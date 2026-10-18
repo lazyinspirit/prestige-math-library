@@ -7,13 +7,14 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-self-adjoint-and-normal-endomorphism, prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases, thm-real-normal-endomorphism-classification]
+deps: [ def-self-adjoint-and-normal-endomorphism, prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases, thm-real-normal-endomorphism-classification ]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   audited: 2026-08-28
   precheck: pass
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step4-published-alert-repair-records/cor-real-spectral-theorem-for-self-adjoint-endomorphisms.json
 sources:
   scraped: []
   references:
@@ -43,6 +44,6 @@ $T$.
 
 1.1 By [L1] and [L2], there is an orthonormal basis in which the matrix of $T$ is block diagonal with $1\times1$ real blocks and $2\times2$ blocks $B=\begin{pmatrix}a&b\\-b&a\end{pmatrix}$. [L1, L2]
 
-2.1 Because $T$ is self-adjoint, [L3] says that the same matrix is symmetric. A block $B$ above is symmetric exactly when $b=0$, so every $2\times2$ block collapses to the scalar block $[a]$. Therefore the whole matrix is diagonal. [L3, step 1.1, algebra]
+2.1 Because $T$ is self-adjoint, [L3] says that the same matrix is symmetric. A block $B$ above is symmetric exactly when $b=0$, so every $2\times2$ block is the diagonal block $aI_2=\operatorname{diag}(a,a)$. Therefore the whole matrix is diagonal. [L3, step 1.1, algebra]
 
 3.1 A diagonal matrix acts on each basis vector by scalar multiplication, so the orthonormal basis from step 2.1 is an orthonormal eigenbasis of $T$. [step 2.1] ∎

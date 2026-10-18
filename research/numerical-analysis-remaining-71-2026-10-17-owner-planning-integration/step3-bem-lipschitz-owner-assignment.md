@@ -1,0 +1,7 @@
+# Current owner escalation assignment
+
+Run `numerical-analysis-remaining-71-2026-10-17`. Recorded 2026-10-18T01:51:45.403980+00:00.
+
+The actual native escalation `na71-b57-3a-lipschitz-scope` is in the original Alpha57 report and append-only defect ledger. Root assigns `/root/gate_url_iga_wiley` exclusive source authoring and complete old/current consumer ownership. Preserve the general Lipschitz Statements and add the substantial prerequisites required by the actual proof; no narrowing to avoid work. `/root/gate_url_cwi` performs the focused independent review of the actual drafted graph-Sobolev/Green and trace/lifting/transmission proofs. Root owns metadata, hashes, ledger integration and certification.
+
+Expected necessary helpers in existing batch57 A page: `lem-bem-lipschitz-graph-sobolev-and-green-interface` and `lem-bem-lipschitz-transmission-kernel-representation`. Strengthen the actual trace/lifting supplier and repair the actual layer proofs; clarify general a.e. normal/surface measure in the existing boundary Definition. Retain the richer polyhedral face-interior kernel helper. Native original outputs remain historical; no native execution or review is fabricated. The author must retain full actual source preimages and report actual proof/consumer dispositions. Source writes began after the immutable Step3 baseline; exact worker start/end times are not inferred from this instruction record. No tests or gates are authorized until every escalation is resolved.

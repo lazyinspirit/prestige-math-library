@@ -1,0 +1,53 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "64",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-pe18-spherical-dtn-truncated-variational-problem",
+      "model": "gpt-6-luna",
+      "context_sha256": "df56bbb3e548a302ac147348287165f8d90d929578b1d220062e4c5c4bc555c7",
+      "outcome": "false_positive",
+      "reason": "The lemma's reference to the definition supplies explicit coefficient-space and series formulas, not an assumption that the infinite form already converges. In lem-pe18-modal-trace-and-form-continuity, step 1.1 derives the weighted endpoint bound directly from the one-dimensional H1 absolute-continuity identity and Cauchy-Schwarz. Step 2.1 then uses the independent estimate |tau_l| <= k+(l+1)/R from thm-pe18-exact-spherical-dtn-map-on-smooth-data to prove absolute convergence of the boundary series and continuity of the volume terms. Neither step invokes the asserted continuity as a premise. This is precisely the definition/well-definedness-result relationship prescribed by SCHEMA.md: the result depends on the definition through deps, and the definition names the result only through justified_by. There is no circular mathematical inference or reverse deps edge.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-pe18-spherical-dtn-truncated-variational-problem",
+      "disposition": "unaffected",
+      "post_sha256": "f3cda69b13a29f7c16bfcd5d01103fc718c9c6271e85d497db2249cd66dfbbdf",
+      "review_context_sha256": "8e4ce50ad7bcaaa1b3db69334faa1ffedb1b79f0eb6c404905b4748d5e2e0947",
+      "reason": "The positive inner radius makes the coordinate energy norms equivalent to ordinary H1 norms; each coordinate has canonical endpoint traces. The lemma independently proves their weighted square summability, Hilbert completeness and density of finite-degree truncations, then bounds the boundary pairing absolutely using |tau_l| <= C(1+l). Thus the explicitly displayed sesquilinear form is defined for every pair in the energy space. Smooth inner data have canonical harmonic projections; the definition formulates the affine problem without assuming its solvability. The first-argument-linear convention and minus R^2 outer-boundary term agree with the owning page's outgoing Helmholtz formulation. The owning contract's positive-radius, zero-data and endpoint clauses agree with this interface; no item, contract or page repair is necessary. The current item guard equals the assignment's before guard.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair_needed",
+    "mathematical_evidence": [
+      "items/lem-pe18-modal-trace-and-form-continuity.md, Proof steps 1.1 and 2.1: the endpoint estimate follows from ||w(R)||^2 <= (R-a)^(-1)||w||_L2^2 + 2||w||_L2||w'||_L2; multiplying by 1+l and applying Young's inequality gives a summable bound by the stated energy. The same argument applies at a.",
+      "items/thm-pe18-exact-spherical-dtn-map-on-smooth-data.md, Proof step 1.1: the Hankel derivative bound gives |tau_l| <= k+(l+1)/R independently of the variational definition. Together with the weighted trace bound this gives absolute boundary-series convergence by Cauchy-Schwarz over degrees.",
+      "SCHEMA.md, Items: a justified_by target must depend on the definition through deps and must not also appear in the definition's deps. The present metadata follows that rule. The lemma only uses formulas from the definition, not its promised well-definedness."
+    ],
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-analysis-remaining-71-2026-10-17 --items def-pe18-spherical-dtn-truncated-variational-problem",
+        "exit_code": 0,
+        "result": "Returned the post_sha256 and review_context_sha256 copied into the review immediately after mathematical review. The post guard matches initial-1.json before."
+      }
+    ],
+    "interface_changes": "None. No item files were edited, so there is no changed Statement/Definition, downstream propagation, or changed-item proof-layout obligation.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection of this unchanged-item false-positive adjudication; no judges or workflow transitions were launched."
+  }
+}

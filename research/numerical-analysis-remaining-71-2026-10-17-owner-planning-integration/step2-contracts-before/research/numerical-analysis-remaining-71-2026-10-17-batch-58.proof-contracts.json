@@ -1,0 +1,2386 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-signorini-partial-trace-space-bounded",
+    "lem-signorini-rigid-motion-controlled-by-dirichlet-segment",
+    "lem-signorini-elasticity-form-bounded",
+    "lem-signorini-contact-set-closed-convex-nonempty",
+    "lem-signorini-nodal-contact-set-conforming",
+    "lem-signorini-partial-dirichlet-korn-coercivity",
+    "lem-signorini-dual-mortar-biorthogonality-and-infsup",
+    "thm-signorini-continuous-contact-vi-wellposed",
+    "thm-signorini-mortar-contact-kkt-and-complementarity",
+    "thm-signorini-nodal-contact-vi-falk-error",
+    "ex-signorini-one-dimensional-obstacle-free-boundary",
+    "cex-signorini-nodal-contact-feasibility-needs-convex-obstacle",
+    "ex-signorini-contact-patch-test",
+    "ex-signorini-mortar-active-set-change",
+    "lem-signorini-contact-nodal-test-functions-surjective"
+  ],
+  "contracts": {
+    "lem-signorini-partial-trace-space-bounded": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a\nbounded $C^1$ domain in the graph sense of\n[[def-bounded-c-k-domain-and-boundary-charts]], let $\\partial\\Omega$ carry the\nchart-independent surface measure of\n[[def-surface-integral-on-a-compact-c-one-hypersurface]] and\n[[lem-surface-integral-is-independent-of-c-one-boundary-charts]], let\n$1\\le p<\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then there is a\nunique bounded linear operator\n$$T:W^{1,p}(\\Omega;\\mathbb K)\\longrightarrow L^p(\\partial\\Omega;\\mathbb K)$$\nwith $Tu=u|_{\\partial\\Omega}$ for every\n$u\\in C(\\overline\\Omega)\\cap W^{1,p}(\\Omega;\\mathbb K)$, and it satisfies\n$\\|Tu\\|_{L^p(\\partial\\Omega)}\\le C(\\Omega,p)\\|u\\|_{W^{1,p}(\\Omega)}$. On each\nboundary chart the operator is the flat half-space trace of\n[[thm-trace-estimate-on-the-half-space]] transported by the flattening\ndiffeomorphism, and the chartwise definitions agree on overlaps; uniqueness\nholds because two bounded operators agreeing on the dense subspace\n$C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$ are equal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a\nbounded $C^1$ domain in the graph sense of\n[[def-bounded-c-k-domain-and-boundary-charts]], let $\\partial\\Omega$ carry the\nchart-independent surface measure of\n[[def-surface-integral-on-a-compact-c-one-hypersurface]] and\n[[lem-surface-integral-is-independent-of-c-one-boundary-charts]], let\n$1\\le p<\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then there is a\nunique bounded linear operator\n$$T:W^{1,p}(\\Omega;\\mathbb K)\\longrightarrow L^p(\\partial\\Omega;\\mathbb K)$$\nwith $Tu=u|_{\\partial\\Omega}$ for every\n$u\\in C(\\overline\\Omega)\\cap W^{1,p}(\\Omega;\\mathbb K)$, and it satisfies\n$\\|Tu\\|_{L^p(\\partial\\Omega)}\\le C(\\Omega,p)\\|u\\|_{W^{1,p}(\\Omega)}$. On each\nboundary chart the operator is the flat half-space trace of\n[[thm-trace-estimate-on-the-half-space]] transported by the flattening\ndiffeomorphism, and the chartwise definitions agree on overlaps; uniqueness\nholds because two bounded operators agreeing on the dense subspace\n$C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$ are equal.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sobolev-extension-domain-and-extension-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Fix $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, an open set\n$\\Omega\\subseteq\\mathbb R^n$ with $n\\ge1$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sobolev-spaces-are-banach-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, used to invoke the published real and complex\n$L^p$ completeness results through their Countable-Choice interface. Let\n$\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, let $k\\in\\mathbb N_0$,\n$1\\le p\\le\\infty$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then\n$W^{k,p}(\\Omega;\\mathbb K)$, equipped with the displayed norm of\n[[def-sobolev-space-wkp-and-its-norm]], is a complete normed space over\n$\\mathbb K$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complete-subspace-iff-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $A \\subseteq X$\ncarry the subspace metric $d_A$ ([[def-isometry-and-metric-embedding]]). Then:",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $j\\in\\{D,C\\}$, restriction [F2] followed by the bounded trace map [F1] and restriction from $\\partial U_j$ to its segment $\\Gamma_j$ gives $\\|T_jv\\|_{L^2(\\Gamma_j)}\\le C_j\\|v|_{U_j}\\|_{H^1(U_j)}\\le C_j\\|v\\|_{H^1(\\Omega)}$ for every $v\\in H^1(\\Omega;\\mathbb R^2)$. Both maps are compositions of linear maps, so they are bounded and linear.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The space $V$ is the kernel of the bounded linear map $T_D$, hence is closed in $H^1(\\Omega;\\mathbb R^2)$; by [F3] the inherited inner product is complete on $V$, so $V$ is Hilbert.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty bounded polygon and positive-length boundary segments."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the zero-Dirichlet kernel as a closed Hilbert subspace."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This is a planar vector trace statement; no scalar one-dimensional trace case is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The maps use C1 collars around positive-length segments, as specified in the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The target is L2 on segments, so no endpoint point-value claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the Axiom of Choice branch of the bounded C1 trace supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a boundedness and closed-kernel assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a boundedness and closed-kernel assertion, not a biconditional."
+        }
+      ]
+    },
+    "lem-signorini-rigid-motion-controlled-by-dirichlet-segment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-signorini-partial-trace-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. A **bounded connected Lipschitz polygon** $Ω\\subset\\mathbb R^2$ is a bounded connected open set whose boundary is a simple closed polygonal curve and, near every boundary point after a rigid coordinate change, is the graph of a Lipschitz function with $Ω$ on one side. Assume $Ω$ is a $W^{1,2}$-extension domain in the sense of [[def-sobolev-extension-domain-and-extension-operator]]. Fix two disjoint closed straight segments $Γ_D,Γ_C\\subset\\partialΩ$, each of positive length and each lying strictly inside a straight side of $∂Ω$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a\nbounded $C^1$ domain in the graph sense of\n[[def-bounded-c-k-domain-and-boundary-charts]], let $\\partial\\Omega$ carry the\nchart-independent surface measure of\n[[def-surface-integral-on-a-compact-c-one-hypersurface]] and\n[[lem-surface-integral-is-independent-of-c-one-boundary-charts]], let\n$1\\le p<\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then there is a\nunique bounded linear operator\n$$T:W^{1,p}(\\Omega;\\mathbb K)\\longrightarrow L^p(\\partial\\Omega;\\mathbb K)$$\nwith $Tu=u|_{\\partial\\Omega}$ for every\n$u\\in C(\\overline\\Omega)\\cap W^{1,p}(\\Omega;\\mathbb K)$, and it satisfies\n$\\|Tu\\|_{L^p(\\partial\\Omega)}\\le C(\\Omega,p)\\|u\\|_{W^{1,p}(\\Omega)}$. On each\nboundary chart the operator is the flat half-space trace of\n[[thm-trace-estimate-on-the-half-space]] transported by the flattening\ndiffeomorphism, and the chartwise definitions agree on overlaps; uniqueness\nholds because two bounded operators agreeing on the dense subspace\n$C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$ are equal.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-signorini-partial-trace-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. A **bounded connected Lipschitz polygon** $Ω\\subset\\mathbb R^2$ is a bounded connected open set whose boundary is a simple closed polygonal curve and, near every boundary point after a rigid coordinate change, is the graph of a Lipschitz function with $Ω$ on one side. Assume $Ω$ is a $W^{1,2}$-extension domain in the sense of [[def-sobolev-extension-domain-and-extension-operator]]. Fix two disjoint closed straight segments $Γ_D,Γ_C\\subset\\partialΩ$, each of positive length and each lying strictly inside a straight side of $∂Ω$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the trace $T_Dr$ is the boundary restriction of the continuous rigid motion. Put $A:=a+\\omega Jx_0$ and decompose $A=A_\\parallel J\\tau+A_\\perp$ with $A_\\perp\\cdot J\\tau=0$. Since $J$ is a quarter-turn, $r(x(s))=A+\\omega sJ\\tau$. Integrating the two orthogonal components and completing the square in $\\int_0^L(A_\\parallel+\\omega s)^2ds$ gives $\\|T_Dr\\|_{L^2(\\Gamma_D)}^2=L|A_\\perp|^2+L(A_\\parallel+\\omega L/2)^2+\\omega^2L^3/12$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The last term of step 1.1 controls $|\\omega|^2$, the first controls $|A_\\perp|^2$, and the middle term together with $|\\omega|$ controls $|A_\\parallel|^2$; hence $|A|+|\\omega|\\le C_L\\|T_Dr\\|_{L^2(\\Gamma_D)}$. Because $a=A-\\omega Jx_0$ and $\\Omega$ is bounded, direct integration of $r$ and its constant gradient gives $\\|r\\|_{H^1(\\Omega)}\\le C_\\Omega(|a|+|\\omega|)\\le C(\\Omega,\\Gamma_D)\\|T_Dr\\|_{L^2(\\Gamma_D)}$. If the trace vanishes, this also forces $a=0$ and $\\omega=0$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a bounded polygon and a positive-length Dirichlet segment."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows a zero trace forces both rigid-motion coefficients to vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim is restricted to planar rigid motions on a two-dimensional polygon."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A zero-length Dirichlet segment is excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 integrates the affine trace over the full arclength interval [0,L]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the inherited trace interface and records its Axiom of Choice branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way norm estimate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way norm estimate."
+        }
+      ]
+    },
+    "lem-signorini-elasticity-form-bounded": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-signorini-elasticity-contact-model",
+          "source_section": "Definition",
+          "quote": "Use the polygon, displacement space and oriented contact normal from [[def-signorini-partial-trace-space]]. Let the constant shear modulus satisfy $\\mu>0$, let the finite Lam\\'e parameter satisfy $\\lambda\\ge0$, and let $F:V\\to\\mathbb R$ be a bounded linear functional. For $v\\in V$, define the weak symmetric gradient\n$$\\varepsilon(v):=\\frac{\\nabla v+(\\nabla v)^T}{2}.$$\nFor $u,v\\in V$, define the isotropic small-strain elasticity form\n$$a(u,v):=\\int_\\Omega 2\\mu\\,\\varepsilon(u):\\varepsilon(v)+\\lambda\\,\\operatorname{div}u\\,\\operatorname{div}v\\,dx.$$\nThe strain and form conventions are the algebraic formulas in [[def-linear-elasticity-displacement-formulation-and-data]]. The present domain is the partial-trace space $V$; all coercivity and well-posedness claims for it are proved locally below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The symmetric-part map is an orthogonal projection in the Frobenius inner product, so $|\\varepsilon(w)|_F\\le|\\nabla w|_F$. Also $|\\operatorname{div}w|=|\\operatorname{tr}\\nabla w|\\le\\sqrt2|\\nabla w|_F$ by Cauchy–Schwarz on the two diagonal entries. Thus both $\\varepsilon(w)$ and $\\operatorname{div}w$ are in $L^2$ by [F3], so each integral defining $a(u,v)$ is finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F2] to the two terms of [F1] and then the bounds of step 1.1 gives $|a(u,v)|\\le2\\mu\\|\\nabla u\\|_2\\|\\nabla v\\|_2+2\\lambda\\|\\nabla u\\|_2\\|\\nabla v\\|_2\\le(2\\mu+2\\lambda)\\|u\\|_{H^1}\\|v\\|_{H^1}$. The integrand is symmetric in $u,v$, so $a(u,v)=a(v,u)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The form is stated on the nonempty polygon of the contact model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the bilinear estimate to all u,v, including zero fields."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The form is defined for two-dimensional vector displacements only."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The model assumes mu>0 and finite lambda>=0; no degenerate material case is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The form is a volume integral and has no endpoint terms."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite-dimensional matrix bounds and L2 Cauchy-Schwarz."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a boundedness assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a boundedness assertion, not an equivalence."
+        }
+      ]
+    },
+    "lem-signorini-contact-set-closed-convex-nonempty": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-signorini-partial-trace-space-bounded",
+          "source_section": "Statement",
+          "quote": "Assume the geometry and trace conventions of [[def-signorini-partial-trace-space]]. Then the maps $T_D,T_C:H^1(Ω;\\mathbb R^2)\\to L^2(Γ_D;\\mathbb R^2),L^2(Γ_C;\\mathbb R^2)$ are bounded and linear, and $V=\\ker T_D$ is a Hilbert space with the inherited $H^1$ inner product.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-signorini-partial-trace-space-bounded",
+          "source_section": "Statement",
+          "quote": "Assume the geometry and trace conventions of [[def-signorini-partial-trace-space]]. Then the maps $T_D,T_C:H^1(Ω;\\mathbb R^2)\\to L^2(Γ_D;\\mathbb R^2),L^2(Γ_C;\\mathbb R^2)$ are bounded and linear, and $V=\\ker T_D$ is a Hilbert space with the inherited $H^1$ inner product.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-signorini-contact-variational-inequality",
+          "source_section": "Definition",
+          "quote": "Let $\\psi\\in C(\\Gamma_C;\\mathbb R)$ satisfy $\\psi\\le0$. Define the unilateral frictionless **contact set**\n$$K:=\\{v\\in V:T_Cv\\cdot n\\ge\\psi\\quad\\text{for arclength-almost every point of }\\Gamma_C\\}.$$\nGiven the elasticity form $a$ and bounded load $F$ of [[def-signorini-elasticity-contact-model]], the **contact variational inequality** is to find $u\\in K$ such that\n$$a(u,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K.$$\nThe set $K$ is nonempty, closed and convex by [[lem-signorini-contact-set-closed-convex-nonempty]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-signorini-partial-trace-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. A **bounded connected Lipschitz polygon** $Ω\\subset\\mathbb R^2$ is a bounded connected open set whose boundary is a simple closed polygonal curve and, near every boundary point after a rigid coordinate change, is the graph of a Lipschitz function with $Ω$ on one side. Assume $Ω$ is a $W^{1,2}$-extension domain in the sense of [[def-sobolev-extension-domain-and-extension-operator]]. Fix two disjoint closed straight segments $Γ_D,Γ_C\\subset\\partialΩ$, each of positive length and each lying strictly inside a straight side of $∂Ω$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-signorini-contact-variational-inequality",
+          "source_section": "Definition",
+          "quote": "Let $\\psi\\in C(\\Gamma_C;\\mathbb R)$ satisfy $\\psi\\le0$. Define the unilateral frictionless **contact set**\n$$K:=\\{v\\in V:T_Cv\\cdot n\\ge\\psi\\quad\\text{for arclength-almost every point of }\\Gamma_C\\}.$$\nGiven the elasticity form $a$ and bounded load $F$ of [[def-signorini-elasticity-contact-model]], the **contact variational inequality** is to find $u\\in K$ such that\n$$a(u,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K.$$\nThe set $K$ is nonempty, closed and convex by [[lem-signorini-contact-set-closed-convex-nonempty]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The zero field belongs to $V$, and $T_C0\\cdot n=0\\ge\\psi$ almost everywhere, so $0\\in K$. If $v,w\\in K$ and $0\\le t\\le1$, linearity of $T_C$ gives $T_C(tv+(1-t)w)\\cdot n-\\psi=t(T_Cv\\cdot n-\\psi)+(1-t)(T_Cw\\cdot n-\\psi)\\ge0$ almost everywhere, so $tv+(1-t)w\\in K$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $g_m\\in L^2_+(\\Gamma_C)$ and $g_m\\to g$ in $L^2$, then $g^-:=\\max\\{-g,0\\}\\le|g-g_m|$ almost everywhere for each $m$, hence $\\|g^-\\|_2\\le\\|g-g_m\\|_2\\to0$ and $g\\ge0$ almost everywhere. Thus the cone is closed; it is convex by pointwise convexity. By [F1] and [F3], the affine map $v\\mapsto T_Cv\\cdot n-\\psi$ is continuous into $L^2(\\Gamma_C)$, so its preimage of that closed convex cone is closed in $V$. This proves the claim.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits the zero field in K."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies zero feasibility from psi<=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional parameter or one-element partition is part of this continuous-set lemma."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The geometry assumes fixed positive-length segments and a bounded polygon."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The contact inequality is imposed arclength-almost everywhere, not at endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the trace/Hilbert interface with its declared Axiom of Choice branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a nonempty closed-convex claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a nonempty closed-convex claim, not a biconditional."
+        }
+      ]
+    },
+    "lem-signorini-nodal-contact-set-conforming": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-signorini-contact-variational-inequality",
+          "source_section": "Definition",
+          "quote": "Let $\\psi\\in C(\\Gamma_C;\\mathbb R)$ satisfy $\\psi\\le0$. Define the unilateral frictionless **contact set**\n$$K:=\\{v\\in V:T_Cv\\cdot n\\ge\\psi\\quad\\text{for arclength-almost every point of }\\Gamma_C\\}.$$\nGiven the elasticity form $a$ and bounded load $F$ of [[def-signorini-elasticity-contact-model]], the **contact variational inequality** is to find $u\\in K$ such that\n$$a(u,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K.$$\nThe set $K$ is nonempty, closed and convex by [[lem-signorini-contact-set-closed-convex-nonempty]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-signorini-contact-set-closed-convex-nonempty",
+          "source_section": "Statement",
+          "quote": "Under [[def-signorini-contact-variational-inequality]], $K$ is nonempty, closed, and convex in the Hilbert space $V$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-broken-and-conforming-polynomial-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal T$ be a matching affine simplicial mesh of $\\Omega$ as defined\nin [[def-matching-affine-simplicial-meshes]]. Fix $k\\in\\mathbb N_0$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and an integer $q\\ge1$. On each\ncell let $\\mathbb P_k(K;\\mathbb K^q)$ denote the\nrestrictions to $K$ of $\\mathbb K^q$-valued polynomials of total degree at\nmost $k$. The **broken polynomial space** is the finite product\n$$V_h^{\\mathrm{br}}:=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb K^q),$$\nviewed as functions defined almost everywhere cell by cell. For an interior\nfacet $F=K\\cap K'$, the **jump** is the difference of the two polynomial\ntraces, with either fixed ordering of $K,K'$; its vanishing is independent of\nthat ordering. The **conforming polynomial space** is\n$$V_h^{\\mathrm{conf}}:=\\{v\\in V_h^{\\mathrm{br}}:v|_{F,K}=v|_{F,K'}\\text{ on every interior facet }F\\}.$$\nThe **zero-boundary subspace** consists of those $v\\in V_h^{\\mathrm{conf}}$\nwhose polynomial trace is zero on every boundary facet. These are algebraic\ndefinitions. The Sobolev inclusions and the zero-boundary closure conclusion\nare proved separately in the corresponding local theorems on matching\npiecewise polynomials and zero-boundary values. If $\\mathcal T=\\varnothing$,\nthen $\\Omega=\\varnothing$ by the mesh definition; the empty product is the\nzero vector space consisting of the unique empty function, and the trace\nconditions are vacuous.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-signorini-nodal-p1-contact-scheme",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T_h)$ be a family of matching, boundary-conforming, shape-regular affine triangular meshes of the polygon from [[def-signorini-partial-trace-space]], with $h:=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)$. Assume both $\\Gamma_D$ and $\\Gamma_C$ are unions of boundary edges of each mesh, and let $\\mathcal N_h^C$ be the vertices on $\\Gamma_C$. The conforming continuous P1 displacement space is\n$$V_h:=\\{v_h\\in V\\cap C(\\overline\\Omega;\\mathbb R^2):v_h|_K\\in\\mathbb P_1(K;\\mathbb R^2)\\text{ for every }K\\in\\mathcal T_h\\}.$$\nFor continuous $\\psi$ on $\\Gamma_C$, let $I_h\\psi$ be its continuous piecewise-affine nodal interpolant on the contact edges. Under the additional obstacle hypotheses $\\psi\\le0$ and convexity of $\\psi$ in arclength on $\\Gamma_C$, define\n$$K_h:=\\{v_h\\in V_h:v_h(a)\\cdot n\\ge I_h\\psi(a)\\text{ for every }a\\in\\mathcal N_h^C\\}.$$\nThe nodal inequalities are exactly the plan's vertex constraints. The well-definedness and conformity claims are proved in [[lem-signorini-nodal-contact-set-conforming]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-signorini-partial-trace-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. A **bounded connected Lipschitz polygon** $Ω\\subset\\mathbb R^2$ is a bounded connected open set whose boundary is a simple closed polygonal curve and, near every boundary point after a rigid coordinate change, is the graph of a Lipschitz function with $Ω$ on one side. Assume $Ω$ is a $W^{1,2}$-extension domain in the sense of [[def-sobolev-extension-domain-and-extension-operator]]. Fix two disjoint closed straight segments $Γ_D,Γ_C\\subset\\partialΩ$, each of positive length and each lying strictly inside a straight side of $∂Ω$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a\nbounded $C^1$ domain in the graph sense of\n[[def-bounded-c-k-domain-and-boundary-charts]], let $\\partial\\Omega$ carry the\nchart-independent surface measure of\n[[def-surface-integral-on-a-compact-c-one-hypersurface]] and\n[[lem-surface-integral-is-independent-of-c-one-boundary-charts]], let\n$1\\le p<\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then there is a\nunique bounded linear operator\n$$T:W^{1,p}(\\Omega;\\mathbb K)\\longrightarrow L^p(\\partial\\Omega;\\mathbb K)$$\nwith $Tu=u|_{\\partial\\Omega}$ for every\n$u\\in C(\\overline\\Omega)\\cap W^{1,p}(\\Omega;\\mathbb K)$, and it satisfies\n$\\|Tu\\|_{L^p(\\partial\\Omega)}\\le C(\\Omega,p)\\|u\\|_{W^{1,p}(\\Omega)}$. On each\nboundary chart the operator is the flat half-space trace of\n[[thm-trace-estimate-on-the-half-space]] transported by the flattening\ndiffeomorphism, and the chartwise definitions agree on overlaps; uniqueness\nholds because two bounded operators agreeing on the dense subspace\n$C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$ are equal.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-convex-concave-and-midpoint-convex-functions",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval ([[def-interval]]) and let $f:I\\to\\mathbb R$. For $x,y\\in I$ and $\\lambda\\in[0,1]$, the point $\\lambda x+(1-\\lambda)y$ belongs to $I$. The function $f$ is **convex** when the convex-combination inequality holds for every weight in $[0,1]$:",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $V_h$ is finite dimensional. By [F3], $K_h$ is the intersection of finitely many closed affine halfspaces in $V_h$, so it is closed and convex. The zero field is in $V_h$, and $0\\ge I_h\\psi(a)=\\psi(a)$ at every contact vertex since $\\psi\\le0$; hence $0\\in K_h$ and $K_h$ is nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a contact edge $e=[a,b]$. For $v_h\\in K_h$, the function $q_h:=v_h\\cdot n-I_h\\psi$ is affine on $e$ and is nonnegative at $a,b$ by [F3]. Thus $q_h((1-t)a+tb)=(1-t)q_h(a)+tq_h(b)\\ge0$ throughout $e$. Convexity [F5] gives $I_h\\psi((1-t)a+tb)\\ge\\psi((1-t)a+tb)$, so $v_h\\cdot n\\ge\\psi$ on every contact edge. Therefore $v_h\\in K$ and $K_h\\subseteq K$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $v\\in K\\cap H^2\\cap C(\\overline\\Omega)$. Its continuous gap $T_Cv\\cdot n-\\psi$ is nonnegative almost everywhere by [F1], hence everywhere: if it were negative at one point, continuity would make it negative on a subsegment of positive length. Define $I_hv$ cell by cell as the affine polynomial matching $v$ at the three vertices. On a shared edge the two affine traces agree at both endpoints, so they agree along the whole edge. For every test function compactly supported in $\\Omega$, integration by parts on each triangle cancels the internal-edge boundary terms because these traces agree; the remaining piecewise constant gradients are in $L^2(\\Omega)$. Hence $I_hv\\in H^1(\\Omega;\\mathbb R^2)$ and is globally continuous. Its boundary values on $\\Gamma_D$ are zero: $v\\in V$ means $T_Dv=0$ almost everywhere, and [F4] identifies this trace with the continuous boundary restriction, which therefore vanishes everywhere on the segment. Since the mesh resolves $\\Gamma_D$, the affine boundary traces of $I_hv$ vanish there, so $I_hv\\in V_h$. At every contact node, $I_hv(a)=v(a)$ and [F4] identifies the contact trace with the continuous restriction; the continuous gap is nonnegative, so the nodal constraints hold and $I_hv\\in K_h$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 shows zero is in Kh, so the discrete feasible set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies zero satisfies every nodal constraint when psi<=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 applies to each contact edge, including a mesh with one contact edge."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The matching affine mesh definition excludes degenerate triangles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 use the contact-edge endpoints as nodal constraints and interpolation values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional halfspace and affine-chord arguments make no choice-dependent selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives inclusions and feasibility, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives inclusions and feasibility, not a biconditional."
+        }
+      ]
+    },
+    "lem-signorini-partial-dirichlet-korn-coercivity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a\nbounded $C^1$ domain in the graph sense of\n[[def-bounded-c-k-domain-and-boundary-charts]], let $\\partial\\Omega$ carry the\nchart-independent surface measure of\n[[def-surface-integral-on-a-compact-c-one-hypersurface]] and\n[[lem-surface-integral-is-independent-of-c-one-boundary-charts]], let\n$1\\le p<\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then there is a\nunique bounded linear operator\n$$T:W^{1,p}(\\Omega;\\mathbb K)\\longrightarrow L^p(\\partial\\Omega;\\mathbb K)$$\nwith $Tu=u|_{\\partial\\Omega}$ for every\n$u\\in C(\\overline\\Omega)\\cap W^{1,p}(\\Omega;\\mathbb K)$, and it satisfies\n$\\|Tu\\|_{L^p(\\partial\\Omega)}\\le C(\\Omega,p)\\|u\\|_{W^{1,p}(\\Omega)}$. On each\nboundary chart the operator is the flat half-space trace of\n[[thm-trace-estimate-on-the-half-space]] transported by the flattening\ndiffeomorphism, and the chartwise definitions agree on overlaps; uniqueness\nholds because two bounded operators agreeing on the dense subspace\n$C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$ are equal.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a\nnonempty bounded connected extension domain, and let $1\\le p<\\infty$. Then there is\n$C=C(\\Omega,p)$ such that every $u\\in W^{1,p}(\\Omega;\\mathbb K)$ satisfies\n$$\\|u-u_\\Omega\\|_{L^p(\\Omega)}\\le C\\|Du\\|_{L^p(\\Omega)},\\qquad u_\\Omega:=|\\Omega|^{-1}\\int_\\Omega u(x)\\,dx.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F0",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "source_section": "Statement",
+          "quote": "Let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected and Lipschitz, with $d\\in\\{2,3\\}$. Under Countable Choice there is a bounded linear map $B_D:L^2_0(D)\\to H^1_0(D;\\mathbb R^d)$ such that\n$$\\operatorname{div}B_Dq=q,\\qquad \\|\\nabla B_Dq\\|_2\\le C_{\\rm div}(D)\\|q\\|_2.$$\nFor a chosen finite cover and tree decomposition from [[lem-na-lipschitz-domain-finite-star-shaped-cover]] and [[lem-na-finite-cover-zero-mean-data-decomposition]], one valid bound is $C_{\\rm div}(D)=\\sum_i C_{U_i}D_i$; it is finite and independent of any finite-element mesh.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a\nnonempty bounded connected extension domain, and let $1\\le p<\\infty$. Then there is\n$C=C(\\Omega,p)$ such that every $u\\in W^{1,p}(\\Omega;\\mathbb K)$ satisfies\n$$\\|u-u_\\Omega\\|_{L^p(\\Omega)}\\le C\\|Du\\|_{L^p(\\Omega)},\\qquad u_\\Omega:=|\\Omega|^{-1}\\int_\\Omega u(x)\\,dx.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-signorini-partial-trace-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. A **bounded connected Lipschitz polygon** $Ω\\subset\\mathbb R^2$ is a bounded connected open set whose boundary is a simple closed polygonal curve and, near every boundary point after a rigid coordinate change, is the graph of a Lipschitz function with $Ω$ on one side. Assume $Ω$ is a $W^{1,2}$-extension domain in the sense of [[def-sobolev-extension-domain-and-extension-operator]]. Fix two disjoint closed straight segments $Γ_D,Γ_C\\subset\\partialΩ$, each of positive length and each lying strictly inside a straight side of $∂Ω$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-signorini-partial-trace-space-bounded",
+          "source_section": "Statement",
+          "quote": "Assume the geometry and trace conventions of [[def-signorini-partial-trace-space]]. Then the maps $T_D,T_C:H^1(Ω;\\mathbb R^2)\\to L^2(Γ_D;\\mathbb R^2),L^2(Γ_C;\\mathbb R^2)$ are bounded and linear, and $V=\\ker T_D$ is a Hilbert space with the inherited $H^1$ inner product.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-signorini-rigid-motion-controlled-by-dirichlet-segment",
+          "source_section": "Statement",
+          "quote": "Let $\\Gamma_D$ be a fixed straight segment of length $L>0$ in the geometry of [[def-signorini-partial-trace-space]]. For every planar infinitesimal rigid motion $r(x)=a+\\omega Jx$, where $a\\in\\mathbb R^2$, $\\omega\\in\\mathbb R$, and $J=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$, there is a constant $C=C(\\Omega,\\Gamma_D)$ such that\n$$\\|r\\|_{H^1(\\Omega)}\\le C\\|T_Dr\\|_{L^2(\\Gamma_D)}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-signorini-elasticity-contact-model",
+          "source_section": "Definition",
+          "quote": "Use the polygon, displacement space and oriented contact normal from [[def-signorini-partial-trace-space]]. Let the constant shear modulus satisfy $\\mu>0$, let the finite Lam\\'e parameter satisfy $\\lambda\\ge0$, and let $F:V\\to\\mathbb R$ be a bounded linear functional. For $v\\in V$, define the weak symmetric gradient\n$$\\varepsilon(v):=\\frac{\\nabla v+(\\nabla v)^T}{2}.$$\nFor $u,v\\in V$, define the isotropic small-strain elasticity form\n$$a(u,v):=\\int_\\Omega 2\\mu\\,\\varepsilon(u):\\varepsilon(v)+\\lambda\\,\\operatorname{div}u\\,\\operatorname{div}v\\,dx.$$\nThe strain and form conventions are the algebraic formulas in [[def-linear-elasticity-displacement-formulation-and-data]]. The present domain is the partial-trace space $V$; all coercivity and well-posedness claims for it are proved locally below.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-signorini-rigid-motion-controlled-by-dirichlet-segment",
+          "source_section": "Statement",
+          "quote": "Let $\\Gamma_D$ be a fixed straight segment of length $L>0$ in the geometry of [[def-signorini-partial-trace-space]]. For every planar infinitesimal rigid motion $r(x)=a+\\omega Jx$, where $a\\in\\mathbb R^2$, $\\omega\\in\\mathbb R$, and $J=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$, there is a constant $C=C(\\Omega,\\Gamma_D)$ such that\n$$\\|r\\|_{H^1(\\Omega)}\\le C\\|T_Dr\\|_{L^2(\\Gamma_D)}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\Omega$ is nonempty, open and bounded, [F0] gives $0<|\\Omega|<\\infty$. Hence $1\\in L^2(\\Omega)$, and [F7] with the Cauchy–Schwarz inequality makes every $L^2$ component of $v$ and its weak gradient integrable; boundedness of $\\Omega$ also makes $x$ and $Jx$ integrable. Thus the means in $\\omega=(2|\\Omega|)^{-1}\\int_\\Omega\\operatorname{curl}v$ and $a=|\\Omega|^{-1}\\int_\\Omega(v-\\omega Jx)$ exist. Put $r(x)=a+\\omega Jx$ and $z=v-r$. Then $\\int_\\Omega z=0$, $\\int_\\Omega\\operatorname{curl}z=0$, and $\\varepsilon(z)=\\varepsilon(v)$ by [F6].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F0",
+            "F6",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $q=\\operatorname{curl}z\\in L^2_0(\\Omega)$ and choose $w=B_\\Omega q$ by [F1]. Define the matrix $R(w)$ rowwise by $R(w)_{i1}=\\partial_2w_i$ and $R(w)_{i2}=-\\partial_1w_i$. For $w\\in C_c^\\infty(\\Omega;\\mathbb R^2)$ each row of $R(w)$ has zero divergence, so distributional integration by parts gives $(\\nabla z,R(w))_{L^2}=0$. Approximate the actual $w\\in H^1_0$ by compactly supported smooth fields using [F5]; since $R(w_m)\\to R(w)$ in $L^2$, the same identity holds for $w$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $G=\\nabla z-R(w)$. In two dimensions $J:G=G_{21}-G_{12}=\\operatorname{curl}z-\\operatorname{div}w=q-q=0$, so the off-diagonal entries of $G$ agree and $G$ is symmetric. Write $S=(\\nabla z-(\\nabla z)^T)/2$, which is skew-symmetric. Symmetric and skew-symmetric matrices are orthogonal in the Frobenius inner product, so $(S,G)_{L^2}=0$ and $(\\nabla z,G)=(\\varepsilon(z),G)$. By step 2.1, $(\\nabla z,G)=\\|\\nabla z\\|_2^2-(\\nabla z,R(w))=\\|\\nabla z\\|_2^2$. The entries of $R(w)$ are the entries of $\\nabla w$ permuted and sign-changed, so $\\|R(w)\\|_2=\\|\\nabla w\\|_2$. Also $|q|^2=|\\partial_1z_2-\\partial_2z_1|^2\\le2(|\\partial_1z_2|^2+|\\partial_2z_1|^2)\\le2|\\nabla z|_F^2$ almost everywhere; integration gives $\\|q\\|_2\\le\\sqrt2\\|\\nabla z\\|_2$. Thus [F1] and the triangle inequality imply $\\|G\\|_2\\le\\|\\nabla z\\|_2+\\|\\nabla w\\|_2\\le(1+\\sqrt2C_{\\rm div})\\|\\nabla z\\|_2$. Therefore $\\|\\nabla z\\|_2^2\\le\\|\\varepsilon(z)\\|_2\\|G\\|_2\\le(1+\\sqrt2C_{\\rm div})\\|\\varepsilon(z)\\|_2\\|\\nabla z\\|_2$. If $\\nabla z=0$ the gradient estimate is immediate; otherwise divide by $\\|\\nabla z\\|_2$. Then [F2] and $\\int_\\Omega z=0$ give $\\|z\\|_2\\le C_P\\|\\nabla z\\|_2$, hence $\\|z\\|_{H^1}\\le\\sqrt{1+C_P^2}\\|\\nabla z\\|_2\\le C_0\\|\\varepsilon(v)\\|_2$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $v\\in V$, [F3] gives $T_Dr=-T_Dz$. Apply [F4] and the trace bound [F3] to obtain $\\|r\\|_{H^1}\\le C_D\\|T_Dz\\|_{L^2(\\Gamma_D)}\\le C_DC_T\\|z\\|_{H^1}$. Since $v=z+r$, step 3.1 yields $\\|v\\|_{H^1}\\le\\|z\\|_{H^1}+\\|r\\|_{H^1}\\le(1+C_DC_T)C_0\\|\\varepsilon(v)\\|_2$, proving the assertion.",
+          "step": "4.1",
+          "inputs": [
+            "A2",
+            "F3",
+            "F4",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the nonempty open-domain hypothesis to prove 0<|Omega|<infinity before taking means."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles grad z=0 before division."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem is restricted to d=2, where planar curl and rigid rotation are used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 include the zero-gradient branch and remove the rigid component."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 removes the rigid component using the trace estimate on the full Dirichlet segment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 retain the Countable Choice and Axiom of Choice supplier branches."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way Korn inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way Korn inequality."
+        }
+      ]
+    },
+    "lem-signorini-dual-mortar-biorthogonality-and-infsup": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-signorini-dual-mortar-contact-pair",
+          "source_section": "Definition",
+          "quote": "On a contact mesh with nodes $a_0,\\ldots,a_N$ and edges $e_k=[a_k,a_{k+1}]$ of lengths $h_k>0$, let $W_h$ be the continuous piecewise-affine scalar trace space with nodal basis $\\phi_0,\\ldots,\\phi_N$. On $e_k$, write the local endpoint basis as $\\phi_k^{e_k},\\phi_{k+1}^{e_k}$. Define broken piecewise-affine dual functions by\n$$\\chi_i|_{e_k}=\\begin{cases}4\\phi_k^{e_k}-2\\phi_{k+1}^{e_k},&i=k,\\\\-2\\phi_k^{e_k}+4\\phi_{k+1}^{e_k},&i=k+1,\\\\0,&i\\notin\\{k,k+1\\},\\end{cases}$$\nand set $\\Lambda_h:=\\operatorname{span}\\{\\chi_i:0\\le i\\le N\\}\\subset L^2(\\Gamma_C)$. The **positive discrete multiplier cone** is\n$$\\Lambda_h^+:=\\left\\{\\lambda_h=\\sum_{i=0}^N\\lambda_i\\chi_i:\\lambda_i\\ge0\\right\\}.$$\nThe functions $\\chi_i$ have support on the one or two contact edges incident to $a_i$ and can jump at contact nodes. For $v_h\\in V_h$ and $\\lambda_h\\in\\Lambda_h$, define the exact mortar coupling\n$$b_h(v_h,\\lambda_h):=\\int_{\\Gamma_C}\\lambda_h\\,T_Cv_h\\cdot n\\,ds.$$\nThe cone $\\Lambda_h^+$ is coefficientwise; its elements need not be pointwise nonnegative. Its dual-cone and stability properties are proved in [[lem-signorini-dual-mortar-biorthogonality-and-infsup]]. This is a matching boundary mortar pair and makes no nonmatching-interface claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-signorini-dual-mortar-contact-pair",
+          "source_section": "Definition",
+          "quote": "On a contact mesh with nodes $a_0,\\ldots,a_N$ and edges $e_k=[a_k,a_{k+1}]$ of lengths $h_k>0$, let $W_h$ be the continuous piecewise-affine scalar trace space with nodal basis $\\phi_0,\\ldots,\\phi_N$. On $e_k$, write the local endpoint basis as $\\phi_k^{e_k},\\phi_{k+1}^{e_k}$. Define broken piecewise-affine dual functions by\n$$\\chi_i|_{e_k}=\\begin{cases}4\\phi_k^{e_k}-2\\phi_{k+1}^{e_k},&i=k,\\\\-2\\phi_k^{e_k}+4\\phi_{k+1}^{e_k},&i=k+1,\\\\0,&i\\notin\\{k,k+1\\},\\end{cases}$$\nand set $\\Lambda_h:=\\operatorname{span}\\{\\chi_i:0\\le i\\le N\\}\\subset L^2(\\Gamma_C)$. The **positive discrete multiplier cone** is\n$$\\Lambda_h^+:=\\left\\{\\lambda_h=\\sum_{i=0}^N\\lambda_i\\chi_i:\\lambda_i\\ge0\\right\\}.$$\nThe functions $\\chi_i$ have support on the one or two contact edges incident to $a_i$ and can jump at contact nodes. For $v_h\\in V_h$ and $\\lambda_h\\in\\Lambda_h$, define the exact mortar coupling\n$$b_h(v_h,\\lambda_h):=\\int_{\\Gamma_C}\\lambda_h\\,T_Cv_h\\cdot n\\,ds.$$\nThe cone $\\Lambda_h^+$ is coefficientwise; its elements need not be pointwise nonnegative. Its dual-cone and stability properties are proved in [[lem-signorini-dual-mortar-biorthogonality-and-infsup]]. This is a matching boundary mortar pair and makes no nonmatching-interface claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On one edge, direct integration of [F1]–[F2] gives $\\int_e\\chi_L\\phi_L=h_k$, $\\int_e\\chi_L\\phi_R=0$, $\\int_e\\chi_R\\phi_L=0$, and $\\int_e\\chi_R\\phi_R=h_k$. Summing over edges, only the edges incident to node $a_i$ contribute to $\\int\\chi_i\\phi_i$, and no edge contributes to $\\int\\chi_i\\phi_j$ for $i\\ne j$; hence the global pairing is $d_i\\delta_{ij}$. This also proves linear independence of the $\\chi_i$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On an edge, the consistent P1 mass matrix is $h_k\\begin{pmatrix}1/3&1/6\\\\1/6&1/3\\end{pmatrix}$, whose eigenvalues are $h_k/6,h_k/2$. The local dual coefficient map is $\\begin{pmatrix}4&-2\\\\-2&4\\end{pmatrix}$, with eigenvalues $2,6$ on the same sum/difference vectors. Therefore, for local nodal coefficients $(\\lambda_L,\\lambda_R)$, $2h_k(\\lambda_L^2+\\lambda_R^2)\\le\\|\\lambda_L\\chi_L+\\lambda_R\\chi_R\\|_{L^2(e)}^2\\le6h_k(\\lambda_L^2+\\lambda_R^2)$; for primal nodal coefficients $(g_L,g_R)$, $\\frac{h_k}{6}(g_L^2+g_R^2)\\le\\|g_L\\phi_L+g_R\\phi_R\\|_{L^2(e)}^2\\le\\frac{h_k}{2}(g_L^2+g_R^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing the local inequalities in step 2.1 gives $2S_\\lambda\\le\\|\\lambda_h\\|_2^2\\le6S_\\lambda$ and $S_g/6\\le\\|g_h\\|_2^2\\le S_g/2$, where $S_\\lambda=\\sum_i d_i\\lambda_i^2$ and $S_g=\\sum_i d_i g_i^2$. By step 1.1, $\\langle\\lambda_h,g_h\\rangle=\\sum_i d_i\\lambda_i g_i$. Taking $g_h$ with nodal coefficients $g_i=\\lambda_i$ makes the numerator $S_\\lambda$ and the denominator at most $\\sqrt{6S_\\lambda}\\sqrt{S_\\lambda/2}=\\sqrt3S_\\lambda$, proving the inf-sup bound. If $\\lambda_i\\ge0$ and $g_h\\ge0$, then every $g_i\\ge0$ and the same pairing is nonnegative; conversely testing against each nonnegative hat $\\phi_i$ shows any nonnegative functional has $d_i\\lambda_i\\ge0$, hence $\\lambda_i\\ge0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A positive-length contact segment partitioned into positive-length edges excludes an empty partition."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The inf-sup quotient is over nonzero multipliers; no zero-multiplier quotient is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compute the local pairing and norm formulas on one edge."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Each contact edge is assumed to have positive length h_k>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 assembles endpoint weights d_0=h_0 and d_N=h_{N-1} from incident edges."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof consists of finite sums and two-by-two matrix calculations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a stability and cone-duality assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a stability and cone-duality assertion, not an equivalence."
+        }
+      ]
+    },
+    "thm-signorini-continuous-contact-vi-wellposed": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-signorini-partial-dirichlet-korn-coercivity",
+          "source_section": "Statement",
+          "quote": "Assume the geometry of [[def-signorini-partial-trace-space]] and let $V=\\{v\\in H^1(\\Omega;\\mathbb R^2):T_Dv=0\\}$. Then there is $c_K>0$, depending on $\\Omega$ and $\\Gamma_D$, such that\n$$\\|v\\|_{H^1(\\Omega)}\\le c_K\\|\\varepsilon(v)\\|_{L^2(\\Omega)}\\qquad(v\\in V).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-signorini-partial-trace-space-bounded",
+          "source_section": "Statement",
+          "quote": "Assume the geometry and trace conventions of [[def-signorini-partial-trace-space]]. Then the maps $T_D,T_C:H^1(Ω;\\mathbb R^2)\\to L^2(Γ_D;\\mathbb R^2),L^2(Γ_C;\\mathbb R^2)$ are bounded and linear, and $V=\\ker T_D$ is a Hilbert space with the inherited $H^1$ inner product.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a\nnonempty bounded connected extension domain, and let $1\\le p<\\infty$. Then there is\n$C=C(\\Omega,p)$ such that every $u\\in W^{1,p}(\\Omega;\\mathbb K)$ satisfies\n$$\\|u-u_\\Omega\\|_{L^p(\\Omega)}\\le C\\|Du\\|_{L^p(\\Omega)},\\qquad u_\\Omega:=|\\Omega|^{-1}\\int_\\Omega u(x)\\,dx.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-signorini-partial-trace-space-bounded",
+          "source_section": "Statement",
+          "quote": "Assume the geometry and trace conventions of [[def-signorini-partial-trace-space]]. Then the maps $T_D,T_C:H^1(Ω;\\mathbb R^2)\\to L^2(Γ_D;\\mathbb R^2),L^2(Γ_C;\\mathbb R^2)$ are bounded and linear, and $V=\\ker T_D$ is a Hilbert space with the inherited $H^1$ inner product.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-signorini-contact-set-closed-convex-nonempty",
+          "source_section": "Statement",
+          "quote": "Under [[def-signorini-contact-variational-inequality]], $K$ is nonempty, closed, and convex in the Hilbert space $V$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-signorini-elasticity-form-bounded",
+          "source_section": "Statement",
+          "quote": "In the setting of [[def-signorini-elasticity-contact-model]], the form $a$ is well defined, symmetric, and satisfies\n$$|a(u,v)|\\le(2\\mu+2\\lambda)\\|u\\|_{H^1(\\Omega)}\\|v\\|_{H^1(\\Omega)}\\qquad(u,v\\in V).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-signorini-partial-dirichlet-korn-coercivity",
+          "source_section": "Statement",
+          "quote": "Assume the geometry of [[def-signorini-partial-trace-space]] and let $V=\\{v\\in H^1(\\Omega;\\mathbb R^2):T_Dv=0\\}$. Then there is $c_K>0$, depending on $\\Omega$ and $\\Gamma_D$, such that\n$$\\|v\\|_{H^1(\\Omega)}\\le c_K\\|\\varepsilon(v)\\|_{L^2(\\Omega)}\\qquad(v\\in V).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-signorini-elasticity-contact-model",
+          "source_section": "Definition",
+          "quote": "Use the polygon, displacement space and oriented contact normal from [[def-signorini-partial-trace-space]]. Let the constant shear modulus satisfy $\\mu>0$, let the finite Lam\\'e parameter satisfy $\\lambda\\ge0$, and let $F:V\\to\\mathbb R$ be a bounded linear functional. For $v\\in V$, define the weak symmetric gradient\n$$\\varepsilon(v):=\\frac{\\nabla v+(\\nabla v)^T}{2}.$$\nFor $u,v\\in V$, define the isotropic small-strain elasticity form\n$$a(u,v):=\\int_\\Omega 2\\mu\\,\\varepsilon(u):\\varepsilon(v)+\\lambda\\,\\operatorname{div}u\\,\\operatorname{div}v\\,dx.$$\nThe strain and form conventions are the algebraic formulas in [[def-linear-elasticity-displacement-formulation-and-data]]. The present domain is the partial-trace space $V$; all coercivity and well-posedness claims for it are proved locally below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-stampacchia-variational-inequality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]), let $K\\subseteq H$ be nonempty, closed and convex, let $a:H\\times H\\to\\mathbb R$ be a bounded coercive bilinear form with constants $M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]; no symmetry is assumed), and let $F:H\\to\\mathbb R$ be a bounded linear functional. Then there is exactly one $u\\in K$ with\n$$a(u,\\,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lipschitz-stability-of-strongly-monotone-variational-inequalities",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]), let $K\\subseteq H$ be nonempty, closed and convex, let $a$ be a bounded coercive bilinear form with constants $M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F_1,F_2\\in H^*$ with the dual norm $\\|\\cdot\\|_*$ ([[def-dual-space-of-a-normed-space]], [[def-operator-norm]]). Let $u_i\\in K$ be the unique solution of the variational inequality with data $F_i$, that is, $a(u_i,v-u_i)\\ge F_i(v-u_i)$ for every $v\\in K$ ([[thm-stampacchia-variational-inequality]]). Then\n$$\\alpha\\|u_1-u_2\\|\\le\\|F_1-F_2\\|_* .$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $V$ is a real Hilbert space and $K$ is nonempty, closed and convex. The elasticity form is bounded by [F2] and coercive by [F3], with positive constant $\\alpha=2\\mu/c_K^2$. Thus every hypothesis of [F4] holds, and [F4] gives exactly one $u\\in K$ satisfying $a(u,v-u)\\ge F(v-u)$ for all $v\\in K$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F5] to the same $V$, $K$ and $a$, with the two bounded loads $F_1,F_2$. Its hypotheses are the Hilbert, closed-convex, boundedness, and coercivity properties verified in step 1.1; hence $\\alpha\\|u_1-u_2\\|_V\\le\\|F_1-F_2\\|_{V^*}$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes Stampacchia only after verifying K is nonempty, closed, and convex."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the existence theorem to every bounded load, including zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem concerns the two-dimensional elasticity displacement space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies alpha=2 mu cK^2>0 from mu>0 and cK>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The VI is formulated with L2 traces and no pointwise endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly invoke the Countable Choice and Axiom of Choice branches."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states existence, uniqueness, and a stability estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states existence, uniqueness, and a stability estimate, not an equivalence."
+        }
+      ]
+    },
+    "thm-signorini-mortar-contact-kkt-and-complementarity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-signorini-nodal-p1-contact-scheme",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T_h)$ be a family of matching, boundary-conforming, shape-regular affine triangular meshes of the polygon from [[def-signorini-partial-trace-space]], with $h:=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)$. Assume both $\\Gamma_D$ and $\\Gamma_C$ are unions of boundary edges of each mesh, and let $\\mathcal N_h^C$ be the vertices on $\\Gamma_C$. The conforming continuous P1 displacement space is\n$$V_h:=\\{v_h\\in V\\cap C(\\overline\\Omega;\\mathbb R^2):v_h|_K\\in\\mathbb P_1(K;\\mathbb R^2)\\text{ for every }K\\in\\mathcal T_h\\}.$$\nFor continuous $\\psi$ on $\\Gamma_C$, let $I_h\\psi$ be its continuous piecewise-affine nodal interpolant on the contact edges. Under the additional obstacle hypotheses $\\psi\\le0$ and convexity of $\\psi$ in arclength on $\\Gamma_C$, define\n$$K_h:=\\{v_h\\in V_h:v_h(a)\\cdot n\\ge I_h\\psi(a)\\text{ for every }a\\in\\mathcal N_h^C\\}.$$\nThe nodal inequalities are exactly the plan's vertex constraints. The well-definedness and conformity claims are proved in [[lem-signorini-nodal-contact-set-conforming]].",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-signorini-nodal-contact-set-conforming",
+          "source_section": "Statement",
+          "quote": "Under [[def-signorini-nodal-p1-contact-scheme]], $K_h$ is a nonempty closed convex subset of the finite-dimensional space $V_h$ and $K_h\\subseteq K$. If $v\\in K\\cap H^2(\\Omega;\\mathbb R^2)\\cap C(\\overline\\Omega;\\mathbb R^2)$, its global P1 nodal interpolant $I_hv$ is well defined, belongs to $V_h$, and lies in $K_h$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and assume\n$X$ admits an ordered basis of finite length. Then $X$ is a Banach space in the\nsense of [[def-banach-space]].",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-signorini-elasticity-form-bounded",
+          "source_section": "Statement",
+          "quote": "In the setting of [[def-signorini-elasticity-contact-model]], the form $a$ is well defined, symmetric, and satisfies\n$$|a(u,v)|\\le(2\\mu+2\\lambda)\\|u\\|_{H^1(\\Omega)}\\|v\\|_{H^1(\\Omega)}\\qquad(u,v\\in V).$$",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-signorini-partial-dirichlet-korn-coercivity",
+          "source_section": "Statement",
+          "quote": "Assume the geometry of [[def-signorini-partial-trace-space]] and let $V=\\{v\\in H^1(\\Omega;\\mathbb R^2):T_Dv=0\\}$. Then there is $c_K>0$, depending on $\\Omega$ and $\\Gamma_D$, such that\n$$\\|v\\|_{H^1(\\Omega)}\\le c_K\\|\\varepsilon(v)\\|_{L^2(\\Omega)}\\qquad(v\\in V).$$",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-signorini-dual-mortar-biorthogonality-and-infsup",
+          "source_section": "Statement",
+          "quote": "For the spaces and basis of [[def-signorini-dual-mortar-contact-pair]], put $d_i:=\\sum_{e_k\\ni a_i}h_k$. Then\n$$\\int_{\\Gamma_C}\\chi_i\\phi_j\\,ds=d_i\\delta_{ij}\\qquad(0\\le i,j\\le N).$$\nThe pair $(\\Lambda_h,W_h)$ satisfies the mesh-independent trace-space inf-sup bound\n$$\\inf_{0\\ne\\lambda_h\\in\\Lambda_h}\\sup_{0\\ne g_h\\in W_h}\\frac{\\int_{\\Gamma_C}\\lambda_hg_h\\,ds}{\\|\\lambda_h\\|_{L^2(\\Gamma_C)}\\|g_h\\|_{L^2(\\Gamma_C)}}\\ge\\frac1{\\sqrt3}.$$\nMoreover, $\\lambda_h\\in\\Lambda_h^+$ defines a nonnegative functional on the cone of nonnegative functions in $W_h$, and $\\langle\\lambda_h,g_h\\rangle=\\sum_i d_i\\lambda_i g_h(a_i)$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-signorini-nodal-p1-contact-scheme",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T_h)$ be a family of matching, boundary-conforming, shape-regular affine triangular meshes of the polygon from [[def-signorini-partial-trace-space]], with $h:=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)$. Assume both $\\Gamma_D$ and $\\Gamma_C$ are unions of boundary edges of each mesh, and let $\\mathcal N_h^C$ be the vertices on $\\Gamma_C$. The conforming continuous P1 displacement space is\n$$V_h:=\\{v_h\\in V\\cap C(\\overline\\Omega;\\mathbb R^2):v_h|_K\\in\\mathbb P_1(K;\\mathbb R^2)\\text{ for every }K\\in\\mathcal T_h\\}.$$\nFor continuous $\\psi$ on $\\Gamma_C$, let $I_h\\psi$ be its continuous piecewise-affine nodal interpolant on the contact edges. Under the additional obstacle hypotheses $\\psi\\le0$ and convexity of $\\psi$ in arclength on $\\Gamma_C$, define\n$$K_h:=\\{v_h\\in V_h:v_h(a)\\cdot n\\ge I_h\\psi(a)\\text{ for every }a\\in\\mathcal N_h^C\\}.$$\nThe nodal inequalities are exactly the plan's vertex constraints. The well-definedness and conformity claims are proved in [[lem-signorini-nodal-contact-set-conforming]].",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-signorini-nodal-contact-set-conforming",
+          "source_section": "Statement",
+          "quote": "Under [[def-signorini-nodal-p1-contact-scheme]], $K_h$ is a nonempty closed convex subset of the finite-dimensional space $V_h$ and $K_h\\subseteq K$. If $v\\in K\\cap H^2(\\Omega;\\mathbb R^2)\\cap C(\\overline\\Omega;\\mathbb R^2)$, its global P1 nodal interpolant $I_hv$ is well defined, belongs to $V_h$, and lies in $K_h$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-stampacchia-variational-inequality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]), let $K\\subseteq H$ be nonempty, closed and convex, let $a:H\\times H\\to\\mathbb R$ be a bounded coercive bilinear form with constants $M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]; no symmetry is assumed), and let $F:H\\to\\mathbb R$ be a bounded linear functional. Then there is exactly one $u\\in K$ with\n$$a(u,\\,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-signorini-contact-nodal-test-functions-surjective",
+          "source_section": "Statement",
+          "quote": "Under [[def-signorini-nodal-p1-contact-scheme]], let the contact vertices be $a_0,\\ldots,a_N$ and define $B:V_h\\to\\mathbb R^{N+1}$ by $B_i(v_h)=v_h(a_i)\\cdot n$. Then $B$ is onto. In particular, for each $i$ there is $w_i\\in V_h$ with $B_j(w_i)=\\delta_{ij}$ for every contact vertex $a_j$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1]–[F2], the restricted form and load meet [F5], so the discrete VI has exactly one solution $u_h\\in K_h$. By [F6], the contact-coordinate map $B:V_h\\to\\mathbb R^{N+1}$ is onto; choose test functions $w_i$ with $B_j(w_i)=\\delta_{ij}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define the residual $r_h(v_h):=a(u_h,v_h)-F(v_h)$. If $k\\in\\ker B$, then $u_h\\pm tk\\in K_h$ for every real $t$, so the VI tested with both signs gives $r_h(k)=0$. If $g_i>0$, then $u_h\\pm tw_i\\in K_h$ for all sufficiently small $t>0$, so $r_h(w_i)=0$; if $g_i=0$, the feasible variation $u_h+tw_i$ for $t>0$ gives $r_h(w_i)\\ge0$. Set $\\lambda_i:=r_h(w_i)/d_i$. Then $\\lambda_i\\ge0$ and $\\lambda_i g_i=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For arbitrary $v_h\\in V_h$, write $v_h=\\sum_i B_i(v_h)w_i+k$ with $k:=v_h-\\sum_iB_i(v_h)w_i\\in\\ker B$. Step 2.1 gives $r_h(v_h)=\\sum_iB_i(v_h)r_h(w_i)=\\sum_i d_i\\lambda_iB_i(v_h)=b_h(v_h,\\lambda_h)$ by [F3], with $\\lambda_h:=\\sum_i\\lambda_i\\chi_i\\in\\Lambda_h^+$. Thus the saddle stationarity equation holds. If another multiplier gives the same stationarity, surjectivity of $B$ and $d_i>0$ force each coefficient to equal $\\lambda_i$, proving multiplier uniqueness.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Conversely, suppose a feasible displacement and nonnegative coefficients satisfy stationarity and $\\lambda_i g_i=0$. Define $g_i(w_h):=B_i(w_h)-I_h\\psi(a_i)$ for $w_h\\in V_h$, so $g_i=g_i(u_h)$. For feasible $v_h$, [F3] gives $a(u_h,v_h-u_h)-F(v_h-u_h)=\\sum_i d_i\\lambda_i(B_i(v_h)-B_i(u_h))=\\sum_i d_i\\lambda_i(g_i(v_h)-g_i(u_h))=\\sum_i d_i\\lambda_i g_i(v_h)\\ge0$, using [F4] and complementarity. Therefore the saddle system implies the VI, and the integrated residual is exactly $\\mathcal R_h=\\sum_i d_i\\lambda_i g_i=0$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F4], $\\psi\\le0$ and $I_h\\psi(a_i)=\\psi(a_i)$, so $0\\in K_h$. Taking $v_h=0$ in the VI gives $a(u_h,u_h)\\le F(u_h)\\le\\|F\\|_{V^*}\\|u_h\\|_V$. Coercivity [F2] yields $\\alpha\\|u_h\\|_V^2\\le\\|F\\|_{V^*}\\|u_h\\|_V$, hence either $u_h=0$ or $\\|u_h\\|_V\\le\\|F\\|_{V^*}/\\alpha$. The [F3] trace inf-sup and exact edge integrals give the stated stability and consistency.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 obtains a displacement from the nonempty closed-convex discrete set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 explicitly treats the u_h=0 branch before division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and Step 3.1 show the KKT construction applies with a single contact edge and its two nodal coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a valid fixed mesh with positive edge lengths and coercivity alpha>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 use positive endpoint weights d_i and nodal complementarity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the Countable Choice branch of finite-dimensional Stampacchia."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 derive KKT multipliers and stationarity from the VI."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 proves KKT feasibility and complementarity imply the discrete VI."
+        }
+      ]
+    },
+    "thm-signorini-nodal-contact-vi-falk-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-local-finite-element-interpolation-estimates",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $k\\ge0$, $1\\le p<\\infty$, and let\n$(\\widehat S_d,\\widehat P,\\widehat\\Sigma)$ be a reference finite element\nwhose polynomial space contains $\\mathbb P_k$. Assume its degrees of\nfreedom are bounded on $W^{\\ell,p}(\\widehat S_d)$ for an integer\n$\\ell\\ge1$, let $r,m\\in\\mathbb N_0$, and let $\\widehat I$ be its\ninterpolant. Thus\n$\\widehat Iq=q$ for $q\\in\\mathbb P_k$. On a shape-regular affine mesh\nas in [[def-matching-affine-simplicial-meshes]], for each cell $K$ with its\norientation-preserving reference map $F_K$ define\n$$I_Kv=(\\widehat I(v\\circ F_K))\\circ F_K^{-1}.$$\nFor every such cell, if $\\ell\\le r\\le k+1$ and $0\\le m\\le r$, then for\n$v\\in W^{r,p}(K)$,\n$$|v-I_Kv|_{W^{m,p}(K)}\\le C h_K^{r-m}|v|_{W^{r,p}(K)}.$$\nIf $\\ell>k+1$ and $0\\le m\\le k+1$, then for $v\\in W^{\\ell,p}(K)$,\n$$|v-I_Kv|_{W^{m,p}(K)} \\le C\\sum_{n=k+1}^{\\ell}h_K^{n-m}|v|_{W^{n,p}(K)}.$$\nThe constants are uniform over the mesh family and depend on the stated\nreference element, exponents and shape-regularity bound. For Lagrange\nelements in the existing mesh dimension range $d\\ge2$, assume additionally\nthe Axiom of Choice for the automatic nodal-boundedness application. Then\n[[thm-lagrange-point-evaluation-threshold-on-reference-simplex]] supplies\nthe boundedness hypothesis when $\\ell>d/p$; unisolvence of a particular\nnode set remains a separate hypothesis.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-signorini-continuous-contact-vi-wellposed",
+          "source_section": "Statement",
+          "quote": "Assume the setting of [[def-signorini-contact-variational-inequality]], including the Axiom of Choice for the trace/Poincare interfaces and Countable Choice. For every bounded linear load $F:V\\to\\mathbb R$, there is exactly one $u\\in K$ satisfying the contact variational inequality. With $\\alpha:=2\\mu/c_K^2$, where $c_K$ is from [[lem-signorini-partial-dirichlet-korn-coercivity]], solutions for two loads $F_1,F_2$ satisfy\n$$\\alpha\\|u_1-u_2\\|_V\\le\\|F_1-F_2\\|_{V^*}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-signorini-nodal-p1-contact-scheme",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T_h)$ be a family of matching, boundary-conforming, shape-regular affine triangular meshes of the polygon from [[def-signorini-partial-trace-space]], with $h:=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)$. Assume both $\\Gamma_D$ and $\\Gamma_C$ are unions of boundary edges of each mesh, and let $\\mathcal N_h^C$ be the vertices on $\\Gamma_C$. The conforming continuous P1 displacement space is\n$$V_h:=\\{v_h\\in V\\cap C(\\overline\\Omega;\\mathbb R^2):v_h|_K\\in\\mathbb P_1(K;\\mathbb R^2)\\text{ for every }K\\in\\mathcal T_h\\}.$$\nFor continuous $\\psi$ on $\\Gamma_C$, let $I_h\\psi$ be its continuous piecewise-affine nodal interpolant on the contact edges. Under the additional obstacle hypotheses $\\psi\\le0$ and convexity of $\\psi$ in arclength on $\\Gamma_C$, define\n$$K_h:=\\{v_h\\in V_h:v_h(a)\\cdot n\\ge I_h\\psi(a)\\text{ for every }a\\in\\mathcal N_h^C\\}.$$\nThe nodal inequalities are exactly the plan's vertex constraints. The well-definedness and conformity claims are proved in [[lem-signorini-nodal-contact-set-conforming]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-signorini-nodal-contact-set-conforming",
+          "source_section": "Statement",
+          "quote": "Under [[def-signorini-nodal-p1-contact-scheme]], $K_h$ is a nonempty closed convex subset of the finite-dimensional space $V_h$ and $K_h\\subseteq K$. If $v\\in K\\cap H^2(\\Omega;\\mathbb R^2)\\cap C(\\overline\\Omega;\\mathbb R^2)$, its global P1 nodal interpolant $I_hv$ is well defined, belongs to $V_h$, and lies in $K_h$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and assume\n$X$ admits an ordered basis of finite length. Then $X$ is a Banach space in the\nsense of [[def-banach-space]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-signorini-elasticity-form-bounded",
+          "source_section": "Statement",
+          "quote": "In the setting of [[def-signorini-elasticity-contact-model]], the form $a$ is well defined, symmetric, and satisfies\n$$|a(u,v)|\\le(2\\mu+2\\lambda)\\|u\\|_{H^1(\\Omega)}\\|v\\|_{H^1(\\Omega)}\\qquad(u,v\\in V).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-signorini-partial-dirichlet-korn-coercivity",
+          "source_section": "Statement",
+          "quote": "Assume the geometry of [[def-signorini-partial-trace-space]] and let $V=\\{v\\in H^1(\\Omega;\\mathbb R^2):T_Dv=0\\}$. Then there is $c_K>0$, depending on $\\Omega$ and $\\Gamma_D$, such that\n$$\\|v\\|_{H^1(\\Omega)}\\le c_K\\|\\varepsilon(v)\\|_{L^2(\\Omega)}\\qquad(v\\in V).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-stampacchia-variational-inequality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]), let $K\\subseteq H$ be nonempty, closed and convex, let $a:H\\times H\\to\\mathbb R$ be a bounded coercive bilinear form with constants $M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]; no symmetry is assumed), and let $F:H\\to\\mathbb R$ be a bounded linear functional. Then there is exactly one $u\\in K$ with\n$$a(u,\\,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-local-finite-element-interpolation-estimates",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $k\\ge0$, $1\\le p<\\infty$, and let\n$(\\widehat S_d,\\widehat P,\\widehat\\Sigma)$ be a reference finite element\nwhose polynomial space contains $\\mathbb P_k$. Assume its degrees of\nfreedom are bounded on $W^{\\ell,p}(\\widehat S_d)$ for an integer\n$\\ell\\ge1$, let $r,m\\in\\mathbb N_0$, and let $\\widehat I$ be its\ninterpolant. Thus\n$\\widehat Iq=q$ for $q\\in\\mathbb P_k$. On a shape-regular affine mesh\nas in [[def-matching-affine-simplicial-meshes]], for each cell $K$ with its\norientation-preserving reference map $F_K$ define\n$$I_Kv=(\\widehat I(v\\circ F_K))\\circ F_K^{-1}.$$\nFor every such cell, if $\\ell\\le r\\le k+1$ and $0\\le m\\le r$, then for\n$v\\in W^{r,p}(K)$,\n$$|v-I_Kv|_{W^{m,p}(K)}\\le C h_K^{r-m}|v|_{W^{r,p}(K)}.$$\nIf $\\ell>k+1$ and $0\\le m\\le k+1$, then for $v\\in W^{\\ell,p}(K)$,\n$$|v-I_Kv|_{W^{m,p}(K)} \\le C\\sum_{n=k+1}^{\\ell}h_K^{n-m}|v|_{W^{n,p}(K)}.$$\nThe constants are uniform over the mesh family and depend on the stated\nreference element, exponents and shape-regularity bound. For Lagrange\nelements in the existing mesh dimension range $d\\ge2$, assume additionally\nthe Axiom of Choice for the automatic nodal-boundedness application. Then\n[[thm-lagrange-point-evaluation-threshold-on-reference-simplex]] supplies\nthe boundedness hypothesis when $\\ell>d/p$; unisolvence of a particular\nnode set remains a separate hypothesis.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-reference-finite-element-and-unisolvent-dofs",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $\\widehat K\\subset\\mathbb R^d$ be a nonempty bounded open\nreference cell, let $q\\ge1$ be an integer, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **reference finite element** is a\ntriple $(\\widehat K,\\widehat P,\\widehat\\Sigma)$ where $\\widehat P$ is an\n$N$-dimensional subspace of $[C(\\overline{\\widehat K};\\mathbb K)]^q$ for\n$N\\in\\mathbb N_0$ and\n$\\widehat\\Sigma=(\\widehat\\sigma_1,\\ldots,\\widehat\\sigma_N)$ is a list of\nlinear functionals on $\\widehat P$ for which\n$$J_{\\widehat\\Sigma}:\\widehat P\\to\\mathbb K^N,\\qquad J_{\\widehat\\Sigma}(p):=(\\widehat\\sigma_1(p),\\ldots,\\widehat\\sigma_N(p)),$$\nis bijective. The functionals are the **degrees of freedom** and the triple\nis **unisolvent**. Its **shape functions** are the unique dual basis\n$\\widehat\\phi_1,\\ldots,\\widehat\\phi_N\\in\\widehat P$ satisfying\n$\\widehat\\sigma_i(\\widehat\\phi_j)=\\delta_{ij}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2]–[F4], the discrete VI on $V_h$ has a unique solution $u_h$. Fix any $v_h\\in K_h$. Since $K_h\\subseteq K$, [F1] applies at $z=u_h$ and gives $a(u,u_h-u)\\ge F(u_h-u)$; equivalently $a(u,e)\\le F(e)$ for $e:=u-u_h$. The discrete inequality tested at $v_h$ gives $a(u_h,e-\\delta)\\ge F(e-\\delta)$ for $\\delta:=u-v_h$. Rearranging these two inequalities yields $a(e,e)\\le F(\\delta)-a(u_h,\\delta)=\\eta_{\\rm feas}(v_h)+a(e,\\delta)$; [F1] also gives $\\eta_{\\rm feas}(v_h)\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the convergence clause, let $v_h=I_hu$. By [F2] the nodal interpolant belongs to $K_h$. Apply [F5] on each cell for $m=0,1$. The cell interiors partition $\\Omega$ up to the finite edge union [F6]; summing the squared local estimates gives $\\|u-I_hu\\|_V\\le C(h+h^2)|u|_{H^2(\\Omega)}\\to0$.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F2",
+            "F5",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], $\\alpha\\|e\\|_V^2\\le a(e,e)$ and $|a(e,\\delta)|\\le M\\|e\\|_V\\|\\delta\\|_V$. The inequality of step 1.1 and $M\\|e\\|\\|\\delta\\|\\le(\\alpha/2)\\|e\\|^2+(M^2/(2\\alpha))\\|\\delta\\|^2$ imply $\\|e\\|_V^2\\le(2/\\alpha)\\eta_{\\rm feas}(v_h)+(M^2/\\alpha^2)\\|u-v_h\\|_V^2$. Since $v_h$ was arbitrary, take the infimum to obtain the displayed Falk bound.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The functional $R(v):=a(u,v)-F(v)$ is bounded on $V$, with $\\|R\\|_{V^*}\\le M\\|u\\|_V+\\|F\\|_{V^*}$ by [F3]. Thus $0\\le\\eta_{\\rm feas}(I_hu)=R(I_hu-u)\\le(M\\|u\\|+\\|F\\|)\\|I_hu-u\\|_V\\to0$. Substitute $v_h=I_hu$ in step 2.1 and use step 1.2 to conclude $\\|u-u_h\\|_V\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 obtains the discrete solution on the nonempty closed-convex Kh established by F2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the bound without dividing by the energy error, so zero error is included."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is a mesh-family estimate and makes no one-element special claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The mesh family is assumed matching, shape regular, and nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 sums local P1 estimates over cells, including boundary cells."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 preserve the Countable Choice and Lagrange-functional Axiom of Choice branches."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an error bound and conditional convergence theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an error bound and conditional convergence theorem, not an equivalence."
+        }
+      ]
+    },
+    "ex-signorini-one-dimensional-obstacle-free-boundary": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-closed-convex-obstacle-set-and-variational-inequality",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge1$, and let $\\Omega\\subseteq\\mathbb R^n$ be a bounded open set of one of the following two kinds ([[def-bounded-c-k-domain-and-boundary-charts]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-one-dimensional-trace-truncation-compatibility",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $I=(a,b)$ with $-\\infty<a<b<\\infty$, let $1\\le p<\\infty$, and let $u\\in W^{1,p}(I;\\mathbb R)$ ([[def-sobolev-space-wkp-and-its-norm]]). Let $u^*$ be its unique absolutely continuous representative on $[a,b]$ ([[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]]) and put $Tu:=(u^*(a),u^*(b))\\in\\mathbb R^2$, ordered componentwise. Then:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-poincare-inequality-for-w-one-p-zero",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open and bounded in one direction: there are a unit vector $e$ and $a<b$ with $a<x\\cdot e<b$ for every $x\\in\\Omega$. Let $1\\le p<\\infty$. Then $\\|u\\|_{L^p(\\Omega)}\\le C(p)\\,(b-a)\\,\\|Du\\|_{L^p(\\Omega)}$ for every $u\\in W^{1,p}_0(\\Omega;\\mathbb K)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The function $\\psi$ is continuous and piecewise affine, hence belongs to $H^1(0,1)$; its endpoint values are $0$ and $-1/2$, so [F1] applies. The displayed $u$ is continuous at $a_0$, has derivative $0$ from both sides there, and has endpoint values $u(0)=u(1)=0$. By [F2], its endpoint trace is zero and therefore $u\\in H^1_0(0,1)$. On $[0,a_0]$, $u=\\psi=0$; on $(a_0,1]$, $u\\ge0>\\psi$. Thus $u\\in K$, and equality $u=\\psi$ holds exactly on $[0,a_0]$.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On $(a_0,1)$, direct differentiation gives $u''(x)=4-6x$; on $(0,a_0)$, $u''=0$. The derivative $u'$ is continuous at $a_0$, so its distributional derivative is the piecewise function just computed, with no point mass at $a_0$. For $z=v-u\\in H^1_0(0,1)$, [F6] supplies a sequence $z_m\\in C_c^\\infty(0,1)$ converging in $H^1$. Piecewise integration by parts for each $z_m$ has cancelling interface terms because $u'$ is continuous; passing to the limit in the $L^2$ pairings gives $\\int_0^1u'z'=-\\int_0^1u''z$. Since $f=-1$ on the first interval and $f=-u''$ on the second, this yields $a(u,v-u)-F(v-u)=\\int_0^{a_0}(v-u)\\,dx=\\int_0^{a_0}v\\,dx\\ge0$, where the last inequality uses $v\\ge\\psi=0$ almost everywhere on $(0,a_0)$. Hence $u$ solves the variational inequality. The same integration by parts against compactly supported tests gives reaction density $-u''-f=1$ on $(0,a_0)$ and $0$ on $(a_0,1)$; no point mass occurs at $a_0$ because $u'$ is continuous.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $f$ is bounded on both subintervals, hence belongs to $L^2(0,1)$. The form is symmetric and bounded since $|a(w,z)|\\le\\|w'\\|_2\\|z'\\|_2\\le\\|w\\|_{H^1}\\|z\\|_{H^1}$ by [F4]. By [F3], $a(w,w)=\\|w'\\|_2^2\\ge c_P^{-2}\\|w\\|_{H^1}^2$ for some $c_P>0$. Thus the form is bounded, symmetric and coercive in the sense of [F5]. The load is bounded because $|F(z)|\\le\\|f\\|_2\\|z\\|_2\\le c_P\\|f\\|_2\\|z\\|_{H^1}$ by [F3]–[F4]. If $\\widetilde u\\in K$ is another solution, test its inequality with $u$ and the one for $u$ with $\\widetilde u$, then add; symmetry gives $a(u-\\widetilde u,u-\\widetilde u)\\le0$. Coercivity forces $u=\\widetilde u$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits u in the admissible set K."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use zero displacement on the contact interval and its zero obstacle."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The complete example is on (0,1), with its endpoint traces checked in Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The free boundary a0=1/2 lies strictly inside the nondegenerate interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 verify the obstacle/displacement endpoint data and interface regularity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 retains the obstacle trace Axiom of Choice branch and Step 2.1 uses Countable Choice for Poincare."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one explicit solution and uniqueness; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one explicit solution and uniqueness; it states no biconditional."
+        }
+      ]
+    },
+    "cex-signorini-nodal-contact-feasibility-needs-convex-obstacle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-signorini-nodal-p1-contact-scheme",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T_h)$ be a family of matching, boundary-conforming, shape-regular affine triangular meshes of the polygon from [[def-signorini-partial-trace-space]], with $h:=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)$. Assume both $\\Gamma_D$ and $\\Gamma_C$ are unions of boundary edges of each mesh, and let $\\mathcal N_h^C$ be the vertices on $\\Gamma_C$. The conforming continuous P1 displacement space is\n$$V_h:=\\{v_h\\in V\\cap C(\\overline\\Omega;\\mathbb R^2):v_h|_K\\in\\mathbb P_1(K;\\mathbb R^2)\\text{ for every }K\\in\\mathcal T_h\\}.$$\nFor continuous $\\psi$ on $\\Gamma_C$, let $I_h\\psi$ be its continuous piecewise-affine nodal interpolant on the contact edges. Under the additional obstacle hypotheses $\\psi\\le0$ and convexity of $\\psi$ in arclength on $\\Gamma_C$, define\n$$K_h:=\\{v_h\\in V_h:v_h(a)\\cdot n\\ge I_h\\psi(a)\\text{ for every }a\\in\\mathcal N_h^C\\}.$$\nThe nodal inequalities are exactly the plan's vertex constraints. The well-definedness and conformity claims are proved in [[lem-signorini-nodal-contact-set-conforming]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-signorini-contact-variational-inequality",
+          "source_section": "Definition",
+          "quote": "Let $\\psi\\in C(\\Gamma_C;\\mathbb R)$ satisfy $\\psi\\le0$. Define the unilateral frictionless **contact set**\n$$K:=\\{v\\in V:T_Cv\\cdot n\\ge\\psi\\quad\\text{for arclength-almost every point of }\\Gamma_C\\}.$$\nGiven the elasticity form $a$ and bounded load $F$ of [[def-signorini-elasticity-contact-model]], the **contact variational inequality** is to find $u\\in K$ such that\n$$a(u,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K.$$\nThe set $K$ is nonempty, closed and convex by [[lem-signorini-contact-set-closed-convex-nonempty]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-convex-concave-and-midpoint-convex-functions",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval ([[def-interval]]) and let $f:I\\to\\mathbb R$. For $x,y\\in I$ and $\\lambda\\in[0,1]$, the point $\\lambda x+(1-\\lambda)y$ belongs to $I$. The function $f$ is **convex** when the convex-combination inequality holds for every weight in $[0,1]$:",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The polynomial $\\psi(s)=-1+4s(1-s)$ has endpoint values $-1$ and midpoint value $0$, and $\\psi(s)=-(2s-1)^2$ shows its maximum is $0$. For $s_0,s_1\\in[0,1]$ and $t\\in[0,1]$, direct expansion gives $\\psi((1-t)s_0+ts_1)-[(1-t)\\psi(s_0)+t\\psi(s_1)]=4t(1-t)(s_1-s_0)^2\\ge0$, with strict inequality when $0<t<1$ and $s_0\\ne s_1$. Thus [F2] says $\\psi$ is strictly concave, not convex, and the convex-obstacle premise is absent.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The vector field $v_h(x,y)=(-x,0)$ is affine on each triangle and is zero on $\\Gamma_D$, hence belongs to $V_h$. On the two contact vertices its normal value is $-1$, equal to the endpoint obstacle values, so both nodal inequalities hold. Along all of $\\Gamma_C$, $v_h\\cdot n=-1$, while at $s=1/2$ the obstacle equals $0$; continuity gives an interval around that midpoint on which $-1<\\psi(s)$. Therefore the continuum contact inequality fails on a set of positive arclength and $v_h\\notin K$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a fixed nonempty unit square with one contact edge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the zero obstacle value at the midpoint where the continuum inequality fails."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The mesh has one contact edge; Step 2.1 checks both endpoint nodal constraints."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The square is triangulated by nondegenerate triangles and the field is affine."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 compute the obstacle and displacement at the contact endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample is a finite polynomial calculation with no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a feasibility implication; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a feasibility implication; it states no equivalence."
+        }
+      ]
+    },
+    "ex-signorini-contact-patch-test": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-signorini-continuous-contact-vi-wellposed",
+          "source_section": "Statement",
+          "quote": "Assume the setting of [[def-signorini-contact-variational-inequality]], including the Axiom of Choice for the trace/Poincare interfaces and Countable Choice. For every bounded linear load $F:V\\to\\mathbb R$, there is exactly one $u\\in K$ satisfying the contact variational inequality. With $\\alpha:=2\\mu/c_K^2$, where $c_K$ is from [[lem-signorini-partial-dirichlet-korn-coercivity]], solutions for two loads $F_1,F_2$ satisfy\n$$\\alpha\\|u_1-u_2\\|_V\\le\\|F_1-F_2\\|_{V^*}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-signorini-elasticity-contact-model",
+          "source_section": "Definition",
+          "quote": "Use the polygon, displacement space and oriented contact normal from [[def-signorini-partial-trace-space]]. Let the constant shear modulus satisfy $\\mu>0$, let the finite Lam\\'e parameter satisfy $\\lambda\\ge0$, and let $F:V\\to\\mathbb R$ be a bounded linear functional. For $v\\in V$, define the weak symmetric gradient\n$$\\varepsilon(v):=\\frac{\\nabla v+(\\nabla v)^T}{2}.$$\nFor $u,v\\in V$, define the isotropic small-strain elasticity form\n$$a(u,v):=\\int_\\Omega 2\\mu\\,\\varepsilon(u):\\varepsilon(v)+\\lambda\\,\\operatorname{div}u\\,\\operatorname{div}v\\,dx.$$\nThe strain and form conventions are the algebraic formulas in [[def-linear-elasticity-displacement-formulation-and-data]]. The present domain is the partial-trace space $V$; all coercivity and well-posedness claims for it are proved locally below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-signorini-contact-variational-inequality",
+          "source_section": "Definition",
+          "quote": "Let $\\psi\\in C(\\Gamma_C;\\mathbb R)$ satisfy $\\psi\\le0$. Define the unilateral frictionless **contact set**\n$$K:=\\{v\\in V:T_Cv\\cdot n\\ge\\psi\\quad\\text{for arclength-almost every point of }\\Gamma_C\\}.$$\nGiven the elasticity form $a$ and bounded load $F$ of [[def-signorini-elasticity-contact-model]], the **contact variational inequality** is to find $u\\in K$ such that\n$$a(u,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K.$$\nThe set $K$ is nonempty, closed and convex by [[lem-signorini-contact-set-closed-convex-nonempty]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-signorini-nodal-p1-contact-scheme",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T_h)$ be a family of matching, boundary-conforming, shape-regular affine triangular meshes of the polygon from [[def-signorini-partial-trace-space]], with $h:=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)$. Assume both $\\Gamma_D$ and $\\Gamma_C$ are unions of boundary edges of each mesh, and let $\\mathcal N_h^C$ be the vertices on $\\Gamma_C$. The conforming continuous P1 displacement space is\n$$V_h:=\\{v_h\\in V\\cap C(\\overline\\Omega;\\mathbb R^2):v_h|_K\\in\\mathbb P_1(K;\\mathbb R^2)\\text{ for every }K\\in\\mathcal T_h\\}.$$\nFor continuous $\\psi$ on $\\Gamma_C$, let $I_h\\psi$ be its continuous piecewise-affine nodal interpolant on the contact edges. Under the additional obstacle hypotheses $\\psi\\le0$ and convexity of $\\psi$ in arclength on $\\Gamma_C$, define\n$$K_h:=\\{v_h\\in V_h:v_h(a)\\cdot n\\ge I_h\\psi(a)\\text{ for every }a\\in\\mathcal N_h^C\\}.$$\nThe nodal inequalities are exactly the plan's vertex constraints. The well-definedness and conformity claims are proved in [[lem-signorini-nodal-contact-set-conforming]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-broken-and-conforming-polynomial-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal T$ be a matching affine simplicial mesh of $\\Omega$ as defined\nin [[def-matching-affine-simplicial-meshes]]. Fix $k\\in\\mathbb N_0$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and an integer $q\\ge1$. On each\ncell let $\\mathbb P_k(K;\\mathbb K^q)$ denote the\nrestrictions to $K$ of $\\mathbb K^q$-valued polynomials of total degree at\nmost $k$. The **broken polynomial space** is the finite product\n$$V_h^{\\mathrm{br}}:=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb K^q),$$\nviewed as functions defined almost everywhere cell by cell. For an interior\nfacet $F=K\\cap K'$, the **jump** is the difference of the two polynomial\ntraces, with either fixed ordering of $K,K'$; its vanishing is independent of\nthat ordering. The **conforming polynomial space** is\n$$V_h^{\\mathrm{conf}}:=\\{v\\in V_h^{\\mathrm{br}}:v|_{F,K}=v|_{F,K'}\\text{ on every interior facet }F\\}.$$\nThe **zero-boundary subspace** consists of those $v\\in V_h^{\\mathrm{conf}}$\nwhose polynomial trace is zero on every boundary facet. These are algebraic\ndefinitions. The Sobolev inclusions and the zero-boundary closure conclusion\nare proved separately in the corresponding local theorems on matching\npiecewise polynomials and zero-boundary values. If $\\mathcal T=\\varnothing$,\nthen $\\Omega=\\varnothing$ by the mesh definition; the empty product is the\nzero vector space consisting of the unique empty function, and the trace\nconditions are vacuous.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and assume\n$X$ admits an ordered basis of finite length. Then $X$ is a Banach space in the\nsense of [[def-banach-space]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-signorini-nodal-contact-set-conforming",
+          "source_section": "Statement",
+          "quote": "Under [[def-signorini-nodal-p1-contact-scheme]], $K_h$ is a nonempty closed convex subset of the finite-dimensional space $V_h$ and $K_h\\subseteq K$. If $v\\in K\\cap H^2(\\Omega;\\mathbb R^2)\\cap C(\\overline\\Omega;\\mathbb R^2)$, its global P1 nodal interpolant $I_hv$ is well defined, belongs to $V_h$, and lies in $K_h$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-signorini-elasticity-form-bounded",
+          "source_section": "Statement",
+          "quote": "In the setting of [[def-signorini-elasticity-contact-model]], the form $a$ is well defined, symmetric, and satisfies\n$$|a(u,v)|\\le(2\\mu+2\\lambda)\\|u\\|_{H^1(\\Omega)}\\|v\\|_{H^1(\\Omega)}\\qquad(u,v\\in V).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-signorini-partial-dirichlet-korn-coercivity",
+          "source_section": "Statement",
+          "quote": "Assume the geometry of [[def-signorini-partial-trace-space]] and let $V=\\{v\\in H^1(\\Omega;\\mathbb R^2):T_Dv=0\\}$. Then there is $c_K>0$, depending on $\\Omega$ and $\\Gamma_D$, such that\n$$\\|v\\|_{H^1(\\Omega)}\\le c_K\\|\\varepsilon(v)\\|_{L^2(\\Omega)}\\qquad(v\\in V).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-signorini-continuous-contact-vi-wellposed",
+          "source_section": "Statement",
+          "quote": "Assume the setting of [[def-signorini-contact-variational-inequality]], including the Axiom of Choice for the trace/Poincare interfaces and Countable Choice. For every bounded linear load $F:V\\to\\mathbb R$, there is exactly one $u\\in K$ satisfying the contact variational inequality. With $\\alpha:=2\\mu/c_K^2$, where $c_K$ is from [[lem-signorini-partial-dirichlet-korn-coercivity]], solutions for two loads $F_1,F_2$ satisfy\n$$\\alpha\\|u_1-u_2\\|_V\\le\\|F_1-F_2\\|_{V^*}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-stampacchia-variational-inequality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a real Hilbert space ([[def-hilbert-space]]), let $K\\subseteq H$ be nonempty, closed and convex, let $a:H\\times H\\to\\mathbb R$ be a bounded coercive bilinear form with constants $M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]; no symmetry is assumed), and let $F:H\\to\\mathbb R$ be a bounded linear functional. Then there is exactly one $u\\in K$ with\n$$a(u,\\,v-u)\\ge F(v-u)\\qquad\\text{for every }v\\in K .$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The affine field $u$ lies in $H^1(\\Omega;\\mathbb R^2)$ and vanishes on the left side, so $u\\in V$. On the right side $u\\cdot n=0=\\psi$, hence $u\\in K$ and has zero gap. Every affine function restricts to a continuous piecewise-affine function on the given matching mesh, so $u\\in V_h$; its contact nodal inequalities hold with equality, so $u\\in K_h$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The gradient is $\\nabla u=\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix}$, so $\\operatorname{div}u=0$ and $\\varepsilon(u)=\\begin{pmatrix}0&1/2\\\\1/2&0\\end{pmatrix}$. By [F3], $F(v)=a(u,v)$ is bounded. For every $v\\in K$, $a(u,v-u)-F(v-u)=0$, so $u$ solves the continuous VI; uniqueness follows from [F4]. For every $v_h\\in K_h\\subseteq K$, the same identity holds, so $u$ solves the discrete VI. The inherited $H^1$ inner product makes finite-dimensional $V_h$ a Hilbert space by [F2]; the restricted form is bounded and coercive by [F3], and [F5] gives uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the field is feasible in both K and Kh."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the contact gap is identically zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The square requires a valid triangulation; no one-cell geometric realization is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes a matching triangulation by nondegenerate affine triangles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies zero Dirichlet trace on the full left side and nodal feasibility on the full contact side."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the continuous and discrete Countable Choice branches and the inherited Axiom of Choice branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an exact solution; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies an exact solution; it states no equivalence."
+        }
+      ]
+    },
+    "ex-signorini-mortar-active-set-change": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-signorini-mortar-contact-kkt-and-complementarity",
+          "source_section": "Statement",
+          "quote": "On each fixed contact mesh in [[def-signorini-dual-mortar-contact-pair]], assume $K_h\\subseteq K$, the elasticity form is bounded and coercive on $V_h$ with constants $M,\\alpha>0$, and $F$ is bounded. Then the nodal contact variational inequality has a unique displacement $u_h$ and a unique multiplier $\\lambda_h=\\sum_i\\lambda_i\\chi_i\\in\\Lambda_h^+$ satisfying\n$$a(u_h,v_h)-F(v_h)=b_h(v_h,\\lambda_h)\\quad(v_h\\in V_h),$$\n$$g_i:=u_h(a_i)\\cdot n-I_h\\psi(a_i)\\ge0,\\quad \\lambda_i\\ge0,\\quad \\lambda_i g_i=0\\quad(0\\le i\\le N).$$\nThese saddle equations are equivalent to the discrete VI, and the integrated complementarity residual is exactly $\\mathcal R_h:=\\int_{\\Gamma_C}\\lambda_h(T_Cu_h\\cdot n-I_h\\psi)\\,ds=\\sum_i d_i\\lambda_i g_i=0$. The trace-pair inf-sup bound is at least $1/\\sqrt3$ in the stated $L^2$ norms by [[lem-signorini-dual-mortar-biorthogonality-and-infsup]], and the displacement satisfies $\\|u_h\\|_V\\le\\|F\\|_{V^*}/\\alpha$. The coupling uses exact edge integrals and has no contact quadrature defect.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vectors $(1,1)^T$ and $(1,-1)^T$ are eigenvectors of $A$ with eigenvalues $1$ and $3$, so $A$ is symmetric positive definite. Also $A^{-1}=\\frac13\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$. For $f^{(1)}=(1,1/5)^T$, the unconstrained solution is $g=A^{-1}f^{(1)}=(11/15,7/15)^T$, which has positive entries, and $Ag-f^{(1)}=0$. Thus every VI test has zero residual and the complementarity equations hold with $\\rho=0$. The scaling between $\\rho_i$ and the mortar coefficient $\\lambda_i$ agrees with [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $f^{(2)}=(1,-1)^T$, take $g=(1/2,0)^T$ and compute $Ag=(1,-1/2)^T$, so $Ag-f^{(2)}=(0,1/2)^T=\\rho$. Both vectors are componentwise nonnegative and $\\rho_1g_1=0=\\rho_2g_2$. For every $z\\in\\mathbb R_+^2$, $\\rho\\cdot(z-g)=\\rho_2z_2\\ge0$, so this is the VI solution with exactly the second gap active.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $e_1,e_2$ be the standard coordinate vectors and write $r:=Ag-f$. If $g\\ge0$, $r\\ge0$, and $r_i g_i=0$, then for every $z\\ge0$, $r\\cdot(z-g)=\\sum_i r_i z_i-\\sum_i r_i g_i=\\sum_i r_i z_i\\ge0$, so the complementarity equations imply the VI. Conversely, suppose $g$ solves the VI. If $g_i>0$, choose $0<t<g_i$ and test with $z=g+te_i$ and $z=g-te_i$; the two inequalities give $r_i\\ge0$ and $r_i\\le0$, hence $r_i=0$. If $g_i=0$, test with $z=g+te_i$ for any $t>0$ to get $r_i\\ge0$. Thus $r\\ge0$ and $r_i g_i=0$ for both coordinates, proving equivalence. If $g,\\widetilde g$ both solve the VI for the same load, testing with each other and adding gives $-(g-\\widetilde g)^TA(g-\\widetilde g)\\ge0$. The eigenvalues computed in step 1.1 are positive, so $A$ is positive definite and this forces $g=\\widetilde g$; then $\\rho=Ag-f$ is also unique. Thus the displayed complementarity solutions are the unique ones for their respective loads.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The reduced system has exactly two gap coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 has zero reaction for the inactive load, and Step 1.2 has a zero second gap for the active load."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 exhibits exactly one active constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes positive eigenvalues 1 and 3 for A, excluding a singular stiffness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is an algebraic reduced model and has no geometric boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The calculation uses a finite matrix and exact rational arithmetic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item gives two explicit complementarity solutions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item gives two explicit complementarity solutions, not an equivalence."
+        }
+      ]
+    },
+    "lem-signorini-contact-nodal-test-functions-surjective": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-signorini-partial-trace-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. A **bounded connected Lipschitz polygon** $Ω\\subset\\mathbb R^2$ is a bounded connected open set whose boundary is a simple closed polygonal curve and, near every boundary point after a rigid coordinate change, is the graph of a Lipschitz function with $Ω$ on one side. Assume $Ω$ is a $W^{1,2}$-extension domain in the sense of [[def-sobolev-extension-domain-and-extension-operator]]. Fix two disjoint closed straight segments $Γ_D,Γ_C\\subset\\partialΩ$, each of positive length and each lying strictly inside a straight side of $∂Ω$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mathcal T$ be a finite matching affine simplicial mesh of a bounded\npolyhedral open set $\\Omega$, let $1\\le p\\le\\infty$, and let $v$ be a\nreal-valued scalar member of the conforming piecewise-polynomial space in\n[[def-broken-and-conforming-polynomial-spaces]]. Then $v\\in W^{1,p}(\\Omega)$.\nIts weak gradient agrees almost everywhere on each cell with the ordinary\ncellwise polynomial gradient.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-signorini-nodal-p1-contact-scheme",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T_h)$ be a family of matching, boundary-conforming, shape-regular affine triangular meshes of the polygon from [[def-signorini-partial-trace-space]], with $h:=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)$. Assume both $\\Gamma_D$ and $\\Gamma_C$ are unions of boundary edges of each mesh, and let $\\mathcal N_h^C$ be the vertices on $\\Gamma_C$. The conforming continuous P1 displacement space is\n$$V_h:=\\{v_h\\in V\\cap C(\\overline\\Omega;\\mathbb R^2):v_h|_K\\in\\mathbb P_1(K;\\mathbb R^2)\\text{ for every }K\\in\\mathcal T_h\\}.$$\nFor continuous $\\psi$ on $\\Gamma_C$, let $I_h\\psi$ be its continuous piecewise-affine nodal interpolant on the contact edges. Under the additional obstacle hypotheses $\\psi\\le0$ and convexity of $\\psi$ in arclength on $\\Gamma_C$, define\n$$K_h:=\\{v_h\\in V_h:v_h(a)\\cdot n\\ge I_h\\psi(a)\\text{ for every }a\\in\\mathcal N_h^C\\}.$$\nThe nodal inequalities are exactly the plan's vertex constraints. The well-definedness and conformity claims are proved in [[lem-signorini-nodal-contact-set-conforming]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-signorini-partial-trace-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. A **bounded connected Lipschitz polygon** $Ω\\subset\\mathbb R^2$ is a bounded connected open set whose boundary is a simple closed polygonal curve and, near every boundary point after a rigid coordinate change, is the graph of a Lipschitz function with $Ω$ on one side. Assume $Ω$ is a $W^{1,2}$-extension domain in the sense of [[def-sobolev-extension-domain-and-extension-operator]]. Fix two disjoint closed straight segments $Γ_D,Γ_C\\subset\\partialΩ$, each of positive length and each lying strictly inside a straight side of $∂Ω$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a\nbounded $C^1$ domain in the graph sense of\n[[def-bounded-c-k-domain-and-boundary-charts]], let $\\partial\\Omega$ carry the\nchart-independent surface measure of\n[[def-surface-integral-on-a-compact-c-one-hypersurface]] and\n[[lem-surface-integral-is-independent-of-c-one-boundary-charts]], let\n$1\\le p<\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then there is a\nunique bounded linear operator\n$$T:W^{1,p}(\\Omega;\\mathbb K)\\longrightarrow L^p(\\partial\\Omega;\\mathbb K)$$\nwith $Tu=u|_{\\partial\\Omega}$ for every\n$u\\in C(\\overline\\Omega)\\cap W^{1,p}(\\Omega;\\mathbb K)$, and it satisfies\n$\\|Tu\\|_{L^p(\\partial\\Omega)}\\le C(\\Omega,p)\\|u\\|_{W^{1,p}(\\Omega)}$. On each\nboundary chart the operator is the flat half-space trace of\n[[thm-trace-estimate-on-the-half-space]] transported by the flattening\ndiffeomorphism, and the chartwise definitions agree on overlaps; uniqueness\nholds because two bounded operators agreeing on the dense subspace\n$C(\\overline\\Omega)\\cap W^{1,p}(\\Omega)$ are equal.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-broken-and-conforming-polynomial-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal T$ be a matching affine simplicial mesh of $\\Omega$ as defined\nin [[def-matching-affine-simplicial-meshes]]. Fix $k\\in\\mathbb N_0$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and an integer $q\\ge1$. On each\ncell let $\\mathbb P_k(K;\\mathbb K^q)$ denote the\nrestrictions to $K$ of $\\mathbb K^q$-valued polynomials of total degree at\nmost $k$. The **broken polynomial space** is the finite product\n$$V_h^{\\mathrm{br}}:=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb K^q),$$\nviewed as functions defined almost everywhere cell by cell. For an interior\nfacet $F=K\\cap K'$, the **jump** is the difference of the two polynomial\ntraces, with either fixed ordering of $K,K'$; its vanishing is independent of\nthat ordering. The **conforming polynomial space** is\n$$V_h^{\\mathrm{conf}}:=\\{v\\in V_h^{\\mathrm{br}}:v|_{F,K}=v|_{F,K'}\\text{ on every interior facet }F\\}.$$\nThe **zero-boundary subspace** consists of those $v\\in V_h^{\\mathrm{conf}}$\nwhose polynomial trace is zero on every boundary facet. These are algebraic\ndefinitions. The Sobolev inclusions and the zero-boundary closure conclusion\nare proved separately in the corresponding local theorems on matching\npiecewise polynomials and zero-boundary values. If $\\mathcal T=\\varnothing$,\nthen $\\Omega=\\varnothing$ by the mesh definition; the empty product is the\nzero vector space consisting of the unique empty function, and the trace\nconditions are vacuous.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mathcal T$ be a finite matching affine simplicial mesh of a bounded\npolyhedral open set $\\Omega$, let $1\\le p\\le\\infty$, and let $v$ be a\nreal-valued scalar member of the conforming piecewise-polynomial space in\n[[def-broken-and-conforming-polynomial-spaces]]. Then $v\\in W^{1,p}(\\Omega)$.\nIts weak gradient agrees almost everywhere on each cell with the ordinary\ncellwise polynomial gradient.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-signorini-partial-trace-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. A **bounded connected Lipschitz polygon** $Ω\\subset\\mathbb R^2$ is a bounded connected open set whose boundary is a simple closed polygonal curve and, near every boundary point after a rigid coordinate change, is the graph of a Lipschitz function with $Ω$ on one side. Assume $Ω$ is a $W^{1,2}$-extension domain in the sense of [[def-sobolev-extension-domain-and-extension-operator]]. Fix two disjoint closed straight segments $Γ_D,Γ_C\\subset\\partialΩ$, each of positive length and each lying strictly inside a straight side of $∂Ω$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a contact vertex $a_i$. On a nondegenerate triangle $K$ with vertices $b_0,b_1,b_2$, the matrix with columns $b_1-b_0$ and $b_2-b_0$ is invertible by [F1]. For $x\\in K$, write $(s,t)$ for its image under the inverse affine coordinate map $x=b_0+s(b_1-b_0)+t(b_2-b_0)$, and define $\\lambda_0=1-s-t$, $\\lambda_1=s$, $\\lambda_2=t$. These affine functions take the Kronecker values at the three vertices. Define $\\phi_i|_K=\\lambda_j$ if $a_i=b_j$, and $\\phi_i|_K=0$ if $a_i$ is not a vertex of $K$. This finite cellwise construction gives a piecewise-affine scalar function with value $1$ at $a_i$ and $0$ at every other mesh vertex.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On any common facet, the two affine restrictions of $\\phi_i$ agree at every facet vertex: the value is $1$ exactly at $a_i$ if that vertex lies on the facet, and is $0$ at the other vertices. Affine functions on an edge are determined by their two endpoint values, so the restrictions agree on every common edge; at a shared vertex they both have the same prescribed nodal value. Thus $\\phi_i$ is globally continuous and belongs to the conforming piecewise-affine space [F4]. By [F5], $\\phi_i\\in H^1(\\Omega)$.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "No contact vertex lies on $\\Gamma_D$ by [F6]. Since $\\Gamma_D$ is a union of boundary edges, $\\phi_i$ vanishes at both endpoints of each such edge and, being affine on the edge, vanishes on the entire segment. By [F3], $T_D\\phi_i=0$, so $w_i:=\\phi_i n$ belongs to $V_h$ by [F2]. At each contact vertex, $B_j(w_i)=\\phi_i(a_j)(n\\cdot n)=\\delta_{ij}$ by [F6]. For any $y=(y_0,\\ldots,y_N)\\in\\mathbb R^{N+1}$, the finite sum $w=\\sum_i y_iw_i$ lies in $V_h$ and satisfies $B_j(w)=y_j$ for every $j$. Hence $B$ is onto.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a positive-length contact segment on a nonempty polygon."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the zero coordinate vector among arbitrary y and constructs its preimage."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 construct and glue nodal functions on each triangle, including a mesh with one contact edge."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The matching mesh hypothesis requires nondegenerate affine triangles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies zero trace on every Dirichlet edge and evaluates all contact vertices, including segment endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 retain Countable Choice for the Sobolev inclusion and Axiom of Choice for the inherited trace interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a surjectivity assertion and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a surjectivity assertion and states no equivalence."
+        }
+      ]
+    }
+  }
+}

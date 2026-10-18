@@ -1,0 +1,749 @@
+[
+  {
+    "order": 2670,
+    "id": "variational-inequality-and-contact-finite-elements",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Variational inequalities and spatial contact discretization",
+    "companion": "variational-inequality-and-contact-finite-elements-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "elasticity-near-incompressibility-and-locking-free-discretization",
+      "constrained-variational-problems-and-variational-inequalities"
+    ],
+    "items": [
+      {
+        "id": "def-signorini-partial-trace-space",
+        "kind": "definition",
+        "title": "Partial-trace displacement space on a polygon",
+        "statement": "A bounded connected extension polygon with disjoint straight Dirichlet and contact subsegments, their local Sobolev traces, and the closed subspace of H1 vector fields with zero Dirichlet trace.",
+        "deps": [
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-bounded-c-k-domain-and-boundary-charts"
+        ],
+        "justified_by": [
+          "lem-signorini-partial-trace-space-bounded"
+        ],
+        "dependency_level": 0,
+        "strategy": "Use bounded C1 collars around the straight segments to define bounded traces, then define the zero-trace kernel.",
+        "axiom_base": "Axiom of Choice is inherited from the bounded C1 trace theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 53: Stokes equations: Basic ideas",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "§§53.1–53.2.1, printed pp. 391–394: the symmetric-gradient stress form, componentwise trace space, and positive-measure Dirichlet velocity boundary."
+            },
+            {
+              "title": "Walter Zulehner, Numerical Methods for Continuum Mechanics 1, complete 80-page lecture notes",
+              "url": "https://www.numa.uni-linz.ac.at/Teaching/Lectures/numkont1_en.pdf",
+              "locator": "Chapter 2 §2.1, printed pp. 20–25: partial Dirichlet displacement spaces and mixed-boundary Korn coercivity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-signorini-partial-trace-space-bounded",
+        "kind": "lemma",
+        "title": "The partial-trace displacement space is a Hilbert space",
+        "statement": "The traces on the selected Dirichlet and contact segments are bounded linear maps from H1(Omega;R2) to L2 of the segments, and their zero-Dirichlet kernel is a closed Hilbert subspace.",
+        "deps": [
+          "def-signorini-partial-trace-space",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "thm-complete-subspace-iff-closed",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Restrict to fixed C1 collars, apply the trace bound, and take the kernel of a bounded map.",
+        "axiom_base": "Axiom of Choice is inherited from the trace theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 53: Stokes equations: Basic ideas",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "§53.2.1, printed pp. 393–394: the trace space with a positive-measure Dirichlet portion."
+            },
+            {
+              "title": "Walter Zulehner, Numerical Methods for Continuum Mechanics 1, complete 80-page lecture notes",
+              "url": "https://www.numa.uni-linz.ac.at/Teaching/Lectures/numkont1_en.pdf",
+              "locator": "Chapter 2 §2.1, printed pp. 20–25: partial Dirichlet displacement spaces and trace conditions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-signorini-rigid-motion-controlled-by-dirichlet-segment",
+        "kind": "lemma",
+        "title": "A planar rigid motion is controlled by its trace on a segment",
+        "statement": "On a bounded planar polygon, the H1 norm of a rigid motion is bounded by its L2 trace norm on any fixed straight segment of positive length.",
+        "deps": [
+          "def-signorini-partial-trace-space",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Parameterize the segment and integrate the affine rigid-motion trace explicitly.",
+        "axiom_base": "No choice principle is used in the local finite-dimensional estimate.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Walter Zulehner, Numerical Methods for Continuum Mechanics 1, complete 80-page lecture notes",
+              "url": "https://www.numa.uni-linz.ac.at/Teaching/Lectures/numkont1_en.pdf",
+              "locator": "Chapter 2 §2.1, printed pp. 22–25: the kernel of the symmetric gradient and coercivity for a positive-measure Dirichlet part; the stated kernel and coercivity results there are in three dimensions."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 53: Stokes equations: Basic ideas",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "§§53.1–53.2.1, printed pp. 391–394: the symmetric-gradient tensor and the positive-measure Dirichlet velocity space."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-signorini-elasticity-contact-model",
+        "kind": "definition",
+        "title": "Small-strain elasticity with a frictionless contact gap",
+        "statement": "The two-dimensional isotropic elasticity form on the partial-trace space, with constant mu>0, lambda>=0, bounded load, a fixed opening normal, and a continuous nonpositive contact obstacle.",
+        "deps": [
+          "def-signorini-partial-trace-space",
+          "def-linear-elasticity-displacement-formulation-and-data"
+        ],
+        "justified_by": [
+          "lem-signorini-elasticity-form-bounded"
+        ],
+        "dependency_level": 3,
+        "strategy": "State the strain, stress-form bilinear energy, load space, normal orientation, and gap convention; import only the literal elasticity formula.",
+        "axiom_base": "The definition uses no choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 53: Stokes equations: Basic ideas",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "§§53.1–53.2.1, printed pp. 391–394: the symmetric-gradient stress convention and weak formulation on a positive-measure Dirichlet velocity space. The elasticity energy form is cited to Zulehner below."
+            },
+            {
+              "title": "Walter Zulehner, Numerical Methods for Continuum Mechanics 1, complete 80-page lecture notes",
+              "url": "https://www.numa.uni-linz.ac.at/Teaching/Lectures/numkont1_en.pdf",
+              "locator": "Chapter 2 §2.1, printed pp. 20–22: displacement spaces and the linear-elasticity energy form."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-signorini-contact-variational-inequality",
+        "kind": "definition",
+        "title": "The vector Signorini contact set and variational inequality",
+        "statement": "K={v in V:T_C v dot n>=psi almost everywhere on Gamma_C}; the weak frictionless contact problem is to find u in K with a(u,v-u)>=F(v-u) for every v in K.",
+        "deps": [
+          "def-signorini-elasticity-contact-model",
+          "def-signorini-partial-trace-space"
+        ],
+        "justified_by": [
+          "lem-signorini-contact-set-closed-convex-nonempty"
+        ],
+        "dependency_level": 4,
+        "strategy": "Define the vector boundary gap and its variational inequality on the actual partial-trace displacement space.",
+        "axiom_base": "The definition itself uses no choice principle; well-posedness is established separately.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, complete 52-page KTH lecture notes",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 §3.1, Theorem 3.1 and printed pp. 26–28: feasible obstacle sets and variational minimizers."
+            },
+            {
+              "title": "Richard S. Falk, Error Estimates for the Approximation of a Class of Variational Inequalities, complete 10-page paper",
+              "url": "https://ow3.math.rutgers.edu/~falk/papers/varineq.pdf",
+              "locator": "§2, Theorem 1, printed pp. 964–965: variational inequalities with finite-dimensional feasible sets."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-signorini-elasticity-form-bounded",
+        "kind": "lemma",
+        "title": "The isotropic contact elasticity form is well defined and bounded",
+        "statement": "For constant mu>0 and lambda>=0, the displayed two-dimensional elasticity bilinear form is a bounded symmetric form on V with bound 2mu+2lambda in the H1 norm.",
+        "deps": [
+          "def-signorini-elasticity-contact-model",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-sobolev-space-wkp-and-its-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Apply Cauchy-Schwarz to the strain and divergence terms and bound both by the full gradient.",
+        "axiom_base": "No choice principle is used by the local L2 estimates.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 53: Stokes equations: Basic ideas",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "§§53.1–53.2, printed pp. 391–394: the symmetric strain form and its continuity bounds."
+            },
+            {
+              "title": "Walter Zulehner, Numerical Methods for Continuum Mechanics 1, complete 80-page lecture notes",
+              "url": "https://www.numa.uni-linz.ac.at/Teaching/Lectures/numkont1_en.pdf",
+              "locator": "Chapter 2 §2.1, printed pp. 20–22: the elasticity bilinear form and boundedness estimate."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-signorini-contact-set-closed-convex-nonempty",
+        "kind": "lemma",
+        "title": "The Signorini contact set is nonempty, closed, and convex",
+        "statement": "For a continuous obstacle psi<=0, the vector contact set in the partial-trace Hilbert space contains zero and is closed and convex.",
+        "deps": [
+          "def-signorini-contact-variational-inequality",
+          "def-signorini-partial-trace-space",
+          "lem-signorini-partial-trace-space-bounded",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Use continuity of the contact trace and closedness of the nonnegative cone in L2.",
+        "axiom_base": "No choice principle is used beyond the inherited function-space interfaces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, complete 52-page KTH lecture notes",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 §3.1, Theorem 3.1, printed pp. 26–28: obstacle feasible-set properties."
+            },
+            {
+              "title": "Richard S. Falk, Error Estimates for the Approximation of a Class of Variational Inequalities, complete 10-page paper",
+              "url": "https://ow3.math.rutgers.edu/~falk/papers/varineq.pdf",
+              "locator": "§2, Theorem 1, printed pp. 964–965: coercive variational inequalities on nonempty closed convex sets."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-signorini-nodal-p1-contact-scheme",
+        "kind": "definition",
+        "title": "Conforming nodal P1 Signorini contact discretization",
+        "statement": "On a boundary-conforming shape-regular triangular mesh, use continuous P1 vector fields and impose v_h(a) dot n>=I_h psi(a) at every contact vertex, with psi continuous, nonpositive, and convex along the contact segment.",
+        "deps": [
+          "def-signorini-elasticity-contact-model",
+          "def-signorini-contact-variational-inequality",
+          "def-signorini-partial-trace-space",
+          "def-matching-affine-simplicial-meshes",
+          "def-reference-finite-element-and-unisolvent-dofs",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "justified_by": [
+          "lem-signorini-nodal-contact-set-conforming"
+        ],
+        "dependency_level": 5,
+        "strategy": "Specify the matching triangular mesh, global P1 displacement space, nodal obstacle interpolation, and exact constraint set.",
+        "axiom_base": "The scheme definition uses no choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Falk, Error Estimates for the Approximation of a Class of Variational Inequalities, complete 10-page paper",
+              "url": "https://ow3.math.rutgers.edu/~falk/papers/varineq.pdf",
+              "locator": "§3, printed pp. 966–969: continuous P1 spaces, vertex obstacle constraints, and feasible interpolants."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 11: Local interpolation on affine meshes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap11.pdf",
+              "locator": "§§11.2 and 11.4, printed pp. 120–125: affine scaling, nodal interpolation, and local P1 estimates."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-signorini-partial-dirichlet-korn-coercivity",
+        "kind": "lemma",
+        "title": "Korn coercivity with a partial Dirichlet segment",
+        "statement": "For a bounded connected planar extension polygon and a positive-length straight Dirichlet segment, the symmetric gradient controls the full H1 norm on V={v:T_Dv=0}.",
+        "deps": [
+          "def-signorini-elasticity-contact-model",
+          "def-signorini-partial-trace-space",
+          "lem-signorini-partial-trace-space-bounded",
+          "lem-signorini-rigid-motion-controlled-by-dirichlet-segment",
+          "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "strategy": "Subtract the rigid-motion component, use a zero-mean divergence lift to control the skew gradient by strain, then remove the rigid motion with the Dirichlet trace.",
+        "axiom_base": "Countable Choice is used by the divergence right inverse; the Axiom of Choice is used by Poincare-Wirtinger compactness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Walter Zulehner, Numerical Methods for Continuum Mechanics 1, complete 80-page lecture notes",
+              "url": "https://www.numa.uni-linz.ac.at/Teaching/Lectures/numkont1_en.pdf",
+              "locator": "Chapter 2 §2.1, printed pp. 22–23: Lemma 2.2 states second Korn in dimension d; Corollary 2.1 states positive-measure Dirichlet coercivity in three dimensions."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 53: Stokes equations: Basic ideas",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "§53.2, printed pp. 393–395: the positive-measure Dirichlet velocity space and coercivity of its symmetric-gradient form via Korn's inequality."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-signorini-nodal-contact-set-conforming",
+        "kind": "lemma",
+        "title": "The convex-obstacle nodal set is conforming",
+        "statement": "The nodal P1 contact set is nonempty, closed, and convex; if psi is convex on each contact edge then K_h is a subset of K, and continuous feasible functions have nodally feasible interpolants.",
+        "deps": [
+          "def-signorini-nodal-p1-contact-scheme",
+          "def-signorini-contact-variational-inequality",
+          "lem-signorini-contact-set-closed-convex-nonempty",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-signorini-partial-trace-space",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "def-convex-concave-and-midpoint-convex-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "strategy": "Check zero feasibility and finite-dimensional halfspaces, then compare affine edge gaps with convex obstacle chords.",
+        "axiom_base": "No additional choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Falk, Error Estimates for the Approximation of a Class of Variational Inequalities, complete 10-page paper",
+              "url": "https://ow3.math.rutgers.edu/~falk/papers/varineq.pdf",
+              "locator": "§3, Lemma 3, printed pp. 969–970: vertex interpolation preserves obstacle feasibility and gives an admissible comparison."
+            },
+            {
+              "title": "John Andersson, The Obstacle Problem, complete 52-page KTH lecture notes",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 §3.1, printed pp. 26–28: continuous obstacle feasible sets and their minimizers."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-signorini-contact-nodal-test-functions-surjective",
+        "kind": "lemma",
+        "title": "Contact nodal coordinates are independently attainable",
+        "statement": "On the matching triangular P1 space with resolved disjoint Dirichlet and contact segments, each contact nodal normal coordinate has a test function in V_h equal to one at that node and zero at every other contact node; hence the contact-coordinate map V_h -> R^{N+1} is onto.",
+        "deps": [
+          "def-signorini-nodal-p1-contact-scheme",
+          "def-signorini-partial-trace-space",
+          "thm-lp-trace-operator-on-a-bounded-c-one-domain",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "strategy": "Construct the global P1 nodal function from local affine barycentric coordinates, prove matching traces and zero Dirichlet trace, and evaluate its contact coordinates.",
+        "axiom_base": "The finite barycentric construction is choice-free; the trace interface inherits the Axiom of Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Falk, Error Estimates for the Approximation of a Class of Variational Inequalities, complete 10-page paper",
+              "url": "https://ow3.math.rutgers.edu/~falk/papers/varineq.pdf",
+              "locator": "§3, printed pp. 966–970: conforming P1 spaces and vertex degrees of freedom."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 11: Local interpolation on affine meshes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap11.pdf",
+              "locator": "§§11.1 and 11.5.1, printed pp. 118–128: affine triangles and the Lagrange nodal basis."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-signorini-dual-mortar-contact-pair",
+        "kind": "definition",
+        "title": "Dual P1 mortar multipliers for boundary contact",
+        "statement": "The contact trace space is continuous P1 on the contact segment; a locally supported broken P1 dual basis defines the multiplier space and the cone of functionals nonnegative on nonnegative P1 gaps.",
+        "deps": [
+          "def-signorini-nodal-p1-contact-scheme",
+          "def-matching-affine-simplicial-meshes",
+          "def-reference-finite-element-and-unisolvent-dofs"
+        ],
+        "justified_by": [
+          "lem-signorini-dual-mortar-biorthogonality-and-infsup"
+        ],
+        "dependency_level": 6,
+        "strategy": "Define the local two-node L2-dual basis, its assembled multiplier space, and the coefficientwise positive cone.",
+        "axiom_base": "No choice principle is used by the finite-dimensional construction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rolf H. Krause and Barbara I. Wohlmuth, Multigrid Methods for Mortar Finite Elements, complete 7-page paper",
+              "url": "https://publications.imp.fu-berlin.de/1852/1/paper_emg99_mortar.pdf",
+              "locator": "§2, printed pp. 2–3: dual P1 mortar multiplier functions and biorthogonality."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-signorini-continuous-contact-vi-wellposed",
+        "kind": "theorem",
+        "title": "Continuous frictionless elasticity contact is well posed",
+        "statement": "Under the stated planar polygon, partial-trace, obstacle, and elasticity hypotheses, the contact variational inequality has a unique solution; changing only the bounded load changes it by at most alpha^{-1} times the dual-norm load difference.",
+        "deps": [
+          "def-signorini-contact-variational-inequality",
+          "def-signorini-elasticity-contact-model",
+          "lem-signorini-contact-set-closed-convex-nonempty",
+          "lem-signorini-elasticity-form-bounded",
+          "lem-signorini-partial-dirichlet-korn-coercivity",
+          "lem-signorini-partial-trace-space-bounded",
+          "thm-stampacchia-variational-inequality",
+          "thm-lipschitz-stability-of-strongly-monotone-variational-inequalities",
+          "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "strategy": "Prove boundedness and coercivity of the elasticity form, apply Stampacchia, and then apply the literal load-stability estimate.",
+        "axiom_base": "Countable Choice is used by Stampacchia and its stability theorem; the Korn supplier also carries its declared Axiom of Choice branch.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, complete 52-page KTH lecture notes",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 §3.1, Theorem 3.1 and printed pp. 26–28: closed convex obstacle sets and variational inequalities."
+            },
+            {
+              "title": "Richard S. Falk, Error Estimates for the Approximation of a Class of Variational Inequalities, complete 10-page paper",
+              "url": "https://ow3.math.rutgers.edu/~falk/papers/varineq.pdf",
+              "locator": "§2, Theorem 1, printed p. 965: a general approximation error estimate for coercive variational inequalities. The introduction attributes existence and uniqueness to Lions–Stampacchia."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-signorini-dual-mortar-biorthogonality-and-infsup",
+        "kind": "lemma",
+        "title": "The dual mortar basis is biorthogonal and uniformly stable on the trace space",
+        "statement": "The local broken P1 dual basis satisfies exact nodal biorthogonality and the L2 inf-sup constant of the multiplier/continuous-P1 trace pair is bounded below independently of contact mesh lengths.",
+        "deps": [
+          "def-signorini-dual-mortar-contact-pair",
+          "def-signorini-nodal-p1-contact-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "strategy": "Compute the two-by-two reference mass matrix on each edge, assemble its diagonal dual pairings, and use local norm equivalence.",
+        "axiom_base": "No choice principle is used; all matrices and sums are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rolf H. Krause and Barbara I. Wohlmuth, Multigrid Methods for Mortar Finite Elements, complete 7-page paper",
+              "url": "https://publications.imp.fu-berlin.de/1852/1/paper_emg99_mortar.pdf",
+              "locator": "§2, printed pp. 2–3: local dual basis, biorthogonality, and diagonal mass pairing."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-signorini-nodal-contact-vi-falk-error",
+        "kind": "theorem",
+        "title": "Falk error bound for nodal Signorini contact",
+        "statement": "For the conforming nodal P1 scheme, the squared energy error is bounded by the best feasible H1 approximation term plus the explicit nonnegative continuous VI residual eta_feas(v_h)=a(u,v_h-u)-F(v_h-u); if u is H2 and continuous and the convex-obstacle nodal family is shape regular with h->0, the solutions converge in H1.",
+        "deps": [
+          "thm-signorini-continuous-contact-vi-wellposed",
+          "def-signorini-nodal-p1-contact-scheme",
+          "lem-signorini-nodal-contact-set-conforming",
+          "lem-signorini-elasticity-form-bounded",
+          "lem-signorini-partial-dirichlet-korn-coercivity",
+          "thm-local-finite-element-interpolation-estimates",
+          "def-matching-affine-simplicial-meshes",
+          "def-reference-finite-element-and-unisolvent-dofs",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-stampacchia-variational-inequality",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "strategy": "Test the continuous and discrete inequalities at feasible comparison points, apply Young's inequality, and use the local P1 H2 interpolation estimate for the conditional convergence branch.",
+        "axiom_base": "Countable Choice is used for discrete Stampacchia existence; Lagrange nodal boundedness and the interpolation supplier use the Axiom of Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Falk, Error Estimates for the Approximation of a Class of Variational Inequalities, complete 10-page paper",
+              "url": "https://ow3.math.rutgers.edu/~falk/papers/varineq.pdf",
+              "locator": "§2, Theorem 1, printed pp. 964–965, and §3, Lemma 3, printed pp. 969–970: feasible-set defects and nodal comparisons."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 11: Local interpolation on affine meshes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap11.pdf",
+              "locator": "§§11.2, 11.4 and 11.5.1, printed pp. 120–128: affine scaling, the complete local interpolation theorem, and its Lagrange-element application."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-signorini-mortar-contact-kkt-and-complementarity",
+        "kind": "theorem",
+        "title": "The dual mortar contact system is stable and exactly complementary",
+        "statement": "For each fixed contact mesh, the nodal VI has a unique displacement and a unique nonnegative dual-basis multiplier; the saddle equations are equivalent to the VI, the multiplier gap residual vanishes exactly, and the mortar coupling is consistent with the nodal trace constraints.",
+        "deps": [
+          "def-signorini-dual-mortar-contact-pair",
+          "lem-signorini-dual-mortar-biorthogonality-and-infsup",
+          "def-signorini-nodal-p1-contact-scheme",
+          "lem-signorini-nodal-contact-set-conforming",
+          "lem-signorini-contact-nodal-test-functions-surjective",
+          "lem-signorini-elasticity-form-bounded",
+          "lem-signorini-partial-dirichlet-korn-coercivity",
+          "thm-stampacchia-variational-inequality",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "strategy": "Use coercive finite-dimensional VI existence, prove the nodal constraint map is onto, derive complementary multipliers from feasible coordinate variations, and use biorthogonality for exact consistency.",
+        "axiom_base": "Countable Choice is inherited from the discrete Stampacchia theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rolf H. Krause and Barbara I. Wohlmuth, Multigrid Methods for Mortar Finite Elements, complete 7-page paper",
+              "url": "https://publications.imp.fu-berlin.de/1852/1/paper_emg99_mortar.pdf",
+              "locator": "§2, printed pp. 2–3: dual multiplier basis, biorthogonality, and equivalent mortar saddle formulation."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2671,
+    "id": "variational-inequality-and-contact-finite-elements-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Variational inequalities and spatial contact discretization — Examples",
+    "companion": "variational-inequality-and-contact-finite-elements",
+    "requires": [
+      "variational-inequality-and-contact-finite-elements"
+    ],
+    "items": [
+      {
+        "id": "ex-signorini-one-dimensional-obstacle-free-boundary",
+        "kind": "example",
+        "title": "A one-dimensional obstacle with an explicit free boundary",
+        "statement": "On $(0,1)$ take $a_0=1/2$, obstacle $\\psi(x)=0$ for $0\\le x\\le a_0$ and $\\psi(x)=-(x-a_0)$ for $a_0\\le x\\le1$, bilinear form $a(w,z)=\\int_0^1w'z'\\,dx$, and load $F(z)=\\int_0^1f z\\,dx$, where\n$$u(x)=\\begin{cases}0,&0\\le x\\le a_0,\\\\(x-a_0)^2(1-x),&a_0\\le x\\le1,\\end{cases}\\qquad f(x)=\\begin{cases}-1,&0<x<a_0,\\\\-4+6x,&a_0<x<1.\\end{cases}$$\nThen $u$ is the unique solution of the scalar obstacle variational inequality. Using the displayed continuous representatives on $[0,1]$, their coincidence set on $\\overline\\Omega$ is $[0,a_0]$; the contact set within $\\Omega=(0,1)$ is $(0,a_0]$. The reaction density is $1$ on $(0,a_0)$ and $0$ on $(a_0,1)$.",
+        "deps": [
+          "def-closed-convex-obstacle-set-and-variational-inequality",
+          "lem-one-dimensional-trace-truncation-compatibility",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Verify endpoint traces, obstacle feasibility, the piecewise weak residual, and uniqueness by the published scalar VI theorem.",
+        "axiom_base": "Axiom of Choice is required by the imported scalar obstacle definition; Countable Choice is used by Stampacchia existence and uniqueness.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Andersson, The Obstacle Problem, complete 52-page KTH lecture notes",
+              "url": "https://www.kth.se/social/files/5671638ef276544fe6bf8bb4/Lectures_Obstacle_Problem.pdf",
+              "locator": "Chapter 3 §3.1, Theorem 3.1, printed p. 27: existence and uniqueness for the scalar Dirichlet obstacle problem; printed pp. 27–28 derive its variational inequality by admissible variations. The reaction density in this example is computed locally."
+            },
+            {
+              "title": "Richard S. Falk, Error Estimates for the Approximation of a Class of Variational Inequalities, complete 10-page paper",
+              "url": "https://ow3.math.rutgers.edu/~falk/papers/varineq.pdf",
+              "locator": "§2, Theorem 1, printed pp. 964–965: coercive obstacle variational inequalities."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-signorini-nodal-contact-feasibility-needs-convex-obstacle",
+        "kind": "counterexample",
+        "title": "Nodal feasibility can miss a nonconvex obstacle between vertices",
+        "statement": "Let $\\Omega=(0,1)^2$, $\\Gamma_D=\\{0\\}\\times[1/4,3/4]$, $\\Gamma_C=\\{1\\}\\times[1/4,3/4]$, and $n=(1,0)$. Use the grid $x\\in\\{0,1/2,1\\}$, $y\\in\\{0,1/4,3/4,1\\}$ and split each rectangular cell by a diagonal. This is a matching triangular mesh on which both segments are single boundary edges. Parameterize $\\Gamma_C$ by normalized arclength $s=2(y-1/4)\\in[0,1]$, set $\\psi(s)=-1+4s(1-s)$, and let $v_h(x,y)=(-x,0)$. The obstacle is continuous, nonpositive and concave, and $v_h$ satisfies both endpoint nodal inequalities, but $v_h\\notin K$ because its contact gap is negative at the midpoint.",
+        "deps": [
+          "def-signorini-nodal-p1-contact-scheme",
+          "def-signorini-contact-variational-inequality",
+          "def-convex-concave-and-midpoint-convex-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "strategy": "Give a concave nonpositive obstacle and an affine gap that meets the endpoint constraints but violates the midpoint constraint.",
+        "axiom_base": "No choice principle is used.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Falk, Error Estimates for the Approximation of a Class of Variational Inequalities, complete 10-page paper",
+              "url": "https://ow3.math.rutgers.edu/~falk/papers/varineq.pdf",
+              "locator": "§3, printed pp. 966–970: nodal obstacle constraints and the need to control the between-node obstacle comparison."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-signorini-contact-patch-test",
+        "kind": "example",
+        "title": "An affine shear field passes the frictionless contact patch test",
+        "statement": "On the unit square with $\\Gamma_D=\\{0\\}\\times[1/4,3/4]$, $\\Gamma_C=\\{1\\}\\times[1/4,3/4]$, and $n=(1,0)$, use any matching boundary-conforming affine triangular mesh that resolves both segments as unions of boundary edges, and take obstacle $\\psi=0$. Let $u(x,y)=(0,x)$ and define the load $F(v)=a(u,v)$ on $V$. Then $u$ is the unique continuous solution and, on every such mesh, the same field is the unique nodal P1 solution. Its contact gap is identically zero.",
+        "deps": [
+          "def-signorini-elasticity-contact-model",
+          "def-signorini-contact-variational-inequality",
+          "def-signorini-nodal-p1-contact-scheme",
+          "lem-signorini-nodal-contact-set-conforming",
+          "lem-signorini-elasticity-form-bounded",
+          "lem-signorini-partial-dirichlet-korn-coercivity",
+          "thm-signorini-continuous-contact-vi-wellposed",
+          "thm-stampacchia-variational-inequality",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "def-broken-and-conforming-polynomial-spaces",
+          "cor-finite-dimensional-normed-spaces-are-banach"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "strategy": "Compute strain/divergence and use F(v)=a(u,v) to verify exact equality in both the continuous and discrete inequalities.",
+        "axiom_base": "The verification is an exact finite-dimensional and affine calculation.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 53: Stokes equations: Basic ideas",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "§§53.1–53.2.1, printed pp. 391–394: the symmetric-gradient stress form and weak formulation on a positive-measure Dirichlet velocity space."
+            },
+            {
+              "title": "Walter Zulehner, Numerical Methods for Continuum Mechanics 1, complete 80-page lecture notes",
+              "url": "https://www.numa.uni-linz.ac.at/Teaching/Lectures/numkont1_en.pdf",
+              "locator": "Chapter 2 §2.1, printed pp. 20–25: elasticity energy and mixed boundary coercivity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-signorini-mortar-active-set-change",
+        "kind": "example",
+        "title": "A two-gap contact model changes its active set with the load",
+        "statement": "For a positive-definite two-gap stiffness matrix, one load yields two open gaps while a second load activates exactly the second contact constraint, with nonnegative multipliers and zero complementarity residual.",
+        "deps": [
+          "thm-signorini-mortar-contact-kkt-and-complementarity"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "strategy": "Solve the two finite KKT systems directly and verify feasibility, stationarity, multiplier signs, and complementarity.",
+        "axiom_base": "No choice principle is used in the finite calculation.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rolf H. Krause and Barbara I. Wohlmuth, Multigrid Methods for Mortar Finite Elements, complete 7-page paper",
+              "url": "https://publications.imp.fu-berlin.de/1852/1/paper_emg99_mortar.pdf",
+              "locator": "§2, printed pp. 2–3: dual multiplier basis and the saddle-point convention."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

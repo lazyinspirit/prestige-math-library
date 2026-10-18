@@ -1,0 +1,249 @@
+{
+  "group": "b",
+  "batches": [
+    "5"
+  ],
+  "pages_read": [
+    "shape-preserving-piecewise-polynomial-interpolation",
+    "shape-preserving-piecewise-polynomial-interpolation-examples"
+  ],
+  "items_read": [
+    "def-piecewise-cubic-hermite-interpolant",
+    "def-piecewise-bernstein-representation",
+    "thm-piecewise-cubic-hermite-interpolant-properties",
+    "thm-hermite-monotonicity-for-normalized-slopes-in-square",
+    "alg-pchip-slope-selection",
+    "thm-bernstein-convex-hull-and-positivity",
+    "lem-pchip-slope-selection-well-defined",
+    "thm-pchip-normalized-slopes-in-square",
+    "lem-pchip-slopes-second-order-uniform-grid",
+    "thm-pchip-shape-preserving-no-overshoot",
+    "thm-pchip-third-order-away-from-extrema",
+    "ex-positive-endpoint-samples-negative-between",
+    "ex-natural-cubic-spline-undershoots-nonnegative-table",
+    "ex-pchip-flat-monotone-data",
+    "ex-pchip-limiter-second-order-at-smooth-extremum"
+  ],
+  "conventions": [
+    {
+      "convention": "Hermite nodes are strictly increasing; h_i=x_{i+1}-x_i>0 and t=(x-x_i)/h_i. Slopes are derivatives with respect to x, so their basis coefficients include h_i. C1 at the outer endpoints uses one-sided derivatives.",
+      "fixed_by": "def-piecewise-cubic-hermite-interpolant",
+      "matters_for": [
+        "thm-piecewise-cubic-hermite-interpolant-properties",
+        "thm-hermite-monotonicity-for-normalized-slopes-in-square",
+        "thm-pchip-third-order-away-from-extrema",
+        "ex-pchip-limiter-second-order-at-smooth-extremum"
+      ]
+    },
+    {
+      "convention": "PCHIP uses n nodes indexed 0 through n-1 and exact real arithmetic. Two nodes receive the common secant slope. Interior slopes vanish for nonpositive adjacent-secant product; otherwise they use the stated weighted harmonic mean. Endpoint sign clipping precedes the opposite-sign cap.",
+      "fixed_by": "alg-pchip-slope-selection",
+      "matters_for": [
+        "lem-pchip-slope-selection-well-defined",
+        "thm-pchip-normalized-slopes-in-square",
+        "lem-pchip-slopes-second-order-uniform-grid",
+        "thm-pchip-shape-preserving-no-overshoot",
+        "ex-pchip-flat-monotone-data",
+        "ex-pchip-limiter-second-order-at-smooth-extremum"
+      ]
+    },
+    {
+      "convention": "Normalized slopes divide by the signed secant d, including when d<0. The sufficient square is [0,3]^2. A zero secant is treated separately with both endpoint slopes zero.",
+      "fixed_by": "thm-hermite-monotonicity-for-normalized-slopes-in-square",
+      "matters_for": [
+        "thm-pchip-normalized-slopes-in-square",
+        "thm-pchip-shape-preserving-no-overshoot"
+      ]
+    },
+    {
+      "convention": "Bernstein degrees may be zero; binomial coefficients enter the real field through the canonical embedding. Continuity requires agreement of adjacent endpoint controls and is not intrinsic to a representation.",
+      "fixed_by": "def-piecewise-bernstein-representation",
+      "matters_for": [
+        "thm-bernstein-convex-hull-and-positivity",
+        "ex-positive-endpoint-samples-negative-between"
+      ]
+    },
+    {
+      "convention": "Accuracy estimates use a fixed nondegenerate interval, a C3 function on an open neighborhood, uniform grids with N≥2, and a fixed positive lower bound for |f'| throughout the interval. Constants and fineness thresholds are independent of N.",
+      "fixed_by": "lem-pchip-slopes-second-order-uniform-grid",
+      "matters_for": [
+        "thm-pchip-third-order-away-from-extrema",
+        "ex-pchip-limiter-second-order-at-smooth-extremum"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-pchip-slope-selection",
+      "statement": "For strictly increasing real nodes and real values, select interior slopes by the zero or weighted-harmonic branches, select endpoint slopes by the stated one-sided estimate with sign clipping and opposite-sign capping, and return the associated cubic Hermite interpolant; for two nodes use the common secant slope.",
+      "used_by": [
+        "lem-pchip-slope-selection-well-defined",
+        "thm-pchip-normalized-slopes-in-square",
+        "lem-pchip-slopes-second-order-uniform-grid",
+        "thm-pchip-shape-preserving-no-overshoot",
+        "thm-pchip-third-order-away-from-extrema",
+        "ex-natural-cubic-spline-undershoots-nonnegative-table",
+        "ex-pchip-flat-monotone-data",
+        "ex-pchip-limiter-second-order-at-smooth-extremum"
+      ]
+    },
+    {
+      "id": "thm-pchip-normalized-slopes-in-square",
+      "statement": "For any input to PCHIP slope selection, consider an interval with secant d_i. If d_i=0, the selected slopes at both endpoints of that interval are zero. If d_i≠0, then m_i/d_i and m_{i+1}/d_i both belong to [0,3].",
+      "used_by": [
+        "thm-pchip-shape-preserving-no-overshoot"
+      ]
+    },
+    {
+      "id": "thm-hermite-monotonicity-for-normalized-slopes-in-square",
+      "statement": "For a single Hermite piece with h>0 and secant d≠0, if m_0/d and m_1/d both lie in [0,3], then the piece is monotone from y_0 to y_1 and stays between those values. If d=0 and m_0=m_1=0, then the piece is constant.",
+      "used_by": [
+        "thm-pchip-shape-preserving-no-overshoot"
+      ]
+    },
+    {
+      "id": "thm-piecewise-cubic-hermite-interpolant-properties",
+      "statement": "Each Hermite piece has its prescribed endpoint values and slopes; the resulting interpolant is C1, with one-sided derivatives at the outer endpoints. On a single interval it reproduces every polynomial of degree at most three from that polynomial's endpoint values and derivatives.",
+      "used_by": [
+        "thm-pchip-shape-preserving-no-overshoot",
+        "thm-pchip-third-order-away-from-extrema"
+      ]
+    },
+    {
+      "id": "lem-pchip-slopes-second-order-uniform-grid",
+      "statement": "Let a<b, let f be C3 on an open interval containing [a,b], and suppose |f'|≥c>0 there. For N≥2 and h=(b-a)/N, the PCHIP slopes from f(a+jh) satisfy max_j |m_j-f'(a+jh)|≤Ch² for all h<h_0, with C,h_0>0 depending on f, c, and [a,b].",
+      "used_by": [
+        "thm-pchip-third-order-away-from-extrema"
+      ]
+    },
+    {
+      "id": "thm-bernstein-convex-hull-and-positivity",
+      "statement": "On each cell of a piecewise Bernstein representation, the polynomial value lies between the minimum and maximum of that cell's controls. Nonnegative controls imply nonnegativity; if every cell has nonnegative controls and adjacent endpoint controls agree, the piecewise function is continuous and nonnegative on the entire partition.",
+      "used_by": [
+        "ex-positive-endpoint-samples-negative-between"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-integer-power",
+      "used_for": "Natural powers, including exponent zero at zero, in Hermite and Bernstein polynomials.",
+      "opened": true
+    },
+    {
+      "id": "def-binomial-coefficient",
+      "used_for": "Natural-valued Bernstein coefficients and their boundary values.",
+      "opened": true
+    },
+    {
+      "id": "def-canonical-natural",
+      "used_for": "Embedding binomial coefficients into the real field.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite Bernstein sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-algebra-and-chain-rules",
+      "used_for": "Differentiating Hermite pieces and explicit example polynomials, and differentiability implying continuity.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Transferring derivative signs to monotonicity and identifying secants with derivative values.",
+      "opened": true
+    },
+    {
+      "id": "thm-binomial-theorem",
+      "used_for": "Bernstein partition of unity over the real field.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-trichotomy",
+      "used_for": "Splitting natural binomial coefficients into zero and positive cases.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-naturals-positive",
+      "used_for": "Nonnegativity of embedded binomial coefficients.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Summing control-value inequalities.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Extrema of nonempty finite control and nodal-error lists.",
+      "opened": true
+    },
+    {
+      "id": "def-max-min",
+      "used_for": "Meaning of the control minimum and maximum.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of cell polynomials.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-zero-mult",
+      "used_for": "Vanishing Bernstein endpoint basis terms.",
+      "opened": true
+    },
+    {
+      "id": "def-continuity-and-derivative-on-real-interval",
+      "used_for": "Continuity and higher-derivative hypotheses in the accuracy estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "A continuous nonvanishing derivative has constant sign on the fixed interval.",
+      "opened": true
+    },
+    {
+      "id": "lem-taylor-integral-remainder",
+      "used_for": "Uniform secant expansions and value/derivative Taylor remainder bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-boundedness-theorem-r",
+      "used_for": "Uniform derivative bounds on the compact interval.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-r",
+      "used_for": "Compactness of fixed and individual-cell closed intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-r",
+      "used_for": "Attainment of continuous value-error maxima on nonempty compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "lem-real-and-complex-modulus-rules",
+      "used_for": "Triangle inequalities and continuity of the absolute error.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-cubic-spline",
+      "used_for": "Checking the explicit undershooting spline's C2 matching and natural boundary conditions.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "shape-preserving-piecewise-polynomial-interpolation",
+      "to": "spline-evaluation-and-interpolation-algorithms",
+      "faithful": true,
+      "note": "Read both page carriers and checked the prerequisite relationship against actual uses. The shape page uses local Hermite/PCHIP arguments and does not import the prerequisite page's knot-insertion, floating-point, or fourth-order clamped-spline claims. Its natural-spline example instead cites the published definition and verifies its explicit spline directly. The pages preserve the distinction between C1 PCHIP, C2 natural splines, and reconstructed computed pieces that need not be C1."
+    }
+  ]
+}

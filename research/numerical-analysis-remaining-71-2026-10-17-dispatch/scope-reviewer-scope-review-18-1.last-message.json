@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "18",
+  "round": 1,
+  "reviewed_items": [
+    "alg-strong-rrqr-interpolative-decomposition",
+    "lem-moore-penrose-products-are-orthogonal-projectors",
+    "def-cur-reconstruction-cores",
+    "def-psd-nystrom-approximation",
+    "thm-strong-rrqr-interpolative-decomposition-error",
+    "thm-skeleton-cur-exactness",
+    "thm-cur-projection-residual-bound",
+    "lem-nystrom-square-root-projector-identity",
+    "thm-psd-nystrom-order-and-exactness",
+    "thm-nystrom-deterministic-spectral-residual-bound",
+    "cex-arbitrary-selected-columns-miss-dominant-direction",
+    "ex-exact-rank-two-skeleton-cur",
+    "ex-psd-nystrom-residual-is-psd"
+  ],
+  "reviewed_pages": [
+    "interpolative-cur-and-nystrom-decompositions",
+    "interpolative-cur-and-nystrom-decompositions-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The diagnostics and dimension repairs from round 0 are present, and their consumers check out. The finite-precision certificate rule remains under-defined, and its published QR supplier lacks a finite-precision rank-status test. Round 1 remains unsatisfied, so escalation is required.",
+  "findings": [
+    {
+      "id": "alg-strong-rrqr-interpolative-decomposition",
+      "type": "local",
+      "reason": "Step 5 assigns `ID-certificate status` using unspecified “verified data” and “a stated bound.” The called QR certificate bounds scores for the exact quotient of candidate R blocks and the QR residual; it does not by itself certify the returned finite-precision X/T or bound ||A-A(:,J)T||. Specify the ID-certificate data and decision rule for the actual T, including non-success branches. This affects the A-page status summary; the error theorem itself is exact-arithmetic only."
+    },
+    {
+      "id": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "type": "prerequisite",
+      "reason": "This published supplier’s finite-precision branch says to return `rank-deficient-input` when A is not full column rank, but gives no exact or certified rank test or indeterminate status. The assigned algorithm calls this mode in step 3 and propagates that status. The smallest missing prerequisite is a finite-precision rank-status rule; owner reconciliation is needed outside this batch."
+    },
+    {
+      "id": "alg-strong-rrqr-interpolative-decomposition",
+      "type": "local",
+      "reason": "No separate result establishes termination/well-definedness. The error theorem is conditional on exact-arithmetic success; it does not prove the procedure returns a status. The finite swap cap gives a short termination proof for the exact branch, but the algorithm instructions are not that proof."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-strong-rrqr-interpolative-decomposition-error",
+      "decision": "accept",
+      "reason": "The theorem uses the exact-arithmetic branch and explicitly makes no finite-precision error claim."
+    },
+    {
+      "id": "interpolative-cur-and-nystrom-decompositions",
+      "decision": "escalate",
+      "reason": "Its updated summary describes the finite-precision ID-certificate status, whose certification rule and upstream rank-status behavior remain unresolved."
+    },
+    {
+      "id": "interpolative-cur-and-nystrom-decompositions-examples",
+      "decision": "accept",
+      "reason": "The examples use fixed exact matrices and do not depend on the finite-precision ID branch."
+    },
+    {
+      "id": "thm-psd-nystrom-order-and-exactness",
+      "decision": "accept",
+      "reason": "Its n≥1 premise now matches the Nyström definition and projector lemma; the proof remains valid."
+    },
+    {
+      "id": "thm-nystrom-deterministic-spectral-residual-bound",
+      "decision": "accept",
+      "reason": "Its n≥1 premise now matches the Nyström definition and projector lemma; the proof remains valid."
+    },
+    {
+      "id": "ex-exact-rank-two-skeleton-cur",
+      "decision": "accept",
+      "reason": "The fixed 3×3 example satisfies the revised CUR hypotheses and its computations check out."
+    },
+    {
+      "id": "ex-psd-nystrom-residual-is-psd",
+      "decision": "accept",
+      "reason": "The fixed 2×2 example satisfies the revised Nyström hypotheses and its computations check out."
+    }
+  ]
+}

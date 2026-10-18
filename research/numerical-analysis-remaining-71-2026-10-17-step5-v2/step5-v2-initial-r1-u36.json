@@ -1,0 +1,386 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "36",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-pe04-upwind-dg-transport-discretization",
+      "model": "gpt-6-luna",
+      "context_sha256": "d153dc72f93af28ae32cfcf0905e2ea1d4a7942f2e403f089105b35d171cd965",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed: the mesh definition includes subfaces of every dimension, so an outward unit normal is not determined on a vertex in d=2. The DG relation now explicitly sums over codimension-one facets, with endpoints/counting measure in d=1; the upwind signs, zero-speed branch and polynomial weak form are preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-pe04-upwind-dg-l2-energy-stability",
+      "model": "gpt-6-luna",
+      "context_sha256": "0162d6ab7c42acae719b1ef62123fe34f09d41632a175c8dac6bd354a6fc26cc",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The missing finiteness caveat is confirmed, but L1/non-L2 inflow does not refute the equality in extended reals: bounded polynomial traces imply both square integrals are infinite. The repair preserves all original inflow data, specifies the extended-real meaning, and proves that the identity is finite exactly when the weighted g-square integral is finite; zero inflow still yields the stated decrease.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+      "model": "gpt-6-luna",
+      "context_sha256": "f0d0434aa78b76928fbb6f285c10cc3cda7f81d802301b14e1c1614629d4f16a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The projection relation fixes an integer degree. The lemma left that domain implicit in its universal p>=0 wording; this is a nonfatal interface ambiguity, not a counterexample to the finite-dimensional projection argument. The statement now explicitly carries integer degree and the already-required polynomial-subspace inclusion in raw L2. Positive full support makes the monomial Gram matrix strictly positive definite, Cauchy-Schwarz makes its moments finite, and orthogonality yields the Pythagorean inequality.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-pe04-ssprk33-first-order-upwind-entropy-preservation",
+      "model": "gpt-6-luna",
+      "context_sha256": "51b285a065102c4fb834dad7a3a0acd691464780ada9a654f38ba001b62e5ba9",
+      "outcome": "false_positive",
+      "reason": "False positive: def-matching-affine-simplicial-meshes begins by fixing an integer d>=2, so the named matching affine simplicial mesh in this statement already excludes the distinct interval-mesh branch. Its FE condition also explicitly imports Countable Choice. The autonomous upwind operator is defined on the entire finite cell-state space; FE admissibility is state-independent at the fixed CFL. Positive volumes make Phi convex, and the prescribed SSPRK convex combinations give Phi(Y1), Phi(Y2), Phi(U_next) <= Phi(U_initial). No extra order/smoothness assumption from the separate local-order clause is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-pe04-upwind-dg-transport-discretization",
+      "disposition": "repaired",
+      "post_sha256": "1057f1a94ae44d1ca8fcbe45e60e68a0dd372e99028add6d2644cca7055fa4dc",
+      "review_context_sha256": "189c9ffc5b94e383e106fb8dd45b3f08d91bb0f111bd4e1b8548f06ca0674483",
+      "reason": "Confirmed: the mesh definition includes subfaces of every dimension, so an outward unit normal is not determined on a vertex in d=2. The DG relation now explicitly sums over codimension-one facets, with endpoints/counting measure in d=1; the upwind signs, zero-speed branch and polynomial weak form are preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-pe04-upwind-dg-l2-energy-stability",
+      "disposition": "repaired",
+      "post_sha256": "3a4e8989cc46cea636eddb2516d742c333b630143ab6c134184559be97cfe019",
+      "review_context_sha256": "aa2645c4335560acfb516236e44019c5411fbc4f21bf27d170cdc9883e034393",
+      "reason": "The missing finiteness caveat is confirmed, but L1/non-L2 inflow does not refute the equality in extended reals: bounded polynomial traces imply both square integrals are infinite. The repair preserves all original inflow data, specifies the extended-real meaning, and proves that the identity is finite exactly when the weighted g-square integral is finite; zero inflow still yields the stated decrease. Checked test-with-solution differentiation, Green/FTC branches, both upwind signs, zero normal speed and inflow square completion. DG facet clarification is used in every face sum.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+      "disposition": "repaired",
+      "post_sha256": "32ae3a6ec399e7b211dae02ee15cafb621440515a0d40da0ceccee2d2c553e2a",
+      "review_context_sha256": "0bed1223a6824cbd2efe895186b9f1ac4b5a3a53a6d7a9deddd14d88e471b426",
+      "reason": "The projection relation fixes an integer degree. The lemma left that domain implicit in its universal p>=0 wording; this is a nonfatal interface ambiguity, not a counterexample to the finite-dimensional projection argument. The statement now explicitly carries integer degree and the already-required polynomial-subspace inclusion in raw L2. Positive full support makes the monomial Gram matrix strictly positive definite, Cauchy-Schwarz makes its moments finite, and orthogonality yields the Pythagorean inequality.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-pe04-ssprk33-first-order-upwind-entropy-preservation",
+      "disposition": "unaffected",
+      "post_sha256": "79fd041bcf0aed5be9960f007b4601df3844e88c075a4a34e08afdf445bba8c8",
+      "review_context_sha256": "dd02754dd6ce0671365a3701b049adab252dcc7befd751b5d86e5119d5860eec",
+      "reason": "False positive: def-matching-affine-simplicial-meshes begins by fixing an integer d>=2, so the named matching affine simplicial mesh in this statement already excludes the distinct interval-mesh branch. Its FE condition also explicitly imports Countable Choice. The autonomous upwind operator is defined on the entire finite cell-state space; FE admissibility is state-independent at the fixed CFL. Positive volumes make Phi convex, and the prescribed SSPRK convex combinations give Phi(Y1), Phi(Y2), Phi(U_next) <= Phi(U_initial). No extra order/smoothness assumption from the separate local-order clause is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-pe04-first-order-upwind-forward-euler",
+    "def-pe04-cellwise-l2-projection",
+    "def-pe04-flux-differencing-sbp-systems",
+    "def-pe04-upwind-sbp-sat-transport-discretization",
+    "ex-pe04-central-versus-upwind-periodic-transport",
+    "ex-pe04-upwind-transport-with-inflow",
+    "thm-pe04-dg-smooth-solution-l2-error-bound",
+    "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy",
+    "thm-pe04-upwind-dg-l2-energy-stability"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "def-pe04-upwind-dg-transport-discretization",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed: the mesh definition includes subfaces of every dimension, so an outward unit normal is not determined on a vertex in d=2. The DG relation now explicitly sums over codimension-one facets, with endpoints/counting measure in d=1; the upwind signs, zero-speed branch and polynomial weak form are preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "thm-pe04-upwind-dg-l2-energy-stability",
+      "outcome": "confirmed_nonfatal",
+      "defect_type": null,
+      "reason": "The missing finiteness caveat is confirmed, but L1/non-L2 inflow does not refute the equality in extended reals: bounded polynomial traces imply both square integrals are infinite. The repair preserves all original inflow data, specifies the extended-real meaning, and proves that the identity is finite exactly when the weighted g-square integral is finite; zero inflow still yields the stated decrease.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+      "outcome": "confirmed_nonfatal",
+      "defect_type": null,
+      "reason": "The projection relation fixes an integer degree. The lemma left that domain implicit in its universal p>=0 wording; this is a nonfatal interface ambiguity, not a counterexample to the finite-dimensional projection argument. The statement now explicitly carries integer degree and the already-required polynomial-subspace inclusion in raw L2. Positive full support makes the monomial Gram matrix strictly positive definite, Cauchy-Schwarz makes its moments finite, and orthogonality yields the Pythagorean inequality.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-false-positive",
+      "id": "thm-pe04-ssprk33-first-order-upwind-entropy-preservation",
+      "reason": "False positive: def-matching-affine-simplicial-meshes begins by fixing an integer d>=2, so the named matching affine simplicial mesh in this statement already excludes the distinct interval-mesh branch. Its FE condition also explicitly imports Countable Choice. The autonomous upwind operator is defined on the entire finite cell-state space; FE admissibility is state-independent at the fixed CFL. Positive volumes make Phi convex, and the prescribed SSPRK convex combinations give Phi(Y1), Phi(Y2), Phi(U_next) <= Phi(U_initial). No extra order/smoothness assumption from the separate local-order clause is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update-required",
+      "reason": "All nine direct item consumers of the three changed interfaces are draft frozen-frontier items. The energy theorem has no direct item consumer. No published or outside-frontier consumer use or defect was discovered, and no published item was edited. This is a scoped disposition, not a new audit of published suppliers.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "summary": "One fatal face-domain defect repaired; two nonfatal interface/interpretation ambiguities repaired; the SSPRK dimension rejection is a false positive and its item is unchanged. No new item, source stamp, judgment, certificate, or round transition was created.",
+    "mathematical_evidence": [
+      "DG mesh faces include vertices and other subfaces, which do not determine a unique outward unit normal. Explicit facets/endpoints repair the domain of every numerical flux without altering its value.",
+      "For an inflow edge parameter s in (0,1), g(s)=s^(-3/4) has finite first moment and infinite square moment, so the weak polynomial flux is meaningful but the split square balance need not be finite. Since u_h has bounded traces, g^2<=2(g-u_h)^2+2u_h^2 proves that both sides are infinite in that case. The updated theorem retains this case and explicitly distinguishes it from a finite energy balance.",
+      "Projection finiteness is inherited from the declared polynomial inclusion in raw L2; full support turns the Gram seminorm into a positive-definite norm on actual polynomial functions. The finite monomial solve and Pythagorean decomposition require no additional choice principle.",
+      "The exact named matching affine simplicial mesh already fixes d>=2. SSPRK convex transfer uses only the separate autonomous convex-preservation clause, not its smoothness-dependent local-order clause."
+    ],
+    "sources_consulted": [
+      {
+        "url": "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf",
+        "locators": "§1.1, printed pp.175–176; §2.1, printed pp.184–188; §2.2 convex-stage argument and Table 2.1, printed pp.188–190",
+        "establishes": "DG weak-form/upwind/projection conventions and the SSP convex-combination construction. The arbitrary full-support finite-measure Gram proof, facet-domain correction, and infinite-inflow caveat are verified locally; no claim that the paper proves those exact generalizations."
+      }
+    ],
+    "metadata_repairs": [
+      "Mirrored the three changed Definition/Statement sections into their existing batch-36 manifest rows.",
+      "Regenerated only the assigned energy theorem contract citations/derivations, including the changed DG quote and final proof step.",
+      "Corrected the assigned energy contract finite-check locator from nonexistent step 1.2 to actual step 2.1; numerical witness b=2,u_minus=3,u_plus=1 still gives dissipation 4."
+    ],
+    "metadata_followup": [
+      {
+        "id": "ex-pe04-central-versus-upwind-periodic-transport",
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-36.proof-contracts.json",
+        "reason": "Owner integration should synchronize source-quote mirrors for the changed DG Definition. These unassigned consumer contract rows were not edited; their mathematical uses are sound."
+      },
+      {
+        "id": "ex-pe04-upwind-transport-with-inflow",
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-36.proof-contracts.json",
+        "reason": "Owner integration should synchronize source-quote mirrors for the changed DG Definition. These unassigned consumer contract rows were not edited; their mathematical uses are sound."
+      },
+      {
+        "id": "thm-pe04-dg-smooth-solution-l2-error-bound",
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-36.proof-contracts.json",
+        "reason": "Owner integration should synchronize source-quote mirrors for the changed DG Definition and projection Statement (F11). These unassigned consumer contract rows were not edited; their mathematical uses are sound."
+      }
+    ],
+    "page_examination": [
+      "library/numerical-pdes-and-spatial-discretization/hyperbolic-dg-and-summation-by-parts-discretizations.md retains the same semidiscrete balance, projection-residual scope, and degree-zero SSP restriction.",
+      "library/numerical-pdes-and-spatial-discretization/hyperbolic-dg-and-summation-by-parts-discretizations-examples.md retains the same interval examples and SBP claims."
+    ],
+    "propagation": "Direct dependency/reference inventory and literal ID searches agree: nine DG consumers, no energy-theorem consumers, one projection-lemma consumer already among the nine. Every one is listed in downstream. Unchanged consumer statements stop propagation. No outside maintenance target was found.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-pe04-upwind-dg-transport-discretization.md items/thm-pe04-upwind-dg-l2-energy-stability.md items/lem-pe04-cellwise-l2-projection-exists-best-approximation.md items/thm-pe04-ssprk33-first-order-upwind-entropy-preservation.md --json",
+        "exit_code": 0,
+        "result": "4 files: 3 proofs pass; definition not applicable; 0 failures."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-36.proof-contracts.json --strict --items def-pe04-upwind-dg-transport-discretization,thm-pe04-upwind-dg-l2-energy-stability,lem-pe04-cellwise-l2-projection-exists-best-approximation,thm-pe04-ssprk33-first-order-upwind-entropy-preservation",
+        "exit_code": 0,
+        "result": "4/4 checked; 0 errors; 0 warnings after final contract edit."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-pe04-upwind-dg-transport-discretization.md items/thm-pe04-upwind-dg-l2-energy-stability.md items/lem-pe04-cellwise-l2-projection-exists-best-approximation.md items/thm-pe04-ssprk33-first-order-upwind-entropy-preservation.md library/numerical-pdes-and-spatial-discretization/hyperbolic-dg-and-summation-by-parts-discretizations.md library/numerical-pdes-and-spatial-discretization/hyperbolic-dg-and-summation-by-parts-discretizations-examples.md --json",
+        "exit_code": 0,
+        "result": "6 checked; 0 errors; 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-pe04-upwind-dg-transport-discretization.md items/thm-pe04-upwind-dg-l2-energy-stability.md items/lem-pe04-cellwise-l2-projection-exists-best-approximation.md",
+        "exit_code": 0,
+        "result": "3 items; 6 steps; 0 defects; run once after all final item edits."
+      },
+      {
+        "command": "Read-only report consistency check using itemHashGuard, statementHash, reviewMatchesCurrent, and discoverDownstream on current library inventory",
+        "exit_code": 0,
+        "result": "Exact frozen input identity; 4/4 rejected tuples covered; 4/4 stored review contexts current without refreshing them; 3 changed defining sections; 9 exact direct consumers; 2/2 supporting metadata hashes current; no unresolved mathematics."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "next_action": "Controller collection, ordinary frontier consumer/context routing, and independent current rejudgment remain owed. This report does not independently review its own repairs or close the round."
+  },
+  "downstream_examination": [
+    {
+      "supplier": "def-pe04-upwind-dg-transport-discretization",
+      "id": "alg-pe04-first-order-upwind-forward-euler",
+      "path": "items/alg-pe04-first-order-upwind-forward-euler.md",
+      "locus": "Definition",
+      "source_excerpt": "For each face $F\\subset\\partial K$, let $n_{K,F}$ be the outward unit normal",
+      "affected_use": "The degree-zero update uses A_F times the outward upwind flux on each cell facet. The supplier now explicitly fixes these faces to be facets. The unchanged periodic update and CFL sums use exactly those codimension-one fluxes.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    },
+    {
+      "supplier": "def-pe04-upwind-dg-transport-discretization",
+      "id": "def-pe04-cellwise-l2-projection",
+      "path": "items/def-pe04-cellwise-l2-projection.md",
+      "locus": "Definition",
+      "source_excerpt": "Let $K$ be a cell in the one-dimensional interval or $d\\ge2$ matching affine-simplex branch",
+      "affected_use": "The supplier is used only to select interval or nondegenerate simplex cells and their polynomial trial spaces. No face normal or flux enters the projection relation; the added facet convention leaves these data unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    },
+    {
+      "supplier": "def-pe04-upwind-dg-transport-discretization",
+      "id": "def-pe04-flux-differencing-sbp-systems",
+      "path": "items/def-pe04-flux-differencing-sbp-systems.md",
+      "locus": "Definition",
+      "source_excerpt": "R_{K,F}^TM_{K,F}\\bigl(\\widehat F_{n_{K,F}}^*-F_{n_{K,F}}(U_{K,F})\\bigr)",
+      "affected_use": "The dependency supplies spatial flux/interface context; this definition prescribes its own nodal normal flux and compatible SBP face data. The corrected codimension-one face convention agrees with its normal-flux SAT; no flux, Tadmor identity, or nodal condition changes.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    },
+    {
+      "supplier": "def-pe04-upwind-dg-transport-discretization",
+      "id": "def-pe04-upwind-sbp-sat-transport-discretization",
+      "path": "items/def-pe04-upwind-sbp-sat-transport-discretization.md",
+      "locus": "Definition",
+      "source_excerpt": "At each interior face, use the trace from the cell with positive outward speed",
+      "affected_use": "The upwind rule uses the same sign of beta dot outward facet normal as DG. Face restrictions, quadrature, and opposite normals are supplied independently by the SBP-data definition, with explicit interval endpoints. The DG facet clarification changes no SAT sign or matrix identity.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    },
+    {
+      "supplier": "def-pe04-upwind-dg-transport-discretization",
+      "id": "ex-pe04-central-versus-upwind-periodic-transport",
+      "path": "items/ex-pe04-central-versus-upwind-periodic-transport.md",
+      "locus": "Facts F1; Verification 1.1–2.1",
+      "source_excerpt": "h\\dot u_j=-(\\widehat f_{j+1/2}-\\widehat f_{j-1/2})",
+      "affected_use": "The degree-zero interval balance tests v=1 and sums two endpoint fluxes. Counting measure at endpoints is now explicit. Central flux still gives zero rate and upwind flux gives -a(u1-u2)^2; neither conclusion changes.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    },
+    {
+      "supplier": "def-pe04-upwind-dg-transport-discretization",
+      "id": "ex-pe04-upwind-transport-with-inflow",
+      "path": "items/ex-pe04-upwind-transport-with-inflow.md",
+      "locus": "Facts F1; Verification 1.1–2.1",
+      "source_excerpt": "\\dot U+aU-ag=0",
+      "affected_use": "The one-cell interval example uses outward endpoint normals -1,+1, giving Udot=a(g-U). Its scalar inflow datum is finite at each evaluation and its displayed square identity is ordinary real algebra. The new facet/endpoint convention preserves every use.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    },
+    {
+      "supplier": "def-pe04-upwind-dg-transport-discretization",
+      "id": "thm-pe04-dg-smooth-solution-l2-error-bound",
+      "path": "items/thm-pe04-dg-smooth-solution-l2-error-bound.md",
+      "locus": "Facts F1; Proof 3.1–4.1",
+      "source_excerpt": "At an interior face the homogeneous upwind terms combine",
+      "affected_use": "The error proof subtracts the same elementwise DG weak form and pairs codimension-one interfaces using Green and opposite normals; its interval branch uses endpoints. The clarified face convention is exactly the one already used in its jump dissipation and trace residual.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    },
+    {
+      "supplier": "def-pe04-upwind-dg-transport-discretization",
+      "id": "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy",
+      "path": "items/thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy.md",
+      "locus": "Facts F1–F2; Proof 1.1–3.1",
+      "source_excerpt": "\\sum_FA_Fb_{K,F}=0",
+      "affected_use": "The proof derives the weighted-normal sum from Gauss–Green over facets, rewrites the facet update as a convex combination, and cancels paired periodic facet fluxes. The supplier facet restriction makes the intended face domain explicit and preserves these calculations.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    },
+    {
+      "supplier": "def-pe04-upwind-dg-transport-discretization",
+      "id": "thm-pe04-upwind-dg-l2-energy-stability",
+      "path": "items/thm-pe04-upwind-dg-l2-energy-stability.md",
+      "locus": "Facts F1; Proof 1.1–2.2",
+      "source_excerpt": "Fix an interior facet oriented from $K^-$ to $K^+$",
+      "affected_use": "The tested weak form and integration-by-parts sum pair actual facets, already explicitly named in the statement and proof. Their dissipation remains |beta dot n| times jump squared/2. The item was separately repaired for its inflow-finiteness caveat and reviewed at the changed DG interface.",
+      "disposition": "repaired_for_assigned_nonfatal_finding",
+      "route": "assigned-review",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    },
+    {
+      "supplier": "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+      "id": "thm-pe04-dg-smooth-solution-l2-error-bound",
+      "path": "items/thm-pe04-dg-smooth-solution-l2-error-bound.md",
+      "locus": "Facts F11; Proof 2.1 and 3.1",
+      "source_excerpt": "By the construction in [F11], the projection coefficients solve that fixed finite linear system",
+      "affected_use": "The consumer applies the projection relation to its polynomial degree and finite full-support Lebesgue cell measure, then uses its fixed monomial Gram system to differentiate moments. The degree is integer under the DG polynomial-space interface; bounded continuous polynomials are Lebesgue measurable and square integrable. All clarified premises hold.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "invalidated_claim": "None: the examined mathematical use remains valid.",
+      "minimality": "No consumer item change is needed for this interface clarification."
+    }
+  ],
+  "supporting_evidence": {
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-36.pages.json": "85381985c8bcb077fb693cf5ff4d7760317eb5bcd7b55e920c2642a0b87c584a",
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-36.proof-contracts.json": "b354442d75f6260b1ccf86940659f130cf714165de7523d843083652e56498ec"
+  }
+}

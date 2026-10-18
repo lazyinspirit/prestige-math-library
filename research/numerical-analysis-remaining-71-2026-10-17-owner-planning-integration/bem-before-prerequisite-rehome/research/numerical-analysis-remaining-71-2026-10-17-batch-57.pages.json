@@ -1,0 +1,1064 @@
+[
+  {
+    "order": 2668,
+    "id": "boundary-integral-equations-and-galerkin-bem",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Boundary-integral equations and Galerkin BEM",
+    "companion": "boundary-integral-equations-and-galerkin-bem-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "singular-and-infinite-interval-quadrature",
+      "fast-multipole-expansions-and-error"
+    ],
+    "items": [
+      {
+        "id": "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+        "kind": "definition",
+        "title": "Lipschitz polyhedral boundary, orientation, and trace spaces",
+        "statement": "Assume [[def-countable-choice|Countable Choice]].\n\nLet $\\Omega^-$ be a nonempty bounded connected open subset of $\\mathbb R^3$ whose boundary $\\Gamma=\\partial\\Omega^-$ is a compact connected orientable Lipschitz surface. A **Lipschitz graph chart** is a rigid coordinate change in which $\\Gamma$ is the graph $x_3=\\psi(x_1,x_2)$ of a Lipschitz function on an open subset of $\\mathbb R^2$, with $\\Omega^-$ on one side of that graph. A **polyhedral boundary** is such a boundary made from finitely many planar polygonal faces meeting along edges and vertices; all surface-discretization claims below use this polyhedral subclass. Put $\\Omega^+=\\mathbb R^3\\setminus\\overline{\\Omega^-}$ and assume $\\Omega^+$ is connected. The unit normal $n$ points from $\\Omega^-$ into $\\Omega^+$ and is defined almost everywhere by the face normals (equivalently by the Lipschitz charts).\n\nFix a finite Lipschitz graph atlas $\\{(U_j,\\psi_j)\\}_{j=1}^J$ and a subordinate finite Lipschitz partition of unity $\\{\\chi_j\\}_{j=1}^J$ whose chartwise supports have positive distance from the chart edges. On $\\mathbb R^2$, use the real-order Bessel-potential space $H^{1/2}(\\mathbb R^2)$ of [[def-real-order-bessel-potential-sobolev-space]], with norm $\\|g\\|_{H^{1/2}}^2=\\int_{\\mathbb R^2}(1+4\\pi^2|\\xi|^2)^{1/2}|\\widehat g(\\xi)|^2d\\xi$ under its negative-sign $2\\pi$ Fourier convention ([[thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces]]). Define $H^{1/2}(\\Gamma)$ by requiring every localized chart pullback $(\\chi_jg)\\circ\\psi_j$ (extended by zero outside its chart) to belong to this Euclidean space, with the finite sum of the chart norms as the fixed norm used on this page. Let $H^{-1/2}(\\Gamma)$ be the continuous real dual of $H^{1/2}(\\Gamma)$, with pairing $\\langle\\cdot,\\cdot\\rangle_\\Gamma$. The interior and exterior traces of an $H^1$ function are denoted $\\gamma^-u$ and $\\gamma^+u$; their common chartwise trace space is $H^{1/2}(\\Gamma)$ once the trace theorem below is proved.\n\nNo smoothness at edges or vertices is included in this definition. The normal is only used almost everywhere, and every boundary integral is with respect to the sum of planar face-area measures.",
+        "deps": [
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "local_order": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed pp. 614–616: Lipschitz graph charts, local Sobolev spaces, Gagliardo trace map and right inverse."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §§1.5–1.6, PDF pp. 12–15: Lipschitz graph charts, polyhedral examples, and the almost-everywhere outward normal."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-bem-logarithmic-capacity-and-two-dimensional-layer-scaling",
+        "kind": "definition",
+        "title": "Logarithmic capacity and the two-dimensional Laplace layer kernel",
+        "statement": "For $x\\ne y$ in $\\mathbb R^2$, the logarithmic Laplace fundamental solution is $G_2(x,y)=-(2\\pi)^{-1}\\log|x-y|$. If $\\Gamma$ is a closed piecewise-smooth curve and $\\lambda$ is a smooth density, its two-dimensional single-layer trace is\n$$V_\\Gamma\\lambda(x)=-\\frac1{2\\pi}\\int_\\Gamma\\log|x-y|\\lambda(y)\\,ds_y.$$\n\nFor a compact set $K\\subset\\mathbb R^2$ with positive finite logarithmic capacity, let $\\mathcal P(K)$ be the Borel probability measures supported on $K$, let $I(\\mu)=\\int_K\\int_K\\log\\frac1{|x-y|}\\,d\\mu(x)\\,d\\mu(y)$ with value $+\\infty$ on the diagonal, and define\n$$I(K)=\\inf_{\\mu\\in\\mathcal P(K)} I(\\mu),\\qquad \\operatorname{cap}(K)=e^{-I(K)}.$$\nThis definition fixes length units: scaling $K$ changes its capacity and adds a constant-mode term to the logarithmic layer operator, as proved separately by the homothety theorem on this page.",
+        "deps": [],
+        "dependency_level": 0,
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.4 and Exercise 11, PDF pp. 9–16: the logarithmic fundamental solution, the unknown constant at infinity, and Robin's constant/logarithmic capacity."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§§1 and 5, printed pp. 614 and 625: the exceptional analytic-capacity-one case in two dimensions."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-bem-half-order-bessel-slobodeckij-equivalence",
+        "kind": "lemma",
+        "title": "Bessel and Slobodeckij norms agree at order one half",
+        "statement": "Assume Countable Choice. For $f\\in\\mathcal S(\\mathbb R^2)$, define\n$$[f]_{1/2,2}^2=\\int_{\\mathbb R^2}\\int_{\\mathbb R^2}\\frac{|f(x)-f(y)|^2}{|x-y|^3}\\,dx\\,dy.$$\nThere is a finite constant $c_*>0$ such that\n$$[f]_{1/2,2}^2=c_*\\int_{\\mathbb R^2}|\\xi|\\,|\\widehat f(\\xi)|^2d\\xi.$$\nConsequently, the norm $\\|f\\|_2^2+[f]_{1/2,2}^2$ is equivalent on $\\mathcal S(\\mathbb R^2)$ to the Bessel-potential norm $\\int_{\\mathbb R^2}(1+4\\pi^2|\\xi|^2)^{1/2}|\\widehat f(\\xi)|^2d\\xi$. The two completions therefore define the same $H^{1/2}(\\mathbb R^2)$ space with equivalent norms.",
+        "deps": [
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed pp. 614–616: the invariance of real-order Sobolev spaces under Lipschitz coordinates and local Sobolev norms on Lipschitz boundaries."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.5, PDF pp. 12–14: Lipschitz graph coordinates used for local Sobolev spaces on polyhedral boundaries."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-bem-newtonian-kernel-in-three-dimensions",
+        "kind": "definition",
+        "title": "The three-dimensional Laplace Newton kernel",
+        "statement": "For $x\\ne y$ in $\\mathbb R^3$, the Newton kernel is $G_3(x,y)=(4\\pi|x-y|)^{-1}$. Its distributional fundamental-solution property $-\\Delta_xG_3(x,y)=\\delta_y$ is proved in [[lem-bem-newtonian-kernel-is-fundamental-solution]]. The kernel fixes the sign and $4\\pi$ normalization for every three-dimensional layer operator on this page.",
+        "deps": [],
+        "dependency_level": 0,
+        "local_order": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed p. 615, equations (2.5)–(2.7): the fundamental solution and simple/double layer kernels."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §2.2, PDF pp. 3–4: the three-dimensional Laplace fundamental solution and layer representation."
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-bem-newtonian-kernel-is-fundamental-solution"
+        ]
+      },
+      {
+        "id": "lem-bem-plane-poisson-kernel-fourier-transform",
+        "kind": "lemma",
+        "title": "Fourier transform of the three-dimensional plane Poisson kernel",
+        "statement": "For $t>0$ and $z\\in\\mathbb R^2$, let\n$$P_t(z)=\\frac{t}{2\\pi(|z|^2+t^2)^{3/2}}.$$\nThen $P_t\\in L^1(\\mathbb R^2)$ has integral one and, under the negative-sign $2\\pi$ Fourier convention,\n$$\\widehat{P_t}(\\xi)=e^{-2\\pi|\\xi|t}\\qquad(\\xi\\in\\mathbb R^2).$$",
+        "deps": [
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §2.1, PDF pp. 23–24: the Laplace Poisson kernel and its Fourier multiplier."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed pp. 615–616: local planar layer kernels and Fourier-based boundary operators."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-bem-smooth-helmholtz-combined-field-operator",
+        "kind": "definition",
+        "title": "The combined-field operator for smooth-boundary Helmholtz scattering",
+        "statement": "Let $\\Omega^-$ be a bounded connected $C^2$ domain in $\\mathbb R^3$ with connected boundary $\\Gamma$, let $\\Omega^+=\\mathbb R^3\\setminus\\overline{\\Omega^-}$ be connected, and let $n$ point outward from $\\Omega^-$. Fix $k>0$ and $\\eta\\in\\mathbb R\\setminus\\{0\\}$. The outgoing Helmholtz kernel is\n$$G_k(x,y)=\\frac{e^{ik|x-y|}}{4\\pi|x-y|},\\qquad x\\ne y.$$\nFor $\\phi\\in C^\\infty(\\Gamma)$ and $x\\notin\\Gamma$, define $S_k\\phi(x)=\\int_\\Gamma G_k(x,y)\\phi(y)\\,dS_y$ and $D_k\\phi(x)=\\int_\\Gamma\\partial_{n_y}G_k(x,y)\\phi(y)\\,dS_y$. The **combined-field potential** is $u_\\phi=D_k\\phi-i\\eta S_k\\phi$, and its exterior trace defines the smooth-density operator $A_{k,\\eta}\\phi=\\gamma^+u_\\phi$. This definition makes no assertion that $A_{k,\\eta}$ extends boundedly or Fredholmly to a Sobolev space; those are explicit hypotheses in the conditional theorem below. For this smooth-boundary branch, $\\gamma^+$ denotes the trace from $\\Omega^+$ and uses the same fixed normal $n$ as the interior trace. The complex Sobolev spaces are the complexifications of the real chart spaces, with the same norms.",
+        "deps": [
+          "def-complex-exponential"
+        ],
+        "dependency_level": 0,
+        "local_order": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §§2.1–2.2, PDF pp. 22–25: Helmholtz single/double layers, their exterior traces, and the outgoing fundamental solution."
+            }
+          ]
+        },
+        "justified_by": [
+          "thm-bem-helmholtz-layer-jumps-match-laplace-jumps"
+        ]
+      },
+      {
+        "id": "lem-bem-surface-fractional-norm-equivalence",
+        "kind": "lemma",
+        "title": "The chart and chordal surface H1/2 norms are equivalent",
+        "statement": "Let $\\Gamma$ and the chartwise norm on $H^{1/2}(\\Gamma)$ be as in [[def-bem-lipschitz-polyhedral-boundary-and-trace-spaces]]. For a measurable $g$ define\n$$\\|g\\|_{H^{1/2}_{\\mathrm{ch}}(\\Gamma)}^2=\\|g\\|_{L^2(\\Gamma)}^2+\\int_\\Gamma\\int_\\Gamma\\frac{|g(x)-g(y)|^2}{|x-y|^3}\\,ds_xds_y.$$\nThere are constants $c,C>0$ depending only on the fixed finite atlas and partition such that, first for smooth $g$ and then by completion,\n$$c\\|g\\|_{H^{1/2}(\\Gamma)}\\le\\|g\\|_{H^{1/2}_{\\mathrm{ch}}(\\Gamma)}\\le C\\|g\\|_{H^{1/2}(\\Gamma)}.$$",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "lem-bem-half-order-bessel-slobodeckij-equivalence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "local_order": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed pp. 614–616: chartwise Gagliardo norms and equivalent Sobolev norms on Lipschitz boundaries."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.5, PDF pp. 12–14: graph-chart norms on Lipschitz polyhedral surfaces."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-bem-lipschitz-trace-and-lifting",
+        "kind": "lemma",
+        "title": "The H1 trace and lifting theorem on a Lipschitz polyhedron",
+        "statement": "Assume the Axiom of Choice and that $\\Gamma$ is polyhedral as specified in [[def-bem-lipschitz-polyhedral-boundary-and-trace-spaces]]. The trace maps $\\gamma^-:H^1(\\Omega^-)\\to H^{1/2}(\\Gamma)$ and $\\gamma^+:H^1_{\\mathrm{loc}}(\\Omega^+)\\to H^{1/2}_{\\mathrm{loc}}(\\Gamma)$ are bounded on every bounded boundary neighborhood. There is a bounded linear right inverse $L:H^{1/2}(\\Gamma)\\to H^1(\\mathbb R^3)$ with $\\gamma(Lg)=g$. There is also a bounded extension operator $E:H^1(\\Omega^-)\\to H^1(\\mathbb R^3)$ with $(Eu)|_{\\Omega^-}=u$.\n\nLet $\\dot H^1(\\mathbb R^3)$ denote the completion of $C_c^\\infty(\\mathbb R^3)$ in the norm $\\|u\\|_{\\dot H^1}=\\|\\nabla u\\|_{L^2}$. Its elements have an $L^6$ representative, the trace $\\gamma:\\dot H^1(\\mathbb R^3)\\to H^{1/2}(\\Gamma)$ is bounded, and the right inverse above may be chosen with compact support near $\\Gamma$.",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "lem-bem-half-order-bessel-slobodeckij-equivalence",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-fourier-inversion-on-schwartz-space",
+          "thm-gagliardo-nirenberg-sobolev-inequality",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-holder-inequality-for-integrals",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-chain-rule-for-total-derivatives",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "local_order": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2 and the proof of Lemma 3.6, printed pp. 614–616 and 619–625: the Lipschitz Gagliardo trace lemma, a continuous right inverse, and its localization proof."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.5, PDF pp. 12–14: local graph flattening, polyhedral Lipschitz domains, and the almost-everywhere normal convention."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-bem-surface-mesh-and-piecewise-constant-density-space",
+        "kind": "definition",
+        "title": "Shape-regular surface meshes and conforming P0 densities",
+        "statement": "Let $\\Gamma$ be a polyhedral boundary as in [[def-bem-lipschitz-polyhedral-boundary-and-trace-spaces]]. A **conforming surface triangulation** $\\mathcal T_h$ is a finite collection of nondegenerate closed planar triangles covering $\\Gamma$, with disjoint relative interiors, such that two distinct triangles meet only in a common full edge, a common vertex, or not at all. For $T\\in\\mathcal T_h$, write $h_T=\\operatorname{diam}(T)$ and let $\\rho_T$ be the radius of the largest disk contained in $T$; the family is **shape regular** if $\\sup_{h,T}h_T/\\rho_T<\\infty$, and **quasi-uniform** if $\\inf_{h,T}h_T/h>0$ for $h=\\max_{T\\in\\mathcal T_h}h_T$.\n\nThe conforming **P0 density space** is $X_h=\\{\\lambda_h\\in L^2(\\Gamma):\\lambda_h|_T\\text{ is constant for every }T\\in\\mathcal T_h\\}$. The continuous inclusion $H^{1/2}(\\Gamma)\\hookrightarrow L^2(\\Gamma)$ follows because each chart Bessel norm controls its L2 norm and the fixed partition is finite. Hence every $\\lambda_h$ defines a bounded functional $v\\mapsto\\int_\\Gamma\\lambda_hv$ on $H^{1/2}(\\Gamma)$; thus $X_h\\subset H^{-1/2}(\\Gamma)$. This inclusion makes the single-layer Galerkin method conforming in its energy space.",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces"
+        ],
+        "dependency_level": 1,
+        "local_order": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.3, PDF pp. 6–8: non-overlapping surface partitions and the conforming piecewise-constant P0 density space."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed pp. 615–616: finite-dimensional Galerkin subspaces of H^{-1/2}(Γ) and their density requirements."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-bem-logarithmic-capacity-homothety-and-layer-scale",
+        "kind": "theorem",
+        "title": "Logarithmic capacity and single-layer scaling under homothety",
+        "statement": "Use the logarithmic energy and capacity conventions of [[def-bem-logarithmic-capacity-and-two-dimensional-layer-scaling]]. If $K\\subset\\mathbb R^2$ has $0<\\operatorname{cap}(K)<\\infty$ and $s>0$, then $\\operatorname{cap}(sK)=s\\operatorname{cap}(K)$. If $\\Gamma$ is a closed piecewise-smooth curve and $\\lambda$ is a smooth density, define $\\Gamma_s=s\\Gamma$ and $\\lambda_s(sy)=s^{-1}\\lambda(y)$. Then\n$$V_{\\Gamma_s}\\lambda_s(sx)=V_\\Gamma\\lambda(x)-\\frac{\\log s}{2\\pi}\\int_\\Gamma\\lambda\\,ds_y.$$\nThus changing length scale adds a rank-one constant-mode term; the formula is retained separately from the three-dimensional kernel $1/(4\\pi|x-y|)$.",
+        "deps": [
+          "def-bem-logarithmic-capacity-and-two-dimensional-layer-scaling"
+        ],
+        "dependency_level": 1,
+        "local_order": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.6, Exercise 11(a)–(e), PDF p. 16: logarithmic capacity, its invariance, and its scaling under dilations."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§5, printed p. 625: the role of analytic capacity in the two-dimensional Laplace single-layer equation."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-bem-newtonian-kernel-is-fundamental-solution",
+        "kind": "lemma",
+        "title": "The three-dimensional Newton kernel is a fundamental solution",
+        "statement": "For every $y\\in\\mathbb R^3$, the locally integrable kernel $G_3(x,y)=(4\\pi|x-y|)^{-1}$ of [[def-bem-newtonian-kernel-in-three-dimensions]] satisfies $-\\Delta_xG_3(x,y)=\\delta_y$ in the sense of distributions: for every $\\varphi\\in C_c^\\infty(\\mathbb R^3)$,\n$$\\int_{\\mathbb R^3}G_3(x,y)(-\\Delta\\varphi(x))\\,dx=\\varphi(y).$$",
+        "deps": [
+          "def-bem-newtonian-kernel-in-three-dimensions",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "local_order": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed p. 615: the normalized fundamental solution for a strongly elliptic operator, specialized to the Laplacian."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §2.2, PDF p. 3: $1/(4\\\\pi|x-y|)$ as the 3D fundamental solution."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-bem-helmholtz-layer-jumps-match-laplace-jumps",
+        "kind": "theorem",
+        "title": "The Helmholtz single-layer and double-layer traces have the Laplace jump signs",
+        "statement": "Let $\\Gamma=\\partial\\Omega^-$ be the connected closed $C^2$ surface from [[def-bem-smooth-helmholtz-combined-field-operator]], with outward normal $n$. For $k>0$ and smooth densities $\\lambda,\\phi$, the Helmholtz layers in that definition satisfy\n$$\\gamma^-S_k\\lambda=\\gamma^+S_k\\lambda,\\qquad \\partial_n^-S_k\\lambda-\\partial_n^+S_k\\lambda=\\lambda,$$\n$$\\gamma^-D_k\\phi-\\gamma^+D_k\\phi=-\\phi.$$\nThe one-sided conormal limits in the single-layer formula and trace limits in the double-layer formula are taken along the fixed normal $n$. The double-layer conormal jump is not asserted here; it remains an owner-reconciliation item for the conditional combined-field theorem.",
+        "deps": [
+          "def-bem-smooth-helmholtz-combined-field-operator",
+          "def-complex-exponential",
+          "def-bem-newtonian-kernel-in-three-dimensions",
+          "lem-bem-plane-poisson-kernel-fourier-transform"
+        ],
+        "dependency_level": 1,
+        "local_order": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §§2.1–2.2, PDF pp. 22–25: outgoing Helmholtz kernels and the single/double trace jumps."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§§2–4, printed pp. 615–622: the Laplace kernel singularity and its layer jump conventions."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-bem-exterior-energy-trace-bound",
+        "kind": "lemma",
+        "title": "Exterior finite-energy functions have a trace controlled by their gradient",
+        "statement": "Assume the Axiom of Choice and Countable Choice. For the connected exterior domain $\\Omega^+$ of [[def-bem-lipschitz-polyhedral-boundary-and-trace-spaces]], let\n$$E^+(\\Omega^+)=\\{u\\in H^1_{\\mathrm{loc}}(\\Omega^+):u\\in L^6(\\Omega^+),\\ \\nabla u\\in L^2(\\Omega^+)\\}.$$\nThere is a constant $C$ depending only on $\\Omega^-$ and its fixed trace atlas such that every $u\\in E^+(\\Omega^+)$ has $\\gamma^+u\\in H^{1/2}(\\Gamma)$ and\n$$\\|\\gamma^+u\\|_{H^{1/2}(\\Gamma)}\\le C\\|\\nabla u\\|_{L^2(\\Omega^+)}.$$",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "lem-bem-lipschitz-trace-and-lifting",
+          "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "local_order": 13,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed pp. 614–616: exterior trace estimates and homogeneous energy spaces on Lipschitz domains."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §2.5, PDF pp. 39–41: exterior energy spaces and weak traces."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-bem-laplace-layer-potentials-and-energy-spaces",
+        "kind": "definition",
+        "title": "Weak Laplace single-layer potentials and energy spaces",
+        "statement": "Write $G_3$ for the Newton kernel of [[def-bem-newtonian-kernel-in-three-dimensions]]. For a smooth density $\\lambda$ on $\\Gamma$, the classical single-layer potential is\n$$S\\lambda(x)=\\int_\\Gamma G_3(x,y)\\lambda(y)\\,dS_y,\\qquad x\\in\\mathbb R^3\\setminus\\Gamma.$$\n\nLet $\\dot H^1(\\mathbb R^3)$ be the completion of $C_c^\\infty(\\mathbb R^3)$ in the norm $\\|u\\|_{\\dot H^1}=\\|\\nabla u\\|_{L^2(\\mathbb R^3)}$, using its $L^6$ representative and the trace from [[lem-bem-lipschitz-trace-and-lifting]]. For $\\lambda\\in H^{-1/2}(\\Gamma)$, call any $u\\in\\dot H^1(\\mathbb R^3)$ satisfying\n$$\\int_{\\mathbb R^3}\\nabla u\\cdot\\nabla v\\,dx=\\langle\\lambda,\\gamma v\\rangle_\\Gamma\\qquad(v\\in\\dot H^1(\\mathbb R^3)).$$\nCall such a function a weak single-layer potential and write $S\\lambda=u$ when it exists. Define the exterior energy space $E^+(\\Omega^+)=\\{u\\in H^1_{\\mathrm{loc}}(\\Omega^+):u\\in L^6(\\Omega^+),\\ \\nabla u\\in L^2(\\Omega^+)\\}$. For a harmonic function $u^-$ in $\\Omega^-$ with trace in $H^{1/2}(\\Gamma)$, define its weak outward conormal by $\\langle\\partial_n^-u^-,g\\rangle=\\int_{\\Omega^-}\\nabla u^-\\cdot\\nabla L^-g$, where $L^-g$ is any $H^1$ trace lift. For a harmonic $u^+\\in E^+(\\Omega^+)$, use the same fixed normal $n$ by $\\langle\\partial_n^+u^+,g\\rangle=-\\int_{\\Omega^+}\\nabla u^+\\cdot\\nabla L^+g$ for a compactly supported local lift. In either case the value is independent of the lift: the difference of two lifts has zero trace, and weak harmonicity makes its gradient pairing zero. Existence, uniqueness, agreement with the displayed kernel for smooth densities, and the conormal jump are proved in [[thm-bem-single-layer-transmission-mapping-and-coercivity]]. The weak definition fixes the normalization at infinity through $u\\in L^6(\\mathbb R^3)$; arbitrary additive constants are excluded.",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "lem-bem-lipschitz-trace-and-lifting",
+          "def-bem-newtonian-kernel-in-three-dimensions",
+          "lem-bem-newtonian-kernel-is-fundamental-solution"
+        ],
+        "dependency_level": 2,
+        "local_order": 14,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§§2–4, printed pp. 615–625: distributional layer potentials, weak boundary operators, Green identities, jumps, and operator extensions."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.2, PDF pp. 3–7: the 3D Laplace single-layer kernel and its potential convention; Chapter 2 §2.5, PDF pp. 39–41: the weak transmission definition."
+            }
+          ]
+        },
+        "justified_by": [
+          "thm-bem-single-layer-transmission-mapping-and-coercivity"
+        ]
+      },
+      {
+        "id": "lem-bem-p0-negative-half-order-approximation",
+        "kind": "lemma",
+        "title": "P0 averages approximate smooth densities in H negative one half",
+        "statement": "Let $\\{\\mathcal T_h\\}$ be a shape-regular family of conforming surface triangulations of $\\Gamma$ from [[def-bem-surface-mesh-and-piecewise-constant-density-space]], and let $h=\\max_{T\\in\\mathcal T_h}h_T$. For $v\\in L^1(\\Gamma)$ define the element-average projection\n$$\\Pi_hv|_T=|T|^{-1}\\int_Tv\\,ds.$$\nThere is a family-independent constant $C$ such that\n$$\\|v-\\Pi_hv\\|_{L^2(\\Gamma)}\\le Ch^{1/2}\\|v\\|_{H^{1/2}(\\Gamma)}\\qquad(v\\in H^{1/2}(\\Gamma)).$$\nIf $\\lambda$ is continuously differentiable on each planar face (with facewise derivatives square integrable), then\n$$\\|\\lambda-\\Pi_h\\lambda\\|_{H^{-1/2}(\\Gamma)}\\le Ch^{3/2}\\|\\nabla_\\Gamma\\lambda\\|_{L^2(\\Gamma)}.$$\nHere $\\nabla_\\Gamma\\lambda$ is the ordinary two-dimensional gradient on each planar face; no continuity of these derivatives across edges is assumed.",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "def-bem-surface-mesh-and-piecewise-constant-density-space",
+          "lem-bem-surface-fractional-norm-equivalence",
+          "cor-poincare-wirtinger-on-convex-domains",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "local_order": 15,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.3, PDF pp. 6–8: piecewise constant spaces on surface triangulations and approximation context."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed pp. 615–616: the H^{-1/2} energy norm and conforming finite-dimensional boundary spaces."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-bem-combined-field-conditional-invertibility",
+        "kind": "theorem",
+        "title": "Conditional invertibility of a smooth-boundary combined field",
+        "statement": "Assume the Axiom of Choice, let $k>0$ and real $\\eta\\ne0$, and use the smooth-boundary spaces and field $A_{k,\\eta}$ of [[def-bem-smooth-helmholtz-combined-field-operator]]. Suppose the following three interface hypotheses hold at these fixed parameters:\n\n(A) $A_{k,\\eta}$ extends to a bounded operator on complex $H^{1/2}(\\Gamma)$ and $2A_{k,\\eta}=I-\\mathcal K_{k,\\eta}$ for a compact operator $\\mathcal K_{k,\\eta}$.\n\n(B) Every outgoing exterior Helmholtz solution with zero Dirichlet trace is zero.\n\n(C) The layer extensions have outgoing exterior and H1 interior restrictions that solve the Helmholtz equation, satisfy Green's identity with the complex sesquilinear pairing linear in the first slot, and satisfy the trace jumps of [[thm-bem-helmholtz-layer-jumps-match-laplace-jumps]], the single-layer conormal jump $\\partial_n^-S_k\\lambda-\\partial_n^+S_k\\lambda=\\lambda$, and the double-layer conormal jump $\\partial_n^-D_k\\phi-\\partial_n^+D_k\\phi=0$.\n\nThen $A_{k,\\eta}$ is bijective and has a bounded inverse. In particular, for this fixed $k,\\eta$ there is a finite constant $C_{k,\\eta}=\\|A_{k,\\eta}^{-1}\\|$ such that\n$$\\|\\phi\\|_{H^{1/2}(\\Gamma)}\\le C_{k,\\eta}\\|A_{k,\\eta}\\phi\\|_{H^{1/2}(\\Gamma)}.$$\nThe theorem asserts no bound uniform as $k$ varies.",
+        "deps": [
+          "def-bem-smooth-helmholtz-combined-field-operator",
+          "thm-bem-helmholtz-layer-jumps-match-laplace-jumps",
+          "thm-fredholm-alternative-for-identity-minus-compact",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "local_order": 16,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §§2.1–2.2, PDF pp. 22–25: the combined-field representation and boundary operator."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§§2–4, printed pp. 615–622: layer mapping and Fredholm structure for boundary operators."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-bem-double-layer-transmission-space",
+        "kind": "definition",
+        "title": "The finite-energy double-layer transmission space",
+        "statement": "Use the exterior energy space $E^+(\\Omega^+)$ and weak conormal conventions of [[def-bem-laplace-layer-potentials-and-energy-spaces]]. For $\\phi\\in H^{1/2}(\\Gamma)$ let\n$$\\mathcal A_\\phi=\\{(u^-,u^+)\\in H^1(\\Omega^-)\\times E^+(\\Omega^+):\\gamma^-u^- -\\gamma^+u^+=-\\phi\\}.$$\nWhen it exists uniquely, denote by $D\\phi$ the pair in $\\mathcal A_\\phi$ minimizing\n$$\\mathcal E(u^-,u^+)=\\int_{\\Omega^-}|\\nabla u^-|^2dx+\\int_{\\Omega^+}|\\nabla u^+|^2dx.$$\nExistence, uniqueness, harmonicity, and equality of the weak conormals are proved in [[thm-bem-double-layer-transmission-jumps-and-bounds]].\n\nFor $\\phi$ smooth and compactly supported in the relative interior of one planar face and $x\\notin\\Gamma$, the corresponding classical potential is $D\\phi(x)=\\int_\\Gamma\\partial_{n_y}G_3(x,y)\\phi(y)\\,dS_y$. The sign in the imposed jump, $\\gamma^-D\\phi-\\gamma^+D\\phi=-\\phi$, is the convention for this kernel.",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "lem-bem-lipschitz-trace-and-lifting",
+          "def-bem-laplace-layer-potentials-and-energy-spaces"
+        ],
+        "dependency_level": 3,
+        "local_order": 17,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§§3–4, printed pp. 617–622: weak conormal derivatives, Green formulas, transmission solutions, and double-layer jump relations."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §2.5, PDF pp. 39–41: single/double layers defined by transmission jumps and their energy spaces."
+            }
+          ]
+        },
+        "justified_by": [
+          "thm-bem-double-layer-transmission-jumps-and-bounds"
+        ]
+      },
+      {
+        "id": "thm-bem-single-layer-transmission-mapping-and-coercivity",
+        "kind": "theorem",
+        "title": "The three-dimensional single layer is bounded and coercive",
+        "statement": "Assume the Axiom of Choice and Countable Choice. For every $\\lambda\\in H^{-1/2}(\\Gamma)$, with $\\Gamma$ as in [[def-bem-lipschitz-polyhedral-boundary-and-trace-spaces]], there is a unique $u=S\\lambda\\in\\dot H^1(\\mathbb R^3)$ satisfying the weak single-layer equation of [[def-bem-laplace-layer-potentials-and-energy-spaces]]. It is harmonic on $\\Omega^-$ and $\\Omega^+$, its two traces agree, and its weak conormal traces satisfy\n$$\\partial_n^-u-\\partial_n^+u=\\lambda\\quad\\hbox{in }H^{-1/2}(\\Gamma).$$\nThe trace operator $V\\lambda:=\\gamma u$ maps $H^{-1/2}(\\Gamma)$ boundedly into $H^{1/2}(\\Gamma)$, and there are constants $C,c>0$ depending on $\\Gamma$ such that\n$$\\|u\\|_{\\dot H^1}+\\|V\\lambda\\|_{H^{1/2}}\\le C\\|\\lambda\\|_{H^{-1/2}},\\qquad \\langle\\lambda,V\\lambda\\rangle_\\Gamma\\ge c\\|\\lambda\\|_{H^{-1/2}}^2.$$\nIf $\\lambda$ is smooth on each face and vanishes near the edges, this weak potential agrees away from $\\Gamma$ with $\\int_\\Gamma(4\\pi|x-y|)^{-1}\\lambda(y)dS_y$.",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "lem-bem-lipschitz-trace-and-lifting",
+          "def-bem-newtonian-kernel-in-three-dimensions",
+          "lem-bem-newtonian-kernel-is-fundamental-solution",
+          "def-bem-laplace-layer-potentials-and-energy-spaces",
+          "thm-lax-milgram",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "local_order": 18,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§§2–4, printed pp. 615–621: weak single-layer operators, trace and conormal spaces, Green formulas, and the jump relation."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.2 and Chapter 2 §2.5, PDF pp. 3–7 and 39–41: the 3D Newton kernel, single-layer jumps, and weak transmission definition."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-bem-double-layer-transmission-jumps-and-bounds",
+        "kind": "theorem",
+        "title": "The double-layer potential has the stated jumps and bounds",
+        "statement": "Assume the Axiom of Choice and Countable Choice. For every $\\phi\\in H^{1/2}(\\Gamma)$, the affine class $\\mathcal A_\\phi$ in [[def-bem-double-layer-transmission-space]] has a unique minimum-energy pair $D\\phi=(u^-,u^+)$. It is harmonic on both sides, satisfies\n$$\\gamma^-D\\phi-\\gamma^+D\\phi=-\\phi,\\qquad \\partial_n^-D\\phi=\\partial_n^+D\\phi,$$\nand obeys\n$$\\|\\nabla u^-\\|_{L^2(\\Omega^-)}+\\|\\nabla u^+\\|_{L^2(\\Omega^+)}\\le C\\|\\phi\\|_{H^{1/2}(\\Gamma)}.$$\nConsequently the average trace $K\\phi=(\\gamma^-D\\phi+\\gamma^+D\\phi)/2$ is in $H^{1/2}(\\Gamma)$ and the common conormal $q_\\phi=\\partial_n^-D\\phi=\\partial_n^+D\\phi$ is in $H^{-1/2}(\\Gamma)$, with both maps bounded. For $\\phi$ smooth and compactly supported in the relative interior of one planar face, the weak potential agrees away from $\\Gamma$ with $\\int_\\Gamma\\partial_{n_y}G_3(x,y)\\phi(y)dS_y$.",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "lem-bem-lipschitz-trace-and-lifting",
+          "lem-bem-exterior-energy-trace-bound",
+          "def-bem-newtonian-kernel-in-three-dimensions",
+          "lem-bem-newtonian-kernel-is-fundamental-solution",
+          "lem-bem-plane-poisson-kernel-fourier-transform",
+          "def-bem-laplace-layer-potentials-and-energy-spaces",
+          "def-bem-double-layer-transmission-space",
+          "thm-lax-milgram",
+          "thm-gagliardo-nirenberg-sobolev-inequality",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4,
+        "local_order": 19,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "Lemma 4.1 and the proof of Theorem 2, printed pp. 620–622: weak double-layer jumps, common conormal, and energy/Garding identities."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §2.1, PDF pp. 23–25, and §2.5, PDF pp. 39–41: signed double-layer jumps and transmission/energy formulation."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-bem-calderon-boundary-operators",
+        "kind": "definition",
+        "title": "Calderon boundary operators and trace conventions",
+        "statement": "For $\\lambda\\in H^{-1/2}(\\Gamma)$ and $\\phi\\in H^{1/2}(\\Gamma)$ define the Laplace Calderon boundary operators by\n$$V\\lambda=\\gamma S\\lambda,\\qquad K\\phi=\\tfrac12(\\gamma^-D\\phi+\\gamma^+D\\phi),$$\n$$K'\\lambda=\\tfrac12(\\partial_n^-S\\lambda+\\partial_n^+S\\lambda),\\qquad W\\phi=-\\partial_n^-D\\phi=-\\partial_n^+D\\phi.$$\nHere $\\gamma S\\lambda$ is the common trace, conormal traces use the orientation of [[def-bem-lipschitz-polyhedral-boundary-and-trace-spaces]], and the last equality is meaningful because the weak double layer has a common conormal derivative. This page uses the real duality pairing between $H^{-1/2}(\\Gamma)$ and $H^{1/2}(\\Gamma)$. The well-definedness and bounded mapping properties of $V,K,K',W$ are proved in [[thm-bem-calderon-mapping-and-jump-identities]].",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "def-bem-laplace-layer-potentials-and-energy-spaces",
+          "def-bem-double-layer-transmission-space"
+        ],
+        "dependency_level": 4,
+        "local_order": 20,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§§2–4, printed pp. 615–622: boundary operators as traces and conormal traces of weak single/double-layer potentials."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.2 and Chapter 2 §2.2, PDF pp. 4–6 and 23–25: averaged traces, double-layer operators, and hypersingular sign convention."
+            }
+          ]
+        },
+        "justified_by": [
+          "thm-bem-calderon-mapping-and-jump-identities"
+        ]
+      },
+      {
+        "id": "thm-bem-single-layer-galerkin-wellposed-and-quasioptimal",
+        "kind": "theorem",
+        "title": "P0 Galerkin BEM for the single layer is well posed and quasioptimal",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $\\Gamma$ be as above, let $\\mathcal T_h$ be any finite conforming surface triangulation, and let $X_h$ be its P0 space. For every $f\\in H^{1/2}(\\Gamma)$ there are unique $\\lambda\\in H^{-1/2}(\\Gamma)$ and $\\lambda_h\\in X_h$ satisfying\n$$\\langle\\mu,V\\lambda\\rangle_\\Gamma=\\langle\\mu,f\\rangle_\\Gamma\\quad(\\mu\\in H^{-1/2}(\\Gamma)),\\qquad \\langle\\mu_h,V\\lambda_h\\rangle_\\Gamma=\\langle\\mu_h,f\\rangle_\\Gamma\\quad(\\mu_h\\in X_h).$$\nFor constants $c,C>0$ from [[thm-bem-single-layer-transmission-mapping-and-coercivity]],\n$$\\|\\lambda-\\lambda_h\\|_{H^{-1/2}(\\Gamma)}\\le(1+C/c)\\inf_{\\mu_h\\in X_h}\\|\\lambda-\\mu_h\\|_{H^{-1/2}(\\Gamma)}.$$\nThe method is conforming because $X_h\\subset H^{-1/2}(\\Gamma)$; this is an exact Galerkin estimate and contains no quadrature or geometry error.",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces",
+          "def-bem-surface-mesh-and-piecewise-constant-density-space",
+          "def-bem-laplace-layer-potentials-and-energy-spaces",
+          "thm-bem-single-layer-transmission-mapping-and-coercivity",
+          "thm-second-strang-lemma-for-nonconforming-galerkin",
+          "thm-lax-milgram",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4,
+        "local_order": 21,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§4, printed pp. 620–622: coercive boundary operators and Galerkin approximation."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.3, PDF pp. 6–8: the P0 Galerkin method for the single-layer equation."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-bem-calderon-mapping-and-jump-identities",
+        "kind": "theorem",
+        "title": "Bounded Calderon maps and signed jump identities",
+        "statement": "For $\\lambda\\in H^{-1/2}(\\Gamma)$ and $\\phi\\in H^{1/2}(\\Gamma)$, the operators in [[def-bem-calderon-boundary-operators]] are bounded as\n$$V:H^{-1/2}\\to H^{1/2},\\quad K:H^{1/2}\\to H^{1/2},\\quad K':H^{-1/2}\\to H^{-1/2},\\quad W:H^{1/2}\\to H^{-1/2}.$$\nTheir weak traces satisfy\n$$\\gamma^-S\\lambda=\\gamma^+S\\lambda=V\\lambda,\\qquad \\partial_n^-S\\lambda=K'\\lambda+\\tfrac12\\lambda,\\quad \\partial_n^+S\\lambda=K'\\lambda-\\tfrac12\\lambda,$$\n$$\\gamma^-D\\phi=K\\phi-\\tfrac12\\phi,\\qquad \\gamma^+D\\phi=K\\phi+\\tfrac12\\phi,\\qquad \\partial_n^-D\\phi=\\partial_n^+D\\phi=-W\\phi.$$\nAll equalities are in the stated Sobolev trace or dual spaces and use the outward normal orientation fixed on the A page.",
+        "deps": [
+          "def-bem-calderon-boundary-operators",
+          "thm-bem-single-layer-transmission-mapping-and-coercivity",
+          "thm-bem-double-layer-transmission-jumps-and-bounds",
+          "lem-bem-lipschitz-trace-and-lifting"
+        ],
+        "dependency_level": 5,
+        "local_order": 22,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§§2–4, printed pp. 615–622: bounded layer traces, conormal traces, Calderon operators, and weak jump relations."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §§2.1–2.5, PDF pp. 23–41: signed trace jumps and weak transmission definitions."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "cor-bem-p0-galerkin-rate-for-h1-density",
+        "kind": "corollary",
+        "title": "An H1-density rate for P0 single-layer Galerkin BEM",
+        "statement": "Under the mesh and coercivity hypotheses of [[thm-bem-single-layer-galerkin-wellposed-and-quasioptimal]], suppose the exact density $\\lambda$ is continuously differentiable on each planar face with $\\nabla_\\Gamma\\lambda\\in L^2(\\Gamma)$. Then the P0 Galerkin solution obeys\n$$\\|\\lambda-\\lambda_h\\|_{H^{-1/2}(\\Gamma)}\\le C h^{3/2}\\|\\nabla_\\Gamma\\lambda\\|_{L^2(\\Gamma)},$$\nwhere $C$ is independent of $h$ for a shape-regular mesh family.",
+        "deps": [
+          "thm-bem-single-layer-galerkin-wellposed-and-quasioptimal",
+          "lem-bem-p0-negative-half-order-approximation"
+        ],
+        "dependency_level": 5,
+        "local_order": 23,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.3, PDF pp. 6–8: Galerkin approximation with piecewise-constant surface elements."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§4, printed pp. 620–622: energy-norm quasi-optimality of Galerkin boundary operators."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-bem-hypersingular-ellipticity-and-stabilized-formulation",
+        "kind": "theorem",
+        "title": "The hypersingular operator is elliptic modulo constants",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $W:H^{1/2}(\\Gamma)\\to H^{-1/2}(\\Gamma)$ be the hypersingular operator of [[def-bem-calderon-boundary-operators]]. It is symmetric and nonnegative, its kernel is exactly the constants, and there is $c>0$ such that\n$$\\langle W\\phi,\\phi\\rangle_\\Gamma\\ge c\\inf_{a\\in\\mathbb R}\\|\\phi-a\\|_{H^{1/2}(\\Gamma)}^2.$$\nThe stabilized form\n$$b(\\phi,\\psi)=\\langle W\\phi,\\psi\\rangle_\\Gamma+\\langle\\phi,1\\rangle_\\Gamma\\langle\\psi,1\\rangle_\\Gamma$$\nis bounded and coercive on $H^{1/2}(\\Gamma)$. Consequently, for each $f\\in H^{-1/2}(\\Gamma)$ there is a unique $\\phi\\in H^{1/2}(\\Gamma)$ such that $b(\\phi,\\psi)=\\langle f,\\psi\\rangle_\\Gamma$ for every $\\psi\\in H^{1/2}(\\Gamma)$.",
+        "deps": [
+          "def-bem-calderon-boundary-operators",
+          "thm-bem-double-layer-transmission-jumps-and-bounds",
+          "thm-bem-calderon-mapping-and-jump-identities",
+          "lem-bem-exterior-energy-trace-bound",
+          "lem-bem-lipschitz-trace-and-lifting",
+          "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "thm-lax-milgram",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "local_order": 24,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§4, printed pp. 620–622: the hypersingular operator, energy identity, and ellipticity modulo constants."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §2.2, PDF pp. 24–25, and §2.5, pp. 39–41: the hypersingular sign convention and energy formulation."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-bem-certified-inexact-matrix-assembly",
+        "kind": "algorithm",
+        "title": "Certified near-quadrature and far-multipole matrix assembly",
+        "statement": "Let $\\mathcal T_h$ and $X_h$ be the surface mesh and P0 space from [[def-bem-surface-mesh-and-piecewise-constant-density-space]], and let\n$$A_{TS}=\\langle 1_T,V1_S\\rangle_\\Gamma$$\nbe the exact single-layer matrix entry for test panel $T$ and source panel $S$. For each ordered pair $(T,S)$ the input must contain exactly one of the following auditable certificates.\n\nA **near certificate** supplies a finite identity $A_{TS}=\\sum_{m=1}^M c_m I_m$ in which each $I_m$ is a reference-triangle integral of the form $\\int_{\\widehat T}|z|^{-\\alpha_m}q_m(z)dz$, with $\\alpha_m<2$, continuous $q_m$, and the Duffy map of [[thm-duffy-weak-singularity-transform]] producing an amplitude $G_m\\in C^{2n}([0,1]^2)$. It includes the derivation of this identity and bounds for the required mixed-coordinate derivatives. Apply the weighted rule of [[alg-duffy-weighted-product-gauss-quadrature]] and the error estimate of [[cor-duffy-weighted-product-gauss-error]] to each term; record the resulting entry bound $\\varepsilon_{TS}^{\\rm near}=\\sum_m|c_m|E_m$.\n\nA **far certificate** supplies a finite positive target quadrature rule, a source point-charge cluster in $B(c,a)$, a target cluster in $B(d,b)$, and $R=|d-c|>a+b$. It also supplies a proved quadrature residual $\\varepsilon_{TS}^{\\rm quad}$ between that discrete double sum and the exact entry. Apply the single-cluster evaluator of [[alg-three-dimensional-laplace-cluster-expansion]] at each target node. If $Q$ is the sum of absolute source charges and $W_T$ the sum of target weights, record\n$$\\varepsilon_{TS}^{\\rm far}=\\varepsilon_{TS}^{\\rm quad}+W_T\\frac{Q}{R-b}\\frac{(a/(R-b))^{p+1}}{1-a/(R-b)}.$$\nThe cluster work is the sum of the single-cluster costs; this item makes no multilevel or global $O(N)$ claim.\n\nGiven one valid certificate for every pair, form the approximate matrix $\\widetilde A_h=(\\widetilde A_{TS})$. If $\\gamma_h>0$ is a certified lower norm bound such that $\\|c\\|_2\\le\\gamma_h^{-1}\\|\\sum_Tc_T1_T\\|_{H^{-1/2}}$, then the assembled matrix defect is certified by\n$$\\delta_h=\\gamma_h^{-2}\\left(\\sum_{T,S}\\varepsilon_{TS}^2\\right)^{1/2}.$$\nA missing or unverified panel-pair certificate returns **uncertified** and no matrix-defect claim. In particular, the supplied Duffy theorem alone does not certify arbitrary coincident or edge-adjacent panel pairs.",
+        "deps": [
+          "def-bem-surface-mesh-and-piecewise-constant-density-space",
+          "def-bem-calderon-boundary-operators",
+          "thm-duffy-weak-singularity-transform",
+          "alg-duffy-weighted-product-gauss-quadrature",
+          "cor-duffy-weighted-product-gauss-error",
+          "alg-three-dimensional-laplace-cluster-expansion",
+          "thm-three-dimensional-laplace-expansion-error-and-work",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "local_order": 25,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Imperial College London, Numerical quadrature, Finite Element course notes, §1.6",
+              "url": "https://finite-element.github.io/1_quadrature.html",
+              "locator": "§1.6, equations (1.11)–(1.13): Duffy's map and the weighted product rule for one reference-triangle vertex singularity."
+            },
+            {
+              "title": "Michael O’Neil, Integral Equations and Fast Algorithms, complete course lecture notes (2017)",
+              "url": "https://cims.nyu.edu/~oneil/courses/fa17-math2011/int_eq_notes_2017.pdf",
+              "locator": "Chapter 4 §4.1.2, PDF pp. 26–30: the 3D Laplace point-source expansion and its separated-cluster truncation."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-bem-matrix-perturbation-transfer",
+        "kind": "theorem",
+        "title": "A certified matrix defect transfers to a Galerkin error bound",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $H$ be a real Hilbert space and $X_h\\subset H$ a finite-dimensional subspace. Let $a:H\\times H\\to\\mathbb R$ be bounded with continuity constant $C$ and coercive with constant $c>0$, and let $F\\in H'$. Write $F_h=F|_{X_h}$ and\n$$\\|F_h\\|_{X_h'}=\\sup_{\\substack{w_h\\in X_h\\\\\\|w_h\\|_H\\le1}}|F_h(w_h)|.$$\nLet $u\\in H$ solve $a(u,w)=F(w)$ for all $w\\in H$, and let $u_h\\in X_h$ be its exact Galerkin solution. Suppose a bilinear form $\\widetilde a_h:X_h\\times X_h\\to\\mathbb R$ and load $\\widetilde F_h\\in X_h'$ satisfy\n$$|\\widetilde a_h(v_h,w_h)-a(v_h,w_h)|\\le\\delta\\|v_h\\|_H\\|w_h\\|_H,\\qquad |\\widetilde F_h(w_h)-F_h(w_h)|\\le\\eta\\|w_h\\|_H$$\nfor all $v_h,w_h\\in X_h$, with $0\\le\\delta<c$. The perturbed equation $\\widetilde a_h(\\widetilde u_h,w_h)=\\widetilde F_h(w_h)$ has a unique solution and\n$$\\|u-\\widetilde u_h\\|_H\\le(1+C/c)\\inf_{v_h\\in X_h}\\|u-v_h\\|_H+\\frac1c\\left(\\eta+\\frac{\\delta(\\|F_h\\|_{X_h'}+\\eta)}{c-\\delta}\\right).$$\nFor P0 single-layer BEM, take $H=H^{-1/2}(\\Gamma)$ with its Sobolev norm and $a(v,w)=\\langle w,Vv\\rangle_\\Gamma$. The single-layer theorem supplies $c,C$, and a successful matrix-assembly certificate supplies $\\delta$.",
+        "deps": [
+          "alg-bem-certified-inexact-matrix-assembly",
+          "def-bem-surface-mesh-and-piecewise-constant-density-space",
+          "thm-bem-single-layer-transmission-mapping-and-coercivity",
+          "thm-second-strang-lemma-for-nonconforming-galerkin",
+          "thm-lax-milgram",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "local_order": 26,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.3 and Chapter 2 §2.5, PDF pp. 6–8 and 39–41: the energy Galerkin system and stability from coercivity."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§4, printed pp. 620–622: coercive energy estimates and perturbation stability."
+            }
+          ]
+        },
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2669,
+    "id": "boundary-integral-equations-and-galerkin-bem-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Boundary-integral equations and Galerkin BEM — Examples",
+    "companion": "boundary-integral-equations-and-galerkin-bem",
+    "requires": [
+      "boundary-integral-equations-and-galerkin-bem"
+    ],
+    "items": [
+      {
+        "id": "ex-bem-sphere-constant-density",
+        "kind": "example",
+        "title": "A constant density on the sphere gives a constant trace",
+        "statement": "For $R>0$, let $S_R=\\{y\\in\\mathbb R^3:|y|=R\\}$ and take density $\\lambda=1$. The classical Newton single-layer potential is\n$$S1(x)=\\int_{S_R}\\frac{1}{4\\pi|x-y|}\\,dS_y=\\begin{cases}R,&|x|\\le R,\\\\ R^2/|x|,&|x|\\ge R.\\end{cases}$$\nIt is continuous on $S_R$ with trace $R$. With outward radial normal, the interior and exterior normal derivatives at the sphere are $0$ and $-1$, respectively, so their difference is $1$, the density.",
+        "deps": [
+          "def-bem-newtonian-kernel-in-three-dimensions"
+        ],
+        "dependency_level": 1,
+        "local_order": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.2, PDF pp. 3–7: the Laplace single-layer kernel and sphere normalization examples."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed p. 615: the normalized three-dimensional single-layer kernel."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-bem-sphere-jump-sign-orientation",
+        "kind": "example",
+        "title": "A unit sphere checks both layer jump signs",
+        "statement": "On the unit sphere $S_1$ with outward normal, let both layer densities be the constant $1$. The single layer has boundary trace $1$ and conormal jump $\\partial_n^-S1-\\partial_n^+S1=1$. The double-layer kernel $\\partial_{n_y}G_3$ has potential $-1$ in the unit ball and $0$ outside; hence $\\gamma^-D1-\\gamma^+D1=-1$. Its common normal derivative is zero. Thus these conventions agree with $\\gamma^-D-\\gamma^+D=-\\phi$ and $\\partial_n^-S-\\partial_n^+S=\\lambda$.",
+        "deps": [
+          "def-bem-newtonian-kernel-in-three-dimensions",
+          "lem-bem-newtonian-kernel-is-fundamental-solution",
+          "ex-bem-sphere-constant-density"
+        ],
+        "dependency_level": 2,
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 2 §2.1, PDF pp. 23–25: signed single- and double-layer jump conventions."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed p. 615: fundamental-solution normalization and layer signs."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-bem-polyhedral-reentrant-edge-singularity",
+        "kind": "example",
+        "title": "A reentrant polyhedral edge has an H1 harmonic singularity",
+        "statement": "At a straight reentrant edge with cross-sectional opening angle $\\omega\\in(\\pi,2\\pi)$, put $\\alpha=\\pi/\\omega\\in(1/2,1)$ and in local cylindrical coordinates define\n$$u(r,\\theta,z)=r^\\alpha\\sin(\\alpha\\theta),\\qquad 0<r<r_0,\\quad0<\\theta<\\omega,\\quad |z|<z_0.$$\nThen $u$ is harmonic in the wedge, has zero trace on its two planar side faces, belongs to $H^1$ locally up to the edge, and does not belong to $H^2$ in any neighborhood of the edge.",
+        "deps": [
+          "def-bem-lipschitz-polyhedral-boundary-and-trace-spaces"
+        ],
+        "dependency_level": 1,
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§2, printed pp. 614–616: polyhedral Lipschitz boundaries and the distinction between Lipschitz and smooth boundary regularity."
+            },
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.5, PDF pp. 12–14: polyhedral Lipschitz domains and reentrant edges."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-bem-logarithmic-capacity-and-scale-on-a-circle",
+        "kind": "example",
+        "title": "The logarithmic single layer on a circle changes by a rank-one scale term",
+        "statement": "Let $\\Gamma=S_1$ be the unit circle, let $s>0$, and scale the curve to $S_s$. For a smooth density $\\lambda$ on $S_1$, set $\\lambda_s(sy)=s^{-1}\\lambda(y)$. Then\n$$\\operatorname{cap}(S_s)=s\\operatorname{cap}(S_1),\\qquad V_{S_s}\\lambda_s(sx)=V_{S_1}\\lambda(x)-\\frac{\\log s}{2\\pi}\\int_{S_1}\\lambda\\,ds.$$\nIn particular, the change in the layer trace depends only on the total charge, so it is a rank-one constant-mode term. For $\\lambda=1/(2\\pi)$ on $S_1$ and $s=e$, the total charge is one and the trace changes by $-1/(2\\pi)$.",
+        "deps": [
+          "def-bem-logarithmic-capacity-and-two-dimensional-layer-scaling",
+          "thm-bem-logarithmic-capacity-homothety-and-layer-scale"
+        ],
+        "dependency_level": 2,
+        "local_order": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.4 and Exercise 11, PDF pp. 9–16: logarithmic capacity and the scale-dependent constant mode."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§5, printed p. 625: the exceptional two-dimensional logarithmic-capacity case."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-bem-inexact-assembly-error-ledger",
+        "kind": "example",
+        "title": "A two-by-two inexact assembly ledger",
+        "statement": "Use Euclidean norm on $X=\\mathbb R^2$ and exact matrix/load\n$$A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix},\\qquad f=\\binom10.$$\nApproximate it by\n$$\\widetilde A=A+E,\\qquad E=\\begin{pmatrix}1/100&0\\\\0&-1/100\\end{pmatrix},\\qquad \\widetilde f=f.$$\nThe exact coercivity and continuity constants are $c=1$ and $C=3$. The defect matrix is $E=\\operatorname{diag}(1/100,-1/100)$, so $\\|E\\|_2=1/100<1/50$; take the conservative certified $\\delta=1/50$, load defect $\\eta=0$, and $\\|F_h\\|=1$. The perturbed solve is\n$$\\widetilde u=\\binom{19900/29999}{-10000/29999},$$\nwhile $u=(2/3,-1/3)$. The transfer theorem gives the certified error $\\|u-\\widetilde u\\|_2\\le1/49$; the exact rational difference is also smaller than $1/49$.\n\nThis is a finite algebraic error ledger illustrating how a certified assembly defect enters the perturbation theorem; it does not assert that this particular matrix is a panel matrix from a specified mesh.",
+        "deps": [
+          "thm-bem-matrix-perturbation-transfer"
+        ],
+        "dependency_level": 9,
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, First Steps in the Boundary Element Method (2015 lecture notes)",
+              "url": "https://team-pancho.github.io/teaching/math838/BEM.pdf",
+              "locator": "Chapter 1 §1.3, PDF pp. 6–8: finite-dimensional energy Galerkin systems."
+            },
+            {
+              "title": "Martin Costabel, Boundary Integral Operators on Lipschitz Domains: Elementary Results (1988)",
+              "url": "https://costabel.perso.math.cnrs.fr/publis/Co88_Lip.pdf",
+              "locator": "§4, printed pp. 620–622: coercivity and Galerkin stability."
+            }
+          ]
+        },
+        "justified_by": []
+      }
+    ]
+  }
+]

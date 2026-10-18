@@ -1,0 +1,13 @@
+# Batch 41: review 0
+
+Run: numerical-analysis-remaining-71-2026-10-17
+Batch: 41
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: energy-stable-incompressible-navier-stokes-discretization, energy-stable-incompressible-navier-stokes-discretization-examples
+Items: lem-na-halfline-heat-logarithmic-mass-loss, lem-na-shrinking-boundary-stream-corrector, lem-na-solenoidal-scalar-equations-give-weak-continuity, def-na-evolutionary-skew-convective-form, def-na-evolutionary-incompressible-ns-weak-solution, lem-na-evolutionary-skew-convective-form-bound, def-na-mini-navier-stokes-backward-euler-scheme, def-na-solenoidal-energy-weak-ns-velocity, lem-na-evolutionary-ns-weak-form-is-well-defined, thm-na-ns-weak-solution-uniqueness-2d-and-weak-strong-3d, lem-na-mini-be-scheme-is-well-defined, lem-na-two-dimensional-solenoidal-energy-velocity-uniqueness, lem-na-continuous-pressure-recovery-from-solenoidal-residual, lem-na-mini-fortin-l2-approximation, thm-na-mini-be-step-existence-energy, lem-na-mini-fortin-h2-approximation, lem-na-mini-weak-solenoidal-compactness, thm-na-mini-solenoidal-stokes-projection-error, thm-na-mini-be-smooth-velocity-error, thm-na-mini-navier-stokes-be-subsequential-limit, lem-na-solenoidal-evolution-integrated-pressure-recovery, thm-na-mini-be-smooth-integrated-pressure-error, rem-na-pe06-pressure-recovery-escalation, ex-na-zero-mean-pressure-gauge, ex-na-periodic-taylor-green-vortex, ex-na-unit-square-mini-mesh-family, ex-na-mini-backward-euler-energy-budget, ex-na-conditional-three-dimensional-flow-computation, cex-na-polyhedral-energy-ns-pressure-endpoint, cex-na-graded-mini-mass-initialization-pressure-rate
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

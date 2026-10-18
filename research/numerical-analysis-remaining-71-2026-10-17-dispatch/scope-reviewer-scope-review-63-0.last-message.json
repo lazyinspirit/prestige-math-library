@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "63",
+  "round": 0,
+  "reviewed_items": [
+    "def-intersection-volume-conservative-remapping",
+    "def-isoparametric-curved-cell-map",
+    "lem-h2-zero-boundary-p1-interpolant-conforming",
+    "def-curved-domain-geometry-approximation",
+    "lem-curved-p1-interpolation-scaling",
+    "lem-isoparametric-pullback-and-surface-metric",
+    "thm-overlap-remap-l2-projection-conservation-positivity",
+    "lem-curved-boundary-lift-residual",
+    "lem-isoparametric-cofactor-normal-perturbation",
+    "lem-isoparametric-laplace-tensor-defect",
+    "lem-parabolic-domain-map-approximation",
+    "thm-overlap-remap-error-from-approximation-and-geometry",
+    "lem-curved-nvb-closure-preserves-matching-traces",
+    "thm-curved-isoparametric-strang-error-bound",
+    "alg-certified-convex-polygon-overlap",
+    "thm-certified-polygon-overlap-correctness",
+    "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+    "thm-curved-uniform-nvb-quality-and-termination",
+    "ex-inverted-isoparametric-map-detection",
+    "ex-conservative-transfer-between-moving-curved-meshes",
+    "ex-isoparametric-unit-disk-mesh",
+    "cex-delaunay-tetrahedral-sliver",
+    "ex-parabolic-curved-domain-linear-geometry-approximation"
+  ],
+  "reviewed_pages": [
+    "curved-mesh-geometry-and-conservative-mesh-transfer",
+    "curved-mesh-geometry-and-conservative-mesh-transfer-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch, approved PE17 scope, and relevant supplier arguments were reviewed. Five assigned items need one focused local repair; no unresolved outside-scope prerequisite requires escalation.",
+  "findings": [
+    {
+      "id": "alg-certified-convex-polygon-overlap",
+      "type": "local",
+      "reason": "The procedure returns unresolved for a nonpositive crossing denominator. For an ordinary outside-to-inside crossing with s(S)<0<s(E), the denominator s(S)-s(E) is negative while the exact intersection parameter lies in (0,1), so valid clipping inputs can fail. Specify the cyclic traversal and all sign branches, including boundary endpoints; divide only on an actual crossing, where the denominator is nonzero. Also define or verify the mentioned convexity certificate."
+    },
+    {
+      "id": "cex-delaunay-tetrahedral-sliver",
+      "type": "prerequisite",
+      "reason": "The cited Delaunay definition inherits the dyadic-coordinate restriction from def-indexed-geometric-site-set, while this example quantifies over arbitrary real 0<epsilon<1. Restrict to a dyadic sequence such as epsilon=2^-n, n>=1; it still gives inradius tending to zero."
+    },
+    {
+      "id": "thm-curved-uniform-nvb-quality-and-termination",
+      "type": "local",
+      "reason": "The induced metric is G=DF^TDF. The proof bounds the derivative-map condition number by 9/4, but the spectral condition number of G is its square; at x=1 for the identity reference cell, kappa(G)=(9+sqrt(17))/(9-sqrt(17))>9/4. Clarify the condition-number convention or state the squared metric bound. The proof also invokes curved closure without explicitly verifying the shear's common-map injectivity and admissibility; give its explicit inverse and C2 derivative bounds."
+    },
+    {
+      "id": "lem-curved-p1-interpolation-scaling",
+      "type": "local",
+      "reason": "Step 1.1 uses the reference-simplex point-evaluation result before establishing the pulled-back class. Apply the flattening result first, obtain the continuous representative of v composed with the map on the reference triangle, then transport it back to establish existence and uniqueness of the continuous representative on the curved cell and its nodal values."
+    },
+    {
+      "id": "thm-overlap-remap-error-from-approximation-and-geometry",
+      "type": "prerequisite",
+      "reason": "The proof invokes the remap definition's finite measurable partition hypotheses, but the statement only says finite positive-volume partitions. Explicitly require the measurable partition conditions used by def-intersection-volume-conservative-remapping, including coverage and disjointness up to null sets."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-certified-polygon-overlap-correctness",
+      "decision": "repair",
+      "reason": "Its universal termination and exact-output claim consumes the clipping procedure; update the proof to cover the repaired strict-sign branches and endpoints on clipping lines."
+    },
+    {
+      "id": "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+      "decision": "accept",
+      "reason": "Its justified_by use of thm-curved-uniform-nvb-quality-and-termination depends on the square-family termination and diameter guarantees, which remain intact after clarifying the metric-condition convention and verifying the shear map."
+    }
+  ]
+}

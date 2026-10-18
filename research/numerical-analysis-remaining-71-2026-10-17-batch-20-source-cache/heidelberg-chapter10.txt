@@ -1,0 +1,1956 @@
+
+===== PDF PAGE 174 =====
+Chapter 9. Adaptive Finite Element Methods
+Table 9.2.: Convergence order and eﬃciency index for adaptive mesh reﬁnement
+with varying polynomial degree. Bisection type reﬁnement was used
+as reﬁnement technique.
+N
+|u −uh|1,Ω
+|rate|
+η
+η/|u −uh|1,Ω
+k = 1
+15355
+6.84e-03
+0.51
+2.36e-02
+3.44
+20312
+5.92e-03
+0.52
+2.04e-02
+3.44
+26779
+5.15e-03
+0.50
+1.78e-02
+3.44
+k = 2
+6979
+6.76e-04
+1.01
+2.61e-03
+3.86
+8765
+5.41e-04
+0.98
+2.08e-03
+3.84
+10985
+4.30e-04
+1.02
+1.66e-03
+3.86
+k = 3
+8701
+6.70e-05
+1.42
+2.88e-04
+4.30
+10072
+5.28e-05
+1.63
+2.27e-04
+4.31
+11515
+4.28e-05
+1.57
+1.83e-04
+4.27
+k = 4
+10993
+8.39e-06
+2.19
+4.76e-05
+5.68
+12109
+6.74e-06
+2.26
+3.81e-05
+5.65
+13541
+5.32e-06
+2.12
+3.00e-05
+5.64
+174
+
+
+===== PDF PAGE 175 =====
+Chapter 10.
+Multigrid Methods
+The linear systems arising in the ﬁnite element method are large, sparse and
+symmetric positive deﬁnite (assuming the bilinear form is symmetric and coer-
+cive). We now turn to the question how to solve them eﬃciently.
+There are two basic approaches: Direct methods such as LU-decomposition
+or Cholesky decomposition produce a solution after a ﬁnite number of steps de-
+pending only on the size of the matrix A. However, this cost may be prohibitively
+large, the methods may need an excessive amount of memory and roundoﬀerror
+might be a problem for ill-conditioned matrices. On the other hand iterative
+methods typically require little memory but the number of iterations needed
+to reduce the error to an acceptable amount depends strongly on the type of
+problem to be solved. Fortunately, symmetric positive deﬁnite linear systems
+are among the systems most amenable to iterative solution.
+In particular the number of iterations needed in iterative methods often de-
+pends on the spectral condition number of the matrix κ2(A) = λmax(A)/λmin(A).
+For a Lagrange ﬁnite element basis one can show:
+κ2(A) = O(h−2)
+where h is the mesh size (uniform mesh).
+The following table gives the number of arithmetic operations needed to solve
+a symmetric and positive deﬁnite linear system arising from the ﬁnite element
+discretization (operations are up to a constant factor depending on the coeﬃ-
+cients and the required accuracy):
+Scheme
+d = 2
+d = 3
+Gaussian elimination
+N 3
+N 3
+Banded-Gauß
+N 2
+N 7/3
+Nested dissection
+N 3/2
+N 2
+Gauß-Seidel, Jacobi
+N 2
+N 5/3
+CG, SOR(ωopt)
+N 3/2
+N 4/3
+Multigrid
+N
+N
+The multigrid method is one of the few methods that is able to solve the systems
+in question with a computational complexity that is linear in the number of
+unknowns. The main purpose of the rest of this chapter is then to introduce the
+multigrid method and to prove its optimal convergence.
+175
+
+
+===== PDF PAGE 176 =====
+Chapter 10. Multigrid Methods
+10.1. Some Examples
+As a motivation to develop fast methods we now illustrate the performance of
+several iterative methods for diﬀerent model problems
+All tables in this section give the number of iterations needed to reduce the
+defect norm ∥b −Ax0∥with respect to the initial guess x0 by the factor 10−8.
+Run-times are given in seconds (Intel 2.5 GHz Core 2 Duo Processor, gcc-4.2
+with -O2 optimization). The maximum number of iterations allowed was 20000.
+Empty entries indicate that the required reduction was not reached within the
+maximum number of iterations.
+Example 10.1. Model problem A reads as follows:
+−∆u = (2d −4∥x∥2)e−∥x∥2
+in Ω= (0, 1)d,
+u = e−∥x∥2
+on ∂Ω
+with the exact solution
+u(x) = e−∥x∥2.
+This model problem illustrates the most basic case with constant coeﬃcients,
+Dirichlet boundary conditions and full regularity. The exact solution is illus-
+trated in ﬁgure 10.1.
+Table 10.1 shows results for seven diﬀerent methods. Jacobi, Gauß-Seidel,
+gradient method (steepest descent) and gradient method preconditioned by the
+symmetric Gauß-Seidel (SGS) method all have a number of iterations that is
+O(h−2). Consequently, the number of iterations increases by a factor of four
+with each mesh reﬁnement and the computation time increases by a factor of 16
+in 2d and 32(!) in 3d for each reﬁnement.
+The conjugate gradient method without preconditioning (CG) and precondi-
+tioned by SGS and incomplete LU-decomposition (ILU0) exhibit a number of
+iterations which is O(h−1) and therefore the iteration number doubles with each
+reﬁnement and the computation increases by factors 8 and 16 in 2d and 3d,
+respectively. It is clear that asymptotically as N →∞the overall computation
+time is dominated by the time it takes to solve the system of linear equations as
+all other parts of the ﬁnite element procedure scale linearly in N.
+□
+Example 10.2. Model problem B reads
+−∆u = f
+in Ω= (0, 1)d,
+u = g
+on ΓD,
+−∇u · ν = j
+on ΓN,
+176
+
+
+===== PDF PAGE 177 =====
+10.1. Some Examples
+.png
+Figure 10.1.: Solution of model problem A in two and three space dimensions.
+Table 10.1.: Results for model problem A.
+Model problem A, Q1, 2d
+h
+Jacobi
+Gauß-Seidel
+Gradient
+Grad+SGS
+CG
+CG+SGS
+CG+ILU0
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+1/8
+147
+75
+113
+24
+16
+10
+8
+1/16
+562
+0.01
+282
+431
+79
+35
+18
+14
+1/32
+2113
+0.15
+1056
+0.08
+1621
+0.06
+275
+0.03
+69
+34
+25
+1/64
+7886
+2.18
+3939
+1.10
+6059
+0.94
+1011
+0.43
+136
+0.03
+64
+0.03
+46
+0.01
+1/128
+14615
+16.1
+3741
+6.42
+266
+0.18
+120
+0.22
+87
+0.10
+1/256
+13823
+115
+521
+1.94
+217
+1.89
+162
+1.23
+Model problem A, P1, 2d
+h
+Jacobi
+Gauß-Seidel
+Gradient
+Grad+SGS
+CG
+CG+SGS
+CG+ILU0
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+1/8
+218
+112
+220
+51
+22
+13
+13
+1/16
+840
+0.02
+427
+854
+177
+48
+26
+24
+1/32
+3165
+0.21
+1607
+0.11
+3230
+0.12
+645
+0.07
+98
+49
+45
+1/64
+11820
+3.04
+6004
+1.57
+12096
+1.74
+2403
+0.95
+193
+0.03
+95
+0.04
+88
+0.02
+1/128
+8955
+13.9
+378
+0.24
+184
+0.30
+172
+0.20
+1/256
+739
+2.25
+359
+2.58
+336
+2.18
+Model problem A, Q1, 3d
+h
+Jacobi
+Gauß-Seidel
+Gradient
+Grad+SGS
+CG
+CG+SGS
+CG+ILU0
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+1/8
+98
+0.01
+51
+77
+18
+16
+9
+8
+1/16
+376
+0.24
+189
+0.12
+290
+0.10
+55
+0.05
+34
+0.01
+17
+0.02
+15
+0.01
+1/32
+1416
+10.1
+708
+4.87
+1087
+4.10
+187
+1.95
+67
+0.26
+32
+0.34
+27
+0.25
+1/64
+5287
+304.
+2641
+152.
+4063
+129.
+681
+65.6
+132
+4.43
+59
+5.86
+51
+4.18
+177
+
+
+===== PDF PAGE 178 =====
+Chapter 10. Multigrid Methods
+with
+f(x) =
+
+50 0.25 ≤x0, x1 ≤0.375
+0
+else
+,
+and
+ΓN = {x | x1 = 0 ∨x1 = 1 ∨(x0 = 1 ∧x1 > 1/2)}
+ΓD = ∂Ω\ ΓN,
+and
+g(x) = e−∥x−x0∥2,
+x0 = (1/2, . . . , 1/2)T,
+as well as
+j(x) =
+
+−5 x0 = 1 ∧x1 > 1/2
+0 else
+.
+This problem illustrates a case with mixed boundary conditions inducing a sin-
+gularity. The solution is illustrated in ﬁgure 10.2 and the corresponding results
+are given in table 10.2. The behavior is pretty much similar to model problem A.
+In particular there is no inﬂuence of the regularity of the solution on the number
+of iterations needed. This can be proven in general: The asymptotic convergence
+rate for a linear iterative method only depends on the iteration matrix but not
+on the right hand side. It may depend on the initial guess but this would be very
+lucky (one would have to choose a suitable initial guess in a subspace spanned
+by eigenvectors corresponding to small eigenvalues of the iteration matrix).
+□
+Example 10.3. Model problem C reads
+−∇· {k(x)∇u} = 1
+in Ω= (0, 1)d,
+u = 0
+on ∂Ω,
+with
+k(x) =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+20.0
+⌊x0/H⌋even, ⌊x1/H⌋even, ⌊x2/H⌋even
+0.002
+⌊x0/H⌋odd, ⌊x1/H⌋even, ⌊x2/H⌋even
+0.2
+⌊x0/H⌋even, ⌊x1/H⌋odd, ⌊x2/H⌋even
+2000.0 ⌊x0/H⌋odd, ⌊x1/H⌋odd, ⌊x2/H⌋even
+1000.0 ⌊x0/H⌋even, ⌊x1/H⌋even, ⌊x2/H⌋odd
+0.001
+⌊x0/H⌋odd, ⌊x1/H⌋even, ⌊x2/H⌋odd
+0.1
+⌊x0/H⌋even, ⌊x1/H⌋odd, ⌊x2/H⌋odd
+10.0
+⌊x0/H⌋odd, ⌊x1/H⌋odd, ⌊x2/H⌋odd
+.
+This model problem illustrates a case with highly variable diﬀusion coeﬃcient
+(in fact a coeﬃcient ﬁeld with cross-points leading to a solution with very low
+regularity).
+178
+
+
+===== PDF PAGE 179 =====
+10.1. Some Examples
+Figure 10.2.: Solution of model problem B in two and three space dimensions.
+Table 10.2.: Results for model problem B.
+Model problem B, Q1, 2d
+h
+Jacobi
+Gauß-Seidel
+Gradient
+Grad+SGS
+CG
+CG+SGS
+CG+ILU0
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+1/8
+456
+230
+424
+65
+32
+14
+11
+1/16
+1770
+0.07
+888
+0.02
+1504
+0.01
+237
+59
+24
+18
+1/32
+6720
+0.43
+3364
+0.21
+5436
+0.22
+877
+0.09
+112
+45
+32
+1/64
+12614
+3.20
+19895
+3.11
+3249
+1.28
+215
+0.04
+87
+0.04
+61
+0.02
+1/128
+12055
+18.8
+415
+0.28
+168
+0.27
+118
+0.13
+1/256
+806
+2.88
+328
+2.63
+231
+1.71
+Model problem B, P1, 2d
+h
+Jacobi
+Gauß-Seidel
+Gradient
+Grad+SGS
+CG
+CG+SGS
+CG+ILU0
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+1/8
+667
+338
+830
+138
+41
+18
+16
+1/16
+2619
+0.04
+1327
+0.02
+2969
+0.03
+525
+0.01
+82
+35
+32
+1/32
+10009
+0.60
+5075
+0.32
+10778
+0.40
+2017
+0.20
+159
+68
+62
+1/64
+19131
+4.57
+7637
+2.81
+306
+0.05
+133
+0.05
+124
+0.04
+1/128
+590
+0.36
+259
+0.39
+244
+0.28
+1/256
+1143
+3.45
+505
+3.47
+478
+3.08
+Model problem B, Q1, 3d
+h
+Jacobi
+Gauß-Seidel
+Gradient
+Grad+SGS
+CG
+CG+SGS
+CG+ILU0
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+1/8
+180
+0.01
+92
+176
+29
+29
+12
+10
+1/16
+694
+0.42
+349
+0.21
+596
+0.22
+95
+0.09
+54
+0.02
+22
+0.02
+19
+0.01
+1/32
+2622
+17.6
+1313
+8.74
+2126
+7.86
+343
+3.54
+102
+0.39
+42
+0.44
+35
+0.32
+1/64
+9813
+531.
+4908
+263.
+7747
+240.
+1269
+119.
+197
+6.42
+80
+7.70
+67
+5.40
+179
+
+
+===== PDF PAGE 180 =====
+Chapter 10. Multigrid Methods
+The solution for this model problem is illustrated in ﬁgure 10.3 and results
+are shown in table 10.3. In comparison to model problems A and B the iteration
+numbers are much higher. In fact, only the preconditioned conjugate gradient
+method (last two columns) is able to solve this model problem for reasonable
+mesh sizes. This illustrates that a robust and eﬃcient linear solver is crucial for
+the ﬁnite element method!
+□
+10.2. Smoothing Property of Richardson Iteration
+We want to solve
+Ax = b
+with symmetric and positive deﬁnite A. One of the simplest iterative methods
+is the so-called Richardson iteration given by
+xk+1 = xk + ω(b −Axk)
+which converges for ω < 2/λmax(A). Since A is s.p.d. we have the spectrum
+σ(A) = {λmin(A) = λ1, . . . , λN = λmax(A)}
+with the ordered eigenvalues 0 < λ1 ≤λ2 ≤. . . ≤λN.
+For the iteration error x −xk we have the recursion
+ek+1 = x −xk+1 = x −xk −ω(b −Axk) = (I −ωA)(x −xk) = (I −ωA)ek.
+M = I −ωA is the iteration matrix of Richardson’s method. Now let (λi, zi)
+be an eigenpair of A. Then
+Mzi = (I −ωA)zi = (1 −ωλi)zi .
+Since the zi form a basis of RN, any error ek can be written in this basis and we
+get
+Me = M
+N
+X
+i=1
+cizi =
+N
+X
+i=1
+ci(1 −ωλi)zi .
+Setting ω = 1/λN we observe for the reduction factor
+1 −ωλi = 1 −λi
+λN
+=
+
+small (→0) i large
+large
+(→1) i small .
+180
+
+
+===== PDF PAGE 181 =====
+10.2. Smoothing Property of Richardson Iteration
+Figure 10.3.: Solution of model problem C in two and three space dimensions.
+Table 10.3.: Results for model problem C.
+Model problem C, Q1, 2d
+h
+Jacobi
+Gauß-Seidel
+Gradient
+Grad+SGS
+CG
+CG+SGS
+CG+ILU0
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+1/8
+4665
+0.06
+2354
+0.01
+3334
+0.01
+724
+27
+17
+8
+1/16
+13573
+0.26
+4335
+0.12
+281
+38
+27
+1/32
+17512
+1.91
+1761
+0.08
+73
+52
+1/64
+8644
+1.48
+142
+0.06
+99
+0.03
+1/128
+282
+0.49
+196
+0.22
+1/256
+577
+4.82
+405
+2.96
+Model problem C, Q1, 3d
+h
+Jacobi
+Gauß-Seidel
+Gradient
+Grad+SGS
+CG
+CG+SGS
+CG+ILU0
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+IT
+Time
+1/8
+127
+0.01
+65
+96
+22
+21
+10
+8
+1/16
+1326
+0.83
+667
+0.42
+208
+0.20
+1179
+0.45
+32
+0.03
+23
+0.02
+1/32
+9966
+68.2
+4996
+34.8
+1425
+14.8
+8594
+32.9
+71
+0.76
+56
+0.51
+1/64
+8382
+792.
+151
+14.6
+124
+9.96
+181
+
+
+===== PDF PAGE 182 =====
+Chapter 10. Multigrid Methods
+Example 10.4. For a discretization of −u′′ = f with u(0) = u(1) = 0 using P1
+ﬁnite elements on an equidistant mesh we obtain the tridiagonal matrix (scaled
+by h):
+A = tridiag(−1, 2, −1)
+which has eigenvalues λi = 4 sin2(iπh/2), 1 ≤i < N, and corresponding eigen-
+vectors
+(zi)k = sin
+ k
+N iπ
+
+1 ≤i, k < N.
+These eigenvectors are illustrated for a low frequency i = 1 and a high fre-
+quency i = 7 (relative to N = 8) in the following ﬁgure:
+i = 1
+N = 8
+i = 7
+N = 8
+Whether sin(iπx) is a high or low frequency function depends on the mesh size
+h = 1/N.
+□
+A possible remedy of the problem is the following:
+• High frequency errors i > N/2 are damped eﬃciently by Richardson iter-
+ation.
+• Low frequency errors i ≤N/2 are damped slowly by Richardson iteration.
+• The transfer of low frequency errors to a coarser grid would make them
+appear more high frequent there and Richardson iteration would remove
+them there.
+The realization of this idea requires the representation of errors on a hierarchy
+of coarser grids as they are produced naturally by the reﬁnement algorithms:
+→A0x0 = b
+→A1x1 = b
+→A2x2 = b
+182
+
+
+===== PDF PAGE 183 =====
+10.3. Variational Multigrid
+10.3. Variational Multigrid
+Let Vh = span{ϕ1, . . . , ϕNh} be the discrete ﬁnite element space. The ﬁnite
+element ismorphism
+v = FE(x) =
+Nh
+X
+i=1
+xiϕi
+establishes a one-to-one correspondence between
+x ∈RNh ←→v ∈Vh.
+Below we will make use of the fact that multigrid components can be either
+interpreted in terms of matrices and vectors or function spaces and weak for-
+mulations. The derivation of the two- and multi-grid method in terms of the
+variational formulation is called variational multigrid.
+Consider two levels of mesh hierarchy obtained from hierarchic reﬁnement.
+T2h
+Th
+Then the corresponding ﬁnite element spaces are nested, i.e.
+V2h = P1(T2h) ⊂Vh = P1(Th).
+The two-grid method is then deﬁned as follows:
+1) Given uk
+h ∈Vh deﬁne uk,1
+h
+to be the ﬁnite element function obtained after
+ν-fold application of Richardson’s method. I.e. given that uk
+h = FE(xk
+h), set
+xk,0
+h
+= xk
+h,
+x
+k, i
+ν
+h
+= x
+k, i−1
+ν
+h
++ ω
+
+b −Ahx
+k, i−1
+ν
+h
+
+,
+1 ≤i ≤ν,
+and uk,1
+h
+= FE(xk,1
+h ).
+2) Apply “coarse grid correction” which means to solve the ﬁnite element prob-
+lem
+Find w ∈V2h :
+a(uk,1
+h + w, v) = l(v)
+∀v ∈V2h
+(10.1)
+and set uk+1
+h
+= uk,1
+h + w.
+183
+
+
+===== PDF PAGE 184 =====
+Chapter 10. Multigrid Methods
+The algebraic interpretation of the coarse grid correction step (10.1) is ob-
+tained by inserting a basis representation of the function spaces involved. Let us
+deﬁne the basis by Vh = span{ϕh
+1, . . . , ϕh
+Nh}, V2h = span{ϕ2h
+1 , . . . , ϕ2h
+N2h}. Since
+V2h ⊂Vh, there exist coeﬃcients rij such that:
+ϕ2h
+i
+=
+Nh
+X
+j=1
+rijϕh
+j,
+∀1 ≤i ≤N2h .
+(10.2)
+Now insert the basis representation into (10.1):
+a(uk,1
+h + w, v) = l(v)
+v ∈V2h
+⇔
+a(w, v) = l(v) −a(uk,1
+h , v)
+v ∈V2h
+⇔
+a
+ N2h
+X
+j=1
+yjϕ2h
+j , ϕ2h
+i
+!
+= l(ϕ2h
+i ) −a
+ Nh
+X
+n=1
+xk,1
+n ϕh
+n, ϕ2h
+i
+!
+1 ≤i ≤N2h
+⇔
+N2h
+X
+j=1
+yja(ϕ2h
+j , ϕ2h
+i ) = l
+ Nh
+X
+m=1
+rimϕh
+m
+!
+−a
+ Nh
+X
+n=1
+xk,1
+n ϕh
+n,
+Nh
+X
+m=1
+rimϕh
+m
+!
+=
+Nh
+X
+m=1
+rim
+"
+l(ϕh
+m) −
+Nh
+X
+n=1
+xk,1
+n a(ϕh
+n, ϕh
+m)
+#
+⇔
+A2hy = Rh
+2h(bh −Ahxk,1
+h ) .
+where the rectangular restriction matrix Rh
+2h is given by (Rh
+2h)ij = rij.
+This allows us now to formulate the two-grid method in an algebraic way.
+Algorithm 10.5 (Two-grid method). Denote the systems on the ﬁne grid by
+Ahxh = bh and on the coarse grid by A2hx2h = b2h. Let the current iterate xk
+h on
+the ﬁne grid be given. The following function computes the next iterate xk+1
+h
+.
+TGM(xk
+h)
+{
+xk,1
+h
+= xk
+h;
+for(κ = 1, . . . , ν) xk,1
+h
+= xk,1
+h + ω(bh −Ahxk,1
+h ); //Pre -smoothing
+dh = bh −Ahxk,1
+h ; // Calculate defect
+d2h = Rh
+2hdh; // Restriction
+y2h = A−1
+2h d2h; // Coarse grid solve
+yh = (Rh
+2h)Ty2h; // Prolongation
+xk,2
+h
+= xk,1
+h + yh; // Coarse grid correction
+return xk,2
+h ;
+}
+□
+184
+
+
+===== PDF PAGE 185 =====
+10.3. Variational Multigrid
+In the multigrid method the exact coarse grid solve is replaced by a recursive
+application of the method. The systems on the levels 0 (coarsest) to J (ﬁnest)
+are now denoted by Ajxj = bj.
+Algorithm 10.6 (Multigrid method). Let ν1, ν2, γ ∈N be given parameters.
+Then the following function computes the new iterate xk+1
+j
+on mesh level j:
+MGM(j, xk
+j, bj)
+{
+if (j == 0) { xk
+j = A−1
+j bj; return xk
+j ; }
+xk,1
+j
+= xk
+j ;
+for(κ = 1, . . . , ν1) xk,1
+j
+= xk,1
+j
++ ω(bj −Ajxk,1
+j ); //Pre -smoothing
+dj = bj −Ajxk,1
+j ; // Calculate defect
+dj−1 = Rj
+j−1dj; // Restriction
+xj−1 = 0; // Initial value for coarse grid
+if (j == 1) ¯γ = 1; else ¯γ = γ;
+for (i = 1, . . . , ¯γ)
+xj−1 = MGM(j −1, xj−1, dj−1); // Approximate coarse grid solve
+yj = (Rj
+j−1)Txj−1; // Prolongation
+xk,2
+j
+= xk,1
+j
++ yj; // Coarse grid correction
+xk,3
+j
+= xk,2
+j ;
+for (κ = 1, . . . , ν2) xk,3
+j
+= xk,3
+j
++ ω(bj −Ajxk,3
+j ); //Post -smoothing
+return xk,3
+h ;
+}
+□
+The parameter γ is called the cycle form parameter. For γ = 1 the call of
+MGM on level j carries out the following steps:
+j
+ν1
+−→
+ν2
+−→
+R↘
+P↗
+j −1
+ν1
+−→
+ν2
+−→
+...
+...
+1
+ν1
+−→
+ν2
+−→
+R↘
+P↗
+0
+−→
+A−1
+0
+Because of this form γ = 1 is called the V -cycle. Setting γ = 2 results in the
+following sequence of steps:
+185
+
+
+===== PDF PAGE 186 =====
+Chapter 10. Multigrid Methods
+j
+ν1
+−→
+ν2
+−→
+R↘
+P↗
+j −1
+ν1
+−→
+ν2
+−→
+ν1
+−→
+ν2
+−→
+...
+...
+...
+...
+1
+ν1
+−→
+ν2
+−→
+ν1
+−→
+ν2
+−→
+R↘
+P↗
+R↘
+P↗
+0
+−→
+A−1
+0
+−→
+A−1
+0
+This cycle is therefore called the W-cycle.
+10.4. Convergence Analysis
+There are many diﬀerent proofs of convergence for the multigrid method. We
+concentrate here on the ﬁrst rigorous multigrid proof due to W. Hackbusch, see
+e.g. the seminal book Hackbusch [1985]. The essence of this proof is to establish
+the optimal convergence of the two-grid method. From two-grid convergence the
+multigrid convergence for the W-cycle can be obtained. The advantage of this
+proof is that it is rather simple and it shows an improvement of the convergence
+factor with the number of smoothing steps. It has also several disadvantages: it
+does not show V -cycle convergence, it requires H2-regularity and it requires that
+the number of smoothing steps is large enough. In fact non of these requirements
+is actually necessary for the method to work optimally.
+Given xk
+h we obtain the following error recursion for the smoothing step
+ek,1 = xh −xk,1
+h
+= (Ih −ωAh)ν1(xh −xk
+h) = Sν1
+h ek
+and for the coarse grid correction step:
+ek+1 = xh −xk+1
+h
+= xh −
+
+xk,1
+h + (Rh
+2h)TA−1
+2h Rh
+2h(bh −Ahxk,1
+h )
+
+= ek,1 −(Rh
+2h)TA−1
+2h Rh
+2hAhek,1
+=
+Ih −(Rh
+2h)TA−1
+2h Rh
+2hAh
+
+ek,1.
+The complete iteration matrix of one step of the two-grid method is:
+ek+1 =
+Ih −(Rh
+2h)TA−1
+2h Rh
+2hAh
+
+Sν1
+h ek
+=
+A−1
+h −(Rh
+2h)TA−1
+2h Rh
+2h
+
+AhSν1
+h ek
+Taking appropriate norms and splitting up the operator into two parts we get
+∥ek+1∥≤∥A−1
+h −(Rh
+2h)TA−1
+2h Rh
+2h∥
+|
+{z
+}
+“approximation property”
+∥AhSν1
+h ∥
+|
+{z
+}
+“smoothing property”
+∥ek∥.
+186
+
+
+===== PDF PAGE 187 =====
+10.4. Convergence Analysis
+It turns out that the appropriate norm for the error is the Euclidean norm. The
+norm of the operators is important as well and there is some choice. Observe
+that in the deﬁnition of an operator norm two norms can be chosen:
+∥A∥s→t = sup
+x̸=0
+∥Ax∥t
+∥x∥s
+.
+This implies ∥Ax∥t ≤∥A∥s→t∥x∥s for any x. When A is an iteration matrix
+it usually makes no sense to chose s ̸= t since we want to apply that estimate
+recursively but if we have a product of operators AB then one can use ∥ABx∥s ≤
+∥A∥t→s∥B∥s→t∥x∥s, which is what we do below with a careful choice of norms.
+A scale of norms
+Since A is s.p.d. we can deﬁne the following norms:
+|||x|||s := (x, Asx)
+1
+2
+s = 0, 1, 2
+(for s = 0, 2 s.p.d. is not necessary). In detail:
+s = 0
+|||x|||0 = (x, x)
+1
+2
+Euclidean norm
+s = 1
+|||x|||1 = (x, Ax)
+1
+2
+Energy norm
+s = 2
+|||x|||2 = (Ax, Ax)
+1
+2
+Defect norm
+The last name stems from the fact
+|||x −xk|||2
+2 = (A(x −xk), A(x −xk)) = ∥b −Axk∥2
+|
+{z
+}
+Euclidean norm!
+.
+The norm |||.|||s can be extended to the case s ∈R as follows: Since A is
+s.p.d. there exists unitary Q (i.e. QT = Q−1) such that A = QTDQ, D =
+diag(λ1, . . . , λN), λi ∈σ(A). Then set As = QTDsQ with Ds := diag(λs
+1, . . . , λs
+N).
+So we get:
+|||x|||s = (x, Asx)
+1
+2 = (x, QTDsQx)
+1
+2
+= (x, QTD
+s
+2QQTD
+s
+2Qx)
+1
+2 = (QTD
+s
+2Qx, QTD
+s
+2Qx)
+1
+2
+= ∥A
+s
+2x∥.
+We now relate the Sobolev norms ∥vh∥0,Ωand ∥vh∥1,Ωof a ﬁnite element
+function with the corresponding norms of its coeﬃcient vector |||x|||0 and |||x|||1.
+From |||x|||2
+1 = (x, Ax) = a(vh, vh), coercivity and continuity we conclude:
+α∥vh∥1,Ω≤|||x|||2
+1 = a(vh, vh) ≤C∥vh∥2
+1,Ω
+(10.3)
+with α, C independent of h. Note that (10.3) is independent of the basis of Vh.
+187
+
+
+===== PDF PAGE 188 =====
+Chapter 10. Multigrid Methods
+Lemma 10.7. Let Φh = {ϕ1, . . . , ϕN} be the P1 Lagrange-basis for Vh on a
+family of uniform and shape regular triangulations and assume vh = FE(x).
+Then there exist constants c1, c2 independent of h, but dependent on the mesh
+Th such that
+c1h
+n
+2 |||x|||0 ≤∥v∥0,Ω≤c2h
+n
+2 |||x|||0
+(10.4)
+with n the space dimension.
+Proof :
+a) Let ˆSn be the n-dimensional reference simplex. Set ˆv = Pn
+i=0 xi ˆϕi with ˆϕi
+the basis function on ˆSn. Then
+∥ˆu∥2
+0, ˆSn = (ˆu, ˆu)0, ˆSn =
+ n
+X
+i=0
+xi ˆϕi,
+n
+X
+j=0
+xj ˆϕj
+!
+0, ˆSn
+=
+n
+X
+i=0
+n
+X
+j=0
+xixj ( ˆϕi, ˆϕj)0, ˆSn
+|
+{z
+}
+=: ˆ
+Mij
+= (x, ˆ
+Mx).
+ˆ
+M is the s.p.d. mass matrix on the reference simplex. Since ˆ
+M is s.p.d. we
+have
+λmin( ˆ
+M)(x, x) ≤(x, ˆ
+Mx) ≤λmax( ˆ
+M)(x, x)
+and therefore
+λmin( ˆ
+M)∥x∥2 ≤∥ˆu∥2
+0, ˆSn = (x, ˆ
+Mx) ≤λmax( ˆ
+M)∥x∥2 .
+b) On the transformed element we get
+∥u∥2
+0,t =
+Z
+t
+u2(x) dx =
+Z
+ˆSn
+u2(µt(ξ))| det Bt| dξ
+= | det Bt|
+Z
+ˆSn
+ˆu2(ξ) dξ = | det Bt|∥ˆu∥2
+0, ˆSn .
+c) Observing c1hn ≤| det Bt| ≤c2hn due to uniformity and shape regularity we
+obtain
+∥u∥2
+0,Ω=
+X
+t∈Th
+∥u∥2
+0,t =
+X
+t∈Th
+| det Bt|∥ˆu∥2
+0, ˆSn ≤c2hnλmax( ˆ
+M)
+X
+t∈Th
+∥xt∥2
+≤¯Chn|||x|||2
+0 .
+188
+
+
+===== PDF PAGE 189 =====
+10.4. Convergence Analysis
+Here we used that x2
+t contributes to ﬁnitely many t ∈Th. Similarly we get
+for the lower bound
+∥u∥2
+0,Ω= . . . ≥c1hnλmin( ˆ
+M)
+X
+t∈Th
+∥xt∥2 ≥C|||x|||2
+0 .
+□
+Approximation and Smoothing Property
+Lemma 10.8 (Approximation property). Let Ahxh = bh be the discretized
+variational problem on the ﬁne grid. xk,1
+h
+denotes the iterate after smoothing
+and xk,2
+h
+denotes the iterate after coarse grid correction (cf. Algorithm 10.5).
+Provided the mesh is uniform and shape-regular and the variational problem is
+H2-regular there exists a constant c such that
+|||xh −xk,2
+h |||0 ≤ch2−n|||xh −xk,1
+h |||2 .
+Proof :
+a) From the proof of Theorem 8.18 (L2 error estimate) we conclude (requires
+H2-regularity)
+∥u −uh∥0,Ω≤Ch∥u −uh∥1,Ω.
+(Just omit the last line in the last derivation).
+b) We have the Galerkin orthogonality property for the error on the coarse grid:
+a(uk,1
+h + w2h, v) = l(v)
+∀v ∈V2h
+(uk,1
+h
+= FE(xk,1
+h ))
+a(uh, v) = l(v)
+∀v ∈Vh
+(uh = FE(xh))
+⇒a(uh −uk,1
+h −w2h, v) = 0
+∀v ∈V2h
+With that we prove:
+α∥uh −uk,2
+h ∥2
+1,Ω= α∥uh −(uk,1
+h + w2h)∥2
+1,Ω
+≤a(uh −uk,1
+h −w2h, uh −uk,1
+h −w2h)
+(coercivity)
+= a(uh −uk,1
+h −w2h, uh −uk,1
+h )
+(orth.)
+= (xh −xk,1
+h −(Rh
+2h)Ty2h, Ah(xh −xk,1
+h ))
+(goto coeﬀ.)
+≤|||xh −xk,1
+h −(Rh
+2h)Ty2h|||0 |||xh −xk,1
+h |||2 (C.S.)
+≤ch−n
+2 ∥uh −uk,1
+h −w2h∥0,Ω|||xh −xk,1
+h |||2
+(go back)
+≤ch−n
+2 h∥uh −uk,1
+h −w2h∥1,Ω|||xh −xk,1
+h |||2
+(L2-est.)
+≤ch−n
+2 h∥uh −uk,2
+h ∥1,Ω|||xh −xk,1
+h |||2 .
+189
+
+
+===== PDF PAGE 190 =====
+Chapter 10. Multigrid Methods
+In the second to last step the L2-estimate has been used for the problem
+a(w2h, v) = a(uh −uk,1
+h , v) ∀v ∈V2h which has the exact solution uh −uk,1
+h .
+Dividing by ∥uh −uk,2
+h ∥1,Ωand α results in
+∥uh −uk,2
+h ∥1,Ω≤Ch1−n
+2 |||xh −xk,1
+h |||2 .
+Note that this estimate is not robust with respect to the coercivity constant
+α which has been absorbed into C.
+c) Finally, we obtain
+|||xh −xk,2
+h |||0 ≤ch−n
+2 ∥uh −uk,2
+h ∥0,Ω
+(use 10.7)
+= ch−n
+2 ∥uh −uk,1
+h −w2h∥0,Ω
+(deﬁnition of uk,2
+h )
+≤ch−n
+2 h∥uh −uk,2
+h ∥1,Ω
+(use L2 estimate once)
+≤ch2−n|||xh −xk,1
+h |||2 .
+use b)
+□
+Lemma 10.9 (Smoothing property). Let Ah be symmetric positive deﬁnite.
+The Richardson iteration xk+1
+h
+= xk
+h + ω(bh −Ahxk
+h) with ω = 1/λmax(Ah)
+satisﬁes:
+|||xh −xν
+h|||2 ≤λmax(Ah)
+ν
+|||xh −x0
+h|||0 .
+Proof : With eν
+h := xh −xν
+h
+|||eν
+h|||2 = ∥Aheν
+h∥= ∥Ah(I −ωAh)νe0
+h∥
+(Deﬁnitions)
+= ∥QTDQ(QTQ −ωQTDQ)νe0
+h∥
+(A s.p.d.)
+= ∥QTDQ(QT(I −ωD)Q)νe0
+h∥
+= ∥QTDQQT(I −ωD)Q . . . QT(I −ωD)Qe0
+h∥
+= ∥QTD(I −ωD)νQe0
+h∥
+≤∥QT∥∥D(I −ωD)ν∥∥Q∥∥e0
+h∥
+(∥Q∥= 1 )
+= ∥D(I −ωD)ν∥∥e0
+h∥
+∥Q∥= 1 follows from ∥Qz∥2 = (Qz, Qz) = (z, QTQz) = (z, z) = ∥z∥2 and
+supx̸=0
+∥Qz∥
+∥z∥= supx̸=0
+∥z∥
+∥z∥= 1.
+Now since D = diag(λi) with λi > 0 we have
+D(I −ωD)ν = diag(λi(1 −ωλi)ν)
+190
+
+
+===== PDF PAGE 191 =====
+10.4. Convergence Analysis
+and
+∥D(I −ωD)ν∥= max
+i=1,...,N λi(1 −ωλi)ν
+= max
+i=1,...,N λmax
+λi
+λmax
+(1 −
+λi
+λmax
+)ν
+(ω =
+1
+λmax
+)
+≤λmax max
+ξ∈[0,1] ξ(1 −ξ)ν
+= λmax
+1
+1 + ν(
+ν
+ν + 1)ν
+≤λmax
+ν
+□
+Two- and Multigrid Convergence
+Theorem 10.10. Assume that the variational problem has H2-regularity. Then
+the two-grid method with ν steps of Richardson iteration as smoother satisﬁes
+the estimate
+|||xh −xk+1
+h
+|||0 ≤c
+ν|||xh −x0
+h|||0 .
+This says, that for ν large enough, the two-grid method converges independent
+of of the mesh size h.
+Proof : Combine Lemma 10.8 and Lemma 10.9 to get
+|||xh −xk+1
+h
+|||0 ≤ch2−nλmax(Ah)
+ν
+|||xh −xk
+h|||0 .
+It remains to prove an estimate for the maximum eigenvalue λmax(Ah). The
+entries of the stiﬀness matrix can be estimated by
+(Ah)ij = a(ϕj, ϕi) =
+Z
+Ω
+(K∇ϕj) · ∇ϕi dx
+≤c
+Z
+supp ϕj∩supp ϕi
+h−1h−1 ≤chn−2
+(Ω⊂Rn) .
+Here the essential property | supp ϕi| = O(hn
+t ) of the Lagrange basis functions
+enters. Using the Gerschgorin circle theorem we obtain λmax(Ah) ≤Chn−2.
+Finally
+ch2−nλmax(Ah)
+ν
+≤C
+ν .
+□
+191
+
+
+===== PDF PAGE 192 =====
+Chapter 10. Multigrid Methods
+Now W-cycle multigrid convergence follows from two-grid convergence by an
+induction argument.
+Lemma 10.11. Let ρ1 be the convergence rate of the two-grid method and ρl
+the convergence rate of a multigrid method with with cycle parameter γ and
+l ≥2 levels. Then we have the recursive relation
+ρl ≤ρ1 + (1 + ρ1)ργ
+l−1 .
+Proof : Braess [2003]. Denote by ˆuk,2
+l
+= uk,1
+l + ˆwl−1 the solution after exact coarse
+grid correction (i.e. the two-grid method on level l) and by uk,2
+l
+= uk,1
+l
++ wγ
+l−1
+the solution after γ steps of multigrid on level l −1.
+Then ˆwl−1 is given by
+a( ˆwl−1, v) = l(v) −a(uk,1
+h , v)
+∀v ∈Vl−1
+and wγ
+l−1 is an approximate solution of this system using γ steps of the MG
+method on level l −1 with initial value w0
+l−1 = 0. So
+∥ˆwl−1 −wγ
+l−1∥0,Ω≤ργ
+l−1∥ˆwl−1 −w0
+l−1
+|{z}
+=0
+∥0,Ω= ργ
+l−1∥ˆwl−1∥0,Ω
+(∗)
+= ργ
+l−1∥ˆuk,2
+l
+−uk,1
+l ∥0,Ω.
+Then we have:
+∥ul−uk+1
+l
+∥0,Ω≤∥ul −uk,2
+l ∥0,Ω
+(conv. smoother)
+= ∥ul −ˆuk,2
+l
++ ˆuk,2
+l
+−uk,2
+l ∥0,Ω
+≤∥ul −ˆuk,2
+l ∥0,Ω+ ∥ˆuk,2
+l
+−uk,2
+l ∥0,Ω
+(tri. ineq.)
+≤ρ1∥ul −uk
+l ∥0,Ω+ ∥uk,1
+l
++ ˆwl−1 −uk,1
+l
+−wγ
+l−1∥0,Ω
+= ρ1∥ul −uk
+l ∥0,Ω+ ∥ˆwl−1 −wγ
+l−1∥0,Ω
+≤ρ1∥ul −uk
+l ∥0,Ω+ ργ
+l−1∥ˆuk,2
+l
+−uk,1
+l ∥0,Ω
+(use (∗))
+= ρ1∥ul −uk
+l ∥0,Ω+ ργ
+l−1∥ˆuk,2
+l
+−ul
+|
+{z
+}
+two-grid
++ ul −uk,1
+l
+|
+{z
+}
+smoothing
+∥0,Ω
+≤ρ1∥ul −uk
+l ∥0,Ω+ ργ
+l−1ρ1∥u −uk
+l ∥0,Ω+ ργ
+l−1∥ul −uk
+l ∥0,Ω(conv. smoother)
+= [ρ1 + ργ
+l−1(1 + ρ1)]∥ul −uk
+l ∥0,Ω
+□
+This Lemma proves the following Theorem.
+192
+
+
+===== PDF PAGE 193 =====
+10.4. Convergence Analysis
+Theorem 10.12. If ρ1 ≤1
+5 and γ = 2 then ρl ≤1
+3 for l ≥1.
+Proof : By induction.
+l = 1 :
+ρl ≤1
+5 ≤1
+3
+✓
+l −1 →l :
+ρl ≤1
+5 + (1 + 1
+5)(1
+3)2 = 1
+5 + 6
+5
+1
+9 = 9 + 6
+45
+= 1
+3 .
+□
+Remark 10.13. Another interpretation of Lemma 10.11 is
+ρl = f(ρl−1) = ρ1 + (1 + ρ1)ργ
+l−1 .
+This ﬁxed-point iteration converges when f is a contraction. For γ = 1 we get
+|f(x) −f(y)| ≤|ρ1 + (1 + ρ1)x −ρ1 −(1 + ρ1)y| = |1 + ρ1||x −y| .
+But since 1 + ρ1 > 1 f is no contraction for γ = 1.
+□
+Finally, the optimal computational complexity requires that the work per
+iteration scales only linearly with the number of degrees of freedom.
+Lemma 10.14. Let Nl be the number of unknowns on level l using P1 ﬁnite
+elements. Then the amount of arithmetic operations Al on level l is
+Al = O(Nl) .
+Proof: For uniform reﬁnement we have
+Nl
+Nl−1 = ω = 2n (for l →∞). Then
+Al ≤CNl + γCNl−1 + γ2CNl−2 + . . . + γlCN0
+= CNl + γC Nl
+ω + γ2C Nl
+ω2 + . . . + γlC Nl
+ωl
+≤CNl(1 + γ
+ω + (γ
+ω)2 + . . .) .
+The geometric series converges for γ < ω ⇔γ
+2n < 1 ⇔γ < 2n.
+□
+193

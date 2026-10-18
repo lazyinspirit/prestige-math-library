@@ -1,0 +1,836 @@
+[
+  {
+    "order": 2576,
+    "id": "randomized-low-rank-approximation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Randomized low-rank approximation",
+    "companion": "randomized-low-rank-approximation-examples",
+    "requires": [
+      "sparse-matrix-models-and-kernel-costs",
+      "computed-singular-values-and-rank-revealing-factorizations",
+      "conjugate-families-and-posterior-prediction"
+    ],
+    "items": [
+      {
+        "id": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+        "kind": "definition",
+        "title": "Standard real and normalized complex Gaussian matrix laws",
+        "statement": "Assume the Axiom of Countable Choice so that the repository's Lebesgue measure\non each finite-dimensional real coordinate space is a measure. A **standard\nreal Gaussian scalar** has Lebesgue density\n$$\\varphi_R(x)=(2\\pi)^{-1/2}e^{-x^2/2}.$$\nA **normalized complex Gaussian scalar** is $z=(x+iy)/\\sqrt2$ for independent\nstandard real Gaussian scalars $x,y$; its density on $\\mathbb C\\simeq\\mathbb\nR^2$ is $\\varphi_C(z)=\\pi^{-1}e^{-|z|^2}$ and $\\mathbb E|z|^2=1$.\n\nFor $F=\\mathbb R$ or $\\mathbb C$, an **iid standard Gaussian matrix** in\n$F^{a\\times b}$ has independent entries with the corresponding scalar law.\nAll its expectations are finite-dimensional Lebesgue integrals against the\nproduct density. Independence means this product-density factorization.\nThe normalized complex convention is fixed throughout; it is not the\nunnormalized law $x+iy$.",
+        "deps": [
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, \u00a710.1",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a7\u00a711.1, 11.4",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-gaussian-matrix-law-normalization-and-second-moments"
+        ]
+      },
+      {
+        "id": "lem-gaussian-matrix-law-normalization-and-second-moments",
+        "kind": "lemma",
+        "title": "Normalization and second moments of the Gaussian matrix laws",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "lem-gaussian-density-integrals-for-supplied-length-measures",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Algorithms 4.1 and 4.4 and Gaussian conventions in section 10.1; local prerequisite proof",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. The scalar and finite product densities in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]] have total\nmass one. A real entry has mean zero and second moment one; a normalized\ncomplex entry has mean zero and $\\mathbb E|z|^2=1$. The image of two independent\nreal entries under $(x,y)\\mapsto(x+iy)/\\sqrt2$ has density\n$\\pi^{-1}e^{-|z|^2}$. These facts justify the probability laws in that definition."
+      },
+      {
+        "id": "lem-orthogonal-projector-power-error-inequality",
+        "kind": "lemma",
+        "title": "Orthogonal-projector power error inequality",
+        "statement": "For finite real or complex A, orthogonal projector P, and integer q>=0, ||(I-P)A||2 <= ||(I-P)(AA*)^q A||2^(1/(2q+1)).",
+        "deps": [
+          "thm-singular-value-decomposition",
+          "thm-non-negative-operator-characterisations",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-jensen-inequality-for-expectation"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Proposition 8.6 and Theorem 9.2",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, Lemma 11.8",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-gaussian-randomized-range-finder",
+        "kind": "algorithm",
+        "title": "Exact Gaussian randomized range finder",
+        "statement": "Input a fixed matrix $A\\in F^{m\\times n}$, a positive integer sketch width $\\ell$,\nand a Gaussian draw primitive as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. Draw\n$\\Omega\\in F^{n\\times\\ell}$ with iid entries in the chosen field and form\n$Y=A\\Omega$. Select $Q$ deterministically by scanning columns of $Y$ in\norder, subtracting projections onto already retained columns, skipping zero\nresiduals, and normalizing each nonzero residual. In the complex case fix each\nphase by making its first nonzero coordinate positive real. Return this\northonormal basis $Q$ and the approximation $\\widehat A=QQ^*A$.\n\nEmpty ranges return the empty basis. All operations use exact arithmetic.\nNo truncated rank-$k$ factorization, finite-precision stability result, or\ndeterministic error certificate is part of the procedure.",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Algorithm 4.1",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a711.1.1",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-finite-scan-range-basis-is-borel"
+        ]
+      },
+      {
+        "id": "lem-finite-scan-range-basis-is-borel",
+        "kind": "lemma",
+        "title": "Borel measurability and range correctness of the finite scan",
+        "deps": [
+          "alg-gaussian-randomized-range-finder",
+          "cor-continuous-functions-are-borel-measurable"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Algorithms 4.1 and 4.4 and Gaussian conventions in section 10.1; local prerequisite proof",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Apply the column scan specified in\n[[alg-gaussian-randomized-range-finder]] to any $Y\\in F^{m\\times s}$,\n$F\\in\\{\\mathbb R,\\mathbb C\\}$, allowing $s=0$. It terminates and returns an\northonormal basis $Q$ of $\\operatorname{Ran}(Y)$. On each output-rank stratum\n$Q$ is Borel measurable, with the variable-size output interpreted in the\nfinite disjoint union of the matrix spaces $F^{m\\times r}$. The projector\n$QQ^*$ is a Borel function of $Y$. Consequently the range-finder projector\nand $\\|(I-QQ^*)A\\|_2$ are Borel functions of the sketch for fixed $A$."
+      },
+      {
+        "id": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+        "kind": "lemma",
+        "title": "Orthogonal and unitary invariance of Gaussian matrix blocks",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $G\\in F^{a\\times b}$ have the iid Gaussian law of\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. If $U,V$\nare compatible orthogonal matrices for $F=\\mathbb R$ or unitary matrices for\n$F=\\mathbb C$, then $U^*GV$ has the same iid law as $G$. In particular, if\n$W\\in F^{n\\times n}$ is orthogonal/unitary and $\\Omega\\in F^{n\\times\\ell}$\nis iid Gaussian, then any two disjoint row blocks of $W^*\\Omega$ are\nindependent standard Gaussian matrices.",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "def-countable-choice",
+          "cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, \u00a710.1",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a711.4.2",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-real-gaussian-increment-comparison",
+        "kind": "lemma",
+        "title": "Finite Gaussian increment comparison",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $N\\ge1$ be an integer, and let $(X_i)_{i=1}^N$ and $(Y_i)_{i=1}^N$ be\nfinite centered real Gaussian families. If $\\mathbb E(X_i-X_j)^2\\le\\mathbb E(Y_i-Y_j)^2$ for every\n$i,j$, then $\\mathbb E\\max_iX_i\\le\\mathbb E\\max_iY_i$.\nHere a finite centered real Gaussian family means a finite real vector that\nis a real-linear image of finitely many independent standard real Gaussian\nscalars.",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "def-countable-choice",
+          "thm-differentiation-under-dominated-improper-multiple-integrals",
+          "thm-dominated-convergence",
+          "thm-integration-by-parts",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. Chevet, S\u00e9ries de variables al\u00e9atoires gaussiennes..., \u00a72",
+              "url": "https://www.numdam.org/item/SAF_1977-1978____A14_0.pdf"
+            },
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Proposition A.2",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-randomized-power-subspace-iteration-with-qr",
+        "kind": "algorithm",
+        "title": "Reorthogonalized randomized power subspace iteration",
+        "statement": "Input $F\\in\\{\\mathbb R,\\mathbb C\\}$, a fixed matrix $A\\in F^{m\\times n}$,\nintegers $\\ell\\ge1$ and $q\\ge0$, and draw $\\Omega\\in F^{n\\times\\ell}$ with\niid standard real or normalized complex Gaussian entries as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. Put $Q_0$\nequal to the orthonormal basis\nselected by the finite scan in [[alg-gaussian-randomized-range-finder]] for\n$\\operatorname{Ran}(A\\Omega)$. For $j=1,\\ldots,q$, form $A^*Q_{j-1}$ and\nselect $\\widetilde Q_j$ from its range by the same scan, then form\n$A\\widetilde Q_j$ and select $Q_j$ from its range by that scan. Return $Q_q$.\nThus exact QR/range orthogonalization follows each application of $A^*$ and\n$A$; empty or rank-deficient ranges return bases of their actual ranges. The procedure is defined in exact arithmetic and makes no\nfinite-precision error guarantee.",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "alg-gaussian-randomized-range-finder"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Algorithms 4.3\u20134.4",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a711.6",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-power-rangefinder-projector-is-borel"
+        ]
+      },
+      {
+        "id": "lem-power-rangefinder-projector-is-borel",
+        "kind": "lemma",
+        "title": "Measurability of the reorthogonalized power range finder",
+        "deps": [
+          "alg-randomized-power-subspace-iteration-with-qr",
+          "lem-finite-scan-range-basis-is-borel"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Algorithms 4.1 and 4.4 and Gaussian conventions in section 10.1; local prerequisite proof",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. For fixed $A\\in F^{m\\times n}$, sketch width\n$\\ell\\ge1$, and integer $q\\ge0$, the basis returned by\n[[alg-randomized-power-subspace-iteration-with-qr]] is Borel measurable on\neach output-rank stratum. Its projector and spectral error on $A$ are Borel\nfunctions of $\\Omega$, including rank-deficient and zero samples."
+      },
+      {
+        "id": "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+        "kind": "lemma",
+        "title": "A wide Gaussian matrix has full row rank almost surely",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $k\\ge1$, $\\ell>k$, and let $G\\in F^{k\\times\\ell}$ have iid standard\nreal Gaussian or normalized complex Gaussian entries. Then\n$\\operatorname{rank}(G)=k$ almost surely.",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, \u00a710.2",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a711.4.2",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-real-scaled-gaussian-product-expectation",
+        "kind": "lemma",
+        "title": "Real scaled-Gaussian spectral and Frobenius product bounds",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $a,r,s,b$ be positive integers, let $S\\in\\mathbb R^{a\\times r}$ and $T\\in\\mathbb R^{s\\times b}$ be fixed,\nand let $G\\in\\mathbb R^{r\\times s}$ have independent standard real Gaussian\nentries. Then\n$$\\mathbb E\\|SGT\\|_F^2=\\|S\\|_F^2\\|T\\|_F^2,\\qquad \\mathbb E\\|SGT\\|_2\\le\\|S\\|_2\\|T\\|_F+\\|S\\|_F\\|T\\|_2.$$\nThe spectral estimate in this lemma is real-field only.",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "lem-finite-real-gaussian-increment-comparison",
+          "thm-jensen-inequality-for-expectation",
+          "def-countable-choice",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Proposition 10.1 and Appendix A.1",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "S. Chevet, S\u00e9ries de variables al\u00e9atoires gaussiennes..., Lemma 3.1",
+              "url": "https://www.numdam.org/item/SAF_1977-1978____A14_0.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-randomized-rangefinder-deterministic-svd-partition-error",
+        "kind": "lemma",
+        "title": "Deterministic SVD-partition error bound for the range finder",
+        "statement": "When the top k sketch block Omega1 has full row rank, ||(I-QQ*)A||2 <= sigma_(k+1)+||Sigma2 Omega2 Omega1\u2020||2, including rank(A)<k.",
+        "deps": [
+          "alg-gaussian-randomized-range-finder",
+          "thm-singular-value-decomposition",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Theorem 9.1",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, Theorem 11.4",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-randomized-power-rangefinder-error-transfer",
+        "kind": "theorem",
+        "title": "Power-rangefinder error transfer under finite expected powered error",
+        "statement": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, let $(\\Xi,\\mathcal A,\\mathbb P)$ be a\nprobability space, let $A\\in F^{m\\times n}$ be fixed, let $\\ell\\ge1$ be an\ninteger, and let $q\\ge0$ be an integer. Let $\\Omega:\\Xi\\to F^{n\\times\\ell}$\nbe measurable and let $P:\\Xi\\to F^{m\\times m}$ be a measurable orthogonal\nprojector-valued map whose value $P(\\xi)$ projects onto the output range of the procedure in\n[[alg-randomized-power-subspace-iteration-with-qr]] applied to $A,\\Omega(\\xi),q$.\nAssume\n$$\\mathbb E\\|(I-P)(AA^*)^qA\\|_2<\\infty,$$\nwhere expectation is with respect to $\\mathbb P$. Then\n$$\\mathbb E\\|(I-P)A\\|_2\\le \\left(\\mathbb E\\|(I-P)(AA^*)^qA\\|_2\\right)^{1/(2q+1)}.$$\nThis is a transfer inequality; it assumes the powered error expectation has\nalready been bounded.",
+        "deps": [
+          "alg-randomized-power-subspace-iteration-with-qr",
+          "lem-orthogonal-projector-power-error-inequality",
+          "thm-jensen-inequality-for-expectation"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Theorem 9.2",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Lemma 11.8",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+        "kind": "lemma",
+        "title": "Exact Frobenius moments of wide Gaussian pseudoinverses",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $k\\ge1$ and let $p$ be a positive integer, with $p\\ge2$ over $\\mathbb R$\nand $p\\ge1$ over normalized $\\mathbb C$. Let $G\\in F^{k\\times(k+p)}$ have iid entries as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. Then $G$\nhas full row rank almost surely and\n$$\\mathbb E\\|G^\\dagger\\|_F^2= \\begin{cases}k/(p-1),&F=\\mathbb R,\\\\k/p,&F=\\mathbb C.\\end{cases}$$\nThe complex entry convention is variance one, $\\mathbb E|G_{ij}|^2=1$. Write\n$G^\\dagger=G^+$ for the Moore\u2013Penrose pseudoinverse of\n[[def-moore-penrose-pseudoinverse]]. On the full-row-rank event,\n$$G^\\dagger=G^*(GG^*)^{-1},\\qquad (G^\\dagger)^*G^\\dagger=(GG^*)^{-1}.$$\nHere $U\\sim\\Gamma(a,\\theta)$ means that $U$ has density\n$u^{a-1}e^{-u/\\theta}/(\\theta^a\\Gamma(a))$ for $u>0$. For every diagonal\nindex $i$, $((GG^*)^{-1})_{ii}$ has distribution $1/U$ with\n$U\\sim\\Gamma((p+1)/2,2)$ over $\\mathbb R$ and $U\\sim\\Gamma(p+1,1)$ over\n$\\mathbb C$.",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+          "thm-real-beta-gamma-identity",
+          "def-real-gamma-function-by-the-euler-integral",
+          "cor-real-gamma-one-half-is-root-pi",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-real-gamma-functional-equation"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Proposition 10.2 and Appendix A.1",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a711.4.2",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-wide-gaussian-pseudoinverse-spectral-moments-and-tail",
+        "kind": "lemma",
+        "title": "Spectral moments and integrable tails for wide Gaussian pseudoinverses",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nFor $G\\in F^{k\\times(k+p)}$ as in\n[[lem-wide-gaussian-pseudoinverse-frobenius-moments]], put $X=\\|G^\\dagger\\|_2$.\nFor $0<q<(p+1)/2$ over $\\mathbb R$ and $0<q<p+1$ over normalized $\\mathbb C$,\n$$\\mathbb E X^{2q}\\le C_R(q):=\\frac{2^{-q}\\sqrt\\pi\\,\\Gamma((p+1)/2-q)\\Gamma(k/2+q)}{\\Gamma((p+1)/2)\\Gamma(k/2)\\Gamma(q+1/2)},$$\n$$\\mathbb E X^{2q}\\le C_C(q):=\\frac{\\Gamma(p+1-q)\\Gamma(k+q)}{\\Gamma(p+1)\\Gamma(k)\\Gamma(q+1)}.$$\nFor integers $p\\ge2$, writing $\\ell=k+p$ and $a=e\\sqrt\\ell/p$,\n$$\\mathbb E X^p\\le a^p\\quad(F=\\mathbb R),\\qquad \\mathbb E X^{2p}\\le a^{2p}\\quad(F=\\mathbb C).$$\nConsequently $\\mathbb E X\\le a$ and\n$$\\mathbb P\\{X>t\\}\\le\\min(1,(a/t)^p)\\quad(F=\\mathbb R),\\qquad \\mathbb P\\{X>t\\}\\le\\min(1,(a/t)^{2p})\\quad(F=\\mathbb C),$$\nfor $t>0$. In the randomized range-finder application $p\\ge2$, so these tails\nare integrable at infinity.",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+          "thm-real-beta-gamma-identity",
+          "def-real-gamma-function-by-the-euler-integral",
+          "cor-real-gamma-one-half-is-root-pi",
+          "thm-real-gamma-functional-equation",
+          "thm-real-gamma-is-smooth",
+          "thm-logarithm-derivative-and-integral",
+          "thm-jensen-inequality-for-expectation",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Proposition 10.2 and Appendix A.1",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a711.4.2",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-normalized-complex-gaussian-block-affine-spectral-second-moments",
+        "kind": "lemma",
+        "title": "Affine second-moment bounds for normalized complex Gaussian block products",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "def-countable-choice",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+          "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+          "thm-real-beta-gamma-identity",
+          "def-real-beta-integral",
+          "def-gamma-distribution-shape-rate",
+          "def-real-gamma-function-by-the-euler-integral",
+          "thm-real-gamma-functional-equation",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "def-frobenius-matrix-norm",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "lem-absolute-real-powers-are-convex",
+          "thm-jensen-inequality-for-expectation",
+          "thm-finite-jensen-inequality-in-euclidean-space",
+          "thm-am-gm",
+          "def-factorial-and-falling-factorial",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-real-exponential-function-and-e",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-implies-integrable",
+          "thm-ftc-second-part",
+          "thm-additivity-over-subintervals",
+          "thm-monotonicity-of-the-integral",
+          "def-oriented-integral",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, \u00a710.1 and Appendix A.1; standard Gaussian block context, with the present normalized-complex estimates derived locally",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a711.4.2; real Gaussian rangefinder context, with the present normalized-complex estimates derived locally",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $k\\ge1$, $p\\ge2$, $\\ell=k+p$, and $d,a\\ge1$ be integers. Let\n$G_1\\in\\mathbb C^{k\\times\\ell}$ and $G_2\\in\\mathbb C^{d\\times\\ell}$ be\nindependent matrices with iid normalized complex Gaussian entries as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]], so\n$\\mathbb E|g|^2=1$. Put $Z=G_2G_1^\\dagger$, where $G_1^\\dagger$ is the\nMoore--Penrose pseudoinverse of [[def-moore-penrose-pseudoinverse]]. For every\nfixed $S\\in\\mathbb C^{a\\times d}$, writing $C=2\\sqrt2e$ with\n$e=\\exp(1)$ as in [[def-real-exponential-function-and-e]], one has\n$$\\mathbb E\\|SZ\\|_2^2\\le\\frac{C\\ell}{p^2}\\left(\\|S\\|_F^2+\\frac p4\\|S\\|_2^2\\right),$$\n$$\\mathbb E\\|SZ\\|_2^2\\le\\frac{e^2\\ell}{p^2}\\left(\\|S\\|_F^2+\\frac p2\\|S\\|_2^2\\right).$$\nHere $\\|\\cdot\\|_2$ is the induced operator norm of\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] and\n$\\|\\cdot\\|_F$ is the Frobenius norm of [[def-frobenius-matrix-norm]]. These\nare coarse second-moment bounds; no sharp complex Chevet comparison is assumed.\nThe values on the null event where $G_1$ loses row rank may be set to zero in\nthese integrals."
+      },
+      {
+        "id": "lem-normalized-complex-rangefinder-direct-spectral-expectation",
+        "kind": "lemma",
+        "title": "Direct expected spectral bound for the normalized complex range finder",
+        "deps": [
+          "lem-finite-scan-range-basis-is-borel",
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "def-countable-choice",
+          "alg-gaussian-randomized-range-finder",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+          "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+          "def-moore-penrose-pseudoinverse",
+          "lem-normalized-complex-gaussian-block-affine-spectral-second-moments",
+          "thm-singular-value-decomposition",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-jensen-inequality-for-expectation",
+          "def-factorial-and-falling-factorial",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-real-exponential-function-and-e",
+          "cor-two-less-than-e-less-than-three",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, \u00a7\u00a79.1\u201310.2; the present normalized-complex moment and rank-shift argument is derived locally",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a7\u00a711.4.1\u201311.4.2; the present normalized-complex proof is derived locally",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $A\\in\\mathbb C^{m\\times n}$ be fixed, let $k\\ge2$, $p\\ge2$ be integers\nwith $\\ell=k+p\\le\\min(m,n)$, and draw $\\Omega\\in\\mathbb C^{n\\times\\ell}$\nwith iid normalized complex Gaussian entries satisfying $\\mathbb E|g|^2=1$.\nLet $Q$ be the exact finite-scan range-finder basis of\n$\\operatorname{Ran}(A\\Omega)$ returned by\n[[alg-gaussian-randomized-range-finder]], and put $P=QQ^*$. Then\n$$\\mathbb E\\|(I-P)A\\|_2\\le\\sqrt{\\frac{\\ell}{p}}\\,\\sigma_{k+1} +\\frac{e\\sqrt\\ell}{p}\\left(\\sum_{j>k}\\sigma_j^2\\right)^{1/2}.$$\nIn particular, the original approved bound with leading coefficient\n$1+\\sqrt{k/(p-1)}$ follows. The algorithm and sketch width $\\ell$ are\nunchanged; only the analysis may use a larger SVD partition rank."
+      },
+      {
+        "id": "thm-real-gaussian-rangefinder-expected-spectral-error",
+        "kind": "theorem",
+        "title": "Expected spectral error of the real Gaussian range finder",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability\nmeasure. Let $A\\in\\mathbb R^{m\\times n}$ be fixed, $k\\ge2$, $p\\ge2$,\n$\\ell=k+p\\le\\min(m,n)$, and draw $\\Omega\\in\\mathbb R^{n\\times\\ell}$ with\niid standard real Gaussian entries. If $Q$ is an orthonormal basis for\n$\\operatorname{Ran}(A\\Omega)$, then\n$$\\mathbb E\\|A-QQ^*A\\|_2\\le \\left(1+\\sqrt{\\frac{k}{p-1}}\\right)\\sigma_{k+1} +\\frac{e\\sqrt{k+p}}{p}\\left(\\sum_{j>k}\\sigma_j^2\\right)^{1/2}.$$\nThe rank of $Q$ may be smaller than $\\ell$; exact arithmetic is assumed.\nThe comparator $\\sigma_{k+1}$ is the minimum spectral error among all\nrank-at-most-$k$ approximations.",
+        "deps": [
+          "alg-gaussian-randomized-range-finder",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+          "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+          "lem-wide-gaussian-pseudoinverse-spectral-moments-and-tail",
+          "lem-real-scaled-gaussian-product-expectation",
+          "lem-randomized-rangefinder-deterministic-svd-partition-error",
+          "thm-singular-value-decomposition",
+          "thm-eckart-young-best-rank-k-approximation",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-jensen-inequality-for-expectation",
+          "def-countable-choice",
+          "lem-finite-scan-range-basis-is-borel"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Theorem 10.6 and its proof",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, Theorem 11.5",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gaussian-rangefinder-expected-spectral-error",
+        "kind": "theorem",
+        "title": "Expected spectral error for real and normalized complex Gaussian range finders",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $A\\in F^{m\\times n}$ be fixed, where $F=\\mathbb R$ or $\\mathbb C$. Let\n$k\\ge2$, $p\\ge2$, $\\ell=k+p\\le\\min(m,n)$, and draw $\\Omega$ with iid\nstandard real entries if $F=\\mathbb R$ or normalized complex entries if\n$F=\\mathbb C$. If $Q$ is an orthonormal basis of $\\operatorname{Ran}(A\\Omega)$,\nthen\n$$\\mathbb E\\|A-QQ^*A\\|_2\\le \\left(1+\\sqrt{\\frac{k}{p-1}}\\right)\\sigma_{k+1} +\\frac{e\\sqrt{k+p}}{p}\\left(\\sum_{j>k}\\sigma_j^2\\right)^{1/2}.$$\nThis preserves the normalized-complex convention $\\mathbb E|\\Omega_{ij}|^2=1$.",
+        "deps": [
+          "thm-real-gaussian-rangefinder-expected-spectral-error",
+          "lem-normalized-complex-rangefinder-direct-spectral-expectation",
+          "alg-gaussian-randomized-range-finder",
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "def-countable-choice",
+          "lem-finite-scan-range-basis-is-borel"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Theorem 10.6 and its complex-case discussion",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, Theorem 11.5",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-real-gaussian-power-rangefinder-expected-error",
+        "kind": "theorem",
+        "title": "Expected real Gaussian power-rangefinder error",
+        "statement": "Under the real-field hypotheses of\n[[thm-real-gaussian-rangefinder-expected-spectral-error]], let $q\\ge0$ be an\ninteger, draw the same Gaussian sketch $\\Omega$, and let $Q$ be the basis\nreturned by [[alg-randomized-power-subspace-iteration-with-qr]] on $A,\\Omega,q$.\nEquivalently, if $B=(AA^*)^qA$, then $\\operatorname{Ran}(Q)=\\operatorname{Ran}(B\\Omega)$. Then\n$$\\mathbb E\\|(I-QQ^*)A\\|_2\\le \\left[ \\left(1+\\sqrt{\\frac{k}{p-1}}\\right)\\sigma_{k+1}^{2q+1} +\\frac{e\\sqrt{k+p}}{p} \\left(\\sum_{j>k}\\sigma_j^{2(2q+1)}\\right)^{1/2} \\right]^{1/(2q+1)}.$$",
+        "deps": [
+          "thm-real-gaussian-rangefinder-expected-spectral-error",
+          "thm-randomized-power-rangefinder-error-transfer",
+          "alg-randomized-power-subspace-iteration-with-qr",
+          "thm-singular-value-decomposition",
+          "lem-power-rangefinder-projector-is-borel"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Corollary 10.10",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Corollary 11.9",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gaussian-power-rangefinder-expected-error",
+        "kind": "theorem",
+        "title": "Expected real and normalized complex Gaussian power-rangefinder error",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $A\\in F^{m\\times n}$, $F=\\mathbb R$ or $\\mathbb C$, with the same\n$k\\ge2$, $p\\ge2$, $\\ell=k+p\\le\\min(m,n)$ and field-normalized Gaussian\ndraws as in [[thm-gaussian-rangefinder-expected-spectral-error]]. For an\ninteger $q\\ge0$, let $Q$ be the basis returned by\n[[alg-randomized-power-subspace-iteration-with-qr]] on $A,\\Omega,q$. Equivalently,\nfor $B=(AA^*)^qA$, $\\operatorname{Ran}(Q)=\\operatorname{Ran}(B\\Omega)$. The corresponding\nsingular-value bound\n$$\\mathbb E\\|(I-QQ^*)A\\|_2\\le \\left[ \\left(1+\\sqrt{\\frac{k}{p-1}}\\right)\\sigma_{k+1}^{2q+1} +\\frac{e\\sqrt{k+p}}{p} \\left(\\sum_{j>k}\\sigma_j^{2(2q+1)}\\right)^{1/2} \\right]^{1/(2q+1)}.$$",
+        "deps": [
+          "thm-real-gaussian-power-rangefinder-expected-error",
+          "thm-gaussian-rangefinder-expected-spectral-error",
+          "thm-randomized-power-rangefinder-error-transfer",
+          "alg-randomized-power-subspace-iteration-with-qr",
+          "thm-singular-value-decomposition",
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "def-countable-choice",
+          "lem-power-rangefinder-projector-is-borel"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Corollary 10.10",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Corollary 11.9",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2577,
+    "id": "randomized-low-rank-approximation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Randomized low-rank approximation \u2014 Examples",
+    "companion": "randomized-low-rank-approximation",
+    "requires": [
+      "randomized-low-rank-approximation"
+    ],
+    "items": [
+      {
+        "id": "ex-power-rangefinder-loses-small-mode-without-qr",
+        "kind": "example",
+        "title": "A small mode is lost by an unorthogonalized power pass",
+        "statement": "In an explicit thresholded dyadic arithmetic model, unorthogonalized powering drops a small singular mode while QR between multiplications preserves it.",
+        "deps": [
+          "alg-randomized-power-subspace-iteration-with-qr"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, Algorithm 4.4 and Remark 4.3",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a711.6",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-gaussian-rangefinder-exact-on-rank-k-matrices",
+        "kind": "example",
+        "title": "Exact range recovery on a rank-k matrix",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $A=\\operatorname{diag}(4,1,0,0)\\in\\mathbb R^{4\\times4}$, take target\nrank $k=2$, oversampling $p=2$, and draw $\\Omega\\in\\mathbb R^{4\\times4}$\nwith iid standard real Gaussian entries. The randomized range finder returns\n$QQ^*A=A$ almost surely, so its spectral error is zero.",
+        "deps": [
+          "alg-gaussian-randomized-range-finder",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+          "thm-singular-value-decomposition",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Finding Structure with Randomness, \u00a710.2",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, \u00a711.4.2",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-slow-singular-tail-rangefinder-error-term",
+        "kind": "example",
+        "title": "A slowly decaying singular tail makes the Frobenius term dominate",
+        "statement": "For sigma_j=j^(-1/2), the tail-Frobenius contribution in the real expected range-finder bound eventually dominates the sigma_(k+1) contribution for fixed k,p.",
+        "deps": [
+          "thm-real-gaussian-rangefinder-expected-spectral-error",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Halko, Martinsson, and Tropp, Theorem 10.6 and discussion after it",
+              "url": "https://users.oden.utexas.edu/~pgm/Pubs/2010_HMT_random_review.pdf"
+            },
+            {
+              "title": "Martinsson and Tropp, Theorem 11.5 and discussion after it",
+              "url": "https://arxiv.org/pdf/2002.01387"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

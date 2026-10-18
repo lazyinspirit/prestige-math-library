@@ -1,0 +1,2035 @@
+[
+  {
+    "order": 2604,
+    "id": "stable-special-function-recurrences-and-certified-evaluation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Stable special function recurrences and certified evaluation",
+    "companion": "stable-special-function-recurrences-and-certified-evaluation-examples",
+    "requires": [
+      "composite-quadrature-rules",
+      "gaussian-quadrature",
+      "the-gamma-function",
+      "outward-rounded-interval-and-ball-arithmetic",
+      "average-orders-divisor-sums-and-representation-counts"
+    ],
+    "items": [
+      {
+        "id": "def-airy-initial-value-series",
+        "deps": [
+          "def-euler-gamma-function"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Airy initial-value series",
+        "justified_by": [
+          "lem-airy-series-coefficient-recurrence-and-tail"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a79.2(ii), equations 9.2.3\u20139.2.6",
+              "url": "https://dlmf.nist.gov/9.2"
+            },
+            {
+              "title": "DLMF, \u00a79.4, Maclaurin series",
+              "url": "https://dlmf.nist.gov/9.4"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $y(z)=\\sum_{k\\ge0}c_kz^k$, set $c_2=0$ and\n$c_{k+3}=c_k/((k+3)(k+2))$ for $k\\ge0$. Define $\\operatorname{Ai}$ by this\nseries with\n\n$$c_0=\\frac{1}{3^{2/3}\\Gamma(2/3)},\\qquad c_1=-\\frac{1}{3^{1/3}\\Gamma(1/3)},$$\n\nand define $\\operatorname{Bi}$ by the same recurrence with\n\n$$c_0=\\frac{1}{3^{1/6}\\Gamma(2/3)},\\qquad c_1=\\frac{3^{1/6}}{\\Gamma(1/3)}.$$\n\nHere $\\Gamma$ is Euler's integral on the right half-plane from\n[[def-euler-gamma-function]]. The standard Airy initial values are those in\nDLMF \u00a79.2(ii); in particular, the power of $3$ in $\\operatorname{Bi}(0)$ is\nin the denominator."
+      },
+      {
+        "id": "def-certified-evaluation-result-contract",
+        "deps": [
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-real-elementary-range-enclosures",
+          "thm-complex-elementary-range-enclosures"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Certified special-function enclosure result",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, Chapter 3, Numerical Methods, \u00a73.1",
+              "url": "https://dlmf.nist.gov/3.1"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72\u20135",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "A **certified enclosure** for a real value is a nonempty closed interval\n$B=[a,b]$ with finite dyadic endpoints; for a complex value it is a nonempty\nclosed rectangle $B=[a_1,b_1]+i[a_2,b_2]$ with finite dyadic endpoints. Its\nradius is half its length in the real case and half its Euclidean diagonal in\nthe complex case; $d(B,0)$ is the Euclidean distance from $B$ to $0$.\nAn evaluator item declares whether its input is an exact dyadic point or a\ndyadic interval/rectangle enclosure; a successful range result contains the\nexact function image of every admissible point in an input enclosure. Constants\nnot exactly dyadic must be supplied with certified enclosing intervals or\nrectangles.\n\nThe interval backend uses the endpoint operations in\n[[def-outward-rounded-interval-and-ball-operations]]; the soundness of finite\narithmetic expression DAGs follows from\n[[thm-outward-rounded-operations-are-isotone-and-dag-sound]]. Real elementary\nfunction ranges use [[thm-real-elementary-range-enclosures]], and complex\nexponential and principal-logarithm ranges use\n[[thm-complex-elementary-range-enclosures]]. An operation that returns a\nnon-finite status supplies no finite enclosure claim.\n\nA finite-budget evaluator receives a branch input enclosure wholly within\nthe stated domain, absolute tolerance $\\varepsilon_a>0$, optional relative\ntolerance $\\varepsilon_r>0$, finite integer work and precision caps, and the\nfixed format and truncation parameters required by the backend. Its result has\none of four statuses:\n\n- `success`: the returned enclosure contains the exact requested value and its\n  radius is at most $\\varepsilon_a$. If $0\\notin B$ and relative tolerance was\n  requested, the evaluator may also report `relative_certified: true` only when\n  $\\operatorname{rad}(B)/d(B,0)\\le\\varepsilon_r$.\n- `inconclusive`: the procedure exhausted a finite cap before its requested\n  enclosure test passed.\n- `domain`: the input is outside the stated branch domain, violates a stated\n  parameter condition, or lies on a branch cut excluded by that branch.\n- `range`: a certified finite enclosure cannot be represented in the requested\n  output format; the procedure returns no unsound finite interval.\n\nIf a success enclosure contains $0$, it still supplies the stated absolute\nbound, but it carries no relative-accuracy claim. The work and precision caps\ndo not imply that success occurs for every input."
+      },
+      {
+        "id": "def-fresnel-erf-and-hypergeometric-series",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Fresnel, error, and Gauss hypergeometric series",
+        "justified_by": [
+          "lem-fresnel-series-geometric-tail",
+          "lem-erf-series-geometric-tail",
+          "lem-gauss-hypergeometric-series-geometric-tail"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.6, Series Expansions",
+              "url": "https://dlmf.nist.gov/7.6"
+            },
+            {
+              "title": "DLMF, \u00a715.2(i), Gauss Series",
+              "url": "https://dlmf.nist.gov/15.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $z\\in\\mathbb C$, define the Fresnel functions and error function by\n\n$$C(z)=\\sum_{k=0}^{\\infty}\\frac{(-1)^k(\\pi/2)^{2k}z^{4k+1}}{(2k)!(4k+1)}, \\qquad S(z)=\\sum_{k=0}^{\\infty}\\frac{(-1)^k(\\pi/2)^{2k+1}z^{4k+3}}{(2k+1)!(4k+3)}, \\qquad \\operatorname{erf}(z)=\\frac{2}{\\sqrt\\pi}\\sum_{k=0}^{\\infty}\\frac{(-1)^kz^{2k+1}}{k!(2k+1)}, \\qquad \\operatorname{erfc}(z)=1-\\operatorname{erf}(z).$$\n\nThe following local lemmas prove convergence and show that $C,S,\\operatorname{erf}$\nequal the standard entire integral functions with their usual normalizations.\n\nFor $a,b,c,z\\in\\mathbb C$ with $c\\notin\\{0,-1,-2,\\ldots\\}$ and $|z|<1$,\ndefine\n\n$$(a)_0=1,\\qquad (a)_k=\\prod_{j=0}^{k-1}(a+j),\\qquad {}_2F_1(a,b;c;z)=\\sum_{k=0}^{\\infty}\\frac{(a)_k(b)_k}{(c)_k k!}z^k.$$\n\nOnly this Gauss-series branch of ${}_2F_1$ is defined on this page; no value\noutside $|z|<1$ or across a continuation cut is implicit."
+      },
+      {
+        "id": "def-integer-order-bessel-series",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Integer-order Bessel series",
+        "justified_by": [
+          "lem-integer-order-bessel-series-tail"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a710.2(ii), equation 10.2.2",
+              "url": "https://dlmf.nist.gov/10.2"
+            },
+            {
+              "title": "DLMF, \u00a710.25(ii), equation 10.25.2",
+              "url": "https://dlmf.nist.gov/10.25"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For an integer $n\\ge0$ and $z\\in\\mathbb C$, define\n\n$$J_n(z)=\\sum_{k=0}^{\\infty}\\frac{(-1)^k(z/2)^{2k+n}}{k!(k+n)!}, \\qquad I_n(z)=\\sum_{k=0}^{\\infty}\\frac{(z/2)^{2k+n}}{k!(k+n)!}.$$\n\nThese are the integer-order Bessel and modified Bessel functions used on this\npage. For real $x\\ge0$, the scaled modified Bessel value means\n$I_n^{\\mathrm{sc}}(x)=e^{-x}I_n(x)$. This notation does not assert a finite\nevaluation method or a truncation bound; those are proved separately."
+      },
+      {
+        "id": "def-loggamma-right-halfplane-branch",
+        "deps": [
+          "def-euler-gamma-function",
+          "def-euler-mascheroni-constant",
+          "def-complex-logarithms-principal-logarithm-and-complex-powers"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Log-Gamma branch on the right half-plane",
+        "justified_by": [
+          "lem-loggamma-series-convergence-and-gamma-identity"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.8(ii), Weierstrass product",
+              "url": "https://dlmf.nist.gov/5.8"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "On $\\operatorname{Re}z>0$, define\n\n$$\\ell_+(z)=-\\operatorname{Log}z-\\gamma_Ez+ \\sum_{n=1}^{\\infty}\\left(\\frac zn-\\operatorname{Log}\\left(1+\\frac zn\\right)\\right).$$\n\nHere $\\operatorname{Log}$ is the principal logarithm from\n[[def-complex-logarithms-principal-logarithm-and-complex-powers]], and\n$\\gamma_E$ denotes Euler's constant $\\gamma$ from\n[[def-euler-mascheroni-constant]]. Both $z$ and $1+z/n$ lie in the\nprincipal-logarithm domain. The local uniform convergence of this series\nand the identity $e^{\\ell_+(z)}=\\Gamma(z)$ are established by\n[[lem-loggamma-series-convergence-and-gamma-identity]]."
+      },
+      {
+        "id": "lem-explicit-euler-constant-enclosure",
+        "deps": [
+          "thm-euler-mascheroni-constant-and-harmonic-asymptotic",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "Finite harmonic enclosure for Euler's constant",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.2, Gamma and psi functions",
+              "url": "https://dlmf.nist.gov/5.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For each integer $M\\ge1$, put $H_M=\\sum_{k=1}^M1/k$. Euler's constant\n$\\gamma$ satisfies\n$$0\\le H_M-\\log M-\\gamma\\le\\frac1M.$$\nThus $[H_M-\\log M-1/M,\\ H_M-\\log M]$ is a finite enclosure for $\\gamma$."
+      },
+      {
+        "id": "lem-gamma-functional-equation-meromorphic-extension",
+        "deps": [
+          "def-euler-gamma-function",
+          "lem-gamma-integral-converges-locally-uniformly",
+          "thm-gamma-functional-equation",
+          "lem-archimedean-property-from-completeness",
+          "thm-euler-gamma-function-is-holomorphic"
+        ],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "Gamma functional equation away from the poles",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.5, Functional Relations",
+              "url": "https://dlmf.nist.gov/5.5"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For every $z\\in\\mathbb C\\setminus\\{0,-1,-2,\\ldots\\}$,\n$$\\Gamma(z+1)=z\\Gamma(z),$$\nwhere $\\Gamma$ is the meromorphic continuation of Euler's Gamma function."
+      },
+      {
+        "id": "def-spherical-bessel-and-hankel-functions",
+        "kind": "definition",
+        "title": "Spherical Bessel and outgoing Hankel function conventions",
+        "deps": [
+          "def-sine-and-cosine-by-power-series",
+          "def-complex-exponential"
+        ],
+        "justified_by": [
+          "lem-spherical-bessel-and-hankel-radial-solutions"
+        ],
+        "dependency_level": 0,
+        "source_path": "items/def-spherical-bessel-and-hankel-functions.md",
+        "statement": "For real $z>0$, let $D_z:=z^{-1}\\frac{d}{dz}$ and define, for integers $\\ell\\ge0$,\n$$j_\\ell(z):=(-z)^\\ell D_z^\\ell\\left(\\frac{\\sin z}{z}\\right),\\qquad h_\\ell^{(1)}(z):=(-z)^\\ell D_z^\\ell\\left(-i\\frac{e^{iz}}{z}\\right).$$\nThe definition fixes the outgoing $e^{iz}$ convention. The functions solve the radial Helmholtz equation and have the recurrence, origin, Wronskian, and infinity behavior by [[lem-spherical-bessel-and-hankel-radial-solutions]].\n\nThese symbolic definitions assert no stable or certified numerical evaluation algorithm for large $\\ell$ or $z$.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No axiom is used. These are exact symbolic functions; no stable or certified evaluation algorithm is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, Chapter 8",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 147\u2013149, spherical Bessel equation, regular and outgoing radial solutions, and recurrences."
+            },
+            {
+              "title": "Pierre Capel, Introduction to Scattering Theory, TALENT lecture notes",
+              "url": "https://indico.mitp.uni-mainz.de/event/279/sessions/1001/attachments/2951/3418/Capel1TALENTFB22ho.pdf",
+              "locator": "PDF pp. 18\u201319, spherical Bessel functions and recurrence relations; the local convention uses the outgoing Hankel sign fixed below."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "def-bessel-complementary-recurrence-solution",
+        "deps": [
+          "def-integer-order-bessel-series"
+        ],
+        "dependency_level": 1,
+        "kind": "definition",
+        "title": "Complementary solution for the integer Bessel recurrence",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a73.6(iii), Miller's Algorithm",
+              "url": "https://dlmf.nist.gov/3.6"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Fix real $x>0$. Let $D_0(x)=-J_1(x)$ and $D_1(x)=J_0(x)$, and for every integer\n$j\\ge1$ define\n\n$$D_{j+1}(x)=\\frac{2j}{x}D_j(x)-D_{j-1}(x).$$\n\nThus $D$ is the second sequence obtained from the same order recurrence as\n$J_j(x)$. It is a local auxiliary solution, not the Bessel function of the\nsecond kind."
+      },
+      {
+        "id": "def-erfcx-moment-sequence",
+        "deps": [
+          "def-fresnel-erf-and-hypergeometric-series"
+        ],
+        "dependency_level": 1,
+        "kind": "definition",
+        "title": "Scaled complementary error function and its moments",
+        "justified_by": [
+          "lem-erfcx-moment-recurrence"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.2, definitions and elementary properties",
+              "url": "https://dlmf.nist.gov/7.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a73 and 5",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For real $x>0$, define\n$\\operatorname{erfcx}(x)=e^{x^2}\\operatorname{erfc}(x)$. For each integer\n$k\\ge0$, define the finite positive moment\n\n$$M_k(x)=\\int_0^\\infty t^k e^{-t^2-2xt}\\,dt.$$\n\nThe moments are auxiliary quantities for a finite-depth interval enclosure of\n$\\operatorname{erfcx}$. They are not the modified Bessel functions $I_k$."
+      },
+      {
+        "id": "def-loggamma-slit-plane-branch",
+        "deps": [
+          "def-loggamma-right-halfplane-branch",
+          "lem-archimedean-property-from-completeness"
+        ],
+        "dependency_level": 1,
+        "kind": "definition",
+        "title": "Log-Gamma branch on the slit plane",
+        "justified_by": [
+          "lem-loggamma-shift-independent"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.8, analytic continuation and Weierstrass product",
+              "url": "https://dlmf.nist.gov/5.8"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a75.8 and 5.11",
+              "url": "https://dlmf.nist.gov/5.11"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Let $\\Omega=\\mathbb C\\setminus(-\\infty,0]$. For every $z\\in\\Omega$, an\nadmissible integer $m\\ge0$ with $\\operatorname{Re}(z+m)>0$ exists by the\nArchimedean property [[lem-archimedean-property-from-completeness]]. Choose\nany such $m$ and set\n\n$$\\ell(z)=\\ell_+(z+m)-\\sum_{j=0}^{m-1}\\operatorname{Log}(z+j),$$\n\nwhere the sum is empty if $m=0$ and $\\ell_+$ and $\\operatorname{Log}$ are\ndefined in [[def-loggamma-right-halfplane-branch]]. The next lemma proves that\nthis value is independent of the admissible $m$ and satisfies\n$e^{\\ell(z)}=\\Gamma(z)$.\nThis is a continued branch of log-Gamma, not a separate principal\n$\\operatorname{Log}(\\Gamma(z))$."
+      },
+      {
+        "id": "lem-airy-series-coefficient-recurrence-and-tail",
+        "deps": [
+          "def-airy-initial-value-series",
+          "thm-termwise-differentiation-of-complex-power-series"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Airy coefficient recurrence and geometric tail bounds",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a79.4, Airy Maclaurin series",
+              "url": "https://dlmf.nist.gov/9.4"
+            },
+            {
+              "title": "DLMF, \u00a79.2(ii), Airy initial values",
+              "url": "https://dlmf.nist.gov/9.2"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a79.2(ii), 9.4, and 9.17(i)",
+              "url": "https://dlmf.nist.gov/9.17"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "The coefficient recurrence in [[def-airy-initial-value-series]] makes both\nseries solve $y''=zy$. In a residue class $k\\equiv r\\pmod 3$, successive\nnonzero terms have absolute ratio\n\n$$\\frac{|z|^3}{(k+3)(k+2)}.$$\n\nIf the ratio of each term after a chosen first omitted term is bounded by\n$q<1$, that class's tail is at most the first omitted term's absolute value\ndivided by $1-q$. The series and their first two derivative series converge\nlocally uniformly on $\\mathbb C$."
+      },
+      {
+        "id": "lem-erf-series-geometric-tail",
+        "deps": [
+          "def-fresnel-erf-and-hypergeometric-series",
+          "def-complex-exponential",
+          "lem-complex-exponential-series-converges-everywhere",
+          "thm-termwise-differentiation-of-complex-power-series",
+          "cor-complex-differentiability-implies-continuity",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Error-function series geometric tail bound",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.6(i), equation 7.6.1",
+              "url": "https://dlmf.nist.gov/7.6"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For the $k$th term $e_k$ of the $\\operatorname{erf}$ series in\n[[def-fresnel-erf-and-hypergeometric-series]],\n\n$$\\frac{|e_{k+1}|}{|e_k|} =\\frac{|z|^2}{k+1}\\frac{2k+1}{2k+3} \\le\\frac{|z|^2}{k+1}.$$\n\nThe displayed quotient is asserted when $e_k\\ne0$. At $z=0$, every $e_k=0$, so the series and every tail are zero; the corresponding division-free inequality $|e_{k+1}|\\le |z|^2|e_k|/(k+1)$ holds there as well.\n\nThus, if $|z|^2/(K+2)=q<1$, the tail after terms $0,\\ldots,K$ is bounded by\n$|e_{K+1}|/(1-q)$. The series converges locally uniformly. For every\npiecewise-$C^1$ path $\\gamma:[0,1]\\to\\mathbb C$ with $\\gamma(0)=0$ and\n$\\gamma(1)=z$, it equals\n$$\\frac{2}{\\sqrt\\pi}\\int_\\gamma e^{-t^2}\\,dt,$$\nwhere the complex line integral is defined by\n[[def-complex-line-integral-over-a-rectifiable-path]]. In particular, the\nstraight-segment integral has this value, and the integral is path-independent."
+      },
+      {
+        "id": "lem-fresnel-series-geometric-tail",
+        "deps": [
+          "def-fresnel-erf-and-hypergeometric-series",
+          "def-complex-trigonometric-and-hyperbolic-functions",
+          "thm-complex-trigonometric-and-hyperbolic-power-series",
+          "thm-termwise-differentiation-of-complex-power-series",
+          "cor-complex-differentiability-implies-continuity",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Fresnel series geometric tail bounds",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.6(i), equations 7.6.4 and 7.6.6",
+              "url": "https://dlmf.nist.gov/7.6"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For the terms $c_k$ of $C$ and $s_k$ of $S$ in\n[[def-fresnel-erf-and-hypergeometric-series]],\n\n$$\\frac{|c_{k+1}|}{|c_k|}\\le \\frac{\\pi^2|z|^4/4}{(2k+1)(2k+2)}, \\qquad \\frac{|s_{k+1}|}{|s_k|}\\le \\frac{\\pi^2|z|^4/4}{(2k+2)(2k+3)}.$$\n\nEach displayed quotient is asserted only when its denominator is nonzero. At $z=0$, every $c_k=s_k=0$, so both series and every tail are zero. The corresponding division-free inequalities obtained by multiplying by $|c_k|$ or $|s_k|$ hold for every $z$.\n\nOnce the applicable bound is at most $q<1$ for all terms after a first\nomitted term, the absolute tail is bounded by that term divided by $1-q$.\nBoth series converge locally uniformly on $\\mathbb C$. For every\npiecewise-$C^1$ path $\\gamma:[0,1]\\to\\mathbb C$ with $\\gamma(0)=0$ and\n$\\gamma(1)=z$, they equal\n$$C(z)=\\int_\\gamma\\cos(\\pi t^2/2)\\,dt,\\qquad S(z)=\\int_\\gamma\\sin(\\pi t^2/2)\\,dt,$$\nwhere the complex line integral is defined by\n[[def-complex-line-integral-over-a-rectifiable-path]]. In particular, these\nintegrals are path-independent and agree with the straight-segment integrals."
+      },
+      {
+        "id": "lem-gauss-hypergeometric-series-geometric-tail",
+        "deps": [
+          "def-fresnel-erf-and-hypergeometric-series"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Gauss hypergeometric series geometric tail bound",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a715.2(i), equation 15.2.1",
+              "url": "https://dlmf.nist.gov/15.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Let $a,b,c,z\\in\\mathbb C$, $|z|<1$, and\n$c\\notin\\{0,-1,-2,\\ldots\\}$. If $z=0$, then $h_0=1$ and $h_k=0$ for\n$k\\ge1$, so the series equals $1$ and every tail after $h_0$ is zero.\nSuppose instead that $z\\ne0$ and neither $a$ nor $b$ is a nonpositive\ninteger. Then every term $h_k=(a)_k(b)_kz^k/((c)_kk!)$ is nonzero, and for\nany integer $N>|c|$,\n\n$$\\frac{|h_{k+1}|}{|h_k|} =|z|\\frac{|a+k||b+k|}{|c+k|(k+1)} \\le q_N:=|z|\\frac{(1+|a|/N)(1+|b|/N)}{1-|c|/N} \\qquad(k\\ge N).$$\n\nFor sufficiently large $N$, $q_N<1$; then the tail starting at $h_N$ is at\nmost $|h_N|/(1-q_N)$. If $a$ or $b$ is a nonpositive integer, the series\nterminates and its tail after the last nonzero term is zero."
+      },
+      {
+        "id": "lem-integer-order-bessel-series-tail",
+        "deps": [
+          "def-integer-order-bessel-series"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Convergence and geometric tails for integer-order Bessel series",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a710.25(ii), modified Bessel power series",
+              "url": "https://dlmf.nist.gov/10.25"
+            },
+            {
+              "title": "DLMF, \u00a710.2(ii) and \u00a710.25(ii)",
+              "url": "https://dlmf.nist.gov/10.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $n\\ge0$, $z\\ne0$, and either series in\n[[def-integer-order-bessel-series]], the absolute term ratio is\n\n$$r_k=\\frac{|z|^2}{4(k+1)(k+n+1)}.$$\n\nAt $z=0$, the order-zero series have only the constant term $a_0=1$ and\npositive orders have only zero terms; in every case the tail after terms\n$k=0,\\ldots,K$ is zero. The series for $J_n$ and $I_n$ converge absolutely\nand locally uniformly in $z\\in\\mathbb C$. If $K\\ge0$ and\n$q=|z|^2/[4(K+2)(K+n+2)]<1$, then the tail after terms $k=0,\\ldots,K$ has\nabsolute value at most $|a_{K+1}|/(1-q)$, where $a_k$ is the corresponding\nseries term. The first two formal termwise derivative series also converge\nlocally uniformly."
+      },
+      {
+        "id": "lem-loggamma-series-convergence-and-gamma-identity",
+        "deps": [
+          "def-loggamma-right-halfplane-branch",
+          "def-euler-beta-function",
+          "def-euler-gamma-function",
+          "def-euler-mascheroni-constant",
+          "thm-euler-mascheroni-constant-and-harmonic-asymptotic",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-substitution-for-improper-integrals",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "thm-derivative-of-exponential",
+          "lem-mean-value-theorem-on-closed-interval",
+          "thm-algebra-of-derivatives",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-gamma-integral-converges-locally-uniformly",
+          "thm-weierstrass-convergence-holomorphic-functions"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Weierstrass log-Gamma series converges to a Gamma branch",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.2, Gamma function and Euler constant",
+              "url": "https://dlmf.nist.gov/5.2"
+            },
+            {
+              "title": "DLMF, \u00a75.8(ii), equation 5.8.2",
+              "url": "https://dlmf.nist.gov/5.8"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For every $z$ with $\\operatorname{Re}z>0$, the series defining\n$\\ell_+(z)$ in [[def-loggamma-right-halfplane-branch]] converges locally\nuniformly, defines a holomorphic function, and satisfies\n$e^{\\ell_+(z)}=\\Gamma(z)$ for Euler's Gamma function on that half-plane."
+      },
+      {
+        "id": "lem-spherical-bessel-and-hankel-radial-solutions",
+        "kind": "lemma",
+        "title": "Spherical Bessel and outgoing Hankel recurrences solve the radial Helmholtz equation",
+        "deps": [
+          "def-spherical-bessel-and-hankel-functions",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-sine-and-cosine-derivatives",
+          "thm-eulers-formula",
+          "thm-termwise-differentiation-of-a-real-power-series",
+          "thm-power-series-uniform-on-compact-subintervals",
+          "thm-ratio-test",
+          "lem-sine-and-cosine-series-converge-everywhere",
+          "def-factorial-and-falling-factorial",
+          "lem-of-naturals-positive",
+          "cor-zero-derivative-implies-constant",
+          "lem-trigonometric-identities-machin-and-range-reduction"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "source_path": "items/lem-spherical-bessel-and-hankel-radial-solutions.md",
+        "statement": "For the functions of [[def-spherical-bessel-and-hankel-functions]], define\n$$L_\\ell y:=y''+\\frac2z y'+\\left(1-\\frac{\\ell(\\ell+1)}{z^2}\\right)y\\qquad(z>0).$$\nThen $L_\\ell j_\\ell=L_\\ell h_\\ell^{(1)}=0$, and for $y=j,h^{(1)}$,\n$$y_{\\ell+1}(z)=\\frac{\\ell}{z}y_\\ell(z)-y_\\ell'(z),\\qquad y_\\ell'(z)=y_{\\ell-1}(z)-\\frac{\\ell+1}{z}y_\\ell(z)\\quad(\\ell\\ge1).$$\nThe regular-origin and outgoing-infinity normalizations are\n$$j_\\ell(z)=\\frac{z^\\ell}{(2\\ell+1)!!}+O(z^{\\ell+2}),\\quad h_\\ell^{(1)}(z)=-i(2\\ell-1)!!z^{-\\ell-1}(1+O(z))\\quad(z\\downarrow0),$$\n$$j_\\ell(z)=\\frac{\\sin(z-\\ell\\pi/2)}z+O(z^{-2}),\\quad h_\\ell^{(1)}(z)=(-i)^{\\ell+1}\\frac{e^{iz}}z+O(z^{-2})\\quad(z\\to\\infty),$$\nwhere $(-1)!!:=1$. Their Wronskian is\n$$j_\\ell(z)(h_\\ell^{(1)})'(z)-j_\\ell'(z)h_\\ell^{(1)}(z)=\\frac{i}{z^2}.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "The proof uses finite differentiation and power-series algebra only; it makes no certified numerical evaluation claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, version July 15, 2009, Chapter 8",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 147\u2013149, radial Helmholtz equation and spherical Bessel functions; the exact finite-derivative identities below are verified locally."
+            },
+            {
+              "title": "Pierre Capel, Introduction to Scattering Theory, TALENT lecture notes",
+              "url": "https://indico.mitp.uni-mainz.de/event/279/sessions/1001/attachments/2951/3418/Capel1TALENTFB22ho.pdf",
+              "locator": "PDF pp. 18\u201319, spherical Bessel equation and recurrences."
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, \u00a710.49, Explicit Formulas",
+              "url": "https://dlmf.nist.gov/10.49",
+              "locator": "\u00a710.49(i), equations 10.49.1\u201310.49.6: terminating sine/cosine and outgoing Hankel formulas."
+            },
+            {
+              "title": "University of Toronto, Lecture Notes on Mathematical Methods 2019\u201320",
+              "url": "https://www.physics.utoronto.ca/~phy1540f/p154019_cumullect.pdf",
+              "locator": "\u00a76.4, printed pp. 157\u2013158, spherical radial Helmholtz equation, finite-derivative definition, origin/infinity behavior, and Hankel convention."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "def-spherical-bessel-evaluation-contract",
+        "kind": "definition",
+        "title": "Scaled spherical Bessel evaluation on positive real arguments",
+        "deps": [
+          "def-spherical-bessel-and-hankel-functions",
+          "def-certified-evaluation-result-contract"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "thm-certified-scaled-spherical-bessel-enclosures"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, \u00a710.49, Explicit Formulas",
+              "url": "https://dlmf.nist.gov/10.49",
+              "locator": "\u00a710.49(i), equations 10.49.1\u201310.49.6, finite spherical Bessel and outgoing Hankel formulas."
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, \u00a710.51, Recurrence Relations and Derivatives",
+              "url": "https://dlmf.nist.gov/10.51",
+              "locator": "\u00a710.51(i), equations 10.51.1\u201310.51.3, spherical-function recurrences and derivative formulas."
+            },
+            {
+              "title": "University of Toronto, Lecture Notes on Mathematical Methods 2019\u201320",
+              "url": "https://www.physics.utoronto.ca/~phy1540f/p154019_cumullect.pdf",
+              "locator": "\u00a76.4, printed pp. 157\u2013158, spherical radial solution convention and finite-derivative definition."
+            }
+          ]
+        },
+        "statement": "Let $\\ell\\ge0$ be an integer and $z>0$ real. Put\n$$c_\\ell=(2\\ell+1)!!=\\prod_{r=0}^{\\ell}(2r+1),\\qquad d_\\ell=(2\\ell-1)!!=\\prod_{r=1}^{\\ell}(2r-1),$$\nwhere the second product is empty and equals $1$ when $\\ell=0$. Using the outgoing convention of [[def-spherical-bessel-and-hankel-functions]], define\n$$J_\\ell^{\\rm sc}(z)=c_\\ell z^{-\\ell}j_\\ell(z),\\qquad D J_\\ell^{\\rm sc}(z)=c_\\ell z^{-\\ell}j_\\ell'(z),$$\n$$H_\\ell^{\\rm sc}(z)=d_\\ell^{-1}z^{\\ell+1}e^{-iz}h_\\ell^{(1)}(z),\\qquad D H_\\ell^{\\rm sc}(z)=d_\\ell^{-1}z^{\\ell+1}e^{-iz}(h_\\ell^{(1)})'(z).$$\nThe symbols $D J_\\ell^{\\rm sc}$ and $D H_\\ell^{\\rm sc}$ mean the scaled derivatives of the original functions, not derivatives of the scaled functions. The available targets are $j_\\ell$, $j_\\ell'$, $h_\\ell^{(1)}$, $(h_\\ell^{(1)})'$, and these four scaled quantities; every derivative is with respect to $z$.\n\nAn input is either (i) a closed dyadic interval $I=[a,b]\\subset(0,\\infty)$, requesting an enclosure of the whole target image on $I$, or (ii) a positive real $z$ supplied by an interface that, on each integer request $n\\ge1$, terminates and returns a closed dyadic interval $I_n$ containing $z$ with width at most $2^{-n}$. The intervals need not be nested. This is a representation hypothesis on a supplied input, not a claim that every positive real has such a representation. An exact positive dyadic point is the constant-interface case $I_n=[z,z]$. A represented point need not be dyadic: arguments such as $kR$ or $\\sqrt{k^2+V_0}R$ are admitted when a caller constructs a terminating interface by rigorous interval propagation from represented parameters. Each returned box must contain the exact composed argument; a midpoint or approximate point alone is not an admissible interface. The caller's construction must retain positivity and prove termination of every requested refinement.\n\nFor each target, outputs and optional relative tests use [[def-certified-evaluation-result-contract]]: a real enclosure is an interval, a complex enclosure is a rectangle, and its radius is half its length or half its Euclidean diagonal, respectively. Each target has an exact positive rational absolute tolerance $\\varepsilon_a$; an exact positive rational relative tolerance $\\varepsilon_r$ may also be requested. A relative flag may be true only when the returned enclosure excludes zero and $\\operatorname{rad}(B)/d(B,0)\\le\\varepsilon_r$. No relative flag is available when the enclosure contains zero.\n\nIntermediate interval endpoints may be exact rationals. Final endpoints are rounded outward to multiples of $2^{-p}$ for an integer $p\\ge0$. The mathematical procedure has no fixed exponent limit. A concrete bounded implementation must return `range` or `inconclusive` rather than claim a finite result it cannot represent. Finite caps are specified by the evaluating algorithm. A fixed nondegenerate input interval requests its whole image and is not promised arbitrarily small radius; eventual absolute success is asserted separately for represented-point inputs."
+      },
+      {
+        "id": "alg-certified-fresnel-erf-hypergeometric-series",
+        "deps": [
+          "def-certified-evaluation-result-contract",
+          "def-fresnel-erf-and-hypergeometric-series",
+          "lem-fresnel-series-geometric-tail",
+          "lem-erf-series-geometric-tail",
+          "lem-gauss-hypergeometric-series-geometric-tail",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "alg-certified-elementary-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "thm-complex-elementary-range-enclosures",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+          "def-factorial-and-falling-factorial",
+          "lem-of-naturals-positive"
+        ],
+        "dependency_level": 2,
+        "kind": "algorithm",
+        "title": "Finite certified power-series evaluation for Fresnel, erf, and Gauss functions",
+        "justified_by": [
+          "thm-certified-fresnel-erf-hypergeometric-enclosures"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a715.2(i), Gauss series",
+              "url": "https://dlmf.nist.gov/15.2"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a77.6(i) and 15.2(i)",
+              "url": "https://dlmf.nist.gov/7.6"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "Inputs are a target label $T\\in\\{C,S,\\operatorname{erf},{}_2F_1\\}$, an exact\ndyadic complex argument $z$, and, for the Gauss-series target, exact dyadic\ncomplex parameters $a,b,c$. Also input positive exact rational absolute\ntolerance $\\varepsilon_a$, optional positive exact rational relative\ntolerance $\\varepsilon_r$, a fixed exponent range $(e_{\\min},e_{\\max})$,\nand finite positive integer caps $S_{\\max},N_{\\max},p_{\\max},W$, with\n$p_{\\max}\\ge2$. The stage\ncap $S_{\\max}$ bounds retries, $N_{\\max}$ bounds series terms, $p_{\\max}$\nbounds dyadic precision, and $W$ bounds this procedure's exact interval\noperations, term constructions, and elementary-DAG node operations. Every\nnested elementary-range call shares this counter and is interrupted with\ninconclusive before its next operation would exceed the remaining budget. At\nstage $q$, use\nprecision $p=\\max(2,\\min(q,p_{\\max}))$ and truncation index $q$ for every\nelementary-range subcall.\n\nReject an invalid target, nonpositive tolerance, invalid cap, invalid exponent\nrange $e_{\\min}>e_{\\max}$, or a Gauss input with\n$|z|^2\\ge1$ or $c\\in\\{0,-1,-2,\\ldots\\}$ by returning domain. The\nFresnel and error-function branches accept every finite complex $z$.\nOutputs are a finite interval or rectangle with status success, or a\nstatus inconclusive, domain, or range as in\n[[def-certified-evaluation-result-contract]].\n\nAll rational and interval arithmetic uses\n[[def-outward-rounded-interval-and-ball-operations]]. Embed real coefficient intervals $X$ as $X+i[0,0]$ in complex arithmetic; typed elementary DAG nodes never use an implicit real-to-complex conversion. If a required\nintermediate operation or output endpoint overflows its selected format,\nreturn range. If an elementary-range subcall returns a non-finite status,\nskip the current candidate; if no later stage succeeds, return inconclusive.\nThe same candidate-skip rule applies to every other non-finite arithmetic\nstatus, including split-domain or entire when a rounded divisor contains\nzero; never use such a status as a finite interval.\nCharge each exact arithmetic operation, coefficient term, rounding, and\nelementary-range call against $W$; before an operation that would exceed\n$W$, return inconclusive.\n\nAt each stage, form $P_q$, a certified dyadic interval containing $\\pi$,\nonly when $T\\in\\{C,S,\\operatorname{erf}\\}$. For $r\\in\\{1/5,1/239\\}$, form\n$A_q(r)=\\sum_{j=0}^{q-1}(-1)^jr^{2j+1}/(2j+1)$ and\n$E_q(r)=r^{2q+1}/((2q+1)(1-r^2))$ by exact rational arithmetic. The\narctangent series and geometric-tail argument in\n[[lem-range-reduced-exp-log-and-arctan-series-enclosures]]\ngives $\\arctan r\\in[A_q(r)-E_q(r),A_q(r)+E_q(r)]$. Combine these intervals\nas $16\\arctan(1/5)-4\\arctan(1/239)$, then round the resulting endpoints\noutward to the selected format at precision $p$. The Machin identity in\n[[lem-trigonometric-identities-machin-and-range-reduction]] proves $\\pi\\in P_q$. If this conversion is non-finite,\nskip this stage for the selected Fresnel or erf target. For the Gauss-series\ntarget, omit $P_q$ and all square-root calls.\n\nOnly when $T=\\operatorname{erf}$, call\n[[alg-certified-elementary-range-evaluation]] on the one-node real DAG\n$\\sqrt{P_q}$ with the same exponent range and precision $p$, and truncation\nindex $q$. If it returns a finite interval $R_q$, continue only if\n$\\inf R_q>0$; otherwise skip this stage. This call encloses $\\sqrt\\pi$\nby [[thm-real-elementary-range-enclosures]]. The $C,S$ branches use $P_q$\ndirectly and do not call square root. For a complex rectangle\n$B=X+iY$, write\n$M(B)=\\max(|\\inf X|,|\\sup X|)+\\max(|\\inf Y|,|\\sup Y|)$; this rational\nquantity bounds the modulus of every point in $B$.\n\nAt each stage $q=1,\\ldots,\\min(S_{\\max},N_{\\max},p_{\\max})$, form the\nfollowing candidate for the selected target.\n\n- For $C$, sum its defining terms $c_0,\\ldots,c_{q-1}$ from\n  [[def-fresnel-erf-and-hypergeometric-series]] by interval arithmetic,\n  using $P_q/2$ for $\\pi/2$. Let $c_q$ be the first omitted term and set\n  $$r_C=\\frac{(\\sup P_q)^2 M(z)^4}{4(2q+1)(2q+2)}.$$\n  If $r_C<1$, enlarge the partial-sum rectangle in both coordinates by\n  $M(c_q)/(1-r_C)$; otherwise skip this stage.\n- For $S$, sum its first $q$ defining terms using $P_q/2$, let $s_q$\n  be the first omitted term, and set\n  $$r_S=\\frac{(\\sup P_q)^2 M(z)^4}{4(2q+2)(2q+3)}.$$\n  If $r_S<1$, enlarge the partial-sum rectangle in both coordinates by\n  $M(s_q)/(1-r_S)$; otherwise skip this stage.\n- For erf, use the interval $2/R_q$ from the single square-root call above\n  for $2/\\sqrt\\pi$,\n  sum the first $q$ defining terms, and let $e_q$ be the first omitted\n  term. Set $r_E=M(z)^2/(q+1)$. If $r_E<1$, enlarge the partial-sum\n  rectangle in both coordinates by $M(e_q)/(1-r_E)$; otherwise skip this\n  stage.\n- For the Gauss series, compute its terms by $h_0=1$ and\n  $$h_{k+1}=h_k\\,z\\,\\frac{(a+k)(b+k)}{(c+k)(k+1)}$$\n  using outward interval operations. The exact $c+k$ is nonzero by the\n  domain check, but its rounded enclosure may contain zero; in that case\n  skip this candidate before division. If $a$ or $b$ is a nonpositive integer, let $L$ be one\n  more than the smaller absolute value of those nonpositive integer\n  parameters. If $L\\le q$, sum exactly through $h_{L-1}$ and use zero\n  tail. Otherwise put\n  $$A=|\\Re a|+|\\Im a|,\\quad B=|\\Re b|+|\\Im b|,\\quad C_0=|\\Re c|+|\\Im c|,\\quad Z_0=|\\Re z|+|\\Im z|,$$\n  If $q\\le C_0$, skip this stage before forming a quotient. Otherwise set\n  $$r_H=Z_0\\frac{(1+A/q)(1+B/q)}{1-C_0/q}.$$\n  If $r_H<1$, sum $h_0,\\ldots,h_{q-1}$, let $h_q$\n  be the first omitted term, and enlarge the partial-sum rectangle in both\n  coordinates by $M(h_q)/(1-r_H)$; otherwise skip this stage. The geometric\n  bound in [[lem-gauss-hypergeometric-series-geometric-tail]] applies because\n  $A,B,C_0,Z_0$ dominate the corresponding complex moduli.\n\nRound each candidate's final endpoints outward to precision $p$. Return\nsuccess at the first stage where its radius is at most $\\varepsilon_a$.\nIf relative tolerance was requested, set relative_certified to true exactly\nwhen zero is excluded and the contract's relative-radius inequality holds;\nfailure of that relative test does not prevent absolute success. If no stage\nproduces a passing candidate, return inconclusive. The finite stage loop and\nthe finite elementary-range calls define the procedure completely.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-airy-functions-have-negative-real-zeros",
+        "deps": [
+          "def-airy-initial-value-series",
+          "lem-airy-series-coefficient-recurrence-and-tail",
+          "def-euler-gamma-function",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "The Airy Ai function has a negative real zero",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a79.9(i), real zeros of Airy functions",
+              "url": "https://dlmf.nist.gov/9.9"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a79.2(i)\u2013(ii) and 9.9(i)",
+              "url": "https://dlmf.nist.gov/9.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "The real Airy function $\\operatorname{Ai}$ has at least one zero on the\nnegative real axis."
+      },
+      {
+        "id": "lem-bessel-integral-representations-and-scaled-range",
+        "deps": [
+          "def-integer-order-bessel-series",
+          "lem-integer-order-bessel-series-tail",
+          "def-complex-exponential",
+          "lem-complex-exponential-series-converges-everywhere",
+          "lem-cauchy-product-of-absolutely-convergent-complex-series",
+          "thm-absolute-convergence-of-complex-series",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-eulers-formula",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "thm-sine-and-cosine-derivatives",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-uniform-limit-interchanges-riemann-integration",
+          "thm-substitution-for-improper-integrals"
+        ],
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "Integral representations and a range bound for integer Bessel functions",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a710.32(i), integral representations for modified Bessel functions",
+              "url": "https://dlmf.nist.gov/10.32"
+            },
+            {
+              "title": "DLMF, \u00a710.25(ii), modified Bessel functions",
+              "url": "https://dlmf.nist.gov/10.25"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a710.9, 10.25, and 10.32(ii)",
+              "url": "https://dlmf.nist.gov/10.9"
+            },
+            {
+              "title": "DLMF, \u00a710.74(iii)",
+              "url": "https://dlmf.nist.gov/10.74"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For integer $n\\ge0$ and real $x$, the series in\n[[def-integer-order-bessel-series]] satisfy\n\n$$J_n(x)=\\frac1\\pi\\int_0^\\pi\\cos(n\\theta-x\\sin\\theta)\\,d\\theta, \\qquad I_n(x)=\\frac1\\pi\\int_0^\\pi e^{x\\cos\\theta}\\cos(n\\theta)\\,d\\theta.$$\n\nConsequently, for $x\\ge0$,\n$0\\le e^{-x}I_n(x)\\le1$."
+      },
+      {
+        "id": "lem-binet-loggamma-right-halfplane-identity",
+        "deps": [
+          "def-loggamma-right-halfplane-branch",
+          "lem-loggamma-series-convergence-and-gamma-identity",
+          "def-euler-mascheroni-constant",
+          "thm-euler-mascheroni-constant-and-harmonic-asymptotic",
+          "thm-real-stirling-formula",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-integration-by-parts",
+          "thm-logarithm-derivative-and-integral",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "lem-changing-a-function-at-finitely-many-points",
+          "thm-additivity-over-subintervals"
+        ],
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "Binet integral identity for the right-half-plane log-Gamma branch",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.9(i), Binet's integral representation",
+              "url": "https://dlmf.nist.gov/5.9",
+              "locator": "\u00a75.9(i), equation 5.9.10_2, an alternative Binet integral representation."
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $\\operatorname{Re}z>0$, let $\\ell_+(z)$ be the branch in\n[[def-loggamma-right-halfplane-branch]]. Define\n$$\\Phi(u)=\\int_0^u\\bigl(\\lfloor v\\rfloor-v+1/2\\bigr)\\,dv.$$\nThen the absolutely convergent integral satisfies\n$$\\ell_+(z)=\\left(z-\\frac12\\right)\\operatorname{Log}z-z+ \\frac12\\log(2\\pi)+\\int_0^\\infty\\frac{\\Phi(u)}{(u+z)^2}\\,du.$$\nOn each unit interval, $\\Phi(n+t)=t(1-t)/2$ for $0\\le t\\le1$; hence\n$0\\le\\Phi(u)\\le1/8$."
+      },
+      {
+        "id": "lem-erfcx-moment-recurrence",
+        "deps": [
+          "def-erfcx-moment-sequence",
+          "def-fresnel-erf-and-hypergeometric-series",
+          "lem-erf-series-geometric-tail",
+          "thm-gaussian-integral",
+          "thm-integration-by-parts",
+          "thm-continuous-implies-integrable",
+          "thm-substitution-for-improper-integrals",
+          "def-euler-gamma-function",
+          "lem-gamma-integral-converges-locally-uniformly",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "Moment recurrence for the scaled complementary error function",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.2, definitions and elementary properties",
+              "url": "https://dlmf.nist.gov/7.2"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a77.2 and 7.12(i)",
+              "url": "https://dlmf.nist.gov/7.12"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a73 and 5",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $x>0$ and integer $k\\ge0$, the moments in\n[[def-erfcx-moment-sequence]] are finite and positive. They satisfy\n\n$$2xM_0+2M_1=1, \\qquad kM_{k-1}=2xM_k+2M_{k+1}\\quad(k\\ge1).$$\n\nWith $r_k=M_{k+1}/M_k$, it follows that\n\n$$r_k=\\frac{k+1}{2(x+r_{k+1})},\\qquad 0<r_k<\\frac{k+1}{2x},\\qquad \\operatorname{erfcx}(x)=\\frac{1}{\\sqrt\\pi(x+r_0)}.$$"
+      },
+      {
+        "id": "lem-integer-order-bessel-recurrences-and-ode",
+        "deps": [
+          "def-integer-order-bessel-series",
+          "lem-integer-order-bessel-series-tail",
+          "thm-termwise-differentiation-of-complex-power-series"
+        ],
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "Bessel differential equations and order recurrences from the series",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a710.25(i), modified Bessel differential equation",
+              "url": "https://dlmf.nist.gov/10.25"
+            },
+            {
+              "title": "DLMF, \u00a710.2(i), Bessel differential equation",
+              "url": "https://dlmf.nist.gov/10.2"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a710.2(i), 10.6(i), and 10.25(i)",
+              "url": "https://dlmf.nist.gov/10.6"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $z\\ne0$, the functions in [[def-integer-order-bessel-series]] satisfy\n\n$$z^2J_n''+zJ_n'+(z^2-n^2)J_n=0, \\qquad z^2I_n''+zI_n'-(z^2+n^2)I_n=0.$$\n\nFor real or complex $z\\ne0$ and integer $n\\ge1$, they also satisfy\n\n$$J_{n-1}(z)+J_{n+1}(z)=\\frac{2n}{z}J_n(z), \\qquad I_{n-1}(z)-I_{n+1}(z)=\\frac{2n}{z}I_n(z).$$\n\nIn addition, $J_0'(z)=-J_1(z)$.\n\nAt $z=0$, the series limits are $J_0(0)=I_0(0)=1$ and\n$J_n(0)=I_n(0)=0$ for $n\\ge1$."
+      },
+      {
+        "id": "lem-loggamma-product-tail-bound",
+        "deps": [
+          "def-loggamma-right-halfplane-branch",
+          "lem-loggamma-series-convergence-and-gamma-identity",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable"
+        ],
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "Explicit tail bound for the log-Gamma product series",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.8(ii), equation 5.8.2",
+              "url": "https://dlmf.nist.gov/5.8"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $\\operatorname{Re}z>0$ and integer $N>2|z|$, the tail in the series for\n$\\ell_+(z)$ after its first $N$ summands satisfies\n\n$$\\left|\\sum_{n=N+1}^{\\infty} \\left(\\frac zn-\\operatorname{Log}\\left(1+\\frac zn\\right)\\right)\\right| \\le \\frac{|z|^2}{2N\\left(1-|z|/(N+1)\\right)}.$$"
+      },
+      {
+        "id": "lem-loggamma-shift-independent",
+        "deps": [
+          "def-loggamma-slit-plane-branch",
+          "def-loggamma-right-halfplane-branch",
+          "lem-gamma-functional-equation-meromorphic-extension",
+          "lem-loggamma-series-convergence-and-gamma-identity",
+          "thm-gamma-functional-equation",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane",
+          "def-complex-logarithms-principal-logarithm-and-complex-powers",
+          "thm-polar-form-with-unique-principal-argument",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-complex-exponential-addition-and-real-extension",
+          "def-complex-exponential",
+          "thm-chain-rule-for-complex-derivatives",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-zero-derivative-on-connected-open-euclidean-set-iff-constant",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "thm-path-connected-implies-connected",
+          "lem-real-and-complex-modulus-rules",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "Shifted log-Gamma branch is independent of the shift",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.11, asymptotic expansions",
+              "url": "https://dlmf.nist.gov/5.11"
+            },
+            {
+              "title": "DLMF, \u00a75.5, functional relations",
+              "url": "https://dlmf.nist.gov/5.5"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a75.5, 5.8, and 5.11",
+              "url": "https://dlmf.nist.gov/5.8"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For every $z\\in\\Omega=\\mathbb C\\setminus(-\\infty,0]$, the value $\\ell(z)$ in\n[[def-loggamma-slit-plane-branch]] is independent of the integer $m\\ge0$ with\n$\\operatorname{Re}(z+m)>0$, is holomorphic on $\\Omega$, and satisfies\n$e^{\\ell(z)}=\\Gamma(z)$."
+      },
+      {
+        "id": "alg-certified-scaled-spherical-bessel-evaluation",
+        "kind": "algorithm",
+        "title": "Finite exact-interval evaluation of scaled spherical Bessel values",
+        "deps": [
+          "def-spherical-bessel-evaluation-contract",
+          "def-factorial-and-falling-factorial",
+          "lem-of-naturals-positive"
+        ],
+        "dependency_level": 2,
+        "justified_by": [
+          "thm-certified-scaled-spherical-bessel-enclosures"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, \u00a710.49, Explicit Formulas",
+              "url": "https://dlmf.nist.gov/10.49",
+              "locator": "\u00a710.49(i), equations 10.49.1\u201310.49.6, terminating Laurent formulas for spherical Bessel and Hankel functions."
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, \u00a710.74, Methods of Computation",
+              "url": "https://dlmf.nist.gov/10.74",
+              "locator": "\u00a710.74(i), exact spherical formulas and the cancellation risk when |z| is not large compared with the squared order."
+            },
+            {
+              "title": "University of Toronto, Lecture Notes on Mathematical Methods 2019\u201320",
+              "url": "https://www.physics.utoronto.ca/~phy1540f/p154019_cumullect.pdf",
+              "locator": "\u00a76.4, printed pp. 157\u2013158, finite-derivative spherical formula and outgoing Hankel convention."
+            }
+          ]
+        },
+        "statement": "Inputs are those of [[def-spherical-bessel-evaluation-contract]], a nonempty finite list of valid targets, finite exact positive rational absolute tolerances, optional exact positive rational relative tolerances, and finite integer caps $W,Q,M_{\\max},p_{\\max}\\ge1$. $W$ is the maximum exact-arithmetic work count, $Q$ the maximum stage and represented-point interface index, $M_{\\max}$ the maximum Taylor degree, and $p_{\\max}$ the maximum final dyadic precision. A Gaussian rational is $a+ib$ with $a,b\\in\\mathbb Q$. A Laurent polynomial is a finite sum $\\sum_k a_k z^k$ with integer exponents and Gaussian-rational coefficients; its formal derivative uses $(z^k)'=kz^{k-1}$. An expression graph below is a finite directed acyclic graph of exact rational arithmetic operations.\n\nFactorials are those of [[def-factorial-and-falling-factorial]]; they are nonzero by that definition and [[lem-of-naturals-positive]], so every displayed factorial denominator is defined. For a rational $x$, $\\lceil x\\rceil$ denotes the least integer greater than or equal to $x$, computed by exact integer division.\n\nReject an invalid order, target, tolerance, cap, or interval input not contained in $(0,\\infty)$ with `domain`. For a represented point, an interval returned by the input interface may meet zero; such a stage is skipped and a later interface index is tried.\n\nConstruct Laurent polynomials by\n$$A_0=0,\\quad B_0=z^{-1},\\quad C_0=-iz^{-1},$$\n$$A_{r+1}=rz^{-1}A_r-A_r'-B_r,\\quad B_{r+1}=rz^{-1}B_r-B_r'+A_r,\\quad C_{r+1}=rz^{-1}C_r-C_r'-iC_r$$\nfor $r=0,\\ldots,\\ell-1$. With $s$ and $c$ denoting the sine and cosine input enclosures, form the unscaled outputs\n$$u=A_\\ell c+B_\\ell s,\\quad v=(A_\\ell'+B_\\ell)c+(B_\\ell'-A_\\ell)s,\\quad w=C_\\ell(c+is),\\quad t=(C_\\ell'+iC_\\ell)(c+is).$$\nForm the scaled outputs\n$$c_\\ell z^{-\\ell}u,\\quad c_\\ell z^{-\\ell}v,\\quad d_\\ell^{-1}z^{\\ell+1}C_\\ell,\\quad d_\\ell^{-1}z^{\\ell+1}(C_\\ell'+iC_\\ell).$$\nCollect like Laurent powers exactly; in particular cancel negative powers in the scaled $h_\\ell^{(1)}$ value when they cancel algebraically. A remaining $z^{-1}$ in the scaled derivative is evaluated only on positive input intervals.\n\nFor real intervals use exact rational endpoint hulls: $[a,b]+[c,d]=[a+c,b+d]$, $[a,b][c,d]=[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$, and $[a,b]^{-1}=[1/b,1/a]$ when $0<a\\le b$. For complex rectangles, apply these real interval operations to the real and imaginary components of $(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. Thus interval arithmetic encloses every pointwise sum and product; division is only by a positive power of the positive argument or by a positive integer constant. Compute powers, factorials, and rational endpoints by finite exact arithmetic.\n\nAt a positive current box $I=[a,b]$, choose $M\\ge0$ with $M+2\\ge2b$ and form the rational interval polynomial and rational tail\n$$T_M(I)=\\sum_{m=0}^{M}\\frac{(iI)^m}{m!},\\qquad E_M=\\frac{2b^{M+1}}{(M+1)!}.$$\nThe interval power is repeated complex-rectangle multiplication. Enclose $\\cos(I)$ by $\\operatorname{Re}T_M(I)+[-E_M,E_M]$ and $\\sin(I)$ by $\\operatorname{Im}T_M(I)+[-E_M,E_M]$. Evaluate each requested output graph with these leaves and $z\\in I$, and round each final endpoint outward to the grid $2^{-p}\\mathbb Z$.\n\nUse the following deterministic finite search. Charge the Laurent recurrence, graph construction, and coefficient collection to the work counter as they are performed. For stages $q=1,\\ldots,Q$, first take the fixed interval unchanged, or call the represented-point interface at index $q$. Skip a represented-point stage unless its returned interval has $a>0$. Set $p=q$ and $M=\\max(q,\\lceil2b\\rceil)$. If $p>p_{\\max}$ or $M>M_{\\max}$, stop with `inconclusive`. Evaluate all requested graphs and the displayed $T_M,E_M$ using the work counter: each exact rational or Gaussian-rational arithmetic operation or comparison, each Taylor term, each endpoint-rounding operation, and each interface call costs one unit. If the next operation would exceed $W$, stop with `inconclusive` before performing it. If the output format cannot represent a certified endpoint, return `range` with no finite claim. If every requested target has radius at most its absolute tolerance, return `success`; for each optional relative tolerance, set its flag true exactly when the enclosure excludes zero and the relative test in the contract passes. A failed relative test does not prevent absolute `success`. If no stage succeeds before a cap or the search ends, return `inconclusive`. No floating-point recurrence is used."
+      },
+      {
+        "id": "lem-bessel-integral-midpoint-error",
+        "deps": [
+          "lem-bessel-integral-representations-and-scaled-range",
+          "lem-taylor-lagrange-remainder-from-mean-value",
+          "lem-derivative-algebra-and-chain-rules",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "dependency_level": 3,
+        "kind": "lemma",
+        "title": "Composite midpoint enclosure for the integer Bessel integral",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, Chapter 3, \u00a73.5, quadrature",
+              "url": "https://dlmf.nist.gov/3.5"
+            },
+            {
+              "title": "DLMF, \u00a710.74(iii) and Chapter 3, \u00a73.5",
+              "url": "https://dlmf.nist.gov/10.74"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Let $n\\ge0$ be an integer, $x\\in\\mathbb R$, $m\\ge1$, and $h=\\pi/m$. Put\n$\\phi(\\theta)=\\cos(n\\theta-x\\sin\\theta)$ and\n$Q_m=h\\sum_{j=0}^{m-1}\\phi((j+1/2)h)$. Then\n\n$$\\left|J_n(x)-\\frac{Q_m}{\\pi}\\right| \\le \\frac{h^2}{24}\\left((n+|x|)^2+|x|\\right).$$\n\nThis is the local composite-midpoint certificate for the Bessel integral; it\ndoes not certify floating-point summation unless each operation is enclosed."
+      },
+      {
+        "id": "lem-bessel-j-zero-data-exclusion",
+        "deps": [
+          "def-integer-order-bessel-series",
+          "lem-integer-order-bessel-recurrences-and-ode",
+          "thm-identity-theorem-holomorphic-functions"
+        ],
+        "dependency_level": 3,
+        "kind": "lemma",
+        "title": "Adjacent initial Bessel values cannot both vanish",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a7\u00a710.2(i)\u2013(ii)",
+              "url": "https://dlmf.nist.gov/10.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For every real $x>0$, $J_0(x)$ and $J_1(x)$ are not both zero."
+      },
+      {
+        "id": "lem-erfcx-asymptotic-remainder",
+        "deps": [
+          "def-erfcx-moment-sequence",
+          "lem-erfcx-moment-recurrence",
+          "thm-substitution-for-improper-integrals",
+          "lem-taylor-lagrange-remainder-from-mean-value",
+          "def-euler-gamma-function",
+          "lem-gamma-integral-converges-locally-uniformly",
+          "cor-gamma-factorial-values",
+          "thm-real-power-continuity-and-derivatives",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 3,
+        "kind": "lemma",
+        "title": "Signed finite remainder for the erfcx asymptotic expansion",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.12(i), equation 7.12.1",
+              "url": "https://dlmf.nist.gov/7.12"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a73 and 5",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For real $x>0$ and integer $N\\ge1$, put\n\n$$(1/2)_0=1,\\qquad (1/2)_k=\\prod_{j=0}^{k-1}(j+1/2).$$\n\n$$S_N(x)=\\frac1{x\\sqrt\\pi}\\sum_{k=0}^{N-1} (-1)^k\\frac{(1/2)_k}{x^{2k}}.$$\n\nThen\n\n$$\\operatorname{erfcx}(x)-S_N(x)=(-1)^N R_N(x),\\qquad 0\\le R_N(x)\\le \\frac1{x\\sqrt\\pi}\\frac{(2N)!}{4^N N!x^{2N}}.$$\n\nThis is a finite signed remainder bound, not a convergence assertion for the\nasymptotic series."
+      },
+      {
+        "id": "lem-erfcx-continued-fraction-enclosure",
+        "deps": [
+          "lem-erfcx-moment-recurrence"
+        ],
+        "dependency_level": 3,
+        "kind": "lemma",
+        "title": "Finite continued-fraction enclosure for erfcx",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.9, continued fractions for erfc",
+              "url": "https://dlmf.nist.gov/7.9"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a73 and 5",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Fix real $x>0$ and integer $N\\ge0$. Set\n$I_N=[0,(N+1)/(2x)]$, and for $k=N-1,\\ldots,0$ define\n\n$$I_k=\\left[\\frac{k+1}{2(x+\\sup I_{k+1})}, \\frac{k+1}{2(x+\\inf I_{k+1})}\\right].$$\n\nThen $r_k\\in I_k$ for every $0\\le k\\le N$, where $r_k$ is the moment ratio\nfrom [[lem-erfcx-moment-recurrence]]. Therefore\n\n$$\\operatorname{erfcx}(x)\\in \\left[\\frac1{\\sqrt\\pi(x+\\sup I_0)}, \\frac1{\\sqrt\\pi(x+\\inf I_0)}\\right].$$\n\nEach finite depth gives a valid enclosure; no convergence or shrinking-width\nclaim as $N$ grows is made."
+      },
+      {
+        "id": "lem-scaled-modified-bessel-midpoint-error",
+        "deps": [
+          "lem-bessel-integral-representations-and-scaled-range",
+          "lem-taylor-lagrange-remainder-from-mean-value",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "dependency_level": 3,
+        "kind": "lemma",
+        "title": "Composite midpoint enclosure for the scaled modified Bessel integral",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a710.32(ii), integral representations for modified Bessel functions",
+              "url": "https://dlmf.nist.gov/10.32"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Let $n\\ge0$ be an integer, $x\\ge0$, $m\\ge1$, $h=\\pi/m$, and\n$$f(\\theta)=e^{-x(1-\\cos\\theta)}\\cos(n\\theta),\\qquad Q_m=h\\sum_{j=0}^{m-1}f((j+1/2)h).$$\nThen\n$$\\left|e^{-x}I_n(x)-\\frac{Q_m}{\\pi}\\right| \\le \\frac{h^2}{24}\\bigl((x+n)^2+x\\bigr).$$\nThe bound certifies the exact midpoint integral. Floating-point summation is\ncertified only if its operations are enclosed separately."
+      },
+      {
+        "id": "lem-sectorial-stirling-explicit-remainder-bound",
+        "deps": [
+          "lem-binet-loggamma-right-halfplane-identity",
+          "def-loggamma-right-halfplane-branch",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "lem-trigonometric-identities-machin-and-range-reduction"
+        ],
+        "dependency_level": 3,
+        "kind": "lemma",
+        "title": "Explicit sectorial remainder bound for the right-half-plane log-Gamma branch",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.9(i), Binet's integral representations",
+              "url": "https://dlmf.nist.gov/5.9",
+              "locator": "Equation 5.9.10_2, an alternative Binet integral representation."
+            },
+            {
+              "title": "DLMF, \u00a75.11(i), Stirling's expansion for log-Gamma",
+              "url": "https://dlmf.nist.gov/5.11",
+              "locator": "Equation 5.11.1, the sectorial log-Gamma Stirling expansion."
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72\u20135",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Fix $0<\\delta\\le\\pi/2$ and $z\\in\\mathbb C$ with $\\operatorname{Re}z>0$.\nFor the branch $\\ell_+$ from [[def-loggamma-right-halfplane-branch]],\n[[lem-binet-loggamma-right-halfplane-identity]] gives\n$$\\ell_+(z)=\\left(z-\\frac12\\right)\\operatorname{Log}z-z+ \\frac12\\log(2\\pi)+R(z), \\qquad R(z)=\\int_0^\\infty\\frac{\\Phi(u)}{(u+z)^2}\\,du,$$\nwhere $\\Phi(u)=\\int_0^u(\\lfloor v\\rfloor-v+1/2)\\,dv$. Then\n$$|R(z)|\\le \\frac{1}{8\\sin^2(\\delta/2)|z|}.$$\nFor $\\delta=\\pi/2$, the bound is $1/(4|z|)$. The relative error after\nexponentiating the three main terms is at most $\\exp(|R(z)|)-1$."
+      },
+      {
+        "id": "thm-certified-fresnel-erf-hypergeometric-enclosures",
+        "deps": [
+          "alg-certified-fresnel-erf-hypergeometric-series",
+          "alg-certified-elementary-range-evaluation",
+          "def-certified-evaluation-result-contract",
+          "def-fresnel-erf-and-hypergeometric-series",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-fresnel-series-geometric-tail",
+          "lem-erf-series-geometric-tail",
+          "lem-gauss-hypergeometric-series-geometric-tail",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-real-elementary-range-enclosures",
+          "thm-complex-elementary-range-enclosures"
+        ],
+        "dependency_level": 3,
+        "kind": "theorem",
+        "title": "Soundness of the finite Fresnel, erf, and Gauss-series enclosures",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a715.2(i), Gauss series",
+              "url": "https://dlmf.nist.gov/15.2"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a77.6(i) and 15.2(i)",
+              "url": "https://dlmf.nist.gov/7.6"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "If [[alg-certified-fresnel-erf-hypergeometric-series]] returns `success` for\n$C,S,\\operatorname{erf}$, or a Gauss-series value on its stated domain, its\nreturned interval or rectangle contains that exact function value and passes\nthe requested absolute-radius test. A relative certificate is valid only when\nthe enclosure excludes zero and the contract's relative-radius test passes.\nEvery execution with finite caps terminates. The theorem makes no claim of success for every valid input.",
+        "forward_refs": []
+      },
+      {
+        "id": "thm-certified-scaled-spherical-bessel-enclosures",
+        "kind": "theorem",
+        "title": "Soundness and eventual absolute precision for spherical Bessel enclosures",
+        "deps": [
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "alg-certified-scaled-spherical-bessel-evaluation",
+          "def-spherical-bessel-evaluation-contract",
+          "def-spherical-bessel-and-hankel-functions",
+          "def-certified-evaluation-result-contract",
+          "def-sine-and-cosine-by-power-series",
+          "def-complex-exponential",
+          "lem-complex-exponential-series-converges-everywhere",
+          "def-factorial-and-falling-factorial",
+          "lem-of-naturals-positive",
+          "thm-sine-and-cosine-derivatives",
+          "thm-eulers-formula",
+          "lem-cauchy-product-of-absolutely-convergent-complex-series",
+          "thm-ratio-test",
+          "lem-geometric-sequence-null"
+        ],
+        "dependency_level": 3,
+        "statement": "Every `success` output of [[alg-certified-scaled-spherical-bessel-evaluation]] encloses each requested scaled or unscaled value, or the entire requested image for an interval input, and satisfies its absolute-radius test. Its relative flags satisfy [[def-certified-evaluation-result-contract]]. Every capped execution terminates. For each fixed order, positive represented real point, finite nonempty target list, and positive rational absolute tolerances, some finite work, degree, interface-index, and precision caps permit absolute success. The same holds for an exact positive dyadic point. For a nonzero requested target, any positive rational relative tolerance can also eventually be certified by rerunning with sufficiently small positive rational absolute tolerances and sufficiently large finite caps; no relative certification is promised at a zero. The theorem gives no uniform floating-point condition number, bit-complexity bound, success guarantee for fixed small caps, or scattering uniqueness result.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, \u00a710.49, Explicit Formulas",
+              "url": "https://dlmf.nist.gov/10.49",
+              "locator": "\u00a710.49(i), equations 10.49.1\u201310.49.6, terminating spherical Bessel and outgoing Hankel expressions."
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, \u00a710.51, Recurrence Relations and Derivatives",
+              "url": "https://dlmf.nist.gov/10.51",
+              "locator": "\u00a710.51(i), equations 10.51.1\u201310.51.3, spherical-function derivative and recurrence identities."
+            },
+            {
+              "title": "University of Toronto, Lecture Notes on Mathematical Methods 2019\u201320",
+              "url": "https://www.physics.utoronto.ca/~phy1540f/p154019_cumullect.pdf",
+              "locator": "\u00a76.4, printed pp. 157\u2013158, spherical Bessel differential-operator representation and outgoing Hankel convention."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-certified-erfcx-evaluation",
+        "deps": [
+          "def-certified-evaluation-result-contract",
+          "def-erfcx-moment-sequence",
+          "lem-erfcx-moment-recurrence",
+          "lem-erfcx-continued-fraction-enclosure",
+          "lem-erfcx-asymptotic-remainder",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "alg-certified-elementary-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+          "def-factorial-and-falling-factorial"
+        ],
+        "dependency_level": 4,
+        "kind": "algorithm",
+        "title": "Finite certified evaluation of the scaled complementary error function",
+        "justified_by": [
+          "thm-certified-erfcx-enclosures"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.9, continued fractions",
+              "url": "https://dlmf.nist.gov/7.9"
+            },
+            {
+              "title": "DLMF, \u00a77.12(i), equation 7.12.1",
+              "url": "https://dlmf.nist.gov/7.12"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a73 and 5",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "Input an exact dyadic real $x$, positive rational absolute tolerance\n$\\varepsilon_a$, optional positive rational relative tolerance\n$\\varepsilon_r$, a fixed exponent range $(e_{\\min},e_{\\max})$, and finite\npositive integer caps $S_{\\max},D_{\\max},N_{\\max},p_{\\max},W$, with\n$p_{\\max}\\ge2$. Here\n$S_{\\max}$ bounds stages, $D_{\\max}$ the continued-fraction depth,\n$N_{\\max}$ the asymptotic truncation, $p_{\\max}$ the dyadic precision, and\n$W$ the exact interval operations, terms, and subroutine calls performed by\nthis procedure. Reject nonpositive tolerances, invalid caps,\n$e_{\\min}>e_{\\max}$, or $x\\le0$ with domain. At stage $q$, use\n$D=\\min(q,D_{\\max})$, $N=\\min(q,N_{\\max})$, precision\n$p=\\max(2,\\min(q,p_{\\max}))$, and truncation index $q$ for elementary-range calls.\nOutputs and status meanings are those of\n[[def-certified-evaluation-result-contract]].\n\nAll rational and interval arithmetic uses\n[[def-outward-rounded-interval-and-ball-operations]]. Charge every exact\narithmetic operation, range-evaluator node operation, term, rounding, and\nloop update to the shared counter $W$. Interrupt any nested elementary-range\ncall with inconclusive before its next operation would exceed the remaining\nbudget. Return inconclusive before any local operation would exceed $W$. A\nfinal endpoint overflow\nreturns range. A non-finite required arithmetic operation or elementary-range subcall makes its candidate unavailable; if neither candidate can be formed, the current stage is\ninconclusive and later stages may still be tried.\n\nFor each stage $q=1,\\ldots,S_{\\max}$, compute $P_q$, a finite dyadic\ninterval containing $\\pi$, as follows. For $r\\in\\{1/5,1/239\\}$, form\n$A_q(r)=\\sum_{j=0}^{q-1}(-1)^jr^{2j+1}/(2j+1)$ and\n$E_q(r)=r^{2q+1}/((2q+1)(1-r^2))$ exactly; the arctangent-tail lemma gives\n$\\arctan r\\in[A_q(r)-E_q(r),A_q(r)+E_q(r)]$. Combine these intervals by\n$\\pi=16\\arctan(1/5)-4\\arctan(1/239)$ and round outward to the selected\nformat at precision $p$. The Machin identity is supplied by\n[[lem-trigonometric-identities-machin-and-range-reduction]]; the arctangent\nseries and its geometric-tail argument are in\n[[lem-range-reduced-exp-log-and-arctan-series-enclosures]]. If the interval\nconversion is non-finite, skip the stage. Call\n[[alg-certified-elementary-range-evaluation]] on the real one-node DAG\n$\\sqrt{P_q}$, using exponent range $(e_{\\min},e_{\\max})$, precision $p$,\nand truncation $q$. If this call is not finite or its output $R_q$ does\nnot have positive lower endpoint, skip this stage. Otherwise $R_q$ encloses\n$\\sqrt\\pi$ by [[thm-real-elementary-range-enclosures]].\n\nForm the continued-fraction candidate as follows. Set\n$I_D=[0,(D+1)/(2x)]$. For $k=D-1,\\ldots,0$, set\n$$I_k=\\left[\\frac{k+1}{2(x+\\sup I_{k+1})}, \\frac{k+1}{2(x+\\inf I_{k+1})}\\right]$$\nby outward interval operations. Apply the decreasing map\n$r\\mapsto1/(\\sqrt\\pi(x+r))$ to $I_0$, evaluating $\\sqrt\\pi$ with\n$R_q$, to obtain a candidate interval $C_q$. The finite-depth\ncontainment lemma [[lem-erfcx-continued-fraction-enclosure]] makes $C_q$\na valid enclosure for every $D\\ge0$.\n\nIf $N\\ge1$, also form the asymptotic candidate. Evaluate\n$$S_N(x)=\\frac1{x\\sqrt\\pi}\\sum_{k=0}^{N-1}(-1)^k\\frac{(1/2)_k}{x^{2k}}, \\qquad B_N(x)=\\frac1{x\\sqrt\\pi}\\frac{(2N)!}{4^NN!x^{2N}}$$\nwith $R_q$ and exact factorial/rational interval arithmetic. Write the computed sum interval as $[s_-,s_+]$ and take a nonnegative outward upper endpoint $b_N$ for the remainder bound $B_N$. Set\n$A_q=[s_-,s_++b_N]$ when $N$ is even and\n$A_q=[s_--b_N,s_+]$ when $N$ is odd, rounding the final endpoints outward. The signed remainder lemma\n[[lem-erfcx-asymptotic-remainder]] makes $A_q$ a valid enclosure.\n\nIf both candidates are finite, intersect them when the intersection is\nnonempty; if it is empty, discard the stage. If only one is finite, use that\ncandidate. Round the selected final endpoints outward to precision $p$.\nReturn success at the first stage whose radius is at most\n$\\varepsilon_a$. Set relative_certified to true exactly when relative\ntolerance was requested, the interval excludes zero, and the contract's\nrelative-radius test passes; a failed relative test does not prevent absolute\nsuccess. If no stage passes before the finite caps, return inconclusive.",
+        "forward_refs": []
+      },
+      {
+        "id": "alg-certified-gamma-loggamma-evaluation",
+        "deps": [
+          "def-certified-evaluation-result-contract",
+          "def-loggamma-right-halfplane-branch",
+          "def-loggamma-slit-plane-branch",
+          "lem-loggamma-series-convergence-and-gamma-identity",
+          "lem-loggamma-product-tail-bound",
+          "lem-loggamma-shift-independent",
+          "lem-sectorial-stirling-explicit-remainder-bound",
+          "lem-explicit-euler-constant-enclosure",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "alg-certified-elementary-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "thm-complex-elementary-range-enclosures",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "lem-range-reduced-exp-log-and-arctan-series-enclosures"
+        ],
+        "dependency_level": 4,
+        "kind": "algorithm",
+        "title": "Finite certified evaluation of Gamma and a continued log-Gamma branch",
+        "justified_by": [
+          "thm-certified-gamma-loggamma-enclosures"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.11, asymptotic expansions",
+              "url": "https://dlmf.nist.gov/5.11"
+            },
+            {
+              "title": "DLMF, \u00a75.5, functional relations",
+              "url": "https://dlmf.nist.gov/5.5"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a75.5, 5.8, and 5.11",
+              "url": "https://dlmf.nist.gov/5.8"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "Inputs are a finite dyadic complex rectangle $Z$, a target label $\\Gamma$ or\n$\\ell$, positive exact rational absolute tolerance $\\varepsilon_a$,\noptional positive exact rational relative tolerance $\\varepsilon_r$, a fixed\ndyadic format precision $p_0\\ge2$ and exponent range\n$(e_{\\min},e_{\\max})$, fixed integer elementary truncation index $K\\ge1$,\nfinite positive integer work cap $W$, and integer precision cap $P\\ge p_0$.\nThe target\n$\\ell$ is the continued\nbranch in [[def-loggamma-slit-plane-branch]]. Reject an invalid target, empty or non-finite rectangle, invalid cap,\ntolerance, $e_{\\min}>e_{\\max}$, or\n$Z\\not\\subset\\mathbb C\\setminus(-\\infty,0]$ by returning\ndomain. The exact rectangle test is: either the imaginary interval omits\nzero, or the real interval has strictly positive lower endpoint. Reject a\nselected shift $m>W$ with inconclusive. For stages $q=1,\\ldots,P$, use\nprecision $p=\\max(p_0,q)$, harmonic cutoff $M=\\min(q,W)$, product cutoff\n$N=\\min(q,W)$, and the fixed elementary truncation index $K$ for every\nrange call. Output statuses are those of\n[[def-certified-evaluation-result-contract]].\n\nUse [[def-outward-rounded-interval-and-ball-operations]] for interval\narithmetic. Count every exact rational or interval operation, series term,\nelementary-DAG node operation, rounding, and loop update against the shared\ncounter $W$. If the procedure is called by another evaluator, charge these\nsame primitive operations directly to that caller's shared counter, so the\ncaller can debit the actual child work; the local cap $W$ remains in force.\nBefore any operation would exceed either remaining cap, return inconclusive.\nRun nested elementary-range calls under that counter and interrupt a subcall\nbefore its next operation would exceed the remaining budget. A non-finite\nrange result makes the current candidate unavailable. Any other non-finite arithmetic result also makes its candidate unavailable; no partial result is retained. Final output overflow\nreturns range.\n\nChoose\n$$m=\\max\\!\\left(0,\\left\\lfloor-\\inf\\Re Z\\right\\rfloor+1\\right),$$\nwhich is the least integer $m\\ge0$ for which $\\inf\\Re Z+m>0$. Compute\nthis exactly from the rational endpoint; if $m>W$, return inconclusive\nbefore forming the shift. Put $W_Z=Z+m$.\nBefore every elementary-range call, round each rational interval input\noutward to the stage dyadic format; a conversion overflow makes that candidate\nunavailable. A rounded Log input must still avoid the cut; otherwise its candidate is unavailable, rather than declaring the valid original input outside the domain. Embed a real interval $X$ explicitly as $X+i[0,0]$ whenever it participates in a complex expression; real and complex DAG nodes retain their declared types. All elementary-range calls below use\n[[alg-certified-elementary-range-evaluation]] with the selected format and\nfixed truncation $K$; its soundness for finite real and complex results is\ngiven by\n[[thm-real-elementary-range-enclosures]] and\n[[thm-complex-elementary-range-enclosures]].\n\nFor stage $q=1,\\ldots,P$, form a dyadic $P_q$ containing $\\pi$:\nfor $r\\in\\{1/5,1/239\\}$, compute exactly\n$A_q(r)=\\sum_{k=0}^{q-1}(-1)^kr^{2k+1}/(2k+1)$ and\n$E_q(r)=r^{2q+1}/((2q+1)(1-r^2))$, combine\n$\\arctan r\\in[A_q(r)-E_q(r),A_q(r)+E_q(r)]$ by the Machin identity, and\nround outward to the selected format at precision $p$. The arctangent\nseries and its geometric-tail argument are in\n[[lem-range-reduced-exp-log-and-arctan-series-enclosures]], and the Machin\nidentity is in [[lem-trigonometric-identities-machin-and-range-reduction]]. If the conversion\nis non-finite or $\\inf P_q\\le0$, the Stirling candidate is unavailable for\nthis stage; still attempt the product candidate. Let\n$a_W=\\inf\\Re W_Z>0$ and\n$R_W=\\max(|\\inf\\Re W_Z|,|\\sup\\Re W_Z|)\n+\\max(|\\inf\\Im W_Z|,|\\sup\\Im W_Z|)$; $R_W$ is an exact rational upper\nbound for $|w|$ on $W_Z$.\n\nFor this stage, call the elementary-range algorithm on the principal-log node\nfor each $Z+j$, $j=0,\\ldots,m-1$. Translation by these real integers\npreserves avoidance of the cut for an input rectangle wholly in the slit\nplane; if the exact branch-domain check fails, return domain. Add the finite\nlog rectangles to form the shift sum $L_Z$. If any shift-log call is non-finite, discard this whole stage, since both candidates require that sum. When $m=0$, set $L_Z=0$.\n\nConstruct the product candidate when $N>2R_W$. Call the elementary-range\nalgorithm for the real node $\\log M$ to get an enclosure $G_M=[g_-,g_+]$ of\n$\\log M$, and form the outward-rounded Euler-constant interval\n$[H_M-g_+-1/M,\\ H_M-g_-]$, where $H_M=\\sum_{k=1}^M1/k$ exactly. Call\nthe complex principal-log node on $W_Z$ and on each $1+W_Z/k$ for\n$1\\le k\\le N$. All these rectangles lie in the principal-log domain since\n$\\Re W_Z>0$. Form\n$$Q_N=-\\operatorname{Log}(W_Z)-\\gamma_E W_Z+ \\sum_{k=1}^N\\left(\\frac{W_Z}{k}-\\operatorname{Log}(1+W_Z/k)\\right)$$\nby interval arithmetic, and enlarge each coordinate by an outward upper bound for\n$$T_N=\\frac{R_W^2}{2N(1-R_W/(N+1))}.$$\nThe tail lemma [[lem-loggamma-product-tail-bound]] proves that this is an\nenclosure of $\\ell_+(W_Z)$, uniformly on the whole rectangle. Subtract\n$L_Z$ to get the shifted product candidate for $\\ell(Z)$. If $N\\le2R_W$\nor a required call is non-finite, this candidate is unavailable at this stage.\n\nConstruct the Stirling candidate only when $P_q$ is finite and has positive\nlower endpoint. Call the complex principal-log node on $W_Z$, and the real\nlogarithm node on $2P_q$. Form\n$$S_Z=(W_Z-\\tfrac12)\\operatorname{Log}(W_Z)-W_Z+ \\tfrac12\\log(2\\pi)-L_Z$$\nby interval arithmetic and enlarge each coordinate by an outward upper bound for $1/(4a_W)$.\nThe sectorial remainder lemma [[lem-sectorial-stirling-explicit-remainder-bound]]\nproves this is an enclosure of $\\ell(Z)$. If a required call is non-finite,\nthis candidate is unavailable at this stage.\n\nIf both log candidates are available, intersect them when the intersection is\nnonempty; if empty, discard the stage. If only one is available, select it.\nFor target $\\ell$, use this rectangle as the output candidate. For target\n$\\Gamma$, call the complex exponential node on the selected rectangle and\nuse its finite output rectangle. Return success at the first stage whose\ncandidate radius is at most $\\varepsilon_a$. Set relative_certified to true\nexactly when relative tolerance was requested, zero is excluded, and the\ncontract's relative-radius test passes; a failed relative test does not\nprevent absolute success. If no stage succeeds before its caps, return\ninconclusive.",
+        "forward_refs": []
+      },
+      {
+        "id": "lem-bessel-casoratian-invariant-positive",
+        "deps": [
+          "def-integer-order-bessel-series",
+          "def-bessel-complementary-recurrence-solution",
+          "lem-integer-order-bessel-recurrences-and-ode",
+          "lem-bessel-j-zero-data-exclusion"
+        ],
+        "dependency_level": 4,
+        "kind": "lemma",
+        "title": "Positive discrete Wronskian for the Bessel recurrence pair",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a73.6, Linear Difference Equations",
+              "url": "https://dlmf.nist.gov/3.6"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Fix real $x>0$, let $J_j(x)$ be as in\n[[def-integer-order-bessel-series]], and let $D_j(x)$ be as in\n[[def-bessel-complementary-recurrence-solution]]. Define\n$W_j=J_jD_{j+1}-J_{j+1}D_j$. Then\n\n$$W_j=J_0(x)^2+J_1(x)^2>0\\qquad(j\\ge0).$$\n\nIn particular, the two recurrence solutions $J$ and $D$ are linearly\nindependent."
+      },
+      {
+        "id": "lem-finite-miller-terminal-error-identity",
+        "deps": [
+          "def-integer-order-bessel-series",
+          "def-bessel-complementary-recurrence-solution",
+          "lem-bessel-casoratian-invariant-positive",
+          "lem-integer-order-bessel-recurrences-and-ode"
+        ],
+        "dependency_level": 5,
+        "kind": "lemma",
+        "title": "Exact finite terminal-contamination error identity",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a73.6(iii), Miller's Algorithm",
+              "url": "https://dlmf.nist.gov/3.6"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Fix $x>0$, integers $N\\ge1$ and $0\\le n<N$, and define the exact backward\nrecurrence solution by $u_{N+1}=0$, $u_N=1$, and\n$u_{j-1}=2ju_j/x-u_{j+1}$ for $j=N,N-1,\\ldots,1$. If\n$D_{N+1}(x)\\ne0$, put $q=-J_{N+1}(x)/D_{N+1}(x)$. For $s\\in\\{0,1\\}$ such\nthat $J_s(x)+qD_s(x)\\ne0$, let\n$\\widehat J_n=J_s(x)u_n/u_s$. Then\n\n$$\\widehat J_n-J_n= \\frac{q\\bigl(J_sD_n-J_nD_s\\bigr)}{J_s+qD_s}.$$\n\nThis is a finite-$N$ identity. It makes no assertion that the error tends to\nzero as $N\\to\\infty$."
+      },
+      {
+        "id": "thm-certified-erfcx-enclosures",
+        "deps": [
+          "alg-certified-erfcx-evaluation",
+          "alg-certified-elementary-range-evaluation",
+          "def-certified-evaluation-result-contract",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-erfcx-continued-fraction-enclosure",
+          "lem-erfcx-asymptotic-remainder",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-real-elementary-range-enclosures"
+        ],
+        "dependency_level": 5,
+        "kind": "theorem",
+        "title": "Soundness of finite erfcx enclosures",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.9, continued fractions",
+              "url": "https://dlmf.nist.gov/7.9"
+            },
+            {
+              "title": "DLMF, \u00a77.12(i), equation 7.12.1",
+              "url": "https://dlmf.nist.gov/7.12"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a73 and 5",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "If [[alg-certified-erfcx-evaluation]] returns `success` for $x>0$, the\nreturned interval contains $\\operatorname{erfcx}(x)$ and passes the requested\nabsolute-radius test. A relative certificate is valid only if zero is outside\nthe interval and the required relative-radius test passes. Every execution\nwith finite caps terminates. The theorem makes no success claim for every\n$x$ or finite cap.",
+        "forward_refs": []
+      },
+      {
+        "id": "thm-certified-gamma-loggamma-enclosures",
+        "deps": [
+          "lem-loggamma-series-convergence-and-gamma-identity",
+          "lem-loggamma-product-tail-bound",
+          "lem-explicit-euler-constant-enclosure",
+          "lem-sectorial-stirling-explicit-remainder-bound",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "alg-certified-gamma-loggamma-evaluation",
+          "alg-certified-elementary-range-evaluation",
+          "def-certified-evaluation-result-contract",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-loggamma-shift-independent",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-real-elementary-range-enclosures",
+          "thm-complex-elementary-range-enclosures"
+        ],
+        "dependency_level": 5,
+        "kind": "theorem",
+        "title": "Soundness of finite Gamma and log-Gamma enclosures",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a75.11, asymptotic expansions",
+              "url": "https://dlmf.nist.gov/5.11"
+            },
+            {
+              "title": "DLMF, \u00a75.5, functional relations",
+              "url": "https://dlmf.nist.gov/5.5"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a75.5, 5.8, and 5.11",
+              "url": "https://dlmf.nist.gov/5.8"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 3",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "For any finite dyadic rectangle $Z\\subset\\mathbb C\\setminus(-\\infty,0]$,\nwhenever [[alg-certified-gamma-loggamma-evaluation]] returns `success`, its\nreturned enclosure contains the range of $\\Gamma$ or the continued log-Gamma\nbranch on $Z$ and passes the stated absolute-radius test. Any reported\nrelative certificate obeys the zero-exclusion condition. No assertion\nguarantees success for every valid input or finite cap. Every execution with\nfinite caps terminates.",
+        "forward_refs": []
+      },
+      {
+        "id": "alg-certified-airy-evaluation",
+        "deps": [
+          "def-certified-evaluation-result-contract",
+          "def-airy-initial-value-series",
+          "lem-airy-series-coefficient-recurrence-and-tail",
+          "alg-certified-gamma-loggamma-evaluation",
+          "thm-certified-gamma-loggamma-enclosures",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "alg-certified-elementary-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "thm-complex-elementary-range-enclosures",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "lem-directed-dyadic-rounding-enclosure-and-error",
+          "def-real-elementary-functions-and-domains"
+        ],
+        "dependency_level": 6,
+        "kind": "algorithm",
+        "title": "Finite certified Airy power-series evaluation",
+        "justified_by": [
+          "thm-certified-airy-enclosures"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a79.17(i), numerical evaluation",
+              "url": "https://dlmf.nist.gov/9.17"
+            },
+            {
+              "title": "DLMF, \u00a79.4, Airy Maclaurin series",
+              "url": "https://dlmf.nist.gov/9.4"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a79.2(ii), 9.4, and 9.17(i)",
+              "url": "https://dlmf.nist.gov/9.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "Inputs are an exact dyadic complex number $z$, a target label\n$\\operatorname{Ai}$ or $\\operatorname{Bi}$, positive rational absolute\ntolerance $\\varepsilon_a$, optional positive rational relative tolerance\n$\\varepsilon_r$, a fixed exponent range $(e_{\\min},e_{\\max})$, and finite\npositive integer caps $S_{\\max},K_{\\max},p_{\\max},W$, with $p_{\\max}\\ge2$.\nReject an invalid target, nonpositive tolerance, invalid cap, or\n$e_{\\min}>e_{\\max}$ with domain. The caps bound stages,\nterms per residue class, final dyadic precision, and this procedure's exact\ninterval operations and subroutine calls. For stage $q$, use $K=q$,\nprecision $p=\\max(2,\\min(q,p_{\\max}))$, and elementary-range truncation $q$;\nrun stages $q=1,\\ldots,\\min(S_{\\max},K_{\\max},p_{\\max})$.\n\nAll arithmetic uses [[def-outward-rounded-interval-and-ball-operations]].\nCharge every exact arithmetic operation, range-evaluator node operation,\nterm, rounding, and loop update to the shared counter $W$. Return\ninconclusive before any local operation would exceed $W$; interrupt a nested\nsubroutine before its next operation would exceed the remaining budget. When\nnested, charge every Gamma-child operation directly to the same parent counter.\nIf a final\nendpoint overflows, return range. A non-finite subroutine result makes the\ncurrent stage unavailable; later stages may still be tried. Other statuses\nare those of [[def-certified-evaluation-result-contract]].\n\nAt stage $q$, outward-round the rational points $1/3$ and $2/3$ to\ndyadic intervals $G_r$ at precision $p$. For each $r\\in\\{1/3,2/3\\}$, charge the\nchild-call operation to the parent counter. If no parent work unit remains,\nreturn inconclusive; otherwise pass the positive remaining budget as the\nchild's work cap and call\n[[alg-certified-gamma-loggamma-evaluation]] with target $\\Gamma$ on the\ncomplex rectangle $G_r+i[0,0]$, absolute tolerance $2^{-q}$, no relative\ntolerance, the same exponent range, fixed elementary truncation $q$,\nbase format precision $p$, and precision cap $p$. Debit every operation\nperformed by the Gamma child to the shared counter. A\nsuccess output rectangle encloses\n$\\Gamma(r)$, since $r\\in G_r$; if either call is not successful or its\nrectangle contains zero, skip this stage. A failed rational-to-dyadic conversion also makes the stage unavailable.\n\nFor $s\\in\\{1/6,1/3,2/3\\}$, outward-round the exact rational $s$ to a\ndyadic interval $S_{s,p}$, then call\n[[alg-certified-elementary-range-evaluation]] on the real expression DAG\n$\\exp(S_{s,p}\\log 3)$, with the same exponent range, precision $p$, and\ntruncation $q$. These calls enclose $3^s$ by\n[[thm-real-elementary-range-enclosures]]. If a required call is not finite,\nskip this stage. Embed each real power interval $X$ as the complex rectangle $X+i[0,0]$, then combine it with the Gamma rectangles by outward complex arithmetic\nto enclose the two initial coefficients\n$$(a_0,a_1)=\\left(\\frac{1}{3^{2/3}\\Gamma(2/3)}, -\\frac{1}{3^{1/3}\\Gamma(1/3)}\\right)$$\nfor Ai, or\n$$(b_0,b_1)=\\left(\\frac{1}{3^{1/6}\\Gamma(2/3)}, \\frac{3^{1/6}}{\\Gamma(1/3)}\\right)$$\nfor Bi. If any divisor rectangle contains zero or an arithmetic operation is non-finite, skip this stage.\n\nPut $R=|\\Re z|+|\\Im z|$, an exact rational upper bound for $|z|$.\nFor each residue $r=0,1$, initialize $t_{r,0}=c_r z^r$ using the\nselected pair of initial coefficient intervals, and compute\n$t_{r,j+1}=t_{r,j}z^3/((k+3)(k+2))$, where $k=r+3j$. Sum\n$t_{r,0},\\ldots,t_{r,q-1}$ and compute the first omitted term\n$t_{r,q}$. Put $k_r=r+3q$ and\n$$\\rho_r=\\frac{R^3}{(k_r+3)(k_r+2)}.$$\nIf either $\\rho_r\\ge1$, skip the stage. Otherwise enlarge the sum of both\npartial rectangles in each coordinate by\n$$\\frac{M(t_{0,q})}{1-\\rho_0}+\\frac{M(t_{1,q})}{1-\\rho_1},$$\nwhere $M(X+iY)=\\max(|\\inf X|,|\\sup X|)\n+\\max(|\\inf Y|,|\\sup Y|)$. The $c_2=0$ residue class vanishes identically.\nThe ratio and tail lemma [[lem-airy-series-coefficient-recurrence-and-tail]]\ntherefore makes the enlarged rectangle a containing enclosure of the selected\nAiry value.\n\nRound the final rectangle outward to precision $p$. Return success at the\nfirst stage whose radius is at most $\\varepsilon_a$. Set relative_certified\nto true exactly when relative tolerance was requested, zero is excluded, and\nthe contract's relative-radius test passes; a failed relative test does not\nprevent absolute success. If no stage succeeds before its caps, return\ninconclusive. The stage loop and all subroutine calls have finite caps, so the\nprocedure has no unbounded retry.",
+        "forward_refs": []
+      },
+      {
+        "id": "alg-certified-integer-order-bessel-evaluation",
+        "deps": [
+          "def-certified-evaluation-result-contract",
+          "def-integer-order-bessel-series",
+          "def-bessel-complementary-recurrence-solution",
+          "lem-integer-order-bessel-series-tail",
+          "lem-integer-order-bessel-recurrences-and-ode",
+          "lem-bessel-integral-representations-and-scaled-range",
+          "lem-bessel-integral-midpoint-error",
+          "lem-scaled-modified-bessel-midpoint-error",
+          "lem-bessel-casoratian-invariant-positive",
+          "lem-finite-miller-terminal-error-identity",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "alg-certified-elementary-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "def-factorial-and-falling-factorial",
+          "lem-of-naturals-positive"
+        ],
+        "dependency_level": 6,
+        "kind": "algorithm",
+        "title": "Finite certified evaluation of integer-order Bessel functions",
+        "justified_by": [
+          "thm-certified-integer-order-bessel-enclosures"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a710.9, integral representations",
+              "url": "https://dlmf.nist.gov/10.9"
+            },
+            {
+              "title": "DLMF, \u00a710.6, recurrence relations and derivatives",
+              "url": "https://dlmf.nist.gov/10.6"
+            },
+            {
+              "title": "DLMF, \u00a710.2, Bessel functions of the first kind",
+              "url": "https://dlmf.nist.gov/10.2"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a710.2, 10.6, 10.9, 10.25, and 10.74(iii)",
+              "url": "https://dlmf.nist.gov/10.74"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "Inputs are an integer order $n\\ge0$, a target $J$ or scaled $I$, an exact\ndyadic real argument $x$, positive rational absolute tolerance\n$\\varepsilon_a$, optional positive rational relative tolerance\n$\\varepsilon_r$, a fixed exponent range $(e_{\\min},e_{\\max})$, and finite\npositive integer caps $S_{\\max},K_{\\max},M_{\\max},N_{\\max},p_{\\max},W$, with\n$p_{\\max}\\ge2$.\nThe caps bound stages, series terms, midpoint panels, Miller terminal index,\ndyadic precision, and exact interval operations and subroutine calls. Run\nstages $q=1,\\ldots,\\min(S_{\\max},K_{\\max},M_{\\max},p_{\\max})$, using precision\n$p=\\max(2,\\min(q,p_{\\max}))$ and elementary-range truncation $q$. Reject\n$n<0$, invalid targets, nonpositive tolerances, invalid caps,\n$e_{\\min}>e_{\\max}$, or $x<0$ for the scaled $I$ target with\ndomain. The scaled\ntarget is always $e^{-x}I_n(x)$.\n\nUse exact rational endpoint formulas for finite sums, recurrences, mesh\nconstruction, and error bounds, with final endpoints rounded outward to\nprecision $p$. Charge every exact arithmetic operation, range-evaluator\nnode operation, term, rounding, and loop update to the shared counter $W$;\ninterrupt a nested elementary-range call with inconclusive before its next\noperation would exceed the remaining budget. Factorials use\n[[def-factorial-and-falling-factorial]]. Call\n[[alg-certified-elementary-range-evaluation]] for the real sine, cosine, and\nexponential ranges in the midpoint branches. Before each call, round its\nrational input interval outward to the fixed dyadic format. Its finite outputs are sound by\n[[thm-real-elementary-range-enclosures]]. Count each exact operation, term,\nrounding, and subroutine call against $W$; if the next operation would\nexceed $W$, return inconclusive. A non-finite elementary call makes that\nbranch unavailable. Final endpoint overflow returns range.\n\nBefore forming any stage constant, if the target is scaled $I$ and $x=0$,\nuse precision $p=p_{\\max}$, form $[1,1]$ when $n=0$ and $[0,0]$ when $n\\ge1$, and round its\nendpoints outward to that format. If either conversion overflows,\nreturn range. Otherwise apply the ordinary absolute-radius test to the rounded candidate and return `success` only when it passes; return `inconclusive` if it fails. The internal exact candidate has radius zero, but outward underflow may widen its stored enclosure. Set a successful output's relative flag by the usual contract test, so a zero value\nreceives no relative certificate. This branch does not call the\nelementary-range procedure.\n\nAt stage $q$, compute an outward dyadic interval $P_q$ containing $\\pi$\nfrom the Machin identity and alternating arctangent tails in\n[[lem-trigonometric-identities-machin-and-range-reduction]]: for\n$r=1/5,1/239$, use the $q$-term sum\n$\\sum_{k=0}^{q-1}(-1)^kr^{2k+1}/(2k+1)$ and tail bound\n$r^{2q+1}/((2q+1)(1-r^2))$, combine by $16\\arctan(1/5)-4\\arctan(1/239)$,\nand round outward to the selected format at precision $p$. If this\nconversion is non-finite or $\\inf P_q\\le0$, midpoint candidates are\nunavailable at this stage; the independent power-series or Miller branches may\nstill be attempted.\n\nFor a requested $J_n(x)$, first form a power-series candidate if possible.\nFor any order $r\\ge0$, define the finite subroutine $\\operatorname{SeriesJ}(r)$:\nstart\n$a_0=(x/2)^r/(0!\\,r!)$ and\n$a_{k+1}=-a_kx^2/(4(k+1)(k+r+1))$; sum $a_0,\\ldots,a_{q-1}$, and\ncompute $a_q$. Put\n$$\\rho_J=\\frac{x^2}{4(q+1)(q+r+1)}.$$\nIf $\\rho_J<1$, return the interval partial sum enlarged by\n$|a_q|/(1-\\rho_J)$; otherwise mark this series candidate unavailable.\nThe tail lemma [[lem-integer-order-bessel-series-tail]] proves each returned\ninterval contains $J_r(x)$.\n\nFor each requested target, also form its composite-midpoint candidate with\n$m=q$ panels, $h=\\pi/m$, and nodes $\\theta_j=(j+\\tfrac12)h$,\n$j=0,\\ldots,m-1$, using $P_q$ as the interval for $\\pi$. For $J_n$,\ncall the elementary-range algorithm for $\\sin(\\theta_j)$, form\n$n\\theta_j-x\\sin(\\theta_j)$, and call it for the cosine of that interval.\nLet $Q_m$ be the interval sum $h\\sum_j\\cos(n\\theta_j-x\\sin\\theta_j)$ and\n$$E_J=\\frac{h_{\\max}^2}{24}\\bigl((n+|x|)^2+|x|\\bigr), \\qquad h_{\\max}=\\sup(P_q)/m.$$\nThe candidate is $Q_m/P_q+[-E_J,E_J]$.\nFor the scaled $I$ target with $x>0$, call the elementary algorithm for\n$\\cos(\\theta_j)$, form\n$-x(1-\\cos(\\theta_j))$, call it for the real exponential, and also call it\nfor $\\cos(n\\theta_j)$. Let $Q_m$ be $h$ times the sum of the resulting\nproduct intervals and set\n$$E_I=\\frac{h_{\\max}^2}{24}\\bigl((x+n)^2+x\\bigr).$$\nThe candidate is $Q_m/P_q+[-E_I,E_I]$. The exact midpoint error lemmas\n[[lem-bessel-integral-midpoint-error]] and\n[[lem-scaled-modified-bessel-midpoint-error]] prove these inclusions.\n\nFor a $J_n(x)$ Miller candidate, only try this branch when $x>0$ and\n$N=n+q\\le N_{\\max}$. Obtain $\\operatorname{SeriesJ}(r)$ for\n$r=0,1,n,N+1$; if any is unavailable, skip the branch. Set\n$D_0=-J_1$, $D_1=J_0$, and compute\n$D_{j+1}=2jD_j/x-D_{j-1}$ for $j=1,\\ldots,N$ by interval arithmetic.\nSet $u_{N+1}=0,u_N=1$, and compute\n$u_{j-1}=2ju_j/x-u_{j+1}$ for $j=N,\\ldots,1$. Require the intervals for\n$D_{N+1}$, $u_s$, $J_s$, and $J_s+q_MD_s$ below to exclude zero. Form\n$q_M=-J_{N+1}/D_{N+1}$. In the fixed order $s=0,1$, whenever the tests\npass, form\n$$\\widehat J_n=\\frac{J_su_n}{u_s},\\qquad E_M=\\frac{q_M(J_sD_n-J_nD_s)}{J_s+q_MD_s}, \\qquad C_M=\\widehat J_n-E_M.$$\nThe exact finite terminal-contamination identity\n[[lem-finite-miller-terminal-error-identity]] proves that each $C_M$\ncontains $J_n(x)$. The Casoratian lemma\n[[lem-bessel-casoratian-invariant-positive]] supplies the independent\nrecurrence pair and positive invariant required by that identity.\n\nCollect every available sound candidate for the requested target. If more\nthan one is available, intersect them; if the intersection is empty, discard\nthis stage. Round the selected candidate outward to precision $p$. Return\nsuccess at the first stage whose radius is at most $\\varepsilon_a$. Set\nrelative_certified to true exactly when relative tolerance was requested,\nzero is excluded, and the contract's relative-radius test passes; failure of\nthat relative test does not prevent absolute success. If no stage succeeds\nbefore the finite caps, return inconclusive. No branch uses a limit in the\nMiller terminal index.",
+        "forward_refs": []
+      },
+      {
+        "id": "thm-certified-airy-enclosures",
+        "deps": [
+          "alg-certified-airy-evaluation",
+          "alg-certified-gamma-loggamma-evaluation",
+          "thm-certified-gamma-loggamma-enclosures",
+          "alg-certified-elementary-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "def-certified-evaluation-result-contract",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-airy-series-coefficient-recurrence-and-tail",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 7,
+        "kind": "theorem",
+        "title": "Soundness of finite Airy enclosures",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a79.17(i), numerical evaluation",
+              "url": "https://dlmf.nist.gov/9.17"
+            },
+            {
+              "title": "DLMF, \u00a79.4, Airy Maclaurin series",
+              "url": "https://dlmf.nist.gov/9.4"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a79.2(ii), 9.4, and 9.17(i)",
+              "url": "https://dlmf.nist.gov/9.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "Whenever [[alg-certified-airy-evaluation]] returns `success`, its interval or\nrectangle contains the requested $\\operatorname{Ai}(z)$ or\n$\\operatorname{Bi}(z)$ and passes the requested absolute-radius test. Any\nrelative certificate is valid only when the enclosure excludes zero. No\nsuccess guarantee is made for every input or finite cap. Every execution with finite\ncaps terminates.",
+        "forward_refs": []
+      },
+      {
+        "id": "thm-certified-integer-order-bessel-enclosures",
+        "deps": [
+          "alg-certified-integer-order-bessel-evaluation",
+          "alg-certified-elementary-range-evaluation",
+          "def-certified-evaluation-result-contract",
+          "def-integer-order-bessel-series",
+          "def-real-elementary-functions-and-domains",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-integer-order-bessel-series-tail",
+          "lem-finite-miller-terminal-error-identity",
+          "lem-bessel-integral-midpoint-error",
+          "lem-scaled-modified-bessel-midpoint-error",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-real-elementary-range-enclosures",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+          "def-bessel-complementary-recurrence-solution"
+        ],
+        "dependency_level": 7,
+        "kind": "theorem",
+        "title": "Soundness of finite integer-order Bessel enclosures",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a710.9, integral representations",
+              "url": "https://dlmf.nist.gov/10.9"
+            },
+            {
+              "title": "DLMF, \u00a710.6, recurrence relations and derivatives",
+              "url": "https://dlmf.nist.gov/10.6"
+            },
+            {
+              "title": "DLMF, \u00a710.2, Bessel functions of the first kind",
+              "url": "https://dlmf.nist.gov/10.2"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a710.2, 10.6, 10.9, 10.25, and 10.74(iii)",
+              "url": "https://dlmf.nist.gov/10.74"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "statement": "Whenever [[alg-certified-integer-order-bessel-evaluation]] returns `success`,\nits interval contains the requested $J_n(x)$ or scaled modified Bessel value\n$e^{-x}I_n(x)$ and passes the requested absolute-radius test. A relative\ncertificate is valid only when zero is outside the interval and the relative\ntest passes. The theorem makes no success guarantee for every input or finite\ncap. Every execution with finite caps terminates.",
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 2605,
+    "id": "stable-special-function-recurrences-and-certified-evaluation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Stable special function recurrences and certified evaluation \u2014 Examples",
+    "companion": "stable-special-function-recurrences-and-certified-evaluation",
+    "requires": [
+      "stable-special-function-recurrences-and-certified-evaluation"
+    ],
+    "items": [
+      {
+        "id": "ex-hypergeometric-branch-cut-domain",
+        "deps": [
+          "def-fresnel-erf-and-hypergeometric-series",
+          "alg-certified-fresnel-erf-hypergeometric-series",
+          "thm-certified-fresnel-erf-hypergeometric-enclosures",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "cor-termwise-integration-of-a-real-power-series"
+        ],
+        "dependency_level": 4,
+        "kind": "example",
+        "title": "The Gauss series disk and a continued logarithmic branch have different domains",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a715.2(i), Gauss series",
+              "url": "https://dlmf.nist.gov/15.2"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $a=b=1$ and $c=2$, the Gauss-series branch in\n[[def-fresnel-erf-and-hypergeometric-series]] is defined for $|z|<1$ and\nthere equals\n$${}_2F_1(1,1;2;z)=\\sum_{k=0}^\\infty\\frac{z^k}{k+1} =-\\frac{\\operatorname{Log}(1-z)}{z},$$\nwith value $1$ at $z=0$. The right side has a principal analytic\ncontinuation to $\\mathbb C\\setminus[1,\\infty)$, which includes $z=-2$; the\nseries evaluator correctly returns `domain` at $z=-2$ because this input lies\noutside the defined power-series branch. This example distinguishes the\nseries branch's disk from the continuation branch's slit domain."
+      },
+      {
+        "id": "ex-erfc-subtraction-cancellation",
+        "deps": [
+          "def-erfcx-moment-sequence",
+          "def-fresnel-erf-and-hypergeometric-series",
+          "lem-erf-series-geometric-tail",
+          "thm-gaussian-integral",
+          "thm-certified-erfcx-enclosures",
+          "thm-real-elementary-range-enclosures"
+        ],
+        "dependency_level": 6,
+        "kind": "example",
+        "title": "Subtracting erf from one amplifies absolute input errors in the tail",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.2, definitions of erf and erfc",
+              "url": "https://dlmf.nist.gov/7.2"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a77.2 and 7.12(i)",
+              "url": "https://dlmf.nist.gov/7.12"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $x>0$, suppose the inputs to the subtraction $1-\\operatorname{erf}(x)$\nare approximations $1+\\delta_1$ and $\\operatorname{erf}(x)+\\delta_2$, where\n$\\delta_1,\\delta_2$ are signed errors. Its output error is exactly\n$\\delta_1-\\delta_2$, so its relative error is at most\n$$\\frac{|\\delta_1|+|\\delta_2|}{\\operatorname{erfc}(x)}.$$\nFor fixed nonzero input error bounds, this conditioning factor grows without\nbound as $x\\to\\infty$, because $\\operatorname{erfc}(x)>0$ and tends to zero.\nThe identity $\\operatorname{erfc}(x)=e^{-x^2}\\operatorname{erfcx}(x)$ and a\ncertified direct $\\operatorname{erfcx}$ enclosure avoid this particular\nsubtraction."
+      },
+      {
+        "id": "ex-erfcx-asymptotic-optimal-truncation",
+        "deps": [
+          "lem-erfcx-asymptotic-remainder",
+          "thm-certified-erfcx-enclosures"
+        ],
+        "dependency_level": 6,
+        "kind": "example",
+        "title": "Least-term truncation of the erfcx asymptotic expansion",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a77.12(i), equation 7.12.1",
+              "url": "https://dlmf.nist.gov/7.12"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a73 and 5",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $x\\ge1$, let $N\\ge1$ be an integer nearest to $x^2$, so\n$N-\\tfrac12\\le x^2\\le N+\\tfrac12$. In the expansion from\n[[lem-erfcx-asymptotic-remainder]], the magnitudes of the terms are\n$$a_k(x)=\\frac{(1/2)_k}{x^{2k+1}\\sqrt\\pi}.$$\nThe term $a_N(x)$ is minimal (ties are possible), and the signed remainder\nafter $N$ terms is bounded by exactly $a_N(x)$. For example, at $x=3$ the\nleast-term truncation is $N=9$. This describes optimal truncation by term\nsize; it does not assert convergence of the asymptotic series."
+      },
+      {
+        "id": "ex-forward-bessel-recurrence-loses-sign",
+        "deps": [
+          "def-integer-order-bessel-series",
+          "def-bessel-complementary-recurrence-solution",
+          "lem-integer-order-bessel-series-tail",
+          "lem-integer-order-bessel-recurrences-and-ode",
+          "thm-certified-integer-order-bessel-enclosures"
+        ],
+        "dependency_level": 8,
+        "kind": "example",
+        "title": "An arbitrarily small seed perturbation flips a later Bessel sign",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a710.6(i), recurrence relations",
+              "url": "https://dlmf.nist.gov/10.6"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a73.6(iii) and 10.6(i)",
+              "url": "https://dlmf.nist.gov/3.6"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a7\u00a72 and 4",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "At $x=1$, every $J_n(1)$ is positive and tends to zero as $n\\to\\infty$,\nwhereas the complementary recurrence solution $D_n(1)$ defined in\n[[def-bessel-complementary-recurrence-solution]] is positive and unbounded\nfor $n\\ge1$. Hence, for every $\\varepsilon>0$, the perturbed seed pair\n$$\\widetilde J_0=J_0(1)-\\varepsilon D_0(1),\\qquad \\widetilde J_1=J_1(1)-\\varepsilon D_1(1)$$\ncan be arbitrarily close to the exact seeds, yet its forward recurrence\nsolution $\\widetilde J_n=J_n(1)-\\varepsilon D_n(1)$ is negative for some\nindex where the exact $J_n(1)$ is positive. This is a recurrence-sensitivity\nexample, not a claim that every floating-point implementation follows this\nparticular error direction."
+      },
+      {
+        "id": "ex-relative-error-near-an-airy-zero",
+        "deps": [
+          "lem-airy-functions-have-negative-real-zeros",
+          "thm-certified-airy-enclosures",
+          "def-certified-evaluation-result-contract",
+          "lem-airy-series-coefficient-recurrence-and-tail"
+        ],
+        "dependency_level": 8,
+        "kind": "example",
+        "title": "Relative error becomes unavailable at an Airy zero",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a79.17(i), numerical evaluation of Airy functions",
+              "url": "https://dlmf.nist.gov/9.17"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a79.9(i) and 9.17(i)",
+              "url": "https://dlmf.nist.gov/9.9"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "There is a real $\\xi<0$ with $\\operatorname{Ai}(\\xi)=0$. An absolute\nenclosure remains meaningful there, but the relative certificate in\n[[def-certified-evaluation-result-contract]] cannot be reported by an\nenclosure containing zero. Near $\\xi$, relative certification requires a\nradius proportional to the small value $|\\operatorname{Ai}(x)|$ and therefore\nrequires increasingly fine absolute enclosures."
+      },
+      {
+        "id": "ex-scaled-modified-bessel-overflow-avoidance",
+        "deps": [
+          "lem-bessel-integral-representations-and-scaled-range",
+          "lem-scaled-modified-bessel-midpoint-error",
+          "thm-certified-integer-order-bessel-enclosures",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable"
+        ],
+        "dependency_level": 8,
+        "kind": "example",
+        "title": "Scaling keeps the modified Bessel value bounded as the unscaled value grows",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DLMF, \u00a710.40, asymptotic expansions for modified Bessel functions",
+              "url": "https://dlmf.nist.gov/10.40"
+            },
+            {
+              "title": "DLMF, \u00a7\u00a710.25 and 10.40",
+              "url": "https://dlmf.nist.gov/10.25"
+            },
+            {
+              "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), \u00a72",
+              "url": "https://ir.cwi.nl/pub/11612/11612C.pdf"
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "For $n=0$ and $x\\ge0$, the scaled value $e^{-x}I_0(x)$ lies in $[0,1]$,\nwhile $I_0(x)\\to\\infty$ as $x\\to\\infty$. Thus any fixed finite output\nrange for unscaled values is eventually exceeded, whereas the scaled value\nremains bounded and can be evaluated directly from its scaled integral."
+      }
+    ]
+  }
+]

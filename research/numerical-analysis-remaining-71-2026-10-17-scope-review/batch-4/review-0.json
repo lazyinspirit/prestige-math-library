@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "4",
+  "round": 0,
+  "reviewed_items": [
+    "def-na-best-polynomial-uniform-error",
+    "lem-na-extrema-sign-block-polynomial",
+    "lem-na-polynomial-alternating-signs-force-root-count",
+    "lem-na-polynomial-coefficient-bound-from-fixed-nodes",
+    "lem-na-polynomial-interpolation-alternating-weight-annihilator",
+    "lem-na-reduced-rational-representation-unique",
+    "def-na-weighted-rational-minimax-family",
+    "lem-na-polynomial-remez-system-invertible",
+    "thm-na-best-polynomial-approximation-exists",
+    "thm-na-polynomial-equioscillation-certificate",
+    "alg-na-minimax-approximation-and-remez-algorithms",
+    "lem-na-rational-perturbation-space",
+    "thm-na-best-weighted-rational-approximation-exists",
+    "thm-na-polynomial-alternation-necessity",
+    "cor-na-best-polynomial-approximation-unique",
+    "thm-na-polynomial-remez-budget-termination",
+    "thm-na-weighted-rational-alternation-characterization",
+    "alg-na-weighted-rational-remez-exchange",
+    "thm-na-weighted-rational-remez-budget-termination",
+    "ex-na-remez-zero-degree-equioscillation-certificate",
+    "cex-na-defective-rational-approximation-naive-count",
+    "ex-na-degree-one-minimax-of-square"
+  ],
+  "reviewed_pages": [
+    "minimax-approximation-and-remez-algorithms",
+    "minimax-approximation-and-remez-algorithms-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch, approved design, and actual prerequisite review found local defects that can be repaired within this page. The defect-sensitive rational scope is supported by the repaired design and the proof; no unresolved outside prerequisite gap was found.",
+  "findings": [
+    {
+      "id": "lem-na-polynomial-remez-system-invertible",
+      "type": "local",
+      "reason": "In step 1.1, F1 excludes nonzero alternating values but does not show that p=0 when λ=0 and p vanishes at n+2 nodes. Also, F3 attributes the basis 1,x,…,x^n to the definition, which only defines P_n as restrictions. Use the polynomial root-count result to justify both the zero case and linear independence of these restrictions on the nondegenerate interval."
+    },
+    {
+      "id": "alg-na-minimax-approximation-and-remez-algorithms",
+      "type": "local",
+      "reason": "The endpoint exchange test is strict even when the oracle maximum occurs at a or b. If its sign matches the endpoint reference node, replacing x_0 by a or x_{n+1} by b preserves strict ordering, yet the procedure returns no-order-preserving-exchange. Permit the corresponding endpoint equality while retaining strict ordering among reference nodes."
+    },
+    {
+      "id": "alg-na-weighted-rational-remez-exchange",
+      "type": "local",
+      "reason": "The initial reference is specified only as ordered distinct nodes, although f is defined on I and the certificate branch relies on the reference being in I. State a≤x_0<…<x_{m+n+1}≤b as an admissibility condition."
+    },
+    {
+      "id": "thm-na-weighted-rational-alternation-characterization",
+      "type": "local",
+      "reason": "F5 restates the interpolation supplier using ω′(x_i), while the supplier states its identity and sign condition using w_i=∏_{j≠i}(x_i−x_j). Apply the supplied w_i formulation directly, or state and justify the derivative identity and sign relation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-na-polynomial-remez-budget-termination",
+      "decision": "repair",
+      "reason": "Its step 1.1 must match the repaired endpoint exchange rule and justify that an endpoint replacement preserves distinct ordering."
+    },
+    {
+      "id": "ex-na-remez-zero-degree-equioscillation-certificate",
+      "decision": "accept",
+      "reason": "It returns through the E=|λ| certificate branch; the endpoint exchange repair does not affect its calculation."
+    },
+    {
+      "id": "thm-na-weighted-rational-remez-budget-termination",
+      "decision": "accept",
+      "reason": "Requiring the initial reference to lie in I restricts admissible inputs but leaves its finite call-count argument valid."
+    },
+    {
+      "id": "minimax-approximation-and-remez-algorithms",
+      "decision": "accept",
+      "reason": "The page inventory and approved synopsis remain valid with these local clarifications."
+    }
+  ]
+}

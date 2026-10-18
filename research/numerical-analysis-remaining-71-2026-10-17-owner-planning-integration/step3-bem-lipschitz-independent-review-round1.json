@@ -1,0 +1,131 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "kind": "independent-bem-general-lipschitz-proof-review",
+  "round": 1,
+  "reviewer": "/root/gate_url_cwi",
+  "recorded_at": "2026-10-18T01:54:52.096605+00:00",
+  "verdict": "focused mathematical proof accepted subject to two explicit prerequisite-assumption repairs",
+  "canonical_owner": "/root/gate_url_iga_wiley",
+  "source_edits_performed": false,
+  "sources_read_in_full": [
+    "items/lem-bem-lipschitz-graph-sobolev-and-green-interface.md",
+    "items/lem-bem-lipschitz-transmission-kernel-representation.md",
+    "items/lem-bem-lipschitz-trace-and-lifting.md",
+    "items/def-bem-lipschitz-polyhedral-boundary-and-trace-spaces.md",
+    "items/lem-bem-exterior-energy-trace-bound.md",
+    "items/thm-bem-single-layer-transmission-mapping-and-coercivity.md",
+    "items/thm-bem-double-layer-transmission-jumps-and-bounds.md",
+    "items/lem-bem-polyhedral-edge-kernel-representation.md",
+    "items/lem-na-lipschitz-scalar-h1-h2-extension.md",
+    "items/thm-na-rademacher-euclidean.md",
+    "items/lem-acl-representatives-reconstruct-weak-gradients-by-fubini.md",
+    "items/lem-bem-newtonian-kernel-is-fundamental-solution.md",
+    "items/def-bem-laplace-layer-potentials-and-energy-spaces.md"
+  ],
+  "additional_actual_interfaces_read": [
+    "thm-acl-characterisation-of-w-one-p: Statement/Facts/full proof",
+    "thm-rmk-uniqueness-among-radon-measures: Statement/Facts/full proof",
+    "def-banach-valued-vector-measure-and-variation: Definition and Remarks"
+  ],
+  "findings": [
+    {
+      "id": "bem57-independent-translation-interface",
+      "severity": "prerequisite-reference omission",
+      "source": "items/lem-bem-lipschitz-graph-sobolev-and-green-interface.md",
+      "location": "F3 and proof4.1",
+      "evidence": "Step4.1 invokes H1 convergence of inward translations by F3; F3 presently states extension, smooth approximation and completeness, but no translation continuity interface.",
+      "minimal_sound_repair": "Add thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity and apply it separately to the compactly supported zero extension and its first weak derivatives; their translated derivatives are the translated weak derivatives. Alternatively derive this convergence explicitly by smooth approximation.",
+      "mathematical_status": "The claim is true; no issue with the graph translation construction itself."
+    },
+    {
+      "id": "bem57-independent-definition-choice-interface",
+      "severity": "assumption mismatch",
+      "source": "items/def-bem-lipschitz-polyhedral-boundary-and-trace-spaces.md",
+      "location": "initial Assume Countable Choice and first geometry paragraph",
+      "evidence": "The Definition assumes only CC but now attributes a.e. normal existence and intrinsic graph-measure compatibility to lem-bem-lipschitz-graph-sobolev-and-green-interface, whose actual hypotheses are full AC, through Rademacher and Sobolev interfaces.",
+      "minimal_sound_repair": "State the full AC assumption for the proved general graph geometry and carry it through actual consumers, or explicitly make the new compatibility assertion conditional on AC in analytical uses. Do not certify this stronger interface under CC from an AC-only supplier.",
+      "mathematical_status": "The general Lipschitz theorem is correct under the already permitted full AC; no polyhedral restriction is needed."
+    }
+  ],
+  "proof_acceptance": [
+    {
+      "source": "lem-bem-lipschitz-graph-sobolev-and-green-interface",
+      "locations": [
+        "1.1",
+        "1.2"
+      ],
+      "reason": "Vertical Fubini proves exact volume preservation of the graph shear and its inverse, including null sets. Ambient smooth compositions are locally Lipschitz, so Rademacher and ACL give their genuine weak chain rule. The resulting norm estimate extends by the independent Lipschitz extension/mollification supplier to every H1 input. Flat one-dimensional endpoint bounds produce a stable local L2 trace; no C1 graph or piecewise affine graph assumption occurs."
+    },
+    {
+      "source": "lem-bem-lipschitz-graph-sobolev-and-green-interface",
+      "locations": [
+        "2.1",
+        "2.2"
+      ],
+      "reason": "For the upper graph domain, vertical integration gives normal flux \u22121; horizontal differentiation of the variable-lower-limit integral gives the flux coefficients \u22021\u03c8 and \u22022\u03c8. Hence outward n dS=(\u2207\u03c8,\u22121)dz, with the correct opposite sign below. Ambient smooth density and bounded trace convergence extend the first-order identity to H1 pieces without differentiating n. On overlaps these vector measures represent the same intrinsic indicator derivative. Local Radon uniqueness identifies them. Partitioning unit normal values into finitely many small spherical caps proves total variation equals the scalar graph measure, so its compatibility is proved rather than presumed from a smooth area theorem."
+    },
+    {
+      "source": "lem-bem-lipschitz-graph-sobolev-and-green-interface",
+      "locations": [
+        "3.1",
+        "4.1"
+      ],
+      "reason": "Finite graph charts with bounded Jacobian give area at most Cr\u00b2 in every small ball. Compact subchart margins and vertical gap at most (1+L)\u03b4 give tube volume O(\u03b4). Matching traces cancel the first-order interface distributions, so no artificial delta derivative remains. Zero trace gives a genuine zero extension; flat inward translation followed by bounded pullback and physical mollification yields interior smooth approximants. Translation continuity requires the explicit interface recorded above."
+    },
+    {
+      "source": "lem-bem-lipschitz-trace-and-lifting",
+      "locations": [
+        "1.1",
+        "2.1",
+        "3.1",
+        "4.1",
+        "5.1"
+      ],
+      "reason": "The flat Fourier estimate has precisely H1/2 tangential weight. Integrating exp(\u2212a|t|) supplies a bounded flat right inverse. The new graph helper transfers H1 without using an unproved general Lipschitz volume substitution. Bounded Lipschitz cutoff multiplication is justified by the near/far Slobodeckij split, and chart transitions use intrinsic surface measure with bounded graph densities and bi-Lipschitz distances. Local lifts carry \u03c7_jg and an ambient cutoff equal to one on that support, so their traces sum to g rather than to a sum of squared cutoffs. Ordinary extension is supplied independently, avoiding a circular trace-to-extension argument. Compact localization plus the L6 homogeneous bound gives the dot-H1 trace."
+    },
+    {
+      "source": "lem-bem-lipschitz-transmission-kernel-representation",
+      "locations": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "3.1"
+      ],
+      "reason": "The transmission pair gives U in global L6 and piecewise H1 boundary collars. First-order Green produces distributional grad U equal to piecewise grad plus \u03c6 n \u03b4\u0393, and stationarity yields \u2212\u0394U acting as integral \u03c6\u2202n\u03b7. The source-normal derivative of the Newton fundamental solution has the same action; no derivative of the a.e. normal is taken. |\u2202nG|\u2264C|x\u2212y|^(\u22122) is locally volume integrable, giving P in L1loc and its ball integral at most CR||\u03c6||1. Off the compact boundary the integral is absolutely convergent and smooth. The difference U\u2212P is distributionally entire harmonic; mollification and the ball mean-value formula give its value at most C(R^(\u22121/2)||U||6+R^(\u22122)||\u03c6||1), tending to zero. Thus U=P without an unstated Weyl or exterior decay theorem. No planar-face assertion enters this chain."
+    },
+    {
+      "source": "lem-bem-exterior-energy-trace-bound",
+      "locations": [
+        "1.1",
+        "2.1",
+        "3.1",
+        "4.1"
+      ],
+      "reason": "The proof already works for any connected Lipschitz exterior. Its separated outer sphere gives a bounded connected Lipschitz annulus with the independently established extension property. Radial Sobolev slicing, the L6 tail and Poincare control its mean and H1 norm. The strengthened trace theorem now applies at the original general Lipschitz boundary. Replacing the old polyhedral Given is mathematically valid."
+    },
+    {
+      "source": "thm-bem-single-layer-transmission-mapping-and-coercivity",
+      "locations": [
+        "F1",
+        "4.1"
+      ],
+      "reason": "Finite graph area and tube-volume estimates replace both previous finite-face steps. The dyadic kernel estimates give bounded potential and at most logarithmic gradient growth in boundary distance. The O(\u03b4) tube estimate makes the squared logarithm locally integrable. Newton convolution differentiates weakly by Fubini, far-field decay makes the cutoff tail vanish, and dot-H1 uniqueness identifies the classical and variational potentials. Coercivity and full H\u22121/2 mapping continue to use the general trace right inverse."
+    },
+    {
+      "source": "thm-bem-double-layer-transmission-jumps-and-bounds",
+      "locations": [
+        "F5",
+        "2.1",
+        "3.1",
+        "4.1",
+        "5.1"
+      ],
+      "reason": "Matching-trace gluing is now supported by the graph Green interface. Energy minimization and conormal recovery require no planar faces. The new general kernel lemma supplies representation for the full Lipschitz trace space; the old polyhedral helper remains a separate supplier solely for its extra face-interior pointwise formulas. Thus general Statements are preserved without silently asserting planar kernels on rough boundaries."
+    }
+  ],
+  "limitations": [
+    "This is the first independent review round; final acceptance awaits rereading the two focused prerequisite/assumption repairs.",
+    "No new external full-text fetch is claimed. Review uses actual canonical proof bodies and prerequisite interfaces; Costabel reading belongs to the canonical lead.",
+    "No source, metadata, contract or hash edits; no tests, checkers, gates or engine actions."
+  ]
+}

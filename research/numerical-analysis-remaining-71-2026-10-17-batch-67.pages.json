@@ -1,0 +1,630 @@
+[
+  {
+    "order": 2688,
+    "id": "ale-interface-and-partitioned-multiphysics-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "ALE, interfaces and partitioned multiphysics coupling",
+    "companion": "ale-interface-and-partitioned-multiphysics-discretization-examples",
+    "requires": [
+      "energy-stable-incompressible-navier-stokes-discretization",
+      "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "elasticity-near-incompressibility-and-locking-free-discretization",
+      "imex-and-operator-splitting-methods"
+    ],
+    "items": [
+      {
+        "id": "cor-ale-exact-splitting-residual-orders",
+        "kind": "corollary",
+        "title": "Conditional finite-dimensional Lie and Strang splitting residual orders",
+        "statement": "For the optional splitting branch of the finite-dimensional coupled model, suppose $a,b\\in C^3(U,\\mathbb R^d)$ define the additive autonomous ODE of [[def-additive-ode-and-partition]], their exact subflows use the Lie and Strang compositions of [[def-exact-split-flows-lie-strang-and-bracket]], and all exact and numerical paths lie with positive margin in a common compact convex tube on $[0,T]$. Initialize both schemes at the exact initial value $y_0=y(0)$. Under the remaining Lipschitz, regularity, and step-size hypotheses of [[thm-lie-strang-global-orders-and-subflow-error]], the exact Lie and Strang schemes have global errors $O(h)$ and $O(h^2)$ respectively. Approximate subflows retain these orders only under the separate per-subflow error budgets and composition stability condition stated in that theorem. This corollary makes no claim for unbounded operators or general moving-domain PDEs.",
+        "deps": [
+          "def-additive-ode-and-partition",
+          "def-exact-split-flows-lie-strang-and-bracket",
+          "thm-lie-strang-global-orders-and-subflow-error"
+        ],
+        "dependency_level": 0,
+        "strategy": "Instantiate the exact finite-dimensional Lie-Strang theorem and preserve all of its common-tube, regularity, exact-initial-data, exact-flow, and approximate-subflow hypotheses.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ernst Hairer, Geometric Numerical Integration, Lecture 2: Symplectic Integrators",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf",
+              "locator": "§5, Lie–Trotter and Strang splitting and their finite-dimensional global orders, PDF pp. 12–14."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "def-ale-linear-diffusion-transmission-model",
+        "kind": "definition",
+        "title": "Finite-dimensional backward-Euler diffusion transmission model",
+        "statement": "Let $I_1,I_2$ and the common trace space $\\Lambda$ be finite-dimensional real inner-product spaces, with $\\dim\\Lambda\\ge1$, and set $X_i:=I_i\\oplus\\Lambda$. The trace map is $\\gamma_i(x_i,\\lambda_i)=\\lambda_i$. Let $M_i$ and $A_i$ be self-adjoint positive-definite operators on $X_i$, let $\\Delta t>0$, and define the local backward-Euler block $B_i:=\\Delta t^{-1}M_i+A_i$. In coordinates $I_i\\oplus\\Lambda$, write\n\n$$B_i=\\begin{pmatrix}B_{i,00}&B_{i,0\\Gamma}\\\\B_{i,\\Gamma0}&B_{i,\\Gamma\\Gamma}\\end{pmatrix},\\qquad g_i=(g_{i,0},g_{i,\\Gamma}).$$\n\nFor a prescribed local trace $\\lambda_i$, solve the interior equation $B_{i,00}x_i+B_{i,0\\Gamma}\\lambda_i=g_{i,0}$ and define the outward algebraic interface flux $q_i:=B_{i,\\Gamma0}x_i+B_{i,\\Gamma\\Gamma}\\lambda_i-g_{i,\\Gamma}$. Eliminating $x_i$ gives $q_i=S_i\\lambda_i-f_i$, where $S_i:=B_{i,\\Gamma\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}B_{i,0\\Gamma}$ and $f_i:=g_{i,\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}g_{i,0}$. The sign convention is outward flux on each subdomain.\n\nThe monolithic interface equations are trace continuity $\\lambda_1=\\lambda_2=\\lambda$ and flux balance $q_1+q_2=0$, equivalently $(S_1+S_2)\\lambda=f_1+f_2$. These finite-dimensional matrices represent a linear diffusion-transmission step; no nonlinear fluid-structure well-posedness is asserted.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Define the real inner products, matrix blocks, trace coordinates, local flux sign, condensed data, and monolithic interface conditions.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emil Engström and Eskil Hansen, Time-dependent Steklov–Poincaré operators and space-time Robin–Robin decomposition for the heat equation (2022)",
+              "url": "https://arxiv.org/pdf/2210.13868",
+              "locator": "§§1, 4–6: two-domain heat transmission, common trace, outward flux convention, and Robin–Robin iteration; the current item is a finite-dimensional backward-Euler model."
+            },
+            {
+              "title": "Martina Maria Joosten, Aspects of interface modelling in fluid-structure interaction problems, PhD thesis, Swansea University (2011)",
+              "url": "https://cronfa.swan.ac.uk/Record/cronfa42211/Download/0042211-02082018162436.pdf",
+              "locator": "Chapter 5, §§5.2–5.4: finite-dimensional subsystem partitioning, interface data, and mass-dependent iteration behavior."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "def-ale-moving-domain-map",
+        "kind": "definition",
+        "title": "ALE moving-domain map and mesh velocity",
+        "statement": "Fix an integer $d\\ge1$, a time interval $[0,T]$ with $T>0$, and a nonempty bounded open reference domain $\\widehat\\Omega\\subset\\mathbb R^d$ with compact Jordan closure; Jordan measurability means equality of finite-rectangle inner and outer contents ([[def-jordan-inner-and-outer-content]]). In dimension $d=1$, require $\\widehat\\Omega$ to be a finite union of bounded open intervals with pairwise disjoint closures. In dimensions $d\\ge2$, require a finite piecewise-$C^1$ boundary presentation: a finite family of compact boundary faces $S_1,\\ldots,S_q$ and a compact edge set $E$ such that the faces cover $\\partial\\widehat\\Omega$, each face lies in a regular $C^1$ hypersurface patch, $S_i\\cap E$ is surface-null, all face overlaps lie in $E$, and off $E$ the boundary is locally one $C^1$ graph with $\\widehat\\Omega$ on one side. The faces carry that side's outward unit normal.\n\nAn **ALE moving-domain map** is a map $A:[0,T]\\times\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ whose space-time restriction extends to a $C^2$ map on a neighborhood of this set, and for each $t$ the map $A_t(\\xi):=A(t,\\xi)$ is an orientation-preserving diffeomorphism on neighborhoods of the closures. Write $\\Omega(t):=A_t(\\widehat\\Omega)$ and $J(\\xi,t):=\\det D_\\xi A_t(\\xi)>0$. Define the **mesh velocity** in physical coordinates by $w_m(x,t):=\\partial_t A_t(A_t^{-1}(x))$. In $d=1$ the moving boundary consists of the transported interval endpoints. In $d\\ge2$, require the transported faces under $A_t$ to satisfy the same finite piecewise-$C^1$ boundary-presentation conditions; the diffeomorphism carries the reference faces and edge set to that presentation, with the transported outward normal.\n\nThis definition fixes the regularity and sign conventions for the continuous ALE identities. It does not assert a discrete approximation property, a nonintersection theorem for a computed mesh, or well-posedness of a coupled PDE.",
+        "deps": [
+          "def-jordan-inner-and-outer-content"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define the map, its domains, regularity, Jacobian, and spatial mesh velocity.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§2.2, pp. 415–417; §3, pp. 417–419; §4, pp. 419–420."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "def-ale-periodic-moving-grid",
+        "kind": "definition",
+        "title": "Periodic one-dimensional moving grid",
+        "statement": "Fix $N\\ge1$, a reference cell width $\\Delta\\xi>0$, a time step $\\Delta t>0$, and a physical period length $L>0$. Face positions $x_{i+1/2}^n$ and face velocities $w_{i+1/2}^n$ are indexed periodically by $i\\in\\mathbb Z$, with $x_{i+N+1/2}^n=x_{i+1/2}^n+L$ and $w_{i+N+1/2}^n=w_{i+1/2}^n$. The physical cell $i$ is $[x_{i-1/2}^n,x_{i+1/2}^n]$ and its dimensionless Jacobian is $J_i^n=(x_{i+1/2}^n-x_{i-1/2}^n)/\\Delta\\xi$; require $J_i^n>0$.\n\nFor a constant physical advection speed $a\\in\\mathbb R$, the relative face speed is $c_{i+1/2}^n:=a-w_{i+1/2}^n$. Write $c^+:=\\max(c,0)$ and $c^-:=\\min(c,0)$. The prescribed face move is $x_{i+1/2}^{n+1}=x_{i+1/2}^n+\\Delta t\\,w_{i+1/2}^n$. The cell average $\\bar u_i^n$ is the average over the corresponding physical cell.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "State the periodic indexing, positive cell widths, time step, face motion, and relative speed convention.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§4, ALE conservation equations, pp. 419–420; §6, geometric conservation laws, pp. 422–425."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "def-ale-toy-added-mass-recurrence",
+        "kind": "definition",
+        "title": "Scalar added-mass staggered recurrence",
+        "statement": "For positive scalars $m_s$ and $m_f$, call $m_s$ the structure mass and $m_f$ the fluid added mass in the **scalar toy added-mass recurrence**. Given a scalar initial velocity increment $\\delta v_0$, define successive increments by\n\n$$m_s\\,\\delta v_{n+1}=-m_f\\,\\delta v_n\\qquad(n\\ge0).$$\n\nThis is a stipulated one-mode sequential update used only to expose its amplification factor. It is not derived from, and makes no stability claim about, a general fluid-structure discretization.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Declare the exact scalar recurrence and its restricted toy-model scope.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martina Maria Joosten, Aspects of interface modelling in fluid-structure interaction problems, PhD thesis, Swansea University (2011)",
+              "url": "https://cronfa.swan.ac.uk/Record/cronfa42211/Download/0042211-02082018162436.pdf",
+              "locator": "Chapter 5, §§5.2–5.7: one-degree-of-freedom interface models, mass-ratio dependence, and the limits of sequential partitioned convergence. The recurrence below is the narrower toy specified here."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "alg-ale-upwind-finite-volume-step",
+        "kind": "algorithm",
+        "title": "Conservative upwind ALE finite-volume step",
+        "statement": "**Inputs:** The periodic grid and relative speeds of [[def-ale-periodic-moving-grid]], cell averages $\\bar u_i^n\\in\\mathbb R$, a constant physical speed $a$, face velocities $w_{i+1/2}^n$, $\\Delta t>0$, and $\\Delta\\xi>0$.\n\n**Instructions:**\n\n1. Without modifying the input mesh or cell averages, compute trial face positions $x_{i+1/2}^{n+1}=x_{i+1/2}^n+\\Delta t\\,w_{i+1/2}^n$ and trial Jacobians $J_i^{n+1}=(x_{i+1/2}^{n+1}-x_{i-1/2}^{n+1})/\\Delta\\xi$.\n\n2. If any $J_i^{n+1}\\le0$, discard the trial data and return the status `mesh_crossing` and no updated state, leaving the input mesh and cell averages unchanged.\n\n3. Otherwise, for every face set $c_{i+1/2}^n=a-w_{i+1/2}^n$ and $\\widehat F_{i+1/2}^n=(c_{i+1/2}^n)^+\\bar u_i^n+(c_{i+1/2}^n)^-\\bar u_{i+1}^n$, with periodic indices and $c^+=\\max(c,0)$, $c^-=\\min(c,0)$.\n\n4. Accept the trial mesh and return the status `success` and the unique cell averages defined by $J_i^{n+1}\\bar u_i^{n+1}=J_i^n\\bar u_i^n-(\\Delta t/\\Delta\\xi)(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)$.\n\nAll state updates occur only after every new cell Jacobian has passed the positivity check.",
+        "deps": [
+          "def-ale-periodic-moving-grid"
+        ],
+        "dependency_level": 1,
+        "strategy": "Give exact inputs, status branch, flux convention, update order, and output.",
+        "justified_by": [
+          "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§4, ALE conservation form, and §6, geometric conservation laws, printed pp. 419–425."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "lem-ale-jacobi-geometric-conservation-identity",
+        "kind": "lemma",
+        "title": "Jacobi identity for the ALE mesh Jacobian",
+        "statement": "For the ALE moving-domain map $A_t$ of [[def-ale-moving-domain-map]], let $F(\\xi,t):=D_\\xi A_t(\\xi)$ and $J(\\xi,t):=\\det F(\\xi,t)$. Then\n\n$$\\partial_t J(\\xi,t)=J(\\xi,t)\\,\\operatorname{div}_x w_m(A_t(\\xi),t).$$\n\nThis is the continuous geometric conservation identity. It makes no discrete or time-integration claim.",
+        "deps": [
+          "def-ale-moving-domain-map"
+        ],
+        "dependency_level": 1,
+        "strategy": "Differentiate the determinant and identify the trace of the spatial velocity gradient.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§2.2 and §3, mesh maps and the fundamental ALE equation, printed pp. 415–419."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+        "kind": "lemma",
+        "title": "Moving faces satisfy the one-dimensional discrete GCL",
+        "statement": "For the face motion of [[def-ale-periodic-moving-grid]], every cell satisfies\n\n$$J_i^{n+1}=J_i^n+\\frac{\\Delta t}{\\Delta\\xi}\\left(w_{i+1/2}^n-w_{i-1/2}^n\\right).$$",
+        "deps": [
+          "def-ale-periodic-moving-grid"
+        ],
+        "dependency_level": 1,
+        "strategy": "Subtract the two adjacent face updates and divide by Delta xi.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§6, geometric conservation laws, printed pp. 422–425."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "lem-ale-schur-complement-positive-and-minimizes-energy",
+        "kind": "lemma",
+        "title": "The diffusion Schur complement is positive and minimizes energy",
+        "statement": "Let $B=\\begin{pmatrix}K&C\\\\C^*&D\\end{pmatrix}$ be a self-adjoint positive-definite operator on a finite-dimensional real inner-product direct sum $I\\oplus\\Lambda$. Then $K$ is positive definite, $S:=D-C^*K^{-1}C$ is positive definite on $\\Lambda$, and for every $z\\in\\Lambda$,\n\n$$\\langle Sz,z\\rangle=\\min_{x\\in I}\\langle B(x,z),(x,z)\\rangle.$$\n\nIn particular, the local Schur operators $S_i$ in [[def-ale-linear-diffusion-transmission-model]] are positive definite.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model"
+        ],
+        "dependency_level": 1,
+        "strategy": "Complete the square in interior variables and use positivity of the full local block.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emil Engström and Eskil Hansen, Time-dependent Steklov–Poincaré operators and space-time Robin–Robin decomposition for the heat equation (2022)",
+              "url": "https://arxiv.org/pdf/2210.13868",
+              "locator": "§5, Steklov–Poincaré operators and coercivity; the present finite-dimensional completion-of-squares proof is independent."
+            },
+            {
+              "title": "Martina Maria Joosten, Aspects of interface modelling in fluid-structure interaction problems, PhD thesis, Swansea University (2011)",
+              "url": "https://cronfa.swan.ac.uk/Record/cronfa42211/Download/0042211-02082018162436.pdf",
+              "locator": "Chapter 5, interface block systems and partitioned solution operators."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "thm-ale-monolithic-backward-euler-energy-identity",
+        "kind": "theorem",
+        "title": "Monolithic backward Euler transmission energy identity",
+        "statement": "Assume the finite-dimensional diffusion-transmission model of [[def-ale-linear-diffusion-transmission-model]]. Let $V:=\\{(v_1,v_2)\\in X_1\\oplus X_2:\\gamma_1v_1=\\gamma_2v_2\\}$ be the common-trace space, take $u^n\\in V$, and let $F_i^{n+1}\\in X_i$. In the block notation of the definition, set the local right-hand side to $g_i:=\\Delta t^{-1}M_i u_i^n+F_i^{n+1}$; assemble the local equations with common trace and the outward algebraic fluxes $q_i$ from that definition. There is a unique $u^{n+1}\\in V$ satisfying\n\n$$\\sum_{i=1}^2\\left(\\left\\langle M_i\\frac{u_i^{n+1}-u_i^n}{\\Delta t},v_i\\right\\rangle+\\langle A_i u_i^{n+1},v_i\\rangle\\right)=\\sum_{i=1}^2\\langle F_i^{n+1},v_i\\rangle\\qquad(v\\in V).$$\n\nIt obeys the exact identity\n\n$$\\frac12\\left(\\|u^{n+1}\\|_M^2-\\|u^n\\|_M^2+\\|u^{n+1}-u^n\\|_M^2\\right)+\\Delta t\\|u^{n+1}\\|_A^2=\\Delta t\\sum_{i=1}^2\\langle F_i^{n+1},u_i^{n+1}\\rangle,$$\n\nwhere $\\|v\\|_M^2:=\\sum_i\\langle M_iv_i,v_i\\rangle$ and $\\|v\\|_A^2:=\\sum_i\\langle A_iv_i,v_i\\rangle$. In the unforced case the monolithic backward-Euler energy is nonincreasing.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use positive definiteness for unique solvability, cancel paired interface flux work, test by the new state, and expand the mass inner product.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emil Engström and Eskil Hansen, Time-dependent Steklov–Poincaré operators and space-time Robin–Robin decomposition for the heat equation (2022)",
+              "url": "https://arxiv.org/pdf/2210.13868",
+              "locator": "§§1 and 4: two-subdomain heat transmission with matching traces and opposite outward normal fluxes; the time-discrete identity below is proved locally."
+            },
+            {
+              "title": "Martina Maria Joosten, Aspects of interface modelling in fluid-structure interaction problems, PhD thesis, Swansea University (2011)",
+              "url": "https://cronfa.swan.ac.uk/Record/cronfa42211/Download/0042211-02082018162436.pdf",
+              "locator": "Chapter 5, monolithic subsystem equations and interface work in the finite-dimensional model."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "alg-ale-robin-robin-partitioned-iteration",
+        "kind": "algorithm",
+        "title": "Finite-budget Robin-Robin transmission iteration",
+        "statement": "**Inputs:** Positive-definite real Schur operators $S_1,S_2$ on the nonzero finite-dimensional trace space $\\Lambda$, loads $f_1,f_2\\in\\Lambda$, a parameter $\\alpha>0$, initial incoming datum $r_1^0\\in\\Lambda$, tolerance $\\varepsilon>0$, and integer pass budget $M\\ge1$.\n\nAll vector norms on $\\Lambda$ and operator norms on its endomorphisms are induced by its specified real inner product. Set $R_i:=(\\alpha I-S_i)(\\alpha I+S_i)^{-1}$, $q_i:=\\|R_i\\|$, and $q:=q_1q_2$. For each pass $m=0,\\ldots,M-1$, perform in order\n\n$$ (S_1+\\alpha I)\\lambda_1^{m+1}=r_1^m+f_1,\\quad r_2^{m+1}=(\\alpha I-S_1)\\lambda_1^{m+1}+f_1;\\quad (S_2+\\alpha I)\\lambda_2^{m+1}=r_2^{m+1}+f_2,\\quad r_1^{m+1}=(\\alpha I-S_2)\\lambda_2^{m+1}+f_2. $$\n\nIf $\\|r_1^{m+1}-r_1^m\\|\\le (1-q)\\varepsilon/\\|(\\alpha I+S_1)^{-1}\\|$, return `converged` with trace $\\lambda_1^{m+1}$ and pass count $m+1$. If all $M$ passes are used without this test succeeding, return `budget_exhausted` with the last trace $\\lambda_1^M$ and pass count $M$. This procedure states the finite stop predicate but makes no claim about its error certificate.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model",
+          "lem-ale-schur-complement-positive-and-minimizes-energy"
+        ],
+        "dependency_level": 2,
+        "strategy": "Specify each sequential solve and exchange, the finite stopping rule, and the exhaustion output.",
+        "justified_by": [
+          "thm-ale-robin-robin-iteration-contracts-and-certifies-stop"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emil Engström and Eskil Hansen, Time-dependent Steklov–Poincaré operators and space-time Robin–Robin decomposition for the heat equation (2022)",
+              "url": "https://arxiv.org/pdf/2210.13868",
+              "locator": "§§1, 5–6, Robin–Robin interface iteration and convergence; the finite-dimensional algorithm is specified here."
+            },
+            {
+              "title": "Martina Maria Joosten, Aspects of interface modelling in fluid-structure interaction problems, PhD thesis, Swansea University (2011)",
+              "url": "https://cronfa.swan.ac.uk/Record/cronfa42211/Download/0042211-02082018162436.pdf",
+              "locator": "Chapter 5, sequential subsystem solve, interface iteration, and finite iteration stopping."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "lem-ale-schur-residual-controls-interface-energy-error",
+        "kind": "lemma",
+        "title": "Schur residual controls trace and reconstruction energy error",
+        "statement": "Let $S:=S_1+S_2$, let $\\lambda_*$ solve $S\\lambda_*=f_1+f_2$, and let $\\widetilde\\lambda\\in\\Lambda$ have residual $\\rho:=S\\widetilde\\lambda-(f_1+f_2)$. All trace-vector and operator norms below are induced by the given real inner product on $\\Lambda$. Then\n\n$$\\|\\widetilde\\lambda-\\lambda_*\\|\\le\\|S^{-1}\\|\\,\\|\\rho\\|.$$\n\nIf each subdomain state is reconstructed by solving its interior equations at the supplied trace, define the product backward-Euler energy norm by $\\|(z_1,z_2)\\|_{B_1\\oplus B_2}^2:=\\langle B_1z_1,z_1\\rangle+\\langle B_2z_2,z_2\\rangle$ for $z_i\\in X_i$. Then\n\n$$\\|\\widetilde u-u_*\\|_{B_1\\oplus B_2}\\le\\sqrt{\\|S^{-1}\\|}\\,\\|\\rho\\|.$$",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model",
+          "lem-ale-schur-complement-positive-and-minimizes-energy"
+        ],
+        "dependency_level": 2,
+        "strategy": "Express trace error through the inverse Schur sum and use the Schur energy-minimization identity.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emil Engström and Eskil Hansen, Time-dependent Steklov–Poincaré operators and space-time Robin–Robin decomposition for the heat equation (2022)",
+              "url": "https://arxiv.org/pdf/2210.13868",
+              "locator": "§5, equivalence between interface residuals and subdomain energy; the finite-dimensional residual bound is proved locally."
+            },
+            {
+              "title": "Martina Maria Joosten, Aspects of interface modelling in fluid-structure interaction problems, PhD thesis, Swansea University (2011)",
+              "url": "https://cronfa.swan.ac.uk/Record/cronfa42211/Download/0042211-02082018162436.pdf",
+              "locator": "Chapter 5, condensed interface systems and subsystem reconstruction."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "thm-ale-one-dimensional-reynolds-transport-identity",
+        "kind": "theorem",
+        "title": "Choice-free one-dimensional ALE Reynolds transport identity",
+        "statement": "Let $d=1$ and let $A_t$ be an ALE moving-domain map of [[def-ale-moving-domain-map]], so $\\widehat\\Omega$ is a finite union of bounded intervals with pairwise disjoint closures and $\\partial_\\xi A_t>0$. For every $C^1$ scalar field $g$ on the moving closure,\n\n$$\\frac{d}{dt}\\int_{\\Omega(t)}g(x,t)\\,dx=\\int_{\\Omega(t)}\\partial_tg(x,t)\\,dx+\\sum_{x\\in\\partial\\Omega(t)}g(x,t)w_m(x,t)n(x),$$\n\nwhere $n=-1$ at each left endpoint and $n=+1$ at each right endpoint. This dimension-one branch is choice-free.",
+        "deps": [
+          "def-ale-moving-domain-map",
+          "lem-ale-jacobi-geometric-conservation-identity",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-jordan-boundary-criterion",
+          "thm-lebesgue-criterion-in-rn",
+          "thm-ftc-second-part",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "cor-mean-value-theorem",
+          "def-riemann-integral-over-a-jordan-set",
+          "thm-multidimensional-integral-properties",
+          "thm-jordan-content-and-indicator-integrability",
+          "thm-heine-cantor-metric"
+        ],
+        "dependency_level": 2,
+        "strategy": "Differentiate on the fixed finite union of intervals, change variables, and apply the one-dimensional fundamental theorem on each endpoint pair.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§§2–4, ALE map, relative velocity, and transport form, printed pp. 415–420."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "thm-ale-reynolds-transport-identity",
+        "kind": "theorem",
+        "title": "Reynolds transport identity on an ALE moving domain",
+        "statement": "Assume Countable Choice and $d\\ge2$. Let $A_t$ be the ALE moving-domain map of [[def-ale-moving-domain-map]], and let $g(x,t)$ and its first derivatives be continuous on the moving closure. Then, for each $t\\in(0,T)$,\n\n$$\\frac{d}{dt}\\int_{\\Omega(t)}g(x,t)\\,dx=\\int_{\\Omega(t)}\\partial_tg(x,t)\\,dx+\\int_{\\partial\\Omega(t)}g(x,t)w_m(x,t)\\cdot n(x,t)\\,dS.$$\n\nHere $n$ is the outward normal from the transported finite piecewise-$C^1$ boundary presentation. This is a continuous transport identity; no discrete high-dimensional geometric conservation estimate follows from it.",
+        "deps": [
+          "def-ale-moving-domain-map",
+          "lem-ale-jacobi-geometric-conservation-identity",
+          "def-countable-choice",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "thm-jordan-boundary-criterion",
+          "thm-lebesgue-criterion-in-rn",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "cor-mean-value-theorem",
+          "def-riemann-integral-over-a-jordan-set",
+          "thm-multidimensional-integral-properties",
+          "thm-jordan-content-and-indicator-integrability",
+          "thm-heine-cantor-metric",
+          "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals"
+        ],
+        "dependency_level": 2,
+        "strategy": "Pull the integral back to the fixed reference domain, differentiate using Jacobi's identity, then apply change of variables and the divergence theorem.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§3, fundamental ALE equation, and §4, ALE conservation equations, printed pp. 417–420."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+        "kind": "theorem",
+        "title": "The upwind ALE step conserves mass and preserves constants",
+        "statement": "For every input satisfying [[alg-ale-upwind-finite-volume-step]], the procedure completes after finitely many operations and returns exactly one of `mesh_crossing` (with no updated state, if some $J_i^{n+1}\\le0$) or `success` (with a unique updated array, if all $J_i^{n+1}>0$). Whenever it returns `success`, it preserves total periodic mass, $\\sum_iJ_i^{n+1}\\bar u_i^{n+1}=\\sum_iJ_i^n\\bar u_i^n$. It also preserves every constant state: if $\\bar u_i^n=U$ for every cell, then $\\bar u_i^{n+1}=U$ for every cell. The mass and constant-state properties require no CFL condition.",
+        "deps": [
+          "def-ale-periodic-moving-grid",
+          "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+          "alg-ale-upwind-finite-volume-step"
+        ],
+        "dependency_level": 2,
+        "strategy": "Sum the periodic flux differences for mass and use the discrete GCL to cancel mesh-flux changes for a constant state.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§4 and §6, ALE conservation and geometric conservation, printed pp. 419–425."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+        "kind": "theorem",
+        "title": "Robin-Robin iteration contracts to the monolithic trace",
+        "statement": "Assume the model, positive Schur operators, and algorithm of [[def-ale-linear-diffusion-transmission-model]], [[lem-ale-schur-complement-positive-and-minimizes-energy]], and [[alg-ale-robin-robin-partitioned-iteration]], with $\\alpha>0$. Every Robin solve in the algorithm exists uniquely, and for every admitted input it returns `converged` with the current first-subdomain trace on the first passing test, or returns `budget_exhausted` with $\\lambda_1^M$ after at most $M$ passes. Let $\\lambda_*$ be the unique monolithic trace solving $(S_1+S_2)\\lambda_*=f_1+f_2$, and put $R_i=(\\alpha I-S_i)(\\alpha I+S_i)^{-1}$ and $q_i=\\|R_i\\|$, $q=q_1q_2$. Then $q<1$, the unique fixed point of the iteration corresponds exactly to $\\lambda_*$, and the incoming-data error satisfies\n\n$$r_1^{m+1}-r_1^*=R_2R_1(r_1^m-r_1^*),\\qquad\\|r_1^{m+1}-r_1^*\\|\\le q\\|r_1^m-r_1^*\\|.$$\n\nIf the algorithm's stop test succeeds at pass $m+1$, its returned trace satisfies $\\|\\lambda_1^{m+1}-\\lambda_*\\|\\le\\varepsilon$. A `budget_exhausted` return carries no such certificate.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model",
+          "lem-ale-schur-complement-positive-and-minimizes-energy",
+          "alg-ale-robin-robin-partitioned-iteration",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 3,
+        "strategy": "Prove fixed-point equivalence, diagonalize the positive Schur operators to get strict contractions, and sum the geometric tail for the stop certificate.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emil Engström and Eskil Hansen, Time-dependent Steklov–Poincaré operators and space-time Robin–Robin decomposition for the heat equation (2022)",
+              "url": "https://arxiv.org/pdf/2210.13868",
+              "locator": "§§5–6, Schur-interface formulation and convergence of the heat Robin–Robin method; the present finite-dimensional contraction and stopping certificate are proved directly."
+            },
+            {
+              "title": "Martina Maria Joosten, Aspects of interface modelling in fluid-structure interaction problems, PhD thesis, Swansea University (2011)",
+              "url": "https://cronfa.swan.ac.uk/Record/cronfa42211/Download/0042211-02082018162436.pdf",
+              "locator": "Chapter 5, §§5.2–5.7, one-degree-of-freedom partitioned iteration, mass-ratio convergence, and stopping behavior."
+            }
+          ]
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+        "kind": "theorem",
+        "title": "CFL monotonicity and weighted L1 contraction for the ALE step",
+        "statement": "Suppose the step of [[alg-ale-upwind-finite-volume-step]] succeeds and, for every cell,\n\n$$\\frac{\\Delta t}{\\Delta\\xi}\\left((c_{i+1/2}^n)^+-(c_{i-1/2}^n)^-\\right)\\le J_i^n.$$\n\nThen the update is monotone, maps nonnegative cell averages to nonnegative cell averages, and for any two input arrays $U,V$ with outputs $U',V'$ it satisfies\n\n$$\\sum_iJ_i^{n+1}|U_i'-V_i'|\\le\\sum_iJ_i^n|U_i-V_i|.$$",
+        "deps": [
+          "def-ale-periodic-moving-grid",
+          "alg-ale-upwind-finite-volume-step",
+          "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream"
+        ],
+        "dependency_level": 3,
+        "strategy": "Expand the update into nonnegative neighbor coefficients, use constant preservation for row sums, and use mass conservation for weighted column sums.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§§4 and 6, ALE finite-volume conservation and discrete geometric conservation, printed pp. 419–425; the exact scalar estimate is proved locally."
+            }
+          ]
+        },
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 2689,
+    "id": "ale-interface-and-partitioned-multiphysics-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "ALE, interfaces and partitioned multiphysics coupling — Examples",
+    "companion": "ale-interface-and-partitioned-multiphysics-discretization",
+    "requires": [
+      "ale-interface-and-partitioned-multiphysics-discretization"
+    ],
+    "items": [
+      {
+        "id": "ex-ale-added-mass-toy-recurrence-instability",
+        "kind": "example",
+        "title": "A toy sequential coupling can amplify velocity error",
+        "statement": "In the scalar recurrence of [[def-ale-toy-added-mass-recurrence]], set $m_s=1$, $m_f=2$, and choose $\\delta v_0\\ne0$. Then $\\delta v_n=(-2)^n\\delta v_0$, so the increments grow geometrically in magnitude.",
+        "deps": [
+          "def-ale-toy-added-mass-recurrence"
+        ],
+        "dependency_level": 1,
+        "strategy": "Iterate the scalar recurrence and compare successive absolute values.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martina Maria Joosten, Aspects of interface modelling in fluid-structure interaction problems, PhD thesis, Swansea University (2011)",
+              "url": "https://cronfa.swan.ac.uk/Record/cronfa42211/Download/0042211-02082018162436.pdf",
+              "locator": "Chapter 5, §§5.2–5.7, one-degree-of-freedom staggered models and mass-ratio-dependent convergence; the exact recurrence here is checked directly."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "ex-ale-expanding-mesh-free-stream",
+        "kind": "example",
+        "title": "An expanding cell preserves a constant state",
+        "statement": "On a two-cell periodic grid take $\\Delta\\xi=1$, $\\Delta t=0.1$, period $L=2$, initial faces $x_{1/2}=0$, $x_{3/2}=1$, $x_{5/2}=2$, physical speed $a=0$, and periodic face velocities $w_{1/2}=0$, $w_{3/2}=0.1$, $w_{5/2}=0$. If both initial cell averages equal $U\\in\\mathbb R$, the successful ALE upwind step has Jacobians $1.01$ and $0.99$, preserves both averages at $U$, and conserves total mass $2U$.",
+        "deps": [
+          "def-ale-periodic-moving-grid",
+          "alg-ale-upwind-finite-volume-step",
+          "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream"
+        ],
+        "dependency_level": 3,
+        "strategy": "Compute both updated Jacobians, relative fluxes, and the two cell updates exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Donea, A. Huerta, J.-Ph. Ponthot, and A. Rodríguez-Ferran, Arbitrary Lagrangian–Eulerian Methods, Encyclopedia of Computational Mechanics, Vol. 1, Chapter 14 (2004)",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=0233bb2f3a26e2c7677cf79adc0caea4811d86bf&repid=rep1&type=pdf",
+              "locator": "§6, geometric conservation and free-stream preservation, printed pp. 422–425; the two-cell arithmetic is computed here."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "ex-ale-two-domain-heat-interface-flux-balance",
+        "kind": "example",
+        "title": "A two-domain heat trace balances outward fluxes",
+        "statement": "Take a one-dimensional trace space $\\Lambda=\\mathbb R$, two interior spaces $I_i=\\mathbb R$, $\\Delta t=2$, $M_1=M_2=I_2$, $A_1=\\operatorname{diag}(1/2,3/2)$, and $A_2=\\operatorname{diag}(1/2,1/2)$, with the second coordinate as trace. Let the condensed loads be $f_1=1$, $f_2=5$. The monolithic trace is $2$ and the outward fluxes are $3$ and $-3$. With $\\alpha=1$, $r_1^0=2$, tolerance $0.1$, and budget $M=2$, the Robin–Robin algorithm returns the certified trace $2$ on its second pass.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model",
+          "lem-ale-schur-complement-positive-and-minimizes-energy",
+          "thm-ale-monolithic-backward-euler-energy-identity",
+          "alg-ale-robin-robin-partitioned-iteration",
+          "thm-ale-robin-robin-iteration-contracts-and-certifies-stop"
+        ],
+        "dependency_level": 4,
+        "strategy": "Exhibit positive local blocks realizing the stated Schur scalars and perform both Robin passes exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emil Engström and Eskil Hansen, Time-dependent Steklov–Poincaré operators and space-time Robin–Robin decomposition for the heat equation (2022)",
+              "url": "https://arxiv.org/pdf/2210.13868",
+              "locator": "§§1 and 4–6, matching traces, balanced normal fluxes, and Robin–Robin interface iteration; the reduced matrix example is computed here."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "forward_refs": []
+      }
+    ]
+  }
+]

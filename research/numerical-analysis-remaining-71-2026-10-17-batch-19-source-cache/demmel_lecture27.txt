@@ -1,0 +1,745 @@
+CS267: Notes for Lecture 25, Apr 16 1996
+CS267: Lecture 25, Apr 16 1996
+Fast Hierarchical Methods for the N-body Problem, Part 2
+Table of Contents
+The Fast Multipole Method (FMM)
+Potentials and Forces
+Multipole expansion of the potential
+Inner expansions, and converting among expansions
+Outer_shift: converting Outer( n
+1
+) to Outer( n
+2
+)
+Inner_shift: converting Inner( n
+2
+) to Inner( n
+1
+)
+Convert: Converting Outer( n
+3
+) to Inner( n
+4
+)
+The Fast Multipole Method
+Step 1: Building the Quadtree
+Step 2: Computing Outer(n) for each tree node
+Step 3: Computing Inner(n) for each tree node
+Step 4: Nearest neighbor contributions
+Complexity of the Fast Multipole Method
+Parallelizing Barnes-Hut and the FMM
+Spatial Partitioning
+Tree Partitioning
+Bibliography
+The Fast Multipole Method (FMM)
+This algorithm was first published in "Rapid Solution of Integral Equations of Classical Potential Theory", V. Rokhlin, J. Comp. Phys. v. 60, 1985 and "A Fast Algorithm for Particle Simulations", L. Greengard and V. Rokhlin, J. Comp. Phys. v. 73, 1987. Greengard's 1987 Yale dissertation "The Rapid Evaluation of Potential Fields in Particle Systems" won an ACM Distinguished Dissertation Award.
+This method shares the quadtree and divide-and-conquer paradigm of Barnes-Hut. It differs in the following ways:
+FMM computes an expression for the
+potential
+at every point, not the force as does Barnes-Hut.
+FMM uses more information than the mass and center of the particles in a box. This more complicated expansion is more accurate, but also more expensive. In compensation, the FMM uses a fixed set of boxes to compute the potential, rather than a set varying with the accuracy parameter theta, and location of the center of mass.
+In other words, where Barnes-Hut uses a fixed, small amount of information per box (mass and center of mass), but a set of boxes varying with desired accuracy, FMM uses a larger amount of information per box (depending on desired accuracy), but a fixed set of boxes.
+We begin by reviewing the role of the potential, and then return to the FMM.
+Potentials and Forces
+As discussed in
+Lecture 17
+, gravitational and electrostatic forces obey an inverse square law, so that the force on a particle at (x,y,z), due to a particle at the origin, is proportional to
+-(x,y,z)/r
+3
+where r = sqrt(x
+2
++ y
+2
++ z
+2
+) is the distance of the particle from the origin.
+Instead of dealing with the force, which is a vector, it is often easier to compute the
+potential
+phi(x,y,z), which is the scalar
+phi(x,y,z) = -1 / r
+One can easily confirm that the force is just the negative of the
+gradient
+of the potential
+- grad phi(x,y,z) = d phi(x,y,z) d phi(x,y,z) d phi(x,y,z) - ( ------------ , ------------ , ------------ ) dx dy dz
+The intuition behind the potential is that phi is the height of a hill at a point (x,y,z), and the corresponding force just pushes a particle at (x,y,z) downhill, in the direction of steepest descent (the direction in which phi decreases most rapidly).
+Thus, the strategy of the FMM will be to compute a compact expression for the potential phi(x,y,z) which can be easily evaluated, along with its derivative, at any point.
+To make the presentation simple, we will do everything in 2D instead of 3D. To motivate the form of the potential we use in 2D, we note that the 3D potential phi(x,y,z) satisfies the 3D Poisson equation
+d
+2
+phi(x,y,z) d
+2
+phi(x,y,z) d
+2
+phi(x,y,z) ------------- + ------------- + ------------- = 0 dx
+2
+dy
+2
+dz
+2
+(except at (x,y,z) = 0) as may be easily confirmed. We will analogously demand that the 2D potential phi(x,y) satisfy the 2D Poisson equation
+d
+2
+phi(x,y) d
+2
+phi(x,y) ----------- + ----------- = 0 dx
+2
+dy
+2
+(except at (x,y)=0). The solution for a particle at the origin is
+phi(x,y) = log r
+so
+force = - grad phi(x,y) = -( x, y )/r
+2
+where r = sqrt( x
+2
++ y
+2
+) is the distance of the particle from the origin. In other words, we have an inverse-first-power force law instead of an inverse-square law.
+If we have n points in the plane at locations z
+1
+, z
+2
+, ... , z
+n
+(each z
+i
+= ( x
+i
+, y
+i
+)), with masses m
+1
+, m
+2
+, ... , m
+n
+, their potential at a point x will be
+phi(x,y) = sum
+i=1,...,n
+m
+i
+log sqrt( ( x-x
+i
+)
+2
++ ( y-y
+i
+)
+2
+)
+Our goal is to find a way to evaluate this expression (or its derivative) at n points, in O(n) time instead of O(n
+2
+) time.
+Multipole expansion of the potential
+A "multipole expansion" of the potential phi(x,y) is a kind of Taylor expansion which is accurate when x
+2
++y
+2
+is large. To simplify its derivation, we will consider z
+i
+and z=(x,y) as complex numbers, as well as points in the plane (we used the same idea in the
+sharks and fish
+codes). This will let us write phi(x,y) as a simple function of the complex number z as follows. Write
+r = sqrt( ( x-x
+i
+)
+2
++ ( y-y
+i
+)
+2
+) = | z - z
+i
+|
+Writing z-z
+i
+in polar coordinates yields
+z - z
+i
+= r*e
+sqrt(-1)*theta
+= r*cos(theta) + sqrt(-1)*r*sin(theta)
+so
+log( z - z
+i
+) = log(r) + log(e
+sqrt(-1)*theta
+) = log(r) + sqrt(-1)*theta = log |z-z
+i
+| + sqrt(-1)*theta
+and
+Real( log( z-z
+i
+) ) = log | z-z
+i
+|
+Thus, the potential is the real part of the complex number
+phi(z) = sum
+i=1,...,n
+m
+i
+* log( z-z
+i
+)
+This is a differentiable function of the complex variable z (not the case with the absolute value present!), so we can compute its Taylor (or "multipole") expansion. We use the fact that when the |y|
+<
+1, then the Taylor expansion of log( 1-y ) is
+log( 1-y ) = y + y
+2
+/2 + y
+3
+/3 + ...
+Thus when |z| is larger than any | z
+i
+| we may rewrite phi(z) as
+phi(z) = sum
+i=1,...,n
+[ m
+i
+* log( z-z
+i
+) ] = sum
+i=1,...,n
+[ m
+i
+* { log(z) + log( 1 - z
+i
+/z ) } ] = sum
+i=1,...,n
+[ m
+i
+* log (z) ] + sum
+i=1,...,n
+[ m
+i
+* log( 1 - z
+i
+/z ) ] = M * log(z) + sum
+i=1,...,n
+[ m
+i
+{ sum
+j=1,...,infinity
+(z
+i
+/z)
+j
+/ j } ] ... where M = sum
+i=1,...,n
+m
+i
+= M * log(z) + sum
+j=1,...,infinity
+[ sum
+i=1,...,n
+m
+i
+* (z
+i
+/z)
+j
+/ j ] ... reversing the order of summation = M * log(z) + sum
+j=1,...,infinity
+[ z
+-j
+{ sum
+i=1,...,n
+m
+i
+* z
+i
+j
+/ j } ] = M * log(z) + sum
+j=1,...,infinity
+z
+-j
+alpha
+j
+where
+alpha
+j
+= sum
+i=1,...,n
+[ m
+i
+* z
+i
+j
+/ j ]
+We "compress" this representation by truncating it, yielding
+phi(z) ~ M * log(z) + sum
+j=1,...,p
+alpha
+j
+/ z
+j
+The error in this truncation is proportional to the largest term omitted, namely
+( (max | z
+i
+|) / |z| )
+p+1
+For example, if |z| > c * max | z
+i
+| with c > 1, then the error is proportional to 1/c
+p+1
+. In particular, suppose all the particles lie
+inside
+a D-by-D square centered at the origin, so |z
+i
+|
+<
+= D/sqrt(2). Also suppose that z is
+outside
+a 3*D-by-3*D square centered at the origin, as shown below, so |z| >= 1.5*D. Then we can take c = (1.5*D)/(D/sqrt(2)) = 3/sqrt(2) ~ 2.12, and so the error in the formula is O(2.12
+-p
+). This fact will let us use a multipole expansion for the particles in the small box, in any like-sized box not immediatedly adjacent to it.
+If the D-by-D box is centered at z
+c
+instead of 0, the idea is similar: We approximate the potential by an expansion around z
+c
+:
+phi(z) ~ M * log( z-z
+c
+) + sum
+j=1,...,p
+alpha
+j
+/ ( z-z
+c
+)
+j
+If the node in the quadtree corresponding to this box is n, then we define the data structure representing the multipole expansion associated with n as
+Outer(n) = ( M, alpha
+1
+, alpha
+2
+, ... , alpha
+p
+, z
+c
+)
+For ease of exposition, we will sometimes refer to the expansion associated with Outer(n) as an
+outer expansion
+, since it is to be evaluated outside n, and to contrast it with the different expansion discussed in the next section.
+Inner expansions, and converting among expansions
+Outer(n) stores the information needed to compute the potential
+away from
+n, due to the particles
+inside
+n. But our eventual goal is to cheaply compute the potential
+inside
+n, due to the particles
+away from
+n. We will do this using another kind of Taylor expansion, namely
+sum
+i=0,...,p
+beta
+i
+* ( z-z
+c
+)
+i
+This expansion will represent the potential inside the D-by-D box in the above figure, due to
+all
+the particles outside the 3*D-by-3*D box. We call it an
+inner expansion
+, and represent it by the data structure
+Inner(n) = ( beta
+0
+, beta
+1
+, ... , beta
+p
+, z
+c
+)
+The output of the FMM will (partially) consist of Inner(n) for each leaf node n of the quadtree. To explain the algorithm, we need to say how to convert an outer expansion to an inner expansion, and perform related transformations on expansions.
+Outer_shift: converting Outer( n
+1
+) to Outer( n
+2
+)
+In the picture below, n
+1
+is a blue subsquare of the larger black square n
+2
+. We let center( n
+1
+) = z
+1
+denote the center of n
+1
+, and center( n
+2
+) = z
+2
+denote the center of z
+2
+. Suppose we are given Outer( n
+1
+). The corresponding outer expansion is accurate outside the blue dashed square centered at z
+1
+, so it is certainly accurate outside the black dashed square centered at z
+2
+. This means there is another expansion, defined by Outer( n
+2
+), with different coefficients alpha
+i
+as well as a different center z
+2
+, which represents the same potential as Outer( n
+1
+) outside the black dashed box.
+More mathematically, if
+Outer( n
+1
+) = ( M, alpha
+1,1
+, alpha
+1,2
+, ... , alpha
+1,p
+, z
+1
+)
+then there is an
+Outer( n
+2
+) = ( M, alpha
+2,1
+, alpha
+2,2
+, ... , alpha
+2,p
+, z
+2
+)
+such that for z outside the dashed black box the two outer expansions approximate each other:
+M*log(z- z
+1
+) + sum
+i=1,...,p
+alpha
+1,i
+/ (z- z
+1
+)
+i
+~ M*log(z- z
+2
+) + sum
+i=1,...,p
+alpha
+2,i
+/ (z- z
+2
+)
+i
+By doing a little algebra, one can show that each alpha
+2,i
+is a weighted linear sum of all the alpha
+1,j
+, and that the weights are easy to compute; we refer to the original paper of Greengard and Rokhlin for details. Thus computing the alpha
+2,i
+costs just O(p
+2
+). We refer to this conversion function as
+Outer( n
+2
+) = Outer_shift( Outer( n
+1
+), center( n
+2
+) )
+where the second argument is the new center for the expansion Outer( n
+2
+).
+We will use Outer_shift in the algorithm to compute Outer(n) for each node in the quad tree by combining the outer expansions of its children.
+Inner_shift: converting Inner( n
+2
+) to Inner( n
+1
+)
+Let n
+1
+and n
+2
+be the same squares as in the above figure. Suppose we have an inner expansion defined by Inner(n
+2
+), centered at z
+2
+:
+Inner( n
+2
+) = ( beta
+2,0
+, beta
+2,1
+, ... , beta
+2,p
+, z
+2
+)
+for the potential inside n
+2
+due to all the particles outside the dashed black box. Then this expansion also works inside n
+1
+, since n
+1
+is inside n
+2
+. What we want is an expansion Inner( n
+1
+), centered at z
+1
+:
+Inner( n
+1
+) = ( beta
+1,0
+, beta
+1,1
+, ... , beta
+1,p
+, z
+1
+)
+which gives the potential inside n
+1
+due to the same set of all points outside the dashed black box:
+sum
+i=0,...,p
+beta
+1,i
+* ( z-z
+1
+)
+i
+= sum
+i=0,...,p
+beta
+2,i
+* ( z-z
+2
+)
+i
+Our job, then, is to take z
+2
+and the beta
+2,i
+and compute the beta
+1,i
+. As above, this is a matter of computing certain weighted linear sums of the beta
+2,i
+, and costs O(p
+2
+). We denote this transformation by
+Inner( n
+1
+) = Inner_shift( Inner( n
+2
+), center( n
+1
+) )
+Convert: Converting Outer( n
+3
+) to Inner( n
+4
+)
+Finally, we need to show how to convert an outer transformation Outer( n
+3
+) to an inner transformation Inner( n
+4
+), when n
+4
+is far enough from n
+3
+, as shown below.
+In other words, given
+Outer( n
+3
+) = ( M, alpha
+3,1
+, alpha
+3,2
+, ... , alpha
+3,p
+, z
+3
+)
+we want to compute an
+Inner( n
+4
+) = ( beta
+4,1
+, beta
+4,2
+, ... , beta
+4,p
+, z
+4
+)
+such that
+M * log( z-z
+3
+) + sum
+i=1,...,p
+alpha
+3,i
+/ ( z-z
+3
+)
+i
+~ sum
+i=0,...,p
+beta
+4,i
+* ( z- z
+4
+)
+i
+Once again, each beta
+4,i
+is a weighted sum of all the alpha
+3,i
+, so it costs O(p
+2
+) to compute
+Inner(n
+4
+) = Convert( Outer(n
+3
+), center(n
+4
+) )
+The Fast Multipole Method
+Now we can present the complete algorithm. We begin with a high-level description, and then fill in details.
+(1) Build the quadtree containing all the points. (2) Traverse the quadtree from bottom to top, computing Outer(n) for each square n in the tree. (3) Traverse the quadtree from top to bottom, computing Inner(n) for each square in the tree. (4) For each leaf, add the contributions of nearest neighbors and particles in the leaf to Inner(n)
+Step 1: Building the Quadtree
+This construction step is essentially the same as for the Barnes-Hut algorithm, except that it is more efficient to stop refining nodes when they contain a small constant k > 1 number of particles, rather than going down to 1 particle per leaf node. The optimal k depends on implementation details, such as the crossover point where the FMM starts beating the direct (k
+2
+) method.
+Step 2: Computing Outer(n) for each tree node
+We do a
+postorder traversal
+of the tree, which means that we compute Outer(c) for all children c of a node n, and then combine the Outer(c) to get Outer(n). We may do this recursively by calling Build_Outer(root), where Build_Outer is defined as follows:
+procedure Build_Outer(n) if n is a leaf compute Outer(n) using its definition as a sum else Outer(n) = 0 for all children c(i) of n ... at most 4 children Build_Outer( c(i) ) Outer(n) = Outer(n) + Outer_Shift( Outer( c(i) ), center(n) ) end for endif
+This is shown graphically below, where the outer expansions of the children c(i) are combined to get the outer expansion of the parent n. We need only "add" the outer expansions in the sense of adding the masses M (since the total mass of the particles in n is the sum of the masses of its children), and adding the coefficients alpha
+i
+(since the potential of a collection of particles is the sum of the potentials of each particle).
+Step 3: Computing Inner(n) for each tree node
+This step is the core of the algorithm. The problem is to compute Inner(n) in a
+constant
+amount of work, for any n. This will require combining inner and outer expansions from a fixed number of other nodes of the quadtree. This is illustrated in the figure below, where the (magenta) node n is the one for which we would like to compute Inner(n). Recall from its definition that Inner(n) is a simple expression for the potential inside the small box labeled n, due to all particles not in same-sized boxes adjacent to n. In other words, Inner(n) is supposed to include the potential from all shaded regions (shaded red or cyan).
+We begin by considering Inner(p), where p is the parent of n, as shown above. By having the algorithm compute parents before children (using a so-called
+preorder traversal
+of the quadtree), Inner(p) is already available, and includes the potential due to all particles in the red-shaded region. Computing
+Inner_shift( Inner(p), center(n) )
+converts this expansion around the center of p to one around the center of n, which will contribute to Inner(n).
+This leaves the particles in the cyan shaded boxes, which are also labeled i for
+Interaction_Set(n)
+. More formally,
+Interaction_Set(n) = { nodes i such that i is a child of a neighbor of parent(n) but i is not itself a neighbor of n }
+For each node i in Interaction_Set(n), we have Outer(i) available, which is an accurate expansion inside n. Thus
+Convert( Outer(i), center(n) )
+gives us an inner expansion for n, which includes the potential due to all particles inside i. Since there are only a bounded number of nodes i in the Interaction_set(i) (namely at most 6
+2
+- 3
+2
+= 27 in 2D, and 6
+3
+- 3
+3
+= 189 in 3D, with slightly fewer if n is near a boundary of the largest box), there is only a constant amount of work to do to compute Inner(n). The figure above also shows Interaction_Set(n) in terms of the quadtree.
+We can now state the algorithm for step 3 of the FMM, which is to call Build_Inner(root), where Build_Inner is defined recursively as follows
+Build_Inner(n) p = parent(n) ... p=nil if n=root Inner(n) = Inner_shift( Inner(p), center(n) ) ... Inner(n)=0 if n=root For all i in Interaction_Set(n) ... Interaction_set(root) is empty Inner(n) = Inner(n) + Convert( Outer(i), center(n) ) end for For all children c of n Build_Inner( c ) end for
+Adding inner expansions means just adding their coefficients beta(i), which is valid, as before, because the potential of a set of particles is the sum of potentials of each particle alone.
+We have skipped some details when the quadtree is adaptive. For example, it may be that some some nodes in the interaction set are not present, because they belong to subtrees containing few points. For example, suppose there were only a few points in the left half of the region above, so the two children of the root on the left were in fact leaves. Then their contribution to node n would not be in computed in step 3, but instead be delayed until step 4 below.
+Step 4: Nearest neighbor contributions
+At the end of step 3, for each leaf n, Inner(n) includes the potential of all particles except those in nearest neighbors of n, and particles inside n itself. This is a small number of particles (otherwise we would have further refined the tree), so their contributions can be added in directly.
+Complexity of the Fast Multipole Method
+Since we are traversing the quad tree in the last 3 steps, and doing a bounded amount of work per node, the total work is proportional to the number of nodes. The number of nodes is in turn proportional to the number of particles, so steps 2, 3 and 4 of the algorithm take O(n) serial time. Step 1, building the quadtree, takes either O(n log n) or O(n), depending on your point of view, as discussed for the Barnes-Hut algorithm.
+Parallelizing Barnes-Hut and the FMM
+Most of the literature on parallelizing these algorithms is for Barnes-Hut with adaptive octtrees. For one on-line bibliography, click
+here
+. A bibliography of the papers specifically referred to in this section is given at the end.
+But first we will mention one parallelization of nonadaptive FMM on the Connection Machine CM-2. The CM-2 was an SIMD machine, and so each processor had to execute the same instruction at the same time (or execute nothing). This is clearly not very compatible with an irregularly structured quadtree or octtree, so in this implementation it was assumed that the tree was complete, i.e. every level was fully populated (4
+i
+nodes on level i of the quadtree, and 8
+i
+nodes on the octtree). This way, the tree traversals in steps 2 and 3 of the FMM could be done in a data parallel fashion, with the same operations at each node on each processor. Thus in step 2, the post-order traversal, all the leaves are processed simultaneously, followed by all their parents, and so on. Step 3, the pre-order traversal, starts with the root, and works its way to the leaves. The communication pattern is very similar to multigrid, as described in
+Lecture 17
+.
+There have been parallelizations of Barnes-Hut both on shared memory machines and distributed memory machines. On both architectures, two similar strategies have been pursued. Since there is not complete agreement on what to call these strategies, we will make up our own names and call them
+spatial partitioning
+and
+tree partitioning
+, to distinguish how they divide the work.
+Spatial Partitioning
+This method divides the large square in which all the particles lie into p nonoverlapping subrectangles, each of which contains an approximately equal number of particles, and assigns each rectangle to a processor. This is also called
+Orthogonal Recursive Bisection (ORB)
+in the literature, and is quite similar to the Inertial Bisection algorithm for graphs discussed in
+Lecture 20
+. It works as follows. First, a vertical dividing line is found such that half the particles are on one side, and half are on the other, as shown below with the blue line. Next, the particles in the left and right halves are divided in half by horizontal red lines, to get 4 partitions with equally many particles. These are in turn bisected with vertical cyan lines, horizontal brown lines, and so on, until there are as many partitions as processors.
+In order for processor k to run Barnes-Hut on the particles it owns, it needs that subset of the quadtree that would be accessed while computing forces for its own particles; this subset is called the
+Locally Essential Tree (LET)
+. The LET includes the whole subset of the quadtree whose leaves contain the particles inside processor k, as well as "neighboring" tree nodes. Here is an somewhat simplified description of the LET. Recalling the Barnes-Hut algorithm, we let n be a node in the quadtree not containing any particles in processor k, let D(n) be the length of a side of the square corresponding to n, and let r(n) be the shortest distance from any point in n to any point in the rectangle owned by processor k. Then if
+(1) D(n)/r(n)
+<
+theta and D(parent(n))/r(parent(n) >= theta, or (2) D(n)/r(n) >= theta
+n is part of the LET of processor k. The idea behind condition (1) is that the mass and center of mass of n can be used to evaluate the force at any point in processor k, but no ancestor of n in the tree has this property. In particular, no children of n are in the LET. Condition (2) says we need the ancestors of all such nodes as well. For an illustration, see figure 1 on page 3, and figure 3 on page 4, in
+"Astrophysical N-body Simulations Using Hierarchical Tree Data Structures"
+, M. Warren and J. Salmon, Supercomputing 92.
+The advantage of conditions (1) and (2) is that processor k can examine its own local subtree, and decide how much of it any other processor j needs for processor j's LET, knowing only the size and location of the rectangle owned by processor j (this is needed to determine r(n)). The parallel algorithm given below for computing the LETs in parallel takes advantage of this.
+To explain the algorithm, we assume there are p=2
+m
+processors. Each m-bit processor number is determined by the orthogonal bisection process; bit i is 1 or 0 depending on the side of the i-th bisecting line on which the processor lies. This is illustrated below for the same partition as above, with bits in processor numbers color coded to indicate to which bisecting line they correspond.
+The algorithm below is similar to broadcast on a hypercube, discussed briefly in
+Lecture 9
+. It is SPMD code, to be executed by each processor. MYPROC is a variable equal to the local processor number.
+Compute local quadtree T LET = T for i = 0 to m-1 ... p = 2
+m
+OTHERPROC = MYPROC xor 2
+i
+... flip i-th bit of MYPROC Compute the subset of LET that any processor on other side of bisecting line i might want Send this subset to OTHERPROC Receive corresponding subset from OTHERPROC, and incorporate it into LET end for prune LET of unnecessary parts
+The path a particular part of the quadtree might take to reach its final destination is circuitous, as illustrated by the small black box in the last figure. To get from processor 0110 to 1011, which needs it, it first goes to processor 1110 (leftmost bit flipped), then to processor 1010 (next bit flipped), then it remains in 1010 because it is on the correct side of the cyan line, and finally it goes to processor 1011 (rightmost bit flipped).
+This algorithm was implemented both on the Intel Delta, a distributed memory machine, and the Stanford Dash, a shared memory machine. The Delta implementation was the largest astrophysical simulation ever done at the time, and won the Gordon Bell Prize at Supercomputing 92. The Intel Delta has 512 processors, each one an Intel i860. Over 17 million particles were simulated for over 600 time steps. The elapsed time was about 24 hours, for a sustained flop rate of about 5.2 Gflops. To see results of these simulations, click
+here.
+The shared memory implementation was somewhat slower than the next algorithm, and much more complicated to program.
+Tree Partitioning
+This approach is called
+costzones
+in the shared memory implementation, and
+hashed octtree
+in the distributed memory implementation. The shared memory implementation is much simpler, so we describe it first. After the quadtree is formed, a
+work estimate
+is associated with each leaf (particle), indicating how much work is needed to compute the force for that leaf. If the tree is being constructed for the first time, this estimate may simply be the depth of the leaf in the tree. If, as is more common, the tree has been computed before during a previous time step, then an estimate from the last call to Barnes-Hut is available (if particles do not move quickly, then the tree structure changes little from time step to time step). Given the work estimate for each leaf, we can compute an estimate of the total work W. Now the leaves may be partitioned by breaking them into blocks, or
+costzones
+, each of which has a total amount of work close to W/p, so the load is balanced. Such a partition is shown below, where we have circled leaves belonging to a costzone, as well as correspondingly color coded the squares to which they correspond. Note that it is possible for a costzone to consist of noncontiguous squares (such as the brown processor), although this method generally assigns contiguous squares to processors. This contiguity is important for memory locality reasons, since the algorithm accesses more nearby squares than distant ones.
+The shared memory implementation simply used reads of remote data to fetch the parts of the quadtree needed on demand. This data is read-only while traversing the tree to compute forces, and is cached in each processor. Because each processor works on (mostly) contiguous regions of space, the same parts of the quadtree are needed over and over again, so caching is very effective. The speedup was 15 on a 16 processor Dash, which is quite good. (More detailed speedup and scalability studies are in the literature cited below). The disadvantage of the shared memory approach is that cache sizes have to grow proportionally to the number of processors to maintain high efficiency. Also, the locality afforded by this approach is not perfect, as illustrated by the brown processor in the above figure.
+The distributed memory algorithm is much more complex, and uses a distributed data structure called a
+hashed octtree
+. The idea is to associate a unique
+key
+with each node in the quadtree (as before, we limit ourselves to 2D for ease of exposition). Then a
+hashing function
+hash(key) will map each key to a global address in a
+hash table
+at which to find the data associated with the node. The hash table is then distributed across processors using a technique much like costzones. The hash function permits each processor (with high probability) to find exactly where each node is stored without traversing links in a linked tree structure, and so minimizing the number of communications necessary find get the data at a node.
+Here is how the key is computed. Let (x,y) be the coordinates of the center of a square. We may think of them as bit strings, as shown below. The corresponding key is obtained by interleaving these bits, from right (least significant) to left (most significant), and putting an extra 1 at the left (to act as a "sentinel").
+The nodes at the top of the quadtree are larger, and therefore may be represented by shorter bit patterns. A more complete picture of the keys for each level of the quadtree is shown below. The bits of each key are color coded according to which level of the quadtree determines them.
+The hash function hash(key) is a simple bit-mask of the bottom h bits of each key. Thus, the top (h/2)+1 quadtree levels ( (h/3)+1 octtree levels) have unique value of hash(key). Each hash table entry include a pointer to a list of boxes with the same value of hash(key), a list of which child cells are actually present, and mass and center of mass data.
+The hash table is partitioned in a method similar to costzones. Suppose h=4, so there is one cell in the hash table for each of the 16 squares on level 3 of the quadtree (the rightmost figure of the three above). Then the keys for each of the 16 squares determine a linear order for these squares, from 10000 to 11111. We want to break this sequence of 16 squares into p contiguous subsequences to assign to processors. To balance the load, we want each each subsequence to require the same work. We do this similarly to costzones, where to each square we associate a cost, and choose the subsequences so the sum of the costs in each subsequence is nearly equal. This is illustrated below, for p=4. Note that a processor may be assigned noncontiguous regions of space, as with costzones. (There are also ways to order the squares using continuous "space-filling curves" which would not lead to noncontiguous regions being assigned to processors. This is discussed in the literature cited below.)
+Finally, the Barnes-Hut tree is traversed by sending messages to access remote parts of the hash table. There are many standard techniques to lower the communication needed, including overlapping communication and computation, prefetching parts of the tree, processing tree nodes in the order they become available rather in the order they appear in the tree, and caching.
+Here are some performance results from an astrophysics calculation, again on a 512 processor Intel Delta. There are 8.8 million particles, initially uniformly distributed. The time for one Barnes-Hut step is 114 seconds, or 5.8 Gflops. The breakdown of the time is
+Decomposing the domain 7 seconds Building the tree 7 seconds Tree traversal 33 seconds Communication during traversal 6 seconds Force evaluation 54 seconds Load Imbalance 7 seconds Total 114 seconds
+Thus, the floating point work of force evaluation takes almost half the time, so the implementation is reasonably efficient. At later stages of the calculation, the particles become highly clustered, and the time increases to 160 seconds, but with about the same timing breakdown as above.
+Bibliography
+The presentation in this section was adapted from the following papers.
+An on-line bibliography of papers on parallel Barnes-Hut, including postscript copies of papers, is available by clicking
+here
+.
+"A Fast Algorithm for Particle Simulations", L. Greengard and V. Rokhlin, J. Comp. Phys. v 73, 1987, presents the Fast Multipole Method. Greengard's 1987 Yale dissertation "The Rapid Evaluation of Potential Fields in Particle Systems" won an ACM Distinguished Dissertation Award.
+"The parallel multipole method on the connection machine", F. Zhao and L. Johnsson, SIAM J. Sci. Stat. Computing 12(6), 1991. This paper presents a data parallel implementation of the nonadaptive FMM on an SIMD machine, the CM-2.
+Orthogonal recursive bisection was discussed in "Astrophysical N-body Simulations using Hierarchical Tree Data Structures", M. Warren and J. Salmon, Supercomputing 92, and discussed in more detail in Salmon's 1990 PhD thesis at Caltech. The shared memory version is discussed in "Implications of Hierarchical N-body methods for Multiprocessor Architecture", J. P. Singh, J. Hennessy and A. Goopta, Computer Systems Lab, Stanford U. This paper also discusses costzones. Also see Singh's Stanford PhD thesis in Computer Science.
+"A parallel hashed octtree N-body algorithm", M. Warren and J. Salmon, appeared in Supercomputing 93.

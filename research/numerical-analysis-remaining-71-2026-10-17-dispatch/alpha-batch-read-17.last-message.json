@@ -1,0 +1,291 @@
+{
+  "group": "f",
+  "batches": ["17"],
+  "pages_read": [
+    "sketched-least-squares-and-subspace-embeddings",
+    "sketched-least-squares-and-subspace-embeddings-examples"
+  ],
+  "items_read": [
+    "alg-sketch-and-solve-least-squares",
+    "def-oblivious-l2-subspace-embedding",
+    "def-sketch-qr-right-preconditioner",
+    "def-subspace-leverage-scores",
+    "lem-hermitian-sphere-net-controls-operator-norm",
+    "lem-subspace-leverage-score-identities",
+    "thm-sketch-and-solve-exact-minimizer",
+    "thm-sketch-qr-right-preconditioner-conditioned-spectrum",
+    "lem-gaussian-squared-norm-tail",
+    "alg-leverage-score-row-sampling-sketch",
+    "thm-sketch-and-solve-residual-guarantee",
+    "thm-gaussian-oblivious-l2-subspace-embedding",
+    "thm-leverage-score-row-sampling-subspace-embedding",
+    "cex-embedding-the-column-space-alone-does-not-control-ls-residual",
+    "ex-leverage-zero-rows-and-high-coherence",
+    "ex-overdetermined-regression-exact-subspace-sketch"
+  ],
+  "conventions": [
+    {
+      "convention": "Embedding distortion applies to squared Euclidean norms, with factors 1−ε and 1+ε and 0<ε<1.",
+      "fixed_by": "def-oblivious-l2-subspace-embedding",
+      "matters_for": [
+        "thm-sketch-and-solve-residual-guarantee",
+        "thm-sketch-qr-right-preconditioner-conditioned-spectrum",
+        "thm-gaussian-oblivious-l2-subspace-embedding",
+        "thm-leverage-score-row-sampling-subspace-embedding",
+        "cex-embedding-the-column-space-alone-does-not-control-ls-residual"
+      ]
+    },
+    {
+      "convention": "An oblivious embedding succeeds separately for every fixed subspace chosen independently of the draw; it need not preserve all such subspaces simultaneously.",
+      "fixed_by": "def-oblivious-l2-subspace-embedding",
+      "matters_for": [
+        "thm-gaussian-oblivious-l2-subspace-embedding"
+      ]
+    },
+    {
+      "convention": "Sketch-and-solve calls the SVD solver at strict threshold zero with a finite sweep budget. Its minimizer guarantee is conditional on exact-arithmetic convergence and an exact SVD record.",
+      "fixed_by": "alg-sketch-and-solve-least-squares",
+      "matters_for": [
+        "thm-sketch-and-solve-exact-minimizer",
+        "thm-sketch-and-solve-residual-guarantee",
+        "ex-overdetermined-regression-exact-subspace-sketch"
+      ]
+    },
+    {
+      "convention": "The residual guarantee requires an embedding of span(Ran(A),{b}); embedding Ran(A) alone is insufficient.",
+      "fixed_by": "thm-sketch-and-solve-residual-guarantee",
+      "matters_for": [
+        "cex-embedding-the-column-space-alone-does-not-control-ls-residual",
+        "ex-overdetermined-regression-exact-subspace-sketch"
+      ]
+    },
+    {
+      "convention": "Leverage scores use an orthonormal basis matrix of a positive-dimensional subspace, with row indices 0≤i<n.",
+      "fixed_by": "def-subspace-leverage-scores",
+      "matters_for": [
+        "lem-subspace-leverage-score-identities",
+        "alg-leverage-score-row-sampling-sketch",
+        "thm-leverage-score-row-sampling-subspace-embedding",
+        "ex-leverage-zero-rows-and-high-coherence"
+      ]
+    },
+    {
+      "convention": "Rows are sampled independently with replacement, with π_i≥βℓ_i/d and 0<β≤1, and rescaled by 1/sqrt(mπ_i). Zero-probability rows are never sampled; admissible distributions may assign positive probability to zero-leverage rows.",
+      "fixed_by": "alg-leverage-score-row-sampling-sketch",
+      "matters_for": [
+        "thm-leverage-score-row-sampling-subspace-embedding",
+        "ex-leverage-zero-rows-and-high-coherence"
+      ]
+    },
+    {
+      "convention": "Normalized complex Gaussian entries have E|g|²=1. The Gaussian tail and embedding statements explicitly assume Countable Choice for their finite-dimensional probability laws.",
+      "fixed_by": "lem-gaussian-squared-norm-tail",
+      "matters_for": [
+        "thm-gaussian-oblivious-l2-subspace-embedding"
+      ]
+    },
+    {
+      "convention": "The QR right preconditioner is R⁻¹ from SA=QR with Q*Q=I and nonsingular upper-triangular R; it preconditions the original matrix as AR⁻¹.",
+      "fixed_by": "def-sketch-qr-right-preconditioner",
+      "matters_for": [
+        "thm-sketch-qr-right-preconditioner-conditioned-spectrum"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-oblivious-l2-subspace-embedding",
+      "statement": "S is an ε-subspace embedding for U when (1−ε)||x||₂²≤||Sx||₂²≤(1+ε)||x||₂² for every x∈U. An (ε,δ) oblivious embedding satisfies this with probability at least 1−δ for every fixed d-dimensional U chosen independently of the draw.",
+      "used_by": [
+        "thm-sketch-and-solve-residual-guarantee",
+        "thm-sketch-qr-right-preconditioner-conditioned-spectrum",
+        "thm-gaussian-oblivious-l2-subspace-embedding",
+        "thm-leverage-score-row-sampling-subspace-embedding",
+        "cex-embedding-the-column-space-alone-does-not-control-ls-residual",
+        "ex-leverage-zero-rows-and-high-coherence",
+        "ex-overdetermined-regression-exact-subspace-sketch"
+      ]
+    },
+    {
+      "id": "lem-subspace-leverage-score-identities",
+      "statement": "For a d-dimensional subspace U, d≥1, the row squared norms of any orthonormal basis matrix are basis-independent, satisfy 0≤ℓ_i≤1 and sum_i ℓ_i=d, and ℓ_i=0 exactly when row i is zero.",
+      "used_by": [
+        "alg-leverage-score-row-sampling-sketch",
+        "thm-leverage-score-row-sampling-subspace-embedding",
+        "ex-leverage-zero-rows-and-high-coherence"
+      ]
+    },
+    {
+      "id": "thm-sketch-and-solve-exact-minimizer",
+      "statement": "In exact arithmetic, if the zero-threshold SVD call converges and supplies an exact SVD record, the returned vector is the unique minimum-Euclidean-norm minimizer of ||SAx−Sb||₂, and the reported rank is rank(SA). No conclusion is asserted on an inconclusive or finite-precision unverified branch.",
+      "used_by": [
+        "thm-sketch-and-solve-residual-guarantee",
+        "ex-overdetermined-regression-exact-subspace-sketch"
+      ]
+    },
+    {
+      "id": "lem-hermitian-sphere-net-controls-operator-norm",
+      "statement": "For Hermitian H∈K^(d×d), d≥1, a 1/4-net of the unit sphere exists with cardinality at most 9^d over R and 9^(2d) over C; every such net satisfies ||H||₂≤2 max_v |v*Hv|.",
+      "used_by": [
+        "thm-gaussian-oblivious-l2-subspace-embedding"
+      ]
+    },
+    {
+      "id": "lem-gaussian-squared-norm-tail",
+      "statement": "Assume Countable Choice. For m≥1 independent standard real or normalized complex Gaussian scalars and 0<t<1, Pr{|m⁻¹ sum_j |g_j|²−1|≥t}≤2 exp(−mt²/8).",
+      "used_by": [
+        "thm-gaussian-oblivious-l2-subspace-embedding"
+      ]
+    },
+    {
+      "id": "thm-sketch-and-solve-residual-guarantee",
+      "statement": "If S embeds span(Ran(A),{b}) with squared-norm distortion ε and sketch-and-solve returns an exact-arithmetic converged vector x̂, then ||Ax̂−b||₂²≤((1+ε)/(1−ε)) min_x ||Ax−b||₂².",
+      "used_by": [
+        "ex-overdetermined-regression-exact-subspace-sketch"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "alg-rank-thresholded-least-squares-by-svd",
+      "used_for": "The supplied zero-threshold, finite-budget SVD solve and its success, inconclusive, and finite-precision branches.",
+      "opened": true
+    },
+    {
+      "id": "thm-svd-thresholded-least-squares-minimum-norm-model",
+      "used_for": "Exact convergence returns the minimum-norm least-squares solution of the truncated model; at threshold zero that model equals the original matrix.",
+      "opened": true
+    },
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "used_for": "Shapes and orthonormality conditions of the reduced QR factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+      "used_for": "Existence of reduced QR for the tall sketch matrix, including rank-deficient inputs before injectivity is established.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Orthonormal basis matrices for subspaces and completion of fixed unit vectors.",
+      "opened": true
+    },
+    {
+      "id": "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+      "used_for": "The 1/4-net cardinalities in real dimensions d and 2d.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Hermitian diagonalization in the quadratic-form net argument; the real case is derived explicitly by complexification.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Quadratic-form estimates in the net and embedding proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Operator norm bounds on vectors and the unit-sphere characterization.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Minimum and maximum expansion characterization of the preconditioned matrix's singular values.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Spectral norm and singular-value interpretation in QR preconditioning.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Existence of an original least-squares minimizer without a full-rank hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "lem-bounded-independent-matrix-bernstein-via-trace-exponential",
+      "used_for": "The two-sided Hermitian norm tail with individual bounds ||B_j||≤R and ||E B_j²||≤R in leverage sampling.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice assumption inherited by the Gaussian probability laws.",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "Upper and lower Chernoff bounds applied to nonnegative exponential random variables.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-union-bound",
+      "used_for": "Combining Gaussian tails and controlling the fixed finite sphere net.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Integral lower bounds for t−log(1+t) and −t−log(1−t).",
+      "opened": true
+    },
+    {
+      "id": "thm-linear-change-of-variables-for-lebesgue-measure",
+      "used_for": "Real and complex Gaussian moment-generating functions by scalar dilation; also the external Gaussian normalization proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-gaussian-density-integrals-for-supplied-length-measures",
+      "used_for": "Checking the external Gaussian normalization lemma's supplied-measure proof of real Gaussian mass and moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Checking the external Gaussian normalization lemma's measure and box-volume hypotheses under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-sets-are-lebesgue-measurable",
+      "used_for": "Checking measurability of the density functions in the external Gaussian normalization argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "used_for": "Checking the product integration interface in the external Gaussian normalization proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Checking factorization of the nonnegative finite Gaussian product-density integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Checking countable additivity of the density-weighted Gaussian measures in the external normalization proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps",
+      "used_for": "Checking the external orthogonal/unitary Gaussian invariance argument under Countable Choice.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "sketched-least-squares-and-subspace-embeddings",
+      "to": "randomized-low-rank-approximation",
+      "faithful": true,
+      "note": "Read the current Gaussian-law definition, normalization-and-second-moments lemma, and orthogonal/unitary invariance lemma. The tail and OSE consumers preserve the variance-one complex normalization, fixed-vector scope, independence, and Countable Choice assumption. They do not use expected rangefinder-error results. The current normalization lemma supplies support that the batch-17 ledger still describes as unresolved; the owning writer should reconcile those stale ledger entries."
+    },
+    {
+      "from": "interpolative-cur-and-nystrom-decompositions",
+      "to": "sketched-least-squares-and-subspace-embeddings",
+      "faithful": true,
+      "note": "The current downstream page makes deterministic, rank-conditional CUR/Nyström claims and explicitly disclaims randomized and leverage-score rates. No downstream item cites this batch's embedding or sampling results in the current item inventory. This is a reading-context seam with no cited embedding proposition to strengthen or misapply."
+    }
+  ]
+}

@@ -1,0 +1,696 @@
+[
+  {
+    "order": 2580,
+    "id": "oscillatory-filon-and-levin-quadrature",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Oscillatory integrals and filon levin methods",
+    "companion": "oscillatory-filon-and-levin-quadrature-examples",
+    "requires": [
+      "composite-quadrature-rules",
+      "finite-precision-direct-factorizations",
+      "outward-rounded-interval-and-ball-arithmetic",
+      "smooth-partitions-of-unity-and-exhaustions"
+    ],
+    "items": [
+      {
+        "id": "def-na-finite-interval-oscillatory-integral",
+        "kind": "definition",
+        "title": "Finite-interval oscillatory integral and phase convention",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous",
+          "thm-continuous-implies-integrable"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, $f:[a,b]\\to\\mathbb C$ be continuous, and $g:[a,b]\\to\\mathbb R$ be continuous. Define\n$$I_\\omega(f,g;[a,b]) := \\int_a^b f(x)e^{i\\omega g(x)}\\,dx.$$\nThe complex Riemann integral here means the real Riemann integral of the real part plus $i$ times the real Riemann integral of the imaginary part. Euler's formula [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and continuity of sine and cosine, which follows from [[thm-sine-and-cosine-derivatives]] and differentiability implying continuity [[cor-differentiable-implies-continuous]], make $e^{i\\omega g}$ continuous. The product is continuous, so both component integrals exist by [[thm-continuous-implies-integrable]]. A function is in $C^r[a,b]$ when it and its derivatives through order $r$ are continuous on $[a,b]$, with one-sided endpoint derivatives. A phase is nonstationary on $[a,b]$ when $g\\in C^1[a,b]$ and $|g'(x)|\\ge c$ everywhere for some fixed $c>0$. For such a phase and differentiable $h$, put $T_g^0h=h$ and $T_g^{j+1}h=(T_g^jh/g')'$ whenever that derivative exists.\n\nThis is an exact-real definition. A later numerical implementation must separately state its moment errors and any floating-point solve error.",
+        "strategy": "Let $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, $f:[a,b]\\to\\mathbb C$ be continuous, and $g:[a,b]\\to\\mathbb R$ be continuous. Define\n$$I_\\omega(f,g;[a,b]) := \\int_a^b f(x)e^{i\\omega g(x)}\\,dx.$$\nThe complex Riemann integral here means the real Riemann integral of the real part plus $i$ times the real Riemann integral of the imaginary part. Euler's formula [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and continuity of sine and cosine, which follows from [[thm-sine-and-cosine-derivatives]] and differentiability implying continuity [[cor-differentiable-implies-continuous]], make $e^{i\\omega g}$ continuous. The product is continuous, so both component integrals exist by [[thm-continuous-implies-integrable]]. A function is in $C^r[a,b]$ when it and its derivatives through order $r$ are continuous on $[a,b]$, with one-sided endpoint derivatives. A phase is nonstationary on $[a,b]$ when $g\\in C^1[a,b]$ and $|g'(x)|\\ge c$ everywhere for some fixed $c>0$. For such a phase and differentiable $h$, put $T_g^0h=h$ and $T_g^{j+1}h=(T_g^jh/g')'$ whenever that derivative exists.\n\nThis is an exact-real definition. A later numerical implementation must separately state its moment errors and any floating-point solve error.",
+        "sources": {
+          "references": [
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §1",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3",
+              "url": "https://dlmf.nist.gov/2.3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-na-lagrange-interpolation-on-distinct-nodes",
+        "kind": "lemma",
+        "title": "Lagrange interpolation at distinct real nodes",
+        "deps": [
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $n\\ge1$ and let $c_0,\\ldots,c_n$ be distinct real numbers. For arbitrary values $y_0,\\ldots,y_n\\in\\mathbb C$, define\n$$\\ell_j(x)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{x-c_k}{c_j-c_k},\\qquad p(x)=\\sum_{j=0}^n y_j\\ell_j(x).$$\nThen $p$ is the unique polynomial of degree at most $n$ satisfying $p(c_j)=y_j$. In particular, interpolation reproduces every polynomial of degree at most $n$.",
+        "strategy": "direct\n\n**Given:** The stated distinct nodes and complex data.\n\n[F1] [[thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots]]: a nonzero real polynomial of degree at most $n$ has at most $n$ distinct real roots. Applied to real and imaginary parts, the same root bound holds for complex polynomials.\n\n1.1 Since $c_j-c_k\\ne0$ for $j\\ne k$, every denominator in $\\ell_j$ is nonzero. At $x=c_m$, the factor for $k=m$ makes $\\ell_j(c_m)=0$ when $j\\ne m$, while every factor in $\\ell_m(c_m)$ equals $1$; hence $\\ell_j(c_m)=1$ exactly when $j=m$. The displayed $p$ has degree at most $n$ and $p(c_m)=y_m$. [given, construct, algebra]\n\n2.1 If $q$ is another such polynomial, then $q-p$ has degree at most $n$ and vanishes at the $n+1$ distinct nodes. Its real and imaginary parts each have those roots, so [F1] forces both parts to be zero polynomials. Thus $q=p$. If the data are values of a polynomial of degree at most $n$, uniqueness identifies that polynomial with $p$. [given, F1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.2",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            },
+            {
+              "title": "D. Levin, Procedures for computing one- and two-dimensional integrals of functions with rapid irregular oscillations, §1",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/OSCINT/LEV82.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-na-one-dimensional-morse-coordinate",
+        "kind": "lemma",
+        "title": "Local quadratic coordinate at a simple stationary point",
+        "deps": [
+          "thm-ftc-second-part",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "lem-mean-value-theorem-on-closed-interval",
+          "thm-heine-cantor-r",
+          "thm-of-square-roots",
+          "thm-intermediate-value"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $g\\in C^7(J,\\mathbb R)$ on an open interval $J$, and let $x_0\\in J$ satisfy $g'(x_0)=0$ and $g''(x_0)\\ne0$. Then some open interval $J_0\\subset J$ about $x_0$ admits a $C^5$ increasing diffeomorphism $\\Phi:J_0\\to\\Phi(J_0)$ such that\n$$g(x)=g(x_0)+\\frac{\\sigma}{2}\\Phi(x)^2,\\qquad \\Phi(x_0)=0,\\qquad \\Phi'(x_0)=\\sqrt{|g''(x_0)|},\\qquad \\sigma=\\operatorname{sgn}(g''(x_0)).$$",
+        "strategy": "direct\n\n**Given:** The stated real $C^7$ phase and simple stationary point.\n\n[F1] [[thm-ftc-second-part]]: the integral of a continuous derivative on a compact interval equals the endpoint increment.\n\n[F2] [[thm-algebra-of-derivatives]]: product and quotient rules hold for differentiable real functions wherever denominators are nonzero.\n\n[F3] [[lem-mean-value-theorem-on-closed-interval]]: a continuous function differentiable in the open interval has an interior mean-value point.\n\n[F4] [[thm-chain-rule]]: for differentiable real functions with compatible domains, the derivative of a composition is the product of the outer derivative and inner derivative, provided the evaluation point and its image are limit points of their respective domains. Here the domains are intervals and the outer functions are differentiable on open intervals containing the inner images.\n\n[F5] [[thm-heine-cantor-r]]: every continuous real function on a compact interval is uniformly continuous; apply componentwise to the derivatives of $g$ on the chosen compact neighborhood.\n\n[F6] [[thm-of-square-roots]]: every nonnegative real number has a unique nonnegative square root, which is positive when the number is positive.\n\n[F7] [[thm-intermediate-value]]: a continuous real function on a closed interval attains every value between its endpoint values.\n\n1.1 Put $h=x-x_0$, $G(t)=g(x_0+th)$, and $J(t)=G'(t)$. By [F1], [F2], [F4], and $g'(x_0)=0$, $J(0)=0$, $J'(t)=G''(t)=h^2g''(x_0+th)$, and $g(x)-g(x_0)=G(1)-G(0)=\\int_0^1J(t)\\,dt$. Applying [F1] to $J$ and to $tJ(t)$, with $(tJ)'=J+tJ'$, gives $\\int_0^1J(t)\\,dt=\\int_0^1(1-t)J'(t)\\,dt$. Hence $g(x)-g(x_0)=(x-x_0)^2\\int_0^1(1-t)g''(x_0+t(x-x_0))\\,dt$. Set $q(x)=2\\int_0^1(1-t)g''(x_0+t(x-x_0))\\,dt$. For $0\\le j\\le5$, repeated differentiation gives $q^{(j)}(x)=2\\int_0^1(1-t)t^jg^{(j+2)}(x_0+t(x-x_0))\\,dt$; each difference quotient converges uniformly in $t$ by [F3] and [F5], since the next derivative through $g^{(7)}$ is uniformly continuous on a compact neighborhood. Thus $q\\in C^5$ and $q(x_0)=g''(x_0)$. [given, F1, F2, F3, F4, F5, construct, algebra]\n\n2.1 Put $\\sigma=\\operatorname{sgn}(g''(x_0))$. Shrink the neighborhood so $\\sigma q(x)>0$, and define $v(x)=\\sqrt{\\sigma q(x)}>0$ by [F6]. For a fixed point $z$ in this neighborhood, $|v(x)-v(z)|=|q(x)-q(z)|/(v(x)+v(z))\\le |q(x)-q(z)|/v(z)$, so $v$ is continuous at $z$. For $x\\ne z$, rationalization gives $(v(x)-v(z))/(x-z)=\\sigma(q(x)-q(z))/((x-z)(v(x)+v(z)))\\to\\sigma q'(z)/(2v(z))$. Thus $v'=\\sigma q'/(2v)$ exists and is continuous. Since $q'\\in C^4$, repeated product and quotient rules [F2] applied to this identity inductively give $v\\in C^5$. Define $\\Phi(x)=(x-x_0)v(x)$. Then $\\Phi\\in C^5$, $g=g(x_0)+\\sigma\\Phi^2/2$, $\\Phi(x_0)=0$, and $\\Phi'(x_0)=\\sqrt{|g''(x_0)|}>0$. [given, F2, F6, step 1.1, construct, algebra]\n\n3.1 By continuity of $\\Phi'$, shrink to an open interval $J_0$ about $x_0$ where $\\Phi'\\ge m>0$. For $x<y$ in $J_0$, [F3] gives $\\Phi(y)-\\Phi(x)=\\Phi'(\\xi)(y-x)\\ge m(y-x)$, so $\\Phi$ is strictly increasing. Applying [F7] between points on either side of each $x\\in J_0$ shows that $\\Phi(J_0)$ is open. Its inverse $\\Psi$ satisfies $|\\Psi(u)-\\Psi(w)|\\le |u-w|/m$, hence is continuous. At $u=\\Phi(x)$, the inverse difference quotient is the reciprocal of the difference quotient of $\\Phi$, and therefore $\\Psi'(u)=1/\\Phi'(\\Psi(u))$. This is continuous and nonzero; applying [F2] and [F4] repeatedly to this identity gives $\\Psi\\in C^5$, since $\\Phi'\\in C^4$ and never vanishes. Thus $\\Phi$ is the asserted diffeomorphism. [given, F2, F3, F4, F7, step 2.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iv)",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §4",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-na-fourier-polynomial-moments",
+        "kind": "algorithm",
+        "title": "Exact recurrence for polynomial Fourier moments",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral"
+        ],
+        "dependency_level": 1,
+        "statement": "Input real endpoints $a<b$, a real frequency $\\omega\\ne0$, and an integer $m\\ge0$. Set\n$$\\mu_0=(e^{i\\omega b}-e^{i\\omega a})/(i\\omega).$$\nFor $k=1,\\ldots,m$ in increasing order, set\n$$\\mu_k=(b^ke^{i\\omega b}-a^ke^{i\\omega a})/(i\\omega)-k\\mu_{k-1}/(i\\omega).$$\nReturn the complex list $(\\mu_0,\\ldots,\\mu_m)$. The divisions are defined by $\\omega\\ne0$. The procedure works in exact real and complex arithmetic; its exact moment identities are stated and proved separately on this page.",
+        "strategy": "Input real endpoints $a<b$, a real frequency $\\omega\\ne0$, and an integer $m\\ge0$. Set\n$$\\mu_0=(e^{i\\omega b}-e^{i\\omega a})/(i\\omega).$$\nFor $k=1,\\ldots,m$ in increasing order, set\n$$\\mu_k=(b^ke^{i\\omega b}-a^ke^{i\\omega a})/(i\\omega)-k\\mu_{k-1}/(i\\omega).$$\nReturn the complex list $(\\mu_0,\\ldots,\\mu_m)$. The divisions are defined by $\\omega\\ne0$. The procedure works in exact real and complex arithmetic; its exact moment identities are stated and proved separately on this page.",
+        "sources": {
+          "references": [
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.2",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            },
+            {
+              "title": "D. Levin, Procedures for computing one- and two-dimensional integrals of functions with rapid irregular oscillations, §1",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/OSCINT/LEV82.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-na-complex-phase-derivative",
+        "kind": "lemma",
+        "title": "Derivative of a complex oscillatory phase",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule"
+        ],
+        "dependency_level": 1,
+        "statement": "If $a<b$, $g\\in C^1[a,b]$ is real-valued and $\\omega\\in\\mathbb R$, then $x\\mapsto e^{i\\omega g(x)}$ is continuously differentiable and\n$$\\frac{d}{dx}e^{i\\omega g(x)}=i\\omega g'(x)e^{i\\omega g(x)}.$$",
+        "strategy": "direct\n\n**Given:** $a<b$, a real $C^1$ function $g$ on $[a,b]$, and a real number $\\omega$.\n\n[F1] [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]: for real $y$, $e^{iy}=\\cos y+i\\sin y$.\n\n[F2] [[thm-sine-and-cosine-derivatives]]: $(\\sin y)'=\\cos y$ and $(\\cos y)'=-\\sin y$.\n\n[F3] [[thm-chain-rule]]: if $v:A\\to B\\subseteq\\mathbb R$ is differentiable at a limit point $x\\in A$ of $A$, and $u:B\\to\\mathbb R$ is differentiable at the limit point $v(x)$ of $B$, then $(u\\circ v)'(x)=u'(v(x))v'(x)$.\n\n1.1 Set $\\theta(x)=\\omega g(x)$. By [F1], $e^{i\\theta(x)}=\\cos(\\theta(x))+i\\sin(\\theta(x))$. [given, F1, construct]\n\n2.1 The scalar difference quotient gives $\\theta'(x)=\\omega g'(x)$. Apply [F3] with $A=[a,b]$, $B=\\mathbb R$, $v=\\theta$, and $u=\\sin$ or $\\cos$: every $x\\in[a,b]$ is a limit point of $[a,b]$ since $a<b$, and $\\theta(x)$ is a limit point of $\\mathbb R$, where both outer functions are differentiable by [F2]. Thus [F2] and step 1.1 give the componentwise derivative $-\\omega g'(x)\\sin(\\theta(x))+i\\omega g'(x)\\cos(\\theta(x))=i\\omega g'(x)e^{i\\theta(x)}$, including the one-sided endpoint derivatives. Continuity follows from continuity of $g'$, $g$, and the trigonometric functions. [given, F2, F3, step 1.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.3",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-na-levin-collocation-quadrature",
+        "kind": "algorithm",
+        "title": "Levin collocation for a nonstationary oscillatory integral",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "lem-na-complex-phase-derivative"
+        ],
+        "dependency_level": 2,
+        "statement": "Input $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, real $g\\in C^1[a,b]$ with $|g'|\\ge c>0$, complex $f\\in C[a,b]$, an integer $n\\ge2$, and complex-valued $C^1$ functions $\\psi_1,\\ldots,\\psi_n:[a,b]\\to\\mathbb C$ linearly independent over $\\mathbb C$. Also input distinct collocation nodes $a=x_1<\\cdots<x_n=b$. Define $L_\\omega\\psi=\\psi'+i\\omega g'\\psi$, form $A_{jk}=L_\\omega\\psi_k(x_j)$ and $y_j=f(x_j)$. If $A$ is singular, return failure status and no quadrature value. Otherwise solve $Ac=y$ in exact arithmetic, put $p=\\sum_{k=1}^nc_k\\psi_k$, and return\n$$Q_L=p(b)e^{i\\omega g(b)}-p(a)e^{i\\omega g(a)}$$\nwith $A,c$, and $\\kappa_2(A)=\\|A\\|_2\\|A^{-1}\\|_2$, where vector norms are Euclidean and $\\|A\\|_2=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$ is the induced matrix norm. This is a finite collocation procedure; residual and conditioning claims for the nonsingular branch are stated separately on this page. Rounded factorization error is outside this exact-arithmetic definition.",
+        "strategy": "Input $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, real $g\\in C^1[a,b]$ with $|g'|\\ge c>0$, complex $f\\in C[a,b]$, an integer $n\\ge2$, and complex-valued $C^1$ functions $\\psi_1,\\ldots,\\psi_n:[a,b]\\to\\mathbb C$ linearly independent over $\\mathbb C$. Also input distinct collocation nodes $a=x_1<\\cdots<x_n=b$. Define $L_\\omega\\psi=\\psi'+i\\omega g'\\psi$, form $A_{jk}=L_\\omega\\psi_k(x_j)$ and $y_j=f(x_j)$. If $A$ is singular, return failure status and no quadrature value. Otherwise solve $Ac=y$ in exact arithmetic, put $p=\\sum_{k=1}^nc_k\\psi_k$, and return\n$$Q_L=p(b)e^{i\\omega g(b)}-p(a)e^{i\\omega g(a)}$$\nwith $A,c$, and $\\kappa_2(A)=\\|A\\|_2\\|A^{-1}\\|_2$, where vector norms are Euclidean and $\\|A\\|_2=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$ is the induced matrix norm. This is a finite collocation procedure; residual and conditioning claims for the nonsingular branch are stated separately on this page. Rounded factorization error is outside this exact-arithmetic definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Levin, Procedures for computing one- and two-dimensional integrals of functions with rapid irregular oscillations, §1",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/OSCINT/LEV82.pdf"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.3",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-na-fresnel-integral",
+        "kind": "lemma",
+        "title": "Fresnel whole-line moment from the damped complex Gaussian",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "def-improper-integral-at-infinity",
+          "def-mixed-improper-integral",
+          "def-absolute-and-conditional-improper-convergence",
+          "thm-comparison-test-for-improper-integrals",
+          "thm-cauchy-criterion-for-improper-integrals",
+          "thm-gaussian-integral",
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "thm-multidimensional-integral-properties",
+          "thm-jordan-boundary-criterion",
+          "def-riemann-integral-over-a-jordan-set",
+          "def-null-and-content-zero-in-rn",
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "thm-heine-borel-rn",
+          "thm-of-square-roots",
+          "lem-riemann-integral-unchanged-by-content-zero-modification",
+          "thm-continuous-implies-integrable",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-intermediate-value",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-polar-form-with-unique-principal-argument",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-and-cosine-derivatives",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
+          "thm-exponential-is-strictly-increasing",
+          "thm-exponential-definition-equivalence",
+          "def-multidimensional-rectangle-and-volume",
+          "thm-complex-numbers-form-a-field",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-exponential-limits-and-range",
+          "cor-differentiable-implies-continuous",
+          "lem-na-complex-phase-derivative",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part"
+        ],
+        "dependency_level": 2,
+        "statement": "For $\\operatorname{Re}\\alpha>0$, the absolutely convergent componentwise complex integral\n$$F(\\alpha)=\\int_{-\\infty}^{\\infty}e^{-\\alpha u^2}\\,du$$\nequals $\\sqrt{\\pi}\\,\\alpha^{-1/2}$, where $\\alpha^{-1/2}$ uses the continuous square-root branch with $\\arg\\alpha\\in(-\\pi/2,\\pi/2)$. Consequently, for every $\\lambda>0$ and $\\sigma\\in\\{-1,1\\}$, the ordinary two-sided improper Fresnel integral exists and\n$$\\int_{-\\infty}^{\\infty}e^{i\\sigma\\lambda u^2/2}\\,du=\\sqrt{\\frac{2\\pi}{\\lambda}}e^{i\\sigma\\pi/4}.$$",
+        "strategy": "direct\n\n**Given:** The stated $\\alpha$, the componentwise finite-interval convention of [[def-na-finite-interval-oscillatory-integral]], and the same componentwise convention for the Jordan-set integrals below.\n\n[F1] [[thm-change-of-variables-for-compact-jordan-sets]]: an injective $C^1$ map with invertible derivative on a neighborhood of a compact Jordan set transforms the integral by the absolute Jacobian determinant.\n\n[F2] [[thm-sine-and-cosine-subtraction-formulas]]: the subtraction identities express sine and cosine of $u-v$ in terms of the sine and cosine of $u$ and $v$.\n\n[F3] [[thm-sine-cosine-zero-sets-and-fundamental-period]]: $\\sin t=0$ exactly when $t=m\\pi$ for some integer $m$, and both trigonometric functions have period $2\\pi$.\n\n[F4] [[thm-quarter-turn-values-and-shift-formulas]]: $\\sin(t+\\pi/2)=\\cos t$ and $\\cos(t+\\pi)=-\\cos t$ for every real $t$.\n\n[F5] [[cor-trigonometric-parity-and-pythagorean-identity]]: sine is odd, cosine is even, and $\\sin^2t+\\cos^2t=1$.\n\n[F6] [[cor-pi-is-the-first-positive-sine-zero]]: $\\sin t>0$ for $0<t<\\pi$ and $\\sin\\pi=0$.\n\n[F7] [[thm-intermediate-value]]: a continuous real function on a closed interval takes every value between its endpoint values.\n\n[F8] [[thm-graphs-of-continuous-functions-have-content-zero]]: the graph of a continuous real function on a closed nondegenerate rectangle has content zero in the next Euclidean dimension.\n\n[F9] [[def-null-and-content-zero-in-rn]]: content zero means that every positive volume allowance has a finite cube cover whose total volume is at most that allowance; content zero passes to subsets.\n\n[F10] [[thm-heine-borel-rn]]: a closed bounded subset of Euclidean space is compact.\n\n[F11] [[thm-jordan-boundary-criterion]]: a bounded set is Jordan measurable exactly when its boundary has content zero.\n\n[F12] [[lem-riemann-integral-unchanged-by-content-zero-modification]]: changing a bounded real integrand on a content-zero subset of a bounded Jordan set preserves integrability and its integral; apply componentwise to complex integrands.\n\n[F13] [[def-riemann-integral-over-a-jordan-set]]: integrate over a bounded Jordan set by integrating the zero extension over a bounding rectangle.\n\n[F14] [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]: every continuous real function on a compact Jordan set is Riemann integrable over it.\n\n[F15] [[thm-multidimensional-integral-properties]]: rectangular Riemann integrals are linear, monotone, and satisfy the absolute-value estimate.\n\n[F16] [[thm-riemann-fubini-on-product-rectangles]]: for an integrable real function on a product rectangle with integrable sections, either iterated integral equals the multiple integral.\n\n[F17] [[thm-gaussian-integral]]: $\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi$.\n\n[F18] [[thm-continuous-implies-integrable]]: a continuous real function on a compact interval is Riemann integrable.\n\n[F19] [[thm-complex-exponential-addition-and-real-extension]]: $e^{z+w}=e^ze^w$ for complex $z,w$.\n\n[F20] [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]: $e^{x+iy}=e^x(\\cos y+i\\sin y)$ and $|e^{x+iy}|=e^x$ for real $x,y$.\n\n[F21] [[thm-sine-and-cosine-derivatives]]: $(\\sin t)'=\\cos t$ and $(\\cos t)'=-\\sin t$.\n\n[F22] [[thm-derivative-of-exponential]]: $(e^t)'=e^t$ for real $t$.\n\n[F23] [[thm-chain-rule]]: $(u\\circ v)'=(u'\\circ v)v'$ for differentiable real functions.\n\n[F24] [[thm-algebra-of-derivatives]]: products of differentiable real functions obey the product rule.\n\n[F25] [[cor-differentiable-implies-continuous]]: a real function differentiable at a point is continuous there.\n\n[F26] [[thm-of-square-roots]]: every nonnegative real has a unique nonnegative square root.\n\n[F27] [[lem-na-complex-phase-derivative]]: for real differentiable $\\theta$, $(e^{i\\theta})'=i\\theta'e^{i\\theta}$.\n\n[F28] [[thm-integration-by-parts]]: the real $C^1$ integration-by-parts identity holds on compact intervals; applying it to real and imaginary parts gives its complex version.\n\n[F29] [[thm-ftc-second-part]]: if a differentiable real function has integrable derivative on a compact interval, the integral of that derivative is its endpoint increment.\n\n[F30] [[thm-sine-and-cosine-parametrize-the-unit-circle]]: every point on the real unit circle has a unique representation $(\\cos t,\\sin t)$ with $0\\le t<2\\pi$.\n\n[F31] [[thm-polar-form-with-unique-principal-argument]]: every nonzero complex number has a unique polar form $r(\\cos\\theta+i\\sin\\theta)$ with $r>0$ and $-\\pi<\\theta\\le\\pi$.\n\n[F32] [[thm-algebra-of-continuous-functions]]: finite sums and products of continuous real functions are continuous, constant and identity functions are continuous, and a quotient is continuous where its denominator is nonzero.\n\n[F33] [[thm-exponential-is-strictly-increasing]] and [[thm-exponential-definition-equivalence]]: the real exponential is positive, strictly increasing, and satisfies $e^0=1$.\n\n[F34] [[def-multidimensional-rectangle-and-volume]]: a rectangle has volume equal to the product of its side lengths.\n\n[F35] [[thm-complex-numbers-form-a-field]]: complex addition and multiplication have their real-coordinate formulas, and every nonzero complex number has an inverse.\n\n[F36] [[thm-exponential-limits-and-range]]: $e^t\\to0$ as $t\\to-\\infty$, and $e^t>0$ for every real $t$.\n\n[F37] [[def-improper-integral-at-infinity]]: each one-sided improper Riemann integral is the finite limit of its proper truncations.\n\n[F38] [[def-mixed-improper-integral]]: a whole-line improper integral is the sum of its two separately convergent one-sided tails; cancellation between divergent tails is not allowed.\n\n[F39] [[def-absolute-and-conditional-improper-convergence]]: absolute convergence means that the improper integral of the modulus converges separately on every one-ended piece.\n\n[F40] For a continuous complex function $z$ on a compact Jordan set $E$, $\\left|\\int_E z\\right|\\le\\int_E|z|$. If $Z=\\int_Ez\\ne0$, the conjugation and modulus laws [[lem-complex-conjugation-and-modulus-laws]] give $|\\overline Z/|Z||=1$; set $\\zeta=\\overline Z/|Z|$. Componentwise linearity from [[thm-multidimensional-integral-properties]] under the stated convention gives $|Z|=\\operatorname{Re}(\\zeta Z)=\\int_E\\operatorname{Re}(\\zeta z)$, while $\\operatorname{Re}(\\zeta z)\\le|z|$ pointwise; apply the same theorem after the zero-extension definition [[def-riemann-integral-over-a-jordan-set]]. The conjugation and modulus laws also give $|z+w|\\le|z|+|w|$ for complex scalars. The interval convention is [[def-na-finite-interval-oscillatory-integral]]. The case $Z=0$ is immediate.\n\n[F41] [[thm-cauchy-criterion-for-improper-integrals]]: a real one-sided improper integral converges if and only if its proper tail integrals satisfy the Cauchy condition; apply this separately to real and imaginary parts.\n\n[F42] [[thm-comparison-test-for-improper-integrals]]: if $|f|\\le g$ eventually and the nonnegative improper integral of $g$ converges, then $f$ converges absolutely on that tail.\n\n1.1 Write $u_0=\\operatorname{Re}\\alpha>0$. For finite $R$, the substitution $y=\\sqrt{u_0}x$ in [F1] gives $\\int_{-R}^Re^{-u_0x^2}dx=u_0^{-1/2}\\int_{-\\sqrt{u_0}R}^{\\sqrt{u_0}R}e^{-y^2}dy$; letting $R\\to\\infty$ and using [F17] shows that the real Gaussian majorant has finite one-sided integrals. Since $|e^{-\\alpha x^2}|=e^{-u_0x^2}$ by [F20], [F42] gives absolute convergence of each real and imaginary tail; [F37] and [F39] specify these one-sided limits and [F38] defines their two-sided sum $F(\\alpha)$. By [F18], every finite-interval complex integral exists; the cut-additivity clause of [F15], applied componentwise at $0$, shows $F_R(\\alpha)=\\int_{-R}^Re^{-\\alpha x^2}dx\\to F(\\alpha)$. On $S_R=[-R,R]^2$, the integrand is continuous by Euler's formula [F20], differentiability and continuity of sine, cosine and the real exponential [F21], [F22], [F25], and polynomial continuity [F32]; also $e^{-\\alpha(x^2+y^2)}=e^{-\\alpha x^2}e^{-\\alpha y^2}$ by [F19]. Its real and imaginary parts are integrable by [F14]. Expanding the complex product into four real products, applying [F16] to each, using the complex-coordinate formulas [F35], and using linearity [F15] yields $F_R(\\alpha)^2=\\int_{S_R}e^{-\\alpha(x^2+y^2)}d(x,y)$. [given, F1, F14, F15, F16, F17, F18, F19, F20, F21, F22, F25, F32, F35, F37, F38, F39, F42, construct]\n\n1.2 Put $D_s=\\{(x,y):x^2+y^2\\le s^2\\}$ and $A_{\\varepsilon,R}=D_R\\setminus\\operatorname{int}D_\\varepsilon$. On $K_+=[\\varepsilon,R]\\times[0,\\pi]$ and $K_-=[\\varepsilon,R]\\times[-\\pi,0]$, the polar map $P(r,\\theta)=(r\\cos\\theta,r\\sin\\theta)$ has determinant $r$ by [F21] and [F5]. Each rectangle has an open rectangular neighborhood with positive radial coordinate and angular width strictly below $2\\pi$. If two points there have the same image, equal Euclidean norms give equal radii; after division by that radius, their trigonometric pairs agree. [F2] then gives sine of the angle difference zero and cosine equal to one. By [F3], the difference is $m\\pi$; repeated use of [F4], with evenness from [F5] when $m<0$, gives cosine $(-1)^m$, so $m$ is even. The neighborhood's angular width below $2\\pi$ forces the difference to be zero. Thus each map is injective on a neighborhood and its derivative is invertible there because the determinant is positive. By [F30], every point in the upper half-annulus has a canonical polar angle in $[0,2\\pi)$; if the second coordinate is positive, [F6], [F5], and [F3] rule out an angle in $(\\pi,2\\pi)$, while if it is zero [F3] leaves only $0$ or $\\pi$. For a lower-half point with negative second coordinate, its canonical angle is in $(\\pi,2\\pi)$ by the same sign facts, and subtracting $2\\pi$ places it in $(-\\pi,0)$ without changing its trigonometric pair; points with zero second coordinate use angle $0$ or $-\\pi$. These arguments prove that the images are exactly the upper and lower closed half-annuli. For $s>0$, their curved boundary arcs are graphs of $\\pm\\sqrt{s^2-x^2}$; the radicand is continuous by [F32], and for nonnegative $u,v$ one has $|\\sqrt u-\\sqrt v|^2\\le|u-v|$ by [F26] and algebra, proving continuity of those graphs. Each radial segment is a constant-function graph after exchanging coordinates if needed. Each graph has content zero by [F8]; their finite unions do as well by combining finite covers from [F9]. Thus the half-annuli are bounded with content-zero boundary and hence Jordan by [F11]; they are compact by [F10]. Now apply [F1] separately to the real and imaginary parts on each. By componentwise Fubini [F16], each transformed integral is $\\pi\\int_\\varepsilon^R e^{-\\alpha r^2}r\\,dr$. Writing $\\alpha=A+iB$ and differentiating the Euler representation with [F20]--[F24] gives $(e^{-\\alpha r^2})'=-2\\alpha r e^{-\\alpha r^2}$; componentwise [F29] therefore evaluates this radial integral as $(e^{-\\alpha\\varepsilon^2}-e^{-\\alpha R^2})/(2\\alpha)$. Their intersection is two radial segments, content-zero by the same graph argument. On a bounding rectangle, the zero extensions of the two half-annulus integrands sum to the annulus integrand off those segments and to twice it on them; [F12] removes this content-zero difference, while linearity [F15] adds the componentwise integrals. Thus $\\int_{A_{\\varepsilon,R}}e^{-\\alpha(x^2+y^2)}d(x,y)=\\pi(e^{-\\alpha\\varepsilon^2}-e^{-\\alpha R^2})/\\alpha$. The same circle-graph argument makes $D_\\varepsilon$ compact Jordan; [F14] integrates the continuous real and imaginary parts there. For $h=e^{-\\alpha(x^2+y^2)}$, [F20] and [F33] give $|h|=e^{-u_0(x^2+y^2)}\\le1$; the containing square has area $4\\varepsilon^2$ by [F34], and [F13], [F15], [F40] give $|\\int_{D_\\varepsilon}h|\\le\\int_{D_\\varepsilon}|h|\\le4\\varepsilon^2$. On the containing square, the zero extensions over $D_\\varepsilon$ and $A_{\\varepsilon,R}$ sum to $h$ off the boundary circle and to $2h$ on it; [F12] removes this content-zero difference and linearity [F15] gives $\\int_{D_R}h=\\int_{D_\\varepsilon}h+\\int_{A_{\\varepsilon,R}}h$. Letting $\\varepsilon\\downarrow0$ therefore gives $\\int_{D_R}h=\\pi(1-e^{-\\alpha R^2})/\\alpha$. [F1, F2, F3, F4, F5, F6, F8, F9, F10, F11, F12, F13, F14, F15, F16, F20, F21, F24, F26, F29, F30, F32, F33, F34, F40, algebra]\n\n2.1 Set $E_R=S_R\\setminus\\operatorname{int}D_R$. It is closed and bounded, hence compact by [F10]; its boundary is contained in $\\partial S_R\\cup\\partial D_R$. The square boundary is a finite union of line graphs and the circle boundary is the pair of continuous semicircle graphs proved in step 1.2, so [F8] and [F9] make this union content zero and [F11] makes $E_R$ Jordan. Both $E_R$ and $D_R$ are compact Jordan subsets of $S_R$, so their zero extensions are integrable by [F13] and [F14]. On $S_R$ these extensions sum to $h$ off $\\partial D_R$ and to $2h$ on the content-zero circle; [F12] and linearity [F15] therefore give $\\int_{E_R}h+\\int_{D_R}h=\\int_{S_R}h$. Every point of $E_R$ has $x^2+y^2\\ge R^2$, so $|x|\\ge R/\\sqrt2$ or $|y|\\ge R/\\sqrt2$. Put $G=\\int_{\\mathbb R}e^{-u_0x^2}dx<\\infty$ and $H(t)=\\int_{|x|\\ge t}e^{-u_0x^2}dx$; $H(t)\\to0$ by [F37] and the convergent nonnegative improper Gaussian integral [F17]. By [F19], the majorant factors as $e^{-u_0x^2}e^{-u_0y^2}$. On finite bounding rectangles, [F13], [F15], and [F16] bound its integral over the vertical and horizontal tail strips by $2H(R/\\sqrt2)G$. For $h(x,y)=e^{-\\alpha(x^2+y^2)}$, [F40] bounds the complex integral's modulus by the integral of $|h|$, so it is at most $2H(R/\\sqrt2)G$. The integrand is continuous on the compact Jordan set $E_R$, so its components are integrable by [F14]. Passing to the one-dimensional Gaussian tail limits preserves this bound. It tends to zero, so the square and disc integrals have the same limit. Also $|e^{-\\alpha R^2}|=e^{-u_0R^2}\\to0$: [F33] makes this nonnegative function decreasing in $R$, and a positive limiting lower bound would contradict the finite Gaussian integral [F1], [F17]. Steps 1.1 and 1.2, with $e^{-\\alpha R^2}\\to0$, now give $F(\\alpha)^2=\\pi/\\alpha$. [F1, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17, F19, F20, F33, F37, F40, step 1.1, step 1.2]\n\n3.1 The function $F$ is continuous on the right half-plane. Fix a compact neighborhood with $\\operatorname{Re}\\alpha,\\operatorname{Re}\\beta\\ge c_0>0$. On $[-R,R]$, differentiating $e^{-(\\beta+t(\\alpha-\\beta))x^2}$ in $t$ by [F20]--[F24] and applying [F29] gives $|e^{-\\alpha x^2}-e^{-\\beta x^2}|\\le R^2|\\alpha-\\beta|$. By [F40], the finite-interval contribution to $|F(\\alpha)-F(\\beta)|$ is therefore at most $2R^3|\\alpha-\\beta|$. Each omitted tail is bounded by $\\int_{|x|>R}e^{-c_0x^2}dx$, which tends to zero as $R\\to\\infty$ by [F37], [F39], and the scaled Gaussian integral [F1], [F17]; choosing $R$ and then $|\\alpha-\\beta|$ proves continuity. To justify the branch continuously, write $\\alpha=x+iy$, $q=\\sqrt{x^2+y^2}$, $u=\\sqrt{(q+x)/2}>0$, and $v=y/(2u)$. For nonnegative $s,t$, $|\\sqrt{s}-\\sqrt{t}|^2\\le|s-t|$, so [F26] and [F32] make $q,u,v$ continuous. Also $2uv=y$ and $u^2-v^2=((q+x)^2-y^2)/(2(q+x))=x$ since $q^2=x^2+y^2$, hence $(u+iv)^2=\\alpha$. Let $\\theta=\\arg\\alpha\\in(-\\pi,\\pi]$ from [F31]. Since $x=|\\alpha|\\cos\\theta>0$, $\\cos\\theta>0$. On $[-\\pi,-\\pi/2]$, [F4] writes $\\cos\\theta=\\sin(\\theta+\\pi/2)\\le0$ by [F5], [F6]; on $[\\pi/2,\\pi]$, put $t=\\theta-\\pi/2\\in[0,\\pi/2]$ and use period $2\\pi$, oddness, and [F6] to get $\\cos\\theta=\\sin(\\pi+t)=\\sin(t-\\pi)=-\\sin(\\pi-t)\\le0$. Hence $-\\pi/2<\\theta<\\pi/2$. Then the specified square root has positive real part because its argument is $\\theta/2\\in(-\\pi/4,\\pi/4)$ and cosine is positive there by [F4], [F6]. Both it and $u+iv$ square to $\\alpha$; since complex numbers form a field [F35], any two roots differ only by sign, and their positive real parts force equality. Thus $H(\\alpha)=F(\\alpha)(u+iv)/\\sqrt\\pi$ is continuous; steps 2.1 and $(u+iv)^2=\\alpha$ give $H(\\alpha)^2=(F(\\alpha)^2/\\pi)\\alpha=1$. On any line segment, if the endpoint values of $H$ were $1$ and $-1$, [F7] applied to its continuous real part would force that part to vanish somewhere, impossible for a value in $\\{-1,1\\}$. Therefore $H$ is constant along every segment. At $\\alpha=1$, [F17] gives $H(1)=1$, so $F(\\alpha)=\\sqrt\\pi\\,\\alpha^{-1/2}$. [given, F1, F4, F5, F6, F7, F17, F18, F20, F21, F22, F23, F24, F26, F29, F31, F32, F35, F37, F39, F40, step 2.1]\n\n4.1 Fix $\\lambda>0$ and $\\sigma=\\pm1$, and for $\\varepsilon>0$ set $\\alpha=\\varepsilon-i\\sigma\\lambda/2$. For any $\\varepsilon\\ge0$ and $T>R>0$, [F27] gives the phase derivative and [F28] justifies integration by parts on $[R,T]$. The amplitude derivative is $(e^{-\\varepsilon u^2}/u)'=-2\\varepsilon e^{-\\varepsilon u^2}-e^{-\\varepsilon u^2}/u^2$ by [F22]--[F24]; the boundary terms are at most $2/(\\lambda R)$. For $\\varepsilon>0$, using $u\\ge R$ and then [F22], [F23], [F29], and [F36] gives $\\int_R^\\infty2\\varepsilon e^{-\\varepsilon u^2}du\\le R^{-1}\\int_R^\\infty2\\varepsilon u e^{-\\varepsilon u^2}du=e^{-\\varepsilon R^2}/R\\le1/R$; when $\\varepsilon=0$ this derivative term is zero. Also $e^{-\\varepsilon u^2}\\le1$ by [F33], so $\\int_R^\\infty e^{-\\varepsilon u^2}u^{-2}du\\le1/R$. Including the factor $1/\\lambda$ gives $|\\int_R^T e^{-\\varepsilon u^2}e^{i\\sigma\\lambda u^2/2}du|\\le4/(\\lambda R)$, and the negative tail has the same bound by $u\\mapsto-u$. For $\\varepsilon=0$, [F40] makes each real and imaginary tail satisfy the Cauchy condition in [F41]; hence the one-sided limits exist, and [F38] defines the ordinary two-sided improper Fresnel integral. The estimate is uniform for $\\varepsilon\\ge0$; on every finite interval the damped integrand converges uniformly as $\\varepsilon\\downarrow0$. Given a tolerance, first choose $R$ so both tails are uniformly small and then pass to the limit on $[-R,R]$; this proves that the Abel limit equals the ordinary two-sided improper integral. As $\\varepsilon\\downarrow0$, $|\\alpha|\\to\\lambda/2$ and $\\arg\\alpha\\to-\\sigma\\pi/2$, so step 3.1 gives $\\sqrt\\pi(\\lambda/2)^{-1/2}e^{i\\sigma\\pi/4}=\\sqrt{2\\pi/\\lambda}e^{i\\sigma\\pi/4}$. [given, F1, F17, F22, F23, F24, F27, F28, F29, F33, F36, F38, F40, F41, step 3.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §7.12(ii)",
+              "url": "https://dlmf.nist.gov/7.12"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iv)",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §4",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-na-quadratic-phase-amplitude-bound",
+        "kind": "lemma",
+        "title": "One-dimensional quadratic oscillatory amplitude bound",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "lem-na-complex-phase-derivative",
+          "thm-integration-by-parts",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-multidimensional-integral-properties",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $R>0$, $\\lambda>0$, $\\sigma\\in\\{-1,1\\}$, and $H\\in C_c^1((-R,R);\\mathbb C)$. Then\n$$\\left|\\int_{-R}^RH(u)e^{i\\sigma\\lambda u^2/2}\\,du\\right|\\le\\frac{6\\|H\\|_\\infty+R\\|H'\\|_\\infty}{\\sqrt\\lambda}.$$",
+        "strategy": "direct\n\n**Given:** The stated compactly supported complex amplitude, $R,\\lambda,\\sigma$, and the componentwise complex integral convention of [[def-na-finite-interval-oscillatory-integral]].\n\n[F1] [[lem-na-complex-phase-derivative]]: $(e^{i\\sigma\\lambda u^2/2})'=i\\sigma\\lambda u e^{i\\sigma\\lambda u^2/2}$.\n\n[F2] [[thm-integration-by-parts]]: integration by parts on a compact interval holds for real $C^1$ functions and hence componentwise for complex functions.\n\n[F3] [[thm-change-of-variables-for-compact-jordan-sets]]: an increasing affine map $t\\mapsto Rt$ on a compact interval changes a real integral by its positive derivative $R$; apply separately to the real and imaginary parts of a complex integrand.\n\n[F4] For a continuous complex $z$ on a compact interval, the componentwise definition of [[def-na-finite-interval-oscillatory-integral]], the conjugation and modulus laws [[lem-complex-conjugation-and-modulus-laws]], and real linearity and monotonicity from [[thm-multidimensional-integral-properties]] give $\\left|\\int z\\right|\\le\\int|z|$: if $Z=\\int z\\ne0$, set $\\zeta=\\overline Z/|Z|$, so $|\\zeta|=1$ and $|Z|=\\int\\operatorname{Re}(\\zeta z)\\le\\int|z|$. If $Z=0$ the bound is immediate. The conjugation and modulus laws also give $|z+w|\\le|z|+|w|$ for complex scalars.\n\n[F5] The integral over an interval is additive across an interior cut by the coordinate-slice clause of [[thm-multidimensional-integral-properties]]; apply this to the real and imaginary parts of complex integrands.\n\n1.1 Rescale $u=Rt$ by [F3], put $\\Lambda=\\lambda R^2$, and define $\\widetilde H(t)=H(Rt)$. If $\\Lambda\\le4$, [F4] bounds the integral by $2R\\|H\\|_\\infty\\le4\\|H\\|_\\infty/\\sqrt\\lambda$, so the claim holds. Assume $\\Lambda>4$, put $\\delta=2\\Lambda^{-1/2}<1$, and split $[-1,1]$ into $[-\\delta,\\delta]$, $[\\delta,1]$, and $[-1,-\\delta]$. By [F5], the integral is the sum over these subintervals; the central integral in the rescaled variable is at most $2\\delta\\|H\\|_\\infty=4\\|H\\|_\\infty/\\sqrt\\Lambda$ by [F4]. [given, F3, F4, F5, construct, algebra]\n\n2.1 On $[\\delta,1]$, [F1] and [F2] integrate by parts using $(i\\sigma\\Lambda t)^{-1}$ and $\\widetilde H$; the boundary at $1$ vanishes because $\\widetilde H$ is compactly supported in $(-1,1)$. The remaining boundary is at most $\\|H\\|_\\infty/(\\Lambda\\delta)$. The integral term is at most $\\frac1\\Lambda\\left(R\\|H'\\|_\\infty\\int_\\delta^1t^{-1}dt+\\|H\\|_\\infty\\int_\\delta^1t^{-2}dt\\right)\\le\\frac{R\\|H'\\|_\\infty+\\|H\\|_\\infty}{\\Lambda\\delta}$, since both integrals are at most $1/\\delta$. [F4] justifies the complex integral norm bounds; the negative interval has the same estimates. With $\\delta=2\\Lambda^{-1/2}$, each boundary is at most $\\|H\\|_\\infty/(2\\sqrt\\Lambda)$ and each integral is at most $(R\\|H'\\|_\\infty+\\|H\\|_\\infty)/(2\\sqrt\\Lambda)$. By [F5], adding the central piece and two tails gives $(6\\|H\\|_\\infty+R\\|H'\\|_\\infty)/\\sqrt\\Lambda$ in the rescaled integral. Multiplication by $R$ and $\\Lambda=\\lambda R^2$ give the claimed bound. [given, F1, F2, F4, F5, step 1.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iv)",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §4",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-na-fourier-oscillatory-moment-recurrence",
+        "kind": "theorem",
+        "title": "Exact polynomial moments for the linear Fourier phase",
+        "deps": [
+          "alg-na-fourier-polynomial-moments",
+          "def-na-finite-interval-oscillatory-integral",
+          "lem-na-complex-phase-derivative",
+          "thm-integration-by-parts",
+          "lem-derivative-of-a-power"
+        ],
+        "dependency_level": 2,
+        "statement": "For real endpoints $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, and an integer $m\\ge0$, the output of [[alg-na-fourier-polynomial-moments]] satisfies $\\mu_k=\\int_a^b x^k e^{i\\omega x}\\,dx$ for every $0\\le k\\le m$, with\n$$\\mu_0=\\frac{e^{i\\omega b}-e^{i\\omega a}}{i\\omega},\\qquad \\mu_k=\\frac{b^ke^{i\\omega b}-a^ke^{i\\omega a}}{i\\omega}-\\frac{k}{i\\omega}\\mu_{k-1}\\quad(k\\ge1).$$\nThus all polynomial moments for the Fourier phase $g(x)=x$ are obtained by a finite exact recurrence.",
+        "strategy": "direct\n\n**Given:** Reals $a<b$, $\\omega\\ne0$, and the componentwise complex integral convention of [[def-na-finite-interval-oscillatory-integral]].\n\n[F1] [[alg-na-fourier-polynomial-moments]]: $\\mu_0=(e^{i\\omega b}-e^{i\\omega a})/(i\\omega)$ and $\\mu_k=(b^ke^{i\\omega b}-a^ke^{i\\omega a})/(i\\omega)-k\\mu_{k-1}/(i\\omega)$.\n\n[F2] [[lem-na-complex-phase-derivative]]: $(e^{i\\omega x})'=i\\omega e^{i\\omega x}$.\n\n[F3] [[thm-integration-by-parts]]: $\\int u v'=[uv]-\\int u'v$ for real $C^1$ functions; the componentwise complex identity follows by applying it to real and imaginary parts.\n\n[F4] [[lem-derivative-of-a-power]]: for $k\\ge1$, $(x^k)'=kx^{k-1}$.\n\n1.1 The algorithm sets $\\mu_0=(e^{i\\omega b}-e^{i\\omega a})/(i\\omega)$. Since $(e^{i\\omega x}/(i\\omega))'=e^{i\\omega x}$ by [F2], [F3] with $u=1$ identifies this value with $\\int_a^b e^{i\\omega x}\\,dx$. [given, F1, F2, F3, algebra]\n\n2.1 For $k\\ge1$, apply [F3] to $u=x^k$ and $v'=e^{i\\omega x}$. Using [F2] and [F4] gives $\\int_a^b x^ke^{i\\omega x}\\,dx=(b^ke^{i\\omega b}-a^ke^{i\\omega a})/(i\\omega)-k\\int_a^b x^{k-1}e^{i\\omega x}\\,dx/(i\\omega)$. Starting from step 1.1, induction identifies each value returned by the algorithm with the corresponding moment. [given, F1, F2, F3, F4, step 1.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.2",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            },
+            {
+              "title": "D. Levin, Procedures for computing one- and two-dimensional integrals of functions with rapid irregular oscillations, §1",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/OSCINT/LEV82.pdf"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(i)",
+              "url": "https://dlmf.nist.gov/2.3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-na-nonstationary-oscillatory-integration-by-parts",
+        "kind": "theorem",
+        "title": "Repeated integration by parts for a nonstationary oscillatory integral",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "lem-na-complex-phase-derivative",
+          "thm-integration-by-parts",
+          "thm-algebra-of-derivatives",
+          "thm-multidimensional-integral-properties",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $a<b$, $r\\ge1$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, $g\\in C^{r+1}[a,b]$ be real-valued with $|g'|\\ge c>0$, and $h\\in C^r[a,b]$ be complex-valued. With $T_g h=(h/g')'$ and $T_g^0h=h$ as in [[def-na-finite-interval-oscillatory-integral]], one has\n$$I_\\omega(h,g;[a,b])=\\sum_{j=0}^{r-1}\\frac{(-1)^j}{(i\\omega)^{j+1}}\\left[\\frac{T_g^jh(x)}{g'(x)}e^{i\\omega g(x)}\\right]_a^b+\\frac{(-1)^r}{(i\\omega)^r}I_\\omega(T_g^rh,g;[a,b]).$$\nConsequently,\n$$\\left|I_\\omega(h,g;[a,b])-\\sum_{j=0}^{r-1}\\frac{(-1)^j}{(i\\omega)^{j+1}}\\left[\\frac{T_g^jh(x)}{g'(x)}e^{i\\omega g(x)}\\right]_a^b\\right|\\le\\frac{b-a}{|\\omega|^r}\\|T_g^rh\\|_\\infty.$$\nFor fixed $h,g,r$, the remainder is $O(|\\omega|^{-r})$; the constant is the displayed derivative norm, not a frequency-uniform assertion about varying $h$ or $g$.",
+        "strategy": "direct\n\n**Given:** $a<b$, the hypotheses in the Statement, and the componentwise complex Riemann integral from [[def-na-finite-interval-oscillatory-integral]].\n\n[F1] [[lem-na-complex-phase-derivative]]: $(e^{i\\omega g})'=i\\omega g'e^{i\\omega g}$.\n\n[F2] [[thm-integration-by-parts]]: for real $C^1$ functions $u,v$ on a closed interval, $\\int u v'=[uv]-\\int u'v$. Applying this to real and imaginary components gives the componentwise complex identity.\n\n[F3] [[thm-algebra-of-derivatives]]: sums, products, and quotients with nonzero denominator preserve differentiability and obey the stated derivative rules.\n\n[F4] For continuous complex $z$ on $[a,b]$, the componentwise definition of [[def-na-finite-interval-oscillatory-integral]] and the conjugation and modulus laws [[lem-complex-conjugation-and-modulus-laws]] give $\\left|\\int_a^b z\\right|\\le\\int_a^b|z|$. If $Z=\\int z\\ne0$, set $\\zeta=\\overline Z/|Z|$, so $|\\zeta|=1$ and $|Z|=\\int\\operatorname{Re}(\\zeta z)$. Since $\\operatorname{Re}(\\zeta z)\\le|z|$, monotonicity from [[thm-multidimensional-integral-properties]] proves the bound; the zero case is immediate.\n\n1.1 Since $g'$ is continuous and nowhere zero, [F3] makes $h/g'$ differentiable with derivative $T_gh$. Apply [F2] componentwise with $u=h/g'$ and $v=e^{i\\omega g}$. By [F1], $v'=i\\omega g'v$, so rearranging gives $I_\\omega(h,g)=[(h/g')v]_a^b/(i\\omega)-I_\\omega(T_gh,g)/(i\\omega)$. [given, F1, F2, F3, algebra]\n\n2.1 Apply step 1.1 successively to $h,T_gh,\\ldots,T_g^{r-1}h$. At each application the final integral receives one further factor $-1/(i\\omega)$ and the next endpoint term receives the matching alternating sign, yielding the displayed finite sum and remainder. Since $|e^{i\\omega g(x)}|=1$, [F4] bounds the remainder modulus by $|\\omega|^{-r}\\int_a^b|T_g^rh(x)|\\,dx\\le (b-a)|\\omega|^{-r}\\|T_g^rh\\|_\\infty$. [given, F1, F4, step 1.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(i)",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "D. Levin, Procedures for computing one- and two-dimensional integrals of functions with rapid irregular oscillations, §3",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/OSCINT/LEV82.pdf"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §2",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-na-nonstationary-moment-expansion",
+        "kind": "algorithm",
+        "title": "Bounded integration-by-parts expansion for an oscillatory moment",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "thm-na-nonstationary-oscillatory-integration-by-parts"
+        ],
+        "dependency_level": 3,
+        "statement": "Input $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, a real phase $g\\in C^{r+1}[a,b]$ with $|g'|\\ge c>0$, a complex amplitude $p\\in C^r[a,b]$, an integer $r\\ge1$, and a certified real bound $M\\ge\\|T_g^rp\\|_\\infty$. Compute\n$$S_r(p)=\\sum_{j=0}^{r-1}\\frac{(-1)^j}{(i\\omega)^{j+1}}\\left[\\frac{T_g^jp(x)}{g'(x)}e^{i\\omega g(x)}\\right]_a^b,\\qquad \\epsilon_r=\\frac{(b-a)M}{|\\omega|^r}.$$\nReturn $(S_r(p),\\epsilon_r)$. The nonstationary recurrence and the need for the certified derivative bound are specified in [[thm-na-nonstationary-oscillatory-integration-by-parts]]. If exact phase moments are available, they may instead be passed as exact moment data to a Filon rule; this algorithm makes no general closed-form claim for nonlinear phases.",
+        "strategy": "Input $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, a real phase $g\\in C^{r+1}[a,b]$ with $|g'|\\ge c>0$, a complex amplitude $p\\in C^r[a,b]$, an integer $r\\ge1$, and a certified real bound $M\\ge\\|T_g^rp\\|_\\infty$. Compute\n$$S_r(p)=\\sum_{j=0}^{r-1}\\frac{(-1)^j}{(i\\omega)^{j+1}}\\left[\\frac{T_g^jp(x)}{g'(x)}e^{i\\omega g(x)}\\right]_a^b,\\qquad \\epsilon_r=\\frac{(b-a)M}{|\\omega|^r}.$$\nReturn $(S_r(p),\\epsilon_r)$. The nonstationary recurrence and the need for the certified derivative bound are specified in [[thm-na-nonstationary-oscillatory-integration-by-parts]]. If exact phase moments are available, they may instead be passed as exact moment data to a Filon rule; this algorithm makes no general closed-form claim for nonlinear phases.",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(i)",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §2",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-na-quadratic-phase-stationary-expansion",
+        "kind": "lemma",
+        "title": "Local stationary expansion for a quadratic phase",
+        "deps": [
+          "lem-na-fresnel-integral",
+          "lem-na-quadratic-phase-amplitude-bound",
+          "lem-na-complex-phase-derivative",
+          "thm-ftc-second-part",
+          "thm-integration-by-parts",
+          "def-improper-integral-at-infinity",
+          "def-mixed-improper-integral",
+          "def-absolute-and-conditional-improper-convergence",
+          "thm-comparison-test-for-improper-integrals",
+          "thm-improper-p-test-rational",
+          "thm-multidimensional-integral-properties",
+          "lem-mean-value-theorem-on-closed-interval",
+          "thm-heine-cantor-r",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "def-na-finite-interval-oscillatory-integral",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $R>0$, $\\lambda\\ge1$, $\\sigma\\in\\{-1,1\\}$, and $A\\in C_c^4((-R,R);\\mathbb C)$. Fix an even $\\chi\\in C_c^\\infty((-R,R))$ equal to $1$ on a neighborhood of $0$. With $\\|A\\|_{C^4}:=\\max_{0\\le j\\le4}\\|A^{(j)}\\|_\\infty$, there is a finite constant $C_{R,\\chi}$, depending only on $R$ and $\\chi$, such that\n$$\\left|\\int_{-R}^R A(u)e^{i\\sigma\\lambda u^2/2}\\,du-A(0)\\sqrt{\\frac{2\\pi}{\\lambda}}e^{i\\sigma\\pi/4}\\right|\\le C_{R,\\chi}\\|A\\|_{C^4}\\lambda^{-3/2}.$$",
+        "strategy": "direct\n\n**Given:** $A,R,\\lambda,\\sigma,\\chi$ of the Statement.\n\n[F1] [[lem-na-fresnel-integral]]: $\\int_{\\mathbb R}e^{i\\sigma\\lambda u^2/2}\\,du=\\sqrt{2\\pi/\\lambda}\\,e^{i\\sigma\\pi/4}$ as an ordinary two-sided improper integral.\n\n[F2] [[lem-na-quadratic-phase-amplitude-bound]]: for $H\\in C_c^1((-R,R))$, $|\\int H(u)e^{i\\sigma\\lambda u^2/2}\\,du|\\le(6\\|H\\|_\\infty+R\\|H'\\|_\\infty)\\lambda^{-1/2}$.\n\n[F3] [[thm-ftc-second-part]]: continuous derivatives integrate to endpoint increments; applying it twice gives the integral Taylor remainder.\n\n[F4] [[thm-integration-by-parts]]: the real compact-interval identity extends componentwise to complex $C^1$ functions.\n\n[F5] [[lem-na-complex-phase-derivative]]: $(e^{i\\sigma\\lambda u^2/2})'=i\\sigma\\lambda u e^{i\\sigma\\lambda u^2/2}$.\n\n[F6] [[def-improper-integral-at-infinity]], [[def-mixed-improper-integral]], and [[def-absolute-and-conditional-improper-convergence]]: one-sided limits define improper integrals, whole-line integrals sum separately convergent tails, and absolute convergence is tested on each tail.\n\n[F7] [[thm-improper-p-test-rational]] and [[thm-comparison-test-for-improper-integrals]]: a continuous function bounded in modulus by $C|u|^{-4}$ on each tail has an absolutely convergent improper integral there.\n\n[F8] For a continuous complex $z$ on a compact interval, the componentwise definition of [[def-na-finite-interval-oscillatory-integral]], the conjugation and modulus laws [[lem-complex-conjugation-and-modulus-laws]], and real linearity and monotonicity from [[thm-multidimensional-integral-properties]] give $\\left|\\int z\\right|\\le\\int|z|$: if $Z=\\int z\\ne0$, set $\\zeta=\\overline Z/|Z|$, so $|\\zeta|=1$ and $|Z|=\\int\\operatorname{Re}(\\zeta z)\\le\\int|z|$. If $Z=0$ the bound is immediate. The conjugation and modulus laws also give $|z+w|\\le|z|+|w|$ for complex scalars.\n\n[F9] The mean-value theorem [[lem-mean-value-theorem-on-closed-interval]] and Heine--Cantor [[thm-heine-cantor-r]]: on compact $[-R,R]$, the continuous derivatives $D^{(3)}$ and $D^{(4)}$ are uniformly continuous; componentwise mean-value estimates justify differentiating $B(u)=\\int_0^1(1-t)D''(tu)\\,dt$ twice, giving $B'(u)=\\int_0^1(1-t)tD'''(tu)\\,dt$ and $B''(u)=\\int_0^1(1-t)t^2D''''(tu)\\,dt$.\n\n[F10] Reflection $u\\mapsto-u$ preserves the compact interval integral by [[thm-change-of-variables-for-compact-jordan-sets]]; real interval linearity from [[thm-multidimensional-integral-properties]], applied componentwise, then makes the integral of an odd complex function on $[-R,R]$ zero.\n\n1.1 Put $D(u)=A(u)-A(0)\\chi(u)-A'(0)u\\chi(u)$. Then $D(0)=D'(0)=0$. Near zero, twice applying [F3] gives $D(u)=u^2B(u)$ with $B(u)=\\int_0^1(1-t)D''(tu)\\,dt$; differentiating this finite parameter integral twice is justified by [F9] and gives $B\\in C^2$. Away from zero set $B=D/u^2$. These definitions agree near zero, $B$ is compactly supported, and $\\|B\\|_{C^2}\\le C_{R,\\chi}\\|A\\|_{C^4}$. Thus $A=A(0)\\chi+A'(0)u\\chi+u^2B$. [given, F3, F9, construct, algebra]\n\n2.1 By [F10], the integral of $u\\chi(u)e^{i\\sigma\\lambda u^2/2}$ is zero: the integrand is odd and vanishes outside $[-R,R]$. Let $S=1-\\chi$. Since $S=0$ near $0$, apply [F4] and [F5] twice on finite truncations of each half-line. All boundary terms vanish at the inner endpoints because $S=0$ there, and at infinity because $S/u\\to0$ and $((S/u)'/u)\\to0$. The final amplitude $K(u)=\\left(\\frac{(S/u)'}{u}\\right)'$ is continuous, vanishes near $0$, and is $O(|u|^{-4})$ on both tails; [F7] makes its phase-weighted improper integral absolutely convergent. Taking one-sided limits in the finite integration-by-parts identities and using [F6] gives $\\int_{\\mathbb R}S(u)e^{i\\sigma\\lambda u^2/2}\\,du=\\frac{1}{(i\\sigma\\lambda)^2}\\int_{\\mathbb R}K(u)e^{i\\sigma\\lambda u^2/2}\\,du$. Apply [F8] on finite truncations and pass to the limits from [F7] to bound the latter modulus by $\\lambda^{-2}\\int_{\\mathbb R}|K(u)|du=C_\\chi\\lambda^{-2}$. [given, F1, F4, F5, F6, F7, F8, F10, step 1.1, algebra]\n\n3.1 Since $\\chi=1$ near zero, [F1] and step 2.1 give $A(0)\\int\\chi(u)e^{i\\sigma\\lambda u^2/2}\\,du=A(0)\\sqrt{\\frac{2\\pi}{\\lambda}}e^{i\\sigma\\pi/4}+O(C_\\chi\\|A\\|_{C^4}\\lambda^{-2}).$ For the last term in step 1.1, one integration by parts gives $\\int u^2B e^{i\\sigma\\lambda u^2/2}=-(i\\sigma\\lambda)^{-1}\\int(B+uB')e^{i\\sigma\\lambda u^2/2}$; the boundary term vanishes by compact support. Apply [F2] to $H=B+uB'\\in C_c^1$ and the bound on $\\|B\\|_{C^2}$ to obtain $O(C_{R,\\chi}\\|A\\|_{C^4}\\lambda^{-3/2})$. Since $\\lambda^{-2}\\le\\lambda^{-3/2}$ for $\\lambda\\ge1$, adding the three contributions and applying the complex scalar triangle inequality in [F8] proves the stated estimate. [given, F1, F2, F8, step 1.1, step 2.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iv) and §7.12(ii)",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §4",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-na-levin-conditioned-residual-bound",
+        "kind": "theorem",
+        "title": "Levin endpoint identity and conditioned residual bound",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "lem-na-complex-phase-derivative",
+          "alg-na-levin-collocation-quadrature",
+          "thm-na-nonstationary-oscillatory-integration-by-parts",
+          "thm-integration-by-parts",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-multidimensional-integral-properties",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $a<b$, $s\\ge1$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, complex-valued $f\\in C^s[a,b]$, and real-valued $g\\in C^{s+1}[a,b]$ with $|g'|\\ge c>0$. Use a nonsingular collocation system from [[alg-na-levin-collocation-quadrature]], with complex-valued basis functions $\\psi_k:[a,b]\\to\\mathbb C$ in $C^{s+1}[a,b]$. Write $A_{jk}=L_\\omega\\psi_k(x_j)$, $y_j=f(x_j)$, $c=A^{-1}y$, $p=\\sum_kc_k\\psi_k$, $Q=p(b)e^{i\\omega g(b)}-p(a)e^{i\\omega g(a)}$, and $r=f-L_\\omega p$. Then\n$$I_\\omega(f,g;[a,b])-Q=I_\\omega(r,g;[a,b])=\\sum_{j=0}^{s-1}\\frac{(-1)^j}{(i\\omega)^{j+1}}\\left[\\frac{T_g^jr(x)}{g'(x)}e^{i\\omega g(x)}\\right]_a^b+\\frac{(-1)^s}{(i\\omega)^s}I_\\omega(T_g^sr,g;[a,b]).$$\nPut $E_j=|T_g^jf(a)/g'(a)|+|T_g^jf(b)/g'(b)|$, $V_j=\\|v_j(a)\\|_2+\\|v_j(b)\\|_2$ for $v_{j,k}(x)=T_g^j(L_\\omega\\psi_k)(x)/g'(x)$, and $K_s=(\\sum_k\\|T_g^s(L_\\omega\\psi_k)\\|_\\infty^2)^{1/2}$. Then\n$$|I_\\omega(f,g)-Q|\\le\\sum_{j=0}^{s-1}\\frac{E_j+\\|A^{-1}\\|_2\\|y\\|_2V_j}{|\\omega|^{j+1}}+\\frac{b-a}{|\\omega|^s}\\left(\\|T_g^sf\\|_\\infty+\\|A^{-1}\\|_2\\|y\\|_2K_s\\right).$$\nIf an approximate coefficient vector $\\widehat c$ has exact residual $\\rho=A\\widehat c-y$ and endpoint vector $d_k=\\psi_k(b)e^{i\\omega g(b)}-\\psi_k(a)e^{i\\omega g(a)}$, its output satisfies\n$$|Q(\\widehat c)-Q|\\le\\|d\\|_2\\|A^{-1}\\|_2\\|\\rho\\|_2=\\|d\\|_2\\frac{\\kappa_2(A)}{\\|A\\|_2}\\|\\rho\\|_2.$$\nIf $B_s$ denotes the right-hand side of the preceding collocation bound, then\n$$|I_\\omega(f,g)-Q(\\widehat c)|\\le B_s+\\|d\\|_2\\|A^{-1}\\|_2\\|\\rho\\|_2.$$\nAll vector norms are Euclidean, $\\|A\\|_2=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$ is the induced matrix norm, and $\\kappa_2(A)=\\|A\\|_2\\|A^{-1}\\|_2$.\nThus a small nodal residual alone does not provide an integral-error bound; the smooth residual terms and inverse solve amplification are also required.",
+        "strategy": "direct\n\n**Given:** The stated functions, nonzero frequency, nonstationary phase, nonsingular collocation matrix, and exact arithmetic residual $\\rho$ when an approximate coefficient vector is considered.\n\n[F1] [[alg-na-levin-collocation-quadrature]]: $L_\\omega p=p'+i\\omega g'p$, $A_{jk}=L_\\omega\\psi_k(x_j)$, and the endpoint output is $p(b)e^{i\\omega g(b)}-p(a)e^{i\\omega g(a)}$.\n\n[F2] [[lem-na-complex-phase-derivative]]: $(e^{i\\omega g})'=i\\omega g'e^{i\\omega g}$.\n\n[F3] [[thm-integration-by-parts]]: for real $C^1$ functions, $\\int u v'=[uv]-\\int u'v$; the complex identity follows componentwise.\n\n[F4] [[thm-na-nonstationary-oscillatory-integration-by-parts]]: the $s$-step expansion and its remainder bound apply to every $C^s$ amplitude when $|g'|\\ge c>0$.\n\n[F5] [[thm-cauchy-schwarz-in-an-inner-product-space]]: for finite real or complex vectors, $|\\langle z,w\\rangle|\\le\\|z\\|_2\\|w\\|_2$.\n\n[F6] Real Riemann integrals on an interval are linear by [[thm-multidimensional-integral-properties]] with $m=1$; the componentwise complex convention [[def-na-finite-interval-oscillatory-integral]] extends this to complex integrands.\n\n[F7] The complex modulus is subadditive, $|z+w|\\le|z|+|w|$ ([[lem-complex-conjugation-and-modulus-laws]]).\n\n[F8] On $\\mathbb C^n$ the Euclidean inner product is $\\langle x,y\\rangle=\\sum_kx_k\\overline{y_k}$, linear in the first argument, and $\\|\\overline d\\|_2=\\|d\\|_2$ by [[def-real-and-complex-inner-product-space]] and [[lem-complex-conjugation-and-modulus-laws]].\n\n1.1 For any $p\\in C^1[a,b]$, [F2] gives $(pe^{i\\omega g})'=(L_\\omega p)e^{i\\omega g}$. Apply [F3] to the real and imaginary components of $p$ and $e^{i\\omega g}$; the product rule and cancellation of the two $i\\omega g'p$ terms yield $I_\\omega(L_\\omega p,g)=[pe^{i\\omega g}]_a^b$. With $p$ from [F1] and $r=f-L_\\omega p$, componentwise linearity [F6] gives $I_\\omega(f,g)-Q=I_\\omega(r,g)$. [given, F1, F2, F3, F6, algebra]\n\n1.2 The coefficient equations imply $A(\\widehat c-c)=\\rho$, so $\\widehat c-c=A^{-1}\\rho$. The endpoint formula is linear in the coefficient vector, hence $Q(\\widehat c)-Q=d^\\top A^{-1}\\rho$. [F1, given, algebra]\n\n2.1 The hypotheses on $f,g,\\psi_k$ make $r\\in C^s[a,b]$. Apply [F4] to $r$ to obtain the displayed exact expansion and bound its integral remainder by $(b-a)|\\omega|^{-s}\\|T_g^sr\\|_\\infty$. [given, F4, step 1.1]\n\n2.2 With $x=A^{-1}\\rho$, [F8] gives $d^\\top x=\\langle x,\\overline d\\rangle$ and $\\|\\overline d\\|_2=\\|d\\|_2$; Cauchy--Schwarz [F5] therefore gives $|d^\\top A^{-1}\\rho|\\le\\|d\\|_2\\|A^{-1}\\|_2\\|\\rho\\|_2$. The definition $\\kappa_2(A)=\\|A\\|_2\\|A^{-1}\\|_2$ and nonsingularity give the displayed condition-number form. [F1, F5, F8, step 1.2, algebra]\n\n3.1 Since $c=A^{-1}y$, $\\|c\\|_2\\le\\|A^{-1}\\|_2\\|y\\|_2$. Linearity of $T_g$ gives $T_g^jr=T_g^jf-\\sum_kc_kT_g^j(L_\\omega\\psi_k)$. At each endpoint, [F5] bounds the corresponding divided sum by $\\|c\\|_2\\|v_j(a)\\|_2$ or $\\|c\\|_2\\|v_j(b)\\|_2$; [F7] combines it with the amplitude term. On the interval [F5] bounds $\\|\\sum_kc_kT_g^s(L_\\omega\\psi_k)\\|_\\infty$ by $\\|c\\|_2K_s$, and [F7] gives $\\|T_g^sr\\|_\\infty\\le\\|T_g^sf\\|_\\infty+\\|c\\|_2K_s$. Substitution in the expansion from step 2.1 gives the stated $E_j,V_j,K_s$ bound. [given, F4, F5, F7, step 2.1, algebra]\n\n4.1 The complex triangle inequality [F7] combines the exact-collocation bound in step 3.1 with step 2.2, giving the stated integral bound for $Q(\\widehat c)$. [F7, step 3.1, step 2.2, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Levin, Procedures for computing one- and two-dimensional integrals of functions with rapid irregular oscillations, §1",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/OSCINT/LEV82.pdf"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.3",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            },
+            {
+              "title": "R. M. Stuart and J. Voss, Matrix Analysis and Algorithms, §2",
+              "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-na-filon-nodal-moment-quadrature",
+        "kind": "algorithm",
+        "title": "Filon quadrature from nodal interpolation and phase moments",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "lem-na-lagrange-interpolation-on-distinct-nodes",
+          "alg-na-fourier-polynomial-moments",
+          "alg-na-nonstationary-moment-expansion"
+        ],
+        "dependency_level": 4,
+        "statement": "Input $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, continuous $f:[a,b]\\to\\mathbb C$, continuous real $g:[a,b]\\to\\mathbb R$, an integer $n\\ge1$, distinct nodes $a=c_0<\\cdots<c_n=b$, and for each Lagrange basis polynomial $\\ell_j$ a complex moment estimate $\\widehat\\mu_j\\in\\mathbb C$ with real error bound $\\epsilon_j\\ge0$ satisfying $|\\widehat\\mu_j-\\int_a^b\\ell_j(x)e^{i\\omega g(x)}dx|\\le\\epsilon_j$. Put $f_j=f(c_j)$. Form $p_n=\\sum_{j=0}^nf_j\\ell_j$ using [[lem-na-lagrange-interpolation-on-distinct-nodes]], then return\n$$Q_n=\\sum_{j=0}^nf_j\\widehat\\mu_j,\\qquad \\eta_n=\\sum_{j=0}^n|f_j|\\epsilon_j.$$\nFor $g(x)=x$, expand each real-node Lagrange polynomial as $\\ell_j(x)=\\sum_{k=0}^n a_{jk}x^k$, run [[alg-na-fourier-polynomial-moments]] through $k=n$, and set $\\widehat\\mu_j=\\sum_{k=0}^na_{jk}\\mu_k$ and $\\epsilon_j=0$. For general nonstationary $g$, a user may obtain bounded moments by applying [[alg-na-nonstationary-moment-expansion]] to each $\\ell_j$ with a certified derivative bound. The exact-moment branch for a general phase is conditional on supplied exact moments; no general exact moment solver for arbitrary nonlinear $g$ is asserted here.",
+        "strategy": "Input $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, continuous $f:[a,b]\\to\\mathbb C$, continuous real $g:[a,b]\\to\\mathbb R$, an integer $n\\ge1$, distinct nodes $a=c_0<\\cdots<c_n=b$, and for each Lagrange basis polynomial $\\ell_j$ a complex moment estimate $\\widehat\\mu_j\\in\\mathbb C$ with real error bound $\\epsilon_j\\ge0$ satisfying $|\\widehat\\mu_j-\\int_a^b\\ell_j(x)e^{i\\omega g(x)}dx|\\le\\epsilon_j$. Put $f_j=f(c_j)$. Form $p_n=\\sum_{j=0}^nf_j\\ell_j$ using [[lem-na-lagrange-interpolation-on-distinct-nodes]], then return\n$$Q_n=\\sum_{j=0}^nf_j\\widehat\\mu_j,\\qquad \\eta_n=\\sum_{j=0}^n|f_j|\\epsilon_j.$$\nFor $g(x)=x$, expand each real-node Lagrange polynomial as $\\ell_j(x)=\\sum_{k=0}^n a_{jk}x^k$, run [[alg-na-fourier-polynomial-moments]] through $k=n$, and set $\\widehat\\mu_j=\\sum_{k=0}^na_{jk}\\mu_k$ and $\\epsilon_j=0$. For general nonstationary $g$, a user may obtain bounded moments by applying [[alg-na-nonstationary-moment-expansion]] to each $\\ell_j$ with a certified derivative bound. The exact-moment branch for a general phase is conditional on supplied exact moments; no general exact moment solver for arbitrary nonlinear $g$ is asserted here.",
+        "sources": {
+          "references": [
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.2",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            },
+            {
+              "title": "D. Levin, Procedures for computing one- and two-dimensional integrals of functions with rapid irregular oscillations, §1",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/OSCINT/LEV82.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-na-single-interior-stationary-phase-expansion",
+        "kind": "theorem",
+        "title": "Stationary-phase expansion at one simple interior critical point",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "lem-na-one-dimensional-morse-coordinate",
+          "lem-na-quadratic-phase-stationary-expansion",
+          "thm-na-nonstationary-oscillatory-integration-by-parts",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "thm-multidimensional-integral-properties",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $a<b$, $f\\in C^4[a,b]$ be complex-valued, and $g\\in C^7[a,b]$ be real-valued. Suppose $g'(x_0)=0$, $g''(x_0)\\ne0$ for one $x_0\\in(a,b)$, and $g'$ has no other zero on $[a,b]$. Choose a coordinate $\\Phi:J\\to(-R,R)$ from [[lem-na-one-dimensional-morse-coordinate]], after restricting its domain so $\\overline J\\subset(a,b)$, and an even $\\eta\\in C_c^\\infty((-R,R))$ equal to $1$ near $0$. Such a cutoff exists by symmetrizing a bump from [[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]]. Extend $\\chi(x)=\\eta(\\Phi(x))$ by $0$ outside $J$, put $h=(1-\\chi)f$, $A(u)=\\eta(u)f(\\Phi^{-1}(u))(\\Phi^{-1})'(u)$, and $\\sigma=\\operatorname{sgn}(\\omega g''(x_0))$. For $|\\omega|\\ge1$,\n$$I_\\omega(f,g;[a,b])=\\frac{1}{i\\omega}\\left[\\frac{f(x)e^{i\\omega g(x)}}{g'(x)}\\right]_a^b+f(x_0)e^{i\\omega g(x_0)}\\sqrt{\\frac{2\\pi}{|\\omega g''(x_0)|}}e^{i\\sigma\\pi/4}+\\mathcal R_\\omega,$$\nwhere\n$$|\\mathcal R_\\omega|\\le\\left(C_{R,\\eta}\\|A\\|_{C^4}+|T_gh(a)/g'(a)|+|T_gh(b)/g'(b)|+(b-a)\\|T_g^2h\\|_\\infty\\right)|\\omega|^{-3/2}.$$\nOn the neighborhood where $h=0$, define $T_gh$ and $T_g^2h$ to be $0$; elsewhere use the recurrence from [[def-na-finite-interval-oscillatory-integral]]. The nonstationary norm is taken over the two closed intervals away from that neighborhood.",
+        "strategy": "direct\n\n**Given:** The stated interval, amplitude, phase, stationary point, chart, cutoff, and $|\\omega|\\ge1$.\n\n[F1] [[lem-na-one-dimensional-morse-coordinate]]: $g(x)=g(x_0)+\\operatorname{sgn}(g''(x_0))\\Phi(x)^2/2$ and $\\Phi'(x_0)=\\sqrt{|g''(x_0)|}$.\n\n[F2] [[lem-na-quadratic-phase-stationary-expansion]]: for an even cutoff $\\eta$ and compactly supported $C^4$ amplitude $A$, the quadratic-phase integral has leading term $A(0)\\sqrt{2\\pi/|\\omega|}e^{i\\operatorname{sgn}(\\omega g''(x_0))\\pi/4}$ and remainder at most $C_{R,\\eta}\\|A\\|_{C^4}|\\omega|^{-3/2}$.\n\n[F3] [[thm-na-nonstationary-oscillatory-integration-by-parts]]: the two-step expansion for $h$ applies on intervals where $|g'|\\ge c>0$.\n\n[F4] [[thm-change-of-variables-for-compact-jordan-sets]]: an injective $C^1$ coordinate change transforms a real compact Jordan integral by its absolute derivative; apply separately to the real and imaginary parts of a complex amplitude.\n\n[F5] [[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]]: a compact interval inside an open interval admits a smooth cutoff equal to $1$ on the compact interval and supported in the open interval.\n\n[F6] Real Riemann integrals on an interval are linear and additive across an interior cut by [[thm-multidimensional-integral-properties]] with $m=1$; apply componentwise using [[def-na-finite-interval-oscillatory-integral]].\n\n[F7] The complex modulus is subadditive, $|z+w|\\le|z|+|w|$ ([[lem-complex-conjugation-and-modulus-laws]]).\n\n1.1 Use [F5] for a compact neighborhood of $0$ inside $(-R,R)$ and symmetrize the resulting bump to obtain the even $\\eta$ in the Statement. By [F1], $\\chi$ is $1$ near $x_0$, vanishes near $a,b$, and $A$ is compactly supported and $C^4$; moreover $A(0)=f(x_0)/\\sqrt{|g''(x_0)|}$. Since $g'$ has no other zero, its modulus has a positive minimum on the two closed intervals outside a smaller neighborhood where $\\chi=1$. [given, F1, F5, construct]\n\n2.1 Choose $r<R$ with $\\operatorname{supp}\\eta\\subset(-r,r)$ and put $K=\\Phi^{-1}([-r,r])$, a compact interval inside $J$. Since $\\chi f$ vanishes off $K$, interval additivity [F6] identifies its integral on $[a,b]$ with its integral on $K$. Apply [F4] on $K$ separately to the real and imaginary parts. The transformed amplitude is $A(u)$, supported in $(-r,r)$, so [F6] also identifies its integral on $[-r,r]$ with that on $[-R,R]$. The phase exponential factors as $e^{i\\omega g(x_0)}e^{i\\operatorname{sgn}(\\omega g''(x_0))|\\omega|u^2/2}$. Then [F2], with $\\lambda=|\\omega|$ and sign $\\sigma$, gives the stationary term in the Statement and a local remainder at most $C_{R,\\eta}\\|A\\|_{C^4}|\\omega|^{-3/2}$. [given, F1, F2, F4, F6, step 1.1, algebra]\n\n2.2 The complementary amplitude $h$ vanishes on a neighborhood of $x_0$. Apply [F3] with $r=2$ on each side of that neighborhood; interval additivity [F6] combines the two formulas, and the internal endpoint terms vanish because $h$ and its derivatives are zero there. Since $\\chi$ vanishes near $a,b$, the first endpoint term is exactly $\\frac{1}{i\\omega}[f e^{i\\omega g}/g']_a^b$. The complex triangle inequality [F7] combines the remaining side estimates into a total modulus at most $\\left(|T_gh(a)/g'(a)|+|T_gh(b)/g'(b)|+(b-a)\\|T_g^2h\\|_\\infty\\right)|\\omega|^{-2}.$ [given, F3, F6, F7, step 1.1]\n\n3.1 By componentwise linearity [F6], the localized and complementary integrals sum to $I_\\omega(f,g;[a,b])$. The complex triangle inequality [F7] and $|\\omega|^{-2}\\le|\\omega|^{-3/2}$ for $|\\omega|\\ge1$ combine the two remainder bounds and give the stated $\\mathcal R_\\omega$ bound and endpoint term. [F6, F7, step 2.1, step 2.2, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iv)",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §7.12(ii)",
+              "url": "https://dlmf.nist.gov/7.12"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §4",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-na-filon-interpolation-error-bound",
+        "kind": "theorem",
+        "title": "Nonstationary error bound for endpoint Filon interpolation",
+        "deps": [
+          "def-na-finite-interval-oscillatory-integral",
+          "lem-na-lagrange-interpolation-on-distinct-nodes",
+          "alg-na-filon-nodal-moment-quadrature",
+          "thm-na-nonstationary-oscillatory-integration-by-parts",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-multidimensional-integral-properties"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $a<b$, $\\omega\\in\\mathbb R\\setminus\\{0\\}$, $f\\in C^2[a,b]$ be complex-valued, and $g\\in C^3[a,b]$ be real-valued with $|g'|\\ge c>0$. Use the endpoint Lagrange rule from [[alg-na-filon-nodal-moment-quadrature]] and put $r=f-p_n$. If $\\mu_j=\\int_a^b\\ell_j e^{i\\omega g}$ and the rule uses $\\widehat\\mu_j$ with $|\\widehat\\mu_j-\\mu_j|\\le\\epsilon_j$, then\n$$|I_\\omega(f,g;[a,b])-Q_n|\\le\\frac{|T_gr(a)/g'(a)|+|T_gr(b)/g'(b)|+(b-a)\\|T_g^2r\\|_\\infty}{|\\omega|^2}+\\eta_n.$$\nWith exact moments $\\eta_n=0$, this is an $O(|\\omega|^{-2})$ endpoint-interpolation error bound. The constant depends on the fixed amplitude, phase, nodes, and derivative norms.",
+        "strategy": "direct\n\n**Given:** The hypotheses in the Statement, the integral convention on [[def-na-finite-interval-oscillatory-integral]], and the endpoint nodes $c_0=a,c_n=b$.\n\n[F1] [[lem-na-lagrange-interpolation-on-distinct-nodes]]: $p_n=\\sum_{j=0}^nf(c_j)\\ell_j$ and $p_n(c_j)=f(c_j)$.\n\n[F2] [[alg-na-filon-nodal-moment-quadrature]]: $Q_n=\\sum_jf(c_j)\\widehat\\mu_j$ and $\\eta_n=\\sum_j|f(c_j)|\\epsilon_j$.\n\n[F3] [[thm-na-nonstationary-oscillatory-integration-by-parts]]: the two-step identity for $I_\\omega(h,g)$ has first boundary term $[(h/g')e^{i\\omega g}]_a^b/(i\\omega)$, second term $-[(T_gh/g')e^{i\\omega g}]_a^b/(i\\omega)^2$, and remainder $I_\\omega(T_g^2h,g)/(i\\omega)^2$.\n\n[F4] The complex modulus is subadditive, $|z+w|\\le|z|+|w|$ ([[lem-complex-conjugation-and-modulus-laws]]).\n\n[F5] Real Riemann integrals on an interval are linear by [[thm-multidimensional-integral-properties]] with $m=1$; the componentwise complex definition [[def-na-finite-interval-oscillatory-integral]] extends this to complex integrands.\n\n1.1 Let $Q_n^\\ast=\\sum_jf(c_j)\\mu_j$. By [F1] and [F5], linearity of the integral gives $Q_n^\\ast=I_\\omega(p_n,g)$; by [F2] and the finite-sum triangle inequality [F4], $|Q_n^\\ast-Q_n|\\le\\eta_n$. The same linearity gives $I_\\omega(f,g)-Q_n=I_\\omega(r,g)+(Q_n^\\ast-Q_n)$. [given, F1, F2, F4, F5, algebra]\n\n1.2 The endpoint nodes and [F1] give $r(a)=r(b)=0$, so the first boundary term in [F3] vanishes. Applying [F3] to $r$ leaves $I_\\omega(r,g)=-\\frac{[(T_gr/g')e^{i\\omega g}]_a^b}{(i\\omega)^2}+\\frac{I_\\omega(T_g^2r,g)}{(i\\omega)^2}.$ [given, F1, F3, algebra]\n\n2.1 Since $|e^{i\\omega g}|=1$, the complex triangle inequality [F4] bounds the displayed boundary term by $|T_gr(a)/g'(a)|+|T_gr(b)/g'(b)|$, and the integral term is at most $(b-a)\\|T_g^2r\\|_\\infty$ by [F3]. Combine these bounds with step 1.1 and $|(i\\omega)^2|=|\\omega|^2$ using [F4] to obtain the assertion. [given, F2, F3, F4, step 1.1, step 1.2, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(i)",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.2",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            },
+            {
+              "title": "D. Levin, Procedures for computing one- and two-dimensional integrals of functions with rapid irregular oscillations, §3",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/OSCINT/LEV82.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2581,
+    "id": "oscillatory-filon-and-levin-quadrature-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Oscillatory integrals and filon levin methods — Examples",
+    "companion": "oscillatory-filon-and-levin-quadrature",
+    "requires": [
+      "oscillatory-filon-and-levin-quadrature"
+    ],
+    "items": [
+      {
+        "id": "ex-na-ill-conditioned-levin-collocation",
+        "kind": "example",
+        "title": "A small Levin collocation residual can hide a large endpoint error",
+        "deps": [
+          "alg-na-levin-collocation-quadrature",
+          "thm-na-levin-conditioned-residual-bound"
+        ],
+        "dependency_level": 4,
+        "statement": "Fix $\\omega=2\\pi$, $0<\\varepsilon<1$, $f=0$, $g(x)=x$ on $[0,1]$, and define\n$$p_\\varepsilon(x)=(\\varepsilon+2-i\\omega)x^3+(2i\\omega-3-\\varepsilon)x^2-i\\omega x+1,\\qquad \\psi_1=1,\\quad\\psi_2=1+p_\\varepsilon.$$\nWith endpoint nodes $0,1$, the collocation matrix is nonsingular and has $\\kappa_2(A_\\varepsilon)\\ge2\\omega/\\varepsilon$. The exact coefficient vector is $0$, but $\\widehat c=(-1,1)$ has residual $(0,\\varepsilon)$ and endpoint output $-1$, while the exact integral is $0$.",
+        "strategy": "direct\n\n**Given:** The stated phase, amplitude, frequency, basis, endpoint nodes, and $0<\\varepsilon<1$.\n\n[F1] [[alg-na-levin-collocation-quadrature]]: the matrix entries are $A_{jk}=L_\\omega\\psi_k(x_j)$, a singular matrix returns failure, and a nonsingular solve returns the endpoint expression $p(1)e^{i\\omega}-p(0)$.\n\n[F2] [[thm-na-levin-conditioned-residual-bound]]: a coefficient residual contributes an endpoint error factor $\\|d\\|_2\\|A^{-1}\\|_2\\|\\rho\\|_2$; the inverse norm equals $\\kappa_2(A)/\\|A\\|_2$.\n\n1.1 Direct differentiation gives $p_\\varepsilon(0)=1$, $p_\\varepsilon(1)=0$, $p_\\varepsilon'(0)=-i\\omega$, and $p_\\varepsilon'(1)=\\varepsilon$. Therefore $L_\\omega p_\\varepsilon(0)=0$ and $L_\\omega p_\\varepsilon(1)=\\varepsilon$. The basis functions are linearly independent because $p_\\varepsilon$ is nonconstant, and [F1] gives $A_\\varepsilon=\\begin{bmatrix}i\\omega&i\\omega\\\\i\\omega&i\\omega+\\varepsilon\\end{bmatrix},\\qquad \\det A_\\varepsilon=i\\omega\\varepsilon\\ne0.$ [given, F1, algebra]\n\n1.2 For $f=0$, the exact right-hand side and solution are zero. Multiplying $A_\\varepsilon$ by $\\widehat c=(-1,1)$ gives $\\rho=(0,\\varepsilon)$, while the associated polynomial is $\\widehat p=-\\psi_1+\\psi_2=p_\\varepsilon$. Its endpoint values give $Q(\\widehat c)=0\\cdot e^{i\\omega}-1=-1$. Hence the exact integral is $0$ and the endpoint error has magnitude $1$ although $\\|\\rho\\|_2=\\varepsilon$. [given, F1, algebra]\n\n2.1 Solving $A_\\varepsilon z=(0,1)$ gives $z=(-1/\\varepsilon,1/\\varepsilon)$, so $\\|A_\\varepsilon^{-1}\\|_2\\ge\\sqrt2/\\varepsilon$. Also $\\|A_\\varepsilon\\|_2\\ge\\|A_\\varepsilon(1,0)^T\\|_2=\\sqrt2\\,\\omega$. Thus $\\kappa_2(A_\\varepsilon)\\ge2\\omega/\\varepsilon\\to\\infty$ as $\\varepsilon\\downarrow0$. The factor in [F2] records this amplification; the residual norm alone cannot certify a small quadrature error. [given, F2, step 1.2, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Levin, Procedures for computing one- and two-dimensional integrals of functions with rapid irregular oscillations, §1",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/OSCINT/LEV82.pdf"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.3",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-interior-stationary-phase-boundary-term",
+        "kind": "example",
+        "title": "An interior stationary point adds a Fresnel-scale term",
+        "deps": [
+          "thm-na-single-interior-stationary-phase-expansion",
+          "thm-na-nonstationary-oscillatory-integration-by-parts",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_level": 5,
+        "statement": "For $f(x)=1$, $g(x)=x^2/2$ on $[-1,1]$, and $\\omega\\ge1$, the integral has an interior contribution of order $\\omega^{-1/2}$ in addition to its order-$\\omega^{-1}$ endpoint term:\n$$I_\\omega(1,g;[-1,1])=\\sqrt{\\frac{2\\pi}{\\omega}}e^{i\\pi/4}+\\frac{2e^{i\\omega/2}}{i\\omega}+R_\\omega,\\qquad |R_\\omega|\\le C\\omega^{-3/2}.$$\nThe nonstationary expansion cannot be applied on the full interval because $g'(0)=0$.",
+        "strategy": "direct\n\n**Given:** $f(x)=1$, $g(x)=x^2/2$ on $[-1,1]$, and $\\omega\\ge1$.\n\n[F1] [[thm-na-single-interior-stationary-phase-expansion]]: a single simple interior stationary point contributes $f(x_0)e^{i\\omega g(x_0)}\\sqrt{2\\pi/|\\omega g''(x_0)|}e^{i\\operatorname{sgn}(\\omega g''(x_0))\\pi/4}$, with the endpoint term and an $O(|\\omega|^{-3/2})$ remainder.\n\n[F2] [[thm-na-nonstationary-oscillatory-integration-by-parts]]: the nonstationary branch requires $|g'|\\ge c>0$ on the whole interval to which it is applied.\n\n[F3] The complex modulus is subadditive, $|z+w|\\le|z|+|w|$ ([[lem-complex-conjugation-and-modulus-laws]]).\n\n1.1 Here $g'(x)=x$, $g''(0)=1$, and $g(\\pm1)=1/2$. Applying [F1] at $x_0=0$ gives the stationary term $\\sqrt{2\\pi/\\omega}e^{i\\pi/4}$, while the endpoint bracket is $\\frac{1}{i\\omega}\\left(\\frac{e^{i\\omega/2}}{1}-\\frac{e^{i\\omega/2}}{-1}\\right)=\\frac{2e^{i\\omega/2}}{i\\omega}.$ The remainder bound is the one in [F1]. [given, F1, algebra]\n\n2.1 Since $g'(0)=0$, no $c>0$ satisfies [F2] on $[-1,1]$. By [F3], the endpoint term and remainder together are bounded by $2/\\omega+C\\omega^{-3/2}$, both smaller than the stationary term's magnitude $\\sqrt{2\\pi/\\omega}$ by a factor tending to zero. Thus the leading scale is $\\omega^{-1/2}$, not the nonstationary integer-power expansion. [given, F1, F2, F3, step 1.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(iv)",
+              "url": "https://dlmf.nist.gov/2.3"
+            },
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §4",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-large-frequency-fourier-filon-versus-midpoint-sample",
+        "kind": "example",
+        "title": "A Fourier integral missed by one sample but captured by Filon moments",
+        "deps": [
+          "alg-na-filon-nodal-moment-quadrature",
+          "alg-na-fourier-polynomial-moments",
+          "thm-na-fourier-oscillatory-moment-recurrence",
+          "thm-na-filon-interpolation-error-bound",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-power-laws"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $N$ be a positive odd integer, $\\omega=2\\pi N$, and $g(x)=x$ on $[0,1]$. For $f(x)=1$, the exact integral is $0$ and the endpoint Filon rule returns $0$, while the one-sample midpoint value $M_\\omega(f)=f(1/2)e^{i\\omega/2}$ is $-1$. For $f(x)=x^2$, the same endpoint Filon rule has the exact error $2/\\omega^2$.",
+        "strategy": "direct\n\n**Given:** The positive odd integer $N$, $\\omega=2\\pi N$, $g(x)=x$, and the two amplitudes $f(x)=1$ and $f(x)=x^2$ on $[0,1]$.\n\n[F1] [[alg-na-filon-nodal-moment-quadrature]]: the Filon output is $\\sum_j f(c_j)\\widehat\\mu_j$, using the Lagrange interpolant's phase moments.\n\n[F2] [[alg-na-fourier-polynomial-moments]]: for endpoints $a,b$, the recurrence is $\\mu_0=(e^{i\\omega b}-e^{i\\omega a})/(i\\omega)$ and $\\mu_k=(b^ke^{i\\omega b}-a^ke^{i\\omega a})/(i\\omega)-k\\mu_{k-1}/(i\\omega)$.\n\n[F3] [[thm-na-fourier-oscillatory-moment-recurrence]]: each output $\\mu_k$ is the exact integral $\\int_a^b x^ke^{i\\omega x}\\,dx$.\n\n[F4] [[thm-na-filon-interpolation-error-bound]]: endpoint Filon with exact moments has error bounded by an explicit constant times $|\\omega|^{-2}$ under $f\\in C^2$ and nonstationary $g\\in C^3$.\n\n[F5] [[thm-complex-exponential-addition-and-real-extension]]: $e^{z+w}=e^ze^w$ for complex $z,w$.\n\n[F6] [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]: $e^{i\\pi}=-1$.\n\n[F7] [[lem-power-laws]]: for a nonzero field element and natural exponents, $(a^m)^n=a^{mn}$ and $a^{m+n}=a^ma^n$.\n\n1.1 Since $e^{i2\\pi N}=(e^{i\\pi})^{2N}=(-1)^{2N}=1$ and $e^{i\\pi N}=(-1)^N=-1$ for odd $N$, by [F5]--[F7], [F2] and [F3] give $\\mu_0=0$. For $f=1$ the endpoint interpolant is constant, so [F1] returns the exact integral $0$, while the one-sample value is $M_\\omega(1)=e^{i\\pi N}=-1$. [given, F1, F2, F3, F5, F6, F7, algebra]\n\n2.1 For $f=x^2$, the degree-one endpoint interpolant is $p(x)=x$. Step 1.1 gives $e^{i\\omega}=1$, so [F2] gives $\\mu_1=1/(i\\omega)$ and $\\mu_2=1/(i\\omega)-2/(i\\omega)^2$. Thus $I_\\omega(f,g)-Q_1=\\mu_2-\\mu_1=-2/(i\\omega)^2=2/\\omega^2$. The hypotheses of [F4] hold, so this exact error has the asserted second-order frequency decay. [given, F1, F2, F3, F4, step 1.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "A. Iserles, S. P. Nørsett, and S. Olver, Highly oscillatory quadrature: The story so far, §3.2",
+              "url": "https://www.cs.ox.ac.uk/sheehan.olver/papers/storysofar.pdf"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §2.3(i)",
+              "url": "https://dlmf.nist.gov/2.3"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

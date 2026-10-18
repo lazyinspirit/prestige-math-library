@@ -1,0 +1,652 @@
+[
+  {
+    "order": 2672,
+    "id": "compressible-viscous-flow-and-entropy-stable-fluxes",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Compressible viscous flow and entropy-stable viscous fluxes",
+    "companion": "compressible-viscous-flow-and-entropy-stable-fluxes-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "hyperbolic-dg-and-summation-by-parts-discretizations",
+      "finite-volume-diffusion-and-mimetic-fluxes"
+    ],
+    "items": [
+      {
+        "id": "def-compressible-navier-stokes-fourier-model",
+        "kind": "definition",
+        "title": "Ideal-gas compressible Navier–Stokes–Fourier model",
+        "statement": "The ideal-gas admissible states, entropy, Euler fluxes, Newtonian stress, Fourier heat flux, and conservative balance law with fixed sign conventions.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Specify parameters, state variables, thermodynamic functions, stress convention, and PDE sign.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "F. Ismail and P. L. Roe, Affordable, entropy-consistent Euler flux functions II: Entropy production at shocks, Journal of Computational Physics 228 (2009), 5410–5436, complete paper",
+              "url": "https://www.math.umd.edu/~tadmor/references/files/Ismail%20and%20Roe%20affordable%20fluxes%20JCP2009.pdf",
+              "locator": "PDF pp. 8–9, printed pp. 5417–5418, equations (38)–(40): ideal-gas conservative variables, Euler flux, entropy, and entropy variables in the normalized gas-constant convention."
+            },
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 2.1–2.3, equations (1)–(12), PDF pp. 2–4."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-compressible-admissible-state-set-open-convex",
+        "kind": "lemma",
+        "title": "The ideal-gas admissible state set is open and convex",
+        "statement": "The set rho>0 and E>|m|²/(2rho) is open and convex, so conservative-state arithmetic means remain admissible.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Compute the perspective Hessian and use its convexity to verify the strict epigraph.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "F. Ismail and P. L. Roe, Affordable, entropy-consistent Euler flux functions II: Entropy production at shocks, Journal of Computational Physics 228 (2009), 5410–5436, complete paper",
+              "url": "https://www.math.umd.edu/~tadmor/references/files/Ismail%20and%20Roe%20affordable%20fluxes%20JCP2009.pdf",
+              "locator": "PDF pp. 8–9, printed pp. 5417–5418: ideal-gas states with positive density and internal energy."
+            },
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Section 2.1, PDF p. 2: physical states."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-compressible-ideal-gas-entropy-pair-and-variables",
+        "kind": "lemma",
+        "title": "Strict convexity and entropy variables for the ideal-gas Euler flux",
+        "statement": "The mathematical entropy has positive-definite Hessian on the admissible set, explicit entropy variables, a compatible Euler entropy flux, potential rho R u_j, and a locally invertible entropy-variable map.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model",
+          "lem-compressible-admissible-state-set-open-convex"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Differentiate the ideal-gas entropy, prove Hessian positivity, derive the Euler entropy transport identity, and compute the entropy potential.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "F. Ismail and P. L. Roe, Affordable, entropy-consistent Euler flux functions II: Entropy production at shocks, Journal of Computational Physics 228 (2009), 5410–5436, complete paper",
+              "url": "https://www.math.umd.edu/~tadmor/references/files/Ismail%20and%20Roe%20affordable%20fluxes%20JCP2009.pdf",
+              "locator": "PDF pp. 8–9, printed pp. 5417–5418, equations (38)–(40): ideal-gas mathematical entropy and entropy variables in the normalized convention."
+            },
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Chapter 18, Handbook of Numerical Methods for Hyperbolic Problems: Basic and Fundamental Issues, 2016, complete chapter",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Printed pp. 469–470 and 482–483, Sections 1.1–1.2 and 4.6: entropy pairs, entropy variables, entropy potential, and ideal-gas Euler example."
+            },
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Section 2.3, equations (7)–(12), PDF pp. 3–4."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-ideal-gas-entropy-conservative-pair-flux",
+        "kind": "definition",
+        "title": "Explicit entropy-conservative two-point Euler flux",
+        "statement": "A symmetric two-point ideal-gas Euler flux defined by the entropy-potential correction of the arithmetic conservative-state flux.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model",
+          "lem-compressible-admissible-state-set-open-convex",
+          "lem-compressible-ideal-gas-entropy-pair-and-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "State the two branches and arithmetic-state convention for the potential correction.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Chapter 18, Handbook of Numerical Methods for Hyperbolic Problems: Basic and Fundamental Issues, 2016, complete chapter",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Printed pp. 482–483, Section 4.6, equations (32)–(33): entropy-conservative fluxes from the entropy potential."
+            },
+            {
+              "title": "F. Ismail and P. L. Roe, Affordable, entropy-consistent Euler flux functions II: Entropy production at shocks, Journal of Computational Physics 228 (2009), 5410–5436, complete paper",
+              "url": "https://www.math.umd.edu/~tadmor/references/files/Ismail%20and%20Roe%20affordable%20fluxes%20JCP2009.pdf",
+              "locator": "PDF pp. 8–10, printed pp. 5417–5419, equations (40)–(42) and Appendix A: ideal-gas entropy variables and entropy-conservative Euler flux construction."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-compressible-viscous-flux-entropy-variable-factorization",
+        "kind": "lemma",
+        "title": "Positive-semidefinite entropy-variable factorization of viscous flux",
+        "statement": "The Newtonian–Fourier viscous flux equals a block matrix applied to entropy-variable gradients, and the block matrix factors as a sum of nonnegative strain, dilation, and heat terms.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model",
+          "lem-compressible-ideal-gas-entropy-pair-and-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Write velocity and temperature gradients in entropy variables and identify the symmetric block bilinear form.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 2.2–2.3 and 3.3, equations (3)–(12), (18)–(19), PDF pp. 3–4 and 6."
+            },
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Chapter 18, Handbook of Numerical Methods for Hyperbolic Problems: Basic and Fundamental Issues, 2016, complete chapter",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Printed pp. 477–483, Sections 4.1–4.6: entropy variables, entropy potentials, and the discrete entropy production framework."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-ideal-gas-entropy-conservative-flux-properties",
+        "kind": "lemma",
+        "title": "Properties of the explicit entropy-conservative flux",
+        "statement": "The defined two-point flux is well-defined, symmetric, consistent, satisfies the entropy-potential jump identity, and is locally Lipschitz on positive-state compact sets.",
+        "deps": [
+          "def-ideal-gas-entropy-conservative-pair-flux",
+          "lem-compressible-ideal-gas-entropy-pair-and-variables",
+          "lem-compressible-admissible-state-set-open-convex"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Use strict convexity for the diagonal case, algebra for symmetry and the jump identity, and a midpoint Taylor expansion for regularity.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Chapter 18, Handbook of Numerical Methods for Hyperbolic Problems: Basic and Fundamental Issues, 2016, complete chapter",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Printed pp. 482–483, Section 4.6: entropy-potential jump identity and symmetric entropy-conservative system fluxes."
+            },
+            {
+              "title": "F. Ismail and P. L. Roe, Affordable, entropy-consistent Euler flux functions II: Entropy production at shocks, Journal of Computational Physics 228 (2009), 5410–5436, complete paper",
+              "url": "https://www.math.umd.edu/~tadmor/references/files/Ismail%20and%20Roe%20affordable%20fluxes%20JCP2009.pdf",
+              "locator": "PDF pp. 8–9, printed pp. 5417–5418: entropy variables; Appendix A, equation (66), PDF p. 25, printed p. 5434: entropy-conservative flux identity. The present correction formula is verified locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-compressible-viscous-smooth-entropy-identity",
+        "kind": "lemma",
+        "title": "Smooth ideal-gas Navier–Stokes–Fourier entropy identity",
+        "statement": "Every smooth positive solution obeys the local mathematical-entropy balance with Fourier entropy flux and nonnegative viscous and thermal production.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model",
+          "lem-compressible-ideal-gas-entropy-pair-and-variables",
+          "lem-compressible-viscous-flux-entropy-variable-factorization"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Multiply the conservative balance by entropy variables and use the local viscous factorization.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 2.2–2.3 and 4.4–4.5, equations (3)–(12), (39)–(43), PDF pp. 3–4 and 11–12. The smooth identity is proved locally."
+            },
+            {
+              "title": "F. Ismail and P. L. Roe, Affordable, entropy-consistent Euler flux functions II: Entropy production at shocks, Journal of Computational Physics 228 (2009), 5410–5436, complete paper",
+              "url": "https://www.math.umd.edu/~tadmor/references/files/Ismail%20and%20Roe%20affordable%20fluxes%20JCP2009.pdf",
+              "locator": "PDF pp. 8–9, printed pp. 5417–5418: ideal-gas mathematical entropy and entropy variables; the viscous production is derived locally here."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-periodic-sbp-compressible-viscous-scheme",
+        "kind": "definition",
+        "title": "Periodic diagonal-norm SBP compressible viscous scheme",
+        "statement": "The periodic nodal semidiscretization using the explicit symmetric entropy-conservative Euler flux and the ideal-gas entropy-variable viscous blocks.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model",
+          "lem-compressible-ideal-gas-entropy-pair-and-variables",
+          "def-ideal-gas-entropy-conservative-pair-flux",
+          "lem-compressible-viscous-flux-entropy-variable-factorization"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Specify the finite periodic index set, diagonal norm, derivative identities, nodal state convention, and semidiscrete operator.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Chapter 18, Handbook of Numerical Methods for Hyperbolic Problems: Basic and Fundamental Issues, 2016, complete chapter",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Printed pp. 482–490, Sections 4.6–6: entropy-conservative system fluxes and high-order entropy-stable constructions."
+            },
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 3.3 and 4.4–4.5, PDF pp. 6 and 11–12. The nodal SBP operator is defined locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-orthogonal-fv-compressible-viscous-scheme",
+        "kind": "definition",
+        "title": "One-dimensional orthogonal finite-volume viscous scheme",
+        "statement": "The cell-centered one-dimensional uniform finite-volume diffusion operator using a symmetric positive-semidefinite entropy-variable face block and zero boundary fluxes.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model",
+          "lem-compressible-admissible-state-set-open-convex",
+          "lem-compressible-ideal-gas-entropy-pair-and-variables",
+          "lem-compressible-viscous-flux-entropy-variable-factorization",
+          "def-fv-admissible-cell-face-mesh"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Specify the interval cell-face mesh, midpoint admissible state, face block, shared flux, zero boundary fluxes, and cell balance.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, January 2019 updated author text, complete manuscript",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, printed pp. 37–39: finite cell-face balances, shared face fluxes, and orthogonal center-to-face geometry."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014, complete preprint",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§1.1, PDF pp. 3–4, Definition 1.1 and Remark 1.2: cells, faces, normals, cell balances, and finite-volume conventions in any dimension."
+            },
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 2.2–2.3 and 3.3, equations (3)–(5), (18)–(19): compressible viscous flux in entropy variables. The present cell-centered flux is defined and analysed locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-periodic-sbp-compressible-viscous-conservation-and-entropy",
+        "kind": "theorem",
+        "title": "Conservation and entropy dissipation of the periodic SBP scheme",
+        "statement": "On the stated periodic diagonal-norm SBP grid, every admissible semidiscrete solution conserves all weighted conservative variables and has a nonincreasing total mathematical entropy with the exact nodal viscous-production sum.",
+        "deps": [
+          "def-periodic-sbp-compressible-viscous-scheme",
+          "lem-ideal-gas-entropy-conservative-flux-properties",
+          "lem-compressible-viscous-flux-entropy-variable-factorization"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Use skew SBP flux differencing for the inviscid pair and summation by parts plus the local block factorization for viscosity.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Chapter 18, Handbook of Numerical Methods for Hyperbolic Problems: Basic and Fundamental Issues, 2016, complete chapter",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Printed pp. 482–490, Sections 4.6–6: entropy-conservative flux differencing and entropy stability of high-order schemes."
+            },
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 3.3 and 4.4–4.5, PDF pp. 6 and 11–12. The present proof uses its own nodal SBP identities."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-orthogonal-fv-compressible-viscous-flux-consistency",
+        "kind": "lemma",
+        "title": "Second-order face-flux consistency for the one-dimensional viscous operator",
+        "statement": "For smooth positive cell-center data on the uniform one-dimensional mesh, the defined entropy-variable viscous face flux approximates the physical viscous flux at the face with error O(h²).",
+        "deps": [
+          "def-orthogonal-fv-compressible-viscous-scheme",
+          "lem-compressible-viscous-flux-entropy-variable-factorization"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Use symmetric Taylor expansions of the conservative-state midpoint and entropy-variable difference, then use smoothness of the block matrix.",
+        "axiom_base": "No choice axiom is used; the argument is a finite-dimensional Taylor estimate.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, January 2019 updated author text, complete manuscript",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §§9.2 and 9.5, printed pp. 37–39 and 50–53: orthogonal center-to-face fluxes and smooth-solution face-flux consistency estimates."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014, complete preprint",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "Section 2 introductory TPFA construction, PDF p. 8, equations (2.1)–(2.4), and Remark 1.3, PDF p. 6: flux consistency context. The second-order state-block estimate is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-orthogonal-fv-compressible-viscous-entropy-dissipation",
+        "kind": "theorem",
+        "title": "Entropy dissipation of the orthogonal finite-volume viscous scheme",
+        "statement": "For the defined one-dimensional uniform finite-volume scheme, the weighted total entropy derivative is exactly the negative sum of face entropy-gradient quadratic forms and the total conservative state is conserved.",
+        "deps": [
+          "def-orthogonal-fv-compressible-viscous-scheme",
+          "lem-compressible-viscous-flux-entropy-variable-factorization"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Pair each cell balance with its entropy variables and cancel the two signed contributions at each interior face.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, January 2019 updated author text, complete manuscript",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, printed pp. 37–39: conservative cell-face flux balances and orthogonal diffusion flux conventions."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014, complete preprint",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§§1.1–1.2 and 2.1–2.2, PDF pp. 3–10: finite-volume face balance, shared flux cancellation, and diffusion energy identities. The present matrix entropy identity is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-positive-tube-forward-euler-for-compressible-sbp",
+        "kind": "algorithm",
+        "title": "Finite-budget positive-tube forward Euler loop",
+        "statement": "Fix the periodic SBP data and semidiscrete vector field $L_h$ of [[def-periodic-sbp-compressible-viscous-scheme]]. Let $\\mathcal C\\subset\\mathcal G$ be a specified compact set, let the initial nodal vector $U^0=(U_i^0)_{i\\in\\mathcal I}$ satisfy $U_i^0\\in\\mathcal C$ for every node, let $\\Delta t>0$, and let $N\\in\\mathbb N\\cup\\{0\\}$ be a finite step budget. The algorithm returns a nodal vector, a status, and an accepted-step count.\n\n1. For $n=0,\\ldots,N-1$, compute the candidate\n   $$U^{n+1,*}=U^n+\\Delta t\\,L_h(U^n).$$\n\n2. If $U_i^{n+1,*}\\in\\mathcal C$ for every node $i$, accept it by setting $U^{n+1}=U^{n+1,*}$ and continue.\n\n3. If any candidate node lies outside $\\mathcal C$, return $(U^n,\\texttt{left\\_positive\\_tube},n)$ immediately. Here $U^n$ is the last accepted vector and $n$ is the number of accepted steps; the rejected candidate is the one-based stage $n+1$.\n\n4. If all $N$ candidates are accepted, return $(U^N,\\texttt{completed},N)$. For $N=0$, return $(U^0,\\texttt{completed},0)$.\n\nThe membership test is applied nodewise to the compact positive-state tube. A returned `left_positive_tube` status records a failed candidate and makes no claim that the prescribed step budget was completed.",
+        "deps": [
+          "def-periodic-sbp-compressible-viscous-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Define inputs, state check, accept and early-return branches, budget completion, and outputs.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, January 2019 updated author text, complete manuscript",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 1, Example 1.1, printed pp. 4–5 (PDF pp. 5–6): explicit Euler time stepping in a finite-volume balance."
+            },
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 3.2–5.2: semidiscrete entropy-variable compressible flow systems and time-evolved examples; the guarded forward-Euler loop is defined locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-positive-tube-forward-euler-loop-terminates",
+        "kind": "lemma",
+        "title": "Termination of the finite-budget guarded forward-Euler loop",
+        "statement": "For every valid input with finite nonnegative step budget N, the guarded forward-Euler algorithm returns after at most N candidate evaluations and its returned status and accepted-step count obey the branch instructions.",
+        "deps": [
+          "alg-positive-tube-forward-euler-for-compressible-sbp"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "strategy": "Induct on the number of remaining budgeted stages and inspect the accept and early-return branches.",
+        "axiom_base": "No choice axiom is used; the loop has a finite integer budget.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, January 2019 updated author text, complete manuscript",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 1, Example 1.1, PDF pp. 4–5: a finite explicit-Euler stage and finite-volume balance. The bounded-loop termination is proved locally."
+            },
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Chapter 18, Handbook of Numerical Methods for Hyperbolic Problems: Basic and Fundamental Issues, 2016, complete chapter",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Sections 2–7: distinction between semidiscrete and fully discrete entropy assertions; the loop termination is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-fixed-mesh-forward-euler-error-for-compressible-sbp",
+        "kind": "theorem",
+        "title": "Conditional fixed-grid forward-Euler error bound",
+        "statement": "On a fixed SBP grid, if the exact semidiscrete trajectory remains inside a compact positive-state tube with positive margin, the guarded forward-Euler loop completes for sufficiently small steps and has first-order global error with a grid-dependent constant.",
+        "deps": [
+          "alg-positive-tube-forward-euler-for-compressible-sbp",
+          "def-periodic-sbp-compressible-viscous-scheme",
+          "lem-ideal-gas-entropy-conservative-flux-properties",
+          "lem-compressible-viscous-flux-entropy-variable-factorization",
+          "lem-positive-tube-forward-euler-loop-terminates"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "strategy": "Prove local Lipschitz and boundedness, estimate the one-step defect, apply the discrete Gronwall recurrence, and use the tube margin for acceptance.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, January 2019 updated author text, complete manuscript",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 1, Example 1.1, printed pp. 4–5 (PDF pp. 5–6): explicit Euler context. The conditional fixed-grid estimate is proved locally."
+            },
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Chapter 18, Handbook of Numerical Methods for Hyperbolic Problems: Basic and Fundamental Issues, 2016, complete chapter",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Sections 4–5, printed pp. 477–487: distinction between semidiscrete stability and additional fully discrete time-step arguments."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2673,
+    "id": "compressible-viscous-flow-and-entropy-stable-fluxes-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Compressible viscous flow and entropy-stable viscous fluxes — Examples",
+    "companion": "compressible-viscous-flow-and-entropy-stable-fluxes",
+    "requires": [
+      "compressible-viscous-flow-and-entropy-stable-fluxes"
+    ],
+    "items": [
+      {
+        "id": "ex-compressible-entropy-variable-blowup-near-vacuum",
+        "kind": "example",
+        "title": "Entropy variables leave compact positive-state tubes near vacuum",
+        "statement": "A positive-density sequence with density and pressure tending to zero has an unbounded density entropy variable and converges to the excluded vacuum boundary.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model",
+          "lem-compressible-ideal-gas-entropy-pair-and-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Evaluate the explicit entropy variables on a positive sequence and identify its limiting boundary state.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "F. Ismail and P. L. Roe, Affordable, entropy-consistent Euler flux functions II: Entropy production at shocks, Journal of Computational Physics 228 (2009), 5410–5436, complete paper",
+              "url": "https://www.math.umd.edu/~tadmor/references/files/Ismail%20and%20Roe%20affordable%20fluxes%20JCP2009.pdf",
+              "locator": "PDF pp. 8–9, printed pp. 5417–5418, equation (40): ideal-gas entropy variables."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-periodic-compressible-viscous-manufactured-state",
+        "kind": "example",
+        "title": "A periodic manufactured compressible viscous state",
+        "statement": "A smooth positive stationary periodic ideal-gas state is an exact solution of an explicitly forced one-dimensional Navier–Stokes–Fourier balance.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model",
+          "lem-compressible-viscous-smooth-entropy-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Substitute the explicit density, velocity, temperature, energy, and forcing into each conservative balance.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 2.2–2.3, PDF pp. 3–4. The explicit periodic forcing is computed locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-compressible-couette-thermal-wall-entropy-balance",
+        "kind": "example",
+        "title": "Couette flow with the thermal wall entropy balance",
+        "statement": "The constant-pressure heated Couette profile is a smooth positive steady ideal-gas solution and its outward thermal entropy flux equals the integrated viscous and thermal production.",
+        "deps": [
+          "def-compressible-navier-stokes-fourier-model",
+          "lem-compressible-viscous-smooth-entropy-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Verify the steady mass, momentum, and energy balances and integrate the exact entropy identity.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 2.2–2.3, PDF pp. 3–4. This explicit Couette field is verified locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-sbp-inviscid-versus-viscous-entropy-budget",
+        "kind": "example",
+        "title": "An exact three-node inviscid-versus-viscous SBP entropy budget",
+        "statement": "A three-node periodic skew SBP grid has zero inviscid entropy rate for the explicit entropy-conservative flux and a strictly negative viscous entropy rate for a stated positive-state data vector.",
+        "deps": [
+          "def-periodic-sbp-compressible-viscous-scheme",
+          "lem-ideal-gas-entropy-conservative-flux-properties",
+          "lem-compressible-viscous-flux-entropy-variable-factorization"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Verify the three-node SBP matrices, compute entropy-variable gradients, and evaluate the finite dissipation sum.",
+        "axiom_base": "No choice axiom is used; all state spaces and grid sums are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Chapter 18, Handbook of Numerical Methods for Hyperbolic Problems: Basic and Fundamental Issues, 2016, complete chapter",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "Printed pp. 482–490, Section 4.6 and Section 6: entropy-conservative flux identity and high-order flux differencing. The three-node arithmetic is computed locally."
+            },
+            {
+              "title": "Pablo Fernandez, Ngoc-Cuong Nguyen, and Jaime Peraire, Entropy-stable hybridized discontinuous Galerkin methods for the compressible Euler and Navier-Stokes equations, complete author preprint",
+              "url": "https://arxiv.org/pdf/1808.05066",
+              "locator": "Sections 2.2–2.3 and 4.4–4.5: compressible viscous entropy production; the finite nodal budget is recomputed locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

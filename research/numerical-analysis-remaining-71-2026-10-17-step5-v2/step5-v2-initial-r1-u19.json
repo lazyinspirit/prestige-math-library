@@ -1,0 +1,250 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "19",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-finite-planar-quadtree-fmm-pair-lists",
+      "model": "gpt-6-luna",
+      "context_sha256": "9654fc2542fedd1231022b3387b86c78b9099afbf1e90483b299872b112ca6d8",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The admitted N=0 input has an empty root, outside the stipulated domain of nonempty cell pairs, so the unconditional root call is undefined. Explicitly defining both lists as empty without recursive calls repairs that missing boundary case and leaves the N>=1 recursion unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-planar-laplace-fmm-fixed-order",
+      "model": "gpt-6-luna",
+      "context_sha256": "907ad6a7bcfbdaf9ff9a9580df04b3abac506e81c3bde10764b1ab633c35d000",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The last sentence identifies the finite-order derivative with the exact declared potential derivative, contradicting the prescribed truncation. For p=1, unit sources at c±1/4 and target d=c+2 give M0=2, M1=0 and returned derivative 1, whereas the exact sum is 4/9+4/7=64/63. The procedure now names approximate outputs and describes differentiation of its stored polynomial plus exact near terms.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-finite-planar-quadtree-fmm-pair-lists",
+      "disposition": "repaired",
+      "post_sha256": "02b344744e4be16da273283f83e46f3c1212597f68e161090c76b4a2a23acebf",
+      "review_context_sha256": "952376a5a40c721b6e717d825546dd511ccc3acae730f9db9ba25c5aae20d74d",
+      "reason": "Defined empty lists without recursive calls for N=0. Checked half-open membership, the split rules and decreasing remaining-height measure for N>=1, far separation excluding shared labels, and finite fixed logarithm choices. No arbitrary-index choice is used. This is an adjudicator repair and self-check, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-planar-laplace-fmm-fixed-order",
+      "disposition": "repaired",
+      "post_sha256": "2b6f73fb13a2b9a792d978562d2469e09b354e344f3e00835827fe07acdd6169",
+      "review_context_sha256": "2c7d47c1368fb782e89b09ba1a2b9a9d82d6d928f12e3247caef65214492def8",
+      "reason": "Corrected only the output interpretation and named the approximate outputs. Binomial expansion gives the M2M and L2L coefficients; the log(δ+x−y) series gives the displayed M2L coefficients with source and target indices bounded by p. Differentiating the stored degree-p polynomial gives precisely the returned far derivative; additive branch constants affect only local constant coefficients. Collision, empty-input and exact-near branches remain valid. This is repair self-check, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-planar-laplace-fmm-fixed-order",
+    "lem-planar-fmm-pair-lists-partition-off-diagonal-pairs",
+    "lem-planar-fmm-multipole-local-translation-identities",
+    "thm-planar-fmm-operation-count-under-linear-list-assumptions",
+    "thm-planar-fmm-global-potential-force-error",
+    "ex-fmm-clustered-points-require-depth-sensitive-work",
+    "ex-fmm-two-separated-charge-clusters",
+    "ex-fmm-near-far-potential-and-force-error"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-finite-planar-quadtree-fmm-pair-lists",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "status": "fixed",
+      "reason": "The admitted N=0 input has an empty root, outside the stipulated domain of nonempty cell pairs, so the unconditional root call is undefined. Explicitly defining both lists as empty without recursive calls repairs that missing boundary case and leaves the N>=1 recursion unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "section": "Definition"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-planar-laplace-fmm-fixed-order",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "status": "fixed",
+      "reason": "The last sentence identifies the finite-order derivative with the exact declared potential derivative, contradicting the prescribed truncation. For p=1, unit sources at c±1/4 and target d=c+2 give M0=2, M1=0 and returned derivative 1, whereas the exact sum is 4/9+4/7=64/63. The procedure now names approximate outputs and describes differentiation of its stored polynomial plus exact near terms.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "section": "Definition"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-planar-fmm-global-potential-force-error",
+      "status": "open",
+      "route": "frontier-owner",
+      "locus": "proof-step",
+      "affected_use": "items/thm-planar-fmm-global-potential-force-error.md, proof step 2.2: “Summing the omitted degrees bounds the interaction derivative error”.",
+      "invalidated_claim": "Bounding the derivative of a complete homogeneous degree-m term does not bound a subset of its differentiated monomials, which is what the rectangular n<=p,k<=p truncation omits.",
+      "minimality": "Replace the degree-m bound in proof step 2.2 by the sum of absolute differentiated monomials: sum_{k=1}^m (k/m) binom(m,k) |x|^(k-1)|y_j|^(m-k)/R^m = (|x|+|y_j|)^(m-1)/R^m. Each omitted degree-m subset is bounded by this nonnegative complete sum. The stated tail estimate follows with no Statement change, new supplier or downstream propagation.",
+      "reason": "Confirmed the Step-4 concern by checking the rectangular truncation against the complete proof. The theorem remains mathematically true, and the displayed absolute-monomial calculation supplies its missing inference. Its unassigned item is left unchanged for the ordinary frontier owner. This pre-existing gap is unrelated to either assigned interface correction.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "source_reading": "Direct algebra and finite-recursion reasoning; no external source URLs were consulted or claimed. The authoritative local task, current assigned items, actual suppliers, contracts, owning page and all direct item consumers were examined.",
+    "interface_changes": [
+      {
+        "id": "def-finite-planar-quadtree-fmm-pair-lists",
+        "before": "Start at the root pair.",
+        "after": "For N>=1, start at the root pair; for N=0, make no recursive calls and set both lists to empty.",
+        "impact": "Only the previously undefined empty branch is added; all nonempty operations, branches, logarithm conventions and count hypotheses are unchanged."
+      },
+      {
+        "id": "alg-planar-laplace-fmm-fixed-order",
+        "before": "The derivative output is the complex derivative of the declared logarithmic potential; its value is independent of logarithm branches.",
+        "after": "Outputs are named approximate potential and derivative; derivative output differentiates the stored truncated local polynomial plus exact near derivatives.",
+        "impact": "Every operational coefficient, pass, admissibility condition and output sum is unchanged. The false equality to the exact potential derivative is removed in favor of the actual prescribed approximation, as already required by the error theorem and examples."
+      }
+    ],
+    "consumer_examinations": [
+      {
+        "id": "alg-planar-laplace-fmm-fixed-order",
+        "supplier": "def-finite-planar-quadtree-fmm-pair-lists",
+        "affected_use": "Definition first paragraph imports the quadtree and list construction and already returns empty outputs for N=0.",
+        "disposition": "Compatible with empty lists; separately repaired its independently rejected final sentence."
+      },
+      {
+        "id": "lem-planar-fmm-pair-lists-partition-off-diagonal-pairs",
+        "supplier": "def-finite-planar-quadtree-fmm-pair-lists",
+        "affected_use": "Statement explicitly assumes a nonempty root; F1 and proof steps 1.1–4.1 use the nonempty recursion and disjoint child partitions.",
+        "disposition": "Unchanged nonempty rule proves the same partition; empty extension has empty off-diagonal set and requires no change."
+      },
+      {
+        "id": "lem-planar-fmm-multipole-local-translation-identities",
+        "supplier": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order"
+        ],
+        "affected_use": "F1 uses R>a_C+a_D and fixed logarithms; F2 and proof steps 1.2,1.3,3.1,4.1 use the unchanged moment, translation, polynomial-evaluation and differentiation formulas.",
+        "disposition": "Unchanged; claims exactness of finite identities and polynomial evaluation, not equality of a truncated far derivative with the exact kernel sum."
+      },
+      {
+        "id": "thm-planar-fmm-operation-count-under-linear-list-assumptions",
+        "supplier": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order"
+        ],
+        "affected_use": "Statement assumes N>=1 and explicit T,V,K,J bounds; F2 and proof steps 1.1–1.3 count the prescribed finite passes and exact near evaluations.",
+        "disposition": "Unchanged; the nonempty rule and all operation counts remain identical."
+      },
+      {
+        "id": "thm-planar-fmm-global-potential-force-error",
+        "supplier": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order"
+        ],
+        "affected_use": "Statement distinguishes u_i,g_i from approximate outputs; F1–F2 and proof steps 1.1,3.1 use separation, rectangular source/local truncation and exact near evaluation.",
+        "disposition": "Both interface corrections are compatible; for N=0 there are no target inequalities. Separate pre-existing proof step 2.2 gap is routed to its frontier owner in ledger_updates; no claim of a completed repair of this unassigned item."
+      },
+      {
+        "id": "ex-fmm-clustered-points-require-depth-sensitive-work",
+        "supplier": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order"
+        ],
+        "affected_use": "F1 uses dyadic subdivision and the explicit node bound; F2 and Verification step 2.1 use visitation of nonempty edges for the two-point depth-M family.",
+        "disposition": "Unchanged; N=2 and the per-node passes are unaffected."
+      },
+      {
+        "id": "ex-fmm-two-separated-charge-clusters",
+        "supplier": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order"
+        ],
+        "affected_use": "F1 and Verification step 1.1 use the nonempty split rule; F2 and steps 1.2–2.1 compute p=1 far derivative 1 and exact derivative 64/63.",
+        "disposition": "Unchanged; it directly confirms the corrected approximate-output interpretation."
+      },
+      {
+        "id": "ex-fmm-near-far-potential-and-force-error",
+        "supplier": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order"
+        ],
+        "affected_use": "F1 and Verification step 1.1 use the same nonempty pair rule; F2 and steps 1.2–2.1 combine far approximation (2 log 2,1) with exact near values (3 log(0.1),30).",
+        "disposition": "Unchanged; its exact/approximate comparison already uses the repaired interpretation."
+      }
+    ],
+    "page_examination": {
+      "path": "library/numerical-linear-algebra-and-approximation/fast-multipole-expansions-and-error.md",
+      "affected_use": "First paragraph imports the cell and branch conventions, finite pair partition, finite coefficient passes, exact near additions and potential/derivative tail estimates.",
+      "disposition": "Unchanged: the empty extension is vacuous and the page already distinguishes the finite procedure from its error bounds. “Force” names the exact branch-independent derivative being approximated."
+    },
+    "outside_consumers": "No direct item consumers outside the frozen frontier and no published consumers found by the current dependency/reference uses of either changed interface. No published-ledger update is proposed.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-finite-planar-quadtree-fmm-pair-lists.md items/alg-planar-laplace-fmm-fixed-order.md --json",
+        "exit_code": 0,
+        "result": "2 files, 0 proof sections, 0 failures; both not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-finite-planar-quadtree-fmm-pair-lists.md items/alg-planar-laplace-fmm-fixed-order.md --json",
+        "exit_code": 0,
+        "result": "2 files checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-19.proof-contracts.json --strict --items def-finite-planar-quadtree-fmm-pair-lists,alg-planar-laplace-fmm-fixed-order --json",
+        "exit_code": 0,
+        "result": "Both scoped contracts passed without errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-finite-planar-quadtree-fmm-pair-lists.md items/alg-planar-laplace-fmm-fixed-order.md",
+        "exit_code": 0,
+        "result": "Run once after final item edits: 2 items, 0 steps, 0 defects."
+      },
+      {
+        "command": "Expanded owning proof-contract check with --strict --items for both assigned items and their seven other direct consumers",
+        "exit_code": 1,
+        "result": "Initial metadata check found two boundary-evidence-unanchored diagnostics after the collision-evidence clarification; explicitly labelled both evidence rows Definition."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-19.proof-contracts.json --strict --items def-finite-planar-quadtree-fmm-pair-lists,alg-planar-laplace-fmm-fixed-order,lem-planar-fmm-pair-lists-partition-off-diagonal-pairs,lem-planar-fmm-multipole-local-translation-identities,thm-planar-fmm-operation-count-under-linear-list-assumptions,thm-planar-fmm-global-potential-force-error,ex-fmm-clustered-points-require-depth-sensitive-work,ex-fmm-two-separated-charge-clusters,ex-fmm-near-far-potential-and-force-error --json",
+        "exit_code": 0,
+        "result": "Final check: all nine selected contracts passed; no errors or warnings."
+      },
+      {
+        "command": "Read-only exact manifest-section and frozen tuple/input/current itemHashGuard comparisons",
+        "exit_code": 0,
+        "result": "Both manifest mirrors equal current Definition sections. The original pack digest matches input_sha256, every rejected tuple occurs exactly once, and both saved review post hashes equal current guards. Review contexts were not refreshed after their immediate captures."
+      }
+    ],
+    "metadata_repairs": {
+      "manifest": "Updated only the two assigned item Definition mirrors in research/numerical-analysis-remaining-71-2026-10-17-batch-19.pages.json.",
+      "contracts": "Updated 13 exact Definition citation mirrors for the changed suppliers in the owning batch contract; clarified only the assigned items’ empty and collision boundary evidence. Consumer source files, statements, derivations and prior review records remain unchanged.",
+      "ownership": "These are unit 19’s explicitly assigned owning batch files. No shared registry or ledger was edited. Shared-lock acquisition attempts were unsuccessful; no other unit’s lock was modified or released."
+    },
+    "unresolved_obligations": "No unresolved mathematical uncertainty or incomplete repair in assigned items. The separate pre-existing theorem proof gap remains with the frontier owner; its exact minimal correction is recorded in ledger_updates. No independent acceptance, judging, certification, or round transition is claimed."
+  },
+  "supporting_evidence": {
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-19.pages.json": "becea1e6890da4a64086b09325f464c69fa1756eeea80efb764b6f0ea4a8bebf",
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-19.proof-contracts.json": "6aa7f9182f233174f53656a1088943e819170eaef18541c735b8f410a5c68a82"
+  }
+}

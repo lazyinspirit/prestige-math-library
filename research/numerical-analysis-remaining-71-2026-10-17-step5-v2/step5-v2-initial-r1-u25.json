@@ -1,0 +1,461 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "25",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "alg-certified-fresnel-erf-hypergeometric-series",
+      "model": "gpt-6-luna",
+      "context_sha256": "6374cc3b4dc41886e9702364e16ddc6aeae047b741b53d1719410f53921d08a3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The exact restriction on c does not exclude zero from rounded c+k (for example c=-1+2^-20 in a format whose least positive subnormal exceeds 2^-20). A split-domain quotient was unhandled. The repaired procedure skips every non-finite arithmetic candidate, while retaining overflow/range and all original domains, tails and caps. Also replaced the indirect arctangent-tail attribution by its actual proved supplier.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-erfcx-evaluation",
+      "model": "gpt-6-luna",
+      "context_sha256": "6da81a1b92d874332d4f86a40ca973bc6072d0a542f410199fc15843bcb75afc",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The numerical tail E_q is correct: the arctangent series has omitted terms bounded by r^(2q+1) times a geometric series divided by 2q+1. The named Machin lemma uses that estimate in proof 4.1 through its L2 but does not state it. This is a nonfatal attribution/direct-dependency omission, repaired by citing the actual proved range-reduced arctangent supplier, without changing numerical instructions or claiming the computed P_q was unsound.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-gamma-loggamma-evaluation",
+      "model": "gpt-6-luna",
+      "context_sha256": "3aa49bc5be183364a81ead9b0385795d7e4a334dcfed3498e40a78f2e2391ae7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The arctangent estimate is correct and the cited Machin proof 4.1 obtains it through its L2. However the defining interface misattributes the explicit tail to the Machin statement. Added the actual range-reduced arctangent lemma as a direct dependency and separate tail citation. This nonfatal citation correction preserves all numerical candidates, slit-plane branch, shift, work caps, and full-rectangle containment promises.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-erfc-subtraction-cancellation",
+      "model": "gpt-6-luna",
+      "context_sha256": "68c0098f378b54a8d97f87bf503bd0fd553e4a895dfb6d2146b5bbddf358e40c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F5 and the last sentence of step 2.1 asserted an absolute erf enclosure for arbitrary real x from a finite evaluator restricted to exact dyadic arguments and allowed to return inconclusive. This does not invalidate the algebraic conditioning or Gaussian-tail argument, so it is nonfatal. Removed that unused availability claim and its algorithm dependency, and made the numerical scaled-product illustration conditional on exact dyadic input and successful factor evaluations. The Statement is byte-for-byte unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-certified-integer-order-bessel-enclosures",
+      "model": "gpt-6-luna",
+      "context_sha256": "9f666ab27837798724fdad9056bc8b8b8452009b476af183a5ce0ef741127348",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The proposed fatal Miller gap is a false alarm: the cited algorithm explicitly calls SeriesJ at orders 0,1,n,N+1, constructs D and u by finite recurrences, and tests D_(N+1), u_s, J_s and J_s+q_M D_s for zero exclusion. F4 and A2 therefore supply sound operands for F5 without knowing exact Bessel values. During review a separate nonfatal defect was confirmed in F8: its explicit arctangent tails were attributed to a statement containing only Machin and trigonometric tails. Added the actual tail dependency/citation and expanded the Miller containment induction in step 1.2. No theorem statement or numerical instruction changed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/3.6#iii",
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-certified-fresnel-erf-hypergeometric-series",
+      "disposition": "repaired",
+      "post_sha256": "d60a1459474ee1a6b8fe0ebe6816046238a2fd7b101e49d722f3ba2988072722",
+      "review_context_sha256": "279d5af16b81d27baa35a352509cf7593734f02b9574ce52678e739461f46d97",
+      "reason": "The exact restriction on c does not exclude zero from rounded c+k (for example c=-1+2^-20 in a format whose least positive subnormal exceeds 2^-20). A split-domain quotient was unhandled. The repaired procedure skips every non-finite arithmetic candidate, while retaining overflow/range and all original domains, tails and caps. Also replaced the indirect arctangent-tail attribution by its actual proved supplier.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-erfcx-evaluation",
+      "disposition": "repaired",
+      "post_sha256": "fd42f343fe39083a4512e8864ef6c677bed5b5e84e1e67f8dd7d81588214b5d8",
+      "review_context_sha256": "0d14e3ae199fb338ad15a54a0281981a0a274a690de1fcf905d29545b3c39933",
+      "reason": "The numerical tail E_q is correct: the arctangent series has omitted terms bounded by r^(2q+1) times a geometric series divided by 2q+1. The named Machin lemma uses that estimate in proof 4.1 through its L2 but does not state it. This is a nonfatal attribution/direct-dependency omission, repaired by citing the actual proved range-reduced arctangent supplier, without changing numerical instructions or claiming the computed P_q was unsound.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-gamma-loggamma-evaluation",
+      "disposition": "repaired",
+      "post_sha256": "c5a8872f1a6570e290e45469b309f5f6983f2f81539d25cbe4eb041c8d652d3d",
+      "review_context_sha256": "241b02e7633cd4ba473c37f24e4357171a6929899f6161914fdd8f1ed3a30cc9",
+      "reason": "The arctangent estimate is correct and the cited Machin proof 4.1 obtains it through its L2. However the defining interface misattributes the explicit tail to the Machin statement. Added the actual range-reduced arctangent lemma as a direct dependency and separate tail citation. This nonfatal citation correction preserves all numerical candidates, slit-plane branch, shift, work caps, and full-rectangle containment promises.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-erfc-subtraction-cancellation",
+      "disposition": "repaired",
+      "post_sha256": "641a75213f23f9f511b4bc3d44c64c9e851ec8f4fcac3d5fe36e00645e9374b5",
+      "review_context_sha256": "f0ee43fadd74f7dc15f051ecf35bd50c2ec6793335b2708326f3e87897eb01b2",
+      "reason": "F5 and the last sentence of step 2.1 asserted an absolute erf enclosure for arbitrary real x from a finite evaluator restricted to exact dyadic arguments and allowed to return inconclusive. This does not invalidate the algebraic conditioning or Gaussian-tail argument, so it is nonfatal. Removed that unused availability claim and its algorithm dependency, and made the numerical scaled-product illustration conditional on exact dyadic input and successful factor evaluations. The Statement is byte-for-byte unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-certified-integer-order-bessel-enclosures",
+      "disposition": "repaired",
+      "post_sha256": "8c0c70550de09682a8be5665b073c6aedfecfd52cbf00676848ec5db22f2df91",
+      "review_context_sha256": "830b611f4f03085d04e079ecbf8ed0bed3f1f7569c5282f21e09144fd5e1514c",
+      "reason": "The proposed fatal Miller gap is a false alarm: the cited algorithm explicitly calls SeriesJ at orders 0,1,n,N+1, constructs D and u by finite recurrences, and tests D_(N+1), u_s, J_s and J_s+q_M D_s for zero exclusion. F4 and A2 therefore supply sound operands for F5 without knowing exact Bessel values. During review a separate nonfatal defect was confirmed in F8: its explicit arctangent tails were attributed to a statement containing only Machin and trigonometric tails. Added the actual tail dependency/citation and expanded the Miller containment induction in step 1.2. No theorem statement or numerical instruction changed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/3.6#iii",
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-certified-fresnel-erf-hypergeometric-enclosures",
+    "ex-hypergeometric-branch-cut-domain",
+    "ex-erfc-subtraction-cancellation",
+    "thm-certified-erfcx-enclosures",
+    "thm-certified-gamma-loggamma-enclosures",
+    "alg-certified-airy-evaluation",
+    "thm-certified-airy-enclosures",
+    "alg-certified-boys-finite-budget-branch-evaluation",
+    "thm-boys-branch-evaluation-enclosures-are-sound"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "alg-certified-fresnel-erf-hypergeometric-series",
+      "severity": "fatal",
+      "reason": "The exact restriction on c does not exclude zero from rounded c+k (for example c=-1+2^-20 in a format whose least positive subnormal exceeds 2^-20). A split-domain quotient was unhandled. The repaired procedure skips every non-finite arithmetic candidate, while retaining overflow/range and all original domains, tails and caps. Also replaced the indirect arctangent-tail attribution by its actual proved supplier.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "alg-certified-erfcx-evaluation",
+      "severity": "nonfatal",
+      "reason": "The numerical tail E_q is correct: the arctangent series has omitted terms bounded by r^(2q+1) times a geometric series divided by 2q+1. The named Machin lemma uses that estimate in proof 4.1 through its L2 but does not state it. This is a nonfatal attribution/direct-dependency omission, repaired by citing the actual proved range-reduced arctangent supplier, without changing numerical instructions or claiming the computed P_q was unsound.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "alg-certified-gamma-loggamma-evaluation",
+      "severity": "nonfatal",
+      "reason": "The arctangent estimate is correct and the cited Machin proof 4.1 obtains it through its L2. However the defining interface misattributes the explicit tail to the Machin statement. Added the actual range-reduced arctangent lemma as a direct dependency and separate tail citation. This nonfatal citation correction preserves all numerical candidates, slit-plane branch, shift, work caps, and full-rectangle containment promises.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "ex-erfc-subtraction-cancellation",
+      "severity": "nonfatal",
+      "reason": "F5 and the last sentence of step 2.1 asserted an absolute erf enclosure for arbitrary real x from a finite evaluator restricted to exact dyadic arguments and allowed to return inconclusive. This does not invalidate the algebraic conditioning or Gaussian-tail argument, so it is nonfatal. Removed that unused availability claim and its algorithm dependency, and made the numerical scaled-product illustration conditional on exact dyadic input and successful factor evaluations. The Statement is byte-for-byte unchanged.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "thm-certified-integer-order-bessel-enclosures",
+      "severity": "nonfatal",
+      "reason": "The proposed fatal Miller gap is a false alarm: the cited algorithm explicitly calls SeriesJ at orders 0,1,n,N+1, constructs D and u by finite recurrences, and tests D_(N+1), u_s, J_s and J_s+q_M D_s for zero exclusion. F4 and A2 therefore supply sound operands for F5 without knowing exact Bessel values. During review a separate nonfatal defect was confirmed in F8: its explicit arctangent tails were attributed to a statement containing only Machin and trigonometric tails. Added the actual tail dependency/citation and expanded the Miller containment induction in step 1.2. No theorem statement or numerical instruction changed.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/3.6#iii",
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-certified-gamma-loggamma-enclosures",
+      "route": "frontier owner, batch 25; outside this dispatch item assignment",
+      "severity": "nonfatal",
+      "affected_use": "F7: Machin lemma gives the Machin identity and the finite arctangent tails used to enclose pi; proof 2.2 invokes F7.",
+      "minimality": "Add lem-range-reduced-exp-log-and-arctan-series-enclosures to F7 and deps; retain the existing Statement and all proof bounds.",
+      "reason": "The explicit estimate is correct and proved in the existing range-reduced arctangent supplier; this is the same direct citation mismatch corrected in the assigned algorithms.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "alg-certified-integer-order-bessel-evaluation",
+      "route": "frontier owner, batch 25; outside this dispatch item assignment",
+      "severity": "nonfatal",
+      "affected_use": "Definition stage-constant paragraph attributes the alternating arctangent tails to lem-trigonometric-identities-machin-and-range-reduction, whose Statement only contains sine/cosine tails.",
+      "minimality": "Cite the actual arctangent-tail lemma in the stage-constant paragraph and deps; no numerical instruction or domain needs changing.",
+      "reason": "The explicit estimate is correct and proved in the existing range-reduced arctangent supplier; this is the same direct citation mismatch corrected in the assigned algorithms.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.24#E3"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-existing-step4-alert",
+      "id": "lem-pe18-outgoing-spherical-mode-expansion",
+      "route": "frontier owner, batch 57, per current batch-57.pages.json",
+      "severity": "nonfatal",
+      "affected_use": "F3 asserts h_ell prime = h_(ell-1) - (ell+1)h_ell/z for every ell, and proof 2.1 uses it for outgoing and incoming radiation limits, including ell=0.",
+      "invalidated_claim": "The supplier states the derivative recurrence only for ell>=1; h_(-1) is not defined by its interface.",
+      "minimality": "Keep the Statement and radiation conclusions. Restrict the F3 recurrence to ell>=1 and compute the ell=0 limits directly from h_0=-i exp(iz)/z and its conjugate.",
+      "reason": "Verified the exact F3 and proof 2.1 uses against the spherical supplier Statement. The consumer currently has status draft and is in the frozen frontier, so this is an owner route, not a published maintenance repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-existing-step4-concern",
+      "id": "stable-special-function-recurrences-and-certified-evaluation",
+      "route": "batch 25 page owner",
+      "severity": "nonfatal",
+      "reason": "Current A-page requires omits average-orders-divisor-sums-and-representation-counts although the current batch manifest requires it and def-loggamma-right-halfplane-branch uses its Euler constant. Reconcile owning page metadata; no assigned item mathematics changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-existing-step4-concern",
+      "id": "stable-special-function-recurrences-and-certified-evaluation-examples",
+      "route": "batch 25 page owner",
+      "severity": "nonfatal",
+      "reason": "Examples Objective prints $1-operatorname{erf}(x)$ with a missing TeX backslash. Owning page prose correction only; not an assigned frontier item repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "record-no-published-change",
+      "reason": "No changed assigned Statement/Definition has a direct published item consumer in the dependency/reference search. The Step4 spherical alert target is currently draft and in the frozen frontier; it is routed to its frontier owner. No published carrier was edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": [
+    {
+      "id": "alg-certified-fresnel-erf-hypergeometric-series",
+      "claim": "Finite successful series candidates enclose the same C, S, erf or disk-branch Gauss value; no universal success.",
+      "dependencies": [
+        "def-outward-rounded-interval-and-ball-operations",
+        "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+        "lem-trigonometric-identities-machin-and-range-reduction",
+        "lem-fresnel-series-geometric-tail",
+        "lem-erf-series-geometric-tail",
+        "lem-gauss-hypergeometric-series-geometric-tail"
+      ],
+      "source_evidence": "Read complete local series-tail proofs, interval-operation definition, and both published Machin/arctangent proofs. For q=1 the arctangent geometric-majorant proof also applies with N=0; for q>=2 substitute N=q-1.",
+      "definition_diff": "--- assigned-before Definition\n+++ reviewed-after Definition\n@@ -28,6 +28,9 @@\n intermediate operation or output endpoint overflows its selected format,\n return range. If an elementary-range subcall returns a non-finite status,\n skip the current candidate; if no later stage succeeds, return inconclusive.\n+The same candidate-skip rule applies to every other non-finite arithmetic\n+status, including split-domain or entire when a rounded divisor contains\n+zero; never use such a status as a finite interval.\n Charge each exact arithmetic operation, coefficient term, rounding, and\n elementary-range call against $W$; before an operation that would exceed\n $W$, return inconclusive.\n@@ -36,11 +39,12 @@\n only when $T\\in\\{C,S,\\operatorname{erf}\\}$. For $r\\in\\{1/5,1/239\\}$, form\n $A_q(r)=\\sum_{j=0}^{q-1}(-1)^jr^{2j+1}/(2j+1)$ and\n $E_q(r)=r^{2q+1}/((2q+1)(1-r^2))$ by exact rational arithmetic. The\n-arctangent tail in [[lem-trigonometric-identities-machin-and-range-reduction]]\n+arctangent series and geometric-tail argument in\n+[[lem-range-reduced-exp-log-and-arctan-series-enclosures]]\n gives $\\arctan r\\in[A_q(r)-E_q(r),A_q(r)+E_q(r)]$. Combine these intervals\n as $16\\arctan(1/5)-4\\arctan(1/239)$, then round the resulting endpoints\n outward to the selected format at precision $p$. The Machin identity in\n-that same lemma proves $\\pi\\in P_q$. If this conversion is non-finite,\n+[[lem-trigonometric-identities-machin-and-range-reduction]] proves $\\pi\\in P_q$. If this conversion is non-finite,\n skip this stage for the selected Fresnel or erf target. For the Gauss-series\n target, omit $P_q$ and all square-root calls.\n \n@@ -77,8 +81,9 @@\n   stage.\n - For the Gauss series, compute its terms by $h_0=1$ and\n   $$h_{k+1}=h_k\\,z\\,\\frac{(a+k)(b+k)}{(c+k)(k+1)}$$\n-  using exact interval operations. No denominator $c+k$ vanishes by the\n-  domain check. If $a$ or $b$ is a nonpositive integer, let $L$ be one\n+  using outward interval operations. The exact $c+k$ is nonzero by the\n+  domain check, but its rounded enclosure may contain zero; in that case\n+  skip this candidate before division. If $a$ or $b$ is a nonpositive integer, let $L$ be one\n   more than the smaller absolute value of those nonpositive integer\n   parameters. If $L\\le q$, sum exactly through $h_{L-1}$ and use zero\n   tail. Otherwise put\n"
+    },
+    {
+      "supplier": "alg-certified-fresnel-erf-hypergeometric-series",
+      "consumer": "thm-certified-fresnel-erf-hypergeometric-enclosures",
+      "path": "items/thm-certified-fresnel-erf-hypergeometric-enclosures.md",
+      "affected_use": "F1 and proof 2.1/4.1 use containing finite partial sums and finite candidate loops; skipping failed arithmetic preserves the soundness and termination statements.",
+      "disposition": "sound unchanged"
+    },
+    {
+      "supplier": "alg-certified-fresnel-erf-hypergeometric-series",
+      "consumer": "ex-hypergeometric-branch-cut-domain",
+      "path": "items/ex-hypergeometric-branch-cut-domain.md",
+      "affected_use": "F5 and proof 3.1 use only the unchanged exact Gauss disk-domain rejection at z=-2.",
+      "disposition": "sound unchanged"
+    },
+    {
+      "supplier": "alg-certified-fresnel-erf-hypergeometric-series",
+      "consumer": "ex-erfc-subtraction-cancellation",
+      "path": "items/ex-erfc-subtraction-cancellation.md",
+      "affected_use": "F5 and proof 2.1 overstate arbitrary-real erf availability; independent assigned finding will be repaired at its ordered review.",
+      "disposition": "assigned repair pending"
+    },
+    {
+      "id": "alg-certified-erfcx-evaluation",
+      "claim": "x>0; finite CF and signed asymptotic candidates contain erfcx; positive sqrt-pi and guarded non-finite statuses precede success.",
+      "source_evidence": "Read full local moment, CF, signed remainder and soundness proofs. Checked both signs of (-1)^N, decreasing-map endpoint order, and common-value intersection. Arctangent geometric proof covers q=1 directly and N=q-1 thereafter.",
+      "definition_diff": "--- assigned-before Definition\n+++ reviewed-after Definition\n@@ -30,8 +30,10 @@\n $E_q(r)=r^{2q+1}/((2q+1)(1-r^2))$ exactly; the arctangent-tail lemma gives\n $\\arctan r\\in[A_q(r)-E_q(r),A_q(r)+E_q(r)]$. Combine these intervals by\n $\\pi=16\\arctan(1/5)-4\\arctan(1/239)$ and round outward to the selected\n-format at precision $p$. The Machin identity and tails are supplied by\n-[[lem-trigonometric-identities-machin-and-range-reduction]]. If the interval\n+format at precision $p$. The Machin identity is supplied by\n+[[lem-trigonometric-identities-machin-and-range-reduction]]; the arctangent\n+series and its geometric-tail argument are in\n+[[lem-range-reduced-exp-log-and-arctan-series-enclosures]]. If the interval\n conversion is non-finite, skip the stage. Call\n [[alg-certified-elementary-range-evaluation]] on the real one-node DAG\n $\\sqrt{P_q}$, using exponent range $(e_{\\min},e_{\\max})$, precision $p$,\n"
+    },
+    {
+      "supplier": "alg-certified-erfcx-evaluation",
+      "consumer": "thm-certified-erfcx-enclosures",
+      "path": "items/thm-certified-erfcx-enclosures.md",
+      "affected_use": "A1, F4 and proof 1.1 use the same finite sqrt-pi, continued-fraction and signed-asymptotic candidates. The repaired source attribution leaves every enclosure and finite loop unchanged.",
+      "disposition": "sound unchanged"
+    },
+    {
+      "id": "alg-certified-gamma-loggamma-evaluation",
+      "claim": "Gamma or the continued ell branch on a slit-plane rectangle, via product and/or right-half-plane Stirling certificates.",
+      "source_evidence": "Read complete local product tail, Euler-constant, shift-independence, Gamma-identity, sectorial remainder and soundness arguments. Checked N>2R_W, denominator positivity, 1/(4a_W), shift-log cut avoidance and exponential image containment.",
+      "definition_diff": "--- assigned-before Definition\n+++ reviewed-after Definition\n@@ -49,9 +49,10 @@\n $A_q(r)=\\sum_{k=0}^{q-1}(-1)^kr^{2k+1}/(2k+1)$ and\n $E_q(r)=r^{2q+1}/((2q+1)(1-r^2))$, combine\n $\\arctan r\\in[A_q(r)-E_q(r),A_q(r)+E_q(r)]$ by the Machin identity, and\n-round outward to the selected format at precision $p$. These tails and the\n-identity are in\n-[[lem-trigonometric-identities-machin-and-range-reduction]]. If the conversion\n+round outward to the selected format at precision $p$. The arctangent\n+series and its geometric-tail argument are in\n+[[lem-range-reduced-exp-log-and-arctan-series-enclosures]], and the Machin\n+identity is in [[lem-trigonometric-identities-machin-and-range-reduction]]. If the conversion\n is non-finite or $\\inf P_q\\le0$, the Stirling candidate is unavailable for\n this stage; still attempt the product candidate. Let\n $a_W=\\inf\\Re W_Z>0$ and\n"
+    },
+    {
+      "supplier": "alg-certified-gamma-loggamma-evaluation",
+      "consumer": "thm-certified-gamma-loggamma-enclosures",
+      "path": "items/thm-certified-gamma-loggamma-enclosures.md",
+      "affected_use": "F7 and proof 2.2 attribute finite arctangent tails to the Machin statement, although that statement only has the identity and sine/cosine tails. Add the actual arctangent-tail lemma to F7 and deps; proof 2.2 then cites the correct explicit premise.",
+      "disposition": "owner citation repair required"
+    },
+    {
+      "supplier": "alg-certified-gamma-loggamma-evaluation",
+      "consumer": "alg-certified-airy-evaluation",
+      "path": "items/alg-certified-airy-evaluation.md",
+      "affected_use": "Definition stage Gamma calls on outward intervals around 1/3 and 2/3 use only successful containing Gamma rectangles and debit actual child work. Numerical procedure unchanged, so these calls remain valid.",
+      "disposition": "sound unchanged"
+    },
+    {
+      "supplier": "alg-certified-gamma-loggamma-evaluation",
+      "consumer": "thm-certified-airy-enclosures",
+      "path": "items/thm-certified-airy-enclosures.md",
+      "affected_use": "A1 and proof 1.1 use successful Gamma range containment for initial coefficients. The corrected constant citation changes no input, output, branch or success condition.",
+      "disposition": "sound unchanged"
+    },
+    {
+      "supplier": "alg-certified-gamma-loggamma-evaluation",
+      "consumer": "alg-certified-boys-finite-budget-branch-evaluation",
+      "path": "items/alg-certified-boys-finite-budget-branch-evaluation.md",
+      "affected_use": "Definition large-t branch calls Gamma on the exact positive half-integer singleton, projects a successful rectangle onto its real coordinate and discards unsuccessful child results; all these interfaces are unchanged.",
+      "disposition": "sound unchanged"
+    },
+    {
+      "supplier": "alg-certified-gamma-loggamma-evaluation",
+      "consumer": "thm-boys-branch-evaluation-enclosures-are-sound",
+      "path": "items/thm-boys-branch-evaluation-enclosures-are-sound.md",
+      "affected_use": "F6 and proof 1.2/4.1 use successful positive half-integer Gamma containment and finite child work only. Those numerical and finite-budget interfaces are unchanged.",
+      "disposition": "sound unchanged"
+    },
+    {
+      "id": "ex-erfc-subtraction-cancellation",
+      "claim": "All real x>0: subtraction error delta1-delta2, positive Gaussian tail, unbounded worst-case relative conditioning; conditional certified-product alternative.",
+      "source_evidence": "Local erf primitive proof and Gaussian normalization give the positive tail integral. Integrability gives its zero limit; opposite signed errors attain 2 eta. Exact dyadic finite numerical calls are now distinguished from the all-real identity.",
+      "statement_unchanged": true
+    },
+    {
+      "id": "thm-certified-integer-order-bessel-enclosures",
+      "rejected_miller_finding": "false_positive",
+      "confirmed_nonfatal_finding": "F8 attributes the arctangent-tail estimate to the wrong Statement, as in the assigned erfcx and Gamma procedures.",
+      "claim": "Every successful series, midpoint or Miller candidate encloses the exact target; finite caps terminate, with no Miller convergence assertion.",
+      "source_evidence": "Read complete local algorithm, SeriesJ tail, complementary D definition, positive Casoratian and finite-contamination proof, both midpoint proofs and Bessel-series definition. Consulted DLMF 3.6(iii) in full for ordinary normalization; it does not certify the local finite interval error formula, which was checked algebraically from the local recurrence pair. DLMF 4.24.3 confirms the arctangent series; the explicit geometric majorant is proved locally.",
+      "statement_unchanged": true
+    },
+    {
+      "validation": {
+        "precheck": "exit 0: 5 files; 2 proof bodies passed; 3 algorithms not applicable",
+        "rendercheck": "exit 0: 5 files, zero errors or warnings",
+        "proof_layout": "exit 0: 5 items, 7 steps, 0 defects"
+      },
+      "unresolved_assigned_mathematics": false
+    },
+    {
+      "page_interface": {
+        "path": "library/numerical-linear-algebra-and-approximation/stable-special-function-recurrences-and-certified-evaluation.md",
+        "affected_use": "The page inventory lists all three repaired algorithms. Its Objective promises finite guarded enclosures, the Gauss disk and slit-plane Gamma branches, and finite Miller certificates. None of those promises changes. Two pre-existing page metadata/presentation concerns were verified and routed separately."
+      }
+    },
+    {
+      "status": "assigned_repair_complete",
+      "repair_complete": true,
+      "independent_review_of_repairs": false,
+      "checks": {
+        "precheck": {
+          "exit_code": 0,
+          "files": 5,
+          "proofs_passed": 2,
+          "algorithms_not_applicable": 3
+        },
+        "rendercheck": {
+          "exit_code": 0,
+          "checked": 5,
+          "errors": [],
+          "warnings": []
+        },
+        "proof_layout": {
+          "exit_code": 0,
+          "items": 5,
+          "steps": 7,
+          "defects": 0
+        },
+        "proof_contract": {
+          "exit_code": 0,
+          "strict": true,
+          "items": 5,
+          "errors": [],
+          "warnings": []
+        },
+        "finite_smoke": {
+          "exit_code": 0,
+          "fixtures_passed": [
+            "special-zero-branches",
+            "erfcx-cf-zero",
+            "gamma-targets-one",
+            "erf-subtraction"
+          ],
+          "limitation": "Bounded algebra/numerical fixtures only; no general theorem or source-algorithm execution is inferred."
+        },
+        "git_diff_check": {
+          "exit_code": 0,
+          "scope": "five assigned items and their two owning metadata files"
+        }
+      },
+      "review_context_capture": "Ran review-contexts immediately after each mathematical item review. After guarded metadata integration, examined current manifest clauses, regenerated citation sources and derivation inputs; batched review-contexts again on that examined state. All five post and context hashes were identical to their initial review captures.",
+      "unresolved_assigned_mathematics": false,
+      "owner_actions": "Route the unassigned citation defects and pre-existing Step4 page/spherical concerns in ledger_updates through their ordinary owners. No shared ledger, certificate, stamp or round state was written."
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-25.pages.json": "91f770bdef5e04579e5f80444d5cac24f764273ff417a7faa80a144fdc305fb7",
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-25.proof-contracts.json": "fd8953226b448789e78de8389578f5ad91db946fd849ef43f1e8e5cc6153c7ac"
+  }
+}

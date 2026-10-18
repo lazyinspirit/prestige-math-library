@@ -8,7 +8,7 @@ pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0
 deps: []
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 sources:
   references:
@@ -20,15 +20,18 @@ sources:
       locator: "§§5–7, mesh size, inradius, affine simplex map, and shape-regular scaling."
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-17
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step3-reference-simplex65/local-published-repair.json
 ---
 
 ## Definition
 
-Fix an integer $d\ge2$. The **reference open simplex** is
+Fix an integer $d\ge2$. The underlying coordinate index set of $\mathbb R^d$
+is $I_d=\{0,\ldots,d-1\}$. In this definition the conventional labels
+$1\le i\le d$ are relabeled by $i\mapsto i-1$: write
+$\widehat x_i:=\widehat x(i-1)$, and let $e_i\in\mathbb R^d$ be the function
+on $I_d$ with $e_i(i-1)=1$ and $e_i(k)=0$ for $k\ne i-1$.
+The vertex and barycentric labels $0,\ldots,d$ are distinct from these
+underlying coordinate indices. The **reference open simplex** is
 $$\widehat S_d:=\{\widehat x\in\mathbb R^d:\widehat x_i>0\ (1\le i\le d),\ \sum_{i=1}^d\widehat x_i<1\},$$
 with closure $\overline{\widehat S_d}=\operatorname{conv}\{0,e_1,\ldots,e_d\}$.
 

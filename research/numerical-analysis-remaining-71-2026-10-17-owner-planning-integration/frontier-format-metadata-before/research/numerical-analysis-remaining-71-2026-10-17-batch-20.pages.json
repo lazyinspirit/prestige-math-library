@@ -1,0 +1,483 @@
+[
+  {
+    "order": 2594,
+    "id": "multigrid-methods-and-complexity",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Multigrid methods and complexity",
+    "companion": "multigrid-methods-and-complexity-examples",
+    "requires": [
+      "preconditioner-algorithms-and-residual-metrics",
+      "lax-milgram-and-weak-elliptic-solutions"
+    ],
+    "items": [
+      {
+        "id": "def-galerkin-coarse-grid-correction",
+        "kind": "definition",
+        "title": "Galerkin coarse matrices and exact coarse-correction error map",
+        "statement": "Let $A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite and let $P\\in\\mathbb R^{n\\times m}$ have full column rank, with $1\\le m\\le n$. Define the Galerkin coarse matrix $A_H:=P^{\\mathsf T}A_hP$. Whenever $A_H$ is invertible, define the exact coarse-correction error map $C:=I_n-PA_H^{-1}P^{\\mathsf T}A_h$. Here $P$ prolongs coarse coordinates to fine coordinates and $P^{\\mathsf T}$ restricts fine residuals. The definition is in exact real arithmetic; it does not identify a rediscretized coarse operator with $A_H$.",
+        "deps": [
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "def-matrix-product-and-identity-matrix",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "prop-standard-coordinate-inner-products"
+        ],
+        "dependency_level": 0,
+        "local_order": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+        "kind": "lemma",
+        "title": "Continuous piecewise-affine functions with zero endpoints lie in H1-zero",
+        "statement": "Assume Countable Choice. Every continuous real function on $[0,1]$ that is affine on the intervals of a finite partition and vanishes at both endpoints belongs to $H^1_0(0,1)$, defined as the $W^{1,2}$-norm closure of $C_c^\\infty(0,1)$.",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-sobolev-norm-is-well-defined-and-definite",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-compact-support-zero-extension-in-wkp",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign"
+        ],
+        "dependency_level": 0,
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        },
+        "strategy": "Direct cutoff, zero-extension, and mollification proof with explicit Sobolev closure argument."
+      },
+      {
+        "id": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+        "kind": "theorem",
+        "title": "The Galerkin coarse correction is an energy-orthogonal projector for SPD fine matrices",
+        "statement": "For $A_h$ symmetric positive definite and $P$ full column rank as in [[def-galerkin-coarse-grid-correction]], the Galerkin matrix $A_H=P^{\\mathsf T}A_hP$ is symmetric positive definite, so the coarse-correction map $C$ is defined. It satisfies $C^2=C$, $CP=0$, $P^{\\mathsf T}A_hC=0$, and $C^{\\mathsf T}A_h=A_hC$. Hence its range is the $A_h$-orthogonal complement of $\\operatorname{Ran}(P)$, and $C$ is the orthogonal projection onto that complement for $\\langle x,y\\rangle_{A_h}=x^{\\mathsf T}A_hy$.",
+        "deps": [
+          "def-galerkin-coarse-grid-correction",
+          "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "prop-transpose-laws"
+        ],
+        "dependency_level": 1,
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        },
+        "strategy": "Direct algebraic proof with explicit hypotheses and boundary checks."
+      },
+      {
+        "id": "def-symmetric-two-grid-error-operator",
+        "kind": "definition",
+        "title": "Symmetric two-grid error operator from a smoother and Galerkin correction",
+        "statement": "Let $A_h$ be symmetric positive definite, let $C$ be the exact Galerkin error projector of [[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], and let $S$ be a linear pre-smoothing error map. Its $A_h$-adjoint is $S^{*_{A_h}}:=A_h^{-1}S^{\\mathsf T}A_h$. The symmetric two-grid error map is $E:=S^{*_{A_h}}CS$: it applies pre-smoothing, exact coarse correction, then the $A_h$-adjoint post-smoother.",
+        "deps": [
+          "def-galerkin-coarse-grid-correction",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_level": 2,
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+        "kind": "algorithm",
+        "title": "Finite strength-graph aggregation and Galerkin hierarchy with explicit statuses",
+        "statement": "Input an integer $n_0\\ge1$ and a real symmetric positive-definite matrix $A_0\\in\\mathbb R^{n_0\\times n_0}$ with nonpositive off-diagonal entries, a strength threshold $0<\\theta<1$, a coarse-size threshold $n_{\\min}\\ge1$, and a level cap $L\\ge0$. At each level $\\ell<L$ with $n_\\ell>n_{\\min}$, form an undirected graph on $\\{1,\\ldots,n_\\ell\\}$: join $i\\ne j$ when $a_{ij}^{(\\ell)}<0$ and either $-a_{ij}^{(\\ell)}\\ge\\theta\\max_{k\\ne i}(-a_{ik}^{(\\ell)})$ or $-a_{ij}^{(\\ell)}\\ge\\theta\\max_{k\\ne j}(-a_{jk}^{(\\ell)})$. Repeatedly take the smallest still-unassigned vertex $i$ and make one aggregate from $i$ and all its still-unassigned graph neighbours; remove that nonempty aggregate and continue. Set $(P_\\ell)_{ic}=1$ when fine index $i$ belongs to aggregate $c$ and $0$ otherwise. If the aggregate count is not smaller than $n_\\ell$, return status `coarsening-stalled`. Otherwise set $A_{\\ell+1}=P_\\ell^{\\mathsf T}A_\\ell P_\\ell$ and continue. Return `coarse-reached` when $n_\\ell\\le n_{\\min}$, `level-cap` when the cap is reached first, or `coarsening-stalled` on a nonreducing step, together with all completed matrices and prolongations. This setup procedure makes no convergence claim.",
+        "deps": [
+          "def-galerkin-coarse-grid-correction",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "def-matrix-product-and-identity-matrix",
+          "def-cholesky-factorisation-with-positive-diagonal"
+        ],
+        "dependency_level": 2,
+        "local_order": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chen-Song Zhang, Multilevel Iterative Methods, version 0.5, Chapter 6: Multigrid Methods",
+              "url": "https://lsec.cc.ac.cn/~zhangcs/pub/course2016/mgnote.pdf"
+            },
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            }
+          ]
+        },
+        "strategy": "Finite explicit setup/recursion with bounded status branches; no convergence claim is included.",
+        "justified_by": [
+          "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates"
+        ]
+      },
+      {
+        "id": "lem-one-dimensional-poisson-smoothing-and-approximation",
+        "kind": "lemma",
+        "title": "Exact level-uniform smoothing and approximation bounds for one-dimensional Poisson",
+        "statement": "Let $N=2M\\ge4$, $h=1/N$, and $A_h=h^{-1}\\operatorname{tridiag}(-1,2,-1)$ on the $N-1$ interior nodes of the uniform Dirichlet mesh of $(0,1)$. Let $P$ be piecewise-linear interpolation from the $M-1$ interior coarse nodes at even fine indices, $A_H=P^{\\mathsf T}A_hP$, $C=I-PA_H^{-1}P^{\\mathsf T}A_h$, and $S=I-A_h/\\lambda_{\\max}(A_h)$. For every integer $\\nu\\ge1$ and fine error $e$, $\\|CS^\\nu e\\|_{A_h}^2\\le\\frac{2}{2\\nu+1}\\|e\\|_{A_h}^2$. In particular, the joint smoothing-correction constant $\\rho=2/(2\\nu+1)$ is less than $1$ and is independent of $N$.",
+        "deps": [
+          "def-galerkin-coarse-grid-correction",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "prop-transpose-laws"
+        ],
+        "dependency_level": 2,
+        "local_order": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        },
+        "strategy": "Direct algebraic proof with explicit hypotheses and boundary checks."
+      },
+      {
+        "id": "alg-finite-galerkin-v-cycle",
+        "kind": "algorithm",
+        "title": "Finite Galerkin V- and W-cycle for an SPD hierarchy",
+        "statement": "Input a finite Galerkin hierarchy of real SPD matrices $A_j\\in\\mathbb R^{n_j\\times n_j}$ with $n_j\\ge1$ and full-column-rank prolongations $P_j\\in\\mathbb R^{n_j\\times n_{j-1}}$ satisfying $A_{j-1}=P_j^{\\mathsf T}A_jP_j$. For an invocation at level $j$, take $x,b\\in\\mathbb R^{n_j}$, nonnegative sweep counts $\\nu_1,\\nu_2$, positive integer $\\gamma$, and pre/post residual-correction matrices $K_j^{\\mathrm{pre}},K_j^{\\mathrm{post}}\\in\\mathbb R^{n_j\\times n_j}$. Define $\\mathrm{Cycle}(0,x,b)=A_0^{-1}b$. For $j>0$, pre-smooth $x$ by $\\nu_1$ steps, set $r=b-A_jx$ and $e=0$, then for $t=1,\\ldots,\\gamma$ set $e\\leftarrow\\mathrm{Cycle}(j-1,e,P_j^{\\mathsf T}r)$. Correct $x\\leftarrow x+P_je$, post-smooth $\\nu_2$ steps, and return $x$. The V-cycle is $\\gamma=1$ and the W-cycle is $\\gamma=2$. Setup cost, floating-point error, and convergence are separate claims.",
+        "deps": [
+          "def-galerkin-coarse-grid-correction",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix"
+        ],
+        "dependency_level": 2,
+        "local_order": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        },
+        "strategy": "Finite explicit setup/recursion with bounded status branches; no convergence claim is included.",
+        "justified_by": [
+          "thm-galerkin-v-cycle-work-recurrence-master-regimes"
+        ]
+      },
+      {
+        "id": "thm-two-grid-energy-contraction-under-joint-estimate",
+        "kind": "theorem",
+        "title": "A joint smoothing-correction estimate gives symmetric two-grid energy contraction",
+        "statement": "Let $A_h$, $C$, $S$, and $E=S^{*_{A_h}}CS$ be as in [[def-symmetric-two-grid-error-operator]]. If $0\\le\\rho<1$ and $\\|CSx\\|_{A_h}^2\\le\\rho\\|x\\|_{A_h}^2$ for every fine-grid vector $x$, then $E$ is self-adjoint and nonnegative in the $A_h$ inner product and its induced operator norm satisfies $\\|E\\|_{A_h}\\le\\rho$. The hypothesis is the joint estimate; separate smoothing and approximation inequalities imply it only when their compatibility is proved.",
+        "deps": [
+          "def-symmetric-two-grid-error-operator",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 3,
+        "local_order": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        },
+        "strategy": "Direct algebraic proof with explicit hypotheses and boundary checks."
+      },
+      {
+        "id": "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+        "kind": "theorem",
+        "title": "The finite aggregation AMG setup preserves Galerkin SPD matrices and returns a status",
+        "statement": "For every admissible input to [[alg-aggregation-based-algebraic-multigrid-hierarchy]], every successful aggregate partition covers the current indices by nonempty disjoint sets. Its indicator prolongation has full column rank. Each successful Galerkin product $A_{\\ell+1}=P_\\ell^{\\mathsf T}A_\\ell P_\\ell$ is symmetric positive definite with nonpositive off-diagonal entries. The procedure terminates after at most $L$ coarsening attempts and returns exactly one of `coarse-reached`, `level-cap`, or `coarsening-stalled`; none of these statuses implies multigrid convergence.",
+        "deps": [
+          "alg-aggregation-based-algebraic-multigrid-hierarchy",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_level": 3,
+        "local_order": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chen-Song Zhang, Multilevel Iterative Methods, version 0.5, Chapter 6: Multigrid Methods",
+              "url": "https://lsec.cc.ac.cn/~zhangcs/pub/course2016/mgnote.pdf"
+            },
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            }
+          ]
+        },
+        "strategy": "Direct algebraic proof with explicit hypotheses and boundary checks."
+      },
+      {
+        "id": "thm-galerkin-v-cycle-work-recurrence-master-regimes",
+        "kind": "theorem",
+        "title": "Work recurrence for fixed-coarsening multigrid cycles",
+        "statement": "Suppose each level with $N$ unknowns has $cN$ work outside recursion, the next level has $N/q$ unknowns for fixed $q=2^d>1$, the base solve has bounded cost, and each cycle makes $\\gamma\\ge1$ recursive calls. Then $T(N)=cN+\\gamma T(N/q)$ has order $\\Theta(N)$ if $\\gamma<q$, $\\Theta(N\\log N)$ if $\\gamma=q$, and $\\Theta(N^{\\log_q\\gamma})$ if $\\gamma>q$. These are arithmetic-work bounds conditional on the stated uniform per-level cost and coarsening assumptions; they do not imply convergence.",
+        "deps": [
+          "alg-finite-galerkin-v-cycle"
+        ],
+        "dependency_level": 3,
+        "local_order": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        },
+        "strategy": "Direct algebraic proof with explicit hypotheses and boundary checks."
+      },
+      {
+        "id": "thm-one-dimensional-poisson-two-grid-energy-contraction",
+        "kind": "theorem",
+        "title": "The symmetric one-dimensional Poisson two-grid cycle is uniformly contractive",
+        "statement": "For the one-dimensional nested-grid data of [[lem-one-dimensional-poisson-smoothing-and-approximation]], take $S_{\\mathrm{pre}}=S^\\nu$ and the $A_h$-adjoint post-smoother. Then the joint estimate holds with $\\rho=2/(2\\nu+1)$, and the symmetric two-grid error operator satisfies $\\|E\\|_{A_h}\\le2/(2\\nu+1)\\le2/3$ for every $N=2M\\ge4$ and every $\\nu\\ge1$.",
+        "deps": [
+          "lem-one-dimensional-poisson-smoothing-and-approximation",
+          "thm-two-grid-energy-contraction-under-joint-estimate",
+          "def-symmetric-two-grid-error-operator"
+        ],
+        "dependency_level": 4,
+        "local_order": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        },
+        "strategy": "Direct algebraic proof with explicit hypotheses and boundary checks."
+      }
+    ]
+  },
+  {
+    "order": 2595,
+    "id": "multigrid-methods-and-complexity-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Multigrid methods and complexity — Examples",
+    "companion": "multigrid-methods-and-complexity",
+    "requires": [
+      "multigrid-methods-and-complexity"
+    ],
+    "items": [
+      {
+        "id": "ex-one-dimensional-poisson-coarse-correction-removes-linear-error",
+        "kind": "example",
+        "title": "A linear error on the 1D Poisson coarse space is removed exactly",
+        "statement": "For the piecewise-linear finite-element discretization of the homogeneous Dirichlet Poisson form on $(0,1)$ with $N=4$ fine intervals, the interior error vector $e=(1,2,1)^{\\mathsf T}$ is the prolongation of the single coarse interior value $2$. The exact Galerkin coarse correction therefore sends $e$ to $0$.",
+        "deps": [
+          "def-galerkin-coarse-grid-correction",
+          "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "local_order": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-v-and-w-cycle-costs-in-two-dimensions",
+        "kind": "example",
+        "title": "V- and W-cycle work for two-dimensional geometric coarsening",
+        "statement": "Let $N=4^L$ with integer $L\\ge1$, assume linear work per level and a four-to-one reduction in level size, and take V-cycle $\\gamma=1$ and W-cycle $\\gamma=2$. Both cycles have $\\Theta(N)$ arithmetic work, with per-level recursion ratios $1/4$ and $1/2$ respectively.",
+        "deps": [
+          "alg-finite-galerkin-v-cycle",
+          "thm-galerkin-v-cycle-work-recurrence-master-regimes"
+        ],
+        "dependency_level": 4,
+        "local_order": 13,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-one-dimensional-poisson-two-grid-uniform-contraction",
+        "kind": "example",
+        "title": "Uniform 1D Poisson contraction from one pair of level-uniform estimates",
+        "statement": "For every nested uniform Dirichlet grid with $N=2M\\ge4$ intervals, the stiffness matrix $h^{-1}\\operatorname{tridiag}(-1,2,-1)$, piecewise-linear coarse interpolation, exact Galerkin correction, and $\\nu\\ge1$ Richardson sweeps with step $1/\\lambda_{\\max}(A_h)$ have the symmetric two-grid energy contraction factor at most $2/(2\\nu+1)$.",
+        "deps": [
+          "thm-one-dimensional-poisson-two-grid-energy-contraction",
+          "def-galerkin-coarse-grid-correction",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "def-symmetric-two-grid-error-operator",
+          "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "local_order": 14,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Susanne C. Brenner and L. Ridgway Scott, The Mathematical Theory of Finite Element Methods, 3rd ed., Chapter 6: Finite Element Multigrid Methods",
+              "url": "https://webs.um.es/eliseo/um/uploads/Main/Brenner_Scott_The_Mathematical_Theory_Of_Finite_Element%20Methods_2008.pdf"
+            },
+            {
+              "title": "Numerical Methods II, University of Heidelberg lecture notes, Chapter 10: Multigrid Methods",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/teaching/finiteelements_ws2021/num2_updated.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

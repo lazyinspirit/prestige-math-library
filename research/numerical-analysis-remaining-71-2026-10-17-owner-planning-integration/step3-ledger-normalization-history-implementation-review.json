@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "reviewer": "/root/gate_url_cwi",
+  "recorded_at": "2026-10-18T07:08:05.250254+00:00",
+  "owned_paths": [
+    "tools/step3-ledger-normalization-history.mjs",
+    "tools/step3-ledger-normalization-history.md",
+    "tools/step3-close.mjs"
+  ],
+  "unexecuted_root_builder": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step3-ledger-normalization-history-builder.mjs",
+  "raw_sha256": {
+    "tools/step3-ledger-normalization-history.mjs": "b517c51e0c8f584738a65ec48bc6b860a807cf16449caa817cfee98d9e10e949",
+    "tools/step3-ledger-normalization-history.md": "867c87423791b9e80371697d24076f72550fef2fae57ef9a37f1230ca04a077d",
+    "tools/step3-close.mjs": "d5de2c66c2a329a2b76fb29ca03b7311ff0257ab47ccfd0a659d4c31e42b9249",
+    "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step3-ledger-normalization-history-builder.mjs": "bc73f9c84004b1dc037d08229fee4acf9a3ca30fb4707768071a946003747926"
+  },
+  "step3_close_attribution": {
+    "own_before_reconstructed_raw_sha256": "4daea77f8116285531859386ff7d91153e07183bf98d9e6f263638775059f641",
+    "method": "Remove only this change\u2019s single helper import and verify-only fallback, restoring the old literal mismatch error. All earlier native-origin imports, artifact options, evidence-policy guards and close-mode writes remain byte-for-byte present. Entire current file is not claimed as newly authored.",
+    "exact_new_patch": "--- own-before/tools/step3-close.mjs\n+++ current/tools/step3-close.mjs\n@@ -15,6 +15,7 @@\n import { ownerRepairEvidenceClosure, OWNER_REPAIR_EVIDENCE_FREEZE_POLICY } from './step3-owner-stabilized-source-identical-continuity.mjs';\n import { nativeOriginClosureEvidence } from './auditor-created-items.mjs';\n import { NATIVE_ORIGIN_FREEZE_POLICY } from './step3-native-creation-origin.mjs';\n+import { step3LedgerNormalizationHistory } from './step3-ledger-normalization-history.mjs';\n \n const argv = process.argv.slice(2);\n const mode = argv[0];\n@@ -121,7 +122,9 @@\n   const ledgerRows = step3LedgerRows();\n   if (sha256(JSON.stringify(ledgerRows)) !== receipt.step3_ledger_rows_sha256\n     || ledgerRows.length !== receipt.step3_ledger_rows_count) {\n-    errors.push('Step-3 defect-ledger rows changed');\n+    try {\n+      if (!step3LedgerNormalizationHistory(root, run, receipt, ledgerRows)) errors.push('Step-3 defect-ledger rows changed');\n+    } catch (cause) { errors.push(`Step-3 defect-ledger rows changed: ${cause.message}`); }\n   }\n   if (errors.length) fail(errors.join('; '));\n   console.log(`step3-close: verified ${Object.keys(receipt.artifacts ?? {}).length} frozen artifact(s) for ${run}`);\n",
+    "patch_sha256": "2721710ec3f39eb8f0e94d213c60dbe56adcf710a443756cd6062b08170bbe60"
+  },
+  "actual_rows": {
+    "original_count": 390,
+    "original_canonical_sha256": "916d7a72ca183b1004a2694e4c53e471c6d5de750011e2dd500ab7620ea841fa",
+    "current_count": 390,
+    "current_canonical_sha256": "a9caa02dfb15b5a0d7980f185e969f8aa884769e092fbc704a070a46ee28471c",
+    "unchanged": 373,
+    "normalized": 17,
+    "source_evidence": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step5-step3-ledger-historical-normalization-proposal.json"
+  },
+  "source_justification": "Original3a/3b selected ledger digest includes raw JSON object metadata as well as semantic fields. Four root-applied shape repairs plus13taxonomy repairs changed the frozen selected390 digest despite preserving actual findings. Exact reconstructed full original array matches immutableclosure hash/count; all17changes are explicitly enumerated and guarded. Native u1 ledger append rows are outside this selection, not erased or attributed to this repair.",
+  "soundness": "No new close/reseal path. Fallback is used only by verify after unchanged artifact verification and failed exact ledger digest/count; absent/invalid receipt retains the failure. Full original closure hash+genuine original tool close result+own authentic preimages+root applied evidence and exact original/current inventories required. Only finite legacy field mappings, exact original evidence-string wrap, explicit unknownmissingtimestamp and factual migration annotations admitted. Existing identities/severity/timestamps/prose/references/repairconfidence remain identical. Escalated/open is only already-superseded statusopen with unchanged existing fixed superseder; no new resolution.",
+  "root_recording": "Builder remains unexecuted. Root chooses --prepare or --record at actual paused/drained5.9; recorder authenticates real current selected rows, exact state archive and source/state CAS before immutable receipt creation. Root owns receipt support retention, ownership authority, validation and native reload/recertification.",
+  "not_changed": [
+    "originalclosure",
+    "canonicalledger",
+    "native3reports",
+    "originalsourcefiles",
+    "runtimestate/controller",
+    "sourcepolicies/seals"
+  ],
+  "validation_status": "Read-only native/evidence/source inspection, static code/doc review and raw hashing only. No tests, syntax/import/helper/builder execution, gates, source/layout checks or native controls. Independent SourceKinds review requested."
+}

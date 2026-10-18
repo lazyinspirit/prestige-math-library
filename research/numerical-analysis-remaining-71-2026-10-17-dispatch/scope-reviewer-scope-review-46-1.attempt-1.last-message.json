@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "46",
+  "round": 1,
+  "reviewed_items": [
+    "alg-fas-two-grid-cycle",
+    "lem-fas-second-derivative-of-composed-cycle-map",
+    "alg-fas-vw-cycle",
+    "lem-fas-coarse-branch-derivative",
+    "lem-fas-vw-cycle-work-and-status",
+    "lem-fas-fine-root-fixed-point",
+    "thm-fas-local-contraction-under-derivative-bound",
+    "lem-fas-linear-vw-cycle-translation",
+    "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+    "lem-fas-inexact-coarse-solve-residual-defect",
+    "ex-fas-semilinear-reaction-diffusion-local-convergence",
+    "ex-fas-reaction-poisson-tau-cancellation",
+    "cex-fas-zero-tau-breaks-fine-root",
+    "ex-fas-bifurcation-shrinks-contraction-ball",
+    "ex-fas-linear-cycle-equivalence"
+  ],
+  "reviewed_pages": [
+    "nonlinear-full-approximation-multigrid",
+    "nonlinear-full-approximation-multigrid-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Both prior findings are repaired: trial iterates preserve the last valid fine state, and the A-page sentence is complete. Final review found a remaining diagnostics gap after the single repair, so the owner must resolve it.",
+  "findings": [
+    {
+      "id": "alg-fas-two-grid-cycle",
+      "type": "local",
+      "reason": "Step 4's domain-failure branch returns the current iterate and status but omits Δ, which already contains coarse-call residuals from Step 3. This fails the approved promise to retain every coarse residual and the output contract consumed by alg-fas-vw-cycle. Smallest repair: include Δ in that return. The round-1 repair is exhausted."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-fas-vw-cycle",
+      "decision": "escalate",
+      "reason": "Its Definition requires the two-grid call to return the finite coarse-call diagnostic list on all status branches; Step 4 currently drops that list."
+    },
+    {
+      "id": "cex-fas-zero-tau-breaks-fine-root",
+      "decision": "accept",
+      "reason": "Its counterexample uses a successful coarse correction and is unaffected by the missing failure-branch diagnostics."
+    },
+    {
+      "id": "ex-fas-bifurcation-shrinks-contraction-ball",
+      "decision": "accept",
+      "reason": "Its exact-branch map and derivative calculations are unaffected."
+    },
+    {
+      "id": "ex-fas-linear-cycle-equivalence",
+      "decision": "accept",
+      "reason": "Its successful linear correction calculation is unaffected."
+    },
+    {
+      "id": "ex-fas-reaction-poisson-tau-cancellation",
+      "decision": "accept",
+      "reason": "Its exact coarse root and successful correction are unaffected."
+    },
+    {
+      "id": "ex-fas-semilinear-reaction-diffusion-local-convergence",
+      "decision": "accept",
+      "reason": "Its valid exact branch and contraction calculations are unaffected."
+    },
+    {
+      "id": "lem-fas-coarse-branch-derivative",
+      "decision": "accept",
+      "reason": "The derivative proof uses the unchanged successful exact-branch map."
+    },
+    {
+      "id": "lem-fas-fine-root-fixed-point",
+      "decision": "accept",
+      "reason": "Its fixed-point argument uses successful exact-root branches."
+    },
+    {
+      "id": "lem-fas-inexact-coarse-solve-residual-defect",
+      "decision": "accept",
+      "reason": "Its correction-defect estimate compares successful corrected states."
+    },
+    {
+      "id": "lem-fas-vw-cycle-work-and-status",
+      "decision": "accept",
+      "reason": "Its termination and work recurrence remain valid; the missing list does not invalidate the bound."
+    },
+    {
+      "id": "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+      "decision": "accept",
+      "reason": "Its equality proof concerns exact successful recursive updates."
+    },
+    {
+      "id": "thm-fas-local-contraction-under-derivative-bound",
+      "decision": "accept",
+      "reason": "Its result concerns the successful exact-branch map."
+    },
+    {
+      "id": "nonlinear-full-approximation-multigrid",
+      "decision": "escalate",
+      "reason": "The approved A-page scope requires every coarse residual to be retained in diagnostics, including when the correction fails its domain check."
+    },
+    {
+      "id": "nonlinear-full-approximation-multigrid-examples",
+      "decision": "accept",
+      "reason": "The examples use successful branches and remain consistent with the corrected procedure."
+    }
+  ]
+}

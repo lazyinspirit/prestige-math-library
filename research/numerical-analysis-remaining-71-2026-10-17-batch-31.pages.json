@@ -1,0 +1,1082 @@
+[
+  {
+    "order": 2616,
+    "id": "mixed-finite-elements-and-stokes-stability",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Mixed finite elements and Stokes stability",
+    "companion": "mixed-finite-elements-and-stokes-stability-examples",
+    "requires": [
+      "finite-element-meshes-and-interpolation",
+      "lax-milgram-and-weak-elliptic-solutions",
+      "fourier-multipliers-and-sobolev-characterisations",
+      "fredholm-elliptic-problems-and-the-elliptic-spectrum",
+      "decomposition-inertia-and-frobenius"
+    ],
+    "items": [
+      {
+        "id": "lem-na-zero-mean-of-zero-boundary-divergence",
+        "kind": "lemma",
+        "title": "Zero mean of the divergence of a zero-boundary field",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open. If $v\\in H^1_0(D;\\mathbb R^d)$, then $\\operatorname{div}v\\in L^2(D)$ and $\\int_D\\operatorname{div}v=0$.",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-homogeneous-dirichlet-poincare",
+        "kind": "lemma",
+        "title": "A bounded-domain Poincare inequality for H1-zero fields",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open, and suppose its first coordinate projection is contained in an interval $(a,b)$ of width $L=b-a$. For every real $v\\in H^1_0(D)$,\n$$\\|v\\|_{L^2(D)}\\le L\\|\\partial_1v\\|_{L^2(D)}\\le L\\|\\nabla v\\|_{L^2(D)}.$$",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-homogeneous-dirichlet-korn-identity",
+        "kind": "lemma",
+        "title": "The homogeneous Dirichlet strain identity",
+        "statement": "Assume Countable Choice. For bounded open $D\\subset\\mathbb R^d$ and $v\\in H^1_0(D;\\mathbb R^d)$, put $\\varepsilon(v)=(\\nabla v+\\nabla v^T)/2$. Then\n$$2\\|\\varepsilon(v)\\|_2^2=\\|\\nabla v\\|_2^2+\\|\\operatorname{div}v\\|_2^2,$$\nso $\\|\\nabla v\\|_2\\le\\sqrt2\\|\\varepsilon(v)\\|_2$.",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-lipschitz-domain-finite-star-shaped-cover",
+        "kind": "lemma",
+        "title": "Finite star-shaped cover of a bounded Lipschitz domain",
+        "statement": "Let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected and Lipschitz. Here Lipschitz means that its compact boundary has a finite atlas of rigidly moved cylinders in which $D$ is the strict epigraph $x_d>\\varphi(x')$ of a Lipschitz function. There are finitely many bounded open sets $U_i\\subset D$ covering $D$, each star-shaped with respect to a closed ball $\\overline B_i\\subset U_i$, and the graph joining $i,j$ when $U_i\\cap U_j\\ne\\varnothing$ is connected. There are measurable sets $E_i\\subset U_i$ partitioning $D$ and, for every edge of a spanning tree of this graph, a function $\\psi_{ij}\\in C_c^\\infty(U_i\\cap U_j)$ with integral one.",
+        "deps": [
+          "thm-heine-borel-rn"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-star-shaped-bogovskii-integral",
+        "kind": "definition",
+        "title": "The Bogovskii integral on a star-shaped set",
+        "statement": "Let $U\\subset\\mathbb R^d$ be bounded and open, star-shaped with respect to a closed ball $\\overline B(a,\\rho)\\subset U$. Choose $\\omega\\in C_c^\\infty(B(a,\\rho))$ with $\\int\\omega=1$. For $f\\in C_c^\\infty(U)$, initially define the vector-valued integral\n$$ (\\mathcal B_U f)(x)=\\int_U f(y)(x-y)\\int_0^1\\omega\\!\\left(y+\\frac{x-y}{t}\\right)\\frac{dt}{t^{d+1}}\\,dy. $$\nThe inner integral is first interpreted for $t>0$; its locally integrable kernel, support and divergence identity are proved in the following lemma. All data and fields here are real. This definition makes no finite-quadrature or numerical-algorithm claim.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally.",
+        "justified_by": [
+          "lem-na-bogovskii-kernel-support-and-divergence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo G. Durán, An elementary proof of the continuity from L2_0(Omega) to H1_0(Omega)^n of Bogovskii’s right inverse of the divergence",
+              "url": "https://arxiv.org/pdf/1103.3718",
+              "locator": "Complete 17-page article; adopted proof range: pp. 2–7, formula (1.3), Lemmas 2.1–2.4 and Theorem 2.1; complete source reviewed."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §8.2: continuous Stokes divergence lifting and inf-sup background."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-infsup-bounded-right-inverse-hilbert",
+        "kind": "theorem",
+        "title": "Hilbert inf-sup gives a bounded constraint right inverse",
+        "statement": "Assume Countable Choice. Let $V,Q$ be real Hilbert spaces and let $b:V\\times Q\\to\\mathbb R$ be a bounded bilinear form. Define $B:V\\to Q$ by $(Bv,q)_Q=b(v,q)$. If $Q=\\{0\\}$, the unique zero map is a bounded right inverse. If $Q\\ne\\{0\\}$, assume $V\\ne\\{0\\}$ and define\n$$\\beta:=\\inf_{q\\ne0}\\sup_{v\\ne0}\\frac{b(v,q)}{\\|v\\|_V\\|q\\|_Q}.$$\nWhen $\\beta>0$, $B$ is onto and has a bounded linear right inverse $R:Q\\to V$ with $BR=I_Q$ and $\\|R\\|\\le\\beta^{-1}$.",
+        "deps": [
+          "thm-lax-milgram",
+          "def-hilbert-space",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+        "kind": "lemma",
+        "title": "Boundary-preserving face-average P1 interpolation",
+        "statement": "Assume Countable Choice. Let $D$ be a bounded connected Lipschitz polygonal/polyhedral domain with a conforming shape-regular simplicial mesh, $d=2$ or $3$, mesh size $h=\\max_Kh_K$. For each interior mesh vertex $z$, choose any incident facet $F_z$; for each boundary vertex choose an incident boundary facet. Let $\\psi_{z,F_z}\\in P_1(F_z)$ be the unique dual affine function satisfying $\\int_{F_z}\\psi_{z,F_z}\\varphi_y=\\delta_{zy}$ for the facet's P1 nodal basis. Define\n$$I_hv=\\sum_z\\left(\\int_{F_z}\\psi_{z,F_z}\\operatorname{tr}v\\right)\\varphi_z.$$\nThis is a linear face-average interpolant $H^1(D)\\to S_h$, where $S_h$ is the continuous piecewise P1 space. It maps $H^1_0(D)$ into $S_h\\cap H^1_0(D)$, is uniformly $H^1$-seminorm stable, and for each element patch $\\omega_K$ has\n$$\\|v-I_hv\\|_{L^2(K)}\\le Ch_K\\|\\nabla v\\|_{L^2(\\omega_K)}.$$\nIf $v\\in H^2(D)$, then $\\|\\nabla(v-I_hv)\\|_{L^2(K)}\\le Ch_K\\|D^2v\\|_{L^2(\\omega_K)}$. Constants depend only on dimension, the fixed domain, and the mesh shape-regularity bound. No point evaluation is used.",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "thm-reference-simplex-poincare-wirtinger",
+          "thm-bramble-hilbert-on-reference-simplex",
+          "def-countable-choice",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field",
+          "lem-affine-pullback-weak-derivatives-and-scaling"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 49–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "§49.4.2, Babuška–Brezzi; Chapter 50, §§50.1–50.2, mixed approximation and Schur complement; Chapters 53–54, Stokes and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2 and pp. 276–277; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+        "kind": "definition",
+        "title": "Stokes velocity and pressure spaces and weak forms",
+        "statement": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a nonempty bounded connected Lipschitz open set, where Lipschitz means that $\\partial D$ has a finite rigidly moved graph-chart atlas. Here $H^1_0(D)$ is the $H^1$-closure of $C_c^\\infty(D)$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]). Since $D$ has finite measure, Holder makes every $L^2$ class integrable, so the zero-mean condition is well-defined ([[thm-holder-inequality-for-integrals]]). Define\n$$V:=H^1_0(D;\\mathbb R^d),\\qquad Q:=L^2_0(D):=\\{q\\in L^2(D;\\mathbb R):\\int_Dq=0\\}.$$\nEquip $V$ with $\\|v\\|_V:=\\|\\nabla v\\|_{L^2(D)}$ and $Q$ with $\\|q\\|_Q:=\\|q\\|_{L^2(D)}$. The local Poincare inequality [[lem-na-homogeneous-dirichlet-poincare]] makes the first a norm equivalent to the usual $H^1$ norm. For $v\\in V$, define $\\varepsilon(v):=(\\nabla v+\\nabla v^T)/2$ and $b(v,q):=-\\int_Dq\\,\\operatorname{div}v$. For viscosity $\\nu>0$, set $a_\\nu(u,v):=2\\nu\\int_D\\varepsilon(u):\\varepsilon(v)$, where $X:Y=\\sum_{i,j}X_{ij}Y_{ij}$. The continuous domain class is all bounded connected Lipschitz $D$; the exact mini-element mesh class is the narrower polygonal/polyhedral conforming affine simplicial class.",
+        "deps": [
+          "lem-na-homogeneous-dirichlet-poincare",
+          "def-countable-choice",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 1,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-finite-cover-zero-mean-data-decomposition",
+        "kind": "lemma",
+        "title": "Zero-mean L2 decomposition over a finite cover",
+        "statement": "Let $D=\\bigcup_{i=1}^N U_i$ be the finite connected star-shaped cover from [[lem-na-lipschitz-domain-finite-star-shaped-cover]], with measurable partition $E_i$ and normalized tree-edge bumps $\\psi_e$. For every $q\\in L^2_0(D)$ there are $q_i\\in L^2_0(U_i)$, depending linearly on $q$, whose zero extensions satisfy $q=\\sum_iq_i$ and\n$$\\|q_i\\|_{L^2(U_i)}\\le D_i\\|q\\|_{L^2(D)},\\qquad D_i=1+|D|^{1/2}\\sum_{e\\text{ incident to }i}\\|\\psi_e\\|_2.$$",
+        "deps": [
+          "lem-na-lipschitz-domain-finite-star-shaped-cover",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 1,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-bogovskii-kernel-support-and-divergence",
+        "kind": "lemma",
+        "title": "Support, integrability, and divergence identity for the Bogovskii kernel",
+        "statement": "Assume Countable Choice. Let $U,\\omega$ and $\\mathcal B_U$ be as in [[def-na-star-shaped-bogovskii-integral]]. For $f\\in C_c^\\infty(U)$, write $G(x,y)=(x-y)\\int_0^1\\omega(y+(x-y)/t)t^{-d-1}dt$. Then $\\mathcal B_Uf(x)=\\int_UG(x,y)f(y)dy$ defines an $L^2$ field supported in a compact subset of $U$. Writing $K(x,y)=|G(x,y)|$ and $(\\mathcal K_Ug)(x):=\\int_UK(x,y)g(y)dy$, the majorant $\\mathcal K_U|f|$ is also in $L^2(U)$, and $\\mathcal K_U$ has a finite $L^2$ bound. Moreover,\n$$\\operatorname{div}\\mathcal B_Uf=f-\\omega\\int_Uf$$\nin distributions on $\\mathbb R^d$. In particular, mean-zero input has divergence $f$.",
+        "deps": [
+          "def-na-star-shaped-bogovskii-integral",
+          "def-countable-choice",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-compactness-under-continuous-maps",
+          "def-distributional-derivative",
+          "thm-heine-borel-rn"
+        ],
+        "dependency_level": 1,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo G. Durán, An elementary proof of the continuity from L2_0(Omega) to H1_0(Omega)^n of Bogovskii’s right inverse of the divergence",
+              "url": "https://arxiv.org/pdf/1103.3718",
+              "locator": "Complete 17-page article; adopted proof range: pp. 2–7, formula (1.3), Lemmas 2.1–2.4 and Theorem 2.1; complete source reviewed."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §8.2 and §§8.5.5–8.7.1: continuous divergence lifting, inf-sup and MINI element."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-babuska-brezzi-kernel-coercivity",
+        "kind": "theorem",
+        "title": "Babuska-Brezzi solvability by kernel coercivity and inf-sup",
+        "statement": "Assume Countable Choice. Let $V,Q$ be real Hilbert spaces, and let $a:V\\times V\\to\\mathbb R$ and $b:V\\times Q\\to\\mathbb R$ be bounded bilinear forms. If $Q=\\{0\\}$, the theorem reduces to Lax–Milgram on $V$ with $Z=V$ and $p=0$. Otherwise, if $Q\\ne\\{0\\}$, assume $V\\ne\\{0\\}$. Define $B:V\\to Q$ by $(Bv,q)_Q=b(v,q)$ and set $\\beta:=\\inf_{q\\ne0}\\sup_{v\\ne0}b(v,q)/(\\|v\\|_V\\|q\\|_Q)>0$. Suppose $Z:=\\ker B$ is closed and $a(z,z)\\ge\\alpha\\|z\\|_V^2$ on $Z$, with $\\alpha>0$. For every $F\\in V'$ and $G\\in Q'$, there is a unique $(u,p)\\in V\\times Q$ satisfying\n$$a(u,v)+b(v,p)=F(v),\\qquad b(u,q)=G(q),$$\nfor all $v\\in V,q\\in Q$. If $M_a=\\|a\\|$, then one stability bound is\n$$\\|u\\|_V\\le\\beta^{-1}\\|G\\|+\\alpha^{-1}(\\|F\\|+M_a\\beta^{-1}\\|G\\|),\\qquad \\|p\\|_Q\\le\\beta^{-1}(\\|F\\|+M_a\\|u\\|_V).$$",
+        "deps": [
+          "thm-na-infsup-bounded-right-inverse-hilbert",
+          "thm-lax-milgram",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-bogovskii-truncated-derivative-fourier-formula",
+        "kind": "lemma",
+        "title": "Truncated Fourier formula for derivatives of the Bogovskii operator",
+        "statement": "Assume Countable Choice. Let $U$ and $\\omega$ be as in [[def-na-star-shaped-bogovskii-integral]]. For $\\phi\\in C_c^\\infty(\\mathbb R^d)$ and $f\\in C_c^\\infty(\\mathbb R^d)$, use $\\widehat g(\\xi)=\\int e^{-2\\pi ix\\cdot\\xi}g(x)dx$ and define\n$$T_{\\phi,j}^{\\epsilon}f(x)=\\int f(y)\\int_\\epsilon^1\\partial_{x_j}\\left[\\phi\\left(y+\\frac{x-y}{t}\\right)\\right]\\frac{dt}{t^d}dy.$$\nAs $\\epsilon\\downarrow0$ these converge in distributions to $T_{\\phi,j}f$. The part with $0<t<1/2$ satisfies\n$$\\widehat{T^<_{\\phi,j}f}(\\xi)=2\\pi i\\xi_j\\int_0^{1/2}\\widehat\\phi(t\\xi)\\widehat f((1-t)\\xi)dt.$$\nWhen $f\\in C_c^\\infty(U)$, the Bogovskii formula satisfies $\\partial_j(\\mathcal B_Uf)_k=T_{x_k\\omega,j}f-T_{\\omega,j}(y_kf)$ distributionally.",
+        "deps": [
+          "def-na-star-shaped-bogovskii-integral",
+          "def-countable-choice",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-dominated-convergence",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-na-bogovskii-kernel-support-and-divergence"
+        ],
+        "dependency_level": 2,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo G. Durán, An elementary proof of the continuity from L2_0(Omega) to H1_0(Omega)^n of Bogovskii’s right inverse of the divergence",
+              "url": "https://arxiv.org/pdf/1103.3718",
+              "locator": "Complete 17-page article; adopted proof range: pp. 2–7, formula (1.3), Lemmas 2.1–2.4 and Theorem 2.1; complete source reviewed."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §8.2 and §§8.5.5–8.7.1: continuous divergence lifting, inf-sup and MINI element."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-fortin-operator",
+        "kind": "definition",
+        "title": "Fortin operator for a discrete constraint",
+        "statement": "Let $V,Q,b$ be as in [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]], and let $V_h\\subset V$, $Q_h\\subset Q$ be finite-dimensional subspaces. A **Fortin operator** is a bounded linear map $\\Pi_h:V\\to V_h$ for which there is a constant $C_F$ such that\n$$\\|\\Pi_hv\\|_V\\le C_F\\|v\\|_V\\quad(v\\in V),\\qquad b(\\Pi_hv,q_h)=b(v,q_h)\\quad(v\\in V,\\ q_h\\in Q_h).$$\nThe second condition is exact constraint preservation. It does not assert $\\operatorname{div}\\Pi_hv=\\operatorname{div}v$ pointwise.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-mixed-galerkin-quasioptimality",
+        "kind": "theorem",
+        "title": "Mixed Galerkin error bound retaining beta_h",
+        "statement": "Assume Countable Choice. Let $V,Q$ be real Hilbert spaces and let $F\\in V\\prime$, $G\\in Q\\prime$ be bounded data. Suppose bounded bilinear forms $a,b$ and $(u,p)\\in V\\times Q$ satisfy\n$$a(u,v)+b(v,p)=F(v),\\qquad b(u,q)=G(q)$$\nfor all $v\\in V,q\\in Q$. Let $V_h\\subset V$, $Q_h\\subset Q$ be finite-dimensional conforming subspaces, with $V_h\\ne\\{0\\}$, $Q_h\\ne\\{0\\}$, and discrete inf-sup constant $\\beta_h:=\\inf_{q_h\\ne0}\\sup_{v_h\\ne0}b(v_h,q_h)/(\\|v_h\\|_V\\|q_h\\|_Q)>0$. Assume the **discrete** kernel coercivity $a(v_h,v_h)\\ge\\alpha_*\\|v_h\\|_V^2$ for every $v_h\\in Z_h:=\\{w_h:b(w_h,q_h)=0\\text{ for all }q_h\\in Q_h\\}$, where $\\alpha_*>0$. Put $M_a=\\|a\\|$, $M_b=\\|b\\|$. The Galerkin system with the same $F,G$ has a unique solution $(u_h,p_h)$. For any $w_h\\in V_h$, $r_h\\in Q_h$, define $\\delta_u=\\|u-w_h\\|_V$, $\\delta_p=\\|p-r_h\\|_Q$, $R_h=\\beta_h^{-1}M_b\\delta_u$, and\n$$U_h=\\delta_u+\\alpha_*^{-1}\\{M_a(\\delta_u+R_h)+M_b\\delta_p\\}+R_h,$$\n$$P_h=\\delta_p+\\beta_h^{-1}\\{M_a(U_h+\\delta_u)+M_b\\delta_p\\}.$$\nThen $\\|u-u_h\\|_V\\le U_h$ and $\\|p-p_h\\|_Q\\le P_h$. In particular the pressure bound retains $\\beta_h^{-1}$ explicitly; taking infima over $w_h,r_h$ gives the corresponding best-approximation bound.",
+        "deps": [
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "thm-na-infsup-bounded-right-inverse-hilbert",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 49–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "§49.4.2, Babuška–Brezzi; Chapter 50, §§50.1–50.2, mixed approximation and Schur complement; Chapters 53–54, Stokes and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2 and pp. 276–277; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-mini-element-p1-bubble-p1-spaces",
+        "kind": "definition",
+        "title": "The conforming P1-bubble/P1 mini element",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$, $d=2$ or $3$, be a bounded connected Lipschitz polygonal/polyhedral domain with a conforming shape-regular affine simplicial mesh $\\mathcal T_h$. On a simplex $K$ with barycentric coordinates $\\lambda_0,\\ldots,\\lambda_d$, define the scalar interior bubble $b_K=(d+1)^{d+1}\\prod_{i=0}^d\\lambda_i$. Let\n$$S^1_h=\\{w\\in C^0(\\overline D):w|_K\\in P_1(K)\\},\\quad S^1_{h,0}=S^1_h\\cap H^1_0(D).$$\nThe **mini-element spaces** are\n$$V_h=[S^1_{h,0}]^d\\oplus\\bigoplus_{K\\in\\mathcal T_h}b_K\\mathbb R^d\\subset H^1_0(D;\\mathbb R^d),\\qquad Q_h=S^1_h\\cap L^2_0(D).$$\nEach bubble is extended by zero off its cell. The zero-boundary conformity of the piecewise affine part is supplied by [[thm-zero-boundary-piecewise-polynomials-in-w10p]]. The local/global dimensions are proved in the next dimension lemma.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 49–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "§49.4.2, Babuška–Brezzi; Chapter 50, §§50.1–50.2, mixed approximation and Schur complement; Chapters 53–54, Stokes and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2 and pp. 276–277; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-bogovskii-fourier-ray-and-derivative-ltwo-bound",
+        "kind": "lemma",
+        "title": "Elementary Fourier ray and derivative L2 bounds",
+        "statement": "Assume Countable Choice. Let $U$ be bounded and open, $\\phi\\in C_c^\\infty(\\mathbb R^d)$, and $\\rho>0$. For every $\\xi\\in\\mathbb R^d$ and coordinate $j$,\n$$\\int_0^\\infty2\\pi|\\xi_j||\\widehat\\phi(t\\xi)|dt\\le \\rho^{-1}\\|\\phi\\|_1+\\rho\\|\\partial_j^2\\phi\\|_1.$$\nIf $T_{\\phi,j}$ is the distributional operator of [[lem-na-bogovskii-truncated-derivative-fourier-formula]], then for every $f\\in C_c^\\infty(U)$ its restriction to $U$ is in $L^2(U)$ and\n$$\\|T_{\\phi,j}f\\|_{L^2(U)}\\le A_j(\\phi)\\|f\\|_{L^2(U)},\\quad A_j(\\phi)=2^{(d-1)/2}(\\rho^{-1}\\|\\phi\\|_1+\\rho\\|\\partial_j^2\\phi\\|_1)+2^d|U|\\|\\partial_j\\phi\\|_\\infty.$$\nBy density, this restriction has a unique bounded extension $L^2(U)\\to L^2(U)$ with the same bound.",
+        "deps": [
+          "lem-na-bogovskii-truncated-derivative-fourier-formula",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 3,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo G. Durán, An elementary proof of the continuity from L2_0(Omega) to H1_0(Omega)^n of Bogovskii’s right inverse of the divergence",
+              "url": "https://arxiv.org/pdf/1103.3718",
+              "locator": "Complete 17-page article; adopted proof range: pp. 2–7, formula (1.3), Lemmas 2.1–2.4 and Theorem 2.1; complete source reviewed."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §8.2 and §§8.5.5–8.7.1: continuous divergence lifting, inf-sup and MINI element."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-fortin-transfers-discrete-infsup",
+        "kind": "lemma",
+        "title": "Fortin operators transfer the continuous inf-sup bound",
+        "statement": "Let $V_h\\subset V$ and $Q_h\\subset Q$, and suppose the continuous inf-sup constant of $b$ is $\\beta>0$. If $Q_h=\\{0\\}$ the constraint assertion is vacuous. Otherwise, for a Fortin operator as in [[def-na-fortin-operator]] with bound $C_F$, define $\\beta_h:=\\inf_{q_h\\ne0}\\sup_{v_h\\ne0}b(v_h,q_h)/(\\|v_h\\|_V\\|q_h\\|_Q)$. Then $\\beta_h\\ge\\beta/C_F$.",
+        "deps": [
+          "def-na-fortin-operator"
+        ],
+        "dependency_level": 3,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-mini-element-local-and-global-dimensions",
+        "kind": "lemma",
+        "title": "Local and global dimensions of the mini element",
+        "statement": "Assume Countable Choice. For a nonempty connected conforming simplicial mesh in dimension $d=2$ or $3$, the local scalar velocity polynomial space $P_1(K)\\oplus\\operatorname{span}\\{b_K\\}$ has dimension $d+2$, the vector velocity dimension is $d(d+2)$, and the local pressure space $P_1(K)$ has dimension $d+1$. If the mesh has $N_v$ vertices, $N_{v,0}$ interior vertices and $N_K$ cells, then\n$$\\dim V_h=dN_{v,0}+dN_K,\\qquad \\dim Q_h=N_v-1.$$",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-countable-choice",
+          "thm-rank-nullity",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p"
+        ],
+        "dependency_level": 3,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 49–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "§49.4.2, Babuška–Brezzi; Chapter 50, §§50.1–50.2, mixed approximation and Schur complement; Chapters 53–54, Stokes and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2 and pp. 276–277; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-discrete-weak-and-exact-divergence-free-spaces",
+        "kind": "definition",
+        "title": "Weak and pointwise divergence-free discrete velocities",
+        "statement": "For the conforming mini-element spaces $V_h,Q_h$, define the **weak discrete divergence kernel** by\n$$Z_h:=\\{v_h\\in V_h:b(v_h,q_h)=0\\text{ for every }q_h\\in Q_h\\},$$\nand the **exact discrete divergence kernel** by\n$$Z_h^0:=\\{v_h\\in V_h:\\operatorname{div}v_h=0\\text{ almost everywhere on }D\\}.$$\nSince $b(v_h,q_h)=-\\int_Dq_h\\operatorname{div}v_h$, one has $Z_h^0\\subseteq Z_h$. Equality is not part of either definition; the companion example proves strictness for a concrete mesh.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-mini-element-p1-bubble-p1-spaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 49–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "§49.4.2, Babuška–Brezzi; Chapter 50, §§50.1–50.2, mixed approximation and Schur complement; Chapters 53–54, Stokes and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2 and pp. 276–277; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-star-shaped-bogovskii-bounded-right-inverse",
+        "kind": "theorem",
+        "title": "Bounded Bogovskii right inverse on a star-shaped domain",
+        "statement": "Let $U\\subset\\mathbb R^d$ be bounded and open, star-shaped with respect to a ball, and let $\\omega$ and $\\mathcal B_U$ be as in [[def-na-star-shaped-bogovskii-integral]]. Under Countable Choice there is a bounded linear extension $\\mathcal B_U:L^2_0(U)\\to H^1_0(U;\\mathbb R^d)$ such that\n$$\\operatorname{div}\\mathcal B_U f=f,\\qquad \\|\\nabla\\mathcal B_U f\\|_2\\le C_U\\|f\\|_2.$$\nAfter translating the ball center to $0$, choose $R_U\\ge\\sup_{y\\in U}|y|$ and define\n$$A_j(\\phi)=2^{(d-1)/2}\\bigl(\\rho^{-1}\\|\\phi\\|_1+\\rho\\|\\partial_j^2\\phi\\|_1\\bigr)+2^d|U|\\|\\partial_j\\phi\\|_\\infty.$$\nOne valid constant is $C_U=\\left(\\sum_{k,j=1}^d[A_j(x_k\\omega)+R_UA_j(\\omega)]^2\\right)^{1/2}$.",
+        "deps": [
+          "lem-na-bogovskii-kernel-support-and-divergence",
+          "lem-na-bogovskii-fourier-ray-and-derivative-ltwo-bound",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "def-countable-choice",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-na-star-shaped-bogovskii-integral",
+          "lem-na-bogovskii-truncated-derivative-fourier-formula",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "thm-l-one-approximate-identities-converge-in-l-p"
+        ],
+        "dependency_level": 4,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo G. Durán, An elementary proof of the continuity from L2_0(Omega) to H1_0(Omega)^n of Bogovskii’s right inverse of the divergence",
+              "url": "https://arxiv.org/pdf/1103.3718",
+              "locator": "Complete 17-page article; adopted proof range: pp. 2–7, formula (1.3), Lemmas 2.1–2.4 and Theorem 2.1; complete source reviewed."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §8.2: continuous Stokes divergence lifting and inf-sup background."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+        "kind": "theorem",
+        "title": "Divergence right inverse on bounded connected Lipschitz domains",
+        "statement": "Let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected and Lipschitz, with $d\\in\\{2,3\\}$. Under Countable Choice there is a bounded linear map $B_D:L^2_0(D)\\to H^1_0(D;\\mathbb R^d)$ such that\n$$\\operatorname{div}B_Dq=q,\\qquad \\|\\nabla B_Dq\\|_2\\le C_{\\rm div}(D)\\|q\\|_2.$$\nFor a chosen finite cover and tree decomposition from [[lem-na-lipschitz-domain-finite-star-shaped-cover]] and [[lem-na-finite-cover-zero-mean-data-decomposition]], one valid bound is $C_{\\rm div}(D)=\\sum_i C_{U_i}D_i$; it is finite and independent of any finite-element mesh.",
+        "deps": [
+          "lem-na-lipschitz-domain-finite-star-shaped-cover",
+          "lem-na-finite-cover-zero-mean-data-decomposition",
+          "thm-na-star-shaped-bogovskii-bounded-right-inverse",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-continuous-stokes-divergence-infsup",
+        "kind": "theorem",
+        "title": "Continuous Stokes divergence inf-sup on a Lipschitz domain",
+        "statement": "Assume Countable Choice. On the spaces $V=H^1_0(D;\\mathbb R^d)$ and $Q=L^2_0(D)$ of [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]], equipped with $\\|v\\|_V=\\|\\nabla v\\|_2$, the form $b(v,q)=-\\int_Dq\\,\\operatorname{div}v$ is bounded by $\\sqrt d$. Its inf-sup constant satisfies\n$$\\inf_{q\\ne0}\\sup_{v\\ne0}\\frac{b(v,q)}{\\|v\\|_V\\|q\\|_2}\\ge C_{\\rm div}(D)^{-1}.$$",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 6,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 53–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Chapter 53, §§53.1–53.4: weak Stokes problem, divergence lift and inf-sup; Chapter 54, §§54.1–54.2: Fortin criteria and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1 and 8.7.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-mini-element-fortin-stability",
+        "kind": "theorem",
+        "title": "Uniform Fortin stability of the mini element",
+        "statement": "On the mini-element spaces of [[def-na-mini-element-p1-bubble-p1-spaces]], there is a Fortin operator $\\Pi_h:V\\to V_h$ preserving $b(v,q_h)$ for every $q_h\\in Q_h$, with $\\|\\Pi_hv\\|_V\\le C_F\\|v\\|_V$. The constant depends only on $d$ and the mesh shape-regularity bound, not on $h$. Consequently\n$$\\beta_h\\ge (C_FC_{\\rm div}(D))^{-1}.$$",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "def-na-fortin-operator",
+          "lem-na-fortin-transfers-discrete-infsup",
+          "thm-na-continuous-stokes-divergence-infsup",
+          "def-countable-choice",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "lem-shape-regular-affine-simplex-scaling",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "thm-reference-simplex-poincare-wirtinger"
+        ],
+        "dependency_level": 7,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 49–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "§49.4.2, Babuška–Brezzi; Chapter 50, §§50.1–50.2, mixed approximation and Schur complement; Chapters 53–54, Stokes and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2 and pp. 276–277; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-weak-stokes-solvability-lipschitz-domain",
+        "kind": "theorem",
+        "title": "Weak Stokes solvability on bounded connected Lipschitz domains",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected and Lipschitz, $d=2$ or $3$, and let $\\nu>0$. For every bounded linear functional $F$ on $V=H^1_0(D;\\mathbb R^d)$ equipped with $\\|v\\|_V=\\|\\nabla v\\|_2$, there is a unique $(u,p)\\in V\\times Q$, $Q=L^2_0(D)$, satisfying\n$$2\\nu\\int_D\\varepsilon(u):\\varepsilon(v)-\\int_Dp\\operatorname{div}v=F(v),\\qquad -\\int_Dq\\operatorname{div}u=0$$\nfor every $v\\in V,q\\in Q$. The pressure is normalized to have mean zero. One stability bound is $\\|u\\|_V\\le\\nu^{-1}\\|F\\|_{V'}$ and $\\|p\\|_2\\le3C_{\\rm div}(D)\\|F\\|_{V'}$.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "thm-na-continuous-stokes-divergence-infsup",
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 7,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 49–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "§49.4.2, Babuška–Brezzi; Chapter 50, §§50.1–50.2, mixed approximation and Schur complement; Chapters 53–54, Stokes and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2 and pp. 276–277; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-mini-element-h1-pressure-error",
+        "kind": "theorem",
+        "title": "Mini-element H1 velocity and L2 pressure error estimate",
+        "statement": "Assume Countable Choice. Let $D$ be a bounded connected Lipschitz polygonal/polyhedral domain in dimension $d=2$ or $3$, with a conforming shape-regular simplicial mesh family of mesh size $h$. Put $V=H^1_0(D;\\mathbb R^d)$ and $Q=L^2_0(D)$. For $\\nu>0$ and $F\\in V'$, suppose $(u,p)\\in V\\times Q$ satisfies\n$$2\\nu\\int_D\\varepsilon(u):\\varepsilon(v)-\\int_Dp\\,\\operatorname{div}v=F(v),\\qquad -\\int_Dq\\,\\operatorname{div}u=0$$\nfor every $v\\in V,q\\in Q$, with $u\\in H^2(D;\\mathbb R^d)$ and $p\\in H^1(D)$. Let $(u_h,p_h)\\in V_h\\times Q_h$ solve the same equations for every $v_h\\in V_h,q_h\\in Q_h$, where $V_h,Q_h$ are the P1-bubble/P1 mini spaces. Then\n$$\\|u-u_h\\|_{H^1(D)}+\\|p-p_h\\|_{L^2(D)}\\le C h(\\|u\\|_{H^2(D)}+\\|p\\|_{H^1(D)}).$$\nThe constant is independent of $h$ and depends on $d$, $D$, shape regularity, $\\nu$, $C_{\\rm div}(D)$, and the Poincare constant. The mixed error formula retains $M_a=2\\nu$, $M_b=\\sqrt d$, discrete-kernel coercivity $\\alpha_*=\\nu$, and $\\beta_h\\ge(C_FC_{\\rm div}(D))^{-1}$ explicitly.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "thm-na-mixed-galerkin-quasioptimality",
+          "thm-na-mini-element-fortin-stability",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 8,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 49–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "§49.4.2, Babuška–Brezzi; Chapter 50, §§50.1–50.2, mixed approximation and Schur complement; Chapters 53–54, Stokes and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2 and pp. 276–277; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-discrete-helmholtz-projection-and-pressure-schur",
+        "kind": "theorem",
+        "title": "Discrete Helmholtz projection and pressure Schur identities",
+        "statement": "Assume Countable Choice. Let $V_h,Q_h$ be the stable mini-element spaces on a bounded connected Lipschitz polyhedral domain with a conforming mesh, with viscosity $\\nu>0$, and let $Z_h=\\{v_h:b(v_h,q_h)=0\\ \\forall q_h\\in Q_h\\}$. Choose bases of $V_h,Q_h$, let $M$ be the velocity mass matrix, $A$ the Stokes stiffness matrix, and $B$ the constraint matrix with entries $B_{\\ell j}=b(\\phi_j,\\chi_\\ell)$. The mass-orthogonal projector onto $Z_h$ is\n$$P_M=I-M^{-1}B^T(BM^{-1}B^T)^{-1}B.$$\nOn the mean-zero pressure coordinates, both the mass pressure Schur matrix $BM^{-1}B^T$ and stiffness pressure Schur matrix $BA^{-1}B^T$ are positive definite. Before imposing the pressure gauge on the full continuous P1 space, the constant pressure is exactly the one-dimensional nullspace of $B^T$.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "thm-na-mini-element-fortin-stability",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-countable-choice",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-homogeneous-dirichlet-korn-identity"
+        ],
+        "dependency_level": 8,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapters 49–54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "§49.4.2, Babuška–Brezzi; Chapter 50, §§50.1–50.2, mixed approximation and Schur complement; Chapters 53–54, Stokes and MINI element."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 5, Theorem 5.2.2 and pp. 276–277; Chapter 8, §§8.2, 8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2617,
+    "id": "mixed-finite-elements-and-stokes-stability-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Mixed finite elements and Stokes stability — Examples",
+    "companion": "mixed-finite-elements-and-stokes-stability",
+    "requires": [
+      "mixed-finite-elements-and-stokes-stability"
+    ],
+    "items": [
+      {
+        "id": "ex-na-taylor-hood-pressure-mode",
+        "kind": "example",
+        "title": "A Taylor-Hood local pressure mode on a right triangle",
+        "statement": "On the reference right triangle $K=\\{(x,y):x\\ge0,y\\ge0,x+y\\le1\\}$, let $q(x,y)=x-1/3$ and $v(x,y)=(x^2,0)$. Then $q$ has zero cell mean and the local Stokes pairing is $-\\int_Kq\\operatorname{div}v=-1/18$. This is a local mode-detection calculation only; it proves no global Taylor–Hood stability theorem.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "Chapter 54, §§54.1–54.2, MINI Fortin map and the P1+bubble/P1 pair."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §§8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-mini-element-bubble-moment",
+        "kind": "example",
+        "title": "A mini-element bubble detects an affine pressure gradient",
+        "statement": "Assume Countable Choice. Let $K$ be a $d$-simplex, $b_K>0$ its interior barycentric bubble, and $q\\in P_1(K)$ a nonconstant affine pressure. Define the local pairing $b_K(v,q):=-\\int_Kq\\,\\operatorname{div}v$ and let $v=b_K\\nabla q$. Then $b_K(v,q)=\\int_Kb_K|\\nabla q|^2>0$. This positive cell contribution does not by itself prove a global inf-sup bound.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "Chapter 54, §§54.1–54.2, MINI Fortin map and the P1+bubble/P1 pair."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §§8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-na-q1-p0-checkerboard-pressure-mode",
+        "kind": "counterexample",
+        "title": "The alternating Q1/P0 checkerboard pressure defeats the discrete inf-sup condition",
+        "statement": "The continuous Q1 velocity / cellwise P0 pressure pair is uniformly inf-sup stable on every Cartesian mesh.",
+        "deps": [
+          "lem-na-fortin-transfers-discrete-infsup"
+        ],
+        "dependency_level": 4,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "Chapter 54, §§54.1–54.2, MINI Fortin map and the P1+bubble/P1 pair."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §§8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-na-weakly-versus-exactly-divergence-free-mini-velocity",
+        "kind": "example",
+        "title": "A weakly divergence-free mini velocity need not be pointwise divergence-free",
+        "statement": "Assume Countable Choice. On a square split into two triangles, the mini-element weak divergence kernel contains a nonzero velocity whose divergence is not zero almost everywhere. Thus the weak discrete kernel $Z_h$ can strictly contain the exact kernel $Z_h^0$.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "lem-na-mini-element-local-and-global-dimensions",
+          "thm-rank-nullity",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 54 (complete course notes)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap54.pdf",
+              "locator": "Chapter 54, §§54.1–54.2, MINI Fortin map and the P1+bubble/P1 pair."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete textbook)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §§8.4.2, 8.5.5, 8.6.1, 8.7.1 and 8.10."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "8",
+  "round": 1,
+  "reviewed_items": [
+    "def-nufft-finite-array-norms",
+    "def-nufft-periodized-gaussian-gridding-kernel",
+    "lem-nufft-finite-euclidean-norm-triangle",
+    "def-nufft-transform-types-and-mode-conventions",
+    "lem-nufft-gaussian-periodization-converges",
+    "lem-nufft-gaussian-image-tail-bound",
+    "lem-nufft-gaussian-periodization-fourier-series",
+    "lem-nufft-gaussian-spread-truncation-tail",
+    "lem-nufft-gaussian-grid-alias-identity-and-bound",
+    "alg-nufft-certified-gaussian-gridding-type1-type2",
+    "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+    "ex-nufft-mri-fourier-samples",
+    "ex-nufft-small-deconvolution-mode-is-inconclusive",
+    "ex-nufft-clustered-sources-l1-error"
+  ],
+  "reviewed_pages": [
+    "nonuniform-fast-fourier-transforms",
+    "nonuniform-fast-fourier-transforms-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The round-0 algorithm specification repair is present, and its affected consumers were checked. Final review found a separate type-1 FFT error-radius omission, and the approved-scope discrepancy about the VAL-INTERVAL supplier edge remains unresolved. As this is the second review, both require owner resolution.",
+  "findings": [
+    {
+      "id": "alg-nufft-certified-gaussian-gridding-type1-type2",
+      "type": "local",
+      "reason": "Step 3 returns interval radii for scaling and deconvolution of the computed FFT output, but does not enclose its error relative to the exact unitary FFT. The published FFT routine returns a computed vector and twiddle certificates; its separate error theorem gives the normwise bound rho*U. Thus the stated r_k need not enclose the exact deconvolution of the dyadic center grid, contrary to theorem F7 and proof step 2.1. Include this error in the type-1 enclosure or B_round (at most rho*U/(sqrt(P)*d_min^-)), and reconcile the theorem proof. Affected consumers: thm-nufft-gaussian-gridding-error-and-type2-adjoint and ex-nufft-clustered-sources-l1-error; the small-multiplier example rejects before the FFT."
+    },
+    {
+      "id": "nonuniform-fast-fourier-transforms",
+      "type": "scope",
+      "reason": "The approved design records an added same-frontier VAL-INTERVAL→LIN-NUFFT supplier edge. The current run has no VAL-INTERVAL pair or dependency edge, while the page retains only its computed-fast-transforms-and-convolution requirement and the algorithm names published interval/range items directly. Those published supplier bodies were inspected and support the mathematics; owner confirmation is still needed on whether they discharge the approved internal edge or the dependency scope must be reconciled. This affects the algorithm, its error theorem, and downstream examples."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+      "decision": "escalate",
+      "reason": "Proof step 2.1 and F7 assert that the algorithm's type-1 radii enclose the exact deconvolution, but the procedure omits the computed FFT error bound."
+    },
+    {
+      "id": "ex-nufft-small-deconvolution-mode-is-inconclusive",
+      "decision": "accept",
+      "reason": "Its conclusion follows from the positive-multiplier lower-endpoint check or an earlier range failure, before the FFT is called."
+    },
+    {
+      "id": "ex-nufft-clustered-sources-l1-error",
+      "decision": "escalate",
+      "reason": "Its conditional successful-run absolute certificate depends on the error theorem, whose type-1 bound is unsupported until the FFT error radius is included."
+    }
+  ]
+}

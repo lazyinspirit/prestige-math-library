@@ -1,0 +1,1497 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-21",
+  "scope": [
+    "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+    "lem-na-normalized-rayleigh-energy-perturbation",
+    "lem-na-periodic-mps-to-open-tt",
+    "lem-na-mixed-canonical-qr-gauge-preserves-state",
+    "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+    "prop-na-exact-local-dmrg-update-does-not-increase-energy",
+    "thm-na-dmrg-sweep-truncation-energy-increase-bound",
+    "thm-na-convergent-exact-dmrg-sweeps-are-coordinatewise-stationary",
+    "ex-na-two-site-spin-chain-exact-local-solve",
+    "ex-na-degenerate-local-ground-state-tie-break",
+    "ex-na-two-site-tt-truncation-can-increase-energy"
+  ],
+  "contracts": {
+    "lem-na-finite-hermitian-ground-vector-with-deterministic-tie": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rayleigh-quotient",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real inner product space, let $T:V\\to V$ be\nself-adjoint, and let $v\\in V$ be nonzero. The **Rayleigh quotient** of $v$ for\n$T$ is\n\n$$R_T(v):=\\frac{\\langle Tv,v\\rangle}{\\langle v,v\\rangle}.$$\n\nBecause $\\langle v,v\\rangle>0$ for nonzero $v$ in an inner product space, this\nquotient is a well-defined real number.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-courant-fischer-min-max-principle",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to V$ be self-adjoint on an $n$-dimensional real inner product space,\nand list its eigenvalues in weakly decreasing order:\n\n$$\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_n.$$\n\nThen for every $1\\le k\\le n$,\n\n$$\\lambda_k=\\min_{\\dim W=n-k+1}\\ \\max_{0\\ne v\\in W} R_T(v)=\\max_{\\dim U=k}\\ \\min_{0\\ne v\\in U} R_T(v).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $\\mathbb F=\\mathbb R$. By [F2], $A$ represents a self-adjoint endomorphism in the standard orthonormal basis, and [F3] identifies its Rayleigh quotient with $q_A$. Taking $k=m$ in [F4] gives $\\lambda_{\\min}=\\min_{\\dim W=1}\\max_{x\\in W\\setminus\\{0\\}}q_A(x)$. On each one-dimensional $W$, homogeneity gives the same quotient for every nonzero vector, and every nonzero $x$ spans such a $W$; hence this minimum is exactly $\\min_{x\\ne0}q_A(x)$. By [F5], write $x=\\sum_j c_ju_j$ in an orthonormal eigenbasis with real eigenvalues $\\lambda_j$; then $q_A(x)=\\sum_j\\lambda_jc_j^2/\\sum_jc_j^2$, which equals $\\lambda_{\\min}$ exactly when every nonzero coefficient belongs to the least-eigenvalue eigenspace.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $\\mathbb F=\\mathbb C$. By [F2], $A$ represents a self-adjoint endomorphism in the standard orthonormal basis; by [F1] this endomorphism is normal, so [F6] gives an orthonormal eigenbasis $u_1,\\ldots,u_m$. Every eigenvalue is real because if $Au_j=\\lambda_j u_j$, then $\\overline{u_j^*Au_j}=u_j^*A^*u_j=u_j^*Au_j$, so $\\lambda_j\\|u_j\\|^2$ is real and $\\|u_j\\|^2>0$. For $x=\\sum_j c_ju_j\\ne0$, the quotient is the weighted average $\\sum_j\\lambda_j|c_j|^2/\\sum_j|c_j|^2$, so it is at least the least eigenvalue and equals it exactly when all nonzero coefficients lie in its eigenspace.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In either field, the least eigenspace is nonzero, so [F7] gives a unique orthogonal decomposition of each vector into its $E_{\\min}$ and $E_{\\min}^{\\perp}$ parts; define $P_{\\min}$ to be the first component. Uniqueness makes $P_{\\min}$ linear, since sums and scalar multiples of decompositions are the corresponding decompositions. At least one $P_{\\min}e_j$ is nonzero, since otherwise linearity and the fact that the standard vectors span $\\mathbb F^m$ would imply $P_{\\min}=0$, contradicting $E_{\\min}\\ne\\{0\\}$. The first such $j$ is uniquely determined by the fixed basis order. Normalize this projection. Over $\\mathbb C$, its first nonzero coordinate $z$ is changed to $|z|>0$ by multiplication by $\\overline z/|z|$; over $\\mathbb R$, multiplication by $z/|z|$ makes that coordinate positive. These unit-modulus rescalings preserve the eigenvector and its Rayleigh quotient. The minimizer characterization in steps 1.1 and 1.2 proves the result.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement assumes m≥1; the selected lowest eigenspace is nonzero by steps 1.1 and 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The quotient domain excludes x=0, and step 2.1 separately proves the projection tie rule is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 the only eigenspace is the whole coefficient line; the finite basis scan and normalization in step 2.1 still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 defines the choice by the first nonzero projection, so repeated lowest eigenvalues are covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this finite-dimensional spectral statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 selects the first nonzero projection from the finite ordered standard basis; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 show a minimizing quotient forces all nonzero eigenbasis coefficients to have the least eigenvalue."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 show every nonzero vector in the least eigenspace attains the least quotient."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Ulrich Schollwöck, complete 122-page review inspected",
+          "url": "https://arxiv.org/pdf/1008.3477",
+          "locator": "§§4.4.1–4.4.2 canonical MPS forms; §§6.2–6.4 effective Hamiltonians, local solves, and two-site DMRG/truncation."
+        },
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "lem-na-normalized-rayleigh-energy-perturbation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $v\\in\\mathcal H$, $\\|Hv\\|_F\\le\\|H\\|_{\\mathrm{op}}\\|v\\|_F$: this is immediate for $v=0$, and otherwise follows by applying [F2] to $v/\\|v\\|_F$ and scaling back.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], expand the difference as $\\langle\\psi-\\phi,H\\psi\\rangle_F+\\langle\\phi,H(\\psi-\\phi)\\rangle_F$. Apply [F3] to both terms, then [F2] and step 1.1 to obtain a bound of $\\|\\psi-\\phi\\|_F\\|H\\|_{\\mathrm{op}}\\|\\psi\\|_F+\\|\\phi\\|_F\\|H\\|_{\\mathrm{op}}\\|\\psi-\\phi\\|_F=2\\|H\\|_{\\mathrm{op}}\\|\\psi-\\phi\\|_F$. Finally, $\\overline{\\langle\\psi,H\\psi\\rangle_F}=\\langle H\\psi,\\psi\\rangle_F=\\langle\\psi,H\\psi\\rangle_F$ by [F1] and $H^*=H$ from [F4], so the energy values are real.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Positive mode sizes make the coefficient space nonzero; both states are unit by the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats v=0 separately before scaling in the operator norm bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When ψ=φ the difference and both energy terms in step 2.1 are zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The perturbation estimate imposes no eigenvalue simplicity or gap condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in the inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use only finite-dimensional norms and Cauchy–Schwarz, with no selected element from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an inequality, not a biconditional."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Ulrich Schollwöck, complete 122-page review inspected",
+          "url": "https://arxiv.org/pdf/1008.3477",
+          "locator": "§§4.4.1–4.4.2 canonical MPS forms; §§6.2–6.4 effective Hamiltonians, local solves, and two-site DMRG/truncation."
+        },
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "lem-na-periodic-mps-to-open-tt": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an order $d\\ge2$, and positive physical dimensions $n_1,\\ldots,n_d$. The finite coefficient space is the tensor-array space $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with the Frobenius pairing and lexicographic index conventions of [[def-finite-tensor-arrays-and-frobenius-inner-product]]. A **normalized finite state** is an array $\\psi\\in\\mathcal H$ with $\\|\\psi\\|_F=1$.\n\nAn **open-boundary matrix-product state (MPS), or tensor train (TT), presentation** is a TT core list from [[def-tensor-train-cores-bond-ranks-and-canonical-gauges]] with $r_0=r_d=1$ whose contraction is $\\psi$. In particular, each core has shape $r_{k-1}\\times n_k\\times r_k$ and the shared internal indices are summed.\n\nA **periodic MPS presentation** consists of positive integers $r_0,\\ldots,r_d$ with $r_d=r_0$ and matrices $A_k^{(i_k)}\\in\\mathbb F^{r_{k-1}\\times r_k}$ for each $1\\le i_k\\le n_k$. It represents the array\n$$\\psi_{i_1,\\ldots,i_d}=\\operatorname{tr}\\!\\left(A_1^{(i_1)}A_2^{(i_2)}\\cdots A_d^{(i_d)}\\right).$$\nA finite MPS/TT state is a normalized array admitting at least one of these exact presentations; a presentation need not be unique or canonical.\n\nA **finite Hermitian Hamiltonian input** is a linear endomorphism $H:\\mathcal H\\to\\mathcal H$ whose matrix in the standard lexicographic basis satisfies $H^*=H$, where $*$ is conjugate transpose as in [[def-finite-tensor-arrays-and-frobenius-inner-product]]. This page uses only that finite-dimensional Hermitian input and makes no claim about how a physical model assembles it. For nonzero $\\psi$, its Rayleigh energy is\n$$\\mathcal E_H(\\psi)=\\frac{\\langle\\psi,H\\psi\\rangle_F}{\\|\\psi\\|_F^2};$$\nfor a normalized state this equals $\\langle\\psi,H\\psi\\rangle_F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$. A tensor-train (TT) representation consists of integers $r_0=r_d=1$, internal bond sizes $r_1,\\ldots,r_{d-1}\\in\\mathbb N_0$, and cores\n$$ G_k\\in\\mathbb F^{r_{k-1}\\times n_k\\times r_k}\\quad(1\\le k\\le d) $$\nsuch that\n$$ A_{i_1,\\ldots,i_d} =\\sum_{\\alpha_1=1}^{r_1}\\cdots\\sum_{\\alpha_{d-1}=1}^{r_{d-1}} G_1(1,i_1,\\alpha_1)G_2(\\alpha_1,i_2,\\alpha_2)\\cdots G_d(\\alpha_{d-1},i_d,1). $$\nAn empty bond index set gives an empty sum, hence the zero tensor; in particular, all internal bond sizes zero represent zero. A bond size $r_k$ is the storage dimension contracted between cores $k$ and $k+1$. The cut-$k$ unfolding groups modes $1,\\ldots,k$ against $k+1,\\ldots,d$ as fixed in [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\nFor an internal bond $k$, an invertible matrix $S\\in\\mathbb F^{r_k\\times r_k}$ gives a gauge transformation by replacing the two adjacent cores with\n$$ \\widetilde G_k(\\alpha,i,\\beta)=\\sum_{\\gamma=1}^{r_k}G_k(\\alpha,i,\\gamma)S_{\\gamma\\beta}, \\qquad \\widetilde G_{k+1}(\\beta,j,\\eta)=\\sum_{\\gamma=1}^{r_k}(S^{-1})_{\\beta\\gamma}G_{k+1}(\\gamma,j,\\eta). $$\nTheir contraction is unchanged because $\\sum_\\beta S_{\\gamma\\beta}(S^{-1})_{\\beta\\gamma'}=\\delta_{\\gamma,\\gamma'}$.\n\nThe left matricization of core $G_k$ has row index $(\\alpha_{k-1},i_k)$ and column index $\\alpha_k$. The core is left-isometric if this matrix $L_k$ satisfies $L_k^*L_k=I_{r_k}$. The right matricization has row index $\\alpha_{k-1}$ and column index $(i_k,\\alpha_k)$; the core is right-isometric if its matrix $R_k$ satisfies $R_kR_k^*=I_{r_{k-1}}$. A TT is in mixed canonical gauge about core $\\ell$ when cores $k<\\ell$ are left-isometric and cores $k>\\ell$ are right-isometric.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding the matrix trace and the matrix products in [F1] gives $\\psi_{i_1,\\ldots,i_d}=\\sum_{a_0=1}^{r_0}\\sum_{a_1=1}^{r_1}\\cdots\\sum_{a_{d-1}=1}^{r_{d-1}}(A_1^{(i_1)})_{a_0,a_1}\\cdots(A_d^{(i_d)})_{a_{d-1},a_0}.$ This is a finite sum, and remains the same for $d=2$ with no intermediate factors.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Contract the cores defined in the Statement according to [F2]. Each internal TT bond is a pair $(a_k,a_0)$, so its summation matches the adjacent physical matrix index $a_k$ while carrying the same $a_0$ to the next core. The resulting contraction sums once over $a_0,a_1,\\ldots,a_{d-1}$ and has exactly the product in step 1.1. Hence every array entry is unchanged, and the TT bond at cut $k$ has $r_k r_0$ possible pair indices.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The order satisfies d≥2 and all cyclic bond sizes are positive in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Although the represented array may be zero by cancellation, step 1.1 expands the trace and step 2.1 preserves each entry exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The d=2 boundary case is explicitly covered in step 1.1 with an empty middle-core clause."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No eigenvalue, rank-minimality, or uniqueness claim occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use the finite explicit pair indices (a_k,a_0), with no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is exact equality of two presentations, not a biconditional criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is exact equality of two presentations, not a biconditional criterion."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Ulrich Schollwöck, complete 122-page review inspected",
+          "url": "https://arxiv.org/pdf/1008.3477",
+          "locator": "§§4.4.1–4.4.2 canonical MPS forms; §§6.2–6.4 effective Hamiltonians, local solves, and two-site DMRG/truncation."
+        },
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        },
+        {
+          "source": "Ivan V. Oseledets, complete 23-page paper inspected",
+          "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf",
+          "locator": "§2, Theorem 2.2 and proof; §3 TT rounding and orthogonalization (printed pp. 2298–2304)."
+        },
+        {
+          "source": "Mark D. Dupuy, complete 72-page lecture notes inspected",
+          "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf",
+          "locator": "§1.2.2 canonical gauges; Theorem 1.2.14 and proof on truncated TT-SVD error (pp. 20–22)."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "lem-na-mixed-canonical-qr-gauge-preserves-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an order $d\\ge2$, and positive physical dimensions $n_1,\\ldots,n_d$. The finite coefficient space is the tensor-array space $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with the Frobenius pairing and lexicographic index conventions of [[def-finite-tensor-arrays-and-frobenius-inner-product]]. A **normalized finite state** is an array $\\psi\\in\\mathcal H$ with $\\|\\psi\\|_F=1$.\n\nAn **open-boundary matrix-product state (MPS), or tensor train (TT), presentation** is a TT core list from [[def-tensor-train-cores-bond-ranks-and-canonical-gauges]] with $r_0=r_d=1$ whose contraction is $\\psi$. In particular, each core has shape $r_{k-1}\\times n_k\\times r_k$ and the shared internal indices are summed.\n\nA **periodic MPS presentation** consists of positive integers $r_0,\\ldots,r_d$ with $r_d=r_0$ and matrices $A_k^{(i_k)}\\in\\mathbb F^{r_{k-1}\\times r_k}$ for each $1\\le i_k\\le n_k$. It represents the array\n$$\\psi_{i_1,\\ldots,i_d}=\\operatorname{tr}\\!\\left(A_1^{(i_1)}A_2^{(i_2)}\\cdots A_d^{(i_d)}\\right).$$\nA finite MPS/TT state is a normalized array admitting at least one of these exact presentations; a presentation need not be unique or canonical.\n\nA **finite Hermitian Hamiltonian input** is a linear endomorphism $H:\\mathcal H\\to\\mathcal H$ whose matrix in the standard lexicographic basis satisfies $H^*=H$, where $*$ is conjugate transpose as in [[def-finite-tensor-arrays-and-frobenius-inner-product]]. This page uses only that finite-dimensional Hermitian input and makes no claim about how a physical model assembles it. For nonzero $\\psi$, its Rayleigh energy is\n$$\\mathcal E_H(\\psi)=\\frac{\\langle\\psi,H\\psi\\rangle_F}{\\|\\psi\\|_F^2};$$\nfor a normalized state this equals $\\langle\\psi,H\\psi\\rangle_F$.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$. A tensor-train (TT) representation consists of integers $r_0=r_d=1$, internal bond sizes $r_1,\\ldots,r_{d-1}\\in\\mathbb N_0$, and cores\n$$ G_k\\in\\mathbb F^{r_{k-1}\\times n_k\\times r_k}\\quad(1\\le k\\le d) $$\nsuch that\n$$ A_{i_1,\\ldots,i_d} =\\sum_{\\alpha_1=1}^{r_1}\\cdots\\sum_{\\alpha_{d-1}=1}^{r_{d-1}} G_1(1,i_1,\\alpha_1)G_2(\\alpha_1,i_2,\\alpha_2)\\cdots G_d(\\alpha_{d-1},i_d,1). $$\nAn empty bond index set gives an empty sum, hence the zero tensor; in particular, all internal bond sizes zero represent zero. A bond size $r_k$ is the storage dimension contracted between cores $k$ and $k+1$. The cut-$k$ unfolding groups modes $1,\\ldots,k$ against $k+1,\\ldots,d$ as fixed in [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\nFor an internal bond $k$, an invertible matrix $S\\in\\mathbb F^{r_k\\times r_k}$ gives a gauge transformation by replacing the two adjacent cores with\n$$ \\widetilde G_k(\\alpha,i,\\beta)=\\sum_{\\gamma=1}^{r_k}G_k(\\alpha,i,\\gamma)S_{\\gamma\\beta}, \\qquad \\widetilde G_{k+1}(\\beta,j,\\eta)=\\sum_{\\gamma=1}^{r_k}(S^{-1})_{\\beta\\gamma}G_{k+1}(\\gamma,j,\\eta). $$\nTheir contraction is unchanged because $\\sum_\\beta S_{\\gamma\\beta}(S^{-1})_{\\beta\\gamma'}=\\delta_{\\gamma,\\gamma'}$.\n\nThe left matricization of core $G_k$ has row index $(\\alpha_{k-1},i_k)$ and column index $\\alpha_k$. The core is left-isometric if this matrix $L_k$ satisfies $L_k^*L_k=I_{r_k}$. The right matricization has row index $\\alpha_{k-1}$ and column index $(i_k,\\alpha_k)$; the core is right-isometric if its matrix $R_k$ satisfies $R_kR_k^*=I_{r_{k-1}}$. A TT is in mixed canonical gauge about core $\\ell$ when cores $k<\\ell$ are left-isometric and cores $k>\\ell$ are right-isometric.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gram-schmidt-orthonormalisation",
+          "source_section": "Statement",
+          "quote": "Let $(v_0,\\ldots,v_{r-1})$ be a finite linearly independent list in a real or complex inner product space. There is an orthonormal list $(e_0,\\ldots,e_{r-1})$ such that, for every $k\\le r$,\n\n$$\\operatorname{span}(e_0,\\ldots,e_{k-1})=\\operatorname{span}(v_0,\\ldots,v_{k-1}).$$\n\nIt is obtained recursively from\n\n$$u_k=v_k-\\sum_{j<k}\\langle v_k,e_j\\rangle e_j,\\qquad e_k=\\frac{u_k}{\\lVert u_k\\rVert}.$$\n\nFor $r=0$, both lists are empty.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M\\in\\mathbb F^{m\\times n}$ be any core matricization. Scan its columns in order, starting with an empty list and retaining a column exactly when it is not in the span of those already retained. At termination the retained columns are independent, and every skipped column lies in their final span; hence they span the column image of $M$ and their count is $q=\\operatorname{rank}(M)$ by [F2]. If $q>0$, apply [F4] to obtain a matrix $Q$ with orthonormal columns spanning those retained columns; their Gram–Schmidt coordinates form an upper triangular $R_{11}$ with nonzero diagonal. If $q=0$, then $M=0$ and use the empty factorization.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Move the retained column indices to the front by a permutation $\\Pi$. Every remaining column lies in the span of $Q$, so it equals $Q$ times its coordinate vector $Q^*$ applied to that column. Thus $M\\Pi=Q[R_{11}\\ R_{12}]$ for some $R_{12}$, with $Q^*Q=I_q$; equivalently $M=QB$ where $B=[R_{11}\\ R_{12}]\\Pi^*$. This is an exact rank-revealing thin QR factorization for every rectangular shape.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Starting at the left boundary, apply step 2.1 to each left matricization of cores $1,\\ldots,s-1$. Replace the current core matricization $M$ by $Q$ and absorb $B$ into the next core. Since $M=QB$, the shared-index contraction in [F1] is unchanged; $Q^*Q=I_q$ makes the replaced core left-isometric by [F3]. Induction over the swept cores gives the required left-isometric prefix.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Starting at the right boundary, apply step 2.1 to the adjoint $M^*$ of each right matricization of cores $d,\\ldots,t+1$. If $M^*\\Pi=QB$, then $M=\\Pi B^*Q^*$. Replace the current right matricization by $Q^*$ and absorb $\\Pi B^*$ into the preceding core. The shared-index contraction in [F1] is unchanged, and $Q^*Q=I_q$ makes the replaced matricization right-isometric by [F3]. Induction gives the right-isometric suffix and preserves the represented array, while leaving cores $k<s$ untouched. If $t<d$, the final absorption into core $t$ can change the contracted center coefficients; if $t=d$, there is no right sweep.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The scan drops only columns already in the span of retained columns, so each bond dimension changes only from its former size to the exact matrix rank. If any swept matricization had rank zero, that core would be zero and the full TT contraction would be zero, contrary to the nonzero-state hypothesis; hence every reduced swept bond has positive dimension. Steps 3.1 and 3.2 establish the exact mixed canonical gauge.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires a nonzero open-boundary TT, order d≥2, and an in-range nonempty center window."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles a zero matricization with the empty factorization; step 4.1 shows this cannot occur on a swept bond of a nonzero represented state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The selected center may be one site, which is covered by the same prefix and suffix sweep in steps 3.1 and 3.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No eigenproblem or uniqueness claim occurs; dependent matricization columns are explicitly removed exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The scan uses the fixed finite column order and deterministic Gram–Schmidt construction in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result asserts existence and exact preservation, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result asserts existence and exact preservation, not an iff characterization."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Ulrich Schollwöck, complete 122-page review inspected",
+          "url": "https://arxiv.org/pdf/1008.3477",
+          "locator": "§§4.4.1–4.4.2 canonical MPS forms; §§6.2–6.4 effective Hamiltonians, local solves, and two-site DMRG/truncation."
+        },
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        },
+        {
+          "source": "Ivan V. Oseledets, complete 23-page paper inspected",
+          "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf",
+          "locator": "§2, Theorem 2.2 and proof; §3 TT rounding and orthogonalization (printed pp. 2298–2304)."
+        },
+        {
+          "source": "Mark D. Dupuy, complete 72-page lecture notes inspected",
+          "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf",
+          "locator": "§1.2.2 canonical gauges; Theorem 1.2.14 and proof on truncated TT-SVD error (pp. 20–22)."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "lem-na-mps-environment-isometry-and-effective-hamiltonian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an order $d\\ge2$, and positive physical dimensions $n_1,\\ldots,n_d$. The finite coefficient space is the tensor-array space $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with the Frobenius pairing and lexicographic index conventions of [[def-finite-tensor-arrays-and-frobenius-inner-product]]. A **normalized finite state** is an array $\\psi\\in\\mathcal H$ with $\\|\\psi\\|_F=1$.\n\nAn **open-boundary matrix-product state (MPS), or tensor train (TT), presentation** is a TT core list from [[def-tensor-train-cores-bond-ranks-and-canonical-gauges]] with $r_0=r_d=1$ whose contraction is $\\psi$. In particular, each core has shape $r_{k-1}\\times n_k\\times r_k$ and the shared internal indices are summed.\n\nA **periodic MPS presentation** consists of positive integers $r_0,\\ldots,r_d$ with $r_d=r_0$ and matrices $A_k^{(i_k)}\\in\\mathbb F^{r_{k-1}\\times r_k}$ for each $1\\le i_k\\le n_k$. It represents the array\n$$\\psi_{i_1,\\ldots,i_d}=\\operatorname{tr}\\!\\left(A_1^{(i_1)}A_2^{(i_2)}\\cdots A_d^{(i_d)}\\right).$$\nA finite MPS/TT state is a normalized array admitting at least one of these exact presentations; a presentation need not be unique or canonical.\n\nA **finite Hermitian Hamiltonian input** is a linear endomorphism $H:\\mathcal H\\to\\mathcal H$ whose matrix in the standard lexicographic basis satisfies $H^*=H$, where $*$ is conjugate transpose as in [[def-finite-tensor-arrays-and-frobenius-inner-product]]. This page uses only that finite-dimensional Hermitian input and makes no claim about how a physical model assembles it. For nonzero $\\psi$, its Rayleigh energy is\n$$\\mathcal E_H(\\psi)=\\frac{\\langle\\psi,H\\psi\\rangle_F}{\\|\\psi\\|_F^2};$$\nfor a normalized state this equals $\\langle\\psi,H\\psi\\rangle_F$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$. A tensor-train (TT) representation consists of integers $r_0=r_d=1$, internal bond sizes $r_1,\\ldots,r_{d-1}\\in\\mathbb N_0$, and cores\n$$ G_k\\in\\mathbb F^{r_{k-1}\\times n_k\\times r_k}\\quad(1\\le k\\le d) $$\nsuch that\n$$ A_{i_1,\\ldots,i_d} =\\sum_{\\alpha_1=1}^{r_1}\\cdots\\sum_{\\alpha_{d-1}=1}^{r_{d-1}} G_1(1,i_1,\\alpha_1)G_2(\\alpha_1,i_2,\\alpha_2)\\cdots G_d(\\alpha_{d-1},i_d,1). $$\nAn empty bond index set gives an empty sum, hence the zero tensor; in particular, all internal bond sizes zero represent zero. A bond size $r_k$ is the storage dimension contracted between cores $k$ and $k+1$. The cut-$k$ unfolding groups modes $1,\\ldots,k$ against $k+1,\\ldots,d$ as fixed in [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\nFor an internal bond $k$, an invertible matrix $S\\in\\mathbb F^{r_k\\times r_k}$ gives a gauge transformation by replacing the two adjacent cores with\n$$ \\widetilde G_k(\\alpha,i,\\beta)=\\sum_{\\gamma=1}^{r_k}G_k(\\alpha,i,\\gamma)S_{\\gamma\\beta}, \\qquad \\widetilde G_{k+1}(\\beta,j,\\eta)=\\sum_{\\gamma=1}^{r_k}(S^{-1})_{\\beta\\gamma}G_{k+1}(\\gamma,j,\\eta). $$\nTheir contraction is unchanged because $\\sum_\\beta S_{\\gamma\\beta}(S^{-1})_{\\beta\\gamma'}=\\delta_{\\gamma,\\gamma'}$.\n\nThe left matricization of core $G_k$ has row index $(\\alpha_{k-1},i_k)$ and column index $\\alpha_k$. The core is left-isometric if this matrix $L_k$ satisfies $L_k^*L_k=I_{r_k}$. The right matricization has row index $\\alpha_{k-1}$ and column index $(i_k,\\alpha_k)$; the core is right-isometric if its matrix $R_k$ satisfies $R_kR_k^*=I_{r_{k-1}}$. A TT is in mixed canonical gauge about core $\\ell$ when cores $k<\\ell$ are left-isometric and cores $k>\\ell$ are right-isometric.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $L_j$ be the prefix interface through site $j$, with rows indexed by $(i_1,\\ldots,i_j)$ and columns by $\\alpha_j$. Put $L_0=[1]$. For $j<k$, its recurrence is $L_j=(L_{j-1}\\otimes I_{n_j})G_j^{(L)}$, where $G_j^{(L)}$ is the left matricization from [F3]. If $L_{j-1}^*L_{j-1}=I$, then $(L_{j-1}\\otimes I)^*(L_{j-1}\\otimes I)=I\\otimes I$ and hence $L_j^*L_j=G_j^{(L)*}G_j^{(L)}=I$ by [F3]. Induction gives $L_{k-1}^*L_{k-1}=I$. For the suffix, put $R_{d+1}=[1]$ and contract from right to left: for $j>k+w-1$, $R_j=G_j^{(R)}(I_{n_j}\\otimes R_{j+1})$, with rows indexed by $\\alpha_{j-1}$ and columns by $(i_j,\\ldots,i_d)$. Since $R_{j+1}R_{j+1}^*=I$ implies $(I\\otimes R_{j+1})(I\\otimes R_{j+1})^*=I\\otimes I$, the right-isometry in [F3] gives $R_jR_j^*=G_j^{(R)}G_j^{(R)*}=I$. Induction yields $R_{k+w}R_{k+w}^*=I$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the full array entries are the finite contractions of the fixed cores with the center coefficients. Expand $\\langle Ex,Ey\\rangle_F$ using the conjugate-first finite sum in [F2], and first sum over the physical prefix and suffix indices. Those sums replace the interface factors by $L^*L=I$ and $RR^*=I$ from step 1.1. The remaining finite sum is exactly $\\langle x,y\\rangle_F$. Hence $E^*E=I$ and $\\|Ex\\|_F=\\|x\\|_2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1], $H^*=H$. Therefore $H_{\\mathrm{eff}}^*=(E^*HE)^*=E^*H^*E=E^*HE=H_{\\mathrm{eff}}$. Associativity of finite matrix multiplication gives $\\langle Ex,HEx\\rangle_F=x^*E^*HEx=x^*H_{\\mathrm{eff}}x$, as claimed.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement fixes finite order d≥2 and a valid center window; empty prefix/suffix interfaces use the one-dimensional boundary identity in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero-dimensional center coefficient space yields the empty identity E*E=I_0; the finite contraction identities in steps 1.1 and 2.1 remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The width-one window w=1 is explicitly included, with the same interface calculation in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No eigenvalue or ground-state uniqueness claim occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 define all interfaces by explicit finite contractions; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusions are identities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusions are identities, not a biconditional."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Ulrich Schollwöck, complete 122-page review inspected",
+          "url": "https://arxiv.org/pdf/1008.3477",
+          "locator": "§§4.4.1–4.4.2 canonical MPS forms; §§6.2–6.4 effective Hamiltonians, local solves, and two-site DMRG/truncation."
+        },
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        },
+        {
+          "source": "Ivan V. Oseledets, complete 23-page paper inspected",
+          "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf",
+          "locator": "§2, Theorem 2.2 and proof; §3 TT rounding and orthogonalization (printed pp. 2298–2304)."
+        },
+        {
+          "source": "Mark D. Dupuy, complete 72-page lecture notes inspected",
+          "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf",
+          "locator": "§1.2.2 canonical gauges; Theorem 1.2.14 and proof on truncated TT-SVD error (pp. 20–22)."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "prop-na-exact-local-dmrg-update-does-not-increase-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+          "source_section": "Statement",
+          "quote": "Let a finite open-boundary TT have order $d\\ge2$ and be in the following mixed gauge about a one-site or two-site center window $J=[k,k+w-1]$, where $w\\in\\{1,2\\}$: every core strictly left of $J$ is left-isometric and every core strictly right of $J$ is right-isometric. The center coefficient array has shape $r_{k-1}\\times n_k\\times\\cdots\\times n_{k+w-1}\\times r_{k+w-1}$, with boundary ranks interpreted as one, and $x$ is its vectorization in the fixed lexicographic order. Hold every core outside $J$ fixed. Contracting the fixed prefix and suffix defines a linear embedding $E$ from center coefficients to the full tensor space. Then $E^*E=I$, so $\\|Ex\\|_F=\\|x\\|_2$. For every finite Hermitian Hamiltonian input $H$, the effective matrix\n$$H_{\\mathrm{eff}}:=E^*HE$$\nis Hermitian and satisfies\n$$\\langle Ex,HEx\\rangle_F=x^*H_{\\mathrm{eff}}x.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $m\\ge1$, and let $A\\in\\mathbb F^{m\\times m}$ satisfy $A^*=A$. Define\n$$q_A(x):=\\frac{x^*Ax}{x^*x}\\qquad(x\\in\\mathbb F^m\\setminus\\{0\\}).$$\nThen $q_A$ has a minimum $\\lambda_{\\min}$, equal to the least eigenvalue of $A$, and its minimizers are precisely the nonzero vectors in the lowest eigenspace $E_{\\min}=\\ker(A-\\lambda_{\\min}I)$. There is a deterministic choice of a unit minimizer: let $P_{\\min}$ be the orthogonal projection onto $E_{\\min}$, scan the standard basis $e_1,\\ldots,e_m$, and take the first $j$ with $P_{\\min}e_j\\ne0$. Normalize $P_{\\min}e_j$; over $\\mathbb C$, if $z$ is its first nonzero coordinate, multiply by $\\overline z/|z|$, and over $\\mathbb R$ multiply by $z/|z|$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an order $d\\ge2$, and positive physical dimensions $n_1,\\ldots,n_d$. The finite coefficient space is the tensor-array space $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with the Frobenius pairing and lexicographic index conventions of [[def-finite-tensor-arrays-and-frobenius-inner-product]]. A **normalized finite state** is an array $\\psi\\in\\mathcal H$ with $\\|\\psi\\|_F=1$.\n\nAn **open-boundary matrix-product state (MPS), or tensor train (TT), presentation** is a TT core list from [[def-tensor-train-cores-bond-ranks-and-canonical-gauges]] with $r_0=r_d=1$ whose contraction is $\\psi$. In particular, each core has shape $r_{k-1}\\times n_k\\times r_k$ and the shared internal indices are summed.\n\nA **periodic MPS presentation** consists of positive integers $r_0,\\ldots,r_d$ with $r_d=r_0$ and matrices $A_k^{(i_k)}\\in\\mathbb F^{r_{k-1}\\times r_k}$ for each $1\\le i_k\\le n_k$. It represents the array\n$$\\psi_{i_1,\\ldots,i_d}=\\operatorname{tr}\\!\\left(A_1^{(i_1)}A_2^{(i_2)}\\cdots A_d^{(i_d)}\\right).$$\nA finite MPS/TT state is a normalized array admitting at least one of these exact presentations; a presentation need not be unique or canonical.\n\nA **finite Hermitian Hamiltonian input** is a linear endomorphism $H:\\mathcal H\\to\\mathcal H$ whose matrix in the standard lexicographic basis satisfies $H^*=H$, where $*$ is conjugate transpose as in [[def-finite-tensor-arrays-and-frobenius-inner-product]]. This page uses only that finite-dimensional Hermitian input and makes no claim about how a physical model assembles it. For nonzero $\\psi$, its Rayleigh energy is\n$$\\mathcal E_H(\\psi)=\\frac{\\langle\\psi,H\\psi\\rangle_F}{\\|\\psi\\|_F^2};$$\nfor a normalized state this equals $\\langle\\psi,H\\psi\\rangle_F$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $E^*E=I$ by [F1], the current center state $\\psi_0=Ex_0$ has norm $\\|x_0\\|_2=1$, and the updated state $\\psi_*=Ex_*$ has norm $\\|x_*\\|_2=1$. Thus both are admissible normalized states under [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $x_*^*H_{\\mathrm{eff}}x_*\\le x_0^*H_{\\mathrm{eff}}x_0$. Use the pullback identity in [F1] on both sides and then [F3] to obtain $\\mathcal E_H(\\psi_*)\\le\\mathcal E_H(\\psi_0)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The center coefficient vectors x0 and x* are unit vectors by the Statement and step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero center vector is excluded by the unit-norm hypothesis; step 1.1 transfers that norm through E."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The comparison allows equality, including when the current center is already a ground vector, by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 applies ground lemma F2, which supplies a deterministic unit minimizer even when the lowest eigenspace is degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 obtains the selected local vector by the deterministic finite-basis rule in F2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a one-sided energy inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is a one-sided energy inequality."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Ulrich Schollwöck, complete 122-page review inspected",
+          "url": "https://arxiv.org/pdf/1008.3477",
+          "locator": "§§4.4.1–4.4.2 canonical MPS forms; §§6.2–6.4 effective Hamiltonians, local solves, and two-site DMRG/truncation."
+        },
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "proposition"
+    },
+    "thm-na-dmrg-sweep-truncation-energy-increase-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over a fixed field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and order $d\\ge2$. The inputs are:\n\n- a normalized finite MPS/TT state $\\psi\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ together with one concrete presentation of $\\psi$, either an open-boundary TT core list or periodic trace matrices; the supplied presentation must contract to $\\psi$;\n- a finite Hermitian Hamiltonian $H$ on that same tensor-array coefficient space;\n- a positive integer sweep budget $M$;\n- a window width $w\\in\\{1,2\\}$; and\n- optionally, positive integer rank caps $c_1,\\ldots,c_{d-1}$.\n\nThe procedure is the following.\n\n1. If the supplied presentation is in periodic trace form, convert it exactly to the open-boundary TT form using [[lem-na-periodic-mps-to-open-tt]]. Otherwise take the supplied open-boundary core list. Keep the resulting open-boundary core list.\n\n2. For each of $M$ full sweeps, perform one forward pass and one backward pass. For width $w$, the windows are the $d$ single sites when $w=1$, or the $d-1$ adjacent site pairs when $w=2$. Visit them in increasing order in the forward pass and decreasing order in the backward pass.\n\n3. Before each window update, place the TT in mixed canonical gauge about that window using the deterministic rank-revealing QR sweeps of [[lem-na-mixed-canonical-qr-gauge-preserves-state]]. Contract the fixed left and right cores to form the isometric center embedding $E$ and compute the finite effective matrix $H_{\\mathrm{eff}}=E^*HE$.\n\n4. Apply the exact ground-vector rule of [[lem-na-finite-hermitian-ground-vector-with-deterministic-tie]] to $H_{\\mathrm{eff}}$. Let $x$ be the resulting unit eigenvector and replace the center coefficient vector by $x$. Record its local Rayleigh energy $x^*H_{\\mathrm{eff}}x=\\lambda_{\\min}$ and residual $\\|H_{\\mathrm{eff}}x-\\lambda_{\\min}x\\|_2$.\n\n5. For a two-site window, reshape the updated center as a matrix with row index (left bond, first physical index) and column index (second physical index, right bond). Compute an exact compact SVD $X=U\\Sigma V^*$. In a forward pass replace the first core by the reshape of $U$ and absorb $\\Sigma V^*$ into the second core. In a backward pass absorb $U\\Sigma$ into the first core and replace the second core by the reshape of $V^*$. Retain every positive singular direction, so this split changes no tensor entries. For a one-site window, keep that site as the center.\n\n6. After each complete forward/backward sweep, if rank caps were supplied, apply [[alg-tensor-train-rounding]] to the current TT and record its cut tails $\\delta_1,\\ldots,\\delta_{d-1}$ and $\\tau=(\\sum_{k=1}^{d-1}\\delta_k^2)^{1/2}$. If $\\tau<1$, normalize the rounded tensor and continue from it. If $\\tau\\ge1$, discard that rounded candidate, retain the last normalized unrounded tensor, and record status **rounding-skipped**. If no rank caps were supplied, do not round.\n\nReturn the final normalized TT state, the energy and local-residual records, all accepted discarded-tail records, and status **budget-complete** or **rounding-skipped** according to whether any requested rounding was skipped.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-na-exact-local-dmrg-update-does-not-increase-energy",
+          "source_section": "Statement",
+          "quote": "Let $\\psi_0=Ex_0$ be a normalized finite MPS in mixed canonical gauge about a one-site or two-site center, with $\\|x_0\\|_2=1$. Let $H_{\\mathrm{eff}}=E^*HE$ be its effective Hermitian matrix, and replace the center by the deterministic unit ground vector $x_* $ of $H_{\\mathrm{eff}}$, giving $\\psi_*=Ex_*$. Then $\\psi_*$ is normalized and\n$$\\mathcal E_H(\\psi_*)\\le\\mathcal E_H(\\psi_0).$$\nThis claim is before any bond truncation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-tensor-train-rounding",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. The input is a valid TT core list for a tensor of order $d\\ge2$ and exactly one of rank caps $c_1,\\ldots,c_{d-1}\\in\\mathbb N_0$ or absolute tail tolerances $\\tau_1,\\ldots,\\tau_{d-1}\\in[0,\\infty)$.\n\n1. **Left orthogonalize without truncation.** For $k=1,\\ldots,d-1$, reshape core $G_k$ into a matrix with rows $(\\alpha_{k-1},i_k)$ and columns $\\alpha_k$. Compute an exact compact SVD $M=U\\Sigma V^*$, replace $G_k$ by the reshape of $U$, and absorb $\\Sigma V^*$ into the next core along their common bond. Omitting zero singular directions is exact. The resulting cores $G_1,\\ldots,G_{d-1}$ are left-isometric.\n\n2. **Truncate from right to left.** For $k=d,d-1,\\ldots,2$, reshape the current $G_k$ into a matrix $M_k$ with rows $\\alpha_{k-1}$ and columns $(i_k,\\alpha_k)$, and compute an exact compact SVD $M_k=U_k\\Sigma_kV_k^*$. If its positive singular values are $\\sigma_1\\ge\\cdots\\ge\\sigma_s>0$, choose $q_{k-1}=\\min(c_{k-1},s)$ for rank caps, or the least $q_{k-1}\\in\\{0,\\ldots,s\\}$ with $\\sum_{j>q_{k-1}}\\sigma_j^2\\le\\tau_{k-1}^2$ for tolerances. Record $\\delta_{k-1}=(\\sum_{j>q_{k-1}}\\sigma_j^2)^{1/2}$. Replace $G_k$ by the reshape of the first $q_{k-1}$ rows of $V_k^*$ and absorb $U_{k,1:q}\\Sigma_{k,1:q}$ into the previous core.\n\nIf $q_{k-1}=0$, the represented tensor becomes zero; set all remaining internal ranks to zero and their unperformed tails to zero. If the input represents zero, return the all-zero-rank representation and zero tails immediately. The output is the rounded core list and all recorded cut tails. No finite-precision error guarantee is part of this exact-arithmetic procedure.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, $d\\ge2$, and let $A^{\\langle k\\rangle}$ denote its cut-$k$ unfolding. For sequential TT-SVD, let $r_k$ be its retained bond size and $\\delta_k$ its discarded singular-value tail at cut $k$. For rounding, let the input TT represent $A$ and use the same notation for the output bond sizes and recorded tails. Then both procedures satisfy\n$$ \\|A-\\widehat A\\|_F^2\\le\\sum_{k=1}^{d-1}\\delta_k^2. $$\nIf no positive singular value is discarded, the output is exactly $A$. In full-rank TT-SVD, $r_k=\\operatorname{rank}(A^{\\langle k\\rangle})$ for every cut, and these are the minimal possible TT bond sizes among exact representations.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-na-normalized-rayleigh-energy-perturbation",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ be a finite tensor-array space over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $H:\\mathcal H\\to\\mathcal H$ be self-adjoint, and let $\\psi,\\phi\\in\\mathcal H$ satisfy $\\|\\psi\\|_F=\\|\\phi\\|_F=1$. Then\n$$\\left|\\langle\\psi,H\\psi\\rangle_F-\\langle\\phi,H\\phi\\rangle_F\\right|\\le 2\\|H\\|_{\\mathrm{op}}\\|\\psi-\\phi\\|_F.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-reverse-triangle-inequality-in-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space. For all $x,y\\in V$,\n$$\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le \\|x-y\\|.$$\nIn particular, the norm map is $1$-Lipschitz for the norm metric.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "There are finitely many local updates in the sweep. Each exact local solve preserves normalization and weakly decreases energy by [F2]; each intervening exact SVD split preserves the represented tensor and therefore its norm and energy by [F1]. Induction over this finite sequence shows that every intermediate state stays normalized and its energy does not exceed the preceding one. Hence $\\mathcal E_H(\\psi_*)\\le\\mathcal E_H(\\psi_0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The tails $\\delta_k$ are those recorded by [F3]. By [F4], $e:=\\|\\psi_*-\\widetilde\\psi\\|_F\\le\\tau$. The triangle inequality [F6] gives $1=\\|\\psi_*\\|_F\\le e+\\|\\widetilde\\psi\\|_F$, so $\\|\\widetilde\\psi\\|_F\\ge1-e\\ge1-\\tau>0$ and $\\phi$ is defined.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F7], $|1-\\|\\widetilde\\psi\\|_F|\\le e$. Also, homogeneity [F6] and $\\phi=\\widetilde\\psi/\\|\\widetilde\\psi\\|_F$ give $\\|\\phi-\\widetilde\\psi\\|_F=|1-\\|\\widetilde\\psi\\|_F|$. Therefore $\\|\\phi-\\psi_*\\|_F\\le\\|\\phi-\\widetilde\\psi\\|_F+\\|\\widetilde\\psi-\\psi_*\\|_F\\le2e\\le2\\tau.$",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F5] to the unit states $\\phi$ and $\\psi_*$ to get $\\mathcal E_H(\\phi)\\le\\mathcal E_H(\\psi_*)+4\\|H\\|_{\\mathrm{op}}\\tau$. Combine this with step 1.1 to obtain the claimed bound relative to $\\psi_0$. The same inequality gives the asserted upper bound on any post-rounding increase.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The normalized input ψ0 and finite tensor shape are fixed in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At τ=0, step 1.2 gives zero rounding error and the normalized state remains defined; for all τ<1 it proves a positive lower norm bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unit case is explicit: step 1.2 proves ||tildeψ||≥1−τ>0, including any accepted τ arbitrarily close to 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The energy perturbation and local exact solve require no spectral gap or simple eigenvalue."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict endpoint τ<1 is used in step 1.2; the Statement makes no normalized-output claim for τ≥1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses finitely many updates and exact finite SVDs; local tie choices are deterministic by the algorithm."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an upper-bound implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an upper-bound implication, not a biconditional."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Ulrich Schollwöck, complete 122-page review inspected",
+          "url": "https://arxiv.org/pdf/1008.3477",
+          "locator": "§§4.4.1–4.4.2 canonical MPS forms; §§6.2–6.4 effective Hamiltonians, local solves, and two-site DMRG/truncation."
+        },
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-na-convergent-exact-dmrg-sweeps-are-coordinatewise-stationary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over a fixed field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and order $d\\ge2$. The inputs are:\n\n- a normalized finite MPS/TT state $\\psi\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ together with one concrete presentation of $\\psi$, either an open-boundary TT core list or periodic trace matrices; the supplied presentation must contract to $\\psi$;\n- a finite Hermitian Hamiltonian $H$ on that same tensor-array coefficient space;\n- a positive integer sweep budget $M$;\n- a window width $w\\in\\{1,2\\}$; and\n- optionally, positive integer rank caps $c_1,\\ldots,c_{d-1}$.\n\nThe procedure is the following.\n\n1. If the supplied presentation is in periodic trace form, convert it exactly to the open-boundary TT form using [[lem-na-periodic-mps-to-open-tt]]. Otherwise take the supplied open-boundary core list. Keep the resulting open-boundary core list.\n\n2. For each of $M$ full sweeps, perform one forward pass and one backward pass. For width $w$, the windows are the $d$ single sites when $w=1$, or the $d-1$ adjacent site pairs when $w=2$. Visit them in increasing order in the forward pass and decreasing order in the backward pass.\n\n3. Before each window update, place the TT in mixed canonical gauge about that window using the deterministic rank-revealing QR sweeps of [[lem-na-mixed-canonical-qr-gauge-preserves-state]]. Contract the fixed left and right cores to form the isometric center embedding $E$ and compute the finite effective matrix $H_{\\mathrm{eff}}=E^*HE$.\n\n4. Apply the exact ground-vector rule of [[lem-na-finite-hermitian-ground-vector-with-deterministic-tie]] to $H_{\\mathrm{eff}}$. Let $x$ be the resulting unit eigenvector and replace the center coefficient vector by $x$. Record its local Rayleigh energy $x^*H_{\\mathrm{eff}}x=\\lambda_{\\min}$ and residual $\\|H_{\\mathrm{eff}}x-\\lambda_{\\min}x\\|_2$.\n\n5. For a two-site window, reshape the updated center as a matrix with row index (left bond, first physical index) and column index (second physical index, right bond). Compute an exact compact SVD $X=U\\Sigma V^*$. In a forward pass replace the first core by the reshape of $U$ and absorb $\\Sigma V^*$ into the second core. In a backward pass absorb $U\\Sigma$ into the first core and replace the second core by the reshape of $V^*$. Retain every positive singular direction, so this split changes no tensor entries. For a one-site window, keep that site as the center.\n\n6. After each complete forward/backward sweep, if rank caps were supplied, apply [[alg-tensor-train-rounding]] to the current TT and record its cut tails $\\delta_1,\\ldots,\\delta_{d-1}$ and $\\tau=(\\sum_{k=1}^{d-1}\\delta_k^2)^{1/2}$. If $\\tau<1$, normalize the rounded tensor and continue from it. If $\\tau\\ge1$, discard that rounded candidate, retain the last normalized unrounded tensor, and record status **rounding-skipped**. If no rank caps were supplied, do not round.\n\nReturn the final normalized TT state, the energy and local-residual records, all accepted discarded-tail records, and status **budget-complete** or **rounding-skipped** according to whether any requested rounding was skipped.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+          "source_section": "Statement",
+          "quote": "Let a finite open-boundary TT have order $d\\ge2$ and be in the following mixed gauge about a one-site or two-site center window $J=[k,k+w-1]$, where $w\\in\\{1,2\\}$: every core strictly left of $J$ is left-isometric and every core strictly right of $J$ is right-isometric. The center coefficient array has shape $r_{k-1}\\times n_k\\times\\cdots\\times n_{k+w-1}\\times r_{k+w-1}$, with boundary ranks interpreted as one, and $x$ is its vectorization in the fixed lexicographic order. Hold every core outside $J$ fixed. Contracting the fixed prefix and suffix defines a linear embedding $E$ from center coefficients to the full tensor space. Then $E^*E=I$, so $\\|Ex\\|_F=\\|x\\|_2$. For every finite Hermitian Hamiltonian input $H$, the effective matrix\n$$H_{\\mathrm{eff}}:=E^*HE$$\nis Hermitian and satisfies\n$$\\langle Ex,HEx\\rangle_F=x^*H_{\\mathrm{eff}}x.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $m\\ge1$, and let $A\\in\\mathbb F^{m\\times m}$ satisfy $A^*=A$. Define\n$$q_A(x):=\\frac{x^*Ax}{x^*x}\\qquad(x\\in\\mathbb F^m\\setminus\\{0\\}).$$\nThen $q_A$ has a minimum $\\lambda_{\\min}$, equal to the least eigenvalue of $A$, and its minimizers are precisely the nonzero vectors in the lowest eigenspace $E_{\\min}=\\ker(A-\\lambda_{\\min}I)$. There is a deterministic choice of a unit minimizer: let $P_{\\min}$ be the orthogonal projection onto $E_{\\min}$, scan the standard basis $e_1,\\ldots,e_m$, and take the first $j$ with $P_{\\min}e_j\\ne0$. Normalize $P_{\\min}e_j$; over $\\mathbb C$, if $z$ is its first nonzero coordinate, multiply by $\\overline z/|z|$, and over $\\mathbb R$ multiply by $z/|z|$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix one update window. Each entry of its prefix and suffix interface and of its effective Hamiltonian is a finite sum of products of core entries and fixed entries of $H$. Therefore these entries depend continuously on the canonical core arrays. By the assumed componentwise convergence at every stage, the center vectors and effective Hamiltonians at this window converge to limits $x_*$ and $H_{\\mathrm{eff},*}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every sweep index $m$ and every unit vector $y$ in this fixed center coefficient space, the exact update at the chosen window gives $x_m^*H_{\\mathrm{eff},m}x_m\\le y^*H_{\\mathrm{eff},m}y$ by [F1] and [F3]. Taking the limit as $m\\to\\infty$ preserves the inequality because matrix multiplication is continuous, giving $x_*^*H_{\\mathrm{eff},*}x_*\\le y^*H_{\\mathrm{eff},*}y$ for every unit $y$. Thus the limiting center minimizes its local Rayleigh quotient and, by [F3], is a lowest eigenvector.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The update-window list is finite. Apply steps 1.1 and 2.1 to each window in that list. Every limiting center is therefore a local Rayleigh minimizer with all other limiting cores fixed, which is exactly coordinatewise stationarity as defined in the Statement. The argument makes no comparison with states outside those local coordinate spaces.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The sequence has a fixed finite list of update windows; each statement window is considered in steps 1.1 and 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes every tuple and its limit is normalized; step 1.1 therefore has a nonzero limit state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof treats every update window in the fixed finite list in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses ground-vector supplier F3, which permits ties; the limit argument uses the minimizing inequality rather than uniqueness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For each arbitrary fixed unit y the update inequality is passed to the limit in step 2.1; no minimizer is selected by choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient condition for stationarity, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient condition for stationarity, not an iff characterization."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Ulrich Schollwöck, complete 122-page review inspected",
+          "url": "https://arxiv.org/pdf/1008.3477",
+          "locator": "§§4.4.1–4.4.2 canonical MPS forms; §§6.2–6.4 effective Hamiltonians, local solves, and two-site DMRG/truncation."
+        },
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "ex-na-two-site-spin-chain-exact-local-solve": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an order $d\\ge2$, and positive physical dimensions $n_1,\\ldots,n_d$. The finite coefficient space is the tensor-array space $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with the Frobenius pairing and lexicographic index conventions of [[def-finite-tensor-arrays-and-frobenius-inner-product]]. A **normalized finite state** is an array $\\psi\\in\\mathcal H$ with $\\|\\psi\\|_F=1$.\n\nAn **open-boundary matrix-product state (MPS), or tensor train (TT), presentation** is a TT core list from [[def-tensor-train-cores-bond-ranks-and-canonical-gauges]] with $r_0=r_d=1$ whose contraction is $\\psi$. In particular, each core has shape $r_{k-1}\\times n_k\\times r_k$ and the shared internal indices are summed.\n\nA **periodic MPS presentation** consists of positive integers $r_0,\\ldots,r_d$ with $r_d=r_0$ and matrices $A_k^{(i_k)}\\in\\mathbb F^{r_{k-1}\\times r_k}$ for each $1\\le i_k\\le n_k$. It represents the array\n$$\\psi_{i_1,\\ldots,i_d}=\\operatorname{tr}\\!\\left(A_1^{(i_1)}A_2^{(i_2)}\\cdots A_d^{(i_d)}\\right).$$\nA finite MPS/TT state is a normalized array admitting at least one of these exact presentations; a presentation need not be unique or canonical.\n\nA **finite Hermitian Hamiltonian input** is a linear endomorphism $H:\\mathcal H\\to\\mathcal H$ whose matrix in the standard lexicographic basis satisfies $H^*=H$, where $*$ is conjugate transpose as in [[def-finite-tensor-arrays-and-frobenius-inner-product]]. This page uses only that finite-dimensional Hermitian input and makes no claim about how a physical model assembles it. For nonzero $\\psi$, its Rayleigh energy is\n$$\\mathcal E_H(\\psi)=\\frac{\\langle\\psi,H\\psi\\rangle_F}{\\|\\psi\\|_F^2};$$\nfor a normalized state this equals $\\langle\\psi,H\\psi\\rangle_F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over a fixed field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and order $d\\ge2$. The inputs are:\n\n- a normalized finite MPS/TT state $\\psi\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ together with one concrete presentation of $\\psi$, either an open-boundary TT core list or periodic trace matrices; the supplied presentation must contract to $\\psi$;\n- a finite Hermitian Hamiltonian $H$ on that same tensor-array coefficient space;\n- a positive integer sweep budget $M$;\n- a window width $w\\in\\{1,2\\}$; and\n- optionally, positive integer rank caps $c_1,\\ldots,c_{d-1}$.\n\nThe procedure is the following.\n\n1. If the supplied presentation is in periodic trace form, convert it exactly to the open-boundary TT form using [[lem-na-periodic-mps-to-open-tt]]. Otherwise take the supplied open-boundary core list. Keep the resulting open-boundary core list.\n\n2. For each of $M$ full sweeps, perform one forward pass and one backward pass. For width $w$, the windows are the $d$ single sites when $w=1$, or the $d-1$ adjacent site pairs when $w=2$. Visit them in increasing order in the forward pass and decreasing order in the backward pass.\n\n3. Before each window update, place the TT in mixed canonical gauge about that window using the deterministic rank-revealing QR sweeps of [[lem-na-mixed-canonical-qr-gauge-preserves-state]]. Contract the fixed left and right cores to form the isometric center embedding $E$ and compute the finite effective matrix $H_{\\mathrm{eff}}=E^*HE$.\n\n4. Apply the exact ground-vector rule of [[lem-na-finite-hermitian-ground-vector-with-deterministic-tie]] to $H_{\\mathrm{eff}}$. Let $x$ be the resulting unit eigenvector and replace the center coefficient vector by $x$. Record its local Rayleigh energy $x^*H_{\\mathrm{eff}}x=\\lambda_{\\min}$ and residual $\\|H_{\\mathrm{eff}}x-\\lambda_{\\min}x\\|_2$.\n\n5. For a two-site window, reshape the updated center as a matrix with row index (left bond, first physical index) and column index (second physical index, right bond). Compute an exact compact SVD $X=U\\Sigma V^*$. In a forward pass replace the first core by the reshape of $U$ and absorb $\\Sigma V^*$ into the second core. In a backward pass absorb $U\\Sigma$ into the first core and replace the second core by the reshape of $V^*$. Retain every positive singular direction, so this split changes no tensor entries. For a one-site window, keep that site as the center.\n\n6. After each complete forward/backward sweep, if rank caps were supplied, apply [[alg-tensor-train-rounding]] to the current TT and record its cut tails $\\delta_1,\\ldots,\\delta_{d-1}$ and $\\tau=(\\sum_{k=1}^{d-1}\\delta_k^2)^{1/2}$. If $\\tau<1$, normalize the rounded tensor and continue from it. If $\\tau\\ge1$, discard that rounded candidate, retain the last normalized unrounded tensor, and record status **rounding-skipped**. If no rank caps were supplied, do not round.\n\nReturn the final normalized TT state, the energy and local-residual records, all accepted discarded-tail records, and status **budget-complete** or **rounding-skipped** according to whether any requested rounding was skipped.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the displayed basis, $H$ is the diagonal matrix $\\operatorname{diag}(-3,1,1,1)$: the three summands contribute respectively $(-1,-1,1,1)$, $(-1,1,-1,1)$, and $(-1,1,1,-1)$. Thus $|00\\rangle$ is the unique unit ground vector with energy $-3$, while $|11\\rangle$ has energy $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the only two-site window, the fixed environments are identities, so the embedding $E$ and effective Hamiltonian are $I_4$ and $H$. The exact solve in [F2] therefore selects $|00\\rangle$. The backward pass sees the same $H$ and leaves this unique ground vector unchanged, and its exact SVD split has rank one and no discarded tail. Hence the completed sweep returns $|00\\rangle$ with energy $-3<1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes the two-dimensional local spaces and one nonzero product input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "All four displayed diagonal eigenvalues and the two compared states are nonzero/norm-one as verified in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exact ground state is unique; step 1.1 computes the entire four-entry diagonal matrix."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The displayed Hamiltonian has a unique ground state by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exact solver uses the finite deterministic rule in F2; the unique ground vector is calculated in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes one update, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes one update, not an iff statement."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Two-site diagonalization",
+          "calculation": "H=diag(-3,1,1,1); E(|11>)=1 and E(|00>)=-3.",
+          "result": "The unique ground vector and energy are |00> and -3."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-na-two-site-tt-truncation-can-increase-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an order $d\\ge2$, and positive physical dimensions $n_1,\\ldots,n_d$. The finite coefficient space is the tensor-array space $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with the Frobenius pairing and lexicographic index conventions of [[def-finite-tensor-arrays-and-frobenius-inner-product]]. A **normalized finite state** is an array $\\psi\\in\\mathcal H$ with $\\|\\psi\\|_F=1$.\n\nAn **open-boundary matrix-product state (MPS), or tensor train (TT), presentation** is a TT core list from [[def-tensor-train-cores-bond-ranks-and-canonical-gauges]] with $r_0=r_d=1$ whose contraction is $\\psi$. In particular, each core has shape $r_{k-1}\\times n_k\\times r_k$ and the shared internal indices are summed.\n\nA **periodic MPS presentation** consists of positive integers $r_0,\\ldots,r_d$ with $r_d=r_0$ and matrices $A_k^{(i_k)}\\in\\mathbb F^{r_{k-1}\\times r_k}$ for each $1\\le i_k\\le n_k$. It represents the array\n$$\\psi_{i_1,\\ldots,i_d}=\\operatorname{tr}\\!\\left(A_1^{(i_1)}A_2^{(i_2)}\\cdots A_d^{(i_d)}\\right).$$\nA finite MPS/TT state is a normalized array admitting at least one of these exact presentations; a presentation need not be unique or canonical.\n\nA **finite Hermitian Hamiltonian input** is a linear endomorphism $H:\\mathcal H\\to\\mathcal H$ whose matrix in the standard lexicographic basis satisfies $H^*=H$, where $*$ is conjugate transpose as in [[def-finite-tensor-arrays-and-frobenius-inner-product]]. This page uses only that finite-dimensional Hermitian input and makes no claim about how a physical model assembles it. For nonzero $\\psi$, its Rayleigh energy is\n$$\\mathcal E_H(\\psi)=\\frac{\\langle\\psi,H\\psi\\rangle_F}{\\|\\psi\\|_F^2};$$\nfor a normalized state this equals $\\langle\\psi,H\\psi\\rangle_F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over a fixed field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and order $d\\ge2$. The inputs are:\n\n- a normalized finite MPS/TT state $\\psi\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ together with one concrete presentation of $\\psi$, either an open-boundary TT core list or periodic trace matrices; the supplied presentation must contract to $\\psi$;\n- a finite Hermitian Hamiltonian $H$ on that same tensor-array coefficient space;\n- a positive integer sweep budget $M$;\n- a window width $w\\in\\{1,2\\}$; and\n- optionally, positive integer rank caps $c_1,\\ldots,c_{d-1}$.\n\nThe procedure is the following.\n\n1. If the supplied presentation is in periodic trace form, convert it exactly to the open-boundary TT form using [[lem-na-periodic-mps-to-open-tt]]. Otherwise take the supplied open-boundary core list. Keep the resulting open-boundary core list.\n\n2. For each of $M$ full sweeps, perform one forward pass and one backward pass. For width $w$, the windows are the $d$ single sites when $w=1$, or the $d-1$ adjacent site pairs when $w=2$. Visit them in increasing order in the forward pass and decreasing order in the backward pass.\n\n3. Before each window update, place the TT in mixed canonical gauge about that window using the deterministic rank-revealing QR sweeps of [[lem-na-mixed-canonical-qr-gauge-preserves-state]]. Contract the fixed left and right cores to form the isometric center embedding $E$ and compute the finite effective matrix $H_{\\mathrm{eff}}=E^*HE$.\n\n4. Apply the exact ground-vector rule of [[lem-na-finite-hermitian-ground-vector-with-deterministic-tie]] to $H_{\\mathrm{eff}}$. Let $x$ be the resulting unit eigenvector and replace the center coefficient vector by $x$. Record its local Rayleigh energy $x^*H_{\\mathrm{eff}}x=\\lambda_{\\min}$ and residual $\\|H_{\\mathrm{eff}}x-\\lambda_{\\min}x\\|_2$.\n\n5. For a two-site window, reshape the updated center as a matrix with row index (left bond, first physical index) and column index (second physical index, right bond). Compute an exact compact SVD $X=U\\Sigma V^*$. In a forward pass replace the first core by the reshape of $U$ and absorb $\\Sigma V^*$ into the second core. In a backward pass absorb $U\\Sigma$ into the first core and replace the second core by the reshape of $V^*$. Retain every positive singular direction, so this split changes no tensor entries. For a one-site window, keep that site as the center.\n\n6. After each complete forward/backward sweep, if rank caps were supplied, apply [[alg-tensor-train-rounding]] to the current TT and record its cut tails $\\delta_1,\\ldots,\\delta_{d-1}$ and $\\tau=(\\sum_{k=1}^{d-1}\\delta_k^2)^{1/2}$. If $\\tau<1$, normalize the rounded tensor and continue from it. If $\\tau\\ge1$, discard that rounded candidate, retain the last normalized unrounded tensor, and record status **rounding-skipped**. If no rank caps were supplied, do not round.\n\nReturn the final normalized TT state, the energy and local-residual records, all accepted discarded-tail records, and status **budget-complete** or **rounding-skipped** according to whether any requested rounding was skipped.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $m\\ge1$, and let $A\\in\\mathbb F^{m\\times m}$ satisfy $A^*=A$. Define\n$$q_A(x):=\\frac{x^*Ax}{x^*x}\\qquad(x\\in\\mathbb F^m\\setminus\\{0\\}).$$\nThen $q_A$ has a minimum $\\lambda_{\\min}$, equal to the least eigenvalue of $A$, and its minimizers are precisely the nonzero vectors in the lowest eigenspace $E_{\\min}=\\ker(A-\\lambda_{\\min}I)$. There is a deterministic choice of a unit minimizer: let $P_{\\min}$ be the orthogonal projection onto $E_{\\min}$, scan the standard basis $e_1,\\ldots,e_m$, and take the first $j$ with $P_{\\min}e_j\\ne0$. Normalize $P_{\\min}e_j$; over $\\mathbb C$, if $z$ is its first nonzero coordinate, multiply by $\\overline z/|z|$, and over $\\mathbb R$ multiply by $z/|z|$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-tensor-train-rounding",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. The input is a valid TT core list for a tensor of order $d\\ge2$ and exactly one of rank caps $c_1,\\ldots,c_{d-1}\\in\\mathbb N_0$ or absolute tail tolerances $\\tau_1,\\ldots,\\tau_{d-1}\\in[0,\\infty)$.\n\n1. **Left orthogonalize without truncation.** For $k=1,\\ldots,d-1$, reshape core $G_k$ into a matrix with rows $(\\alpha_{k-1},i_k)$ and columns $\\alpha_k$. Compute an exact compact SVD $M=U\\Sigma V^*$, replace $G_k$ by the reshape of $U$, and absorb $\\Sigma V^*$ into the next core along their common bond. Omitting zero singular directions is exact. The resulting cores $G_1,\\ldots,G_{d-1}$ are left-isometric.\n\n2. **Truncate from right to left.** For $k=d,d-1,\\ldots,2$, reshape the current $G_k$ into a matrix $M_k$ with rows $\\alpha_{k-1}$ and columns $(i_k,\\alpha_k)$, and compute an exact compact SVD $M_k=U_k\\Sigma_kV_k^*$. If its positive singular values are $\\sigma_1\\ge\\cdots\\ge\\sigma_s>0$, choose $q_{k-1}=\\min(c_{k-1},s)$ for rank caps, or the least $q_{k-1}\\in\\{0,\\ldots,s\\}$ with $\\sum_{j>q_{k-1}}\\sigma_j^2\\le\\tau_{k-1}^2$ for tolerances. Record $\\delta_{k-1}=(\\sum_{j>q_{k-1}}\\sigma_j^2)^{1/2}$. Replace $G_k$ by the reshape of the first $q_{k-1}$ rows of $V_k^*$ and absorb $U_{k,1:q}\\Sigma_{k,1:q}$ into the previous core.\n\nIf $q_{k-1}=0$, the represented tensor becomes zero; set all remaining internal ranks to zero and their unperformed tails to zero. If the input represents zero, return the all-zero-rank representation and zero tails immediately. The output is the rounded core list and all recorded cut tails. No finite-precision error guarantee is part of this exact-arithmetic procedure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-na-dmrg-sweep-truncation-energy-increase-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\psi_0$ be a normalized finite MPS/TT state with a supplied concrete open-boundary TT core list or periodic trace presentation contracting to $\\psi_0$, and let $H$ be a finite Hermitian Hamiltonian on the same coefficient space. Run [[alg-na-alternating-tensor-optimization-and-effective-eigenproblems]] for one full forward/backward sweep of a fixed width $w\\in\\{1,2\\}$, with $M=1$ and no rank caps, from that presentation using exact local solves and exact SVD splits; call its normalized unrounded output $\\psi_*$. Apply exact TT rounding with rank caps $c_1,\\ldots,c_{d-1}\\in\\mathbb N_0$, obtaining $\\widetilde\\psi$ and discarded tails $\\delta_1,\\ldots,\\delta_{d-1}$. Put $\\tau=(\\sum_{k=1}^{d-1}\\delta_k^2)^{1/2}$. If $\\tau<1$, define $\\phi=\\widetilde\\psi/\\|\\widetilde\\psi\\|_F$. Then\n$$\\mathcal E_H(\\phi)\\le \\mathcal E_H(\\psi_0)+4\\|H\\|_{\\mathrm{op}}\\tau.$$\nIn particular,\n$$\\mathcal E_H(\\phi)-\\mathcal E_H(\\psi_*)\\le4\\|H\\|_{\\mathrm{op}}\\tau.$$\nNo normalized-output claim is made when $\\tau\\ge1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The squared norm of $\\psi$ is $8/9+1/9=1$. Since $\\psi\\psi^*$ is the orthogonal projection onto $\\operatorname{span}\\{\\psi\\}$, $H\\psi=-\\psi$ and $Hx=x$ for every $x\\perp\\psi$. Thus $H$ is Hermitian, its unique ground energy is $-1$, and $\\|H\\|_{\\mathrm{op}}=1$. Also $\\mathcal E_H(|00\\rangle)=1-2(8/9)=-7/9$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The width-two center spans all four coordinates, so $H_{\\mathrm{eff}}=H$. Its ground eigenspace is $\\operatorname{span}\\{\\psi\\}$, and its ground projection sends $|00\\rangle$ to $(2\\sqrt2/3)\\psi$; [F3]'s rule therefore returns exactly $\\psi$. The backward pass leaves it unchanged. Reshaping $\\psi$ into a $2\\times2$ matrix gives $\\operatorname{diag}(2\\sqrt2/3,1/3)$; its singular values are distinct and ordered as written, so rank-one rounding in [F4] retains $(2\\sqrt2/3)|00\\rangle$, records discarded tail $\\tau=1/3$, and after normalization gives $|00\\rangle$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The rounded energy is the value from step 1.1, so its increase from the exact-sweep energy is $-7/9-(-1)=2/9>0$. The bound in [F5] permits at most $4\\cdot1\\cdot(1/3)=4/3$, which indeed exceeds $2/9$. This exhibits a possible post-truncation increase while satisfying the discarded-weight estimate.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example uses a two-site coefficient space of dimension four and a normalized state, checked in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The discarded tail is 1/3<1, so the rounded tensor is nonzero and can be normalized in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exact ground eigenvalue is simple, and the two Schmidt values are positive and distinct in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The reflection Hamiltonian has a unique ground line; degeneracy is not needed for this counterexample."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The local tie rule is finite and deterministic (F3); the one retained singular direction is uniquely determined by the strict singular-value order in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes a strict increase and a compatible upper bound, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example establishes a strict increase and a compatible upper bound, not an iff criterion."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Reflection-state energies and TT tail",
+          "calculation": "||ψ||²=8/9+1/9=1; H=I−2ψψ* has spectrum {−1,1,1,1}; rank-one truncation drops singular value 1/3 and normalizes the retained coefficient to |00>.",
+          "result": "Energy rises from −1 to −7/9, by 2/9, while 2/9≤4||H||τ=4/3."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-na-degenerate-local-ground-state-tie-break": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an order $d\\ge2$, and positive physical dimensions $n_1,\\ldots,n_d$. The finite coefficient space is the tensor-array space $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with the Frobenius pairing and lexicographic index conventions of [[def-finite-tensor-arrays-and-frobenius-inner-product]]. A **normalized finite state** is an array $\\psi\\in\\mathcal H$ with $\\|\\psi\\|_F=1$.\n\nAn **open-boundary matrix-product state (MPS), or tensor train (TT), presentation** is a TT core list from [[def-tensor-train-cores-bond-ranks-and-canonical-gauges]] with $r_0=r_d=1$ whose contraction is $\\psi$. In particular, each core has shape $r_{k-1}\\times n_k\\times r_k$ and the shared internal indices are summed.\n\nA **periodic MPS presentation** consists of positive integers $r_0,\\ldots,r_d$ with $r_d=r_0$ and matrices $A_k^{(i_k)}\\in\\mathbb F^{r_{k-1}\\times r_k}$ for each $1\\le i_k\\le n_k$. It represents the array\n$$\\psi_{i_1,\\ldots,i_d}=\\operatorname{tr}\\!\\left(A_1^{(i_1)}A_2^{(i_2)}\\cdots A_d^{(i_d)}\\right).$$\nA finite MPS/TT state is a normalized array admitting at least one of these exact presentations; a presentation need not be unique or canonical.\n\nA **finite Hermitian Hamiltonian input** is a linear endomorphism $H:\\mathcal H\\to\\mathcal H$ whose matrix in the standard lexicographic basis satisfies $H^*=H$, where $*$ is conjugate transpose as in [[def-finite-tensor-arrays-and-frobenius-inner-product]]. This page uses only that finite-dimensional Hermitian input and makes no claim about how a physical model assembles it. For nonzero $\\psi$, its Rayleigh energy is\n$$\\mathcal E_H(\\psi)=\\frac{\\langle\\psi,H\\psi\\rangle_F}{\\|\\psi\\|_F^2};$$\nfor a normalized state this equals $\\langle\\psi,H\\psi\\rangle_F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $m\\ge1$, and let $A\\in\\mathbb F^{m\\times m}$ satisfy $A^*=A$. Define\n$$q_A(x):=\\frac{x^*Ax}{x^*x}\\qquad(x\\in\\mathbb F^m\\setminus\\{0\\}).$$\nThen $q_A$ has a minimum $\\lambda_{\\min}$, equal to the least eigenvalue of $A$, and its minimizers are precisely the nonzero vectors in the lowest eigenspace $E_{\\min}=\\ker(A-\\lambda_{\\min}I)$. There is a deterministic choice of a unit minimizer: let $P_{\\min}$ be the orthogonal projection onto $E_{\\min}$, scan the standard basis $e_1,\\ldots,e_m$, and take the first $j$ with $P_{\\min}e_j\\ne0$. Normalize $P_{\\min}e_j$; over $\\mathbb C$, if $z$ is its first nonzero coordinate, multiply by $\\overline z/|z|$, and over $\\mathbb R$ multiply by $z/|z|$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over a fixed field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and order $d\\ge2$. The inputs are:\n\n- a normalized finite MPS/TT state $\\psi\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ together with one concrete presentation of $\\psi$, either an open-boundary TT core list or periodic trace matrices; the supplied presentation must contract to $\\psi$;\n- a finite Hermitian Hamiltonian $H$ on that same tensor-array coefficient space;\n- a positive integer sweep budget $M$;\n- a window width $w\\in\\{1,2\\}$; and\n- optionally, positive integer rank caps $c_1,\\ldots,c_{d-1}$.\n\nThe procedure is the following.\n\n1. If the supplied presentation is in periodic trace form, convert it exactly to the open-boundary TT form using [[lem-na-periodic-mps-to-open-tt]]. Otherwise take the supplied open-boundary core list. Keep the resulting open-boundary core list.\n\n2. For each of $M$ full sweeps, perform one forward pass and one backward pass. For width $w$, the windows are the $d$ single sites when $w=1$, or the $d-1$ adjacent site pairs when $w=2$. Visit them in increasing order in the forward pass and decreasing order in the backward pass.\n\n3. Before each window update, place the TT in mixed canonical gauge about that window using the deterministic rank-revealing QR sweeps of [[lem-na-mixed-canonical-qr-gauge-preserves-state]]. Contract the fixed left and right cores to form the isometric center embedding $E$ and compute the finite effective matrix $H_{\\mathrm{eff}}=E^*HE$.\n\n4. Apply the exact ground-vector rule of [[lem-na-finite-hermitian-ground-vector-with-deterministic-tie]] to $H_{\\mathrm{eff}}$. Let $x$ be the resulting unit eigenvector and replace the center coefficient vector by $x$. Record its local Rayleigh energy $x^*H_{\\mathrm{eff}}x=\\lambda_{\\min}$ and residual $\\|H_{\\mathrm{eff}}x-\\lambda_{\\min}x\\|_2$.\n\n5. For a two-site window, reshape the updated center as a matrix with row index (left bond, first physical index) and column index (second physical index, right bond). Compute an exact compact SVD $X=U\\Sigma V^*$. In a forward pass replace the first core by the reshape of $U$ and absorb $\\Sigma V^*$ into the second core. In a backward pass absorb $U\\Sigma$ into the first core and replace the second core by the reshape of $V^*$. Retain every positive singular direction, so this split changes no tensor entries. For a one-site window, keep that site as the center.\n\n6. After each complete forward/backward sweep, if rank caps were supplied, apply [[alg-tensor-train-rounding]] to the current TT and record its cut tails $\\delta_1,\\ldots,\\delta_{d-1}$ and $\\tau=(\\sum_{k=1}^{d-1}\\delta_k^2)^{1/2}$. If $\\tau<1$, normalize the rounded tensor and continue from it. If $\\tau\\ge1$, discard that rounded candidate, retain the last normalized unrounded tensor, and record status **rounding-skipped**. If no rank caps were supplied, do not round.\n\nReturn the final normalized TT state, the energy and local-residual records, all accepted discarded-tail records, and status **budget-complete** or **rounding-skipped** according to whether any requested rounding was skipped.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the ordered basis, $H=\\operatorname{diag}(1,-1,-1,1)$. Its least eigenvalue is $-1$ and its eigenspace is exactly $\\operatorname{span}\\{|01\\rangle,|10\\rangle\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The orthogonal projection onto that eigenspace sends $|00\\rangle$ to zero and sends $|01\\rangle$ to itself. Hence the first standard basis vector with nonzero projection is $|01\\rangle$; it is already unit length and has positive first nonzero coordinate. The local solve therefore returns $|01\\rangle$ deterministically, with energy $-1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The computational basis is the fixed four-vector basis in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks that the projection of the first basis vector vanishes and the next is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The selected vector |01> has unit norm, verified directly in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the two-dimensional lowest eigenspace, and step 2.1 applies the tie rule to it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The first nonzero basis projection is found by a finite ordered scan in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one deterministic selection, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one deterministic selection, not a biconditional."
+        }
+      ],
+      "source_locators": [
+        {
+          "source": "Grégoire Misguich, complete 64-page lecture notes inspected",
+          "url": "https://arxiv.org/pdf/2606.24803",
+          "locator": "§2.1 periodic MPS; §§2.4.1–2.4.3 canonical forms; §2.7 DMRG/effective Hamiltonian and two-site update (PDF pp. 24–26)."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Degenerate two-site spectrum",
+          "calculation": "Z⊗Z=diag(1,−1,−1,1) in the stated lexicographic basis.",
+          "result": "The lowest eigenspace is span{|01>,|10>}; the first nonzero standard-basis projection is |01>."
+        }
+      ],
+      "kind": "example"
+    }
+  }
+}

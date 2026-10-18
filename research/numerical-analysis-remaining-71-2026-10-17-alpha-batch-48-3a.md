@@ -1,0 +1,95 @@
+# Batch 48 Step 3a adjudication
+
+Run: `numerical-analysis-remaining-71-2026-10-17`; group: `batch-48`. Completed local adjudication.
+
+Scope: 13 touched carriers, one page, refuter:48:1; no reader findings. All 17 current raw item hashes match the reader-post snapshot on entry. The two touched examples with unchanged pre/post bytes require metadata/audit disposition rather than invented repairs.
+
+`def-nystrom-quadrature-and-finite-rank-operators`: Reviewed Definition: nonempty compact [0,1] and square follow from Heine–Borel; the Banach example supplies the supremum norm structure, completeness alone is not used as a norm axiom. Continuous integrands are Riemann integrable. Finite real weights may vanish or be negative and nodes may repeat; m,N>=1. No convergence or invertibility is asserted.
+
+`lem-continuous-kernel-integral-operator-is-compact-on-c`: Reviewed steps 1.1–4.1 and exact suppliers: finite kernel bound, integral linearity and length-one error estimate give boundedness; the uniform kernel modulus first establishes the codomain C and then equicontinuity. Nonempty compact interval/square and the Banach norm are explicit. Countable Choice and Dependent Choice match Arzela–Ascoli. Zero kernel and zero input cause no exception.
+
+`lem-finite-node-equation-reconstruction-equivalence`: Reviewed both constructions and homogeneous kernels in steps 1.1–3.1: Mc=b implies reconstructed u(y_i)=c_i even for coincident nodes and zero coefficient functions. Evaluation and reconstruction are linear inverse maps on kernels, so rank-nullity on the finite square matrix proves both directions of invertibility, without assuming evaluation is onto for arbitrary prescribed data.
+
+`lem-half-order-kernel-translation-modulus-in-l1`: Reviewed steps 1.1–2.1: split at distinct singularities, use rho<distance/3 and Cauchy completeness for improper limits, handle boundary singularities one-sided and equal points separately. The truncated kernel is continuous on compact [-1,1]; its full removed L1 mass is 2 sqrt(eta). Two translated tails give 4 sqrt(eta), then uniform continuity and the nonempty bounded supremum prove tau(d)->0. No choice is needed.
+
+`lem-half-order-singular-integral-exists`: Reviewed steps 1.1–3.1: continuous truncated integrands on at most two intervals, annular differences <=4M|m^-1/2-l^-1/2|, and the cofinal-sequence comparison justify the full improper limit. Positive linearity passes through limits. Constant input 1 attains norm 2sqrt(x)+2sqrt(1-x)<=2sqrt(2); x=0,1 have only one tail and norm 2. Normed-space prerequisites and zero input are covered; no AC.
+
+`thm-collectively-compact-operator-stability-and-error`: Reviewed steps 1.1–4.1 and exact Fredholm and metric compactness statements. Failure of an eventual lower bound selects n_m>=m and normalized x_m by AC; collective compactness gives a convergent image subsequence. Its common norm bound controls moving x_m, while consistency is used only at the fixed limit y, yielding Ky=y with norm(y)=1. Each K_n is compact by unit-ball containment, so Fredholm gives surjectivity. The lower bound gives a uniform inverse constant; subtraction yields the stated residual and right-hand-side error. Nonzero X and AC are explicit; norm convergence is not asserted.
+
+Sources checked so far: Lebl Basic Analysis I §5.5 Definition 5.5.1 and Proposition 5.5.2 (endpoint exponent 1/2); Neubauer–Ramlau §3.3 Theorems 3.18–3.19 and their cited local statements (printed pp. 63–64). Current arguments were checked independently against local prerequisite statements.
+
+Next: finish level-1 items and risk reviews, then level-2 weights finding and remaining consumers, page, ledger and focused checks. No established blocker.
+
+
+`lem-midpoint-nystrom-collective-compactness-and-consistency`: Reviewed steps 1.1–3.1: AC supplies both weaker choice assumptions; kernel compactness is the reviewed level-0 result. Every midpoint sum is continuous and linear, with norm <=M since Nh=1. Unit-ball images share the kernel modulus independently of N; Arzela–Ascoli applies on the nonempty compact interval. For each fixed u the panel residual bound h omega_u(h/2) sums to omega_u(h/2); this proves strong consistency only, including N=1 and zero k,u.
+
+`thm-nystrom-operator-norm-perturbation-error`: Reviewed all facts and steps: F7 explicitly bounds K,K_Q,K_Q-K and A using finite real weights, so bounded invertibility is not incorrectly used to infer boundedness of A. On the Banach space X, E=K-K_Q gives A+E=A(I+A^-1 E); composition norm <=R epsilon<1 permits the Neumann inverse and R/(1-q) bound. Subtracting the equations has the correct sign. Finite reconstruction applies with psi_j=w_j k(.,y_j); repeated nodes and zero weights remain valid. q=0 is admitted, q=1 excluded; no norm convergence or AC is assumed.
+
+`cex-standard-midpoint-nystrom-not-operator-norm-convergent`: Reviewed the entire explicit witness: 0<rho<h/2 makes disjoint interior V-shaped windows even at N=1; window integrals vanish, outside value is 1, and midpoint values are -1. Thus unit-norm continuous u_rho gives difference 2-2N rho. Each positive mass-one functional has norm <=1, giving the matching upper bound 2. Let rho tend to zero for fixed N; no single witness for all N is required and the operator norm remains exactly 2.
+
+`ex-gaussian-two-node-nystrom-exact-separable-equation`: Reviewed steps 1.1–3.1: Lebesgue measure has mass one and support at least {0,1/2,1}, and continuous bounded powers give the required absolute moments through degree 3. Countable Choice is stated exactly for the Riemann/Lebesgue bridge. The moment matrix determinant is 19/32 and its solution (92/57,16/19) yields u=(80+24x)/57. Gaussian exactness applies to affine u and quadratic yu. Every reconstructed solution is affine, so moment uniqueness and the kernel correspondence prove grid nonsingularity; existence is checked by substitution.
+
+`ex-near-resonant-midpoint-solution-error`: Reviewed all four steps: the rank-one range forces affine solutions; exact panel integration gives Q(y)=1/2 and Q(y^2)=1/3-h^2/12 for all N>=1. With 0<delta<1, lambda=3(1-delta)>0, both denominators are positive. Recomputed residual lambda^2 h^2/(24 delta) and solution error divided by delta+lambda h^2/12. Their ratio has the claimed >=1/(2delta) bound precisely under lambda h^2/12<=delta. Delta=0 is intentionally excluded; no uniform bound near resonance is asserted.
+
+Level 1 reviewed; next are level-2 consistency, weights and the routed refuter finding, smooth error and singular example, then level 3.
+
+`lem-half-order-product-integration-stability-and-consistency`: Reviewed steps 1.1–4.1: hats are nonnegative and partition unity, including n=1, so positive S_x gives exact mass 2sqrt(x)+2sqrt(1-x)<=2sqrt(2). Convex interpolation has sup norm <=1 and uniformly approximates each fixed continuous g(x,y). Comparing kernels and smooth factors separately gives the common modulus A||u|| tau(d)+2sqrt(2)||u|| omega_a(d), proving both codomain continuity and equicontinuity. AC supplies Arzela–Ascoli assumptions; bounded linearity and unit-ball compactness are established. Interpolation applies with the stated C2 neighborhood extension and uniform second derivative bound, giving 2sqrt(2) M2 h2/8=sqrt(2) M2 h2/4. Weight continuity follows by interpolating its own grid hat; no closed-form weight formula is presumed.
+
+`lem-half-order-product-weights-closed-form`: Reviewed steps 1.1–3.1 and F3 root existence: rationalization proves differentiability on r>0 and P,Q derivatives have the correct signs. Confirmed refuter:48:1 as a nonfatal implicit zero-limit justification; added 0<=delta<epsilon^2 => sqrt(delta)<epsilon in step 2.1 and synchronized that derivation. Truncated one-sided primitives, positive parts, x outside/on/inside each panel, alpha=beta, signed affine factors, and n=1 all yield the stated formulas. No Statement or dependency changes and no AC. Repair confidence 1.
+
+Local change: step 2.1 now explicitly justifies the root limit at zero and states the one-sided truncations for sufficiently small cutoffs. No mathematical interface changed. Next: finalize remaining level-2 reviews, level 3 and page disposition; run focused checks.
+
+
+`thm-midpoint-nystrom-smooth-solution-error`: Reviewed steps 1.1–2.1: X is explicitly Banach and nonzero, AC supplies the compactness hypotheses, continuous k gives compact K and midpoint operators satisfy collective compactness/strong consistency. Injectivity therefore yields eventual inverses; continuous finite coefficients permit reconstruction. The actual fixed-solution integrands are C2([0,1]), exactly the published midpoint theorem hypothesis, with uniform M2. Its h2/24 residual bound and independent right-hand-side error give the asserted estimate. No neighborhood extension or uniform unit-ball smoothness is assumed.
+
+`ex-half-order-midpoint-order-loss`: Reviewed steps 1.1–3.1: first-panel improper mass 2sqrt(h) minus h/sqrt(h/2) gives (2-sqrt(2))sqrt(h). All later panels avoid zero; positive second derivative and two mean-value applications make the symmetric midpoint difference nonnegative. Affine tagged-sum substitution and integral monotonicity justify panel errors and summation. For N=1 there are no later panels. Endpoint g(0) is never sampled; the product rule interpolates the constant regular factor and is exactly 2. This lower bound refutes second-order convergence without claiming an upper rate.
+
+Level 2 complete; next is the final Fredholm consumer and page normalization review.
+
+`thm-half-order-product-integration-fredholm-error`: Reviewed steps 1.1–3.1 after all suppliers: nonzero Banach X, AC, compact K, bounded linear collectively compact K_n, and convergence at every fixed vector meet the stability theorem exactly. Injectivity supplies eventual uniform inverse bound C. The preceding proof establishes continuity of each weight/coefficient, permitting finite-node reconstruction with n+1 nodes, including endpoints. Equation subtraction gives the correct residual sign and combines the fixed-solution C2-extension interpolation bound sqrt(2) M2 h2/4 with arbitrary right-hand-side discrepancy. O(h2) is asserted only for exact right-hand side and the stated regularity.
+
+Page review: U is a linear bijective supremum isometry on nondegenerate compact intervals, not just a completeness assertion. Verified continuous and truncated improper affine substitutions through tagged sums. Continuous kernel scales by L, quadrature weights by 1/L; singular regular factor/weights scale by sqrt(L), tau_I(d)=sqrt(L)tau(d/L). The midpoint residual is L Delta^2 M2/24 and product residual sqrt(2) sqrt(L) M2 Delta^2/4. Both Banach spaces are established, inverse norms and compactness transfer under U. L=1 recovers the items; L=0 is explicitly excluded. No page defect remains.
+
+All 16 required risk reviews are now mathematically complete. Two source locator corrections and synchronization of stale manifest mirrors are being prepared before local checks.
+
+
+Adjudication decisions: 15 exact obligations. Eleven reader item repairs and the normalization page repair are retained; the compactness carrier is amended only for its source locator, and the near-resonant example receives a source-locator correction. The unchanged midpoint operator-norm counterexample has audit enrichment only, with no invented mathematical defect. Refuter:48:1 is confirmed nonfatal and repaired with confidence 1.
+
+Historical evidence: the pre/post snapshots bind item/contract/manifest hashes; all current item hashes matched post on entry. No exact pre-reader raw item copies were found among same-named research archives or at HEAD. Thus original textual details are attributed to the reader report, not claimed as independently recovered historical bytes. Current proofs and actual prerequisites were independently reviewed in full. The routed refuter carrier fingerprint is preserved by the scope and is distinct from a raw item hash; it binds the unchanged post-reader weight carrier. No unbound-observation route is present.
+
+Manifest mirrors synchronized: def-nystrom-quadrature-and-finite-rank-operators (deps, statement); lem-continuous-kernel-integral-operator-is-compact-on-c (deps, sources); lem-half-order-singular-integral-exists (deps); lem-half-order-kernel-translation-modulus-in-l1 (deps); thm-nystrom-operator-norm-perturbation-error (deps); lem-midpoint-nystrom-collective-compactness-and-consistency (deps, statement); thm-midpoint-nystrom-smooth-solution-error (deps, sources); lem-half-order-product-integration-stability-and-consistency (deps, statement); thm-half-order-product-integration-fredholm-error (deps); ex-gaussian-two-node-nystrom-exact-separable-equation (deps); ex-near-resonant-midpoint-solution-error (sources); ex-half-order-midpoint-order-loss (deps). No item inventory/order, dependency level, statement conclusion or algorithm was changed.
+
+Defect rows prepared: na71-3a-b48-reader-1, na71-3a-b48-reader-2, na71-3a-b48-reader-3, na71-3a-b48-reader-4, na71-3a-b48-reader-5, na71-3a-b48-reader-6, na71-3a-b48-reader-7, na71-3a-b48-reader-8, na71-3a-b48-reader-9, na71-3a-b48-reader-10, na71-3a-b48-reader-11, na71-3a-b48-page-normalization, na71-3a-b48-root-zero, na71-3a-b48-compact-source, na71-3a-b48-quadrature-source. Each is owned at 3a-adjudicate with closed fixed disposition; reader-origin details use the reader report as evidence.
+
+
+Final sources and qualifications:
+
+- [Neubauer–Ramlau, Integral Equations and Boundary Value Problems](https://www.jyu.fi/en/file-download/download/public/28300): §3.3 Method 3.12/equations (3.18)–(3.23), printed pp. 60–61; Theorems 3.18–3.19, their arguments and Corollary 3.20, printed pp. 63–64. The compact-kernel theorem is Theorem 2.10, printed pp. 18–19; the locator correction is recorded separately. The current library supplies its own explicit proofs.
+- [Ammari–Fitzpatrick–Yu tutorial notes](https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf): Theorem 1.5 and proof, printed pp. 11–12; §1.4 Theorems 1.10–1.12, printed pp. 15–16. Source caveats: the Neumann estimate is an inequality, despite the source proof's erroneous equality; Theorem 1.11's heading reverses the actual convergence modes, and a universal failure of norm convergence would require a nonzero limiting operator. The local statements do not inherit these errors: the perturbation proof uses an inequality, consistency is strong, and the counterexample explicitly fixes kernel 1.
+- [Lebl, Basic Analysis I §5.5](https://www.jirka.org/ra/html/sec_impropriemann.html): Definition 5.5.1 and Proposition 5.5.2, including the finite-endpoint condition 0<p<1. The local arguments derive the p=1/2 tails and signed-factor limits directly.
+- [Rutgers MATH 373 §8.2](https://sites.math.rutgers.edu/~falk/math373/lecture12.pdf): printed pp. 37–38/PDF pp. 3–4, midpoint panel remainder and composite h²(b-a)/24 estimate under continuous second derivative. This agrees with the exact local midpoint supplier.
+- [FNC §5.6](https://fncbook.com/integration/): Definition 5.6.1 gives the general weights-and-nodes convention. The near-resonance locator now describes that role accurately, without attributing midpoint conventions or moments to that section.
+
+Current carrier/prerequisite evidence is in the sixteen specific risk reviews above and in the owning proof contract. These reviews cover every current numbered argument and all cited direct dependency statements/definitions, including the stronger neighborhood-extension requirement of linear interpolation, the closed-interval C² midpoint interface, all explicit choice assumptions, the Gaussian absolute-moment/support requirements and reconstruction in both directions. The moderate-risk product-integration Definition was also read as a necessary supplier. No recursive audit of unrelated transitive published proofs is claimed.
+
+Validation:
+
+- Initial `node tools/risk-report.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-48.proof-contracts.json`: 17 routed items, 16 HIGH/CRITICAL; 0 errors.
+- Reflow on the three Alpha-edited item paths: all unchanged by the formatter.
+- `node tools/tsx-run.mjs tools/precheck.mts` on the same three item paths: 3 checked, 0 failing.
+- Strict proof-contract check: the first attempt identified an omitted citation-use mapping for F3 at weight step 2.1. Added that mapping; rerun passed with 0 errors, 0 warnings, 17/17 items checked. This mechanical synchronization failure has no defect-ledger row.
+- `node tools/risk-report.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-48.proof-contracts.json --require-reviewed`: 0 errors; all sixteen required item reviews complete.
+- Required final batched `node tools/proof-layout.mjs items/lem-half-order-product-weights-closed-form.md items/lem-continuous-kernel-integral-operator-is-compact-on-c.md items/ex-near-resonant-midpoint-solution-error.md`: 3 items, 11 steps, 0 defects. No item was edited afterward.
+- Defect-ledger append succeeded: 15 closed rows, with the generated view refreshed through the serialized append tool. Every confirmed defect is owned at 3a-adjudicate. The sole flagged decision references exactly one row.
+
+Final scope: exactly 15 decisions (13 touched, 1 page, 1 refuter); no reader findings, new items, withdrawn items, changed page order, or outstanding mathematical blocker. Eleven reader item repairs and the page correction are retained; two citation corrections and the root-limit clarification are the Alpha item edits. The midpoint counterexample's unchanged carrier is classified as audit enrichment with no defect IDs. The batch manifest's twelve stale interface/source/dependency mirrors are synchronized. The frontier dependency ledger records owned consumer dispositions; no published defect was confirmed, so the published ledger needs no entry or lock.
+
+Historical limitation: the hash snapshots and reader report are available, but complete raw pre-reader carriers were not recovered; the report does not assert independent byte-for-byte reconstruction of those historical proofs. This does not prevent checking the current mathematical repairs against their actual prerequisites and the recorded reader descriptions. No historical finding is dismissed because current bytes are corrected.
+
+No judge was invoked, no verification stamp was created, and no engine transition or gate battery was initiated. The engine owns decision hash stamping and subsequent gates. Next action is engine collection of the named report and decisions.
+
+Final Alpha-edited raw item hashes:
+
+- `lem-half-order-product-weights-closed-form`: `d31726d69fc99166ab299515369710b153ab792406470723519b4399a9695204`.
+- `lem-continuous-kernel-integral-operator-is-compact-on-c`: `f4526925785588c726c7ff899652a91d047ccfea28efdd7d105e78770960a053`.
+- `ex-near-resonant-midpoint-solution-error`: `85d1f56e9588852b1feddef1b2cea005754dd798b7952573df0b047779a3f38b`.

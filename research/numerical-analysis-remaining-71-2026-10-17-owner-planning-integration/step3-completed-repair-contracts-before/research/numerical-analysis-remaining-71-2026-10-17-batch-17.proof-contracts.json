@@ -1,0 +1,1944 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-hermitian-sphere-net-controls-operator-norm",
+    "lem-gaussian-squared-norm-tail",
+    "lem-subspace-leverage-score-identities",
+    "thm-sketch-and-solve-exact-minimizer",
+    "thm-sketch-qr-right-preconditioner-conditioned-spectrum",
+    "thm-gaussian-oblivious-l2-subspace-embedding",
+    "thm-sketch-and-solve-residual-guarantee",
+    "thm-leverage-score-row-sampling-subspace-embedding",
+    "cex-embedding-the-column-space-alone-does-not-control-ls-residual",
+    "ex-leverage-zero-rows-and-high-coherence",
+    "ex-overdetermined-regression-exact-subspace-sketch"
+  ],
+  "contracts": {
+    "lem-hermitian-sphere-net-controls-operator-norm": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ be an integer and $0<\\epsilon<1$. There is a finite set $\\mathcal N\\subseteq S^{d-1}$ such that every $u\\in S^{d-1}$ has some $v\\in\\mathcal N$ with $\\|u-v\\|_2\\le\\epsilon$, and\n$$|\\mathcal N|\\le(1+2/\\epsilon)^d.$$\nHere $S^{d-1}=\\{u\\in\\mathbb R^d:\\|u\\|_2=1\\}$ by [[def-euclidean-spheres-and-closed-balls]]. Such a set is called an $\\epsilon$-net of the sphere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "egard $H$ as a complex Hermitian matrix when $\\mathbb K=\\mathbb R$. By [F1], it has an orthonormal eigenbasis over $\\mathbb C$; every eigenvalue is real because $Hv=\\lambda v$ and $H=H^*$ give $\\lambda\\|v\\|_2^2=v^*Hv=\\overline{v^*Hv}=\\overline\\lambda\\|v\\|_2^2$. Choose a unit eigenvector $z$ for an eigenvalue $\\lambda$ of largest absolute value. The diagonalization shows $\\|H\\|_2=|\\lambda|$ over $\\mathbb C$. If $\\mathbb K=\\mathbb C$, set $u=z$. If $\\mathbb K=\\mathbb R$, write $z=a+ib$; since $H$ and $\\lambda$ are real, $Ha=\\lambda a$ and $Hb=\\lambda b$, and at least one of $a,b$ is nonzero. Normalize a nonzero part as $u$. The same diagonalization bounds the real operator norm by $|\\lambda|$, while $u$ attains that bound, so $|u^*Hu|=|\\lambda|=\\|H\\|_2$ over either field. [F1, choose, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] in real dimension $q=d$ when $\\mathbb K=\\mathbb R$, and $q=2d$ when $\\mathbb K=\\mathbb C$, to obtain the stated net-size bound and a $v\\in\\mathcal N$ with $\\|u-v\\|_2\\le1/4$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $H=H^*$ and $u,v$ are unit vectors, $|u^*Hu-v^*Hv|\\le|(u-v)^*Hu|+|v^*H(u-v)|\\le2\\|u-v\\|_2\\|H\\|_2\\le\\|H\\|_2/2$, using [F3] and the definition of operator norm. Therefore $|v^*Hv|\\ge|u^*Hu|-\\|H\\|_2/2=\\|H\\|_2/2$, proving the claimed bound.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d≥1; the zero-dimensional operator is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For H=0, every net quadratic form and the operator norm are zero, as included in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The d=1 sphere and eigenvector argument are included in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated or zero eigenvalues do not affect the maximum-absolute-eigenvalue choice in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The radius is fixed at 1/4; the net-size and norm estimates are stated in the Statement and steps 2.1–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The spectral theorem supplies an eigenvector and the finite sphere-net theorem supplies a net; both choices are used in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The net estimate bounds the full Hermitian operator norm by sampled quadratic forms, using a maximizing eigenvector and nearby net point.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The net estimate bounds the full Hermitian operator norm by sampled quadratic forms, using a maximizing eigenvector and nearby net point.",
+            "item_sha256": "c0d6ac77c784e601ab999286d548e414f163783d0aadc3eb8b78dcea45f5a482",
+            "row_sha256": "4a115eca74724ac85161f4b0294cbd9c3bd2167a66b6aec5698c11cbc0a6fcbf",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The net estimate bounds the full Hermitian operator norm by sampled quadratic forms, using a maximizing eigenvector and nearby net point.",
+            "item_sha256": "c0d6ac77c784e601ab999286d548e414f163783d0aadc3eb8b78dcea45f5a482",
+            "row_sha256": "4a115eca74724ac85161f4b0294cbd9c3bd2167a66b6aec5698c11cbc0a6fcbf",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A bound on quadratic samples is not used to infer the existence or cardinality of a sphere net; those are supplied independently.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "A bound on quadratic samples is not used to infer the existence or cardinality of a sphere net; those are supplied independently.",
+            "item_sha256": "c0d6ac77c784e601ab999286d548e414f163783d0aadc3eb8b78dcea45f5a482",
+            "row_sha256": "ea86eff37c831e7037e42051f1296690391083a6ac4c34c785f29a2700cc42b0",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "A bound on quadratic samples is not used to infer the existence or cardinality of a sphere net; those are supplied independently.",
+            "item_sha256": "c0d6ac77c784e601ab999286d548e414f163783d0aadc3eb8b78dcea45f5a482",
+            "row_sha256": "ea86eff37c831e7037e42051f1296690391083a6ac4c34c785f29a2700cc42b0",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read all three proof steps and all four local suppliers. Hermitian implies normal and real eigenvalues; for real H, real or imaginary part of a nonzero extremal complex eigenvector attains the same real norm. A finite 1/4-net in real dimension d or 2d has size 9^d or 9^(2d); two Cauchy-Schwarz terms cost at most ||H||/2. H=0, d=1 and repeated eigenvalues are covered. Reader real-case clarification accepted; no Statement or dependency changed. Woodruff Lemma 5 supports net method; sharper count is supplied by the local sphere-net proof and Rigollet–Hütter Lemma 1.18."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke applies to this general result; the proof and its boundary cases are stated directly.",
+      "kind": "lemma"
+    },
+    "lem-gaussian-squared-norm-tail": {
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice, through the finite-dimensional Lebesgue probability laws in def-standard-real-and-normalized-complex-gaussian-matrix-law, is used to define and integrate the finite Gaussian product law. No unrestricted Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice so that the repository's Lebesgue measure\non each finite-dimensional real coordinate space is a measure. A **standard\nreal Gaussian scalar** has Lebesgue density\n$$\\varphi_R(x)=(2\\pi)^{-1/2}e^{-x^2/2}.$$\nA **normalized complex Gaussian scalar** is $z=(x+iy)/\\sqrt2$ for independent\nstandard real Gaussian scalars $x,y$; its density on $\\mathbb C\\simeq\\mathbb\nR^2$ is $\\varphi_C(z)=\\pi^{-1}e^{-|z|^2}$ and $\\mathbb E|z|^2=1$.\n\nFor $F=\\mathbb R$ or $\\mathbb C$, an **iid standard Gaussian matrix** in\n$F^{a\\times b}$ has independent entries with the corresponding scalar law.\nAll its expectations are finite-dimensional Lebesgue integrals against the\nproduct density. Independence means this product-density factorization.\nThe normalized complex convention is fixed throughout; it is not the\nunnormalized law $x+iy$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ ([[def-linear-map]],\n[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which [[def-extended-reals]]\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For real $Z$ and $\\theta<1/2$, put $c=1-2\\theta>0$. By [F3], the substitution $u=\\sqrt c\\,x$ gives $\\mathbb Ee^{\\theta Z^2}=c^{-1/2}(2\\pi)^{-1/2}\\int_{\\mathbb R}e^{-u^2/2}\\,du=c^{-1/2}$. The prefactored integral is one since [F1] is a probability density. For normalized complex $G$ and $\\theta<1$, put $d=1-\\theta>0$. On $\\mathbb C\\simeq\\mathbb R^2$, the map $u=\\sqrt d\\,z$ has real determinant $d$, so [F3] gives $\\mathbb Ee^{\\theta|G|^2}=d^{-1}\\pi^{-1}\\int_{\\mathbb R^2}e^{-|u|^2}\\,du=d^{-1}$. Again the prefactored integral is one by the normalized density [F1]. These identities include the finite integrability ranges needed below.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the real case, [F4] applied to $X=e^{\\lambda\\sum_j g_j^2}$ at the positive threshold $a=e^{\\lambda m(1+t)}$, with $\\lambda=t/(2(1+t))$, and independence together with the first formula of step 1.1 give $\\Pr\\{m^{-1}\\sum_jg_j^2\\ge1+t\\}\\le\\exp[-\\tfrac m2(t-\\log(1+t))]$. For the complex case use $X=e^{\\lambda\\sum_j|g_j|^2}$, the same threshold, $\\lambda=t/(1+t)$, and the second formula to obtain the stronger bound $\\exp[-m(t-\\log(1+t))]$. Both positive parameters lie in the finite mgf ranges of step 1.1. By [F5], $t-\\log(1+t)=\\int_0^t u/(1+u)\\,du\\ge t^2/4$, so both upper tails are at most $e^{-mt^2/8}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For the real lower tail, apply [F4] to $X=e^{-\\lambda\\sum_j g_j^2}$ at threshold $a=e^{-\\lambda m(1-t)}>0$ with $\\lambda=t/(2(1-t))$; for the complex lower tail use $X=e^{-\\lambda\\sum_j|g_j|^2}$, the same threshold, and $\\lambda=t/(1-t)$. The event $X\\ge a$ is precisely the lower-tail event because the exponential is decreasing in the squared norm sum. The mgf arguments $-\\lambda$ lie in the finite ranges of step 1.1, and independence again factors the expectations. Step 1.1 gives respective bounds $\\exp[-\\tfrac m2(-t-\\log(1-t))]$ and $\\exp[-m(-t-\\log(1-t))]$. By [F5], $-t-\\log(1-t)=\\int_0^t u/(1-u)\\,du\\ge t^2/2$, so each is at most $e^{-mt^2/8}$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The event in the Statement is the union of the upper and lower tail events bounded in steps 2.1 and 2.2. The finite union bound [F6] therefore gives the claimed sum bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The number of independent Gaussian coordinates is positive because normalization divides by that number; a zero-dimensional squared norm is not included.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The number of independent Gaussian coordinates is positive because normalization divides by that number; a zero-dimensional squared norm is not included.",
+            "item_sha256": "250229331661c51b72e0227574b3439d36fe950fbe8eaa172610005b25281a36",
+            "row_sha256": "6641e9bda04d4641a08103e4285248de3408abb9a48779f3869ef0ba3badd6a5",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The number of independent Gaussian coordinates is positive because normalization divides by that number; a zero-dimensional squared norm is not included.",
+            "item_sha256": "250229331661c51b72e0227574b3439d36fe950fbe8eaa172610005b25281a36",
+            "row_sha256": "6641e9bda04d4641a08103e4285248de3408abb9a48779f3869ef0ba3badd6a5",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The density and moment-generating calculations include scalar values at zero in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows m=1; both tail estimates in steps 2.1 and 2.2 and their union in step 3.1 apply without an asymptotic assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The normalized complex convention and the real Gaussian density are handled separately in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The parameter 0<t<1 is used in the Chernoff choices in steps 2.1–2.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only the finite independent family in the Statement is integrated; Countable Choice is identified exactly in A1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Gaussian moment-generating-function calculation supplies a concentration upper bound; it does not recover Gaussianity or independence from that probability estimate.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The Gaussian moment-generating-function calculation supplies a concentration upper bound; it does not recover Gaussianity or independence from that probability estimate.",
+            "item_sha256": "250229331661c51b72e0227574b3439d36fe950fbe8eaa172610005b25281a36",
+            "row_sha256": "76d8e7946a7c9d324d2b362699179659806d73ac6a4a64602cca2c8b23f76c57",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The Gaussian moment-generating-function calculation supplies a concentration upper bound; it does not recover Gaussianity or independence from that probability estimate.",
+            "item_sha256": "250229331661c51b72e0227574b3439d36fe950fbe8eaa172610005b25281a36",
+            "row_sha256": "76d8e7946a7c9d324d2b362699179659806d73ac6a4a64602cca2c8b23f76c57",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Gaussian moment-generating-function calculation supplies a concentration upper bound; it does not recover Gaussianity or independence from that probability estimate.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The Gaussian moment-generating-function calculation supplies a concentration upper bound; it does not recover Gaussianity or independence from that probability estimate.",
+            "item_sha256": "250229331661c51b72e0227574b3439d36fe950fbe8eaa172610005b25281a36",
+            "row_sha256": "f737f734973a502a096f4a87bfe0aea7fa8d15036a004c44e32fa18b81418320",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The Gaussian moment-generating-function calculation supplies a concentration upper bound; it does not recover Gaussianity or independence from that probability estimate.",
+            "item_sha256": "250229331661c51b72e0227574b3439d36fe950fbe8eaa172610005b25281a36",
+            "row_sha256": "f737f734973a502a096f4a87bfe0aea7fa8d15036a004c44e32fa18b81418320",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/gaussian_planning",
+        "notes": "The actual Gaussian normalization/product independence supplier is now proved under the same Countable Choice and explicitly used. Same owner reviewed complete actual supplier-first tail and embedding proofs, preserving every Statement and constant; completed old/current25-carrier closure is recorded.",
+        "owner_evidence": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step3-gaussian-final-owner-resolution-proposal.json",
+        "native_execution_credit": false
+      },
+      "finite_check_disposition": "No separate registered finite_smoke applies to this general result; the proof and its boundary cases are stated directly.",
+      "kind": "lemma",
+      "prior_risk_reviews": [
+        {
+          "status": "open",
+          "reviewer": "alpha-batch-17",
+          "notes": "Read all four steps, all six cited suppliers, and current batch-11 Gaussian definition/manifest/null contract. Conditional algebra is correct: real mgf (1-2theta)^(-1/2), complex mgf (1-theta)^(-1), admissible upper/lower exponential parameters, t-log(1+t)>=t²/4 and -t-log(1-t)>=t²/2 for 0<t<1. m>=1 excludes empty average, thresholds are positive and finite. However step 1.1 assumes unit mass for both densities without a proved CC-compatible supplier. reader:17:3/refuter:17:3 escalated to batch 11; this risk remains open until owner resolution and supplier-first re-review."
+        }
+      ]
+    },
+    "lem-subspace-leverage-score-identities": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subspace-leverage-scores",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $U\\subseteq\\mathbb K^n$\nhave dimension $d\\ge1$. Choose a matrix $Q\\in\\mathbb K^{n\\times d}$\nwhose columns are an orthonormal basis of $U$, so $Q^*Q=I_d$. For\n$0\\le i<n$, define the **$i$-th row leverage score of $U$** by\n$$\n\\ell_i(U):=\\|e_i^*Q\\|_2^2,\n$$\nwhere $e_i$ is the $i$-th standard coordinate vector. The following item\nproves that this value is independent of the chosen orthonormal basis, so the\ndefinition is well-defined.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-subspace-leverage-scores",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $U\\subseteq\\mathbb K^n$\nhave dimension $d\\ge1$. Choose a matrix $Q\\in\\mathbb K^{n\\times d}$\nwhose columns are an orthonormal basis of $U$, so $Q^*Q=I_d$. For\n$0\\le i<n$, define the **$i$-th row leverage score of $U$** by\n$$\n\\ell_i(U):=\\|e_i^*Q\\|_2^2,\n$$\nwhere $e_i$ is the $i$-th standard coordinate vector. The following item\nproves that this value is independent of the chosen orthonormal basis, so the\ndefinition is well-defined.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $Q'$ be another orthonormal basis matrix of $U$, and set $W=Q^*Q'$. Since each column of $Q'$ lies in $U=\\operatorname{Ran}(Q)$, the orthogonal projection $QQ^*$ fixes it, so $Q'=QQ^*Q'=QW$. Thus $W^*W=Q'^*QQ^*Q'=Q'^*Q'=I_d$. The square matrix $W$ is unitary, and right multiplication by $W$ preserves the Euclidean norm of every row; hence $\\|e_i^*Q'\\|_2^2=\\|e_i^*Q\\|_2^2$ for every $i$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Writing $q_j$ for column $j$ of $Q$, finite-sum reordering gives $\\sum_{i=0}^{n-1}\\ell_i=\\sum_i\\sum_{j=0}^{d-1}|Q_{ij}|^2=\\sum_j\\|q_j\\|_2^2=d$, because every column is a unit vector.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $P=QQ^*$. Then $P=P^*$ and $P^2=P$ by [F2], so $e_i=Pe_i+(I-P)e_i$ is an orthogonal decomposition. Also $\\ell_i=\\|Q^*e_i\\|_2^2=\\|QQ^*e_i\\|_2^2=\\|Pe_i\\|_2^2$, using $Q^*Q=I_d$. Therefore $0\\le\\ell_i\\le\\|e_i\\|_2^2=1$, and $\\ell_i=0$ exactly when $Q^*e_i=0$, which is exactly when row $i$ of $Q$ is zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A positive-dimensional subspace cannot have an empty orthonormal basis or live in zero ambient dimension.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A positive-dimensional subspace cannot have an empty orthonormal basis or live in zero ambient dimension.",
+            "item_sha256": "f542b1656552da68a61c611ff793b644ef9da7d1e36886eff6841e97d22c0939",
+            "row_sha256": "3497b3fc54edd65adc97c817a5c5ca39082f2d3b430ae81eb6d19c3fe778bd66",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A positive-dimensional subspace cannot have an empty orthonormal basis or live in zero ambient dimension.",
+            "item_sha256": "f542b1656552da68a61c611ff793b644ef9da7d1e36886eff6841e97d22c0939",
+            "row_sha256": "3497b3fc54edd65adc97c817a5c5ca39082f2d3b430ae81eb6d19c3fe778bd66",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero leverage rows are characterized exactly in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite-sum dimension identity includes d=1 in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A row may have leverage zero or one; step 2.1 proves both endpoint bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The score endpoints 0 and 1 are included by the projection argument in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Two arbitrary orthonormal bases are compared by a finite unitary change of basis in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: A zero leverage score is a sum of squared row moduli equal to zero, so every entry of that row vanishes.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A zero leverage score is a sum of squared row moduli equal to zero, so every entry of that row vanishes.",
+            "item_sha256": "f542b1656552da68a61c611ff793b644ef9da7d1e36886eff6841e97d22c0939",
+            "row_sha256": "d90c6420195b0adf54191d23765092ea9e1c4c5c04629c5b81a703c4bd808731",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A zero leverage score is a sum of squared row moduli equal to zero, so every entry of that row vanishes.",
+            "item_sha256": "f542b1656552da68a61c611ff793b644ef9da7d1e36886eff6841e97d22c0939",
+            "row_sha256": "d90c6420195b0adf54191d23765092ea9e1c4c5c04629c5b81a703c4bd808731",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: When the coordinate row vanishes its squared Euclidean norm is zero, giving the reverse direction of the stated exact characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "When the coordinate row vanishes its squared Euclidean norm is zero, giving the reverse direction of the stated exact characterization.",
+            "item_sha256": "f542b1656552da68a61c611ff793b644ef9da7d1e36886eff6841e97d22c0939",
+            "row_sha256": "a3003a1b24f933c9af5e00b186049c8a36f42fa64c44e5047624383ade463fd8",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "When the coordinate row vanishes its squared Euclidean norm is zero, giving the reverse direction of the stated exact characterization.",
+            "item_sha256": "f542b1656552da68a61c611ff793b644ef9da7d1e36886eff6841e97d22c0939",
+            "row_sha256": "a3003a1b24f933c9af5e00b186049c8a36f42fa64c44e5047624383ade463fd8",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-scaffolder",
+        "notes": "Author self-check of the displayed argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke applies to this general result; the proof and its boundary cases are stated directly.",
+      "kind": "lemma"
+    },
+    "thm-sketch-and-solve-exact-minimizer": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-sketch-and-solve-least-squares",
+          "source_section": "Definition",
+          "quote": "Input $A\\in\\mathbb K^{n\\times p}$, $b\\in\\mathbb K^n$, a supplied sketch\n$S\\in\\mathbb K^{m\\times n}$, and a finite nonnegative integer SVD sweep\nbudget $N$, where $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Form\n$C=SA$ and $c=Sb$, and call\n[[alg-rank-thresholded-least-squares-by-svd]] on $(C,c)$ with threshold\n$\\tau=0$ and budget $N$.\n\nIf the call returns exact-arithmetic convergence with an exact SVD record,\nreturn `success`, the exact rank $r=\\operatorname{rank}(C)$, the canonical\nminimum-norm vector $\\widehat x=C^+c$, and the separately computed sketched\nand physical residuals $\\|C\\widehat x-c\\|_2$ and\n$\\|A\\widehat x-b\\|_2$. The exact-arithmetic solve-error certificate is\nzero. If the SVD call returns `inconclusive`, return its status and supplied\npartial diagnostics without claiming a minimizer. In finite precision, return\nthe computed candidate and the two residual reports separately; mark the rank\n`unverified` unless a certified interval separates every singular-value\ncomparison from zero, and report a solve-error certificate only when the\nsolver supplies one. No finite-precision accuracy guarantee is part of this\nprocedure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-svd-thresholded-least-squares-minimum-norm-model",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, $b\\in\\mathbb F^m$, and $\\tau\\ge0$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$. Let $A=U\\Sigma V^*$ be an exact SVD. Define $\\Sigma_\\tau$ by retaining $\\sigma_i$ when $\\sigma_i>\\tau$ and replacing each $\\sigma_i\\le\\tau$ by zero, and set $A_\\tau=U\\Sigma_\\tau V^*$. Put $q=\\#\\{i:\\sigma_i>\\tau\\}$, the spectral numerical rank of $A$ at threshold $\\tau$. The vector $x_\\tau=A_\\tau^+b$ is the unique minimum-Euclidean-norm least-squares solution for the truncated model $A_\\tau x\\approx b$. An exact-arithmetic run of [[alg-rank-thresholded-least-squares-by-svd]] that converges within its supplied finite sweep budget and supplies this SVD record returns $x_\\tau$; a failure or exhausted budget returns `inconclusive`. No convergence within an arbitrary budget is asserted. Moreover,\n$$\\|A-A_\\tau\\|_2=\\sigma_{q+1}\\le\\tau,\\qquad \\|Ax_\\tau-b\\|_2\\le\\|A_\\tau x_\\tau-b\\|_2+\\tau\\|x_\\tau\\|_2,$$\nwith $\\sigma_{p+1}=0$ when $q=p=\\min(m,n)$. If every discarded singular value is zero, then $A_\\tau=A$ and $x_\\tau$ is the unique minimum-norm least-squares solution for the original matrix. If a positive singular value is discarded, no original-matrix least-squares optimality is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $C=SA$ and $c=Sb$. By [F1], the converged call uses threshold zero and returns $\\widehat x=C_0^+c$, where $C_0$ retains exactly the singular values of $C$ that are strictly positive.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In an exact SVD $C=U\\Sigma V^*$, zero singular values contribute zero terms and every positive singular value is retained at threshold zero. Thus $C_0=U\\Sigma V^*=C$, including the rank-zero case.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F2] to the truncated matrix $C_0$. It says that $C_0^+c$ is its unique minimum-norm least-squares solution. By step 2.1, $C_0=C$, so $\\widehat x$ is the unique minimum-norm minimizer of $\\|Cx-c\\|_2=\\|SAx-Sb\\|_2$; the zero-threshold rank count is precisely the number of positive singular values of $C$, hence $\\operatorname{rank}(C)$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns a finite SVD execution with an exact converged record; an empty-factorization branch is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If SA is zero, all singular values are zero and step 2.1 gives C_0=C."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At rank one, the strict zero-threshold rule retains every positive singular value in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero singular values and arbitrary rank deficiency are handled in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The threshold is exactly zero; the strict comparison and zero singular-value equality case are handled in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exact SVD record and minimum-norm solution are supplied by the named theorem in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The exact converged zero-threshold sketch SVD retains every positive singular value and returns the unique minimum-norm sketch minimizer. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "The exact converged zero-threshold sketch SVD retains every positive singular value and returns the unique minimum-norm sketch minimizer. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "d2ec523d29d71e0560db057692d903d70512ffd4a83ca533e5642aa8e9036e1e",
+            "row_sha256": "7f7a143c65368ebf3fc4860a82394e4f26eb66ef25c4403fa2fa077ce92eb377",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "The exact converged zero-threshold sketch SVD retains every positive singular value and returns the unique minimum-norm sketch minimizer. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "d2ec523d29d71e0560db057692d903d70512ffd4a83ca533e5642aa8e9036e1e",
+            "row_sha256": "7f7a143c65368ebf3fc4860a82394e4f26eb66ef25c4403fa2fa077ce92eb377",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exact converged zero-threshold sketch SVD retains every positive singular value and returns the unique minimum-norm sketch minimizer. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "The exact converged zero-threshold sketch SVD retains every positive singular value and returns the unique minimum-norm sketch minimizer. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "d2ec523d29d71e0560db057692d903d70512ffd4a83ca533e5642aa8e9036e1e",
+            "row_sha256": "d622ddbaad9ef82c61cac1541d7f5d4ef2e77dbe0adf07db8522ad4a51d34054",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "The exact converged zero-threshold sketch SVD retains every positive singular value and returns the unique minimum-norm sketch minimizer. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "d2ec523d29d71e0560db057692d903d70512ffd4a83ca533e5642aa8e9036e1e",
+            "row_sha256": "d622ddbaad9ef82c61cac1541d7f5d4ef2e77dbe0adf07db8522ad4a51d34054",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read all three steps, exact procedure and its finite-budget SVD call, and full minimum-norm model theorem. Strict threshold tau=0 discards only zero singular values, hence C_0=C, even at rank zero and empty singular spectrum. The supplied exact converged record determines C^+c and positive-value count; uniqueness is minimum norm among fits, not unique fit for rank-deficient C. No convergence or finite-precision branch is certified. All source hypotheses are preserved."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke applies to this general result; the proof and its boundary cases are stated directly.",
+      "kind": "theorem"
+    },
+    "thm-sketch-qr-right-preconditioner-conditioned-spectrum": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oblivious-l2-subspace-embedding",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $n,m\\ge1$, and use\n$\\|x\\|_2^2=\\sum_i|x_i|^2$ on $\\mathbb K^n$. For a fixed subspace\n$U\\subseteq\\mathbb K^n$ and $0<\\varepsilon<1$, a matrix\n$S\\in\\mathbb K^{m\\times n}$ is an **$\\varepsilon$-subspace embedding\nfor $U$** when\n$$\n(1-\\varepsilon)\\|x\\|_2^2\\le\\|Sx\\|_2^2\\le(1+\\varepsilon)\\|x\\|_2^2\\quad\\text{for every }x\\in U.\n$$\n\nFor $0<\\delta<1$, a distribution $\\mathcal D$ on $m\\times n$\nmatrices is an **$(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace\nembedding for dimension $d$** if, for every fixed $d$-dimensional\nsubspace $U\\subseteq\\mathbb K^n$ chosen independently of the draw,\n$$\n\\Pr_{S\\sim\\mathcal D}\\{S\\text{ is an }\\varepsilon\\text{-subspace embedding for }U\\}\\ge1-\\delta.\n$$\nThe subspace is fixed before sampling, but the guarantee is stated separately\nfor each such $U$; it does not assert that one draw preserves all\n$d$-dimensional subspaces simultaneously. For a matrix $A$, an embedding\nof $\\operatorname{Ran}(A)$ means the property on its column space. For\nleast-squares residuals $Ax-b$, the relevant subspace is\n$\\operatorname{span}(\\operatorname{Ran}(A),b)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\nA **full QR factorisation** of $A$ is a factorisation\n\n$$A=QR,$$where $Q\\in M_m(\\mathbb F)$ is orthogonal or unitary and $R\\in M_{m\\times n}(\\mathbb F)$ is upper trapezoidal. A **reduced QR factorisation** is a factorisation$$A=\\widehat Q\\widehat R,$$where $\\widehat Q\\in M_{m\\times n}(\\mathbb F)$ has orthonormal columns ($\\widehat Q^*\\widehat Q=I_n$) and $\\widehat R\\in M_n(\\mathbb F)$ is upper triangular. A **column-pivoted QR factorisation** is a factorisation$$A\\Pi=\\widehat Q R,$$\n\nwhere $\\Pi$ is a permutation matrix acting on columns, $\\widehat Q$ has\northonormal columns, and $R$ is upper trapezoidal or upper triangular according\nto whether the full or reduced form is used. Computationally, one obtains these\nfactorisations by successive Householder reflectors or Givens transformations\nthat zero entries below the diagonal, with the pivoted version choosing the next\ncolumn after a permutation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\n1. Successive Householder reflectors or Givens transformations can zero the\n   subdiagonal entries column by column and produce a full QR factorisation\n   $A=QR$ and hence a reduced QR factorisation $A=\\widehat Q\\widehat R$.\n2. In dense real arithmetic, Householder QR uses\n   $$2mn^2-\\frac{2}{3}n^3+O(mn)$$\n   scalar operations, while dense Givens QR uses\n   $$3mn^2-n^3+O(mn)$$\n   scalar operations.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $y\\in\\mathbb K^d$ is nonzero, full column rank gives $Ay\\ne0$; then [F1] gives $\\|SAy\\|_2^2\\ge(1-\\varepsilon)\\|Ay\\|_2^2>0$. Thus $SA$ has full column rank. The reduced QR factorization in [F2] exists. If $Rv=0$, then $SAv=QRv=0$; injectivity of $SA$ forces $v=0$, so $R$ is nonsingular and $P_S=R^{-1}$ is defined.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $y\\in\\mathbb K^d$, $SAP_Sy=QRR^{-1}y=Qy$, so $\\|SAP_Sy\\|_2^2=\\|Qy\\|_2^2=\\|y\\|_2^2$ by [F2]. Since $AP_Sy\\in\\operatorname{Ran}(A)$, [F1] yields $(1-\\varepsilon)\\|AP_Sy\\|_2^2\\le\\|y\\|_2^2\\le(1+\\varepsilon)\\|AP_Sy\\|_2^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every unit $y$, step 2.1 implies $1/\\sqrt{1+\\varepsilon}\\le\\|AP_Sy\\|_2\\le1/\\sqrt{1-\\varepsilon}$. By [F3], the minimum and maximum of these values over the unit sphere are $\\sigma_{\\min}(AP_S)$ and $\\sigma_{\\max}(AP_S)$, respectively. This proves both singular-value bounds.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The lower bound in step 3.1 is positive, so the ratio defining $\\kappa_2$ is valid. Dividing the upper singular-value bound by the lower one gives $\\kappa_2(AP_S)\\le\\sqrt{(1+\\varepsilon)/(1-\\varepsilon)}$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes 1≤d≤min(n,m) and full column rank."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A zero column is incompatible with the full-column-rank hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The d=1 reduced QR and singular-value bounds are covered by steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Full column rank and the lower embedding inequality force SA and R to be nonsingular in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict condition 0<epsilon<1 gives positive denominators in the Statement and the positive lower singular-value bound in step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A reduced QR exists by the finite QR supplier, and its nonsingularity is proved in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The embedding hypothesis makes the sketched matrix injective and the triangular factor invertible, yielding singular-value bounds after right scaling.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The embedding hypothesis makes the sketched matrix injective and the triangular factor invertible, yielding singular-value bounds after right scaling.",
+            "item_sha256": "a5e79f79a0112a93ae7df07fc621021edcc571bfb6b986fda2c5923754d877b1",
+            "row_sha256": "4784f6d270228121a26b0d84413b25ad3c3d1946e08785cf7dcdf66e4baf2ead",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The embedding hypothesis makes the sketched matrix injective and the triangular factor invertible, yielding singular-value bounds after right scaling.",
+            "item_sha256": "a5e79f79a0112a93ae7df07fc621021edcc571bfb6b986fda2c5923754d877b1",
+            "row_sha256": "4784f6d270228121a26b0d84413b25ad3c3d1946e08785cf7dcdf66e4baf2ead",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A well-conditioned right-preconditioned matrix alone is not asserted to certify that the supplied sketch embeds the entire original column space.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "A well-conditioned right-preconditioned matrix alone is not asserted to certify that the supplied sketch embeds the entire original column space.",
+            "item_sha256": "a5e79f79a0112a93ae7df07fc621021edcc571bfb6b986fda2c5923754d877b1",
+            "row_sha256": "7768b18b9cd4138f5df994b9e08837dcc95c45b3537b37546bebb5e181876b43",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "A well-conditioned right-preconditioned matrix alone is not asserted to certify that the supplied sketch embeds the entire original column space.",
+            "item_sha256": "a5e79f79a0112a93ae7df07fc621021edcc571bfb6b986fda2c5923754d877b1",
+            "row_sha256": "7768b18b9cd4138f5df994b9e08837dcc95c45b3537b37546bebb5e181876b43",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read all four steps and exact six supplier Statements/Definitions. Full column rank with epsilon<1 makes SA injective; m>=d allows reduced QR and R is invertible. SAPy=Qy gives two-sided squared-norm comparison on Ran(A); solving yields reciprocal square-root bounds and their positive ratio. Both fields, d=1, square/tall matrices and zero y are included; rank-deficient A and epsilon=1 are explicitly excluded. Singular-value extremality follows directly from SVD. No algorithmic convergence or Gaussian normalization is used."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke applies to this general result; the proof and its boundary cases are stated directly.",
+      "kind": "theorem"
+    },
+    "thm-gaussian-oblivious-l2-subspace-embedding": {
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is required by the finite-dimensional Gaussian product measures; no unrestricted Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oblivious-l2-subspace-embedding",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $n,m\\ge1$, and use\n$\\|x\\|_2^2=\\sum_i|x_i|^2$ on $\\mathbb K^n$. For a fixed subspace\n$U\\subseteq\\mathbb K^n$ and $0<\\varepsilon<1$, a matrix\n$S\\in\\mathbb K^{m\\times n}$ is an **$\\varepsilon$-subspace embedding\nfor $U$** when\n$$\n(1-\\varepsilon)\\|x\\|_2^2\\le\\|Sx\\|_2^2\\le(1+\\varepsilon)\\|x\\|_2^2\\quad\\text{for every }x\\in U.\n$$\n\nFor $0<\\delta<1$, a distribution $\\mathcal D$ on $m\\times n$\nmatrices is an **$(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace\nembedding for dimension $d$** if, for every fixed $d$-dimensional\nsubspace $U\\subseteq\\mathbb K^n$ chosen independently of the draw,\n$$\n\\Pr_{S\\sim\\mathcal D}\\{S\\text{ is an }\\varepsilon\\text{-subspace embedding for }U\\}\\ge1-\\delta.\n$$\nThe subspace is fixed before sampling, but the guarantee is stated separately\nfor each such $U$; it does not assert that one draw preserves all\n$d$-dimensional subspaces simultaneously. For a matrix $A$, an embedding\nof $\\operatorname{Ran}(A)$ means the property on its column space. For\nleast-squares residuals $Ax-b$, the relevant subspace is\n$\\operatorname{span}(\\operatorname{Ran}(A),b)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice so that the repository's Lebesgue measure\non each finite-dimensional real coordinate space is a measure. A **standard\nreal Gaussian scalar** has Lebesgue density\n$$\\varphi_R(x)=(2\\pi)^{-1/2}e^{-x^2/2}.$$\nA **normalized complex Gaussian scalar** is $z=(x+iy)/\\sqrt2$ for independent\nstandard real Gaussian scalars $x,y$; its density on $\\mathbb C\\simeq\\mathbb\nR^2$ is $\\varphi_C(z)=\\pi^{-1}e^{-|z|^2}$ and $\\mathbb E|z|^2=1$.\n\nFor $F=\\mathbb R$ or $\\mathbb C$, an **iid standard Gaussian matrix** in\n$F^{a\\times b}$ has independent entries with the corresponding scalar law.\nAll its expectations are finite-dimensional Lebesgue integrals against the\nproduct density. Independence means this product-density factorization.\nThe normalized complex convention is fixed throughout; it is not the\nunnormalized law $x+iy$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $G\\in F^{a\\times b}$ have the iid Gaussian law of\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. If $U,V$\nare compatible orthogonal matrices for $F=\\mathbb R$ or unitary matrices for\n$F=\\mathbb C$, then $U^*GV$ has the same iid law as $G$. In particular, if\n$W\\in F^{n\\times n}$ is orthogonal/unitary and $\\Omega\\in F^{n\\times\\ell}$\nis iid Gaussian, then any two disjoint row blocks of $W^*\\Omega$ are\nindependent standard Gaussian matrices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-gaussian-squared-norm-tail",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $m\\ge1$, and let $g_1,\\ldots,g_m$ be independent standard real\nGaussian scalars or independent normalized complex Gaussian scalars, with\n$\\mathbb E|g_j|^2=1$. For $0<t<1$,\n$$\n\\Pr\\left\\{\\left|\\frac1m\\sum_{j=1}^m|g_j|^2-1\\right|\\ge t\\right\\}\\le2e^{-mt^2/8}.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-hermitian-sphere-net-controls-operator-norm",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$H\\in\\mathbb K^{d\\times d}$ be Hermitian. Regard $\\mathbb C^d$ as\n$\\mathbb R^{2d}$ for distances. A $1/4$-net $\\mathcal N$ of the unit\nsphere exists with $|\\mathcal N|\\le9^d$ over $\\mathbb R$, and\n$|\\mathcal N|\\le9^{2d}$ over $\\mathbb C$. For every such net,\n$$\n\\|H\\|_2\\le2\\max_{v\\in\\mathcal N}|v^*Hv|.\n$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose an orthonormal basis matrix $Q\\in\\mathbb K^{n\\times d}$ for $U$, and let $\\mathcal N$ be a $1/4$-net of its unit sphere with $|\\mathcal N|\\le9^{2d}$, which covers the real case too. For each fixed $v\\in\\mathcal N$, $Qv$ is a unit vector. Extend $Qv$ to an orthonormal basis of $\\mathbb K^n$ by applying [F4] to its orthogonal complement; [F3] then shows that $GQv$ has $m$ independent standard Gaussian coordinates.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each fixed $v\\in\\mathcal N$, apply [F5] with $t=\\varepsilon/2$ to obtain $\\Pr\\{|\\|SQv\\|_2^2-1|\\ge\\varepsilon/2\\}\\le2e^{-m\\varepsilon^2/32}$. The finite union bound [F9] for the fixed finite net gives $\\Pr\\{\\exists v\\in\\mathcal N:|\\|SQv\\|_2^2-1|\\ge\\varepsilon/2\\}\\le2\\,9^{2d}e^{-m\\varepsilon^2/32}\\le2e^{2d\\log9-6d-6\\log(1/\\delta)}\\le\\delta$. Here the sample-size hypothesis gives $m\\varepsilon^2/32\\ge6(d+\\log(1/\\delta))$, and $\\log2+2d\\log9<6d$ for $d\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the complementary event, put $H=Q^*S^*SQ-I_d$. This is Hermitian and $|v^*Hv|=|\\|SQv\\|_2^2-1|<\\varepsilon/2$ for every $v\\in\\mathcal N$. By [F6], $\\|H\\|_2\\le\\varepsilon$. For nonzero $y$, [F7] and [F8] give $|y^*Hy|\\le\\|y\\|_2\\|Hy\\|_2\\le\\|H\\|_2\\|y\\|_2^2$; the zero vector satisfies the same inequality. Therefore $(1-\\varepsilon)\\|y\\|_2^2\\le\\|SQy\\|_2^2\\le(1+\\varepsilon)\\|y\\|_2^2$. Since $Q$ is an isometry onto $U$, [F1] identifies this as the required embedding inequality for every $x=Qy\\in U$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes 1≤d≤n and a positive sample count m."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the final norm inequality at step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The net and union-bound argument includes d=1 and is quantified in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Any fixed d-dimensional subspace, including one padded in a larger ambient dimension, is handled by its orthonormal basis in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict ranges 0<epsilon,delta<1 are stated; the sample bound is used in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite orthonormal basis, finite net and fixed-vector basis extension are chosen in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A fixed finite unit-sphere net and Gaussian norm tails give a uniform subspace embedding with an explicit sample-size bound. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A fixed finite unit-sphere net and Gaussian norm tails give a uniform subspace embedding with an explicit sample-size bound. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "6d9b18258bdd69b012cb5d9ed1ea75c850322044c8e2762f0b99422f89623c60",
+            "row_sha256": "b183c5cc7f8bdc22ccedd09ee64f5039632f8f3be370441593ff9e395b5fd2f0",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A fixed finite unit-sphere net and Gaussian norm tails give a uniform subspace embedding with an explicit sample-size bound. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "6d9b18258bdd69b012cb5d9ed1ea75c850322044c8e2762f0b99422f89623c60",
+            "row_sha256": "b183c5cc7f8bdc22ccedd09ee64f5039632f8f3be370441593ff9e395b5fd2f0",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A fixed finite unit-sphere net and Gaussian norm tails give a uniform subspace embedding with an explicit sample-size bound. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A fixed finite unit-sphere net and Gaussian norm tails give a uniform subspace embedding with an explicit sample-size bound. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "6d9b18258bdd69b012cb5d9ed1ea75c850322044c8e2762f0b99422f89623c60",
+            "row_sha256": "3b1efc1683529a1a84f003110dd33020f93b4b45c4687d4b73c9ec9e7c12d49f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A fixed finite unit-sphere net and Gaussian norm tails give a uniform subspace embedding with an explicit sample-size bound. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "6d9b18258bdd69b012cb5d9ed1ea75c850322044c8e2762f0b99422f89623c60",
+            "row_sha256": "3b1efc1683529a1a84f003110dd33020f93b4b45c4687d4b73c9ec9e7c12d49f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/gaussian_planning",
+        "notes": "The actual Gaussian normalization/product independence supplier is now proved under the same Countable Choice and explicitly used. Same owner reviewed complete actual supplier-first tail and embedding proofs, preserving every Statement and constant; completed old/current25-carrier closure is recorded.",
+        "owner_evidence": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step3-gaussian-final-owner-resolution-proposal.json",
+        "native_execution_credit": false
+      },
+      "finite_check_disposition": "No separate registered finite_smoke applies to this general result; the proof and its boundary cases are stated directly.",
+      "kind": "theorem",
+      "prior_risk_reviews": [
+        {
+          "status": "open",
+          "reviewer": "alpha-batch-17",
+          "notes": "Read all three proof steps and all ten suppliers, including full current batch-11 invariance proof. Fixed U and fixed finite net are chosen independently of G. Extending Qv by a finite orthonormal complement permits right invariance and independent m coordinates. t=epsilon/2 is admissible; 2*9^(2d)*exp(-m epsilon²/32)<=delta follows from 192 and log2+2d log9<6d for d>=1. Hermitian net transfer and homogeneity include zero y and both fields. Conditional local reasoning is sound, but real/complex Gaussian probability normalization is unresolved in batch 11 (reader:17:3/refuter:17:3), so tail and invariance cannot currently supply a fully discharged probability result. Owner must repair/review the producer first; risk remains open."
+        }
+      ]
+    },
+    "thm-sketch-and-solve-residual-guarantee": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oblivious-l2-subspace-embedding",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $n,m\\ge1$, and use\n$\\|x\\|_2^2=\\sum_i|x_i|^2$ on $\\mathbb K^n$. For a fixed subspace\n$U\\subseteq\\mathbb K^n$ and $0<\\varepsilon<1$, a matrix\n$S\\in\\mathbb K^{m\\times n}$ is an **$\\varepsilon$-subspace embedding\nfor $U$** when\n$$\n(1-\\varepsilon)\\|x\\|_2^2\\le\\|Sx\\|_2^2\\le(1+\\varepsilon)\\|x\\|_2^2\\quad\\text{for every }x\\in U.\n$$\n\nFor $0<\\delta<1$, a distribution $\\mathcal D$ on $m\\times n$\nmatrices is an **$(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace\nembedding for dimension $d$** if, for every fixed $d$-dimensional\nsubspace $U\\subseteq\\mathbb K^n$ chosen independently of the draw,\n$$\n\\Pr_{S\\sim\\mathcal D}\\{S\\text{ is an }\\varepsilon\\text{-subspace embedding for }U\\}\\ge1-\\delta.\n$$\nThe subspace is fixed before sampling, but the guarantee is stated separately\nfor each such $U$; it does not assert that one draw preserves all\n$d$-dimensional subspaces simultaneously. For a matrix $A$, an embedding\nof $\\operatorname{Ran}(A)$ means the property on its column space. For\nleast-squares residuals $Ax-b$, the relevant subspace is\n$\\operatorname{span}(\\operatorname{Ran}(A),b)$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sketch-and-solve-exact-minimizer",
+          "source_section": "Statement",
+          "quote": "Let $C=SA$ and $c=Sb$ be the sketch matrix and response in\n[[alg-sketch-and-solve-least-squares]]. In exact arithmetic, if its zero-\nthreshold SVD call converges and supplies an exact SVD record, the returned\n$\\widehat x$ is the unique minimum-Euclidean-norm minimizer of\n$\\|SAx-Sb\\|_2$, and the reported rank is $\\operatorname{rank}(SA)$.\nNo conclusion is asserted on an `inconclusive` or finite-precision\n`unverified` branch.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], choose an original least-squares minimizer $x_*\\in\\mathbb K^p$, and write $r_*=Ax_*-b$, $\\widehat r=A\\widehat x-b$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $x\\in\\mathbb K^p$, both $Ax$ and $b$ belong to $U$, so their difference $Ax-b$ belongs to $U$. In particular [F1] applies to $\\widehat r$ and $r_*$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F2], $\\widehat x$ minimizes the sketched residual, so $\\|S\\widehat r\\|_2^2\\le\\|Sr_*\\|_2^2$; squaring preserves order because both residual norms are nonnegative.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The lower inequality in [F1] gives $(1-\\varepsilon)\\|\\widehat r\\|_2^2\\le\\|S\\widehat r\\|_2^2$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The upper inequality in [F1] gives $\\|Sr_*\\|_2^2\\le(1+\\varepsilon)\\|r_*\\|_2^2$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Combining steps 3.1, 2.2 and 3.2 and dividing by $1-\\varepsilon>0$ proves the claimed estimate, since $x_*$ is an original minimizer by step 1.1.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 2.2",
+            "step 3.2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The result is stated for finite matrices and vectors with the least-squares minimizer supplied in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero optimal residual is preserved through the embedding inequalities and final estimate in steps 3.1, 3.2 and 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits a single fitted column and response coordinate; no full-rank hypothesis appears."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Rank-deficient A is allowed; minimizer existence is supplied in step 1.1 and no inverse is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The condition 0<epsilon<1 guarantees the positive divisor 1-epsilon in step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "An original minimizer is chosen from the finite-dimensional least-squares existence theorem in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The embedding and exact convergence imply a residual upper bound, without a necessity claim for the embedding.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The embedding and exact convergence imply a residual upper bound, without a necessity claim for the embedding.",
+            "item_sha256": "acf1af74e6f2c64d169d8aa37af2b01085a153c3421df64c16538d6b38bfebc0",
+            "row_sha256": "8b8a78f975d85c10f1df3d0fe39da2f7d0197f5063e9e8d3d721b3081ad75c10",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The embedding and exact convergence imply a residual upper bound, without a necessity claim for the embedding.",
+            "item_sha256": "acf1af74e6f2c64d169d8aa37af2b01085a153c3421df64c16538d6b38bfebc0",
+            "row_sha256": "8b8a78f975d85c10f1df3d0fe39da2f7d0197f5063e9e8d3d721b3081ad75c10",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An observed residual ratio does not infer the subspace embedding or exact sketched optimality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "An observed residual ratio does not infer the subspace embedding or exact sketched optimality.",
+            "item_sha256": "acf1af74e6f2c64d169d8aa37af2b01085a153c3421df64c16538d6b38bfebc0",
+            "row_sha256": "e227c7d9ac70fa2279ac93771bc9e175bf7068df178f2d93af674b75d233b58f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "An observed residual ratio does not infer the subspace embedding or exact sketched optimality.",
+            "item_sha256": "acf1af74e6f2c64d169d8aa37af2b01085a153c3421df64c16538d6b38bfebc0",
+            "row_sha256": "e227c7d9ac70fa2279ac93771bc9e175bf7068df178f2d93af674b75d233b58f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-scaffolder",
+        "notes": "Author self-check of the displayed argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke applies to this general result; the proof and its boundary cases are stated directly.",
+      "kind": "theorem"
+    },
+    "thm-leverage-score-row-sampling-subspace-embedding": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subspace-leverage-scores",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $U\\subseteq\\mathbb K^n$\nhave dimension $d\\ge1$. Choose a matrix $Q\\in\\mathbb K^{n\\times d}$\nwhose columns are an orthonormal basis of $U$, so $Q^*Q=I_d$. For\n$0\\le i<n$, define the **$i$-th row leverage score of $U$** by\n$$\n\\ell_i(U):=\\|e_i^*Q\\|_2^2,\n$$\nwhere $e_i$ is the $i$-th standard coordinate vector. The following item\nproves that this value is independent of the chosen orthonormal basis, so the\ndefinition is well-defined.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-subspace-leverage-score-identities",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb K^n$ have dimension $d\\ge1$, where\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. For any orthonormal basis matrix\n$Q\\in\\mathbb K^{n\\times d}$, let $\\ell_i=\\|e_i^*Q\\|_2^2$. Then\nthese values are independent of the chosen orthonormal basis, satisfy\n$0\\le\\ell_i\\le1$ and $\\sum_{i=0}^{n-1}\\ell_i=d$, and $\\ell_i=0$\nexactly when the $i$-th row of $Q$ is zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-leverage-score-row-sampling-sketch",
+          "source_section": "Definition",
+          "quote": "Input an orthonormal basis matrix $Q\\in\\mathbb K^{n\\times d}$ with\n$d\\ge1$, a sample count $m\\ge1$, a parameter $0<\\beta\\le1$, and a\nprobability vector $\\pi=(\\pi_0,\\ldots,\\pi_{n-1})$ satisfying\n$\\pi_i\\ge\\beta\\ell_i(U)/d$, where $U=\\operatorname{Ran}(Q)$ and\n$\\ell_i(U)$ is from [[def-subspace-leverage-scores]]. If the input checks\nfail, return `invalid-input`. Otherwise draw indices $J_1,\\ldots,J_m$\nindependently with replacement from $\\pi$. Form $S\\in\\mathbb K^{m\\times n}$\nby setting row $j$ to $e_{J_j}^*/\\sqrt{m\\pi_{J_j}}$, and return `success`,\nthe selected indices, and $S$.\n\nBecause $\\beta>0$, $\\pi_i=0$ implies $\\ell_i(U)=0$; such a row is\nnever sampled, so the scaling never divides by zero. One canonical choice is\n$\\pi_i=\\ell_i(U)/d$, which sets every zero-leverage row's probability to\nzero. Other admissible distributions may assign positive probability to a\nzero-leverage row, but that choice wastes samples. Repeated indices are\nallowed and are distinct rows of $S$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-independent-matrix-bernstein-via-trace-exponential",
+          "source_section": "Statement",
+          "quote": "Let $B_1,\\ldots,B_m$ be independent centered random Hermitian $q\\times q$ matrices, $q,m\\ge1$. Suppose $R>0$, $v\\ge0$, and\n$$\\|B_i\\|_{\\rm op}\\le R\\quad\\text{almost surely},\\qquad\\|\\mathbb E B_i^2\\|_{\\rm op}\\le v\\quad(1\\le i\\le m).$$\nWriting $Y=\\sum_{i=1}^m B_i$, for $0<s<3/R$ one has\n$$\\mathbb E\\operatorname{tr}\\exp(sY)\\le q\\exp\\left(\\frac{ms^2v}{2(1-sR/3)}\\right).$$\nConsequently, for $u>0$ when $v>0$,\n$$\\mathbb P\\{\\lambda_{\\max}(Y)\\ge u\\}\\le q\\exp\\left(-\\frac{u^2}{2(mv+Ru/3)}\\right).$$\nFor every $b>0$, the following convenient forms also hold:\n$$\\mathbb P\\left\\{\\lambda_{\\max}(Y)>\\sqrt{2mvb}+\\frac{2Rb}{3}\\right\\}\\le qe^{-b},\\qquad\\mathbb P\\left\\{\\|Y\\|_{\\rm op}>\\sqrt{2mvb}+\\frac{2Rb}{3}\\right\\}\\le2qe^{-b}.$$\nIf $v=0$, all $B_i$ and $Y$ vanish almost surely, so the displayed positive-threshold conclusions remain valid.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-oblivious-l2-subspace-embedding",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $n,m\\ge1$, and use\n$\\|x\\|_2^2=\\sum_i|x_i|^2$ on $\\mathbb K^n$. For a fixed subspace\n$U\\subseteq\\mathbb K^n$ and $0<\\varepsilon<1$, a matrix\n$S\\in\\mathbb K^{m\\times n}$ is an **$\\varepsilon$-subspace embedding\nfor $U$** when\n$$\n(1-\\varepsilon)\\|x\\|_2^2\\le\\|Sx\\|_2^2\\le(1+\\varepsilon)\\|x\\|_2^2\\quad\\text{for every }x\\in U.\n$$\n\nFor $0<\\delta<1$, a distribution $\\mathcal D$ on $m\\times n$\nmatrices is an **$(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace\nembedding for dimension $d$** if, for every fixed $d$-dimensional\nsubspace $U\\subseteq\\mathbb K^n$ chosen independently of the draw,\n$$\n\\Pr_{S\\sim\\mathcal D}\\{S\\text{ is an }\\varepsilon\\text{-subspace embedding for }U\\}\\ge1-\\delta.\n$$\nThe subspace is fixed before sampling, but the guarantee is stated separately\nfor each such $U$; it does not assert that one draw preserves all\n$d$-dimensional subspaces simultaneously. For a matrix $A$, an embedding\nof $\\operatorname{Ran}(A)$ means the property on its column space. For\nleast-squares residuals $Ax-b$, the relevant subspace is\n$\\operatorname{span}(\\operatorname{Ran}(A),b)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $z_i=Q^*e_i\\in\\mathbb K^d$, so $\\|z_i\\|_2^2=\\ell_i$. For draw $j$, let $J_j$ be its sampled index and define $Y_j=z_{J_j}z_{J_j}^*/\\pi_{J_j}$. By [F2], the $Y_j$ are independent and $\\mathbb E Y_j=\\sum_{i:\\pi_i>0}z_i z_i^*=Q^*Q=I_d$; terms with $\\pi_i=0$ have $z_i=0$ by [F1] and contribute zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $R=d/\\beta\\ge1$ and $B_j=Y_j-I_d$. The rank-one identity $(z_i z_i^*)^2=\\ell_i z_i z_i^*$ and $\\pi_i\\ge\\beta\\ell_i/d$ give $\\|Y_j\\|_2=\\ell_{J_j}/\\pi_{J_j}\\le R$ and $Y_j^2\\preceq RY_j$. Thus $\\|B_j\\|_2\\le\\max(1,R-1)\\le R$, $\\mathbb E B_j=0$, and $0\\preceq\\mathbb E B_j^2=\\mathbb E Y_j^2-I_d\\preceq(R-1)I_d\\preceq RI_d$. Hence [F3] applies with both bounds equal to $R$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $a=\\log(2d/\\delta)$. By [F3], $\\Pr\\{\\|\\sum_{j=1}^mB_j\\|_2>\\sqrt{2mRa}+2Ra/3\\}\\le2d e^{-a}=\\delta$. Under the first sample-size condition, $m\\varepsilon^2\\ge8Ra$, so $\\sqrt{2mRa}\\le m\\varepsilon/2$. Also $m\\varepsilon/2\\ge4Ra/\\varepsilon\\ge2Ra/3$, since $0<\\varepsilon<1$. Thus the Bernstein threshold is at most $m\\varepsilon$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "From the sampled-row definition in [F2], $Q^*S^*SQ=m^{-1}\\sum_jY_j$, so $Q^*S^*SQ-I_d=m^{-1}\\sum_jB_j$. Step 2.1 therefore proves $\\|Q^*S^*SQ-I_d\\|_2\\le\\varepsilon$ with probability at least $1-\\delta$. For nonzero $y$, [F5] and [F6] imply $|y^*(Q^*S^*SQ-I_d)y|\\le\\|y\\|_2\\|(Q^*S^*SQ-I_d)y\\|_2\\le\\varepsilon\\|y\\|_2^2$; the same holds for zero $y$. Thus $(1-\\varepsilon)\\|y\\|_2^2\\le\\|SQy\\|_2^2\\le(1+\\varepsilon)\\|y\\|_2^2$, and because $Q$ is an isometry onto its range, this is the embedding property in [F4].",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $0<\\delta\\le1/2$ and $d\\ge1$, then $d/\\delta\\ge2$, hence $\\log(2d/\\delta)=\\log(d/\\delta)+\\log2\\le2\\log(d/\\delta)$. Therefore the second stated sample-size condition implies the first. For any rank-$d$ matrix $A$, its range is $\\operatorname{Ran}(Q)$, so the same embedding statement applies to $A$'s column space.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d≥1 and m≥1; rank-zero spaces need no leverage sampling."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-probability rows have zero leverage and contribute zero in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The d=1 case and finite sample count are included in the concentration and embedding argument in steps 3.1 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Rows with zero leverage, including probability zero, are separated before division in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict epsilon and delta ranges and beta in (0,1] are stated; the delta≤1/2 corollary is separately derived in step 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Q and the probability vector are inputs; the proof uses only the finite independent draws specified in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: The Gram error bound controls its Hermitian quadratic form on every coefficient vector; orthonormality transfers the resulting squared-norm bounds to the column range.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The Gram error bound controls its Hermitian quadratic form on every coefficient vector; orthonormality transfers the resulting squared-norm bounds to the column range.",
+            "item_sha256": "b35211feb839b5d288363074aade273b7c36c6ba29900022cdc559f31874f128",
+            "row_sha256": "076a0caba1f213ba4e8a1ebe68bc000599fecae46c7ef5666ed5993e02805a52",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The Gram error bound controls its Hermitian quadratic form on every coefficient vector; orthonormality transfers the resulting squared-norm bounds to the column range.",
+            "item_sha256": "b35211feb839b5d288363074aade273b7c36c6ba29900022cdc559f31874f128",
+            "row_sha256": "076a0caba1f213ba4e8a1ebe68bc000599fecae46c7ef5666ed5993e02805a52",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: The embedding inequalities on the column range pull back through the orthonormal basis to bound every Rayleigh quotient of the Hermitian Gram error, hence its spectral norm.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The embedding inequalities on the column range pull back through the orthonormal basis to bound every Rayleigh quotient of the Hermitian Gram error, hence its spectral norm.",
+            "item_sha256": "b35211feb839b5d288363074aade273b7c36c6ba29900022cdc559f31874f128",
+            "row_sha256": "0d5a9a6d1d5935811f46c80a0c4df98abed52490af79a1c98143428613a64d07",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The embedding inequalities on the column range pull back through the orthonormal basis to bound every Rayleigh quotient of the Hermitian Gram error, hence its spectral norm.",
+            "item_sha256": "b35211feb839b5d288363074aade273b7c36c6ba29900022cdc559f31874f128",
+            "row_sha256": "0d5a9a6d1d5935811f46c80a0c4df98abed52490af79a1c98143428613a64d07",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read all five proof steps and all seven suppliers, including entire published Bernstein proof. For pi_i=0, ell_i=z_i=0; restrict Y to positive support so no division by zero. E Y=I, Y²<=RY, centered B=Y-I has norm<=R and second moment<=RI for R=d/beta>=1. Independence survives entrywise formation, so uniform-v Bernstein with v=R applies in both fields. For a=log(2d/delta)>0, m>=8Ra/epsilon² bounds each threshold term by m epsilon/2; strict failure tail gives nonstrict success norm. Hermitian spectral decomposition also gives the reverse embedding/norm equivalence by testing eigenvectors. delta<=1/2 is needed for the simpler log(d/delta) sufficient condition and is stated. d=1, beta=1 and zero-leverage/positive-probability waste rows are covered; no Gaussian premise."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke applies to this general result; the proof and its boundary cases are stated directly.",
+      "kind": "theorem"
+    },
+    "cex-embedding-the-column-space-alone-does-not-control-ls-residual": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oblivious-l2-subspace-embedding",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $n,m\\ge1$, and use\n$\\|x\\|_2^2=\\sum_i|x_i|^2$ on $\\mathbb K^n$. For a fixed subspace\n$U\\subseteq\\mathbb K^n$ and $0<\\varepsilon<1$, a matrix\n$S\\in\\mathbb K^{m\\times n}$ is an **$\\varepsilon$-subspace embedding\nfor $U$** when\n$$\n(1-\\varepsilon)\\|x\\|_2^2\\le\\|Sx\\|_2^2\\le(1+\\varepsilon)\\|x\\|_2^2\\quad\\text{for every }x\\in U.\n$$\n\nFor $0<\\delta<1$, a distribution $\\mathcal D$ on $m\\times n$\nmatrices is an **$(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace\nembedding for dimension $d$** if, for every fixed $d$-dimensional\nsubspace $U\\subseteq\\mathbb K^n$ chosen independently of the draw,\n$$\n\\Pr_{S\\sim\\mathcal D}\\{S\\text{ is an }\\varepsilon\\text{-subspace embedding for }U\\}\\ge1-\\delta.\n$$\nThe subspace is fixed before sampling, but the guarantee is stated separately\nfor each such $U$; it does not assert that one draw preserves all\n$d$-dimensional subspaces simultaneously. For a matrix $A$, an embedding\nof $\\operatorname{Ran}(A)$ means the property on its column space. For\nleast-squares residuals $Ax-b$, the relevant subspace is\n$\\operatorname{span}(\\operatorname{Ran}(A),b)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sketch-and-solve-least-squares",
+          "source_section": "Definition",
+          "quote": "Input $A\\in\\mathbb K^{n\\times p}$, $b\\in\\mathbb K^n$, a supplied sketch\n$S\\in\\mathbb K^{m\\times n}$, and a finite nonnegative integer SVD sweep\nbudget $N$, where $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Form\n$C=SA$ and $c=Sb$, and call\n[[alg-rank-thresholded-least-squares-by-svd]] on $(C,c)$ with threshold\n$\\tau=0$ and budget $N$.\n\nIf the call returns exact-arithmetic convergence with an exact SVD record,\nreturn `success`, the exact rank $r=\\operatorname{rank}(C)$, the canonical\nminimum-norm vector $\\widehat x=C^+c$, and the separately computed sketched\nand physical residuals $\\|C\\widehat x-c\\|_2$ and\n$\\|A\\widehat x-b\\|_2$. The exact-arithmetic solve-error certificate is\nzero. If the SVD call returns `inconclusive`, return its status and supplied\npartial diagnostics without claiming a minimizer. In finite precision, return\nthe computed candidate and the two residual reports separately; mark the rank\n`unverified` unless a certified interval separates every singular-value\ncomparison from zero, and report a solve-error certificate only when the\nsolver supplies one. No finite-precision accuracy guarantee is part of this\nprocedure.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "n $\\mathbb R^2$, set $A=e_1=(1,0)^T$, $b=e_1+e_2=(1,1)^T$, and $S=(1\\quad1)$. For every $x\\in\\mathbb R$, $\\|S(Ax)\\|_2=|x|=\\|Ax\\|_2$, so [F1] holds on $\\operatorname{Ran}(A)=\\operatorname{span}(e_1)$ with $\\varepsilon=1/4$ (indeed with zero distortion). [F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The sketched residual is $S(Ax-b)=x-2$, so its unique minimizer is $\\widehat x=2$ by [F2]. The original squared residual is $\\|Ax-b\\|_2^2=(x-1)^2+1$, whose minimum is $1$ at $x_*=1$; at $\\widehat x=2$ it equals $2$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $\\varepsilon=1/4$, the claimed factor is $(1+\\varepsilon)/(1-\\varepsilon)=5/3$, but $2>5/3\\cdot1$. Thus preserving $\\operatorname{Ran}(A)$ alone does not imply the residual guarantee; the lost direction is the component of $b$ orthogonal to $\\operatorname{Ran}(A)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Counterexample fixes explicit nonempty two-dimensional vectors and a one-row sketch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The sketch annihilates the residual direction and the exact values are computed in steps 1.2–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example has one fitted variable and its unique sketch minimizer is calculated in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "S preserves Ran(A) exactly while it collapses the independent residual direction, as shown in steps 1.1–1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The selected epsilon=1/4 lies strictly inside (0,1), and the claimed factor is computed in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All vectors and the matrix S are explicitly given in the Counterexample and step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A one-row sketch preserves the column direction exactly but sends the response's orthogonal component into that direction, increasing the true residual. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A one-row sketch preserves the column direction exactly but sends the response's orthogonal component into that direction, increasing the true residual. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "9a2fdb59fa62e53d0967c8f4da5d2f690e20e0c56a6ddea4598f19c36f01e7d6",
+            "row_sha256": "a9db458e4ef6b97ce5c9418ffd0f0724cf44e00c1c20b6248ebab8afdf9b4487",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A one-row sketch preserves the column direction exactly but sends the response's orthogonal component into that direction, increasing the true residual. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "9a2fdb59fa62e53d0967c8f4da5d2f690e20e0c56a6ddea4598f19c36f01e7d6",
+            "row_sha256": "a9db458e4ef6b97ce5c9418ffd0f0724cf44e00c1c20b6248ebab8afdf9b4487",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A one-row sketch preserves the column direction exactly but sends the response's orthogonal component into that direction, increasing the true residual. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A one-row sketch preserves the column direction exactly but sends the response's orthogonal component into that direction, increasing the true residual. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "9a2fdb59fa62e53d0967c8f4da5d2f690e20e0c56a6ddea4598f19c36f01e7d6",
+            "row_sha256": "cbcba08dd5ae0ba22def3c5ea0e8d91516677eb1251b9825a73e62dbe6efb284",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A one-row sketch preserves the column direction exactly but sends the response's orthogonal component into that direction, increasing the true residual. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "9a2fdb59fa62e53d0967c8f4da5d2f690e20e0c56a6ddea4598f19c36f01e7d6",
+            "row_sha256": "cbcba08dd5ae0ba22def3c5ea0e8d91516677eb1251b9825a73e62dbe6efb284",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-scaffolder",
+        "notes": "Author self-check of the displayed argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "The exact finite computations are carried by the displayed Counterexample or Verification steps; no separate registered software finite_smoke covers these fixtures.",
+      "kind": "counterexample"
+    },
+    "ex-leverage-zero-rows-and-high-coherence": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subspace-leverage-scores",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $U\\subseteq\\mathbb K^n$\nhave dimension $d\\ge1$. Choose a matrix $Q\\in\\mathbb K^{n\\times d}$\nwhose columns are an orthonormal basis of $U$, so $Q^*Q=I_d$. For\n$0\\le i<n$, define the **$i$-th row leverage score of $U$** by\n$$\n\\ell_i(U):=\\|e_i^*Q\\|_2^2,\n$$\nwhere $e_i$ is the $i$-th standard coordinate vector. The following item\nproves that this value is independent of the chosen orthonormal basis, so the\ndefinition is well-defined.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-subspace-leverage-score-identities",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb K^n$ have dimension $d\\ge1$, where\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. For any orthonormal basis matrix\n$Q\\in\\mathbb K^{n\\times d}$, let $\\ell_i=\\|e_i^*Q\\|_2^2$. Then\nthese values are independent of the chosen orthonormal basis, satisfy\n$0\\le\\ell_i\\le1$ and $\\sum_{i=0}^{n-1}\\ell_i=d$, and $\\ell_i=0$\nexactly when the $i$-th row of $Q$ is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-leverage-score-row-sampling-sketch",
+          "source_section": "Definition",
+          "quote": "Input an orthonormal basis matrix $Q\\in\\mathbb K^{n\\times d}$ with\n$d\\ge1$, a sample count $m\\ge1$, a parameter $0<\\beta\\le1$, and a\nprobability vector $\\pi=(\\pi_0,\\ldots,\\pi_{n-1})$ satisfying\n$\\pi_i\\ge\\beta\\ell_i(U)/d$, where $U=\\operatorname{Ran}(Q)$ and\n$\\ell_i(U)$ is from [[def-subspace-leverage-scores]]. If the input checks\nfail, return `invalid-input`. Otherwise draw indices $J_1,\\ldots,J_m$\nindependently with replacement from $\\pi$. Form $S\\in\\mathbb K^{m\\times n}$\nby setting row $j$ to $e_{J_j}^*/\\sqrt{m\\pi_{J_j}}$, and return `success`,\nthe selected indices, and $S$.\n\nBecause $\\beta>0$, $\\pi_i=0$ implies $\\ell_i(U)=0$; such a row is\nnever sampled, so the scaling never divides by zero. One canonical choice is\n$\\pi_i=\\ell_i(U)/d$, which sets every zero-leverage row's probability to\nzero. Other admissible distributions may assign positive probability to a\nzero-leverage row, but that choice wastes samples. Repeated indices are\nallowed and are distinct rows of $S$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oblivious-l2-subspace-embedding",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $n,m\\ge1$, and use\n$\\|x\\|_2^2=\\sum_i|x_i|^2$ on $\\mathbb K^n$. For a fixed subspace\n$U\\subseteq\\mathbb K^n$ and $0<\\varepsilon<1$, a matrix\n$S\\in\\mathbb K^{m\\times n}$ is an **$\\varepsilon$-subspace embedding\nfor $U$** when\n$$\n(1-\\varepsilon)\\|x\\|_2^2\\le\\|Sx\\|_2^2\\le(1+\\varepsilon)\\|x\\|_2^2\\quad\\text{for every }x\\in U.\n$$\n\nFor $0<\\delta<1$, a distribution $\\mathcal D$ on $m\\times n$\nmatrices is an **$(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace\nembedding for dimension $d$** if, for every fixed $d$-dimensional\nsubspace $U\\subseteq\\mathbb K^n$ chosen independently of the draw,\n$$\n\\Pr_{S\\sim\\mathcal D}\\{S\\text{ is an }\\varepsilon\\text{-subspace embedding for }U\\}\\ge1-\\delta.\n$$\nThe subspace is fixed before sampling, but the guarantee is stated separately\nfor each such $U$; it does not assert that one draw preserves all\n$d$-dimensional subspaces simultaneously. For a matrix $A$, an embedding\nof $\\operatorname{Ran}(A)$ means the property on its column space. For\nleast-squares residuals $Ax-b$, the relevant subspace is\n$\\operatorname{span}(\\operatorname{Ran}(A),b)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The row norms of $Q$ give $(\\ell_0,\\ell_1,\\ell_2)=(1,0,0)$, agreeing with the sum $d=1$ in [F1]. Thus the last two rows have zero leverage and $\\mu(U)=(3/1)\\cdot1=3$, the largest possible value since each leverage score is at most one.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With exact probabilities $\\pi=(1,0,0)$ and one sample, [F2] selects row zero with probability one and returns $S=e_1^T$. Then $SQ=1$, so the only unit vectors in $\\operatorname{Ran}(Q)$ retain squared norm exactly one. The zero-leverage rows are never sampled.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Uniform probabilities $\\pi=(1/3,1/3,1/3)$ satisfy the lower bound in [F2] with $\\beta=1/3$. With one sample, $SQ=\\sqrt3$ if row zero is drawn, and $SQ=0$ if row one or two is drawn. For $\\varepsilon=1/2$, [F3] requires squared norm in $[1/2,3/2]$, which contains neither outcome; hence this one-row uniform sample fails with probability one, while the exact leverage sample in step 2.1 succeeds with probability one.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes Q=e1 in R^3 and one sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The two zero-leverage rows are identified and excluded by exact leverage sampling in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional subspace and m=1 sample are computed explicitly in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The high-coherence score vector (1,0,0) and both sampling outcomes are computed in steps 1.1–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For epsilon=1/2, both possible uniform-sampling squared norms lie outside the required interval in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The orthonormal column Q and both probability distributions are explicitly given in the Example and steps 2.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The explicit high-coherence column makes leverage sampling exact and uniform sampling liable to miss the sole nonzero row.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The explicit high-coherence column makes leverage sampling exact and uniform sampling liable to miss the sole nonzero row.",
+            "item_sha256": "8b752a1f1e42f96f4ab123647abbdc0684202f02bdf216dc211b41db728ce827",
+            "row_sha256": "ee7ec36fd2d69b21baa0265f4243ff33ebc544eabe25cf425c6aba3834e5331a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The explicit high-coherence column makes leverage sampling exact and uniform sampling liable to miss the sole nonzero row.",
+            "item_sha256": "8b752a1f1e42f96f4ab123647abbdc0684202f02bdf216dc211b41db728ce827",
+            "row_sha256": "ee7ec36fd2d69b21baa0265f4243ff33ebc544eabe25cf425c6aba3834e5331a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Success of one draw here is not asserted to characterize leverage distributions for every matrix.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "Success of one draw here is not asserted to characterize leverage distributions for every matrix.",
+            "item_sha256": "8b752a1f1e42f96f4ab123647abbdc0684202f02bdf216dc211b41db728ce827",
+            "row_sha256": "b6e974d2a7700a947488d99121998ac80b87afc74b12f08c7a4f0de7995fc2ed",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "Success of one draw here is not asserted to characterize leverage distributions for every matrix.",
+            "item_sha256": "8b752a1f1e42f96f4ab123647abbdc0684202f02bdf216dc211b41db728ce827",
+            "row_sha256": "b6e974d2a7700a947488d99121998ac80b87afc74b12f08c7a4f0de7995fc2ed",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read Example, all three Verification steps and four supplier Definitions/Statements/proofs. Q=e1 has leverage (1,0,0), total d=1 and maximal coherence 3. With m=1, exact pi=(1,0,0) samples only row zero and S Q=1; uniform pi gives squared outcomes 3 or 0, neither in [1/2,3/2], so failure probability is exactly one. Uniform admissibility uses beta=1/3; exact sampling uses beta=1. Zero-probability scaling is never evaluated. This is an explicit finite witness, not an asymptotic sampling-threshold contradiction."
+      },
+      "finite_check_disposition": "The exact finite computations are carried by the displayed Counterexample or Verification steps; no separate registered software finite_smoke covers these fixtures.",
+      "kind": "example"
+    },
+    "ex-overdetermined-regression-exact-subspace-sketch": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oblivious-l2-subspace-embedding",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $n,m\\ge1$, and use\n$\\|x\\|_2^2=\\sum_i|x_i|^2$ on $\\mathbb K^n$. For a fixed subspace\n$U\\subseteq\\mathbb K^n$ and $0<\\varepsilon<1$, a matrix\n$S\\in\\mathbb K^{m\\times n}$ is an **$\\varepsilon$-subspace embedding\nfor $U$** when\n$$\n(1-\\varepsilon)\\|x\\|_2^2\\le\\|Sx\\|_2^2\\le(1+\\varepsilon)\\|x\\|_2^2\\quad\\text{for every }x\\in U.\n$$\n\nFor $0<\\delta<1$, a distribution $\\mathcal D$ on $m\\times n$\nmatrices is an **$(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace\nembedding for dimension $d$** if, for every fixed $d$-dimensional\nsubspace $U\\subseteq\\mathbb K^n$ chosen independently of the draw,\n$$\n\\Pr_{S\\sim\\mathcal D}\\{S\\text{ is an }\\varepsilon\\text{-subspace embedding for }U\\}\\ge1-\\delta.\n$$\nThe subspace is fixed before sampling, but the guarantee is stated separately\nfor each such $U$; it does not assert that one draw preserves all\n$d$-dimensional subspaces simultaneously. For a matrix $A$, an embedding\nof $\\operatorname{Ran}(A)$ means the property on its column space. For\nleast-squares residuals $Ax-b$, the relevant subspace is\n$\\operatorname{span}(\\operatorname{Ran}(A),b)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sketch-and-solve-exact-minimizer",
+          "source_section": "Statement",
+          "quote": "Let $C=SA$ and $c=Sb$ be the sketch matrix and response in\n[[alg-sketch-and-solve-least-squares]]. In exact arithmetic, if its zero-\nthreshold SVD call converges and supplies an exact SVD record, the returned\n$\\widehat x$ is the unique minimum-Euclidean-norm minimizer of\n$\\|SAx-Sb\\|_2$, and the reported rank is $\\operatorname{rank}(SA)$.\nNo conclusion is asserted on an `inconclusive` or finite-precision\n`unverified` branch.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sketch-and-solve-residual-guarantee",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb K^{n\\times p}$, $b\\in\\mathbb K^n$, and\n$0<\\varepsilon<1$. Suppose the particular sketch $S$ used in\n[[alg-sketch-and-solve-least-squares]] is an $\\varepsilon$-subspace\nembedding for\n$U=\\operatorname{span}(\\operatorname{Ran}(A),\\{b\\})$. If that algorithm\nreturns an exact-arithmetic converged vector $\\widehat x$, then\n$$\n\\|A\\widehat x-b\\|_2^2\\le\\frac{1+\\varepsilon}{1-\\varepsilon}\\min_{x\\in\\mathbb K^p}\\|Ax-b\\|_2^2.\n$$\nEmbedding $\\operatorname{Ran}(A)$ alone is not a hypothesis for this\nconclusion.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct calculation gives $\\|q_1\\|_2=\\|q_2\\|_2=1$ and $q_1^Tq_2=0$. Also $A=\\sqrt3q_1$ and $b=(1/\\sqrt3)q_1+\\sqrt{2/3}\\,q_2$, so $\\operatorname{span}(A,b)=\\operatorname{span}(q_1,q_2)$. The rows of $S$ form an orthonormal basis of this subspace; hence $S$ preserves its squared norms exactly and [F1] holds for every $0<\\varepsilon<1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For real $x$, $\\|Ax-b\\|_2^2=(x-1)^2+x^2+x^2=3(x-1/3)^2+2/3$. Thus the original minimizer is $x_*=1/3$ and its residual squared is $2/3$.",
+          "step": "1.2",
+          "inputs": [
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The sketch gives $SA=(\\sqrt3,0)^T$ and $Sb=(1/\\sqrt3,\\sqrt{2/3})^T$. Therefore $\\|SAx-Sb\\|_2^2=3(x-1/3)^2+2/3$; by [F2], $\\widehat x=1/3$, with sketched residual squared $2/3$. Substitution into $A\\widehat x-b=(-2/3,1/3,1/3)^T$ gives physical residual squared $2/3$ as well.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The fixed-subspace embedding hypothesis in [F3] is satisfied by step 1.1, and the computed minimizer in step 1.3 satisfies $\\|A\\widehat x-b\\|_2^2=2/3\\le((1+\\varepsilon)/(1-\\varepsilon))(2/3)$ for $0<\\varepsilon<1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes a three-row, one-column nonempty regression problem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The squared residuals are explicitly computed and positive in steps 1.2 and 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-variable minimizer is computed by completing the square in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two stated sketch rows are orthonormal and span span(A,b), verified in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The sketch is exact on the stated subspace, so every 0<epsilon<1 works in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The explicit vectors q1 and q2 determine the basis and sketch in the Example and step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example lines 35–38 requests computations for a fixed three-row regression problem and two-row sketch. Verification 1.1 shows exact preservation on the relevant span, but does not characterize all sketches preserving its minimizer.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Example lines 35–38 requests computations for a fixed three-row regression problem and two-row sketch. Verification 1.1 shows exact preservation on the relevant span, but does not characterize all sketches preserving its minimizer.",
+            "item_sha256": "4c85423556b2a374454dc6cdaa772cacbcf7cdca6f2f3c4be0292f9591e87c77",
+            "row_sha256": "1c72ebddfea93d2d885ef20302510c662dd209a23ca2503b4fdfaa279b3fdc23",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Example lines 35–38 requests computations for a fixed three-row regression problem and two-row sketch. Verification 1.1 shows exact preservation on the relevant span, but does not characterize all sketches preserving its minimizer.",
+            "item_sha256": "4c85423556b2a374454dc6cdaa772cacbcf7cdca6f2f3c4be0292f9591e87c77",
+            "row_sha256": "1c72ebddfea93d2d885ef20302510c662dd209a23ca2503b4fdfaa279b3fdc23",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.3 computes identical original and sketched minimizers and residuals by completing the square. The example does not infer an embedding of the entire regression span merely from equality of that one minimizer.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Verification 1.3 computes identical original and sketched minimizers and residuals by completing the square. The example does not infer an embedding of the entire regression span merely from equality of that one minimizer.",
+            "item_sha256": "4c85423556b2a374454dc6cdaa772cacbcf7cdca6f2f3c4be0292f9591e87c77",
+            "row_sha256": "cfae83ffc4d57fddfde381a3faab08e499a87963c16ab7e306784b37d62c2ac9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Verification 1.3 computes identical original and sketched minimizers and residuals by completing the square. The example does not infer an embedding of the entire regression span merely from equality of that one minimizer.",
+            "item_sha256": "4c85423556b2a374454dc6cdaa772cacbcf7cdca6f2f3c4be0292f9591e87c77",
+            "row_sha256": "cfae83ffc4d57fddfde381a3faab08e499a87963c16ab7e306784b37d62c2ac9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-scaffolder",
+        "notes": "Author self-check of the displayed argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "The exact finite computations are carried by the displayed Counterexample or Verification steps; no separate registered software finite_smoke covers these fixtures.",
+      "kind": "example"
+    }
+  }
+}

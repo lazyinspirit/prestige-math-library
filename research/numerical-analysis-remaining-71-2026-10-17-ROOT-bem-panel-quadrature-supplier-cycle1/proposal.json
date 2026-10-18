@@ -1,0 +1,57 @@
+{
+  "type": "research-only-supplier-proposal",
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "cycle": 1,
+  "native_batch": 57,
+  "proposed_page": "boundary-integral-equations-and-galerkin-bem",
+  "approved_operator_scope": "3D Laplace P0 single-layer only; fixed H^-1/2 bilinear defect norm",
+  "new_items": [
+    {
+      "id": "lem-bem-panel-pair-duffy-certificates",
+      "kind": "lemma",
+      "proof": "near-proof.md",
+      "cases": ["coincident", "common-full-edge", "common-vertex", "disjoint-smooth-fallback"],
+      "method": "finite sign-cell/pulling-simplex construction; exact homogeneous radial integration; smooth reference-triangle reduction; certified nested amplitude evaluation",
+      "direct_new_consumers": ["alg-bem-certified-inexact-matrix-assembly"],
+      "status": "proposed-proof-not-native-reviewed"
+    },
+    {
+      "id": "lem-bem-far-panel-quadrature-residual",
+      "kind": "lemma",
+      "proof": "far-proof.md",
+      "method": "positive centroid subdivision and explicit kernel-gradient residual independent of point-cluster theorem",
+      "direct_new_consumers": ["alg-bem-certified-inexact-matrix-assembly"],
+      "status": "proposed-proof-not-native-reviewed"
+    }
+  ],
+  "consumer_repairs": [
+    {
+      "id": "alg-bem-certified-inexact-matrix-assembly",
+      "changes_original_definition": true,
+      "necessary_changes": [
+        "Add actual near/far supplier deps and prescribe their constructions; retain auditable custom certificates.",
+        "Allow the proved affine triangle subdivision and certified nested amplitude errors, charging all errors in epsilon_TS.",
+        "State physical kernel normalization and far source charges q_j=v_j/(4*pi).",
+        "Give positive per-pair absolute tolerances and outward arithmetic budgets; retain uncertified result on absent or unverified geometry/certificates.",
+        "Retain gamma_h^-2 Frobenius bound, strict R>a+b cluster condition and single-cluster cost only.",
+        "Use smooth-near fallback for disjoint panels whose whole-panel balls are not admissible; no silent cluster separation assumption."
+      ]
+    }
+  ],
+  "actual_consumer_dispositions": [
+    {"id": "alg-bem-certified-inexact-matrix-assembly", "disposition": "repair-definition-as-above", "read_in_full": true},
+    {"id": "thm-bem-matrix-perturbation-transfer", "disposition": "unchanged-interface-compatible", "read_in_full": true},
+    {"id": "ex-bem-inexact-assembly-error-ledger", "disposition": "unchanged-algebraic-example", "read_in_full": true}
+  ],
+  "dependency_order": [
+    "existing Newton/mesh/single-layer and batch-26 Gaussian/Duffy suppliers",
+    "lem-bem-panel-pair-duffy-certificates",
+    "lem-bem-far-panel-quadrature-residual",
+    "alg-bem-certified-inexact-matrix-assembly",
+    "thm-bem-matrix-perturbation-transfer",
+    "ex-bem-inexact-assembly-error-ledger"
+  ],
+  "canonical_changes_performed": false,
+  "native_review_or_gate_claim": false,
+  "required_followup": "Same original reviewer second/final actual suppliers plus all old/new consumers after native refresh drain; parent alone integrates and performs bookkeeping."
+}

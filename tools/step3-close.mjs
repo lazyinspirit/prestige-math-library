@@ -13,6 +13,9 @@ import { downstreamConsumerClosureEvidence } from './step3-owner-downstream-cons
 import { closureEvidence, OBSERVATION_EVIDENCE_POLICY } from './step3-owner-unbound-reader-observations.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { ownerRepairEvidenceClosure, OWNER_REPAIR_EVIDENCE_FREEZE_POLICY } from './step3-owner-stabilized-source-identical-continuity.mjs';
+import { nativeOriginClosureEvidence } from './auditor-created-items.mjs';
+import { NATIVE_ORIGIN_FREEZE_POLICY } from './step3-native-creation-origin.mjs';
+import { step3LedgerNormalizationHistory } from './step3-ledger-normalization-history.mjs';
 
 const argv = process.argv.slice(2);
 const mode = argv[0];
@@ -42,7 +45,7 @@ const artifactNames = (version = 3) => researchNames().filter((name) =>
   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-3a-decisions.json'))
   || version === 2 && [ `${run}-alpha-3b.md`, `${run}-cross-group-edges.json`,
     `${run}-3b-verdicts.jsonl` ].includes(name)).sort();
-const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = null, repairEvidencePolicy = null, frozenManifestArtifacts = null) => ({
+const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = null, repairEvidencePolicy = null, frozenManifestArtifacts = null, nativeOriginPolicy = null, requireLiveNativeLog = false) => ({
   ...Object.fromEntries(artifactNames(version).map((name) => [
     `research/${name}`, sha256(readFileSync(R('research', name))),
   ])),
@@ -51,6 +54,8 @@ const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = 
   ...(version === 3 && observationPolicy === OBSERVATION_EVIDENCE_POLICY ? closureEvidence(root, run) : {}),
   ...(version === 3 && repairEvidencePolicy === OWNER_REPAIR_EVIDENCE_FREEZE_POLICY
     ? ownerRepairEvidenceClosure(root, run, { required: true }) : {}),
+  ...(version === 3 && nativeOriginPolicy === NATIVE_ORIGIN_FREEZE_POLICY
+    ? nativeOriginClosureEvidence(root, run, { requireLiveLog: requireLiveNativeLog }) : {}),
 });
 const jsonl = (path) => existsSync(path)
   ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
@@ -99,10 +104,15 @@ if (mode === 'verify') {
     && (receipt.version !== 3 || receipt.owner_repair_evidence_policy !== OWNER_REPAIR_EVIDENCE_FREEZE_POLICY)) {
     fail('unknown or unsupported owner_repair_evidence_policy');
   }
+  if (Object.hasOwn(receipt, 'native_origin_evidence_policy')
+    && (receipt.version !== 3 || receipt.native_origin_evidence_policy !== NATIVE_ORIGIN_FREEZE_POLICY)) {
+    fail('unknown or unsupported native_origin_evidence_policy');
+  }
   // Only verification authenticates closure-time manifest slots through their
   // already sealed archives. Close/default calls retain live preclosure currency.
   const currentArtifacts = artifactHashes(receipt.version, receipt.observation_evidence_policy, receipt.manifest_evidence_policy, receipt.owner_repair_evidence_policy,
-    receipt.manifest_evidence_policy === PRECLOSURE_MANIFEST_POLICY ? receipt.artifacts : null);
+    receipt.manifest_evidence_policy === PRECLOSURE_MANIFEST_POLICY ? receipt.artifacts : null,
+    receipt.native_origin_evidence_policy);
   if (JSON.stringify(Object.keys(currentArtifacts).sort()) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
     errors.push('the exact Step-3 artifact set changed');
   }
@@ -112,7 +122,9 @@ if (mode === 'verify') {
   const ledgerRows = step3LedgerRows();
   if (sha256(JSON.stringify(ledgerRows)) !== receipt.step3_ledger_rows_sha256
     || ledgerRows.length !== receipt.step3_ledger_rows_count) {
-    errors.push('Step-3 defect-ledger rows changed');
+    try {
+      if (!step3LedgerNormalizationHistory(root, run, receipt, ledgerRows)) errors.push('Step-3 defect-ledger rows changed');
+    } catch (cause) { errors.push(`Step-3 defect-ledger rows changed: ${cause.message}`); }
   }
   if (errors.length) fail(errors.join('; '));
   console.log(`step3-close: verified ${Object.keys(receipt.artifacts ?? {}).length} frozen artifact(s) for ${run}`);
@@ -138,13 +150,15 @@ for (const [label, args] of checks) {
 }
 const repairEvidencePolicy = existsSync(R('research', `${run}-step3-owner-repair-evidence.json`))
   ? OWNER_REPAIR_EVIDENCE_FREEZE_POLICY : null;
-const artifacts = artifactHashes(3, OBSERVATION_EVIDENCE_POLICY, PRECLOSURE_MANIFEST_POLICY, repairEvidencePolicy);
+const artifacts = artifactHashes(3, OBSERVATION_EVIDENCE_POLICY, PRECLOSURE_MANIFEST_POLICY, repairEvidencePolicy,
+  null, NATIVE_ORIGIN_FREEZE_POLICY, true);
 if (!Object.keys(artifacts).length) fail('no exact Step-3 artifacts exist');
 const ledgerRows = step3LedgerRows();
 writeFileSync(receiptPath, `${JSON.stringify({
   version: 3,
   basis: 'dependency-ordered-step3a',
   observation_evidence_policy: OBSERVATION_EVIDENCE_POLICY,
+  native_origin_evidence_policy: NATIVE_ORIGIN_FREEZE_POLICY,
   ...(repairEvidencePolicy ? { owner_repair_evidence_policy: repairEvidencePolicy } : {}),
   manifest_evidence_policy: PRECLOSURE_MANIFEST_POLICY,
   run,

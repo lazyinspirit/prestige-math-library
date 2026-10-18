@@ -1,0 +1,13 @@
+# Batch 27: review 0
+
+Run: numerical-analysis-remaining-71-2026-10-17
+Batch: 27
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: gaussian-basis-integral-recurrences-and-boys-error, gaussian-basis-integral-recurrences-and-boys-error-examples
+Items: def-cartesian-gaussian-primitives-and-contractions, def-boys-function-and-coulomb-auxiliary-recurrence, def-finite-gaussian-basis-variational-energy-and-gradient, thm-gaussian-product-theorem-and-polynomial-shift, thm-boys-integral-identities-series-and-incomplete-gamma, lem-boys-positive-midpoint-enclosure, lem-cartesian-gaussian-moments-and-parameter-derivatives, thm-gaussian-contraction-error-energy-gradient-bounds, def-hermite-gaussian-coulomb-auxiliary-functions, thm-cartesian-pair-hermite-expansion-and-coefficient-recurrence, thm-cartesian-gaussian-integrals-absolutely-convergent, lem-boys-small-taylor-remainder, lem-boys-incomplete-gamma-large-t-tail-bound, lem-boys-upward-downward-recurrence-error-amplification, thm-cartesian-gaussian-raising-lowering-and-kinetic-recurrences, thm-positive-coulomb-bilinear-cauchy-schwarz-screening, alg-certified-boys-finite-budget-branch-evaluation, thm-boys-branch-evaluation-enclosures-are-sound, thm-gaussian-coulomb-hermite-recurrences-and-integral-formulas, alg-finite-gaussian-basis-integral-recurrence-evaluation, thm-finite-gaussian-integral-evaluator-soundness-and-screening-error, ex-same-center-s-orbital-integrals, ex-small-t-upward-boys-cancellation, ex-highly-contracted-gaussian-coefficients-amplify-error, ex-overlap-near-linear-dependence, ex-screened-coulomb-blocks-accumulate-error
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

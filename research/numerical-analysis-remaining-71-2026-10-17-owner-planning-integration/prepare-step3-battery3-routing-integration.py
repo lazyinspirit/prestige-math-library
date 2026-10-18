@@ -1,0 +1,35 @@
+import json,pathlib
+run='numerical-analysis-remaining-71-2026-10-17';base=pathlib.Path('research/'+run+'-owner-planning-integration');out=base/'step3-battery3-routing-integration';out.mkdir(exist_ok=True)
+def load(lab):return json.loads((base/('step3-battery3-'+lab+'-routing-proposal.json')).read_text())
+def path(b):return 'research/'+run+'-alpha-batch-'+str(b)+'-3a-decisions.json'
+patches=[];adds=[];rows=[]
+def patch(file,obligation,fields=None,before=None,after=None,remove=None,reason=None):patches.append(dict(file=file,obligation=obligation,fields=fields or{},before=before,after=after,remove=remove or[],reason=reason))
+def add(file,row):adds.append({'file':file,'decision':row})
+x=load('gaussian')
+for a in x['existing_decision_field_patches']:patch(path(11),a['obligation'],a['set_fields'])
+for a in x['page_decision_replacement_proposals']:patch(path(11),a['obligation'],after=a)
+rows.append(x['page_ledger_append_proposal'])
+x=load('oscillatory')
+for a in x['proposals']:
+ fields={k:v for k,v in a['proposed_patch'].items()if k!='remove_fields'};fields['evidence']=a['proposed_evidence'];patch(path(13),a['obligation'],fields,before=a['original_working_decision'],remove=a['proposed_patch']['remove_fields'])
+x=load('fmm')
+for a in x['proposed_decision_changes']:patch(path(19),a['obligation'],before=a['guard_exact_current_decision'],after=a['proposed_working_decision'])
+rows+=x['proposed_append_only_ledger_rows']
+x=load('mixed')
+for a in x['exact_shared_decision_edits']:patch(a['file'],a['before_row']['obligation'],{z['path'].split('/')[-1]:z['value']for z in a['operations']},before=a['before_row'])
+for a in x['exact_supplemental_gate_additions']:add(a['file'],a['operation']['value'])
+x=load('fehmm-ordering-pressure')
+for a in x['existing_decision_field_patches']:patch(a['path'],a['obligation'],a['fields'])
+for a in x['supplemental_gate_decisions']:add(a['path'],a['decision'])
+x=load('bem')
+for a in x['decision_edits']:patch(a['file'],a['obligation'],{a['replace_field']:a['proposed_value']},reason=a['reason'])
+for a in x['append_supplemental_decisions']:add(path(57),a)
+x=load('maxwell-fv')
+for a in x['proposed_edits']:add(a['decision_file'],a['decision'])
+x=load('ewald-special')
+for a in x['items']:add(a['target_decisions_path'],a['proposed_decision'])
+x=load('semilagrangian')
+for a in x['proposed_append_decisions']:add(x['working_decision_destination'],a)
+x=load('ritz-dpg')['rows'][1];patch(path(60),x['obligation'],before=x['existing_decision'],after=x['proposed_working_decision']);rows.append(x['proposed_new_page_ledger_row'])
+normalized={'run':run,'patches':patches,'adds':adds,'ledger_rows':rows,'shared_templates':load('gaussian')['owner_shared_defect_entries_to_seal']}
+(out/'normalized.json').write_text(json.dumps(normalized,indent=2)+'\n');(out/'ledger-rows.json').write_text(json.dumps(rows,indent=2)+'\n');print(json.dumps({'patches':len(patches),'adds':len(adds),'new_rows':len(rows)}))

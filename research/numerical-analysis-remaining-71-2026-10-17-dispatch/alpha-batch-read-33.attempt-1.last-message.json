@@ -1,0 +1,187 @@
+{
+  "group": "k",
+  "batches": ["33"],
+  "pages_read": [
+    "invariant-domain-and-entropy-stable-conservative-schemes",
+    "invariant-domain-and-entropy-stable-conservative-schemes-examples"
+  ],
+  "items_read": [
+    "def-pe03-convex-invariant-domain",
+    "def-pe03-system-entropy-pair-and-potential",
+    "alg-pe03-convex-scaling-positivity-limiter",
+    "def-pe03-first-order-hll-finite-volume-update",
+    "def-pe03-euler-positive-margin-domain",
+    "lem-pe03-euler-llf-split-state-positive",
+    "def-pe03-tadmor-entropy-conservative-flux",
+    "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+    "def-pe03-entropy-stable-dissipative-flux",
+    "lem-pe03-hll-half-cell-riemann-averages",
+    "thm-pe03-hll-update-preserves-convex-invariant-domain",
+    "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+    "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+    "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+    "ex-pe03-burgers-entropy-residual",
+    "ex-pe03-conservative-positivity-rescaling",
+    "ex-pe03-entropy-stable-underresolved-shock",
+    "ex-pe03-near-vacuum-euler-hll-update"
+  ],
+  "conventions": [
+    {
+      "convention": "Convex invariant domain means convexity and preservation by the specified one-step map on its stated admissible inputs; it asserts no invariance for other integrators or exact Riemann evolution.",
+      "fixed_by": "def-pe03-convex-invariant-domain",
+      "matters_for": [
+        "thm-pe03-hll-update-preserves-convex-invariant-domain",
+        "thm-pe03-ideal-gas-llf-branch-preserves-positivity"
+      ]
+    },
+    {
+      "convention": "The HLL update uses a periodic uniform mesh with N ≥ 2, ν = Δt/h ≥ 0, and supplied speeds S_L < 0 < S_R at each face. No exact nonlinear wave-speed enclosure is inferred.",
+      "fixed_by": "def-pe03-first-order-hll-finite-volume-update",
+      "matters_for": [
+        "lem-pe03-hll-half-cell-riemann-averages",
+        "thm-pe03-hll-update-preserves-convex-invariant-domain",
+        "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+        "ex-pe03-near-vacuum-euler-hll-update"
+      ]
+    },
+    {
+      "convention": "Entropy gradients are columns: v = ∇η, ∇q = DFᵀv, and ψ = vᵀF − q. Convex entropy permits a positive-semidefinite Hessian.",
+      "fixed_by": "def-pe03-system-entropy-pair-and-potential",
+      "matters_for": [
+        "def-pe03-tadmor-entropy-conservative-flux",
+        "def-pe03-entropy-stable-dissipative-flux",
+        "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+        "ex-pe03-burgers-entropy-residual",
+        "ex-pe03-entropy-stable-underresolved-shock"
+      ]
+    },
+    {
+      "convention": "The Tadmor identity uses right-minus-left jumps: (v_R − v_L)ᵀFᵉᶜ = ψ_R − ψ_L. Dissipation is subtracted as D(v_R − v_L)/2, with D symmetric positive semidefinite.",
+      "fixed_by": "def-pe03-entropy-stable-dissipative-flux",
+      "matters_for": [
+        "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+        "ex-pe03-burgers-entropy-residual",
+        "ex-pe03-entropy-stable-underresolved-shock"
+      ]
+    },
+    {
+      "convention": "For γ > 1 and ε > 0, the Euler margin requires density ≥ ε and internal-energy density E − m²/(2ρ) ≥ ε; ε is not a pressure threshold.",
+      "fixed_by": "def-pe03-euler-positive-margin-domain",
+      "matters_for": [
+        "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+        "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+        "ex-pe03-conservative-positivity-rescaling"
+      ]
+    },
+    {
+      "convention": "The limiter takes a finite nonempty node set, positive weights summing to one, a closed convex set K, and a mean already in K. It returns the largest common feasible scaling parameter in [0,1].",
+      "fixed_by": "alg-pe03-convex-scaling-positivity-limiter",
+      "matters_for": [
+        "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+        "ex-pe03-conservative-positivity-rescaling"
+      ]
+    },
+    {
+      "convention": "The entropy theorem concerns differentiable semidiscrete trajectories remaining in the state domain; it supplies no fully discrete entropy inequality.",
+      "fixed_by": "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+      "matters_for": [
+        "ex-pe03-entropy-stable-underresolved-shock"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-pe03-hll-half-cell-riemann-averages",
+      "statement": "Under 2ν(−S_L) ≤ 1 and 2νS_R ≤ 1, the adjacent half-cell averages are A⁻ = (1 − 2ν(−S_L))U_L + 2ν(−S_L)U_* and A⁺ = (1 − 2νS_R)U_R + 2νS_RU_*, where U_* = (S_RU_R − S_LU_L − (F_R − F_L))/(S_R − S_L). Every updated mean is (A⁺ at its left face + A⁻ at its right face)/2.",
+      "used_by": [
+        "thm-pe03-hll-update-preserves-convex-invariant-domain",
+        "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+        "ex-pe03-near-vacuum-euler-hll-update"
+      ]
+    },
+    {
+      "id": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+      "statement": "For γ > 1 and ε > 0, the ideal-gas admissible set and K_{γ,ε} are convex, and K_{γ,ε} is closed in R³.",
+      "used_by": [
+        "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+        "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+        "ex-pe03-near-vacuum-euler-hll-update"
+      ]
+    },
+    {
+      "id": "lem-pe03-euler-llf-split-state-positive",
+      "statement": "For an ideal-gas admissible state U and a ≥ |u| + c, both U ± F(U)/a are admissible. With δ = ±1/a and x = 1 + δu, their density is ρx and their internal-energy density is ex − δ²p²/(2ρx) > 0.",
+      "used_by": [
+        "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+        "ex-pe03-near-vacuum-euler-hll-update"
+      ]
+    },
+    {
+      "id": "def-pe03-tadmor-entropy-conservative-flux",
+      "statement": "A continuous two-point flux is entropy-conservative in Tadmor's sense if it is consistent and symmetric and satisfies (v_R − v_L)ᵀFᵉᶜ(U_L,U_R) = ψ_R − ψ_L for every pair of states in the domain. No existence for a prescribed entropy pair is asserted.",
+      "used_by": [
+        "def-pe03-entropy-stable-dissipative-flux",
+        "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+        "ex-pe03-burgers-entropy-residual",
+        "ex-pe03-entropy-stable-underresolved-shock",
+        "def-pe04-flux-differencing-sbp-systems",
+        "thm-pe04-flux-differencing-sbp-conservation-and-entropy-stability"
+      ]
+    },
+    {
+      "id": "thm-pe03-hll-update-preserves-convex-invariant-domain",
+      "statement": "For convex K and cell means in K, one first-order HLL update remains in K if both adjacent half-cell fan averages at every face lie in K under the local CFL bounds. Membership of every HLL intermediate state in K is sufficient for this hypothesis.",
+      "used_by": [
+        "thm-pe03-ideal-gas-llf-branch-preserves-positivity"
+      ]
+    },
+    {
+      "id": "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+      "statement": "Differentiable periodic finite-volume states remaining in the entropy domain and using the specified dissipative flux satisfy the local cell entropy inequality with numerical entropy flux ((v_i + v_{i+1})/2)ᵀFᵉˢ − (ψ_i + ψ_{i+1})/2. Total discrete entropy is nonincreasing. No fully discrete conclusion is asserted.",
+      "used_by": [
+        "ex-pe03-entropy-stable-underresolved-shock"
+      ]
+    },
+    {
+      "id": "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+      "statement": "For finite positively weighted Euler candidate nodes whose mean lies in K_{γ,ε}, maximal convex scaling is well-defined, preserves the weighted mean, and places every output node in K_{γ,ε}. It is inactive when all candidate nodes are already admissible, including under the stated strict target-margin and reconstruction-error condition. No positivity between nodes is claimed.",
+      "used_by": [
+        "ex-pe03-conservative-positivity-rescaling"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "The external hyperbolic-system definition imports its C¹ flux regularity convention; the assigned entropy and HLL definitions use that system convention.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-euclidean-maps-and-diffeomorphisms",
+      "used_for": "The external hyperbolic-system definition imports its C³ Euclidean-map convention. No inverse-function conclusion is used by the assigned proofs.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "invariant-domain-and-entropy-stable-conservative-schemes",
+      "to": "high-resolution-tvd-eno-and-weno-methods",
+      "faithful": true,
+      "note": "Read both page interfaces. The consumer explicitly treats this as prerequisite context and imports no MUSCL, ENO, WENO, TVD, or fully discrete result. Its finite-node limiter makes no unsupported reconstruction claim."
+    },
+    {
+      "from": "hyperbolic-dg-and-summation-by-parts-discretizations",
+      "to": "invariant-domain-and-entropy-stable-conservative-schemes",
+      "faithful": true,
+      "note": "Read the downstream page and its flux-differencing definition and theorem. They apply the entropy-pair convention and exact Tadmor identity separately to each directional flux with a common entropy, explicitly supply symmetric consistent fluxes, and retain semidiscrete scope."
+    },
+    {
+      "from": "well-balanced-balance-laws-and-wet-dry-fronts",
+      "to": "invariant-domain-and-entropy-stable-conservative-schemes",
+      "faithful": true,
+      "note": "Read the downstream page, shallow-water state definition, and convexity proposition. The actual PE03 citation imports only segment convexity. The proof separately handles endpoint weights and the zero-depth case, without importing Euler positivity, closedness, or an HLL entropy conclusion."
+    }
+  ]
+}

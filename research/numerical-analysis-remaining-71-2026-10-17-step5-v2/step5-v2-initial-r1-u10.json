@@ -1,0 +1,185 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "10",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "alg-budgeted-cp-alternating-least-squares",
+      "model": "gpt-6-luna",
+      "context_sha256": "b38ea75341debde40674b283cc1764d9cf56344b0923547f121dedd6622ef644",
+      "outcome": "false_positive",
+      "reason": "The declared tensor prerequisite fixes d>=2 and positive physical mode sizes, so n_k=0 is not an admissible input. The R=0 branch exits before least squares. In every executed solve, p=product_{ell!=k} n_ell>=1, r=R>=1 and s=n_k>=1, and conjugation preserves full column rank. Taking adjoints gives the displayed equivalent complex least-squares problem and the cited lemma supplies its unique minimizer. The finite sweep budget and rank-deficient exit are fully specified.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-hosvd-truncation",
+      "model": "gpt-6-luna",
+      "context_sha256": "43b4c4abb85ec55eee3bb8620d4175b544e2bccfc92d041a84c18e9a8560fd1b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For A=0 with positive physical sizes, every unfolding has rank zero, hence q_k=0 and U_k has zero columns. The original G then has zero-sized modes, outside the positive-shape tensor definition, without an auxiliary-array convention. The same problem occurs for a nonzero tensor and a zero rank cap. Added an explicit local definition of auxiliary arrays on possibly empty finite Cartesian products and extended the supplier entrywise contraction formula with empty sums zero. All retained ranks, orthogonal projections, core/reconstruction formulas, admissible caps and physical tensor sizes are preserved; the empty core now reconstructs the zero physical tensor. Positive-rank outputs are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-budgeted-cp-alternating-least-squares",
+      "disposition": "unaffected",
+      "post_sha256": "c99230c56281e2ea7844f9f1c70bc55a58af2e6e389554f9b94559d319ae76b3",
+      "review_context_sha256": "4ddae88fa43de2742ff9f2f3c5eb2d9eedc9dcf33ce5caf4717eb592d28b2895",
+      "reason": "The declared tensor prerequisite fixes d>=2 and positive physical mode sizes, so n_k=0 is not an admissible input. The R=0 branch exits before least squares. In every executed solve, p=product_{ell!=k} n_ell>=1, r=R>=1 and s=n_k>=1, and conjugation preserves full column rank. Taking adjoints gives the displayed equivalent complex least-squares problem and the cited lemma supplies its unique minimizer. The finite sweep budget and rank-deficient exit are fully specified.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-hosvd-truncation",
+      "disposition": "repaired",
+      "post_sha256": "05d1cdb8c0865f882c132368a0fa7d357f42865ef7b50927b754d57a96a55f63",
+      "review_context_sha256": "b91a534ce38bdce450fb747aa3564bc62d2b578b6c03ad9ccf230c39cf09699e",
+      "reason": "For A=0 with positive physical sizes, every unfolding has rank zero, hence q_k=0 and U_k has zero columns. The original G then has zero-sized modes, outside the positive-shape tensor definition, without an auxiliary-array convention. The same problem occurs for a nonzero tensor and a zero rank cap. Added an explicit local definition of auxiliary arrays on possibly empty finite Cartesian products and extended the supplier entrywise contraction formula with empty sums zero. All retained ranks, orthogonal projections, core/reconstruction formulas, admissible caps and physical tensor sizes are preserved; the empty core now reconstructs the zero physical tensor. Positive-rank outputs are unchanged. Exact SVD supplies the requested leading singular vectors; the mode products compose to P_k=U_k U_k*, including the zero projection. No choice axiom beyond finite choices is used. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-hosvd-quasioptimal-multilinear-rank-error"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-hosvd-truncation",
+      "proposed_row": {
+        "defect_id": "numerical-analysis-remaining-71-2026-10-17-step5-initial-r1-u10-hosvd-empty-core",
+        "run": "numerical-analysis-remaining-71-2026-10-17",
+        "at": "2026-10-18T03:56:37.513016+00:00",
+        "class": "accuracy",
+        "subclass": "ill-typed-construction",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "alg-hosvd-truncation",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "adjudication_ref": {
+          "id": "alg-hosvd-truncation",
+          "model": "gpt-6-luna",
+          "context_sha256": "43b4c4abb85ec55eee3bb8620d4175b544e2bccfc92d041a84c18e9a8560fd1b"
+        },
+        "evidence": "Zero unfolding rank or rank cap produced a zero-sized core without an admissible array/contraction convention. Added a local finite-index-set auxiliary-array definition and empty-sum contraction convention; retained all algorithm outputs and rank caps. Current guard 05d1cdb8c0865f882c132368a0fa7d357f42865ef7b50927b754d57a96a55f63."
+      },
+      "reason": "The original algorithm is undefined at an explicitly allowed zero retained rank under its positive-mode tensor supplier. The completed local convention repairs that logical well-definedness defect. The historical model/context remain exactly those assigned."
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update-required",
+      "id": "alg-hosvd-truncation",
+      "reason": "The current direct dependency/reference inventory contains only the draft frontier HOSVD quasioptimality theorem and its draft owning page. Their examined projector and quasioptimality uses remain sound. No published consumer or published repair was found, and no published item was edited."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "alg-budgeted-cp-alternating-least-squares",
+      "alg-hosvd-truncation"
+    ],
+    "next_action": "Controller collects this evidence and schedules the ordinary frontier consumer-owner and independent rejudgment work; no worker-launched gates or judgments.",
+    "evidence": [
+      "items/def-finite-tensor-arrays-and-frobenius-inner-product.md, Definition: d>=2 and n_k positive.",
+      "items/lem-full-column-rank-matrix-least-squares-solution.md, Statement and Proof: full column rank gives unique matrix least-squares minimizer for positive p,r,s.",
+      "Owning batch-10 pages manifest mirrors the unchanged CP-ALS Definition; no separate algorithm proof contract exists."
+    ],
+    "unresolved_obligations": [],
+    "consumer_examinations": [
+      {
+        "supplier": "alg-hosvd-truncation",
+        "id": "thm-hosvd-quasioptimal-multilinear-rank-error",
+        "path": "items/thm-hosvd-quasioptimal-multilinear-rank-error.md",
+        "affected_use": "Facts F4 and Proof step 1.1 use the identity Ahat=P_1...P_d A, with P_k=U_k U_k*; steps 2.1 and 3.1 use the leading singular-subspace projection residual.",
+        "disposition": "unchanged_mathematics_sound; supplier quotation synchronized",
+        "reason": "The new empty-array convention preserves every P_k and the physical reconstruction. If q_k=0, P_k=0 is orthogonal and contractive, the commuting-projector telescoping sum is still valid, and its residual is the full singular-value tail. The matrix best-rank theorem includes rank zero. No theorem Statement, proof, dependency, or foundational requirement changes.",
+        "metadata_followup": {
+          "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-10.proof-contracts.json",
+          "entry": "contracts.thm-hosvd-quasioptimal-multilinear-rank-error.citations, fact F4",
+          "required_change": "Completed: refreshed only the F4 exact supplier Definition quotation under the shared write lock. The theorem carrier remains unchanged."
+        }
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/numerical-linear-algebra-and-approximation/tensor-train-compression-and-truncation-error.md",
+        "affected_use": "Page inventory places alg-hosvd-truncation before its quasioptimality theorem; summary states HOSVD is within sqrt(d) of the prescribed multilinear-rank error.",
+        "disposition": "unchanged_sound",
+        "reason": "The procedure and physical output are preserved, and the theorem proof continues to apply even when a cap or unfolding rank is zero."
+      }
+    ],
+    "outside_scope_findings": [
+      {
+        "path": "library/numerical-linear-algebra-and-approximation/tensor-train-compression-and-truncation-error-examples.md",
+        "route": "page owner, separate presentation maintenance",
+        "finding": "The digest concern is confirmed: prose says \"The final counterexample\" while the examples inventory places cex-best-rank-two-cp-approximation-may-not-exist first. No mathematical defect; no page edit is licensed by this assignment."
+      }
+    ],
+    "repair_complete": true,
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-budgeted-cp-alternating-least-squares.md items/alg-hosvd-truncation.md --json",
+        "exit_code": 0,
+        "result": "2 files, 0 proofs checked, 0 failures; both not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-budgeted-cp-alternating-least-squares.md items/alg-hosvd-truncation.md --json",
+        "exit_code": 0,
+        "result": "2 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-hosvd-truncation.md",
+        "exit_code": 0,
+        "result": "1 item, 0 proof steps, 0 defects; run after the final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-10.proof-contracts.json --strict --items thm-hosvd-quasioptimal-multilinear-rank-error --json",
+        "exit_code": 0,
+        "result": "Selected theorem contract checked successfully, no errors or warnings."
+      },
+      {
+        "command": "Shared-lock acquire/reread/edit/check/release with tools/step5-shared-write-lock.mjs sharedWriteLock API",
+        "exit_code": 0,
+        "result": "Updated only the HOSVD Definition manifest mirror and its F4 citation quote. Exact manifest equality checked; lock released in finally."
+      },
+      {
+        "command": "Focused report/manifest assertions against initial-1.json assignment 10",
+        "exit_code": 0,
+        "result": "Exact rejected-tuple coverage, unchanged/repaired guard dispositions, downstream inventory, uncertain:false fields and both Definition mirrors passed."
+      }
+    ],
+    "interface_change": {
+      "id": "alg-hosvd-truncation",
+      "section": "Definition",
+      "preserved": "Rank caps including zero, q_k=min(r_k,rank A_(k)), the U_k and P_k selections, core and physical reconstruction formulas, and exact-arithmetic-only scope.",
+      "added_clause": "For auxiliary cores and intermediate arrays in this procedure, allow mode sizes $m_k\\ge0$: an array of shape $(m_1,\\ldots,m_d)$ is a function from $\\prod_{k=1}^d\\{1,\\ldots,m_k\\}$ to $\\mathbb F$. If a mode size is zero, this is the unique empty array.",
+      "direct_consumers": [
+        "thm-hosvd-quasioptimal-multilinear-rank-error"
+      ],
+      "discovery": "Searched all current items and library pages for both algorithm IDs; no aliases exist. Only the HOSVD theorem and owning A page use the changed supplier. No outside or published direct item consumers were found."
+    },
+    "changed_files": [
+      "items/alg-hosvd-truncation.md",
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-10.pages.json",
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-10.proof-contracts.json",
+      "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u10.json"
+    ],
+    "source_consultation": "Local definitions, supplier statements/proofs, both algorithms, both theorem consumers, owning pages, manifest and relevant contract citations were read. The finite-array and linear-algebra arguments are familiar; no external full text was consulted or claimed."
+  }
+}

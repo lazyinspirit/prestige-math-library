@@ -1,0 +1,2203 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-3",
+  "scope": [
+    "lem-natural-cubic-spline-second-derivative-perturbation",
+    "lem-b-spline-basis-refinement-under-single-knot-insertion",
+    "thm-de-boor-coefficient-evaluation-equivalence",
+    "thm-de-boor-coefficient-evaluation-work",
+    "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+    "thm-natural-cubic-spline-tridiagonal-residual-transfer",
+    "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+    "thm-de-boor-forward-error-under-operationwise-model",
+    "thm-single-new-knot-insertion-preserves-b-spline-curve",
+    "thm-clamped-cubic-spline-fourth-order-error",
+    "thm-computed-natural-cubic-spline-forward-error-certificate",
+    "ex-repeated-knot-de-boor-evaluation",
+    "ex-natural-cubic-x-squared-endpoint-caveat",
+    "ex-single-new-knot-insertion-preserves-linear-curve"
+  ],
+  "contracts": {
+    "thm-de-boor-coefficient-evaluation-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-de-boor-coefficient-evaluation",
+          "source_section": "Definition",
+          "quote": "Use zero-based indices for this procedure: write the clamped knot vector from\n[[def-b-spline-space-and-basis]] as $t_0\\le\\cdots\\le t_{n+p}$, where\n$t_i=\\xi_{i+1}$, with $n\\ge p+1$, and write the real degree-$p$\ncoefficients as $c_0,\\ldots,c_{n-1}$. The input includes $p\\in\\mathbb N_0$,\na nonempty span index $k$ with $p\\le k\\le n-1$ and $t_k<t_{k+1}$, a real\nquery, and the $p+1$ active coefficients $c_{k-p},\\ldots,c_k$. The query is\neither $x\\in[t_k,t_{k+1})$ or, for the left limit at the right endpoint $b$,\n$x=b$ with the last nonempty span supplied. At an interior knot, the\nhalf-open convention selects the span on its right. In exact mode the\nknots, query, and coefficients are real numbers. In floating-point mode the\nknots, query, and active coefficients are finite stored real numbers in the\nselected format; conversion into that format is outside this procedure.\n\nThe arithmetic mode is either exact real arithmetic or the operationwise\nfloating-point model of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\nThe output is `success(value)`, `invalid-input`, or, in floating-point mode,\n`range-failure(operation, r, j)`. The span search is supplied by the caller\nand is not part of the evaluation loop. Invalid indices, coefficient counts,\nspan or query conditions, or floating-point input formats return\n`invalid-input`.\n\n1. If the indices, coefficient count, span, or query do not satisfy the\n   input conditions, return `invalid-input`.\n2. If $p=0$, return $c_k$ by copy.\n3. Initialize $d_j^{(0)}=c_{k-p+j}$ for $0\\le j\\le p$.\n4. For $r=1,\\ldots,p$, and then $j=p,p-1,\\ldots,r$, put\n   $L=k-p+j$ and $U=k+1+j-r$. In exact mode set\n   $\\alpha=(x-t_L)/(t_U-t_L)$ and\n   $d_j^{(r)}=(1-\\alpha)d_{j-1}^{(r-1)}+\\alpha d_j^{(r-1)}$. In\n   floating-point mode first compute $v=\\operatorname{fl}(x-t_L)$. On\n   failure return `range-failure` for the numerator subtraction. If $v=0$,\n   copy $d_{j-1}^{(r-1)}$ to $d_j^{(r)}$ and skip the denominator subtraction,\n   division, complement subtraction, products, and addition. Otherwise\n   compute $w=\\operatorname{fl}(t_U-t_L)$ and then\n   $\\widehat\\alpha=\\operatorname{fl}(v/w)$; on the first failure return its\n   operation and indices. Next compute\n   $\\widehat\\beta=\\operatorname{fl}(1-\\widehat\\alpha)$, followed by\n   $a=\\operatorname{fl}(\\widehat\\beta d_{j-1}^{(r-1)})$,\n   $b=\\operatorname{fl}(\\widehat\\alpha d_j^{(r-1)})$, and\n   $d_j^{(r)}=\\operatorname{fl}(a+b)$, in that order, returning the first\n   `range-failure`. Keep the old $d_j^{(r-1)}$ until the update is complete.\n5. Return `success(d_p^{(p)})`.\n\nFor every loop entry, $L\\le k<U$, so\n$t_L\\le t_k<t_{k+1}\\le t_U$ and the denominator is positive. The exact\nweight therefore lies in $[0,1]$. When a span endpoint is requested as a\none-sided value, the same recurrence is evaluated at that endpoint with the\nspecified half-open or left-limit convention.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-b-spline-space-and-basis",
+          "source_section": "Definition",
+          "quote": "Let $p\\in\\mathbb N_0$, $n\\ge p+1$, and $a<b$. A clamped knot vector is a nondecreasing finite sequence\n$$\\xi_1=\\cdots=\\xi_{p+1}=a<\\xi_{p+2}\\le\\cdots\\le\\xi_n<\\xi_{n+1}=\\cdots=\\xi_{n+p+1}=b,$$\nwith $\\xi_j<\\xi_{j+p+1}$ for every $1\\le j\\le n$. Empty interior ranges are omitted. The multiplicity $\\mu(\\eta)$ of an interior knot $\\eta$ is its number of occurrences among $\\xi_{p+2},\\ldots,\\xi_n$.\n\nWrite $\\mathcal P_p$ for the real polynomials of degree at most $p$. The degree-$p$ spline space $S_{p,\\xi}$ consists of functions that restrict to a member of $\\mathcal P_p$ on each nonempty knot interval and whose derivatives through order $p-\\mu(\\eta)$ agree across each interior knot $\\eta$. The convention $C^{-1}$ means that no matching condition is imposed. For this piecewise definition, take knot cells left-closed and right-open; at a knot with no matching condition, the value is the one from the cell on its right, and at $b$ use the left limit. Thus the function value at a discontinuous knot is specified.\n\nFor each degree $d\\in\\{0,\\ldots,p\\}$, the functions $B_{j,d,\\xi}$ are indexed by $1\\le j\\le n+p-d$. Set\n$$B_{j,0,\\xi}(x)=\\mathbf 1_{[\\xi_j,\\xi_{j+1})}(x),\\qquad 1\\le j\\le n+p.$$\nFor $1\\le d\\le p$ and $1\\le j\\le n+p-d$, define recursively\n$$B_{j,d,\\xi}(x)=\\frac{x-\\xi_j}{\\xi_{j+d}-\\xi_j}B_{j,d-1,\\xi}(x)+\\frac{\\xi_{j+d+1}-x}{\\xi_{j+d+1}-\\xi_{j+1}}B_{j+1,d-1,\\xi}(x),$$\nwhere a term with zero denominator is defined to be zero. For every degree $d$ and every allowed index $j$, set $B_{j,d,\\xi}(b)$ equal to its left limit. In particular, the degree-$p$ family has indices $1\\le j\\le n$. Its basis and regularity properties are proved in [[thm-spline-polynomial-reproduction]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spline-polynomial-reproduction",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb N_0$ and let $\\xi$ be a clamped knot vector as in [[def-b-spline-space-and-basis]]. The recursively defined degree-$p$ B-splines are nonnegative, are supported on $[\\xi_j,\\xi_{j+p+1}]$, and are piecewise polynomials of degree at most $p$. At a knot of multiplicity $\\mu\\le p$, each B-spline is $C^{p-\\mu}$; multiplicity $p+1$ imposes no continuity requirement. On every nonempty knot interval $[\\xi_m,\\xi_{m+1})$, the active functions $B_{m-p,p,\\xi},\\ldots,B_{m,p,\\xi}$ form a basis of $\\mathcal P_p$ and sum to one. Globally, the $n$ B-splines form a basis of $S_{p,\\xi}$. In particular, every $q\\in\\mathcal P_p$ has a unique expansion $q=\\sum_{j=1}^n c_jB_{j,p,\\xi}$ on $[a,b]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], on the supplied span the spline value is the sum over its active indices only. With $d_j^{(0)}=c_{k-p+j}$, this is $S(x)=\\sum_{j=0}^{p}d_j^{(0)}B_{k-p+j,p}(x)$. If $p=0$, the sole active degree-zero indicator equals one on the half-open span, so the algorithm's copy $c_k$ is exactly $S(x)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose a current degree-$q$ local expansion has active coefficients $a_{k-q},\\ldots,a_k$. Expand each basis function by [F2]. For every $i=k-q+1,\\ldots,k$, the coefficient of $B_{i,q-1}(x)$ after collecting the two contributing terms is $\\frac{(x-t_i)a_i+(t_{i+q}-x)a_{i-1}}{t_{i+q}-t_i}=\\left(1-\\frac{x-t_i}{t_{i+q}-t_i}\\right)a_{i-1}+\\frac{x-t_i}{t_{i+q}-t_i}a_i$. The two boundary terms are zero on $[t_k,t_{k+1})$: the left one is supported only up to $t_k$, and the right one starts at $t_{k+1}$. A zero denominator contributes zero by [F2]. Thus this degree reduction preserves the value at $x$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Starting at $q=p$, repeat step 1.2. After $r-1$ reductions the active degree is $q=p-r+1$, and the coefficient indexed by $i=k-p+j$ has the weight $(x-t_{k-p+j})/(t_{k+1+j-r}-t_{k-p+j})$, exactly $\\alpha_{j,r}$ in [F1]. Hence each algorithmic update is the coefficient collection in step 1.2 and preserves the spline value. After $p$ reductions the sole degree-zero indicator on the span is one, so the remaining coefficient $d_p^{(p)}$ equals $S(x)$. At $b$ equality on the last open span extends to the prescribed left limit.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.2",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Although an empty knot span is excluded, degree zero has an empty de Boor update loop and returns the sole active coefficient.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "Although an empty knot span is excluded, degree zero has an empty de Boor update loop and returns the sole active coefficient.",
+            "item_sha256": "69de5528d2eb942ca17d6c8c39fe0255b49e59aaa04b2b594df457bbe0d8e2aa",
+            "row_sha256": "39190c4f215aa5ec27d6b6a548c998ff8a320ae36b750904966328c5bec9a543",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "Although an empty knot span is excluded, degree zero has an empty de Boor update loop and returns the sole active coefficient.",
+            "item_sha256": "69de5528d2eb942ca17d6c8c39fe0255b49e59aaa04b2b594df457bbe0d8e2aa",
+            "row_sha256": "39190c4f215aa5ec27d6b6a548c998ff8a320ae36b750904966328c5bec9a543",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the zero coefficient expansion, and the final recurrence preserves its value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the p=0 base case explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The span is required to satisfy t_k<t_{k+1}."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles right-cell knot values and the left limit at b."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use only a finite active list and finite degree induction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proof reduces the spline expansion by collecting coefficients, not by characterizing all possible algorithms that return the spline value.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The proof reduces the spline expansion by collecting coefficients, not by characterizing all possible algorithms that return the spline value.",
+            "item_sha256": "69de5528d2eb942ca17d6c8c39fe0255b49e59aaa04b2b594df457bbe0d8e2aa",
+            "row_sha256": "98bdb2508ff0d5100809a3e7424018fe907fe84e214243b0af6328eba629442d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The proof reduces the spline expansion by collecting coefficients, not by characterizing all possible algorithms that return the spline value.",
+            "item_sha256": "69de5528d2eb942ca17d6c8c39fe0255b49e59aaa04b2b594df457bbe0d8e2aa",
+            "row_sha256": "98bdb2508ff0d5100809a3e7424018fe907fe84e214243b0af6328eba629442d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Equality of one computed value to the spline would not force the supplied span or knots to satisfy the clamped-input hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "Equality of one computed value to the spline would not force the supplied span or knots to satisfy the clamped-input hypotheses.",
+            "item_sha256": "69de5528d2eb942ca17d6c8c39fe0255b49e59aaa04b2b594df457bbe0d8e2aa",
+            "row_sha256": "dc555bc884414d243d57e1fdf7e1b40332de9768e9c9def547cf1fa5190833c3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "Equality of one computed value to the spline would not force the supplied span or knots to satisfy the clamped-input hypotheses.",
+            "item_sha256": "69de5528d2eb942ca17d6c8c39fe0255b49e59aaa04b2b594df457bbe0d8e2aa",
+            "row_sha256": "dc555bc884414d243d57e1fdf7e1b40332de9768e9c9def547cf1fa5190833c3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read every current step and the exact algorithm, B-spline definition and complete published basis proof. Cox\u2013de Boor coefficient collection gives precisely L=k-p+j and U=k+1+j-r; boundary lower-degree supports vanish, active denominators straddle the nonempty span, p=0 copies the sole indicator coefficient, and b follows by left limits. Descending update order preserves both old inputs. Published justified_by annotation follows SCHEMA and supplies no circular proof premise. No AC."
+      },
+      "kind": "theorem",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "Checked the local coefficient recursion against the exact one-based B-spline definition after t_i=xi_{i+1}; no basis-evaluation algorithm is substituted for coefficient evaluation. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    },
+    "thm-de-boor-coefficient-evaluation-work": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-de-boor-coefficient-evaluation",
+          "source_section": "Definition",
+          "quote": "Use zero-based indices for this procedure: write the clamped knot vector from\n[[def-b-spline-space-and-basis]] as $t_0\\le\\cdots\\le t_{n+p}$, where\n$t_i=\\xi_{i+1}$, with $n\\ge p+1$, and write the real degree-$p$\ncoefficients as $c_0,\\ldots,c_{n-1}$. The input includes $p\\in\\mathbb N_0$,\na nonempty span index $k$ with $p\\le k\\le n-1$ and $t_k<t_{k+1}$, a real\nquery, and the $p+1$ active coefficients $c_{k-p},\\ldots,c_k$. The query is\neither $x\\in[t_k,t_{k+1})$ or, for the left limit at the right endpoint $b$,\n$x=b$ with the last nonempty span supplied. At an interior knot, the\nhalf-open convention selects the span on its right. In exact mode the\nknots, query, and coefficients are real numbers. In floating-point mode the\nknots, query, and active coefficients are finite stored real numbers in the\nselected format; conversion into that format is outside this procedure.\n\nThe arithmetic mode is either exact real arithmetic or the operationwise\nfloating-point model of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\nThe output is `success(value)`, `invalid-input`, or, in floating-point mode,\n`range-failure(operation, r, j)`. The span search is supplied by the caller\nand is not part of the evaluation loop. Invalid indices, coefficient counts,\nspan or query conditions, or floating-point input formats return\n`invalid-input`.\n\n1. If the indices, coefficient count, span, or query do not satisfy the\n   input conditions, return `invalid-input`.\n2. If $p=0$, return $c_k$ by copy.\n3. Initialize $d_j^{(0)}=c_{k-p+j}$ for $0\\le j\\le p$.\n4. For $r=1,\\ldots,p$, and then $j=p,p-1,\\ldots,r$, put\n   $L=k-p+j$ and $U=k+1+j-r$. In exact mode set\n   $\\alpha=(x-t_L)/(t_U-t_L)$ and\n   $d_j^{(r)}=(1-\\alpha)d_{j-1}^{(r-1)}+\\alpha d_j^{(r-1)}$. In\n   floating-point mode first compute $v=\\operatorname{fl}(x-t_L)$. On\n   failure return `range-failure` for the numerator subtraction. If $v=0$,\n   copy $d_{j-1}^{(r-1)}$ to $d_j^{(r)}$ and skip the denominator subtraction,\n   division, complement subtraction, products, and addition. Otherwise\n   compute $w=\\operatorname{fl}(t_U-t_L)$ and then\n   $\\widehat\\alpha=\\operatorname{fl}(v/w)$; on the first failure return its\n   operation and indices. Next compute\n   $\\widehat\\beta=\\operatorname{fl}(1-\\widehat\\alpha)$, followed by\n   $a=\\operatorname{fl}(\\widehat\\beta d_{j-1}^{(r-1)})$,\n   $b=\\operatorname{fl}(\\widehat\\alpha d_j^{(r-1)})$, and\n   $d_j^{(r)}=\\operatorname{fl}(a+b)$, in that order, returning the first\n   `range-failure`. Keep the old $d_j^{(r-1)}$ until the update is complete.\n5. Return `success(d_p^{(p)})`.\n\nFor every loop entry, $L\\le k<U$, so\n$t_L\\le t_k<t_{k+1}\\le t_U$ and the denominator is positive. The exact\nweight therefore lies in $[0,1]$. When a span endpoint is requested as a\none-sided value, the same recurrence is evaluated at that endpoint with the\nspecified half-open or left-limit convention.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At loop level $r$, there are $p-r+1$ values of $j$. Therefore a completed loop performs $\\sum_{r=1}^{p}(p-r+1)=\\sum_{s=1}^{p}s=p(p+1)/2$ updates; for $p=0$ the loop is empty. A range failure stops the loop early, so every call performs at most this many updates.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each full update computes a fixed number of subtractions, one division, two multiplications and one addition, independent of $p$; an exact-zero numerator branch or a range failure can only reduce that count. Initializing and returning the local list takes at most a constant times $p+1$ copies. Thus the scalar arithmetic count is bounded by a constant times $p^2+1$, while the list contains at most $p+1$ entries. The excluded span search cannot change either bound.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm receives an already specified nonempty span."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero blends at p=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives exactly one blend when p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A zero-width span is rejected by the algorithm input contract."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the count is independent of the one-sided endpoint value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use finite loop indices only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The count sums p-r+1 updates over triangular loop levels and proves a cost bound, not a characterization of which calls succeed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The count sums p-r+1 updates over triangular loop levels and proves a cost bound, not a characterization of which calls succeed.",
+            "item_sha256": "3279116642b68e355f7debe2fd49f6e7ae78c79a5fe1a5699126a789f959b799",
+            "row_sha256": "04831ba20b9f223cf21ffd50c175b48732b28cac829be26e134129c0f705c49c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The count sums p-r+1 updates over triangular loop levels and proves a cost bound, not a characterization of which calls succeed.",
+            "item_sha256": "3279116642b68e355f7debe2fd49f6e7ae78c79a5fe1a5699126a789f959b799",
+            "row_sha256": "04831ba20b9f223cf21ffd50c175b48732b28cac829be26e134129c0f705c49c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A quadratic work bound does not imply numerical success or identify the spline value, and neither converse is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "A quadratic work bound does not imply numerical success or identify the spline value, and neither converse is asserted.",
+            "item_sha256": "3279116642b68e355f7debe2fd49f6e7ae78c79a5fe1a5699126a789f959b799",
+            "row_sha256": "0aae89920cf5944ab950eb34af0191b65517ac6dde8a9c90b5d177eb7fd6b365",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "A quadratic work bound does not imply numerical success or identify the spline value, and neither converse is asserted.",
+            "item_sha256": "3279116642b68e355f7debe2fd49f6e7ae78c79a5fe1a5699126a789f959b799",
+            "row_sha256": "0aae89920cf5944ab950eb34af0191b65517ac6dde8a9c90b5d177eb7fd6b365",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-scaffolder",
+        "notes": "Recomputed the triangular loop count and the fixed seven-operation blend count; the span-search cost is explicitly outside the claim. This is an authoring self-check, not independent review or acceptance."
+      },
+      "kind": "theorem"
+    },
+    "thm-de-boor-forward-error-under-operationwise-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "At each precision, let the representable set, normal range, and unit roundoff be an instance of [[def-standard-relative-floating-point-model-and-unit-roundoff]] specialized to a finite binary format of integer precision $p\\ge2$ and integer normal-exponent bounds $j_{\\min}\\le j\\le j_{\\max}$. Its normal values are $\\pm m2^{j-p+1}$ for integers $2^{p-1}\\le m<2^p$ and $j_{\\min}\\le j\\le j_{\\max}$, with $N_{\\min}=2^{j_{\\min}}$ and $N_{\\max}=(2^p-1)2^{j_{\\max}-p+1}$. The rounding rule is round-to-nearest, ties-to-even by the parity of the normalized significand. Each precision in a mixed-precision procedure has its own format, range, and valid unit-roundoff bound. On every real exact result that is zero or normal, $\\operatorname{fl}$ uses this rule; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range $x$, $\\operatorname{fl}(\\sqrt{x})$ is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression $ab+c$; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-de-boor-coefficient-evaluation",
+          "source_section": "Definition",
+          "quote": "Use zero-based indices for this procedure: write the clamped knot vector from\n[[def-b-spline-space-and-basis]] as $t_0\\le\\cdots\\le t_{n+p}$, where\n$t_i=\\xi_{i+1}$, with $n\\ge p+1$, and write the real degree-$p$\ncoefficients as $c_0,\\ldots,c_{n-1}$. The input includes $p\\in\\mathbb N_0$,\na nonempty span index $k$ with $p\\le k\\le n-1$ and $t_k<t_{k+1}$, a real\nquery, and the $p+1$ active coefficients $c_{k-p},\\ldots,c_k$. The query is\neither $x\\in[t_k,t_{k+1})$ or, for the left limit at the right endpoint $b$,\n$x=b$ with the last nonempty span supplied. At an interior knot, the\nhalf-open convention selects the span on its right. In exact mode the\nknots, query, and coefficients are real numbers. In floating-point mode the\nknots, query, and active coefficients are finite stored real numbers in the\nselected format; conversion into that format is outside this procedure.\n\nThe arithmetic mode is either exact real arithmetic or the operationwise\nfloating-point model of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\nThe output is `success(value)`, `invalid-input`, or, in floating-point mode,\n`range-failure(operation, r, j)`. The span search is supplied by the caller\nand is not part of the evaluation loop. Invalid indices, coefficient counts,\nspan or query conditions, or floating-point input formats return\n`invalid-input`.\n\n1. If the indices, coefficient count, span, or query do not satisfy the\n   input conditions, return `invalid-input`.\n2. If $p=0$, return $c_k$ by copy.\n3. Initialize $d_j^{(0)}=c_{k-p+j}$ for $0\\le j\\le p$.\n4. For $r=1,\\ldots,p$, and then $j=p,p-1,\\ldots,r$, put\n   $L=k-p+j$ and $U=k+1+j-r$. In exact mode set\n   $\\alpha=(x-t_L)/(t_U-t_L)$ and\n   $d_j^{(r)}=(1-\\alpha)d_{j-1}^{(r-1)}+\\alpha d_j^{(r-1)}$. In\n   floating-point mode first compute $v=\\operatorname{fl}(x-t_L)$. On\n   failure return `range-failure` for the numerator subtraction. If $v=0$,\n   copy $d_{j-1}^{(r-1)}$ to $d_j^{(r)}$ and skip the denominator subtraction,\n   division, complement subtraction, products, and addition. Otherwise\n   compute $w=\\operatorname{fl}(t_U-t_L)$ and then\n   $\\widehat\\alpha=\\operatorname{fl}(v/w)$; on the first failure return its\n   operation and indices. Next compute\n   $\\widehat\\beta=\\operatorname{fl}(1-\\widehat\\alpha)$, followed by\n   $a=\\operatorname{fl}(\\widehat\\beta d_{j-1}^{(r-1)})$,\n   $b=\\operatorname{fl}(\\widehat\\alpha d_j^{(r-1)})$, and\n   $d_j^{(r)}=\\operatorname{fl}(a+b)$, in that order, returning the first\n   `range-failure`. Keep the old $d_j^{(r-1)}$ until the update is complete.\n5. Return `success(d_p^{(p)})`.\n\nFor every loop entry, $L\\le k<U$, so\n$t_L\\le t_k<t_{k+1}\\le t_U$ and the denominator is positive. The exact\nweight therefore lies in $[0,1]$. When a span endpoint is requested as a\none-sided value, the same recurrence is evaluated at that endpoint with the\nspecified half-open or left-limit convention.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-de-boor-coefficient-evaluation-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb N_0$, let $t_0\\le\\cdots\\le t_{n+p}$ be the\nzero-based reindexing of a clamped knot vector, and let\n$S(x)=\\sum_{i=0}^{n-1}c_iB_{i,p}(x)$ be its degree-$p$ B-spline\nexpansion, with $B_{i,p}=B_{i+1,p,\\xi}$ under\n[[def-b-spline-space-and-basis]]. If $k$ is a nonempty span index and\n$x\\in[t_k,t_{k+1})$, then the exact-arithmetic mode of\n[[alg-de-boor-coefficient-evaluation]] returns $S(x)$. For $x=b$ it returns\nthe corresponding left limit when the last nonempty span is supplied.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At one blend let $\\alpha\\in[0,1]$ be the exact ratio. If its numerator is zero, the algorithm's exact-zero branch returns the left coefficient copy. Otherwise the two subtractions and division in [F2] give $\\widehat\\alpha=\\alpha(1+\\delta_1)(1+\\delta_3)/(1+\\delta_2)$, with $|\\delta_i|\\le u$ by [F1]. Hence $|\\widehat\\alpha-\\alpha|\\le\\eta$. The complement subtraction gives $|\\widehat\\beta-(1-\\alpha)|\\le\\eta+u(2+\\eta)=e$, because $|1-\\widehat\\alpha|\\le2+\\eta$. Also $|\\widehat\\alpha|,|\\widehat\\beta|\\le1+e=W$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write the two rounded products and final rounded sum as $\\widehat y=\\operatorname{fl}(\\operatorname{fl}(\\widehat\\beta a)+\\operatorname{fl}(\\widehat\\alpha b))$. Subtract the exact convex blend $(1-\\alpha)a+\\alpha b$. The coefficient differences contribute at most $e(|a|+|b|)$; the two product roundings contribute at most $uW(|a|+|b|)$; and the final addition contributes at most $u(1+u)W(|a|+|b|)$. Thus $|\\widehat y-((1-\\alpha)a+\\alpha b)|\\le E(|a|+|b|)$. If $M$ is the maximum magnitude in the preceding computed column, this is at most $2EM$. Since the exact blend is a convex combination, its magnitude is at most $M$, so the next computed column has maximum at most $(1+2E)M$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $M_r$ be the maximum magnitude of the computed column after $r$ stages and let $\\varepsilon_r$ be the maximum difference from the exact column. Step 1.2 gives $M_r\\le(1+2E)^rM_0$. Since the exact weights are nonnegative and sum to one, the previous-column discrepancy contributes at most $\\varepsilon_{r-1}$, while the local rounding contributes at most $2EM_{r-1}$. Therefore $\\varepsilon_r\\le\\varepsilon_{r-1}+2E(1+2E)^{r-1}M_0$. Starting with $\\varepsilon_0=0$ and summing this geometric series gives $\\varepsilon_p\\le((1+2E)^p-1)M_0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], the final exact column is $S(x)$; the final computed column is $\\widehat S(x)$, and $M_0=\\max_{k-p\\le i\\le k}|c_i|$. Substitution in step 2.1 proves the bound.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input contract requires a nonempty supplied span and active list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero error when all active coefficients vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 states the p=0 branch has zero error."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The input contract excludes zero-width spans."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the exact span convention and its specified one-sided endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use only the finite de Boor index loop; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Success with normal-range intermediates implies the error estimate; the estimate is not a sufficient success condition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Success with normal-range intermediates implies the error estimate; the estimate is not a sufficient success condition.",
+            "item_sha256": "2ea39e1b88d8b60406a63c2ef0f0b418a0fe66b91a949d920c684f904fcaa13d",
+            "row_sha256": "cb13f621f426c973747ceef0089c3c8ca41067f2ba77dab73abf2ec8dcb74a91",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Success with normal-range intermediates implies the error estimate; the estimate is not a sufficient success condition.",
+            "item_sha256": "2ea39e1b88d8b60406a63c2ef0f0b418a0fe66b91a949d920c684f904fcaa13d",
+            "row_sha256": "cb13f621f426c973747ceef0089c3c8ca41067f2ba77dab73abf2ec8dcb74a91",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A small output error cannot certify all intermediate range conditions, and that converse is explicitly withheld.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "A small output error cannot certify all intermediate range conditions, and that converse is explicitly withheld.",
+            "item_sha256": "2ea39e1b88d8b60406a63c2ef0f0b418a0fe66b91a949d920c684f904fcaa13d",
+            "row_sha256": "b2f18f12e3b1a6f492530210d4e20f75e17e110b05c213e9d0a058fe4cc131cf",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "A small output error cannot certify all intermediate range conditions, and that converse is explicitly withheld.",
+            "item_sha256": "2ea39e1b88d8b60406a63c2ef0f0b418a0fe66b91a949d920c684f904fcaa13d",
+            "row_sha256": "b2f18f12e3b1a6f492530210d4e20f75e17e110b05c213e9d0a058fe4cc131cf",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read four current steps and all three complete suppliers. Independently reconstructed pre-reader text by replacing only F2 with the archived earlier sentence; its raw SHA256 equals immutable pre-reader snapshot. F2 clarification matches the changed algorithm; mathematics unchanged. Verified ratio upper and lower deviations for 0<u<1 bounded by eta, complement bound e, weight bound W and three arithmetic rounding contributions E. Normal-or-zero success makes a zero rounded numerator equivalent to an exact zero, so early copy contributes zero local error. Convex exact weights propagate prior discrepancy without amplification; local magnitude grows by 1+2E, and summation gives ((1+2E)^p-1)M0. p=0 and all-zero coefficients give zero error, alpha=0/1 is covered. No range-success guarantee, data-conversion error or AC."
+      },
+      "kind": "theorem",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "Checked the ratio and complement bounds, all three blend roundings, and the geometric propagation. The theorem assumes successful normal-or-zero operations and does not guarantee range success. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    },
+    "thm-single-new-knot-insertion-preserves-b-spline-curve": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-b-spline-space-and-basis",
+          "source_section": "Definition",
+          "quote": "Let $p\\in\\mathbb N_0$, $n\\ge p+1$, and $a<b$. A clamped knot vector is a nondecreasing finite sequence\n$$\\xi_1=\\cdots=\\xi_{p+1}=a<\\xi_{p+2}\\le\\cdots\\le\\xi_n<\\xi_{n+1}=\\cdots=\\xi_{n+p+1}=b,$$\nwith $\\xi_j<\\xi_{j+p+1}$ for every $1\\le j\\le n$. Empty interior ranges are omitted. The multiplicity $\\mu(\\eta)$ of an interior knot $\\eta$ is its number of occurrences among $\\xi_{p+2},\\ldots,\\xi_n$.\n\nWrite $\\mathcal P_p$ for the real polynomials of degree at most $p$. The degree-$p$ spline space $S_{p,\\xi}$ consists of functions that restrict to a member of $\\mathcal P_p$ on each nonempty knot interval and whose derivatives through order $p-\\mu(\\eta)$ agree across each interior knot $\\eta$. The convention $C^{-1}$ means that no matching condition is imposed. For this piecewise definition, take knot cells left-closed and right-open; at a knot with no matching condition, the value is the one from the cell on its right, and at $b$ use the left limit. Thus the function value at a discontinuous knot is specified.\n\nFor each degree $d\\in\\{0,\\ldots,p\\}$, the functions $B_{j,d,\\xi}$ are indexed by $1\\le j\\le n+p-d$. Set\n$$B_{j,0,\\xi}(x)=\\mathbf 1_{[\\xi_j,\\xi_{j+1})}(x),\\qquad 1\\le j\\le n+p.$$\nFor $1\\le d\\le p$ and $1\\le j\\le n+p-d$, define recursively\n$$B_{j,d,\\xi}(x)=\\frac{x-\\xi_j}{\\xi_{j+d}-\\xi_j}B_{j,d-1,\\xi}(x)+\\frac{\\xi_{j+d+1}-x}{\\xi_{j+d+1}-\\xi_{j+1}}B_{j+1,d-1,\\xi}(x),$$\nwhere a term with zero denominator is defined to be zero. For every degree $d$ and every allowed index $j$, set $B_{j,d,\\xi}(b)$ equal to its left limit. In particular, the degree-$p$ family has indices $1\\le j\\le n$. Its basis and regularity properties are proved in [[thm-spline-polynomial-reproduction]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-single-new-b-spline-knot-insertion",
+          "source_section": "Definition",
+          "quote": "Use the zero-based reindexing $t_i=\\xi_{i+1}$ of the clamped knot vector\nin [[def-b-spline-space-and-basis]], so $t_0\\le\\cdots\\le t_{n+p}$ with\n$n\\ge p+1$. Let $p\\in\\mathbb N_0$, $d\\in\\mathbb N$, and let the controls\nbe $P_0,\\ldots,P_{n-1}\\in\\mathbb R^d$. Let $k$ be a\nnonempty span index with $t_k<u<t_{k+1}$, where $u$ is not already a knot.\nInsert $u$ between $t_k$ and $t_{k+1}$ to obtain $t'$. The output controls\n$Q_0,\\ldots,Q_n$ are defined by\n\n$$Q_i=\\begin{cases}P_i,&0\\le i\\le k-p,\\\\\\alpha_iP_i+(1-\\alpha_i)P_{i-1},&k-p+1\\le i\\le k,\\\\P_{i-1},&k+1\\le i\\le n,\\end{cases}\\qquad\\alpha_i=\\frac{u-t_i}{t_{i+p}-t_i}.$$\n\nThe middle range is empty when $p=0$. The curve uses the same degree and\nthe B-spline basis for the new knot vector. Each denominator in the middle\nrange is positive and each $\\alpha_i$ lies in $[0,1]$, so the update is an\nexact affine blend. This procedure inserts one knot that is new to the\nvector; repeated insertion at an existing knot is not part of this\nalgorithm's input contract.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-b-spline-basis-refinement-under-single-knot-insertion",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le\\cdots\\le t_{n+p}$ be a clamped degree-$p$ knot vector as in\n[[def-b-spline-space-and-basis]], with endpoints $a=t_0$ and $b=t_{n+p}$.\nFor a zero-based knot vector $v$, write $\\xi(v)_j=v_{j-1}$ and\n$B_{i,q,v}=B_{i+1,q,\\xi(v)}$. Let $k$ satisfy $t_k<t_{k+1}$, let\n$t_k<u<t_{k+1}$, and obtain $t'$ by inserting $u$ between $t_k$ and\n$t_{k+1}$. For $0\\le q\\le p$, define\n$$\\lambda_i^{(q)}=\\begin{cases}1,&i\\le k-q,\\\\\\frac{u-t_i}{t_{i+q}-t_i},&k-q+1\\le i\\le k,\\\\0,&i\\ge k+1.\\end{cases}$$\nThen for every degree $q\\in\\{0,\\ldots,p\\}$, every old basis index\n$0\\le i\\le n+p-q-1$, and every $x\\in[a,b]$,\n$$B_{i,q,t}(x)=\\lambda_i^{(q)}B_{i,q,t'}(x)+(1-\\lambda_{i+1}^{(q)})B_{i+1,q,t'}(x).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since the knot vector is clamped and the insertion span is nonempty, $p\\le k\\le n-1$. For bookkeeping only, set $P_{-1}=P_n=0$ and write $\\lambda_j=\\lambda_j^{(p)}$. The copy, blend, and shift ranges in [F2] give $Q_j=\\lambda_jP_j+(1-\\lambda_j)P_{j-1}$ for every $0\\le j\\le n$: in the copy range $\\lambda_j=1$, in the blend range the algorithm's $\\alpha_j$ is $\\lambda_j$, and in the shift range $\\lambda_j=0$. This also covers $p=0$, when the blend range is empty. Therefore the finite refined sum is $\\sum_{j=0}^n Q_jB'_{j,p}=\\sum_{i=0}^{n-1}P_i[\\lambda_iB'_{i,p}+(1-\\lambda_{i+1})B'_{i+1,p}]$: the first control sum uses $P_n=0$, and in the second the change of index $i=j-1$ drops the $P_{-1}=0$ term.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], each bracketed basis combination in step 1.1 equals $B_{i,p,t}$. Substitution in that finite sum gives $\\sum_{j=0}^nQ_jB_{j,p,t'}=\\sum_{i=0}^{n-1}P_iB_{i,p,t}=C(x)$. The recurrence and control algebra hold at interior knots under the right-cell convention, and at $b$ they hold by the prescribed left limits. Hence the refined expansion equals the original curve for every $x\\in[a,b]$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The blend range is explicitly empty at degree zero and step 1.1 handles it with copied and shifted controls; the insertion span itself must be nonempty.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The blend range is explicitly empty at degree zero and step 1.1 handles it with copied and shifted controls; the insertion span itself must be nonempty.",
+            "item_sha256": "7b821b998035edb72a6550f99a7914018e379d6a1085d6c961eafa6ef0ebb523",
+            "row_sha256": "6370c756ef2acb5b124801470dbedc867eaf7b719821ef5f481aed69237a6670",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The blend range is explicitly empty at degree zero and step 1.1 handles it with copied and shifted controls; the insertion span itself must be nonempty.",
+            "item_sha256": "7b821b998035edb72a6550f99a7914018e379d6a1085d6c961eafa6ef0ebb523",
+            "row_sha256": "6370c756ef2acb5b124801470dbedc867eaf7b719821ef5f481aed69237a6670",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include degree zero through the basis-refinement identity and the empty blend range."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 specializes to the single active degree-one blend; step 2.1 applies the degree-one basis identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The inserted knot is strictly inside a positive-width span."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the half-open convention at interior knots and the left limit at b."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use only finite control sums and the finite degree induction already proved in the lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The supplied basis refinement identity proves that copied and blended controls preserve the original curve.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The supplied basis refinement identity proves that copied and blended controls preserve the original curve.",
+            "item_sha256": "7b821b998035edb72a6550f99a7914018e379d6a1085d6c961eafa6ef0ebb523",
+            "row_sha256": "d533cb9e4c1a2c80d26d06ecd6260fe3c85ec29f8a3915f1ecb005324a7c5f1c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The supplied basis refinement identity proves that copied and blended controls preserve the original curve.",
+            "item_sha256": "7b821b998035edb72a6550f99a7914018e379d6a1085d6c961eafa6ef0ebb523",
+            "row_sha256": "d533cb9e4c1a2c80d26d06ecd6260fe3c85ec29f8a3915f1ecb005324a7c5f1c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A curve-preserving control modification is not asserted to arise uniquely from this particular knot-insertion algorithm.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "A curve-preserving control modification is not asserted to arise uniquely from this particular knot-insertion algorithm.",
+            "item_sha256": "7b821b998035edb72a6550f99a7914018e379d6a1085d6c961eafa6ef0ebb523",
+            "row_sha256": "417cbd7e81bef2071127a3f6db6d992bf5e6e7cd0a4a17e1f3387f97bfdf372f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "A curve-preserving control modification is not asserted to arise uniquely from this particular knot-insertion algorithm.",
+            "item_sha256": "7b821b998035edb72a6550f99a7914018e379d6a1085d6c961eafa6ef0ebb523",
+            "row_sha256": "417cbd7e81bef2071127a3f6db6d992bf5e6e7cd0a4a17e1f3387f97bfdf372f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read both proof steps, exact insertion algorithm and full refinement lemma/definition. Copy/blend/shift intervals cover 0..n; P[-1]=P[n]=0 is bookkeeping only. Reindexing the second finite sum gives precisely lambda_i B_i + (1-lambda_(i+1))B_(i+1) and invokes the proved refinement identity componentwise for arbitrary positive d. p=0 has empty blend range; first/last controls and repeated-knot right-cell values are covered, with b assigned its left limit. New u lies strictly inside a nonempty span; no existing-knot insertion or continuity at a discontinuous knot is assumed. No AC."
+      },
+      "kind": "theorem",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "Rechecked the p=0 empty blend range, the j=0 and j=n bookkeeping terms, the finite-sum index shift, all vector controls componentwise, and the endpoint convention. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    },
+    "thm-clamped-cubic-spline-interpolant-exists-uniquely": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-clamped-cubic-spline-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $a=x_0<x_1<\\cdots<x_m=b$, with $m\\ge1$, let\n$y_0,\\ldots,y_m\\in\\mathbb R$, and prescribe endpoint slopes\n$\\sigma_a,\\sigma_b\\in\\mathbb R$. A **clamped cubic spline interpolant**\nfor these data is a function $s\\in C^2([a,b])$ whose restriction to every\n$[x_i,x_{i+1}]$ is a polynomial of degree at most three, which satisfies\n$s(x_i)=y_i$ for every $i$, and which satisfies\n$s'(a)=\\sigma_a$ and $s'(b)=\\sigma_b$.\n\nHere $C^2$ means that the function and its first two derivatives are\ncontinuous on $[a,b]$, with one-sided derivatives at the endpoints. This\nuses the piecewise-cubic convention in\n[[def-natural-cubic-spline]] and replaces its natural endpoint-curvature\nconditions by prescribed endpoint slopes. It does not alter the natural\ncubic interpolant or its system.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $A$ be the $(m+1)\\times(m+1)$ matrix of the displayed system. Its first row has diagonal $2h_0$ and off-diagonal sum $h_0$; an interior row $i$ has diagonal $2(h_{i-1}+h_i)$ and off-diagonal sum $h_{i-1}+h_i$; the last row has diagonal $2h_{m-1}$ and off-diagonal sum $h_{m-1}$. Every diagonal entry therefore strictly exceeds the sum of the other absolute entries in its row. If $Av=0$ for a nonzero $v$, choose $i$ with $|v_i|=\\max_j|v_j|>0$. The $i$th row gives $|A_{ii}||v_i|\\le\\sum_{j\\ne i}|A_{ij}||v_j|\\le \\left(\\sum_{j\\ne i}|A_{ij}|\\right)|v_i|$, contradicting strict row diagonal dominance. Thus $A$ has zero kernel and, being square, is invertible.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $M_0,\\ldots,M_m$ be the unique solution. Define $s_i$ by the displayed piece formula. Substitution at $x_i$ and $x_{i+1}$ gives the values $y_i,y_{i+1}$, and differentiating twice gives endpoint second derivatives $M_i,M_{i+1}$. Differentiating once gives $s_i'(x_i)=d_i-h_i(2M_i+M_{i+1})/6$ and $s_i'(x_{i+1})=d_i+h_i(M_i+2M_{i+1})/6$. The interior system rows make the adjacent endpoint slopes agree. Since the adjacent second derivatives both equal the shared $M_i$, the pieces join with continuous first and second derivatives. The first and last rows give $s_0'(a)=\\sigma_a$ and $s_{m-1}'(b)=\\sigma_b$. Hence the constructed function satisfies [F1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any clamped interpolant, its nodal second derivatives must satisfy the displayed system by the same endpoint-slope formulas, so invertibility from step 1.1 forces them to equal the constructed $M_i$. On each interval, the difference from $s_i$ is a cubic with zero endpoint values and zero endpoint second derivatives. Its second derivative is affine and vanishes at both endpoints, hence is identically zero; the difference is then affine and vanishes at both endpoint values, hence is zero. Every piece is therefore unique, proving uniqueness of the interpolant.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes at least one interval, m>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 permits zero right-hand sides and still proves invertibility."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the two-row system when m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every mesh width h_i is strictly positive by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies both prescribed endpoint slopes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 3.1 use finite rows and a finite maximum index."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The nodal second-derivative system and piece formula explicitly construct the unique clamped interpolant, but the theorem is stated as existence and uniqueness.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The nodal second-derivative system and piece formula explicitly construct the unique clamped interpolant, but the theorem is stated as existence and uniqueness.",
+            "item_sha256": "5d3fb29dc60bb7bec1688ceaadcc0044cd848c01c202955552d2e73768fd5c57",
+            "row_sha256": "0398f74523696a600950e1cd99cf3fbac47b8034ecc720f0c727f3cbd4430748",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The nodal second-derivative system and piece formula explicitly construct the unique clamped interpolant, but the theorem is stated as existence and uniqueness.",
+            "item_sha256": "5d3fb29dc60bb7bec1688ceaadcc0044cd848c01c202955552d2e73768fd5c57",
+            "row_sha256": "0398f74523696a600950e1cd99cf3fbac47b8034ecc720f0c727f3cbd4430748",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Any clamped interpolant must satisfy the same nodal system by its endpoint slopes; this uniqueness argument is not a separately asserted biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Any clamped interpolant must satisfy the same nodal system by its endpoint slopes; this uniqueness argument is not a separately asserted biconditional.",
+            "item_sha256": "5d3fb29dc60bb7bec1688ceaadcc0044cd848c01c202955552d2e73768fd5c57",
+            "row_sha256": "549cf8521c3e1aa07e6b6be8d9b4993e0b154e63833dde92ca705c77e89a1a65",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Any clamped interpolant must satisfy the same nodal system by its endpoint slopes; this uniqueness argument is not a separately asserted biconditional.",
+            "item_sha256": "5d3fb29dc60bb7bec1688ceaadcc0044cd848c01c202955552d2e73768fd5c57",
+            "row_sha256": "549cf8521c3e1aa07e6b6be8d9b4993e0b154e63833dde92ca705c77e89a1a65",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-scaffolder",
+        "notes": "Checked the first and last row equations, the m=1 case, continuity at every interior node, and uniqueness of each local cubic. This is an authoring self-check, not independent review or acceptance."
+      },
+      "kind": "theorem"
+    },
+    "lem-natural-cubic-spline-second-derivative-perturbation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge2$, $a\\le x_1<\\cdots<x_r\\le b$, and $y_1,\\ldots,y_r\\in\\mathbb R$. There is exactly one natural cubic spline $s$ on $[a,b]$ with $s(x_i)=y_i$ for each $i$. On each interval $[x_i,x_{i+1}]$ it is the cubic with endpoint values $y_i,y_{i+1}$ and endpoint second derivatives $M_i,M_{i+1}$, where $M_1=M_r=0$ and the interior values solve the positive-definite tridiagonal system\n$$h_{i-1}M_{i-1}+2(h_{i-1}+h_i)M_i+h_iM_{i+1}=6\\left(\\frac{y_{i+1}-y_i}{h_i}-\\frac{y_i-y_{i-1}}{h_{i-1}}\\right),\\quad 2\\le i\\le r-1,$$\nwith $h_i=x_{i+1}-x_i>0$. The interpolant is linear outside $[x_1,x_r]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $i$ and write $h=h_i$ and $t=(x-x_i)/h\\in[0,1]$. Subtract the two piece formulas in [F1]. The endpoint values cancel, leaving $\\widehat s(x)-s(x)=\\frac{h^2}{6}\\left((\\widehat M_i-M_i)((1-t)^3-(1-t))+(\\widehat M_{i+1}-M_{i+1})(t^3-t)\\right)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $0\\le t\\le1$, $(1-t)-(1-t)^3=t(1-t)(2-t)\\ge0$ and $t-t^3=t(1-t)(1+t)\\ge0$. Their sum is $3t(1-t)\\le3/4$. Therefore the absolute value in step 1.1 is at most $h^2 E(3/4)/6=h^2E/8\\le H^2E/8$. Taking the maximum over the finitely many knot intervals proves the claim on $[x_1,x_r]$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes at least two distinct knots and uses their knot hull."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero error when E=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With r=2 there is one interval and step 2.1 applies directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "All knot spacings are strictly positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes both closed endpoints of every knot-hull interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use only the finite mesh and finite maximum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion bounds the change of the cubic interpolant by nodal curvature error; neither equality in that estimate nor recovery of curvature error from the function norm is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The conclusion bounds the change of the cubic interpolant by nodal curvature error; neither equality in that estimate nor recovery of curvature error from the function norm is asserted.",
+            "item_sha256": "f386586b213c4dc3e3202a795aa6eef58197d2721497fd8b253eaa4330344e17",
+            "row_sha256": "b7970b7810a1c1734ba93254f1180684ae9937d5eb1a449d31a8d7fa56fe3644",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The conclusion bounds the change of the cubic interpolant by nodal curvature error; neither equality in that estimate nor recovery of curvature error from the function norm is asserted.",
+            "item_sha256": "f386586b213c4dc3e3202a795aa6eef58197d2721497fd8b253eaa4330344e17",
+            "row_sha256": "b7970b7810a1c1734ba93254f1180684ae9937d5eb1a449d31a8d7fa56fe3644",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion bounds the change of the cubic interpolant by nodal curvature error; neither equality in that estimate nor recovery of curvature error from the function norm is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The conclusion bounds the change of the cubic interpolant by nodal curvature error; neither equality in that estimate nor recovery of curvature error from the function norm is asserted.",
+            "item_sha256": "f386586b213c4dc3e3202a795aa6eef58197d2721497fd8b253eaa4330344e17",
+            "row_sha256": "53d6923b2f785d54ea422035a87065896d042eac329ecd1d7f3d46e37d63010e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The conclusion bounds the change of the cubic interpolant by nodal curvature error; neither equality in that estimate nor recovery of curvature error from the function norm is asserted.",
+            "item_sha256": "f386586b213c4dc3e3202a795aa6eef58197d2721497fd8b253eaa4330344e17",
+            "row_sha256": "53d6923b2f785d54ea422035a87065896d042eac329ecd1d7f3d46e37d63010e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-scaffolder",
+        "notes": "Checked the endpoint second-derivative agreement and the exact factor 3t(1-t) in the local bound. This is an authoring self-check, not independent review or acceptance."
+      },
+      "kind": "lemma"
+    },
+    "thm-natural-cubic-spline-tridiagonal-residual-transfer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge2$, $a\\le x_1<\\cdots<x_r\\le b$, and $y_1,\\ldots,y_r\\in\\mathbb R$. There is exactly one natural cubic spline $s$ on $[a,b]$ with $s(x_i)=y_i$ for each $i$. On each interval $[x_i,x_{i+1}]$ it is the cubic with endpoint values $y_i,y_{i+1}$ and endpoint second derivatives $M_i,M_{i+1}$, where $M_1=M_r=0$ and the interior values solve the positive-definite tridiagonal system\n$$h_{i-1}M_{i-1}+2(h_{i-1}+h_i)M_i+h_iM_{i+1}=6\\left(\\frac{y_{i+1}-y_i}{h_i}-\\frac{y_i-y_{i-1}}{h_{i-1}}\\right),\\quad 2\\le i\\le r-1,$$\nwith $h_i=x_{i+1}-x_i>0$. The interpolant is linear outside $[x_1,x_r]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-natural-cubic-spline-second-derivative-perturbation",
+          "source_section": "Statement",
+          "quote": "Let $x_1<\\cdots<x_r$ be natural interpolation knots, $r\\ge2$, and put\n$h_i=x_{i+1}-x_i$ and $H=\\max_i h_i$. Let $s$ be the natural cubic\ninterpolant with data $y_i$ and nodal second derivatives $M_i$, with\n$M_1=M_r=0$. Let $\\widehat M_1=\\widehat M_r=0$ and let\n$\\widehat s$ be the piecewise cubic formed from the same values $y_i$ and\nthe second derivatives $\\widehat M_i$ using the natural cubic piece formula\nof [[thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots]]. On\nthe knot hull $[x_1,x_r]$, if\n$$E=\\max_{1\\le i\\le r}|\\widehat M_i-M_i|,$$\nthen\n$$\\|\\widehat s-s\\|_{L^\\infty([x_1,x_r])}\\le \\frac{H^2}{8}E.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $e=\\widehat m-m$, so $Ae=\\rho$ by [F1] and the definition of $\\rho$. Choose an index $i$ at which $|e_i|=\\|e\\|_\\infty$, and put $S_i=h_{i-1}+h_i$. The diagonal entry in row $i$ is $2S_i$, while the sum $R_i$ of the absolute off-diagonal entries is at most $S_i$ because an endpoint row omits the coefficient multiplying the fixed zero endpoint second derivative (and when $r=3$ there are no off-diagonal entries). The reverse triangle inequality and $|e_j|\\le\\|e\\|_\\infty$ give $|\\rho_i|\\ge(2S_i-R_i)\\|e\\|_\\infty\\ge S_i\\|e\\|_\\infty\\ge\\delta\\|e\\|_\\infty$. Hence $\\|e\\|_\\infty\\le\\|\\rho\\|_\\infty/\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] with $E=\\max_i|\\widehat M_i-M_i|=\\|e\\|_\\infty$, since both endpoint perturbations are zero. Step 1.1 then yields $\\|\\widehat s-s\\|_\\infty\\le H^2\\|e\\|_\\infty/8\\le H^2\\|\\rho\\|_\\infty/(8\\delta)$, as claimed.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes r>=3 and an interior natural-system vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero nodal error for zero exact residual."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes r=3, where the single interior row has no off-diagonal unknowns and the same diagonal-dominance margin bound holds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The knots are strictly increasing, so delta>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the perturbation lemma on the entire knot hull, including endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use only finite row indices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The residual certificate transfers an algebraic infinity-norm bound to spline function error through strict diagonal dominance; it does not characterize a small residual from a small function error.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The residual certificate transfers an algebraic infinity-norm bound to spline function error through strict diagonal dominance; it does not characterize a small residual from a small function error.",
+            "item_sha256": "a6fc5d0d534ced8dbe289394d3cdc7744a3b2444ed6531c21cc0d45dddbc1420",
+            "row_sha256": "80515ef35b1bd7f7ce6ef4b88c80b5a2b9b35733a7595b86f9fac4f3f1019741",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The residual certificate transfers an algebraic infinity-norm bound to spline function error through strict diagonal dominance; it does not characterize a small residual from a small function error.",
+            "item_sha256": "a6fc5d0d534ced8dbe289394d3cdc7744a3b2444ed6531c21cc0d45dddbc1420",
+            "row_sha256": "80515ef35b1bd7f7ce6ef4b88c80b5a2b9b35733a7595b86f9fac4f3f1019741",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The residual certificate transfers an algebraic infinity-norm bound to spline function error through strict diagonal dominance; it does not characterize a small residual from a small function error.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The residual certificate transfers an algebraic infinity-norm bound to spline function error through strict diagonal dominance; it does not characterize a small residual from a small function error.",
+            "item_sha256": "a6fc5d0d534ced8dbe289394d3cdc7744a3b2444ed6531c21cc0d45dddbc1420",
+            "row_sha256": "4367fd818f82fb8d3935227b7db1c11ef7ee45ad97806ef4858625daac5d0462",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The residual certificate transfers an algebraic infinity-norm bound to spline function error through strict diagonal dominance; it does not characterize a small residual from a small function error.",
+            "item_sha256": "a6fc5d0d534ced8dbe289394d3cdc7744a3b2444ed6531c21cc0d45dddbc1420",
+            "row_sha256": "4367fd818f82fb8d3935227b7db1c11ef7ee45ad97806ef4858625daac5d0462",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read both current steps, the full nodal perturbation lemma and published natural-cubic definition/existence proof. Maximal-coordinate row estimate uses R_i<=hprev+hnext, not equality, including r=3 with zero off-diagonal sum. delta>0 follows from distinct knots. Perturbation identity sums nonnegative weights to 3t(1-t)<=3/4, giving H^2/(8delta). Endpoints fixed zero; proposed reconstruction need not be C1 and no solver success is asserted. Finite maximal selection needs no AC."
+      },
+      "kind": "theorem",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "This proves only the exact residual transfer. It does not assert that a rounded tridiagonal factor/solve routine produces the assumed residual. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    },
+    "thm-clamped-cubic-spline-fourth-order-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $a=x_0<x_1<\\cdots<x_m=b$, $m\\ge1$, let $y_0,\\ldots,y_m\\in\\mathbb R$,\nand let $\\sigma_a,\\sigma_b\\in\\mathbb R$. Put\n$h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$. There is exactly one\nclamped cubic spline interpolant in the sense of\n[[def-clamped-cubic-spline-interpolant]]. Its nodal second derivatives\n$M_i=s''(x_i)$ are the unique solution of\n$$\\begin{aligned}2h_0M_0+h_0M_1&=6(d_0-\\sigma_a),\\\\h_{i-1}M_{i-1}+2(h_{i-1}+h_i)M_i+h_iM_{i+1}&=6(d_i-d_{i-1}),\\quad 1\\le i<m,\\\\h_{m-1}M_{m-1}+2h_{m-1}M_m&=6(\\sigma_b-d_{m-1}).\\end{aligned}$$\nOn $[x_i,x_{i+1}]$ the interpolant is\n$$s_i(x)=\\frac{M_i(x_{i+1}-x)^3+M_{i+1}(x-x_i)^3}{6h_i}+\\left(y_i-\\frac{M_ih_i^2}{6}\\right)\\frac{x_{i+1}-x}{h_i}+\\left(y_{i+1}-\\frac{M_{i+1}h_i^2}{6}\\right)\\frac{x-x_i}{h_i}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-remainder-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, and suppose $f$ has derivatives through order $n+1$ on the closed interval between $a$ and $x$, with the usual endpoint continuity. If $|f^{(n+1)}(t)|\\le M$ throughout that interval, then\n$$|R_{n,a}f(x)|\\le \\frac{M}{\\iota((n+1)!)}|x-a|^{n+1}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $g_i=f''(x_i)$ and $q_i=f'''(x_i)$. By [F2], on each adjacent interval of length $h$, Taylor expansion gives $f''(x_i+h)=g_i+hq_i+R_g^+$ and $f''(x_i-h)=g_i-hq_i+R_g^-$ with $|R_g^\\pm|\\le Mh^2/2$; the corresponding secant slopes satisfy $d_i=f'(x_i)+h_i g_i/2+h_i^2q_i/6+R_i^+$ and $d_{i-1}=f'(x_i)-h_{i-1}g_i/2+h_{i-1}^2q_i/6+R_i^-$, with $|R_i^\\pm|\\le Mh_{i\\text{ or }i-1}^3/24$. Substitution in an interior row of [F1] shows that the residual obtained by inserting $g_i$ in place of $M_i$ has magnitude at most $(3/4)MH^2(h_{i-1}+h_i)$: the first-derivative terms cancel, and the remaining terms are bounded by $(1/2+1/4)M(h_{i-1}^3+h_i^3)$. The same expansions in the first row give residual at most $(3/4)MH^2h_0$; expansion backward from $b$ gives at most $(3/4)MH^2h_{m-1}$ in the last row.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix an interval $[x_i,x_{i+1}]$ of length $h_i$ and let $H_i$ be the cubic Hermite interpolant matching $f$ and $f'$ at both endpoints. Let $T_3$ be the Taylor polynomial of degree three for $f$ at $x_i$, and put $g=f-T_3$. By [F2], $g(x_i)=g'(x_i)=0$, $|g(x)|\\le Mh_i^4/24$, $|g(x_{i+1})|\\le Mh_i^4/24$, and $|g'(x_{i+1})|\\le Mh_i^3/6$. With $t=(x-x_i)/h_i$, the Hermite basis functions for the right value and right slope are $3t^2-2t^3$ and $t^3-t^2$; their absolute values on $[0,1]$ are at most $1$ and $4/27$. Therefore $|H_i g(x)|\\le(43/648)Mh_i^4$, and $|f(x)-H_i(x)|=|g(x)-H_i g(x)|\\le(35/324)Mh_i^4$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the clamped system matrix, each diagonal exceeds the sum of the absolute off-diagonal entries by respectively $h_0$, $h_{i-1}+h_i$, and $h_{m-1}$. Let $e_i=M_i-g_i$ and choose an index with maximal $|e_i|$. Since the residual equation is $Ae=b-Ag$, its row at that index has magnitude at least the row's diagonal-dominance margin times $\\max_j|e_j|$. Step 1.1 bounds that same row by $(3/4)MH^2$ times the margin. Hence $\\max_i|M_i-g_i|\\le(3/4)MH^2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At an interior node $x_i$, [F1] gives $s'(x_i)=d_{i-1}+h_{i-1}(M_{i-1}+2M_i)/6$. Substituting the backward Taylor expansions in step 1.1 and $M_j=g_j+e_j$ cancels the terms in $g_i$ and $q_i$. The remaining Taylor terms are bounded by $(1/24+1/12)Mh_{i-1}^3=MH^3/8$, and the $e$ terms by $h_{i-1}(3/4)MH^2/2\\le3MH^3/8$. Thus $|s'(x_i)-f'(x_i)|\\le MH^3/2$. At $a$ and $b$ this difference is zero by the boundary conditions.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The difference $s-H_i$ is a cubic with zero endpoint values and with endpoint slope differences $\\epsilon_i=s'(x_i)-f'(x_i)$ and $\\epsilon_{i+1}=s'(x_{i+1})-f'(x_{i+1})$. Its Hermite form is $h_i(\\epsilon_i t(1-t)^2+\\epsilon_{i+1}t^2(t-1))$. Each displayed shape function has absolute value at most $4/27$ on $[0,1]$. Step 3.1 therefore gives $|s-H_i|\\le(4/27)MH^4$. Combining with step 1.2 yields $|s-f|\\le(35/324+4/27)MH^4=(83/324)MH^4$ on this interval.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The intervals cover $[a,b]$, and $83/324<1$. Taking the supremum over all intervals proves the stated maximum-norm estimate.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes m>=1 and a nondegenerate partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 5.1 give exact reproduction when M=0, including cubic polynomials."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With one interval, the clamped interpolant is the endpoint Hermite cubic and steps 1.2-5.1 apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every h_i is positive by the partition hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses exact endpoint slopes, and step 5.1 includes both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 5.1 use a finite partition and finite maxima."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The clamped endpoint derivatives and a fourth derivative bound imply the displayed fourth-order uniform spline estimate.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The clamped endpoint derivatives and a fourth derivative bound imply the displayed fourth-order uniform spline estimate.",
+            "item_sha256": "303b95b1d1460537f1f499615744f46ecd18cc794d647c245291a874e1c95b26",
+            "row_sha256": "b2fcb8fb71f0d709f30f2b523fb8e977c154f26105bf517c576dcde815d21454",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The clamped endpoint derivatives and a fourth derivative bound imply the displayed fourth-order uniform spline estimate.",
+            "item_sha256": "303b95b1d1460537f1f499615744f46ecd18cc794d647c245291a874e1c95b26",
+            "row_sha256": "b2fcb8fb71f0d709f30f2b523fb8e977c154f26105bf517c576dcde815d21454",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A small interpolation error for one function does not recover its endpoint slopes or fourth-derivative bound, so no converse is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "A small interpolation error for one function does not recover its endpoint slopes or fourth-derivative bound, so no converse is asserted.",
+            "item_sha256": "303b95b1d1460537f1f499615744f46ecd18cc794d647c245291a874e1c95b26",
+            "row_sha256": "1a2a0848c5407ff7e8ef13f89c2e8bf0e731fa9ff056beb74c3764b8b81d2b34",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "A small interpolation error for one function does not recover its endpoint slopes or fourth-derivative bound, so no converse is asserted.",
+            "item_sha256": "303b95b1d1460537f1f499615744f46ecd18cc794d647c245291a874e1c95b26",
+            "row_sha256": "1a2a0848c5407ff7e8ef13f89c2e8bf0e731fa9ff056beb74c3764b8b81d2b34",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read every step and all three exact suppliers, including complete clamped existence proof and Taylor remainder corollary. Checked forward/backward Taylor signs and factorials: residual <=(3/4)MH^2 times each row margin, including both endpoint rows and m=1; maximal-coordinate argument bounds curvature error without mesh-ratio assumptions. Interior slope bound is (1/8+3/8)MH^3 and endpoint slope errors vanish by exact clamping. Hermite right-value/slope basis yields 43/648 then 35/324; two slope errors contribute 4/27, totaling 83/324. C4 neighborhood hypotheses imply all applied Taylor regularity, M=0 reproduces cubics, and no natural-boundary claim or AC is used."
+      },
+      "kind": "theorem",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "Checked variable mesh widths, endpoint rows, interior row margins, one-interval case, exact cubic reproduction and all constants in the Hermite comparison. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    },
+    "ex-repeated-knot-de-boor-evaluation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-de-boor-coefficient-evaluation",
+          "source_section": "Definition",
+          "quote": "Use zero-based indices for this procedure: write the clamped knot vector from\n[[def-b-spline-space-and-basis]] as $t_0\\le\\cdots\\le t_{n+p}$, where\n$t_i=\\xi_{i+1}$, with $n\\ge p+1$, and write the real degree-$p$\ncoefficients as $c_0,\\ldots,c_{n-1}$. The input includes $p\\in\\mathbb N_0$,\na nonempty span index $k$ with $p\\le k\\le n-1$ and $t_k<t_{k+1}$, a real\nquery, and the $p+1$ active coefficients $c_{k-p},\\ldots,c_k$. The query is\neither $x\\in[t_k,t_{k+1})$ or, for the left limit at the right endpoint $b$,\n$x=b$ with the last nonempty span supplied. At an interior knot, the\nhalf-open convention selects the span on its right. In exact mode the\nknots, query, and coefficients are real numbers. In floating-point mode the\nknots, query, and active coefficients are finite stored real numbers in the\nselected format; conversion into that format is outside this procedure.\n\nThe arithmetic mode is either exact real arithmetic or the operationwise\nfloating-point model of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\nThe output is `success(value)`, `invalid-input`, or, in floating-point mode,\n`range-failure(operation, r, j)`. The span search is supplied by the caller\nand is not part of the evaluation loop. Invalid indices, coefficient counts,\nspan or query conditions, or floating-point input formats return\n`invalid-input`.\n\n1. If the indices, coefficient count, span, or query do not satisfy the\n   input conditions, return `invalid-input`.\n2. If $p=0$, return $c_k$ by copy.\n3. Initialize $d_j^{(0)}=c_{k-p+j}$ for $0\\le j\\le p$.\n4. For $r=1,\\ldots,p$, and then $j=p,p-1,\\ldots,r$, put\n   $L=k-p+j$ and $U=k+1+j-r$. In exact mode set\n   $\\alpha=(x-t_L)/(t_U-t_L)$ and\n   $d_j^{(r)}=(1-\\alpha)d_{j-1}^{(r-1)}+\\alpha d_j^{(r-1)}$. In\n   floating-point mode first compute $v=\\operatorname{fl}(x-t_L)$. On\n   failure return `range-failure` for the numerator subtraction. If $v=0$,\n   copy $d_{j-1}^{(r-1)}$ to $d_j^{(r)}$ and skip the denominator subtraction,\n   division, complement subtraction, products, and addition. Otherwise\n   compute $w=\\operatorname{fl}(t_U-t_L)$ and then\n   $\\widehat\\alpha=\\operatorname{fl}(v/w)$; on the first failure return its\n   operation and indices. Next compute\n   $\\widehat\\beta=\\operatorname{fl}(1-\\widehat\\alpha)$, followed by\n   $a=\\operatorname{fl}(\\widehat\\beta d_{j-1}^{(r-1)})$,\n   $b=\\operatorname{fl}(\\widehat\\alpha d_j^{(r-1)})$, and\n   $d_j^{(r)}=\\operatorname{fl}(a+b)$, in that order, returning the first\n   `range-failure`. Keep the old $d_j^{(r-1)}$ until the update is complete.\n5. Return `success(d_p^{(p)})`.\n\nFor every loop entry, $L\\le k<U$, so\n$t_L\\le t_k<t_{k+1}\\le t_U$ and the denominator is positive. The exact\nweight therefore lies in $[0,1]$. When a span endpoint is requested as a\none-sided value, the same recurrence is evaluated at that endpoint with the\nspecified half-open or left-limit convention.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-de-boor-coefficient-evaluation-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb N_0$, let $t_0\\le\\cdots\\le t_{n+p}$ be the\nzero-based reindexing of a clamped knot vector, and let\n$S(x)=\\sum_{i=0}^{n-1}c_iB_{i,p}(x)$ be its degree-$p$ B-spline\nexpansion, with $B_{i,p}=B_{i+1,p,\\xi}$ under\n[[def-b-spline-space-and-basis]]. If $k$ is a nonempty span index and\n$x\\in[t_k,t_{k+1})$, then the exact-arithmetic mode of\n[[alg-de-boor-coefficient-evaluation]] returns $S(x)$. For $x=b$ it returns\nthe corresponding left limit when the last nonempty span is supplied.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-b-spline-space-and-basis",
+          "source_section": "Definition",
+          "quote": "Let $p\\in\\mathbb N_0$, $n\\ge p+1$, and $a<b$. A clamped knot vector is a nondecreasing finite sequence\n$$\\xi_1=\\cdots=\\xi_{p+1}=a<\\xi_{p+2}\\le\\cdots\\le\\xi_n<\\xi_{n+1}=\\cdots=\\xi_{n+p+1}=b,$$\nwith $\\xi_j<\\xi_{j+p+1}$ for every $1\\le j\\le n$. Empty interior ranges are omitted. The multiplicity $\\mu(\\eta)$ of an interior knot $\\eta$ is its number of occurrences among $\\xi_{p+2},\\ldots,\\xi_n$.\n\nWrite $\\mathcal P_p$ for the real polynomials of degree at most $p$. The degree-$p$ spline space $S_{p,\\xi}$ consists of functions that restrict to a member of $\\mathcal P_p$ on each nonempty knot interval and whose derivatives through order $p-\\mu(\\eta)$ agree across each interior knot $\\eta$. The convention $C^{-1}$ means that no matching condition is imposed. For this piecewise definition, take knot cells left-closed and right-open; at a knot with no matching condition, the value is the one from the cell on its right, and at $b$ use the left limit. Thus the function value at a discontinuous knot is specified.\n\nFor each degree $d\\in\\{0,\\ldots,p\\}$, the functions $B_{j,d,\\xi}$ are indexed by $1\\le j\\le n+p-d$. Set\n$$B_{j,0,\\xi}(x)=\\mathbf 1_{[\\xi_j,\\xi_{j+1})}(x),\\qquad 1\\le j\\le n+p.$$\nFor $1\\le d\\le p$ and $1\\le j\\le n+p-d$, define recursively\n$$B_{j,d,\\xi}(x)=\\frac{x-\\xi_j}{\\xi_{j+d}-\\xi_j}B_{j,d-1,\\xi}(x)+\\frac{\\xi_{j+d+1}-x}{\\xi_{j+d+1}-\\xi_{j+1}}B_{j+1,d-1,\\xi}(x),$$\nwhere a term with zero denominator is defined to be zero. For every degree $d$ and every allowed index $j$, set $B_{j,d,\\xi}(b)$ equal to its left limit. In particular, the degree-$p$ family has indices $1\\le j\\le n$. Its basis and regularity properties are proved in [[thm-spline-polynomial-reproduction]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The input is admissible: [F3] allows the displayed clamped knot vector, including the double interior knot; the knots are nondecreasing and clamped for degree two; $t_4=1<t_5=2$; and $x=3/2\\in[1,2)$. By [F1], the initial active list is $(d_0^{(0)},d_1^{(0)},d_2^{(0)})=(4,8,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $r=1,j=2$, the indices are $L=4,U=6$, so $\\alpha=(3/2-t_4)/(t_6-t_4)=1/2$ and $d_2^{(1)}=(8+0)/2=4$. For $r=1,j=1$, $L=3,U=5$, again $\\alpha=1/2$, so $d_1^{(1)}=(4+8)/2=6$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $r=2,j=2$, $L=4,U=5$ and $\\alpha=1/2$. Therefore $d_2^{(2)}=(6+4)/2=5$, which is the algorithm's exact returned value.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F2], the B-spline curve value on the specified span is also $5$. The example exercises a repeated knot without evaluating a basis function outside the active span.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example specifies a nonempty span and three active coefficients."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example has fixed nonzero active coefficients and a positive query."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks each first-stage blend explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies t_4<t_5 although the preceding interior knot is repeated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 applies the half-open convention to the interior-knot span."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 4.1 use only the finite three-entry coefficient list."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The repeated-knot example evaluates one prescribed spline and obtains the displayed value by the de Boor recurrence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The repeated-knot example evaluates one prescribed spline and obtains the displayed value by the de Boor recurrence.",
+            "item_sha256": "f11fec6e96e899acc75b9ba01668a1d4b93b755f591527a55094a48c23860abd",
+            "row_sha256": "f2f6e8a1da3473f56a985442f8dab3954ed98eb1176cb516d8c16c2ba863cece",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The repeated-knot example evaluates one prescribed spline and obtains the displayed value by the de Boor recurrence.",
+            "item_sha256": "f11fec6e96e899acc75b9ba01668a1d4b93b755f591527a55094a48c23860abd",
+            "row_sha256": "f2f6e8a1da3473f56a985442f8dab3954ed98eb1176cb516d8c16c2ba863cece",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Agreement at this one evaluation point is not claimed to characterize the recurrence or every spline with repeated knots.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "Agreement at this one evaluation point is not claimed to characterize the recurrence or every spline with repeated knots.",
+            "item_sha256": "f11fec6e96e899acc75b9ba01668a1d4b93b755f591527a55094a48c23860abd",
+            "row_sha256": "cb0d98d0ee4ba0004fbff8d0114c3f444bebaa4341844ac0d7fc0e7a9e352b0e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "Agreement at this one evaluation point is not claimed to characterize the recurrence or every spline with repeated knots.",
+            "item_sha256": "f11fec6e96e899acc75b9ba01668a1d4b93b755f591527a55094a48c23860abd",
+            "row_sha256": "cb0d98d0ee4ba0004fbff8d0114c3f444bebaa4341844ac0d7fc0e7a9e352b0e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-scaffolder",
+        "notes": "Recomputed all three half-weight blends and checked that the double knot does not make the chosen span empty. This is an authoring self-check, not independent review or acceptance."
+      },
+      "kind": "example"
+    },
+    "ex-natural-cubic-x-squared-endpoint-caveat": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge2$, $a\\le x_1<\\cdots<x_r\\le b$, and $y_1,\\ldots,y_r\\in\\mathbb R$. There is exactly one natural cubic spline $s$ on $[a,b]$ with $s(x_i)=y_i$ for each $i$. On each interval $[x_i,x_{i+1}]$ it is the cubic with endpoint values $y_i,y_{i+1}$ and endpoint second derivatives $M_i,M_{i+1}$, where $M_1=M_r=0$ and the interior values solve the positive-definite tridiagonal system\n$$h_{i-1}M_{i-1}+2(h_{i-1}+h_i)M_i+h_iM_{i+1}=6\\left(\\frac{y_{i+1}-y_i}{h_i}-\\frac{y_i-y_{i-1}}{h_{i-1}}\\right),\\quad 2\\le i\\le r-1,$$\nwith $h_i=x_{i+1}-x_i>0$. The interpolant is linear outside $[x_1,x_r]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $a=x_0<x_1<\\cdots<x_m=b$, $m\\ge1$, let $y_0,\\ldots,y_m\\in\\mathbb R$,\nand let $\\sigma_a,\\sigma_b\\in\\mathbb R$. Put\n$h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$. There is exactly one\nclamped cubic spline interpolant in the sense of\n[[def-clamped-cubic-spline-interpolant]]. Its nodal second derivatives\n$M_i=s''(x_i)$ are the unique solution of\n$$\\begin{aligned}2h_0M_0+h_0M_1&=6(d_0-\\sigma_a),\\\\h_{i-1}M_{i-1}+2(h_{i-1}+h_i)M_i+h_iM_{i+1}&=6(d_i-d_{i-1}),\\quad 1\\le i<m,\\\\h_{m-1}M_{m-1}+2h_{m-1}M_m&=6(\\sigma_b-d_{m-1}).\\end{aligned}$$\nOn $[x_i,x_{i+1}]$ the interpolant is\n$$s_i(x)=\\frac{M_i(x_{i+1}-x)^3+M_{i+1}(x-x_i)^3}{6h_i}+\\left(y_i-\\frac{M_ih_i^2}{6}\\right)\\frac{x_{i+1}-x}{h_i}+\\left(y_{i+1}-\\frac{M_{i+1}h_i^2}{6}\\right)\\frac{x-x_i}{h_i}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-clamped-cubic-spline-fourth-order-error",
+          "source_section": "Statement",
+          "quote": "Let $a=x_0<\\cdots<x_m=b$, $m\\ge1$, with $h_i=x_{i+1}-x_i$ and\n$H=\\max_i h_i$. Suppose $f$ has continuous derivatives through order four\non an open interval containing $[a,b]$, and let $M\\ge0$ satisfy\n$|f^{(4)}(x)|\\le M$ there. Let $s$ be the clamped cubic interpolant at\n$y_i=f(x_i)$ with the boundary-compatible slopes\n$s'(a)=f'(a)$ and $s'(b)=f'(b)$. Then\n$$\n\\|s-f\\|_{L^\\infty([a,b])}\\le\\frac{83}{324}MH^4\\le MH^4.\n$$\nThe conclusion uses the exact endpoint derivatives; it is not a rate claim\nfor the natural boundary condition or for estimated endpoint slopes.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The interval lengths are both $H$, and the two secant slopes are $H$ and $3H$. The natural endpoint second derivatives are zero. The single interior equation from [F1] is $4H M_1=6(3H-H)=12H$, hence $M_1=3$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $M_0=0$, $M_1=3$, $y_0=0$, and $y_1=H^2$ into the first-interval formula in [F1] gives $s(x)=x^3/(2H)+Hx/2$. Thus $s(H/2)=5H^2/16$ whereas $f(H/2)=H^2/4=4H^2/16$, so the absolute error is $H^2/16>0$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $f^{(4)}=0$, a general natural-boundary estimate of the form $C H^4\\|f^{(4)}\\|_\\infty$ would force zero error, contradicting step 2.1. The polynomial $f$ has the prescribed clamped slopes $f'(0)=0$ and $f'(2H)=4H$, so [F2] makes it the unique clamped interpolant; [F3] also gives zero error.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses three distinct knots on a positive-length interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly uses f-fourth=0 while step 2.1 computes a positive error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the single interior equation for three knots."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "H is assumed positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the first interval adjacent to the natural endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 3.1 use finite arithmetic and a fixed three-knot data set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The quadratic example calculates a positive natural-spline midpoint error despite a vanishing fourth derivative, rather than an iff error criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The quadratic example calculates a positive natural-spline midpoint error despite a vanishing fourth derivative, rather than an iff error criterion.",
+            "item_sha256": "2c5d3efdddf8bbe6148da5d00693495210ad9887d8d766e917bac23efa4380b5",
+            "row_sha256": "12940c0b3a542363a5973610be67c1ee5ab43d510d8ec7cb4a4952557c9f56b3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The quadratic example calculates a positive natural-spline midpoint error despite a vanishing fourth derivative, rather than an iff error criterion.",
+            "item_sha256": "2c5d3efdddf8bbe6148da5d00693495210ad9887d8d766e917bac23efa4380b5",
+            "row_sha256": "12940c0b3a542363a5973610be67c1ee5ab43d510d8ec7cb4a4952557c9f56b3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Exactness of the clamped quadratic does not claim that every exact spline interpolation must use these endpoint slopes.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Exactness of the clamped quadratic does not claim that every exact spline interpolation must use these endpoint slopes.",
+            "item_sha256": "2c5d3efdddf8bbe6148da5d00693495210ad9887d8d766e917bac23efa4380b5",
+            "row_sha256": "4ee767609e6bc44c4de8cf8a873f7a61d4b15f18cc28ecd269c206790885e2e5",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Exactness of the clamped quadratic does not claim that every exact spline interpolation must use these endpoint slopes.",
+            "item_sha256": "2c5d3efdddf8bbe6148da5d00693495210ad9887d8d766e917bac23efa4380b5",
+            "row_sha256": "4ee767609e6bc44c4de8cf8a873f7a61d4b15f18cc28ecd269c206790885e2e5",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all three verification steps and four exact suppliers. For H>0 the sole natural equation is 4HM1=12H, hence M1=3. Direct substitution yields x^3/(2H)+Hx/2 and midpoint value 5H^2/16, differing from x^2 by H^2/16. Thus a bound proportional only to ||f^(4)|| cannot hold for this natural boundary condition. Exact clamping slopes 0 and 4H reproduce f by uniqueness and M=0 clamped error theorem. r=3 and positive H are explicit; no assertion about fixed-domain asymptotic mesh convergence or AC is needed."
+      },
+      "kind": "example",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "Checked the natural system equation, the exact cubic piece value, and the contrast with the clamped boundary data. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    },
+    "ex-single-new-knot-insertion-preserves-linear-curve": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-single-new-b-spline-knot-insertion",
+          "source_section": "Definition",
+          "quote": "Use the zero-based reindexing $t_i=\\xi_{i+1}$ of the clamped knot vector\nin [[def-b-spline-space-and-basis]], so $t_0\\le\\cdots\\le t_{n+p}$ with\n$n\\ge p+1$. Let $p\\in\\mathbb N_0$, $d\\in\\mathbb N$, and let the controls\nbe $P_0,\\ldots,P_{n-1}\\in\\mathbb R^d$. Let $k$ be a\nnonempty span index with $t_k<u<t_{k+1}$, where $u$ is not already a knot.\nInsert $u$ between $t_k$ and $t_{k+1}$ to obtain $t'$. The output controls\n$Q_0,\\ldots,Q_n$ are defined by\n\n$$Q_i=\\begin{cases}P_i,&0\\le i\\le k-p,\\\\\\alpha_iP_i+(1-\\alpha_i)P_{i-1},&k-p+1\\le i\\le k,\\\\P_{i-1},&k+1\\le i\\le n,\\end{cases}\\qquad\\alpha_i=\\frac{u-t_i}{t_{i+p}-t_i}.$$\n\nThe middle range is empty when $p=0$. The curve uses the same degree and\nthe B-spline basis for the new knot vector. Each denominator in the middle\nrange is positive and each $\\alpha_i$ lies in $[0,1]$, so the update is an\nexact affine blend. This procedure inserts one knot that is new to the\nvector; repeated insertion at an existing knot is not part of this\nalgorithm's input contract.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-single-new-knot-insertion-preserves-b-spline-curve",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le\\cdots\\le t_{n+p}$ be a clamped knot vector of degree $p$ as\nin [[def-b-spline-space-and-basis]], with $a=t_0$ and $b=t_{n+p}$, and\nlet $\\xi(v)_j=v_{j-1}$ be the one-based version of any zero-based knot\nvector $v$. Write $B_{i,q,v}=B_{i+1,q,\\xi(v)}$ for the basis in\n[[def-b-spline-space-and-basis]]. Let a B-spline curve be\n$C(x)=\\sum_{i=0}^{n-1}P_iB_{i,p,t}(x)$ with $d\\in\\mathbb N$ and\n$P_i\\in\\mathbb R^d$. Insert\none new knot $u$ strictly inside a nonempty span by\n[[alg-single-new-b-spline-knot-insertion]], obtaining knots $t'$ and\ncontrols $Q_i$. Write $B'_{i,q}=B_{i,q,t'}$. Then, for every $x\\in[a,b]$,\n$$C(x)=\\sum_{i=0}^{n}Q_iB_{i,p,t'}(x).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-b-spline-space-and-basis",
+          "source_section": "Definition",
+          "quote": "Let $p\\in\\mathbb N_0$, $n\\ge p+1$, and $a<b$. A clamped knot vector is a nondecreasing finite sequence\n$$\\xi_1=\\cdots=\\xi_{p+1}=a<\\xi_{p+2}\\le\\cdots\\le\\xi_n<\\xi_{n+1}=\\cdots=\\xi_{n+p+1}=b,$$\nwith $\\xi_j<\\xi_{j+p+1}$ for every $1\\le j\\le n$. Empty interior ranges are omitted. The multiplicity $\\mu(\\eta)$ of an interior knot $\\eta$ is its number of occurrences among $\\xi_{p+2},\\ldots,\\xi_n$.\n\nWrite $\\mathcal P_p$ for the real polynomials of degree at most $p$. The degree-$p$ spline space $S_{p,\\xi}$ consists of functions that restrict to a member of $\\mathcal P_p$ on each nonempty knot interval and whose derivatives through order $p-\\mu(\\eta)$ agree across each interior knot $\\eta$. The convention $C^{-1}$ means that no matching condition is imposed. For this piecewise definition, take knot cells left-closed and right-open; at a knot with no matching condition, the value is the one from the cell on its right, and at $b$ use the left limit. Thus the function value at a discontinuous knot is specified.\n\nFor each degree $d\\in\\{0,\\ldots,p\\}$, the functions $B_{j,d,\\xi}$ are indexed by $1\\le j\\le n+p-d$. Set\n$$B_{j,0,\\xi}(x)=\\mathbf 1_{[\\xi_j,\\xi_{j+1})}(x),\\qquad 1\\le j\\le n+p.$$\nFor $1\\le d\\le p$ and $1\\le j\\le n+p-d$, define recursively\n$$B_{j,d,\\xi}(x)=\\frac{x-\\xi_j}{\\xi_{j+d}-\\xi_j}B_{j,d-1,\\xi}(x)+\\frac{\\xi_{j+d+1}-x}{\\xi_{j+d+1}-\\xi_{j+1}}B_{j+1,d-1,\\xi}(x),$$\nwhere a term with zero denominator is defined to be zero. For every degree $d$ and every allowed index $j$, set $B_{j,d,\\xi}(b)$ equal to its left limit. In particular, the degree-$p$ family has indices $1\\le j\\le n$. Its basis and regularity properties are proved in [[thm-spline-polynomial-reproduction]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the insertion span $k=1$, the only blended index is $i=1$ and $\\alpha_1=(1/2-t_1)/(t_2-t_1)=1/2$. Therefore [F1] returns $Q_0=P_0=0$, $Q_1=(P_0+P_1)/2=1/2$, and $Q_2=P_1=1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Before insertion, the two degree-one basis functions on $[0,1)$ are $1-x$ and $x$, so the curve is $x$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $[0,1/2)$, the refined curve is $0(1-2x)+(1/2)(2x)=x$. On $[1/2,1)$, it is $(1/2)2(1-x)+1(2x-1)=x$. The endpoint value at $1$ is the left limit. Therefore the piecewise calculation agrees with the general preservation statement [F2].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has a positive-width original span."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the copied zero endpoint control."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the sole degree-one blend."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The inserted knot 1/2 is strictly inside the span (0,1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks both refined subspans and their shared knot convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2 and 2.1 use only two control points and two half-spans."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The midpoint control blend and piecewise linear identities verify that this specified knot insertion preserves the represented curve.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The midpoint control blend and piecewise linear identities verify that this specified knot insertion preserves the represented curve.",
+            "item_sha256": "6149d42397e54166007574e58a14c12d369018232a055141e277d83db3350757",
+            "row_sha256": "85cfa6bfa0df2f12611e37e40d9dd971b48a0c9bcc0784113a9f37fd01fa1313",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The midpoint control blend and piecewise linear identities verify that this specified knot insertion preserves the represented curve.",
+            "item_sha256": "6149d42397e54166007574e58a14c12d369018232a055141e277d83db3350757",
+            "row_sha256": "85cfa6bfa0df2f12611e37e40d9dd971b48a0c9bcc0784113a9f37fd01fa1313",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Curve preservation alone does not characterize every valid knot insertion or force the chosen midpoint and updated control list.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "Curve preservation alone does not characterize every valid knot insertion or force the chosen midpoint and updated control list.",
+            "item_sha256": "6149d42397e54166007574e58a14c12d369018232a055141e277d83db3350757",
+            "row_sha256": "93534eb2f2385e4bb55bda22ee2bccf629767343761fea46dd0586e45e4d5238",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "Curve preservation alone does not characterize every valid knot insertion or force the chosen midpoint and updated control list.",
+            "item_sha256": "6149d42397e54166007574e58a14c12d369018232a055141e277d83db3350757",
+            "row_sha256": "93534eb2f2385e4bb55bda22ee2bccf629767343761fea46dd0586e45e4d5238",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all three verification steps, exact insertion algorithm, complete preservation theorem and B-spline definition. p=1,k=1 gives sole alpha=1/2 and controls (0,1/2,1). Verified old functions 1-x,x and refined formulas separately on [0,1/2) and [1/2,1), both equal x. Knot value uses the right cell, right endpoint its left limit. Diagram only records the copies and blend; proof relies on exact formulas and the already reviewed preservation supplier. No AC."
+      },
+      "kind": "example",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "Checked the blend coefficient and both explicit linear pieces; the diagram is explanatory and not used in the verification. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    },
+    "lem-b-spline-basis-refinement-under-single-knot-insertion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-b-spline-space-and-basis",
+          "source_section": "Definition",
+          "quote": "Let $p\\in\\mathbb N_0$, $n\\ge p+1$, and $a<b$. A clamped knot vector is a nondecreasing finite sequence\n$$\\xi_1=\\cdots=\\xi_{p+1}=a<\\xi_{p+2}\\le\\cdots\\le\\xi_n<\\xi_{n+1}=\\cdots=\\xi_{n+p+1}=b,$$\nwith $\\xi_j<\\xi_{j+p+1}$ for every $1\\le j\\le n$. Empty interior ranges are omitted. The multiplicity $\\mu(\\eta)$ of an interior knot $\\eta$ is its number of occurrences among $\\xi_{p+2},\\ldots,\\xi_n$.\n\nWrite $\\mathcal P_p$ for the real polynomials of degree at most $p$. The degree-$p$ spline space $S_{p,\\xi}$ consists of functions that restrict to a member of $\\mathcal P_p$ on each nonempty knot interval and whose derivatives through order $p-\\mu(\\eta)$ agree across each interior knot $\\eta$. The convention $C^{-1}$ means that no matching condition is imposed. For this piecewise definition, take knot cells left-closed and right-open; at a knot with no matching condition, the value is the one from the cell on its right, and at $b$ use the left limit. Thus the function value at a discontinuous knot is specified.\n\nFor each degree $d\\in\\{0,\\ldots,p\\}$, the functions $B_{j,d,\\xi}$ are indexed by $1\\le j\\le n+p-d$. Set\n$$B_{j,0,\\xi}(x)=\\mathbf 1_{[\\xi_j,\\xi_{j+1})}(x),\\qquad 1\\le j\\le n+p.$$\nFor $1\\le d\\le p$ and $1\\le j\\le n+p-d$, define recursively\n$$B_{j,d,\\xi}(x)=\\frac{x-\\xi_j}{\\xi_{j+d}-\\xi_j}B_{j,d-1,\\xi}(x)+\\frac{\\xi_{j+d+1}-x}{\\xi_{j+d+1}-\\xi_{j+1}}B_{j+1,d-1,\\xi}(x),$$\nwhere a term with zero denominator is defined to be zero. For every degree $d$ and every allowed index $j$, set $B_{j,d,\\xi}(b)$ equal to its left limit. In particular, the degree-$p$ family has indices $1\\le j\\le n$. Its basis and regularity properties are proved in [[thm-spline-polynomial-reproduction]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-single-new-b-spline-knot-insertion",
+          "source_section": "Definition",
+          "quote": "Use the zero-based reindexing $t_i=\\xi_{i+1}$ of the clamped knot vector\nin [[def-b-spline-space-and-basis]], so $t_0\\le\\cdots\\le t_{n+p}$ with\n$n\\ge p+1$. Let $p\\in\\mathbb N_0$, $d\\in\\mathbb N$, and let the controls\nbe $P_0,\\ldots,P_{n-1}\\in\\mathbb R^d$. Let $k$ be a\nnonempty span index with $t_k<u<t_{k+1}$, where $u$ is not already a knot.\nInsert $u$ between $t_k$ and $t_{k+1}$ to obtain $t'$. The output controls\n$Q_0,\\ldots,Q_n$ are defined by\n\n$$Q_i=\\begin{cases}P_i,&0\\le i\\le k-p,\\\\\\alpha_iP_i+(1-\\alpha_i)P_{i-1},&k-p+1\\le i\\le k,\\\\P_{i-1},&k+1\\le i\\le n,\\end{cases}\\qquad\\alpha_i=\\frac{u-t_i}{t_{i+p}-t_i}.$$\n\nThe middle range is empty when $p=0$. The curve uses the same degree and\nthe B-spline basis for the new knot vector. Each denominator in the middle\nrange is positive and each $\\alpha_i$ lies in $[0,1]$, so the update is an\nexact affine blend. This procedure inserts one knot that is new to the\nvector; repeated insertion at an existing knot is not part of this\nalgorithm's input contract.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since the knot vector is clamped, a nonempty span index satisfies $p\\le k\\le n-1$. The insertion map is $t'_j=t_j$ for $j\\le k$, $t'_{k+1}=u$, and $t'_j=t_{j-1}$ for $j\\ge k+2$. For $q=0$, $\\lambda_i^{(0)}=1$ when $i\\le k$ and $0$ when $i\\ge k+1$. Every old half-open degree-zero cell other than $[t_k,t_{k+1})$ is unchanged or shifts by one index; the affected cell splits as $[t_k,u)\\cup[u,t_{k+1})$. Thus the indicator identity holds for all degree-zero indices, including zero-length repeated-knot cells; at $u$ the right cell supplies the value. The value at $b$ follows by the stipulated left limit.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $1\\le q\\le p$ and assume the identity holds in degree $q-1$. For $x\\in[a,b)$, write $A_i=(x-t_i)/(t_{i+q}-t_i)$ and $D_i=(t_{i+q+1}-x)/(t_{i+q+1}-t_{i+1})$, with any zero-denominator term defined as zero as in [F1]; define $A'_i,D'_i$ using $t'$. Expanding the old recurrence and applying the degree-$(q-1)$ identity gives the coefficient triple $(A_i\\lambda_i^{(q-1)},\\ A_i(1-\\lambda_{i+1}^{(q-1)})+D_i\\lambda_{i+1}^{(q-1)},\\ D_i(1-\\lambda_{i+2}^{(q-1)}))$ on $B'_{i,q-1},B'_{i+1,q-1},B'_{i+2,q-1}$. Expanding the proposed refined expression gives $(\\lambda_i^{(q)}A'_i,\\ \\lambda_i^{(q)}D'_i+(1-\\lambda_{i+1}^{(q)})A'_{i+1},\\ (1-\\lambda_{i+1}^{(q)})D'_{i+1})$. It remains to prove these three coefficient equalities for $k-q\\le i\\le k$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the first coefficient, at $i=k-q$ both $\\lambda_i^{(q-1)}$ and $\\lambda_i^{(q)}$ are $1$, and the insertion map gives $t'_i=t_i$ and $t'_{i+q}=t_{i+q}=t_k$. Hence $A'_i=A_i$; if this common denominator is zero, both terms are zero by [F1]. For $k-q+1\\le i\\le k$, put $a=t_i$, $b=t_{i+q}$ and $v=t'_{i+q}$. Then $a\\le t_k<u<b$. At the lower index $i=k-q+1$, $v=u$ and $\\lambda_i^{(q-1)}=1=(u-a)/(v-a)$. At higher indices in this range, the definition gives the same ratio because $v=t_{i+q-1}$. All denominators here are positive, and $A_i\\lambda_i^{(q-1)}=((x-a)/(b-a))((u-a)/(v-a))=((u-a)/(b-a))((x-a)/(v-a))=\\lambda_i^{(q)}A'_i$. This also covers $q=1$, where the lower-degree weight is the degree-zero value $1$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For the last coefficient, first take $k-q\\le i\\le k-1$ and put $c=t_{i+1}$, $d=t_{i+q+1}$, and $w=t'_{i+2}$. Then $c\\le t_k<u<d$ and $w\\le t_k$ for $i\\le k-2$, while $w=u$ for $i=k-1$. In both cases $d-c>0$, $d-w>0$, and $\\lambda_{i+2}^{(q-1)}=(u-w)/(d-w)$ (zero in the case $w=u$). Consequently $1-\\lambda_{i+2}^{(q-1)}=(d-u)/(d-w)$, $1-\\lambda_{i+1}^{(q)}=(d-u)/(d-c)$, and $D'_{i+1}=(d-x)/(d-w)$, while $D_i=(d-x)/(d-c)$. Multiplying proves $D_i(1-\\lambda_{i+2}^{(q-1)})=(1-\\lambda_{i+1}^{(q)})D'_{i+1}$. At $i=k$, both $\\lambda_{k+2}^{(q-1)}$ and $\\lambda_{k+1}^{(q)}$ are zero, and the insertion map gives $D'_{k+1}=D_k$. If their common denominator is zero, both terms are zero by [F1]; otherwise equality follows from the identical numerator and denominator.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "For the middle coefficient at the lower boundary $i=k-q$, put $c=t_{i+1}$ and $d=t_{k+1}$. Here $\\lambda_i^{(q)}=1$ and $\\lambda_{i+1}^{(q-1)}=1$, so the old middle coefficient is $D_i=(d-x)/(d-c)$. Also $1-\\lambda_{i+1}^{(q)}=(d-u)/(d-c)$, $D'_i=(u-x)/(u-c)$, and $A'_{i+1}=(x-c)/(u-c)$. All displayed denominators are positive, and the new middle coefficient is $\\lambda_i^{(q)}D'_i+(1-\\lambda_{i+1}^{(q)})A'_{i+1}=(u-x)/(u-c)+(d-u)(x-c)/((d-c)(u-c))=(d-x)/(d-c)=D_i$. The omitted old term $A_i(1-\\lambda_{i+1}^{(q-1)})$ is zero even if $A_i$ has zero denominator, because [F1] defines that term as zero and its multiplier is zero. At the upper boundary $i=k$, $\\lambda_{i+1}^{(q-1)}=\\lambda_{i+1}^{(q)}=0$, so the old middle coefficient is $A_i$. Put $a=t_k$ and $b=t_{k+q}$; then $a<u<b$. The insertion map gives $\\lambda_i^{(q)}=(u-a)/(b-a)$, $D'_i=(b-x)/(b-u)$, and $A'_{i+1}=(x-u)/(b-u)$. Therefore the new middle coefficient is $\\lambda_i^{(q)}D'_i+(1-\\lambda_{i+1}^{(q)})A'_{i+1}=((u-a)(b-x)+(b-a)(x-u))/((b-a)(b-u))=(x-a)/(b-a)=A_i$. The old term $D_i\\lambda_{i+1}^{(q-1)}$ is zero without division by its denominator. For the strict interior $k-q+1\\le i\\le k-1$, which is empty if $q=1$, put $a=t_i$, $c=t_{i+1}$, $b=t_{i+q}$, and $d=t_{i+q+1}$. The insertion span gives $a\\le c\\le t_k<u<t_{k+1}\\le b\\le d$, so every denominator below is positive. The old and refined middle coefficients are respectively $((x-a)(b-u)/(b-a)+(d-x)(u-c)/(d-c))/(b-c)$ and $((u-a)(b-x)/(b-a)+(d-u)(x-c)/(d-c))/(b-c)$. Their first numerator terms differ by $x-u$, since $(x-a)(b-u)-(u-a)(b-x)=(b-a)(x-u)$. Their second numerator terms differ by $u-x$, since $(d-x)(u-c)-(d-u)(x-c)=(d-c)(u-x)$. Thus their sum is equal. These lower, strict-interior, and upper cases prove the middle coefficient identity.",
+          "step": "3.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $i<k-q$, both weights in the refinement formula are $1$, and the complete local knot list used by $B_{i,q,t}$ is unchanged in $t'$, so the recursively defined basis function is unchanged. For $i\\ge k+1$, both weights are $0$, and the local knot list shifts by one, giving $B_{i,q,t}=B_{i+1,q,t'}$. For the transition range, steps 3.1, 3.2 and 3.3 establish all three coefficients in step 2.1, so the Cox\u2013de Boor expansions agree. Induction from the degree-zero base in step 1.1 proves the formula for every $q\\le p$. The argument is pointwise on $[a,b)$ under the right-cell convention, including repeated knots; taking left limits gives the equality at $b$. No continuity at knots is assumed.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "step 3.3",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A nonempty span containing the insertion knot is an explicit hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the degree-zero indicator split and includes zero-length repeated-knot cells."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.3 notes that the strict-interior range is empty at q=1 and treats its two boundaries separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1\u20133.3 keep every active insertion denominator positive and handle each zero old recurrence denominator by the stipulated zero-term convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the right-cell value at u; step 4.1 extends the identity to b by left limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20134.1 use only finite index ranges and finite induction on q."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way identity, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all six current steps and the two exact defining suppliers. Checked the degree-zero split, q=1 empty strict interior, each first/last/middle coefficient identity, the lower and upper transition boundaries, zero denominators, unaffected ranges, right cell at u and b left limit. Formula holds pointwise without assuming continuity at repeated knots. No AC or additional premise is used."
+      },
+      "kind": "lemma",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "Displayed all three recurrence-coefficient identities, split the middle coefficient into lower-boundary, strict-interior and upper-boundary cases, and checked degree zero, q=1, repeated-knot zero denominators, and both endpoint conventions. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    },
+    "thm-natural-tridiagonal-cholesky-solve-residual-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+          "source_section": "Definition",
+          "quote": "Use one binary floating-point format from\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]\nwith round-to-nearest, ties-to-even, a known rational unit roundoff\n$0<u\\le1/4$, and the model's normal-or-zero success rule. Inputs are\n$r\\ge2$ finite stored real knots $x_1<\\cdots<x_r$ and finite stored real\nvalues $y_1,\\ldots,y_r$. These stored numbers are the exact interpolation\ndata; no unrecorded perturbation of the data is included. Write\n$h_i=x_{i+1}-x_i$ for their exact rational differences. If a constant $2$\nor $6$ needed by the selected branch is not representable as a finite normal\nnumber, return `input-format-failure`. Arithmetic statuses below report the\nfirst failing operation in the specified order. This algorithm makes no\nclaim that floating-point success is automatic.\n\nIf $r=2$, return `success` with endpoint second derivatives\n$\\widehat M_1=\\widehat M_2=0$ and error certificate $B=0$. The corresponding\npiece is the exact straight line. For $r\\ge3$, put $n=r-2$ and return\n`certificate-parameter-failure` unless $(n-1)u<1$.\n\nFor $r\\ge3$, assemble stored widths and secant slopes in increasing\n$i=1,\\ldots,r-1$: compute\n$\\widehat h_i=\\operatorname{fl}(x_{i+1}-x_i)$,\n$a_i=\\operatorname{fl}(y_{i+1}-y_i)$, and\n$q_i=\\operatorname{fl}(a_i/\\widehat h_i)$, in that order. At the first\nfailed operation return `assembly-range-failure(i,operation)`. Successful\nwidth subtraction gives $\\widehat h_i>0$. In increasing $k=1,\\ldots,n$,\nfor the row corresponding to knot $x_{k+1}$ compute\n$$\ns_k=\\operatorname{fl}(\\widehat h_k+\\widehat h_{k+1}),\\quad d_k=\\operatorname{fl}(2s_k),\\quad t_k=\\operatorname{fl}(q_{k+1}-q_k),\\quad f_k=\\operatorname{fl}(6t_k)\n$$\nin that order. Copy $c_k=\\widehat h_{k+1}$ for $k<n$. On failure return\n`assembly-range-failure(k,operation)`. Let $T\\in\\mathbb R^{n\\times n}$\nhave diagonal $d_k$, adjacent off-diagonal entries $c_k$, and zero entries\nelsewhere; represent it by these three diagonals, not a dense array. Let the\nstored right-hand side be $f=(f_1,\\ldots,f_n)^T$.\n\nFactor $T$ with a real lower bidiagonal factor, stored as diagonal\n$\\ell_1,\\ldots,\\ell_n$ and subdiagonal $e_1,\\ldots,e_{n-1}$. For\n$k=1,\\ldots,n$ in order, set $p_1=d_1$ by exact copy; for $k>1$ compute\n$\\zeta_k=\\operatorname{fl}(e_{k-1}e_{k-1})$ and\n$p_k=\\operatorname{fl}(d_k-\\zeta_k)$. If either operation fails, return\n`factor-range-failure(k,operation)`. If the resulting $p_k$ fails the\npublished positive-normal pivot test of\n[[alg-rounded-cholesky-with-failure-status]], return `invalid-pivot(k,p_k)`.\nOtherwise compute\n$\\ell_k=\\operatorname{fl}(\\sqrt{p_k})$; on failure or a nonpositive or\nnonnormal result return `factor-range-failure(k,operation)`. For $k<n$ compute\n$e_k=\\operatorname{fl}(c_k/\\ell_k)$ and return the same indexed factor\nstatus on failure.\n\nSolve $Lz=f$ by forward substitution in increasing index order: set\n$z_1=\\operatorname{fl}(f_1/\\ell_1)$; for $k>1$, compute\n$a=\\operatorname{fl}(e_{k-1}z_{k-1})$,\n$b=\\operatorname{fl}(f_k-a)$, and $z_k=\\operatorname{fl}(b/\\ell_k)$.\nSolve $L^T\\widehat m=z$ in decreasing order: set\n$\\widehat m_n=\\operatorname{fl}(z_n/\\ell_n)$; for $k<n$, compute\n$a=\\operatorname{fl}(e_k\\widehat m_{k+1})$,\n$b=\\operatorname{fl}(z_k-a)$, and\n$\\widehat m_k=\\operatorname{fl}(b/\\ell_k)$. At the first failed operation\nreturn `solve-range-failure(direction,k,operation)`. These are separate\nmultiply, subtract, and divide operations; no fused multiply-add is used.\nSet $\\widehat M_1=\\widehat M_r=0$ and copy the interior vector\n$\\widehat M_{k+1}=\\widehat m_k$.\n\nCompute the rounded residual in increasing row order. Within row $k$, form\nthe products $T_{kj}\\widehat m_j$ for existing columns $j$ in increasing\ncolumn order, and add them sequentially from an exact zero accumulator to\nobtain $\\widehat v_k$. Then compute\n$\\widehat w_k=\\operatorname{fl}(\\widehat v_k-f_k)$. Return the first\n`residual-range-failure(k,j,operation)` if any operation fails. Structural\nzero entries are omitted; all included products, additions, and the final\nsubtraction use the operationwise model.\n\nThe certificate calculations that follow are exact rational arithmetic on\nthe finite binary values and the rational $u$; they are not rounded\nfloating-point calculations. Define\n$$\nF_1=\\sum_{k=1}^n|d_k|+2\\sum_{k=1}^{n-1}|c_k|,\\quad X_1=\\sum_{k=1}^n|\\widehat m_k|,\\quad Y_1=\\sum_{k=1}^n|f_k|,\\quad V_1=\\sum_{k=1}^n|\\widehat v_k|,\\quad W_1=\\sum_{k=1}^n|\\widehat w_k|\n$$\nand\n$$\ng_n=\\frac{1+6u}{1-(n-1)u}-1,\\qquad C=W_1+g_nF_1X_1+u(V_1+Y_1).\n$$\nForm the exact natural-cubic matrix $A$ and right-hand side $b$ for the\noriginal stored data as in\n[[thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots]]:\n$A_{kk}=2(h_k+h_{k+1})$, $A_{k,k+1}=A_{k+1,k}=h_{k+1}$, and\n$b_k=6((y_{k+2}-y_{k+1})/h_{k+1}-(y_{k+1}-y_k)/h_k)$, with only existing\ninterior entries included; represent $A$ by its three diagonals and compute\nthe following row quantities as a stream, without allocating dense matrices.\nCompute\n$$\n\\alpha=\\max_k\\sum_j|A_{kj}-T_{kj}|,\\quad \\beta=\\max_k|b_k-f_k|,\\quad Q=\\max_k|\\widehat m_k|,\\quad \\delta=\\min_{1\\le k\\le n}(h_k+h_{k+1}),\\quad H=\\max_{1\\le i<r}h_i,\n$$\nand\n$$\nB=\\frac{H^2}{8\\delta}(C+\\alpha Q+\\beta).\n$$\nAll denominators are positive: $h_i>0$, $\\delta>0$, and\n$1-(n-1)u>0$. Return `success(\\widehat M,C,\\alpha,\\beta,B)`. If a\nresource-limited implementation cannot complete the exact rational\ncertificate, it may return `certificate-resource-failure`, which carries no\ncertified $B$.\n\nFor $r\\ge3$, associate to the returned vector $\\widehat M$ the piecewise\ncubic reconstruction on each $[x_i,x_{i+1}]$ given by\n$$\n\\widehat s_i(x)=\\frac{\\widehat M_i(x_{i+1}-x)^3+\\widehat M_{i+1}(x-x_i)^3}{6h_i}+\\left(y_i-\\frac{\\widehat M_i h_i^2}{6}\\right)\\frac{x_{i+1}-x}{h_i}+\\left(y_{i+1}-\\frac{\\widehat M_{i+1}h_i^2}{6}\\right)\\frac{x-x_i}{h_i}.\n$$\nThis reconstruction interpolates the stored data and need not be $C^1$ at an interior knot;\nit is a piecewise cubic reconstruction, not necessarily a natural spline.\nThe certificate concerns exact evaluation of these pieces. Any floating-point\nevaluation of them needs a separate piece-evaluation error allowance.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "At each precision, let the representable set, normal range, and unit roundoff be an instance of [[def-standard-relative-floating-point-model-and-unit-roundoff]] specialized to a finite binary format of integer precision $p\\ge2$ and integer normal-exponent bounds $j_{\\min}\\le j\\le j_{\\max}$. Its normal values are $\\pm m2^{j-p+1}$ for integers $2^{p-1}\\le m<2^p$ and $j_{\\min}\\le j\\le j_{\\max}$, with $N_{\\min}=2^{j_{\\min}}$ and $N_{\\max}=(2^p-1)2^{j_{\\max}-p+1}$. The rounding rule is round-to-nearest, ties-to-even by the parity of the normalized significand. Each precision in a mixed-precision procedure has its own format, range, and valid unit-roundoff bound. On every real exact result that is zero or normal, $\\operatorname{fl}$ uses this rule; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range $x$, $\\operatorname{fl}(\\sqrt{x})$ is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression $ab+c$; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-rounded-cholesky-with-failure-status",
+          "source_section": "Definition",
+          "quote": "Input a Hermitian positive-definite matrix $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, whose real and imaginary components are in the floating-point system, using the convention of [[def-cholesky-factorisation-with-positive-diagonal]]; real matrices are included. Initialize every entry of $\\widehat L$ to zero. Process columns $j=1,\\ldots,n$ in increasing order. For the diagonal, initialize $s=0$ and, for $k=1,\\ldots,j-1$ in increasing order, compute\n$$r_k=\\operatorname{fl}(\\Re(\\widehat l_{jk})^2),\\quad t_k=\\operatorname{fl}(\\Im(\\widehat l_{jk})^2),\\quad q_k=\\operatorname{fl}(r_k+t_k),\\quad s=\\operatorname{fl}(s+q_k),$$\nin that order. Then compute $p_j=\\operatorname{fl}(a_{jj}-s)$. If an operation fails, or if $p_j$ is not positive and normal, return `failure` with pivot $j$ and the first failing operation location. Otherwise compute $\\widehat l_{jj}=\\operatorname{fl}(\\sqrt{p_j})$; if it is not positive and normal, return `failure` at pivot $j$.\n\nFor each $i=j+1,\\ldots,n$ in increasing order, initialize the complex accumulator $c_{ij}=0$. For $k=1,\\ldots,j-1$ in increasing order, compute the complex product $w_{ik}=\\widehat l_{ik}\\overline{\\widehat l_{jk}}$ using exactly the six real operations of the complex-product convention in [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], then update\n$$\\Re(c_{ij})\\gets\\operatorname{fl}(\\Re(c_{ij})+\\Re(w_{ik})),\\qquad \\Im(c_{ij})\\gets\\operatorname{fl}(\\Im(c_{ij})+\\Im(w_{ik})).$$\nAfter this dot product, compute $r_{ij}=a_{ij}-c_{ij}$ by one rounded real subtraction for each component, then compute each component of $\\widehat l_{ij}=r_{ij}/\\widehat l_{jj}$ by one rounded real division. The empty dot product is zero. On any failure return `failure` with pivot $j$ and its first failing operation location (stage, column, row, inner index, component, and operation where applicable), with the diagonal and row loops ordered as stated. If all columns finish, return `success(\\widehat L)`. By [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]], exact positive definiteness ensures an exact factor exists, but does not ensure the rounded algorithm succeeds.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "source_section": "Statement",
+          "quote": "Let $R\\in\\mathbb R^{n\\times n}$ be upper triangular with stored floating-point entries and nonzero diagonal, and let $y\\in\\mathbb R^n$ have stored floating-point entries, where $n\\ge1$ and $(n+3)u<1$. Use the operationwise arithmetic model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]] at unit roundoff $u$. Compute descending substitution by the sequential rounded dot $s_i=\\operatorname{fl}(\\sum_{j>i}R_{ij}\\widehat x_j)$ (empty sum zero), $t_i=\\operatorname{fl}(y_i-s_i)$, and $\\widehat x_i=\\operatorname{fl}(t_i/R_{ii})$. Assume each exact intermediate is zero or normal and each rounded result is finite, so every operation succeeds under that model. Then there is upper triangular $\\Delta R$ with\n$$(R+\\Delta R)\\widehat x=y,\\qquad |\\Delta R|\\le\\gamma_{n+3}|R|,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|R\\|_F.$$\nIn particular $\\widehat x=0$ forces $y=0$. Forward substitution has the transposed conclusion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A=A^*$ be positive definite in $\\mathbb C^{n\\times n}$. Suppose the rounded Cholesky algorithm succeeds with $\\widehat L$. Put $m=20n+20$ and $g=\\gamma_m=\\frac{m u}{1-m u}$; assume $m u<1/5$. For $E=\\widehat L\\widehat L^*-A$, which is Hermitian, and with $|M|$ denoting entrywise absolute value for matrices,\n$$|E|\\le100g\\,|\\widehat L|\\,|\\widehat L|^*\\quad\\hbox{entrywise},\\qquad \\|E\\|_F\\le100g\\|\\widehat L\\|_F^2,\\qquad \\|E\\|_2\\le100g\\|\\widehat L\\|_F^2.$$\nThus $c_n(u)u=\\frac{100m u}{1-m u}$. If also $100\\sqrt n\\,g\\le1/2$, then\n$$\\|E\\|_F\\le200\\sqrt n\\,g\\|A\\|_F,\\qquad \\|E\\|_2\\le200\\sqrt n\\,g\\|A\\|_F.$$\nThese bounds apply on success only; positive definiteness does not guarantee rounded success.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-rounded-linear-and-normal-residual-certificates",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, $x\\in\\mathbb F^n$, $y\\in\\mathbb F^m$ have stored real or complex entries, with $m,n\\ge1$. Use the operationwise arithmetic model, successful sequential dot products, and $0<u<1$ with $(\\max(m,n)-1)u<1$. Define\n$$g_k=\\frac{1+6u}{1-(k-1)u}-1,\\qquad F=\\|A\\|_F,\\quad X=\\|x\\|_2,\\quad Y=\\|y\\|_2.$$\nFor $\\widehat v=\\operatorname{fl}(Ax)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-y)$, put $V=g_nFX$ and $W=V+u(\\|\\widehat v\\|_2+Y)$. Then\n$$\\|\\widehat w-(Ax-y)\\|_2\\le W.$$\nFor a stored real $\\lambda>0$, also compute $\\widehat z=\\operatorname{fl}(A^*\\widehat w)$, $\\widehat l=\\operatorname{fl}(\\lambda x)$ and $\\widehat r=\\operatorname{fl}(\\widehat z+\\widehat l)$, rounding scalar multiplication componentwise. The exact intended normal residual $r=A^*(Ax-y)+\\lambda x$ satisfies\n$$\\|\\widehat r-r\\|_2\\le\\rho:=FW+g_mF\\|\\widehat w\\|_2+u\\lambda X+u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2).$$\nNorms in these certificates mean exact norms or certified upper bounds. Uncontrolled rounding of the certificate itself is not authorized. The linear bound applies columnwise to certify $\\|I-AB\\|_2\\le\\|I-AB\\|_F$ from stored basis-solve columns $B$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-arithmetic-schedule-termination-and-count",
+          "source_section": "Statement",
+          "quote": "Fix an initialized finite state and an ordered list of $M\\ge0$ instructions, followed by a specified completion return. Each instruction reads only initialized data and deterministically either produces the next finite state or returns a specified early status in finite time. There are no backward jumps. Then execution terminates at the first early return, if any, or at the completion return, after at most $M$ attempted instructions. A finite nesting of counted loops with bounds fixed by the finite input has the same property whenever unrolling the loops gives such a list.\n\nIn particular, consider $d\\ge0$ levels containing $2^{d-\\ell}$ addition instructions at level $\\ell=1,\\ldots,d$, with each addition returning a rounded value or immediate failure. A successful execution attempts exactly $2^d-1$ additions; every execution attempts at most $2^d-1$. For $d=0$ there are no additions. These conclusions assert finite execution, not arithmetic success or accuracy.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-inner-product-norm",
+          "source_section": "Definition",
+          "quote": "For a vector $v$ in a real or complex inner product space, define its **inner-product norm** by\n\n$$\\lVert v\\rVert:=\\sqrt{\\langle v,v\\rangle}.$$\n\nPositive definiteness in [[def-inner-product-space]] makes the radicand a nonnegative real, and [[thm-nth-roots-exist]] supplies its unique nonnegative square root. The notation therefore defines one real number $\\lVert v\\rVert\\ge0$. Its norm axioms are established in [[cor-triangle-inequality-for-inner-product-norm]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each successful width subtraction has exact positive input difference, so by [F2] its stored result $\\widehat h_i$ is positive. Write $S_k=\\widehat h_k+\\widehat h_{k+1}$. The successful rounding of its sum and multiplication by $2$ gives $d_k\\ge2(1-u)^2S_k\\ge(9/8)S_k>S_k$. Row $k$'s off-diagonal absolute sum is at most $S_k$: it contains only some of the positive entries $\\widehat h_k,\\widehat h_{k+1}$, and for $n=1$ it is zero. For any real nonzero vector $v$, applying $2c_kv_kv_{k+1}\\ge-|c_k|(v_k^2+v_{k+1}^2)$ to each adjacent term yields $v^TTv\\ge\\sum_k(d_k-\\sum_{j\\ne k}|T_{kj}|)v_k^2>0$. Hence every successfully assembled $T$ is real SPD.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the dense Cholesky recurrence of [F3], induction over columns shows that $\\widehat L_{ij}=0$ for $i>j+1$: the input matrix is tridiagonal, and in each such row the prior-column products and input entry are zero. At $k=1$ the diagonal square-sum is empty, so its pivot is copied as $p_1=d_1$, exactly as in the local algorithm. For $k>1$, the only possible nonzero term in the dense diagonal square-sum is $e_{k-1}^2$; the remaining zero products, additions and subtractions are exact and cannot fail under [F2]. Thus the dense pivot is exactly the specialized $p_k$, followed by the same square root and positive-normal test. For the first subdiagonal, the dense dot product has only the input $c_k$ after its exact zero terms, so the update is exactly $\\operatorname{fl}(c_k/\\ell_k)$. Every lower entry beyond that subdiagonal is exactly zero. This induction proves equality of all stored factor entries and all potentially failing operations. The forward and backward dense triangular recurrences likewise have only the single adjacent product; all other terms are exact zeros. Therefore the specialized solve outputs equal the published substitutions.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $r_*=T\\widehat m-f$ be the exact residual. The algorithm computes the same sparse sequential products and subtraction as the dense dot product in [F6], with only exact-zero products and additions omitted. By [F2], a zero product is exact and adding zero to a stored normal value or zero is also exact, so the sparse accumulation is identical to the dense one. Thus [F6] gives $\\|\\widehat w-r_*\\|_2\\le g_n\\|T\\|_F\\|\\widehat m\\|_2+u(\\|\\widehat v\\|_2+\\|f\\|_2)$. By [F9] and [F10], the Euclidean norm is the square root of the sum of squared coordinates, so each coordinate magnitude is at most that norm and $\\|v\\|_2\\le\\sum_k|v_k|$; the latter follows by squaring, since all cross terms are nonnegative. By [F8], the same argument on the finite entry list gives $\\|T\\|_F\\le\\sum_{i,j}|T_{ij}|=F_1$. The definitions in [F1] therefore imply $\\|\\widehat w\\|_2\\le W_1$, $\\|\\widehat m\\|_2\\le X_1$, $\\|\\widehat v\\|_2\\le V_1$, and $\\|f\\|_2\\le Y_1$. The coordinate bound also gives $\\|r_*\\|_\\infty\\le\\|r_*\\|_2$, whence $\\|r_*\\|_\\infty\\le\\|r_* -\\widehat w\\|_2+\\|\\widehat w\\|_2\\le C$. Setting $e=r_*$ gives the stated exact right-hand-side perturbation without division by a solution or residual norm.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $(n+3)u<1$, apply [F4] to each successful triangular substitution from step 1.2. It gives $D_1,D_2$ with $(\\widehat L+D_1)z=f$ and $(\\widehat L^T+D_2)\\widehat m=z$ and the stated entrywise bounds; since $\\widehat L$ is bidiagonal, those bounds force $D_1,D_2$ to be bidiagonal as well. Under the distinct condition $(20n+20)u<1/5$, step 1.1 and [F5] give $E=\\widehat L\\widehat L^T-T$ and the stated factor bound. Substituting the second triangular equation into the first gives $(\\widehat L+D_1)(\\widehat L^T+D_2)\\widehat m=f$. Expanding the product and using $\\widehat L\\widehat L^T=T+E$ yields $(T+J)\\widehat m=f$. Entrywise submultiplicativity and the bounds on $D_1,D_2,E$ give the displayed bound for $J$. The conditional Frobenius estimate is exactly the further norm consequence in [F5], with the norm convention in [F8].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $n=r-2$. Assembly makes a fixed number of floating-point operations per each of the $r-1$ intervals and $n$ rows. Factorization, each substitution and residual evaluation visit $n$ rows, with at most a fixed number of operations per row because a tridiagonal row has at most three nonzero entries. The exact-certificate scan likewise visits $r-1$ intervals and $n$ rows; each contributes a fixed number of rational operations and comparisons to the sums, row discrepancies, and extrema, followed by a fixed number to form $B$. Thus the floating-point and exact rational operation counts are $O(r)$. The algorithm stores only input and output vectors, the bidiagonal factor, the three diagonals of $T$ and $A$, and a fixed number of rational accumulators; row discrepancies can be computed as they are scanned, so storage is $O(r)$ scalars and $O(r)$ rationals. Every loop has a finite index range and every floating-point instruction returns or its first failure. The certificate denominators $h_i$, $\\delta$, and $1-(n-1)u$ are positive, so each exact rational operation has finite inputs and is defined. [F7] therefore gives termination; if a resource limit prevents completion of the exact certificate, the algorithm returns its separate failure status and no $B$. No rational bit-complexity bound follows.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes r>=3 and hence at least one interior equation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 proves the absolute certificate without dividing by ||mhat|| or ||f||, covering zero solution and zero right-hand side."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 include n=1 (r=3): the off-diagonal sum and solve subdiagonal are empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Strictly increasing knots give positive widths; any rounded pivot failure returns a status outside the successful-call theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats missing boundary off-diagonal entries; the algorithm sets both endpoint second derivatives to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses finite deterministic loops and rational sums; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way successful-call certificate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way successful-call certificate, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all five proof steps, complete local algorithm, all ten cited direct suppliers and the theta lemma. Assembly d>=2(1-u)^2(hprev+hnext)>=9/8 of that sum proves SPD even for n=1. Verified real sparse and complex dense schedules agree: omitted zero operations only add/subtract normal stored values or zero. Dense residual supplier has the exact g_n used and requires only (n-1)u<1; Euclidean/Frobenius norms bounded above by exact rational entry sums give C with no uncontrolled rounding. Separate triangular (n+3)u and factor (20n+20)u hypotheses and additional norm condition are preserved; J is correctly nonsymmetric. Zero RHS and zero solution cause no norm division. Finite loops, positive certificate denominators, streamed three diagonals and resource-failure branch justify linear operation/storage count; no rational bit bound or automatic rounded success is claimed. No AC."
+      },
+      "kind": "theorem",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "Checked the exact sparse-versus-dense operation correspondence including the empty first pivot sum, the distinct triangular and factor small-u conditions, the independent residual-certificate condition and its norm definitions, the explicit linear-operation and storage count, and the no-underflow success convention. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    },
+    "thm-computed-natural-cubic-spline-forward-error-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+          "source_section": "Definition",
+          "quote": "Use one binary floating-point format from\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]\nwith round-to-nearest, ties-to-even, a known rational unit roundoff\n$0<u\\le1/4$, and the model's normal-or-zero success rule. Inputs are\n$r\\ge2$ finite stored real knots $x_1<\\cdots<x_r$ and finite stored real\nvalues $y_1,\\ldots,y_r$. These stored numbers are the exact interpolation\ndata; no unrecorded perturbation of the data is included. Write\n$h_i=x_{i+1}-x_i$ for their exact rational differences. If a constant $2$\nor $6$ needed by the selected branch is not representable as a finite normal\nnumber, return `input-format-failure`. Arithmetic statuses below report the\nfirst failing operation in the specified order. This algorithm makes no\nclaim that floating-point success is automatic.\n\nIf $r=2$, return `success` with endpoint second derivatives\n$\\widehat M_1=\\widehat M_2=0$ and error certificate $B=0$. The corresponding\npiece is the exact straight line. For $r\\ge3$, put $n=r-2$ and return\n`certificate-parameter-failure` unless $(n-1)u<1$.\n\nFor $r\\ge3$, assemble stored widths and secant slopes in increasing\n$i=1,\\ldots,r-1$: compute\n$\\widehat h_i=\\operatorname{fl}(x_{i+1}-x_i)$,\n$a_i=\\operatorname{fl}(y_{i+1}-y_i)$, and\n$q_i=\\operatorname{fl}(a_i/\\widehat h_i)$, in that order. At the first\nfailed operation return `assembly-range-failure(i,operation)`. Successful\nwidth subtraction gives $\\widehat h_i>0$. In increasing $k=1,\\ldots,n$,\nfor the row corresponding to knot $x_{k+1}$ compute\n$$\ns_k=\\operatorname{fl}(\\widehat h_k+\\widehat h_{k+1}),\\quad d_k=\\operatorname{fl}(2s_k),\\quad t_k=\\operatorname{fl}(q_{k+1}-q_k),\\quad f_k=\\operatorname{fl}(6t_k)\n$$\nin that order. Copy $c_k=\\widehat h_{k+1}$ for $k<n$. On failure return\n`assembly-range-failure(k,operation)`. Let $T\\in\\mathbb R^{n\\times n}$\nhave diagonal $d_k$, adjacent off-diagonal entries $c_k$, and zero entries\nelsewhere; represent it by these three diagonals, not a dense array. Let the\nstored right-hand side be $f=(f_1,\\ldots,f_n)^T$.\n\nFactor $T$ with a real lower bidiagonal factor, stored as diagonal\n$\\ell_1,\\ldots,\\ell_n$ and subdiagonal $e_1,\\ldots,e_{n-1}$. For\n$k=1,\\ldots,n$ in order, set $p_1=d_1$ by exact copy; for $k>1$ compute\n$\\zeta_k=\\operatorname{fl}(e_{k-1}e_{k-1})$ and\n$p_k=\\operatorname{fl}(d_k-\\zeta_k)$. If either operation fails, return\n`factor-range-failure(k,operation)`. If the resulting $p_k$ fails the\npublished positive-normal pivot test of\n[[alg-rounded-cholesky-with-failure-status]], return `invalid-pivot(k,p_k)`.\nOtherwise compute\n$\\ell_k=\\operatorname{fl}(\\sqrt{p_k})$; on failure or a nonpositive or\nnonnormal result return `factor-range-failure(k,operation)`. For $k<n$ compute\n$e_k=\\operatorname{fl}(c_k/\\ell_k)$ and return the same indexed factor\nstatus on failure.\n\nSolve $Lz=f$ by forward substitution in increasing index order: set\n$z_1=\\operatorname{fl}(f_1/\\ell_1)$; for $k>1$, compute\n$a=\\operatorname{fl}(e_{k-1}z_{k-1})$,\n$b=\\operatorname{fl}(f_k-a)$, and $z_k=\\operatorname{fl}(b/\\ell_k)$.\nSolve $L^T\\widehat m=z$ in decreasing order: set\n$\\widehat m_n=\\operatorname{fl}(z_n/\\ell_n)$; for $k<n$, compute\n$a=\\operatorname{fl}(e_k\\widehat m_{k+1})$,\n$b=\\operatorname{fl}(z_k-a)$, and\n$\\widehat m_k=\\operatorname{fl}(b/\\ell_k)$. At the first failed operation\nreturn `solve-range-failure(direction,k,operation)`. These are separate\nmultiply, subtract, and divide operations; no fused multiply-add is used.\nSet $\\widehat M_1=\\widehat M_r=0$ and copy the interior vector\n$\\widehat M_{k+1}=\\widehat m_k$.\n\nCompute the rounded residual in increasing row order. Within row $k$, form\nthe products $T_{kj}\\widehat m_j$ for existing columns $j$ in increasing\ncolumn order, and add them sequentially from an exact zero accumulator to\nobtain $\\widehat v_k$. Then compute\n$\\widehat w_k=\\operatorname{fl}(\\widehat v_k-f_k)$. Return the first\n`residual-range-failure(k,j,operation)` if any operation fails. Structural\nzero entries are omitted; all included products, additions, and the final\nsubtraction use the operationwise model.\n\nThe certificate calculations that follow are exact rational arithmetic on\nthe finite binary values and the rational $u$; they are not rounded\nfloating-point calculations. Define\n$$\nF_1=\\sum_{k=1}^n|d_k|+2\\sum_{k=1}^{n-1}|c_k|,\\quad X_1=\\sum_{k=1}^n|\\widehat m_k|,\\quad Y_1=\\sum_{k=1}^n|f_k|,\\quad V_1=\\sum_{k=1}^n|\\widehat v_k|,\\quad W_1=\\sum_{k=1}^n|\\widehat w_k|\n$$\nand\n$$\ng_n=\\frac{1+6u}{1-(n-1)u}-1,\\qquad C=W_1+g_nF_1X_1+u(V_1+Y_1).\n$$\nForm the exact natural-cubic matrix $A$ and right-hand side $b$ for the\noriginal stored data as in\n[[thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots]]:\n$A_{kk}=2(h_k+h_{k+1})$, $A_{k,k+1}=A_{k+1,k}=h_{k+1}$, and\n$b_k=6((y_{k+2}-y_{k+1})/h_{k+1}-(y_{k+1}-y_k)/h_k)$, with only existing\ninterior entries included; represent $A$ by its three diagonals and compute\nthe following row quantities as a stream, without allocating dense matrices.\nCompute\n$$\n\\alpha=\\max_k\\sum_j|A_{kj}-T_{kj}|,\\quad \\beta=\\max_k|b_k-f_k|,\\quad Q=\\max_k|\\widehat m_k|,\\quad \\delta=\\min_{1\\le k\\le n}(h_k+h_{k+1}),\\quad H=\\max_{1\\le i<r}h_i,\n$$\nand\n$$\nB=\\frac{H^2}{8\\delta}(C+\\alpha Q+\\beta).\n$$\nAll denominators are positive: $h_i>0$, $\\delta>0$, and\n$1-(n-1)u>0$. Return `success(\\widehat M,C,\\alpha,\\beta,B)`. If a\nresource-limited implementation cannot complete the exact rational\ncertificate, it may return `certificate-resource-failure`, which carries no\ncertified $B$.\n\nFor $r\\ge3$, associate to the returned vector $\\widehat M$ the piecewise\ncubic reconstruction on each $[x_i,x_{i+1}]$ given by\n$$\n\\widehat s_i(x)=\\frac{\\widehat M_i(x_{i+1}-x)^3+\\widehat M_{i+1}(x-x_i)^3}{6h_i}+\\left(y_i-\\frac{\\widehat M_i h_i^2}{6}\\right)\\frac{x_{i+1}-x}{h_i}+\\left(y_{i+1}-\\frac{\\widehat M_{i+1}h_i^2}{6}\\right)\\frac{x-x_i}{h_i}.\n$$\nThis reconstruction interpolates the stored data and need not be $C^1$ at an interior knot;\nit is a piecewise cubic reconstruction, not necessarily a natural spline.\nThe certificate concerns exact evaluation of these pieces. Any floating-point\nevaluation of them needs a separate piece-evaluation error allowance.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge3$, $n=r-2$, and use the stored input data, arithmetic model and\nalgorithm of\n[[alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate]]. If\nassembly succeeds, its stored symmetric tridiagonal matrix $T$ is positive\ndefinite. On every full successful call, the algorithm returns\n$\\operatorname{success}(\\widehat M,C,\\alpha,\\beta,B)$. Let\n$\\widehat m=(\\widehat M_2,\\ldots,\\widehat M_{r-1})$ be the interior\nsubvector, let $f$ be the stored right-hand side, and let $\\widehat w$ be the\ncomputed rounded residual vector from the algorithm's residual-evaluation\nstep. Then\n$$\n\\|T\\widehat m-f\\|_\\infty\\le C.\n$$\nFor $v\\in\\mathbb R^n$, the notation here is\n$\\|v\\|_\\infty:=\\max_{1\\le k\\le n}|v_k|$.\nThus $e=T\\widehat m-f$ is an exact right-hand-side perturbation satisfying\n$T\\widehat m=f+e$ and $\\|e\\|_\\infty\\le C$. This absolute residual\ncertificate remains valid when $\\widehat m=0$ or $f=0$.\n\nThe algorithm's factorization and two substitutions are the successful\nexecutions of the published dense rounded Cholesky and triangular-substitution\nprocedures on the same stored $T$ and $f$, after omitting only exact-zero\noperations. Their failure tests retain the published positive-normal pivot\nand operationwise range rules. Exact positive definiteness does not guarantee\nrounded success.\n\nWrite $\\widehat L$ and $z$ for the factor and forward-solve vector computed in\nthis execution. There are additional conditional backward-error statements.\nIf\n$(n+3)u<1$, lower bidiagonal $D_1$ and upper bidiagonal $D_2$ satisfy\n$$\n(\\widehat L+D_1)z=f,\\qquad (\\widehat L^T+D_2)\\widehat m=z,\\qquad |D_1|\\le\\tau|\\widehat L|,\\qquad |D_2|\\le\\tau|\\widehat L|^T,\\qquad \\tau=\\frac{(n+3)u}{1-(n+3)u}.\n$$\nIf $(20n+20)u<1/5$, put\n$g=(20n+20)u/(1-(20n+20)u)$. For the symmetric factor residual\n$E=\\widehat L\\widehat L^T-T$,\n$$\n|E|\\le100g|\\widehat L||\\widehat L|^T.\n$$\nWith\n$$\nJ=E+D_1\\widehat L^T+\\widehat L D_2+D_1D_2,\n$$\nwe have $(T+J)\\widehat m=f$ and\n$$\n|J|\\le(100g+2\\tau+\\tau^2)|\\widehat L||\\widehat L|^T.\n$$\nThe matrix $J$ need not be symmetric. If also\n$100\\sqrt n\\,g\\le1/2$, then\n$\\|E\\|_F\\le200\\sqrt n\\,g\\|T\\|_F$. The residual certificate above\nrequires only the algorithm's $(n-1)u<1$ check; it does not require these\nstronger factor and triangular-solve conditions.\n\nThe finite procedure terminates and uses $O(r)$ floating-point operations,\n$O(r)$ stored scalars, $O(r)$ exact rational operations and $O(r)$ stored\nrationals. No rational bit-complexity bound is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge2$, $a\\le x_1<\\cdots<x_r\\le b$, and $y_1,\\ldots,y_r\\in\\mathbb R$. There is exactly one natural cubic spline $s$ on $[a,b]$ with $s(x_i)=y_i$ for each $i$. On each interval $[x_i,x_{i+1}]$ it is the cubic with endpoint values $y_i,y_{i+1}$ and endpoint second derivatives $M_i,M_{i+1}$, where $M_1=M_r=0$ and the interior values solve the positive-definite tridiagonal system\n$$h_{i-1}M_{i-1}+2(h_{i-1}+h_i)M_i+h_iM_{i+1}=6\\left(\\frac{y_{i+1}-y_i}{h_i}-\\frac{y_i-y_{i-1}}{h_{i-1}}\\right),\\quad 2\\le i\\le r-1,$$\nwith $h_i=x_{i+1}-x_i>0$. The interpolant is linear outside $[x_1,x_r]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-cubic-spline-tridiagonal-residual-transfer",
+          "source_section": "Statement",
+          "quote": "Let $x_1<\\cdots<x_r$, $r\\ge3$, and let $s$ be the natural cubic\ninterpolant of nodal values $y_i$. Write $h_i=x_{i+1}-x_i$ and\n$H=\\max_i h_i$. Let $A$ be the $(r-2)\\times(r-2)$ interior coefficient\nmatrix in the system of\n[[thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots]], and\nlet $b$ be its right-hand side. Put\n$$\\delta=\\min_{2\\le i\\le r-1}(h_{i-1}+h_i)>0.$$\nFor any proposed nodal second derivatives\n$\\widehat M_1=\\widehat M_r=0$, let $\\widehat m$ be their interior vector,\nlet $\\rho=A\\widehat m-b$ be the exact residual, and let $\\widehat s$ be\nthe piecewise cubic given by the natural piece formula with these second\nderivatives and the same values $y_i$. Then, on the knot hull,\n$$\\|\\widehat s-s\\|_{L^\\infty([x_1,x_r])}\\le \\frac{H^2}{8\\delta}\\|\\rho\\|_\\infty.$$\nThis is a residual-to-function transfer statement; it does not assert that\na particular floating-point solver returns a residual certificate.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $r\\ge3$. Let $\\widehat M$ be the returned vector and $\\widehat m=(\\widehat M_2,\\ldots,\\widehat M_{r-1})$ its interior subvector. By [F2] and the exact identity $A\\widehat m-b=(T\\widehat m-f)+(A-T)\\widehat m+(f-b)$, each row satisfies $|(A\\widehat m-b)_k|\\le |(T\\widehat m-f)_k|+\\sum_j|A_{kj}-T_{kj}|\\,|\\widehat m_j|+|f_k-b_k|\\le C+\\alpha\\|\\widehat m\\|_\\infty+\\beta$. Taking the maximum proves $\\|A\\widehat m-b\\|_\\infty\\le C+\\alpha\\|\\widehat m\\|_\\infty+\\beta$; these exact discrepancies account for all rounded system assembly.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The returned endpoint second derivatives and those of $s$ are both zero. Apply [F4] to the exact residual from step 1.1 and the original widths. It gives $\\|\\widehat s-s\\|_{L^\\infty([x_1,x_r])}\\le(H^2/(8\\delta))\\|A\\widehat m-b\\|_\\infty\\le(H^2/(8\\delta))(C+\\alpha\\|\\widehat m\\|_\\infty+\\beta)=B$. The transfer theorem applies to any proposed interior derivatives with zero endpoint values; it does not require the algorithm-defined pieces to join with matching first derivatives.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $r=2$, the algorithm returns zero endpoint second derivatives and its associated reconstruction is the exact straight-line piece. By [F3] this is also $s$, and the algorithm defines $B=0$, so the stated bound holds with equality.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm input requires at least two distinct knots."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 retains the absolute error terms and uses no division by a solution norm, so zero vectors are covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies when r=3 and n=1; step 2.1 uses the one-row residual-transfer estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Strictly increasing input knots imply positive h_i and delta."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the residual-transfer bound on the full knot hull including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 use only finite rows and the r=2/r>=3 case split; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way forward-error bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way forward-error bound, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read every current step and all four exact algorithm/theorem suppliers. Residual identity (T mhat-f)+(A-T)mhat+(f-b) accounts for both matrix and RHS assembly, with alpha the absolute row sum and beta the RHS max. Fixed zero endpoint curvatures permit H^2/(8delta) transfer even when pieces fail C1. r=2 uses the exact line and B=0 without a maximum over an empty interior vector. Only the knot hull and exact piece evaluation are certified; no endpoint-compatible fourth-order rate or automatic floating-point success is inferred. No AC."
+      },
+      "kind": "theorem",
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "step-1-scaffolder",
+          "notes": "Checked the assembly mismatch terms, the r=2 branch, the one-interior-row case, the endpoint knot hull, and the separate exclusion of rounded piece evaluation. This is an authoring self-check, not independent review or acceptance."
+        }
+      ]
+    }
+  }
+}

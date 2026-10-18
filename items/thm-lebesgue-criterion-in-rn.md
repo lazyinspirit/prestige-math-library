@@ -13,12 +13,8 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
-    date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
+  precheck: pass
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step3-lebesgue67/local-published-repair.json
 sources:
   scraped: []
   references:
@@ -69,7 +65,7 @@ A bounded real function on a closed nondegenerate rectangle in $\mathbb R^m$, $m
 
 3.1 Let $O$ be the union of those cube interiors and $K=Q\setminus O$. The set $K$ is relatively closed in compact $Q$, hence compact by [L2]. For every $z\in K$, $\omega_f(z)<\alpha$, so some Euclidean ball about $z$ has oscillation below $\alpha$. Shrink these balls by a factor of two; compactness gives a finite subcover of $K$.  [step 2.1, L1, L2, L4, choose]
 
-3.2 Apply the finite rectangle-to-cube claim of step 1.1 to that finite family, with $\gamma=\eta/2$. Its rectangle-volume sum is below $\eta/2$, so $S_{1/r}$ has a finite cube cover of total volume below $\eta$. Since $\eta>0$ was arbitrary, $S_{1/r}$ has content zero and is null.  [step 1.1, step 1.3, step 2.2, L2]
+3.2 Take the high-oscillation cells from step 1.3 together with the degenerate rectangles forming $H_P$ in step 2.2. This finite rectangle family covers $S_{1/r}$ by step 2.2, and its total volume is below $\eta/2$ by step 1.3 because the hyperplane pieces have volume zero. Apply the finite rectangle-to-cube claim of step 1.1 to this family with $\gamma=\eta/2$ to obtain a finite cube cover of $S_{1/r}$ of total volume below $\eta$. Since $\eta>0$ was arbitrary, $S_{1/r}$ has content zero and is null.  [step 1.1, step 1.3, step 2.2, L2, L5]
 
 4.1 Refine $P_0$ to mesh small enough that the fixed norm comparison in [L4] makes every cell meeting a shrunken ball lie inside the corresponding original ball. Every cell not meeting $O$ contains a point of $K$, hence is contained in one of those original oscillation balls; refinement does not increase the total volume of cells meeting $O$.  [step 3.1, L3, L4]
 

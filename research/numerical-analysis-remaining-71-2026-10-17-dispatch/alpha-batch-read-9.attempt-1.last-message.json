@@ -1,0 +1,232 @@
+{
+  "group": "c",
+  "batches": ["9"],
+  "pages_read": [
+    "toeplitz-circulant-and-displacement-structured-solvers",
+    "toeplitz-circulant-and-displacement-structured-solvers-examples"
+  ],
+  "items_read": [
+    "def-toeplitz-circulant-and-displacement-notation",
+    "thm-realified-dense-residual-certificate",
+    "prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft",
+    "thm-zero-padded-fft-toeplitz-matvec-is-exact-and-costs-nlogn",
+    "lem-complex-hermitian-toeplitz-reflection-recursion",
+    "def-displacement-rank-generators-and-lower-shift",
+    "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+    "lem-toeplitz-matrix-has-displacement-rank-at-most-two",
+    "lem-displacement-generator-update-under-scalar-schur-elimination",
+    "thm-gohberg-semencul-inverse-identity-and-cost",
+    "ex-circulant-periodic-poisson-zero-mode",
+    "ex-hermitian-toeplitz-nonpositive-pivot-failure",
+    "ex-ar-covariance-toeplitz-forecast-solve"
+  ],
+  "conventions": [
+    {
+      "convention": "Indices start at zero; Toeplitz entries are T_ij=t_(i-j), circulant entries are c_((i-j) mod N), and Hermitian lags satisfy t_(-r)=conjugate(t_r). J reverses coordinates, including the empty vector.",
+      "fixed_by": "def-toeplitz-circulant-and-displacement-notation",
+      "matters_for": [
+        "prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft",
+        "thm-zero-padded-fft-toeplitz-matvec-is-exact-and-costs-nlogn",
+        "lem-complex-hermitian-toeplitz-reflection-recursion",
+        "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+        "lem-toeplitz-matrix-has-displacement-rank-at-most-two",
+        "thm-gohberg-semencul-inverse-identity-and-cost",
+        "ex-circulant-periodic-poisson-zero-mode"
+      ]
+    },
+    {
+      "convention": "The canonical DFT has negative exponent and normalization N^(-1/2); D_N=√N F_N is unnormalised. Cyclic convolution is unnormalised, so its unitary transform law carries √N.",
+      "fixed_by": "def-toeplitz-circulant-and-displacement-notation",
+      "matters_for": [
+        "prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft",
+        "thm-zero-padded-fft-toeplitz-matvec-is-exact-and-costs-nlogn",
+        "ex-circulant-periodic-poisson-zero-mode"
+      ]
+    },
+    {
+      "convention": "Z is the lower shift and the Stein displacement is A−ZAZ*. A width-r generator means A−ZAZ*=GH*, with G,H having r columns.",
+      "fixed_by": "def-displacement-rank-generators-and-lower-shift",
+      "matters_for": [
+        "lem-toeplitz-matrix-has-displacement-rank-at-most-two",
+        "lem-displacement-generator-update-under-scalar-schur-elimination",
+        "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+        "thm-gohberg-semencul-inverse-identity-and-cost"
+      ]
+    },
+    {
+      "convention": "Residual evaluation rounds products, accumulates each row left to right, then rounds b−p componentwise. Exact operation results must be zero or normal, and (s+1)u<1. Complex systems use the explicit realification of dimension 2n.",
+      "fixed_by": "thm-realified-dense-residual-certificate",
+      "matters_for": ["thm-realified-dense-residual-certificate"]
+    },
+    {
+      "convention": "The general-RHS procedure uses exact arithmetic and rejects nonpositive reflection pivots before division. HPD inputs guarantee positive pivots; no finite-precision stability assertion is made.",
+      "fixed_by": "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+      "matters_for": [
+        "thm-gohberg-semencul-inverse-identity-and-cost",
+        "ex-hermitian-toeplitz-nonpositive-pivot-failure",
+        "ex-ar-covariance-toeplitz-forecast-solve"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-complex-hermitian-toeplitz-reflection-recursion",
+      "statement": "For Hermitian positive-definite T_n, the displayed recursion has strictly positive denominators and satisfies T_k φ_k=g_k and ν_k=t_0−g_k*φ_k>0 for 0≤k<n. Computing through order n−1 takes O(n²) complex arithmetic operations and O(n) working storage.",
+      "used_by": [
+        "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+        "thm-gohberg-semencul-inverse-identity-and-cost"
+      ]
+    },
+    {
+      "id": "thm-gohberg-semencul-inverse-identity-and-cost",
+      "statement": "For Hermitian positive-definite T_n and arbitrary b∈C^n, the specified exact-arithmetic algorithm returns T_n^(-1)b. With u=T_n^(-1)e_0 and v=T_n^(-1)e_(n−1), T_n^(-1)=[L(u)L(u)*−L(Z_nv)L(Z_nv)*]/u_0, where u_0>0. Work is O(n²) and storage is O(n).",
+      "used_by": ["ex-ar-covariance-toeplitz-forecast-solve"]
+    },
+    {
+      "id": "prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft",
+      "statement": "C(c)=F_N^(-1)diag(λ)F_N, where λ_k=Σ_j c_j exp(−2πikj/N). Invertibility is equivalent to every λ_k being nonzero; solvability requires and suffices that the transformed right-hand side vanish at every zero mode.",
+      "used_by": ["ex-circulant-periodic-poisson-zero-mode"]
+    },
+    {
+      "id": "thm-zero-padded-fft-toeplitz-matvec-is-exact-and-costs-nlogn",
+      "statement": "For m,n≥1, the specified embedding at the least power-of-two length N≥m+n−1 makes the first m coordinates of c*_N x̃ equal Tx in exact arithmetic. Three exact DFT calls give O(N log₂N) arithmetic for N≥2 and constant work for N=1.",
+      "used_by": ["toeplitz-circulant-and-displacement-structured-solvers"]
+    },
+    {
+      "id": "lem-displacement-generator-update-under-scalar-schur-elimination",
+      "statement": "Given A−Z_nAZ_n*=GH* with width s≥1 and nonzero leading scalar pivot d, the specified G′,H′ satisfy S−Z_(n−1)SZ_(n−1)*=G′H′* for S=M−ℓd^(-1)r*. The updated displacement rank is at most s.",
+      "used_by": ["toeplitz-circulant-and-displacement-structured-solvers"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Complex coordinates, conjugation, modulus, and realification.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Finite matrix-product conventions throughout the batch.",
+      "opened": true
+    },
+    {
+      "id": "def-unitary-discrete-fourier-transform-on-z-mod-n",
+      "used_for": "Negative-sign unitary DFT convention.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Real componentwise residual inequalities.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Operationwise relative error assumptions and exact-zero rule.",
+      "opened": true
+    },
+    {
+      "id": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+      "used_for": "Left-to-right dot-product error expansion in the residual certificate; the owned proof explicitly extends the expansion to zero operations.",
+      "opened": true
+    },
+    {
+      "id": "def-cyclic-convolution-on-z-mod-n",
+      "used_for": "Unnormalised cyclic convolution and its finite-sum orientation.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product",
+      "used_for": "The √N convolution multiplier in circulant diagonalization and Toeplitz embedding.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-fourier-inversion",
+      "used_for": "DFT invertibility and positive-sign inverse formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-arbitrary-length-fft-correctness-and-cost",
+      "used_for": "Formal exact-constant DFT correctness and arithmetic count, with phase generation and bit complexity excluded.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-computed-fft-convolution-error-bound",
+      "used_for": "The separately qualified finite-precision convolution remark.",
+      "opened": true
+    },
+    {
+      "id": "alg-durbin-levinson-forecast-recursion",
+      "used_for": "Published real covariance forecast procedure, distinguished from the complex general-RHS solver.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Invertibility of HPD leading Toeplitz blocks.",
+      "opened": true
+    },
+    {
+      "id": "def-block-lu-factorisation",
+      "used_for": "Scalar-pivot Schur complement convention.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Unit-modulus exponential values and the N=4 Poisson calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "used_for": "Complex field arithmetic and the zero-square implication in the Poisson example.",
+      "opened": true
+    },
+    {
+      "id": "thm-kernel-and-fibres-of-complex-exponential",
+      "used_for": "Characterizing the unique zero Fourier mode.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Root-of-unity identities in the Poisson example.",
+      "opened": true
+    },
+    {
+      "id": "def-autocovariance-and-sample-autocovariance",
+      "used_for": "Population ACVF convention in the AR(1) example.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Variance and covariance definitions for square-integrable variables.",
+      "opened": true
+    },
+    {
+      "id": "def-strict-and-weak-stationarity-for-time-series",
+      "used_for": "Moment and lag-invariance hypotheses in the AR(1) example.",
+      "opened": true
+    },
+    {
+      "id": "lem-variance-and-covariance-identities-for-random-variables",
+      "used_for": "Covariance symmetry and bilinearity in the AR(1) calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-durbin-levinson-solves-the-prediction-equations",
+      "used_for": "Identification of the computed order-two forecast coefficients and error variance after verifying positive-definite leading blocks.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-realified-dense-residual-certificate",
+      "concern": "The Statement says “For complex $A,x,b\\in\\mathbb C^n$”, but A must be an n×n matrix for the subsequent realification and matrix products. The surrounding formulas make the intended type clear.",
+      "severity": "presentation"
+    },
+    {
+      "id": "lem-complex-hermitian-toeplitz-reflection-recursion",
+      "concern": "The Statement allows n=1, but proof step 2.3 unconditionally says “For $k=0$, the formula gives $\\alpha_1=t_1/t_0$ and $\\phi_1=(\\alpha_1)$”. At n=1, t_1 is outside the supplied lags and there is no update. The n=1 conclusion follows immediately from step 2.2; step 2.3 needs qualification to the case n≥2.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": []
+}

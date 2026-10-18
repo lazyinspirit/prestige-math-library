@@ -1,0 +1,1131 @@
+[PAGE 1]
+POINTWISE GRADIENT ESTIMATE OF THE RITZ PROJECTION
+LARS DIENING∗, JULIAN ROLFES†, AND ABNER J. SALGADO‡
+Abstract. Let Ω⊂Rn be a convex polytope (n ≤3). The Ritz projection is the best approx-
+imation, in the W 1,2
+0
+-norm, to a given function in a ﬁnite element space. When such ﬁnite element
+spaces are constructed on the basis of quasiuniform triangulations, we show a pointwise estimate
+on the Ritz projection. Namely, that the gradient at any point in Ωis controlled by the Hardy–
+Littlewood maximal function of the gradient of the original function at the same point. From this
+estimate, the stability of the Ritz projection on a wide range of spaces that are of interest in the
+analysis of PDEs immediately follows. Among those are weighted spaces, Orlicz spaces and Lorentz
+spaces.
+Key words. Ritz projection, gradient estimates, maximal function, Muckenhoupt weights
+AMS subject classiﬁcations. 65N30, 65N80, 65N12
+1. Introduction. To approximate solutions of partial diﬀerential eiquations, in
+particular, those that are second order and elliptic, the ﬁnite element method has
+emerged as the method of choice. A ﬁnite element scheme is nothing but a Galerkin
+approximation with particular choice of ﬁnite dimensional subspace (piecewise poly-
+nomials subject to a triangulation of the domain) and a particular basis. It is fair
+to say that the study the properties of ﬁnite element schemes for second order linear
+elliptic second order equations in an energy setting has reached a state of maturity.
+In short the Ritz projection, that is the best approximation in the W 1,2
+0
+-norm (see
+Section 2 for notation), possesses optimal approximation properties when these are
+measured in the energy norm, which usually is a norm equivalent to the W 1,2-norm.
+This reduces the numerical analysis of a ﬁnite element scheme to a question of approx-
+imation theory, and this is usually resolved by constructing a suitable interpolant.
+On the other hand, the study of the properties of the Ritz projection in non en-
+ergy norms has been the subject of intensive study with many classical results, recent
+progresses, and still some open questions. We refer the reader to the Introductions
+of [GLRS09] and [DLSW12] for some historical accounts. It is fair to say that the
+development of this subject is obscured by technicalities, and it is far from settled.
+Nevertheless, apart from the intrinsic interest such estimates may present, these be-
+come important when dealing, for instance, with nonlinear or coupled problems, or
+even when in a linear problem the data is suﬃciently rough that the functional setting
+that provides well–posedness is no longer the energy one, see for instance [DDO20],
+or when the energy norm is not equivalent to the usual W 1,2-norm, see [NOS15].
+The purpose of this work is to make a contribution in this direction. We show
+that, over quasiuniform meshes, the gradient of the Ritz projection at any point in the
+domain is controlled by the Hardy–Littlewood maximal operator of the gradient of the
+original function at the same point. This pointwise estimate not only immediately
+implies stability of the Ritz projection in any function space where the maximal
+operator is bounded, but it also elucidates the action of the Ritz projection, i.e., ﬁnite
+element approximation. It is a sort of averaging procedure.
+∗Department of Mathematics, University of Bielefeld, Postfach 10 01 31, 33501 Bielefeld, Germany.
+(lars.diening@uni-bielefeld.de, http://www.bi-discrete.com)
+†Department of Mathematics, University of Bielefeld, Postfach 10 01 31, 33501 Bielefeld, Germany.
+(julian.rolfes@uni-bielefeld.de, http://www.bi-discrete.com)
+‡Department of Mathematics, University of Tennessee, Knoxville, TN 37996, USA. (asal-
+gad1@utk.edu, https://math.utk.edu/people/abner-salgado/)
+1
+arXiv:2305.03575v1  [math.NA]  5 May 2023
+
+[PAGE 2]
+2
+L. DIENING, J. ROLFES, A.J. SALGADO
+Our presentation is organized as follows.
+In Section 2 we introduce notation.
+The statement of our main result, Theorem 3.1, is presented in Section 3.
+Here
+we also colllect a list of Corollaries. Some of these recover known results, whereas
+others are truly new and may ﬁnd application in the ﬁnite element approximation of,
+for instance, nonlinear elliptic problems with nonstandard growth conditions [DE08].
+The proof of our main result is the content of Section 4. For clarity, this proof is split
+in several steps that comprise the bulk of this section.
+2. Notation and preliminaries. We begin by introducing some notation and
+specifying the framework under which we shall operate. The relation A ≲B means
+that there is a constant c for which A ≤cB. The value of this constant may change
+at each occurrence. More importantly, this constant does not depend on A, B, nor
+discretization parameters. A ≈B means that A ≲B and B ≲A.
+Throughout our work, Ω⊂Rn, n ≤3, is a bounded convex polytope. While
+convexity is essential for our arguments, the dimensional restriction is merely an
+artifact of our methods. Given x ∈Rn, we denote its Euclidean norm by |x|. By
+B(x, r) we denote the open ball with center x ∈Rn and radius r > 0. For a measurable
+set E ⊂Rn we denote by |E| its Lebesgue measure. L0(Ω) denotes the collection of
+functions Ω→R that are measurable. For p ∈[1, ∞] and k ∈N we denote by Lp(Ω)
+and W k,p(Ω), respectively, the usual Lebesgue and Sobolev spaces. The subspace of
+W k,p(Ω) that consists of functions vanishing on the boundary is denoted by W k,p
+0
+(Ω).
+We immediately notice that, whenever w ∈W k,p
+0
+(Ω), its extension to Rn \ Ωby zero,
+denoted by ˜w, is such that ˜w ∈W k,p(Rn). For this reason, whenever necessary, we
+shall make this extension by zero without explicit mention nor change of notation.
+By L1
+loc(Rn) we denote the space of locally integrable functions. For f ∈L0(Rn) the
+(centered) Hardy–Littlewood maximal operator M of f is
+(2.1)
+M[f](x) = sup
+r>0
+1
+|B(x, r)|
+Z
+B(x,r)
+|f(y)| dy.
+With this notation M[f] readily extends to vector valued functions. If X is a normed
+space, we shall denote by ∥· ∥X its norm. If this norm comes from an inner product,
+this will be denoted by ⟨·, ·⟩X. We shall make no distinction between scalar and vector
+valued functions nor their spaces, as this will be clear from context. For α ∈(0, 1] we
+let C0,α(Ω) denote the space of H¨older continuous functions with seminorm
+(2.2)
+|f|C0,α(Ω) = sup
+x,y∈Ω
+|f(x) −f(y)|
+|x −y|α
+,
+and norm ∥f∥C0,α(Ω) = ∥f∥L∞(Ω) + |f|C0,α(Ω).
+Let T = {Th}h>0 be a quasiuniform family of conforming triangulations of Ω
+where, for h > 0, the triangulation Th has mesh size h. For k ∈N we denote by
+L1
+k(Th) =
+
+wh ∈C(Ω) : wh|T ∈Pk, ∀T ∈Th
+	
+the Lagrange space of degree k, where Pk is the space of polynomials of degree at most
+k. We set Vh = L1
+k(Th) ∩W 1,1
+0
+(Ω) and immediately observe that Vh ⊂W 1,∞
+0
+(Ω). The
+Ritz projection Rh : W 1,1
+0
+(Ω) →Vh is deﬁned by
+(2.3)
+⟨∇Rhu, ∇ϕh⟩L2(Ω) = ⟨∇u, ∇ϕh⟩L2(Ω),
+∀ϕh ∈Vh.
+We comment that this mapping is the orthogonal projections onto Vh with respect
+to the W 1,2
+0
+(Ω)-seminorm. The following local error estimate for Rh can be found in
+
+[PAGE 3]
+POINTWISE GRADIENT ESTIMATE OF THE RITZ PROJECTION
+3
+[DLSW12, Theorem 1]. In fact, it holds for more general families of triangulations
+than quasiuniform ones.
+Proposition 2.1 (local error estimate).
+Let w ∈W 1,∞
+0
+(Ω) and T be a quasi-
+uniform family of triangulations of Ω. Let z ∈Ωand h > 0. Deﬁne D = Ω∩Bd(z)
+with d ≥k0h, where k0 is suﬃciently large. We have, for every wh ∈Vh,
+|∇(w−Rhw)(z)| ≲∥∇(w−wh)∥L∞(D)+d−1∥w−wh∥L∞(D)+d−n
+2 −1∥w−Rhw∥L2(D),
+where the implicit constant is independent of w, h, and z.
+Proof. As mentioned before, this is essentially [DLSW12, Theorem 1]. However
+in that result, as stated, the point z is where ∥∇(w −Rhw)∥L∞(Ω) is attained. One
+merely needs to examine the proof to see that this point may be arbitrary.
+3. Statement of the main result and corollaries. We are now in position
+to state the main result of our work.
+Theorem 3.1 (pointwise estimate).
+Let Ω⊂Rn, for n ∈{2, 3}, be a convex
+polytope and T = {Th}h>0 be a family of conforming and quasiuniform triangulations
+of Ω. For every u ∈W 1,1
+0
+(Ω) and almost every z ∈Ωwe have
+(3.1)
+|∇Rhu(z)| ≲M[∇u](z),
+where the implied constant is independent of z, u, and h, and depends on T only
+through its shape regularity constants.
+Before we embark in the proof of this result we immediately mention that it
+implies the stability of the Ritz projection in any space where the Hardy–Littlewood
+maximal operator is bounded. For the sake of completeness we present a, far from
+exhaustive, list of examples: (weighted) Lp spaces, see §3.4, Lorentz spaces, §3.1 and
+§3.5; Orlicz spaces, §3.3; functions of bounded mean oscillation §3.2, and (weighted)
+variable exponent spaces §3.6.
+3.1. Lorentz spaces. Let µ be a measure on Ω, p ∈[1, ∞), and q ∈[1, ∞]. The
+Lorentz spaces are deﬁned as
+Lp,q(µ, Ω) =
+
+f ∈L0(µ, Ω) : ∥f∥Lp,q(µ,Ω) < ∞
+	
+,
+where
+(3.2)
+∥f∥Lp,q(µ,Ω) =
+
+
+
+
+
+
+
+
+q
+Z ∞
+0
+tqµf(t)q/p dt
+t
+1/q
+,
+q < ∞,
+sup
+t>0
+tµf(t)1/p,
+q = ∞,
+and
+µf(t) = µ ({x ∈Ω: |f(x)| > t})
+is the distribution function of f. We recall that, for p ∈[1, ∞), Lp,p(µ, Ω) = Lp(µ, Ω)
+with equivalence of norms [Gra14a, Proposition 1.4.5]. Finally, if µ is the Lebesgue
+measure, we simply denote these spaces by Lp,q(Ω).
+Corollary 3.2 (Lorentz stability).
+In the setting of of Theorem 3.1 assume,
+in addition, that p ∈(1, ∞) and q ∈(1, ∞], or that p = 1 and q = ∞. Then we have
+∥∇Rhu∥Lp,q(Ω) ≲∥∇u∥Lp,q(Ω),
+
+[PAGE 4]
+4
+L. DIENING, J. ROLFES, A.J. SALGADO
+where the implicit constant is independent of u and h. In particular, for p ∈(1, ∞],
+we have
+∥∇Rhu∥Lp(Ω) ≲∥∇u∥Lp(Ω).
+Proof. Consider ﬁrst the case p = 1 and q = ∞. Owing to, for instance, [Gra14a,
+Theorem 2.1.6] we have M : L1,∞→L1,∞boundedly.
+For p > 1 it suﬃces to invoke [KK91, Theorems A, Section 5.2].
+We comment that the boundedness of the Ritz projection in Lp spaces, has been
+already presented in [RS82; GLRS09; DLSW12]. Thus, the case p ∈(1, ∞) of Corol-
+lary 3.2 can also be obtained by the Marcinkiewicz interpolation theorem as presented
+in [BL76, Theorem 5.3.2].
+3.2. Functions of bounded mean oscillation. Let us now present a truly
+new result. We recall that the (local) sharp maximal operator is deﬁned as
+M ♯[f](x) = sup
+r>0
+Z
+B(x,r)∩Ω
+|f(y) −⟨f⟩B(x,r)∩Ω| dy,
+⟨f⟩B =
+1
+|B|
+Z
+B
+f(y) dy.
+With its aid we deﬁne the space of functions of bounded mean oscillation
+BMO(Ω) =
+
+f ∈L0(Ω) : M ♯[f] ∈L∞(Ω)
+	
+,
+∥f∥BMO(Ω) =
+M ♯[f]
+
+L∞(Ω) .
+We remark that L∞(Ω) ⊊BMO(Ω) ⊊Lp(Ω) for all p ∈[1, ∞). We refer to [Gra14b,
+Proposition 3.1.2(2) and Example 3.1.3] for the ﬁrst inclusion, and [Gra14b, Corollary
+3.1.8] for the second one.
+Corollary 3.3 (BMO stability).
+Under the assumptions of Theorem 3.1 we
+have that
+∥∇Rhu∥BMO(Ω) ≲∥∇u∥BMO(Ω),
+where the implicit constant is independent of u and h.
+Proof. It suﬃces to recall that, owing to [BDS81, Theorem 4.2] or [Tor04, Theo-
+rem VII.2.1], the Hardy–Littlewood maximal operator is bounded in BMO(Ω).
+3.3. Orlicz spaces. Another new result is stability in Orlicz spaces. We say
+that ϕ : (0, ∞) →(0, ∞) is an Orlicz function if it is nonnegative, increasing, and
+ϕ(0+) = lim
+t↓0 ϕ(t) = 0,
+ϕ(∞) = lim
+t→∞ϕ(t) = ∞.
+If ϕ is an Orlicz function and, in addition, it is convex and satisﬁes
+lim
+t↓0
+ϕ(t)
+t
+= lim
+t→∞
+t
+ϕ(t) = 0,
+then we say that it is an N–function.
+For an N–function ϕ, we deﬁne its corresponding Orlicz space as
+Lϕ(Ω) =
+
+f ∈L0(Ω) : ∥f∥Lϕ(Ω) < ∞
+	
+,
+∥f∥Lϕ(Ω) = inf
+λ>0
+Z
+Ω
+ϕ
+ 1
+λ|f(x)|
+
+dx ≤1
+
+.
+We refer the reader to [KR61] for further properties of such spaces.
+Given an N–function ϕ, we say that ϕ ∈∇2 if there exists a > 1 such that
+ϕ(t) ≤1
+2aϕ(at),
+∀t ≥0.
+
+[PAGE 5]
+POINTWISE GRADIENT ESTIMATE OF THE RITZ PROJECTION
+5
+Corollary 3.4 (Orlicz stability).
+In the setting of Theorem 3.1 let ϕ ∈∇2.
+Then
+∥∇Rhu∥Lϕ(Ω) ≲∥∇u∥Lϕ(Ω),
+where the implicit constant is independent of u and h.
+Proof. According to [KK91, Theorem 1.2.1(v)], if ϕ ∈∇2, then the maximal
+function is bounded on Lϕ(Ω). Apply Theorem 3.1 to conclude.
+Remark 3.5 (Simonenko indices). Given an N–function ϕ deﬁne
+hϕ(λ) = sup
+t>0
+ϕ(λt)
+ϕ(t) ,
+λ > 0.
+The upper and lower Simonenko indices of ϕ are, respectively,
+p−
+ϕ = lim
+λ↓0
+log hϕ(λ)
+log λ
+,
+p+
+ϕ = lim
+λ→∞
+log hϕ(λ)
+log λ
+.
+We comment that ϕ ∈∇2 implies p−
+ϕ > 1 so that the condition in Corollary 3.4 is
+consistent with the results of Corollary 3.2.
+On the other hand, we say that an N–function is power-like if p+
+ϕ < ∞. According
+to [Sim64], see also [KM01], the space Lϕ(Ω) is an intermediate space between Lp(Ω)
+and Lq(Ω) provided the Simonenko indices satisfy
+1 ≤p ≤p−
+ϕ ≤p+
+ϕ ≤q ≤∞.
+Thus, in the case of ϕ ∈∇2 and power-like, the results of Corollary 3.4 could be
+obtained by interpolation. Since, however, we are not assuming p+
+ϕ < ∞, this is truly
+a new result.
+3.4. Muckenhoupt weighted spaces. Next we extend the results of [DDO20]
+to the optimal range of indices. We recall that a function 0 ≤ω ∈L1
+loc(Ω) is called a
+weight. For p ∈[1, ∞) we say that a weight ω belongs to the Muckenhoupt class Ap
+if
+[ω]Ap =
+
+
+
+
+
+
+
+
+
+sup
+Q
+ 1
+|Q|
+Z
+Q
+ω(x) dx
+  1
+|Q|
+Z
+Q
+ω
+−
+1
+p−1 (x) dx
+p−1
+,
+p > 1,
+sup
+Q
+ 1
+|Q|
+Z
+Q
+ω(x) dx
+
+∥ω−1∥L∞(Q),
+p = 1,
+where the supremum is over all cubes Q with sides parallel to the coordinate axes.
+Weighted Lebesgue spaces are deﬁned, for p ∈(1, ∞) and ω ∈Ap, as
+Lp(ω, Ω) =
+
+f ∈L0(Ω) : ∥f∥Lp(ω,Ω) < ∞
+	
+,
+∥f∥Lp(ω,Ω) =
+Z
+Ω
+|f(x)|pω(x) dx
+1/p
+.
+Corollary 3.6 (weighted stability). Under the assumptions of Theorem 3.1 let
+p ∈(1, ∞) and ω ∈Ap. Then,
+∥∇Rhu∥Lp(ω,Ω) ≲∥∇u∥Lp(ω,Ω),
+where the implicit constant is independent of u and h.
+Proof. It suﬃces to recall that, provided ω ∈Ap, the Hardy–Littlewood maximal
+operator is bounded on weighted spaces; see [Gra14a, Theorem 7.1.9(b)].
+As we mentioned above, this result generalizes [DDO20, Corollary 3.3] where such
+estimate is obtained, but with ω ∈Ap/2, a strictly smaller class.
+
+[PAGE 6]
+6
+L. DIENING, J. ROLFES, A.J. SALGADO
+3.5. Weighted Lorentz spaces. Let ω be a weight. Here we are concerned
+with weighted Lorentz spaces Lp,q(ω, Ω), i.e., the measure in (3.2) is µ = ω dx.
+Corollary 3.7 (weighted stability).
+In the setting of Theorem 3.1 let p ∈
+(1, ∞), q ∈(1, ∞], and ω ∈Ap. Then
+∥∇Rhu∥Lp,q(ω,Ω) ≲∥∇u∥Lp,q(ω,Ω),
+where the implicit constant is independent of u and h.
+Proof. According to [KK91, Theorem 5.2.1], given the range of exponents, we
+have that M : Lp,q(ω, Ω) →Lp,q(ω, Ω) boundedly if ω ∈Ap.
+3.6. Weighted variable exponent spaces. As a ﬁnal application we mention
+weighted variable exponent spaces.
+A variable exponent is p ∈L0(Ω) such that
+p(Ω) ⊂[1, ∞]. Given a variable exponent and a weight 0 ≤ω ∈L1
+loc(Ω) we deﬁne
+weighted variable exponent Lebesgue spaces as
+Lp(·)
+ω
+(Ω) =
+n
+f ∈L0(Ω) : ∥f∥Lp(·)
+ω
+(Ω) < ∞
+o
+,
+∥f∥Lp(·)
+ω
+(Ω) = inf
+λ>0
+(Z
+Ω
+
+1
+λf(x)ω(x)
+
+p(x)
+dx ≤1
+)
+.
+We refer the reader to [CF13; DHHR11] for an extensive treatise on these spaces.
+Given a variable exponent p, we say that p ∈Plog(Ω) if
+
+1
+p(x) −
+1
+p(y)
+ ≲
+1
+log(e + 1/|x −y|),
+∀x, y ∈Ω,
+and, there is p∞≥1 such that
+
+1
+p(x) −1
+p∞
+ ≲
+1
+log(e + 1/|x|),
+∀x ∈Ω.
+If p is a variable exponent, then p′ is its H¨older conjugate; that is, the variable
+exponent that satisﬁes
+1
+p(x) +
+1
+p′(x) = 1,
+for almost every x ∈Ω. We say that the weight ω satisﬁes the generalized Mucken-
+houpt condition, denoted by ω ∈A, if
+∥χQ∥Lp(·)
+ω
+(Ω)∥χQ∥Lp′(·)
+ω−1 (Ω) ≈|Q|,
+for every cube Q with sides parallel to the coordinate axes. Here χQ is the character-
+istic function of Q.
+Remark 3.8 (A vs. Ap). If p(x) = p ∈(1, ∞) for all x ∈Ω, then it is known that
+∥f∥p
+Lp(·)
+ω
+(Ω) =
+Z
+Ω
+|f(x)ω(x)|p dx = ∥fω∥Lp(Ω) = ∥f∥Lp(ωp,Ω).
+Thus, we see that ω ∈A is equivalent to µ = ωp ∈Ap.
+
+[PAGE 7]
+POINTWISE GRADIENT ESTIMATE OF THE RITZ PROJECTION
+7
+Corollary 3.9 (variable exponent stability).
+Under the assumptions of Theo-
+rem 3.1 let p ∈Plog(Ω) with ess infx∈Ωp(x) > 1, and ω ∈A. Then
+∥∇Rhu∥Lp(·)
+ω
+(Ω) ≲∥∇u∥Lp(·)
+ω
+(Ω),
+where the implicit constant is independent of u and h.
+Proof. Under the given assumptions the Hardy–Littlewood maximal operator is
+bounded on Lp(·)
+ω
+(Ω); see [CDH11], [DHHR11, Theorem 4.3.8] and [DHHR11, Theo-
+rem 5.8.6].
+3.7. Other extensions and variations. As we mentioned after Theorem 3.1,
+the list we have provided is not exhaustive. For instance, under certain conditions,
+one can also assert the boundedness in Orlicz–Musielak spaces [CH18].
+On the other hand, there are some spaces where the stability remains open. No-
+table examples are H1(Ω), the atomic Hardy space, and L1(Ω).
+4. Proof of the main result. We now focus on the proof of Theorem 3.1. The
+technique that we shall follow will be a combination of weighted norm inequalities as
+in [RS82], and local estimates, as presented in [DLSW12]. We shall also rely on some
+estimates on the Green’s function that hold, for n ∈{2, 3}, in convex polytopes.
+Proposition 4.1 (Green’s function estimates).
+Let Ω⊂Rn, with n ∈{2, 3},
+be a convex polytope and G : Ω× Ω→R be the Green’s function associated to this
+domain. Then, for every i ∈{1, . . . , n},
+|∂xiG(x, ξ)| ≲
+1
+|x −ξ|n−1 ,
+∀x, ξ ∈Ω.
+In addition, there is α ∈(0, 1], depending only on the inner angles of Ω, such that,
+for every i, j ∈{1, . . . , n} and all x, y, ξ ∈Ω, we have
+|∂xiG(x, ξ) −∂yiG(y, ξ)|
+|x −y|α
+≲|x −ξ|−n−α+1 + |y −ξ|−n+α+1,
+∂xi∂ξjG(x, ξ) −∂yi∂ξjG(y, ξ)
+
+|x −y|α
+≲|x −ξ|−n−α + |y −ξ|−n+α.
+Proof. The ﬁrst bound can be found in [GW82, Theorem 3.3(iv)] for n ≥3, and
+[Fro93, Proposition 1 (9)] for n = 2.
+In the case n = 3, the H¨older estimates on the ﬁrst and mixed derivatives can be
+found in [GLRS09, formula (1.4)]. When n = 2 [DDO20, Lemma 2.1] presents a proof
+of the estimate for the mixed derivative. The estimate on the ﬁrst derivative follows
+the same proof presented in [GLRS09].
+Notice that the H¨older estimates on derivatives of G is the only moment where
+our dimensional restriction plays a role. As soon as the estimates in Proposition 4.1
+are valid for more dimensions, the proof of Theorem 3.1 follows verbatim.
+4.1. Approximation of identity. The technique of weighted norms [Nat75;
+Nit75] relies on the construction of a regularized distance function and its properties.
+Here we rephrase some of the properties of such function that may help elucidate the
+reason for its use. For K, γ > 0 to be chosen we deﬁne ϕ1 : Rn →R by
+(4.1)
+ϕ1(x) = c1
+
+|x|2 + K2−n+γ
+2
+,
+
+[PAGE 8]
+8
+L. DIENING, J. ROLFES, A.J. SALGADO
+where c1 is such that
+R
+Ωϕ1(x) dx = 1. Now, for ε > 0 and z ∈Ω, we deﬁne
+ϕε(x) = ε−nϕ1(x/ε) = c1ε−n 
+|x/ε|2 + K2−n+γ
+2
+= c1εγ 
+|x|2 + K2ε2−n+γ
+2
+,
+ϕε,z(x) = ϕε(z −x).
+Notice that the family {ϕε}ε>0 is an approximation of the identity.
+Lemma 4.2 (convolution estimate).
+For every ε > 0, z ∈Ω, and f ∈L0(Ω) we
+have
+∥ϕε,zf∥L1(Ω) = (ϕε ∗|f|) (z) ≲M[f](z),
+where the constant is independent of ε, z, and f.
+Proof. Since the function ϕ1 is radial and decreasing, it suﬃces to invoke Theorem
+2.2 of Section 2.2 in [Ste70], see also [Gra14a, Theorem 2.1.10].
+4.2. Regularized Green’s function. To establish our main estimate we shall
+rely on a pointwise representation. We ﬁx h > 0 and let z ∈Ωbe such that z ∈˚
+T for
+some T ∈Th. Owing to shape regularity, there is a function δz ∈C∞
+0 (T) such that
+Z
+T
+δz(x)P(x) dx = P(z),
+∀P ∈Pk,
+∥Dmδz∥L∞(Ω) ≲h−n−m,
+m ∈N0.
+Fix l ∈{1, . . . , n}. The regularized Green’s function is gz ∈W 1,2
+0
+(Ω) such that
+(4.2)
+⟨∇gz, ∇v⟩L2(Ω) = ⟨δz, ∂lv⟩L2(Ω),
+∀v ∈W 1,2
+0
+(Ω).
+Owing to the fact that the right hand side in (4.2) is compactly supported in Ωwe
+can, using Proposition 4.1, obtain some H¨older regularity for gz. This is the content
+of the following result.
+Proposition 4.3 (estimates on gz).
+Let z ∈˚
+T ∈Th and gz solve (4.2). Then,
+for every i ∈{1, . . . , n} and all x, y /∈T, x ̸= y, we have
+|∂igz(x) −∂igz(y)|
+|x −y|α
+≲max
+ξ∈T
+ |x −ξ|−n−α + |y −ξ|−n−α
+,
+where the exponent α ∈(0, 1] is the same as in Proposition 4.1. Moreover,
+∥∇gz∥L∞(Ω) ≲h−n.
+Proof. We begin by using the pointwise representation of gz in terms of the
+Green’s function G, and the fact that δz is supported on T to obtain
+∂igz(x) −∂igz(y) = −
+Z
+T
+(∂xiG(x, ξ) −∂yiG(y, ξ)) ∂lδz(ξ) dξ.
+We now invoke Proposition 4.1 to obtain
+|∂igz(x) −∂igz(y)|
+|x −y|α
+≤sup
+ξ∈T
+|∂ξl∂xiG(x, ξ) −∂ξl∂yiG(y, ξ)|
+|x −y|α
+∥δz∥L1(T )
+≲max
+ξ∈T
+ |x −ξ|−n−α + |y −ξ|−n−α
+,
+as claimed.
+
+[PAGE 9]
+POINTWISE GRADIENT ESTIMATE OF THE RITZ PROJECTION
+9
+To obtain the second estimate we observe that δz is supported on T and use its
+scaling properties to assert that, for any i ∈{1, . . . , n}, we have
+|∂igz(x)| =
+
+Z
+T
+∂xiG(x, ξ)∂lδz(ξ) dξ
+ ≲
+Z
+T
+|x −ξ|1−nh−n−1 dξ ≲h−n.
+All estimates have been proved.
+4.3. Step 1:
+Pointwise representation. We now begin with the proof of
+Theorem 3.1 per se. Owing to the properties of δz we have that
+∂lRhu(z) = ⟨δz, ∂lRhu⟩L2(Ω) = ⟨∇gz, ∇Rhu⟩L2(Ω) = ⟨∇Rhgz, ∇u⟩L2(Ω)
+= ⟨δz, ∂lu⟩L2(Ω) + ⟨∇(Rhgz −gz), ∇u⟩L2(Ω)
+where we used (4.2) and the deﬁnition of the Ritz projection (2.3). From the deﬁnition
+of δz it follows immediately that
+⟨δz, ∂lu⟩L2(Ω)
+ ≲M[∇u](z).
+On the other hand, we estimate the second term as
+⟨∇(Rhgz −gz), ∇u⟩L2(Ω)
+ ≤∥ϕh,z∇u∥L1(Ω)
+ϕ−1
+h,z∇(Rhgz −gz)
+
+L∞(Ω) .
+Owing to Lemma 4.2,
+∥ϕh,z∇u∥L1(Ω) ≲M[∇u](z).
+Thus, if we deﬁne
+(4.3)
+Gh = sup
+z∈Ω
+ϕ−1
+h,z∇(Rhgz −gz)
+
+L∞(Ω) ,
+we see that the heart of the matter is to provide a uniform, in h, estimate for this
+quantity.
+In summary, the rest of the proof consists in showing the following result.
+Proposition 4.4 (uniform estimate).
+In the setting of Theorem 3.1 there are
+K > k0 and γ ∈(0, α) such that, if ϕ1 is deﬁned as in (4.1), we have
+Gh ≲1,
+where the constant is independent of h > 0, and Gh was deﬁned in (4.3). Here k0 is
+as in Proposition 2.1, and α as in Proposition 4.1.
+4.4. Step 2: Dyadic decomposition. Fix z ∈Ω. Deﬁne, for j ∈N0, dj =
+2jKh. We decompose the domain Ωinto the following annuli
+(4.4)
+Bj = {x ∈Ω: |x −z| < dj} ,
+Aj = Bj \ Bj−1,
+A+
+j = Bj+1 \ Bj−2,
+A++
+j
+= Bj+2 \ Bj−3,
+with the convention that, for j < 0, Bj = ∅. For S ⊂Ωwe also deﬁne
+Nh(S) =
+[
+{T ∈Th : S ∩T ̸= ∅} .
+The use of this dyadic decomposition lies on the fact that on each annulus the regu-
+larized distance function ϕh,z is almost constant.
+
+[PAGE 10]
+10
+L. DIENING, J. ROLFES, A.J. SALGADO
+Lemma 4.5 (distance estimates).
+Assume that K > 2. For all j ≥0 we have
+ϕh,z(x) ≈hγd−n−γ
+j
+,
+∀x ∈Aj,
+and
+dist
+ A+
+j , Nh(Ω\ A++
+j
+)
+
+≈dj,
+where the implicit constants are independent of h. As a consequence, for j ≥3 we
+have,
+|∇gz|C0,α(A++
+j
+) ≲d−n−α
+j
+,
+where α ∈(0, 1] is as in Proposition 4.1.
+Proof. The estimate on ϕh,z follows by deﬁnition. The estimate on the distance
+between A+
+j and Nh(Ω\ A++
+j
+) does so as well.
+On the other hand, if j ≥3, x, y ∈A++
+j
+, and ξ ∈T then |x −ξ|, |y −ξ| ≈dj. We
+can then reﬁne the estimate of Proposition 4.3 to conclude
+|∂igz(x) −∂igz(y)|
+|x −y|α
+≲d−n−α
+j
+.
+4.5. Step 3: Reduction to interpolation and duality. Let j ∈N0 now be
+such that
+Gh =
+ϕ−1
+h,z∇(gz −Rhgz)
+
+L∞(Aj) .
+Using the distance estimates of Lemma 4.5 we can also assert that
+Gh ≲h−γdn+γ
+j
+∥∇(gz −Rhgz)∥L∞(Aj) .
+Now choose K ≥k0, where k0 was introduced in Proposition 2.1. Then we have
+diam Aj ≈dj ≥k0h, so that with a simple covering argument we may obtain that
+(4.5)
+Gh ≲h−γdn+γ
+j
+∥∇(gz −Rhgz)∥L∞(Aj)
+≲h−γdn+γ
+j
+
+∥∇(gz −Πhgz)∥L∞(A+
+j ) + d−1
+j
+∥gz −Πhgz∥L∞(A+
+j )
++ d
+−n
+2 −1
+j
+∥gz −Rhgz∥L2(A+
+j )
+
+= I + II + III,
+where Πh is, for instance, the so-called Scott–Zhang interpolant [SZ90]. The ﬁrst two
+terms will be handled using interpolation estimates, whereas the last one is controlled
+by duality.
+4.6. Step 4: Bound of I + II via interpolation estimates. It is our goal
+now to bound I + II using the approximation properties of Πh and the regularity of
+gz. This regularity, however, depends on the distance between A+
+j
+and z. If j ≥3,
+then we can invoke the estimate in Lemma 4.5 to see that
+∥gz −Πhgz∥L∞(A+
+j ) + h∥∇(gz −Πhgz)∥L∞(A+
+j ) ≲h1+α|∇gz|C0,α(A++
+j
+)
+≲h1+αd−n−α
+j
+.
+As a consequence, since 0 < γ < α,
+(4.6)
+I + II ≲h−γdn+γ
+j
+ hαd−n−α
+j
++ h1+αd−n−α−1
+j
+
+≲
+ h
+dj
+α−γ
++
+ h
+dj
+1+α−γ
+≤
+1
+Kα−γ +
+1
+K1+α−γ .
+
+[PAGE 11]
+POINTWISE GRADIENT ESTIMATE OF THE RITZ PROJECTION
+11
+If, on the other hand, j < 3 we use the second bound of Proposition 4.3 to obtain
+∥gz −Πhgz∥L∞(A+
+j ) + h∥∇(gz −Πhgz)∥L∞(A+
+j ) ≲h∥∇gz∥L∞(Ω) ≲h1−n.
+In this case then we get
+(4.7)
+I + II ≲h−γdn+γ
+j
+ h−n + d−1
+j
+h1−n
+≲h−n−γdn+γ
+3
++ h1−n−γdn+γ−1
+3
+≲Kn+γ + Kn+γ−1.
+Gathering (4.6) and (4.7) we arrive at
+(4.8)
+I + II ≲max
+
+1
+Kα−γ +
+1
+K1+α−γ , Kn+γ + Kn+γ−1
+
+.
+4.7. Step 5: Bound of III by duality. We bound III by duality. Deﬁne
+(4.9)
+Sj =
+
+v ∈C∞
+0 (Ω) : ∥v∥L2(Ω) ≤1, supp(v) ⊂A+
+j
+	
+so that
+∥gz −Rhgz∥L2(A+
+j ) =
+sup
+0̸=v∈Sj
+⟨gz −Rhgz, v⟩L2(Ω).
+Fix v ∈Sj and let wv ∈W 1,2
+0
+(Ω) solve
+(4.10)
+−∆wv = v, in Ω,
+wv = 0, on ∂Ω.
+Then, by Galerkin orthogonality,
+⟨gz −Rhgz, v⟩L2(Ω) = ⟨∇(gz −Rhgz), ∇wv⟩L2(Ω)
+= ⟨∇(gz −Rhgz), ∇(wv −Πhwv)⟩L2(Ω)
+= ⟨ϕ−1
+h,z∇(gz −Rhgz), ϕh,z∇(wv −Πhwv)⟩L2(Ω).
+An application of H¨older’s inequality then allows us to conclude that
+III ≤h−γd
+n
+2 +γ−1
+j
+sup
+v∈Sj
+∥ϕh,z∇(wv −Πhwv)∥L1(Ω)Gh.
+Notice that if, in this last estimate, the term that is multiplying Gh is suﬃciently
+small, then it could be absorbed on the left hand side in (4.5). This possibility is
+explored in the following result.
+Lemma 4.6 (duality bound).
+Let Sj be deﬁned in (4.9) and γ ∈(0, α). There is
+a constant, independent of j, z, and h such that
+h−γd
+n
+2 +γ−1
+j
+sup
+v∈Sj
+∥ϕh,z∇(wv −Πhwv)∥L1(Ω) ≤C
+ 1
+K +
+1
+Kα−γ
+
+,
+where wv ∈W 1,2
+0
+(Ω) is the solution to (4.10) and α is as in Proposition 4.1.
+Proof. Let v ∈Sj be arbitrary. Using Lemma 4.5 and scaling we have
+h−γd
+n
+2 +γ−1
+j
+∥ϕh,z∇(wv −Πhwv)∥L1(A++
+j
+) ≲d
+−n
+2 −1
+j
+∥∇(wv −Πhwv)∥L1(A++
+j
+)
+≤d−1
+j
+∥∇(wv −Πhwv)∥L2(A++
+j
+)
+≲h
+dj
+|wv|W 2,2(Ω) ≲1
+K ∥v∥L2(Ω) ≤1
+K ,
+
+[PAGE 12]
+12
+L. DIENING, J. ROLFES, A.J. SALGADO
+where, since Ωis convex, we used a regularity estimate on wv.
+To control the norm in Ω\ A++
+j
+observe that, owing to the estimates of Proposi-
+tion 4.1, for every i ∈{1, . . . , n} we have
+|∂iwv(x) −∂iwv(y)|
+|x −y|α
+≤
+Z
+A+
+j
+|∂xiG(x, ξ) −∂yiG(y, ξ)|
+|x −y|α
+|v(ξ)| dξ
+≲max
+ξ∈A+
+j
+ |x −ξ|−n−α+1 + |y −ξ|−n−α+1 Z
+A+
+j
+|v(ξ)| dξ
+≲d−n−α+1
+j
+d
+n
+2
+j ∥v∥L2(A+
+j ) ≤d
+1−α−n
+2
+j
+,
+where we used the second distance estimate of Lemma 4.5. This shows that
+|∇wv|C0,α(Nh(Ω\A++
+j
+)) ≲d
+1−α−n
+2
+j
+.
+To shorten notation let ew = wv −Πhwv. We use that ∥ϕh,z∥L1(Ω) = 1 and the
+recently obtained regularity estimate to proceed as follows:
+h−γd
+n
+2 +γ−1
+j
+∥ϕh,z∇ew∥L1(Ω\A++
+j
+) ≤h−γd
+n
+2 +γ−1
+j
+∥∇ew∥L∞(Ω\A++
+j
+)
+≤h−γd
+n
+2 +γ−1
+j
+hαd
+1−α−n
+2
+j
+=
+ h
+dj
+α−γ
+≤
+1
+Kα−γ .
+We combine both bounds to conclude.
+With Lemma 4.6 at hand we conclude that
+(4.11)
+III ≲
+ 1
+K +
+1
+Kα−γ
+
+Gh.
+4.8. Step 6: Final step.
+Gathering all the estimates. With the aid of
+(4.8) and (4.11), estimate (4.5) reduces to
+Gh ≲max
+
+1
+Kα−γ +
+1
+K1+α−γ , Kn+γ + Kn+γ−1
+
++
+ 1
+K +
+1
+Kα−γ
+
+Gh,
+provided K ≥k0, where k0 is deﬁned in Proposition 2.1; and γ ∈(0, α), with α as in
+Proposition 4.1. We can now, if necessary, choose an even bigger K to conclude the
+proof of Proposition 4.4 and, as a consequence, that of Theorem 3.1.
+Acknowledgements. The work of AJS is partially supported by NSF grant
+DMS-2111228. The main results of this paper were obtained in February 2022 when
+AJS was visiting Bielefeld University for the conference: “Nonlocal Equations: Analy-
+sis and Numerics”. This work was also funded by the Deutsche Forschungsgemein-
+schaft (DFG, German Research Foundation) - SFB 1283/2 2021 - 317210226.
+References.
+[BDS81]
+C. Bennett, R. A. DeVore, and R. Sharpley. “Weak-L∞and BMO”. In: Ann.
+of Math. (2) 113.3 (1981), pp. 601–611. doi: 10.2307/2006999.
+[BL76]
+J. Bergh and J. L¨ofstr¨om. Interpolation spaces. An introduction. Grundleh-
+ren der Mathematischen Wissenschaften, No. 223. Springer-Verlag, Berlin-New
+York, 1976, pp. x+207.
+[CDH11]
+D. Cruz-Uribe, L. Diening, and P. H¨ast¨o. “The maximal operator on weighted
+variable Lebesgue spaces”. In: Fract. Calc. Appl. Anal. 14.3 (2011), pp. 361–
+374. doi: 10.2478/s13540-011-0023-7.
+
+[PAGE 13]
+POINTWISE GRADIENT ESTIMATE OF THE RITZ PROJECTION
+13
+[CF13]
+D. V. Cruz-Uribe and A. Fiorenza. Variable Lebesgue spaces. Applied and
+Numerical Harmonic Analysis. Foundations and harmonic analysis. Birkh¨au-
+ser/Springer, Heidelberg, 2013, pp. x+312. doi: 10.1007/978-3-0348-0548-3.
+[CH18]
+D. Cruz-Uribe and P. H¨ast¨o. “Extrapolation and interpolation in generalized
+Orlicz spaces”. In: Trans. Amer. Math. Soc. 370.6 (2018), pp. 4323–4349. doi:
+10.1090/tran/7155.
+[DDO20]
+I. Drelichman, R. G. Dur´an, and I. Ojea. “A weighted setting for the numerical
+approximation of the Poisson problem with singular sources”. In: SIAM J.
+Numer. Anal. 58.1 (2020), pp. 590–606. doi: 10.1137/18M1213105.
+[DE08]
+L. Diening and F. Ettwein. “Fractional estimates for non-diﬀerentiable elliptic
+systems with general growth”. In: Forum Math. 20.3 (2008), pp. 523–556. doi:
+10.1515/FORUM.2008.027.
+[DHHR11]
+L. Diening, P. Harjulehto, P. H¨ast¨o, and M. R˚uˇziˇcka. Lebesgue and Sobolev spa-
+ces with variable exponents. Vol. 2017. Lecture Notes in Mathematics. Springer,
+Heidelberg, 2011, pp. x+509. doi: 10.1007/978-3-642-18363-8.
+[DLSW12]
+A. Demlow, D. Leykekhman, A. H. Schatz, and L. B. Wahlbin. “Best ap-
+proximation property in the W 1
+∞norm for ﬁnite element methods on graded
+meshes”. In: Math. Comp. 81.278 (2012), pp. 743–764. doi: 10.1090/S0025-
+5718-2011-02546-9.
+[Fro93]
+S. J. Fromm. “Potential space estimates for Green potentials in convex do-
+mains”. In: Proc. Amer. Math. Soc. 119.1 (1993), pp. 225–233. doi: 10.2307/
+2159846.
+[GLRS09]
+J. Guzm´an, D. Leykekhman, J. Rossmann, and A. H. Schatz. “H¨older estimates
+for Green’s functions on convex polyhedral domains and their applications to
+ﬁnite element methods”. In: Numer. Math. 112.2 (2009), pp. 221–243. doi:
+10.1007/s00211-009-0213-y.
+[Gra14a]
+L. Grafakos. Classical Fourier analysis. Third. Vol. 249. Graduate Texts in
+Mathematics. Springer, New York, 2014, pp. xviii+638. doi: 10.1007/978-1-
+4939-1194-3.
+[Gra14b]
+L. Grafakos. Modern Fourier analysis. Third. Vol. 250. Graduate Texts in
+Mathematics. Springer, New York, 2014, pp. xvi+624. doi: 10.1007/978-1-
+4939-1230-8.
+[GW82]
+M. Gr¨uter and K.-O. Widman. “The Green function for uniformly elliptic
+equations”. In: Manuscripta Math. 37.3 (1982), pp. 303–342. doi: 10.1007/
+BF01166225.
+[KK91]
+V. Kokilashvili and M. Krbec. Weighted inequalities in Lorentz and Orlicz
+spaces. World Scientiﬁc Publishing Co., Inc., River Edge, NJ, 1991, pp. xii+233.
+doi: 10.1142/9789814360302.
+[KM01]
+A. Y. Karlovich and L. Maligranda. “On the interpolation constant for Orlicz
+spaces”. In: Proc. Amer. Math. Soc. 129.9 (2001), pp. 2727–2739. doi: 10.1090/
+S0002-9939-01-06162-7.
+[KR61]
+M. A. Krasnoselskii and J. B. Rutickii. Convex functions and Orlicz spaces.
+Translated from the ﬁrst Russian edition by Leo F. Boron. P. NoordhoﬀLtd.,
+Groningen, 1961, pp. xi+249.
+[Nat75]
+F. Natterer. “¨Uber die punktweise Konvergenz ﬁniter Elemente”. In: Numer.
+Math. 25.1 (1975), pp. 67–77. doi: 10.1007/BF01419529.
+[Nit75]
+J. A. Nitsche. “L∞-convergence of ﬁnite element approximation”. In: Journ´ees
+“´El´ements Finis” (Rennes, 1975). Univ. Rennes, Rennes, 1975, p. 18.
+[NOS15]
+R. H. Nochetto, E. Ot´arola, and A. J. Salgado. “A PDE approach to fractional
+diﬀusion in general domains: a priori error analysis”. In: Found. Comput. Math.
+15.3 (2015), pp. 733–791. doi: 10.1007/s10208-014-9208-x.
+[RS82]
+R. Rannacher and R. Scott. “Some optimal error estimates for piecewise linear
+ﬁnite element approximations”. In: Math. Comp. 38.158 (1982), pp. 437–445.
+doi: 10.2307/2007280.
+
+[PAGE 14]
+14
+L. DIENING, J. ROLFES, A.J. SALGADO
+[Sim64]
+I. B. Simonenko. “Interpolation and extrapolation of linear operators in Orlicz
+spaces”. In: Mat. Sb. (N.S.) 63 (105) (1964), pp. 536–553.
+[Ste70]
+E. M. Stein. Singular integrals and diﬀerentiability properties of functions.
+Princeton Mathematical Series, No. 30. Princeton University Press, Princeton,
+N.J., 1970, pp. xiv+290.
+[SZ90]
+L. R. Scott and S. Zhang. “Finite element interpolation of nonsmooth functions
+satisfying boundary conditions”. In: Math. Comp. 54.190 (1990), pp. 483–493.
+doi: 10.2307/2008497.
+[Tor04]
+A. Torchinsky. Real-variable methods in harmonic analysis. Reprint of the 1986
+original [Dover, New York; MR0869816]. Dover Publications, Inc., Mineola,
+NY, 2004, pp. xiv+462.

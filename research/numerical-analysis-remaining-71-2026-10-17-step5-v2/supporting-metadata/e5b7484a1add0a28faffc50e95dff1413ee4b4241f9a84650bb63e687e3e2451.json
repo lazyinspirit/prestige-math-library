@@ -1,0 +1,832 @@
+[
+  {
+    "order": 2584,
+    "id": "delaunay-triangulations-and-voronoi-computation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Delaunay triangulations and voronoi computation",
+    "companion": "delaunay-triangulations-and-voronoi-computation-examples",
+    "requires": [
+      "certified-geometric-predicates",
+      "polynomial-interpolation-and-remainder"
+    ],
+    "items": [
+      {
+        "id": "def-indexed-geometric-site-set",
+        "kind": "definition",
+        "title": "Finite indexed geometric site sets and duplicate handling",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+        "source_path": "items/def-indexed-geometric-site-set.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-complete-ordered-field-is-archimedean",
+        "kind": "lemma",
+        "title": "A complete ordered field has cofinal canonical integers",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Let $F$ be a Dedekind-complete ordered field with $1_F>0$. For every $x\\in F$, some canonical integer $n\\cdot1_F$ satisfies $x<n\\cdot1_F$.",
+        "source_path": "items/lem-complete-ordered-field-is-archimedean.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Truman, Bruckner, and Bruckner, Elementary Real Analysis, 2nd ed., Section 1.7, The Archimedean Property",
+              "url": "https://people.math.sc.edu/girardi/m5545/TBB-AllChapters-Landscape.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-linear-cardinal-interpolant-on-an-edge",
+        "kind": "lemma",
+        "title": "The affine edge interpolant is the unique degree-at-most-one cardinal polynomial",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Let $F$ be a field, let $a,b\\in F$ with $a\\ne b$, and let $y_0,y_1\\in F$. The unique polynomial $P\\in F[X]$ of degree at most one with $P(a)=y_0$ and $P(b)=y_1$ is\n$$P(X)=y_0+(y_1-y_0)\\frac{X-a}{b-a}.$$",
+        "source_path": "items/lem-linear-cardinal-interpolant-on-an-edge.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-lexicographic-lift-tie-break",
+        "kind": "definition",
+        "title": "Stable-id lexicographic lift perturbation for cocircular and power ties",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-certified-geometric-predicate-determinants"
+        ],
+        "justified_by": [
+          "thm-lexicographic-lift-tie-break-consistent"
+        ],
+        "dependency_level": 1,
+        "statement": "Take a fixed finite universe $U$ of indexed sites as in [[def-indexed-geometric-site-set]], dimension $d\\in\\{2,3\\}$, and an ordered tuple of $d+2$ sites from $U$ with distinct identifiers. A computation using auxiliary sites, such as a planar supertriangle, includes those sites in $U$ from the start and assigns them distinct deterministic integer identifiers. Require that the first $d+1$ sites are affinely independent. Put $h_i=\\|p_i\\|^2-w_i$, with absent weights interpreted as $0$. Rank all identifiers of $U$ in increasing order, starting at rank $0$, and define\n$$P(\\varepsilon)=\\det\\bigl((p_i,h_i+\\varepsilon^{2^{r_i}},1)\\bigr)_{i=0}^{d+1}.$$\nRegard $\\varepsilon$ as a positive formal infinitesimal in the rational-function field $\\mathbb R(\\varepsilon)$, ordered so a nonzero polynomial has the sign of its coefficient at its least nonzero exponent. Expand this finite polynomial exactly and return the sign of its coefficient at the least exponent with nonzero coefficient. If the base is degenerate, return status degenerate-base. The same universe $U$ and ranks are used for every predicate tuple. The procedure never chooses or evaluates a numerical $\\varepsilon$. Its returned sign is the declared stable-id convention for the displayed weighted lifted determinant. When all weights are zero, its constant term is the raw lifted determinant in [[def-certified-geometric-predicate-determinants]]; for nonzero weights, replace that determinant's squared-norm column by $\\|p_i\\|^2-w_i$ before applying this convention.",
+        "source_path": "items/def-lexicographic-lift-tie-break.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22: Weighted Delaunay Triangulations",
+              "url": "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delaunay.pdf"
+            },
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations, Regular Triangulation",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-lifted-power-sphere-determinant-identity",
+        "kind": "lemma",
+        "title": "The lifted determinant records a power-sphere side",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-certified-geometric-predicate-determinants"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $d\\in\\{2,3\\}$, let $p_0,\\ldots,p_d,q\\in\\mathbb D^d$, and let their dyadic weights be $w_0,\\ldots,w_d,w_q$ (zero when absent). Assume $p_0,\\ldots,p_d$ are affinely independent. If $c\\in\\mathbb R^d$ and $R\\in\\mathbb R$ satisfy\n$$\\|p_i-c\\|^2-w_i=R\\qquad(0\\le i\\le d),$$\ndefine the power difference\n$$\\Delta(q)=\\|q-c\\|^2-w_q-R.$$\nLet $O_d$ be the determinant of the rows $(p_i,1)$ for $i=0,\\ldots,d$, and let $P_d$ be the determinant of the $d+2$ rows $(p_i,\\|p_i\\|^2-w_i,1)$, including the query row $(q,\\|q\\|^2-w_q,1)$. Then\n$$P_d=-O_d\\Delta(q),\\qquad O_dP_d=-O_d^2\\Delta(q).$$\nThus the sign of $O_dP_d$ is positive, zero or negative exactly when $q$ is respectively inside, on or outside the power sphere. When all weights are zero, this is the ordinary circumsphere convention.",
+        "source_path": "items/lem-lifted-power-sphere-determinant-identity.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 13: Delaunay Triangulations: Incremental Construction",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            },
+            {
+              "title": "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22: Weighted Delaunay Triangulations",
+              "url": "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delaunay.pdf"
+            },
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations, Regular Triangulation",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-voronoi-vertex-empty-circle",
+        "kind": "lemma",
+        "title": "A Voronoi vertex has a common empty circle of nearest sites",
+        "deps": [
+          "def-indexed-geometric-site-set"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $P\\subset\\mathbb R^2$ be finite and nonempty, and define $V(p)=\\{x:\\|x-p\\|^2\\le\\|x-q\\|^2\\ \\text{for all }q\\in P\\}$. If $x$ belongs to at least three distinct cells, then all sites whose cells contain $x$ lie on one circle centered at $x$, no site lies strictly inside that circle, and their convex hull is a polygon with those sites as its vertices.",
+        "source_path": "items/lem-voronoi-vertex-empty-circle.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 11",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-planar-delaunay-voronoi-structures",
+        "kind": "definition",
+        "title": "Planar triangulations, Delaunay structures, and Voronoi cells",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-lexicographic-lift-tie-break",
+          "lem-voronoi-vertex-empty-circle"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+        "source_path": "items/def-planar-delaunay-voronoi-structures.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lectures 11–13",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+        "kind": "definition",
+        "title": "Three-dimensional Delaunay and weighted regular triangulations by lifting",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "lem-lifted-power-sphere-determinant-identity",
+          "def-lexicographic-lift-tie-break"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For a weighted site $(p,w)$, define its power distance from $x\\in\\mathbb R^3$ by\n$$\\pi_{(p,w)}(x)=\\|x-p\\|^2-w.$$\nIts lifted point is $\\widehat p=(p,\\|p\\|^2-w)\\in\\mathbb R^4$. A lower face of the lifted convex hull is a face supported by a nonvertical hyperplane $z=\\ell(x)$ with every lifted site on or above that hyperplane. The projection of the union of lower faces is the **regular subdivision** of the projected sites; a simplex in that subdivision has an empty power sphere, meaning its common power distance is no larger than that of any input site.\n\nThe lex-refined lift is interpreted over the ordered rational-function field of [[def-lexicographic-lift-tie-break]], using one fixed finite universe of all input sites. When every weight is zero, the regular subdivision is the ordinary 3D Delaunay subdivision and power spheres are circumspheres. A weight configuration can hide a site: a weighted site is **hidden** if its lift is not a vertex of any lower face. A nonsimplicial lower face is refined with the same fixed-universe lexicographic lift convention. For projected affine dimension below three, the algorithm reports `lower-dimensional` with that dimension and the exact deduplicated site list, and makes no tetrahedralization claim. A tetrahedral output is claimed only on the full-dimensional branch with nondegenerate projected bases.",
+        "source_path": "items/def-three-dimensional-delaunay-and-weighted-regular-lower-hull.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22: Weighted Delaunay Triangulations",
+              "url": "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delaunay.pdf"
+            },
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations, Regular Triangulation",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-lexicographic-lift-tie-break-consistent",
+        "kind": "theorem",
+        "title": "The finite lexicographic lift tie-break is coherent",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-certified-geometric-predicate-determinants",
+          "lem-lifted-power-sphere-determinant-identity",
+          "def-lexicographic-lift-tie-break"
+        ],
+        "dependency_level": 2,
+        "statement": "Fix one finite universe $U$ of uniquely indexed dyadic sites and weights and a dimension $d\\in\\{2,3\\}$. For an ordered tuple of $d+2$ distinct sites whose first $d+1$ sites are affinely independent, the lexicographic lift procedure in [[def-lexicographic-lift-tie-break]] is the determinant sign of one common formal lifted configuration. Every exact nonzero power determinant retains its original sign, every exact zero has a nonzero polynomial tie determinant, and all tuples therefore receive mutually coherent signs. No numeric perturbation parameter is selected or assumed.",
+        "source_path": "items/thm-lexicographic-lift-tie-break-consistent.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22: Weighted Delaunay Triangulations",
+              "url": "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delaunay.pdf"
+            },
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations, Regular Triangulation",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-barycentric-point-location-interpolation-and-voronoi-query",
+        "kind": "definition",
+        "title": "Barycentric point location, affine interpolation, and nearest-site queries",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures"
+        ],
+        "justified_by": [
+          "thm-barycentric-interpolation-and-nearest-neighbor-query-correct"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $T$ be a nondegenerate triangle with ordered vertices $p_0,p_1,p_2\\in\\mathbb D^2$. For $x\\in\\mathbb R^2$, its **barycentric coordinates** are the unique scalars $\\lambda_0,\\lambda_1,\\lambda_2$ satisfying $\\sum_i\\lambda_i=1$ and $x=\\sum_i\\lambda_i p_i$. They are exact for dyadic $x$: they are obtained by solving the invertible $2\\times2$ system with columns $p_1-p_0,p_2-p_0$. The point is in $T$ exactly when all $\\lambda_i\\ge0$.\n\nGiven vertex data $f_0,f_1,f_2\\in\\mathbb R$, the **barycentric affine interpolant** on $T$ is $I_Tf(x)=\\sum_i\\lambda_i f_i$. A point-location result is a containing triangle of the triangulation, with a shared-edge or shared-vertex result allowed when the point lies on a face; outside the convex hull its status is `outside-hull` and no containing triangle is returned.\n\nFor a nonempty finite unweighted indexed site set $P$, the **nearest-site query** returns a site minimizing $\\|x-p\\|^2$, breaking ties by the least stable identifier. Its hull status is `inside-hull` for $x\\in\\operatorname{conv}P$ and `outside-hull` otherwise. The minimizer is returned in either case.",
+        "source_path": "items/def-barycentric-point-location-interpolation-and-voronoi-query.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lectures 11–13",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-euler-count-for-planar-triangulation",
+        "kind": "lemma",
+        "title": "Euler counting for a finite planar triangulation",
+        "deps": [
+          "def-planar-delaunay-voronoi-structures"
+        ],
+        "dependency_level": 3,
+        "statement": "For a finite triangulation of the convex hull of $n$ distinct planar sites of affine dimension two, let $k$ be the number of sites on the hull boundary, $E$ the number of edges, and $T$ the number of bounded triangular faces. Then\n$$3T=2E-k,\\qquad n-E+T=1,$$\nand consequently $T=2n-2-k$ and $E=3n-3-k$.",
+        "source_path": "items/lem-euler-count-for-planar-triangulation.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 12",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-large-delaunay-supertriangle-exists",
+        "kind": "lemma",
+        "title": "A dyadic supertriangle contains the sites and excludes every input circumcircle",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "lem-complete-ordered-field-is-archimedean"
+        ],
+        "dependency_level": 3,
+        "statement": "For every finite full-dimensional dyadic planar site set, a dyadic supertriangle can be chosen to contain every input site strictly and to have all three vertices strictly outside every circumcircle through a noncollinear input triple. If the input has no three collinear and no four cocircular sites, the supertriangle can additionally be chosen so the augmented set has no three collinear sites and no four cocircular sites.",
+        "source_path": "items/lem-large-delaunay-supertriangle-exists.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9, Sections 9.2–9.3",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 13",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-lifted-flip-potential-decreases",
+        "kind": "lemma",
+        "title": "An illegal planar Delaunay flip strictly decreases lifted interpolation volume",
+        "deps": [
+          "def-planar-delaunay-voronoi-structures",
+          "lem-lifted-power-sphere-determinant-identity",
+          "def-lexicographic-lift-tie-break",
+          "thm-lexicographic-lift-tie-break-consistent"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $ABCD$ be a strictly convex planar quadrilateral in counterclockwise boundary order. Lift its four sites using the common formal heights of [[def-lexicographic-lift-tie-break]]. Let $g_{AC}$ and $g_{BD}$ be the piecewise-affine interpolants on the two diagonal triangulations. Define each interpolant's integral over the quadrilateral as the sum over its two triangles of triangle area times the average of the three vertex heights. If the lifted point $D$ lies strictly below the affine plane through the lifts of $A,B,C$ (the illegal-incircle sign by the coefficientwise determinant identity), then\n$$\\int_{ABCD}g_{BD}<\\int_{ABCD}g_{AC}$$\nin the lexicographic order of the formal lift field.",
+        "source_path": "items/lem-lifted-flip-potential-decreases.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9, Section 9.2",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 13",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            },
+            {
+              "title": "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22",
+              "url": "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delaunay.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-lower-lifted-facets-cover-the-convex-hull",
+        "kind": "lemma",
+        "title": "Generic lower lifted facets project to a triangulation of the convex hull",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-lexicographic-lift-tie-break",
+          "thm-lexicographic-lift-tie-break-consistent",
+          "lem-lifted-power-sphere-determinant-identity"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $d\\in\\{2,3\\}$ and let $P$ be a finite indexed weighted site set of affine dimension $d$ in $\\mathbb R^d$. Lift each site to height $h_i=\\|p_i\\|^2-w_i+\\varepsilon^{2^{r_i}}$ in the fixed ordered formal field of [[def-lexicographic-lift-tie-break]]. A **lower simplex** is the projection of $d+1$ affinely independent lifted sites whose graph hyperplane has every lifted site on or above it. Then the lower simplices cover $\\operatorname{conv}(P)$ and intersect in common faces. Each lower simplex has a weakly empty power sphere for the original unperturbed weighted sites.",
+        "source_path": "items/lem-lower-lifted-facets-cover-the-convex-hull.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations, The Delaunay and Regular Triangulations",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-simplicial-four-polytope-facet-count",
+        "kind": "lemma",
+        "title": "A convex 4-polytope has at most m(m−3)/2 facets",
+        "deps": [
+          "lem-euler-count-for-planar-triangulation"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $Q$ be a full-dimensional convex polytope in $\\mathbb R^4$ with $m\\ge5$ vertices. A facet is a three-dimensional face, and a vertex is an extreme point. Then the number $f_3$ of facets satisfies\n$$f_3\\le \\frac{m(m-3)}2.$$",
+        "source_path": "items/lem-simplicial-four-polytope-facet-count.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations, Complexity and Performance",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-barycentric-interpolation-and-nearest-neighbor-query-correct",
+        "kind": "theorem",
+        "title": "Barycentric interpolation and nearest-site queries are correct",
+        "deps": [
+          "def-barycentric-point-location-interpolation-and-voronoi-query",
+          "def-planar-delaunay-voronoi-structures",
+          "lem-linear-cardinal-interpolant-on-an-edge"
+        ],
+        "dependency_level": 4,
+        "statement": "On every nondegenerate triangle, a point lies in the triangle if and only if its unique barycentric coordinates are all nonnegative; these coordinates also give the unique affine interpolant matching the three vertex data. Interpolants on adjacent triangles with common vertex data agree on their shared face. On an edge, the interpolant is the degree-one cardinal polynomial interpolant. For every nonempty finite site set, the nearest-site query returns a minimizer, breaks ties by least identifier, and reports correctly whether the query is inside or outside the convex hull.",
+        "source_path": "items/thm-barycentric-interpolation-and-nearest-neighbor-query-correct.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 11",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-planar-triangle-and-edge-count",
+        "kind": "theorem",
+        "title": "A planar triangulation has linearly many triangles and edges",
+        "deps": [
+          "def-planar-delaunay-voronoi-structures",
+          "lem-euler-count-for-planar-triangulation"
+        ],
+        "dependency_level": 4,
+        "statement": "For a triangulation of the convex hull of $n$ distinct planar sites with affine dimension two, let $k$ be the number of sites on the hull boundary, $T$ the number of triangles, and $E$ the number of edges. Then\n$$T=2n-2-k,\\qquad E=3n-3-k.$$\nIn particular $T<2n$ and $E<3n$.",
+        "source_path": "items/thm-planar-triangle-and-edge-count.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 13",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-incremental-planar-delaunay-edge-flips",
+        "kind": "algorithm",
+        "title": "Incremental planar Delaunay insertion with exact edge flips",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "def-lexicographic-lift-tie-break",
+          "alg-certified-dyadic-geometric-predicate",
+          "lem-large-delaunay-supertriangle-exists"
+        ],
+        "justified_by": [
+          "thm-incremental-planar-delaunay-correctness-and-termination"
+        ],
+        "dependency_level": 5,
+        "statement": "Input is a nonempty finite indexed planar list of exact dyadic sites and optionally a prescribed insertion permutation. Collapse equal coordinates to the least stable identifier. If no permutation is supplied, use increasing stable-identifier order; otherwise require the permutation to list each deduplicated site exactly once. If the affine dimension is zero, return the single site; if it is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and return the consecutive chain. These branches return no triangles.\n\nFor affine dimension two, run `CHOOSE-SUPERTRIANGLE(P,g)` before insertion, where $g=0$ in an ordinary batch run and $g=1$ when a caller requires the augmented general-position condition. Enumerate ordered triples of dyadic points by increasing height $H=0,1,2,\\ldots$: represent each dyadic coordinate uniquely as $m/2^k$ with $k\\ge0$ and either $k=0$ or odd $m$, and at height $H$ enumerate lexicographically the six coordinate representations with $|m|,k\\le H$ and maximum $H$. For each candidate triple, reject coincident vertices or zero orientation; if its orientation is negative, swap the second and third vertices so it is counterclockwise. Reject it unless all input sites have strictly positive orientation against each of its three directed edges. For every noncollinear input triple and each candidate vertex, call [[alg-certified-dyadic-geometric-predicate]] for its exact orientation-normalized raw incircle sign and reject unless that sign is negative (outside). If $g=1$, test each input triple for zero orientation and each input four-site subset for zero raw incircle determinant; return `invalid-general-position-request` if either occurs. For each remaining candidate, also test every augmented triple for zero orientation and every augmented four-site subset for zero raw incircle determinant, rejecting that candidate if any test is zero. Return the first accepted triangle. The enumeration is deterministic and finite at each height; [[lem-large-delaunay-supertriangle-exists]] guarantees that an accepted candidate occurs for $g=0$, and also for $g=1$ under its general-position hypothesis. Assign the three synthetic vertices, in their enumerated order after the orientation correction, the consecutive integer identifiers immediately below the least input identifier. This fixes the universe $U$ and all lexicographic ranks before insertion. Initialize the current triangulation to the supertriangle and maintain its finite triangle list and edge incidences.\n\nExpose the following state update `INSERT(p,L)`, where $p$ is a not-yet-inserted input site and $L$ is an optional location certificate. Its admissibility condition is that $p$ lies strictly inside the current triangulated hull. A face certificate names one current triangle $abc$ and is valid exactly when the three exact orientation tests put $p$ strictly in its interior. An edge certificate names an interior edge $uv$ and its two current incident triangles; it is valid exactly when $p$ lies strictly between $u$ and $v$ and those are the two triangles incident to $uv$. If a supplied certificate is invalid, return `invalid-location` without changing the triangulation. If $L$ is absent, scan the finite current triangle list in increasing lexicographic order of the sorted vertex identifiers. For each triangle $abc$, compute $s=\\operatorname{sgn}\\operatorname{orient}(a,b,c)$ and the three signs $s_{ab}=\\operatorname{sgn}\\operatorname{orient}(a,b,p)$, $s_{bc}=\\operatorname{sgn}\\operatorname{orient}(b,c,p)$, and $s_{ca}=\\operatorname{sgn}\\operatorname{orient}(c,a,p)$. If $ss_{ab},ss_{bc},ss_{ca}$ are all positive, use the face certificate for $abc$. If exactly one is zero and the other two are positive, use the edge certificate for that edge and its two incident triangles; if it is a hull edge, return `boundary-edge`. Two or more zero signs put $p$ at an existing vertex, contrary to the distinct-site input, and return `duplicate-vertex`. If the scan finds no containing face or interior edge, return `outside-hull`.\n\nFor a face certificate, replace its triangle by the three triangles joining $p$ to its edges. For an interior-edge certificate, replace its two incident triangles by the four triangles joining $p$ to the edge endpoints and the two opposite vertices. Then call `LEGALIZE(p,uv)` once on each distinct new edge $uv$ opposite $p$, in lexicographic order of its endpoint identifiers. In each call, order $u,v$ by stable identifier and let $w$ be the third vertex of the adjacent triangle. Compute the exact orientation determinant $O$ on rows $(u,v,w)$ and the raw lifted determinant sign $L$ on rows $(u,v,w,p)$ using [[alg-certified-dyadic-geometric-predicate]]. If $O=0$, return `degenerate-base`. If $L\\ne0$, set the normalized sign to $\\operatorname{sgn}(O)L$. If $L=0$, take the sign $L_{\\rm lex}$ selected from the common formal height perturbation of [[def-lexicographic-lift-tie-break]] on the same row order and set the normalized sign to $\\operatorname{sgn}(O)L_{\\rm lex}$. A positive normalized sign means illegal; a negative sign means legal; zero is treated as legal. Boundary edges have no adjacent triangle and are legal. If an edge is illegal, test strict convexity with exact orientations: both $p,w$ must lie on opposite sides of $uv$, and $u,v$ must lie on opposite sides of $pw$. If either product of the corresponding two orientation signs is not negative, return `invalid-triangulation`. Otherwise flip $uv$ to $pw$, record the replacement event, and recursively call `LEGALIZE(p,uw)` and `LEGALIZE(p,wv)` in lexicographic order. Each face split, edge split, and flip records its removed triangles, created triangles, and overlap map: one-to-three for a face split, two-to-two-within-each-old-face for an edge split, and both new triangles for each old face at a flip. `INSERT` returns these events in execution order with the updated triangulation. A batch run calls `INSERT(p,none)` for each site in the chosen permutation, discards the event lists, halts with any returned status, and otherwise returns the remaining triangles and their edges after deleting triangles incident to synthetic vertices.\n\nThe exact raw predicate and its tie-break are separate: [[alg-certified-dyadic-geometric-predicate]] returns exact raw signs including zero; a zero nondegenerate-base sphere test is resolved by the common formal height perturbation in this algorithm. The procedure never chooses or evaluates a numerical $\\varepsilon$. A degenerate base is reported as `degenerate-base` and is not flipped.",
+        "source_path": "items/alg-incremental-planar-delaunay-edge-flips.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9, Sections 9.2–9.3",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 13",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-incremental-three-dimensional-regular-cavity-repair",
+        "kind": "algorithm",
+        "title": "Finite exact 3D Delaunay and regular lower-hull cavity repair",
+        "deps": [
+          "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+          "def-lexicographic-lift-tie-break",
+          "alg-certified-dyadic-geometric-predicate",
+          "alg-exact-dyadic-determinant-sign",
+          "thm-lexicographic-lift-tie-break-consistent"
+        ],
+        "justified_by": [
+          "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination"
+        ],
+        "dependency_level": 5,
+        "statement": "Input is a finite indexed list of dyadic sites in $\\mathbb R^3$, each with an optional dyadic weight. Collapse only exact duplicate coordinate-weight pairs, retaining the least identifier. If the projected set has affine dimension less than three, return `lower-dimensional`, that dimension, and the exact deduplicated list; do not assert tetrahedra.\n\nFor affine dimension three, fix the finite lexicographic universe before insertion. Process sites in stable-id order (any stated permutation is allowed if it is fixed before processing). At each prefix, enumerate every four-site subset. If its projected base is affinely dependent, record that tuple with status `degenerate-base` and omit it from tetrahedral candidates. Otherwise solve the unique affine height plane through its four lifted sites. Retain the tetrahedron exactly when every other lifted site in that prefix lies on or above this plane in the ordered formal field of [[def-lexicographic-lift-tie-break]].\n\nAfter adding a site, delete old tetrahedra whose plane the new lift violates, retain old tetrahedra still supporting, and add every newly supporting tetrahedron containing the inserted site. This finite set difference is the **cavity repair**; no geometric connectivity or running-time bound is asserted. After the final prefix, report the retained lower tetrahedra, the finite `degenerate-base` tuple list, and every weighted site absent from the lower tetrahedra as `hidden`.\n\nFor ordinary orientation use [[alg-certified-dyadic-geometric-predicate]]. For weighted lower tests, form the exact dyadic matrix with lifted column $\\|p\\|^2-w$ and evaluate the finite formal perturbation coefficients using exact integer determinant signs from [[alg-exact-dyadic-determinant-sign]]. The raw exact predicate keeps zero; the formal lift is applied only by this algorithm's declared tie convention.",
+        "source_path": "items/alg-incremental-three-dimensional-regular-cavity-repair.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22: Weighted Delaunay Triangulations",
+              "url": "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delaunay.pdf"
+            },
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations, Regular Triangulations and Conflict Zones",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-randomized-history-dag-point-location",
+        "kind": "algorithm",
+        "title": "Randomized planar point location by a history DAG",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "alg-incremental-planar-delaunay-edge-flips",
+          "lem-large-delaunay-supertriangle-exists"
+        ],
+        "justified_by": [
+          "thm-randomized-history-dag-expected-location-cost"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume a finite full-dimensional planar site set in general position: no three input sites are collinear and no four are cocircular. Choose the augmented dyadic supertriangle by calling `CHOOSE-SUPERTRIANGLE(P,1)` from [[alg-incremental-planar-delaunay-edge-flips]], so the full augmented set has no three collinear sites and no four cocircular sites. Fix the common tie ranks before processing.\n\nDraw one permutation uniformly from all $n!$ permutations of the distinct input sites. Initialize the fixed-universe supertriangle and current triangulation as in [[alg-incremental-planar-delaunay-edge-flips]], and maintain a directed acyclic graph (DAG) whose leaves correspond one-to-one with current triangulation triangles. Initially the DAG has one leaf for the supertriangle.\n\nFor each next site $p$, start at the root. At each node, order its child triangles lexicographically by their sorted vertex identifiers and test each child by the same three signed-orientation containment tests used by `INSERT` in [[alg-incremental-planar-delaunay-edge-flips]]. Descend to the unique child containing $p$ until reaching a current leaf $T$. Under the augmented general-position condition, $p$ lies in the interior of a unique triangle at every stage; the located leaf therefore supplies the face certificate `face(T)`. Call `INSERT(p,face(T))` from [[alg-incremental-planar-delaunay-edge-flips]]. The update verifies that certificate, uses it without a triangle scan, and returns the ordered replacement events. Process those events in order: for a face split, replace the old leaf by pointers to its three new triangle leaves; for an interior-edge split, replace each of the two old leaves by pointers to the two new triangles whose interiors meet that old triangle; for a flip, point each of the two old leaves to both new triangle leaves. Each event names the triangles and overlap map as specified by the insertion procedure. A leaf replaced later is treated in the same way, so the graph remains acyclic and its current leaves correspond exactly to the current triangulation. The insertion procedure also accepts an interior-edge certificate from callers whose admissible inputs permit edge hits; this randomized variant's general-position condition excludes that case. Each internal node has at most three children. After construction, remove synthetic-vertex triangles for the returned Delaunay triangulation; the history DAG is the insertion-time point-location structure.",
+        "source_path": "items/alg-randomized-history-dag-point-location.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9, Sections 9.3–9.4",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 13",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-incremental-planar-delaunay-correctness-and-termination",
+        "kind": "theorem",
+        "title": "Exact planar insertion terminates with a weak empty-circle triangulation",
+        "deps": [
+          "alg-incremental-planar-delaunay-edge-flips",
+          "lem-large-delaunay-supertriangle-exists",
+          "def-planar-delaunay-voronoi-structures",
+          "lem-lifted-power-sphere-determinant-identity",
+          "thm-lexicographic-lift-tie-break-consistent",
+          "lem-lifted-flip-potential-decreases",
+          "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+          "lem-lower-lifted-facets-cover-the-convex-hull"
+        ],
+        "dependency_level": 6,
+        "statement": "For every nonempty finite indexed dyadic planar site set, after duplicate collapse the algorithm of [[alg-incremental-planar-delaunay-edge-flips]] terminates. In the affine-dimension-two branch, after each insertion the augmented triangles are exactly the $d=2$ lower simplices of the inserted sites together with the three synthetic vertices, as defined in [[lem-lower-lifted-facets-cover-the-convex-hull]], using the restriction of the common fixed-universe formal heights to that prefix. Uninserted sites are excluded from the prefix support tests; the universe and ranks remain fixed throughout. After removing synthetic vertices, the output triangulates the input convex hull with weakly empty original circumdisks and coherent lexicographic ties. In dimensions zero and one, the algorithm returns the defined single site or consecutive chain.",
+        "source_path": "items/thm-incremental-planar-delaunay-correctness-and-termination.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9, Sections 9.2–9.3",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 13",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination",
+        "kind": "theorem",
+        "title": "Exact 3D lower-hull insertion covers the hull and terminates",
+        "deps": [
+          "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+          "alg-incremental-three-dimensional-regular-cavity-repair",
+          "lem-lifted-power-sphere-determinant-identity",
+          "thm-lexicographic-lift-tie-break-consistent",
+          "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+          "alg-exact-dyadic-determinant-sign",
+          "lem-lower-lifted-facets-cover-the-convex-hull"
+        ],
+        "dependency_level": 6,
+        "statement": "For a finite dyadic weighted site set of projected affine dimension three, the algorithm of [[alg-incremental-three-dimensional-regular-cavity-repair]] terminates. Its output tetrahedra cover the convex hull, meet in common faces, and have empty power spheres in the original weak sense. In the zero-weight case they are ordinary Delaunay tetrahedra. A site is hidden in the fixed formal lower hull if and only if it is omitted from every output tetrahedron. The algorithm reports every coplanar four-site base as `degenerate-base` and makes no tetrahedralization claim on the lower-dimensional branch.",
+        "source_path": "items/thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22: Weighted Delaunay Triangulations",
+              "url": "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delaunay.pdf"
+            },
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations, The Delaunay and Regular Triangulations",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-randomized-history-dag-expected-location-cost",
+        "kind": "theorem",
+        "title": "Uniform random insertion gives expected O(n log n) location work",
+        "deps": [
+          "alg-randomized-history-dag-point-location",
+          "thm-incremental-planar-delaunay-correctness-and-termination",
+          "thm-planar-triangle-and-edge-count",
+          "lem-lifted-power-sphere-determinant-identity"
+        ],
+        "dependency_level": 7,
+        "statement": "For a full-dimensional planar input in general position, augmented by a fixed supertriangle so the full set is also in general position, a uniform random permutation, the local insertion updates, and history DAG of [[alg-randomized-history-dag-point-location]] give expected $O(n\\log n)$ total point-location work in the exact-predicate-call model. Triangle creation and DAG storage have expected $O(n)$ size. A conservative worst-case bound for all location walks is $O(n^3)$; no randomized expected bound is asserted for nonuniform or adversarial insertion orders.",
+        "source_path": "items/thm-randomized-history-dag-expected-location-cost.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9, Sections 9.3–9.4, Theorem 9.12 and Lemma 9.13",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 13",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-three-dimensional-delaunay-output-size-quadratic",
+        "kind": "theorem",
+        "title": "Three-dimensional Delaunay and regular output size is quadratic",
+        "deps": [
+          "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+          "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination",
+          "lem-simplicial-four-polytope-facet-count",
+          "thm-lexicographic-lift-tie-break-consistent"
+        ],
+        "dependency_level": 7,
+        "statement": "For $n\\ge4$ weighted sites of projected affine dimension three, the number of 3D Delaunay tetrahedra or weighted regular tetrahedra returned by the fixed formal lift is at most $n(n-3)/2$, hence $O(n^2)$. No planar $O(n)$ bound or mesh-quality guarantee is asserted.",
+        "source_path": "items/thm-three-dimensional-delaunay-output-size-quadratic.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "CGAL 6.3 User Manual, 3D Triangulations, Complexity and Performance",
+              "url": "https://cgal.github.io/9465/doc/Triangulation_3/index.html"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2585,
+    "id": "delaunay-triangulations-and-voronoi-computation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Delaunay triangulations and voronoi computation — Examples",
+    "companion": "delaunay-triangulations-and-voronoi-computation",
+    "requires": [
+      "delaunay-triangulations-and-voronoi-computation"
+    ],
+    "items": [
+      {
+        "id": "ex-cocircular-four-site-lexicographic-tie",
+        "kind": "example",
+        "title": "A cocircular four-site tie selects the stable-id diagonal",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "def-lexicographic-lift-tie-break",
+          "thm-lexicographic-lift-tie-break-consistent",
+          "thm-incremental-planar-delaunay-correctness-and-termination"
+        ],
+        "dependency_level": 7,
+        "statement": "For the square sites $A=(0,0),B=(1,0),C=(1,1),D=(0,1)$ with identifiers $1,2,3,4$ and zero weights, the unperturbed lifts are coplanar. In the four-site universe the perturbation $h_i=\\|p_i\\|^2+\\varepsilon^{2^{r_i}}$ selects diagonal $BD$. Adding three synthetic identifiers below these four sites multiplies all four perturbation exponents by $8$, so the algorithm's augmented universe selects the same diagonal. Both selected triangles are weakly empty in the original, unperturbed sense.",
+        "source_path": "items/ex-cocircular-four-site-lexicographic-tie.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "Don Sheehy, Computational Geometry, Fall 2014, Lecture 22",
+              "url": "https://donsheehy.net/courses/comp_geom/2014_fall/notes/22_weighted_delaunay.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-collinear-sites-lower-dimensional-output",
+        "kind": "example",
+        "title": "Collinear and duplicate sites return a canonical chain",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "thm-incremental-planar-delaunay-correctness-and-termination",
+          "thm-planar-triangle-and-edge-count"
+        ],
+        "dependency_level": 7,
+        "statement": "For unweighted sites with distinct ids at $(0,0),(1,0),(1,0),(2,0)$, duplicate collapse retains the least id at $(1,0)$, and the affine-dimension-one output is the ordered two-edge chain from $(0,0)$ to $(2,0)$.",
+        "source_path": "items/ex-collinear-sites-lower-dimensional-output.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9, Section 9.1",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 11",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-scattered-linear-interpolation-over-delaunay-cell",
+        "kind": "example",
+        "title": "A scattered affine interpolant on one Delaunay cell",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "def-barycentric-point-location-interpolation-and-voronoi-query",
+          "thm-barycentric-interpolation-and-nearest-neighbor-query-correct",
+          "thm-incremental-planar-delaunay-correctness-and-termination"
+        ],
+        "dependency_level": 7,
+        "statement": "On the Delaunay triangle with vertices $(0,0),(2,0),(0,2)$ and vertex data $0,2,2$, the query $(1/2,1/2)$ has barycentric weights $1/2,1/4,1/4$ and affine interpolated value $1$.",
+        "source_path": "items/ex-scattered-linear-interpolation-over-delaunay-cell.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 3rd ed., Chapter 9",
+              "url": "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+            },
+            {
+              "title": "David M. Mount, CMSC 754 Computational Geometry, Lecture 11",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/compgeom/2021/refs/Mount.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,503 @@
+[
+  {
+    "order": 2644,
+    "id": "overlapping-schwarz-and-stable-subspace-decompositions",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Overlapping Schwarz and stable subspace decompositions",
+    "companion": "overlapping-schwarz-and-stable-subspace-decompositions-examples",
+    "requires": [
+      "multigrid-methods-and-complexity",
+      "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "mixed-finite-elements-and-stokes-stability"
+    ],
+    "items": [
+      {
+        "id": "lem-schwarz-p1-product-cutoff-interpolation-energy-estimate",
+        "kind": "lemma",
+        "title": "Elementwise P1 product-cutoff energy estimate",
+        "dependency_level": 0,
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field"
+        ],
+        "statement": "Assume Countable Choice. Let $d\\ge2$ and let $K$ be a nondegenerate affine\n$d$-simplex in a shape-regular mesh with $h_K/\\rho_K\\le\\sigma$. Let\n$\\theta,w\\in\\mathbb P_1(K)$. Let $I_K(\\theta w)\\in\\mathbb P_1(K)$ be the affine\nfunction whose values at the vertices of $K$ are the nodal values of\n$\\theta w$. There is a constant $C$ depending only on $d$ and the shape\nregularity bound $\\sigma$ such that\n$$ \\|\\nabla I_K(\\theta w)\\|_{L^2(K)} \\le C\\bigl(\\|\\theta\\nabla w\\|_{L^2(K)} +\\|w\\nabla\\theta\\|_{L^2(K)}\\bigr). $$",
+        "strategy": "Use vertex differences of the affine nodal product, affine scaling of barycentric gradients, and finite-dimensional L2 control of P1 nodal values.",
+        "local_order": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.3 and 4.1–4.2, pp. 585–594: subspace corrections, additive preconditioner, stable splitting, and strengthened Cauchy–Schwarz."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 4, §§4.1–4.3, printed pp. 57–66, and Chapter 5 §5.3, printed pp. 79–80: abstract Schwarz operators and Lemma 5.7 on energy stability of P1 interpolation of P2 products."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-overlapping-schwarz-subspace-correction-data",
+        "kind": "definition",
+        "title": "Finite-dimensional Schwarz subspace-correction data",
+        "dependency_level": 2,
+        "deps": [
+          "def-galerkin-coarse-grid-correction",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "def-matrix-product-and-identity-matrix",
+          "prop-transpose-laws"
+        ],
+        "justified_by": [
+          "lem-schwarz-local-matrices-are-well-defined"
+        ],
+        "statement": "Define one-level or two-level finite-dimensional Schwarz data using a finite ordered index set of full-rank prolongations, SPD local matrices, exact and inexact local solves, an additive preconditioner, and an ordered multiplicative sweep.",
+        "strategy": "Specify global and local spaces, restrictions/prolongations, exact and inexact local solves, the coarse space, and the additive and multiplicative operators in exact arithmetic.",
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.3 and 4.1–4.2, pp. 585–594: subspaces, local solves, additive and successive correction operators."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 4 §§4.1–4.3, printed pp. 57–66: local projections and abstract additive/multiplicative Schwarz theory."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-schwarz-local-matrices-are-well-defined",
+        "kind": "lemma",
+        "title": "Schwarz local matrices and exact solves are well defined",
+        "dependency_level": 3,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer",
+          "prop-transpose-laws"
+        ],
+        "statement": "Every restricted local matrix is SPD and its exact local solve exists uniquely; if a coarse index is present, its Galerkin matrix is SPD.",
+        "strategy": "Use the actual Galerkin coarse-projector supplier for i=0 and injectivity with the global energy for the remaining local matrices.",
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Section 3.1, pp. 585–586: restricted local SPD operators."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 4 §4.1, pp. 57–59: local restricted matrices and exact projection equations."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-two-level-p1-poisson-stable-decomposition",
+        "kind": "theorem",
+        "title": "Stable two-level P1 decomposition for structured Poisson meshes",
+        "dependency_level": 3,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "lem-schwarz-p1-product-cutoff-interpolation-energy-estimate",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-countable-choice"
+        ],
+        "statement": "On the stated nested uniform Freudenthal P1 meshes of (0,1)^d, d=2 or 3, with coarse diameter H and overlap radius h<=delta<=H/sqrt(d), every fine-grid function has a coarse-plus-local decomposition whose sum of squared Poisson energies is at most C_FE(1+(H/delta)^2) times its fine-grid energy. The constant is independent of mesh counts and overlap width.",
+        "strategy": "Apply the boundary-preserving Scott-Zhang coarse map, construct a nonnegative bounded-overlap partition of unity with gradient O(delta^{-1}), interpolate each cutoff times the coarse residual, and sum the local energy bounds.",
+        "local_order": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.3 and 4.1–4.2, pp. 585–594: subspace corrections, additive preconditioner, stable splitting, and strengthened Cauchy–Schwarz."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 3 §§3.2–3.4, pp. 41–50; Chapter 4 §§4.1–4.3, pp. 57–66; and Chapter 5 §§5.1–5.4, printed pp. 69–92: coarse interpolation, partition of unity, localization, and Lemma 5.13 stable splitting."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-schwarz-local-corrections-are-energy-orthogonal-projections",
+        "kind": "lemma",
+        "title": "Exact Schwarz local corrections are energy-orthogonal projections",
+        "dependency_level": 4,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "lem-schwarz-local-matrices-are-well-defined",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "prop-transpose-laws"
+        ],
+        "statement": "Every exact local correction is an idempotent A-self-adjoint projection onto its local space and satisfies the energy Pythagorean identity.",
+        "strategy": "Multiply the local restriction/prolongation formula and use the Galerkin supplier for the coarse space.",
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.2, pp. 585–587: exact restricted subspace equations and additive preconditioning."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 4 §§4.1–4.2, printed pp. 57–63: local orthogonal projections and additive Schwarz bounds."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-schwarz-additive-inverse-is-local-energy-minimum",
+        "kind": "lemma",
+        "title": "The additive Schwarz inverse minimizes summed local energy",
+        "dependency_level": 4,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "lem-schwarz-local-matrices-are-well-defined"
+        ],
+        "statement": "When the local spaces span the global space, the additive preconditioner is SPD and its inverse energy is the minimum summed local energy among all local decompositions.",
+        "strategy": "Assemble the local matrices block-diagonally, construct the unique feasible minimizer from B^{-1}x, and prove every other feasible vector adds a nonnegative nullspace energy.",
+        "local_order": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.2, pp. 585–587: exact restricted subspace equations and additive preconditioning."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 4 §§4.1–4.2, printed pp. 57–63: local orthogonal projections and additive Schwarz bounds."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-additive-schwarz-stable-decomposition-condition-number",
+        "kind": "theorem",
+        "title": "Additive Schwarz condition bound from stable decomposition and synthesis",
+        "dependency_level": 5,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "lem-schwarz-local-matrices-are-well-defined",
+          "lem-schwarz-local-corrections-are-energy-orthogonal-projections",
+          "lem-schwarz-additive-inverse-is-local-energy-minimum",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "statement": "If every x admits a decomposition with summed local energy at most C0||x||_A^2 and every local synthesis satisfies ||sum_i R_i z_i||_A^2<=C1 sum_i||z_i||_{A_i}^2, then lambda_min^A(BA)>=1/C0, lambda_max^A(BA)<=C1, and kappa_A(BA)<=C0 C1. If alpha A_i<=Atilde_i<=beta A_i for all local solvers, then kappa_A(Btilde A)<= (beta/alpha) C0 C1.",
+        "strategy": "Use the energy projection identity for the lower Rayleigh bound, the synthesis inequality for the upper bound, and variational inverse comparison for uniformly spectrally equivalent local solvers.",
+        "local_order": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Section 4.1, Theorem 4.1 and proof, printed pp. 591–592: stable splitting and strengthened Cauchy–Schwarz bound the spectrum of the additive preconditioner."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 4 §4.2, Lemmas 4.5 and 4.7 and Theorem 4.8, printed pp. 60–63."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-multiplicative-schwarz-exact-sweep-contraction",
+        "kind": "theorem",
+        "title": "Multiplicative Schwarz projection sweeps contract with explicit overlap constants",
+        "dependency_level": 6,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "lem-schwarz-local-corrections-are-energy-orthogonal-projections",
+          "thm-additive-schwarz-stable-decomposition-condition-number",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "statement": "Under a stable decomposition constant C0, additive upper bound C1, and a symmetric nonnegative local overlap matrix E with pairwise strengthened Cauchy-Schwarz constants and spectral norm rho, the exact coarse-first multiplicative sweep satisfies ||E_mult||_A^2<=1-1/(C0 K)<1, where K=1+2 C1+2(1+rho)^2. The product is ordered; no commutation of local projections is assumed.",
+        "strategy": "Telescope exact energy decreases, compare additive projection energies to sweep corrections using the overlap matrix, and apply the stable lower Rayleigh bound.",
+        "local_order": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Section 4.1, Lemma 4.3 and Theorem 4.4, printed pp. 592–593: ordered projection products and telescoped energy decreases."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 4 §4.3, Theorem 4.10 and proof, printed pp. 63–66: multiplicative contraction from stable splitting and overlap constants."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-two-level-p1-poisson-additive-and-multiplicative-bounds",
+        "kind": "theorem",
+        "title": "Two-level overlapping P1 Poisson bounds with explicit H-overlap dependence",
+        "dependency_level": 7,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "thm-two-level-p1-poisson-stable-decomposition",
+          "thm-additive-schwarz-stable-decomposition-condition-number",
+          "thm-multiplicative-schwarz-exact-sweep-contraction",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "statement": "Assume Countable Choice. For the two-level P1 Poisson family of\n[[thm-two-level-p1-poisson-stable-decomposition]], let\n$N_0=7^d$ and $N_1=11^d$. The coarse-plus-local synthesis constant can be\nchosen as $C_1=1+N_0$, and the local overlap matrix can be chosen with\n$\\rho\\le N_1$. Consequently, for the exact additive Schwarz operator,\n$$ \\kappa_A(BA)\\le C_{\\rm FE}\\left(1+(H/\\delta)^2\\right)(1+7^d). $$\nFor the coarse-first exact multiplicative sweep,\n$$ \\|E_{\\rm mult}\\|_A^2\\le 1-\\frac{1}{ C_{\\rm FE}(1+(H/\\delta)^2) \\left(1+2(1+7^d)+2(1+11^d)^2\\right) }<1. $$\nIn particular, if $H/\\delta$ is uniformly bounded, both estimates are\nindependent of the fine mesh size and the number of subdomains. These are\nconstant-coefficient Poisson bounds; they assert no robustness for arbitrary\ncoefficient contrast or anisotropy.",
+        "strategy": "Count local supports per element and neighboring padded cubes, then substitute the resulting constants into the abstract additive and multiplicative theorems.",
+        "local_order": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 4.1–4.2, printed pp. 591–594: stable splitting, additive spectrum, and multiplicative correction estimates."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 3 §3.4 and Chapter 4 §§4.1–4.3, printed pp. 48–66; Chapter 5 §5.4, printed pp. 86–92: overlapping P1 subdomains and abstract, then concrete, Schwarz bounds."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2645,
+    "id": "overlapping-schwarz-and-stable-subspace-decompositions-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Overlapping Schwarz and stable subspace decompositions — Examples",
+    "companion": "overlapping-schwarz-and-stable-subspace-decompositions",
+    "requires": [
+      "overlapping-schwarz-and-stable-subspace-decompositions"
+    ],
+    "items": [
+      {
+        "id": "ex-schwarz-overlap-shrinking-decomposition-bound",
+        "kind": "example",
+        "title": "The stable-splitting guarantee worsens as overlap shrinks",
+        "dependency_level": 4,
+        "deps": [
+          "thm-two-level-p1-poisson-stable-decomposition"
+        ],
+        "statement": "For any admissible overlap radius delta, put r=H/delta to obtain the proved stable-decomposition upper bound C_FE(1+r^2); this formula grows along admissible families with delta/H tending to zero and does not assert actual condition-number divergence.",
+        "strategy": "Substitute r=H/delta into the established one-sided bound and keep the implication direction explicit.",
+        "local_order": 12,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.3 and 4.1, pp. 585–592: subspace correction, point-Jacobi splitting, and additive condition estimates."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 3 §§3.2–3.4, pp. 41–50: overlapping local spaces and coarse-grid correction."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-one-level-overlapping-schwarz-condition-number-growth",
+        "kind": "example",
+        "title": "One-level point-patch Schwarz loses uniformity on 1D Poisson",
+        "dependency_level": 6,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "thm-additive-schwarz-stable-decomposition-condition-number"
+        ],
+        "statement": "On the uniform N-interval Dirichlet P1 mesh of (0,1), the one-level exact point-patch additive Schwarz preconditioner has condition number (1+cos(pi/N))/(1-cos(pi/N)), which diverges as the number N-1 of overlapping nodal patches grows.",
+        "strategy": "Diagonalize the Dirichlet tridiagonal stiffness matrix with its sine vectors and compute the exact local point-patch preconditioner.",
+        "local_order": 10,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.3 and 4.1, pp. 585–592: subspace correction, point-Jacobi splitting, and additive condition estimates."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 3 §§3.2–3.4, pp. 41–50: overlapping local spaces and coarse-grid correction."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-schwarz-naive-coarse-space-misses-conductive-mode",
+        "kind": "counterexample",
+        "title": "A one-node coarse space misses a high-conductance channel",
+        "dependency_level": 6,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "thm-additive-schwarz-stable-decomposition-condition-number"
+        ],
+        "statement": "A bounded-size one-node coarse space with bounded-overlap exact local solves does not guarantee contrast-uniform condition numbers.",
+        "strategy": "Give the two-by-two SPD graph diffusion matrix, compute its local solves and eigenvalues, and let alpha grow.",
+        "local_order": 11,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.2, pp. 585–587: local subspaces and additive preconditioning."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 4 §§4.1–4.2, pp. 57–63: a coarse space and local spaces enter the same additive operator."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-schwarz-two-level-1d-poisson-coarse-plus-odd-corrections",
+        "kind": "example",
+        "title": "A uniform two-level 1D Poisson correction bound",
+        "dependency_level": 6,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "thm-additive-schwarz-stable-decomposition-condition-number"
+        ],
+        "statement": "On the uniform N=2M fine P1 Dirichlet grid, coarse P1 corrections at even nodes plus exact odd-node corrections have a stable decomposition constant C0<=2 and synthesis constant C1<=2, hence kappa_A(BA)<=4 for every M>=2.",
+        "strategy": "Decompose each fine nodal vector into its even-node linear interpolant and odd-node residuals, then compare each energy exactly interval by interval.",
+        "local_order": 13,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.3 and 4.1, pp. 585–592: subspace correction, point-Jacobi splitting, and additive condition estimates."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 3 §§3.2–3.4, pp. 41–50: overlapping local spaces and coarse-grid correction."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-schwarz-inexact-local-solves-spectral-equivalence-bound",
+        "kind": "example",
+        "title": "Inexact local solves enter through spectral-equivalence constants",
+        "dependency_level": 6,
+        "deps": [
+          "def-overlapping-schwarz-subspace-correction-data",
+          "thm-additive-schwarz-stable-decomposition-condition-number"
+        ],
+        "statement": "For A=I_2 and coordinate subspaces, exact local solves have condition number 1; replacing the local matrices by diag(4,1/2) gives condition number 8 and satisfies the theorem's beta/alpha=16 bound.",
+        "strategy": "Compute the exact diagonal additive preconditioner, its eigenvalues, and the uniform local spectral-equivalence interval.",
+        "local_order": 14,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jinchao Xu, Iterative Methods by Space Decomposition and Subspace Correction, SIAM Review 34(4) (1992)",
+              "url": "https://numerik.mi.fu-berlin.de/wiki/SS_2020/NumericsIII_Dokumente/Xu92.pdf",
+              "locator": "Sections 3.1–3.3 and 4.1, pp. 585–592: subspace correction, point-Jacobi splitting, and additive condition estimates."
+            },
+            {
+              "title": "Peter Bastian, Lecture Notes on Parallel Solution of Large Sparse Linear Systems, University of Heidelberg (2015)",
+              "url": "https://conan.iwr.uni-heidelberg.de/data/scripts/num3.pdf",
+              "locator": "Chapter 3 §§3.2–3.4, pp. 41–50: overlapping local spaces and coarse-grid correction."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

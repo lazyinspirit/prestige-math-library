@@ -1,0 +1,413 @@
+[
+  {
+    "order": 2592,
+    "id": "fast-multipole-expansions-and-error",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Fast multipole expansions and error",
+    "companion": "fast-multipole-expansions-and-error-examples",
+    "requires": [
+      "hierarchical-low-rank-matrices-and-error-propagation",
+      "computed-fast-transforms-and-convolution"
+    ],
+    "items": [
+      {
+        "id": "def-finite-planar-quadtree-fmm-pair-lists",
+        "kind": "definition",
+        "title": "Finite planar quadtree and separated interaction lists",
+        "statement": "Let $N\\ge0$, $I=\\{1,\\ldots,N\\}$, source positions $z_j\\in\\mathbb C$ and charges $q_j\\in\\mathbb C$ for $j\\in I$, and target positions equal to the same labelled positions. A root square is a closed square of side $s_0>0$ containing every source position. Its cells are the dyadic subsquares obtained by repeatedly bisecting each side. At each split use half-open child squares, with the outer top and right edges included in the last child, so every point belongs to exactly one child. A **finite quadtree** is a finite rooted tree of such cells in which each internal cell has its four geometric children and each leaf contains at most $s$ labels for a fixed integer $s\\ge1$. Empty children are retained as geometric cells but are skipped in source and target lists. For a cell $C$, write $c_C$ for its center, $s_C$ for its side length, $I_C=\\{j:z_j\\in C\\}$, and $a_C=s_C/\\sqrt2$ for the radius of its circumscribed disk.\n\nA cell pair $(C,D)$ is **source-separated from target-separated** when $R_{CD}:=|c_D-c_C|>a_C+a_D$; $C$ is the source cell and $D$ the target cell. For every such pair fix an analytic logarithm $L_{CD}$ on the open disk $\\{w:|w-(c_D-c_C)|<R_{CD}\\}$. This disk excludes zero and contains all differences $z_i-z_j$ with $i\\in I_D$, $j\\in I_C$. For each direct near particle pair $(j,i)$ fix one value $L_{ji}$ of the logarithm of $z_i-z_j$, when this difference is nonzero. Once the recursive rule below terminates, for a collision-free configuration define the exact target potential and its complex derivative using the resulting lists as follows:\nHere $\\mathcal F$ and $\\mathcal N$ denote the far and direct near lists produced by that rule.\n$$u_i:=\\sum_{(j,i)\\in\\mathcal N}q_jL_{ji}+\\sum_{\\substack{(C,D)\\in\\mathcal F\\\\ i\\in I_D}}\\ \\sum_{j\\in I_C}q_jL_{CD}(z_i-z_j),\\qquad g_i:=\\sum_{j\\ne i}\\frac{q_j}{z_i-z_j}.$$\nThus each ordered source-target pair contributes its source charge times the fixed direct-near branch value or the fixed far-cell branch value prescribed by its list entry. The complex derivative is independent of the chosen logarithm values.\n\nThe **recursive interaction decomposition** of an ordered pair of nonempty cells $(C,D)$ is defined as follows. If $C=D$ is a leaf, record as direct near pairs all $(j,i)\\in I_C\\times I_D$ with $j\\ne i$. If $C=D$ is internal, replace $(C,D)$ by all ordered pairs $(E,F)$ of its nonempty children. If $C\\ne D$ and $R_{CD}>a_C+a_D$, record the far cell pair $(C,D)$. If both cells are leaves and the pair is not separated, record all direct near particle pairs $(j,i)\\in I_C\\times I_D$ with $j\\ne i$. In every other case, if exactly one cell is nonleaf, split that cell; if both are nonleaf, split the one of larger side length, breaking a tie by splitting the source cell. Replace the pair by the child pairs having nonempty source and target sets. For $N\\ge1$, start at the root pair; for $N=0$, make no recursive calls and set both lists to empty. The resulting lists are the **far interaction list** $\\mathcal F$ and the **direct near-pair list** $\\mathcal N$. Their termination and exact pair-partition property are mathematical assertions, proved separately.\n\nFor a far pair $(C,D)$ put $\\rho_{CD}=(a_C+a_D)/R_{CD}<1$ and $Q_C=\\sum_{j\\in I_C}|q_j|$. Two leaves are adjacent when their closed squares meet. A tree is **2:1 level-restricted** when any adjacent leaves have depths differing by at most one. It is **linear-size level-restricted for this decomposition** when it is 2:1 level-restricted and there are fixed constants $C_T,C_V$ such that its number $T$ of nonempty cells and the number $V$ of recursive cell-pair inspections satisfy $T\\le C_T\\max(1,N)$ and $V\\le C_V\\max(1,N)$. A list is **bounded** when there are fixed constants $C_F,C_N$ with $|\\mathcal F|\\le C_F T$ and $|\\mathcal N|\\le C_N\\max(1,N)$. The work theorem uses these explicit counts; 2:1 balance alone is not asserted to supply them.",
+        "deps": [],
+        "dependency_level": 0,
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348",
+              "url": "https://web.stanford.edu/class/cme324/classics/greengard-rokhlin.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-three-dimensional-spherical-harmonic-space",
+        "kind": "definition",
+        "title": "Degree-indexed spherical harmonic spaces in three dimensions",
+        "statement": "Let $\\mathbb S^2=\\{x\\in\\mathbb R^3:|x|=1\\}$ with its usual surface-area measure $dS$, normalized so $\\int_{\\mathbb S^2}dS=4\\pi$. For an integer $\\ell\\ge0$, let $\\mathcal H_\\ell$ be the complex vector space of restrictions to $\\mathbb S^2$ of homogeneous degree-$\\ell$ polynomials $P(x_1,x_2,x_3)$ satisfying $\\Delta P=0$. Give $\\mathcal H_\\ell$ the inner product $\\langle f,g\\rangle=\\int_{\\mathbb S^2}f\\overline g\\,dS$, linear in the first argument. An orthonormal basis is not fixed by this definition; the addition-theorem item proves that $\\dim\\mathcal H_\\ell=2\\ell+1$ and that such a finite basis exists.\n\nIf $Y_{\\ell m}\\in\\mathcal H_\\ell$ is later chosen from an orthonormal basis and $v\\ne0$, its associated homogeneous harmonic polynomial is $H_{\\ell m}(v)=|v|^\\ell Y_{\\ell m}(v/|v|)$. At $v=0$ use the polynomial value: $H_{00}(0)=Y_{00}$ and $H_{\\ell m}(0)=0$ for $\\ell>0$. This is the regular-solid-harmonic convention used in the 3D evaluator.",
+        "deps": [],
+        "dependency_level": 0,
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael O’Neil, Integral Equations and Fast Algorithms, complete course lecture notes (2017)",
+              "url": "https://cims.nyu.edu/~oneil/courses/fa17-math2011/int_eq_notes_2017.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-planar-laplace-fmm-fixed-order",
+        "kind": "algorithm",
+        "title": "Fixed-order planar Laplace fast multipole procedure",
+        "statement": "Use the data, quadtree and interaction decomposition of [[def-finite-planar-quadtree-fmm-pair-lists]]. Fix an expansion order $p\\ge1$. If two different labels have the same position, return status `collision` before evaluating any singular interaction: the requested potential is undefined. Otherwise take as input a finite quadtree from the definition, together with its point-to-cell membership arrays and leaf threshold $s$. For $N=0$ return empty outputs. For $N\\ge1$, construct $\\mathcal F$ and $\\mathcal N$ by the recursive decomposition in the definition. The tree and point-to-cell membership are preprocessing inputs; their construction is not part of the arithmetic passes below.\n\nUsing the supplied membership data, make a root-first list of nonempty cells: at each nonempty internal cell inspect its four children and recurse only into children $E$ with $I_E\\ne\\varnothing$; never descend into an empty subtree. Use the reverse list order for the bottom-up pass and the root-first order for the top-down pass. Use exact complex arithmetic throughout. For each nonempty leaf $C$ form the particle-to-multipole (P2M) moments\n$$M_n(C)=\\sum_{j\\in I_C}q_j(z_j-c_C)^n,\\qquad 0\\le n\\le p.$$\nFor the upward multipole-to-multipole (M2M) pass, process nonempty internal cells bottom-up. For each such parent $C$ and each $0\\le n\\le p$, form its moments from its nonempty children by\n$$M_n(C)=\\sum_{\\substack{E\\text{ child of }C\\\\ I_E\\ne\\varnothing}}\\sum_{r=0}^n\\binom nr(c_E-c_C)^{n-r}M_r(E).$$\nAn empty child has zero moments and is skipped. Thus the upward pass visits only parent-child edges whose two cells are nonempty.\n\nInitialize the local coefficient vector of every nonempty cell to zero before processing any far pair. For each far pair $(C,D)$ set $\\delta=c_D-c_C$, $R=|\\delta|$, choose the fixed logarithm $L_{CD}$, and add to the target cell $D$'s local coefficients the multipole-to-local (M2L) coefficients\n$$L_0(D)\\mathrel{+}=M_0(C)L_{CD}(\\delta)-\\sum_{n=1}^p\\frac{M_n(C)}{n\\delta^n},$$\n$$L_k(D)\\mathrel{+}=(-1)^{k+1}\\left(\\frac{M_0(C)}{k\\delta^k}+\\sum_{n=1}^p\\binom{n+k-1}{k}\\frac{M_n(C)}{n\\delta^{n+k}}\\right),\\quad 1\\le k\\le p.$$\nAfter all M2L additions, perform a top-down downward local-to-local (L2L) pass over parent-child edges whose two cells are nonempty. For each parent $D$ and each nonempty child $E$, add\n$$L_j(E)\\mathrel{+}=\\sum_{k=j}^p\\binom kj L_k(D)(c_E-c_D)^{k-j},\\qquad 0\\le j\\le p.$$\nFor a target $i$ in leaf $D$, return the far potential $\\sum_{k=0}^pL_k(D)(z_i-c_D)^k$ and far derivative $\\sum_{k=1}^p kL_k(D)(z_i-c_D)^{k-1}$. Add the exact direct near contributions $q_jL_{ji}$ and $q_j/(z_i-z_j)$, respectively, for $(j,i)\\in\\mathcal N$. Denote the resulting potential and derivative approximations by $\\widetilde u_i$ and $\\widetilde g_i$, respectively. The derivative output differentiates the truncated local polynomial and adds the exact near derivatives; its value is independent of logarithm branches.",
+        "deps": [
+          "def-finite-planar-quadtree-fmm-pair-lists"
+        ],
+        "dependency_level": 1,
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348",
+              "url": "https://web.stanford.edu/class/cme324/classics/greengard-rokhlin.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-planar-fmm-pair-lists-partition-off-diagonal-pairs",
+        "kind": "lemma",
+        "title": "Planar FMM lists partition all ordered off-diagonal particle pairs",
+        "statement": "For a finite quadtree and a nonempty root pair as in [[def-finite-planar-quadtree-fmm-pair-lists]], the recursive interaction decomposition terminates. The Cartesian pair sets $I_C\\times I_D$ of its far cell pairs, together with its direct near particle pairs, are pairwise disjoint and partition $\\{(j,i)\\in I\\times I:j\\ne i\\}$.",
+        "deps": [
+          "def-finite-planar-quadtree-fmm-pair-lists"
+        ],
+        "dependency_level": 1,
+        "local_order": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348",
+              "url": "https://web.stanford.edu/class/cme324/classics/greengard-rokhlin.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "lem-three-dimensional-laplace-spherical-harmonic-addition-theorem",
+        "kind": "lemma",
+        "title": "Three-dimensional Laplace spherical-harmonic addition theorem",
+        "statement": "For every integer $\\ell\\ge0$, the space $\\mathcal H_\\ell$ of [[def-three-dimensional-spherical-harmonic-space]] has dimension $2\\ell+1$. For any orthonormal basis $\\{Y_{\\ell m}:-\\ell\\le m\\le\\ell\\}$, there is a basis-independent normalized zonal polynomial $P_\\ell$ such that\n$$\\sum_{m=-\\ell}^{\\ell}Y_{\\ell m}(\\omega)\\overline{Y_{\\ell m}(\\omega')}=\\frac{2\\ell+1}{4\\pi}P_\\ell(\\omega\\cdot\\omega'),\\qquad P_\\ell(1)=1.$$\nIt obeys $|P_\\ell(t)|\\le1$ for $-1\\le t\\le1$ and the generating identity\n$$\\frac1{\\sqrt{1-2rt+r^2}}=\\sum_{\\ell=0}^{\\infty}r^\\ell P_\\ell(t),\\qquad -1\\le t\\le1,\\quad 0\\le r<1.$$",
+        "deps": [
+          "def-three-dimensional-spherical-harmonic-space"
+        ],
+        "dependency_level": 1,
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael O’Neil, Integral Equations and Fast Algorithms, complete course lecture notes (2017)",
+              "url": "https://cims.nyu.edu/~oneil/courses/fa17-math2011/int_eq_notes_2017.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "lem-planar-fmm-multipole-local-translation-identities",
+        "kind": "lemma",
+        "title": "Planar Laplace multipole and local translation identities",
+        "statement": "For the P2M, M2M, M2L, L2L and L2P formulas of [[alg-planar-laplace-fmm-fixed-order]], P2M gives the source moments about a leaf center, M2M gives exactly the same moments about a parent center, and the finite M2L coefficients are the degree-$0$ through degree-$p$ Taylor coefficients of the order-$p$ source multipole polynomial about the target center. L2L is exact re-centering of the resulting degree-$p$ polynomial, and L2P evaluates it exactly. For every $n\\ge0$ define $M_n(C)=\\sum_{j\\in I_C}q_j(z_j-c_C)^n$; the algorithm stores only $n\\le p$. For a far pair $(C,D)$ and $z$ in the target cell, the fixed-branch source potential also has the absolutely convergent outer expansion $M_0(C)L_{CD}(z-c_C)-\\sum_{n=1}^{\\infty}M_n(C)/(n(z-c_C)^n)$.",
+        "deps": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order"
+        ],
+        "dependency_level": 2,
+        "local_order": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348",
+              "url": "https://web.stanford.edu/class/cme324/classics/greengard-rokhlin.pdf"
+            },
+            {
+              "title": "Michael O’Neil, Integral Equations and Fast Algorithms, complete course lecture notes (2017)",
+              "url": "https://cims.nyu.edu/~oneil/courses/fa17-math2011/int_eq_notes_2017.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-planar-fmm-operation-count-under-linear-list-assumptions",
+        "kind": "theorem",
+        "title": "Planar FMM operation count under explicit linear-size tree and list bounds",
+        "statement": "Let $N\\ge1$ and $p\\ge1$. Suppose the finite quadtree and recursive interaction decomposition supplied to [[alg-planar-laplace-fmm-fixed-order]] are linear-size level-restricted and have bounded lists in the exact sense of [[def-finite-planar-quadtree-fmm-pair-lists]]: $T,V\\le C\\,N$, $K:=|\\mathcal F|\\le C\\,T$, and $J:=|\\mathcal N|\\le C\\,N$ for a constant $C$ independent of $N,p$. Counting each complex addition, multiplication, division by a nonzero number, coefficient copy, cell-pair inspection, and evaluation of a fixed logarithm branch at one argument as one operation, the FMM passes and direct near evaluation use at most\n$$C_0\\bigl(N(p+1)+(T+K)(p+1)^2+V+J\\bigr)$$\noperations for an absolute implementation constant $C_0$. Hence the total counted work is $O(N(p+1)^2)$, and therefore $O(Np^2)$ for $p\\ge1$. The input quadtree construction and point-to-cell preprocessing are not included; a highly clustered input must report its actual tree depth, node count, and list/traversal counts before a linear-in-$N$ conclusion is made.",
+        "deps": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order",
+          "lem-planar-fmm-pair-lists-partition-off-diagonal-pairs"
+        ],
+        "dependency_level": 2,
+        "local_order": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348",
+              "url": "https://web.stanford.edu/class/cme324/classics/greengard-rokhlin.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "alg-three-dimensional-laplace-cluster-expansion",
+        "kind": "algorithm",
+        "title": "Single-cluster three-dimensional Laplace multipole evaluator",
+        "statement": "Fix an integer $p\\ge0$, a finite set of source labels $J$ with positions $y_j\\in\\mathbb R^3$ and charges $q_j\\in\\mathbb C$, a center $c$, and a radius $a\\ge0$ with $|y_j-c|\\le a$. For each $0\\le\\ell\\le p$, supply an orthonormal basis $\\{Y_{\\ell m}:-\\ell\\le m\\le\\ell\\}$ of $\\mathcal H_\\ell$ from [[def-three-dimensional-spherical-harmonic-space]]; its existence and dimension are given by [[lem-three-dimensional-laplace-spherical-harmonic-addition-theorem]]. Form moments\n$$M_{\\ell m}=\\sum_{j\\in J}q_j\\overline{H_{\\ell m}(y_j-c)}.$$\nFor every target $x$ with $r=|x-c|>a$, evaluate the truncated single-cluster multipole field\n$$\\widetilde U_p(x)=4\\pi\\sum_{\\ell=0}^p\\frac{1}{2\\ell+1}\\frac{1}{r^{\\ell+1}}\\sum_{m=-\\ell}^{\\ell}M_{\\ell m}Y_{\\ell m}\\!\\left(\\frac{x-c}{r}\\right).$$\nThe output is an approximation to $U(x)=\\sum_{j\\in J}q_j/|x-y_j|$. This is the source-cluster-to-target evaluator only; it makes no 3D tree-translation or global all-target complexity claim.\n\nFor the arithmetic count, store each basis polynomial by its monomial coefficient array. Basis setup is done once for the chosen $p$. To evaluate the displayed formula directly, evaluate every basis polynomial by summing its monomials at each source and target point, then accumulate the moments and target sums. This convention makes the basis-evaluation work explicit rather than treating each special-function evaluation as free.",
+        "deps": [
+          "def-three-dimensional-spherical-harmonic-space",
+          "lem-three-dimensional-laplace-spherical-harmonic-addition-theorem"
+        ],
+        "dependency_level": 2,
+        "local_order": 8,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael O’Neil, Integral Equations and Fast Algorithms, complete course lecture notes (2017)",
+              "url": "https://cims.nyu.edu/~oneil/courses/fa17-math2011/int_eq_notes_2017.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-planar-fmm-global-potential-force-error",
+        "kind": "theorem",
+        "title": "Global planar FMM potential and derivative error",
+        "statement": "Assume the collision-free exact-arithmetic branch of [[alg-planar-laplace-fmm-fixed-order]] with order $p\\ge1$. For each target $i$ in leaf $D_i$, let $\\mathcal F_i=\\{(C,D)\\in\\mathcal F:i\\in I_D\\}$ be its far cell interactions. For $(C,D)\\in\\mathcal F_i$ put $R_{CD}=|c_D-c_C|$, $\\rho_{CD}=(a_C+a_D)/R_{CD}<1$, and $Q_C=\\sum_{j\\in I_C}|q_j|$. If $u_i$ is the exact fixed-branch logarithmic potential and $\\widetilde u_i$ the algorithm output, then\n$$|u_i-\\widetilde u_i|\\le\\sum_{(C,D)\\in\\mathcal F_i}\\frac{Q_C\\rho_{CD}^{p+1}}{(p+1)(1-\\rho_{CD})}.$$\nIf $g_i=\\sum_{j\\ne i}q_j/(z_i-z_j)$ and $\\widetilde g_i$ is the algorithm's complex derivative output, then\n$$|g_i-\\widetilde g_i|\\le\\sum_{(C,D)\\in\\mathcal F_i}\\frac{Q_C}{R_{CD}}\\frac{\\rho_{CD}^{p}}{1-\\rho_{CD}}.$$\nNear interactions are exact. The second estimate is branch-independent; no floating-point rounding error is included.",
+        "deps": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order",
+          "lem-planar-fmm-pair-lists-partition-off-diagonal-pairs",
+          "lem-planar-fmm-multipole-local-translation-identities"
+        ],
+        "dependency_level": 3,
+        "local_order": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348",
+              "url": "https://web.stanford.edu/class/cme324/classics/greengard-rokhlin.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-three-dimensional-laplace-expansion-error-and-work",
+        "kind": "theorem",
+        "title": "Three-dimensional Laplace cluster expansion error and work",
+        "statement": "For the single-cluster evaluator of [[alg-three-dimensional-laplace-cluster-expansion]], let $Q=\\sum_{j\\in J}|q_j|$. If a target satisfies $r=|x-c|>a$, then its potential error obeys\n$$|U(x)-\\widetilde U_p(x)|\\le\\frac{Q}{r}\\frac{(a/r)^{p+1}}{1-a/r}.$$\nIf a target region is contained in a ball of radius $b$ centered at $d$, with $R=|d-c|>a+b$, then every target in the region has error at most\n$$\\frac{Q}{R-b}\\frac{\\bigl(a/(R-b)\\bigr)^{p+1}}{1-a/(R-b)}.$$\nLet $S=|J|$ and let $T_0$ be the number of targets. Under the monomial-coefficient evaluation convention of the algorithm, forming moments and evaluating the truncated field costs $O((S+T_0)(p+1)^4)$ arithmetic operations after the basis coefficient arrays have been prepared. If all basis values at sources and targets are supplied, the coefficient accumulation and expansion evaluation alone cost $O((S+T_0)(p+1)^2)$. This is a single-cluster estimate; it is not a 3D multilevel FMM tree complexity theorem.",
+        "deps": [
+          "def-three-dimensional-spherical-harmonic-space",
+          "lem-three-dimensional-laplace-spherical-harmonic-addition-theorem",
+          "alg-three-dimensional-laplace-cluster-expansion"
+        ],
+        "dependency_level": 3,
+        "local_order": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael O’Neil, Integral Equations and Fast Algorithms, complete course lecture notes (2017)",
+              "url": "https://cims.nyu.edu/~oneil/courses/fa17-math2011/int_eq_notes_2017.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2593,
+    "id": "fast-multipole-expansions-and-error-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Fast multipole expansions and error — Examples",
+    "companion": "fast-multipole-expansions-and-error",
+    "requires": [
+      "fast-multipole-expansions-and-error"
+    ],
+    "items": [
+      {
+        "id": "ex-fmm-clustered-points-require-depth-sensitive-work",
+        "kind": "example",
+        "title": "A clustered point set makes tree depth enter the work",
+        "statement": "This example shows why the operation theorem records tree depth, node count, and list counts explicitly. In the square $[-1/2,1/2]^2$, place two distinct unit charges at $z_1=0$ and $z_2=2^{-M}$ for an integer $M\\ge3$, and refine a dyadic quadtree until every leaf has occupancy at most $1$.",
+        "deps": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order",
+          "thm-planar-fmm-operation-count-under-linear-list-assumptions"
+        ],
+        "dependency_level": 3,
+        "local_order": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348",
+              "url": "https://web.stanford.edu/class/cme324/classics/greengard-rokhlin.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "ex-fmm-two-separated-charge-clusters",
+        "kind": "example",
+        "title": "Two separated planar charge clusters",
+        "statement": "Use the dyadic root square $H=[0,4]^2$. Put $P=[0,2]\\times[0,2]$ and $Q=[2,4]\\times[0,2]$; the other two root children are empty. Within $P$ name its lower-left and lower-right children $C_0=[0,1]\\times[0,1]$ and $C=[1,2]\\times[0,1]$. Within $Q$ name its lower-left, lower-right, and upper-left children $D_0=[2,3]\\times[0,1]$, $D=[3,4]\\times[0,1]$, and $D_1=[2,3]\\times[1,2]$; its upper-right child is empty. Let the leaf threshold be $s=2$ and split each cell with more than two labels. Put unit charges at $c\\pm\\tfrac14$ in $C$, where $c=\\tfrac32+\\tfrac12i$. Put zero-charge labels at $\\tfrac12+\\tfrac12i$ in $C_0$, $d=\\tfrac72+\\tfrac12i$ in $D$, $\\tfrac52+\\tfrac12i$ in $D_0$, and $\\tfrac52+\\tfrac32i$ in $D_1$. Thus $P$ and $Q$ have three labels each and split; their named children are leaves. In the recursive ordered cell pair $(P,Q)$, splitting the source exposes $(C,Q)$, and then splitting $Q$ exposes the separated pair $(C,D)$. The far difference disk has center $2$ and radius $\\sqrt2$, so use its analytic logarithm real at $2$. Take order $p=1$.",
+        "deps": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order",
+          "thm-planar-fmm-global-potential-force-error"
+        ],
+        "dependency_level": 4,
+        "local_order": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348",
+              "url": "https://web.stanford.edu/class/cme324/classics/greengard-rokhlin.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "ex-fmm-near-far-potential-and-force-error",
+        "kind": "example",
+        "title": "Near/far split with exact near evaluation and truncated far error",
+        "statement": "Use root $H=[0,4]^2$; its two nonempty children are $P=[0,2]\\times[0,2]$ and $Q=[2,4]\\times[0,2]$. Name the lower children of $P$ by $C_0=[0,1]\\times[0,1]$ and $C=[1,2]\\times[0,1]$. Name the lower-left, lower-right, and upper-left children of $Q$ by $D_0=[2,3]\\times[0,1]$, $D=[3,4]\\times[0,1]$, and $D_1=[2,3]\\times[1,2]$; its upper-right child and the two upper root children are empty. Let leaf threshold $s=2$ and split each cell with more than two labels. Put unit charges at $c\\pm\\tfrac14$ in $C$, where $c=\\tfrac32+\\tfrac12i$, a charge $3$ at $d-0.1$ in $D$, where $d=\\tfrac72+\\tfrac12i$, and a zero-charge target label at $d$. Put zero-charge labels at $\\tfrac12+\\tfrac12i$ in $C_0$, $\\tfrac52+\\tfrac12i$ in $D_0$, and $\\tfrac52+\\tfrac32i$ in $D_1$. Then $P$ has three labels and $Q$ has four, so both split and their named grandchildren are leaves. For the target $d$, the recursion records $(C,D)$ as far and the charge-$3$ pair in $D$ as direct near. Use the analytic logarithm on the far difference disk that is real at $2$; the near difference $0.1$ uses its real logarithm. Take order $p=1$.",
+        "deps": [
+          "def-finite-planar-quadtree-fmm-pair-lists",
+          "alg-planar-laplace-fmm-fixed-order",
+          "thm-planar-fmm-global-potential-force-error"
+        ],
+        "dependency_level": 4,
+        "local_order": 13,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and Vladimir Rokhlin, A Fast Algorithm for Particle Simulations, Journal of Computational Physics 73 (1987), 325–348",
+              "url": "https://web.stanford.edu/class/cme324/classics/greengard-rokhlin.pdf"
+            },
+            {
+              "title": "James Demmel, Fast Hierarchical Methods for the N-body Problem, Part 2, CS267 Lecture 25 (1996)",
+              "url": "https://people.eecs.berkeley.edu/~demmel/cs267/lecture27/lecture27.html"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "justified_by": []
+      }
+    ]
+  }
+]

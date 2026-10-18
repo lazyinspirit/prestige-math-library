@@ -1,0 +1,4219 @@
+DRAFT
+
+Integral Equations and Fast Algorithms
+with applications
+
+Courant Institute
+New York University
+
+Michael O’Neil1
+
+Fall 2017
+
+1Department of Mathematics, Courant Institute, New York University, New York, NY. E-mail:
+oneil@cims.nyu.edu.
+
+
+DRAFT
+
+Copyright ©2017 Michael O’Neil
+
+1
+
+
+DRAFT
+
+Contents
+
+1
+Introduction
+3
+1.1
+Motivation: electrostatics . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+1.2
+The state of computing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+1.3
+Notes on the notes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+
+2
+The Laplace equation
+7
+2.1
+Two dimensions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+2.1.1
+The Interior Dirichlet Problem . . . . . . . . . . . . . . . . . . . . . .
+10
+2.2
+Three dimensions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+
+3
+Discretization and quadrature
+14
+3.1
+Curves in two dimensions . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+3.1.1
+Discretization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+3.1.2
+Quadrature . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+3.2
+Surfaces in three dimensions . . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+
+4
+The 3D Laplace Fast Multipole Method
+18
+4.1
+Tree-codes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+4.1.1
+Barnes-Hut . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+4.1.2
+High-order tree-codes
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+23
+4.2
+The 3D Laplace fast multipole method . . . . . . . . . . . . . . . . . . . . . .
+31
+4.2.1
+Point and shoot translation . . . . . . . . . . . . . . . . . . . . . . . .
+32
+4.2.2
+Diagonal plane-wave translation operators . . . . . . . . . . . . . . . .
+32
+4.2.3
+Accelerations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+32
+
+5
+The Helmholtz equation
+33
+
+6
+Electromagnetics
+34
+
+7
+Elasticity
+35
+
+8
+Fluids
+36
+
+9
+Parabolic theory
+37
+
+2
+
+
+DRAFT
+
+CONTENTS
+M. O’Neil
+
+10 Fast multipole methods
+38
+10.1 The 3D fast multipole method for Helmholtz potentials . . . . . . . . . . . . .
+38
+10.1.1 Addition formulas
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+38
+10.1.2 Exponential translations
+. . . . . . . . . . . . . . . . . . . . . . . . .
+38
+10.1.3 Implementation caveats . . . . . . . . . . . . . . . . . . . . . . . . . .
+38
+10.2 3D Stokesian potentials . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+38
+
+11 Discrete Fourier Transforms
+39
+11.1 The Fast Fourier Transform . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+40
+11.1.1 As a matrix factorization . . . . . . . . . . . . . . . . . . . . . . . . .
+42
+11.2 The non-uniform FFT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+44
+11.2.1 The Type I NUFFT . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+45
+11.2.2 The Type II NUFFT
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+47
+11.2.3 The Type III NUFFT . . . . . . . . . . . . . . . . . . . . . . . . . . .
+47
+
+12 Butterfly algorithms
+48
+12.1 Analogy with the FFT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+48
+12.2 Applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+48
+12.3 An algorithm
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+48
+12.4 Applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+48
+
+13 Randomized linear algebra
+49
+
+14 Fast direct solvers
+50
+14.1 Nested dissection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+50
+14.2 Hierarchically structured matrices
+. . . . . . . . . . . . . . . . . . . . . . . .
+50
+
+A Green’s Identities
+51
+
+B
+Fredholm Theory
+52
+
+C Iterative Solvers
+54
+
+3
+
+
+DRAFT
+
+1
+Introduction
+
+Before describing the current lay of the land in modern computational science (at least with
+regard to PDEs and classical physics-driven problems), it is worth pointing out what is necessary
+to understand the following lecture notes. We will assume that the reader has a strong grasp of
+linear algebra and multi-variable calculus, a working knowledge of the basic theorems and ideas
+in complex analysis, and at least some exposure to ordinary and partial differential equations. Of
+course, proficiency in computer programming (preferably C, Fortran, or Matlab) will prove
+invaluable if any of the algorithms in these notes are to be implemented. Remember, the level of
+work required to implement a fast algorithm is not an excuse to avoid implementing it!
+Keep in mind that these notes are far from finished! Please send suggestions and errors to
+oneil@cims.nyu.edu.
+
+1.1
+Motivation: electrostatics
+
+As motivation for the use of integral equations and fast algorithms over the usual PDE formulations
+(and solvers) of many physical systems, we first examine a special case of Maxwell’s equations:
+electrostatics. In an isotropic medium with constant magnetic permeability µ and electric
+permittivity ϵ, the fully time-dependent Maxwell equations governing the propagation of electric
+and magnetic fields, E and H, are given by:
+
+∇× E = −µ∂H
+
+∂t ,
+∇× H = ε ∂E
+
+∂t + J,
+
+∇· E = ρ
+
+ε,
+∇· H = 0,
+(1.1)
+
+where J and ρ are the electric current and charge, respectively. For various important physical
+devices, it suffices to study the above equations in the time harmonic case. Assuming an implicit
+time dependence of e−iωt on E, H, J, and ρ, we have what are known as the time-harmonic
+Maxwell’s equations:
+
+∇× E = iωµH,
+∇× H = −iωεE + J,
+
+∇· E = ρ
+
+ε,
+∇· H = 0,
+(1.2)
+
+where script quantities have been replaced by bold quantities to show only spatial dependence.
+Furthermore, letting ω →0 we arrive at the equations of electro- and magnetostatics:
+
+∇× E = 0,
+∇× H = J,
+
+∇· E = ρ
+
+ε,
+∇· H = 0.
+(1.3)
+
+4
+
+
+DRAFT
+
+1.1. MOTIVATION: ELECTROSTATICS
+M. O’Neil
+
+In this regime, we see that the electric and magnetic fields have completely decoupled. Examining
+the equations for E for a moment, the first implies that the electric field must be a gradient. We
+then write:
+E = −∇ϕ,
+(1.4)
+
+where ϕ will be referred to as the electric potential. Inserting this representation into the
+divergence equation, we have a Poisson problem for the potential function:
+
+−∆ϕ = ρ
+
+ε .
+(1.5)
+
+That is to say, for a known charge distribution ρ, the calculation of the electric field requires the
+solution to the above Poisson problem.
+Standard PDE discretizations of the Poisson problem (finite difference, finite element, etc.)
+result in sparse linear systems which can be solved relatively efficiently using sparse linear
+algebra methods (nested dissection, etc.) or iterative methods (e.g. conjugate gradients). Often
+solvers which scale near linearly in the number of unknowns can be derived. However, if the
+domain of interest is unbounded (i.e. all of R3) then a prohibitive amount of discretization is
+required, or such methods as Perfectly Matched Layers (PMLs) must be used. Lastly, derivatives
+of the solution ϕ must be calculated numerically, which can lead to severe loss of precision if a
+very fine discretization mesh was used.
+On the other hand, using a little bit of physics and mathematics, we can directly write down
+the solution to equation (1.5) using Coulomb’s Law:
+
+ϕ(x) =
+∫
+ρ(x′)
+4πϵ|x −x′| dV(x′).
+(1.6)
+
+Mathematically, this corresponds to the use of the Green’s function for the Laplace operator:
+
+∆g = δ,
+(1.7)
+
+with g(x, x′) = −1/4π|x −x′|. Note that by writing down the solution ϕ in integral form, we
+have eliminated the solve step! Only an evaluation of the integral in (1.6) is required. In avoiding
+having to actually solve a linear system, however, we have introduced various numerical analysis
+and algorithmic issued that need to be overcome. First, the singular kernel in this expression
+needs to be integrated accurately. This requires the development of specialized quadrature rules
+for singular integrals. And second, if support of ρ is discretized at N points xj, and the potential
+ϕ is required at each of these points, denoting our quadrature weights by wj, we are left with the
+dense sum:
+
+ϕ(xi) ≈1
+
+ϵ
+
+�
+
+j�i
+
+wj ρ(xj)
+4π|xi −xj| .
+(1.8)
+
+It is the rapid evaluation of sums such as these that precipitated the development, originally,
+of what are known as tree codes. These algorithms are almost always low-order accurate,
+and scale as O(N log N). Later on, in the late 80s, more efficient algorithms known as fast
+multipole methods (FMMs) which scale linearly in N were developed to optimally accelerate the
+computation of N-body sums such as (1.8).
+Despite these numerical and algorithmic requirements in order to efficiently use integral
+methods, the benefits far outweigh work required to implement them. For example, derivatives
+
+5
+
+
+DRAFT
+
+1.2. THE STATE OF COMPUTING
+M. O’Neil
+
+of ϕ can be computed analytically, and the potential can be computed at locations y outside
+the support of ρ straightforwardly – that is to say, merely the sum above is evaluated with bxi
+replaced by y. Lastly, any numerical conditioning issues in the evaluation of the solution are
+usually tied to underlying physical considerations, and not artifacts of numerical differentiation
+or other various instabilities.
+It is with examples such as these that the following lecture notes were developed. While
+fast multipole methods are most commonly associated with the evaluation of N-body sums,
+their true power lies in their ability to accelerated integral equation methods. This feature has
+revolutionized the field of computational electromagnetics, in particular. Analogous methods
+are used every day in large-scale calculations in fluid flow, acoustic wave propagation, and
+elastodynamics simulations. We will address many of these applications in the following
+chapters, with a focus on modern developments and thorough treatment of both the integral
+equation theory and the implementation of the related algorithms.
+
+1.2
+The state of computing
+
+For the past several decades, Moore’s Law regarding the growth of computational power has
+approximately held true: the number of transistors in integrated circuits has roughly doubled
+every two years. This behavior has resulted in unprecedented growth in computational power,
+allowing for computations that previously required entire buildings of computers to now be
+performed on laptops. While Moore’s Law cannot continue to hold true indefinitely, it will most
+likely persist for some time.
+This being said, it is more common today for computing environments to obtain more flops
+per second by adding parallelism in the form of networked machines or dedicated compute
+cards such as Graphics Processing Units (GPUs) or specialized co-processors, instead of relying
+on an increase in clock speed or density of transistors. Many of the following fast algorithms,
+since they are often built on hierarchical data structures, are compatible with such compute
+architecture.
+The question that remains is: what happens to computational science when the exponential
+growth in compute power dies off? Or rather, what types of algorithms will be compatible with
+limited computing resources?
+While not complete by any means, there are several characteristics that all the fast analysis-
+based algorithms shared that will be covered in these notes. These algorithms differ from many
+of the classical algorithms rooted in theoretical computer science (sorting, etc.).
+
+Asymptotic scaling: In part because Moore’s Law has held true, asymptotic scaling of
+fast computational algorithms is perhaps their most important characteristic. For example,
+a standard matrix-vector multiplication requires O(n2) operations. If for twice the money,
+a computer can be purchased which is twice as fast and has twice as much memory (this
+is not exactly true), then only a matrix of dimension
+√
+
+2 ≈1.4 times larger can be applied
+to vectors of length N in the amount of time. This is not a sustainable scaling of cost vs.
+computational ability in the long-term. Going forward, by fast algorithm we mean one
+whose computational complexity scales as O(N logp N), for some reasonably small p, as
+the size N of the inputs grows.
+
+6
+
+
+DRAFT
+
+1.3. NOTES ON THE NOTES
+M. O’Neil
+
+Controlled precision: Analysis-based algorithms strongly take advantage of the fact that
+modern day computers operate natively as finite precision machines. For example, the
+Fast Fourier Transform relies on particular algebraic observations concerning complex
+exponentials, as well as relying on the data to be sampled at equispaced intervals. No
+numerical approximation is made in the design of the algorithm; it is exact in infinite
+precision. This being said, often times that degree of precision is not needed. The
+algorithms detailed in this course often scale as O(N logp N logq 1/ϵ), where ϵ is the
+precision to which the output of the algorithm is desired. Obtaining more correct digits
+in the output only affects the constant implicit in the O(·) notation, not the asymptotic
+scaling with N. Because of only the need for finite precision solutions, many ideas in
+approximation theory can be used to accelerate and control intermediate calculations.
+
+Technical implementations: Most, if not all of the algorithms described in these notes
+rely on hierarchical data structures, efficient linear algebra routines, and/or efficient and
+accurate evaluation of many of the special functions of classical mathematical physics
+(Bessel functions, orthogonal polynomials, etc.). Each of these tasks can be an entire
+project in and of themselves, but once implemented, become black box subroutines that
+can be relied on. In fact, the efficient and accurate evaluation of certain classes of special
+functions is an ongoing research topic in several groups.
+
+The above characteristics of many fast analysis-based algorithms have some interesting
+consequences. For example, as in the FFT, evaluating N-body interactions (for very large N)
+using the fast multipole method is often more accurate that doing the direct calculation via
+matrix-vector multiplication. The reason for this is the inherent round-off error from computing
+the dot-product of two vectors of length N. In fact, the round-off error in computing x · y can be
+shown to be:
+ϵ ≤N ϵmach
+�
+
+j
+|xj||yj|.
+(1.9)
+
+Since fast multipole methods never add up N numbers for each data point, the round-off error is
+often much smaller.
+
+1.3
+Notes on the notes
+
+In the following manuscript, we have explicitly avoided any such discuss of function spaces.
+When necessary, and of interest, references are provided to direct the reader to sources that
+may clarify the requirements on functions, kernels, operators, etc. For the most part, unless
+otherwise noted, boundaries are assumed to be smooth and kernels and functions are assumed to
+be square integrable. This assumption naturally corresponds to the classic L2 theory of integral
+operators, as is commonly seen in works by Fredholm, Hilbert, and Riesz.
+
+7
+
+
+DRAFT
+
+2
+The Laplace equation
+
+In the introduction, we saw that Poisson’s equation arises naturally from physical considerations
+in electrostatics merely by using Coulomb’s law for the force exerted on charged particles.
+Similarly, Laplace’s equation with boundary conditions (and Poisson’s equation) also arise
+naturally in fluid flow and elasticity. These problems will be treated in later chapters. We first
+discuss the simplest case, that of Laplace’s equation in two dimensions.
+
+2.1
+Two dimensions
+
+In two dimensions, the Green’s function g for Laplace’s equation satisfies
+
+∆g(x, x′) = δ(x −x′).
+(2.1)
+
+Since the right hand side is only a function of r, we can assume that so is the Green’s
+function g = g(r). With this in mind, and switching to polar coordinates, we see that the Green’s
+function, away from r = 0 must satisfy:
+�∂2
+
+∂r2 + 1
+
+r
+∂
+∂r
+
+�
+g(r) = 0.
+(2.2)
+
+The solution to this ODE is g(r) = c1 log r +c2. Taking c2 = 0, the constant c1 can be determined
+by integrating both sides of (2.1) over some ball of radius R and applying the Divergence
+Theorem. We have that
+∬
+
+B(0,R)
+∆g(r) dV(r) =
+∬
+
+B(0,R)
+∇· ∇g(r) dV(r)
+
+=
+∫
+
+∂B(0,R)
+n · ∇g(r) dA(r)
+
+=
+∫2π
+
+0
+
+�∂
+
+∂r log r
+�
+|r=R R dφ
+
+= 2π.
+
+(2.3)
+
+This result is independent of R, and since
+∬
+δ = 1, by definition the definition of the δ function,
+we have that
+g(x, x′) = g(x −x′) = 1
+
+2π log |x −x′|.
+(2.4)
+
+Using this Green’s function the solution to the Poisson problem in all of R,
+
+∆u = f,
+(2.5)
+
+8
+
+
+DRAFT
+
+2.1. TWO DIMENSIONS
+M. O’Neil
+
+can explicitly be written as:
+
+u(x) = 1
+
+2π
+
+∬
+
+R2 log |x −x′| f (x′) dV(x′).
+(2.6)
+
+The log kernel is absolutely integrable, and therefore u is well-defined everywhere.
+For functions σ and µ supported on the boundary Γ of some open region Ω⊂R2, we define
+the single and double layer potential operator:
+
+Sσ(x) =
+∫
+
+Γ
+g(x, x′) σ(x′) ds(x′)
+
+Dµ(x) =
+∫
+
+Γ
+
+�∂
+
+∂n′g(x, x′)
+�
+µ(x′) ds(x′),
+(2.7)
+
+where ∂/∂n = n · ∇and it is assumed that x �Γ. It is worth noting that no matter what σ and µ
+are, the functions Sσ and Dµ are harmonic everywhere by construction.
+In the limit as x approaches the boundary Γ, special case must be made to in order to obtain
+the correct limit in these integrals. Since the Green’s function g exhibits only a logarithmic
+singularity, it is absolutely integrable and we have that
+
+lim
+h→0± Sσ(x + hn) = Sσ(x).
+(2.8)
+
+That is to say, the function Sσ is continuous across the boundary Γ. On the other hand, it can
+be shown that the double layer potential Dµ exhibits a jump of size µ across Γ:
+
+lim
+h→0± Dµ(x + hn) = ±1
+
+2 µ(x) + Dµ(x),
+(2.9)
+
+where for x ∈Γ, in somewhat of an abuse of notation, Dµ(x) is interpreted in its principal
+value sense:
+Dµ(x) = lim
+ϵ→0
+
+∫
+
+Γ\B(x,ϵ)
+
+−n′ · (x −x′)
+
+2π|x −x′|2 µ(x′)ds(x′),
+(2.10)
+
+where B(x, ϵ) is the ball of radius ϵ centered at x. A careful calculation along the smooth curve
+Γ can show that the integral over Γ ∩B(x, ϵ) is merely ±µ/2:
+
+lim
+ϵ→0 lim
+h→0±
+
+∫
+
+Γ∩B(x,ϵ)
+
+−n′ · (x + hn −x′)
+
+2π|x + hn −x′|2 µ(x′)ds(x′) = ±1
+
+2 µ(x).
+(2.11)
+
+Furthermore, the double layer kernel is actually continuous at x = x′, with
+
+lim
+x→x′
+−n′ · (x −x′)
+
+2π|x −x′|2
+= κ(x),
+(2.12)
+
+where κ denotes the signed curvature of Γ. See [?] for a full derivation. Related formulas in the
+complex analytic case, known as Sokhotski-Plemelj formulae, can easily be derived using the
+residue theorem.
+
+9
+
+
+DRAFT
+
+2.1. TWO DIMENSIONS
+M. O’Neil
+
+Lemma 1 (Plemelji formula). Let f be a complex analytic function in a neighborhood of the
+curve Γ which bounds a simply connected region Ω⊂C. Then for w ∈Γ,
+
+lim
+ξ→w±
+1
+2πi
+
+∫
+
+Γ
+
+f (z)
+ξ −z dz = ±1
+
+2 f (w) + PV
+∫
+
+Γ
+
+f (z)
+ξ −z dz,
+(2.13)
+
+where + denotes the limit from the exterior (C \ Ω), −the limit from the interior, and PV the
+principal value.
+
+Proof. We prove the case for the interior limit only, as the exterior limit is virtually identical. To
+this end, let w ∈Γ, and let Γϵ = Γ ∩B(w, ϵ). Denote by ∂B+(w, ϵ) the part of the boundary of
+this ball that lies exterior to Ω. The interior limit corresponds to the limit as ϵ →0 in Figure 2.1.
+The direction (counter-clockwise) of integration is also shown in the figure. The integral can
+therefore be split as follows:
+∫
+
+Γ
+
+f (z)
+w −z dz = lim
+ϵ→0
+
+∫
+
+∂B+(w,ϵ)
+
+f (z)
+w −z dz + PV
+∫
+
+Γ
+
+f (z)
+w −z dz.
+(2.14)
+
+Under the assumption that f is analytic in a neighborhood of Γ, ϵ can be chosen small enough
+so that f can be written in B(w, ϵ) as
+
+f (z) = f (w) + f ′(w)(z −w) + f ′′(w)
+
+2
+(z −w) + . . . .
+(2.15)
+
+Inserting this expansion into the first integral on the right of (2.14), we have (as in a residue
+calculation):
+∫
+
+∂B+(w,ϵ)
+
+f (z)
+w −z dz =
+∫
+
+∂B+(w,ϵ)
+
+f (w)
+w −z dz +
+∫
+
+∂B+(w,ϵ)
+
+f ′(w) (z −w)
+
+w −z
+dz + . . .
+
+= f (w)
+∫θ2
+
+θ1
+
+−iϵeiθ
+
+ϵeiθ
+dθ + f ′(w)
+∫
+
+∂B+(w,ϵ)
+
+iϵ2ei2θ
+
+ϵeiθ
+dθ + . . .
+
+= −i f (w)
+∫θ2
+
+θ1
+dθ + iϵ f ′(w)
+∫
+
+∂B+(w,ϵ)
+eiθdθ + . . .
+
+(2.16)
+
+where the curve has been parameterized according to w −z = ϵeiθ. Taking the limit as ϵ →0,
+we see that θ2 −θ1 →π, and we have that
+
+lim
+ϵ→0
+
+∫
+
+∂B+(w,ϵ)
+
+f (z)
+w −z dz = −iπ f (w).
+(2.17)
+
+□
+
+A similar calculation can be done for the real-valued double layer kernel, as it can be shown
+that
+
+ℜ
+�1
+
+2πi
+dz′
+
+z −z′
+
+�
+= −n′ · (x −x′)
+
+|x −x′|2
+ds(x′),
+(2.18)
+
+where we have associated the complex values z, z′ with the real vectors x and x′, respectively.
+
+10
+
+
+DRAFT
+
+2.1. TWO DIMENSIONS
+M. O’Neil
+
+Figure 2.1: Splitting of the boundary curve in order to calculate the jump conditions layer potential
+operators and the Cauchy integral for values on the curve.
+
+To summarize, we have the following limited behaviors for the single and double layer
+potentials:
+lim
+h→0± Sσ(x + hn) = Sσ(x),
+
+lim
+h→0± Dµ(x + hn) = ±1
+
+2 µ(x) + Dµ(x).
+(2.19)
+
+The kernel of S is singular, but integrable, and the kernel of D is continuous (and therefore
+integrable). Analogous results can be shown for their normal derivatives along Γ, denoted by S′
+
+and D′:
+lim
+h→0± S′σ(x + hn) = ∓1
+
+2σ(x) + S′σ(x),
+
+lim
+h→0± D′µ(x + hn) = D′µ(x).
+(2.20)
+
+The operator D′ is known as a hypersingular operator, and has to be interpreted as a finite part
+integral. That is to say, for x ∈Γ,
+
+FP D′µ(x) = lim
+ϵ→0
+
+�∫
+
+Γ\B(x,ϵ)
+
+∂2g(x, x′)
+
+∂n ∂n′
+µ(x′) ds(x′) −2µ(x)
+
+ϵ
+
+�
+.
+(2.21)
+
+As before, principal value and finite part integrals are implied when the argument is located on
+the boundary of integration.
+
+2.1.1
+The Interior Dirichlet Problem
+
+The canonical boundary value problem for the Laplace equation is that of the Interior Dirichlet
+problem. In this section we derive a corresponding integral equation for this boundary value
+problem, prove that it has a unique solution, and then discuss discretization and quadrature
+techniques in the next section. Other boundary value problems are treated in subsequent sections,
+but the techniques are very similar.
+For some connected bounded region Ωwith smooth boundary Γ, and f defined on Γ, the
+interior Dirichlet boundary value problem is given as:
+
+∆u = 0,
+in Ω,
+
+u = f,
+on Γ.
+(2.22)
+
+11
+
+
+DRAFT
+
+2.1. TWO DIMENSIONS
+M. O’Neil
+
+This boundary value problem arises naturally in electrostatic scattering problems from perfect
+electric conductors. The uniqueness of u is established by Green’s First Identity (see Appendix).
+If u1 and u2 were two different solutions to (2.22), then the difference u = u1 −u2 would satisfy
+the interior Dirichlet problem with f = 0. Setting v = u in Green’s First Identity (A.2), we have
+that
+∫
+
+Ω
+|∇u|2dV = 0.
+(2.23)
+
+Therefore, u must be a constant. But since u = 0 on Γ, u = 0 everywhere.
+Instead of numerically solving (2.22) in differential form, we now change variables and
+represent the solution u in Ωin terms of a double layer potential due to an unknown distribution
+σ (motivation to be discussed later on). For x in the interior of Ω, we write:
+
+u(x) = Dσ(x)
+
+=
+∫
+
+Γ
+
+�∂
+
+∂n′
+1
+2π log |x −x′|
+�
+σ(x′) ds(x′).
+(2.24)
+
+Note that since the Green’s function was used in the representation of u, we automatically have
+that ∆u = 0 in Ω. It merely remains to satisfy the boundary condition on Γ that u = f . Using
+the limiting values of the layer potential operators discussed in the previous section, enforcing
+the boundary condition u = f on Γ yields the following integral equation for σ:
+
+−1
+
+2σ + Dσ = f,
+(2.25)
+
+where the limit to the boundary has been taken from the domain of interest (i.e., the interior,
+inside Ω). Since Dσ defines a harmonic function everywhere inside Ω, any such solution to
+the above integral equation will yield a solution u to the interior Dirichlet problem by setting
+u = Dσ. It remains to be shown that there is a unique solution to this integral equation.
+
+Theorem 1. The integral equation (−I/2 + D)σ = f on Γ has a unique solution σ for any
+right-hand side f . The function u = Dσ then uniquely solves the interior Dirichlet problem in
+Ωwith boundary data f .
+
+Proof. By the Fredholm Alternative (see Appendix B), since the operator D is compact, to
+show the uniqueness of σ it suffices to show that the homogeneous integral equation
+�
+−1
+
+2I + D
+�
+σ = 0
+(2.26)
+
+only has the solution σ = 0. To this end, define the function uin(x) = Dσ(x) for x ∈Ω. By the
+jump properties of the double layer, we have that for x ∈Γ:
+
+lim
+h→0−uin(x + hn) = −σ(x)
+
+2
++ Dσ(x)
+
+= 0.
+(2.27)
+
+This means that uin satisfies the interior Dirichlet problem with zero boundary data. This implies
+that uin = 0 in Ω, and therefore, also that for x ∈Γ:
+
+lim
+h→0−
+∂uin
+
+∂n (x + hn) = 0.
+(2.28)
+
+12
+
+
+DRAFT
+
+2.1. TWO DIMENSIONS
+M. O’Neil
+
+Next, for x ∈R2 \ ¯Ω, set uout(x) = Dσ(x). Since D′σ is continuous across the boundary Γ,
+we have that for x ∈Γ,
+∂uout
+
+∂n
+= ∂uin
+
+∂n = 0.
+(2.29)
+
+That is to say, uout satisfies that boundary value problem:
+
+∆u = 0,
+R2 \ ¯Ω,
+
+∂uout
+
+∂n
+= 0,
+on Γ.
+(2.30)
+
+We will now show that this implies that uout = 0 in R2 \ ¯Ω. We begin by applying Green’s First
+Identity in the region contained between Γ and a very large circle of radius R centered at the
+origin. We will denote this region by D = B(0, R) \ Ω:
+∫
+
+D
+
+�
+uout∆uout + |∇uout|2�
+dv =
+∫
+
+∂D
+uout ∂uout
+
+∂n
+da.
+(2.31)
+
+Since uout is harmonic, and ∂uout/∂n = 0 on Γ, we have that:
+∫
+
+D
+|∇uout|2 dv =
+∫
+
+∂B(0,R)
+uout ∂uout
+
+∂n
+da.
+(2.32)
+
+But for sufficiently large R, uout ∼O(1/R) on ∂B(0, R) since:
+
+uout(x) = Dσ(x)
+
+=
+∫
+
+Γ
+
+1
+2π
+
+�∂
+
+∂n′ log |x −x′|
+�
+σ(x′) da
+
+= −
+∫
+
+Γ
+
+1
+2π
+n′ · (x −x′)
+
+|x −x′|
+σ(x′) da
+
+∼O
+�1
+
+|x|
+
+�
+as x →∞.
+
+(2.33)
+
+Taking the normal derivative, ∂/∂r, of this asymptotic behavior in uout we have that as |x| →∞:
+
+∂uout
+
+∂n (x) ∼
+1
+|x|2 .
+(2.34)
+
+Using this behavior in (2.32), we have that
+
+lim
+R→∞
+
+∫
+
+D
+|∇uout|2 dv = lim
+R→∞
+
+∫
+
+∂B(0,R)
+uout ∂uout
+
+∂n
+da
+
+∼lim
+R→∞
+
+∫
+
+∂B(0,R)
+O
+�1
+
+r3
+
+�
+r dr
+
+∼lim
+R→∞O
+�1
+
+R2
+
+�
+
+= 0.
+
+(2.35)
+
+13
+
+
+DRAFT
+
+2.2. THREE DIMENSIONS
+M. O’Neil
+
+This implies that uout is a constant, but since uout →0 as |x| →∞it must be that uout = 0.
+We now have both that uin = 0 and that uout = 0. By the jump conditions of Dσ, we have that
+
+0 = lim
+h→0+
+
+�
+uout(x + hn) −uin(x −hn)
+�
+= σ(x).
+(2.36)
+
+This proves that if (−I/2 + D) σ = 0 then σ = 0.
+□
+
+2.2
+Three dimensions
+
+14
+
+
+DRAFT
+
+3
+Discretization and quadrature
+
+This chapter will describe modern techniques for discretizing continuous boundary integral
+equations into finite dimension linear systems that can be solved using linear algebra techniques.
+Technically, discretization and quadrature can be viewed as two separate topics, but it is often
+convenient to treat them together as the easiest to use quadrature rule often depends on the
+method by which functions are discretized. We treat both the discretization of integrals and
+functions along curves in two dimensions and surfaces in three dimensions. The analogous
+volume discretizations are not discussed, but similar methods immediately extend to those cases.
+In keeping with the theme of these lecture notes, we will assume that the operators to be
+discretized are viewed as maps from L2 →L2, and that functions (unknowns and right-hand
+sides) to be discretized are elements of L2. With this in mind, there are basically two options for
+both discretizing functions and enforcing the discrete approximation of the continuout integral
+equation: point values and moments (function expansions). That is to say, a function f (or class
+of functions) can be discretized using N point values f (xj) at nodes xj with weights wj such
+that
+∫
+
+Γ
+| f (x)|2 da(x) =
+
+N
+�
+
+j=1
+wj | f (xj)|2.
+(3.1)
+
+If the above formula merely holds to accuracy ϵ, then we say that the nodes and weights xj,
+wj provide an ϵ-discretization of f in L2. (This formula may hold to a particular order of
+approximation as well, but we choose to use ϵ-discretizations instead because of the forthcoming
+relationship with matrix decompositions and approximations.) Values of f at locations other
+than the nodes xj can be obtained via interpolation, which may or may not yield accurate results
+based on the choice of node locations. We will discuss this matter later on.
+On the other hand, instead of using point values of f , one may wish to instead express f in
+terms of its coefficients with respect to some set of N basis functions ϕj:
+
+f (x) =
+
+N
+�
+
+j=1
+αj ϕj(x).
+(3.2)
+
+Once again, if the above approximation is valid to accuracy ϵ, we say that ϕj provides an
+ϵ-discretization of f .
+With these two methods of discretization in mind, we can discuss the three major methods
+for discretizing integral equations: the Nyström method, collocation, and Galerkin discretization.
+In short, the discretized linear systems of the continous integral equation (I + K)σ = f for each
+
+15
+
+
+DRAFT
+
+M. O’Neil
+
+of these methods is given by:
+
+Nyström:
+σi +
+�
+
+j
+wj k(xi, xj) σj = f (xi)
+
+Collocation:
+�
+
+j
+αj
+�ϕj(xi) + Kϕj(xi)�= f (xi)
+
+Galerkin:
+�
+
+j
+αj
+�(ψi, ϕj) + (ψi, Kϕj)�= (ψi, f ),
+
+(3.3)
+
+where ( f, g) denotes the usual L2 inner product on Γ and ψi, ϕj are some set of suitable testing
+and expansion functions. The solution to the Nyström discretization is an approximation to
+actual functions values of σ, σi ≈σ(xi), whereas the unknowns in both the collocation and
+Galerkin methods are the expansion coefficients of σ, given by αi. While the linear systems due
+to collocation and Galerkin methods tend to be slightly better conditioned (heuristically) due
+to the extra integration, the Nyström method has several algorithmic advantages, namely that
+each matrix element Kij in the discretized system (I + K)σ = f is merely a kernel evaluation
+times a weight function. This is in contrast to, for example, the Galerkin discretization wherein
+each matrix entry is an inner product: (ψi, Kϕj). As a result, matrix assembly for the Nyström
+method is often much faster than for the Galerkin method, and is directly compatible with the
+standard form of fast multipole methods for computing N-body simulations. It is for this reason
+that we mainly focus on Nyström-type discretizations going forward.
+Within the technique of Nyström discretization, there is a subtle, but very practical scaling
+of the discretized system which ensures that (on the order of the underlying quadrature) that the
+finite dimensional operator on ℓ2 captures the behavior of the infinite-dimensional operator on
+L2. That is to say, with the proper scaling of unknowns, the eigenvalues of I + K converge to the
+eigenvalues of the continuous operator I + K as the number of discretization points tends to
+infinity. A thorough treatment of this can be found in [1, 2], but we outline the scaling here.
+First, we note that given a nyström discretization of a function σ defined along a curve (or
+surface) Γ (i.e. values and weights), its L2 norm can be approximated as:
+
+||σ||2
+2 =
+∫
+
+Γ
+|σ(x)|2 da(x)
+
+≈
+�
+
+j
+wj |σ(xj)|2
+
+=
+�
+
+j
+|√wjσ(xj)|2.
+
+(3.4)
+
+Declaring the vector σ = (σ1 · · · σn) to be discretized version of σ means that the usual ℓ2 norm
+of σ does not converge to the L2 norm of σ, since
+
+||σ||2
+2 =
+�
+
+j
+|σj|2
+
+�
+�
+
+j
+
+�
+
+j
+wj |σj|2
+
+≈
+∫
+
+Γ
+|σ|2 da.
+
+(3.5)
+
+16
+
+
+DRAFT
+
+3.1. CURVES IN TWO DIMENSIONS
+M. O’Neil
+
+We denote the discretization of σ →√wjσ(xj) as an L2 embedding of σ, also known as an
+inner-product preserving discretization as the norm in ℓ2 converges to the norm in L2.
+Likewise, the usual Nyström discretization of K with matrix entries Kij = wj k(xi, xj)
+results in a matrix with eigenvalues which, in general, have nothing to do with the eigenvalues
+of the continuous operator K. The proper scaling can be derived by noting the effect of using
+the inner product preserving discretization of σ in the discretized integral equation instead of
+the usual one. The ith equation becomes:
+
+σi +
+�
+
+j
+wj k(xi, xj)σj = fi
+
+σi +
+�
+
+j
+k(xi, xj) √wj √wjσj = fi
+
+√wiσi +
+�
+
+j
+
+√wik(xi, xj) √wj √wjσj = √wi fi
+
+(3.6)
+
+Therefore, the discretization √wiwjk(xi, xj) is the corresponding inner product preserving
+discretization of K. These scalings are particularly important for adaptive discretizations,
+especially those along geometries with corners and edges as the integral operators are not
+compact on L2 anymore but merely bounded. In particular, these weightings can have a large
+effect on the resulting condition number of the discretized system.
+
+3.1
+Curves in two dimensions
+
+3.1.1
+Discretization
+
+While Nyström method truists may claim that discretizing a function at point values is just that
+– samples of a function at particular locations, and nothing more – the fact is that each such
+discretization implies an underlying representation of the function (as opposed to the explicit
+representation of the function in Galerkin methods).
+
+Global periodic discretizations
+
+Locally adaptive discretizations
+
+3.1.2
+Quadrature
+
+Generally, in two dimensions, the integrals of interest have kernels with logarithmic singularities
+(absolutely integrable) or normal derivatives thereof (weakly-singular, defined in the principal
+value sense). The singularity of these kernels along a curve is generic in the sense that it can be
+shown to only depend on the distance of the source and target in parameter-space, not in R2.
+
+17
+
+
+DRAFT
+
+3.2. SURFACES IN THREE DIMENSIONS
+M. O’Neil
+
+For example,
+
+Sσ(x) =
+∫
+
+Γ
+log |x −x′| σ(x′) ds(x′)
+
+=
+∫1
+
+0
+log |x(τ) −x′(t)| σ(x′(t)) ds(x′(t))
+
+=
+∫1
+
+0
+log |x(τ) −x′(t)| σ(t) ds
+
+dt (t) dt
+
+=
+∫1
+
+0
+
+�
+log
+����
+x(τ) −x′(t)
+
+τ −t
+
+����−log |τ −t|
+�
+σ(t) ds
+
+dt (t) dt.
+
+(3.7)
+
+The above expression contains no geometry information in the singular part, only the parameter-
+ization variables. Therefore, it suffices to design quadratures for polynomials times log on the
+line.
+
+Adaptive quadrature
+
+For example, if σ (the unknown solution to an integral equation) is discretized on a panel at
+k Legendre nodes in the parameterization domain of the panel, then the diagonal block in the
+resulting discretized linear system can be constructed as follows. Sampling σ at k Legendre
+points implies that there exists a degree k −1 interpolant on the same panel, given as:
+
+σ(t) =
+
+k−1
+�
+
+ℓ=0
+cℓPℓ(t).
+(3.8)
+
+Inserting this interpolant into integral (3.7), for example, we have
+
+φi =
+∫
+
+Γ
+log |xi −x′| σ(x′) ds(x′)
+
+=
+∫1
+
+−1
+log |xi −x(t)|
+
+�k−1
+�
+
+ℓ=0
+cℓPℓ(t)
+
+�
+ds
+dt (t) dt.
+(3.9)
+
+Product quadratures
+
+Corrected-trapezoidal rules
+
+Generalized Gaussian rules
+
+3.2
+Surfaces in three dimensions
+
+18
+
+
+DRAFT
+
+4
+The 3D Laplace Fast Multipole Method
+
+4.1
+Tree-codes
+
+Early algorithms of the 1980’s based on various oct-tree or kd-tree divisions of space, and used
+mainly for molecular dynamics or cosmological (galaxy formation) simulations, were known
+as tree-codes. These algorithms [?, ?, ?] were low-order (usually only using approximations
+equivalent to zeroth-order multipole expansions) and did not make use of systematic error
+analysis to guarantee precision upon completion.
+In the work of Appel [?], a kd-tree was used to hierarchically compute the gravitational
+n-body problem for galaxy formation. The drawbacks of using a kd-tree, as opposed to the
+oct-tree that was later introduced by Barnes and Hut [?], is that it makes no assumption on
+the physical distribution of points. For uniformly distribution points, the two trees are almost
+equivalent in practice. Keeping track of the physical separation and structure points in an n-body
+calculation turns out to be necessary if one is to maintain control over the accuracy of the
+computation.
+We now introduce the basic Barnes-Hut algorithm here (in terms of the potential function
+formulation), and discuss the error and higher-order extensions.
+
+4.1.1
+Barnes-Hut
+
+The goal of many galaxy formation calculations is to simulation, in time, the movement and
+coagulation (or dispersion) of point-masses in the universe. Basic time integrators for this
+system require that, on every step, the following n-body calculation be done for all point-masses
+xj in the system, with masses denoted by mj:
+
+Fi =
+�
+
+j�i
+
+Gmimj(xi −xj)
+
+∥xi −xj∥3
+
+= −Gmi∇i
+�
+
+j�i
+
+mj
+∥xi −xj∥
+
+= −Gmi∇iφi
+
+(4.1)
+
+where ∇i is the gradient on the target, xi. For simplicity, we will now address the problem of
+computing the sum of the potential point interactions, φi, and not the field F. The field can be
+obtained by differentiation of the proceeding formulas.
+The driving motivation for the following algorithm is that from far away, the gravitational
+field due to a collection of point masses located at xj is very close to that due to a single point
+mass, located at the center of mass xc of the xj’s. Using this idea hierarchically (i.e. replacing
+
+19
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+Figure 4.1: An oct-tree with one particle per box. The green dots can denote either original particles, or
+centers of mass for boxes on finer levels.
+
+centers of mass with other centers of mass on larger scales), we have the following algorithm,
+known as Barnes-Hut.
+
+The original Barnes-Hut algorithm
+
+Step 0 Divide the computational box, containing all point masses, using an oct-tree
+such that at most one point is contained in each leaf node. Set all the φi’s to
+zero, initialize threshold parameter θ < 1.
+
+Step 1 Starting at the leaf nodes, recursively compute the center of mass and total
+mass for all particles contained in each box, all the way to the root.
+
+Step 2 Now, for each target particle xi, starting at the root, traverse the tree toward
+the leafs, processing one box B (that is not marked done) at a time. Let:
+
+rB = the radius of box B
+
+xB,c = the center of mass for all particles contained in B
+
+mB = the total mass of all particles in box B
+
+rB,i = the distance from xB,c to xi
+
+If rB/rB,i < θ, mark this box as done and increment φi:
+
+φi = φi +
+mB
+∥xi −xB,c∥.
+
+20
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+If rB/rB,i ≥θ, then skip this box and process its children. Repeat for all
+boxes.
+
+Step 3 For all boxes Bj on the leaf level that were not marked done, add their
+contribution directly:
+
+φi = φi +
+mBj
+∥xi −xBj ∥.
+
+The potential φi has now been computed.
+
+Let us now discuss these steps one-by-one in more detail.
+
+Complexity analysis
+
+Step 0: This step can be considered pre-computation, as it merely constructs the data structure
+which keeps track of centers of mass and total mass for each box. The oct-tree data structure is
+hierarchical data structure that evenly divides space on each level into eight equal cubes (the
+two-dimensional version is a quad-tree, and the one-dimensional version is a binary tree) [?].
+Its construction requires O(n log n) operations, where n is the total number of particles being
+sorted. The parameter θ that is set will be proportional to the global accuracy of the proceeding
+algorithm.
+Step 1: The center of mass and total mass for each box is computed. For a box B with
+masses mj > 0 located at xj, the center of mass is calculated as:
+
+xB,c =
+
+�
+j mj xj
+�
+j mj
+.
+(4.2)
+
+We will discuss the matter of non-positive masses later on when detailing multipole methods
+for electrostatics (in that case, electric charge takes the place of mass). The center of mass for
+parent boxes can be computed directly from the centers of mass of their children. Since on each
+level of the oct-tree, each box performs an O(1) calculation to compute its center of mass and
+total mass (from its children), the complexity of this step is proportional to the total number of
+boxes, which is O(n) in an oct-tree. See Figure 4.1 for a depiction of a two-dimensional oct-tree
+(quad-tree).
+Step 2: This step is the important part of the Barnes-Hut algorithm. If the center of mass
+xB,c of a particular box B is far away enough from the target particle xi (relative to the size of
+the box containing the center of mass), then add this contribution to the potential for target i. In
+particular, if rB/rB,i < θ then this means that rB,i > rB/θ, i.e. that particle i located at xi is 1/θ
+box-lengths away from the center of mass for box B (where one unit of box length is the box
+radius rB). See Figure 4.2 for a graphical depiction of dimensions discussed.
+As the tree is traversed, starting at the root, the values of rB and maxB rB,i decrease by the
+same constant factor (since each box is always divided evenly into eight children). Because of
+this fact, there are at most O(1) boxes that will contribute to the potential φi on every one of
+O(log n) levels. Therefore, the computational cost for this step for one particle is O(log n), and
+for all particles is O(n log n).
+
+21
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+,i
+
+Figure 4.2: The region of interaction for a target particle xi in the Barnes-Hut style tree-code algorithm.
+The red dot is the target, the yellow dots do not contribute, only the blue dot does. The grey dots are on
+levels have have not been processed, and the black dots have already been processed.
+
+Step 3: Unless θ is very large, for a given particle xi there will be a finite number of nearby
+leaf boxes whose center of mass (i.e. the location of the actual particle) will not satisfy the
+criterion rB/rB,i ≥θ. The contribution to φi from these boxes is now added directly. For each
+particle, this occurs for O(1) boxes, depending on the value of θ. The total cost for this step (for
+all particles xi) is O(n).
+
+Error analysis
+
+In the center-of-mass Barnes-Hut algorithm, the only parameter that can be changed to increase
+the accuracy of the computation is θ. We will now derive an expression in θ based on multipole
+expansions for an estimate of the error for Barnes-Hut [?].
+The main approximation made in the original Barnes-Hut algorithm was the center of mass
+approximation. In its simplest form, we are interested in the error in the following approximation:
+
+φ(xi) =
+ma
+∥xi −xa∥+
+ma
+∥xi −xa∥
+
+=
+ma + mb
+���xi −maxa+mb xb
+
+ma+mb
+
+���
++ ϵ
+(4.3)
+
+22
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+Figure 4.3: Source and target particles for a multipole expansion.
+
+as a function of the distance from xi to the center of mass of xa and xb. In order to estimate this
+error, we need an expression for 1/∥x −x′∥in terms of multipoles. As detailed in Appendix ??,
+if ∥x′∥< ∥x∥, then this fundamental solution can be expanded as:
+
+1
+∥x −x′∥=
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+r′ℓ
+
+rℓ+1 Y−m
+ℓ
+(θ′, ϕ′)Y m
+ℓ(θ, ϕ)
+(4.4)
+
+where the spherical coordinates of x are r, θ, ϕ and similarly for x′. Truncating this expansion
+at ℓ= p yields the following error estimate:
+�����
+1
+∥x −x′∥−
+
+p
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+r′ℓ
+
+rℓ+1 Y−m
+ℓ
+(θ′, ϕ′)Y m
+ℓ(θ, ϕ)
+
+�����≤
+1
+r −r′
+
+�r′
+
+r
+
+�p+1
+,
+(4.5)
+
+which is straightforward to derive using the fact that when properly normalized, |Pm
+ℓ| ≤1. A
+sufficient normalization is given in the appendix. By the principle of superposition, the multipole
+expansion for a collection of point sources with masses mj and locations rj, θj, ϕj with rj < r is
+
+φ(x) =
+�
+
+j
+
+mj
+∥x −xj∥
+
+=
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+Mℓm
+rℓ+1 Y m
+ℓ(θ, ϕ),
+(4.6)
+
+with
+Mℓm =
+�
+
+j
+mj rℓ
+j Y−m
+ℓ
+(θj, ϕj).
+(4.7)
+
+Likewise, by interchanging the order of summation, the error in truncating this expansion at
+
+23
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+ℓ= p is given by
+�����φ(x) −
+
+p
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+Mℓm
+rℓ+1 Y m
+ℓ(θ, ϕ)
+
+�����≤
+
+�
+j mj
+r −rB
+
+�rB
+
+r
+
+�p+1
+,
+(4.8)
+
+where rB = maxj rj, see Figure 4.3.
+We now apply this error estimate to the geometry governing particle interactions in the
+Barnes-Hut algorithm. Examining Figure 4.2, we see that when processing a box B, the center of
+mass xB,c can be located anywhere inside B. Therefore, the radius of the smallest ball, centered
+at xB,c that encloses all sources contained in box B is bounded by 2rB, where rB is the diagonal
+radius of the box. Using this observation, we see that the Barnes-Hut potential at location xi due
+to all sources in box B is given by equation (4.3) is nothing more than a zeroth-order multipole
+expansion, centered at xB,c:
+φ(xi) ≈mB
+
+rB,i
+
+=
+
+�
+j mj
+∥xi −xBc ∥
+
+(4.9)
+
+where the sum is over all masses mj contained in box B. For the Barnes-Hut parameter θ ≤1/2,
+the error in the zeroth-order multipole expansion is then given by:
+����φ(xi) −mB
+
+rB,i
+
+����≤
+mB
+rB,i −2rB
+
+�2rB
+
+rB,i
+
+�
+
+≤
+2mB
+rB,i −2rB
+θ
+
+≤mB
+
+rB
+
+2θ2
+
+1 −2θ .
+
+(4.10)
+
+At first glance, this error estimate (which is an absolute accuracy statement) grows linearly with
+the size of the mass contained in each box. However, multipole estimates are inherently a relative
+precision statement with respect to the scale of the potential, �
+j mj. Similar observations hold
+when applying multipole estimates not to point masses, but rather to mass densities (e.g. in the
+case of solving a Poisson problem, where multipole methods are used to evaluate integrals).
+In order to improve the accuracy of the Barnes-Hut algorithm, we must use higher order
+multipole expansions for evaluate the potential due to a collection of sources in a particular box.
+In the next section, we will describe the calculations for these high-order tree-codes.
+
+4.1.2
+High-order tree-codes
+
+In the first upward-pass through the oct-tree in the original Barnes-Hut algorithm, the total mass
+and center of mass for each box was calculated. These quantities are then used to approximate
+the potential due to all the sources in a particular box, regardless of its depth in the oct-tree. This
+center of mass approximation is nothing more than a zeroth-order multipole expansion, centered
+at the center of mass, with a multipole coefficient equal to the total mass contained in the box (as
+was shown in the previous section). In order to improve the accuracy of this O(n log n) scheme,
+the zeroth-order multipole approximation can be replaced with one of higher order. In doing so,
+we now require one additional piece of mathematics: a procedure for translating and merging the
+
+24
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+multipole expansions of child boxes into one for their parent. In particular, we can now describe
+a higher-order version of the previous Barnes-Hut scheme, with some additional modifications
+that will enable better error approximation.
+As before, we first informally describe the algorithm and then examine details of the
+complexity and accuracy.
+
+A pth order tree-code
+
+Step 0 Divide the computational box, containing all points, using an oct-tree such
+that there is at most one point contained in each leaf node. Set all the φi’s to
+zero, initialize the order of the multipole expansion to p > 0.
+
+Step 1 Process all the leaf nodes. For each box B on the leaf level, L, form the order
+p multipole expansion due to the source contained in B, centered about the
+center of box B.
+
+Step 2 For levels L −1 to 0, recursively compute the order p multipole expansion
+centered about the center of a box B by translating and merging the multipole
+expansions for the children of box B.
+
+Step 3 For each target particle xi = (ri, θi, φi), starting at the root, traverse the tree
+toward the leafs, processing one box B (that is not marked done) at a time.
+Let:
+
+rB = the radius of box B
+
+xB = the center of box B
+
+MB
+ℓm = the multipole coefficients for box B
+
+rB,i = ∥xb −xi∥, the distance from xB to xi
+(ρ, α, β) = xi −xB, the coordinates of xi relative to xB
+
+If box B is well-separated from the target xi, mark this box as done and
+increment φi:
+
+φi = φi +
+
+p
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+MB
+ℓm
+ρℓ+1 Y m
+ℓ(α, β)
+
+By well-separated, we mean that the target xi is separated from box B by at
+least one box of the same size as B. See Figure ??. If xi is not well-separated,
+then skip box B and process its children using the same procedure. Repeat for
+targets xi.
+
+Step 4 For any boxes B on the leaf level that were not marked done, add the
+contributions from the sources xj located in them directly:
+
+φi = φi +
+mj
+∥xi −xj∥.
+
+The potential φi, due to all sources other than xi, has now been computed.
+
+25
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+Note: Unlike the previous tree-code, where the inclusion of a potential contribution was
+determined by a separation parameter θ, which in turn determined the accuracy of the calculation,
+this scheme does not contain an analogous parameter. All multipole-target interactions are
+determined by the oct-tree structure. This allows for more efficient computation and data
+structure development. We shall see that it is the multipole order p which directly determines
+the accuracy of the calculation.
+It remains to be discussed how to translate a multipole expansion, as in Step 2 of the pth
+
+order tree-code described above. We can formulate this computational task as follows: let M′
+ℓm
+be the multipole coefficients for an expansion centered at x′ = (r′, θ′, ϕ′), valid at any point
+x = (r, θ, ϕ) such that ∥x −x′∥> a. Let the coordinates of x −x′ by given as (ρ, α, β), i.e.
+these are the coordinates of x relative to x′. See Figure 4.4. Also assume that r > r′ + a. The
+potential at x is then given by:
+
+φ(x) =
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+M′
+ℓm
+ρℓ+1 Y m
+ℓ(α, β),
+for ∥x −x′∥> a.
+(4.11)
+
+The computational task in translating a multipole expansion to the origin 0 is to construct a new
+expansion for the potential at x, valid outside of a ball of radius r′ + a, centered at the origin, in
+terms of the absolute coordinates of x:
+
+φ(x) =
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+Mℓm
+rℓ+1 Y m
+ℓ(θ, ϕ),
+for ∥x∥> r′ + a,
+(4.12)
+
+and where the new multipole coefficients Mℓm depend only on x′ and the M′
+ℓm’s. We will
+now derive a formula for the coefficients Mℓm, i.e. the translation to the origin operator. This
+operator is often referred to as an M2M or multipole_to_multipole operator, when thought
+of as a subroutine.
+Equivalently, we wish to derive an expression for Y m
+ℓ(α, β)/ρℓ+1 in terms of the functions
+Y m
+ℓ(θ, ϕ)/rℓ+1. The coefficients in such an expression will yield the translation operator. In
+one dimension, these so-called addition formulas are best illustrated in terms of complex
+exponentials:
+
+ei(α+β) = eiαeiβ
+
+= (cos α + i sin α)(cos β + i sin β)
+
+= (cos α cos β −sin α sin β) + i (cos α sin β −sin α cos β)
+
+(4.13)
+
+which yield the sum-of-angles and difference-of-angles formulas for sin and cos. The angle
+θ = α + β can also be given in terms of an angle relative to α, which is β. We merely seek
+analogous formulas for the functions Y m
+ℓ(α, β)/ρℓ+1, also known as outgoing solid harmonics.
+We begin with a lemma which gives each of the solid harmonics, defined in spherical
+coordinates, in terms of cartesian derivatives of the function 1/∥x∥. A derivation of the
+following formulas can be found in [].
+
+26
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+a
+
+0
+
+Figure 4.4: The geometry used in constructing the addition formula for Y m
+ℓ.
+
+Lemma2. Let the spherical coordinates of the point x be given by (r, θ, ϕ), withr2 = x2 + y2 + z2,
+θ the angle from the z-axis, and ϕ the azimuthal angle. Then for all ℓ≥m ≥0,
+
+Y±m
+ℓ
+(θ, ϕ)
+
+rℓ+1
+= Aℓm
+
+�∂
+
+∂x ± i ∂
+
+∂y
+
+�m �∂
+
+∂z
+
+�ℓ−m �1
+
+r
+
+�
+,
+(4.14)
+
+with
+
+Aℓm =
+(−1)ℓ
+�
+
+(ℓ−m)! (ℓ+ m)!
+.
+(4.15)
+
+Keep in mind that the above definition of Aℓm depends directly on the normalization used
+in defining the associated Legendre functions Pm
+ℓ. The above definition is consistent with
+the normalization for Pm
+ℓand Y m
+ℓ
+in Appendix ??. Often, the differential operators given in
+Lemma 2 will be abbreviated as:
+
+∂+ = ∂
+
+∂x + i ∂
+
+∂y,
+∂−= ∂
+
+∂x −i ∂
+
+∂y,
+∂z = ∂
+
+∂z .
+(4.16)
+
+These operators, ∂±, ∂z are related to the raising and lowering operators (ladder operators) in
+quantum mechanics, see [?] for a nice discussion. Furthermore, if a function u is harmonic, then
+we will use the fact that
+∂+∂−u = −∂2
+z u.
+(4.17)
+
+To derive the multipole-to-multipole addition formula, we begin by recalling the multipole
+expansion of a point source at x′:
+
+1
+∥x −x′∥= 1
+
+ρ
+
+=
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+r′ℓ
+
+rℓ+1 Y−m
+ℓ
+(θ′, ϕ′)Y m
+ℓ(θ, ϕ),
+(4.18)
+
+27
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+and inserting the representation in (4.14), we have that
+
+1
+ρ =
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+r′ℓY−m
+ℓ
+(θ′, ϕ′) Aℓm ∂|m|
+sgn(m) ∂ℓ−|m|
+z
+
+�1
+
+r
+
+�
+,
+(4.19)
+
+where sgn(m) = 1 if m ≥0, and −1 otherwise. We handle the cases for m′ ≥0 and m′ < 0
+separately for the sake of clarity. For ℓ′ ≥m′ ≥0, if we apply the operator ∂m′
++ ∂ℓ′−m′
+z
+to both
+sides of this expression, and use (4.14), we have that
+
+1
+Aℓ′m′
+Y m′
+ℓ′ (α, β)
+
+ρℓ′+1
+=
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+r′ℓY−m
+ℓ
+(θ′, ϕ′) Aℓm ∂m′
++ ∂|m|
+sgn(m) ∂ℓ+ℓ′−|m|−m′
+z
+
+�1
+
+r
+
+�
+.
+(4.20)
+
+Now, note that for the terms in the previous sum corresponding to those with m ≥0, we have that
+
+∂m′
++ ∂|m|
+sgn(m) ∂ℓ+ℓ′−|m|−m′
+z
+
+�1
+
+r
+
+�
+= ∂m′+m
++
+∂ℓ+ℓ′−(m+m′)
+z
+
+�1
+
+r
+
+�
+
+= A(ℓ+ℓ′)(m+m′)
+Y m+m′
+ℓ+ℓ′ (θ, ϕ)
+
+rℓ+ℓ′+1
+.
+
+(4.21)
+
+For those terms in (4.20) with m < 0, i.e. sgn(m) = −1,
+
+∂m′
++ ∂|m|
+sgn(m) ∂ℓ+ℓ′−|m|−m′
+z
+
+�1
+
+r
+
+�
+= ∂m′
++ ∂|m|
+−
+∂ℓ+ℓ′−|m|−m′
+z
+
+�1
+
+r
+
+�
+.
+(4.22)
+
+Now, since 1/r is a harmonic function, and if m′ ≥|m|, then we can eliminate the ∂|m|
+−
+term by
+using (4.17):
+
+∂m′
++ ∂|m|
+−
+∂ℓ+ℓ′−|m|−m′
+z
+
+�1
+
+r
+
+�
+= ∂m′−|m|
++
+∂|m|
++
+∂|m|
+−
+∂ℓ+ℓ′−|m|−m′
+z
+
+�1
+
+r
+
+�
+
+= ∂m′−|m|
++
+(−1)|m| ∂2|m|
+z
+∂ℓ+ℓ′−|m|−m′
+z
+
+�1
+
+r
+
+�
+
+= (−1)|m| ∂m′−|m|
++
+∂ℓ+ℓ′+|m|−m′
+z
+
+�1
+
+r
+
+�
+
+= (−1)|m| ∂m′+m
++
+∂ℓ+ℓ′−(m′+m)
+z
+
+�1
+
+r
+
+�
+
+= (−1)|m| A(ℓ+ℓ′)(m+m′)
+Y m+m′
+ℓ+ℓ′ (θ, ϕ)
+
+rℓ+ℓ′+1
+.
+
+(4.23)
+
+Likewise, if m′ < |m|, then similarly the term ∂m′
++ can be eliminated, giving:
+
+∂m′
++ ∂|m|
+−
+∂ℓ+ℓ′−|m|−m′
+z
+
+�1
+
+r
+
+�
+= (−1)m′ A(ℓ+ℓ′)(m+m′)
+Y m+m′
+ℓ+ℓ′ (θ, ϕ)
+
+rℓ+ℓ′+1
+.
+(4.24)
+
+Defining the functions
+
+JM2M
++
+(m′, m) =
+�1,
+if m ≥0,
+(−1)min(m′, |m|),
+if m < 0,
+(4.25)
+
+28
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+and
+
+JM2M
+−
+(m′, m) =
+�1,
+if m ≤0,
+(−1)min(|m′|,m),
+if m > 0,
+(4.26)
+
+we have that for m′ ≥0,
+
+Y m′
+ℓ′ (α, β)
+
+ρℓ′+1
+=
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+JM2M
++
+(m′, m) Aℓ′m′ Aℓm r′ℓY−m
+ℓ
+(θ′, ϕ′)
+
+A(ℓ+ℓ′)(m+m′)
+
+Y m+m′
+ℓ+ℓ′ (θ, ϕ)
+
+rℓ+ℓ′+1
+.
+(4.27)
+
+A virtually identical calculation shows that for any m′ < 0,
+
+Y m′
+ℓ′ (α, β)
+
+ρℓ′+1
+=
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+JM2M
+−
+(m′, m) Aℓ′m′ Aℓm r′ℓY−m
+ℓ
+(θ′, ϕ′)
+
+A(ℓ+ℓ′)(m+m′)
+
+Y m+m′
+ℓ+ℓ′ (θ, ϕ)
+
+rℓ+ℓ′+1
+.
+(4.28)
+
+The only difference between these addition formulas is the sign function JM2M
+±
+, which depends
+on the sign of m′. We will refer to formulas (4.27) and (4.28) as the first addition formula for
+solid harmonics, i.e. that which operates on the outgoing (or multipole) functions. Having
+derived the multipole-to-multipole translation operator directly, we can simplify the remaining
+discussion by defining scaled versions of the solid harmonics, which we will refer to as the inner
+and outer functions:
+Im
+ℓ(r, θ, ϕ) = i−|m| Aℓm rℓY m
+ℓ(θ, ϕ),
+
+Om
+ℓ(r, θ, ϕ) = (−1)ℓi |m|
+
+Aℓm
+
+Y m
+ℓ(θ, ϕ)
+
+rℓ+1
+.
+(4.29)
+
+In this basis, multipole expansion for 1/∥x −x′∥becomes
+
+1
+∥x −x′∥=
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+(−1)ℓI−m
+ℓ
+(x′) Om
+ℓ(x),
+(4.30)
+
+where, of course we assume that ∥x∥> ∥x′∥. Likewise, the first addition formula for the
+outgoing solid harmonics is given by:
+
+Om
+ℓ(x −x′) =
+
+∞
+�
+
+ℓ′=0
+
+ℓ′
+�
+
+m′=−ℓ′
+(−1)ℓ′ I−m′
+ℓ′
+(x′) Om+m′
+ℓ+ℓ′ (x),
+(4.31)
+
+Remark 1. It is worth pointing out that using the inner and outer functions Im
+ℓand Om
+ℓsimplifies
+the resulting formulas considerably, however, they are not well-scaled functions. Each includes
+the Aℓm coefficients, which contain factorial terms. For this reason, it is often numerically more
+stable to deal with the standard solid harmonics functions when implementing any translation
+algorithm. The inner and outer functions are certainly preferable for formula derivation.
+
+We can now state the multipole translation theorem precisely.
+
+Theorem 2 (Multipole-to-multipole translation). Suppose that some collection of sources x′
+j
+with strengths qj are located inside the sphere of radius a centered at x′. For targets x outside
+this sphere, the potential is given by the multipole expansion
+
+φ(x) =
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+M′
+ℓm
+ρℓ+1Y m
+ℓ(α, β),
+(4.32)
+
+29
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+where the multipole coefficients M′
+ℓm are given as in (4.7), and (ρ, α, β) = x −x′. Then, outside
+of the sphere centered at the origin with radius r′ + a, the potential is given as
+
+φ(x) =
+
+∞
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+Mℓm
+rℓ+1 Y m
+ℓ(θ, ϕ)
+(4.33)
+
+with multipole coefficients given as:
+
+Mℓm =
+
+∞
+�
+
+ℓ′=0
+
+ℓ′
+�
+
+m=−ℓ′
+
+M′
+ℓ−ℓ′,m−m′ JM2M(m′, m −m′) Aℓ′m′ Aℓ−ℓ′,m−m′ r′ℓ′ Y−m′
+ℓ′
+(θ′, ϕ′)
+
+Aℓm)
+(4.34)
+
+and
+
+JM2M(j, k) =
+�(−1)min(|j |, |k |),
+if j · k < 0,
+1,
+otherwise.
+(4.35)
+
+Furthermore, if the multipole expansion centered at x′ satisfied the bound
+�����φ(x) −
+
+p
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+M′
+ℓm
+ρℓ+1Y m
+ℓ(α, β)
+
+�����≤
+
+�
+j |qj|
+
+ρ −a
+
+�a
+
+ρ
+
+�p+1
+(4.36)
+
+then the translated multipole expansion, when evaluated outside the disk of radius r′+a, satisfies
+the error estimate
+�����φ(x) −
+
+p
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+Mℓm
+rℓ+1 Y m
+ℓ(θ, ϕ)
+
+�����≤
+
+�
+j |qj|
+
+r −(r′ + a)
+
+�r′ + a
+
+r
+
+�p+1
+.
+(4.37)
+
+Proof. The proof of this is straightforward from the first addition theorem for multipole
+expansions. The bound is obtained directly from the fact that multipole expansions are unique,
+and therefore the translated expansion must be the unique expansion about 0.
+□
+
+We will refer to the linear operator which maps the multipole coefficients M′
+ℓm to the
+multipole coefficients Mℓm as T M2M, which when viewed as a second-order tensor (properly
+ordered matrix) has elements equal to
+
+T M2M
+ℓm,ℓ′m′ =
+(4.38)
+
+Computational cost
+
+The computational cost of the high-order tree-code described in the previous section, based
+on direct multipole-to-multipole translation operators is straightforward to derive. While the
+asymptotic cost of the upward-pass and evaluation stay the same as for the original Barnes-Hut
+algorithm, O(n) and O(n log n), respectively, we can also include an explicit dependence on p,
+the order of the multipole expansion used.
+During the upward-pass stage of the high-order tree-code, the additional work that each
+box must perform (except for the leaf level) is translating and combining each of the pth-order
+multipole expansions from each of its children into a single pth-order expansion about its center.
+As we saw in the previous section, the direct multipole-to-multipole translation operator is
+
+30
+
+
+DRAFT
+
+4.1. TREE-CODES
+M. O’Neil
+
+a dense, linear, convolution-type operator and therefore costs O(p4) operations to translate a
+single p-term expansion. This is akin to multiplication by a dense p2 × p2 matrix. Since each
+box has eight children, this brings the cost of the upward pass up to O(8p4n). We shall see in
+later sections that bringing the cost of these translations down from O(p4) is one of the main
+accelerations that can be made.
+An order p multipole expansion includes (p + 1)2 = O(p2) terms, and assuming that each
+term can be numerically calculated using a fixed number of floating point operations, the cost
+of evaluating a pth order expansion is O(p2). Therefore, the cost of the evaluation stage of a
+high-order tree-code is O(p2 n log n).
+
+Error analysis
+
+As mentioned before, the high-order tree-code described earlier does not depend on a parameter
+like θ in the original Barnes-Hut algorithm that determined when a box contributes to the
+potential at a target on a given level. Instead, all interactions are determined via the oct-tree
+structure (Figure ??). The accuracy of the resulting algorithm is determined by the order of the
+expansion p. Using the fact that boxes only interact if they are well-separated, and the error
+bound on multipole expansions, we see that p ∼O(log√
+
+3 1/ϵ). This number of terms can be
+derived based on the separation distance between a sphere enclosing a box, and the nearest box
+that is well-separated.
+
+Implementation details
+
+Despite the simplicity of the previous multipole and translation formulas, constructing an
+accurate and efficient numerical implementation can seem daunting. Here we discuss a couple
+aspects of the implementation of tree-codes.
+Building the oct-tree:
+Numerical computation of Legendre functions: The Legendre polynomials satisfy the
+three-term recurrence relation:
+
+Pℓ+1(x) = 2ℓ+ 1
+
+ℓ+ 1 x Pℓ(x) −
+ℓ
+ℓ+ 1Pℓ−1(x),
+(4.39)
+
+with
+P0(x) = 1,
+and
+P1(x) = x.
+(4.40)
+
+For x ∈(−1, 1), this recurrence is upward-stable [?]. Furthermore the associate Legendre
+functions satisfy:
+
+P0
+0(x) = 1,
+P0
+1(x) = x,
+and
+P1
+1(x) = −
+�
+
+1 −x2,
+(4.41)
+
+and
+P−m
+ℓ
+(x) = (−1)m.
+(4.42)
+
+These function obey the following (relatively) stable three-term recurrence in the order m:
+
+Pm+1
+ℓ
+=
+(4.43)
+
+31
+
+
+DRAFT
+
+4.2. THE 3D LAPLACE FAST MULTIPOLE METHOD
+M. O’Neil
+
+4.2
+The 3D Laplace fast multipole method
+
+At this point in the development of fast n-body codes, there are two routes to take: the reduction
+of the O(p4) cost for multipole translation, and the reduction of the overall complexity from
+O(n log n) to O(n). We will first discuss the reduction in the overall scaling with n, and then
+address the scaling with the expansion order p (since it is a dominant cost, independent of
+the scaling with n). As before, we first give an informal description of the algorithm known
+as the Fast Multipole Method (FMM) for the 3D Laplace kernel, and then work through the
+necessary pieces of machinery needed to implement the algorithm. The main additional piece
+of technology that allows for a reduction in the asymptotic complexity are what are known as
+local expansions. Local expansions allow for information contained in multipole expansions to
+be shipped more efficiently to boxes on finer levels in the tree hierarchy.
+
+The Fast Multipole Method
+
+Step 0 Divide the computational box, containing all points, using an oct-tree such
+that there are at most nf ine points contained in each leaf node. Set all the φi’s
+to zero, initialize the order of the multipole expansion to p > 0.
+
+Step 1 Process all the leaf nodes. For each box B on the leaf level, L, form the order
+p multipole expansion due to the sources contained in B, centered about the
+center of box B.
+
+Step 2 For levels L −1 to 0, recursively compute the order p multipole expansion
+centered about the center of a box B by translating and merging the multipole
+expansions for the children of box B.
+
+Step 3 For levels 2 through L, for each box B on each level, translate its multipole
+expansion to boxes in List 2 (also known as box B’s interaction list).
+
+Step 4 For each target particle xi = (ri, θi, φi), starting at the root, traverse the tree
+toward the leafs, processing one box B (that is not marked done) at a time.
+Let:
+
+rB = the radius of box B
+
+xB = the center of box B
+
+MB
+ℓm = the multipole coefficients for box B
+
+rB,i = ∥xb −xi∥, the distance from xB to xi
+(ρ, α, β) = xi −xB, the coordinates of xi relative to xB
+
+If box B is well-separated from the target xi, mark this box as done and
+increment φi:
+
+φi = φi +
+
+p
+�
+
+ℓ=0
+
+ℓ
+�
+
+m=−ℓ
+
+MB
+ℓm
+ρℓ+1 Y m
+ℓ(α, β)
+
+32
+
+
+DRAFT
+
+4.2. THE 3D LAPLACE FAST MULTIPOLE METHOD
+M. O’Neil
+
+By well-separated, we mean that the target xi is separated from box B by at
+least one box of the same size as B. See Figure ??. If xi is not well-separated,
+then skip box B and process its children using the same procedure. Repeat for
+targets xi.
+
+Step 4 For any boxes B on the leaf level that were not marked done, add the
+contributions from the sources xj located in them directly:
+
+φi = φi +
+mj
+∥xi −xj∥.
+
+The potential φi, due to all sources other than xi, has now been computed.
+
+Computational cost
+
+Error analysis
+
+4.2.1
+Point and shoot translation
+
+As we have seen several times before, the main computational cost in the FMM (as it is formulated
+here) is the multipole-to-local translations. Done directly, this
+
+4.2.2
+Diagonal plane-wave translation operators
+
+Using the point-and-shoot method of the previous section, it is possible to reduce the cost of
+the multipole and local translations from O(p4) to O(p3) by first rotating the coordinate system,
+translating along the z-axis, and the rotating back. However, due to the anisotropy of spherical
+coordinate systems, there is still coupling between the θ and ϕ components in the rotation. In the
+case of multipole-to-local translations, it is possible to reduce this cost further, down to O(p2),
+by switching to a different representation of the potential in Cartesian coordinates: plane-wave
+representations.
+By Fourier transforming Laplace’s equation for the Green’s function
+
+△G(x) = δ(x),
+(4.44)
+
+we see that
+�
+G(ξ) =
+(4.45)
+
+and then performing contour integration in the ξ3 variable, it is possible to write:
+
+1
+∥x −x′∥=
+(4.46)
+
+4.2.3
+Accelerations
+
+33
+
+
+DRAFT
+
+5
+The Helmholtz equation
+
+34
+
+
+DRAFT
+
+6
+Electromagnetics
+
+35
+
+
+DRAFT
+
+7
+Elasticity
+
+36
+
+
+DRAFT
+
+8
+Fluids
+
+37
+
+
+DRAFT
+
+9
+Parabolic theory
+
+38
+
+
+DRAFT
+
+10
+Fast multipole methods
+
+10.1
+The 3D fast multipole method for Helmholtz potentials
+
+10.1.1
+Addition formulas
+
+10.1.2
+Exponential translations
+
+10.1.3
+Implementation caveats
+
+10.2
+3D Stokesian potentials
+
+39
+
+
+DRAFT
+
+11
+Discrete Fourier Transforms
+
+Entire courses could be taught only covering Discrete Fourier Analysis and its applications in
+methods for differential equations, signal processing, etc. It is merely our goal to cover some
+basic, very useful properties of the Discrete Fourier Tranform (denote by DFT from here on
+out), and then to discuss algorithms for applying the operator rapidly – both in the standard case
+of the widely know Fast Fourier Transform (FFT), and in the case where the sample in time and
+modes in frequency are not equispaced or integers, respectively.
+In these notes, we define the n-point forward DFT to be the finite-dimensional linear operator
+Fn : Cn →Cn defined by:
+�u = Fnu
+
+�uk =
+
+n
+�
+
+j=1
+uj e−2πi(j−1)(k−1)/n
+(11.1)
+
+Likewise, it is easy to show that the inverse of Fn is given by F−1
+n = 1
+
+nF∗
+n, where F∗
+n is the adjoint
+matrix to Fn, also referred to as the backward DFT. Therefore, in infinite precision arithmetic
+
+u = 1
+
+nF∗
+nFnu.
+(11.2)
+
+Keep in mind that there are many other definitions of the DFT, including almost all
+permutations of ±2πi in the exponent, scaling by 1/n or 1/√n, summing over −n/2 + 1 to n/2,
+etc. We stick with the above definition of Fn as it is consistent with almost all FFT software
+packages.
+
+Quadrature and aliasing
+
+The DFT can also be though of as a discretization of a series of Fourier integrals using the
+trapezoidal rule:
+
+�f (k) = 1
+
+2π
+
+∫2π
+
+0
+f (x) e−ixk dx
+
+=
+∫1
+
+0
+f (2πx) e−2πixk dx
+
+≈1
+
+n
+
+n
+�
+
+j=1
+f
+�2π(j −1)
+
+n
+
+�
+e−2πi(j−1)k/n,
+
+(11.3)
+
+40
+
+
+DRAFT
+
+11.1. THE FAST FOURIER TRANSFORM
+M. O’Neil
+
+where we assume that k is an integer. The approximation of the previous integral is in fact exact
+for functions of the form
+
+f (x) =
+
+m
+�
+
+k=−m
+αk eixk,
+(11.4)
+
+with n > 2m. The integer m (or 2πm in some references) is known as the bandwidth of the
+function f .
+If the size of the quadrature rule n (or, it will turn out, the size of the FFT that we compute) is
+not sufficiently larger, then we will observe what is known as aliasing. When sampled discretely
+on an equispaced grid in x, exponentials e2πikx will alias to exponentials with a smaller integer
+frequency k ∈(−n/2, n/2). This is because these functions have exactly the same values on
+under-resolved grids. This is the whole intuition behind the Nyquist sampling rate. Two sample
+points per wavelength are able to uniquely resolve the function.
+
+11.1
+The Fast Fourier Transform
+
+It is useful to define the factor
+ωn = e2πi/n.
+(11.5)
+
+This factor, as well as ωn/2, etc., will be the basic building block for what is known as the radix-2
+split FFT. Assuming that the n = 2d, for some positive integer d, we describe one level of the
+FFT and leave the rest as a straightforward exercise in induction.
+Written out as in equation (11.1), the DFT is given, for k = 0, . . ., n −1 by:
+
+�uk =
+
+n−1
+�
+
+j=0
+uj e−2πijk/n
+
+=
+
+n−1
+�
+
+j=0
+uj ω−jk
+n
+.
+
+(11.6)
+
+This sum can then be split into two pieces – those corresponding to even indices j and those
+corresponding to odd indices j – and properly re-ordered into two DFTs of size n/2:
+
+�uk =
+
+n/2−1
+�
+
+j=0
+u2j e−2πi(2j)k/n +
+
+n/2−1
+�
+
+j=0
+u2j+1 e−2πi(2j+1)k/n
+
+=
+
+n/2−1
+�
+
+j=0
+u2j e−2πijk/(n/2) + e−2πik/n
+n/2−1
+�
+
+j=0
+u2j+1 e−2πijk/(n/2)
+
+=
+
+n/2−1
+�
+
+j=0
+u2j ω−jk
+n/2 + ω−k
+n
+
+n/2−1
+�
+
+j=0
+u2j+1 ω−jk
+n/2
+
+(11.7)
+
+41
+
+
+DRAFT
+
+11.1. THE FAST FOURIER TRANSFORM
+M. O’Neil
+
+Introducing a new frequency variable, ˜k = 0, . . ., n/2 −1, we have that:
+
+�u ˜k =
+
+n/2−1
+�
+
+j=0
+u2j ω−j ˜k
+n/2 + ω−˜k
+n
+
+n/2−1
+�
+
+j=0
+u2j+1 ω−j ˜k
+n/2
+
+�un/2+ ˜k =
+
+n/2−1
+�
+
+j=0
+u2j ω−j ˜k
+n/2 + ω−n/2−˜k
+n
+
+n/2−1
+�
+
+j=0
+u2j+1 ω−j ˜k
+n/2 .
+
+(11.8)
+
+There is one final step in simplifying these relationships, which hinges on the identity that
+ωn/2
+n
+= eπi = −1. We now have:
+
+�u ˜k =
+
+n/2−1
+�
+
+j=0
+u2j ω−j ˜k
+n/2 + ω−˜k
+n
+
+n/2−1
+�
+
+j=0
+u2j+1 ω−j ˜k
+n/2
+
+�un/2+ ˜k =
+
+n/2−1
+�
+
+j=0
+u2j ω−j ˜k
+n/2 −ω−˜k
+n
+
+n/2−1
+�
+
+j=0
+u2j+1 ω−j ˜k
+n/2 .
+
+(11.9)
+
+Each of these four sums can then be split again, into their relatively odd and even parts. The
+resulting scheme is the FFT. Efficiently implementing the FFT involves an a priori reordering of
+the coefficients uj so that neighboring coefficients in memory contribute to the same sums. The
+particular re-ordering required is a bit-reversal re-ordering, as uj will be permuted to location ¯j,
+where ¯j is the integer obtained by reversing the binary representation of the integer j.
+
+Computational cost
+
+It is easy to show that when n = 2d, the DFT sum can be split d = log2 n times. The resulting
+coefficients �uk are then each the sum of d terms. This gives an overall running time of O(n log2 n),
+and the intricate details are omitted [?].
+
+Accuracy
+
+Unlike virtually every other algorithm that is discussed in these lecture notes, the FFT is an
+exact algorithm when performed in infinite precision. There are no approximations made in the
+algorithm, and the only source of error in the scheme arises from floating point arithmetic (and
+is virtually non-existent for all practical purposes because the number of operations done per
+output is log2 n). A precise discussion of this error is beyond the scope of these notes [?].
+
+General radix schemes
+
+The FFT is generally fastest when applied to vectors whose length is the product of many small
+primes because of the fine-scale splitting that can be accomplished. We previously described
+the most common case, when n = 2d for some positive integer d. If, for example, n is divisible
+
+42
+
+
+DRAFT
+
+11.1. THE FAST FOURIER TRANSFORM
+M. O’Neil
+
+by 3, then one step of the FFT will contain a radix-3 split:
+
+n−1
+�
+
+j=0
+uj e−2πijk/n =
+
+n/3−1
+�
+
+j=0
+u3j e−2πijk/(n/3) + e−2πik/(n/3)
+n/3−1
+�
+
+j=0
+u3j+1 e−2πijk/(n/3)
+
++ e−2πik/(2n/3)
+n/3−1
+�
+
+j=0
+u3j+2 e−2πijk/(n/3),
+(11.10)
+
+or using the previous notation,
+
+n−1
+�
+
+j=0
+uj ω−jk
+n
+=
+
+n/3−1
+�
+
+j=0
+u3j ω−jk
+n/3 + ω−1
+n/3
+
+n/3−1
+�
+
+j=0
+u3j+1 ω−jk
+n/3 + ω−2
+n/3
+
+n/3−1
+�
+
+j=0
+u3j+2 ω−jk
+n/3 .
+(11.11)
+
+There are several methods for FFTs on vectors whose length is a large prime number,
+including incremental and absolute zero-padding, etc. These are beyond the scope of this
+discussion, as well as efficient methods for implementing FFTs. See resources related to the
+software package fftw.
+
+11.1.1
+As a matrix factorization
+
+An extremely powerful interpretation of the FFT is that presented by Van Loan in [?] as a
+recursive matrix factorization. We briefly discuss this interpretation here, as it is often overlooked
+and very insightful. To simplify the following discussion of the length-n FFT in factorized
+matrix form, let us first define the number
+
+ωn = e2πi/n.
+(11.12)
+
+Then the DFT can be written as
+
+�uj =
+
+n−1
+�
+
+j=0
+uj ω−jk,
+(11.13)
+
+for k = 0, . . ., n −1. Note here that for the case of simplicity, we have defined the DFT using
+slightly different indicies than in (11.1). Under this notation, the length-4 DFT matrix F4 can be
+written as:
+
+F4 =
+
+
+
+1
+1
+1
+1
+1
+ω−1
+ω−2
+ω−3
+
+1
+ω−2
+ω−4
+ω−6
+
+1
+ω−3
+ω−6
+ω−9
+
+
+
+.
+(11.14)
+
+Our goal will be to write this matrix as the product of log2 n sparse matrices, each of size n × n.
+First, we examine this factorization in detail in the case of the length-4 transform.
+As described earlier, we can use the radix-2 splitting algorithm to write the length-4 FFT as
+the sum of two length-2 FFTs:
+
+F4u =
+�
+F2ue + ˙2F2uo
+F2ue −˙2F2uo
+
+�
+,
+(11.15)
+
+43
+
+
+DRAFT
+
+11.1. THE FAST FOURIER TRANSFORM
+M. O’Neil
+
+where the matrix ˙m is the diagonal matrix:
+
+˙m =
+
+
+
+1
+ω−1
+2m
+...
+ω−(m−1)
+2m
+
+
+
+.
+(11.16)
+
+The relation inside the matrix in (11.15) is known as a butterfly relation. Explicitly expand-
+ing (11.15) we have:
+
+F4u =
+�
+F2
+˙2F2
+F2
+−˙2F2
+
+��
+ue
+uo
+
+�
+.
+(11.17)
+
+We can play the same trick again with the matrices F2:
+
+F2v =
+�
+F1
+˙1F1
+F1
+−˙1F1
+
+��v0
+v1
+
+�
+.
+(11.18)
+
+Since F1 = 1 and Ω1 =, we are done. Combing these two previous formulas, we have that:
+
+F4u =
+�
+I2
+˙2
+I2
+−˙2
+
+�
+
+I1
+˙1
+I1
+−˙1
+I1
+˙1
+I1
+−˙1
+
+
+
+
+
+1
+1
+1
+1
+
+
+
+u,
+(11.19)
+
+where, as is standard, the matrix mtxIm is the m × m identity matrix. Performing a similar
+factorization for larger size FFTs quickly becomes unmanageable, and therefore it becomes very
+useful to denote by the size-m butterfly matrix Bm:
+
+Bm =
+�
+Im/2
+˙m/2
+Im/2
+−˙m/2
+
+�
+.
+(11.20)
+
+Furthermore, the Kronecker product of two matrices A and B will be given as:
+
+A ⊗B =
+
+
+
+a11B
+· · ·
+a1nB
+...
+...
+...
+an1B
+· · ·
+annB
+
+
+
+(11.21)
+
+Obviously, if A ∈Cn×n and B ∈Cm×m, then A ⊗B ∈C(n+m)×(n+m). See [?] for a thorough
+discussion of this operation, its properties, and its usefulness. Lastly, the bit-reversal matrix Wn
+is given as ...
+Combining all these notations together, we have
+
+F4 = (I1 ⊗B4) (I2 ⊗B2) Wn.
+(11.22)
+
+Based on the sparsity pattern of the above factorization, it is obvious that F4 can be applied in
+O(n log2 n) operations (assuming, of course, that sparse matrix-vector products are performed).
+In general, for a DFT of size n = 2d we have:
+
+Fn = (I1 ⊗Bn) �
+I2 ⊗Bn/2
+��
+I4 ⊗Bn/4
+�· · · �
+In/2 ⊗B2
+�
+Wn.
+(11.23)
+
+This is a very powerful framework in which to view the FFT. Similar factorizations for other
+radix FFTs exist, but the notation becomes slightly more complicated.
+
+44
+
+
+DRAFT
+
+11.2. THE NON-UNIFORM FFT
+M. O’Neil
+
+11.2
+The non-uniform FFT
+
+The entire previous discussion of the FFT was predicated on the fact that we are computing
+inner products of the vector u with equi-spaced samples in x ∈[0, 2π] of the basis functions
+e2πixk, with k an integer. We now address the problem of computing similar sums when the
+samples in space and/or frequency are not equispaced (or integers). To this end, let’s begin by
+stating the precise problem, which can be split into three distinct cases. In what follows, let
+x1, . . ., xn ∈[0, 2π] be arbitrary points.
+The Type I DFT is given by:
+
+F(k) =
+
+n
+�
+
+j=1
+fj e−ikxj,
+for k = −m
+
+2 , . . ., m
+
+2 .
+(11.24)
+
+The Type II DFT is given by:
+
+f (xj) =
+
+m/2
+�
+
+k=−m/2
+Fk eikxj,
+for j = 1, . . ., n.
+(11.25)
+
+The Type III DFT is given by:
+
+ϕk =
+
+n
+�
+
+j=1
+uj e±isk xj,
+for k = 1, . . ., m,
+(11.26)
+
+with sk ∈R arbitrary. In some cases, these sums correspond to the evaluation of an expansion
+in complex exponentials (Type II), or discretization of an integral (Type I). The problems of
+efficiently discretizing Fourier integrals and evaluating the above discrete sums should not be
+conflated – the sums above do not hold any physical meaning unless attached to an outer problem
+(as in the case of FMMs, etc.). We merely address the task of efficiently computing these sums
+in near linear time.
+We have listed the one-dimensional versions of each of these schemes, but they are readily
+extended to sums based on higher dimensional frequency vectors k and spatial locations xj. For
+example, in two dimensions, the Type I DFT is defined as:
+
+F(k) =
+
+n
+�
+
+j=1
+fj e−ik·xj,
+for k = (−m/2, −m/2), . . ., (m/2, m/2).
+(11.27)
+
+The algorithms which allow for the rapid computation of these sums are of a different nature
+than those upon which FMMs are designed. FMMs exist because after separating near-field
+from far-field calculations, it can be shown that the far-field part is a low-rank operation. Using
+this idea hierarchically, one can build a fast algorithm.
+Similar addition formulas for complex exponentials exist, for example:
+
+eiρt = J0(ρ) +
+
+∞
+�
+
+n=1
+2in Jn(ρ)Tn(t),
+(11.28)
+
+where Jn is the Bessel function of order n, Tn is the degree n Chebyshev polynomial and
+t ∈[−1, 1]. However, this addition formula does not directly yield a fast algorithm because there
+
+45
+
+
+DRAFT
+
+11.2. THE NON-UNIFORM FFT
+M. O’Neil
+
+is no obvious low-rank observation. We will discuss other FFT-like fast algorithms in the next
+chapter, where we develop what are known as butterfly algorithms.
+The schemes described below are a combination of interpolation, application of standard
+FFT methods, and rigorous error analysis. We will now discuss an algorithm for the Type I
+NUFFT.
+
+11.2.1
+The Type I NUFFT
+
+The Type I NUFFT corresponds to evaluating the sums:
+
+F(k) =
+
+n
+�
+
+j=1
+fj e−ikxj,
+for k = −m
+
+2 , . . ., m
+
+2 .
+(11.29)
+
+We first describe an algorithm, and then analyze its accuracy and efficiency.
+
+The Type I NUFFT
+
+Step 0 Choose absolute error tolerance ϵ, set width of convolution kernel to be
+τ = τ(ϵ) (see accuracy discussion below).
+
+Step 1 Compute the Fourier coefficients
+
+�fτ(k) = 1
+
+2π
+
+∫2π
+
+0
+fτ(x) e−ikx dx
+(11.30)
+
+of the function
+
+fτ(x) =
+
+n
+�
+
+j=1
+fj
+
+∞
+�
+
+ℓ=−∞
+e−(x−xj−2ℓπ)2/4τ.
+(11.31)
+
+This can be done using a sufficiently large FFT.
+
+Step 2 Evaluate F as
+
+F(k) =
+�π
+
+τ ek2τ �fτ(k).
+(11.32)
+
+The previous algorithm is very straightforward, all that remains is to prove some identities, error
+bounds, and choices for the parameters τ and the size of the FFT to take of fτ. First, we explain
+the algorithm in some more detail.
+First, we note that F(k) in (11.29) is the exact Fourier coefficient of the 2π-periodic function:
+
+f (x) = 2π
+
+∞
+�
+
+ℓ=−∞
+
+n
+�
+
+j=1
+fj δ(x −xj −2πℓ)
+(11.33)
+
+46
+
+
+DRAFT
+
+11.2. THE NON-UNIFORM FFT
+M. O’Neil
+
+That is, we have that
+
+F(k) = 1
+
+2π
+
+∫2π
+
+0
+f (x) e−ikx dx
+
+=
+
+n
+�
+
+j=1
+
+∫2π
+
+0
+fj δ(x −xj) dx
+
+=
+
+n
+�
+
+j=1
+fj e−ikxj
+
+(11.34)
+
+If the function f was well-resolved by equispaced sampling on [0, 2π], then these coefficients
+could be directly computed (as in the case of smooth periodic functions on this interval).
+Unfortunately, no number of equispaced points would resolve the δ-functions. In order to take
+advantage of this fact, we first convolve f with a smooth kernel function (the Gaussian), and
+then scale the resulting Fourier coefficients (deconvolve).
+Define the kernel function gτ by:
+
+gτ(x) = e−x2/4τ,
+(11.35)
+
+and the convolution over the entire real line fτ as:
+
+fτ(x) = ( f ∗gt)(x)
+
+=
+∫∞
+
+−∞
+f (y) gτ(x −y) dy.
+(11.36)
+
+It is easy to confirm that fτ is a smooth, C∞function with period 2π (due to the smoothness of
+gτ and the periodicity of the function f ). The exact Fourier coefficients of fτ are then given by
+�fτ:
+
+�fτ(k) = 1
+
+2π
+
+∫2π
+
+0
+fτ(x) e−ikx dx.
+(11.37)
+
+It is obvious that if the coefficients �fτ were known exactly, the using then properties of the
+Fourier transform,
+
+�fτ(k) = F(k) · �gτ(k)
+⇐⇒
+F(k) =
+�fτ(k)
+�gτ(k),
+(11.38)
+
+where, as before, F is the exact Fourier transform of f in (11.33). The computational task, then,
+is to efficiently evaluate the terms �fτ(k), since the Fourier transform of gτ is known analytically:
+
+�gτ(k) =
+�τ
+
+π e−k2τ.
+(11.39)
+
+These integrals defining �fτ can be evaluated with spectral accuracy using an N-point trapezoidal
+rule, where N is chosen in order to sufficiently resolve Gaussians placed at each of the locations
+xj. That is to say, N ∼O(1/√τ). Details of this analysis follow.
+
+47
+
+
+DRAFT
+
+11.2. THE NON-UNIFORM FFT
+M. O’Neil
+
+Accuracy
+
+The formula for computing F(k) is given in equation (11.38), and the accuracy is completely
+controlled by the evaluation of �fτ(k) since �gτ(k) is known analytically. If a maximum k = m/2
+is needed in equation (11.37), then at least N = 2m points are needed in its discretization (to
+resolve the m/2 mode in fτ and in the exponential). Note that the formula in (11.38) is exact
+– that is, it is true for any value of τ. It is merely a point of computational complexity and
+accuracy to choose τ.
+
+Computational cost
+
+Here we briefly detail the computational cost, which if we assume m ∼n, is O(m log m + n).
+Step 1: This step consists of Gaussian gridding, followed by an FFT of length O(m).
+Step 2: Evaluating F(k) is merely a diagonal scaling of �fτ, and costs O(m) operations.
+
+Caveats
+
+Here we briefly discuss regimes in which the previous scheme does not yield a sufficiently fast
+or efficient algorithm.
+
+11.2.2
+The Type II NUFFT
+
+Accuracy
+
+11.2.3
+The Type III NUFFT
+
+Accuracy
+
+48
+
+
+DRAFT
+
+12
+Butterfly algorithms
+
+12.1
+Analogy with the FFT
+
+12.2
+Applications
+
+12.3
+An algorithm
+
+12.4
+Applications
+
+49
+
+
+DRAFT
+
+13
+Randomized linear algebra
+
+50
+
+
+DRAFT
+
+14
+Fast direct solvers
+
+14.1
+Nested dissection
+
+14.2
+Hierarchically structured matrices
+
+51
+
+
+DRAFT
+
+A
+Green’s Identities
+
+All three Green’s identities are a direct consequence of the Divergence Theorem (valid in any
+dimension):
+∫
+
+Ω
+∇· F dV =
+∫
+
+Γ
+n · F dA,
+(A.1)
+
+where Ωis a bounded (assumed to be open) region with boundary Γ, and F is a smooth
+vectorfield. Green’s First Identity can be derived by setting F = u∇v, where u and v are smooth
+functions defined on the closure of Ω:
+∫
+
+Ω
+(∇u · ∇v + u∆v) dV =
+∫
+
+Γ
+u∂v
+
+∂n dA,
+(A.2)
+
+where as always, ∂/∂n denoted differentiation in the direction outward from Ω.
+Green’s Second Identity is derived by setting F = v∇u, and subtracting the resulting equation
+from that in (A.2):
+∫
+
+Ω
+(u∆v −v∆u) dV =
+∫
+
+Γ
+
+�
+u∂v
+
+∂n −v ∂u
+
+∂n
+
+�
+dA.
+(A.3)
+
+Finally, Green’s Third Identity is obtained by setting v(x′) = g(x, x′), where g is the Green’s
+function for the Laplace operator, and integrating in the x′ variable:
+
+u =
+∫
+
+Ω
+g(·, x′) ∆u(x′) dV(x′) +
+∫
+
+Γ
+
+�
+u(x′)∂g(·, x′)
+
+∂n′
+−g(·, x′)∂u(x′)
+
+∂n′
+
+�
+dA(x′)
+
+= V∆u + Du −S ∂u
+
+∂n.
+(A.4)
+
+If u happens to be a harmonic function, this identity reduces to what is known as Green’s
+Reproducing Identity:
+
+u = Du −S ∂u
+
+∂n.
+(A.5)
+
+For values of x on the boundary of Ω, the limiting form of the above reproducing formula is:
+
+u = ±1
+
+2u + Du −S ∂u
+
+∂n,
+(A.6)
+
+where the sign depends on which side the limit is taken from, and the integral operator D is
+implicitly interpreted in its principal value sense (even though it has a continuous kernel).
+
+52
+
+
+DRAFT
+
+B
+Fredholm Theory
+
+The standard treatments often paid to integral equation theory and Fredholm theory in most
+texts are needlessly complicated for most applications. In particular, most of the time for most
+applications (at least in mathematical physics), boundary integral equations of concern are being
+solving on curves in 2D or surfaces in 3D (usually smooth curves and surfaces, maybe with a
+few corners) and contain as kernels the standard single- and double-layer kernels corresponding
+to the appropriate Green’s function. What this means, mathematically, is that almost all of
+the standard integral operators can be treated as operators acting from L2 to L2. This greatly
+simplifies much of the analysis, and has a direct correspondence to the numerical methods often
+used to solve them: iterative linear algebraic solvers, generalized Fourier series, etc. It is with
+this in mind that we provide the overview of what we will call Fredholm theory.
+We first classify integral equations into one of two kinds. In the simplest case, let K be a
+compact integral operator acting on some curve in 2D or surface in 3D, denoted by Γ, with
+kernel k, integral equations of the first and second kind are then:
+
+First-kind:
+∫
+
+Γ
+k(x, x′) ϕ(x′) da(x′) = f (x)
+
+Second-kind:
+ϕ(x) +
+∫
+
+Γ
+k(x, x′) ϕ(x′) da(x′) = g(x)
+(B.1)
+
+A third class of integral equation exists, known as Volterra equations, and arise naturally in the
+theory of parabolic PDEs and the associated integral equations. We omit a discussion of these
+types for now.
+
+Definition 1 (Weakly-singular integral operators). The integral operator K with kernel k(x, y)
+is a weakly-singular integral operator on a curve in 2D if:
+
+k(x, y) ≤C
+1
+|x −y|α,
+(B.2)
+
+where α ∈[0, 1). Along surfaces in 3D, the condition can be relaxed to α ∈[0, 2) due to the
+change in metric (and therefore conditions on integrability).
+
+It can be shown that weakly singular integral operators along smooth boundaries are compact
+operators acting from L2 →L2. If K is a compact operator, then it can be approximated to any
+precision ϵ by a finite rank operator, Kn:
+
+||K −Kn||2 ≤ϵ
+(B.3)
+
+where n denotes the rank and depends on ϵ. The smallest n such that the above equation holds
+will be referred to as the ϵ-rank of the operator K.
+
+53
+
+
+DRAFT
+
+M. O’Neil
+
+Theorem 3 (The Fredholm Alternative). For a compact integral operator K : L2 →L2,
+
+1. the equation (I + K)σ = f has a solution for any f if and only if (I + K)σ = 0 has only
+σ = 0 as a solution. If so, the operator (I + K)−1 is in fact bounded. Otherwise,
+
+2. if (I + K)σ = 0 has non-zero solutions, then dim Null(I + K) = dim Null(I + K∗), and
+(I + K)σ = f is solvable if and only if f is orthogonal to Null(I + K∗).
+
+Proof. We omit a proof, as various proofs can be found an any integral equations textbook or
+functional analysis textbook.
+□
+
+54
+
+
+DRAFT
+
+C
+Iterative Solvers
+
+55
+
+
+Bibliography
+
+[1] J. Bremer. On the Nyström discretization of integral equations on planar curves with corners.
+Appl. Comput. Harm. Anal., 32:45–64, 2012.
+
+[2] J. Bremer and Z. Gimbutas. A Nyström method for weakly singular integral operators on
+surfaces. J. Comput. Phys., 231:4885–4903, 2012.
+
+56
+
+

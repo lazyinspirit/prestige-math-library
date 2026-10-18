@@ -1,0 +1,2674 @@
+Numerical Analysis of 2D Stochastic Navier–Stokes Equations with
+Transport Noise: Regularity and Spatial Semidiscretization
+Binjie Li∗1 and Qin Zhou†2
+1School of Mathematics, Sichuan University, Chengdu 610064, China
+2School of Mathematics, China West Normal University, Nanchong 637002, China
+Abstract
+This paper establishes strong convergence rates for the spatial finite element discretization of a two-
+dimensional stochastic Navier–Stokes system with transport noise and no-slip boundary conditions on a
+convex polygonal domain. The main challenge arises from the lack of spatial D(A)-regularity of the solution
+(where A is the Stokes operator), which prevents the application of standard error analysis techniques. Under
+a small-noise assumption, we prove that the weak solution satisfies
+u ∈L2Ω; C([0, T]; ˙Hϱ
+σ) ∩L2(0, T; ˙H1+ϱ
+σ
+)
+
+for some ϱ ∈(0, 1
+2). To address the low regularity in the numerical analysis, we introduce a novel smoothing
+operator Jh,α = Aα
+hPhA−α with α ∈(0, 1), where Ah is the discrete Stokes operator and Ph the discrete
+Helmholtz projection. This tool enables a complete error analysis for a MINI-element spatial semidiscretiza-
+tion, yielding the mean-square convergence estimate
+∥u −uh∥L2(Ω;C([0,T ];L2(O;R2))) + ∥∇(u −uh)∥L2(Ω×(0,T );L2(O;R2×2)) ⩽c hϱ log
+1 + 1
+h
+
+.
+The framework can be extended to broader stochastic fluid models with rough noise and Dirichlet boundary
+conditions.
+This work is the first to establish strong convergence rates for spatial discretizations of 2D stochastic Navier-
+Stokes equations with transport noise under physical no-slip boundary conditions. Previous results required
+periodic boundaries, constant noise, or that the noise coefficients are divergence-free and vanish on the boundary.
+The breakthrough is achieved via new regularity estimates and a novel smoothing operator that overcomes the
+lack of solution regularity, extending rigorous numerical analysis to a realistic physical setting for the first time.
+Keywords: stochastic Navier–Stokes equations, no-slip boundary conditions, transport noise, finite element
+method, convergence
+1
+Introduction
+This paper is concerned with the numerical analysis of the two-dimensional incompressible stochastic Navier–
+Stokes equations (SNSEs) driven by transport noise. Let 0 < T < ∞and let O ⊂R2 be a bounded convex
+polygonal domain. We consider the SNSE in the Stratonovich form:
+du(t) = [∆u(t) −(u(t) · ∇)u(t) −∇π(t)] dt +
+∞
+X
+n=1
+[(ζn · ∇)u(t) −∇eπn(t)] ◦dWn(t),
+t ∈[0, T],
+(1.1)
+∗libinjie@scu.edu.cn
+†Corresponding author: zqmath@cwnu.edu.cn. This work was partially supported by the National Natural Science Foundation
+of China under grant 12301525.
+1
+arXiv:2512.03483v3  [math.NA]  12 Dec 2025
+
+equipped with the incompressibility constraint ∇· u(t) = 0, the no-slip boundary condition u(t) = 0 on ∂O,
+and the initial condition u(0) = u0.
+Here, u denotes the velocity field, π the pressure, (ζn)n⩾1 a sequence
+of divergence-free vector fields, and (Wn)n⩾1 a sequence of independent real-valued Brownian motions. The
+auxiliary pressure processes (eπn)n⩾1 are introduced to ensure that the stochastic term remains divergence-free.
+The systematic analysis of stochastic Navier–Stokes equations (SNSEs) was initiated in the 1970s by the
+seminal work of Bensoussan and Temam [2]. These equations have since been extensively studied in various
+mathematical settings; see, for instance, [12, 14, 19, 32] and the references therein. A particularly significant
+class is driven by transport noise, which models the influence of unresolved, small-scale turbulent fluctuations
+on the resolved, large-scale flow through a Lagrangian advection mechanism. This formulation has a rigorous
+physical foundation derived from Holm’s stochastic variational approach [25], which yields SPDEs that preserve
+the geometric structures of ideal fluid dynamics, such as Kelvin’s circulation theorem. The resulting Stratonovich-
+form SNSEs with multiplicative transport noise, for which (1.1) serves as a canonical example, have recently
+attracted significant analytical interest (see [20, 21] and the references therein).
+Substantial progress has also been achieved in the numerical analysis of these equations.
+For problems
+endowed with space-periodic boundary conditions, a succession of works [3, 4, 5, 7, 15, 24] has established strong
+convergence rates in probability for various approximation schemes. The prevailing analytical strategy involves
+partitioning the probability space into a regular set, where strong convergence is attained, and a singular set
+whose probability measure diminishes as the discretization is refined. More recently, Feng and Vo [18] derived
+full moment error estimates in strong norms for numerical approximations of a two-dimensional SNSE under
+space-periodic boundary conditions. Their analysis relies critically on a uniform boundedness condition for the
+noise coefficients, which is instrumental in proving the exponential stability of the solution.
+In contrast, the analysis under no-slip boundary conditions is significantly more challenging, with the lit-
+erature being considerably less developed. Convergence for multiplicative noise was first shown by Brze´zniak,
+Careli, and Prohl [13] without explicit rates, and subsequently, a first-order convergence rate was established
+for additive noise by Breit and Prohl [9]. A more recent contribution by Breit and Prohl [8] derived strong
+convergence rates in probability for multiplicative noise via discrete stopping times. This result, however, is
+subject to restrictive assumptions: the spatial domain must have a smooth boundary, and the noise coefficients
+must be divergence-free and vanish on the boundary. Further related results can be found in [17, 30].
+The challenge is further amplified when considering SNSEs driven by transport noise, a regime that remains
+largely unexplored. To our knowledge, the only convergence result is due to Breit et al. [10], who established
+a mean-square rate of order 1/2 for the temporal discretization of the two-dimensional SNSEs under periodic
+boundary conditions. However, this result relies on the restrictive assumption that the transport noise vector
+fields (ζn)n⩾1 are constant. This assumption is crucial for guaranteeing both the high regularity of the continuous
+solution and the stability of the temporal discretization, which in turn facilitates the control of the non-Lipschitz
+nonlinearity.
+This exposes a fundamental gap: for SNSEs with transport noise and no-slip boundaries, solutions generally
+fail to possess D(A)-regularity, thereby invalidating the analytical tools employed in all previous convergence
+analyses. Consequently, no convergence rates are available for spatial discretizations in this physically relevant
+setting.
+This paper bridges this gap by introducing novel theoretical and numerical tools, delivering the first conver-
+gence analysis for this class of problems. Our contributions are twofold:
+1. First, we establish key regularity properties for the weak solution to the model problem (1.1), assum-
+ing a smallness condition on the transport noise vector fields (ζn)n⩾1, i.e., P∞
+n=1 ∥ζn∥2
+W1,∞is sufficiently
+small. This mathematical assumption has a clear physical interpretation: it characterizes a dynamical sys-
+tem whose energy is dominated by large-scale motions, which is a typical regime where the deterministic
+dynamics prevail and the stochastic effects can be treated as a perturbation. Under this condition, we
+demonstrate in Proposition 3.1 that for some ϱ ∈(0, 1/2), the solution u satisfies
+u ∈L2(Ω; C([0, T]; ˙Hϱ
+σ) ∩L2(0, T; ˙H1+ϱ
+σ
+)).
+This regularity result provides the essential foundation for the subsequent numerical analysis.
+2
+
+2. Second, we establish a strong error estimate for a spatial semidiscretization based on the MINI finite
+element method. A key difficulty arises from the lack of D(A)-regularity of the continuous solution u,
+which prevents the direct application of the discrete Helmholtz projection Ph to Au. To overcome this
+obstacle, we introduce and systematically analyze an auxiliary operator Jh,α := Aα
+hPhA−α with α ∈(0, 1),
+where Ah is the discrete Stokes operator. This operator serves as an effective bridge between the continuous
+and discrete spaces, replacing the role of Ph. By employing stochastic analytic tools, including Itˆo’s formula
+and the Burkholder–Davis–Gundy inequality, we derive the following strong error estimate:
+∥u −uh∥L2(Ω;C([0,T ];L2(O;R2))) + ∥∇(u −uh)∥L2(Ω×(0,T );L2(O;R2×2)) ⩽chϱ log(1 + 1/h),
+where uh is the strong solution of the spatial semidiscretization and c > 0 is a constant independent of the
+mesh size h, as stated in Theorem 4.2.
+These theoretical results provide a foundation for the further numerical analysis of fully discrete finite element
+approximations of the two-dimensional stochastic Navier–Stokes equations with transport noise under no-slip
+boundary conditions. The primary novelty of this work lies in a new analytical framework that circumvents the
+lack of D(A)-regularity—a fundamental obstacle in the numerical analysis of stochastic Navier–Stokes equations
+under no-slip (i.e., homogeneous Dirichlet) boundary conditions. The same methodology extends naturally to
+the stochastic Stokes equations driven by rough noise with Dirichlet boundary conditions, where solution paths
+likewise lack D(A)-regularity.
+The remainder of this paper is organized as follows.
+Section 2 lays the foundation by introducing the
+functional–probabilistic framework, including Sobolev and interpolation spaces, the cylindrical Brownian motion
+W, relevant spaces of stochastic processes, and the Stokes operator A.
+Section 3 establishes key regularity
+properties of the weak solution, which play an essential role in the subsequent numerical analysis. In Section 4,
+we derive a strong convergence rate for the spatial semidiscretization based on the MINI finite element method.
+The paper concludes with Section 5, which summarizes the main contributions and identifies several prominent
+open problems for future research.
+2
+Preliminaries
+For Banach spaces E1 and E2, L(E1, E2) denotes the space of bounded linear operators from E1 to E2. The
+identity operator on any space is denoted by I. Given an interval D ⊂R and a Banach space X, C(D; X)
+denotes the space of continuous functions from D to X, endowed with the supremum norm
+∥ξ∥C(D;X) = sup
+t∈D
+∥ξ(t)∥X,
+ξ ∈C(D; X).
+Fix a terminal time T > 0, and let O be a bounded convex polygonal domain with boundary ∂O. For
+q ∈[1, ∞], we denote by W 2,q(O) and W 2,q(O; R2) the standard Sobolev spaces (cf. [6, Chapter III]). For
+α ∈[0, 2] and q ∈(1, ∞), we define the complex interpolation spaces
+Hα :=
+
+L2(O), W 2,2(O)
+
+α/2,
+Hα :=
+
+L2(O; R2), W 2,2(O; R2)
+
+α/2.
+For α ⩾0, let ˙Hα denote the domain of the fractional power (−∆)α/2, where ∆is the Dirichlet Laplacian on
+L2(O; R2); the space ˙H−α is defined as the dual of ˙Hα. The space ˙Hα is continuously embedded into Hα for
+each α ∈(0, 2] (see, e.g., [23, Theorem 1.8]). We adopt the following shorthand notation:
+Lq := Lq(O; R2),
+W1,q := W 1,q(O; R2),
+q ∈[1, ∞].
+With a slight abuse of notation, Lq will also be used to denote Lq(O; R2×2), which will be clear from the context.
+The inner product in either L2(O) or L2 is denoted by ⟨·, ·⟩.
+We introduce the solenoidal space
+L2
+σ := {v ∈C∞
+c (O; R2) : ∇· v = 0}
+L2
+,
+3
+
+the L2-closure of smooth, compactly supported, divergence-free vector fields. Let P : L2(O; R2) →L2
+σ be the
+orthogonal Helmholtz projection onto L2
+σ. The Stokes operator A is defined by
+Av := −P∆v,
+with domain
+D(A) := {v ∈L2
+σ ∩W2,2 : v = 0 on ∂O}.
+The operator A is positive definite and self-adjoint, with a bounded inverse A−1 : L2
+σ →D(A) (cf. [16, The-
+orem 5.5]). For α > 0, we define the fractional power space ˙Hα
+σ := D(Aα/2), endowed with the graph norm
+∥v∥˙Hα
+σ := ∥Aα/2v∥L2, and denote its dual by ˙H−α
+σ
+. Furthermore, there exists a constant c > 0, independent of
+α and v, such that for each α ∈[0, 2] and v ∈˙Hα
+σ ,
+∥v∥˙Hα
+σ ⩽∥v∥˙Hα ⩽c∥v∥˙Hα
+σ .
+The Helmholtz projection operator P extends to a bounded linear operator from ˙H−1 to ˙H−1
+σ . This extension
+is defined via duality: for all v ∈˙H−1 and w ∈˙H1
+σ,
+⟨Pv, w⟩˙H−1
+σ
+, ˙H1σ := ⟨v, w⟩˙H−1, ˙H1,
+where ⟨·, ·⟩X∗,X denotes the dual pairing between a Banach space X and its dual X∗. Moreover, the Helmholtz
+projection P satisfies the following boundedness properties.
+Lemma 2.1. The Helmholtz projection P is bounded in the following senses:
+(i) P ∈L(Hα, Hα) for all α ∈[0, 1].
+(ii) P ∈L(Hα, ˙Hβ
+σ ) for all α ∈(0, 1] and β ∈(0, α] with β < 1/2.
+(iii) P ∈L( ˙Hα, ˙Hα
+σ ) for all α ∈[−1, 0).
+Proof. The proof is standard. Boundedness on H1 follows by adapting the argument of [6, Proposition IV.3.7],
+which relies on the regularity theory for the Poisson equation with homogeneous Neumann boundary conditions
+[23, Theorem 1.10]. Boundedness on L2 is immediate, as P is the L2-orthogonal projection. Complex interpola-
+tion between these two endpoints yields (i). Property (ii) is a direct consequence of [29, Proposition 2.16], while
+(iii) follows from [29, Equation (4.45)].
+■
+Remark 2.1. The restriction β < 1/2 in Lemma 2.1(ii) is necessary because the Helmholtz projection of a
+smooth vector field, even one vanishing on ∂O, need not itself vanish on the boundary.
+Let (Ω, F, P) be a complete probability space endowed with a right-continuous filtration F = (Ft)t⩾0, sup-
+porting a sequence (Wn)n⩾1 of independent real-valued F-Brownian motions. Denote by ℓ2 the real Hilbert space
+of square-summable sequences. The F-adapted ℓ2-cylindrical Brownian motion W = (W(t))t⩾0 is defined by its
+action on any l = (ln)n⩾1 ∈ℓ2:
+W(t)l :=
+∞
+X
+n=1
+lnWn(t),
+t ⩾0.
+For each t ⩾0, the series converges in L2(Ω, Ft, P), ensuring that W(t) is a bounded linear operator from ℓ2 to
+L2(Ω, Ft, P). For a Hilbert space U, we write L2(ℓ2, U) for the space of Hilbert-Schmidt operators from ℓ2 to U.
+For a separable Banach space E and p ∈[1, ∞], let Lp
+F0(Ω; E) denote the Bochner space Lp(Ω, F0, P; E),
+and let Lp
+F(Ω; C([0, T]; E)) denote the space of all F-adapted, continuous, E-valued processes belonging to
+Lp(Ω; C([0, T]; E)). For p ∈[1, ∞), we define Lp
+F(Ω× (0, T); E) as the space of all F-progressively measurable
+processes f : Ω× [0, T] →E satisfying
+∥f∥Lp
+F (Ω×(0,T );E) :=
+ 
+E
+Z T
+0
+∥f(t)∥p
+E dt
+!1/p
+< ∞,
+where E denotes the expectation with respect to P.
+4
+
+3
+Weak Solutions
+The stochastic model (1.1) is originally formulated in the Stratonovich form, which arises naturally from its
+physical derivation involving transport noise. Applying the Helmholtz projection P yields the following abstract
+stochastic evolution equation in the solenoidal space L2
+σ:
+du(t) = [−Au −P((u · ∇)u)] (t) dt +
+∞
+X
+n=1
+Lζnu(t) ◦dWn(t),
+t ∈[0, T],
+where the transport operator Lξn is formally defined by
+Lζnv := P
+(ζn · ∇)v
+
+.
+(3.1)
+To enable a rigorous analytical treatment, we convert this equation to its Itˆo form. This transformation introduces
+a second-order Itˆo correction term in the drift:
+du(t) =
+h
+−Au −P((u · ∇)u) + 1
+2
+∞
+X
+n=1
+L2
+ζnu
+i
+(t) dt +
+∞
+X
+n=1
+Lζnu(t) dWn(t).
+This additional term motivates the introduction of the modified Stokes operator
+Av := Av −1
+2
+∞
+X
+n=1
+L2
+ζnv,
+∀v ∈˙H2
+σ.
+(3.2)
+In terms of A, the Itˆo formulation simplifies to the compact form:
+du(t) = [−Au −P((u · ∇)u)] (t) dt +
+∞
+X
+n=1
+Lζnu(t) dWn(t),
+t ∈[0, T].
+(3.3)
+Throughout this paper, we impose the following structural assumptions on the transport noise vector fields
+(ζn)n∈N.
+Hypothesis 3.1. Let (ζn)n⩾1 ⊂W1,∞be divergence-free vector fields satisfying
+∞
+X
+n=1
+∥ζn∥2
+W1,∞< ∞.
+(3.4)
+Moreover, we assume that the sum in (3.4) is small enough so that there exists a constant κσ ∈(0, 1) for which
+
+
+
+1
+2
+∞
+X
+n=1
+L2
+ζnv
+
+
+
+L2 ⩽κσ∥v∥˙H2σ,
+∀v ∈˙H2
+σ.
+(3.5)
+Under Hypothesis 3.1, the operator A is an isomorphism between ˙H2
+σ and L2
+σ, and it is a positive definite
+and self-adjoint operator in L2
+σ. Moreover, the following norm equivalence holds:
+(1 −κσ)∥v∥˙H2σ ⩽∥Av∥L2 ⩽(1 + κσ)∥v∥˙H2σ,
+∀v ∈˙H2
+σ.
+(3.6)
+For α > 0, define the space Hα as the domain of Aα/2, equipped with the graph norm
+∥v∥Hα := ∥Aα/2v∥L2.
+By (3.6) and standard complex interpolation (see, e.g., [34, Theorems 1.15 and 16.1]), the norms ∥· ∥Hθ and
+∥· ∥˙Hθσ are equivalent for all θ ∈[0, 2]:
+(1 −κσ)θ/2∥v∥˙Hθ
+σ ⩽∥v∥Hθ ⩽(1 + κσ)θ/2∥v∥˙Hθ
+σ,
+∀v ∈˙Hθ
+σ.
+(3.7)
+5
+
+In particular, when θ = 1, we have
+∥v∥2
+H1 = ∥v∥2
+˙H1σ + 1
+2
+∞
+X
+n=1
+∥Lζnv∥2
+L2,
+∀v ∈H1.
+(3.8)
+We are now in a position to define the concept of a weak solution.
+Definition 3.1 (Weak Solution). A stochastic process
+u ∈L2
+F
+Ω; C([0, T]; L2
+σ)
+
+∩L2
+F(Ω× (0, T); H1)
+is called a weak solution to the model problem (1.1) if, for every t ∈[0, T], P-almost surely,
+u(t) = u0 −
+Z t
+0
+Au(s) + P[(u(s) · ∇)u(s)] ds +
+Z t
+0
+F(u(s)) dW(s)
+holds in H−1, where the operator F ∈L
+ ˙H1
+σ, L2(ℓ2, L2
+σ)
+
+is defined by
+F(v)l =
+∞
+X
+n=1
+lnLζnv,
+for all v ∈˙H1
+σ, l = (ln)∞
+n=1 ∈ℓ2.
+(3.9)
+The main result of this section is the following proposition.
+Proposition 3.1. Assume that
+u0 ∈L∞
+F0(Ω; L2
+σ) ∩L2
+F0(Ω; ˙H1/2
+σ
+).
+Then the model problem (1.1) admits a unique weak solution. Moreover, there exists a constant ϱ ∈(0, 1/2) such
+that the solution satisfies:
+u ∈L∞(Ω; L2(0, T; ˙H1
+σ) ∩C([0, T]; L2
+σ)),
+(3.10)
+u ∈L2
+F(Ω; C([0, T]; ˙Hϱ
+σ)),
+(3.11)
+u ∈L2
+F(Ω× (0, T); ˙Hϱ+1
+σ
+).
+(3.12)
+Remark 3.1. We note that if the transport noise vector fields (ζn)n⩾1 ⊂W1,∞are divergence-free and satisfy
+the summability condition
+∞
+X
+n=1
+∥ζn∥2
+L∞< ∞,
+then the existence and uniqueness of a weak solution can be established under the significantly weaker assumption
+u0 ∈L4
+F0(Ω; L2
+σ) (cf.
+[21, Theorem 4.21]).
+In the present work, the smallness condition on the transport
+noise vector fields imposed in Hypothesis 3.1 (i.e., P∞
+n=1 ∥ζn∥2
+W1,∞being sufficiently small) is not required for
+mere existence and uniqueness. Instead, it is essential for obtaining the higher spatial regularity u ∈L2
+F(Ω×
+(0, T); ˙Hϱ+1
+σ
+) as stated in (3.12).
+Remark 3.2. A fundamental obstruction to higher regularity stems from the mapping properties of the Helmholtz
+projection P. As noted in Lemma 2.1(ii), P fails to be bounded from Hα to ˙Hβ
+σ for β ⩾1/2. As a result, F(v)
+cannot, in general, be valued in L2(ℓ2, ˙Hθ
+σ) for any θ ⩾1/2, regardless of the regularity of v. This directly implies
+that the solution u to the model problem (1.1) cannot, in general, possess paths with ˙H1+ϱ
+σ
+-regularity for ϱ ⩾1/2.
+Remark 3.3. The well-posedness theory for the two-dimensional stochastic Navier–Stokes equations with trans-
+port noise is well established. For the Cauchy problem, Mikulevicius and Rozovskii [28] proved the existence
+and pathwise uniqueness of a global strong solution. In the periodic setting, Flandoli and Luongo [21, Theorem
+4.21] established the existence and uniqueness of weak solutions, while Breit et al. [8] derived certain regularity
+estimates for weak pathwise solutions under the assumption that the transport noise vector fields (ζn)n⩾1 are
+constant. The analysis in [21, Theorem 4.21] also extends to no-slip boundary conditions with only minor mod-
+ifications. However, to the best of our knowledge, the regularity results (3.11) and (3.12) in Proposition 3.1 are
+new. We also refer the reader to the recent work of Agresti and Veraar [1] for the theoretical analysis of a class
+of stochastic Navier–Stokes equations that are closely related to the model problem (1.1).
+6
+
+Proof of Proposition 3.1. The existence and uniqueness of a weak solution, along with the basic regularity
+(3.10), are standard.
+These results follow directly from a variational approach, mirroring the proof of [21,
+Theorem 4.2] with minor adjustments to accommodate our specific setting. The core of our contribution is the
+derivation of the higher-order regularity estimates (3.11) and (3.12). For the remainder of the proof, let c > 0 be
+a generic constant, independent of the parameter n ∈N>0, whose value may vary from one instance to the next.
+Step 1. We prove the existence of 0 < ϱ∗< 1
+2 such that
+sup
+1⩽α⩽ϱ∗+1
+∥F∥L(Hα, L2(ℓ2,Hα−1)) <
+√
+2,
+(3.13)
+The argument is divided into three parts. We set Cζ := P∞
+n=1 ∥ζn∥2
+L∞.
+(a) Bound for α = 1. For any v ∈H1, the definition of F in (3.9) and the contractivity of the Helmholtz
+projection P on L2 imply
+∥F(v)∥2
+L2(ℓ2,H0) =
+∞
+X
+n=1
+∥P((ζn · ∇)v)∥2
+L2 ⩽
+∞
+X
+n=1
+∥(ζn · ∇)v∥2
+L2 ⩽Cζ∥∇v∥2
+L2 = Cζ∥v∥2
+˙H1σ.
+Hence,
+∥v∥2
+˙H1σ ⩾1
+Cζ
+∥F(v)∥2
+L2(ℓ2,H0).
+Now, applying the norm identity (3.8):
+∥v∥2
+H1 = ∥v∥2
+˙H1σ + 1
+2∥F(v)∥2
+L2(ℓ2,H0),
+and combining with the previous inequality, we obtain
+∥v∥2
+H1 ⩾
+ 1
+Cζ
++ 1
+2
+
+∥F(v)∥2
+L2(ℓ2,H0) = 2 + Cζ
+2Cζ
+∥F(v)∥2
+L2(ℓ2,H0).
+Rearranging this inequality and taking square roots gives
+∥F(v)∥L2(ℓ2,H0) ⩽
+s
+2Cζ
+2 + Cζ
+∥v∥H1,
+which implies the bound
+∥F∥L(H1, L2(ℓ2,H0)) ⩽
+s
+2Cζ
+2 + Cζ
+.
+(3.14)
+(b) Bound for α = α0 > 1. Fix any α0 ∈(1, 3
+2). For any n ⩾1 and v ∈˙Hα0
+σ , by Lemma 2.1(ii) and the
+standard product estimate
+∥(ζn · ∇)v∥Hα0−1 ⩽c∥ζn∥W1,∞∥v∥˙Hα0
+σ ,
+we have
+∥P((ζn · ∇)v)∥˙Hα0−1
+σ
+⩽c∥ζn∥W1,∞∥v∥˙Hα0
+σ .
+Therefore,
+∥F(v)∥L2(ℓ2, ˙Hα0−1
+σ
+) =
+ ∞
+X
+n=1
+∥P((ζn · ∇)v)∥2
+˙Hα0−1
+σ
+!1/2
+⩽
+ 
+c
+∞
+X
+n=1
+∥ζn∥2
+W1,∞
+!1/2
+∥v∥˙Hα0
+σ .
+Using the norm equivalence (3.7), we conclude that
+∥F∥L(Hα0, L2(ℓ2,Hα0−1)) ⩽
+ 
+c
+∞
+X
+n=1
+∥ζn∥2
+W1,∞
+!1/2
+.
+(3.15)
+7
+
+(c) Interpolation.
+We now interpolate between the bounds (3.14) and (3.15) to obtain estimates for
+intermediate regularity. Let θ ∈(0, 1) and define α = 1 + (α0 −1)θ. Standard interpolation theory (see, e.g.,
+[34, Theorem 16.1]) yields the identities
+[H1, Hα0]θ = Hα,
+[L2(ℓ2, H0), L2(ℓ2, Hα0−1)]θ = L2(ℓ2, Hα−1),
+with equality of norms. Applying the interpolation theorem for linear operators (see [34, Theorem 1.15]) to the
+bounds (3.14) and (3.15) gives
+∥F∥L(Hα,L2(ℓ2,Hα−1)) ⩽∥F∥1−θ
+L(H1,L2(ℓ2,H0))∥F∥θ
+L(Hα0,L2(ℓ2,Hα0−1)).
+Substituting (3.14) and (3.15) gives
+∥F∥L(Hα,L2(ℓ2,Hα−1)) ⩽
+ 2Cζ
+2 + Cζ
+ 1−θ
+2  
+c
+∞
+X
+n=1
+∥ζn∥2
+W1,∞
+! θ
+2
+.
+The right-hand side is a continuous function of θ that equals
+p
+2Cζ/(2 + Cζ) <
+√
+2 at θ = 0. Consequently,
+there exists a small θ > 0 such that the expression is strictly less than
+√
+2. Defining ϱ∗:= (α0 −1)θ ∈(0, 1
+2)
+completes the proof of (3.13).
+Step 2. It is well known that the space L2
+σ admits an orthonormal basis (ek)k⩾1 consisting of eigenvectors of the
+operator A. For each n ⩾1, let Pn denote the orthogonal projection in L2 onto the finite-dimensional subspace
+span{e1, . . . , en}. We consider the Galerkin approximation
+(
+du(n) = −Pn
+Au(n) + (u(n) · ∇)u(n)
+dt + Pn
+k=1 Pn
+(ζk · ∇)u(n)
+dWk(t),
+t ∈[0, T],
+u(n)(0) = Pnu0.
+Since this is a finite-dimensional stochastic differential equation with locally monotone drift and linear diffusion
+coefficients, the classical theory (see, e.g., [31, Theorem 3.27]) guarantees the existence of a unique strong solution
+u(n) for every n ⩾1. Moreover, following the arguments in [21, Lemma 4.4], we obtain the uniform bound
+sup
+n⩾1
+
+∥u(n)∥L∞(Ω;C([0,T ];L2σ)) + ∥u(n)∥L∞(Ω;L2(0,T ; ˙H1σ))
+
+< ∞.
+(3.16)
+Step 3. Fix 0 < ϱ < ϱ∗, where ϱ∗is the constant from Step 1. Our goal is to establish the following uniform
+bounds for the Galerkin approximations (u(n))n⩾1:
+sup
+n⩾1
+∥u(n)∥L2(Ω;C([0,T ]; ˙Hϱ
+σ)) < ∞,
+(3.17)
+sup
+n⩾1
+∥u(n)∥L2(Ω×(0,T ); ˙Hϱ+1
+σ
+) < ∞.
+(3.18)
+The proof is divided into three substeps.
+(a). For any 0 < α ⩽ϱ∗, we establish the following P-almost surely inequality:
+∥u(n)(t)∥2
+˙Hα
+σ + c
+Z t
+0
+∥u(n)(s)∥2
+˙Hα+1
+σ
+ds
+⩽c∥u0∥2
+˙Hα
+σ + c
+Z t
+0
+∥u(n)(s)∥2
+˙Hα
+σ ∥u(n)(s)∥2
+˙H1
+σds
++ 2
+Z t
+0
+n
+X
+k=1
+⟨Aαu(n)(s), Pn((ζk · ∇)u(n)(s))⟩dWk(s),
+∀t ∈[0, T].
+(3.19)
+8
+
+Applying Itˆo’s formula to ∥u(n)(t)∥2
+Hα yields the following identity, which holds P-almost surely for all t ∈[0, T]:
+∥u(n)(t)∥2
+Hα = ∥Pnu0∥2
+Hα −2
+Z t
+0
+
+∥u(n)(s)∥2
+Hα+1 + ⟨Pn((u(n)(s) · ∇)u(n)(s)), Aαu(n)(s)⟩
+
+ds
++
+Z t
+0
+n
+X
+k=1
+∥Pn((ζk · ∇)u(n)(s))∥2
+Hα ds + 2
+Z t
+0
+n
+X
+k=1
+⟨Aαu(n)(s), Pn((ζk · ∇)u(n)(s))⟩dWk(s).
+The nonlinear term admits the estimate:
+⟨Pn((u(n) · ∇)u(n)), Aαu(n)⟩
+ =
+⟨P((u(n) · ∇)u(n)), Aαu(n)⟩
+
+⩽ϵ∥u(n)∥2
+Hα+1 + c
+ϵ∥P((u(n) · ∇)u(n))∥2
+Hα−1,
+∀ϵ > 0,
+where we used that Aαu(n) is in the range of the projection Pn. We bound the Itˆo correction term as
+n
+X
+k=1
+∥Pn((ζk · ∇)u(n))∥2
+Hα ⩽
+∞
+X
+k=1
+∥P((ζk · ∇)u(n))∥2
+Hα ⩽CF ∥u(n)∥2
+Hα+1,
+where CF := ∥F∥2
+L(Hα+1,L2(ℓ2,Hα)). Combining these estimates and using the contractivity of Pn on Hα, we
+obtain
+∥u(n)(t)∥2
+Hα +
+Z t
+0
+2 −ϵ −CF
+
+∥u(n)(s)∥2
+Hα+1 ds
+⩽∥u0∥2
+Hα + c
+ϵ
+Z t
+0
+∥P((u(n)(s) · ∇)u(n)(s))∥2
+Hα−1 ds
++ 2
+Z t
+0
+n
+X
+k=1
+⟨Aαu(n), Pn((ζk · ∇)u(n)(s))⟩dWk(s).
+Since CF < 2 (see (3.13)), we can choose ϵ > 0 sufficiently small to ensure that 2 −ϵ −CF > 0. Finally, the
+norm equivalence (3.7) implies the continuous embedding ˙Hα−1
+σ
+,→Hα−1. Together with the product estimate
+from [22, Lemma 2.2],
+∥P((u(n) · ∇)u(n))∥˙Hα−1
+σ
+⩽c∥u(n)∥˙Hα
+σ ∥u(n)∥˙H1σ.
+this yields the desired inequality (3.19).
+(b). Apply the stochastic Gronwall lemma [33, Theorem 4] to (3.19) with α = ϱ∗. For any p ∈(0, 1) and
+ν ∈(1, 1/p), this yields
+∥u(n)∥L2p(Ω;C([0,T ]; ˙Hϱ∗
+σ )) ⩽c
+ 
+E exp
+ 
+pν
+ν −1
+Z T
+0
+∥u(n)(t)∥2
+˙H1σdt
+!!1−1
+ν
+
+1
+2p
+∥u0∥L2pν(Ω; ˙Hϱ∗
+σ ).
+By the uniform bound (3.16), the exponential moment on the right-hand side is finite and uniformly bounded in
+n. Hence,
+sup
+n⩾1
+∥u(n)∥L2p(Ω;C([0,T ]; ˙Hϱ∗
+σ )) ⩽c∥u0∥L2pν(Ω; ˙Hϱ∗
+σ ),
+p ∈(0, 1), ν ∈(1, 1/p).
+Since u0 ∈L2
+F0(Ω; ˙H1/2
+σ
+), we may take p = ϱ/ϱ∗∈(0, 1) to obtain
+sup
+n⩾1
+∥u(n)∥L2ϱ/ϱ∗(Ω;C([0,T ]; ˙Hϱ∗
+σ )) < ∞.
+Combined with (3.16), this establishes the uniform bound (3.17) via the interpolation inequality
+∥u(n)∥L2(Ω;C([0,T ]; ˙Hϱ
+σ)) ⩽∥u(n)∥1−ϱ/ϱ∗
+L∞(Ω;C([0,T ];L2
+σ))∥u(n)∥ϱ/ϱ∗
+L2ϱ/ϱ∗(Ω;C([0,T ]; ˙Hϱ∗
+σ )).
+9
+
+(c). Taking the expectation of (3.19) with α = ϱ and t = T and noting that the stochastic integral is a
+martingale with zero mean, we obtain
+E
+h Z T
+0
+∥u(n)(t)∥2
+˙Hϱ+1
+σ
+dt
+i
+⩽cE
+"
+∥u0∥2
+˙Hϱ
+σ +
+Z T
+0
+∥u(n)(t)∥2
+˙Hϱ
+σ∥u(n)(t)∥2
+˙H1σ dt
+#
+⩽cE
+h
+∥u0∥2
+˙Hϱ
+σ + ∥u(n)∥2
+C([0,T ]; ˙Hϱ
+σ)∥u(n)∥2
+L2(0,T ; ˙H1σ)
+i
+.
+The right-hand side is uniformly bounded in n by (3.16), (3.17), and the assumption u0 ∈L2
+F0(Ω; ˙H1/2
+σ
+). This
+establishes the uniform bound (3.18).
+Step 4. From the uniform bound (3.18), we first deduce
+sup
+n⩾1
+∥Au(n)∥L2(Ω×(0,T ); ˙Hϱ−1
+σ
+) < ∞.
+To control the nonlinear term, we employ an estimate analogous to that in [22, Lemma 2.2]:
+∥P((v · ∇)v)∥˙Hϱ−1
+σ
+⩽c∥v∥L2σ∥v∥˙Hϱ+1
+σ
+,
+∀v ∈˙Hϱ+1
+σ
+.
+Applying this to v = u(n) and combining it with (3.16) and (3.18) yields the uniform bound
+sup
+n⩾1
+∥P((u(n) · ∇)u(n))∥L2(Ω×(0,T ); ˙Hϱ−1
+σ
+) < ∞.
+Furthermore, using (3.13) and (3.18) gives
+sup
+n⩾1
+∥F(u(n))∥L2(Ω×(0,T );L2(ℓ2, ˙Hϱ
+σ)) < ∞.
+These uniform bounds, together with (3.18), enable a standard variational argument (see, e.g., [21, Section 4.3]
+and [27, Chapter 5]) to establish the existence of a unique weak solution u to the model problem (1.1), satisfying
+the regularity properties (3.11) and (3.12). Finally, the regularity property (3.10) follows from an argument
+analogous to that in [21, Lemma 4.4]. This completes the proof of Proposition 3.1.
+■
+4
+Spatial Semidiscretization
+Let Kh be a conforming, quasi-uniform triangulation of the domain O, consisting of triangles. Denote by h the
+maximum diameter of the elements in Kh. For each element K ∈Kh, define the local velocity space
+P1(K) :=
+
+P1(K) ⊕span{λ1λ2λ3}
+2,
+where P1(K) denotes the space of linear polynomials on K, and λ1, λ2, λ3 are the barycentric (area) coordinates
+associated with the vertices of K. The enrichment term λ1λ2λ3 is the cubic bubble function vanishing on ∂K.
+The classical MINI finite element spaces (cf. [23, Section 4.1]) are then defined as follows:
+Lh :=
+
+vh ∈C(O; R2) : vh|K ∈P1(K) for all K ∈Kh, vh|∂O = 0
+	
+,
+Mh :=
+
+ϕh ∈C(O; R) : ϕh|K ∈P1(K) for all K ∈Kh
+	
+.
+The discrete divergence-free subspace Lσ,h ⊂Lh is characterized by the weak incompressibility condition
+Lσ,h := {vh ∈Lh : ⟨∇· vh, ϕh⟩= 0
+∀ϕh ∈Mh} .
+(4.1)
+Let Ph denote the L2-orthogonal projection onto Lσ,h.
+10
+
+The discrete Stokes operator Ah : Lσ,h →Lσ,h is given by
+⟨Ahuh, vh⟩=
+Z
+O
+∇uh : ∇vh dx,
+∀uh, vh ∈Lσ,h.
+It satisfies the following standard approximation property (see, e.g., [23, Theorem 4.1]):
+∥A−1P −A−1
+h Ph∥L( ˙H−α,L2) + h∥A−1P −A−1
+h Ph∥L( ˙H−α, ˙H1) ⩽ch2−α,
+α ∈[0, 1],
+(4.2)
+where c > 0 is a constant independent of h. For α ∈R, define the Hilbert space ˙Hα
+σ,h as Lσ,h endowed with the
+norm
+∥vh∥˙Hα
+σ,h := ∥Aα/2
+h
+vh∥L2,
+∀vh ∈Lσ,h.
+The following norm equivalence holds for all vh ∈Lσ,h and θ ∈[0, 1]:
+∥vh∥˙Hθ ⩽∥vh∥˙Hθ
+σ,h ⩽c∥vh∥˙Hθ,
+(4.3)
+where the constant c > 0 is independent of both h and θ. Moreover, the inverse inequality
+∥vh∥˙Hθ2
+σ,h ⩽chθ1−θ2∥vh∥˙Hθ1
+σ,h,
+(4.4)
+holds for all vh ∈Lσ,h and all θ1 ⩽θ2, where c > 0 is independent of h and vh.
+This section considers the following spatial semidiscretization of the model problem (1.1):
+
+
+
+
+
+duh(t) = −
+h
+Ahuh −1
+2
+∞
+X
+n=1
+L2
+ζn,huh + PhG(uh)
+i
+(t) dt + Fh(uh(t)) dW(t),
+t ∈[0, T],
+uh(0) = Phu0.
+(4.5)
+Here, for each n, the discrete transport operator Lζn,h : ˙H1 →Lσ,h is given by
+Lζn,hv := Ph
+(ζn · ∇)v
+
+,
+∀v ∈˙H1.
+(4.6)
+The nonlinear mapping G is defined as
+G(v) := (v · ∇)v + 1
+2(∇· v)v,
+∀v ∈˙H1.
+(4.7)
+Finally, for any vh ∈Lσ,h, the operator Fh(vh) ∈L2(ℓ2, ˙H0
+σ,h) is given as
+Fh(vh)l :=
+∞
+X
+n=1
+lnLζn,hvh,
+∀l = (ln)n⩾1 ∈ℓ2.
+(4.8)
+Remark 4.1. The discrete Helmholtz projection Ph : L2 →Lσ,h extends uniquely—by duality—to a bounded
+linear operator Ph : ˙H−1 →Lσ,h via
+⟨Phf, vh⟩:= ⟨f, vh⟩˙H−1, ˙H1,
+∀f ∈˙H−1, vh ∈Lσ,h,
+where ⟨·, ·⟩˙H−1, ˙H1 denotes the duality pairing between ˙H−1 and ˙H1. This extension makes the discrete transport
+operators Lζn,h well-defined on the larger space L2. Indeed, under condition ζn ∈W1,∞(cf. Hypothesis 3.1), the
+map
+v 7→(ζn · ∇)v
+is continuous from L2 into ˙H−1. Consequently, Ph
+(ζn · ∇)·
+
+defines a bounded linear operator
+Lζn,h : L2 →Lσ,h.
+11
+
+We say that uh is a strong solution to (4.5) if it satisfies the following properties:
+• uh is an F-adapted, continuous, Lσ,h-valued process;
+• For all t ∈[0, T], the following identity holds P-almost surely:
+uh(t) = Phu0 −
+Z t
+0
+
+Ahuh(s) −1
+2
+∞
+X
+n=1
+L2
+ζn,huh(s) + PhG(uh(s))
+
+ds
++
+Z t
+0
+Fh(uh(s)) dW(s).
+We first present the well-posedness and stability of the spatial semidiscretization (4.5).
+Theorem 4.1. Assume u0 ∈L∞
+F0(Ω; L2
+σ).
+Then the spatial semidiscretization (4.5) admits a unique strong
+solution uh. Moreover,
+∥uh∥L∞(Ω;C([0,T ];L2)) + ∥uh∥L∞(Ω;L2(0,T ; ˙H1
+σ,h))
+is uniformly bounded with respect to the spatial mesh size h.
+Proof. The proof follows from standard arguments; we provide a brief sketch for completeness.
+Existence and uniqueness.
+Since
+˙H0
+σ,h is finite-dimensional, the operator Ah is bounded on it.
+By
+assumption (3.4), the operators P∞
+n=1 L2
+ζn,h and Fh are also bounded, with the former acting on ˙H0
+σ,h and the
+latter mapping ˙H0
+σ,h into L2(ℓ2, ˙H0
+σ,h). For any vh ∈Lσ,h, the following identities hold:
+⟨Ahvh, vh⟩= ∥vh∥2
+˙H1
+σ,h,
+⟨PhG(vh), vh⟩= 0,
+
+L2
+ζn,hvh, vh
+
+= −∥Lζn,hvh∥2
+˙H0
+σ,h
+for all n ⩾1,
+∥Fh(vh)∥2
+L2(ℓ2, ˙H0
+σ,h) =
+∞
+X
+n=1
+∥Lζn,hvh∥2
+˙H0
+σ,h.
+These yield the coercivity relation
+2
+D
+−Ahvh + 1
+2
+∞
+X
+n=1
+L2
+ζn,hvh −PhG(vh), vh
+E
++ ∥Fh(vh)∥2
+L2(ℓ2, ˙H0
+σ,h) + 2∥vh∥2
+˙H1
+σ,h = 0.
+(4.9)
+The nonlinear term PhG is continuous. Moreover, for all vh, wh ∈Lσ,h, it satisfies the following growth and local
+monotonicity estimates:
+∥PhG(vh)∥˙H0
+σ,h ⩽ch−2∥vh∥2
+˙H0
+σ,h,
+(4.10)
+⟨PhG(vh) −PhG(wh), vh −wh⟩⩽ch−2∥vh∥˙H0
+σ,h + ∥wh∥˙H0
+σ,h
+
+∥vh −wh∥2
+˙H0
+σ,h,
+(4.11)
+for a constant c > 0 independent of h. These estimates follow from H¨older’s inequality and standard inverse
+estimates (see, e.g., [11, Theorem 4.5.11]). These properties—namely, the boundedness of the linear operators
+and the growth and monotonicity conditions (4.10)–(4.11) for the nonlinear term—satisfy the hypotheses of [26,
+Theorem 1.1]. Therefore, (4.5) admits a unique strong solution uh.
+Uniform bound.
+The uniform bound for the solution is obtained via an argument analogous to [21,
+Lemma 4.4]. First, we apply Itˆo’s formula to ∥uh∥2
+L2. The stochastic integral term vanishes due to the skew-
+symmetry identity ⟨Ph(ζn · ∇)uh, uh⟩= 0 for all n ⩾1, yielding the following identity that holds P-almost surely
+for all t ∈[0, T]:
+∥uh(t)∥2
+L2 = ∥Phu0∥2
+L2 +
+Z t
+0
+n
+2
+D
+−Ahuh(s) + 1
+2
+∞
+X
+n=1
+L2
+ζn,huh(s) −PhG(uh(s)), uh(s)
+E
++ ∥Fh(uh(s))∥2
+L2(ℓ2, ˙H0
+σ,h)
+o
+ds.
+12
+
+Next, substituting the coercivity relation (4.9) furnishes the pathwise energy equality
+∥uh(t)∥2
+L2 + 2
+Z t
+0
+∥uh(s)∥2
+˙H1
+σ,h ds = ∥Phu0∥2
+L2,
+∀t ∈[0, T].
+This immediately implies the estimate
+∥uh∥2
+C([0,T ];L2) + 2∥uh∥2
+L2(0,T ; ˙H1
+σ,h) ⩽2∥Phu0∥2
+L2 ⩽2∥u0∥2
+L2σ,
+where we used the contractivity of the L2-projection Ph. Taking the L∞(Ω)-norm of the above estimate and
+using the assumption u0 ∈L∞
+F0(Ω; L2
+σ), we conclude that
+∥uh∥L∞(Ω;C([0,T ];L2)) + ∥uh∥L∞(Ω;L2(0,T ; ˙H1
+σ,h))
+is uniformly bounded with respect to the spatial mesh size h. This completes the proof.
+■
+Then, we present the convergence result for the spatial semi-discretization (4.5).
+Theorem 4.2. Under the assumptions of Proposition 3.1, let u be the unique weak solution to (1.1) and let uh be
+the strong solution to the semidiscrete problem (4.5). Then, for the exponent ϱ ∈(0, 1/2) from Proposition 3.1,
+there exists a constant c > 0, independent of the mesh size h, such that
+∥u −uh∥L2(Ω;C([0,T ];L2)) + ∥∇(u −uh)∥L2(Ω×(0,T );L2) ⩽chϱ log(1 + 1/h).
+(4.12)
+The remainder of this section is devoted to the proof of Theorem 4.2. Throughout, c > 0 denotes a generic
+constant independent of the mesh size h, whose value may vary from line to line.
+4.1
+Preliminary estimates
+We recall standard approximation results and derive essential operator-norm estimates. The projection error
+satisfies
+∥I −Ph∥L( ˙Hθ2
+σ , ˙Hθ1) ⩽chθ2−θ1,
+θ1 ∈[0, 1], θ2 ∈[θ1, 2].
+(4.13)
+For θ ∈[0, 1], the composite operator (I −Ph)A−1P admits the bound:
+∥(I −Ph)A−1P∥L( ˙H−θ,L2) ⩽∥I −Ph∥L( ˙H2−θ
+σ
+,L2)∥A−1∥L( ˙H−θ
+σ
+, ˙H2−θ
+σ
+)∥P∥L( ˙H−θ
+σ
+, ˙H−θ
+σ
+)
+⩽ch2−θ∥A−1∥L( ˙H−θ
+σ
+, ˙H2−θ
+σ
+)∥P∥L( ˙H−θ
+σ
+, ˙H−θ
+σ
+)
+= ch2−θ∥P∥L( ˙H−θ
+σ
+, ˙H−θ
+σ
+)
+⩽ch2−θ,
+where the last inequality follows from Lemma 2.1(iii). Combining this with the approximation property (4.2)
+(with α = θ) and applying the triangle inequality yields
+∥PhA−1P −A−1
+h Ph∥L( ˙H−θ,L2) ⩽ch2−θ,
+θ ∈[0, 1].
+(4.14)
+Furthermore, using the definition of the discrete divergence-free space Lσ,h (see (4.1)) together with standard
+approximation properties of the L2-orthogonal projection, we obtain: for any α ∈[0, 2],
+|⟨∇· vh, ϕ⟩| ⩽chα∥vh∥˙H1
+σ,h∥ϕ∥Hα,
+∀vh ∈Lσ,h, ϕ ∈Hα.
+(4.15)
+The following lemma provides auxiliary bounds crucial for the subsequent analysis.
+Lemma 4.1. The following bounds hold:
+13
+
+(i) For all θ ∈[0, 1],
+∥Ph(I −P)∥L(Hθ, ˙H−1
+σ,h) ⩽chθ+1.
+(4.16)
+(ii) For all θ ∈(0, 1/2),
+∥P −Ph∥L(Hθ,L2) ⩽chθ.
+(4.17)
+Proof. These estimates follow from standard finite element analysis for the Stokes problem; see, e.g., [23, Chapter
+II]. For completeness, we present a self-contained proof.
+Proof of (i).
+Let θ ∈[0, 1] and v ∈Hθ.
+By Theorem IV.3.5 in [6] and the boundedness of P on Hθ
+(cf. Lemma 2.1(i)), there exists a zero-mean function φ ∈Hθ+1 such that
+v −Pv = ∇φ,
+∥φ∥Hθ+1 ⩽c∥v∥Hθ.
+(4.18)
+For any vh ∈Lσ,h, the Galerkin orthogonality of the L2-projection Ph implies
+⟨vh, Ph(I −P)v⟩= ⟨vh, (I −P)v⟩= ⟨vh, ∇φ⟩= −⟨∇· vh, φ⟩,
+where the last equality follows from integration by parts. Applying estimate (4.15) with α = θ + 1 and using the
+bound for ∥φ∥Hθ+1 from (4.18) yields
+|⟨vh, Ph(I −P)v⟩| ⩽chθ+1∥vh∥˙H1
+σ,h∥φ∥Hθ+1 ⩽chθ+1∥vh∥˙H1
+σ,h∥v∥Hθ.
+Taking the supremum over v ∈Hθ with ∥v∥Hθ = 1 and vh ∈Lσ,h with ∥vh∥˙H1
+σ,h = 1 gives the desired bound
+(4.16).
+Proof of (ii). Let θ ∈(0, 1/2). We decompose the difference as
+P −Ph = (I −Ph)P −Ph(I −P)
+and estimate the two terms on the right-hand side. For the first term, (4.13) with θ1 = 0, θ2 = θ and the
+boundedness of P : Hθ →˙Hθ
+σ from Lemma 2.1(ii) imply
+∥(I −Ph)P∥L(Hθ,L2) ⩽chθ.
+For the second term, we employ the inverse inequality ∥wh∥L2 ⩽ch−1∥wh∥˙H−1
+σ,h for wh ∈Lσ,h (see (4.4)) together
+with Lemma 4.1(i) to obtain
+∥Ph(I −P)∥L(Hθ,L2) ⩽ch−1∥Ph(I −P)∥L(Hθ, ˙H−1
+σ,h) ⩽chθ.
+Combining these two bounds via the triangle inequality yields the desired estimate (4.17).
+■
+Lemma 4.2. Let α ∈(1, 3
+2), ξ ∈L2
+σ ∩W1,∞, and v ∈˙Hα
+σ . Then
+∥(ξ · ∇)P((ξ · ∇)v)∥˙Hα−2 ⩽c∥ξ∥2
+W1,∞∥v∥˙Hα
+σ .
+(4.19)
+Proof. Applying Lemma 2.1(i) to the standard product estimate
+∥(ξ · ∇)v∥Hα−1 ⩽c∥ξ∥W1,∞∥v∥˙Hα
+σ ,
+yields the bound
+∥P((ξ · ∇)v)∥Hα−1 ⩽c∥ξ∥W1,∞∥v∥˙Hα
+σ .
+(4.20)
+Next, by complex interpolation between the bounds
+∥(ξ · ∇)w∥˙H0 ⩽c∥ξ∥L∞∥w∥H1,
+∀w ∈H1,
+∥(ξ · ∇)w∥˙H−1 ⩽c∥ξ∥L∞∥w∥H0,
+∀w ∈H0,
+we obtain for any w ∈Hα−1 the estimate
+∥(ξ · ∇)w∥˙Hα−2 ⩽c∥ξ∥L∞∥w∥Hα−1.
+(4.21)
+Substituting w = P((ξ ·∇)v) from (4.20) into (4.21) and using the inequality ∥ξ∥L∞⩽∥ξ∥W1,∞yields the desired
+estimate (4.19).
+■
+14
+
+4.2
+The auxiliary operator Jh,α
+A central challenge in the numerical analysis of the model problem (1.1) arises from the fact that the solution
+paths generally lack even ˙H3/2
+σ
+-regularity (see Remark 3.2). Consequently, expressions such as PhAu or ⟨Au, Pvh⟩
+for vh ∈Lσ,h are not well-defined. This regularity limitation precludes the direct application of techniques used
+in related works such as [8].
+To overcome this difficulty, we introduce the operator
+Jh,α := Aα
+hPhA−α,
+α ∈(0, 1).
+(4.22)
+This composition acts as a regularization mechanism: it first lifts a function from the continuous space ˙H−2α
+σ
+via
+A−α, projects the result onto the discrete space using Ph, and then maps it back through the discrete fractional
+power Aα
+h. The key properties of this operator are collected in the lemma below.
+Lemma 4.3. The operator Jh,α satisfies the following estimates:
+(i) For all α ∈(0, 1), θ1 ∈[−1, 1], and θ2 ∈[0, 2],
+∥Jh,α −Ph∥L( ˙Hθ2
+σ , ˙Hθ1
+σ,h) ⩽ch2
+Z ∞
+0
+r−α
+1 + rθ2/2 min
+
+h(−2α−θ1)∧0
+1 + r0∨(−α−θ1/2) , h−2−2α−θ1
+1 + r
+
+dr.
+(4.23)
+(ii) For all α ∈(0, 1/2),
+∥I −Jh,α∥L( ˙Hβ
+σ ,L2) ⩽chβ,
+β ∈[0, 1],
+(4.24)
+∥I −Jh,α∥L( ˙H2−2α
+σ
+, ˙H1) ⩽ch1−2α log(1 + 1/h).
+(4.25)
+(iii) For all α ∈[0, 1],
+∥Jh,αA −AhJh,α∥L( ˙H2−2α
+σ
+, ˙H−2
+σ,h) ⩽ch2−2α.
+(4.26)
+(iv) For all α ∈(1/4, 1/2),
+∥Jh,αP −Ph∥L( ˙H1−2α, ˙H−1
+σ,h) ⩽ch2−2α,
+(4.27)
+∥Jh,αP −Ph∥L( ˙H−2α, ˙H−1
+σ,h) ⩽ch1−2α.
+(4.28)
+Proof. (i) Let α ∈(0, 1), θ1 ∈[−1, 1], and θ2 ∈[0, 2]. From the definition of Jh,α in (4.22), we obtain the identity
+Jh,α −Ph = Aα
+h
+PhA−α −A−α
+h Ph
+
+.
+Applying the Dunford–Taylor representation for fractional powers (cf. Section 7.1 from Chapter 2 of [34]) yields
+Jh,α −Ph =
+1
+2πi
+Z
+Γ
+λ−αAα
+h
+h
+Ph(λ −A)−1 −(λ −Ah)−1Ph
+i
+dλ,
+where Γ denotes the standard contour consisting of the rays {re±iπ/4 : r ∈[0, ∞)}, oriented with the positive
+real axis on its left. This representation immediately implies the operator norm bound
+∥Jh,α −Ph∥L( ˙Hθ2
+σ , ˙Hθ1
+σ,h) ⩽1
+2π
+Z
+Γ
+|λ|−α
+
+Aα
+h
+
+Ph(λ −A)−1 −(λ −Ah)−1Ph
+
+
+L( ˙Hθ2
+σ , ˙Hθ1
+σ,h) |dλ|.
+To bound the integrand, we first observe the algebraic identity
+Aα
+h
+
+Ph(λ −A)−1 −(λ −Ah)−1Ph
+
+= (λ −Ah)−1A1+α
+h
+A−1
+h Ph −PhA−1
+A(λ −A)−1.
+15
+
+Using the approximation estimate
+∥A−1
+h Ph −PhA−1∥L(L2σ, ˙H0
+σ,h) ⩽ch2
+(cf. (4.14) with θ = 0),
+together with the resolvent bound
+∥A(λ −A)−1∥L( ˙Hθ2
+σ ,L2
+σ) ⩽
+c
+1 + |λ|θ2/2 ,
+we obtain
+
+
+Aα
+h
+
+Ph(λ −A)−1 −(λ −Ah)−1Ph
+
+
+L( ˙Hθ2
+σ , ˙Hθ1
+σ,h) ⩽
+ch2
+1 + |λ|θ2/2 ∥(λ −Ah)−1A1+α
+h
+∥L( ˙H0
+σ,h, ˙Hθ1
+σ,h).
+By the inverse inequality (4.4) and the standard resolvent estimate
+∥(λ −Ah)−1As
+h∥L( ˙H0
+σ,h, ˙H0
+σ,h) ⩽
+c
+1 + |λ|1−s ,
+s ∈[0, 1],
+we further deduce
+∥(λ −Ah)−1A1+α
+h
+∥L( ˙H0
+σ,h, ˙Hθ1
+σ,h) = ∥(λ −Ah)−1A1+α+θ1/2
+h
+∥L( ˙H0
+σ,h, ˙H0
+σ,h)
+⩽c min
+
+h(−2α−θ1)∧0
+1 + |λ|0∨(−α−θ1/2) , h−2−2α−θ1
+1 + |λ|
+
+.
+Consequently,
+
+
+Aα
+h
+
+Ph(λ −A)−1 −(λ −Ah)−1Ph
+
+
+L( ˙Hθ2
+σ , ˙Hθ1
+σ,h)
+⩽
+ch2
+1 + |λ|θ2/2 min
+
+h(−2α−θ1)∧0
+1 + |λ|0∨(−α−θ1/2) , h−2−2α−θ1
+1 + |λ|
+
+.
+Substituting this bound into the Dunford–Taylor integral and parametrizing Γ via λ = re±iπ/4 yields the desired
+estimate (4.23).
+(ii) Let α ∈(0, 1
+2) and β ∈[0, 1].
+Applying estimate (4.23) with (θ1, θ2) = (0, β) and (1, 2 −2α), and
+employing the norm equivalence (4.3), we obtain
+∥Jh,α −Ph∥L( ˙Hβ
+σ ,L2) ⩽chβ,
+∥Jh,α −Ph∥L( ˙H2−2α
+σ
+, ˙H1) ⩽ch1−2α log(1 + 1/h).
+Furthermore, the standard approximation properties of Ph (cf. (4.13)) provide
+∥I −Ph∥L( ˙Hβ
+σ ,L2) ⩽chβ,
+∥I −Ph∥L( ˙H2−2α
+σ
+, ˙H1) ⩽ch1−2α.
+Finally, the desired estimates (4.24) and (4.25) follow directly from the triangle inequality, ∥I −Jh,α∥⩽∥I −
+Ph∥+ ∥Jh,α −Ph∥, in conjunction with the four bounds established above.
+(iii) Fix α ∈[0, 1]. From the definition (4.22), a direct computation yields the commutator identity
+Jh,αA −AhJh,α = Aα+1
+h
+A−1
+h Ph −PhA−1
+A1−α.
+We estimate its operator norm from ˙H2−2α
+σ
+to ˙H−2
+σ,h as follows:
+
+
+Jh,αA −AhJh,α
+
+
+L( ˙H2−2α
+σ
+, ˙H−2
+σ,h) =
+
+
+Aα+1
+h
+(A−1
+h Ph −PhA−1)A1−α
+
+L( ˙H2−2α
+σ
+, ˙H−2
+σ,h)
+=
+
+
+(A−1
+h Ph −PhA−1)A1−α
+
+L( ˙H2−2α
+σ
+, ˙H2α
+σ,h)
+⩽ch−2α
+
+(A−1
+h Ph −PhA−1)A1−α
+
+L( ˙H2−2α
+σ
+,L2)
+⩽ch−2α
+
+A−1
+h Ph −PhA−1
+
+L(L2σ,L2)
+
+
+A1−α
+
+L( ˙H2−2α
+σ
+,L2σ).
+16
+
+where the first inequality uses the inverse inequality (4.4). Since A1−α is an isometry from ˙H2−2α
+σ
+to L2
+σ, and
+(4.14) with θ = 0 gives ∥A−1
+h Ph −PhA−1∥L(L2σ,L2) ⩽ch2, we obtain (4.26).
+(iv) Let α ∈( 1
+4, 1
+2). To prove (4.27), we write
+Jh,αP −Ph = (Jh,α −Ph)P + Ph(P −I).
+By Lemma 2.1(ii), the Helmholtz projection P is bounded from ˙H1−2α to ˙H1−2α
+σ
+. Hence, applying estimate
+(4.23) with (θ1, θ2) = (−1, 1 −2α) gives
+∥(Jh,α −Ph)P∥L( ˙H1−2α, ˙H−1
+σ,h) ⩽ch2−2α.
+On the other hand, Lemma 4.1(i) implies
+∥Ph(P −I)∥L( ˙H1−2α, ˙H−1
+σ,h) ⩽ch2−2α.
+Combining these two bounds yields (4.27).
+To establish (4.28), we decompose
+Jh,αP −Ph = Aα
+hPhA−αP −Ph
+= Aα
+h(Ph −Jh,1−α)A−αP + Ah
+PhA−1P −A−1
+h Ph
+
+.
+For the first term, observe that
+∥Aα
+h∥L( ˙H2α−1
+σ,h
+, ˙H−1
+σ,h) = 1,
+∥A−α∥L( ˙H−2α
+σ
+,L2σ) = 1,
+and P ∈L( ˙H−2α, ˙H−2α
+σ
+) by Lemma 2.1(iii). Therefore,
+∥Aα
+h(Ph −Jh,1−α)A−αP∥L( ˙H−2α, ˙H−1
+σ,h) ⩽c ∥Ph −Jh,1−α∥L(L2σ, ˙H2α−1
+σ,h
+).
+Applying (4.23) with α replaced by 1 −α, θ1 = 2α −1, and θ2 = 0 (noting that 2α −1 ∈(−1
+2, 0) for α ∈( 1
+4, 1
+2))
+gives
+∥Ph −Jh,1−α∥L(L2σ, ˙H2α−1
+σ,h
+) ⩽ch1−2α.
+Hence,
+∥Aα
+h(Ph −Jh,1−α)A−αP∥L( ˙H−2α, ˙H−1
+σ,h) ⩽ch1−2α.
+(4.29)
+For the second term, note that
+∥Ah(PhA−1P −A−1
+h Ph)∥L( ˙H−2α, ˙H−1
+σ,h) = ∥PhA−1P −A−1
+h Ph∥L( ˙H−2α, ˙H1
+σ,h).
+By the inverse inequality ∥vh∥˙H1
+σ,h ⩽ch−1∥vh∥L2 (cf. (4.4)) and the estimate ∥PhA−1P −A−1
+h Ph∥L( ˙H−2α,L2) ⩽
+ch2−2α (cf. (4.14) with θ = 2α),
+∥PhA−1P −A−1
+h Ph∥L( ˙H−2α, ˙H1
+σ,h) ⩽ch−1∥PhA−1P −A−1
+h Ph∥L( ˙H−2α,L2) ⩽ch1−2α.
+Combining this bound with (4.29) and applying the triangle inequality gives the desired bound (4.28).
+■
+4.3
+Proof of Theorem 4.2.
+Set eh := uh −Jhu, where Jh abbreviates Jh,(1−ϱ)/2. The regularity properties established in (3.11) and (3.12)
+ensure that the weak solution u satisfies (3.3) in
+˙Hϱ−1
+σ
+.
+Applying Jh to the continuous equation (3.3) and
+17
+
+subtracting from the spatial semidiscretization (4.5), we derive the following stochastic differential equation for
+eh on [0, T]:
+deh(t) = −
+
+Aheh + AhJhu −JhAu
+
+(t) dt
++ 1
+2
+∞
+X
+n=1
+L2
+ζn,huh(t) −JhL2
+ζnu(t)
+
+dt
++
+h
+JhPG(u) −PhG(uh)
+i
+(t) dt
++
+∞
+X
+n=1
+h
+Lζn,huh(t) −JhLζnu(t)
+i
+dWn(t),
+where Lζn and Lζn,h are defined by (3.1) and (4.6), respectively. Applying Itˆo’s formula to ∥eh(t)∥2
+L2 yields, for
+P-almost surely all t ∈[0, T], the identity
+∥eh(t)∥2
+L2 = ∥(Ph −Jh)u0∥2
+L2 + 2
+Z t
+0
+4
+X
+k=1
+Ik(s) ds + M(t),
+(4.30)
+where the terms Ik for k = 1, . . . , 4 and the martingale M(t) are defined by
+I1 :=
+
+−Aheh −AhJhu + JhAu, eh
+
+,
+(4.31)
+I2 := 1
+2
+∞
+X
+n=1
+
+L2
+ζn,huh −JhL2
+ζnu, eh
+
+,
+(4.32)
+I3 :=
+
+JhPG(u) −PhG(uh), eh
+
+,
+(4.33)
+I4 := 1
+2
+∞
+X
+n=1
+
+
+Lζn,huh −JhLζnu
+
+
+2
+L2,
+(4.34)
+and
+M(t) := 2
+∞
+X
+n=1
+Z t
+0
+
+Lζn,huh(s) −JhLζnu(s), eh(s)
+
+dWn(s).
+(4.35)
+The proof proceeds in six steps. In Steps 1–5, we derive bounds for the terms I1, . . . , I4 and the martingale
+M(t). Finally, in Step 6, we combine these estimates with Gr¨onwall’s inequality to establish the convergence
+rate stated in (4.12).
+Step 1. (Estimate of I1). We establish the bound
+I1 ⩽−3
+4∥eh∥2
+˙H1
+σ,h + ch2ϱ∥u∥2
+˙Hϱ+1
+σ
+.
+(4.36)
+By definition (4.31), we decompose I1 as
+I1 = −∥eh∥2
+˙H1
+σ,h + ⟨JhAu −AhJhu, eh⟩.
+To estimate the second term, we proceed as follows:
+⟨JhAu −AhJhu, eh⟩⩽∥eh∥˙H2
+σ,h∥JhAu −AhJhu∥˙H−2
+σ,h
+(duality)
+⩽ch−1∥eh∥˙H1
+σ,h∥JhAu −AhJhu∥˙H−2
+σ,h
+(inverse inequality (4.4))
+⩽chϱ∥eh∥˙H1
+σ,h∥u∥˙Hϱ+1
+σ
+((4.26) with α = (1 −ϱ)/2).
+Substituting this into the decomposition of I1 gives
+I1 ⩽−∥eh∥2
+˙H1
+σ,h + chϱ∥eh∥˙H1
+σ,h∥u∥˙Hϱ+1
+σ
+.
+18
+
+An application of Young’s inequality to the cross term then yields the desired bound (4.36).
+Step 2. (Estimate of I2). We establish the following bound for I2:
+I2 ⩽3
+8∥eh∥2
+˙H1
+σ,h −1
+2
+∞
+X
+n=1
+∥Lζn,heh∥2
+L2 + ch2ϱ(log(1 + 1/h))2∥u∥2
+˙Hϱ+1
+σ
+.
+(4.37)
+From the definition (4.32), we decompose I2 as
+I2 = 1
+2
+∞
+X
+n=1
+⟨(Lζn,h −JhLζn)Lζnu, eh⟩+ 1
+2
+∞
+X
+n=1
+
+Lζn,h
+Lζn,huh −Lζnu
+
+, eh
+
+.
+Using integration by parts and the fact that each ζn ∈W1,∞is divergence-free (cf. Hypothesis 3.1), we rewrite
+the second term to obtain
+I2 = 1
+2
+∞
+X
+n=1
+⟨(Lζn,h −JhLζn)Lζnu, eh⟩−1
+2
+∞
+X
+n=1
+⟨Lζn,huh −Lζnu, (ζn · ∇)eh⟩.
+This leads to the decomposition
+I2 = I(1)
+2
++ I(2)
+2
++ I(3)
+2
+−1
+2
+∞
+X
+n=1
+∥Lζn,heh∥2
+L2,
+(4.38)
+where
+I(1)
+2
+:= 1
+2
+∞
+X
+n=1
+⟨(Lζn,h −JhLζn)Lζnu, eh⟩,
+I(2)
+2
+:= 1
+2
+∞
+X
+n=1
+⟨(Lζn −Lζn,h)u, (ζn · ∇)eh⟩,
+I(3)
+2
+:= 1
+2
+∞
+X
+n=1
+⟨Lζn,h(I −Jh)u, (ζn · ∇)eh⟩.
+The desired bound (4.37) is then obtained by combining the estimates (4.39)–(4.41) for I(1)
+2 , I(2)
+2 , and I(3)
+2 , which
+are derived in parts (a)–(c) below.
+Part (a): Estimate of I(1)
+2 . We estimate I(1)
+2
+as follows:
+I(1)
+2
+= 1
+2
+∞
+X
+n=1
+⟨(Ph −JhP)[(ζn · ∇)P((ζn · ∇)u)], eh⟩
+⩽1
+2
+∞
+X
+n=1
+∥(Ph −JhP)[(ζn · ∇)P((ζn · ∇)u)]∥˙H−1
+σ,h ∥eh∥˙H1
+σ,h
+⩽chϱ
+∞
+X
+n=1
+∥(ζn · ∇)P((ζn · ∇)u)∥˙Hϱ−1 ∥eh∥˙H1
+σ,h
+(by (4.28) with α = (1 −ϱ)/2)
+⩽chϱ
+∞
+X
+n=1
+∥ζn∥2
+W1,∞∥u∥˙Hϱ+1
+σ
+∥eh∥˙H1
+σ,h
+(by Lemma 4.2 with α = ϱ + 1).
+By the summability condition (3.4) and Young’s inequality, we obtain
+I(1)
+2
+⩽1
+8∥eh∥2
+˙H1
+σ,h + ch2ϱ∥u∥2
+˙Hϱ+1
+σ
+.
+(4.39)
+19
+
+Part (b): Estimate of I(2)
+2 . By the Cauchy–Schwarz inequality and Lemma 4.1(ii),
+I(2)
+2
+= 1
+2
+∞
+X
+n=1
+⟨(P −Ph)((ζn · ∇)u), (ζn · ∇)eh⟩
+⩽chϱ
+∞
+X
+n=1
+∥(ζn · ∇)u∥Hϱ∥(ζn · ∇)eh∥L2.
+Applying the standard product estimates
+∥(ζn · ∇)u∥Hϱ ⩽c∥ζn∥W1,∞∥u∥˙Hϱ+1
+σ
+,
+∥(ζn · ∇)eh∥L2 ⩽c∥ζn∥W1,∞∥eh∥˙H1
+σ,h,
+yields
+I(2)
+2
+⩽chϱ
+∞
+X
+n=1
+∥ζn∥2
+W1,∞∥u∥˙Hϱ+1
+σ
+∥eh∥˙H1
+σ,h.
+An application of Young’s inequality and the summability condition (3.4) gives
+I(2)
+2
+⩽1
+8∥eh∥2
+˙H1
+σ,h + ch2ϱ∥u∥2
+˙Hϱ+1
+σ
+.
+(4.40)
+Part (c): Estimate of I(3)
+2 . We estimate I(3)
+2
+as:
+I(3)
+2
+= 1
+2
+∞
+X
+n=1
+⟨Ph[(ζn · ∇)(I −Jh)u], (ζn · ∇)eh⟩
+⩽1
+2
+∞
+X
+n=1
+∥Ph[(ζn · ∇)(I −Jh)u]∥L2∥(ζn · ∇)eh∥L2
+⩽1
+2
+∞
+X
+n=1
+∥(ζn · ∇)(I −Jh)u∥L2∥(ζn · ∇)eh∥L2
+(since ∥Ph∥L(L2,L2) ⩽1)
+⩽c
+∞
+X
+n=1
+∥ζn∥2
+L∞∥∇(I −Jh)u∥L2∥eh∥˙H1
+σ,h
+⩽chϱ log(1 + 1/h)
+∞
+X
+n=1
+∥ζn∥2
+L∞∥u∥˙Hϱ+1
+σ
+∥eh∥˙H1
+σ,h,
+where the last inequality follows from (4.25) with α = (1 −ϱ)/2. Finally, an application of Young’s inequality
+together with the summability condition (3.4) yields
+I(3)
+2
+⩽1
+8∥eh∥2
+˙H1
+σ,h + ch2ϱ(log(1 + 1/h))2∥u∥2
+˙Hϱ+1
+σ
+.
+(4.41)
+Step 3. (Estimate of I3). We establish the following bound for I3:
+I3 ⩽1
+8∥eh∥2
+˙H1
+σ,h + c
+
+∥u∥2
+L2∥u∥2
+˙H1σ + ∥uh∥2
+L2∥uh∥2
+˙H1
+σ,h
+
+∥eh∥2
+L2
++ ch2ϱ(1 + ∥u∥2
+L2)∥u∥2
+˙Hϱ
+σ∥u∥2
+˙H1σ + ch2ϱ(log(1 + 1/h))2∥u∥2
+˙Hϱ+1
+σ
+.
+(4.42)
+20
+
+From the definition of I3 in (4.33), the definition of G in (4.7), and the incompressibility of u, we decompose I3
+as
+I3 = ⟨(JhP −Ph)((u · ∇)u), eh⟩
+|
+{z
+}
+I(1)
+3
++ ⟨((u −uh) · ∇)u, eh⟩+ ⟨(uh · ∇)(u −uh), eh⟩+ 1
+2⟨∇· (u −uh), uh · eh⟩
+|
+{z
+}
+I(2)
+3
+.
+For I(1)
+3 , using the Cauchy-Schwarz inequality and (4.28) with α = (1 −ϱ)/2, we have
+I(1)
+3
+⩽∥(JhP −Ph)((u · ∇)u)∥˙H−1
+σ,h∥eh∥˙H1
+σ,h
+⩽chϱ∥(u · ∇)u∥˙Hϱ−1∥eh∥˙H1
+σ,h.
+A duality argument, employing H¨older’s inequality and the Sobolev embedding theorem, gives
+∥(u · ∇)u∥˙Hϱ−1 ⩽c∥u∥˙Hϱ
+σ∥u∥˙H1σ,
+and hence,
+I(1)
+3
+⩽chϱ∥u∥˙Hϱ
+σ∥u∥˙H1σ∥eh∥˙H1
+σ,h.
+Applying Young’s inequality then gives
+I(1)
+3
+⩽1
+16∥eh∥2
+˙H1
+σ,h + ch2ϱ∥u∥2
+˙Hϱ
+σ∥u∥2
+˙H1σ.
+We now turn to I(2)
+3 . Integration by parts provides
+I(2)
+3
+= ⟨((uh −u) · ∇)eh, u⟩+ ⟨∇· (uh −u), u · eh⟩
++ ⟨(uh · ∇)(u −uh), eh⟩+ 1
+2⟨∇· (u −uh), uh · eh⟩.
+By H¨older’s inequality, it follows that
+I(2)
+3
+⩽c∥uh −u∥L4∥∇eh∥L2∥u∥L4 + c(∥u∥L4 + ∥uh∥L4)∥∇(u −uh)∥L2∥eh∥L4.
+Using Young’s inequality, the identity uh −u = eh −(u −Jhu), and the Gagliardo–Nirenberg interpolation
+inequality ∥v∥L4 ⩽c∥v∥1/2
+L2 ∥∇v∥1/2
+L2 for any v ∈˙H1 (see e.g. [6, Proposition III.2.35]), we deduce
+I(2)
+3
+⩽1
+16∥eh∥2
+˙H1
+σ,h + c
+
+∥u∥2
+L2∥u∥2
+˙H1σ + ∥uh∥2
+L2∥uh∥2
+˙H1
+σ,h
+
+∥eh∥2
+L2
++ c∥u∥2
+L2∥u∥2
+˙H1σ∥u −Jhu∥2
+L2 + c∥u −Jhu∥2
+˙H1.
+Applying (4.24) and (4.25) with α = (1 −ϱ)/2 and β = 1 −2α then yields
+I(2)
+3
+⩽1
+16∥eh∥2
+˙H1
+σ,h + c
+
+∥u∥2
+L2∥u∥2
+˙H1σ + ∥uh∥2
+L2∥uh∥2
+˙H1
+σ,h
+
+∥eh∥2
+L2
++ ch2ϱ∥u∥2
+L2∥u∥2
+˙H1σ∥u∥2
+˙Hϱ
+σ + ch2ϱ(log(1 + 1/h))2∥u∥2
+˙Hϱ+1
+σ
+.
+Combining the bounds for I(1)
+3
+and I(2)
+3
+yields the desired estimate (4.42).
+21
+
+Step 4. (Estimate of I4). We establish the bound
+I4 ⩽1
+8∥eh∥2
+˙H1
+σ,h + 1
+2
+∞
+X
+n=1
+∥Lζn,heh∥2
+L2 + ch2ϱ(log(1 + 1/h))2∥u∥2
+˙Hϱ+1
+σ
+.
+(4.43)
+We begin with the decomposition, valid for any n ⩾1:
+Lζn,huh −JhLζnu = Lζn,heh + Lζn,h(Jh −I)u + (Lζn,h −JhLζn)u.
+Applying the Cauchy–Schwarz and Young’s inequalities gives, for any ϵ > 0,
+I4 ⩽
+1
+2 + ϵ
+ ∞
+X
+n=1
+∥Lζn,heh∥2
+L2
++ c
+ϵ
+∞
+X
+n=1
+∥Lζn,h(Jh −I)u∥2
+L2 + c
+ϵ
+∞
+X
+n=1
+∥(Lζn,h −JhLζn)u∥2
+L2.
+(4.44)
+We now bound the second and third terms. Applying (4.25) with α = (1 −ϱ)/2 yields the estimate
+∞
+X
+n=1
+∥Lζn,h(Jh −I)u∥2
+L2 =
+∞
+X
+n=1
+∥Ph[(ζn · ∇)(Jhu −u)]∥2
+L2
+⩽c
+∞
+X
+n=1
+∥ζn∥2
+L∞∥Jhu −u∥2
+˙H1
+⩽ch2ϱ(log(1 + 1/h))2
+∞
+X
+n=1
+∥ζn∥2
+L∞∥u∥2
+˙Hϱ+1
+σ
+,
+which, by condition (3.4), simplifies to
+∞
+X
+n=1
+∥Lζn,h(Jh −I)u∥2
+L2 ⩽ch2ϱ(log(1 + 1/h))2∥u∥2
+˙Hϱ+1
+σ
+.
+(4.45)
+Analogously, for the third term we have
+∞
+X
+n=1
+∥(Lζn,h −JhLζn)u∥L2 =
+∞
+X
+n=1
+∥(Ph −JhP)((ζn · ∇)u)∥2
+L2
+⩽ch−2
+∞
+X
+n=1
+∥(Ph −JhP)((ζn · ∇)u)∥2
+˙H−1
+σ,h
+(by (4.4))
+⩽ch2ϱ
+∞
+X
+n=1
+∥(ζn · ∇)u∥2
+˙Hϱ
+(by (4.27) with α = (1 −ϱ)/2)
+⩽ch2ϱ
+∞
+X
+n=1
+∥ζn∥2
+W1,∞∥u∥2
+˙Hϱ+1
+σ
+,
+which, by the condition (3.4), implies
+∞
+X
+n=1
+∥(Lζn,h −JhLζn)u∥2
+L2 ⩽ch2ϱ∥u∥2
+˙Hϱ+1
+σ
+.
+(4.46)
+Substituting (4.45) and (4.46) into (4.44) yields, for any ϵ > 0,
+I4 ⩽
+1
+2 + ϵ
+ ∞
+X
+n=1
+∥Lζn,heh∥2
+L2 + ch2ϱ
+ϵ
+(log(1 + 1/h))2∥u∥2
+˙Hϱ+1
+σ
+.
+22
+
+Condition (3.4) also provides control over the term involving eh:
+∞
+X
+n=1
+∥Lζn,heh∥2
+L2 ⩽c∥eh∥2
+˙H1
+σ,h.
+Inserting this into the previous inequality yields
+I4 ⩽cϵ∥eh∥2
+˙H1
+σ,h + 1
+2
+∞
+X
+n=1
+∥Lζn,heh∥2
+L2 + ch2ϱ
+ϵ
+(log(1 + 1/h))2∥u∥2
+˙Hϱ+1
+σ
+.
+The desired bound (4.43) now follows by choosing ϵ > 0 sufficiently small.
+Step 5. (Estimate of the Martingale M). We establish the following bound for the martingale term M:
+E∥M∥C[0,T ] ⩽ϵ∥eh∥2
+L2(Ω;C([0,T ];L2)) + ch2ϱ
+ϵ
+(log(1 + 1/h))2,
+∀ϵ > 0.
+(4.47)
+Since each ζn ∈W1,∞is divergence-free (cf. Hypothesis 3.1), integration by parts yields
+⟨Lζn,heh, eh⟩= 0,
+∀n ⩾1,
+which implies
+⟨Lζn,huh, eh⟩= ⟨Lζn,hJhu, eh⟩,
+∀n ⩾1.
+Consequently, the integrand in the definition of M can be estimated as
+⟨Lζn,huh −JhLζnu, eh⟩= ⟨(Lζn,hJh −JhLζn)u, eh⟩
+⩽∥(Lζn,hJh −JhLζn)u∥L2∥eh∥L2.
+Squaring both sides and summing over n, we find
+∞
+X
+n=1
+
+Lζn,huh −JhLζnu, eh
+2 ⩽
+∞
+X
+n=1
+∥(Lζn,hJh −JhLζn)u∥2
+L2∥eh∥2
+L2
+⩽ch2ϱ(log(1 + 1/h))2∥u∥2
+˙Hϱ+1
+σ
+∥eh∥2
+L2,
+where the last inequality uses estimates from (4.45) and (4.46). Applying the Burkholder–Davis–Gundy inequal-
+ity yields
+E∥M(t)∥C[0,T ] ⩽cE
+" Z T
+0
+∞
+X
+n=1
+
+Lζn,huh(t) −JhLζnu(t), eh(t)
+2dt
+1/2#
+⩽chϱ log(1 + 1/h)E
+h
+∥u∥L2(0,T ; ˙Hϱ+1
+σ
+)∥eh∥C([0,T ];L2)
+i
+.
+Finally, applying Young’s inequality with an arbitrary ϵ > 0 and using the regularity property (3.12) for u yields
+the desired bound (4.47).
+Step 6.
+(Conclusion).
+From (4.13), (4.24) with α = (1 −ϱ)/2 and β = 1, and the assumption u0 ∈
+L2
+F0(Ω; ˙H1/2), we have the initial error bound:
+∥(Ph −Jh)u0∥L2 ⩽ch1.
+Substituting this bound, together with the estimates for I1, . . . , I4 from (4.36), (4.37), (4.42), and (4.43), into
+the identity (4.30), we deduce that, P-almost surely for all t ∈[0, T],
+∥eh(t)∥2
+L2 + 1
+4
+Z t
+0
+∥eh(s)∥2
+˙H1
+σ,h ds
+⩽ch2ϱ + ch2ϱ(log(1 + 1/h))2
+Z T
+0
+h
+∥u(s)∥2
+˙Hϱ+1
+σ
++
+1 + ∥u(s)∥2
+L2
+
+∥u(s)∥2
+˙Hϱ
+σ∥u(s)∥2
+˙H1σ
+i
+ds
++ c
+Z t
+0
+
+∥u(s)∥2
+L2∥u(s)∥2
+˙H1σ + ∥uh(s)∥2
+L2∥uh(s)∥2
+˙H1
+σ,h
+
+∥eh(s)∥2
+L2 ds + ∥M∥C[0,T ].
+23
+
+Define z(t) := sups∈[0,t] ∥eh(s)∥2
+L2. Then, P-almost surely for all t ∈[0, T],
+z(t) + 1
+4
+Z t
+0
+∥eh(s)∥2
+˙H1
+σ,h ds
+⩽ch2ϱ + ch2ϱ(log(1 + 1/h))2
+Z T
+0
+h
+∥u(s)∥2
+˙Hϱ+1
+σ
++
+1 + ∥u(s)∥2
+L2
+
+∥u(s)∥2
+˙Hϱ
+σ∥u(s)∥2
+˙H1σ
+i
+ds
++ c
+Z t
+0
+
+∥u(s)∥2
+L2∥u(s)∥2
+˙H1σ + ∥uh(s)∥2
+L2∥uh(s)∥2
+˙H1
+σ,h
+
+z(s) ds + ∥M∥C[0,T ].
+Applying Gronwall’s inequality yields, P-almost surely,
+z(T) + 1
+4
+Z T
+0
+∥eh(s)∥2
+˙H1
+σ,h ds
+⩽c exp
+ 
+c
+Z T
+0
+∥u(s)∥2
+L2∥u(s)∥2
+˙H1σ + ∥uh(s)∥2
+L2∥uh(s)∥2
+˙H1
+σ,hds
+!
+×
+
+h2ϱ + h2ϱ(log(1 + 1/h))2
+Z T
+0
+∥u(s)∥2
+˙Hϱ+1
+σ
++
+1 + ∥u(s)∥2
+L2
+
+∥u(s)∥2
+˙Hϱ
+σ∥u(s)∥2
+˙H1σds + ∥M∥C[0,T ]
+
+⩽c exp
+
+c∥u∥2
+C([0,T ];L2)∥u∥2
+L2(0,T ; ˙H1σ) + c∥uh∥2
+C([0,T ];L2)∥uh∥2
+L2(0,T ; ˙H1
+σ,h)
+
+×
+
+h2ϱ + h2ϱ(log(1 + 1/h))2 
+∥u∥2
+L2(0,T ; ˙Hϱ+1
+σ
+) +
+1 + ∥u∥2
+C([0,T ];L2)
+
+∥u∥2
+C([0,T ]; ˙Hϱ
+σ)∥u∥2
+L2(0,T ; ˙H1σ)
+
++ ∥M∥C[0,T ]
+
+.
+By the regularity of u in (3.10) and the stability of uh in Theorem 4.1, it follows that P-almost surely,
+z(T) + 1
+4
+Z T
+0
+∥eh(s)∥2
+˙H1
+σ,h ds
+⩽c
+h
+h2ϱ + h2ϱ(log(1 + 1/h))2 
+∥u∥2
+L2(0,T ; ˙Hϱ+1
+σ
+) + ∥u∥2
+C([0,T ]; ˙Hϱ
+σ)
+
++ ∥M∥C[0,T ]
+i
+.
+Taking expectations and using the regularity results in (3.11) and (3.12), we obtain
+E z(T) + ∥eh∥2
+L2(Ω×(0,T ); ˙H1
+σ,h) ⩽c
+h2ϱ(log(1 + 1/h))2 + E∥M∥C[0,T ]
+
+.
+Noting that z(T) = ∥eh∥2
+C([0,T ];L2), this inequality is equivalent to
+∥eh∥2
+L2(Ω;C([0,T ];L2)) + ∥eh∥2
+L2(Ω×(0,T ); ˙H1
+σ,h) ⩽c
+h2ϱ(log(1 + 1/h))2 + E∥M∥C[0,T ]
+
+.
+Substituting the bound for E∥M∥C[0,T ] from (4.47) and absorbing the resulting stochastic term into the left-hand
+side, then taking square roots, yields the error estimate
+∥eh∥L2(Ω;C([0,T ];L2)) + ∥eh∥L2(Ω×(0,T ); ˙H1
+σ,h) ⩽chϱ log(1 + 1/h).
+(4.48)
+To bound the total error u −uh, we decompose it as u −uh = (u −Jhu) −eh. Applying the triangle inequality
+and using (4.48) yields
+∥u −uh∥L2(Ω;C([0,T ];L2)) + ∥∇(u −uh)∥L2(Ω×(0,T );L2)
+⩽∥u −Jhu∥L2(Ω;C([0,T ];L2)) + ∥∇(u −Jhu)∥L2(Ω×(0,T );L2) + chϱ log(1 + 1/h).
+Furthermore, invoking (4.24) and (4.25) together with the regularity results (3.11) and (3.12) gives
+∥u −Jhu∥L2(Ω;C([0,T ];L2)) + ∥∇(u −Jhu)∥L2(Ω×(0,T );L2) ⩽chϱ log(1 + 1/h).
+Combining the last two inequalities yields the desired estimate (4.12), which completes the proof of Theorem
+4.2.
+■
+24
+
+5
+Conclusions
+This paper has provided a rigorous numerical analysis of the two-dimensional incompressible stochastic Navier–
+Stokes equations with transport noise under no-slip boundary conditions. We first investigated the regularity of
+the weak solution and then established a mean-square strong convergence rate of O(hϱ log(1+1/h)) for both the
+velocity and its gradient, where 0 < ϱ < 1/2, for a spatial semidiscretization based on the MINI finite element
+method.
+To the best of our knowledge, this work constitutes the first rigorous convergence analysis for finite element
+spatial semidiscretizations of the two-dimensional stochastic Navier–Stokes equations with transport noise. The
+central innovation of our approach is a novel technique that overcomes the lack of D(A)-regularity—a longstand-
+ing obstacle in the numerical analysis of such problems under no-slip boundary conditions.
+Our analysis relies on a smallness condition on the transport noise vector fields: P∞
+n=1 ∥ζn∥2
+W1,∞is sufficiently
+small. Removing this restriction remains a fundamental open question in the numerical analysis of stochastic fluid
+models. Key challenges for future work include extending these results to fully discrete schemes and developing
+efficient algorithms to mitigate the substantial computational cost of simulations.
+References
+[1]
+A. Agresti and M. Veraar. Stochastic Navier–Stokes equations for turbulent flows in critical spaces. Com-
+mun. Math. Phys. 405 (2024), p. 43.
+[2]
+A. Bensoussan and R. Temam. Equations stochastique du type Navier-Stokes. J. Funct. Anal. 13 (1973),
+pp. 195–222.
+[3]
+H. Bessaih, Z. Brze´zniak, and A. Millet. Splitting up method for the 2D stochastic Navier-Stokes equations.
+Stoch PDE: Anal. Comp. 2 (2014), pp. 433–470.
+[4]
+H. Bessaih and A. Millet. Strong L2 convergence of time numerical schemes for the stochastic two-
+dimensional Navier-Stokes equations. IMA J. Numer. Anal. 39 (2019), pp. 2135–2167.
+[5]
+H. Bessaih and A. Millet. Strong rates of convergence of space-time discretization schemes for the 2D
+Navier-Stokes equations with additive noise. Stoch. Dyn. 22 (2022), p. 2240005.
+[6]
+F. Boyer and P. Fabrie. Mathematical tools for the study of the incompressible Navier-Stokes equations
+and related models. Springer, New York, 2012.
+[7]
+D. Breit and A. Dodgson. Convergence rates for the numerical approximation of the 2D stochastic Navier-
+Stokes equations. Numer. Math. 147 (2021), pp. 553–578.
+[8]
+D. Breit and A. Prohl. Error analysis for 2D stochastic Navier-Stokes equations in bounded domains with
+Dirichlet data. Found. Comput. Math. (2023).
+[9]
+D. Breit and A. Prohl. Numerical analysis of two-dimensional Navier–Stokes equations with additive
+stochastic forcing. IMA J. Numer. Anal. 43 (2023), pp. 1391–1421.
+[10]
+D. Breit et al. Mean square temporal error estimates for the 2D stochastic Navier-Stokes equations with
+transport noise. arXiv:2305.109999 (2024).
+[11]
+S. C. Brenner and R. Scott. The mathematical theory of finite element methods. 3rd ed. Springer-Verlag
+New York, 2008.
+[12]
+Z. Brze´zniak, M. Capi´nski, and F. Flandoli. Stochastic partial differential equations and turbulence. Math.
+Models Methods Appl. Sci. 1 (1991), pp. 41–59.
+[13]
+Z. Brze´zniak, E. Carelli, and A. Prohl. Finite-element-based discretizations of the incompressible Navier–Stokes
+equations with multiplicative random forcing. IMA J. Numer. Anal. 33 (2013), pp. 771–824.
+[14]
+M. Capi´nski and N. J. Cutland. Stochastic Navier-Stokes equations. Acta Appl. Math. 25 (1991), pp. 59–
+85.
+25
+
+[15]
+E. Carelli and A. Prohl. Rates of convergence for discretizations of the stochastic incompressible Navier-
+Stokes equations. SIAM J. Numer. Anal. 50 (2012), pp. 2467–2496.
+[16]
+M. Dauge. Stationary Stokes and Navier-Stokes systems on two- or three-dimensional domains with corners.
+Part I: linearized equations. SIAM J. Math. Anal. 20 (1989), pp. 74–97.
+[17]
+J. Doghman. Numerical approximation of the stochastic Navier-Stokes equations through artificial com-
+pressibility. Calcolo 61:23 (2024).
+[18]
+X. Feng and L. Vo. Full Moment Error Estimates in Strong Norms for Numerical Approximations of
+Stochastic Navier–Stokes Equations with Multiplicative Noise. Part I: Time Discretization. arXiv:2510.08291
+(2025).
+[19]
+F. Flandoli and D. Gatarek. Martingale and stationary solutions for stochastic Navier–Stokes equations.
+Probab. Theory Related Fields 102 (1995), pp. 367–391.
+[20]
+F. Flandoli and D. Luo. High mode transport noise improves vorticity blow-up control in 3D Navier–Stokes
+equations. Probab. Theory Relat. Fields 180.1 (2021), pp. 309–363.
+[21]
+F. Flandoli and E. Luongo. Stochastic partial differential equations in fluid mechanics. Springer, Singapore,
+2023.
+[22]
+Y. Giga and T. Miyakawa. Solutions in Lr of the Navier-Stokes initial value problem. Arch. Ration. Mech.
+Anal. 89 (1985), pp. 267–281.
+[23]
+V. Girault and P.-A. Raviart. Finite element methods for Navier-Stokes equations. Theory and algorithms.
+Springer, Berlin, 1986.
+[24]
+E. Hausenblas and T. Randrianasolo. Time-discretization of stochastic 2-D Navier-Stokes equations with
+a penalty-projection method. Numer. Math. 143 (2019), pp. 339–378.
+[25]
+D. D. Holm. Variational principles for stochastic fluid dynamics. Proceedings of the Royal Society A:
+Mathematical, Physical and Engineering Sciences 471.2176 (2015), p. 20140963.
+[26]
+W. Liu and M. R¨ockner. SPDE in Hilbert space with locally monotone coefficients. J. Funct. Anal. 259
+(2010), pp. 2902–2922.
+[27]
+W. Liu and M. R¨ockner. Stochastic Partial Differential Equations: An Introduction. Universitext. Springer,
+2015.
+[28]
+R. Mikulevicius and B. L. Rozovskii. Global L2-solutions of stochastic Navier-Stokes equations. Ann.
+Probab. 33 (2005), pp. 137–176.
+[29]
+M. Mitrea and S. Monniaux. The regularity of the Stokes operator and the Fujita–Kato approach to the
+Navier–Stokes initial value problem in Lipschitz domains. Journal of Functional Analysis 254.6 (2008),
+pp. 1522–1574.
+[30]
+M. Ondrej´at, A. Prohl, and N. Walkington. Numerical approximation of nonlinear SPDE’s. Stoch PDE:
+Anal. Comp. 11 (2023), pp. 1553–1634.
+[31]
+E. Pardoux and A. Rascanu. Stochastic differential equations, backward SDEs, partial differential equations.
+Springer, Cham, 2014.
+[32]
+M. R¨ockner and X. Zhang. Stochastic tamed 3D Navier-Stokes equations: existence, uniqueness and ergod-
+icity. Probab. Theory Relat. Fields 145 (2009), pp. 211–267.
+[33]
+M. Scheutzow. A stochastic Gronwall lemma. Infin. Dimens. Anal. Quantum Probab. Relat. Top. 16.2
+(2013). 4 pages, p. 1350019.
+[34]
+A. Yagi. Abstract parabolic evolution equations and their applications. Springer, Berlin, 2010.
+26

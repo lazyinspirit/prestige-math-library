@@ -1,0 +1,1122 @@
+[
+  {
+    "order": 2622,
+    "id": "mixed-hdiv-fluxes-and-darcy-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Mixed H(div) fluxes, Darcy flow and local conservation",
+    "companion": "mixed-hdiv-fluxes-and-darcy-discretization-examples",
+    "requires": [
+      "mixed-finite-elements-and-stokes-stability"
+    ],
+    "items": [
+      {
+        "id": "def-na-contravariant-piola-map",
+        "kind": "definition",
+        "title": "Contravariant Piola map",
+        "statement": "Let $\\widehat K,K\\subset\\mathbb R^d$ be nondegenerate open simplices and let $F_K:\\widehat K\\to K$ be the orientation-preserving affine bijection $F_K(\\widehat x)=A_K\\widehat x+b_K$, where $J_K:=\\det A_K>0$. For a measurable vector field $\\widehat v$ on $\\widehat K$, define its contravariant Piola push-forward by\n$$\n(\\mathcal P_K\\widehat v)(x):=J_K^{-1}A_K\\widehat v(F_K^{-1}(x)),\\qquad x\\in K.\n$$\nThe inverse pull-back is $\\widehat v(\\widehat x)=J_KA_K^{-1}v(F_K(\\widehat x))$. Facet normals are oriented consistently with the chosen orientation of $F_K$; the associated oriented surface vector transforms by $n\\,ds=J_KA_K^{-T}\\widehat n\\,d\\widehat s$.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "State the map, domains, orientation, and inverse convention.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §14.4, equations (14.8)–(14.12): contravariant Piola mapping and facet flux transformation."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1, equation (2.1.69) and Lemmas 2.1.6–2.1.7."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-hdiv-space",
+        "kind": "definition",
+        "title": "The real H(div) space",
+        "statement": "Assume Countable Choice for the published Sobolev interfaces cited below. Let $D\\subseteq\\mathbb R^d$ be open and use real scalars. $L^2(D;\\mathbb R^d)$ means the $d$-tuple of real $L^2$ equivalence classes, with norm $\\|v\\|_2^2=\\sum_{j=1}^d\\|v_j\\|_2^2$. The test space $C_c^\\infty(D;\\mathbb R)$ consists of real smooth functions compactly supported in $D$.\n\nFor $v\\in L^2(D;\\mathbb R^d)$, say that $g\\in L^2(D;\\mathbb R)$ is its distributional divergence when\n$$\n\\int_D v\\cdot\\nabla\\phi\\,dx=-\\int_D g\\phi\\,dx\\qquad\\text{for every }\\phi\\in C_c^\\infty(D;\\mathbb R).\n$$\nThe $L^2$ class $g$ is unique when it exists. Indeed, if $g_1,g_2$ both satisfy the identity, put $h=g_1-g_2\\in L^2(D)$. Every compact $C\\subset D$ has finite Lebesgue measure by [[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]], and [[cor-cauchy-schwarz-inequality-for-l-two]] gives $\\int_C|h|\\le |C|^{1/2}\\|h\\|_{L^2(D)}<\\infty$. Thus $h\\in L^1_{\\mathrm{loc}}(D)$. Subtracting the two divergence identities gives $\\int_Dh\\phi=0$ for every real test $\\phi$; splitting a complex test into real and imaginary parts gives the same identity for complex tests. Injectivity of the regular-distribution map in [[thm-locally-integrable-functions-embed-in-distributions]] therefore yields $h=0$ almost everywhere, hence $g_1=g_2$ as $L^2$ classes. Define\n$$\nH(\\operatorname{div};D):=\\{v\\in L^2(D;\\mathbb R^d):\\text{there is }g\\in L^2(D;\\mathbb R)\\text{ with }g=\\operatorname{div}v\\text{ distributionally}\\},\n$$\nand equip it with the graph norm\n$$\n\\|v\\|_{H(\\operatorname{div};D)}:=\\bigl(\\|v\\|_2^2+\\|\\operatorname{div}v\\|_2^2\\bigr)^{1/2}.\n$$\nThe Sobolev notation $H^1(D)=W^{1,2}(D)$ and $H^1_0(D)=W^{1,2}_0(D)$ uses the norm and zero-boundary closure conventions of [[def-sobolev-space-wkp-and-its-norm]] and [[def-wkp-zero-as-a-sobolev-closure]]. No pointwise boundary value is part of this definition.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets"
+        ],
+        "dependency_level": 0,
+        "strategy": "Give the typed definition and all conventions; prove claimed well-definedness locally.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §14 introduction and §14.1: H(div) finite-element setting and the real vector-valued flux space."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1: H(div; Omega) and its graph norm."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-l2-zero-mean-hilbert",
+        "kind": "lemma",
+        "title": "The real zero-mean $L^2$ space is Hilbert",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be a measurable set of finite measure, and set\n$$L^2_0(D):=\\left\\{q\\in L^2(D;\\mathbb R):\\int_Dq\\,dx=0\\right\\}.$$\nWith the real $L^2$ inner product $(q,r)=\\int_Dqr\\,dx$, $L^2_0(D)$ is a closed real Hilbert subspace of $L^2(D;\\mathbb R)$.",
+        "deps": [
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-holder-inequality-for-integrals",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Show the integral is a bounded linear functional and its zero set is closed.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 49: Well-posedness for PDEs in mixed form",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "Complete chapter, §49.1 domain and real $L^2$ pressure-space conventions; the closed-subspace argument is proved locally here."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1 real $L^2$ and mixed pressure-space conventions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+        "kind": "lemma",
+        "title": "Smooth-neighborhood density in H1 of a simplex",
+        "statement": "Assume Countable Choice. Let $K\\subset\\mathbb R^d$ be a nondegenerate open simplex. For every $u\\in H^1(K;\\mathbb R)$ and every $\\varepsilon>0$, there is a function $u_\\varepsilon$ smooth on an open neighborhood of $\\overline K$ with $\\|u_\\varepsilon-u\\|_{H^1(K)}<\\varepsilon$.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-holder-inequality-for-integrals",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Contract the simplex inward, prove affine-composition continuity in H1, and mollify on the resulting neighborhood.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations (complete UC Davis notes, revised 2014)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Complete notes, Chapter 3 §3.6 (printed pp. 59–60), smooth approximation of Sobolev functions by mollification."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations (complete University of Illinois lecture notes, 2020)",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Complete notes, Chapter 3 §§3.2–3.4 (printed pp. 51–58), mollification and approximation by smooth functions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-hdiv-weak-normal-trace",
+        "kind": "lemma",
+        "title": "Weak normal trace by Green duality",
+        "statement": "Assume Countable Choice for the Sobolev-space interfaces below. Let $D\\subseteq\\mathbb R^d$ be open and $v\\in H(\\operatorname{div};D)$. Define the trace quotient\n$$T_D:=H^1(D)/H^1_0(D),\\qquad \\|[w]\\|_{T_D}:=\\inf_{z\\in H^1_0(D)}\\|w+z\\|_{H^1(D)}.$$\nThen the formula\n$$\n\\langle\\gamma_n v,[w]\\rangle:=\\int_D\\bigl(v\\cdot\\nabla w+(\\operatorname{div}v)w\\bigr)\\,dx\n$$\nis independent of the representative $w$, defines a bounded real linear functional $\\gamma_n v\\in T_D'$, and satisfies $\\|\\gamma_n v\\|_{T_D'}\\le\\|v\\|_{H(\\operatorname{div};D)}$. This functional is the weak normal trace; no pointwise boundary value is asserted.",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove Green independence on the H1_0 closure and bound the quotient functional.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1.1, Lemma 2.1.1 and its proof: normal trace in the dual trace space and Green's formula."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 16: Local interpolation in H(div) and H(curl) (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap16.pdf",
+              "locator": "Complete chapter, §16.1.1: face degrees of freedom and their Sobolev regularity domain."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-piola-divergence-and-flux-identities",
+        "kind": "lemma",
+        "title": "Piola divergence and facet-flux identities",
+        "statement": "Let $F_K(\\widehat x)=A_K\\widehat x+b_K$ be as in [[def-na-contravariant-piola-map]], and let $\\widehat v\\in C^1(\\overline{\\widehat K};\\mathbb R^d)$. Set $v=\\mathcal P_K\\widehat v$. Then\n$$\n(\\operatorname{div}_x v)(F_K(\\widehat x))=J_K^{-1}\\operatorname{div}_{\\widehat x}\\widehat v(\\widehat x).\n$$\nFor each facet $\\widehat F$ mapped to $F$, with the corresponding oriented normals, the integrated flux is preserved:\n$$\n\\int_F v\\cdot n_F\\,ds=\\int_{\\widehat F}\\widehat v\\cdot\\widehat n_{\\widehat F}\\,d\\widehat s.\n$$",
+        "deps": [
+          "def-na-contravariant-piola-map",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 1,
+        "strategy": "Derive the divergence identity by the affine chain rule and the flux identity by the cofactor surface transformation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §14.4, equations (14.8)–(14.12): oriented face transformation and contravariant Piola identities."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1, equations (2.1.69)–(2.1.74), Piola divergence and normal-flux formulas."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-h0div-space",
+        "kind": "definition",
+        "title": "Zero-normal-trace H(div) space",
+        "statement": "Assume Countable Choice for the Sobolev and weak normal trace interfaces. For an open set $D\\subseteq\\mathbb R^d$, let $T_D=H^1(D)/H^1_0(D)$ be the trace quotient of [[lem-na-hdiv-weak-normal-trace]], and let $\\gamma_n:H(\\operatorname{div};D)\\to T_D'$ be its weak normal trace. Define\n$$\nH_0(\\operatorname{div};D):=\\{v\\in H(\\operatorname{div};D):\\gamma_n v=0\\text{ in }T_D'\\}.\n$$\nThus zero normal trace means that the Green-duality functional vanishes on every H1 trace class; no pointwise normal value is required.",
+        "deps": [
+          "lem-na-hdiv-weak-normal-trace",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the typed definition and state exactly which trace is required to vanish.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1.1, equation (2.1.21), zero-normal-trace subspace of H(div)."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §14.1 normal-facet flux convention used for the zero-normal finite element subspace."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-simplicial-mesh-rt-bdm-spaces",
+        "kind": "definition",
+        "title": "Affine simplicial meshes and RT/BDM spaces",
+        "statement": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a bounded, connected polyhedral Lipschitz domain. A matching affine simplicial mesh and its shape regularity have the exact meaning of [[def-matching-affine-simplicial-meshes]]; additionally, call the mesh facet-connected when its dual graph (one vertex per cell and one edge per shared $(d-1)$-facet) is connected. Write $h=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}K$.\n\nFor $k\\ge0$, $\\mathbb P_k(K)$ is the real scalar polynomial space of total degree at most $k$, and $\\widetilde{\\mathbb P}_k$ is the real homogeneous scalar polynomial space of degree exactly $k$ (for $k=0$, the constants). Define\n$$\\operatorname{RT}_k(K)=\\mathbb P_k(K;\\mathbb R^d)+x\\widetilde{\\mathbb P}_k(K),\\qquad \\operatorname{BDM}_k(K)=\\mathbb P_k(K;\\mathbb R^d)\\quad(k\\ge1).$$\nFor either local family $X_k$, its global H(div)-conforming space is\n$$X_k(\\mathcal T_h)=\\{v\\in H(\\operatorname{div};D):v|_K\\in X_k(K)\\text{ for every }K\\in\\mathcal T_h\\}.\n$$\nThe zero-normal RT0 flux space and mean-zero P0 pressure space are\n$$V_h:=\\operatorname{RT}_0(\\mathcal T_h)\\cap H_0(\\operatorname{div};D),\\qquad Q_h:=\\{q\\in L^2(D):q|_K\\text{ is constant for every }K,\\ \\int_Dq=0\\}.$$\nFor each mesh facet $F$, fix one unit normal $n_F$; on a cell boundary use the outward unit normal $n_K$, which equals either $n_F$ or $-n_F$. The notation $\\mathbb P_0(\\mathcal T_h)$ means cellwise constants. No existence of a mesh for every $D$ is asserted by this definition.",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-na-hdiv-space",
+          "def-na-h0div-space",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Specify the affine map, facet orientation, polynomial families, mesh conformity, shape bound, and the precise global spaces.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §§14.2–14.4: affine simplices, Raviart–Thomas and BDM polynomial spaces, and facet conformity."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §§2.1–2.2: affine simplex maps and RT/BDM families."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-h0div-div-zero-mean",
+        "kind": "lemma",
+        "title": "Zero mean of the divergence under zero normal trace",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open. If $v\\in H_0(\\operatorname{div};D)$, then $\\operatorname{div}v\\in L^1(D)$ and\n$$\\int_D\\operatorname{div}v\\,dx=0.$$",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-na-h0div-space",
+          "lem-na-hdiv-weak-normal-trace",
+          "def-sobolev-space-wkp-and-its-norm",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Evaluate the Green-duality normal trace on the constant function one.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1.1, Green formula (2.1.16) and the definition of H0(div)."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §14.1 facet-normal flux convention and H(div) boundary interpretation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-h1-zero-boundary-is-zero-normal-hdiv",
+        "kind": "lemma",
+        "title": "H1-zero fields have zero weak H(div) normal trace",
+        "statement": "Assume Countable Choice and let $D\\subset\\mathbb R^d$ be open. Every real vector field $w\\in H^1_0(D;\\mathbb R^d)$ belongs to $H_0(\\operatorname{div};D)$, where the latter is the kernel of the weak normal trace. In particular, $\\operatorname{div}w\\in L^2(D)$ and its weak normal trace vanishes on the whole boundary trace quotient.",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-na-h0div-space",
+          "lem-na-hdiv-weak-normal-trace",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice"
+        ],
+        "strategy": "Approximate by compactly supported smooth fields, use the weak derivative identity against H1 tests, and pass Green duality to the H1 limit.",
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1.1: H(div) Green formula and zero-normal boundary subspace."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §14.1: zero-normal H(div) fluxes and the H1_0 test-space setting."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-hdiv-is-hilbert-and-h0div-closed",
+        "kind": "lemma",
+        "title": "H(div) is Hilbert and H0(div) is closed",
+        "statement": "Assume Countable Choice. For every open $D\\subseteq\\mathbb R^d$, the real space $H(\\operatorname{div};D)$ with the graph inner product\n$$\n(v,w)_{H(\\operatorname{div})}:=(v,w)_{L^2(D;\\mathbb R^d)}+(\\operatorname{div}v,\\operatorname{div}w)_{L^2(D)}\n$$\nis a Hilbert space. Its subspace $H_0(\\operatorname{div};D)$ of [[def-na-h0div-space]] is closed, hence is Hilbert with the restricted inner product.",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-na-h0div-space",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-holder-inequality-for-integrals",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Use closedness of distributional differentiation for graph completeness and continuity of the weak normal trace for closedness.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1, equations (2.1.14)–(2.1.16), H(div) graph norm and normal trace continuity."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §§14.1–14.4, H(div) conformity and normal-trace conventions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-neumann-darcy-mixed-problem",
+        "kind": "definition",
+        "title": "No-flow mixed Darcy problem and coefficient norms",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be a bounded connected Lipschitz polyhedral domain, $d\\in\\{2,3\\}$, and set $V:=H_0(\\operatorname{div};D)$ and $Q:=L^2_0(D)$ with the real graph and integral inner products from [[def-na-hdiv-space]] and [[lem-na-l2-zero-mean-hilbert]]. A permeability tensor $K(x)$ is a measurable real symmetric $d\\times d$ matrix field for which there are constants $0<\\kappa_{\\min}\\le\\kappa_{\\max}<\\infty$ satisfying\n$$\\kappa_{\\min}|\\xi|^2\\le \\xi\\cdot K(x)\\xi\\le\\kappa_{\\max}|\\xi|^2$$\nfor almost every $x\\in D$ and every $\\xi\\in\\mathbb R^d$. It is positive definite almost everywhere, so $K^{-1}$ is measurable and has eigenvalues between $\\kappa_{\\max}^{-1}$ and $\\kappa_{\\min}^{-1}$. Define\n$$a(u,v):=\\int_DK^{-1}u\\cdot v,\\qquad b(v,q):=-\\int_Dq\\,\\operatorname{div}v,$$\nand the weighted flux norm $\\|v\\|_{K^{-1}}:=a(v,v)^{1/2}$. For data $F\\in V'$ and $f\\in Q$, the no-flow mixed Darcy problem is to find $(u,p)\\in V\\times Q$ such that\n$$a(u,v)+b(v,p)=F(v)\\quad(v\\in V),\\qquad b(u,q)=-\\int_D f q\\quad(q\\in Q).$$\nThe pressure space's zero-mean constraint fixes the additive constant (Neumann) gauge; $u\\in H_0(\\operatorname{div};D)$ encodes zero weak normal flux on the full boundary. In the standard source-only Darcy problem used for hybridization, $F=0$.",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-na-h0div-space",
+          "lem-na-hdiv-is-hilbert-and-h0div-closed",
+          "lem-na-l2-zero-mean-hilbert",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Specify all coefficient, source, space, sign, boundary, gauge, and weighted-norm conventions.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, A gentle introduction to the Finite Element Method (2015)",
+              "url": "https://team-pancho.github.io/documents/anIntro2FEM_2015.pdf",
+              "locator": "Complete book, Lesson 9 §1.1, pp. 152–155: mixed Darcy formulation and flux-pressure signs."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 7: mixed Darcy formulation, existence and finite-element discretization."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-cell-average-l2-projection",
+        "kind": "lemma",
+        "title": "Cell averaging is the $L^2$ projection onto P0",
+        "statement": "For a finite conforming simplicial mesh of bounded $D$, define $P_0:L^2(D)\\to\\mathbb P_0(\\mathcal T_h)$ cellwise by\n$$ (P_0g)|_K=|K|^{-1}\\int_Kg. $$\nThen $P_0$ is linear, equals the identity on piecewise constants, is the $L^2$-orthogonal projection onto that space, satisfies $\\|P_0g\\|_2\\le\\|g\\|_2$, and preserves the integral $\\int_DP_0g=\\int_Dg$.",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null"
+        ],
+        "dependency_level": 4,
+        "strategy": "Prove orthogonality by cellwise integration, then use Cauchy–Schwarz for contraction and sum cell integrals.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §14.1: piecewise-constant cell projections used with RT divergence."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2: finite-dimensional $L^2$ projections and piecewise-constant spaces."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-piola-preserves-rt-bdm-spaces",
+        "kind": "lemma",
+        "title": "Piola maps RT and BDM polynomial families onto the physical cell",
+        "statement": "For any $d\\ge1$, write $\\mathbb P_k$ for real scalar polynomials of total degree at most $k$ and $\\widetilde{\\mathbb P}_k$ for homogeneous scalar polynomials of degree $k$, including zero, and define the local families $\\operatorname{RT}_k=\\mathbb P_k^d+x\\widetilde{\\mathbb P}_k$ and $\\operatorname{BDM}_k=\\mathbb P_k^d$.\n\nLet $F(\\widehat x)=A\\widehat x+b$ be an orientation-preserving affine bijection between nondegenerate $d$-simplices, with $J=\\det A>0$, and use the contravariant Piola map of [[def-na-contravariant-piola-map]]. For every $k\\ge0$, it maps $\\operatorname{RT}_k(\\widehat K)$ bijectively onto $\\operatorname{RT}_k(K)$, and for every $k\\ge1$ it maps $\\operatorname{BDM}_k(\\widehat K)$ bijectively onto $\\operatorname{BDM}_k(K)$.",
+        "deps": [
+          "def-na-contravariant-piola-map",
+          "def-na-simplicial-mesh-rt-bdm-spaces"
+        ],
+        "dependency_level": 4,
+        "strategy": "Expand the affine push-forward polynomial and split its scalar factor into its degree-k homogeneous part and lower-degree remainder; apply the same argument to the inverse map.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §14.4: affine contravariant Piola map preserves RT and BDM spaces."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.2, affine transformation formulas for RT and BDM elements."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-rt0-p0-kernel-is-divergencefree",
+        "kind": "lemma",
+        "title": "The RT0/P0 discrete kernel is exactly divergence-free",
+        "statement": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. With $V_h=\\operatorname{RT}_0(\\mathcal T_h)\\cap H_0(\\operatorname{div};D)$, $Q_h=\\mathbb P_0(\\mathcal T_h)\\cap L^2_0(D)$ and $b(v_h,q_h)=-\\int_Dq_h\\operatorname{div}v_h$, the discrete kernel\n$$Z_h:=\\{v_h\\in V_h:b(v_h,q_h)=0\\text{ for every }q_h\\in Q_h\\}$$\nis exactly $\\{v_h\\in V_h:\\operatorname{div}v_h=0\\}$.",
+        "deps": [
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "def-na-h0div-space",
+          "lem-na-h0div-div-zero-mean",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Use div(V_h) subset Q_h and test the orthogonality with div(v_h) itself.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §§14.1–14.2: H(div)-conforming RT fields and piecewise-constant divergence."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 7: stable RT0/P0 mixed pairs and divergence constraints."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-simplex-h1-facet-trace-bound",
+        "kind": "lemma",
+        "title": "H1 facet trace inequality on shape-regular simplices",
+        "statement": "Assume Countable Choice. For a nondegenerate affine simplex $K$ with diameter $h_K$ and shape bound $h_K/r_K\\le\\gamma$, and any facet $F$, every $u\\in H^1(K)$ has a well-defined trace $\\gamma_Fu\\in L^2(F)$ and\n$$\n\\|\\gamma_Fu\\|_{L^2(F)}^2\\le C(d,\\gamma)\\bigl(h_K^{-1}\\|u\\|_{L^2(K)}^2+h_K\\|\\nabla u\\|_{L^2(K)}^2\\bigr).\n$$",
+        "deps": [
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+          "lem-shape-regular-affine-simplex-scaling",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Prove the reference-simplex face estimate along inward segments for smooth functions, then extend by the local density lemma and scale by the affine map.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 16: Local interpolation in H(div) and H(curl) (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap16.pdf",
+              "locator": "Complete chapter, §16.1.1: Sobolev trace and the regularity domain of facet moments."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.1: normal traces and integration by parts on Lipschitz cells."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-hybridized-rt0-darcy-system",
+        "kind": "definition",
+        "title": "Hybridized no-flow RT0/P0 Darcy system",
+        "statement": "Assume Countable Choice.\n\nAssume the no-flow Darcy data of [[def-na-neumann-darcy-mixed-problem]] and a facet-connected conforming mesh from [[def-na-simplicial-mesh-rt-bdm-spaces]]. Let $\\mathcal F_h^i$ be its interior facets. On each cell $K$, let\n$$W_K:=\\{v\\in\\operatorname{RT}_0(K):v\\cdot n_K=0\\text{ on every boundary facet of }D\\text{ contained in }\\partial K\\}.$$\nThe broken flux space is $W_h:=\\prod_{K\\in\\mathcal T_h}W_K$, the cell pressure space is $M_h:=\\prod_{K\\in\\mathcal T_h}\\mathbb R$, and the skeleton multiplier space is $\\Lambda_h:=\\prod_{F\\in\\mathcal F_h^i}\\mathbb R$. The scalar $\\lambda_F$ is constant on facet $F$ and uses the fixed orientation only to label that facet; local equations use the outward normal of each cell.\n\nFor the source-only problem $F=0$, a hybrid solution $(u_h,p_h,\\lambda_h)\\in W_h\\times M_h\\times\\Lambda_h$ for $f\\in Q$ satisfies, for every cell $K$, every $v_K\\in W_K$, and every interior facet $F=K^+\\cap K^-$,\n$$\\int_KK^{-1}u_K\\cdot v_K-\\int_Kp_K\\operatorname{div}v_K+\\sum_{F\\subset\\partial K,\\ F\\in\\mathcal F_h^i}\\lambda_F\\int_Fv_K\\cdot n_K=0,$$\n$$\\int_K\\operatorname{div}u_K=\\int_Kf,$$\n$$\\int_F(u_{K^+}\\cdot n_{K^+}+u_{K^-}\\cdot n_{K^-})=0.$$\nBecause each RT0 normal component is constant on a facet, the last equation is pointwise normal-flux matching. With physical-boundary flux zero, the transformation $p_K\\mapsto p_K+c$ for all cells and $\\lambda_F\\mapsto\\lambda_F+c$ leaves the hybrid equations unchanged: in the local first equation the change is $-c\\int_K\\operatorname{div}v_K+c\\sum_{F\\text{ interior}}\\int_Fv_K\\cdot n_K=0$ by Gauss–Green and the zero physical-boundary flux; the mass and jump equations do not use pressure or multipliers. This is the common pressure gauge.",
+        "deps": [
+          "def-na-neumann-darcy-mixed-problem",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "def-na-h0div-space",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "State the local and skeleton unknowns, all signs/orientations, and the gauge transformation explicitly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 7 §7.2: hybridization of mixed methods and Lagrange multipliers on interfaces."
+            },
+            {
+              "title": "Francisco-Javier Sayas, A gentle introduction to the Finite Element Method (2015)",
+              "url": "https://team-pancho.github.io/documents/anIntro2FEM_2015.pdf",
+              "locator": "Complete book, Lesson 10 §§1.1–1.2, pp. 174–180: hybridized implementation and hybridized form."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-h1-interior-facet-traces-agree",
+        "kind": "lemma",
+        "title": "H1 traces agree across interior mesh facets",
+        "statement": "Assume Countable Choice. Let $D$ be a polyhedral open set with a conforming affine simplicial mesh, let $K_+$ and $K_-$ share an interior facet $F$, and let $w\\in H^1(D)$. The elementwise $L^2(F)$ traces of $w|_{K_+}$ and $w|_{K_-}$ agree almost everywhere on $F$.",
+        "deps": [
+          "lem-na-simplex-h1-facet-trace-bound",
+          "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Localize around compact subfacets, mollify the single H1 field across the interface, and use the simplex trace bound to pass equality of smooth traces to the elementwise traces.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 16: Local interpolation in H(div) and H(curl) (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap16.pdf",
+              "locator": "Complete chapter, §16.1.1, trace spaces and elementwise facet moments."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Complete notes, Chapter 3 §§3.2–3.4: cutoff localization, mollification and Sobolev approximation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-rt0-unisolvence-and-global-conformity",
+        "kind": "lemma",
+        "title": "RT0 facet-flux unisolvence and global H(div) conformity",
+        "statement": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. On each $d$-simplex $K$, $\\operatorname{RT}_0(K)=\\{a+cx:a\\in\\mathbb R^d,c\\in\\mathbb R\\}$ has dimension $d+1$, and the $d+1$ integrated outward facet-normal fluxes determine its element uniquely. A piecewise RT0 field belongs to $H(\\operatorname{div};D)$ exactly when its oriented integrated fluxes match across every shared facet; such a field belongs to $H_0(\\operatorname{div};D)$ exactly when its normal component (equivalently its integrated outward flux) also vanishes on every boundary facet.",
+        "deps": [
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "def-na-hdiv-space",
+          "def-na-h0div-space",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-piola-preserves-rt-bdm-spaces",
+          "lem-na-piola-divergence-and-flux-identities",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-na-simplex-h1-facet-trace-bound",
+          "lem-na-h1-interior-facet-traces-agree",
+          "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Prove local unisolvence, cancel interior distributional fluxes, and use the trace agreement lemma to identify the weak external normal trace.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §14.1, printed pp. 156–157: RT0 unisolvence, facet flux degrees of freedom and global conformity."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §§2.2–2.3: RT degrees of freedom and conformity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-darcy-mixed-wellposedness",
+        "kind": "theorem",
+        "title": "Continuous mixed Darcy well-posedness with pressure gauge",
+        "statement": "Assume Countable Choice and the hypotheses in [[def-na-neumann-darcy-mixed-problem]] on a bounded connected Lipschitz domain in dimension two or three. For every $F\\in V'$ and $f\\in Q$, there is a unique $(u,p)\\in V\\times Q$ solving\n$$a(u,v)+b(v,p)=F(v),\\qquad b(u,q)=-\\int_Dfq$$\nfor all $v\\in V,q\\in Q$. The graph norm on the flux and zero-mean pressure norm make these equations well-posed; the mean-zero pressure convention fixes the Neumann gauge.",
+        "deps": [
+          "def-na-neumann-darcy-mixed-problem",
+          "lem-na-hdiv-is-hilbert-and-h0div-closed",
+          "lem-na-l2-zero-mean-hilbert",
+          "lem-na-h0div-div-zero-mean",
+          "lem-na-h1-zero-boundary-is-zero-normal-hdiv",
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Verify boundedness, continuous inf-sup from the actual divergence right inverse, and coercivity on the divergence-free kernel, then apply the supplier Babuška–Brezzi theorem.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 49: Well-posedness for PDEs in mixed form",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "Complete chapter, §§49.1–49.4: mixed variational formulation and Babuška–Brezzi well-posedness."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 5 Theorem 5.2.2 and Chapter 7 mixed Darcy formulation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-rt0-h1-interpolation",
+        "kind": "definition",
+        "title": "Canonical RT0 interpolation on H1 fields",
+        "statement": "Assume Countable Choice, a conforming affine simplicial mesh $\\mathcal T_h$ from [[def-na-simplicial-mesh-rt-bdm-spaces]], and $v\\in H^1(D;\\mathbb R^d)$. The facet trace inequality of [[lem-na-simplex-h1-facet-trace-bound]] makes each moment $m_F(v):=\\int_F\\gamma_Fv\\cdot n_F$ finite. On each cell $K$, use its outward normals to prescribe the $d+1$ facet moments (with sign reversed when $n_F$ points inward to $K$); by RT0 flux unisolvence in [[lem-na-rt0-unisolvence-and-global-conformity]], there is a unique $I_Kv\\in\\operatorname{RT}_0(K)$ with those moments. Define $I_hv$ by $(I_hv)|_K=I_Kv$. The elementwise traces of the global H1 field agree almost everywhere across each shared facet by [[lem-na-h1-interior-facet-traces-agree]], so the shared moment is single-valued in the fixed orientation; the same unisolvence result gives $I_hv\\in\\operatorname{RT}_0(\\mathcal T_h)\\subset H(\\operatorname{div};D)$. No canonical facet-moment definition on rough H(div)-only input is made here.",
+        "deps": [
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-simplex-h1-facet-trace-bound",
+          "lem-na-h1-interior-facet-traces-agree",
+          "lem-na-rt0-unisolvence-and-global-conformity",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Specify the input regularity, facet moments, orientation, and elementwise outputs.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 16: Local interpolation in H(div) and H(curl) (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap16.pdf",
+              "locator": "Complete chapter, §16.1: canonical RT interpolation defined by facet flux moments on H1 fields."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.2: RT0 facet degrees of freedom and interpolation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-rt0-p0-local-mass-conservation",
+        "kind": "theorem",
+        "title": "Exact RT0/P0 element mass balance and normal continuity",
+        "statement": "Assume Countable Choice, the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]], and let $(u_h,p_h)\\in V_h\\times Q_h$ solve the discrete Darcy equations with source $f\\in L^2_0(D)$. Then on every cell $K$,\n$$\\operatorname{div}u_h|_K=|K|^{-1}\\int_Kf,\\qquad\\int_K\\operatorname{div}u_h=\\int_Kf.$$\nThe normal flux is single-valued on every interior facet and zero on every boundary facet.",
+        "deps": [
+          "def-na-neumann-darcy-mixed-problem",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-rt0-unisolvence-and-global-conformity",
+          "lem-na-h0div-div-zero-mean",
+          "lem-na-cell-average-l2-projection",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Use orthogonality to all mean-zero piecewise constants, total compatibility, and the global RT0 normal degrees of freedom.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §§14.1–14.2: RT normal continuity and cellwise divergence."
+            },
+            {
+              "title": "Francisco-Javier Sayas, A gentle introduction to the Finite Element Method (2015)",
+              "url": "https://team-pancho.github.io/documents/anIntro2FEM_2015.pdf",
+              "locator": "Complete book, Lesson 9 §3.1, pp. 168–169: exact RT0/P0 cell mass balance."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-rt0-h1-interpolation-bounded-and-commuting",
+        "kind": "lemma",
+        "title": "Boundedness and divergence commutation of RT0 interpolation",
+        "statement": "Assume Countable Choice, a shape-regular mesh with $h=\\max_Kh_K$, and $I_h$ from [[def-na-rt0-h1-interpolation]]. There is $C$ depending only on dimension and the shape bound such that every $v\\in H^1(D;\\mathbb R^d)$ satisfies\n$$\\|I_hv\\|_{L^2(D)}\\le C(\\|v\\|_{L^2(D)}+h\\|\\nabla v\\|_{L^2(D)}),\\qquad (\\operatorname{div}I_hv)|_K=|K|^{-1}\\int_K\\operatorname{div}v.$$\nIf $v\\in H^1_0(D;\\mathbb R^d)$, then $I_hv\\in V_h$.",
+        "deps": [
+          "def-na-rt0-h1-interpolation",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-rt0-unisolvence-and-global-conformity",
+          "lem-na-simplex-h1-facet-trace-bound",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-na-h0div-space",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "Use explicit RT0 facet basis functions and trace scaling; prove commutation by the divergence theorem and constant divergence.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 16: Local interpolation in H(div) and H(curl) (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap16.pdf",
+              "locator": "Complete chapter, §§16.1.1–16.1.2: RT interpolation stability and its divergence-commuting relation."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §§2.2–2.3: interpolation estimates and commuting diagram."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-rt0-p0-bounded-divergence-lift-and-infsup",
+        "kind": "theorem",
+        "title": "Uniform RT0/P0 divergence lift and inf-sup bound",
+        "statement": "Assume Countable Choice, a bounded connected Lipschitz polyhedral $D$ in dimension two or three, and a shape-regular conforming mesh. Let $C_I$ be the mesh-independent constant in the RT0 interpolation estimate and let $L$ be a coordinate-slab width for $D$. If $B_D$ is the actual right inverse of [[thm-na-bounded-lipschitz-domain-divergence-right-inverse]], define\n$$S_hq_h:=I_hB_Dq_h,\\qquad C_R:=C_I C_{\\rm div}(L+\\operatorname{diam}D).$$\nThen $S_h:Q_h\\to V_h$ is a linear right inverse of divergence and $\\|S_hq_h\\|_{L^2(D)}\\le C_R\\|q_h\\|_{L^2(D)}$. Consequently $\\|S_hq_h\\|_{H(\\operatorname{div})}\\le\\sqrt{1+C_R^2}\\|q_h\\|_2$. When $Q_h\\ne\\{0\\}$, the RT0/P0 inf-sup constant satisfies $\\beta_h\\ge(1+C_R^2)^{-1/2}$ uniformly in mesh size.",
+        "deps": [
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-rt0-h1-interpolation-bounded-and-commuting",
+          "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "Compose the actual H1 divergence lift with the H1-domain RT0 interpolant and derive the graph-norm and inf-sup constants.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 16: Local interpolation in H(div) and H(curl) (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap16.pdf",
+              "locator": "Complete chapter, §16.1: divergence-commuting RT interpolation and stable facet moments."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 5: stable right inverses, discrete inf-sup and mixed approximation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-rt0-bounded-commuting-projection",
+        "kind": "theorem",
+        "title": "Bounded commuting projection onto the zero-normal RT0 space",
+        "statement": "Assume Countable Choice and a shape-regular mesh. Let $P_0$ be the cellwise $L^2$-orthogonal projection onto piecewise constants, let $S_h:Q_h\\to V_h$ be the stable right inverse above, and put $Z_h=\\{z_h\\in V_h:\\operatorname{div}z_h=0\\}$. There is a linear projection $\\Pi_h:H_0(\\operatorname{div};D)\\to V_h$ such that\n$$\\operatorname{div}\\Pi_hv=P_0\\operatorname{div}v,\\qquad \\|\\Pi_hv\\|_{H(\\operatorname{div})}\\le C\\|v\\|_{H(\\operatorname{div})},$$\nwhere $C$ depends on the domain and mesh shape bound, not mesh size. The construction uses the finite-dimensional $L^2$-orthogonal projection onto $Z_h$ and never applies facet moments to rough H(div)-only fields.",
+        "deps": [
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "def-na-h0div-space",
+          "lem-na-h0div-div-zero-mean",
+          "lem-na-cell-average-l2-projection",
+          "thm-na-rt0-p0-bounded-divergence-lift-and-infsup",
+          "lem-na-rt0-p0-kernel-is-divergencefree",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 10,
+        "strategy": "Decompose into a stable discrete divergence lift and the L2 projection onto the discrete kernel; verify commutation, identity on V_h, and the uniform graph-norm bound.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 16: Local interpolation in H(div) and H(curl) (I)",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap16.pdf",
+              "locator": "Complete chapter, §§16.1–16.2: bounded commuting projections and the limits of canonical facet interpolation."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 2 §2.3: commuting projections for H(div)-conforming spaces."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-rt0-p0-darcy-error-estimate",
+        "kind": "theorem",
+        "title": "RT0/P0 Darcy stability and flux/pressure error bound",
+        "statement": "Assume Countable Choice, the Darcy data in [[def-na-neumann-darcy-mixed-problem]], and a facet-connected shape-regular mesh. For at least two cells, set $C_R$ as in the stable lift theorem and define\n$$\\widehat\\beta=(1+C_R^2)^{-1/2},\\quad M_a=\\kappa_{\\min}^{-1},\\quad M_b=1,\\quad\\alpha_*=\\kappa_{\\max}^{-1}.$$\nLet $(u,p)$ solve the continuous source-only Darcy problem ($F=0$) and $(u_h,p_h)$ the RT0/P0 Galerkin system. For any $w_h\\in V_h,r_h\\in Q_h$, put $\\delta_u=\\|u-w_h\\|_{H(\\operatorname{div})}$, $\\delta_p=\\|p-r_h\\|_2$, and\n$$R_h=\\widehat\\beta^{-1}M_b\\delta_u,$$\n$$U_h=\\delta_u+\\alpha_*^{-1}\\{M_a(\\delta_u+R_h)+M_b\\delta_p\\}+R_h,$$\n$$P_h=\\delta_p+\\widehat\\beta^{-1}\\{M_a(U_h+\\delta_u)+M_b\\delta_p\\}.$$\nThen the discrete pair exists uniquely and\n$$\\|u-u_h\\|_{H(\\operatorname{div})}\\le U_h,\\qquad \\|p-p_h\\|_2\\le P_h,\\qquad \\|u-u_h\\|_{K^{-1}}\\le\\kappa_{\\min}^{-1/2}U_h.$$\nFor a one-cell mesh $V_h=Q_h=\\{0\\}$, so the unique discrete pair is $(0,0)$; the nonzero-$Q_h$ error theorem is not invoked. The constants display permeability contrast and do not assert contrast-independent robustness.",
+        "deps": [
+          "def-na-neumann-darcy-mixed-problem",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-rt0-unisolvence-and-global-conformity",
+          "thm-na-darcy-mixed-wellposedness",
+          "thm-na-rt0-p0-bounded-divergence-lift-and-infsup",
+          "lem-na-rt0-p0-kernel-is-divergencefree",
+          "thm-na-mixed-galerkin-quasioptimality",
+          "def-countable-choice"
+        ],
+        "dependency_level": 10,
+        "strategy": "Separate the zero-space one-cell case; otherwise verify the discrete bounds and kernel coercivity, apply the actual beta_h-sensitive mixed Galerkin theorem, and state every coefficient-dependent constant.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 49: Well-posedness for PDEs in mixed form",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "Complete chapter, §§49.3–49.4: discrete stability, Galerkin approximation and explicit mixed error bounds."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 5 Theorem 5.2.2 and Chapter 7: mixed error estimates and Darcy elements."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-rt0-hybridization-equivalence-static-condensation",
+        "kind": "theorem",
+        "title": "Hybridization, static condensation, and pressure gauge",
+        "statement": "Assume Countable Choice and the source-only Darcy system and hybrid equations of [[def-na-hybridized-rt0-darcy-system]] on a facet-connected mesh. The hybrid solutions modulo the common pressure shift $(p,\\lambda)\\mapsto(p+c,\\lambda+c)$ are in one-to-one correspondence with the conforming RT0/P0 Darcy solution. If the mesh has at least two cells, every local flux-pressure saddle block is invertible; eliminating these local variables gives a linear system on the interior-facet multipliers whose nullspace is exactly the one-dimensional constant gauge. For one cell, the conforming flux and mean-zero pressure spaces are zero and the hybrid pressure is entirely gauge.",
+        "deps": [
+          "def-na-hybridized-rt0-darcy-system",
+          "def-na-neumann-darcy-mixed-problem",
+          "thm-na-rt0-p0-darcy-error-estimate",
+          "thm-na-rt0-p0-local-mass-conservation",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-rt0-unisolvence-and-global-conformity",
+          "lem-na-h0div-div-zero-mean",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 11,
+        "strategy": "Prove both directions using the broken-to-conforming jump map, characterize its annihilator, verify local saddle-block invertibility, and identify the sole gauge mode.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 7 §7.2: hybridization, multiplier formulation and static condensation."
+            },
+            {
+              "title": "Francisco-Javier Sayas, A gentle introduction to the Finite Element Method (2015)",
+              "url": "https://team-pancho.github.io/documents/anIntro2FEM_2015.pdf",
+              "locator": "Complete book, Lesson 10 §§1.1–1.2, pp. 174–180: hybridized implementation and hybridized form."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2623,
+    "id": "mixed-hdiv-fluxes-and-darcy-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Mixed H(div) fluxes, Darcy flow and local conservation — Examples",
+    "companion": "mixed-hdiv-fluxes-and-darcy-discretization",
+    "requires": [
+      "mixed-hdiv-fluxes-and-darcy-discretization"
+    ],
+    "items": [
+      {
+        "id": "ex-na-primal-p1-flux-is-not-locally-conservative",
+        "kind": "example",
+        "title": "A continuous P1 pressure gives a nonconservative primal flux",
+        "statement": "Assume Countable Choice.\n\nOn the unit square split along the diagonal from $(0,0)$ to $(1,1)$, the continuous piecewise-affine pressure with nodal values $0,0,1,0$ at $(0,0),(1,0),(1,1),(0,1)$ has negative gradient $q=(0,-1)$ below the diagonal and $q=(-1,0)$ above it. Each cellwise divergence is zero, but the normal flux jumps by magnitude $\\sqrt2$ across the diagonal; hence this piecewise field is not in $H(\\operatorname{div};D)$ and does not have a locally conservative global flux.",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Compute both affine gradients, the oriented diagonal normal components, and the resulting distributional interface divergence.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §§14.1–14.2: H(div) requires matching normal components across facets."
+            },
+            {
+              "title": "Francisco-Javier Sayas, A gentle introduction to the Finite Element Method (2015)",
+              "url": "https://team-pancho.github.io/documents/anIntro2FEM_2015.pdf",
+              "locator": "Complete book, Lesson 9 §2.2, pp. 164–165: global RT0 normal-flux continuity across facets."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-na-constant-flux-reference-triangle",
+        "kind": "example",
+        "title": "A constant Darcy flux on the reference triangle",
+        "statement": "Assume Countable Choice.\n\nOn $K=\\{(x,y):x>0,y>0,x+y<1\\}$ with unit permeability, $q=(1,0)$ and $p=-x$ satisfy $q+\\nabla p=0$ and $\\operatorname{div}q=0$. Their outward integrated facet fluxes on $x=0$, $y=0$, and $x+y=1$ are respectively $-1,0,+1$, so exact local mass balance holds.",
+        "deps": [
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-rt0-unisolvence-and-global-conformity",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Verify the pointwise Darcy equations and calculate each facet flux with its outward unit normal.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, A gentle introduction to the Finite Element Method (2015)",
+              "url": "https://team-pancho.github.io/documents/anIntro2FEM_2015.pdf",
+              "locator": "Complete book, Lesson 9 §§2.1–2.2, pp. 162–165: RT0 facet-flux degrees of freedom and local balance."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III Chapter 14: H(div) finite elements",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap14.pdf",
+              "locator": "Complete chapter, §§14.1–14.2: RT0 degrees of freedom and divergence balance."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-na-checkerboard-permeability-contrast",
+        "kind": "example",
+        "title": "Checkerboard permeability and the explicit contrast factor",
+        "statement": "Assume Countable Choice.\n\nOn a $2\\times2$ checkerboard of equal squares, split each square into two affine triangles and set scalar permeability $K=1$ on one color and $K=10^6$ on the other. Then $\\kappa_{\\min}=1$, $\\kappa_{\\max}=10^6$, the weighted energy assigns coefficients $1$ and $10^{-6}$ to the two regions, and the RT0/P0 graph-norm error constants include $\\alpha_*^{-1}=10^6$ and $M_a/\\alpha_*=10^6$.",
+        "deps": [
+          "def-na-neumann-darcy-mixed-problem",
+          "thm-na-rt0-p0-darcy-error-estimate",
+          "def-countable-choice"
+        ],
+        "dependency_level": 11,
+        "strategy": "Evaluate the coefficient bounds cell by cell and substitute them into the theorem's explicit constants.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part XI Chapter 49: Well-posedness for PDEs in mixed form",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap49.pdf",
+              "locator": "Complete chapter, §§49.3–49.4: coefficient-dependent coercivity and mixed approximation constants."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapters 5 and 7: coefficient-weighted mixed Darcy norms and estimates."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-na-two-triangle-hybrid-static-condensation",
+        "kind": "example",
+        "title": "Two-triangle hybrid RT0 local elimination",
+        "statement": "Assume Countable Choice.\n\nSplit the unit square by its diagonal into $K_1=\\{0<y<x<1\\}$ and $K_2=\\{0<x<y<1\\}$. For unit permeability and $f=1$ on $K_1$, $f=-1$ on $K_2$, the hybrid solution has\n$$u_1=\\tfrac12\\theta_1,\\quad u_2=-\\tfrac12\\theta_2,\\quad p_1=\\tfrac1{12},\\quad p_2=-\\tfrac1{12},\\quad\\lambda=0,$$\nwhere $\\theta_1(x,y)=(x-1,y)$ and $\\theta_2(x,y)=(x,y-1)$. The local elimination equations reduce to $t_K/6-p_K+\\lambda=0$, $t_1=1/2$, $t_2=-1/2$, and $t_1+t_2=0$; changing $\\lambda$ shifts both pressures by the same constant and is precisely the gauge.",
+        "deps": [
+          "def-na-hybridized-rt0-darcy-system",
+          "thm-na-rt0-hybridization-equivalence-static-condensation",
+          "thm-na-rt0-p0-local-mass-conservation",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-rt0-unisolvence-and-global-conformity",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 12,
+        "strategy": "Use the unit-facet-flux RT0 basis on each triangle to solve the finite hybrid equations exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Francisco-Javier Sayas, A gentle introduction to the Finite Element Method (2015)",
+              "url": "https://team-pancho.github.io/documents/anIntro2FEM_2015.pdf",
+              "locator": "Complete book, Lesson 10 §§1.1–1.2, pp. 174–180: hybridized implementation and hybridized form."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi and Michel Fortin, Mixed Finite Element Methods and Applications",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Complete textbook, Chapter 7 §7.2: hybridization and static condensation."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

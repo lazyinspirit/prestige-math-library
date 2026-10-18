@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "52",
+  "round": 1,
+  "reviewed_items": [
+    "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+    "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+    "lem-nitsche-local-polynomial-flux-inverse-trace",
+    "lem-nitsche-fractional-face-trace-on-simplex",
+    "lem-nitsche-scaled-fractional-simplex-trace",
+    "def-nitsche-boundary-penalty-forms",
+    "lem-nitsche-global-boundary-flux-bound",
+    "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+    "thm-nitsche-zero-boundary-fractional-comparison-interpolation",
+    "lem-nitsche-global-fractional-boundary-flux-trace",
+    "lem-nitsche-penalty-coercivity",
+    "thm-nitsche-consistency-and-energy-quasioptimality",
+    "thm-nonsymmetric-nitsche-l2-error-with-boundary-defect",
+    "thm-symmetric-nitsche-l2-error-under-dual-regularity",
+    "ex-nitsche-exact-affine-data-weak-imposition",
+    "ex-nitsche-penalty-below-and-above-coercivity-threshold",
+    "ex-nitsche-symmetric-and-nonsymmetric-l2-defects"
+  ],
+  "reviewed_pages": [
+    "nitsche-methods-for-weak-boundary-enforcement",
+    "nitsche-methods-for-weak-boundary-enforcement-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The prior change-of-variables, vector Jensen, and interior trace-matching findings are resolved. Final review found a remaining s=1 pullback scaling error in the scaled-trace proof. The single repair has been used, so this unsatisfied batch must go to the owner.",
+  "findings": [
+    {
+      "id": "lem-nitsche-scaled-fractional-simplex-trace",
+      "type": "local",
+      "reason": "Step 4.1 states that the reference L2 norm of the weak-gradient pullback is at most C h_K ||∇w||_{L2(K)}. The affine pullback supplier gives the factor ||A_K|| |det A_K|^{-1/2}, which shape regularity scales as h_K^{1-d/2}, not h_K. State and use the full factor before multiplying by the facet Jacobian. The endpoint bound is then established with h_K^{-1}||w||_K^2+h_K||∇w||_K^2. Affected uses: lem-nitsche-fractional-weak-green-and-flux-cancellation [F2, step 5.1]; thm-nitsche-zero-boundary-fractional-comparison-interpolation steps 2.1 and 4.1; thm-nitsche-consistency-and-energy-quasioptimality [F4, step 1.2]; both L2 theorems [F6/F7, steps 1.1–2.1]; and ex-nitsche-symmetric-and-nonsymmetric-l2-defects [F3, verification 2.1]."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+      "decision": "escalate",
+      "reason": "Its H1 endpoint trace use in [F2] and step 5.1 depends on the unresolved s=1 scaled-trace estimate."
+    },
+    {
+      "id": "thm-nitsche-zero-boundary-fractional-comparison-interpolation",
+      "decision": "escalate",
+      "reason": "Its endpoint trace uses in steps 2.1 and 4.1 depend on the unresolved s=1 scaled-trace estimate; its round-0 trace-matching proof gap is resolved."
+    },
+    {
+      "id": "thm-nitsche-consistency-and-energy-quasioptimality",
+      "decision": "escalate",
+      "reason": "Its consistency proof uses the weak Green supplier, whose endpoint trace step depends on the unresolved scaling."
+    },
+    {
+      "id": "thm-nonsymmetric-nitsche-l2-error-with-boundary-defect",
+      "decision": "escalate",
+      "reason": "Its Green identity and comparison interpolation uses depend on the unresolved endpoint trace supplier."
+    },
+    {
+      "id": "thm-symmetric-nitsche-l2-error-under-dual-regularity",
+      "decision": "escalate",
+      "reason": "Its Green identity and comparison interpolation uses depend on the unresolved endpoint trace supplier."
+    },
+    {
+      "id": "ex-nitsche-symmetric-and-nonsymmetric-l2-defects",
+      "decision": "escalate",
+      "reason": "Its duality comparison depends on the two L2 theorem consumers above and the unresolved endpoint trace supplier."
+    }
+  ]
+}

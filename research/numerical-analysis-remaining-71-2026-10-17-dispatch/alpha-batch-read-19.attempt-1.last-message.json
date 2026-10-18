@@ -1,0 +1,143 @@
+{
+  "group": "g",
+  "batches": ["19"],
+  "pages_read": [
+    "fast-multipole-expansions-and-error",
+    "fast-multipole-expansions-and-error-examples"
+  ],
+  "items_read": [
+    "def-finite-planar-quadtree-fmm-pair-lists",
+    "def-three-dimensional-spherical-harmonic-space",
+    "alg-planar-laplace-fmm-fixed-order",
+    "lem-planar-fmm-pair-lists-partition-off-diagonal-pairs",
+    "lem-three-dimensional-laplace-spherical-harmonic-addition-theorem",
+    "lem-planar-fmm-multipole-local-translation-identities",
+    "thm-planar-fmm-operation-count-under-linear-list-assumptions",
+    "alg-three-dimensional-laplace-cluster-expansion",
+    "thm-planar-fmm-global-potential-force-error",
+    "thm-three-dimensional-laplace-expansion-error-and-work",
+    "ex-fmm-clustered-points-require-depth-sensitive-work",
+    "ex-fmm-two-separated-charge-clusters",
+    "ex-fmm-near-far-potential-and-force-error"
+  ],
+  "conventions": [
+    {
+      "convention": "Dyadic children partition labels using half-open boundaries, retaining the outer top and right edges. Cell pairs are ordered source first, target second; far separation means R_CD > a_C+a_D.",
+      "fixed_by": "def-finite-planar-quadtree-fmm-pair-lists",
+      "matters_for": [
+        "lem-planar-fmm-pair-lists-partition-off-diagonal-pairs",
+        "alg-planar-laplace-fmm-fixed-order",
+        "thm-planar-fmm-global-potential-force-error",
+        "ex-fmm-clustered-points-require-depth-sensitive-work",
+        "ex-fmm-two-separated-charge-clusters",
+        "ex-fmm-near-far-potential-and-force-error"
+      ]
+    },
+    {
+      "convention": "Each far pair has its own analytic logarithm branch; direct near pairs have fixed logarithm values. The potential uses those prescribed values, while force means the branch-independent complex derivative sum q_j/(z_i-z_j).",
+      "fixed_by": "def-finite-planar-quadtree-fmm-pair-lists",
+      "matters_for": [
+        "alg-planar-laplace-fmm-fixed-order",
+        "lem-planar-fmm-multipole-local-translation-identities",
+        "thm-planar-fmm-global-potential-force-error",
+        "ex-fmm-two-separated-charge-clusters",
+        "ex-fmm-near-far-potential-and-force-error"
+      ]
+    },
+    {
+      "convention": "The sphere has surface area 4π; the harmonic inner product is linear in its first argument. Regular solid harmonics use their polynomial values at the origin.",
+      "fixed_by": "def-three-dimensional-spherical-harmonic-space",
+      "matters_for": [
+        "lem-three-dimensional-laplace-spherical-harmonic-addition-theorem",
+        "alg-three-dimensional-laplace-cluster-expansion",
+        "thm-three-dimensional-laplace-expansion-error-and-work"
+      ]
+    },
+    {
+      "convention": "Planar work counts exact complex arithmetic, coefficient copies, cell-pair inspections and prescribed logarithm evaluations. Tree construction and point-to-cell preprocessing are excluded; linear work requires explicit bounds on T, V, K and J.",
+      "fixed_by": "thm-planar-fmm-operation-count-under-linear-list-assumptions",
+      "matters_for": [
+        "ex-fmm-clustered-points-require-depth-sensitive-work"
+      ]
+    },
+    {
+      "convention": "The 3D evaluator approximates the kernel 1/|x-y|, uses supplied orthonormal basis coefficient arrays, and makes only a single-cluster work claim.",
+      "fixed_by": "alg-three-dimensional-laplace-cluster-expansion",
+      "matters_for": [
+        "thm-three-dimensional-laplace-expansion-error-and-work"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-planar-fmm-pair-lists-partition-off-diagonal-pairs",
+      "statement": "For a finite quadtree and a nonempty root pair as in the definition, the recursive interaction decomposition terminates. The Cartesian pair sets I_C × I_D of its far cell pairs, together with its direct near particle pairs, are pairwise disjoint and partition {(j,i) ∈ I × I : j ≠ i}.",
+      "used_by": [
+        "thm-planar-fmm-operation-count-under-linear-list-assumptions",
+        "thm-planar-fmm-global-potential-force-error"
+      ]
+    },
+    {
+      "id": "lem-planar-fmm-multipole-local-translation-identities",
+      "statement": "P2M gives source moments about a leaf center; M2M gives exactly the same moments about a parent center; finite M2L gives Taylor coefficients through degree p of the order-p source multipole expression; L2L exactly re-centers the resulting degree-p polynomial and L2P evaluates it exactly.",
+      "used_by": [
+        "thm-planar-fmm-global-potential-force-error"
+      ]
+    },
+    {
+      "id": "lem-three-dimensional-laplace-spherical-harmonic-addition-theorem",
+      "statement": "For every integer ℓ ≥ 0, dim H_ℓ = 2ℓ+1. Every orthonormal basis satisfies the addition identity with factor (2ℓ+1)/(4π), a basis-independent zonal polynomial P_ℓ normalized by P_ℓ(1)=1, the bound |P_ℓ(t)| ≤ 1 on [-1,1], and the stated generating identity for 0 ≤ r < 1.",
+      "used_by": [
+        "alg-three-dimensional-laplace-cluster-expansion",
+        "thm-three-dimensional-laplace-expansion-error-and-work"
+      ]
+    },
+    {
+      "id": "thm-planar-fmm-global-potential-force-error",
+      "statement": "On the collision-free exact-arithmetic branch with p ≥ 1, the potential error is bounded by the sum over F_i of Q_C ρ_CD^(p+1)/((p+1)(1−ρ_CD)); the complex derivative error is bounded by the sum over F_i of (Q_C/R_CD)ρ_CD^p/(1−ρ_CD). Near interactions are exact.",
+      "used_by": [
+        "ex-fmm-two-separated-charge-clusters",
+        "ex-fmm-near-far-potential-and-force-error"
+      ]
+    },
+    {
+      "id": "thm-three-dimensional-laplace-expansion-error-and-work",
+      "statement": "For r=|x−c|>a, the single-cluster error is at most (Q/r)(a/r)^(p+1)/(1−a/r). For a target ball of radius b and center distance R>a+b, replace r by R−b. Direct monomial basis evaluation costs O((S+T_0)(p+1)^4) after basis preparation; supplied basis values reduce coefficient-stage work to O((S+T_0)(p+1)^2).",
+      "used_by": [
+        "lem-bem-far-panel-quadrature-residual",
+        "alg-bem-certified-inexact-matrix-assembly",
+        "thm-bem-matrix-perturbation-transfer"
+      ]
+    },
+    {
+      "id": "thm-planar-fmm-operation-count-under-linear-list-assumptions",
+      "statement": "For N ≥ 1 and p ≥ 1, under the explicitly stated linear-size level-restricted tree and bounded-list assumptions, the counted passes and direct evaluation cost at most C_0[N(p+1)+(T+K)(p+1)^2+V+J], hence O(Np^2), excluding tree construction and point-to-cell preprocessing.",
+      "used_by": [
+        "ex-fmm-clustered-points-require-depth-sensitive-work"
+      ]
+    }
+  ],
+  "published_dependencies": [],
+  "concerns": [
+    {
+      "id": "thm-planar-fmm-global-potential-force-error",
+      "concern": "Proof step 2.2 bounds the derivative of an entire homogeneous degree-m term and then says, “Summing the omitted degrees bounds the interaction derivative error”. The rectangular truncation n≤p, k≤p can omit only part of a degree, so cancellation within the entire homogeneous term does not itself justify that inference. The stated estimate follows immediately by bounding the differentiated omitted monomials absolutely: their sum is at most R^(−m) times the sum from k=1 to m of (k/m) binom(m,k)|x|^(k−1)|y|^(m−k), which equals (|x|+|y|)^(m−1)/R^m.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fast-multipole-expansions-and-error",
+      "to": "hierarchical-low-rank-matrices-and-error-propagation",
+      "faithful": true,
+      "note": "This is a reading prerequisite without an imported HLR proof premise. Checked the cluster-tree definition, balanced-tree bounds, block-partition lemma and nested-basis interface. FMM supplies its own spatial quadtree, pair-partition proof and explicit count assumptions; it does not transfer the cardinality-balanced binary-tree bounds to spatial quadtrees."
+    },
+    {
+      "from": "boundary-integral-equations-and-galerkin-bem",
+      "to": "fast-multipole-expansions-and-error",
+      "faithful": true,
+      "note": "Checked the BEM page, far-panel residual lemma, assembly procedure and transfer theorem's cited interface. Consumers preserve R>a+b, multiply the uniform pointwise tail by positive target-weight sum W_T, and normalize source charges as v_j/(4π) for the physical kernel. They separately account for quadrature and arithmetic errors and do not assert global multilevel complexity."
+    }
+  ]
+}

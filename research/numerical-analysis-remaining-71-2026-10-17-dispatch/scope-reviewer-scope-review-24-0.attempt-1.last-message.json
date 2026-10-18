@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "24",
+  "round": 0,
+  "reviewed_items": [
+    "lem-square-root-kalman-householder-error-rational-envelope",
+    "lem-square-root-kalman-gram-perturbation-bound",
+    "lem-square-root-kalman-measurement-block-factor-identity",
+    "lem-square-root-kalman-prediction-factor-identity",
+    "lem-square-root-kalman-schur-perturbation-bound",
+    "lem-square-root-kalman-triangular-solve-forward-bound",
+    "alg-finite-budget-square-root-kalman-filter",
+    "lem-square-root-kalman-prearray-qr-error-bound",
+    "thm-square-root-kalman-finite-procedure-status",
+    "thm-square-root-kalman-finite-horizon-perturbation-bound",
+    "ex-square-root-kalman-perturbed-prearray-psd-factor",
+    "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+    "ex-square-root-kalman-singular-prior-positive-innovation",
+    "ex-square-root-kalman-nearly-noiseless-solve-sensitivity"
+  ],
+  "reviewed_pages": [
+    "square-root-covariance-update-error-and-stability",
+    "square-root-covariance-update-error-and-stability-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch, approved scope, and supplier claims and proofs were reviewed. Two local QR instructions need clarification; the approved all-rank scope is preserved. All identified direct and indirect consumers remain valid after those corrections.",
+  "findings": [
+    {
+      "id": "lem-square-root-kalman-measurement-block-factor-identity",
+      "type": "prerequisite",
+      "reason": "The lemma permits L^- to have any column count but pads only L_R to at least p columns. The reduced QR supplier requires the prearray transpose to have at least p+n rows, so this QR may not exist when L^- has fewer than n columns (for example, L^-=0 with R positive definite). Pad L^- or the full prearray with zeros until its total width is at least p+n; this preserves the approved rank-deficient scope."
+    },
+    {
+      "id": "alg-finite-budget-square-root-kalman-filter",
+      "type": "local",
+      "reason": "In both this Definition and the measurement-identity lemma, L is assigned as R^T and partitioned before rows of R are sign-adjusted. The stated positive-diagonal result then does not follow unless L is updated. Apply the signs before defining and partitioning L, or explicitly apply them to L's first p columns; the Gram identities are preserved."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-finite-budget-square-root-kalman-filter",
+      "decision": "accept",
+      "reason": "Its measurement prearray already has at least p+d columns because the prediction factor is d by d and the noise factor is padded to at least p columns. The sign adjustment preserves the block Gram identities and the gain solve."
+    },
+    {
+      "id": "thm-square-root-kalman-finite-procedure-status",
+      "decision": "accept",
+      "reason": "The finite termination and status argument is unchanged by zero padding and finitely many exact sign changes."
+    },
+    {
+      "id": "thm-square-root-kalman-finite-horizon-perturbation-bound",
+      "decision": "accept",
+      "reason": "The block covariance and gain identities used in the proof remain valid after paired sign adjustment of the innovation and cross blocks."
+    },
+    {
+      "id": "ex-square-root-kalman-perturbed-prearray-psd-factor",
+      "decision": "accept",
+      "reason": "Its scalar prearray already has width p+n; its Schur-complement and factor-product claims are unaffected."
+    },
+    {
+      "id": "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+      "decision": "accept",
+      "reason": "Its comparison uses the exact factor-product PSD property and makes no claim that depends on the missing padding case."
+    },
+    {
+      "id": "ex-square-root-kalman-singular-prior-positive-innovation",
+      "decision": "accept",
+      "reason": "The example uses the algorithm's padded square prediction factor, so its measurement prearray already has width p+n; the sign adjustment leaves the stated scalar update unchanged."
+    },
+    {
+      "id": "ex-square-root-kalman-nearly-noiseless-solve-sensitivity",
+      "decision": "accept",
+      "reason": "Its scalar prearray already has width p+n, and the gain ratio and residual-sensitivity calculation are invariant under the paired sign adjustment."
+    },
+    {
+      "id": "square-root-covariance-update-error-and-stability",
+      "decision": "accept",
+      "reason": "Its summary remains within the approved finite-horizon scope after the local padding and sign clarifications."
+    },
+    {
+      "id": "square-root-covariance-update-error-and-stability-examples",
+      "decision": "accept",
+      "reason": "Its four example summaries and claims remain valid after the local corrections."
+    }
+  ]
+}

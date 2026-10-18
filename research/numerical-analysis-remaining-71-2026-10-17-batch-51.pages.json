@@ -1,0 +1,884 @@
+[
+  {
+    "order": 2656,
+    "id": "crouzeix-raviart-finite-elements",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Crouzeix–Raviart finite elements",
+    "companion": "crouzeix-raviart-finite-elements-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas"
+    ],
+    "items": [
+      {
+        "id": "def-crouzeix-raviart-local-p1-element",
+        "kind": "definition",
+        "title": "The local P1 Crouzeix–Raviart element",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-reference-finite-element-and-unisolvent-dofs"
+        ],
+        "statement": "Let $d\\ge2$ and let $K$ be a nondegenerate affine $d$-simplex with vertices\n$a_0,\\ldots,a_d$ and facets $F_i$ opposite $a_i$. Write\n$\\lambda_0,\\ldots,\\lambda_d$ for its barycentric coordinate functions, so\n$\\lambda_i(a_j)=\\delta_{ij}$ and $\\sum_i\\lambda_i=1$. The local\nCrouzeix–Raviart polynomial space is $\\mathbb P_1(K)$, the real affine\nfunctions on $K$. Its face-average functionals are\n$$\\sigma_{K,F_i}(p):=\\frac1{|F_i|}\\int_{F_i}p\\,dS,\\qquad p\\in\\mathbb P_1(K).$$\nThe candidate dual shape polynomial associated with $F_i$ is\n$$\\phi_{K,F_i}:=1-d\\lambda_i.$$\nThe next item proves that these $d+1$ functionals are unisolvent and that the\ndisplayed polynomials form their dual basis. No pointwise continuity across\ndifferent cells is part of this local element.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "§§36.2.1–36.2.2, PDF pp. 2–4: local affine polynomial space and face-average degrees of freedom."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 276–290: the nonconforming P1 triangle and the midpoint/face degrees of freedom."
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used by this definition or finite-dimensional calculation.",
+        "dependency_level": 0,
+        "level": 0,
+        "strategy": "direct"
+      },
+      {
+        "id": "def-crouzeix-raviart-fractional-sobolev-regularity",
+        "kind": "definition",
+        "title": "Fractional Sobolev regularity on a simplex",
+        "deps": [
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "statement": "Assume Countable Choice. Let $U\\subset\\mathbb R^d$ be a bounded open set,\n$0<r<1$, and let $q$ be a measurable real function on $U$. Define\n$$[q]_{H^r(U)}^2:=\\int_U\\int_U\\frac{|q(x)-q(y)|^2}{|x-y|^{d+2r}}\\,dx\\,dy,$$\nwith the diagonal integrand set to zero, and\n$H^r(U):=\\{q\\in L^2(U):[q]_{H^r(U)}<\\infty\\}$, using almost-everywhere\nclasses and norm $\\|q\\|_{H^r(U)}^2:=\\|q\\|_{L^2(U)}^2+[q]_{H^r(U)}^2$.\nFor $u\\in H^1(U)$, write $u\\in H^{1+r}(U)$ when each weak derivative\n$\\partial_j u$ belongs to $H^r(U)$, and define\n$$|u|_{H^{1+r}(U)}^2:=\\sum_{j=1}^d[\\partial_j u]_{H^r(U)}^2.$$\nFor vector fields, use the sum of the componentwise squared $H^r$ norms.\nUse these definitions on each cell $K$ and on the full domain $\\Omega$, with\n$\\|u\\|_{H^{1+r}(U)}^2:=\\|u\\|_{H^1(U)}^2+|u|_{H^{1+r}(U)}^2$. At $r=1$,\nset $H^1(U)=W^{1,2}(U)$, interpret $[q]_{H^1(U)}^2:=\\|\\nabla q\\|_{L^2(U)}^2$,\nand set $H^{1+r}(U)=W^{2,2}(U)$ with the integer-order membership of\n[[def-sobolev-space-wkp-and-its-norm]], retaining the displayed full-norm rule.\nThus $|u|_{H^2(U)}^2=\\sum_{j,k}\\|\\partial_k\\partial_j u\\|_{L^2(U)}^2$.\nThis Hessian convention counts mixed derivatives twice: its full norm is\nequivalent to, rather than identical with, the ordinary multi-index\n$W^{2,2}$ norm, with\n$\\|u\\|_{W^{2,2}(U)}\\le\\|u\\|_{H^2(U)}\\le\\sqrt2\\,\\|u\\|_{W^{2,2}(U)}$. The local\nseminorm is the restriction of the Slobodeckij convention in\n[[def-fractional-slobodeckij-space-on-euclidean-space]] to $U\\times U$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.1, PDF p. 2, and Lemma 36.8, PDF pp. 6–7: W^{1+r,2} and face traces for r>1/2."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 326–343: local H2 interpolation and reference-simplex scaling."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is declared for the local Sobolev conventions; no Axiom of Choice is invoked.",
+        "dependency_level": 0,
+        "level": 0
+      },
+      {
+        "id": "lem-crouzeix-raviart-continuous-poincare",
+        "kind": "lemma",
+        "title": "A Poincare bound on a slab-bounded domain",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Let $\\Omega\\subset\\mathbb R^d$ be open and satisfy\n$a<x\\cdot e<b$ for a unit vector $e$ and all $x\\in\\Omega$, with $a<b$.\nThen every $v\\in H^1_0(\\Omega)$ satisfies\n$$\\|v\\|_{L^2(\\Omega)}\\le(b-a)\\|\\nabla v\\|_{L^2(\\Omega)}.$$\nThe argument assumes Countable Choice through the stated Sobolev,\nproduct-measure, and affine change-of-variables interfaces; it does not use the\nAxiom of Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 3, Traces and Poincare inequalities",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap03.pdf",
+              "locator": "§3.3, Lemma 3.27, printed p. 32: zero-boundary Poincare–Steklov inequality; Exercise 3.2, printed p. 35: the one-dimensional fundamental-theorem argument."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations, Chapter 3",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§3.10, Theorems 3.17–3.18 and their proofs, printed pp. 64–66."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is used through the stated Tonelli/Fubini interface; the slab proof does not use the Axiom of Choice.",
+        "dependency_level": 0,
+        "level": 0,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-crouzeix-raviart-local-face-unisolvence",
+        "kind": "lemma",
+        "title": "Face averages are unisolvent for the local Crouzeix–Raviart element",
+        "deps": [
+          "def-crouzeix-raviart-local-p1-element"
+        ],
+        "statement": "For the element of [[def-crouzeix-raviart-local-p1-element]], the face-average\nfunctionals form an isomorphism\n$\\mathbb P_1(K)\\to\\mathbb R^{d+1}$. In particular,\n$$\\frac1{|F_j|}\\int_{F_j}\\phi_{K,F_i}\\,dS=\\delta_{ij},\\qquad \\phi_{K,F_i}=1-d\\lambda_i,$$\nso every $p\\in\\mathbb P_1(K)$ has the unique expansion\n$p=\\sum_{i=0}^d\\sigma_{K,F_i}(p)\\phi_{K,F_i}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "§36.2.1, equations (36.4)–(36.5) and the shape functions on PDF p. 2."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 276–290: the affine P1 space is specified by face-midpoint values in two dimensions."
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used by this definition or finite-dimensional calculation.",
+        "dependency_level": 1,
+        "level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "def-crouzeix-raviart-global-space",
+        "kind": "definition",
+        "title": "The global homogeneous Crouzeix–Raviart space",
+        "deps": [
+          "def-crouzeix-raviart-local-p1-element",
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "statement": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded connected Lipschitz polyhedral\ndomain with a finite matching affine simplicial mesh $\\mathcal T$. Here\nLipschitz polyhedral means that the boundary is a finite union of flat\nsimplex faces and, near each boundary point after a rigid coordinate change,\n$\\Omega$ lies on one side of a Lipschitz graph. Let $\\mathcal F^\\circ$ and\n$\\mathcal F^\\partial$ be its interior and boundary facets. For a cellwise\naffine function $v$, write $v_K$ for its polynomial restriction to $K$. The\nbroken gradient $\\nabla_hv$ is defined by $(\\nabla_hv)|_K:=\\nabla v_K$.\nFor a facet $F$ and an integrable function $w$ on $F$, let $h_F:=\\operatorname{diam}(F)$ and write $\\operatorname{avg}_F(w):=|F|^{-1}\\int_Fw\\,dS$.\nThe homogeneous Crouzeix–Raviart space is\n$$V_h^{CR,0}:=\\left\\{v\\in L^2(\\Omega): v_K\\in\\mathbb P_1(K)\\ \\text{for each }K\\in\\mathcal T,\\quad \\int_F(v_{K^+}-v_{K^-})\\,dS=0\\ \\text{for }F=K^+\\cap K^-\\in\\mathcal F^\\circ,\\quad \\int_Fv_K\\,dS=0\\ \\text{for }F\\in\\mathcal F^\\partial\\right\\}.$$\nThe ordering $K^+,K^-$ on an interior facet is arbitrary; the zero-mean\ncondition is independent of that ordering. The functions need not agree\npointwise on a facet and need not belong to $H^1(\\Omega)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "§36.2.2, equation (36.7) and the homogeneous boundary subspace (36.8), PDF pp. 3–4."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 280–290: piecewise P1 functions whose face means agree."
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used by this definition or finite-dimensional calculation.",
+        "dependency_level": 1,
+        "level": 1
+      },
+      {
+        "id": "lem-crouzeix-raviart-simplex-traces-and-green-identity",
+        "kind": "lemma",
+        "title": "Fractional face traces and cellwise Green identity on a simplex",
+        "deps": [
+          "def-crouzeix-raviart-fractional-sobolev-regularity",
+          "def-countable-choice",
+          "def-fractional-slobodeckij-space-on-euclidean-space",
+          "def-matching-affine-simplicial-meshes",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-coordinate-direction-form-of-the-slobodeckij-seminorm",
+          "lem-smooth-compactly-supported-functions-are-dense-in-slobodeckij-spaces",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "lem-compact-support-zero-extension-in-wkp",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "lem-smooth-density-on-reference-simplex",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-shape-regular-affine-simplex-scaling",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "thm-reference-simplex-poincare-wirtinger",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-heine-borel-rn",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Assume Countable Choice. Let $K$ be a shape-regular affine $d$-simplex,\n$F\\subset\\partial K$ a facet, and $1/2<r\\le1$. Every $q\\in H^r(K)$ has a\nsingle-valued $L^2(F)$ trace $\\gamma_Fq$. For $1/2<r<1$,\n$$\\|\\gamma_Fq\\|_{L^2(F)} \\le C\\left(h_K^{-1/2}\\|q\\|_{L^2(K)} +h_K^{r-1/2}[q]_{H^r(K)}\\right),$$\nand\n$$\\|\\gamma_Fq-\\operatorname{avg}_F\\gamma_Fq\\|_{L^2(F)} \\le C h_K^{r-1/2}[q]_{H^r(K)},$$\nwhile for $r=1$,\n$$\\|\\gamma_Fq\\|_{L^2(F)} \\le C\\left(h_K^{-1/2}\\|q\\|_{L^2(K)} +h_K^{1/2}\\|\\nabla q\\|_{L^2(K)}\\right),$$\nand the face-mean fluctuation is bounded by\n$C h_K^{1/2}\\|\\nabla q\\|_{L^2(K)}$.\nThe constant depends only on $d$, the shape-regularity bound, and $r$.\n\nIf $u\\in H^1(K)$, $\\nabla u\\in H^r(K;\\mathbb R^d)$, and\n$f=-\\Delta u\\in L^2(K)$ distributionally, then for every $w\\in H^1(K)$,\n$$\\int_Kfw\\,dx=\\int_K\\nabla u\\cdot\\nabla w\\,dx -\\sum_{F\\subset\\partial K}\\int_F(\\gamma_F\\nabla u\\cdot n_{K,F})\\gamma_Fw\\,dS.$$\nHere $n_{K,F}$ is the outward unit normal. The trace threshold $r>1/2$ is\nused to make the normal-gradient trace an $L^2$ function.\n\nThe two cell traces of a global $H^1(\\Omega)$ function agree on a shared\ninterior facet, and the trace of a global $H^1_0(\\Omega)$ function vanishes\non a boundary facet. More generally, if $1/2<r<1$ and $q\\in H^r(\\Omega)$,\nthen its two traces on each shared interior facet agree almost everywhere.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.8 and its proof, PDF p. 6: face-mean Poincare estimate for H^s, s>1/2; Lemma 36.10, PDF pp. 9–10: cellwise Green identity and consistency."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 314–343: elementwise integration by parts and subtraction of face means in the H2 case."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is used through the declared integration, density, and approximation suppliers; no Axiom of Choice is invoked.",
+        "dependency_level": 1,
+        "level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "def-crouzeix-raviart-poisson-smoothing-index",
+        "kind": "definition",
+        "title": "A Dirichlet Poisson smoothing index",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-crouzeix-raviart-fractional-sobolev-regularity"
+        ],
+        "statement": "Assume Countable Choice. Let $\\Omega$ be a bounded domain and let $1/2<s\\le1$. Say that $\\Omega$ has\na **Dirichlet Poisson smoothing index $s$** with constant $C_{\\rm reg}$ if,\nfor every $g\\in L^2(\\Omega)$, there is a unique $\\zeta_g\\in H^1_0(\\Omega)$\nsatisfying\n$$\\int_\\Omega\\nabla\\zeta_g\\cdot\\nabla v\\,dx =\\int_\\Omega g v\\,dx\\qquad(v\\in H^1_0(\\Omega)),$$\nand $\\zeta_g\\in H^{1+s}(\\Omega)$ with\n$$\\|\\zeta_g\\|_{H^{1+s}(\\Omega)}\\le C_{\\rm reg}\\|g\\|_{L^2(\\Omega)}.$$\nThis is a hypothesis about the continuous adjoint Poisson problem. It is not\nasserted for every bounded domain.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "§36.3.2, PDF pp. 11–13: the elliptic regularity index s in (1/2,1] and its L2 estimate."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is declared through the exact weak-solution and Sobolev interfaces; the smoothing property remains a domain hypothesis, and no Axiom of Choice is invoked.",
+        "dependency_level": 1,
+        "level": 1
+      },
+      {
+        "id": "lem-crouzeix-raviart-global-face-basis",
+        "kind": "lemma",
+        "title": "Interior face means form the global Crouzeix–Raviart degrees of freedom",
+        "deps": [
+          "def-crouzeix-raviart-global-space",
+          "def-crouzeix-raviart-local-p1-element",
+          "lem-crouzeix-raviart-local-face-unisolvence"
+        ],
+        "statement": "For every interior facet $F$, define $\\phi_F$ to equal $\\phi_{K,F}$ on each\ncell $K$ incident to $F$ and zero on all other cells, where\n$\\phi_{K,F}$ is the local shape polynomial of\n[[def-crouzeix-raviart-local-p1-element]]. Then\n$\\{\\phi_F:F\\in\\mathcal F^\\circ\\}$ is a basis of the space in\n[[def-crouzeix-raviart-global-space]]. The face mean $\\bar v_F:=|F|^{-1}\\int_F\nv_K\\,dS$ is single-valued for $v\\in V_h^{CR,0}$ and\n$\\dim V_h^{CR,0}=|\\mathcal F^\\circ|$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Proposition 36.2 and its proof, PDF p. 3; the homogeneous restriction is described on PDF p. 4."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 280–290: one face degree of freedom is shared by the adjacent cells."
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used by this definition or finite-dimensional calculation.",
+        "dependency_level": 2,
+        "level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "def-crouzeix-raviart-face-average-interpolant",
+        "kind": "definition",
+        "title": "The face-average Crouzeix–Raviart interpolant",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-global-space",
+          "def-crouzeix-raviart-local-p1-element",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-crouzeix-raviart-simplex-traces-and-green-identity"
+        ],
+        "statement": "Assume Countable Choice. For $u\\in H^1(K)$, use the facet traces of\n[[lem-crouzeix-raviart-simplex-traces-and-green-identity]] and define its local\nface-average interpolant by\n$$I_K^{CR}u:=\\sum_{F\\subset\\partial K}\\left(\\frac1{|F|}\\int_Fu\\,dS\\right)\\phi_{K,F},$$\nwhere $\\phi_{K,F}$ is the explicit polynomial in\n[[def-crouzeix-raviart-local-p1-element]]. On a finite matching mesh, define\n$I_h^{CR}u$ cellwise by $(I_h^{CR}u)|_K=I_K^{CR}(u|_K)$. For a global\n$u\\in H^1_0(\\Omega)$, the cell traces agree on interior facets and vanish on\nboundary facets, so this formula has the intended global Crouzeix–Raviart\ndegrees of freedom. The local estimate item proves its fractional\napproximation bounds.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "§36.2.1, equations (36.4)–(36.6), and the global interpolation definition after Proposition 36.2, PDF pp. 2–4."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 308–313: interpolation into the conforming P1 subspace used for approximation."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is assumed through the local simplex trace interface; no Axiom of Choice is invoked.",
+        "dependency_level": 2,
+        "level": 2
+      },
+      {
+        "id": "lem-crouzeix-raviart-face-jump-estimate",
+        "kind": "lemma",
+        "title": "Face jumps are controlled by the broken gradient",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-global-space",
+          "def-matching-affine-simplicial-meshes",
+          "lem-shape-regular-affine-simplex-scaling"
+        ],
+        "statement": "Assume Countable Choice. For every matching shape-regular simplicial mesh and\n$v_h\\in V_h^{CR,0}$,\n$$\\sum_{F\\in\\mathcal F^\\circ\\cup\\mathcal F^\\partial} h_F^{-1}\\|[v_h]_F\\|_{L^2(F)}^2 \\le C\\|\\nabla_hv_h\\|_{L^2(\\Omega)}^2.$$\nOn an interior facet, $[v_h]_F=v_{K^+}-v_{K^-}$; on a boundary facet,\n$[v_h]_F=v_K$. The constant depends only on $d$ and the shape-regularity\nbound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.9, equations (36.14) and its proof, PDF pp. 7–8."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 314–343: face-mean cancellation and local scaling of nonconforming jumps."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is required by the affine shape-scaling interface; no Axiom of Choice is invoked.",
+        "dependency_level": 2,
+        "level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "def-crouzeix-raviart-poisson-method",
+        "kind": "definition",
+        "title": "The Crouzeix–Raviart method for the homogeneous Poisson problem",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-global-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-crouzeix-raviart-simplex-traces-and-green-identity"
+        ],
+        "statement": "Assume Countable Choice. Let $\\Omega$ and $\\mathcal T$ be as in\n[[def-crouzeix-raviart-global-space]], let $V:=H^1_0(\\Omega)$, let\n$V_h:=V_h^{CR,0}$, and let $f\\in L^2(\\Omega)$. The exact Poisson form and\nload are\n$$a(u,v):=\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx,\\qquad F(v):=\\int_\\Omega f v\\,dx\\quad (u,v\\in V).$$\nAn exact solution is a $u\\in V$ satisfying $a(u,v)=F(v)$ for every $v\\in V$.\nFor $v_h,w_h\\in V_h$, define the broken form and discrete load by\n$$a_h(v_h,w_h):=\\sum_{K\\in\\mathcal T}\\int_K\\nabla v_h\\cdot\\nabla w_h\\,dx, \\qquad F_h(w_h):=\\int_\\Omega f w_h\\,dx.$$\nThe discrete problem is to find $u_h\\in V_h$ such that\n$a_h(u_h,w_h)=F_h(w_h)$ for every $w_h\\in V_h$.\n\nPut $X_h:=V+V_h$. For each cell facet $F\\subset\\partial K$, let\n$\\gamma_{F,K}$ denote the trace supplied by\n[[lem-crouzeix-raviart-simplex-traces-and-green-identity]].\nFor $z\\in X_h$ and $w_h\\in V_h$, define the comparison-space extension\n$$\\widetilde a_h(z,w_h):=\\sum_{K\\in\\mathcal T}\\int_K \\nabla(z|_K)\\cdot\\nabla w_h\\,dx.$$\nEach restriction $z|_K$ belongs to $H^1(K)$, and this extension agrees with\n$a_h$ when $z\\in V_h$.\n\nOn an interior facet\n$F=K^+\\cap K^-$ choose either ordering and define\n$[z]_F:=\\gamma_{F,K^+}z-\\gamma_{F,K^-}z$; on a boundary facet of $K$ set\n$[z]_F:=\\gamma_{F,K}z$. The mesh-dependent comparison expression is\n$$\\|z\\|_{\\sharp,h}^2:= \\sum_{K\\in\\mathcal T}\\|\\nabla(z|_K)\\|_{L^2(K)}^2+ \\sum_{F\\in\\mathcal F^\\circ\\cup\\mathcal F^\\partial} h_F^{-1}\\|[z]_F\\|_{L^2(F)}^2,\\qquad z\\in X_h.$$\nThe next items prove the required definiteness, stability, and consistency\nproperties; this definition makes no assertion that $V_h\\subset V$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "§§36.1–36.2.3, equations (36.2)–(36.11), PDF pp. 1–5."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 247–315: second Strang setting, CR space, broken form, and consistency."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is declared through the local trace/Green and Sobolev interfaces; no Axiom of Choice is invoked.",
+        "dependency_level": 2,
+        "level": 2
+      },
+      {
+        "id": "lem-crouzeix-raviart-broken-gradient-is-a-norm",
+        "kind": "lemma",
+        "title": "The broken gradient is a norm on the homogeneous Crouzeix–Raviart space",
+        "deps": [
+          "def-crouzeix-raviart-global-space",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "For a finite matching mesh of a bounded connected polyhedral domain,\n$v_h\\mapsto\\|\\nabla_hv_h\\|_{L^2(\\Omega)}$ is a norm on\n$V_h^{CR,0}$ of [[def-crouzeix-raviart-global-space]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.4, PDF p. 4: the broken-gradient seminorm is a norm under the face-average boundary conditions."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 282–290: the homogeneous nonconforming P1 space and broken-gradient norm."
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used by this definition or finite-dimensional calculation.",
+        "dependency_level": 2,
+        "level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-crouzeix-raviart-local-interpolation-estimates",
+        "kind": "lemma",
+        "title": "Local approximation by the face-average Crouzeix–Raviart interpolant",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-face-average-interpolant",
+          "def-crouzeix-raviart-fractional-sobolev-regularity",
+          "lem-crouzeix-raviart-local-face-unisolvence",
+          "lem-crouzeix-raviart-simplex-traces-and-green-identity",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-reference-simplex-poincare-wirtinger"
+        ],
+        "statement": "Assume Countable Choice and the setup of [[def-crouzeix-raviart-face-average-interpolant]], a\nshape-regular affine mesh, and $1/2<r\\le1$. The face-average interpolant is\ndefined for every $u\\in H^{1+r}(K)$ by the traces of\n[[lem-crouzeix-raviart-simplex-traces-and-green-identity]] and reproduces\n$\\mathbb P_1(K)$. Uniformly over all cells,\n$$\\|\\nabla(u-I_K^{CR}u)\\|_{L^2(K)} \\le C h_K^r|u|_{H^{1+r}(K)},\\qquad \\|u-I_K^{CR}u\\|_{L^2(K)} \\le C h_K^{1+r}|u|_{H^{1+r}(K)}.$$\nFor each facet $F\\subset\\partial K$,\n$$h_F^{-1/2}\\|\\gamma_F(u-I_K^{CR}u)\\|_{L^2(F)} \\le C h_K^r|u|_{H^{1+r}(K)}.$$\nIf $u\\in H^1_0(\\Omega)$, then the global interpolant has matching interior\nface means and zero boundary face means, so $I_h^{CR}u\\in V_h^{CR,0}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.1 and its proof, PDF p. 2: local interpolation estimate for every r in [0,1]."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 326–343: reference-simplex Bramble–Hilbert interpolation estimate and face scaling in the H2 case."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is used through the local trace, reference Poincare, and affine shape-scaling suppliers; no Axiom of Choice is invoked.",
+        "dependency_level": 3,
+        "level": 3,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-crouzeix-raviart-conforming-companion",
+        "kind": "lemma",
+        "title": "A conforming averaging companion for Crouzeix–Raviart functions",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-global-space",
+          "def-matching-affine-simplicial-meshes",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-the-standard-smooth-step-function",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-crouzeix-raviart-face-jump-estimate",
+          "lem-compact-support-zero-extension-in-wkp",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "lem-shape-regular-affine-simplex-scaling",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-heine-borel-rn",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "thm-continuity-from-above-for-measures",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-measure-monotonicity",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "statement": "Assume Countable Choice. Let $\\Omega$ be the bounded connected Lipschitz polyhedral domain and\n$\\mathcal T_h$ a finite matching shape-regular simplicial mesh of\n[[def-crouzeix-raviart-global-space]]. For every $v_h\\in V_h^{CR,0}$ there is\na continuous piecewise affine function $E_hv_h$ with zero boundary trace\nsuch that\n$$\\|\\nabla E_hv_h\\|_{L^2(\\Omega)} \\le C\\|\\nabla_hv_h\\|_{L^2(\\Omega)},\\qquad \\|v_h-E_hv_h\\|_{L^2(\\Omega)} \\le C h\\|\\nabla_hv_h\\|_{L^2(\\Omega)},$$\nwhere $h=\\max_{K\\in\\mathcal T_h}h_K$. In particular,\n$E_hv_h\\in H^1_0(\\Omega)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.9, PDF pp. 7–8: local averaging and jump control for CR functions."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 280–350: the CR space, broken norm, and conformity defect."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is used through affine shape scaling, simplex Gauss–Green, measure continuity, and density suppliers; no Axiom of Choice is invoked.",
+        "dependency_level": 3,
+        "level": 3,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-crouzeix-raviart-comparison-norm",
+        "kind": "lemma",
+        "title": "The broken comparison expression is a norm",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-poisson-method",
+          "lem-crouzeix-raviart-continuous-poincare",
+          "lem-crouzeix-raviart-simplex-traces-and-green-identity",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-reference-simplex-poincare-wirtinger",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "statement": "In the Poisson setting of [[def-crouzeix-raviart-poisson-method]],\n$\\|\\cdot\\|_{\\sharp,h}$ is a norm on $X_h=H^1_0(\\Omega)+V_h^{CR,0}$.\nIts restriction to $H^1_0(\\Omega)$ is the gradient norm, equivalent to the\n$H^1$ norm, and its restriction to $V_h^{CR,0}$ is a norm.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.4, PDF p. 4, and Lemma 36.9, PDF pp. 7–8: broken-gradient norm and scaled facet-jump estimate for the homogeneous CR space."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 280–290: homogeneous CR face conditions and the broken-gradient norm."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice enters through the reference-simplex Poincare supplier; no Axiom of Choice is invoked.",
+        "dependency_level": 3,
+        "level": 3,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-crouzeix-raviart-discrete-well-posedness",
+        "kind": "theorem",
+        "title": "Well-posedness of the homogeneous Poisson and CR problems",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-poisson-method",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-crouzeix-raviart-continuous-poincare",
+          "lem-crouzeix-raviart-broken-gradient-is-a-norm",
+          "lem-crouzeix-raviart-global-face-basis",
+          "thm-lax-milgram",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Assume Countable Choice, let $\\Omega$ and $\\mathcal T_h$ be as in\n[[def-crouzeix-raviart-poisson-method]], and let $f\\in L^2(\\Omega)$. The\nexact weak problem has a unique solution $u\\in H^1_0(\\Omega)$, and the\ndiscrete problem has a unique solution $u_h\\in V_h^{CR,0}$. The exact\nexistence argument uses Countable Choice through Hilbert-space structure and\nLax–Milgram. The finite-dimensional discrete existence and uniqueness\nargument uses no choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "§36.2.3, equations (36.9)–(36.11), PDF pp. 4–5: exact and discrete Poisson variational problems."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 247–315: exact and discrete variational formulations and stability."
+            }
+          ]
+        },
+        "axiom_use": "The exact Hilbert-space solve uses Countable Choice through Hilbert structure and Lax–Milgram. The finite face-basis matrix proof of the discrete solve uses no choice principle.",
+        "dependency_level": 3,
+        "level": 3,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-crouzeix-raviart-discrete-poincare",
+        "kind": "theorem",
+        "title": "Discrete Poincare inequality for homogeneous Crouzeix–Raviart functions",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-global-space",
+          "lem-crouzeix-raviart-conforming-companion",
+          "lem-crouzeix-raviart-continuous-poincare"
+        ],
+        "statement": "Assume Countable Choice. Let $\\Omega$ be a bounded connected Lipschitz polyhedral domain and\n$\\mathcal T_h$ any finite matching shape-regular simplicial mesh. There is a\nconstant $C$ depending only on $\\Omega$, $d$, and the shape-regularity bound\nsuch that every $v_h\\in V_h^{CR,0}$ satisfies\n$$\\|v_h\\|_{L^2(\\Omega)}\\le C\\|\\nabla_hv_h\\|_{L^2(\\Omega)}.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.6 and its proof, PDF pp. 5–6: the discrete Poincare–Steklov inequality, proved there by elliptic duality and face estimates."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 280–312: the homogeneous CR space, broken-gradient norm, and conforming P1 subspace used for approximation."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is inherited through the conforming companion and continuous Poincare interfaces; no Axiom of Choice is invoked.",
+        "dependency_level": 4,
+        "level": 4,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-crouzeix-raviart-consistency-defect",
+        "kind": "lemma",
+        "title": "Consistency bounds for the Crouzeix–Raviart Poisson method",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-fractional-sobolev-regularity",
+          "def-crouzeix-raviart-face-average-interpolant",
+          "def-crouzeix-raviart-global-space",
+          "def-crouzeix-raviart-poisson-method",
+          "lem-crouzeix-raviart-simplex-traces-and-green-identity",
+          "lem-crouzeix-raviart-face-jump-estimate",
+          "lem-crouzeix-raviart-local-interpolation-estimates",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Assume Countable Choice. Let $1/2<r\\le1$, let $u\\in H^1_0(\\Omega)\\cap H^{1+r}(\\Omega)$ solve\n$-\\Delta u=f\\in L^2(\\Omega)$ distributionally, and let $h$ be the maximum\ncell diameter of a finite matching shape-regular mesh. With the method of\n[[def-crouzeix-raviart-poisson-method]], define\n$$\\mathcal R_h(u;v_h):=\\widetilde a_h(u,v_h)-F_h(v_h),\\qquad v_h\\in V_h^{CR,0},$$\nwhere $\\widetilde a_h$ is the cellwise extension in [[def-crouzeix-raviart-poisson-method]]. Then\n$$|\\mathcal R_h(u;v_h)|\\le C h^r|u|_{H^{1+r}(\\Omega)} \\|\\nabla_hv_h\\|_{L^2(\\Omega)}.$$\nIf also $1/2<s\\le1$ and $\\zeta\\in H^1_0(\\Omega)\\cap H^{1+s}(\\Omega)$,\nthen\n$$|\\mathcal R_h(u;I_h^{CR}\\zeta)|\\le C h^{r+s} |u|_{H^{1+r}(\\Omega)}|\\zeta|_{H^{1+s}(\\Omega)}.$$\nThe constants depend only on $d$, the shape-regularity bound, $r$, and $s$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.10 and its proof, PDF pp. 9–10: consistency defect, cancellation of face means, and regularity-dependent residual bounds."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 314–350: elementwise integration by parts, face-mean cancellation, and consistency estimates."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is required through the local trace/Green, jump, interpolation, and CR-method interfaces; no Axiom of Choice is invoked.",
+        "dependency_level": 4,
+        "level": 4,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-crouzeix-raviart-energy-error-estimate",
+        "kind": "theorem",
+        "title": "Energy error estimate for the Crouzeix–Raviart Poisson method",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-fractional-sobolev-regularity",
+          "def-crouzeix-raviart-face-average-interpolant",
+          "def-crouzeix-raviart-poisson-method",
+          "lem-crouzeix-raviart-comparison-norm",
+          "thm-crouzeix-raviart-discrete-poincare",
+          "lem-crouzeix-raviart-face-jump-estimate",
+          "lem-crouzeix-raviart-global-face-basis",
+          "lem-crouzeix-raviart-local-interpolation-estimates",
+          "lem-crouzeix-raviart-consistency-defect",
+          "thm-crouzeix-raviart-discrete-well-posedness",
+          "thm-second-strang-lemma-for-nonconforming-galerkin",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-crouzeix-raviart-continuous-poincare",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Assume Countable Choice. Let $1/2<r\\le1$, and let $u\\in H^1_0(\\Omega)\\cap\nH^{1+r}(\\Omega)$ solve $-\\Delta u=f\\in L^2(\\Omega)$ on a bounded connected\nLipschitz polyhedral domain. On any finite matching shape-regular mesh, the\nsolution $u_h$ of the Crouzeix–Raviart method satisfies\n$$\\|u-u_h\\|_{\\sharp,h}\\le C h^r|u|_{H^{1+r}(\\Omega)}.$$\nIn particular, $\\|\\nabla_h(u-u_h)\\|_{L^2(\\Omega)}$ obeys the same bound.\nThe constant is independent of the mesh size and may depend on $\\Omega$, $d$,\nthe shape-regularity bound, and $r$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Theorem 36.11 and proof, PDF pp. 10–11: second-Strang application and the CR energy estimate."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 247–350: second Strang framework, CR interpolation, and H2 energy error proof."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is required by the imported nonconforming Strang theorem and exact Hilbert-space solve; no Axiom of Choice is invoked.",
+        "dependency_level": 5,
+        "level": 5,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-crouzeix-raviart-l2-error-estimate",
+        "kind": "theorem",
+        "title": "L2 error estimate under a Dirichlet Poisson smoothing index",
+        "deps": [
+          "def-crouzeix-raviart-fractional-sobolev-regularity",
+          "def-crouzeix-raviart-face-average-interpolant",
+          "def-crouzeix-raviart-global-space",
+          "def-crouzeix-raviart-poisson-method",
+          "def-crouzeix-raviart-poisson-smoothing-index",
+          "lem-crouzeix-raviart-simplex-traces-and-green-identity",
+          "lem-crouzeix-raviart-face-jump-estimate",
+          "lem-crouzeix-raviart-local-interpolation-estimates",
+          "lem-crouzeix-raviart-consistency-defect",
+          "thm-crouzeix-raviart-energy-error-estimate",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Assume the hypotheses of the energy estimate with $1/2<r\\le1$, and suppose\nthe domain has Dirichlet Poisson smoothing index $s$ with $1/2<s\\le1$ and\nconstant $C_{\\rm reg}$. Then\n$$\\|u-u_h\\|_{L^2(\\Omega)}\\le C C_{\\rm reg}h^{r+s} |u|_{H^{1+r}(\\Omega)}.$$\nThe constant $C$ depends only on $d$, the mesh shape-regularity bound, $r$,\nand $s$. No smoothing index is asserted for every bounded domain.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Theorem 36.13 and proof, PDF pp. 12–13: duality argument and the $h^{r+s}$ L2 estimate, with $r,s>1/2$."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 314–350: cellwise consistency and the H2 energy estimate for the Crouzeix–Raviart method."
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is inherited through the exact solve, energy estimate, and declared smoothing suppliers; no Axiom of Choice is invoked.",
+        "dependency_level": 6,
+        "level": 6,
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2657,
+    "id": "crouzeix-raviart-finite-elements-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Crouzeix–Raviart finite elements — Examples",
+    "companion": "crouzeix-raviart-finite-elements",
+    "requires": [
+      "crouzeix-raviart-finite-elements"
+    ],
+    "items": [
+      {
+        "id": "cex-crouzeix-raviart-below-trace-threshold",
+        "kind": "counterexample",
+        "title": "A zero-boundary solution below the CR trace regularity threshold",
+        "deps": [
+          "def-countable-choice",
+          "def-crouzeix-raviart-fractional-sobolev-regularity",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-the-standard-smooth-step-function",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-crouzeix-raviart-simplex-traces-and-green-identity",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "statement": "Every $u\\in H^1_0((0,1)^2)$ belongs to $H^{1+r}((0,1)^2)$ for some\n$r\\in(1/2,1]$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "Lemma 36.8 and Theorem 36.13, PDF pp. 6–7 and 12–13: the strict r>1/2 normal-gradient trace and duality requirements."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 314–350: cellwise consistency, face-mean cancellation, and the H2 energy estimate."
+            }
+          ]
+        },
+        "axiom_use": "The explicit function and integrability estimates are choice-free; the fractional Sobolev convention and cited local trace theorem carry Countable Choice; no Axiom of Choice is invoked.",
+        "dependency_level": 2,
+        "level": 2,
+        "strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-crouzeix-raviart-one-face-degree-of-freedom",
+        "kind": "example",
+        "title": "One shared face-average degree of freedom",
+        "deps": [
+          "def-crouzeix-raviart-global-space",
+          "lem-crouzeix-raviart-global-face-basis",
+          "lem-crouzeix-raviart-local-face-unisolvence"
+        ],
+        "statement": "Let $F$ be an interior facet of a finite matching mesh and let $\\phi_F$ be\nthe global CR basis function indexed by $F$. It has face mean one on $F$ and\nzero on every other facet. It is supported only on the two cells incident to\n$F$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "§36.2.1–36.2.2, PDF pp. 2–4: local shape functions and shared face means."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 276–290: one CR degree of freedom per face in two dimensions."
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used by this definition or finite-dimensional calculation.",
+        "dependency_level": 3,
+        "level": 3,
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-crouzeix-raviart-broken-gradient-norm",
+        "kind": "example",
+        "title": "A nonzero CR function on a two-triangle square",
+        "deps": [
+          "def-crouzeix-raviart-global-space",
+          "lem-crouzeix-raviart-global-face-basis",
+          "lem-crouzeix-raviart-local-face-unisolvence"
+        ],
+        "statement": "Split the unit square along the diagonal from $(0,0)$ to $(1,1)$ into\n$K_1=\\operatorname{conv}\\{(0,0),(1,0),(1,1)\\}$ and\n$K_2=\\operatorname{conv}\\{(0,0),(0,1),(1,1)\\}$. The CR basis function for\nthe diagonal is nonzero and has broken-gradient norm $2\\sqrt2$. Its boundary\nedge means vanish, although its boundary traces are not pointwise zero.\n\nThe figure uses Cartesian coordinates with $x$ increasing rightward and $y$\nupward. The red diagonal is the one interior facet; $K_1$ is below and to its\nright, and $K_2$ is above and to its left.\n\n\\begin{tikzpicture}[scale=2,line width=0.7pt,every node/.style={font=\\small}]\n\\fill[blue!8] (0,0)--(1,0)--(1,1)--cycle;\n\\fill[green!8] (0,0)--(0,1)--(1,1)--cycle;\n\\draw[gray] (0,0)--(1,0)--(1,1)--(0,1)--cycle;\n\\draw[red!75!black,very thick] (0,0)--(1,1);\n\\fill (0,0) circle (0.025) (1,0) circle (0.025) (1,1) circle (0.025) (0,1) circle (0.025);\n\\node[below left] at (0,0) {$(0,0)$};\n\\node[below right] at (1,0) {$(1,0)$};\n\\node[above right] at (1,1) {$(1,1)$};\n\\node[above left] at (0,1) {$(0,1)$};\n\\node at (0.72,0.35) {$K_1$};\n\\node at (0.28,0.65) {$K_2$};\n\\node[red!75!black,above left] at (0.5,0.5) {$F$};\n\\end{tikzpicture}",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 36, Crouzeix–Raviart approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap36.pdf",
+              "locator": "§36.2.1–36.2.2 and Lemma 36.4, PDF pp. 2–4: CR face basis and broken-gradient norm."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "§25.2, lines 276–290: the nonconforming P1 CR space and its broken-gradient form."
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used by this definition or finite-dimensional calculation.",
+        "dependency_level": 3,
+        "level": 3,
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

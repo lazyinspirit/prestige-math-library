@@ -1,0 +1,275 @@
+[
+  {
+    "kind": "item",
+    "consumer": "def-certified-geometric-predicate-determinants",
+    "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-dyadic-floating-point-format-and-directed-rounding, its Definition section. Exact supplier excerpt: “An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.”. Consumer use: Use [[def-dyadic-floating-point-format-and-directed-rounding]]: each finite. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-certified-geometric-predicate-determinants",
+    "supplier": "def-intervals-rectangles-and-complex-balls",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-intervals-rectangles-and-complex-balls, its Definition section. Exact supplier excerpt: “A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.”. Consumer use: as defined in [[def-intervals-rectangles-and-complex-balls]]. Its values remain. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-certified-geometric-predicate-determinants",
+    "supplier": "def-complete-ordered-real-field",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-complete-ordered-real-field, its Definition section. Exact supplier excerpt: “A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.”. Consumer use: comparisons use the order of [[def-complete-ordered-real-field]]. For a positive. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-interval-geometric-predicate-filter",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-outward-rounded-interval-and-ball-operations, its Definition section. Exact supplier excerpt: “For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.”. Consumer use: [[def-outward-rounded-interval-and-ball-operations]]. If every operation. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-interval-geometric-predicate-filter",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "evidence": "Inspected the published supplier thm-outward-rounded-operations-are-isotone-and-dag-sound, its Statement section and complete proof. Exact supplier excerpt: “For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosur”. Consumer use: The declared direct dependency thm-outward-rounded-operations-are-isotone-and-dag-sound supports this item’s specification and proof.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-symbolic-geometric-determinant-tie-break",
+    "supplier": "def-complete-ordered-real-field",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-complete-ordered-real-field, its Definition section. Exact supplier excerpt: “A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.”. Consumer use: [[def-complete-ordered-real-field]], and an explicit caller declaration that this algorithm uses. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-dyadic-determinant-integer-clearance-preserves-sign",
+    "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-dyadic-floating-point-format-and-directed-rounding, its Definition section. Exact supplier excerpt: “An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.”. Consumer use: F1: [F1] [[def-dyadic-floating-point-format-and-directed-rounding]]: an exact dyadic rational is $m2^e$ for integers $m,e$.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-leibniz-determinant-forward-error-bound",
+    "supplier": "def-standard-relative-floating-point-model-and-unit-roundoff",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-standard-relative-floating-point-model-and-unit-roundoff, its Definition section. Exact supplier excerpt: “**A floating-point system.** A floating-point system consists of a nonempty\nfinite set $\\mathbb F\\subseteq\\mathbb R$ of representable numbers with\n$0\\in\\mathbb F$ and $-\\mathbb F=\\mathbb F$, a positive real\n$N_{\\max}\\in\\mathbb F$ (the largest normal magnitude), a positive real\n$N_{\\min}\\in\\mathbb F$ (the smallest normal magnitude), with\n$N_{\\min}\\le N_{\\max}$, and a rounding map\n$\\operatorname{fl}$ defined on $0$ and on the real numbers $t$ with\n$N_{\\min}\\le|t|\\le N_{\\max}$, taking values in $\\mathbb F$ and satisfying\n$\\operatorname{fl}(0)=0$.”. Consumer use: F1: [F1] [[def-standard-relative-floating-point-model-and-unit-roundoff]]: for each addition or multiplication whose exact result is zero or normal-range, $\\operatorname{fl}(x\\circ y)=(x\\circ y)(1+\\delta)$ with $|\\delta|\\le u$.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-leibniz-determinant-forward-error-bound",
+    "supplier": "lem-of-abs-value",
+    "status": "verified",
+    "evidence": "Inspected the published supplier lem-of-abs-value, its Statement section and complete proof. Exact supplier excerpt: “Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then”. Consumer use: F2: [F2] [[lem-of-abs-value]] and [[lem-of-triangle-inequality]]: $|xy|=|x||y|$, $-|x|\\le x\\le|x|$, and $|x+y|\\le|x|+|y|$.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-leibniz-determinant-forward-error-bound",
+    "supplier": "lem-of-triangle-inequality",
+    "status": "verified",
+    "evidence": "Inspected the published supplier lem-of-triangle-inequality, its Statement section and complete proof. Exact supplier excerpt: “Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then”. Consumer use: F2: [F2] [[lem-of-abs-value]] and [[lem-of-triangle-inequality]]: $|xy|=|x||y|$, $-|x|\\le x\\le|x|$, and $|x+y|\\le|x|+|y|$.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-two-and-three-by-three-nonsingular-dyadic-system-solvable",
+    "supplier": "def-complete-ordered-real-field",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-complete-ordered-real-field, its Definition section. Exact supplier excerpt: “A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.”. Consumer use: F2: [F2] [[def-complete-ordered-real-field]]: $\\mathbb R$ is an ordered field; every nonzero real scalar has an inverse, and field operations preserve the order.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-floating-filter-for-geometric-determinants",
+    "supplier": "def-standard-relative-floating-point-model-and-unit-roundoff",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-standard-relative-floating-point-model-and-unit-roundoff, its Definition section. Exact supplier excerpt: “**A floating-point system.** A floating-point system consists of a nonempty\nfinite set $\\mathbb F\\subseteq\\mathbb R$ of representable numbers with\n$0\\in\\mathbb F$ and $-\\mathbb F=\\mathbb F$, a positive real\n$N_{\\max}\\in\\mathbb F$ (the largest normal magnitude), a positive real\n$N_{\\min}\\in\\mathbb F$ (the smallest normal magnitude), with\n$N_{\\min}\\le N_{\\max}$, and a rounding map\n$\\operatorname{fl}$ defined on $0$ and on the real numbers $t$ with\n$N_{\\min}\\le|t|\\le N_{\\max}$, taking values in $\\mathbb F$ and satisfying\n$\\operatorname{fl}(0)=0$.”. Consumer use: [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Set. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-floating-filter-for-geometric-determinants",
+    "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-dyadic-floating-point-format-and-directed-rounding, its Definition section. Exact supplier excerpt: “An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.”. Consumer use: [[def-dyadic-floating-point-format-and-directed-rounding]]. If this. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-floating-filter-for-geometric-determinants",
+    "supplier": "def-abs-value",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-abs-value, its Definition section. Exact supplier excerpt: “Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is”. Consumer use: value [[def-abs-value]] and the outward. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-floating-filter-for-geometric-determinants",
+    "supplier": "lem-directed-dyadic-rounding-enclosure-and-error",
+    "status": "verified",
+    "evidence": "Inspected the published supplier lem-directed-dyadic-rounding-enclosure-and-error, its Statement section and complete proof. Exact supplier excerpt: “For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.”. Consumer use: The declared direct dependency lem-directed-dyadic-rounding-enclosure-and-error supports this item’s specification and proof.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-floating-filter-for-geometric-determinants",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-outward-rounded-interval-and-ball-operations, its Definition section. Exact supplier excerpt: “For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.”. Consumer use: [[def-outward-rounded-interval-and-ball-operations]] to singleton intervals. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-floating-filter-for-geometric-determinants",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "evidence": "Inspected the published supplier thm-outward-rounded-operations-are-isotone-and-dag-sound, its Statement section and complete proof. Exact supplier excerpt: “For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosur”. Consumer use: [[thm-outward-rounded-operations-are-isotone-and-dag-sound]].. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-nondegenerate-dyadic-simplex-determines-unique-sphere",
+    "supplier": "def-complete-ordered-real-field",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-complete-ordered-real-field, its Definition section. Exact supplier excerpt: “A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.”. Consumer use: F2: [F2] [[def-complete-ordered-real-field]]: the coordinates lie in an ordered field, so squares are nonnegative; $1>0$ and the order is compatible with addition.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-nondegenerate-dyadic-simplex-determines-unique-sphere",
+    "supplier": "lem-nonnegative-square-root-exists-and-unique",
+    "status": "verified",
+    "evidence": "Inspected the published supplier lem-nonnegative-square-root-exists-and-unique, its Statement section and complete proof. Exact supplier excerpt: “In a Dedekind-complete ordered field, every $x\\ge0$ has a unique $y\\ge0$ with\n$y^2=x$.”. Consumer use: F4: [F4] [[lem-nonnegative-square-root-exists-and-unique]]: every nonnegative real has a unique nonnegative square root.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-interval-geometric-predicate-filter-sound",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "evidence": "Inspected the published supplier thm-outward-rounded-operations-are-isotone-and-dag-sound, its Statement section and complete proof. Exact supplier excerpt: “For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosur”. Consumer use: F2: [F2] [[thm-outward-rounded-operations-are-isotone-and-dag-sound]]: for a finite expression DAG with finite interval outputs, every exact value from every admissible input assignment belongs to its root interval.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-lifted-determinant-sign-matches-sphere-side",
+    "supplier": "def-complete-ordered-real-field",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-complete-ordered-real-field, its Definition section. Exact supplier excerpt: “A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.”. Consumer use: F2: [F2] [[def-complete-ordered-real-field]]: the coordinates, sphere center, and radius are in an ordered real field, so positive squares and their order comparisons have their usual meanings.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-floating-filter-sign-is-exact",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "evidence": "Inspected the published supplier thm-outward-rounded-operations-are-isotone-and-dag-sound, its Statement section and complete proof. Exact supplier excerpt: “For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosur”. Consumer use: F3: [F3] [[thm-outward-rounded-operations-are-isotone-and-dag-sound]]: every exact node value of a finite expression DAG with finite operation results belongs to its computed interval enclosure.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-floating-filter-sign-is-exact",
+    "supplier": "lem-directed-dyadic-rounding-enclosure-and-error",
+    "status": "verified",
+    "evidence": "Inspected the published supplier lem-directed-dyadic-rounding-enclosure-and-error, its Statement section and complete proof. Exact supplier excerpt: “For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.”. Consumer use: F4: [F4] [[lem-directed-dyadic-rounding-enclosure-and-error]]: directed upward rounding encloses each finite exact endpoint from above.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-symbolic-geometric-determinant-tie-break-consistent",
+    "supplier": "def-complete-ordered-real-field",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-complete-ordered-real-field, its Definition section. Exact supplier excerpt: “A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.”. Consumer use: F4: [F4] [[def-complete-ordered-real-field]]: coefficient comparisons and positive thresholds are taken in the ordered real field.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-symbolic-geometric-determinant-tie-break-consistent",
+    "supplier": "lem-of-abs-value",
+    "status": "verified",
+    "evidence": "Inspected the published supplier lem-of-abs-value, its Statement section and complete proof. Exact supplier excerpt: “Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then”. Consumer use: F5: [F5] [[lem-of-abs-value]]: absolute value is nonnegative and multiplicative.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-symbolic-geometric-determinant-tie-break-consistent",
+    "supplier": "lem-of-triangle-inequality",
+    "status": "verified",
+    "evidence": "Inspected the published supplier lem-of-triangle-inequality, its Statement section and complete proof. Exact supplier excerpt: “Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then”. Consumer use: F6: [F6] [[lem-of-triangle-inequality]]: the absolute value of a finite sum is at most the sum of the absolute values.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-uncertain-coordinate-interval-with-ambiguous-sign",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-outward-rounded-interval-and-ball-operations, its Definition section. Exact supplier excerpt: “For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.”. Consumer use: The declared direct dependency def-outward-rounded-interval-and-ball-operations supports this item’s specification and proof.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-uncertain-coordinate-interval-with-ambiguous-sign",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "evidence": "Inspected the published supplier thm-outward-rounded-operations-are-isotone-and-dag-sound, its Statement section and complete proof. Exact supplier excerpt: “For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosur”. Consumer use: F2: [F2] [[thm-outward-rounded-operations-are-isotone-and-dag-sound]]: a finite outward arithmetic DAG encloses the exact determinant for every admissible coordinate assignment.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-cocircular-sites-certified-incircle",
+    "supplier": "def-standard-relative-floating-point-model-and-unit-roundoff",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-standard-relative-floating-point-model-and-unit-roundoff, its Definition section. Exact supplier excerpt: “**A floating-point system.** A floating-point system consists of a nonempty\nfinite set $\\mathbb F\\subseteq\\mathbb R$ of representable numbers with\n$0\\in\\mathbb F$ and $-\\mathbb F=\\mathbb F$, a positive real\n$N_{\\max}\\in\\mathbb F$ (the largest normal magnitude), a positive real\n$N_{\\min}\\in\\mathbb F$ (the smallest normal magnitude), with\n$N_{\\min}\\le N_{\\max}$, and a rounding map\n$\\operatorname{fl}$ defined on $0$ and on the real numbers $t$ with\n$N_{\\min}\\le|t|\\le N_{\\max}$, taking values in $\\mathbb F$ and satisfying\n$\\operatorname{fl}(0)=0$.”. Consumer use: F3: [F3] [[def-standard-relative-floating-point-model-and-unit-roundoff]]: the relative model bounds every allowed operation error by the stated unit roundoff and requires normal-range exact results.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-cocircular-sites-certified-incircle",
+    "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-dyadic-floating-point-format-and-directed-rounding, its Definition section. Exact supplier excerpt: “An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.”. Consumer use: F7: [F7] [[def-dyadic-floating-point-format-and-directed-rounding]]: binary formats have a finite normal range and represent dyadic values by the stated precision and exponent parameters.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-cocircular-sites-certified-incircle",
+    "supplier": "lem-directed-dyadic-rounding-enclosure-and-error",
+    "status": "verified",
+    "evidence": "Inspected the published supplier lem-directed-dyadic-rounding-enclosure-and-error, its Statement section and complete proof. Exact supplier excerpt: “For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.”. Consumer use: F9: [F9] [[lem-directed-dyadic-rounding-enclosure-and-error]]: upward directed rounding returns the least representable value not below a finite exact input.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-cocircular-sites-certified-incircle",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-outward-rounded-interval-and-ball-operations, its Definition section. Exact supplier excerpt: “For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.”. Consumer use: The declared direct dependency def-outward-rounded-interval-and-ball-operations supports this item’s specification and proof.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-cocircular-sites-certified-incircle",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "evidence": "Inspected the published supplier thm-outward-rounded-operations-are-isotone-and-dag-sound, its Statement section and complete proof. Exact supplier excerpt: “For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosur”. Consumer use: F6: [F6] [[thm-outward-rounded-operations-are-isotone-and-dag-sound]]: outward interval evaluation encloses the exact absolute-term sum when finite.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-collinear-triangle-certified-orientation",
+    "supplier": "def-standard-relative-floating-point-model-and-unit-roundoff",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-standard-relative-floating-point-model-and-unit-roundoff, its Definition section. Exact supplier excerpt: “**A floating-point system.** A floating-point system consists of a nonempty\nfinite set $\\mathbb F\\subseteq\\mathbb R$ of representable numbers with\n$0\\in\\mathbb F$ and $-\\mathbb F=\\mathbb F$, a positive real\n$N_{\\max}\\in\\mathbb F$ (the largest normal magnitude), a positive real\n$N_{\\min}\\in\\mathbb F$ (the smallest normal magnitude), with\n$N_{\\min}\\le N_{\\max}$, and a rounding map\n$\\operatorname{fl}$ defined on $0$ and on the real numbers $t$ with\n$N_{\\min}\\le|t|\\le N_{\\max}$, taking values in $\\mathbb F$ and satisfying\n$\\operatorname{fl}(0)=0$.”. Consumer use: F2: [F2] [[def-standard-relative-floating-point-model-and-unit-roundoff]]: the binary64 unit roundoff is $u=2^{-53}$, and its relative error model excludes underflow and overflow.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-collinear-triangle-certified-orientation",
+    "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-dyadic-floating-point-format-and-directed-rounding, its Definition section. Exact supplier excerpt: “An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.”. Consumer use: F4: [F4] [[def-dyadic-floating-point-format-and-directed-rounding]]: the representable spacing in $[2^e,2^{e+1})$ is $2^{e-p+1}$.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-collinear-triangle-certified-orientation",
+    "supplier": "lem-directed-dyadic-rounding-enclosure-and-error",
+    "status": "verified",
+    "evidence": "Inspected the published supplier lem-directed-dyadic-rounding-enclosure-and-error, its Statement section and complete proof. Exact supplier excerpt: “For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.”. Consumer use: F5: [F5] [[lem-directed-dyadic-rounding-enclosure-and-error]]: downward and upward rounding bracket every finite exact endpoint.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-collinear-triangle-certified-orientation",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "evidence": "Inspected the published supplier def-outward-rounded-interval-and-ball-operations, its Definition section. Exact supplier excerpt: “For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.”. Consumer use: The declared direct dependency def-outward-rounded-interval-and-ball-operations supports this item’s specification and proof.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-nearly-collinear-triangle-certified-orientation",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "evidence": "Inspected the published supplier thm-outward-rounded-operations-are-isotone-and-dag-sound, its Statement section and complete proof. Exact supplier excerpt: “For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosur”. Consumer use: F6: [F6] [[thm-outward-rounded-operations-are-isotone-and-dag-sound]]: every exact value of a finite DAG with finite operation results belongs to its computed interval enclosure.. The supplied hypotheses, determinant/rounding conventions and claim direction match this use. This records author inspection, not independent approval."
+  },
+  {
+    "kind": "page",
+    "consumer": "certified-geometric-predicates",
+    "supplier": "outward-rounded-interval-and-ball-arithmetic",
+    "status": "verified",
+    "evidence": "The assigned A page declares this published page as its prerequisite. Read its objective and the supplier items used by this batch, including def-outward-rounded-interval-and-ball-operations, thm-outward-rounded-operations-are-isotone-and-dag-sound, and lem-directed-dyadic-rounding-enclosure-and-error. Exact page excerpt: “---\npage: outward-rounded-interval-and-ball-arithmetic\ntitle: Outward rounded interval and ball arithmetic\nstatus: published\nitems:\n  - def-complete-ordered-real-field\n  - def-continuity-and-derivative-on-real-interval\n  - def-dyadic-floating-point-format-and-directed-rounding\n  - lem-archimedean-property-from-completeness\n  - lem-closed-interval-compactness-from-completeness\n  - lem-nonnegative-square-root-exists-and-unique\n  - alg-dyadic-square-root-bisection\n  - def-intervals-rectangles-and-complex-balls\n  - lem-directed-dyadic-rounding-enclosure-and-error\n  - def-outward-rounded-interval-and-ball-operations\n  - lem-real-and-complex-modulus-rules\n  - thm-dyadic-square-root-bisection-encloses\n  - def-centered-taylor-model-with-derivative-interval\n  - lem-absolutely-convergent-series-cauchy-product\n  - lem-derivative-algebra-and-chain-rules\n  - lem-elementary-power-series-converge-uniformly-on-bounded-sets\n  - lem-extreme-value-theorem-from-compactness\n  - lem-power-series-termwise-di”. The certified-predicate page uses finite outward enclosures, directed endpoint rounding and exact DAG inclusion under the supplier’s finite-result conditions."
+  }
+]

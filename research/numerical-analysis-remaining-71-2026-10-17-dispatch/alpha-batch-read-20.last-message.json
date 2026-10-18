@@ -1,0 +1,272 @@
+{
+  "group": "g",
+  "batches": ["20"],
+  "pages_read": [
+    "multigrid-methods-and-complexity",
+    "multigrid-methods-and-complexity-examples"
+  ],
+  "items_read": [
+    "def-galerkin-coarse-grid-correction",
+    "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+    "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+    "def-symmetric-two-grid-error-operator",
+    "alg-aggregation-based-algebraic-multigrid-hierarchy",
+    "lem-one-dimensional-poisson-smoothing-and-approximation",
+    "alg-finite-galerkin-v-cycle",
+    "thm-two-grid-energy-contraction-under-joint-estimate",
+    "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+    "thm-galerkin-v-cycle-work-recurrence-master-regimes",
+    "thm-one-dimensional-poisson-two-grid-energy-contraction",
+    "ex-one-dimensional-poisson-coarse-correction-removes-linear-error",
+    "ex-v-and-w-cycle-costs-in-two-dimensions",
+    "ex-one-dimensional-poisson-two-grid-uniform-contraction"
+  ],
+  "conventions": [
+    {
+      "convention": "Matrices and arithmetic are real and exact; A_h is SPD, P has full column rank with 1 ≤ m ≤ n, A_H=PᵀA_hP, and C=I−PA_H⁻¹PᵀA_h is the remaining-error map.",
+      "fixed_by": "def-galerkin-coarse-grid-correction",
+      "matters_for": [
+        "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+        "def-symmetric-two-grid-error-operator",
+        "alg-aggregation-based-algebraic-multigrid-hierarchy",
+        "alg-finite-galerkin-v-cycle",
+        "lem-one-dimensional-poisson-smoothing-and-approximation"
+      ]
+    },
+    {
+      "convention": "The energy adjoint is S* = A_h⁻¹SᵀA_h, and the symmetric two-grid error map is E=S*CS, with the adjoint post-smoother applied last.",
+      "fixed_by": "def-symmetric-two-grid-error-operator",
+      "matters_for": [
+        "thm-two-grid-energy-contraction-under-joint-estimate",
+        "thm-one-dimensional-poisson-two-grid-energy-contraction",
+        "ex-one-dimensional-poisson-two-grid-uniform-contraction"
+      ]
+    },
+    {
+      "convention": "The Poisson hierarchy has even N=2M≥4, h=1/N, stiffness scaling 1/h, zero endpoint coordinates, interpolation from even fine indices, and S=I−A_h/λ_max(A_h); ν is a positive integer.",
+      "fixed_by": "lem-one-dimensional-poisson-smoothing-and-approximation",
+      "matters_for": [
+        "thm-one-dimensional-poisson-two-grid-energy-contraction",
+        "ex-one-dimensional-poisson-two-grid-uniform-contraction"
+      ]
+    },
+    {
+      "convention": "H¹₀ is the Sobolev-norm closure of compactly supported smooth functions. Countable Choice is assumed for the Sobolev interfaces; membership is proved without invoking a trace characterization.",
+      "fixed_by": "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+      "matters_for": [
+        "ex-one-dimensional-poisson-coarse-correction-removes-linear-error",
+        "ex-one-dimensional-poisson-two-grid-uniform-contraction"
+      ]
+    },
+    {
+      "convention": "Cycle levels run from exact-solve level 0 upward. Each nonbase call initializes its coarse correction at zero and performs γ recursive calls using the current coarse iterate and a fixed restricted residual; γ=1 is V and γ=2 is W.",
+      "fixed_by": "alg-finite-galerkin-v-cycle",
+      "matters_for": [
+        "thm-galerkin-v-cycle-work-recurrence-master-regimes",
+        "ex-v-and-w-cycle-costs-in-two-dimensions"
+      ]
+    },
+    {
+      "convention": "Aggregation uses nonpositive off-diagonal entries, 0<θ<1, least-unassigned-vertex aggregate selection, and a finite real cap L≥0. Its three output statuses certify setup termination, without certifying convergence.",
+      "fixed_by": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+      "matters_for": [
+        "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "statement": "For real SPD A_h and full-column-rank P, A_H=PᵀA_hP is SPD and invertible. C=I−PA_H⁻¹PᵀA_h satisfies C²=C, CP=0, PᵀA_hC=0, and CᵀA_h=A_hC; its range is Ran(P) perpendicular in the A_h inner product.",
+      "used_by": [
+        "def-symmetric-two-grid-error-operator",
+        "alg-aggregation-based-algebraic-multigrid-hierarchy",
+        "lem-one-dimensional-poisson-smoothing-and-approximation",
+        "alg-finite-galerkin-v-cycle",
+        "thm-two-grid-energy-contraction-under-joint-estimate",
+        "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+        "ex-one-dimensional-poisson-two-grid-uniform-contraction"
+      ]
+    },
+    {
+      "id": "lem-one-dimensional-poisson-smoothing-and-approximation",
+      "statement": "For the stated even-grid 1D Dirichlet Poisson stiffness matrix, piecewise-linear prolongation, exact Galerkin correction C, and S=I−A_h/λ_max(A_h), every integer ν≥1 and fine vector e satisfy ‖CS^νe‖²_A_h ≤ 2/(2ν+1) ‖e‖²_A_h. The proved component bounds are ‖Cw‖²_A_h ≤ (h/2)‖A_hw‖²₂ and ‖A_hS^νe‖²₂ ≤ 4/[h(2ν+1)] ‖e‖²_A_h.",
+      "used_by": [
+        "thm-one-dimensional-poisson-two-grid-energy-contraction"
+      ]
+    },
+    {
+      "id": "thm-two-grid-energy-contraction-under-joint-estimate",
+      "statement": "For E=S*CS as defined, if 0≤ρ<1 and ‖CSx‖²_A_h ≤ ρ‖x‖²_A_h for every fine vector x, then E is energy-self-adjoint and nonnegative and ‖E‖_A_h≤ρ.",
+      "used_by": [
+        "thm-one-dimensional-poisson-two-grid-energy-contraction"
+      ]
+    },
+    {
+      "id": "alg-finite-galerkin-v-cycle",
+      "statement": "On a finite SPD Galerkin hierarchy with full-column-rank prolongations, finite nonnegative pre/post sweep counts, fixed smoothing matrices, and positive integer γ, Cycle solves exactly at level 0; otherwise it pre-smooths, restricts the residual, makes γ recursive coarse-correction calls starting from zero, prolongs the correction, and post-smooths.",
+      "used_by": [
+        "thm-galerkin-v-cycle-work-recurrence-master-regimes",
+        "ex-v-and-w-cycle-costs-in-two-dimensions"
+      ]
+    },
+    {
+      "id": "thm-galerkin-v-cycle-work-recurrence-master-regimes",
+      "statement": "Every invocation on an admissible finite hierarchy terminates. For fixed q=2^d with integer d≥1, level sizes N_j=q^j, fixed positive per-level work cN_j, bounded positive base cost, and fixed positive integer γ, T(N)=cN+γT(N/q) has order Θ(N), Θ(N log N), or Θ(N^(log_q γ)) according as γ<q, γ=q, or γ>q.",
+      "used_by": [
+        "ex-v-and-w-cycle-costs-in-two-dimensions"
+      ]
+    },
+    {
+      "id": "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+      "statement": "Assume Countable Choice. Every continuous real function on [0,1] that is affine on each interval of a finite partition and vanishes at both endpoints has its Sobolev class in H¹₀(0,1), defined as the W¹,² closure of C_c^∞(0,1).",
+      "used_by": [
+        "ex-one-dimensional-poisson-coarse-correction-removes-linear-error",
+        "ex-one-dimensional-poisson-two-grid-uniform-contraction"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "The real SPD convention for Galerkin matrices and aggregation.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Shapes, products, and identity matrices in the correction and cycle definitions.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "The defining adjoint identity for transpose restriction and energy-adjoint smoothing.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+      "used_for": "Identification of Euclidean adjoints with transposes over the real field.",
+      "opened": true
+    },
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "The coordinate inner-product convention underlying energy norms.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice assumption carried by the Sobolev lemma and weak-form examples.",
+      "opened": true
+    },
+    {
+      "id": "def-sobolev-space-wkp-and-its-norm",
+      "used_for": "W¹,² membership and the function-and-derivative norm used in approximation.",
+      "opened": true
+    },
+    {
+      "id": "lem-sobolev-norm-is-well-defined-and-definite",
+      "used_for": "The Sobolev triangle inequality in the final approximation argument.",
+      "opened": true
+    },
+    {
+      "id": "def-wkp-zero-as-a-sobolev-closure",
+      "used_for": "The closure criterion establishing H¹₀ membership.",
+      "opened": true
+    },
+    {
+      "id": "def-weak-derivative-of-a-locally-integrable-function",
+      "used_for": "Identification of piecewise derivatives through test-function integration by parts.",
+      "opened": true
+    },
+    {
+      "id": "lem-compact-support-zero-extension-in-wkp",
+      "used_for": "Zero extension of the cutoff approximation before mollification.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-bump-between-concentric-euclidean-balls",
+      "used_for": "Construction of a nonnegative compactly supported bump to normalize into a mollifier.",
+      "opened": true
+    },
+    {
+      "id": "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+      "used_for": "Scaled compactly supported convolution kernels.",
+      "opened": true
+    },
+    {
+      "id": "prop-mollifier-families-are-l-one-approximate-identities",
+      "used_for": "The approximate-identity properties of the normalized bump family.",
+      "opened": true
+    },
+    {
+      "id": "thm-l-one-approximate-identities-converge-in-l-p",
+      "used_for": "L² convergence of the mollified cutoff function and its derivative.",
+      "opened": true
+    },
+    {
+      "id": "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+      "used_for": "Smoothness of the compactly supported approximants.",
+      "opened": true
+    },
+    {
+      "id": "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer",
+      "used_for": "Invertibility of SPD coarse matrices and existence of exact base solves.",
+      "opened": true
+    },
+    {
+      "id": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+      "used_for": "Energy inner products, norms, and induced contraction estimates.",
+      "opened": true
+    },
+    {
+      "id": "prop-transpose-laws",
+      "used_for": "Symmetry and adjoint calculations in the projector and Poisson proofs.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Eigenbasis expansions for Richardson smoothing and the nonnegative symmetric two-grid operator.",
+      "opened": true
+    },
+    {
+      "id": "def-transpose-of-a-matrix",
+      "used_for": "Residual restriction in the recursive Galerkin cycle.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "The induced energy operator norm in the joint-estimate theorem.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Existence and attainment of the finite-dimensional operator-norm maximum.",
+      "opened": true
+    },
+    {
+      "id": "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+      "used_for": "The homogeneous weak Dirichlet test-space interface in the two Poisson examples.",
+      "opened": true
+    },
+    {
+      "id": "def-uniformly-elliptic-divergence-form-operator",
+      "used_for": "Specialization to the real Poisson form with a¹¹=1 and b=c=0.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "overlapping-schwarz-and-stable-subspace-decompositions",
+      "to": "multigrid-methods-and-complexity",
+      "faithful": true,
+      "note": "Checked the Schwarz data definition and its local-matrix and projection lemmas against the Galerkin definition and projector theorem. Full column rank and SPD hypotheses are retained. Schwarz correctly uses Π₀=I−C as the projection onto the coarse space, while C projects onto its energy-orthogonal complement. No reciprocal item citation was found in the assigned multigrid content."
+    },
+    {
+      "from": "nonlinear-full-approximation-multigrid",
+      "to": "multigrid-methods-and-complexity",
+      "faithful": true,
+      "note": "Checked the linear translation lemma and linear FAS reduction theorem, including the FAS procedure definitions, against the recursive Galerkin cycle. The consumer retains the SPD Galerkin hierarchy, transpose residual restriction, matching residual-correction smoothers, repeated coarse calls with fixed target, and exact base solves. The reduction does not import a general convergence claim. No reciprocal item citation was found in the assigned multigrid content."
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "67",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "alg-ale-upwind-finite-volume-step",
+      "model": "gpt-6-luna",
+      "context_sha256": "5f249f3028b7e871892d88e615d93f473e3c47eaeb06cf9a3a64b79970660a67",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Instruction 1 commands a face move before instruction 2 can reject it, contradicting the explicit requirement that all state updates follow the positivity check. For N=2, L=2, initial faces (0,1,2), reference width 1, time step 1 and periodic velocities (0,-2,0), the moved faces are (0,-1,2) with Jacobians (-1,3): the original instructions can change the mesh before returning mesh_crossing. This is a failure of the operational no-update contract, not of the conservative flux algebra. Repaired by computing trial mesh data without changing inputs, discarding them on failure, and accepting the mesh only on success.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-ale-upwind-finite-volume-step",
+      "disposition": "repaired",
+      "post_sha256": "ce53a2862c777b8ce3d1f984f3dfc1f9f91e3a36f663bd2ed4093e24be8b8849",
+      "review_context_sha256": "6f6144995ffd96c8da9fe034f78898e48336ee722baf960d780b3dc2fb04d891",
+      "reason": "Checked the complete Definition, periodic-grid prerequisite, well-definedness theorem, direct consumers and owning page. Finite trial computations preserve the input mesh and averages; a nonpositive Jacobian discards the trial data, while positivity makes every returned average uniquely defined by division. Periodic indexing, relative-speed fluxes, successful face positions and update equations are unchanged. The discrete GCL, flux telescoping, constant-state substitution and nonnegative-coefficient CFL argument remain valid. Updated the manifest Definition mirror and its three contract quotations under the shared-write lock. This is a repair review, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+    "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+    "ex-ale-expanding-mesh-free-stream"
+  ],
+  "downstream_uses": {
+    "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream": "items/thm-ale-upwind-step-conserves-mass-and-preserves-free-stream.md: Statement, F2 and proof 1.1 use the mesh_crossing/no-state branch; F2 and steps 1.2, 1.3 and 2.1 use the unchanged successful update. Trial computation followed by discard now directly supports the rejection claim. The finite arithmetic, telescoping flux sum and discrete-GCL constant preservation remain sound; no item edit required.",
+    "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl": "items/thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl.md: Statement and F2 assume success; proof 1.1 expands the same successful flux difference and 2.1 divides by the same positive Jacobian. Neither these coefficients nor the weighted column-sum argument in 3.1 changes. No item edit required.",
+    "ex-ale-expanding-mesh-free-stream": "items/ex-ale-expanding-mesh-free-stream.md: F2 and Verification 1.1-1.2 use the successful mesh and flux equations. Trial faces (0,1.01,2) yield positive Jacobians (1.01,0.99), so acceptance and all displayed arithmetic remain exactly valid. No item edit required."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-ale-upwind-finite-volume-step",
+      "locus": "Definition, instructions 1-2 and final state-update requirement",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "A commanded mesh move preceded the rejection branch despite the no-update contract. Explicit trial computation and discard now prevent any rejected mesh update; successful formulas and all direct consumer claims are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "interface_change": "The original Definition changed: instructions 1, 2 and 4 now distinguish trial computation, rejection without mutation and successful acceptance. No prerequisite, physical formula, admissible input or successful output claim was weakened.",
+    "metadata_repairs": [
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-67.pages.json: only this item’s statement mirror.",
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-67.proof-contracts.json: only the three citation quotes whose source is this algorithm; mathematical consumer carriers unchanged."
+    ],
+    "page_check": {
+      "path": "library/numerical-pdes-and-spatial-discretization/ale-interface-and-partitioned-multiphysics-discretization.md",
+      "affected_use": "The selected moving-grid paragraph says mesh_crossing is returned before updating the state when a new Jacobian is nonpositive.",
+      "disposition": "unchanged_sound",
+      "reason": "The repaired trial/discard branch now explicitly implements that page promise."
+    },
+    "consumer_inventory": "Search of current items and library pages found exactly the three listed direct item dependency/reference consumers and the owning page. All three are draft frozen-frontier items. No outside or published direct consumer was found; no separate maintenance repair is requested.",
+    "checks": [
+      {
+        "command": "node tools/proof-layout.mjs items/alg-ale-upwind-finite-volume-step.md",
+        "exit_code": 0,
+        "result": "1 items, 0 proof steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-ale-upwind-finite-volume-step.md --json",
+        "exit_code": 0,
+        "result": "not-applicable; 0 checked proofs, 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-ale-upwind-finite-volume-step.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-67.proof-contracts.json --strict --items thm-ale-upwind-step-conserves-mass-and-preserves-free-stream,thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl,ex-ale-expanding-mesh-free-stream --json",
+        "exit_code": 0,
+        "result": "All three selected contracts checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-analysis-remaining-71-2026-10-17 --items alg-ale-upwind-finite-volume-step",
+        "exit_code": 0,
+        "result": "Captured post_sha256 and review_context_sha256 immediately after the completed repair review and metadata reconciliation."
+      },
+      {
+        "command": "Exact mirror assertions after locked metadata edits",
+        "exit_code": 0,
+        "result": "Manifest statement and all three supplier quotations equal the current Definition."
+      }
+    ],
+    "source_evidence": "Local Definition and def-ale-periodic-moving-grid; complete direct-consumer arguments and lem-ale-periodic-face-motion-satisfies-discrete-gcl. No external source was consulted or claimed as read; the repair is finite arithmetic and procedural ordering.",
+    "published_ledger_updates": [],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, normal affected-consumer routing and independent current judgment; no judgments, certification or round state written by this worker."
+  }
+}

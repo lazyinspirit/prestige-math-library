@@ -1,0 +1,286 @@
+{
+  "group": "w",
+  "batches": [
+    "67"
+  ],
+  "pages_read": [
+    "ale-interface-and-partitioned-multiphysics-discretization",
+    "ale-interface-and-partitioned-multiphysics-discretization-examples"
+  ],
+  "items_read": [
+    "cor-ale-exact-splitting-residual-orders",
+    "def-ale-linear-diffusion-transmission-model",
+    "def-ale-moving-domain-map",
+    "def-ale-periodic-moving-grid",
+    "def-ale-toy-added-mass-recurrence",
+    "alg-ale-upwind-finite-volume-step",
+    "lem-ale-jacobi-geometric-conservation-identity",
+    "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+    "lem-ale-schur-complement-positive-and-minimizes-energy",
+    "thm-ale-monolithic-backward-euler-energy-identity",
+    "alg-ale-robin-robin-partitioned-iteration",
+    "lem-ale-schur-residual-controls-interface-energy-error",
+    "thm-ale-one-dimensional-reynolds-transport-identity",
+    "thm-ale-reynolds-transport-identity",
+    "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+    "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+    "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+    "ex-ale-added-mass-toy-recurrence-instability",
+    "ex-ale-expanding-mesh-free-stream",
+    "ex-ale-two-domain-heat-interface-flux-balance"
+  ],
+  "conventions": [
+    {
+      "convention": "The ALE map extends C² to a space-time neighborhood and is an orientation-preserving diffeomorphism on neighborhoods of the closures; J=det(DξA)>0 and mesh velocity is ∂tA composed with A⁻¹.",
+      "fixed_by": "def-ale-moving-domain-map",
+      "matters_for": [
+        "lem-ale-jacobi-geometric-conservation-identity",
+        "thm-ale-one-dimensional-reynolds-transport-identity",
+        "thm-ale-reynolds-transport-identity"
+      ]
+    },
+    {
+      "convention": "Dimension one uses finitely many intervals with pairwise disjoint closures and endpoint normals −1 on the left and +1 on the right. The higher-dimensional Reynolds theorem assumes Countable Choice and a transported finite piecewise-C¹ boundary presentation.",
+      "fixed_by": "thm-ale-reynolds-transport-identity",
+      "matters_for": [
+        "thm-ale-one-dimensional-reynolds-transport-identity",
+        "thm-ale-reynolds-transport-identity"
+      ]
+    },
+    {
+      "convention": "Faces are periodic modulo a fixed physical period L; J is physical cell width divided by Δξ. Relative speed is c=a−w, with c⁺=max(c,0) and c⁻=min(c,0).",
+      "fixed_by": "def-ale-periodic-moving-grid",
+      "matters_for": [
+        "alg-ale-upwind-finite-volume-step",
+        "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+        "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+        "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+        "ex-ale-expanding-mesh-free-stream"
+      ]
+    },
+    {
+      "convention": "A nonpositive new Jacobian returns mesh_crossing without an updated state. Conservation and constant preservation require success but no CFL condition; monotonicity and weighted L1 contraction additionally require the stated cellwise CFL bound.",
+      "fixed_by": "alg-ale-upwind-finite-volume-step",
+      "matters_for": [
+        "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+        "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+        "ex-ale-expanding-mesh-free-stream"
+      ]
+    },
+    {
+      "convention": "Both subdomains use the same real inner-product trace space Λ with dim Λ≥1. M_i and A_i are self-adjoint positive definite; outward algebraic flux is q_i=S_iλ_i−f_i, and monolithic coupling imposes equal traces and q_1+q_2=0.",
+      "fixed_by": "def-ale-linear-diffusion-transmission-model",
+      "matters_for": [
+        "lem-ale-schur-complement-positive-and-minimizes-energy",
+        "thm-ale-monolithic-backward-euler-energy-identity",
+        "alg-ale-robin-robin-partitioned-iteration",
+        "lem-ale-schur-residual-controls-interface-energy-error",
+        "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+        "ex-ale-two-domain-heat-interface-flux-balance"
+      ]
+    },
+    {
+      "convention": "Robin vector and operator norms use the specified trace inner product. The stop test measures r_1^{m+1}−r_1^m and returns λ_1^{m+1}; budget_exhausted carries no tolerance certificate.",
+      "fixed_by": "alg-ale-robin-robin-partitioned-iteration",
+      "matters_for": [
+        "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+        "ex-ale-two-domain-heat-interface-flux-balance"
+      ]
+    },
+    {
+      "convention": "The added-mass recurrence is stipulated only for positive scalar masses, starts at n=0, and is not asserted to describe general fluid-structure schemes.",
+      "fixed_by": "def-ale-toy-added-mass-recurrence",
+      "matters_for": [
+        "ex-ale-added-mass-toy-recurrence-instability"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-ale-linear-diffusion-transmission-model",
+      "statement": "On finite-dimensional real spaces X_i=I_i⊕Λ with dim Λ≥1, self-adjoint positive-definite M_i,A_i define B_i=Δt⁻¹M_i+A_i. Interior elimination gives outward flux q_i=S_iλ_i−f_i; common trace and flux balance give (S_1+S_2)λ=f_1+f_2.",
+      "used_by": [
+        "lem-ale-schur-complement-positive-and-minimizes-energy",
+        "thm-ale-monolithic-backward-euler-energy-identity",
+        "alg-ale-robin-robin-partitioned-iteration",
+        "lem-ale-schur-residual-controls-interface-energy-error",
+        "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+        "ex-ale-two-domain-heat-interface-flux-balance"
+      ]
+    },
+    {
+      "id": "lem-ale-schur-complement-positive-and-minimizes-energy",
+      "statement": "For a self-adjoint positive-definite block operator B=((K,C),(C*,D)) on a finite-dimensional real inner-product direct sum I⊕Λ, K and S=D−C*K⁻¹C are positive definite, and ⟨Sz,z⟩=min_x ⟨B(x,z),(x,z)⟩ for every z∈Λ.",
+      "used_by": [
+        "alg-ale-robin-robin-partitioned-iteration",
+        "lem-ale-schur-residual-controls-interface-energy-error",
+        "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+        "ex-ale-two-domain-heat-interface-flux-balance"
+      ]
+    },
+    {
+      "id": "def-ale-moving-domain-map",
+      "statement": "An ALE map is C² on a neighborhood of the reference space-time closure, each A_t is an orientation-preserving neighborhood diffeomorphism, J=det(DξA_t)>0, and w_m(x,t)=∂tA_t(A_t⁻¹(x)); the specified reference and transported boundary presentations are required.",
+      "used_by": [
+        "lem-ale-jacobi-geometric-conservation-identity",
+        "thm-ale-one-dimensional-reynolds-transport-identity",
+        "thm-ale-reynolds-transport-identity"
+      ]
+    },
+    {
+      "id": "lem-ale-jacobi-geometric-conservation-identity",
+      "statement": "For the ALE moving-domain map, ∂tJ(ξ,t)=J(ξ,t) div_x w_m(A_t(ξ),t).",
+      "used_by": [
+        "thm-ale-one-dimensional-reynolds-transport-identity",
+        "thm-ale-reynolds-transport-identity"
+      ]
+    },
+    {
+      "id": "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+      "statement": "Every cell satisfies J_i^{n+1}=J_i^n+(Δt/Δξ)(w_{i+1/2}^n−w_{i−1/2}^n).",
+      "used_by": [
+        "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream"
+      ]
+    },
+    {
+      "id": "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+      "statement": "For every admissible input the finite procedure returns mesh_crossing without a state if some new Jacobian is nonpositive, or success with a unique array otherwise. Successful steps conserve periodic weighted mass and preserve every constant state without a CFL condition.",
+      "used_by": [
+        "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+        "ex-ale-expanding-mesh-free-stream"
+      ]
+    },
+    {
+      "id": "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+      "statement": "For the specified positive Schur operators and α>0, all Robin solves exist uniquely and the algorithm terminates within M passes. Its unique fixed point corresponds to the monolithic trace; incoming errors propagate by R_2R_1 with norm bound q=||R_1||||R_2||<1. A passing stop test certifies ||λ_1^{m+1}−λ_*||≤ε.",
+      "used_by": [
+        "ex-ale-two-domain-heat-interface-flux-balance"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-additive-ode-and-partition",
+      "used_for": "Finite-dimensional autonomous additive ODE convention in the splitting corollary.",
+      "opened": true
+    },
+    {
+      "id": "def-exact-split-flows-lie-strang-and-bracket",
+      "used_for": "Exact Lie and Strang composition order and finite-dimensional scope.",
+      "opened": true
+    },
+    {
+      "id": "thm-lie-strang-global-orders-and-subflow-error",
+      "used_for": "Conditional global orders, separate approximate-subflow error budgets, and composed-map stability.",
+      "opened": true
+    },
+    {
+      "id": "def-jordan-inner-and-outer-content",
+      "used_for": "Jordan measurability convention for the reference closure.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Orthonormal diagonalization of positive Schur operators to bound Robin reflection norms.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit choice assumption in the higher-dimensional transport branch.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-piecewise-c-one-euclidean-domain",
+      "used_for": "Finite-face, null-edge boundary presentation and outward normals.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-compact-jordan-sets",
+      "used_for": "Compact Jordan image and pullback integral equality in both Reynolds proofs.",
+      "opened": true
+    },
+    {
+      "id": "thm-jordan-boundary-criterion",
+      "used_for": "Jordan measurability of open domains with content-zero boundaries.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-criterion-in-rn",
+      "used_for": "Integrability of zero extensions whose discontinuities lie on null boundaries.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Evaluation of the one-dimensional transport boundary term on each image interval.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+      "used_for": "Integrability of continuous pullbacks, derivatives, and difference quotients.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Uniform difference-quotient estimate before differentiating the reference-domain integral.",
+      "opened": true
+    },
+    {
+      "id": "def-riemann-integral-over-a-jordan-set",
+      "used_for": "Zero-extension definition of Jordan-domain integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-multidimensional-integral-properties",
+      "used_for": "Linearity, monotonicity, absolute-value bounds, and finite interval splitting.",
+      "opened": true
+    },
+    {
+      "id": "thm-jordan-content-and-indicator-integrability",
+      "used_for": "Zero integrals on content-zero boundaries and uniform-error integral bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Uniform continuity of the time derivative on compact reference space-time sets.",
+      "opened": true
+    },
+    {
+      "id": "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals",
+      "used_for": "Explicit Riemann-to-Lebesgue bridge before applying the divergence theorem.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+      "used_for": "Higher-dimensional boundary flux formula under Countable Choice.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "finding": "Step 2.1 says: “every $2\\times2$ block collapses to the scalar block $[a]$.” Setting b=0 makes the displayed 2×2 block equal to aI₂, retaining two coordinates; [a] denotes a 1×1 block. The subsequent diagonality and eigenbasis conclusions remain valid, but this block-size wording is inaccurate.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "ale-interface-and-partitioned-multiphysics-discretization",
+      "to": "energy-stable-incompressible-navier-stokes-discretization",
+      "faithful": true,
+      "note": "Checked both page texts and the assigned items' direct dependencies. This is a contextual reading prerequisite: the ALE page imports no Navier–Stokes existence, pressure, or discretization estimate and explicitly excludes nonlinear moving-domain fluid-structure well-posedness."
+    },
+    {
+      "from": "ale-interface-and-partitioned-multiphysics-discretization",
+      "to": "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "faithful": true,
+      "note": "Checked both page texts and direct dependencies. The ALE page independently defines its smooth map and selected one-dimensional grid; it explicitly asserts no curved-mesh transfer rate or high-dimensional discrete GCL estimate. No converse mathematical dependence appears."
+    },
+    {
+      "from": "ale-interface-and-partitioned-multiphysics-discretization",
+      "to": "elasticity-near-incompressibility-and-locking-free-discretization",
+      "faithful": true,
+      "note": "Checked both page texts and direct dependencies. The finite-dimensional diffusion model and stipulated added-mass recurrence import no elasticity or locking-free theorem. The supplier's Dirichlet and free-body branches remain separate from these ALE claims; no converse mathematical dependence appears."
+    }
+  ]
+}

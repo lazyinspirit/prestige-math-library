@@ -1,0 +1,40 @@
+--- authenticated-reader-pre/lem-fehmm-micro-cell-solves-wellposedness.md
++++ final-current/lem-fehmm-micro-cell-solves-wellposedness.md
+@@ -15,6 +15,9 @@
+   - lem-unit-cube-h01-separability-and-l2-compactness
+   - thm-matching-continuous-piecewise-polynomials-are-wkp
+   - thm-zero-boundary-piecewise-polynomials-in-w10p
++  - lem-affine-simplex-gauss-green-formula
++  - lem-oriented-facet-cancellation-on-matching-meshes
++  - thm-fourier-basis-and-parseval-on-the-n-torus
+   - thm-lax-milgram
+   - thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost
+   - def-countable-choice
+@@ -41,7 +44,7 @@
+ 
+ **Given:** The coefficient bound, full periodic cell space, finite-dimensional periodic P1 subspace, periodic gradients of mean zero, zero-boundary macro space, and real Lax--Milgram.
+ 
+-[F1] [[alg-fehmm-periodic-cell-micro-macro]]: $W_{\mathcal M}$ is finite-dimensional and is a subspace of $V_\#$; $b_K(y)=a(x_K/\epsilon+ry)$.
++[F1] [[alg-fehmm-periodic-cell-micro-macro]]: $W_{\mathcal M}$ consists of mean-zero periodic $H^1_\#(Y)$ classes with continuous piecewise-affine representatives, and $b_K(y)=a(x_K/\epsilon+ry)$.
+ 
+ [F2] [[def-periodic-zero-mean-cell-space]] and [[lem-periodic-cell-poincare]]: $V_\#$ is a Hilbert space in the gradient norm and $\int_Y\nabla v=0$ for every $v\in V_\#$.
+ 
+@@ -55,13 +58,17 @@
+ 
+ [F7] [[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]: backward substitution on a real upper-triangular matrix with nonzero diagonal returns its unique solution in finitely many steps.
+ 
++[F8] [[lem-affine-simplex-gauss-green-formula]] and [[lem-oriented-facet-cancellation-on-matching-meshes]]: cellwise integration by parts holds and matching interior-facet terms cancel.
++
++[F9] [[thm-fourier-basis-and-parseval-on-the-n-torus]]: trigonometric polynomials are complete in $L^2(Y)$ and Parseval holds componentwise.
++
+ [A1] [[def-countable-choice]]: the periodic Sobolev and Hilbert conventions use Countable Choice; no stronger axiom is required here.
+ 
+ ## Proof
+ 
+ 
+ 
+-1.1 On the finite periodic micro triangulation, a continuous P1 function is determined by its nodal values, with opposite-edge vertices identified. The periodic nodal hats therefore form a basis of the full periodic P1 space. Each hat is nonnegative and positive on an incident triangle, so $m_i=\int_Y\phi_i>0$. A nodal combination $\sum_i c_i\phi_i$ has zero mean exactly when $\sum_i m_ic_i=0$; solving this constraint for $c_1$ shows that the $\psi_i$ defined in the algorithm form a basis of $W_{\mathcal M}$ (and when $N=1$ that space is zero). For fixed $K,p$, on $V_\#$ define $c_K(u,v)=\int_Yb_K\nabla u\cdot\nabla v$ and $F_{K,p}(v)=-\int_Yb_Kp\cdot\nabla v$. The bounds [F3] give $|c_K(u,v)|\le\Lambda\|\nabla u\|_2\|\nabla v\|_2$, $c_K(v,v)\ge\lambda\|\nabla v\|_2^2$, and $|F_{K,p}(v)|\le\Lambda|p|\|\nabla v\|_2$. By [F2], [F4] gives a unique solution $w_{K,p}$. The finite-dimensional gradient inner product is positive definite on $W_{\mathcal M}$ because it is a subspace of the mean-zero space $V_\#$; hence it is complete and the same boundedness and coercivity estimates give the unique $w^h_{K,p}$ by [F4]. Testing its equation with each basis function $\psi_i$ gives exactly the matrix system $G^Kc=r^K_{\cdot,p}$ from the algorithm. Its matrix is symmetric positive definite since, for each nonzero coefficient vector, the corresponding $z_h\ne0$ in $W_{\mathcal M}$ has $\int_Yb_K|\nabla z_h|^2>0$. [F3, F2, F4, F1, A1, algebra]
++1.1 Every continuous periodic P1 nodal hat $\phi_i$ on $\mathcal M$ is in $H^1(Y)$ by the conforming piecewise-polynomial theorem in [F5]. For each coordinate $0\le j<2$ and Fourier mode $k\in\mathbb Z^2$, apply [F8] on each triangle to $\phi_i(y)e^{-2\pi i k\cdot y}$. Interior-edge terms cancel by matching traces; opposite boundary-edge terms cancel because $\phi_i$ is periodic and $k$ is integral. Thus $\widehat{\partial_j\phi_i}(k)=2\pi i k_j\widehat\phi_i(k)$. Parseval [F9] applied to $\phi_i$ and its two weak derivatives shows that symmetric Fourier partial sums converge in $H^1(Y)$; they are real smooth periodic trigonometric polynomials, so $\phi_i\in H^1_\#(Y)$. The periodic nodal hats form a basis of the full periodic P1 space because a continuous P1 function is determined by its nodal values, with opposite-edge vertices identified. Each hat is nonnegative and positive on an incident triangle, so $m_i=\int_Y\phi_i>0$. A nodal combination $\sum_i c_i\phi_i$ has zero mean exactly when $\sum_i m_ic_i=0$; solving this constraint for $c_1$ shows that the $\psi_i$ defined in the algorithm form a basis of $W_{\mathcal M}$ (and when $N=1$ that space is zero). For fixed $K,p$, on $V_\#$ define $c_K(u,v)=\int_Yb_K\nabla u\cdot\nabla v$ and $F_{K,p}(v)=-\int_Yb_Kp\cdot\nabla v$. The bounds [F3] give $|c_K(u,v)|\le\Lambda\|\nabla u\|_2\|\nabla v\|_2$, $c_K(v,v)\ge\lambda\|\nabla v\|_2^2$, and $|F_{K,p}(v)|\le\Lambda|p|\|\nabla v\|_2$. By [F2], [F4] gives a unique solution $w_{K,p}$. The finite-dimensional gradient inner product is positive definite on $W_{\mathcal M}$ because it is a subspace of the mean-zero space $V_\#$; hence it is complete and the same boundedness and coercivity estimates give the unique $w^h_{K,p}$ by [F4]. Testing its equation with each basis function $\psi_i$ gives exactly the matrix system $G^Kc=r^K_{\cdot,p}$ from the algorithm. Its matrix is symmetric positive definite since, for each nonzero coefficient vector, the corresponding $z_h\ne0$ in $W_{\mathcal M}$ has $\int_Yb_K|\nabla z_h|^2>0$. [F3, F2, F4, F5, F8, F9, F1, A1, algebra]
+ 
+ 2.1 Each solution is linear in $p$ by uniqueness. For either space $X=V_\#$ or $X=W_\mathcal M$, the variational equation says $w_{K,p}^X$ minimizes $J_{K,p}(z)=\int_Yb_K|p+\nabla z|^2$ over $X$: expanding at the solution cancels the cross term and leaves $\int b_K|\nabla(z-w)|^2\ge0$. For $p,q$, testing the $q$ equation with $w_{K,p}^X$ shows $p\cdot A_K^Xq=\int_Yb_K(p+\nabla w_{K,p}^X)\cdot(q+\nabla w_{K,q}^X),$ so the tensor is symmetric. Since $\int_Y\nabla w_{K,p}^X=0$ by [F2], Jensen gives $J_{K,p}(w_{K,p}^X)\ge\lambda|p|^2$; the competitor zero gives it at most $\Lambda|p|^2$. [F2, F3, step 1.1, algebra]
+ 

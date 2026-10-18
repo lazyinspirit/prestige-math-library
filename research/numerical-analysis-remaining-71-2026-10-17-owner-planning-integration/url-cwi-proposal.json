@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "kind": "read-only-cwi-url-repair-proposal",
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "recorded_at": "2026-10-17T22:03:53.682083+00:00",
+  "scope": [
+    "https://ir.cwi.nl/pub/11604/11604.pdf",
+    "https://ir.cwi.nl/pub/11604/11604C.pdf",
+    "https://ir.cwi.nl/pub/11604/Fulltext.pdf"
+  ],
+  "finding": "All three blocking CWI PDFs are tried-only candidates in top-level source_resolution_history[0].attempts, not active sources. This is evidence misclassification in metadata, not loss of an assigned cited full text.",
+  "coverage_occurrences": [
+    {
+      "file": "research/numerical-analysis-remaining-71-2026-10-17-batch-25.coverage.json",
+      "json_pointer": "/source_resolution_history/0/attempts/0/url",
+      "url": "https://ir.cwi.nl/pub/11604/Fulltext"
+    },
+    {
+      "file": "research/numerical-analysis-remaining-71-2026-10-17-batch-25.coverage.json",
+      "json_pointer": "/source_resolution_history/0/attempts/1/url",
+      "url": "https://ir.cwi.nl/pub/11604/11604.pdf"
+    },
+    {
+      "file": "research/numerical-analysis-remaining-71-2026-10-17-batch-25.coverage.json",
+      "json_pointer": "/source_resolution_history/0/attempts/2/url",
+      "url": "https://ir.cwi.nl/pub/11604/11604C.pdf"
+    },
+    {
+      "file": "research/numerical-analysis-remaining-71-2026-10-17-batch-25.coverage.json",
+      "json_pointer": "/source_resolution_history/0/attempts/3/url",
+      "url": "https://ir.cwi.nl/pub/11604/Fulltext.pdf"
+    }
+  ],
+  "active_source_evidence": {
+    "file": "research/numerical-analysis-remaining-71-2026-10-17-batch-25.coverage.json",
+    "page": "stable-special-function-recurrences-and-certified-evaluation",
+    "sources_count": 29,
+    "cwi_11604_active_sources": 0,
+    "actual_independent_treatment": {
+      "title": "N. M. Temme, \u201cNumerical aspects of special functions,\u201d Acta Numerica 17 (2008), pp. 1\u2013101; complete CWI author deposit",
+      "url": "https://ir.cwi.nl/pub/11612/11612C.pdf",
+      "fetch_verified": {
+        "at": "2026-10-17T12:19:09.919Z",
+        "bytes": 740560,
+        "sha256_16": "fced3b18143591fb",
+        "kind": "pdf",
+        "pages": 101
+      }
+    },
+    "reading_record": "research/numerical-analysis-remaining-71-2026-10-17-batch-25.notes.md:23,33,35; explicitly records no book reading and successful alternative source reading"
+  },
+  "gate_rules": {
+    "tools/url-sweep.mjs": "Coverage JSON is recursively collected via citationUrls(value,{coverage:true}); only active page.sources generate fetchedByUrl stamps. Thus an URL in unrelated metadata has no fetch exemption even when actual source backing passes. Superseded exclusions concern actual source.original_url and archived_fallback.snapshot and do not apply here.",
+    "tools/citation-urls.mjs": "Coverage walk skips keys starting historical_ and exact checks, recovery_attempts, source_resolution. source_resolution_history is not skipped.",
+    "tools/source-resolution.mjs": "A documented source drop requires an actual source record and full owner/scaffolder decision with six attempts, searches and any included/inline alternative arguments. Do not fabricate such a record for tried-only metadata.",
+    "tools/source-fulltext.mjs": "Dead rows block only without previously_fetched; no book fetch stamp exists and none should be fabricated."
+  },
+  "preferred_guarded_edit": {
+    "file": "research/numerical-analysis-remaining-71-2026-10-17-batch-25.coverage.json",
+    "guards": [
+      {
+        "op": "test",
+        "path": "/source_resolution_history",
+        "value": [
+          {
+            "source": "Gil, Segura, and Temme, Numerical Methods for Special Functions (SIAM, 2007)",
+            "planned_reference": "The stale plan-spec DOI 10.1002/9781118833050 is not the SIAM book DOI.",
+            "verified_reference": "https://doi.org/10.1137/1.9780898717822",
+            "attempts": [
+              {
+                "url": "https://ir.cwi.nl/pub/11604/Fulltext",
+                "at": "2026-10-17T12:18:09Z",
+                "outcome": "CWI repository Free Full Text link redirected to the SIAM publisher and the web reader rejected the redirect; no book text was read."
+              },
+              {
+                "url": "https://ir.cwi.nl/pub/11604/11604.pdf",
+                "at": "2026-10-17T12:18:09Z",
+                "outcome": "Direct candidate was not accessible through the reader."
+              },
+              {
+                "url": "https://ir.cwi.nl/pub/11604/11604C.pdf",
+                "at": "2026-10-17T12:18:09Z",
+                "outcome": "Direct candidate was not accessible through the reader."
+              },
+              {
+                "url": "https://ir.cwi.nl/pub/11604/Fulltext.pdf",
+                "at": "2026-10-17T12:18:09Z",
+                "outcome": "Direct candidate was not accessible through the reader."
+              }
+            ],
+            "searches": [
+              {
+                "query": "Numerical Methods for Special Functions full text SIAM DOI and CWI repository",
+                "outcome": "Located the CWI publication record, corrected SIAM DOI, and its Free Full Text redirect; publisher chapter retrieval attempts in the earlier run history returned cache-miss/403 and the alternative UJ mirror returned DNS/502."
+              },
+              {
+                "query": "full text lecture notes or survey for numerical special functions, Bessel, Airy, Gamma, and erf",
+                "outcome": "Found and read the complete 101-page CWI deposit of Temme\u2019s independent Acta Numerica survey, plus the NIST Handbook/DLMF full-text sections listed above."
+              }
+            ],
+            "disposition": "The unavailable SIAM book is not claimed as read or used as unique support. The full NIST Handbook/DLMF and the full Temme Acta Numerica survey provide the two independent treatments; all finite proofs and bounds are local."
+          }
+        ]
+      },
+      {
+        "op": "assert-absent",
+        "path": "/historical_source_resolution"
+      }
+    ],
+    "edit": {
+      "op": "move",
+      "from": "/source_resolution_history",
+      "path": "/historical_source_resolution"
+    },
+    "reason": "Classify the entire existing diagnostic history under the collector's supported historical_ namespace. Preserve its full value without modifications, including source identity, corrected DOI, failed retrievals, searches and explicit no-book-reading disposition.",
+    "coordination": "This also correctly classifies the same history's DOI https://doi.org/10.1137/1.9780898717822 and live /Fulltext candidate as historical metadata. Coordinate with any DOI repair proposal; this is not a new book source replacement."
+  },
+  "more_narrow_alternative": {
+    "when": "If owner prefers to repair only the CWI candidate list and leave same-book DOI history to its assigned owner. Do not combine with preferred edit.",
+    "file": "research/numerical-analysis-remaining-71-2026-10-17-batch-25.coverage.json",
+    "guards": [
+      {
+        "op": "test",
+        "path": "/source_resolution_history/0/attempts",
+        "value": [
+          {
+            "url": "https://ir.cwi.nl/pub/11604/Fulltext",
+            "at": "2026-10-17T12:18:09Z",
+            "outcome": "CWI repository Free Full Text link redirected to the SIAM publisher and the web reader rejected the redirect; no book text was read."
+          },
+          {
+            "url": "https://ir.cwi.nl/pub/11604/11604.pdf",
+            "at": "2026-10-17T12:18:09Z",
+            "outcome": "Direct candidate was not accessible through the reader."
+          },
+          {
+            "url": "https://ir.cwi.nl/pub/11604/11604C.pdf",
+            "at": "2026-10-17T12:18:09Z",
+            "outcome": "Direct candidate was not accessible through the reader."
+          },
+          {
+            "url": "https://ir.cwi.nl/pub/11604/Fulltext.pdf",
+            "at": "2026-10-17T12:18:09Z",
+            "outcome": "Direct candidate was not accessible through the reader."
+          }
+        ]
+      },
+      {
+        "op": "assert-absent",
+        "path": "/source_resolution_history/0/recovery_attempts"
+      }
+    ],
+    "edit": {
+      "op": "move",
+      "from": "/source_resolution_history/0/attempts",
+      "path": "/source_resolution_history/0/recovery_attempts"
+    },
+    "reason": "The collector explicitly skips recovery_attempts. Preserve all four recorded retrieval attempts verbatim, leaving source identity, DOI, searches and disposition where they are."
+  },
+  "existing_native_evidence": {
+    "findings": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step1-first-battery-complete-findings.json",
+    "url_liveness": "research/numerical-analysis-remaining-71-2026-10-17-url-liveness.json",
+    "cwi_rows": "All three are HTTP 404, error null, recovered null; /Fulltext is 200.",
+    "source_backing": "Native first battery passed: 677 authored results across 71 files backed by openable source or documented alternative argument.",
+    "source_fetch": "Native first battery passed: 430/444 fetch-verified, 444/444 resolved including 14 documented drops."
+  },
+  "preserve_unchanged": [
+    "all page.sources, their source identities, contents and fetch_verified stamps",
+    "all source reading claims and actual successful substitute attribution",
+    "all existing recovery attempts and search outcomes",
+    "archived native findings and first battery liveness results",
+    "canonical items, manifests, code and workflow rules"
+  ],
+  "uncertainty": [
+    "No fresh network/source read is necessary to classify tried-only history; no new liveness or full-text availability claim is made.",
+    "The complete existing history says the SIAM book was not used as unique support; this proposal relies on that genuine recorded author evidence and does not independently review the special-function mathematics.",
+    "No test, validator, gate, source-fetch command, canonical/coverage/manifest/code edit or hash calculation was performed. Root owns application, hashing and later recertification."
+  ]
+}

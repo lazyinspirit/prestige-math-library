@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "3",
+  "round": 0,
+  "reviewed_items": [
+    "alg-de-boor-coefficient-evaluation",
+    "alg-single-new-b-spline-knot-insertion",
+    "def-clamped-cubic-spline-interpolant",
+    "lem-natural-cubic-spline-second-derivative-perturbation",
+    "lem-b-spline-basis-refinement-under-single-knot-insertion",
+    "thm-de-boor-coefficient-evaluation-equivalence",
+    "thm-de-boor-coefficient-evaluation-work",
+    "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+    "thm-natural-cubic-spline-tridiagonal-residual-transfer",
+    "thm-de-boor-forward-error-under-operationwise-model",
+    "thm-single-new-knot-insertion-preserves-b-spline-curve",
+    "thm-clamped-cubic-spline-fourth-order-error",
+    "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+    "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+    "thm-computed-natural-cubic-spline-forward-error-certificate",
+    "ex-repeated-knot-de-boor-evaluation",
+    "ex-natural-cubic-x-squared-endpoint-caveat",
+    "ex-single-new-knot-insertion-preserves-linear-curve"
+  ],
+  "reviewed_pages": [
+    "spline-evaluation-and-interpolation-algorithms",
+    "spline-evaluation-and-interpolation-algorithms-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch review found three locally resolvable issues. The substantive arguments and checked cross-frontier consumers otherwise stand.",
+  "findings": [
+    {
+      "id": "thm-clamped-cubic-spline-fourth-order-error",
+      "type": "prerequisite",
+      "reason": "Steps 1.1–1.2 use lem-taylor-integral-remainder, whose home page outward-rounded-interval-and-ball-arithmetic is outside APP-SPLINE’s approved page prerequisites. Replace it with cor-taylor-remainder-bound, reachable through the required polynomial-interpolation-and-remainder → darboux-lhopital-and-taylor pages; its n=1, 2, and 3 cases supply the same bounds used here. The theorem statement need not change."
+    },
+    {
+      "id": "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+      "type": "local",
+      "reason": "The algorithm returns success( M̂, C, α, β, B ); it computes ŵ internally and returns M̂ rather than a separate m̂. Clarify that m̂ is extracted from M̂ and ŵ is computed, not returned. The residual bound itself is sound."
+    },
+    {
+      "id": "thm-computed-natural-cubic-spline-forward-error-certificate",
+      "type": "local",
+      "reason": "The theorem calls H and δ returned by the algorithm, but its success tuple omits them; they are computed internally to form B. Describe them as computed certificate quantities. The error bound remains sound."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-computed-natural-cubic-spline-forward-error-certificate",
+      "decision": "repair",
+      "reason": "Direct consumer of the residual-certificate theorem; its own H and δ output wording also needs correction."
+    },
+    {
+      "id": "spline-evaluation-and-interpolation-algorithms",
+      "decision": "accept",
+      "reason": "Its summary accurately describes the computed residual and returned B; it does not claim the internal residual vector, H, or δ are returned."
+    },
+    {
+      "id": "spline-evaluation-and-interpolation-algorithms-examples",
+      "decision": "accept",
+      "reason": "The examples use the unchanged theorem claims and their checked supplier assumptions."
+    },
+    {
+      "id": "ex-natural-cubic-x-squared-endpoint-caveat",
+      "decision": "accept",
+      "reason": "Its use of the clamped error theorem remains valid; the proposed Taylor supplier substitution does not change that theorem’s statement."
+    },
+    {
+      "id": "thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry",
+      "decision": "accept",
+      "reason": "The new-knot span hypotheses imply 0 < αᵢ < 1 on every blended index, and the curve-preservation supplier applies to the homogeneous vector controls."
+    },
+    {
+      "id": "def-isogeometric-galerkin-patch-space-and-refinement",
+      "decision": "accept",
+      "reason": "Its h-refinement definition correctly uses the insertion procedure and the homogeneous preservation result."
+    },
+    {
+      "id": "ex-isogeometric-k-refinement-of-the-identity-patch",
+      "decision": "accept",
+      "reason": "The identity-patch calculation, knot-preservation use, and C¹ conclusion from the published basis theorem are supported."
+    },
+    {
+      "id": "isogeometric-galerkin-methods",
+      "decision": "accept",
+      "reason": "Its APP-SPLINE page dependency and NURBS consumers use the checked knot-insertion claims consistently."
+    },
+    {
+      "id": "shape-preserving-piecewise-polynomial-interpolation",
+      "decision": "accept",
+      "reason": "Its declared page dependency on APP-SPLINE introduces no unsupported use of the assigned item claims."
+    }
+  ]
+}

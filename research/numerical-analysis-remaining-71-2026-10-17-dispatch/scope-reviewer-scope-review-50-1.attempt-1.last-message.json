@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "50",
+  "round": 1,
+  "reviewed_items": [
+    "def-pe26-scalar-substructuring-model",
+    "lem-pe26-preconditioned-operator-norm-bound",
+    "thm-pe26-local-energy-kernel-and-interior-spd",
+    "def-pe26-primal-interface-spaces-and-jumps",
+    "thm-pe26-primal-constraints-remove-floating-kernels",
+    "def-pe26-discrete-harmonic-extension-and-schur-complement",
+    "thm-pe26-harmonic-extension-minimizes-energy",
+    "thm-pe26-static-condensation-is-exact-interface-solve",
+    "def-pe26-scaled-averaging-and-bddc-preconditioner",
+    "prop-pe26-bddc-constrained-local-minimization",
+    "def-pe26-feti-dp-dual-system-and-preconditioner",
+    "lem-pe26-discrete-trace-schur-equivalence",
+    "prop-pe26-feti-dp-is-dual-schur-complement",
+    "lem-pe26-complementary-primal-dual-spectrum",
+    "lem-pe26-log-edge-cutoff-and-discrete-sobolev",
+    "rem-pe26-conditioning-and-work-are-separate",
+    "thm-pe26-nontrivial-spectrum-bddc-feti-dp",
+    "lem-pe26-scaled-averaging-energy-bound",
+    "thm-pe26-condition-number-2d-polylogarithmic",
+    "ex-pe26-missing-primal-corner",
+    "ex-pe26-two-floating-poisson-subdomains",
+    "ex-pe26-matching-primal-dual-spectrum",
+    "ex-pe26-coarse-solve-work-bottleneck"
+  ],
+  "reviewed_pages": [
+    "substructuring-feti-dp-and-bddc-preconditioners",
+    "substructuring-feti-dp-and-bddc-preconditioners-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The seven prior findings are repaired, and the listed consumers of the revised Schur definition were checked. A separate unresolved prerequisite gap in the primal-constraints theorem prevents acceptance on this final review.",
+  "findings": [
+    {
+      "id": "thm-pe26-primal-constraints-remove-floating-kernels",
+      "type": "prerequisite",
+      "reason": "Step 1.2 uses the partially assembled energy and says zero energy makes each local extension constant, but the theorem does not depend on def-pe26-discrete-harmonic-extension-and-schur-complement, the assigned definition of H_i, S_i, and tilde S. Its current Facts & Assumptions only supply local energy kernels and interface spaces. The missing prerequisite is needed to relate zero tilde-S energy to local harmonic-extension energy. This SPD claim is consumed directly by def-pe26-scaled-averaging-and-bddc-preconditioner, def-pe26-feti-dp-dual-system-and-preconditioner, prop-pe26-bddc-constrained-local-minimization, prop-pe26-feti-dp-is-dual-schur-complement, and ex-pe26-two-floating-poisson-subdomains; downstream consumers include lem-pe26-scaled-averaging-energy-bound, lem-pe26-complementary-primal-dual-spectrum, thm-pe26-nontrivial-spectrum-bddc-feti-dp, thm-pe26-condition-number-2d-polylogarithmic, rem-pe26-conditioning-and-work-are-separate, ex-pe26-matching-primal-dual-spectrum, and ex-pe26-coarse-solve-work-bottleneck. Escalating because this is the second review."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-pe26-feti-dp-dual-system-and-preconditioner",
+      "decision": "accept",
+      "reason": "Its use of the revised interface spaces, inclusion, and Schur operator is consistent; the separate anchoring-theorem gap is reported above."
+    },
+    {
+      "id": "def-pe26-scaled-averaging-and-bddc-preconditioner",
+      "decision": "accept",
+      "reason": "Its use of the revised interface spaces and partial Schur operator is consistent; the separate anchoring-theorem gap is reported above."
+    },
+    {
+      "id": "ex-pe26-coarse-solve-work-bottleneck",
+      "decision": "accept",
+      "reason": "Its use of the revised definitions and fixed-geometry condition estimate is consistent."
+    },
+    {
+      "id": "ex-pe26-matching-primal-dual-spectrum",
+      "decision": "accept",
+      "reason": "Its finite-dimensional projection and Schur-operator calculations remain consistent with the revised definition."
+    },
+    {
+      "id": "ex-pe26-two-floating-poisson-subdomains",
+      "decision": "accept",
+      "reason": "The full exterior-side condition and harmonic-Schur use are consistent; the separate anchoring-theorem gap is reported above."
+    },
+    {
+      "id": "lem-pe26-complementary-primal-dual-spectrum",
+      "decision": "accept",
+      "reason": "Its complementary projection identities remain valid with the clarified inclusion."
+    },
+    {
+      "id": "lem-pe26-discrete-trace-schur-equivalence",
+      "decision": "accept",
+      "reason": "Its Schur-energy use is consistent, and the trace and boundary-preserving lifting arguments are supplied."
+    },
+    {
+      "id": "lem-pe26-log-edge-cutoff-and-discrete-sobolev",
+      "decision": "accept",
+      "reason": "Its trace-Schur use and completed cutoff and discrete Sobolev arguments are consistent."
+    },
+    {
+      "id": "lem-pe26-scaled-averaging-energy-bound",
+      "decision": "accept",
+      "reason": "Its coefficient-weighted Schur-energy conversion retains the required rho factors."
+    },
+    {
+      "id": "prop-pe26-bddc-constrained-local-minimization",
+      "decision": "accept",
+      "reason": "Its partial-energy minimization argument is consistent with the revised BDDC definition; the separate anchoring-theorem gap is reported above."
+    },
+    {
+      "id": "prop-pe26-feti-dp-is-dual-schur-complement",
+      "decision": "accept",
+      "reason": "Its constrained dual-system use is consistent with the revised spaces and operators; the separate anchoring-theorem gap is reported above."
+    },
+    {
+      "id": "rem-pe26-conditioning-and-work-are-separate",
+      "decision": "accept",
+      "reason": "Its exact-solver and preconditioner references remain consistent with the revised definitions."
+    },
+    {
+      "id": "thm-pe26-condition-number-2d-polylogarithmic",
+      "decision": "accept",
+      "reason": "The scalar-model dependency and FETI operator-order similarity argument are present; the separate anchoring-theorem gap is reported above."
+    },
+    {
+      "id": "thm-pe26-harmonic-extension-minimizes-energy",
+      "decision": "accept",
+      "reason": "Its harmonic-extension and Schur-energy uses remain consistent with the clarified spaces."
+    },
+    {
+      "id": "thm-pe26-nontrivial-spectrum-bddc-feti-dp",
+      "decision": "accept",
+      "reason": "Its product identifications and projection identities remain consistent with the revised definitions."
+    },
+    {
+      "id": "thm-pe26-static-condensation-is-exact-interface-solve",
+      "decision": "accept",
+      "reason": "The local-to-global load assembly convention and interface reduction are explicit."
+    },
+    {
+      "id": "substructuring-feti-dp-and-bddc-preconditioners",
+      "decision": "accept",
+      "reason": "The page summary matches the reviewed scope and revised Schur-complement definition."
+    },
+    {
+      "id": "substructuring-feti-dp-and-bddc-preconditioners-examples",
+      "decision": "accept",
+      "reason": "The example summary matches the reviewed examples, including the corrected exterior Dirichlet side."
+    }
+  ]
+}

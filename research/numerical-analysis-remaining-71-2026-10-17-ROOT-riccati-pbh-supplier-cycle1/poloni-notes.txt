@@ -1,0 +1,2882 @@
+PAGE 1
+Lecture notes
+Federico Poloni
+1
+Introduction
+Riccati-type matrix equations are a family of matrix equations that appears
+very frequently in literature and applications, especially in systems theory. One
+of the reasons why they are so ubiquitous is that they are equivalent to certain
+invariant subspace problems; this equivalence connects them to a larger part of
+numerical linear algebra, and opens up avenues for many solution algorithms.
+Many books (and even more articles) have been written on these equations;
+among them, we recall the classical monography by Lancaster and Rodman [56],
+a review book edited by Bittanti, Laub and Willems [22], various treatises which
+consider them from different points of view such as [1, 4, 5, 19, 24, 34, 50, 64],
+and recently also a book devoted specifically to doubling [49].
+This vast theory can be presented from different angles; in this exposition,
+we aim to present a selection of topics which differs from that of the other
+books and treatises, and focuses on computational linear algebra. In addition
+to other more common algorithm, we try to introduce doubling algorithms with
+a direct approach, explaining in particular that they arise as ‘doubling variants’
+of other more basic iterations, and detailing how they are related to the subspace
+iteration, to ADI, to cyclic reduction and to Schur complements. We do not
+treat algorithms and equations with the greatest generality possible, to reduce
+technicalities.
+1.1
+Example: heating a long corridor
+The main application behind these equations is so-called control theory, a pop-
+ular field in engineering. The idea behind this is altering the behavior of certain
+linear dynamical systems using an additional input.
+Consider a very long and thin corridor with a radiator at one end and an
+open window at the other. We can model it as the segment [0, 1]; the endpoint
+1 (window) is at constant temperature 0◦C, and the endpoint 0 (radiator) is at
+a temperature u(t) that we can choose by turning a valve.
+We discretize the space: x(t) is the vector of temperatures at equi-spaced
+points h, 2h, . . . , (n−1)h (the temperatures at 0 and (n+1)h = 1 are prescribed).
+We get
+d
+dtx(t) = Ax(t) + bu(t),
+with A = αh2 tridiag(1, −2, 1) and b = αh2e1.
+1
+
+PAGE 2
+2 Stein equations
+2
+This is a first example of a linear control system: we are given a target
+temperature xF at each point of the room, and we want to choose u(t) so that
+we reach it.
+If left to itself at temperature u(t) = 0, this system is stable: all the eigen-
+values of A are in the left half-plane, so the temperature will (slowly) converge
+to zero.
+This dynamical system is in continuous time, but we can also formulate a
+variant in discrete time; it takes the form
+xk+1 = Axk + buk.
+Some formulas are simpler to state and prove in discrete time, but modelling
+often naturally produces continuous-time linear systems; so we see a litle bit of
+both here.
+In the following, we use the notation A ≻B (resp. A ⪰B) to mean that
+A −B is positive definite (resp. semidefinite) (Loewner order). We use ρ(M)
+to denote the spectral radius of M, the symbol LHP = {z ∈C : Re(z) <
+0} to denote the (open) left half-plane, and RHP for the (open) right half-
+plane. We use the notation Λ(M) to denote the spectrum of M, i.e., the set
+of its eigenvalues.
+We use M ∗to denote the conjugate transpose, and M ⊤
+to denote the transpose without conjugation, which appears when combining
+vectorizations and Kronecker products with the identity vec(MXN) = (N ⊤⊗
+M) vec(X) [41, Sections 1.3.6–1.3.7].
+2
+Stein equations
+The simplest matrix equation that we consider is the Stein equation (or discrete-
+time Lyapunov equation).
+X −A∗XA = Q,
+Q = Q∗⪰0,
+(1)
+for A, X, Q ∈Cn×n. Here X is the unknown, while A and Q are given.
+2.1
+Relation to dynamical systems
+Consider the discrete-time constant-coefficient linear dynamical system
+xk+1 = Axk,
+x0 ∈Cn.
+(2)
+We know that xk = Akx0, and that limk→∞xk = 0 if and only if ρ(A) < 1.
+One of the classical uses for the Stein equation is proving that the dynamical
+system is stable without having to compute an eigendecomposition (at the time
+of Lyapunov, no computers existed!). Indeed, the following result holds.
+Lemma 1. Let Q ≻0, and suppose that the Stein equation (1) has solution
+X ≻0. Then, ρ(A) < 1.
+
+PAGE 3
+2 Stein equations
+3
+Proof. Let Av = vλ be an eigenpair of A. Then, we have
+v∗Qv = v∗(X −A∗XA)v = (1 −λλ)v∗Xv.
+Hence
+1 −λλ = v∗Qv
+v∗Xv < 0,
+i.e., |λ|2 < 1.
+Hence, if we wish to check that A has eigenvalues in the unit circle, we choose
+any Q ≻0, compute X by solving the vectorized linear system (4), and check
+that X ≻0. All these operations can be done by hand, without a computer. If
+A has rational entries, we never have to deal with irrationals.
+Note that this method is guaranteed to succeed: whenever Q ≻0 and ρ(A) <
+1, we get X ≻0, thanks to the expression (6), which is a sum of positive definite
+matrices.
+Lyapunov’s argument actually was slightly different, without involving eigen-
+values at all. Suppose we have found a Stein equation with X ≻0, Q ≻0. Let
+us consider the energy function V (x) := x∗Xx. Then,
+V (xk) −V (xk+1) = x∗
+k(X −A∗XA)xk = x∗
+kQxk > 0,
+i.e., Q is decreasing over the trajectories of (2). So V (xk) is bounded, and so
+is the sequence of vectors {xk}, since X ≻0. By strengthening this argument
+slightly, we can prove that xk actually converges to 0: suppose by contradiction
+that ∥xk∥> ε for all k; then V (xk)−V (xk+1) > λmin(Q)ε2, which is impossible
+since V (x) ≥0.
+2.2
+Vectorization
+This is an ‘easy’ equation, from the linear algebra point of view, because it is
+linear: the n×n matrices form a vector space, and the left-hand side is a linear
+operator. We can write out this equation explicitly as a linear system using
+vectorization and Kronecker products.
+
+PAGE 4
+2 Stein equations
+4
+We define the map vec: Cn×n →Cnn as
+X =
+
+
+x11
+x12
+. . .
+x1n
+x21
+x22
+. . .
+x2n
+...
+...
+...
+...
+xn1
+xn2
+. . .
+xnn
+
+∈Cn×n,
+vec X :=
+
+
+x11
+x21
+...
+xn1
+x12
+x22
+...
+xn2
+...
+x1n
+x2n
+...
+xnn
+
+
+.
+In plain words, vec X is the vector obtained by stacking the columns of the
+matrix X one on top of the other.
+With vectorization, the elements of X are listed in column-major order: the
+leftmost index is the one that ‘changes more often’. This choice matches the
+memory layout in which matrices are stored in memory in most languages, like
+Matlab, Fortran, Python/Numpy (C/C++ prefer row-major instead), and it is
+often the most convenient one to work with.
+[Matlab example]
+There is an identity that gives explicitly the matrix associated to the linear
+operator X 7→BXA:
+vec(BXA) = (A⊤⊗B) vec(X),
+(3)
+where A⊤⊗B is the n2 × n2 matrix
+
+
+a11B
+a21B
+. . .
+an1B
+a12B
+a22B
+. . .
+an2B
+...
+...
+...
+...
+a1nB
+a2nB
+. . .
+annB
+
+
+In our case, we set B = A∗, so the Stein equation in vectorized form becomes
+(In2 −A⊤⊗A∗
+|
+{z
+}
+:=M
+) vec(X) = vec(Q).
+(4)
+Note that one of the two symbols is a transpose-conjugate ∗and one is a plain
+conjugate ⊤. This is not a mistake: the identity (3) is one of the few places in
+linear algebra when one encounters a transpose that does not become a conju-
+gate transpose when dealing with complex matrices.
+
+PAGE 5
+2 Stein equations
+5
+Using more properties of the Kronecker product, we can tell explicitly what
+the eigenvalues of M (and hence of the system matrix I−M) are. Let A = UTU ∗
+be a Schur factorization of A, with
+diag(T) = (λ1, . . . , λn) = Λ(A).
+Then, we can factor M as
+M = A⊤⊗A∗= ( ¯U ⊗U)(T ⊤⊗T ∗)(U ⊤⊗U ∗).
+(5)
+This is (up to transposition) a Schur factorization of M, since T ⊤⊗T ∗is lower
+triangular and ( ¯U ⊗U) is orthogonal with inverse (U ⊤⊗U ∗); in particular, it
+reveals that the n2 eigenvalues of M are the diagonal entries
+λ1λ1, λ1λ2, . . . , λ1λn, λ2λ1, λ2λ2, . . . , λnλn.
+In particular, the Stein equation is solvable whenever A does not have a pair of
+eigenvalues λi, λj such that λiλj = 1. An important case when this happens is
+when ρ(A) < 1.
+Exercise 2. Show that the Kronecker product satisfies (B ⊗A)(D ⊗C) =
+BD ⊗AC, when the dimensions are compatible, and that (B ⊗A)⊤= B⊤⊗A⊤.
+Use these properties to verify the steps that lead to (5).
+We conclude this section with another useful formula: when ρ(A) < 1, then
+also ρ(M) < 1, and we can use the Neumann series (I −M)−1 = I + M + M 2 +
+M 3 + . . . to solve the system:
+vec(X) = vec(Q) + (A⊤⊗A∗) vec(Q) + (A⊤⊗A∗)2 vec(Q) + . . . ,
+or, in non-vectorized form,
+X = Q + A∗QA + (A∗)2QA2 + · · · =
+∞
+X
+k=0
+(A∗)kQAk.
+(6)
+This infinite sum converges if ρ(A) < 1. This form also makes it apparent that
+the solution X must be symmetric; this follows also from transposing (1) (even
+without assuming ρ(A) < 1).
+2.3
+Controllability
+There is another important application in linear control theory that results in
+Lyapunov equations: that of controllability. Suppose that, at each step k, we
+are allowed to modify the behavior of our dynamical system by adding a certain
+multiple of a vector b ∈Cn. In engineering, this is usually a very practical
+matter: the dynamical system describes the evolution of a certain quantity
+(e.g., the temperature in a room, the position of a drone), and this multiple
+of b is a control: e.g., a radiator that changes the temperature, or an engine
+
+PAGE 6
+2 Stein equations
+6
+attached to a propeller that makes the drone go up or down. Sometimes, there
+is more than one control, resulting in a matrix B ∈Cn×m rather than a vector,
+but the differences are minor, so we focus on the case of one vector only. Our
+goal is reaching a certain state xF , starting from x0.
+Hence the modified system is
+xk+1 = Axk + buk
+k = 0, 1, 2, . . . ,
+(7)
+where u1, u2, · · · ∈C are the scalar multiples we choose, and and at time k we
+have
+xk = Akx0 + buk−1 + Abuk−2 + A2buk−3 + · · · + Ak−1bu0.
+Hence, at time k we can reach all states xk such that
+xk −Akx0 ∈span(b, Ab, A2b, . . . , Ak−1b)
+|
+{z
+}
+Kk(A,b)
+.
+The linear subspace in the right-hand side is a very famous one in numerical lin-
+ear algebra; it is the so-called Krylov space. A useful alternative characterization
+is
+Kk(A, b) = {p(A)b: p is a polynomial of degree d < k}.
+Usually one focus on controllability at a sufficiently large time k, so we are
+interested in the controllable space
+K(A, b) = Im
+b
+Ab
+A2b
+. . .
+.
+The infinite-size matrix may look daunting, but in fact we can stop at k = n: by
+the Cayley-Hamilton theorem, An is a linear combination of An−1, An−2, . . . , A, I,
+hence the space cannot grow after the first n iterations.
+A pair (A, b) (or analogously in the matrix case (A, B)) is called controllable
+if its controllable space is the whole Cn.
+This is the generic case, since for
+a general b the first n vectors of the form Akb are linearly independent, but
+it can be much smaller; for instance, if b is an eigenvector for A, we have
+dim K(A, b) = 1.
+How is controllability related to Stein equations? Consider the equation
+X −AXA∗= bb∗.
+(8)
+Note that A and A∗have swapped position with respect to (1): unfortunately
+equations related to the system xk+1 = Axk come in both variants; we always
+have to pay attention to where the transpose-conjugate lies.
+For this equation, (6) reads
+X = bb∗+Abb∗A∗+A2bb∗(A∗)2+· · · =
+b
+Ab
+A2b
+. . . b
+Ab
+A2b
+. . .∗;
+in particular, X ≻0 if and only if (A, b) is controllable: i.e., there is a vector
+w ̸= 0 such that w∗X = 0 if and only if
+w∗
+b
+Ab
+A2b
+. . .
+
+= 0.
+
+PAGE 7
+2 Stein equations
+7
+Exercise 3. Let xF ∈Cn be prescribed, and x0 = 0. Show that
+min|u0|2 + |u1|2 + |u2|2 + . . .
+over all sequences uk such that limk→∞xk = xF for (7) is equal to x∗
+F X−1xF .
+2.4
+Iterative algorithms
+We present here two iterative algorithms, which we will use to build our way
+towards algorithms for nonlinear equations.
+The Stein equation (1) takes the form of a fixed-point equation; this fact
+suggests the fixed-point iteration
+X0 = 0,
+Xk+1 = Q + A∗XkA,
+(9)
+known as Smith method [79]. It is easy to see that the kth iterate Xk is the
+partial sum of (6) truncated to k terms, thus convergence is monotonic, i.e.,
+Q = X0 ⪯X1 ⪯X2 ⪯· · · ⪯X. Moreover, some manipulations give
+vec(X −Xk) = (I + M + M 2 + . . . ) vec(Q) −(I + M + M 2 + · · · + M k−1) vec(Q)
+= M k(I + M + M 2 + . . . ) vec(Q) = M k vec(X),
+or, devectorizing,
+X −Xk = (A∗)kXAk.
+(10)
+This relation (10) implies ∥X −Xk∥= O(rk) with r = ρ(A)2, so convergence is
+linear when ρ(A) < 1, and it typically slows down when ρ(A) ≈1.
+For a dense problem, it is better to replace this algorithm with a “squaring”
+(or “doubling”) variant. The sum of the first 2k+1 terms of the Neumann series
+can be computed iteratively using the identity
+I+M+M 2+· · ·+M 2k+1−1 = (I+M+M 2+· · ·+M 2k−1)+M 2k(I+M+M 2+· · ·+M 2k−1),
+without computing all the intermediate sums. Setting vec Qk := (I +M +M 2 +
+· · · + M 2k−1) vec Q and Ak := A2k, one gets the iteration
+A0 = A,
+Ak+1 = A2
+k,
+(11a)
+Q0 = Q,
+Qk+1 = Qk + A∗
+kQkAk.
+(11b)
+In view of the definitions, we have Qk = X2k; so this method computes the 2kth
+iterate of the Smith method directly with O(n3k) operations, without going
+through all intermediate iterates. Convergence is quadratic: ∥X−Qk∥= O(r2k)
+with r = ρ(A)2. The method (11) is known as squared Smith. It has been used
+in the context of parallel and high-performance computing [15], and reappeared
+in recent years, when it has been used for large and sparse equations [69, 75, 12]
+in combination with Krylov methods.
+This is the first example of a squaring (or more often doubling) algorithm,
+i.e., a method to compute directly the doubling sequence X1, X2, X4, X8, . . . .
+
+PAGE 8
+2 Stein equations
+8
+2.5
+Sparse Stein equations
+When one needs to solve a dense Stein equation, the doubling version is more
+performant, because of its faster convergence. However, another important case
+is that of the Stein equations for controllability (8), in the case when A is large
+and sparse. In this case, one does not want to form Ak and Qk explicitly, since
+they are large and dense, typically. And, actually, we have a bigger problem: if
+Qk is dense and Qk →X, then that means X is dense, too!
+We can solve both problems in the non-squaring variant.
+That variant,
+for (8), reads
+Xk+1 = bb∗+ AXkA∗,
+Xk = bb∗+ Abb∗A∗+ A2bb∗(A∗)2 . . . .
+Note that
+Xk = ZkZ∗
+k,
+Zk =
+
+b
+Ab
+A2b
+· · ·
+Ak−1b
+
+∈Cn×k.
+In particular, Xk has rank k. This has an interesting theoretical consequence:
+we have
+∥X −Xk∥= O(rk);
+This has a consequence on the singular values (which are also its eigenvalues,
+since X is positive semidefinite):
+σk(X) =
+min
+rank R=k∥X −R∥≤∥X −Xk∥= O(rk).
+The singular values of X decay exponentially. If r is sufficiently smaller than
+1, only a handful of its singular values are above the machine precision, and
+we can successfully approximate X with a low-rank matrix. We can frame our
+iteration in terms of the Zk:
+(
+v1 = b
+vk+1 = Avk
+k = 0, 1, . . .
+Zk =
+v1
+v2
+. . .
+vk
+
+.
+When vk becomes sufficiently small, we can truncate the iteration, and then,
+X ≈ZkZ∗
+k. This is efficient, in practice, if r is sufficiently smaller than 1.
+If convergence is slow and k becomes large, in some cases we can gain per-
+formance by compressing Zk. We can do this with a thin SVD: we compute a
+thin SVD Zk = USV ∗(remember: we are in the large and sparse case, so we
+still have k < n), and if some singular values are small we replace them with
+zeros. A slightly more efficient variant is with rank-revealing QR factorization
+in place of the SVD, but the idea is similar.
+We shall see later a variant of this algorithm for Lyapunov equations, and
+we shall see there that we have some options to speed up its convergence.
+2.6
+Direct algorithms
+Solving the n2 × n2 system (4) directly with Gaussian elimination would cost
+O(n6) operations, which is prohibitive even for very small n. There is a clever
+
+PAGE 9
+3 Lyapunov equations
+9
+idea due to Bartels and Stewart that can be used to solve equations of this kind
+in O(n3) instead. We shall see this idea later for Lyapunov equations, since it
+is simpler to introduce in that case.
+3
+Lyapunov equations
+Lyapunov equations
+A∗X + XA + Q = 0,
+Q = Q∗⪰0
+(12)
+are the continuous-time counterpart of Stein equations. They arise from the
+study of continuous-time constant-coefficient linear systems
+d
+dtx(t) = Ax(t).
+(13)
+Indeed, if we argue as in the discrete-time case, we can introduce an energy
+functional V (x) := x∗Xx and show that
+d
+dtV (x(t)) = ˙x(t)∗Xx(t) + x(t)∗X ˙x(t) = x(t)∗(A∗X + XA)x(t) = −x(t)∗Qx(t).
+So if Q ⪰0 then the function V (x(t)) is non-increasing, and we can use this
+computation to show that in the system (13) x(t) is bounded (if X ≻0).
+Today stability is more often proved by computing eigenvalues, but Stein
+equations (1) and Lyapunov equations (12) have survived in many other ap-
+plications in systems and control theory, for instance in model order reduc-
+tion [8, 43, 78], or as the inner step in Newton methods for other equations (see
+for instance (51) in the following).
+The Lyapunov equation also comes in a variant that can be used to check
+controllability:
+AX + XA∗+ G = 0,
+G = bb∗.
+(14)
+A continuous-time dynamical system with control comes in the form
+d
+dtx(t) = Ax(t) + bu(t),
+where u(t) is a (scalar) function that we can choose to modify the dynamics of
+the system. The proofs are slightly more involved in the continuous-time case.
+The explicit solution formula for (14) is
+x(t) =
+Z ∞
+0
+exp(tA)G exp(tA∗) dt,
+and it holds assuming that all the eigenvalues of A are in the LHP. The equiv-
+alent of the formula TODO is the ugly-looking solution formula for the explicit
+solution of linear differential equations
+x(tF ) = exp(AtF )x0 +
+Z tF
+0
+exp(A(tF −t))bu(t)dt.
+
+PAGE 10
+3 Lyapunov equations
+10
+One can show that for any tF , xF we can choose u(t) so that x(tF ) = xF , under
+the same condition as the one for discrete-time controllability:
+rank
+b
+Ab
+A2b
+. . .
+= n.
+One can prove that this rank condition holds if and only if the solution of (14)
+has full rank, and the solution gives information on the amount of energy re-
+quired to reach xF .
+3.1
+Solution properties
+Using Kronecker products, one can rewrite (12) as
+(In ⊗A∗+ A⊤⊗In) vec(X) = −vec(Q),
+(15)
+and a Schur decomposition A = UTU ∗produces
+In ⊗A∗+ A⊤⊗In = ( ¯U ⊗U)(In ⊗T ∗+ T ⊤⊗In)(U ⊤⊗U ∗).
+(16)
+Again, this is a Schur-like factorization, where the middle term is lower triangu-
+lar. One can tell when In ⊗A∗+A⊤⊗In is invertible by looking at its diagonal
+entries: that matrix is invertible (and hence (12) is uniquely solvable) if and only
+if ¯λi + λj ̸= 0 for each pair of eigenvalues λi, λj of A. This holds, in particular,
+if the eigenvalues of A all lie in the left-half plane LHP = {z ∈C: Re(z) < 0}.
+For a continuous-time linear system, the condition for asymptotic stability
+(limt→∞x(t) = 0) is indeed that all the eigenvalues of A are in the LHP.
+When the system is stable, an analogue of (6) is
+X =
+Z ∞
+0
+exp(A∗t)Q exp(At) dt.
+(17)
+Indeed, this integral converges for every choice of Q if and only if the eigenvalues
+of A all lie in LHP.
+Notice the pleasant symmetry with the Stein case: the (discrete) sum turns
+into a (continuous) integral; the stability condition for discrete-time linear time-
+invariant dynamical systems ρ(A) < 1 turns into the one Λ(A) ⊂LHP for
+continuous-time systems. We can prove analogues of all our results for Stein
+equations; they are sometimes more technically involved because of the presence
+of integrals, but the main results continue to hold with minor changes.
+Perhaps a bit less evident is the equivalence between the condition ¯λi+λj ̸= 0
+(i.e., no two eigenvalues of A are mapped into each other by reflection with
+respect to the imaginary axis) and λiλj ̸= 1 (i.e., no two eigenvalues of A are
+mapped into each other by circle inversion with respect to the complex unit
+circle).
+3.2
+Direct algorithms
+As in the Stein case, a direct solution by using Gaussian elimination on the
+n2 × n2 system (15) costs O(n6) floating point operations, and is impractical
+even for small values of n.
+
+PAGE 11
+3 Lyapunov equations
+11
+There is an algorithm due to Bartels and Stewart [6] that allows to get a
+solution in O(n3) only.
+Step 1 Reduce to a triangular equation. Take a Schur form A = UTU ∗to get
+UT ∗U ∗X + XUTU ∗+ Q = 0.
+Multiply both sides by U ∗and U to get
+T ∗(U ∗XU) + (U ∗XU)T + (U ∗QU) = 0,
+i.e., a Lyapunov equation with triangular coefficients
+T ∗ˆX + ˆXT + ˆQ = 0,
+ˆX = U ∗XU,
+ˆQ = U ∗QU.
+(18)
+We can compute ˆQ immediately.
+Step 2 : Solve (18) with a substitution idea: we can compute the entries xij of
+ˆX one at a time. Visualize the equation as
+
+
+∗
+0
+0
+0
+∗
+∗
+0
+0
+∗
+∗
+∗
+0
+∗
+∗
+∗
+∗
+
+
+
+
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+
++
+
+
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+
+
+
+
+∗
+∗
+∗
+∗
+0
+∗
+∗
+∗
+0
+0
+∗
+∗
+0
+0
+0
+∗
+
++
+
+
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+
+= 0
+We compute the (1,1) term in the LHS to get
+t11x11 + x11t11 + q11 = 0;
+from this equation we can solve for x11:
+x11 = −
+q11
+t11 + t11
+.
+Once we have computed x11, we use the (2,1) entry of the equation to get
+x21:
+t21x11 + t22x21 + x21t11 + q21 = 0,
+i.e.,
+x21 = −q21 −t21x11
+t22 + t11
+.
+Similarly, one has
+xij = −qij −Pi−1
+I=1 tiIxIj −Pj−1
+J=1 xiJtJj
+tii + tjj
+.
+Note that to compute i and j we only need entries that are above and
+to the left of (i, j), so we can compute the entries in the same order as
+vectorization.
+
+PAGE 12
+3 Lyapunov equations
+12
+Step 3 Once all entries of ˆX are computed, we change basis again with X =
+U ˆXU ∗.
+It is interesting to note that this algorithm essentially correspond to inverting
+one by one the factors of (16):
+vec(X) = ( ¯U ⊗U) (In ⊗T ∗+ T ⊤⊗In)−1 (U ⊤⊗U ∗) vec(Q)
+|
+{z
+}
+=vec( ˆ
+Q)
+|
+{z
+}
+=vec( ˆ
+X)
+.
+This explanation motivates well why the substitution part of the algorithm
+works: we are basically solving a linear system with the lower triangular matrix
+In ⊗T ∗+ T ⊤⊗In by forward substitution.
+Remarks:
+• One can prove that this algorithm works using the backward stability prop-
+erties of substitution: the second step computes (in machine precision) eˆX
+which solves exactly a perturbed linear system
+(M + ∆M) vec( eˆX) = vec(eˆQ + ∆Q).
+This is sufficient to prove, for instance, that the (relative) residual of the
+equation is of the order of machine precision. It is interesting to note,
+though, that the perturbation ∆M does not have the same Kronecker
+product structure as M; hence it is in general not true that e
+X solves a
+perturbed equation (A+∆A)∗e
+X + e
+X(A+∆A)+(Q+∆Q) = 0 with small
+∆A, ∆Q. This is studied in Higham (2001) for a slightly more general
+equation.
+• The same idea can be used for Stein equations (try it yourself!), or more
+generally for equations of the form AXB + CXD = E, with a little more
+work and suitable generalizations of the Schur form. System with more
+than two equations are a different beast; for them (as far as I know) there
+is no known O(n3) algorithm.
+3.3
+Iterative algorithms
+We focus now on iterative algorithms.
+To solve a Lyapunov equation itera-
+tively, the main technique is turning it into a Stein equation. (This is a general
+observation: it is easier to find iterations to solve discrete-time problems than
+continuous-time ones.)
+In this section, we switch to the notation of (14), since it will save us a few
+transpositions.
+Lyapunov equations can be turned into Stein equations and vice versa. In-
+deed, for a given τ ∈C, (12) is equivalent to
+(A −τI)X(A∗−¯τI) −(A + ¯τI)X(A∗+ τI) −2 Re(τ)G = 0,
+
+PAGE 13
+3 Lyapunov equations
+13
+or, if A −τI is invertible,
+X −c(A)Xc(A)∗= 2 Re(τ)(A −τI)−1G(A −τI)−∗,
+c(A) = (A + ¯τI)(A −τI)−1 = (A −τI)−1(A + ¯τI).
+(19)
+If τ ∈RHP, then the right-hand side is positive semidefinite and (19) is a Stein
+equation. The stability properties of c(A) can be explicitly related to those of
+A via the following lemma.
+Lemma 4 (properties of Cayley transforms). Let τ ∈RHP. Then,
+(1) for λ ∈C, we have |c(λ)| =
+ λ+¯τ
+λ−τ
+ < 1 if and only if λ ∈LHP;
+(2) for a matrix A ∈Cn×n, we have ρ(c(A)) < 1 if and only if Λ(A) ⊂LHP.
+A geometric argument to visualize (1) is the following. In the complex plane,
+τ and = ¯τ are symmetric with respect to the imaginary axis, with −¯τ lying to
+its left. Thus a point λ ∈C is closer to −¯τ than to τ if and only if it lies in
+LHP. Part (2) follows from facts on the behaviour of eigenvalues of a matrix
+under rational functions [56, Proposition 1.7.3], which we will often use also in
+the following.
+We will assume Λ(A) ⊂LHP. Then, thanks to Lemma 4, we have ρ(c(A)) <
+1, so we can apply the Smith method (9) to (19).
+X0 = 0,
+Xk+1 = ˆG + c(A)Xkc(A)∗,
+ˆG = 2 Re(τ)(A −τI)−1G(A −τI)−∗.
+(20)
+As we already know, convergence is linear with rate r2, where r = ρ(c(A)). It
+is interesting to note which is the better value of τ to use. If λ is an eigenvalue
+of A, then the corresponding eigenvalue of c(A) is
+c(λ) = λ + ¯τ
+λ −τ .
+If τ ≫|λ|, then c(λ) ≈¯τ
+τ , which is on the unit circle. If τ ≪|λ|, then c(λ) ≈1,
+which is also on the unit circle. So we can get fast convergence only when τ
+has the same order of magnitude as the eigenvalues of A. In particular, if A
+has both large and small eigenvalues, convergence is always going to be slow,
+because
+ρ(A) = max
+λ∈Λ(A)|c(λ)|
+is going to be close to 1 no matter how we choose τ.
+To solve this issue, the solution is changing the value of τ at each iteration.
+The resulting algorithm is known as ADI iteration [68, 80]:
+X0 = 0,
+Xk+1 = Qk + ck(A)∗Xkck(A),
+(21)
+Qk = 2 Re(τk)(A∗−τkI)−1Q(A −¯τkI)−1,
+ck(A) = (A + τkI)(A −¯τkI)−1 = (A −¯τkI)−1(A + τkI).
+
+PAGE 14
+3 Lyapunov equations
+14
+The sequence of shifts τk ∈RHP can be chosen arbitrarily.
+Typically, one
+chooses a fixed number of shifts (say, d), and uses them cyclically, so that the
+factorization of A −τkI can be reused.
+By writing a recurrence for the error Ek = X −Xk, one sees that
+Ek = rk+1(A)∗E0rk+1(A) = rk+1(A)∗Xrk+1(A),
+rk+1(A) = ck(A) . . . c1(A)c0(A),
+(22)
+a formula which generalizes (10). If we reuse shifts cyclically, then every d steps
+we have multiplied the error by rd(A).
+When A is normal, the problem of assessing the convergence speed of this
+iteration can be reduced to a scalar approximation theory problem. Note that
+∥rd(A)∥= max
+λ∈Λ(A)|rd(λ)|,
+rd(λ) =
+If one knows a region E ⊂LHP that encloses the eigenvalues of A, the optimal
+choice of rd is the degree-d rational function that minimizes
+supz∈E|rd(z)|
+infz∈−E∗|rd(z)|,
+(23)
+i.e., a rational function that is ‘as large as possible’ on E and ‘as small as
+possible’ on −E∗. Finding this rational function is known as Zolotarev approx-
+imation problem, and it was solved by its namesake for many choices of E,
+including E = [a, b] ⊆R+: this choice of E corresponds to having a symmetric
+positive definite A for which a lower and upper bound on the spectrum are
+known. It is known that the optimal ratio (23) decays as ρd, where ρ < 1 is
+a certain value that depends on E, related to its so-called logarithmic capac-
+ity. See the recent review by Beckermann and Townsend [7] for more details.
+Optimal choices for the shifts for a normal A were originally studied by Wach-
+spress [80, 38]. When A is non-normal, a similar bound can be obtained from
+its eigendecomposition A = V DV −1, but it includes its eigenvalue condition
+number κ(V ) = ∥V ∥∥V ∥−1, and thus it is of worse quality.
+An important case, both in theory and in practice, is when the constant term
+Q has low rank. To study this case, we switch to the “controllability version”
+of the Lyapunov equation
+AX + XA∗+ G = 0,
+G = bb∗
+(We restrict for simplicity and ease of exposition to the case where b has rank
+1; the case of larger rank is similar.)
+A decomposition Xk = ZkZ∗
+k can be derived from (21), and reads
+Zk =
+p
+2 Re(τk−1)(A −τk−1I)−1b,
+ck−1(A)Zk−1
+
+=
+hp
+2 Re(τk−1)(A −τk−1I)−1b,
+p
+2 Re(τk−2)(A −τk−1I)−1(A + ¯τk−1I)(A −τk−2I)−1b, . . . ,
+p
+2 Re(τ0)(A −τk−1I)−1(A + ¯τk−1I)(A −τk−2I)−1(A + ¯τk−2I) · · · (A −τ0I)−1b
+i
+.
+(24)
+
+PAGE 15
+3 Lyapunov equations
+15
+Hence Zk is obtained by concatenating horizontally k terms V1, V2, . . . , Vk of
+size n × p each. Each of them contains a rational function of A of increasing
+degree multiplied by b. All the factors in parentheses commute: hence that the
+factors Vj can be computed with the recurrence
+Zk =
+V1
+V2
+· · ·
+Vk
+
+,
+V1 =
+p
+2 Re(τk−1)(A −τk−1I)−1b,
+Vj+1 =
+p
+2 Re(τk−j−1)
+p
+2 Re(τk−j)
+(A −τk−j−1I)−1(A + ¯τk−jI)Vj
+=
+p
+2 Re(τk−j−1)
+p
+2 Re(τk−j)
+ Vj + (τk−j−1 + ¯τk−j)(A + τk−j−1I)−1Vj
+
+.
+(25)
+This version of ADI is known as low-rank ADI (LR-ADI) [13]. After k steps,
+Xk = ZkZ∗
+k, but note that in the intermediate steps j < k the quantity
+V1
+V2
+· · ·
+Vj
+ V1
+V2
+· · ·
+Vj
+∗differs from Xj in (21). Indeed, in this
+factorized version the shifts appear in reversed order, starting from τk−1 and
+ending with τ0. Nevertheless, we can use LR-ADI as an iteration in its own
+right: since we keep adding columns to Zk at each step, ZkZ∗
+k converges mono-
+tonically to X. This version is particularly convenient for problems in which A
+is large and sparse, because in each step we only need to solve a linear system
+with a shifted matrix A −τI, and we store in memory only the n × k matrix
+Zk. In contrast, iterations such as (11) are not going to be efficient for problems
+with a large and sparse A, since powers of sparse matrices become dense.
+The formula (24) displays the relationship between ADI and certain Krylov
+methods: since the LR-ADI iterates are constructed by applying rational func-
+tions of A iteratively to b, the LR-ADI iterate Zk lies in the so-called rational
+Krylov subspace [74]
+Kq,k+1(A, b) = span{q(A)−1p(A)b : p is a polynomial of degree ≤k},
+(26)
+constructed with pole polynomial q(z) = (z −τ0)(z −τ1) · · · (z −τk−1). This
+suggests a different view: what is important is not the form of the ADI itera-
+tion, but rather the approximation space Kq,k(A, b) to which its iterates belong.
+Once one has chosen suitable shifts and computed an orthogonal basis Uk of
+Kq,k+1(A, b), (12) can be solved via Galerkin projection: we seek an iterate Xk
+of the form Xk = UkYkU ∗
+k, and compute Yk by solving the projected equation
+0 = U ∗
+k(AXk + XkA∗+ G)U = (U ∗
+kAUk)Yk + Yk(U ∗
+kA∗Uk) + U ∗
+kGUk,
+which is a smaller (k × k) Lyapunov equation.
+While the approximation properties of classical Krylov subspaces are related
+to polynomial approximation, those of rational Krylov subspaces are related to
+approximation with rational functions, as in the Zolotarev problem mentioned
+earlier. In many cases, rational approximation has better convergence proper-
+ties, with an appropriate choice of the shifts. This happens also for Lyapunov
+
+PAGE 16
+3 Lyapunov equations
+16
+equations: algorithms based on rational Krylov subspaces (26) [37, 36] (includ-
+ing ADI which uses them implicitly) often display better convergence properties
+than equivalent ones in which Uk is chosen as a basis of a regular Krylov sub-
+space.
+Computing a basis for a rational Krylov subspace (26) is more expensive than
+computing one for a Krylov subspace: indeed, the former requires solving linear
+systems with A −τkI for many values of k, while the latter uses multiple linear
+systems with the same matrix A. However, typically, their faster convergence
+more than compensates for it. Another remarkable feature is the possibility to
+use an adaptive procedure based on the residual for shift selection [37].
+See also the analysis in Benner, Li, Truhar [14], which shows that Galerkin
+projection can improve also on the ADI solution.
+An important consequence of the convergence of these algorithms is that they
+can be used to give bounds on the rank of the solution X. Since we can find
+rational functions such that (23) decreases exponentially, the formula (22) shows
+that X can be approximated well with Xk, which has rank at most k·rank(Q) in
+view of the decomposition (24). This observation has practical relevance, since
+in many applications p is very small, and the exponential decay in the singular
+values of X is very well visible and helps reducing the computational cost.
+3.4
+Remarks
+There is vast literature already for linear matrix equations, especially when it
+comes to large and sparse problems. We refer the reader to the review by Si-
+moncini [78] for more details. The literature typically deals with continuous-time
+Lyapunov equations more often than their discrete-time counterpart; however,
+Cayley transformations (19) can be used to convert one to the other.
+In particular, it follows from our discussion that a step of ADI can be inter-
+preted as transforming the Lyapunov equation (12) into a Stein equation (1) via
+a Cayley transform (19) and then applying one step of the Smith iteration (9).
+Hence the squared Smith method (11) can be interpreted as a doubling al-
+gorithm to construct the ADI iterate X2k in k iterations only, but with the
+significant limitation of using only one shift τ in ADI.
+It is known that a wise choice of shifts has a major impact on the conver-
+gence speed of these algorithms; see e.g. G¨uttel [47]. A major challenge for
+doubling-type algorithms seems incorporating multiple shifts in this framework
+of repeated squaring. It seems unlikely that one can introduce more than one
+shift per doubling iteration, but even doing so would be an improvement, al-
+lowing one to leverage the theory of rational approximation that underlies ADI
+and Krylov space methods.
+
+PAGE 17
+4 Optimal control and algebraic Riccati equations
+17
+4
+Optimal control and algebraic Riccati equations
+The motivation for the next, more complicated class of equations comes once
+again from control systems. Consider either (7) or its continuous-time equivalent
+d
+dtx(t) = Ax(t) + bu(t),
+where u(t) is an arbitrary function that we add at each time t to modify (“con-
+trol”) the dynamics of the system. There are many choices of the sequence uk,
+or the function u(t), that make the corresponding system stable. An “optimal”
+one can be defined: given an “energy” function Q ⪰0, we wish to minimize
+min
+∞
+X
+k=1
+x∗
+kQxk + u∗
+kuk
+or respectively
+min
+Z ∞
+0
+(x(t)∗Qx(t) + u(t)∗u(t)) dt
+over all possible control functions. This minimization problem makes sense in
+terms of modelling: we want x(t) to be as close as possible to 0 at all times, but
+we also have a cost to pay for our control function u(t).
+It turns out that the optimal control can be constructed using a solution X
+to a certain nonlinear matrix equation; for continuous systems, this equation
+takes the form (CARE, continuous-time algebraic Riccati equation)
+Q + A∗X + XA −XGX = 0,
+G = G∗= bb∗⪰0,
+Q = Q∗⪰0,
+A, G, Q, X ∈Cn×n,
+(27)
+with the controlled system given by ˙x(t) = Ax(t) + bu(t) = (A −GX)x(t), so
+u(t) = −b∗x(t). We do not see a full proof here; there is one in [34, Chapter 10].
+The main idea is noting that x∗Qx+u∗u = x∗(Q+XGX)x = x∗((A−GX)∗X+
+X(A −GX))x, which is the derivative of the energy function x∗Xx. Another
+proof based on calculus of variations techniques is in [64].
+The corresponding equation for discrete-time system (the DARE, discrete-
+time algebraic Riccati equation) looks uglier:
+X = Q + A∗X(I + GX)−1A
+G = G∗= bb∗⪰0,
+Q = Q∗⪰0,
+A, G, Q, X ∈Cn×n.
+(28)
+Despite the very different form, this equation is a natural analogue of the
+CARE (27), exactly like Stein and Lyapunov equations are related to each
+other.
+The corresponding controlled system is xk+1 = Axk+Buk = (I+GX)−1Axk.
+This time it is a little less obvious that (I +GX)−1A = A+bf ∗for a certain vec-
+tor f ∗; we can convince ourselves by expanding the inverse with the Neumann
+
+PAGE 18
+4 Optimal control and algebraic Riccati equations
+18
+series, assuming that ρ(GX) < 1:
+(I + GX)−1A = (I −GX + GXGX −GXGXGX + . . . )A
+= A −GXA + GXGXA −GXGXGXA + . . .
+= A + b(−b∗XA + b∗Xbb∗XA −. . . ).
+Even if the assumption ρ(GX) < 1 does not hold, one can use the identity
+(I + GX)−1 = I −GX(I + GX)−1
+to get the same result. Due to the fact that there are several different ways to
+rewrite this inverse, the DARE can take many slightly different forms. If you
+read X = Q + something ugly, it is probably a DARE.
+(One can generalize this computation to more than one control, and then
+another matrix R appears: u∗Ru is the u part of the “energy functional”, and
+G = BR−1B∗).
+4.1
+Relation to invariant subspaces
+There is a beautiful chapter of linear algebra behind the solutions of the CARE (27)
+(and the DARE, as we see later). It all starts by rewriting it into the form
+ A
+−G
+−Q
+−A∗
+  I
+X
+
+=
+ I
+X
+
+M,
+M = A −GX.
+(29)
+This equation looks like a “fat version” of the eigenvalue-eigenvector relation
+Hv = vλ for the matrix
+H =
+ A
+−G
+−Q
+−A∗
+
+.
+(30)
+Indeed, one can show that the two problems are related: if Mw = wλ is an
+eigenvector/eigenvalue pair for M, then [ I
+X ]w, λ is an eigenvalue / eigenvector
+pair for H.
+This observation suggests a way to compute X. First, suppose for simplicity
+that H is diagonalizable. Then, select n out of its 2n eigenvalue/eigenvector
+pairs. In this way, u1, . . . , un are linear combinations of the columns of [ I
+X ];
+symmetrically, the columns of [ I
+X ] are linear combinations of the columns of
+U = [u1, . . . , un], since the two column spaces are n-dimensional. So, if
+U =
+
+U1
+U2
+
+∈C2n×n,
+X = U2U −1
+1 .
+Equation (29) is called an invariant subspace relation, since Im U is H-invariant,
+i.e., H Im U ⊆Im U.
+It remains to determine which eigenvalues and eigenvectors of H we have to
+select: from every choice of n eigenvectors out of 2n determines a solution of the
+CARE (assuming U1 is invertible), but only one is the one we are looking for. If
+H has repeated eigenvalues, there can even be an infinite number of solutions.
+
+PAGE 19
+4 Optimal control and algebraic Riccati equations
+19
+The choice of solution comes from stability consideration: if the system
+with its optimal control is ˙x(t) = (A −GX)x(t), we must have Λ(A −GX) ⊆
+LHP, otherwise the system is not stable and we cannot (usually) hope that
+R
+x∗Qx + u∗u is finite.
+This condition is sufficient, because luckily H has a remarkable property.
+4.2
+Hamiltionan property
+Lemma 5. Let
+H =
+H11
+H12
+H21
+H22
+
+∈C2n×2n
+be any matrix such that H12 = H∗
+12, H21 = H∗
+21, H22 = −H∗
+11. Then, if λ is an
+eigenvalue of H, then so is −λ, and the two have the same multiplicity.
+Proof. Consider the antisymmetric orthogonal matrix
+J =
+ 0
+I
+−I
+0
+
+,
+for which we have J−1 = J∗= −J. Then, JH is Hermitian, i.e., JH = H∗J∗,
+or, equivalently, H∗= −JHJ−1. In particular, H and −H∗are similar, and
+they must have the same spectrum; the thesis follows from this.
+Geometrically, the spectrum Λ(H) is symmetric with respect to the imag-
+inary axis. This property is important, because it shows that we can expect
+to have exactly n out of 2n eigenvalues of H in the left half-plane; i.e., the
+solution X that we are looking for is uniquely determined by choosing these n
+eigenvalues.
+There are still a few points to settle to get a formal theorem; in particular, we
+need to exclude the possibility that H has eigenvalues exactly on the imaginary
+axis, since those do not come in pair (and are not considered “stable” nor “in the
+left half-plane” for our purposes). To do this, we need a few extra controllability
+assumptions.
+Theorem 6. [56, Theorems 7.9.1, 9.1.2 and 9.1.5] Assume that Q ⪰0, G ⪰0,
+(A, G) (or equivalently (A, b)) is controllable, and (A∗, Q) is controllable. Then,
+(27) has a (unique) solution X+ such that
+(1) X+ = X∗
++ ⪰0;
+(2) X+ ⪰X for any other Hermitian solution X;
+(3) Λ(A −GX+) ⊂LHP (and, more precisely, Λ(A −GX+) = Λ(H) ∩LHP).
+For a full proof of this theorem, we refer the reader to Lancaster and Rod-
+man [56].
+We also note that if X solves the CARE then we have the factorization
+
+I
+0
+−X
+I
+
+H
+
+I
+0
+X
+I
+
+=
+
+A −GX
+−G
+0
+−(A −GX)∗
+
+,
+which shows clearly how the eigenvalues come in conjugate pairs.
+
+PAGE 20
+4 Optimal control and algebraic Riccati equations
+20
+4.3
+Algorithms
+We shall discuss iterative algorithms in the following, when speaking about
+discrete-time equations, but first we see a direct algorithm.
+We have given a characterization of the solution based on eigenvectors; how-
+ever, the problem of computing eigenvalues can be numerically problematic, in
+cases when the eigenvector matrix V is ill-conditioned. Luckily, one can also
+extract an invariant subspace of H through the Schur factorization H = UTU ∗,
+which can be computed with a backward stable algorithm (since U is unitary).
+Lemma 7. Let H be a Hamiltonian matrix as above, and assume that H has n
+eigenvalues in LHP and n in RHP. Let H = UTU ∗be its Schur factorization,
+and write
+U =
+
+U1
+U2
+
+,
+T =
+T11
+T12
+0
+T22
+
+.
+Assume that the eigenvalues are sorted so that Λ(T11) ⊂LHP and Λ(T22) ⊂
+RHP. Then, the columns of U1 are a basis for the (unique) invariant subspace
+associated with the eigenvalues in the LHP.
+Luckily, Matlab (as well as Julia, Numpy,. . . ) has a function to reorder the
+Schur form.
+function X = care_schur(A, G, Q)
+H = [A -G; -Q -A’];
+[U, T] = schur(H, ’complex’);
+[U2, T2] = ordschur(U, T, ’lhp’);
+n = size(A,1);
+X = U2(n+1:2*n, 1:n) / U2(1:n, 1:n);
+We show an example, which relies on the carex test suite, a collection of
+benchmark examples for algebraic Riccati equations.
+>> [A,G,Q] = carex(4);
+>> X = care_schur(A, G, Q)
+X =
+0.8919 0.7366 0.6023 0.5212 0.5929 0.3488 0.2199 0.1415
+0.7366 1.3795 1.0765 0.8039 0.7005 0.5191 0.3348 0.1744
+0.6023 1.0765 1.4920 1.0138 0.8014 0.7435 0.4192 0.2031
+0.5212 0.8039 1.0138 1.1488 0.7327 0.5313 0.3410 0.1732
+0.5929 0.7005 0.8014 0.7327 0.5921 0.4293 0.2847 0.1476
+0.3488 0.5191 0.7435 0.5313 0.4293 0.3553 0.2377 0.1241
+0.2199 0.3348 0.4192 0.3410 0.2847 0.2377 0.1965 0.1024
+0.1415 0.1744 0.2031 0.1732 0.1476 0.1241 0.1024 0.0795
+>> norm(A’*X + X*A + Q - X*G*X) / (norm(A’*X) + norm(X*A) + norm(Q) + norm(X*G*X))
+ans =
+3.4242e-15
+>> max(real(eig(A - G*X)))
+ans =
+-0.1006
+
+PAGE 21
+5 Discrete-time Riccati equations
+21
+Note that the method produces a symmetric stabilizing solution X; we al-
+ready know that this must be the case.
+5
+Discrete-time Riccati equations
+We now consider (28), i.e.,
+X = Q + A∗X(I + GX)−1A
+G = G∗= bb∗⪰0,
+Q = Q∗⪰0,
+A, G, Q, X ∈Cn×n,
+(31)
+to be solved for X = X∗⪰0.
+Variants in which G, Q are not necessarily
+positive semidefinite also exist [71, 82], but we will not deal with them here
+to keep our presentation simpler. The non-linear term can appear in various
+slightly different forms: for instance, if G = BR−1B∗for certain matrices B ∈
+Cn×m, R ∈Cm×m, R = R∗≻0, then one sees with some algebra that
+X(I + GX)−1 = (I + XG)−1X = X −X(I + GX)−1GX
+= X −XBR−1/2(I + R−1/2B∗XBR−1/2)−1R−1/2B∗X
+= X −XB(R + B∗XB)−1B∗X,
+(32)
+and all these forms can be plugged into (28) to obtain a slightly different (but
+equivalent) equation. In particular, from the versions in the last two rows one
+sees that X(I + GX)−1 is Hermitian, which is not evident at first sight. These
+identities become clearer if one considers the special case in which ρ(GX) < 1:
+in this case, one sees that the expressions in (32) are all different ways to rewrite
+the sum of the converging series X −XGX + XGXGX −XGXGXGX + . . . .
+Note that the required inverses exist under our assumptions, because the
+eigenvalues of GX coincide with those of G1/2XG1/2 ⪰0.
+5.1
+Solution properties
+For convenience, we assume in the following that A is invertible. The results in
+this section hold also when it is singular, but to formulate them properly one
+must deal with matrix pencils, infinite eigenvalues, and generalized invariant
+subspaces (or deflating subspaces), a technical difficulty that we would rather
+avoid here since it does not add much to our presentation. For a more general
+pencil-based presentation, see for instance Mehrmann [62].
+For each solution X of the DARE (28), it holds that
+ A
+0
+−Q
+I
+  I
+X
+
+=
+I
+G
+0
+A∗
+  I
+X
+
+K,
+K = (I + GX)−1A.
+(33)
+Equation (33) shows that Im[ I
+X ] is an invariant subspace of
+S =
+I
+G
+0
+A∗
+−1  A
+0
+−Q
+I
+
+,
+(34)
+
+PAGE 22
+5 Discrete-time Riccati equations
+22
+i.e., S maps this subspace into itself. In particular, the n eigenvalues (counted
+with multiplicity) of K are a subset of the 2n eigenvalues of S: this can be
+seen by noticing that the matrix K represents (in a suitable basis) the linear
+operator S when restricted to said subspace. Conversely, if one takes a basis
+matrix
+ U1
+U2
+
+for an invariant subspace of S, and if U1 is invertible, then
+h
+I
+U2U −1
+1
+i
+is another basis matrix, the equality (33) holds, and X = U2U −1
+1
+is a solution
+of (28). Hence, (28) typically has multiple solutions, each associated to a differ-
+ent invariant subspace. However, among them there is a preferred one, which is
+the one typically sought in applications.
+Theorem 8. [56, Corollary 13.1.2 and Theorem 13.1.3] Assume that Q ⪰0,
+G ⪰0 and (A, G) is d-stabilizable. Then, (28) has a (unique) solution X+ such
+that
+(1) X+ = X∗
++ ⪰0;
+(2) X+ ⪰X for any other Hermitian solution X;
+(3) ρ
+ (I + GX+)−1A
+
+≤1.
+If, in addition, (Q, A) is d-detectable, then ρ
+ (I + GX+)−1A
+
+< 1.
+The hypotheses involve two classical definitions from control theory [34]:
+d-stabilizable (resp.
+d-detectable) means that all Jordan chains of A (resp.
+A∗) that are associated to eigenvalues outside the set {|λ| < 1} are con-
+tained in the maximal (block) Krylov subspace span(B, AB, A2B, . . . ) (resp.
+span(C∗, A∗C∗, (A∗)2C∗, . . . )). We do not discuss further these hypotheses nor
+the theorem, which is not obvious to prove; we refer the reader to Lancaster and
+Rodman [56] for details, and we just mention that these hypotheses are typi-
+cally satisfied in control theory applications. This solution X+ is often called
+stabilizing (because of property 3) or maximal (because of property 2).
+Various properties of the matrix S in (34) follow from the fact that it belongs
+to a certain class of structured matrices. Let J =
+
+0
+In
+−In 0
+
+∈C2n×2n. A matrix
+M ∈C2n×2n is called symplectic if M ∗JM = J, i.e., if it is unitary for the
+non-standard scalar product associated to J. The following properties hold.
+Lemma 9.
+(1) A matrix in the form (34) is symplectic if and only if G =
+G∗, Q = Q∗, and the two blocks called A, A∗in (34) are one the conjugate
+transpose of the other.
+(2) If λ is an eigenvalue of a symplectic matrix with right eigenvector v, then
+λ
+−1 is an eigenvalue of the same matrix with left eigenvector v∗J.
+(3) Under the hypotheses of Theorem 8 (including the d-detectability one in
+the end), then the 2n eigenvalues of S are (counting multiplicities) the n
+eigenvalues λ1, λ2, . . . , λn of (I +GX+)−1A inside the unit circle, and the
+n eigenvalues λi
+−1, i = 1, 2, . . . , n outside the unit circle. In particular,
+
+I
+X+
+
+spans the unique invariant subspace of S of dimension n all of whose
+associated eigenvalues lie in the unit circle.
+
+PAGE 23
+5 Discrete-time Riccati equations
+23
+Parts 1 and 2 are easy to verify from the form (34) and the definition of
+symplectic matrix, respectively. To prove Part 3, plug X+ into (33) and notice
+that K has n eigenvalues λ1, λ2, . . . , λn inside the unit circle; these are also
+eigenvalues of S. By Part 2, all other eigenvalues lie outside the unit circle.
+5.2
+Algorithms
+The shape of (28) suggests the iteration
+Xk+1 = Q + A∗Xk(I + GXk)−1A,
+X0 = 0.
+(35)
+This iteration can be rewritten in a form analogous to (33):
+
+A
+0
+−Q
+I
+ 
+I
+Xk+1
+
+=
+
+I
+G
+0
+A∗
+ 
+I
+Xk
+
+Kk,
+Kk = (I + GXk)−1A.
+(36)
+Equivalently, one can write it as
+U1k
+U2k
+
+= S−1
+ I
+Xk
+
+,
+
+I
+Xk+1
+
+=
+U1k
+U2k
+
+(U1k)−1.
+(37)
+This form highlights a connection with (inverse) subspace iteration (or orthog-
+onal iteration), a classical generalization of the (inverse) power method to find
+multiple eigenvalues [81]. Indeed, we start from the 2n × n matrix
+ I
+X0
+
+= [ I
+0 ],
+and at each step we first multiply it by S−1, and then we normalize the result
+by imposing that the first block is I. In inverse subspace iteration, we would
+make the same multiplication, but then we would normalize the result by taking
+the Q factor of its QR factorization, instead.
+It follows from classical convergence results for the subspace iteration (see
+e.g. Watkins [81, Section 5.1]) that (37) converges to the invariant subspace
+associated to the n largest eigenvalues (in modulus) of S−1, i.e., the n smallest
+eigenvalues of S.
+In view of Part 3 of Lemma 9, this subspace is precisely
+Im
+
+I
+X+
+
+. Note that this unusual normalization is not problematic, since at each
+step of the iteration (and in the limit) the subspace does admit a basis in which
+the first n rows form an identity matrix. This argument shows the convergence
+of (35) to the maximal solution, under the d-detectability condition mentioned
+in Theorem 8, which ensures that there are no eigenvalues on the unit circle.
+How would one construct a ‘squaring’ variant of this method? Note that that
+ U1k
+U2k
+
+= S−k[ I
+0 ]; hence one can think of computing S−2k by iterated squaring
+to obtain X2k in k steps. However, this idea would be problematic numerically,
+because it amounts to delaying the normalization in subspace iteration until the
+very last step. The key to solve this issue is using the LU-like decomposition
+obtained from (34)
+S−1 =
+ A
+0
+−Q
+I
+−1 I
+G
+0
+A∗
+
+.
+We seek an analogous decomposition for the powers of S−1, i.e.,
+S−2k =
+ Ak
+0
+−Qk
+I
+−1 I
+Gk
+0
+A∗
+k
+
+.
+(38)
+
+PAGE 24
+5 Discrete-time Riccati equations
+24
+The following result shows how to compute this factorization with just one
+matrix inversion.
+Lemma 10.
+[70] Let M1, M2, N1, N2 ∈C2n×n. The factorization
+M1
+M2
+−1 N1
+N2
+
+=
+A11
+0
+A21
+In
+−1 In
+A21
+0
+A22
+
+,
+A11, A12, A21, A22 ∈Cn×n
+(39)
+exists if and only if
+N1
+M2
+
+is invertible, and in that case its blocks Aij are
+given by
+A11
+A12
+A21
+A22
+
+=
+N1
+M2
+−1 M1
+N2
+
+.
+A proof follows from noticing that the factorization (39) is equivalent to the
+existence of a matrix K ∈C2n×2n such that
+K
+M1
+M2
+N1
+N2
+
+=
+
+A11
+0
+In
+A12
+A21
+In
+0
+A22
+
+,
+and rearranging block columns in this expression.
+One can apply Lemma 10 (with [M1 M2] = I and [N1 N2] =
+h
+I Gk
+0 A∗
+k
+ih
+Ak
+0
+−Qk I
+i−1
+) to find a factorization of the term in parentheses in
+S−2k+1 = S−2kS−2k =
+
+Ak
+0
+−Qk
+I
+−1  I
+Gk
+0
+A∗
+k
+  Ak
+0
+−Qk
+I
+−1! I
+Gk
+0
+A∗
+k
+
+,
+(40)
+and use it to construct a decomposition (38) of S−2k+1 starting from that of
+S−2k. The fact that the involved matrices are symplectic can be used to prove
+that the relations A11 = A∗
+22, A21 = A∗
+21, A12 = A∗
+12 will hold for the computed
+coefficients.
+We omit the details of this computation; what matters are the
+resulting formulas
+Ak+1 = Ak(I + GkQk)−1Ak,
+(41a)
+Gk+1 = Gk + AkGk(I + QkGk)−1A∗
+k,
+(41b)
+Qk+1 = Qk + A∗
+k(I + QkGk)−1QkAk,
+(41c)
+with A0 = A, Q0 = Q, G0 = G. These formulas are all we need to formulate a
+‘squaring’ version of (35): for each k it holds that
+S−2k In
+0
+
+=
+ I
+Qk
+
+A−1
+k ,
+hence Qk = X2k, the 2kth iterate of (35). It is not difficult to show by induction
+that 0 ⪯Q0 ⪯Q1 ⪯· · · ≤Qk ⪯. . . , and we have already argued above that
+Qk = X2k →X+.
+In view of the interpretation as subspace iteration, the
+
+PAGE 25
+5 Discrete-time Riccati equations
+25
+convergence speed of (35) is linear and proportional to the ratio between the
+absolute values of the (n + 1)st and nth eigenvalue of S, i.e., between σ :=
+ρ((I + GX+)A) < 1 and its inverse σ−1. The convergence speed of its doubling
+variant (41) is then quadratic with the same ratio [49].
+The iteration (41), which goes under the name of structure-preserving dou-
+bling algorithm, has been used to solve DAREs and related equations by various
+authors, starting from Chu, Fan, Lin and Wang [31], but it also appears much
+earlier: for instance, Anderson [2] gave it an explicit system-theoretical meaning
+as constructing an equivalent system with the same DARE solution. The reader
+may find in the literature slightly different versions of (41), which are equivalent
+to them thanks to the identities (32).
+More general versions of the factorization (38) and of the iteration (41),
+which guarantee existence and boundedness of the iterates under much weaker
+conditions, have been explored by Mehrmann and Poloni [63]. Kuo, Lin and
+Shieh [55] studied the theoretical properties of the factorization (38) for general
+powers St, t ∈R, drawing a parallel with the so-called Toda flow for the QR
+algorithm.
+The limit of the monotonic sequence 0 ⪯G0 ⪯G1 ⪯G2 ⪯. . . also has a
+meaning: it is the maximal solution Y+ of the so-called dual equation
+Y = G + AY (I + QY )−1A∗,
+(42)
+which is obtained swapping Q with G and A with A∗in (28). Indeed, SDA
+for the DARE (42) is obtained by swapping Q with G and A with A∗in (41),
+but this transformation leaves the formulas unchanged. The dual equation (42)
+appears sometimes in applications together with (28). From the point of view
+of linear algebra, the most interesting feature of its solution Y+ is that
+ −Y+
+I
+
+is a basis matrix for the invariant subspace associated to the other eigenvalues
+of S, those outside the unit circle. Indeed, (38) gives
+S2k 0
+I
+
+=
+−Gk
+In
+
+A−∗
+k ,
+so
+ −Y+
+I
+
+is the limit of subspace iteration applied to S instead of S−1, with
+initial value [ 0
+I ]. In particular, putting all pieces together, the following Wiener-
+Hopf factorization holds
+S =
+
+−Y+
+I
+I
+X+
+  (I + QY+)−1A∗−1
+0
+0
+(I + GX+)−1A
+ −Y+
+I
+I
+X+
+−1
+.
+(43)
+This factorization relates explicitly the solutions X+, Y+ to a block diagonaliza-
+tion of S.
+An interesting limit case is the one when only the first part of Theorem 8
+holds, (Q, A) is not d-detectable, and the solution X+ exists but ρ((I+GX+)A) =
+1. In this case, S has eigenvalues on the unit circle, and it can be proved that
+all its Jordan blocks relative to these eigenvalues have even size: one can use a
+
+PAGE 26
+6 Continuous-time Riccati equations
+26
+result in Lancaster and Rodman[56, Theorem 12.2.3], after taking a factoriza-
+tion G = BR−1B∗with R ≻0 and using another result in the same book [56,
+Theorem 12.2.1] to show that the hypothesis Ψ(η) ≻0 holds.
+It turns out that in this case the two iterations still converge, although (35)
+becomes sublinear and (41) becomes linear with rate 1/2. This is shown by
+Chiang, Chu, Guo, Huang, Lin and Xu [29]; the reader can recognize that the
+key step there is the study of the subspace iteration in presence of Jordan blocks
+of even multiplicity.
+Note that the case in which the assumptions Q ⪰0, G ⪰0 do not hold
+is trickier, because there are examples where (28) does not have a stabilizing
+solution and S has Jordan blocks of odd size with eigenvalues on the unit circle:
+an explicit example is
+A =
+1
+3
+0
+1
+
+,
+G =
+1
+1
+1
+1
+
+,
+Q =
+1
+0
+0
+−10
+
+,
+(44)
+which produces a matrix S with two simple eigenvalues (Jordan blocks of size
+1) λ± ≈0.598 ± 0.801i with |λ| = 1.
+Surprisingly, eigenvalues on the unit
+circle are a generic phenomenon for symplectic matrices, which is preserved
+under perturbations: a small perturbation of the matrices in (44) will produce
+a perturbed ˜S with two simple eigenvalues ˜λ± that satisfy exactly |λ| = 1,
+because otherwise Part 2 of Lemma 9 would be violated.
+6
+Continuous-time Riccati equations
+We consider the equation to be solved for X = X∗⪰0. This equation is known
+as continuous-time algebraic Riccati equation (CARE), and arises in various
+problems connected to continuous-time control theory [34, Chapter 10].
+6.1
+Solution properties
+The similarities between (29) and (33) suggest that CAREs can be turned into
+DAREs (and vice versa) by converting the two associated invariant subspace
+problems; the ingredient to turn one into the other is the Cayley transform.
+Lemma 11. Let A, G = G∗, Q = Q∗be given, and take τ > 0. Set
+ Ad
+Gd
+−Qd
+A∗
+d
+
+=
+A −τI
+−G
+Q
+A∗−τI
+−1 A + τI
+−G
+Q
+A∗+ τI
+
+= I+2τ
+A −τI
+−G
+Q
+A∗−τI
+−1
+.
+(45)
+Assume that the inverse exists, and that Ad is invertible. Then, the DARE with
+coefficients Ad, Gd, Qd has the same solutions as the CARE with coefficients
+A, G, Q (and, in particular, the same maximal / stabilizing solution).
+These formulas (45) follow from constructing S := c(H) = (H −τI)−1(H +
+τI), and then applying Lemma 10 to construct a factorization
+S =
+I
+Gd
+0
+A∗
+d
+−1  Ad
+0
+−Qd
+I
+
+.
+
+PAGE 27
+6 Continuous-time Riccati equations
+27
+The matrix S that we have constructed has the same invariant subspaces as H
+because c(·) is an invertible rational function: indeed, from (29), it follows that
+S
+ I
+X
+
+= c(H)
+ I
+X
+
+=
+ I
+X
+
+c(M),
+M = A −GX.
+This relation coincides with (33), and shows that a solution X of the CARE is
+also a solution of the DARE constructed with (45). Thanks to Lemma (4), M
+has all its eigenvalues in LHP if and only if c(M) has all its eigenvalues inside
+the unit circle, so the stabilizing property of the solution is preserved.
+Methods to transform DAREs into CAREs and vice versa based on the
+Cayley transform appear frequently in the literature starting from the 1960s; see
+for instance Mehrmann [62], a paper which explores these transformations and
+mentions the presence of many “folklore results” based on the Cayley transforms,
+relating the properties of the two associated equations.
+Even if we restrict ourselves to the assumption that Ad is invertible when
+treating the DARE, it is important to remark that Lemma 11 does not generalize
+completely to the case when Ad is singular [62, Section 6]. By considering the
+poles of c(H) as a function of τ, one sees that Ad is singular if and only if
+τ ∈Λ(H).
+When this happens, even if S ‘exists’ in a suitable sense as an
+equivalent matrix pencil, an invariant subspace of H for which τ ∈Λ(M) cannot
+be converted to the form (33), but only to the subtly weaker form
+
+Ad
+0
+−Qd
+I
+  I
+X
+
+(M −τI) =
+I
+Gd
+0
+A∗
+d
+  I
+X
+
+(M + τI),
+M = A −GX.
+(46)
+with an additional singular matrix M −τI in the left-hand side. Thus we cannot
+write the equality (33), which identifies X as a solution of the DARE: hence the
+DARE has fewer solutions than the CARE. The stabilizing solution is always
+preserved by this transformation, though, because Λ(M) ⊂LHP cannot contain
+τ > 0.
+6.2
+Algorithms
+In view of the relation between DAREs and CAREs that we have just outlined,
+a natural algorithm is using the formulas (45) to convert (27) into an equiva-
+lent (28) and solving it using (41). This algorithm has been suggested by Chu,
+Fan and Lin [30] as a doubling algorithm for CAREs. This algorithm inherits
+all the nice convergence properties of SDA for DAREs; in particular, among
+them, the fact that it also works (at reduced linear speed) on problems in which
+A −GX+ has eigenvalues on the imaginary axis [29].
+While SDA works well in general, a delicate point is the choice of the shift
+value τ. In principle almost every choice of τ works, since H−τI is singular only
+for at most 2n values of τ, but in practice choosing the wrong value of τ may
+affect accuracy negatively. Dangers arise not from singularity of H −τI (which
+is actually harmless with a matrix pencil formulation), but from singularity
+
+PAGE 28
+6 Continuous-time Riccati equations
+28
+in (45), and also from taking τ too large or too small by orders of magnitude.
+A heuristic approach based on golden section search has been suggested [30].
+In practice, one would prefer to avoid the Cayley transform or at least delay
+it as much as possible; this observation leads to another popular algorithm for
+CAREs. We start from the following observation.
+Lemma 12. If S = c(H) (with a parameter τ ∈R), then
+S2 = c
+1
+2
+ H + τ 2H−1
+.
+(47)
+This identity can be verified directly, using the fact that rational functions
+of the same matrix H all commute with each other.
+Applying this identity repeatedly, we get S2k = c(Hk), where
+Hk+1 = 1
+2
+ Hk + τ 2H−1
+k
+
+,
+H0 = H.
+(48)
+Hence one can hold off the Cayley transform and just compute the sequence
+Hk directly, starting from (30). This constructs a sequence which represents
+implicitly S2k.
+Constructing the matrices Hk is numerically much less troublesome than
+constructing explicitly S2k or its inverse S−2k. Indeed, it is instructive to con-
+sider the behaviour of these iterations in a basis in which H is diagonal (when
+it exists). Let λ be a generic diagonal entry (i.e., an eigenvalue) of H. Then,
+S = c(H) has the corresponding eigenvalue c(λ), and S2k has the eigenvalue
+c(λ)2k. If λ ∈LHP, then |c(λ)| < 1 (Lemma 4), and hence c(λ)2k →0 when
+k →∞. Similarly, if λ is in the right half-plane, then |c(λ)| > 1 and c(λ)2k →∞.
+Thus S2k (as well as its inverse) has some eigenvalues that converge to zero, and
+some that diverge to infinity, as k grows. This is one of the reasons why it is
+preferable to keep S in its factored form (38). On the other hand, the eigen-
+values of Hk converge to finite values c−1(0) = −τ and c−1(∞) = τ, so this
+computation suggests that the direct computation of Hk is feasible.
+The sign function method[72, 35, 40] to solve CAREs consists exactly in
+computing the iteration (48) up to convergence, obtaining a matrix H∞=
+limk→∞Hk that has numerically n eigenvalues equal to τ ∈RHP and n equal
+to −τ ∈LHP, and then computing
+Im
+U1
+U2
+
+= ker(H∞+ τI),
+U1, U2 ∈Cn×n,
+X+ = U2U −1
+1 .
+(49)
+The method takes its name from the fact that the limit matrix H∞(for τ = 1)
+is the so-called matrix sign function of H. We refer the reader to its analysis
+in Higham [48, Chapter 5], in which one clearly sees that one of the main
+ingredients is the formula 47 relating the iteration to repeated squaring.
+Scaling is an important detail that deserves a discussion. Replacing H with
+a positive multiple of itself corresponds to multiplying each term of (27) by a
+
+PAGE 29
+6 Continuous-time Riccati equations
+29
+positive quantity; this operation does not change the solutions of the equation,
+nor the maximal / stabilizing properties of X+. In SDA, scaling is limited to
+choosing the parameter of the initial Cayley transform, but in the sign method
+we have more freedom: we can take a different τk at each step of (48). We
+remark that scaling for the sign method is usually presented in the literature in
+a slightly different form: one replaces (48) with
+Hk+1 = 1
+2
+ (τ −1
+k Hk) + (τ −1
+k Hk)−1
+.
+(50)
+The two forms are essentially equivalent, as they return iterates Hk that differ
+only by a multiplicative factor, which is then irrelevant in the final step (49).
+Irrespective of formulation, the main result is that a judicious choice of scaling
+can speed up the convergence of (48) or (50). A cheap and effective choice of
+scaling, determinantal scaling, τk = (det Hk)
+1
+n has been suggested by Byers [26].
+Other related choices of scaling and their performances have been discussed by
+Higham [48, Chapter 5] and Kenney and Laub [52]. The general message is that
+scaling has a great impact in the first steps of the iteration, when it can greatly
+improve convergence, but once the residual starts to decrease its effect in the
+later steps becomes negligible.
+Scaling also has an impact on stability; the stability of the sign iteration as a
+method to compute invariant subspaces (and hence ultimately Riccati solutions)
+has been studied by Bai and Demmel [3] and Byers, He and Mehrmann [27].
+The two interesting messages are that (expectedly) the sign function method
+suffers when H is ill-conditioned, but that (unexpectedly) the invariant sub-
+spaces extracted from H∞has better stability properties than H∞itself. A
+version of the sign iteration that uses matrix pencils to reduce the impact of
+these inversions have been suggested by Benner and Byers [11].
+Another useful computational detail is that one can rewrite the sign function
+method (48) as
+Mk+1 = 1
+2(Mk + τ 2JM−1
+k J),
+Mk = HkJ,
+which is cheaper because one can take advantage of the fact that the matrices
+Mk are Hermitian [26]. Indeed, it is a general observation that most of the
+matrix algebra operations needed in doubling-type algorithms can be reduced
+to operations on symmetric/Hermitian matrices; see for instance also (45).
+6.3
+Remarks
+The formulation in the sign iteration allows one to introduce some form of
+per-iteration scaling in the setting of a doubling-type algorithm. It would be
+interesting to see if this scaling can be transferred to the SDA setting, and which
+computational advantage it brings. Note that, in view of (47), scaling the sign
+iteration is equivalent to changing the parameter τ in the Cayley transform. So
+SDA does incorporate a form of scaling, but only at the first iteration, when
+one chooses τ.
+
+PAGE 30
+6 Continuous-time Riccati equations
+30
+In general, it is unclear if scaling after the first iteration produces major
+gains in convergence speed. It would be appealing to try and study this kind
+of scaling with the tools of polynomial and rational approximation, like it has
+been done in more details for non-doubling algorithms, with the aim of deriving
+optimal choices for the parameters τ and σk.
+There is another classical iterative algorithm to solve algebraic Riccati equa-
+tions (both in discrete and continuous time), and it is Newton’s method. For
+the simpler case of CAREs, Newton’s method [53] consists in determining Xk+1
+by solving at each step the Lyapunov equation
+(A−GXk)∗(Xk+1−Xk)+(Xk+1−Xk)(A−GXk) = −(Q+A∗Xk+XkA−XkGXk)
+(51)
+or the equivalent one
+(A −GXk)∗Xk+1 + Xk+1(A −GXk) = −Q −XkGXk.
+A line search procedure, which improves convergence speed in practice, has been
+introduced by Benner and Byers [10]. The method can be used, in particular,
+for large and sparse equations in conjunction with low-rank ADI [13].
+The reader may wonder if there is an explicit relation between doubling al-
+gorithms and Newton-type algorithms, considering especially that both exhibit
+quadratic convergence (which, moreover, in both cases degrades to linear with
+rate 1/2 if A−GX+ has purely imaginary eigenvalues [44]). The answer, unfor-
+tunately, seems to be no. An argument that suggests that the two iterations are
+genuinely different is that the iterates produced by Newton’s method approach
+X+ from above [53] (i.e., X1 ⪰X2 ⪰· · · ⪰Xk ⪰Xk+1 ⪰· · · ⪰X+), not from
+below like the iterates Qk of SDA in (41c).
+Some more recent algorithms for large and sparse CAREs essentially merge
+the Newton step (51) and the ADI iteration (25) into a single iteration [59, 77, 9].
+It is again unclear whether there is an explicit relation between these two families
+of methods.
+An interesting question is what is the ‘non-doubling’ analogue of the sign
+method and of SDA. One can convert the CARE to discrete-time using (45)
+and formulate (35), but to our knowledge this method does not have a more
+appealing presentation in terms of a simple iterative method for (27), like it has
+in all the other discrete-time examples.
+Another ‘philosophical’ observation is that the sign function method does not
+avoid a Cayley-type transformation; it merely pushes it back to the very last
+step (49), where the sub-expression H+τI appears; this operation takes the role
+of a discretizing transformation that maps the eigenvalue −τ into a value inside a
+given circle and the eigenvalue τ into one outside. A discretizing transformation
+of some sort seems inevitable in this family of algorithms, although delaying it
+until the very last step seems beneficial for accuracy, because at that point we
+have complete control of the location of eigenvalues.
+
+PAGE 31
+7 Unilateral equations and NMEs
+31
+7
+Unilateral equations and NMEs
+We end our discussion of the family of Riccati-type equations with a pair of
+oft-neglected cousins, and present them with an application that shows clearly
+the relationship between them. Consider the matrix Laurent polynomial
+P(z) = Az−1 + Q + A∗z,
+Q = Q∗≻0,
+A, Q ∈Cn×n.
+(52)
+The problem of spectral factorization (of quadratic matrix polynomials) consists
+in determining a factorization
+P(z) = (zY ∗−I)X(z−1Y −I),
+X = X∗≻0,
+X, Y ∈Cn×n,
+(53)
+such that ρ(Y ) ≤1. In particular, the left factor is invertible for |z| < 1, and
+the right factor is invertible for |z| > 1.
+Equating coefficients in (52) and (53) gives −XY = A, Q = X +Y ∗XY . We
+can eliminate one among X and Y from this system of two equations, getting
+two equations with a single unknown each
+0 = A + QY + A∗Y 2,
+(54)
+Q = X + A∗X−1A.
+(55)
+The first one (54) is called unilateral quadratic matrix equation [18], while the
+second one (55) is known with the (rather undescriptive) name of nonlinear
+matrix equation (NME) [46, 45, 49].
+While (54) looks more appealing at first, as it reveals direct ties with the
+palindromic quadratic eigenvalue problem [46, 45, 60], it is in fact (55) that
+reveals more structure: for instance, (55) has Hermitian solutions (see below),
+while the structure in the solutions of (54) is much less apparent.
+7.1
+Solution properties
+It follows from (53) that P(λ) ⪰0 for each λ that belongs to the unit circle
+(hence λ−1 = ¯λ), so this is a necessary condition for the solvability of this
+problem.
+It can be proved that it is sufficient, too, and that a maximal /
+stabilizing solution exists.
+Theorem 13. [39, Theorem 2.2] Assume that P(z) is regular and P(λ) ⪰0
+for each λ on the unit circle. Then, (55) has a (unique) solution X+ such that
+(1) X+ = X∗
++ ≻0;
+(2) X+ ⪰X for any other Hermitian solution X;
+(3) ρ(Y ) = ρ(−X−1
++ A) ≤1
+If, in addition, P(λ) ≻0 for each λ on the unit circle, then ρ(−X−1
++ A) < 1.
+
+PAGE 32
+7 Unilateral equations and NMEs
+32
+Once again, we can rewrite (55) as an invariant subspace problem.
+ A
+0
+−Q
+I
+  I
+X
+
+=
+ 0
+−I
+A∗
+0
+  I
+X
+
+Y,
+Y = −X−1A.
+(56)
+We assume again that A is invertible to avoid technicalities with matrix
+pencils. The matrix
+S =
+ 0
+−I
+A∗
+0
+−1  A
+0
+−Q
+I
+
+(57)
+is symplectic, and so is the slightly more general form
+ G
+−I
+A∗
+0
+−1  A
+0
+−Q
+I
+
+.
+(58)
+Lemma 14.
+(1) A matrix in the form (58) is symplectic if and only if G =
+G∗, Q = Q∗, and the two blocks called A, A∗in (34) are one the conjugate
+transpose of the other.
+(2) If λ is an eigenvalue of a symplectic matrix with right eigenvector v, then
+λ
+−1 is an eigenvalue of the same matrix with left eigenvector v∗J.
+(3) If the hypotheses of Theorem 13 hold (including the strict positivity one
+in the end), then the 2n eigenvalues of S are (counting multiplicities) the
+n eigenvalues λ1, λ2, . . . , λn of −X−1
++ A inside the unit circle, and the n
+eigenvalues λi
+−1, i = 1, 2, . . . , n outside the unit circle.
+The symplectic structure behind this equation is the same one as the DARE,
+and indeed Part 2 of this lemma is identical to Part 2 of Lemma 9. Indeed,
+Engwerda, Ran and Rijkeboer [39, Section 7] note that (55) can be reduced to
+a DARE, although it is one that does not fall inside our framework since it has
+G ⪯0.
+7.2
+Algorithms
+The formulation (55) suggests immediately the iterative algorithm
+Xk+1 = Q −A∗X−1
+k A.
+(59)
+Clearly we cannot start this iteration from 0, so we take X1 = Q instead. An
+interesting interpretation of this algorithm is as iterated Schur complements of
+block Toeplitz tridiagonal matrices. The Schur complement of the (1, 1) block
+of the tridiagonal matrix
+
+
+Xk
+A∗
+A
+Q
+A∗
+A
+Q
+...
+...
+...
+A∗
+A
+Q
+
+
+|
+{z
+}
+h blocks
+,
+
+PAGE 33
+7 Unilateral equations and NMEs
+33
+is
+
+
+Xk+1
+A∗
+A
+Q
+A∗
+A
+Q
+...
+...
+...
+A∗
+A
+Q
+
+
+|
+{z
+}
+h −1 blocks
+.
+Hence the whole iteration can be interpreted as constructing successive Schur
+complements of the tridiagonal matrix
+Qm :=
+
+
+Q
+A∗
+A
+Q
+A∗
+A
+Q
+...
+...
+...
+A∗
+A
+Q
+
+
+|
+{z
+}
+m blocks
+.
+(60)
+It can be seen that Qm is positive semidefinite, under the assumptions of The-
+orem 13: a quick sketch of a proof is as follows. The matrix Qm is a submatrix
+of
+
+
+Q
+A∗
+A
+A
+Q
+A∗
+A
+Q
+...
+...
+...
+A∗
+A∗
+A
+Q
+
+
+= (Φ⊗I)
+
+
+P(1)
+P(ζ)
+P(ζ2)
+...
+P(ζ−1)
+
+
+(Φ⊗I)−1,
+which the equation shows to be similar (using the Fourier matrix Φ and prop-
+erties of Fourier transforms) to a block diagonal matrix that contains P(z)
+from (52) evaluated in the roots of unity 1, ζ, ζ2, . . . , ζ−1.
+Hence, in particular, all the Xk are positive semidefinite. One can further
+show that Q = X0 ⪰X1 ⪰X2 ⪰· · · ⪰Xk ⪰. . . .
+The sequence Xk is
+monotonic and bounded from below, hence it converges, and one can show that
+its limit is X+ [39, Section 4] (to do this, verify the property in Point (2) of
+Theorem 13 by proving that Xk ⪰X at each step of the iteration).
+A doubling variant of (59) can be constructed starting from this Schur com-
+plement interpretation. The Schur complement of the submatrix formed by the
+
+PAGE 34
+7 Unilateral equations and NMEs
+34
+odd-numbered blocks (1, 3, 5, . . . , 2m −1) of
+
+
+Uk
+A∗
+k
+Ak
+Uk
+A∗
+k
+Ak
+...
+...
+...
+Uk
+A∗
+k
+Ak
+Qk
+
+
+|
+{z
+}
+2m blocks
+,
+is
+
+
+Uk+1
+A∗
+k+1
+Ak+1
+Uk+1
+A∗
+k+1
+Ak+1
+...
+...
+...
+Uk+1
+A∗
+k+1
+Ak+1
+Qk+1
+
+
+|
+{z
+}
+m blocks
+,
+with
+Ak+1 = −AkU −1
+k Ak,
+(61a)
+Qk+1 = Qk −A∗
+kU −1
+k Ak,
+(61b)
+Uk+1 = Uk −A∗
+kU −1
+k Ak −AkU −1
+k A∗
+k.
+(61c)
+We can construct the Schur complement of the first 2k −1 blocks of Q2k in two
+different ways: either we make 2k −1 iterations of (59), resulting in X2k, or we
+make k iterations of (61), starting from A0 = A, Q0 = U0 = Q, resulting in Qk.
+This shows that Qk = X2k.
+This peculiar way to take Schur complements of Toeplitz tridiagonal matrices
+was introduced by Buzbee, Golub and Nielson [25] to solve certain differential
+equations, and then later applied to matrix equations similar to (54) and (55)
+by Bini, Gemignani, and Meini [16, 17, 65]. The iteration (61) is known as cyclic
+reduction.
+One can derive the same iteration from repeated squaring, in the same way
+as we obtained SDA as a modified subspace iteration [58]. We seek formulas to
+update a factorization of the kind
+S−2k =
+ Ak
+0
+−Qk
+I
+−1 Gk
+−I
+A∗
+k
+0
+
+.
+To do this, we write (analogously to (40))
+S−2k+1 = S−2kS−2k =
+ Ak
+0
+−Qk
+I
+−1  Gk
+−I
+A∗
+k
+0
+  Ak
+0
+−Qk
+I
+−1! Gk
+−I
+A∗
+k
+0
+
+
+PAGE 35
+8 Nonsymmetric variants in applied probability
+35
+and use Lemma 10 (with [M1 M2] = I2n) to find a factorization in the form (39)
+of the term in parentheses, which then combines with the outer terms to produce
+the sought decomposition. The resulting formulas are
+Ak+1 = −Ak(Qk −Gk)−1Ak,
+(62a)
+Qk+1 = Qk −A∗
+k(Qk −Gk)−1Ak,
+(62b)
+Gk+1 = Gk + Ak(Qk −Gk)−1A∗
+k,
+(62c)
+and one sees that they coincide with (61), after setting Uk = Qk −Gk. With an
+argument analogous to the one in Section 5, one sees that
+S−2k  0
+−I
+
+=
+ I
+Qk
+
+,
+thus
+ I
+Qk
+
+converges to a basis of the invariant subspace associated to the eigen-
+values of S inside the unit circle.
+This formulation (62) is known as SDA-II [58, 32].
+7.3
+Remarks
+Even though we have mentioned spectral factorization only here, it can be for-
+mulated for more complicated matrix functions also in the context of DAREs
+and CAREs; in fact, it is a classical topic, and another facet of the multiple
+connections between matrix equations and control theory [4, 5, 76].
+The interpretation as Schur complement is a powerful trick, which reveals
+a greater picture in this family of methods. It may possibly be used to under-
+stand more about the stability of these methods, since Schur complementation
+and Gaussian elimination on symmetric positive definite matrices is a well un-
+derstood topic from the numerical point of view.
+Many authors have studied variants of (55). Typically, one replaces the non-
+linear term with various functions of the form A∗f(X)A, or adds more nonlinear
+terms. In the modified versions, it is often possible to prove convergence of the
+fixed-point algorithm with arguments of monotonicity, and prove the existence
+of a solution under some assumptions. However, after any nontrivial modifi-
+cation the connection with invariant subspaces is lost. This fact, coupled with
+lack of applications, makes these variants much less interesting than the original
+equation, in the eyes of the author.
+8
+Nonsymmetric variants in applied probability
+Many of the equations treated here have nonsymmetric variants which appear
+naturally in queuing theory, a sub-field of applied probability. In the analysis
+of quasi-birth-death models [57, 20], one encounters equations of the form
+0 = A + QY + BY 2,
+A, B, Q, Y ∈Rn×n,
+(63)
+
+PAGE 36
+8 Nonsymmetric variants in applied probability
+36
+where A, B ≥0 (we use the notation M ≥N to denote that a matrix M
+is entrywise larger than N, i.e., Mij ≥Nij for all i, j), and the matrix −Q
+is an M-matrix, i.e., Qij ≥0 for i ̸= j and Λ(Q) ⊂LHP. These equations
+have a solution Y ≥0 which has a natural probabilistic interpretation. The
+solution X to X = Q−BX−1A and the solution of the associated dual equation
+0 = Z2A + ZQ + B also appear naturally and have a related probabilistic
+meaning [57, Chapter 6][20, Section 5.6].
+Similarly, the equation
+Q + BX + XA −XGX = 0,
+Q, X ∈Rm×n, A ∈Rn×n, B ∈Rm×m, G ∈Rn×m.
+(64)
+appears in the study of so-called fluid queues, or stochastic flow models [73, 51,
+33]. The matrices A, B are M-matrices, while G, −Q ≥0. One can formulate
+nonsymmetric analogues of basic matrix iterations and doubling algorithms.
+Unfortunately, the theory does not translate perfectly to this setting, due to the
+sign differences between the two cases: in the symmetric equations G, Q ⪰0,
+while in the nonsymmetric case G, −Q ≥0. Due to this asymmetry, the signs
+in the two cases do not match, and one needs to formulate different arguments.
+For instance, in the symmetric case one proves that the inverses that appear
+in (41) exist because Gk ⪰0, Qk ⪰0; while in its nonsymmetric analogue
+Gk, −Qk ≥0, and one proves that I + GkQk and I + QkGk are M-matrices to
+show that those inverses exist.
+The equation (28) does not appear to have an immediate analogue in queu-
+ing theory, but this fact seems just an accident, since some of the results that
+involve (64) could have been formulated with an equivalent equation resembling
+more (28) than (27) instead. There is a distinction between discrete-time and
+continuous-time models also in applied probability, but in many cases it does
+not affect directly the shape of the equations; for instance (63) takes the same
+form for discrete- and continuous-time QBDs. The role of discretizing trans-
+formations such as Cayley transforms in this context has been studied by Bini,
+Meini, and Poloni [21].
+For reasons of space, we cannot give here a complete treatment of these
+nonsymmetric variants. Huang, Li and Lin [49] in their book enter into more
+detail about the doubling algorithms for these equations, but a great part of
+the theory (including existence results and probabilistic interpretations for the
+iterates of various numerical methods) is unfortunately available only in the
+queuing theory literature, strictly entangled with its applications.
+An interesting remark is that the M-matrix structure allows one to construct
+stability proofs more easily. Conditioning and stability results for these equa-
+tions have been studied by some authors [86, 85, 66, 84, 28], relying heavily
+on the sign and M-matrix structure. The forward stability proof in Nguyen
+and Poloni [66] is, to date, one of the very few complete stability proofs for a
+doubling-type algorithm.
+
+PAGE 37
+9 Conclusions
+37
+9
+Conclusions
+In this paper, we presented from a consistent point of view doubling algorithms
+for symmetric Riccati-type equations, relating them to the basic iterations of
+which they are a ‘squaring’ variant. We have included various algorithms that
+belong to the same family but have appeared independently, such as the sign
+iteration and cyclic reduction. We have outlined relations between doubling al-
+gorithms, the subspace iteration, ADI-type and Krylov subspace methods, and
+Schur complementation of tridiagonal block Toeplitz matrices. This theory, in
+turn, forms only a small portion of the far larger topic of numerical algorithms
+for Riccati-type equations and control theory. This field of research is an incred-
+ibly vast one, spanning at least six decades of literature and various communities
+between engineering and mathematics, so we have surely omitted or forgotten
+many relevant contributions; we apologize with the missing authors.
+We hope that the reader can benefit from our paper by both gaining theoret-
+ical insight, and having available some numerical algorithms for these equations.
+Indeed, with respect to many competitors, doubling-based algorithms have the
+advantage that they reduce to the simple coupled matrix iterations (41) or (61),
+which are easy to code and fast to run in many computational environments.
+Another interesting remark that was suggested by a referee is that some
+recent lines of research consider this family of matrix equations under different
+types of data sparsity than low-rank: for instance, Palitta and Simoncini [67]
+consider banded data, and Kressner, Massei and Robol [54] and Massei, Palitta
+and Robol [61] consider semi-separable (low-rank off-diagonal blocks) and hier-
+archically semiseparable structures. Much earlier, Grasedyck, Hackbusch and
+Khoromskij [42] considered using hierarchical matrices to solve Riccati equa-
+tions. All these structures are (at least up to a degree) preserved by the opera-
+tions involved in doubling methods [23, 83]. These novel techniques may open
+up new lines of research for doubling-type algorithms.
+References
+[1] H. Abou-Kandil, G. Freiling, V. Ionescu, and G. Jank.
+Matrix Riccati
+equations. Systems & Control: Foundations & Applications. Birkh¨auser
+Verlag, Basel, 2003.
+In control and systems theory.
+doi:10.1007/
+978-3-0348-8081-7.
+[2] B. D. O. Anderson. Second-order convergent algorithms for the steady-
+state Riccati equation. Internat. J. Control, 28(2):295–306, 1978. doi:
+10.1080/00207177808922455.
+[3] Z. Bai and J. Demmel. Using the matrix sign function to compute invariant
+subspaces. SIAM J. Matrix Anal. Appl., 19(1):205–225, 1998. doi:10.
+1137/S0895479896297719.
+[4] H. Bart, I. Gohberg, M. A. Kaashoek, and A. C. M. Ran. Factorization
+of matrix and operator functions: the state space method, volume 178 of
+
+PAGE 38
+9 Conclusions
+38
+Operator Theory: Advances and Applications. Birkh¨auser Verlag, Basel,
+2008. Linear Operators and Linear Systems.
+[5] H. Bart, I. Gohberg, M. A. Kaashoek, and A. C. M. Ran. A state space
+approach to canonical factorization with applications, volume 200 of Op-
+erator Theory:
+Advances and Applications.
+Birkh¨auser Verlag, Basel;
+Birkh¨auser Verlag, Basel, 2010.
+Linear Operators and Linear Systems.
+doi:10.1007/978-3-7643-8753-2.
+[6] R. H. Bartels and G. W. Stewart. Algorithm 432: solution of the matrix
+equation AX + XB = C. Comm. ACM, 15:820–826, 1972.
+[7] B. Beckermann and A. Townsend. Bounds on the singular values of matrices
+with displacement structure. SIAM Rev., 61(2):319–344, 2019. Revised
+reprint of ”On the singular values of matrices with displacement structure”
+[ MR3717820]. doi:10.1137/19M1244433.
+[8] P. Benner, T. Breiten, and T. Damm. Generalised tangential interpolation
+for model reduction of discrete-time MIMO bilinear systems. Internat. J.
+Control, 84(8):1398–1407, 2011. doi:10.1080/00207179.2011.601761.
+[9] P. Benner, Z. Bujanovi´c, P. K¨urschner, and J. Saak. RADI: a low-rank
+ADI-type algorithm for large scale algebraic Riccati equations.
+Numer.
+Math., 138(2):301–330, 2018. doi:10.1007/s00211-017-0907-5.
+[10] P. Benner and R. Byers. An exact line search method for solving general-
+ized continuous-time algebraic Riccati equations. IEEE Trans. Automat.
+Control, 43(1):101–107, 1998. doi:10.1109/9.654908.
+[11] P. Benner and R. Byers. An arithmetic for matrix pencils: theory and
+new algorithms.
+Numer. Math., 103(4):539–573, 2006.
+doi:10.1007/
+s00211-006-0001-x.
+[12] P. Benner, G. El Khoury, and M. Sadkane. On the squared Smith method
+for large-scale Stein equations. Numer. Linear Algebra Appl., 21(5):645–
+665, 2014. doi:10.1002/nla.1918.
+[13] P. Benner, J.-R. Li, and T. Penzl.
+Numerical solution of large-scale
+Lyapunov equations, Riccati equations, and linear-quadratic optimal con-
+trol problems. Numer. Linear Algebra Appl., 15(9):755–777, 2008. doi:
+10.1002/nla.622.
+[14] P. Benner, R.-C. Li, and N. Truhar. On the ADI method for Sylvester
+equations. J. Comput. Appl. Math., 233(4):1035–1045, 2009. doi:10.1016/
+j.cam.2009.08.108.
+[15] P. Benner, E. S. Quintana-Ort´ı, and G. Quintana-Ort´ı. Numerical solution
+of discrete stable linear matrix equations on multicomputers. Parallel Al-
+gorithms Appl., 17(2):127–146, 2002. doi:10.1080/10637190208941436.
+
+PAGE 39
+9 Conclusions
+39
+[16] D. Bini and B. Meini.
+On the solution of a nonlinear matrix equation
+arising in queueing problems. SIAM J. Matrix Anal. Appl., 17(4):906–926,
+1996. doi:10.1137/S0895479895284804.
+[17] D. A. Bini, L. Gemignani, and B. Meini.
+Computations with infinite
+Toeplitz matrices and polynomials. Linear Algebra Appl., 343/344:21–61,
+2002. Special issue on structured and infinite systems of linear equations.
+doi:10.1016/S0024-3795(01)00341-X.
+[18] D. A. Bini, B. Iannazzo, G. Latouche, and B. Meini. On the solution of
+algebraic Riccati equations arising in fluid queues. Linear Algebra Appl.,
+413(2-3):474–494, 2006. doi:10.1016/j.laa.2005.04.019.
+[19] D. A. Bini, B. Iannazzo, and B. Meini. Numerical solution of algebraic
+Riccati equations, volume 9 of Fundamentals of Algorithms. Society for
+Industrial and Applied Mathematics (SIAM), Philadelphia, PA, 2012.
+[20] D. A. Bini, G. Latouche, and B. Meini.
+Numerical methods for struc-
+tured Markov chains. Numerical Mathematics and Scientific Computation.
+Oxford University Press, New York, 2005. Oxford Science Publications.
+doi:10.1093/acprof:oso/9780198527688.001.0001.
+[21] D. A. Bini, B. Meini, and F. Poloni.
+Transforming algebraic Riccati
+equations into unilateral quadratic matrix equations.
+Numer. Math.,
+116(4):553–578, 2010. doi:10.1007/s00211-010-0319-2.
+[22] S. Bittanti, A. Laub, and J. Willems. The Riccati equation. Communica-
+tions and Control Engineering. Springer-Verlag, Berlin, 1991.
+[23] S. B¨orm, L. Grasedyck, and W. Hackbusch. Hierarchical matrices. Max-
+Planck-Institut f¨ur Mathematik inden Naturwissenschaften, Leipzig, Ger-
+many, 2003. Lecture note 21.
+[24] S. Boyd, L. El Ghaoui, E. Feron, and V. Balakrishnan.
+Linear matrix
+inequalities in system and control theory, volume 15 of SIAM Studies in
+Applied Mathematics.
+Society for Industrial and Applied Mathematics
+(SIAM), Philadelphia, PA, 1994. doi:10.1137/1.9781611970777.
+[25] B. L. Buzbee, G. H. Golub, and C. W. Nielson. On direct methods for
+solving Poisson’s equations. SIAM J. Numer. Anal., 7:627–656, 1970. doi:
+10.1137/0707049.
+[26] R. Byers.
+Solving the algebraic Riccati equation with the matrix
+sign function.
+Linear Algebra Appl., 85:267–279, 1987.
+doi:10.1016/
+0024-3795(87)90222-9.
+[27] R. Byers, C. He, and V. Mehrmann. The matrix sign function method
+and the computation of invariant subspaces. SIAM J. Matrix Anal. Appl.,
+18(3):615–632, 1997. doi:10.1137/S0895479894277454.
+
+PAGE 40
+9 Conclusions
+40
+[28] C. Chen, R.-C. Li, and C. Ma. Highly accurate doubling algorithm for
+quadratic matrix equation from quasi-birth-and-death process. Linear Al-
+gebra Appl., 583:1–45, 2019. doi:10.1016/j.laa.2019.08.018.
+[29] C.-Y. Chiang, E. K.-W. Chu, C.-H. Guo, T.-M. Huang, W.-W. Lin, and
+S.-F. Xu. Convergence analysis of the doubling algorithm for several non-
+linear matrix equations in the critical case. SIAM J. Matrix Anal. Appl.,
+31(2):227–247, 2009. doi:10.1137/080717304.
+[30] E. K.-W. Chu, H.-Y. Fan, and W.-W. Lin. A structure-preserving doubling
+algorithm for continuous-time algebraic Riccati equations. Linear Algebra
+Appl., 396:55–80, 2005. doi:10.1016/j.laa.2004.10.010.
+[31] E. K.-W. Chu, H.-Y. Fan, W.-W. Lin, and C.-S. Wang.
+Structure-
+preserving algorithms for periodic discrete-time algebraic Riccati equa-
+tions.
+Internat. J. Control,
+77(8):767–788,
+2004.
+doi:10.1080/
+00207170410001714988.
+[32] E. K.-W. Chu, T.-M. Hwang, W.-W. Lin, and C.-T. Wu. Vibration of fast
+trains, palindromic eigenvalue problems and structure-preserving doubling
+algorithms. J. Comput. Appl. Math., 219(1):237–252, 2008. doi:10.1016/
+j.cam.2007.07.016.
+[33] A. da Silva Soares. Fluid queues – Building upon the analogy with QBD
+processes. PhD thesis, 2005.
+[34] B. N. Datta. Numerical methods for linear control systems. Elsevier Aca-
+demic Press, San Diego, CA, 2004. Design and analysis.
+[35] E. D. Denman and A. N. Beavers, Jr.
+The matrix sign function and
+computations in systems. Appl. Math. Comput., 2(1):63–94, 1976. doi:
+10.1016/0096-3003(76)90020-5.
+[36] V. Druskin, L. Knizhnerman, and V. Simoncini. Analysis of the rational
+Krylov subspace and ADI methods for solving the Lyapunov equation.
+SIAM J. Numer. Anal., 49(5):1875–1898, 2011. doi:10.1137/100813257.
+[37] V. Druskin and V. Simoncini. Adaptive rational Krylov subspaces for large-
+scale dynamical systems. Systems Control Lett., 60(8):546–560, 2011. doi:
+10.1016/j.sysconle.2011.04.013.
+[38] N. S. Ellner and E. L. Wachspress. Alternating direction implicit iteration
+for systems with complex spectra. SIAM J. Numer. Anal., 28(3):859–870,
+1991. doi:10.1137/0728045.
+[39] J. C. Engwerda, A. C. M. Ran, and A. L. Rijkeboer. Necessary and suf-
+ficient conditions for the existence of a positive definite solution of the
+matrix equation X + A∗X−1A = Q. Linear Algebra Appl., 186:255–275,
+1993. doi:10.1016/0024-3795(93)90295-Y.
+
+PAGE 41
+9 Conclusions
+41
+[40] J. D. Gardiner and A. J. Laub. A generalization of the matrix-sign-function
+solution for algebraic Riccati equations. International Journal of Control,
+44(3):823–832, 1986. doi:10.1080/00207178608933634.
+[41] G. H. Golub and C. F. Van Loan. Matrix computations. Johns Hopkins
+Studies in the Mathematical Sciences. Johns Hopkins University Press, Bal-
+timore, MD, fourth edition, 2013.
+[42] L. Grasedyck, W. Hackbusch, and B. N. Khoromskij.
+Solution of large
+scale algebraic matrix Riccati equations by use of hierarchical matrices.
+Computing, 70(2):121–165, 2003. doi:10.1007/s00607-002-1470-0.
+[43] S. Gugercin and A. C. Antoulas. A survey of model reduction by balanced
+truncation and some new results. Internat. J. Control, 77(8):748–766, 2004.
+doi:10.1080/00207170410001713448.
+[44] C.-H. Guo and P. Lancaster. Analysis and modification of Newton’s method
+for algebraic Riccati equations. Math. Comp., 67(223):1089–1105, 1998.
+doi:10.1090/S0025-5718-98-00947-8.
+[45] C.-H. Guo and W.-W. Lin. The matrix equation X + AT X−1A = Q and
+its application in nano research. SIAM J. Sci. Comput., 32(5):3020–3038,
+2010. doi:10.1137/090758209.
+[46] C.-H. Guo and W.-W. Lin. Solving a structured quadratic eigenvalue prob-
+lem by a structure-preserving doubling algorithm. SIAM J. Matrix Anal.
+Appl., 31(5):2784–2801, 2010. doi:10.1137/090763196.
+[47] S. G¨uttel. Rational Krylov approximation of matrix functions: numerical
+methods and optimal pole selection. GAMM-Mitt., 36(1):8–31, 2013. doi:
+10.1002/gamm.201310002.
+[48] N. J. Higham. Functions of matrices. Society for Industrial and Applied
+Mathematics (SIAM), Philadelphia, PA, 2008. Theory and computation.
+doi:10.1137/1.9780898717778.
+[49] T.-M. Huang, R.-C. Li, and W.-W. Lin. Structure-preserving doubling algo-
+rithms for nonlinear matrix equations, volume 14 of Fundamentals of Algo-
+rithms. Society for Industrial and Applied Mathematics (SIAM), Philadel-
+phia, PA, 2018. doi:10.1137/1.9781611975369.ch1.
+[50] V. Ionescu, C. Oar˘a, and M. Weiss. Generalized Riccati theory and robust
+control. John Wiley & Sons, Ltd., Chichester, 1999. A Popov function
+approach.
+[51] R. L. Karandikar and V. Kulkarni. Second-order fluid flow models: Re-
+flected Brownian motion in a random environment. Oper. Res, 43:77–88,
+1995.
+
+PAGE 42
+9 Conclusions
+42
+[52] C. Kenney and A. J. Laub.
+On scaling Newton’s method for polar de-
+composition and the matrix sign function. SIAM J. Matrix Anal. Appl.,
+13(3):698–706, 1992. doi:10.1137/0613044.
+[53] D. Kleinman. On an iterative technique for Riccati equation computations.
+IEEE Transactions on Automatic Control, 13(1):114–115, February 1968.
+doi:10.1109/TAC.1968.1098829.
+[54] D. Kressner, S. Massei, and L. Robol. Low-rank updates and a divide-
+and-conquer method for linear matrix equations. SIAM J. Sci. Comput.,
+41(2):A848–A876, 2019. doi:10.1137/17M1161038.
+[55] Y.-C. Kuo, W.-W. Lin, and S.-F. Shieh. Structure-preserving flows of sym-
+plectic matrix pairs. SIAM J. Matrix Anal. Appl., 37(3):976–1001, 2016.
+doi:10.1137/15M1019155.
+[56] P. Lancaster and L. Rodman. Algebraic Riccati equations. Oxford Science
+Publications. The Clarendon Press, Oxford University Press, New York,
+1995.
+[57] G. Latouche and V. Ramaswami. Introduction to matrix analytic meth-
+ods in stochastic modeling.
+ASA-SIAM Series on Statistics and Ap-
+plied Probability. Society for Industrial and Applied Mathematics (SIAM),
+Philadelphia, PA; American Statistical Association, Alexandria, VA, 1999.
+doi:10.1137/1.9780898719734.
+[58] W.-W. Lin and S.-F. Xu.
+Convergence analysis of structure-preserving
+doubling algorithms for Riccati-type matrix equations. SIAM J. Matrix
+Anal. Appl., 28(1):26–39, 2006. doi:10.1137/040617650.
+[59] Y. Lin and V. Simoncini. A new subspace iteration method for the algebraic
+Riccati equation. Numer. Linear Algebra Appl., 22(1):26–47, 2015. doi:
+10.1002/nla.1936.
+[60] D. S. Mackey, N. Mackey, C. Mehl, and V. Mehrmann. Structured polyno-
+mial eigenvalue problems: good vibrations from good linearizations. SIAM
+J. Matrix Anal. Appl., 28(4):1029–1051, 2006. doi:10.1137/050628362.
+[61] S. Massei, D. Palitta, and L. Robol. Solving rank-structured Sylvester and
+Lyapunov equations. SIAM J. Matrix Anal. Appl., 39(4):1564–1590, 2018.
+doi:10.1137/17M1157155.
+[62] V. Mehrmann. A step toward a unified treatment of continuous and discrete
+time control problems.
+In Proceedings of the Fourth Conference of the
+International Linear Algebra Society (Rotterdam, 1994), volume 241/243,
+pages 749–779, 1996. doi:10.1016/0024-3795(95)00257-X.
+[63] V. Mehrmann and F. Poloni.
+Doubling algorithms with permuted La-
+grangian graph bases. SIAM J. Matrix Anal. Appl., 33(3):780–805, 2012.
+doi:10.1137/110850773.
+
+PAGE 43
+9 Conclusions
+43
+[64] V. L. Mehrmann. The autonomous linear quadratic control problem, volume
+163 of Lecture Notes in Control and Information Sciences. Springer-Verlag,
+Berlin, 1991. Theory and numerical solution. doi:10.1007/BFb0039443.
+[65] B. Meini. Efficient computation of the extreme solutions of X +A∗X−1A =
+Q and X −A∗X−1A = Q. Math. Comp., 71(239):1189–1204, 2002. doi:
+10.1090/S0025-5718-01-01368-0.
+[66] G. T. Nguyen and F. Poloni. Componentwise accurate fluid queue compu-
+tations using doubling algorithms. Numer. Math., 130(4):763–792, 2015.
+doi:10.1007/s00211-014-0675-4.
+[67] D. Palitta and V. Simoncini.
+Numerical methods for large-scale Lya-
+punov equations with symmetric banded data.
+SIAM J. Sci. Comput.,
+40(5):A3581–A3608, 2018. doi:10.1137/17M1156575.
+[68] D. W. Peaceman and H. H. Rachford, Jr.
+The numerical solution of
+parabolic and elliptic differential equations. J. Soc. Indust. Appl. Math.,
+3:28–41, 1955.
+[69] T. Penzl. A cyclic low-rank Smith method for large sparse Lyapunov equa-
+tions. SIAM J. Sci. Comput., 21(4):1401–1418, 1999/00. doi:10.1137/
+S1064827598347666.
+[70] F. Poloni and T. Reis. A structure-preserving doubling algorithm for Lur’e
+equations. Numer. Linear Algebra Appl., 23(1):169–186, 2016. doi:10.
+1002/nla.2019.
+[71] A. C. M. Ran and H. L. Trentelman.
+Linear quadratic problems with
+indefinite cost for discrete time systems.
+SIAM J. Matrix Anal. Appl.,
+14(3):776–797, 1993. doi:10.1137/0614055.
+[72] J. D. Roberts. Linear model reduction and solution of the algebraic Riccati
+equation by use of the sign function. Internat. J. Control, 32(4):677–687,
+1980. doi:10.1080/00207178008922881.
+[73] L. C. G. Rogers. Fluid models in queueing theory and Wiener-Hopf factor-
+ization of Markov chains. Ann. Appl. Probab., 4:390–413, 1994.
+[74] A. Ruhe. Rational Krylov sequence methods for eigenvalue computation.
+Linear Algebra Appl., 58:391–405, 1984.
+doi:10.1016/0024-3795(84)
+90221-0.
+[75] M. Sadkane.
+A low-rank Krylov squared Smith method for large-scale
+discrete-time Lyapunov equations.
+Linear Algebra and its Applications,
+436(8):2807 – 2827, 2012. Special Issue dedicated to Danny Sorensen’s 65th
+birthday.
+URL: http://www.sciencedirect.com/science/article/
+pii/S0024379511005337, doi:10.1016/j.laa.2011.07.021.
+
+PAGE 44
+9 Conclusions
+44
+[76] A. H. Sayed and T. Kailath. A survey of spectral factorization methods.
+Numer. Linear Algebra Appl., 8(6-7):467–496, 2001. Numerical linear alge-
+bra techniques for control and signal processing. doi:10.1002/nla.250.
+[77] V. Simoncini. Analysis of the rational Krylov subspace projection method
+for large-scale algebraic Riccati equations. SIAM J. Matrix Anal. Appl.,
+37(4):1655–1674, 2016. doi:10.1137/16M1059382.
+[78] V. Simoncini. Computational methods for linear matrix equations. SIAM
+Rev., 58(3):377–441, 2016. doi:10.1137/130912839.
+[79] R. A. Smith. Matrix equation XA + BX = C. SIAM J. Appl. Math.,
+16:198–201, 1968. doi:10.1137/0116017.
+[80] E. L. Wachspress. Iterative solution of the Lyapunov matrix equation. Appl.
+Math. Lett., 1(1):87–90, 1988. doi:10.1016/0893-9659(88)90183-8.
+[81] D. S. Watkins. The matrix eigenvalue problem. Society for Industrial and
+Applied Mathematics (SIAM), Philadelphia, PA, 2007. GR and Krylov
+subspace methods. doi:10.1137/1.9780898717808.
+[82] J. Willems.
+Least squares stationary optimal control and the algebraic
+riccati equation. IEEE Transactions on Automatic Control, 16(6):621–634,
+1971.
+[83] J. Xia, S. Chandrasekaran, M. Gu, and X. S. Li. Fast algorithms for hierar-
+chically semiseparable matrices. Numer. Linear Algebra Appl., 17(6):953–
+976, 2010. doi:10.1002/nla.691.
+[84] J. Xue and R.-C. Li. Highly accurate doubling algorithms for M-matrix
+algebraic Riccati equations. Numer. Math., 135(3):733–767, 2017. doi:
+10.1007/s00211-016-0815-0.
+[85] J. Xue, S. Xu, and R.-C. Li. Accurate solutions of M-matrix algebraic
+Riccati equations. Numer. Math., 120(4):671–700, 2012. doi:10.1007/
+s00211-011-0421-0.
+[86] J. Xue,
+S. Xu,
+and R.-C. Li.
+Accurate solutions of M-matrix
+Sylvester equations. Numer. Math., 120(4):639–670, 2012. doi:10.1007/
+s00211-011-0420-1.

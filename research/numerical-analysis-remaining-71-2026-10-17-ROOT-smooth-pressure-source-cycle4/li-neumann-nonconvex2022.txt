@@ -1,0 +1,5146 @@
+[PAGE 1]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MATHEMATICS OF COMPUTATION
+Volume 91, Number 336, July 2022, Pages 1533–1585
+https://doi.org/10.1090/mcom/3724
+Article electronically published on April 26, 2022
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT
+METHOD FOR THE NEUMANN PROBLEM IN NONCONVEX
+POLYGONS WITH LOCALLY REFINED MESH
+BUYANG LI
+Abstract. The Galerkin ﬁnite element solution uh of the Poisson equation
+−Δu = f under the Neumann boundary condition in a possibly nonconvex
+polygon Ω, with a graded mesh locally reﬁned at the corners of the domain,
+is shown to satisfy the following maximum-norm stability:
+∥uh∥L∞(Ω) ≤Cℓh∥u∥L∞(Ω),
+where ℓh = ln(2 + 1/h) for piecewise linear elements and ℓh = 1 for higher-
+order elements. As a result of the maximum-norm stability, the following best
+approximation result holds:
+∥u −uh∥L∞(Ω) ≤Cℓh∥u −Ihu∥L∞(Ω),
+where Ih denotes the Lagrange interpolation operator onto the ﬁnite element
+space.
+For a locally quasi-uniform triangulation suﬃciently reﬁned at the
+corners, the above best approximation property implies the following optimal-
+order error bound in the maximum norm:
+∥u −uh∥L∞(Ω) ≤
+
+Cℓhhk+2−2
+p ∥f∥W k,p(Ω)
+if r ≥k + 1,
+Cℓhhk+1∥f∥Hk(Ω)
+if r = k,
+where r ≥1 is the degree of ﬁnite elements, k is any nonnegative integer no
+larger than r, and p ∈[2, ∞) can be arbitrarily large.
+1. Introduction
+This article concerns the maximum-norm stability of Galerkin ﬁnite element
+approximations to the Neumann boundary value problem
+
+−Δu = f
+in Ω,
+∂nu = 0
+on ∂Ω,
+(1.1)
+under the condition
+
+Ω f d x = 0 (for the existence of solution) with the normal-
+ization condition
+
+Ω u d x = 0 (for the uniqueness of the solution), where Ω is a
+two-dimensional polygon. The Galerkin ﬁnite element solution of (1.1) is deﬁned
+by the weak formulation:
+(∇uh, ∇vh) = (f, vh)
+∀vh ∈Sh,
+(1.2)
+Received by the editor May 16, 2021, and, in revised form, November 12, 2021, and November
+30, 2021.
+2020 Mathematics Subject Classiﬁcation. Primary 65M12, 65M15; Secondary 65L06.
+Key words and phrases. Finite element methods, Neumann problem, maximum-norm stability,
+nonconvex polygon, graded mesh, corner singularity.
+This work was partially supported by a grant from the Research Grants Council of Hong
+Kong (GRF Project No. PolyU15300519), and an internal grant at The Hong Kong Polytechnic
+University (PolyU Project ID: P0031035, Work Programme: ZZKQ).
+c
+⃝2022 American Mathematical Society
+1533
+
+[PAGE 2]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1534
+BUYANG LI
+with the normalization condition
+
+Ω uh d x = 0, where Sh is the Lagrange ﬁnite
+element subspace of H1(Ω) consisting of all piecewise polynomials of degree r ≥1
+subject to a locally quasi-uniform triangulation.
+It is well known that the ﬁnite element approximation to (1.1) is stable in the
+H1 norm on a general polygon with general triangulation, i.e.,
+∥uh∥H1(Ω) ≤C∥u∥H1(Ω),
+(1.3)
+where the constant C is independent of the solution u and the mesh size h. The
+result can be interpreted as the H1 stability of the Ritz projection. Since the Ritz
+projection of u −Ihu is uh −Ihu, where Ih denotes the Lagrange interpolation
+operator onto the ﬁnite element space, replacing u by u −Ihu in (1.3) yields the
+following best approximation property in the H1 norm:
+∥u −uh∥H1(Ω) ≤C∥u −Ihu∥H1(Ω).
+(1.4)
+The objective of this article is to establish the following analogous stability result
+in the L∞norm on a general polygon (possibly nonconvex) with locally reﬁned
+triangulation at the corners:
+∥uh∥L∞(Ω) ≤Cℓh∥u∥L∞(Ω),
+(1.5)
+where
+ℓh =
+
+ln(2 + 1/h)
+if r = 1,
+1
+if r ≥2.
+(1.6)
+Such maximum-norm stability results have important applications in resolvent es-
+timates of discretized elliptic operators [6, 28], discrete maximal Lp regularity of
+parabolic equations [13, 14, 23, 24], and pointwise error estimates of ﬁnite element
+solutions for elliptic, parabolic and optimal control problems [19, 21, 22, 33].
+In
+particular, the maximum-norm stability result in (1.5) would completely reduce
+pointwise error estimation to interpolation errors, i.e.,
+∥u −uh∥L∞(Ω) ≤Cℓh∥u −Ihu∥L∞(Ω).
+(1.7)
+The maximum-norm stability result in (1.5) has been established for convex poly-
+gons and polyhedra with globally quasi-uniform mesh in [20], and for smooth do-
+mains in [18,31]. It is known that the logarithmic factor ln(2+1/h) in the piecewise
+linear case r = 1 cannot be removed in general; see [11]. For the Dirichlet boundary
+condition, the maximum-norm stability has been established in [29] for nonconvex
+polygons by utilizing a weak maximum principle of ﬁnite element methods under
+globally quasi-uniform mesh. However, the argument using weak maximum prin-
+ciple of ﬁnite element methods cannot be extended to the Neumann problem in
+nonconvex polygons, or Dirichlet/Neumann problems in nonconvex polyhedra, or
+locally reﬁned mesh. Whether the maximum-norm stability (1.5) can hold, under
+either globally quasi-uniform mesh or locally reﬁned mesh, is still an open ques-
+tion for the Neumann problem in nonconvex polygons/polyhedra and the Dirichlet
+problem in nonconvex polyhedra (except for the special case of piecewise linear
+ﬁnite elements with nonobtuse quasi-uniform tetrahedral mesh [12]).
+In contrast to the maximum-norm stability result in (1.5), the almost optimal-
+order error estimate
+∥u −uh∥L∞(Ω) ≤Chr+1−ϵ
+(ϵ > 0 is any ﬁxed number)
+(1.8)
+
+[PAGE 3]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1535
+was shown in [30] for suﬃciently smooth f and general polygons, with triangulations
+locally reﬁned at the corners, i.e.,
+ℏ(x) ∼min
+j
+|x −zj|1−γjh,
+(1.9)
+where ℏ(x) denotes the mesh size at point x, and zj denotes the jth corner of
+the polygon Ω.
+It is assumed that the local reﬁnement parameter γj ∈(0, 1]
+corresponding to the corner zj satisﬁes the condition γj < βj/r, where βj = π/θj
+and θj is the interior angle at the corner zj. The convergence order for piecewise
+linear ﬁnite elements was improved in [2] for the Dirichlet problem with explicit
+dependence on a H¨older norm of f, i.e.,
+∥u −uh∥L∞(Ω) ≤Ch2 ln(2 + 1/h)∥f∥Cσ(Ω)
+(1.10)
+under the condition γj < βj/2 and σ > 0. More recently, an optimal-order error
+estimate
+∥u −uh∥L∞(Ω) ≤Ch2 ln(2 + 1/h)∥u∥W 2,∞
+σ
+(1.11)
+was shown in [1] under the condition γj < βj/2, for the Neumann problem with
+piecewise linear ﬁnite elements, with explicit dependence on some weighted W 2,∞
+norm of the solution u.
+The W 1,∞stability of ﬁnite element approximations was shown for convex poly-
+gons and polyhedra under mildly graded meshes in [10], i.e.,
+∥uh∥W 1,∞(Ω) ≤C∥u∥W 1,∞(Ω).
+(1.12)
+The W 1,p stability
+∥uh∥W 1,p(Ω) ≤C∥u∥W 1,p(Ω)
+(1.13)
+was shown in [25] for convex polygons with mesh satisfying (1.9).
+Such W 1,∞
+stability estimates were also established for the Stokes equation in convex polyhedra
+[17]. The extension of these results to nonconvex polygons or polyhedra still remains
+open, similarly as the L∞stability result in (1.5).
+In this article, we prove the maximum-norm stability (1.5) for general polygons,
+with ﬁnite elements of arbitrary degree and locally reﬁned mesh satisfying (1.9);
+see Theorem 2.1. The local reﬁnement parameter γj is only required to satisfy
+γj ∈(0, βj) ∩(0, 1], which is weaker than the condition γj < βj/2 required to ob-
+tain the maximum-norm error estimates in the literature. Some new techniques
+are developed to prove such maximum-norm stability results in nonconvex poly-
+gons and with graded mesh.
+In particular, in the literature of maximum-norm
+stability and error estimates for ﬁnite element methods, people often use a “dyadic
+decomposition” corresponding to a point x0 where uh attains its maximum, i.e.,
+Ω =
+J
+j=0
+Ωj
+with
+Ωj ={x ∈Ω : ρj+1 ≤|x −x0|<ρj} and ρj =2−jdiameter(Ω),
+and reduce the problem to some technical estimates on the subdomains Ωj, in order
+to derive estimates of |uh(x0)| or |uh(x0) −u(x0)|. In this article, we introduce
+a “double dyadic decomposition” corresponding to both x0 and a corner z0, as
+described in Section 4.1. In this way, diﬀerent estimates can be obtained on the
+subdomains closer to x0 and the subdomains closer to z0, respectively. Therefore,
+such a double dyadic decomposition is convenient for analysis of the maximum-norm
+stability of ﬁnite element methods with graded mesh locally reﬁned at a corner.
+
+[PAGE 4]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1536
+BUYANG LI
+As a consequence of (1.5) and a local regularity result to be established in this
+article, we also obtain the following maximum-norm error estimates:
+∥u −uh∥L∞(Ω) ≤
+⎧
+⎪
+⎪
+⎪
+⎪
+⎨
+⎪
+⎪
+⎪
+⎪
+⎩
+Cℓhhk+2−2
+p ∥f∥W k,p(Ω)
+if r ≥k + 1 and γj ∈
+	
+0, min(1,βj)
+k+2−2/p
+
+at corners,
+Cℓhhk+1∥f∥Hk(Ω)
+if r = k and γj ∈
+	
+0, min(1,βj)
+k+1
+
+at corners,
+(1.14)
+where k is any nonnegative integer and p ∈[2, ∞) can be arbitrarily large; see
+Corollary 2.1. In particular, if f is suﬃciently smooth compared with the degree
+of ﬁnite elements (in the case r = k), then the order of convergence is optimal with
+respect to the degree of ﬁnite elements (up to a factor ℓh); if f is not suﬃciently
+smooth compared with the degree of ﬁnite elements (in the case r ≥k + 1), then
+the order of convergence is optimal with respect to the regularity of f.
+The rest of this article is organized as follows.
+In Section 2 we present the
+notation, assumptions and main theorems. In Section 3 we present local H1+s,
+W 2,p and H2+α estimates of Green’s function in nonconvex polygons. These results
+are used in Section 4 to prove the maximum-norm stability of the Ritz projection.
+The proof of is presented in Section 5.
+Some technical estimates are presented
+in Appendices A–C. Throughout this article, we denote by C a generic positive
+constant, which may be diﬀerent at diﬀerent occurrences but will be independent
+of the mesh size h.
+2. Main results
+2.1. Triangulation locally reﬁned at the corners. Let Ω be a nonconvex poly-
+gon, with vertices zj, j = 0, . . . , m −1, oriented counter clockwise, and denote by
+Γj the edge between the vertices zj and zj+1, with zm = z0. Let θj be the interior
+angle of the polygon Ω at the vertex zj, and deﬁne βj := π/θj. We assume that
+the domain Ω is triangulated with the following properties.
+(1) Local quasi-uniformity: The ratio between the radius of circumcircle and
+the radius of inscribed circle of each triangle is bounded, and the ratios
+between the diameters of adjacent triangles are bounded.
+(2) Local reﬁnement at the corners: Let h denote the mesh size of the triangula-
+tion (maximal diameter of the triangles). Let h∗,j ∼h1/γj for some constant
+γj ∈(0, βj) ∩(0, 1] represent the diameter (up to a constant multiple) of
+triangles near the corner zj, and let ℏ(x) denote the maximal diameter of
+triangles which contain x. We assume that ℏ(x) is equivalent to h away
+from (when x is outside a neighborhood of) the corners and satisﬁes the
+following conditions near the corners zj, j = 0, . . . , m −1:
+ℏ(x) ∼|x −zj|1−γjh,
+if |x −zj| > 2h∗,j,
+(2.1a)
+ℏ(x) ∼h∗,j,
+if |x −zj| ≤2h∗,j.
+(2.1b)
+Hence, the mesh is locally reﬁned at the corners zj, j = 0, . . . , m −1, and
+is quasi-uniform away from the corners. In particular, the mesh size near
+the corner zj is h1−γj
+∗,j
+h ∼h∗,j, with h∗,j ∼h1/γj.
+
+[PAGE 5]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1537
+If we denote by N the number of degrees of freedom in the triangulation above,
+then the following inequality can be shown:
+N ≤Ch−2.
+(2.2)
+Namely, the number of degrees of freedom in the above locally reﬁned triangulation
+is equivalent to the number of degrees of freedom in a quasi-uniform triangulation
+with mesh size h.
+Let Th denote the set of triangles in the triangulation of the domain Ω, and let
+Sh be the ﬁnite element space of degree r ≥1 subject to the triangulation, i.e.,
+Sh = {vh ∈H1(Ω) : vh|τ is a polynomial of degree r for all τ ∈Th}.
+2.2. Main results.
+Theorem 2.1. Let Ω be a polygon which is triangulated as described in Section
+2.1. Then the Ritz projection Rh : H1(Ω) →Sh deﬁned by
+(∇(u −Rhu), ∇vh) = 0,
+∀vh ∈Sh,
+(2.3)
+with the normalization condition
+
+Ω Rhu d x =
+
+Ω u d x, satisﬁes the following sta-
+bility estimate:
+∥Rhu∥L∞(Ω) ≤Cℓh∥u∥L∞(Ω)
+∀u ∈C(Ω) ∩H1(Ω),
+(2.4)
+where ℓh is deﬁned in (1.6).
+Remark 2.1. Since C(Ω) ∩H1(Ω) is dense in C(Ω), the stability inequality (2.4)
+implies that the Ritz projection has an extension Rh : C(Ω) →Sh. The maximum-
+norm stability of the Ritz projection in Theorem 2.1 immediately implies (1.5) for
+the solutions of (1.1)–(1.2).
+The L∞stability of the Ritz projection in Theorem 2.1 immediately implies that
+the solutions of (1.1)–(1.2) have the following property:
+∥Ihu −uh∥L∞(Ω) = ∥Rh(Ihu −u)∥L∞(Ω) ≤Cℓh∥Ihu −u∥L∞(Ω),
+(2.5)
+and therefore
+∥u −uh∥L∞(Ω) ≤Cℓh∥u −Ihu∥L∞(Ω).
+(2.6)
+The inequality above is called the best approximation property in maximum norm.
+By using this best approximation property (2.6) and the regularity result in Lemma
+5.1, we can prove the following maximum-norm error estimate, which is optimal
+with respect to regularity of f.
+Corollary 2.1. Let f ∈W k,p(Ω), where k is a nonnegative integer and p ≥2 is a
+real number such that (k, p) ̸= (0, 2) and (1 −1
+p) 2θj
+π
+is not an integer for j = 0, 1,
+. . . , m −1. Then the solutions of (1.1)–(1.2) satisfy the error bound in (1.14).
+The rest part of this paper is devoted to the proof of Theorem 2.1 and Corollary
+2.1. For simplicity, in the proof of Theorem 2.1 we assume that there is only one
+reentrant corner at z0 with θ0 ∈(π, 2π), with θj ∈(0, π) for j = 1, . . . , m −1,
+and assume that the mesh is locally reﬁned only at the reentrant corner z0 with
+a parameter γ = γ0. The proof would be similar if there are multiple reentrant
+corners or the mesh is reﬁned at multiple corners.
+
+[PAGE 6]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1538
+BUYANG LI
+3. Local estimates of Green’s function in nonconvex polygons
+In this section we present local W 2,p and H2+α estimates for the solution of the
+Neumann problem
+(3.1)
+
+−Δu = f
+in Ω,
+∂nu = g
+on ∂Ω.
+Note that the compatibility condition
+(3.2)
+
+Ω
+f d x =
+
+∂Ω
+g d s
+is automatically satisﬁed once u is a solution of (3.1). Conversely, this compatibility
+condition also guarantees the existence and uniqueness of solutions to (3.1) under
+the normalization condition
+
+Ω u d x = 0 (for uniqueness).
+Throughout this paper, we denote by s a number satisfying the following condi-
+tion (unless otherwise speciﬁed):
+s ∈
+1
+2, β
+
+with
+β = π
+θ0
+∈
+1
+2 , 1
+
+.
+(3.3)
+We denote by Hs−1(Ω) the dual space of H1−s(Ω). Then Lps(Ω) →Hs−1(Ω) for
+ps = 2/(2 −s).
+3.1. H1+s estimates in a polygon.
+Lemma 3.1 (Existence of lifted functions in Hs+1(Ω)). Let φ ∈H
+s+ 1
+2
+piecewise(∂Ω)
+and g ∈H
+s−1
+2
+piecewise(∂Ω). There exists a lifted function w ∈Hs+1(Ω) satisfying
+w = φ ∈Hs+ 1
+2 (∂Ω)
+and
+∂nw = g ∈H
+s−1
+2
+piecewise(∂Ω)
+on ∂Ω,
+if and only if the following condition holds:
+φ is continuous at the corners zj, j = 0, 1, . . . , m −1.
+(3.4)
+In this case, the lifted function w satisﬁes the following estimate:
+(3.5)
+∥w∥Hs+1(Ω) ≤C
+
+∥φ∥
+H
+s+ 1
+2
+piecewise(∂Ω) + ∥g∥
+H
+s−1
+2
+piecewise(∂Ω)
+
+.
+Proof. Condition (3.4) with s ∈( 1
+2, 1) is exactly the condition (5.3) in [3, Theorem
+5.2] in the case n = 0 and m = 2. As a result, the existence of the lifted function and
+its boundedness in Hs+1(Ω) follow from [3, Theorem 5.2 and Corollary 5.3].
+□
+The following regularity result can be proved by using Lemma 3.1.
+Lemma 3.2. Let s be any number satisfying (3.3). For any given f ∈Hs−1(Ω)
+and g ∈H
+s−1
+2
+piecewise(∂Ω), the solution of (3.1) is in Hs+1(Ω), and
+(3.6)
+∥u∥Hs+1(Ω) ≤C(∥f∥Hs−1(Ω) + ∥g∥
+H
+s−1
+2
+piecewise(∂Ω)).
+Proof. Let φ = 0. Then condition (3.4) is fulﬁlled, and Lemma 3.1 implies that
+there exists a function w ∈Hs+1(Ω) satisfying
+∂nw = g on ∂Ω
+and
+∥w∥Hs+1(Ω) ≤C∥g∥
+H
+s−1
+2
+piecewise(∂Ω).
+(3.7)
+
+[PAGE 7]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1539
+If u is the solution of (3.1) then u −w is the solution of
+(3.8)
+
+−Δ(u −w) = f + Δw
+in Ω,
+∂n(u −w) = 0
+on ∂Ω,
+with the homogeneous Neumann boundary condition.
+Since w ∈Hs+1(Ω), it
+follows that f + Δw ∈Hs−1(Ω). In [8, (23.3)] it is shown that, when 0 < s < β
+as shown in (3.3), the solution to the Neumann problem (3.8) has the following
+regularity result:
+∥u −w∥Hs+1(Ω) ≤C∥f + Δw∥Hs−1(Ω)
+≤C∥f∥Hs−1(Ω) + C∥w∥Hs+1(Ω)
+≤C∥f∥Hs−1(Ω) + C∥g∥
+H
+s−1
+2
+piecewise(∂Ω).
+(3.9)
+The two estimates in (3.7) and (3.9) imply the desired result in Lemma 3.2.
+□
+For a subdomain D ⊂Ω we deﬁne the fractional-order Sobolev space on D by
+∥v∥Hα+k(D) = inf
+˜v ∥˜v∥Hα+k(Ω)
+when α ∈(0, 1) and k is a nonnegative integer,
+(3.10)
+where the inﬁmum extends over all possible extensions ˜v ∈Hα+k(Ω) such that
+˜v = v on D. The deﬁnition in (3.10) is equivalent to the usual deﬁnition of Sobolev
+spaces when D is a ﬁxed Lipschitz domain (see [32, p. 181, Theorem 5]), but is
+more convenient for analysis when the subdomain D is nonsmooth and not ﬁxed.
+By using the regularity result in Lemma 3.2, we prove the following local Hs+1
+estimate.
+Lemma 3.3. Let D = Bd(z) ∩Ω and D′ = B2d(z) ∩Ω be subdomains of Ω, where
+z ∈Ω and 0 < d < diameter(Ω), and let ω be a smooth cut-oﬀfunction satisfying
+ω(x) ≡1,
+x ∈Bd(z),
+(3.11a)
+ω(x) ≡0,
+x ∈R2\B3d/2(z),
+(3.11b)
+|∇kω| ≤Ckd−k,
+k = 1, 2, . . . .
+(3.11c)
+Then for any given f ∈Lps(Ω) and g = 0, with
+
+Ω f d x = 0 and ps := 2/(2 −s),
+the solution of (3.1) satisﬁes
+(3.12)
+∥u −uD∥Hs+1(D) ≤C∥f∥Lps(D′) + Cd−s(∥u∥L2,∞(Ω) + ∥∇u∥L2,∞(Ω)),
+where uD is some constant depending on both u and the subdomain D, satisfying
+|uD| ≤Cd−2∥u∥L1(Ω), and ∥· ∥Lp,∞(Ω) denotes the weak Lp norm deﬁned by
+∥w∥Lp,∞(Ω) :=
+
+sup
+λ>0
+λ|{x ∈Ω : |w(x)|p ≥λ}|,
+(3.13)
+where |{x ∈Ω : |w(x)|p ≥λ}| denotes the measure of the set {x ∈Ω : |w(x)|p ≥λ}.
+Proof. Since ps = 2/(2 −s), the following two Sobolev embedding results hold and
+will be used frequently:
+Lps(Ω) →Hs−1(Ω)
+and
+W 1,ps(Ω) →Hs(Ω).
+(3.14)
+
+[PAGE 8]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1540
+BUYANG LI
+Let Lp,q(Ω) be the Lorentz space (see [15, §1.4]), and let W 1,p,q(Ω) be the space
+of functions w such that
+∥w∥W 1,p,q(Ω) :=
+	
+∥u∥p
+Lp,q(Ω) + ∥∇u∥p
+Lp,q(Ω)
+ 1
+p < ∞.
+In the case q = ∞, the Lp,q(Ω) norm is equivalent to the deﬁnition in (3.13).
+Let E : L1(Ω) →L1(R2) be Stein’s extension operator as described in [32, p.
+181, Theorem 5], which is bounded from W k,p(Ω) to W k,p(R2) for 1 ≤p ≤∞
+and k ≥0. According to [26, Example 7], the real interpolation space between
+W 1,p1(Ω) and W 1,p2(Ω) is
+(W 1,p1(Ω), W 1,p1(Ω))θ,q = W 1,p,q(Ω)
+with 1
+p = 1 −θ
+p1
++ θ
+p2
+and 1 ≤q ≤∞.
+By choosing q = ∞and using the real interpolation result, we obtain that Stein’s
+extension operator is bounded from W 1,p,∞(Ω) to W 1,p,∞(R2) for 1 < p < ∞. We
+denote ¯u = Eu so that ¯u = u in Ω and
+∥¯u∥L2,∞(R2) + ∥∇¯u∥L2,∞(R2) ≤C(∥u∥L2,∞(Ω) + ∥∇u∥L2,∞(Ω)).
+(3.15)
+Since f ∈Lps(Ω) →Hs−1(Ω), with
+
+Ω f d x = 0 and g = 0, it follows that (3.1) has
+a unique solution in H1(Ω) and therefore the right-hand side of (3.15) is bounded
+(L2,∞norm is weaker than L2 norm).
+Let ¯ud be the average of ¯u on B2d(z). Then ˜u := ω(¯u −¯ud) is the solution of
+
+−Δ˜u = ˜f
+in Ω,
+∂n˜u = ˜g · n
+on ∂Ω,
+(3.16)
+where
+˜f = fω −2∇¯u · ∇ω −(¯u −¯ud)Δω,
+(3.17)
+˜g = (¯u −¯ud)∇ω
+and
+˜g · n = (¯u −¯ud)∇ω · n.
+(3.18)
+Since f ∈Lps(Ω) →Hs−1(Ω) and ∇¯u ∈L2(Ω) →Hs−1(Ω), it follows that
+˜f ∈Hs−1(Ω). Since ¯u ∈H1(Ω) →W 1,ps(Ω) →Hs(Ω), it follows that
+˜g ∈W 1,ps(Ω) →Hs(Ω)
+and
+˜g · n = (¯u −¯ud)∇ω · n ∈H
+s−1
+2
+piecewise(∂Ω).
+Then Lemma 3.2 implies that
+∥˜u∥Hs+1(Ω) ≤C(∥˜f∥Hs−1(Ω) + ∥˜g · n∥
+H
+s−1
+2
+piecewise(∂Ω))
+≤C(∥˜f∥Hs−1(Ω) + ∥˜g∥Hs(Ω))
+≤C(∥˜f∥Hs−1(Ω) + ∥˜g∥W 1,ps(Ω))
+≤C∥ωf∥Lps(Ω) + C∥∇¯u · ∇ω∥Lps(Ω)
++ C∥(¯u −¯ud)Δω∥Lps(Ω) + C∥(¯u −¯ud)∇ω∥W 1,ps(Ω).
+(3.19)
+By using (3.11c) to estimate ∇ω and Δω on the right-hand side of (3.19), we have
+∥˜u∥Hs+1(Ω) ≤C∥ωf∥Lps(Ω) + Cd−2∥¯u −¯ud∥Lps(B2d(z)) + Cd−1∥∇¯u∥Lps(B2d(z))
+≤C∥f∥Lps(D′) + Cd−1∥∇¯u∥Lps(B2d(z))
+(by Poincar´e’s inequality)
+≤C∥f∥Lps(D′) + Cd−2+ 2
+ps ∥∇¯u∥L2,∞(R2)
+([15, Exercise 1.1.15])
+≤C∥f∥Lps(D′) + Cd−2+ 2
+ps (∥u∥L2,∞(Ω) + ∥∇u∥L2,∞(Ω)).
+(3.20)
+
+[PAGE 9]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1541
+Since ps =
+2
+2−s implies −2 + 2
+ps = −s, and ˜u = ω(¯u −¯ud) is an extension of u −¯ud
+from D to Ω, the last inequality implies (3.12) in view of the deﬁnition in (3.10),
+with uD = ¯ud, i.e., the average of ¯u = Eu in B2d(z). Therefore,
+|uD| =
+1
+|B2d(z)|
+
+
+B2d(z)
+Eu d x
+ ≤Cd−2
+
+B2d(z)
+|Eu| d x ≤Cd−2∥u∥L1(Ω),
+where the boundedness of the extension operator E : L1(Ω) →L1(R2) is used.
+□
+3.2. A priori W 2,p and H2+α estimates in a polygon. It is well known that
+in a nonconvex polygon, f ∈Lp(Ω) and g ∈W 1−1/p
+piecewise(∂Ω) with p > 1 may not
+imply u ∈W 2,p(Ω) for the solution of (3.1). However, for a solution u which is a
+priori in W 2,p(Ω), we still have the following W 2,p estimates.
+Lemma 3.4 (A priori W 2,p estimates). Let u ∈W 2,p(Ω), with p > 1, be a solution
+of (3.1), and assume that the following conditions are satisﬁed:
+2 −2
+p and
+
+1 −1
+p
+2θj
+π
+are not integers for j = 0, 1, . . . , m −1.
+(3.21)
+Then
+(3.22)
+|u|W 1,p(Ω) + |u|W 2,p(Ω) ≤C(∥f∥Lp(Ω) + ∥g∥W 1−1/p,p
+piecewise(∂Ω)),
+where
+(3.23)
+W 1−1/p,p
+piecewise(∂Ω) = {q ∈Lp(∂Ω) : q ∈W 1−1/p,p(Γj), j = 0, 1, . . . , m −1}.
+In particular, if u ∈H2(Ω) is a solution of (3.1) with g = 0, then
+(3.24)
+|u|H1(Ω) + |u|H2(Ω) ≤C∥f∥L2(Ω).
+Proof. From [16, Corollary 4.4.4.14] we know that for the given f ∈Lp(Ω) and g ∈
+W 1−1/p
+piecewise(∂Ω) satisfying the compatibility condition
+
+Ω f d x =
+
+∂Ω g d s (which
+must be true if u ∈W 2,p(Ω) is the solution of (3.1)), there exist some constants
+cj,n, n = 1, . . . , Kj and j = 0, . . . , m −1, such that
+u −
+m−1
+
+j=0
+Kj
+
+n=1
+cj,nSj,n ∈W 2,p(Ω),
+(3.25)
+where Sj,n, n = 1, . . . , Kj, are some weakly singular functions (independent of f
+and g) not in W 2,p(Ω), but ΔSj,n ∈Lp(Ω) and ∂nSj,n = 0 on ∂Ω. The number of
+such singular terms depends only on Ω and p. In fact, we have
+Sj,n(x) = φ(|x −zj|)|x −zj|
+nπ
+θj cos
+nπ
+θj
+Θj(x)
+
+,
+(3.26)
+where Θj(x) denotes the angle between the two vectors x −zj and zj+1 −zj, and
+φ : R →R is some smooth cut-oﬀfunction such that φ(|x −zj|) = 0 when x is
+outside a small neighborhood of the corner zj, and Kj is the largest integer such
+that Kj <
+	
+1 −1
+p
+ 2θj
+π .
+Let X be the Banach space spanned by W 2,p(Ω) and Sj,n, with n = 1, . . . ,
+Kj and j = 0, 1, . . . , m −1, and deﬁne X0 = {v ∈X :
+
+Ω v d x = 0}.
+Let
+Y = {(f, g) ∈Lp(Ω) × W 1−1/p,p
+piecewise(∂Ω) :
+
+Ω f d x =
+
+∂Ω g d s}. Then the above-
+mentioned regularity result implies that the operator
+(Δ, ∂n) : X0 →Y
+
+[PAGE 10]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1542
+BUYANG LI
+is one-to-one, bounded and onto. Therefore, there exists a bounded right inverse
+of the above operator. This implies that
+(3.27)
+m−1
+
+j=0
+Kj
+
+n=1
+|cj,n|+
+u−c−
+m−1
+
+j=0
+Kj
+
+n=1
+cj,nSj,n
+
+W 2,p(Ω)
+≤C(∥f∥Lp(Ω)+∥g∥W 1−1/p
+piecewise(∂Ω))
+for some constant c =
+1
+|Ω|
+
+Ω u d x. If u is a priori in W 2,p(Ω) then cj,n = 0 for
+n = 1, . . . , Kj and j = 0, . . . , m −1. In this case, the above inequality implies
+(3.22).
+In the case p = 2 and g = 0, it is shown in [16, Theorem 4.3.1.4] that any solution
+u ∈H2(Ω) of (3.1) with g = 0 satisﬁes the following estimate:
+∥u∥H2(Ω) ≤C(∥f∥L2(Ω) + ∥u∥L2(Ω)).
+Let uΩ =
+1
+|Ω|
+
+Ω u d x be the average of u over Ω. Then u −uΩ is also a solution of
+(3.1) with g = 0. Replacing u by u −uΩ in the inequality above yields
+∥u −uΩ∥H2(Ω) ≤C(∥f∥L2(Ω) + ∥u −uΩ∥L2(Ω)) ≤C(∥f∥L2(Ω) + ∥∇u∥L2(Ω)).
+By substituting the standard energy estimate ∥∇u∥L2(Ω) ≤C∥f∥L2(Ω) into the
+inequality above, we obtain (3.24).
+□
+Similar as Lemma 3.4, for a solution which is a priori in H2+α(Ω), the standard
+H2+α estimates still hold. The proof of this result requires using the existence of
+a function w ∈H2+α(Ω) satisfying ∂nw = g, for any g ∈H
+α+ 1
+2
+piecewise(∂Ω). This is
+guaranteed by Lemma 3.5.
+Lemma 3.5 (Existence of lifted functions in H2+α(Ω)). Let α ∈(0, 1), and let φ ∈
+H
+3
+2 +α
+piecewise(∂Ω) and g ∈H
+1
+2 +α
+piecewise(∂Ω). There exists a lifted function w ∈H2+α(Ω)
+satisfying
+w = φ
+and
+∂nw = g
+on ∂Ω,
+if and only if the following conditions hold:
+φ and (∂τφ)τ + gn are both continuous at the corners zj, j = 0, 1, . . . , m −1,
+(3.28)
+where τ and n denote the unit tangential and normal vectors on the boundary ∂Ω,
+respectively. In this case, the lifted function w satisﬁes the following estimate:
+(3.29)
+∥w∥H2+α(Ω) ≤C
+
+∥φ∥
+H
+3
+2 +α
+piecewise(∂Ω) + ∥g∥
+H
+1
+2 +α
+piecewise(∂Ω)
+
+.
+Proof. Condition (3.4) is exactly the condition (5.3) in [3, Theorem 5.2] in the case
+n = 0, 1 and m = 2 therein. As a result, the existence of the lifted function and its
+boundedness in H2+α(Ω) follow from [3, Theorem 5.2 and Corollary 5.3].
+□
+Lemma 3.6 (A priori H2+α estimate). Let u ∈H2+α(Ω) be a solution of (3.1),
+with
+α ∈(0, 1)
+and
+(1 + α)θj
+π
+is not an integer for j = 0, 1, . . . , m −1.
+(3.30)
+Then there exist constants c and C such that
+∥u −c∥H2+α(Ω) ≤C(∥f∥Hα(Ω) + ∥g∥
+H
+1
+2 +α
+piecewise(∂Ω)),
+
+[PAGE 11]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1543
+where
+H
+1
+2 +α
+piecewise(∂Ω) = {q ∈L2(∂Ω) : q ∈H
+1
+2 +α(Γj), j = 0, 1, . . . , m −1},
+|c| ≤C∥u∥L1(Ω) and the constant C is independent of u, f and g.
+Proof. We deﬁne φ to be a cubic polynomial on each side Γj, j = 0, 1, . . . , m −1,
+such that
+φ = 0,
+∂τ+φ = g−−g+n+ · n−
+τ+ · n−
+and
+∂τ−φ = g+ −g−n−· n+
+τ−· n+
+,
+at every corner zj from both sides of the corner, where τ−and n−denote the
+tangential and normal vectors on the left side of the corner, τ+ and n+ denote the
+normal vectors on the right side of the corner, and g−and g+ denote the values of
+g on the left and right sides of the corner. Then φ and g satisfy the conditions in
+(3.28). In fact, the above expressions of ∂τ+φ and ∂τ−φ at a corner can be solved
+from the following two equations:
+[(∂τ+φ+)τ+ + g+n+] · n−= [(∂τ−φ−)τ−+ g−n−] · n−= g−,
+[(∂τ−φ−)τ−+ g−n−] · n+ = [(∂τ+φ+)τ+ + g+n+] · n+ = g+ .
+Therefore, Lemma 3.5 implies that there exists a lifted function w ∈Hα+2(Ω)
+satisfying
+∂nw = g ∈H
+α+ 1
+2
+piecewise(∂Ω) on ∂Ω
+and
+∥w∥H2+α(Ω) ≤C∥g∥
+H
+1
+2 +α
+piecewise(∂Ω).
+(3.31)
+If u is the solution of (3.1) then u −w is the solution of
+(3.32)
+
+−Δ(u −w) = f + Δw
+in Ω,
+∂n(u −w) = 0
+on ∂Ω,
+with the homogeneous Neumann boundary condition.
+Since w ∈Hα+2(Ω), it
+follows that f + Δw ∈Hα(Ω). In [8, (5.11) and p. 210] (also see [7, page 24]) it is
+shown that the solution of the PDE problem (3.32) with f + Δw ∈Hα(Ω) can be
+written as a singular part plus a regular part (similarly as in the proof of Lemma
+3.4), i.e.,
+u −w −
+m−1
+
+j=0
+Kj
+
+n=1
+cj,nSj,n ∈H2+α(Ω)
+with
+Sj,n(x) = |x −zj|
+nπ
+θj cos
+nπ
+θj
+Θj(x)
+
+,
+(3.33)
+where Kj is the largest integer such that Kj <
+
+1−1
+p
+2θj
+π . Moreover, the following
+estimate holds (similarly as in the proof of Lemma 3.4):
+m−1
+
+j=0
+Kj
+
+n=1
+|cj,n| +
+u −w −c0 −
+m−1
+
+j=0
+Kj
+
+n=1
+cj,nSj,n
+
+H2+α(Ω)
+≤C∥f + Δw∥Hα(Ω)
+≤C∥f∥Hα(Ω) + ∥w∥H2+α(Ω),
+
+[PAGE 12]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1544
+BUYANG LI
+where c0 =
+1
+|Ω|
+
+Ω(u−w) d x =: c+c1, where c =
+1
+|Ω|
+
+Ω u d x and c1 =
+1
+|Ω|
+
+Ω w d x.
+By using the triangle inequality and (3.31), the inequality above implies that
+m−1
+
+j=0
+Kj
+
+n=1
+|cj,n| +
+u −c −
+m−1
+
+j=0
+Kj
+
+n=1
+cj,nSj,n
+
+H2+α(Ω)
+≤C∥f∥Hα(Ω) + C∥w∥H2+α(Ω) + Cc1
+≤C(∥f∥Hα(Ω) + ∥g∥
+H
+1
+2 +α
+piecewise(∂Ω)).
+If u is a priori in H2+α(Ω) then cj,n = 0 for n = 1, . . . , Kj and j = 0, . . . , m −1.
+In this case, the above inequality implies the desired result in Lemma 3.6.
+□
+3.3. W 2,p and H2+α estimates away from the reentrant corner. As men-
+tioned at the end of Section 2, we assume that there is only one reentrant corner
+at z0 with θ0 ∈(π, 2π), with θj ∈(0, π) for j = 1, . . . , m −1. We deﬁne
+α0 := min
+2π
+θ0
+−1 ,
+min
+1≤j≤m−1
+ π
+θj
+
+−1
+
+∈(0, 1),
+(3.34)
+p0 :=
+2
+1 −α0
+.
+(3.35)
+Then any p ∈(2, p0) and α ∈(0, α0) satisfy the conditions in (3.21) and (3.30).
+Moreover, we have the following qualitative regularity results away from the reen-
+trant corner as a result of the decomposition in (3.25) and (3.33).
+Lemma 3.7. For any 0 < d < diameter(Ω), the solution of (3.1) has the following
+properties:
+(1) If f ∈Lp(Ω) and g ∈W 1−1/p,p
+piecewise(∂Ω), then u ∈W 2,p(Ω\Bd(z0));
+(2) If f ∈Hα(Ω) and g ∈H1/2+α
+piecewise(∂Ω), then u ∈H2+α(Ω\Bd(z0)).
+For the Neumann problem (3.1) with g = 0, by using Lemmas 3.4 and 3.6 we
+have the following local quantitative estimates away from the reentrant corner.
+Lemma 3.8 (Local W 2,p and H2+α estimates away from the reentrant corner).
+Let p ∈[2, p0) and α ∈(0, α0), and let u be a solution of (3.1) with g = 0. Let
+D = Bd(z) ∩Ω and D′ = Bd+d⋆(z) ∩Ω, with z ∈Ω, be subdomains of Ω such that
+d ≤Kd⋆
+and
+d + d⋆< |z −z0|.
+Then
+|u|H1(D) ≤CK(d⋆∥f∥L2(D′) + ∥∇u∥L2,∞(D′)),
+if f ∈L2(D′),
+(3.36a)
+|u|W 1,p(D) + |u|W 2,p(D) ≤CK
+
+∥f∥Lp(D′) + d−2+2/p
+⋆
+∥∇u∥L2,∞(D′)
+
+,
+if f ∈Lp(D′).
+(3.36b)
+Moreover, there exists β ∈(0, 1) such that D can be covered by a bounded number
+of smaller subdomains Dj = Bβd/2(ζj) ∩Ω (with some points ζj ∈D), j = 1, . . . ,
+Jβ, such that
+∥u −uD′
+j∥H2+α(D′
+j) ≤CKd−α
+⋆
+	
+∥f∥L2(D′) + d⋆∥∇f∥L2(D′) + d−1
+⋆∥∇u∥L2,∞(D′)
+
+,
+(3.37)
+if f ∈H1(D′),
+
+[PAGE 13]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1545
+where D′
+j = Bβd(ζj) ∩Ω and uD′
+j are some constants depending on both u and Dj,
+satisfying |uD′
+j| ≤Cd−2
+⋆∥u∥L1(D′).
+Remark 3.1. In Section 4, we will decompose the domain into some subdomains
+and cover each subdomain by a ﬁnite number of balls Bd(z) (with several diﬀerent
+z in the subdomain).
+Then we apply the estimates on each Bdj/8(z) to obtain
+Lemma 4.2.
+In the estimation of the Green function and the regularized Green function (see
+Lemmas 3.9, 4.1 and 4.2), and in the proof of Theorem 2.1, we have to frequently
+use some H2+α estimates of the Green function. Since we cannot directly prove
+such H2+α estimates on the subdomain D = Bd(z) ∩Ω (which may intersect two
+adjacent sides of Ω and therefore nonconvex), we have to cover D by some smaller
+convex subdomains Dj = Bβd/2(ζj)∩Ω which intersect at most one edge of Ω (and
+therefore convex) and use the estimates on these convex subdomains Dj. This is
+the motivation of dividing D into subdomains Dj, j = 1, . . . , Jβ.
+Proof. Without loss of generality, we can assume that f is qualitatively smooth
+enough, provided our quantitative estimates presented below are independent of
+the assumed extra smoothness of f.
+Let ζ ∈D be any ﬁxed point and consider Dζ := Bβd(ζ) ∩Ω and D′
+ζ :=
+Bβd+βd⋆(ζ) ∩Ω, with β =
+1
+2(1+K) sin(2π −θ0). Then we have βd + βd⋆< 1
+2|ζ −
+z0| sin(2π−θ0), which guarantees that the disk Bβd+βd⋆(ζ) can intersect at most one
+side of the wedge at corner z0. As a result, the subdomain D′
+ζ is convex and |D′
+ζ| ≥
+d2
+⋆/C.
+In this case, the following Poincar´e’s inequality holds (cf.
+[4, Theorems
+1.1–1.2]):
+∥u −uD′
+ζ∥Lq(D′
+ζ) ≤Cd⋆∥∇u∥Lq(D′
+ζ)
+∀1 ≤q ≤∞,
+(3.38)
+where uD′
+ζ denotes the average of u on D′
+ζ.
+Since D = Bd(z) ∩Ω can be covered by a ﬁnite number of subdomains of the
+type Bβd/2(ζ) ∩Ω with ζ ∈D (the number depends only on β, independent of z,
+d, d⋆), we only need to prove the following estimates in Dζ = Bβd(ζ) ∩Ω:
+|u|H1(Dζ) ≤CK
+	
+d⋆∥f∥L2(D′
+ζ) + ∥∇u∥L2,∞(D′
+ζ)
+
+,
+(3.39a)
+|u|W 1,p(Dζ) + |u|W 2,p(Dζ) ≤CK
+	
+∥f∥Lp(D′
+ζ)+d−2+2/p
+⋆
+∥∇u∥L2,∞(D′
+ζ)
+
+for p∈[2, p0),
+(3.39b)
+∥u −c∥H2+α(Dζ) ≤CKd−α
+⋆
+	
+∥f∥L2(D′
+ζ) + d⋆∥∇f∥L2(D′
+ζ) + d−1
+⋆∥∇u∥L2,∞(D′
+ζ)
+
+,
+(3.39c)
+where c is some constant depending on u and Dζ, satisfying that |c|≤Cd−2
+⋆∥u∥L1(D′
+ζ).
+Then (3.36)–(3.37) follow from (3.39).
+To prove (3.39a)–(3.39c), we introduce a convex subdomain D′
+ζ := Bβd+βd⋆/2(ζ)
+∩Ω, which satisﬁes Dζ ⊂D′
+ζ ⊂D′
+ζ, and deﬁne a smooth cut-oﬀfunction ω(x) such
+that
+ω(x) ≡1,
+x ∈Bβd(ζ),
+(3.40a)
+ω(x) ≡0,
+x ∈R2\Bβd+βd⋆/2(ζ),
+(3.40b)
+|∇kω| ≤Ckd−k
+⋆,
+k = 1, 2, . . . .
+(3.40c)
+
+[PAGE 14]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1546
+BUYANG LI
+In view of Lemma 3.7, we have ˜u = ω(u −u 
+D′
+ζ) ∈W 2,p(Ω), and it is the solution
+of the equation
+
+−Δ˜u = ˜f
+in Ω,
+∂n˜u = ˜g · n
+on ∂Ω,
+(3.41)
+where
+˜f = fω −2∇u · ∇ω −(u −u 
+D′
+ζ)Δω
+and
+˜g = (u −u 
+D′
+ζ)∇ω.
+(3.42)
+For p ∈(2, p0), we choose q ∈(1, 2) satisfying 1 = 2/q −2/p so that W 1,q(Ω) →
+Lp(Ω) and W 2,q(Ω) →W 1,p(Ω). Since 1 < q ≤p < p0, it follows that q also
+satisﬁes the condition (3.21), as explained below (3.35). Then Lemma 3.4 implies
+that
+∥∇˜u∥W 1,q(Ω) ≤C∥˜f∥Lq(Ω) + C∥˜g · n∥W 1−1/q,q
+piecewise(∂Ω)
+≤C∥˜f∥Lq(Ω) + C∥˜g∥W 1,q(Ω)
+≤C(∥f∥Lq( 
+D′
+ζ) + d−1
+⋆∥∇u∥Lq( 
+D′
+ζ) + d−2
+⋆∥u −u 
+D′
+ζ∥Lq( 
+D′
+ζ))
+≤C(∥f∥Lq( 
+D′
+ζ) + d−1
+⋆∥∇u∥Lq( 
+D′
+ζ))
+(the Poincar´e inequality (3.38) is used)
+≤C(d−1+2/q
+⋆
+∥f∥L2( 
+D′
+ζ) + d−2+2/q
+⋆
+∥∇u∥L2,∞( 
+D′
+ζ))
+(3.43)
+and so
+∥∇˜u∥Lp(Ω) ≤C∥∇˜u∥W 1,q(Ω)
+≤C(d−1+2/q
+⋆
+∥f∥L2( 
+D′
+ζ) + d−2+2/q
+⋆
+∥∇u∥L2,∞( 
+D′
+ζ))
+≤C(d2/p
+⋆
+∥f∥L2( 
+D′
+ζ) + d−1+2/p
+⋆
+∥∇u∥L2,∞( 
+D′
+ζ)),
+(3.44)
+where 1 = 2/q −2/p is used in the last inequality.
+Since ω = 1 on Dζ and
+˜u = ω(u −u 
+D′
+ζ), the last inequality implies that
+∥∇u∥Lp(Dζ) ≤C(d2/p
+⋆
+∥f∥L2( 
+D′
+ζ) + d−1+2/p
+⋆
+∥∇u∥L2,∞( 
+D′
+ζ)).
+(3.45)
+By using H¨older’s inequality, we can further derive the following two inequalities:
+∥∇u∥L2(Dζ) ≤d1−2/p
+⋆
+∥∇u∥Lp(Dζ) ≤C(d⋆∥f∥L2( 
+D′
+ζ) + ∥∇u∥L2,∞( 
+D′
+ζ)),
+(3.46)
+∥∇u∥Lp(Dζ) ≤C(d⋆∥f∥Lp( 
+D′
+ζ) + d−1+2/p
+⋆
+∥∇u∥L2,∞( 
+D′
+ζ)).
+(3.47)
+This proves (3.39a).
+Similarly as (3.46)–(3.47), replacing Dζ and D′
+ζ by D′
+ζ and D′
+ζ, respectively, we
+also have the following estimates:
+∥∇u∥L2( 
+D′
+ζ) ≤C(d⋆∥f∥L2(D′
+ζ) + ∥∇u∥L2,∞(D′
+ζ)),
+(3.48)
+∥∇u∥Lp( 
+D′
+ζ) ≤C(d⋆∥f∥Lp(D′
+ζ) + d−1+2/p
+⋆
+∥∇u∥L2,∞(D′
+ζ)).
+(3.49)
+
+[PAGE 15]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1547
+The last inequality and Lemma 3.4 imply
+|˜u|W 1,p(Ω) + |˜u|W 2,p(Ω)
+≤C∥˜f∥Lp(Ω) + C∥˜g · n∥W 1−1/p,p
+piecewise(∂Ω)
+≤C∥˜f∥Lp(Ω) + C∥˜g∥W 1,p(Ω)
+≤C(∥f∥Lp( 
+D′
+ζ) + d−1
+⋆∥∇u∥Lp( 
+D′
+ζ) + d−2
+⋆∥u −u 
+D′
+ζ∥Lp( 
+D′
+ζ))
+≤C(∥f∥Lp( 
+D′
+ζ) + d−1
+⋆∥∇u∥Lp( 
+D′
+ζ))
+≤C
+
+∥f∥Lp( 
+D′
+ζ) + d−1
+⋆(d⋆∥f∥Lp(D′
+ζ) + d−1+2/p
+⋆
+∥∇u∥L2,∞(D′
+ζ))
+
+≤C(∥f∥Lp(D′
+ζ) + d−2+2/p
+⋆
+∥∇u∥L2,∞(D′
+ζ)).
+This proves (3.39b) in the case p ∈(2, p0).
+For p = 2 we have ˜u = ˜u1 + ˜u2, where ˜u1 and ˜u2 are solutions of
+
+−Δ˜u1 = ˜f
+in Ω,
+∂n˜u1 = 0
+on ∂Ω,
+and
+
+−Δ˜u2 = 0
+in Ω,
+∂n˜u2 = ˜g · n
+on ∂Ω.
+By applying (3.24) and (3.22) to ˜u1 and ˜u2, respectively, we obtain
+|˜u1|H1(Ω) + |˜u1|H2(Ω) ≤C∥˜f∥L2(Ω)
+≤C(∥f∥L2( 
+D′
+ζ) + d−1
+⋆∥∇u∥L2( 
+D′
+ζ) + d−2
+⋆∥u −u 
+D′
+ζ∥L2( 
+D′
+ζ))
+≤C(∥f∥L2( 
+D′
+ζ) + d−1
+⋆∥∇u∥L2( 
+D′
+ζ))
+and
+|˜u2|W 1,p(Ω) + |˜u2|W 2,p(Ω) ≤C∥˜g · n∥W 1−1/p,p
+piecewise(∂Ω)
+≤C∥˜g∥W 1,p(Ω)
+≤Cd−1
+⋆∥∇u∥Lp( 
+D′
+ζ)
+≤C(d
+−1+ 2
+p
+⋆
+∥f∥L2(D′
+ζ) + d
+−2+ 2
+p
+⋆
+∥∇u∥L2,∞(D′
+ζ)),
+where (3.45) is used in the last inequality. By using H¨older’s inequality, we have
+|˜u2|H1(Ω) + |˜u2|H2(Ω) ≤Cd
+1−2
+p
+⋆
+(|˜u2|W 1,p(Ω) + |˜u2|W 2,p(Ω))
+≤C(∥f∥L2(D′
+ζ) + d−1
+⋆∥∇u∥L2,∞(D′
+ζ)).
+Combining the estimates of ˜u1 and ˜u2, we obtain
+|˜u|H1(Ω) + |˜u|H2(Ω) ≤C(∥f∥L2(D′
+ζ) + d−1
+⋆∥∇u∥L2,∞(D′
+ζ)).
+(3.50)
+This proves (3.39b) in the case p = 2.
+Next, we prove (3.39c). In view of the qualitative regularity results in Lemma
+3.7, we have ˜u = ω(u −u 
+D′
+ζ) ∈H2+α(Ω), which is the solution of (3.41). For the
+given α ∈(0, α0), we choose p = 2/(1 −α) so that Hα(Ω) →Lp(Ω). Let ω be a
+smooth cut-oﬀfunction such that
+ω(x) ≡1,
+x ∈Bβd+βd⋆/2(ζ),
+(3.51a)
+ω(x) ≡0,
+x ∈R2\Bβd+βd⋆(ζ),
+(3.51b)
+|∇kω| ≤Ckd−k
+⋆,
+k = 1, 2, . . . ,
+(3.51c)
+so that ω = 1 on D′
+ζ and ω = 0 outside D′
+ζ.
+
+[PAGE 16]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1548
+BUYANG LI
+Since
+∥f ω∥L2(Ω) ≤C∥f∥L2(D′
+ζ),
+∥f ω∥H1(Ω) ≤Cd−1
+⋆∥f∥L2(D′
+ζ) + C∥∇f∥L2(D′
+ζ),
+it follows from the interpolation and Young’s inequalities that
+∥f ω∥Hα(Ω) ≤∥f ω∥1−α
+L2(Ω)∥f ω∥α
+H1(Ω) ≤Cd−α
+⋆∥f∥L2(D′
+ζ) + C∥f∥1−α
+L2(D′
+ζ)∥∇f∥α
+L2(D′
+ζ)
+≤Cd−α
+⋆∥f∥L2(D′
+ζ) + Cd1−α
+⋆
+∥∇f∥L2(D′
+ζ).
+(3.52)
+Similarly, for the smooth cut-oﬀfunction ω deﬁned in (3.40), the following result
+holds:
+∥fω∥Hα(Ω) ≤∥fω∥1−α
+L2(Ω)∥fω∥α
+H1(Ω) ≤Cd−α
+⋆∥f∥L2( 
+D′
+ζ) + C∥f∥1−α
+L2( 
+D′
+ζ)∥∇f∥α
+L2( 
+D′
+ζ)
+≤Cd−α
+⋆∥f∥L2( 
+D′
+ζ) + Cd1−α
+⋆
+∥∇f∥L2( 
+D′
+ζ).
+(3.53)
+By an obvious change of domain from D′
+ζ to D′
+ζ, (3.39b) implies
+|˜u|W 1,p(Ω) + |˜u|W 2,p(Ω)
+≤C(∥f∥Lp( 
+D′
+ζ) + d−2+2/p
+⋆
+∥∇u∥L2,∞( 
+D′
+ζ))
+≤C(∥ωf∥Lp(Ω) + d−2+2/p
+⋆
+∥∇u∥L2,∞( 
+D′
+ζ))
+≤C(∥ωf∥Hα(Ω) + d−2+2/p
+⋆
+∥∇u∥L2,∞( 
+D′
+ζ))
+≤C(d−α
+⋆∥f∥L2(D′
+ζ) + d1−α
+⋆
+∥∇f∥L2(D′
+ζ) + d−2+2/p
+⋆
+∥∇u∥L2,∞(D′
+ζ)),
+(3.54)
+which reduces to
+|u|W 1,p(Dζ) + |u|W 2,p(Dζ)
+(3.55)
+≤C(d−α
+⋆∥f∥L2(D′
+ζ) + d1−α
+⋆
+∥∇f∥L2(D′
+ζ) + d−2+2/p
+⋆
+∥∇u∥L2,∞(D′
+ζ)).
+Again, by an obvious change of domain from Dζ to D′
+ζ, we can rewrite the last
+inequality as
+|u|W 1,p( 
+D′
+ζ) + |u|W 2,p( 
+D′
+ζ)
+≤C(d−α
+⋆∥f∥L2(D′
+ζ) + d1−α
+⋆
+∥∇f∥L2(D′
+ζ) + d−2+2/p
+⋆
+∥∇u∥L2,∞(D′
+ζ)).
+Since 1 −2/p = α, by using H¨older’s inequality we get
+|u|H1( 
+D′
+ζ) + |u|H2( 
+D′
+ζ) ≤Cd1−2/p
+⋆
+(|u|W 1,p( 
+D′
+ζ) + |u|W 2,p( 
+D′
+ζ))
+≤C(∥f∥L2(D′
+ζ) + d⋆∥∇f∥L2(D′
+ζ) + d−1
+⋆∥∇u∥L2,∞(D′
+ζ)).
+(3.56)
+In order to obtain H2+α estimate for ˜u, we ﬁrst estimate ∥˜f∥Hα(Ω) below, where
+˜f is deﬁned in (3.42). By the properties of ω and the H¨older inequality, we have
+∥(u −u 
+D′
+ζ)Δω∥L2(Ω) ≤Cd−2
+⋆∥u −u 
+D′
+ζ∥L2( 
+D′
+ζ) ≤Cd−1
+⋆∥∇u∥L2( 
+D′
+ζ),
+
+[PAGE 17]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1549
+∥(u −u 
+D′
+ζ)Δω∥H1(Ω)
+≤∥(u −u 
+D′
+ζ)Δω∥L2(Ω) + ∥∇uΔω∥L2(Ω) + ∥(u −u 
+D′
+ζ)∇Δω∥L2(Ω)
+≤Cd−2
+⋆∥u −u 
+D′
+ζ∥L2( 
+D′
+ζ) + Cd−2
+⋆∥∇u∥L2( 
+D′
+ζ) + Cd−3
+⋆∥u −u 
+D′
+ζ∥L2( 
+D′
+ζ)
+≤Cd−2
+⋆∥∇u∥L2( 
+D′
+ζ).
+By the interpolation inequality between L2(Ω) and H1(Ω), we have
+∥(u −u 
+D′
+ζ)Δω∥Hα(Ω) ≤∥(u −u 
+D′
+ζ)Δω∥1−α
+L2(Ω)∥(u −u 
+D′
+ζ)Δω∥α
+H1(Ω)
+≤Cd−1−α
+⋆
+∥∇u∥L2( 
+D′
+ζ).
+(3.57)
+Similarly, we have
+∥∇u · ∇ω∥L2(Ω) ≤Cd−1
+⋆∥∇u∥L2( 
+D′
+ζ),
+∥∇u · ∇ω∥H1(Ω) ≤Cd−2
+⋆∥∇u∥L2( 
+D′
+ζ) + Cd−1
+⋆(|u|H1( 
+D′
+ζ) + |u|H2( 
+D′
+ζ))
+≤Cd−2
+⋆∥∇u∥L2( 
+D′
+ζ) + Cd−1
+⋆|u|H2( 
+D′
+ζ),
+which imply the following result by the Sobolev interpolation inequality and Young’s
+inequality:
+∥∇u · ∇ω∥Hα(Ω) ≤∥∇u · ∇ω∥1−α
+L2(Ω)∥∇u · ∇ω∥α
+H1(Ω)
+≤Cd−(1−α)
+⋆
+∥∇u∥1−α
+L2( 
+D′
+ζ)(Cd−2
+⋆∥∇u∥L2( 
+D′
+ζ) + Cd−1
+⋆|u|H2( 
+D′
+ζ))α
+≤Cd−(1−α)
+⋆
+∥∇u∥1−α
+L2( 
+D′
+ζ)(Cd−2
+⋆∥∇u∥α
+L2( 
+D′
+ζ) + Cd−1
+⋆|u|α
+H2( 
+D′
+ζ))
+≤Cd−1−α
+⋆
+∥∇u∥L2( 
+D′
+ζ) + Cd−1
+⋆∥∇u∥1−α
+L2( 
+D′
+ζ)|u|α
+H2( 
+D′
+ζ).
+(3.58)
+The estimates in (3.53) and (3.57)–(3.58) imply that
+∥˜f∥Hα(Ω) ≤Cd−α
+⋆∥f∥L2( 
+Dζ) + Cd1−α
+⋆
+∥∇f∥L2( 
+D′
+ζ)
++ Cd−1−α
+⋆
+∥∇u∥L2( 
+D′
+ζ) + Cd−1
+⋆∥∇u∥1−α
+L2( 
+D′
+ζ)|u|α
+H2( 
+D′
+ζ).
+(3.59)
+By applying Lemma 3.6 to equation (3.41) and using (3.59), we obtain
+∥˜u −c1∥H2+α(Ω)
+≤C∥˜f∥Hα(Ω) + C∥˜g · n∥H1/2+α
+piecewise(∂Ω)
+≤C∥˜f∥Hα(Ω) + C∥˜g∥H1+α(Ω)
+≤Cd−α
+⋆∥f∥L2( 
+D′
+ζ) + Cd1−α
+⋆
+∥∇f∥L2( 
+D′
+ζ)
++ Cd−1−α
+⋆
+∥∇u∥L2( 
+D′
+ζ) + Cd−1
+⋆∥∇u∥1−α
+L2( 
+D′
+ζ)|u|α
+H2( 
+D′
+ζ)
+≤Cd−α
+⋆∥f∥L2( 
+D′
+ζ) + Cd1−α
+⋆
+∥∇f∥L2( 
+D′
+ζ) + Cd−1−α
+⋆
+∥∇u∥L2( 
+D′
+ζ) + Cd−α
+⋆|u|H2( 
+D′
+ζ),
+where c1 is some constant satisfying |c1| ≤C
+
+Ω |˜u| d x ≤C
+
+
+D′
+j |u| d x.
+Then,
+
+[PAGE 18]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1550
+BUYANG LI
+substituting (3.48) and (3.56) into the inequality above, we have
+∥u −u 
+D′
+ζ −c1∥H2+α(Dζ)
+≤CK
+
+d−α
+⋆∥f∥L2(D′
+ζ) + d1−α
+⋆
+∥∇f∥L2(D′
+ζ) + d−1−α
+⋆
+∥∇u∥L2,∞(D′
+ζ)
+
+,
+where the constant c := u 
+D′
+ζ +c1 satisﬁes |c| ≤Cd−2
+j
+
+
+D′
+j |u| d x. This proves (3.39c).
+The proof of Lemma 3.8 is complete.
+□
+3.4. Local estimates of the Green function. Let Γ(x, y) be the Green function
+of the Neumann problem, deﬁned by
+⎧
+⎨
+⎩
+−ΔΓ(·, y) = δy −
+1
+|Ω|
+in Ω,
+∂nΓ(·, y) = 0
+on ∂Ω,
+(3.60)
+where δy(x) is the delta function satisfying
+
+Ω δy(x)φ(x) d x = φ(y) for any φ ∈
+C(Ω). For uniqueness of the Green function, we impose the normalization condition
+
+Ω Γ(x, y) dx = 0. The Green function satisﬁes the basic weak L2 estimate [27,
+Theorem 1.3]:
+∥∇Γ(·, y)∥L2,∞(Ω) ≤C.
+(3.61)
+Since
+
+Ω Γ(x, y) dx = 0, the above estimate also implies (via the Sobolev embedding
+inequality)
+∥Γ(·, y)∥Lq(Ω) ≤C∥∇Γ(·, y)∥L2,∞(Ω) ≤C
+for 1 < q < ∞.
+(3.62)
+We will need the following local estimates of the Green function in the next
+section.
+Lemma 3.9 (Local estimates of the Green function). Let p ∈(2, p0) and α ∈
+(0, α0), and let D = Bd(z) ∩Ω with
+d ≤Kd⋆
+and
+d + d⋆< min(|z −z0|, |z −y|).
+Then the Green function Γ(x, y) satisﬁes
+∥Γ(·, y)∥H1(D) ≤CK,
+(3.63a)
+∥Γ(·, y)∥H2(D) ≤CKd−1
+⋆,
+(3.63b)
+∥Γ(·, y)∥W 2,p(D) ≤CKd−2+2/p
+⋆
+.
+(3.63c)
+Moreover, there exists β ∈(0, 1) such that D can be covered by a bounded number
+of subdomains Dj = Bβd/2(ζj) ∩Ω, j = 1, . . . , Jβ, with
+∥Γ(·, y) −cDj(y)∥H2+α(D′
+j) ≤CKd−1−α
+⋆
+,
+(3.64)
+where D′
+j = Bβd(ζj) ∩Ω and cDj(y) is some constant depending on Dj and y,
+satisfying |cDj(y)| ≤Cd−2
+⋆.
+If d+d⋆≤Kd# and d+d⋆+d# < |z −y|, then the following improved estimates
+hold:
+∥Γ(·, y)∥H2(D) ≤CKds−1
+⋆
+d−s
+# ,
+(3.65a)
+∥Γ(·, y)∥W 2,p(D) ≤CKd
+−2+ 2
+p +s
+⋆
+d−s
+# .
+(3.65b)
+
+[PAGE 19]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1551
+Proof. The condition d + d⋆< min(|z −z0|, |z −y|) guarantees that the subdomain
+D′ = Bd+d⋆(z) ∩Ω is away from the reentrant corner and the singularity point y.
+As a result, the solution Γ(·, y) of equation (3.60) has W 2,p and H2+α regularity in
+the subdomain D′.
+By applying Lemma 3.8 and using the basic estimate (3.61), we have
+|Γ(·, y)|H1(D) ≤CK
+	
+d⋆∥1/|Ω|∥L2(D′) + ∥∇Γ(·, y)∥L2,∞(D′)
+
+≤CK,
+|Γ(·, y)|W 1,p(D) + |Γ(·, y)|W 2,p(D) ≤CK
+	
+∥1
+|Ω|∥Lp(D′) + d−2+2/p
+⋆
+∥∇Γ(·, y)∥L2,∞(D′)
+
+≤CKd−2+2/p
+⋆
+,
+|Γ(·, y)|H1(D) + |Γ(·, y)|H2(D) ≤CKd1−2/p
+⋆
+(|Γ(·, y)|W 1,p(D) + |Γ(·, y)|W 2,p(D))
+≤CKd−1
+⋆.
+Moreover, according to Lemma 3.8, D can be covered by a bounded number of
+subdomains Dj = Bβd/2(ζj) ∩Ω, j = 1, . . . , Jβ, with
+∥Γ(·, y) −cDj∥H2+α(D′
+j) ≤CK
+	
+d−α
+⋆∥1/|Ω|∥L2(D′) + d−1−α
+⋆
+∥∇Γ(·, y)∥L2,∞(D′)
+
+≤Cd−1−α
+⋆
+,
+where cDj(y) is some constant which satisﬁes |cDj(y)| ≤Cd−2
+⋆∥Γ(·, y)∥L1(D′
+j) ≤
+Cd−2
+⋆. The above semi-norm estimates and the Lq-norm estimate in (3.62) together
+imply the desired results in (3.63)–(3.64).
+Let D′′ = Bd+d⋆+d#(z) ∩Ω. Let ω be a smooth cut-oﬀfunction such that
+ω(x) ≡1,
+x ∈Bd+d⋆(z),
+(3.66a)
+ω(x) ≡0,
+x ∈Ω\Bd+d⋆+d#(z),
+(3.66b)
+|∇kω| ≤Ckd−k
+# ,
+k = 1, 2, . . . .
+(3.66c)
+Hence, ω = 1 on D′ and ω = 0 outside D′′. Then applying Lemma 3.8 yields
+|Γ(·, y)|W 1,p(D) + |Γ(·, y)|W 2,p(D)
+≤CK
+	
+∥1/|Ω|∥Lp(D′) + d
+−2+ 2
+p
+⋆
+∥∇Γ(·, y)∥L2,∞(D′)
+
+≤CK
+	
+C + d
+−2+ 2
+p
+⋆
+d
+1−2
+q
+⋆
+∥∇Γ(·, y)∥Lq(D′)
+
+(H¨older inequality with q > 2 satisfying s = 1 −2
+q )
+≤CK
+	
+C + d
+−2+ 2
+p +s
+⋆
+∥ω(Γ(·, y) −c)∥Hs+1(Ω)
+
+(with Hs+1(Ω) →W 1,q(Ω))
+≤CK
+
+C + d
+−2+ 2
+p +s
+⋆
+
+∥1/|Ω|∥Lps(D′′)+d−s
+# (∥Γ(·, y)∥L2,∞(Ω)+∥∇Γ(·, y)∥L2,∞(Ω))
+
+≤CKd
+−2+ 2
+p +s
+⋆
+d−s
+# ,
+where c can be an arbitrary constant in the third to last inequality, and we have
+used (3.20) in estimating ∥ω(Γ(·, y)−c)∥Hs+1(Ω) with u = Γ(·, y), c = ¯ud, f = 1/|Ω|
+and ps = 2/(2 −s). By using H¨older’s inequality, we further derive the following
+
+[PAGE 20]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1552
+BUYANG LI
+result:
+|Γ(·, y)|H1(D) + |Γ(·, y)|H2(D) ≤Cd
+1−2
+p
+⋆
+(|Γ(·, y)|W 1,p(D) + |Γ(·, y)|W 2,p(D))
+≤CKds−1
+⋆
+d−s
+# .
+The two semi-norm estimates above and the Lq-norm (3.62) together imply the
+desired results in (3.65). The proof of Lemma 3.9 is complete.
+□
+4. Proof of Theorem 2.1
+We only need to prove the following result for any given point x0 ∈Ω in the
+interior of some triangle τ0:
+|Rhu(x0)| ≤C∥u∥L∞(Ω)
+for any given x0 ∈Ω.
+We ﬁrst focus on the case |x0−z0| > 16κh∗, where κ ≥1 is a parameter to be deter-
+mined later. From now on, we keep the generic positive constant C independent of
+κ until it is determined, and keep C independent of x0. The case |x0 −z0| ≤16κh∗
+will be discussed after the parameter κ is determined.
+4.1. Double dyadic decomposition of the domain. We decompose the domain
+Ω into disjoint subsets
+Ω = O∗
+
+∪J∗
+j=0Oj
+ O∗
+
+∪
+Jx0
+j=0 Oj
+
+∪J+1
+j=0 Ωj,
+(4.1)
+where
+O∗:= {x ∈Ω : |x −z0| < dJ∗+1},
+(4.2a)
+Oj := {x ∈Ω : dj+1 ≤|x −z0| < dj},
+j = 0, 1, . . . , J∗,
+(4.2b)
+O∗:= {x ∈Ω : |x −x0| < dJx0+1},
+(4.2c)
+Oj := {x ∈Ω : dj+1 ≤|x −x0| < dj},
+j = 0, 1, . . . , Jx0,
+(4.2d)
+Ωj := {x ∈Ω : ρj+1 ≤|x −z0| < ρj},
+j = 0, 1, . . . , J,
+(4.2e)
+ΩJ+1 := {x ∈Ω : |x −x0| ≥d0, d0 ≤|x −z0| < ρJ+1},
+(4.2f)
+with dj = 2−j−2|x0 −z0|, J∗=
+
+log2
+
+|x0−z0|
+16κh∗
+ 
+and Jx0 =
+
+log2
+
+|x0−z0|
+16κγσℏ(x0)
+ 
+for
+some σ ∈(0, 1), and ρj = 2−jdiameter(Ω) and J =
+
+log2
+
+diameter(Ω)
+16|x0−z0|
+ 
+, so that
+2κh∗≤dJ∗+1 ≤4κh∗,
+(4.3a)
+2κγσℏ(x0) ≤dJx0+1 ≤4κγσℏ(x0),
+(4.3b)
+8|x0 −z0| ≤ρJ+1 ≤16|x0 −z0|,
+(4.3c)
+dist(Oj, Oi) ∼|x0 −z0|,
+(4.3d)
+dist(Oj, Ωi) ∼dist( Ok, Ωi) ∼ρi,
+(4.3e)
+
+[PAGE 21]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1553
+where dist(Oj, Oi) denotes the distance between the two sets Oj and Oi. Moreover,
+we have
+K−1h∗≤ℏ(x) ≤2Kκ1−γh∗
+∀x ∈O∗,
+(4.4a)
+ℏ(x) ∼d1−γ
+j
+h
+∀x ∈Oj,
+(4.4b)
+ℏ(x) ∼ℏ(x0)
+∀x ∈Oj ∪O∗,
+(4.4c)
+ℏ(x) ∼ρ1−γ
+j
+h
+∀x ∈Ωj,
+(4.4d)
+for some positive constant K (independent of κ). We denote by hj the mesh size
+in Oj and hj the mesh size in Ωj.
+Let
+O′
+j = Oj−1/2 ∪Oj ∪Oj+1/2,
+(4.5)
+O′
+j = Oj−1/2 ∪Oj ∪Oj+1/2,
+(4.6)
+Ω′
+j = Ωj−1/2 ∪Ωj ∪Ωj+1/2,
+(4.7)
+(4.8)
+with
+Oj−1/2 := {x ∈Ω : dj+1/2 ≤|x −z0| < dj−1/2},
+(4.9a)
+Oj−1/2 := {x ∈Ω : dj+1/2 ≤|x −x0| < dj−1/2},
+(4.9b)
+Ωj−1/2 := {x ∈Ω : ρj+1/2 ≤|x −z0| < ρj−1/2},
+(4.9c)
+O−1 = O−1 := ΩJ+1,
+(4.9d)
+ΩJ+2 := O0 ∪O0,
+(4.9e)
+(4.9f)
+and
+Oz0 := {Oj : 0 ≤j ≤J∗},
+O′
+z0 := Oz0 ∪{O∗},
+(4.10a)
+Ox0 := { Oj : 0 ≤j ≤Jx0},
+O′
+x0 := Ox0 ∪{ O∗},
+(4.10b)
+O := {Ωj : 0 ≤j ≤J + 1},
+O′ := O ∪{ΩJ+2}.
+(4.10c)
+Then we have Ω = O∗
+ O∗
+ 	
+∪Oj∈Oz0 Oj
+  	
+∪
+Oj∈Ox0
+Oj
+  	
+∪Ωj∈O Ωj
+
+.
+Remark 4.1. In the case |x0 −z0| > 16κh∗∼16κh1/γ we have |x0 −z0|γ > 16γκγh
+and
+|x0 −z0|
+κγσℏ(x0) ∼
+|x0 −z0|
+κγσ|x0 −z0|1−γh ∼|x0 −z0|γ
+κγσh
+≥κγ(1−σ)
+C
+.
+Hence, for the ﬁxed σ ∈(0, 1), we can choose κ suﬃciently large to make sure that
+|x0 −z0| ≥16κγσℏ(x0).
+Remark 4.2. The double dyadic decompositions Oj := {x ∈Ω : dj+1 ≤|x −z0| <
+dj} and Oj := {x ∈Ω : dj+1 ≤|x −x0| < dj} are deﬁned for dj = 2−j−2|x0 −z0|,
+j = 1, . . . , J∗, and therefore with radius dj smaller than |x0 −z0|. They reduce
+to the single dyadic decomposition Ωj := {x ∈Ω : ρj+1 ≤|x −z0| < ρj} when
+the radius exceeds |x0 −z0|. We use ρj to denote the radius when it is bigger than
+|x0 −z0|.
+
+[PAGE 22]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1554
+BUYANG LI
+4.2. Regularized Green’s function. Recall that τ0 is the triangle which contains
+x0. We denote by ˜δx0 ∈C3(τ0) a regularized Delta function which has the following
+properties:
+˜δx0 is compactly supported in τ0,
+(4.11a)
+(˜δx0, vh)τ0 = vh(x0),
+∀vh ∈Sh,
+(4.11b)
+
+Ω
+˜δx0(x) dx = 1,
+(4.11c)
+∥˜δx0∥W l,p(Ω) ≤Cℏ(x0)−l−2(1−1
+p )
+for 1 ≤p ≤∞, l = 0, 1, 2, 3.
+(4.11d)
+It is known that such a smoothed Delta function exists; see [34, Lemma 2.2].
+The regularized Green’s function G(x, x0) is deﬁned by using the regularized
+Delta function, as the solution of
+⎧
+⎨
+⎩
+−ΔG(·, x0) = ˜δx0(·) −
+1
+|Ω|
+in Ω,
+∂nG(·, x0) = 0
+on ∂Ω.
+(4.12)
+Since
+
+Ω(˜δ(x) −
+1
+|Ω|) d x = 0, the equation above admits a unique solution up to
+a constant. The discrete Green’s function Gh(·, x0) ∈Sh is deﬁned as the ﬁnite
+element solution of the problem
+(∇Gh(·, x0), ∇vh) = vh(x0) −1
+|Ω|
+
+Ω
+vh(x) d x,
+∀vh ∈Sh,
+(4.13)
+which is also well deﬁned up to a constant. For uniqueness, we further impose the
+condition
+
+Ω
+G(x, x0) d x =
+
+Ω
+Gh(x, x0) d x = 0.
+Similarly as the local estimates of Green’s function in Lemma 3.9, the following
+local estimates of the regularized Green’s function hold.
+Lemma 4.1 (Local estimates of the regularized Green’s function). Let p ∈(2, p0)
+and α ∈(0, α0). Let D = Bd(z) ∩Ω and assume that
+d ≤Kd⋆
+and
+Bd+d⋆(z) ∩{z0} = Bd+d⋆(z) ∩supp(˜δx0) = ∅.
+Then the regularized Green’s function G(x, x0) satisﬁes the following estimates:
+∥G(·, x0)∥H1(D) ≤CK,
+(4.14a)
+∥G(·, x0)∥H2(D) ≤CKd−1
+⋆,
+(4.14b)
+∥G(·, x0)∥W 2,p(D) ≤CKd−2+2/p
+⋆
+.
+(4.14c)
+Moreover, there exists β ∈(0, 1) such that D can be covered by a bounded number
+of subdomains Dj = Bβd/2(ζj) ∩Ω, j = 1, . . . , Jβ, with ζj ∈D, and
+∥G(·, x0) −cDj∥H2+α(D′
+j) ≤CKd−1−α
+⋆
+,
+(4.15)
+where D′
+j = Bβd(ζj) ∩Ω and cDj is some constant depending on G and Dj.
+
+[PAGE 23]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1555
+If d+d⋆≤Kd# and d+d⋆+d# < dist(z, supp(˜δx0)), then the following estimates
+hold:
+∥G(·, x0)∥H2(D) ≤CKds−1
+⋆
+d−s
+# ,
+(4.16)
+∥G(·, x0)∥W 2,p(D) ≤CKd
+−2+ 2
+p +s
+⋆
+d−s
+# .
+(4.17)
+Proof. By representing G(x, x0) in terms of the continuous Green function, i.e.
+G(x, x0) =
+
+Ω
+Γ(x, ξ)˜δx0(ξ) d ξ,
+we see that |x −ξ| ≥d⋆when x ∈D and ξ ∈supp(˜δx0). Therefore, the following
+estimate holds as a result of Lemma 3.9:
+∥G(·, x0)∥W 2,p(D) ≤
+
+Ω
+∥Γ(·, ξ)∥W 2,p(D)|˜δx0(ξ)| d ξ
+≤
+
+Ω
+Cd−2+2/p
+⋆
+|˜δx0(ξ)| d ξ ≤Cd−2+2/p
+⋆
+.
+The other estimates in (4.14) and (4.16)–(4.17) can be proved in the same way.
+The local H2+α estimate in (4.15) needs to be proved in a slightly diﬀerent way,
+by considering the following expression:
+G(x, x0) −c =
+
+Ω
+(Γ(x, y) −cDj(y))˜δx0(y) d y,
+where c =
+
+Ω cDj(y)˜δx0(y) d y satisﬁes |c| ≤
+
+Ω Cd−2
+⋆˜δx0(y) d y ≤Cd−2
+⋆. By using
+(3.64) we obtain
+∥G(·, x0) −c∥H2+α(D′
+j) ≤
+
+Ω
+∥Γ(·, y) −cDj(y)∥H2+α(D′
+j)|˜δx0(y)| d y
+≤
+
+Ω
+Cd−1−α
+⋆
+|˜δx0(y)| d y ≤Cd−1−α
+⋆
+.
+□
+Each Oj can be covered by a ﬁnite number of balls Bdj/8(z) with z ∈Oj, and
+the number of balls are independent of dj, where each ball Bdj+2(z) satisﬁes the
+condition of Lemma 4.1 with d = d⋆= dj/8. Similarly, Oj and Ωj can also be cov-
+ered by balls of radius dj/8 and ρj/8, respectively. Hence, Lemma 4.1 immediately
+implies the following results.
+
+[PAGE 24]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1556
+BUYANG LI
+Lemma 4.2 (Local estimates in Oj, Oj and Ωj). Let p ∈(2, p0) and α ∈(0, α0).
+Then we have
+∥G(·, x0)∥H1(Oj) ≤C,
+(4.18a)
+∥G(·, x0)∥H2(Oj) ≤Cd−1
+j ,
+(4.18b)
+∥G(·, x0)∥W 2,p(Oj) ≤Cd−2+2/p
+j
+,
+(4.18c)
+∥G(·, x0)∥H1( 
+Oj) ≤C,
+(4.18d)
+∥G(·, x0)∥H2( 
+Oj) ≤Cd−1
+j ,
+(4.18e)
+∥G(·, x0)∥W 2,p( 
+Oj) ≤Cd−2+2/p
+j
+,
+(4.18f)
+∥G(·, x0)∥H1(Ωj) ≤C,
+(4.18g)
+∥G(·, x0)∥H2(Ωj) ≤Cρ−1
+j ,
+(4.18h)
+∥G(·, x0)∥W 2,p(Ωj) ≤Cρ−2+2/p
+j
+.
+(4.18i)
+Moreover, there exists β ∈(0, 1) such that Oj can be covered by a bounded number
+of subdomains Dj,i = Bβdj/2(ζj,i) ∩Ω, i = 1, . . . , Jβ, with ζj,i ∈Oj, and
+∥G(·, x0) −cDj,i∥H2+α(D′
+j,i) ≤Cd−1−α
+j
+,
+(4.19)
+where D′
+j,i = Bβdj(ζj,i) ∩Ω and cDj is some constant depending on G and Dj,i.
+Similarly, there exists β ∈(0, 1) such that Oj can be covered by a bounded number
+of subdomains Dj,i = Bβdj/2(ζj,i) ∩Ω, i = 1, . . . , Jβ, with ζj,i ∈Oj, and
+∥G(·, x0) −c 
+Dj,i∥H2+α( 
+D′
+j) ≤Cd−1−α
+j
+,
+(4.20)
+where D′
+j,i = Bβdj(ζj,i) ∩Ω and c 
+Dj,i is some constant depending on G and Dj,i.
+There exists β ∈(0, 1) such that Ωj can be covered by a bounded number of
+subdomains ˆDj,i = Bβρj/2(ζj,i) ∩Ω, i = 1, . . . , Jβ, with ζj,i ∈Ωj, and
+∥G(·, x0) −c ˆ
+Dj,i∥H2+α( ˆ
+D′
+j,i) ≤Cρ−1−α
+j
+,
+(4.21)
+where ˆD′
+j,i = Bβρj/(ζj,i) ∩Ω and c ˆ
+Dj,i is some constant depending on G and ˆDj,i.
+If Ωj ∈O and Oi ∈Ox0\{ O0}, then
+sup
+y∈Ωj
+∥G(·, y)∥H2( 
+O′
+i) ≤C|x0 −z0|s−1ρ−s
+j .
+(4.22)
+Proof. (4.18) is a consequence of (4.14); (4.19)–(4.21) follow from (4.15); (4.22) is
+a consequence of (4.16).
+□
+Since Gh is piecewisely deﬁned in the elements and therefore not in H2(Ω), we
+denote by ∇2
+T Gh the elementwise second-order derivative (Hessian) of Gh. For the
+simplicity of notation, we denote
+∥∇2
+T (Gh −G)∥L1(D) :=
+
+τ∩D̸=∅
+∥∇2(Gh −G)∥L1(τ)
+
+[PAGE 25]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1557
+and
+∥G(·, x0)∥H2+α
+∗
+(Oj) :=
+
+i
+∥G(·, x0) −cDj,i∥H2+α(D′
+j,i),
+(4.23)
+∥G(·, x0)∥H2+α
+∗
+( 
+Oj) :=
+
+i
+∥G(·, x0) −cDj,i∥H2+α( 
+D′
+j,i),
+(4.24)
+∥G(·, x0)∥H2+α
+∗
+(Ωj) :=
+
+i
+∥G(·, x0) −ˆcDj,i∥H2+α( ˆ
+D′
+j,i),
+(4.25)
+where the number of terms in the three summations above is bounded (independent
+of h), as mentioned in Lemma 4.2. Then we have the following estimates:
+∥∇[G(·, x0) −IhG(·, x0)]∥L2(Oj)
+≤
+
+i
+∥∇[G(·, x0) −IhG(·, x0)]∥L2(Dj,i)
+=
+
+i
+∥∇[(G(·, x0) −cDj,i) −Ih(G(·, x0) −cDj,i)]∥L2(Dj,i)
+≤
+
+i
+Ch1+α∥G(·, x0) −cDj,i∥H2+α(D′
+j,i)
+(if r ≥2)
+= Ch1+α∥G(·, x0)∥H2+α
+∗
+(Oj),
+(4.26)
+∥∇2
+T [G(·, x0) −IhG(·, x0)]∥L2(Oj)
+≤
+
+i
+∥∇2
+T [G(·, x0) −IhG(·, x0)]∥L2(Dj,i)
+=
+
+i
+∥∇2
+T [(G(·, x0) −cDj,i) −Ih(G(·, x0) −cDj,i)]∥L2(Dj,i)
+≤
+
+i
+Chα∥G(·, x0) −cDj,i∥H2+α(D′
+j,i)
+(if r ≥2)
+= Chα∥G(·, x0)∥H2+α
+∗
+(Oj),
+(4.27)
+and similarly, the following estimates hold for r ≥2:
+∥∇[G(·, x0) −IhG(·, x0)]∥L2( 
+Oj) ≤Ch1+α∥G(·, x0)∥H2+α
+∗
+( 
+Oj),
+(4.28)
+∥∇2
+T [G(·, x0) −IhG(·, x0)]∥L2( 
+Oj) ≤Chα∥G(·, x0)∥H2+α
+∗
+( 
+Oj),
+(4.29)
+∥∇[G(·, x0) −IhG(·, x0)]∥L2(Ωj) ≤Ch1+α∥G(·, x0)∥H2+α
+∗
+(Ωj),
+(4.30)
+∥∇2
+T [G(·, x0) −IhG(·, x0)]∥L2(Ωj) ≤Chα∥G(·, x0)∥H2+α
+∗
+(Ωj).
+(4.31)
+
+[PAGE 26]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1558
+BUYANG LI
+For r = 1 the estimates in (4.26)–(4.31) should be replaced by the following
+standard estimates:
+∥∇[G(·, x0) −IhG(·, x0)]∥L2(Oj) ≤Ch∥G(·, x0)∥H2(O′
+j),
+∥∇2
+T [G(·, x0) −IhG(·, x0)]∥L2(Oj) ≤C∥G(·, x0)∥H2(O′
+j),
+∥∇[G(·, x0) −IhG(·, x0)]∥L2( 
+Oj) ≤Ch∥G(·, x0)∥H2( 
+O′
+j),
+∥∇2
+T [G(·, x0) −IhG(·, x0)]∥L2( 
+Oj) ≤C∥G(·, x0)∥H2( 
+O′
+j),
+∥∇[G(·, x0) −IhG(·, x0)]∥L2(Ωj) ≤Ch∥G(·, x0)∥H2(Ω′
+j),
+∥∇2
+T [G(·, x0) −IhG(·, x0)]∥L2(Ωj) ≤C∥G(·, x0)∥H2(Ω′
+j).
+4.3. Reduction to the estimation of ∥∇2
+T (Gh−G)∥L1(Ω)+∥ℏ−1∇(Gh−G)∥L1(Ω).
+The standard Lagrange interpolation operator Ih : C(Ω) →Sh has the following
+approximation properties (cf. [5, Theorem 3.1.5])
+∥u −Ihu∥Lq(D) ≤Ch2+2( 1
+q −1
+p )|u|W 2,p(D′),
+for 1 < p ≤q ≤∞,
+(4.32)
+where D ⊂D′ ⊂Ω can be any subdomain such that {τ : τ ∩D ̸= ∅} ⊂D′.
+Then we have
+Rhu(x0) −Ihu(x0) −1
+|Ω|
+
+Ω
+(Rhu −Ihu) d x
+
+= |(∇Gh, ∇(Rhu −Ihu))|
+= |(∇Gh, ∇(u −Ihu))|
+= |(∇(Gh −G), ∇(u −Ihu)) + (∇G, ∇(u −Ihu))|
+=
+(∇(Gh −G), ∇(u −Ihu)) + (˜δx0, u) −Ihu(x0) −1
+|Ω|
+
+Ω
+(u −Ihu) d x
+
+=
+
+
+τ∈Th
+(−Δ(Gh −G), u −Ihu)τ +
+
+e∈Eh
+([∂n(Gh −G)], u −Ihu)e
++ (˜δx0, u) −Ihu(x0) −1
+|Ω|
+
+Ω
+(u −Ihu) d x
+
+≤
+ 
+τ∈Th
+∥Δ(Gh −G)∥L1(τ) +
+
+e∈Eh
+∥[∂n(Gh −G)]∥L1(e) + C
+
+∥u∥L∞(Ω)
+≤C
+	
+∥∇2
+T (Gh −G)∥L1(Ω) + ∥ℏ−1∇(Gh −G)∥L1(Ω) + 1
+
+∥u∥L∞(Ω),
+(4.33)
+where we have used the following trace inequality in the last inequality of (4.33) (e
+is an edge of τ):
+∥∇(Gh −G)∥L1(e) ≤C
+	
+∥ℏ−1∇(Gh −G)∥L1(τ) + ∥∇2
+T (Gh −G)∥L1(τ)
+
+.
+(4.34)
+It remains to prove
+∥∇2
+T (Gh −G)∥L1(Ω) + ∥ℏ−1∇(Gh −G)∥L1(Ω) ≤Cℓh,
+(4.35)
+
+[PAGE 27]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1559
+where ℓh is deﬁned in (1.6). Once the above inequality is proved, (4.33) would
+reduce to
+|Rhu(x0) −Ihu(x0)| ≤Cℓh∥u∥L∞(Ω) +
+
+1
+|Ω|
+
+Ω
+(Rhu −Ihu) d x
+
+= Cℓh∥u∥L∞(Ω) +
+
+1
+|Ω|
+
+Ω
+(u −Ihu) d x
+
+≤Cℓh∥u∥L∞(Ω),
+where we have used the normalization condition
+
+Ω Rhu d x =
+
+Ω u d x for the Ritz
+projection. By using the triangle inequality, we obtain from the inequality above
+|Rhu(x0)| ≤Cℓh∥u∥L∞(Ω) + |Ihu(x0)| ≤Cℓh∥u∥L∞(Ω).
+(4.36)
+Since the constant C is independent of x0, the inequality above implies (2.4) and
+therefore complete the proof of Theorem 2.1.
+It remains to prove the key estimate (4.35), which is presented in the next two
+subsections.
+4.4. Reduction to the estimation of ∥ℏ−1∇(Gh −G)∥L1(Ω). By using the in-
+verse inequality, we have
+(4.37)
+∥∇2
+T (Gh −G)∥L1(Ω) + ∥ℏ−1∇(Gh −G)∥L1(Ω)
+≤∥∇2
+T (Gh −IhG)∥L1(Ω) + ∥∇2
+T (IhG −G)∥L1(Ω) + ∥ℏ−1∇(Gh −G)∥L1(Ω)
+≤C∥ℏ−1∇(Gh −IhG)∥L1(Ω) + ∥∇2
+T (IhG −G)∥L1(Ω) + ∥ℏ−1∇(Gh −G)∥L1(Ω)
+≤C∥ℏ−1∇(Gh −G)∥L1(Ω) + C∥ℏ−1∇(G −IhG)∥L1(Ω) + ∥∇2
+T (G −IhG)∥L1(Ω).
+The last two terms on the right-hand side are estimated in Lemma 4.3.
+Lemma 4.3. There exists a constant C, independent of h, such that
+∥ℏ−1∇(G −IhG)∥L1(Ω) + ∥∇2
+T (G −IhG)∥L1(Ω) ≤Cℓh.
+(4.38)
+Proof. By using the decomposition (4.1), we have
+∥∇2
+T (G −IhG)∥L1(Ω) + ∥ℏ−1∇(G −IhG)∥L1(Ω)
+≤∥∇2
+T (G −IhG)∥L1(O∗) + ∥ℏ−1∇(G −IhG)∥L1(O∗)
++
+
+Oj∈Oz0
+∥∇2
+T (G −IhG)∥L1(Oj) +
+
+Oj∈Oz0
+∥ℏ−1∇(G −IhG)∥L1(Oj)
++ ∥∇2
+T (G −IhG)∥L1( 
+O∗) + ∥ℏ−1∇(G −IhG)∥L1( 
+O∗)
++
+
+
+Oj∈Ox0
+∥∇2
+T (G −IhG)∥L1( 
+Oj) +
+
+
+Oj∈Ox0
+∥ℏ−1∇(G −IhG)∥L1( 
+Oj)
++
+
+Ωj∈O
+∥∇2
+T (G −IhG)∥L1(Ωj) +
+
+Ωj∈O
+∥ℏ−1∇(G −IhG)∥L1(Ωj).
+To estimate the integrals on O∗, we use the following result: for suﬃciently small
+q ∈(1, 2) the W 2,q estimate ∥G∥W 2,q(Ω) ≤C∥˜δ −1/|Ω|∥Lq(Ω) holds; see [16]. By
+
+[PAGE 28]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1560
+BUYANG LI
+applying this result and the Hs+1 estimate in Lemma 3.2, we obtain
+(4.39)
+∥ℏ−1∇(G −IhG)∥L1(O∗) + ∥∇2
+T (G −IhG)∥L1(O∗)
+≤Ch−1
+∗dJ∗∥∇(G −IhG)∥L2(O∗) + Cd2/q′
+J∗∥∇2
+T (G −IhG)∥Lq(O∗)
+≤Cκ(κ1−γh∗)s∥G∥Hs+1(Ω) + Cκ2/q′h2/q′
+∗
+∥G∥W 2,q(Ω)
+≤Cκ(κ1−γh∗)s∥˜δx0 −1/|Ω|∥Hs−1(Ω) + Cκ2/q′h2/q′
+∗
+∥˜δx0 −1/|Ω|∥Lq(Ω)
+≤Cκ(κ1−γh∗)s∥˜δx0 −1/|Ω|∥Lps (Ω) + Cκ2/q′h2/q′
+∗
+∥˜δx0 −1/|Ω|∥Lq(Ω)
+≤Cκ(κ1−γh∗)sℏ(x0)−2+2/ps + Cκ2/q′h2−2/q
+∗
+ℏ(x0)−2+2/q
+(here (4.11d) is used)
+≤Cκ + Cκ2γ/q′,
+where we have chosen ps := 2/(2 −s), which satisﬁes Lps(Ω) →Hs−1(Ω) and
+−2 + 2/ps = −s, and we have also used the following relation in the derivation of
+the last inequality:
+ℏ(x0) ∼|x0 −z0|1−γh ≥C(κh∗)1−γhγ
+∗∼Cκ1−γh∗.
+Similarly, the following estimate holds:
+(4.40)
+∥ℏ−1∇(G −IhG)∥L1( 
+O∗) + ∥∇2
+T (G −IhG)∥L1( 
+O∗)
+≤Cℏ(x0)−1dJx0 ∥∇(G −IhG)∥L2( 
+O∗) + Cd2/q′
+Jx0 ∥∇2
+T (G −IhG)∥Lq( 
+O∗)
+≤Cκγσℏ(x0)s∥G∥Hs+1(Ω) + C(κγσℏ(x0))2/q′∥G∥W 2,q(Ω)
+≤Cκγσℏ(x0)s∥˜δx0 −1/|Ω|∥Hs−1(Ω) + C(κγσℏ(x0))2/q′∥˜δx0 −1/|Ω|∥Lq(Ω)
+≤Cκγσℏ(x0)s∥˜δx0 −1/|Ω|∥Lps(Ω) + C(κγσℏ(x0))2/q′∥˜δx0 −1/|Ω|∥Lq(Ω)
+≤Cκγσℏ(x0)sℏ(x0)−2+2/ps
++ Cκγσ2/q′ℏ(x0)2−2/qℏ(x0)−2+2/q
+(here (4.11d) is used)
+≤C(κγσ + κγσ2/q′)
+≤Cκγσ.
+We estimate the integrals on Oj below by using Lemma 4.2:
+(4.41)
+∥ℏ−1∇(G −IhG)∥L1(Oj) + ∥∇2
+T (G −IhG)∥L1(Oj)
+≤C
+	
+djh−1
+j ∥∇(G −IhG)∥L2(Oj) + dj∥∇2
+T (G −IhG)∥L2(Oj)
+
+≤
+⎧
+⎨
+⎩
+Cdj∥G∥H2(Oj)
+if r = 1,
+Cdjhα
+j ∥G∥H2+α
+∗
+(Oj)
+if r ≥2,
+(here the notation in (4.26)–(4.31) is used)
+≤
+⎧
+⎨
+⎩
+C
+if r = 1,
+Chα
+j d−α
+j
+if r ≥2.
+Since h ∼hγ
+∗, dJ∗+1 ≥2κh∗and κ ≥1, it follows that
+
+j
+hα
+j d−α
+j
+∼
+
+j
+(d1−γ
+j
+h)αd−α
+j
+=
+
+j
+hαd−γα
+j
+≤Chγα
+∗(2κh∗)−γα ≤C.
+
+[PAGE 29]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1561
+By using the inequality above in the case r ≥2, and using the inequality J∗≤
+C ln(2 + 1/h) in the case r = 1, we obtain
+(4.42)
+
+Oj∈Oz0
+∥ℏ−1∇(G −IhG)∥L1(Oj) +
+
+Oj∈Oz0
+∥∇2
+T (G −IhG)∥L1(Oj)
+≤
+⎧
+⎨
+⎩
+C ln(2 + 1/h)
+if r = 1,
+C
+if r ≥2,
+= Cℓh.
+In the same way, one can prove that
+(4.43)
+
+
+Oj∈Ox0
+∥ℏ−1∇(G −IhG)∥L1( 
+Oj) +
+
+
+Oj∈Ox0
+∥∇2
+T (G −IhG)∥L1( 
+Oj)
++
+
+Ωj∈O
+∥ℏ−1∇(G −IhG)∥L1(Ωj) +
+
+Ωj∈O
+∥∇2
+T (G −IhG)∥L1(Ωj) ≤Cℓh.
+Summing up (4.39)–(4.40) and (4.42)–(4.43), we obtain the desired result (4.38).
+□
+Then, by substituting Lemma 4.3 into (4.37), we obtain
+(4.44)
+∥∇2
+T (Gh −G)∥L1(Ω) + ∥ℏ−1∇(Gh −G)∥L1(Ω) ≤C∥ℏ−1∇(Gh −G)∥L1(Ω) + Cℓh.
+Now it remains to estimate ∥ℏ−1∇(Gh −G)∥L1(Ω).
+4.5. Estimation of ∥ℏ−1∇(Gh −G)∥L1(Ω). We consider the decomposition
+(4.45)
+∥ℏ−1∇(Gh −G)∥L1(Ω)
+≤Ch−1
+∗∥∇(G −Gh)∥L1(O∗) + Cℏ(x0)−1∥∇(G −Gh)∥L1( 
+O∗)
++ C
+
+Oj∈Oz0
+h−1
+j ∥∇(G −Gh)∥L1(Oj)
++ C
+
+
+Oj∈Ox0
+ℏ(x0)−1∥∇(G −Gh)∥L1( 
+Oj)
++ C
+
+Ωj∈O
+h−1
+j ∥∇(G −Gh)∥L1(Ωj)
+≤Cκ∥∇(G −Gh)∥L2(O∗) + Cκ∥∇(G −Gh)∥L2( 
+O∗)
++ C
+
+Oj∈Oz0
+djh−1
+j ∥∇(G −Gh)∥L2(Oj)
++ C
+
+
+Oj∈Ox0
+djℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oj)
++ C
+
+Ωj∈O
+ρjh−1
+j ∥∇(G −Gh)∥L2(Ωj).
+
+[PAGE 30]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1562
+BUYANG LI
+Again, we use the notation ps = 2/(2 −s), with Lps(Ω) →Hs−1(Ω). Then we
+have
+∥∇(G −Gh)∥L2(O∗) + ∥∇(G −Gh)∥L2( 
+O∗)
+≤2∥∇(G −Gh)∥L2(Ω)
+≤2∥∇(G −IhG)∥L2(Ω)
+≤2∥∇(G −IhG)∥L2(O∗) + 2∥∇(G −IhG)∥L2( 
+O∗)
++ 2
+
+Oj∈Oz0
+∥∇(G −IhG)∥L2(Oj) + 2
+
+
+Oj∈Ox0
+∥∇(G −IhG)∥L2( 
+Oj)
++ 2
+
+Ωj∈O
+∥∇(G −IhG)∥L2(Ωj)
+≤C(κ1−γh∗)s∥G∥Hs+1(O′
+∗) + Cℏ(x0)s∥G∥Hs+1( 
+O′∗)
++ C
+
+Oj∈Oz0
+hj∥G∥H2(O′
+j) + C
+
+
+Oj∈Ox0
+ℏ(x0)∥G∥H2( 
+O′
+j) + C
+
+Ωj∈O
+hj∥G∥H2(Ω′
+j)
+≤C(κ1−γh∗)s∥˜δx0 −1/|Ω|∥Hs−1(Ω) + Cℏ(x0)s∥˜δx0 −1/|Ω|∥Hs−1(Ω)
++ C
+
+Oj∈O∗
+hjd−1
+j
++ C
+
+
+Oj∈Ox0
+ℏ(x0)d−1
+j
++ C
+
+Ωj∈O
+hjρ−1
+j
+(Lemma 4.2 is used)
+≤C(κ1−γh∗)s∥˜δx0 −1/|Ω|∥Lps(Ω) + Cℏ(x0)s∥˜δx0 −1/|Ω|∥Lps (Ω) + C
+≤C(κ1−γh∗)sℏ(x0)−2+2/ps + Cℏ(x0)sℏ(x0)−2+2/ps + C
+(here (4.11d) is used)
+≤C.
+(4.46)
+The estimates (4.45)–(4.46) imply
+∥ℏ−1∇(Gh −G)∥L1(Ω) ≤C + CM,
+(4.47)
+where
+(4.48)
+M :=
+
+Oj∈Oz0
+djh−1
+j ∥∇(G −Gh)∥L2(Oj)
++
+
+
+Oj∈Ox0
+djℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oj)
++
+
+Ωj∈O
+ρjh−1
+j ∥∇(G −Gh)∥L2(Ωj).
+To estimate M, we need to use the following local energy error estimate (cf.
+[9, Theorem 3.4]), which holds in general polygons.
+Lemma 4.4. For any ξ ∈Ω, let L0 and L1 be two concentric annuli such that
+{x ∈R2 : dist(x, L0) < d} ⊂L1, and consider the subdomains D = L0 ∩Ω and
+D′ = L1 ∩Ω of Ω. Moreover, we assume that ℏ(x) < d and ℏ(x) ∼ℏ(y) for all
+x, y ∈D′. Then any function u ∈W 1,1(Ω) ∩H1(D′) satisﬁes
+∥u −Rhu∥H1(D)
+≤C
+	
+∥u −Ihu∥H1(D′) + d−1∥u −Ihu∥L2(D′) + d−1∥u −Rhu∥L2(D′)
+
+.
+
+[PAGE 31]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1563
+Since Gh = RhG, we can apply Lemma 4.4 with u = G(·, x0) and use the local
+regularity estimates in Lemma 4.2. Then we obtain
+(4.49)
+djh−1
+j ∥∇(G −Gh)∥L2(Oj)
+≤C
+
+djh−1
+j ∥∇(G −IhG)∥L2(O′
+j) + h−1
+j ∥G −IhG∥L2(O′
+j)
+
++ Ch−1
+j ∥G −Gh∥L2(O′
+j)
+≤
+⎧
+⎪
+⎪
+⎪
+⎪
+⎨
+⎪
+⎪
+⎪
+⎪
+⎩
+C
+
+dj∥G∥H2(O′′
+j ) + hj∥G∥H2(O′′
+j )
+
++ Ch−1
+j ∥G −Gh∥L2(O′
+j)
+if r = 1,
+C
+
+djhα
+j ∥G∥H2+α
+∗
+(O′′
+j ) + h1+α
+j
+∥G∥H2+α
+∗
+(O′′
+j )
+
++Ch−1
+j ∥G −Gh∥L2(O′
+j)
+if r ≥2,
+≤
+⎧
+⎨
+⎩
+C + Ch−1
+j ∥G −Gh∥L2(O′
+j)
+if r = 1,
+C
+	
+d−α
+j
+hα
+j + d−1−α
+j
+h1+α
+j
+
++ Ch−1
+j ∥G −Gh∥L2(O′
+j)
+if r ≥2.
+Since J∗≤C ln(2 + 1/h) and 
+Oj∈Oz0 d−α
+j
+hα
+j ≤C, it follows that
+(4.50)
+
+Oj∈Oz0
+djh−1
+j ∥∇(G −Gh)∥L2(Oj) ≤Cℓh + C
+
+Oj∈Oz0
+h−1
+j ∥G −Gh∥L2(O′
+j).
+In the same way, one can prove that
+
+
+Oj∈Ox0
+djℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oj) ≤Cℓh + C
+
+
+Oj∈Ox0
+ℏ(x0)−1∥G −Gh∥L2( 
+O′
+j),
+(4.51)
+
+Ωj∈O
+ρjh−1
+j ∥∇(G −Gh)∥L2(Ωj) ≤Cℓh + C
+
+Ωj∈O
+h−1
+j ∥G −Gh∥L2(Ω′
+j).
+(4.52)
+Hence, by summing up (4.50)–(4.52), we have
+(4.53)
+M ≤Cℓh + C
+
+Oj∈Oz0
+h−1
+j ∥G −Gh∥L2(O′
+j)
++ C
+
+
+Oj∈Ox0
+ℏ(x0)−1∥G −Gh∥L2( 
+O′
+j) + C
+
+Ωj∈O
+h−1
+j ∥G −Gh∥L2(Ω′
+j)
+≤Cℓh + C
+
+Oj∈O′z0
+h−1
+j ∥G −Gh∥L2(Oj)
++ C
+
+
+Oj∈O′x0
+ℏ(x0)−1∥G −Gh∥L2( 
+Oj) + C
+
+Ωj∈O
+h−1
+j ∥G −Gh∥L2(Ωj),
+where we have used (4.46) in the last inequality.
+
+[PAGE 32]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1564
+BUYANG LI
+The following three technical estimates can be proved for some σ ∈(γ, β), and
+their proofs are presented in Appendices A–C:
+
+Oj∈O′
+z0
+h−1
+j ∥G −Gh∥L2(Oj) ≤Cκ(1−σ)γ + Cκ−γσM,
+(4.54)
+
+
+Oj∈O′x0
+ℏ(x0)−1∥G −Gh∥L2( 
+Oj) ≤Cκγ(1−σ) + Cκ−γσ2M,
+(4.55)
+
+Ωj∈O
+h−1
+j ∥G −Gh∥L2(Ωj) ≤Cκγ(1−σ) + Cκ−γσM.
+(4.56)
+Substituting (4.54)–(4.56) into (4.53), we have
+(4.57)
+M ≤Cℓh + Cκγ(1−σ) + Cκ−γσ2M.
+Then, by choosing κ suﬃciently large, the last term of the above inequality would
+be absorbed by its left-hand side, and therefore we obtain
+(4.58)
+M ≤Cℓh.
+By substituting the above result into (4.47) and using (4.44), we obtain the key
+estimate (4.35). This completes the proof of Theorem 2.1 in the case |x0 −z0| >
+16κh∗.
+4.6. The case |x0−z0| ≤16κh∗. Note that κ is a ﬁxed constant already determined
+below (4.57). In the case |x0 −z0| ≤16κh∗, we decompose the domain Ω into
+disjoint subsets
+Ω =
+J+1
+
+j=0
+Ωj,
+(4.59)
+where
+Ωj := {x ∈Ω : ρj+1 ≤|x −z0| < ρj},
+j = 0, 1, . . . , J,
+(4.60a)
+ΩJ+1 := {x ∈Ω : |x −z0| < ρJ+1},
+(4.60b)
+with ρj = 2−jdiameter(Ω) and J =
+
+log2
+
+diameter(Ω)
+16κh∗λ
+ 
+, so that
+8κh∗λ ≤ρJ+1 ≤16κh∗λ,
+(4.61a)
+where λ is a constant to be determined later (like the constant κ in the previous
+subsections).
+The rest of the proof is similar as the proof for the case |x0 −z0| > 16κh∗, except
+that the decomposition (4.1) is replaced by the simpler one (4.59). In particular,
+inequality (4.33) still holds, i.e.,
+Rhu(x0) −Ihu(x0) −1
+|Ω|
+
+Ω
+(Rhu −Ihu) d x
+
+≤C
+	
+∥∇2
+T (Gh −G)∥L1(Ω) + ∥ℏ−1∇(Gh −G)∥L1(Ω) + 1
+
+∥u∥L∞(Ω),
+(4.62)
+and (4.47)–(4.48) would be replaced by
+∥∇2
+T (Gh −G)∥L1(Ω) + ∥ℏ−1∇(Gh −G)∥L1(Ω) ≤Cℓh + CM,
+(4.63)
+
+[PAGE 33]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1565
+with
+(4.64)
+M :=
+J
+
+j=0
+ρjh−1
+j ∥∇(G −Gh)∥L2(Ωj).
+The similar estimates as in the previous subsections would yield the following esti-
+mate (similarly as (4.57)):
+(4.65)
+M ≤Cℓh + Cλγ(1−σ) + Cλ−γσM.
+By choosing suﬃciently large λ, the last term of (4.65) can be absorbed by its
+left-hand side and therefore,
+(4.66)
+M ≤Cℓh.
+Substituting (4.63) and (4.66) into (4.62) would yield the desired result, i.e.,
+(4.67)
+|Rhu(x0)| ≤Cℓh∥u∥L∞(Ω).
+This completes the proof of Theorem 2.1.
+5. Proof of Corollary 2.1
+In this section, we prove Corollary 2.1 by applying the result of Theorem 2.1
+and assuming that the triangulation satisﬁes the general conditions described in
+Section 2.1.
+We ﬁrst prove the following local W k+2,p regularity for the solutions of the
+Poisson equation and then use this result to prove Corollary 2.1.
+Lemma 5.1 (Local W k+2,p estimates). Let k and p be nonnegative integer and
+real number, respectively, such that p ≥2, (k, p) ̸= (0, 2), and (1 −1
+p) 2θj
+π
+are not
+integers for j = 0, 1, . . . , m −1. Let f ∈W k,p(Ω) (satisfying the compatibility
+condition
+
+Ω f d x = 0) and let u be the unique solution of (1.1), and let d > 0 be
+small enough so that dist(Ω ∩B3d(zi), zj) ≥C when i ̸= j and i, j = 0, 1, . . . ,
+m −1. Then
+(5.1)
+∥u∥W k+2,p(Ω∩B2d(zj)\Bd(zj)) ≤Cd
+−k−1+ 2
+p −2
+qj ∥f∥W k,p(Ω),
+where qj = 2/(1 −βj) if βj < 1 and qj = ∞if βj > 1 and k ≥1.
+Proof. Since we have assumed that k ≥0, p ≥2 and (k, p) ̸= (0, 2), there are two
+cases: (1) If k = 0 then p > 2; (2) If k ≥1 then W k,p(Ω) →Lq(Ω) for some
+q > 2. In either case, f ∈W k,p(Ω) →Lq(Ω) for some q > 2. We can choose such
+a ﬁxed q > 2 such that condition (3.21) is satisﬁed. Then from (3.25)–(3.27) (or
+[16, Corollary 4.4.4.11]) we know there exist some constants cj,n, n = 1, . . . , Kj
+and j = 0, . . . , m −1, such that
+u −
+m−1
+
+j=0
+Kj
+
+n=1
+cj,nSj,n ∈W 2,q(Ω),
+where the expression of Sj,n in (3.26) implies that
+∥∇Sj,n∥Lqj,∞(Ω) ≤C
+with qj = 2/(1 −βj) if βj = π
+ωj
+< 1, and qj = ∞if βj > 1.
+
+[PAGE 34]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1566
+BUYANG LI
+Moreover, as explained in the text above (3.27), there exists c ∈R such that
+m−1
+
+j=0
+Kj
+
+n=1
+|cj,n| +
+u −c −
+m−1
+
+j=0
+Kj
+
+n=1
+cj,nSj,n
+
+W 2,q(Ω)
+≤C∥f∥Lq(Ω) ≤C∥f∥W k,p(Ω).
+Since q > 2, it follows that W 2,q(Ω) →W 1,∞(Ω) →W 1,qj(Ω). As a result, the
+two inequalities above and the triangle inequality imply that
+∥∇u∥Lqj ,∞(Ω∩B2d(zj)) ≤C∥f∥W k,p(Ω)
+for j = 0, 1, . . . , m −1.
+This is the basic estimate to be used in the following proof.
+For any ﬁxed β ∈(0, 1), the circular region Ω ∩B2d(z0)\Bd(z0) can be covered
+by a bounded number of disks of radius βd (the number depends on β). We shall
+present estimates of the solution in each of these disks.
+To this end, for ζ ∈
+Ω ∩B2d(zj)\Bd(zj) and k ≥0, we denote by ωk a smooth cut-oﬀfunction such
+that
+ωk(x) ≡1,
+in Bβd/2k+3(ζ),
+(5.2a)
+ωk(x) ≡0,
+outside Bβd/2k+2(ζ),
+(5.2b)
+|∇lωk| ≤Cld−l,
+l = 1, 2, . . . ,
+(5.2c)
+and let c be an arbitrary constant. Since u is the solution of (3.1), it follows that
+˜u = ωk(u −c) is the solution of
+
+−Δ˜u = ˜f
+in Ω,
+∂n˜u = ˜g · n
+on ∂Ω,
+(5.3)
+with
+˜f = fωk −2∇u · ∇ωk −(u −c)Δωk,
+(5.4)
+˜g = (u −c)∇ωk.
+(5.5)
+Note that the functions ˜u, ˜f and ˜g are all supported on Bβd/2k+2(ζ). If Bβd/2(ζ) ∩
+∂Ω = ∅then the equation in (5.3) actually holds on R2. Then the W k+2,p estimates
+of ˜u can be obtained similarly as (but simpler than) the following argument for the
+more complicated case that Bβd/2(ζ) ∩∂Ω ̸= ∅.
+Without loss of generality, we focus on the case Bβd/2(ζ) ∩∂Ω ̸= ∅and, by
+choosing β small enough, we can make sure that Bβd(ζ) does not intersect other
+sides of Ω. Via a rotation we can assume that one side of ∂Ω∩Bβd/2(ζ) is contained
+in R+ × {0}. Since ˜u is supported in Bβd/2(ζ), it follows that (5.3) holds in the
+upper half plane, i.e.,
+
+−Δ˜u = ˜f
+in R × R+,
+∂n˜u = ˜g · n
+on R × {0},
+(5.6)
+
+[PAGE 35]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1567
+where ˜g(x1, 0) = 0 for x1 ≤0. Let Bβd/2(ζ)+ = Bβd/2(ζ) ∩(R × R+). By applying
+the W k+1,p estimates on the upper half plane we obtain
+|u|W k+2,p(R×R+)
+≤C∥˜f∥W k,p(R×R+) + C∥˜g · n∥
+W
+k+1−1
+p ,p(R×{0})
+≤C∥˜f∥W k,p(R×R+) + C∥˜g∥W k+1,p(R×R+)
+≤C
+k
+
+j=0
+d−j∥f∥W k−j,p(Bβd/2k+2 (ζ)+) + C
+k
+
+j=0
+d−j−1∥u∥W k+1−j,p(Bβd/2k+2 (ζ)+)
++ C
+k
+
+j=0
+d−j−2∥u −c∥W k−j,p(Bβd/2k+2 (ζ)+)
++ C
+k+1
+
+j=0
+d−j−1∥u −c∥W k+1−j,p(Bβd/2k+2 (ζ)+),
+where we have substituted the expressions (5.4)–(5.5) in deriving the last inequality.
+By choosing c to be the average of u on Bd/2k+2(ζ), we have
+|u −c|Lp(Bβd/2k+2 (ζ)+) ≤Cd|u|W 1,p(Bβd/2k+2 (ζ)+).
+Since wk = 1 on Bβd/2k+3(ζ), it follows that
+|u|W k+2,p(Bβd/2k+3 (ζ)∩Ω)
+≤C
+k
+
+j=0
+d−j∥f∥W k−j,p(Bβd/2k+2 (ζ)∩Ω) + C
+k
+
+j=0
+d−j−1∥u∥W k+1−j,p(Bβd/2k+2 (ζ)∩Ω).
+(5.7)
+Since the right-hand side contains strictly lower-order norms of u than the left-hand
+side, by iterating the inequality with respect to k we can obtain
+|u|W k+2,p(Bβd/2k+3 (ζ)∩Ω)
+≤C
+k
+
+j=0
+d−j∥f∥W k−j,p(Bβd/4(ζ)∩Ω) + Cd−k−1∥∇u∥Lp(Bβd/4(ζ)∩Ω).
+Then, substituting the Lp estimate for ∇u in (3.49) into the above inequality, we
+have
+|u|W k+2,p(Bβd/2k+3 (ζ)∩Ω)
+≤C
+k
+
+j=0
+d−j∥f∥W k−j,p(Bβd/2(ζ)∩Ω) + Cd−k−2+ 2
+p ∥∇u∥L2(Bβd/2(ζ)∩Ω)
+≤C
+k
+
+j=0
+d−j∥f∥W k−j,p(Bβd/2(ζ)∩Ω) + Cd−k−1+ 2
+p −2
+q ∥∇u∥Lq,∞(Bβd/2(ζ)∩Ω),
+(5.8)
+where the last inequality follows from using H¨older’s inequality with the weak Lq
+norm, for arbitrary q ∈[2, ∞]. The proof of above inequality relies on the iteration
+of (5.7). In fact, we can construct many intermediate disks between Bβd(ζ) and
+
+[PAGE 36]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1568
+BUYANG LI
+Bβd/2(ζ) and apply similar iterations as (5.7). In this way, we would obtain a similar
+inequality as (5.8), but with Bβd/2k+3(ζ) replaced by Bβd/4(ζ) on the left-hand side,
+i.e.,
+|u|W k+2,p(Bβd/4(ζ)∩Ω)
+≤C
+k
+
+j=0
+d−j∥f∥W k−j,p(Bβd/2(ζ)∩Ω) + Cd−k−1+ 2
+p −2
+q ∥∇u∥Lq,∞(Bβd/2(ζ)∩Ω).
+(5.9)
+Since the circular region Ω∩B2d(zj)\Bd(zj) can be covered by a bounded number
+of balls of radius βd, by summing up the W k+2,p estimates over these balls, we
+obtain
+∥u∥W k+2,p(Ω∩B2d(zj)\Bd(zj))
+≤C
+k
+
+j=0
+d−j∥f∥W k−j,p(Ω) + Cd
+−k−1+ 2
+p −2
+qj ∥∇u∥Lqj ,∞(Ω∩B3d(zj))
+≤Cd
+−k−1+ 2
+p −2
+qj ∥f∥W k,p(Ω).
+(5.10)
+This proves the desired result of Lemma 5.1.
+□
+Let d be a suﬃciently small constant such that dist(zi, zj) ≥4d for any two
+diﬀerent vertices zi and zj of the polygon Ω. For any j = 0, 1, . . . , m−1, we denote
+Dj,i = Ω ∩B2di(zj)\Bdi(zj), with di = 2−i−2d for i = 0, 1, . . . , Ij, where Ij is
+determined by 2−Ijd ∼κh∗,j, where κ can be chosen to be large enough so that
+di ≥Cκγjhj,i is bigger than twice of the mesh size in Bdi(zj).
+Let Ω0 = {x ∈Ω : dist(x, zj) ≥d/4 for j = 0, 1, . . . , m −1}. We denote by hj,i
+the mesh size in Dj,i. According to the mesh size choice in (2.1), we have
+hj,i = d1−γj
+i
+h.
+Then
+Ω = Ω0 ∪
+m−1
+
+j=0
+∪Ij
+i=0Di,j.
+(1.2) implies that the ﬁnite element solution given by (1.2) satisﬁes the following
+error estimate:
+∥u −uh∥L∞(Ω) = ∥u −Ihu −Rh(u −Ihu)∥L∞(Ω)
+≤Cℓh∥u −Ihu∥L∞(Ω)
+≤Cℓh
+max
+0≤j≤m−1 max
+1≤i≤Ij ∥u −Ihu∥L∞(Ω∩B2di(zj)\Bdi(zj))
++ Cℓh∥u −Ihu∥L∞(Ω0).
+(5.11)
+We consider two cases separately.
+
+[PAGE 37]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1569
+Case 1: r ≥k + 1. In this case, we have
+∥u −Ihu∥L∞(Ω∩B2di (zj)\Bdi (zj)) ≤Ch
+k+2−2
+p
+j,i
+∥u∥W k+2,p(Ω∩B4di (zj)\Bdi/2(zj))
+≤Ch
+k+2−2
+p
+j,i
+d
+−k−1+ 2
+p −2
+qj
+i
+∥f∥W k,p(Ω)
+≤Cd
+(1−γj)(k+2−2
+p )
+i
+hk+2−2
+p d
+−k−1+ 2
+p −2
+qj
+i
+∥f∥W k,p(Ω)
+≤Chk+2−2
+p d
+(1−γj)(k+2−2
+p )−k−1+ 2
+p −2
+qj
+i
+∥f∥W k,p(Ω)
+≤Chk+2−2
+p d
+−γj(k+2−2
+p )+1−2
+qj
+i
+∥f∥W k,p(Ω).
+(5.12)
+By choosing −γj(k + 2 −2
+p) + 1 −2
+qj ≥0, or equivalently γj ≤
+1−2/qj
+k+2−2/p = min(1,βj)
+k+2−2/p
+(as qj = ∞when βj > 1), we obtain
+∥u −Ihu∥L∞(Ω∩B2di (zj)\Bdi (zj)) ≤Chk+2−2
+p ∥f∥W k,p(Ω).
+(5.13)
+Since the mesh size in Ω0 is O(h), it follows that
+∥u −Ihu∥L∞(Ω0) ≤Chk+2−2
+p ∥u∥W k+2,p(Ω′
+0) ≤Chk+2−2
+p ∥f∥W k,p(Ω),
+(5.14)
+where Ω′
+0 = {x ∈Ω : dist(x, zj) ≥d/8} ⊃Ω0. By substituting the two estimates
+above into (5.11), we obtain
+∥u −uh∥L∞(Ω) ≤Cℓhhk+2−2
+p ∥f∥W k,p(Ω).
+(5.15)
+This proves the desired result of Corollary 2.1 in the case r ≥k + 1.
+Case 2: r = k ≥1. In this case, we choose p = 2 in Lemma 5.1 and replace
+(5.12) by the following estimate:
+∥u −Ihu∥L∞(Ω∩B2di(zj)\Bdi (zj)) ≤Chr+1
+j,i ∥u∥Hr+2(Ω∩B4di (zj)\Bdi/2(zj))
+≤Chr+1
+j,i d
+−r−2
+qj
+i
+∥f∥Hr(Ω)
+≤Chr+1d
+(1−γj)(r+1)−r−2
+qj
+i
+∥f∥Hr(Ω).
+(5.16)
+By choosing (1 −γj)(r + 1) −r −2
+qj ≥0, or equivalently γj ≤1−2/qj
+r+1
+= min(1,βj)
+r+1
+(as qj = ∞when βj > 1), we obtain
+∥u −Ihu∥L∞(Ω∩B2di (zj)\Bdi (zj)) ≤Chr+1∥f∥Hr(Ω).
+(5.17)
+Since the mesh size in Ω0 is O(h), it follows that
+∥u −Ihu∥L∞(Ω0) ≤Chr+1∥u∥Hr+1(Ω′
+0) ≤Chr+1∥f∥Hr(Ω),
+(5.18)
+where Ω′
+0 = {x ∈Ω : dist(x, zj) ≥d/8} ⊃Ω0. By substituting the two estimates
+above into (5.11), we obtain
+∥u −uh∥L∞(Ω) ≤Cℓhhr+1∥f∥Hr(Ω).
+(5.19)
+This proves the desired result of Corollary 2.1 in the case r = k.
+
+[PAGE 38]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1570
+BUYANG LI
+6. Conclusions
+We have proved the maximum-norm stability of ﬁnite element solutions to the
+Poisson equation with the Neumann boundary condition in a polygon which is
+possibly nonconvex. The use of graded mesh, with triangulations locally reﬁned at
+the reentrant corners, is essential to the proof. With the maximum-norm stability
+result, the error estimation in the L∞norm can be reduced to an interpolation
+error estimate. By analyzing the interpolation error, the error estimate is derived
+in terms of the smoothness f ∈W k,p(Ω) of the right-hand side, with 2 ≤p < ∞.
+By using norms in Lorentz spaces Lp,q(Ω) (instead of the usual Lebesgue spaces)
+for the singular functions, it is possible to choose the grading parameter in the
+limit.
+The analysis in this article may be extended to the Dirichlet boundary condi-
+tion and more general elliptic equations with variable diﬀusion coeﬃcients in two-
+dimensional polygonal domains.
+The maximum-norm stability of ﬁnite element
+solutions in three-dimensional nonconvex polyhedral domains still remains open.
+Appendix A. Proof of (4.54)
+For Oj ∈O′
+z0, we estimate ∥G −Gh∥L2(Oj) via the duality
+∥G −Gh∥L2(Oj) =
+sup
+ψ∈C∞
+0
+(Oj )
+∥ψ∥L2(Oj )≤1
+(G −Gh, ψ).
+For any given ψ ∈C∞
+0 (Oj) satisfying ∥ψ∥L2(Oj) ≤1, we deﬁne w as the solution of
+
+−Δw = ψ −ψ
+in Ω,
+∂nw = 0
+on ∂Ω,
+(A.1)
+where ψ :=
+1
+|Ω|
+
+Ω ψ(x)dx is the average of ψ in the domain Ω. The solution w
+exists and is unique under the condition
+
+Ω w(x) d x = 0. It is known that the
+solution of (A.1) satisﬁes that
+∥w∥Hs+1(Ω) ≤C∥ψ∥Hs−1(Ω)
+for s = 0 and s ∈
+1
+2, β
+
+;
+see Lemma 3.2 with g = 0. By the complex interpolation, we have
+∥w∥Hs+1(Ω) ≤C∥ψ∥Hs−1(Ω)
+for s ∈[0, β).
+(A.2)
+Here we choose s > γ to be suﬃciently close to γ so that (1 −γ)(1 + s) < 1, and
+choose σ = s in the deﬁnition of Jx0 below (4.2). Inequality (A.2) will be used in
+Appendices A–C.
+By using the Sobolev embedding Lps(Ω) →Hs−1(Ω) with ps = 2/(2 −s) and
+H¨older’s inequality, we have
+∥ψ∥Hs−1(Ω) ≤C∥ψ∥Lps(Ω) ≤C|Oj|
+1
+ps −1
+2 ∥ψ∥L2(Ω) ≤Cd
+2
+ps −1
+j
+∥ψ∥L2(Ω) = Cd1−s
+j
+.
+(A.3)
+This inequality will be frequently used below.
+
+[PAGE 39]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1571
+By using the normalization condition
+
+Ω Gh d x =
+
+Ω G d x, we have (G−Gh, ψ)
+= 0 and therefore
+(A.4)
+(G −Gh, ψ) = (G −Gh, ψ −ψ) = (G −Gh, −Δw) = (∇(G −Gh), ∇w)
+= (∇(G −Gh), ∇(w −Ihw))
+= (∇(G −Gh), ∇(w −Ihw))O∗
++ (∇(G −Gh), ∇(w −Ihw)) 
+O∗
++
+
+Oi∈Oz0 ∪{O−1}
+(∇(G −Gh), ∇(w −Ihw))Oi
++
+
+
+Oi∈Ox0
+(∇(G −Gh), ∇(w −Ihw)) 
+Oi
++
+
+Ωi∈O\{ΩJ+1}
+(∇(G −Gh), ∇(w −Ihw))Ωi
+=:
+5
+
+j=1
+Ej.
+We estimate Ej, j = 1, . . . , 5, separately.
+The ﬁrst term on the right-hand side of (A.4) can be estimated by
+(A.5)
+|E1| = |(∇(G −Gh), ∇(w −Ihw))O∗|
+≤∥∇(G −Gh)∥L2(O∗)∥∇(w −Ihw)∥L2(O∗)
+≤C(κ1−γh∗)s∥∇(G −Gh)∥L2(O∗)∥w∥Hs+1(Ω)
+≤C(κ1−γh∗)s∥∇(G −Gh)∥L2(O∗)∥ψ∥Hs−1(Ω)
+≤C(κ1−γh∗)sd1−s
+j
+∥∇(G −Gh)∥L2(O∗)
+≤C(κ1−γh∗)sd1−s
+j
+,
+where we have used (A.3) in the second to last inequality, and (4.46) in the last
+inequality.
+The second term on the right-hand side of (A.4) can be estimated by
+|E2| = |(∇(G −Gh), ∇(w −Ihw)) 
+O∗|
+≤Cℏ(x0)∥w∥H2( 
+O∗)∥∇(G −Gh)∥L2( 
+O∗)
+≤Cℏ(x0)∥w∥H2( 
+O∗),
+(A.6)
+where we have used (4.46). Note that ∥w∥H2( 
+O∗) can be estimated by using Green’s
+formula, i.e.,
+w(x) =
+
+Ω
+Γ(x, y)ψ(y) d y =
+
+Oj
+Γ(x, y)ψ(y) d y.
+Since ψ ∈C∞
+0 (Oj) and ∥ψ∥L2(Oj) ≤1, it follows that
+∥w∥H2( 
+O∗) ≤sup
+y∈Oj
+∥Γ(·, y)∥H2( 
+O∗)∥ψ∥L1(Oj)
+≤Cdist( O∗, Oj)−1|Oj|
+1
+2 ∥ψ∥L2(Oj)
+≤C|x0 −z0|−1dj.
+
+[PAGE 40]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1572
+BUYANG LI
+Then, substituting this result into (A.6), we have
+|E2| ≤Cℏ(x0)|x0 −z0|−1dj.
+(A.7)
+For Oi ∈Oz0 ∪{O−1} we have
+(A.8)
+|E3| = |(∇(G −Gh), ∇(w −Ihw))Oi| ≤Chs
+i∥w∥Hs+1(Ω)∥∇(G −Gh)∥L2(Oi)
+≤Chs
+i∥ψ∥Hs−1(Ω)∥∇(G −Gh)∥L2(Oi)
+≤Chs
+i∥ψ∥Lps(Ω)∥∇(G −Gh)∥L2(Oi)
+≤Chs
+id
+2
+ps −1
+j
+∥ψ∥L2(Ω)∥∇(G −Gh)∥L2(Oi)
+≤Chs
+id1−s
+j
+∥∇(G −Gh)∥L2(Oi).
+For Oi ∈Ox0 there holds
+∥w∥H2( 
+O′
+i) ≤sup
+y∈Oj
+∥G(·, y)∥H2( 
+O′
+i)∥ψ∥L1(Oj)
+≤C|x0 −z0|−1|Oj|
+1
+2 ∥ψ∥L2(Oj)
+≤C|x0 −z0|−1dj,
+which implies that
+(A.9)
+|E4| = |(∇(G −Gh), ∇(w −Ihw)) 
+Oi| ≤Cℏ(x0)∥w∥H2( 
+O′
+i)∥∇(G −Gh)∥L2( 
+Oi)
+≤Cℏ(x0)|x0 −z0|−1dj∥∇(G −Gh)∥L2( 
+Oi).
+For Ωi ∈O\{ΩJ+1} there holds
+∥w∥H2(Ω′
+i) ≤sup
+y∈Oj
+∥G(·, y)∥H2(Ω′
+i)∥ψ∥L1(Oj)
+≤Cρ−1
+i |Oj|
+1
+2 ∥ψ∥L2(O′
+j)
+≤Cρ−1
+i dj,
+which implies that
+(A.10)
+|E5| = |(∇(G −Gh), ∇(w −Ihw))Ωi| ≤Chi∥w∥H2(Ω′
+i)∥∇(G −Gh)∥L2(Ωi)
+≤Chiρ−1
+i dj∥∇(G −Gh)∥L2(Ωi).
+Overall, substituting the estimates of |Ej|, j = 1, . . . , 5, into (A.4), we obtain
+(via the duality argument)
+∥G −Gh∥L2(Oj) ≤
+C(κ1−γh∗)sd1−s
+j
++ Cℏ(x0)|x0 −z0|−1dj
++ C
+
+Oi∈Oz0 ∪{O−1}
+(d1−s
+j
+hs+1
+i
+d−1
+i )dih−1
+i ∥∇(G −Gh)∥L2(Oi)
++ C
+
+
+Oi∈Ox0
+(djℏ(x0)2|x0 −z0|−1d−1
+i )diℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oi)
++ C
+
+Ωi∈O\{ΩJ+1}
+(djh2
+i ρ−2
+i )ρih−1
+i ∥∇(G −Gh)∥L2(Ωi),
+(A.11)
+
+[PAGE 41]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1573
+and so
+
+Oj∈O′
+z0
+h−1
+j ∥G −Gh∥L2(Oj)
+≤C
+
+Oj∈O′
+z0
+((κ1−γh∗)sd1−s
+j
+h−1
+j
++ ℏ(x0)|x0 −z0|−1djh−1
+j )
++ C
+
+Oi∈Oz0 ∪{O−1}
+
+Oj∈O′z0
+(d1−s
+j
+h−1
+j hs+1
+i
+d−1
+i )dih−1
+i ∥∇(G −Gh)∥L2(Oi)
++ C
+
+
+Oi∈Ox0
+
+Oj∈O′z0
+(djh−1
+j ℏ(x0)2d−1
+i |x0 −z0|−1)diℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oi)
++ C
+
+Ωi∈O\{ΩJ+1}
+
+Oj∈O′
+z0
+(djh−1
+j h2
+i ρ−2
+i )ρih−1
+i ∥∇(G −Gh)∥L2(Ωi)
+=: L1 + L2 + L3 + L4.
+(A.12)
+Since γ < s < β, as shown in (3.3), we have
+L1 = C
+
+Oj∈O′
+z0
+((κ1−γh∗)sd1−s
+j
+h−1
+j
++ ℏ(x0)|x0 −z0|−1djh−1
+j )
+≤C
+
+Oj∈O′z0
+(κ1−γh∗)sd1−s
+j
+(hd1−γ
+j
+)−1
++ C
+
+Oj∈O′z0
+ℏ(x0)|x0 −z0|−1dj(hd1−γ
+j
+)−1
+≤C
+
+Oj∈O′z0
+((κ1−γh∗)sh−γ
+∗d−(s−γ)
+j
++ C
+
+Oj∈O′z0
+(h|x0 −z0|1−γ)|x0 −z0|−1h−γ
+∗dγ
+j
+≤C((κ1−γh∗)sh−γ
+∗(κh∗)−(s−γ)
++ Chγ
+∗|x0 −z0|1−γ|x0 −z0|−1h−γ
+∗|x0 −z0|γ
+≤Cκ(1−s)γ + C.
+
+[PAGE 42]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1574
+BUYANG LI
+By using the deﬁnition of M in (4.48), we have
+L2 ≤CM
+max
+Oi∈Oz0 ∪{O−1}
+
+Oj∈O′z0
+	
+d1−s
+j
+h−1
+j hs+1
+i
+d−1
+i
+
+≤CM
+max
+Oi∈Oz0 ∪{O−1}
+
+Oj∈O′z0
+d1−s
+j
+(hd1−γ
+j
+)−1(hd1−γ
+i
+)s+1d−1
+i
+≤CM
+max
+Oi∈Oz0 ∪{O−1}
+
+Oj∈O′z0
+hsd−(s−γ)
+j
+d−[1−(1−γ)(s+1)]
+i
+≤CMhγs
+∗(κh∗)−(s−γ)(κh∗)−[1−(1−γ)(s+1)]
+(note that 1 −(1 −γ)(s + 1) > 0)
+≤Cκ−γsM,
+L3 ≤CM max
+
+Oi∈Ox0
+
+Oj∈O′z0
+	
+djh−1
+j ℏ(x0)2d−1
+i |x0 −z0|−1
+≤CM
+
+Oj∈O′z0
+dj(hd1−γ
+j
+)−1ℏ(x0)2(κγsℏ(x0))−1|x0 −z0|−1
+≤CM
+
+Oj∈O′z0
+h−1dγ
+j κ−γsℏ(x0)|x0 −z0|−1
+≤CMh−1|x0 −z0|γκ−γs(h|x0 −z0|1−γ)|x0 −z0|−1
+≤Cκ−γsM,
+L4 ≤CM
+max
+Ωi∈O\{ΩJ+1}
+
+Oj∈O′
+z0
+(djh−1
+j h2
+i ρ−2
+i )
+≤CM
+max
+Ωi∈O\{ΩJ+1}
+
+Oj∈O′
+z0
+dj(hd1−γ
+j
+)−1(hρ1−γ
+i
+)2ρ−2
+i
+≤CM
+max
+Ωi∈O\{ΩJ+1}
+
+Oj∈O′
+z0
+hdγ
+j ρ−2γ
+i
+≤CM
+max
+Ωi∈O\{ΩJ+1} hγ
+∗|x0 −z0|γ|x0 −z0|−2γ
+≤CM
+max
+Ωi∈O\{ΩJ+1} hγ
+∗(κh∗)−γ
+≤Cκ−γM.
+Substituting the estimates of L1, L2, L3 and L4 into (A.12) and using κ ≥1, we
+obtain
+
+Oj∈O′
+z0
+h−1
+j ∥G −Gh∥L2(Oj) ≤Cκ(1−s)γ + Cκ−γsM.
+(A.13)
+This completes the proof of (4.54).
+Appendix B. Proof of (4.55)
+The proof of (4.55) is similar as the proof of (4.54) in Appendix A. The main
+diﬀerence here is that we focus on the subdomains Oj which are closer to the
+singular point x0 than the reentrant corner z0 (in Appendix A we focus on the
+
+[PAGE 43]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1575
+subdomains Oj which are closer to the reentrant corner z0). For the convenience
+of readers, we include the complete proof here.
+For Oj ∈O′
+x0, we estimate ∥G −Gh∥L2( 
+Oj) via the duality
+∥G −Gh∥L2( 
+Oj) =
+sup
+ψ∈C∞
+0
+( 
+Oj )
+∥ψ∥L2( 
+Oj )≤1
+(G −Gh, ψ).
+For any given ψ ∈C∞
+0 ( Oj) satisfying ∥ψ∥L2( 
+Oj) ≤1, we deﬁne w as the solution of
+
+−Δw = ψ −ψ
+in Ω,
+∂nw = 0
+on ∂Ω,
+(B.1)
+where ψ :=
+1
+|Ω|
+
+Ω ψ(x)dx is the average of ψ in the domain Ω. The solution w
+exists and is unique under the condition
+
+Ω w(x) d x = 0. Moreover, inequality
+(A.3) holds similarly here.
+By using the normalization condition
+
+Ω Gh d x =
+
+Ω G d x, we have (G−Gh, ψ)
+= 0 and therefore
+(B.2)
+(G −Gh, ψ) = (G −Gh, ψ −ψ) = (G −Gh, −Δw) = (∇(G −Gh), ∇w)
+= (∇(G −Gh), ∇(w −Ihw))
+= (∇(G −Gh), ∇(w −Ihw))O∗
++
+
+Oi∈Oz0
+(∇(G −Gh), ∇(w −Ihw))Oi
++
+
+Ωi∈O\{ΩJ+1}
+(∇(G −Gh), ∇(w −Ihw))Ωi
++ (∇(G −Gh), ∇(w −Ihw)) 
+O∗
++
+
+
+Oi∈Ox0 ∪{ 
+O−1}
+(∇(G −Gh), ∇(w −Ihw)) 
+Oi
+=:
+5
+
+j=1
+Ej.
+The term |E1| can be estimated in the same way as (A.5), i.e.
+(B.3)
+|E1| =|(∇(G −Gh), ∇(w −Ihw))O∗| ≤C(κ1−γh∗)sd1−s
+j
+.
+The second and third terms on the right-hand side of (B.2) can be estimated by
+(B.4)
+|E2| = |(∇(G −Gh), ∇(w −Ihw))Oi| ≤Chs
+i∥w∥Hs+1(O′
+i)∥∇(G −Gh)∥L2(Oi)
+≤Chs
+i∥ψ∥Hs−1(Ω)∥∇(G −Gh)∥L2(Oi)
+≤Chs
+id1−s
+j
+∥∇(G −Gh)∥L2(Oi)
+≤C(d1−s
+j
+hs+1
+i
+d−1
+i )dih−1
+i ∥∇(G −Gh)∥L2(Oi),
+
+[PAGE 44]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1576
+BUYANG LI
+and
+(B.5)
+|E3| = |(∇(G −Gh), ∇(w −Ihw))Ωi| ≤Chs
+i∥w∥Hs+1(Ω′
+i)∥∇(G −Gh)∥L2(Ωi)
+≤Chs
+i∥ψ∥Hs−1(Ω)∥∇(G −Gh)∥L2(Ωi)
+≤Chs
+id1−s
+j
+∥∇(G −Gh)∥L2(Ωi)
+≤C(d1−s
+j
+hs+1
+i
+ρ−1
+i )ρih−1
+i ∥∇(G −Gh)∥L2(Ωi).
+To estimate |E4|, we consider the two diﬀerent cases below.
+Case 1. If j = Jx0 or j = Jx0 + 1, then O′
+j ∩O′
+∗̸= ∅and dj ≤Cκℏ(x0). In this
+case, by applying (3.36b) with p = 2 we have
+∥w∥H2( 
+O′∗) ≤C
+
+∥ψ −¯ψ∥L2( 
+O′′
+∗) + (κγsℏ(x0))−1∥∇w∥L2( 
+O′′
+∗)
+
+≤C
+
+∥ψ∥L2( 
+O′′
+∗) + (κγsℏ(x0))−1∥∇w∥L2( 
+O′′
+∗)
+
+,
+and so
+(B.6)
+|E4| = |(∇(G −Gh), ∇(w −Ihw)) 
+O∗|
+≤Cℏ(x0)∥w∥H2( 
+O′∗)∥∇(G −Gh)∥L2( 
+O∗)
+≤Cℏ(x0)
+
+∥ψ∥L2( 
+O′′
+∗) + (κγsℏ(x0))−1∥∇w∥L2( 
+O′′
+∗)
+
+∥∇(G −Gh)∥L2( 
+O∗)
+≤Cℏ(x0)
+
+∥ψ∥L2( 
+O′′
+∗) + (κγsℏ(x0))s−1∥∇w∥L2/(1−s)( 
+O′′
+∗)
+
+∥∇(G −Gh)∥L2( 
+O∗)
+≤Cℏ(x0)
+
+∥ψ∥L2( 
+O′′
+∗) + (κγsℏ(x0))s−1∥w∥Hs+1(Ω)
+
+∥∇(G −Gh)∥L2( 
+O∗)
+≤Cℏ(x0)
+	
+1 + (κγsℏ(x0))s−1∥ψ∥Hs−1(Ω)
+
+∥∇(G −Gh)∥L2( 
+O∗)
+≤Cℏ(x0)
+	
+1 + (κγsℏ(x0))s−1(κγsℏ(x0))1−s
+∥∇(G −Gh)∥L2( 
+O∗)
+≤Cℏ(x0),
+where we have used H¨older’s inequality in deriving the third inequality of (B.6),
+and used (4.46) in deriving the last inequality.
+Case 2. If 0 ≤j < Jx0, then O′
+j ∩O′
+∗= ∅and for p ∈(2, p0) as in Lemma 4.2
+we have
+|E4| = |(∇(G −Gh), ∇(w −Ihw)) 
+O∗|
+≤Cℏ(x0)∥w∥W 2,p( 
+O′∗)∥∇(G −Gh)∥Lp′ ( 
+O∗)
+≤Cℏ(x0)| O∗|
+1
+p′ −1
+2 ∥w∥W 2,p( 
+O′
+∗)∥∇(G −Gh)∥L2( 
+O∗)
+≤Cℏ(x0)(κγsℏ(x0))
+2
+p′ −1∥w∥W 2,p( 
+O′
+∗),
+where we have used (4.46) in the last inequality. Then, by applying the local W 2,p
+estimate in Lemma 4.2 to the expression w(x) =
+
+
+Oj Γ(x, y)ψ(y) d y and using
+
+[PAGE 45]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1577
+H¨older’s inequality, we have
+∥w∥W 2,p( 
+O′
+∗) ≤sup
+y∈
+Oj
+∥Γ(·, y)∥W 2,p( 
+O′
+∗)∥ψ∥L1( 
+Oj)
+≤Cd−2+2/p
+j
+dj∥ψ∥L2( 
+Oj)
+≤Cd2/p−1
+j
+,
+which implies that
+|E4| = |(∇(G −Gh), ∇(w −Ihw)) 
+O∗| ≤Cκγs( 2
+p′ −1)ℏ(x0)
+2
+p′ d2/p−1
+j
+.
+(B.7)
+Similarly, we also consider the following two diﬀerent cases in the estimation of
+|E5|.
+Case 1’. If |j−i| ≤2, then O′
+j∩O′
+i ̸= ∅. In this case, dj ∼di and hi ∼hj ∼ℏ(x0),
+and we have
+(B.8)
+|E5| = |(∇(G −Gh), ∇(w −Ihw)) 
+Oi|
+≤Cℏ(x0)s∥w∥Hs+1(Ω)∥∇(G −Gh)∥L2( 
+Oi)
+≤Cℏ(x0)s∥ψ∥Hs−1(Ω)∥∇(G −Gh)∥L2( 
+Oi)
+≤C(ℏ(x0)s+1d−s
+i )dih(x0)−1∥∇(G −Gh)∥L2( 
+Oi).
+Case 2’. If |j −i| ≥3, then O′
+j ∩O′
+i = ∅. In this case, hi ∼hj ∼ℏ(x0), and for
+p ∈(2, p0) as in Lemma 4.2 we have
+|E5| = |(∇(G −Gh), ∇(w −Ihw)) 
+Oi|
+≤Cℏ(x0)∥w∥W 2,p( 
+O′
+i)∥∇(G −Gh)∥Lp′( 
+Oi)
+≤Cℏ(x0)∥w∥W 2,p( 
+O′
+i)d
+2
+p′ −1
+i
+∥∇(G −Gh)∥L2( 
+Oi)
+≤C
+
+ℏ(x0)2d
+2
+p′ −2
+i
+∥w∥W 2,p( 
+O′
+i)
+
+diℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oi).
+By using the local W 2,p estimate in Lemma 4.2, we have
+∥w∥W 2,p( 
+O′
+i) ≤sup
+y∈
+Oj
+∥Γ(·, y)∥W 2,p( 
+O′
+i)∥ψ∥L1( 
+Oj)
+≤C max(di, dj)−2+ 2
+p dj∥ψ∥L2( 
+Oj)
+≤C max(di, dj)−2
+p′ dj,
+which implies that
+(B.9)
+|E5| ≤C
+
+ℏ(x0)2d
+2
+p′ −2
+i
+max(di, dj)−2
+p′ dj
+
+diℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oi).
+
+[PAGE 46]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1578
+BUYANG LI
+Substituting the estimates of |Ej|, j = 1, . . . , 5 into (B.2), we obtain (via the
+duality argument)
+(B.10)
+∥(G −Gh∥L2( 
+Oj)
+≤C(κ1−γh∗)sd1−s
+j
++
+
+Oi∈Oz0
+C(hs+1
+i
+d−1
+i d1−s
+j
+)dih−1
+i ∥∇(G −Gh)∥L2(Oi)
++
+
+Ωi∈O
+C(hs+1
+i
+ρ−1
+i d1−s
+j
+)ρih−1
+i ∥∇(G −Gh)∥L2(Ωi)
++ Cℏ(x0)(δj,Jx0 + δj,Jx0+1) + Cκγs( 2
+p′ −1)ℏ(x0)
+2
+p′ d
+1−2
+p′
+j
+(1 −δj,Jx0 −δj,Jx0+1)
++ C
+
+
+Oi∈Ox0
+(ℏ(x0)s+1d−s
+i )dih−1
+i ∥∇(G −Gh)∥L2( 
+Oi)
+(δi,j + δi,j−1 + δi,j+1 + δi,j−2 + δi,j+2)
++
+
+|i−j|≥3
+
+ℏ(x0)2d
+−2
+p
+i
+max(di, dj)−2
+p′ dj
+
+diℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oi).
+Hence, we have
+
+
+Oj∈O′x0
+ℏ(x0)−1∥G −Gh∥L2( 
+Oj)
+≤C
+
+
+Oj∈O′x0
+ℏ(x0)−1(κ1−γh∗)sd1−s
+j
++ C
+
+Oi∈Oz0
+
+
+Oj∈O′
+x0
+(ℏ(x0)−1hs+1
+i
+d−1
+i d1−s
+j
+)dih−1
+i ∥∇(G −Gh)∥L2(Oi)
++ C
+
+Ωi∈O
+
+
+Oj∈O′
+x0
+(ℏ(x0)−1hs+1
+i
+ρ−1
+i d1−s
+j
+)ρih−1
+i ∥∇(G −Gh)∥L2(Ωi)
++ C + C
+
+
+Oj∈O′
+x0
+κγs( 2
+p′ −1)ℏ(x0)
+2
+p′ −1d
+1−2
+p′
+j
++ C
+
+
+Oj∈Ox0
+(ℏ(x0)sd−s
+j )djℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oj)
++ C
+
+
+Oi∈Ox0
+
+
+Oj∈O′
+x0
+⎛
+⎝
+ℏ(x0)dj
+d
+2
+p
+i max(di, dj)
+2
+p′
+⎞
+⎠diℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oi)
+=: E1 + E2 + E3 + E4 + E5 + E6.
+(B.11)
+
+[PAGE 47]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1579
+Since γ < s < β, as shown in (3.3), we have
+E1 = C
+
+
+Oj∈O′x0
+ℏ(x0)−1(κ1−γh∗)sd1−s
+j
+≤C(h|x0 −z0|1−γ)−1(κ1−γh∗)s|x0 −z0|1−s
+≤Ch−1(κ1−γh∗)s|x0 −z0|−(s−γ)
+≤Ch−γ
+∗(κ1−γh∗)s(κh∗)−(s−γ)
+≤Cκγ(1−s),
+E2 ≤CM max
+Oi∈Oz0
+
+
+Oj∈O′x0
+
+ℏ(x0)−1hs+1
+i
+d−1
+i d1−s
+j
+
+≤CM max
+Oi∈Oz0
+
+(h|x0 −z0|1−γ)−1(hd1−γ
+i
+)s+1d−1
+i |x0 −z0|1−s
+≤CM max
+Oi∈Oz0
+
+hs|x0 −z0|−(s−γ)d−[1−(1−γ)(1+s)]
+i
+
+≤CMhγs
+∗(κh∗)−(s−γ)(κh∗)−[1−(1−γ)(1+s)]
+≤Cκ−γsM,
+E3 ≤CM max
+Ωi∈O
+
+
+Oj∈Ox0
+
+ℏ(x0)−1hs+1
+i
+ρ−1
+i d1−s
+j
+
+≤CM max
+Ωi∈O
+
+(h|x0 −z0|1−γ)−1(hρ1−γ
+i
+)s+1ρ−1
+i |x0 −z0|1−s
+≤CM max
+Ωi∈O
+
+hs|x0 −z0|−(s−γ)ρ−[1−(1−γ)(1+s)]
+i
+
+≤CMhγs
+∗(κh∗)−(s−γ)(κh∗)−[1−(1−γ)(1+s)]
+≤Cκ−γsM,
+E4 ≤C + C
+
+
+Oj∈O′
+x0
+κ
+2
+p′ −1ℏ(x0)
+2
+p′ −1d
+−
+	
+2
+p′ −1
+
+j
+≤C + Cκγs( 2
+p′ −1)ℏ(x0)
+2
+p′ −1(κγsℏ(x0))−
+	
+2
+p′ −1
+
+≤C,
+E5 ≤CM max
+
+Oj∈O′
+x0
+ℏ(x0)sd−s
+j
+≤Cκ−γs2M,
+E6 ≤CM max
+
+Oi∈Ox0
+
+
+Oj∈Ox0
+⎛
+⎝
+ℏ(x0)dj
+d
+2
+p
+i max(di, dj)
+2
+p′
+⎞
+⎠
+≤CM max
+
+Oi∈Ox0
+ℏ(x0)
+di
+
+≤Cκ−γsM.
+
+[PAGE 48]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1580
+BUYANG LI
+Substituting the estimates of Ek, k = 1, . . . , 6, into (B.11), we obtain
+
+
+Oj∈Ox0
+ℏ(x0)−1∥G −Gh∥L2(Oj) ≤Cκγ(1−s) + Cκ−γs2M.
+(B.12)
+Appendix C. Proof of (4.56)
+The proof of (4.55) is similar as the proof of (4.54) in Appendix A. The main
+diﬀerence here is that the subdomains Ωj are away from both the reentrant corner
+z0 and the singular point x0, and therefore the analysis would become simpler. For
+the convenience of readers, we include the complete proof here.
+For Ωj ∈O, we estimate ∥G −Gh∥L2(Ωj) via the duality
+∥G −Gh∥L2(Ωj) =
+sup
+ψ∈C∞
+0
+(Ωj )
+∥ψ∥L2(Ωj )≤1
+(G −Gh, ψ).
+For any given ψ ∈C∞
+0 (Ωj) satisfying ∥ψ∥L2(Ωj) ≤1, we deﬁne w as the solution of
+
+−Δw = ψ −ψ
+in Ω,
+∂nw = 0
+on ∂Ω,
+(C.1)
+where ψ :=
+1
+|Ω|
+
+Ω ψ(x)dx is the average of ψ in the domain Ω. The solution w
+exists and is unique under the condition
+
+Ω w(x) d x = 0. Moreover, inequality
+(A.3) holds similarly here.
+By using the normalization condition
+
+Ω Gh d x =
+
+Ω G d x, we have (G−Gh, ψ)
+= 0 and therefore
+(C.2)
+(G −Gh, ψ) = (G −Gh, ψ −ψ) = (G −Gh, −Δw) = (∇(G −Gh), ∇w)
+= (∇(G −Gh), ∇(w −Ihw))
+= (∇(G −Gh), ∇(w −Ihw))O∗
++
+
+Oi∈Oz0 \{O0}
+(∇(G −Gh), ∇(w −Ihw))Oi
++
+
+Ωi∈O∪{ΩJ+2}
+(∇(G −Gh), ∇(w −Ihw))Ωi
++ (∇(G −Gh), ∇(w −Ihw)) 
+O∗
++
+
+
+Oi∈Ox0 \{ 
+O0}
+(∇(G −Gh), ∇(w −Ihw)) 
+Oi
+=
+5
+
+j=1
+E∗
+j .
+The term |E∗
+1| can be estimated in the same way as (A.5), i.e.
+(C.3)
+|E∗
+1| =|(∇(G −Gh), ∇(w −Ihw))O∗| ≤C(κ1−γh∗)sρ1−s
+j
+.
+|E∗
+2| and |E∗
+3| can be estimated by
+(C.4)
+|E∗
+2| = |(∇(G −Gh), ∇(w −Ihw))Oi| ≤Chs
+i∥w∥Hs+1(O′
+i)∥∇(G −Gh)∥L2(Oi)
+≤Chs
+i∥ψ∥Hs−1(Ω)∥∇(G −Gh)∥L2(Oi)
+≤Chs
+iρ1−s
+j
+∥∇(G −Gh)∥L2(Oi)
+
+[PAGE 49]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1581
+and
+(C.5)
+|E∗
+3| = |(∇(G −Gh), ∇(w −Ihw))Ωi| ≤Chs
+i∥w∥Hs+1(Ω′
+i)∥∇(G −Gh)∥L2(Ωi)
+≤Chs
+i∥ψ∥Hs−1(Ω)∥∇(G −Gh)∥L2(Ωi)
+≤Chs
+iρ1−s
+j
+∥∇(G −Gh)∥L2(Ωi).
+|E∗
+4| can be estimated by
+(C.6)
+|E∗
+4| = |(∇(G −Gh), ∇(w −Ihw)) 
+O∗| ≤Cℏ(x0)∥w∥H2( 
+O′
+∗)∥∇(G −Gh)∥L2( 
+O∗)
+≤Cℏ(x0)∥w∥H2( 
+O′
+∗),
+where we have used (4.46) in the last inequality. By using (4.22), we get
+∥w∥H2( 
+O′
+∗) ≤sup
+y∈Ωj
+∥G(·, y)∥H2( 
+O′
+∗)∥ψ∥L1(Ωj)
+≤C|x0 −z0|s−1ρ−s
+j |Ωj|
+1
+2 ∥ψ∥L2(Ωj)
+≤C|x0 −z0|s−1ρ1−s
+j
+,
+which implies
+(C.7)
+|E∗
+4| ≤C|x0 −z0|s−1ℏ(x0)ρ1−s
+j
+.
+By using (4.22) we can estimate |E∗
+5| similarly as |E∗
+4|, i.e.,
+(C.8)
+|E∗
+5| = |(∇(G −Gh), ∇(w −Ihw)) 
+Oi|
+≤C(|x0 −z0|s−1ℏ(x0)2d−1
+i ρ1−s
+j
+diℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oi).
+Then, substituting the estimates of |E∗
+j | into (C.2), we obtain (via the duality
+argument)
+(C.9)
+∥G −Gh∥L2(Ωj) ≤C(κ1−γh∗)sρ1−s
+j
++ C
+
+Oi∈Oz0
+(hs+1
+i
+d−1
+i ρ1−s
+j
+)dih−1
+i ∥∇(G −Gh)∥L2(Oi)
++ C
+
+Ωi∈O∪{ΩJ+2}
+(hs+1
+i
+ρ−1
+i ρ1−s
+j
+)ρih−1
+i ∥∇(G −Gh)∥L2(Ωi)
++ C|x0 −z0|s−1ℏ(x0)ρ1−s
+j
++ C
+
+
+Oi∈Ox0 \{ 
+O0}
+ℏ(x0)2ρ1−s
+j
+|x0 −z0|1−sdi
+diℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oi).
+
+[PAGE 50]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1582
+BUYANG LI
+As a result, we have
+
+Ωj∈O
+h−1
+j ∥G −Gh∥L2(Ωj)
+(C.10)
+≤C
+
+Ωj∈O
+(κ1−γh∗)sρ1−s
+j
+h−1
+j
++ C
+
+Oi∈Oz0
+
+Ωj∈O
+(hs+1
+i
+d−1
+i ρ1−s
+j
+h−1
+j )dih−1
+i ∥∇(G −Gh)∥L2(Oi)
++ C
+
+Ωi∈O∪{ΩJ+2}
+
+Ωj∈O
+(hs+1
+i
+ρ−1
+i ρ1−s
+j
+h−1
+j )ρih−1
+i ∥∇(G −Gh)∥L2(Ωi)
++ C
+
+Ωj∈O
+|x0 −z0|s−1ℏ(x0)ρ1−s
+j
+h−1
+j
++ C
+
+
+Oi∈Ox0
+
+Ωj∈O
+ℏ(x0)2ρ1−s
+j
+|x0 −z0|1−sdihj
+diℏ(x0)−1∥∇(G −Gh)∥L2( 
+Oi)
+=: F1 + F2 + F3 + F4 + F5,
+where
+F1 = C
+
+Ωj∈O
+(κ1−γh∗)sρ1−s
+j
+h−1
+j
+≤C
+
+Ωj∈O
+(κ1−γh∗)sρ1−s
+j
+(hρ1−γ
+j
+)−1
+≤C(κ1−γh∗)sh−1 
+Ωj∈O
+ρ−(s−γ)
+j
+≤C(κ1−γh∗)sh−1|x0 −z0|−(s−γ)
+≤C(κ1−γh∗)sh−1(κh∗)−(s−γ)
+≤Cκγ(1−s),
+F2 ≤C max
+Oi∈Oz0
+
+Ωj∈O
+(hs+1
+i
+d−1
+i ρ1−s
+j
+h−1
+j ) M
+≤C max
+Oi∈Oz0
+
+Ωj∈O
+(hd1−γ
+i
+)s+1d−1
+i ρ1−s
+j
+(hρ1−γ
+j
+)−1M
+≤C max
+Oi∈Oz0
+
+Ωj∈O
+hsd(1−γ)(s+1)−1
+i
+ρ−(s−γ)
+j
+M
+≤C max
+Oi∈Oz0
+hsd−[γ(s+1)−s]
+i
+|x0 −z0|−(s−γ)M
+≤Chγs
+∗(κh∗)−[γ(s+1)−s](κh∗)−(s−γ)M
+≤Cκ−γsM,
+
+[PAGE 51]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1583
+F3 ≤C
+max
+Ωi∈O∪{ΩJ+2}
+
+Ωj∈O
+(hs+1
+i
+ρ−1
+i ρ1−s
+j
+h−1
+j )M
+≤C
+max
+Ωi∈O∪{ΩJ+2}
+
+Ωj∈O
+(hρ1−γ
+i
+)s+1ρ−1
+i ρ1−s
+j
+(hρ1−γ
+j
+)−1M
+≤C
+max
+Ωi∈O∪{ΩJ+2}
+
+Ωj∈O
+hsρ(1−γ)(s+1)−1
+i
+ρ−(s−γ)
+j
+M
+≤C
+max
+Ωi∈O∪{ΩJ+2} hsρ−[γ(s+1)−s]
+i
+|x0 −z0|−(s−γ)M
+≤Chγs
+∗(κh∗)−[γ(s+1)−s](κh∗)−(s−γ)M
+≤Cκ−γsM,
+F4 ≤C
+
+Ωj∈O
+|x0 −z0|s−1ℏ(x0)ρ1−s
+j
+h−1
+j
+≤C
+
+Ωj∈O
+|x0 −z0|s−1(h|x0 −z0|1−γ)ρ1−s
+j
+(hρ1−γ
+j
+)−1
+≤C
+
+Ωj∈O
+|x0 −z0|s−γρ−(s−γ)
+j
+≤C,
+F5 ≤C max
+
+Oi∈Ox0
+
+Ωj∈O
+ℏ(x0)2
+|x0 −z0|1−sdi
+ρ1−s
+j
+h−1
+j )M
+≤C max
+
+Oi∈Ox0
+
+Ωj∈O
+ℏ(x0)2
+|x0 −z0|1−sdi
+ρ1−s
+j
+(hρ1−γ
+j
+)−1)M
+≤C max
+
+Oi∈Ox0
+
+Ωj∈O
+ℏ(x0)2
+|x0 −z0|1−sdi
+h−1ρ−(s−γ)
+j
+M
+≤C max
+
+Oi∈Ox0
+h|x0 −z0|1−γℏ(x0)
+|x0 −z0|1−sdi
+h−1|x0 −z0|−(s−γ)M
+≤C max
+
+Oi∈Ox0
+ℏ(x0)d−1
+i M
+≤Cκ−γsM.
+Substituting the estimates of F1, F2, F3, F4 and F5 into (C.10), we obtain
+(C.11)
+
+Ωj∈O
+h−1
+j ∥G −Gh∥L2(Ωj) ≤Cκγ(1−s) + Cκ−γsM.
+References
+[1] T. Apel, S. Rogovs, J. Pfeﬀerer, and M. Winkler, Maximum norm error estimates for Neu-
+mann boundary value problems on graded meshes, IMA J. Numer. Anal. 40 (2020), no. 1,
+474–497, DOI 10.1093/imanum/dry076. MR4050547
+[2] T. Apel, A. R¨osch, and D. Sirch, L∞-error estimates on graded meshes with application to op-
+timal control, SIAM J. Control Optim. 48 (2009), no. 3, 1771–1796, DOI 10.1137/080731724.
+MR2516188
+
+[PAGE 52]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+1584
+BUYANG LI
+[3] C. Bernardi, M. Dauge, and Y. Maday, Polynomials in the Sobolev world, Preprint,
+hal-00153795, September 2007, https://hal.archives-ouvertes.fr/hal-00153795v2/file/
+BeDaMa07b.pdf.
+[4] S.-K. Chua and R. L. Wheeden, Estimates of best constants for weighted Poincar´e inequal-
+ities on convex domains, Proc. London Math. Soc. (3) 93 (2006), no. 1, 197–226, DOI
+10.1017/S0024611506015826. MR2235947
+[5] P. G. Ciarlet, The Finite Element Method for Elliptic Problems, Studies in Mathematics and
+its Applications, Vol. 4, North-Holland Publishing Co., Amsterdam-New York-Oxford, 1978.
+MR0520174
+[6] M. Crouzeix, S. Larsson, and V. Thom´ee, Resolvent estimates for elliptic ﬁnite element
+operators in one dimension, Math. Comp. 63 (1994), no. 207, 121–140, DOI 10.2307/2153565.
+MR1242058
+[7] M. Dauge, Regularity and singularities in polyhedral domains. The case of Laplace and
+Maxwell equations, Presentation, https://perso.univ-rennes1.fr/monique.dauge/publis/
+Talk_Karlsruhe08.pdf, 2008.
+[8] M. Dauge, Elliptic Boundary Value Problems on Corner Domains, Lecture Notes in Math-
+ematics, vol. 1341, Springer-Verlag, Berlin, 1988. Smoothness and asymptotics of solutions,
+DOI 10.1007/BFb0086682. MR961439
+[9] A. Demlow, J. Guzm´an, and A. H. Schatz, Local energy estimates for the ﬁnite element
+method on sharply varying grids, Math. Comp. 80 (2011), no. 273, 1–9, DOI 10.1090/S0025-
+5718-2010-02353-1. MR2728969
+[10] A. Demlow, D. Leykekhman, A. H. Schatz, and L. B. Wahlbin, Best approximation property
+in the W 1
+∞norm for ﬁnite element methods on graded meshes, Math. Comp. 81 (2012),
+no. 278, 743–764, DOI 10.1090/S0025-5718-2011-02546-9. MR2869035
+[11] I. Fried, On the optimality of the pointwise accuracy of the ﬁnite element solution, Internat. J.
+Numer. Methods Engrg. 15 (1980), no. 3, 451–456, DOI 10.1002/nme.1620150311. MR560779
+[12] H. Gao and W. Qiu, The pointwise stabilities of piecewise linear ﬁnite element method on
+non-obtuse tetrahedral meshes of nonconvex polyhedra, J. Sci. Comput. 87 (2021), no. 2,
+Paper No. 53, 5, DOI 10.1007/s10915-021-01465-4. MR4240799
+[13] M. Geissert, Discrete maximal Lp regularity for ﬁnite element operators, SIAM J. Numer.
+Anal. 44 (2006), no. 2, 677–698, DOI 10.1137/040616553. MR2218965
+[14] M. Geissert, Applications of discrete maximal Lp regularity for ﬁnite element operators,
+Numer. Math. 108 (2007), no. 1, 121–149, DOI 10.1007/s00211-007-0110-1. MR2350187
+[15] L. Grafakos, Classical Fourier Analysis, 2nd ed., Graduate Texts in Mathematics, vol. 249,
+Springer, New York, 2008. MR2445437
+[16] P. Grisvard, Elliptic Problems in Nonsmooth Domains, Classics in Applied Mathematics,
+vol. 69, Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA, 2011.
+Reprint of the 1985 original [ MR0775683]; With a foreword by Susanne C. Brenner, DOI
+10.1137/1.9781611972030.ch1. MR3396210
+[17] J. Guzm´an and D. Leykekhman, Pointwise error estimates of ﬁnite element approximations
+to the Stokes problem on convex polyhedra, Math. Comp. 81 (2012), no. 280, 1879–1902, DOI
+10.1090/S0025-5718-2012-02603-2. MR2945141
+[18] T. Kashiwabara and T. Kemmochi, Pointwise error estimates of linear ﬁnite element method
+for Neumann boundary value problems in a smooth domain, Numer. Math. 144 (2020), no. 3,
+553–584, DOI 10.1007/s00211-019-01098-8. MR4071825
+[19] D. Leykekhman and B. Vexler, A priori error estimates for three dimensional parabolic
+optimal control problems with pointwise control, SIAM J. Control Optim. 54 (2016), no. 5,
+2403–2435, DOI 10.1137/15M1028042. MR3549870
+[20] D. Leykekhman and B. Vexler, Finite element pointwise results on convex polyhedral domains,
+SIAM J. Numer. Anal. 54 (2016), no. 2, 561–587, DOI 10.1137/15M1013912. MR3470741
+[21] D. Leykekhman and B. Vexler, Pointwise best approximation results for Galerkin ﬁnite el-
+ement solutions of parabolic problems, SIAM J. Numer. Anal. 54 (2016), no. 3, 1365–1384,
+DOI 10.1137/15M103412X. MR3498514
+[22] B. Li, Maximum-norm stability and maximal Lp regularity of FEMs for parabolic equa-
+tions with Lipschitz continuous coeﬃcients, Numer. Math. 131 (2015), no. 3, 489–516, DOI
+10.1007/s00211-015-0698-5. MR3395142
+
+[PAGE 53]
+This is a free offprint provided to the author by the publisher. Copyright restrictions may apply.
+MAXIMUM-NORM STABILITY OF THE FINITE ELEMENT METHOD
+1585
+[23] B. Li and W. Sun, Regularity of the diﬀusion-dispersion tensor and error analysis of Galerkin
+FEMs for a porous medium ﬂow, SIAM J. Numer. Anal. 53 (2015), no. 3, 1418–1437, DOI
+10.1137/140958803. MR3355773
+[24] B. Li and W. Sun, Maximal Lp analysis of ﬁnite element solutions for parabolic equations
+with nonsmooth coeﬃcients in convex polyhedra, Math. Comp. 86 (2017), no. 305, 1071–1102,
+DOI 10.1090/mcom/3133. MR3614012
+[25] H. Li, The W 1
+p stability of the Ritz projection on graded meshes, Math. Comp. 86 (2017),
+no. 303, 49–74, DOI 10.1090/mcom/3101. MR3557793
+[26] C. Merucci, Applications of interpolation with a function parameter to Lorentz, Sobolev
+and Besov spaces, Interpolation Spaces and Allied Topics in Analysis (Lund, 1983), Lecture
+Notes in Math., vol. 1070, Springer, Berlin, 1984, pp. 183–201, DOI 10.1007/BFb0099101.
+MR760483
+[27] D. Mitrea, A generalization of Dahlberg’s theorem concerning the regularity of harmonic
+Green potentials, Trans. Amer. Math. Soc. 360 (2008), no. 7, 3771–3793, DOI 10.1090/S0002-
+9947-08-04384-5. MR2386245
+[28] N. Yu. Bakaev, V. Thom´ee, and L. B. Wahlbin, Maximum-norm estimates for resolvents
+of elliptic ﬁnite element operators, Math. Comp. 72 (2003), no. 244, 1597–1610, DOI
+10.1090/S0025-5718-02-01488-6. MR1986795
+[29] A. H. Schatz, A weak discrete maximum principle and stability of the ﬁnite element method
+in L∞on plane polygonal domains. I, Math. Comp. 34 (1980), no. 149, 77–91, DOI
+10.2307/2006221. MR551291
+[30] A. H. Schatz and L. B. Wahlbin, Maximum norm estimates in the ﬁnite element method on
+plane polygonal domains. II. Reﬁnements, Math. Comp. 33 (1979), no. 146, 465–492, DOI
+10.2307/2006291. MR502067
+[31] A. H. Schatz and L. B. Wahlbin, On the quasi-optimality in L∞of the ˙H1-projection into ﬁ-
+nite element spaces, Math. Comp. 38 (1982), no. 157, 1–22, DOI 10.2307/2007461. MR637283
+[32] E. M. Stein, Singular Integrals and Diﬀerentiability Properties of Functions, Princeton Math-
+ematical Series, No. 30, Princeton University Press, Princeton, N.J., 1970. MR0290095
+[33] V. Thom´ee, Galerkin Finite Element Methods for Parabolic Problems, 2nd ed., Springer
+Series in Computational Mathematics, vol. 25, Springer-Verlag, Berlin, 2006. MR2249024
+[34] V. Thom´ee and L. B. Wahlbin, Stability and analyticity in maximum-norm for simplicial La-
+grange ﬁnite element semidiscretizations of parabolic equations with Dirichlet boundary con-
+ditions, Numer. Math. 87 (2000), no. 2, 373–389, DOI 10.1007/s002110000184. MR1804662
+Department of Applied Mathematics, The Hong Kong Polytechnic University, Hung
+Hom, Hong Kong, People’s Republic of China
+Email address: buyang.li@polyu.edu.hk

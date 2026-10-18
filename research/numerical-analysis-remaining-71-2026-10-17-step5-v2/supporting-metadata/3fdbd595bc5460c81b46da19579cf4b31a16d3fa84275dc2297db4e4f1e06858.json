@@ -1,0 +1,542 @@
+[
+  {
+    "order": 2588,
+    "id": "sketched-least-squares-and-subspace-embeddings",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Sketched least squares and subspace embeddings",
+    "companion": "sketched-least-squares-and-subspace-embeddings-examples",
+    "requires": [
+      "randomized-low-rank-approximation",
+      "computed-fast-transforms-and-convolution",
+      "robust-covariance-and-high-dimensional-stability"
+    ],
+    "items": [
+      {
+        "id": "alg-sketch-and-solve-least-squares",
+        "kind": "algorithm",
+        "title": "Rank-aware sketch-and-solve least squares",
+        "statement": "Input $A\\in\\mathbb K^{n\\times p}$, $b\\in\\mathbb K^n$, a supplied sketch\n$S\\in\\mathbb K^{m\\times n}$, and a finite nonnegative integer SVD sweep\nbudget $N$, where $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Form\n$C=SA$ and $c=Sb$, and call\n[[alg-rank-thresholded-least-squares-by-svd]] on $(C,c)$ with threshold\n$\\tau=0$ and budget $N$.\n\nIf the call returns exact-arithmetic convergence with an exact SVD record,\nreturn `success`, the exact rank $r=\\operatorname{rank}(C)$, the canonical\nminimum-norm vector $\\widehat x=C^+c$, and the separately computed sketched\nand physical residuals $\\|C\\widehat x-c\\|_2$ and\n$\\|A\\widehat x-b\\|_2$. The exact-arithmetic solve-error certificate is\nzero. If the SVD call returns `inconclusive`, return its status and supplied\npartial diagnostics without claiming a minimizer. In finite precision, return\nthe computed candidate and the two residual reports separately; mark the rank\n`unverified` unless a certified interval separates every singular-value\ncomparison from zero, and report a solve-error certificate only when the\nsolver supplies one. No finite-precision accuracy guarantee is part of this\nprocedure.",
+        "deps": [
+          "alg-rank-thresholded-least-squares-by-svd"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/alg-sketch-and-solve-least-squares.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.5, Theorem 21",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.2",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-oblivious-l2-subspace-embedding",
+        "kind": "definition",
+        "title": "Oblivious squared-norm subspace embeddings",
+        "statement": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $n,m\\ge1$, and use\n$\\|x\\|_2^2=\\sum_i|x_i|^2$ on $\\mathbb K^n$. For a fixed subspace\n$U\\subseteq\\mathbb K^n$ and $0<\\varepsilon<1$, a matrix\n$S\\in\\mathbb K^{m\\times n}$ is an **$\\varepsilon$-subspace embedding\nfor $U$** when\n$$\n(1-\\varepsilon)\\|x\\|_2^2\\le\\|Sx\\|_2^2\\le(1+\\varepsilon)\\|x\\|_2^2\\quad\\text{for every }x\\in U.\n$$\n\nFor an integer $d$ with $0\\le d\\le n$ and $0<\\delta<1$,\na distribution $\\mathcal D$ on $m\\times n$\nmatrices is an **$(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace\nembedding for dimension $d$** if, for every fixed $d$-dimensional\nsubspace $U\\subseteq\\mathbb K^n$ chosen independently of the draw,\n$$\n\\Pr_{S\\sim\\mathcal D}\\{S\\text{ is an }\\varepsilon\\text{-subspace embedding for }U\\}\\ge1-\\delta.\n$$\nThe subspace is fixed before sampling, but the guarantee is stated separately\nfor each such $U$; it does not assert that one draw preserves all\n$d$-dimensional subspaces simultaneously. For a matrix $A$, an embedding\nof $\\operatorname{Ran}(A)$ means the property on its column space. For\nleast-squares residuals $Ax-b$, the relevant subspace is\n$\\operatorname{span}(\\operatorname{Ran}(A),b)$.",
+        "deps": [],
+        "dependency_level": 0,
+        "source_path": "items/def-oblivious-l2-subspace-embedding.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.1, Definitions 1–2",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §2.1",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-sketch-qr-right-preconditioner",
+        "kind": "definition",
+        "title": "Right preconditioner from the reduced QR factor of a sketch",
+        "statement": "Let $A\\in\\mathbb K^{n\\times d}$, $S\\in\\mathbb K^{m\\times n}$, and suppose\na reduced QR factorization of $SA$ is supplied:\n$$\nSA=QR,\\qquad Q^*Q=I_d,\n$$\nwhere $R\\in\\mathbb K^{d\\times d}$ is upper triangular and nonsingular.\nThe **sketch-QR right preconditioner** is\n$$\nP_S:=R^{-1}.\n$$\nIt is undefined when no such reduced factorization with nonsingular $R$ is\navailable. The matrix being preconditioned is the original $A$, through\n$AP_S$; $SA$ is used to construct $P_S$.",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/def-sketch-qr-right-preconditioner.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.6",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.3",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-subspace-leverage-scores",
+        "kind": "definition",
+        "title": "Row leverage scores of a finite-dimensional subspace",
+        "statement": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $U\\subseteq\\mathbb K^n$\nhave dimension $d\\ge1$. Choose a matrix $Q\\in\\mathbb K^{n\\times d}$\nwhose columns are an orthonormal basis of $U$, so $Q^*Q=I_d$. For\n$0\\le i<n$, define the **$i$-th row leverage score of $U$** by\n$$\n\\ell_i(U):=\\|e_i^*Q\\|_2^2,\n$$\nwhere $e_i$ is the $i$-th standard coordinate vector. The following item\nproves that this value is independent of the chosen orthonormal basis, so the\ndefinition is well-defined.",
+        "deps": [
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "justified_by": [
+          "lem-subspace-leverage-score-identities"
+        ],
+        "dependency_level": 0,
+        "source_path": "items/def-subspace-leverage-scores.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.4, Definition 16",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.1",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hermitian-sphere-net-controls-operator-norm",
+        "kind": "lemma",
+        "title": "A sphere net controls a real or complex Hermitian operator norm",
+        "statement": "Let $d\\ge1$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$H\\in\\mathbb K^{d\\times d}$ be Hermitian. Regard $\\mathbb C^d$ as\n$\\mathbb R^{2d}$ for distances. A $1/4$-net $\\mathcal N$ of the unit\nsphere exists with $|\\mathcal N|\\le9^d$ over $\\mathbb R$, and\n$|\\mathcal N|\\le9^{2d}$ over $\\mathbb C$. For every such net,\n$$\n\\|H\\|_2\\le2\\max_{v\\in\\mathcal N}|v^*Hv|.\n$$",
+        "deps": [
+          "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-hermitian-sphere-net-controls-operator-norm.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.1, Lemma 5",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Philippe Rigollet and Jan-Christian Hütter, High-Dimensional Statistics: Lecture Notes, Chapter 1, Lemma 1.18",
+              "url": "https://arxiv.org/pdf/2310.19244v1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-subspace-leverage-score-identities",
+        "kind": "lemma",
+        "title": "Leverage scores are basis-independent and sum to the dimension",
+        "statement": "Let $U\\subseteq\\mathbb K^n$ have dimension $d\\ge1$, where\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. For any orthonormal basis matrix\n$Q\\in\\mathbb K^{n\\times d}$, let $\\ell_i=\\|e_i^*Q\\|_2^2$. Then\nthese values are independent of the chosen orthonormal basis, satisfy\n$0\\le\\ell_i\\le1$ and $\\sum_{i=0}^{n-1}\\ell_i=d$, and $\\ell_i=0$\nexactly when the $i$-th row of $Q$ is zero.",
+        "deps": [
+          "def-subspace-leverage-scores"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-subspace-leverage-score-identities.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.4",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.1",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sketch-and-solve-exact-minimizer",
+        "kind": "theorem",
+        "title": "A converged exact sketch-and-solve run returns a sketch minimizer",
+        "statement": "Let $C=SA$ and $c=Sb$ be the sketch matrix and response in\n[[alg-sketch-and-solve-least-squares]]. In exact arithmetic, if its zero-\nthreshold SVD call converges and supplies an exact SVD record, the returned\n$\\widehat x$ is the unique minimum-Euclidean-norm minimizer of\n$\\|SAx-Sb\\|_2$, and the reported rank is $\\operatorname{rank}(SA)$.\nNo conclusion is asserted on an `inconclusive` or finite-precision\n`unverified` branch.",
+        "deps": [
+          "alg-sketch-and-solve-least-squares",
+          "thm-svd-thresholded-least-squares-minimum-norm-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-sketch-and-solve-exact-minimizer.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wen-Wei Lin, Lecture Notes of Matrix Computations, §3.2.2",
+              "url": "https://zhims.github.io/doc/note/computing/matrixComputations.pdf"
+            },
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.5",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sketch-qr-right-preconditioner-conditioned-spectrum",
+        "kind": "theorem",
+        "title": "An embedded QR right preconditioner has controlled singular values",
+        "statement": "Let $n,m,d\\ge1$ with $n,m\\ge d$, let $A\\in\\mathbb K^{n\\times d}$ have full column rank, and let\n$0<\\varepsilon<1$, and suppose the particular matrix $S$ is an\n$\\varepsilon$-subspace embedding for $\\operatorname{Ran}(A)$. A reduced\nQR factorization $SA=QR$ exists and has nonsingular $R$, so the\npreconditioner $P_S=R^{-1}$ of\n[[def-sketch-qr-right-preconditioner]] is defined. Its right-preconditioned\nmatrix satisfies\n$$\n\\frac1{\\sqrt{1+\\varepsilon}}\\le\\sigma_{\\min}(AP_S)\\le\\sigma_{\\max}(AP_S)\\le\\frac1{\\sqrt{1-\\varepsilon}},\\qquad \\kappa_2(AP_S):=\\frac{\\sigma_{\\max}(AP_S)}{\\sigma_{\\min}(AP_S)}\\le\\sqrt{\\frac{1+\\varepsilon}{1-\\varepsilon}}.\n$$",
+        "deps": [
+          "def-sketch-qr-right-preconditioner",
+          "def-oblivious-l2-subspace-embedding",
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-sketch-qr-right-preconditioner-conditioned-spectrum.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.6",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.3",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-gaussian-squared-norm-tail",
+        "kind": "lemma",
+        "title": "Squared-norm concentration for real and normalized complex Gaussians",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $m\\ge1$, and let $g_1,\\ldots,g_m$ be independent standard real\nGaussian scalars or independent normalized complex Gaussian scalars, with\n$\\mathbb E|g_j|^2=1$. For $0<t<1$,\n$$\n\\Pr\\left\\{\\left|\\frac1m\\sum_{j=1}^m|g_j|^2-1\\right|\\ge t\\right\\}\\le2e^{-mt^2/8}.\n$$",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "lem-gaussian-matrix-law-normalization-and-second-moments",
+          "def-countable-choice",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "cor-markov-inequality-for-random-variables",
+          "thm-logarithm-derivative-and-integral",
+          "thm-finite-union-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-gaussian-squared-norm-tail.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.1, Theorem 4 and §2.2, Lemma 18",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §3.1",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-leverage-score-row-sampling-sketch",
+        "kind": "algorithm",
+        "title": "With-replacement leverage-score row sampling and rescaling",
+        "statement": "Input an orthonormal basis matrix $Q\\in\\mathbb K^{n\\times d}$ with\n$d\\ge1$, a sample count $m\\ge1$, a parameter $0<\\beta\\le1$, and a\nprobability vector $\\pi=(\\pi_0,\\ldots,\\pi_{n-1})$ satisfying\n$\\pi_i\\ge\\beta\\ell_i(U)/d$, where $U=\\operatorname{Ran}(Q)$ and\n$\\ell_i(U)$ is from [[def-subspace-leverage-scores]]. If the input checks\nfail, return `invalid-input`. Otherwise draw indices $J_1,\\ldots,J_m$\nindependently with replacement from $\\pi$. Form $S\\in\\mathbb K^{m\\times n}$\nby setting row $j$ to $e_{J_j}^*/\\sqrt{m\\pi_{J_j}}$, and return `success`,\nthe selected indices, and $S$.\n\nBecause $\\beta>0$, $\\pi_i=0$ implies $\\ell_i(U)=0$; such a row is\nnever sampled, so the scaling never divides by zero. One canonical choice is\n$\\pi_i=\\ell_i(U)/d$, which sets every zero-leverage row's probability to\nzero. Other admissible distributions may assign positive probability to a\nzero-leverage row, but that choice wastes samples. Repeated indices are\nallowed and are distinct rows of $S$.",
+        "deps": [
+          "def-subspace-leverage-scores",
+          "lem-subspace-leverage-score-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "source_path": "items/alg-leverage-score-row-sampling-sketch.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.4, Definition 16",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.2",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sketch-and-solve-residual-guarantee",
+        "kind": "theorem",
+        "title": "Embedding span(A,b) gives the sketch-and-solve residual factor",
+        "statement": "Let $A\\in\\mathbb K^{n\\times p}$, $b\\in\\mathbb K^n$, and\n$0<\\varepsilon<1$. Suppose the particular sketch $S$ used in\n[[alg-sketch-and-solve-least-squares]] is an $\\varepsilon$-subspace\nembedding for\n$U=\\operatorname{span}(\\operatorname{Ran}(A),\\{b\\})$. If that algorithm\nreturns an exact-arithmetic converged vector $\\widehat x$, then\n$$\n\\|A\\widehat x-b\\|_2^2\\le\\frac{1+\\varepsilon}{1-\\varepsilon}\\min_{x\\in\\mathbb K^p}\\|Ax-b\\|_2^2.\n$$\nEmbedding $\\operatorname{Ran}(A)$ alone is not a hypothesis for this\nconclusion.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "alg-sketch-and-solve-least-squares",
+          "thm-sketch-and-solve-exact-minimizer",
+          "thm-least-squares-solutions-and-normal-equation"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-sketch-and-solve-residual-guarantee.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.5, Theorem 21",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.2",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gaussian-oblivious-l2-subspace-embedding",
+        "kind": "theorem",
+        "title": "Gaussian sketches embed a fixed subspace at the additive dimension rate",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $1\\le d\\le n$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$U\\subseteq\\mathbb K^n$ be a fixed $d$-dimensional subspace. Let\n$G\\in\\mathbb K^{m\\times n}$ have iid standard real Gaussian entries when\n$\\mathbb K=\\mathbb R$, or iid normalized complex Gaussian entries with\n$\\mathbb E|g|^2=1$ when $\\mathbb K=\\mathbb C$. Put $S=G/\\sqrt m$.\nFor $0<\\varepsilon,\\delta<1$, if\n$$\nm\\ge192\\varepsilon^{-2}\\bigl(d+\\log(1/\\delta)\\bigr),\n$$\nthen with probability at least $1-\\delta$, $S$ is an\n$\\varepsilon$-subspace embedding for $U$. Thus this Gaussian distribution\nis an $(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace embedding for\ndimension $d$.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "lem-gaussian-matrix-law-normalization-and-second-moments",
+          "lem-gaussian-squared-norm-tail",
+          "lem-hermitian-sphere-net-controls-operator-norm",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-countable-choice",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-finite-union-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-gaussian-oblivious-l2-subspace-embedding.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.1, Theorem 6",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §3.1",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-leverage-score-row-sampling-subspace-embedding",
+        "kind": "theorem",
+        "title": "Leverage-score row sampling embeds the column space",
+        "statement": "Let $Q\\in\\mathbb K^{n\\times d}$, $d\\ge1$, have orthonormal columns,\nand let $\\ell_i=\\|e_i^*Q\\|_2^2$. Let $\\pi$ be a probability vector\nwith $\\pi_i\\ge\\beta\\ell_i/d$ for $0<\\beta\\le1$, and draw $S$ by\n[[alg-leverage-score-row-sampling-sketch]] with replacement. For\n$0<\\varepsilon,\\delta<1$, if\n$$\nm\\ge\\frac{8d}{\\beta\\varepsilon^2}\\log\\left(\\frac{2d}{\\delta}\\right),\n$$\nthen with probability at least $1-\\delta$,\n$$\n\\|Q^*S^*SQ-I_d\\|_2\\le\\varepsilon.\n$$\nEquivalently, $S$ is an $\\varepsilon$-subspace embedding for\n$\\operatorname{Ran}(Q)$. In the usual confidence range\n$0<\\delta\\le1/2$, the simpler sufficient condition\n$$\nm\\ge\\frac{16d}{\\beta\\varepsilon^2}\\log\\left(\\frac d\\delta\\right)\n$$\nfollows. For a matrix $A$ of rank $d$, any orthonormal basis $Q$ of\n$\\operatorname{Ran}(A)$ gives the corresponding embedding guarantee on\n$\\operatorname{Ran}(A)$.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "def-subspace-leverage-scores",
+          "lem-subspace-leverage-score-identities",
+          "alg-leverage-score-row-sampling-sketch",
+          "lem-bounded-independent-matrix-bernstein-via-trace-exponential",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-leverage-score-row-sampling-subspace-embedding.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.4, Theorem 17",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "David Woodruff, 15-859T Lecture 4.2, Leverage Score Sampling gives a Subspace Embedding, Claims 2–3",
+              "url": "https://www.cs.cmu.edu/afs/cs/user/dwoodruf/www/teaching/15859-fall20/lecture4_2.pdf"
+            },
+            {
+              "title": "Joel A. Tropp, An Introduction to Matrix Concentration Inequalities, §6.6",
+              "url": "https://tropp.caltech.edu/books/Tro14-Introduction-Matrix-preprint.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2589,
+    "id": "sketched-least-squares-and-subspace-embeddings-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Sketched least squares and subspace embeddings — Examples",
+    "companion": "sketched-least-squares-and-subspace-embeddings",
+    "requires": [
+      "sketched-least-squares-and-subspace-embeddings"
+    ],
+    "items": [
+      {
+        "id": "cex-embedding-the-column-space-alone-does-not-control-ls-residual",
+        "kind": "counterexample",
+        "title": "Embedding Ran(A) alone does not control the sketch-and-solve residual",
+        "statement": "False claim: If $S$ is an $\\varepsilon$-subspace embedding for\n$\\operatorname{Ran}(A)$, then every exact sketch least-squares minimizer\n$\\widehat x$ satisfies\n$$\n\\|A\\widehat x-b\\|_2^2\\le\\frac{1+\\varepsilon}{1-\\varepsilon}\\min_x\\|Ax-b\\|_2^2.\n$$",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "alg-sketch-and-solve-least-squares"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/cex-embedding-the-column-space-alone-does-not-control-ls-residual.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.5, Theorem 21",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.2",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-leverage-zero-rows-and-high-coherence",
+        "kind": "example",
+        "title": "Zero leverage rows and a maximally coherent one-dimensional design",
+        "statement": "Take $Q=e_1=(1,0,0)^T\\in\\mathbb R^{3\\times1}$. Compute its leverage\nscores and compare one exact leverage-proportional sample with one uniform\nrow sample. Define the coherence here by\n$\\mu(U)=(n/d)\\max_i\\ell_i(U)$.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "def-subspace-leverage-scores",
+          "lem-subspace-leverage-score-identities",
+          "alg-leverage-score-row-sampling-sketch"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "source_path": "items/ex-leverage-zero-rows-and-high-coherence.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.4",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.1",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-overdetermined-regression-exact-subspace-sketch",
+        "kind": "example",
+        "title": "An exact two-row sketch for a three-row regression problem",
+        "statement": "Let $A=(1,1,1)^T$, $b=e_1$, and let $S\\in\\mathbb R^{2\\times3}$\nhave rows $q_1^T=(1,1,1)/\\sqrt3$ and\n$q_2^T=(2,-1,-1)/\\sqrt6$. Compute the original and sketched least-squares\nminimizers and residuals.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "alg-sketch-and-solve-least-squares",
+          "thm-sketch-and-solve-exact-minimizer",
+          "thm-sketch-and-solve-residual-guarantee"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "source_path": "items/ex-overdetermined-regression-exact-subspace-sketch.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David P. Woodruff, Sketching as a Tool for Numerical Linear Algebra, §2.5, Theorem 21",
+              "url": "https://arxiv.org/pdf/1411.4357"
+            },
+            {
+              "title": "Michael W. Mahoney, Randomized Algorithms for Matrices and Data, §4.2",
+              "url": "https://www.math.ucdavis.edu/~strohmer/courses/270/RandLA.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

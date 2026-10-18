@@ -1,0 +1,424 @@
+[
+  {
+    "order": 2660,
+    "id": "discontinuous-galerkin-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Symmetric interior-penalty discontinuous Galerkin",
+    "companion": "discontinuous-galerkin-methods-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "finite-element-meshes-and-interpolation",
+      "ceas-lemma-and-aubin-nitsche-error-estimates"
+    ],
+    "items": [
+      {
+        "id": "lem-sipdg-physical-simplex-trace-green",
+        "kind": "lemma",
+        "title": "Sobolev traces and Gauss\u2013Green formula on physical simplices",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-smooth-density-on-reference-simplex",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-holder-inequality-for-integrals",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.2.1, printed pp. 192\u2013194: affine matching cells, face traces, and the elementwise Green identity used in SIP consistency."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a7\u00a73.1\u20133.3, printed pp. 1756\u20131759: elementwise Sobolev traces, integration by parts, consistency, and adjoint consistency."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-sipdg-jump-average-convention",
+        "kind": "definition",
+        "title": "Jump and average conventions for symmetric interior-penalty DG",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.2.1, printed pp. 192\u2013193: oriented interior faces, jumps, averages, and the one-sided boundary convention."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a7\u00a73.1\u20133.2, printed pp. 1756\u20131758: jump/average identities and the primal DG formulation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-sipdg-bilinear-form-and-energy-norm",
+        "kind": "definition",
+        "title": "Symmetric interior-penalty DG form and energy seminorm",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-sipdg-jump-average-convention",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-sipdg-physical-simplex-trace-green",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.2.1\u201338.2.2, printed pp. 192\u2013195: SIP bilinear form, gamma_0/h_F penalty, and broken energy norm."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a7\u00a73.2\u20133.3, printed pp. 1757\u20131759: primal formulation, consistency, and adjoint consistency."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sipdg-discrete-flux-inverse-bound",
+        "kind": "lemma",
+        "title": "Discrete inverse-trace bound for SIPDG coefficient fluxes",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.2.2, printed pp. 194\u2013195: the discrete trace inequality used to bound the consistency flux."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a74.1, printed pp. 1763\u20131764: inverse-trace control of the face consistency terms."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sipdg-energy-seminorm-is-a-norm",
+        "kind": "lemma",
+        "title": "The SIPDG broken energy expression is definite",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "def-matching-affine-simplicial-meshes",
+          "lem-sipdg-physical-simplex-trace-green",
+          "thm-holder-inequality-for-integrals",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.2.2, printed p. 194: why the broken energy expression is a norm under weak homogeneous Dirichlet enforcement."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a74.1, printed p. 1763: the mesh-dependent DG expressions are norms by the discrete Poincar\u00e9 inequality."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sipdg-boundedness-augmented-norm",
+        "kind": "lemma",
+        "title": "Boundedness of the SIPDG form in the augmented norm",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.3, Lemma 38.9, printed pp. 197\u2013198: face-aware boundedness of the SIP consistency terms."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a74.1, printed pp. 1763\u20131764: boundedness of the primal DG form in the face-aware norm."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sipdg-exact-consistency",
+        "kind": "theorem",
+        "title": "Exact consistency of the symmetric interior-penalty DG form",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "def-sipdg-jump-average-convention",
+          "lem-sipdg-physical-simplex-trace-green",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.2.1, Lemma 38.2, printed pp. 193\u2013194: exact consistency by elementwise integration by parts."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a73.3, printed pp. 1758\u20131759: consistency and Galerkin orthogonality of the primal formulation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sipdg-adjoint-consistency-h2",
+        "kind": "lemma",
+        "title": "SIPDG adjoint consistency for piecewise H2 dual solutions",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "lem-sipdg-physical-simplex-trace-green",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.2.1 and \u00a738.3, printed pp. 193 and 198\u2013199: the symmetric adjoint-consistency term and its duality role."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a73.3 and \u00a75.1, printed pp. 1758\u20131759 and 1767\u20131768: the adjoint-consistency condition and its use in the L2 duality identity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sipdg-coercivity-large-penalty",
+        "kind": "theorem",
+        "title": "SIPDG coercivity above the discrete inverse-trace threshold",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "lem-sipdg-discrete-flux-inverse-bound",
+          "lem-sipdg-energy-seminorm-is-a-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.2.2, Lemma 38.6, printed pp. 194\u2013195: inverse-trace threshold, coercivity, and well-posedness."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a74.2, printed pp. 1765\u20131766: penalty terms absorb the consistency terms once the threshold exceeds the inverse-trace bound."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sipdg-l2-error-under-adjoint-regularity",
+        "kind": "theorem",
+        "title": "SIPDG L2 error under adjoint consistency and dual approximation",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "lem-sipdg-physical-simplex-trace-green",
+          "thm-sipdg-exact-consistency",
+          "lem-sipdg-adjoint-consistency-h2",
+          "lem-sipdg-boundedness-augmented-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.3, Theorem 38.12 and its dual-problem setup, printed pp. 198\u2013199: the s>1/2 regularity index and h^s ell_Omega^(1-s) L2 estimate."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a75.1, printed pp. 1767\u20131768: adjoint consistency, Galerkin orthogonality, and duality for the L2 error."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sipdg-energy-error-estimate",
+        "kind": "theorem",
+        "title": "A direct Strang-type energy error estimate for SIPDG",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "thm-sipdg-coercivity-large-penalty",
+          "thm-sipdg-exact-consistency",
+          "lem-sipdg-discrete-flux-inverse-bound",
+          "lem-sipdg-boundedness-augmented-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "\u00a738.3, Theorem 38.10, printed pp. 197\u2013198: stability, consistency/boundedness, and the DG energy error estimate."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "\u00a75.1, printed pp. 1767\u20131768: the stable, consistent DG energy estimate derived from coercivity, boundedness, and approximation."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2661,
+    "id": "discontinuous-galerkin-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Symmetric interior-penalty discontinuous Galerkin \u2014 Examples",
+    "companion": "discontinuous-galerkin-methods",
+    "requires": [
+      "discontinuous-galerkin-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-sipdg-broken-function-is-not-h1",
+        "kind": "example",
+        "title": "A broken polynomial with a nonzero jump is not globally H1",
+        "deps": [
+          "def-sipdg-jump-average-convention",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-sipdg-one-dimensional-interior-jump",
+        "kind": "example",
+        "title": "One-dimensional SIPDG jump and penalty calculation",
+        "deps": [
+          "def-sipdg-jump-average-convention"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-sipdg-small-penalty-loses-coercivity",
+        "kind": "example",
+        "title": "A too-small SIPDG penalty destroys coercivity",
+        "deps": [
+          "def-sipdg-jump-average-convention"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

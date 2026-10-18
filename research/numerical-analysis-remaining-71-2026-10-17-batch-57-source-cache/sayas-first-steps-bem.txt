@@ -1,0 +1,4317 @@
+First steps in the boundary element method
+
+Francisco-Javier Sayas
+University of Delaware
+
+April 29, 2015
+
+
+Presentation
+
+This is yet another instance of the beginning of a book I’ll never find the time to finish.
+Instead, you’ll find here some basic lectures, at an elementary level,, about boundary
+integral equations and boundary element methods.
+
+1
+
+
+Chapter 1
+
+The single layer potential for the
+Laplacian
+
+chap:1
+
+1.1
+Exterior solutions of the Laplace equation
+
+We consider the following geometric set-up. A bounded domain Ω−⊂Rd, with d = 2
+or d = 3, is assumed to be on one side of its boundary Γ. Often, the domain of interest
+will be Ω+ := Rd\Ω−, and will be referred to as the exterior domain. The unit normal
+vector field ν : Γ →Rd is well defined (almost everywhere) and assumed to point from
+Ω−to Ω+.
+
+With respect to the boundary, the farther we will go from the point of view of regularity is
+Lipschitz regularity (see Section 1.5 below), but it will help the reader to place themselves
+in one of these extreme situations:
+
+• Γ is a closed simple polygon in the plane or a closed polyhedron in the space that
+is locally representable as a graph.
+
+• Γ is locally the graph of a C∞function.
+
+Many interesting situations fall in-between. We will make an effort in exploring domains
+in their due generality, as we approach the more theoretical chapters of this book.
+Most of this book is going to be focused on exterior solutions of boundary value
+problems. We start by focusing on the Laplace equation
+
+∆u = 0
+in Ω+.
+(1.1)
+
+At this point we are not going to worry about smoothness of the solution or of the
+boundary. Smoothness of solution will be a given, as we will see later in the book, and
+the boundary might have different kinds of regularity. A boundary condition will be given
+on Γ, typically, a Dirichlet condition
+
+u = β0
+on Γ,
+(1.2)
+
+2
+
+
+or a Neumann condition
+∂νu := ∇u · ν = β1
+on Γ.
+(1.3)
+
+The problem is not complete without a certain kind of condition at infinity.
+At this
+moment, we are going to deal with the asymptotic behavior at infinity in full generality.
+In the two dimensional case, we assume that
+
+u(z) = a log |z| + b + c · z
+
+|z|2 + O(|z|−2)
+as |z| →∞.
+(1.4)
+eq:1.4
+
+The scalar quantities a and b, and the vector c might be given or not. The Landau symbol
+is used as follows:
+f(z) = O(|z|−m) as |z| →∞
+
+means that there exist C, R > 0 such that
+
+|f(z)| ≤C|z|−m
+∀z
+s.t. |z| ≥R.
+
+In the three dimensional case, we will consider the following type of asymptotic behavior
+
+u(z) = a
+
+|z| + b · z
+
+|z|3 + O(|z|−3)
+as |z| →∞.
+(1.5)
+eq:1.5
+
+Asymptotic conditions at infinity, imposed to solutions of boundary value problems, are
+often called radiation conditions for reasons that will be clear when we start exploring
+equations related to wave propagation.
+
+Some functional notation.
+Even for readers who are not fully acquainted with inte-
+gration theory, it will be useful to adopt the classical notation of Lebesgue spaces. On a
+domain Ω⊂Rd (bounded or not), we consider the spaces
+
+L1(Ω) :={u : Ω→R :
+�
+
+Ω
+|u| < ∞},
+(1.6a)
+eq:1.5a
+
+L2(Ω) :={u : Ω→R :
+�
+
+Ω
+|u|2 < ∞},
+(1.6b)
+eq:1.5b
+
+and
+L∞(Ω) := {u : Ω→R : |u| bounded}.
+(1.6c)
+eq:1.5c
+
+Some further precision is needed. The integral in (1.6a) and (1.6b) is a Lebesgue integral.
+The Lebesgue measure will not be displayed unless we explicitly show the variable in the
+function. Functions that are equal almost everywhere (except in set of zero measure) are
+considered to be the same function. If the reader is not acquainted with these concepts,
+there are simple intuitive introductions to measure and integration in the literature. We
+will not attemp them here. In (1.6c), boundedness has to be understood as the existence
+of a constant such that |u| ≤C almost everywhere, i.e., except in a set of zero measure.
+Once again, functions that differ on sets of measure zero are considered to be the same
+function. When we are working on the boundary Γ, we will use a Lebesgue measure in
+d −1 dimensions mapped on the boundary (this is particularly easy to understand in the
+case of polygonal boundaries), in order to define the spaces L1(Γ) and L2(Γ). The space
+L∞(Γ) is similarly defined.
+
+3
+
+
+1.2
+The single layer potential in three dimensions
+sec:1.2
+
+Let η : Γ →R be a given function defined on the boundary Γ. We then define the single
+layer potential Sη : R3 \ Γ →R with the formula:
+
+(Sη)(z) :=
+�
+
+Γ
+
+η(y)
+4π|z −y|dΓ(y).
+
+In this context, the input function η will be called a density. Several simple properties
+are next listed. Their proofs are proposed in the exercise list. If η ∈L1(Γ) and u = Sη,
+then u ∈C∞(R3 \ Γ), and
+
+∆u = 0
+in R3 \ Γ,
+(1.7a)
+
+u(z) = a 1
+
+|z| + O(|z|−2)
+as |z| →∞.
+(1.7b)
+
+where a =
+1
+4π
+�
+
+Γ η dΓ. It takes quite some more work to prove the following estimates.
+On smooth points of the boundary, that is, on points x ∈Γ on which there is a tangent
+plane, and for smooth enough density η, we have
+eq:1.8
+
+(γ+u)(x) :=
+lim
+Ω+∋z→x u(x)
+=
+�
+
+Γ
+
+η(y)
+4π|x −y|dΓ(y),
+(1.8a)
+
+(γ−u)(x) :=
+lim
+Ω−∋z→x u(x)
+=
+�
+
+Γ
+
+η(y)
+4π|x −y|dΓ(y),
+(1.8b)
+
+(∂+
+ν u)(x) :=
+lim
+Ω+∋z→x ∇u(x) · ν(x) = −1
+
+2η(x) +
+�
+
+Γ
+
+(y −x) · ν(x)
+
+4π|x −y|3
+η(y)dΓ(y),
+(1.8c)
+
+(∂−
+ν u)(x) :=
+lim
+Ω−∋z→x ∇u(x) · ν(x) = 1
+
+2η(x) +
+�
+
+Γ
+
+(y −x) · ν(x)
+
+4π|x −y|3
+η(y)dΓ(y).
+(1.8d)
+
+This shows that the single layer potential is continuous across the surface from where it
+is generated, but that its gradient is discontinuous in the normal direction, with a jump
+discontinuity equal to the density. We have used the symbols γ± to denote restrictions
+to the boundary from Ω±. These will be the precise symbols for trace operators that we
+will use when we get to be theoretically precise. We have also adopted the quite usual
+symbols ∂±
+ν for normal derivatives from both sides of Γ.
+Smooth points on the boundary include all points that are not on edges in the case of
+polyhedral boundaries. All points are smooth on smooth surfaces.
+
+Two boundary integral operators.
+It is quite convenient to have separate symbols
+for the two integral expressions in the righ-hand-sides of (1.8): for an arbitrary density η
+and for points x ∈Γ, we define
+
+4
+
+
+eq:1.9
+
+(Vη)(x) :=
+�
+
+Γ
+
+η(y)
+4π|x −y|dΓ(y),
+(1.9a)
+
+(Ktη)(x) :=
+�
+
+Γ
+
+(y −x) · ν(x)
+
+4π|x −y|3
+η(y)dΓ(y).
+(1.9b)
+
+Note that Sη and Vη share the same mathematical expression, although they mean two
+different things: Sη is a function defined in free space R3 \ Γ and Vη is defined on the
+interface Γ.
+The operators V and Kt are our first two examples of boundary integral
+operators, respectivelly called single layer operator and adjoint/transpose double layer
+operator. We will need to wait until Chapter 2 to understand the name of the second one,
+as well as its superscripted notation.
+
+Some jump relations.
+We can collect much of the previous information with the help
+of the jump and average operators: if u : Rd \ Γ →R is sufficiently smooth on both sides
+of Γ, we write
+[[γu]] := γ−u −γ+u,
+[[∂νu]] := ∂−
+ν u −∂+
+ν u,
+
+and
+{{γu}} := 1
+
+2γ−u + 1
+
+2γ+u,
+{{∂νu}} := 1
+
+2∂−
+ν u + 1
+
+2∂+
+ν u.
+
+Then, the limiting properties of the single layer potential (1.8) can be condensed as
+eq:1.10
+
+[[γSη]] = 0,
+[[∂νSη]] = η,
+(1.10a)
+{{γSη}} = γ±Sη = Vη,
+{{∂νSη}} = Ktη.
+(1.10b)
+
+In the jargon of boundary integral equations, these are some of the jump relations of
+potentials.
+
+A boundary integral equation.
+We can now try to use the single layer potential to
+solve the exterior Dirichlet problem:
+eq:1.11
+
+∆u = 0
+in Ω+,
+(1.11a)
+γ+u = β0
+(on Γ),
+(1.11b)
+u = O(r−1)
+as r →∞,
+(1.11c)
+
+for given boundary data β0 : Γ →R, and where the simplified asymptotic notation for
+the radiation condition at infinity is self-explanatory. We can look then for a solution of
+(1.11) in the form of a single layer potential
+eq:1.12
+
+u = Sη,
+(1.12a)
+eq:1.12a
+
+for a density η to be determined. This function satisfies the Laplace equation and has the
+right asymptotic behavior at infinity. It solves the Dirichlet problem if and only if
+
+Vη = β0.
+(1.12b)
+eq:1.12b
+
+5
+
+
+The equation (1.12b), which has the explicit form
+�
+
+Γ
+
+η(y)
+4π|x −y|dΓ(y) = β0(x),
+x ∈Γ,
+(1.13)
+eq:1.13
+
+is our first example of a boundary integral equation. Once again, we are not concerned
+with smoothness or regularity of the functions involved in this problem, so we do not have
+the right to talk about existence and uniqueness of solution to (1.12b). Note though, that
+in principle we will aim for equation (1.13) to be satisfied only almost everywhere, or,
+more precisely: on any point not on vertices/edges in the polygonal case, and everywhere
+in the case of smooth surfaces. What is important to remember at this point is that
+the equation (1.12b) is coupled with the integral representation (1.12a), since it is the
+Dirichlet problem (1.11) that is of interest to us, and not the integral equation per se. It
+is common to refer to a potential representation of the solution of (1.11) as a potential
+ansatz.
+
+Single or simple?
+There is some discussion in the community on whether the name
+of the single layer potential should be simple layer potential, as it would correspond to
+a more direct translation of its German origin (due to Carl Friedrich Gauss), which is
+respected in other languages. It would also probably pair better with its counterpart, the
+double layer potential that we will meet in Chapter 2. (It has to be said that both simple
+and single convey the idea of one-ness.) On the other hand, English language usage for
+single layer is quite extended and unlikely to change just because we want it to change
+(that is probably not how languages work, especially in relatively unimportant topics as
+this one), so we will be faithful to the old single layer tradition.
+
+1.3
+Some numerical methods
+sec:1.3
+
+We fast forward to show two numerical approximation methods for problem (1.12b).
+Consider a partition of Γ in relatively open disjoint patches {T1, . . . , TN}
+
+Ti ∩Tj = ∅
+i ̸= j,
+Γ = ∪N
+j=1T j,
+
+and the set of piecewise constant functions with respect to this partition
+
+Xh := {ηh : Γ →R : ηh|Tj ∈P0(Tj)
+∀j},
+(1.14)
+
+where P0(Ω) is the set of constant functions on the domain Ω. (We will use a script h to
+denote discretization. The meaning of this index will be clear when we study approxima-
+tion properties of the space Xh in different norms. In that case h will be the maximum
+diameter of the elements of the partition.) A basis for Xh is easy to define using the
+characteristic functions of the elements of the partition:
+
+χj :=
+�1,
+in Tj,
+0,
+elsewhere.
+(1.15)
+
+6
+
+
+A Galerkin method.
+We look for ηh ∈Xh such that
+�
+
+Γ
+µh(x)(Vηh)(x)dΓ(x) =
+�
+
+Γ
+µh(x)β0(x)dΓ(x)
+∀µh ∈Xh.
+(1.16)
+eq:1.16
+
+It is clear that any solution of this equation is also a solution of
+�
+
+Ti
+(Vηh)(x)dΓ(x) =
+�
+
+Ti
+β0(x)dΓ(x)
+i = 1, . . . , N,
+(1.17)
+eq:1.17
+
+since we only need to restrict testing in (1.16) to the basis functions χi. However, linearity
+of integration and the fact that {χ1, . . . , χN} is a basis for Xh, shows that (1.17) also
+implies (1.16). We can go one step further by decomposing the unknown in the given
+basis. We thus look for
+
+(η1, . . . , ηN) ∈RN,
+representing
+ηh =
+
+N
+�
+
+j=1
+ηjχj,
+(1.18a)
+
+such that
+
+N
+�
+
+j=1
+
+��
+
+Ti
+(Vχj)(x)dΓ(x)
+�
+ηj =
+�
+
+Ti
+β0(x)dΓ(x)
+i = 1, . . . , N.
+(1.18b)
+eq:1.18b
+
+It is clear from (1.18b) that we are in the presence of an N ×N system of linear equations.
+A closer inspection to the elements of this matrix show that they are
+
+Vij =
+�
+
+Ti
+(Vχj)(x)dΓ(x) =
+�
+
+Ti
+
+�
+
+Tj
+
+1
+4π|x −y|dΓ(x)dΓ(y).
+(1.19)
+eq:1.19
+
+Therefore, the matrix in the system (1.18b) is symmetric. It is also a full matrix to the
+furthest extent of this concept: not a single element of the matrix is zero. It will take us
+a little bit longer to show that the matrix is also positive definite. This is a consequence
+of a coercivity estimate that we will not see for the time being. Once the discrete density
+ηh has been computed (by assembling the system (1.18b) and solving it afterwards), the
+discrete solution to the Dirichlet problem (1.11) is given by the single layer potential
+representation
+
+uh := Sηh :=
+
+N
+�
+
+j=1
+
+��
+
+Tj
+
+1
+4π| · −y|dΓ(y)
+
+�
+
+ηj.
+
+This is a linear combination of N single layer potentials generated from constant density
+distributions on each of the patches Tj. One interesting feature of this kind of methods
+is the fact that uh still satisfies the differential equation, and it is only the boundary
+condition that has been approximated. More precisely, since uh = Sηh, then
+
+∆uh = 0
+in R3 \ Γ,
+(1.20a)
+
+uh = O(r−1)
+as r →∞.
+(1.20b)
+
+7
+
+
+The boundary condition is not satisfied. In its place we have the following bits of infor-
+mation on the boundary:
+
+[[γuh]] = 0,
+[[∂νuh]] ∈Xh,
+�
+
+Γ
+µh(γ+uh −β0)dΓ = 0
+∀µh ∈Xh.
+(1.20c)
+
+The first of these conditions stems from the fact that single layer potentials are continuous
+across their boundary. The second one just restates the fact that the jump of the normal
+derivative, that is, the density, was found in the subspace Xh. The third condition repeats
+the fact that we are forcing some moments of γ+uh = Vηh and β0 to coincide, namely,
+those moments obtained by averaging on the elements Ti.
+
+A comment on notation.
+The matrix (1.19) is symmetric and therefore the order used
+to write integration domains and variables in that formula is not very relevant. However,
+from now on we will keep the following easy to remember convention: assuming that the
+order of integration is not relevant, we will write
+�
+
+Ti
+
+�
+
+Tj
+Φ(x, y)dΓ(x)dΓ(y) =
+�
+
+Ti
+
+��
+
+Tj
+Φ(x, y)dΓ(y)
+
+�
+
+dΓ(x),
+
+that is, we will write the integration variables in the same order as the domains.
+
+Computation of integrals.
+At the present stage of this text, we are going to ignore
+the difficulties of computing the integrals
+�
+
+Ti
+
+�
+
+Tj
+
+1
+4π|x −y|dΓ(x)dΓ(y)
+and
+�
+
+Ti
+β0(x)dΓ(x).
+
+Even in the case of a polyhedral surface (where element integrals become integrals over
+plane domains quite easily), partitioned into simple shapes Ti (quadrilaterals or triangles),
+this computation is not an easy task. Assume for the moment being that Γ is a poly-
+hedron and that it has been subdivided into triangles in the tradition of Finite Element
+triangulations: two adjacent triangles can share a common vertex or a common full edge.
+We have four situations for pairs of elements (Ti, Tj):
+
+• Ti = Tj,
+
+• T i and T j share a common edge,
+
+• T i and T j share a common vertex,
+
+• T i and T j are disjoint.
+
+Only the latter case is easy to handle from the point of view of the integral in (1.19). In
+this case the integrand is a very smooth function of both variables and we can think of
+easy ways to approximate the double integral. (This might be misleadingly easy, however,
+when the elements are disjoint, but they are geometrically very close, since the function
+gets to have very large values and gradients.) All other cases involve integrating functions
+with singularities. More about this in the appendices.
+
+8
+
+
+The collocation method.
+Let us go back to our general partition {Γ1, . . . , ΓN} and
+to the space Xh. We now choose points xi ∈Ti for all i (one point on each element), and
+look for ηh ∈Xh satisfying
+
+(Vηh)(xi) = β0(xi),
+i = 1, . . . , N.
+(1.21)
+
+Equivalently, we can look for coefficients (η1, . . . , ηN) ∈RN satisfying
+
+N
+�
+
+j=1
+
+��
+
+Tj
+
+1
+4π|xi −y|dΓ(y)
+
+�
+
+ηj = β0(xi)
+i = 1, . . . , N.
+(1.22)
+
+We are again in the presence of an N × N linear system. We have lost symmetry in
+the discretization process, but have greatly simplified several aspects: the right-hand-
+side does not require any integration process, and the matrix involves only integration
+over Tj, as opposed to integration in double the number of variables that appear in
+Galerkin methods.
+It has to be said though, that for this particular equation, even
+restricting to simpler boundaries and partitions, there is no satisfactory theory supporting
+the collocation method, while the theory of Galerkin methods is very well understood since
+over four decades ago, including results for superconvergence that we will mention in due
+time.
+
+1.4
+The two dimensional case
+sec:1.4
+
+While the same ideas that we have explained in Section 1.2 will work in two dimensional
+problems, and being able to foresee that the corresponding integral equations will be
+simpler (integration on Γ is essentially one-dimensional), the unbounded behavior of the
+fundamental solution of the Laplace equation in two dimensions complicates asymptotics
+at infinity and the search for well-posed boundary value problems. We start with the
+definition of the single layer potential
+
+(Sη)(z) = −1
+
+2π
+
+�
+
+Γ
+log |z −y|η(y)dΓ(y).
+(1.23)
+
+The difference between this potential and its three dimensional counterpart is the function
+
+−1
+
+2π log |x −y|
+instead of
+1
+4π|x −y|.
+
+This function is the fundamental solution, or Green’s function in free space, for the Lapla-
+cian (properly speaking, for the minus Laplacian). For very similar reasons that were
+argued in Section 1.2 (details are requested as exercises), if u = Sη with η ∈L1(Γ), then
+u ∈C∞(R2 \ Γ) and
+
+∆u = 0
+in R2 \ Γ,
+(1.24a)
+u = a log r + O(r−1)
+as r →∞,
+(1.24b)
+
+9
+
+
+where a = −1
+
+2π
+�
+
+Γ η dΓ. The limits of Sη and its normal derivative on both sides of Γ can
+be represented using two integral operators:
+
+eq:1.25
+
+(Vη)(x) := −1
+
+π
+
+�
+
+Γ
+log |x −y|η(y)dΓ(y),
+(1.25a)
+
+(Ktη)(x) :=
+�
+
+Γ
+
+(y −x) · ν(x)
+
+2π|x −y|2
+η(y)dΓ(y).
+(1.25b)
+
+Like in the three dimensional case, when we think of the integral operators, we have to
+remember that the input is a function defined on Γ and the output is a function defined on
+Γ too. The jump relations are exactly the same as in the three dimensional case, namely
+
+[[γSη]] = 0,
+[[∂νSη]] = η,
+(1.26a)
+eq:1.26a
+
+and
+{{γSη}} = γ±Sη = Vη,
+{{∂νKtη}} = Ktη.
+(1.26b)
+eq:1.26b
+
+Equalities are to be understood as happening only on smooth points of the boundary and
+for smooth enough densities. From the rightmost formulas in (1.26a) and (1.26b), it is
+easy to prove that
+∂+
+ν Sη = −1
+
+2η + Ktη,
+∂−
+ν Sη = 1
+
+2η + Ktη.
+
+An integral equation for the Dirichlet problem.
+Consider the exterior problem
+eq:1.27
+
+∆u = 0
+in Ω+,
+(1.27a)
+γ+u = β0
+(on Γ),
+(1.27b)
+u = u∞+ O(r−1)
+as r →∞,
+(1.27c)
+
+where u∞∈R is unknown. This is a good model for the exterior Dirichlet problem,
+looking for bounded solutions.
+It will be seen in future chapters that the option of
+taking u = O(r−1) as the radiation condition leads to problems that might not have
+a solution. Based on what we know about the single layer potential, we propose the
+following representation for the solution of (1.27)
+eq:1.28
+
+u = Sη + u∞,
+where
+�
+
+Γ
+η dΓ = 0.
+(1.28a)
+
+This guarantees that u is a solution of the exterior Laplace equation with the correct
+asymptotic behavior at infinity. Both η and u∞are unknown. The boundary condition
+is then equivalent to
+Vη + u∞= β0.
+(1.28b)
+
+10
+
+
+A Galerkin method.
+Let now {T1, . . . , TN} be a non-overlapping partition of Γ in the
+same conditions as in Section 1.3 and let Xh be equally defined. We then look for ηh ∈Xh
+and uh
+∞∈R such that
+eq:1.29
+
+�
+
+Γ
+µh (Vηh + uh
+∞)dΓ =
+�
+
+Γ
+µhβ0 dΓ
+∀µh ∈Xh
+(1.29a)
+
+and
+�
+
+Γ
+ηh dΓ = 0.
+(1.29b)
+
+Using the basis of characteristic functions on the elements of the partition {χ1, . . . , χN},
+we can look for (η1, . . . , ηN) ∈RN and uh
+∞∈R such that
+eq:1.30
+
+N
+�
+
+j=1
+Vijηj + |Ti|uh
+∞=
+�
+
+Ti
+β0(x)dΓ(x)
+i = 1, . . . , N
+(1.30a)
+
+N
+�
+
+j=1
+|Tj|ηj
+=0
+(1.30b)
+
+where
+Vij = Vji = −1
+
+2π
+
+�
+
+Ti
+
+�
+
+Tj
+log |x −y|dΓ(x)dΓ(y)
+(1.30c)
+
+and |Ti| is the length of the element Ti. The global matrix is symmetric but has a not
+very attractive zero in the last diagonal term. An exercise below suggests a simple way
+around this. As for implementation of this problem, we propose some approximations of
+the integrals in one of this chapter’s projects.
+
+The interior problem.
+One interesting feature of this single layer representation of
+the solution of the Dirichlet problem is that if (η, u∞) solve (1.28), the interior part of the
+potential representation (after all Sη + u∞is well defined in R2 \ Γ) is also a solution of
+
+∆u = 0
+in Ω−,
+γ−u = β0.
+
+1.5
+Lipschitz domains (*)
+sec:1.A.1
+
+In this section we are going to describe with precision what the type of domains are, for
+which we will be delivering precise mathematical statements about the boundary element
+method. Where and why some of the hypotheses of the definition are used is not easy to
+grasp unless you are willing to go deep in the theory of Sobolev spaces. The goal of this
+course is not that, but it is necessary to have delimited the scope of our theory and to
+warn of the dangers of more complicated situations.
+Let then Ω−be a bounded open domain in Rd with boundary Γ and exterior Ω+.
+Assume now that for every point x ∈Γ (and here every means, exactly for every point),
+we can find:
+
+11
+
+
+(a) a vector a ∈Rd and an orthogonal matrix Q, determining a rigid motion
+
+Φ(x) = Qx + a,
+
+(b) a Lipschitz function h : Rd−1 →R, that is, a function for which there exists L such
+that
+|h(�x) −h(�y)| ≤C|�x −�y|
+∀�x, �y ∈Rd−1,
+
+(c) and a cylindrical reference domain
+
+{(�x, t) ∈Rd−1 × R : |�x| ≤ε, |t| ≤ρ},
+
+so that
+
+Φ(�x, h(�x) + t) ∈Ω+,
+|�x| ≤ε,
+0 < t ≤ρ,
+Φ(�x, h(�x)) ∈Γ,
+|�x| ≤ε,
+Φ(�x, h(�x) −t) ∈Ω+,
+|�x| ≤ε,
+0 < t ≤ρ.
+
+(The elements of the above list –rigid motion, Lipschitz graph, and localization cylinder–
+depend on the point x.) In this case we say that Ω−is a (strongly) Lipschitz domain. We
+also say that Γ is locally a Lipschitz graph and Ω−is locally a Lipschitz hypograph (it can
+be locally placed under a Lipschitz graph.) Note that the local process to observe/describe
+a Lipschitz hypograph consists of the following steps (see Figure 1.1):
+
+• create a (possibly small) localization cylinder;
+
+• deform the cylinder in the vertical xd direction using the Lipschitz function;
+
+• apply a rigid motion to place this locally deformed cylinder in the physical space,
+making the image of the original horizontal disk (�x, 0) part of the boundary, the
+negative part being mapped to the interior domain, and the positive part to the
+exterior domain.
+
+In some theoretical expositions it is common to flip the xd axis so that the domain is a
+hypergraph. This obviously does not change the kind of domains.
+
+Examples.
+Most friendly domains are Lipschitz domains. Circles, rectangles, simple
+polygons,... are planar Lipschitz domains. Domains with internal or boundary cracks are
+not Lipschitz domains. Domains with cuspidal points on the boundary are not Lipschitz
+domains. Similarly, spheres, torii, hexahedra,... are Lipschitz domains in the space, and
+once again, cracked domains are excluded. (This does not mean that they cannot be dealt
+with at all, but that much of what we are going to say here has to be adapted, sometimes
+in highly nontrivial ways, to these more general situations.)
+
+12
+
+
+h
+
+Γ
+
+Ω−
+
+Ω+
+
+Figure 1.1: The localization process in the definition of a Lipschitz domain. The cylinder
+on the left. Its deformation by a part of a Lipschitz graph in the center. The deformed
+cylinder being rigidly mapped to physical coordinates.
+fig:1.1
+
+Figure 1.2: A non-Lipschitz planar polygon. The central point of the figure is troublesome,
+since the domain cannot be placed on one side of the boundary at this point.
+
+The normal vector.
+Due to a well-known but really deep theorem by Rademacher,
+the function h is differentiable almost everywhere in its domain of definition. This means
+that we can attach a tangent plane to almost every point in the graph Φ(�x, h(�x)). The
+unit normal vector at the point z = (�x, h(�x)), pointing towards Ω+ will be denoted ν(z).
+It is not complicated to see that the normal vector at the point exists and coincides even if
+we change the point x around which we are localizing. We thus get an almost everywhere
+defined unit vector field ν : Γ →Rd. In the case of a polyhedral domain, the construction
+of the normal vector field is completely straightforward.
+
+Smooth domains.
+If we still assume the same construction as in the definition of
+Lipschitz domain, but increase the smoothness of the function h in step (b), then we get
+smoother versions of the definition. In particular, if instead of a Lipschitz function h,
+
+13
+
+
+Figure 1.3: Two views of a popular non-Lipschitz polyhedron, made up of to corssing
+bricks. The crossing point is the only point where we cannot take a point of view allowing
+us to locally view the boundary as a graph. Note that ‘topologically’ the figure is quite
+simple, but this lack of visibility of the boundary is enough for the domain not to fit in
+the hypotheses. The domain is however an example of weakly Lipschitz domain.
+
+we take h to be an infinitely often differentiable function, we obtain a smooth domain.
+Several interesting geometric constructions can be carried out for smooth domains (or for
+sufficiently smooth domains, meaning with h several times continuously differentiable).
+The normal vector ν(x) is well defined for every point x ∈Γ. We can then find ε > 0
+such that the set of points
+
+{x + t ν(x) : x ∈Γ,
+|t| ≤ε}
+
+satisfy x + t ν(x) = y + s ν(y) if and only if x = y and s = t. In this tubular domain, we
+can extend the normal vector field to a function ν(x+t ν(x)) = ν(x) (for x ∈Γ, |t| ≤ε),
+that is, the normal vector field can be constantly extended among the normal direction.
+This extension is a smooth function in its domain of definition.
+
+1.6
+Literature, exercises and working projects
+
+1. (Section 1) Let u : Ω+ ⊂R2 →R be smooth up to the boundary and satisfying
+(1.4). Give conditions on a, b and c for u to be in L2(Ω+).
+
+2. (Section 1) Let u : Ω+ ⊂R3 →R be smooth up to the boundary and satisfying
+(1.4). Give conditions on a and b for u to be in L2(Ω+).
+
+3. (Section 2 – Needs analysis) Show that if Φ : Rd × Rd →R is of class C∞in the set
+
+14
+
+
+{(z, y) ∈Rd × Rd : z ̸= y}, and η ∈L1(Γ), then
+
+u(z) :=
+�
+
+Γ
+Φ(z, y)η(y)dΓ(y)
+
+is in C∞(Rd \ Γ) and can be arbitrarily often differentiated under integral sign. Use
+this to show that the single layer potential in two and three dimensions is a smooth
+function and that it satisfies the Laplace equation.
+
+4. (Section 2) Prove that
+����
+1
+|z −y| −1
+
+|z|
+
+����≤CR
+
+|z|2,
+|z| ≥2R ≥2|y|.
+
+Use it to prove that the three dimensional single layer potential satisfies
+
+(Sη)(z) =
+1
+4π|z|
+
+�
+
+Γ
+η(y)dΓ(y) + O(|z|−2)
+as |z| →∞.
+
+5. (Section 2) The previous exercise gives an explicit formula for the first asymptotic
+term at infinity of the single layer potential.
+Find an explicit expression of the
+second one, that is, the term you have to subtract to the single layer potential to
+get an O(|z|−3) remainder.
+
+6. (Section 2) Let
+
+Ed(x, y) :=
+
+
+
+
+
+
+
+
+−1
+
+2π log |x −y|,
+(d = 2),
+1
+4π|x −y|,
+(d = 3).
+
+Show that
+∇yEd(x, y) =
+1
+2d−1π|x −y|d(x −y).
+
+7. (Section 4) Show that
+
+C1,R
+
+|x| ≤log |x −y| −log |x| ≤C2,R
+
+|x| ,
+|x| ≥4R ≥4|y|.
+
+Use it to prove that in two dimensions
+
+(Sη)(z) = −1
+
+2π log |z|
+�
+
+Γ
+η(y)dΓ(y) + O(|z|−1)
+as |z| →∞.
+
+8. (Section 4) Exact solutions of the Laplace equation. Let x1, x2 be two distinct
+points in Ω−. Show that
+
+u(x) = log |x −x1|
+
+|x −x2|
+is an exterior decaying solution of the Laplace equation in two dimensions. Show
+that 1, x1, x2, x2
+1 −x2
+2, x1x2 are also solutions to the interior Laplace equation. Find
+more polynomial solutions in two and three dimensions. (Polynomials satisfying the
+Laplace equation are called harmonic polynomials.)
+
+15
+
+
+9. (Section 4) Instead of the given basis for Xh, we can use the following modified basis
+
+�χi :=
+1
+|Ti|χi −
+1
+|Γi+1|χi+1,
+i = 1, . . . , N −1,
+�χN := χ1 + . . . + χN = 1.
+
+If we represent the solution of (1.29) as
+
+ηh =
+
+N
+�
+
+j=1
+�ηj �χj,
+
+show that the system can be decoupled into the computation of the coefficients �ηj
+followed by the computation of uh
+∞. Write down the corresponding matrix. Finally,
+relate the coefficients {�ηj} to the coefficients {ηj} of the decomposition with respect
+to the original basis of Xh.
+
+10. (Section 4) Assume that we have been able to solve
+
+Vη + u∞= β0,
+�
+
+Γ
+η dΓ = c,
+
+for given β0 and c ∈R. What problem is u = Sη + u∞solving in this case? (Note
+that in this case, the leading asymptotic behavior is unbounded, but given.)
+
+11. (Section 4) The logarithmic capacity. In this exercise we are going to assume
+that the problem
+
+Vφ + a = 0,
+�
+
+Γ
+φ dΓ = 1,
+
+admits a unique solution. We then define CΓ := exp(−a). The quantity a is called
+Robin’s constant for Γ and CΓ is called the logarithmic capacity of Γ. The function
+φ is called the equilibrium distribution for Γ.
+
+(a) Show that CΓ is invariant by translations, plane symmetries and rotations of Γ.
+(Hint. Write the system that defines (φ, a) explicitly and apply translations,
+symmetries and rotations to Γ.)
+
+(b) If cΓ := {cx : x ∈Γ} with c > 0, show that CcΓ = c CΓ, which means that the
+logarithmic capacity scales like a diameter.
+
+(c) For the given solution (φ, a), we define u = Sφ. Show that u is constant in Ω−.
+(This requires a uniqueness argument for the solution of the interior Laplacian
+that you can assume.)
+
+(d) Show that if CΓ = 1, then V is not injective.
+
+(e) Show that the logarithmic capacity of a disk is its radius. (This one is quite
+difficult. It is easy to use a symmetry argument to guess that φ has to be con-
+stant. Using this and an exact computation, it is possible to find the solution
+for the case of the circle of radius one.)
+
+16
+
+
+Project # 1.1 – A quadrature method (coding)
+
+Statement of the problem.
+We are looking for a numerical solution for the inte-
+rior/exterior Dirichlet problem for the Laplacian
+
+∆u = 0
+in R2 \ Γ,
+γ±u = β0,
+u = u∞+ O(r−1)
+at infinity,
+
+in the case when Γ is a smooth parametrizable curve in the plane. A boundary integral
+formulation for this problem has been given in Section 1.4. and the exercise list contains
+several exact solutions for both interior and exterior problems. Our starting point is a
+1-periodic parametrization of the boundary x : R →Γ ⊂R2, with the following properties
+
+x(t + 1) = x(t)
+∀t,
+|x′(t)| ̸= 0
+∀t,
+x(t) ̸= x(τ)
+t −τ ̸∈Z.
+
+We next parametrize equations (1.28). We abuse notation by renaming
+
+β0(t) := β0(x(t)),
+η(t) := η(x(t))|x′(t)|.
+
+The integral system (1.28) is then equivalent to the periodic integral equation
+eq:project1
+
+−1
+
+2π
+
+�1
+
+0
+log |x(t) −x(τ)| η(τ)dτ + u∞= β0(t)
+∀t
+(1.31a)
+eq:project1a
+
+with the side condition
+�1
+
+0
+η(τ)dτ = 0
+(1.31b)
+
+and the potential representation
+
+u(z) = −1
+
+2π
+
+�1
+
+0
+log |z −x(τ)| η(τ) dτ + u∞.
+(1.31c)
+
+A quadrature method.
+The method to approximate (1.31) is simple. We approximate
+every integral by the trapezoidal rule on a uniform grid, and collocate (1.31a) in pairs of
+strategically chosen points. We thus choose an integer N, define h := 1/N and consider
+the parametric points
+
+tj := j h,
+t+
+i := (i + 1
+
+6) h,
+t−
+i := (i −1
+
+6) h.
+(1.32)
+eq:project1.2
+
+For ease of notation we will write �
+
+± a± = 1
+
+2(a++a−) for the average of quantities tagged
+with the ± signs. The unknowns are then ηj ≈h η(tj) and the system is:
+project1.3
+
+−1
+
+2π
+
+�
+
+±
+
+N
+�
+
+j=1
+log |x(t±
+i ) −x(tj)|ηj + uN
+∞=
+�
+
+±
+β0(t±
+i ),
+i = 1, . . . , N,
+(1.33a)
+
+N
+�
+
+j=1
+ηj = 0.
+(1.33b)
+
+17
+
+
+The solution is postprocessed to a discrete potential
+
+uN(z) = −1
+
+2π
+
+N
+�
+
+j=1
+log |z −x(tj)| ηj + uN
+∞.
+(1.33c)
+
+Estimate the errors
+|u(z) −uN(z)| = O(N −3)
+
+for different points z and increasing values of N.
+Try with different geometries and
+different points. Show that as z gets closer to the boundary the errors degenerate. The
+±1/6 lateral displacement in the observation points t±
+i in (1.32) can be changed to be a
+parameter ±ε. Try other choices and compare orders of convergence. For a given value
+of N graph the error as a function of the parameter ε.
+
+Another way of getting to the same method.
+We can devise a Galerkin method
+for (1.31) based on the space
+
+Xh := {η : R →R : η(1 + ·) = η,
+η|(ti−h/2,ti+h/2) ∈P0
+∀i}.
+
+Show that the discrete equations can be understood as a full discretization of the Galerkin
+equations using the midpoint quadrature for one of the integrals and a two point quadra-
+ture for the other one. (Note that the use of different quadrature rules makes the matrix
+non-symmetric.)
+
+18
+
+
+Project # 1.2 – A Galerkin procedure (coding)
+
+Statement of the problem.
+Let Γ be a simple closed polygon in the plane.
+We
+are looking for a numerical solution for the interior/exterior Dirichlet problem for the
+Laplacian
+
+∆u = 0
+in R2 \ Γ,
+γ±u = β0,
+u = u∞+ O(r−1)
+at infinity,
+
+using the Galerkin equations (1.30) leading to a potential representation
+
+uh(z) =
+
+N
+�
+
+j=1
+Φj(z)ηj + uh
+∞,
+Φj(z) := −1
+
+2π
+
+�
+
+Tj
+log |z −y|dΓ(y).
+
+An exact computation.
+Let e be a segment joining points v and w, and let z ∈R2.
+Then
+�
+
+e
+log |z −y|dΓ(y) = f(β, η) −f(α, η),
+(1.34)
+eq:project2.1
+
+where
+
+f(t, η) := t
+
+2 log(t2 + η2) + η arctan
+�t
+
+η
+
+�
+−t,
+
+and
+
+ℓ:= |w −v|,
+η := (z −v) · n,
+
+t := 1
+
+ℓ(w −v),
+α := −(z −v) · t,
+
+n := t⊥= (t2, −t1),
+β := α + ℓ= −(z −w) · t.
+
+Prove (1.34).
+
+Gaussian quadrature.
+Let e be again a segment joining the points v and w. Then
+we can approximate
+�
+
+e
+ρ(y)dΓ(y) ≈|ℓ|
+
+2 (ρ(g+) + ρ(g−)),
+(1.35)
+eq:project2.2
+
+where
+g± = 1
+
+2(v + w) ±
+1
+2
+√
+
+3(w −v).
+
+19
+
+
+The method.
+The Galerkin equations (1.30) need approximation of some integrals. For
+the right-hand-side, use Gaussian integration as in (1.35). For the matrix, compute the
+following approximation
+
+Vij ≈V ns
+ij := −1
+
+2π
+|Ti|
+
+2
+
+��
+
+Tj
+log |g+
+i −y|dΓ(y) +
+�
+
+Tj
+log |g−
+i −y|dΓ(y)
+
+�
+
+,
+
+where g±
+i are the Gaussian points in the element Ti, and the integrals can be computed
+analytically using (1.34). Finally symmetrize Vij ≈1
+
+2(V ns
+ij + V ns
+ji ).
+
+Book-keeping.
+One of the most complicated parts of numerical coding is having the
+right data structures. The partition of the boundary can be described with two matrices.
+
+• The first one is an N × 2 matrix with the coordinates of all nodes of the partition
+of Γ. We will refer to it as coord. Then coord(i, :) = [x, y] are the coordinates of
+the node number i. The matrix itself imposes the ordering of the nodes.
+
+• The second one is a matrix with the element references. It is equally an N ×2 matrix
+with positive integers as entries: if ele(i, :) = [2, 5], this says that the element Ti
+starts at the point v2 and ends at the point v5. It is convenient that numbering of
+elements is done with positive orientation, that is, if you go from the first vertex to
+the second, the domain lies to the left-hand-side of the element.
+
+As a first part of your code you will have to create some code to generate partitions of a
+given polygon, generating the coordinate and the element matrices.
+
+Experiments.
+Fix a polygon and create a sequence of partitions (uniform is fine in
+a first approach). The computations needed for obtain uh(z) can be carried out with
+analytic integration as in (1.34). Compare then
+
+|uh(z) −u(z)|.
+
+There are several exact solutions for interior and exterior problems in the exercise list.
+
+20
+
+
+Project # 1.3 – The Helmholtz equation
+
+The single layer potential.
+Consider the following function
+
+Φ(z) := eıω|z|
+
+4π|z|.
+
+Show that the function u(z) := Φ(z −x0) satisfies
+
+∆u + ω2u = 0
+in R3 \ {x0}.
+
+This equation is called the Helmholtz equation and the function u above is called the out-
+going fundamental solution of the Helmholtz equation. Show that u satisfies the following
+radiation condition at infinity
+
+∂ru(z) −ıωu(z) = o(|z|−1)
+as |z| →∞,
+
+where the radial partial derivative is defined as
+
+∂ru(z) = ∇u(z) ·
+�1
+
+|z|z),
+
+and the little o Landau symbol has to understood in the following way: f(z) = o(|z|−m),
+when |z|m|f(z)| →0 as |z| →∞, uniformly in all directions. This condition at infinity is
+called the Sommerfeld radiation condition. The single layer potential for the Helmholtz
+equation is defined as
+
+(Sη)(z) :=
+�
+
+Γ
+
+eıω|z−y|
+
+4π|z −y|η(y)dΓ(y).
+
+Show that Sη defines a smooth solution of ∆u+ω2u = 0 in R3\Γ, satisfying the Sommerfeld
+radiation condition at infinity.
+
+A more challenging question.
+Study the behavior of the difference of the Helmholtz
+and Laplace potentials
+
+w(z) :=
+�
+
+Γ
+
+eıω|z−y| −1
+
+4π|z −y| η(y)dΓ(y).
+
+In particular, if x0 ∈Γ is a smooth point on the boundary, study the limiting behavior
+of w and ∇w as z →x0 from both sides of the boundary.
+
+Relation to the wave equation.
+Assume that U is a solution of the wave equation
+
+∂2
+t U −∆U = 0
+
+that can be written in the form
+
+U(z, t) = Re (e−ıωtu(z)) = cos(ωt)Re u(z) + sin(ω t)Im u(z).
+
+21
+
+
+Show that u is a solution of the Helmholtz equation. If u = Φ(· −x0), show that the
+corresponding function U is an spherical kind of wave moving away from x0.
+If we
+consider instead u = Φ(· −x0), study what the radiation condition at infinity is, and how
+the time-domain function U behaves.
+
+The two dimensional case.
+Repeat as many of the previous arguments as you can
+with the two dimensional Helmholtz equation. The fundamental solution uses a Hankel
+function of the first kind and order zero:
+
+ı
+4H(1)
+0 (ω|z|),
+
+and the associated radiation condition is
+
+∂ru(z) −ıωu(z) = o(|z|−1/2)
+as |z| →∞.
+
+This part of the project will require you to inquire on basic properties of the Hankel
+functions (their derivatives, their behavior at infinity, etc).
+
+22
+
+
+Chapter 2
+
+Green’s representation formula
+
+chap:2
+
+2.1
+The double layer potential
+
+Let us start by reminding ourselves about the fundamental solution for the Laplacian
+
+Ed(x, y) =
+
+
+
+
+
+
+
+
+−1
+
+2π log |x −y|,
+(d = 2),
+1
+4π|x −y|,
+(d = 3),
+
+and about a simple computation that was previously proposed as an exercise:
+
+∇yEd(x, y) =
+1
+2d−1π|x −y|d(x −y).
+
+For a given density ψ : Γ →R, the double layer potential is defined by the formula
+
+(Dψ)(z) :=
+�
+
+Γ
+∇yEd(z, y) · ν(y) ψ(y)dΓ(y) =
+�
+
+Γ
+
+(z −y) · ν(y)
+
+2d−1π|z −y|d ψ(y)dΓ(y).
+
+In the same way that the single layer potential is a continuous distribution of monopoles on
+the boundary Γ, the double layer potential can be understood as a continuous distributrion
+of dipoles oriented in the normal direction. The idea of the dipole is simple: it is the limit
+of the scaled difference of potentials generated by two opposing charges
+
+∇yEd(x, y) · d = lim
+h→0
+1
+2h
+
+�
+Ed(x, y + hd) −Ed(x, y −hd)
+�
+.
+
+This argument can be stretched to let us understand the double layer potential as the limit
+of two single layer potentials with the same density of parallel surfaces as the distance of
+the surfaces decreases. As usual, some properties are easy: if ψ ∈L1(Γ) and we define
+u = Dψ, then u ∈C∞(Rd \ Γ), and
+eq:2.2
+
+∆u = 0
+in Rd \ Γ,
+(2.1a)
+
+u = O(r−d+1)
+as r →∞.
+(2.1b)
+
+23
+
+
+The side limits of the double layer potential are given by the following (more complicated
+to prove) relations, valid on smooth points x ∈Γ and for smooth enough densities:
+eq:2.3
+
+(γ+Dψ)(x) = 1
+
+2ψ(x) +
+�
+
+Γ
+
+(x −y) · ν(y)
+
+2d−1π|x −y|d ψ(y)dΓ(y),
+(2.2a)
+
+(γ−Dψ)(x) = −1
+
+2ψ(x) +
+�
+
+Γ
+
+(x −y) · ν(y)
+
+2d−1π|x −y|d ψ(y)dΓ(y).
+(2.2b)
+
+We will not give a closed formula for the side normal derivatives, but be content with
+saying at this moment that
+∂+
+ν Dψ = ∂−
+ν Dψ.
+(2.2c)
+
+Two more boundary operators.
+We thus define two associated boundary integral
+operators
+
+(Kψ)(x) :=
+�
+
+Γ
+
+(x −y) · ν(y)
+
+2d−1π|x −y|d ψ(y)dΓ(y),
+(2.3a)
+
+(Wψ)(x) := −∂ν(x)
+
+�
+
+Γ
+
+(x −y) · ν(y)
+
+2d−1π|x −y|d ψ(y)dΓ(y).
+(2.3b)
+
+While it would be extremely tempting to move the normal derivative in the definition
+of W inside the integral, the result would be a function with a very strong singularity
+that is not integrable any more. The kind of non-integrable singularity that would thus be
+obtained justifies naming this operator the hypersingular operator. There is a possible way
+of writing the operator using finite part integrals. We will not follow that route here, and
+will circumvent the problem using other possible expressions. The operator K is called
+the double layer operator. The negative sign in the definition of W might look somewhat
+bizarre, but is very convenient from the point of view of positivity of the operator, as we
+will see in due time. Note that, at least formally,
+�
+
+Γ
+(Kψ)(x)η(x)dΓ(x) =
+�
+
+Γ
+
+�
+
+Γ
+
+(x −y) · ν(y)
+
+2d−1π|x −y|d ψ(y)η(x)dΓ(x)dΓ(y)
+
+=
+�
+
+Γ
+ψ(y)(Ktη)(y)dΓ(y),
+
+which justifies the notation for Kt and its being called the adjoint double layer operator.
+Once again, and because it is important, remember that potentials take input (densities)
+on the boundary and build functions in the entire space (in Rd\Γ more properly speaking),
+while the output of the integral operators is a function defined on the boundary.
+
+The jump relations.
+Equations (2.1) and definitions (2.2) can be written together in
+the form of the jump relations of the double layer potential:
+
+[[γDψ]] = −ψ,
+[[∂νDψ]] = 0,
+(2.4a)
+{{γDψ}} = Kψ,
+{{∂νDψ}} = ∂±
+ν Dψ = −Wψ.
+(2.4b)
+
+24
+
+
+Is there anything we can do with the minus signs?
+There are two details in the
+limiting and jump relations of potentials that have annoyed authors since time immemo-
+rial. The first one is the prevalence of the 1
+
+2 factors in the limiting relations
+
+∂±
+ν Sη = ∓1
+
+2η + Ktη,
+γ±Dψ = ±1
+
+2ψ + Kψ.
+
+This is easily avoided by changing the definition of all the potentials and operators.
+Instead of working with Ed(x, y), we just need to work with 2Ed(x, y) everywhere. Of
+course, what changes then are the jump relations, since jumps of the potentials yield
+twice the densities. This is actually done by many mathematically inclined authors, but
+it is far from being the standard. The reader should be warned that every time they
+approach any writing with potentials, the first thing to be done is to be sure that the
+definitions are the same. (The letters chosen for potentials and operators also vary from
+author to author.) The second incovenience comes from the minus sign in the definition
+of W and the fact that [[γDψ]] = −ψ. Every now and then, someone comes with the idea
+of changing the sign in the definition of the double layer potential. The minus sign then
+reappears in the definition of K (or can be moved to the definition of Kt, since it would
+not be reasonable to call transpose to the minus transpose of an operator). That would
+be a minor inconvenience. Another one would occur in the next page, when the last of
+Green’s identities suddenly stops being a commutator formula. The veredict is unclear,
+and uses are unlikely to change, so we will stick to more traditional definitions.
+
+An energy free solution.
+The interior Neumann problem for the Laplace equation
+has a one dimensional kernel, namely the solutions of
+
+∆u = 0
+in Ω−,
+∂−
+ν u = 0
+
+are constant functions. In the way we will impose behavior at infinity for the exterior
+Neumann problem, constants will not be a problem. This effect passes onto the double
+layer potential. Consider the function
+
+u(z) = (D1)(z) =
+�
+
+Γ
+∇yEd(z, y) · ν(y)dΓ(y).
+
+If z ∈Ω+, then we can apply the divergence theorem to the smooth vector field v(y) :=
+∇yEd(z, y) to obtain
+
+(D1)(z) =
+�
+
+Γ
+v(y) · ν(y)dΓ(y)
+
+=
+�
+
+Ω−
+div v =
+�
+
+Ω−
+∆Ed(z, ·) = 0.
+
+By looking at the exterior limits, we obtain
+
+1
+2 + K1 = γ+D1
+= 0,
+(2.5a)
+eq:2.5a
+W1 = −∂+
+ν D1 = 0.
+(2.5b)
+
+25
+
+
+Let us now turn our attention to what happens in Ω−. The interior part of the potential
+u := (D1)|Ω−satisfies ∆u = 0 in Ω−(it is a potential after all), and also ∂−
+ν u = ∂+
+ν D1 = 0.
+Therefore u is constant in Ω−. But we even know more:
+
+γ−u = γ−D1 = −1
+
+2 + K1 = −1
+
+by (2.5a). All of this proves that
+
+D1 = −χΩ−=
+�−1,
+in Ω−,
+0
+in Ω+.
+
+2.2
+Green’s Third Identity
+
+Some background.
+Let us agree that everyone with some calculus background can
+easily remember the divergence theorem of Gauss:
+�
+
+Ω−
+div p =
+�
+
+Γ
+p · νdΓ.
+(2.6)
+eq:2.6
+
+The difficulties for this theorem are on how smooth p and Ω−have to be for this equation
+to hold. When we get to Sobolev spaces we will see how a clean cut definition seems to
+solve the problem. (As usual the devil will be in the details.) If we apply this equality
+to a vector field of the form v q and use Leibnitz’s rule to compute the divergence of the
+product, we get
+�
+
+Ω−
+(∇v · q + v div q) =
+�
+
+Γ
+v q · νdΓ.
+(2.7)
+eq:2.7
+
+In the Partial Differential Equation community (especially among numericians), this for-
+mula is often referred to as integration by parts. The reason is simple: in a one dimensional
+domain Ω−= (a, b), the divergence theorem (2.6) is Barrow’s rule (the connection between
+integration and differentiation)
+�b
+
+a
+f ′ = f(b) −f(a)
+
+(the minus sign is due to the normal vector), and (2.7) is
+�b
+
+a
+f ′g + fg′ = f(b)g(b) −f(a)g(a),
+
+which written in the slightly different way
+�b
+
+a
+f ′g = f g
+��b
+a −
+�b
+
+a
+fg′+
+
+becomes the popular integration by parts formula. We can now take q = ∇u in (2.7) to
+obtain
+�
+
+Ω−
+(∇u · ∇v + v ∆u) =
+�
+
+Γ
+v∂νu dΓ,
+(2.8)
+eq:2.8
+
+26
+
+
+which is Green’s First Identity. This formula is the key in the weak understanding of
+the Laplacian that is needed to justify much of what is happening in these preliminary
+chapters. It is also the bread and butter of Finite Element theorists and practitioners.
+If we apply (2.8) to the pairs (u, v) and (v, u) and subtract the result, we obtain Green’s
+Second Identity
+�
+
+Ω−
+(v∆u −u∆v) =
+�
+
+Γ
+(v∂νu −u∂νv)dΓ.
+(2.9)
+eq:2.9
+
+An intuitive presentation of the Third Identity.
+Choose now u satisfying ∆u = 0
+and v = Ed(z, ·) with z ∈Ω+. Then (2.9) tells us that
+�
+
+Γ
+Ed(z, y)∂νu(y)dΓ(y) −
+�
+
+Γ
+∇yEd(z, y) · ν(y)u(y)dΓ(y) = 0,
+when z ∈Ω+.
+
+We can read this formula using potentials: it says that
+
+S∂−
+ν u −Dγ−u = 0
+in Ω+.
+
+If z ∈Ω−, the argument is fuzzier. We will admit the following fact (that we will eventually
+prove):
+
+−
+�
+
+Ω−
+u(y) ∆yEd(z, y)dy = u(z).
+(2.10)
+eq:2.10
+
+This is often written using Dirac delta distributions as
+
+−∆Ed(z, ·) = δz.
+
+Plugging (2.10) in Green’s Second Identity (2.9), we obtain
+�
+
+Γ
+Ed(z, y)∂νu(y)dΓ(y) −
+�
+
+Γ
+∇yEd(z, y) · ν(y)u(y)dΓ(y) = u(z),
+when z ∈Ω−.
+
+So far, what we have shown (this is not a proof though) is that if ∆u = 0 in Ω−, then
+
+S∂−
+ν u −Dγ−u =
+�u,
+in Ω−,
+0,
+in Ω+.
+(2.11)
+eq:2.11
+
+To figure out what happens on the boundary, we take the jump relations and compute
+starting in (2.11)
+
+γ−u = γ−S∂−
+ν u −γ−Dγ−u
+= V∂−
+ν u −(1
+
+2γ−u + Kγ−u)
+
+which can be rearranged to yield
+
+V∂−
+ν u −Kγ−u = 1
+
+2γ−u.
+(2.12)
+eq:2.12
+
+The collection of (2.11) and (2.12) is what is known as Green’s Third Identity. It is often
+presented as follows:
+
+�
+
+Γ
+Ed(z, y)∂νu(y)dΓ(y) −
+�
+
+Γ
+∇yEd(z, y) · ν(y)u(y)dΓ(y) =
+
+
+
+
+
+
+u(z),
+z ∈Ω−,
+1
+2u(z),
+z ∈Γ,
+0,
+z ∈Ω+,
+(2.13)
+eq:2.13
+
+27
+
+
+with the serious warning that the equality in points of the boundary holds only on smooth
+points (those with a tangent plane) and that we have assumed that ∆u = 0 in Ω−. We
+could have also started with a more general u so that the term ∆u stays in the formula,
+that is, in the right-hand-side of (2.13) we have to add the term
+�
+
+Ω−
+Ed(z, y)∆u(y)dy.
+
+A different formulation.
+Since we care about exterior problems, our next step would
+be trying to justify (2.13) for exterior domains. There are two things to take into account:
+(a) the normal vector points inwards now, so this will force a change of signs in the formula;
+(b) at the very beginning we are using the divergence theorem to move to the boundary,
+but we have to pay attention to behavior at infinity to be sure that the integration by
+parts process is meaningful. Instead, we are going to take a different approach by stating
+(not proving or arguing) a Green’s Third Identity in space. (There will be some keys to
+readjust in the two dimensional case.) Let then u satisfy
+
+∆u = 0
+in R3 \ Γ,
+u = O(r−1)
+at infinity.
+(2.14)
+
+If u is smooth enough (conditions will have to wait to Chapter ??), then
+eq:2.15
+
+u = S[[∂νu]] −D[[γu]].
+(2.15a)
+eq:2.15a
+
+Using the jump relations of potentials, it follows that on the boundary
+
+{{γu}} = V[[∂νu]] −K[[γu]],
+(2.15b)
+{{∂νu}} = Kt[[∂νu]] + W[[γu]].
+(2.15c)
+
+Green’s Third Identity is the collection of all equations (2.15) or just the representation
+formula (2.15a), which implies the other two identities.
+
+Green’s Third Identity for exterior domains.
+Consider now u such that
+
+∆u = 0
+in Ω+,
+u = O(r−1)
+at infinity,
+
+where we are again in the three dimensional case. Let us extend u by zero to the interior
+domain, while keeping the same name. Then [[γu]] = −γ+u, [[∂νu]] = −∂+
+ν u, and the
+representation formula (2.15a) says now
+
+−S∂νu+ + Dγ+u =
+�u,
+in Ω+,
+0,
+in Ω−.
+(2.16a)
+
+On the boundary, we now have the identities
+
+1
+2γu+ = −V∂+
+ν u + Kγ+u,
+(2.16b)
+eq:2.16b
+
+1
+2∂+
+ν u = −Kt∂+
+ν u −Wγ+u.
+(2.16c)
+
+28
+
+
+A two dimensional version of Green’s Third Identity.
+Assume now that
+
+∆u = 0
+in R2 \ Γ,
+u = a + O(r−1)
+at infinity.
+
+Then
+�
+
+Γ
+∂+
+ν udΓ = 0.
+(2.17)
+
+Note that in any dimension
+�
+
+Γ
+∂−
+ν udΓ =
+�
+
+Ω−
+∆u = 0,
+
+by the divergence theorem. Therefore, now we have
+�
+
+Γ
+[[∂νu]]dΓ = 0.
+
+The representation formula is now
+
+u = S[[∂νu]] −D[[γu]] + a,
+
+and the corresponding integral identities follow from the jump relations
+
+{{γu}} = V[[∂νu]] −K[[γu]] + a,
+{{∂νu}} = Kt[[∂νu]] + W[[γu]].
+
+All the other arguments for the three dimensional case still apply.
+
+2.3
+A direct boundary integral equation
+sec:2.3
+
+A direct method.
+Let us go back to the exterior Dirichlet problem in three dimensions:
+eq:2.17
+
+∆u = 0
+in Ω+,
+(2.18a)
+γ+u = β0
+(on Γ),
+(2.18b)
+u = O(r−1)
+as r →∞.
+(2.18c)
+
+In Section 1.2 we explored a single layer potential based formulation
+
+u = Sη,
+where
+Vη = β0.
+
+In this formulation η is just an unknown density, with not much relation to the problem
+at hand, apart from being able to deliver the solution via an integral representation. This
+kind of boundary integral formulation, where we propose an integral representation and
+derive an associated boundary integral equation is called an indirect method. Instead we
+can do the following. First let us name the Cauchy data
+eq:2.18
+
+ϕ := γ+u,
+λ := ∂+
+ν u.
+(2.19a)
+
+29
+
+
+Next, we use Green’s identity as the potential representation:
+
+u = Dϕ −Sλ.
+(2.19b)
+
+Finally, we look at the exterior trace of this latter representation and impose the known
+boundary value:
+1
+2ϕ = Kϕ −Vλ,
+ϕ = β0.
+(2.19c)
+eq:2.18c
+
+Equation (2.19c) can be reorganized to look
+
+Vλ = −1
+
+2ϕ + Kϕ = (−1
+
+2I + K)ϕ,
+ϕ = β0,
+(2.20)
+eq:2.19
+
+where we have now introduced an identity operator I. We are going to keep this slightly
+illogical notation of keeping two names for what is the same quantity ϕ = β0.
+This
+will allow us to later unify some formulas but, even more importantly, we are going to
+consider the possibility of discretizing data, so that ϕ will end up being an approximation
+to β0. There are two novelties in (2.20). First of all, the data (or a copy/approximation
+of the data) appear under the action of an integral operator in the right-hand-side of
+the equation. This is obviously more work for us to code. Secondly, λ is now a physical
+variable (λ = ∂+
+ν u), which might have its own interest, independently of the integral
+representation that yields the solution of the exterior Dirichlet problem. A formulation
+based on Green’s formula, using partial Cauchy data as unknowns, is called a direct
+method.
+
+Discretization.
+In principle, we could address the discretization of (2.20) in exactly
+the same form that we used in Section 1.3. We start with a partition of Γ in elements
+{Γ1, . . . , ΓN}, consider the space Xh of piecewise constant functions and discretize, either
+with a Galerkin method
+
+λh ∈Xh,
+�
+
+Γ
+µh(Vλh)dΓ = −1
+
+2
+
+�
+
+Γ
+µhβ0dΓ +
+�
+
+Γ
+µh(Kβ0)dΓ
+∀µh ∈Xh,
+
+or with a collocation method
+
+λh ∈Xh,
+(Vλh)(xi) = −1
+
+2β0(xi) + (Kβ0)(xi)
+i = 1, . . . , N.
+
+In both cases the matrix is the same as in the indirect formulation. What changes is the
+right-hand-side, that now incorporates the need to evaluate an integral operator.
+
+Further discretization.
+It is common in some communities to address the discretiza-
+tion of all the integral operators as if they were acting on discrete quantities, and then
+project or interpolate data onto the discrete spaces. We are going to explore this idea
+briefly now. To explain better what we want to do, we need to restrict to a more partic-
+ular case. We assume Γ to be a polyhedron that has been partitioned into N triangles
+{T1, . . . , TN}. We can then consider the usual space Xh and the space
+
+Yh := {ψh ∈C(Γ) : ψh|Tj ∈P1(Tj)
+∀j}.
+
+30
+
+
+Since the elements Tj are flat pieces of a surface, the meaning of the space P1(Tj) is not
+complicated: it is just the space of polynomials of two variables and degree up to one,
+written in tangential coordinates. In other words, if Tj is a triangle with vertices vj
+ℓfor
+ℓ= {1, 2, 3}, then
+φj(s, t) = vj
+1 + s(vj
+2 −vj
+1) + t(vj
+3 −vj
+1)
+
+can be chosen as a parametrization of Tj from the reference element
+
+�T = {(s, t) : s, t ≥0, s + t ≤1}.
+
+Then
+P1(Tj) = {p : Tj →R : p ◦φj ∈P1(�Γ)}.
+
+This process of sending a space from a reference element to each physical element is called
+pushing forward. A basis for Yh is easy to construct. Let {v1, . . . , vM} be a numbering of
+all vertices of the triangulation. To each vertex vj we can associated a function ψj ∈Yh
+satisfying
+ψj(vi) = δij.
+
+This is a simple basis of Yh. We can then discretize (2.20) in the following way. We first
+construct
+ϕh ∈Yh
+ϕh(vi) = β0(vi)
+i = 1, . . . , M,
+(2.21a)
+
+which gives the explicit representation
+
+ϕh =
+
+M
+�
+
+j=1
+β0(vj)ψj.
+
+We then look for λh ∈Xh satisfying
+
+λh ∈Xh,
+�
+
+Γ
+µh(Vλh)dΓ = −1
+
+2
+
+�
+
+Γ
+µhϕhdΓ +
+�
+
+Γ
+µh(Kϕh)dΓ
+∀µh ∈Xh.
+(2.21b)
+
+There are three matrices involved in this discretization process.
+The first one is the
+Galerkin matrix (1.19) associated to the operator V, namely
+
+Vij =
+�
+
+Γ
+χi(Vχj)dΓ =
+�
+
+Ti
+
+�
+
+Tj
+
+1
+4π|x −y|dΓ(x)dΓ(y).
+
+The second matrix is rectangular N × M with elements
+
+Mij =
+�
+
+Γ
+χiψjdΓ =
+�
+
+Ti
+ψj =
+�1
+
+3|Ti|
+if Ti ⊂Ξj,
+0
+otherwise,
+
+where
+Ξj = ∪{Γℓ: vj ∈Γℓ}
+
+is the patch of triangles sharing vj as a vertex. The third matrix is
+
+Kij =
+�
+
+Γ
+χi(Kψj)dΓ =
+�
+
+Ti
+
+�
+
+Ξj
+
+(x −y) · ν(y)
+
+4π|x −y|2
+ψj(y)dΓ(x)dΓ(y).
+
+31
+
+
+The global system is then
+
+N
+�
+
+j=1
+Vijλj =
+
+M
+�
+
+j=1
+(−1
+
+2Mij + Kij)β0(vj).
+
+The matrix Mij is very sparse, containing a very reduced number of elements in each row.
+The matrix Kij is full once again, although not as full as the matrix Vij, in this case if Ti
+and Ξj are contained in the same face of Γ, the element Kij vanishes.
+
+2.4
+An equation of the second kind
+
+For reasons that we will explore in the exercise list, in order to use a double layer potential
+representation of the solution of the Dirichlet problem, it is convenient to think first of
+the interior problem:
+eq:2.22F
+
+∆u = 0
+in Ω−,
+(2.22a)
+γ−u = β0
+(on Γ).
+(2.22b)
+
+If we represent the solution with a double layer potential
+eq:2.22
+
+u = Dψ,
+(2.23a)
+
+for a density to be determined, the problem is equivalent to the integral equation
+
+−1
+
+2ψ + Kψ = β0.
+(2.23b)
+eq:2.22b
+
+Equation (2.23b) is an example of an integral equation of the second kind. An integral
+equation of the second kind is an equation of the form f + Ff = g, where F is an integral
+operator. (It is clear that we can modify (2.23b) to have exacly this form.) Note that
+once functional analysis is thrown on the collection of integral equations that we will be
+dealing with, some equations will be considered of the second kind only in a formal sense,
+depending on the properties of the integral operator F. The concept of equation of the
+second kind is opposed to the concept of equation of the first kind, which is any integral
+equation of the form Ff = g. We have seen this kind of equation before.
+
+The origin of it all.
+The problem of existence of solution to the Dirichlet problem
+for the Laplace equation was one that bugged mathematicians for many decades. This
+was way before the arrival of weak derivatives, distributions, Sobolev spaces, and a wide
+array of modern mathematical techniques that redefined the question before answering it.
+Gauss had the idea of looking for solutions in the form of a double layer potential. With
+that he was ensuring that the Laplace equation was being solved, but then existence of
+solution was transferred to existence of solution to the integral equation (2.23b). This
+ended up being quite a difficult problem for general domains. The theory of integral
+equations of the second kind sparked new definitions (Hilbert space, compact operator)
+and general theorems (the Fredholm alternative). We will inevitably meet many of these
+concepts as we proceed in this course.
+
+32
+
+
+The double layer operator.
+Let us write equation (2.23b) explicitly
+
+−1
+
+2ψ(x) +
+�
+
+Γ
+
+(x −y) · ν(y)
+
+2d−1π|x −y|d ψ(y)dΓ(y) = β0(x),
+x ∈Γ.
+(2.24)
+eq:2.24
+
+The equation is only imposed on smooth points of the boundary.
+Consider now the
+function
+
+D(x, y) := (x −y) · ν(y)
+
+|x −y|2
+.
+
+If Γ is smooth enough, this function is continuous, and even smooth. Note that (2.24)
+can be written as
+
+−1
+
+2ψ(x) + 1
+
+2π
+
+�
+
+Γ
+D(x, y)ψ(y)dΓ(y) = β0(x)
+∀x ∈Γ
+
+in the two dimensional case, and
+
+−1
+
+2ψ(x) +
+�
+
+Γ
+
+D(x, y)
+4π|x −y|ψ(y)dΓ(y) = β0(x)
+∀x ∈Γ
+
+in the three dimensional case. We will do some additional work for the first of the two
+equations. It can be seen that the integral operator in the three dimensional case looks
+like a smooth non-symmetric variant of the single layer operator.
+
+A Nystr¨om method.
+Let us focus then in (2.23) for the case of a smooth two dimen-
+sional boundary. We equip ourselves with a quadrature formula on Γ:
+
+�
+
+Γ
+φ(y)dΓ(y) ≈
+
+N
+�
+
+j=1
+ωjφ(yj).
+(2.25)
+eq:2.25
+
+We then approximate the integral equation (2.23b) using the quadrature formula to ap-
+proximate the integral sign:
+
+−1
+
+2ψh(x) +
+
+N
+�
+
+j=1
+
+ωj
+2π
+(x −yj) · ν(yj)
+
+|x −yj|2
+ψh(yj) = β0(x)
+∀x ∈Γ.
+(2.26)
+eq:2.26
+
+We then collocate (evaluate) (2.26) on the points x = yi. If we rename ψj := ψh(yj), we
+then show that any solution of (2.26) solves
+
+−1
+
+2ψi +
+
+N
+�
+
+j=1
+
+ωj
+2π
+(yi −yj) · ν(yj)
+
+|yi −yj|2
+ψj = β0(yi).
+(2.27)
+eq:2.27
+
+This is an N × N system of linear equations that will, we hope, determine the values ψj.
+Once we have them, we can revert (2.26) to define
+
+ψh(x) = −2β0(x) +
+
+N
+�
+
+j=1
+
+ωj
+
+π
+(x −yj) · ν(yj)
+
+|x −yj|2
+ψj
+∀x ∈Γ.
+(2.28)
+eq:2.28
+
+33
+
+
+This is a reconstruction formula that defines ψh : Γ →R from its point values.
+In
+summary, if ψh satisfies (2.26), then its point values satisfy (2.27). Reciprocally, if the
+values (ψ1, . . . , ψN) satisfy (2.27) and we define ψh with (2.28), then ψh(yj) = ψj and ψh
+
+satisfies (2.26). This is called a Nystr¨om or quadrature method. We remark that diagonal
+elements of the matrix in (2.27) need to be evaluated using a limit argument. We will
+show explicit formulas in one project below, for the particular case of parametrizable
+curves.
+
+Recovering the potential.
+Once we have computed ψh we have two options for the
+potential. We can use uh = Dψh, that is
+
+uh(z)
+=
+−2
+�
+
+Γ
+
+(z −y) · ν(y)
+
+2π|z −y|2
+β0(y)dΓ(y)
+
++
+
+N
+�
+
+j=1
+
+ωj
+
+π ψj
+
+�
+
+Γ
+
+(z −y) · ν(y)
+
+2π|z −y|2
+(y −yj) · ν(yj)
+
+|y −yj|2
+dΓ(y)
+
+or we can take advantage of the quadrature formula again (2.25) to propose another
+approximation
+
+uh(z) =
+
+N
+�
+
+j=1
+ωj
+(z −yj) · ν(yj)
+
+2π|z −yj|2
+ψj.
+
+2.5
+Literature, exercises, and working projects
+
+1. (Section 1 – Needs analysis) Show that for any ψ ∈L1(Γ), Dψ ∈C∞(Rd\Γ) and that
+∆u = 0 in Rd \ Γ. (Hint. You can apply Exercise 1.3 to the functions ∂yjEd(x, y)
+with densities η νj, where ν = (ν1, ..., νd).)
+
+2. (Section 1) The fundamental solution for the Helmholtz operator u �→∆u + ω2u is
+
+Ed(x, y) =
+
+�
+ı
+4H(1)
+0 (ω|x −y|),
+(d = 2),
+eıω|x−y|
+4π|x−y|
+(d = 3),
+
+where ω > 0 is the frequency or wave number. Find ∇yEd(x, y). Note that the two
+dimensional case uses one of the Hankel functions of the first kind.
+
+3. (Section 1) Show that
+
+(Dψ)(z) = c · z
+
+|z|d + O(|z|−d),
+where
+c =
+1
+2d−1π
+
+�
+
+Γ
+ϕ(y)ν(y)dΓ(y).
+
+4. (Section 1) Let u = Sη −Dψ. Give formulas for
+
+γ±u,
+∂±
+ν u,
+[[γu]],
+[[∂νu]],
+{{γu}},
+{{∂νu}}.
+
+5. (Section 1) Let us take a point x0 ∈Ω−, and consider the function u(x) = 1/|x−x0|.
+Show that it is not possible to represent u as a double layer potential in Ω+.
+
+34
+
+
+6. (Section 3) Give a direct boundary integral formulation based on Green’s identity
+for the interior Dirichlet problem.
+
+7. (Section 3) The exterior Dirichlet-to-Neumann operator. Consider the opera-
+tor that given β0 solves the exterior Dirichlet problem (2.18) and outputs DtN+β0 :=
+∂+
+ν u.
+
+(a) Using (2.19)-(2.20) show that DtN+ = V−1(−1
+
+2I + K).
+
+(b) Using now an indirect method, representing the solution of (2.18) in the form
+u = Sη, solve for η and then compute ∂+
+ν u with help of the jump relations.
+Show that DtN+ = (−1
+
+2I + Kt)V−1.
+
+(c) Use (a) and (b) to prove that KV = VKt.
+
+8. (Section 3) Following the ideas of the previous exercise, find two formulas for the
+interior Dirichlet-to-Neumann operator.
+
+9. (Section 3) Double layer potential and Dirichlet problem. In the two dimen-
+sional case, to solve
+
+∆u = 0
+in Ω+,
+γ+u = β0,
+u = u∞+ O(r−1),
+
+we try with a representation
+
+u = Dψ + u∞,
+where
+�
+
+Γ
+ψ dΓ = 0.
+
+Give a reason for the last condition. Write down the associated integral equation.
+
+10. (Section 3) Double layer potential and Dirichlet problem. In the three di-
+mensional case, to solve
+
+∆u = 0
+in Ω+,
+γ+u = β0,
+u = O(r−1)
+
+where u∞is unknown, we try with a representation
+
+u = Dψ + cΦ,
+where
+�
+
+Γ
+ψ dΓ = 0,
+and
+Φ(z) =
+1
+|z −x0|,
+x0 ∈Ω−.
+
+Give a reason for the condition on ψ and for the need to include the monopole Φ.
+Write down the associated integral equation.
+
+35
+
+
+Project # 2.1 – A Nystr¨om method (coding)
+
+Statement of the problem.
+This project can be considered as a continuation of
+Project # 1.1. We are looking for a numerical solution of the interior Dirichlet prob-
+lem for the Laplacian
+∆u = 0
+in Ω−,
+γ−u = β0,
+
+where Γ can be parametrized using a 1-periodic function x : R →R2 with the properties
+
+x(t + 1) = x(t)
+∀t,
+|x′(t)| ̸= 0
+∀t,
+x(t) ̸= x(τ)
+t −τ ̸∈Z.
+
+The double layer representation and integral equation (2.23) will be given parametric
+forms using
+β0(t) := β0(x(t)),
+ψ(t) := ψ(x(t)),
+
+and a non-unit normal vector field
+
+x′(t)⊥:= (x′
+2(t), −x′
+1(t)),
+
+assuming that the parametrization is positively oriented. The form of the potential is
+then
+
+u(z) =
+�1
+
+0
+
+(z −x(τ)) · x′(τ)⊥
+
+2π|z −x(τ)|2
+ψ(τ)dτ,
+
+and the integral equation is
+
+−1
+
+2ψ(t) −
+�1
+
+0
+
+(x(t) −x(τ)) · x′(τ)⊥
+
+2π|x(t) −x(τ)|2
+ψ(τ)dτ = β0(t)
+∀t.
+
+Show that
+
+lim
+t→τ
+(x(t) −x(τ)) · x′(τ)⊥
+
+2π|x(t) −x(τ)|2
+= x′′(τ) · x′(τ)⊥
+
+4π|x′(τ)|2
+.
+
+A Nystr¨om approximation.
+We then substitute integrals by composite trapezoidal
+approximations
+
+�1
+
+0
+φ(τ) ≈1
+
+N
+
+N
+�
+
+j=1
+φ(tj) = 1
+
+N (1
+
+2φ(t0) +
+
+N−1
+�
+
+j=1
+φ(tj) + 1
+
+2φ(tN))
+tj = j/N.
+
+(Recall that we are dealing with periodic functions.) Using this quadrature formula for the
+integral equation and the potential representation, it is simple to obtain a fully discrete
+approximation uN(z) for any z ∈Ω−. Check errors |uN(z)−u(z)| for different geometries
+and exact solutions. You will see that the method converges extraordinarily fast.
+
+36
+
+
+Organization.
+One of the nices features of this simple method is the fact that all
+geometric information is contained in the quantities
+
+mj := x(tj),
+nj := 1
+
+N x′(tj)⊥,
+ℓj := |x′(tj)|,
+sj := x′′(tj),
+
+and that the right-hand-side involves the evaluations of β0(x(tj)) = β0(mj).
+
+37
+
+
+Project # 2.2 – A Galerkin direct method (coding)
+
+General setting.
+This project is a continuation of Project # 1.2. Our goal is to code
+the Galerkin equations for a formulation similar to what is given in Section 2.3, in the
+two dimensional case. Let then Γ be a closed polygonal curve in the plane, discretized in
+elements {T1, . . . , TN}. To solve the exterior Dirichlet problem
+
+∆u = 0
+in Ω+,
+γ+u = β0
+(on Γ),
+u = u∞+ O(r−1)
+as r →∞,
+
+we use a direct formulation (Green’s third identity) to represent the solution
+
+u = Dϕ −Sλ + u∞,
+ϕ = β0,
+λ = ∂+
+ν u,
+
+and derive an integral equation from one of Green’s identities:
+
+Vλ −u∞= −1
+
+2ϕ + Kϕ,
+�
+
+Γ
+λdΓ = 0.
+
+Handling the discretization.
+We consider the two following discrete spaces:
+
+Xh
+:=
+{λh : Γ →R : λh|Ti ∈P0(Ti)
+∀i},
+Yh
+:=
+{ϕh ∈C(Γ) : ϕh|Ti ∈P1(Ti)
+∀i}.
+
+The basis functions for Xh are the characteristic functions of the elements: {χ1, . . . , χN}.
+There are N nodes, which are numbered in a separate way {v1, . . . , vN}, and they give
+rise to functions
+ψi ∈Yh
+s.t.
+ψi(vj) = δij.
+
+The discrete equations.
+The Galerkin equations are
+�
+
+j
+Vijλj −uh
+∞|Ti| = −1
+
+2
+�
+
+j
+Mijϕj +
+�
+
+j
+Kijϕj,
+∀i,
+�
+
+j
+|Tj|λj = 0
+
+(see Chapter 1 and in particular Project # 1.1). The computation of Vij and the way of
+storing geometric information is explained in Project # 1.1.
+
+Assembly in Yh.
+We now explain how to compute integrals of the following form
+
+Ij :=
+�
+
+Γ
+φ(y)ψj(y)dΓ(y)
+j = 1, . . . , N.
+(2.29)
+
+38
+
+
+Assume that for the element Tℓ= [vele(ℓ,1), vele(ℓ,2)] we can find a function φℓsuch that
+
+φℓ∈P1(Γℓ),
+φℓ(vele(ℓ,1)) = 1,
+φℓ(vele(ℓ,2)) = 0,
+
+and that we have computed the quantities
+
+I(1)
+ℓ
+=
+�
+
+Tℓ
+φ(y)φℓ(y)dΓ(y),
+I(2)
+ℓ
+=
+�
+
+Tℓ
+φ(y)(1 −φℓ(y))dΓ(y).
+
+The assembly process is a loop that after initializing Ij = 0 for all j, computes
+
+Iele(j,1) = Iele(j,1) + I(1)
+j ,
+Iele(j,2) = Iele(j,2) + I(2)
+j ,
+j = 1, . . . , N.
+
+This process transfers computations done at the element level, and numbered with element
+indices, to computations on the entire boundary, counted by vertices.
+
+Applications.
+Since
+�
+
+Tj
+φℓ(y)dΓ(y) =
+�
+
+Tj
+(1 −φℓ(y))dΓ(y) = 1
+
+2|Tℓ|δiℓ,
+
+it is easy to compute now
+
+Mij =
+�
+
+Ti
+ψj(y)dΓ(y) =
+�
+
+Γ
+χi(y)ψj(y)dΓ(y),
+∀i, j.
+
+To compute the matrix related to the double layer operator, we approximate
+
+Kij
+=
+�
+
+Ti
+
+�
+
+Γ
+
+(x −y) · ν(y)
+
+2π|x −y|2
+ψi(y)dΓ(y)
+
+≈
+|Ti|
+
+2
+
+��
+
+Γ
+
+(g+
+i −y) · ν(y)
+2π|g+
+i −y|2
+ψi(y)dΓ(y) + (g−
+i −y) · ν(y)
+2π|g−
+i −y|2
+ψi(y)dΓ(y)
+�
+,
+
+where the two Gaussian points on the element Ti are defined in Project # 1.2. The above
+integrals can be computed exactly (see what follows), after some element-by-element
+computations and assembly process.
+
+An exact computation.
+Let e = [v, w] be a segment, let z ∈R2, and let
+
+ℓ:= |w −v|,
+η := (z −v) · n,
+
+t := 1
+
+ℓ(w −v),
+α := −(z −v) · t,
+
+n := t⊥= (t2, −t1),
+β := α + ℓ= −(z −w) · t.
+
+Let also φ ∈P1(e) satisfy φ(v) = 1, φ(w) = 0. Then
+�
+
+e
+
+(z −y) · ν(y)
+
+|z −y|2
+
+�
+φ(y)
+1 −φ(y)
+
+�
+dΓ(y)
+=
+1
+ℓ
+
+�
+arctan
+�β
+
+η
+
+�
+−arctan
+�α
+
+η
+
+���
+β
+−α
+
+�
+
++ η
+
+2ℓlog η2 + β2
+
+η2 + α2
+
+�−1
+1
+
+�
+
+39
+
+
+Chapter 3
+
+The Calder´on Calculus
+
+chap:3
+
+In this chapter we repeat the presentation of the two layer potentials and four integral
+operators associated to the Laplace equation and give arguments for some of their prop-
+erties. The point of view is to ignore what the potentials are, and try to work with them
+for what properties they satisfy. The presentation is not fully rigorous (function spaces
+are still missing), but the arguments that we show here will be the ones used in the rig-
+orous proofs in forthcoming chapters. In order to prepare the mindset for this chapter,
+let us mention that all the presentation hinges on two important results, with the minor
+intrusion of an energy concept:
+
+• We will assume that a certain transmission problem in free space has a unique
+solution.
+We will use it to define the potentials and their associated boundary
+integral operators.
+
+• We will assume an integration by parts formula, which we will use to show some
+symmetries of the integral operators, as well as some positivity results.
+
+• Finally, we will have a look at the concept of energy that is associated to the
+integration by parts formula. This concept will deliver the energy-free solutions
+that create some uniqueness issues.
+
+3.1
+Layer potentials and transmission problems
+sec:3.1
+
+The transmission problem.
+Let us assume that for given η, ψ : Γ →R, the problem
+eq:3.1
+
+∆u = 0
+in Rd \ Γ,
+(3.1a)
+[[γu]] = ψ
+(on Γ),
+(3.1b)
+[[∂νu]] = η
+(on Γ),
+(3.1c)
+u = O(r−1)
+at infinity,
+(3.1d)
+
+admits a unique solution. This fact includes the additional hypothesis of data
+�
+
+Γ
+η dΓ = 0
+when d = 2.
+(3.2)
+eq:3.2
+
+40
+
+
+The solution of (3.1) with ψ = 0 is denoted u = Sη. The solution of (3.1) with η = 0 is
+denoted u = Dψ. Because of the superposition principle (all operators in (3.1) are linear
+and we are assuming existence and uniqueness of solution), we can write the solution to
+(3.1) as
+u = Sη −Dψ.
+
+Let us briefly repeat these definitions step by step.
+
+Given η satisfying (3.2), the single layer potential u = Sη is the solution to:
+eq:3.3
+
+∆u = 0
+in Rd \ Γ,
+(3.3a)
+[[γu]] = 0
+(on Γ),
+(3.3b)
+[[∂νu]] = η
+(on Γ),
+(3.3c)
+u = O(r−1)
+at infinity,
+(3.3d)
+
+Given ψ, the double layer potential u = Dψ is the solution to:
+eq:3.4
+
+∆u = 0
+in Rd \ Γ,
+(3.4a)
+[[γu]] = −ψ
+(on Γ),
+(3.4b)
+[[∂νu]] = 0
+(on Γ),
+(3.4c)
+u = O(r−1)
+at infinity,
+(3.4d)
+
+Energy-free solutions.
+The energy associated to a function is the quantity
+
+E(u) := 1
+
+2
+
+�
+
+Rd\Γ
+|∇u|2.
+
+If E(u) = 0 and u = O(r−1) at infinity, then it is clear that u ∈span{χΩ−}. These
+functions are the energy free solutions of the problem.
+They are related to the layer
+potentials in the following way. It is clear that ∆χΩ−= 0 in Rd \ Γ, that [[χΩ−]] = 1 and
+[[γ∂νχΩ−]] = 0. Therefore
+D1 = −χΩ−.
+(3.5)
+
+Jumps.
+By definition of the layer potentials through problem (3.1), it follows that
+
+[[γSη]] = 0,
+[[∂νSη]] = η,
+[[γDψ]] = −ψ,
+[[∂νDψ]] = 0.
+
+We can write these identities in operator form:
+�[[γ·]]
+[[∂ν·]]
+
+��
+−D
+S
+�
+=
+�I
+O
+O
+I
+
+�
+=: I.
+(3.6)
+eq:3.6
+
+41
+
+
+Averages.
+The four boundary integral operators are defined as averages of side values
+of the layer potentials:
+
+Vη =:{{γSη}} = γ±Sη,
+Kψ =:{{γDψ}},
+Ktη =:{{∂νSη}},
+Wψ =: −{{∂νDψ}} = −∂±
+ν Dψ.
+
+Mimicking (3.6), we can write
+�{{γ·}}
+{{∂ν·}}
+
+��
+−D
+S
+�
+=
+�−K
+V
+W
+Kt
+
+�
+=: D,
+(3.7)
+eq:3.7
+
+understading now that these equalities are the definitions of the operators on the right-
+hand-side. From (3.6) and (3.7), it is also clear that
+
+∂±
+ν S = ∓1
+
+2I + Kt,
+γ±D = ±1
+
+2I + K.
+
+The representation theorem.
+Let u satisfy
+
+∆u = 0
+in Rd \ Γ,
+u = O(r−1)
+at infinity.
+(3.8)
+eq:3.8
+
+Then
+u = S[[∂νu]] −D[[γu]].
+(3.9)
+eq:3.9
+
+The reason for this to hold is really simple: let η := [[∂νu]] and ψ := [[γu]]. Clearly u and
+Sη −Dψ are solutions to (3.1); therefore, they are equal. Implicit to this argument is the
+fact that if u satisfies (3.8) and we are in two dimensions, then
+�
+
+Γ[[∂νu]]dΓ = 0.
+
+3.2
+The exterior Calder´on projector
+
+Representation theorem for exterior solutions.
+Let
+
+∆u = 0
+in Ω+,
+u = O(r−1)
+at infinity.
+(3.10)
+eq:3.10
+
+We then extend u by zero to Ω−:
+
+�u =
+�u
+in Ω+,
+0
+in Ω−,
+(3.11)
+eq:3.11
+
+and apply the representation formula (3.9) to �u:
+
+�u = S[[∂ν�u]] −D[[γ�u]] = −S∂+
+ν u + Dγ+u.
+(3.12)
+eq:3.12
+
+We can rephrase this formula forgetting about the extended function �u, by simply writing
+
+Dγ+u −S∂+
+ν u =
+�u
+in Ω+,
+0
+in Ω−.
+
+42
+
+
+Integral identities.
+There are different ways of reaching the two integral identities
+associated to the limiting values of an exterior solution of the Laplace equation (3.10).
+We can think in terms of the extended function (3.12) to obtain the identities
+
+1
+2γ+u ={{γ�u}} = −V∂+
+ν u + Kγ+u,
+
+1
+2∂+
+ν u ={{∂ν�u}} = −Kt∂+
+ν u −Wγ+u.
+
+These equalities follow from (3.12) and the definition of the integral operators as averages
+(3.7). Also, we can start with the identity u = Dγ+u −S∂+
+ν u, valid in Ω+, take exterior
+values from both sides, and show that
+
+γ+u = γ+Dγ+u −γ+S∂+
+ν u = 1
+
+2γ+u + Kγ+u −V∂+
+ν u
+∂+
+ν u = ∂+
+ν Dγ+u −∂+
+ν S∂+
+ν u = −Wγ+u + 1
+
+2∂+
+ν u −Kt∂+
+ν u.
+
+For easy reference, let us write the formulas again, after changing some signs:
+
+V∂+
+ν u + (1
+
+2I −K)γ+u = 0.
+(3.13a)
+(1
+
+2I + Kt)∂+
+ν u + Wγ+u = 0.
+(3.13b)
+
+The Calder´on projector.
+We next use the formula
+�γ+
+
+∂+
+ν
+
+�
+= −1
+
+2
+
+�[[γ·]]
+[[∂ν·]]
+
+�
++
+�{{γ·}}
+{{∂ν·}}
+
+�
+
+together with (3.6) and (3.7) to show that
+�γ+
+
+∂+
+ν
+
+��
+D
+−S
+�
+= 1
+
+2I −D =
+�1
+
+2I + K
+−V
+−W
+1
+2I −Kt
+
+�
+,
+(3.14)
+eq:3.14
+
+where we have changed signs in front of single and double layer potentials due to the
+change difference between the representation formula for transmission problems (3.9) and
+for exterior problems (3.12). The matrix of operators
+
+C+ :=
+�1
+
+2I + K
+−V
+−W
+1
+2I −Kt
+
+�
+(3.15)
+
+will be called the exterior Calder´on projector, for reasons that we will next see.
+
+The Calder´on projector is a projector.
+We have already seen that if u is an exterior
+solution of the Laplacian (3.10), then
+
+C+
+
+�γ+u
+∂+
+ν u
+
+�
+=
+�γ+u
+∂+
+ν u
+
+�
+.
+
+This means that elements of the set
+
+C := {(γ+u, ∂+
+ν u) : u satisfies (3.10)},
+(3.16)
+
+43
+
+
+i.e., Cauchy data of solutions of the exterior Laplace equation, are fixed points of C+.
+Reciprocally, if
+
+C+
+
+�ψ
+η
+
+�
+=
+�ψ
+η
+
+�
+,
+
+we can define u = Dψ −Sη, which is a solution of (3.10) and note that
+�γ+u
+∂+
+ν u
+
+�
+=
+�γ+
+
+∂+
+ν
+
+��
+D
+−S
+��ψ
+η
+
+�
+= C+
+
+�ψ
+η
+
+�
+=
+�ψ
+η
+
+�
+,
+
+which shows that the fixed points of C+ are the elements of C. We can think of this
+in a slightly different way: we start with general densities (ψ, η), define the potential
+u = Dψ −Sη and note that
+
+C+
+
+�ψ
+η
+
+�
+=
+�γ+
+
+∂+
+ν
+
+��
+D
+−S
+��ψ
+η
+
+�
+=
+�γ+u
+∂+
+ν u
+
+�
+= C+
+
+�γ+u
+∂+
+ν u
+
+�
+= C+C+
+
+�ψ
+η
+
+�
+.
+
+The reader should by now be convinced that we have shown the following two properties:
+
+C2
++ = C+
+and
+range C+ = {(γ+u, ∂+
+ν u) : u satisfies (3.10)},
+(3.17)
+
+or in words, C+ is a projection onto the space of Cauchy data of exterior solutions of the
+Laplace equation.
+
+Some identities between the operators.
+We are now going to exploit the projection
+property of C+. To do this, just note that
+
+C+C+ = C+
+⇐⇒
+(1
+
+2I −D)(1
+
+2I −D) = 1
+
+2I −D
+⇐⇒
+1
+4I −D + D2 = 1
+
+2I −D
+⇐⇒
+D2 = 1
+
+4I,
+
+or in expanded form,
+�
+K2 + VW
+−KV + VKt
+
+−WK + KtW
+WV + (Kt)2
+
+�
+= 1
+
+4
+
+�I
+O
+O
+I
+
+�
+.
+(3.18)
+
+This matrix equality can also be written as a collection of four identities:
+
+VW = 1
+
+2I −K2,
+WV = 1
+
+4I −(Kt)2,
+(3.19a)
+KV = VKt,
+WK = KtW.
+(3.19b)
+
+Some readers might recognize one of these formulas from the exercise list in Chapter 2.
+We got to it from apparently different arguments.
+
+44
+
+
+3.3
+The integration by parts formula
+
+Notation.
+In order to avoid an excess of integral signs (and in preview of some inner
+product style notation for duality products), we will write for functions u, v and vector
+fields p, q (all of them defined on a domain Ω)
+
+(u, v)Ω:=
+�
+
+Ω
+u v,
+(p, q)Ω:=
+�
+
+Ω
+p · q.
+
+We will also shorten
+∥u∥2
+Ω:= (u, u)Ω,
+∥p∥2
+Ω:= (p, p)Ω.
+
+For functions defined on Γ, we denote
+
+⟨η, φ⟩Γ :=
+�
+
+Γ
+η φ dΓ.
+
+Even if at the present time, this latter integral symbol is just the L2(Γ) inner product,
+whenever we find an expression of the kind ⟨∂νu, γv⟩Γ, which later on will be made corre-
+spond to a duality product, we will always place normal derivatives in the first variable.
+
+Around Green’s First Identity.
+The integration by parts formula we will consider is
+a variant of Green’s First Identity, written simultaneously for the domains Ω±: if
+
+∆u = 0
+in Rd \ Γ
+and
+u = O(r−1)
+at infinity,
+(3.20)
+eq:3.20
+
+then
+(∇u, ∇v)Rd\Γ = ⟨∂−
+ν u, γ−v⟩Γ −⟨∂+
+ν u, γ+v⟩Γ.
+(3.21)
+
+Note how this is formula (2.8) especialized to a harmonic function u, applied in Ω±. The
+reason for the negative sign in the term coming from the exterior lies on the sign of the
+normal vector field, which is pointing inwards from the point of view of Ω+. Very simple
+algebra allows us to write
+
+(∇u, ∇v)Rd\Γ = ⟨[[∂νu]], γ−v⟩Γ + ⟨∂+
+ν u, [[γv]]⟩Γ.
+(3.22)
+eq:3.22
+
+If we now aply (3.22) to two functions satisfying (3.20), we obtain
+
+⟨[[∂νu]], γ−v⟩Γ + ⟨∂+
+ν u, [[γv]]⟩Γ = (∇u, ∇v)Rd\Γ = ⟨[[∂νv]], γ−u⟩Γ + ⟨∂+
+ν v, [[γu]]⟩Γ.
+(3.23)
+eq:3.23
+
+Symmetry and positivity of V.
+Apply now (3.23) to u = Sη and v = Sµ. Then
+
+⟨η, Vµ⟩Γ = ⟨[[∂νu]], γv⟩Γ = (∇u, ∇v)Rd\Γ = ⟨[[∂νv]], γu⟩Γ = ⟨µ, Vη⟩Γ,
+
+which, in formal notation for transposition with respect to the ⟨·, ·⟩Γ bracket, can be
+shortened as Vt = V. Moreover, if η ̸= 0,
+
+⟨η, Vη⟩Γ = ∥∇u∥2
+Rd\Γ > 0,
+(3.24)
+eq:3.24
+
+since the only energy-free solution of the Laplace equation (see Section 3.1) cannot be
+represented as a single layer potential, because it has to jump across Γ.
+
+45
+
+
+Symmetry and positivity of W.
+Applying (3.23) to u = Dψ and v = Dφ, we obtain
+
+⟨Wψ, φ⟩Γ = ⟨−∂νu, −[[γv]]⟩Γ = (∇u, ∇v)Rd\Γ = ⟨−∂νv, −[[γu]]⟩Γ = ⟨Wφ, ψ⟩Γ,
+
+or Wt = W. The positivity result is not as strong as in the case of the operator V. If
+u = Dψ, then
+⟨Wψ, ψ⟩Γ = ∥∇u∥2
+Rd\Γ ≥0.
+(3.25)
+eq:3.25
+
+The gradient is equal to zero only if u is a multiple of χΩ−= −D1, that is, only when ψ ∈
+P0(Γ). Note that both (3.24) and (3.25) will be strenghthened to coercivity inequalities
+in its due time.
+
+An orthogonality result.
+Take finally u = Sη and v = Dψ in (3.23). Then
+
+⟨[[∂νu]], γ−v⟩Γ + ⟨∂+
+ν u, [[γv]]⟩Γ = (∇u, ∇v)Rd\Γ = 0.
+
+This proves that single and double layer potentials are orthogonal with respect to the
+semi-inner product (∇·, ∇·)Rd\Γ. Moreover, we can write this equality in terms of the
+densities as
+⟨η, −1
+
+2ψ + Kψ⟩Γ + ⟨1
+
+2η + Ktη, −ψ⟩Γ = 0,
+
+which is equivalent to
+⟨η, Kψ⟩Γ = ⟨Ktη, ψ⟩Γ,
+
+and thus justifies the notation chosen for Kt. It is important to emphasize that the three
+transposition properties we have displayed are given using just this formal definitions
+of the potentials as solutions of transmission problems. Two of them (the symmetry of
+V and the fact that Kt is the transpose of K) could be seen directly from the integral
+definitions of these operators.
+
+3.4
+Literature, exercises, and working projects
+
+1. (Section 1) Show that
+
+W1 = 0
+and
+K1 = −1
+
+2.
+
+2. (Section 2) Show that the kernel of the matrix of operators
+�
+V
+1
+2I −Kt
+
+1
+2I + K
+W
+
+�
+
+is the space {(∂+
+ν u, γ+u) : ∆u = 0 in Ω+, u = O(r−1) at infinity}.
+
+3. (Section 2) The interior Calder´on projector. Let
+
+C−:=
+�γ−
+
+∂−
+ν
+
+��
+−D
+S
+�
+.
+
+46
+
+
+Identify the elements of C−, show that
+
+C+ + C−= I
+
+and conclude that C−and C+ are complementary projections. What is the range
+of C−?
+
+4. (Section 2) Combined field operators.
+Consider the followin combined field
+potential:
+u := (S + c D)η,
+
+where c ∈R. What are the values of γ+u and ∂+
+ν u?
+
+5. (Section 2) Burton-Miller type equation.
+Let (β0, β1) := (γv, ∂νv) be the
+Cauchy data on Γ of a solution of ∆v = 0 in a neighborhood of Ω−. (This im-
+plies that ∆v = 0 in Ω−and that the interior and exterior limits of v coincide.) Let
+u satisfy
+
+∆u = 0
+in Ω+,
+γ+u + β0 = 0,
+u = O(r−1)
+at infinity.
+
+Show that for any constant c ̸= 0
+
+(V + c(1
+
+2I + Kt))∂+
+ν u = −((−1
+
+2I + K) −cW)β0.
+
+Show that
+(V + c(1
+
+2I + Kt))(∂+
+ν + β1) = β0 + cβ1.
+
+6. (Section 3) Show that KV and WK are formally symmetric.
+
+7. (Section 3) Consider the matrix of operators
+
+M+ :=
+�
+V
+−1
+
+2I −Kt
+
+1
+2I + K
+W
+
+�
+.
+
+Show that it is formally positive semidefinite and that its kernel is {0} × P0(Γ). If
+u is an exterior solution of the Laplacian, find what
+
+M+
+
+�∂+
+ν u
+γ+u
+
+�
+
+is.
+
+47
+
+
+Project # 3.1 – Linear elasticity
+
+The basic concepts.
+In linear elasticity the main unknown is the displacement field
+u. Associated to it we have strain
+
+ε(u) := 1
+
+2(Du + (Du)⊤)
+εij(u) = 1
+
+2
+
+�∂ui
+
+∂xj
++ ∂uj
+
+∂xi
+
+�
+
+and stress
+
+σ(u) = 2µε(u) + λ(div u)I,
+σij(u) = 2µεij(u) + λ(div u)δij.
+
+The constants λ, µ are assumed to be positive.
+Instead of the normal derivative, we
+consider the normal stress (or traction) as a boundary relevant quantity σ(u)ν. The
+Navier-Lam´e equation in absence of volumetric forces is
+
+divσ(u) = 0.
+
+The energy function is
+
+(σ(u), ε(u))Ω=
+�
+
+i,j=1d
+(σij(u), εij(u))Ω= 2µ(ε(u), ε(u))Ω+ λ∥divu∥2
+Ω.
+
+Potentials.
+We assume that the transmission problem
+
+divσ(u) = 0
+in Rd \ Γ,
+[[γu]] = ψ
+(on Γ),
+[[σ(u)ν]] = η
+(on Γ),
+u = O(r−1)
+at infinity,
+
+is uniquely solvable, with the additional restriction
+�
+
+Γ
+η dΓ = 0
+when d = 2.
+
+Potentials and operators are defined using the same strategy as in the case of the Laplace
+equation. The associated energy-free solutions are of the form
+
+χΩ−m,
+m ∈Md,
+
+where the space of rigid motions depends on the space dimension. Its elements are
+�a1
+a2
+
+�
++
+�0
+−b
+b
+0
+
+��x1
+x2
+
+�
+,
+if d = 2,
+
+
+
+a1
+a2
+a3
+
+
+
++
+
+
+
+
+0
+b1
+−b2
+b1
+0
+b3
+b2
+−b3
+0
+
+
+
+
+
+
+
+
+x1
+x2
+x3
+
+
+
+,
+if d = 3.
+
+48
+
+
+Integration by parts.
+If divσ(u) = 0 in Rd \ Γ and u = O(r−1) at infinity, then
+
+(σ(u), ε(v))Rd\Γ = ⟨σ(u)+ν, γ+v⟩Γ −⟨σ(u)−ν, γ−v⟩Γ.
+
+Going step by step, derive the entire Calder´on Calculus for the homogeneous isotropic
+linear elasticity operator.
+
+49
+
+
+Contents
+
+1
+The single layer potential for the Laplacian
+2
+1.1
+Exterior solutions of the Laplace equation
+. . . . . . . . . . . . . . . . . .
+2
+1.2
+The single layer potential in three dimensions
+. . . . . . . . . . . . . . . .
+4
+1.3
+Some numerical methods . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+1.4
+The two dimensional case
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+1.5
+Lipschitz domains (*) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+1.6
+Literature, exercises and working projects
+. . . . . . . . . . . . . . . . . .
+14
+
+2
+Green’s representation formula
+23
+2.1
+The double layer potential . . . . . . . . . . . . . . . . . . . . . . . . . . .
+23
+2.2
+Green’s Third Identity . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+26
+2.3
+A direct boundary integral equation . . . . . . . . . . . . . . . . . . . . . .
+29
+2.4
+An equation of the second kind
+. . . . . . . . . . . . . . . . . . . . . . . .
+32
+2.5
+Literature, exercises, and working projects . . . . . . . . . . . . . . . . . .
+34
+
+3
+The Calder´on Calculus
+40
+3.1
+Layer potentials and transmission problems
+. . . . . . . . . . . . . . . . .
+40
+3.2
+The exterior Calder´on projector . . . . . . . . . . . . . . . . . . . . . . . .
+42
+3.3
+The integration by parts formula
+. . . . . . . . . . . . . . . . . . . . . . .
+45
+3.4
+Literature, exercises, and working projects . . . . . . . . . . . . . . . . . .
+46
+
+50
+
+

@@ -1,0 +1,1378 @@
+[PDF PAGE 1]
+NUMERICAL COMPUTATIONS WITH H(div)-FINITE ELEMENTS
+FOR THE BRINKMAN PROBLEM
+JUHO KÖNNÖ∗AND ROLF STENBERG†
+Abstract. The H(div)-conforming approach for the Brinkman equation is studied numerically,
+verifying the theoretical a priori and a posteriori analysis in [27, 28]. Furthermore, the results are ex-
+tended to cover a non-constant permeability. A hybridization technique for the problem is presented,
+complete with a convergence analysis and numerical veriﬁcation. Finally, the numerical convergence
+studies are complemented with numerical examples of applications to domain decomposition and
+adaptive mesh reﬁnement.
+1. Introduction. The Brinkman equation describes the ﬂow of a viscous ﬂuid
+in a highly porous medium.
+Mathematically the model is a parameter-dependent
+combination of the Darcy and Stokes models.
+For a derivation of and details on
+the Brinkman equations we refer to [29, 1, 2, 3, 35].
+Typical applications of the
+model lie in subsurface ﬂow problems, along with some special applications, such as
+heat pipes and composite manufacturing [26, 20]. The eﬀects of taking the viscosity
+into account are most pronounced in the presence of large crack or vugs, typical of
+e.g.
+real-life oil reservoirs.
+The Brinkman model is also used as a coupling layer
+between a free surface ﬂow and a porous Darcy ﬂow [17]. Numerical results for the
+Brinkman ﬂow have been previously presented for the Hsieh-Clough-Tocher element
+in [38], for the Crouzeix-Raviart element in [9], for the Stokes-based elements with
+various stabilizations, including interior penalty methods, in [21, 15, 22, 12, 10, 11],
+and for coupling the Stokes and Darcy ﬂows with an SIPG method in [25]. For the
+H(div)-conforming approximation, numerical results with a subgrid algorithm can be
+found in [23], and with modiﬁed H(div)-elements in [37, 31].
+The structure of the paper is as follows. In Chapter 2 we brieﬂy recall the mathe-
+matical formulation of the model, and introduce the necessary function spaces. Chap-
+ter 3 carries on to introducing the H(div)-conforming ﬁnite element discretization for
+the problem, along with the Nitsche formulation for assuring conformity and stability
+in the discrete spaces. We also recall the main results of the a priori and a posteriori
+analysis carried out in [27], along with the postprocessing procedure necessary for
+the optimal convergence results. The results are extended to cover a non-constant
+permeability. In Chapter 4 we introduce a hybridization technique for the parameter
+dependent problem based on previous hybridization techniques for mixed and DG
+methods [16, 14, 8]. The practicability of the hybridization and the beneﬁts therein
+are discussed brieﬂy.
+We end the paper with extensive numerical tests in Chapter 5. We ﬁrst demon-
+strate the convergence rates predicted by the theory for both the relative error as well
+as the a posteriori indicator. Furthermore, the performance of the method is com-
+pared with that of a MINI ﬁnite element discretization. Next, the importance of the
+postprocessing method is clariﬁed and convergence of the hybridized method is stud-
+ied. We also apply the hybridization procedure to domain decomposition. The weak
+enforcing of the boundary conditions and adaptive reﬁnement techniques are studied
+in the framework of a ﬂow in a channel with a parameter-dependent boundary con-
+dition. The chapter ends with a practical example of the Brinkman ﬂow with actual
+∗Department of Mathematics and Systems Analysis, Aalto University (jkonno@math.tkk.fi)
+†Department of Mathematics and Systems Analysis, Aalto University
+1
+arXiv:1103.5338v2  [math.NA]  9 Oct 2011
+
+[PDF PAGE 2]
+material parameters from the SPE10 dataset [13] demonstrating the applicability of
+the estimator to adaptive mesh reﬁnement.
+2. The Brinkman model. Let Ω⊂Rn, with n = 2, 3, be a domain with a
+polygonal or polyhedral boundary. We denote by u the velocity ﬁeld of the ﬂuid and
+by p the pore pressure. Let K denote the symmetric permeability tensor and µ and ˜µ
+are the dynamic and eﬀective viscosities of the ﬂuid, respectively. With this notation
+the problem reads [35, 34]
+−˜µ∆u + µK−1u + ∇p = f,
+in Ω,
+(2.1)
+div u = g,
+in Ω.
+(2.2)
+To simplify the mathematical analysis we assume the permeability to be of the
+following diagonal form
+K−1(x) = σ(x)2I,
+x ∈Ω,
+(2.3)
+in which σ is a strictly positive, piecewise constant function. We furthermore assume
+both the viscosities to be constant over the whole domain Ω. By scaling the equations
+with the dynamic viscosity, we arrive at the following scaled problem
+−t2∆u + σ2u + ∇p = f,
+in Ω,
+(2.4)
+div u = g,
+in Ω.
+(2.5)
+Here the parameter t represents the eﬀective viscosity of the ﬂuid, whereas σ reﬂects
+the variations in the magnitude of the permeability ﬁeld.
+For simplicity, we con-
+sider homogenous Dirichlet boundary conditions for the velocity ﬁeld. For t > 0 the
+boundary conditions are
+u = 0.
+(2.6)
+For the limiting case t = 0 we assume the boundary condition
+u· n = 0.
+(2.7)
+For t > 0, the equations are formally a Stokes problem. The solution (u, p) is
+sought in V × Q = [H1
+0(Ω)]n × L2
+0(Ω). For the case t = 0 we get the Darcy problem,
+and accordingly the solution space can be chosen as V × Q = H(div, Ω) × L2
+0(Ω) or
+V × Q = [L2(Ω)]n × [H1(Ω) ∩L2
+0(Ω)]. Here, we focus on the ﬁrst choice of spaces.
+In the following, we denote by (· , · )D the standard L2-inner product over a set
+D ⊂Rn. If D = Ω, the subscript is dropped for convenience. Similarly, ⟨· , · ⟩B is the
+L2-inner product over an (n −1)-dimensional subset B ⊂¯Ω. We deﬁne the following
+bilinear forms
+a(u, v) = t2(∇u, ∇v) + (σ2u, v),
+(2.8)
+b(v, p) = −(div v, p),
+(2.9)
+and
+B(u, p; v, q) = a(u, v) + b(v, p) + b(u, q).
+(2.10)
+The weak formulation of the Brinkman problem then reads: Find (u, p) ∈V × Q
+such that
+B(u, p; v, q) = (f, v) −(g, q),
+∀(v, q) ∈V × Q.
+(2.11)
+2
+
+[PDF PAGE 3]
+3. Solution by mixed ﬁnite elements. Let Kh be a shape-regular partition
+of Ωinto simplices. As usual, the diameter of an element K is denoted by hK, and
+the global mesh size h is deﬁned as h = maxK∈Kh hK. We denote by Eh the set of all
+faces of Kh. We write hE for the diameter of a face E.
+We introduce the jump and average of a piecewise smooth scalar function f as
+follows. Let E = ∂K ∩∂K′ be an interior face shared by two elements K and K′.
+Then the jump of f over E is deﬁned by
+[[f]] = f|K −f|K′,
+(3.1)
+and the average as
+{|f|} = 1
+2(f|K + f|K′).
+(3.2)
+For vector valued functions, we deﬁne the jumps and averages analogously. Denoting
+by n the normal vector of a face E, we deﬁne the tangential component on each face
+E as
+uτ = u −(u· n)n.
+(3.3)
+In addition, we assume that the piecewise constant permeability ﬁeld agrees with
+the triangulation Kh and that there exist a constant C ≥1 such that
+1
+C ≤σ2|K
+σ2|K′ ≤C,
+∀K, K′ ∈Kh.
+(3.4)
+On each edge E ∈Eh we deﬁne ¯σ2 = (σ2|K + σ2|K′)/2. Thus we have ¯σ2 ∼σ2|K and
+¯σ2 ∼σ2|K′ for an arbitrary face E.
+3.1. The mixed method and the norms. Mixed ﬁnite element discretization
+of the problem is based on ﬁnite element spaces Vh × Qh ⊂H(div, Ω) × L2
+0(Ω) of
+piecewise polynomial functions with respect to Kh. We will focus here on the Raviart-
+Thomas (RT) and Brezzi-Douglas-Marini (BDM) families of elements [8]. In three
+dimensions the counterparts are the Nédélec elements [32] and the BDDF elements [7].
+That is, for an approximation of order k ≥1, the ﬂux space Vh is taken as one of the
+following two spaces
+V RT
+h
+= {v ∈H(div, Ω) | v|K ∈[Pk−1(K)]n ⊕x ˜Pk−1(K) ∀K ∈Kh},
+(3.5)
+V BDM
+h
+= {v ∈H(div, Ω) | v|K ∈[Pk(K)]n ∀K ∈Kh},
+(3.6)
+where ˜Pk−1(K) denotes the homogeneous polynomials of degree k −1. The pressure
+is approximated in the same space for both choices of the velocity space, namely
+Qh = {q ∈L2
+0(Ω) | q|K ∈Pk−1(K) ∀K ∈Kh}.
+(3.7)
+Notice that V RT
+h
+⊂V BDM
+h
+. The combination of spaces satisﬁes the following equi-
+librium property:
+div Vh ⊂Qh.
+(3.8)
+To assure the conformity and stability of the approximation, we use the an SIPG
+method [24, 33], also known as Nitsche’s method, with a suitably chosen stabilization
+parameter α > 0. We deﬁne the following mesh-dependent bilinear form
+Bh(u, p; v, q) = ah(u, v) + b(v, p) + b(u, q),
+(3.9)
+3
+
+[PDF PAGE 4]
+in which
+ah(u, v) = (σ2u, v) + t2
+" X
+K∈Kh
+(∇u, ∇v)K
+(3.10)
++
+X
+E∈Eh
+{ α
+hE
+⟨[[uτ]], [[vτ]]⟩E −⟨{|∂u
+∂n |}, [[vτ]]⟩E −⟨{|∂v
+∂n|}, [[uτ]]⟩E}
+#
+.
+Then the discrete problem is to ﬁnd uh ∈Vh and ph ∈Qh such that
+Bh(uh, ph; v, q) = (f, v) −(g, q),
+∀(v, q) ∈Vh × Qh.
+(3.11)
+We introduce the following mesh-dependent norms for the problem. For the ve-
+locity we use
+∥u∥2
+σ,t,h =
+X
+K∈Kh
+σ2∥u∥2
+0,K + t2
+" X
+K∈Kh
+∥∇u∥2
+0,K +
+X
+E∈Eh
+1
+hE
+∥[[uτ]]∥2
+0,E
+#
+,
+(3.12)
+and for the pressure
+|||p|||2
+σ,t,h =
+X
+K∈Kh
+h2
+K
+σ2h2
+K + t2 ∥∇p∥2
+0,K +
+X
+E∈Eh
+hE
+¯σ2h2
+E + t2 ∥[[p]]∥2
+0,E.
+(3.13)
+Note that both of the norms are also parameter dependent. To show continuity, we
+use the somewhat stronger norm
+∥u∥2
+σ,t,∗= ∥u∥2
+σ,t,h + t2 X
+E∈Eh
+hE∥{|∂u
+∂n |}∥2
+0,E.
+(3.14)
+It is easily shown that the norms (3.12) and (3.14) are equivalent in Vh. We have the
+result [36], with CI > 0 .
+hE∥∂v
+∂n∥2
+0,E ≤CI∥∇v∥2
+0,K,
+∀v ∈Vh.
+(3.15)
+3.2. A priori analysis. For the proofs of the following results, see [27]. First
+we note that the method is consistent.
+Theorem 3.1. The exact solution (u, p) ∈V × Q satisﬁes
+Bh(u, p; v, q) = (f, v) −(g, q),
+∀(v, q) ∈Vh × Qh.
+(3.16)
+In addition, the bilinear form ah(· , · ) is coercive in Vh in the mesh-dependent
+norm (3.12).
+Lemma 3.2. Let CI be the constant from the inequality (3.15). For α > CI/4
+there exists a positive constant C such that
+ah(v, v) ≥C∥v∥2
+σ,t,h,
+∀v ∈Vh.
+(3.17)
+With a trivial modiﬁcation of the proof presented in [27], we have the discrete
+Brezzi-Babuska stability condition.
+4
+
+[PDF PAGE 5]
+Lemma 3.3. There exists a positive constant C independent of the parameters t
+and σ such that
+sup
+v∈Vh
+b(v, q)
+∥v∥σ,t,h
+≥C|||q|||σ,t,h,
+∀q ∈Qh.
+(3.18)
+By the above stability results for ah(· , · ) and b(· , · ), the following full stability
+result holds, see e.g. [8].
+Lemma 3.4. There is a positive constant C such that
+sup
+(v,q)∈Vh×Qh
+Bh(r, s; v, q)
+∥v∥σ,t,h + |||q|||σ,t,h
+≥C(∥r∥σ,t,h + |||s|||σ,t,h),
+∀(r, s) ∈Vh × Qh. (3.19)
+In H(div), a special interpolation operator Rh : H(div, Ω) T[Ls(Ω)]n →Vh is
+required, see [8]. We denote by Ph : L2(Ω) →Qh the L2-projection. The interpolants
+possess the following properties:
+(div (v −Rhv), q) = 0,
+∀q ∈Qh,
+(3.20)
+(div v, q −Phq) = 0,
+∀v ∈Vh,
+(3.21)
+and
+div Rh = Phdiv.
+(3.22)
+By stability and consistency we have the following quasioptimal a priori result shown
+in [27].
+Theorem 3.5. There is a positive constant C such that
+∥u −uh∥σ,t,h + |||Php −ph|||σ,t,h ≤C∥u −Rhu∥σ,t,h.
+(3.23)
+This contains a superconvergence result for |||ph −Php|||σ,t,h, which implies that the
+pressure solution can be improved by local postprocessing. Given full regularity, we
+conclude the section with the following a priori estimate.
+Theorem 3.6. Assuming u ∈[Hk+1(Ω)]n or u ∈[Hk(Ω)]n for BDM and RT
+elements of order k, respectively, we have
+∥u −uh∥σ,t,h + |||Php −ph|||σ,t,h ≤
+(
+C(σh + t)hk−1∥u∥k,
+for RT,
+C(σh + t)hk∥u∥k+1,
+for BDM.
+(3.24)
+3.3. Postprocessing method. We recall the postprocessing method proposed
+in [27] based on the ideas of [30]. Due to the varying permeability parameter σ, we
+modify the method accordingly. We seek the postprocessed pressure in an augmented
+space Q∗
+h ⊃Qh, deﬁned as
+Q∗
+h =
+(
+{q ∈L2
+0(Ω) | q|K ∈Pk(K) ∀K ∈Kh},
+for RT,
+{q ∈L2
+0(Ω) | q|K ∈Pk+1(K) ∀K ∈Kh},
+for BDM.
+(3.25)
+The postprosessing method is: Find p∗
+h ∈Q∗
+h such that
+Php∗
+h = ph
+(3.26)
+(∇p∗
+h, ∇q)K = (t2∆uh −σ2uh + f, ∇q)K,
+∀q ∈(I −Ph)Q∗
+h|K.
+(3.27)
+5
+
+[PDF PAGE 6]
+In [27] the analysis of the postprocessing method is performed by treating it as an
+integral part of the problem by embedding it into the bilinear form. Note, that this
+is solely for mathematical purposes, in computations the postprocessing is performed
+after the solution of the original system elementwise. The modiﬁed bilinear form now
+reads
+B∗
+h(u, p∗; v, q∗) = Bh(u, p∗; v, q∗)+
+X
+K∈Kh
+h2
+K
+σ2h2
+K + t2 (∇p∗+σ2u−t2∆u, ∇(I−Ph)q∗)K.
+(3.28)
+The postprocessed problem is then: Find (uh, p∗
+h) ∈Vh × Q∗
+h such that for every pair
+(v, q∗) ∈Vh × Q∗
+h it holds
+B∗
+h(uh, p∗
+h; v, q∗) = Lh(f, Phg; v, q∗),
+(3.29)
+in which
+Lh(f, g; v, q∗) = (f, v) −(g, q∗) +
+X
+K∈Kh
+h2
+K
+σ2h2
+K + t2 (f, ∇(I −Ph)q∗)K.
+(3.30)
+Now using exactly the same arguments as in [27] for the case σ ≡1, we can show
+that the solutions of the postprocessing procedure and the modiﬁed problem (3.29)
+agree, and we have the following quasioptimal a priori result.
+Theorem 3.7. For the postprocessed solution (uh, p∗
+h) it holds
+∥u −uh∥σ,t,h + |||p −p∗
+h|||σ,t,h ≤C
+inf
+q∗∈Q∗
+h
+n
+∥u −Rhu∥σ,t,h + |||p −q∗|||σ,t,h
+(3.31)
++ (
+X
+K∈Kh
+h2
+K
+σ2h2
+K + t2 ∥∇q∗+ σ2Rhu −t2∆Rhu −f∥2
+0,K)1/2o
+.
+Assuming full regularity, we have the following optimal a priori result for the post-
+processed problem.
+Theorem 3.8. Let us assume (u, p) ∈[Hk+1(Ω)]n×Hk+2(Ω) or u ∈[Hk(Ω)]n×
+×Hk+1(Ω) for BDM and RT elements of order k, respectively. Then we have for the
+solution (uh, p∗
+h) of the postprocessed problem (3.29)
+∥u −uh∥σ,t,h + |||p −p∗
+h|||σ,t,h ≤C{(σh + t)hk−1∥u∥k + hk+1
+σh + t∥p∥k+1},
+for RT,
+and
+∥u −uh∥σ,t,h + |||p −p∗
+h|||σ,t,h ≤C{(σh + t)hk∥u∥k+1 + hk+2
+σh + t∥p∥k+2},
+for BDM.
+3.4. A posteriori estimates. In this section we introduce a residual-based
+a posteriori estimator for the postprocessed solution. It should be noted that the
+postprocessing is vital for a properly functioning estimator. We divide the estimator
+into two distinct parts, one deﬁned over the elements and one over the edges of the
+mesh. The elementwise and edgewise estimators are deﬁned as
+η2
+K =
+h2
+K
+σ2h2
+K + t2 ∥−t2∆uh + σ2uh + ∇p∗
+h −f∥2
+0,K
++ (t2 + σ2h2
+K)∥g −Phg∥2
+0,K
+(3.32)
+6
+
+[PDF PAGE 7]
+η2
+E = t2
+hE
+∥[[uh,τ]]∥2
+0,E +
+hE
+¯σ2h2
+E + t2 ∥[[t2 ∂uh
+∂n ]]∥2
+0,E +
+hE
+¯σ2h2
+E + t2 ∥[[p∗
+h]]∥2
+0,E.
+(3.33)
+The global estimator is
+η =
+ X
+K∈Kh
+η2
+K +
+X
+E∈Eh
+η2
+E
+!1/2
+.
+(3.34)
+Note that setting t = 0 gives the estimator of [30] for the Darcy problem. In the
+following, we address the reliability and eﬃciency of the estimator and show the terms
+of the estimator to be properly matched to one another. The estimator introduced
+is both an upper and a lower bound for the actual error as shown by the following
+results, provided that a saturation assumption holds. The arguments presented in [27]
+hold step-by-step for the estimators (3.32) and (3.33) in conjunction with the scaled
+norms (3.12) and (3.13).
+Theorem 3.9 (Reliability). There exists a constant C > 0 independent of h and
+the parameters t and σ such that
+∥u −uh∥σ,t,h + |||p −p∗
+h|||σ,t,h ≤Cη.
+(3.35)
+Theorem 3.10 (Eﬃciency). There exists a constant C > 0 independent of h, t,
+and σ such that
+η2 ≤C
+n
+∥u −uh∥2
+σ,t,h + |||p −p∗
+h|||2
+σ,t,h
+(3.36)
++
+X
+K∈Kh
+
+h2
+K
+σ2h2
+K + t2 ∥f −fh∥2
+0,K + (t2 + σ2h2
+K)∥g −Phg∥2
+0,K
+o
+.
+Thus for the displacement uh and the postprocessed pressure p∗
+h we have by
+Theorems 3.9 and 3.10 a reliable and eﬃcient indicator for an elementwise constant
+permeability parameter σ and all values of the eﬀective viscosity parameter t.
+In
+addition, we have the localized lower bound
+η2
+K + η2
+E ≤C
+n
+∥u −uh∥2
+σ,t,h,ωK + |||p −p∗
+h|||2
+σ,t,h,ωK
+(3.37)
++
+X
+K∈ωK
+
+h2
+K
+σ2h2
+K + t2 ∥f −fh∥2
+0,K + (t2 + σ2h2
+K)∥g −Phg∥2
+0,K
+o
+,
+in which ωK ⊂Ωis the patch of elements surrounding an element K, and the sub-
+scripted norms above are evaluated only over the elements in ωK. Thus we have a
+strong indication of the applicability of the estimator to adaptive reﬁnement.
+4. Hybridization. A well-known method for dealing with the indeﬁnite system
+resulting from the Darcy equation is the hybridization technique introduced in [5,
+8]. The idea is to enforce the tangential continuity via Lagrange multipliers chosen
+suitably and relaxing the continuity requirement on the ﬁnite element space. Thus,
+we drop the normal continuity requirement in the spaces V BDM
+h
+and V RT
+h
+and denote
+these discontinuous counterparts by ˜
+Vh. In addition, we introduce the corresponding
+multiplier spaces
+ΛBDM
+h
+= {λ ∈[L2(Eh)]n−1 | λ ∈Pk(E), E ∈Eh, λ|E = 0, E ⊂∂Ω},
+(4.1)
+ΛRT
+h
+= {λ ∈[L2(Eh)]n−1 | λ ∈Pk−1(E), E ∈Eh, λ|E = 0, E ⊂∂Ω},
+(4.2)
+7
+
+[PDF PAGE 8]
+in which Eh denotes the collection of all faces of the mesh. It can be easily shown,
+that the normal continuity of a discrete ﬂux uh ∈˜
+Vh is equivalent to the requirement
+X
+K∈Kh
+⟨uh· n, µ⟩∂K = 0,
+∀µ ∈Λh.
+(4.3)
+Accordingly, the original ﬁnite element problem (3.11) can be hybridized in the fol-
+lowing form: Find (uh, ph, λh) ∈˜
+Vh × Qh × Λh such that
+Bh(uh, ph; v, q) +
+X
+K∈Kh
+⟨v· n, λh⟩∂K = (f, v) + (g, q),
+(4.4)
+X
+K∈Kh
+⟨uh· n, µ⟩∂K = 0
+(4.5)
+for all (v, q, µ) ∈˜
+Vh × Qh × Λh. Due to (4.3), the solution (uh, ph) of the hybridized
+system coincides with that of the original system. Thus, we need not modify the
+postprocessing procedure even if we drop the continuity requirement from the velocity
+space.
+4.1. Hybridization of the Nitsche term. However, now the matrix block
+corresponding to the bilinear form Bh(uh, ph; v, q) is a block diagonal system only for
+the special case t = 0, and for a non-zero eﬀective viscosity we cannot eliminate the
+variables locally. To alleviate this problem we introduce a second hybrid variable for
+the Nitsche term of the velocity, see e.g. [14]. Recall, that the velocity-velocity term
+of the bilinear form Bh(uh, ph; v, q) is
+ah(u, v) = (σ2u, v) + t2
+" X
+K∈Kh
+(∇u, ∇v)K
+(4.6)
++
+X
+E∈Eh
+{ α
+hE
+⟨[[uτ]], [[vτ]]⟩E −⟨{|∂u
+∂n |}, [[vτ]]⟩E −⟨{|∂v
+∂n|}, [[uτ]]⟩E}
+#
+.
+To this end, we follow [16], and formally introduce the mean value of uτ as a new
+variable, m = 1
+2(u1,τ + u2,τ). Thus we can write the tangential jump as
+[[uτ]] = 2(u1,τ −m) = −2(u2,τ −m).
+(4.7)
+Now using the new hybrid variables the bilinear form ah(u, v) can be rewritten as
+ah(u, m; v, r) = (σ2u, v) + t2 X
+K∈Kh
+{(∇u, ∇v)K + 2α
+hE
+⟨uτ −m, vτ −r⟩∂K
+−⟨∂u
+∂n , vτ −r⟩∂K −⟨∂v
+∂n, uτ −m⟩∂K}.
+Here, the hybrid variable m belongs to a space Mh ⊂[L2(Eh)]n, the choice of which
+will be discussed subsequently. In addition, we introduce a slightly modiﬁed version
+of the norm (3.12) to encompass both the velocity and the hybrid variable:
+∥(u, m)∥2
+σ,t,h =
+X
+K∈Kh
+σ2∥u∥2
+0,K + t2
+" X
+K∈Kh
+∥∇u∥2
+0,K +
+X
+E∈Eh
+1
+hE
+∥uτ −m∥2
+0,E
+#
+.
+(4.8)
+8
+
+[PDF PAGE 9]
+Since for the exact solution the jumps disappear, the bilinear form is consistent.
+Using exactly the same arguments as those presented in [16] for (3.17), we have
+Lemma 4.1. The hybridized bilinear form ah(· , · ; · , · ) is coercive in the discrete
+spaces Vh × Mh, that is there exists a positive constant C such that
+ah(v, m; v, m) ≥C∥(v, m)∥2
+σ,t,h,
+∀(v, m) ∈Vh × Mh.
+(4.9)
+Note, that the stability holds for any choice of the space Mh.
+For complicated
+problems, this gives great ﬂexibility. Thus, due to consistency and stability, we get
+optimal convergence rate as long as the space Mh is rich enough. Here we choose
+Mh = {m ∈[L2(Eh)]n | Q(E)m|E ∈[Pk(E)]n−1,
+∀E ∈Eh},
+(4.10)
+in which Q(E) is the coordinate transformation matrix from the global n-dimensional
+coordinate system to the local (n −1)-dimensional coordinate system on the face E.
+Let Ph : [L2(E)]n−1 →Mh be the L2 projection on the faces.
+We then get the
+following interpolation estimate.
+Lemma 4.2. Let u be such that u|K ∈[Hs+1(K)]n for 1
+2 < s ≤k. Then it holds
+∥(u −Rhu, uτ −Phuτ)∥σ,t,h ≤C(σh + t)hs∥u∥s+1.
+(4.11)
+Proof.
+We proceed by direct computation.
+Scaling and the Bramble-Hilbert
+lemma [6] yield
+∥(u−Rhu, uτ −Phuτ)∥2
+σ,t,h ≤
+X
+K∈Kh
+σ2∥u−Rhu∥2
+0,K+t2
+" X
+K∈Kh
+∥∇(u −Rhu)∥2
+0,K
++
+X
+E∈Eh
+ 1
+hE
+∥(u −Rhu)τ∥2
+0,E + 1
+hE
+∥(uτ −Phuτ)∥2
+0,E
+#
+≤C
+ 
+σ2h2s+2∥u∥2
+s+1 + t2 X
+K∈Kh
+{h2s
+K ∥u∥2
+s+1,K + h2s
+K ∥uτ∥2
+s+1/2,K}
+!
+.
+The result is immediate after taking the square root.
+Combining the interpolation results with the consistency and ellipticity properties
+yields an optimal convergence rate for the velocity.
+Theorem 4.3.
+Assuming suﬃcient regularity, for the ﬁnite element solution
+(uh, mh) of the hybridized system it holds
+∥(u −uh, uτ −mh))∥σ,t,h ≤C(σh + t)hs∥u∥s+1.
+(4.12)
+Thus the hybridization preserves the convergence rates of Theorem 3.8.
+The residual a posteriori estimator of Section 3.4 can be modiﬁed to handle the
+hybrid variable by changing the edgewise estimator (3.33) to
+η2
+E = t2
+hE
+∥uh,τ −mh∥2
+0,E +
+hE
+¯σ2h2
+E + t2 ∥[[t2 ∂uh
+∂n ]]∥2
+0,E +
+hE
+¯σ2h2
+E + t2 ∥[[p∗
+h]]∥2
+0,E. (4.13)
+Following the lines of the proof in [27] it is easy to prove that also the modiﬁed esti-
+mator is both sharp and reliable. This will be demonstrated in numerical experiments
+in Section 5.
+9
+
+[PDF PAGE 10]
+4.2. Implementation and local condensation. In practice, it is beneﬁcial
+to choose the hybrid variable m slightly diﬀerently, namely as the weighted average
+m = t
+2(u1,τ + u2,τ). Now the hybridized bilinear form can be written as
+ah(u, m; v, r) = (σ2u, v) +
+X
+K∈Kh
+2α
+hE
+⟨m, r⟩∂K
++ t
+X
+K∈Kh
+{⟨∂u
+∂n , r⟩∂K + ⟨∂v
+∂n, m⟩∂K −2α
+hE
+⟨uτ, r⟩∂K −2α
+hE
+⟨vτ, m⟩∂K}
++ t2 X
+K∈Kh
+{(∇u, ∇v)K + 2α
+hE
+⟨uτ, vτ⟩∂K −⟨∂u
+∂n , vτ⟩∂K −⟨∂u
+∂n , uτ⟩∂K}.
+Note, that now we get a t-independent part for the hybrid variable and the system
+remains solvable even in the limit t →0. It is clear that all of the results in Section 4.1
+hold also for the scaled hybrid variable.
+The main motivation for the hybridization procedure is to break all connections
+in the original saddlepoint system to allow for local elimination of the velocity and
+pressure variables at the element level. After hydridization the matrix system gets
+the following form where A is the matrix corresponding to the bilinear form ah(· , · ),
+B to b(· , · ), whilst C and D represent the connecting blocks for the hybrid variables
+for normal continuity and the Nitsche terms, respectively. M is the mass matrix for
+the Nitsche hybrid variable.
+
+
+
+
+A
+BT
+CT
+DT
+B
+0
+0
+0
+C
+0
+0
+0
+D
+0
+0
+M
+
+
+
+.
+(4.14)
+Since A and B are now block diagonal matrices, they can be inverted on the
+element level and we get the following symmetric and positive deﬁnite system for the
+hybrid variables. We denote the by H the following matrix that can be computed
+elementwise.
+H := A−1BT (BA−1BT )−1BA−1 −A−1.
+(4.15)
+The matrix H is positive deﬁnite and symmetric. Eliminating the velocity and pres-
+sure from the system matrix (4.14) yields the following system matrix for the hybrid
+variables (λ, m) corresponding to the normal continuity and tangential jumps, respec-
+tively.
+CHCT
+CHDT
+DHCT
+DHDT + M
+
+.
+(4.16)
+Evidently the resulting system is symmetric and positive deﬁnite. Note, that whilst
+the connecting block D will vanish as t →0, the M block does not depend on t, thus
+the whole system remains invertible even in the limit.
+4.3. Application to domain decomposition. The hybridized formulation is
+well-suited to solving large problems with the domain decomposition method. The
+10
+
+[PDF PAGE 11]
+hybrid variables readily form a discretization for the skeleton of the domain decom-
+position method for any choice of non-overlapping blocks. The local problems are of
+the Dirichlet type, and the domain decomposition method can be implemented easily
+using local solvers on the subdomains.
+Furthermore, only the skeleton of the domain decomposition mesh can be hy-
+bridized using conventional H(div)-elements for the saddle point system in the sub-
+domains. We also have great ﬂexibility in the choice of the hybridized variables, thus
+allowing one to use a lower number of degrees of freedom on the skeleton when com-
+putational resources are limited or alternatively construct a coarser approximation
+for use as a preconditioner. Most importantly, the mass conservation property is re-
+tained over the subdomain boundaries, thus making the method a viable alternative
+for multiphase ﬂow computations.
+5. Numerical tests. In this section, we shall numerically demonstrate the per-
+formance of the method. In all of the convergence tests we are mainly interested in
+the eﬀect of the ratio between the Stokes and Darcy terms −t2∆u and σ2u. Thus for
+the convergence tests we reduce the problem to a one-parameter family of problems
+by choosing σ = 1 on the whole of the domain Ω. This allows us to visualize diﬀer-
+ent behavior of the numerical method in the Stokes and Darcy regimes for varying
+parameter values.
+This choice of parameterization is made for clarity of the numerical analysis, since
+it allows the Brinkman problem to be easily interpreted as a singular perturbation
+of the Darcy problem, on which the ﬁnite element scheme proposed is based. More
+exactly, the underlying Darcy ﬂow problem for which the behaviour of the H(div)-
+conforming discretization is well-understood is kept constant as regards the ratio of the
+permeability parameter to the mesh size. The eﬀects of adding the viscous term are
+then studied by gradually increasing value of the t parameter, which is in accordance
+with the numerical nature of the problem.
+Since the main value of the convergence tests lies in showing the performance
+of the method throughout the parameter range in an idealized case with a known
+solution, the permeability can be chosen not to vary spatially without losing generality.
+Thus, the conversion to a one-parameter family can be interpreted also as a constant
+scaling of the pressure and the loading in the original model (2.4) as [21]
+−
+ t
+σ
+2
+∆u + u + 1
+σ2 ∇p = 1
+σ2 f,
+in Ω,
+(5.1)
+div u = g,
+in Ω.
+(5.2)
+Accordingly, in the physically more realistic case of approximately constant viscosity
+and varying permeability, the converge results can be interpreted by regarding the
+above scaling of the pressure as a variation in the magnitude of the driving force
+exerted by a given pressure gradient.
+First, we test the optimal convergence properties of the method along with the
+performance of the a posteriori estimator in two cases with diﬀerent regularity proper-
+ties. The proposed method is also compared with the Stokes-type approach using the
+MINI element. We proceed to demonstrate the eﬀect and the importance of the post-
+processing procedure. Next, the convergence of the hybridized method is studied in
+the framework of domain decomposition methods. Our fourth test is a ﬂow in a chan-
+nel, demonstrating the performance of Nitsche’s method in assigning the boundary
+conditions and the applicability of the error indicator to adaptive mesh reﬁnement.
+11
+
+[PDF PAGE 12]
+We end the section with a realistic example employing permeability data from the
+SPE10 dataset. In all of the test cases the ratio h/t is the ratio 1/(t
+√
+N), in which
+N is the number of degrees of freedom. For a uniform mesh we have h/t ≈1/(t
+√
+N).
+Note, that this holds only in the two-dimensional case considered in the computations.
+The data approximation term in the a posteriori estimator is neglected in the compu-
+tations. In all but the last test case in which real-life values are used, the parameters
+as well as the size of the domain are dimensionless.
+5.1. Convergence tests. For the purpose of testing the convergence rate, we
+pick a pressure p such that ∇p is a harmonic function. Thus, u = ∇p is a solution of
+the problem for every t ≥0. In polar coordinates (r, Θ) the pressure is chosen as
+p(r, Θ) = rβ sin(βΘ) + C.
+(5.3)
+The constant C is chosen such that the pressure will have a zero mean value. Moreover,
+we have p ∈H1+β(Ω), and subsequently u ∈[Hβ(Ω)]n, see [19]. In the following,
+we have tested the convergence with a wide range of diﬀerent parameter values, and
+the results are plotted with respect to the ratio of the viscosity parameter t to the
+mesh size h. Our aim is to demonstrate numerically, that the change in the nature
+of the problem indeed occurs at t = h, and that the convergence rates are optimal in
+both of the limiting cases. First we choose β = 3.1 to test the convergence rates in
+a smooth situation. With the ﬁrst-order BDM element we are expecting h2 converge
+in the Darcy end of the parameter range and h in the Stokes limit.
+As is visible from the results in Figures 1 and 2, the behaviour of the problem
+changes numerically when t = h. Thus, even though in practical applications almost
+always t > 0, numerically the problem behaves like the Darcy problem when t < h.
+As can be seen from Figure 2, the converge rates follow quite closely those given by
+the theory. Furthermore, both the actual error and the a posteriori indicator behave
+in a similar manner. Notice, that the convergence rate exhibits a slight dip at the
+point in which the nature of the problem changes. This is a result of the dominating
+error component changing from pressure to velocity error as we pass into the Stokes
+regime.
+To show the applicability of the a posteriori indicator to mesh reﬁnement, we con-
+sider the more irregular case β = 1.52. Our reﬁnement strategy consists of reﬁning
+those elements in which the error exceeds 50 percent of the average value. The tresh-
+old is halved until at least ﬁve percent of the elements have been reﬁned. The edge
+estimators are shared evenly between the neighbouring elements. When compared to
+uniform reﬁnement in Figure 4, Figure 6 shows that the convergence is considerably
+faster with adaptive reﬁnement. Furthermore, adaptive reﬁnement seems to allevi-
+ate the problem of convergence rate drop at the numerical turning point t = h, as
+demonstrated in Figures 3 and 5. Clearly these results indicate that the a posteriori
+indicator proposed gives reasonable local bounds and can thus be used in adaptive
+mesh reﬁnement.
+5.2. Comparison with the MINI element. A common choice for solving the
+Stokes problem is the classical MINI element [4]. This element has been applied to
+the Brinkman problem and thoroughly analyzed both theoretically and numerically
+in [24, 21]. We use the same test case as above with the regularity parameter set to
+β = 3.1. Notice, that the mesh-dependent norms (3.12) and (3.13) reduce to the ones
+presented in [24] when a continuous velocity-pressure pair is inserted. Thus we can
+use the same mesh-dependent norm for computing the error for both of the elements
+and the results are comparable with one another.
+12
+
+[PDF PAGE 13]
+As can be seen from the results in Figures 7 and 8, the convergence rate for the
+MINI element is as expected of the order h throughout the parameter regime. For
+the BDM1 element, on the other hand, we get h2 convergence in the Darcy regime,
+and after a slight dip at the turnaround point convergence relative to h. Turning our
+attention to Figure 7 reveals that the behaviour of the absolute value of the relative
+error diﬀers vastly for the two elements. Clearly, the BDM element outperforms the
+MINI element in the Darcy regime by several decades of magnitude, whereas in the
+Stokes regime the performance of the MINI element is superior. This implicates that
+it is impossible to clearly tell which element is superior for the Brinkman ﬂow. How-
+ever, usually real-life reservoirs consist mostly of porous stone with scattered vugs
+and cracks. Thus the volume of the Stokes-type regime is often small compared to
+the Darcy regime, implying that the good performance of the BDM element in its
+natural operation conditions might oﬀer signiﬁcant performance increase for the over-
+all simulation. In problems with a greater fraction of void space, such as ﬁlters with
+large free-ﬂow areas separated by permeable thin layers, the Stokes-based elements
+might be a more natural choice.
+5.3. Postprocessing. In this section, we show the necessity of the postprocess-
+ing by comparing the behaviour of both the exact error and the a posteriori estimator
+for the original and the postprocessed pressure. We shall use the same test case as in
+the previous sections. First we choose β = 3.1 for testing the eﬀect of the postpro-
+cessign on the convergence. On the second run we choose β = 1.52 and use the same
+mesh reﬁnement strategy as before to show the necessity of the post-processing for
+the usefulness of the error estimator.
+From the results of Figure 9, it is immediately evident that in the case of a small
+parameter t corresponding to a Darcy-type porous ﬂow the postprocessing procedure
+is of vital importance for the method to work. However, as the viscosity increases the
+weighting of the pressure error changes, and the norm is more tolerable of variations
+in the pressure. Once again, this change in behaviour appears exactly at t = h. As
+regards convergence rate, the non-postprocessed method is able to attain a close-to-
+optimal rate in the Stokes regime, cf. Figure 10. The same pattern is evident also
+with the more irregular test case with β = 1.52 as shown in Figures 11 and 12. When
+in the Darcy regime, the indicator simply does not work in adaptive reﬁnement since
+the pressure solution lacks the necessary extra accuracy. However, when crossing into
+the Stokes regime, convergence starts to occur, and the adaptive procedure achieves
+a rather high rate of convergence. Evidently, postprocessing is vital for the method
+in the Darcy regime. Even though the method seems to work without postprocessing
+in the Stokes regime, one cannot guarantee convergence and thus the method should
+always be used only in conjunction with the postprocessing scheme for the pressure.
+The cost of solving the postprocessed pressure is negligible compared to the total
+workload since the procedure is performed elementwise.
+Note that with postprocessing using the BDM family of elements is more eco-
+nomical than using the RT family with respect to the number of degrees of freedom,
+since we can use initially one order lower approximation for the pressure, and still get
+the same order of polynomial approximation and convergence after the postprocessing
+procedure.
+5.4. Hybridized method. Here we study the convergence of the fully hy-
+bridized method for diﬀerent parameter values using the modiﬁed norm (4.8) and
+the a posteriori estimator (4.13). We employ once again the same exact solution as
+in the other convergence tests with the same values for the regularity parameter β.
+13
+
+[PDF PAGE 14]
+The errors are measured using the modiﬁed norm (4.8).
+First we hybridize all of the edges in Eh.
+As Figures 13 to 16 clearly show,
+the hybridized method behaves in an identical manner compared to the standard
+formulation, both in the case of a regular and an irregular exact solution. Thus it
+can be concluded that the error induced by hybridizing the jump terms inexactly is
+negligible, and the proposed convergence rates are attained.
+In the second test we divide the domain Ωinto 16 triangular subdomains, and hy-
+bridize the ﬁnite element spaces only on the domain boundaries and employ standard
+H(div)-conforming BDM1 elements in the subdomains. Accordingly, the estimator
+is modiﬁed only on the hybridized faces. Note, that since the hybridization for the
+tangential jumps is not exact, the system of equations for the domain decomposition
+method diﬀers from the one for the fully hybridized method, since we are using the
+original bilinear form (3.9) in the subdomains. As is evident from Figures 17 to 20,
+we have the correct convergence for the hybridized domain decomposition method,
+too.
+Lastly, we investigate the condition number of the Schur complement matrix (4.16)
+for β = 3.1 and values of t ranging from t = 0 to t = 103. The total number of de-
+grees of freedom is kept approximately constant, whilst the number of the subdomains
+in the domain decomposition method is varied. The subdomains are approximately
+equal in size. As is evident from Figure 21, in the Darcy regime the condition number
+is rather insensitive to the value of the parameter t, however as t is increased and
+we pass to the Stokes regime the condition number grows as t2. Furthermore, in the
+Darcy regime we observe an increasing condition number related to the size of the
+subdomain Ωi as diam(Ωi)−1, as one would expect.
+5.5. Pressure driven ﬂow in a channel. A viscous ﬂow in a narrow channel
+driven by a pressure drop gives us a test case for which the exact solution is known.
+The ﬂow is driven by a linear pressure drop with no-slip boundary conditions for t > 0.
+For the Darcy case t = 0, only the normal component of the velocity vanishes on the
+boundary.
+We will test the convergence with Nitsche’s method for the tangential
+boundary condition with adaptive mesh reﬁnement. Denote by Eh,uτ the collection of
+edges residing on the part of the boundary Γuτ ⊂∂Ωon which we set the tangential
+velocity. To set the tangential velocity we then add the term
+t2
+X
+E∈Eh,uτ
+{ α
+hE
+⟨uτ, vτ⟩E −⟨∂u
+∂n , vτ⟩E −⟨∂v
+∂n, uτ⟩E}
+(5.4)
+to the bilinear form ah(· , · ). The loading is augmented by the term
+t2
+X
+E∈Eh,uτ
+{ α
+hE
+⟨uD,τ, vτ⟩E −⟨∂v
+∂n, uD,τ⟩E}.
+(5.5)
+in which uD denotes the velocity boundary condition. Thus, in the limit t = 0 a
+standard Darcy problem with Dirichlet normal boundary conditions is solved. Finally,
+the error estimator (3.33) is modiﬁed by adding the corresponding boundary face
+terms to the estimator.
+In the unit square we take the pressure to be p = −x + 1
+2. Then zero boundary
+conditions for the velocity for y = 0 and y = 1 give the exact solution u = (u, 0), with
+the x-directional velocity given by
+u =
+(
+(1 + e1/t −e(1−y)/t −ey/t)/(1 + e1/t),
+t > 0
+1,
+t = 0.
+(5.6)
+14
+
+[PDF PAGE 15]
+As Figures 22 through 26 demonstrate, the adaptive process is able to catch the
+boundary layer eﬀectively in the case where no-slip boundary conditions are desired on
+the boundary, leading to nearly identical converge rates for diﬀerent parameter values
+as indicated by Figure 27. Note, that as the mesh is reﬁned on the edges, the problem
+changes numerically to a Stokes-type problem near the boundary since the mesh size
+h drops locally below the parameter t. Diﬀerent boundary conditions between porous
+media and free-ﬂow regions are discussed from a more physical viewpoint in e.g. [18].
+5.6. Example with realistic material parameters. In this ﬁnal section we
+consider the Society of Petroleum Engineers test case SPE10 [13] with realistic porosity
+and permeability data for a heteregeneous oil reservoir. Following [34], we make the
+common choice ˜µ = µ. We consider a single layer ﬂow as a two-dimensional ﬂow
+problem. For the outﬂow quantities to have meaningful units, we assume a thickness
+of 2 ft for the layer. The dimensions of the problem are 2200 × 1200 ft, the ﬂuid is
+chosen as e.g. water with a viscosity of 1 cP. The ﬂow is driven by a pressure on
+the left-hand side of the domain. The top and bottom boundaries have a no-ﬂow
+boundary condition. To demonstrate the eﬀect of the Brinkman term to the ﬂow, we
+modify the permeability data by adding a rectangular streak of very high permeability
+with the dimensions 1100 × 20 ft in the middle of the domain. The advantage of the
+Brinkman model is the ability to model cracks or vugs by simply assigning a very
+high (or inﬁnite) permeability to these parts of the domain.
+In the numerical tests the performance of the a posteriori estimator for adaptive
+reﬁnement with extremely heterogenous data with vast diﬀerences in magnitude is
+studied. We start all of the computations from a coarse triangulation of the domain
+with 328 triangles and 1352 total degrees of freedom. This results in an initial element
+diameter of approximately 150 ft. In our tests we employ layer 68 from the SPE10
+dataset, and assume the permeability to be as in equation (2.3).
+In the ﬁrst test case we consider the original dataset.
+In addition, we add a
+streak with a very high permeability of 106 Darcy representing e.g. a gravel-ﬁlled
+crack inside the domain in two slightly diﬀerent orientations, cf. Figure 28. We also
+compute the net ﬂow exiting the domain through the right boundary. We choose a
+simple reﬁnement strategy in which we always reﬁne one percent of the elements in
+which the estimator attains the largest values. The edgewise indicators are divided
+evenly to neighbouring elements. The reﬁnements are performed until the limit of
+100 000 degrees of freedom is reached. Figure 29 demonstrates that the a posteriori
+estimator is able to capture the ﬁne details of the non-modiﬁed permeability ﬁeld. In
+Figures 30 and 31 it is clearly visible, how the method is able to ﬁnd the non-piercing
+permeability streak, even if the streak is outside the natural ﬂow path. In particular,
+in Figure 30 it is clearly visible how the ﬂow paths to and from the high permeability
+region are found by the reﬁnement procedure. In Figure 32 we compare the ﬂow rate
+for the diﬀerent permeability conﬁgurations. As can be seen, the ﬂow rate is stabilized
+as the mesh reﬁnement procedure proceeds.
+In the second test we modify the permeability ﬁeld by adding a through-domain
+crack 20 feet wide into the domain by extending the streak from the ﬁrst test case
+and we reduce the pressure loading to 1 Pa. The permeability is set to 1015 Darcy in
+the crack – thus modelling in essence a void space. We compare the Brinkman and
+Darcy models. In this case we use a modiﬁed reﬁnement strategy to speed up the
+adaptive process. In the ﬁrst three reﬁnements we reﬁne 15 percent of the elements,
+in the next three 10 percent, followed by 5 percent in the next three and 2 percent in
+all of the subsequent reﬁnements. We stop reﬁning once 100 000 degrees of freedom
+15
+
+[PDF PAGE 16]
+are attained. Clearly Figures 34 and 35 indicate that both for the Darcy (i.e. t = 0)
+and Brinkman models the indicator ﬁnds the piercing crack. However, as can be seen
+from the net ﬂow results on Figure 33, the Darcy model overestimates the ﬂow by
+many orders of magnitude due to the absence of the viscous forces. Also the velocity
+of the ﬂuid grows unnaturally large for the Darcy model, but in the Brinkman model
+the velocity stays reasonable.
+The net ﬂow rate results also clearly indicate how
+the reﬁnement proceeds gradually until the piercing crack is found and the ﬂow rate
+jumps, after which it is again stabilized.
+Overall, simulating ﬁne cracks requires extremely ﬁne mesh around the cracks, as
+demonstrated by the mesh density plots. Thus uniform reﬁnement would yield systems
+too large to practically solve, in particular in 3D. We also investigated the value of the
+ratio
+t
+σKhK for all of the Brinkman simulations. When this ratio is greater than unity,
+we are numerically in the Stokes regime. Clearly, in the case of high permeability
+cracks we obtain ﬂow domains in which we actually move numerically into the Stokes
+regime in the Brinkman model when modelling fractures and cracks.
+6. Conclusions. We were able to numerically demonstrate the theoretical re-
+sults for the Darcy-based method of [27] for solving the Brinkman equation. Further-
+more a hybridization technique was introduced for the whole system, which might
+prove useful for handling very large systems with the domain decomposition method.
+The hybridized method was also shown, both theoretically and numerically, to possess
+the same convergence properties as the original problem for all values of the parameter
+t. We also demonstrated the performance of the a posteriori estimator by applying it
+successfully to adaptive mesh reﬁnement, and compared the Brinkman model to the
+Darcy model in the framework of an oil reservoir simulation.
+16
+
+[PDF PAGE 17]
+Figure 1.
+Relative error in the mesh
+dependent norm. Uniform reﬁnement for a
+smooth solution β = 3.1.
+Figure 2.
+Converge rate for diﬀerent
+values of t. Uniform reﬁnement for a smooth
+solution β = 3.1.
+Figure 3.
+Relative error in the mesh
+dependent norm. Uniform reﬁnement for an
+irregular solution β = 1.52.
+Figure 4.
+Converge rate for diﬀerent
+values of t. Uniform reﬁnement for an irreg-
+ular solution β = 1.52.
+Figure 5.
+Relative error in the mesh
+dependent. Adaptive reﬁnement for an irreg-
+ular solution β = 1.52.
+Figure 6.
+Converge rate for diﬀerent
+values of t. Adaptive reﬁnement for an irreg-
+ular solution β = 1.52.
+17
+
+[PDF PAGE 18]
+Figure 7.
+Relative error in the mesh
+dependent norm. Uniform reﬁnement for a
+smooth solution β = 3.1.
+Figure 8.
+Converge rate for diﬀerent
+values of t. Uniform reﬁnement for a smooth
+solution β = 3.1.
+Figure 9.
+Relative error in the mesh
+dependent norm without postprocessing. Uni-
+form reﬁnement for β = 3.1.
+Figure 10. Converge rate for diﬀerent
+values of t without postprocessing. Uniform
+reﬁnement for β = 3.1.
+Figure
+11.
+Relative
+error
+in
+the
+mesh dependent norm without postprocess-
+ing. Adaptive reﬁnement for β = 1.52.
+Figure 12. Converge rate for diﬀerent
+values of t without postprocessing. Adaptive
+reﬁnement for β = 1.52.
+18
+
+[PDF PAGE 19]
+Figure 13. Relative error in the mesh
+dependent norm for the hybridized method
+with uniform reﬁnement and β = 3.1.
+Figure 14. Converge rate for diﬀerent
+values of t for the hybridized method with β =
+3.1.
+Figure 15. Relative error in the mesh
+dependent norm for the hybridized method
+with uniform reﬁnement and β = 1.52.
+Figure 16. Converge rate for diﬀerent
+values of t for the hybridized method with β =
+1.52.
+Figure 17. Relative error in the mesh
+dependent norm for the domain decomposi-
+tion with 16 subdomains and β = 3.1.
+Figure 18. Converge rate for diﬀerent
+values of t for the domain decomposition with
+16 subdomains and β = 3.1.
+19
+
+[PDF PAGE 20]
+Figure 19. Relative error in the mesh
+dependent norm for the domain decomposi-
+tion with 16 subdomains and β = 1.52.
+Figure 20. Converge rate for diﬀerent
+values of t for the domain decomposition with
+16 subdomains and β = 1.52.
+Figure 21. Condition number for several subdomain divisions for diﬀerent values of t.
+20
+
+[PDF PAGE 21]
+Figure 22. Final mesh after adaptive
+reﬁnement, t = 0.5
+Figure 23. Final mesh after adaptive
+reﬁnement, t = 0.2
+Figure 24. Final mesh after adaptive
+reﬁnement, t = 0.1
+Figure 25. Final mesh after adaptive
+reﬁnement, t = 0.05
+Figure 26. Final mesh after adaptive
+reﬁnement, t = 0.005
+Figure 27.
+Convergence rates of the
+adaptive solution for diﬀerent values of t.
+21
+
+[PDF PAGE 22]
+Figure 28. Original and modiﬁed per-
+meabilities on a logarithmic scale in mD for
+layer 68 of SPE10.
+Figure 29. Flow in the domain with no
+streak.
+Original data from SPE10 dataset,
+layer 68.
+22
+
+[PDF PAGE 23]
+Figure 30. Flow in the domain with a
+horizontal streak.
+Figure 31. Flow in the domain with a
+tilted streak.
+23
+
+[PDF PAGE 24]
+Figure 32. Net ﬂow rates for no streak or one internal streak.
+Figure 33. Net ﬂow rates for the Brinkman and Darcy models with a piercing crack with a
+permeability of 1015 Darcy.
+24
+
+[PDF PAGE 25]
+Figure 34. Flow in the domain with a
+piercing crack, Brinkman model.
+Figure 35. Flow in the domain with a
+piercing crack, Darcy model.
+25
+
+[PDF PAGE 26]
+REFERENCES
+[1] G. Allaire. Homogenization of the Navier-Stokes equations in open sets perforated with tiny
+holes. I. Abstract framework, a volume distribution of holes. Arch. Rational Mech. Anal.,
+113(3):209–259, 1990.
+[2] G. Allaire. Homogenization of the Navier-Stokes equations in open sets perforated with tiny
+holes. II. Noncritical sizes of the holes for a volume distribution and a surface distribution
+of holes. Arch. Rational Mech. Anal., 113(3):261–298, 1990.
+[3] T. Arbogast and H. L. Lehr. Homogenization of a Darcy-Stokes system modeling vuggy porous
+media. Comput. Geosci., 10(3):291–302, 2006.
+[4] D. N. Arnold, F. Brezzi, and M. Fortin.
+A stable ﬁnite element for the Stokes equations.
+Calcolo, 21(4):337–344 (1985), 1984.
+[5] M. Baudoiun Fraejis de Veubeke. Displacement and equilibrium models in the ﬁnite element
+method. In Stress analysis, (O.C Zienkiewics and G.S, pages 145–197. Wiley, 1965.
+[6] D. Braess. Finite Elemente: Theorie, schnelle Löser und Anwendungen in der Elastizitätsthe-
+orie. Springer-Verlag, 1992, 1997.
+[7] F. Brezzi, J. Douglas, Jr., R. Durán, and M. Fortin. Mixed ﬁnite elements for second order
+elliptic problems in three variables. Numer. Math., 51(2):237–250, 1987.
+[8] F. Brezzi and M. Fortin.
+Mixed and hybrid ﬁnite element methods, volume 15 of Springer
+Series in Computational Mathematics. Springer-Verlag, New York, 1991.
+[9] E. Burman and P. Hansbo. Stabilized Crouzeix-Raviart element for the Darcy-Stokes problem.
+Numer. Methods Partial Diﬀerential Equations, 21(5):986–997, 2005.
+[10] E. Burman and P. Hansbo. Edge stabilization for the generalized Stokes problem: a continuous
+interior penalty method.
+Comput. Methods Appl. Mech. Engrg., 195(19-22):2393–2410,
+2006.
+[11] E. Burman and P. Hansbo. A uniﬁed stabilized method for Stokes’ and Darcy’s equations. J.
+Comput. Appl. Math., 198(1):35–51, 2007.
+[12] E. Burman.
+Pressure projection stabilizations for Galerkin approximations of Stokes’ and
+Darcy’s problem. Numer. Methods Partial Diﬀerential Equations, 24(1):127–143, 2008.
+[13] M. A. Christie and M. J. Blunt. Tenth SPE comparative solution project: A comparison of
+upscaling techniques. SPE Reservoir Eval. Eng., 4(4):308–317, 2001.
+[14] B. Cockburn, J. Gopalakrishnan, and R. Lazarov.
+Uniﬁed hybridization of discontinuous
+Galerkin, mixed, and continuous Galerkin methods for second order elliptic problems.
+SIAM J. Numer. Anal., 47(2):1319–1365, 2009.
+[15] C. D’Angelo and P. Zunino. A ﬁnite element method based on weighted interior penalties for
+heterogeneous incompressible ﬂows. SIAM Journal on Numerical Analysis, 47(5):3990–
+4020, 2009.
+[16] H. Egger. A class of hybrid mortar ﬁnite element methods for interface problems with non-
+matching meshes. AICES-2009-2, Preprint, 2009.
+[17] M. Ehrhardt, J. Fuhrmann, and A. Linke. A model of an electrochemical ﬂow cell with porous
+layer. Preprint 1437, Weierstrass Institute for Applied Analysis and Stochastics, 2009.
+[18] M. Ehrhardt, J. Fuhrmann, E. Holzbecher, and A. Linke. Mathematical modeling of channel -
+porous layer interfaces in pem fuel cells, Conference on Fundamentals and Developments
+of Fuel Cells, University of Nancy, 10-12th December, 2008, Nancy, France. ISBN 978-2-
+7466-0413-1.
+[19] E. Gekeler. Mathematische Methoden zur Mechanik. Springer-Verlag, Berlin Heidelberg, 2006.
+[20] M. Griebel and M. Klitz. Homogenization and numerical simulation of ﬂow in geometries with
+textile microstructures. Multiscale Modeling & Simulation, 8(4):1439–1460, 2010.
+[21] A. Hannukainen, M. Juntunen, and R. Stenberg. Computations with ﬁnite element methods
+for the Brinkman problem. Computational Geosciences, 15:155–166, 2011.
+[22] P. Hansbo and M. Juntunen. Weakly imposed Dirichlet boundary conditions for the Brinkman
+model of porous media ﬂow. Applied Numerical Mathematics, 59(6):1274–1289, 2009.
+[23] O. Iliev, R. Lazarov, and J. Willems. Discontinuous Galerkin subgrid ﬁnite element method
+for heterogeneous Brinkman’s equations. In I. Lirkov, S. Margenov, and J. Wasniewski,
+editors, Large-Scale Scientiﬁc Computing, volume 5910 of Lecture Notes in Computer
+Science, pages 14–25. Springer Berlin / Heidelberg, 2010.
+[24] M. Juntunen and R. Stenberg. Analysis of ﬁnite element methods for the Brinkman problem.
+Calcolo, 47(3):129–147, 2010.
+[25] G. Kanschat and B. Rivière. A strongly conservative ﬁnite element method for the coupling of
+Stokes and Darcy ﬂow. Journal of Computational Physics, 229(17):5933 – 5943, 2010.
+[26] T. Kaya and J. Goldak. Three-dimensional numerical analysis of heat and mass transfer in
+heat pipes. Heat and Mass Transfer, 43:775–785, 2007.
+26
+
+[PDF PAGE 27]
+[27] J. Könnö and R. Stenberg. Analysis of H(div)-conforming ﬁnite elements for the Brinkman
+problem. Math. Models Methods Appl. Sci., DOI 10.1142/S0218202511005726, to appear
+2011.
+[28] J. Könnö and R. Stenberg. Non-conforming ﬁnite element method for the Brinkman problem.
+In G. Kreiss, P. Lötstedt, A. Målqvist, and M. Neytcheva, editors, Numerical Mathematics
+and Advanced Applications 2009, pages 515–522. Springer Berlin Heidelberg, 2010.
+[29] T. Lévy. Loi de Darcy ou loi de Brinkman? C. R. Acad. Sci. Paris Sér. II Méc. Phys. Chim.
+Sci. Univers Sci. Terre, 292(12):871–874, Erratum (17):1239, 1981.
+[30] C. Lovadina and R. Stenberg. Energy norm a posteriori error estimates for mixed ﬁnite element
+methods. Math. Comp., 75:1659–1674, 2006.
+[31] K. A. Mardal, X-C. Tai, and R. Winther. A robust ﬁnite element method for Darcy-Stokes
+ﬂow. SIAM J. Numer. Anal., 40(5):1605–1631, 2002.
+[32] J.-C. Nédélec. A new family of mixed ﬁnite elements in R3. Numer. Math., 50(1):57–81, 1986.
+[33] J. Nitsche. Über ein Variationsprinzip zur Lösung von Dirichlet-Problemen bei Verwendung
+von Teilräumen, die keinen Randbedingungen unterworfen sind. Abh. Math. Sem. Univ.
+Hamburg, 36:9–15, 1971. Collection of articles dedicated to Lothar Collatz on his sixtieth
+birthday.
+[34] P. Popov, Y. Efendiev, and G. Qin. Multiscale modeling and simulations of ﬂows in naturally
+fractured Karst reservoirs. Commun. Comput. Phys., 6(1):162–184, 2009.
+[35] K. R. Rajagopal.
+On a hierarchy of approximate models for ﬂows of incompressible ﬂuids
+through porous solids. Math. Models Methods Appl. Sci., 17(2):215–252, 2007.
+[36] R. Stenberg. On some techniques for approximating boundary conditions in the ﬁnite element
+method. J. Comput. Appl. Math., 63(1-3):139–148, 1995.
+[37] X. Xie, J. Xu, and G. Xue. Uniformly-stable ﬁnite element methods for Darcy-Stokes-Brinkman
+models. J. Comput. Math., 26(3):437–455, 2008.
+[38] X. Xu and S. Zhang. A new divergence-free interpolation operator with applications to the
+darcy–stokes–brinkman equations. SIAM Journal on Scientiﬁc Computing, 32(2):855–874,
+2010.
+27

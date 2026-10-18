@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "53",
+  "round": 0,
+  "reviewed_items": [
+    "lem-sipdg-physical-simplex-trace-green",
+    "def-sipdg-jump-average-convention",
+    "def-sipdg-bilinear-form-and-energy-norm",
+    "lem-sipdg-discrete-flux-inverse-bound",
+    "lem-sipdg-energy-seminorm-is-a-norm",
+    "lem-sipdg-boundedness-augmented-norm",
+    "thm-sipdg-exact-consistency",
+    "lem-sipdg-adjoint-consistency-h2",
+    "thm-sipdg-coercivity-large-penalty",
+    "thm-sipdg-l2-error-under-adjoint-regularity",
+    "thm-sipdg-energy-error-estimate",
+    "ex-sipdg-broken-function-is-not-h1",
+    "ex-sipdg-one-dimensional-interior-jump",
+    "ex-sipdg-small-penalty-loses-coercivity"
+  ],
+  "reviewed_pages": [
+    "discontinuous-galerkin-methods",
+    "discontinuous-galerkin-methods-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Reviewed both complete pages, all 14 assigned items, their 13 declared published item suppliers, and the NA-28/29/30 design interfaces. The core conditional SIPDG claims and calculations are sound. Same-page repairs are identified below, but owner reconciliation is required before acceptance because the approved designs disagree on page prerequisites and the specified NA-30 energy-error route lacks its bounded-extension premise. The cited full treatment uses a regular comparison space with face-flux control and states the s>1/2 duality condition ([Guermond, Chapter 38](https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf)).",
+  "findings": [
+    {
+      "id": "lem-sipdg-energy-seminorm-is-a-norm",
+      "type": "prerequisite",
+      "reason": "Step 2.1 [F5] uses lem-sipdg-physical-simplex-trace-green, whose statement assumes Countable Choice, but this lemma's Statement and deps do not carry it. Request one local repair: state the Countable Choice premise and add def-countable-choice, or replace [F5] with a complete choice-free proof of the special simplex identity used. The direct consumer thm-sipdg-coercivity-large-penalty and indirect consumer thm-sipdg-energy-error-estimate already state Countable Choice."
+    },
+    {
+      "id": "thm-sipdg-coercivity-large-penalty",
+      "type": "prerequisite",
+      "reason": "Step 1.1 uses L2 integral Cauchy–Schwarz and finite-face-sum Cauchy–Schwarz, but neither thm-holder-inequality-for-integrals nor thm-cauchy-schwarz-and-the-euclidean-norm appears in deps or Facts. Request both suppliers and explicit fact citations, or give the inequalities directly. Both published supplier arguments were inspected."
+    },
+    {
+      "id": "ex-sipdg-broken-function-is-not-h1",
+      "type": "prerequisite",
+      "reason": "Verification step 2.1 uses the L2 integral Cauchy–Schwarz inequality to bound the test pairing, but Holder's inequality is not declared in deps or Facts. Add thm-holder-inequality-for-integrals and cite its L2 case, or prove that bound locally."
+    },
+    {
+      "id": "def-sipdg-bilinear-form-and-energy-norm",
+      "type": "local",
+      "reason": "The Definition says facet integrals use a 'counting-measure convention in dimension d−1' and then says that for d≥2 this is ordinary facet surface measure. Clarify that the d≥2 definition uses (d−1)-dimensional surface measure, reserving counting measure for the separate one-dimensional examples. The proofs consistently use surface measure."
+    },
+    {
+      "id": "discontinuous-galerkin-methods",
+      "type": "scope",
+      "reason": "The canonical plan-spec NA-33 row and current A page require only variational-crimes-and-strang-lemmas (NA-30), while the NA-33 entries in plan-numerical-analysis-track and plan-numerical-spatial-track list NA-28, NA-29, and NA-30 as prerequisites. NA-28 and NA-29 pages are now published, and the relevant supplier claims used here were inspected. The owner must reconcile the design sources and decide whether the current page prerequisite list is authoritative or incomplete; this cannot be settled by local source repair."
+    },
+    {
+      "id": "thm-sipdg-energy-error-estimate",
+      "type": "scope",
+      "reason": "The approved NA-33 proof route says to apply NA-30. The published thm-second-strang-lemma-for-nonconforming-galerkin requires a bounded extension to X_h=V+V_h with a common comparison norm. This SIPDG form is defined on D_h and shown bounded in DG* there; no extension on all of H0^1+V_h is proved, and general H0^1 functions need not have the L2 flux traces defining D_h. The current direct energy estimate itself is valid, so the owner must approve that route or supply the missing bounded-extension result and hypotheses. Guermond Chapter 38 also works on a regular comparison space with face-flux control."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-sipdg-discrete-flux-inverse-bound",
+      "decision": "accept",
+      "reason": "Its L2(F) trace and face integrals use surface measure consistently with the proposed clarification."
+    },
+    {
+      "id": "lem-sipdg-energy-seminorm-is-a-norm",
+      "decision": "repair",
+      "reason": "Its surface-measure use is consistent; its missing Countable Choice premise is separately identified for local repair."
+    },
+    {
+      "id": "lem-sipdg-boundedness-augmented-norm",
+      "decision": "accept",
+      "reason": "All facet pairings and L2(F) norms use surface measure consistently."
+    },
+    {
+      "id": "thm-sipdg-exact-consistency",
+      "decision": "accept",
+      "reason": "Its Green identity and facet flux pairings use surface measure consistently."
+    },
+    {
+      "id": "lem-sipdg-adjoint-consistency-h2",
+      "decision": "accept",
+      "reason": "Its Green identity and facet flux pairings use surface measure consistently."
+    },
+    {
+      "id": "thm-sipdg-coercivity-large-penalty",
+      "decision": "repair",
+      "reason": "It already carries Countable Choice as required by the energy-norm lemma; its missing Cauchy–Schwarz suppliers are separately identified for local repair."
+    },
+    {
+      "id": "thm-sipdg-l2-error-under-adjoint-regularity",
+      "decision": "accept",
+      "reason": "It carries Countable Choice and uses the stated surface measure consistently."
+    },
+    {
+      "id": "thm-sipdg-energy-error-estimate",
+      "decision": "escalate",
+      "reason": "Its direct proof is valid and carries Countable Choice, but the approved NA-30 route requires owner reconciliation as detailed in the scope finding."
+    },
+    {
+      "id": "discontinuous-galerkin-methods",
+      "decision": "escalate",
+      "reason": "Its current NA-30-only prerequisite conflicts with the detailed NA-28/29/30 designs."
+    },
+    {
+      "id": "discontinuous-galerkin-methods-examples",
+      "decision": "escalate",
+      "reason": "This companion page requires the A page, so its page-level disposition depends on resolution of the A-page prerequisite conflict."
+    },
+    {
+      "id": "ex-sipdg-broken-function-is-not-h1",
+      "decision": "repair",
+      "reason": "Its one-dimensional example is unaffected by the d≥2 surface-measure clarification; its missing Holder dependency is separately identified."
+    },
+    {
+      "id": "ex-sipdg-one-dimensional-interior-jump",
+      "decision": "accept",
+      "reason": "It uses the separately stated one-dimensional counting-measure convention, which the clarification preserves."
+    },
+    {
+      "id": "ex-sipdg-small-penalty-loses-coercivity",
+      "decision": "accept",
+      "reason": "It uses the separately stated one-dimensional counting-measure convention, which the clarification preserves."
+    }
+  ]
+}

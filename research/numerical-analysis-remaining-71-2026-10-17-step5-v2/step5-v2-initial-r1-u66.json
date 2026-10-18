@@ -1,0 +1,65 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "66",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "thm-phase-field-sav-modified-energy-law",
+      "model": "gpt-6-luna",
+      "context_sha256": "969b051f280e526eeeba8725ca6f14a2f4f3d215b626f980a0a55c31738884a6",
+      "outcome": "false_positive",
+      "reason": "The algorithm begins 'Use either Cahn–Hilliard realization of [[def-phase-field-discrete-realizations]]'. That definition explicitly starts its finite-volume branch from a 'finite connected cell-face mesh'; the cell adjacency graph is defined by interior faces in def-fv-admissible-cell-face-mesh. Its interval branch uses N cells, h=L/N and centers indexed from 1 to N, so N is a positive integer; N=0 does not define that realization. Thus the kernel lemma's connected-graph and N>=1 conditions are inherited, and F2 legitimately makes v constant in step 1.1. Pairing the first homogeneous equation with 1 makes v mean zero, hence zero. There is no omitted connectivity hypothesis to repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-phase-field-sav-modified-energy-law",
+      "disposition": "unaffected",
+      "post_sha256": "6e25c853505b331c2fbb1ff010c728e4c08b9f762dd94ec6552411b32a25b490",
+      "review_context_sha256": "44b8ff0a2b572d7b6f6899f88b137176753e1258a65c4f82ebc8768ff532c012",
+      "reason": "Checked the complete theorem, algorithm, realization definition, kernel lemma proof, owning proof contract and page interface. The inherited connectedness licenses the constant-kernel inference. In the difference system, the three pairings give kappa<A_h v,v>+2s^2+M*tau<A_h nu,nu>=0; positivity and the conserved mean force v=s=nu=0, proving invertibility of the square system. For an actual step, self-adjointness, A_h 1=0, polarization of the stiffness form and 2r_new*delta_r=r_new^2-r_old^2+delta_r^2 give exactly the stated identity and nonnegative dissipation. The one-cell case A_h=0 is included, and no relation between r_new and the physical potential is imposed. No choice axiom is needed. The item guard equals the assignment's before guard; no item, contract or page repair was made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair",
+    "mathematical_basis": "Familiar finite-dimensional linear algebra and quadratic-energy identities, checked directly from the local arguments. No external source text was consulted or claimed as read.",
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-analysis-remaining-71-2026-10-17 --items thm-phase-field-sav-modified-energy-law",
+        "exit_code": 0,
+        "result": "Captured both review hashes immediately after completing the mathematical review."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-phase-field-sav-modified-energy-law.md --json",
+        "exit_code": 0,
+        "result": "One proof checked; zero failures."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-66.proof-contracts.json --items thm-phase-field-sav-modified-energy-law --json",
+        "exit_code": 0,
+        "result": "The registered one-cell SAV fixture passed; this bounded computation is not a proof of the general theorem."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-phase-field-sav-modified-energy-law.md --json",
+        "exit_code": 0,
+        "result": "One file checked; zero errors and zero warnings."
+      }
+    ],
+    "propagation": "No Statement or Definition changed, no prerequisite was created, and no downstream examination is triggered. No published-consumer defect was discovered and no canonical defect-ledger or published-ledger change is proposed.",
+    "proof_layout": "No item paths changed, so the required post-edit proof-layout invocation has no subjects.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection of this unchanged-item adjudication; no judgments, stamps, certificates or round state were written."
+  }
+}

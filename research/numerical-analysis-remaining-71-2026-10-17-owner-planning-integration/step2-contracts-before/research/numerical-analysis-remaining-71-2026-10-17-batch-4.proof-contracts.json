@@ -1,0 +1,2403 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "4",
+  "level": 0,
+  "scheduling_input_sha256": "a9c2867eaa03cf0691cfe311c2db2df06f2bb75d230effbc8a099369ec33749c",
+  "scope": [
+    "def-na-best-polynomial-uniform-error",
+    "lem-na-extrema-sign-block-polynomial",
+    "lem-na-polynomial-alternating-signs-force-root-count",
+    "lem-na-polynomial-coefficient-bound-from-fixed-nodes",
+    "lem-na-polynomial-interpolation-alternating-weight-annihilator",
+    "lem-na-reduced-rational-representation-unique",
+    "def-na-weighted-rational-minimax-family",
+    "lem-na-polynomial-remez-system-invertible",
+    "thm-na-best-polynomial-approximation-exists",
+    "thm-na-polynomial-equioscillation-certificate",
+    "alg-na-minimax-approximation-and-remez-algorithms",
+    "lem-na-rational-perturbation-space",
+    "thm-na-best-weighted-rational-approximation-exists",
+    "thm-na-polynomial-alternation-necessity",
+    "cor-na-best-polynomial-approximation-unique",
+    "thm-na-polynomial-remez-budget-termination",
+    "thm-na-weighted-rational-alternation-characterization",
+    "alg-na-weighted-rational-remez-exchange",
+    "thm-na-weighted-rational-remez-budget-termination",
+    "ex-na-remez-zero-degree-equioscillation-certificate",
+    "cex-na-defective-rational-approximation-naive-count",
+    "ex-na-degree-one-minimax-of-square"
+  ],
+  "contracts": {
+    "def-na-best-polynomial-uniform-error": {
+      "kind": "definition",
+      "risk": "medium",
+      "proof_strategy": "not-applicable",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The zero polynomial is included and its stated identity/bound holds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Only fixed finite data or a single witness guaranteed by the stated existence theorem is used; no axiom of choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of def-na-best-polynomial-uniform-error is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of def-na-best-polynomial-uniform-error is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-extrema-sign-block-polynomial": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) with its order\n([[def-real-order]]).\n\nA subset $I \\subseteq \\mathbb{R}$ is **order-convex** when\n\n$$x, y \\in I \\text{ and } x \\le z \\le y \\;\\Longrightarrow\\; z \\in I .$$\n\nThe **intervals** of $\\mathbb{R}$ are the sets of the following nine forms, where\n$a, b \\in \\mathbb{R}$:\n\n| | bounded forms | | one-sided and full forms |\n|---|---|---|---|\n| $(a,b)$ | $\\{x : a < x < b\\}$ | $(a,\\infty)$ | $\\{x : a < x\\}$ |\n| $[a,b]$ | $\\{x : a \\le x \\le b\\}$ | $[a,\\infty)$ | $\\{x : a \\le x\\}$ |\n| $[a,b)$ | $\\{x : a \\le x < b\\}$ | $(-\\infty,b)$ | $\\{x : x < b\\}$ |\n| $(a,b]$ | $\\{x : a < x \\le b\\}$ | $(-\\infty,b]$ | $\\{x : x \\le b\\}$ |\n| | | $(-\\infty,\\infty)$ | $\\mathbb{R}$ |\n\nAn interval is **open** when both of its written endpoints are excluded, that is\nfor the forms $(a,b)$, $(a,\\infty)$, $(-\\infty,b)$ and $(-\\infty,\\infty)$; it is\n**closed** when both written endpoints are included, that is for $[a,b]$,\n$[a,\\infty)$, $(-\\infty,b]$ and $(-\\infty,\\infty)$. The forms $[a,b)$ and\n$(a,b]$ are **half-open**.\n\n**The symbols $\\pm\\infty$ are notation and not elements of $\\mathbb{R}$.** They\nmark which side carries no endpoint condition at all; the five forms in the right\ncolumn are defined by the displayed conditions on $x$ alone, and no arithmetic is\never performed with $\\infty$. This is the same refusal to extend $\\mathbb{R}$\nsilently that [[rem-sup-conventions]] records for suprema.\n\n**Every one of the nine forms is order-convex.** Each is defined by a conjunction\nof at most two conditions, each of the shape $a < x$, $a \\le x$, $x < b$ or\n$x \\le b$, and each such condition is inherited by an intermediate point: if\n$a < x$ and $x \\le z$ then $a < z$, and if $z \\le y$ and $y < b$ then $z < b$,\nby transitivity of the order ([[def-ordered-field]]). Applying this to whichever\none or two conditions define the form in question gives $z \\in I$ whenever\n$x, y \\in I$ and $x \\le z \\le y$.\n\n**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly\nwhen it is of one of the four forms in the left column: for those, $a$ is a lower\nbound and $b$ an upper bound. The other five forms are unbounded, on the side or\nsides written with $\\infty$; the verification is in the remarks below.\n\n**Nondegeneracy.** An interval is **degenerate** when it has at most one element,\nand **nondegenerate** when it has at least two. For the four bounded forms with\nendpoints $a$ and $b$:\n\n- $[a,b]$ is nonempty exactly when $a \\le b$, and it is nondegenerate exactly\n  when $a < b$. It is the singleton $\\{a\\}$ when $a = b$.\n- $(a,b)$, $[a,b)$ and $(a,b]$ are nonempty exactly when $a < b$, and then each\n  is nondegenerate.\n\nThe only assertion here that is not immediate from the defining conditions is\nthat $a < b$ makes $(a,b)$ nonempty with at least two points. It holds because\n$a < (a+b)/2 < b$, which follows from $a < b$ by adding $a$, respectively $b$, to\nboth sides and halving ([[def-ordered-field]]); repeating the halving inside\n$(a, (a+b)/2)$ produces a second point.\n\n**Closed bounded intervals.** These are the sets $[a,b]$ with $a \\le b$, which is\nexactly the condition making them nonempty. They are the intervals the nested\ninterval property is stated for, and the phrase *closed bounded interval* always\ncarries the hypothesis $a \\le b$ in this library.\n\n**Length.** The **length** of a bounded interval presented by its endpoints\n$a \\le b$ is\n\n$$\\ell = b - a \\;\\ge\\; 0 .$$\n\nLength is attached to the presentation by endpoints and is not recovered from the\nset: $(a,b)$, $[a,b)$ and $(a,b]$ are all empty when $a = b$, and so is\n$(c,c)$ for any other $c$, while each of these presentations has length $0$, so\nnothing inconsistent arises; but the endpoints are named explicitly at every\npoint where a length is used in this library, and never inferred from the set.\nUnbounded intervals are assigned no length.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Continuity and attainment in [F2] show that $S_+\\cup S_-$ is nonempty and compact: the maximum of $|e|$ is attained and $E>0$, while each level set is closed in the compact interval [F1]. If one of $S_+$ or $S_-$ is empty, take $h=1$ or $h=-1$ according to the sign of the nonempty set; this has degree zero and the required sign.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose both sets are nonempty. Their product is a closed bounded subset of $\\mathbb R^2$, so [F2] applied to the continuous distance function gives a minimum separation $\\delta=\\min\\{|x-y|:x\\in S_+,\\,y\\in S_-\\}>0$; it is positive because the two compact sets are disjoint. Starting at the leftmost point of $S_+\\cup S_-$, repeatedly take the first point of the opposite-sign set to the right and the last current-sign point before it. These extrema exist because the level sets are compact, and each transition gives an open gap of length at least $\\delta$ containing no point of $S_+\\cup S_-$. The process therefore has finitely many transitions, each with a distinct ordered gap.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If there were at least $n+1$ transitions, choosing one extremal point from each successive sign run would give $n+2$ ordered alternating points, contrary to the hypothesis. Thus the number $k$ of transitions is at most $n$. Choose one point $\\xi_j$ in each transition gap and set $h(x)=c\\prod_{j=1}^{k}(x-\\xi_j)$, where $c\\in\\{-1,1\\}$ is chosen so that $h$ has the sign of $e$ on the first run. The polynomial has degree $k\\le n$, has no zero on $S_+\\cup S_-$, and changes sign exactly when the extremal sign changes. Hence $e(x)h(x)>0$ on the entire extremal set.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis $E=|e|_infty>0$ excludes a zero residual and ensures an active-extrema set exists (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The compact sign sets determine finitely many transition gaps; the proof chooses one point in each gap after bounding the number of transitions by $n$ (steps 1.2–2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-extrema-sign-block-polynomial is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-extrema-sign-block-polynomial is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-polynomial-alternating-signs-force-root-count": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], $p$ is continuous on each $[x_i,x_{i+1}]$. Since the endpoint values are nonzero and have opposite signs, [F2] gives a root $z_i\\in(x_i,x_{i+1})$ for every $0\\le i\\le n$. These open intervals are pairwise disjoint, so the $z_i$ are $n+1$ distinct real roots.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The $n+1$ distinct roots from step 1.1 contradict [F3], because $p$ is nonzero and has degree at most $n$. Therefore the assumed alternating nonzero values cannot occur.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypothesis supplies an ordered list of distinct real nodes; for degree zero it still has positive cardinality (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The polynomial is assumed nonzero; the zero polynomial cannot serve as a counterexample to the claimed root-count contradiction (statement; step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-na-polynomial-alternating-signs-force-root-count has no interval or geometric degeneracy parameter; it is an algebraic statement about fixed polynomial data."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-na-polynomial-alternating-signs-force-root-count has no interval endpoints; its domain is the stated real nodes or coefficient pairs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only fixed finite data or a single witness guaranteed by the stated existence theorem is used; no axiom of choice is invoked (step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-polynomial-alternating-signs-force-root-count is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-polynomial-alternating-signs-force-root-count is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-polynomial-coefficient-bound-from-fixed-nodes": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(X)=\\sum_{k=0}^{n}a_kX^k$. The list, rather than the function it induces, is the polynomial object. Its **evaluation** at $x\\in\\mathbb R$ is the real number $p(x):=\\sum_{k=0}^{n}a_kx^k$.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Thus degree and leading coefficient are defined from the displayed finite list, without asserting that distinct formal polynomials define distinct functions. The conventions for finite sums and integer powers used in the evaluation are recorded in [[def-finite-sum]], [[def-integer-power]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Each denominator $t_j-t_k$ is nonzero, so every $L_j$ is a polynomial of degree at most $n$ and $L_j(t_i)$ is $1$ for $i=j$ and $0$ otherwise. The polynomial $p-\\sum_jp(t_j)L_j$ has degree at most $n$ and vanishes at the $n+1$ distinct nodes; [F2] makes it the zero polynomial. This also covers $n=0$, when $L_0=1$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Comparing the coefficients of $x^k$ in the identity of step 1.1 gives $c_k=\\sum_jp(t_j)\\ell_{jk}$. The triangle inequality yields the stated coefficient bound.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated polynomial/rational class includes its zero element, so the admissible family is nonempty (Definition)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero polynomial is included and its stated identity/bound holds (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $n=0$, $L_0=1$ and the interpolation identity holds exactly (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-na-polynomial-coefficient-bound-from-fixed-nodes has no interval or geometric degeneracy parameter; it is an algebraic statement about fixed polynomial data."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-na-polynomial-coefficient-bound-from-fixed-nodes has no interval endpoints; its domain is the stated real nodes or coefficient pairs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The fixed nodes and finite Lagrange products explicitly determine the coefficient bounds (steps 1.1–2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-polynomial-coefficient-bound-from-fixed-nodes is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-polynomial-coefficient-bound-from-fixed-nodes is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-polynomial-interpolation-alternating-weight-annihilator": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Each $w_i\\ne0$. The Lagrange polynomial $L_i(t):=\\omega(t)/((t-x_i)w_i)$ has degree $N+1$ and values $L_i(x_j)=1$ for $j=i$ and $0$ otherwise. Thus $H(t):=\\sum_i g(x_i)L_i(t)$ has degree at most $N+1$ and agrees with $g$ at all $N+2$ nodes. By [F1], $H-g=0$, so $H=g$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The coefficient of $t^{N+1}$ in $L_i$ is $1/w_i$, while that coefficient in $g$ is $0$. Comparing the $t^{N+1}$ coefficients in $H=g$ from step 1.1 proves the displayed sum identity.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The sign of $w_i$ is $(-1)^{N+1-i}$, since exactly the $N+1-i$ factors with $j>i$ are negative. Hence all terms $g(x_i)/w_i$ have one common weak sign when $\\varepsilon(-1)^i g(x_i)\\ge0$. Their sum is $0$ by step 2.1, so every term is $0$, and all $N+2$ values $g(x_i)$ vanish.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Since $g$ has degree at most $N$, its $N+2$ distinct roots in step 3.1 force $g=0$ by [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated polynomial/rational class includes its zero element, so the admissible family is nonempty (Definition)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero polynomial is included and its stated identity/bound holds (step 4.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At $N=0$ there are two nodes and the alternating-weight identity is still a finite two-term sum (steps 1.1–2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-na-polynomial-interpolation-alternating-weight-annihilator has no interval or geometric degeneracy parameter; it is an algebraic statement about fixed polynomial data."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-na-polynomial-interpolation-alternating-weight-annihilator has no interval endpoints; its domain is the stated real nodes or coefficient pairs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only fixed finite data or a single witness guaranteed by the stated existence theorem is used; no axiom of choice is invoked (step 4.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-polynomial-interpolation-alternating-weight-annihilator is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-polynomial-interpolation-alternating-weight-annihilator is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-reduced-rational-representation-unique": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-bezout-identity-for-polynomials",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field and let $f,g\\in F[x]$ be not both zero. Repeated polynomial division terminates at a last nonzero remainder, whose monic associate is $d=\\gcd(f,g)$. There are $A,B\\in F[x]$ such that\n\n$$ Af+Bg=d. $$\n\nMoreover, $d$ divides both $f$ and $g$, and every common divisor of $f$ and $g$ divides $d$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For a nonzero quotient, let $d=\\gcd(p,q)$ from [F1] and put $p_0=p/d$, $q_0=q/d$. Then $Ap+Bq=d$ implies $Ap_0+Bq_0=1$, so no nonconstant polynomial divides both $p_0$ and $q_0$. For the zero quotient, $p=0$ and reducing by $\\gcd(0,q)$ gives $(0,1)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Suppose $p_0/q_0=p_1/q_1$ are nonzero reduced representations. Cross-multiplication gives $p_0q_1=p_1q_0$. By the Bézout identity $Ap_0+Bq_0=1$ from step 1.1, multiplication by $p_1$ shows $p_0$ divides $p_1$; the same argument with the denominator gives $q_0\\mid q_1$. Write $p_1=h p_0$ and $q_1=k q_0$. Cross-multiplication and nonzero $p_0q_0$ give $h=k$. If $h$ were nonconstant, it would divide both $p_1$ and $q_1$, contradicting reduction. Thus $h=k$ is a nonzero constant. The zero case is the reduced pair already identified in step 1.1.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If both positive denominators have coefficient norm $1$, their common scalar from step 2.1 is positive and its multiplication scales the coefficient norm by that scalar. The two norms being $1$ forces the scalar to be $1$, and then the numerators agree as well.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated polynomial/rational class includes its zero element, so the admissible family is nonempty (Definition)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero rational function is handled separately by the reduced pair $(0,1)$ up to scale (statement; step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-reduced-rational-representation-unique has no separate one-element or degree-one parameter case; its stated degree and node hypotheses govern."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-na-reduced-rational-representation-unique has no interval or geometric degeneracy parameter; it is an algebraic statement about fixed polynomial data."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "lem-na-reduced-rational-representation-unique has no interval endpoints; its domain is the stated real nodes or coefficient pairs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The gcd and positive coefficient-norm condition fix the reduced pair up to the specified normalization (steps 1.1–3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-reduced-rational-representation-unique is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-reduced-rational-representation-unique is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-na-weighted-rational-minimax-family": {
+      "kind": "definition",
+      "risk": "medium",
+      "proof_strategy": "not-applicable",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The zero polynomial is included and its stated identity/bound holds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: The type permits $m=0$ or $n=0$; defect and effective perturbation degree remain defined, including the stated zero-function convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Only fixed finite data or a single witness guaranteed by the stated existence theorem is used; no axiom of choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of def-na-weighted-rational-minimax-family is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of def-na-weighted-rational-minimax-family is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-polynomial-remez-system-invertible": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-na-polynomial-alternating-signs-force-root-count",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $p$ be a nonzero real polynomial of degree at most $n$, and\nlet $x_0<\\cdots<x_{n+1}$ be real numbers. The values $p(x_i)$ cannot all be\nnonzero with alternating signs.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-na-best-polynomial-uniform-error",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]\\subset\\mathbb R$ with $a<b$, and let $C(I,\\mathbb R)$ denote the\nreal-valued continuous functions on $I$. For $h\\in C(I,\\mathbb R)$ set\n$\\|h\\|_{\\infty,I}:=\\sup_{x\\in I}|h(x)|$. For $n\\in\\mathbb N_0$, let\n$\\mathcal P_n(I)$ be the restrictions to $I$ of real polynomials of degree at\nmost $n$, including the zero polynomial, and define\n$$E_n(f;I):=\\inf_{p\\in\\mathcal P_n(I)}\\|f-p\\|_{\\infty,I}.$$\nWhen $I=[-1,1]$, this agrees with the published definition\n[[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]].\n\nThese quantities are finite and well-defined. The interval is compact by\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]], so each\ncontinuous difference $f-p$ has a finite maximum absolute value. The\npolynomial space contains $0$, hence the set of errors is nonempty and bounded\nbelow by $0$; completeness of $\\mathbb R$\n([[def-complete-ordered-field]]) supplies its infimum.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Define the linear map $T:\\mathcal P_n(I)\\times\\mathbb R\\to\\mathbb R^{n+2}$ by $T(p,\\lambda)_i=p(x_i)+(-1)^i\\lambda$. If $T(p,\\lambda)=0$ and $\\lambda=0$, then $p$ vanishes at the $n+2$ nodes; the degree bound and [F1] imply $p=0$. If $\\lambda\\ne0$, then $p(x_i)=-(-1)^i\\lambda$ are nonzero alternating values, again impossible by [F1]. Thus $\\ker T=\\{(0,0)\\}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F3], the space $\\mathcal P_n(I)$ has dimension $n+1$, with basis $1,x,\\ldots,x^n$, so the domain and codomain of $T$ both have dimension $n+2$. By [F2] and step 1.1, $T$ has image dimension $n+2$ and is therefore bijective. Its equation $T(p,\\lambda)_i=f(x_i)$ has exactly one solution.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero polynomial is included and its stated identity/bound holds (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-polynomial-remez-system-invertible has no separate one-element or degree-one parameter case; its stated degree and node hypotheses govern."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only fixed finite data or a single witness guaranteed by the stated existence theorem is used; no axiom of choice is invoked (step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-polynomial-remez-system-invertible is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-polynomial-remez-system-invertible is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-best-polynomial-approximation-exists": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-best-polynomial-uniform-error",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]\\subset\\mathbb R$ with $a<b$, and let $C(I,\\mathbb R)$ denote the\nreal-valued continuous functions on $I$. For $h\\in C(I,\\mathbb R)$ set\n$\\|h\\|_{\\infty,I}:=\\sup_{x\\in I}|h(x)|$. For $n\\in\\mathbb N_0$, let\n$\\mathcal P_n(I)$ be the restrictions to $I$ of real polynomials of degree at\nmost $n$, including the zero polynomial, and define\n$$E_n(f;I):=\\inf_{p\\in\\mathcal P_n(I)}\\|f-p\\|_{\\infty,I}.$$\nWhen $I=[-1,1]$, this agrees with the published definition\n[[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]].\n\nThese quantities are finite and well-defined. The interval is compact by\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]], so each\ncontinuous difference $f-p$ has a finite maximum absolute value. The\npolynomial space contains $0$, hence the set of errors is nonempty and bounded\nbelow by $0$; completeness of $\\mathbb R$\n([[def-complete-ordered-field]]) supplies its infimum.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-polynomial-coefficient-bound-from-fixed-nodes",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$ and let $t_0,\\ldots,t_n$ be distinct real numbers. For\n$0\\le j\\le n$, define\n$$L_j(x):=\\prod_{k\\ne j}\\frac{x-t_k}{t_j-t_k}.$$\nIf $p(x)=\\sum_{k=0}^{n}c_kx^k$ has degree at most $n$, then\n$$p(x)=\\sum_{j=0}^{n}p(t_j)L_j(x).$$\nConsequently, writing $L_j(x)=\\sum_{k=0}^{n}\\ell_{jk}x^k$, every coefficient\nsatisfies\n$$|c_k|\\le\\left(\\sum_{j=0}^{n}|\\ell_{jk}|\\right)\\max_{0\\le j\\le n}|p(t_j)|.$$\nThe empty product convention gives $L_0=1$ when $n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $p_c(x)=\\sum_{j=0}^n c_jx^j$ for $c=(c_0,\\ldots,c_n)\\in\\mathbb R^{n+1}$ and set $F(c)=\\|f-p_c\\|_{\\infty,I}$. For $0\\le j\\le n$, compactness of $I$ and [F2] give $M_j:=\\max_{x\\in I}|x|^j<\\infty$. Thus $|F(c)-F(d)|\\le\\|p_c-p_d\\|_{\\infty,I}\\le\\sum_{j=0}^n|c_j-d_j|M_j$, so $F$ is continuous. The sublevel set $K:=\\{c:F(c)\\le\\|f\\|_{\\infty,I}\\}$ is closed and contains $0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $c\\in K$, then $\\|p_c\\|_{\\infty,I}\\le\\|f\\|_{\\infty,I}+F(c)\\le2\\|f\\|_{\\infty,I}$. For $n=0$, take $\\tau_0=a$; for $n\\ge1$, take distinct nodes $\\tau_j=a+j(b-a)/n$, $0\\le j\\le n$. Each $|p_c(\\tau_j)|\\le2\\|f\\|_{\\infty,I}$, so [F4] bounds every coefficient $c_k$ uniformly on $K$. Hence $K$ is bounded.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F3], the nonempty closed bounded set $K$ is compact, so the continuous function $F$ attains a minimum $\\alpha$ on $K$. Since $0\\in K$, $\\alpha\\le\\|f\\|_{\\infty,I}$; every coefficient vector outside $K$ has $F(c)>\\|f\\|_{\\infty,I}\\ge\\alpha$. Therefore $\\alpha$ is the minimum over all of $\\mathbb R^{n+1}$, which by [F1] is $E_n(f;I)$. The attaining polynomial is the required $p_*$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero polynomial is included and its stated identity/bound holds (step 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "One attained minimum on the compact sublevel set supplies the approximant; no minimizing sequence or choice axiom is used (step 3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-best-polynomial-approximation-exists is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-best-polynomial-approximation-exists is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-polynomial-equioscillation-certificate": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-best-polynomial-uniform-error",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]\\subset\\mathbb R$ with $a<b$, and let $C(I,\\mathbb R)$ denote the\nreal-valued continuous functions on $I$. For $h\\in C(I,\\mathbb R)$ set\n$\\|h\\|_{\\infty,I}:=\\sup_{x\\in I}|h(x)|$. For $n\\in\\mathbb N_0$, let\n$\\mathcal P_n(I)$ be the restrictions to $I$ of real polynomials of degree at\nmost $n$, including the zero polynomial, and define\n$$E_n(f;I):=\\inf_{p\\in\\mathcal P_n(I)}\\|f-p\\|_{\\infty,I}.$$\nWhen $I=[-1,1]$, this agrees with the published definition\n[[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]].\n\nThese quantities are finite and well-defined. The interval is compact by\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]], so each\ncontinuous difference $f-p$ has a finite maximum absolute value. The\npolynomial space contains $0$, hence the set of errors is nonempty and bounded\nbelow by $0$; completeness of $\\mathbb R$\n([[def-complete-ordered-field]]) supplies its infimum.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-polynomial-alternating-signs-force-root-count",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $p$ be a nonzero real polynomial of degree at most $n$, and\nlet $x_0<\\cdots<x_{n+1}$ be real numbers. The values $p(x_i)$ cannot all be\nnonzero with alternating signs.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Suppose $q\\in\\mathcal P_n([a,b])$ has $\\|f-q\\|_{\\infty,[a,b]}<E$. At a node with $f(x_i)-p(x_i)=\\sigma(-1)^iE$, the strict inequality gives $|f(x_i)-q(x_i)|<E$, so $q(x_i)-p(x_i)=(f(x_i)-p(x_i))-(f(x_i)-q(x_i))$ has the same nonzero sign as $\\sigma(-1)^i$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The polynomial $q-p$ has degree at most $n$ and, by step 1.1, has nonzero alternating signs at $n+2$ ordered nodes. This contradicts [F2]. Therefore no such $q$ exists, and $p$ is a best approximant.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis $E>0$ excludes zero error, so this statement makes no alternation claim in the exact case (statement)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only fixed finite data or a single witness guaranteed by the stated existence theorem is used; no axiom of choice is invoked (step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-polynomial-equioscillation-certificate is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-polynomial-equioscillation-certificate is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-na-minimax-approximation-and-remez-algorithms": {
+      "kind": "algorithm",
+      "risk": "medium",
+      "proof_strategy": "not-applicable",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The exact zero-error oracle branch returns the exact candidate before positive-error certification or exchange (Definition)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exchange rule chooses the smallest admissible index and has only $B+1$ iterations (Definition; )."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of alg-na-minimax-approximation-and-remez-algorithms is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of alg-na-minimax-approximation-and-remez-algorithms is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-rational-perturbation-space": {
+      "kind": "lemma",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-weighted-rational-minimax-family",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]$ with $a<b$, let $m,n\\in\\mathbb N_0$, and let\n$f,w\\in C(I,\\mathbb R)$ with $w(x)>0$ for every $x\\in I$. A normalized\nreduced pair is a pair of real polynomials $p,q$ such that $q>0$ on $I$,\n$\\deg p\\le m$, $\\deg q\\le n$, $p$ and $q$ have no nonconstant common\ndivisor, and\n$$\\|q\\|_{\\mathrm{coef},2}:=\\left(\\sum_{j=0}^{n}q_j^2\\right)^{1/2}=1\\quad\\text{when }q(x)=\\sum_{j=0}^{n}q_jx^j.$$\nThe zero rational function is represented by $(p,q)=(0,1)$. By\n[[lem-na-reduced-rational-representation-unique]], each rational function\nadmissible under these conditions has exactly one normalized reduced pair.\nDefine\n$$\\mathcal R_{m,n}^+(I):=\\{p/q:(p,q)\\text{ is a normalized reduced pair}\\}$$\nand\n$$E_{m,n}(f,w;I):=\\inf_{r\\in\\mathcal R_{m,n}^+(I)}\\|w(f-r)\\|_{\\infty,I}.$$\nThe family is nonempty because it contains $r=0$. For each admissible $r=p/q$,\n$q>0$ on $I$ makes $r$ continuous by\n[[thm-algebra-of-continuous-functions]], so $w(f-r)$ is continuous and bounded\non compact $I$. The infimum is therefore finite, bounded below by zero, and\nexists as a real number by completeness of $\\mathbb R$.\n\nFor $r=p/q\\ne0$ in reduced form, put\n$$d_{m,n}(r):=\\min\\{m-\\deg p,\\ n-\\deg q\\},\\qquad N_{m,n}(r):=m+n-d_{m,n}(r).$$\nFor $r=0$, define $d_{m,n}(0):=n$ and hence $N_{m,n}(0):=m$. The integer\n$d_{m,n}(r)$ is the defect. A candidate is **normal** when $d_{m,n}(r)=0$\nand **defective** when $d_{m,n}(r)>0$. The alternation count associated with\nthe candidate is $N_{m,n}(r)+2$; it equals $m+n+2$ only in the normal case.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bezout-identity-for-polynomials",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field and let $f,g\\in F[x]$ be not both zero. Repeated polynomial division terminates at a last nonzero remainder, whose monic associate is $d=\\gcd(f,g)$. There are $A,B\\in F[x]$ such that\n\n$$ Af+Bg=d. $$\n\nMoreover, $d$ divides both $f$ and $g$, and every common divisor of $f$ and $g$ divides $d$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-polynomial-degree-of-a-product-over-a-domain",
+          "source_section": "Statement",
+          "quote": "If $R$ is an integral domain and $f,g\\in R[x]$ are nonzero, then $fg\\ne0$ and\n\n$$ \\deg(fg)=\\deg f+\\deg g,\\qquad \\operatorname{lc}(fg)=\\operatorname{lc}(f)\\operatorname{lc}(g). $$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(X)=\\sum_{k=0}^{n}a_kX^k$. The list, rather than the function it induces, is the polynomial object. Its **evaluation** at $x\\in\\mathbb R$ is the real number $p(x):=\\sum_{k=0}^{n}a_kx^k$.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Thus degree and leading coefficient are defined from the displayed finite list, without asserting that distinct formal polynomials define distinct functions. The conventions for finite sums and integer powers used in the evaluation are recorded in [[def-finite-sum]], [[def-integer-power]].",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Define $\\Phi:\\mathcal P_m\\times\\mathcal P_n\\to\\mathbb R[x]$ by $\\Phi(u,v)=uq-pv$. It is linear. If $r=0$, [F1] gives $p=0,q=1,d=n,N=m$, so $\\Phi(u,v)=u$ and its image is exactly $\\mathcal P_m=\\mathcal P_N$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Suppose $r\\ne0$. If $(u,v)\\in\\ker\\Phi$, then $uq=pv$. Multiply the Bézout identity in [F2] by $u$: $u=Apu+Bqu=Apu+Bpv=p(Au+Bv)$, so $u=hp$ for $h:=Au+Bv$. Substitution into $uq=pv$ and cancellation of the nonzero polynomial $p$ give $v=hq$. Conversely, every $(hp,hq)$ lies in the kernel.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The degree bounds on $u=hp$ and $v=hq$, together with [F4], are equivalent to $\\deg h\\le\\min(m-\\deg p,n-\\deg q)=d$; the zero polynomial $h$ is included. Thus the kernel has basis $(p,q),(xp,xq),\\ldots,(x^dp,x^dq)$ and dimension $d+1$. By [F3] and [F5], the image dimension is $(m+n+2)-(d+1)=m+n+1-d=N+1$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For all $u,v$, the degree of $uq-pv$ is at most $\\max(m+\\deg q,n+\\deg p)=m+n-d=N$ by [F1] and [F4]. Hence the image is a subspace of $\\mathcal P_N$, whose dimension is $N+1$ by [F5]. Its dimension from step 3.1 is also $N+1$, so the two spaces are equal.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The $r=0$ convention is handled directly in step 1.1: $p=0,q=1,d=n,N=m$, so the image is $mathcal P_m$ (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $m=0$ or $n=0$, the degree bounds and defect remain defined; step 1.1 handles $r=0$, while steps 2.1–4.1 establish the nonzero case (statement; steps 1.1–2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Bézout construction yields the kernel form and the finite-dimensional dimension comparison finishes the image equality (steps 2.1–4.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-rational-perturbation-space is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of lem-na-rational-perturbation-space is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-best-weighted-rational-approximation-exists": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-weighted-rational-minimax-family",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]$ with $a<b$, let $m,n\\in\\mathbb N_0$, and let\n$f,w\\in C(I,\\mathbb R)$ with $w(x)>0$ for every $x\\in I$. A normalized\nreduced pair is a pair of real polynomials $p,q$ such that $q>0$ on $I$,\n$\\deg p\\le m$, $\\deg q\\le n$, $p$ and $q$ have no nonconstant common\ndivisor, and\n$$\\|q\\|_{\\mathrm{coef},2}:=\\left(\\sum_{j=0}^{n}q_j^2\\right)^{1/2}=1\\quad\\text{when }q(x)=\\sum_{j=0}^{n}q_jx^j.$$\nThe zero rational function is represented by $(p,q)=(0,1)$. By\n[[lem-na-reduced-rational-representation-unique]], each rational function\nadmissible under these conditions has exactly one normalized reduced pair.\nDefine\n$$\\mathcal R_{m,n}^+(I):=\\{p/q:(p,q)\\text{ is a normalized reduced pair}\\}$$\nand\n$$E_{m,n}(f,w;I):=\\inf_{r\\in\\mathcal R_{m,n}^+(I)}\\|w(f-r)\\|_{\\infty,I}.$$\nThe family is nonempty because it contains $r=0$. For each admissible $r=p/q$,\n$q>0$ on $I$ makes $r$ continuous by\n[[thm-algebra-of-continuous-functions]], so $w(f-r)$ is continuous and bounded\non compact $I$. The infimum is therefore finite, bounded below by zero, and\nexists as a real number by completeness of $\\mathbb R$.\n\nFor $r=p/q\\ne0$ in reduced form, put\n$$d_{m,n}(r):=\\min\\{m-\\deg p,\\ n-\\deg q\\},\\qquad N_{m,n}(r):=m+n-d_{m,n}(r).$$\nFor $r=0$, define $d_{m,n}(0):=n$ and hence $N_{m,n}(0):=m$. The integer\n$d_{m,n}(r)$ is the defect. A candidate is **normal** when $d_{m,n}(r)=0$\nand **defective** when $d_{m,n}(r)>0$. The alternation count associated with\nthe candidate is $N_{m,n}(r)+2$; it equals $m+n+2$ only in the normal case.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-reduced-rational-representation-unique",
+          "source_section": "Statement",
+          "quote": "For real polynomials $p,q$ with $q\\ne0$, there is a reduced pair\n$p_0,q_0$ representing $p/q$, and any two reduced pairs representing the same\nnonzero rational function differ by a common nonzero real scalar. The zero\nrational function has reduced pair $(0,1)$ up to a nonzero scalar. If a\nreduced denominator is strictly positive on an interval and is normalized to\ncoefficient Euclidean norm $1$, then the representing pair is unique.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-real-polynomial-factor-at-a-root",
+          "source_section": "Statement",
+          "quote": "If $p(x)=\\sum_{k<n}a_kx^k$ and $p(a)=0$, then there is a real polynomial $q$ with $p(x)=(x-a)q(x)$ for every real $x$. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-power-difference-factorisation]], [[lem-finite-sum-laws]].",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-continuity-real",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field with its order and\nabsolute value ([[def-complete-ordered-field]], [[lem-of-abs-value]]), and\nneighbourhoods are those of [[def-neighbourhood-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$. Then\n$f$ is **continuous at $c$** when\n\n$$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ |x - c| < \\delta \\ \\Longrightarrow\\ |f(x) - f(c)| < \\varepsilon\\ \\bigr],$$\n\nwith $\\varepsilon$ and $\\delta$ ranging over the **positive reals**. In the\nlanguage of neighbourhoods: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ with\n\n$$f\\bigl(A \\cap N_{\\delta}(c)\\bigr) \\;\\subseteq\\; N_{\\varepsilon}\\bigl(f(c)\\bigr).$$\n\n$f$ is **continuous on $A$** when it is continuous at every point of $A$.\n\n**The point $c$ is required to lie in $A$, and the condition is unpunctured.**\nBoth differ from [[def-function-limit]], and deliberately. There the quantifier\nruns over $0 < |x - c| < \\delta$, which removes $x = c$; here $x = c$ is allowed,\nand at $x = c$ the implication reads $|f(c) - f(c)| = 0 < \\varepsilon$, which is\nautomatic. So allowing $x = c$ costs nothing, and it is what lets the definition\nbe stated at every point of $A$, including the points where no limit exists.\n\n**Three clauses, and all three are part of the definition.**\n\n1. **At a limit point.** Suppose $c \\in A$ is a limit point of $A$\n   ([[def-limit-point-r]]). Then $f$ is continuous at $c$ if and only if the\n   limit of $f$ at $c$ exists and\n   $$\\lim_{x \\to c} f(x) \\;=\\; f(c)$$\n   ([[def-function-limit]]). Indeed, for a given $\\varepsilon > 0$ a $\\delta$\n   witnessing continuity witnesses the limit condition, because the limit\n   condition quantifies over a subset of the points continuity quantifies over;\n   and conversely a $\\delta$ witnessing $\\lim_{x \\to c} f(x) = f(c)$ witnesses\n   continuity, because the one point it omits, $x = c$, satisfies\n   $|f(c) - f(c)| < \\varepsilon$ anyway.\n\n2. **At an isolated point.** Suppose $c \\in A$ is an isolated point of $A$\n   ([[def-limit-point-r]]), so that $N_{\\eta}(c) \\cap A = \\{c\\}$ for some real\n   $\\eta > 0$. Then **every** $f : A \\to \\mathbb{R}$ is continuous at $c$: take\n   $\\delta := \\eta$, so that the only $x \\in A$ with $|x - c| < \\delta$ is $c$\n   itself, and $|f(c) - f(c)| = 0 < \\varepsilon$.\n\n3. **On a set.** Continuity on $A$ is continuity at each point of $A$, and\n   nothing more. It is not a condition relating $f$ to points outside $A$.\n\nEvery point of $A$ is either a limit point of $A$ or an isolated point of $A$,\nand never both ([[def-limit-point-r]]), so clauses 1 and 2 between them describe\ncontinuity at every point of $A$.\n\n**This is not the raw $\\varepsilon$-$\\delta$ formula of\n[[fs-limit-unique-at-every-point-of-the-domain]].** That item records what goes\nwrong when the *punctured* formula of [[def-function-limit]] is written down at\nan arbitrary point of the domain: at an isolated point it is satisfied\nvacuously by every real $L$ at once, so it defines nothing, and this library\ntherefore leaves $\\lim_{x \\to c} f(x)$ **undefined** at an isolated point.\nContinuity at an isolated point is a different matter: the formula above is not\nvacuous — it is a genuine condition on $f(c)$, satisfied because $f(c)$ is the\nonly value being compared with itself — and it names a single, well-defined\nproperty. The limit is undefined there; the continuity is defined, and is\nautomatic. Clause 1 is the only place where the two notions meet, and it is\nstated only where the limit exists as a notion.\n\n**Where the distinction disappears.** If $A$ is an open subset of $\\mathbb{R}$\n([[def-open-and-closed-in-r]]), then every $c \\in A$ has some\n$N_{\\eta}(c) \\subseteq A$, and a punctured neighbourhood is never empty\n([[def-neighbourhood-r]]), so every point of $A$ is a limit point of $A$ and\nclause 1 covers the whole of $A$. The same holds when $A$ is a nondegenerate\ninterval ([[def-interval]]). Isolated points are what force clause 2 to exist at\nall, and they occur as soon as $A$ is allowed to be an arbitrary subset of\n$\\mathbb{R}$, as in $A = \\{0\\} \\cup [1,2]$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-na-polynomial-coefficient-bound-from-fixed-nodes",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$ and let $t_0,\\ldots,t_n$ be distinct real numbers. For\n$0\\le j\\le n$, define\n$$L_j(x):=\\prod_{k\\ne j}\\frac{x-t_k}{t_j-t_k}.$$\nIf $p(x)=\\sum_{k=0}^{n}c_kx^k$ has degree at most $n$, then\n$$p(x)=\\sum_{j=0}^{n}p(t_j)L_j(x).$$\nConsequently, writing $L_j(x)=\\sum_{k=0}^{n}\\ell_{jk}x^k$, every coefficient\nsatisfies\n$$|c_k|\\le\\left(\\sum_{j=0}^{n}|\\ell_{jk}|\\right)\\max_{0\\le j\\le n}|p(t_j)|.$$\nThe empty product convention gives $L_0=1$ when $n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-polynomial-degree-of-a-product-over-a-domain",
+          "source_section": "Statement",
+          "quote": "If $R$ is an integral domain and $f,g\\in R[x]$ are nonzero, then $fg\\ne0$ and\n\n$$ \\deg(fg)=\\deg f+\\deg g,\\qquad \\operatorname{lc}(fg)=\\operatorname{lc}(f)\\operatorname{lc}(g). $$",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $\\gamma:=\\min_{x\\in I}w(x)>0$ and $M:=\\|wf\\|_{\\infty,I}$. Positivity of $\\gamma$ follows because the continuous positive function $w$ attains its minimum on compact $I$ by [F3]. In the coefficient space for pairs $(p,q)$ of degrees at most $(m,n)$ and an extra scalar $t$, define $K$ by $\\|q\\|_{\\mathrm{coef},2}=1$, $q(x)\\ge0$ on $I$, $0\\le t\\le M$, and $|w(x)(f(x)q(x)-p(x))|\\le t q(x)$ for every $x\\in I$. The triple $(0,1,M)$ lies in $K$, so $K$ is nonempty.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The coefficient norm equation, the interval for $t$, and each pointwise inequality defining $K$ are closed conditions on the finite coefficient vector, so $K$ is closed. Its denominator coefficients have norm $1$, and for every $(p,q,t)\\in K$, $|p(x)|\\le(|f(x)|+M/\\gamma)q(x)$ on $I$. The coefficient norm bound gives $\\|q\\|_{\\infty,I}\\le\\sum_{j=0}^n\\max(|a|,|b|)^j$, hence $\\|p\\|_{\\infty,I}$ is uniformly bounded. For $m=0$, evaluation at one node bounds the sole coefficient of $p$. For $m\\ge1$, evaluate at the $m+1$ distinct nodes $\\tau_j=a+j(b-a)/m$; each value is bounded by $\\|p\\|_{\\infty,I}$, so [F7] bounds every coefficient. Thus $K$ is bounded.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F3], $K$ is compact, so its coordinate function $(p,q,t)\\mapsto t$ has a minimum $t_*$ at some $(p_*,q_*,t_*)\\in K$. For every admissible rational $r=p/q$ with error at most $M$, its normalized positive reduced pair and $t=\\|w(f-r)\\|_{\\infty,I}$ belong to $K$; candidates with larger error exceed $M\\ge t_*$. Therefore $t_*\\le E_{m,n}(f,w;I)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "For the minimizing pair, $q_*$ is a nonzero nonnegative polynomial because its coefficient norm is $1$. Its zero set in $I$ is finite by [F4]. The defining inequality of $K$ and $w\\ge\\gamma$ give $|p_*(x)|\\le(\\|f\\|_{\\infty,I}+M/\\gamma)q_*(x)$ for every $x\\in I$. At any zero $c$ of $q_*$, repeated use of [F5] writes $q_*(x)=(x-c)^s u(x)$ with $u(c)\\ne0$ and, if $p_*\\ne0$, writes $p_*(x)=(x-c)^r v(x)$ with $v(c)\\ne0$. If $p_*\\ne0$ and $r<s$, then [F8] and [F4] give $q_*(x)>0$ on a punctured one-sided neighborhood of $c$ inside $I$, and $|p_*(x)|/q_*(x)=|x-c|^{r-s}|v(x)|/|u(x)|$ is unbounded as $x\\to c$ from within $I$, contradicting the displayed bound. Hence $p_*$ is divisible by the factor of $q_*$ at every interval zero; this is automatic if $p_*=0$. Thus every interval zero of $q_*$ cancels from the quotient.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For each interior zero $c$ of $q_*$, its multiplicity is even: an odd multiplicity would make $q_*$ change sign across $c$, contradicting $q_*\\ge0$ on $I$. Form $H$ from the factors $(x-c)^s$ at interior zeros (where $s$ is even), $(x-a)^{s_a}$ at $a$ if it is a zero, and $(b-x)^{s_b}$ at $b$ if it is a zero. Then $H\\ge0$ on $I$ and $H>0$ off the finite zero set of $q_*$. Step 3.2 shows that $H$ divides both $p_*$ and $q_*$. Write $p_*=H\\bar p$ and $q_*=H\\bar q$; since $q_*\\ge0$ and $H>0$ off its zeros, the zero-free polynomial $\\bar q$ is positive on $I$. At every point outside those zeros, divide the defining inequality $|w(fq_*-p_*)|\\le t_*q_*$ by $H$ to obtain $|w(f\\bar q-\\bar p)|\\le t_*\\bar q$. Thus $|w(f-\\bar p/\\bar q)|\\le t_*$ there. The quotient $\\bar p/\\bar q$ and $w(f-\\cdot)$ are continuous on $I$ by [F6], so the same bound holds at the cancelled zeros by continuity. Reducing and normalizing the pair by [F2] gives an admissible rational function with error at most $t_*$, whence $E_{m,n}(f,w;I)\\le t_*$. Together with step 3.1, equality holds and the infimum is attained.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The admissible zero candidate $(0,1)$ makes the coefficient-feasible set nonempty and bounds the infimum (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The type permits $m=0$ or $n=0$; defect and effective perturbation degree remain defined, including the stated zero-function convention (statement; steps 1.1–2.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At endpoint denominator zeros, step 4.1 uses the oriented factors $(x-a)^{s_a}$ and $(b-x)^{s_b}$ in a nonnegative common factor $H$; dividing away from zeros preserves the error inequality and continuity extends it at the zeros (step 4.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 attains a minimizer on the compact feasible coefficient set; step 4.1 cancels its finitely many interval denominator zeros (steps 3.1–4.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-best-weighted-rational-approximation-exists is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-best-weighted-rational-approximation-exists is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-polynomial-alternation-necessity": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-best-polynomial-uniform-error",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]\\subset\\mathbb R$ with $a<b$, and let $C(I,\\mathbb R)$ denote the\nreal-valued continuous functions on $I$. For $h\\in C(I,\\mathbb R)$ set\n$\\|h\\|_{\\infty,I}:=\\sup_{x\\in I}|h(x)|$. For $n\\in\\mathbb N_0$, let\n$\\mathcal P_n(I)$ be the restrictions to $I$ of real polynomials of degree at\nmost $n$, including the zero polynomial, and define\n$$E_n(f;I):=\\inf_{p\\in\\mathcal P_n(I)}\\|f-p\\|_{\\infty,I}.$$\nWhen $I=[-1,1]$, this agrees with the published definition\n[[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]].\n\nThese quantities are finite and well-defined. The interval is compact by\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]], so each\ncontinuous difference $f-p$ has a finite maximum absolute value. The\npolynomial space contains $0$, hence the set of errors is nonempty and bounded\nbelow by $0$; completeness of $\\mathbb R$\n([[def-complete-ordered-field]]) supplies its infimum.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-extrema-sign-block-polynomial",
+          "source_section": "Statement",
+          "quote": "Let $I=[a,b]$ with $a<b$, let $e:I\\to\\mathbb R$ be continuous, and let\n$E=\\|e\\|_{\\infty,I}>0$. Put\n$S_+=\\{x\\in I:e(x)=E\\}$ and $S_-=\\{x\\in I:e(x)=-E\\}$. If there are no\n$n+2$ increasing points of $S_+\\cup S_-$ with alternating signs, then there\nis a real polynomial $h$ of degree at most $n$ such that\n$e(x)h(x)>0$ for every $x\\in S_+\\cup S_-$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $e=f-p$. It is continuous by [F3] and has norm $E$ by [F1]. Suppose there are not $n+2$ ordered alternating points in its active-extrema set $S=\\{x\\in I:|e(x)|=E\\}$. Applying [F2] gives a polynomial $h$ of degree at most $n$ with $e(x)h(x)>0$ for every $x\\in S$. In particular, $h$ is nonzero on $S$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The set $S$ is compact because it is a closed subset of $I$. The continuous function $|h|$ therefore has a positive minimum $c$ on $S$ by [F3]. The set $U=\\{x\\in I:e(x)h(x)>0,\\ |e(x)|>E/2,\\ |h(x)|>c/2\\}$ is a relatively open neighborhood of $S$, by continuity and step 1.1.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $I\\setminus U$ is nonempty, it is compact and contains no point of $S$, so [F3] gives $\\eta:=E-\\max_{x\\in I\\setminus U}|e(x)|>0$. If it is empty, set $\\eta:=E$; the outside bound is then vacuous.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The polynomial $h$ is continuous and has finite norm. Choose $\\varepsilon>0$ with $\\varepsilon\\|h\\|_{\\infty,I}<\\min(E/2,\\eta)$. On $U$, $e$ and $h$ have the same sign, $|e|>E/2$, and $\\varepsilon|h|<E/2$, so $|e-\\varepsilon h|=|e|-\\varepsilon|h|<E-\\varepsilon c/2$. On $I\\setminus U$, when nonempty, $|e-\\varepsilon h|\\le E-\\eta+\\varepsilon\\|h\\|_{\\infty,I}<E$. Thus $\\|f-(p+\\varepsilon h)\\|_{\\infty,I}<E$, while $p+\\varepsilon h\\in\\mathcal P_n(I)$, contradicting that $p$ is best. Hence the required $n+2$ alternating extrema exist.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis $E>0$ excludes zero error, so this statement makes no alternation claim in the exact case (statement)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only fixed finite data or a single witness guaranteed by the stated existence theorem is used; no axiom of choice is invoked (step 4.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-polynomial-alternation-necessity is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-polynomial-alternation-necessity is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-na-best-polynomial-approximation-unique": {
+      "kind": "corollary",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-best-polynomial-uniform-error",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]\\subset\\mathbb R$ with $a<b$, and let $C(I,\\mathbb R)$ denote the\nreal-valued continuous functions on $I$. For $h\\in C(I,\\mathbb R)$ set\n$\\|h\\|_{\\infty,I}:=\\sup_{x\\in I}|h(x)|$. For $n\\in\\mathbb N_0$, let\n$\\mathcal P_n(I)$ be the restrictions to $I$ of real polynomials of degree at\nmost $n$, including the zero polynomial, and define\n$$E_n(f;I):=\\inf_{p\\in\\mathcal P_n(I)}\\|f-p\\|_{\\infty,I}.$$\nWhen $I=[-1,1]$, this agrees with the published definition\n[[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]].\n\nThese quantities are finite and well-defined. The interval is compact by\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]], so each\ncontinuous difference $f-p$ has a finite maximum absolute value. The\npolynomial space contains $0$, hence the set of errors is nonempty and bounded\nbelow by $0$; completeness of $\\mathbb R$\n([[def-complete-ordered-field]]) supplies its infimum.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-best-polynomial-approximation-exists",
+          "source_section": "Statement",
+          "quote": "Let $I=[a,b]$ with $a<b$, let $n\\ge0$, and let $f\\in C(I,\\mathbb R)$. There\nis a polynomial $p_*\\in\\mathcal P_n(I)$ such that\n$\\|f-p_*\\|_{\\infty,I}=E_n(f;I)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-polynomial-alternation-necessity",
+          "source_section": "Statement",
+          "quote": "Let $I=[a,b]$ with $a<b$, let $n\\ge0$, and let $f\\in C(I,\\mathbb R)$. If\n$p\\in\\mathcal P_n(I)$ is a best approximant with\n$E:=\\|f-p\\|_{\\infty,I}>0$, then there are $n+2$ ordered points\n$x_0<\\cdots<x_{n+1}$ in $I$ and $\\sigma\\in\\{-1,1\\}$ such that\n$$f(x_i)-p(x_i)=\\sigma(-1)^iE\\qquad(0\\le i\\le n+1).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-polynomial-alternating-signs-force-root-count",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $p$ be a nonzero real polynomial of degree at most $n$, and\nlet $x_0<\\cdots<x_{n+1}$ be real numbers. The values $p(x_i)$ cannot all be\nnonzero with alternating signs.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $p,q\\in\\mathcal P_n(I)$ both attain $E:=E_n(f;I)$. If $E=0$, then $\\|f-p\\|_{\\infty,I}=\\|f-q\\|_{\\infty,I}=0$, so $p=f=q$ at every point of $I$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose $E>0$ and set $r=(p+q)/2\\in\\mathcal P_n(I)$. The triangle inequality gives $\\|f-r\\|_{\\infty,I}\\le E$, while [F1] gives $\\|f-r\\|_{\\infty,I}\\ge E$; hence $r$ is also best. By [F3], choose ordered alternating extrema $x_0<\\cdots<x_{n+1}$ for $f-r$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "At each $x_i$, $f(x_i)-r(x_i)$ equals either $E$ or $-E$. It is the average of $f(x_i)-p(x_i)$ and $f(x_i)-q(x_i)$, each lying in $[-E,E]$. An average of two numbers in this interval equals $E$ only if both are $E$, and equals $-E$ only if both are $-E$. Thus $p(x_i)=q(x_i)$ for all $n+2$ nodes.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The polynomial $p-q$ has degree at most $n$ and vanishes at the $n+2$ distinct points from step 2.1. By [F4], it is the zero polynomial, so $p=q$. Existence is [F2], hence the best approximant is unique.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats zero best error by pointwise equality before using alternation in the positive-error case (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The midpoint and alternation nodes are chosen from explicit existence/compactness results, then polynomial root count proves equality (steps 1.2–3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of cor-na-best-polynomial-approximation-unique is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of cor-na-best-polynomial-approximation-unique is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-polynomial-remez-budget-termination": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-na-minimax-approximation-and-remez-algorithms",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A nondegenerate interval $I=[a,b]$, a degree $n\\ge0$, a continuous\nreal function $f$ on $I$, an integer exchange budget $B\\in\\mathbb N_0$, and an initial reference\n$X=(x_0,\\ldots,x_{n+1})$ with $a\\le x_0<\\cdots<x_{n+1}\\le b$. Also supply an\nexact extrema oracle for a polynomial candidate $p$. On each call it returns\none of:\n\n- alternation$(E,y_0,\\ldots,y_{n+1})$, only when $E=\\|f-p\\|_{\\infty,I}$ and the\n  returned ordered distinct nodes satisfy $f(y_i)-p(y_i)=\\sigma(-1)^iE$ for\n  one fixed sign $\\sigma$;\n- maximum$(E,y)$, only when $E=\\|f-p\\|_{\\infty,I}$ and\n  $|f(y)-p(y)|=E$; or\n- inconclusive, when neither exact certificate can be returned.\n\n**Procedure.** For $k=0,\\ldots,B$, solve the unique real linear system\n$$p_k(x_i)+(-1)^i\\lambda_k=f(x_i),\\qquad 0\\le i\\le n+1,$$\nfor $p_k\\in\\mathcal P_n(I)$ and $\\lambda_k\\in\\mathbb R$, using\n[[lem-na-polynomial-remez-system-invertible]]. Query the oracle for $p_k$.\nIf an exact oracle response certifies $E=0$, return exact$(p_k)$. If it returns\nalternation$(E,Y)$ with $E>0$, return certified$(p_k,E,Y)$; the optimality\nclaim is discharged by [[thm-na-polynomial-equioscillation-certificate]]. If\nit returns inconclusive, return oracle-inconclusive. If it returns\nmaximum$(E,y)$ with $E>0$ and $E=|\\lambda_k|$, return certified$(p_k,E,X)$,\nbecause the solved equations make $X$ an alternating set and the oracle\ncertifies the global norm. If $\\lambda_k=0<E$, return zero-level-no-exchange.\n\nIn the remaining case, let $s=\\operatorname{sgn}(f(y)-p_k(y))$. Find the\nsmallest index $i$ for which $s=\\operatorname{sgn}(\\lambda_k)(-1)^i$ and\n$y$ lies strictly between the neighboring reference nodes (use $a$ as the\nleft neighbor at $i=0$ and $b$ as the right neighbor at $i=n+1$). Replace\n$x_i$ by $y$ and continue. If no such index exists, return\nno-order-preserving-exchange. If all $B+1$ iterations finish without a\ncertificate, return budget-exhausted with the last candidate and reference.\n\n**Outputs.** The procedure returns an exact best-approximation certificate,\nan exact zero-error candidate, or one of the explicit inconclusive,\nzero-level, no-exchange, or budget statuses. It asserts no convergence of the\niterates. Any implementation must ensure each exact solve and oracle call\nterminates.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-polynomial-remez-system-invertible",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $I=[a,b]$ with $a<b$, let $f:I\\to\\mathbb R$ be any function,\nand let $x_0<\\cdots<x_{n+1}$ be distinct nodes in $I$. There is a unique pair\n$(p,\\lambda)\\in\\mathcal P_n(I)\\times\\mathbb R$ satisfying\n$$p(x_i)+(-1)^i\\lambda=f(x_i),\\qquad 0\\le i\\le n+1.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "At the start of each iteration the reference is ordered and distinct: it is so initially, and a replacement is performed only when the new node lies strictly between its chosen neighbors, preserving order and distinctness. Therefore [F2] supplies the unique solve on every entered iteration, and by [F1] the terminating oracle call or one reference update follows.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The loop indices are exactly $0,\\ldots,B$, a finite set of $B+1$ iterations. Each iteration returns or advances once, so after at most $B+1$ terminating oracle calls the procedure either has returned earlier or returns budget-exhausted.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero error and other terminal outcomes are explicit return statuses; the bound counts all entered iterations regardless of branch (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exchange rule chooses the smallest admissible index and has only $B+1$ iterations (Definition; step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-polynomial-remez-budget-termination is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-polynomial-remez-budget-termination is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-weighted-rational-alternation-characterization": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-weighted-rational-minimax-family",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]$ with $a<b$, let $m,n\\in\\mathbb N_0$, and let\n$f,w\\in C(I,\\mathbb R)$ with $w(x)>0$ for every $x\\in I$. A normalized\nreduced pair is a pair of real polynomials $p,q$ such that $q>0$ on $I$,\n$\\deg p\\le m$, $\\deg q\\le n$, $p$ and $q$ have no nonconstant common\ndivisor, and\n$$\\|q\\|_{\\mathrm{coef},2}:=\\left(\\sum_{j=0}^{n}q_j^2\\right)^{1/2}=1\\quad\\text{when }q(x)=\\sum_{j=0}^{n}q_jx^j.$$\nThe zero rational function is represented by $(p,q)=(0,1)$. By\n[[lem-na-reduced-rational-representation-unique]], each rational function\nadmissible under these conditions has exactly one normalized reduced pair.\nDefine\n$$\\mathcal R_{m,n}^+(I):=\\{p/q:(p,q)\\text{ is a normalized reduced pair}\\}$$\nand\n$$E_{m,n}(f,w;I):=\\inf_{r\\in\\mathcal R_{m,n}^+(I)}\\|w(f-r)\\|_{\\infty,I}.$$\nThe family is nonempty because it contains $r=0$. For each admissible $r=p/q$,\n$q>0$ on $I$ makes $r$ continuous by\n[[thm-algebra-of-continuous-functions]], so $w(f-r)$ is continuous and bounded\non compact $I$. The infimum is therefore finite, bounded below by zero, and\nexists as a real number by completeness of $\\mathbb R$.\n\nFor $r=p/q\\ne0$ in reduced form, put\n$$d_{m,n}(r):=\\min\\{m-\\deg p,\\ n-\\deg q\\},\\qquad N_{m,n}(r):=m+n-d_{m,n}(r).$$\nFor $r=0$, define $d_{m,n}(0):=n$ and hence $N_{m,n}(0):=m$. The integer\n$d_{m,n}(r)$ is the defect. A candidate is **normal** when $d_{m,n}(r)=0$\nand **defective** when $d_{m,n}(r)>0$. The alternation count associated with\nthe candidate is $N_{m,n}(r)+2$; it equals $m+n+2$ only in the normal case.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-best-weighted-rational-approximation-exists",
+          "source_section": "Statement",
+          "quote": "For $I=[a,b]$ with $a<b$, $m,n\\ge0$, $f\\in C(I,\\mathbb R)$, and a strictly\npositive continuous weight $w$, there is $r_*\\in\\mathcal R_{m,n}^+(I)$ such\nthat\n$$\\|w(f-r_*)\\|_{\\infty,I}=E_{m,n}(f,w;I).$$",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-rational-perturbation-space",
+          "source_section": "Statement",
+          "quote": "Let $r=p/q\\in\\mathcal R_{m,n}^+(I)$ be nonzero, with its reduced pair and\ndefect $d=d_{m,n}(r)$, and put $N=m+n-d$. Then\n$$\\{u q-p v:u\\in\\mathcal P_m,\\ v\\in\\mathcal P_n\\}=\\mathcal P_N.$$\nFor $r=0$ with the convention $p=0,q=1,d=n,N=m$, the same equality holds.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-extrema-sign-block-polynomial",
+          "source_section": "Statement",
+          "quote": "Let $I=[a,b]$ with $a<b$, let $e:I\\to\\mathbb R$ be continuous, and let\n$E=\\|e\\|_{\\infty,I}>0$. Put\n$S_+=\\{x\\in I:e(x)=E\\}$ and $S_-=\\{x\\in I:e(x)=-E\\}$. If there are no\n$n+2$ increasing points of $S_+\\cup S_-$ with alternating signs, then there\nis a real polynomial $h$ of degree at most $n$ such that\n$e(x)h(x)>0$ for every $x\\in S_+\\cup S_-$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-na-polynomial-interpolation-alternating-weight-annihilator",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge0$ and let $x_0<\\cdots<x_{N+1}$ be real nodes. Set\n$\\omega(t)=\\prod_{j=0}^{N+1}(t-x_j)$ and\n$w_i=\\prod_{j\\ne i}(x_i-x_j)$. If $g$ is a real polynomial of degree at most\n$N$, then\n$$\\sum_{i=0}^{N+1}\\frac{g(x_i)}{w_i}=0.$$\nIf, for one fixed $\\varepsilon\\in\\{-1,1\\}$, the values\n$\\varepsilon(-1)^i g(x_i)$ are all nonnegative, then $g$ is the zero\npolynomial.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-na-polynomial-alternating-signs-force-root-count",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $p$ be a nonzero real polynomial of degree at most $n$, and\nlet $x_0<\\cdots<x_{n+1}$ be real numbers. The values $p(x_i)$ cannot all be\nnonzero with alternating signs.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-na-reduced-rational-representation-unique",
+          "source_section": "Statement",
+          "quote": "For real polynomials $p,q$ with $q\\ne0$, there is a reduced pair\n$p_0,q_0$ representing $p/q$, and any two reduced pairs representing the same\nnonzero rational function differ by a common nonzero real scalar. The zero\nrational function has reduced pair $(0,1)$ up to a nonzero scalar. If a\nreduced denominator is strictly positive on an interval and is normalized to\ncoefficient Euclidean norm $1$, then the representing pair is unique.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "First suppose $E_r>0$ and that $r$ has $N+2$ alternating weighted extrema. If another admissible $s=p'/q'$ had strictly smaller weighted error, write $e_i=w(x_i)(f(x_i)-r(x_i))=\\sigma(-1)^iE_r$ and $e_i'=w(x_i)(f(x_i)-s(x_i))$, so $|e_i'|<E_r$. Then $\\sigma(-1)^i w(x_i)(s(x_i)-r(x_i))=E_r-\\sigma(-1)^ie_i'>0$. Since $w(x_i)q(x_i)q'(x_i)>0$, the numerator $p'q-pq'$ has nonzero alternating signs at those nodes. It lies in $\\mathcal P_N$ by [F3], contradicting [F6]. Thus no rational candidate has smaller weighted error and $r$ is best.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Now suppose $r$ is best with $E:=E_r>0$, and put $e=w(f-r)$. Its active-extrema set is compact. If it had no $N+2$ alternating points, [F4] would give a polynomial $g\\in\\mathcal P_N$ with $e(x)g(x)>0$ on that set. By [F3], choose $u,v$ with $\\deg u\\le m$, $\\deg v\\le n$, and $g=uq-pv$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "If the best error is zero, then $w(f-r)=0$ everywhere; since $w>0$, $r=f$ pointwise, so the best rational function is unique.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $q>0$ on compact $I$, let $q_0=\\min_I q>0$. For all sufficiently small $\\varepsilon>0$, $q+\\varepsilon v>0$ on $I$, so $r_\\varepsilon=(p+\\varepsilon u)/(q+\\varepsilon v)$ reduces and normalizes to an admissible member of $\\mathcal R_{m,n}^+(I)$ by [F7]. Its weighted residual is $e_\\varepsilon=e-\\varepsilon h_\\varepsilon$, where $h_\\varepsilon:=wg/[q(q+\\varepsilon v)]$. On the active-extrema set, $h_0=wg/q^2$ has the same sign as $e$ and is bounded away from zero. By [F8], $h_0$ and $e$ are continuous; the denominator bound implies $h_\\varepsilon\\to h_0$ uniformly as $\\varepsilon\\downarrow0$. Hence there are a neighborhood $U$ of that set and a constant $c>0$ such that $e$ and $h_\\varepsilon$ have the same sign and $|h_\\varepsilon|\\ge c$ on $U$ for all sufficiently small $\\varepsilon$. Shrink $\\varepsilon$ further so $\\varepsilon\\|h_\\varepsilon\\|_{\\infty,I}<E/2$; then $|e_\\varepsilon|\\le E-\\varepsilon c<E$ on $U$. The compact complement $I\\setminus U$, if nonempty, contains no active extremum, so $|e|\\le E-\\eta$ there for some $\\eta>0$; a further small choice of $\\varepsilon$ makes $\\varepsilon\\|h_\\varepsilon\\|_{\\infty,I}<\\eta/2$. Hence $\\|e_\\varepsilon\\|_{\\infty,I}<E$, contradicting best approximation. This proves necessity.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "given",
+            "step 1.2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Suppose the best error $E$ is positive and $r,s=p'/q'$ are both best. By step 1.2, $r$ has $N+2$ alternating nodes. At each such node, $w(s-r)=e_r-e_s$ has weak sign $\\sigma(-1)^i$, because $|e_s|\\le E$. The numerator $g=p'q-pq'$ lies in $\\mathcal P_N$ by [F3], and its values have the same weak alternating signs since $wqq'>0$. Applying [F5] gives $g=0$, so $r=s$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Steps 1.1 and 1.2 prove the two directions of the criterion for positive error; steps 1.3 and 2.2 prove uniqueness in the zero- and positive-error cases. Existence is [F2].",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 treats zero best error separately by $w>0$; the alternation iff is restricted to positive error (step 1.3)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The type permits $m=0$ or $n=0$; defect and effective perturbation degree remain defined, including the stated zero-function convention (statement; steps 1.1–2.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The perturbation pair comes from the exact image result, and each alternant is supplied by the compact sign-set argument; no choice axiom is invoked (steps 1.2–2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Given $N+2$ alternating extrema, step 1.1 rules out a strictly better competitor by the alternating-numerator contradiction (step 1.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "If a positive-error candidate is best, steps 1.2 and 2.1 show that absence of $N+2$ alternants yields a strict-improvement perturbation (steps 1.2–2.1)."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-na-weighted-rational-remez-exchange": {
+      "kind": "algorithm",
+      "risk": "medium",
+      "proof_strategy": "not-applicable",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The exact zero-error oracle branch returns the exact candidate before positive-error certification or exchange (Definition)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: The type permits $m=0$ or $n=0$; defect and effective perturbation degree remain defined, including the stated zero-function convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exchange rule chooses the smallest admissible index and has only $B+1$ iterations (Definition; )."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of alg-na-weighted-rational-remez-exchange is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of alg-na-weighted-rational-remez-exchange is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-weighted-rational-remez-budget-termination": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-na-weighted-rational-remez-exchange",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A nondegenerate interval $I=[a,b]$, degrees $m,n\\ge0$, continuous\nreal target $f$, strictly positive continuous weight $w$, a finite exchange\ninteger budget $B\\in\\mathbb N_0$, an initial reference of $m+n+2$ ordered distinct nodes, an\nexact rational alternation-solver procedure, and an exact weighted-extrema\noracle.\n\nThe alternation solver is an explicit input procedure. On a reference\n$X=(x_0,\\ldots,x_{m+n+1})$, it solves the nonlinear equations\n$$w(x_i)\\bigl(f(x_i)-p(x_i)/q(x_i)\\bigr)=(-1)^i\\lambda$$\nwith $p,q$ coprime, $\\deg p\\le m$, $\\deg q\\le n$, $q>0$ on $I$, and\n$\\|q\\|_{\\mathrm{coef},2}=1$. It reports one of: a unique candidate with\ndefect $d=0$; an exact defective candidate with its computed $d>0$; singular\nor nonunique system; no normal solution; or inconclusive. The procedure does\nnot assume that this nonlinear solve always succeeds.\n\nThe weighted-extrema oracle for a returned candidate $r=p/q$ reports one of:\n\n- alternation$(E,Y)$ only when $E=\\|w(f-r)\\|_{\\infty,I}$ and $Y$ consists of\n  $N_{m,n}(r)+2$ ordered distinct points with weighted residuals\n  $\\sigma(-1)^iE$;\n- maximum$(E,x)$ only when $E=\\|w(f-r)\\|_{\\infty,I}$ and\n  $|w(x)(f(x)-r(x))|=E$; or\n- inconclusive.\n\n**Procedure.** For $k=0,\\ldots,B$, call the alternation solver on the current\nreference. Return its singular, no-normal-solution, or inconclusive status\nunchanged. If it returns a defective candidate, return\ndefective$(d,N_{m,n}(r))$ immediately; do not apply the normal\n$m+n+2$-point count. For a normal candidate $(r,\\lambda)$, query the\nweighted-extrema oracle. An exact zero error returns exact$(r)$. An\nalternation response with $E>0$ returns certified$(r,E,Y)$, with optimality supplied by\n[[thm-na-weighted-rational-alternation-characterization]]. For maximum$(E,x)$\nwith $E=|\\lambda|$, the current reference itself is an exact global\nalternation certificate, so return certified$(r,E,X)$. If $\\lambda=0<E$,\nreturn zero-level-no-exchange. If $E>|\\lambda|$,\nexchange the returned maximum point $x$ for the smallest reference node $x_i$\nwhose expected sign $\\operatorname{sgn}(\\lambda)(-1)^i$ matches the sign of\n$w(x)(f(x)-r(x))$ and for which replacing $x_i$ by $x$ preserves strict\nordering. If no such index exists, return no-valid-exchange. After $B+1$\nunsuccessful iterations, return budget-exhausted.\n\n**Outputs.** The procedure returns an exact minimax certificate, an exact\nzero-error candidate, or an explicit defect, singularity, no-solution,\noracle, exchange, or budget status. It claims no existence of a successful\nnonlinear solve and no iterative convergence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Every entered iteration has exactly one solver call; if the solver returns a status, the procedure terminates. If it returns a defective candidate, the explicit defect branch terminates. Otherwise a normal candidate receives at most one oracle call, whose terminal response either returns a status or performs one reference exchange. Thus each iteration takes finitely many branches under the given termination hypothesis.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The loop has only the indices $0,\\ldots,B$, so it has at most $B+1$ iterations. If no earlier branch returns, the final iteration is followed by budget-exhausted. Therefore the procedure terminates within the stated call bound.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero error and other terminal outcomes are explicit return statuses; the bound counts all entered iterations regardless of branch (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The type permits $m=0$ or $n=0$; defect and effective perturbation degree remain defined, including the stated zero-function convention (statement; steps 1.1–2.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is closed $[a,b]$, so both endpoints are included in norms, extrema, and admissible nodes (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exchange rule chooses the smallest admissible index and has only $B+1$ iterations (Definition; step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-weighted-rational-remez-budget-termination is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of thm-na-weighted-rational-remez-budget-termination is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-na-remez-zero-degree-equioscillation-certificate": {
+      "kind": "example",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-na-polynomial-remez-system-invertible",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $I=[a,b]$ with $a<b$, let $f:I\\to\\mathbb R$ be any function,\nand let $x_0<\\cdots<x_{n+1}$ be distinct nodes in $I$. There is a unique pair\n$(p,\\lambda)\\in\\mathcal P_n(I)\\times\\mathbb R$ satisfying\n$$p(x_i)+(-1)^i\\lambda=f(x_i),\\qquad 0\\le i\\le n+1.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-na-minimax-approximation-and-remez-algorithms",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A nondegenerate interval $I=[a,b]$, a degree $n\\ge0$, a continuous\nreal function $f$ on $I$, an integer exchange budget $B\\in\\mathbb N_0$, and an initial reference\n$X=(x_0,\\ldots,x_{n+1})$ with $a\\le x_0<\\cdots<x_{n+1}\\le b$. Also supply an\nexact extrema oracle for a polynomial candidate $p$. On each call it returns\none of:\n\n- alternation$(E,y_0,\\ldots,y_{n+1})$, only when $E=\\|f-p\\|_{\\infty,I}$ and the\n  returned ordered distinct nodes satisfy $f(y_i)-p(y_i)=\\sigma(-1)^iE$ for\n  one fixed sign $\\sigma$;\n- maximum$(E,y)$, only when $E=\\|f-p\\|_{\\infty,I}$ and\n  $|f(y)-p(y)|=E$; or\n- inconclusive, when neither exact certificate can be returned.\n\n**Procedure.** For $k=0,\\ldots,B$, solve the unique real linear system\n$$p_k(x_i)+(-1)^i\\lambda_k=f(x_i),\\qquad 0\\le i\\le n+1,$$\nfor $p_k\\in\\mathcal P_n(I)$ and $\\lambda_k\\in\\mathbb R$, using\n[[lem-na-polynomial-remez-system-invertible]]. Query the oracle for $p_k$.\nIf an exact oracle response certifies $E=0$, return exact$(p_k)$. If it returns\nalternation$(E,Y)$ with $E>0$, return certified$(p_k,E,Y)$; the optimality\nclaim is discharged by [[thm-na-polynomial-equioscillation-certificate]]. If\nit returns inconclusive, return oracle-inconclusive. If it returns\nmaximum$(E,y)$ with $E>0$ and $E=|\\lambda_k|$, return certified$(p_k,E,X)$,\nbecause the solved equations make $X$ an alternating set and the oracle\ncertifies the global norm. If $\\lambda_k=0<E$, return zero-level-no-exchange.\n\nIn the remaining case, let $s=\\operatorname{sgn}(f(y)-p_k(y))$. Find the\nsmallest index $i$ for which $s=\\operatorname{sgn}(\\lambda_k)(-1)^i$ and\n$y$ lies strictly between the neighboring reference nodes (use $a$ as the\nleft neighbor at $i=0$ and $b$ as the right neighbor at $i=n+1$). Replace\n$x_i$ by $y$ and continue. If no such index exists, return\nno-order-preserving-exchange. If all $B+1$ iterations finish without a\ncertificate, return budget-exhausted with the last candidate and reference.\n\n**Outputs.** The procedure returns an exact best-approximation certificate,\nan exact zero-error candidate, or one of the explicit inconclusive,\nzero-level, no-exchange, or budget statuses. It asserts no convergence of the\niterates. Any implementation must ensure each exact solve and oracle call\nterminates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-polynomial-equioscillation-certificate",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $f\\in C([a,b],\\mathbb R)$ with $a<b$, and let\n$p\\in\\mathcal P_n([a,b])$. If $E:=\\|f-p\\|_{\\infty,[a,b]}>0$ and there are\n$n+2$ ordered nodes $x_0<\\cdots<x_{n+1}$ and a sign $\\sigma\\in\\{-1,1\\}$ such\nthat\n$$f(x_i)-p(x_i)=\\sigma(-1)^iE\\qquad(0\\le i\\le n+1),$$\nthen no polynomial in $\\mathcal P_n([a,b])$ has smaller uniform error than\n$p$. Thus the displayed residual values are an a posteriori optimality\ncertificate.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The equations at $x_0=0,x_1=1$ are $p+\\lambda=0$ and $p-\\lambda=1$. Adding them gives $2p=1$, so $p=1/2$ and then $\\lambda=-1/2$, in agreement with the unique solve [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For every $x\\in[-1,1]$, $|x|\\in[0,1]$, so $-|1/2|\\le |x|-1/2\\le1/2$ and the absolute error is at most $1/2$. It equals $1/2$ at $x=0$ and at $x=1$ (also at $x=-1$), so the oracle returns $E=1/2=|\\lambda|$. The residuals at $(0,1)$ are $-1/2,1/2$, hence the procedure returns certified$(p,1/2,X)$ by [F2], and [F3] makes $p$ best.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The worked example/counterexample computes a strictly positive error (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree zero is permitted; the proof's finite-dimensional space and sums retain their stated meaning (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The reference endpoint $x=1$ is allowed and realizes the global error (steps 1.1–2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every node, coefficient and extremum in the worked verification is explicitly specified; no arbitrary witness selection occurs (steps 1.1–2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of ex-na-remez-zero-degree-equioscillation-certificate is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of ex-na-remez-zero-degree-equioscillation-certificate is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-na-defective-rational-approximation-naive-count": {
+      "kind": "counterexample",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-weighted-rational-minimax-family",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]$ with $a<b$, let $m,n\\in\\mathbb N_0$, and let\n$f,w\\in C(I,\\mathbb R)$ with $w(x)>0$ for every $x\\in I$. A normalized\nreduced pair is a pair of real polynomials $p,q$ such that $q>0$ on $I$,\n$\\deg p\\le m$, $\\deg q\\le n$, $p$ and $q$ have no nonconstant common\ndivisor, and\n$$\\|q\\|_{\\mathrm{coef},2}:=\\left(\\sum_{j=0}^{n}q_j^2\\right)^{1/2}=1\\quad\\text{when }q(x)=\\sum_{j=0}^{n}q_jx^j.$$\nThe zero rational function is represented by $(p,q)=(0,1)$. By\n[[lem-na-reduced-rational-representation-unique]], each rational function\nadmissible under these conditions has exactly one normalized reduced pair.\nDefine\n$$\\mathcal R_{m,n}^+(I):=\\{p/q:(p,q)\\text{ is a normalized reduced pair}\\}$$\nand\n$$E_{m,n}(f,w;I):=\\inf_{r\\in\\mathcal R_{m,n}^+(I)}\\|w(f-r)\\|_{\\infty,I}.$$\nThe family is nonempty because it contains $r=0$. For each admissible $r=p/q$,\n$q>0$ on $I$ makes $r$ continuous by\n[[thm-algebra-of-continuous-functions]], so $w(f-r)$ is continuous and bounded\non compact $I$. The infimum is therefore finite, bounded below by zero, and\nexists as a real number by completeness of $\\mathbb R$.\n\nFor $r=p/q\\ne0$ in reduced form, put\n$$d_{m,n}(r):=\\min\\{m-\\deg p,\\ n-\\deg q\\},\\qquad N_{m,n}(r):=m+n-d_{m,n}(r).$$\nFor $r=0$, define $d_{m,n}(0):=n$ and hence $N_{m,n}(0):=m$. The integer\n$d_{m,n}(r)$ is the defect. A candidate is **normal** when $d_{m,n}(r)=0$\nand **defective** when $d_{m,n}(r)>0$. The alternation count associated with\nthe candidate is $N_{m,n}(r)+2$; it equals $m+n+2$ only in the normal case.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-weighted-rational-alternation-characterization",
+          "source_section": "Statement",
+          "quote": "Let $I=[a,b]$ with $a<b$, let $m,n\\ge0$, and let $f,w\\in C(I,\\mathbb R)$\nwith $w>0$ on $I$. A best rational approximant in\n$\\mathcal R_{m,n}^+(I)$ exists and is unique. For a candidate $r=p/q$ with\npositive weighted error $E_r:=\\|w(f-r)\\|_{\\infty,I}>0$, let\n$N=N_{m,n}(r)=m+n-d_{m,n}(r)$. Then $r$ is best if and only if there are\n$N+2$ ordered nodes $x_0<\\cdots<x_{N+1}$ in $I$ and\n$\\sigma\\in\\{-1,1\\}$ such that\n$$w(x_i)(f(x_i)-r(x_i))=\\sigma(-1)^iE_r\\qquad(0\\le i\\le N+1).$$\nIf the best error is $0$, positivity of $w$ forces the unique best function\nto be $f$ itself. In the normal case $d=0$ the count is $m+n+2$; for\ndefective candidates the count is $m+n+2-d$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The pair $p=1/2,q=1$ is reduced, has $q>0$, coefficient norm $1$, degrees $(0,0)$, and error $f-r=x^2-1/2$. Since $x^2\\in[0,1]$, this residual lies in $[-1/2,1/2]$ and its absolute value reaches $1/2$ exactly at $x=-1,0,1$. The extremal residual signs in order are $+,-,+$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Here $d=\\min(1-0,1-0)=1$, so the defect-sensitive count is $1+1+2-1=3$. By [F2], the three alternating extrema make $r=1/2$ a best type-$(1,1)$ rational approximant. The extremal set is exactly $\\{-1,0,1\\}$, so there are not four distinct global extrema; the refuted $m+n+2=4$ count fails.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The worked example/counterexample computes a strictly positive error (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The type $(1,1)$ example has reduced degrees $(0,0)$, defect $1$, and exactly three alternating extrema (steps 1.1–2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoints $-1,1$ are active and included with the interior extremum $0$ (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every node, coefficient and extremum in the worked verification is explicitly specified; no arbitrary witness selection occurs (steps 1.1–2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of cex-na-defective-rational-approximation-naive-count is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of cex-na-defective-rational-approximation-naive-count is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-na-degree-one-minimax-of-square": {
+      "kind": "example",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No axiom of choice is used. Proofs use the declared real completeness, compactness, polynomial algebra and finite-dimensional linear algebra suppliers; finite witnesses are explicit.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-best-polynomial-uniform-error",
+          "source_section": "Definition",
+          "quote": "Let $I=[a,b]\\subset\\mathbb R$ with $a<b$, and let $C(I,\\mathbb R)$ denote the\nreal-valued continuous functions on $I$. For $h\\in C(I,\\mathbb R)$ set\n$\\|h\\|_{\\infty,I}:=\\sup_{x\\in I}|h(x)|$. For $n\\in\\mathbb N_0$, let\n$\\mathcal P_n(I)$ be the restrictions to $I$ of real polynomials of degree at\nmost $n$, including the zero polynomial, and define\n$$E_n(f;I):=\\inf_{p\\in\\mathcal P_n(I)}\\|f-p\\|_{\\infty,I}.$$\nWhen $I=[-1,1]$, this agrees with the published definition\n[[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]].\n\nThese quantities are finite and well-defined. The interval is compact by\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]], so each\ncontinuous difference $f-p$ has a finite maximum absolute value. The\npolynomial space contains $0$, hence the set of errors is nonempty and bounded\nbelow by $0$; completeness of $\\mathbb R$\n([[def-complete-ordered-field]]) supplies its infimum.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-polynomial-equioscillation-certificate",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $f\\in C([a,b],\\mathbb R)$ with $a<b$, and let\n$p\\in\\mathcal P_n([a,b])$. If $E:=\\|f-p\\|_{\\infty,[a,b]}>0$ and there are\n$n+2$ ordered nodes $x_0<\\cdots<x_{n+1}$ and a sign $\\sigma\\in\\{-1,1\\}$ such\nthat\n$$f(x_i)-p(x_i)=\\sigma(-1)^iE\\qquad(0\\le i\\le n+1),$$\nthen no polynomial in $\\mathcal P_n([a,b])$ has smaller uniform error than\n$p$. Thus the displayed residual values are an a posteriori optimality\ncertificate.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-na-best-polynomial-approximation-unique",
+          "source_section": "Statement",
+          "quote": "For every $f\\in C([a,b],\\mathbb R)$ with $a<b$ and every $n\\ge0$, there is\nexactly one $p_*\\in\\mathcal P_n([a,b])$ with\n$\\|f-p_*\\|_{\\infty,[a,b]}=E_n(f;[a,b])$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $x\\in[-1,1]$, $0\\le x^2\\le1$, so $-1/2\\le x^2-1/2\\le1/2$. Equality occurs at $x=0$ and at $x=\\pm1$, hence $\\|f-p\\|_{\\infty,I}=1/2$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The ordered points $-1<0<1$ give residual values $1/2,-1/2,1/2$. By [F2], $p$ is a best degree-one approximant; [F1] identifies its error with $E_1(f;I)$, and [F3] makes it unique.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The stated nondegenerate closed interval $I=[a,b]$, $a<b$, is nonempty and is the fixed domain of the norm/extrema argument (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The worked example/counterexample computes a strictly positive error (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example explicitly computes a degree-one or degree-zero candidate and all of its nodes (steps 1.1–2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The assumption $a<b$ excludes a singleton interval; every compactness and norm argument concerns this nondegenerate domain (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint values $x=pm1$ are active extrema and are included in the norm computation (steps 1.1–2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every node, coefficient and extremum in the worked verification is explicitly specified; no arbitrary witness selection occurs (steps 1.1–2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement of ex-na-degree-one-minimax-of-square is a one-way claim and has no forward/reverse biconditional directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement of ex-na-degree-one-minimax-of-square is a one-way claim and has no forward/reverse biconditional directions."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

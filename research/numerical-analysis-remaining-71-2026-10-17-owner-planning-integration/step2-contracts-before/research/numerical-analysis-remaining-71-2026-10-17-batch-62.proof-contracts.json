@@ -1,0 +1,2005 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-62",
+  "scope": [
+    "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass",
+    "lem-forward-euler-reaction-step-preserves-invariant-rectangle-and-mass",
+    "thm-reaction-diffusion-continuous-mass-balance",
+    "lem-periodic-fv-grid-spatial-consistency",
+    "lem-periodic-fv-grid-reaction-diffusion-commutator-bound",
+    "prop-two-species-continuous-and-discrete-turing-criterion",
+    "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+    "thm-exact-lie-step-preserves-invariant-rectangle-and-mass",
+    "thm-euler-lie-step-preserves-invariant-rectangle-and-mass",
+    "thm-periodic-reaction-diffusion-lie-error-estimate",
+    "thm-cell-centered-no-flux-reaction-diffusion-lie-error",
+    "cex-consistent-mass-p1-fem-diffusion-fails-positivity",
+    "ex-brusselator-continuous-turing-instability",
+    "ex-three-cell-grid-suppresses-continuous-turing-mode",
+    "ex-fisher-kpp-forward-reaction-euler-bound"
+  ],
+  "contracts": {
+    "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reaction-invariant-rectangle",
+          "source_section": "Definition",
+          "quote": "Let $F:U\\to\\mathbb R^m$ be locally Lipschitz, and let $R=\\prod_{i=1}^m[a_i,b_i]\\subset U$ with finite $a_i<b_i$. The rectangle is **reaction-inward** if, for every $i$, $F_i(z)\\ge0$ on the lower face $z_i=a_i$ and $F_i(z)\\le0$ on the upper face $z_i=b_i$, with all other coordinates in their intervals. It is **reaction-invariant** if the solution map $\\Phi_F^t$ is defined for all $t\\ge0$ on $R$ and $\\Phi_F^t(R)\\subseteq R$ for every $t\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stoichiometric-mass-invariant",
+          "source_section": "Definition",
+          "quote": "Let $F:U\\to\\mathbb R^m$ be the reaction vector field of [[def-reaction-vector-field-and-quasipositivity]], and let $R\\subset U$ be a state set. A vector $c\\in[0,\\infty)^m$ is a **stoichiometric conservation vector on $R$** if $c^TF(z)=0$ for every $z\\in R$. It is a **stoichiometric dissipation vector on $R$** if $c^TF(z)\\le0$ for every $z\\in R$. The corresponding pointwise mass is $c^Tz$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Let $z(t)$ be the unique local solution from [F3] and let $p(t)$ be the coordinatewise projection of $z(t)$ onto $R$. While $z(t)\\in R_\\delta$, define $V(t)=\\sum_i((a_i-z_i(t))_+^2+(z_i(t)-b_i)_+^2)$, where $x_+=\\max(x,0)$. The squared positive-part function is continuously differentiable. If $z_i<a_i$, then $p_i=a_i$ and [F1], [A1] give $F_i(z)\\ge F_i(p)-L\\|z-p\\|\\ge-L\\|z-p\\|$; if $z_i>b_i$, then $p_i=b_i$ and $F_i(z)\\le F_i(p)+L\\|z-p\\|\\le L\\|z-p\\|$. Differentiating the active terms of $V$ therefore yields $V'(t)\\le C_m L V(t)$ for a finite constant $C_m$ depending only on $m$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Since $V(0)=0$, integrating $V'(t)\\le C_mLV(t)$ gives $0\\le V(t)\\le C_mL\\int_0^tV(s)\\,ds$ on any initial interval where $z$ remains in $R_\\delta$. Apply [F6] to this integral inequality to obtain $V(t)=0$. Thus $z(t)$ cannot leave $R$ on its local interval of existence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "The field is bounded by $M_F$ on $R$ by [A1]. If a maximal solution interval had a finite right endpoint $T_*$, then $\\|z(t)-z(s)\\|\\le M_F|t-s|$ for $s,t<T_*$, so $z(t)$ has a limit $z_*\\in R$ as $t\\uparrow T_*$. The open domain contains $z_*$, so [F3] gives a solution starting at $(T_*,z_*)$; local uniqueness in [F3] joins it to the original solution, contradicting maximality [F4]. Hence the solution exists for every $t\\ge0$, and step 2.1 keeps it in $R$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-4-1",
+          "claim": "Along the solution, $\\frac d{dt}(c^Tz(t))=c^TF(z(t))$. By [F2] this derivative is zero in the conservation case and nonpositive in the dissipation case. Integrating over $[0,t]$ proves the corresponding mass conclusion.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No additional zero-valued parameter changes the proof branch beyond any zero case explicitly covered in the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 apply the face argument to a one-coordinate rectangle."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 checks both lower and upper faces; step 4.1 integrates the zero or nonpositive mass derivative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "lem-forward-euler-reaction-step-preserves-invariant-rectangle-and-mass": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reaction-invariant-rectangle",
+          "source_section": "Definition",
+          "quote": "Let $F:U\\to\\mathbb R^m$ be locally Lipschitz, and let $R=\\prod_{i=1}^m[a_i,b_i]\\subset U$ with finite $a_i<b_i$. The rectangle is **reaction-inward** if, for every $i$, $F_i(z)\\ge0$ on the lower face $z_i=a_i$ and $F_i(z)\\le0$ on the upper face $z_i=b_i$, with all other coordinates in their intervals. It is **reaction-invariant** if the solution map $\\Phi_F^t$ is defined for all $t\\ge0$ on $R$ and $\\Phi_F^t(R)\\subseteq R$ for every $t\\ge0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stoichiometric-mass-invariant",
+          "source_section": "Definition",
+          "quote": "Let $F:U\\to\\mathbb R^m$ be the reaction vector field of [[def-reaction-vector-field-and-quasipositivity]], and let $R\\subset U$ be a state set. A vector $c\\in[0,\\infty)^m$ is a **stoichiometric conservation vector on $R$** if $c^TF(z)=0$ for every $z\\in R$. It is a **stoichiometric dissipation vector on $R$** if $c^TF(z)\\le0$ for every $z\\in R$. The corresponding pointwise mass is $c^Tz$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Fix coordinate $i$ and keep the other coordinates of $z$ fixed. Let $z^-$ replace $z_i$ by $a_i$. By [F1], $F_i(z^-)\\ge0$; hence [A1] gives $F_i(z)\\ge-L_i(z_i-a_i)$. Similarly, let $z^+$ replace $z_i$ by $b_i$. Then [F1] and [A1] give $F_i(z)\\le L_i(b_i-z_i)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "If $L_i>0$, the lower estimate yields $z_i+\\tau F_i(z)-a_i\\ge(1-\\tau L_i)(z_i-a_i)\\ge0$, and the upper estimate yields $b_i-z_i-\\tau F_i(z)\\ge(1-\\tau L_i)(b_i-z_i)\\ge0$. If $L_i=0$, [A1] makes $F_i$ independent of $z_i$ on the coordinate interval; its lower and upper face signs force $F_i(z)=0$. Thus every coordinate of $z^+$ lies in its interval.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "The Euler formula gives $c^Tz^+=c^Tz+\\tau c^TF(z)$. Apply [F2] to get equality for a conservation vector and the claimed inequality for a dissipation vector.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 includes tau=0, for which both interval inequalities become equalities."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 apply coordinatewise to a one-species rectangle."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 use the lower and upper face values explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-reaction-diffusion-continuous-mass-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semilinear-reaction-diffusion-system",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $D=\\operatorname{diag}(d_1,\\ldots,d_m)$ with $d_i\\ge0$, and let $F:U\\to\\mathbb R^m$ be as in [[def-reaction-vector-field-and-quasipositivity]]. A **semilinear vector reaction-diffusion system** is\n$$\nu_t=D\\Delta u+F(u),\\qquad u(x,0)=u_0(x),\n$$\non either a flat periodic torus $\\mathbb T_L^d$ or a bounded connected polyhedral domain $\\Omega\\subset\\mathbb R^d$ with homogeneous no-flux conditions $\\partial_nu_i=0$ for every component. The diffusion matrix is diagonal and independent of $u$; this definition does not include cross-diffusion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stoichiometric-mass-invariant",
+          "source_section": "Definition",
+          "quote": "Let $F:U\\to\\mathbb R^m$ be the reaction vector field of [[def-reaction-vector-field-and-quasipositivity]], and let $R\\subset U$ be a state set. A vector $c\\in[0,\\infty)^m$ is a **stoichiometric conservation vector on $R$** if $c^TF(z)=0$ for every $z\\in R$. It is a **stoichiometric dissipation vector on $R$** if $c^TF(z)\\le0$ for every $z\\in R$. The corresponding pointwise mass is $c^Tz$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "If the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. If Omega has the specified finite piecewise $C^1$ presentation and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, then $\\int_\\Omega\\operatorname{div}F=\\sum_j\\int_{S_j}F\\cdot\\nu_j\\,dS$, with faces counted once off E. All integrals are finite. In a specified finite gluing, the two fluxes on every shared face cancel.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-bounded-piecewise-c-one-euclidean-domain",
+          "source_section": "Definition",
+          "quote": "Under the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]], a finite piecewise $C^1$ presentation of a nonempty bounded open $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, consists of compact faces $S_1,\\ldots,S_q$ covering its boundary, each a compact Borel subset of a regular $C^1$ hypersurface patch, and a compact edge set $E\\subset\\partial\\Omega$. Require $S_j\\cap E$ to have surface measure zero in each face, using [[lem-surface-integral-is-independent-of-c-one-boundary-charts]]. E contains the boundaries of the faces relative to their patches and every overlap $S_i\\cap S_j$, i different from j. At every point outside E the domain boundary is locally a single $C^1$ graph with Omega on one side. Each face carries this actual outward unit normal off E. Values assigned to the normal on E do not affect its integral.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Since $u_t$ is continuous on the compact cylinder, the time difference quotient of $c^Tu$ is the time average of $c^Tu_t$ by [F4], and uniform continuity makes it converge uniformly to $c^Tu_t$. Each stated domain has finite volume, so integrating this uniform convergence proves $\\frac d{dt}\\int_\\Omega c^Tu=\\int_\\Omega c^Tu_t$.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "In the box branch, substitute [F1] into step 1.1. The diffusion contribution is $\\sum_i c_id_i\\int_\\Omega\\Delta u_i\\,dx$. For each coordinate $j$, [F3] permits integration in $x_j$ first, and [F4] gives $\\int_0^{L_j}\\partial_{jj}u_i\\,dx_j=\\partial_ju_i|_{x_j=L_j}-\\partial_ju_i|_{x_j=0}$. This difference is zero for matching periodic traces and is zero for homogeneous Neumann data. Summing over components and coordinates makes the total diffusion contribution vanish.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-2",
+          "claim": "In the specified piecewise $C^1$ branch, each vector field $\\nabla u_i$ is $C^1$ on the closure. Apply [F5] using the domain presentation [F6] and the axiom assumption [F7]: $\\int_\\Omega\\Delta u_i\\,dx=\\sum_j\\int_{S_j}\\nabla u_i\\cdot\\nu_j\\,dS$. By [A1], the integrand is zero on every face outside its surface-null edge set; hence every face integral vanishes. Thus the diffusion contribution to step 1.1 is also zero in this branch.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "In either branch, after the diffusion term vanishes, the remaining derivative is $\\int_\\Omega c^TF(u(x,t))\\,dx$. By [F2] its integrand is identically zero in the conservation case and nonpositive in the dissipation case. Integrating proves the claimed mass derivative and monotonicity.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 includes d_i=0, whose diffusion contribution vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1 apply to one species and one spatial coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 checks both opposite periodic traces or all Neumann faces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.2 records the separate AC_omega divergence-theorem branch; step 2.1 is the box/torus branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "lem-periodic-fv-grid-spatial-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-reaction-diffusion-grid",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, side lengths $L_j>0$, and integers $N_j\\ge3$. Put $h_j=L_j/N_j$, $\\mathbb T_L^d=\\prod_{j=1}^d(\\mathbb R/L_j\\mathbb Z)$, and $G_h=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z)$. Grid nodes are $x_i=((i_j+\\tfrac12)h_j)_{j=1}^d$ modulo the side lengths, grid indices wrap modulo $N_j$, and $P_hu=(u(x_i))_{i\\in G_h}$ denotes sampling. The cell volume is $m_h=\\prod_jh_j$. The positive periodic heat stencil is the unit-diffusivity specialization of the periodic operator in [[def-parabolic-theta-finite-difference-scheme]]:\n$$\n(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.\n$$\nFor $s$ species with diffusivities $d_r\\ge0$, the reaction-diffusion grid generator acts on species $r$ by $-d_rA_h^{\\rm per}$. Each grid node has weight $m_h=\\prod_jh_j$; the stencil has zero row and column sums, so each species' weighted sum is conserved by diffusion. Its matrix representation satisfies $L_h=m_hA_h^{\\rm per}$, with symmetric $L_h$, nonpositive off-diagonal entries and $L_h\\mathbf1=0$.\n\nThe sign convention is that $A_h^{\\rm per}$ is nonnegative and $-d_rA_h^{\\rm per}$ generates diffusion. The exact eigenvalues of the positive stencil are supplied by [[lem-periodic-heat-difference-amplification-symbol]]. This grid is the only spatial discretization used in the periodic error theorem; no mesh-uniform claim for general finite-volume meshes is made there.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-lagrange-and-cauchy-remainders",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Fix a node $i$ and direction $j$. Lift the periodic component to its smooth periodic function on $\\mathbb R^d$. Apply [F2] to the one-variable restrictions at $x_i+h_je_j$ and $x_i-h_je_j$, expanding each through its cubic term at $x_i$. The odd first- and third-degree terms cancel in the sum, leaving $u_r(x_i+h_je_j)-2u_r(x_i)+u_r(x_i-h_je_j)=h_j^2\\partial_{jj}u_r(x_i)+\\rho_{ij}$ with $|\\rho_{ij}|\\le h_j^4\\|\\partial_{jjjj}u_r\\|_\\infty/12$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Divide the identity of step 1.1 by $h_j^2$, change sign to match the positive stencil, and sum over the finite directions $j=1,\\ldots,d$. The triangle inequality gives the first displayed bound. Multiplying componentwise by $d_r$ gives the residual estimate, and $h_j\\le h_{\\max}$ gives the uniform constant stated above.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 gives a zero residual for zero species diffusivity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 remain valid in one spatial coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoint branch occurs beyond the closed intervals and boundary conditions explicitly stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "lem-periodic-fv-grid-reaction-diffusion-commutator-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-reaction-diffusion-grid",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, side lengths $L_j>0$, and integers $N_j\\ge3$. Put $h_j=L_j/N_j$, $\\mathbb T_L^d=\\prod_{j=1}^d(\\mathbb R/L_j\\mathbb Z)$, and $G_h=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z)$. Grid nodes are $x_i=((i_j+\\tfrac12)h_j)_{j=1}^d$ modulo the side lengths, grid indices wrap modulo $N_j$, and $P_hu=(u(x_i))_{i\\in G_h}$ denotes sampling. The cell volume is $m_h=\\prod_jh_j$. The positive periodic heat stencil is the unit-diffusivity specialization of the periodic operator in [[def-parabolic-theta-finite-difference-scheme]]:\n$$\n(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.\n$$\nFor $s$ species with diffusivities $d_r\\ge0$, the reaction-diffusion grid generator acts on species $r$ by $-d_rA_h^{\\rm per}$. Each grid node has weight $m_h=\\prod_jh_j$; the stencil has zero row and column sums, so each species' weighted sum is conserved by diffusion. Its matrix representation satisfies $L_h=m_hA_h^{\\rm per}$, with symmetric $L_h$, nonpositive off-diagonal entries and $L_h\\mathbf1=0$.\n\nThe sign convention is that $A_h^{\\rm per}$ is nonnegative and $-d_rA_h^{\\rm per}$ generates diffusion. The exact eigenvalues of the positive stencil are supplied by [[lem-periodic-heat-difference-amplification-symbol]]. This grid is the only spatial discretization used in the periodic error theorem; no mesh-uniform claim for general finite-volume meshes is made there.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-reaction-vector-field-and-quasipositivity",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $F:U\\to\\mathbb R^m$ be locally Lipschitz. Write $F_i$ for its $i$th component. The autonomous reaction equation is $z'(t)=F(z(t))$. The field is **quasi-positive** on $U\\cap[0,\\infty)^m$ if, for every $i$ and every $z\\in U\\cap[0,\\infty)^m$ with $z_i=0$, one has $F_i(z)\\ge0$. This condition concerns only the coordinate faces of the nonnegative orthant.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "For a scalar $C^2$ function $w$, two applications of the fundamental theorem of calculus give $ w(x+h)-2w(x)+w(x-h)=\\int_0^h(h-s)\\bigl(w''(x+s)+w''(x-s)\\bigr)\\,ds. $ Taking absolute values and using $\\int_0^h(h-s)ds=h^2/2$ yields $|(w(x+h)-2w(x)+w(x-h))/h^2|\\le\\|w''\\|_\\infty$. This bound is independent of $h$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Apply step 1.1 to each scalar component $F_i\\circ u$ and $u_k$. The chain rule gives $\\partial_{jj}(F_i(u))=\\sum_k\\partial_kF_i(u)\\partial_{jj}u_k+\\sum_{k,\\ell}\\partial_{k\\ell}F_i(u)(\\partial_ju_k)(\\partial_ju_\\ell)$. All terms are uniformly bounded by [A1] and the compact-range derivative bounds in the Statement.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "In each component, $\\mathcal A_hF_h(P_hu)$ is a finite sum of $d_i$ times the centered second differences of $F_i\\circ u$, while $DF(P_hu)\\mathcal A_hP_hu$ is the finite sum of $\\partial_kF_i(u)d_k$ times the centered second differences of $u_k$. Step 1.1 bounds each difference uniformly, and step 2.1 bounds every coefficient. There are only $d m^2$ terms and $D$ is fixed, so their sum is bounded by a constant independent of all $h_j$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 gives zero commutator when all diffusivities vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1's finite coordinate sum includes one species and one direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoint branch occurs beyond the closed intervals and boundary conditions explicitly stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "prop-two-species-continuous-and-discrete-turing-criterion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semilinear-reaction-diffusion-system",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $D=\\operatorname{diag}(d_1,\\ldots,d_m)$ with $d_i\\ge0$, and let $F:U\\to\\mathbb R^m$ be as in [[def-reaction-vector-field-and-quasipositivity]]. A **semilinear vector reaction-diffusion system** is\n$$\nu_t=D\\Delta u+F(u),\\qquad u(x,0)=u_0(x),\n$$\non either a flat periodic torus $\\mathbb T_L^d$ or a bounded connected polyhedral domain $\\Omega\\subset\\mathbb R^d$ with homogeneous no-flux conditions $\\partial_nu_i=0$ for every component. The diffusion matrix is diagonal and independent of $u$; this definition does not include cross-diffusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-periodic-reaction-diffusion-grid",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, side lengths $L_j>0$, and integers $N_j\\ge3$. Put $h_j=L_j/N_j$, $\\mathbb T_L^d=\\prod_{j=1}^d(\\mathbb R/L_j\\mathbb Z)$, and $G_h=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z)$. Grid nodes are $x_i=((i_j+\\tfrac12)h_j)_{j=1}^d$ modulo the side lengths, grid indices wrap modulo $N_j$, and $P_hu=(u(x_i))_{i\\in G_h}$ denotes sampling. The cell volume is $m_h=\\prod_jh_j$. The positive periodic heat stencil is the unit-diffusivity specialization of the periodic operator in [[def-parabolic-theta-finite-difference-scheme]]:\n$$\n(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.\n$$\nFor $s$ species with diffusivities $d_r\\ge0$, the reaction-diffusion grid generator acts on species $r$ by $-d_rA_h^{\\rm per}$. Each grid node has weight $m_h=\\prod_jh_j$; the stencil has zero row and column sums, so each species' weighted sum is conserved by diffusion. Its matrix representation satisfies $L_h=m_hA_h^{\\rm per}$, with symmetric $L_h$, nonpositive off-diagonal entries and $L_h\\mathbf1=0$.\n\nThe sign convention is that $A_h^{\\rm per}$ is nonnegative and $-d_rA_h^{\\rm per}$ generates diffusion. The exact eigenvalues of the positive stencil are supplied by [[lem-periodic-heat-difference-amplification-symbol]]. This grid is the only spatial discretization used in the periodic error theorem; no mesh-uniform claim for general finite-volume meshes is made there.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\\ell_j\\in\\{0,\\ldots,N_j-1\\}$ and\n$$\n\\phi_\\ell(i)=\\exp\\left(2\\pi\\mathrm i\\sum_{j=1}^d\\frac{\\ell_ji_j}{N_j}\\right).\n$$\nThen $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue\n$$\n\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.\n$$\nFor zero source, the $\\theta$ update multiplies this mode at each step by\n$$\ng_\\theta(\\ell)=\\frac{1-(1-\\theta)\\Delta t\\lambda_\\ell}{1+\\theta\\Delta t\\lambda_\\ell}.\n$$\nThe displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Write $u=y_*+\\varepsilon w$. Differentiability of $F$ gives $F(y_*+\\varepsilon w)=F(y_*)+\\varepsilon Jw+o(\\varepsilon)=\\varepsilon Jw+o(\\varepsilon)$, so the linearized equation is $w_t=D\\Delta w+Jw$. For a continuous torus mode $w(t,x)=a(t)e^{2\\pi i\\sum_jk_jx_j/L_j}$, direct differentiation gives $\\Delta w=-\\lambda_kw$ and hence $a'=(J-\\lambda_kD)a$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "For every $\\lambda\\ge0$, $\\operatorname{tr}(J-\\lambda D)=\\operatorname{tr}J-\\lambda(d_1+d_2)<0$. Expanding the $2\\times2$ determinant gives $\\det(J-\\lambda D)=(J_{11}-\\lambda d_1)(J_{22}-\\lambda d_2)-J_{12}J_{21}=d_1d_2\\lambda^2-\\beta_T\\lambda+\\det J=q(\\lambda)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "For the grid, insert a Fourier vector from [F3] into the linearized finite system. By [F2] its diffusion part multiplies that mode by $-D\\lambda_{h,\\ell}$; the reaction Jacobian acts on the species coordinate by $J$. Therefore the mode coefficient satisfies $a'=(J-\\lambda_{h,\\ell}D)a$. The basis assertion in [F3] ensures these are the actual grid mode matrices.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-2",
+          "claim": "The characteristic polynomial of a real $2\\times2$ matrix $A$ is $\\mu^2-\\operatorname{tr}(A)\\mu+\\det(A)$. If $\\operatorname{tr}(A)<0$ and $\\det(A)<0$, its discriminant $\\operatorname{tr}(A)^2-4\\det(A)$ is positive and the real roots have negative product, so one is positive. If $\\operatorname{tr}(A)<0$ and $\\det(A)>0$, real roots have negative sum and positive product, so both are negative; nonreal roots are conjugate with real part $\\operatorname{tr}(A)/2<0$. If the determinant is zero, one eigenvalue is zero and the other is the negative trace. Applying these alternatives to $A=J-\\lambda D$ proves the mode tests in the Statement.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "Since $d_1d_2>0$ and $\\det J>0$, the upward-opening quadratic $q$ is negative at some $\\lambda\\ge0$ exactly when its minimum occurs at a positive point and its discriminant is strictly positive. Its minimizer is $\\beta_T/(2d_1d_2)$, so the first condition is $\\beta_T>0$; its discriminant is $\\beta_T^2-4d_1d_2\\det J$, so the second condition is the strict inequality in the Statement. Under these conditions both roots are positive because their sum is $\\beta_T/(d_1d_2)>0$ and product is $\\det J/(d_1d_2)>0$, and factorization gives $q<0$ precisely between them. The mode tests from step 2.2 then prove the continuous-spectrum and finite-grid criteria without replacing either actual spectrum by all real wavenumbers.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.2 explicitly treats q(lambda)=0 and the resulting zero eigenvalue."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton-size case changes the argument beyond the finite dimensions and index sets allowed by the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2 separates the zero-determinant boundary from both strict-sign cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.2 and 3.1 identify q(lambda_-) = q(lambda_+) = 0 as neutral boundary modes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1 derives the unstable band from beta_T>0 and positive discriminant."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1 shows any negative value of q on lambda>=0 forces both strict conditions."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fv-tpfa-no-flux-diffusion-specialization",
+          "source_section": "Definition",
+          "quote": "For species diffusivities $d_r\\ge0$, the no-flux finite-volume diffusion equation is $M U_r'+d_r L_h U_r=0$ for each species $r$, where $M=\\operatorname{diag}(|K|)$. Its component equation is\n$$\n|K|(U_{K,r})'=d_r\\sum_{L:c_{KL}>0}c_{KL}(U_{L,r}-U_{K,r}).\n$$\nThe equality is the usual shared-face TPFA balance with outward flux $T_F(U_{K,r}-U_{L,r})$ and no boundary flux. The matrix $L_h$ is symmetric, has zero row sums and nonpositive off-diagonal entries, and obeys $v^{\\mathsf T}L_hv=\\sum_{\\{K,L\\}}c_{KL}(v_K-v_L)^2\\ge0$, where the sum is over unordered adjacent cell pairs. With $M=\\operatorname{diag}(|K|)$, the generator $-M^{-1}L_h$ is self-adjoint in the weighted pairing $\\langle v,w\\rangle_M=v^{\\mathsf T}Mw$. This definition makes no accuracy claim for arbitrary admissible meshes.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-periodic-reaction-diffusion-grid",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, side lengths $L_j>0$, and integers $N_j\\ge3$. Put $h_j=L_j/N_j$, $\\mathbb T_L^d=\\prod_{j=1}^d(\\mathbb R/L_j\\mathbb Z)$, and $G_h=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z)$. Grid nodes are $x_i=((i_j+\\tfrac12)h_j)_{j=1}^d$ modulo the side lengths, grid indices wrap modulo $N_j$, and $P_hu=(u(x_i))_{i\\in G_h}$ denotes sampling. The cell volume is $m_h=\\prod_jh_j$. The positive periodic heat stencil is the unit-diffusivity specialization of the periodic operator in [[def-parabolic-theta-finite-difference-scheme]]:\n$$\n(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.\n$$\nFor $s$ species with diffusivities $d_r\\ge0$, the reaction-diffusion grid generator acts on species $r$ by $-d_rA_h^{\\rm per}$. Each grid node has weight $m_h=\\prod_jh_j$; the stencil has zero row and column sums, so each species' weighted sum is conserved by diffusion. Its matrix representation satisfies $L_h=m_hA_h^{\\rm per}$, with symmetric $L_h$, nonpositive off-diagonal entries and $L_h\\mathbf1=0$.\n\nThe sign convention is that $A_h^{\\rm per}$ is nonnegative and $-d_rA_h^{\\rm per}$ generates diffusion. The exact eigenvalues of the positive stencil are supplied by [[lem-periodic-heat-difference-amplification-symbol]]. This grid is the only spatial discretization used in the periodic error theorem; no mesh-uniform claim for general finite-volume meshes is made there.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "This series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-stoichiometric-mass-invariant",
+          "source_section": "Definition",
+          "quote": "For a measurable domain $\\Omega$, the continuous total mass is $\\mathcal M_c(u)=\\int_\\Omega c^Tu(x)\\,dx$. For any finite index set $I$ with assigned positive weights $m_i$, the discrete total mass of states $U_i\\in\\mathbb R^m$ is $\\mathcal M_{c,h}(U)=\\sum_{i\\in I}m_ic^TU_i$. The weights and index set are part of the discrete model. Conservation and dissipation always refer to these stated functionals and the stated state set; no claim is made for a different weight vector or for reactions outside $R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Any two solutions through the same initial data agree on every common subinterval containing $t_0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Fix a species $r$ and put $A_r=-d_rM^{-1}L$. If $d_r=0$, the solution is constant. If $d_r>0$, then $(A_r)_{ij}=d_rc_{ij}/m_i\\ge0$ for $i\\ne j$, every row sums to zero, and $(A_r)_{ii}=-d_r\\sum_{j\\ne i}c_{ij}/m_i$. Choose $\\alpha>0$ at least as large as every exit rate $d_r\\sum_{j\\ne i}c_{ij}/m_i$, and set $P=I+A_r/\\alpha$. Then $P$ is entrywise nonnegative with row sums one. Matrix multiplication shows inductively that every $P^k$ has these same properties.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose",
+            "construct",
+            "induction"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "Symmetry of $L$ and $L\\mathbf1=0$ give $\\mathbf1^{\\mathsf T}L=0$. Hence $\\mathbf1^{\\mathsf T}MA_r=-d_r\\mathbf1^{\\mathsf T}L=0$, and multiplication by every power of $A_r$ gives $\\mathbf1^{\\mathsf T}MA_r^k=0$ for $k\\ge1$. The exponential series therefore yields $\\mathbf1^{\\mathsf T}Me^{tA_r}=\\mathbf1^{\\mathsf T}M$, so the weighted sum of species $r$ is conserved.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra",
+            "F6"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "If $d_r=0$, $e^{tA_r}=I$ has nonnegative entries and row sums one. Otherwise use the $\\alpha$ and $P$ of step 1.1. Since $A_r=\\alpha(P-I)$, [F3] gives $e^{tA_r}=e^{\\alpha tP}e^{-\\alpha tI}$. The power series shows $e^{-\\alpha tI}=e^{-\\alpha t}I$, whose scalar coefficient is positive by [F4]. Every term in the series for $e^{\\alpha tP}$ is entrywise nonnegative by step 1.1. Thus $e^{tA_r}$ is entrywise nonnegative. Since $A_r\\mathbf1=0$, its power series also gives $e^{tA_r}\\mathbf1=\\mathbf1$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra",
+            "F6"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "The initial inequalities are $u_r(0)-a_r\\mathbf1\\ge0$ and $b_r\\mathbf1-u_r(0)\\ge0$. Applying the nonnegative matrix $e^{tA_r}$ and using $e^{tA_r}\\mathbf1=\\mathbf1$ from step 2.1 proves $a_r\\mathbf1\\le e^{tA_r}u_r(0)\\le b_r\\mathbf1$. The explicit exponential is defined for every finite $t\\ge0$; step 1.2 preserves its weighted sum. Taking the finite linear combination in [F5] proves the stated mass assertion.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2 explicitly make the d_r=0 evolution the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 allows a one-cell set; zero exit rate gives P=I for any alpha>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2 cover a one-cell component with no outgoing conductances."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 preserves the closed interval inequalities, including equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-exact-lie-step-preserves-invariant-rectangle-and-mass": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exact-lie-reaction-diffusion-step",
+          "source_section": "Definition",
+          "quote": "1. At every cell/node $i$, solve the exact reaction IVP $\\dot z=F(z)$ from $z(0)=U_i^n$ to time $\\tau$, and set $V_i=\\Phi_F^\\tau(U_i^n)$.\n2. For each species $r$, apply the exact diffusion map $e^{-\\tau d_rM^{-1}L_h}$ in the TPFA case or $e^{-\\tau d_rA_h^{\\rm per}}$ in the periodic-grid case to the vector $(V_{i,r})_i$; call the output $U^{n+1}_{\\cdot,r}$.\n3. Return $U^{n+1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass",
+          "source_section": "Statement",
+          "quote": "Let $R=\\prod_{i=1}^m[a_i,b_i]$ be the reaction-inward rectangle of [[def-reaction-invariant-rectangle]]. Assume $F$ from [[def-reaction-vector-field-and-quasipositivity]] is continuously differentiable on an open neighborhood of $R$, and its derivative is bounded on some closed neighborhood of $R$. For any $z_0\\in R$, the IVP $z'=F(z)$ has a unique solution for every $t\\ge0$, and $z(t)\\in R$. If $c$ is a conservation vector on $R$, then $c^Tz(t)=c^Tz_0$; if it is a dissipation vector, then $c^Tz(t)$ is nonincreasing. The lower-face condition is quasi-positivity when $a_i=0$; upper-face inwardness remains a separate hypothesis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+          "source_section": "Statement",
+          "quote": "Consider either the no-flux TPFA cell system of [[def-fv-tpfa-no-flux-diffusion-specialization]] or the periodic grid system of [[def-periodic-reaction-diffusion-grid]]. Write its finite index set as $I$, its positive diagonal mass matrix as $M=\\operatorname{diag}(m_i)$, and its stiffness matrix as $L$. In both cases $L=L^{\\mathsf T}$, $L\\mathbf1=0$, and $L_{ij}=-c_{ij}$ for $i\\ne j$, where $c_{ij}=c_{ji}\\ge0$. For each species $r$, let $d_r\\ge0$ and solve $M u_r'+d_rLu_r=0$. Assume $a_r\\le b_r$ for every species. If initially $u_{i,r}\\in[a_r,b_r]$ for all $i,r$, then the solution exists for all $t\\ge0$ and remains in those intervals. More precisely, each species evolution matrix has nonnegative entries and row sums one, so it is a contraction in the maximum norm. The flow also preserves each weighted species sum $\\sum_i m_i u_{i,r}$ and therefore every finite linear combination of species sums, including $\\mathcal M_{c,h}$ of [[def-stoichiometric-mass-invariant]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-stoichiometric-mass-invariant",
+          "source_section": "Definition",
+          "quote": "For a measurable domain $\\Omega$, the continuous total mass is $\\mathcal M_c(u)=\\int_\\Omega c^Tu(x)\\,dx$. For any finite index set $I$ with assigned positive weights $m_i$, the discrete total mass of states $U_i\\in\\mathbb R^m$ is $\\mathcal M_{c,h}(U)=\\sum_{i\\in I}m_ic^TU_i$. The weights and index set are part of the discrete model. Conservation and dissipation always refer to these stated functionals and the stated state set; no claim is made for a different weight vector or for reactions outside $R$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "After the reaction substep of [F1], [F2] gives $V_i\\in R$ at every cell/node. It also gives $c^TV_i=c^TU_i^n$ in the conservation case or $c^TV_i\\le c^TU_i^n$ in the dissipation case. Multiplying by $m_i>0$ and summing over the finite index set proves the corresponding mass relation for $V$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Apply the diffusion substep of [F1] to $V$. By [F3], each species remains in its interval, so every resulting cell/node state remains in $R$. Also [F3] preserves each species' weighted sum; taking the finite linear combination with coefficients $c_r$ preserves $\\mathcal M_{c,h}$. Thus the mass relation from step 1.1 is unchanged by diffusion, proving both conclusions for $U^{n+1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 preserve the state and mass when tau=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 use finite sums and apply to one species and one cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 preserve closed interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-euler-lie-step-preserves-invariant-rectangle-and-mass": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-euler-reaction-lie-diffusion-step",
+          "source_section": "Definition",
+          "quote": "This is an approximate reaction substep followed by exact diffusion. The bound $\\tau\\le\\tau_R$ is part of the input contract and is needed for the stated rectangle guarantee; no diffusion CFL restriction is needed because the diffusion map is exact. The procedure makes no claim about finite-precision evaluation of either step.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-forward-euler-reaction-step-preserves-invariant-rectangle-and-mass",
+          "source_section": "Statement",
+          "quote": "Let $R=\\prod_{i=1}^m[a_i,b_i]$ be reaction-inward for $F$ from [[def-reaction-vector-field-and-quasipositivity]]. Assume for each $i$ there is a coordinate Lipschitz constant $L_i\\ge0$ such that $|F_i(z)-F_i(w)|\\le L_i|z_i-w_i|$ whenever $z,w\\in R$ differ only in coordinate $i$. Define\n$$\n\\tau_R=\\min_{i:L_i>0}L_i^{-1},\n$$\nwith $\\tau_R=+\\infty$ if every $L_i=0$. For $z\\in R$ and $0\\le\\tau\\le\\tau_R$, the forward-Euler reaction step $z^+=z+\\tau F(z)$ lies in $R$. For every conservation vector $c$ on $R$, $c^Tz^+=c^Tz$; for every dissipation vector, $c^Tz^+\\le c^Tz$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+          "source_section": "Statement",
+          "quote": "Consider either the no-flux TPFA cell system of [[def-fv-tpfa-no-flux-diffusion-specialization]] or the periodic grid system of [[def-periodic-reaction-diffusion-grid]]. Write its finite index set as $I$, its positive diagonal mass matrix as $M=\\operatorname{diag}(m_i)$, and its stiffness matrix as $L$. In both cases $L=L^{\\mathsf T}$, $L\\mathbf1=0$, and $L_{ij}=-c_{ij}$ for $i\\ne j$, where $c_{ij}=c_{ji}\\ge0$. For each species $r$, let $d_r\\ge0$ and solve $M u_r'+d_rLu_r=0$. Assume $a_r\\le b_r$ for every species. If initially $u_{i,r}\\in[a_r,b_r]$ for all $i,r$, then the solution exists for all $t\\ge0$ and remains in those intervals. More precisely, each species evolution matrix has nonnegative entries and row sums one, so it is a contraction in the maximum norm. The flow also preserves each weighted species sum $\\sum_i m_i u_{i,r}$ and therefore every finite linear combination of species sums, including $\\mathcal M_{c,h}$ of [[def-stoichiometric-mass-invariant]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-stoichiometric-mass-invariant",
+          "source_section": "Definition",
+          "quote": "For a measurable domain $\\Omega$, the continuous total mass is $\\mathcal M_c(u)=\\int_\\Omega c^Tu(x)\\,dx$. For any finite index set $I$ with assigned positive weights $m_i$, the discrete total mass of states $U_i\\in\\mathbb R^m$ is $\\mathcal M_{c,h}(U)=\\sum_{i\\in I}m_ic^TU_i$. The weights and index set are part of the discrete model. Conservation and dissipation always refer to these stated functionals and the stated state set; no claim is made for a different weight vector or for reactions outside $R$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "The reaction substep in [F1] is the map in [F2]. Its output lies in $R$ at every cell/node. Multiplying the nodewise conservation equality or dissipation inequality by each positive weight $m_i$ and summing shows that this substep preserves or decreases $\\mathcal M_{c,h}$ as claimed.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Apply the exact diffusion substep in [F1]. By [F3] it keeps every species component in its interval and preserves every species' weighted sum. Hence it preserves $R$ and leaves the mass relation from step 1.1 unchanged. These are the claimed properties of the complete split update.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes tau=0, when the Euler update is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 use finite sums and apply to one species and one cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 preserve closed interval endpoints under the stated Euler bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-reaction-diffusion-lie-error-estimate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-reaction-diffusion-grid",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, side lengths $L_j>0$, and integers $N_j\\ge3$. Put $h_j=L_j/N_j$, $\\mathbb T_L^d=\\prod_{j=1}^d(\\mathbb R/L_j\\mathbb Z)$, and $G_h=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z)$. Grid nodes are $x_i=((i_j+\\tfrac12)h_j)_{j=1}^d$ modulo the side lengths, grid indices wrap modulo $N_j$, and $P_hu=(u(x_i))_{i\\in G_h}$ denotes sampling. The cell volume is $m_h=\\prod_jh_j$. The positive periodic heat stencil is the unit-diffusivity specialization of the periodic operator in [[def-parabolic-theta-finite-difference-scheme]]:\n$$\n(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.\n$$\nFor $s$ species with diffusivities $d_r\\ge0$, the reaction-diffusion grid generator acts on species $r$ by $-d_rA_h^{\\rm per}$. Each grid node has weight $m_h=\\prod_jh_j$; the stencil has zero row and column sums, so each species' weighted sum is conserved by diffusion. Its matrix representation satisfies $L_h=m_hA_h^{\\rm per}$, with symmetric $L_h$, nonpositive off-diagonal entries and $L_h\\mathbf1=0$.\n\nThe sign convention is that $A_h^{\\rm per}$ is nonnegative and $-d_rA_h^{\\rm per}$ generates diffusion. The exact eigenvalues of the positive stencil are supplied by [[lem-periodic-heat-difference-amplification-symbol]]. This grid is the only spatial discretization used in the periodic error theorem; no mesh-uniform claim for general finite-volume meshes is made there.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-semilinear-reaction-diffusion-system",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $D=\\operatorname{diag}(d_1,\\ldots,d_m)$ with $d_i\\ge0$, and let $F:U\\to\\mathbb R^m$ be as in [[def-reaction-vector-field-and-quasipositivity]]. A **semilinear vector reaction-diffusion system** is\n$$\nu_t=D\\Delta u+F(u),\\qquad u(x,0)=u_0(x),\n$$\non either a flat periodic torus $\\mathbb T_L^d$ or a bounded connected polyhedral domain $\\Omega\\subset\\mathbb R^d$ with homogeneous no-flux conditions $\\partial_nu_i=0$ for every component. The diffusion matrix is diagonal and independent of $u$; this definition does not include cross-diffusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-fv-grid-spatial-consistency",
+          "source_section": "Statement",
+          "quote": "Let $u_r\\in C^4(\\mathbb T_L^d)$, and let $P_hu_r$ denote its samples on the periodic rectangular grid of [[def-periodic-reaction-diffusion-grid]]. For every grid node $i$,\n$$\n\\left|(A_h^{\\rm per}P_hu_r)_i+P_h(\\Delta u_r)_i\\right|\\le\\frac1{12}\\sum_{j=1}^dh_j^2\\|\\partial_{jjjj}u_r\\|_{L^\\infty(\\mathbb T_L^d)}.\n$$\nFor $D=\\operatorname{diag}(d_1,\\ldots,d_m)$, define the sampled spatial residual $r_h=D(P_h\\Delta u-\\Delta_hP_hu)$, where $\\Delta_h=-A_h^{\\rm per}$ acts componentwise. If the indicated fourth derivatives are uniformly bounded for $0\\le t\\le T$, then $\\|r_h(t)\\|_\\infty\\le C_{\\rm sp}h_{\\max}^2$ with $C_{\\rm sp}=\\frac{d_{\\max}}{12}\\sum_j\\|\\partial_{jjjj}u\\|_{L^\\infty}$ componentwise, uniformly in the mesh.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-periodic-fv-grid-reaction-diffusion-commutator-bound",
+          "source_section": "Statement",
+          "quote": "Let $u:[0,T]\\times\\mathbb T_L^d\\to R$ have bounded spatial derivatives through order two, with $R$ a compact rectangle. Let $F\\in C^2$ on a neighborhood of $R$, and let $\\mathcal A_h=-D A_h^{\\rm per}$ be the periodic-grid diffusion generator from [[def-periodic-reaction-diffusion-grid]]. Define $F_h(P_hu)=P_h(F(u))$ pointwise. Then\n$$\n\\sup_{0<h_j\\le1,\\,0\\le t\\le T}\\left\\|\\mathcal A_hF_h(P_hu(t))-DF(P_hu(t))\\mathcal A_hP_hu(t)\\right\\|_\\infty\\le C_{\\rm com}<\\infty,\n$$\nwhere $C_{\\rm com}$ depends only on the dimension, $D$, the suprema of $D^2u$, $DF$, $D^2F$, and the compact state rectangle, not on the mesh widths. This is the finite-grid commutator used in the first-order split-error proof; it is not a claim for arbitrary meshes or unbounded operators.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+          "source_section": "Statement",
+          "quote": "Consider either the no-flux TPFA cell system of [[def-fv-tpfa-no-flux-diffusion-specialization]] or the periodic grid system of [[def-periodic-reaction-diffusion-grid]]. Write its finite index set as $I$, its positive diagonal mass matrix as $M=\\operatorname{diag}(m_i)$, and its stiffness matrix as $L$. In both cases $L=L^{\\mathsf T}$, $L\\mathbf1=0$, and $L_{ij}=-c_{ij}$ for $i\\ne j$, where $c_{ij}=c_{ji}\\ge0$. For each species $r$, let $d_r\\ge0$ and solve $M u_r'+d_rLu_r=0$. Assume $a_r\\le b_r$ for every species. If initially $u_{i,r}\\in[a_r,b_r]$ for all $i,r$, then the solution exists for all $t\\ge0$ and remains in those intervals. More precisely, each species evolution matrix has nonnegative entries and row sums one, so it is a contraction in the maximum norm. The flow also preserves each weighted species sum $\\sum_i m_i u_{i,r}$ and therefore every finite linear combination of species sums, including $\\mathcal M_{c,h}$ of [[def-stoichiometric-mass-invariant]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exact-lie-step-preserves-invariant-rectangle-and-mass",
+          "source_section": "Statement",
+          "quote": "Choose either the no-flux TPFA system of [[def-fv-tpfa-no-flux-diffusion-specialization]] or the periodic grid system of [[def-periodic-reaction-diffusion-grid]], and use the exact reaction-then-diffusion step of [[alg-exact-lie-reaction-diffusion-step]]. Let $R=\\prod_{r=1}^m[a_r,b_r]$ be reaction-inward, and suppose $F$ is $C^1$ on a neighborhood of $R$ with derivative bounded on a closed neighborhood. If every cell/node state of $U^n$ lies in $R$, then every cell/node state of $U^{n+1}$ lies in $R$ for every finite $\\tau\\ge0$. If $c^TF=0$ throughout $R$, then $\\mathcal M_{c,h}(U^{n+1})=\\mathcal M_{c,h}(U^n)$; if $c^TF\\le0$ throughout $R$, then $\\mathcal M_{c,h}(U^{n+1})\\le\\mathcal M_{c,h}(U^n)$. Here $\\mathcal M_{c,h}(U)=\\sum_i m_i c^TU_i$ uses the cell/node weights of the chosen discretization.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "If $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "alg-exact-lie-reaction-diffusion-step",
+          "source_section": "Definition",
+          "quote": "1. At every cell/node $i$, solve the exact reaction IVP $\\dot z=F(z)$ from $z(0)=U_i^n$ to time $\\tau$, and set $V_i=\\Phi_F^\\tau(U_i^n)$.\n2. For each species $r$, apply the exact diffusion map $e^{-\\tau d_rM^{-1}L_h}$ in the TPFA case or $e^{-\\tau d_rA_h^{\\rm per}}$ in the periodic-grid case to the vector $(V_{i,r})_i$; call the output $U^{n+1}_{\\cdot,r}$.\n3. Return $U^{n+1}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "This series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass",
+          "source_section": "Statement",
+          "quote": "Let $R=\\prod_{i=1}^m[a_i,b_i]$ be the reaction-inward rectangle of [[def-reaction-invariant-rectangle]]. Assume $F$ from [[def-reaction-vector-field-and-quasipositivity]] is continuously differentiable on an open neighborhood of $R$, and its derivative is bounded on some closed neighborhood of $R$. For any $z_0\\in R$, the IVP $z'=F(z)$ has a unique solution for every $t\\ge0$, and $z(t)\\in R$. If $c$ is a conservation vector on $R$, then $c^Tz(t)=c^Tz_0$; if it is a dissipation vector, then $c^Tz(t)$ is nonincreasing. The lower-face condition is quasi-positivity when $a_i=0$; upper-face inwardness remains a separate hypothesis.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Let $Y_h(t)=P_hu(t)$ and $E_h(s)=e^{s\\mathcal A_h}$. By [F1]–[F3], the sampled equation is $Y_h'=\\mathcal A_hY_h+F_h(Y_h)+r_h$, where $F_h$ applies $F$ at each node and $\\|r_h(t)\\|_\\infty\\le C_{\\rm sp}h_{\\max}^2$. Differentiate $E_h(\\tau-s)Y_h(t+s)$ using [F9], then integrate from $s=0$ to $s=\\tau$ using [F10]; this gives $ Y_h(t+\\tau)=E_h(\\tau)Y_h(t)+\\int_0^\\tau E_h(\\tau-s)\\bigl(F_h(Y_h(t+s))+r_h(t+s)\\bigr)\\,ds. $ By [F5], $\\|E_h(s)\\|_{\\infty\\to\\infty}\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "For any two grid states $X,Z$ nodewise in $R$, the reaction flows satisfy $\\|\\Phi_{F_h}^\\tau(X)-\\Phi_{F_h}^\\tau(Z)\\|_\\infty\\le e^{L_F\\tau}\\|X-Z\\|_\\infty$, where $L_F=\\sup_R\\|DF\\|$; this follows by subtracting their nodewise integral equations and applying [F7]. Composing with the diffusion contraction [F5] gives $\\|S_{h,\\tau}(X)-S_{h,\\tau}(Z)\\|_\\infty\\le e^{L_F\\tau}\\|X-Z\\|_\\infty$ for the exact Lie map $S_{h,\\tau}$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Write $V_h(s)=\\Phi_{F_h}^s(Y_h(t))$ for the nodewise exact reaction flow. By [F8], [F11], and integration of its reaction ODE using [F10], the exact Lie step from $Y_h(t)$ equals $E_h(\\tau)Y_h(t)+\\int_0^\\tau E_h(\\tau)F_h(V_h(s))\\,ds$. Subtract the identity in step 1.1 and add and subtract $E_h(\\tau)F_h(Y_h(t+s))$ inside the integrand. The defect is therefore the sum of $ \\int_0^\\tau [E_h(\\tau)-E_h(\\tau-s)]F_h(Y_h(t+s))\\,ds, \\quad \\int_0^\\tau E_h(\\tau)[F_h(V_h(s))-F_h(Y_h(t+s))]\\,ds, \\quad -\\int_0^\\tau E_h(\\tau-s)r_h(t+s)\\,ds. $",
+          "step": "2.1",
+          "inputs": [
+            "F8",
+            "F10",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "For a scalar $C^2$ component $g$, two integrations of $g''$ give $g(x+h)-2g(x)+g(x-h)=\\int_0^h(h-s)(g''(x+s)+g''(x-s))\\,ds$, so the absolute centered second difference divided by $h^2$ is at most $\\|g''\\|_\\infty$. Applying this in each coordinate to $u$ and using [A1] gives $\\|\\mathcal A_hY_h(t)\\|_\\infty\\le C_u$ independently of the mesh. By [F4], $\\mathcal A_hF_h(Y_h)-DF(Y_h)\\mathcal A_hY_h$ is uniformly bounded; [A1] bounds $DF$, so $\\|\\mathcal A_hF_h(Y_h(t+s))\\|_\\infty\\le C_A$ for all $s$ and grids. Since $E_h'(r)=E_h(r)\\mathcal A_h$ by [F9] and $E_h$ contracts by [F5], $ \\|[E_h(\\tau)-E_h(\\tau-s)]F_h(Y_h(t+s))\\|_\\infty \\le \\int_{\\tau-s}^{\\tau}\\|E_h(r)\\mathcal A_hF_h(Y_h(t+s))\\|_\\infty\\,dr \\le C_As. $ Thus the first integral in step 2.1 has norm at most $C_A\\tau^2/2$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F9",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-2",
+          "claim": "The reaction path $V_h(s)$ stays in $R$ by [F11], so its time derivative is uniformly bounded by $\\sup_R\\|F\\|$. Also $\\|Y_h(t+s)-Y_h(t)\\|_\\infty\\le s\\sup\\|u_t\\|_\\infty$. Hence, integrating both time derivatives by [F10], $\\|V_h(s)-Y_h(t+s)\\|_\\infty\\le C s$. The mean-value bound for $F$ on the convex rectangle $R$ and contraction of $E_h$ show that the second integral in step 2.1 has norm at most $C\\tau^2/2$. The residual term has norm at most $C_{\\rm sp}\\tau h_{\\max}^2$ by [F3] and [F5]. Consequently the one-step defect is at most $C(\\tau^2+\\tau h_{\\max}^2)$ with $C$ independent of grid and step.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F10",
+            "F11",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-4-1",
+          "claim": "Set $e_n=\\|U^n-Y_h(t_n)\\|_\\infty$. By [F6] and the assumed PDE range, both inputs in step 1.2 lie in $R$. Applying that stability estimate and the defect bound of step 3.2 gives $e_{n+1}\\le e^{L_F\\tau}e_n+C\\tau(\\tau+h_{\\max}^2)$, with $e_0=0$. Iterating, $e_n\\le C\\tau(\\tau+h_{\\max}^2)\\sum_{k=0}^{n-1}e^{L_Fk\\tau}\\le CT e^{L_FT}(\\tau+h_{\\max}^2)$ for $n\\tau\\le T$. This proves the stated estimate after enlarging $C_T$.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 3.2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 2.1–3.2 include zero diffusivity, whose diffusion block is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–4.1 include N=1 time step and any allowed periodic grid dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 includes n=0 and n=N in the maximum over the closed time interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–4.1 use finite matrices and scalar inequalities, with no arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-cell-centered-no-flux-reaction-diffusion-lie-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cell-centered-rectangular-no-flux-tpfa-grid",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega=\\prod_{j=1}^d(0,L_j)$, where $L_j>0$, and let integers $N_j\\ge2$ define $h_j=L_j/N_j$. The finite cell set is $I_h=\\prod_{j=1}^d\\{0,\\ldots,N_j-1\\}$, cell centers are $x_i=((i_j+\\tfrac12)h_j)_{j=1}^d$, and every cell has volume $m_h=\\prod_jh_j$. This is the uniform orthogonal Cartesian mesh; adjacent center segments are perpendicular to their shared faces. Take the scalar cellwise coefficient to be $\\lambda_K=1$ and give boundary faces homogeneous no-flux data, so they contribute no flux.\n\nFor a grid vector $v=(v_i)_{i\\in I_h}$, define the positive cell-centered stencil\n$$\n(A_h^Nv)_i=\\sum_{j=1}^d\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2},\n$$\nwhere an unavailable neighbor at a boundary is assigned the value of the boundary cell itself. Indeed a face normal to direction $j$ has area $|F|=m_h/h_j$ and adjacent centers are distance $h_j$ apart, so its TPFA transmissibility is $|F|/h_j=m_h/h_j^2$; dividing the cell balance by $m_h$ gives the displayed coefficient. Boundary faces contribute zero flux. Thus $M_h=m_hI$ and $L_h^N=m_hA_h^N$ are the mass and stiffness matrices of the no-flux specialization in [[def-fv-tpfa-no-flux-diffusion-specialization]]. For species diffusivities $d_r\\ge0$, the finite-volume diffusion equation is $U_r'=-d_rA_h^NU_r$.\n\nDefine the doubled periodic grid with $2N_j$ cells per direction on side lengths $2L_j$, using the same widths $h_j$, as in [[def-periodic-reaction-diffusion-grid]]. The reflection map $E_h$ extends $U$ evenly across every boundary face: in one coordinate, its extended index is $i$ for $0\\le i<N_j$ and $2N_j-1-i$ for $N_j\\le i<2N_j$; apply this coordinatewise. This finite reflection convention is used in the error theorem below.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-periodic-reaction-diffusion-grid",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, side lengths $L_j>0$, and integers $N_j\\ge3$. Put $h_j=L_j/N_j$, $\\mathbb T_L^d=\\prod_{j=1}^d(\\mathbb R/L_j\\mathbb Z)$, and $G_h=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z)$. Grid nodes are $x_i=((i_j+\\tfrac12)h_j)_{j=1}^d$ modulo the side lengths, grid indices wrap modulo $N_j$, and $P_hu=(u(x_i))_{i\\in G_h}$ denotes sampling. The cell volume is $m_h=\\prod_jh_j$. The positive periodic heat stencil is the unit-diffusivity specialization of the periodic operator in [[def-parabolic-theta-finite-difference-scheme]]:\n$$\n(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.\n$$\nFor $s$ species with diffusivities $d_r\\ge0$, the reaction-diffusion grid generator acts on species $r$ by $-d_rA_h^{\\rm per}$. Each grid node has weight $m_h=\\prod_jh_j$; the stencil has zero row and column sums, so each species' weighted sum is conserved by diffusion. Its matrix representation satisfies $L_h=m_hA_h^{\\rm per}$, with symmetric $L_h$, nonpositive off-diagonal entries and $L_h\\mathbf1=0$.\n\nThe sign convention is that $A_h^{\\rm per}$ is nonnegative and $-d_rA_h^{\\rm per}$ generates diffusion. The exact eigenvalues of the positive stencil are supplied by [[lem-periodic-heat-difference-amplification-symbol]]. This grid is the only spatial discretization used in the periodic error theorem; no mesh-uniform claim for general finite-volume meshes is made there.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-reaction-diffusion-lie-error-estimate",
+          "source_section": "Statement",
+          "quote": "Fix $T>0$, a rectangular torus $\\mathbb T_L^d$, and $D=\\operatorname{diag}(d_1,\\ldots,d_m)$ with $d_r\\ge0$. Let $F\\in C^2(U,\\mathbb R^m)$ on an open neighborhood $U$ of a compact reaction-inward rectangle $R$, and let $u\\in C^1([0,T];C^4(\\mathbb T_L^d;\\mathbb R^m))$ solve $u_t=D\\Delta u+F(u)$ with $u(x,t)\\in R$. For each periodic grid of [[def-periodic-reaction-diffusion-grid]], let $P_hu(t)$ be the samples, and start the exact Lie algorithm [[alg-exact-lie-reaction-diffusion-step]] from $U^0=P_hu(0)$, using the periodic branch and uniform steps $\\tau=T/N$. There is a constant $C_T$, depending on $u,F,D,R,T,L,d,m$ but not on the grid widths or $N$, such that\n$$\n\\max_{0\\le n\\le N}\\|U^n-P_hu(t_n)\\|_\\infty\\le C_T(\\tau+h_{\\max}^2),\\qquad t_n=n\\tau.\n$$\nThe estimate is for exact reaction and diffusion subflows, a fixed smooth solution, and the periodic centered grid. It gives no error claim for a general finite-volume mesh, nonsmooth solutions, approximate subsolvers, or nonlinear cross-diffusion.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-exact-lie-reaction-diffusion-step",
+          "source_section": "Definition",
+          "quote": "1. At every cell/node $i$, solve the exact reaction IVP $\\dot z=F(z)$ from $z(0)=U_i^n$ to time $\\tau$, and set $V_i=\\Phi_F^\\tau(U_i^n)$.\n2. For each species $r$, apply the exact diffusion map $e^{-\\tau d_rM^{-1}L_h}$ in the TPFA case or $e^{-\\tau d_rA_h^{\\rm per}}$ in the periodic-grid case to the vector $(V_{i,r})_i$; call the output $U^{n+1}_{\\cdot,r}$.\n3. Return $U^{n+1}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass",
+          "source_section": "Statement",
+          "quote": "Let $R=\\prod_{i=1}^m[a_i,b_i]$ be the reaction-inward rectangle of [[def-reaction-invariant-rectangle]]. Assume $F$ from [[def-reaction-vector-field-and-quasipositivity]] is continuously differentiable on an open neighborhood of $R$, and its derivative is bounded on some closed neighborhood of $R$. For any $z_0\\in R$, the IVP $z'=F(z)$ has a unique solution for every $t\\ge0$, and $z(t)\\in R$. If $c$ is a conservation vector on $R$, then $c^Tz(t)=c^Tz_0$; if it is a dissipation vector, then $c^Tz(t)$ is nonincreasing. The lower-face condition is quasi-positivity when $a_i=0$; upper-face inwardness remains a separate hypothesis.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "This series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "For each coordinate define $r_j(k_j)=k_j$ if $0\\le k_j<N_j$ and $r_j(k_j)=2N_j-1-k_j$ if $N_j\\le k_j<2N_j$. Then $(E_hU)_k=U_{(r_j(k_j))_j}$. At an interior original index, the doubled periodic stencil uses the same two neighbors as $A_h^N$. At the left boundary, the doubled neighbor $k_j=-1$ is represented by $2N_j-1$, whose reflected index is $0$, so its value is $U_i$; the right-boundary ghost similarly equals the last cell value. Therefore $ A_{2h}^{\\rm per}E_hU=E_hA_h^NU $ for every array $U$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "From step 1.1, $(A_{2h}^{\\rm per})^kE_h=E_h(A_h^N)^k$ for every integer $k\\ge0$, by induction. The exponential power series [F6] then gives $e^{-\\tau d_rA_{2h}^{\\rm per}}E_h=E_he^{-\\tau d_rA_h^N}$ for each species. The nodewise reaction flow also commutes with $E_h$: reflected copies start from identical values and solve the same IVP, so uniqueness [F5] keeps them identical.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "At time zero, $E_hP_hu(0)$ is exactly the sample of the even-reflected continuous initial data on the doubled torus. Step 2.1 shows that the periodic split update of this array is the even extension of the no-flux TPFA split update. Induction over $n$ therefore identifies the periodic numerical iterates with $E_hU^n$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "proof-step-4-1",
+          "claim": "The even-reflected function is $C^1_tC^4_x$ by [A1]. On every reflected open subrectangle, reflection preserves the Laplacian and acts only by coordinate sign changes on first derivatives; since the PDE has constant diagonal diffusion and pointwise reaction, the reflected function satisfies the same equation there. The equality extends across each interface by continuity of the function and its time and second spatial derivatives. Thus the doubled function solves the periodic problem covered by [F3]. Its samples are $E_hP_hu(t_n)$, and step 3.1 plus reflection gives $ \\|E_hU^n-E_hP_hu(t_n)\\|_\\infty=\\|U^n-P_hu(t_n)\\|_\\infty. $ Apply [F3] on the doubled grid, whose counts $2N_j$ are at least four, to obtain the bound.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 intertwines the identity diffusion block when d_r=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton-size case changes the argument beyond the finite dimensions and index sets allowed by the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 4.1 explicitly cover reflected boundary cells and both time endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–4.1 define the finite reflection map explicitly; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "cex-consistent-mass-p1-fem-diffusion-fails-positivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "This series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "On an element $[0,h]$, the two affine basis functions are $\\phi_1(x)=1-x/h$ and $\\phi_2(x)=x/h$. Direct integration gives $ \\int_0^h\\phi_1^2\\,dx=\\int_0^h\\phi_2^2\\,dx=h/3,\\quad \\int_0^h\\phi_1\\phi_2\\,dx=h/6, $ and their derivatives are $-1/h$ and $1/h$, so the element stiffness entries are $1/h,-1/h,-1/h,1/h$. Assembling the two elements yields the displayed matrices: $ M=\\frac h6\\begin{pmatrix}2&1&0\\\\1&4&1\\\\0&1&2\\end{pmatrix}, \\qquad K=\\frac1h\\begin{pmatrix}1&-1&0\\\\-1&2&-1\\\\0&-1&1\\end{pmatrix}. $ The Neumann condition is natural in this stiffness form and adds no boundary matrix.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Write $M=(h/6)B$ and $K=C/h$ for the displayed integer matrices. Direct multiplication verifies $ B^{-1}=\\frac1{12}\\begin{pmatrix}7&-2&1\\\\-2&4&-2\\\\1&-2&7\\end{pmatrix},\\qquad B^{-1}C=\\frac1{12}\\begin{pmatrix}9&-12&3\\\\-6&12&-6\\\\3&-12&9\\end{pmatrix}. $ Thus $M^{-1}K=6B^{-1}C/h^2$, the matrix in the Statement. With $e_3=(0,0,1)^T$, the ODE gives $u'(0)=-\\nu M^{-1}Ke_3$, whose first component is $-3\\nu/(2h^2)<0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "The linear field $u\\mapsto-\\nu M^{-1}Ku$ is globally Lipschitz. By [F1], $e^{-t\\nu M^{-1}K}e_3$ solves the IVP, and [F2] makes it the unique solution. Since $u_1(0)=0$ and $u_1'(0)<0$ by step 2.1, the right difference quotient $u_1(t)/t$ is negative for all sufficiently small $t>0$. Hence the consistent-mass P1 semidiscrete diffusion is not positivity preserving, despite the nonnegative initial nodal vector.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 uses u_1(0)=0 and proves the component becomes negative immediately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 assemble two one-dimensional elements and use the third nodal impulse."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 assume h>0 and nu>0 and use the initial nodal endpoint u_1(0)=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "ex-brusselator-continuous-turing-instability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-two-species-continuous-and-discrete-turing-criterion",
+          "source_section": "Statement",
+          "quote": "Define\n$$\n\\beta_T=d_2J_{11}+d_1J_{22},\\qquad q(\\lambda)=\\det(J-\\lambda D)=d_1d_2\\lambda^2-\\beta_T\\lambda+\\det J.\n$$\nFor either domain or grid and each actual mode, $J-\\lambda D$ has a positive-real-part eigenvalue exactly when $q(\\lambda)<0$; it is Hurwitz exactly when $q(\\lambda)>0$, and has a zero eigenvalue when $q(\\lambda)=0$. Thus the continuous or discrete linear instability criterion tests the actual corresponding spectrum. If all nonnegative $\\lambda$ are regarded as continuously available, then a diffusion-driven unstable band exists exactly when $\\beta_T>0$ and $\\beta_T^2>4d_1d_2\\det J$; its endpoints are\n$$\n\\lambda_\\pm=\\frac{\\beta_T\\pm\\sqrt{\\beta_T^2-4d_1d_2\\det J}}{2d_1d_2}.\n$$\nOn a bounded torus or a finite grid, the band criterion alone is not enough: at least one actual Laplacian eigenvalue must lie strictly between $\\lambda_-$ and $\\lambda_+$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Direct substitution gives $F(1,3/2)=(0,0)$. Differentiating the two components gives $ J=DF(1,3/2)=\\begin{pmatrix}1/2&1\\\\-3/2&-1\\end{pmatrix}, \\qquad \\operatorname{tr}J=-1/2,\\quad \\det J=1. $",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "The coefficient in the dispersion polynomial is $\\beta_T=d_2J_{11}+d_1J_{22}=9/10$ and $d_1d_2=1/5$. Therefore $ q(\\lambda)=\\tfrac15\\lambda^2-\\tfrac9{10}\\lambda+1 =\\tfrac15(\\lambda-2)(\\lambda-\\tfrac52). $",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "For the continuous torus mode $k=1$, $\\lambda=(2\\pi/L)^2=9/4$. This lies strictly between $2$ and $5/2$, so step 2.1 gives $q(9/4)<0$. By [F1], the mode matrix has one positive eigenvalue and one negative eigenvalue. This example proves a linear mode instability only; it does not assert nonlinear pattern existence or stability.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 compares a positive mode; the homogeneous mode lambda=0 is covered by the mode criterion in [F1]."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton-size case changes the argument beyond the finite dimensions and index sets allowed by the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoint branch occurs beyond the closed intervals and boundary conditions explicitly stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1 uses q(9/4)<0 to infer the positive eigenvalue."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "the example makes no converse parameter or spectrum claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "ex-three-cell-grid-suppresses-continuous-turing-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "ex-brusselator-continuous-turing-instability",
+          "source_section": "Statement",
+          "quote": "Consider the Brusselator field\n$$\nF(u,v)=\\bigl(1-\\tfrac52u+u^2v,\\ \\tfrac32u-u^2v\\bigr)\n$$\nwith diagonal diffusivity $D=\\operatorname{diag}(1/10,2)$. Its homogeneous equilibrium is $(u_*,v_*)=(1,3/2)$. On the one-dimensional torus of length $L=4\\pi/3$, the continuous reaction-diffusion linearization has an unstable Fourier mode with wave number $k=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-two-species-continuous-and-discrete-turing-criterion",
+          "source_section": "Statement",
+          "quote": "Define\n$$\n\\beta_T=d_2J_{11}+d_1J_{22},\\qquad q(\\lambda)=\\det(J-\\lambda D)=d_1d_2\\lambda^2-\\beta_T\\lambda+\\det J.\n$$\nFor either domain or grid and each actual mode, $J-\\lambda D$ has a positive-real-part eigenvalue exactly when $q(\\lambda)<0$; it is Hurwitz exactly when $q(\\lambda)>0$, and has a zero eigenvalue when $q(\\lambda)=0$. Thus the continuous or discrete linear instability criterion tests the actual corresponding spectrum. If all nonnegative $\\lambda$ are regarded as continuously available, then a diffusion-driven unstable band exists exactly when $\\beta_T>0$ and $\\beta_T^2>4d_1d_2\\det J$; its endpoints are\n$$\n\\lambda_\\pm=\\frac{\\beta_T\\pm\\sqrt{\\beta_T^2-4d_1d_2\\det J}}{2d_1d_2}.\n$$\nOn a bounded torus or a finite grid, the band criterion alone is not enough: at least one actual Laplacian eigenvalue must lie strictly between $\\lambda_-$ and $\\lambda_+$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Here $h=L/3=4\\pi/9$. The grid symbol gives $\\lambda_0=0$ and $ \\lambda_1=\\lambda_2=\\frac{3}{h^2}=\\frac{243}{16\\pi^2}<2, $ where the last inequality follows from $\\pi>3$, since $243/(16\\pi^2)<243/144=27/16<2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "At $\\lambda_0=0$, the reaction Jacobian has trace $-1/2$ and determinant $1$, so it is Hurwitz by the two-dimensional criterion in [F2]. For $\\ell=1,2$, step 1.1 gives $0<\\lambda_\\ell<2$, so both factors in $q(\\lambda_\\ell)=\\tfrac15(\\lambda_\\ell-2)(\\lambda_\\ell-\\tfrac52)$ are negative and their product is positive. The mode trace is $-1/2-(1/10+2)\\lambda_\\ell<0$, so [F2] makes both modes Hurwitz. These are all three grid modes, even though the continuous mode in [F1] is unstable.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 separately verifies the zero grid mode lambda_0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 enumerate all three modes of the three-node grid."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoint branch occurs beyond the closed intervals and boundary conditions explicitly stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    },
+    "ex-fisher-kpp-forward-reaction-euler-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fv-tpfa-no-flux-diffusion-specialization",
+          "source_section": "Definition",
+          "quote": "For species diffusivities $d_r\\ge0$, the no-flux finite-volume diffusion equation is $M U_r'+d_r L_h U_r=0$ for each species $r$, where $M=\\operatorname{diag}(|K|)$. Its component equation is\n$$\n|K|(U_{K,r})'=d_r\\sum_{L:c_{KL}>0}c_{KL}(U_{L,r}-U_{K,r}).\n$$\nThe equality is the usual shared-face TPFA balance with outward flux $T_F(U_{K,r}-U_{L,r})$ and no boundary flux. The matrix $L_h$ is symmetric, has zero row sums and nonpositive off-diagonal entries, and obeys $v^{\\mathsf T}L_hv=\\sum_{\\{K,L\\}}c_{KL}(v_K-v_L)^2\\ge0$, where the sum is over unordered adjacent cell pairs. With $M=\\operatorname{diag}(|K|)$, the generator $-M^{-1}L_h$ is self-adjoint in the weighted pairing $\\langle v,w\\rangle_M=v^{\\mathsf T}Mw$. This definition makes no accuracy claim for arbitrary admissible meshes.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-euler-reaction-lie-diffusion-step",
+          "source_section": "Definition",
+          "quote": "1. At every cell/node, compute the forward-Euler reaction value $V_i=U_i^n+\\tau F(U_i^n)$.\n2. For each species $r$, apply the exact diffusion map $e^{-\\tau d_rM^{-1}L_h}$ in the TPFA case or $e^{-\\tau d_rA_h^{\\rm per}}$ in the periodic-grid case to $(V_{i,r})_i$.\n3. Return the resulting state $U^{n+1}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euler-lie-step-preserves-invariant-rectangle-and-mass",
+          "source_section": "Statement",
+          "quote": "Choose either the no-flux TPFA system of [[def-fv-tpfa-no-flux-diffusion-specialization]] or the periodic grid system of [[def-periodic-reaction-diffusion-grid]]. Use [[alg-euler-reaction-lie-diffusion-step]] with a reaction-inward rectangle $R$, an initial state in $R$, and $0\\le\\tau\\le\\tau_R$ from [[lem-forward-euler-reaction-step-preserves-invariant-rectangle-and-mass]]. Then every component of the output state lies in $R$. The functional $\\mathcal M_{c,h}$ is unchanged when $c^TF=0$ throughout $R$, and is nonincreasing when $c^TF\\le0$ throughout $R$. The diffusion substep here is exact; no positivity assertion for a forward-Euler diffusion substep is made.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "On $[0,1]$, $F(0)=F(1)=0$, so the field points inward at both endpoints. Also $|F'(u)|=|r(1-2u)|\\le r$, giving the coordinate Lipschitz constant $L=r$ and Euler restriction $\\tau\\le1/r$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "For $u\\in[0,1]$, set $\\alpha=\\tau r\\in[0,1]$. The Euler value is $u^+=u+\\alpha u(1-u)\\ge0$, while $ 1-u^+=(1-u)(1-\\alpha u)\\ge0 $ because both factors are nonnegative. Thus the reaction step preserves $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "If $\\alpha=\\tau r>1$, choose $u$ with $1/\\alpha<u<1$. Then $1-u^+=(1-u)(1-\\alpha u)<0$, so the Euler map leaves $[0,1]$. Together with step 2.1 this proves the stated necessary-and-sufficient bound for the reaction map.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-4-1",
+          "claim": "The reaction map satisfies the hypothesis of [F3] by step 2.1; applying [F2] and then [F3] proves that the full TPFA Lie update also remains in $[0,1]$. For $0<u<1$, $F(u)>0$, so reaction increases total mass on any positive-weight grid with an interior-valued state; mass conservation is not claimed.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty domain, grid, state set, or matrix and does not assert the empty-object convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 includes tau=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–4.1 concern one species at every TPFA cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement excludes the degenerate interval, domain, or matrix case, so no additional degenerate branch is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–3.1 check both interval endpoints and the sharp restriction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite constructions and does not choose from an arbitrary family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a separate reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-62 author self-check",
+        "notes": "Final proof steps, inputs, exact supplier excerpts, boundary branches, and declared axiom uses were checked against the item. Exact finite arithmetic is carried in the Turing-mode and P1 matrix proofs; no registered finite-smoke fixture covers these claims, so no unrelated check is claimed. This is authoring evidence, not independent approval."
+      }
+    }
+  }
+}

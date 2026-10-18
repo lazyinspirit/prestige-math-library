@@ -1,0 +1,838 @@
+[
+  {
+    "order": 2632,
+    "id": "nonlinear-parabolic-compactness-and-monotone-evolution",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nonlinear parabolic compactness and monotone evolution",
+    "companion": "nonlinear-parabolic-compactness-and-monotone-evolution-examples",
+    "requires": [
+      "parabolic-finite-element-methods",
+      "homology-axioms-degree-and-classical-applications"
+    ],
+    "items": [
+      {
+        "id": "def-pe12-gelfand-triple",
+        "kind": "definition",
+        "title": "Banach evolution triples and weak time derivatives",
+        "statement": "Define a real reflexive Banach evolution triple V densely and continuously embedded in a real Hilbert space H, the canonical embedding H→V*, Bochner Lp(V) and Lp′(V*) classes, distributional time derivative, and the trace convention used in PE12.",
+        "deps": [
+          "def-parabolic-evolution-triple-and-energy-space",
+          "def-hilbert-space"
+        ],
+        "strategy": "Extend the published Hilbert evolution-triple convention to a separable reflexive Banach energy space and specify every pairing and weak derivative.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§7.2, evolution spaces and the H-valued trace, printed pp. 204–207"
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, lecture notes, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 11 §§11.1–11.2, PDF pp. 96–101"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pe12-w1p-compact-l2-embedding",
+        "kind": "lemma",
+        "title": "The subcritical W0 one p embedding into L2",
+        "statement": "For every bounded open Ω⊂R^d, d≥1, and 1<p<∞ with p>max(1,2d/(d+2)), W0^{1,p}(Ω) embeds densely, continuously, and compactly in L2(Ω); d=1 uses zero extension, FTC/Hölder and Arzelà–Ascoli, while d≥2 uses a subcritical exponent reduction.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-subcritical-compactness-for-w-one-p-zero-on-arbitrary-bounded-open-sets",
+          "cor-sobolev-inequality-for-w-one-p-zero",
+          "lem-zero-extension-from-w-one-p-zero",
+          "thm-holder-inequality-for-integrals",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-arzela-ascoli-for-real-ck",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-compactly-embedded-normed-spaces"
+        ],
+        "strategy": "Split p<d from p≥d; use the exact strict subcritical exponent in the first branch and finite-measure Lp-to-L2 continuity after Rellich in the second.",
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer Universitext, 2011",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Theorem 9.16, Rellich–Kondrachov, PDF pp. 299–300; local bounded-open reduction is proved below."
+            },
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§7.3, compact Sobolev embeddings in evolution compactness; this URL is historically dropped in batch coverage and is not used as a premise."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pe12-bochner-lp-mollification",
+        "kind": "lemma",
+        "title": "Time translations and mollification in Bochner Lp",
+        "statement": "For a strongly measurable Banach-valued f∈Lp(0,T;X), 1≤p<∞, local time translations are continuous in Lp and scalar time mollifiers converge to f in Lp on compact subintervals; interval averages on partitions with vanishing maximum step converge in Lp.",
+        "deps": [
+          "def-bochner-integrable-function",
+          "def-strongly-measurable-banach-valued-function",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "def-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals",
+          "lem-lebesgue-measurable-sets-have-small-open-excess",
+          "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure",
+          "lem-bochner-integral-norm-inequality",
+          "thm-minkowski-integral-inequality",
+          "thm-continuity-from-below-for-measures"
+        ],
+        "strategy": "Approximate by finite-valued simple functions, use scalar Lp translation continuity componentwise, then Minkowski and density.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§7.2, smoothing of evolution-space functions; §7.3, time mollification in the Aubin–Lions proof"
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, lecture notes, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 11 §11.1, PDF pp. 96–98, evolution-space approximation by time mollification"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pe12-w0p-separable-reflexive",
+        "kind": "lemma",
+        "title": "The zero-boundary W1p space is separable and reflexive",
+        "statement": "Assume the ultrafilter lemma, Dependent Choice and Hahn–Banach. If Ω⊂R^d is bounded and open, d≥1, and 1<p<∞, then W0^{1,p}(Ω), with its inherited W1p norm, is a separable reflexive real Banach space.",
+        "deps": [
+          "lem-w-one-p-is-reflexive",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-closed-subspaces-of-reflexive-spaces-are-reflexive",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "def-separable-space",
+          "def-countable-choice",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative"
+        ],
+        "strategy": "Use the closed-subspace theorem for reflexivity; embed W1p isometrically into a finite product of Lp spaces, restrict rational box-step approximants, then use a countable base to obtain separability of its subspace W0p.",
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer Universitext, 2011",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Proposition 9.1 and its pointer to the complete proof of Proposition 8.1, printed pp. 204 and 263; $W^{1,p}$ is Banach, reflexive for $1<p<\\infty$, and separable for finite $p$."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-pe12-bochner-lp-completeness",
+        "kind": "theorem",
+        "title": "Bochner Lp is complete for a Banach value space",
+        "statement": "For a real Banach space X, finite T, and 1≤p<∞, the Bochner space Lp(0,T;X) with its integral norm is complete.",
+        "deps": [
+          "def-banach-space",
+          "def-bochner-integrable-function",
+          "def-strongly-measurable-banach-valued-function",
+          "def-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "strategy": "Choose a rapidly Cauchy subsequence, sum the pointwise norms of its increments, use monotone convergence to obtain an almost-everywhere Cauchy series, and estimate its Lp tail by Minkowski.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§1.5, construction of Bochner spaces and completeness"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer Universitext, 2011",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 4, Bochner integration and Lp completeness, PDF pp. 90–105"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pe12-outward-zero-brouwer",
+        "kind": "lemma",
+        "title": "An outward-pointing finite-dimensional map has a zero",
+        "statement": "If F:R^N→R^N is continuous and F(x)·x>0 on a sphere of radius R, then F has a zero in the closed ball.",
+        "deps": [
+          "thm-brouwer-fixed-point-theorem"
+        ],
+        "strategy": "Normalize −F on the ball to obtain a Brouwer fixed point; a fixed point must lie on the sphere and contradict the outward-pointing inequality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Marvin Fritz, Monotone Operators in Nonlinear PDEs, JKU lecture notes, WS 2023/2024",
+              "url": "https://numa.jku.at/media/filer_public/ff/80/ff80a871-94c4-4785-8314-028a46d185ed/lecturenotes.pdf",
+              "locator": "Theorem 2.1 and its Galerkin proof, finite-dimensional outward-pointing map step."
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer Universitext, 2011",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Theorem 5.16, finite-dimensional Brouwer argument in the Minty–Browder proof, PDF p. 159."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pe12-quasiuniform-mass-inverse-decay",
+        "kind": "lemma",
+        "title": "Quasi-uniform finite-element mass inverses have summable graph decay",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "lem-reference-polynomial-norm-equivalence",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Prove nodal unisolvence and cellwise coefficient scaling, count common-cell graph balls, then use a Neumann series for the scaled mass inverse and sum its geometric-distance bound.",
+        "statement": "For fixed degree on globally quasi-uniform shape-regular matching simplex meshes in d≥2, or directly defined interval partitions in d=1, scaled mass matrices have uniform spectral bounds, exponentially decaying inverse entries in the common-cell graph, bounded absolute row and column sums, uniform Lr nodal coefficient scaling, and local gradient coefficient bounds; the empty-space case is separate.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lars Diening, Johannes Storn, and Tabea Tscherpel, On the Sobolev and Lp-Stability of the L2-Projection, arXiv:2008.01801v2",
+              "url": "https://arxiv.org/pdf/2008.01801v2",
+              "locator": "§2.2, Lemma 2.1 and Proposition 2.2, PDF pp. 4–5: locality and graph-distance decay for the L2 projection. The present proof gives a separate entrywise Neumann-series argument under global quasi-uniformity."
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 12 §12.1, PDF pp. 102–103: nodal finite-element spaces and the L2 projection used in the parabolic Galerkin setting."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe12-monotone-diffusion-flux",
+        "kind": "definition",
+        "title": "Coercive monotone p-growth diffusion fluxes",
+        "statement": "For bounded open Ω⊂R^d, d≥1, and the full strict p threshold, define Carathéodory p-growth coercive monotone fluxes and their bounded variational maps on W0^{1,p}(Ω), with the Choice-dependent dense compact L2 evolution triple.",
+        "deps": [
+          "def-pe12-gelfand-triple",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-pe12-w1p-compact-l2-embedding",
+          "lem-pe12-w0p-separable-reflexive",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "State the exact pointwise hypotheses that make the variational flux well-defined, p-growth bounded, coercive and monotone.",
+        "sources": {
+          "references": [
+            {
+              "title": "Marvin Fritz, Monotone Operators in Nonlinear PDEs, JKU lecture notes, WS 2023/2024",
+              "url": "https://numa.jku.at/media/filer_public/ff/80/ff80a871-94c4-4785-8314-028a46d185ed/lecturenotes.pdf",
+              "locator": "§§3–4, especially the Nemytskii and quasilinear elliptic flux hypotheses, PDF pp. 10–17"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer Universitext, 2011",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Theorem 5.16 (Minty–Browder), PDF p. 159; Chapter 9, Sobolev spaces and Rellich compactness"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-pe12-stable-conforming-fem-family",
+        "kind": "definition",
+        "title": "Conforming FEM families with stable L2 projectors",
+        "statement": "Define finite-dimensional conforming spaces Vh⊂V with H-orthogonal projections Πh that are uniformly bounded V→V, converge strongly to the identity on V and H, and are paired with time partitions whose maximum step tends to zero.",
+        "deps": [
+          "def-pe12-gelfand-triple"
+        ],
+        "strategy": "Make the exact spatial projection and mesh-density interface used to lift the finite-dimensional time derivative into V* explicit.",
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, lecture notes, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 12 §§12.1–12.2, PDF pp. 102–105: conforming spatial subspaces and the L2 projection"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-pe12-evolution-energy-chain-rule",
+        "kind": "lemma",
+        "title": "The Banach evolution-space energy identity and H trace",
+        "statement": "If u∈Lp(0,T;V), u′∈Lp′(0,T;V*) with 1<p<∞ in a Banach evolution triple, then u has a unique representative in C([0,T];H) and satisfies the integrated Hilbert norm chain rule.",
+        "deps": [
+          "def-pe12-gelfand-triple",
+          "lem-pe12-bochner-lp-mollification",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-hilbert-space",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+        ],
+        "strategy": "Mollify on interior intervals, pass the scalar norm derivative to L1, then use scalar pairings, density of V in H, Riesz representation and norm continuity to construct the strong H trace.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§7.2, norm chain rule and continuous H-valued representative, printed pp. 205–207"
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, lecture notes, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 11 §11.1, PDF pp. 96–98, evolution-space trace and energy identity"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-pe12-aubin-lions-compactness",
+        "kind": "theorem",
+        "title": "Aubin–Lions compactness with exact time exponent",
+        "statement": "If V⊂H⊂V* with V compactly embedded in H and continuously embedded in V*, a family bounded in Lp(0,T;V) with distributional derivative bounded in Lq(0,T;V*), 1<p<∞ and 1<q≤∞, is relatively compact in Lp(0,T;H). With a uniform L∞(0,T;H) bound the same subsequence converges strongly in every finite Lr(0,T;H).",
+        "deps": [
+          "def-pe12-gelfand-triple",
+          "def-compactly-embedded-normed-spaces",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-pe12-bochner-lp-completeness",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+        ],
+        "strategy": "Approximate the V unit ball by finite-dimensional H subspaces, control coefficients by the V* derivative, use finite-dimensional equicontinuity and send the H approximation error to zero.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§7.3, Lemma 7.7 and complete proof, printed pp. 208–210"
+            },
+            {
+              "title": "Marvin Fritz, Monotone Operators in Nonlinear PDEs, JKU lecture notes, WS 2023/2024",
+              "url": "https://numa.jku.at/media/filer_public/ff/80/ff80a871-94c4-4785-8314-028a46d185ed/lecturenotes.pdf",
+              "locator": "Theorem 8.8 and Corollary 8.9.1, PDF pp. 33–36"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-pe12-space-time-gradient-weak-compactness",
+        "kind": "lemma",
+        "title": "Weak compactness of bounded space-time Sobolev gradients",
+        "statement": "For bounded open Ω⊂R^d, finite T, 1<p<∞, and a continuous inclusion W0^{1,p}(Ω)→H, a bounded Bochner sequence with strongly convergent H images has a weakly convergent subsequence in Lp(0,T;W0^{1,p}); the H image and space-time gradients have the claimed limits.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "lem-closed-subspace-of-a-banach-space-is-banach",
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence",
+          "thm-closed-subspaces-of-reflexive-spaces-are-reflexive",
+          "def-reflexive-banach-space",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-countable-choice",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-pe12-gelfand-triple",
+          "thm-pe12-bochner-lp-completeness",
+          "def-strongly-measurable-banach-valued-function",
+          "def-bochner-integrable-function",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-ultrafilter-lemma",
+          "thm-hahn-banach-dominated-extension"
+        ],
+        "strategy": "Embed the zero-extended function and its spatial gradient into a finite product of scalar Lp spaces, extract a weak limit, pass the distributional derivative identity, and recover zero trace on the C1 boundary.",
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer Universitext, 2011",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Chapter 3 §§3.5–3.6, Theorems 3.18–3.19 and Proposition 3.20, printed pp. 69–73; Chapter 4 §4.3, Theorem 4.10, printed pp. 96–98."
+            },
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§7.3, Lemma 7.7 and proof, printed pp. 208–210, for the compactness-and-weak-limit route."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-pe12-discrete-aubin-lions-compactness",
+        "kind": "theorem",
+        "title": "Piecewise-constant discrete Aubin–Lions compactness",
+        "statement": "For conforming-space-valued piecewise-constant reconstructions on partitions with maximum step δk→0, uniform Lp(V) and piecewise discrete derivative Lq(V*) bounds with q>1 imply relative compactness in Lp(H); the time-translate bound is O(h+δk), and a uniform L∞(H) bound upgrades convergence to every finite Lr(H).",
+        "deps": [
+          "def-pe12-gelfand-triple",
+          "def-compactly-embedded-normed-spaces",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-pe12-bochner-lp-completeness",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+        ],
+        "strategy": "Compare the piecewise-constant reconstruction with its affine interpolant, prove an O(δk) reconstruction defect and O(h+δk) V* translates, then use the same finite-rank compact approximation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§7.3, compactness proof via time averaging, printed pp. 208–210"
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, lecture notes, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 12 §12.1, piecewise-constant dG(0)/implicit Euler time stepping, PDF pp. 102–103"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-pe12-boundary-preserving-quasi-interpolation",
+        "kind": "lemma",
+        "title": "Boundary-preserving quasi-interpolation is stable and strongly approximating",
+        "deps": [
+          "lem-pe12-quasiuniform-mass-inverse-decay",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-zero-extension-from-w-one-p-zero",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "thm-holder-inequality-for-integrals",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Convolve the zero extension, sample only interior Lagrange nodes, prove local cube Poincare estimates and boundary exterior density, and obtain strong convergence by smooth-density and uniform stability.",
+        "statement": "On the approved Lipschitz-polyhedral simplex or interval mesh branches, a zero-boundary mollified nodal operator maps W0^{1,p} to Vh for every finite p, has O(h) Lp approximation and uniform gradient stability, and converges strongly in W1p.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lars Diening, Johannes Storn, and Tabea Tscherpel, On the Sobolev and Lp-Stability of the L2-Projection, arXiv:2008.01801v2",
+              "url": "https://arxiv.org/pdf/2008.01801v2",
+              "locator": "§4.3–4.4, PDF pp. 24–25: zero-boundary L2-projector stability and its use of approximation operators. Their Scott–Zhang operator is not imported; the local mollified construction below is proved directly."
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 12 §12.1, PDF pp. 102–103: conforming finite-element spaces and the associated L2 projection."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe12-minty-identification",
+        "kind": "lemma",
+        "title": "Minty identification for a monotone Carathéodory flux",
+        "statement": "Let a(x,ξ) be a Carathéodory monotone flux with p-growth. If gradients converge weakly in Lp(Q), fluxes converge weakly in Lp′(Q), and the flux-gradient pairings satisfy the Minty limsup inequality, then the weak flux limit equals a(x,∇u).",
+        "deps": [
+          "def-pe12-monotone-diffusion-flux",
+          "thm-holder-inequality-for-integrals",
+          "thm-dominated-convergence",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Integrate the pointwise monotonicity inequality against arbitrary comparison gradients, pass to the limsup, then test with ∇u±ε∇w and use dominated convergence and hemicontinuity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer Universitext, 2011",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Theorem 5.16, Minty–Browder monotonicity argument, PDF p. 159 (printed p. 145)."
+            },
+            {
+              "title": "Marvin Fritz, Monotone Operators in Nonlinear PDEs, JKU lecture notes, WS 2023/2024",
+              "url": "https://numa.jku.at/media/filer_public/ff/80/ff80a871-94c4-4785-8314-028a46d185ed/lecturenotes.pdf",
+              "locator": "§0, Minty trick, PDF pp. 2–3."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-pe12-strong-monotone-residual-estimate",
+        "kind": "theorem",
+        "title": "Quantitative residual error under strong monotonicity",
+        "statement": "For two weak evolution fields with residual difference R and identical diffusion, if A is strongly monotone with exponent p, the H-time error and the Lp(V) error are bounded by the initial H error and the Lp′(V*) residual norm.",
+        "deps": [
+          "def-pe12-gelfand-triple",
+          "def-pe12-monotone-diffusion-flux",
+          "lem-pe12-evolution-energy-chain-rule",
+          "thm-holder-inequality-for-integrals",
+          "def-axiom-of-choice",
+          "thm-young-inequality-real-exponents"
+        ],
+        "strategy": "Subtract the weak equations, test by the solution difference, apply the energy chain rule and p/p′ Young inequality, then integrate.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§7.2, evolution-space energy chain rule and monotone uniqueness framework."
+            },
+            {
+              "title": "Marvin Fritz, Monotone Operators in Nonlinear PDEs, JKU lecture notes, WS 2023/2024",
+              "url": "https://numa.jku.at/media/filer_public/ff/80/ff80a871-94c4-4785-8314-028a46d185ed/lecturenotes.pdf",
+              "locator": "§9, energy testing of monotone evolution equations."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-pe12-l2-projector-w1p-stability",
+        "kind": "theorem",
+        "title": "L2 projections are uniformly W1p-stable on quasi-uniform conforming meshes",
+        "deps": [
+          "lem-pe12-quasiuniform-mass-inverse-decay",
+          "lem-pe12-boundary-preserving-quasi-interpolation",
+          "def-pe12-gelfand-triple",
+          "def-pe12-monotone-diffusion-flux",
+          "def-pe12-stable-conforming-fem-family",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-holder-inequality-for-integrals",
+          "lem-pe12-w0p-separable-reflexive",
+          "lem-pe12-w1p-compact-l2-embedding",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use scaled mass inverse row and column bounds for Lr stability, then combine the boundary-preserving quasi-interpolant, the polynomial inverse inequality, and density for W1p stability and convergence.",
+        "statement": "On fixed-degree globally quasi-uniform shape-regular matching simplex meshes in d≥2 and directly defined interval partitions in d=1, the mass-system map is uniformly Lr-stable for 1≤r≤∞ and W1p-stable and strongly approximating for every 1<p<∞; explicit cube and interval families instantiate the full strict PE12 exponent range.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lars Diening, Johannes Storn, and Tabea Tscherpel, On the Sobolev and Lp-Stability of the L2-Projection, arXiv:2008.01801v2",
+              "url": "https://arxiv.org/pdf/2008.01801v2",
+              "locator": "§2.2, Proposition 2.2, and §4.4, Theorem 4.14 with complete proof, PDF pp. 4–5 and 24–25. The paper treats its stated mesh-grading conditions; this carrier proves the global quasi-uniform branches below directly."
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 12 §12.1, PDF pp. 102–103: the finite-element L2 projection and parabolic method-of-lines context."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe12-backward-euler-galerkin-existence-energy",
+        "kind": "theorem",
+        "title": "Nonlinear backward Euler Galerkin existence and energy bounds",
+        "statement": "Under the PE12 flux and stable-projector hypotheses, each nonlinear backward Euler step has a Galerkin solution and the sequence satisfies uniform H, V, jump-energy, and discrete derivative bounds. The same conclusion is instantiated on unit-interval and unit-cube standard meshes with independent time refinement. For each fixed stable family, the uniform derivative-inclusive bound depends on its projector stability constant C_Pi and the flux-growth datum ||g||_(L^pprime), alongside the other stated flux/data quantities.",
+        "deps": [
+          "def-pe12-monotone-diffusion-flux",
+          "def-pe12-stable-conforming-fem-family",
+          "lem-pe12-outward-zero-brouwer",
+          "lem-parabolic-discrete-energy-identity",
+          "thm-holder-inequality-for-integrals",
+          "thm-young-inequality-real-exponents",
+          "def-axiom-of-choice",
+          "thm-pe12-l2-projector-w1p-stability",
+          "thm-dominated-convergence"
+        ],
+        "strategy": "Apply the outward-pointing Brouwer lemma at each step, test with the new solution, use the Hilbert discrete energy identity, coercivity and conjugate-exponent Young inequality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, lecture notes, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 12 §§12.1–12.2, implicit Euler and discrete energy, PDF pp. 102–108"
+            },
+            {
+              "title": "Marvin Fritz, Monotone Operators in Nonlinear PDEs, JKU lecture notes, WS 2023/2024",
+              "url": "https://numa.jku.at/media/filer_public/ff/80/ff80a871-94c4-4785-8314-028a46d185ed/lecturenotes.pdf",
+              "locator": "Theorem 2.1, Galerkin/Brouwer existence proof, and §9, evolution time stepping"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-pe12-monotone-fem-limit",
+        "kind": "theorem",
+        "title": "Conditional monotone finite-element convergence",
+        "statement": "Under the flux hypotheses and abstract stable conforming FEM projectors, backward Euler reconstructions have a subsequence converging strongly in every finite Lr(0,T;H), weakly in Lp(0,T;V), and with the flux identified by Minty; uniqueness follows by monotonicity. Unit interval and cube standard meshes instantiate the full strict p range.",
+        "deps": [
+          "def-pe12-gelfand-triple",
+          "def-pe12-monotone-diffusion-flux",
+          "def-pe12-stable-conforming-fem-family",
+          "lem-pe12-w1p-compact-l2-embedding",
+          "lem-pe12-evolution-energy-chain-rule",
+          "thm-pe12-discrete-aubin-lions-compactness",
+          "thm-pe12-backward-euler-galerkin-existence-energy",
+          "lem-pe12-space-time-gradient-weak-compactness",
+          "lem-pe12-minty-identification",
+          "lem-pe12-bochner-lp-mollification",
+          "lem-parabolic-discrete-energy-identity",
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence",
+          "def-reflexive-banach-space",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "def-countable-choice",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-ultrafilter-lemma",
+          "thm-hahn-banach-dominated-extension",
+          "def-hilbert-space",
+          "thm-holder-inequality-for-integrals",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-pe12-l2-projector-w1p-stability"
+        ],
+        "strategy": "Use the energy bound, projected discrete derivative estimate and discrete Aubin–Lions compactness; pass the weak equation and initial trace, derive the Minty limsup from the discrete energy identity, identify the flux, and prove uniqueness by the chain rule.",
+        "sources": {
+          "references": [
+            {
+              "title": "Marvin Fritz, Monotone Operators in Nonlinear PDEs, JKU lecture notes, WS 2023/2024",
+              "url": "https://numa.jku.at/media/filer_public/ff/80/ff80a871-94c4-4785-8314-028a46d185ed/lecturenotes.pdf",
+              "locator": "§9, evolution equation and Galerkin convergence; §0, Minty trick; Theorem 8.8, compactness, PDF pp. 33–43."
+            },
+            {
+              "title": "Tomáš Roubíček, Nonlinear Partial Differential Equations with Applications, 2nd ed., Birkhäuser, 2005",
+              "url": "https://www.nzdr.ru/data/media/biblio/kolxoz/M/MC/MCde/Roubicek%20T.%20Nonlinear%20partial%20differential%20equations%20with%20applications%20%282ed.%2C%202005%29%28ISBN%209783034805124%29%28O%29%28457s%29_MCde_.pdf",
+              "locator": "§7.2, evolution energy identity; §7.3, Lemma 7.7 and proof, printed pp. 205–210."
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, lecture notes, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapters 11–12, evolution triples, backward Euler and Galerkin approximation, PDF pp. 96–108."
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer Universitext, 2011",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Theorem 5.16, Minty–Browder identification, PDF p. 159 (printed p. 145)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2633,
+    "id": "nonlinear-parabolic-compactness-and-monotone-evolution-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nonlinear parabolic compactness and monotone evolution — Examples",
+    "companion": "nonlinear-parabolic-compactness-and-monotone-evolution",
+    "requires": [
+      "nonlinear-parabolic-compactness-and-monotone-evolution"
+    ],
+    "items": [
+      {
+        "id": "ex-pe12-porous-medium-barenblatt",
+        "kind": "example",
+        "title": "A Barenblatt profile has finite propagation",
+        "statement": "For m>1, the one-dimensional porous-medium equation u_t=(u^m)_{xx} admits an explicit nonnegative profile with compact support at every positive time and interface radius proportional to t^{1/(m+1)}.",
+        "deps": [],
+        "strategy": "Differentiate the positive-part self-similar profile in its positivity region, match the scaling exponents and coefficient, then verify the flux has no boundary delta and compute the support.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-pe12-linear-ritz-does-not-commute",
+        "kind": "counterexample",
+        "title": "The linear Ritz projection need not commute with the p-Laplacian",
+        "statement": "The assertion that the linear Laplace Ritz projection preserves the nonlinear p-Laplace Galerkin residual for every input is false.",
+        "deps": [
+          "def-countable-choice",
+          "def-parabolic-ritz-projection",
+          "lem-two-cell-hat-and-quadratic-functions-lie-in-h10",
+          "lem-parabolic-zero-boundary-sobolev-space-is-separable",
+          "thm-poincare-inequality-for-w-one-p-zero"
+        ],
+        "strategy": "Use Ω=(0,1), the two-element P1 space, u(x)=x(1−x) and p=3; compute both residual pairings against the midpoint hat function and compare 1/2 with 2/3.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "ex-pe12-time-oscillations-without-derivative-control",
+        "kind": "example",
+        "title": "Time oscillations defeat compactness without derivative control",
+        "statement": "A bounded family in L2(0,T;V) can fail to be relatively compact in L2(0,T;H) when no positive-exponent V* time-derivative or translate bound is imposed.",
+        "deps": [
+          "def-pe12-gelfand-triple"
+        ],
+        "strategy": "Take distinct integer temporal frequencies multiplying one fixed nonzero V vector; orthogonality gives a uniform positive pairwise L2(H) distance while the L2(V) norms stay constant.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-pe12-p-laplacian",
+        "kind": "example",
+        "title": "The p-Laplacian is an admissible monotone diffusion",
+        "statement": "The p-Laplacian flux satisfies the full monotonicity, p-growth, coercivity, and operator-continuity conditions for bounded open Ω⊂R^d and p>max(1,2d/(d+2)); explicit interval and unit-cube mesh families make the convergence theorem unconditional for those standard-mesh instances.",
+        "deps": [
+          "def-pe12-monotone-diffusion-flux",
+          "def-pe12-stable-conforming-fem-family",
+          "lem-pe12-w1p-compact-l2-embedding",
+          "thm-pe12-monotone-fem-limit",
+          "def-axiom-of-choice",
+          "thm-pe12-l2-projector-w1p-stability"
+        ],
+        "strategy": "Identify a as the gradient of the convex function |ξ|^p/p, verify its growth and coercivity, and invoke the proved Sobolev embedding and convergence theorem.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 5
+      }
+    ]
+  }
+]

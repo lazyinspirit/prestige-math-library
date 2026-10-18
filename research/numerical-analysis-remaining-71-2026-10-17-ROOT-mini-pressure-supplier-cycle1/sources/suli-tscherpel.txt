@@ -1,0 +1,5540 @@
+
+PAGE 1
+arXiv:1804.02264v1  [math.NA]  6 Apr 2018
+FULLY DISCRETE FINITE ELEMENT APPROXIMATION OF UNSTEADY
+FLOWS OF IMPLICITLY CONSTITUTED INCOMPRESSIBLE FLUIDS
+ENDRE S¨ULI AND TABEA TSCHERPEL
+Abstract. Implicit constitutive theory provides a very general framework for ﬂuid ﬂow models,
+including both Newtonian and generalized Newtonian ﬂuids, where the Cauchy stress tensor and
+the rate of strain tensor are assumed to be related by an implicit relation associated with a maximal
+monotone graph. For incompressible unsteady ﬂows of such ﬂuids, subject to a homogeneous Dirichlet
+boundary condition on a Lipschitz polytopal domain Ω⊂Rd, d ∈{2, 3}, we investigate a fully-
+discrete approximation scheme, using a spatial mixed ﬁnite element approximation combined with
+backward Euler time-stepping.
+We show convergence of a subsequence of approximate solutions,
+when the velocity ﬁeld belongs to the space of solenoidal functions contained in L∞(0, T; L2(Ω)d) ∩
+Lq(0, T; W1,q
+0
+(Ω)d), provided that q ∈ 2d
+d+2, ∞, which is the maximal range for q with respect to
+existence of weak solutions. This is achieved by a technique based on splitting and regularizing, the
+use of a solenoidal parabolic Lipschitz truncation method, a local Minty-type monotonicity result,
+and various weak compactness results.
+Keywords. Finite element method, time-stepping, implicit constitutive models, convergence, weak
+compactness, Lipschitz truncation method
+1. Introduction
+In the mechanics of viscous incompressible ﬂuids typical constitutive relations relate the shear stress
+tensor to the rate of strain tensor through an explicit functional relationship. In the case of a Newtonian
+ﬂuid the relationship is linear, and in the case of generalized Newtonian ﬂuids it is usually a power-
+law-like nonlinear, but still explicit, functional relation. Implicit constitutive theory was introduced
+in order to describe a wide range of non-Newtonian rheology, by admitting implicit and discontinuous
+constitutive laws, see [33, 34]. The existence of weak solutions to mathematical models of this kind
+was explored, for example, in [10, 11] for steady and unsteady ﬂows, respectively. The aim of the
+present paper is to construct a fully discrete numerical approximation scheme, in the unsteady case,
+for a class of such implicitly constituted models, where the shear stress and rate of strain tensors are
+related through a (possibly discontinuous) maximal monotone graph. The scheme is based on a spatial
+mixed ﬁnite element approximation and a backward Euler discretization with respect to the temporal
+variable. We will show weak convergence (up to subsequences) to a weak solution of the model. The
+mathematical ideas contained in the paper are motivated by the existence theory formulated, in the
+unsteady case, in [11], and the convergence theory for ﬁnite element approximations of steady implicitly
+constituted ﬂuid ﬂow models developed in [16].
+1.1. Implicit Constitutive Law
+Statement of the Problem. Let Ω⊂Rd with d ≥2 be a bounded Lipschitz domain and denote by
+Q = (0, T ) × Ωthe parabolic cylinder for a given ﬁnal time T ∈(0, ∞). Furthermore, let f : Q →Rd
+be a given external force and let u0 : Ω→Rd be an initial velocity ﬁeld. We seek a velocity ﬁeld
+Mathematical Institute, University of Oxford, Woodstock Road, Oxford, OX2 6GG, UK
+E-mail addresses: endre.suli@maths.ox.ac.uk, tabea.tscherpel@maths.ox.ac.uk.
+Date: September 10, 2021.
+This work was supported by Engineering and Physical Sciences Research Council [EP/L015811/1].
+1
+
+
+PAGE 2
+2
+E. S¨ULI AND T. TSCHERPEL
+u : Q →Rd, a pressure π : Q →R, and a stress tensor ﬁeld S : Q →Rd×d
+sym satisfying the balance law
+of linear momentum and the incompressibility condition:
+∂tu + div(u ⊗u) −divS = −∇π + f,
+on (0, T ) × Ω,
+div u = 0,
+on (0, T ) × Ω,
+(1.1)
+subject to the following initial condition and no-slip boundary condition:
+u(0, ·) = u0(·)
+in Ω,
+(1.2)
+u = 0
+on (0, T ) × ∂Ω.
+(1.3)
+In order to close the system we need to impose a relation, the so-called constitutive law,
+G(·,Du,S) = 0,
+(1.4)
+between the stress tensor S and the symmetric gradient Du = 1
+2(∇u + (∇u)⊤), which represents the
+shear rate of the ﬂuid. In the following we will refer to the problem consisting of (1.1)–(1.4) as (P),
+and will use the notation z := (t, x) ∈Q.
+The relation G may be fully implicit and we assume that G can be identiﬁed with a maximal
+monotone graph A(z) ⊂Rd×d
+sym × Rd×d
+sym, for z ∈Q, as
+G(z,Du(z),S(z)) = 0
+⇔
+(Du(z),S(z)) ∈A(z),
+where A(·) satisﬁes the following assumption, similarly as in [10, p. 110] and [11, Sec. 1.2].
+Assumption 1.1 (Properties of A(·)). We assume that A(·) ⊂Rd×d
+sym × Rd×d
+sym satisﬁes the following
+conditions for a.e. z ∈Q:
+(A1) (0,0) ∈A(z);
+(A2) A(z) is a monotone graph, i.e., for all (D1,S1), (D2,S2) ∈A(z),
+(D1 −D2): (S1 −S2) ≥0;
+(A3) A(z) is a maximal monotone graph, i.e., (D,S) ∈Rd×d
+sym × Rd×d
+sym and
+(D −D): (S −S) ≥0
+for all (D,S) ∈A(z),
+implies that (D,S) ∈A(z);
+(A4) There exists a constant c∗> 0, a nonnegative function g ∈L1(Q) and q ∈(1, ∞) such that
+D : S ≥−g(z) + c∗(|D|q + |S|q′
+)
+for all (D,S) ∈A(z),
+where q′ is the H¨older conjugate of q;
+(A5) A is L(Q) −(B(Rd×d
+sym) ⊗B(Rd×d
+sym)) measurable, where L(Q) denotes the set of all Lebesgue
+measurable subsets of Q and B(Rd×d
+sym) denotes the set of all Borel subsets of Rd×d
+sym.
+Remark 1.2 (Properties of A(·)).
+(i) In [11] the authors phrase the condition (A4) in the more general context of Orlicz–Sobolev
+spaces. Here we will restrict ourselves to the usual Sobolev setting.
+(ii) Conditions for (A5) to be satisﬁed are given in [10, (A5)(i),(ii), p. 110].
+This framework covers explicit relations, including Newtonian ﬂuids, where q = 2, and q-ﬂuids
+describing shear-thinning and shear-thickening behaviour, for 1 < q < 2 and q > 2, respectively. Also
+relations, where the the stress is a set-valued or discontinuous function of the symmetric gradient, as
+for Bingham and Herschel–Bulkley ﬂuids, are included, which is shown in [11, Lem. 1.1]. Furthermore,
+fully implicitly constituted ﬂuids are covered and the constitutive relation is allowed to depend on
+(t, x) ∈Q.
+
+
+PAGE 3
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+3
+1.2. Overview of the Context
+For explicit constitutive laws the list of existence results is long, see amongst others [31, 32, 21, 18]
+and the references therein. For those constitutive laws the main challenge is the lack of admissibility
+for small q, caused by the presence of the convective term. In the most recent results this diﬃculty
+was overcome by the use of the Lipschitz truncation method.
+In the case of implicitly constituted ﬂuids, the existence of weak solutions for q >
+2d
+d+2 for steady
+and unsteady ﬂows was proved in [10, 11]. The restriction on q is required to ensure compactness
+of the embedding W1,q(Ω) ֒→L2(Ω), and implies that the convective term in the weak formulation
+is well-deﬁned. In [11], a Navier slip boundary condition and C1,1 regularity of ∂Ωwere assumed to
+avoid technicalities related to lack of regularity of the pressure in the unsteady case. Due to the weak
+structural assumptions the existence of short-time strong solutions and uniqueness cannot be expected
+to hold in general. The proof in [11] is constructive and is based on a three-level approximation using
+ﬁnite-dimensional Galerkin subspaces spanned by eigenfunctions of higher order elliptic operators.
+These Galerkin spaces are not available for practical computations and therefore we take an alternative
+route here in the construction of a numerical method for the problem and for its convergence analysis.
+Here we shall consider a mixed ﬁnite element approximation under minimal regularity hypotheses, so
+we can only hope for qualitative convergence results rather than qualitative error bounds in terms of
+the spatial and temporal discretization parameters. The approximation scheme will be constructed for
+a regularized version of the equations, and after passing to the limit with the discretization parameters
+we shall pass to the limit with the regularization parameter.
+Concerning the numerical analysis of implicitly constituted ﬂuid ﬂow models, to the best of our
+knowledge the only results available are those contained in [16, 30], which deal with the steady case.
+By means of a discrete Lipschitz truncation method and various weak compactness results the authors
+of [16] prove the convergence of a large class of mixed ﬁnite element methods for q >
+2d
+d+1 for discretely
+divergence-free ﬁnite element functions for the velocity, and for q >
+2d
+d+2 for exactly (i.e., pointwise)
+divergence-free ﬁnite element functions for the velocity ﬁeld. In the case of discretely divergence-free
+mixed ﬁnite element approximations the more demanding requirement, that q >
+2d
+d+1, arises from
+the (numerical) modiﬁcation of the trilinear form associated with the convective term in the weak
+formulation of the problem, whose purpose is to reinstate the skew-symmetry of the trilinear form,
+lost in the course of the spatial approximation.
+In [30] an a posteriori analysis is performed for
+implicitly constituted ﬂuid ﬂow models using discretely divergence-free ﬁnite element functions. In
+the unsteady case no convergence result is available for implicitly constituted ﬂuid ﬂow models, and
+even those contributions that are focussed on explicit constitutive laws, such as [12], for example, are
+restricted to the case when q > 2(d+1)
+d+2 .
+1.3. Aim and Main Result
+Our objective here is to establish a convergence result for implicitly constituted ﬂuids in the unsteady
+case for the whole range q >
+2d
+d+2. More speciﬁcally, the aim is to show weak convergence (up to
+subsequences) of the sequence of approximate solutions to a weak solution of the problem, the main
+challenges being to deal with the implicit, possibly discontinuous, relation between stress and shear
+rate, and with small exponents q arising in the coercivity and boundedness assumption on the implicit
+relation. To this end, we shall consider a three-level approximation, consisting of approximating the
+potentially multivalued graph A with a single-valued implicit functional relationship between the shear
+stress tensor and the rate of strain tensor, performing a regularization of the resulting model, which
+will enable us to cover the entire range of q >
+2d
+d+2, and then constructing a fully discrete approximation
+of the regularized model.
+The main contribution of the paper is therefore the following. Let Ωbe a Lipschitz polytopal domain,
+q >
+2d
+d+2, and assume that we have a pair of inf-sup stable ﬁnite element spaces. Also we assume that a
+suitable approximation of the graph A is available, which will be constructed below. Then, a sequence
+of approximate solutions to the fully discrete problem exists and the corresponding sequence of ﬁnite
+element approximations converges weakly, up to subsequences, to a weak solution of problem (P),
+when ﬁrst taking the graph approximation limit, then the spatial and temporal discretization limits,
+
+
+PAGE 4
+4
+E. S¨ULI AND T. TSCHERPEL
+and ﬁnally the regularization limit. The precise formulation of this result is contained in Theorem 4.1
+and the notion of weak solution is given in Deﬁnition 2.1. The main tools in the proof are a Minty type
+local monotonicity result proved in [11], and the solenoidal parabolic Lipschitz truncation constructed
+in [8] to overcome the admissibility problem for small q.
+The paper is structured as follows. Section 2 provides the analytical setting, including the graph
+approximation and the Lipschitz truncation. Section 3 describes the ﬁnite element approximation,
+the approximation of the convective term and the time stepping. In Section 4 we ﬁrst introduce the
+approximation levels in detail before giving the convergence proof.
+2. Analytical Preliminaries
+By Rd×d
+sym we denote the set of all real-valued symmetric d×d-matrices and we use : for the Frobenius
+scalar product in Rd×d. For ω ⊂Rd we denote by |ω| the d-dimensional Lebesgue measure of ω. By
+1ω we denote the characteristic function of the set ω. For the partial derivatives with respect to time
+we use the shorthand notation ∂tf := ∂f
+∂t .
+For ω ⊂Rd open and p ∈[1, ∞) let (Lp(ω), ||·||Lp(ω)) be the standard Lebesgue space of p-
+integrable functions and the space of essentially bounded functions when p = ∞.
+For s ∈N let
+(Ws,p(ω), ||·||Ws,p(ω)) be the respective Sobolev spaces. For spaces of vector-valued and tensor-valued
+functions we use superscripts d and d × d, respectively (except for in norms). By Lp
+0(ω) we denote the
+set of functions in Lp(ω) with zero mean integral.
+For a general Banach space (X, ||·||X), the dual space consisting of all continuous linear functionals
+on X is denoted by X′ and the dual pairing is denoted by ⟨f, g⟩X′,X , if f ∈X′ and g ∈X. If X is a
+space of functions deﬁned on ω then we denote the dual pairing by ⟨f, g⟩ω := ⟨f, g⟩X′,X , in case the
+space X is known from the context. We also use this notation for the integral of the scalar product
+f · g of two functions f and g, provided that f · g ∈L1(ω). Furthermore, if ω ⊂Rd is measurable and
+0 < |ω| < ∞, then we denote ﬄ
+ω f(x) dx :=
+1
+|ω|
+´
+ω f(x) dx.
+Now let Ω⊂Rd be a bounded domain, let T ∈(0, ∞) and Q = (0, T ) × Ω. Denote by C∞
+0 (Ω) the
+set of all smooth and compactly supported functions on Ωand by C∞
+0,div(Ω)d the set of all functions in
+C∞
+0 (Ω)d with vanishing divergence. Analogously, deﬁne C∞
+0 (Q)d and C∞
+0,div(Q)d. Deﬁne W1,p
+0 (Ω) :=
+C∞
+0 (Ω)
+||·||W1,p(Ω), for p ∈[1, ∞) and W1,∞
+0
+(Ω) := W1,1
+0 (Ω)∩W1,∞(Ω). For a given p ∈(1, ∞) we let the
+H¨older exponent p′ be deﬁned by 1
+p + 1
+p′ = 1. Then, if p ∈(1, ∞), Lp′(Ω) is the dual space of Lp(Ω)
+and W−1,p′(Ω) will denote the dual space of W1,p
+0 (Ω). Further, we deﬁne the spaces of divergence-free
+functions
+L2
+div(Ω)d := C∞
+0,div(Ω)d||·||L2(Ω),
+W1,p
+0,div(Ω)d := C∞
+0,div(Ω)d||·||W1,p(Ω),
+for p ∈[1, ∞),
+W1,∞
+0,div(Ω)d := W1,1
+0,div(Ω)d ∩W1,∞(Ω)d.
+Let C(Ω) be the set of all continuous real-valued functions on Ωand C0,β(Ω) the set of all H¨older
+continuous functions on Ωwith exponent β ∈(0, 1]. With C([0, T ]; X) we denote the set of all functions
+deﬁned on [0, T ] taking values in a Banach space X, which are continuous (with respect to the strong
+topology in X). Furthermore, we deﬁne the space of weakly continuous functions with values in X by
+Cw([0, T ]; X) := {v : [0, T ] →X : t 7→⟨w, v(t, ·)⟩X′,X ∈C([0, T ]), ∀w ∈X′}.
+We denote by Lp(0, T ; X) the standard Bochner space of p-integrable X-valued functions. We use
+the notation ess limt→0+ f(t) to indicate that there exists a zero set N(f) ⊂[0, T ] such that t ∈
+(0, T )\N(f), when considering the limit of f(t), as t →0+.
+In the following, c > 0 will denote a generic constant, which can change from line to line and
+depends only on the given data unless speciﬁed otherwise.
+
+
+PAGE 5
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+5
+2.1. Analytic Setting
+For q ∈(1, ∞) denote
+ˆq := max
+ q(d + 2)
+2d
+′
+, q
+!
+= max
+
+q(d + 2)
+q(d + 2) −2d, q
+
+,
+(2.1)
+and note that ˆq = q, if q ≥3d+2
+d+2 and ˆq < ∞for any q >
+2d
+d+2. Also denote
+η := max
+
+2q′, q(d + 2)
+d
+
+> 2,
+(2.2)
+τ := min (q′, (2q′)′) > 1.
+(2.3)
+We denote the function spaces
+Xq
+div(Ω) := W1,q
+0,div(Ω)d ∩L2q′(Ω)d,
+(2.4)
+Xq(Q) := Lq(0, T ; W1,q
+0 (Ω)d) ∩L2q′(Q)d,
+(2.5)
+Xq
+div(Q) := Lq(0, T ; W1,q
+0,div(Ω)d) ∩L2q′(Q)d,
+(2.6)
+and the corresponding norms are given by
+||·||Xq(Ω) := ||·||W1,q(Ω) + ||·||L2q′ (Ω) ,
+||·||Xq(Q) := ||·||Lq(0,T ;W1,q(Ω)) + ||·||L2q′ (Q) .
+Weak Solutions. In what follows, let Ω⊂Rd, with d ∈{2, 3}, be a bounded Lipschitz domain
+and for T ∈(0, ∞) denote Q = (0, T ) × Ω. Furthermore, assume that q ∈(1, ∞) is given and let
+A(·) ⊂Rd×d
+sym × Rd×d
+sym be a monotone graph satisfying Assumption 1.1 with respect to q.
+Deﬁnition 2.1 (Weak Solution). For a given u0 ∈L2
+div(Ω)d and f ∈Lq′(0, T ; W−1,q′(Ω)d) we call
+(u,S) a weak solution to problem (P), if
+u ∈Lq(0, T ; W1,q
+0,div(Ω)d) ∩Cw([0, T ]; L2
+div(Ω)d), s.t.
+∂tu ∈Lˆq′(0, T ; (W1,ˆq
+0,div(Ω)d)′),
+S ∈Lq′(Q)d×d,
+and
+⟨∂tu, v⟩Ω−⟨u ⊗u,Dv⟩Ω+ ⟨S,Dv⟩Ω= ⟨f, v⟩Ω
+for all v ∈C∞
+0,div(Ω)d,
+(2.7)
+for a.e. t ∈(0, T ),
+(Du(z),S(z)) ∈A(z)
+for a.e. z ∈Q,
+(2.8)
+ess lim
+t→0+ ||u(t, ·) −u0(·)||L2(Ω) = 0.
+(2.9)
+We choose a pressure-free notion of weak solution because in the unsteady problem subject to
+homogeneous Dirichlet boundary conditions on Lipschitz domains one can only expect to establish a
+distributional (in time) pressure, see [39, Ch. III, § 1, pp. 266] and also [38].
+2.2. Implicit Constitutive Laws
+Approximation of A. The implicit relation encoded by A can be viewed as a set-valued map. In
+order to perform the analysis we require a single-valued map and thus a measurable selection S⋆of the
+graph A is chosen, which may have discontinuities.
+Lemma 2.2 (Measurable Selection, [11, Rem. 1.1, Lem. 2.2]). Let A(·) ⊂Rd×d
+sym ×Rd×d
+sym be the maximal
+monotone graph satisfying (A1)–(A5) in Assumption 1.1. Then, there exists a measurable selection
+S⋆: Q × Rd×d
+sym →Rd×d
+sym, i.e.,
+(B,S⋆(z,B)) ∈A(z)
+for all B ∈Rd×d
+sym, for a.e. z ∈Q,
+(2.10)
+and S⋆is (L(Q) ⊗B(Rd×d
+sym)) −B(Rd×d
+sym)-measurable. Furthermore, for a.e. z ∈Q, one has that
+
+
+PAGE 6
+6
+E. S¨ULI AND T. TSCHERPEL
+(a1) dom S⋆(z, ·) = Rd×d
+sym;
+(a2) S⋆is monotone, i.e., for all B1,B2 ∈Rd×d
+sym,
+(S⋆(z,B1) −S⋆(z,B2)): (B1 −B2) ≥0;
+(a3) for any B ∈Rd×d
+sym one has that
+B : S⋆(z,B) ≥−g(z) + c∗(|B|q + |S⋆(z,B)|q′
+);
+(a4) Let U be a dense set in Rd×d
+sym and let (D,S) ∈Rd×d
+sym × Rd×d
+sym. The following are equivalent:
+(i) (S −S⋆(z,B)): (D −B) ≥0
+for all B ∈U;
+(ii) (D,S) ∈A(z);
+(a5) S⋆is locally bounded, i.e., for a given r > 0 there exists a constant c = c(r) such that
+|S⋆(z,A)| ≤c
+for all z ∈Q and for all A ∈Br(0) ⊂Rd×d
+sym.
+To show the existence of solutions to any of the approximate problems considered below, continuity
+of the (approximate) stress tensor is required. Hence, we introduce the following assumptions on a
+sequence of approximations of the selection S⋆.
+Assumption 2.3 (Properties of Sk, k ∈N). Given the selection S⋆: Q×Rd×d
+sym →Rd×d
+sym in Lemma 2.2,
+assume that there is a sequence {Sk}k∈N of Carath´eodory functions Sk : Q × Rd×d
+sym →Rd×d
+sym such that:
+(α1) Sk(z, ·) is monotone, i.e., for all A1,A2 ∈Rd×d
+sym and for a.e. z ∈Q, we have
+(Sk(z,A1) −Sk(z,A2)): (A1 −A2) ≥0;
+(α2) There exists a constant ec∗> 0 and a nonnegative function eg ∈L1(Q) such that, for all k ∈N,
+for any A ∈Rd×d
+sym and for a.e. z ∈Q, one has that
+A : Sk(z,A) ≥−eg(z) + ec∗
+
+|A|q +
+Sk(z,A)
+q′
+;
+(α3) Let U ⊂Rd×d
+sym be a dense set. For any sequence {Dk}k∈N bounded in L∞(Q)d×d, for any B ∈U
+and all ϕ ∈C∞
+0 (Q) such that ϕ ≥0, we have
+lim inf
+k→∞
+ˆ
+Q
+Sk(·,Dk) −S⋆(·,B)
+
+:
+Dk −B
+
+ϕ dz ≥0.
+In the existence proofs in [10, 11] and also in [16] the approximating sequence Sk is chosen as the
+convolution of the selection S⋆in the second argument with a molliﬁcation kernel.
+Example 2.4 (Approximation by Molliﬁcation). Let ρ ∈C∞
+0 (Rd×d
+sym) be a molliﬁcation kernel, i.e., a
+nonnegative, radially symmetric function, the support of which is contained in the unit ball B1(0) ⊂
+Rd×d
+sym, and which satisﬁes
+´
+Rd×d
+sym ρ(A) dA = 1. For k ∈N set ρk(B) := kd2ρ(kB) and deﬁne the molliﬁ-
+cation of S⋆with respect to the last argument by
+Sk(z,B) := (S⋆∗ρk)(z,B) =
+ˆ
+Rd×d
+sym
+S⋆(z,A)ρk(B −A) dA,
+z ∈Q, B ∈Rd×d
+sym.
+(2.11)
+Lemma 5.1 in the Appendix shows that Sk satisﬁes Assumption 2.3.
+A possibly more practicable approximation based on a piecewise aﬃne interpolant can be used in
+the case of a radially symmetric selection function S⋆under additional regularity assumptions.
+Example 2.5 (Approximation by Aﬃne Interpolation). Assume that S⋆: Q × R≥0 →R≥0 is a
+measurable function with S⋆(z, 0) = 0, for any z ∈Q, such that S⋆: Q × Rd×d
+sym →Rd×d
+sym, deﬁned by
+S⋆(z,B) =
+(
+0
+if B = 0,
+S⋆(z, |B|) B
+|B|
+else,
+is a measurable selection of a graph A satisfying Assumption 1.1. Furthermore, we assume that
+(a1’) S⋆(z, ·) : R≥0 →R≥0 is monotone for a.e. z ∈Q;
+
+
+PAGE 7
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+7
+(a2’) Let I ∈N and {ai}i∈{1,...,I} ⊂R > 0, s.t.
+a1 < · · · < aI.
+Let a0 = 0 and denote by
+A := S
+i∈{0,...,I} ai the ﬁnite set of possible discontinuities. Then, assume that, for a.e. z ∈Q,
+we have
+S⋆(z, ·)|(ai−1,ai ) ∈W1,∞((ai−1, ai))
+for all i ∈{1, . . . , I},
+S⋆(z, ·)|(aI,b) ∈W1,∞((aI, b))
+for all b ∈(aI, ∞).
+We construct the approximation as follows. Since the set A is ﬁnite, there exists a k0 ∈N such that
+2
+k0 < mini∈{1,...,I}(ai −ai−1). Let k ∈N, with k ≥k0 be arbitrary but ﬁxed. Denote for i ∈{0, . . . , I}
+ak
+i,−:= ai −1
+k ,
+ak
+i,+ := ai + 1
+k ,
+Ak
+i := [ak
+i,−, ak
+i,+]
+and
+Ak :=
+[
+i∈{0,...,I}
+Ak
+i .
+Let z ∈Q be arbitrary but ﬁxed. First we extend S⋆(z, ·) as an odd function to R and we still denote
+the extension by S⋆(z, ·). Since the point evaluations S⋆(z, ak
+i,±), for i ∈{0, . . ., I}, are well-deﬁned,
+we can deﬁne
+S
+k
+i (z, B) := k
+2
+ 
+S⋆(z, ak
+i,−)ak
+i,+
+ak
+i,−
+−S⋆(z, ak
+i,+)
+!
+(ak
+i,−−B) + S⋆(z, ak
+i,−) B
+ak
+i,−
+,
+Sk(z, B) :=
+(
+S⋆(z, B)
+if B /∈Ak,
+S
+k
+i (z, B)
+if B ∈Ak
+i ,
+i ∈{0, . . ., I}.
+(2.12)
+On Ak
+i the approximation S⋆(z, ·) is the aﬃne interpolant between S⋆(z, ak
+i,−) and S⋆(z, ak
+i,+) and
+otherwise S⋆is unchanged.
+In Lemma 5.2 and Corollary 5.3 in the Appendix it is proved that the resulting approximating
+sequence Sk(z, ·) satisﬁes Assumption 2.3.
+Minty’s Trick. The following lemma is one of the crucial tools for the identiﬁcation of the implicit
+constitutive law upon passage to the limit.
+Lemma 2.6 (Localized Minty’s Trick, [11, Lem. 2.4] and [9, Lem. 3.1]). Let A(·) be a maximal
+monotone graph satisfying (A2), (A3) in Assumption 1.1 and assume that there are sequences {Sl}n∈N
+and {Dl}n∈N and there is a measurable set eQ ⊂Q and a p ∈(1, ∞) such that
+(Dl(z),Sl(z)) ∈A(z)
+for a.e. z ∈eQ,
+Dl ⇀D
+weakly in Lp( eQ)d×d,
+Sl ⇀S
+weakly in Lp′( eQ)d×d,
+lim sup
+n→∞
+
+Sl,Dl
+e
+Q ≤⟨S,D⟩e
+Q .
+Then, we have that (D(z),S(z)) ∈A(z) for a.e. z ∈eQ.
+2.3. Lipschitz Approximation
+For small q ∈(1, ∞) a weak solution according to Deﬁnition 2.1 is not an admissible test function
+because of the presence of the convective term. The Lipschitz truncation method helps to identify the
+implicit relation despite the lack of admissibility. It ﬁrst appeared in [1] and since then the method
+was further developed and reﬁned in a series of papers, see, e.g., [29, 21, 17, 18, 7, 8, 16], to mention
+just a few.
+For a sequence of solutions to a sequence of divergence-form evolution equations a solenoidal para-
+bolic Lipschitz truncation was developed in [8]. Note that the sets Bl,j in the following Lemma satisfy
+Bl,j = Ol,j ∩Q0, where Ol,j are the “bad sets” in the construction in [8].
+Lemma 2.7 (Parabolic Solenoidal Lipschitz Approximation, [8, Thm. 2.2, Cor. 2.4]).
+Let p ∈(1, ∞), σ ∈(1, min(p, p′)) and let Q0 = I0 × B0 ⊂R × Rd be a parabolic cylinder, for
+d = 3, for an open interval I0 and an open ball B0. Let {vl}l∈N be a sequence of weakly divergence-
+free functions, which is converging to zero weakly in Lp(I0; W1,p(B0)d), strongly in Lσ(Q0)d and is
+
+
+PAGE 8
+8
+E. S¨ULI AND T. TSCHERPEL
+uniformly bounded in L∞(I0, Lσ(B0)d). Consider a sequence {Gl
+1}l∈N, converging to zero weakly in
+Lp′(Q0)d×d and a second sequence, {Gl
+2}l∈N, converging to zero strongly in Lσ(Q0)d×d. Furthermore,
+denoting Gl := Gl
+1 + Gl
+2, assume that, for any l ∈N, the equation
+
+∂tvl, ξ
+
+Q0 =
+
+Gl, ∇ξ
+
+Q0
+for all ξ ∈C∞
+0,div(Q0)d
+(2.13)
+is satisﬁed. Then, there exists a j0 ∈N,
+• a double sequence {λl,j}l,j∈N ⊂R with λl,j ∈
+h
+22j, 22j+1−1i
+, for any l, j ∈N,
+• a double sequence of open sets Bl,j ⊂Q0, l, j ∈N,
+• a double sequence of functions {vl,j}l,j∈N ⊂L1(Q0)d and
+• a nonnegative function ζ ∈C∞
+0 ( 1
+6Q0) such that 1 1
+8 Q0 ≤ζ ≤1 1
+6 Q0,
+such that
+(i) vl,j ∈Ls( 1
+4I0; W1,s
+0,div( 1
+6B0)d) for all s ∈[1, ∞), and supp(vl,j) ⊂1
+6Q0, for any j ≥j0 and any
+l ∈N;
+(ii) vl,j = vl on 1
+8Q0\Bl,j, i.e., {vl,j ̸= vl} ∩1
+8Q0 ⊂Bl,j, for any j ≥j0 and any l ∈N;
+(iii) there exists a constant c > 0 such that
+lim sup
+l→∞
+λp
+l,j |Bl,j| ≤c2−j
+for all j ≥j0;
+(iv) there exists a constant c > 0 such that
+∇vl,j
+L∞( 1
+4 Q0) ≤cλl,j
+for all j ≥j0 and all l ∈N;
+(v) for any ﬁxed j ≥j0 we have
+vl,j →0
+strongly in L∞( 1
+4Q0)d,
+∇vl,j ⇀0
+weakly in Ls( 1
+4Q0)d×d
+for all s ∈[1, ∞),
+as l →∞;
+(vi) there exists a constant c > 0 such that
+lim sup
+l→∞
+
+Gl, ∇vl,j ≤c2−j
+for all j ≥j0;
+(vii) there exists a constant c > 0 such that, for any H ∈Lp′( 1
+6Q0)d×d, we have that
+lim sup
+l→∞
+
+D
+(Gl
+1 + H), ∇vlζ1Bc
+l,j
+E ≤c2−j/p
+for all j ≥j0.
+The lemma is stated for d = 3, but according to [8, Rem. 2.1, p. 2692] the result holds for all d ≥2,
+in fact, with minor modiﬁcations of the proof.
+2.4. Continuity and Compactness in Time
+Lemma 2.8 (Parabolic Interpolation). Let d ≥2, let Ω⊂Rd be a Lipschitz domain, let T ∈(0, ∞),
+Q = (0, T ) × Ωand let p > 1. Then, there exists a constant c > 0 such that
+ˆ
+Q
+|v|
+p(d+2)
+d
+dz ≤c ||v||p
+Lp(0,T ;W1,p(Ω))
+
+||v||L∞(0,T ;L2(Ω))
+ 2p
+d
+(2.14)
+for all v ∈Lp(0, T ; W1,p(Ω)) ∩L∞(0, T ; L2(Ω)).
+Proof. For p ≥d, the reader is referred to [15, Prop. 3.1, p. 8]. If p < d, then by H¨older’s inequality
+with s =
+d
+d−p > 1 and s′ = d
+p and with Sobolev exponent p∗=
+dp
+d−p we have that
+ˆ
+Ω
+|v|
+p(d+2)
+d
+dx =
+ˆ
+Ω
+|v|p |v|
+2p
+d dx ≤
+ˆ
+Ω
+|v|
+dp
+d−p dx
+ d−p
+d ˆ
+Ω
+|v|2 dx
+ p
+d
+d = ||v||p
+Lp∗(Ω) ||v||
+2p
+d
+L2(Ω) .
+
+
+PAGE 9
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+9
+Then, by integrating over (0, T ), further estimating the second factor and using the continuous em-
+bedding of W1,p(Ω) ֒→Lp∗(Ω), we obtain
+ˆ
+Q
+|v|
+p(d+2)
+d
+dx dt ≤c ||v||p
+Lp(0,T ;Lp∗(Ω))
+
+||v||L∞(0,T ;L2(Ω))
+ 2p
+d
+≤||v||p
+Lp(0,T ;W1,p(Ω))
+
+||v||L∞(0,T ;L2(Ω))
+ 2p
+d ,
+which completes the proof.
+□
+Lemma 2.9 (Continuity I). Let Z be a reﬂexive Banach space. Then, any function v ∈L1(0, T ; Z′),
+with distributional derivative ∂tv ∈L1(0, T ; Z′) is contained in Cw([0, T ]; Z′).
+Proof. The proof follows from [39, Lem. 1.1, Ch. III, § 1, p. 250].
+□
+Lemma 2.10 (Continuity II, [39, Lem. 1.4, Ch. III, § 1, p. 263]). Let X and Z be Banach spaces and
+let X be reﬂexive such that the embedding X ֒→Z is continuous. Then one has that
+L∞(0, T ; X) ∩Cw([0, T ]; Z) ⊂Cw([0, T ]; X).
+Lemma 2.11 (Simon, [37, Thm. 3, p. 80]). Let X, B be Banach spaces such that the embedding
+X ֒→֒→B is compact. Let F ⊂Lp(0, T ; B) for some p ∈[1, ∞] and let
+(i) F be bounded in L1
+loc(0, T ; X),
+(ii)
+´ T −ε
+0
+||f(s + ε, ·) −f(s, ·)||p
+B ds →0,
+as ε →0,
+uniformly for f ∈F.
+Then, F is relatively compact in Lp(0, T ; B), and in C([0, T ]; B) if p = ∞.
+3. Finite Element Approximation
+3.1. Finite Element Spaces and Assumptions
+The setting here is slightly more general than the one in [16].
+Assumption 3.1 (Triangulations {Tn}n∈N). Let us assume that d ≥2 and that Ωis a bounded
+Lipschitz polytopal domain. Furthermore, assume that {Tn}n∈N is a family of simplicial partitions of
+Ω(in the sense of [13, Sec. 2.1, p. 38]) such that the following conditions hold:
+(i) Each element K ∈Tn is aﬃne-equivalent to the closed standard reference simplex bK :=
+conv{0, e1, . . . , ed} ⊂Rd, i.e., there exists an aﬃne invertible function FK : K →bK;
+(ii) {Tn}n∈N is shape-regular, i.e., there exists a constant cr (independent of n ∈N) such that
+hK
+ρK ≤cr
+for all K ∈Tn and all n ∈N,
+where hK := diam(K) and ρK := sup{diam(B): B is a ball contained in K};
+(iii) The grid size hn := max{hK : K ∈Tn} vanishes, as n →∞.
+Finite Element Spaces. Let bPV ⊂W1,∞( bK)d and let bPQ ⊂L∞( bK) be ﬁnite-dimensional function
+spaces on the reference simplex bK (with a slight abuse of notation) as in [16]. Further, let V ⊂C(Ω)d
+and let Q ⊂L∞(Ω). Then we deﬁne the conforming ﬁnite element spaces Vn and Qn with respect to
+the partition Tn by
+Vn := {V ∈V:
+V |K ◦F−1
+K ∈bPV, K ∈Tn and V |∂Ω= 0},
+(3.1)
+Qn := {Q ∈Q:
+Q|K ◦F−1
+K ∈bPQ, K ∈Tn}.
+(3.2)
+Let us also introduce the subspace of discretely divergence-free functions of Vn and the subspace of
+zero integral mean functions of Qn by
+Vn
+div := {V ∈Vn : ⟨div V , Q⟩Ω= 0 for all Q ∈Qn},
+(3.3)
+Qn
+0 := {Q ∈Qn :
+ˆ
+Ω
+Q dx = 0}.
+(3.4)
+Note that the functions in Vn
+div are in general not divergence-free, so in general Vn
+div ̸⊂W1,∞
+0,div(Ω)d.
+
+
+PAGE 10
+10
+E. S¨ULI AND T. TSCHERPEL
+Assumption 3.2 (Approximability, [16, Assump. 5]). Assume that for all p ∈[1, ∞), we have that
+inf
+V ∈Vn ||v −V ||W1,p(Ω) →0,
+as n →∞
+for all v ∈W1,p
+0 (Ω)d,
+(3.5)
+inf
+Q∈Qn ||h −Q||Lp(Ω) →0,
+as n →∞
+for all h ∈Lp
+0(Ω).
+(3.6)
+Projectors. For the convergence analysis we require certain projectors to the respective ﬁnite element
+spaces and suitable assumptions on them. Since we do not need local stability of the projector Πn, we
+assume less than in [16].
+Assumption 3.3 (Projector Πn).
+Assume that for each n ∈N there exists a linear projector Πn : W1,1
+0 (Ω)d →Vn such that:
+(i) (preservation of the divergence in (Qn)
+′) for any v ∈W1,1
+0 (Ω)d one has that
+⟨div v, Q⟩Ω= ⟨div(Πnv), Q⟩Ω
+for all Q ∈Qn;
+(ii) (W1,p-stability) for any p ∈(1, ∞) there exists a constant c(p) > 0 (independent of n) such
+that
+||Πnv||W1,p(Ω) ≤c ||v||W1,p(Ω)
+for all v ∈W1,p
+0 (Ω)d and all n ∈N.
+Assumption 3.4 (Projector Πn
+Q).
+Assume that for each n ∈N there exists a linear projector Πn
+Q : L1(Ω) →Qn such that, for any
+p ∈(1, ∞), there exists a constant c(p) > 0 such that
+Πn
+Qh
+
+Lp(Ω) ≤c ||h||Lp(Ω)
+for all h ∈Lp(Ω) and all n ∈N.
+(3.7)
+Remark 3.5 (Properties of Πn and Πn
+Q).
+(i) The global stability in Assumption 3.3 (ii) and the approximability in (3.5) yield that
+||v −Πnv||W1,p(Ω) →0,
+as n →∞
+for all v ∈W1,p
+0 (Ω)d with p ∈[1, ∞).
+(ii) The stability in (3.7) and the approximability in (3.6) imply that
+h −Πn
+Qh
+
+Lp(Ω) →0,
+as n →∞
+for all h ∈Lp(Ω) with p ∈[1, ∞).
+(iii) The existence of the Bogovski˘ı operator, see [6] and also [17, p. 223] implies that the continuous
+inf-sup condition holds for any p ∈(1, ∞). With this and the Assumption 3.3 the corresponding
+discrete inf-sup condition holds uniformly in n ∈N; see Fortin’s Lemma for Banach spaces in
+[20, Lem. 4.19]. This means that the framework results in an inf-sup stable pair (Vn, Qn).
+Example 3.6 (Finite Element Spaces).
+The following elements satisfy Assumptions 3.2–3.4:
+(i) the P2 −P0 element for d = 2, see [5, Sec. 8.4.3], where the projector Πn is given and Assump-
+tion 3.3 (i) is shown; The stability in (ii) can be proved similarly as for the MINI element, see
+[3, App. A.1] and [16, pp. 990].
+(ii) the conforming Crouzeix–Raviart element, for d = 2, see [5, Ex. 8.6.1] and [14]; the projector
+Πn satisfying Assumption 3.3 (i) is given in [14, pp. 49] and it can be shown to satisfy (ii),
+see for example [24, Thm. 3.3].
+(iii) the MINI element for d ∈{2, 3} (k = 1), see [5, Sec. 8.4.2, 8.7.1]; the proof that Assumption 3.3
+is satisﬁed is given in [3, App. A.1], see also [23, Lem. 4.5] and [16, pp. 990].
+(iv) the Taylor–Hood element and its generalizations for d ∈{2, 3} and k ≥d, see [5, Sec. 8.8.2];
+the proof of Assumption 3.3 can be found in [24, Thm. 3.1, 3.2].
+The following element satisﬁes Assumption 3.2–3.4 and additionally, that Vn
+div ⊂W1,∞
+0,div(Ω)d:
+(v) the high-dimensional family of Guzm´an–Neilan elements for k ≥1, d ∈{2, 3}, see [28, 27].
+Note that the stability in Assumption 3.3 (ii) is only shown for p = 2, if d = 2.
+
+
+PAGE 11
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+11
+L2-Projector to Vn
+div. Let us introduce the projector onto Vn
+div, given by
+P n
+div : L2(Ω)d →Vn
+div,
+and for v ∈L2(Ω)d,
+⟨P n
+divv, V ⟩Ω= (v, V )Ω
+for all V ∈Vn
+div.
+(3.8)
+Directly from the deﬁnition we have L2-stability and optimality of the approximation in L2(Ω)d, i.e.,
+for v ∈L2(Ω)d we have
+||P n
+divv||L2(Ω) ≤||v||L2(Ω) ,
+(3.9)
+||v −P n
+divv||L2(Ω) ≤||v −V ||L2(Ω)
+for all V ∈Vn
+div.
+(3.10)
+By these properties and an approximation argument using the properties of Πn (see Remark 3.5 (i))
+one can show that
+P n
+divw →w,
+strongly in L2(Ω)d, as n →∞,
+(3.11)
+for any w ∈L2
+div(Ω)d.
+3.2. Convective Term and its Numerical Approximation
+Motivated by the form of the convective term in the conservation of momentum equation, we consider
+the trilinear form b deﬁned by
+b(u, v, w) := −⟨u ⊗v, ∇w⟩Ω= ⟨u ⊗w, ∇v⟩Ω−⟨div u, v · w⟩Ω,
+(3.12)
+for u, v, w ∈C∞
+0 (Ω)d, where the second equality follows by integration by parts. Hence for divergence-
+free functions u the last term vanishes and b(u, ·, ·) is skew-symmetric, i.e., b(u, v, v) = 0 for u ∈
+C∞
+0,div(Ω)d and v ∈C∞
+0 (Ω)d. This property can be extended to Sobolev functions.
+As in general Vn
+div ̸⊂W1,∞
+0,div(Ω)d, the second term in (3.12) need not vanish. To preserve the skew-
+symmetry of the trilinear form associated with the convective term the usual approach in the numerical
+analysis literature (see, e.g., [39]) is therefore to consider instead the skew-symmetric trilinear form
+eb(u, v, w) := 1
+2 (⟨u ⊗w, ∇v⟩Ω−⟨u ⊗v, ∇w⟩Ω) = −⟨u ⊗v, ∇w⟩Ω+ 1
+2 ⟨div u, v · w⟩Ω,
+(3.13)
+for u, v, w ∈C∞
+0 (Ω)d. Thus we have that eb(u, v, v) = 0 regardless of the solenoidality of u. Note that
+we have b(u, ·, ·) = eb(u, ·, ·) for divergence-free functions u.
+In the equations the terms appear in the form b(u, u, v) and eb(u, u, v), for the velocity u and a
+test function v. The natural function space for weak solutions of the problem is L∞(0, T ; L2(Ω)d) ∩
+Lq(0, T ; W1,q
+0 (Ω)d), which embeds by Lemma 2.8 continuously into L
+q(d+2)
+d
+(Q)d. Also, provided that
+q ≥
+2d
+d+2, we have that the embedding L
+q(d+2)
+d
+(Q)d ֒→L2(Q)d is continuous, which means that the
+expression b(u(t, ·), u(t, ·), v) is integrable on (0, T ), for any v ∈W1,∞(Ω)d. More speciﬁcally we can
+show that for ˆq as deﬁned in (2.1) we have
+|⟨u(t, ·) ⊗u(t, ·), ∇v⟩Ω| ≤c ||u(t, ·)||2
+L
+q(d+2)
+d
+(Ω) ||v||W1,ˆ
+q(Ω) ,
+provided that q ≥
+2d
+d+2.
+(3.14)
+On the other hand, for the modiﬁcation (cf. the ﬁrst term in (3.13)) of the trilinear form b associated
+with the convective term one obtains
+|⟨u(t, ·) ⊗v, ∇u(t, ·)⟩Ω| ≤c ||u(t, ·)||
+L
+q(d+2)
+d
+(Ω) ||v||W1,ˆ
+q(Ω) ||∇u(t, ·)||Lq(Ω) ,
+if q ≥2(d+1)
+d+2 .
+(3.15)
+Evidently, the source of this more restrictive requirement on q is the modiﬁcation of the trilinear form
+b, introduced in order to reinstate the skew symmetry of b, lost in the course of approximating the
+pointwise divergence-free solution by discretely divergence-free ﬁnite element functions. We note in
+passing that the restriction q ≥2(d+1)
+d+2
+in the unsteady case corresponds to the restriction q ≥
+2d
+d+1 in
+the steady case in [16].
+
+
+PAGE 12
+12
+E. S¨ULI AND T. TSCHERPEL
+To motivate the choice of the form of the additional regularization term that we shall add to the
+weak form to relax the excessive restriction q ≥2(d+1)
+d+2
+to the natural restriction on q >
+2d
+d+2, we note
+that by H¨older’s inequality we have that
+
+eb(u, u, v)
+
+
+L1((0,T )) ≤||u||2
+L2q′ (Q) ||∇v||Lq(Q) + ||u||L2q′ (Q) ||v||L2q′ (Q) ||∇u||Lq(Q)
+≤c ||u||2
+Xq(Q) ||v||Xq(Q) ,
+(3.16)
+for u, v ∈Xq(Q) := Lq(0, T ; W1,q
+0 (Ω)d) ∩L2q′(Q)d, see (2.5), without any restrictions on the range
+of q, other than q ∈(1, ∞).
+This justiﬁes the use of a regularizing term guaranteeing additional
+L2q′-integrability.
+3.3. Time Discretization
+For the purpose of time discretization, let l ∈N and deﬁne the time step by δl = T/l →0, as l →∞.
+For l ∈N, we shall use the equidistant temporal grid on [0, T ] deﬁned by {tl
+i}i∈{0,...,l}, where tl
+i := iδl,
+for i ∈{0, . . ., l}. In the following we will suppress the superscript l and write ti, i ∈{0, . . ., l}.
+For a Banach space X of functions, l ∈N and a sequence {ϕi}i∈{1,...,l} ⊂X we consider the temporal
+diﬀerence quotient
+dtϕi := 1
+δl
+(ϕi −ϕi−1) .
+(3.17)
+Furthermore, for l ∈N we denote by Pl
+0(0, T ; X) the linear space of left-continuous piecewise constant
+mappings from (0, T ] into X with respect to the equidistant temporal grid {tl
+0, . . . , tl
+l} ⊂[0, T ], and
+by Pl
+1(0, T ; X) the space of continuous, piecewise aﬃne functions from [0, T ] into X with respect to
+the same temporal grid. Let the piecewise constant and the piecewise aﬃne interpolants ϕ and eϕ of
+{ϕi}i∈{0,...,l} be deﬁned by
+ϕ(t) := ϕi,
+for t ∈(ti−1, ti], i ∈{1, . . . , l},
+(3.18)
+eϕ(t) := ϕi
+t −ti−1
+δl
++ ϕi−1
+ti −t
+δl
+,
+for t ∈[ti−1, ti], i ∈{1, . . . , l},
+(3.19)
+so that ϕ, eϕ, ∂t eϕ ∈L∞(0, T ; X). Choosing the representative ∂t eϕ ∈Pl
+0(0, T ; X), for t ∈(ti−1, ti] we
+have ∂t eϕ(t) = dtϕi and
+ϕ(t) −eϕ(t) = (ti −t)∂t eϕ(t).
+(3.20)
+Furthermore, note that one has
+||ϕ||L∞(0,T ;X) =
+max
+i∈{1,...,l} ||ϕi||X ,
+||ϕ||p
+Lp(0,T ;X) = δl
+l
+X
+i=1
+||ϕi||p
+X ,
+for p ∈[1, ∞),
+(3.21)
+||eϕ||L∞(0,T ;X) =
+max
+i∈{0,...,l} ||ϕi||X ,
+||eϕ||p
+Lp(0,T ;X) ≤c(p)δl
+l
+X
+i=0
+||ϕi||p
+X ,
+for p ∈[1, ∞),
+(3.22)
+where 0 < c(p) ≤1 by the Riesz–Thorin interpolation theorem (cf. [4, Thm. 1.1.1, p.2]).
+For a Bochner function ψ ∈Lp(0, T ; X), p ∈[1, ∞), we deﬁne the time averages with respect to the
+time grid {t0, . . . , tl}, for l ∈N, by
+ψi :=
+ ti
+ti−1
+ψ(t, ·) dt ∈X,
+i ∈{1, . . . , l}.
+(3.23)
+Considering the piecewise constant interpolant ψ of the set of values {ψi}i∈{1,...,l}, with ψi deﬁned by
+(3.23), it follows by Jensen’s and by H¨older’s inequality that
+ψ
+
+Lp(0,T ;X) ≤||ψ||Lp(0,T ;X)
+for all p ∈[1, ∞],
+(3.24)
+and, for any p ∈[1, ∞),
+ψ →ψ
+strongly in Lp(0, T ; X),
+as l →∞,
+(3.25)
+
+
+PAGE 13
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+13
+thanks to the inequality ∥ψ −ψ∥Lp(0,T ;X) ≤T
+1
+p δl∥ψ∥C0,1([0,T ];X) for all ψ ∈C0,1([0, T ]; X) and p ∈
+[1, ∞], the density of C0,1([0, T ]; X) in Lp(0, T ; X) for p ∈[1, ∞), which, together with (3.24) implies
+(3.25) for p ∈[1, ∞).
+To simplify the notation we will denote Qt
+s := (s, t) × Ω, for 0 ≤s < t ≤T , and Qs := Qs
+0, for
+s ∈(0, T ]. Furthermore, let us introduce the notation Qi
+i−1 := Qti
+ti−1 and Qi := Qti, for i ∈{1, . . ., l}.
+4. Convergence Proof
+Motivated by the approach in [11, Sec. 3.1] we consider the following levels of approximation.
+k ∈N: The selection S⋆given in Lemma 2.2 is approximated by a family of Carath´eodory functions
+{Sk}k∈N, which satisfy Assumption 2.3. The approximation of the stress is then explicit and
+continuous in Du.
+l ∈N: A time stepping based on the implicit Euler method is introduced similarly as, e.g., in [12, 39],
+see Subsection 3.3.
+n ∈N: The velocity u is approximated by a Galerkin approximation in ﬁnite element spaces in the
+spatial variable, see Section 3.
+m ∈N: The regularizing term
+1
+m |u|2q′−2 u is added to the equation to gain admissibility of the ap-
+proximate solutions if q ≤3d+2
+d+2 and to enable us to use the bound on eb(·, ·, ·) in (3.16), without
+imposing the restriction q > 3d+2
+d+2 .
+This results in a fully discrete approximation. The limits are taken in the order k →∞, l, n →∞,
+and then m →∞, and we can take the limits in l, n →∞simultaneously. To simplify the notation we
+shall write
+vk,l,n,m →
+k →
+(l,n)→
+m v
+in X,
+as k →∞, l, n →∞, m →∞,
+(4.1)
+to denote the fact that the limits k, (l, n), m are taken successively in the order of indexing (from left-
+to right) and the space X describes the weakest topology of the three limits. We will use analogous
+notation for weak and weak* convergence. In each step one has to identify the equation and the
+implicit relation, which is the most challenging part. The most signiﬁcant diﬀerence compared to [11]
+lies in the passage to the limits l, n →∞and the identiﬁcation of the implicit law.
+As both the external force f and the approximate stress Sk will be allowed to be time-dependent,
+and the time-dependence will not be assumed to be continuous, we shall consider an integral-averaged
+version in the approximate problem. Let us recall the notation in Subsection 3.3 and introduce for
+f ∈Lq′(0, T ; W−1,q′(Ω)d) and Sk : Q × Rd×d
+sym →Rd×d
+sym as in Assumption 2.3 and l ∈N the averages
+with respect to the time grid {ti}i∈{0,...,l} deﬁned, for i ∈{1, . . . , l}, by
+f i(x) :=
+ ti
+ti−1
+f(t, x) dt,
+x ∈Ω,
+(4.2)
+Sk
+i (x,B) :=
+ ti
+ti−1
+Sk(t, x,B) dt,
+x ∈Ω, B ∈Rd×d
+sym,
+(4.3)
+and let the corresponding piecewise constant interpolants f and S
+k be deﬁned as in Subsection 3.3
+(3.18). Recall that by (3.24) and (3.25) we have that
+f
+
+Lq′ (0,T ;W−1,q′ (Ω)) ≤||f||Lq′ (0,T ;W−1,q′ (Ω))
+for all l ∈N,
+(4.4)
+f →f
+strongly in Lq′(0, T ; W−1,q′(Ω)d),
+as l →∞.
+(4.5)
+For u, v ∈Vn
+div we introduce
+Lk,l,n,m
+i
+[u; v] := −eb(u, u, v) −
+
+Sk
+i (·,Du),Dv
+
+Ω−1
+m
+D
+|u|2q′−2 u, v
+E
+Ω+ ⟨f i, v⟩Ω,
+(4.6)
+for k, l, n, m ∈N, i ∈{1, . . ., l} and eb(·, ·, ·) as deﬁned in (3.13).
+
+
+PAGE 14
+14
+E. S¨ULI AND T. TSCHERPEL
+Approximate Problem: For k, l, n, m ∈N ﬁnd a sequence {U k,l,n,m
+i
+}i∈{0,...,l} ⊂Vn
+div such that
+U k,l,n,m
+0
+= P n
+divu0,
+(4.7)
+and for a given U k,l,n,m
+i−1
+∈Vn
+div the approximate solution on the next time level, U k,l,n,m
+i
+∈Vn
+div, is
+deﬁned, for i ∈{1, . . ., l}, by
+D
+dtU k,l,n,m
+i
+, W
+E
+Ω= Lk,l,n,m
+i
+[U k,l,n,m
+i
+; W]
+for all W ∈Vn
+div,
+(4.8)
+where P n
+div is the L2-projector onto Vn
+div, deﬁned in (3.8).
+For each i ∈{1, . . ., l} a fully implicit problem has to be solved, since the numerical solution from
+the previous time level only appears in the term involving dtU k,l,n,m
+i
+, as deﬁned in (3.17).
+Theorem 4.1 (Main Result). In addition to the assumptions of Deﬁnition 2.1 let Sk satisfy Assump-
+tion 2.3. For the ﬁnite element approximation let Assumption 3.1 on the domain and on the family of
+simplicial partitions be satisﬁed. Let Vn and let Vn
+div be as introduced in (3.1) and (3.3), respectively,
+and assume that Assumptions 3.2, 3.3 and 3.4 hold. Then, for all k, l, n, m ∈N there exists a sequence
+{Uk,l,n,m
+i
+}i∈{0,...,l} ⊂Vn
+div solving (4.7), (4.8). Moreover, if q ∈
+
+2d
+d+2, ∞
+
+, then there exists a weak
+solution (u,S) of (P) according to Deﬁnition 2.1 and for the piecewise constant interpolant U
+k,l,n,m
+and the continuous, piecewise aﬃne interpolant eU
+k,l,n,m of {Uk,l,n,m
+i
+}i∈{0,...,l} as deﬁned in (3.18) and
+(3.19), respectively, (up to not relabelled subsequences) one has that
+U
+k,l,n,m, eU
+k,l,n,m →
+k →
+(l,n)→
+m u
+strongly in Lq(0, T ; L2(Ω)d),
+U
+k,l,n,m, eU
+k,l,n,m
+∗⇀
+k
+∗⇀
+(l,n)
+∗⇀
+m u
+weakly in L∞(0, T ; L2(Ω)d),
+U
+k,l,n,m ⇀
+k ⇀
+(l,n)⇀
+m u
+weakly in Lq(0, T ; W1,q
+0 (Ω)d),
+Sk(·, ·,DU
+k,l,n,m) ⇀
+k ⇀
+(l,n)⇀
+m S
+weakly in Lq′(Q)d×d,
+as k →∞, (l, n) →∞(combined) and m →∞, when taking the limits successively, without restrictions
+on the relation between the discretization parameters δl and hn.
+Remark 4.2.
+(i) In the proof of Theorem 4.1 it is essential that the limits are taken in the indicated order.
+(ii) If S⋆is a Carath´eodory function, then the approximation level corresponding to k ∈N can be
+skipped.
+(iii) For Lipschitz polytopal domains Theorem 4.1 is also a new existence result, since in [11] a
+Navier slip boundary condition and ∂Ω∈C1,1 are assumed.
+(iv) The convergence proof is presented for discretely divergence-free velocity functions. If Vn
+div ⊂
+W1,∞
+0,div(Ω)d, then no modiﬁcation of the convective term is required and the proof that um is
+divergence-free is also simpler.
+The rest of this section consists of the proof of Theorem 4.1, which relies on Lemmas 4.3–4.5 dealing
+with the existence of the discrete solution, and the limit k →∞, Lemmas 4.6 and 4.7 covering the
+combined limit l, n →∞, and Lemmas 4.8 and 4.9 the limit m →∞.
+Limit k →∞. The existence and convergence in Lemmas 4.3 and 4.4 follow by a standard approach
+presented, e.g., in [39], with minor modiﬁcations required to deal with the time-dependence of Sk.
+Taking k →∞we remain in the ﬁnite-dimensional setting and hence strong convergence of the
+sequence of symmetric gradients follows. Consequently, the identiﬁcation of the limiting equation is
+based on the properties of the sequence {Sk}k∈N according to Assumption 2.3; c.f. [11].
+
+
+PAGE 15
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+15
+Lemma 4.3 (Existence of Approximate Solutions). For each κ := (k, l, n, m) ∈N4, there exists a
+sequence {Uκ
+i }i∈{0,...,l} ⊂Vn
+div, which satisﬁes (4.7), (4.8). Furthermore, there exists a constant c > 0
+such that for all κ = (k, l, n, m) ∈N4 one has that
+max
+j∈{1,...,l}
+U κ
+j
+2
+L2(Ω) +
+l
+X
+j=1
+U κ
+j −U κ
+j−1
+2
+L2(Ω) + δl
+l
+X
+j=1
+U κ
+j
+q
+W1,q(Ω)
++
+l
+X
+j=1
+Sk(·, ·,DU κ
+j )
+q′
+Lq′ (Qj
+j−1) + δl
+m
+l
+X
+j=1
+U κ
+j
+2q′
+L2q′ (Ω) ≤c.
+(4.9)
+Proof.
+Step 1: A priori estimates.
+The a priori estimates follow from standard arguments, see [39], in
+combination with the estimates available for Sk by Assumption 2.3: testing (4.8) with W = Uκ
+i ∈Vn
+div
+one obtains
+⟨dtUκ
+i , Uκ
+i ⟩Ω+
+
+Sk
+i (·,DU κ
+i ),DU κ
+i
+
+Ω+ 1
+m ||U κ
+i ||2q′
+L2q′ (Ω) = ⟨f i, Uκ
+i ⟩Ω,
+(4.10)
+since the term involving eb vanishes by skew-symmetry. By the fact that 2a(a −b) = a2 −b2 + (a −b)2,
+for a, b ∈R and by the deﬁnition of dtU κ
+i in (3.17), the ﬁrst term in (4.10) can be rewritten as
+⟨dtUκ
+i , U κ
+i ⟩Ω= 1
+δl
+
+U κ
+i −U κ
+i−1, U κ
+i
+
+Ω
+= 1
+2δl
+
+||U κ
+i ||2
+L2(Ω) −
+U κ
+i−1
+2
+L2(Ω) +
+U κ
+i −U κ
+i−1
+2
+L2(Ω)
+
+.
+(4.11)
+Using the deﬁnition of Sk
+i in (4.3) and Assumption 2.3 (α2) one has that
+
+Sk
+i (·,DU κ
+i ),DU κ
+i
+
+Ω
+(4.3)
+=
+* ti
+ti−1
+Sk(t, ·,DU κ
+i ) dt,DU κ
+i
++
+Ω
+= 1
+δl
+
+Sk(·, ·,DU κ
+i ),DU κ
+i
+
+Qi
+i−1
+≥1
+δl
+ˆ
+Qi
+i−1
+−|eg(·)| + ec∗
+
+|DU κ
+i |q +
+Sk(·, ·,DU κ
+i )
+q′
+dz
+(4.12)
+≥−1
+δl
+||eg||L1(Qi
+i−1) + c ||U κ
+i ||q
+W1,q(Ω) + ec∗
+δl
+Sk(·, ·,DU κ
+i )
+q′
+Lq′ (Qi
+i−1) ,
+where the last inequality follows by Korn’s and Poincar´e’s inequality. On the term on the right-hand
+side of (4.10) by duality of norms and by Young’s inequality with ε > 0 we obtain that
+⟨f i, U κ
+i ⟩Ω≤||f i||W−1,q′ (Ω) ||U κ
+i ||W1,q(Ω) ≤c(ε) ||f i||q′
+W−1,q′ (Ω) + ε ||U κ
+i ||q
+W1,q(Ω)
+≤c(ε)
+δl
+||f||q′
+Lq′ (ti−1,ti;W−1,q′ (Ω)) + ε ||U κ
+i ||q
+W1,q(Ω) ,
+(4.13)
+where the last inequality follows by (4.4). Applying the estimates (4.11)–(4.13) in (4.10), after rear-
+ranging, choosing ε > 0 small enough and multiplying by δl, we arrive at
+||U κ
+i ||2
+L2(Ω) −
+U κ
+i−1
+2
+L2(Ω) +
+U κ
+i −U κ
+i−1
+2
+L2(Ω)
++ δl ||U κ
+i ||q
+W1,q(Ω) +
+Sk(·, ·,DU κ
+i )
+q′
+Lq′ (Qi
+i−1) + δl
+m ||U κ
+i ||2q′
+L2q′ (Ω)
+≤c(ε) ||f||q′
+Lq′ (ti−1,ti;W−1,q′ (Ω)) + c ||eg||L1(Qi
+i−1) .
+(4.14)
+
+
+PAGE 16
+16
+E. S¨ULI AND T. TSCHERPEL
+For arbitrary j ∈{1, . . ., l}, summing over i ∈{1, . . . , j}, yields
+U κ
+j
+2
+L2(Ω) −||U κ
+0||2
+L2(Ω) +
+j
+X
+i=1
+U κ
+i −U κ
+i−1
+2
+L2(Ω)
++ δl
+j
+X
+i=1
+||U κ
+i ||q
+W1,q(Ω) +
+j
+X
+i=1
+Sk(·, ·,DU κ
+i )
+q′
+Lq′ (Qi
+i−1) + δl
+m
+j
+X
+i=1
+||U κ
+i ||2q′
+L2q′ (Ω)
+≤c(||f||q′
+Lq′ (0,T ;W−1,q′ (Ω)) + ||eg||L1(Q)),
+(4.15)
+because of cancellation in the ﬁrst term. Applying the estimate
+||U κ
+0||2
+L2(Ω)
+(4.7)
+= ||P n
+divu0||2
+L2(Ω)
+(3.9)
+≤||u0||2
+L2(Ω) ,
+(4.16)
+and taking the supremum over all j ∈{1, . . ., l} in (4.15) ﬁnishes the proof of (4.9).
+Step 2: Existence of {Uκ
+i }i∈{0,...,l}. Let us ﬁx κ ∈N4 and since U κ
+0 = P n
+divu0 by (4.7), we only have
+to show that for a given U κ
+i−1 ∈Vn
+div, there exists a U κ
+i ∈Vn
+div such that (4.8) is satisﬁed. So let
+i ∈{1, . . . , l} be ﬁxed and let U κ
+i−1 ∈Vn
+div be given. We wish to ﬁnd U = Pdn
+j=1 αjW j ∈Vn
+div, where
+{W 1, . . . , W dn} is a basis of Vn
+div and α ∈Rdn such that
+1
+δl
+
+U −U κ
+i−1, W
+
+Ω= Lκ
+i [U; W ]
+for all W ∈Vn
+div,
+(4.17)
+where Lκ
+i [·, ·] is deﬁned in (4.6). Deﬁning F : Rdn →Rdn by
+F (α) :=
+
+−Lκ
+i
+
+
+dn
+X
+j=1
+αjW j; W r
+
++ 1
+δl
+* dn
+X
+j=1
+αjW j −U κ
+i−1, W r
++
+Ω
+
+
+r∈{1,...,dn}
+,
+(4.18)
+this amounts to ﬁnding α ∈Rdn such that F (α) = 0. Considering term by term one can see that F
+is continuous in α. By use of an L2-orthonormal basis of Vn
+div one can show that
+|α|2 ≤c(n) ||U||2
+L2(Ω) .
+(4.19)
+Furthermore, we ﬁnd that
+F (α) · α = eb(U, U, U) +
+
+Sk
+i (·,DU),DU
+
+Ω+ 1
+m ||U||2q′
+L2q′ (Ω)
+−⟨f i, U⟩Ω+ 1
+δl
+
+U −U κ
+i−1, U
+
+Ω.
+(4.20)
+The ﬁrst term vanishes thanks to the skew-symmetry and the other terms can be estimated similarly
+as in (4.11)–(4.14) to obtain
+F (α) · α ≥−c(eg, δl, f, U κ
+i ) + 1
+2δl
+||U||2
+L2(Ω)
+(4.19)
+≥
+−c + c(n, l) |α|2 .
+Thus, there exists an R > 0 such that F (α) · α > 0, for any α ∈Rdn with |α| = R. So F is outward
+normal on ∂BR(0), and hence, as a consequence of Brouwer’s ﬁxed point theorem, F has a zero in
+BR(0), see [25, § 5.7, (G.7), p. 104]. This means that U satisfying (4.17) exists and the claim is
+proved.
+□
+For κ = (k, l, n, m) ∈N4 let the sequence of coeﬃcients {ακ
+i }i∈{0,...,l} ⊂Rdn be such that U κ
+i =
+Pdn
+j=1(ακ
+i )jW j, where {W 1, . . . , W dn} is a basis of Vn
+div. Uniqueness is in general not guaranteed,
+so we choose one such sequence for each κ ∈N4. Let ακ ∈Pl
+0(0, T ; Rdn) ⊂L∞(0, T )dn and eακ ∈
+
+
+PAGE 17
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+17
+Pl
+1(0, T ; Rdn) ⊂W1,∞(0, T )dn be the piecewise constant and piecewise aﬃne interpolants as in (3.18)
+and (3.19). We denote
+U
+κ(t, x) :=
+dn
+X
+j=1
+ακ
+j (t)W j(x) ∈Pl
+0(0, T ; Vn
+div),
+eU
+κ(t, x) :=
+dn
+X
+j=1
+eακ
+j (t)W j(x) ∈Pl
+1(0, T ; Vn
+div).
+(4.21)
+The so deﬁned functions coincide with the respective interpolants of {Uκ
+i }i∈{0,...,l}, deﬁned in (3.18)
+and (3.19). Furthermore, for t ∈(0, T ], u ∈Pl
+0(0, T ; Vn
+div) and v ∈Vn
+div we introduce
+Lκ[u; v](t) := −eb(u(t, ·), u(t, ·), v) −
+D
+S
+k(t, ·,Du(t, ·)),Dv
+E
+Ω
+−1
+m
+D
+|u(t, ·)|2q′−2 u(t, ·), v
+E
+Ω+
+
+f(t, ·), v
+
+Ω,
+(4.22)
+for κ = (k, l, n, m) ∈N4 and eb(·, ·, ·) as deﬁned in (3.13). Recall that f ∈Pl
+0(0, T ; W−1,q′(Ω)d) is the
+piecewise constant interpolant of {f i}i∈{1,...,l}, as deﬁned in (3.18) in Subsection 3.3, and similarly,
+S
+k(t, ·, ·) = Sk
+i (·, ·), for t ∈(ti−1, ti], which is piecewise constant with respect to the variable t ∈(0, T ].
+Lemma 4.4 (Equation for t ∈(0, T ] and Convergence k →∞). The functions U
+κ and eU
+κ deﬁned as
+in (4.21) satisfy
+D
+∂t eU
+κ(t, ·), W
+E
+Ω= Lκ[U
+κ; W ](t)
+for all W ∈Vn
+div, for all t ∈(0, T ],
+(4.23)
+eU
+κ(0, ·) = P n
+divu0
+in Ω,
+(4.24)
+for any κ = (k, l, n, m) ∈N4. For each λ := (l, n, m) ∈N3, i.e., κ = (k, λ), there exists a sequence
+{Uλ
+i }i∈{0,...,l} ⊂Vn
+div, and subsequences such that the piecewise constant and continuous piecewise
+aﬃne interpolants U
+λ ∈Pl
+0(0, T ; Vn
+div) and eU
+λ ∈Pl
+1(0, T ; Vn
+div) of {Uλ
+i }i∈{0,...,l}, as deﬁned in (3.18)
+and (3.19), satisfy
+U
+k,λ →U
+λ
+strongly in L∞(0, T ; C(Ω)d),
+(4.25)
+DU
+k,λ →DU
+λ
+strongly in L∞(0, T ; L∞(Ω)d×d),
+(4.26)
+∇U
+k,λ →∇U
+λ
+strongly in L∞(0, T ; L∞(Ω)d×d),
+(4.27)
+eU
+k,λ →eU
+λ
+strongly in C([0, T ]; C(Ω)d),
+(4.28)
+∂t eU
+k,λ →∂t eU
+λ
+strongly in L∞(0, T ; C(Ω)d),
+(4.29)
+as k →∞. Furthermore, for each λ ∈N3 there exist Sλ ∈Lq′(Q)d×d and S
+λ ∈Pl
+0(0, T ; Lq′(Ω)d×d)
+and subsequences such that
+Sk(·, ·,DU
+k,λ) ⇀Sλ
+weakly in Lq′(Q)d×d,
+(4.30)
+S
+k(·, ·,DU
+k,λ) ⇀S
+λ
+weakly in Lq′(Q)d×d,
+(4.31)
+as k →∞, where, up to a representative, we have
+S
+λ(t, ·) = Sλ
+i (·) :=
+ ti
+ti−1
+Sλ(t, ·) dt
+for all t ∈(ti−1, ti], i ∈{1, . . ., l}.
+(4.32)
+Proof.
+
+
+PAGE 18
+18
+E. S¨ULI AND T. TSCHERPEL
+Step 1: Identiﬁcation of the equation. We have that eU
+κ(0, ·) = U κ
+0 = P n
+divu0 by deﬁnition of eU
+κ and
+by (4.7), which shows (4.24). The equation (4.23) follows from (4.8) and the fact that for t ∈(ti−1, ti]
+we have that
+U
+κ(t, ·) = U κ
+i ,
+∂t eU
+κ(t, ·) = dtU κ
+i ,
+f(t, ·) = f i
+and
+S
+k(t, ·, ·) = Sk
+i (·, ·),
+i ∈{1, . . . , l}.
+Step 2: Estimates. Let λ = (l, n, m) ∈N3 be arbitrary, but ﬁxed. When taking k →∞we stay in the
+ﬁnite-dimensional setting, hence it suﬃces to focus on estimates for the coeﬃcient functions ακ = αk,λ
+and eακ = eαk,λ, uniformly in k ∈N. Using the deﬁnition of U
+k,λ in (4.21) with the estimate (4.19),
+the fact that the interpolants are piecewise constant and also the a priori estimate in (4.9), we obtain
+αk,λ(t)
+2 (4.19)
+≤
+c(n)
+
+U
+k,λ(t, ·)
+
+
+2
+L2(Ω) ≤c(n)
+max
+i∈{1,...,l}
+
+U k,λ
+i
+
+
+2
+L2(Ω)
+(4.9)
+≤c(n),
+for any t ∈(0, T ) uniformly in k ∈N. The corresponding estimate holds for |eαk,λ(t)|2, using also that
+eU
+k,λ(0, ·) = P n
+divu0 by (4.24) and the L2-stability of P n
+div in (3.9). Thus, we have that
+αk,λ
+L∞(0,T ) +
+
+eαk,λ
+
+L∞(0,T ) ≤c
+for all k ∈N.
+(4.33)
+Since the space of continuous piecewise aﬃne functions Pl
+1(0, T ; Rdn) ⊂W1,∞(0, T )dn with respect
+to the time grid {t0, . . . , tl} ⊂[0, T ] is ﬁnite-dimensional, all norms on it are equivalent, with the
+norm-equivalence constants depending on the (here ﬁxed) dimension. So we also have that
+
+eαk,λ
+
+W1,∞(0,T ) ≤c(l, n)
+for all k ∈N.
+(4.34)
+From the a priori estimate (4.9) it follows directly that
+
+Sk 
+·, ·,DU
+k,λ
+
+q′
+Lq′ (Q) ≤c
+for all k ∈N.
+(4.35)
+By the deﬁnition of Sk
+i in (4.3), we have that
+
+S
+k(·, ·,DU
+k,λ)
+
+
+q′
+Lq′ (Q) =
+l
+X
+i=1
+
+Sk
+i (·,DU k,λ
+i
+)
+
+
+q′
+Lq′ (Qi
+i−1) =
+l
+X
+i=1
+δl
+
+Sk
+i (·,DU k,λ
+i
+)
+
+
+q′
+Lq′ (Ω)
+(3.24)
+≤
+l
+X
+i=1
+
+Sk(·, ·,DU k,λ
+i
+)
+
+
+q′
+Lq′ (Qi
+i−1) =
+
+Sk(·, ·,DU
+k,λ)
+
+
+q′
+Lq′ (Q)
+(4.35)
+≤
+c
+(4.36)
+for all k ∈N. This also shows that
+Sk
+i (·,DU k,λ
+i
+)
+
+
+q
+Lq′ (Ω) ≤c
+δl
+≤c(l),
+(4.37)
+for any k ∈N and any i ∈{1, . . ., l}.
+Step 3: Convergence as k →∞. Since {αk,λ}k∈N ⊂Pl
+0(0, T ; Rdn) and the space Pl
+0(0, T ; Rdn) is ﬁnite-
+dimensional, (4.33) implies strong convergence of a subsequence, i.e., there exists an αλ ∈Pl
+0(0, T ; Rdn)
+such that
+αk,λ →αλ
+strongly in L∞(0, T )dn,
+as k →∞.
+(4.38)
+Similarly, we obtain from (4.34) that there exists a subsequence and an eαλ ∈Pl
+1(0, T ; Rdn) such that
+eαk,λ →eαλ
+strongly in W1,∞(0, T )dn,
+as k →∞.
+(4.39)
+Note that the convergence holds pointwise everywhere in (0, T ], and hence,
+αλ(ti) ←αk,λ(ti) = αk,λ
+i
+= eαk,λ(ti) →eαλ(ti),
+as k →∞,
+for any i ∈{1, . . ., l}, so the limits coincide and we can set αλ
+i = eαλ(ti) = αλ(ti), for i ∈{1, . . ., l}.
+Since we also have that eαk,λ(0, ·) →eαλ, we can set αλ
+0 = eαλ(0, ·). Then αλ ∈Pl
+0(0, T ; Rdn) and eαλ ∈
+
+
+PAGE 19
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+19
+Pl
+1(0, T ; Rdn) are the piecewise constant and continuous piecewise aﬃne interpolants of {αλ
+i }i∈{0,...,l},
+respectively. Let us set
+U
+λ(t, x) :=
+dn
+X
+j=1
+αλ
+j (t)W j(x),
+eU
+λ(t, x) :=
+dn
+X
+j=1
+eαλ
+j (t)W j(x),
+(4.40)
+and let U λ
+i = Pdn
+j=1(αλ
+i )jW j ∈Vn
+div for i ∈{0, . . . , l}. Note that by the above considerations concern-
+ing the coeﬃcients we have that U
+λ and eU
+λ coincide with the respective interpolants of {U λ
+i }i∈{0,...,l}.
+By the convergence in (4.38), (4.39) one obtains for the so-deﬁned functions the convergence results
+(4.25)–(4.29), as k →∞. By the (sequential) Banach–Alaoglu theorem, (4.35)–(4.37) imply that there
+exist Sλ,S
+λ ∈Lq′(Q)d×d and Sλ
+i ∈Lq′(Ω)d×d for i ∈{1, . . . , l}, and subsequences such that
+Sk(·, ·,DU
+k,λ) ⇀Sλ
+weakly in Lq′(Q)d×d,
+(4.41)
+S
+k(·, ·,DU
+k,λ) ⇀S
+λ
+weakly in Lq′(Q)d×d,
+(4.42)
+Sk
+i (·,DU k,λ
+i
+) ⇀Sλ
+i
+weakly in Lq′(Ω)d×d,
+for i ∈{1, . . . , l},
+(4.43)
+as k →∞.
+It remains to show the identiﬁcation of Sλ, S
+λ and {Sλ
+i }i∈{1,...,l}. Let i ∈{1, . . . , l} be arbitrary,
+but ﬁxed. First let ϕ ∈C∞
+0 ((ti−1, ti)) and v ∈C∞
+0 (Ω)d×d. On the one hand, by (4.42) we have
+D
+S
+k(·, ·,DU
+k,λ), ϕv
+E
+Qi
+i−1
+→
+D
+S
+λ, ϕv
+E
+Qi
+i−1
+,
+as k →∞.
+(4.44)
+On the other hand by the deﬁnition of S
+k(·, ·,DU
+k,λ) as piecewise constant interpolant of the sequence
+{Sk
+i (·,DU k,λ
+i
+)}i∈{1,...,l} and by (4.43) we have
+D
+S
+k(·, ·,DU
+k,λ), ϕv
+E
+Qi
+i−1
+=
+DD
+Sk
+i (·,DU k,λ
+i
+),v
+E
+Ωϕ
+E
+(ti−1,ti)
+= ⟨1, ϕ⟩(ti−1,ti)
+D
+Sk
+i (·,DU k,λ
+i
+),v
+E
+Ω
+→⟨1, ϕ⟩(ti−1,ti)
+
+Sλ
+i ,v
+
+Ω=
+
+Sλ
+i ,vϕ
+
+Qi
+i−1 ,
+as k →∞.
+(4.45)
+Now, (4.44) and (4.45) imply, by the uniqueness of the limit, that S
+λ(t, x) = Sλ
+i (x) for a.e. (t, x) ∈
+Qi
+i−1, i.e., S
+λ is piecewise constant in t and we can choose the representative in Pl
+0(0, T ; Lq′(Ω)d×d).
+Again for v ∈C∞
+0 (Ω)d×d we have by (4.43) that
+D
+Sk
+i (·,DU k,λ
+i
+),v
+E
+Ω→
+
+Sλ
+i ,v
+
+Ω,
+as k →∞.
+(4.46)
+On the other hand by the deﬁnition of Sk
+i (·,DU k,λ
+i
+) in (4.3) and by (4.41) we obtain that
+D
+Sk
+i (·,DU k,λ
+i
+),v
+E
+Ω=
+* ti
+ti−1
+Sk(t, ·,DU k,λ
+i
+) dt,v
++
+Ω
+= 1
+δl
+D
+Sk(·, ·,DU
+k,λ), 1(ti−1,ti)v
+E
+Q
+→1
+δl
+
+Sλ, 1(ti−1,ti)v
+
+Q =
+* ti
+ti−1
+Sλ(t, ·) dt,v
++
+Ω
+,
+as k →∞,
+(4.47)
+so by the uniqueness of limits, we conclude from (4.46), (4.47), that Sλ
+i (x) =
+ﬄti
+ti−1 Sλ(t, x) dt for a.e.
+x ∈Ω, which completes the proof.
+□
+
+
+PAGE 20
+20
+E. S¨ULI AND T. TSCHERPEL
+For λ = (l, n, m) ∈N3, t ∈(0, T ], u ∈Pl
+0(0, T ; Vn
+div) and v ∈Vn
+div, let us introduce
+Lλ[u; v](t) := −eb(u(t, ·), u(t, ·), v) −
+D
+S
+λ(t, ·),Dv
+E
+Ω
+−1
+m
+D
+|u(t, ·)|2q′−2 u(t, ·), v
+E
+Ω+
+
+f(t, ·), v
+
+Ω,
+(4.48)
+where S
+λ ∈Pl
+0(0, T ; Lq′(Ω)d×d) is given in Lemma 4.4.
+Furthermore, for λ = (l, n, m) ∈N3, i ∈{1, . . . , l} and u, v ∈Vn
+div let us denote
+Lλ
+i [u; v] := −eb(u, u, v) −
+
+Sλ
+i ,Dv
+
+Ω−1
+m
+D
+|u|2q′−2 u, v
+E
+Ω+ ⟨f i, v⟩Ω,
+(4.49)
+where Sλ
+i ∈Lq′(Ω)d×d is given in Lemma 4.4 (4.32) and f i ∈W−1,q′(Ω)d is deﬁned in (4.2).
+Lemma 4.5 (Identiﬁcation of the PDE as k →∞). The functions U
+λ ∈Pl
+0(0, T ; Vn
+div), eU
+λ ∈
+Pl
+1(0, T ; Vn
+div) and Sλ ∈Lq′(Q)d×d given in Lemma 4.4 satisfy
+D
+∂t eU
+λ(t, ·), W
+E
+Ω= Lλ[U
+λ; W ](t)
+for all W ∈Vn
+div, for all t ∈(0, T ],
+(4.50)
+eU
+λ(0, ·) = P n
+divu0(·)
+in Ω,
+(4.51)
+(DU
+λ(z),Sλ(z)) ∈A(z)
+for a.e. z ∈Q,
+(4.52)
+for all λ = (l, n, m) ∈N3, where Lλ[·; ·](·) is deﬁned by (4.48), using S
+λ ∈Pl
+0(0, T ; Lq′(Ω)d×d) given by
+(4.32) in Lemma 4.4. Furthermore, the sequence {Uλ
+i }i∈{0,...,l} ⊂Vn
+div given in Lemma 4.4 satisﬁes
+U λ
+0 = P n
+divu0,
+(4.53)
+D
+dtU λ
+i , W
+E
+Ω= Lλ
+i [U λ
+i ; W ]
+for all W ∈Vn
+div,
+for all i ∈{1, . . ., l}.
+(4.54)
+Proof. Let λ = (l, n, m) ∈N3 be arbitrary but ﬁxed.
+Step 1: Identiﬁcation of the initial condition. By (4.24) the family of continuous functions eU
+k,λ satisﬁes
+the initial condition eU
+k,λ(0, ·) = P n
+divu0(·) in Ωfor all k ∈N. Thus, the sequence { eU
+k,λ(0, ·)}k∈N is
+constant and the strong convergence in (4.28) implies that P n
+divu0(·) = eU
+k,λ(0, ·) = eU
+λ(0, ·) = U λ
+0 in
+Ω, so (4.51) and (4.53) are satisﬁed.
+Step 2: Identiﬁcation of the limiting equation. Let W ∈Vn
+div and let ϕ ∈C∞
+0 ((0, T )) be arbitrary but
+ﬁxed. With the convergence of ∂t eU
+k,λ in (4.29) it follows that
+D
+∂t eU
+k,λ, ϕW
+E
+Q →
+D
+∂t eU
+λ, ϕW
+E
+Q ,
+as k →∞.
+(4.55)
+Further, by the strong convergence in (4.25), (4.27) and (4.31) it is straightforward to show that
+D
+Lk,λ[U
+k,λ, W ](·), ϕ
+E
+(0,T ) →
+D
+Lλ[U
+λ, W ](·), ϕ
+E
+(0,T ) ,
+as k →∞.
+(4.56)
+In particular, the strong convergence in (4.25) and in (4.27) allows us to take the limit in the numerical
+convective term without any restriction. Finally, (4.55) and (4.56) applied in (4.23) imply that (4.50)
+holds for a.e. t ∈(0, T ). Recall that S
+λ(t, ·) = Sλ
+i , for any t ∈(ti−1, ti] and i ∈{1, . . . , l} by (4.32).
+Since now the terms in (4.50) are constant on each interval (ti−1, ti], for i ∈{1, . . . , l}, the equation
+also holds for all t ∈(0, T ]. Also, (4.54) follows from (4.50) since ∂t eU
+λ(t, ·) = dtUλ
+i , U
+λ(t, ·) = U λ
+i
+and the corresponding holds for Sλ
+i and f i, for any t ∈(ti−1, ti] and i ∈{1, . . . , l}.
+Step 3: Identiﬁcation of the implicit relation. The proof of the implicit relation (4.52) relies on the
+strong convergence of {DU
+k,λ}k∈N and the properties of Sk stated in Assumption 2.3. By the property
+
+
+PAGE 21
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+21
+(α3) in Assumption 2.3 on Sk and the boundedness of {DU
+k,λ}k∈N in L∞(Q)d×d resulting from (4.26),
+we have
+0 ≤lim inf
+k→∞
+D
+Sk(·,DU
+k,λ) −S⋆(·,B), (DU
+k,λ −B)ϕ
+E
+Q
+(4.57)
+for all ϕ ∈C∞
+0 (Q) such that ϕ ≥0 and for all matrices B ∈U, for the dense set U ⊂Rd×d
+sym given
+in the assumption. Then, by the strong convergence of DU
+k,λ in (4.26) and the weak convergence of
+Sk(·, ·,DU
+k,λ) in (4.30) we obtain
+0 ≤lim inf
+k→∞
+D
+Sk(·,DU
+k,λ) −S⋆(·,B), (DU
+k,λ −B)ϕ
+E
+Q
+=
+D
+Sλ −S⋆(·,B), (DU
+λ −B)ϕ
+E
+Q
+(4.58)
+for all ϕ ∈C∞
+0 (Q) such that ϕ ≥0 and for all matrices B ∈U. By Lemma 2.2 (a4) this allows us to
+conclude that
+(DU
+λ(z),Sλ(z)) ∈A(z)
+for a.e. z ∈Q,
+so (4.52) is shown.
+□
+Limit l, n →∞. We are taking the limits l, n →∞simultaneously without imposing any condition
+on δl and hn. The condition q >
+2d
+d+2 is required to gain compactness. Two additional diﬃculties,
+compared to [11], arise from the discretization. The ﬁrst is that in order to prove a uniform bound on
+the sequence of approximations to the time derivative one would require the stability of the L2-projector
+onto Vn
+div in Sobolev norms, which would impose stronger requirements on the ﬁnite element partition
+of Ω. To avoid this, instead of the Aubin–Lions lemma we shall employ an alternative compactness
+result due to Simon (cf.
+Lemma 2.11), which requires convergence properties of time-increments.
+The second diﬃculty is that, in the identiﬁcation of the implicit relation we have to deal with the
+discrepancy between S
+λ and Sλ, since S
+λ appears in the equation (4.50) and Sλ satisﬁes the implicit
+relation in (4.52).
+Lemma 4.6 (Convergence as l, n →∞). Let U
+l,n,m ∈Pl
+0(0, T ; Vn
+div), eU
+l,n,m ∈Pl
+1(0, T ; Vn
+div), Sl,n,m ∈
+Lq′(Q)d×d and S
+l,n,m ∈Pl
+0(0, T ; Lq′(Ω)d×d) satisfy (4.50)–(4.52), for any l, n, m ∈N, by Lemma 4.5.
+Further, let η be as deﬁned in (2.2). For any 0 ≤s0 < s ≤T and all λ = (l, n, m) ∈N3 one has that
+1
+2
+
+ eU
+λ(s, ·)
+
+
+2
+L2(Ω) +
+D
+S
+λ,DU
+λE
+Qss0
++ 1
+m
+
+U
+λ
+
+2q′
+L2q′ (Qss0 )
+≤
+D
+f, U
+λE
+Qs
+s0
++ 1
+2
+
+ eU
+λ(s0, ·)
+
+
+2
+L2(Ω) .
+(4.59)
+Furthermore, for each m ∈N there exists a um ∈L∞(0, T ; L2
+div(Ω)d) ∩Xq
+div(Q), Sm ∈Lq′(Q)d×d and
+subsequences such that, as l, n →∞,
+eU
+l,n,m →um
+strongly in Lp(0, T ; L2(Ω)d) for all p ∈[1, ∞),
+(4.60)
+eU
+l,n,m(s, ·) →um(s, ·)
+strongly in L2(Ω)d for a.e. s ∈(0, T ),
+(4.61)
+eU
+l,n,m(0, ·) →u0
+strongly in L2(Ω)d,
+(4.62)
+U
+l,n,m →um
+strongly in Lp(0, T ; L2(Ω)d) ∩Lr(Q)d
+(4.63)
+for all p ∈[1, ∞) and all r ∈[1, η),
+U
+l,n,m(s, ·) →um(s, ·)
+strongly in L2(Ω)d for a.e. s ∈(0, T ),
+(4.64)
+U
+l,n,m ⇀um
+weakly in Lq(0, T ; W1,q
+0 (Ω)d) ∩Lη(Q)d,
+(4.65)
+U
+l,n,m
+∗⇀um
+weakly* in L∞(0, T ; L2(Ω)d),
+(4.66)
+
+
+PAGE 22
+22
+E. S¨ULI AND T. TSCHERPEL
+U
+l,n,m
+2q′−2
+U
+l,n,m ⇀|um|2q′−2 um
+weakly in L(2q′)′(Q)d,
+(4.67)
+S
+l,n,m ⇀Sm
+weakly in Lq′(Q)d×d,
+(4.68)
+Sl,n,m ⇀Sm
+weakly in Lq′(Q)d×d.
+(4.69)
+Proof.
+Step 1: Energy inequality. Let λ = (l, n, m) ∈N3, i ∈{1, . . ., l} and let t ∈(ti−1, ti]. In (4.50) we test
+with W = U
+λ(t, ·) ∈Vn
+div. For the ﬁrst term adding and subtracting eU
+λ(t, ·) one obtains with (3.20)
+that
+D
+∂t eU
+λ(t, ·), U
+λ(t, ·)
+E
+Ω=
+D
+∂t eU
+λ(t, ·), eU
+λ(t, ·)
+E
+Ω+
+D
+∂t eU
+λ(t, ·), U
+λ(t, ·) −eU
+λ(t, ·)
+E
+Ω
+= 1
+2
+d
+dt
+
+ eU
+λ(t, ·)
+
+
+2
+L2(Ω) + (ti −t)
+
+∂t eU
+λ(t, ·)
+
+
+2
+L2(Ω)
+≥1
+2
+d
+dt
+
+ eU
+λ(t, ·)
+
+
+2
+L2(Ω) ,
+(4.70)
+since t ≤ti. By the continuity of eU
+λ, upon integration over (s0, s), for 0 ≤s0 < s ≤T , this yields
+ˆ s
+s0
+D
+∂t eU
+λ(t, ·), U
+λ(t, ·)
+E
+Ω≥1
+2
+
+ eU
+λ(s, ·)
+
+
+2
+L2(Ω) −1
+2
+
+ eU
+λ(s0, ·)
+
+
+2
+L2(Ω) .
+(4.71)
+The other terms follow immediately and (4.59) is proved.
+Step 2: Estimates on the discrete level. Similarly as in the proof of Lemma 4.3, testing (4.54) with
+W = U λ
+i ∈Vn
+div for i ∈{1, . . . , l}, yields
+D
+dtU λ
+i , U λ
+i
+E
+Ω+
+D
+Sλ
+i ,DU λ
+i
+E
+Ω+ 1
+m
+
+U λ
+i
+
+
+2q′
+L2q′ (Ω) =
+D
+f i, U λ
+i
+E
+Ω.
+(4.72)
+The ﬁrst term on the left-hand side is bounded as in (4.11) and the term on the right-hand side is
+bounded as in (4.13). The only diﬀerence arises in bounding the term involving the stress tensor; cf.
+(4.12): we use that (DU
+λ,Sλ) ∈A a.e. in Q by (4.52) and Assumption 1.1 (A4) to obtain
+D
+Sλ
+i ,DU λ
+i
+E
+Ω
+(4.32)
+=
+* ti
+ti−1
+Sλ(t, ·) dt,DU λ
+i
++
+Ω
+= 1
+δl
+D
+Sλ,DU λ
+i
+E
+Qi
+i−1
+≥1
+δl
+ˆ
+Qi
+i−1
+−|g(·)| + c∗
+DU λ
+i
+
+q
++
+Sλq′
+dz
+(4.73)
+≥−1
+δl
+||g||L1(Qi
+i−1) + c
+
+U λ
+i
+
+
+q
+W1,q(Ω) + c∗
+δl
+Sλq′
+Lq′ (Qi
+i−1) ,
+where again Poincar´e’s and Korn’s inequalities were used. Following the same procedure as in (4.14)–
+(4.16) we arrive at
+max
+j∈{1,...,l}
+
+U λ
+j
+
+
+2
+L2(Ω) +
+l
+X
+j=1
+
+U λ
+j −U λ
+j−1
+
+
+2
+L2(Ω) + δl
+l
+X
+j=1
+
+U λ
+j
+
+
+q
+W1,q(Ω)
++
+Sλq′
+Lq′ (Q) + δl
+m
+l
+X
+j=1
+
+U λ
+j
+
+
+2q′
+L2q′ (Ω) ≤c
+for all λ = (l, n, m) ∈N3.
+(4.74)
+It follows by the relation between S
+λ and Sλ in (4.32), by (3.24) and the estimate (4.74) that
+
+S
+λ
+
+q
+Lq′ (Q) ≤
+Sλq′
+Lq′ (Q) ≤c
+for all λ ∈N3.
+(4.75)
+
+
+PAGE 23
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+23
+Step 3: Estimates on the continuous level. By the deﬁnition of the piecewise constant interpolant
+according to (3.18) it follows from the discrete estimates that
+
+U
+λ
+
+L∞(0,T ;L2(Ω)) +
+
+U
+λ
+
+2q′
+L2q′ (Q) +
+
+U
+λ
+
+q
+Lq(0,T ;W1,q(Ω))
+(3.21)
+=
+max
+j∈{1,...,l}
+
+U λ
+j
+
+
+L2(Ω) + δl
+l
+X
+j=1
+
+U λ
+j
+
+
+2q′
+L2q′ (Ω) + δl
+l
+X
+j=1
+
+U λ
+j
+
+
+q
+W1,q(Ω)
+(4.74)
+≤
+c(m)
+for all λ = (l, n, m) ∈N3.
+(4.76)
+With this and the parabolic interpolation from Lemma 2.8 we have that
+
+U
+λ
+
+L
+q(d+2)
+d
+(Q) ≤c(m)
+for all λ = (l, n, m) ∈N3.
+(4.77)
+For the estimates of the continuous, piecewise aﬃne interpolant eU
+λ according to (3.19) one also has
+to estimate the corresponding norms of U λ
+0; by (4.53) and the stability of the L2-projector in (3.9) we
+have that
+
+U λ
+0
+
+
+L2(Ω)
+(4.53)
+=
+||P n
+divu0||L2(Ω)
+(3.9)
+≤||u0||L2(Ω)
+for all λ = (l, n, m) ∈N3.
+(4.78)
+Together with the discrete estimate in (4.74) this yields that
+
+ eU
+λ
+
+L∞(0,T ;L2(Ω)
+(3.22)
+=
+max
+j∈{0,...,l}
+
+U λ
+j
+
+
+L2(Ω)
+(4.78),(4.74)
+≤
+c
+for all λ ∈N3.
+(4.79)
+For the compactness argument instead of eU
+λ we consider bU
+λ ∈C([0, T ]; Vn
+div) deﬁned by
+bU
+λ(t, ·) :=
+(
+eU
+λ(t, ·)
+if t ∈(δl, T ],
+U
+λ(t, ·) = U λ
+1(·)
+if t ∈[0, δl],
+(4.80)
+which is constant on [0, δl]. Note that by deﬁnition and by the discrete estimate we have that
+
+ bU
+λ
+
+L∞(0,T ;L2(Ω)) ≤
+
+ eU
+λ
+
+L∞(0,T ;L2(Ω))
+(4.79)
+≤
+c,
+(4.81)
+
+ bU
+λ
+
+2q′
+L2q′ (Q) =
+
+U λ
+1
+
+
+2q′
+L2q′ (Q
+δl
+0 ) +
+
+ eU
+λ
+
+2q′
+L2q′ (QT
+δl ) ≤cδl
+l
+X
+i=1
+
+U λ
+i
+
+
+2q′
+L2q′ (Ω)
+(4.74)
+≤
+c(m),
+(4.82)
+
+ bU
+λ
+
+q
+Lq(0,T ;W1,q(Ω)) ≤cδl
+l
+X
+i=1
+
+U λ
+i
+
+
+q
+W1,q(Ω)
+(4.74)
+≤
+c
+(4.83)
+for all λ = (l, n, m) ∈N3.
+By the fact that ∂t eU
+l(t, ·) = dtU λ
+i , for t ∈(ti−1, ti], i ∈{1, . . . , l}, and by the discrete estimate
+(4.74) we obtain
+δl
+
+∂t eU
+λ
+
+2
+L2(Q) = δl
+l
+X
+i=1
+
+
+1
+δl
+(U λ
+i −U λ
+i−1)
+
+
+2
+L2(Qi
+i−1)
+=
+l
+X
+i=1
+
+U λ
+i −U λ
+i−1
+
+
+2
+L2(Ω)
+(4.74)
+≤
+c
+(4.84)
+for all λ ∈N3.
+
+
+PAGE 24
+24
+E. S¨ULI AND T. TSCHERPEL
+Finally, we also estimate Lλ[u; v](t), as deﬁned in (4.48): by (3.16), duality of norms, and H¨older’s
+and Poincar´e’s inequality we obtain
+ˆ b
+a
+Lλ[u; v](t) dt =
+D
+eb(u(t, ·), u(t, ·), v)
+E
+(a,b) −
+D
+S
+λ(t, ·),Dv
+E
+Qba
+−1
+m
+D
+|u(t, ·)|2q′−2 u(t, ·), v
+E
+Qba
++
+
+f(t, ·), v
+
+Qba
+≤||u||2
+L2q′ (Qba) ||∇v||Lq(Qba) + ||u||L2q′ (Qba) ||∇u||Lq(Qba) ||v||L2q′ (Qba)
++
+
+S
+λ
+
+Lq′ (Qba) ||Dv||Lq(Qba) + 1
+m ||u||2q′−1
+L2q′ (Qba) ||v||L2q′ (Qba)
++
+f
+
+Lq′ (a,b;W−1,q′ (Ω)) ||v||Lq(a,b;W1,q(Ω))
+≤c
+
+1 + ||u||2
+L2q′ (Qba)
+
+||∇v||Lq(Qba)
++ c
+
+||u||L2q′ (Qba) ||∇u||Lq(Qba) + 1
+m ||u||2q′−1
+L2q′ (Qba)
+
+||v||L2q′ (Qba) ,
+(4.85)
+for 0 ≤a < b ≤T , for any λ = (l, n, m) ∈N3, where we have used the estimate (4.75) on S
+λ and (4.4)
+on f. With the estimates on U
+λ in (4.76) this yields
+ˆ b
+a
+Lλ[U
+λ; v](t) dt
+(4.85)
+≤
+c
+
+1 +
+
+U
+λ
+
+2
+L2q′ (Qba)
+
+||∇v||Lq(Qba)
++ c
+
+U
+λ
+
+L2q′ (Qba)
+
+∇U
+λ
+
+Lq(Qba) + 1
+m
+
+U
+λ
+
+2q′−1
+L2q′ (Qba)
+
+||v||L2q′ (Qba)
+(4.76)
+≤
+c(m)
+
+||∇v||Lq(Qb
+a) + ||v||L2q′ (Qb
+a)
+
+,
+(4.86)
+for 0 ≤a < b ≤T and any λ = (l, n, m) ∈N3.
+Step 4: Convergence of the time increments (compare [12, pp. 174]). Instead of applying the Aubin–
+Lions lemma, as in [11], here we apply the compactness result due to Simon, stated in Lemma 2.11. This
+means that we do not need uniform bounds on the time derivatives but only convergence properties
+for time increments, which avoids the use of stability results in Sobolev norms for the L2-projector
+onto Vn
+div.
+We wish to apply Lemma 2.11 to the sequence { bU
+l,n,m}l,n∈N, for ﬁxed m ∈N, with
+X = W1,q(Ω)d, B = L2(Ω)d and p = 2. Let us show that
+ˆ T −ε
+0
+
+ bU
+λ(s + ε, ·) −bU
+λ(s, ·)
+
+
+2
+L2(Ω) ds →0,
+as ε →0,
+uniformly for l, n ∈N.
+(4.87)
+Consider the term
+D
+bU
+λ(s + ε, ·) −bU
+λ(s, ·), W
+E
+Ω, for W ∈Vn
+div, s ∈(0, T ) and ε > 0 such that
+s + ε < T . If s + ε ≤δl, then we have bU
+λ(s + ε) = bU
+λ(s) = U λ
+1, so the term vanishes. Now let
+s + ε > δl.
+By the deﬁnition of bU
+λ in (4.80) we have that bU
+λ(s, ·) = bU
+λ(max(s, δl), ·).
+By the
+continuity of bU
+λ and since ∂t bU
+λ is integrable, we obtain
+D
+bU
+λ(s + ε, ·) −bU
+λ(s, ·), W
+E
+Ω=
+ˆ s+ε
+max(s,δl)
+D
+∂t bU
+λ(t, ·), W
+E
+Ωdt
+=
+ˆ s+ε
+max(s,δl)
+D
+∂t eU
+λ(t, ·), W
+E
+Ωdt,
+(4.88)
+where in the last line we have used that bU
+λ(t, ·) and eU
+λ(t, ·) coincide on (max(s, δl), s + ε) ⊂[δl, T ].
+Applying the equation (4.50) for a.e. t ∈(max(s, δl), s + ε), integrating and applying the bounds in
+
+
+PAGE 25
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+25
+(4.86) yields
+ˆ s+ε
+max(s,δl)
+D
+∂t eU
+λ(t, ·), W
+E
+Ωdt =
+ˆ s+ε
+max(s,δl)
+Lλ[U
+λ; W ](t) dt
+(4.86)
+≤
+c(m)
+
+||∇W ||Lq
+
+Qs+ε
+max(s,δl)
+ + ||W ||L2q′ 
+Qs+ε
+max(s,δl)
+
+
+= c(m)
+
+ε
+1/q + ε
+1/2q′
+||W ||Xq(Ω) ,
+(4.89)
+since W is constant in time and the length of the time interval is
+s + ε −max(s, δl) = min(ε, s + ε −δl) ≤ε.
+For all s ∈(0, T ) and ε > 0 such that s + ε < T we have that bU
+λ(s + ε, ·), bU
+λ(s, ·) ∈Vn
+div; so,
+applying (4.88) and (4.89) with W = bU
+λ(s+ε, ·)−bU
+λ(s, ·), which is piecewise constant in time, shows
+that
+
+ bU
+λ(s + ε, ·) −bU
+λ(s, ·)
+
+
+2
+L2(Ω) ≤c(m)
+
+ε
+1/q + ε
+1/2q′ 
+ bU
+λ(s + ε, ·) −bU
+λ(s, ·)
+
+
+Xq(Ω) .
+(4.90)
+Integrating over (0, T −ε), using the triangle inequality, H¨older’s inequality and the estimates in (4.82)
+and (4.83) yields
+ˆ T −ε
+0
+
+ bU
+λ(s + ε, ·) −bU
+λ(s, ·)
+
+
+2
+L2(Ω) ds
+(4.90)
+≤
+c(m)
+
+ε
+1/q + ε
+1/2q′ ˆ T −ε
+0
+
+ bU
+λ(s + ε, ·)
+
+
+Xq(Ω) +
+
+ bU
+λ(s, ·)
+
+
+Xq(Ω)
+
+ds
+≤c(m)
+
+ε
+1/q + ε
+1/2q′ 
+ bU
+λ
+
+Xq(Q)
+(4.82),(4.83)
+≤
+c(m)(ε
+1/q + ε
+1/2q′) →0,
+(4.91)
+as ε →0 uniformly in l, n ∈N, where λ = (l, n, m) ∈N3. This proves (4.87).
+Step 5: Convergence as l, n →∞. Recall that we have λ = (l, n, m) ∈N3 and let m ∈N be ﬁxed.
+By the estimates (4.81) and (4.83) we have that { bU
+l,n,m}l,n∈N is bounded in particular in L2(Q)d and
+L1(0, T ; W1,q(Ω)d). By the condition that q >
+2d
+d+2, the embedding W1,q(Ω) ֒→֒→L2(Ω) is compact
+and with (4.87) all the assumptions in Lemma 2.11 are satisﬁed for X = W1,q(Ω)d, B = L2(Ω)d and
+p = 2. Hence, there exists um ∈L2(Q)d and a subsequence such that
+bU
+l,n,m →um
+strongly in L2(Q)d,
+as l, n →∞.
+(4.92)
+By the deﬁnition of bU
+l,n,m in (4.80) and the property (3.20) of the interpolants deﬁned in (3.18) and
+(3.19) we have that
+
+ bU
+l,n,m −eU
+l,n,m
+
+2
+L2(Q) =
+
+U
+l,n,m −eU
+l,n,m
+
+2
+L2(0,δl;L2(Ω))
+(3.20)
+≤
+
+(δl −t)∂t eU
+l,n,m
+
+2
+L2(0,δl;L2(Ω)) ≤δ2
+l
+
+∂t eU
+l,n,m
+
+2
+L2(0,δl;L2(Ω))
+(4.93)
+(4.84)
+≤
+cδl →0,
+as l →∞.
+With (4.92) it follows that eU
+l,n,m →um strongly in L2(Q)d, as l, n →∞. By the boundedness in
+L∞(0, T ; L2(Ω)d) in (4.79) and interpolation, this implies that
+eU
+l,n,m →um
+strongly in Lp(0, T ; L2(Ω)d),
+as l, n →∞,
+(4.94)
+
+
+PAGE 26
+26
+E. S¨ULI AND T. TSCHERPEL
+for any p ∈[1, ∞). Similarly, by (3.20) we have that
+
+U
+l,n,m −eU
+l,n,m
+
+2
+L2(Q)
+(3.20)
+=
+l
+X
+i=1
+
+(ti −t)∂t eU
+l,n,m
+
+2
+L2(Qi
+i−1)
+≤δ2
+l
+
+∂t eU
+l,n,m
+
+2
+L2(Q)
+(4.84)
+≤
+cδl →0,
+as l →∞.
+(4.95)
+Consequently, with (4.94) it follows that U
+l,n,m →um strongly in L2(Q)d, as l, n →∞. In particular,
+t 7→∥U
+l,n,m(t, ·) −um(t, ·)∥L2(Ω) converges to zero strongly in L2(0, T ), as l, n →∞. Thus, there
+exists a subsequence such that t 7→∥U
+l,n,m(t, ·) −um(t, ·)∥L2(Ω) converges to zero a.e. in (0, T ), as
+l, n →∞, which implies (4.64). Analogously, (4.62) follows from the strong convergence of eU
+l,n,m in
+(4.94).
+The uniform bounds in L∞(0, T ; L2(Ω)d) and Lη(Q)d, with η = max(2q′, q(d+2)
+d
+), by (4.76) and
+(4.77), and the strong convergence in L2(Q)d, yield by interpolation, that
+U
+l,n,m →um
+strongly in Lp(0, T ; L2(Ω)d) ∩Lr(Q)d, as l, n →∞,
+(4.96)
+for any p ∈[1, ∞) and any r ∈[1, η). By the uniform bounds in (4.76) and (4.77) and the (sequential)
+Banach–Alaoglu theorem, up to subsequences, we have that
+U
+l,n,m
+∗⇀um
+weakly* in L∞(0, T ; L2(Ω)d),
+(4.97)
+U
+l,n,m ⇀um
+weakly in Lq(0, T ; W1,q
+0 (Ω)d) ∩Lη(Q)d,
+(4.98)
+as l, n →∞, where the identiﬁcation of the limiting functions with um follows by the strong convergence
+in (4.96).
+The argument that um is divergence-free follow as in [16, p. 1001]: Let h ∈Lq′(Ω) and note that
+by the Assumption 3.4 on the projector Πn
+Q we have that Πn
+Qh →h in particular in Lq′(Ω), as n →∞,
+compare Remark 3.5 (ii). Also, let ϕ ∈C∞
+0 (0, T ). By (4.98) we have that div U
+l,n,m ⇀div um weakly
+in Lq(Ω), and hence
+D
+div U
+l,n,m, ϕΠn
+Qh
+E
+Q →⟨div um, ϕh⟩Q ,
+as l, n →∞.
+(4.99)
+Since U
+l,n,m ∈Pl
+0(0, T ; Vn
+div) the left-hand side vanishes for all l, n ∈N, and hence we have that
+⟨div um, hϕ⟩Q = 0 for all h ∈Lq′(Ω) and all ϕ ∈C∞(0, T ), so by density um is (weakly) divergence-
+free.
+By (4.76) it follows that {|U
+l,n,m|2q′−2 U
+l,n,m}l,n∈N is bounded in L(2q′)′(Q)d and thus, by the
+(sequential) Banach–Alaoglu theorem there exists a subsequence and ψm ∈L(2q′)′(Q)d such that
+U
+l,n,m
+2q′−2
+U
+l,n,m ⇀ψm
+weakly in L(2q′)′(Q)d,
+as l, n →∞.
+(4.100)
+By the strong convergence in (4.96), there exists a subsequence, which converges a.e. in Q, and hence
+we can identify ψm = |um|2q′−2 um, which shows (4.67).
+Because eU
+l,n,m(0, ·) = P n
+divu0 by (4.51), with (3.11) it follows that
+eU
+l,n,m(0, ·) = P n
+divu0 →u0,
+strongly in L2(Ω)d,
+as n →∞,
+(4.101)
+so (4.62) is proven.
+The uniform estimates in (4.75) and the (sequential) Banach–Alaoglu theorem imply that there
+exist S
+m,Sm ∈Lq′(Q)d×d such that
+S
+l,n,m ⇀S
+m,
+weakly in Lq′(Q)d×d,
+(4.102)
+Sl,n,m ⇀Sm,
+weakly in Lq′(Q)d×d,
+(4.103)
+
+
+PAGE 27
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+27
+as l, n →∞. It remains to show that S
+m = Sm; to this end, let B ∈C∞
+0 (Q)d×d be arbitrary but ﬁxed.
+On the one hand the weak convergence in (4.102) shows that
+D
+S
+l,n,m,B
+E
+Q →
+D
+S
+m,B
+E
+Q ,
+as l, n →∞.
+(4.104)
+On the other hand, by the relation between S
+l,n,m and Sl,n,m according to (4.32), we have that
+D
+S
+l,n,m,B
+E
+Q =
+l
+X
+i=1
+ˆ ti
+ti−1
+ˆ
+Ω
+ ti
+ti−1
+Sl,n,m(s, x) dsB(t, x) dx dt
+=
+l
+X
+i=1
+1
+δl
+ˆ
+Ω
+ ˆ ti
+ti−1
+Sl,n,m(s, x) ds
+!  ˆ ti
+ti−1
+B(t, x) dt
+!
+dx
+=
+l
+X
+i=1
+ˆ
+Ω
+ˆ ti
+ti−1
+Sl,n,m(s, x)
+ ti
+ti−1
+B(t, x) dt dx ds
+=
+D
+Sl,n,m,B
+E
+Q →⟨Sm,B⟩Q ,
+as l, n →∞,
+(4.105)
+where we have used (4.103) and the fact that B →B strongly in Lq(Q)d×d, as l →∞, see (3.25). By
+(4.104) and (4.105), the uniqueness of limits implies that S
+m = Sm a.e. in Q.
+□
+For m ∈N, t ∈(0, T ), u ∈L2q′(Q)d and v ∈Xq(Ω) let us introduce
+Lm[u; v](t) := −b(u(t, ·), u(t, ·), v) −⟨Sm(t, ·),Dv⟩Ω
+−1
+m
+D
+|u(t, ·)|2q′−2 u(t, ·), v
+E
+Ω+ ⟨f(t, ·), v⟩Ω,
+(4.106)
+where Sm is given by Lemma 4.6 and b(·, ·, ·) is deﬁned in (3.12).
+Lemma 4.7 (Identiﬁcation of the PDE as l, n →∞). The limiting functions um ∈L∞(0, T ; L2
+div(Ω)d)∩
+Xq
+div(Q) given in Lemma 4.6 satisfy that ∂tum ∈Lτ(0, T ; (Xq
+div(Ω))′), with τ deﬁned in (2.3), and
+Xq
+div(Ω) deﬁned in (2.4).
+(Up to a representative) we have that um ∈Cw([0, T ], L2
+div(Ω)d) for all
+m ∈N. Furthermore, for each m ∈N the functions um and Sm ∈Lq′(Q)d×d from Lemma 4.6 satisfy
+⟨∂tum(t, ·), w⟩Ω= Lm[um; w](t)
+for all w ∈C∞
+0,div(Ω)d for a.e. t ∈(0, T ),
+(4.107)
+(Dum(z),Sm(z)) ∈A(z)
+for a.e. z ∈Q,
+(4.108)
+ess lim
+t→0+ ||um(t, ·) −u0||L2(Ω) = 0.
+(4.109)
+Proof. Let m ∈N be arbitrary but ﬁxed.
+Step 1: Identiﬁcation of the limiting equation.
+For λ = (l, n, m) ∈N3 multiplying (4.50) by ϕ ∈
+C∞
+0 ((−T, T )) and integrating over (0, T ) yields
+D
+∂t eU
+λ, W ϕ
+E
+Q
+(4.50)
+=
+D
+Lλ[U
+λ, W ], ϕ
+E
+(0,T ) ,
+for any W ∈Vn
+div.
+(4.110)
+By integration by parts and the fact that eU
+λ ∈C([0, T ]; L2(Ω)d) we obtain that
+D
+∂t eU
+λ, W ϕ
+E
+Q =
+D
+∂t( eU
+λϕ), W
+E
+Q −
+D
+eU
+λ, W ∂tϕ
+E
+Q
+= −
+D
+eU
+λ(0, ·), ϕ(0)W
+E
+Ω−
+D
+eU
+λ, W ∂tϕ
+E
+Q .
+(4.111)
+Taking both (4.110) and (4.111) together, we obtain that
+−
+D
+eU
+λ, W ∂tϕ
+E
+Q =
+D
+eU
+λ(0, ·), ϕ(0)W
+E
+Ω+
+D
+Lλ[U
+λ, W ], ϕ
+E
+(0,T )
+(4.112)
+for all W ∈Vn
+div and all ϕ ∈C∞
+0 ((−T, T )) and λ = (l, n, m) ∈N3.
+
+
+PAGE 28
+28
+E. S¨ULI AND T. TSCHERPEL
+Now let w ∈C∞
+0,div(Ω)d and ϕ ∈C∞
+0 ((−T, T )) be arbitrary. Recall that by Remark 3.5 (i) for
+w ∈C∞
+0,div(Ω)d we have that
+Vn
+div ∋Πnw →w
+strongly in W1,s
+0 (Ω)d,
+as n →∞,
+for any s ∈[1, ∞).
+(4.113)
+In order to deduce the limiting equation for um we consider (4.112) term by term, as l, n →∞: let
+s ∈[1, ∞) be large enough that the embedding W1,s(Ω)d ֒→L2(Ω)d is continuous. By the strong
+convergence of eU
+l,n,m in Lp(0, T ; L2(Ω)d), for p ∈[1, ∞) by (4.60), with (4.113) we obtain that
+−
+D
+eU
+l,n,m, Πn(w)∂tϕ
+E
+Q →−⟨um, w∂tϕ⟩Q ,
+as l, n →∞.
+(4.114)
+Similarly, the strong convergence of eU
+l,n,m(0, ·) →u0 in L2(Ω)d in (4.62) yields that
+D
+eU
+l,n,m(0, ·), ϕ(0)Πnw
+E
+Ω→⟨u0, ϕ(0)w⟩Ω,
+as l, n →∞.
+(4.115)
+By the fact that U
+l,n,m →um strongly in Lr(Q)d for all r ∈[1, η), as l, n →∞, by (4.63), it follows
+that U
+l,n,m ⊗U
+l,n,m →um ⊗um strongly in Lp(Q)d×d for all p ∈[1, η
+2). Such a p > 1 exists, since
+η = max
+
+2q′, q(d+2)
+d
+
+> 2 by the assumption that q >
+2d
+d+2. With (4.113) applied for s = p′ < ∞we
+obtain that ϕ∇Πnw →ϕ∇w strongly in Lp′(Q)d×d. Together these imply that
+D
+U
+l,n,m ⊗U
+l,n,m, ϕ∇Πnw
+E
+Q →⟨um ⊗um, ϕ∇w⟩Q ,
+as l, n →∞.
+(4.116)
+For the modiﬁcation of the convective term note ﬁrst that we have weak convergence of ∇U
+l,n,m ⇀
+∇um in Lq(Q)d×d by (4.65). By (4.63) we have in particular that U
+l,n,m →um strongly in Lq′(Q)d,
+as l, n →∞since q′ < 2q′ ≤η. For s > d, the embedding W1,s(Ω) ֒→L∞(Ω) is continuous, and hence
+we have ϕΠnw →ϕw strongly in L∞(Q)d. Together, this yields that
+D
+U
+l,n,m ⊗ϕΠnw, ∇U
+l,n,mE
+Q →⟨um ⊗ϕw, ∇um⟩Q
+as l, n →∞.
+(4.117)
+By (4.113) we have in particular that ϕDΠnw →ϕDw strongly in Lq(Q)d×d and by (4.68) that
+S
+l,n,m ⇀Sm weakly in Lq′(Q)d×d. Thus, it follows that
+D
+S
+l,n,m, ϕDΠnw
+E
+Q →⟨Sm, ϕDw⟩Q ,
+as l, n →∞.
+(4.118)
+Since |U
+l,n,m|2q′−2U
+l,n,m ⇀|um|2q′−2 um weakly in L(2q′)′(Q)d by (4.67) and ϕΠnw →ϕw in par-
+ticular in L2q′(Q)d, we obtain
+1
+m
+U
+l,n,m
+2q′−2
+U
+l,n,m, ϕΠnw
+
+Q
+→1
+m
+D
+|um|2q′−2 U m, ϕw
+E
+Q ,
+as l, n →∞.
+(4.119)
+Finally, with the strong convergence f →f in Lq′(0, T ; W−1,q′(Ω)d) by (4.5) and with (4.113) we have
+that
+
+f, ϕΠnw
+
+Q →⟨f, ϕw⟩Q ,
+as l, n →∞.
+(4.120)
+By the fact that um is divergence-free, it follows that eb(um, um, ϕw) = b(um, um, ϕw). So with Ll,n,m
+and Lm as deﬁned in (4.48) and (4.106), respectively, the convergence results (4.116)–(4.120) yield that
+D
+Ll,n,m[U
+l,n,m, Πnw], ϕ
+E
+(0,T ) →⟨Lm[um, w], ϕ⟩(0,T ) ,
+as l, n →∞.
+(4.121)
+Now, from (4.112), using (4.114), (4.115) and (4.121), as l, n →∞, we have that
+−⟨um, w∂tϕ⟩Q = ⟨u0, ϕ(0)w⟩Ω+ ⟨Lm[um, w], ϕ⟩(0,T )
+(4.122)
+for all w ∈C∞
+0,div(Ω)d and all ϕ ∈C∞
+0 ((−T, T )).
+
+
+PAGE 29
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+29
+Step 2: Bound on the time-derivative. The distributional derivative of um satisﬁes, by deﬁnition and
+using (4.122), that
+⟨∂tum, wϕ⟩Q = −⟨um, w∂tϕ⟩Q
+(4.122)
+=
+⟨Lm[um, w], ϕ⟩(0,T )
+(4.123)
+for all w ∈C∞
+0,div(Ωd) and all ϕ ∈C∞
+0 ((0, T )), since supp ϕ ⊂(0, T ). Using this equation we wish to
+show that ∂tum ∈Lτ(0, T ; (Xq
+div(Ω))′) (not uniformly in m ∈N), for τ as in (2.3) and Xq
+div(Ω) as in
+(2.4). For Lm as deﬁned in (4.106), using the fact that um ∈L2q′(Q)d and Sm ∈Lq′(Q)d×d let us ﬁrst
+estimate
+⟨Lm[um, w], ϕ⟩(0,T )
+ ≤
+⟨um ⊗um, ϕ∇w⟩Q
+ +
+⟨Sm, ϕDw⟩Q
+
++ 1
+m
+
+D
+|um|2q′−2 um, ϕw
+E
+Q
+ +
+⟨f, ϕw⟩Q
+
+≤||um||2
+L2q′ (Q) ||ϕ∇w||Lq(Q) + ||Sm||Lq′ (Q) ||ϕDw||Lq(Q)
++ 1
+m ||um||2q′−1
+L2q′ (Q) ||ϕw||L2q′ (Q)
++ ||f||Lq′ (0,T ;W−1,q′ (Ω)) ||ϕw||Lq(0,T ;W1,q(Ω))
+≤c(m)
+
+||ϕ||Lq(0,T ) + ||ϕ||L2q′ (0,T )
+ 
+||w||W1,q(Ω) + ||w||L2q′ (Ω)
+
+≤c(m) ||ϕ||Lτ′ (0,T ) ||w||Xq(Ω)
+(4.124)
+for all ϕ ∈C∞
+0 ((0, T )) and all w ∈C∞
+0,div(Ω)d, since τ ′ = max(2q′, q). By the density of the respective
+test function spaces, ⟨Lm[um, ·], ·⟩(0,T ) represents a bounded linear functional on Lτ ′(0, T ; Xq
+div(Ω)),
+and thus we have that ∂tum ∈Lτ(0, T ; (Xq
+div(Ω))′) by (4.123) and by reﬂexivity of the function space.
+Consequently, ⟨∂tum, w⟩Ωis integrable for w ∈C∞
+0,div(Ω)d, and thus, we can rephrase (4.123) by the
+fundamental lemma of calculus of variations in the pointwise sense in time, so (4.107) is proved.
+Step 3: Identiﬁcation of the initial condition.
+Let us ﬁrst show that um ∈Cw([0, T ]; L2
+div(Ω)d).
+Recall that the embedding Xq
+div(Ω) ֒→L2
+div(Ω)d is dense and hence we have (L2
+div(Ω)d)′ ֒→(Xq
+div(Ω))′.
+Furthermore, since the embedding L2
+div(Ω)d ֒→L2(Ω)d is continuous and L2
+div(Ω)d is a closed subspace,
+one has (e.g., by [36]) that (L2
+div(Ω)d)′ ≃L2(Ω)d/(L2
+div(Ω)d)⊥, and hence it follows that
+L2
+div(Ω)d ֒→L2(Ω)d ֒→(L2
+div(Ω)d)′.
+(4.125)
+This implies with the above that the embedding L2
+div(Ω)d ֒→(Xq
+div(Ω))′ is continuous.
+Consequently, we have that um ∈L∞(0, T ; L2
+div(Ω)d) ֒→L1(0, T ; (Xq
+div(Ω))′). With this and the
+fact that in particular ∂tu ∈L1(0, T ; (Xq
+div(Ω))′), Lemma 2.9 implies that um ∈Cw([0, T ]; (Xq
+div(Ω))′).
+Furthermore, by this and the fact that um ∈L∞(0, T ; L2
+div(Ω)d), again with L2
+div(Ω)d ֒→(Xq
+div(Ω))′,
+Lemma 2.10 shows that um ∈Cw([0, T ]; L2
+div(Ω)d).
+Next, we shall show that um(0, ·) = u0 ∈L2
+div(Ω)d. Let ϕ ∈C∞
+0 ((−T, T )) such that ϕ(0) = 1.
+Multiplying (4.107) by ϕ and integrating over (0, T ), yields that
+⟨∂tum, wϕ⟩Q = ⟨Lm[um, w], ϕ⟩(0,T )
+(4.126)
+for all w ∈C∞
+0,div(Ω)d.
+On the other hand, by integration by parts, the fundamental theorem of
+calculus and the fact that um ∈Cw([0, T ]; L2
+div(Ω)d) and also applying (4.122), we have
+⟨∂tum, wϕ⟩Q = ⟨∂t(umϕ), w⟩Q −⟨um, w∂tϕ⟩Q
+(4.122)
+=
+−⟨um(0, ·)ϕ(0), w⟩Ω+ ⟨u0, ϕ(0)w⟩Ω+ ⟨Lm[um, w], ϕ⟩(0,T )
+(4.127)
+for all w ∈C∞
+0,div(Ω)d. Comparing with (4.126) and noting that ϕ(0) = 1, we obtain
+⟨um(0, ·), w⟩Ω= ⟨u0, w⟩Ω
+for all w ∈C∞
+0,div(Ω)d.
+(4.128)
+Since u0, um(0, ·) ∈L2
+div(Ω)d are divergence-free, this suﬃces to conclude that u0 = um(0, ·).
+
+
+PAGE 30
+30
+E. S¨ULI AND T. TSCHERPEL
+By (4.61) we have strong convergence eU
+l,n,m(s, ·) →um(s, ·) in L2(Ω)d, as l, n →∞, for a.e.
+s ∈(0, T ). Furthermore, by (4.62) we have eU
+l,n,m(0, ·) →u0 strongly in L2(Ω)d, as l, n →∞, and
+consequently for a.e. s ∈(0, T ) we obtain that
+||um(s, ·) −u0||2
+L2(Ω) =
+lim
+l,n→∞
+
+ eU
+l,n,m(s, ·) −eU
+l,n,m(0, ·)
+
+
+2
+L2(Ω) .
+(4.129)
+By (4.59), for all s ∈(0, T ) and λ = (l, n, m) ∈N3 we have that
+
+ eU
+λ(s, ·)
+
+
+2
+−
+
+ eU
+λ(0, ·)
+
+
+2
+≤2
+D
+f, U
+λE
+Qs ,
+for λ = (l, n, m) ∈N3,
+(4.130)
+since the other terms can be shown to be nonnegative.
+Indeed, the nonnegativity of the term
+⟨S
+λ,DU
+λ⟩Qs follows by the relation (4.32), the fact that (DU
+λ,Sλ) ∈A(·) a.e.
+in Q by (4.52),
+and that A(·) is monotone and (0,0) ∈A(·) a.e. in Q by Assumption 1.1. Expanding the norm on
+the right-hand side in (4.129), adding and subtracting twice the term ∥eU
+l,n,m(0, ·)∥2
+L2(Ω) and applying
+(4.130), for λ = (l, n, m), we obtain that
+
+ eU
+λ(s, ·) −eU
+λ(0, ·)
+
+
+2
+L2(Ω) =
+
+ eU
+λ(s, ·)
+
+
+2
+L2(Ω) −2
+D
+eU
+λ(s, ·), eU
+λ(0, ·)
+E
+Ω+
+
+ eU
+λ(0, ·)
+
+
+2
+L2(Ω)
+=
+
+ eU
+λ(s, ·)
+
+
+2
+L2(Ω) −
+
+ eU
+λ(0, ·)
+
+
+2
+L2(Ω)
++ 2
+D
+eU
+λ(0, ·) −eU
+λ(s, ·), eU
+λ(0, ·)
+E
+Ω
+(4.131)
+(4.130)
+≤
+D
+f, U
+λE
+Qs + 2
+D
+eU
+λ(0, ·) −eU
+λ(s, ·), eU
+λ(0, ·)
+E
+Ω.
+Then, applying lim supl,n→∞gives that, for a.e. s ∈(0, T ),
+lim sup
+l,n→∞
+
+ eU
+l,n,m(s, ·) −eU
+l,n,m(0, ·)
+
+
+(4.131)
+≤
+lim sup
+l,n→∞
+D
+f, U
+l,n,mE
+Qs
++ 2 lim sup
+l,n→∞
+D
+eU
+l,n,m(0, ·) −eU
+l,n,m(s, ·), eU
+l,n,m(0, ·)
+E
+Ω
+= ⟨f, um⟩Qs + 2 ⟨u0 −um(s, ·), u0⟩Ω
+(4.132)
+= ⟨f, um⟩Qs + 2 ⟨um(0, ·) −um(s, ·), u0⟩Ω,
+since we have the convergence U
+l,n,m ⇀um weakly in Lq(0, T ; W1,q
+0 (Ω)d) by (4.65), f →f strongly
+in Lq′(0, T ; W−1,q′(Ω)d) by (4.5), eU
+l,n,m(0, ·) →u0 strongly in L2(Ω)d by (4.62) and eU
+l,n,m(s, ·) →
+um(s, ·) strongly in L2(Ω)d for a.e. s ∈(0, T ) by (4.61). In the ﬁnal line we have used that um(0, ·) =
+u0. Let us denote by N m ⊂[0, T ] the zero subset of times for which (4.132) does not hold. Applying
+(4.132) in (4.129) and taking lim infs→0+ omitting the zero set N m we have that
+0 ≤
+lim inf
+(0,T )\N m∋s→0 ||um(s, ·) −u0||2
+L2(Ω)
+(4.129)
+≤
+lim inf
+(0,T )\N m∋s→0 lim sup
+l,n→∞
+
+ eU
+l,n,m(s, ·) −eU
+l,n,m(0, ·)
+
+
+2
+L2(Ω)
+(4.132)
+≤
+lim inf
+(0,T )\N m∋s→0 ⟨f, um⟩Qs + 2 ⟨um(0, ·) −um(s, ·), u0⟩Ω= 0,
+(4.133)
+where the last equality follows from the absolute continuity of the integral and from the fact that
+um ∈Cw([0, T ]; L2
+div(Ω)d), u0 ∈L2
+div(Ω)d and L2
+div(Ω)d ֒→(L2
+div(Ω)d)′. This shows (4.109).
+Step 4:
+Energy identity.
+Recall that um ∈Xq
+div(Q) ֒→Lmin(q,2q′)(0, T ; Xq
+div(Ω)d) and ∂tum ∈
+Lτ(0, T ; (Xq
+div(Ω))′), where τ = min(q′, (2q′)′), and equation (4.107) is satisﬁed. Because of the lack
+
+
+PAGE 31
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+31
+of integrability in time an approximation procedure by means of molliﬁcation in time can be applied
+to show the energy identity
+1
+2 ||um(s, ·)||2
+L2(Ω) + ⟨Sm,Dum⟩Qs + 1
+m ||um||2q′
+L2q′ (Qs) = ⟨f, um⟩Qs + 1
+2 ||u0||2
+L2(Ω)
+(4.134)
+for a.e. s ∈(0, T ), where also the attainment of the initial datum in the sense of (4.109) is used. The
+proof follows by a standard procedure and we therefore omit the details; see, e.g., [32, Ch. 2.5].
+Step 5: Identiﬁcation of the implicit relation. Recall that we have by the assertion (4.52) that the
+inclusion (DU
+l,n,m(z),Sl,n,m(z)) ∈A(z) holds for a.e.
+z ∈Q.
+Furthermore, by (4.65) we have
+that DU
+l,n,m ⇀Dum weakly in Lq(Q)d×d and by (4.69) that Sl,n,m ⇀Sm weakly in Lq′(Q)d×d, as
+l, n →∞. By Lemma 2.6 it suﬃces to show that
+lim sup
+l,n→∞
+D
+Sl,n,m,DU
+l,n,mE
+Qs ≤⟨Sm,Dum⟩Qs ,
+(4.135)
+in order to obtain (Dum(z),Sm(z)) ∈A(z) for a.e. z ∈Qs. Then we can exhaust Q by letting s →T .
+We can only show (4.135) for a.e. s ∈(0, T ) since the energy identity (4.134) is available only for a.e.
+s ∈(0, T ) and some of the arguments used to show (4.135) are only available for a.e. s ∈(0, T ).
+Let us add and subtract the term ⟨S
+l,n,m,DU
+l,n,m⟩Qs to obtain
+D
+Sl,n,m,DU
+l,n,mE
+Qs =
+D
+S
+l,n,m,DU
+l,n,mE
+Qs +
+D
+Sl,n,m −S
+l,n,m,DU
+l,n,mE
+Qs
+=: I + II,
+(4.136)
+where the ﬁrst term appears in the equation (4.50) for the approximate solutions and the second term
+has to be shown to vanish. The energy inequality (4.59) yields that
+I =
+D
+S
+l,n,m,DU
+l,n,mE
+Qs
+(4.59)
+≤
+−1
+2
+
+ eU
+l,n,m(s, ·)
+
+
+2
+L2(Ω) + 1
+2
+
+ eU
+l,n,m(0, ·)
+
+
+2
+L2(Ω)
++
+D
+f, U
+l,n,mE
+Qs −1
+m
+
+U
+l,n,m
+
+2q′
+L2q′ (Qs) .
+(4.137)
+For the second term in (4.136), for l ∈N let j ∈{1, . . . , l} be such that s ∈(tj−1, tj], i.e., j depends
+on s and on l. By the relation (4.32) we have that
+D
+Sl,n,m −S
+l,n,m,DU
+l,n,mE
+Qi
+i−1
+=
+*ˆ ti
+ti−1
+Sl,n,m(t, ·) −S
+l,n,m dt,DU
+l,n,m
++
+Ω
+=
+*ˆ ti
+ti−1
+Sl,n,m(t, ·) dt −δlS
+l,n,m,DU
+l,n,m
++
+Ω
+= 0,
+(4.138)
+for any i ∈{1, . . ., l}. So for II we obtain that
+II =
+D
+Sl,n,m −S
+l,n,m,DU
+l,n,mE
+Qtj
+−
+D
+Sl,n,m −S
+l,n,m,DU
+l,n,mE
+Q
+tj
+s
+(4.138)
+=
+0 −
+D
+Sl,n,m,DU
+l,n,mE
+Q
+tj
+s
++
+D
+S
+l,n,m,DU
+l,n,mE
+Q
+tj
+s
+≤
+D
+S
+l,n,m,DU
+l,n,mE
+Q
+tj
+s
+,
+(4.139)
+where the inequality follows since A(·) is monotone a.e. in Q, (0,0) ∈A(·) a.e. in Q and by the fact
+that (DU
+l,n,m,Sl,n,m) ∈A(·) a.e. in Q by (4.52). For the remaining term ﬁrst we use again (4.59) on
+(s, tj), noting that the term involving
+1
+m is nonnegative, which yields
+D
+S
+l,n,m,DU
+l,n,mE
+Q
+tj
+s
+≤
+D
+f, U
+l,n,mE
+Q
+tj
+s
+−1
+2
+
+ eU
+l,n,m(tj, ·)
+
+
+2
+L2(Ω) + 1
+2
+
+ eU
+l,n,m(s, ·)
+
+
+2
+L2(Ω) .
+(4.140)
+
+
+PAGE 32
+32
+E. S¨ULI AND T. TSCHERPEL
+By the duality of norms, the estimate (4.76) and by (4.4) we obtain
+D
+f, U
+l,n,mE
+Q
+tj
+s
+≤
+f
+
+Lq′ (s,tj;W−1,q′ (Ω))
+
+U
+l,n,m
+
+Lq(0,T ;W1,q(Ω))
+≤c(m) ||f||Lq′ (tj−1,tj;W−1,q′ (Ω)) ≤c(m) ||f||Lq′ (s−δl,s+δl;W−1,q′ (Ω)) .
+(4.141)
+Furthermore, we have eU
+l,n,m(tj, ·) = U
+l,n,m(tj, ·) = U
+l,n,m(s, ·), since s ∈(tj−1, tj], and hence
+II
+(4.139),(4.140)
+≤
+D
+f, U
+l,n,mE
+Q
+tj
+s
+−1
+2
+
+ eU
+l,n,m(tj, ·)
+
+
+2
+L2(Ω) + 1
+2
+
+ eU
+l,n,m(s, ·)
+
+
+2
+L2(Ω)
+(4.141)
+≤
+c(m) ||f||Lq′ (s−δl,s+δl;W−1,q′ (Ω)) −1
+2
+
+U
+l,n,m(s, ·)
+
+
+2
+L2(Ω) + 1
+2
+
+ eU
+l,n,m(s, ·)
+
+
+2
+L2(Ω) .
+(4.142)
+Now applying lim supl,n→∞to (I + II) with (4.137) and (4.142), noting that the term involving
+eU
+l,n,m(s, ·) drops out, we obtain
+lim sup
+l,n→∞
+(I + II) ≤−lim
+l,n→∞
+1
+2
+
+U
+l,n,m(s, ·)
+
+
+2
+L2(Ω) +
+lim
+l,n→∞
+1
+2
+
+ eU
+l,n,m(0, ·)
+
+
+2
+L2(Ω)
+−1
+m lim inf
+l,n→∞
+
+U
+l,n,m
+
+2q′
+L2q′ (Qs) +
+lim
+l,n→∞
+D
+f, U
+l,n,mE
+Qs
++ c(m) lim
+l→∞||f||Lq′ (s−δl,s+δl;W−1,q′ (Ω))
+≤−1
+2 ||um(s, ·)||2
+L2(Ω) + 1
+2 ||u0||2
+L2(Ω) −1
+m ||um||2q′
+L2q′ (Qs) + ⟨f, um⟩Qs ,
+(4.143)
+where the last inequality is based on the following arguments. By (4.64) we have that U
+l,n,m(s, ·) →
+um(s, ·) strongly in L2(Ω)d, as l, n →∞, for a.e. s ∈(0, T ). The second term converges to 1
+2∥u0∥2
+L2(Ω),
+since by (4.62) we have that eU
+l,n,m(0, ·) →u0 strongly in L2(Ω)d. For the third term we use weak
+lower-semicontinuity with respect to the weak convergence in L2q′(Qs)d and (4.65). For the forth term
+we have convergence, since U
+l,n,m ⇀um weakly in Lq(0, T ; W1,q(Ω)d) by (4.65) and f →f strongly
+in Lq′(0, T ; W−1,q′(Ω)d) by (4.5), as l, n →∞. The last term vanishes by the absolute continuity of
+the integral, as l →∞. Finally returning to (4.136), applying lim supl,n→∞and the energy identity
+(4.134) for a.e. s ∈(0, T ), yields
+lim sup
+l,n→∞
+D
+Sl,n,m,DU
+l,n,mE
+Qs
+(4.136)
+≤
+lim sup
+l,n→∞
+(I + II)
+(4.143)
+≤
+−1
+2 ||um(s, ·)||2
+L2(Ω) + 1
+2 ||u0||2
+L2(Ω)
+−1
+m ||um||2q′
+L2q′ (Qs) + ⟨f, um⟩Qs
+(4.134)
+=
+⟨Sm,Dum⟩Qs
+(4.144)
+for a.e. s ∈(0, T ). This proves the claim in (4.135) and completes the proof.
+□
+Limit m →∞. In this step we loose the admissibility of the solution as a test function, and we have
+to use Lipschitz truncation to identify the implicit relation. The availability of the solenoidal Lipschitz
+truncation allows to simplify the arguments in [11], since no pressure has to be reconstructed.
+Let us denote
+µ := min
+q(d + 2)
+2d
+, q′, (2q′)′
+
+= min (ˆq′, τ) ,
+(4.145)
+where τ deﬁned in (2.3). Note that since q >
+2d
+d+2, we have that µ > 1.
+
+
+PAGE 33
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+33
+Lemma 4.8 (Convergence m →∞). Let um ∈L∞(0, T ; L2
+div(Ω)d) ∩Xq
+div(Q) be such that ∂tum ∈
+Lτ(0, T ; (Xq
+div(Ω))′) and let Sm ∈Lq′(Q)d×d be a solution to (4.107)–(4.109), for m ∈N. Further, let
+µ > 1 and ˆq be deﬁned in (4.145) and (2.1), respectively. Then, there exists a constant c > 0 such that
+we have
+||um||2
+L∞(0,T ;L2(Ω)) + ||um||q
+Lq(0,T ;W1,q(Ω)) + ||Sm||q′
+Lq′ (Q)
++ 1
+m ||um||2q′
+L2q′ (Q) + ||um||
+L
+q(d+2)
+d
+(Q) ≤c
+for all m ∈N.
+(4.146)
+Furthermore, there exists a function u ∈L∞(0, T ; L2
+div(Ω)d) ∩Lq(0, T ; W1,q
+0,div(Ω)d) such that ∂tu ∈
+Lµ(0, T ; (W1,ˆq
+0,div(Ω)d)′), an S ∈Lq′(Q)d×d and subsequences such that, as m →∞,
+um →u
+strongly in Lq(0, T ; L2
+div(Ω)d) ∩Lr(Q)d, ∀r ∈[1, q(d+2)
+d
+),
+(4.147)
+um(s, ·) →u(s, ·)
+strongly in L2
+div(Ω)d for a.e. s ∈(0, T ),
+(4.148)
+um ⇀u
+weakly in Lq(0, T ; W1,q
+0,div(Ω)d) ∩L
+q(d+2)
+d
+(Q)d,
+(4.149)
+um
+∗⇀u
+weakly* in L∞(0, T ; L2
+div(Ω)d),
+(4.150)
+∂tum ⇀∂tu
+weakly in Lµ(0, T ; (W1,ˆq
+0,div(Ω)d)′),
+(4.151)
+Sm ⇀S
+weakly in Lq′(Q)d×d,
+(4.152)
+1
+m |um|2q′−2 um →0
+strongly in Lp(Q)d×d, for any p ∈[1, (2q′)′).
+(4.153)
+Proof.
+Step 1: Estimates. Recall that by (4.134) we have the following energy identity for a.e. t ∈(0, T ):
+1
+2 ||um(t, ·)||2
+L2(Ω) + ⟨Sm,Dum⟩Qt + 1
+m ||um||2q′
+L2q′ (Qt) = ⟨f, um⟩Qt + 1
+2 ||u0||2
+L2(Ω) .
+(4.154)
+By the fact that (Dum,Sm) ∈A(·) a.e. in Q by (4.108), we can use Assumption 1.1 (A4) to show that
+⟨Sm,Dum⟩Qt ≥−|g||L1(Qt) + c∗
+
+||Dum||q
+Lq(Qt) + ||Sm||q′
+Lq′ (Qt)
+
+≥−|g||L1(Qt) + c ||um||q
+Lq(0,t;W1,q(Q)) + c∗||Sm||q′
+Lq′ (Qt) ,
+(4.155)
+where we have used Poincar´e’s and Korn’s inequalities in the last line. Similarly as before, we use
+duality of norms and Young’s inequality with ε > 0 to bound
+⟨f, um⟩Qt ≤c(ε) ||f||q′
+Lq′ (0,T ;W−1,q′ (Ω)) + ε ||um||q
+Lq(0,t;W1,q(Ω)) .
+(4.156)
+Applying (4.155) and (4.156) in (4.154), rearranging and choosing ε > 0 small enough yields
+||um(t, ·)||2
+L2(Ω) + ||um||q
+Lq(0,t;W1,q(Ω)) + ||Sm||q′
+Lq′ (Qt) + 1
+m ||um||2q′
+L2q′ (Qt) ≤c
+(4.157)
+for a.e. t ∈(0, T ) and all m ∈N. Taking the essential supremum over t ∈(0, T ) and also applying the
+parabolic interpolation from Lemma 2.8 shows (4.146).
+Step 2: Bound on the time derivative. In order to derive a uniform bound on the time derivative let
+us estimate Lm[um; v]. Since no uniform bounds on ||um||L2q′ (Q) are available at this point, we use the
+bound (3.14) on the convective term, with ˆq as deﬁned in (2.1), to deduce that
+|⟨u(t, ·) ⊗u(t, ·), ∇v⟩Ω| ≤c ||u(t, ·)||2
+L
+q(d+2)
+d
+(Ω) ||∇v||Lˆ
+q(Ω) ,
+which holds, since q ≥
+2d
+d+2. Note that the embedding W1,ˆq(Ω) ֒→W1,q(Ω) ∩L2q′(Ω) is continuous for
+ˆq as in (2.1). Also we have that µ′ = max
+
+2q′, q,
+
+q(d+2)
+2d
+′
+= max(2q′, ˆq) for µ as in (4.145), i.e.,
+
+
+PAGE 34
+34
+E. S¨ULI AND T. TSCHERPEL
+the embedding Lµ′(Ω) ֒→Lˆq(Ω) ∩Lq(Ω) ∩L2q′(Ω) is continuous. With this, similarly as in (4.124)
+applying the uniform estimates in (4.146) one has that
+⟨Lm[um, w], ϕ⟩(0,T )
+ ≤||um||2
+L
+q(d+2)
+d
+(Q) ||ϕ∇w||Lˆ
+q(Q) + ||Sm||Lq′ (Q) ||ϕDw||Lq(Q)
++ 1
+m ||um||2q′−1
+L2q′ (Q) ||ϕw||L2q′ (Q)
++ ||f||Lq′ (0,T ;W−1,q′ (Ω)) ||ϕw||Lq(0,T ;W1,q(Ω))
+≤c ||ϕ||Lµ′(0,T ) ||w||W1,ˆ
+q(Ω)
+(4.158)
+for all ϕ ∈C∞
+0 ((0, T )) and all w ∈C∞
+0,div(Ω)d, and all m ∈N. With (4.107) and using the fact that
+µ > 1 and that the space Lµ(0, T ; (W1,ˆq
+0,div(Ω)d)′) is reﬂexive, this shows that {∂tum}m∈N is bounded
+in Lµ(0, T ; (W1,ˆq
+0,div(Ω)d)′).
+Step 3: Convergence as m →∞. Since q >
+2d
+d+2, the embedding W1,q
+0,div(Ω)d ֒→֒→L2
+div(Ω)d is compact.
+Because ˆq ≥q >
+2d
+d+2, the embedding W1,ˆq
+0,div(Ω) ֒→L2
+div(Ω)d is in particular continuous and dense,
+which implies that (L2
+div(Ω)d) ֒→(W1,ˆq
+0,div(Ω))′. Combined with the embedding in (4.125), this yields
+that the embedding L2
+div(Ω)d ֒→(W1,ˆq
+0,div(Ω))′ is continuous. Hence, the Aubin–Lions compactness
+lemma implies that the embedding
+{v ∈Lq(0, T ; W1,q
+0,div(Ω)d): ∂tv ∈Lµ(0, T ; (W1,ˆq
+0,div(Ω))′)} ֒→֒→Lq(0, T, L2
+div(Ω)d)
+is compact, see for example [35, Lem. 7.7]. The fact that by (4.146) the sequence {um}m∈N is bounded
+in Lq(0, T ; W1,q
+0,div(Ω)d) and that {∂tum}m∈N is bounded in Lµ(0, T ; (W1,ˆq
+0,div(Ω)d)′) then ensures the
+existence of a subsequence such that
+um →u
+strongly in Lq(0, T ; L2
+div(Ω)d),
+as m →∞.
+(4.159)
+By the estimates in (4.146), the uniform bound on {∂tum}m∈N in Lµ(0, T ; (W1,ˆq
+0,div(Ω))′) and the
+(sequential) Banach–Alaoglu theorem, there exists a subsequence such that (4.149)–(4.152) holds,
+where the limits can be identiﬁed with the help of (4.159).
+The strong convergence in Lr(Q)d for all r ∈[1, q(d+2)
+d
+) asserted in (4.147) follows from the strong
+convergence in L1(Q)d by (4.159), and the boundedness in L
+q(d+2)
+d
+(Q)d by (4.146) by means of inter-
+polation. The convergence (4.148) is deduced analogously to the proof of (4.61) by the arguments
+following (4.95). With H¨older’s inequality and the estimate in (4.146) we ﬁnd that
+
+
+1
+m |um|2q′−2 um
+
+
+L1(Q)
+≤c
+m ||um||2q′−1
+L2q′ (Q)
+(4.146)
+≤
+cm−1/2q′ →0,
+as m →∞,
+(4.160)
+so strong convergence to 0 of the regularization term in L1(Q)d is proved. One can show uniform
+boundedness of
+1
+m |um|2q′−2 um in L(2q′)′(Q)d; interpolation between L1(Q)d and L(2q′)′(Q)d then
+gives strong convergence to 0 in Lp(Q)d, for any p ∈[1, (2q′)′). Hence (4.153) follows.
+□
+For t ∈(0, T ), u ∈L
+q(d+2)
+d
+(Q)d and v ∈W1,ˆq
+0 (Ω)d with ˆq deﬁned in (2.1), let us introduce
+L[u; v](t) := −b(u(t, ·), u(t, ·), v) −⟨S(t, ·),Dv⟩Ω+ ⟨f(t, ·), v⟩Ω,
+(4.161)
+where S ∈Lq′(Q)d×d is the limiting function introduced in Lemma 4.8.
+Lemma 4.9 (Identiﬁcation of the PDE as m →∞). The limiting function u ∈L∞(0, T ; L2
+div(Ω)d) ∩
+Lq(0, T ; W1,q
+0,div(Ω)d) from Lemma 4.8 satisﬁes that ∂tu ∈Lˆq′(0, T ; (W1,ˆq
+0,div(Ω)d)′), with ˆq deﬁned in
+(2.1). (Up to a representative) we have that u ∈Cw([0, T ], L2
+div(Ω)d). Furthermore, the functions u
+and S ∈Lq′(Q)d×d from Lemma 4.8 satisfy
+⟨∂tu(t, ·), w⟩Ω= L[u; w](t)
+for all w ∈C∞
+0,div(Ω)d for a.e. t ∈(0, T ),
+(4.162)
+(Du(z),S(z)) ∈A(z)
+for a.e. z ∈Q,
+(4.163)
+
+
+PAGE 35
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+35
+ess lim
+t→0+ ||u(t, ·) −u0||L2(Ω) = 0,
+(4.164)
+i.e., (u,S) is a weak solution according to Deﬁnition 2.1.
+Proof.
+Step 1: Identiﬁcation of the limiting equation. Let w ∈C∞
+0,div(Ω)d and ϕ ∈C∞
+0 ((0, T )) and let us
+consider each of the terms in (4.107) and (4.162). By the weak convergence results in (4.151) and
+(4.152) we have that
+⟨∂tum, ϕw⟩Q →⟨∂tu, ϕw⟩Q ,
+(4.165)
+⟨Sm, ϕDw⟩Q →⟨S, ϕDw⟩Q ,
+(4.166)
+as m →∞. Since by (4.147) we have that um →u in Lr(Q)d×d for all r ∈
+h
+1, q(d+2)
+d
+
+it follows that
+um ⊗um →u ⊗u in Lr(Q)d×d for all r ∈
+h
+1, q(d+2)
+2d
+
+. Since q >
+2d
+d+2, this set is nonempty and the
+convergence holds in particular in L1(Q), so
+⟨um ⊗um, ϕ∇w⟩Q →⟨u ⊗u, ϕ∇w⟩Q ,
+as m →∞.
+(4.167)
+Taking the results in (4.165)–(4.167) and (4.153) shows that (4.107) implies (4.162).
+Step 2: Identiﬁcation of the initial condition. With similar arguments as in the proof of Lemma 4.7,
+Step 3, it follows that u ∈Cw([0, T ]; L2
+div(Ω)d), that u0 = u(0, ·) ∈L2
+div(Ω)d and that the initial datum
+is attained in the sense of (4.164).
+Step 3: Higher integrability of the time derivative.
+As in Step 2 in the proof of Lemma 4.6 we
+can improve the integrability of ∂tu using the fact that (4.162) is satisﬁed. This yields that ∂tu ∈
+Lˆq′(0, T ; (W1,ˆq
+0,div(Ω)d)′), for ˆq as deﬁned in (2.1).
+Step 4: Identiﬁcation of the implicit relation (compare [11] and [8, Sec. 3]). Recall that Dum ⇀Du
+weakly in Lq(Q)d×d by (4.149), that Sm ⇀S weakly in Lq′(Q)d×d by (4.152) and that we have that
+(Dum(z),Sm(z)) ∈A(z) for a.e. z ∈Q by (4.108). Hence, by Lemma 2.6, it suﬃces to show that
+lim sup
+m→∞⟨Sm,Dum⟩e
+Q ≤⟨S,Du⟩e
+Q ,
+(4.168)
+for a set eQ ⊂Q, to identify the implicit relation (Du,S) ∈A(·) a.e. on eQ.
+Since there is no energy identity available for u, in order to identify the implicit relation one has
+to truncate the elements of the approximating sequence of velocity ﬁelds suitably so as to be able
+to use them as test functions. In contrast with [11] we will not use a parabolic Lipschitz truncation
+after locally reconstructing the approximations to the pressure, but work with the solenoidal Lipschitz
+truncation introduced subsequently in [8] and stated in Lemma 2.7, as the argument is then more
+direct.
+We wish to truncate vm := um −u, which satisﬁes, for all ξ ∈C∞
+0,div(Q)d, the equality
+⟨∂tvm, ξ⟩Q = ⟨um ⊗um −u ⊗u, ∇ξ⟩Q −⟨Sm −S,Dξ⟩Q −1
+m
+D
+|um|2q′−2 um, ξ
+E
+Q ,
+(4.169)
+by (4.107) and (4.162) and by the density of C∞
+0 (0, T ) × C∞
+0,div(Ω)d in C∞
+0,div(Q)d. In order to rewrite
+the equation in divergence form as required for Lemma 2.7, we adapt the last term locally.
+Let B0 ⊂⊂Ωbe an arbitrary but ﬁxed ball compactly contained in Ω. For a.e. t ∈(0, T ) we seek
+a weak solution gm
+0 (t, ·) to
+∆gm
+0 (t, ·) = 1
+m |um(t, ·)|2q′−2 um(t, ·)
+in B0,
+gm
+0 (t, ·)|∂B0 = 0,
+(4.170)
+i.e., for suitable p ∈(1, ∞) we wish to ﬁnd a gm
+0 (t, ·) ∈W1,p
+0 (B0)d such that
+⟨∇gm
+0 (t, ·), ∇v⟩B0 = 1
+m
+D
+|um(t, ·)|2q′−2 um(t, ·), v
+E
+B0
+for all v ∈C∞
+0 (B0)d.
+(4.171)
+
+
+PAGE 36
+36
+E. S¨ULI AND T. TSCHERPEL
+As ∂B0 is smooth, standard regularity theory for Poisson’s equation (see, [26, Thm. 2.4.2.5] and [22,
+Lem. 9.17]) guarantees the existence of a unique gm
+0 (t, ·) ∈W2,p(B0)d ∩W1,p
+0 (B0)d such that
+||gm
+0 (t, ·)||W2,p(B0) ≤c
+
+
+1
+m |um(t, ·)|2q′−2 um(t, ·)
+
+
+Lp(B0)
+,
+for p ∈(1, ∞).
+(4.172)
+For an arbitrary but ﬁxed interval I0 ⊂⊂(0, T ), viewing gm
+0 as a function deﬁned on Q0 := I0 × B0
+by (4.172) one has that
+||gm
+0 ||Lp(I0;W2,p(B0)) ≤c
+
+
+1
+m |um|2q′−2 um
+
+
+Lp(Q0)
+,
+(4.173)
+and by (4.153) the right-hand side converges, up to a subsequence, to zero, as m →∞, for p ∈[1, (2q′)′).
+This implies in particular that
+gm
+0 →0
+strongly in Lp(I0; W1,p(B0)d),
+as m →∞
+(4.174)
+for all p ∈[1, (2q′)′). Furthermore, using (4.171) in (4.169) we have for the cylinder Q0 ⊂⊂Q that
+⟨∂tvm, ξ⟩Q0 = ⟨um ⊗um −u ⊗u, ∇ξ⟩Q0 −⟨Sm −S,Dξ⟩Q0 −⟨∇gm
+0 , ∇ξ⟩Q0
+(4.175)
+for all ξ ∈C∞
+0,div(Q0)d.
+Now we wish to apply Lemma 2.7 with p = q ∈(1, ∞) and σ such that
+1 < σ < min
+
+2, q, q′, q(d + 2)
+2d
+, (2q′)′
+
+= min
+
+q′, q(d + 2)
+2d
+, (2q′)′
+
+.
+(4.176)
+Such a σ exists, since we have by assumption that q >
+2d
+d+2. First note that u and um are (weakly)
+divergence-free, and so is vm, and vm ⇀0 weakly in Lq(I0; W1,q(B0)d), as m →∞by (4.149).
+Since um →u strongly in Lp(Q) for p ∈[1, q(d+2)
+d
+) by (4.147) and σ < q(d+2)
+d
+we have that vm →0
+strongly in Lσ(Q0)d, as m →∞. Furthermore, since {um}m∈N is bounded in L∞(0, T ; L2(Ω)d) by
+(4.146) we have with σ < 2 that {vm}m∈N is bounded in L∞(0, T ; Lσ(Ω)d). Now we set
+Gm
+1 := S −Sm,
+and
+Gm
+2 := um ⊗um −u ⊗u −∇gm
+0 .
+Note that Gm
+1 ⇀0 weakly in Lq′(Q0)d×d by (4.152).
+By (4.147) we have that um →u in Lr(Q)d for all r ∈
+h
+1, q(d+2)
+d
+
+, and thus, um ⊗um →u ⊗u in
+Lr(Q)d×d for all r ∈
+h
+1, q(d+2)
+2d
+
+. This holds in particular for r = σ < q(d+2)
+2d
+. Furthermore, by (4.174)
+we have that ∇gm
+0 →0 strongly in Lp(Q0)d×d, for any p ∈[1, (2q′)′), and hence also for p = σ < (2q′)′.
+This means that all the assumptions of Lemma 2.7 are satisﬁed.
+With the aid of the parabolic solenoidal Lipschitz truncation we show that
+lim
+m→∞
+ˆ
+1
+8 Q0
+[(Sm −S⋆(·,Du) : (Dum −Du)]
+1/2 dz = 0,
+(4.177)
+where the exponent 1/2 is used to control the size of the set where vm = um −u and its truncation do
+not coincide. By the monotonicity of A and the fact that (Du,S⋆(·,Du)) ∈A(·) and (Dum,Sm) ∈A(·)
+a.e. in Q by (4.108), it follows that the lim infm→∞of the above is nonnegative. To show the other
+direction, denote Hm := (Sm −S⋆(·,Du) : (Dum −Du) ≥0, and let j ≥j0, Bm,j ⊂Q0 and vm,j be
+given by Lemma 2.7 applied on Q0, and by (ii) we have that vm = vm,j on 1
+8Q0\Bm,j. Dividing the
+
+
+PAGE 37
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+37
+domain into 1
+8Q0 ∩Bm,j and 1
+8Q0\Bm,j, by H¨older’s inequality we obtain
+ˆ
+1
+8 Q0
+(Hm)
+1
+2 dz =
+ˆ
+1
+8 Q0∩Bm,j
+(Hm)
+1
+2 dz +
+ˆ
+1
+8 Q0\Bm,j
+(Hm)
+1
+2 dz
+≤
+ 1
+8Q0 ∩Bm,j
+
+1
+2
+ ˆ
+1
+8 Q0∩Bm,j
+Hm dz
+! 1
+2
++
+ 1
+8Q0\Bm,j
+
+1
+2
+ ˆ
+1
+8 Q0\Bm,j
+Hm dz
+! 1
+2
+≤|Bm,j|
+1
+2
+ˆ
+Q
+Hm dz
+ 1
+2
++ |Q|
+1
+2
+ ˆ
+1
+8 Q0\Bm,j
+Hm dz
+! 1
+2
+,
+(4.178)
+where we have used the nonnegativity of Hm in the ﬁrst term. Since Hm is bounded in L1(Q) by the
+a priori estimate in (4.146), one has that
+ˆ
+1
+8 Q0
+(Hm)
+1
+2 dz ≤c |Bm,j|
+1
+2 + c
+ ˆ
+1
+8 Q0\Bm,j
+Hm dz
+! 1
+2
+.
+(4.179)
+By Lemma 2.7 (iii) we have that
+lim sup
+m→∞|Bm,j|
+1
+2 ≤lim sup
+m→∞(λq
+m,j |Bm,j|)
+1
+2 ≤c2−j
+2 .
+(4.180)
+Let ζ ∈C∞
+0 ( 1
+6B0) be the nonnegative function given by Lemma 2.7 such that ζ| 1
+8 B0 ≡1. In the
+second term in (4.179) we can use the nonnegativity of Hm, the deﬁnition of Hm and vm and ﬁnally
+the deﬁnition of Gm
+1 in order to ﬁnd that Sm = S −Gm
+1 , and we obtain
+ˆ
+1
+8 Q0\Bm,j
+Hm dz =
+ˆ
+1
+8 Q0\Bm,j
+Hm ζ dz =
+ˆ
+1
+8 Q0
+Hm ζ 1Bc
+m,j dz
+≤
+ˆ
+Hm ζ 1Bc
+m,j dz =
+ˆ
+(Sm −S⋆(·,Du)) : Dvm ζ 1Bc
+m,j dz
+= −
+ˆ
+(Gm
+1 −S + S⋆(·,Du)) : ∇vm ζ 1Bc
+m,j dz.
+(4.181)
+Since S −S⋆(·,Du) ∈Lq′(Q)d×d, we are in the position to use Lemma 2.7 (vii). Applying lim supm→∞
+we ﬁnd that
+lim sup
+m→∞
+ˆ
+1
+8 Q0\Bm,j
+Hm dz
+(4.181)
+≤
+lim sup
+m→∞
+
+ˆ
+(Gm
+1 −S + S⋆(·,Du)) : ∇vm ζ 1Bc
+m,j dz
+
+≤c2−j/q.
+(4.182)
+Using (4.180) and (4.182) in (4.179) yields
+lim sup
+m→∞
+ˆ
+1
+8 Q0
+[(Sm −S⋆(·,Du) : (Dum −Du)]
+1/2 dz = lim sup
+m→∞
+ˆ
+1
+8 Q0
+(Hm)
+1/2 dz
+(4.179)
+≤
+c lim sup
+m→∞|Bm,j|
+1
+2 + c lim sup
+m→∞
+ ˆ
+1
+8 Q0\Bm,j
+Hm dz
+! 1
+2
+(4.180),(4.182)
+≤
+c(2−j
+2 + 2−j
+2q ).
+(4.183)
+Then taking j →∞gives the claim and (4.177) is proved. This means that [Hm]
+1
+2 →0 strongly in
+L1( 1
+8Q0), as m →∞.
+
+
+PAGE 38
+38
+E. S¨ULI AND T. TSCHERPEL
+However, to show (4.168) we need L1-convergence of Hm at least on suitable subdomains, which
+can be achieved by use of Chacon’s biting lemma, as was done in [11]: from the strong convergence
+of [Hm]
+1
+2 →0 in L1( 1
+8Q0), as m →∞, we have that there exists a subsequence such that [Hm]
+1
+2 →0
+a.e. in 1
+8Q0 and hence also Hm →0 a.e. in 1
+8Q0. Furthermore, by the above estimates {Hm}m∈N is
+bounded in L1( 1
+8Q0). By Chacon’s biting lemma (see [2]) there exists a further subsequence, a function
+H ∈L1( 1
+8Q0) and a nonincreasing sequence of measurable subsets Ei ⊂1
+8Q0, i ∈N, with |Ei| →0 as
+i →∞, such that
+Hm ⇀H
+weakly in L1( 1
+8Q0\Ei),
+as m →∞,
+for each ﬁxed i ∈N.
+Now let i ∈N be arbitrary but ﬁxed. With the Dunford–Pettis compactness criterion (see [19, Ch. 8,
+Thm. 1.3]) it follows that the sequence {Hm}m∈N is equi-integrable on 1
+8Q0\Ei. By the a.e. conver-
+gence of Hm to zero in particular on 1
+8Q0\Ei, Vitali’s convergence theorem implies that Hm →0 in
+L1( 1
+8Q0\Ei), as m →∞, i.e., we have that
+⟨Sm −S⋆(·,Du),Dum −Du⟩1
+8 Q0\Ei →0,
+as m →∞,
+(4.184)
+for any ﬁxed i ∈N. With the weak convergence of Sm ⇀S in Lq′(Q)d×d by (4.152) and the weak
+convergence of Dum ⇀Du in Lq(Q)d×d following from (4.150) we thus deduce that
+lim
+m→∞⟨Sm,Dum⟩1
+8 Q0\Ei = ⟨S,Du⟩1
+8 Q0\Ei
+for all i ∈N.
+This shows (4.168) for eQ = 1
+8Q0\Ei, and thus we ﬁnd that (Du(z),S(z)) ∈A(z) for a.e. z ∈1
+8Q0\Ei.
+Since |Ei| →0, as i →∞, we have that (Du(z),S(z)) ∈A(z) for a.e. z ∈1
+8Q0.
+Finally let us consider a cover of Q consisting of (open) cylinders Qj = Ij × Bj, j ∈J, for an index
+set J such that Q = S
+j∈J
+1
+8Qj. This can be, for example, chosen as a Whitney type cover, compare,
+e.g., [18]. Then we can identify the implicit relation a.e. on 1
+8Qj for all j ∈J by the above and thus,
+have that (Du(z),S(z)) ∈A(z) for a.e. z ∈Q, which proves (4.163).
+□
+Remark 4.10 (Steady Problem). The same regularization and splitting approach can be applied to
+show convergence in the steady case to cover the range q ∈( 2d
+d+2,
+2d
+d+1] for discretely divergence-free
+ﬁnite element functions, which is missing in [16]. In [16] no regularization term was used, and hence
+the restriction q >
+2d
+d+1 was required in the case of discretely divergence-free ﬁnite element functions.
+Considering the two results together, for q ∈( 2d
+d+2,
+2d
+d+1] one should either use exactly divergence-free
+ﬁnite element functions as was done in [16], or introduce a regularization term and pass to the limit
+m →∞with the regularization parameter, as we have done here.
+5. Appendix: Results about the Constitutive Laws
+Lemma 5.1. (Properties of Sk) For each k ∈N the function Sk : Q × Rd×d
+sym →Rd×d
+sym deﬁned in
+(2.11) is measurable with respect to its ﬁrst argument and smooth with respect to the second argument.
+Furthermore, the sequence {Sk}k∈N satisﬁes the Assumption 2.3 with eg = g, ec∗= c∗and q ∈(1, ∞),
+as in Lemma 2.2.
+Proof. Smoothness and measurability follow by the deﬁnition of the convolution and Fubini’s theorem.
+To show the properties (α1) and (α2) is straightforward. For (α3) we will follow [11, Sec. 3.2]: Let
+z ∈Q be arbitrary but ﬁxed and not in any of the zero-sets for which the properties of S⋆do not hold.
+Then we ﬁrst use the deﬁnition of Sk in (2.11) and the fact that ρk integrates to 1 on Rd×d
+sym and then
+the monotonicity of S⋆in Lemma 2.2 (a2), which gives that
+(S⋆(z,A) −S⋆(z,B)): (A −B) ≥0
+for all A,B ∈Rd×d
+sym,
+(5.1)
+and the nonnegativity of ρk to show that, for any sequence {Dk}k∈N bounded in L∞(Q)d×d and for
+arbitrary but ﬁxed B ∈Rd×d
+sym we have
+Sk(z,Dk(z)) −S⋆(z,B)
+
+:
+Dk(z) −B
+
+
+
+PAGE 39
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+39
+(2.11)
+=
+ˆ
+Rd×d
+sym
+(S⋆(z,A) −S⋆(z,B)): (Dk(z) −B)ρk(Dk(z) −A) dA
+(5.1)
+≥
+ˆ
+Rd×d
+sym
+(S⋆(z,A) −S⋆(z,B)): (Dk(z) −A)ρk(Dk(z) −A) dA
+(5.2)
+≥−
+ˆ
+Rd×d
+sym
+|S⋆(z,A) −S⋆(z,B)|
+Dk(z) −A
+ ρk(Dk(z) −A) dA
+≥−1
+k
+ˆ
+B1/k(Dk(z))
+|S⋆(z,A) −S⋆(z,B)| ρk(Dk(z) −A) dA =: (⋆),
+where in the last step we have used that by the deﬁnition of ρk we have
+supp(ρk(Dk(z) −A)) ⊂B1/k(Dk(z)),
+and hence
+Dk(z) −A
+ ≤1
+k. Also we integrate only over A ∈B1/k(Dk(z)), and since Dk is uniformly
+bounded in L∞(Ω)d×d, for those we have
+|A| ≤1
+k +
+Dk
+L∞(Q) ≤c,
+(5.3)
+where the constant c is independent of z ∈Ωand of k ∈N.
+Then, since S⋆(z, ·) is locally bounded (compare Lemma 2.2 (a5)), there exists a constant c > 0
+independent of k and z such that
+|S⋆(z,A)| ≤c
+for all A ∈B1/k(Dk(z)).
+Since B ∈Rd×d
+sym is ﬁxed, again by the local boundedness of S⋆we can estimate
+|S⋆(z,B)| ≤c(B),
+where the constant may depend on B, but not on z. This implies
+|S⋆(z,A) −S⋆(z,B)| ≤|S⋆(z,A)| + |S⋆(z,B)| ≤c(B),
+independently of z ∈Q and for all A ∈B1/k(Dk(z)). With this we can estimate (⋆) further by
+(⋆) = −1
+k
+ˆ
+B1/k(Dk(z))
+|S⋆(z,A) −S⋆(z,B)| ρk(Dk(z) −A) dA
+≥−1
+kc(B)
+ˆ
+B1/k(Dk(z))
+ρk(Dk(z) −A) dA = −c(B)
+k
+,
+(5.4)
+where we have again used that ρk integrates to 1. Now we take (5.2) and (5.4) together, multiply by
+ϕ ∈C∞
+0 (Q) such that ϕ ≥0, and then integrate in Q. Recalling that the constant is independent of
+z ∈Q this gives
+ˆ
+Q
+(Sk(·,Dk) −S⋆(·,B)): (Dk −B)ϕ dz ≥−c(B)
+k
+||ϕ||L1(Q) .
+Then, applying lim infk→∞yields
+lim inf
+k→∞
+ˆ
+Q
+(Sk(·,Dk) −S⋆(·,B)): (Dk −B)ϕ dz ≥0,
+which proves the claim.
+□
+Lemma 5.2 (Properties of {Sk}k≥k0). The family of functions Sk : Q × R →R, k ≥k0, deﬁned in
+(2.12) has the following properties: each Sk is a Carath´eodory function and
+(α1’) for a.e. z ∈Q the function Sk(z, ·) is monotone;
+(α2’) there exists a constant ec∗> 0 and a nonnegative eg ∈L1(Q) such that
+Sk(z, B)B ≥−eg(z) + ec∗
+
+|B|q +
+Sk(z, B)
+q′
+,
+for any B ∈R≥0 and for a.e. z ∈Q and all k ≥k0;
+
+
+PAGE 40
+40
+E. S¨ULI AND T. TSCHERPEL
+(α3’) for any sequence {Dk}k∈N bounded in L∞(Q), for any B ∈R≥0 and all ϕ ∈C∞
+0 (Q) such that
+ϕ ≥0, we have
+lim inf
+k→∞
+ˆ
+Q
+Sk(·, Dk) −S⋆(·, B)
+
+:
+Dk −B
+
+ϕ dz ≥0.
+Proof. Since S⋆(·, ·) is measurable in the ﬁrst argument by Lemma 2.2, so is Sk(·, ·) and by construction
+Sk(·, ·) is continuous in the second argument. Hence, Sk(·, ·) is a Carath´eodory function.
+(α1’) By Lemma 2.2 (a2), S⋆(z, ·) is monotone for a.e. z ∈Q. Then, by construction Sk(z, ·) is
+piecewise monotone for a.e. z ∈Q, and consequently monotone for a.e. z ∈Q.
+(α2’) Let z ∈Q be arbitrary but ﬁxed such that all properties hold for S⋆(z, ·), excluding zero sets
+where necessary. Also let B ∈R≥0 and k ≥k0 be arbitrary but ﬁxed.
+If B /∈Ak, then we have that Sk(z, B) = S⋆(z, B) and hence the claim holds by the estimate
+for S⋆(z, ·) in Lemma 2.2 (a3), which is equivalent to the one for S⋆(z, ·), with the same g and
+c∗.
+If B ∈Ak, we make use of the fact that A and hence also Ak is bounded. In particular we
+know that B ≤ak
+I,+ ≤aI + 1. Hence, again with the estimate for S⋆(z, ·) corresponding to
+Lemma 2.2 (a3) we obtain
+Sk(z, B)B = (Sk(z, B) −S⋆(z, B))B + S⋆(z, B)B
+(5.5)
+≥−
+Sk(z, B)
+ + |S⋆(z, B)|
+
+|B| −g(z) + c∗
+
+|B|q + |S⋆(z, B)|q′
+.
+Now using that B < aI + 1, and monotonicity of both S⋆(z, ·) and Sk(z, ·) we ﬁnd that
+|S⋆(z, B)| ≤|S⋆(z, aI + 1)| ,
+Sk(z, B)
+ ≤
+Sk(z, ak
+I,+)
+ =
+S⋆(z, ak
+I,+)
+ ≤|S⋆(z, aI + 1)| .
+(5.6)
+Hence in (5.5) we obtain
+Sk(z, B)B
+(5.5)
+≥−
+Sk(z, B)
+ + |S⋆(z, B)|
+
+|B| −g(z) + c∗
+
+|B|q + |S⋆(z, B)|q′
+(5.6)
+≥−2 |S⋆(z, aI + 1)| (aI + 1) −g(z) + c∗
+
+|B|q + |S⋆(z, B)|q′
+.
+(5.7)
+In order to estimate |S⋆(z, B)|q′
+further, we use the inequality
+(a + b)s ≤2s−1(as + bs),
+for a, b ∈R≥0, s ∈[1, ∞).
+By the triangle inequality and again applying (5.6), this yields
+Sk(z, B)
+q′
+≤
+Sk(z, B) −S⋆(z, B)
+ + |S⋆(z, B)|
+q′
+≤2q′−1 Sk(z, B) −S⋆(z, B)
+q′
++ |S⋆(z, B)|q′
+≤2q′−1 Sk(z, B)
+ + |S⋆(z, B)|
+q′
++ 2q′−1 |S⋆(z, B)|q′
+(5.6)
+≤22q′−1 |S⋆(z, aI + 1)|q′
++ 2q′−1 |S⋆(z, B)|q′
+.
+Rearranging and applying this in (5.7) gives
+Sk(z, B)B ≥−2 |S⋆(z, aI + 1)| (aI + 1) −g(z) + c∗
+
+|B|q + |S⋆(z, B)|q′
+≥−2 |S⋆(z, aI + 1)| (aI + 1) −g(z) −c∗2q′ |S⋆(z, aI + 1)|q′
++ c∗|B|q + 2−(q′−1)c∗
+Sk(z, B)
+q′
+.
+We set
+eg(z) := 2 |S⋆(z, aI + 1)| (aI + 1) + c∗2q′ |S⋆(z, aI + 1)|q′ + g(z) ≥g(z) ≥0,
+
+
+PAGE 41
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+41
+which is in L1(Q) thanks to the local boundedness of S⋆and we choose ec∗:= 2−(q′−1)c∗.
+(α3’) Let {Dk}k∈N be bounded in L∞(Q) by eC, let B ∈R≥0 and let z ∈Q be arbitrary but
+ﬁxed such that all properties hold for S⋆(z, ·), (α1’) and (α2’) hold for Sk(z, ·) and such that
+Dk(z)
+ ≤eC, excluding possibly zero sets. We wish to show that there exists a constant c > 0
+depending on S⋆, aI, B and eC such that
+(⋆) :=
+Sk(z, Dk(z)) −S⋆(z, B)
+
+:
+Dk(z) −B
+
+≥−c
+k.
+(5.8)
+To this end, we distinguish the following three cases.
+B /∈Ak: In this case we have that Sk(z, B) = S⋆(z, B) and by monotonicity of Sk(z, ·), it follows
+that (⋆) ≥0.
+Dk(z) /∈Ak: Similarly, in this case we have that Sk(z, Dk(z)) = S⋆(z, Dk(z)), so by monotonicity of
+S⋆(z, ·) it follows that (⋆) ≥0.
+B, Dk(z) ∈Ak: Assume that B ∈Ak
+i and Dk(z) ∈Ak
+j and further distinguish the cases i = j and i ̸= j.
+i = j: In this case we make use of the fact that
+Dk(z) −B
+ ≤2
+k and that Ak is bounded,
+i.e., B, Dk(z) ≤aI + 1. Then, using again the estimates in (5.6) we have
+Sk(z, Dk(z)) −S⋆(z, B)
+
+:
+Dk(z) −B
+
+≥−
+Sk(z, Dk(z))
+ + |S⋆(z, B)|
+ Dk(z) −B
+
+≥−
+Sk(z, Dk(z))
+ + |S⋆(z, B)|
+ 2
+k
+(5.6)
+≥−2S⋆(z, aI + 1) 2
+k ≥−c
+k,
+since S⋆is locally bounded.
+i ̸= j: In this case we make use of the fact that Sk(z, ·) and S⋆(z, ·) agree on ak
+i,±, ak
+j,±
+and are monotone. Let i < j, i.e., B ≤Dk(z); it then follows that
+S⋆(z, B) ≤S⋆(z, ak
+i,+) = Sk(z, ak
+i,+) ≤Sk(z, ak
+j,−) ≤Sk(z, Dk(z)),
+which implies that
+Sk(z, Dk(z)) −S⋆(z, B)
+
+:
+Dk(z) −B
+
+≥0.
+The case i > j is shown analogously.
+Altogether, these imply (5.8), where the right-hand side is independent of z. Multiplying with ϕ ∈
+C∞
+0 (Q) such that ϕ ≥0, and integrating over Q gives
+ˆ
+Q
+Sk(·, Dk) −S⋆(·, B)
+
+:
+Dk −B
+
+ϕ dz ≥−c
+k .
+Then applying lim infk→∞yields the assertion.
+□
+Corollary 5.3. The family of functions Sk : Q × Rd×d
+sym →Rd×d
+sym, k ≥k0, deﬁned by
+Sk(z,B) := Sk(z, |B|) B
+|B|,
+for z ∈Q, B ∈Rd×d
+sym,
+where Sk is deﬁned in (2.12), satisﬁes Assumption 2.3.
+Proof. It is straightforward to show that monotonicity of Sk implies monotonicity of Sk and that the
+growth and coercivity bounds are equivalent for Sk and Sk.
+□
+References
+[1] E. Acerbi and N. Fusco. An approximation lemma for W 1,p functions. In Material instabilities in continuum
+mechanics (Edinburgh, 1985–1986), Oxford Sci. Publ., pages 1–5. Oxford Univ. Press, New York, 1988.
+[2] J.M. Ball and F. Murat. Remarks on Chacon’s Biting Lemma. Proceedings of the American Mathematical Society,
+107(3):655–663, 1989.
+[3] L. Belenki, L.C. Berselli, L. Diening, and M. R˚uˇziˇcka. On the ﬁnite element approximation of p-Stokes systems.
+SIAM Journal on Numerical Analysis, 50(2):373–397, 2012.
+
+
+PAGE 42
+42
+E. S¨ULI AND T. TSCHERPEL
+[4] J. Bergh and J. L¨ofstr¨om. Interpolation spaces. An introduction. Springer-Verlag, Berlin-New York, 1976.
+Grundlehren der Mathematischen Wissenschaften, No. 223.
+[5] D. Boﬃ, F. Brezzi, and M. Fortin. Mixed Finite Element Methods and Applications, volume 44 of Springer Series
+in Computational Mathematics. Springer, 2013.
+[6] M.E. Bogovski˘ı. Solution of the ﬁrst boundary value problem for an equation of continuity of an incompressible
+medium. Dokl. Akad. Nauk SSSR, 248(5):1037–1040, 1979.
+[7] D. Breit, L. Diening, and M. Fuchs. Solenoidal Lipschitz truncation and applications in ﬂuid mechanics. Journal of
+Diﬀerential Equations, 253(6):1910–1942, 2012.
+[8] D. Breit, L. Diening, and S. Schwarzacher. Solenoidal Lipschitz truncation for parabolic PDE’s. Mathematical
+Models and Methods in Applied Sciences, 23(14):2671–2700, 2013.
+[9] M. Bul´ıˇcek and J. M´alek. Recent Developments of Mathematical Fluid Mechanics, chapter On Unsteady Internal
+Flows of Bingham Fluids Subject to Threshold Slip on the Impermeable Boundary, pages 135–156. Springer Basel,
+Basel, 2016.
+[10] M. Bul´ıˇcek, P. Gwiazda, J. M´alek, and A. ´Swierczewska-Gwiazda. On steady ﬂows of incompressible ﬂuids with
+implicit power-law-like rheology. Advances in Calculus of Variations, 2:109–136, February 2009.
+[11] M. Bul´ıˇcek, P. Gwiazda, J. M´alek, and A. ´Swierczewska-Gwiazda. On unsteady ﬂows of implicitly constituted
+incompressible ﬂuids. SIAM Journal on Mathematical Analysis, 44:2756–2801, 2012.
+[12] E. Carelli, J. Haehnle, and A. Prohl. Convergence analysis for incompressible generalized Newtonian ﬂuid ﬂows with
+nonstandard anisotropic growth conditions. SIAM Journal on Numerical Analysis, 48(1):164–190, 2010.
+[13] P. Ciarlet. The Finite Element Method for Elliptic Problems. Society for Industrial and Applied Mathematics, 2002.
+[14] M. Crouzeix and P.-A. Raviart. Conforming and nonconforming ﬁnite element methods for solving the stationary
+Stokes equations I. ESAIM: Mathematical Modelling and Numerical Analysis - Modlisation Mathmatique et Analyse
+Numrique, 7(R3):33–75, 1973.
+[15] E. DiBenedetto. Degenerate Parabolic Equations. Springer Verlag, 1993.
+[16] L. Diening, C. Kreuzer, and E. S¨uli. Finite element approximation of steady ﬂows of incompressible ﬂuids with
+implicit power-law-like rheology. SIAM J. Numer. Anal., 51(2):984–1015, 2013.
+[17] L. Diening, J. M´alek, and M. Steinhauer. On Lipschitz truncations of Sobolev functions (with variable exponent)
+and their selected applications. ESAIM: Control, Optimisation and Calculus of Variations, 14(2):211–232, 3 2008.
+[18] L. Diening, M. R˚uˇziˇcka, and J. Wolf. Existence of weak solutions for unsteady motions of general Newtonian ﬂuids.
+Ann. Scuola Norm. Sup. Pisa Cl. Sci., 9(1):1–46, 2010.
+[19] I. Ekeland and R. Temam. Convex analysis and variational problems. North-Holland Publishing Co., Amsterdam-
+Oxford; American Elsevier Publishing Co., Inc., New York, 1976. Translated from the French, Studies in Mathe-
+matics and its Applications, Vol. 1.
+[20] A. Ern and J.-L. Guermond. Theory and Practice of Finite Elements, volume 159 of Applied Mathematical Sciences.
+Springer-Verlag New York, 1st edition, 2004.
+[21] J. Frehse, J. M´alek, and M. Steinhauer. On analysis of steady ﬂows of ﬂuids with shear-dependent viscosity based
+on the Lipschitz truncation method. SIAM Journal on Mathematical Analysis, 34(5):1064–1083, 2003.
+[22] D. Gilbarg and N.S. Trudinger. Elliptic Partial Diﬀerential Equations of Second Order. Classics in Mathematics.
+Springer, 2001. reprint, originally in Grundlehren der mathematischen Wissenschaften, Vol. 224.
+[23] V. Girault and J.-L. Lions. Two-grid ﬁnite-element schemes for the steady Navier-Stokes problem in polyhedra.
+Port. Math. (N.S.), 58(1):25–57, 2001.
+[24] V. Girault and L.R. Scott. A quasi-local interpolation operator preserving the discrete divergence. Calcolo, 40(1):1–
+19, 2003.
+[25] A. Granas and J. Dugundji. Fixed point theory. Springer Monographs in Mathematics. Springer-Verlag, New York,
+2003.
+[26] P. Grisvard. Elliptic Problems in Nonsmooth Domains, volume 69 of Classics in Applied Mathematics. Society for
+Industrial and Applied Mathematics, 2011.
+[27] J. Guzm´an and M. Neilan. Conforming and divergence-free Stokes elements in three dimensions. IMA Journal of
+Numerical Analysis, 34(4):1489–1508, 2014.
+[28] J. Guzm´an and M. Neilan. Conforming and divergence-free Stokes elements on general triangular meshes. Math.
+Comp., 83:15–36, 2014.
+[29] J. Kinnunen and J.L. Lewis. Very weak solutions of parabolic systems of p-Laplacian type. Ark. Mat., 40:105–132,
+2002.
+[30] C. Kreuzer and E. S¨uli. Adaptive ﬁnite element approximation of steady ﬂows of incompressible ﬂuids with implicit
+power-law-like rheology. ESAIM Math. Model. Numer. Anal., 50(5):1333–1369, 2016.
+[31] O.A. Ladyˇzenskaja. The mathematical theory of viscous incompressible ﬂow. Second English edition, revised and
+enlarged. Translated from the Russian by Richard A. Silverman and John Chu. Mathematics and its Applications,
+Vol. 2. Gordon and Breach, Science Publishers, New York-London-Paris, 1969.
+[32] J.-L. Lions. Quelques M´ethodes De R´esolution Des Probl`emes Aux Limites Non Lin´eaires. Dunod, Paris, 1969.
+[33] K.R. Rajagopal. On implicit constitutive theories. Applications of Mathematics, 48(4):279–319, 2003.
+[34] K.R. Rajagopal. On implicit constitutive theories for ﬂuids. Journal of Fluid Mechanics, 550:243–249, 3 2006.
+
+
+PAGE 43
+FEM FOR IMPLICITLY CONSTITUTED FLUIDS
+43
+[35] T. Roub´ıˇcek. Nonlinear partial diﬀerential equations with applications, volume 153 of International Series of Nu-
+merical Mathematics. Birkh¨auser/Springer Basel AG, Basel, 2nd edition, 2013.
+[36] W. Rudin. Functional analysis. International Series in Pure and Applied Mathematics. McGraw-Hill, Inc., New
+York, 2nd edition, 1991.
+[37] J. Simon. Compact sets in the space Lp(0, T; B). Ann. Mat. Pura Appl. (4), 146:65–96, 1987.
+[38] J. Simon. On the existence of the pressure for solutions of the variational Navier-Stokes equations. J. Math. Fluid
+Mech., 1(3):225–234, 1999.
+[39] R. Temam. Navier–Stokes Equations: Theory & Numerical Analysis. Studies in Mathematics and Its Applications.
+North-Holland, 1984.

@@ -1,0 +1,666 @@
+[
+  {
+    "order": 2568,
+    "id": "certified-geometric-predicates",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Certified geometric predicates",
+    "companion": "certified-geometric-predicates-examples",
+    "requires": [
+      "outward-rounded-interval-and-ball-arithmetic"
+    ],
+    "items": [
+      {
+        "id": "def-certified-geometric-predicate-determinants",
+        "kind": "definition",
+        "title": "Dyadic orientation and lifted sphere determinants",
+        "deps": [
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-complete-ordered-real-field"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §§4.2–4.4",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 2nd ed., §1.2",
+              "url": "https://cimec.org.ar/twiki/pub/Cimec/GeometriaComputacional/DeBerg_-_Computational_Geometry_-_Algorithms_and_Applications_2e.pdf"
+            }
+          ]
+        },
+        "statement": "Use [[def-dyadic-floating-point-format-and-directed-rounding]]: each finite\nbinary coordinate is interpreted as its exact dyadic rational $m2^e$. Write\n$\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$. All real signs and squared-distance\ncomparisons use the order of [[def-complete-ordered-real-field]]. For a positive\ninteger $s\\ge1$ and a square matrix $M=(M_{ij})_{0\\le i,j<s}$ over $\\mathbb D$, define\n$$\n\\det M=\\sum_{\\pi\\in S_s}\\operatorname{sgn}(\\pi)\\prod_{i=0}^{s-1}M_{i,\\pi(i)},\n$$\nwhere $S_s$ is the set of permutations of $\\{0,\\ldots,s-1\\}$ and\n$\\operatorname{sgn}(\\pi)=(-1)^{\\operatorname{inv}(\\pi)}$ with\n$\\operatorname{inv}(\\pi)=\\#\\{(i,j):i<j,\\ \\pi(i)>\\pi(j)\\}$.\n\nFor $d\\in\\{2,3\\}$ and ordered points $p_0,\\ldots,p_d\\in\\mathbb D^d$, let\n$H_d$ have row $i$ equal to $(p_i,1)$ and put $O_d=\\det H_d$. The orientation\npredicate returns $\\operatorname{sgn}(O_d)\\in\\{-1,0,+1\\}$, where\n$\\operatorname{sgn}(x)=+1$ for $x>0$, $0$ for $x=0$, and $-1$ for $x<0$. For ordered points\n$p_0,\\ldots,p_{d+1}$, let $K_d$ have row $i$ equal to\n$(p_i,\\sum_{j=1}^d p_{i,j}^2,1)$ and put $L_d=\\det K_d$. The raw incircle\npredicate ($d=2$) or insphere predicate ($d=3$) returns\n$\\operatorname{sgn}(L_d)$; its zero is an exact determinant zero. The row order\nis the point order displayed, and the column order is the coordinate columns,\nthen squared norm, then $1$. If $O_d\\ne0$, define the orientation-normalized\nside sign algebraically to be $\\operatorname{sgn}(O_dL_d)$. Whenever a sphere\nthrough $p_0,\\ldots,p_d$ is specified, positive means inside it, zero means on\nit, and negative means outside. If\n$O_d=0$, the base simplex is degenerate and only the raw lifted determinant\nsign is specified.\n\nAn uncertain coordinate input is a real interval with finite dyadic endpoints,\nas defined in [[def-intervals-rectangles-and-complex-balls]]. Its values remain\nuncertain throughout a certified computation; a midpoint is not substituted.\nFor real $c\\in\\mathbb R^d$ and $r\\ge0$, write\n$S(c,r)=\\{x\\in\\mathbb R^d:\\sum_j(x_j-c_j)^2=r^2\\}$; inside, on, and outside\nmean that this squared distance is less than, equal to, or greater than $r^2$.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "alg-interval-geometric-predicate-filter",
+        "kind": "algorithm",
+        "title": "Certified geometric predicate for interval-valued coordinates",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "thm-interval-geometric-predicate-filter-sound"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "CGAL Developer Manual, Robustness Issues, §11.1",
+              "url": "https://cgal.geometryfactory.com/CGAL/doc/main/Manual/devman_robustness.html"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 2nd ed., §1.2",
+              "url": "https://cimec.org.ar/twiki/pub/Cimec/GeometriaComputacional/DeBerg_-_Computational_Geometry_-_Algorithms_and_Applications_2e.pdf"
+            }
+          ]
+        },
+        "statement": "Input: finite closed dyadic intervals for all coordinates in one orientation,\nincircle, or insphere determinant. Output: `positive`, `negative`, or\n`indeterminate`. Construct the orientation or lifted matrix as in\n[[def-certified-geometric-predicate-determinants]]. For a lifted matrix, form\neach squared-norm entry by squaring its coordinate intervals and adding the\nresults from coordinate index $1$ through $d$ from left to right, using the\noutward interval operations of\n[[def-outward-rounded-interval-and-ball-operations]]. If matrix construction\nreturns a nonfinite status, return `indeterminate`.\n\nEnumerate the permutations in lexicographic tuple order. For each permutation,\nstart with $[1,1]$ and multiply the selected row-entry intervals from row $0$\nthrough row $s-1$, from left to right, using outward interval multiplication.\nFor an odd permutation, replace the product $T$ by $[0,0]-T$ using outward\ninterval subtraction. Initialize the determinant interval $J$ with the first\nsigned term, then add each later signed term from left to right using outward\ninterval addition. If any operation returns a nonfinite status, return\n`indeterminate`. For a finite $J=[a,b]$, return `positive` when $a>0$,\n`negative` when $b<0$, and `indeterminate` when $0\\in J$. This procedure\nreports a uniform raw determinant sign over the represented coordinate box;\nit does not choose a center point or invoke exact point fallback.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "alg-symbolic-geometric-determinant-tie-break",
+        "kind": "algorithm",
+        "title": "Shared formal perturbation for declared determinant tie-breaking",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "def-complete-ordered-real-field"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "thm-symbolic-geometric-determinant-tie-break-consistent"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Herbert Edelsbrunner and Ernst Peter Mücke, Simulation of Simplicity, §§2–3.2",
+              "url": "https://arxiv.org/pdf/math/9410209"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 2nd ed., §1.2",
+              "url": "https://cimec.org.ar/twiki/pub/Cimec/GeometriaComputacional/DeBerg_-_Computational_Geometry_-_Algorithms_and_Applications_2e.pdf"
+            }
+          ]
+        },
+        "statement": "Input: a finite set of exact dyadic points in dimension $d=2$ or $d=3$, with\nunique stable integer IDs, an ordered tuple with pairwise distinct IDs of the\nrequired size, the coefficient order of\n[[def-complete-ordered-real-field]], and an explicit caller declaration that this algorithm uses\nsymbolic tie-breaking. If an ID is repeated, return the ordinary exact zero\nfor the repeated-row determinant. Otherwise order all coordinate slots by\npoint ID and then coordinate index; let $k$ be the zero-based rank of a slot.\nForm the requested orientation or lifted\ndeterminant polynomial after replacing that coordinate $x$ formally by\n$x+\\varepsilon^{3^k}$. Expand with exact dyadic coefficients, combine equal\npowers of the formal positive infinitesimal $\\varepsilon$, discard zero\ncoefficients, and return the sign of the coefficient with the least remaining\nexponent.\n\nThis is a symbolic procedure: no numeric $\\varepsilon$ is chosen or\nevaluated. It supplies a tie sign only to algorithms that declare this same\nshared point-index perturbation. The ordinary exact predicate continues to\nreturn zero on an exact zero determinant.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "lem-dyadic-determinant-integer-clearance-preserves-sign",
+        "kind": "lemma",
+        "title": "Clearing dyadic row denominators preserves determinant sign",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "def-dyadic-floating-point-format-and-directed-rounding"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §4.2",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "CGAL Developer Manual, Robustness Issues, §11.1",
+              "url": "https://cgal.geometryfactory.com/CGAL/doc/main/Manual/devman_robustness.html"
+            }
+          ]
+        },
+        "statement": "For every finite $s\\times s$ matrix over dyadic rationals with $s\\ge1$, multiplying each row by a\nsuitable positive power of two gives an integer matrix whose determinant has\nthe same sign and is zero exactly when the original determinant is zero.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-leibniz-determinant-forward-error-bound",
+        "kind": "lemma",
+        "title": "A left-to-right Leibniz determinant has an explicit forward error bound",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §§4.2–4.4",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 2nd ed., §1.2",
+              "url": "https://cimec.org.ar/twiki/pub/Cimec/GeometriaComputacional/DeBerg_-_Computational_Geometry_-_Algorithms_and_Applications_2e.pdf"
+            }
+          ]
+        },
+        "statement": "Let $M$ be an $s\\times s$ matrix, $s\\ge2$, whose entries are exactly represented in a\nselected floating-point system. Compute its Leibniz determinant by forming each\nproduct left-to-right, applying each permutation sign by an exact sign-bit\nchange, and summing the $s!$ signed terms left-to-right. If every\nrounded operation is zero or has a normal-range exact result, every operation\nsatisfies the standard relative model with unit roundoff $u$, and\n$qu<1$ for $q=s+s!-2$, then\n$$|\\widehat D-\\det M|\\le \\gamma_q S,\\qquad \\gamma_q=\\frac{qu}{1-qu},\\qquad S=\\sum_{\\pi\\in S_s}\\prod_{i=0}^{s-1}|M_{i,\\pi(i)}|.$$",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-two-and-three-by-three-nonsingular-dyadic-system-solvable",
+        "kind": "lemma",
+        "title": "A nonzero 2-by-2 or 3-by-3 dyadic determinant gives a unique real solution",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "def-complete-ordered-real-field"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §4.2",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 2nd ed., §1.2",
+              "url": "https://cimec.org.ar/twiki/pub/Cimec/GeometriaComputacional/DeBerg_-_Computational_Geometry_-_Algorithms_and_Applications_2e.pdf"
+            }
+          ]
+        },
+        "statement": "Let $d\\in\\{2,3\\}$, let $A=(A_{ij})_{1\\le i,j\\le d}$ have entries in\n$\\mathbb D$, use the determinant defined by\n[[def-certified-geometric-predicate-determinants]], and assume $\\det A\\ne0$.\nFor every $b=(b_i)_{1\\le i\\le d}\\in\\mathbb R^d$, there is a unique\n$x=(x_j)_{1\\le j\\le d}\\in\\mathbb R^d$ satisfying\n$(Ax)_i=\\sum_{j=1}^d A_{ij}x_j=b_i$ for all $i$. Matrix products use\n$(AB)_{ij}=\\sum_{k=1}^d A_{ik}B_{kj}$, and $I_d$ is the matrix with ones on\nthe diagonal and zeros elsewhere. The transpose is defined by $(A^T)_{ij}=A_{ji}$."
+      },
+      {
+        "id": "alg-exact-dyadic-determinant-sign",
+        "kind": "algorithm",
+        "title": "Exact dyadic determinant sign by integer clearance",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "lem-dyadic-determinant-integer-clearance-preserves-sign"
+        ],
+        "dependency_level": 2,
+        "justified_by": [
+          "lem-exact-dyadic-determinant-sign-correct-and-terminates"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §4",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "CGAL Developer Manual, Robustness Issues, §11.1",
+              "url": "https://cgal.geometryfactory.com/CGAL/doc/main/Manual/devman_robustness.html"
+            }
+          ]
+        },
+        "statement": "Input: a finite $s\\times s$ matrix $M$ of exact dyadic rationals with $s\\ge1$. Output: the\nsign of its exact determinant, including zero.\n\n1. In row $i$, write each nonzero entry in reduced form\n   $M_{ij}=a_{ij}/2^{b_{ij}}$ in reduced form with $b_{ij}\\ge0$ and\n   $a_{ij}$ odd when $b_{ij}>0$; write a zero entry with $b_{ij}=0$. Set\n   $k_i=\\max_j b_{ij}$ and form\n   $N_{ij}=2^{k_i}M_{ij}$, an integer matrix.\n2. Compute $\\sum_{\\pi\\in S_s}\\operatorname{sgn}(\\pi)\\prod_iN_{i,\\pi(i)}$\n   using arbitrary-precision integer arithmetic.\n3. Return the sign of this integer sum.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "alg-floating-filter-for-geometric-determinants",
+        "kind": "algorithm",
+        "title": "Outward-bounded floating determinant filter",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "lem-leibniz-determinant-forward-error-bound",
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-abs-value",
+          "lem-directed-dyadic-rounding-enclosure-and-error",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 2,
+        "justified_by": [
+          "thm-floating-filter-sign-is-exact"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §§4.2–4.4",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "CGAL Developer Manual, Robustness Issues, §11.1",
+              "url": "https://cgal.geometryfactory.com/CGAL/doc/main/Manual/devman_robustness.html"
+            }
+          ]
+        },
+        "statement": "Input: a finite exact dyadic square matrix $M$ of size $s\\ge2$, a selected\nfloating-point system with known dyadic unit-roundoff bound $u$, and a finite\nrange certificate listing each exact product or sum in the fixed\nleft-to-right Leibniz schedule. Verify by exact dyadic comparison that every\nentry of $M$ is representable and each listed operation result is either zero\nor normal-range. The system must satisfy the standard relative model in\n[[def-standard-relative-floating-point-model-and-unit-roundoff]]. Set\n$q=s+s!-2$ and $\\gamma_q=qu/(1-qu)$; if $qu\\ge1$, or if the certificate or\nmodel hypotheses are unavailable, return `inconclusive` without using a\nfloating result.\n\n1. Enumerate permutations in lexicographic tuple order. Form each signed\n   product left-to-right, applying its sign by exact sign change. Initialize the sum\n   with the first term; add each later term left-to-right using the selected\n   floating-point system. Call the result $\\widehat D$.\n2. Enumerate permutations in the same lexicographic tuple order. For each\n   permutation, start with $[1,1]$ and multiply the singleton intervals\n   $[|M_{i,\\pi(i)}|,|M_{i,\\pi(i)}|]$ from row $0$ through row $s-1$, from\n   left to right, using the real absolute value [[def-abs-value]] and the\n   outward interval operations of\n   [[def-outward-rounded-interval-and-ball-operations]]. Add these\n   nonnegative terms from left to right, starting with the first term, to\n   obtain the interval enclosure of the Leibniz absolute-term sum. Its\n   expression DAG is finite; let $U$ be the upper endpoint of the resulting\n   finite interval. If any operation is nonfinite, return `inconclusive`.\n3. Compute $E=\\operatorname{ru}(\\gamma_q U)$ by the directed rounding of\n   [[def-dyadic-floating-point-format-and-directed-rounding]]. If this\n   overflows, return `inconclusive`.\n4. Compare exact dyadic rationals. Return `positive` if $\\widehat D-E>0$;\n   return `negative` if $\\widehat D+E<0$; otherwise return `inconclusive`.\n\nThe computation of $U$ uses outward arithmetic, so the exact nonnegative sum\n$S$ in [[lem-leibniz-determinant-forward-error-bound]] satisfies $S\\le U$\nwhenever a finite $U$ is returned, by\n[[thm-outward-rounded-operations-are-isotone-and-dag-sound]].",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "lem-nondegenerate-dyadic-simplex-determines-unique-sphere",
+        "kind": "lemma",
+        "title": "A nondegenerate dyadic simplex determines a unique sphere",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "def-complete-ordered-real-field",
+          "lem-two-and-three-by-three-nonsingular-dyadic-system-solvable",
+          "lem-nonnegative-square-root-exists-and-unique"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §4.2",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 2nd ed., §1.2",
+              "url": "https://cimec.org.ar/twiki/pub/Cimec/GeometriaComputacional/DeBerg_-_Computational_Geometry_-_Algorithms_and_Applications_2e.pdf"
+            }
+          ]
+        },
+        "statement": "Let $d\\in\\{2,3\\}$ and let $p_0,\\ldots,p_d\\in\\mathbb D^d$ have\n$O_d\\ne0$ under [[def-certified-geometric-predicate-determinants]]. There is a\nunique $c\\in\\mathbb R^d$ and $r\\ge0$ such that\n$$\\sum_{j=1}^d(p_{i,j}-c_j)^2=r^2\\qquad (i=0,\\ldots,d).$$"
+      },
+      {
+        "id": "thm-interval-geometric-predicate-filter-sound",
+        "kind": "theorem",
+        "title": "The interval geometric filter certifies only uniform signs",
+        "deps": [
+          "alg-interval-geometric-predicate-filter",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "def-certified-geometric-predicate-determinants"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "CGAL Developer Manual, Robustness Issues, §11.1",
+              "url": "https://cgal.geometryfactory.com/CGAL/doc/main/Manual/devman_robustness.html"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 2nd ed., §1.2",
+              "url": "https://cimec.org.ar/twiki/pub/Cimec/GeometriaComputacional/DeBerg_-_Computational_Geometry_-_Algorithms_and_Applications_2e.pdf"
+            }
+          ]
+        },
+        "statement": "For every tuple of points represented by the input coordinate intervals, any\npositive or negative result returned by\n[[alg-interval-geometric-predicate-filter]] is the exact determinant sign for\nevery admissible tuple. An indeterminate result makes no uniform-sign claim.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-lifted-determinant-sign-matches-sphere-side",
+        "kind": "lemma",
+        "title": "The orientation-normalized lifted determinant records the side of a sphere",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "def-complete-ordered-real-field",
+          "lem-nondegenerate-dyadic-simplex-determines-unique-sphere"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §4.2",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 2nd ed., §1.2",
+              "url": "https://cimec.org.ar/twiki/pub/Cimec/GeometriaComputacional/DeBerg_-_Computational_Geometry_-_Algorithms_and_Applications_2e.pdf"
+            }
+          ]
+        },
+        "statement": "Let $p_0,\\ldots,p_d$ be points in $\\mathbb D^d$, $d\\in\\{2,3\\}$, with\n$O_d\\ne0$ under the determinant convention in\n[[def-certified-geometric-predicate-determinants]]. By\n[[lem-nondegenerate-dyadic-simplex-determines-unique-sphere]], there is a unique\nsphere $S(c,r)=\\{x:\\sum_j(x_j-c_j)^2=r^2\\}$ through $p_0,\\ldots,p_d$. For\n$q=p_{d+1}$ and its lifted determinant $L_d$,\n$$\nL_d=-O_d\\left(\\sum_j(q_j-c_j)^2-r^2\\right).\n$$\nConsequently $O_dL_d$ is positive for $q$ inside the sphere, zero on it, and\nnegative outside it.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-floating-filter-sign-is-exact",
+        "kind": "theorem",
+        "title": "A certified floating determinant filter returns only the exact sign",
+        "deps": [
+          "alg-floating-filter-for-geometric-determinants",
+          "lem-leibniz-determinant-forward-error-bound",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "lem-directed-dyadic-rounding-enclosure-and-error"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §§4.2–4.4",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "CGAL Developer Manual, Robustness Issues, §11.1",
+              "url": "https://cgal.geometryfactory.com/CGAL/doc/main/Manual/devman_robustness.html"
+            }
+          ]
+        },
+        "statement": "Whenever [[alg-floating-filter-for-geometric-determinants]] returns\n`positive` or `negative`, the exact determinant has that same sign. An\n`inconclusive` or nonfinite result carries no sign claim.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-exact-dyadic-determinant-sign-correct-and-terminates",
+        "kind": "lemma",
+        "title": "The integer-clearance determinant-sign algorithm is correct and terminates",
+        "deps": [
+          "alg-exact-dyadic-determinant-sign",
+          "lem-dyadic-determinant-integer-clearance-preserves-sign",
+          "def-certified-geometric-predicate-determinants"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "CGAL Manual, Robustness Issues: exact arithmetic and predicates",
+              "url": "https://doc.cgal.org/latest/Manual/devman_robustness.html"
+            }
+          ]
+        },
+        "statement": "For every finite encoded $s\\times s$ matrix $M$ of exact dyadic rationals,\n$s\\ge1$, [[alg-exact-dyadic-determinant-sign]] terminates and returns\n$\\operatorname{sgn}(\\det M)$, including zero. No axiom of choice is required."
+      },
+      {
+        "id": "alg-certified-dyadic-geometric-predicate",
+        "kind": "algorithm",
+        "title": "Certified predicate for exact dyadic geometric inputs",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "alg-floating-filter-for-geometric-determinants",
+          "alg-exact-dyadic-determinant-sign",
+          "lem-exact-dyadic-determinant-sign-correct-and-terminates",
+          "lem-lifted-determinant-sign-matches-sphere-side"
+        ],
+        "dependency_level": 4,
+        "justified_by": [
+          "thm-certified-dyadic-geometric-predicate-sound-and-terminates"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §§4.2–4.4",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "CGAL Developer Manual, Robustness Issues, §11.1",
+              "url": "https://cgal.geometryfactory.com/CGAL/doc/main/Manual/devman_robustness.html"
+            }
+          ]
+        },
+        "statement": "Input: an ordered tuple of exact dyadic points in dimension $d=2$ or\n$d=3$, with exactly $d+1$ points for an orientation request and exactly $d+2$\npoints for a raw incircle/insphere or orientation-normalized sphere-side\nrequest, and optionally a filter configuration\ncontaining a floating format, its exact dyadic unit-roundoff bound, and a\nverifiable finite range certificate. Output: the requested sign, including\nzero; for a sphere-side request with zero base orientation, output\n`degenerate-base` together with the raw lifted sign. For each required\ndeterminant, construct its matrix in\n[[def-certified-geometric-predicate-determinants]] exactly using dyadic\ninteger arithmetic.\n\n1. Attempt [[alg-floating-filter-for-geometric-determinants]] only when the\n   optional filter configuration is present and its format, standard relative\n   model, and finite normal-range certificate satisfy that algorithm's inputs.\n   If it is absent or invalid, skip directly to the exact fallback.\n2. If the filter returns a nonzero sign, use that sign. If the filter is\n   unavailable or inconclusive, use\n   [[alg-exact-dyadic-determinant-sign]]. For an orientation or raw lifted\n   request, return this sign.\n3. For a requested incircle/insphere side, compute the base orientation and\n   lifted determinant signs by the preceding steps. If the base orientation is\n   zero, return the status `degenerate-base` together with the raw lifted sign.\n   Otherwise\n   return the sign of their product: positive inside, zero on, negative\n   outside, by [[lem-lifted-determinant-sign-matches-sphere-side]].",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "thm-symbolic-geometric-determinant-tie-break-consistent",
+        "kind": "theorem",
+        "title": "The formal determinant tie-break is nondegenerate and consistent",
+        "deps": [
+          "alg-symbolic-geometric-determinant-tie-break",
+          "def-certified-geometric-predicate-determinants",
+          "lem-lifted-determinant-sign-matches-sphere-side",
+          "def-complete-ordered-real-field",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Herbert Edelsbrunner and Ernst Peter Mücke, Simulation of Simplicity, §§2–3.2",
+              "url": "https://arxiv.org/pdf/math/9410209"
+            },
+            {
+              "title": "Mark de Berg et al., Computational Geometry: Algorithms and Applications, 2nd ed., §1.2",
+              "url": "https://cimec.org.ar/twiki/pub/Cimec/GeometriaComputacional/DeBerg_-_Computational_Geometry_-_Algorithms_and_Applications_2e.pdf"
+            }
+          ]
+        },
+        "statement": "For a finite set of uniquely indexed dyadic points and any ordered predicate\ntuple of pairwise distinct IDs of the required size, every orientation,\nincircle, and insphere determinant after the shared formal perturbation in\n[[alg-symbolic-geometric-determinant-tie-break]] is a nonzero polynomial in\n$\\varepsilon$. Its first nonzero coefficient gives the sign for all\nsufficiently small positive $\\varepsilon$. One sufficiently small value works\nsimultaneously for the finite set of predicates, so the signs are consistent\nand every originally nonzero determinant retains its sign.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+        "kind": "theorem",
+        "title": "The filtered exact dyadic predicate is sound and terminates",
+        "deps": [
+          "alg-certified-dyadic-geometric-predicate",
+          "thm-floating-filter-sign-is-exact",
+          "alg-exact-dyadic-determinant-sign",
+          "lem-dyadic-determinant-integer-clearance-preserves-sign",
+          "lem-lifted-determinant-sign-matches-sphere-side",
+          "def-certified-geometric-predicate-determinants"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §§4.2–4.4",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            },
+            {
+              "title": "CGAL Developer Manual, Robustness Issues, §11.1",
+              "url": "https://cgal.geometryfactory.com/CGAL/doc/main/Manual/devman_robustness.html"
+            }
+          ]
+        },
+        "statement": "For every finite encoded dyadic point tuple and every orientation or lifted\ndeterminant request in\n[[alg-certified-dyadic-geometric-predicate]], the returned raw sign equals the\nexact determinant sign, including zero, and the procedure terminates. A\nnondegenerate incircle/insphere side result agrees with the orientation-\nnormalized convention in\n[[lem-lifted-determinant-sign-matches-sphere-side]].",
+        "verification": {
+          "precheck": "pass"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2569,
+    "id": "certified-geometric-predicates-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Certified geometric predicates — Examples",
+    "companion": "certified-geometric-predicates",
+    "requires": [
+      "certified-geometric-predicates"
+    ],
+    "items": [
+      {
+        "id": "ex-uncertain-coordinate-interval-with-ambiguous-sign",
+        "kind": "example",
+        "title": "An uncertain coordinate interval does not decide orientation",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "alg-interval-geometric-predicate-filter",
+          "thm-interval-geometric-predicate-filter-sound"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "CGAL Developer Manual, Robustness Issues, §11.1",
+              "url": "https://cgal.geometryfactory.com/CGAL/doc/main/Manual/devman_robustness.html"
+            }
+          ]
+        },
+        "statement": "Take $A=(0,0)$, $B=(1,0)$, and $C=(2,Y)$ where\n$Y\\in[-1/8,1/8]$. Use an outward-rounding format that represents\n$0,1,2,$ and $\\pm1/8$ exactly. The exact orientation determinant is $Y$. Outward interval\nevaluation returns $[-1/8,1/8]$, which contains zero and both signs; the\ncertified result is `indeterminate`.",
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-nearly-cocircular-sites-certified-incircle",
+        "kind": "example",
+        "title": "A nearly cocircular quadruple has a certified lifted sign",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "lem-lifted-determinant-sign-matches-sphere-side",
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "lem-directed-dyadic-rounding-enclosure-and-error",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "lem-leibniz-determinant-forward-error-bound",
+          "alg-floating-filter-for-geometric-determinants",
+          "thm-floating-filter-sign-is-exact",
+          "alg-certified-dyadic-geometric-predicate",
+          "thm-certified-dyadic-geometric-predicate-sound-and-terminates"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §4.4",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            }
+          ]
+        },
+        "statement": "Let $A=(0,0)$, $B=(1,0)$, $C=(0,1)$, and\n$D=(1,1+\\delta)$ with $\\delta=2^{-52}$. Their raw lifted determinant with\nrows $(x,y,x^2+y^2,1)$ is $-(\\delta+\\delta^2)$. In a 113-bit filter format\nwith $u=2^{-113}$ and a normal range covering the displayed operations, every\nlifted entry is exactly representable. The filter error radius is less than\n$\\delta/4$, so it certifies the negative lifted sign; since the base\norientation is positive, the last site is outside the circle through $A,B,C$.",
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-nearly-collinear-triangle-certified-orientation",
+        "kind": "example",
+        "title": "A nearly collinear dyadic triangle falls through to the exact sign",
+        "deps": [
+          "def-certified-geometric-predicate-determinants",
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "lem-directed-dyadic-rounding-enclosure-and-error",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "lem-leibniz-determinant-forward-error-bound",
+          "alg-floating-filter-for-geometric-determinants",
+          "thm-floating-filter-sign-is-exact",
+          "alg-certified-dyadic-geometric-predicate",
+          "thm-certified-dyadic-geometric-predicate-sound-and-terminates"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates, §4.3",
+              "url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf"
+            }
+          ]
+        },
+        "statement": "Let $A=(0,0)$, $B=(1,1)$, and $C=(2,2+\\delta)$ with\n$\\delta=2^{-51}$, using binary64 inputs. The exact orientation determinant is\n$\\delta>0$. In the 53-bit filter system with $u=2^{-53}$, the outward error\ninterval includes zero, so the certified predicate uses its exact integer\nfallback and returns positive.",
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        }
+      }
+    ]
+  }
+]

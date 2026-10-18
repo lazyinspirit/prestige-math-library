@@ -1,0 +1,833 @@
+[
+  {
+    "order": 2676,
+    "id": "particle-in-cell-and-particle-mesh-kinetic-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Particle in cell and particle mesh kinetic methods",
+    "companion": "particle-in-cell-and-particle-mesh-kinetic-methods-examples",
+    "requires": [
+      "interacting-particle-mean-field-and-vortex-blob-error",
+      "elliptic-finite-difference-methods",
+      "spectral-collocation-and-galerkin-methods"
+    ],
+    "items": [
+      {
+        "id": "def-periodic-pic-grid-and-inner-product",
+        "kind": "definition",
+        "deps": [],
+        "dependency_level": 0,
+        "title": "Periodic uniform PIC grid and inner product",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapters 2, 4, and 5",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, SIAM Journal on Scientific Computing 39(3) (2017)",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-composite-trapezoid-error",
+        "kind": "lemma",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product"
+        ],
+        "dependency_level": 1,
+        "title": "Composite periodic trapezoidal error in a uniform tensor grid",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Levy, Introduction to Numerical Analysis, full lecture notes, \u00a7\u00a76.2\u20136.3",
+              "url": "https://math.umd.edu/~dlevy/classes/amsc460/na-notes.pdf"
+            },
+            {
+              "title": "Andr\u00e9 Massing, TMA4320 Scientific Computation Notes, Composite Quadrature Rules",
+              "url": "https://andre-massing.github.io/TMA4320_ScientificComputationNotes/chapter_integration/CompositeQuadrature.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-periodic-pic-shape-assignment-and-gather",
+        "kind": "definition",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product"
+        ],
+        "dependency_level": 1,
+        "title": "Periodic PIC deposition shape and gather operators",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Sections 2-2-3 and 5-2",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product"
+        ],
+        "dependency_level": 1,
+        "title": "Periodic centered-difference Poisson solvability and zero-mean gauge",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5, Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2.2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 2,
+        "title": "The periodic Poisson mean-zero pseudoinverse is linear and self-adjoint",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5, Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2.2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-periodic-pic-zero-mean-poisson-solver",
+        "kind": "algorithm",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 2,
+        "title": "Fourier diagonal solver for the periodic centered-difference Poisson equation",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5, Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2.2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-charge-conservation-and-neutralized-source",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 2,
+        "title": "Periodic PIC deposition conserves charge and satisfies Poisson compatibility",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Sections 2-2-3 and 5-2",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2.2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-shape-assignment-and-gather"
+        ],
+        "dependency_level": 2,
+        "title": "Periodic PIC regularization gives a smooth compatible Poisson solution",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapters 2 and 5",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-deposition-potential-gather-adjointness",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather"
+        ],
+        "dependency_level": 2,
+        "title": "Periodic PIC deposition and potential gather are adjoint",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Sections 2-2-3 and 5-2",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-pic-smooth-assignment-weights",
+        "kind": "lemma",
+        "deps": [
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth"
+        ],
+        "dependency_level": 3,
+        "title": "Smooth periodic PIC assignment weights have bounded derivatives",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Sections 2-2-3 and 5-2",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint"
+        ],
+        "dependency_level": 3,
+        "title": "Periodic Poisson residual controls the gathered particle force",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5, Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2.2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-periodic-pic-regularized-grid-interaction-kernel",
+        "kind": "definition",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source"
+        ],
+        "dependency_level": 3,
+        "title": "Fixed-regularization periodic PIC pair kernel",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapters 2 and 5",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2.1",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-pic-shape-partition-and-quadrature-bound",
+        "kind": "lemma",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "lem-periodic-composite-trapezoid-error"
+        ],
+        "dependency_level": 3,
+        "title": "Partition and quadrature bounds for a periodic PIC shape",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Sections 2-2-3 and 5-2",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        },
+        "statement": "Let $d,L,N,h,\\eta_\\varepsilon,Z_{\\varepsilon,h}$, and $w_j^{\\varepsilon,h}$ have the meanings in [[def-periodic-pic-grid-and-inner-product]] and [[def-periodic-pic-shape-assignment-and-gather]]. For a finite signed Borel measure $\\mu$ on the torus, write $\\|\\mu\\|_{\\rm TV}=|\\mu|(\\mathbb T_L^d)$ and define\n$$ (P_h^\\varepsilon\\mu)_j=h^{-d}\\int_{\\mathbb T_L^d}w_j^{\\varepsilon,h}(x)\\,d\\mu(x). $$ Put $$ C_\\eta=\\frac{L^d}{12}\\sum_{a=1}^d\\|\\partial_{aa}\\eta_\\varepsilon\\|_\\infty,\\qquad Z_{\\min}=L^d\\min_{x\\in\\mathbb T_L^d}\\eta_\\varepsilon(x)>0 . $$ Then $\\sum_jw_j^{\\varepsilon,h}(x)=1$ for every $x$, and $Z_{\\varepsilon,h}(x)\\ge Z_{\\min}$. The measure assignment satisfies $$ \\left|(P_h^\\varepsilon\\mu)_j-(\\eta_\\varepsilon*\\mu)(x_j)\\right| \\le \\frac{C_\\eta\\|\\eta_\\varepsilon\\|_\\infty}{Z_{\\min}}\\|\\mu\\|_{\\rm TV}h^2 . $$ For $g\\in C^2(\\mathbb T_L^d;\\mathbb R^m)$ with finite $m\\ge1$ (including scalar $m=1$), use the Euclidean norm $|\\cdot|_2$ and $\\|g\\|_\\infty=\\sup_y|g(y)|_2$. Define the translation-uniform constant\n$$ C_{\\eta,g}=\\frac{L^d}{12}\\sum_{a=1}^d \\sup_{x,y\\in\\mathbb T_L^d}\\left|\\partial_{y_a y_a}\\bigl[\\eta_\\varepsilon(y-x)g(y)\\bigr]\\right|_2 . $$ The gathered nodal samples satisfy the explicit bound $$ \\left|\\sum_jw_j^{\\varepsilon,h}(x)g(x_j)-(\\eta_\\varepsilon*g)(x)\\right| \\le \\frac{C_{\\eta,g}+C_\\eta\\|g\\|_\\infty}{Z_{\\min}}h^2 \\qquad(x\\in\\mathbb T_L^d). $$"
+      },
+      {
+        "id": "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution",
+        "kind": "theorem",
+        "deps": [
+          "alg-periodic-pic-zero-mean-poisson-solver",
+          "def-periodic-pic-grid-and-inner-product",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 3,
+        "title": "The periodic PIC Poisson algorithm returns the unique gauged solution",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5, Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2.2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-periodic-pic-classical-rk4-step",
+        "kind": "algorithm",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "def-periodic-pic-regularized-grid-interaction-kernel",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "alg-periodic-pic-zero-mean-poisson-solver",
+          "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution",
+          "def-euler-midpoint-rk4-tableaus"
+        ],
+        "dependency_level": 4,
+        "title": "Classical RK4 step for the fixed-grid regularized PIC particle ODE",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.330, Introduction to Numerical Analysis, Chapter 5",
+              "url": "https://ocw.mit.edu/courses/18-330-introduction-to-numerical-analysis-spring-2012/a9d2bd9be098f0ada172af40379a17cc_MIT18_330S12_Chapter5.pdf"
+            },
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapter 4",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-periodic-pic-separable-hamiltonian-grid-model",
+        "kind": "definition",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "lem-periodic-pic-smooth-assignment-weights",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source"
+        ],
+        "dependency_level": 4,
+        "title": "Matched variational Hamiltonian branch for periodic PIC",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Section 5-5",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "Nikolaj Nordkvist and Poul G. Hjorth, Classical Mechanics and Symplectic Integration, \u00a73.5",
+              "url": "https://backend.orbit.dtu.dk/ws/files/2512495/lecture_notes-1.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-regularized-grid-interaction-kernel",
+          "lem-periodic-pic-smooth-assignment-weights",
+          "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint"
+        ],
+        "dependency_level": 4,
+        "title": "Fixed-regularization periodic PIC kernels are globally Lipschitz",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fran\u00e7ois Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "Simon Mayer, The Vlasov Equation and Mean Field Limit of a Particle System",
+              "url": "https://mathphys.pages.ist.ac.at/wp-content/uploads/sites/193/2023/10/Handout_Mayer.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-smooth-density-grid-force-consistency",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "lem-periodic-pic-shape-partition-and-quadrature-bound",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "thm-periodic-pic-poisson-residual-to-gathered-force-bound"
+        ],
+        "dependency_level": 4,
+        "title": "Fixed-regularization periodic PIC force consistency on a smooth density",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5, Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Sections 2.1\u20132.2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            },
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Section 5-4",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            }
+          ]
+        },
+        "statement": "Fix $\\varepsilon>0$ and a finite signed Borel measure $\\mu$ on $\\mathbb T_L^d$ with total mass $Q$. Let $\\rho_\\varepsilon=\\eta_\\varepsilon*\\mu-Q/L^d$ and let $\\phi_\\varepsilon$ be its unique zero-mean periodic Poisson potential from [[thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth]]. Put $E_\\varepsilon=-\\nabla\\phi_\\varepsilon$. Use the shape and periodic centered-difference Poisson operator of [[def-periodic-pic-shape-assignment-and-gather]] and [[def-periodic-pic-grid-and-inner-product]]. Let $s_h=P_h^\\varepsilon\\mu-Q/L^d$, let $A_h\\phi_h=s_h$ with $\\bar\\phi_h=0$, set $E_{h,j}=-D^0\\phi_h$, and gather $G_hE_h$ using the same shape. Define\n$$ C_{\\rm dep}=\\frac{C_\\eta\\|\\eta_\\varepsilon\\|_\\infty}{Z_{\\min}}\\|\\mu\\|_{\\rm TV},\\quad C_{\\rm FD}=\\frac1{12}\\sum_{a=1}^d\\|\\partial_a^4\\phi_\\varepsilon\\|_\\infty,\\quad C_{\\rm src}=C_{\\rm dep}+C_{\\rm FD}, $$ where $C_\\eta,Z_{\\min}$ are from [[lem-periodic-pic-shape-partition-and-quadrature-bound]]. Put $$ C_3=\\frac16\\left(\\sum_{a=1}^d\\|\\partial_a^3\\phi_\\varepsilon\\|_\\infty^2\\right)^{1/2},\\qquad C_{\\rm int}=\\frac{C_{\\eta,E}+\\|E_\\varepsilon\\|_\\infty C_\\eta}{Z_{\\min}}, \\quad C_{\\eta,E}=\\frac{L^d}{12}\\sum_{a=1}^d \\sup_{x,y\\in\\mathbb T_L^d}\\left|\\partial_{y_a y_a}[\\eta_\\varepsilon(y-x)E_\\varepsilon(y)]\\right|_2 . $$ For vector fields, $\\|V\\|_\\infty=\\sup_x|V(x)|_2$ (the maximum of Euclidean lengths for grid fields); the derivatives in $C_{\\eta,E}$ use this same Euclidean norm. Then the source $s_h$ is compatible and $$ \\|G_hE_h-\\eta_\\varepsilon*E_\\varepsilon\\|_\\infty \\le L^{d/2}h^{2-d/2}\\left(\\gamma_{N,L}C_{\\rm src}+C_3\\right) +C_{\\rm int}h^2. $$\nThe displayed $\\gamma_{N,L}$ is the actual finite-grid inverse/derivative norm of [[thm-periodic-pic-poisson-residual-to-gathered-force-bound]] and satisfies $\\gamma_{N,L}\\le L/4$. Thus for $d\\in\\{1,2,3\\}$ this fixed-$\\varepsilon$ force error tends to zero as $h\\to0$. Every constant depends on the stated smooth regularized solution and kernel; this is not an $\\varepsilon\\to0$ estimate."
+      },
+      {
+        "id": "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-separable-hamiltonian-grid-model",
+          "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "lem-periodic-pic-smooth-assignment-weights"
+        ],
+        "dependency_level": 5,
+        "title": "The matched periodic PIC grid force is a gradient and its ODE conserves energy",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Section 5-5",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "Nikolaj Nordkvist and Poul G. Hjorth, Classical Mechanics and Symplectic Integration, \u00a73.5",
+              "url": "https://backend.orbit.dtu.dk/ws/files/2512495/lecture_notes-1.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-mean-field-error-with-force-defect",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-regularized-grid-interaction-kernel",
+          "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+          "def-globally-lipschitz-mean-field-kernel",
+          "def-p-one-wasserstein-one",
+          "def-characteristic-mean-field-solution",
+          "def-mean-field-and-weighted-vortex-particle-systems",
+          "thm-gronwall-integral-inequality",
+          "thm-w1-dobrushin-stability-with-force-defect"
+        ],
+        "dependency_level": 5,
+        "title": "Periodic PIC particle and force errors under a prescribed initial coupling",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fran\u00e7ois Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "Simon Mayer, The Vlasov Equation and Mean Field Limit of a Particle System",
+              "url": "https://mathphys.pages.ist.ac.at/wp-content/uploads/sites/193/2023/10/Handout_Mayer.pdf"
+            },
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Section 5-4",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+        "kind": "theorem",
+        "deps": [
+          "alg-periodic-pic-classical-rk4-step",
+          "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+          "prop-euler-midpoint-rk4-orders-and-stability-functions",
+          "lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube"
+        ],
+        "dependency_level": 5,
+        "title": "Fourth-order RK4 trajectory error for the fixed-grid periodic PIC ODE",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.330, Introduction to Numerical Analysis, Chapter 5",
+              "url": "https://ocw.mit.edu/courses/18-330-introduction-to-numerical-analysis-spring-2012/a9d2bd9be098f0ada172af40379a17cc_MIT18_330S12_Chapter5.pdf"
+            },
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapter 4",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            }
+          ]
+        },
+        "statement": "Fix $\\varepsilon>0$, grid width $h$, particle count $P\\ge1$, and final time $T>0$. Apply classical RK4 from [[alg-periodic-pic-classical-rk4-step]] to the autonomous finite-dimensional PIC system\n$$ \\dot Z=F_{\\varepsilon,h}(Z),\\qquad (F_{\\varepsilon,h}(Z))_p=\\frac1P\\sum_{r=1}^P \\mathbb K_{\\varepsilon,h}(z_p,z_r),\\qquad z_p=(X_p,V_p). $$ Let $Z(t)$ be an exact solution on $[0,T]$. Assume $F_{\\varepsilon,h}$ is $C^4$ on an open set containing a common compact convex tube $\\mathcal T$; the exact path, all numerical states, and every RK4 stage generated from both the exact and numerical starting states lie in $\\mathcal T$; and all derivatives of $F_{\\varepsilon,h}$ through order four are bounded there. Choose a uniform step $0<h_t\\le h_0$ with $h_0>0$, initialize exactly, and retain every time $t_k=kh_t\\le T$ for integers $k\\ge0$; $T/h_t$ need not be an integer. The stage hypotheses concern each step ending by $T$. Put $$ L_F=2L_{\\varepsilon,h},\\qquad L_*=L_Fe^{L_Fh_0}, $$ and choose $C_4$ so that the exact-start defect on this tube is at most $C_4s^5$ for admitted steps $0<s\\le h_0$ ending by $T$. The local-order supplier gives such constants for a sufficiently small positive $h_0$ under the stated smoothness and tube assumptions. Then, for every grid time $t_k=kh_t\\le T$, $$ \\|Z_k-Z(t_k)\\|_2\\le \\begin{cases} C_4\\dfrac{e^{L_*T}-1}{L_*}h_t^4,&L_*>0,\\\\[4pt] C_4Th_t^4,&L_*=0. \\end{cases} $$\nThe tube, exact-solution, and stage-admissibility hypotheses are conditional; this is a fixed-$\\varepsilon$, fixed-grid finite-particle time error, not a continuum or singular-force estimate."
+      },
+      {
+        "id": "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-separable-hamiltonian-grid-model",
+          "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+          "def-leapfrog-step-map",
+          "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+          "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+          "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "title": "Leapfrog geometry and finite-time order for the matched periodic PIC Hamiltonian",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nikolaj Nordkvist and Poul G. Hjorth, Classical Mechanics and Symplectic Integration",
+              "url": "https://backend.orbit.dtu.dk/ws/files/2512495/lecture_notes-1.pdf"
+            },
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapter 4",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-pic-staged-fixed-regularization-error-budget",
+        "kind": "theorem",
+        "deps": [
+          "thm-periodic-pic-smooth-density-grid-force-consistency",
+          "def-periodic-pic-regularized-grid-interaction-kernel",
+          "thm-periodic-pic-mean-field-error-with-force-defect",
+          "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+          "def-p-one-wasserstein-one"
+        ],
+        "dependency_level": 6,
+        "title": "Staged fixed-regularization PIC error budget",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapters 4 and 5",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        },
+        "statement": "Fix $\\varepsilon>0$, grid width $h$, particle count $P\\ge1$, and $T>0$. Use uniform RK4 times $t_n=n\\Delta t$ for integers $n\\ge0$, with $0<\\Delta t\\le h_0$, where $h_0$ is the positive admitted step-width bound in the RK4 tube/defect hypotheses below. Retain all $t_n\\le T$; no integer value of $T/\\Delta t$ is required. Assume the smooth fixed-regularization hypotheses of [[thm-periodic-pic-smooth-density-grid-force-consistency]], and that the translated unit-source regularized densities $\\eta_\\varepsilon(\\cdot-y)-L^{-d}$ satisfy its derivative bounds uniformly in $y$. Let $\\delta_{\\varepsilon,h}$ be the uniform phase-kernel defect from [[thm-periodic-pic-mean-field-error-with-force-defect]]. The consistency theorem gives the explicit estimate\n$$ \\delta_{\\varepsilon,h} \\le |cQ|\\left[ L^{d/2}h^{2-d/2}\\bigl(\\gamma_{N,L}C_{\\rm src}^{(1)}+C_3^{(1)}\\bigr) +C_{\\rm int}^{(1)}h^2 \\right], $$ where $C_{\\rm src}^{(1)},C_3^{(1)},C_{\\rm int}^{(1)}$ are the constants of that theorem evaluated at a unit point source; translation of the continuum source leaves their derivative suprema unchanged, while the shape quadrature constants are independent of the translate. Define the RK4 empirical measure by $\\nu_{P,h}^{\\Delta t}(t_n)=P^{-1}\\sum_{p=1}^P\\delta_{z_p^{\\Delta t}(t_n)}$. Put $$ \\delta_0=W_1(\\nu_0^h,\\mu_0),\\qquad C_{\\rm RK}= \\begin{cases} C_4(e^{L_*T}-1)/L_*,&L_*>0,\\\\ C_4T,&L_*=0, \\end{cases} $$ using the constants of [[thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube]]. For exact initialization, a common admissible initial coupling, and the same compact-tube hypotheses, the RK4 empirical measure $\\nu_{P,h}^{\\Delta t}(t_n)$ and regularized characteristic solution $\\mu_\\varepsilon(t_n)$ satisfy $$ W_1\\!\\left(\\nu_{P,h}^{\\Delta t}(t_n),\\mu_\\varepsilon(t_n)\\right) \\le \\frac{C_{\\rm RK}}{\\sqrt P}\\Delta t^4 +e^{2L_\\varepsilon T}\\left(\\delta_0+T\\delta_{\\varepsilon,h}\\right), \\qquad t_n\\le T. $$\nThe terms are time error, prescribed initial empirical error, and fixed-$\\varepsilon$ mesh-force error. No universal rate for $\\delta_0$ and no $\\varepsilon\\to0$ singular Vlasov\u2013Poisson limit is asserted."
+      }
+    ]
+  },
+  {
+    "order": 2677,
+    "id": "particle-in-cell-and-particle-mesh-kinetic-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Particle in cell and particle mesh kinetic methods \u2014 Examples",
+    "companion": "particle-in-cell-and-particle-mesh-kinetic-methods",
+    "requires": [
+      "particle-in-cell-and-particle-mesh-kinetic-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-periodic-high-frequency-pic-sampling-alias",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-fourier-collocation-grid",
+          "lem-periodic-fourier-mode-aliasing-under-sampling",
+          "alg-periodic-fourier-collocation-differentiation-matrix",
+          "thm-periodic-fourier-collocation-differentiation-is-exact"
+        ],
+        "dependency_level": 1,
+        "title": "A high Fourier mode aliases to a different periodic PIC grid force",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen and Tao Tang, Spectral and High-Order Methods with Applications, Chapter 2",
+              "url": "https://www.math.purdue.edu/~shen7/sp_intro12/book.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-periodic-nonneutral-source-has-no-poisson-solution",
+        "kind": "counterexample",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 2,
+        "title": "A periodic Poisson source without neutralization is incompatible",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapter 2",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2.2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-periodic-one-dimensional-pic-cic-charge-deposition",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "thm-periodic-pic-deposition-potential-gather-adjointness"
+        ],
+        "dependency_level": 3,
+        "title": "One-dimensional periodic CIC deposition and adjoint potential gather",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Sections 2-2-3 and 5-2",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cold-two-stream-stipulated-pic-experiment",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "def-periodic-pic-regularized-grid-interaction-kernel",
+          "alg-periodic-pic-classical-rk4-step"
+        ],
+        "dependency_level": 5,
+        "title": "A stipulated cold two-stream periodic PIC experiment",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapters 2 and 4",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            },
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Section 2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-periodic-smooth-density-poisson-grid-force-error",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "thm-periodic-pic-smooth-density-grid-force-consistency"
+        ],
+        "dependency_level": 5,
+        "title": "A manufactured smooth periodic density for the PIC grid-force estimate",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Myers, P. Colella, and B. Van Straalen, A 4th-Order Particle-in-Cell Method with Phase-Space Remapping for the Vlasov\u2013Poisson Equation, Sections 2.1\u20132.2",
+              "url": "https://escholarship.org/content/qt2tt7x68b/qt2tt7x68b.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5, Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-separable-hamiltonian-grid-model",
+          "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+          "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error",
+          "def-leapfrog-step-map"
+        ],
+        "dependency_level": 7,
+        "title": "Leapfrog changes the energy of an exact harmonic test mode",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nikolaj Nordkvist and Poul G. Hjorth, Classical Mechanics and Symplectic Integration, \u00a73.5",
+              "url": "https://backend.orbit.dtu.dk/ws/files/2512495/lecture_notes-1.pdf"
+            },
+            {
+              "title": "R. W. Hockney and J. W. Eastwood, Computer Simulation Using Particles, Chapter 4",
+              "url": "https://djvu.online/file/cjOfwRgltjv1g"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

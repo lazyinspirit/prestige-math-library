@@ -1,0 +1,719 @@
+[
+  {
+    "order": 2578,
+    "id": "ewald-periodic-potentials-and-particle-mesh-error",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Ewald periodic potentials and particle mesh error",
+    "companion": "ewald-periodic-potentials-and-particle-mesh-error-examples",
+    "requires": [
+      "computed-fast-transforms-and-convolution",
+      "poisson-summation-sampling-and-lattice-duality",
+      "euclidean-surface-measure-divergence-and-green-identities"
+    ],
+    "items": [
+      {
+        "id": "def-ewald-causal-cardinal-spline-window",
+        "kind": "definition",
+        "title": "Causal cardinal spline window",
+        "deps": [
+          "def-convolution-of-two-functions-on-rn"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define the causal order-P cardinal window by its finite truncated-power formula so periodic assignment is pointwise and finite.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Markus Deserno and Christian Holm, How to mesh up Ewald sums (I): A theoretical and numerical comparison of various particle mesh routines (1998)",
+              "url": "https://arxiv.org/pdf/cond-mat/9807099",
+              "locator": "§3, equations (19)–(20), and Appendix E: order-P cardinal spline as the P-fold convolution of the unit-interval indicator and its tensor-product use."
+            },
+            {
+              "title": "Multi-Level Ewald: A hybrid multigrid / Fast Fourier Transform approach to the electrostatic particle-mesh problem (2011)",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3202610/",
+              "locator": "§2.1, equations (2)–(7): cardinal B-spline charge assignment and particle-to-mesh interpolation."
+            }
+          ]
+        },
+        "statement": "For $P=1$ set $W_1(u)=\\mathbf 1_{[0,1]}(u)$, including both endpoints. For an\ninteger $P\\ge2$, define the causal order-$P$ window by\n$$W_P(u)=\\begin{cases}\\displaystyle\\frac1{(P-1)!}\\sum_{j=0}^{P}(-1)^j\\binom Pj(u-j)_+^{P-1},&0\\le u\\le P,\\\\0,&u<0\\text{ or }u>P.\\end{cases}$$\nHere $s_+=\\max(s,0)$, $m!$ is the factorial of the nonnegative integer $m$\nwith $0!=1$, and for integers $0\\le j\\le P$,\n$\\binom Pj=P!/(j!(P-j)!)$. Convolution means the integral operation\n$$(f*g)(u)=\\int_{\\mathbb R}f(u-s)g(s)\\,ds,$$\nwhen the integrand is measurable and integrable, as in\n[[def-convolution-of-two-functions-on-rn]]. The displayed formula is finite at\nevery $u$ and directly defines $W_P$ to vanish outside $[0,P]$; the local\nalias lemma proves that it agrees with the $P$-fold convolution of $W_1$ and\nestablishes the resulting integral, positivity, partition, Fourier-transform,\nand derivative identities."
+      },
+      {
+        "id": "def-ewald-three-dimensional-periodic-source-data",
+        "kind": "definition",
+        "title": "Neutral point sources and Fourier data on a three-dimensional torus",
+        "deps": [
+          "def-full-rank-lattice-covolume-and-dual-lattice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Fix the physical and reciprocal lattices, torus coordinates, Fourier convention, and neutral finite source data.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hark Lee and Wei Cai, Ewald Summation for Coulomb Interactions in a Periodic Supercell (2009 lecture notes)",
+              "url": "https://warwick.ac.uk/fac/sci/moac/degreescopy/degrees-copy/modules/ch926/lectures/molsim/ewaldsummationnotes.pdf",
+              "locator": "§1, equations (1)–(7), printed pp. 1–2: periodic images, the cell, pairwise-distinct sources, and the point-source interaction convention."
+            },
+            {
+              "title": "Cameron F. Abrams, Modern Molecular Simulations (CHE T580, 2021 lecture notes)",
+              "url": "https://research.coe.drexel.edu/cbe/abramsgroup/msim2/CHE_T580_Lecture_Notes.pdf",
+              "locator": "Chapter 7, §7 Long-Range Interactions: The Ewald Summation, printed pp. 85–87: periodic point charges, reciprocal frequencies, neutrality, and the zero mode."
+            }
+          ]
+        },
+        "statement": "Let $A\\in GL_3(\\mathbb R)$, let $\\Lambda=A\\mathbb Z^3$, let\n$V=|\\det A|$, and let $\\mathbb T_A=\\mathbb R^3/\\Lambda$. These are the\nfull-rank lattice and covolume conventions of\n[[def-full-rank-lattice-covolume-and-dual-lattice]]. The reciprocal lattice is\n$\\Lambda^*=A^{-T}\\mathbb Z^3$. For $k\\in\\mathbb Z^3$ write\n$$\\kappa_k=2\\pi A^{-T}k,\\qquad e_k(x)=e^{i\\kappa_k\\cdot x}.$$\nThus $e_k$ is a character of $\\mathbb T_A$; the ordinary Fourier frequency is\n$A^{-T}k$, while $\\kappa_k$ is the angular physical frequency.\n\nA finite point-source configuration consists of an integer $n\\ge0$, points\n$x_1,\\ldots,x_n\\in\\mathbb T_A$ that are pairwise distinct when $n>1$, and\nreal charges $q_1,\\ldots,q_n$. It is **neutral** when\n$\\sum_{i=1}^n q_i=0$. For a smooth periodic test function $\\varphi$, the\npoint-source distribution is the linear functional\n$$\\langle\\rho,\\varphi\\rangle=\\sum_{i=1}^nq_i\\varphi(x_i).$$\nHere smooth means that the periodic lift to $\\mathbb R^3$ has continuous\nderivatives of every order, and the test-function topology is generated by the\nseminorms $\\max_{x\\in A[0,1]^3}|\\partial^\\beta\\varphi(x)|$ over all derivative\nmulti-indices $\\beta$. A periodic distribution is a continuous complex-linear\nfunctional for this topology. Its distributional Laplacian is defined by\n$\\langle-\\Delta u,\\varphi\\rangle=\\langle u,-\\Delta\\varphi\\rangle$.\n\nFor a smooth periodic $\\varphi$, its Fourier coefficient is\n$$\\widehat\\varphi(k)=\\frac1V\\int_{A(0,1]^3}\\varphi(x)e^{-i\\kappa_k\\cdot x}\\,dx.$$\nThe source coefficient is\n$$\\widehat\\rho(k)=\\frac1V\\sum_{i=1}^nq_i e^{-i\\kappa_k\\cdot x_i};$$\nin particular, neutral data have $\\widehat\\rho(0)=0$. For a periodic\ndistribution $u$, define $\\widehat u(k)=V^{-1}\\langle u,e_{-k}\\rangle$. The\n**mean-zero periodic Poisson solution** is a periodic distribution $u$ satisfying\n$-\\Delta u=4\\pi\\rho$ and $\\widehat u(0)=0$. This definition fixes the\nzero-mode convention; no nonneutral periodic solution is implicit.\n\nThe Coulomb energy convention is the half-sum of each source charge times the\nregular part of its potential, after subtracting its own singular term\n$q_i/|x-x_i|$. The resulting finite part is called the **renormalized\nself-energy convention**. Its Ewald formula is established in this development."
+      },
+      {
+        "id": "lem-ewald-screened-coulomb-kernel-and-self-limit",
+        "kind": "lemma",
+        "title": "Gaussian screened Coulomb kernel and its self limit",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "thm-chain-rule",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "thm-ftc-first-part",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-gaussian-integral"
+        ],
+        "dependency_level": 0,
+        "strategy": "Differentiate the radial error-function potential, verify its distributional source by the flux at the origin, and compute the finite self part.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hark Lee and Wei Cai, Ewald Summation for Coulomb Interactions in a Periodic Supercell (2009 lecture notes)",
+              "url": "https://warwick.ac.uk/fac/sci/moac/degreescopy/degrees-copy/modules/ch926/lectures/molsim/ewaldsummationnotes.pdf",
+              "locator": "§§3–4, equations (13)–(25), printed pp. 3–5: Gaussian screening, erf/erfc radial potentials, and the self limit."
+            },
+            {
+              "title": "Cameron F. Abrams, Modern Molecular Simulations (CHE T580, 2021 lecture notes)",
+              "url": "https://research.coe.drexel.edu/cbe/abramsgroup/msim2/CHE_T580_Lecture_Notes.pdf",
+              "locator": "Chapter 7, equations (242)–(248), printed pp. 86–87: the Gaussian potential, its self value, and the screened real-space term."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. For $\\alpha>0$, define\n$$g_\\alpha(x)=\\frac{\\alpha^3}{\\pi^{3/2}}e^{-\\alpha^2|x|^2},\\quad \\operatorname{erf}(s)=\\frac2{\\sqrt\\pi}\\int_0^s e^{-t^2}\\,dt,\\quad \\operatorname{erfc}(s)=1-\\operatorname{erf}(s).$$\nHere $\\Delta=\\sum_{j=1}^3\\partial_{x_j}^2$, $\\delta_0$ is the distribution\n$\\langle\\delta_0,\\varphi\\rangle=\\varphi(0)$, and a test function is a smooth\ncompactly supported function $\\varphi$.\nFor $r=|x|>0$ put $\\phi_\\ell(r)=\\operatorname{erf}(\\alpha r)/r$ and\n$\\phi_s(r)=\\operatorname{erfc}(\\alpha r)/r$. Then $\\phi_\\ell$ extends\ncontinuously to $r=0$, $-\\Delta\\phi_\\ell=4\\pi g_\\alpha$ distributionally on\n$\\mathbb R^3$, and $-\\Delta\\phi_s=4\\pi\\delta_0-4\\pi g_\\alpha$. Moreover,\nfor every $s\\ge0$,\n$$\\operatorname{erfc}(s)=\\frac2{\\sqrt\\pi}\\int_s^\\infty e^{-t^2}\\,dt,$$\n$$\\phi_s(r)=\\frac1r-\\frac{2\\alpha}{\\sqrt\\pi}+O(r^2)\\quad(r\\downarrow0),$$\nand for every $r>0$,\n$$0\\le\\phi_s(r)\\le\\frac{e^{-\\alpha^2r^2}}{\\sqrt\\pi\\alpha r^2},\\qquad |\\phi_s'(r)|\\le\\frac{2\\alpha}{\\sqrt\\pi}\\frac{e^{-\\alpha^2r^2}}r+ \\frac{e^{-\\alpha^2r^2}}{\\sqrt\\pi\\alpha r^3}.$$"
+      },
+      {
+        "id": "def-ewald-pme-cardinal-assignment-model",
+        "kind": "definition",
+        "title": "Periodic cardinal-spline assignment and unitary mesh transform",
+        "deps": [
+          "def-ewald-causal-cardinal-spline-window",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define the causal order-P periodic window, residue accumulation, signed retained modes, denominator guard, and exact output convention.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Markus Deserno and Christian Holm, How to mesh up Ewald sums (I): A theoretical and numerical comparison of various particle mesh routines (1998)",
+              "url": "https://arxiv.org/pdf/cond-mat/9807099",
+              "locator": "§3 and Appendix E: cardinal-spline charge assignment, finite mesh modes, Fourier assignment convention, and interpolation support."
+            },
+            {
+              "title": "Multi-Level Ewald: A hybrid multigrid / Fast Fourier Transform approach to the electrostatic particle-mesh problem (full-text article, 2011)",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3202610/",
+              "locator": "§2.1, equations (1)–(7): spline assignment, mesh Fourier transform, reciprocal convolution, and force interpolation."
+            }
+          ]
+        },
+        "statement": "Fix neutral point-source data $(A,V,\\Lambda,\\kappa_k,(x_i,q_i)_{i=1}^n)$ from\n[[def-ewald-three-dimensional-periodic-source-data]], an Ewald parameter\n$\\alpha>0$, integers $M_1,M_2,M_3\\ge1$, an assignment order $P\\ge2$, and write\n$N_g=M_1M_2M_3$. Let $\\mathcal G=\\prod_{r=1}^3\\{0,\\ldots,M_r-1\\}$ and take\n$W_P$ from [[def-ewald-causal-cardinal-spline-window]]. Define the periodic\ncausal assignment weights, for $t\\in[0,1)^3$ and $\\ell\\in\\mathcal G$, by\n$$w_\\ell(t)=\\prod_{r=1}^3\\sum_{j\\in\\mathbb Z} W_P(M_rt_r-\\ell_r-jM_r).$$\nThe sums are finite because $W_P$ is supported on $[0,P]$. They collect every\nsupport index into its grid residue; if $P>M_r$, distinct support indices that\nwrap to the same residue are added. The spread grid is\n$$g_\\ell=\\sum_{i=1}^n q_iw_\\ell(t_i),\\qquad t_i=A^{-1}x_i\\pmod{\\mathbb Z^3}.$$\n\nUse the negative-sign unitary tensor DFT convention\n$$\\widehat g_M(k)=N_g^{-1/2}\\sum_{\\ell\\in\\mathcal G}g_\\ell e^{-2\\pi i\\sum_{r=1}^3k_r\\ell_r/M_r},$$\nwhich is the product transform of\n[[def-unitary-discrete-fourier-transform-on-z-mod-n]]. Signed frequency\nrepresentatives are chosen before evaluating windows. A retained set\n$\\mathcal K\\subset\\mathbb Z^3\\setminus\\{0\\}$ is finite, symmetric under\n$k\\mapsto-k$, injective modulo $(M_1,M_2,M_3)$, and satisfies\n$|k_r|<M_r/2$ for each coordinate. In particular, even-grid Nyquist modes are\nnot silently retained.\n\nFor $u\\in\\mathbb R$, put $\\operatorname{sinc}(u)=\\sin(u)/u$ when $u\\ne0$ and\n$\\operatorname{sinc}(0)=1$. Define\n$$D(k)=\\prod_{r=1}^3e^{-\\pi iPk_r/M_r} \\operatorname{sinc}(\\pi k_r/M_r)^P.$$\nOnly modes with $D(k)\\ne0$ are admissible for division. A computed\nimplementation must first certify a strictly positive lower bound for\n$|D(k)|$; otherwise it returns `denominator-inconclusive` without dividing.\nFor $k\\in\\mathcal K$, define\n$$a_k(t)=e^{-2\\pi i k\\cdot t},\\quad b_k(t)=\\frac{\\sum_{\\ell\\in\\mathcal G}w_\\ell(t) e^{-2\\pi i\\sum_rk_r\\ell_r/M_r}}{\\overline{D(k)}},\\quad \\rho_k=\\sum_iq_i a_k(t_i),\\quad z_k=\\frac{\\sqrt{N_g}\\,\\widehat g_M(k)}{\\overline{D(k)}}.$$\nThe denominator is the complex conjugate of the printed window multiplier; this\nsign is part of the definition. Set\n$$c_k=\\frac{4\\pi}{V|\\kappa_k|^2} e^{-|\\kappa_k|^2/(4\\alpha^2)}.$$\nThe exact retained reciprocal energy is\n$$E_{\\mathcal K}=\\frac12\\sum_{k\\in\\mathcal K}c_k|\\rho_k|^2,$$\nand the mesh reciprocal energy is\n$$E_M=\\frac12\\sum_{k\\in\\mathcal K}c_k|z_k|^2.$$\n\nLet $\\mathfrak d_k(t)$ be the declared physical mesh derivative: it is\n$\\nabla_xb_k(t)=A^{-T}\\nabla_tb_k(t)$ wherever the classical derivative\nexists. A grid knot is a point with $M_rt_r\\in\\mathbb Z$ for some coordinate\n$r$. At a $P=2$ knot, take the one-sided vector limits from all adjacent open\nmesh boxes. Define $\\mathfrak d_k(t)$ to be any selected one-sided limit or the\narithmetic average of all those limits. This is a procedure value and does not\nassert that the classical derivative exists there. The\nenergy-gradient mesh force is\n$$F_{M,i}=-q_i\\sum_{k\\in\\mathcal K}c_k \\operatorname{Re}\\!\\left(\\overline{z_k}\\mathfrak d_k(t_i)\\right).$$\nDefine the diagonal mesh-self correction and corrected reciprocal energy by\n$$C_M=\\frac12\\sum_iq_i^2\\sum_{k\\in\\mathcal K}c_k (|b_k(t_i)|^2-1),\\qquad E_M^{\\mathrm{corr}}=E_M-C_M.$$\nWhether the declared force is the derivative of this corrected energy, and the\nerror bound it satisfies, are proved separately."
+      },
+      {
+        "id": "lem-ewald-gaussian-poisson-periodization",
+        "kind": "lemma",
+        "title": "Poisson periodization of a normalized Gaussian on a full-rank lattice",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "thm-poisson-summation-for-a-full-rank-lattice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Apply the published Schwartz lattice Poisson theorem only to the normalized Gaussian and convert its ordinary dual frequency to angular physical frequency.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lior Silberman, Fourier Series and the Poisson Summation Formula (Math 613 lecture notes)",
+              "url": "https://personal.math.ubc.ca/~lior/teaching/1011/613D_F10/Fourier+PoissonSum.pdf",
+              "locator": "§3, Exercise 13, printed p. 4: periodization over a lattice and the $2\\pi$ Fourier convention."
+            },
+            {
+              "title": "Hark Lee and Wei Cai, Ewald Summation for Coulomb Interactions in a Periodic Supercell (2009 lecture notes)",
+              "url": "https://warwick.ac.uk/fac/sci/moac/degreescopy/degrees-copy/modules/ch926/lectures/molsim/ewaldsummationnotes.pdf",
+              "locator": "§5, equations (32)–(36), printed pp. 5–6: the normalized Gaussian reciprocal coefficient and reciprocal lattice frequencies."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and use the full-rank cell and angular frequencies of\n[[def-ewald-three-dimensional-periodic-source-data]]. Here $\\mathcal S(\\mathbb R^3)$\ndenotes the Schwartz space of smooth functions whose derivatives decay faster\nthan every inverse polynomial. For $\\alpha>0$ let\n$$g_\\alpha(x)=\\frac{\\alpha^3}{\\pi^{3/2}}e^{-\\alpha^2|x|^2}.$$\nFor every $x\\in\\mathbb R^3$ the two series below converge absolutely, locally\nuniformly in $x$, and\n$$\\sum_{\\lambda\\in\\Lambda}g_\\alpha(x+\\lambda)= \\frac1V\\sum_{k\\in\\mathbb Z^3} e^{-|\\kappa_k|^2/(4\\alpha^2)}e^{i\\kappa_k\\cdot x}.$$\nThe lattice Poisson theorem is applied only to this Schwartz Gaussian; it is not\napplied to a compactly supported or finite-smoothness assignment window."
+      },
+      {
+        "id": "lem-ewald-lattice-shell-gaussian-tail-controllers",
+        "kind": "lemma",
+        "title": "Uniform lattice-shell counts and explicit Gaussian tail controllers",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-full-rank-lattice-covolume-and-dual-lattice",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "lem-lattice-fundamental-parallelotope-partitions-euclidean-space",
+          "thm-integration-by-parts",
+          "thm-of-archimedean"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use disjoint balls around lattice points for a uniform shell count and an integral-test controller for every Gaussian-polynomial tail used later.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hark Lee and Wei Cai, Ewald Summation for Coulomb Interactions in a Periodic Supercell (2009 lecture notes)",
+              "url": "https://warwick.ac.uk/fac/sci/moac/degreescopy/degrees-copy/modules/ch926/lectures/molsim/ewaldsummationnotes.pdf",
+              "locator": "§§4–6, printed pp. 4–7: Gaussian real-space and reciprocal-space decay and the cutoff context."
+            },
+            {
+              "title": "Cameron F. Abrams, Modern Molecular Simulations (CHE T580, 2021 lecture notes)",
+              "url": "https://research.coe.drexel.edu/cbe/abramsgroup/msim2/CHE_T580_Lecture_Notes.pdf",
+              "locator": "Chapter 7, printed pp. 85–90: real and reciprocal Gaussian cutoffs and differentiated force terms."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. For an invertible real $3\\times3$ matrix $B$, put\n$\\Gamma=B\\mathbb Z^3$ and\n$$C_B=\\bigl(2\\|B^{-1}\\|_2(1+\\sqrt3\\|B\\|_2)+1\\bigr)^3.$$\nHere $\\|\\cdot\\|_2$ is the Euclidean operator norm. Uniformly over every\ntranslate $y+\\Gamma$ and every integer shell $m\\ge0$,\n$$\\#\\{z\\in y+\\Gamma:m\\le|z|<m+1\\}\\le C_B(m+1)^3.$$\n\nFor $\\beta>0$, any integer $p\\ge0$, and integer $M\\ge0$, set\n$$T_p(\\beta,M)=\\sum_{m=M}^{\\infty}(m+1)^p e^{-\\beta m^2}.$$\nFor any integer $J\\ge M$ satisfying $2\\beta J(J+1)\\ge p$, define\n$$I_0(J,\\beta)=\\frac{\\sqrt\\pi}{2\\sqrt\\beta}\\operatorname{erfc}(\\sqrt\\beta J),\\quad I_1(J,\\beta)=\\frac{e^{-\\beta J^2}}{2\\beta},$$\nand recursively for $2\\le s\\le p$,\n$$I_s(J,\\beta)=\\frac{J^{s-1}e^{-\\beta J^2}}{2\\beta} +\\frac{s-1}{2\\beta}I_{s-2}(J,\\beta).$$\nThen the finite controller\n$$U_p(\\beta,M,J)=\\sum_{m=M}^{J}(m+1)^p e^{-\\beta m^2} +\\sum_{s=0}^{p}\\binom ps I_s(J,\\beta)$$\nsatisfies $T_p(\\beta,M)\\le U_p(\\beta,M,J)$. Such a $J$ exists for every\n$\\beta>0$, $M\\ge0$, and integer $p\\ge0$."
+      },
+      {
+        "id": "lem-ewald-smooth-torus-fourier-pairing",
+        "kind": "lemma",
+        "title": "Smooth torus test functions have rapidly convergent Fourier pairings",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-character-orthogonality-on-a-lattice-fundamental-domain",
+          "lem-lattice-fundamental-parallelotope-partitions-euclidean-space",
+          "lem-lattice-periodic-continuous-functions-are-determined-by-their-lattice-fourier-coefficients",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integration-by-parts",
+          "thm-p-series-real-exponents",
+          "thm-uniform-derivative-limit-on-a-closed-interval",
+          "thm-weierstrass-m-test-for-complex-function-series"
+        ],
+        "dependency_level": 1,
+        "strategy": "Repeated periodic integration by parts gives coefficient decay; lattice counting and the uniform derivative theorem give convergence in every smooth seminorm.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lior Silberman, Fourier Series and the Poisson Summation Formula (Math 613 lecture notes)",
+              "url": "https://personal.math.ubc.ca/~lior/teaching/1011/613D_F10/Fourier+PoissonSum.pdf",
+              "locator": "§2, Exercises 7–11, printed pp. 2–4: lattice characters, orthogonality, coefficient decay, and differentiated Fourier series."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $A\\in GL_3(\\mathbb R)$, $V=|\\det A|$,\n$\\Lambda=A\\mathbb Z^3$, $\\kappa_k=2\\pi A^{-T}k$, and let $\\varphi$ be a smooth\n$\\Lambda$-periodic function. With the Fourier coefficients of\n[[def-ewald-three-dimensional-periodic-source-data]], for every derivative\norder $q\\ge0$,\n$$\\sum_{k\\in\\mathbb Z^3}|\\kappa_k|^q|\\widehat\\varphi(k)|<\\infty.$$\nConsequently the Fourier series of $\\varphi$ and every differentiated series\nconverge uniformly to $\\varphi$ and its corresponding derivatives. More\ngenerally, if a coefficient sequence satisfies\n$|a_k|\\le C(1+|\\kappa_k|)^s$ for some $C<\\infty$ and $s\\ge0$, then\n$$T_a(\\varphi):=V\\sum_{k\\in\\mathbb Z^3}a_k\\widehat\\varphi(-k)$$\nconverges absolutely and defines a continuous periodic distribution. A\nperiodic distribution is determined by its Fourier coefficients."
+      },
+      {
+        "id": "lem-ewald-pme-spline-alias-and-dft-normalization",
+        "kind": "lemma",
+        "title": "Exact three-dimensional spline assignment aliases and FFT normalization",
+        "deps": [
+          "def-convolution-of-two-functions-on-rn",
+          "def-ewald-causal-cardinal-spline-window",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-ewald-pme-cardinal-assignment-model",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-p-series-real-exponents",
+          "thm-sine-and-cosine-derivatives",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-weierstrass-m-test-for-complex-function-series"
+        ],
+        "dependency_level": 2,
+        "strategy": "Prove the partition and Fourier multiplier of the causal cardinal window, derive every signed alias, and bound the source-alias series by explicit p-series remainders.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Markus Deserno and Christian Holm, How to mesh up Ewald sums (I): A theoretical and numerical comparison of various particle mesh routines (1998)",
+              "url": "https://arxiv.org/pdf/cond-mat/9807099",
+              "locator": "§3 and Appendix E: spline assignment and Fourier alias structure; the local proof fixes the signed three-dimensional and unitary-normalization conventions."
+            },
+            {
+              "title": "Multi-Level Ewald: A hybrid multigrid / Fast Fourier Transform approach to the electrostatic particle-mesh problem (full-text article, 2011)",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3202610/",
+              "locator": "§2.1, equations (2)–(7): B-spline assignment, reciprocal mesh transform, and force interpolation."
+            }
+          ]
+        },
+        "statement": "Use the periodic cardinal-assignment model of\n[[def-ewald-pme-cardinal-assignment-model]], with integers $M_r\\ge1$, order\n$P\\ge2$, grid size $N_g=\\prod_rM_r$, a retained signed mode $k$ satisfying\n$|k_r|<M_r/2$, and $D(k)\\ne0$. Put $u_r=k_r/M_r$,\n$a_k(t)=e^{-2\\pi i k\\cdot t}$, and\n$$r_{k,n}=\\prod_{r=1}^3 \\frac{\\overline{D_r(k_r+n_rM_r)}}{\\overline{D_r(k_r)}},\\qquad D_r(m)=e^{-\\pi iPm/M_r}\\operatorname{sinc}(\\pi m/M_r)^P.$$\nThen the single-particle assignment factor and the spread-grid coefficient obey\nthe absolutely convergent identities\n$$b_k(t)=\\sum_{n\\in\\mathbb Z^3}r_{k,n}a_{k+n\\odot M}(t),\\qquad z_k=\\sum_{n\\in\\mathbb Z^3}r_{k,n}\\rho_{k+n\\odot M},$$\nwhere $(n\\odot M)_r=n_rM_r$ and\n$\\rho_j=\\sum_iq_i e^{-2\\pi i j\\cdot t_i}$. In particular\n$$z_k-\\rho_k=\\sum_{n\\ne0}r_{k,n}\\rho_{k+n\\odot M}.$$\nThe mesh coefficient also has the exact finite representation\n$z_k=\\sum_iq_i b_k(t_i)$, so no cell-volume or grid-size factor remains after\nthe displayed $\\sqrt{N_g}$ conversion. The alias bound below uses only the Fourier series of\nthe compact spline; the lattice Poisson theorem is not applied to that spline.\n\nFor $u_r\\ne0$ define\n$$a_r(P,u_r)=\\sum_{m\\ne0}\\left|\\frac{u_r}{u_r+m}\\right|^P, \\qquad a_r(P,0)=0,\\qquad A_k=\\prod_{r=1}^3(1+a_r(P,u_r))-1.$$\nThen $|b_k(t)-a_k(t)|\\le A_k$, $|b_k(t)|\\le1+A_k$, and\n$|z_k-\\rho_k|\\le Q A_k$ for $Q=\\sum_i|q_i|$. For $J\\ge1$ and\n$0<|u_r|<1/2$,\n$$a_r(P,u_r)\\le 2\\frac{|u_r|^P}{(1-|u_r|)^P}\\sum_{m=1}^\\infty m^{-P},\\qquad \\sum_{|m|>J}\\left|\\frac{u_r}{u_r+m}\\right|^P\\le 2\\frac{|u_r|^P}{(1-|u_r|)^P}\\frac{\\lfloor J\\rfloor^{1-P}}{P-1}.$$\nThus every alias controller has a finite p-series remainder bound.\nThe periodic assignment also satisfies $\\sum_{\\ell\\in\\mathcal G}w_\\ell(t)=1$,\nso the spread-grid zero mode is $\\sum_{\\ell}g_\\ell=\\sum_iq_i=0$ for neutral data."
+      },
+      {
+        "id": "thm-ewald-neutral-periodic-poisson-green-function",
+        "kind": "theorem",
+        "title": "The mean-zero Fourier distribution solves the neutral periodic Poisson equation",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-smooth-torus-fourier-pairing"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the distribution by its polynomially bounded Fourier coefficients, test against all smooth periodic functions, and prove uniqueness after fixing the zero mode.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lior Silberman, Fourier Series and the Poisson Summation Formula (Math 613 lecture notes)",
+              "url": "https://personal.math.ubc.ca/~lior/teaching/1011/613D_F10/Fourier+PoissonSum.pdf",
+              "locator": "§2, Exercises 10–11, printed pp. 3–4: Fourier reconstruction of smooth periodic data and its derivatives."
+            },
+            {
+              "title": "Cameron F. Abrams, Modern Molecular Simulations (CHE T580, 2021 lecture notes)",
+              "url": "https://research.coe.drexel.edu/cbe/abramsgroup/msim2/CHE_T580_Lecture_Notes.pdf",
+              "locator": "Chapter 7, equations (229)–(241), printed pp. 85–86: the Fourier-space Poisson solve and zero mode."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and a neutral finite point-source configuration on the\ncell $A\\mathbb Z^3$ of\n[[def-ewald-three-dimensional-periodic-source-data]]. Put\n$$\\widehat u(0)=0,\\qquad \\widehat u(k)=\\frac{4\\pi}{V|\\kappa_k|^2} \\sum_{i=1}^nq_i e^{-i\\kappa_k\\cdot x_i}\\quad(k\\ne0).$$\nThe polynomially bounded sequence $\\widehat u(k)$ defines a periodic\ndistribution $u$ by Fourier pairing. It is the unique mean-zero periodic\ndistribution satisfying $-\\Delta u=4\\pi\\rho$."
+      },
+      {
+        "id": "lem-ewald-pme-derivative-window-alias-bound",
+        "kind": "lemma",
+        "title": "Derivative-window alias bounds including the P=2 knot branch",
+        "deps": [
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-ewald-pme-cardinal-assignment-model",
+          "lem-ewald-pme-spline-alias-and-dft-normalization",
+          "thm-p-series-real-exponents",
+          "thm-uniform-derivative-limit-on-a-closed-interval"
+        ],
+        "dependency_level": 3,
+        "strategy": "For P>=3 sum the differentiated signed aliases with a p-series tail; for P=2 use the finite piecewise derivative-window formula and explicit knot values.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Markus Deserno and Christian Holm, How to mesh up Ewald sums (I): A theoretical and numerical comparison of various particle mesh routines (1998)",
+              "url": "https://arxiv.org/pdf/cond-mat/9807099",
+              "locator": "§3, equations (37)–(39): Fourier differentiation, analytic assignment-window differentiation, and mesh differentiation are distinct choices."
+            },
+            {
+              "title": "Multi-Level Ewald: A hybrid multigrid / Fast Fourier Transform approach to the electrostatic particle-mesh problem (full-text article, 2011)",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3202610/",
+              "locator": "§2.1, particle-to-mesh assignment and force interpolation; the local bound includes derivative-window aliases explicitly."
+            }
+          ]
+        },
+        "statement": "Use the data and aliases of\n[[lem-ewald-pme-spline-alias-and-dft-normalization]]. Write\n$h_r(0)=1$ and, for $u_r=k_r/M_r\\ne0$,\n$h_r(n)=|u_r/(u_r+n)|^P$ for $n\\ne0$; when $u_r=0$, set $h_r(n)=0$ for\n$n\\ne0$. Put\n$$a_r=\\sum_{n\\ne0}h_r(n).$$\nFor $P\\ge3$, define\n$$v_r=\\sum_{n\\ne0}|k_r+nM_r|h_r(n),\\qquad J_{k,r}=(|k_r|+v_r)\\prod_{s\\ne r}(1+a_s)-|k_r|,$$\nand\n$$B_k=2\\pi\\|A^{-T}\\|_2\\left(\\sum_{r=1}^3J_{k,r}^2\\right)^{1/2}.$$\nFor $P\\ge3$ the physical derivative alias error satisfies\n$$\\|\\nabla_xb_k(t)-\\nabla_xa_k(t)\\|_2\\le B_k.$$\nEach series has a finite p-series controller: for $0<|u_r|<1/2$,\n$$a_r\\le2\\frac{|u_r|^P}{(1-|u_r|)^P}\\zeta(P),\\qquad v_r\\le2M_r\\frac{|u_r|^P}{(1-|u_r|)^{P-1}}\\zeta(P-1),$$\nwhere $\\zeta(s)=\\sum_{m\\ge1}m^{-s}$ for $s>1$. For $J_0\\ge1$, after summing exactly over\n$1\\le|n|\\le J_0$, the respective omitted tails are at most\n$$2\\frac{|u_r|^P}{(1-|u_r|)^P}\\frac{\\lfloor J_0\\rfloor^{1-P}}{P-1},\\qquad 2M_r\\frac{|u_r|^P}{(1-|u_r|)^{P-1}}\\frac{\\lfloor J_0\\rfloor^{2-P}}{P-2}.$$\n\nFor the approved $P=2$ case, the absolute derivative p-series above diverges\nwhen $u_r\\ne0$. Instead use the finite derivative of the local piecewise\nwindow sum. At every open mesh box and each one-sided knot limit, put\n$$C_{k,r}=\\frac{2M_r}{|D(k)|}+2\\pi|k_r|,\\qquad B_k=\\|A^{-T}\\|_2\\left(\\sum_{r=1}^3C_{k,r}^2\\right)^{1/2}.$$\nThis is a computable finite bound for the same physical derivative error. At a\ngrid knot, use the declared $\\mathfrak d_k(t)$ branch from\n[[def-ewald-pme-cardinal-assignment-model]]: it is a selected one-sided value\nor their average and obeys the bound, but is not asserted to be a classical\nderivative there. Thus for the full $P\\ge2$ range the bound is on\n$\\mathfrak d_k(t)-\\nabla_xa_k(t)$, with $\\mathfrak d_k=\\nabla_xb_k$ wherever\nthe classical derivative exists."
+      },
+      {
+        "id": "thm-ewald-alpha-independent-energy-and-potential",
+        "kind": "theorem",
+        "title": "The alpha-independent Ewald potential and renormalized energy",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-character-orthogonality-on-a-lattice-fundamental-domain",
+          "lem-ewald-gaussian-poisson-periodization",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "lem-lattice-fundamental-parallelotope-partitions-euclidean-space",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-ewald-neutral-periodic-poisson-green-function",
+          "thm-gaussian-integral",
+          "thm-integration-by-parts",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Show the short and Gaussian-smoothed distributions sum to the unique neutral mean-zero solution, then take the regular part at each source.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hark Lee and Wei Cai, Ewald Summation for Coulomb Interactions in a Periodic Supercell (2009 lecture notes)",
+              "url": "https://warwick.ac.uk/fac/sci/moac/degreescopy/degrees-copy/modules/ch926/lectures/molsim/ewaldsummationnotes.pdf",
+              "locator": "§§3–6, equations (13)–(39), printed pp. 3–7: the Gaussian split, reciprocal structure factor, zero mode, self term, and energy."
+            },
+            {
+              "title": "Cameron F. Abrams, Modern Molecular Simulations (CHE T580, 2021 lecture notes)",
+              "url": "https://research.coe.drexel.edu/cbe/abramsgroup/msim2/CHE_T580_Lecture_Notes.pdf",
+              "locator": "Chapter 7, equations (229)–(251), printed pp. 85–87: reciprocal Poisson solve, self correction, and the real erfc sum."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and neutral finite point-source data\n$(A,V,\\Lambda,\\kappa_k,(x_i,q_i)_{i=1}^n)$ from\n[[def-ewald-three-dimensional-periodic-source-data]], with pairwise distinct\nsource positions in $\\mathbb T_A$. For $\\alpha>0$ put\n$$\\sigma_k=\\sum_iq_i e^{-i\\kappa_k\\cdot x_i},\\qquad c_k(\\alpha)=\\frac{4\\pi}{V|\\kappa_k|^2}e^{-|\\kappa_k|^2/(4\\alpha^2)}\\quad(k\\ne0).$$\nFor every off-source point $x\\notin\\bigcup_i(x_i+\\Lambda)$, the absolutely\nconvergent Ewald potential\n$$U_\\alpha(x)=\\sum_iq_i\\sum_{\\lambda\\in\\Lambda} \\frac{\\operatorname{erfc}(\\alpha|x-x_i+\\lambda|)}{|x-x_i+\\lambda|} +\\frac{4\\pi}{V}\\sum_{k\\ne0}\\frac{e^{-|\\kappa_k|^2/(4\\alpha^2)}}{|\\kappa_k|^2} \\sigma_k e^{i\\kappa_k\\cdot x}$$\nis the off-source representative of the unique mean-zero periodic solution of\n$-\\Delta u=4\\pi\\rho$. Hence it is independent of $\\alpha$.\n\nDefine the regular part at $x_i$ by\n$$\\operatorname{FP}_{x_i}U_\\alpha= \\lim_{x\\to x_i}\\left(U_\\alpha(x)-\\frac{q_i}{|x-x_i|}\\right).$$\nThe limit exists, is independent of $\\alpha$, and the renormalized energy is\n$$E=\\frac12\\sum_iq_i\\operatorname{FP}_{x_i}U_\\alpha =\\frac12\\sum_i\\sum_{(j,\\lambda)\\ne(i,0)}q_iq_j \\frac{\\operatorname{erfc}(\\alpha|x_i-x_j+\\lambda|)} {|x_i-x_j+\\lambda|} +\\frac12\\sum_{k\\ne0}c_k(\\alpha)|\\sigma_k|^2 -\\frac{\\alpha}{\\sqrt\\pi}\\sum_iq_i^2.$$\nThe prime-exclusion written as $(j,\\lambda)\\ne(i,0)$ omits only each particle's\nown zero-image singularity."
+      },
+      {
+        "id": "thm-ewald-pme-reciprocal-energy-force-error-bound",
+        "kind": "theorem",
+        "title": "Deterministic reciprocal particle-mesh Ewald potential, energy, and force bounds",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-ewald-pme-cardinal-assignment-model",
+          "lem-ewald-pme-derivative-window-alias-bound",
+          "lem-ewald-pme-spline-alias-and-dft-normalization",
+          "thm-chain-rule",
+          "thm-ewald-alpha-independent-energy-and-potential",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "dependency_level": 4,
+        "strategy": "Compare finite mesh and exact retained reciprocal energies and their declared forces by a product identity, separating source aliases, derivative aliases, gather error, and self correction.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Markus Deserno and Christian Holm, How to mesh up Ewald sums (I): A theoretical and numerical comparison of various particle mesh routines (1998)",
+              "url": "https://arxiv.org/pdf/cond-mat/9807099",
+              "locator": "§§3–4, equations (21)–(42), Appendix E: mesh aliases, distinct differentiation choices, and the RMS scope of the paper's error model."
+            },
+            {
+              "title": "Hark Lee and Wei Cai, Ewald Summation for Coulomb Interactions in a Periodic Supercell (2009 lecture notes)",
+              "url": "https://warwick.ac.uk/fac/sci/moac/degreescopy/degrees-copy/modules/ch926/lectures/molsim/ewaldsummationnotes.pdf",
+              "locator": "§§5–6, equations (29)–(42), printed pp. 5–7: reciprocal energy and its force differentiation."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and neutral finite source data on the cell $A\\mathbb Z^3$\nfrom [[def-ewald-three-dimensional-periodic-source-data]]. Fix $\\alpha>0$,\nintegers $M_r\\ge1$, an order $P\\ge2$, and a finite symmetric set\n$\\mathcal K\\subset\\mathbb Z^3\\setminus\\{0\\}$ whose signed representatives are\ninjective modulo $(M_1,M_2,M_3)$ and satisfy $|k_r|<M_r/2$. Require $D(k)\\ne0$\nfor every $k\\in\\mathcal K$, and let $c_k=4\\pi e^{-|\\kappa_k|^2/(4\\alpha^2)}/(V|\\kappa_k|^2)$ be the positive Ewald coefficient. Use the assignment factors $a_k,b_k,\\rho_k,z_k$ of [[def-ewald-pme-cardinal-assignment-model]], and put $Q=\\sum_j|q_j|$.\n\nFor a query point $x$ write $t=A^{-1}x$ modulo $\\mathbb Z^3$ and define the retained exact and mesh reciprocal potentials by\n$$U_{\\mathcal K}(x)=\\sum_{k\\in\\mathcal K}c_k\\operatorname{Re}(\\rho_k\\overline{a_k(t)}),\\qquad U_{M,\\mathcal K}(x)=\\sum_{k\\in\\mathcal K}c_k\\operatorname{Re}(z_k\\overline{b_k(t)}).$$\nDefine $E_{\\mathcal K}=\\frac12\\sum_{k\\in\\mathcal K}c_k|\\rho_k|^2$ and $E_{M,\\mathcal K}=\\frac12\\sum_{k\\in\\mathcal K}c_k|z_k|^2$. For each mode let $A_k$ be the source-alias controller in [[lem-ewald-pme-spline-alias-and-dft-normalization]], and let $B_k$ be the derivative-alias controller in [[lem-ewald-pme-derivative-window-alias-bound]].\n\nLet a complex-vector derivative/gather value $d_k(t)$ satisfy $\\|d_k(t)-\\mathfrak d_k(t)\\|_2\\le H_k$ for a stated $H_k\\ge0$, where $\\mathfrak d_k$ is the declared derivative branch of [[def-ewald-pme-cardinal-assignment-model]] and $\\nabla_x=A^{-T}\\nabla_t$. The uncorrected mesh and exact reciprocal forces are\n$$F^d_{M,i}=-q_i\\sum_{k\\in\\mathcal K}c_k\\operatorname{Re}(\\overline{z_k}d_k(t_i)),\\qquad F_{\\mathcal K,i}=-q_i\\sum_{k\\in\\mathcal K}c_k\\operatorname{Re}(\\overline{\\rho_k}\\nabla_xa_k(t_i)).$$\nThen for every query point $x$,\n$$|U_{M,\\mathcal K}(x)-U_{\\mathcal K}(x)|\\le Q\\sum_{k\\in\\mathcal K}c_kA_k(2+A_k),\\qquad |E_{M,\\mathcal K}-E_{\\mathcal K}|\\le\\frac{Q^2}{2}\\sum_{k\\in\\mathcal K}c_kA_k(2+A_k),$$\nand for every particle $i$,\n$$\\|F^d_{M,i}-F_{\\mathcal K,i}\\|_2\\le |q_i|Q\\sum_{k\\in\\mathcal K}c_k\\bigl[|\\kappa_k|A_k+(1+A_k)B_k+(1+A_k)H_k\\bigr].$$\n\nFor the declared energy-gradient gather $d_k=\\mathfrak d_k$ (so $H_k=0$), the mesh force is $-\\nabla_{x_i}E_{M,\\mathcal K}$ wherever the classical derivative exists. This holds everywhere for $P\\ge3$ and off the assignment knots for $P=2$; at a $P=2$ knot the selected one-sided derivative or its average is a procedure value, with the same bound but without a differentiability claim.\n\nThe optional diagonal self correction is\n$$C_M=\\frac12\\sum_iq_i^2\\sum_{k\\in\\mathcal K}c_k(|b_k(t_i)|^2-1),\\qquad E^{\\rm corr}_{M,\\mathcal K}=E_{M,\\mathcal K}-C_M.$$\nFor its finite cyclic implementation, set $h_k=c_k/|D(k)|^2$ on $\\mathcal K$,\n$$\\gamma_d=\\sum_{k\\in\\mathcal K}h_ke^{-2\\pi i\\sum_rk_rd_r/M_r},\\qquad S_i=\\sum_{\\ell,m\\in\\mathcal G}w_\\ell(t_i)w_m(t_i)\\gamma_{\\ell-m}.$$\nThen $\\gamma$ is real and even, $S_i=\\sum_{k\\in\\mathcal K}c_k|b_k(t_i)|^2$, and, on every differentiable branch (or as the same declared one-sided branch at a $P=2$ knot),\n$$\\nabla_{x_i}(S_i/2)=\\sum_{\\ell,m\\in\\mathcal G}w_\\ell(t_i)\\nabla_xw_m(t_i)\\gamma_{\\ell-m}.$$\nConsequently this local cyclic-kernel expression computes $C_M$ and its derivative exactly in real arithmetic.\nThe finite tensor-transform gathers also have the exact real-arithmetic forms\n$$U_{M,\\mathcal K}(x)=\\operatorname{Re}\\sum_{\\ell\\in\\mathcal G}w_\\ell(t_x)u_\\ell,\\qquad u_\\ell=\\sum_{k\\in\\mathcal K}\\frac{c_kz_k}{D(k)}e^{2\\pi i\\sum_rk_r\\ell_r/M_r},$$\n$$F_{M,i}=-q_i\\operatorname{Re}\\sum_{\\ell\\in\\mathcal G}\\lambda_\\ell\\nabla_xw_\\ell(t_i),\\qquad \\lambda_\\ell=\\sum_{k\\in\\mathcal K}\\frac{c_k\\overline{z_k}}{\\overline{D(k)}}e^{-2\\pi i\\sum_rk_r\\ell_r/M_r}.$$\nThese identities hold with the declared derivative branch, including the selected one-sided $P=2$ knot value.\nIt satisfies\n$$|E^{\\rm corr}_{M,\\mathcal K}-E_{\\mathcal K}|\\le\\frac{Q^2-\\sum_iq_i^2}{2}\\sum_{k\\in\\mathcal K}c_kA_k(2+A_k).$$\nIn the energy-gradient branch its exactly differentiated force is\n$$F^{\\rm corr}_{M,i}=-q_i\\sum_{k\\in\\mathcal K}c_k\\operatorname{Re}\\bigl(\\overline{z_k-q_ib_k(t_i)}\\,\\mathfrak d_k(t_i)\\bigr),$$\nand\n$$\\|F^{\\rm corr}_{M,i}-F_{\\mathcal K,i}\\|_2\\le |q_i|(Q-|q_i|)\\sum_{k\\in\\mathcal K}c_k\\bigl[|\\kappa_k|A_k+(1+A_k)B_k\\bigr].$$\nThe corrected force is the negative classical energy gradient in the same differentiable cases; at a $P=2$ knot it is only the declared branch value. No pointwise error estimate here replaces an RMS estimate, and no claim is made that a different spectral differentiation rule is the gradient of the mesh energy."
+      },
+      {
+        "id": "thm-ewald-real-reciprocal-cutoff-error-bounds",
+        "kind": "theorem",
+        "title": "Explicit real and reciprocal Ewald potential, energy, and force tail bounds",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "thm-chain-rule",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-ewald-alpha-independent-energy-and-potential",
+          "thm-sine-and-cosine-derivatives",
+          "thm-uniform-derivative-limit-on-a-closed-interval",
+          "thm-uniform-limit-continuous-real-functions"
+        ],
+        "dependency_level": 4,
+        "strategy": "Bound omitted image and reciprocal shells separately for energy and differentiated force, retaining cell-shape constants and collision conventions.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hark Lee and Wei Cai, Ewald Summation for Coulomb Interactions in a Periodic Supercell (2009 lecture notes)",
+              "url": "https://warwick.ac.uk/fac/sci/moac/degreescopy/degrees-copy/modules/ch926/lectures/molsim/ewaldsummationnotes.pdf",
+              "locator": "§§4–6, printed pp. 4–7: Gaussian real-space and reciprocal-space decay and their differentiated force formulas."
+            },
+            {
+              "title": "Cameron F. Abrams, Modern Molecular Simulations (CHE T580, 2021 lecture notes)",
+              "url": "https://research.coe.drexel.edu/cbe/abramsgroup/msim2/CHE_T580_Lecture_Notes.pdf",
+              "locator": "Chapter 7, printed pp. 85–90, equations (235)–(256): real and reciprocal cutoff terms and Ewald forces."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the neutral finite configuration and full-rank cell of\n[[def-ewald-three-dimensional-periodic-source-data]]. Fix $\\alpha>0$. Let\n$Q=\\sum_i|q_i|$, choose real and reciprocal cutoffs $R,K\\ge1$, and put\n$M_R=\\lfloor R\\rfloor$, $M_K=\\lfloor K\\rfloor$. Let $C_R=C_A$ be the shell\nconstant for $\\Lambda=A\\mathbb Z^3$ and $C_K=C_{2\\pi A^{-T}}$ the shell constant\nfor the angular reciprocal lattice. For the real-space cutoff, retain all\n$(i,j,\\lambda)$ with $|x_i-x_j+\\lambda|\\le R$ except $(i,i,0)$. For the\nreciprocal cutoff, retain all $k\\ne0$ with $|\\kappa_k|\\le K$. Use the\n$T_3(\\beta,M)$ controller of\n[[lem-ewald-lattice-shell-gaussian-tail-controllers]]. Then the omitted tails\nin the exact Ewald potential, energy, and particle force satisfy\n$$B_R^U=\\frac{QC_R}{\\sqrt\\pi\\alpha}T_3(\\alpha^2,M_R),\\qquad B_R^E=\\frac{Q^2C_R}{2\\sqrt\\pi\\alpha}T_3(\\alpha^2,M_R),$$\n$$B_R^{F,i}=\\frac{|q_i|QC_R}{\\sqrt\\pi}(2\\alpha+\\alpha^{-1}) T_3(\\alpha^2,M_R),$$\nand\n$$B_K^U=\\frac{4\\pi QC_K}{V}T_3((4\\alpha^2)^{-1},M_K),\\qquad B_K^E=\\frac{2\\pi Q^2C_K}{V}T_3((4\\alpha^2)^{-1},M_K),$$\n$$B_K^{F,i}=\\frac{4\\pi|q_i|QC_K}{V} T_3((4\\alpha^2)^{-1},M_K).$$\nFor a certified finite value, replace each $T_3$ by the corresponding finite\nupper controller $U_3$. The real force is evaluated only away from collisions;\nno field bound is asserted at a point source.\n\nThe exact force is the negative gradient of the renormalized energy. With\n$r_{ij\\lambda}=|x_i-x_j+\\lambda|$ and $a_k(t_i)=e^{-i\\kappa_k\\cdot x_i}$,\nit is\n$$F_i=-q_i\\sum_{j=1}^n\\sum_{\\lambda\\in\\Lambda}'q_j\\phi_s'(r_{ij\\lambda})\\frac{x_i-x_j+\\lambda}{r_{ij\\lambda}}-q_i\\sum_{k\\ne0}c_k\\operatorname{Re}(\\overline{\\sigma_k}\\nabla_xa_k(t_i)).$$\nThe prime excludes only $(j,\\lambda)=(i,0)$; the absolutely convergent\nreciprocal sum is real by pairing $k$ and $-k$."
+      },
+      {
+        "id": "thm-ewald-total-pme-error-certificate",
+        "kind": "theorem",
+        "title": "Total deterministic Ewald and particle-mesh error certificate",
+        "deps": [
+          "alg-na-computed-fast-transforms-and-convolution",
+          "def-countable-choice",
+          "def-ewald-pme-cardinal-assignment-model",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-full-rank-lattice-covolume-and-dual-lattice",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "thm-chain-rule",
+          "thm-ewald-alpha-independent-energy-and-potential",
+          "thm-ewald-pme-reciprocal-energy-force-error-bound",
+          "thm-ewald-real-reciprocal-cutoff-error-bounds",
+          "thm-na-arbitrary-length-fft-correctness-and-cost",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "dependency_level": 5,
+        "strategy": "Add exact cutoff tails, finite mesh alias and differentiation bounds, and supplied outward arithmetic radii; return inconclusive whenever a required radius or denominator guard is unavailable.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hark Lee and Wei Cai, Ewald Summation for Coulomb Interactions in a Periodic Supercell (2009 lecture notes)",
+              "url": "https://warwick.ac.uk/fac/sci/moac/degreescopy/degrees-copy/modules/ch926/lectures/molsim/ewaldsummationnotes.pdf",
+              "locator": "§§4–6, printed pp. 4–7: real and reciprocal cutoffs, forces, and the Ewald split."
+            },
+            {
+              "title": "Markus Deserno and Christian Holm, How to mesh up Ewald sums (I): A theoretical and numerical comparison of various particle mesh routines (1998)",
+              "url": "https://arxiv.org/pdf/cond-mat/9807099",
+              "locator": "§4 and Appendix D: explicitly statistical RMS force-error scope, distinguished here from the deterministic pointwise and per-particle certificate proved locally."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and a neutral finite point-source configuration on\n$A\\mathbb Z^3$ from [[def-ewald-three-dimensional-periodic-source-data]]. Fix\n$\\alpha>0$, real and reciprocal cutoffs $R,K_c\\ge1$, a mesh with integers\n$M_r\\ge1$ and order $P\\ge2$, and a finite symmetric retained set\n$\\mathcal K\\subseteq\\{k\\in\\mathbb Z^3\\setminus\\{0\\}:|\\kappa_k|\\le K_c\\}$\nthat is injective modulo $(M_1,M_2,M_3)$ and has $|k_r|<M_r/2$ and $D(k)\\ne0$\nfor every $k\\in\\mathcal K$. Put $Q=\\sum_i|q_i|$ and let\n$$\\mathcal B_{K_c}=\\{k\\in\\mathbb Z^3\\setminus\\{0\\}:|\\kappa_k|\\le K_c\\},\\qquad \\mathcal M_{K_c}=\\mathcal B_{K_c}\\setminus\\mathcal K.$$\nThis in-ball omitted set is finite. Write $M_R=\\lfloor R\\rfloor$,\n$M_K=\\lfloor K_c\\rfloor$, $C_R=C_A$, and $C_K=C_{2\\pi A^{-T}}$ for the shell\nconstants in [[lem-ewald-lattice-shell-gaussian-tail-controllers]]. Choose\nintegers $J_R\\ge M_R$, $J_K\\ge M_K$ such that\n$2\\alpha^2J_R(J_R+1)\\ge3$ and\n$\\frac{1}{2\\alpha^2}J_K(J_K+1)\\ge3$. Let $U_3(\\beta,M,J)$ be that supplier's\nfinite upper controller for $\\sum_{m=M}^\\infty(m+1)^3e^{-\\beta m^2}$, and put\n$$\\begin{aligned} \\overline B_R^U&=\\frac{QC_R}{\\sqrt\\pi\\alpha}U_3(\\alpha^2,M_R,J_R),& \\overline B_R^E&=\\frac{Q^2C_R}{2\\sqrt\\pi\\alpha}U_3(\\alpha^2,M_R,J_R),& \\overline B_R^{F,i}&=\\frac{|q_i|QC_R}{\\sqrt\\pi}(2\\alpha+\\alpha^{-1})U_3(\\alpha^2,M_R,J_R),\\\\ \\overline B_K^U&=\\frac{4\\pi QC_K}{V}U_3((4\\alpha^2)^{-1},M_K,J_K),& \\overline B_K^E&=\\frac{2\\pi Q^2C_K}{V}U_3((4\\alpha^2)^{-1},M_K,J_K),& \\overline B_K^{F,i}&=\\frac{4\\pi|q_i|QC_K}{V}U_3((4\\alpha^2)^{-1},M_K,J_K). \\end{aligned}$$\n\nFor $\\phi_s(r)=\\operatorname{erfc}(\\alpha r)/r$, define the finite real-space\npotential at an off-source point by\n$$S_R(x)=\\sum_iq_i\\sum_{\\substack{\\lambda\\in\\Lambda\\\\|x-x_i+\\lambda|\\le R}}\\phi_s(|x-x_i+\\lambda|),$$\nand the finite real energy by\n$$E_R=\\frac12\\sum_i\\sum_j\\sum_{\\substack{\\lambda\\in\\Lambda\\\\|x_i-x_j+\\lambda|\\le R}}'q_iq_j\\phi_s(|x_i-x_j+\\lambda|),$$\nwhere the prime omits exactly $(j,\\lambda)=(i,0)$. Let\n$$F_{R,i}=-q_i\\sum_{\\substack{1\\le j\\le n,\\ \\lambda\\in\\Lambda\\\\(j,\\lambda)\\ne(i,0),\\,|x_i-x_j+\\lambda|\\le R}}q_j\\,\\phi_s'(|x_i-x_j+\\lambda|)\\frac{x_i-x_j+\\lambda}{|x_i-x_j+\\lambda|}.$$\nThe cutoff index set is held fixed in this force sum; the cutoff indicator is\nnot differentiated. Set\n$$\\widetilde U(x)=S_R(x)+U_{M,\\mathcal K}(x),$$\n$$\\widetilde E^\\chi=E_R+E_{M,\\mathcal K}^\\chi-\\frac{\\alpha}{\\sqrt\\pi}\\sum_iq_i^2,\\qquad \\widetilde F_i^\\chi=F_{R,i}+F_{M,i}^\\chi,$$\nwhere $\\chi=\\mathrm{uncorr}$ uses the uncorrected energy and force of\n[[thm-ewald-pme-reciprocal-energy-force-error-bound]], and $\\chi=\\mathrm{corr}$ uses\nits optional diagonal self-corrected branch. For the uncorrected branch suppose\nthe derivative/gather residuals are $H_k$; the corrected branch uses the\nenergy-gradient gather, so $H_k=0$.\n\nSuppose the computed finite outputs $\\widehat U(x),\\widehat E^\\chi,\\widehat\nF_i^\\chi$ have certified arithmetic radii $\\varepsilon_U,\\varepsilon_E,\n\\varepsilon_{F,i}\\ge0$ relative to $\\widetilde U,\\widetilde E^\\chi,\n\\widetilde F_i^\\chi$, respectively. Define\n$$\\begin{aligned} \\eta_U={}&\\overline B_R^U+\\overline B_K^U+Q\\sum_{m\\in\\mathcal M_{K_c}}c_m+Q\\sum_{k\\in\\mathcal K}c_kA_k(2+A_k)+\\varepsilon_U,\\\\ \\eta_E^{\\mathrm{uncorr}}={}&\\overline B_R^E+\\overline B_K^E+\\frac{Q^2}{2}\\sum_{m\\in\\mathcal M_{K_c}}c_m+\\frac{Q^2}{2}\\sum_{k\\in\\mathcal K}c_kA_k(2+A_k)+\\varepsilon_E,\\\\ \\eta_E^{\\mathrm{corr}}={}&\\overline B_R^E+\\overline B_K^E+\\frac{Q^2}{2}\\sum_{m\\in\\mathcal M_{K_c}}c_m+\\frac{Q^2-\\sum_iq_i^2}{2}\\sum_{k\\in\\mathcal K}c_kA_k(2+A_k)+\\varepsilon_E,\\\\ \\eta_{F,i}^{\\mathrm{uncorr}}={}&\\overline B_R^{F,i}+\\overline B_K^{F,i}+|q_i|Q\\sum_{m\\in\\mathcal M_{K_c}}c_m|\\kappa_m|+|q_i|Q\\sum_{k\\in\\mathcal K}c_k[|\\kappa_k|A_k+(1+A_k)B_k+(1+A_k)H_k]+\\varepsilon_{F,i},\\\\ \\eta_{F,i}^{\\mathrm{corr}}={}&\\overline B_R^{F,i}+\\overline B_K^{F,i}+|q_i|Q\\sum_{m\\in\\mathcal M_{K_c}}c_m|\\kappa_m|+|q_i|(Q-|q_i|)\\sum_{k\\in\\mathcal K}c_k[|\\kappa_k|A_k+(1+A_k)B_k]+\\varepsilon_{F,i}. \\end{aligned}$$\nThen, for every off-source $x$ and each particle $i$,\n$$|\\widehat U(x)-U_\\alpha(x)|\\le\\eta_U,\\qquad |\\widehat E^\\chi-E|\\le\\eta_E^\\chi,\\qquad \\|\\widehat F_i^\\chi-F_i\\|_2\\le\\eta_{F,i}^\\chi.$$\nHere $U_\\alpha,E,F_i$ are the exact mean-zero periodic Ewald potential,\nrenormalized energy, and particle force. The finite omitted-mode sums\n$\\mathcal M_{K_c}$ explicitly charge every mode in the radial ball that the\nmesh did not retain, including Nyquist modes. Missing arithmetic radii do not\nproduce a certificate; no RMS estimate is substituted for these deterministic\nbounds.\n\nFor the formal exact-constant work count, let $\\mathsf N_{\\mathrm{img}}$ be\nthe total number of candidate real-image indices inspected in the finite\npotential, energy, and force loops, and let $\\mathsf N_{\\mathrm{cert}}$ be the\ntotal number of mode and finite controller entries inspected in constructing\nthe omitted-mode ledger and error certificate. Count each such outer-loop\ninspection as one work unit and count the transform arithmetic in the formal\nexact-constant model of [[thm-na-arbitrary-length-fft-correctness-and-cost]].\nFor fixed $P$, the finite evaluation uses\n$$O\\!\\left(N_g\\log(2N_g)+nP^3+\\mathsf N_{\\mathrm{img}}+\\mathsf N_{\\mathrm{cert}}\\right)$$\nwork units, with at most three tensor transforms before optional\nmesh-self correction. The correction adds\n$$O\\!\\left(N_g\\log(2N_g)+nP^6\\right)$$\nwhen its cyclic kernel is precomputed. These counts do not include interval\nprecision, elementary-function evaluation, memory traffic, bit complexity, or\nthe transform subroutine's integer factor search and phase evaluation; no\noperation count is used as an accuracy bound."
+      },
+      {
+        "id": "alg-ewald-certified-particle-mesh-evaluator",
+        "kind": "algorithm",
+        "title": "Certified three-dimensional particle-mesh Ewald evaluator",
+        "deps": [
+          "alg-na-computed-fast-transforms-and-convolution",
+          "def-countable-choice",
+          "def-ewald-pme-cardinal-assignment-model",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-ewald-pme-reciprocal-energy-force-error-bound",
+          "thm-ewald-total-pme-error-certificate",
+          "thm-na-arbitrary-length-fft-correctness-and-cost"
+        ],
+        "dependency_level": 6,
+        "strategy": "Specify the charge spread, tensor FFT, safe deconvolution, reciprocal solve, gather, optional diagonal self correction, certified error ledger, and every failure status.",
+        "justified_by": [
+          "lem-ewald-certified-particle-mesh-evaluator-terminates"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Multi-Level Ewald: A hybrid multigrid / Fast Fourier Transform approach to the electrostatic particle-mesh problem (2011)",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3202610/",
+              "locator": "§2.1, equations (1)–(7): direct/reciprocal split and particle-to-mesh, FFT convolution, and force interpolation pipeline."
+            },
+            {
+              "title": "Markus Deserno and Christian Holm, How to mesh up Ewald sums (I): A theoretical and numerical comparison of various particle mesh routines (1998)",
+              "url": "https://arxiv.org/pdf/cond-mat/9807099",
+              "locator": "§§2–4 and Appendices B, E: assignment support, aliasing, differentiation alternatives, cutoff tradeoffs, and the RMS limits of numerical accuracy estimates."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Inputs are a full-rank real cell matrix $A$, a finite\nneutral configuration of pairwise-distinct torus positions $x_i$ and real\ncharges $q_i$, an Ewald parameter $\\alpha>0$, cutoffs $R,K_c\\ge1$, integers\n$M_r\\ge1$, an order $P\\ge2$, a mesh-self-correction flag, an optional off-source\nquery point $x$, requested nonnegative tolerances for each requested output,\nand integer controller indices $J_R\\ge\\lfloor R\\rfloor$,\n$J_K\\ge\\lfloor K_c\\rfloor$, and $J_A\\ge1$. The inputs must satisfy\n$2\\alpha^2J_R(J_R+1)\\ge3$ and\n$(2\\alpha^2)^{-1}J_K(J_K+1)\\ge3$ for the shell controllers. The arithmetic\ninterface is one fixed instance of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]],\nwith representable set $\\mathbb F$ and certified outward enclosures for every\nfinite arithmetic node, elementary-function evaluation, transform phase, and\nfinal arithmetic radius. There is an optional positive integer enclosure-work\ncap $B_{\\mathrm{encl}}$, defaulting to $1$ when omitted. Each non-transform\nvalidation, enclosure, or comparison request executes its supplied certificate\nlookup/evaluation program for at most $B_{\\mathrm{encl}}$ program\ninstructions, including control-flow steps. Its numerical primitives are exact\nrational arithmetic/comparisons, fixed-format rounded operations, and reads of\nfinite supplied certificate data. Elementary functions\nand refinement loops are implemented through these counted instructions, not\nas uncapped oracle calls. On exhaustion, unavailable data, a nonfinite bound,\nan uncertified required divisor or an unresolved comparison, return\n`arithmetic-inconclusive`, except where an explicit cutoff, transform, or\nwindow-denominator branch below names its more specific status. Do not retry\nwith larger budgets inside a run. A larger cap may be supplied for another\nrun; no accepted enclosure loses its required soundness. Supplied finite\ncertificate data and the cap are part of the arithmetic interface, so this\nrule does not impose a precision or accuracy restriction on successful outputs. Every particle and optional query point also has a\ncertified representative interval in $[0,1)^3$ after reduction modulo the\ncell. Transform calls use common controls: an exact rational phase tolerance\n$\\tau$ with $0<\\tau\\le1/4$, integer exponent limits $e_{\\min}\\le e_{\\max}$,\ninteger precision $p_0\\ge2$, finite integer cap $p_{\\max}\\ge p_0$, integer\nelementary-series cap $J_{\\mathrm{phase}}\\ge1$, and integer radix-two depth\n$d_{\\max}\\ge0$ required by\n[[alg-na-computed-fast-transforms-and-convolution]]. Every vector passed to a\ntransform has real and imaginary coordinates in $\\mathbb F$, and the outward\nenclosures include phase and arithmetic errors from the entire transform call.\nIf $\\sum_iq_i\\ne0$ is certified, return `nonneutral`. Otherwise check\nneutrality, distinctness, full rank, valid scalar/integer controls, and the\nrequired input enclosures using the bounded interface above. A certified\nviolation of these input conditions returns `invalid-input`; unavailable or\nunresolved evidence returns `arithmetic-inconclusive`. If a query point is\ncertified to be a source image, return `collision` for that potential query;\nif its off-source status is unresolved, return `arithmetic-inconclusive`.\nA controller inequality that is certified false is `invalid-input`; an\nunresolved one is `arithmetic-inconclusive`.\n\n1. Compute a certified outward upper bound $B_K$ for $\\|A^T\\|_2K_c/(2\\pi)$ and set $N_K=\\lceil B_K\\rceil$. Enumerate every integer triple in the finite box $[-N_K,N_K]^3$. For each nonzero $k$, compute a certified interval $[d_k^-,d_k^+]$ for $|2\\pi A^{-T}k|$ and an interval $[K_c^-,K_c^+]$ for $K_c$. Include $k$ in $\\mathcal B_{K_c}$ if $d_k^+\\le K_c^-$, exclude it if $d_k^->K_c^+$, and return `cutoff-inconclusive` if neither comparison is certified. Retain from $\\mathcal B_{K_c}$ exactly the signed modes satisfying $|k_r|<M_r/2$ for every coordinate and store them in $\\mathcal K$. This set is finite, symmetric and injective modulo the mesh. Every other mode in $\\mathcal B_{K_c}$ is kept in the finite omitted-mode ledger $\\mathcal M_{K_c}=\\mathcal B_{K_c}\\setminus\\mathcal K$; it is never assigned zero error.\n\n2. Initialize the full grid $g$ to zero. Use each particle's supplied certified representative interval $t_i\\in[0,1)^3$. For each coordinate $r$, enclose $a=M_rt_{i,r}$ by $[a^-,a^+]$; if $a^+-a^->1$, return `arithmetic-inconclusive`. Enumerate every integer $L_r$ from $\\lceil a^- -P\\rceil$ through $\\lfloor a^+\\rfloor$. This finite list contains every translate with $0\\le a-L_r\\le P$ and has at most $P+2$ entries. For every triple $(L_1,L_2,L_3)$, evaluate $q_i\\prod_rW_P(M_rt_{i,r}-L_r)$, reduce $L_r$ modulo $M_r$ to the grid residue $\\ell_r$, add the term to $g_\\ell$, and store the particle's finite support tuples for later gathers. This Cartesian list computes the periodic assignment exactly because each integer $L_r$ is uniquely $\\ell_r+jM_r$. Accumulate all terms that wrap to the same residue; when $P>M_r$, do not drop duplicate contributions. The support is the causal predecessor support of the window, not an unspecified symmetric nearest-node rule.\n\n3. For each coordinate fiber, call [[alg-na-computed-fast-transforms-and-convolution]] with the supplied common transform controls on its representable center vector. If an input cannot be represented, a call returns any `inconclusive` or `range-failure` status, or a normalization scale fails, return `transform-inconclusive` and retain that substatus. Apply the negative-sign unitary tensor DFT\n$$\\widehat g_M(k)=N_g^{-1/2}\\sum_{\\ell\\in\\mathcal G}g_\\ell e^{-2\\pi i\\sum_rk_r\\ell_r/M_r},\\qquad N_g=M_1M_2M_3,$$\nby dividing each returned unnormalised coordinate transform by $\\sqrt{M_r}$, with outward enclosures for every scale operation. The required mathematical output convention is the unitary transform. The correctness-and-cost supplier proves the formal exact-constant transform identity; it is not used as a floating-point error bound.\n\n4. For each retained $k$, form the window multiplier\n$$D(k)=\\prod_{r=1}^3e^{-\\pi iPk_r/M_r}\\operatorname{sinc}(\\pi k_r/M_r)^P$$\nand obtain an outward lower bound for $|D(k)|$. If any lower bound is nonpositive, return `denominator-inconclusive` without division. Otherwise set\n$$z_k=\\frac{\\sqrt{N_g}\\,\\widehat g_M(k)}{\\overline{D(k)}},\\qquad c_k=\\frac{4\\pi e^{-|\\kappa_k|^2/(4\\alpha^2)}}{V|\\kappa_k|^2}.$$\nUse the conjugated denominator forced by the negative-sign DFT and the causal window. The signed mode representative is used in every window factor; residues are used only as storage indices.\n\n5. For every tensor-transform call in this step, use [[alg-na-computed-fast-transforms-and-convolution]] with the same model and controls as in Step 3, divide each coordinate output by $\\sqrt{M_r}$, and propagate a failed or unrepresentable subcall or failed normalization as `transform-inconclusive`. Form mode arrays on the full mesh-frequency grid, placing retained signed modes in their unique residues and setting all other entries to zero. Set $v^U_k=c_kz_k/D(k)$ on $\\mathcal K$. Apply the per-coordinate unitary normalization to the negative-sign tensor DFT of $\\overline{v^U}$, conjugate the output, and multiply by $\\sqrt{N_g}$; the inverse-transform target array is $u_\\ell=\\sum_{k\\in\\mathcal K}v^U_ke^{2\\pi i\\sum_rk_r\\ell_r/M_r}$. If a query point was supplied, use its supplied representative $t_x$ and the finite-support routine of Step 2 to compute the off-source mesh potential $\\operatorname{Re}\\sum_{\\ell\\in\\mathcal G}w_\\ell(t_x)u_\\ell$. For forces set $v^F_k=c_k\\overline{z_k}/\\overline{D(k)}$ on $\\mathcal K$, zero elsewhere, and apply the same per-coordinate normalization to its negative-sign tensor DFT, then multiply by $\\sqrt{N_g}$ to form $\\lambda_\\ell=\\sum_{k\\in\\mathcal K}v^F_ke^{-2\\pi i\\sum_rk_r\\ell_r/M_r}$. Evaluate $\\nabla_xw_\\ell$ by differentiating the finite support products on the selected mesh box and applying $A^{-T}$; aggregate all tuple derivative contributions by residue, retaining duplicate wraps. Then $F_{M,i}=-q_i\\operatorname{Re}\\sum_{\\ell\\in\\mathcal G}\\lambda_\\ell\\nabla_xw_\\ell(t_i)$, gathering only the at most $(P+2)^3$ candidate support contributions per particle. For $P=2$ at a knot, use the one-sided derivative from the adjacent box immediately to the right in each knot coordinate (box index $\\lfloor M_rt_r\\rfloor$ modulo $M_r$), consistently for the full derivative vector and both correction factors. Determine this right-hand mesh-box index by the bounded certificate interface, allowing a supplied exact knot equality; if its floor/branch cannot be certified, return `arithmetic-inconclusive`. This is the selected branch from the assignment definition and is not asserted to be a classical gradient. Computed enclosures retain outward bounds on residual imaginary parts. The mesh energy is $E_{M,\\mathcal K}=\\frac12\\sum_{k\\in\\mathcal K}c_k|z_k|^2$.\n\n   If mesh-self correction is enabled, place $h_k=c_k/|D(k)|^2$ on retained residues and zero elsewhere. Apply the same normalized negative-sign tensor DFT to $h$ and multiply by $\\sqrt{N_g}$ to form the cyclic kernel $\\gamma_d=\\sum_{k\\in\\mathcal K}h_ke^{-2\\pi i\\sum_rk_rd_r/M_r}$. For each particle evaluate $S_i=\\sum_{\\ell,m}w_\\ell(t_i)w_m(t_i)\\gamma_{\\ell-m}$ over all support-residue pairs, retaining duplicate-wrap contributions, and set $C_M=\\frac12\\sum_iq_i^2(S_i-\\sum_{k\\in\\mathcal K}c_k)$. Replace the mesh energy by $E_{M,\\mathcal K}-C_M$. Replace the uncorrected force by $F_{M,i}+q_i^2\\sum_{\\ell,m}w_\\ell(t_i)\\nabla_xw_m(t_i)\\gamma_{\\ell-m}$, using the same selected derivative branch. The equality of this finite cyclic-kernel computation with the correction and its branch derivative is proved in [[thm-ewald-pme-reciprocal-energy-force-error-bound]]. Outward enclosures include the kernel transform, local products, derivative-window factors, and subtraction.\n\n6. For each query/particle pair and particle pair, use certified representatives $t_a,t_b\\in[0,1)^3$. If $|A(t_a-t_b+\\ell)|\\le R$, then $|\\ell|\\le\\|A^{-1}\\|_2R+\\sqrt3$. Compute an outward upper bound $B_R$ for the right-hand side, set $N_R=\\lceil B_R\\rceil$, and for each required query or particle pair enumerate every integer index in $[-N_R,N_R]^3$. For each candidate compute an outward interval $[r^-,r^+]$ for its image distance and an interval $[R^-,R^+]$ for $R$; include the image if $r^+\\le R^-$, exclude it if $r^->R^+$, and return `cutoff-inconclusive` otherwise. Use these finite lists to compute the real potential when requested, real energy, and real force, excluding exactly the own zero-image term $(j,\\ell)=(i,0)$ from energy and force before any singular kernel division. For every other retained image certify a positive lower distance bound before dividing; otherwise return `arithmetic-inconclusive`. Keep the force convention as the finite sum of differentiated retained pair kernels; do not differentiate the hard-cutoff membership indicator. Add the ordinary Ewald energy constant $-\\alpha\\sum_iq_i^2/\\sqrt\\pi$ to the total energy. The point-source potential is only returned off all source images.\n\n7. Compute $M_R=\\lfloor R\\rfloor$ and $M_K=\\lfloor K_c\\rfloor$; if either floor is not determined by its certified enclosure, return `cutoff-inconclusive`. Construct finite $U_3$ real and reciprocal shell controllers with the supplied $J_R,J_K$. For each retained mode, compute outward bounds for $A_k$ and $B_k$ by summing the source/derivative alias terms through $|n_r|\\le J_A$ and adding the supplier's finite p-series remainders; for $P=2$, use its finite derivative-window controller. Use $H_k=0$ for the declared analytic-window gather in both force branches; place all finite arithmetic errors in the supplied radii $\\varepsilon_{F,i}$. Include every omitted mode in $\\mathcal M_{K_c}$ and the mesh-self correction if enabled. Add the actual outward arithmetic radii for all spread, transform, solve, gather, summation, and correction nodes. The outward enclosures for finite controllers themselves use the bounded enclosure interface above; its name does not authorize an unbounded oracle or refinement search. If a required arithmetic radius or controller enclosure is unavailable, return `arithmetic-inconclusive`. Otherwise retain the computed intervals and total error radii for the final output. Use the same bounded interface for tolerance comparisons: return `certified` when every requested radius is certified to meet its tolerance, `certified-over-tolerance` when at least one is certified to exceed it, and `arithmetic-inconclusive` if neither decision is certified. The total-certificate theorem proves the error bounds and formal operation-count properties for this evaluation; operation counts do not certify accuracy."
+      },
+      {
+        "id": "lem-ewald-certified-particle-mesh-evaluator-terminates",
+        "strategy": "Complete same-frontier prerequisite authored by the assigned Codex escalation owner; see the exact scope report and source-local proof.",
+        "kind": "lemma",
+        "title": "The certified particle-mesh Ewald evaluator terminates with finite outputs or an explicit status",
+        "deps": [
+          "alg-ewald-certified-particle-mesh-evaluator",
+          "alg-na-computed-fast-transforms-and-convolution",
+          "alg-na-certified-unit-circle-phase",
+          "alg-na-computed-unitary-radix-two-fft",
+          "alg-na-computed-fft-cyclic-and-linear-convolution",
+          "alg-certified-elementary-range-evaluation",
+          "alg-dyadic-square-root-bisection",
+          "def-outward-rounded-interval-and-ball-operations",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-ewald-causal-cardinal-spline-window",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-ewald-pme-cardinal-assignment-model",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "lem-ewald-pme-spline-alias-and-dft-normalization",
+          "lem-ewald-pme-derivative-window-alias-bound",
+          "thm-ewald-total-pme-error-certificate",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Multi-Level Ewald: A hybrid multigrid / Fast Fourier Transform approach to the electrostatic particle-mesh problem (2011)",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3202610/"
+            },
+            {
+              "title": "Markus Deserno and Christian Holm, How to mesh up Ewald sums (I): A theoretical and numerical comparison of various particle mesh routines (1998)",
+              "url": "https://arxiv.org/pdf/cond-mat/9807099"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and use the finite input data and arithmetic interface\nof [[alg-ewald-certified-particle-mesh-evaluator]], with its finite positive\n$B_{\\mathrm{encl}}$, finite indices $J_R,J_K,J_A$, and transform controls\n$\\tau,e_{\\min},e_{\\max},p_0,p_{\\max},J_{\\mathrm{phase}},d_{\\max}$.\nEvery execution terminates, either with a declared failure/inconclusive status\n(including the potential-query collision status), or with finite computed\nintervals and error radii labelled `certified` or\n`certified-over-tolerance`. Missing or unresolved evidence cannot force an\nunbounded refinement search and cannot yield an accuracy certificate.\n\nOnce Steps 1 and 6 have obtained their finite integer bounds $N_K,N_R$, the\nreciprocal candidate list has at most $(2N_K+1)^3$ triples and each real-pair\ncandidate list has at most $(2N_R+1)^3$ triples. Each particle or query has at\nmost $(P+2)^3$ assignment-support tuples. There are at most four tensor\ntransforms, including mesh-self correction, each consisting of\n$\\sum_{r=1}^3 N_g/M_r$ one-dimensional calls. The optional correction uses at\nmost $n(P+2)^6$ support-pair terms. These finite bounds do not require the\nrequested tolerances to be achievable. On either valid final-output branch,\nthe error radii retain the guarantees of\n[[thm-ewald-total-pme-error-certificate]] for the same potential, energy,\nforce, and optional mesh-self correction.",
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 2579,
+    "id": "ewald-periodic-potentials-and-particle-mesh-error-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Ewald periodic potentials and particle mesh error — Examples",
+    "companion": "ewald-periodic-potentials-and-particle-mesh-error",
+    "requires": [
+      "ewald-periodic-potentials-and-particle-mesh-error"
+    ],
+    "items": [
+      {
+        "id": "ex-ewald-nonneutral-zero-mode-obstruction",
+        "kind": "example",
+        "title": "A nonneutral periodic source has no periodic Poisson solution",
+        "deps": [
+          "def-ewald-three-dimensional-periodic-source-data"
+        ],
+        "dependency_level": 1,
+        "strategy": "Test the weak equation against the constant function to isolate the necessary zero-mode compatibility condition.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "On any three-dimensional torus, a single point charge of $1$ is nonneutral and\ncannot be the right side of a periodic Poisson equation $-\\Delta u=4\\pi\\rho$."
+      },
+      {
+        "id": "ex-ewald-neutral-dipole-cell",
+        "kind": "example",
+        "title": "A neutral dipole cell and its reciprocal modes",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "thm-ewald-alpha-independent-energy-and-potential"
+        ],
+        "dependency_level": 4,
+        "strategy": "Compute the signed structure factor of a two-charge neutral cell and state its zero mode and reciprocal selection.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Take the unit cubic torus $\\mathbb R^3/\\mathbb Z^3$, with charges $q_1=1$ at\n$x_1=(0,0,0)$ and $q_2=-1$ at $x_2=(1/2,0,0)$. The dipole is neutral and its\nFourier structure factor vanishes on every even first-coordinate mode and is\nequal to $2$ on every odd first-coordinate mode."
+      },
+      {
+        "id": "ex-ewald-source-collision-field-singularity",
+        "kind": "example",
+        "title": "A point-source potential is singular at a source",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "thm-ewald-alpha-independent-energy-and-potential"
+        ],
+        "dependency_level": 4,
+        "strategy": "Isolate the local 1/r and 1/r^2 singular terms and bound every remaining periodic contribution near a source.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "On the unit cubic torus take charges $q_1=1$ at $x_1=(0,0,0)$ and $q_2=-1$ at\n$x_2=(1/2,0,0)$. For $r=|x-x_1|\\downarrow0$, the exact Ewald potential and its\ngradient satisfy\n$$U_\\alpha(x)=\\frac1r+O(1),\\qquad \\nabla_xU_\\alpha(x)=-\\frac{x-x_1}{r^3}+O(1).$$\nThe potential and field therefore have their local Coulomb singularities, so\na pointwise potential or field-error claim must exclude a source collision."
+      },
+      {
+        "id": "ex-ewald-alpha-cutoff-tradeoff",
+        "kind": "example",
+        "title": "Opposite real and reciprocal cutoff trends in the Ewald parameter",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "thm-ewald-real-reciprocal-cutoff-error-bounds"
+        ],
+        "dependency_level": 5,
+        "strategy": "Read the opposite monotonic dependence on alpha from the two explicit Gaussian tail controllers at fixed cutoffs.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Fix the unit cell, a neutral dipole with nonzero total absolute charge $Q$, and\nreal and reciprocal cutoffs $R,K_c\\ge1$. The real-space potential-tail bound\ndecreases strictly with $\\alpha$, while the reciprocal-space potential-tail\nbound increases strictly with $\\alpha$. Thus choosing $\\alpha$ at fixed\ncutoffs and target tolerance balances two opposing certified contributions."
+      },
+      {
+        "id": "ex-ewald-mesh-energy-force-consistency",
+        "kind": "example",
+        "title": "The energy-gradient mesh force matches the differentiated mesh energy",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-pme-cardinal-assignment-model",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-pme-spline-alias-and-dft-normalization",
+          "thm-ewald-pme-reciprocal-energy-force-error-bound"
+        ],
+        "dependency_level": 5,
+        "strategy": "Differentiate the finite mesh energy, exhibit the position-dependent diagonal term, and distinguish the P=2 knot branch from a classical gradient.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Fix $\\alpha>0$ and take the unit cubic cell, $q_1=1$ at $x_1=(1/8,1/8,1/8)$ and $q_2=-1$ at\n$x_2=(5/8,1/8,1/8)$, a $4\\times4\\times4$ mesh, order $P=3$, and retained\nmodes $\\mathcal K=\\{(1,0,0),(-1,0,0)\\}$. The sources are neutral and lie off\nmesh knots. The mesh force from the energy-gradient gather is the negative gradient of\nthe finite mesh reciprocal energy; the optional self correction has the\ndisplayed differentiated force. The theorem's deterministic bound applies."
+      }
+    ]
+  }
+]

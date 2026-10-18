@@ -1,0 +1,674 @@
+[
+  {
+    "order": 2658,
+    "id": "nitsche-methods-for-weak-boundary-enforcement",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nitsche methods for weak boundary enforcement",
+    "companion": "nitsche-methods-for-weak-boundary-enforcement-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "fourier-multipliers-and-sobolev-characterisations"
+    ],
+    "items": [
+      {
+        "id": "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+        "kind": "definition",
+        "title": "Restriction Bessel-potential spaces on polyhedral domains",
+        "deps": [
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "thm-plancherel",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define H^s on a bounded polyhedral set as the restriction space with its quotient Bessel-potential norm, fixing the convention needed for fractional boundary traces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            },
+            {
+              "title": "Leszek F. Demkowicz, Lecture Notes on Energy Spaces",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/CSE393/book.pdf",
+              "locator": "§3.1, p. 50, “Fractional Sobolev spaces on an arbitrary domain” (restriction definition and minimum-energy extension norm)."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $s\\ge0$ and let $D\\subset\\mathbb R^d$ be a nonempty open set. Use $H^s(\\mathbb R^d)$ with the Bessel-potential completion convention of [[def-real-order-bessel-potential-sobolev-space]]. Realize this completion in $L^2(\\mathbb R^d)$ by the canonical injection\n$$\\iota_sU:=\\mathcal F_2^{-1}\\bigl(\\langle\\xi\\rangle^{-s}J_sU\\bigr),$$\nwhere $J_s:H^s(\\mathbb R^d)\\to L^2(\\mathbb R^d)$ is the weighted Fourier isometry of [[thm-bessel-potential-completions-embed-in-tempered-distributions]] and $\\mathcal F_2$ is the unitary transform of [[thm-plancherel]]. Since $s\\ge0$, multiplication by $\\langle\\xi\\rangle^{-s}$ is bounded on $L^2$ with norm at most one and is injective. Hence $\\iota_s$ is linear, injective, and satisfies $\\|\\iota_sU\\|_2\\le\\|U\\|_{H^s}$; it sends each canonical Schwartz class to that function's almost-everywhere class. Equivalently, for a Cauchy representative $[u_j]$, $\\iota_s[u_j]=\\lim_j u_j$ in $L^2$, because $\\widehat u_j=\\langle\\xi\\rangle^{-s}J_su_j$ converges in $L^2$ and $\\mathcal F_2^{-1}$ is continuous. Identify $U$ with this $L^2$ class, and write $U|_D:=(\\iota_sU)|_D$. Define the **restriction space**\n$$H^s(D):=\\{U|_D:U\\in H^s(\\mathbb R^d)\\},\\qquad \\|u\\|_{H^s(D)}:=\\inf\\{\\|U\\|_{H^s(\\mathbb R^d)}:U|_D=u\\text{ a.e. on }D\\}.$$\nTwo extensions represent the same element exactly when their restrictions agree almost everywhere on $D$. This is the convention for fractional-order spaces on the polyhedral domain and its affine simplex cells used in the Nitsche items on this page. No $C^1$ boundary or trace theorem is part of this definition."
+      },
+      {
+        "id": "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+        "kind": "lemma",
+        "title": "Zero facet traces of functions in H1_0 on an affine mesh",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-hk-and-hk-zero-notation",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-affine-simplex-gauss-green-formula",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Pull back the reference-simplex trace map to each cell and pass the zero restrictions of a Countable-Choice-selected compactly supported smooth approximating sequence to the trace limit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf",
+              "locator": "§37.1, the zero-boundary Dirichlet space and weak imposition setup."
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download",
+              "locator": "§2, the conforming H1 test space and Dirichlet limit."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $\\Omega$ have a finite matching affine simplicial mesh $\\mathcal T_h$ as in [[def-matching-affine-simplicial-meshes]], and let $H^1_0(\\Omega;\\mathbb R)=W^{1,2}_0(\\Omega;\\mathbb R)$ have the closure convention of [[def-wkp-zero-as-a-sobolev-closure]] and [[def-hk-and-hk-zero-notation]]. For every boundary facet $F\\subset\\partial K$ there is a bounded affine-simplex trace map $T_{K,F}:W^{1,2}(K;\\mathbb R)\\to L^2(F;\\mathbb R)$ agreeing with classical restriction on smooth functions. If $w\\in H^1_0(\\Omega;\\mathbb R)$, then $T_{K,F}(w|_K)=0$ in $L^2(F;\\mathbb R)$. In particular, any globally $H^1(\\Omega;\\mathbb R)$ function that is polynomial on each cell and belongs to $H^1_0(\\Omega;\\mathbb R)$ has zero classical boundary restriction on every boundary facet."
+      },
+      {
+        "id": "lem-nitsche-local-polynomial-flux-inverse-trace",
+        "kind": "lemma",
+        "title": "Local inverse trace bound for a polynomial normal flux",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Apply the published polynomial facet trace estimate to each component of the cellwise gradient and use the shape-regular equivalence of face height and cell diameter.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Fix $d\\ge2$, a degree $k\\ge1$, and a shape-regular matching affine simplicial mesh family as in [[def-matching-affine-simplicial-meshes]]. There is a selected constant $1\\le C_{\\mathrm{tr}}<\\infty$, depending only on $d,k$ and the shape-regularity bound, such that for every cell $K$, every facet $F\\subset\\partial K$, and every scalar $v_h|_K\\in\\mathbb P_k(K)$,\n$$h_F\\|\\partial_{n_{K,F}}v_h\\|_{L^2(F)}^2\\le C_{\\mathrm{tr}}^2\\|\\nabla v_h\\|_{L^2(K)}^2,$$\nwhere $h_F=|K|/|F|$ and $n_{K,F}$ is the outward unit normal of $K$ on $F$."
+      },
+      {
+        "id": "lem-nitsche-fractional-face-trace-on-simplex",
+        "kind": "lemma",
+        "title": "Fractional Bessel-potential traces on simplex facets",
+        "deps": [
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-plancherel",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove the H^s-to-L2 hyperplane trace inequality by Fourier slicing for s>1/2 and descend to the quotient restriction space using locality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $K\\subset\\mathbb R^d$, $d\\ge2$, be a nondegenerate affine simplex, let $F$ be one of its facets, and let $s>1/2$. Restriction of smooth functions has a unique bounded extension\n$$T_F:H^s(K)\\longrightarrow L^2(F),\\qquad \\|T_Fv\\|_{L^2(F)}\\le C_s\\|v\\|_{H^s(K)},$$\nwhere $H^s(K)$ is the restriction space of [[def-nitsche-restriction-bessel-potential-sobolev-spaces]]. The constant depends only on $s$ and the Fourier normalization, not on the location or orientation of the supporting hyperplane. If $V\\in H^s(\\mathbb R^d)$ is an extension of $v$, then $T_Fv$ is the restriction to $F$ of the unique $L^2$ hyperplane trace of $V$; hence it is independent of the chosen extension."
+      },
+      {
+        "id": "lem-nitsche-scaled-fractional-simplex-trace",
+        "kind": "lemma",
+        "title": "Scaled fractional traces on shape-regular simplices",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-plancherel",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-jensens-integral-inequality",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-shape-regular-affine-simplex-scaling",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "thm-reference-simplex-poincare-wirtinger",
+          "lem-smooth-density-on-reference-simplex",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-dominated-convergence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Fix $d\\ge2$, $1/2<s\\le1$, and a shape-regular affine simplicial mesh family as in [[def-matching-affine-simplicial-meshes]]. For $0<s<1$ and a scalar or vector-valued function $w$ on a cell $K$, define\n$$|w|_{s,K}^2:=\\int_K\\int_K\\frac{|w(x)-w(y)|^2}{|x-y|^{d+2s}}\\,dx\\,dy;$$\nfor $s=1$ set $|w|_{1,K}:=\\|\\nabla w\\|_{L^2(K)}$ (componentwise for vectors). For every cell $K$, facet $F\\subset\\partial K$, and $w\\in H^s(K)$ in the restriction convention of [[def-nitsche-restriction-bessel-potential-sobolev-spaces]], the trace from [[lem-nitsche-fractional-face-trace-on-simplex]] satisfies\n$$\\|T_Fw\\|_{L^2(F)}^2\\le C\\bigl(h_K^{-1}\\|w\\|_{L^2(K)}^2+h_K^{2s-1}|w|_{s,K}^2\\bigr).$$\nFor $0<s<1$, the norm $\\bigl(\\|w\\|_{L^2(K)}^2+|w|_{s,K}^2\\bigr)^{1/2}$ is equivalent on a fixed reference simplex to the restriction $H^s$ norm. At $s=1$ the displayed estimate is the weak $H^1$ trace inequality; no additional identification of the full intrinsic weak-$H^1$ space with a restriction space is asserted. Constants are uniform over the shape-regular family and depend only on $d,s$ and its shape bound.\n\nFor every $w\\in H^s(K)$, with cell mean $w_K:=|K|^{-1}\\int_Kw$, the same conventions give\n$$\\|w-w_K\\|_{L^2(K)}\\le C h_K^s|w|_{s,K}.$$"
+      },
+      {
+        "id": "def-nitsche-boundary-penalty-forms",
+        "kind": "definition",
+        "title": "Symmetric and nonsymmetric Nitsche boundary forms",
+        "deps": [
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the full H1-conforming polynomial trial space, boundary face scale, weak Dirichlet penalty, and the two consistent forms with the source's sign convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $d\\ge2$, let $\\Omega\\subset\\mathbb R^d$ be a nonempty bounded connected polyhedral open set, and let $\\mathcal T_h$ be a finite matching affine simplicial mesh of $\\Omega$ as in [[def-matching-affine-simplicial-meshes]]. Fix a polynomial degree $k\\ge1$. Let $V_h$ be the real scalar conforming polynomial space of [[def-broken-and-conforming-polynomial-spaces]], viewed as a subspace of $H^1(\\Omega)$ by [[thm-matching-continuous-piecewise-polynomials-are-wkp]], and let $Y_h:=V_h\\cap H^1_0(\\Omega)$, where $H^1_0$ is the closure convention of [[def-wkp-zero-as-a-sobolev-closure]]; [[lem-nitsche-h-one-zero-functions-have-zero-facet-traces]] proves its facet-trace consequence. Boundary facets form $\\mathcal F_h^\\partial$. If $F\\in\\mathcal F_h^\\partial$, let $K_F$ be its unique incident cell, $n_F$ its outward unit normal, $|F|$ its $(d-1)$-dimensional measure, and set $h_F:=|K_F|/|F|>0$. For functions with a defined boundary normal trace write $\\partial_n v:=\\nabla v\\cdot n_F$ on $F$.\n\nLet $\\mathcal X_h$ consist of $v\\in H^1(\\Omega)$ such that for every cell $K$ there is $s_K>1/2$ with $v|_K\\in H^{1+s_K}(K)$. By [[lem-nitsche-fractional-face-trace-on-simplex]], $v$ has an $L^2(F)$ trace on each facet, and each component of $\\nabla(v|_K)$ is in $H^{s_K}(K)$, hence has an $L^2(F)$ trace by the same lemma; the derivative mapping follows from $|\\xi_j|\\langle\\xi\\rangle^{s_K}\\le\\langle\\xi\\rangle^{1+s_K}$ in the Bessel-potential norm. Thus $\\partial_n v$ and all displayed integrals are defined. In particular, $V_h\\subseteq\\mathcal X_h$ and the exact/adjoint functions in the later regularity hypotheses lie in $\\mathcal X_h$. For a dimensionless penalty coefficient $\\gamma_0\\ge0$ and symmetry parameter $\\theta\\in\\{0,1\\}$, define the same bilinear formula on $\\mathcal X_h\\times\\mathcal X_h$:\n$$a_h^\\theta(v,w):=\\int_\\Omega\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h^\\partial}\\int_F(\\partial_n v)w\\,dS-\\theta\\sum_{F\\in\\mathcal F_h^\\partial}\\int_Fv(\\partial_n w)\\,dS+\\gamma_0\\sum_{F\\in\\mathcal F_h^\\partial}h_F^{-1}\\int_Fvw\\,dS.$$\nFor $f\\in L^2(\\Omega)$ and boundary data $g$ with the displayed integrals finite, define\n$$\\ell_h^\\theta(w_h):=\\int_\\Omega f w_h\\,dx-\\theta\\sum_{F\\in\\mathcal F_h^\\partial}\\int_Fg(\\partial_n w_h)\\,dS+\\gamma_0\\sum_{F\\in\\mathcal F_h^\\partial}h_F^{-1}\\int_Fg w_h\\,dS.$$\nThe **nonsymmetric Nitsche form** is $a_h^0$; it has the consistency flux in the trial slot only. The **symmetric Nitsche form** is $a_h^1$; it has both transposed consistency fluxes. The discrete weak-boundary problem is the standard Nitsche method when $\\gamma_0>0$: it seeks $u_h\\in V_h$ such that $a_h^\\theta(u_h,w_h)=\\ell_h^\\theta(w_h)$ for every $w_h\\in V_h$. This extension makes expressions such as $a_h^\\theta(u,w_h)$ and $a_h^\\theta(e,\\zeta-z_h)$ well-defined when the exact and adjoint functions have the stated cellwise regularity. The boundary penalty is $\\gamma_0/h_F$; $h_F$ is the cell-face height divided by $d$, not the face diameter. The zero value $\\gamma_0=0$ is used only for the penalty-free algebraic comparison.\n\nThe energy seminorm and the comparison seminorm used below are\n$$\\|v\\|_{E,h}^2:=\\|\\nabla v\\|_{L^2(\\Omega)}^2+\\sum_{F\\in\\mathcal F_h^\\partial}h_F^{-1}\\|v\\|_{L^2(F)}^2,\\qquad \\|v\\|_{\\#,h}^2:=\\|v\\|_{E,h}^2+\\sum_{F\\in\\mathcal F_h^\\partial}h_F\\|\\partial_n v\\|_{L^2(F)}^2.$$\nThese expressions are used only on functions for which their volume and facet traces are defined. The parameter $\\theta$ fixes the sign convention; no convention based on a reciprocal small stabilization parameter is implicit."
+      },
+      {
+        "id": "lem-nitsche-global-boundary-flux-bound",
+        "kind": "lemma",
+        "title": "Global boundary-flux estimate on a matching mesh",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "def-matching-affine-simplicial-meshes",
+          "lem-nitsche-local-polynomial-flux-inverse-trace",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Sum the local inverse trace bounds and count the boundary facets incident to each cell, then apply weighted Cauchy–Schwarz.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the nonempty mesh hypotheses of [[def-nitsche-boundary-penalty-forms]]. Let $N_\\partial$ be the maximum number of boundary facets incident to a single cell, and use the selected positive local constant $C_{\\mathrm{tr}}\\ge1$ from [[lem-nitsche-local-polynomial-flux-inverse-trace]]. The mesh has at least one boundary facet, so $1\\le N_\\partial\\le d+1$ and $C_\\partial:=\\sqrt{N_\\partial}C_{\\mathrm{tr}}\\ge1$. For every $v_h\\in V_h$,\n$$\\left(\\sum_{F\\in\\mathcal F_h^\\partial}h_F\\|\\partial_n v_h\\|_{L^2(F)}^2\\right)^{1/2}\\le C_\\partial\\|\\nabla v_h\\|_{L^2(\\Omega)},\\qquad C_\\partial:=\\sqrt{N_\\partial}\\,C_{\\mathrm{tr}}.$$\nConsequently,\n$$\\left|\\sum_{F\\in\\mathcal F_h^\\partial}\\int_F(\\partial_n v_h)v_h\\,dS\\right|\\le C_\\partial\\|\\nabla v_h\\|_{L^2(\\Omega)}\\left(\\sum_{F\\in\\mathcal F_h^\\partial}h_F^{-1}\\|v_h\\|_{L^2(F)}^2\\right)^{1/2}.$$\nFor simplices $N_\\partial\\le d+1$; no sharper face-count bound is needed."
+      },
+      {
+        "id": "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+        "kind": "lemma",
+        "title": "Fractional weak Green identity and interior flux cancellation",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "thm-plancherel",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "thm-fourier-transform-converts-allowed-tempered-convolutions-to-products",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-nitsche-scaled-fractional-simplex-trace",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-smooth-density-on-reference-simplex",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-compact-support-zero-extension-in-wkp",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-l-one-approximate-identity-on-rn",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-dominated-convergence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $d\\ge2$ and let $K\\subset\\mathbb R^d$ be a nondegenerate affine simplex, let $r>1/2$, and let $q\\in H^r(K;\\mathbb R^d)$ in the restriction convention of [[def-nitsche-restriction-bessel-potential-sobolev-spaces]]. Suppose $\\operatorname{div}q\\in L^2(K)$ distributionally. Then for every $v\\in H^1(K)$,\n$$\\int_Kq\\cdot\\nabla v\\,dx+\\int_K(\\operatorname{div}q)v\\,dx=\\sum_{F\\subset\\partial K}\\int_F(T_Fq\\cdot n_{K,F})T_Fv\\,dS,$$\nwhere $T_Fq$ is the fractional $L^2(F)$ trace of [[lem-nitsche-fractional-face-trace-on-simplex]], $T_Fv$ is the weak $H^1$ endpoint trace of [[lem-nitsche-scaled-fractional-simplex-trace]] (agreeing with the Fourier trace whenever $v$ has a restriction-space extension), and $n_{K,F}$ is the outward unit normal. This identifies the fractional facet trace of $q$ as its weak conormal flux.\n\nNow let $\\Omega$ be a nonempty bounded polyhedral open set with a finite matching affine simplicial mesh $\\mathcal T_h$, let $u\\in H^{1+r}(\\Omega)$ with $r>1/2$, and suppose $-\\Delta u=f\\in L^2(\\Omega)$ distributionally. The traces of $\\nabla u$ from the two cells incident to every interior facet agree as vectors, so their outward normal fluxes cancel. For every $w\\in H^1(\\Omega)$ the sum of the cell identities is\n$$\\int_\\Omega\\nabla u\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h^\\partial}\\int_F\\partial_nu\\,T_Fw\\,dS=\\int_\\Omega fw\\,dx.$$\nHere $\\mathcal F_h^\\partial$ is the set of boundary facets, $\\partial_nu:=T_F(\\nabla u)\\cdot n_F$, and all interior-facet value traces of a global $H^1(\\Omega)$ function agree."
+      },
+      {
+        "id": "thm-nitsche-zero-boundary-fractional-comparison-interpolation",
+        "kind": "theorem",
+        "title": "Zero-boundary fractional interpolation in the Nitsche comparison norm",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-scaled-fractional-simplex-trace",
+          "def-nitsche-boundary-penalty-forms",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "def-broken-and-conforming-polynomial-spaces",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-reference-simplex-poincare-wirtinger",
+          "lem-reference-polynomial-norm-equivalence",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-smooth-density-on-reference-simplex",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-compact-support-zero-extension-in-wkp",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-jensens-integral-inequality",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice, $d\\ge2$, a nonempty connected bounded polyhedral open set $\\Omega$, a finite matching shape-regular affine simplicial mesh $\\mathcal T_h$, and a polynomial degree $k\\ge1$ as in [[def-nitsche-boundary-penalty-forms]]. Put $h:=\\max_{K\\in\\mathcal T_h}h_K$ and $\\ell_\\Omega:=\\operatorname{diam}(\\Omega)$. For every $1/2<s\\le1$ there is an explicitly defined linear map\n$$I_{h,0}:H^{1+s}(\\Omega)\\cap H^1_0(\\Omega)\\longrightarrow \\mathbb P_1(\\mathcal T_h)\\cap H^1_0(\\Omega)\\subseteq Y_h$$\nsuch that\n$$\\|\\zeta-I_{h,0}\\zeta\\|_{\\#,h}\\le C h^s\\|\\zeta\\|_{H^{1+s}(\\Omega)}=C_D h^s\\ell_\\Omega^{1-s}\\|\\zeta\\|_{H^{1+s}(\\Omega)},\\qquad C_D:=C\\ell_\\Omega^{s-1}.$$\nHere $\\|\\cdot\\|_{\\#,h}$ and $Y_h=V_h\\cap H^1_0(\\Omega)$ are exactly those of [[def-nitsche-boundary-penalty-forms]]. The constants are uniform over the mesh family and depend only on $d,s$ and its shape-regularity bound; the displayed conversion to $C_D$ uses the fixed nonempty domain. The construction uses cell means and affine reconstructions, never point values of $\\zeta$. Its boundary-value error vanishes exactly. No approximation statement for higher polynomial degree or for nonzero-trace primal data is asserted."
+      },
+      {
+        "id": "lem-nitsche-global-fractional-boundary-flux-trace",
+        "kind": "lemma",
+        "title": "Mesh-uniform fractional boundary flux trace",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-nitsche-boundary-penalty-forms",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-nitsche-scaled-fractional-simplex-trace",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the fixed nonempty bounded polyhedral domain, matching shape-regular affine simplicial mesh, and Nitsche face-height convention of [[def-nitsche-boundary-penalty-forms]]. Let $h:=\\max_Kh_K$, $\\ell_\\Omega:=\\operatorname{diam}(\\Omega)$, and $1/2<s\\le1$. For every $\\zeta\\in H^{1+s}(\\Omega)$, with no boundary-value or PDE assumption,\n$$\\left(\\sum_{F\\in\\mathcal F_h^\\partial}h_F\\|\\partial_n\\zeta\\|_{L^2(F)}^2\\right)^{1/2}\\le C h^{1/2}\\|\\zeta\\|_{H^{1+s}(\\Omega)}=C_T h^{1/2}\\ell_\\Omega^{1/2}\\|\\zeta\\|_{H^{1+s}(\\Omega)},\\qquad C_T:=C\\ell_\\Omega^{-1/2}.$$\nThe trace is the restriction of the whole-space Fourier hyperplane trace and agrees with the facet trace in [[lem-nitsche-fractional-face-trace-on-simplex]]. The constant $C_T$ may depend on the fixed domain, $d$, $s$, and the Fourier normalization, but not on the mesh."
+      },
+      {
+        "id": "lem-nitsche-penalty-coercivity",
+        "kind": "lemma",
+        "title": "Nitsche coercivity above the inverse-trace threshold",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "lem-nitsche-global-boundary-flux-bound",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Bound the consistency cross term by the global flux constant and compute the smallest eigenvalue of the resulting two-variable quadratic form for each symmetry parameter.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the hypotheses of [[def-nitsche-boundary-penalty-forms]] and [[lem-nitsche-global-boundary-flux-bound]]. Put $C_\\partial$ as in the latter item and let $\\theta\\in\\{0,1\\}$. If\n$$\\gamma_0>\\frac{(1+\\theta)^2C_\\partial^2}{4},$$\nthen for every $v_h\\in V_h$,\n$$a_h^\\theta(v_h,v_h)\\ge\\lambda_\\theta\\|v_h\\|_{E,h}^2,\\qquad \\lambda_\\theta:=\\frac{1+\\gamma_0-\\sqrt{(1-\\gamma_0)^2+(1+\\theta)^2C_\\partial^2}}{2}>0.$$\nThus the sufficient threshold is $C_\\partial^2/4$ for the nonsymmetric form and $C_\\partial^2$ for the symmetric form. These are thresholds certified by the displayed inverse-trace bound, not asserted to be necessary for each individual mesh."
+      },
+      {
+        "id": "thm-nitsche-consistency-and-energy-quasioptimality",
+        "kind": "theorem",
+        "title": "Nitsche consistency and energy quasi-optimality",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-nitsche-global-boundary-flux-bound",
+          "lem-nitsche-penalty-coercivity",
+          "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+          "def-countable-choice",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "def-l-one-approximate-identity-on-rn",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-compact-support-zero-extension-in-wkp"
+        ],
+        "dependency_level": 5,
+        "strategy": "Use the local Green identity to obtain exact consistency, prove finite-dimensional solvability from coercivity, and derive the zero-residual affine Strang bound directly from discrete coercivity and boundedness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the Poisson/Nitsche setup of [[def-nitsche-boundary-penalty-forms]] on a connected bounded polyhedral $\\Omega$. Let $u\\in H^{1+r}(\\Omega)$, $r>1/2$, solve $-\\Delta u=f\\in L^2(\\Omega)$ with Dirichlet trace $g$, and let $u_h^\\theta$ solve the discrete problem for $\\theta\\in\\{0,1\\}$. Use the comparison seminorm $\\|\\cdot\\|_{\\#,h}$ of the definition. Put $C_\\partial$ as in [[lem-nitsche-global-boundary-flux-bound]], and assume\n$$\\gamma_0>(1+\\theta)^2C_\\partial^2/4.$$\nThe discrete solution exists uniquely, and\n$$\\|u-u_h^\\theta\\|_{\\#,h}\\le C_\\theta\\inf_{v_h\\in V_h}\\|u-v_h\\|_{\\#,h},\\qquad C_\\theta:=1+\\frac{(2+\\theta C_\\partial+\\gamma_0)(1+C_\\partial^2)}{\\lambda_\\theta},$$\nwhere $\\lambda_\\theta$ is the positive coercivity constant in [[lem-nitsche-penalty-coercivity]]. If, in addition, the Nitsche comparison-norm approximation bound [A2] holds with exponent $t>0$, then\n$$\\|u-u_h^\\theta\\|_{\\#,h}\\le C_\\theta C_I\\left(\\sum_{K\\in\\mathcal T_h}h_K^{2t}\\|u\\|_{H^{1+t}(K)}^2\\right)^{1/2}.$$\nThe result keeps the weak Dirichlet trace unconstrained in $V_h$."
+      },
+      {
+        "id": "thm-nonsymmetric-nitsche-l2-error-with-boundary-defect",
+        "kind": "theorem",
+        "title": "Nonsymmetric Nitsche L2 estimate with its boundary consistency defect",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "thm-nitsche-consistency-and-energy-quasioptimality",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+          "thm-nitsche-zero-boundary-fractional-comparison-interpolation",
+          "lem-nitsche-global-fractional-boundary-flux-trace",
+          "thm-adjoint-problem-for-bounded-coercive-variational-forms",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use the zero-trace discrete test approximation in the adjoint identity; the nonsymmetric form leaves the exact boundary flux term, which is bounded by the boundary penalty norm and the dual trace estimate.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the nonsymmetric Nitsche setup of [[def-nitsche-boundary-penalty-forms]] and [[thm-nitsche-consistency-and-energy-quasioptimality]] with penalty above its coercivity threshold. Put $e:=u-u_h^0\\in L^2(\\Omega)$, and let $\\zeta_e\\in H^1_0(\\Omega)$ solve $\\int_\\Omega\\nabla v\\cdot\\nabla\\zeta_e=\\int_\\Omega ve$ for all $v\\in H^1_0(\\Omega)$. Let $s\\in(1/2,1]$ and assume the genuine dual regularity hypothesis [A1]. The proved comparison interpolation theorem supplies $z_h:=I_{h,0}\\zeta_e\\in Y_h$ with $\\|\\zeta_e-z_h\\|_{\\#,h}\\le C_D h^s\\ell_\\Omega^{1-s}\\|\\zeta_e\\|_{H^{1+s}}$, and the proved weighted flux trace theorem supplies\n$$\\left(\\sum_{F\\in\\mathcal F_h^\\partial}h_F\\|\\partial_n\\zeta_e\\|_{L^2(F)}^2\\right)^{1/2}\\le C_T h^{1/2}\\ell_\\Omega^{1/2}\\|\\zeta_e\\|_{H^{1+s}(\\Omega)},\\qquad 0<h\\le\\ell_\\Omega:=\\operatorname{diam}(\\Omega).$$\nThen\n$$\\|e\\|_2\\le\\left(M_0C_DC_Rh^s\\ell_\\Omega^{1-s}+C_TC_Rh^{1/2}\\ell_\\Omega^{1/2}\\right)\\|e\\|_{\\#,h},$$\nwhere $M_0:=2+\\gamma_0\\ge1$ and $C_D,C_T$ are mesh-uniform for the fixed domain. Since $s>1/2$ and $h\\le\\ell_\\Omega$, the right side is $O(h^{1/2}\\ell_\\Omega^{1/2})\\|e\\|_{\\#,h}$ after absorbing the fixed constants. The surviving boundary term prevents claiming the symmetric $h^s$ factor from dual regularity alone."
+      },
+      {
+        "id": "thm-symmetric-nitsche-l2-error-under-dual-regularity",
+        "kind": "theorem",
+        "title": "Symmetric Nitsche L2 estimate under dual regularity and Nitsche approximation",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "thm-nitsche-consistency-and-energy-quasioptimality",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-global-boundary-flux-bound",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+          "thm-nitsche-zero-boundary-fractional-comparison-interpolation",
+          "thm-adjoint-problem-for-bounded-coercive-variational-forms",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Solve the adjoint Poisson problem, use symmetric adjoint consistency to cancel the boundary residual, subtract a zero-trace discrete approximant, and apply the stated Nitsche comparison-norm approximation bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the symmetric Nitsche setup of [[def-nitsche-boundary-penalty-forms]] and [[thm-nitsche-consistency-and-energy-quasioptimality]] with penalty above the symmetric coercivity threshold. Let $e:=u-u_h^1\\in L^2(\\Omega)$ and let $\\zeta_e\\in H^1_0(\\Omega)$ solve the adjoint Poisson problem $\\int_\\Omega\\nabla v\\cdot\\nabla\\zeta_e\\,dx=\\int_\\Omega ve\\,dx$ for every $v\\in H^1_0(\\Omega)$. Assume its dual regularity bound [A1]\n$$\\|\\zeta_e\\|_{H^{1+s}(\\Omega)}\\le C_R\\|e\\|_{L^2(\\Omega)},\\qquad s\\in(1/2,1],$$\nThe proved interpolation theorem [[thm-nitsche-zero-boundary-fractional-comparison-interpolation]] supplies $z_h:=I_{h,0}\\zeta_e\\in Y_h$ and a mesh-uniform constant $C_D$ with\n$$\\|\\zeta_e-z_h\\|_{\\#,h}\\le C_D h^s\\ell_\\Omega^{1-s}\\|\\zeta_e\\|_{H^{1+s}(\\Omega)},\\qquad 0<h\\le\\ell_\\Omega:=\\operatorname{diam}(\\Omega).$$\nSet $C_\\partial$ as in [[lem-nitsche-global-boundary-flux-bound]] and preserve the original constant $M_1:=2+C_\\partial+\\gamma_0$. Then\n$$\\|u-u_h^1\\|_{L^2(\\Omega)}\\le M_1 C_D C_R h^s\\ell_\\Omega^{1-s}\\|u-u_h^1\\|_{\\#,h},$$\nwhere the all-comparison-space symmetric form bound with this same $M_1$ is proved below. The dual elliptic regularity estimate remains an explicit PDE hypothesis. If, in addition, the general higher-order/local primal energy approximation hypothesis [A3] holds with exponent $t>0$, then\n$$\\|u-u_h^1\\|_{L^2(\\Omega)}\\le M_1 C_D C_R C_\\theta C_I h^s\\ell_\\Omega^{1-s}\\left(\\sum_{K\\in\\mathcal T_h}h_K^{2t}\\|u\\|_{H^{1+t}(K)}^2\\right)^{1/2}.$$\nThe primal branch retains its full exponent range and local broken-norm hypothesis; the zero-boundary P1 interpolation theorem supplies the dual approximation and does not replace that branch."
+      }
+    ]
+  },
+  {
+    "order": 2659,
+    "id": "nitsche-methods-for-weak-boundary-enforcement-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nitsche methods for weak boundary enforcement — Examples",
+    "companion": "nitsche-methods-for-weak-boundary-enforcement",
+    "requires": [
+      "nitsche-methods-for-weak-boundary-enforcement"
+    ],
+    "items": [
+      {
+        "id": "ex-nitsche-exact-affine-data-weak-imposition",
+        "kind": "example",
+        "title": "Exact affine data under weak imposition",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "lem-nitsche-penalty-coercivity",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Substitute the exact affine solution into each Nitsche form and compare with strong imposition on the zero-trace subspace.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $\\Omega=\\{(x,y):x>0,\\ y>0,\\ x+y<1\\}$ be the open reference triangle with its one-cell mesh, let $k\\ge1$, and take $u(x,y)=x$, $f=0$, and $g=u|_{\\partial\\Omega}$. Then the weak Nitsche equations have $u_h^0=u_h^1=u$ whenever the penalty is above the corresponding coercivity threshold. The same $u$ is the exactly representable strongly imposed $P_1$ solution.\n\nThe faces are $F_1=\\{y=0\\}$, $F_2=\\{x=0\\}$, and $F_3=\\{x+y=1\\}$. The arrows are their outward unit normals; the exact boundary fluxes are $0$, $-1$, and $1/\\sqrt2$, respectively.\n\n```tikz\n\\begin{tikzpicture}[scale=2]\n  \\coordinate (A) at (0,0);\n  \\coordinate (B) at (1,0);\n  \\coordinate (C) at (0,1);\n  \\draw[thick] (A)--(B)--(C)--cycle;\n  \\node[below left] at (A) {$(0,0)$};\n  \\node[below right] at (B) {$(1,0)$};\n  \\node[above left] at (C) {$(0,1)$};\n  \\draw[->,blue] (0.35,0)--(0.35,-0.28) node[below] {$n_{F_1}=(0,-1)$};\n  \\draw[->,blue] (0,0.35)--(-0.28,0.35) node[left] {$n_{F_2}=(-1,0)$};\n  \\draw[->,blue] (0.62,0.38)--(0.86,0.62) node[right] {$n_{F_3}=(1,1)/\\sqrt2$};\n\\end{tikzpicture}\n```"
+      },
+      {
+        "id": "ex-nitsche-penalty-below-and-above-coercivity-threshold",
+        "kind": "example",
+        "title": "Penalties below and above the Nitsche coercivity threshold",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "lem-nitsche-penalty-coercivity",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Compute the penalty-free constant-mode failure and apply the proven sufficient threshold to the same finite-element model.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and take any nondegenerate bounded simplex with its one-cell matching mesh and degree-$k$ space, $k\\ge1$. For either Nitsche sign $\\theta\\in\\{0,1\\}$, the algebraic penalty-free boundary form, obtained by evaluating the displayed formula at zero penalty, is not coercive: the constant function has zero gradient and zero form value but positive boundary part in $\\|\\cdot\\|_{E,h}$. In contrast, any $\\gamma_0>(1+\\theta)^2C_\\partial^2/4$ satisfies the sufficient coercivity threshold of [[lem-nitsche-penalty-coercivity]]. The example shows failure at zero and success above the proved bound; it does not claim that every positive penalty below that sufficient bound fails on every mesh."
+      },
+      {
+        "id": "ex-nitsche-symmetric-and-nonsymmetric-l2-defects",
+        "kind": "example",
+        "title": "Symmetric cancellation and the nonsymmetric L2 boundary defect",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "thm-symmetric-nitsche-l2-error-under-dual-regularity",
+          "thm-nonsymmetric-nitsche-l2-error-with-boundary-defect",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Write the duality identities for both signs and isolate the boundary-flux term that cancels only in the symmetric form.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353–1374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. On the unit reference triangle, the affine function $v(x,y)=x$ gives a finite witness that the symmetric form contains an extra adjoint-consistency term: $a_h^1(v,v)-a_h^0(v,v)=-\\int_{\\partial\\Omega}v\\partial_nv=-1/2$. In the duality calculation for an error $e$ and a zero-trace adjoint solution $\\zeta_e$, that same term cancels the boundary flux in the symmetric $L^2$ identity. It is absent from the nonsymmetric form, which leaves the separate pairing $\\int_{\\partial\\Omega}e\\partial_n\\zeta_e$."
+      }
+    ]
+  }
+]

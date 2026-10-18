@@ -1,0 +1,69 @@
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
+import {splitFrontmatter,sourceSectionText} from '../../tools/facts-block.mjs';
+import {yaml} from '../../tools/pathway-lib.mjs';
+import {runPages,dependencyLevels} from '../../tools/item-dependency-levels.mjs';
+import {collect} from '../../tools/frontier-dependency-ledger.mjs';
+
+const run='numerical-analysis-remaining-71-2026-10-17',base=`research/${run}-owner-planning-integration`,owner=`research/${run}-ROOT-mini-pressure-direct-dual-cycle5`;
+const id='cex-na-graded-mini-mass-initialization-pressure-rate',receipt=`${base}/smooth-pressure-final-metadata-integration.json`,archive=`${base}/smooth-pressure-final-before-metadata`;
+const file=x=>`research/${run}-batch-41.${x}.json`,sha=x=>createHash('sha256').update(x).digest('hex');
+if(existsSync(receipt))throw Error('Preserve prior integration');
+const state=JSON.parse(readFileSync(`.autopilot/${run}/state.json`));
+if(state.stage!=='1-scaffold'||Object.values(state.dispatches).some(d=>!d.endedAt))throw Error('Wrong boundary or native writers active');
+const audit=`${owner}/independent-canonical-proof-consumer-audit-smooth-fresh-c4.md`,auditRaw=readFileSync(audit,'utf8');
+if(!auditRaw.includes('I found no substantive mathematical defect')||!auditRaw.includes('every step of all 28 phases'))throw Error('Missing completed canonical audit');
+const rootReview=`${base}/smooth-pressure-final-root-focused-review.md`;
+if(!readFileSync(rootReview,'utf8').includes('Root now read'))throw Error('Missing actual focused root review');
+const changed=[id,'thm-na-mini-be-smooth-velocity-error','thm-na-mini-be-smooth-integrated-pressure-error','rem-na-pe06-pressure-recovery-escalation'];
+const sources=new Map(changed.map(id=>{const path=`items/${id}.md`,raw=readFileSync(path,'utf8'),parts=splitFrontmatter(raw),m=yaml().parse(parts.fm);return[id,{path,raw,...parts,m}];}));
+const ce=sources.get(id);
+if(ce.m.deps.length!==33||ce.m.dependency_level!==9||ce.m.status!=='draft'||ce.m.pipeline_run!==run||ce.m.provenance.statement!=='ai-generated'||ce.m.generation.role!=='counterexample')throw Error('New carrier scope mismatch');
+for(const dep of ce.m.deps){const m=yaml().parse(splitFrontmatter(readFileSync(`items/${dep}.md`,'utf8')).fm);if(m.kind==='open-problem'||m.provenance?.statement==='ai-generated'||(m.status!=='published'&&m.pipeline_run!==run))throw Error('Unavailable logical supplier '+dep);}
+for(const item of ['thm-na-mini-be-smooth-velocity-error','thm-na-mini-be-smooth-integrated-pressure-error']){
+ const before=splitFrontmatter(readFileSync(`${owner}/canonical-before/${item}.md`,'utf8'));
+ for(const section of ['Facts & Assumptions','Proof',...(item.includes('integrated')?['Statement']:[])])if(sourceSectionText(before.body,section)!==sourceSectionText(sources.get(item).body,section))throw Error('Positive mathematical section changed '+item+' '+section);
+}
+const pages=JSON.parse(readFileSync(file('pages'),'utf8'));
+if(pages.length!==2||pages[0].items.length!==23||pages[1].items.length!==6)throw Error('Original inventory changed');
+const pagePath=p=>`library/${p.category}/${p.id}.md`,bPath=pagePath(pages[1]),bRaw=readFileSync(bPath,'utf8'),bm=yaml().parse(splitFrontmatter(bRaw).fm);
+if(bm.items.length||bm.examples.length!==6||pages[1].items.some(x=>!bm.examples.includes(x.id)))throw Error('B placement guard');
+const tracked=[...['pages','coverage','proof-contracts','cross-batch-dependencies'].map(file),`research/${run}-batch-41.notes.md`,...pages.map(pagePath)];
+for(const path of [...tracked,...changed.map(x=>`items/${x}.md`)]){const dest=`${archive}/${path}`;mkdirSync(dest.slice(0,dest.lastIndexOf('/')),{recursive:true});if(existsSync(dest)){if(!readFileSync(dest).equals(readFileSync(path)))throw Error('Archived pre-mutation input changed '+path);}else writeFileSync(dest,readFileSync(path),{flag:'wx'});}
+for(const p of pages)for(const row of p.items){if(!sources.has(row.id))continue;const s=sources.get(row.id);row.title=s.m.title;row.deps=s.m.deps??[];for(const k of ['forward_refs','justified_by','aliases'])if(k in s.m)row[k]=s.m[k];row.statement=(s.m.kind==='remark'?s.body.match(/## Escalation\n([\s\S]*?)(?=\n## |$)/)?.[1]:sourceSectionText(s.body,'Statement'))?.trim();if(!row.statement)throw Error('Missing current statement '+row.id);}
+pages[1].items.push({id,kind:ce.m.kind,title:ce.m.title,deps:ce.m.deps,dependency_level:9,provenance:ce.m.provenance,generation:ce.m.generation,strategy:'Complete local original-scope graded-mesh counterexample, directly authored by the original owner; no native execution or review credit inferred.',statement:sourceSectionText(ce.body,'Statement refuted').trim()});
+const all=runPages(process.cwd(),run).filter(p=>p.batch!=='41').concat(pages.map(p=>({...p,batch:'41'}))),levels=dependencyLevels(all);
+if(levels.errors.length||levels.items.size!==1456||levels.levels.get(id)!==9)throw Error('Inventory/level validation failed '+levels.errors.join(';'));
+for(const [consumer,{item}]of levels.items)if(item.deps.includes(id))throw Error('Generated CE has logical consumer '+consumer);
+writeFileSync(file('pages'),JSON.stringify(pages,null,2)+'\n');
+const match=bRaw.match(/^examples: \[[^\n]*\]$/m);if(!match)throw Error('B placement syntax changed');
+writeFileSync(bPath,bRaw.replace(match[0],`examples: [${[...bm.examples,id].join(', ')}]`));
+
+const contracts=JSON.parse(readFileSync(file('proof-contracts'),'utf8'));
+if(contracts.scope.includes(id)||contracts.contracts[id])throw Error('Duplicate contract');
+const checked=evidence=>({status:'checked',evidence}),na=reason=>({status:'not_applicable',reason});
+const cases={empty:na('The construction fixes a nonempty convex pentagon and positive finite T; empty domains are not claimed.'),zero:checked('Statement and phases27–28 use exact pressure zero and nonzero smooth solenoidal source signal; the actual positive pressure crossentry, not a zero source, supplies the refutation.'),one:na('The construction requires sufficiently large fixed N and is two dimensional; it does not assert a one-cell or one-dimensional obstruction.'),degenerate:na('Positive viscosity, positive h and a nondegenerate finite template are fixed before recursive depth; no degenerate element is used.'),endpoints:checked('Phases26–28 use s=1/8<s-prime=3/16<1/5, retain finite-time Laplace tails and choose actual positive BE steps satisfying tau-max Lambda<=1/2. The mass limit uses lower semicontinuity, not terminal-map iteration.'),'nonempty-choice':checked('A1 and1.1 explicitly retain AC and countable Hilbert subsequence selections;1.4 and phases2/15/28 choose N, then sufficiently small h, then depth with all finite geometry and parity conditions.'),'iff-forward':na('The item refutes a universal estimate by an actual counterfamily; it asserts no iff characterization.'),'iff-reverse':na('No converse or classification of all stable mesh/initialization classes is asserted.')};
+contracts.scope.push(id);contracts.contracts[id]={citations:[],derivations:[],routine_steps:[],boundaries:Object.entries(cases).map(([name,row])=>({case:name,...row}))};
+writeFileSync(file('proof-contracts'),JSON.stringify(contracts,null,2)+'\n');
+const regen=spawnSync(process.execPath,['tools/regen-contract-entries.mjs',file('proof-contracts'),id,'thm-na-mini-be-smooth-velocity-error','thm-na-mini-be-smooth-integrated-pressure-error'],{encoding:'utf8'});
+if(regen.status!==0)throw Error(regen.stderr||regen.stdout);
+
+const coverage=JSON.parse(readFileSync(file('coverage'),'utf8'));
+coverage.status='owner-resolved-both-original-instantaneous-pressure-claims-by-exact-scope-counterexamples';coverage.blockers=[];
+coverage.certification_limits=['Actual local authoring and original-owner plus independent Codex canonical review are documented separately; this coverage supplies no native execution, native independent review, adjudication or gate credit.','The cited static/source treatments are background only. The two original universal instantaneous claims are refuted by complete local counterexamples; positive velocity and primitive-pressure results are retained.'];
+for(const p of coverage.pages)for(const s of p.sources??[])for(const row of s.contents??[]){if(row.reason?.includes('unresolved full-space pressure bound'))row.reason='No pressure estimate is imported from that different scheme; the original generic and smooth instantaneous assertions have independent exact-scope local counterexamples.';if(row.reason?.includes('either proved locally or explicitly escalated'))row.reason='The chapter is 2D and does not supply these claims. Positive results are proved locally and the two original unrestricted instantaneous pressure assertions are separately refuted locally.';if(row.reason?.includes('this remains an owner escalation'))row.reason='The chapter does not prove the full-space derivative bound for this scheme. The original universal instantaneous assertions are now refuted by separate complete local constructions.';}
+for(const row of coverage.item_coverage){if(row.item==='rem-na-pe06-pressure-recovery-escalation'){row.disposition='local-contextual-refutations';row.argument='Retains both original refuted formulations, valid regular-pressure class, positive primitive results and full-derivative criterion; two contextual generated counterexamples are never logical suppliers.';}if(row.item==='thm-na-mini-navier-stokes-be-subsequential-limit')row.argument='The local theorem proves solenoidal velocity convergence. The original generic regular-pressure assertion is separately refuted; positive theorem Statement/Facts/Proof are unchanged.';}
+coverage.item_coverage.push({item:id,sources:ce.m.sources.references,disposition:'locally-proved-generated-counterexample',argument:'All geometry, mass limits, radiation/compatible-port comparison, guarded lifts, odd AVG source visibility, fractional and actual pressure observation, nonlinear extraction and genuine BE realization are proved locally in28phases. Cited sources supply static background only.',author:'/root/mini_pressure_supplier',canonical_audit:audit});
+coverage.owner_additions.smooth_disposition='Refuted under unchanged original scope by the complete generated graded mass-initialization counterexample; original velocity/primitive statements and proofs retained.';
+coverage.smooth_owner_addition={id,author:'/root/mini_pressure_supplier',route:'Actual direct Codex owner creation after the truthfully recorded spent native continuation; no new native author dispatch.',handoff:`${owner}/canonical-materialization-handoff.md`,supplier_consumers:`${owner}/canonical-supplier-use-and-consumer-dispositions.json`,canonical_audit:audit,root_focused_review:rootReview,native_coverage_adopted:false};
+writeFileSync(file('coverage'),JSON.stringify(coverage,null,2)+'\n');
+const evidenceFile=`${owner}/canonical-supplier-use-and-consumer-dispositions.json`,evidence=JSON.parse(readFileSync(evidenceFile,'utf8')),edgeEvidence=new Map(evidence.edges.map(e=>[e.supplier,e]));
+const ledger=JSON.parse(readFileSync(file('cross-batch-dependencies'),'utf8')),pending=collect(process.cwd(),run).edges.filter(e=>e.consumer===id&&!e.reviews.length);
+for(const e of pending){const ev=edgeEvidence.get(e.supplier);if(!ev||ev.verdict!=='applicable')throw Error('Missing supplier use review '+e.supplier);ledger.push({kind:'item',consumer:id,supplier:e.supplier,status:'verified',evidence:`Original owner actual current supplier read: ${ev.actual_interface} Canonical use ${ev.canonical_use}: ${ev.disposition} Evidence ${evidenceFile}. Root read this mapping and retained prior exact-interface proof reading; no native independent-review credit.`,owner_interface_record:{at:new Date().toISOString(),reviewer:'/root/mini_pressure_supplier',evidence:evidenceFile,independent_native_acceptance:false}});}
+writeFileSync(file('cross-batch-dependencies'),JSON.stringify(ledger,null,2)+'\n');
+const notes=`research/${run}-batch-41.notes.md`,oldNotes=readFileSync(notes,'utf8');
+writeFileSync(notes,`# Current owner integration — both original pressure assertions refuted\n\nRecorded ${new Date().toISOString()}. Current inventory:23A+7B=30items, same71-pair frontier. The new level9 generated counterexample is ${id}, complete local proof, original-owner consumer work and SAME-child actual canonical acceptance. All positive velocity and primitive Statements/proofs are retained except the velocity theorem's stale editorial status sentence. See ${owner}/canonical-materialization-handoff.md and ${audit}. Root alone integrates current manifests/contracts/readiness; no native execution or gate credit is inferred.\n\nThe source-author notes below are retained historical observations and counts, superseded by the actual current manifest, current coverage and dated owner integration receipt.\n\n---\n\n${oldNotes}`);
+for(const [item,s]of sources)if(readFileSync(s.path,'utf8')!==s.raw)throw Error('Concurrent source change '+item);
+const result={version:1,run,at:new Date().toISOString(),archive,original_pairs:71,pages:142,current_items:1456,batch41:{a:23,b:7},new_id:id,new_level:9,new_deps:33,actual_author:'/root/mini_pressure_supplier',canonical_audit:{file:audit,raw_sha256:sha(auditRaw)},root_focused_review:rootReview,added_cross_batch_edges:pending.map(e=>({consumer:e.consumer,supplier:e.supplier})),contract_regeneration:regen.stdout,observed_sources:[...sources].map(([id,s])=>({id,file:s.path,raw_sha256:sha(s.raw)})),current_metadata:tracked.map(p=>({file:p,raw_sha256:sha(readFileSync(p))})),readiness_changed:false,native_gate_attempted:false,native_review_or_creation_credit:false};
+writeFileSync(receipt,JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({items:1456,pairs:71,new_id:id,new_level:9,cross_batch_edges:pending.length,receipt}));

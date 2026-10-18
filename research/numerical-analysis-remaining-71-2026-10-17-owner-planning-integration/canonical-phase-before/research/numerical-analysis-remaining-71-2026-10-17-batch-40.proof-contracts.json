@@ -1,0 +1,2584 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-40",
+  "scope": [
+    "lem-anchored-metric-graph-h1-space-is-hilbert",
+    "lem-anchored-metric-graph-poincare",
+    "lem-metric-graph-kirchhoff-green-identity",
+    "lem-weighted-network-energy-kernel-and-mass-balance",
+    "thm-conservative-network-routing-conserves-flux",
+    "cor-weighted-network-gauged-cg-applicability",
+    "lem-metric-graph-p1-interpolation-estimate",
+    "thm-metric-graph-p1-parabolic-semidiscrete-stability",
+    "thm-metric-graph-weak-elliptic-problem",
+    "thm-weighted-network-semigroup-and-euler-positivity",
+    "thm-metric-graph-p1-fem-cea-and-energy-rate",
+    "cex-density-continuity-fails-unequal-speed-routing",
+    "ex-disconnected-unanchored-network-solve",
+    "ex-y-junction-metric-graph-kirchhoff-flux",
+    "ex-three-compartment-weighted-migration"
+  ],
+  "contracts": {
+    "lem-anchored-metric-graph-h1-space-is-hilbert": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-w-one-two-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. On $H^1(\\Omega)=W^{1,2}(\\Omega;\\mathbb K)$ ([[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]) define $$(u,v)_{H^1}:=(u,v)_{L^2}+\\sum_{i=1}^n(D_iu,D_iv)_{L^2},$$ with the $L^2$ inner product of [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Then $(\\cdot,\\cdot)_{H^1}$ is an inner product on the Sobolev classes whose induced norm is the $W^{1,2}$ norm of [[def-sobolev-space-wkp-and-its-norm]], and $H^1(\\Omega)$ is a Hilbert space for it. The zero-boundary space $H^1_0(\\Omega)$ is a closed subspace of $H^1(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]) and hence a Hilbert space for the restricted inner product. The pairing is linear in the first argument and conjugate-linear in the second, in the convention of [[def-real-and-complex-inner-product-space]].\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-one-dimensional-sobolev-endpoint-estimate",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice through the ACL interface of\n[[thm-acl-characterisation-of-w-one-p]]. Let $I=(a,b)$ be a bounded open\ninterval, $1\\le p<\\infty$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$u\\in W^{1,p}(I;\\mathbb K)$ have weak derivative $u'$ and unique absolutely\ncontinuous representative $u^*$\n([[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]]).\nThen for every $0<\\varepsilon<b-a$:\n\n(i) if $1<p<\\infty$,\n$$|u^*(a)|^p\\le2^{p-1}\\Bigl(\\varepsilon^{-1}\\int_a^{a+\\varepsilon}|u^*|^p+\\varepsilon^{p-1}\\int_a^{a+\\varepsilon}|u'|^p\\Bigr),$$\nand the same inequality holds at $b$ with $(b-\\varepsilon,b)$ in place of\n$(a,a+\\varepsilon)$;\n\n(ii) if $p=1$,\n$$|u^*(a)|\\le\\varepsilon^{-1}\\int_a^{a+\\varepsilon}|u^*|+\\int_a^{a+\\varepsilon}|u'|,$$\nand likewise at $b$.\n\nThe endpoint values are those of the absolutely continuous representative and\ndo not depend on the chosen representative of the class. In the form used by\nthe half-space estimates, multiplying by $\\varepsilon$ gives\n$$\\varepsilon\\,|u^*(a)|^p\\le2^{p-1}\\Bigl(\\int_a^{a+\\varepsilon}|u^*|^p+\\varepsilon^p\\int_a^{a+\\varepsilon}|u'|^p\\Bigr),$$\nwhich at $p=1$ is the unsquared inequality $\\varepsilon|u^*(a)|\\le\\int_a^{a+\\varepsilon}|u^*|+\\varepsilon\\int_a^{a+\\varepsilon}|u'|$ since $2^{0}=1$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The product is a Hilbert space: if a sequence is Cauchy in the finite\nsum-of-squares norm, each edge coordinate is Cauchy in its $H^1$ norm and\nconverges by [F1]; the finitely many coordinate limits form an element of the\nproduct and the sum of the finitely many squared errors tends to zero. The\nproduct inner product is the sum of the edge inner products.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each endpoint evaluation is a continuous linear functional on its edge\n$H^1$ space by [F2], choosing any fixed $\\epsilon>0$. For every vertex, the\ndifference of two incident endpoint evaluations is therefore continuous; its\nkernel is closed. Each anchor endpoint evaluation is also continuous and its\nzero set is closed. There are finitely many vertices, incidences, and\nanchors, so the intersection of these kernels, namely the trace-matching\nspace and then $V_D$, is closed in the product.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A Cauchy sequence in either constrained space converges in the product\nby step 1.1. Continuity of every endpoint functional from step 1.2 passes all\nmatching equalities and zero anchor values to the limit, so the limit remains\nin the same constrained space. The restricted edge-product inner product is\npositive definite and complete there. Hence both constrained spaces are\nHilbert.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2: the finite edge product over no edges is the zero Hilbert space and all trace constraints are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2: zero anchor values and equal traces are kernels of continuous endpoint functionals, including the zero function."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2: the finite product and endpoint argument apply unchanged to a single interval edge."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2: repeated constraints or an empty anchor set still define an intersection of finitely many closed kernels."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.1: both endpoint evaluations are continuous and pass their constraints to limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2: A1 identifies the general endpoint traces through the AC representative interface; the finite-product proof adds no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ]
+    },
+    "lem-anchored-metric-graph-poincare": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-anchored-finite-metric-graph-h1-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the cited one-dimensional\nrepresentative interface. A **finite metric graph**\n$\\Gamma=(V,E,\\partial_-,\\partial_+,\\ell)$ consists of finite vertex and\nedge sets $V,E$, endpoint maps $\\partial_-,\\partial_+:E\\to V$, and edge\nlengths $0<\\ell_e<\\infty$. Distinct edges with the same endpoints are\nallowed, as are loop edges with $\\partial_-e=\\partial_+e$. Every vertex is\nan endpoint of at least one edge. The two endpoint incidences $(e,-)$ and\n$(e,+)$ remain distinct even for a loop. A graph path is a finite sequence\n$z_0,e_1,z_1,\\ldots,e_n,z_n$ with $n\\ge0$ and\n$\\{\\partial_-e_j,\\partial_+e_j\\}=\n\\{z_{j-1},z_j\\}$ for every $j$; a loop permits $z_{j-1}=z_j$. Vertices in\nthe same connected edge component are those joined by such a path. Orient\neach edge only to choose its coordinate $x_e\\in[0,\\ell_e]$, with $0$ at\n$\\partial_-e$ and $\\ell_e$ at $\\partial_+e$. For $z\\in V$, let\n$\\mathcal I(z):=\\{(e,-):\\partial_-e=z\\}\\cup\\{(e,+):\\partial_+e=z\\}$\nbe its finite set of endpoint incidences.\nThe edge-product spaces are\n\n$$H:=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R),\\qquad \\mathcal W:=\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R).$$\n\nFor $w_e\\in H^1(0,\\ell_e)$, its endpoint values mean the values of the unique\nabsolutely continuous representative supplied by\n[[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]].\nThe **trace-matching graph Sobolev space** is the subspace of $\\mathcal W$\nwhose endpoint-incidence traces all agree at each vertex. For a designated\nanchor set $D\\subseteq V$, define the **anchored graph energy space**\n\n$$V_D:=\\{w\\in\\mathcal W:\\ w_{\\iota}=w_{\\iota'}\\text{ whenever }\\iota,\\iota'\\in\\mathcal I(v),\\quad w_{\\iota}=0\\text{ for each }v\\in D,\\ \\iota\\in\\mathcal I(v)\\}.$$\n\nWe equip $H$ with the edge-sum $L^2$ inner product and $V_D$ with\n\n$$\\|w\\|_{V_D}^2=\\sum_{e\\in E}\\int_0^{\\ell_e}(|w_e|^2+|w'_e|^2)\\,dx_e.$$\n\nNo Kirchhoff derivative condition is built into $V_D$; that condition is a\nnatural boundary condition of the later weak diffusion form. The elliptic\nand P1 error results below assume that $D$ meets every connected edge\ncomponent.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-anchored-finite-metric-graph-h1-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the cited one-dimensional\nrepresentative interface. A **finite metric graph**\n$\\Gamma=(V,E,\\partial_-,\\partial_+,\\ell)$ consists of finite vertex and\nedge sets $V,E$, endpoint maps $\\partial_-,\\partial_+:E\\to V$, and edge\nlengths $0<\\ell_e<\\infty$. Distinct edges with the same endpoints are\nallowed, as are loop edges with $\\partial_-e=\\partial_+e$. Every vertex is\nan endpoint of at least one edge. The two endpoint incidences $(e,-)$ and\n$(e,+)$ remain distinct even for a loop. A graph path is a finite sequence\n$z_0,e_1,z_1,\\ldots,e_n,z_n$ with $n\\ge0$ and\n$\\{\\partial_-e_j,\\partial_+e_j\\}=\n\\{z_{j-1},z_j\\}$ for every $j$; a loop permits $z_{j-1}=z_j$. Vertices in\nthe same connected edge component are those joined by such a path. Orient\neach edge only to choose its coordinate $x_e\\in[0,\\ell_e]$, with $0$ at\n$\\partial_-e$ and $\\ell_e$ at $\\partial_+e$. For $z\\in V$, let\n$\\mathcal I(z):=\\{(e,-):\\partial_-e=z\\}\\cup\\{(e,+):\\partial_+e=z\\}$\nbe its finite set of endpoint incidences.\nThe edge-product spaces are\n\n$$H:=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R),\\qquad \\mathcal W:=\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R).$$\n\nFor $w_e\\in H^1(0,\\ell_e)$, its endpoint values mean the values of the unique\nabsolutely continuous representative supplied by\n[[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]].\nThe **trace-matching graph Sobolev space** is the subspace of $\\mathcal W$\nwhose endpoint-incidence traces all agree at each vertex. For a designated\nanchor set $D\\subseteq V$, define the **anchored graph energy space**\n\n$$V_D:=\\{w\\in\\mathcal W:\\ w_{\\iota}=w_{\\iota'}\\text{ whenever }\\iota,\\iota'\\in\\mathcal I(v),\\quad w_{\\iota}=0\\text{ for each }v\\in D,\\ \\iota\\in\\mathcal I(v)\\}.$$\n\nWe equip $H$ with the edge-sum $L^2$ inner product and $V_D$ with\n\n$$\\|w\\|_{V_D}^2=\\sum_{e\\in E}\\int_0^{\\ell_e}(|w_e|^2+|w'_e|^2)\\,dx_e.$$\n\nNo Kirchhoff derivative condition is built into $V_D$; that condition is a\nnatural boundary condition of the later weak diffusion form. The elliptic\nand P1 error results below assume that $D$ meets every connected edge\ncomponent.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $E=\\varnothing$, then $H=\\{0\\}$ and the inequality is $0\\le0$.\nOtherwise fix an edge $e$ in a component containing an anchor. If $e$ is a\nloop, deleting its interior leaves the component connected because any path\nthat traverses the loop can omit that closed excursion. If its endpoints are\ndistinct, every original path that uses $e$ reaches one endpoint before\ntraversing it; after deleting $e$, vertices are therefore connected to one\nof its two endpoints. Thus removing $e$ either leaves the component connected\nor separates it into two components, one containing each endpoint. In the\nconnected case choose either endpoint; in the separated case choose the\nendpoint in the component containing an anchor. By [F3] there is a finite\npath from an anchor to that endpoint avoiding $e$. Deleting the portions\nbetween repeated vertices gives a simple path, so no edge is traversed twice.\nFor a loop choose its tail incidence; otherwise use the incidence at the\nchosen endpoint. For any $x$ on $e$, append the segment from that incidence\nto $x$. The total length is at most $L_\\Gamma$, and the common vertex traces\nagree along the path by [F1].\nSince $w=0$ at the anchor, [F1] and [F2] imply\n$$|w_e(x)|^2\\le L_\\Gamma \\sum_{a\\text{ on the concatenated path}}\\int_a|w'_a|^2 \\le L_\\Gamma\\sum_{a\\in E}\\|w'_a\\|_{L^2(a)}^2.$$",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Integrate the pointwise bound of step 1.1 over every edge and sum. The\ntotal measure of the disjoint edge interiors is\n$\\sum_e\\ell_e=L_\\Gamma$, so\n$$\\|w\\|_{L^2(\\Gamma)}^2\\le L_\\Gamma^2\\sum_{e\\in E}\\|w'_e\\|_{L^2(e)}^2.$$\nTaking nonnegative square roots proves the statement.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: the empty graph is handled explicitly as the inequality 0<=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2: the zero function satisfies the pointwise and integrated estimates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: for a single edge the chosen path runs from an anchor endpoint to the point on that edge, with length at most L-Gamma."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 handles a loop, a bridge, and parallel edges: removing a loop leaves its component connected; removing one nonloop edge either leaves the endpoints connected or separates the component into endpoint sides, one of which contains an anchor."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: the path estimate uses the common vertex traces and the anchor endpoint, then continues along the edge segment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: A1 supplies representatives; only finitely many graph paths are selected, so no stronger choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "One anchored interval path estimate",
+          "method": "exact integral calculation",
+          "input": {
+            "edge_length": "ell",
+            "function": "w(x)=x on [0,ell], anchor at 0"
+          },
+          "calculation": "||w||_L2^2=ell^3/3 and ell^2||w_prime||_L2^2=ell^2*ell=ell^3, so the stated inequality holds.",
+          "expected": {
+            "squared_left": "ell^3/3",
+            "squared_right": "ell^3"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "lem-metric-graph-kirchhoff-green-identity": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice. For $F:[a,b]\\to\\mathbb R$, the following are equivalent:\n\n1. $F$ is absolutely continuous.\n2. $F'$ exists almost everywhere, $F'\\in L^1[a,b]$, and\n$$F(x)-F(a)=\\int_a^xF'(t)\\,dt\\quad\\text{for every }x\\in[a,b].$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $E=\\varnothing$, both sides are empty sums and the identity is $0=0$.\nOtherwise fix an edge $e$. By [F1] and [F4], $u'_e$ and $v_e$ have absolutely continuous\nrepresentatives on $[0,\\ell_e]$. They are bounded there. The product\n$u'_ev_e$ is absolutely continuous: for any disjoint intervals $[a_j,b_j]$,\n$$\\sum_j|u'_e(b_j)v_e(b_j)-u'_e(a_j)v_e(a_j)| \\le \\|u'_e\\|_\\infty\\sum_j|v_e(b_j)-v_e(a_j)| +\\|v_e\\|_\\infty\\sum_j|u'_e(b_j)-u'_e(a_j)|,$$\nso the defining absolute-continuity condition follows from that of the two\nfactors. At almost every point both derivatives exist, and [F3] gives\n$(u'_ev_e)'=u''_ev_e+u'_ev'_e$. These two terms are integrable by\nCauchy–Schwarz. Applying [F2] to the product therefore yields\n$$\\int_0^{\\ell_e}u'_ev'_e\\,dx_e =-\\int_0^{\\ell_e}u''_ev_e\\,dx_e +u'_e(\\ell_e)v_e(\\ell_e)-u'_e(0)v_e(0).$$\nThe endpoint terms are the head and tail outward derivatives paired with\ntheir traces.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Multiply the identity of step 1.1 by $\\kappa_e$ and sum over the finite\nedge set. At each vertex, all endpoint-incidence values of $v$ equal the\ncommon trace $v(z)$ by definition of $V_D$; this includes both incidences\nof a loop. Regrouping the finite endpoint sum by vertices gives the displayed\nidentity. If $z\\in D$, then\n$v(z)=0$; if $z\\notin D$, the stated Kirchhoff sum is zero. Hence the\nboundary contribution vanishes under those conditions.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: the empty edge set gives empty sums on both sides, hence 0=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2: zero u or v makes the identity trivial and the finite endpoint grouping remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: integration by parts on a single interval yields precisely its head and tail terms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2: degree-one anchored vertices and free vertices with any finite degree are covered by the same finite grouping."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2: the tail incidence contributes -u-prime(0), the head incidence contributes +u-prime(ell), and both incidences of a loop are grouped at the same vertex trace."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: A1 supplies edgewise Sobolev representatives; no choice is added by the finite edge sum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "lem-weighted-network-energy-kernel-and-mass-balance": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oriented-incidence-matrix-of-a-graph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph with ordered vertices\n$V=\\{v_i:i<n\\}=\\{v_0,\\dots,v_{n-1}\\}$ and ordered edges\n$E=\\{e_j:j<m\\}=\\{e_0,\\dots,e_{m-1}\\}$. Choose, for each edge\n$e_j=\\{u,w\\}$, one endpoint as its tail and the other as its head. The resulting\n$n\\times m$ matrix $B=(b_{ij})$ with entries in $\\{-1,0,1\\}$ is an **oriented\nincidence matrix** of $G$, where, for $i<n$ and $j<m$,\n\n$$b_{ij}=\\begin{cases}1,&\\text{if }v_i\\text{ is the head of }e_j,\\\\-1,&\\text{if }v_i\\text{ is the tail of }e_j,\\\\0,&\\text{if }v_i\\notin e_j.\\end{cases}$$\n\nEach column therefore has exactly one $1$ and one $-1$, because every edge of a\nsimple graph has exactly two distinct endpoints. Different choices of\norientation change only the signs of columns.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-weighted-network-diffusion-data",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph with ordered vertex and edge sets.\nChoose an orientation of each edge and let $B\\in\\mathbb R^{V\\times E}$ be\nthe resulting incidence matrix of\n[[def-oriented-incidence-matrix-of-a-graph]]: a column has $-1$ at its tail,\n$+1$ at its head, and zero elsewhere. Let $D\\subseteq V$ be the vertices with\nprescribed Dirichlet values and let $I=V\\setminus D$ be the free vertices.\nAssign a mass $m_i>0$ to each $i\\in I$ and a conductance $c_e\\ge0$ to each\n$e\\in E$. Put\n\n$$M=\\operatorname{diag}(m_i)_{i\\in I},\\qquad C=\\operatorname{diag}(c_e)_{e\\in E},\\qquad L_C=BCB^{\\mathsf T}.$$\n\nThe matrix $L_C$ is the **conductance-weighted graph stiffness**. Its free\nDirichlet restriction $L_D$ is the principal submatrix $(L_C)_{I,I}$. The\nfinite weighted network diffusion equation is\n\n$$M u'(t)+L_Du(t)=f(t),$$\n\nwhere $u(t)\\in\\mathbb R^I$ and $f(t)\\in\\mathbb R^I$. If $D=\\varnothing$,\nthis is the closed Neumann network equation. If the boundary values are\ninstead a nonzero vector $g(t)$, restriction of $L_C(u,g)$ to $I$ gives\n$M u'+L_Du=f-(L_C)_{I,D}g$.\n\nWhen every $c_e=1$, $L_C=BB^{\\mathsf T}$ agrees with the ordinary graph\nLaplacian by\n[[thm-laplacian-is-the-oriented-incidence-product]]. Zero conductances are\nallowed and remove those edges from the diffusion coupling; they do not remove\nthe vertices or masses.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Reversing an edge orientation replaces its incidence column $b_e$ by\n$-b_e$, but the contribution $c_eb_eb_e^{\\mathsf T}$ to $BCB^{\\mathsf T}$\ndoes not change. For the zero extension $\\bar x$, [F1] gives\n$b_e^{\\mathsf T}\\bar x=\\bar x_{\\mathrm{head}(e)}\n-\\bar x_{\\mathrm{tail}(e)}$. Expanding\n$\\bar x^{\\mathsf T}BCB^{\\mathsf T}\\bar x\n=\\sum_ec_e(b_e^{\\mathsf T}\\bar x)^2$ proves the displayed energy identity.\nIt is nonnegative term by term, so $L_D$ is symmetric positive semidefinite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $L_Dx=0$, step 1.1 gives a sum of nonnegative terms equal to\n$x^{\\mathsf T}L_Dx=0$. For every $e\\in E_+$ its endpoint difference must\ntherefore be zero. Along every path in $G_+$, $\\bar x$ has equal values at\nsuccessive vertices, hence is constant on each positive-conductance\ncomponent; it is zero on any such component meeting $D$ because $\\bar x=0$\nthere. Conversely, if these componentwise conditions hold, every edge with\n$c_e>0$ has zero endpoint difference, while an edge with $c_e=0$ contributes\nzero regardless of its difference. Thus $BCB^{\\mathsf T}\\bar x=0$ and\n$L_Dx=0$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $D=\\varnothing$. From [F1], every column of $B$ sums to zero,\nso $\\mathbf1^{\\mathsf T}B=0$ and therefore\n$\\mathbf1^{\\mathsf T}L_C=0$. Multiplying\n$Mu'+L_Cu=f$ on the left by $\\mathbf1^{\\mathsf T}$ gives\n$\\mathbf1^{\\mathsf T}Mu'+\\mathbf1^{\\mathsf T}L_Cu\n=\\mathbf1^{\\mathsf T}f$. The second term vanishes, and the first is the\nderivative of $\\mathbf1^{\\mathsf T}Mu$, proving the balance law and its\nhomogeneous conservation case.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, and 2.1: if there are no edges the energy and incidence sums are empty; isolated vertices are singleton positive-conductance components, so the stated kernel description still applies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2: zero conductances contribute zero and impose no endpoint-difference constraint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2: a single positive edge gives exactly equality of its two endpoint values in the kernel."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2: components meeting Dirichlet vertices have zero constant, while components without anchors retain their constant kernel modes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is a finite matrix or flux statement and has no interval endpoint or trace condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1: all operations are finite sums and matrix identities; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separately stated biconditional beyond the characterization addressed as a whole in the cited proof; this direction is not an additional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separately stated biconditional beyond the characterization addressed as a whole in the cited proof; this direction is not an additional claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "thm-conservative-network-routing-conserves-flux": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conservative-network-advection-routing",
+          "source_section": "Definition",
+          "quote": "At a directed network junction, let $n_{\\rm in}$ edges carry nonnegative\nincoming **mass fluxes** $q^{\\rm in}_i$ into the junction, and let\n$n_{\\rm out}$ edges carry outgoing mass fluxes. A **conservative nonnegative\nrouting matrix** is a real matrix\n$P\\in\\mathbb R^{n_{\\rm out}\\times n_{\\rm in}}$ such that\n\n$$P_{ji}\\ge0,\\qquad \\sum_{j=1}^{n_{\\rm out}}P_{ji}=1 \\quad(1\\le i\\le n_{\\rm in}).$$\n\nIt routes the incoming flux vector to\n$q^{\\rm out}=Pq^{\\rm in}$. The column $i$ distributes the mass flux arriving\non incoming edge $i$ among the outgoing edges. The column-sum condition\nstipulates no source or sink at the junction. It is a model condition on flux;\nit does not assert that the densities on incident edges are equal.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every outgoing index $j$,\n$q^{\\rm out}_j=\\sum_iP_{ji}q^{\\rm in}_i$ is a sum of nonnegative terms by\n[F1] and the assumption $q^{\\rm in}\\ge0$. Hence $q^{\\rm out}\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "All sums are finite, so they may be interchanged:\n$$\\sum_jq^{\\rm out}_j =\\sum_j\\sum_iP_{ji}q^{\\rm in}_i =\\sum_i\\left(\\sum_jP_{ji}\\right)q^{\\rm in}_i =\\sum_iq^{\\rm in}_i,$$\nwhere the final equality uses the unit column sums of [F1].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: if the incoming vector is empty, both totals are zero; if the outgoing index set is empty and an incoming column exists, no matrix can satisfy its unit column sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: zero incoming flux maps to zero and the total identity remains true."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.2: one incoming and one outgoing index gives P=[1] and preserves the scalar flux."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: zero-dimensional input/output shapes are covered by finite sums whenever the unit-column condition is satisfiable."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is a finite matrix or flux statement and has no interval endpoint or trace condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2 are finite sums and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Two-input three-output routing balance",
+          "method": "exact rational finite sum",
+          "input": {
+            "P": [
+              [
+                "1/4",
+                "0"
+              ],
+              [
+                "3/4",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ]
+            ],
+            "incoming": [
+              "2",
+              "4"
+            ]
+          },
+          "calculation": "Each incoming column sums to 1. The output is (1/2, 7/2, 2), whose total is 6, equal to 2+4.",
+          "expected": {
+            "outgoing": [
+              "1/2",
+              "7/2",
+              "2"
+            ],
+            "total": "6"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "cor-weighted-network-gauged-cg-applicability": {
+      "risk": "high",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-network-diffusion-data",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph with ordered vertex and edge sets.\nChoose an orientation of each edge and let $B\\in\\mathbb R^{V\\times E}$ be\nthe resulting incidence matrix of\n[[def-oriented-incidence-matrix-of-a-graph]]: a column has $-1$ at its tail,\n$+1$ at its head, and zero elsewhere. Let $D\\subseteq V$ be the vertices with\nprescribed Dirichlet values and let $I=V\\setminus D$ be the free vertices.\nAssign a mass $m_i>0$ to each $i\\in I$ and a conductance $c_e\\ge0$ to each\n$e\\in E$. Put\n\n$$M=\\operatorname{diag}(m_i)_{i\\in I},\\qquad C=\\operatorname{diag}(c_e)_{e\\in E},\\qquad L_C=BCB^{\\mathsf T}.$$\n\nThe matrix $L_C$ is the **conductance-weighted graph stiffness**. Its free\nDirichlet restriction $L_D$ is the principal submatrix $(L_C)_{I,I}$. The\nfinite weighted network diffusion equation is\n\n$$M u'(t)+L_Du(t)=f(t),$$\n\nwhere $u(t)\\in\\mathbb R^I$ and $f(t)\\in\\mathbb R^I$. If $D=\\varnothing$,\nthis is the closed Neumann network equation. If the boundary values are\ninstead a nonzero vector $g(t)$, restriction of $L_C(u,g)$ to $I$ gives\n$M u'+L_Du=f-(L_C)_{I,D}g$.\n\nWhen every $c_e=1$, $L_C=BB^{\\mathsf T}$ agrees with the ordinary graph\nLaplacian by\n[[thm-laplacian-is-the-oriented-incidence-product]]. Zero conductances are\nallowed and remove those edges from the diffusion coupling; they do not remove\nthe vertices or masses.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-weighted-network-energy-kernel-and-mass-balance",
+          "source_section": "Statement",
+          "quote": "Use the data of [[def-finite-weighted-network-diffusion-data]]. Let\n$E_+=\\{e\\in E:c_e>0\\}$ and let $G_+=(V,E_+)$; its connected components are\nthe **positive-conductance components**. For $x\\in\\mathbb R^I$, let\n$\\bar x\\in\\mathbb R^V$ equal $x$ on $I$ and $0$ on $D$. Then\n\n$$x^{\\mathsf T}L_Dx=\\sum_{e\\in E}c_e (\\bar x_{\\mathrm{head}(e)}-\\bar x_{\\mathrm{tail}(e)})^2\\ge0.$$\n\nConsequently $L_D$ is symmetric positive semidefinite, and $x\\in\\ker L_D$\nexactly when $\\bar x$ is constant on each positive-conductance component and\nthat constant is zero on every such component meeting $D$. In the closed\ncase $D=\\varnothing$, every differentiable solution of\n$Mu'+L_Cu=f$ satisfies\n\n$$\\frac{d}{dt}\\mathbf1^{\\mathsf T}Mu(t)=\\mathbf1^{\\mathsf T}f(t).$$\n\nThus homogeneous closed diffusion conserves weighted mass\n$\\mathbf1^{\\mathsf T}Mu$, which need not equal the unweighted sum\n$\\mathbf1^{\\mathsf T}u$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$\n\n",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error",
+          "source_section": "Statement",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, let $x_0$ be an initial\nguess, let $x_*$ be the exact solution of $Ax=b$, and let $x_m$ be the $m$th\nconjugate-gradient iterate with initial residual $r_0=b-Ax_0$. Then $x_m$ is\nthe unique Krylov Galerkin iterate in $x_0+K_m(A,r_0)$, and for every\n$x\\in x_0+K_m(A,r_0)$,\n\n$$\\|x_*-x_m\\|_A\\le \\|x_*-x\\|_A,$$\n\nwith equality only when $x=x_m$.\n\n",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-weighted-network-diffusion-data",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph with ordered vertex and edge sets.\nChoose an orientation of each edge and let $B\\in\\mathbb R^{V\\times E}$ be\nthe resulting incidence matrix of\n[[def-oriented-incidence-matrix-of-a-graph]]: a column has $-1$ at its tail,\n$+1$ at its head, and zero elsewhere. Let $D\\subseteq V$ be the vertices with\nprescribed Dirichlet values and let $I=V\\setminus D$ be the free vertices.\nAssign a mass $m_i>0$ to each $i\\in I$ and a conductance $c_e\\ge0$ to each\n$e\\in E$. Put\n\n$$M=\\operatorname{diag}(m_i)_{i\\in I},\\qquad C=\\operatorname{diag}(c_e)_{e\\in E},\\qquad L_C=BCB^{\\mathsf T}.$$\n\nThe matrix $L_C$ is the **conductance-weighted graph stiffness**. Its free\nDirichlet restriction $L_D$ is the principal submatrix $(L_C)_{I,I}$. The\nfinite weighted network diffusion equation is\n\n$$M u'(t)+L_Du(t)=f(t),$$\n\nwhere $u(t)\\in\\mathbb R^I$ and $f(t)\\in\\mathbb R^I$. If $D=\\varnothing$,\nthis is the closed Neumann network equation. If the boundary values are\ninstead a nonzero vector $g(t)$, restriction of $L_C(u,g)$ to $I$ gives\n$M u'+L_Du=f-(L_C)_{I,D}g$.\n\nWhen every $c_e=1$, $L_C=BB^{\\mathsf T}$ agrees with the ordinary graph\nLaplacian by\n[[thm-laplacian-is-the-oriented-incidence-product]]. Zero conductances are\nallowed and remove those edges from the diffusion coupling; they do not remove\nthe vertices or masses.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the grounded condition, suppose $x\\in\\mathbb R^I$ and\n$x^{\\mathsf T}L_Dx=0$. By [F1], the zero extension of $x$ is constant on\neach positive-conductance component and zero on each such component\nmeeting $D$. The grounded condition says every component containing a free\nvertex meets $D$, so every free coordinate is zero. Thus $L_D$ has trivial\nkernel; it is symmetric positive semidefinite by [F1], hence positive\ndefinite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the closed case, let $K=\\ker L_C$. Symmetry implies\n$L_C(K^\\perp)\\subseteq K^\\perp$: for $x\\in K^\\perp$ and $k\\in K$,\n$k^{\\mathsf T}L_Cx=(L_Ck)^{\\mathsf T}x=0$. If a vector\n$x\\in K^\\perp$ has $x^{\\mathsf T}L_Cx=0$, [F1] puts $x$ in $K$; hence\n$x=0$. Therefore the restriction $L_C|_{K^\\perp}$ is positive definite.\nIt has trivial kernel and is an endomorphism of the finite-dimensional\nspace $K^\\perp$, so [F2] makes it onto. Thus each $b\\in K^\\perp$ has one\ngauged solution $u\\in K^\\perp$. By [F5], an orthonormal basis of\n$K^\\perp$ identifies this restriction with a real symmetric positive\ndefinite matrix, including the zero-dimensional case.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\tau>0$ and any nonzero $x$, [F1] and [F4] give\n$x^{\\mathsf T}(M+\\tau L_D)x=x^{\\mathsf T}Mx+\\tau x^{\\mathsf T}L_Dx\n\\ge\\sum_i m_ix_i^2>0$. Thus $M+\\tau L_D$ is positive definite.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The grounded matrix from step 1.1, the restricted Neumann matrix in the\northonormal coordinates constructed in the preceding argument, and the shifted\nmass matrix from step 2.1 are all real symmetric\npositive definite on their stated spaces. Each therefore has trivial kernel\nand is onto by [F2] on its finite-dimensional domain, so each right-hand\nside has a unique solution. Applying [F3] gives the exact-arithmetic CG\nKrylov Galerkin and energy-minimization conclusions.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.2 and the Statement: if K-perp is zero-dimensional, the empty orthonormal basis gives the vacuous restricted solver claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.1: with zero conductances the closed kernel is the full state space and K-perp is zero; the mass-shifted matrix remains positive definite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1: a one-dimensional grounded stiffness is positive exactly when the grounding condition removes its sole constant mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, and 2.2: the zero-dimensional gauge and zero-dimensional spaces are included; no solver claim is made outside the stated grounding condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is a finite matrix or flux statement and has no interval endpoint or trace condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–2.2: the proof uses finite-dimensional rank-nullity and an orthonormal basis, with no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Grounded and gauged two-vertex stiffness",
+          "method": "exact finite-dimensional eigenvalue calculation",
+          "input": {
+            "grounded_free_to_dirichlet_conductance": "2",
+            "closed_conductance": "2"
+          },
+          "calculation": "The grounded free matrix is [2], positive definite. The closed matrix [[2,-2],[-2,2]] has K=span((1,1)); on the unit direction (1,-1)/sqrt(2) in K-perp it acts by eigenvalue 4.",
+          "expected": {
+            "grounded_eigenvalue": "2",
+            "gauged_eigenvalue": "4"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "lem-metric-graph-p1-interpolation-estimate": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-graph-p1-edge-mesh",
+          "source_section": "Definition",
+          "quote": "Assume $E\\ne\\varnothing$. For each edge $e$, choose a finite partition\n$$0=x_{e,0}<x_{e,1}<\\cdots<x_{e,N_e}=\\ell_e,$$\nwhere $N_e\\ge1$, and let $\\mathcal T_h$ be the union of the resulting\ninterval cells $K_{e,j}=[x_{e,j-1},x_{e,j}]$. Set\n$h=\\max_{e,j}(x_{e,j}-x_{e,j-1})$. The conforming **P1 edge space** is\n$$V_h=\\{w\\in V_D:\\ w_e\\text{ is affine on every }K_{e,j}\\}.$$\nThus internal nodal values are single-valued along each edge, while the\noriginal-vertex matching and zero-anchor conditions are inherited from\n$V_D$. The maximum step $h$ is positive and finite because the mesh has\nfinitely many cells of positive length.\n\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an edge cell $K=[a,b]$ of length $h_K=b-a$. By [F1] and [F2], the\ncontinuous representative of $u_e$ has endpoint values and the\nrepresentative of $u'_e$ is absolutely continuous. Thus the slope of the\nnodal interpolant on $K$ is\n$$s_K=\\frac{u_e(b)-u_e(a)}{h_K} =\\frac1{h_K}\\int_a^b u'_e(y)\\,dy.$$\nThe fundamental theorem in [F2] justifies this equality.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any $x\\in K$, [F2] and [F3] give\n$$|u'_e(x)-s_K| \\le\\frac1{h_K}\\int_a^b|u'_e(x)-u'_e(y)|\\,dy \\le\\frac1{h_K}\\int_a^b\\sqrt{h_K}\\|u''_e\\|_{L^2(K)}\\,dy =\\sqrt{h_K}\\|u''_e\\|_{L^2(K)}.$$\nSquaring and integrating over $x\\in K$ yields\n$$\\|(u_e-I_hu_e)'\\|_{L^2(K)}^2 =\\|u'_e-s_K\\|_{L^2(K)}^2 \\le h_K^2\\|u''_e\\|_{L^2(K)}^2.$$\nThe first equality holds because the derivative of the nodal interpolant is\nthe constant slope $s_K$ on K.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiply the cell estimate in step 1.2 by $\\kappa_e$, sum over all\ncells, and use $h_K\\le h$. The cells partition the edge interiors and their\nfinitely many endpoints have measure zero. Hence\n$$\\sum_e\\kappa_e\\|(u_e-I_hu_e)'\\|_{L^2(e)}^2 \\le h^2\\sum_e\\kappa_e\\|u''_e\\|_{L^2(e)}^2.$$\nTaking square roots proves the displayed error estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "At an original vertex, the endpoint nodal value at every incident\nendpoint incidence is the common trace of $u$, so all interpolant traces\nagree, including both ends of a loop. At each anchor\nthe nodal value is zero. Thus $I_hu\\in V_D$ and it is affine on every cell\nby construction, which is exactly membership in $V_h$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a nonempty graph, mesh, or example, so the empty object is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.1: u=0 gives zero interpolation error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–2.2: one positive-length cell is permitted and the slope estimate and endpoint matching still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1: strict mesh partitions prohibit zero-length cells; the maximum h is positive and finite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.2: nodal interpolation copies common original-vertex traces and zero anchor values exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2: A1 supplies representatives of u and u-prime; the remaining estimates are finite sums and Cauchy-Schwarz."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "One-cell quadratic interpolation error",
+          "method": "exact integral calculation",
+          "input": {
+            "edge": "[0,1]",
+            "mesh_cells": 1,
+            "function": "u(x)=x(1-x)",
+            "diffusivity": "1"
+          },
+          "calculation": "The endpoint interpolant is zero. ||u_prime||_L2=sqrt(1/3), while h||u_second||_L2=1*2=2.",
+          "expected": {
+            "energy_error": "sqrt(1/3)",
+            "upper_bound": "2"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "thm-metric-graph-p1-parabolic-semidiscrete-stability": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).\n\n1. On **real** $L^2(\\mu)$ the formula\n   $$\\langle f,g\\rangle:=\\int fg\\,d\\mu$$is a well-defined inner product, linear in both variables, positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\\mu;\\mathbb C)$ the formula$$\\langle f,g\\rangle:=\\int f\\overline g\\,d\\mu$$\n   is a well-defined inner product, linear in the first variable and\n   conjugate-linear in the second, positive definite, with\n   $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu;\\mathbb C)$ is a complex\n   Hilbert space ([[def-complex-lp-and-euclidean-test-function-conventions]]).\n\nIn both cases the inner product induces exactly the established quotient\n$L^2$ norm.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-anchored-finite-metric-graph-h1-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the cited one-dimensional\nrepresentative interface. A **finite metric graph**\n$\\Gamma=(V,E,\\partial_-,\\partial_+,\\ell)$ consists of finite vertex and\nedge sets $V,E$, endpoint maps $\\partial_-,\\partial_+:E\\to V$, and edge\nlengths $0<\\ell_e<\\infty$. Distinct edges with the same endpoints are\nallowed, as are loop edges with $\\partial_-e=\\partial_+e$. Every vertex is\nan endpoint of at least one edge. The two endpoint incidences $(e,-)$ and\n$(e,+)$ remain distinct even for a loop. A graph path is a finite sequence\n$z_0,e_1,z_1,\\ldots,e_n,z_n$ with $n\\ge0$ and\n$\\{\\partial_-e_j,\\partial_+e_j\\}=\n\\{z_{j-1},z_j\\}$ for every $j$; a loop permits $z_{j-1}=z_j$. Vertices in\nthe same connected edge component are those joined by such a path. Orient\neach edge only to choose its coordinate $x_e\\in[0,\\ell_e]$, with $0$ at\n$\\partial_-e$ and $\\ell_e$ at $\\partial_+e$. For $z\\in V$, let\n$\\mathcal I(z):=\\{(e,-):\\partial_-e=z\\}\\cup\\{(e,+):\\partial_+e=z\\}$\nbe its finite set of endpoint incidences.\nThe edge-product spaces are\n\n$$H:=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R),\\qquad \\mathcal W:=\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R).$$\n\nFor $w_e\\in H^1(0,\\ell_e)$, its endpoint values mean the values of the unique\nabsolutely continuous representative supplied by\n[[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]].\nThe **trace-matching graph Sobolev space** is the subspace of $\\mathcal W$\nwhose endpoint-incidence traces all agree at each vertex. For a designated\nanchor set $D\\subseteq V$, define the **anchored graph energy space**\n\n$$V_D:=\\{w\\in\\mathcal W:\\ w_{\\iota}=w_{\\iota'}\\text{ whenever }\\iota,\\iota'\\in\\mathcal I(v),\\quad w_{\\iota}=0\\text{ for each }v\\in D,\\ \\iota\\in\\mathcal I(v)\\}.$$\n\nWe equip $H$ with the edge-sum $L^2$ inner product and $V_D$ with\n\n$$\\|w\\|_{V_D}^2=\\sum_{e\\in E}\\int_0^{\\ell_e}(|w_e|^2+|w'_e|^2)\\,dx_e.$$\n\nNo Kirchhoff derivative condition is built into $V_D$; that condition is a\nnatural boundary condition of the later weak diffusion form. The elliptic\nand P1 error results below assume that $D$ meets every connected edge\ncomponent.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with $n\\ge1$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then $C_c^\\infty(\\Omega;\\mathbb K)$ is dense in $L^2(\\Omega;\\mathbb K)$: for every $f\\in L^2(\\Omega;\\mathbb K)$ and every $\\delta>0$ there is $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with $\\|\\varphi-f\\|_{L^2(\\Omega)}<\\delta$. Consequently $H^1_0(\\Omega)$ is dense in $L^2(\\Omega)$, and if a class $h\\in L^2(\\Omega)$ satisfies $(h,v)_{L^2}=0$ for all $v\\in H^1_0(\\Omega)$, then $h=0$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-anchored-metric-graph-h1-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For a finite metric graph and anchor set $D$, the trace-matching space and\nthe anchored space $V_D$ of\n[[def-anchored-finite-metric-graph-h1-space]] are closed real Hilbert\nsubspaces of $\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R)$ with the\nedge-product $H^1$ inner product.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-anchored-finite-metric-graph-h1-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the cited one-dimensional\nrepresentative interface. A **finite metric graph**\n$\\Gamma=(V,E,\\partial_-,\\partial_+,\\ell)$ consists of finite vertex and\nedge sets $V,E$, endpoint maps $\\partial_-,\\partial_+:E\\to V$, and edge\nlengths $0<\\ell_e<\\infty$. Distinct edges with the same endpoints are\nallowed, as are loop edges with $\\partial_-e=\\partial_+e$. Every vertex is\nan endpoint of at least one edge. The two endpoint incidences $(e,-)$ and\n$(e,+)$ remain distinct even for a loop. A graph path is a finite sequence\n$z_0,e_1,z_1,\\ldots,e_n,z_n$ with $n\\ge0$ and\n$\\{\\partial_-e_j,\\partial_+e_j\\}=\n\\{z_{j-1},z_j\\}$ for every $j$; a loop permits $z_{j-1}=z_j$. Vertices in\nthe same connected edge component are those joined by such a path. Orient\neach edge only to choose its coordinate $x_e\\in[0,\\ell_e]$, with $0$ at\n$\\partial_-e$ and $\\ell_e$ at $\\partial_+e$. For $z\\in V$, let\n$\\mathcal I(z):=\\{(e,-):\\partial_-e=z\\}\\cup\\{(e,+):\\partial_+e=z\\}$\nbe its finite set of endpoint incidences.\nThe edge-product spaces are\n\n$$H:=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R),\\qquad \\mathcal W:=\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R).$$\n\nFor $w_e\\in H^1(0,\\ell_e)$, its endpoint values mean the values of the unique\nabsolutely continuous representative supplied by\n[[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]].\nThe **trace-matching graph Sobolev space** is the subspace of $\\mathcal W$\nwhose endpoint-incidence traces all agree at each vertex. For a designated\nanchor set $D\\subseteq V$, define the **anchored graph energy space**\n\n$$V_D:=\\{w\\in\\mathcal W:\\ w_{\\iota}=w_{\\iota'}\\text{ whenever }\\iota,\\iota'\\in\\mathcal I(v),\\quad w_{\\iota}=0\\text{ for each }v\\in D,\\ \\iota\\in\\mathcal I(v)\\}.$$\n\nWe equip $H$ with the edge-sum $L^2$ inner product and $V_D$ with\n\n$$\\|w\\|_{V_D}^2=\\sum_{e\\in E}\\int_0^{\\ell_e}(|w_e|^2+|w'_e|^2)\\,dx_e.$$\n\nNo Kirchhoff derivative condition is built into $V_D$; that condition is a\nnatural boundary condition of the later weak diffusion form. The elliptic\nand P1 error results below assume that $D$ meets every connected edge\ncomponent.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-anchored-metric-graph-poincare",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and assume every connected edge component of the finite metric graph $\\Gamma$\nhas at least one anchor in $D$. Put\n$L_\\Gamma=\\sum_{e\\in E}\\ell_e$. Then every $w\\in V_D$ satisfies\n\n$$\\|w\\|_{L^2(\\Gamma)}\\le L_\\Gamma \\left(\\sum_{e\\in E}\\|w'_e\\|_{L^2(e)}^2\\right)^{1/2}.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-parabolic-finite-dimensional-measurable-ode",
+          "source_section": "Statement",
+          "quote": "Let $V_h$ be a finite-dimensional real subspace of an evolution space $V$,\ncontinuously included in $H$. Let $a(t;\\cdot,\\cdot)$ be real bilinear,\nmeasurable in $t$, uniformly bounded by $M$ and coercive by $\\alpha>0$ on\n$V_h$. If $f\\in L^2(0,T;V_h^*)$ and $u_h^0\\in V_h$, then there is a unique\n$u_h\\in H^1(0,T;V_h)$ with $u_h(0)=u_h^0$ and\n$$((u_h)'(t),v_h)_H+a(t;u_h(t),v_h)=\\langle f(t),v_h\\rangle$$\nfor every $v_h\\in V_h$ and almost every $t$. It satisfies\n$$\\|u_h(t)\\|_H^2+\\alpha\\int_0^t\\|u_h(s)\\|_V^2\\,ds \\le \\|u_h^0\\|_H^2+\\alpha^{-1}\\int_0^t\\|f(s)\\|_{V_h^*}^2\\,ds.$$\nHere $H^1(0,T;V_h)$ means absolutely continuous $V_h$-valued coefficient\nfunctions whose value and derivative are square-integrable.\n\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-parabolic-evolution-triple-and-energy-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $H$ be real Hilbert spaces and let $i:V\\to H$ be an injective,\ncontinuous linear map with dense range. Let $V^*$ be the continuous real linear\ndual of $V$. Identify $H$ with its Hilbert dual by its inner product and embed\n$H$ into $V^*$ by\n$$h\\longmapsto\\bigl(v\\longmapsto (h,i v)_H\\bigr).$$\nThe resulting dense continuous embeddings are written\n$$V\\hookrightarrow H\\cong H^*\\hookrightarrow V^*$$\nand $(V,H,V^*)$ is called an **evolution triple**. The pairing between $V^*$\nand $V$ is denoted $\\langle\\cdot,\\cdot\\rangle_{V^*,V}$.\n\nFor a Hilbert space $X$, $L^2(0,T;X)$ is the space of equivalence classes of\nstrongly measurable $X$-valued functions $w$ with\n$$\\int_0^T\\|w(t)\\|_X^2\\,dt<\\infty.$$\nStrong measurability means being an almost-everywhere pointwise limit of\nmeasurable simple functions. For $u\\in L^2(0,T;V)$ and $g\\in L^2(0,T;V^*)$,\nsay that $g$ is the **weak time derivative** of $u$ when\n$$\\int_0^T (i u(t),i v)_H\\,\\phi'(t)\\,dt =-\\int_0^T\\langle g(t),v\\rangle_{V^*,V}\\,\\phi(t)\\,dt$$\nfor every $v\\in V$ and every $\\phi\\in C_c^\\infty(0,T)$. The derivative is\nunique up to equality almost everywhere. The **parabolic energy space** is\n$$W(0,T;V):=\\{u\\in L^2(0,T;V):u'\\in L^2(0,T;V^*)\\},$$\nwith norm\n$$\\|u\\|_{W(0,T;V)}:=\\bigl(\\|u\\|_{L^2(0,T;V)}^2+ \\|u'\\|_{L^2(0,T;V^*)}^2\\bigr)^{1/2}.$$\nNo endpoint values are part of this definition; they are assigned only after\na continuous $H$ trace representative has been proved. Separability is an\nadditional hypothesis when it is needed by a later result.\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-metric-graph-p1-edge-mesh",
+          "source_section": "Definition",
+          "quote": "Assume $E\\ne\\varnothing$. For each edge $e$, choose a finite partition\n$$0=x_{e,0}<x_{e,1}<\\cdots<x_{e,N_e}=\\ell_e,$$\nwhere $N_e\\ge1$, and let $\\mathcal T_h$ be the union of the resulting\ninterval cells $K_{e,j}=[x_{e,j-1},x_{e,j}]$. Set\n$h=\\max_{e,j}(x_{e,j}-x_{e,j-1})$. The conforming **P1 edge space** is\n$$V_h=\\{w\\in V_D:\\ w_e\\text{ is affine on every }K_{e,j}\\}.$$\nThus internal nodal values are single-valued along each edge, while the\noriginal-vertex matching and zero-anchor conditions are inherited from\n$V_D$. The maximum step $h$ is positive and finite because the mesh has\nfinitely many cells of positive length.\n\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The canonical inclusion $i:V_D\\to H$ is continuous because\n$\\|v\\|_H\\le\\|v\\|_{V_D}$. It is injective because $V_D$ consists of Sobolev\nclasses included in the edge-product $L^2$ classes. To prove density, fix\n$g=(g_e)\\in H$ and $\\epsilon>0$. By [F2] and finite choice, choose for each\nof the finitely many edges a $\\phi_e\\in C_c^\\infty(0,\\ell_e)$ with\n$\\|g_e-\\phi_e\\|_{L^2(e)}<\\epsilon/\\sqrt{|E|}$. The edge-product function\n$\\phi=(\\phi_e)$ has zero endpoint traces, hence belongs to $V_D$, and\n$\\|g-\\phi\\|_H^2=\\sum_e\\|g_e-\\phi_e\\|_{L^2(e)}^2<\\epsilon^2$. Thus the range\nof i is dense in H.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "A2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1] and [F3], H and V_D are real Hilbert spaces with dense\ncontinuous inclusion. With V_D^* as its continuous real dual, these spaces\nform the evolution triple of\n[[def-parabolic-evolution-triple-and-energy-space]]. The mesh has finitely\nmany cells, and a P1 function is determined by its finite list of nodal\nvalues; the vertex matching and anchor conditions are linear. Therefore\nV_h is a finite-dimensional subspace of V_D by [F8].",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4] and [F6], the form a is bounded by M=κmax and coercive by α on V_D, hence\nalso on V_h. The restriction F_h(t):=f(t)|_{V_h} is a bounded functional\nand its norm is at most \\|f(t)\\|_{V^*}; restriction is a continuous linear\nmap from V_D^* to V_h^*, so F_h is strongly measurable and square-integrable.\nThus all hypotheses of [F5] hold for the evolution triple and finite P1\nsubspace of step 1.2.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [F5] gives the unique semidiscrete solution and its energy\nestimate for every t in [0,T]. No spatial approximation rate is part of\n[F5], so none follows here.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a nonempty graph, mesh, or example, so the empty object is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: zero initial data and zero force give the zero semidiscrete solution and zero energy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–3.1: the finite-dimensional ODE argument covers one edge and a one-dimensional P1 space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.2 and 3.1: V_h={0} is permitted by the finite-dimensional ODE result, and the claimed bound is then immediate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: compactly supported edge tests vanish at all endpoints and the graph-space inclusion enforces anchor traces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: AC is inherited by graph traces; CC is used by the edge L2 Hilbert and smooth-density interfaces, while the ODE theorem adds no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "One-dimensional graph P1 heat mode",
+          "method": "exact scalar ODE and energy calculation",
+          "input": {
+            "edge": "[0,1]",
+            "anchor": "0",
+            "P1_basis": "phi(x)=x",
+            "diffusivity": "kappa>0",
+            "load": "0"
+          },
+          "calculation": "(phi,phi)_H=1/3 and a(phi,phi)=kappa, so c(t)=c0 exp(-3 kappa t). With alpha=kappa/2 and ||phi||_V^2=4/3, the left side of the stated energy estimate is c0^2(1/9+2 exp(-6 kappa t)/9) <= c0^2/3.",
+          "expected": {
+            "ode": "c′+3 kappa c=0",
+            "energy_bound": "holds"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.2"
+          ]
+        }
+      ]
+    },
+    "thm-metric-graph-weak-elliptic-problem": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-anchored-metric-graph-h1-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For a finite metric graph and anchor set $D$, the trace-matching space and\nthe anchored space $V_D$ of\n[[def-anchored-finite-metric-graph-h1-space]] are closed real Hilbert\nsubspaces of $\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R)$ with the\nedge-product $H^1$ inner product.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-anchored-metric-graph-poincare",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and assume every connected edge component of the finite metric graph $\\Gamma$\nhas at least one anchor in $D$. Put\n$L_\\Gamma=\\sum_{e\\in E}\\ell_e$. Then every $w\\in V_D$ satisfies\n\n$$\\|w\\|_{L^2(\\Gamma)}\\le L_\\Gamma \\left(\\sum_{e\\in E}\\|w'_e\\|_{L^2(e)}^2\\right)^{1/2}.$$\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-metric-graph-kirchhoff-green-identity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Orient each edge coordinate from $0$ at\n$\\partial_-e$ to $\\ell_e$ at $\\partial_+e$. For endpoint incidences\n$(e,-)$ and $(e,+)$ define the outward derivatives by\n$\\partial_{\\nu_{(e,-)}}u_e=-u'_e(0)$ and\n$\\partial_{\\nu_{(e,+)}}u_e=+u'_e(\\ell_e)$. The two incidences are both\nincluded at a loop vertex. For $\\iota=(e,\\pm)$ write $e(\\iota)=e$.\nIf $u_e\\in H^2(0,\\ell_e)$, with $H^2$ as defined by\n[[def-sobolev-space-wkp-and-its-norm]],\n$v\\in V_D$, and each edge has a constant diffusivity $\\kappa_e>0$, then\n\n$$\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u'_ev'_e\\,dx_e =-\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u''_ev_e\\,dx_e +\\sum_{z\\in V}v(z)\\sum_{\\iota\\in\\mathcal I(z)}\\kappa_{e(\\iota)}\\partial_{\\nu_\\iota}u_{e(\\iota)}(z).$$\n\nThus zero test traces remove anchored endpoint terms, and a Kirchhoff\ncondition\n$\\sum_{\\iota\\in\\mathcal I(z)}\\kappa_{e(\\iota)}\\partial_{\\nu_\\iota}u_{e(\\iota)}(z)=0$ at each free vertex\ncancels the remaining terms.\n\n",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with $n\\ge1$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then $C_c^\\infty(\\Omega;\\mathbb K)$ is dense in $L^2(\\Omega;\\mathbb K)$: for every $f\\in L^2(\\Omega;\\mathbb K)$ and every $\\delta>0$ there is $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with $\\|\\varphi-f\\|_{L^2(\\Omega)}<\\delta$. Consequently $H^1_0(\\Omega)$ is dense in $L^2(\\Omega)$, and if a class $h\\in L^2(\\Omega)$ satisfies $(h,v)_{L^2}=0$ for all $v\\in H^1_0(\\Omega)$, then $h=0$.\n\n",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-anchored-finite-metric-graph-h1-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the cited one-dimensional\nrepresentative interface. A **finite metric graph**\n$\\Gamma=(V,E,\\partial_-,\\partial_+,\\ell)$ consists of finite vertex and\nedge sets $V,E$, endpoint maps $\\partial_-,\\partial_+:E\\to V$, and edge\nlengths $0<\\ell_e<\\infty$. Distinct edges with the same endpoints are\nallowed, as are loop edges with $\\partial_-e=\\partial_+e$. Every vertex is\nan endpoint of at least one edge. The two endpoint incidences $(e,-)$ and\n$(e,+)$ remain distinct even for a loop. A graph path is a finite sequence\n$z_0,e_1,z_1,\\ldots,e_n,z_n$ with $n\\ge0$ and\n$\\{\\partial_-e_j,\\partial_+e_j\\}=\n\\{z_{j-1},z_j\\}$ for every $j$; a loop permits $z_{j-1}=z_j$. Vertices in\nthe same connected edge component are those joined by such a path. Orient\neach edge only to choose its coordinate $x_e\\in[0,\\ell_e]$, with $0$ at\n$\\partial_-e$ and $\\ell_e$ at $\\partial_+e$. For $z\\in V$, let\n$\\mathcal I(z):=\\{(e,-):\\partial_-e=z\\}\\cup\\{(e,+):\\partial_+e=z\\}$\nbe its finite set of endpoint incidences.\nThe edge-product spaces are\n\n$$H:=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R),\\qquad \\mathcal W:=\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R).$$\n\nFor $w_e\\in H^1(0,\\ell_e)$, its endpoint values mean the values of the unique\nabsolutely continuous representative supplied by\n[[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]].\nThe **trace-matching graph Sobolev space** is the subspace of $\\mathcal W$\nwhose endpoint-incidence traces all agree at each vertex. For a designated\nanchor set $D\\subseteq V$, define the **anchored graph energy space**\n\n$$V_D:=\\{w\\in\\mathcal W:\\ w_{\\iota}=w_{\\iota'}\\text{ whenever }\\iota,\\iota'\\in\\mathcal I(v),\\quad w_{\\iota}=0\\text{ for each }v\\in D,\\ \\iota\\in\\mathcal I(v)\\}.$$\n\nWe equip $H$ with the edge-sum $L^2$ inner product and $V_D$ with\n\n$$\\|w\\|_{V_D}^2=\\sum_{e\\in E}\\int_0^{\\ell_e}(|w_e|^2+|w'_e|^2)\\,dx_e.$$\n\nNo Kirchhoff derivative condition is built into $V_D$; that condition is a\nnatural boundary condition of the later weak diffusion form. The elliptic\nand P1 error results below assume that $D$ meets every connected edge\ncomponent.\n\n",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The form $a$ is symmetric and bilinear. By Cauchy–Schwarz on the finite\nedge product,\n$$|a(w,v)|\\le\\kappa_{\\max}\\|w'\\|_H\\|v'\\|_H\\le\\kappa_{\\max}\\|w\\|_{V_D}\\|v\\|_{V_D}.$$\nThus it is bounded with constant $M=\\kappa_{\\max}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2],\n$$\\|v\\|_{V_D}^2=\\|v\\|_H^2+\\|v'\\|_H^2\\le(1+L_\\Gamma^2)\\|v'\\|_H^2.$$\nConsequently\n$$a(v,v)\\ge\\kappa_{\\min}\\|v'\\|_H^2\\ge\\frac{\\kappa_{\\min}}{1+L_\\Gamma^2}\\|v\\|_{V_D}^2.$$\nThe form is coercive with $\\alpha=\\kappa_{\\min}/(1+L_\\Gamma^2)>0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The load $F(v)=\\sum_e\\int f_ev_e$ is linear and satisfies\n$$|F(v)|\\le\\|f\\|_H\\|v\\|_H\\le L_\\Gamma\\|f\\|_H\\|v'\\|_H\\le L_\\Gamma\\|f\\|_H\\|v\\|_{V_D}$$\nby [F5] and [F2]. Hence $F$ is bounded on $V_D$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F3] to the real Hilbert space [F1], the bounded coercive form\nfrom steps 1.1–1.2, and the bounded functional from step 2.1. It gives\nexactly one $u\\in V_D$ satisfying $a(u,v)=F(v)$ for all $v\\in V_D$.\nIf this $u$ is edgewise H2, [F6] and the weak equation give, for every\n$v\\in V_D$,\n$$\\sum_e\\int_0^{\\ell_e}(-\\kappa_eu''_e-f_e)v_e\\,dx_e+\\sum_{z\\notin D}v(z)\\sum_{\\iota\\in\\mathcal I(z)}\\kappa_{e(\\iota)}\\partial_{\\nu_\\iota}u_{e(\\iota)}(z)=0.$$",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Fix an edge and take $v$ smooth with compact support in its interior and\nzero on every other edge. The vertex sum vanishes, so the integral of\n$-\\kappa_eu''_e-f_e$ against every such test is zero. This residual is in\n$L^2(0,\\ell_e)$; density from [F7] and continuity of the pairing by [F5]\nimply $-\\kappa_eu''_e=f_e$ almost everywhere on that edge. Now fix a free\nvertex $z$. Prescribe endpoint-incidence value $1$ at every incidence at\n$z$ and $0$ at incidences at every other vertex, and interpolate linearly\non each edge. Both incidences of a loop at $z$ receive value $1$, so this\ndefines a trace-matching test function in $V_D$. Substitution in step 3.1\nand the interior equation just proved leaves only the flux sum at $z$, so it\nis zero. This proves the stated natural Kirchhoff condition.",
+          "step": "3.2",
+          "inputs": [
+            "A2",
+            "F5",
+            "F6",
+            "F7",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a nonempty graph, mesh, or example, so the empty object is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: for f=0, the zero vector is a weak solution and Lax-Milgram uniqueness makes it the only solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–3.2: the finite edge-product proof applies to a single anchored interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2: coercivity remains valid when every vertex is anchored; zero loads and arbitrary finite anchor patterns are permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 3.1–3.2: the Green identity and the piecewise-linear test functions account for anchored endpoints and every free-vertex flux."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1: A1 is inherited by graph traces and A2 is the Countable Choice hypothesis of Lax-Milgram; they remain distinct assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "One-edge anchored Poisson solution",
+          "method": "direct differentiation and integration by parts",
+          "input": {
+            "edge": "[0,1]",
+            "diffusivity": "2",
+            "load": "f=1",
+            "anchors": [
+              "0",
+              "1"
+            ]
+          },
+          "calculation": "u(x)=x(1-x)/4 has u(0)=u(1)=0 and -2u″=1. For v with zero endpoint traces, 2 int_0^1 u′v′ dx=-2 int_0^1 u″v dx=int_0^1v dx.",
+          "expected": {
+            "solution": "x(1-x)/4",
+            "weak_equation": "holds"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "3.1"
+          ]
+        }
+      ]
+    },
+    "thm-weighted-network-semigroup-and-euler-positivity": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-network-diffusion-data",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph with ordered vertex and edge sets.\nChoose an orientation of each edge and let $B\\in\\mathbb R^{V\\times E}$ be\nthe resulting incidence matrix of\n[[def-oriented-incidence-matrix-of-a-graph]]: a column has $-1$ at its tail,\n$+1$ at its head, and zero elsewhere. Let $D\\subseteq V$ be the vertices with\nprescribed Dirichlet values and let $I=V\\setminus D$ be the free vertices.\nAssign a mass $m_i>0$ to each $i\\in I$ and a conductance $c_e\\ge0$ to each\n$e\\in E$. Put\n\n$$M=\\operatorname{diag}(m_i)_{i\\in I},\\qquad C=\\operatorname{diag}(c_e)_{e\\in E},\\qquad L_C=BCB^{\\mathsf T}.$$\n\nThe matrix $L_C$ is the **conductance-weighted graph stiffness**. Its free\nDirichlet restriction $L_D$ is the principal submatrix $(L_C)_{I,I}$. The\nfinite weighted network diffusion equation is\n\n$$M u'(t)+L_Du(t)=f(t),$$\n\nwhere $u(t)\\in\\mathbb R^I$ and $f(t)\\in\\mathbb R^I$. If $D=\\varnothing$,\nthis is the closed Neumann network equation. If the boundary values are\ninstead a nonzero vector $g(t)$, restriction of $L_C(u,g)$ to $I$ gives\n$M u'+L_Du=f-(L_C)_{I,D}g$.\n\nWhen every $c_e=1$, $L_C=BB^{\\mathsf T}$ agrees with the ordinary graph\nLaplacian by\n[[thm-laplacian-is-the-oriented-incidence-product]]. Zero conductances are\nallowed and remove those edges from the diffusion coupling; they do not remove\nthe vertices or masses.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-weighted-network-energy-kernel-and-mass-balance",
+          "source_section": "Statement",
+          "quote": "Use the data of [[def-finite-weighted-network-diffusion-data]]. Let\n$E_+=\\{e\\in E:c_e>0\\}$ and let $G_+=(V,E_+)$; its connected components are\nthe **positive-conductance components**. For $x\\in\\mathbb R^I$, let\n$\\bar x\\in\\mathbb R^V$ equal $x$ on $I$ and $0$ on $D$. Then\n\n$$x^{\\mathsf T}L_Dx=\\sum_{e\\in E}c_e (\\bar x_{\\mathrm{head}(e)}-\\bar x_{\\mathrm{tail}(e)})^2\\ge0.$$\n\nConsequently $L_D$ is symmetric positive semidefinite, and $x\\in\\ker L_D$\nexactly when $\\bar x$ is constant on each positive-conductance component and\nthat constant is zero on every such component meeting $D$. In the closed\ncase $D=\\varnothing$, every differentiable solution of\n$Mu'+L_Cu=f$ satisfies\n\n$$\\frac{d}{dt}\\mathbf1^{\\mathsf T}Mu(t)=\\mathbf1^{\\mathsf T}f(t).$$\n\nThus homogeneous closed diffusion conserves weighted mass\n$\\mathbf1^{\\mathsf T}Mu$, which need not equal the unweighted sum\n$\\mathbf1^{\\mathsf T}u$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-xd-finite-column-generator",
+          "source_section": "Definition",
+          "quote": "Let $S=\\{0,1,\\ldots,n-1\\}$ with $n\\ge1$. Identify its real matrices with $M_n(\\mathbb R)$, the finite matrix space with row and column indices in $S$ from [[def-matrix-space]], and use the matrix-product and identity conventions of [[def-matrix-product-and-identity-matrix]]. A **finite column generator** on $S$ is a real matrix $Q=(q_{ij})\\in M_n(\\mathbb R)$ satisfying\n\n$$q_{ij}\\ge0\\quad(i\\ne j),\\qquad \\sum_{i<n}q_{ij}=0\\quad(j<n).$$\n\nThe column index $j$ is the source state and the row index $i$ is the destination state: for $i\\ne j$, $q_{ij}$ is the transition rate from $j$ to $i$. The exit rate from $j$ is\n\n$$r_j:=-q_{jj}=\\sum_{i\\ne j}q_{ij}\\ge0.$$\n\nA **column probability vector** is $p\\in\\mathbb R^n$ with $p_i\\ge0$ for each $i$ and $\\sum_{i<n}p_i=1$. A **subprobability vector** has the same coordinatewise nonnegativity and has coordinate sum at most one. These conventions are used throughout this page.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "For a finite real square matrix $A$, define\n\n$$e^{tA}:=\\sum_{k=0}^{\\infty}\\frac{t^kA^k}{k!}.$$\n\nThis series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.\n\n",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $I=\\varnothing$, all free-state assertions are vacuous, so assume\n$I\\ne\\varnothing$. Put $Q=-LM^{-1}$. For distinct free vertices $i,j$,\n$Q_{ij}=-L_{ij}/m_j\\ge0$ by [F1]. If $D=\\varnothing$, [F1] says that\n$\\mathbf1$ is constant on every positive-conductance component, so\n$L\\mathbf1=0$; symmetry gives $\\mathbf1^{\\mathsf T}L=0$. Thus $Q$ has zero\ncolumn sums and is a finite column generator by [F2]. If $p_0\\ge0$ is\nnonzero, let $s=\\mathbf1^{\\mathsf T}p_0>0$ and\n$\\pi=p_0/s$. By [F2], $e^{tQ}\\pi$ is a probability vector, so it is\nentrywise nonnegative; multiplying by $s$ proves $e^{tQ}p_0\\ge0$. If\n$p_0=0$, its image is zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $D\\ne\\varnothing$, then $Q$ has nonnegative off-diagonal entries\nand diagonal entries $Q_{ii}=-L_{ii}/m_i$. Put\n$\\lambda=\\max_{i\\in I}L_{ii}/m_i\\ge0$. If $\\lambda=0$, then\n$L_{ii}=\\sum_{e\\text{ incident to }i}c_e=0$ for every free vertex. Since\neach $c_e\\ge0$, every conductance incident to a free vertex is zero; hence\neach free row of $L_D$ vanishes, $Q=0$, and its exponential is the identity.\nIf $\\lambda>0$,\nevery entry of $Q+\\lambda I$ is nonnegative. For $t\\ge0$, each term of the\nmatrix series\n$e^{t(Q+\\lambda I)}=\\sum_{k\\ge0}t^k(Q+\\lambda I)^k/k!$ is entrywise\nnonnegative. By [F3], since $-\\lambda tI$ commutes with $t(Q+\\lambda I)$,\n$$e^{tQ}=e^{-\\lambda tI}e^{t(Q+\\lambda I)}=e^{-\\lambda t}e^{t(Q+\\lambda I)}$$\nis entrywise nonnegative.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The mass state $p=Mu$ satisfies $p'=Qp$ for the homogeneous network\nequation. Its solution is $p(t)=e^{tQ}p(0)$. Since $M$ and $M^{-1}$ are\nentrywise positive diagonal matrices,\n$$u(t)=M^{-1}e^{tQ}Mu(0)=e^{-tM^{-1}L}u(0),$$\nwhere the second equality follows term by term from the matrix exponential\nseries applied to the similarity $M^{-1}QM=-M^{-1}L$. Steps 1.1–1.2\ntherefore prove positivity of $S_D(t)$ for both boundary cases.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The diagonal entries of $E_F(\\tau)$ are\n$1-\\tau L_{ii}/m_i$, and its off-diagonal entries are\n$-\\tau L_{ij}/m_i\\ge0$ by [F1]. Thus all entries are nonnegative exactly\nwhen each diagonal is nonnegative, which is exactly\n$\\tau\\le m_i/L_{ii}$ for every $i$ with $L_{ii}>0$. If a diagonal is\nnegative, applying the step matrix to the corresponding coordinate vector\nproduces a negative coordinate, so the condition is sharp.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $y\\ge0$ and solve $(M+\\tau L)x=My$. The matrix is symmetric\npositive definite because for nonzero $x$,\n$x^{\\mathsf T}(M+\\tau L)x\\ge\\sum_i m_i x_i^2>0$ by [F1]; hence the solve\nexists uniquely. If $x_k<0$ is a minimum coordinate, extend $x$ by zero\non $D$. The edge formula for $(Lx)_k$ is a sum of terms\n$c_e(x_k-\\bar x_{\\mathrm{other}(e)})$, each nonpositive because every free\nneighbor has value at least $x_k$ and every Dirichlet value is zero.\nTherefore\n$((M+\\tau L)x)_k=m_kx_k+\\tau(Lx)_k<0$, contradicting\n$(My)_k=m_ky_k\\ge0$. Thus $x\\ge0$ and backward Euler is positivity\npreserving.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: the case of no free vertices is explicitly declared vacuous; the empty Euler matrix also has no negative entry."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 2.1, and 3.1: zero initial data, zero conductance (lambda=0), and zero diagonal rows are covered directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.1: a one-dimensional free state reduces to a scalar nonnegative exponential and the scalar diagonal threshold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.1: lambda=0 and the empty minimum are explicitly handled; a zero Euler diagonal is allowed at equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is a finite matrix or flux statement and has no interval endpoint or trace condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–3.1 use only finite-dimensional matrix operations and the finite-generator interface; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1: nonnegative diagonals together with nonnegative off-diagonals give positivity of the full forward Euler matrix under the stated threshold."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1: if the threshold fails, a coordinate vector produces a negative diagonal output, proving necessity."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Two-vertex weighted path Euler and backward-Euler matrices",
+          "method": "exact rational matrix calculation",
+          "input": {
+            "masses": [
+              "1",
+              "2"
+            ],
+            "conductance": "1",
+            "time_step": "1"
+          },
+          "calculation": "L=[[1,-1],[-1,1]], so I-tau M^{-1}L=[[0,1],[1/2,1/2]] at tau=1. For tau=11/10 the first diagonal is -1/10. At tau=1, (M+L)^{-1}M=[[3/5,2/5],[1/5,4/5]].",
+          "expected": {
+            "forward_threshold": "1",
+            "forward_at_threshold": "entrywise nonnegative",
+            "forward_above_threshold": "not entrywise nonnegative",
+            "backward_euler": "entrywise nonnegative"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "thm-metric-graph-p1-fem-cea-and-energy-rate": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-anchored-metric-graph-h1-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For a finite metric graph and anchor set $D$, the trace-matching space and\nthe anchored space $V_D$ of\n[[def-anchored-finite-metric-graph-h1-space]] are closed real Hilbert\nsubspaces of $\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R)$ with the\nedge-product $H^1$ inner product.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in its first argument, conjugate-linear\nin its second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad \\operatorname{Re}a(v,v)\\ge\\alpha\\|v\\|_V^2.$$\nLet $F:V\\to\\mathbb K$ be bounded and conjugate-linear, and let $V_h\\subseteq V$\nbe finite-dimensional. Then there are unique $u\\in V$ and $u_h\\in V_h$ with\n$$a(u,v)=F(v)\\quad(v\\in V).$$\n$$a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h).$$\nThe solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe real bilinear case uses linear functionals and reads $\\operatorname{Re}$ as\nthe identity.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-symmetric-galerkin-best-approximation-in-energy-norm",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses and notation of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]], and\nsuppose additionally that $a$ is Hermitian:\n$a(v,w)=\\overline{a(w,v)}$. Then\n$$\\|v\\|_a:=\\sqrt{a(v,v)}$$\nis the energy norm and the Galerkin solution is its best approximation:\n$$\\|u-u_h\\|_a=\\inf_{v_h\\in V_h}\\|u-v_h\\|_a.$$\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-metric-graph-p1-interpolation-estimate",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, any anchor set $D\\subseteq V$ as in\n[[def-anchored-finite-metric-graph-h1-space]], a mesh\n$\\mathcal T_h$ of [[def-metric-graph-p1-edge-mesh]], positive constants\n$\\kappa_e$ on the edges, and edgewise $u_e\\in H^2(0,\\ell_e)$ as in\n[[def-sobolev-space-wkp-and-its-norm]], with the\ntrace matching and anchor conditions of $V_D$. Let $I_hu$ be the edgewise\nnodal linear interpolant. Then $I_hu\\in V_h$ and\n$$\\left(\\sum_{e\\in E}\\kappa_e\\|(u_e-I_hu_e)'\\|_{L^2(e)}^2\\right)^{1/2} \\le h\\left(\\sum_{e\\in E}\\kappa_e\\|u''_e\\|_{L^2(e)}^2\\right)^{1/2}.$$\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-metric-graph-kirchhoff-green-identity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Orient each edge coordinate from $0$ at\n$\\partial_-e$ to $\\ell_e$ at $\\partial_+e$. For endpoint incidences\n$(e,-)$ and $(e,+)$ define the outward derivatives by\n$\\partial_{\\nu_{(e,-)}}u_e=-u'_e(0)$ and\n$\\partial_{\\nu_{(e,+)}}u_e=+u'_e(\\ell_e)$. The two incidences are both\nincluded at a loop vertex. For $\\iota=(e,\\pm)$ write $e(\\iota)=e$.\nIf $u_e\\in H^2(0,\\ell_e)$, with $H^2$ as defined by\n[[def-sobolev-space-wkp-and-its-norm]],\n$v\\in V_D$, and each edge has a constant diffusivity $\\kappa_e>0$, then\n\n$$\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u'_ev'_e\\,dx_e =-\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u''_ev_e\\,dx_e +\\sum_{z\\in V}v(z)\\sum_{\\iota\\in\\mathcal I(z)}\\kappa_{e(\\iota)}\\partial_{\\nu_\\iota}u_{e(\\iota)}(z).$$\n\nThus zero test traces remove anchored endpoint terms, and a Kirchhoff\ncondition\n$\\sum_{\\iota\\in\\mathcal I(z)}\\kappa_{e(\\iota)}\\partial_{\\nu_\\iota}u_{e(\\iota)}(z)=0$ at each free vertex\ncancels the remaining terms.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-metric-graph-weak-elliptic-problem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice, $E\\ne\\varnothing$, and that the anchor set $D$ meets every connected\nedge component of the finite metric graph $\\Gamma$. Let constant edge\ndiffusivities satisfy\n$$0<\\kappa_{\\min}\\le\\kappa_e\\le\\kappa_{\\max}<\\infty.$$\nFor every $f\\in H=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R)$ there is a unique\n$u\\in V_D$ such that\n\n$$a(u,v):=\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u'_ev'_e\\,dx_e=F(v):=\\sum_{e\\in E}\\int_0^{\\ell_e}f_ev_e\\,dx_e\\qquad(v\\in V_D).$$\n\nThe equation is the anchored weak metric-graph diffusion problem. Whenever\n$u_e\\in H^2(0,\\ell_e)$ as defined in\n[[def-sobolev-space-wkp-and-its-norm]], the Green identity\n[[lem-metric-graph-kirchhoff-green-identity]] identifies its interior\nequation as $-\\kappa_eu''_e=f_e$ and its natural free-vertex condition as\nKirchhoff balance of the outward diffusive fluxes.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-anchored-metric-graph-poincare",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and assume every connected edge component of the finite metric graph $\\Gamma$\nhas at least one anchor in $D$. Put\n$L_\\Gamma=\\sum_{e\\in E}\\ell_e$. Then every $w\\in V_D$ satisfies\n\n$$\\|w\\|_{L^2(\\Gamma)}\\le L_\\Gamma \\left(\\sum_{e\\in E}\\|w'_e\\|_{L^2(e)}^2\\right)^{1/2}.$$\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map sending a P1 graph function to its finite list of nodal values is\nlinear and injective, since an affine function on a cell is determined by\nits two endpoint values. There are finitely many cells, so $V_h$ is\nfinite-dimensional. Its defining vertex and anchor constraints make it a\nsubspace of $V_D$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $w,v\\in V_D$, [F7] gives\n$|a(w,v)|\\le\\kappa_{\\max}\\|w'\\|_H\\|v'\\|_H\n\\le M_a\\|w\\|_{V_D}\\|v\\|_{V_D}$. By path Poincare,\n$\\|v\\|_{V_D}^2\\le(1+L_\\Gamma^2)\\|v'\\|_H^2$, so\n$a(v,v)\\ge\\kappa_{\\min}\\|v'\\|_H^2\n\\ge\\alpha_a\\|v\\|_{V_D}^2$. Thus $a$ is bounded and coercive with the\nstated constants and is symmetric.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] with $V=V_D$, subspace $V_h$, form $a$, and load $F$ from\nthe weak problem. Its Hilbert, finite-dimensional inclusion, boundedness,\ncoercivity and bounded-load hypotheses hold by [F1], step 1.1, and step\n1.2. Hence a unique Galerkin solution exists and satisfies the displayed\nCea estimate. It agrees with the restriction of the same weak equation\nbecause the continuous solution is unique by [F6].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the symmetric best-approximation fact [F3] to $u_h$ and choose\n$v_h=I_hu$. By [F4], this interpolant is in $V_h$ and its energy error is at\nmost $h(\\sum_e\\kappa_e\\|u''_e\\|_{L^2(e)}^2)^{1/2}$. Therefore the Galerkin\nenergy error is bounded by the same quantity, as claimed. The rate is\nconditional on the stated edgewise H2 regularity; no vertex regularity is\ninferred. By [F5], the natural free-vertex condition is Kirchhoff flux\nbalance.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a nonempty graph, mesh, or example, so the empty object is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1: zero load yields u=u_h=0, and the bound remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–3.1: the argument allows a single edge and a single cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1: V_h may be the zero subspace; the published Cea and symmetric best-approximation results include it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: the interpolation supplier preserves the endpoint anchors and junction traces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: A1 supports graph traces and A2 supplies the distinct Countable Choice assumptions of Cea and best approximation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "One-cell anchored P1 space",
+          "method": "exact finite-dimensional check",
+          "input": {
+            "edge": "[0,1]",
+            "anchors": [
+              "0",
+              "1"
+            ],
+            "mesh_cells": 1,
+            "function": "u(x)=x(1-x)",
+            "load": "f=2, so -u″=2"
+          },
+          "calculation": "With both endpoints anchored and one affine cell, V_h={0}, so u_h=0. The function u=x(1-x) solves -u_second=2 with zero endpoint traces. Its V_D norm is sqrt(11/30), its energy error is sqrt(1/3), and h||u_second||_L2=2. The Cea factor is M_a/alpha_a=2, so the V_D estimate reads sqrt(11/30)<=2sqrt(11/30).",
+          "expected": {
+            "discrete_space": "{0}",
+            "V_D_error": "sqrt(11/30)",
+            "cea_bound": "2 sqrt(11/30)",
+            "energy_error": "sqrt(1/3)",
+            "H2_energy_bound": "2"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "2.1"
+          ]
+        }
+      ]
+    },
+    "cex-density-continuity-fails-unequal-speed-routing": {
+      "risk": "medium",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conservative-network-advection-routing",
+          "source_section": "Definition",
+          "quote": "At a directed network junction, let $n_{\\rm in}$ edges carry nonnegative\nincoming **mass fluxes** $q^{\\rm in}_i$ into the junction, and let\n$n_{\\rm out}$ edges carry outgoing mass fluxes. A **conservative nonnegative\nrouting matrix** is a real matrix\n$P\\in\\mathbb R^{n_{\\rm out}\\times n_{\\rm in}}$ such that\n\n$$P_{ji}\\ge0,\\qquad \\sum_{j=1}^{n_{\\rm out}}P_{ji}=1 \\quad(1\\le i\\le n_{\\rm in}).$$\n\nIt routes the incoming flux vector to\n$q^{\\rm out}=Pq^{\\rm in}$. The column $i$ distributes the mass flux arriving\non incoming edge $i$ among the outgoing edges. The column-sum condition\nstipulates no source or sink at the junction. It is a model condition on flux;\nit does not assert that the densities on incident edges are equal.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-conservative-network-routing-conserves-flux",
+          "source_section": "Statement",
+          "quote": "Let $P$ be a conservative nonnegative routing matrix from\n[[def-conservative-network-advection-routing]], and let\n$q^{\\rm in}\\in\\mathbb R^{n_{\\rm in}}$ be entrywise nonnegative. Then\n$q^{\\rm out}=Pq^{\\rm in}$ is entrywise nonnegative and\n$$\\sum_{j=1}^{n_{\\rm out}}q^{\\rm out}_j =\\sum_{i=1}^{n_{\\rm in}}q^{\\rm in}_i.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If density is continuous with value $\\rho=1$ on all three incident\nedges, the incoming flux is $v_{\\rm in}\\rho=1$, while the outgoing total is\n$v_1\\rho+v_2\\rho=1+2=3$. These are unequal, so this junction rule fails\nmass conservation in the stipulated model.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The matrix $P=(1,0)^{\\mathsf T}$ is entrywise nonnegative and its sole\nincoming column sums to $1$. With incoming flux $q^{\\rm in}=1$, it produces\n$q^{\\rm out}=(1,0)^{\\mathsf T}$, whose total is $1$ by [F1, F2]. The\ncorresponding outgoing densities are $(1,0)$, so this conservative routing\ndoes not impose equal densities.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a nonempty graph, mesh, or example, so the empty object is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: zero density would give equal zero flux, so the counterexample correctly uses the required nonzero density 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: the counterexample has one incoming edge and explicitly compares its flux with two outgoing fluxes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: the conservative routing sends all incoming flux to the speed-1 outgoing edge and zero to the other, so equal densities are unnecessary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is a finite matrix or flux statement and has no interval endpoint or trace condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 use only finite flux calculations and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Unequal-speed junction fluxes",
+          "method": "exact scalar calculation",
+          "input": {
+            "incoming_speed": "1",
+            "outgoing_speeds": [
+              "1",
+              "2"
+            ],
+            "common_density": "1"
+          },
+          "calculation": "Incoming flux is 1 and outgoing total is 1+2=3. The routing column (1,0)^T instead sends flux 1 to the speed-1 output and 0 to the speed-2 output.",
+          "expected": {
+            "continuous_density_conservation": false,
+            "routed_total": "1"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "ex-disconnected-unanchored-network-solve": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-network-diffusion-data",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph with ordered vertex and edge sets.\nChoose an orientation of each edge and let $B\\in\\mathbb R^{V\\times E}$ be\nthe resulting incidence matrix of\n[[def-oriented-incidence-matrix-of-a-graph]]: a column has $-1$ at its tail,\n$+1$ at its head, and zero elsewhere. Let $D\\subseteq V$ be the vertices with\nprescribed Dirichlet values and let $I=V\\setminus D$ be the free vertices.\nAssign a mass $m_i>0$ to each $i\\in I$ and a conductance $c_e\\ge0$ to each\n$e\\in E$. Put\n\n$$M=\\operatorname{diag}(m_i)_{i\\in I},\\qquad C=\\operatorname{diag}(c_e)_{e\\in E},\\qquad L_C=BCB^{\\mathsf T}.$$\n\nThe matrix $L_C$ is the **conductance-weighted graph stiffness**. Its free\nDirichlet restriction $L_D$ is the principal submatrix $(L_C)_{I,I}$. The\nfinite weighted network diffusion equation is\n\n$$M u'(t)+L_Du(t)=f(t),$$\n\nwhere $u(t)\\in\\mathbb R^I$ and $f(t)\\in\\mathbb R^I$. If $D=\\varnothing$,\nthis is the closed Neumann network equation. If the boundary values are\ninstead a nonzero vector $g(t)$, restriction of $L_C(u,g)$ to $I$ gives\n$M u'+L_Du=f-(L_C)_{I,D}g$.\n\nWhen every $c_e=1$, $L_C=BB^{\\mathsf T}$ agrees with the ordinary graph\nLaplacian by\n[[thm-laplacian-is-the-oriented-incidence-product]]. Zero conductances are\nallowed and remove those edges from the diffusion coupling; they do not remove\nthe vertices or masses.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-weighted-network-energy-kernel-and-mass-balance",
+          "source_section": "Statement",
+          "quote": "Use the data of [[def-finite-weighted-network-diffusion-data]]. Let\n$E_+=\\{e\\in E:c_e>0\\}$ and let $G_+=(V,E_+)$; its connected components are\nthe **positive-conductance components**. For $x\\in\\mathbb R^I$, let\n$\\bar x\\in\\mathbb R^V$ equal $x$ on $I$ and $0$ on $D$. Then\n\n$$x^{\\mathsf T}L_Dx=\\sum_{e\\in E}c_e (\\bar x_{\\mathrm{head}(e)}-\\bar x_{\\mathrm{tail}(e)})^2\\ge0.$$\n\nConsequently $L_D$ is symmetric positive semidefinite, and $x\\in\\ker L_D$\nexactly when $\\bar x$ is constant on each positive-conductance component and\nthat constant is zero on every such component meeting $D$. In the closed\ncase $D=\\varnothing$, every differentiable solution of\n$Mu'+L_Cu=f$ satisfies\n\n$$\\frac{d}{dt}\\mathbf1^{\\mathsf T}Mu(t)=\\mathbf1^{\\mathsf T}f(t).$$\n\nThus homogeneous closed diffusion conserves weighted mass\n$\\mathbf1^{\\mathsf T}Mu$, which need not equal the unweighted sum\n$\\mathbf1^{\\mathsf T}u$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives\n$$L_C=\\begin{pmatrix}1&-1&0&0\\\\-1&1&0&0\\\\0&0&3&-3\\\\0&0&-3&3\\end{pmatrix}.$$\nThe two independent component indicator vectors\n$(1,1,0,0)^{\\mathsf T}$ and $(0,0,1,1)^{\\mathsf T}$ lie in its kernel by\n[F1], so the steady matrix is singular.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The vector $(1,0,0,0)^{\\mathsf T}$ has dot product $1$ with the first\ncomponent indicator, while every vector in the image of the symmetric\nmatrix $L_C$ is orthogonal to its kernel: for $z=L_Cx$ and $k\\in\\ker L_C$,\n$k^{\\mathsf T}z=(L_Ck)^{\\mathsf T}x=0$. Thus this load is not in the image\nand the Neumann steady equation has no solution.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a nonempty graph, mesh, or example, so the empty object is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2: zero entries of the load are retained, and orthogonality to the first component kernel vector proves incompatibility."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item verifies one fixed example with at least two vertices or edges; the one-object case is outside that example’s input."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: two disconnected positive-conductance components yield two independent kernel vectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is a finite matrix or flux statement and has no interval endpoint or trace condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2 are finite matrix calculations and use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Two-component Neumann incompatibility",
+          "method": "exact matrix-kernel calculation",
+          "input": {
+            "conductances": [
+              "1",
+              "3"
+            ],
+            "edges": [
+              [
+                1,
+                2
+              ],
+              [
+                3,
+                4
+              ]
+            ],
+            "load": [
+              1,
+              0,
+              0,
+              0
+            ]
+          },
+          "calculation": "The displayed stiffness has kernel vectors (1,1,0,0) and (0,0,1,1). The load has inner product 1 with the first, so it is not in the symmetric matrix image.",
+          "expected": {
+            "kernel_dimension": "2",
+            "steady_solve": "incompatible"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": []
+    },
+    "ex-y-junction-metric-graph-kirchhoff-flux": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-anchored-finite-metric-graph-h1-space",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the cited one-dimensional\nrepresentative interface. A **finite metric graph**\n$\\Gamma=(V,E,\\partial_-,\\partial_+,\\ell)$ consists of finite vertex and\nedge sets $V,E$, endpoint maps $\\partial_-,\\partial_+:E\\to V$, and edge\nlengths $0<\\ell_e<\\infty$. Distinct edges with the same endpoints are\nallowed, as are loop edges with $\\partial_-e=\\partial_+e$. Every vertex is\nan endpoint of at least one edge. The two endpoint incidences $(e,-)$ and\n$(e,+)$ remain distinct even for a loop. A graph path is a finite sequence\n$z_0,e_1,z_1,\\ldots,e_n,z_n$ with $n\\ge0$ and\n$\\{\\partial_-e_j,\\partial_+e_j\\}=\n\\{z_{j-1},z_j\\}$ for every $j$; a loop permits $z_{j-1}=z_j$. Vertices in\nthe same connected edge component are those joined by such a path. Orient\neach edge only to choose its coordinate $x_e\\in[0,\\ell_e]$, with $0$ at\n$\\partial_-e$ and $\\ell_e$ at $\\partial_+e$. For $z\\in V$, let\n$\\mathcal I(z):=\\{(e,-):\\partial_-e=z\\}\\cup\\{(e,+):\\partial_+e=z\\}$\nbe its finite set of endpoint incidences.\nThe edge-product spaces are\n\n$$H:=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R),\\qquad \\mathcal W:=\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R).$$\n\nFor $w_e\\in H^1(0,\\ell_e)$, its endpoint values mean the values of the unique\nabsolutely continuous representative supplied by\n[[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]].\nThe **trace-matching graph Sobolev space** is the subspace of $\\mathcal W$\nwhose endpoint-incidence traces all agree at each vertex. For a designated\nanchor set $D\\subseteq V$, define the **anchored graph energy space**\n\n$$V_D:=\\{w\\in\\mathcal W:\\ w_{\\iota}=w_{\\iota'}\\text{ whenever }\\iota,\\iota'\\in\\mathcal I(v),\\quad w_{\\iota}=0\\text{ for each }v\\in D,\\ \\iota\\in\\mathcal I(v)\\}.$$\n\nWe equip $H$ with the edge-sum $L^2$ inner product and $V_D$ with\n\n$$\\|w\\|_{V_D}^2=\\sum_{e\\in E}\\int_0^{\\ell_e}(|w_e|^2+|w'_e|^2)\\,dx_e.$$\n\nNo Kirchhoff derivative condition is built into $V_D$; that condition is a\nnatural boundary condition of the later weak diffusion form. The elliptic\nand P1 error results below assume that $D$ meets every connected edge\ncomponent.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-metric-graph-kirchhoff-green-identity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Orient each edge coordinate from $0$ at\n$\\partial_-e$ to $\\ell_e$ at $\\partial_+e$. For endpoint incidences\n$(e,-)$ and $(e,+)$ define the outward derivatives by\n$\\partial_{\\nu_{(e,-)}}u_e=-u'_e(0)$ and\n$\\partial_{\\nu_{(e,+)}}u_e=+u'_e(\\ell_e)$. The two incidences are both\nincluded at a loop vertex. For $\\iota=(e,\\pm)$ write $e(\\iota)=e$.\nIf $u_e\\in H^2(0,\\ell_e)$, with $H^2$ as defined by\n[[def-sobolev-space-wkp-and-its-norm]],\n$v\\in V_D$, and each edge has a constant diffusivity $\\kappa_e>0$, then\n\n$$\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u'_ev'_e\\,dx_e =-\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u''_ev_e\\,dx_e +\\sum_{z\\in V}v(z)\\sum_{\\iota\\in\\mathcal I(z)}\\kappa_{e(\\iota)}\\partial_{\\nu_\\iota}u_{e(\\iota)}(z).$$\n\nThus zero test traces remove anchored endpoint terms, and a Kirchhoff\ncondition\n$\\sum_{\\iota\\in\\mathcal I(z)}\\kappa_{e(\\iota)}\\partial_{\\nu_\\iota}u_{e(\\iota)}(z)=0$ at each free vertex\ncancels the remaining terms.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At the central endpoint $x=0$, all three values equal $1$. At the leaves\n$x=1$, the values are $2,0,1$, respectively. Hence the functions define a\ncontinuous metric-graph function with the specified Dirichlet data.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The outward derivative at the tail $x=0$ is $-u'_i(0)$. The three values\nare $-1,+1,0$, whose sum is $0$. Each edge has $u_i''=0$. Therefore the\nedge equation has zero load and the free central vertex satisfies Kirchhoff\nbalance.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any test function with zero trace at the three leaves, [F2] shows\nthat the edge bilinear form has only the central boundary contribution,\nwhich is its test trace times the sum $-1+1+0=0$. Thus the displayed\nfunction is also a weak harmonic field for these Dirichlet data.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a nonempty graph, mesh, or example, so the empty object is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2: one edge has zero derivative and the interior load is zero; the Kirchhoff sum still vanishes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item verifies one fixed example with at least two vertices or edges; the one-object case is outside that example’s input."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.1: the third edge has zero flux, and its zero contribution does not affect Kirchhoff cancellation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2: the displayed values are checked at x=0 and x=1 and the outward tail derivatives use the stated sign convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: A1 states the general trace interface assumption; the displayed affine functions make all values explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Y-junction endpoint and flux check",
+          "method": "exact derivative calculation",
+          "input": {
+            "edge_functions": [
+              "1+x",
+              "1-x",
+              "1"
+            ],
+            "orientation": "central vertex to leaves",
+            "leaf_values": [
+              2,
+              0,
+              1
+            ]
+          },
+          "calculation": "The central traces are (1,1,1); the leaf values are (2,0,1). Tail outward derivatives are (-1,+1,0), with sum 0, and every second derivative is 0.",
+          "expected": {
+            "central_trace": "1",
+            "kirchhoff_sum": "0",
+            "interior_load": "0"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "ex-three-compartment-weighted-migration": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-network-diffusion-data",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph with ordered vertex and edge sets.\nChoose an orientation of each edge and let $B\\in\\mathbb R^{V\\times E}$ be\nthe resulting incidence matrix of\n[[def-oriented-incidence-matrix-of-a-graph]]: a column has $-1$ at its tail,\n$+1$ at its head, and zero elsewhere. Let $D\\subseteq V$ be the vertices with\nprescribed Dirichlet values and let $I=V\\setminus D$ be the free vertices.\nAssign a mass $m_i>0$ to each $i\\in I$ and a conductance $c_e\\ge0$ to each\n$e\\in E$. Put\n\n$$M=\\operatorname{diag}(m_i)_{i\\in I},\\qquad C=\\operatorname{diag}(c_e)_{e\\in E},\\qquad L_C=BCB^{\\mathsf T}.$$\n\nThe matrix $L_C$ is the **conductance-weighted graph stiffness**. Its free\nDirichlet restriction $L_D$ is the principal submatrix $(L_C)_{I,I}$. The\nfinite weighted network diffusion equation is\n\n$$M u'(t)+L_Du(t)=f(t),$$\n\nwhere $u(t)\\in\\mathbb R^I$ and $f(t)\\in\\mathbb R^I$. If $D=\\varnothing$,\nthis is the closed Neumann network equation. If the boundary values are\ninstead a nonzero vector $g(t)$, restriction of $L_C(u,g)$ to $I$ gives\n$M u'+L_Du=f-(L_C)_{I,D}g$.\n\nWhen every $c_e=1$, $L_C=BB^{\\mathsf T}$ agrees with the ordinary graph\nLaplacian by\n[[thm-laplacian-is-the-oriented-incidence-product]]. Zero conductances are\nallowed and remove those edges from the diffusion coupling; they do not remove\nthe vertices or masses.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-weighted-network-energy-kernel-and-mass-balance",
+          "source_section": "Statement",
+          "quote": "Use the data of [[def-finite-weighted-network-diffusion-data]]. Let\n$E_+=\\{e\\in E:c_e>0\\}$ and let $G_+=(V,E_+)$; its connected components are\nthe **positive-conductance components**. For $x\\in\\mathbb R^I$, let\n$\\bar x\\in\\mathbb R^V$ equal $x$ on $I$ and $0$ on $D$. Then\n\n$$x^{\\mathsf T}L_Dx=\\sum_{e\\in E}c_e (\\bar x_{\\mathrm{head}(e)}-\\bar x_{\\mathrm{tail}(e)})^2\\ge0.$$\n\nConsequently $L_D$ is symmetric positive semidefinite, and $x\\in\\ker L_D$\nexactly when $\\bar x$ is constant on each positive-conductance component and\nthat constant is zero on every such component meeting $D$. In the closed\ncase $D=\\varnothing$, every differentiable solution of\n$Mu'+L_Cu=f$ satisfies\n\n$$\\frac{d}{dt}\\mathbf1^{\\mathsf T}Mu(t)=\\mathbf1^{\\mathsf T}f(t).$$\n\nThus homogeneous closed diffusion conserves weighted mass\n$\\mathbf1^{\\mathsf T}Mu$, which need not equal the unweighted sum\n$\\mathbf1^{\\mathsf T}u$.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-weighted-network-semigroup-and-euler-positivity",
+          "source_section": "Statement",
+          "quote": "Use the data of [[def-finite-weighted-network-diffusion-data]] and write\n$L=L_D$. For any $t\\ge0$, the homogeneous exact semigroup\n$$S_D(t)=e^{-tM^{-1}L}$$\nmaps entrywise nonnegative initial vectors to entrywise nonnegative vectors.\nFor a forward Euler step of size $\\tau\\ge0$, the map\n$$E_F(\\tau)=I-\\tau M^{-1}L$$\nis entrywise nonnegative, and hence positivity preserving for every\nnonnegative input, exactly when\n$$0\\le\\tau\\le\\tau_F:=\\min_{\\substack{i\\in I\\\\L_{ii}>0}}\\frac{m_i}{L_{ii}},$$\nwhere the minimum of an empty set is $+\\infty$. For every $\\tau>0$, the\nbackward Euler map $(M+\\tau L)^{-1}M$ exists and is positivity preserving.\nThe forward Euler threshold is sharp for positivity of the full step matrix.\n\n",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With the stated orientation,\n$$B=\\begin{pmatrix}-1&0\\\\1&-1\\\\0&1\\end{pmatrix},\\qquad L_C=BCB^{\\mathsf T}= \\begin{pmatrix}1&-1&0\\\\-1&3&-2\\\\0&-2&2\\end{pmatrix}.$$\nThe graph is connected and both conductances are positive.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The initial weighted mass is\n$\\mathbf1^{\\mathsf T}Mu(0)=2+2+12=16$. By [F2] it is constant for all\ntimes for which the homogeneous solution is evaluated.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The vector $\\mathbf1=(1,1,1)^{\\mathsf T}$ has\n$L_C\\mathbf1=0$ by the displayed matrix in step 1.1, and its weighted mass\nat value $8/3$ is $(8/3)(1+2+3)=16$. Thus the stated constant state is an\nequilibrium with the same weighted mass.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $u(0)\\ge0$, [F3] implies the exact semigroup trajectory remains\nentrywise nonnegative for every $t\\ge0$.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a nonempty graph, mesh, or example, so the empty object is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the third edge contribution has zero coupling in the chosen equilibrium vector only through its explicit Laplacian cancellation; the initial vector also has positive coordinates."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item verifies one fixed example with at least two vertices or edges; the one-object case is outside that example’s input."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item fixes strictly positive coefficients and a nondegenerate finite example, so a degenerate input is outside its Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is a finite matrix or flux statement and has no interval endpoint or trace condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–2.2 verify explicit finite matrices and vectors; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no claim in this boundary direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Three-compartment weighted mass",
+          "method": "exact integer matrix calculation",
+          "input": {
+            "B": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "C": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                2
+              ]
+            ],
+            "M": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                3
+              ]
+            ],
+            "u0": [
+              2,
+              1,
+              4
+            ]
+          },
+          "calculation": "BCB^T=[[1,-1,0],[-1,3,-2],[0,-2,2]]. The initial weighted mass is 2+2+12=16; the constant equilibrium value is 16/(1+2+3)=8/3.",
+          "expected": {
+            "stiffness": [
+              [
+                1,
+                -1,
+                0
+              ],
+              [
+                -1,
+                3,
+                -2
+              ],
+              [
+                0,
+                -2,
+                2
+              ]
+            ],
+            "weighted_mass": "16",
+            "equilibrium": [
+              "8/3",
+              "8/3",
+              "8/3"
+            ]
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_uses": []
+    }
+  }
+}

@@ -1,0 +1,654 @@
+[
+  {
+    "order": 2658,
+    "id": "nitsche-methods-for-weak-boundary-enforcement",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nitsche methods for weak boundary enforcement",
+    "companion": "nitsche-methods-for-weak-boundary-enforcement-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "fourier-multipliers-and-sobolev-characterisations"
+    ],
+    "items": [
+      {
+        "id": "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+        "kind": "definition",
+        "title": "Restriction Bessel-potential spaces on polyhedral domains",
+        "deps": [
+          "def-real-order-bessel-potential-sobolev-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define H^s on a bounded polyhedral set as the restriction space with its quotient Bessel-potential norm, fixing the convention needed for fractional boundary traces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            },
+            {
+              "title": "Leszek F. Demkowicz, Lecture Notes on Energy Spaces",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/CSE393/book.pdf",
+              "locator": "\u00a73.1, p. 50, \u201cFractional Sobolev spaces on an arbitrary domain\u201d (restriction definition and minimum-energy extension norm)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+        "kind": "lemma",
+        "title": "Zero facet traces of functions in H1_0 on an affine mesh",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-hk-and-hk-zero-notation",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-affine-simplex-gauss-green-formula",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Pull back the reference-simplex trace map to each cell and pass the zero restrictions of a Countable-Choice-selected compactly supported smooth approximating sequence to the trace limit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf",
+              "locator": "\u00a737.1, the zero-boundary Dirichlet space and weak imposition setup."
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download",
+              "locator": "\u00a72, the conforming H1 test space and Dirichlet limit."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nitsche-local-polynomial-flux-inverse-trace",
+        "kind": "lemma",
+        "title": "Local inverse trace bound for a polynomial normal flux",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Apply the published polynomial facet trace estimate to each component of the cellwise gradient and use the shape-regular equivalence of face height and cell diameter.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nitsche-fractional-face-trace-on-simplex",
+        "kind": "lemma",
+        "title": "Fractional Bessel-potential traces on simplex facets",
+        "deps": [
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-plancherel",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-countable-choice",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove the H^s-to-L2 hyperplane trace inequality by Fourier slicing for s>1/2 and descend to the quotient restriction space using locality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nitsche-scaled-fractional-simplex-trace",
+        "kind": "lemma",
+        "title": "Scaled fractional traces on shape-regular simplices",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-plancherel",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-jensens-integral-inequality",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-reference-simplex-poincare-wirtinger",
+          "lem-smooth-density-on-reference-simplex",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-countable-choice",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nitsche-boundary-penalty-forms",
+        "kind": "definition",
+        "title": "Symmetric and nonsymmetric Nitsche boundary forms",
+        "deps": [
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the full H1-conforming polynomial trial space, boundary face scale, weak Dirichlet penalty, and the two consistent forms with the source's sign convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nitsche-global-boundary-flux-bound",
+        "kind": "lemma",
+        "title": "Global boundary-flux estimate on a matching mesh",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "def-matching-affine-simplicial-meshes",
+          "lem-nitsche-local-polynomial-flux-inverse-trace",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Sum the local inverse trace bounds and count the boundary facets incident to each cell, then apply weighted Cauchy\u2013Schwarz.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+        "kind": "lemma",
+        "title": "Fractional weak Green identity and interior flux cancellation",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-bessel-potential-completions-embed-in-tempered-distributions",
+          "thm-plancherel",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "thm-fourier-transform-converts-allowed-tempered-convolutions-to-products",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-nitsche-scaled-fractional-simplex-trace",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-smooth-density-on-reference-simplex",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-compact-support-zero-extension-in-wkp",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-l-one-approximate-identity-on-rn",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-countable-choice",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nitsche-zero-boundary-fractional-comparison-interpolation",
+        "kind": "theorem",
+        "title": "Zero-boundary fractional interpolation in the Nitsche comparison norm",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-scaled-fractional-simplex-trace",
+          "def-nitsche-boundary-penalty-forms",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "def-broken-and-conforming-polynomial-spaces",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-reference-simplex-poincare-wirtinger",
+          "lem-reference-polynomial-norm-equivalence",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-smooth-density-on-reference-simplex",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-compact-support-zero-extension-in-wkp",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-jensens-integral-inequality",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nitsche-global-fractional-boundary-flux-trace",
+        "kind": "lemma",
+        "title": "Mesh-uniform fractional boundary flux trace",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-nitsche-boundary-penalty-forms",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-nitsche-scaled-fractional-simplex-trace",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nitsche-penalty-coercivity",
+        "kind": "lemma",
+        "title": "Nitsche coercivity above the inverse-trace threshold",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "lem-nitsche-global-boundary-flux-bound",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Bound the consistency cross term by the global flux constant and compute the smallest eigenvalue of the resulting two-variable quadratic form for each symmetry parameter.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nitsche-consistency-and-energy-quasioptimality",
+        "kind": "theorem",
+        "title": "Nitsche consistency and energy quasi-optimality",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "lem-nitsche-global-boundary-flux-bound",
+          "lem-nitsche-penalty-coercivity",
+          "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+          "def-countable-choice",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "def-l-one-approximate-identity-on-rn",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "lem-compact-support-zero-extension-in-wkp"
+        ],
+        "dependency_level": 5,
+        "strategy": "Use the local Green identity to obtain exact consistency, prove finite-dimensional solvability from coercivity, and derive the zero-residual affine Strang bound directly from discrete coercivity and boundedness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nonsymmetric-nitsche-l2-error-with-boundary-defect",
+        "kind": "theorem",
+        "title": "Nonsymmetric Nitsche L2 estimate with its boundary consistency defect",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "thm-nitsche-consistency-and-energy-quasioptimality",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+          "thm-nitsche-zero-boundary-fractional-comparison-interpolation",
+          "lem-nitsche-global-fractional-boundary-flux-trace",
+          "thm-adjoint-problem-for-bounded-coercive-variational-forms",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use the zero-trace discrete test approximation in the adjoint identity; the nonsymmetric form leaves the exact boundary flux term, which is bounded by the boundary penalty norm and the dual trace estimate.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-symmetric-nitsche-l2-error-under-dual-regularity",
+        "kind": "theorem",
+        "title": "Symmetric Nitsche L2 estimate under dual regularity and Nitsche approximation",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "thm-nitsche-consistency-and-energy-quasioptimality",
+          "lem-nitsche-fractional-face-trace-on-simplex",
+          "def-nitsche-restriction-bessel-potential-sobolev-spaces",
+          "def-real-order-bessel-potential-sobolev-space",
+          "thm-fourier-characterisation-of-fractional-hilbert-sobolev-spaces",
+          "lem-nitsche-global-boundary-flux-bound",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+          "thm-nitsche-zero-boundary-fractional-comparison-interpolation",
+          "thm-adjoint-problem-for-bounded-coercive-variational-forms",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Solve the adjoint Poisson problem, use symmetric adjoint consistency to cancel the boundary residual, subtract a zero-trace discrete approximant, and apply the stated Nitsche comparison-norm approximation bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2659,
+    "id": "nitsche-methods-for-weak-boundary-enforcement-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nitsche methods for weak boundary enforcement \u2014 Examples",
+    "companion": "nitsche-methods-for-weak-boundary-enforcement",
+    "requires": [
+      "nitsche-methods-for-weak-boundary-enforcement"
+    ],
+    "items": [
+      {
+        "id": "ex-nitsche-exact-affine-data-weak-imposition",
+        "kind": "example",
+        "title": "Exact affine data under weak imposition",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "lem-nitsche-penalty-coercivity",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Substitute the exact affine solution into each Nitsche form and compare with strong imposition on the zero-trace subspace.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-nitsche-penalty-below-and-above-coercivity-threshold",
+        "kind": "example",
+        "title": "Penalties below and above the Nitsche coercivity threshold",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "lem-nitsche-penalty-coercivity",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Compute the penalty-free constant-mode failure and apply the proven sufficient threshold to the same finite-element model.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-nitsche-symmetric-and-nonsymmetric-l2-defects",
+        "kind": "example",
+        "title": "Symmetric cancellation and the nonsymmetric L2 boundary defect",
+        "deps": [
+          "def-nitsche-boundary-penalty-forms",
+          "thm-symmetric-nitsche-l2-error-under-dual-regularity",
+          "thm-nonsymmetric-nitsche-l2-error-with-boundary-defect",
+          "lem-nitsche-h-one-zero-functions-have-zero-facet-traces",
+          "lem-nitsche-fractional-weak-green-and-flux-cancellation",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Write the duality identities for both signs and isolate the boundary-flux term that cancels only in the symmetric form.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 37, Nitsche boundary penalty method",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap37.pdf"
+            },
+            {
+              "title": "Mika Juntunen and Rolf Stenberg, Nitsche's method for general boundary conditions, Mathematics of Computation 78 (2009), 1353\u20131374",
+              "url": "https://aaltodoc.aalto.fi/bitstreams/f6ebc2d5-8166-479a-96c8-45d2538ce179/download"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+# BEM polyhedral-edge kernel supplier, first owner research cycle
+
+This packet proposes one new local lemma and four complete edited carriers, all under this research directory. It does not install canonical content or claim native review, author readiness, independent acceptance, or gate coverage. All original 71 pairs remain unchanged. The new lemma belongs to the existing PE16 A page; no new page pair is necessary.
+
+The missing representation is established by a distributional argument for **every global H1/2 density**, rather than by attempting to approximate such a density by functions vanishing near edges. The latter would conceal a critical-exponent compatibility issue. The proof compares the piecewise finite-energy solution with the double-layer kernel as locally integrable distributions. Both have source `-div(phi n delta_Gamma)`; their difference is entire harmonic. Mollification and the ball mean-value formula remove that difference using its subcubic L1 growth. Thus no boundary regularity theorem for classical double layers and no citation-only fallback is needed. The lemma also computes the ordinary/principal-value K kernel on open faces for facewise C1 data satisfying the global H1/2 hypothesis.
+
+The typed prerequisite assumes the energy pair's jump and smooth-global-test stationarity, not the double-layer transmission theorem. This avoids a circular proof: the lemma has local level 3; the existing level-4 transmission theorem constructs the pair and invokes the lemma. The existing minimization, harmonicity, common-conormal, full-space bounds, and signed jumps are retained.
+
+Exact hypotheses matter. A density smooth up to each closed planar face and agreeing along shared edges is included even when nonzero at edges and vertices. Independent discontinuous face values do not in general define an H1/2 double-layer density. Edge and vertex values themselves do not receive the smooth-point half-jump coefficient; the full global jump remains an equality of Sobolev traces. W remains the negative common weak conormal. An ordinary integrable hypersingular boundary kernel is not asserted.
+
+The actual single-layer theorem has a parallel edge restriction in its last sentence, but its proof never needs that restriction. Its current area-growth, logarithmic gradient, boundary-neighborhood-volume, far-field, and completion estimates work for every bounded density. The supplied complete proposal makes that already justified generality explicit and spells out why the displayed gradient is the global weak gradient. This includes P0 densities that can jump across mesh edges; such data belong to H-1/2, unlike arbitrary discontinuous H1/2 double-layer data. This also removes the stale single-layer portion of the actual Calderon remark.
+
+Two small proof details in the proposed double-layer carrier are made explicit: the distributional first-derivative interface term has sign `(gamma-plus - gamma-minus)n` (its old opposite sign was immaterial for matching traces), and the average-trace bound uses the exterior trace estimate plus the prescribed jump, so no uncontrolled interior mean enters the estimate.
+
+## Exact content deliverables
+
+- `proposed-item.md`: complete new `lem-bem-polyhedral-edge-kernel-representation`.
+- `proposed-thm-bem-double-layer-transmission-jumps-and-bounds.md`: full approved energy theorem retained, kernel claim extended to all H1/2, old face-interior-only proof tail replaced by a literal application of the lemma.
+- `proposed-def-bem-double-layer-transmission-space.md`: full definition retained; kernel agreement language follows the stronger theorem without introducing a dependency cycle.
+- `proposed-thm-bem-single-layer-transmission-mapping-and-coercivity.md`: full weak theorem retained; kernel identification made valid for bounded edge-reaching/discontinuous densities, with its local proof.
+- `proposed-thm-bem-calderon-mapping-and-jump-identities.md`: Statement and two proof steps unchanged; direct dependency on the new lemma and precise replacement of the obsolete open-gap remark.
+- `typed-proposal.json`, `exact-inventory.json`, and `dependency-order.md`: integration targets and actual consumer dispositions.
+
+## Actual consumer reading and dispositions
+
+Read fully the actual three geometry/energy definitions, trace/lifting and exterior-energy suppliers, Newton-kernel definition/fundamental-solution lemma, Poisson-kernel lemma, both transmission theorems, Calderon definition/theorem, hypersingular theorem, surface P0 definition, Galerkin theorem, P0 corollary, assembly algorithm, matrix-perturbation theorem, and inexact assembly example. Full actual bodies, not manifest summaries, control these dispositions.
+
+The actual hypersingular proof uses stationarity, bounded weak conormals, signed trace jumps, exterior trace control and interior Poincare–Wirtinger. The proposal preserves each interface, the constant kernel, quotient ellipticity, symmetry, and rank-one stabilization. It needs no mathematical repair. The Calderon proof remains an exact sum/difference computation of weak traces and conormals; only its obsolete kernel-gap remark needs replacement.
+
+The assembly algorithm is a transitive consumer through the Calderon definition, but its actual entries use only V. This packet strengthens V's classical realization for bounded densities and changes none of its per-pair certificate hypotheses or residual accounting. Panel-pair suppliers remain the separately assigned helper's responsibility. Matrix transfer and its finite ledger use those unchanged certified bounds. Galerkin and its P0 rate consume the unchanged single-layer energy bounds and approximation interface. No consumer Statement is narrowed.
+
+Read the controlling PE16 section completely (`research/plan-numerical-spatial-track.md`, lines 1465–1493) and the complete PE16/PE16-B entries in `research/plan-spec.json` (orders 2668/2669, surrounding lines 780256–780288). Read all batch-57 notes and the whole cross-batch record. No canonical PE16 Markdown page currently exists under `library/`; page ownership is currently the native batch-57 scaffold/manifest obligation. No page was fabricated.
+
+## Source consultation and exact reading extent
+
+Costabel's author-hosted complete PDF is available at the source URL and the existing native cache `research/numerical-analysis-remaining-71-2026-10-17-batch-57-source-cache/costabel-1988-lipschitz.pdf`. Its text cache contains only form feeds. For this cycle the actual scans were rendered and visually read **in full for printed pp. 614–623**, PDF image pages 2–6. The five images retained here record those pages. This includes all of weak Green representation Lemma 3.4, the weak conormal setup, Lemma 4.1 and its complete distributional proof, and the energy argument; it is not a claim to have read printed pp. 613 or 624–626 in this cycle. The homogeneous-energy uniqueness proof in the proposal is supplied locally rather than copied from Costabel's compact-support setup.
+
+Sayas's complete cached PDF and extracted text are available at the source URL and native batch-57 source cache. This cycle read extracted-text lines **1640–2255** (Chapter 2 §§2.1–2.2, printed pp. 23–28, including the smooth-point warning); **2529–2839** (Chapter 2 §2.4 and the beginning of §2.5 through exercise 5); and **3300–3995** (Chapter 3 §§3.1–3.3, printed pp. 40–46, plus the beginning of §3.4). This is not a whole-book reading claim. The text explicitly says its transmission discussion is not yet a rigorous Sobolev proof. Accordingly it corroborates signs and formulations, not an imported proof of edge mapping. The actual material at printed pp. 40–46 is in Chapter 3, not Chapter 2 §2.5 as several current native references say; the four proposed carriers correct their relevant locators.
+
+Read the complete actual published mollification, L1 approximate-identity convergence, mollifier approximate-identity proposition/definition, Fubini, Holder, and smooth-ball divergence carriers used by the proposed proof. No C1-boundary divergence theorem is widened to a polyhedron: the first-derivative polyhedral integration formula is proved locally using graph flattening, the one-dimensional fundamental theorem, H1 approximation, and cancellation of sector interfaces. Smooth-ball divergence is used only for mean value.
+
+## Remaining duties
+
+No mathematical gap in this local edge representation remains in the proposal. Root must aggregate it with the other packets and arrange the one native batch-57 continuation. The original reviewer still owes the requested second/final review of the actual refreshed lemma, changed suppliers, and every listed direct/indirect consumer. The research packet itself supplies no such native review. No canonical files, manifests, proof contracts, readiness records, hashes, runtime files, tests, validators, or gates were changed or run by this helper.

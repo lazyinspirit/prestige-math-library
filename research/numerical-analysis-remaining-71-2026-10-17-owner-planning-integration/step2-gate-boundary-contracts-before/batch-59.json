@@ -1,0 +1,1839 @@
+{
+  "version": 1,
+  "scope": [
+    "def-compressible-navier-stokes-fourier-model",
+    "lem-compressible-admissible-state-set-open-convex",
+    "lem-compressible-ideal-gas-entropy-pair-and-variables",
+    "def-ideal-gas-entropy-conservative-pair-flux",
+    "lem-compressible-viscous-flux-entropy-variable-factorization",
+    "lem-ideal-gas-entropy-conservative-flux-properties",
+    "lem-compressible-viscous-smooth-entropy-identity",
+    "def-periodic-sbp-compressible-viscous-scheme",
+    "def-orthogonal-fv-compressible-viscous-scheme",
+    "thm-periodic-sbp-compressible-viscous-conservation-and-entropy",
+    "lem-orthogonal-fv-compressible-viscous-flux-consistency",
+    "thm-orthogonal-fv-compressible-viscous-entropy-dissipation",
+    "alg-positive-tube-forward-euler-for-compressible-sbp",
+    "lem-positive-tube-forward-euler-loop-terminates",
+    "thm-fixed-mesh-forward-euler-error-for-compressible-sbp",
+    "ex-compressible-entropy-variable-blowup-near-vacuum",
+    "ex-periodic-compressible-viscous-manufactured-state",
+    "ex-compressible-couette-thermal-wall-entropy-balance",
+    "ex-sbp-inviscid-versus-viscous-entropy-budget"
+  ],
+  "contracts": {
+    "def-compressible-navier-stokes-fourier-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition statement fixes d≥1 and the state (ρ,m,E)=(1,0,1) belongs to G, since 1>0 and 1>|0|²/2; the defined state domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no additional zero-input or zero-coefficient claim beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-parameter theorem is asserted; all parameter values use the displayed ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only explicit finite index sets and deterministic formulas occur; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "definition"
+    },
+    "lem-compressible-admissible-state-set-open-convex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-compressible-navier-stokes-fourier-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a gas constant $R>0$, an adiabatic exponent $\\gamma>1$, a constant reference entropy $s_0\\in\\mathbb R$, shear viscosity $\\mu>0$, bulk viscosity $\\zeta\\ge0$, and heat conductivity $\\kappa>0$. Put $c_v=R/(\\gamma-1)$. A conservative state is $U=(\\rho,m,E)\\in\\mathbb R\\times\\mathbb R^d\\times\\mathbb R$. Its **admissible state set** is\n\n$$\\mathcal G=\\left\\{(\\rho,m,E):\\rho>0,\\ E>\\frac{|m|^2}{2\\rho}\\right\\}.$$\n\nFor $U\\in\\mathcal G$, define the velocity $u=m/\\rho$, internal-energy density $\\varepsilon=E-|m|^2/(2\\rho)$, pressure $p=(\\gamma-1)\\varepsilon$, temperature $T=p/(R\\rho)$, specific entropy $s(U)=c_v\\log(p/\\rho^\\gamma)+s_0$, and mathematical entropy $\\eta(U)=-\\rho s(U)$. The Euler flux in coordinate direction $j$ is\n\n$$F_j(U)=\\bigl(\\rho u_j,\\ m u_j+p e_j,\\ (E+p)u_j\\bigr),\\qquad j=1,\\ldots,d,$$\n\nwhere $e_j$ is the $j$th standard basis vector of $\\mathbb R^d$. The mathematical entropy flux is $q_j(U)=\\eta(U)u_j$.\n\nFor a differentiable velocity field, write $D=\\operatorname{sym}\\nabla u$ with $D_{ab}=(\\partial_bu_a+\\partial_au_b)/2$, and $D^0=D-(\\operatorname{tr}D/d)I$. The Newtonian stress and Fourier viscous flux are\n\n$$\\tau=2\\mu D^0+\\zeta(\\operatorname{tr}D)I, \\qquad F_j^{\\mathrm{visc}}=\\bigl(0,\\tau_{j1},\\ldots,\\tau_{jd},\\ u\\cdot\\tau_{j\\cdot}+\\kappa\\partial_jT\\bigr).$$\n\nThe **compressible Navier–Stokes–Fourier balance law** is the conservative system\n\n$$\\partial_tU+\\sum_{j=1}^d\\partial_jF_j(U) =\\sum_{j=1}^d\\partial_jF_j^{\\mathrm{visc}}(U,\\nabla u,\\nabla T).$$\n\nUnless a boundary is specified separately, a periodic solution means that all fields and fluxes are periodic in each spatial coordinate. The positive parameters and the inequalities defining $\\mathcal G$ imply $p>0$ and $T>0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the convex half-space $\\rho>0$, set $g(\\rho,m)=|m|^2/(2\\rho)$. For any direction $(a,b)\\in\\mathbb R\\times\\mathbb R^d$, differentiating twice along $(\\rho+ta,m+tb)$ gives $\\frac{d^2}{dt^2}g(\\rho+ta,m+tb)|_{t=0}=|b-(m/\\rho)a|^2/\\rho\\ge0$. Thus $g$ is convex on that half-space.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $U_0=(\\rho_0,m_0,E_0)$ and $U_1=(\\rho_1,m_1,E_1)$ lie in $\\mathcal G$, and let $0\\le t\\le1$. Then $\\rho_t=(1-t)\\rho_0+t\\rho_1>0$ and convexity from step 1.1 gives $g(\\rho_t,m_t)\\le(1-t)g(\\rho_0,m_0)+tg(\\rho_1,m_1)$. The strict endpoint inequalities $E_i>g(\\rho_i,m_i)$ imply $E_t>g(\\rho_t,m_t)$, so $U_t\\in\\mathcal G$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The function $g$ is continuous where $\\rho>0$, so the strict inequalities $\\rho>0$ and $E-g(\\rho,m)>0$ define an open set there. Step 2.1 proves convexity, and choosing $t=1/2$ proves the arithmetic-mean assertion.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes the zero direction in the Hessian calculation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter assertion is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 1.3 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "lem-compressible-ideal-gas-entropy-pair-and-variables": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-compressible-navier-stokes-fourier-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a gas constant $R>0$, an adiabatic exponent $\\gamma>1$, a constant reference entropy $s_0\\in\\mathbb R$, shear viscosity $\\mu>0$, bulk viscosity $\\zeta\\ge0$, and heat conductivity $\\kappa>0$. Put $c_v=R/(\\gamma-1)$. A conservative state is $U=(\\rho,m,E)\\in\\mathbb R\\times\\mathbb R^d\\times\\mathbb R$. Its **admissible state set** is\n\n$$\\mathcal G=\\left\\{(\\rho,m,E):\\rho>0,\\ E>\\frac{|m|^2}{2\\rho}\\right\\}.$$\n\nFor $U\\in\\mathcal G$, define the velocity $u=m/\\rho$, internal-energy density $\\varepsilon=E-|m|^2/(2\\rho)$, pressure $p=(\\gamma-1)\\varepsilon$, temperature $T=p/(R\\rho)$, specific entropy $s(U)=c_v\\log(p/\\rho^\\gamma)+s_0$, and mathematical entropy $\\eta(U)=-\\rho s(U)$. The Euler flux in coordinate direction $j$ is\n\n$$F_j(U)=\\bigl(\\rho u_j,\\ m u_j+p e_j,\\ (E+p)u_j\\bigr),\\qquad j=1,\\ldots,d,$$\n\nwhere $e_j$ is the $j$th standard basis vector of $\\mathbb R^d$. The mathematical entropy flux is $q_j(U)=\\eta(U)u_j$.\n\nFor a differentiable velocity field, write $D=\\operatorname{sym}\\nabla u$ with $D_{ab}=(\\partial_bu_a+\\partial_au_b)/2$, and $D^0=D-(\\operatorname{tr}D/d)I$. The Newtonian stress and Fourier viscous flux are\n\n$$\\tau=2\\mu D^0+\\zeta(\\operatorname{tr}D)I, \\qquad F_j^{\\mathrm{visc}}=\\bigl(0,\\tau_{j1},\\ldots,\\tau_{jd},\\ u\\cdot\\tau_{j\\cdot}+\\kappa\\partial_jT\\bigr).$$\n\nThe **compressible Navier–Stokes–Fourier balance law** is the conservative system\n\n$$\\partial_tU+\\sum_{j=1}^d\\partial_jF_j(U) =\\sum_{j=1}^d\\partial_jF_j^{\\mathrm{visc}}(U,\\nabla u,\\nabla T).$$\n\nUnless a boundary is specified separately, a periodic solution means that all fields and fluxes are periodic in each spatial coordinate. The positive parameters and the inequalities defining $\\mathcal G$ imply $p>0$ and $T>0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compressible-admissible-state-set-open-convex",
+          "source_section": "Statement",
+          "quote": "The set $\\mathcal G$ in [[def-compressible-navier-stokes-fourier-model]] is open and convex in $\\mathbb R^{d+2}$. In particular, the arithmetic mean of any two admissible conservative states is admissible.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $\\varepsilon=E-|m|^2/(2\\rho)$ and $u=m/\\rho$. Rewriting the entropy gives $\\eta=-c_v\\rho\\log((\\gamma-1)\\varepsilon)+c_v\\gamma\\rho\\log\\rho-s_0\\rho$. For an increment $\\delta U=(a,b,c)$, its first internal-energy variation is $\\delta\\varepsilon=c-u\\cdot b+|u|^2a/2$, and its second directional variation is $D^2\\varepsilon[\\delta U,\\delta U]=-|b-ua|^2/\\rho$. The chain rule therefore yields $D^2\\eta[\\delta U,\\delta U]=c_v\\left(\\frac{\\gamma}{\\rho}a^2-\\frac{2}{\\varepsilon}a\\,\\delta\\varepsilon+\\frac{\\rho}{\\varepsilon^2}(\\delta\\varepsilon)^2+\\frac1{\\varepsilon}|b-ua|^2\\right)$. The first three terms have matrix $\\begin{pmatrix}\\gamma/\\rho&-1/\\varepsilon\\\\-1/\\varepsilon&\\rho/\\varepsilon^2\\end{pmatrix}$, whose leading diagonal entry is positive and determinant is $(\\gamma-1)/\\varepsilon^2>0$. The last term is nonnegative. If the full quadratic form is zero, then $a=\\delta\\varepsilon=0$ and $b=0$; the formula for $\\delta\\varepsilon$ then gives $c=0$. Thus the Hessian is positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For smooth Euler fields write $D_t=\\partial_t+u\\cdot\\nabla$. The conservative mass and momentum equations expand, using $\\rho>0$, to $D_t\\rho=-\\rho\\nabla\\cdot u$ and $\\rho D_tu+\\nabla p=0$. Subtracting the kinetic-energy balance obtained by dotting the momentum equation with $u$ from the total-energy equation gives $\\partial_t(\\rho c_vT)+\\nabla\\cdot(\\rho c_vT u)+p\\nabla\\cdot u=0$; here $\\nabla\\cdot(pu)-u\\cdot\\nabla p=p\\nabla\\cdot u$. Hence $D_tT/T=-(\\gamma-1)\\nabla\\cdot u$ and $D_tp/p=-\\gamma\\nabla\\cdot u$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating the same expression for $\\eta$ gives $\\beta=c_v\\rho/\\varepsilon=1/T$ and $v=(c_v\\gamma-s-\\beta|u|^2/2,\\beta u,-\\beta)$. Positive definiteness from step 1.1 makes $D_Uv=D_U^2\\eta$ invertible, so the inverse function theorem gives a smooth local inverse near each state. Since $\\mathcal G$ is convex by [F2], integrating the positive Hessian along the segment between any two distinct states also gives strict convexity of $\\eta$ on $\\mathcal G$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The formula for $s$ now gives $D_ts=c_v(D_tp/p-\\gamma D_t\\rho/\\rho)=0$. Combining this with the mass equation yields $\\partial_t(\\rho s)+\\nabla\\cdot(\\rho s u)=0$, or $\\partial_t\\eta+\\sum_j\\partial_jq_j=0$. Substituting $\\partial_tU=-\\sum_jDF_j(U)\\partial_jU$ into this chain-rule identity leaves $\\sum_j(\\nabla_Uq_j-v^TDF_j)\\partial_jU=0$. The spatial derivatives may be prescribed independently at an interior state because $\\mathcal G$ is open, so each coefficient vanishes and $\\nabla_Uq_j=v^TDF_j$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Direct substitution of $v$, $F_j$, and $q_j$ gives $v^TF_j-q_j=\\bigl(\\rho(c_v\\gamma-s-\\beta|u|^2/2)+\\beta\\rho|u|^2-\\beta E+\\rho s\\bigr)u_j$. Using $E=\\varepsilon+\\rho|u|^2/2$ and $\\beta\\varepsilon=c_v\\rho$, the coefficient simplifies to $c_v(\\gamma-1)\\rho=R\\rho$. This proves $\\psi_j=\\rho R u_j$ and completes the stated entropy-pair and potential identities.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 proves that zero Hessian quadratic form forces the zero conservative-state increment."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter assertion is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 2.1, 2.2, 2.3 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "def-ideal-gas-entropy-conservative-pair-flux": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the Δv=0 branch specifies the flux value on equal states."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter assertion is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only explicit finite index sets and deterministic formulas occur; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "definition"
+    },
+    "lem-ideal-gas-entropy-conservative-flux-properties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-entropy-conservative-pair-flux",
+          "source_section": "Definition",
+          "quote": "For two admissible states $U_L,U_R\\in\\mathcal G$, let $\\bar U=(U_L+U_R)/2$, $\\Delta v=v(U_R)-v(U_L)$, and $\\Delta\\psi_j=\\psi_j(U_R)-\\psi_j(U_L)$, where $v$ and $\\psi_j$ are given by [[lem-compressible-ideal-gas-entropy-pair-and-variables]]. Define the symmetric two-point flux\n\n$$F_j^{\\mathrm{ec}}(U_L,U_R)= \\begin{cases} F_j(U_L),&\\Delta v=0,\\\\[2mm] F_j(\\bar U)+\\dfrac{\\Delta\\psi_j-\\Delta v^TF_j(\\bar U)}{\\|\\Delta v\\|^2}\\,\\Delta v,&\\Delta v\\ne0. \\end{cases}$$\n\nThe norm is Euclidean in the $d+2$ conservative-state coordinates. The convexity result [[lem-compressible-admissible-state-set-open-convex]] ensures $\\bar U\\in\\mathcal G$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compressible-ideal-gas-entropy-pair-and-variables",
+          "source_section": "Statement",
+          "quote": "For the ideal-gas model in [[def-compressible-navier-stokes-fourier-model]], the mathematical entropy $\\eta=-\\rho s$ has positive-definite Hessian on $\\mathcal G$. Its entropy variables are\n\n$$v(U)=\\nabla_U\\eta(U)=\\left(c_v\\gamma-s-\\frac{\\beta|u|^2}{2},\\ \\beta u,\\ -\\beta\\right),\\qquad \\beta=\\frac{c_v\\rho}{\\varepsilon}=\\frac1T.$$\n\nThe Euler entropy flux $q_j(U)=\\eta(U)u_j$ is compatible with $F_j$, meaning $\\nabla_Uq_j=(\\nabla_U\\eta)^TDF_j$, and its entropy potential is $\\psi_j(U)=v(U)^TF_j(U)-q_j(U)=\\rho R u_j$. Consequently $U\\mapsto v(U)$ is a local diffeomorphism at every $U\\in\\mathcal G$ and $\\eta$ is strictly convex on $\\mathcal G$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-compressible-admissible-state-set-open-convex",
+          "source_section": "Statement",
+          "quote": "The set $\\mathcal G$ in [[def-compressible-navier-stokes-fourier-model]] is open and convex in $\\mathbb R^{d+2}$. In particular, the arithmetic mean of any two admissible conservative states is admissible.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $U_L=U_R$, then $\\Delta v=0$ and [F1] gives $F_j^{\\mathrm{ec}}(U_L,U_R)=F_j(U_L)$. If $U_L\\ne U_R$, convexity [F3] keeps the segment $U(t)=U_L+t(U_R-U_L)$ in $\\mathcal G$, and $\\Delta v^T(U_R-U_L)=\\int_0^1 (U_R-U_L)^TD_U^2\\eta(U(t))(U_R-U_L)\\,dt>0$ by [F2]. Hence $\\Delta v\\ne0$, so the denominator in [F1] is nonzero; also $\\bar U\\in\\mathcal G$. This proves well-definedness and consistency.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Exchanging $U_L$ and $U_R$ leaves $\\bar U$ fixed and changes the signs of both $\\Delta v$ and $\\Delta\\psi_j$. Thus the scalar correction coefficient in [F1] changes sign while its vector factor changes sign, leaving the flux unchanged. The diagonal branch is also symmetric.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix a state $X\\in\\mathcal G$ and write $U_R=X+h/2$, $U_L=X-h/2$ for small $h$. The entropy compatibility in [F2] implies $D_U\\psi_j(X)=F_j(X)^TD_Uv(X)$. Symmetric Taylor expansions therefore give $\\Delta v=D_Uv(X)h+O(|h|^3)$ and $\\Delta\\psi_j=F_j(X)^TD_Uv(X)h+O(|h|^3)$, so $N:=\\Delta\\psi_j-\\Delta v^TF_j(X)=O(|h|^3)$. Positive definiteness of $D_Uv(X)$ implies $|\\Delta v|\\ge c|h|$ in a sufficiently small neighborhood of $h=0$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "When $\\Delta v\\ne0$, dotting [F1] with $\\Delta v$ cancels its denominator and gives $\\Delta v^TF_j(\\bar U)+\\Delta\\psi_j-\\Delta v^TF_j(\\bar U)=\\Delta\\psi_j$. When $\\Delta v=0$, step 1.1 gives $U_L=U_R$, so both sides are zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On that neighborhood, the correction $N\\Delta v/|\\Delta v|^2$ is $O(|h|^2)$ and tends to zero on the diagonal. Differentiating the symmetric Taylor remainders gives $\\partial_hN=O(|h|^2)$, $\\partial_XN=O(|h|^3)$, $\\partial_h\\Delta v=O(1)$, and $\\partial_X\\Delta v=O(|h|)$. The quotient rule then shows that the correction derivatives are bounded and tend to zero as $h\\to0$; its diagonal extension is $C^1$. Away from the diagonal the denominator is nonzero by step 1.1 and the formula is smooth. Thus the flux is locally Lipschitz everywhere on $\\mathcal G\\times\\mathcal G$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 proves that Δv=0 occurs on the diagonal and verifies the equal-state flux branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter assertion is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 1.3, 2.1, 2.2 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "lem-compressible-viscous-flux-entropy-variable-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-compressible-navier-stokes-fourier-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a gas constant $R>0$, an adiabatic exponent $\\gamma>1$, a constant reference entropy $s_0\\in\\mathbb R$, shear viscosity $\\mu>0$, bulk viscosity $\\zeta\\ge0$, and heat conductivity $\\kappa>0$. Put $c_v=R/(\\gamma-1)$. A conservative state is $U=(\\rho,m,E)\\in\\mathbb R\\times\\mathbb R^d\\times\\mathbb R$. Its **admissible state set** is\n\n$$\\mathcal G=\\left\\{(\\rho,m,E):\\rho>0,\\ E>\\frac{|m|^2}{2\\rho}\\right\\}.$$\n\nFor $U\\in\\mathcal G$, define the velocity $u=m/\\rho$, internal-energy density $\\varepsilon=E-|m|^2/(2\\rho)$, pressure $p=(\\gamma-1)\\varepsilon$, temperature $T=p/(R\\rho)$, specific entropy $s(U)=c_v\\log(p/\\rho^\\gamma)+s_0$, and mathematical entropy $\\eta(U)=-\\rho s(U)$. The Euler flux in coordinate direction $j$ is\n\n$$F_j(U)=\\bigl(\\rho u_j,\\ m u_j+p e_j,\\ (E+p)u_j\\bigr),\\qquad j=1,\\ldots,d,$$\n\nwhere $e_j$ is the $j$th standard basis vector of $\\mathbb R^d$. The mathematical entropy flux is $q_j(U)=\\eta(U)u_j$.\n\nFor a differentiable velocity field, write $D=\\operatorname{sym}\\nabla u$ with $D_{ab}=(\\partial_bu_a+\\partial_au_b)/2$, and $D^0=D-(\\operatorname{tr}D/d)I$. The Newtonian stress and Fourier viscous flux are\n\n$$\\tau=2\\mu D^0+\\zeta(\\operatorname{tr}D)I, \\qquad F_j^{\\mathrm{visc}}=\\bigl(0,\\tau_{j1},\\ldots,\\tau_{jd},\\ u\\cdot\\tau_{j\\cdot}+\\kappa\\partial_jT\\bigr).$$\n\nThe **compressible Navier–Stokes–Fourier balance law** is the conservative system\n\n$$\\partial_tU+\\sum_{j=1}^d\\partial_jF_j(U) =\\sum_{j=1}^d\\partial_jF_j^{\\mathrm{visc}}(U,\\nabla u,\\nabla T).$$\n\nUnless a boundary is specified separately, a periodic solution means that all fields and fluxes are periodic in each spatial coordinate. The positive parameters and the inequalities defining $\\mathcal G$ imply $p>0$ and $T>0$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compressible-ideal-gas-entropy-pair-and-variables",
+          "source_section": "Statement",
+          "quote": "For the ideal-gas model in [[def-compressible-navier-stokes-fourier-model]], the mathematical entropy $\\eta=-\\rho s$ has positive-definite Hessian on $\\mathcal G$. Its entropy variables are\n\n$$v(U)=\\nabla_U\\eta(U)=\\left(c_v\\gamma-s-\\frac{\\beta|u|^2}{2},\\ \\beta u,\\ -\\beta\\right),\\qquad \\beta=\\frac{c_v\\rho}{\\varepsilon}=\\frac1T.$$\n\nThe Euler entropy flux $q_j(U)=\\eta(U)u_j$ is compatible with $F_j$, meaning $\\nabla_Uq_j=(\\nabla_U\\eta)^TDF_j$, and its entropy potential is $\\psi_j(U)=v(U)^TF_j(U)-q_j(U)=\\rho R u_j$. Consequently $U\\mapsto v(U)$ is a local diffeomorphism at every $U\\in\\mathcal G$ and $\\eta$ is strictly convex on $\\mathcal G$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any entropy-variable gradient array $Z$, set $G_{k\\ell}=Z_{k,m_\\ell}+u_\\ell Z_{k,E}$ and $c_k=Z_{k,E}$. The formula for $v$ in [F2] gives, when $Z_k=\\partial_kv$, $G_{k\\ell}=T^{-1}\\partial_ku_\\ell$ and $c_k=T^{-2}\\partial_kT$, since $\\partial_k(\\beta u_\\ell)+u_\\ell\\partial_k(-\\beta)=\\beta\\partial_ku_\\ell$ and $\\partial_k(-1/T)=T^{-2}\\partial_kT$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a general array $Z$, define $\\tau_{k\\ell}(Z)=2\\mu T G^0(Z)_{k\\ell}+\\zeta T\\operatorname{tr}G(Z)\\delta_{k\\ell}$. The displayed bilinear form expands to $\\mathcal B_U(Z,W)=\\sum_{k,\\ell}(W_{k,m_\\ell}+u_\\ell W_{k,E})\\tau_{k\\ell}(Z)+\\kappa T^2\\sum_kW_{k,E}Z_{k,E}$. Thus the linear functional in $W$ is pairing against the flux with zero mass row, momentum entries $\\tau_{k\\ell}(Z)$, and energy entry $u\\cdot\\tau_{k\\cdot}(Z)+\\kappa T^2Z_{k,E}$. By step 1.1 this is precisely the physical viscous flux when $Z=\\nabla v$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The linear map $\\mathcal R_U$ in the Statement gives $\\mathcal B_U(Z,W)=(\\mathcal R_UZ)\\cdot(\\mathcal R_UW)$ term by term. Its adjoint therefore defines the block matrix $K(U)=\\mathcal R_U^*\\mathcal R_U$, which is symmetric and positive semidefinite because $Z^TK(U)Z=|\\mathcal R_UZ|^2\\ge0$. In particular, for $W=Z$ the quadratic form equals $2\\mu T|G^0(Z)|^2+\\zeta T(\\operatorname{tr}G(Z))^2+\\kappa T^2\\sum_k Z_{k,E}^2\\ge0$, using $T>0$, $\\mu>0$, $\\zeta\\ge0$, and $\\kappa>0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Take $Z=\\nabla v$. Then $\\nabla u=T G(Z)$ and $\\nabla T=T^2c(Z)$ by step 1.1. Since $\\tau$ is symmetric, $\\tau:\\nabla u=2\\mu T^2|G^0(Z)|^2+\\zeta T^2(\\operatorname{tr}G(Z))^2$. Dividing by $T$ and adding $\\kappa|\\nabla T|^2/T^2=\\kappa T^2|c(Z)|^2$ gives exactly $\\mathcal B_U(Z,Z)$, proving the production identity and its nonnegativity.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement is pointwise for U∈G; the model state (1,0,1) witnesses that G is nonempty for every stated d≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 evaluates the sum-of-squares factorization at zero entropy-variable gradients."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter assertion is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 1.3, 1.4 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "lem-compressible-viscous-smooth-entropy-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-compressible-navier-stokes-fourier-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a gas constant $R>0$, an adiabatic exponent $\\gamma>1$, a constant reference entropy $s_0\\in\\mathbb R$, shear viscosity $\\mu>0$, bulk viscosity $\\zeta\\ge0$, and heat conductivity $\\kappa>0$. Put $c_v=R/(\\gamma-1)$. A conservative state is $U=(\\rho,m,E)\\in\\mathbb R\\times\\mathbb R^d\\times\\mathbb R$. Its **admissible state set** is\n\n$$\\mathcal G=\\left\\{(\\rho,m,E):\\rho>0,\\ E>\\frac{|m|^2}{2\\rho}\\right\\}.$$\n\nFor $U\\in\\mathcal G$, define the velocity $u=m/\\rho$, internal-energy density $\\varepsilon=E-|m|^2/(2\\rho)$, pressure $p=(\\gamma-1)\\varepsilon$, temperature $T=p/(R\\rho)$, specific entropy $s(U)=c_v\\log(p/\\rho^\\gamma)+s_0$, and mathematical entropy $\\eta(U)=-\\rho s(U)$. The Euler flux in coordinate direction $j$ is\n\n$$F_j(U)=\\bigl(\\rho u_j,\\ m u_j+p e_j,\\ (E+p)u_j\\bigr),\\qquad j=1,\\ldots,d,$$\n\nwhere $e_j$ is the $j$th standard basis vector of $\\mathbb R^d$. The mathematical entropy flux is $q_j(U)=\\eta(U)u_j$.\n\nFor a differentiable velocity field, write $D=\\operatorname{sym}\\nabla u$ with $D_{ab}=(\\partial_bu_a+\\partial_au_b)/2$, and $D^0=D-(\\operatorname{tr}D/d)I$. The Newtonian stress and Fourier viscous flux are\n\n$$\\tau=2\\mu D^0+\\zeta(\\operatorname{tr}D)I, \\qquad F_j^{\\mathrm{visc}}=\\bigl(0,\\tau_{j1},\\ldots,\\tau_{jd},\\ u\\cdot\\tau_{j\\cdot}+\\kappa\\partial_jT\\bigr).$$\n\nThe **compressible Navier–Stokes–Fourier balance law** is the conservative system\n\n$$\\partial_tU+\\sum_{j=1}^d\\partial_jF_j(U) =\\sum_{j=1}^d\\partial_jF_j^{\\mathrm{visc}}(U,\\nabla u,\\nabla T).$$\n\nUnless a boundary is specified separately, a periodic solution means that all fields and fluxes are periodic in each spatial coordinate. The positive parameters and the inequalities defining $\\mathcal G$ imply $p>0$ and $T>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compressible-ideal-gas-entropy-pair-and-variables",
+          "source_section": "Statement",
+          "quote": "For the ideal-gas model in [[def-compressible-navier-stokes-fourier-model]], the mathematical entropy $\\eta=-\\rho s$ has positive-definite Hessian on $\\mathcal G$. Its entropy variables are\n\n$$v(U)=\\nabla_U\\eta(U)=\\left(c_v\\gamma-s-\\frac{\\beta|u|^2}{2},\\ \\beta u,\\ -\\beta\\right),\\qquad \\beta=\\frac{c_v\\rho}{\\varepsilon}=\\frac1T.$$\n\nThe Euler entropy flux $q_j(U)=\\eta(U)u_j$ is compatible with $F_j$, meaning $\\nabla_Uq_j=(\\nabla_U\\eta)^TDF_j$, and its entropy potential is $\\psi_j(U)=v(U)^TF_j(U)-q_j(U)=\\rho R u_j$. Consequently $U\\mapsto v(U)$ is a local diffeomorphism at every $U\\in\\mathcal G$ and $\\eta$ is strictly convex on $\\mathcal G$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-compressible-viscous-flux-entropy-variable-factorization",
+          "source_section": "Statement",
+          "quote": "For $U\\in\\mathcal G$, let $Z=(Z_1,\\ldots,Z_d)$ and $W=(W_1,\\ldots,W_d)$ be arrays of entropy-variable gradients, with $Z_k,W_k\\in\\mathbb R^{d+2}$. Write $Z_{k,m_\\ell}$ for the momentum-variable component and $Z_{k,E}$ for the energy-variable component. Define\n\n$$G_{k\\ell}(Z)=Z_{k,m_\\ell}+u_\\ell Z_{k,E},\\qquad c_k(Z)=Z_{k,E},$$\n\nand $G^0(Z)=\\operatorname{sym}G(Z)-(\\operatorname{tr}G(Z)/d)I$. Define the linear map\n\n$$\\mathcal R_U Z=\\bigl(\\sqrt{2\\mu T}\\,G^0(Z),\\ \\sqrt{\\zeta T}\\,\\operatorname{tr}G(Z),\\ \\sqrt{\\kappa}\\,T c(Z)\\bigr).$$\n\nThe bilinear form\n\n$$\\mathcal B_U(Z,W)=2\\mu T\\,G^0(Z):G^0(W)+\\zeta T\\,\\operatorname{tr}G(Z)\\operatorname{tr}G(W)+\\kappa T^2\\sum_{k=1}^d c_k(Z)c_k(W)$$\n\nhas the factorization $\\mathcal B_U(Z,W)=(\\mathcal R_UZ)\\cdot(\\mathcal R_UW)=\\sum_{j,k}Z_j^TK_{jk}(U)W_k$, so $K(U)=\\mathcal R_U^*\\mathcal R_U$ is a symmetric positive-semidefinite block matrix. For $Z_k=\\partial_kv(U)$, its blocks give exactly the model viscous flux $F_j^{\\mathrm{visc}}=\\sum_kK_{jk}(U)\\partial_kv$, and\n\n$$\\sum_{j,k}(\\partial_jv)^TK_{jk}(U)(\\partial_kv)=\\frac{\\tau:\\nabla u}{T}+\\frac{\\kappa|\\nabla T|^2}{T^2}\\ge0.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2] and the balance law [F1], $\\partial_t\\eta+\\sum_j\\partial_jq_j=v^T\\sum_j\\partial_jF_j^{\\mathrm{visc}}=\\sum_j\\partial_j(v^TF_j^{\\mathrm{visc}})-\\sum_j(\\partial_jv)^TF_j^{\\mathrm{visc}}$. The second equality is the product rule applied componentwise to each finite-dimensional flux vector.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From the explicit entropy variables in [F2] and viscous flux in [F1], the momentum and stress-work terms cancel pointwise: $v^TF_j^{\\mathrm{visc}}=(T^{-1}u)\\cdot\\tau_{j\\cdot}-T^{-1}(u\\cdot\\tau_{j\\cdot}+\\kappa\\partial_jT)=-\\kappa\\frac{\\partial_jT}{T}$. Substitution into step 1.1 and the factorization identity [F3] gives the displayed local balance and its nonpositive right-hand side.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement is pointwise for fields with values in G, and d≥1 gives at least one spatial direction; if the physical region is empty there are no field points and the local assertion is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement hypothesis U∈G and the model definition give T=(γ−1)ε/(Rρ)>0, so denominators T and T² are nonzero; zero temperature is excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-parameter theorem is asserted; all parameter values use the displayed ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "def-periodic-sbp-compressible-viscous-scheme": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition explicitly requires the finite periodic node set I={1,…,M} to be nonempty, so there is no empty-node instance."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no additional zero-input or zero-coefficient claim beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-parameter theorem is asserted; all parameter values use the displayed ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: periodic SBP identities are the stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only explicit finite index sets and deterministic formulas occur; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "definition"
+    },
+    "thm-periodic-sbp-compressible-viscous-conservation-and-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-sbp-compressible-viscous-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal I=\\{1,\\ldots,M\\}$ be a nonempty finite periodic node set. Let $H\\in\\mathbb R^{M\\times M}$ be diagonal with strictly positive entries, and for each direction $j=1,\\ldots,d$ let $D_j\\in\\mathbb R^{M\\times M}$ satisfy the periodic diagonal-norm SBP identities\n\n$$HD_j+D_j^TH=0,\\qquad D_j\\mathbf1=0.$$\n\nFor a nodal array $w=(w_i)_{i\\in\\mathcal I}$, $D_jw$ means componentwise matrix multiplication, $(D_jw)_i=\\sum_{\\ell\\in\\mathcal I}(D_j)_{i\\ell}w_\\ell$. Given admissible nodal states $U_i\\in\\mathcal G$, write $v_i=v(U_i)$. Define the semidiscrete system\n\n$$\\dot U_i+2\\sum_{j=1}^d\\sum_{\\ell\\in\\mathcal I}(D_j)_{i\\ell}F_j^{\\mathrm{ec}}(U_i,U_\\ell) =\\sum_{j,k=1}^d\\left[D_j\\left(\\bigl(K_{jk}(U_i)(D_kv)_i\\bigr)_{i\\in\\mathcal I}\\right)\\right]_i, \\qquad i\\in\\mathcal I,$$\n\nwhere $F_j^{\\mathrm{ec}}$ is the two-point flux in [[def-ideal-gas-entropy-conservative-pair-flux]] and $K_{jk}$ is the viscous block matrix in [[lem-compressible-viscous-flux-entropy-variable-factorization]]. This definition specifies a periodic semidiscrete operator on $\\mathcal G^M$; it does not include a time discretization or a positivity limiter.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ideal-gas-entropy-conservative-flux-properties",
+          "source_section": "Statement",
+          "quote": "The flux in [[def-ideal-gas-entropy-conservative-pair-flux]] is well-defined for every pair in $\\mathcal G\\times\\mathcal G$, symmetric in its two states, and consistent in the sense that $F_j^{\\mathrm{ec}}(U,U)=F_j(U)$. It satisfies\n\n$$(v(U_R)-v(U_L))^TF_j^{\\mathrm{ec}}(U_L,U_R)=\\psi_j(U_R)-\\psi_j(U_L).$$\n\nThe flux is locally Lipschitz on $\\mathcal G\\times\\mathcal G$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-compressible-viscous-flux-entropy-variable-factorization",
+          "source_section": "Statement",
+          "quote": "For $U\\in\\mathcal G$, let $Z=(Z_1,\\ldots,Z_d)$ and $W=(W_1,\\ldots,W_d)$ be arrays of entropy-variable gradients, with $Z_k,W_k\\in\\mathbb R^{d+2}$. Write $Z_{k,m_\\ell}$ for the momentum-variable component and $Z_{k,E}$ for the energy-variable component. Define\n\n$$G_{k\\ell}(Z)=Z_{k,m_\\ell}+u_\\ell Z_{k,E},\\qquad c_k(Z)=Z_{k,E},$$\n\nand $G^0(Z)=\\operatorname{sym}G(Z)-(\\operatorname{tr}G(Z)/d)I$. Define the linear map\n\n$$\\mathcal R_U Z=\\bigl(\\sqrt{2\\mu T}\\,G^0(Z),\\ \\sqrt{\\zeta T}\\,\\operatorname{tr}G(Z),\\ \\sqrt{\\kappa}\\,T c(Z)\\bigr).$$\n\nThe bilinear form\n\n$$\\mathcal B_U(Z,W)=2\\mu T\\,G^0(Z):G^0(W)+\\zeta T\\,\\operatorname{tr}G(Z)\\operatorname{tr}G(W)+\\kappa T^2\\sum_{k=1}^d c_k(Z)c_k(W)$$\n\nhas the factorization $\\mathcal B_U(Z,W)=(\\mathcal R_UZ)\\cdot(\\mathcal R_UW)=\\sum_{j,k}Z_j^TK_{jk}(U)W_k$, so $K(U)=\\mathcal R_U^*\\mathcal R_U$ is a symmetric positive-semidefinite block matrix. For $Z_k=\\partial_kv(U)$, its blocks give exactly the model viscous flux $F_j^{\\mathrm{visc}}=\\sum_kK_{jk}(U)\\partial_kv$, and\n\n$$\\sum_{j,k}(\\partial_jv)^TK_{jk}(U)(\\partial_kv)=\\frac{\\tau:\\nabla u}{T}+\\frac{\\kappa|\\nabla T|^2}{T^2}\\ge0.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each direction set $Q_j=HD_j$. Then [F1] gives $Q_j^T=-Q_j$ and $Q_j\\mathbf1=HD_j\\mathbf1=0$. Skew-symmetry also gives $\\mathbf1^TQ_j=-(Q_j\\mathbf1)^T=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiply the semidiscrete equation by $H_{ii}$ and sum in $i$. For the Euler term, each component of $\\sum_{i,\\ell}(Q_j)_{i\\ell}F_j^{\\mathrm{ec}}(U_i,U_\\ell)$ is zero: swapping $i$ and $\\ell$ changes the sign of $Q_j$ by step 1.1 and leaves the flux unchanged by [F2]. The viscous term sums to $\\mathbf1^THD_jW=\\mathbf1^TQ_jW=0$ for each nodal flux array $W$. Thus the weighted sum of each conservative component has derivative zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By the chain rule, the Euler contribution to the entropy derivative is $-2\\sum_{j,i,\\ell}(Q_j)_{i\\ell}v_i^TF_j^{\\mathrm{ec}}(U_i,U_\\ell)$. Skew-symmetry and flux symmetry [F2], after swapping the two indices in one copy of the sum, rewrite this as $-\\sum_{j,i,\\ell}(Q_j)_{i\\ell}(v_i-v_\\ell)^TF_j^{\\mathrm{ec}}(U_i,U_\\ell)$. The entropy-potential identity [F2] changes the summand to $(Q_j)_{i\\ell}(\\psi_j(U_i)-\\psi_j(U_\\ell))$. Both its row sum and column sum vanish by step 1.1, so the total Euler contribution is zero.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each viscous direction, $v^THD_jW=-(D_jv)^THW$ by $D_j^TH=-HD_j$. Applying this to $W_i=\\sum_kK_{jk}(U_i)(D_kv)_i$ shows that the remaining entropy derivative is exactly the negative sum in the Statement. Each nodal quadratic form is nonnegative by [F3], and each weight $H_{ii}$ is positive; hence the derivative is nonpositive.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The theorem statement inherits the scheme hypothesis I={1,…,M} nonempty; its weighted sums therefore have at least one nodal term."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no additional zero-input or zero-coefficient claim beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-parameter theorem is asserted; all parameter values use the displayed ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: periodic SBP identities remove boundary terms from the finite sums."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 2.1, 2.2 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "def-orthogonal-fv-compressible-viscous-scheme": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no additional zero-input or zero-coefficient claim beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-parameter theorem is asserted; all parameter values use the displayed ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only explicit finite index sets and deterministic formulas occur; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "definition"
+    },
+    "lem-orthogonal-fv-compressible-viscous-flux-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-orthogonal-fv-compressible-viscous-scheme",
+          "source_section": "Definition",
+          "quote": "Let $L>0$, let $N\\ge1$ be an integer, put $h=L/N$, and partition $\\Omega=(0,L)$ into the open cells $K_i=((i-1)h,ih)$, $i=1,\\ldots,N$, with centers $x_i=(i-\\tfrac12)h$. The interior face $F_{i+1/2}=\\{ih\\}$ separates $K_i$ and $K_{i+1}$ for $i=1,\\ldots,N-1$; the two endpoints are boundary faces. This is the one-dimensional uniform specialization of [[def-fv-admissible-cell-face-mesh]]: cells are convex intervals, faces are their endpoints, and the common face orientation is from left to right.\n\nFor cell states $U_i\\in\\mathcal G$, set $v_i=v(U_i)$ and define the admissible face state $U_{i+1/2}=(U_i+U_{i+1})/2\\in\\mathcal G$. Define the face block $K_{i+1/2}=K_{11}(U_{i+1/2})$, where $K_{11}$ is the state-space block of [[lem-compressible-viscous-flux-entropy-variable-factorization]] for spatial direction one. The shared rightward viscous flux is\n\n$$G_{i+1/2}=K_{i+1/2}\\frac{v_{i+1}-v_i}{h},\\qquad i=1,\\ldots,N-1.$$\n\nSet the boundary fluxes $G_{1/2}=G_{N+1/2}=0$. The finite-volume viscous operator is\n\n$$\\dot U_i=\\frac{G_{i+1/2}-G_{i-1/2}}{h},\\qquad i=1,\\ldots,N.$$\n\nThis is only the viscous diffusion part of the balance law; no Euler convection term or time discretization is included. The boundary convention is zero total viscous flux.\n\n```tikz\n\\begin{tikzpicture}\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0,1,2,3,4} \\draw (\\x,-0.25) -- (\\x,0.25);\n  \\node at (0.5,0.45) {$K_1$};\n  \\node at (1.5,0.45) {$K_2$};\n  \\node at (2.5,0.45) {$K_3$};\n  \\node at (3.5,0.45) {$K_N$};\n  \\draw[->,blue,thick] (0.55,-0.5) -- (1.45,-0.5) node[midway,below] {$G_{3/2}$};\n  \\draw[->,blue,thick] (1.55,-0.5) -- (2.45,-0.5) node[midway,below] {$G_{5/2}$};\n  \\node at (-0.15,-0.5) {$0$};\n  \\node at (4.15,-0.5) {$0$};\n\\end{tikzpicture}\n```\n\nThe schematic shows $N=4$ cells and two representative shared-flux arrows. The arrows show the rightward orientation used in the balances; the endpoint labels are the imposed zero boundary fluxes, and the omitted interior face uses the same convention. The drawing illustrates signed incidences only and is not used as a proof.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compressible-viscous-flux-entropy-variable-factorization",
+          "source_section": "Statement",
+          "quote": "For $U\\in\\mathcal G$, let $Z=(Z_1,\\ldots,Z_d)$ and $W=(W_1,\\ldots,W_d)$ be arrays of entropy-variable gradients, with $Z_k,W_k\\in\\mathbb R^{d+2}$. Write $Z_{k,m_\\ell}$ for the momentum-variable component and $Z_{k,E}$ for the energy-variable component. Define\n\n$$G_{k\\ell}(Z)=Z_{k,m_\\ell}+u_\\ell Z_{k,E},\\qquad c_k(Z)=Z_{k,E},$$\n\nand $G^0(Z)=\\operatorname{sym}G(Z)-(\\operatorname{tr}G(Z)/d)I$. Define the linear map\n\n$$\\mathcal R_U Z=\\bigl(\\sqrt{2\\mu T}\\,G^0(Z),\\ \\sqrt{\\zeta T}\\,\\operatorname{tr}G(Z),\\ \\sqrt{\\kappa}\\,T c(Z)\\bigr).$$\n\nThe bilinear form\n\n$$\\mathcal B_U(Z,W)=2\\mu T\\,G^0(Z):G^0(W)+\\zeta T\\,\\operatorname{tr}G(Z)\\operatorname{tr}G(W)+\\kappa T^2\\sum_{k=1}^d c_k(Z)c_k(W)$$\n\nhas the factorization $\\mathcal B_U(Z,W)=(\\mathcal R_UZ)\\cdot(\\mathcal R_UW)=\\sum_{j,k}Z_j^TK_{jk}(U)W_k$, so $K(U)=\\mathcal R_U^*\\mathcal R_U$ is a symmetric positive-semidefinite block matrix. For $Z_k=\\partial_kv(U)$, its blocks give exactly the model viscous flux $F_j^{\\mathrm{visc}}=\\sum_kK_{jk}(U)\\partial_kv$, and\n\n$$\\sum_{j,k}(\\partial_jv)^TK_{jk}(U)(\\partial_kv)=\\frac{\\tau:\\nabla u}{T}+\\frac{\\kappa|\\nabla T|^2}{T^2}\\ge0.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an interior face $x_f=x_{i+1/2}$ and put $U_f=U(x_f)$. Taylor's theorem at $x_f$ gives $U(x_f\\pm h/2)=U_f\\pm(h/2)U'(x_f)+(h^2/8)U''(x_f)+O(h^3)$, uniformly in the face index because $U'''$ is bounded. Averaging the two expansions and using [F1] yields $U_{i+1/2}=U_f+O(h^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The composition $v\\circ U$ is $C^3$ on $[0,L]$ because the image stays in the positive-state set. Its centered Taylor expansion gives $(v(U(x_f+h/2))-v(U(x_f-h/2)))/h=\\partial_xv(U_f)+O(h^2)$ uniformly in $i$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The block $K_{11}(U)$ is smooth on $\\mathcal G$ by its explicit finite-dimensional factorization [F2], hence has bounded first derivatives on a compact neighborhood of the image of $U$. Step 1.1 gives $K_{11}(U_{i+1/2})=K_{11}(U_f)+O(h^2)$. Multiplying this by the bounded difference quotient in step 1.2 and using [F1] proves the stated $O(h^2)$ face-flux estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 gives the centered face derivative for a constant state field."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-parameter assertion is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 1.3 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "thm-orthogonal-fv-compressible-viscous-entropy-dissipation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-orthogonal-fv-compressible-viscous-scheme",
+          "source_section": "Definition",
+          "quote": "Let $L>0$, let $N\\ge1$ be an integer, put $h=L/N$, and partition $\\Omega=(0,L)$ into the open cells $K_i=((i-1)h,ih)$, $i=1,\\ldots,N$, with centers $x_i=(i-\\tfrac12)h$. The interior face $F_{i+1/2}=\\{ih\\}$ separates $K_i$ and $K_{i+1}$ for $i=1,\\ldots,N-1$; the two endpoints are boundary faces. This is the one-dimensional uniform specialization of [[def-fv-admissible-cell-face-mesh]]: cells are convex intervals, faces are their endpoints, and the common face orientation is from left to right.\n\nFor cell states $U_i\\in\\mathcal G$, set $v_i=v(U_i)$ and define the admissible face state $U_{i+1/2}=(U_i+U_{i+1})/2\\in\\mathcal G$. Define the face block $K_{i+1/2}=K_{11}(U_{i+1/2})$, where $K_{11}$ is the state-space block of [[lem-compressible-viscous-flux-entropy-variable-factorization]] for spatial direction one. The shared rightward viscous flux is\n\n$$G_{i+1/2}=K_{i+1/2}\\frac{v_{i+1}-v_i}{h},\\qquad i=1,\\ldots,N-1.$$\n\nSet the boundary fluxes $G_{1/2}=G_{N+1/2}=0$. The finite-volume viscous operator is\n\n$$\\dot U_i=\\frac{G_{i+1/2}-G_{i-1/2}}{h},\\qquad i=1,\\ldots,N.$$\n\nThis is only the viscous diffusion part of the balance law; no Euler convection term or time discretization is included. The boundary convention is zero total viscous flux.\n\n```tikz\n\\begin{tikzpicture}\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0,1,2,3,4} \\draw (\\x,-0.25) -- (\\x,0.25);\n  \\node at (0.5,0.45) {$K_1$};\n  \\node at (1.5,0.45) {$K_2$};\n  \\node at (2.5,0.45) {$K_3$};\n  \\node at (3.5,0.45) {$K_N$};\n  \\draw[->,blue,thick] (0.55,-0.5) -- (1.45,-0.5) node[midway,below] {$G_{3/2}$};\n  \\draw[->,blue,thick] (1.55,-0.5) -- (2.45,-0.5) node[midway,below] {$G_{5/2}$};\n  \\node at (-0.15,-0.5) {$0$};\n  \\node at (4.15,-0.5) {$0$};\n\\end{tikzpicture}\n```\n\nThe schematic shows $N=4$ cells and two representative shared-flux arrows. The arrows show the rightward orientation used in the balances; the endpoint labels are the imposed zero boundary fluxes, and the omitted interior face uses the same convention. The drawing illustrates signed incidences only and is not used as a proof.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compressible-viscous-flux-entropy-variable-factorization",
+          "source_section": "Statement",
+          "quote": "For $U\\in\\mathcal G$, let $Z=(Z_1,\\ldots,Z_d)$ and $W=(W_1,\\ldots,W_d)$ be arrays of entropy-variable gradients, with $Z_k,W_k\\in\\mathbb R^{d+2}$. Write $Z_{k,m_\\ell}$ for the momentum-variable component and $Z_{k,E}$ for the energy-variable component. Define\n\n$$G_{k\\ell}(Z)=Z_{k,m_\\ell}+u_\\ell Z_{k,E},\\qquad c_k(Z)=Z_{k,E},$$\n\nand $G^0(Z)=\\operatorname{sym}G(Z)-(\\operatorname{tr}G(Z)/d)I$. Define the linear map\n\n$$\\mathcal R_U Z=\\bigl(\\sqrt{2\\mu T}\\,G^0(Z),\\ \\sqrt{\\zeta T}\\,\\operatorname{tr}G(Z),\\ \\sqrt{\\kappa}\\,T c(Z)\\bigr).$$\n\nThe bilinear form\n\n$$\\mathcal B_U(Z,W)=2\\mu T\\,G^0(Z):G^0(W)+\\zeta T\\,\\operatorname{tr}G(Z)\\operatorname{tr}G(W)+\\kappa T^2\\sum_{k=1}^d c_k(Z)c_k(W)$$\n\nhas the factorization $\\mathcal B_U(Z,W)=(\\mathcal R_UZ)\\cdot(\\mathcal R_UW)=\\sum_{j,k}Z_j^TK_{jk}(U)W_k$, so $K(U)=\\mathcal R_U^*\\mathcal R_U$ is a symmetric positive-semidefinite block matrix. For $Z_k=\\partial_kv(U)$, its blocks give exactly the model viscous flux $F_j^{\\mathrm{visc}}=\\sum_kK_{jk}(U)\\partial_kv$, and\n\n$$\\sum_{j,k}(\\partial_jv)^TK_{jk}(U)(\\partial_kv)=\\frac{\\tau:\\nabla u}{T}+\\frac{\\kappa|\\nabla T|^2}{T^2}\\ge0.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the total conservative state, substitute [F1] and telescope the finite sum: $\\frac{d}{dt}\\sum_{i=1}^NhU_i=\\sum_{i=1}^N(G_{i+1/2}-G_{i-1/2})=G_{N+1/2}-G_{1/2}=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By the chain rule, $\\frac{d}{dt}\\sum_i h\\eta(U_i)=\\sum_i h v_i^T\\dot U_i$. Substituting [F1] cancels the factors $h$ and gives $\\sum_i v_i^T(G_{i+1/2}-G_{i-1/2})$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At each interior face $i+1/2$, the two adjacent cells contribute $v_i^TG_{i+1/2}-v_{i+1}^TG_{i+1/2}=-(v_{i+1}-v_i)^TG_{i+1/2}$. The boundary terms vanish by [F1]. Substituting the face flux gives the exact negative sum in the Statement.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each midpoint state is admissible by the convexity built into [F1], and its matrix block is positive semidefinite by [F2]. Thus every face term $(v_{i+1}-v_i)^TK_{i+1/2}(v_{i+1}-v_i)/h$ is nonnegative because $h>0$. This proves the entropy inequality, including the case $N=1$ when the face sum is empty.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The theorem statement assumes N≥1 and h=L/N>0, so the cell index set {1,…,N} is nonempty; the N=1 case is checked in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 gives zero face production when an interior face entropy-variable jump is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 checks N=1, for which the interior-face sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Positive step size or positive mesh width and admissible states are required by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 uses the two zero endpoint fluxes explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 2.1, 2.2, 2.3 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "alg-positive-tube-forward-euler-for-compressible-sbp": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the N=0 input returns immediately with zero accepted steps."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the branch for a single budgeted stage is explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Positive step size or positive mesh width and admissible states are required by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only explicit finite index sets and deterministic formulas occur; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "algorithm"
+    },
+    "lem-positive-tube-forward-euler-loop-terminates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-positive-tube-forward-euler-for-compressible-sbp",
+          "source_section": "Definition",
+          "quote": "Fix the periodic SBP data and semidiscrete vector field $L_h$ of [[def-periodic-sbp-compressible-viscous-scheme]]. Let $\\mathcal C\\subset\\mathcal G$ be a specified compact set, let the initial nodal vector $U^0=(U_i^0)_{i\\in\\mathcal I}$ satisfy $U_i^0\\in\\mathcal C$ for every node, let $\\Delta t>0$, and let $N\\in\\mathbb N\\cup\\{0\\}$ be a finite step budget. The algorithm returns a nodal vector, a status, and an accepted-step count.\n\n1. For $n=0,\\ldots,N-1$, compute the candidate\n   $$U^{n+1,*}=U^n+\\Delta t\\,L_h(U^n).$$\n\n2. If $U_i^{n+1,*}\\in\\mathcal C$ for every node $i$, accept it by setting $U^{n+1}=U^{n+1,*}$ and continue.\n\n3. If any candidate node lies outside $\\mathcal C$, return $(U^n,\\texttt{left\\_positive\\_tube},n)$ immediately. Here $U^n$ is the last accepted vector and $n$ is the number of accepted steps; the rejected candidate is the one-based stage $n+1$.\n\n4. If all $N$ candidates are accepted, return $(U^N,\\texttt{completed},N)$. For $N=0$, return $(U^0,\\texttt{completed},0)$.\n\nThe membership test is applied nodewise to the compact positive-state tube. A returned `left_positive_tube` status records a failed candidate and makes no claim that the prescribed step budget was completed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $N=0$, branch 4 of [F1] returns the input immediately, with zero evaluations and zero accepted stages.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $N>0$. At each visited stage $n<N$, branch 3 returns immediately if the candidate fails, so no rejected stage repeats; the algorithm reports $n$ accepted steps because $U^n$ follows exactly $n$ earlier acceptances. Otherwise branch 2 accepts one candidate, so the next stored iterate follows one more acceptance. If all $N$ candidates are accepted, branch 4 returns `completed` with count $N$. Thus the loop has at most $N$ evaluations and the accepted count lies in $[0,N]$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The initial nodal vector is in $\\mathcal C$ by the algorithm input. Each later vector becomes the stored state only after every node passes membership in $\\mathcal C$; branch 3 returns the preceding stored vector. Therefore every returned nodal state lies in $\\mathcal C$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats N=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.2 covers N=1 as the first positive finite budget."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Positive step size or positive mesh width and admissible states are required by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 1.3 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "thm-fixed-mesh-forward-euler-error-for-compressible-sbp": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-sbp-compressible-viscous-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal I=\\{1,\\ldots,M\\}$ be a nonempty finite periodic node set. Let $H\\in\\mathbb R^{M\\times M}$ be diagonal with strictly positive entries, and for each direction $j=1,\\ldots,d$ let $D_j\\in\\mathbb R^{M\\times M}$ satisfy the periodic diagonal-norm SBP identities\n\n$$HD_j+D_j^TH=0,\\qquad D_j\\mathbf1=0.$$\n\nFor a nodal array $w=(w_i)_{i\\in\\mathcal I}$, $D_jw$ means componentwise matrix multiplication, $(D_jw)_i=\\sum_{\\ell\\in\\mathcal I}(D_j)_{i\\ell}w_\\ell$. Given admissible nodal states $U_i\\in\\mathcal G$, write $v_i=v(U_i)$. Define the semidiscrete system\n\n$$\\dot U_i+2\\sum_{j=1}^d\\sum_{\\ell\\in\\mathcal I}(D_j)_{i\\ell}F_j^{\\mathrm{ec}}(U_i,U_\\ell) =\\sum_{j,k=1}^d\\left[D_j\\left(\\bigl(K_{jk}(U_i)(D_kv)_i\\bigr)_{i\\in\\mathcal I}\\right)\\right]_i, \\qquad i\\in\\mathcal I,$$\n\nwhere $F_j^{\\mathrm{ec}}$ is the two-point flux in [[def-ideal-gas-entropy-conservative-pair-flux]] and $K_{jk}$ is the viscous block matrix in [[lem-compressible-viscous-flux-entropy-variable-factorization]]. This definition specifies a periodic semidiscrete operator on $\\mathcal G^M$; it does not include a time discretization or a positivity limiter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ideal-gas-entropy-conservative-flux-properties",
+          "source_section": "Statement",
+          "quote": "The flux in [[def-ideal-gas-entropy-conservative-pair-flux]] is well-defined for every pair in $\\mathcal G\\times\\mathcal G$, symmetric in its two states, and consistent in the sense that $F_j^{\\mathrm{ec}}(U,U)=F_j(U)$. It satisfies\n\n$$(v(U_R)-v(U_L))^TF_j^{\\mathrm{ec}}(U_L,U_R)=\\psi_j(U_R)-\\psi_j(U_L).$$\n\nThe flux is locally Lipschitz on $\\mathcal G\\times\\mathcal G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-compressible-viscous-flux-entropy-variable-factorization",
+          "source_section": "Statement",
+          "quote": "For $U\\in\\mathcal G$, let $Z=(Z_1,\\ldots,Z_d)$ and $W=(W_1,\\ldots,W_d)$ be arrays of entropy-variable gradients, with $Z_k,W_k\\in\\mathbb R^{d+2}$. Write $Z_{k,m_\\ell}$ for the momentum-variable component and $Z_{k,E}$ for the energy-variable component. Define\n\n$$G_{k\\ell}(Z)=Z_{k,m_\\ell}+u_\\ell Z_{k,E},\\qquad c_k(Z)=Z_{k,E},$$\n\nand $G^0(Z)=\\operatorname{sym}G(Z)-(\\operatorname{tr}G(Z)/d)I$. Define the linear map\n\n$$\\mathcal R_U Z=\\bigl(\\sqrt{2\\mu T}\\,G^0(Z),\\ \\sqrt{\\zeta T}\\,\\operatorname{tr}G(Z),\\ \\sqrt{\\kappa}\\,T c(Z)\\bigr).$$\n\nThe bilinear form\n\n$$\\mathcal B_U(Z,W)=2\\mu T\\,G^0(Z):G^0(W)+\\zeta T\\,\\operatorname{tr}G(Z)\\operatorname{tr}G(W)+\\kappa T^2\\sum_{k=1}^d c_k(Z)c_k(W)$$\n\nhas the factorization $\\mathcal B_U(Z,W)=(\\mathcal R_UZ)\\cdot(\\mathcal R_UW)=\\sum_{j,k}Z_j^TK_{jk}(U)W_k$, so $K(U)=\\mathcal R_U^*\\mathcal R_U$ is a symmetric positive-semidefinite block matrix. For $Z_k=\\partial_kv(U)$, its blocks give exactly the model viscous flux $F_j^{\\mathrm{visc}}=\\sum_kK_{jk}(U)\\partial_kv$, and\n\n$$\\sum_{j,k}(\\partial_jv)^TK_{jk}(U)(\\partial_kv)=\\frac{\\tau:\\nabla u}{T}+\\frac{\\kappa|\\nabla T|^2}{T^2}\\ge0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-positive-tube-forward-euler-for-compressible-sbp",
+          "source_section": "Definition",
+          "quote": "Fix the periodic SBP data and semidiscrete vector field $L_h$ of [[def-periodic-sbp-compressible-viscous-scheme]]. Let $\\mathcal C\\subset\\mathcal G$ be a specified compact set, let the initial nodal vector $U^0=(U_i^0)_{i\\in\\mathcal I}$ satisfy $U_i^0\\in\\mathcal C$ for every node, let $\\Delta t>0$, and let $N\\in\\mathbb N\\cup\\{0\\}$ be a finite step budget. The algorithm returns a nodal vector, a status, and an accepted-step count.\n\n1. For $n=0,\\ldots,N-1$, compute the candidate\n   $$U^{n+1,*}=U^n+\\Delta t\\,L_h(U^n).$$\n\n2. If $U_i^{n+1,*}\\in\\mathcal C$ for every node $i$, accept it by setting $U^{n+1}=U^{n+1,*}$ and continue.\n\n3. If any candidate node lies outside $\\mathcal C$, return $(U^n,\\texttt{left\\_positive\\_tube},n)$ immediately. Here $U^n$ is the last accepted vector and $n$ is the number of accepted steps; the rejected candidate is the one-based stage $n+1$.\n\n4. If all $N$ candidates are accepted, return $(U^N,\\texttt{completed},N)$. For $N=0$, return $(U^0,\\texttt{completed},0)$.\n\nThe membership test is applied nodewise to the compact positive-state tube. A returned `left_positive_tube` status records a failed candidate and makes no claim that the prescribed step budget was completed.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-positive-tube-forward-euler-loop-terminates",
+          "source_section": "Statement",
+          "quote": "For every valid input to [[alg-positive-tube-forward-euler-for-compressible-sbp]] with finite budget $N$, the loop returns after at most $N$ candidate evaluations. Its accepted-step count is between $0$ and $N$, and every returned nodal state lies in the specified compact tube $\\mathcal C$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2] and [F3], every term in the finite sum [F1] is locally Lipschitz on the open finite-dimensional domain $\\mathcal G^{|\\mathcal I|}$, so $L_h$ is locally Lipschitz and continuous there. Compactness of $\\mathcal C^{|\\mathcal I|}$ gives a bound $M_h=\\sup_{Y\\in\\mathcal C^{|\\mathcal I|}}\\|L_h(Y)\\|<\\infty$. Cover this compact set by finitely many smaller balls whose doubled balls lie in local Lipschitz neighborhoods, and let $\\delta_0>0$ be the smallest smaller-ball radius. Any pair at distance less than $\\delta_0$ lies together in one of those larger balls, so its Lipschitz quotient is bounded by the largest local constant. For pairs at distance at least $\\delta_0$, boundedness gives quotient at most $2M_h/\\delta_0$. Thus a finite Lipschitz constant $L_h^*$ holds on $\\mathcal C^{|\\mathcal I|}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an exact time $t_n=n\\Delta t$ and $t_{n+1}\\le T$, the integral equation and the bound in step 1.1 give the one-step defect $r_n=\\bar U(t_{n+1})-\\bar U(t_n)-\\Delta tL_h(\\bar U(t_n))$, with $\\|r_n\\|\\le\\frac12L_h^*M_h(\\Delta t)^2$. Indeed, $r_n=\\int_0^{\\Delta t}(L_h(\\bar U(t_n+s))-L_h(\\bar U(t_n)))\\,ds$, while $\\|\\bar U(t_n+s)-\\bar U(t_n)\\|\\le M_hs$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The unguarded Euler recurrence, as long as each preceding candidate has been accepted, therefore satisfies $e_{n+1}\\le(1+L_h^*\\Delta t)e_n+\\frac12L_h^*M_h(\\Delta t)^2$, where $e_n=\\|U^n-\\bar U(t_n)\\|$ and $e_0=0$. Summing the geometric bound and using $(1+L_h^*\\Delta t)^n\\le e^{L_h^*T}$ yields $e_n\\le C_{h,T}\\Delta t$ with, for example, $C_{h,T}=\\frac12M_h(e^{L_h^*T}-1)$ when $L_h^*>0$ and $C_{h,T}=0$ when $L_h^*=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The continuous exact trajectory is compactly contained in $\\operatorname{int}\\mathcal C$ over the compact time interval, so there is a positive minimum distance $\\delta$ from every nodal exact state to $\\mathbb R^{d+2}\\setminus\\mathcal C$. Choose $\\Delta t$ so small that $C_{h,T}\\Delta t<\\delta$. Inductively, after an accepted stage the recurrence in step 3.1 bounds the next candidate's distance from the exact next state by less than $\\delta$, so every candidate node remains in $\\mathcal C$ and [F4] accepts it. This proves all $N$ steps are accepted; [F5] confirms finite return within the stated budget. The estimate in step 3.1 then holds for every returned stage.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no additional zero-input or zero-coefficient claim beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-parameter theorem is asserted; all parameter values use the displayed ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 1.3, 2.1 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "ex-periodic-compressible-viscous-manufactured-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-compressible-navier-stokes-fourier-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a gas constant $R>0$, an adiabatic exponent $\\gamma>1$, a constant reference entropy $s_0\\in\\mathbb R$, shear viscosity $\\mu>0$, bulk viscosity $\\zeta\\ge0$, and heat conductivity $\\kappa>0$. Put $c_v=R/(\\gamma-1)$. A conservative state is $U=(\\rho,m,E)\\in\\mathbb R\\times\\mathbb R^d\\times\\mathbb R$. Its **admissible state set** is\n\n$$\\mathcal G=\\left\\{(\\rho,m,E):\\rho>0,\\ E>\\frac{|m|^2}{2\\rho}\\right\\}.$$\n\nFor $U\\in\\mathcal G$, define the velocity $u=m/\\rho$, internal-energy density $\\varepsilon=E-|m|^2/(2\\rho)$, pressure $p=(\\gamma-1)\\varepsilon$, temperature $T=p/(R\\rho)$, specific entropy $s(U)=c_v\\log(p/\\rho^\\gamma)+s_0$, and mathematical entropy $\\eta(U)=-\\rho s(U)$. The Euler flux in coordinate direction $j$ is\n\n$$F_j(U)=\\bigl(\\rho u_j,\\ m u_j+p e_j,\\ (E+p)u_j\\bigr),\\qquad j=1,\\ldots,d,$$\n\nwhere $e_j$ is the $j$th standard basis vector of $\\mathbb R^d$. The mathematical entropy flux is $q_j(U)=\\eta(U)u_j$.\n\nFor a differentiable velocity field, write $D=\\operatorname{sym}\\nabla u$ with $D_{ab}=(\\partial_bu_a+\\partial_au_b)/2$, and $D^0=D-(\\operatorname{tr}D/d)I$. The Newtonian stress and Fourier viscous flux are\n\n$$\\tau=2\\mu D^0+\\zeta(\\operatorname{tr}D)I, \\qquad F_j^{\\mathrm{visc}}=\\bigl(0,\\tau_{j1},\\ldots,\\tau_{jd},\\ u\\cdot\\tau_{j\\cdot}+\\kappa\\partial_jT\\bigr).$$\n\nThe **compressible Navier–Stokes–Fourier balance law** is the conservative system\n\n$$\\partial_tU+\\sum_{j=1}^d\\partial_jF_j(U) =\\sum_{j=1}^d\\partial_jF_j^{\\mathrm{visc}}(U,\\nabla u,\\nabla T).$$\n\nUnless a boundary is specified separately, a periodic solution means that all fields and fluxes are periodic in each spatial coordinate. The positive parameters and the inequalities defining $\\mathcal G$ imply $p>0$ and $T>0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compressible-viscous-smooth-entropy-identity",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a smooth solution with values in $\\mathcal G$ of the unforced balance law in [[def-compressible-navier-stokes-fourier-model]]. Then\n\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_j\\left(\\eta(U)u_j+\\kappa\\frac{\\partial_jT}{T}\\right) =-\\sum_{j,k=1}^d(\\partial_jv)^TK_{jk}(U)(\\partial_kv) =-\\left(\\frac{\\tau:\\nabla u}{T}+\\frac{\\kappa|\\nabla T|^2}{T^2}\\right)\\le0.$$\n\nThis is a local smooth identity; it makes no boundary discretization claim.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $T(x)\\ge1$, $\\rho=1$, $u=0$, $m=0$, and $E=c_vT>0$, the state lies in $\\mathcal G$. The equation of state gives $p=(\\gamma-1)c_vT=RT$. The stress is zero because $u_x=0$, so $F_1=(0,RT,0)$ and $F_1^{\\mathrm{visc}}=(0,0,\\kappa\\cos x)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The state is stationary, so $\\partial_tU=0$. Direct differentiation gives $\\partial_xF_1=(0,R\\cos x,0)$ and $\\partial_xF_1^{\\mathrm{visc}}=(0,0,-\\kappa\\sin x)$. Therefore $\\partial_xF_1^{\\mathrm{visc}}+S=\\partial_xF_1$, proving the forced balance componentwise.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The physical production is $\\tau u_x/T+\\kappa T_x^2/T^2=\\kappa\\cos^2x/T^2$. For a source $S$, multiplying the conservative equation by $v$ adds $v^TS$ to the right side of the mathematical-entropy identity [F2]; here $v^TS=-\\kappa\\sin x/T$. The left-side entropy flux derivative is $\\partial_x(\\kappa\\cos x/T)= -\\kappa\\sin x/T-\\kappa\\cos^2x/T^2$, which equals minus the production plus $v^TS$. Periodicity removes endpoint contributions.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no additional zero-input or zero-coefficient claim beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-parameter theorem is asserted; all parameter values use the displayed ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 verifies the periodic flux balance over a full period."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 2.1 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-compressible-couette-thermal-wall-entropy-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-compressible-navier-stokes-fourier-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a gas constant $R>0$, an adiabatic exponent $\\gamma>1$, a constant reference entropy $s_0\\in\\mathbb R$, shear viscosity $\\mu>0$, bulk viscosity $\\zeta\\ge0$, and heat conductivity $\\kappa>0$. Put $c_v=R/(\\gamma-1)$. A conservative state is $U=(\\rho,m,E)\\in\\mathbb R\\times\\mathbb R^d\\times\\mathbb R$. Its **admissible state set** is\n\n$$\\mathcal G=\\left\\{(\\rho,m,E):\\rho>0,\\ E>\\frac{|m|^2}{2\\rho}\\right\\}.$$\n\nFor $U\\in\\mathcal G$, define the velocity $u=m/\\rho$, internal-energy density $\\varepsilon=E-|m|^2/(2\\rho)$, pressure $p=(\\gamma-1)\\varepsilon$, temperature $T=p/(R\\rho)$, specific entropy $s(U)=c_v\\log(p/\\rho^\\gamma)+s_0$, and mathematical entropy $\\eta(U)=-\\rho s(U)$. The Euler flux in coordinate direction $j$ is\n\n$$F_j(U)=\\bigl(\\rho u_j,\\ m u_j+p e_j,\\ (E+p)u_j\\bigr),\\qquad j=1,\\ldots,d,$$\n\nwhere $e_j$ is the $j$th standard basis vector of $\\mathbb R^d$. The mathematical entropy flux is $q_j(U)=\\eta(U)u_j$.\n\nFor a differentiable velocity field, write $D=\\operatorname{sym}\\nabla u$ with $D_{ab}=(\\partial_bu_a+\\partial_au_b)/2$, and $D^0=D-(\\operatorname{tr}D/d)I$. The Newtonian stress and Fourier viscous flux are\n\n$$\\tau=2\\mu D^0+\\zeta(\\operatorname{tr}D)I, \\qquad F_j^{\\mathrm{visc}}=\\bigl(0,\\tau_{j1},\\ldots,\\tau_{jd},\\ u\\cdot\\tau_{j\\cdot}+\\kappa\\partial_jT\\bigr).$$\n\nThe **compressible Navier–Stokes–Fourier balance law** is the conservative system\n\n$$\\partial_tU+\\sum_{j=1}^d\\partial_jF_j(U) =\\sum_{j=1}^d\\partial_jF_j^{\\mathrm{visc}}(U,\\nabla u,\\nabla T).$$\n\nUnless a boundary is specified separately, a periodic solution means that all fields and fluxes are periodic in each spatial coordinate. The positive parameters and the inequalities defining $\\mathcal G$ imply $p>0$ and $T>0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compressible-viscous-smooth-entropy-identity",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a smooth solution with values in $\\mathcal G$ of the unforced balance law in [[def-compressible-navier-stokes-fourier-model]]. Then\n\n$$\\partial_t\\eta(U)+\\sum_{j=1}^d\\partial_j\\left(\\eta(U)u_j+\\kappa\\frac{\\partial_jT}{T}\\right) =-\\sum_{j,k=1}^d(\\partial_jv)^TK_{jk}(U)(\\partial_kv) =-\\left(\\frac{\\tau:\\nabla u}{T}+\\frac{\\kappa|\\nabla T|^2}{T^2}\\right)\\le0.$$\n\nThis is a local smooth identity; it makes no boundary discretization claim.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The profile has $T(y)\\ge T_w>0$, so $\\rho>0$. Its internal-energy density is $E-|m|^2/(2\\rho)=p_0/(\\gamma-1)$, hence [F1] gives $p=p_0$. The velocity gradient has only $\\partial_yu_1=a$, so $\\nabla\\cdot u=0$, $\\tau_{12}=\\tau_{21}=\\mu a$, and all entries of $\\tau$ are constant.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The mass divergence is zero because the field is independent of $x$ and $u_2=0$. The momentum divergence is zero because $p$ is constant, $\\tau$ is constant, and every $y$-velocity is zero. For total energy, the Euler flux has zero divergence; the only nonzero viscous energy flux is $F_{2,E}^{\\mathrm{visc}}=u\\cdot\\tau_{2\\cdot}+\\kappa T'=\\mu a^2y+\\kappa T'$. Since $T''=-\\mu a^2/\\kappa$, its derivative is zero. Thus all conservative equations hold.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The stress production is $\\tau:\\nabla u=\\mu a^2$. The physical entropy law [F2], no normal velocity at either wall, and periodicity in $x$ give the boundary-flux identity after integration in $y$. Directly, $(\\kappa T'/T)'=\\kappa T''/T-\\kappa(T')^2/T^2=-\\mu a^2/T-\\kappa(T')^2/T^2$, so integrating its negative proves the equality. The integrand is strictly positive because $a\\ne0$, $\\mu>0$, and $T>0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no additional zero-input or zero-coefficient claim beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-parameter theorem is asserted; all parameter values use the displayed ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 evaluates the physical entropy flux at y=0 and y=L."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 2.1 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-sbp-inviscid-versus-viscous-entropy-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-sbp-compressible-viscous-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal I=\\{1,\\ldots,M\\}$ be a nonempty finite periodic node set. Let $H\\in\\mathbb R^{M\\times M}$ be diagonal with strictly positive entries, and for each direction $j=1,\\ldots,d$ let $D_j\\in\\mathbb R^{M\\times M}$ satisfy the periodic diagonal-norm SBP identities\n\n$$HD_j+D_j^TH=0,\\qquad D_j\\mathbf1=0.$$\n\nFor a nodal array $w=(w_i)_{i\\in\\mathcal I}$, $D_jw$ means componentwise matrix multiplication, $(D_jw)_i=\\sum_{\\ell\\in\\mathcal I}(D_j)_{i\\ell}w_\\ell$. Given admissible nodal states $U_i\\in\\mathcal G$, write $v_i=v(U_i)$. Define the semidiscrete system\n\n$$\\dot U_i+2\\sum_{j=1}^d\\sum_{\\ell\\in\\mathcal I}(D_j)_{i\\ell}F_j^{\\mathrm{ec}}(U_i,U_\\ell) =\\sum_{j,k=1}^d\\left[D_j\\left(\\bigl(K_{jk}(U_i)(D_kv)_i\\bigr)_{i\\in\\mathcal I}\\right)\\right]_i, \\qquad i\\in\\mathcal I,$$\n\nwhere $F_j^{\\mathrm{ec}}$ is the two-point flux in [[def-ideal-gas-entropy-conservative-pair-flux]] and $K_{jk}$ is the viscous block matrix in [[lem-compressible-viscous-flux-entropy-variable-factorization]]. This definition specifies a periodic semidiscrete operator on $\\mathcal G^M$; it does not include a time discretization or a positivity limiter.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ideal-gas-entropy-conservative-flux-properties",
+          "source_section": "Statement",
+          "quote": "The flux in [[def-ideal-gas-entropy-conservative-pair-flux]] is well-defined for every pair in $\\mathcal G\\times\\mathcal G$, symmetric in its two states, and consistent in the sense that $F_j^{\\mathrm{ec}}(U,U)=F_j(U)$. It satisfies\n\n$$(v(U_R)-v(U_L))^TF_j^{\\mathrm{ec}}(U_L,U_R)=\\psi_j(U_R)-\\psi_j(U_L).$$\n\nThe flux is locally Lipschitz on $\\mathcal G\\times\\mathcal G$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-compressible-viscous-flux-entropy-variable-factorization",
+          "source_section": "Statement",
+          "quote": "For $U\\in\\mathcal G$, let $Z=(Z_1,\\ldots,Z_d)$ and $W=(W_1,\\ldots,W_d)$ be arrays of entropy-variable gradients, with $Z_k,W_k\\in\\mathbb R^{d+2}$. Write $Z_{k,m_\\ell}$ for the momentum-variable component and $Z_{k,E}$ for the energy-variable component. Define\n\n$$G_{k\\ell}(Z)=Z_{k,m_\\ell}+u_\\ell Z_{k,E},\\qquad c_k(Z)=Z_{k,E},$$\n\nand $G^0(Z)=\\operatorname{sym}G(Z)-(\\operatorname{tr}G(Z)/d)I$. Define the linear map\n\n$$\\mathcal R_U Z=\\bigl(\\sqrt{2\\mu T}\\,G^0(Z),\\ \\sqrt{\\zeta T}\\,\\operatorname{tr}G(Z),\\ \\sqrt{\\kappa}\\,T c(Z)\\bigr).$$\n\nThe bilinear form\n\n$$\\mathcal B_U(Z,W)=2\\mu T\\,G^0(Z):G^0(W)+\\zeta T\\,\\operatorname{tr}G(Z)\\operatorname{tr}G(W)+\\kappa T^2\\sum_{k=1}^d c_k(Z)c_k(W)$$\n\nhas the factorization $\\mathcal B_U(Z,W)=(\\mathcal R_UZ)\\cdot(\\mathcal R_UW)=\\sum_{j,k}Z_j^TK_{jk}(U)W_k$, so $K(U)=\\mathcal R_U^*\\mathcal R_U$ is a symmetric positive-semidefinite block matrix. For $Z_k=\\partial_kv(U)$, its blocks give exactly the model viscous flux $F_j^{\\mathrm{visc}}=\\sum_kK_{jk}(U)\\partial_kv$, and\n\n$$\\sum_{j,k}(\\partial_jv)^TK_{jk}(U)(\\partial_kv)=\\frac{\\tau:\\nabla u}{T}+\\frac{\\kappa|\\nabla T|^2}{T^2}\\ge0.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed $D$ is skew-symmetric, and each row sums to zero, so with $H=I_3$ it satisfies [F1]. The states have $\\rho_i=1$, $p_i=E_i>0$, and $T_i=E_i$, hence are admissible.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Formula [F2] gives $v_{E}=(-1,-1/2,-1)$ and $v_m=(0,0,0)$. Multiplication by $D$ gives $Dv_E=(1/4,0,-1/4)$ and $Dv_m=0$. Since $u_i=0$, the strain array $G$ in [F3] vanishes at every node.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For the Euler-only operator, its entropy derivative is $-2\\sum_{i,\\ell}D_{i\\ell}v_i^TF^{\\mathrm{ec}}(U_i,U_\\ell)$. Skew-symmetry and [F2] rewrite this as $-\\sum_{i,\\ell}D_{i\\ell}(\\psi(U_i)-\\psi(U_\\ell))=0$, since both row and column sums of $D$ vanish.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the viscous term, matrix skew-symmetry gives $v^TDW=-(Dv)^TW$ for the nodal flux array $W_i=K_{11}(U_i)(Dv)_i$, so its entropy derivative is $-\\sum_i(Dv_i)^TK_{11}(U_i)(Dv_i)$. The zero strain and $T=(1,2,1)$ from step 1.1 reduce [F3] to $-\\kappa\\sum_iT_i^2(Dv_{E,i})^2=-\\kappa(1/16+0+1/16)=-\\kappa/8$. Thus adding viscosity changes the Euler-only rate from zero to the stated negative value.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 verifies the Euler-only comparison operator has zero entropy rate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes three nodes and has no unit-size parameter case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 2.1, 2.2 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-compressible-entropy-variable-blowup-near-vacuum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-compressible-navier-stokes-fourier-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a gas constant $R>0$, an adiabatic exponent $\\gamma>1$, a constant reference entropy $s_0\\in\\mathbb R$, shear viscosity $\\mu>0$, bulk viscosity $\\zeta\\ge0$, and heat conductivity $\\kappa>0$. Put $c_v=R/(\\gamma-1)$. A conservative state is $U=(\\rho,m,E)\\in\\mathbb R\\times\\mathbb R^d\\times\\mathbb R$. Its **admissible state set** is\n\n$$\\mathcal G=\\left\\{(\\rho,m,E):\\rho>0,\\ E>\\frac{|m|^2}{2\\rho}\\right\\}.$$\n\nFor $U\\in\\mathcal G$, define the velocity $u=m/\\rho$, internal-energy density $\\varepsilon=E-|m|^2/(2\\rho)$, pressure $p=(\\gamma-1)\\varepsilon$, temperature $T=p/(R\\rho)$, specific entropy $s(U)=c_v\\log(p/\\rho^\\gamma)+s_0$, and mathematical entropy $\\eta(U)=-\\rho s(U)$. The Euler flux in coordinate direction $j$ is\n\n$$F_j(U)=\\bigl(\\rho u_j,\\ m u_j+p e_j,\\ (E+p)u_j\\bigr),\\qquad j=1,\\ldots,d,$$\n\nwhere $e_j$ is the $j$th standard basis vector of $\\mathbb R^d$. The mathematical entropy flux is $q_j(U)=\\eta(U)u_j$.\n\nFor a differentiable velocity field, write $D=\\operatorname{sym}\\nabla u$ with $D_{ab}=(\\partial_bu_a+\\partial_au_b)/2$, and $D^0=D-(\\operatorname{tr}D/d)I$. The Newtonian stress and Fourier viscous flux are\n\n$$\\tau=2\\mu D^0+\\zeta(\\operatorname{tr}D)I, \\qquad F_j^{\\mathrm{visc}}=\\bigl(0,\\tau_{j1},\\ldots,\\tau_{jd},\\ u\\cdot\\tau_{j\\cdot}+\\kappa\\partial_jT\\bigr).$$\n\nThe **compressible Navier–Stokes–Fourier balance law** is the conservative system\n\n$$\\partial_tU+\\sum_{j=1}^d\\partial_jF_j(U) =\\sum_{j=1}^d\\partial_jF_j^{\\mathrm{visc}}(U,\\nabla u,\\nabla T).$$\n\nUnless a boundary is specified separately, a periodic solution means that all fields and fluxes are periodic in each spatial coordinate. The positive parameters and the inequalities defining $\\mathcal G$ imply $p>0$ and $T>0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compressible-ideal-gas-entropy-pair-and-variables",
+          "source_section": "Statement",
+          "quote": "For the ideal-gas model in [[def-compressible-navier-stokes-fourier-model]], the mathematical entropy $\\eta=-\\rho s$ has positive-definite Hessian on $\\mathcal G$. Its entropy variables are\n\n$$v(U)=\\nabla_U\\eta(U)=\\left(c_v\\gamma-s-\\frac{\\beta|u|^2}{2},\\ \\beta u,\\ -\\beta\\right),\\qquad \\beta=\\frac{c_v\\rho}{\\varepsilon}=\\frac1T.$$\n\nThe Euler entropy flux $q_j(U)=\\eta(U)u_j$ is compatible with $F_j$, meaning $\\nabla_Uq_j=(\\nabla_U\\eta)^TDF_j$, and its entropy potential is $\\psi_j(U)=v(U)^TF_j(U)-q_j(U)=\\rho R u_j$. Consequently $U\\mapsto v(U)$ is a local diffeomorphism at every $U\\in\\mathcal G$ and $\\eta$ is strictly convex on $\\mathcal G$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $U_n$, $\\rho_n>0$, $\\varepsilon_n=E_n=1/n>|0|^2/(2\\rho_n)$, so $U_n\\in\\mathcal G$. The formulas [F1] give $p_n=1/n$, $T_n=1$, and $s_n=\\log((1/n)/(1/n)^2)=\\log n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Here $u_n=0$ and $\\beta_n=1$. Substitution into [F2] gives $v_{\\rho,n}=2-\\log n$ and $v_{E,n}=-1$, hence $|v_{\\rho,n}|\\to\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The states satisfy $U_n\\to(0,0,0)$, which is outside $\\mathcal G$ because its density is zero. Every compact subset of Euclidean state space is closed, so a compact $\\mathcal C\\Subset\\mathcal G$ containing every $U_n$ would also contain their limit, a contradiction.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty positive-state domain or finite input and makes no empty-domain claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 checks the first admissible sequence member n=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 explicitly evaluates the n=1 sequence member."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate density, temperature, zero-volume cells, and zero-width mesh cases are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no separate endpoint case beyond its stated boundary convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 1.3 use explicit finite sums and deterministic formulas; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no forward biconditional direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, example, estimate, or one-way result and states no reverse biconditional direction."
+        }
+      ],
+      "kind": "example"
+    }
+  }
+}

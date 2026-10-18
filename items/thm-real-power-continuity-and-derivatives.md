@@ -8,14 +8,14 @@ authorship: ai-altered
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-real-power, thm-logarithm-derivative-and-integral, thm-derivative-of-exponential, thm-chain-rule, thm-algebra-of-derivatives, cor-differentiable-implies-continuous]
+deps: [def-real-power, thm-logarithm-derivative-and-integral, thm-derivative-of-exponential, thm-chain-rule, thm-algebra-of-derivatives, cor-differentiable-implies-continuous, thm-real-power-laws]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-02
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-published-local-repairs/thm-real-power-continuity-and-derivatives.json
 sources:
   scraped: []
   references:
@@ -43,12 +43,14 @@ $$(x^\alpha)'=\alpha x^{\alpha-1}.$$
 
 [L3] The chain rule and algebra of derivatives apply to differentiable real functions, and differentiability implies continuity ([[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[cor-differentiable-implies-continuous]]).
 
+[L4] Positive-base powers satisfy $x^{r+s}=x^rx^s$ ([[thm-real-power-laws]]); together with [L1] and $\exp(\log x)=x$, this gives $x^{\alpha-1}=x^\alpha/x$.
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 The chain rule applied to $a^x=\exp(x\log a)$ gives $(a^x)'=\exp(x\log a)\log a=a^x\log a$. [L1, L2, L3]
 
-1.2 The chain rule applied to $x^\alpha=\exp(\alpha\log x)$ gives $(x^\alpha)'=\exp(\alpha\log x)\alpha/x=\alpha x^{\alpha-1}$. [L1, L2, L3]
+1.2 The chain rule applied to $x^\alpha=\exp(\alpha\log x)$ gives $(x^\alpha)'=\exp(\alpha\log x)\alpha/x=\alpha x^{\alpha-1}$. [L1, L2, L3, L4]
 
 2.1 Both functions are continuous on their stated domains because the displayed derivatives exist there. [step 1.1, step 1.2, L3] ∎

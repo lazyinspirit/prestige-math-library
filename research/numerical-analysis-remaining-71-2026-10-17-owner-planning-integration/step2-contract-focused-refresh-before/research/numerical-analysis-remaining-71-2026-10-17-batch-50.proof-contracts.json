@@ -1,0 +1,2207 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "50",
+  "level": 2,
+  "scheduling_input_sha256": "d695a3efa9f03892e84499ff8e235cee3a448d3bf92fd3a83c3b49fc01940a24",
+  "scope": [
+    "def-pe26-scalar-substructuring-model",
+    "lem-pe26-preconditioned-operator-norm-bound",
+    "thm-pe26-local-energy-kernel-and-interior-spd",
+    "def-pe26-primal-interface-spaces-and-jumps",
+    "def-pe26-discrete-harmonic-extension-and-schur-complement",
+    "thm-pe26-primal-constraints-remove-floating-kernels",
+    "thm-pe26-harmonic-extension-minimizes-energy",
+    "thm-pe26-static-condensation-is-exact-interface-solve",
+    "def-pe26-scaled-averaging-and-bddc-preconditioner",
+    "lem-pe26-discrete-trace-schur-equivalence",
+    "prop-pe26-bddc-constrained-local-minimization",
+    "def-pe26-feti-dp-dual-system-and-preconditioner",
+    "lem-pe26-log-edge-cutoff-and-discrete-sobolev",
+    "prop-pe26-feti-dp-is-dual-schur-complement",
+    "lem-pe26-complementary-primal-dual-spectrum",
+    "lem-pe26-scaled-averaging-energy-bound",
+    "rem-pe26-conditioning-and-work-are-separate",
+    "thm-pe26-nontrivial-spectrum-bddc-feti-dp",
+    "thm-pe26-condition-number-2d-polylogarithmic",
+    "ex-pe26-missing-primal-corner",
+    "ex-pe26-two-floating-poisson-subdomains",
+    "ex-pe26-matching-primal-dual-spectrum",
+    "ex-pe26-coarse-solve-work-bottleneck"
+  ],
+  "contracts": {
+    "def-pe26-scalar-substructuring-model": {
+      "citations": [],
+      "axiom_use": "None; the definitions use finite meshes and finite-dimensional real vector spaces.",
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/trace is covered by the quadratic definition and gives zero energy; see Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "definition"
+    },
+    "lem-pe26-preconditioned-operator-norm-bound": {
+      "citations": [],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the proof is finite-dimensional SPD linear algebra.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $D=T^TAT$, which is SPD because $T$ is injective (if $Tu=0$, then $u=LT u=0$), and $C=LA^{-1}L^T$, which is SPD because $L$ is onto (it has right inverse $T$). Hence $G=CD$ is similar to the symmetric positive definite matrix $D^{1/2}CD^{1/2}$ and has positive real eigenvalues. For an eigenvector $u\\ne0$ with eigenvalue $\\lambda$, let $w=A^{-1}L^TDu$, so $Lw=Gu=\\lambda u$ and $\\|w\\|_A^2=\\langle Du,Gu\\rangle=\\lambda\\langle Du,u\\rangle$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1], $\\langle Du,u\\rangle=\\langle Du,LTu\\rangle=\\langle Aw,Tu\\rangle$. Cauchy–Schwarz in the $A$ inner product gives $\\langle Du,u\\rangle^2\\le\\|w\\|_A^2\\|Tu\\|_A^2=\\lambda\\langle Du,u\\rangle^2$. Dividing by the positive square gives $\\lambda\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Also $\\|Gu\\|_D^2=\\|TLw\\|_A^2\\le\\|TL\\|_A^2\\|w\\|_A^2$. For the eigenvector, the left side is $\\lambda^2\\langle Du,u\\rangle$ and step 1.1 makes the right side $\\|TL\\|_A^2\\lambda\\langle Du,u\\rangle$. Divide by the positive factor to obtain $\\lambda\\le\\|TL\\|_A^2$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "thm-pe26-local-energy-kernel-and-interior-spd": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scalar-substructuring-model",
+          "source_section": "Definition",
+          "quote": "Fix a bounded, connected polygonal open set $Ω\\subset\\mathbb R^2$ with a nonempty Dirichlet boundary segment. A finite **subdomain partition** is a family of connected polygonal open sets $Ω_i$, $1\\le i\\le N$, whose closures cover $\\overline\\Omega$, whose interiors are disjoint, and whose intersections are whole common sides, common vertices, or empty. The outer Dirichlet segment is a union of mesh boundary sides. The edge-adjacency graph of each triangulated subdomain is connected, and the subdomain adjacency graph is connected to the Dirichlet boundary. Each subdomain has a matching affine simplicial triangulation; the triangulations match on every shared side. The family has a fixed shape-regularity bound, quasiuniform mesh size $h_i$, uniformly bounded polygon side count, corner angles bounded below, inradius comparable to $H_i$, and a uniform interior-cone parameter. Write $H_i=\\operatorname{diam}(\\Omega_i)$ and $H/h=\\max_i H_i/h_i$.\n\nUse continuous piecewise-affine ($P_1$) scalar functions on each triangulation. The reference-element and face-matching conventions are those of [[def-reference-finite-element-and-unisolvent-dofs]], [[def-matching-affine-simplicial-meshes]], and [[def-broken-and-conforming-polynomial-spaces]]: local polynomials are affine, their nodal values determine them, and conforming functions have equal traces across a shared side. For each subdomain choose a coefficient $\\rho_i>0$, constant on $\\Omega_i$ but allowed to jump across interfaces. Its local energy is\n\n$$a_i(v,w)=\\rho_i\\sum_{K\\subset\\Omega_i}\\int_K\\nabla v\\cdot\\nabla w\\,dx.$$\n\nThe global finite-element space consists of the continuous piecewise-affine functions on the subdomain meshes that vanish on the outer Dirichlet boundary, with energy $a(v,w)=\\sum_i a_i(v|_{\\Omega_i},w|_{\\Omega_i})$. Local interior degrees of freedom are the mesh vertices strictly inside $\\Omega_i$; local boundary degrees of freedom are its remaining vertices, with outer Dirichlet values fixed to zero. A **floating local block** means the same local energy before any outer-boundary values are fixed. A **subdomain corner** is a vertex of its polygonal boundary.\n\nAll constants in later two-dimensional estimates may depend on the fixed polygon-shape, side-count, and shape-regularity bounds, but not on $h$, $H$, the number of subdomains, or the positive numbers $\\rho_i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe26-scalar-substructuring-model",
+          "source_section": "Definition",
+          "quote": "Fix a bounded, connected polygonal open set $Ω\\subset\\mathbb R^2$ with a nonempty Dirichlet boundary segment. A finite **subdomain partition** is a family of connected polygonal open sets $Ω_i$, $1\\le i\\le N$, whose closures cover $\\overline\\Omega$, whose interiors are disjoint, and whose intersections are whole common sides, common vertices, or empty. The outer Dirichlet segment is a union of mesh boundary sides. The edge-adjacency graph of each triangulated subdomain is connected, and the subdomain adjacency graph is connected to the Dirichlet boundary. Each subdomain has a matching affine simplicial triangulation; the triangulations match on every shared side. The family has a fixed shape-regularity bound, quasiuniform mesh size $h_i$, uniformly bounded polygon side count, corner angles bounded below, inradius comparable to $H_i$, and a uniform interior-cone parameter. Write $H_i=\\operatorname{diam}(\\Omega_i)$ and $H/h=\\max_i H_i/h_i$.\n\nUse continuous piecewise-affine ($P_1$) scalar functions on each triangulation. The reference-element and face-matching conventions are those of [[def-reference-finite-element-and-unisolvent-dofs]], [[def-matching-affine-simplicial-meshes]], and [[def-broken-and-conforming-polynomial-spaces]]: local polynomials are affine, their nodal values determine them, and conforming functions have equal traces across a shared side. For each subdomain choose a coefficient $\\rho_i>0$, constant on $\\Omega_i$ but allowed to jump across interfaces. Its local energy is\n\n$$a_i(v,w)=\\rho_i\\sum_{K\\subset\\Omega_i}\\int_K\\nabla v\\cdot\\nabla w\\,dx.$$\n\nThe global finite-element space consists of the continuous piecewise-affine functions on the subdomain meshes that vanish on the outer Dirichlet boundary, with energy $a(v,w)=\\sum_i a_i(v|_{\\Omega_i},w|_{\\Omega_i})$. Local interior degrees of freedom are the mesh vertices strictly inside $\\Omega_i$; local boundary degrees of freedom are its remaining vertices, with outer Dirichlet values fixed to zero. A **floating local block** means the same local energy before any outer-boundary values are fixed. A **subdomain corner** is a vertex of its polygonal boundary.\n\nAll constants in later two-dimensional estimates may depend on the fixed polygon-shape, side-count, and shape-regularity bounds, but not on $h$, $H$, the number of subdomains, or the positive numbers $\\rho_i$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; all meshes and nodal spaces are finite.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $a_i(v,v)=0$, each nonnegative term $\\rho_i\\int_K|\\nabla v|^2$ is zero. Since $\\nabla v$ is constant on each triangle, it vanishes on every triangle, so $v$ is constant there. Continuity across every shared edge makes neighboring constants equal; connectedness of the triangle adjacency graph makes $v$ one constant on all of $\\Omega_i$. Conversely, a constant has zero gradient, hence lies in the kernel. This proves the floating-block nullspace claim.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A vector in the interior block's kernel defines a local $P_1$ function with zero boundary trace and zero energy. Step 1.1 makes it constant and the zero boundary trace makes that constant zero. Thus the interior quadratic form is strictly positive on every nonzero vector, so its symmetric matrix $K_{II}^{(i)}$ is positive definite. If there are no interior vertices, the unique map on the zero vector space is invertible.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the global energy vanishes, step 1.1 applied triangle by triangle gives one constant on every subdomain. Interface continuity makes adjacent subdomain constants equal; connectedness propagates one constant through $\\Omega$. The nonempty Dirichlet segment forces it to be zero. Hence only the zero global vector has zero quadratic energy, proving positive definiteness.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "def-pe26-primal-interface-spaces-and-jumps": {
+      "citations": [],
+      "axiom_use": "None; the spaces and maps are finite-dimensional.",
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/trace is covered by the quadratic definition and gives zero energy; see Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition states the endpoint primal/edge convention explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "definition"
+    },
+    "thm-pe26-primal-constraints-remove-floating-kernels": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-pe26-local-energy-kernel-and-interior-spd",
+          "source_section": "Statement",
+          "quote": "In the setting of [[def-pe26-scalar-substructuring-model]], the nullspace of the floating local energy matrix on a connected $\\Omega_i$ is exactly the one-dimensional space of constants. The principal stiffness block $K_{II}^{(i)}$ on interior nodal values with zero boundary trace is positive definite (including the empty $0$-dimensional block convention). The assembled global Dirichlet stiffness matrix is positive definite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe26-primal-interface-spaces-and-jumps",
+          "source_section": "Definition",
+          "quote": "For each $i$, let $W_i$ be the vector space of local boundary nodal traces compatible with the fixed outer Dirichlet values, and set $W=\\prod_i W_i$ (all interface copies independent). Let $\\widehat W\\subset W$ be the subspace whose nodal traces agree at every shared interface node; let $R:\\widehat W\\to W$ be the inclusion. Choose a set of **primal constraints**, meaning finitely many linear functionals on local traces whose values are required to agree across their incident subdomains. Vertex values and normalized edge averages are examples. The **partially assembled space** $\\widetilde W$ is the subspace of $W$ satisfying those primal equalities, so $\\widehat W\\subset\\widetilde W\\subset W$.\n\nThe remaining continuity equations are collected in a jump map $B:\\widetilde W\\to\\mathbb R^m$ with $\\ker B=\\widehat W$. It may contain redundant rows. Fix the **redundant-multiplier convention** $\\Lambda:=\\operatorname{range}B$ with its inherited Euclidean inner product: multiplier vectors are elements of this range, not arbitrary row-coordinate vectors modulo an unstated choice. Then $B^T$ is injective on $\\Lambda$. For the PE26 two-dimensional estimate, all subdomain vertices are primal and the only remaining jump rows are nodal differences on open interface edges, each shared by exactly two subdomains.\n\nAn interface corner is primal whenever its value is among the selected primal functionals. An **edge average** on a side $E$ is $|E|^{-1}\\int_E v_h\\,ds$, which is a finite sum of nodal values for a $P_1$ trace. The two-dimensional bound below uses corner constraints; no edge-average bound is claimed there.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "source_section": "Definition",
+          "quote": "Use the interior/interface ordering of [[def-pe26-scalar-substructuring-model]]. The boundary-trace spaces $W_i$, $W=\\prod_iW_i$, the conforming space $\\widehat W$, the partially assembled space $\\widetilde W$, and the inclusion $R:\\widehat W\\to W$ are those of [[def-pe26-primal-interface-spaces-and-jumps]]. In particular, $R$ identifies the copies of a conforming interface trace. In subdomain $i$, write its stiffness matrix as\n\n$$K_i=\\begin{pmatrix}K_{II}^{(i)}&K_{I\\Gamma}^{(i)}\\\\K_{\\Gamma I}^{(i)}&K_{\\Gamma\\Gamma}^{(i)}\\end{pmatrix}.$$\n\nBy [[thm-pe26-local-energy-kernel-and-interior-spd]], $K_{II}^{(i)}$ is positive definite when nonempty; on the zero-dimensional interior space its unique endomorphism is invertible. For admissible boundary trace $g_i$, the **discrete harmonic extension** is\n\n$$H_i g_i:=\\begin{pmatrix}-(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}g_i\\\\g_i\\end{pmatrix}.$$\n\nThe local **interface Schur complement** is\n\n$$S_i:=K_{\\Gamma\\Gamma}^{(i)}-K_{\\Gamma I}^{(i)}(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}.$$\n\nThis is the Schur complement in [[def-block-lu-factorisation]]. The local Schur form on a trace is $g_i^TS_i g_i$. The block identity and the associated block LU factorization use [[thm-block-lu-factorisation-via-an-invertible-leading-block]] with leading block $K_{II}^{(i)}$. Assembling local Schur forms on $\\widehat W$ gives $\\widehat S=R^T(\\operatorname{diag}_i S_i)R$; restricting the same block-diagonal form to $\\widetilde W$ gives the partially assembled operator $\\widetilde S$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the argument uses only finite-dimensional energies and the connected subdomain graph.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From [F3], block multiplication gives $K_iH_i g_i=(0,S_i g_i)^T$ and therefore $(H_i g_i)^TK_i(H_i g_i)=g_i^TS_i g_i$. Thus a zero local Schur energy is precisely zero energy of its harmonic lift. In a local dual subproblem the primal values are prescribed, so a zero-energy local vector, or the harmonic lift of a zero-energy dual trace, is constant by [F1]. A primal corner value is among its prescribed values; because the dual correction has zero primal values, that constant is zero. The local dual quadratic form therefore has trivial kernel and, being symmetric positive semidefinite, is positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $g=(g_i)\\in\\widetilde W$, [F3] and step 1.1 give $g^T\\widetilde Sg=\\sum_i g_i^TS_i g_i=\\sum_i(H_i g_i)^TK_i(H_i g_i)$. Each summand is a nonnegative local energy. If the partially assembled energy is zero, every summand is zero, so [F1] makes each local harmonic extension constant on its subdomain. Neighboring local constants agree at their shared primal corner. The adjacency graph is connected, so all constants agree; the global Dirichlet boundary makes the common value zero. Thus the partially assembled trace is zero, and its assembled energy matrix is positive definite.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The BDDC local dual solves use the positive local restrictions from step 1.1 and its coarse solve uses the positive partially assembled energy from step 2.1. The FETI-DP operator uses the same invertible partially assembled energy and the jump quotient of [F2]. Hence the exact local, coarse and dual systems named in the Statement are well-defined.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "def-pe26-discrete-harmonic-extension-and-schur-complement": {
+      "citations": [],
+      "axiom_use": "None; only finite-dimensional block elimination is used.",
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/trace is covered by the quadratic definition and gives zero energy; see Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition states the endpoint primal/edge convention explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "definition"
+    },
+    "thm-pe26-harmonic-extension-minimizes-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "source_section": "Definition",
+          "quote": "Use the interior/interface ordering of [[def-pe26-scalar-substructuring-model]]. The boundary-trace spaces $W_i$, $W=\\prod_iW_i$, the conforming space $\\widehat W$, the partially assembled space $\\widetilde W$, and the inclusion $R:\\widehat W\\to W$ are those of [[def-pe26-primal-interface-spaces-and-jumps]]. In particular, $R$ identifies the copies of a conforming interface trace. In subdomain $i$, write its stiffness matrix as\n\n$$K_i=\\begin{pmatrix}K_{II}^{(i)}&K_{I\\Gamma}^{(i)}\\\\K_{\\Gamma I}^{(i)}&K_{\\Gamma\\Gamma}^{(i)}\\end{pmatrix}.$$\n\nBy [[thm-pe26-local-energy-kernel-and-interior-spd]], $K_{II}^{(i)}$ is positive definite when nonempty; on the zero-dimensional interior space its unique endomorphism is invertible. For admissible boundary trace $g_i$, the **discrete harmonic extension** is\n\n$$H_i g_i:=\\begin{pmatrix}-(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}g_i\\\\g_i\\end{pmatrix}.$$\n\nThe local **interface Schur complement** is\n\n$$S_i:=K_{\\Gamma\\Gamma}^{(i)}-K_{\\Gamma I}^{(i)}(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}.$$\n\nThis is the Schur complement in [[def-block-lu-factorisation]]. The local Schur form on a trace is $g_i^TS_i g_i$. The block identity and the associated block LU factorization use [[thm-block-lu-factorisation-via-an-invertible-leading-block]] with leading block $K_{II}^{(i)}$. Assembling local Schur forms on $\\widehat W$ gives $\\widehat S=R^T(\\operatorname{diag}_i S_i)R$; restricting the same block-diagonal form to $\\widetilde W$ gives the partially assembled operator $\\widetilde S$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pe26-local-energy-kernel-and-interior-spd",
+          "source_section": "Statement",
+          "quote": "In the setting of [[def-pe26-scalar-substructuring-model]], the nullspace of the floating local energy matrix on a connected $\\Omega_i$ is exactly the one-dimensional space of constants. The principal stiffness block $K_{II}^{(i)}$ on interior nodal values with zero boundary trace is positive definite (including the empty $0$-dimensional block convention). The assembled global Dirichlet stiffness matrix is positive definite.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the proof is a finite-dimensional quadratic identity.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Any local vector with trace $g_i$ has the form $v=H_i g_i+(z,0)^T$. By [F1], the interior block row of $K_iH_i g_i$ is $K_{II}(-K_{II}^{-1}K_{I\\Gamma}g_i)+K_{I\\Gamma}g_i=0$. Hence the energy cross term between $H_i g_i$ and $(z,0)$ vanishes, and $v^TK_i v=(H_i g_i)^TK_i(H_i g_i)+z^TK_{II}z$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], the last term is nonnegative and is zero only for $z=0$. Thus $H_i g_i$ is the unique minimizer. Multiplying the block expression in [F1] gives $(H_i g_i)^TK_i(H_i g_i)=g_i^T(K_{\\Gamma\\Gamma}-K_{\\Gamma I}K_{II}^{-1}K_{I\\Gamma})g_i=g_i^TS_i g_i$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The primal corner and/or edge endpoint values are handled explicitly in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "thm-pe26-static-condensation-is-exact-interface-solve": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scalar-substructuring-model",
+          "source_section": "Definition",
+          "quote": "Fix a bounded, connected polygonal open set $Ω\\subset\\mathbb R^2$ with a nonempty Dirichlet boundary segment. A finite **subdomain partition** is a family of connected polygonal open sets $Ω_i$, $1\\le i\\le N$, whose closures cover $\\overline\\Omega$, whose interiors are disjoint, and whose intersections are whole common sides, common vertices, or empty. The outer Dirichlet segment is a union of mesh boundary sides. The edge-adjacency graph of each triangulated subdomain is connected, and the subdomain adjacency graph is connected to the Dirichlet boundary. Each subdomain has a matching affine simplicial triangulation; the triangulations match on every shared side. The family has a fixed shape-regularity bound, quasiuniform mesh size $h_i$, uniformly bounded polygon side count, corner angles bounded below, inradius comparable to $H_i$, and a uniform interior-cone parameter. Write $H_i=\\operatorname{diam}(\\Omega_i)$ and $H/h=\\max_i H_i/h_i$.\n\nUse continuous piecewise-affine ($P_1$) scalar functions on each triangulation. The reference-element and face-matching conventions are those of [[def-reference-finite-element-and-unisolvent-dofs]], [[def-matching-affine-simplicial-meshes]], and [[def-broken-and-conforming-polynomial-spaces]]: local polynomials are affine, their nodal values determine them, and conforming functions have equal traces across a shared side. For each subdomain choose a coefficient $\\rho_i>0$, constant on $\\Omega_i$ but allowed to jump across interfaces. Its local energy is\n\n$$a_i(v,w)=\\rho_i\\sum_{K\\subset\\Omega_i}\\int_K\\nabla v\\cdot\\nabla w\\,dx.$$\n\nThe global finite-element space consists of the continuous piecewise-affine functions on the subdomain meshes that vanish on the outer Dirichlet boundary, with energy $a(v,w)=\\sum_i a_i(v|_{\\Omega_i},w|_{\\Omega_i})$. Local interior degrees of freedom are the mesh vertices strictly inside $\\Omega_i$; local boundary degrees of freedom are its remaining vertices, with outer Dirichlet values fixed to zero. A **floating local block** means the same local energy before any outer-boundary values are fixed. A **subdomain corner** is a vertex of its polygonal boundary.\n\nAll constants in later two-dimensional estimates may depend on the fixed polygon-shape, side-count, and shape-regularity bounds, but not on $h$, $H$, the number of subdomains, or the positive numbers $\\rho_i$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "source_section": "Definition",
+          "quote": "Use the interior/interface ordering of [[def-pe26-scalar-substructuring-model]]. The boundary-trace spaces $W_i$, $W=\\prod_iW_i$, the conforming space $\\widehat W$, the partially assembled space $\\widetilde W$, and the inclusion $R:\\widehat W\\to W$ are those of [[def-pe26-primal-interface-spaces-and-jumps]]. In particular, $R$ identifies the copies of a conforming interface trace. In subdomain $i$, write its stiffness matrix as\n\n$$K_i=\\begin{pmatrix}K_{II}^{(i)}&K_{I\\Gamma}^{(i)}\\\\K_{\\Gamma I}^{(i)}&K_{\\Gamma\\Gamma}^{(i)}\\end{pmatrix}.$$\n\nBy [[thm-pe26-local-energy-kernel-and-interior-spd]], $K_{II}^{(i)}$ is positive definite when nonempty; on the zero-dimensional interior space its unique endomorphism is invertible. For admissible boundary trace $g_i$, the **discrete harmonic extension** is\n\n$$H_i g_i:=\\begin{pmatrix}-(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}g_i\\\\g_i\\end{pmatrix}.$$\n\nThe local **interface Schur complement** is\n\n$$S_i:=K_{\\Gamma\\Gamma}^{(i)}-K_{\\Gamma I}^{(i)}(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}.$$\n\nThis is the Schur complement in [[def-block-lu-factorisation]]. The local Schur form on a trace is $g_i^TS_i g_i$. The block identity and the associated block LU factorization use [[thm-block-lu-factorisation-via-an-invertible-leading-block]] with leading block $K_{II}^{(i)}$. Assembling local Schur forms on $\\widehat W$ gives $\\widehat S=R^T(\\operatorname{diag}_i S_i)R$; restricting the same block-diagonal form to $\\widetilde W$ gives the partially assembled operator $\\widetilde S$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-block-lu-factorisation-via-an-invertible-leading-block",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$A=\\begin{pmatrix}A_{11}&A_{12}\\\\A_{21}&A_{22}\\end{pmatrix}$$\n\nbe a square block matrix over a field, with $A_{11}$ square and invertible, and\nlet $S:=A_{22}-A_{21}A_{11}^{-1}A_{12}$.\n\n1. One has the exact block factorisation\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&I\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&S\\end{pmatrix}.$$\n2. If $S=\\widetilde L\\widetilde U$ is any normalised LU factorisation, then\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&\\widetilde L\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&\\widetilde U\\end{pmatrix}$$\n   is a block LU factorisation across the same partition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pe26-local-energy-kernel-and-interior-spd",
+          "source_section": "Statement",
+          "quote": "In the setting of [[def-pe26-scalar-substructuring-model]], the nullspace of the floating local energy matrix on a connected $\\Omega_i$ is exactly the one-dimensional space of constants. The principal stiffness block $K_{II}^{(i)}$ on interior nodal values with zero boundary trace is positive definite (including the empty $0$-dimensional block convention). The assembled global Dirichlet stiffness matrix is positive definite.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the proof is block Gaussian elimination in finite-dimensional spaces.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $f_i=(f_I^{(i)},f_\\Gamma^{(i)})^T$ be local load contributions whose assembly is the chosen global Galerkin load vector, as specified above. The global interior rows are local to each subdomain and give $$u_I^{(i)}=(K_{II}^{(i)})^{-1}(f_I^{(i)}-K_{I\\Gamma}^{(i)}u_\\Gamma^{(i)}).$$ The local interface residual contribution is $K_{\\Gamma I}^{(i)}u_I^{(i)}+K_{\\Gamma\\Gamma}^{(i)}u_\\Gamma^{(i)}-f_\\Gamma^{(i)}$. Substituting the interior formula makes it $S_i u_\\Gamma^{(i)}-(f_\\Gamma^{(i)}-K_{\\Gamma I}^{(i)}(K_{II}^{(i)})^{-1}f_I^{(i)})$, precisely the local Schur contribution in [F3]. The global interface rows are the assembled sum of these contributions, not separate local interface equations.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Sum the reduced equations from step 1.1 over subdomains and identify copies of each shared nodal value as in [F1]. Because both the stiffness and the local load vectors assemble by summing their shared interface components, this gives the assembled interface Schur system with the correspondingly reduced global right-hand side. Any solution of the original global system yields this trace. Conversely, a solution of the assembled interface system and the uniquely defined interior values from step 1.1 satisfy every local interior equation and the assembled sum of interface equations, hence the assembled global system.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The global stiffness is positive definite by [F4], so the original solution is unique. The interior reconstruction is unique because every $K_{II}^{(i)}$ is invertible, and the homogeneous part of that reconstruction is $H_i$ from [F2]. Therefore static condensation is exact in both directions.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "def-pe26-scaled-averaging-and-bddc-preconditioner": {
+      "citations": [],
+      "axiom_use": "None; all interface spaces are finite-dimensional.",
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/trace is covered by the quadratic definition and gives zero energy; see Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition states the endpoint primal/edge convention explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "definition"
+    },
+    "prop-pe26-bddc-constrained-local-minimization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use the spaces and partial Schur operator of [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-discrete-harmonic-extension-and-schur-complement]]. Let $E_0:\\widetilde W\\to\\widehat W$ average every remaining interface degree of freedom and preserve every already-shared primal value. It is a scaled average if the weights for all copies of each such degree of freedom sum to one. Put $\\bar E:=R E_0:\\widetilde W\\to\\widetilde W$. Then $E_0R=I_{\\widehat W}$ and $\\bar E$ is a projection onto $\\widehat W$.\n\nIn the PE26 two-dimensional corner-constraint branch, each non-primal node is interior to one interface edge shared by exactly two subdomains $i,j$. Set\n\n$$ (E_0w)(x)=\\frac{\\rho_i}{\\rho_i+\\rho_j}w_i(x)+\\frac{\\rho_j}{\\rho_i+\\rho_j}w_j(x). $$\n\nAt primal nodes the copies already agree, so the average is the common value. For any finite-dimensional positive definite partial Schur operator $\\widetilde S$, the **BDDC preconditioner** is\n\n$$M_{\\rm BDDC}^{-1}:=E_0\\widetilde S^{-1}E_0^T:\\widehat W'\\to\\widehat W,$$\n\nfor the assembled interface system with operator $\\widehat S=R^T\\widetilde S R$. Its constrained partial-energy interpretation is established in [[prop-pe26-bddc-constrained-local-minimization]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pe26-primal-constraints-remove-floating-kernels",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of [[def-pe26-primal-interface-spaces-and-jumps]] and the energy setting of [[thm-pe26-local-energy-kernel-and-interior-spd]]. If each floating local component has at least one primal vertex value fixed in its dual subproblem, its local dual stiffness is positive definite. If all subdomain vertices are primal and the global Dirichlet boundary is nonempty, the partially assembled interface energy is positive definite; hence the BDDC and FETI-DP exact local and coarse solves are well-defined.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; strict convexity is finite-dimensional positive definiteness.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating the finite-dimensional quadratic in a direction $z\\in\\widetilde W$ gives $J_f'(w)[z]=\\langle\\widetilde S w,z\\rangle-\\langle f,E_0z\\rangle$. Thus its critical point solves $\\widetilde S w=E_0^Tf$, whose unique solution is $w_*=\\widetilde S^{-1}E_0^T f$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $z\\in\\widetilde W$, expansion about the critical point yields $J_f(w_*+z)=J_f(w_*)+\\tfrac12\\langle\\widetilde S z,z\\rangle$. By [F2] the added term is positive unless $z=0$, so $w_*$ is the unique global minimizer. Applying $E_0$ gives the displayed BDDC correction by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "proposition"
+    },
+    "def-pe26-feti-dp-dual-system-and-preconditioner": {
+      "citations": [],
+      "axiom_use": "None; the multiplier quotient and right inverse are finite-dimensional.",
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/trace is covered by the quadratic definition and gives zero energy; see Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "definition"
+    },
+    "lem-pe26-discrete-trace-schur-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scalar-substructuring-model",
+          "source_section": "Definition",
+          "quote": "Fix a bounded, connected polygonal open set $Ω\\subset\\mathbb R^2$ with a nonempty Dirichlet boundary segment. A finite **subdomain partition** is a family of connected polygonal open sets $Ω_i$, $1\\le i\\le N$, whose closures cover $\\overline\\Omega$, whose interiors are disjoint, and whose intersections are whole common sides, common vertices, or empty. The outer Dirichlet segment is a union of mesh boundary sides. The edge-adjacency graph of each triangulated subdomain is connected, and the subdomain adjacency graph is connected to the Dirichlet boundary. Each subdomain has a matching affine simplicial triangulation; the triangulations match on every shared side. The family has a fixed shape-regularity bound, quasiuniform mesh size $h_i$, uniformly bounded polygon side count, corner angles bounded below, inradius comparable to $H_i$, and a uniform interior-cone parameter. Write $H_i=\\operatorname{diam}(\\Omega_i)$ and $H/h=\\max_i H_i/h_i$.\n\nUse continuous piecewise-affine ($P_1$) scalar functions on each triangulation. The reference-element and face-matching conventions are those of [[def-reference-finite-element-and-unisolvent-dofs]], [[def-matching-affine-simplicial-meshes]], and [[def-broken-and-conforming-polynomial-spaces]]: local polynomials are affine, their nodal values determine them, and conforming functions have equal traces across a shared side. For each subdomain choose a coefficient $\\rho_i>0$, constant on $\\Omega_i$ but allowed to jump across interfaces. Its local energy is\n\n$$a_i(v,w)=\\rho_i\\sum_{K\\subset\\Omega_i}\\int_K\\nabla v\\cdot\\nabla w\\,dx.$$\n\nThe global finite-element space consists of the continuous piecewise-affine functions on the subdomain meshes that vanish on the outer Dirichlet boundary, with energy $a(v,w)=\\sum_i a_i(v|_{\\Omega_i},w|_{\\Omega_i})$. Local interior degrees of freedom are the mesh vertices strictly inside $\\Omega_i$; local boundary degrees of freedom are its remaining vertices, with outer Dirichlet values fixed to zero. A **floating local block** means the same local energy before any outer-boundary values are fixed. A **subdomain corner** is a vertex of its polygonal boundary.\n\nAll constants in later two-dimensional estimates may depend on the fixed polygon-shape, side-count, and shape-regularity bounds, but not on $h$, $H$, the number of subdomains, or the positive numbers $\\rho_i$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "source_section": "Definition",
+          "quote": "Use the interior/interface ordering of [[def-pe26-scalar-substructuring-model]]. The boundary-trace spaces $W_i$, $W=\\prod_iW_i$, the conforming space $\\widehat W$, the partially assembled space $\\widetilde W$, and the inclusion $R:\\widehat W\\to W$ are those of [[def-pe26-primal-interface-spaces-and-jumps]]. In particular, $R$ identifies the copies of a conforming interface trace. In subdomain $i$, write its stiffness matrix as\n\n$$K_i=\\begin{pmatrix}K_{II}^{(i)}&K_{I\\Gamma}^{(i)}\\\\K_{\\Gamma I}^{(i)}&K_{\\Gamma\\Gamma}^{(i)}\\end{pmatrix}.$$\n\nBy [[thm-pe26-local-energy-kernel-and-interior-spd]], $K_{II}^{(i)}$ is positive definite when nonempty; on the zero-dimensional interior space its unique endomorphism is invertible. For admissible boundary trace $g_i$, the **discrete harmonic extension** is\n\n$$H_i g_i:=\\begin{pmatrix}-(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}g_i\\\\g_i\\end{pmatrix}.$$\n\nThe local **interface Schur complement** is\n\n$$S_i:=K_{\\Gamma\\Gamma}^{(i)}-K_{\\Gamma I}^{(i)}(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}.$$\n\nThis is the Schur complement in [[def-block-lu-factorisation]]. The local Schur form on a trace is $g_i^TS_i g_i$. The block identity and the associated block LU factorization use [[thm-block-lu-factorisation-via-an-invertible-leading-block]] with leading block $K_{II}^{(i)}$. Assembling local Schur forms on $\\widehat W$ gives $\\widehat S=R^T(\\operatorname{diag}_i S_i)R$; restricting the same block-diagonal form to $\\widetilde W$ gives the partially assembled operator $\\widetilde S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pe26-harmonic-extension-minimizes-energy",
+          "source_section": "Statement",
+          "quote": "For every admissible local trace $g_i$, $H_i g_i$ from [[def-pe26-discrete-harmonic-extension-and-schur-complement]] is the unique finite-element function with trace $g_i$ minimizing $a_i(v,v)$. The minimum is $g_i^TS_i g_i$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the constructions use a finite boundary chart cover and finite nodal functionals.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the upper half-plane, Fourier transformation in the tangential variable gives, for a smooth lift $V$ with trace $g$, $$|\\xi||\\widehat g(\\xi)|^2\\le\\int_0^\\infty\\bigl(|\\partial_t\\widehat V(\\xi,t)|^2+|\\xi|^2|\\widehat V(\\xi,t)|^2\\bigr)\\,dt.$$ Indeed, integrate $-\\partial_t|\\widehat V|^2$ and apply $2ab\\le a^2+b^2$. Integration in $\\xi$ proves the trace seminorm bound. Conversely, $\\widehat V(\\xi,t)=e^{-t|\\xi|}\\widehat g(\\xi)$ has gradient energy $\\int |\\xi||\\widehat g(\\xi)|^2\\,d\\xi$. In a bounded chart, multiply the half-plane extension by a fixed cutoff in the inward coordinate; the added gradient term is controlled by the localized L2 boundary norm, hence by the full H1/2 norm after constants are removed. A finite collection of Lipschitz graph charts covers the polygon boundary, including its corners. Flattening each chart is bi-Lipschitz, so it changes the $H^1$ gradient and boundary Gagliardo seminorm by bounded factors. Applying a partition of unity and the half-plane trace inequality to arbitrary chart-localized lifts gives $|g|_{1/2,\\partial\\Omega_i}\\le C\\|V\\|_{H^1(\\Omega_i)}$. Subtract the domain mean of $V$ and use scaled Poincar\\'e to replace the full $H^1$ norm by $\\|\\nabla V\\|_{L^2}$. In the other direction, apply a partition of unity to boundary data, use the half-plane extensions, and sum to obtain a right inverse of the trace. First subtract a boundary constant; the fractional Poincar\\'e inequality on the connected polygon boundary controls the localized full norms by the seminorm. Add that constant back as a constant lift, which has zero gradient. The finite chart count and chart constants are uniform under [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Construct an interpolant $I_h:H^1(\\Omega_i)\\to V_h$ as follows. For each interior mesh vertex choose one incident triangle and set its coefficient to the average of $V$ on that triangle. For each boundary vertex choose one incident boundary edge and set its coefficient to the integral of the trace of $V$ against the $L^2$-dual function to the endpoint nodal basis on that edge. These dual functionals reproduce every affine edge trace, so the trace of $I_hV$ is exactly $g$ whenever the trace of $V$ is $g$. All coefficients reproduce constants. For a triangle $K$, the chosen elements and edges for its vertices lie in a connected patch $\\omega_K$ of diameter at most $Ch$ containing a uniformly bounded number of triangles; these patches have bounded overlap. Let $c_K$ be the mean of $V$ on $\\omega_K$. Scaled Poincaré gives $\\|V-c_K\\|_{L^2(\\omega_K)}\\le Ch\\|\\nabla V\\|_{L^2(\\omega_K)}$, and the scaled trace inequality gives $\\|V-c_K\\|_{L^2(e)}\\le Ch^{1/2}\\|\\nabla V\\|_{L^2(\\omega_K)}$ on a selected boundary edge $e$. Thus each interior average coefficient of $V-c_K$ is bounded by $C\\|\\nabla V\\|_{L^2(\\omega_K)}$. A boundary dual function has $L^2(e)$ norm at most $Ch^{-1/2}$, so its coefficient has the same bound. Since $I_hc_K=c_K$ and the affine basis functions have uniformly bounded $L^2(K)$ gradient norms in two dimensions, $\\|\\nabla I_hV\\|_{L^2(K)}\\le C\\|\\nabla V\\|_{L^2(\\omega_K)}$. Summing and using bounded overlap proves $\\|\\nabla I_hV\\|_{L^2(\\Omega_i)}\\le C\\|\\nabla V\\|_{L^2(\\Omega_i)}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any finite-element lift $v_h$ of $g$, step 1.1 gives $|g|_{1/2,\\partial\\Omega_i}^2\\le C\\|\\nabla v_h\\|_{L^2(\\Omega_i)}^2$. Taking the minimum over such lifts and using [F2]–[F3] gives the lower Schur bound. For the upper bound, step 1.1 supplies a continuous lift $V$ with gradient energy at most $C|g|_{1/2,\\partial\\Omega_i}^2$, and step 1.2 gives a boundary-preserving finite-element lift $I_hV$ with the same bound up to a uniform factor. Minimality [F3] bounds the discrete harmonic energy by this lift. Multiplication by $\\rho_i$ proves both inequalities.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The primal corner and/or edge endpoint values are handled explicitly in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "prop-pe26-feti-dp-is-dual-schur-complement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-feti-dp-dual-system-and-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use $\\widetilde W$, $\\widehat W$, $E_0$, $R$, $B$ and $\\Lambda=\\operatorname{range}B$ as defined in [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-scaled-averaging-and-bddc-preconditioner]]. Regard $\\bar E=R E_0$ as a projection on $\\widetilde W$. Since $\\ker B=\\operatorname{range}\\bar E=\\widehat W$, each class of traces with the same jump has a unique representative in $\\ker\\bar E$. Define $B_D^T:\\Lambda\\to\\widetilde W$ by assigning to $\\lambda\\in\\Lambda$ that unique representative $w$ with $Bw=\\lambda$ and $\\bar Ew=0$. This is the scaled right inverse; it obeys $BB_D^T=I_\\Lambda$ and $B_D^TB=I_{\\widetilde W}-\\bar E$. The latter identity makes the primal and dual projections complementary. In the two-subdomain edge case, its two entries are the coefficient-scaled jump weights complementary to those in $E_0$.\n\nThe **FETI-DP dual operator** and its preconditioner are\n\n$$F:=B\\widetilde S^{-1}B^T:\\Lambda\\to\\Lambda',\\qquad M_{\\rm FETI-DP}^{-1}:=B_D\\widetilde S B_D^T:\\Lambda'\\to\\Lambda.$$\n\nThe multiplier convention removes dependent row coordinates: $\\lambda$ is in $\\operatorname{range}B$, so no arbitrary multiplier component in $\\ker B^T$ is retained. Elimination of the partially assembled displacement and the resulting exact dual system are proved in [[prop-pe26-feti-dp-is-dual-schur-complement]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe26-primal-interface-spaces-and-jumps",
+          "source_section": "Definition",
+          "quote": "For each $i$, let $W_i$ be the vector space of local boundary nodal traces compatible with the fixed outer Dirichlet values, and set $W=\\prod_i W_i$ (all interface copies independent). Let $\\widehat W\\subset W$ be the subspace whose nodal traces agree at every shared interface node; let $R:\\widehat W\\to W$ be the inclusion. Choose a set of **primal constraints**, meaning finitely many linear functionals on local traces whose values are required to agree across their incident subdomains. Vertex values and normalized edge averages are examples. The **partially assembled space** $\\widetilde W$ is the subspace of $W$ satisfying those primal equalities, so $\\widehat W\\subset\\widetilde W\\subset W$.\n\nThe remaining continuity equations are collected in a jump map $B:\\widetilde W\\to\\mathbb R^m$ with $\\ker B=\\widehat W$. It may contain redundant rows. Fix the **redundant-multiplier convention** $\\Lambda:=\\operatorname{range}B$ with its inherited Euclidean inner product: multiplier vectors are elements of this range, not arbitrary row-coordinate vectors modulo an unstated choice. Then $B^T$ is injective on $\\Lambda$. For the PE26 two-dimensional estimate, all subdomain vertices are primal and the only remaining jump rows are nodal differences on open interface edges, each shared by exactly two subdomains.\n\nAn interface corner is primal whenever its value is among the selected primal functionals. An **edge average** on a side $E$ is $|E|^{-1}\\int_E v_h\\,ds$, which is a finite sum of nodal values for a $P_1$ trace. The two-dimensional bound below uses corner constraints; no edge-average bound is claimed there.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pe26-primal-constraints-remove-floating-kernels",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of [[def-pe26-primal-interface-spaces-and-jumps]] and the energy setting of [[thm-pe26-local-energy-kernel-and-interior-spd]]. If each floating local component has at least one primal vertex value fixed in its dual subproblem, its local dual stiffness is positive definite. If all subdomain vertices are primal and the global Dirichlet boundary is nonempty, the partially assembled interface energy is positive definite; hence the BDDC and FETI-DP exact local and coarse solves are well-defined.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the saddle system is finite-dimensional.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Lagrangian is $L(w,\\lambda)=\\tfrac12\\langle\\widetilde S w,w\\rangle-\\langle E_0^Tf,w\\rangle+\\langle\\lambda,Bw\\rangle$. Its derivative in arbitrary $z\\in\\widetilde W$ is $\\langle\\widetilde S w+B^T\\lambda-E_0^Tf,z\\rangle$, and its multiplier derivative is $Bw$. Setting both derivatives to zero gives the displayed saddle equations.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], the first equation has the unique solution $w=\\widetilde S^{-1}(E_0^Tf-B^T\\lambda)$. Substitution into $Bw=0$ gives the displayed dual system.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\lambda\\in\\Lambda$ and $B^T\\lambda=0$, write $\\lambda=Bv$ using [F2]. Then $\\langle\\lambda,\\lambda\\rangle=\\langle Bv,\\lambda\\rangle=\\langle v,B^T\\lambda\\rangle=0$, hence $\\lambda=0$. Thus $B^T$ is injective on $\\Lambda$, and $\\langle F\\lambda,\\lambda\\rangle=\\langle\\widetilde S^{-1}B^T\\lambda,B^T\\lambda\\rangle>0$ for every nonzero $\\lambda$. The exact solution satisfies $Bw=0$, so by [F2] it lies in $\\widehat W$ and solves the assembled variational problem.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "proposition"
+    },
+    "lem-pe26-complementary-primal-dual-spectrum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use the spaces and partial Schur operator of [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-discrete-harmonic-extension-and-schur-complement]]. Let $E_0:\\widetilde W\\to\\widehat W$ average every remaining interface degree of freedom and preserve every already-shared primal value. It is a scaled average if the weights for all copies of each such degree of freedom sum to one. Put $\\bar E:=R E_0:\\widetilde W\\to\\widetilde W$. Then $E_0R=I_{\\widehat W}$ and $\\bar E$ is a projection onto $\\widehat W$.\n\nIn the PE26 two-dimensional corner-constraint branch, each non-primal node is interior to one interface edge shared by exactly two subdomains $i,j$. Set\n\n$$ (E_0w)(x)=\\frac{\\rho_i}{\\rho_i+\\rho_j}w_i(x)+\\frac{\\rho_j}{\\rho_i+\\rho_j}w_j(x). $$\n\nAt primal nodes the copies already agree, so the average is the common value. For any finite-dimensional positive definite partial Schur operator $\\widetilde S$, the **BDDC preconditioner** is\n\n$$M_{\\rm BDDC}^{-1}:=E_0\\widetilde S^{-1}E_0^T:\\widehat W'\\to\\widehat W,$$\n\nfor the assembled interface system with operator $\\widehat S=R^T\\widetilde S R$. Its constrained partial-energy interpretation is established in [[prop-pe26-bddc-constrained-local-minimization]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe26-feti-dp-dual-system-and-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use $\\widetilde W$, $\\widehat W$, $E_0$, $R$, $B$ and $\\Lambda=\\operatorname{range}B$ as defined in [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-scaled-averaging-and-bddc-preconditioner]]. Regard $\\bar E=R E_0$ as a projection on $\\widetilde W$. Since $\\ker B=\\operatorname{range}\\bar E=\\widehat W$, each class of traces with the same jump has a unique representative in $\\ker\\bar E$. Define $B_D^T:\\Lambda\\to\\widetilde W$ by assigning to $\\lambda\\in\\Lambda$ that unique representative $w$ with $Bw=\\lambda$ and $\\bar Ew=0$. This is the scaled right inverse; it obeys $BB_D^T=I_\\Lambda$ and $B_D^TB=I_{\\widetilde W}-\\bar E$. The latter identity makes the primal and dual projections complementary. In the two-subdomain edge case, its two entries are the coefficient-scaled jump weights complementary to those in $E_0$.\n\nThe **FETI-DP dual operator** and its preconditioner are\n\n$$F:=B\\widetilde S^{-1}B^T:\\Lambda\\to\\Lambda',\\qquad M_{\\rm FETI-DP}^{-1}:=B_D\\widetilde S B_D^T:\\Lambda'\\to\\Lambda.$$\n\nThe multiplier convention removes dependent row coordinates: $\\lambda$ is in $\\operatorname{range}B$, so no arbitrary multiplier component in $\\ker B^T$ is retained. Elimination of the partially assembled displacement and the resulting exact dual system are proved in [[prop-pe26-feti-dp-is-dual-schur-complement]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; only finite-dimensional linear algebra is used.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $X=L_1A^{-1}L_2^T:U_2\\to U_1$ and $Y=T_2^TAT_1:U_1\\to U_2$. By [F1] and [F2], $L_1T_1=I$, $L_2T_2=I$, and $T_1L_1+T_2L_2=I$. Expanding the products gives $G_1-I=-XY$ and $G_2-I=-YX$. In detail, $G_1-I=L_1A^{-1}((T_1L_1)^T-I)AT_1=-L_1A^{-1}L_2^TT_2^TAT_1$; also $YX=T_2^T A(I-T_2L_2)A^{-1}L_2^T=I-G_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $G_1u=\\lambda u$ with $\\lambda\\ne1$, then $XYu=(1-\\lambda)u$, so $Yu\\ne0$. The identity $G_2-I=-YX$ gives $(G_2-I)Yu=-YXYu=(\\lambda-1)Yu$, hence $G_2(Yu)=\\lambda Yu$. The reverse map is $v\\mapsto-Xv/(\\lambda-1)$; the same identities show it is the inverse on the $\\lambda$-eigenspaces. Thus these eigenspaces are isomorphic.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both operators are diagonalizable: $T_1^TAT_1$ and $L_1A^{-1}L_1^T$ are positive definite, so $G_1$ is similar to the symmetric positive definite product $D_1^{1/2}(L_1A^{-1}L_1^T)D_1^{1/2}$; likewise $G_2$ is similar to $D_2^{1/2}(L_2A^{-1}L_2^T)D_2^{1/2}$, where $D_2=T_2^TAT_2$. The left-inverse identities make $T_i$ injective and $L_i$ surjective, proving each factor is positive definite. Therefore equal eigenspace dimensions from step 2.1 give equal algebraic multiplicities for every $\\lambda\\ne1$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "lem-pe26-log-edge-cutoff-and-discrete-sobolev": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scalar-substructuring-model",
+          "source_section": "Definition",
+          "quote": "Fix a bounded, connected polygonal open set $Ω\\subset\\mathbb R^2$ with a nonempty Dirichlet boundary segment. A finite **subdomain partition** is a family of connected polygonal open sets $Ω_i$, $1\\le i\\le N$, whose closures cover $\\overline\\Omega$, whose interiors are disjoint, and whose intersections are whole common sides, common vertices, or empty. The outer Dirichlet segment is a union of mesh boundary sides. The edge-adjacency graph of each triangulated subdomain is connected, and the subdomain adjacency graph is connected to the Dirichlet boundary. Each subdomain has a matching affine simplicial triangulation; the triangulations match on every shared side. The family has a fixed shape-regularity bound, quasiuniform mesh size $h_i$, uniformly bounded polygon side count, corner angles bounded below, inradius comparable to $H_i$, and a uniform interior-cone parameter. Write $H_i=\\operatorname{diam}(\\Omega_i)$ and $H/h=\\max_i H_i/h_i$.\n\nUse continuous piecewise-affine ($P_1$) scalar functions on each triangulation. The reference-element and face-matching conventions are those of [[def-reference-finite-element-and-unisolvent-dofs]], [[def-matching-affine-simplicial-meshes]], and [[def-broken-and-conforming-polynomial-spaces]]: local polynomials are affine, their nodal values determine them, and conforming functions have equal traces across a shared side. For each subdomain choose a coefficient $\\rho_i>0$, constant on $\\Omega_i$ but allowed to jump across interfaces. Its local energy is\n\n$$a_i(v,w)=\\rho_i\\sum_{K\\subset\\Omega_i}\\int_K\\nabla v\\cdot\\nabla w\\,dx.$$\n\nThe global finite-element space consists of the continuous piecewise-affine functions on the subdomain meshes that vanish on the outer Dirichlet boundary, with energy $a(v,w)=\\sum_i a_i(v|_{\\Omega_i},w|_{\\Omega_i})$. Local interior degrees of freedom are the mesh vertices strictly inside $\\Omega_i$; local boundary degrees of freedom are its remaining vertices, with outer Dirichlet values fixed to zero. A **floating local block** means the same local energy before any outer-boundary values are fixed. A **subdomain corner** is a vertex of its polygonal boundary.\n\nAll constants in later two-dimensional estimates may depend on the fixed polygon-shape, side-count, and shape-regularity bounds, but not on $h$, $H$, the number of subdomains, or the positive numbers $\\rho_i$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pe26-discrete-trace-schur-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega_i$ be one of the shape-regular polygonal subdomains in [[def-pe26-scalar-substructuring-model]], with a matching quasiuniform $P_1$ mesh. For a continuous piecewise-linear boundary trace $g$, define\n\n$$|g|_{1/2,\\partial\\Omega_i}^2:=\\int_{\\partial\\Omega_i}\\int_{\\partial\\Omega_i}\\frac{|g(s)-g(t)|^2}{|s-t|^2}\\,ds\\,dt.$$\n\nThis seminorm is taken modulo constants. The local Schur energy satisfies\n\n$$c\\rho_i|g|_{1/2,\\partial\\Omega_i}^2\\le g^TS_i g\\le C\\rho_i|g|_{1/2,\\partial\\Omega_i}^2,$$\n\nwhere $c,C>0$ depend only on the fixed polygon shape, mesh shape-regularity and quasiuniformity. The upper bound is realized by a boundary-preserving finite-element lifting; the minimum-energy lifting is the discrete harmonic extension.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; all estimates are explicit finite-element and integral inequalities.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $E$ has no interior boundary node, then $\\theta_E=0$. If $|E|/h\\le4$, scaling $E$ to unit length gives a uniform bound on both terms of $\\|\\theta_E\\|_{00,E}^2$. Otherwise the first and last mesh intervals have length comparable to $h$, $\\theta_E$ is linear from $0$ to $1$ and from $1$ to $0$ there, and it equals $1$ between them. The weighted integral on either endpoint interval is bounded by $\\int_0^h(s/h)^2\\,ds/s\\le C$; the plateau contributes at most $C+\\log(|E|/h)\\le C+\\log(H/h)$. In the double integral, pairs in the plateau contribute zero. Pairs within one endpoint interval have integrand at most $Ch^{-2}$ and hence contribute at most a constant. For one point $s$ in an endpoint interval and one outside it, integrating $(1-s/h)^2/(t-s)^2$ in the outside variable and then in $s$ gives a constant; the two endpoint intervals are treated in the same way. Therefore $\\|\\theta_E\\|_{00,E}^2\\le C(1+\\log(H/h))$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $v_h=u_h-\\overline u_{\\Omega_i}$ and $M=\\|v_h\\|_{L^\\infty(\\Omega_i)}$. Since $v_h$ is affine on each triangle, $M$ is attained at a mesh vertex $x_0$. The uniform interior-cone parameter in [F1] supplies constants $c_0,\\omega_0>0$, independent of $i$ and $h_i$, such that from every such vertex there is an inward cone of height at least $c_0H_i$ and opening at least $\\omega_0$ contained in $\\Omega_i$. Use the annulus in this cone with radii between $c_0H_i/2$ and $c_0H_i$. Shape regularity and quasiuniformity give a bounded vertex patch $\\omega_{x_0}$ and $$\\|\\nabla v_h\\|_{L^\\infty(\\omega_{x_0})}\\le Ch_i^{-1}\\|\\nabla v_h\\|_{L^2(\\omega_{x_0})}.$$ Thus the difference from $x_0$ to distance $ch_i$ on any cone ray is at most $C\\|\\nabla v_h\\|_{L^2(\\omega_{x_0})}$. For $r\\ge ch_i$, weighted Cauchy–Schwarz gives $$\\left|\\int_{ch_i}^r\\partial_s v_h(x_0+s e_\\theta)\\,ds\\right|^2\\le \\log\\!\\left(\\frac{r}{ch_i}\\right)\\int_{ch_i}^r|\\nabla v_h(x_0+s e_\\theta)|^2s\\,ds.$$ At each point in the annulus, express $v_h(x_0)$ as its value there plus these two path differences, square using $|a+b+c|^2\\le3(|a|^2+|b|^2+|c|^2)$, and integrate in polar coordinates over the annulus. Its area is comparable to $H_i^2$. After division by that area, the annular value term is bounded by $H_i^{-2}\\|v_h\\|_{L^2(\\Omega_i)}^2\\le C\\|\\nabla v_h\\|_{L^2(\\Omega_i)}^2$ by scaled Poincaré. In the radial term, each point on a ray is counted over annular radii with total polar weight at most $CH_i^2$; division by the annulus area leaves at most $C(1+\\log(H_i/h_i))\\|\\nabla v_h\\|_{L^2(\\Omega_i)}^2$. The vertex-patch term has the same bound. If $H_i/h_i$ is bounded, the ordinary finite-element inverse inequality and scaled Poincaré give the result directly. This proves $$\\|u_h-\\overline u_{\\Omega_i}\\|_{L^\\infty(\\Omega_i)}^2\\le C(1+\\log(H_i/h_i))\\|\\nabla u_h\\|_{L^2(\\Omega_i)}^2,$$ including the comparison of the maximizing vertex value to the domain mean.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $z=u_h-\\overline u_E$. In the first Gagliardo term use $$\\theta(s)z(s)-\\theta(t)z(t)=\\theta(s)(z(s)-z(t))+z(t)(\\theta(s)-\\theta(t)).$$ The weighted term is bounded by $\\|z\\|_\\infty^2\\int_E\\theta_E^2/\\operatorname{dist}(s,\\partial E)\\,ds$. Together these give $$\\|\\theta_Ez\\|_{00,E}^2\\le C\\left(|z|_{H^{1/2}(E)}^2+(1+\\log(H/h))\\|z\\|_\\infty^2\\right).$$ On the two endpoint mesh intervals, $I_h(\\theta_Ez)-\\theta_Ez$ is a quadratic interpolation error vanishing at both endpoints; scaling the interval to unit length bounds its $00,E$ norm by $C\\|z\\|_\\infty^2$. The same estimate therefore holds for $I_h(\\theta_Ez)$. The local Schur energy of the trace of $u_h$ is at most $\\rho_i\\|\\nabla u_h\\|_{L^2(\\Omega_i)}^2$ because it is the minimum over finite-element lifts; the lower trace-Schur bound in [F2] therefore gives $|z|_{H^{1/2}(E)}^2\\le C\\|\\nabla u_h\\|_{L^2(\\Omega_i)}^2$. Also $|\\overline u_E-\\overline u_{\\Omega_i}|\\le\\|u_h-\\overline u_{\\Omega_i}\\|_{L^\\infty(\\Omega_i)}$, so $\\|z\\|_\\infty\\le2\\|u_h-\\overline u_{\\Omega_i}\\|_{L^\\infty(\\Omega_i)}$. Combining this with steps 1.1 and 1.2 proves the claimed squared-logarithmic multiplier estimate.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The primal corner and/or edge endpoint values are handled explicitly in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "rem-pe26-conditioning-and-work-are-separate": {
+      "citations": [],
+      "axiom_use": "None.",
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/trace is covered by the quadratic definition and gives zero energy; see Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "remark"
+    },
+    "thm-pe26-nontrivial-spectrum-bddc-feti-dp": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use the spaces and partial Schur operator of [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-discrete-harmonic-extension-and-schur-complement]]. Let $E_0:\\widetilde W\\to\\widehat W$ average every remaining interface degree of freedom and preserve every already-shared primal value. It is a scaled average if the weights for all copies of each such degree of freedom sum to one. Put $\\bar E:=R E_0:\\widetilde W\\to\\widetilde W$. Then $E_0R=I_{\\widehat W}$ and $\\bar E$ is a projection onto $\\widehat W$.\n\nIn the PE26 two-dimensional corner-constraint branch, each non-primal node is interior to one interface edge shared by exactly two subdomains $i,j$. Set\n\n$$ (E_0w)(x)=\\frac{\\rho_i}{\\rho_i+\\rho_j}w_i(x)+\\frac{\\rho_j}{\\rho_i+\\rho_j}w_j(x). $$\n\nAt primal nodes the copies already agree, so the average is the common value. For any finite-dimensional positive definite partial Schur operator $\\widetilde S$, the **BDDC preconditioner** is\n\n$$M_{\\rm BDDC}^{-1}:=E_0\\widetilde S^{-1}E_0^T:\\widehat W'\\to\\widehat W,$$\n\nfor the assembled interface system with operator $\\widehat S=R^T\\widetilde S R$. Its constrained partial-energy interpretation is established in [[prop-pe26-bddc-constrained-local-minimization]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe26-feti-dp-dual-system-and-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use $\\widetilde W$, $\\widehat W$, $E_0$, $R$, $B$ and $\\Lambda=\\operatorname{range}B$ as defined in [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-scaled-averaging-and-bddc-preconditioner]]. Regard $\\bar E=R E_0$ as a projection on $\\widetilde W$. Since $\\ker B=\\operatorname{range}\\bar E=\\widehat W$, each class of traces with the same jump has a unique representative in $\\ker\\bar E$. Define $B_D^T:\\Lambda\\to\\widetilde W$ by assigning to $\\lambda\\in\\Lambda$ that unique representative $w$ with $Bw=\\lambda$ and $\\bar Ew=0$. This is the scaled right inverse; it obeys $BB_D^T=I_\\Lambda$ and $B_D^TB=I_{\\widetilde W}-\\bar E$. The latter identity makes the primal and dual projections complementary. In the two-subdomain edge case, its two entries are the coefficient-scaled jump weights complementary to those in $E_0$.\n\nThe **FETI-DP dual operator** and its preconditioner are\n\n$$F:=B\\widetilde S^{-1}B^T:\\Lambda\\to\\Lambda',\\qquad M_{\\rm FETI-DP}^{-1}:=B_D\\widetilde S B_D^T:\\Lambda'\\to\\Lambda.$$\n\nThe multiplier convention removes dependent row coordinates: $\\lambda$ is in $\\operatorname{range}B$, so no arbitrary multiplier component in $\\ker B^T$ is retained. Elimination of the partially assembled displacement and the resulting exact dual system are proved in [[prop-pe26-feti-dp-is-dual-schur-complement]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-pe26-complementary-primal-dual-spectrum",
+          "source_section": "Statement",
+          "quote": "Let $V,U_1,U_2$ be finite-dimensional real vector spaces, let $A:V\\to V'$ be symmetric positive definite, and let $L_i:V\\to U_i$, $T_i:U_i\\to V$ satisfy $L_iT_i=I_{U_i}$ for $i=1,2$ and $T_1L_1+T_2L_2=I_V$. Then the operators\n\n$$G_1=(L_1A^{-1}L_1^T)(T_1^TAT_1),\\qquad G_2=(T_2^TAT_2)(L_2A^{-1}L_2^T)$$\n\nhave the same eigenvalues, with the same multiplicities, except possibly at the eigenvalue $1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the comparison is finite-dimensional linear algebra.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take $V=\\widetilde W$, $U_1=\\widehat W$, $U_2=\\Lambda$, $A=\\widetilde S$, $L_1=E_0$, $T_1=R$, $L_2=B$, and $T_2=B_D^T$. By [F1] and [F2], $L_iT_i=I$ and $T_1L_1+T_2L_2=I$. The first abstract product in [F3] is $(E_0\\widetilde S^{-1}E_0^T)(R^T\\widetilde S R)$, exactly the BDDC preconditioned operator by [F1]; the second is $(B_D\\widetilde S B_D^T)(B\\widetilde S^{-1}B^T)$, exactly the FETI-DP product by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] to conclude equal eigenvalues and multiplicities for every eigenvalue other than $1$. The identities $E_0R=I$ and $BB_D^T=I$ make $R$ and $B_D^T$ injective and $E_0$ and $B$ surjective onto their ranges; since $\\widetilde S$ is positive definite, the four Gram operators in the two products are positive definite on their respective spaces. Thus both preconditioned products have positive eigenvalues. Taking $\\Lambda=\\operatorname{range}B$ removes redundant multiplier null modes. No step determines the multiplicity of eigenvalue $1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "lem-pe26-scaled-averaging-energy-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use the spaces and partial Schur operator of [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-discrete-harmonic-extension-and-schur-complement]]. Let $E_0:\\widetilde W\\to\\widehat W$ average every remaining interface degree of freedom and preserve every already-shared primal value. It is a scaled average if the weights for all copies of each such degree of freedom sum to one. Put $\\bar E:=R E_0:\\widetilde W\\to\\widetilde W$. Then $E_0R=I_{\\widehat W}$ and $\\bar E$ is a projection onto $\\widehat W$.\n\nIn the PE26 two-dimensional corner-constraint branch, each non-primal node is interior to one interface edge shared by exactly two subdomains $i,j$. Set\n\n$$ (E_0w)(x)=\\frac{\\rho_i}{\\rho_i+\\rho_j}w_i(x)+\\frac{\\rho_j}{\\rho_i+\\rho_j}w_j(x). $$\n\nAt primal nodes the copies already agree, so the average is the common value. For any finite-dimensional positive definite partial Schur operator $\\widetilde S$, the **BDDC preconditioner** is\n\n$$M_{\\rm BDDC}^{-1}:=E_0\\widetilde S^{-1}E_0^T:\\widehat W'\\to\\widehat W,$$\n\nfor the assembled interface system with operator $\\widehat S=R^T\\widetilde S R$. Its constrained partial-energy interpretation is established in [[prop-pe26-bddc-constrained-local-minimization]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe26-primal-interface-spaces-and-jumps",
+          "source_section": "Definition",
+          "quote": "For each $i$, let $W_i$ be the vector space of local boundary nodal traces compatible with the fixed outer Dirichlet values, and set $W=\\prod_i W_i$ (all interface copies independent). Let $\\widehat W\\subset W$ be the subspace whose nodal traces agree at every shared interface node; let $R:\\widehat W\\to W$ be the inclusion. Choose a set of **primal constraints**, meaning finitely many linear functionals on local traces whose values are required to agree across their incident subdomains. Vertex values and normalized edge averages are examples. The **partially assembled space** $\\widetilde W$ is the subspace of $W$ satisfying those primal equalities, so $\\widehat W\\subset\\widetilde W\\subset W$.\n\nThe remaining continuity equations are collected in a jump map $B:\\widetilde W\\to\\mathbb R^m$ with $\\ker B=\\widehat W$. It may contain redundant rows. Fix the **redundant-multiplier convention** $\\Lambda:=\\operatorname{range}B$ with its inherited Euclidean inner product: multiplier vectors are elements of this range, not arbitrary row-coordinate vectors modulo an unstated choice. Then $B^T$ is injective on $\\Lambda$. For the PE26 two-dimensional estimate, all subdomain vertices are primal and the only remaining jump rows are nodal differences on open interface edges, each shared by exactly two subdomains.\n\nAn interface corner is primal whenever its value is among the selected primal functionals. An **edge average** on a side $E$ is $|E|^{-1}\\int_E v_h\\,ds$, which is a finite sum of nodal values for a $P_1$ trace. The two-dimensional bound below uses corner constraints; no edge-average bound is claimed there.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-pe26-discrete-trace-schur-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega_i$ be one of the shape-regular polygonal subdomains in [[def-pe26-scalar-substructuring-model]], with a matching quasiuniform $P_1$ mesh. For a continuous piecewise-linear boundary trace $g$, define\n\n$$|g|_{1/2,\\partial\\Omega_i}^2:=\\int_{\\partial\\Omega_i}\\int_{\\partial\\Omega_i}\\frac{|g(s)-g(t)|^2}{|s-t|^2}\\,ds\\,dt.$$\n\nThis seminorm is taken modulo constants. The local Schur energy satisfies\n\n$$c\\rho_i|g|_{1/2,\\partial\\Omega_i}^2\\le g^TS_i g\\le C\\rho_i|g|_{1/2,\\partial\\Omega_i}^2,$$\n\nwhere $c,C>0$ depend only on the fixed polygon shape, mesh shape-regularity and quasiuniformity. The upper bound is realized by a boundary-preserving finite-element lifting; the minimum-energy lifting is the discrete harmonic extension.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pe26-log-edge-cutoff-and-discrete-sobolev",
+          "source_section": "Statement",
+          "quote": "Let $E$ be a side of a shape-regular polygon of diameter $H$ with a matching quasiuniform $P_1$ boundary mesh of size $h$. Let $\\theta_E$ be the piecewise-linear boundary function equal to $1$ at the interior nodes of $E$ and $0$ at the endpoints and all other boundary nodes. For\n\n$$\\|q\\|_{00,E}^2:=\\int_E\\int_E\\frac{|q(s)-q(t)|^2}{|s-t|^2}\\,ds\\,dt+\\int_E\\frac{|q(s)|^2}{\\operatorname{dist}(s,\\partial E)}\\,ds,$$\n\none has $\\|\\theta_E\\|_{00,E}^2\\le C(1+\\log(H/h))$. Also every continuous piecewise-affine $u_h$ on $\\Omega_i$ satisfies\n\n$$\\|u_h-\\overline u_{\\Omega_i}\\|_{L^\\infty(\\Omega_i)}^2\\le C(1+\\log(H_i/h_i))\\|\\nabla u_h\\|_{L^2(\\Omega_i)}^2.$$\n\nConsequently, for the edge mean $\\overline u_E$,\n\n$$\\|I_h(\\theta_E(u_h-\\overline u_E))\\|_{00,E}^2\\le C(1+\\log(H_i/h_i))^2\\|\\nabla u_h\\|_{L^2(\\Omega_i)}^2,$$\n\nwhere $I_h$ is nodal piecewise-linear interpolation on $E$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the estimate uses finite sums over polygon edges and explicit coefficient weights.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an open edge $E_{ij}$ and let $U_i=H_iw_i$, $U_j=H_jw_j$ be the local discrete harmonic extensions. Write $e_i=w_i^TS_iw_i=\\rho_i\\|\\nabla U_i\\|_{L^2(\\Omega_i)}^2$ and similarly for $e_j$, by harmonic minimality and the definition of $S_i$. The $i$-copy of $Pw$ has nodal values $\\alpha_j(w_i-w_j)$ at interior edge nodes and zero at its primal endpoints, so it is $I_h(\\theta_E\\alpha_j(w_i-w_j))$; the $j$-copy has the complementary coefficient $\\alpha_i$. The $00,E$ norm controls the full boundary seminorm of an edge trace extended by zero off $E$: the cross-edge integrals are bounded by the endpoint weight in that norm, with constants uniform for the polygon angles and side count. Thus the trace-Schur upper bound [F3] applies to these supported traces.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $m_i=\\overline w_{i,E}$, $m_j=\\overline w_{j,E}$, and $d_E=m_i-m_j$. At a primal endpoint $v$, $w_i(v)=w_j(v)$, so $|d_E|\\le|m_i-w_i(v)|+|w_j(v)-m_j|$. Applying the discrete Sobolev estimate [F4] to $U_i$ and $U_j$, and noting that a boundary mean differs from the domain mean by at most the same $L^\\infty$ deviation, gives $$|d_E|^2\\le C(1+\\log(H/h))\\left(\\frac{e_i}{\\rho_i}+\\frac{e_j}{\\rho_j}\\right).$$ The factors $1/\\rho_i$ and $1/\\rho_j$ appear because [F4] is unweighted while $S_i$ includes $\\rho_i$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $z_i=w_i-m_i$ and $z_j=w_j-m_j$ on $E$, and set $L=1+\\log(H/h)$. The multiplier estimate [F4] bounds the squared $00,E$ norm of each $I_h(\\theta_Ez_k)$ by $CL^2 e_k/\\rho_k$. Also [F1] bounds $\\|\\theta_E\\|_{00,E}^2$ by $CL$. For the $i$-copy use $w_i-w_j=z_i-z_j+d_E$ and the triangle inequality in the squared norm. After multiplication by its Schur coefficient $\\rho_i\\alpha_j^2$, the mean-zero terms are bounded by $$CL^2\\left(\\alpha_j^2e_i+\\frac{\\rho_i\\alpha_j^2}{\\rho_j}e_j\\right),$$ and the constant term has the same bound by step 1.2. Since $$\\frac{\\rho_i\\alpha_j^2}{\\rho_j}=\\frac{\\rho_i\\rho_j}{(\\rho_i+\\rho_j)^2}\\le\\frac14,\\qquad \\alpha_j^2\\le1,$$ the $i$-side contribution is at most $CL^2(e_i+e_j)$. Interchanging $i,j$ gives the same estimate for the $j$-side contribution, using $\\rho_j\\alpha_i^2/\\rho_i\\le1/4$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Sum over all interface sides. Each polygon has uniformly bounded side count, so each local energy occurs a bounded number of times. On each subdomain the complementary trace is the sum of these edge-supported traces; the squared norm of that sum is bounded by the side count times the sum of the squared norms. The resulting bound is $CL^2\\sum_i e_i=CL^2\\|w\\|_{\\widetilde S}^2$, with no coefficient-contrast or subdomain-count factor.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The primal corner and/or edge endpoint values are handled explicitly in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "thm-pe26-condition-number-2d-polylogarithmic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-pe26-scaled-averaging-energy-bound",
+          "source_section": "Statement",
+          "quote": "Assume the model of [[def-pe26-scalar-substructuring-model]], all subdomain vertices primal, and the coefficient-scaled average of [[def-pe26-scaled-averaging-and-bddc-preconditioner]]. Let $P:=I-R E_0$ be the complementary jump projection on $\\widetilde W$, and let $\\|\\cdot\\|_{\\widetilde S}$ be the energy norm induced by the partially assembled Schur operator. Then\n\n$$\\|Pw\\|_{\\widetilde S}^2\\le C(1+\\log(H/h))^2\\|w\\|_{\\widetilde S}^2\\qquad(w\\in\\widetilde W),$$\n\nwhere $C$ depends only on the polygon/mesh shape bounds and bounded side count. It is independent of coefficient jumps, mesh size, subdomain diameter, and subdomain count.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pe26-preconditioned-operator-norm-bound",
+          "source_section": "Statement",
+          "quote": "Let $A:V\\to V'$ be symmetric positive definite on a finite-dimensional real vector space, and let $L:V\\to U$, $T:U\\to V$ satisfy $LT=I_U$. Every eigenvalue of\n\n$$G=(LA^{-1}L^T)(T^TAT)$$\n\nlies in $[1,\\|TL\\|_A^2]$, where $\\|Q\\|_A:=\\sup_{v\\ne0}\\sqrt{\\langle A Qv,Qv\\rangle/\\langle Av,v\\rangle}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use the spaces and partial Schur operator of [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-discrete-harmonic-extension-and-schur-complement]]. Let $E_0:\\widetilde W\\to\\widehat W$ average every remaining interface degree of freedom and preserve every already-shared primal value. It is a scaled average if the weights for all copies of each such degree of freedom sum to one. Put $\\bar E:=R E_0:\\widetilde W\\to\\widetilde W$. Then $E_0R=I_{\\widehat W}$ and $\\bar E$ is a projection onto $\\widehat W$.\n\nIn the PE26 two-dimensional corner-constraint branch, each non-primal node is interior to one interface edge shared by exactly two subdomains $i,j$. Set\n\n$$ (E_0w)(x)=\\frac{\\rho_i}{\\rho_i+\\rho_j}w_i(x)+\\frac{\\rho_j}{\\rho_i+\\rho_j}w_j(x). $$\n\nAt primal nodes the copies already agree, so the average is the common value. For any finite-dimensional positive definite partial Schur operator $\\widetilde S$, the **BDDC preconditioner** is\n\n$$M_{\\rm BDDC}^{-1}:=E_0\\widetilde S^{-1}E_0^T:\\widehat W'\\to\\widehat W,$$\n\nfor the assembled interface system with operator $\\widehat S=R^T\\widetilde S R$. Its constrained partial-energy interpretation is established in [[prop-pe26-bddc-constrained-local-minimization]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-pe26-feti-dp-dual-system-and-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use $\\widetilde W$, $\\widehat W$, $E_0$, $R$, $B$ and $\\Lambda=\\operatorname{range}B$ as defined in [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-scaled-averaging-and-bddc-preconditioner]]. Regard $\\bar E=R E_0$ as a projection on $\\widetilde W$. Since $\\ker B=\\operatorname{range}\\bar E=\\widehat W$, each class of traces with the same jump has a unique representative in $\\ker\\bar E$. Define $B_D^T:\\Lambda\\to\\widetilde W$ by assigning to $\\lambda\\in\\Lambda$ that unique representative $w$ with $Bw=\\lambda$ and $\\bar Ew=0$. This is the scaled right inverse; it obeys $BB_D^T=I_\\Lambda$ and $B_D^TB=I_{\\widetilde W}-\\bar E$. The latter identity makes the primal and dual projections complementary. In the two-subdomain edge case, its two entries are the coefficient-scaled jump weights complementary to those in $E_0$.\n\nThe **FETI-DP dual operator** and its preconditioner are\n\n$$F:=B\\widetilde S^{-1}B^T:\\Lambda\\to\\Lambda',\\qquad M_{\\rm FETI-DP}^{-1}:=B_D\\widetilde S B_D^T:\\Lambda'\\to\\Lambda.$$\n\nThe multiplier convention removes dependent row coordinates: $\\lambda$ is in $\\operatorname{range}B$, so no arbitrary multiplier component in $\\ker B^T$ is retained. Elimination of the partially assembled displacement and the resulting exact dual system are proved in [[prop-pe26-feti-dp-is-dual-schur-complement]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pe26-nontrivial-spectrum-bddc-feti-dp",
+          "source_section": "Statement",
+          "quote": "For BDDC and FETI-DP built from the same positive definite partially assembled Schur operator, primal constraints, and scaled averaging, all eigenvalues of the two preconditioned operators other than $1$ agree with multiplicity. With the multiplier space fixed as $\\Lambda=\\operatorname{range}B$, neither operator has a zero eigenvalue; retaining all redundant row coordinates instead would add only multiplier null modes that are removed by this convention. The multiplicity of $1$ is not asserted to agree.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the proof uses the two preceding finite-dimensional spectral estimates.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F2] with $L=E_0$ and $T=R$. The BDDC eigenvalues are at least one and at most $\\|RE_0\\|_{\\widetilde S}^2=\\|I-P\\|_{\\widetilde S}^2$. By the triangle inequality for the induced operator norm, $\\|I-P\\|_{\\widetilde S}\\le1+\\|P\\|_{\\widetilde S}\\le1+C_0(1+\\log(H/h))$. Since $1+\\log(H/h)\\ge1$, squaring yields the BDDC bound with a geometry-only constant.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F2] with $L=B$ and $T=B_D^T$. This bounds the eigenvalues of $F M_{\\rm FETI-DP}^{-1}$ below by one and above by $\\|B_D^TB\\|_{\\widetilde S}^2=\\|P\\|_{\\widetilde S}^2\\le C_0^2(1+\\log(H/h))^2$ by [F1] and [F4]. The Gram factors $F=B\\widetilde S^{-1}B^T$ and $M_{\\rm FETI-DP}^{-1}=B_D\\widetilde S B_D^T$ are positive definite: $B^T$ is injective on $\\Lambda$ by [F4], $B_D^T$ is injective by $BB_D^T=I_\\Lambda$, and $\\widetilde S$ is positive definite. Thus both maps are isomorphisms, and conjugation by $F$ sends $M_{\\rm FETI-DP}^{-1}F$ to $F M_{\\rm FETI-DP}^{-1}$, since $$F(M_{\\rm FETI-DP}^{-1}F)F^{-1}=F M_{\\rm FETI-DP}^{-1}.$$ They therefore have identical eigenvalues, so the stated FETI-DP product has the same lower and upper bounds.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The lower eigenvalue bounds make both condition numbers their respective largest eigenvalues. The common nonunit spectrum in [F5] confirms that the paired methods have the same nontrivial convergence spectrum; neither assertion introduces a 3D, arbitrary-graph or unaligned-coefficient claim excluded in the Statement.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated spectral comparison requires nonzero interface and multiplier spaces; a one-subdomain empty interface has no eigenvalue or condition number."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "ex-pe26-missing-primal-corner": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scalar-substructuring-model",
+          "source_section": "Definition",
+          "quote": "Fix a bounded, connected polygonal open set $Ω\\subset\\mathbb R^2$ with a nonempty Dirichlet boundary segment. A finite **subdomain partition** is a family of connected polygonal open sets $Ω_i$, $1\\le i\\le N$, whose closures cover $\\overline\\Omega$, whose interiors are disjoint, and whose intersections are whole common sides, common vertices, or empty. The outer Dirichlet segment is a union of mesh boundary sides. The edge-adjacency graph of each triangulated subdomain is connected, and the subdomain adjacency graph is connected to the Dirichlet boundary. Each subdomain has a matching affine simplicial triangulation; the triangulations match on every shared side. The family has a fixed shape-regularity bound, quasiuniform mesh size $h_i$, uniformly bounded polygon side count, corner angles bounded below, inradius comparable to $H_i$, and a uniform interior-cone parameter. Write $H_i=\\operatorname{diam}(\\Omega_i)$ and $H/h=\\max_i H_i/h_i$.\n\nUse continuous piecewise-affine ($P_1$) scalar functions on each triangulation. The reference-element and face-matching conventions are those of [[def-reference-finite-element-and-unisolvent-dofs]], [[def-matching-affine-simplicial-meshes]], and [[def-broken-and-conforming-polynomial-spaces]]: local polynomials are affine, their nodal values determine them, and conforming functions have equal traces across a shared side. For each subdomain choose a coefficient $\\rho_i>0$, constant on $\\Omega_i$ but allowed to jump across interfaces. Its local energy is\n\n$$a_i(v,w)=\\rho_i\\sum_{K\\subset\\Omega_i}\\int_K\\nabla v\\cdot\\nabla w\\,dx.$$\n\nThe global finite-element space consists of the continuous piecewise-affine functions on the subdomain meshes that vanish on the outer Dirichlet boundary, with energy $a(v,w)=\\sum_i a_i(v|_{\\Omega_i},w|_{\\Omega_i})$. Local interior degrees of freedom are the mesh vertices strictly inside $\\Omega_i$; local boundary degrees of freedom are its remaining vertices, with outer Dirichlet values fixed to zero. A **floating local block** means the same local energy before any outer-boundary values are fixed. A **subdomain corner** is a vertex of its polygonal boundary.\n\nAll constants in later two-dimensional estimates may depend on the fixed polygon-shape, side-count, and shape-regularity bounds, but not on $h$, $H$, the number of subdomains, or the positive numbers $\\rho_i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pe26-local-energy-kernel-and-interior-spd",
+          "source_section": "Statement",
+          "quote": "In the setting of [[def-pe26-scalar-substructuring-model]], the nullspace of the floating local energy matrix on a connected $\\Omega_i$ is exactly the one-dimensional space of constants. The principal stiffness block $K_{II}^{(i)}$ on interior nodal values with zero boundary trace is positive definite (including the empty $0$-dimensional block convention). The assembled global Dirichlet stiffness matrix is positive definite.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pe26-primal-constraints-remove-floating-kernels",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of [[def-pe26-primal-interface-spaces-and-jumps]] and the energy setting of [[thm-pe26-local-energy-kernel-and-interior-spd]]. If each floating local component has at least one primal vertex value fixed in its dual subproblem, its local dual stiffness is positive definite. If all subdomain vertices are primal and the global Dirichlet boundary is nonempty, the partially assembled interface energy is positive definite; hence the BDDC and FETI-DP exact local and coarse solves are well-defined.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; this is a finite matrix counterexample.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiplying the displayed matrix from [F1] by $\\mathbf1$ gives zero, so the nonzero vector $\\mathbf1$ is in the local nullspace.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the dual subproblem imposes no primal value or functional that changes on constants, $\\mathbf1$ also satisfies every homogeneous local dual constraint. Thus its restricted quadratic form is singular, contradicting unique solvability if one attempted the local solve.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If one corner value were retained as primal, a dual correction would have to vanish there; a constant vector with that value zero is the zero vector, so this particular null mode would be removed as in [F3]. The counterexample therefore concerns a whole floating component with no anchor, not omission of one among several anchors.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The primal corner and/or edge endpoint values are handled explicitly in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-pe26-two-floating-poisson-subdomains": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scalar-substructuring-model",
+          "source_section": "Definition",
+          "quote": "Fix a bounded, connected polygonal open set $Ω\\subset\\mathbb R^2$ with a nonempty Dirichlet boundary segment. A finite **subdomain partition** is a family of connected polygonal open sets $Ω_i$, $1\\le i\\le N$, whose closures cover $\\overline\\Omega$, whose interiors are disjoint, and whose intersections are whole common sides, common vertices, or empty. The outer Dirichlet segment is a union of mesh boundary sides. The edge-adjacency graph of each triangulated subdomain is connected, and the subdomain adjacency graph is connected to the Dirichlet boundary. Each subdomain has a matching affine simplicial triangulation; the triangulations match on every shared side. The family has a fixed shape-regularity bound, quasiuniform mesh size $h_i$, uniformly bounded polygon side count, corner angles bounded below, inradius comparable to $H_i$, and a uniform interior-cone parameter. Write $H_i=\\operatorname{diam}(\\Omega_i)$ and $H/h=\\max_i H_i/h_i$.\n\nUse continuous piecewise-affine ($P_1$) scalar functions on each triangulation. The reference-element and face-matching conventions are those of [[def-reference-finite-element-and-unisolvent-dofs]], [[def-matching-affine-simplicial-meshes]], and [[def-broken-and-conforming-polynomial-spaces]]: local polynomials are affine, their nodal values determine them, and conforming functions have equal traces across a shared side. For each subdomain choose a coefficient $\\rho_i>0$, constant on $\\Omega_i$ but allowed to jump across interfaces. Its local energy is\n\n$$a_i(v,w)=\\rho_i\\sum_{K\\subset\\Omega_i}\\int_K\\nabla v\\cdot\\nabla w\\,dx.$$\n\nThe global finite-element space consists of the continuous piecewise-affine functions on the subdomain meshes that vanish on the outer Dirichlet boundary, with energy $a(v,w)=\\sum_i a_i(v|_{\\Omega_i},w|_{\\Omega_i})$. Local interior degrees of freedom are the mesh vertices strictly inside $\\Omega_i$; local boundary degrees of freedom are its remaining vertices, with outer Dirichlet values fixed to zero. A **floating local block** means the same local energy before any outer-boundary values are fixed. A **subdomain corner** is a vertex of its polygonal boundary.\n\nAll constants in later two-dimensional estimates may depend on the fixed polygon-shape, side-count, and shape-regularity bounds, but not on $h$, $H$, the number of subdomains, or the positive numbers $\\rho_i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pe26-local-energy-kernel-and-interior-spd",
+          "source_section": "Statement",
+          "quote": "In the setting of [[def-pe26-scalar-substructuring-model]], the nullspace of the floating local energy matrix on a connected $\\Omega_i$ is exactly the one-dimensional space of constants. The principal stiffness block $K_{II}^{(i)}$ on interior nodal values with zero boundary trace is positive definite (including the empty $0$-dimensional block convention). The assembled global Dirichlet stiffness matrix is positive definite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pe26-primal-constraints-remove-floating-kernels",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of [[def-pe26-primal-interface-spaces-and-jumps]] and the energy setting of [[thm-pe26-local-energy-kernel-and-interior-spd]]. If each floating local component has at least one primal vertex value fixed in its dual subproblem, its local dual stiffness is positive definite. If all subdomain vertices are primal and the global Dirichlet boundary is nonempty, the partially assembled interface energy is positive definite; hence the BDDC and FETI-DP exact local and coarse solves are well-defined.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pe26-static-condensation-is-exact-interface-solve",
+          "source_section": "Statement",
+          "quote": "For the global conforming Dirichlet finite-element system from [[def-pe26-scalar-substructuring-model]], eliminating all subdomain interior variables gives the assembled interface Schur system. Its solution trace is exactly the trace of the unique global Galerkin solution, and the local discrete harmonic extensions reconstruct that solution uniquely.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the example is an exact four-degree-of-freedom calculation.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On triangle $(a,b,c)$ the affine basis gradients are $(-1,0),(1,-1),(0,1)$ and its area is $1/2$; on triangle $(a,c,d)$ they are $(0,-1),(1,0),(-1,1)$ and its area is $1/2$. Adding the two local Gram matrices of these gradients gives the displayed $K_i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The displayed matrix has zero row sums, and its quadratic form is $\\tfrac12[(u_a-u_b)^2+(u_b-u_c)^2+(u_c-u_d)^2+(u_d-u_a)^2]$. It is therefore nonnegative with kernel exactly the constant vector, agreeing with [F2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The imposed zero values on each subdomain's top exterior side fix its local constant mode; equality at the shared primal endpoints also enforces interface continuity. Thus [F3] gives an invertible partially assembled solve. Theorem [F4] then identifies the condensed interface solution and harmonic reconstruction with the original global finite-element solution.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The primal corner and/or edge endpoint values are handled explicitly in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-pe26-matching-primal-dual-spectrum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use the spaces and partial Schur operator of [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-discrete-harmonic-extension-and-schur-complement]]. Let $E_0:\\widetilde W\\to\\widehat W$ average every remaining interface degree of freedom and preserve every already-shared primal value. It is a scaled average if the weights for all copies of each such degree of freedom sum to one. Put $\\bar E:=R E_0:\\widetilde W\\to\\widetilde W$. Then $E_0R=I_{\\widehat W}$ and $\\bar E$ is a projection onto $\\widehat W$.\n\nIn the PE26 two-dimensional corner-constraint branch, each non-primal node is interior to one interface edge shared by exactly two subdomains $i,j$. Set\n\n$$ (E_0w)(x)=\\frac{\\rho_i}{\\rho_i+\\rho_j}w_i(x)+\\frac{\\rho_j}{\\rho_i+\\rho_j}w_j(x). $$\n\nAt primal nodes the copies already agree, so the average is the common value. For any finite-dimensional positive definite partial Schur operator $\\widetilde S$, the **BDDC preconditioner** is\n\n$$M_{\\rm BDDC}^{-1}:=E_0\\widetilde S^{-1}E_0^T:\\widehat W'\\to\\widehat W,$$\n\nfor the assembled interface system with operator $\\widehat S=R^T\\widetilde S R$. Its constrained partial-energy interpretation is established in [[prop-pe26-bddc-constrained-local-minimization]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe26-feti-dp-dual-system-and-preconditioner",
+          "source_section": "Definition",
+          "quote": "Use $\\widetilde W$, $\\widehat W$, $E_0$, $R$, $B$ and $\\Lambda=\\operatorname{range}B$ as defined in [[def-pe26-primal-interface-spaces-and-jumps]] and [[def-pe26-scaled-averaging-and-bddc-preconditioner]]. Regard $\\bar E=R E_0$ as a projection on $\\widetilde W$. Since $\\ker B=\\operatorname{range}\\bar E=\\widehat W$, each class of traces with the same jump has a unique representative in $\\ker\\bar E$. Define $B_D^T:\\Lambda\\to\\widetilde W$ by assigning to $\\lambda\\in\\Lambda$ that unique representative $w$ with $Bw=\\lambda$ and $\\bar Ew=0$. This is the scaled right inverse; it obeys $BB_D^T=I_\\Lambda$ and $B_D^TB=I_{\\widetilde W}-\\bar E$. The latter identity makes the primal and dual projections complementary. In the two-subdomain edge case, its two entries are the coefficient-scaled jump weights complementary to those in $E_0$.\n\nThe **FETI-DP dual operator** and its preconditioner are\n\n$$F:=B\\widetilde S^{-1}B^T:\\Lambda\\to\\Lambda',\\qquad M_{\\rm FETI-DP}^{-1}:=B_D\\widetilde S B_D^T:\\Lambda'\\to\\Lambda.$$\n\nThe multiplier convention removes dependent row coordinates: $\\lambda$ is in $\\operatorname{range}B$, so no arbitrary multiplier component in $\\ker B^T$ is retained. Elimination of the partially assembled displacement and the resulting exact dual system are proved in [[prop-pe26-feti-dp-is-dual-schur-complement]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pe26-nontrivial-spectrum-bddc-feti-dp",
+          "source_section": "Statement",
+          "quote": "For BDDC and FETI-DP built from the same positive definite partially assembled Schur operator, primal constraints, and scaled averaging, all eigenvalues of the two preconditioned operators other than $1$ agree with multiplicity. With the multiplier space fixed as $\\Lambda=\\operatorname{range}B$, neither operator has a zero eigenvalue; retaining all redundant row coordinates instead would add only multiplier null modes that are removed by this convention. The multiplicity of $1$ is not asserted to agree.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; all matrices are explicit real 2 by 2 matrices.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The determinant of $A$ is $3$, so $A^{-1}=\\tfrac13\\begin{pmatrix}2&-1\\\\-1&2\\end{pmatrix}$. The BDDC coarse operator is $R^TAR=2$, while $E_0A^{-1}E_0^T=2/3$; their product is $4/3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The dual operator is $BA^{-1}B^T=2/3$, and its preconditioner is $B_DAB_D^T=2$; their product is also $4/3$. Direct multiplication gives the three identities in the Example, so the abstract assumptions hold.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both operators are one-dimensional, hence each has the single eigenvalue computed in steps 1.1 and 1.2. The common value is positive and different from $1$, consistent with [F3].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-pe26-coarse-solve-work-bottleneck": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-pe26-condition-number-2d-polylogarithmic",
+          "source_section": "Statement",
+          "quote": "Assume the scalar model of [[def-pe26-scalar-substructuring-model]], matching shape-regular quasiuniform $P_1$ meshes on bounded-shape polygonal subdomains in two dimensions, all subdomain vertices primal, coefficient scaling $\\rho_i/(\\rho_i+\\rho_j)$ on each open interface edge, and nonzero assembled and multiplier spaces. Then both preconditioned interface operators satisfy\n\n$$\\kappa(M_{\\rm BDDC}^{-1}\\widehat S)\\le C(1+\\log(H/h))^2,\\qquad \\kappa(M_{\\rm FETI-DP}^{-1}F)\\le C(1+\\log(H/h))^2.$$\n\nThe constant is independent of $h$, $H$, the number of subdomains, and arbitrary positive jumps in the coefficient values $\\rho_i$. If either preconditioned space is zero-dimensional, that interface solve is trivial and its condition number is not asserted. This statement does not cover three-dimensional vertex-only constraints, arbitrary graph or mesh geometries, or unaligned/intra-subdomain high-contrast coefficients.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "proof_strategy": "direct",
+      "axiom_use": "None; the operation counts follow the stated dense direct-solver model.",
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A dense Cholesky factorization of an $m\\times m$ SPD matrix uses a constant multiple of $m^3$ arithmetic operations and stores $O(m^2)$ entries. Repeating on $N$ local matrices gives total $O(Nm^3)$ work, and perfect concurrency reduces the local phase to $O(m^3)$ time.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $n_c$ is proportional to $N$, dense coarse Cholesky uses $O(N^3)$ arithmetic and $O(N^2)$ storage. If $H/h$ stays fixed while the number of subdomains grows, [F1] leaves the iteration condition bound unchanged, but the coarse direct-solve work grows cubically.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty connected polygonal domain/subdomain; an empty domain is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is included in the displayed linear energy equations of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-subdomain/local case is included by the connectedness and finite-dimensional definitions in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate triangles, zero-length edges and zero diffusion coefficients are excluded by the model hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item asserts no separate endpoint branch; it concerns interior interface maps or an abstract cost model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition/Statement fixes finite meshes and explicit matrices; no arbitrary family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way construction, estimate or example, not a biconditional."
+        }
+      ],
+      "kind": "example"
+    }
+  }
+}

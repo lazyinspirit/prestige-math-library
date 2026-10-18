@@ -1,0 +1,1723 @@
+{
+  "version": 1,
+  "scope": [
+    "def-pe05-shallow-water-balance-law",
+    "def-pe05-hydrostatic-hll-scheme",
+    "lem-pe05-strong-l1-limit-preserves-dry-admissibility",
+    "prop-pe05-shallow-water-admissible-state-set-is-convex",
+    "lem-pe05-hll-depth-flux-decomposition",
+    "thm-pe05-hydrostatic-reconstruction-is-well-balanced",
+    "lem-pe05-source-quadrature-consistency",
+    "lem-pe05-discrete-weak-identity-with-source",
+    "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1",
+    "lem-pe05-hll-dry-face-direction-and-zero-flux",
+    "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law",
+    "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+    "cex-pe05-centered-source-produces-spurious-current",
+    "ex-pe05-lake-at-rest-over-a-dry-crest",
+    "ex-pe05-hll-dam-break-wets-dry-cell"
+  ],
+  "contracts": {
+    "def-pe05-shallow-water-balance-law": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No additional zero-valued branch is asserted in this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element or unit-parameter boundary is part of this statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch is asserted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter endpoint or branch equality is asserted in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "definition"
+    },
+    "def-pe05-hydrostatic-hll-scheme": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No additional zero-valued branch is asserted in this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element or unit-parameter boundary is part of this statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch is asserted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter endpoint or branch equality is asserted in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "definition"
+    },
+    "lem-pe05-strong-l1-limit-preserves-dry-admissibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-shallow-water-balance-law",
+          "source_section": "Definition",
+          "quote": "Fix gravity $g>0$ and a stationary bed $b:\\mathbb R\\to\\mathbb R$. A shallow-water state is a pair $U=(h,m)$ with depth $h\\ge0$ and momentum $m\\in\\mathbb R$. Its admissible wet/dry state set is\n$$K=\\{(h,m):h>0,\\ m\\in\\mathbb R\\}\\cup\\{(0,0)\\}.$$\nFor $U\\in K$, define velocity by $u=m/h$ when $h>0$ and $u=0$ when $h=0$. Thus a dry state has both $h=0$ and $m=0$. Define the free surface by $\\eta=h+b$ and the physical flux by\n$$F(U)=\\begin{cases}(m,\\ m^2/h+gh^2/2),&h>0,\\\\(0,0),&U=(0,0).\\end{cases}$$\nFor a continuously differentiable bed, the one-dimensional shallow-water balance law is\n$$U_t+\\partial_xF(U)=(0,-gh\\,b_x).$$\nThe source is evaluated as zero at a dry state.\n\nA discrete lake-at-rest profile with level $\\eta_0$ has $m_i=0$ and $h_i+b_i=\\eta_0$ in every wet cell; cells with $h_i=0$ are dry and satisfy $b_i\\ge\\eta_0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $r_-:=\\max(-r,0)$. On each compact rectangle $Q\\subset\\mathbb R\\times(0,T)$, $h_k\\ge0$ implies $h_-\\le|h-h_k|$, so $\\int_Qh_-\\le\\|h-h_k\\|_{L^1(Q)}\\to0$. On each compact interval $I\\subset\\mathbb R$, $h_k^0\\ge0$ gives $(h_0)_-\\le|h_0-h_k^0|$, so $\\int_I(h_0)_-\\le\\|h_0-h_k^0\\|_{L^1(I)}\\to0$. Countable compact exhaustions of $\\mathbb R\\times(0,T)$ and $\\mathbb R$ now give $h\\ge0$ and $h_0\\ge0$ almost everywhere on their domains.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Where $h>0$, [F1] allows arbitrary momentum $m$; where $h=0$, $m=hu=0$, so $U\\in K$. For the initial data, on each compact interval $I$ the bound on $u_k^0$ and $U_k^0\\in K$ imply $|m_k^0|\\le M_Ih_k^0$. Hence $(|m_0|-M_Ih_0)_+\\le |m_0-m_k^0|+M_I|h_k^0-h_0|$ pointwise, and integration followed by strong $L^1(I)$ convergence gives $|m_0|\\le M_Ih_0$ almost everywhere. Thus $m_0=0$ wherever $h_0=0$; step 1.1 gives $h_0\\ge0$, and [F1] yields $U_0\\in K$. A countable compact exhaustion proves the bulk and initial claims almost everywhere on their domains.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a specified state or sequence and makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The h=0 bulk and initial cases force zero momentum. Step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element or unit-parameter boundary is part of this statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exactly dry branch is treated for both the bulk and initial limits. Step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter endpoint or branch equality is asserted in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra is used; no choice-dependent existence claim occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "prop-pe05-shallow-water-admissible-state-set-is-convex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-shallow-water-balance-law",
+          "source_section": "Definition",
+          "quote": "Fix gravity $g>0$ and a stationary bed $b:\\mathbb R\\to\\mathbb R$. A shallow-water state is a pair $U=(h,m)$ with depth $h\\ge0$ and momentum $m\\in\\mathbb R$. Its admissible wet/dry state set is\n$$K=\\{(h,m):h>0,\\ m\\in\\mathbb R\\}\\cup\\{(0,0)\\}.$$\nFor $U\\in K$, define velocity by $u=m/h$ when $h>0$ and $u=0$ when $h=0$. Thus a dry state has both $h=0$ and $m=0$. Define the free surface by $\\eta=h+b$ and the physical flux by\n$$F(U)=\\begin{cases}(m,\\ m^2/h+gh^2/2),&h>0,\\\\(0,0),&U=(0,0).\\end{cases}$$\nFor a continuously differentiable bed, the one-dimensional shallow-water balance law is\n$$U_t+\\partial_xF(U)=(0,-gh\\,b_x).$$\nThe source is evaluated as zero at a dry state.\n\nA discrete lake-at-rest profile with level $\\eta_0$ has $m_i=0$ and $h_i+b_i=\\eta_0$ in every wet cell; cells with $h_i=0$ are dry and satisfy $b_i\\ge\\eta_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-convex-invariant-domain",
+          "source_section": "Definition",
+          "quote": "Let $m,N\\ge1$, let $\\mathcal A\\subseteq\\mathbb R^m$ be a state domain, and let\n$\\Phi:\\mathcal A^N\\to\\mathcal A^N$ be a one-step update on $N$ cell states.\nA set $K\\subseteq\\mathcal A$ is **convex** if\n$\\theta U+(1-\\theta)V\\in K$ for every $U,V\\in K$ and $\\theta\\in[0,1]$.\nIt is a **convex invariant domain for $\\Phi$** if it is convex and\n$\\Phi(K^N)\\subseteq K^N$. The word invariant refers only to this stated\none-step map and its stated admissible inputs; it asserts no invariance for a\ndifferent flux, time integrator, or exact Riemann evolution.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $(h_1,m_1),(h_2,m_2)\\in K$ and $\\theta\\in[0,1]$. The convex combination has depth $h_\\theta=\\theta h_1+(1-\\theta)h_2\\ge0$. If $\\theta=0$ or $\\theta=1$, it is an endpoint in $K$ by [F1]. If $0<\\theta<1$ and $h_\\theta=0$, nonnegativity forces $h_1=h_2=0$; [F1] then gives $m_1=m_2=0$, so the combination is $(0,0)\\in K$. If $h_\\theta>0$, [F1] places the combination in $K$ for any momentum.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus every segment between two states in $K$ lies in $K$, which is exactly the convexity condition in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The case h_theta=0 forces both endpoint depths and momenta to vanish. Step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint theta=1 is included in the convex-combination case split. Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch is asserted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both theta endpoints are included and remain in K. Step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "proposition"
+    },
+    "lem-pe05-hll-depth-flux-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the middle branch $\\alpha,\\beta>0$. Define $p=\\alpha(u_L^*+\\beta)/(\\alpha+\\beta)$ and $q=\\beta(\\alpha-u_R^*)/(\\alpha+\\beta)$. Substituting $a_L=-\\beta$ and $a_R=\\alpha$ into [F1], then using [F2], gives $\\widehat F^h=(\\alpha h_L^*u_L^*+\\beta h_R^*u_R^*-\\alpha\\beta(h_R^*-h_L^*))/(\\alpha+\\beta)=p h_L^*-q h_R^*$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The speed definitions give $u_L^*+\\beta\\ge c_L^*\\ge0$, $\\alpha-u_L^*\\ge c_L^*\\ge0$, $\\alpha-u_R^*\\ge c_R^*\\ge0$, and $\\beta+u_R^*\\ge c_R^*\\ge0$. Hence the coefficients in step 1.1 satisfy $p,q\\ge0$, $p\\le\\alpha$, and $q\\le\\beta$. When $h_L^*>0$, $c_L^*>0$ and $\\alpha-u_L^*>0$, so $p<\\alpha$; when $h_R^*>0$, $c_R^*>0$ and $\\beta+u_R^*>0$, so $q<\\beta$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $a_L=0<a_R$, the first HLL branch gives $\\widehat F^h=h_L^*u_L^*$; the speed definitions imply $u_L^*\\ge c_L^*\\ge0$ and $\\alpha\\ge u_L^*+c_L^*$, so take $p=u_L^*$ and $q=0$. If $a_L<0=a_R$, the second branch gives $\\widehat F^h=h_R^*u_R^*$, with $u_R^*\\le-c_R^*\\le0$ and $\\beta\\ge c_R^*-u_R^*$, so take $p=0$ and $q=-u_R^*$. If both speeds vanish, their definitions force $u_s^*-c_s^*\\ge0$ and $u_s^*+c_s^*\\le0$ on each side, hence $c_s^*=u_s^*=h_s^*=0$ and the first branch returns zero. These choices satisfy the bounds in step 2.1 and cover every equality-speed branch.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The both-speeds-zero branch is evaluated and returns zero mass flux. Step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element or unit-parameter boundary is part of this statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both-zero and one-zero wave-speed branches are handled separately. Step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The equality-speed branches a_L=0<a_R and a_L<0=a_R are computed explicitly. Step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "lem-pe05-hll-dry-face-direction-and-zero-flux": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pe05-hll-depth-flux-decomposition",
+          "source_section": "Statement",
+          "quote": "At a face of the scheme in [[def-pe05-hydrostatic-hll-scheme]], write $\\alpha=a_R$ and $\\beta=-a_L$. There are coefficients $p,q\\ge0$ such that\n$$\\widehat F^h=p h_L^*-q h_R^*,\\qquad p\\le\\alpha,\\qquad q\\le\\beta.$$\nIf $\\alpha>0$ and $h_L^*>0$, then $p<\\alpha$; if $\\beta>0$ and $h_R^*>0$, then $q<\\beta$. These statements include the branches where one speed is zero and the all-dry branch.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $h_R^*=0$. Then $u_R^*=c_R^*=0$. If both speeds are zero, [F1] makes the full flux zero. If $a_L<0=a_R$, the second branch is $F_R^*=(0,0)$. If $a_L=0<a_R$, the speed definition forces $u_L^*\\ge c_L^*$. When $h_L^*>0$, this gives $\\widehat F^h=h_L^*u_L^*>0$; when $h_L^*=0$, both states and the flux are dry and zero. In the middle branch, [F2] gives $\\widehat F^h=p h_L^*\\ge0$; it is strictly positive for a wet left state and otherwise both states are dry and the full flux is zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose instead $h_L^*=0$. Then $u_L^*=c_L^*=0$. If both speeds vanish, the full flux is zero. If $a_L=0<a_R$, the first branch is $F_L^*=(0,0)$. If $a_L<0=a_R$, the speed definition forces $u_R^*\\le-c_R^*$. For $h_R^*>0$ this makes $\\widehat F^h=h_R^*u_R^*<0$; if $h_R^*=0$, the full flux is zero. In the middle branch, [F2] gives $\\widehat F^h=-q h_R^*\\le0$, strictly negative for a wet right state and otherwise zero with both states dry.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two orientations show that zero mass flux at a dry face occurs only when the selected outer state is dry or both reconstructed states are dry; in each case [F1] gives zero momentum flux as well.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both dry orientations include zero mass flux and imply zero full flux. Steps 1.1, 1.2 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each dry face with one wet reconstructed side is treated in both orientations. Steps 1.1 and 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both-zero wave speeds and zero selected dry fluxes are handled. Steps 1.1, 1.2 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The a_L=0 and a_R=0 outer branches are checked. Steps 1.1 and 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "thm-pe05-hydrostatic-reconstruction-is-well-balanced": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-shallow-water-balance-law",
+          "source_section": "Definition",
+          "quote": "Fix gravity $g>0$ and a stationary bed $b:\\mathbb R\\to\\mathbb R$. A shallow-water state is a pair $U=(h,m)$ with depth $h\\ge0$ and momentum $m\\in\\mathbb R$. Its admissible wet/dry state set is\n$$K=\\{(h,m):h>0,\\ m\\in\\mathbb R\\}\\cup\\{(0,0)\\}.$$\nFor $U\\in K$, define velocity by $u=m/h$ when $h>0$ and $u=0$ when $h=0$. Thus a dry state has both $h=0$ and $m=0$. Define the free surface by $\\eta=h+b$ and the physical flux by\n$$F(U)=\\begin{cases}(m,\\ m^2/h+gh^2/2),&h>0,\\\\(0,0),&U=(0,0).\\end{cases}$$\nFor a continuously differentiable bed, the one-dimensional shallow-water balance law is\n$$U_t+\\partial_xF(U)=(0,-gh\\,b_x).$$\nThe source is evaluated as zero at a dry state.\n\nA discrete lake-at-rest profile with level $\\eta_0$ has $m_i=0$ and $h_i+b_i=\\eta_0$ in every wet cell; cells with $h_i=0$ are dry and satisfy $b_i\\ge\\eta_0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a face and set $b^*=\\max(b_L,b_R)$. If a side cell is wet, its free surface is $\\eta_0$, so its reconstructed depth is $(\\eta_0-b^*)_+$. If a side cell is dry, then $b_s\\ge\\eta_0$ and $b^*\\ge b_s$, so its reconstructed depth is $(b_s-b^*)_+=0=(\\eta_0-b^*)_+$. Thus both reconstructed depths equal $H=(\\eta_0-b^*)_+$, and both reconstructed velocities are zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $H>0$, the states on the face are equal to $(H,0)$ and the middle HLL formula has speeds $-\\sqrt{gH}$ and $\\sqrt{gH}$, so its flux is $F(H,0)=(0,gH^2/2)$. If $H=0$, both states and speeds are zero and the dry branch returns $(0,0)$. Thus in either case the common flux is $(0,gH^2/2)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the side belonging to a cell of depth $h_s$, the correction in [F2] changes this common flux to $(0,g h_s^2/2)$. Therefore the right corrected flux of cell $i$ and the left corrected flux of that same cell are both $(0,g h_i^2/2)$. Their difference is zero, so the update leaves every $U_i$ unchanged.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The common reconstructed depth H=0 gives the dry flux branch. Steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A dry shoreline side and a wet side are included in the free-surface case split. Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The all-dry reconstructed face is evaluated separately. Step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The positive-part boundary H=0 is included in the face computation. Steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem"
+    },
+    "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pe05-hll-depth-flux-decomposition",
+          "source_section": "Statement",
+          "quote": "At a face of the scheme in [[def-pe05-hydrostatic-hll-scheme]], write $\\alpha=a_R$ and $\\beta=-a_L$. There are coefficients $p,q\\ge0$ such that\n$$\\widehat F^h=p h_L^*-q h_R^*,\\qquad p\\le\\alpha,\\qquad q\\le\\beta.$$\nIf $\\alpha>0$ and $h_L^*>0$, then $p<\\alpha$; if $\\beta>0$ and $h_R^*>0$, then $q<\\beta$. These statements include the branches where one speed is zero and the all-dry branch.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-pe05-hll-dry-face-direction-and-zero-flux",
+          "source_section": "Statement",
+          "quote": "At any face in [[def-pe05-hydrostatic-hll-scheme]], if the reconstructed right state is dry, then $\\widehat F^h\\ge0$, and $\\widehat F=(0,0)$ whenever $\\widehat F^h=0$. If the reconstructed left state is dry, then $\\widehat F^h\\le0$, and again $\\widehat F^h=0$ implies $\\widehat F=(0,0)$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-pe05-shallow-water-balance-law",
+          "source_section": "Definition",
+          "quote": "Fix gravity $g>0$ and a stationary bed $b:\\mathbb R\\to\\mathbb R$. A shallow-water state is a pair $U=(h,m)$ with depth $h\\ge0$ and momentum $m\\in\\mathbb R$. Its admissible wet/dry state set is\n$$K=\\{(h,m):h>0,\\ m\\in\\mathbb R\\}\\cup\\{(0,0)\\}.$$\nFor $U\\in K$, define velocity by $u=m/h$ when $h>0$ and $u=0$ when $h=0$. Thus a dry state has both $h=0$ and $m=0$. Define the free surface by $\\eta=h+b$ and the physical flux by\n$$F(U)=\\begin{cases}(m,\\ m^2/h+gh^2/2),&h>0,\\\\(0,0),&U=(0,0).\\end{cases}$$\nFor a continuously differentiable bed, the one-dimensional shallow-water balance law is\n$$U_t+\\partial_xF(U)=(0,-gh\\,b_x).$$\nThe source is evaluated as zero at a dry state.\n\nA discrete lake-at-rest profile with level $\\eta_0$ has $m_i=0$ and $h_i+b_i=\\eta_0$ in every wet cell; cells with $h_i=0$ are dry and satisfy $b_i\\ge\\eta_0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $p_R$ for the left-state coefficient at face $i+1/2$, $q_L$ for the right-state coefficient at face $i-1/2$, and use analogous notation for the two inflow coefficients. Expanding the first component of [F1] with [F2] gives $h_i^{n+1}=h_i^n-\\lambda(p_R h_{i,+}^*+q_L h_{i,-}^*)+\\lambda(q_R h_{i+1,-}^*+p_L h_{i-1,+}^*)$. The inflow terms are nonnegative and the total outflow is at most $(a_{R,i+1/2}-a_{L,i-1/2})h_i^n$, so the CFL gives $h_i^{n+1}\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $h_i^n>0$ and at least one outgoing speed is positive, the corresponding outflow term is strictly below its speed bound times $h_i^n$: this follows from [F2] if the reconstructed depth is positive, and is immediate if that reconstructed depth is zero. By step 1.1 and the CFL, $h_i^{n+1}>0$. If both outgoing speeds are zero, the outflow is zero and step 1.1 gives $h_i^{n+1}\\ge h_i^n>0$. Thus a wet cell remains wet and is in $K$ by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $h_i^n=0$, then $m_i^n=0$ and [F1] gives $h_{i,+}^*=h_{i,-}^*=0$, so both corrections on this cell vanish. Its left face has dry right state and its right face has dry left state. By [F3], the left mass flux is nonnegative and the right mass flux nonpositive; if the updated depth is zero, nonnegativity forces both mass fluxes to vanish.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the zero-depth case of step 2.2, [F3] makes both full HLL face fluxes zero. The cell corrections also vanish, so its updated momentum is zero and its updated state lies in $K$ by [F4]. If instead that initially dry cell has positive updated depth, its updated state lies in $K$ by [F4] as well. Together with step 2.1, this proves that every updated state lies in $K$ under the stated CFL condition.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Multiplying the first component of each update by $\\Delta x$ and summing over the finite chain cancels every interior shared mass flux, because the one-sided corrections have zero first component. This gives $\\Delta x\\sum_{i=1}^N(h_i^{n+1}-h_i^n)=-\\Delta t(\\widehat F^h_{N+1/2}-\\widehat F^h_{1/2})$. Thus only boundary discharge changes finite-domain water; periodic identification makes the right-hand side zero. Combining this identity with steps 2.1 and 3.1 proves the theorem.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero-depth cell has zero reconstructed depths; zero updated depth forces both face fluxes to vanish and hence zero momentum. Steps 2.2 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite-chain telescoping identity remains valid for N=1. Step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The wet cell with both outgoing speeds zero and the dry zero-flux case are treated. Steps 2.1–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The CFL permits equality; nonnegative depth follows at equality and wet depth remains strictly positive by the strict coefficient bound. Steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem"
+    },
+    "lem-pe05-source-quadrature-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe05-shallow-water-balance-law",
+          "source_section": "Definition",
+          "quote": "Fix gravity $g>0$ and a stationary bed $b:\\mathbb R\\to\\mathbb R$. A shallow-water state is a pair $U=(h,m)$ with depth $h\\ge0$ and momentum $m\\in\\mathbb R$. Its admissible wet/dry state set is\n$$K=\\{(h,m):h>0,\\ m\\in\\mathbb R\\}\\cup\\{(0,0)\\}.$$\nFor $U\\in K$, define velocity by $u=m/h$ when $h>0$ and $u=0$ when $h=0$. Thus a dry state has both $h=0$ and $m=0$. Define the free surface by $\\eta=h+b$ and the physical flux by\n$$F(U)=\\begin{cases}(m,\\ m^2/h+gh^2/2),&h>0,\\\\(0,0),&U=(0,0).\\end{cases}$$\nFor a continuously differentiable bed, the one-dimensional shallow-water balance law is\n$$U_t+\\partial_xF(U)=(0,-gh\\,b_x).$$\nThe source is evaluated as zero at a dry state.\n\nA discrete lake-at-rest profile with level $\\eta_0$ has $m_i=0$ and $h_i+b_i=\\eta_0$ in every wet cell; cells with $h_i=0$ are dry and satisfy $b_i\\ge\\eta_0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a compact spatial interval $I$ containing the cell centers under consideration and let $I^+$ be its closed unit enlargement. For $0<d\\le1$, Taylor's formula at $x_i\\in I$ gives $b(x_i+d)-b(x_i)=a+r_+$ and $b(x_i-d)-b(x_i)=-a+r_-$, where $a=b'(x_i)d$ and $|r_\\pm|\\le \\tfrac12\\sup_{I^+}|b''|d^2$. Since $s\\mapsto s_+$ is $1$-Lipschitz and $a_+-(-a)_+=a$, this yields $|\\delta_{i,+}-\\delta_{i,-}-b'(x_i)d|\\le C_0d^2$. The same local derivative bounds give $0\\le\\delta_{i,\\pm}\\le C_1d$, with constants depending only on $I$ and $b$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $h\\ge0$ and $\\delta\\ge0$, write $(h-\\delta)_+^2=h^2-2h\\delta+R(h,\\delta)$. If $\\delta\\le h$, then $R=\\delta^2$; if $\\delta>h$, then $R=2h\\delta-h^2$, which lies between $0$ and $\\delta^2$ because $\\delta^2-(2h\\delta-h^2)=(\\delta-h)^2$. For $0<d\\le1$, steps 1.1 and [F1] therefore give $$\\left|(S_i^n)_2+g h_i^n b'(x_i)\\right|\\le gH C_0d+\\frac{g}{2d}(\\delta_{i,+}^2+\\delta_{i,-}^2)\\le C_2d.$$ For $d\\ge1$, both squared positive parts in [F1] lie in $[0,H^2]$, so $|(S_i^n)_2|\\le gH^2/(2d)$. Since $|b'(x_i)|\\le\\sup_I|b'|$, it follows that $$\\left|(S_i^n)_2+g h_i^n b'(x_i)\\right|\\le \\frac{gH^2}{2d}+gH\\sup_I|b'|\\le C_3d.$$ Taking $C=\\max(C_2,C_3)$ proves the stated estimate for every $d>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Now let $d\\to0$ and fix a compact space-time rectangle. For all sufficiently small $d$, the centers of cells meeting this rectangle lie in a fixed compact interval, so the estimate in step 2.1 and $|b'(x)-b'(x_i)|\\le \\tfrac12d\\sup|b''|$ on a fixed enlargement show that $\\mathcal S_d-(0,-g h_d b'(x))\\to0$ uniformly there. Since $b'$ is bounded on compact intervals and $h_d\\to h$ strongly in local $L^1$, $(0,-g h_d b'(x))\\to(0,-ghb'(x))$ strongly in local $L^1$, proving the asserted source convergence.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The h=0 and delta>h positive-part branch is included in the remainder bound. Step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element or unit-parameter boundary is part of this statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The clipped branch delta>h and the uncut branch delta<=h, including equality, are both evaluated. Step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The kink boundary delta=h is included in the delta<=h case. Step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "lem-pe05-discrete-weak-identity-with-source": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiply the recurrence in [F1] by $\\Phi_i^n$ using the Euclidean dot product and sum over cells $i$ and time levels $0\\le n<N$. Compact support leaves only finitely many nonzero terms, and the resulting exact sum is zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each cell, summing in time and using $\\Phi_i^{N-1}=0$ gives $\\sum_{n=0}^{N-1}(U_i^{n+1}-U_i^n)\\cdot\\Phi_i^n=-U_i^0\\cdot\\Phi_i^0+\\sum_{n=1}^{N-1}U_i^n\\cdot(\\Phi_i^{n-1}-\\Phi_i^n)$. This is finite summation by parts; no limit or infinite rearrangement is used.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Reindexing the spatial face sum gives $\\sum_i(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)\\cdot\\Phi_i^n=\\sum_i\\widehat F_{i+1/2}^n\\cdot(\\Phi_i^n-\\Phi_{i+1}^n)$. Insert this and step 2.1 into step 1.1, retain the source sum with its minus sign from [F1], and multiply the zero identity by $-1$. The displayed identity follows.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero test gives the exact zero identity; compact support ensures all sums are finite. Steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite time summation-by-parts formula includes the N=1 single-slab case. Step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch is asserted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The terminal cell-average test is zero and the initial term is retained. Steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$ and $f \\in L^p(\\mathbb{R}^n)$. Then\n\n$$\\|\\tau_h f-f\\|_p \\longrightarrow 0 \\qquad(h \\to 0).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-l-one-convergence-implies-convergence-in-measure",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f_n,f : X \\to \\mathbb R$ be measurable with $f_n,f \\in L^1(\\mu)$. If $f_n \\to f$\nin $L^1(\\mu)$, then $f_n \\to f$ in measure.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-riesz-subsequence-theorem-for-convergence-in-measure",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f_n,f : X \\to \\mathbb R$ be measurable. If $f_n \\to f$ in measure, then there\nis a strictly increasing sequence $(n_k)_{k \\ge 0}$ of natural numbers such\nthat $f_{n_k} \\to f$ $\\mu$-almost everywhere.\n\nThe construction below uses the **least** admissible index at each stage, so no\nchoice principle is spent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a compact space-time rectangle $Q$ and a fixed compact enlargement $Q'$ containing $Q$ and every spatial translate $Q+d_k$ for all sufficiently large $k$. Choose local bounds $H,M$ so that $0\\le h_k\\le H$ and $|u_k|\\le M$ on $Q'$. Strong local $L^1$ convergence implies the same bounds for $h,u$ almost everywhere on $Q'$: the sum $|h_k-h|+|u_k-u|$ tends to zero in $L^1(Q')$, so [F4] gives a subsequence on which both converge almost everywhere and inherit the bounds. By [F3], multiplying $h,u$ by the indicator of $Q'$ therefore gives $L^1(\\mathbb R^2)$ functions. The given strong convergence gives $h_k\\to h$ and $u_k\\to u$ in $L^1(Q)$. Applying [F2] to the cutoffs shows $h(\\cdot+d_k,\\cdot)\\to h$ and $u(\\cdot+d_k,\\cdot)\\to u$ in $L^1(Q)$. Strong local convergence on $Q'$ and the triangle inequality then show $h_k(\\cdot+d_k,\\cdot)\\to h$ and $u_k(\\cdot+d_k,\\cdot)\\to u$ in $L^1(Q)$ as well.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $L$ be a Lipschitz constant for $b$ on the spatial enlargement, and write $h_k^+(x,t)=h_k(x+d_k,t)$ and $u_k^+(x,t)=u_k(x+d_k,t)$. Hydrostatic clipping changes either adjacent depth by at most $Ld_k$. Take any subsequence of $k$. By step 1.1, the sum of the four errors $|h_k-h|+|u_k-u|+|h_k^+-h|+|u_k^+-u|$ converges to zero in measure on $Q$; [F4] gives a further subsequence on which all four errors tend to zero almost everywhere. At a point where $h>0$, both cell depths are eventually larger than $Ld_k$, so neither reconstructed state is clipped to zero and both reconstructed velocities converge to $u$. At a point where $h=0$, the hypothesis gives $u=0$ and both cell velocities converge to zero; resetting either velocity to zero when its reconstructed depth vanishes therefore still gives convergence to $u$. The reconstructed depths in both states converge to $h$ as well. Thus along this common further subsequence both reconstructed primitive states converge almost everywhere to $(h,u)$. Since the starting subsequence was arbitrary, every subsequence has such a further subsequence.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At a wet limit state $h>0$, the two face inputs tend to the same $(h,hu)$; the left, middle and right HLL branches all tend to $F(h,hu)$, and the formulas agree at the branch boundaries. At a dry limit state, $h=0$ and $u=0$, so both reconstructed fluxes and both speeds tend to zero. In the middle branch write $\\alpha=a_R$, $\\beta=-a_L$; its equivalent formula is $\\widehat F=(\\alpha F_L^*+\\beta F_R^*)/(\\alpha+\\beta)-[\\alpha\\beta/(\\alpha+\\beta)](U_R^*-U_L^*)$. Here $\\alpha\\beta/(\\alpha+\\beta)\\le\\max(\\alpha,\\beta)$, which tends to zero at the dry state, while $F_L^*,F_R^*,U_L^*,U_R^*$ tend to zero. The outer branches also tend to zero. Thus along the almost-everywhere convergent further subsequence from step 2.1, the HLL flux tends almost everywhere to $F(h,hu)$. The same equivalent formula and $\\alpha,\\beta\\le M+\\sqrt{gH}$ give a uniform bound on the fluxes on $Q$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Starting from any subsequence, step 2.1 supplies a further subsequence with almost-everywhere convergence of both face inputs; step 3.1 gives almost-everywhere convergence of its fluxes and a uniform bound. Since $Q$ has finite measure by [F3], [F5] yields $L^1(Q)$ convergence along that further subsequence. If the full flux sequence failed to converge in $L^1(Q)$, some subsequence would stay a fixed positive distance from $F(h,hu)$, contradicting this property. Therefore $\\mathcal F_k\\to F(h,hu)$ in $L^1(Q)$. As $Q$ was arbitrary, the convergence is local.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The dry limit h=0,u=0 gives zero reconstructed states, speeds and flux. Steps 2.1 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A single wet reconstructed side at a dry face is included in the outer and middle HLL branches. Step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The all-dry equal-zero-speed HLL branch is covered by the dry-state convention. Step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The HLL branches agree at zero wave-speed boundaries. Step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only axiom is AC_omega, used through the stated translation and finite-measure suppliers; the subsequence criterion itself is explicit. Steps 1.1, 2.1 and 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.2",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pe05-discrete-weak-identity-with-source",
+          "source_section": "Statement",
+          "quote": "Let $d,\\tau>0$, $I_i=[id,(i+1)d)$, $t_n=n\\tau$, and $J_n=[t_n,t_{n+1})$. Suppose vector states and shared face fluxes satisfy\n$$d(U_i^{n+1}-U_i^n)+\\tau(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)=d\\tau S_i^n$$\nas in [[def-pe05-hydrostatic-hll-scheme]]. For $\\varphi\\in C_c^\\infty(\\mathbb R\\times(-\\infty,T);\\mathbb R^2)$ define the space-time cell average\n$$\\Phi_i^n=\\frac1{d\\tau}\\int_{J_n}\\int_{I_i}\\varphi(x,t)\\,dx\\,dt.$$\nChoose $N$ such that $\\varphi$ vanishes for $t\\ge t_{N-1}$. Then\n$$\\sum_i d\\,U_i^0\\cdot\\Phi_i^0+\\sum_{n=1}^{N-1}\\sum_i d\\,U_i^n\\cdot(\\Phi_i^n-\\Phi_i^{n-1})+\\sum_{n=0}^{N-1}\\sum_i\\tau\\,\\widehat F_{i+1/2}^n\\cdot(\\Phi_{i+1}^n-\\Phi_i^n)+\\sum_{n=0}^{N-1}\\sum_i d\\tau\\,S_i^n\\cdot\\Phi_i^n=0.$$\nEvery sum is finite because the test is compactly supported.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-pe05-source-quadrature-consistency",
+          "source_section": "Statement",
+          "quote": "Let $b\\in C^2(\\mathbb R)$, let the uniform cell width be $d>0$, let $x_i$ be the center of cell $i$, and let $0\\le h_i^n\\le H$ on a fixed compact space-time cylinder. Set $b_i=b(x_i)$, $\\delta_{i,+}=(b(x_i+d)-b(x_i))_+$, and $\\delta_{i,-}=(b(x_i-d)-b(x_i))_+$. For the source term $S_i^n$ in [[def-pe05-hydrostatic-hll-scheme]],\n$$S_i^n=\\left(0,\\frac{g}{2d}\\left((h_i^n-\\delta_{i,+})_+^2-(h_i^n-\\delta_{i,-})_+^2\\right)\\right),$$\nthere is a constant $C$ depending only on the compact interval, $b$, $g$, and $H$ such that\n$$\\left|S_i^{(2)}+g h_i b'(x_i)\\right|\\le C d.$$\nFor time slabs $J_n=[n\\tau,(n+1)\\tau)$, define the piecewise-constant source reconstruction $\\mathcal S_d(x,t)=S_i^n$ on $[x_i-d/2,x_i+d/2)\\times J_n$. Consequently, as $d\\to0$, if the corresponding piecewise-constant depth reconstructions $h_d$ converge strongly in $L^1_{\\rm loc}(\\mathbb R\\times(0,T))$ to $h$ and are locally uniformly bounded, then $\\mathcal S_d\\to(0,-ghb')$ strongly in $L^1_{\\rm loc}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Let $d_k,\\tau_k>0$ tend to zero, set $I_i^k=[id_k,(i+1)d_k)$, $x_i^k=(i+\\tfrac12)d_k$, $t_n^k=n\\tau_k$, and $J_n^k=[t_n^k,t_{n+1}^k)$, and let $b\\in C^1(\\mathbb R)$ be locally Lipschitz. On each cell-time slab let $h_k,u_k$ be piecewise constant, with $h_k\\ge0$, $u_k=0$ when $h_k=0$, and $m_k=h_ku_k$. Suppose $h_k\\to h$ and $u_k\\to u$ strongly in $L^1_{\\rm loc}(\\mathbb R\\times(0,T))$, $u=0$ almost everywhere where $h=0$, and $h_k,|u_k|$ are locally uniformly bounded. Let $\\mathcal F_k(x,t)=\\widehat F_{i+1/2}^{k,n}$ for $(x,t)\\in I_i^k\\times J_n^k$, with face flux from [[def-pe05-hydrostatic-hll-scheme]] and bed samples $b(x_i^k)$. Then\n$$\\mathcal F_k\\longrightarrow F(h,hu)\\quad\\text{strongly in }L^1_{\\rm loc}(\\mathbb R\\times(0,T)).$$\nThe primitive-velocity convergence and uniform velocity bound are included because the assigned wave-speed formula uses $m/h$ on wet states, which is not continuous at a dry state as a function of $(h,m)$ alone.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-pe05-strong-l1-limit-preserves-dry-admissibility",
+          "source_section": "Statement",
+          "quote": "Let $h_k\\ge0$ almost everywhere on $\\mathbb R\\times(0,T)$ and suppose $h_k\\to h$ strongly in $L^1_{\\mathrm{loc}}$. Let $u$ be measurable, put $m=hu$ almost everywhere, and suppose $u=0$ almost everywhere on $\\{h=0\\}$. Then $U=(h,m)$ belongs to the admissible state set $K$ from [[def-pe05-shallow-water-balance-law]] almost everywhere. Also, let initial reconstructions $U_k^0=(h_k^0,m_k^0)\\in K$ satisfy $m_k^0=h_k^0u_k^0$, $u_k^0=0$ where $h_k^0=0$, and $|u_k^0|\\le M_Q$ on each compact spatial interval $Q$ for a constant $M_Q$ independent of $k$. If $U_k^0\\to U_0=(h_0,m_0)$ strongly in $L^1_{\\mathrm{loc}}(\\mathbb R)$, then $U_0\\in K$ almost everywhere.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-pe05-source-quadrature-consistency",
+          "source_section": "Statement",
+          "quote": "Let $b\\in C^2(\\mathbb R)$, let the uniform cell width be $d>0$, let $x_i$ be the center of cell $i$, and let $0\\le h_i^n\\le H$ on a fixed compact space-time cylinder. Set $b_i=b(x_i)$, $\\delta_{i,+}=(b(x_i+d)-b(x_i))_+$, and $\\delta_{i,-}=(b(x_i-d)-b(x_i))_+$. For the source term $S_i^n$ in [[def-pe05-hydrostatic-hll-scheme]],\n$$S_i^n=\\left(0,\\frac{g}{2d}\\left((h_i^n-\\delta_{i,+})_+^2-(h_i^n-\\delta_{i,-})_+^2\\right)\\right),$$\nthere is a constant $C$ depending only on the compact interval, $b$, $g$, and $H$ such that\n$$\\left|S_i^{(2)}+g h_i b'(x_i)\\right|\\le C d.$$\nFor time slabs $J_n=[n\\tau,(n+1)\\tau)$, define the piecewise-constant source reconstruction $\\mathcal S_d(x,t)=S_i^n$ on $[x_i-d/2,x_i+d/2)\\times J_n$. Consequently, as $d\\to0$, if the corresponding piecewise-constant depth reconstructions $h_d$ converge strongly in $L^1_{\\rm loc}(\\mathbb R\\times(0,T))$ to $h$ and are locally uniformly bounded, then $\\mathcal S_d\\to(0,-ghb')$ strongly in $L^1_{\\rm loc}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F5], applied to the nonnegative bulk and initial depths, the strong local convergences, $m=hu$, the dry-velocity convention and the local initial velocity bound, both $U$ and $U_0$ belong to $K$ almost everywhere. Thus $F(U)$ in the weak formulation is defined.",
+          "step": "1.1",
+          "inputs": [
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $\\varphi$ and choose $N_k$ so that $\\varphi$ vanishes for $t\\ge t_{N_k-1}^k$ for all sufficiently large $k$. Apply [F2] to the actual states, shared face fluxes and source terms of the scheme; its exact finite sum is zero for each such $k$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The initial term in [F2] tends to $\\int_{\\mathbb R}U_0(x)\\cdot\\varphi(x,0)\\,dx$. Indeed, on each cell-time slab touching $t=0$, the averaged test differs from $\\varphi(x,0)$ by at most $C_\\varphi(d_k+\\tau_k)$, and the uniform state bound including the initial layer makes the sum of these quadrature errors tend to zero on the fixed compact support. The initial reconstruction convergence then gives the claimed limit.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "The time-difference sum in [F2] differs from $\\int_0^T\\int \\mathcal U_k\\cdot\\varphi_t$ by $O(\\tau_k)$. Taylor's formula in time makes each difference of adjacent cell-time test averages equal to the integral of $\\varphi_t$ over the current slab, up to $C_\\varphi\\tau_k^2$ after spatial averaging; the uniform state bound and the $O(d_k^{-1}\\tau_k^{-1})$ cells/slabs meeting the support give total error $O(\\tau_k)$. The omitted initial-slab integral is also $O(\\tau_k)$.",
+          "step": "1.4",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "The face-flux sum in [F2] differs from $\\int_0^T\\int\\mathcal F_k\\cdot\\varphi_x$ by $O(d_k)$. For each cell, the difference of adjacent test averages is the spatial average of $\\int_0^{d_k}\\varphi_x(x+s,t)\\,ds$; replacing this average by $\\varphi_x(x,t)$ has error at most $C_\\varphi d_k^2\\tau_k$ per cell-time slab. The local depth and velocity bounds give $h^*\\le H$, $|u^*|\\le M$, and wave speeds at most $M+\\sqrt{gH}$. The physical fluxes and reconstructed states are bounded; in the middle HLL branch its equivalent convex-combination formula has coefficient $\\alpha\\beta/(\\alpha+\\beta)\\le\\max(\\alpha,\\beta)$, so the face fluxes are uniformly bounded as well. The number of cells/slabs meeting the support then gives the stated total error. The source sum in [F2] is exactly $\\int_0^T\\int\\mathcal S_k\\cdot\\varphi$ because $\\mathcal S_k$ is constant on each slab.",
+          "step": "1.5",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose a compact spatial interval containing the test support and all cells meeting it for sufficiently large $k$, and choose $T_0<T$ beyond the temporal support. On this compact rectangle the hypotheses give uniform bounds for $h_k,u_k$ through $t=0$; the interior strong limits inherit the same essential bounds. Hence $\\mathcal U_k$, $U$, $F(U)$ and the products with the fixed test derivatives are uniformly bounded. Step 1.5 supplies a uniform bound for $\\mathcal F_k$. For sufficiently large $k$, $d_k\\le1$, and [F6] together with the local bounds on $b'$ and the depths gives a uniform bound for $\\mathcal S_k$; the limit source $(0,-ghb_x)$ is bounded too. Thus the contributions of all state, flux and source integrals from the initial layer $[0,\\varepsilon]$ are bounded by $C\\varepsilon$, uniformly in sufficiently large $k$ and for the limit integrands. On the remaining compact rectangle with $t\\ge\\varepsilon$, the assumed strong convergence gives convergence of the state integral, [F4] gives convergence of the face-flux integral, and [F3] gives convergence of the source integral. Taking $k\\to\\infty$ for fixed $\\varepsilon>0$ and then $\\varepsilon\\downarrow0$ proves convergence of these full integrals. Step 1.3 supplies the initial term, steps 1.4–1.5 identify the limits of the discrete sums, step 1.2 supplies the exact discrete identity, and step 1.1 its state admissibility. Passing to the limit proves the displayed weak formulation.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "step 1.5",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The bulk and initial dry limits belong to K by the local admissibility lemma; the source is zero at h=0. Step 1.1 and the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The initial trace at t=0 is retained as the boundary term. Steps 1.3 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch is asserted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The test vanishes near terminal time while its value at t=0 is retained. Steps 1.2–1.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only choice axiom is AC_omega, inherited through the cited translation and measure suppliers. Statement and step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem"
+    },
+    "ex-pe05-lake-at-rest-over-a-dry-crest": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-shallow-water-balance-law",
+          "source_section": "Definition",
+          "quote": "Fix gravity $g>0$ and a stationary bed $b:\\mathbb R\\to\\mathbb R$. A shallow-water state is a pair $U=(h,m)$ with depth $h\\ge0$ and momentum $m\\in\\mathbb R$. Its admissible wet/dry state set is\n$$K=\\{(h,m):h>0,\\ m\\in\\mathbb R\\}\\cup\\{(0,0)\\}.$$\nFor $U\\in K$, define velocity by $u=m/h$ when $h>0$ and $u=0$ when $h=0$. Thus a dry state has both $h=0$ and $m=0$. Define the free surface by $\\eta=h+b$ and the physical flux by\n$$F(U)=\\begin{cases}(m,\\ m^2/h+gh^2/2),&h>0,\\\\(0,0),&U=(0,0).\\end{cases}$$\nFor a continuously differentiable bed, the one-dimensional shallow-water balance law is\n$$U_t+\\partial_xF(U)=(0,-gh\\,b_x).$$\nThe source is evaluated as zero at a dry state.\n\nA discrete lake-at-rest profile with level $\\eta_0$ has $m_i=0$ and $h_i+b_i=\\eta_0$ in every wet cell; cells with $h_i=0$ are dry and satisfy $b_i\\ge\\eta_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pe05-hydrostatic-reconstruction-is-well-balanced",
+          "source_section": "Statement",
+          "quote": "For any discrete bed values, the update of [[def-pe05-hydrostatic-hll-scheme]] leaves every lake-at-rest profile of [[def-pe05-shallow-water-balance-law]] unchanged, including a wet/dry shoreline with dry cells above the free-surface level.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The data are admissible by [F1]. The four face maxima, including the periodic face between cells $4$ and $0$, are $(1,2,2,1,0)$, so the paired reconstructed depths are respectively $(1,1)$, $(0,0)$, $(0,0)$, $(1,1)$, and $(2,2)$. All reconstructed velocities are zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At these equal states the common HLL fluxes are $(0,1/2)$, $(0,0)$, $(0,0)$, $(0,1/2)$ and $(0,2)$. Adding the one-sided pressure corrections in [F2] makes the two corrected fluxes adjacent to each cell both equal $(0,h_i^2/2)$: the five cell pressures are $2,1/2,0,1/2,2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each cell therefore has zero corrected-flux difference in the update, so every state is unchanged, including the dry crest. This verifies the exact lake-at-rest preservation in [F3] for this finite wet/dry example.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The central crest cell and zero reconstructed-depth faces are evaluated. Steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The five-cell periodic example includes one dry crest and four wet cells. Steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The all-dry reconstructed faces return zero flux. Steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The bed/free-surface equality at the crest produces the zero-depth branch. Steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "five-cell dry-crest lake-at-rest exact flux and update check",
+          "method": "exact rational arithmetic",
+          "input": {
+            "gravity": "1",
+            "bed": [
+              "0",
+              "1",
+              "2",
+              "1",
+              "0"
+            ],
+            "depth": [
+              "2",
+              "1",
+              "0",
+              "1",
+              "2"
+            ],
+            "periodic": true
+          },
+          "calculation": "The face maxima are (1,2,2,1,0); reconstructed depth pairs are (1,1),(0,0),(0,0),(1,1),(2,2). Common pressure fluxes are (0,1/2),(0,0),(0,0),(0,1/2),(0,2). Side corrections make both adjacent cell fluxes equal (0,h_i^2/2), so all five updates vanish.",
+          "expected": {
+            "updated_depth": [
+              "2",
+              "1",
+              "0",
+              "1",
+              "2"
+            ],
+            "updated_momentum": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ]
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example"
+    },
+    "ex-pe05-hll-dam-break-wets-dry-cell": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-hydrostatic-hll-scheme",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ cells form a finite chain, with two admissible ghost states used only to define the boundary faces, or let the cells be periodic. Apply one step of [[def-pe05-hydrostatic-hll-scheme]] to states in $K$ from [[def-pe05-shallow-water-balance-law]]. If\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad(1\\le i\\le N),$$\nthen each updated state remains in $K$. The depth is nonnegative; if it is zero then the momentum is zero. On a finite chain the total water changes by the net boundary discharge, and on a periodic mesh total water is conserved.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At every wet/wet face the states agree at $(1,0)$, the speeds are $(-1,1)$, and the HLL flux is $(0,1/2)$. At every dry/dry face the speeds and flux are zero. At the unique wet/dry face, $F_L=(0,1/2)$, $F_R=(0,0)$, $U_R-U_L=(-1,0)$ and $a_La_R=-1$, so the middle formula in [F1] gives $\\widehat F=(1/2,1/4)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a wet cell adjacent to the front the outgoing-speed sum is $1+1=2$, so $\\lambda$ times that sum is $1$; for the first dry cell it is $1+0=1$, so the product is $1/2$; all other cells have either the wet/wet value $1$ or the dry/dry value $0$ on each side, and satisfy the same bound. Thus every cell meets [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The wet cell $i=0$ has left flux $(0,1/2)$ and right flux $(1/2,1/4)$, hence $U_0^1=(1,0)-\\tfrac12((1/2,1/4)-(0,1/2))=(3/4,1/8)$. The dry cell $i=1$ has left flux $(1/2,1/4)$ and right flux $(0,0)$, hence $U_1^1=(0,0)-\\tfrac12((0,0)-(1/2,1/4))=(1/4,1/8)$. Both depths are positive, and their sum remains $1$, so the front wets the adjacent dry cell without losing water.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Dry/dry faces have zero speeds and zero flux, and the dry cell becomes wet. Steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first dry cell adjacent to a single wet front is updated explicitly. Steps 2.1 and 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The dry/dry zero-speed HLL branch is evaluated. Step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The wet-cell CFL is attained with equality. Step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "one-step flat-bed HLL dry-front exact update",
+          "method": "exact rational arithmetic with sqrt(1)=1",
+          "input": {
+            "gravity": "1",
+            "bed": "0",
+            "wet_state": [
+              "1",
+              "0"
+            ],
+            "dry_state": [
+              "0",
+              "0"
+            ],
+            "lambda": "1/2"
+          },
+          "calculation": "At the wet/dry face a_L=-1,a_R=1 and the HLL flux is (1/2,1/4). Wet/wet flux is (0,1/2); dry/dry flux is (0,0). The largest cellwise CFL product is 1. Updating cells 0 and 1 gives (3/4,1/8) and (1/4,1/8), with total depth 1.",
+          "expected": {
+            "left_updated_state": [
+              "3/4",
+              "1/8"
+            ],
+            "right_updated_state": [
+              "1/4",
+              "1/8"
+            ],
+            "total_depth": "1",
+            "max_cfl": "1"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example"
+    },
+    "cex-pe05-centered-source-produces-spurious-current": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe05-shallow-water-balance-law",
+          "source_section": "Definition",
+          "quote": "Fix gravity $g>0$ and a stationary bed $b:\\mathbb R\\to\\mathbb R$. A shallow-water state is a pair $U=(h,m)$ with depth $h\\ge0$ and momentum $m\\in\\mathbb R$. Its admissible wet/dry state set is\n$$K=\\{(h,m):h>0,\\ m\\in\\mathbb R\\}\\cup\\{(0,0)\\}.$$\nFor $U\\in K$, define velocity by $u=m/h$ when $h>0$ and $u=0$ when $h=0$. Thus a dry state has both $h=0$ and $m=0$. Define the free surface by $\\eta=h+b$ and the physical flux by\n$$F(U)=\\begin{cases}(m,\\ m^2/h+gh^2/2),&h>0,\\\\(0,0),&U=(0,0).\\end{cases}$$\nFor a continuously differentiable bed, the one-dimensional shallow-water balance law is\n$$U_t+\\partial_xF(U)=(0,-gh\\,b_x).$$\nThe source is evaluated as zero at a dry state.\n\nA discrete lake-at-rest profile with level $\\eta_0$ has $m_i=0$ and $h_i+b_i=\\eta_0$ in every wet cell; cells with $h_i=0$ are dry and satisfy $b_i\\ge\\eta_0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The pressure values are $p_0=1/2$, $p_1=1/8$, and $p_2=1/2$ by [F1]. Thus the central right and left momentum fluxes at cell $0$ are $\\widehat F^m_{1/2}=(p_0+p_1)/2=5/16$ and $\\widehat F^m_{-1/2}=(p_2+p_0)/2=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The central-flux contribution to $m_0^+$ is $-\\Delta t(5/16-1/2)=3\\Delta t/16$. The centered source contributes $-\\Delta t\\,h_0(b_1-b_2)/2=-\\Delta t/4=-4\\Delta t/16$. Therefore $m_0^+=-\\Delta t/16\\ne0$, so the stated update moves this lake and the universal preservation claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a defined state, nonempty finite mesh, or specified sequence; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The computed momentum residual is nonzero for every positive timestep and vanishes only at the excluded zero timestep. Step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One cell of the periodic three-cell grid has the nonzero residual needed for the counterexample. Steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter branch is asserted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter endpoint or branch equality is asserted in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite algebra or does not make a choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "three-cell centered-flux/source lake residual",
+          "method": "exact rational arithmetic",
+          "input": {
+            "gravity": "1",
+            "dx": "1",
+            "bed": [
+              "0",
+              "1/2",
+              "0"
+            ],
+            "depth": [
+              "1",
+              "1/2",
+              "1"
+            ],
+            "timestep": "dt>0"
+          },
+          "calculation": "Cell-0 pressures are 1/2,1/8,1/2. Central face momenta are 5/16 and 1/2, so the flux contribution is 3dt/16. The centered source contributes -dt/4=-4dt/16. Hence m_0^+=-dt/16.",
+          "expected": {
+            "updated_momentum_cell_0": "-dt/16",
+            "nonzero_for": "dt>0"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "counterexample"
+    }
+  }
+}

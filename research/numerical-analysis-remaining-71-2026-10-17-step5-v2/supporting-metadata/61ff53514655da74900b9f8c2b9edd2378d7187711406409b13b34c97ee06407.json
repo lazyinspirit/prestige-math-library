@@ -1,0 +1,568 @@
+[
+  {
+    "order": 2574,
+    "id": "tensor-train-compression-and-truncation-error",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Tensor train compression and truncation error",
+    "companion": "tensor-train-compression-and-truncation-error-examples",
+    "requires": [
+      "computed-singular-values-and-rank-revealing-factorizations"
+    ],
+    "items": [
+      {
+        "id": "def-finite-tensor-arrays-and-frobenius-inner-product",
+        "kind": "definition",
+        "title": "Finite tensor arrays and the Frobenius inner product",
+        "statement": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+        "deps": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §§2–4",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §§2–4",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            },
+            {
+              "title": "Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle, A Multilinear Singular Value Decomposition, SIAM Journal on Matrix Analysis and Applications 21(4) (2000), §§2–3",
+              "url": "https://www.math.ucdavis.edu/~saito/data/tensor/lathauwer-etal_mulilinear-SVD.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tensor-unfoldings-are-frobenius-isometries",
+        "kind": "lemma",
+        "title": "Tensor unfoldings preserve the Frobenius inner product",
+        "statement": "For tensors $A,B$ of the same finite shape, every mode unfolding and every cut unfolding preserves the Frobenius inner product and norm.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §2.4",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            },
+            {
+              "title": "Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle, A Multilinear Singular Value Decomposition, SIAM Journal on Matrix Analysis and Applications 21(4) (2000), §2",
+              "url": "https://www.math.ucdavis.edu/~saito/data/tensor/lathauwer-etal_mulilinear-SVD.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-tucker-multilinear-rank-and-mode-products",
+        "kind": "definition",
+        "title": "Tucker format, multilinear rank, and mode products",
+        "statement": "For a tensor $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, its multilinear rank is\n$$ \\operatorname{mlrank}(A)=\\bigl(\\operatorname{rank}A_{(1)},\\ldots,\\operatorname{rank}A_{(d)}\\bigr). $$\nIf $U\\in\\mathbb F^{m\\times n_k}$, the mode-$k$ product $A\\times_k U$ is the tensor with mode-$k$ size $m$ and entries\n$$ (A\\times_k U)_{i_1,\\ldots,i_{k-1},j,i_{k+1},\\ldots,i_d} =\\sum_{i_k=1}^{n_k}A_{i_1,\\ldots,i_d}U_{j,i_k}. $$\nThe product is bilinear in the entries; no conjugation is used in this tensor contraction.\n\nA Tucker representation with mode ranks bounded by $r=(r_1,\\ldots,r_d)$ is a factorization\n$$ A=G\\times_1 U_1\\times_2\\cdots\\times_d U_d, $$\nwhere $U_k\\in\\mathbb F^{n_k\\times r_k}$ and $G\\in\\mathbb F^{r_1\\times\\cdots\\times r_d}$. Separately, write\n$$ \\mathcal T_r=\\{B\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}:\\operatorname{rank}B_{(k)}\\le r_k\\text{ for each }k\\} $$\nfor the multilinear-rank-bounded set used in approximation statements.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §§2.4, 4",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            },
+            {
+              "title": "Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle, A Multilinear Singular Value Decomposition, SIAM Journal on Matrix Analysis and Applications 21(4) (2000), §§2–3",
+              "url": "https://www.math.ucdavis.edu/~saito/data/tensor/lathauwer-etal_mulilinear-SVD.pdf"
+            },
+            {
+              "title": "ACM 270-1, Complete Lecture Notes, Caltech, Spring 2019, Lecture 14, §3",
+              "url": "https://iqim.caltech.edu/wp-content/uploads/2019/08/ACM270_complete_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+        "kind": "definition",
+        "title": "Tensor train cores, bond ranks, and canonical gauges",
+        "statement": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$. A tensor-train (TT) representation consists of integers $r_0=r_d=1$, internal bond sizes $r_1,\\ldots,r_{d-1}\\in\\mathbb N_0$, and cores\n$$ G_k\\in\\mathbb F^{r_{k-1}\\times n_k\\times r_k}\\quad(1\\le k\\le d) $$\nsuch that\n$$ A_{i_1,\\ldots,i_d} =\\sum_{\\alpha_1=1}^{r_1}\\cdots\\sum_{\\alpha_{d-1}=1}^{r_{d-1}} G_1(1,i_1,\\alpha_1)G_2(\\alpha_1,i_2,\\alpha_2)\\cdots G_d(\\alpha_{d-1},i_d,1). $$\nAn empty bond index set gives an empty sum, hence the zero tensor; in particular, all internal bond sizes zero represent zero. A bond size $r_k$ is the storage dimension contracted between cores $k$ and $k+1$. The cut-$k$ unfolding groups modes $1,\\ldots,k$ against $k+1,\\ldots,d$ as fixed in [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\nFor an internal bond $k$, an invertible matrix $S\\in\\mathbb F^{r_k\\times r_k}$ gives a gauge transformation by replacing the two adjacent cores with\n$$ \\widetilde G_k(\\alpha,i,\\beta)=\\sum_{\\gamma=1}^{r_k}G_k(\\alpha,i,\\gamma)S_{\\gamma\\beta}, \\qquad \\widetilde G_{k+1}(\\beta,j,\\eta)=\\sum_{\\gamma=1}^{r_k}(S^{-1})_{\\beta\\gamma}G_{k+1}(\\gamma,j,\\eta). $$\nTheir contraction is unchanged because $\\sum_\\beta S_{\\gamma\\beta}(S^{-1})_{\\beta\\gamma'}=\\delta_{\\gamma,\\gamma'}$.\n\nThe left matricization of core $G_k$ has row index $(\\alpha_{k-1},i_k)$ and column index $\\alpha_k$. The core is left-isometric if this matrix $L_k$ satisfies $L_k^*L_k=I_{r_k}$. The right matricization has row index $\\alpha_{k-1}$ and column index $(i_k,\\alpha_k)$; the core is right-isometric if its matrix $R_k$ satisfies $R_kR_k^*=I_{r_{k-1}}$. A TT is in mixed canonical gauge about core $\\ell$ when cores $k<\\ell$ are left-isometric and cores $k>\\ell$ are right-isometric.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §§2–4",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, §§1.2.1–1.2.5 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-canonical-polyadic-rank",
+        "kind": "definition",
+        "title": "Canonical polyadic rank",
+        "statement": "For $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, its canonical polyadic rank (CP rank) is the least integer $R\\ge0$ for which\n$$ A=\\sum_{q=1}^{R}a_q^{(1)}\\otimes\\cdots\\otimes a_q^{(d)},\\qquad a_q^{(k)}\\in\\mathbb F^{n_k}. $$\nThe empty sum is zero, so the zero tensor has CP rank $0$. The coordinate expansion\n$$ A=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d} A_{i_1,\\ldots,i_d}\\,e_{i_1}^{(1)}\\otimes\\cdots\\otimes e_{i_d}^{(d)} $$\nshows that the set of admissible finite integers $R$ is nonempty. The well-ordering of $\\mathbb N_0$ therefore makes the least such $R$ well-defined.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §3",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            },
+            {
+              "title": "ACM 270-1, Complete Lecture Notes, Caltech, Spring 2019, Lecture 13, §4.2",
+              "url": "https://iqim.caltech.edu/wp-content/uploads/2019/08/ACM270_complete_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-best-rank-k-frobenius-matrix-approximation",
+        "kind": "theorem",
+        "title": "Best rank-k matrix approximation in Frobenius norm",
+        "statement": "Let $A\\in\\mathbb F^{m\\times n}$, where $m,n\\ge1$, have a singular value decomposition\n$$ A=\\sum_{j=1}^{q}\\sigma_j u_jv_j^*,\\qquad \\sigma_1\\ge\\cdots\\ge\\sigma_q>0, $$\nwhere $q=\\operatorname{rank}(A)$. For an integer $k\\ge0$, put\n$$ A_k=\\sum_{j=1}^{\\min(k,q)}\\sigma_j u_jv_j^*, \\qquad \\delta_k^2=\\sum_{j=k+1}^{q}\\sigma_j^2 $$\nwith an empty sum equal to zero. Then $\\operatorname{rank}(A_k)\\le k$, $\\|A-A_k\\|_F=\\delta_k$, and every matrix $B$ with $\\operatorname{rank}(B)\\le k$ satisfies $\\|A-B\\|_F\\ge\\delta_k$.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, §1.1.1, Theorem 1.1.2 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-full-column-rank-matrix-least-squares-solution",
+        "kind": "lemma",
+        "title": "Full-column-rank matrix least squares has a unique minimizer",
+        "statement": "Let $p,r,s\\ge1$, let $M\\in\\mathbb F^{p\\times r}$ have full column rank, and let $Y\\in\\mathbb F^{p\\times s}$. Among all $W\\in\\mathbb F^{r\\times s}$, the function $W\\mapsto\\|Y-MW\\|_F$ has the unique minimizer\n$$ W_*=(M^*M)^{-1}M^*Y. $$",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "ACM 270-1, Complete Lecture Notes, Caltech, Spring 2019, Lecture 13, §4.3",
+              "url": "https://iqim.caltech.edu/wp-content/uploads/2019/08/ACM270_complete_lecture_notes.pdf"
+            },
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §3.4",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-sequential-tensor-train-svd",
+        "kind": "algorithm",
+        "title": "Sequential tensor-train SVD",
+        "statement": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. The input is a tensor $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$, and exactly one of:\n\n- rank caps $c_1,\\ldots,c_{d-1}\\in\\mathbb N_0$; or\n- absolute tail tolerances $\\tau_1,\\ldots,\\tau_{d-1}\\in[0,\\infty)$.\n\nAt cut $k$, flatten the current remainder with rows $(\\alpha_{k-1},i_k)$ and columns $(i_{k+1},\\ldots,i_d)$, where $\\alpha_0=1$, and compute an exact compact SVD $M_k=U_k\\Sigma_kV_k^*$. Its positive singular values are ordered decreasingly as $\\sigma_1,\\ldots,\\sigma_s$. Under rank caps choose $q_k=\\min(c_k,s)$. Under tolerances choose the least $q_k\\in\\{0,\\ldots,s\\}$ for which $\\sum_{j>q_k}\\sigma_j^2\\le\\tau_k^2$. This set is nonempty because $q_k=s$ gives tail zero. Record the discarded tail\n$$ \\delta_k=\\left(\\sum_{j>q_k}\\sigma_j^2\\right)^{1/2}. $$\n\nReshape the first $q_k$ columns of $U_k$ into core $G_k$ and reshape $\\Sigma_{k,1:q_k}V_{k,1:q_k}^*$ as the next remainder. After cut $d-1$, reshape the remaining matrix as $G_d$. If $q_k=0$, the remainder has zero row dimension; all later ranks and tails are set to zero and the remaining cores are the corresponding empty zero arrays. Thus the zero tensor has all internal ranks zero, a cap zero returns the zero tensor, and a tolerance large enough to select $q_k=0$ does the same. The output is the TT core list and the cut tails $(\\delta_k)$. Any SVD tie at a retained cutoff may be resolved by any orthonormal choice within the tied singular subspace.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §2",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, §§1.2.1, 1.2.4 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-tensor-train-rounding",
+        "kind": "algorithm",
+        "title": "Tensor-train rounding",
+        "statement": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. The input is a valid TT core list for a tensor of order $d\\ge2$ and exactly one of rank caps $c_1,\\ldots,c_{d-1}\\in\\mathbb N_0$ or absolute tail tolerances $\\tau_1,\\ldots,\\tau_{d-1}\\in[0,\\infty)$.\n\n1. **Left orthogonalize without truncation.** For $k=1,\\ldots,d-1$, reshape core $G_k$ into a matrix with rows $(\\alpha_{k-1},i_k)$ and columns $\\alpha_k$. Compute an exact compact SVD $M=U\\Sigma V^*$, replace $G_k$ by the reshape of $U$, and absorb $\\Sigma V^*$ into the next core along their common bond. Omitting zero singular directions is exact. The resulting cores $G_1,\\ldots,G_{d-1}$ are left-isometric.\n\n2. **Truncate from right to left.** For $k=d,d-1,\\ldots,2$, reshape the current $G_k$ into a matrix $M_k$ with rows $\\alpha_{k-1}$ and columns $(i_k,\\alpha_k)$, and compute an exact compact SVD $M_k=U_k\\Sigma_kV_k^*$. If its positive singular values are $\\sigma_1\\ge\\cdots\\ge\\sigma_s>0$, choose $q_{k-1}=\\min(c_{k-1},s)$ for rank caps, or the least $q_{k-1}\\in\\{0,\\ldots,s\\}$ with $\\sum_{j>q_{k-1}}\\sigma_j^2\\le\\tau_{k-1}^2$ for tolerances. Record $\\delta_{k-1}=(\\sum_{j>q_{k-1}}\\sigma_j^2)^{1/2}$. Replace $G_k$ by the reshape of the first $q_{k-1}$ rows of $V_k^*$ and absorb $U_{k,1:q}\\Sigma_{k,1:q}$ into the previous core.\n\nIf $q_{k-1}=0$, the represented tensor becomes zero; set all remaining internal ranks to zero and their unperformed tails to zero. If the input represents zero, return the all-zero-rank representation and zero tails immediately. The output is the rounded core list and all recorded cut tails. No finite-precision error guarantee is part of this exact-arithmetic procedure.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §3",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, §1.2.4, Algorithm 1.3; §1.2.5 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-tensor-train-storage-and-inner-product-cost",
+        "kind": "theorem",
+        "title": "Tensor-train storage and inner-product costs",
+        "statement": "If a TT representation has mode sizes $n_k$ and bond sizes $r_0=r_d=1,r_1,\\ldots,r_{d-1}$, its core storage is exactly\n$$ \\sum_{k=1}^d n_kr_{k-1}r_k $$\nfield entries. If $A$ and $B$ have TT cores of bond sizes $r_k$ and $s_k$, respectively, their Frobenius inner product can be computed with\n$$ O\\!\\left(\\sum_{k=1}^d n_kr_{k-1}s_{k-1}r_ks_k\\right) $$\nscalar arithmetic operations and $O(\\max_k r_ks_k)$ additional workspace entries.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §4.2",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, §1.2 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-hosvd-truncation",
+        "kind": "algorithm",
+        "title": "Higher-order SVD truncation",
+        "statement": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. Given $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ and integer rank caps $0\\le r_k\\le n_k$, compute an exact SVD of each mode unfolding $A_{(k)}$. Let $U_k$ consist of the first $q_k=\\min(r_k,\\operatorname{rank}A_{(k)})$ left singular vectors, with any orthonormal choice at a tied cutoff. Define $P_k=U_kU_k^*$, the orthogonal projection onto their span; for $q_k=0$, set $P_k=0$.\n\nFor auxiliary cores and intermediate arrays in this procedure, allow mode sizes $m_k\\ge0$: an array of shape $(m_1,\\ldots,m_d)$ is a function from $\\prod_{k=1}^d\\{1,\\ldots,m_k\\}$ to $\\mathbb F$. If a mode size is zero, this is the unique empty array. Extend the mode-product entry formula of [[def-tucker-multilinear-rank-and-mode-products]] to these arrays, taking every empty sum to be zero.\n\nReturn the factors $U_k\\in\\mathbb F^{n_k\\times q_k}$, the core $G=A\\times_1U_1^*\\times_2\\cdots\\times_dU_d^*$ of shape $(q_1,\\ldots,q_d)$, and reconstruction\n$$ \\widehat A=G\\times_1U_1\\times_2\\cdots\\times_dU_d =A\\times_1P_1\\times_2\\cdots\\times_dP_d. $$\nIf any $q_k=0$, return the corresponding $n_k\\times0$ empty factor, the empty core of the stated shape, and the zero reconstruction of the original physical shape, using the same formulas and empty-sum convention. The algorithm makes no finite-precision claim.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tucker-multilinear-rank-and-mode-products",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle, A Multilinear Singular Value Decomposition, SIAM Journal on Matrix Analysis and Applications 21(4) (2000), §§3, 5",
+              "url": "https://www.math.ucdavis.edu/~saito/data/tensor/lathauwer-etal_mulilinear-SVD.pdf"
+            },
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §4.2",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-budgeted-cp-alternating-least-squares",
+        "kind": "algorithm",
+        "title": "Budgeted CP alternating least squares",
+        "statement": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. Inputs are a tensor $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, a proposed CP component count $R\\in\\mathbb N_0$, initial factor matrices $F_k\\in\\mathbb F^{n_k\\times R}$, and a finite sweep budget $N_{\\max}\\in\\mathbb N_0$. The objective is\n$$ \\Phi(F_1,\\ldots,F_d)=\\left\\|A-\\sum_{j=1}^{R}F_1(:,j)\\otimes\\cdots\\otimes F_d(:,j)\\right\\|_F^2. $$\nOn every exit, return the tuple $(F_1,\\ldots,F_d,\\widehat A,\\text{status})$, where\n$$ \\widehat A=\\sum_{j=1}^{R}F_1(:,j)\\otimes\\cdots\\otimes F_d(:,j) $$\nis evaluated from the factor matrices as they stand at that exit. If $R=0$, return the empty factor matrices, the zero model, and status “rank-zero-model” immediately. If $N_{\\max}=0$, return the current factors and model with status “budget-exhausted”. Otherwise, for each of at most $N_{\\max}$ sweeps, visit modes $k=1,\\ldots,d$ in that order. With the other factors fixed, form $Z_k$ whose rows are indexed by all tuples $(i_\\ell)_{\\ell\\ne k}$ and whose column $j$ is\n$$ (Z_k)_{(i_\\ell)_{\\ell\\ne k},j}=\\prod_{\\ell\\ne k}(F_\\ell)_{i_\\ell,j}. $$\nThe mode-$k$ unfolding model is $A_{(k)}\\approx XZ_k^{\\mathsf T}$. If $Z_k$ is not full column rank, halt and return the current factors and model with status “rank-deficient-design”; no factor has changed at this block. If it has full column rank, solve the equivalent adjoint problem\n$$ \\min_{Y\\in\\mathbb F^{R\\times n_k}}\\|A_{(k)}^*-\\overline{Z_k}Y\\|_F $$\nand replace $F_k$ by $Y^*$. The matrix $\\overline{Z_k}$ has full column rank, so the minimizer is unique by [[lem-full-column-rank-matrix-least-squares-solution]]. After each completed sweep, increment the sweep counter. Return the current factors and model with status “budget-exhausted” after the $N_{\\max}$th completed sweep. This finite-budget procedure guarantees neither convergence nor a global best CP approximation.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-canonical-polyadic-rank",
+          "lem-full-column-rank-matrix-least-squares-solution"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §3.4",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            },
+            {
+              "title": "ACM 270-1, Complete Lecture Notes, Caltech, Spring 2019, Lecture 13, §4.3",
+              "url": "https://iqim.caltech.edu/wp-content/uploads/2019/08/ACM270_complete_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+        "kind": "theorem",
+        "title": "Exact TT ranks and root-sum-square truncation error",
+        "statement": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, $d\\ge2$, and let $A^{\\langle k\\rangle}$ denote its cut-$k$ unfolding. For sequential TT-SVD, let $r_k$ be its retained bond size and $\\delta_k$ its discarded singular-value tail at cut $k$. For rounding, let the input TT represent $A$ and use the same notation for the output bond sizes and recorded tails. Then both procedures satisfy\n$$ \\|A-\\widehat A\\|_F^2\\le\\sum_{k=1}^{d-1}\\delta_k^2. $$\nIf no positive singular value is discarded, the output is exactly $A$. In full-rank TT-SVD, $r_k=\\operatorname{rank}(A^{\\langle k\\rangle})$ for every cut, and these are the minimal possible TT bond sizes among exact representations.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "lem-tensor-unfoldings-are-frobenius-isometries",
+          "thm-best-rank-k-frobenius-matrix-approximation",
+          "alg-sequential-tensor-train-svd",
+          "alg-tensor-train-rounding",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §§2–3",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, §§1.2.1–1.2.5 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hosvd-quasioptimal-multilinear-rank-error",
+        "kind": "theorem",
+        "title": "HOSVD quasioptimality for multilinear rank",
+        "statement": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ and let $\\widehat A$ be the truncated HOSVD with mode-rank caps $r_1,\\ldots,r_d$. Then\n$$ \\|A-\\widehat A\\|_F \\le \\sqrt d\\inf_{B\\in\\mathcal T_r}\\|A-B\\|_F, $$\nwhere $\\mathcal T_r$ is the set of tensors whose $k$th unfolding has rank at most $r_k$.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tucker-multilinear-rank-and-mode-products",
+          "lem-tensor-unfoldings-are-frobenius-isometries",
+          "thm-best-rank-k-frobenius-matrix-approximation",
+          "alg-hosvd-truncation",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle, A Multilinear Singular Value Decomposition, SIAM Journal on Matrix Analysis and Applications 21(4) (2000), §5, Property 10",
+              "url": "https://www.math.ucdavis.edu/~saito/data/tensor/lathauwer-etal_mulilinear-SVD.pdf"
+            },
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §4.2",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-exact-cp-als-block-updates-are-monotone",
+        "kind": "theorem",
+        "title": "Exact CP-ALS block updates do not increase the objective",
+        "statement": "During budgeted CP-ALS, each successful exact block update does not increase the squared Frobenius residual. A rank-deficient-design halt leaves the factor matrices unchanged, so it leaves the objective unchanged. Consequently, the objective is nonincreasing over every sequence of completed exact block updates.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-canonical-polyadic-rank",
+          "lem-full-column-rank-matrix-least-squares-solution",
+          "alg-budgeted-cp-alternating-least-squares"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "ACM 270-1, Complete Lecture Notes, Caltech, Spring 2019, Lecture 13, §4.3",
+              "url": "https://iqim.caltech.edu/wp-content/uploads/2019/08/ACM270_complete_lecture_notes.pdf"
+            },
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §3.4",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2575,
+    "id": "tensor-train-compression-and-truncation-error-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Tensor train compression and truncation error — Examples",
+    "companion": "tensor-train-compression-and-truncation-error",
+    "requires": [
+      "tensor-train-compression-and-truncation-error"
+    ],
+    "items": [
+      {
+        "id": "cex-best-rank-two-cp-approximation-may-not-exist",
+        "kind": "counterexample",
+        "title": "A best rank-two CP approximation need not exist",
+        "statement": "Every finite tensor has a best Frobenius approximation among tensors of CP rank at most two.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-canonical-polyadic-rank"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tamara G. Kolda and Brett W. Bader, Tensor Decompositions and Applications, SIAM Review 51(3) (2009), §3.3",
+              "url": "https://www.kolda.net/publication/TensorReview.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, §1.2.3 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-separable-grid-tensor-has-tt-rank-one",
+        "kind": "example",
+        "title": "A separable grid tensor has TT rank one",
+        "statement": "For nonzero vectors $u^{(k)}\\in\\mathbb R^{n_k}$, consider the separable grid tensor\n$$ A=u^{(1)}\\otimes\\cdots\\otimes u^{(d)}. $$",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §2",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, Example 1.2.3 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-two-tt-truncations-realise-root-sum-squares-bound",
+        "kind": "example",
+        "title": "Two TT truncations realize the root-sum-square bound",
+        "statement": "Let $A\\in\\mathbb R^{2\\times2\\times2}$ have nonzero entries $A_{111}=3$, $A_{122}=1$, and $A_{212}=2$, with all other entries zero. Apply sequential TT-SVD with rank cap one at both cuts.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "alg-sequential-tensor-train-svd",
+          "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §2, Theorem 2.2",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, §1.2.4 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-diagonal-tensor-has-large-minimal-tt-ranks",
+        "kind": "example",
+        "title": "A diagonal tensor has large minimal TT ranks",
+        "statement": "For integers $d\\ge3$ and $n\\ge2$, let\n$$ A=\\sum_{j=1}^{n}e_j^{(1)}\\otimes e_j^{(2)}\\otimes\\cdots\\otimes e_j^{(d)} \\in\\mathbb R^{n\\times\\cdots\\times n}. $$",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, full lecture notes, Chapter 1, §1.2.3, Theorem 1.2.12 (2026)",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            },
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §2",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

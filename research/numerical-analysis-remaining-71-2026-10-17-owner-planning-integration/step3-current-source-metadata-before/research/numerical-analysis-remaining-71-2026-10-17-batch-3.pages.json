@@ -1,0 +1,518 @@
+[
+  {
+    "order": 2560,
+    "id": "spline-evaluation-and-interpolation-algorithms",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Spline evaluation and interpolation algorithms",
+    "companion": "spline-evaluation-and-interpolation-algorithms-examples",
+    "requires": [
+      "finite-precision-direct-factorizations",
+      "polynomial-interpolation-and-remainder",
+      "splines-series-and-approximation-rates",
+      "outward-rounded-interval-and-ball-arithmetic"
+    ],
+    "items": [
+      {
+        "id": "alg-de-boor-coefficient-evaluation",
+        "kind": "algorithm",
+        "title": "de Boor coefficient evaluation on a specified knot span",
+        "deps": [
+          "def-b-spline-space-and-basis",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter X, pp. 123–126",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation, §1.1",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-single-new-b-spline-knot-insertion",
+        "kind": "algorithm",
+        "title": "Single new-knot insertion for a B-spline curve",
+        "deps": [
+          "def-b-spline-space-and-basis"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter XI, pp. 135–138",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Gershon Elber, Computer Aided Geometric Design, Chapter 7, Boehm's knot insertion",
+              "url": "https://class236716.cs.technion.ac.il/wp-content/uploads/2021/04/chapter7.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-clamped-cubic-spline-interpolant",
+        "kind": "definition",
+        "title": "Clamped cubic spline interpolant",
+        "deps": [
+          "def-natural-cubic-spline"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter IV, pp. 43–45",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Brian LeMesurier, Introduction to Numerical Methods and Analysis with Python, §3.4.2",
+              "url": "https://lemesurierb.people.charleston.edu/introduction-to-numerical-methods-and-analysis-python/docs/main/piecewise-polynomial-approximation-and-splines.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-natural-cubic-spline-second-derivative-perturbation",
+        "kind": "lemma",
+        "title": "Nodal second-derivative perturbations bound the natural spline error",
+        "deps": [
+          "def-natural-cubic-spline",
+          "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots"
+        ],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter IV, pp. 42–45",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+        "kind": "algorithm",
+        "title": "Natural-cubic tridiagonal Cholesky solve with a residual certificate",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "alg-rounded-cholesky-with-failure-status",
+          "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "lem-rounded-linear-and-normal-residual-certificates",
+          "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "thm-natural-tridiagonal-cholesky-solve-residual-certificate"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §2.9",
+              "url": "https://fncbook.com/structure/"
+            },
+            {
+              "title": "A. M. Stuart and J. Voss, Matrix Analysis and Algorithms, §§2.6, 3.4, and 5.1",
+              "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+            }
+          ]
+        },
+        "statement": "Use one binary floating-point format from\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]\nwith round-to-nearest, ties-to-even, a known rational unit roundoff\n$0<u\\le1/4$, and the model's normal-or-zero success rule. Inputs are\n$r\\ge2$ finite stored real knots $x_1<\\cdots<x_r$ and finite stored real\nvalues $y_1,\\ldots,y_r$. These stored numbers are the exact interpolation\ndata; no unrecorded perturbation of the data is included. Write\n$h_i=x_{i+1}-x_i$ for their exact rational differences. If a constant $2$\nor $6$ needed by the selected branch is not representable as a finite normal\nnumber, return `input-format-failure`. Arithmetic statuses below report the\nfirst failing operation in the specified order. This algorithm makes no\nclaim that floating-point success is automatic.\n\nIf $r=2$, return `success` with endpoint second derivatives\n$\\widehat M_1=\\widehat M_2=0$ and error certificate $B=0$. The corresponding\npiece is the exact straight line. For $r\\ge3$, put $n=r-2$ and return\n`certificate-parameter-failure` unless $(n-1)u<1$.\n\nFor $r\\ge3$, assemble stored widths and secant slopes in increasing\n$i=1,\\ldots,r-1$: compute\n$\\widehat h_i=\\operatorname{fl}(x_{i+1}-x_i)$,\n$a_i=\\operatorname{fl}(y_{i+1}-y_i)$, and\n$q_i=\\operatorname{fl}(a_i/\\widehat h_i)$, in that order. At the first\nfailed operation return `assembly-range-failure(i,operation)`. Successful\nwidth subtraction gives $\\widehat h_i>0$. In increasing $k=1,\\ldots,n$,\nfor the row corresponding to knot $x_{k+1}$ compute\n$$\ns_k=\\operatorname{fl}(\\widehat h_k+\\widehat h_{k+1}),\\quad d_k=\\operatorname{fl}(2s_k),\\quad t_k=\\operatorname{fl}(q_{k+1}-q_k),\\quad f_k=\\operatorname{fl}(6t_k)\n$$\nin that order. Copy $c_k=\\widehat h_{k+1}$ for $k<n$. On failure return\n`assembly-range-failure(k,operation)`. Let $T\\in\\mathbb R^{n\\times n}$\nhave diagonal $d_k$, adjacent off-diagonal entries $c_k$, and zero entries\nelsewhere; represent it by these three diagonals, not a dense array. Let the\nstored right-hand side be $f=(f_1,\\ldots,f_n)^T$.\n\nFactor $T$ with a real lower bidiagonal factor, stored as diagonal\n$\\ell_1,\\ldots,\\ell_n$ and subdiagonal $e_1,\\ldots,e_{n-1}$. For\n$k=1,\\ldots,n$ in order, set $p_1=d_1$ by exact copy; for $k>1$ compute\n$\\zeta_k=\\operatorname{fl}(e_{k-1}e_{k-1})$ and\n$p_k=\\operatorname{fl}(d_k-\\zeta_k)$. If either operation fails, return\n`factor-range-failure(k,operation)`. If the resulting $p_k$ fails the\npublished positive-normal pivot test of\n[[alg-rounded-cholesky-with-failure-status]], return `invalid-pivot(k,p_k)`.\nOtherwise compute\n$\\ell_k=\\operatorname{fl}(\\sqrt{p_k})$; on failure or a nonpositive or\nnonnormal result return `factor-range-failure(k,operation)`. For $k<n$ compute\n$e_k=\\operatorname{fl}(c_k/\\ell_k)$ and return the same indexed factor\nstatus on failure.\n\nSolve $Lz=f$ by forward substitution in increasing index order: set\n$z_1=\\operatorname{fl}(f_1/\\ell_1)$; for $k>1$, compute\n$a=\\operatorname{fl}(e_{k-1}z_{k-1})$,\n$b=\\operatorname{fl}(f_k-a)$, and $z_k=\\operatorname{fl}(b/\\ell_k)$.\nSolve $L^T\\widehat m=z$ in decreasing order: set\n$\\widehat m_n=\\operatorname{fl}(z_n/\\ell_n)$; for $k<n$, compute\n$a=\\operatorname{fl}(e_k\\widehat m_{k+1})$,\n$b=\\operatorname{fl}(z_k-a)$, and\n$\\widehat m_k=\\operatorname{fl}(b/\\ell_k)$. At the first failed operation\nreturn `solve-range-failure(direction,k,operation)`. These are separate\nmultiply, subtract, and divide operations; no fused multiply-add is used.\nSet $\\widehat M_1=\\widehat M_r=0$ and copy the interior vector\n$\\widehat M_{k+1}=\\widehat m_k$.\n\nCompute the rounded residual in increasing row order. Within row $k$, form\nthe products $T_{kj}\\widehat m_j$ for existing columns $j$ in increasing\ncolumn order, and add them sequentially from an exact zero accumulator to\nobtain $\\widehat v_k$. Then compute\n$\\widehat w_k=\\operatorname{fl}(\\widehat v_k-f_k)$. Return the first\n`residual-range-failure(k,j,operation)` if any operation fails. Structural\nzero entries are omitted; all included products, additions, and the final\nsubtraction use the operationwise model.\n\nThe certificate calculations that follow are exact rational arithmetic on\nthe finite binary values and the rational $u$; they are not rounded\nfloating-point calculations. Define\n$$\nF_1=\\sum_{k=1}^n|d_k|+2\\sum_{k=1}^{n-1}|c_k|,\\quad X_1=\\sum_{k=1}^n|\\widehat m_k|,\\quad Y_1=\\sum_{k=1}^n|f_k|,\\quad V_1=\\sum_{k=1}^n|\\widehat v_k|,\\quad W_1=\\sum_{k=1}^n|\\widehat w_k|\n$$\nand\n$$\ng_n=\\frac{1+6u}{1-(n-1)u}-1,\\qquad C=W_1+g_nF_1X_1+u(V_1+Y_1).\n$$\nForm the exact natural-cubic matrix $A$ and right-hand side $b$ for the\noriginal stored data as in\n[[thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots]]:\n$A_{kk}=2(h_k+h_{k+1})$, $A_{k,k+1}=A_{k+1,k}=h_{k+1}$, and\n$b_k=6((y_{k+2}-y_{k+1})/h_{k+1}-(y_{k+1}-y_k)/h_k)$, with only existing\ninterior entries included; represent $A$ by its three diagonals and compute\nthe following row quantities as a stream, without allocating dense matrices.\nCompute\n$$\n\\alpha=\\max_k\\sum_j|A_{kj}-T_{kj}|,\\quad \\beta=\\max_k|b_k-f_k|,\\quad Q=\\max_k|\\widehat m_k|,\\quad \\delta=\\min_{1\\le k\\le n}(h_k+h_{k+1}),\\quad H=\\max_{1\\le i<r}h_i,\n$$\nand\n$$\nB=\\frac{H^2}{8\\delta}(C+\\alpha Q+\\beta).\n$$\nAll denominators are positive: $h_i>0$, $\\delta>0$, and\n$1-(n-1)u>0$. Return `success(\\widehat M,C,\\alpha,\\beta,B)`. If a\nresource-limited implementation cannot complete the exact rational\ncertificate, it may return `certificate-resource-failure`, which carries no\ncertified $B$.\n\nFor $r\\ge3$, associate to the returned vector $\\widehat M$ the piecewise\ncubic reconstruction on each $[x_i,x_{i+1}]$ given by\n$$\n\\widehat s_i(x)=\\frac{\\widehat M_i(x_{i+1}-x)^3+\\widehat M_{i+1}(x-x_i)^3}{6h_i}+\\left(y_i-\\frac{\\widehat M_i h_i^2}{6}\\right)\\frac{x_{i+1}-x}{h_i}+\\left(y_{i+1}-\\frac{\\widehat M_{i+1}h_i^2}{6}\\right)\\frac{x-x_i}{h_i}.\n$$\nThis reconstruction interpolates the stored data and need not be $C^1$ at an interior knot;\nit is a piecewise cubic reconstruction, not necessarily a natural spline.\nThe certificate concerns exact evaluation of these pieces. Any floating-point\nevaluation of them needs a separate piece-evaluation error allowance."
+      },
+      {
+        "id": "lem-b-spline-basis-refinement-under-single-knot-insertion",
+        "kind": "lemma",
+        "title": "A single new knot refines the B-spline basis",
+        "deps": [
+          "alg-single-new-b-spline-knot-insertion",
+          "def-b-spline-space-and-basis"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter XI, pp. 135–138",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Gershon Elber, Computer Aided Geometric Design, Chapter 7, Boehm's knot insertion",
+              "url": "https://class236716.cs.technion.ac.il/wp-content/uploads/2021/04/chapter7.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-de-boor-coefficient-evaluation-equivalence",
+        "kind": "theorem",
+        "title": "de Boor evaluation equals the B-spline coefficient expansion",
+        "deps": [
+          "alg-de-boor-coefficient-evaluation",
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter X, pp. 123–126",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation, §1.1",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-de-boor-coefficient-evaluation-work",
+        "kind": "theorem",
+        "title": "de Boor evaluation uses quadratic work in the degree",
+        "deps": [
+          "alg-de-boor-coefficient-evaluation"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter X, pp. 123–126",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+        "kind": "theorem",
+        "title": "Clamped cubic spline interpolation exists uniquely",
+        "deps": [
+          "def-clamped-cubic-spline-interpolant"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter IV, pp. 42–45",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Brian LeMesurier, Introduction to Numerical Methods and Analysis with Python, §3.4.2",
+              "url": "https://lemesurierb.people.charleston.edu/introduction-to-numerical-methods-and-analysis-python/docs/main/piecewise-polynomial-approximation-and-splines.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-natural-cubic-spline-tridiagonal-residual-transfer",
+        "kind": "theorem",
+        "title": "A natural-spline tridiagonal residual bounds the spline value error",
+        "deps": [
+          "lem-natural-cubic-spline-second-derivative-perturbation",
+          "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter IV, pp. 42–45",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+        "kind": "theorem",
+        "title": "A successful natural-cubic tridiagonal Cholesky solve has a certified residual",
+        "deps": [
+          "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+          "alg-rounded-cholesky-with-failure-status",
+          "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+          "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "lem-rounded-linear-and-normal-residual-certificates",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "lem-finite-arithmetic-schedule-termination-and-count",
+          "def-frobenius-matrix-norm",
+          "def-inner-product-norm",
+          "prop-standard-coordinate-inner-products"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §2.9",
+              "url": "https://fncbook.com/structure/"
+            },
+            {
+              "title": "A. M. Stuart and J. Voss, Matrix Analysis and Algorithms, §§2.6, 3.4, and 5.1",
+              "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+            }
+          ]
+        },
+        "statement": "Let $r\\ge3$, $n=r-2$, and use the stored input data, arithmetic model and\nalgorithm of\n[[alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate]]. If\nassembly succeeds, its stored symmetric tridiagonal matrix $T$ is positive\ndefinite. On every full successful call, the algorithm returns\n$\\operatorname{success}(\\widehat M,C,\\alpha,\\beta,B)$. Let\n$\\widehat m=(\\widehat M_2,\\ldots,\\widehat M_{r-1})$ be the interior\nsubvector, let $f$ be the stored right-hand side, and let $\\widehat w$ be the\ncomputed rounded residual vector from the algorithm's residual-evaluation\nstep. Then\n$$\n\\|T\\widehat m-f\\|_\\infty\\le C.\n$$\nFor $v\\in\\mathbb R^n$, the notation here is\n$\\|v\\|_\\infty:=\\max_{1\\le k\\le n}|v_k|$.\nThus $e=T\\widehat m-f$ is an exact right-hand-side perturbation satisfying\n$T\\widehat m=f+e$ and $\\|e\\|_\\infty\\le C$. This absolute residual\ncertificate remains valid when $\\widehat m=0$ or $f=0$.\n\nThe algorithm's factorization and two substitutions are the successful\nexecutions of the published dense rounded Cholesky and triangular-substitution\nprocedures on the same stored $T$ and $f$, after omitting only exact-zero\noperations. Their failure tests retain the published positive-normal pivot\nand operationwise range rules. Exact positive definiteness does not guarantee\nrounded success.\n\nWrite $\\widehat L$ and $z$ for the factor and forward-solve vector computed in\nthis execution. There are additional conditional backward-error statements.\nIf\n$(n+3)u<1$, lower bidiagonal $D_1$ and upper bidiagonal $D_2$ satisfy\n$$\n(\\widehat L+D_1)z=f,\\qquad (\\widehat L^T+D_2)\\widehat m=z,\\qquad |D_1|\\le\\tau|\\widehat L|,\\qquad |D_2|\\le\\tau|\\widehat L|^T,\\qquad \\tau=\\frac{(n+3)u}{1-(n+3)u}.\n$$\nIf $(20n+20)u<1/5$, put\n$g=(20n+20)u/(1-(20n+20)u)$. For the symmetric factor residual\n$E=\\widehat L\\widehat L^T-T$,\n$$\n|E|\\le100g|\\widehat L||\\widehat L|^T.\n$$\nWith\n$$\nJ=E+D_1\\widehat L^T+\\widehat L D_2+D_1D_2,\n$$\nwe have $(T+J)\\widehat m=f$ and\n$$\n|J|\\le(100g+2\\tau+\\tau^2)|\\widehat L||\\widehat L|^T.\n$$\nThe matrix $J$ need not be symmetric. If also\n$100\\sqrt n\\,g\\le1/2$, then\n$\\|E\\|_F\\le200\\sqrt n\\,g\\|T\\|_F$. The residual certificate above\nrequires only the algorithm's $(n-1)u<1$ check; it does not require these\nstronger factor and triangular-solve conditions.\n\nThe finite procedure terminates and uses $O(r)$ floating-point operations,\n$O(r)$ stored scalars, $O(r)$ exact rational operations and $O(r)$ stored\nrationals. No rational bit-complexity bound is asserted."
+      },
+      {
+        "id": "thm-de-boor-forward-error-under-operationwise-model",
+        "kind": "theorem",
+        "title": "A successful rounded de Boor evaluation has a degree-dependent forward bound",
+        "deps": [
+          "alg-de-boor-coefficient-evaluation",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-de-boor-coefficient-evaluation-equivalence"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter X, pp. 123–126",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Stuart and Voss, Matrix Analysis and Algorithms, Warwick lecture notes, floating-point model",
+              "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-single-new-knot-insertion-preserves-b-spline-curve",
+        "kind": "theorem",
+        "title": "Single new-knot insertion preserves the B-spline curve",
+        "deps": [
+          "alg-single-new-b-spline-knot-insertion",
+          "def-b-spline-space-and-basis",
+          "lem-b-spline-basis-refinement-under-single-knot-insertion"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter XI, pp. 135–138",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Gershon Elber, Computer Aided Geometric Design, Chapter 7, Boehm's knot insertion",
+              "url": "https://class236716.cs.technion.ac.il/wp-content/uploads/2021/04/chapter7.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-clamped-cubic-spline-fourth-order-error",
+        "kind": "theorem",
+        "title": "Boundary-compatible clamped cubic interpolation is fourth order in the maximum norm",
+        "deps": [
+          "def-clamped-cubic-spline-interpolant",
+          "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter V, pp. 51–56",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Brian LeMesurier, Introduction to Numerical Methods and Analysis with Python, §3.4.3, Theorem 3.5",
+              "url": "https://lemesurierb.people.charleston.edu/introduction-to-numerical-methods-and-analysis-python/docs/main/piecewise-polynomial-approximation-and-splines.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-computed-natural-cubic-spline-forward-error-certificate",
+        "kind": "theorem",
+        "title": "A computed natural-cubic reconstruction has a forward-error certificate",
+        "deps": [
+          "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+          "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+          "thm-natural-cubic-spline-tridiagonal-residual-transfer",
+          "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter IV, pp. 42–45",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Brian LeMesurier, Introduction to Numerical Methods and Analysis with Python, Chapter 3.4",
+              "url": "https://lemesurierb.people.charleston.edu/introduction-to-numerical-methods-and-analysis-python/docs/main/piecewise-polynomial-approximation-and-splines.html"
+            }
+          ]
+        },
+        "statement": "Let $r\\ge2$ and use the stored knots and values and the algorithm of\n[[alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate]]. Let\n$s$ be the exact natural cubic interpolant of those data, supplied by\n[[thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots]]. On a\nsuccessful call, let $\\widehat M$ be the returned second-derivative vector,\nput $\\widehat m=(\\widehat M_2,\\ldots,\\widehat M_{r-1})$, and let\n$\\widehat s$ be the piecewise cubic reconstruction defined by the algorithm\nfrom $\\widehat M$, evaluated exactly. For $r\\ge3$, the success output is\n$\\operatorname{success}(\\widehat M,C,\\alpha,\\beta,B)$. The algorithm\ncomputes $H$, $\\delta$, and $Q=\\|\\widehat m\\|_\\infty$ internally when\nforming $B$; these are not separate returned fields. The returned certificate\nfields satisfy\n$$\n\\|\\widehat s-s\\|_{L^\\infty([x_1,x_r])}\\le B=\\frac{H^2}{8\\delta}\\left(C+\\alpha\\|\\widehat m\\|_\\infty+\\beta\\right).\n$$\nHere $\\alpha$ and $\\beta$ account for the differences between the exact\nnatural-cubic system assembled from the stored input data and the rounded\nmatrix and right-hand side used by the factorization. If those systems are\nexactly the same, then $\\alpha=\\beta=0$ and $B=H^2C/(8\\delta)$. For $r=2$,\nboth the natural interpolant and the algorithm-defined reconstruction are\nthe straight line, and $B=0$.\n\nThe algorithm-defined reconstruction interpolates the stored data, but for $r\\ge3$\nit need not be $C^1$ at its knots and is not asserted to be an exact natural\nspline. The bound excludes floating-point error from evaluating the cubic\npieces and makes no unconditional arithmetic-success or general\nnatural-spline fourth-order claim."
+      }
+    ]
+  },
+  {
+    "order": 2561,
+    "id": "spline-evaluation-and-interpolation-algorithms-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Spline evaluation and interpolation algorithms — Examples",
+    "companion": "spline-evaluation-and-interpolation-algorithms",
+    "requires": [
+      "spline-evaluation-and-interpolation-algorithms"
+    ],
+    "items": [
+      {
+        "id": "ex-repeated-knot-de-boor-evaluation",
+        "kind": "example",
+        "title": "de Boor evaluation with a double knot",
+        "deps": [
+          "alg-de-boor-coefficient-evaluation",
+          "def-b-spline-space-and-basis",
+          "thm-de-boor-coefficient-evaluation-equivalence"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter X, pp. 123–126",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-natural-cubic-x-squared-endpoint-caveat",
+        "kind": "example",
+        "title": "The natural interpolant of x squared has a second-order endpoint error",
+        "deps": [
+          "def-natural-cubic-spline",
+          "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+          "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+          "thm-clamped-cubic-spline-fourth-order-error"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter IV, pp. 43–45",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-single-new-knot-insertion-preserves-linear-curve",
+        "kind": "example",
+        "title": "Inserting a knot leaves a linear B-spline curve fixed",
+        "deps": [
+          "alg-single-new-b-spline-knot-insertion",
+          "def-b-spline-space-and-basis",
+          "thm-single-new-knot-insertion-preserves-b-spline-curve"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter XI, pp. 135–138",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

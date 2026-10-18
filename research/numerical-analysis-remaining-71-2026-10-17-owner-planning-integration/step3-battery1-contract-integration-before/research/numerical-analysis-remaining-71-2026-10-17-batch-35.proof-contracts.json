@@ -1,0 +1,1515 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-linear-elasticity-rigid-body-gauge-system-is-nonsingular",
+    "lem-linear-elasticity-mixed-pressure-gauge-is-well-defined",
+    "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+    "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error",
+    "ex-linear-elasticity-rigid-body-stiffness-nullspace",
+    "ex-linear-elasticity-cantilever-manufactured-shear",
+    "ex-linear-elasticity-p1-volumetric-locking-fixed-mesh"
+  ],
+  "contracts": {
+    "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-elasticity-displacement-formulation-and-data",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected, and Lipschitz. Use the real spaces $V=H^1_0(D;\\mathbb R^d)$ and $Q=L^2_0(D)$, norms $\\|v\\|_V=\\|\\nabla v\\|_{L^2(D)}$ and $\\|q\\|_Q=\\|q\\|_{L^2(D)}$, and $b(v,q)=-\\int_Dq\\,\\operatorname{div}v$ as in [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]]. For a real normed space $X$, write $X'$ for its continuous real dual with operator norm $\\|F\\|_{X'}=\\sup_{\\|x\\|_X\\le1}|F(x)|$. Let $\\mu\\in L^\\infty(D;\\mathbb R)$ satisfy $0<\\mu_0\\le\\mu(x)\\le\\mu_1<\\infty$ almost everywhere, let $\\lambda\\ge0$ be a scalar, and let $f\\in V'$. For any $w,z\\in H^1(D;\\mathbb R^d)$ define $\\varepsilon(w)=(\\nabla w+\\nabla w^T)/2$ and\n$$a_\\mu(w,z)=2\\int_D\\mu\\,\\varepsilon(w):\\varepsilon(z),\\qquad \\mathcal E_\\lambda(w,z)=a_\\mu(w,z)+\\lambda\\int_D\\operatorname{div}w\\,\\operatorname{div}z,$$\nand $\\sigma_\\lambda(w)=2\\mu\\varepsilon(w)+\\lambda(\\operatorname{div}w)I_d$. The homogeneous-Dirichlet model restricts these forms to $V$, with displacement zero on the full boundary; an example may prescribe a different boundary partition but gains no well-posedness claim from this definition. This is a linear small-strain model; no nonlinear, injectivity, or contrast-independent estimate is asserted.\n\nCountable Choice is inherited through the imported Sobolev and Stokes-space conventions; this definition makes no arbitrary-index selection.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-homogeneous-dirichlet-poincare",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open, and suppose its first coordinate projection is contained in an interval $(a,b)$ of width $L=b-a$. For every real $v\\in H^1_0(D)$,\n$$\\|v\\|_{L^2(D)}\\le L\\|\\partial_1v\\|_{L^2(D)}\\le L\\|\\nabla v\\|_{L^2(D)}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-w-one-two-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. On $H^1(\\Omega)=W^{1,2}(\\Omega;\\mathbb K)$ ([[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]) define $$(u,v)_{H^1}:=(u,v)_{L^2}+\\sum_{i=1}^n(D_iu,D_iv)_{L^2},$$ with the $L^2$ inner product of [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Then $(\\cdot,\\cdot)_{H^1}$ is an inner product on the Sobolev classes whose induced norm is the $W^{1,2}$ norm of [[def-sobolev-space-wkp-and-its-norm]], and $H^1(\\Omega)$ is a Hilbert space for it. The zero-boundary space $H^1_0(\\Omega)$ is a closed subspace of $H^1(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]) and hence a Hilbert space for the restricted inner product. The pairing is linear in the first argument and conjugate-linear in the second, in the convention of [[def-real-and-complex-inner-product-space]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\n\nEvery $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ belongs to\n$W^{k,p}(\\Omega;\\mathbb K)$. Indeed $\\varphi$ is bounded with compact support,\nhence lies in $L^p(\\Omega;\\mathbb K)$ for every exponent in range, and each of\nits classical partial derivatives is again smooth and compactly supported,\nhence lies in $L^p(\\Omega;\\mathbb K)$ and is the corresponding weak derivative\nby [[lem-classical-derivatives-are-weak-derivatives]].\n\nDefine the **zero-boundary Sobolev space**\n$$W_0^{k,p}(\\Omega;\\mathbb K):=\\overline{C_c^\\infty(\\Omega;\\mathbb K)},$$\nthe closure taken in the normed space\n$(W^{k,p}(\\Omega;\\mathbb K),\\|\\cdot\\|_{W^{k,p}(\\Omega)})$ of\n[[def-sobolev-space-wkp-and-its-norm]]. The norm is a genuine norm on classes\nby [[lem-sobolev-norm-is-well-defined-and-definite]], so this is the usual\nmetric closure of a subset of a normed space: $u\\in W_0^{k,p}(\\Omega;\\mathbb K)$\nif and only if for every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with\n$\\|u-\\varphi\\|_{W^{k,p}(\\Omega)}<\\delta$. Write\n$H_0^k(\\Omega):=W_0^{k,2}(\\Omega;\\mathbb K)$ when the scalar field is fixed by\ncontext.\n\nThree warnings are part of the definition. First, this is a closure of\nalmost-everywhere classes, and all its equalities are equalities of Sobolev\nclasses. Second, no pointwise boundary values and no trace characterization\nare asserted: a description of $W_0^{k,p}$ by vanishing boundary data belongs\nto the later trace theory and is not used here. Third, the closure is defined\nfor every $1\\le p\\le\\infty$, but for $p=\\infty$ it is not claimed that every\ncompactly supported $W^{k,\\infty}(\\Omega)$ function lies in $W_0^{k,\\infty}(\\Omega)$;\nthe definition merely names the closure of the test functions.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-homogeneous-dirichlet-korn-identity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For bounded open $D\\subset\\mathbb R^d$ and $v\\in H^1_0(D;\\mathbb R^d)$, put $\\varepsilon(v)=(\\nabla v+\\nabla v^T)/2$. Then\n$$2\\|\\varepsilon(v)\\|_2^2=\\|\\nabla v\\|_2^2+\\|\\operatorname{div}v\\|_2^2,$$\nso $\\|\\nabla v\\|_2\\le\\sqrt2\\|\\varepsilon(v)\\|_2$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in its first argument, conjugate-linear\nin its second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad \\operatorname{Re}a(v,v)\\ge\\alpha\\|v\\|_V^2.$$\nLet $F:V\\to\\mathbb K$ be bounded and conjugate-linear, and let $V_h\\subseteq V$\nbe finite-dimensional. Then there are unique $u\\in V$ and $u_h\\in V_h$ with\n$$a(u,v)=F(v)\\quad(v\\in V).$$\n$$a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h).$$\nThe solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe real bilinear case uses linear functionals and reads $\\operatorname{Re}$ as\nthe identity.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $|\\varepsilon(v)|_F\\le|\\nabla v|_F$ and $|\\operatorname{div}v|\\le\\sqrt d|\\nabla v|_F$, [F4] gives $|\\mathcal E_\\lambda(u,v)|\\le(2\\mu_1+d\\lambda)\\|u\\|_V\\|v\\|_V$. The form is real, symmetric, and bounded.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3] and $\\mu\\ge\\mu_0$, $\\mathcal E_\\lambda(v,v)\\ge2\\mu_0\\|\\varepsilon(v)\\|_2^2\\ge\\mu_0\\|v\\|_V^2$; the volumetric term is nonnegative.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1]\u2013[F2], $V$ is complete in $\\|\\cdot\\|_V$. Applying [F5] to the bounded functional $f$ and the form of steps 1.1\u20131.2 yields a unique $u\\in V$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Testing with $v=u$ gives $\\mathcal E_\\lambda(u,u)=f(u)\\le\\|f\\|_{V'}\\|u\\|_V$ and, by step 1.2, $\\mu_0\\|u\\|_V^2\\le\\|f\\|_{V'}\\|u\\|_V$. If $u\\ne0$, divide by $\\mu_0\\|u\\|_V$; if $u=0$, the claimed bound is immediate. Substitution into the energy identity gives the second estimate.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The form bounds in step 1.1 and the coercivity constant $\\mu_0$ in step 1.2 satisfy the hypotheses of [F6] on every finite-dimensional conforming $V_h$. Thus its Galerkin solution is unique and the stated $M/\\alpha$ estimate is exactly $M=2\\mu_1+d\\lambda$, $\\alpha=\\mu_0$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain D is assumed nonempty. The zero Galerkin subspace is allowed and is covered by the cited C\u00e9a supplier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the zero solution satisfies the energy and displacement bounds without division."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The spatial dimension is restricted to two or three; no exponent or cardinality parameter has a one-case branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: the strict lower bound mu_0>0 supplies coercivity even when lambda=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2: lambda=0 is included because its volumetric term is nonnegative; the theorem states finite lambda."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: Countable Choice supplies the Hilbert-space and Lax\u2013Milgram branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Coercivity and boundedness imply continuous and Galerkin existence and bounds, without characterizing all elasticity forms.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Coercivity and boundedness imply continuous and Galerkin existence and bounds, without characterizing all elasticity forms.",
+            "item_sha256": "49e2634ea91d72ec36a84358973566a3da95edd932ee39dc556521b6b2f11c3a",
+            "row_sha256": "277b4c382758a734e468e5c5a17ea732ebd3cd0df98f9ea4cf7395ba1e3000f6",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Coercivity and boundedness imply continuous and Galerkin existence and bounds, without characterizing all elasticity forms.",
+            "item_sha256": "49e2634ea91d72ec36a84358973566a3da95edd932ee39dc556521b6b2f11c3a",
+            "row_sha256": "277b4c382758a734e468e5c5a17ea732ebd3cd0df98f9ea4cf7395ba1e3000f6",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An observed error bound is not asserted to imply the coefficient hypotheses or the Korn identity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "An observed error bound is not asserted to imply the coefficient hypotheses or the Korn identity.",
+            "item_sha256": "49e2634ea91d72ec36a84358973566a3da95edd932ee39dc556521b6b2f11c3a",
+            "row_sha256": "442447b68f063f535690f3f921ff6c5f88bea382c2dc433ec85bd986376d8cd2",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "An observed error bound is not asserted to imply the coefficient hypotheses or the Korn identity.",
+            "item_sha256": "49e2634ea91d72ec36a84358973566a3da95edd932ee39dc556521b6b2f11c3a",
+            "row_sha256": "442447b68f063f535690f3f921ff6c5f88bea382c2dc433ec85bd986376d8cd2",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Checked every step 1.1\u20134.1 and all ten direct dependency interfaces. The current Poincare and Korn proofs apply to full H1-zero vector fields by components; norm equivalence transfers Hilbert completeness. Pointwise strain and divergence bounds give M=2 mu1+d lambda; Korn gives alpha=mu0 even at lambda=0 and for variable measurable mu. The real Lax\u2013Milgram and Cea statements have matching Countable Choice, Hilbert and conforming finite-dimensional hypotheses. Testing with u and treating u=0 separately gives both asserted energy bounds. Vh={0} is allowed. No uniform-in-lambda primal approximation constant is claimed; no defect."
+      }
+    },
+    "lem-linear-elasticity-mixed-pressure-gauge-is-well-defined": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-zero-mean-of-zero-boundary-divergence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open. If $v\\in H^1_0(D;\\mathbb R^d)$, then $\\operatorname{div}v\\in L^2(D)$ and $\\int_D\\operatorname{div}v=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent:\n\n1. $f=g$ almost everywhere;\n2. for every measurable $A$,\n   $$\\int_A f\\,d\\mu=\\int_A g\\,d\\mu.$$\n\nFor integrable real or complex $h$, the notation in condition 2 means\n$\\int_A h\\,d\\mu:=\\int h\\chi_A\\,d\\mu$; the product is integrable because\n$|h\\chi_A|\\le|h|$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a nonempty bounded connected Lipschitz open set, where Lipschitz means that $\\partial D$ has a finite rigidly moved graph-chart atlas. Here $H^1_0(D)$ is the $H^1$-closure of $C_c^\\infty(D)$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]). Since $D$ has finite measure, Holder makes every $L^2$ class integrable, so the zero-mean condition is well-defined ([[thm-holder-inequality-for-integrals]]). Define\n$$V:=H^1_0(D;\\mathbb R^d),\\qquad Q:=L^2_0(D):=\\{q\\in L^2(D;\\mathbb R):\\int_Dq=0\\}.$$\nEquip $V$ with $\\|v\\|_V:=\\|\\nabla v\\|_{L^2(D)}$ and $Q$ with $\\|q\\|_Q:=\\|q\\|_{L^2(D)}$. The local Poincare inequality [[lem-na-homogeneous-dirichlet-poincare]] makes the first a norm equivalent to the usual $H^1$ norm. For $v\\in V$, define $\\varepsilon(v):=(\\nabla v+\\nabla v^T)/2$ and $b(v,q):=-\\int_Dq\\,\\operatorname{div}v$. For viscosity $\\nu>0$, set $a_\\nu(u,v):=2\\nu\\int_D\\varepsilon(u):\\varepsilon(v)$, where $X:Y=\\sum_{i,j}X_{ij}Y_{ij}$. The continuous domain class is all bounded connected Lipschitz $D$; the exact mini-element mesh class is the narrower polygonal/polyhedral conforming affine simplicial class.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under [A1], [F1] gives $\\operatorname{div}u\\in L^2(D)$ and $\\int_D\\operatorname{div}u=0$. By the definition of $Q_D$ in [F2], this means $\\operatorname{div}u\\in Q_D$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiplication by the finite scalar $-\\lambda$ preserves membership in the linear subspace $Q_D$. Therefore $p=-\\lambda\\operatorname{div}u\\in Q_D$. In the stated connected Lipschitz model domain, [F2] identifies $Q_D$ with $Q$, giving the model-space conclusion as well.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is inherited as a bounded open set and the item concerns an already supplied field u."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1: zero divergence gives the zero pressure in Q."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No exponent or cardinality parameter has a one-case branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis lambda>0 excludes the zero-parameter case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma is stated only for finite lambda>0, so zero and infinity are outside its claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the supplied u and scalar lambda and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement lines 30\u201332 constructs pressure from a zero-boundary displacement and concludes membership in the mean-zero space. Proof 1.1 imports zero integral of divergence; no characterization of all pressures by displacements is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Statement lines 30\u201332 constructs pressure from a zero-boundary displacement and concludes membership in the mean-zero space. Proof 1.1 imports zero integral of divergence; no characterization of all pressures by displacements is claimed.",
+            "item_sha256": "7f26a80a8b48633283a883827349da45e257769d3950cd1d168a01a06cd3acc5",
+            "row_sha256": "0e368eafddab352014b15940c5e13ce6d7b7472f30bc05cf5138880940726340",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Statement lines 30\u201332 constructs pressure from a zero-boundary displacement and concludes membership in the mean-zero space. Proof 1.1 imports zero integral of divergence; no characterization of all pressures by displacements is claimed.",
+            "item_sha256": "7f26a80a8b48633283a883827349da45e257769d3950cd1d168a01a06cd3acc5",
+            "row_sha256": "0e368eafddab352014b15940c5e13ce6d7b7472f30bc05cf5138880940726340",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 uses 'Multiplication by the finite scalar' to preserve a linear subspace. The final identification with the Stokes pressure space supplies no converse recovering a displacement from a prescribed pressure.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Proof 2.1 uses 'Multiplication by the finite scalar' to preserve a linear subspace. The final identification with the Stokes pressure space supplies no converse recovering a displacement from a prescribed pressure.",
+            "item_sha256": "7f26a80a8b48633283a883827349da45e257769d3950cd1d168a01a06cd3acc5",
+            "row_sha256": "a439325ba6856223328d5cd86510a7077eeade2a0a09e958f8d58e3580b6a41f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Proof 2.1 uses 'Multiplication by the finite scalar' to preserve a linear subspace. The final identification with the Stokes pressure space supplies no converse recovering a displacement from a prescribed pressure.",
+            "item_sha256": "7f26a80a8b48633283a883827349da45e257769d3950cd1d168a01a06cd3acc5",
+            "row_sha256": "a439325ba6856223328d5cd86510a7077eeade2a0a09e958f8d58e3580b6a41f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Independently checked Statement, F1\u2013F2 and steps 1.1\u20132.1 against the current zero-mean-divergence proof, Stokes-space definition, Countable Choice and the cited Holder, a.e.-invariance and integral-linearity statements. Finite-measure L2 embeds into L1; the integral descends to classes and its kernel is linear. Multiplication by finite -lambda preserves that kernel. The empty-domain case gives the zero space; connected Lipschitz and d=2,3 assumptions are used only for identification with the model Q. Countable Choice is explicitly inherited from smooth approximation. No defect; reader and refuter findings are empty."
+      }
+    },
+    "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-elasticity-displacement-formulation-and-data",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected, and Lipschitz. Use the real spaces $V=H^1_0(D;\\mathbb R^d)$ and $Q=L^2_0(D)$, norms $\\|v\\|_V=\\|\\nabla v\\|_{L^2(D)}$ and $\\|q\\|_Q=\\|q\\|_{L^2(D)}$, and $b(v,q)=-\\int_Dq\\,\\operatorname{div}v$ as in [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]]. For a real normed space $X$, write $X'$ for its continuous real dual with operator norm $\\|F\\|_{X'}=\\sup_{\\|x\\|_X\\le1}|F(x)|$. Let $\\mu\\in L^\\infty(D;\\mathbb R)$ satisfy $0<\\mu_0\\le\\mu(x)\\le\\mu_1<\\infty$ almost everywhere, let $\\lambda\\ge0$ be a scalar, and let $f\\in V'$. For any $w,z\\in H^1(D;\\mathbb R^d)$ define $\\varepsilon(w)=(\\nabla w+\\nabla w^T)/2$ and\n$$a_\\mu(w,z)=2\\int_D\\mu\\,\\varepsilon(w):\\varepsilon(z),\\qquad \\mathcal E_\\lambda(w,z)=a_\\mu(w,z)+\\lambda\\int_D\\operatorname{div}w\\,\\operatorname{div}z,$$\nand $\\sigma_\\lambda(w)=2\\mu\\varepsilon(w)+\\lambda(\\operatorname{div}w)I_d$. The homogeneous-Dirichlet model restricts these forms to $V$, with displacement zero on the full boundary; an example may prescribe a different boundary partition but gains no well-posedness claim from this definition. This is a linear small-strain model; no nonlinear, injectivity, or contrast-independent estimate is asserted.\n\nCountable Choice is inherited through the imported Sobolev and Stokes-space conventions; this definition makes no arbitrary-index selection.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-elasticity-near-incompressible-mixed-mini-pair",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice, as in the imported model and mini-element spaces. Use the model, spaces, and sign convention of [[def-linear-elasticity-displacement-formulation-and-data]]. For finite $\\lambda>0$, set $p=-\\lambda\\operatorname{div}u\\in Q$ and write the mixed equations\n$$\na_\\mu(u,v)+b(v,p)=f(v),\\qquad b(u,q)-\\lambda^{-1}(p,q)_{L^2(D)}=0\n$$\nfor all $v\\in V$ and $q\\in Q$. The pressure belongs to $Q$ by [[lem-linear-elasticity-mixed-pressure-gauge-is-well-defined]], which uses the zero-mean-divergence result. At the endpoint $\\lambda=\\infty$, define $\\lambda^{-1}=0$ and impose $b(u,q)=0$; this is the incompressible constraint. At $\\lambda=0$ use the primal displacement problem with $p=0$, not a mixed saddle system.\n\nFor a connected polygonal or polyhedral $D$ in dimension $d=2$ or $3$ with a conforming shape-regular affine simplicial mesh, the discrete pair $(V_h,Q_h)$ is exactly the P1-bubble/P1 mini-element pair of [[def-na-mini-element-p1-bubble-p1-spaces]]. The discrete mixed equations use the same $a_\\mu,b,\\lambda^{-1}$ and replace $V,Q$ by $V_h,Q_h$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-zero-mean-of-zero-boundary-divergence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open. If $v\\in H^1_0(D;\\mathbb R^d)$, then $\\operatorname{div}v\\in L^2(D)$ and $\\int_D\\operatorname{div}v=0$.",
+          "uses": [
+            "1.3",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-homogeneous-dirichlet-korn-identity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For bounded open $D\\subset\\mathbb R^d$ and $v\\in H^1_0(D;\\mathbb R^d)$, put $\\varepsilon(v)=(\\nabla v+\\nabla v^T)/2$. Then\n$$2\\|\\varepsilon(v)\\|_2^2=\\|\\nabla v\\|_2^2+\\|\\operatorname{div}v\\|_2^2,$$\nso $\\|\\nabla v\\|_2\\le\\sqrt2\\|\\varepsilon(v)\\|_2$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-na-continuous-stokes-divergence-infsup",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. On the spaces $V=H^1_0(D;\\mathbb R^d)$ and $Q=L^2_0(D)$ of [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]], equipped with $\\|v\\|_V=\\|\\nabla v\\|_2$, the form $b(v,q)=-\\int_Dq\\,\\operatorname{div}v$ is bounded by $\\sqrt d$. Its inf-sup constant satisfies\n$$\\inf_{q\\ne0}\\sup_{v\\ne0}\\frac{b(v,q)}{\\|v\\|_V\\|q\\|_2}\\ge C_{\\rm div}(D)^{-1}.$$",
+          "uses": [
+            "2.1",
+            "2.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-na-mini-element-fortin-stability",
+          "source_section": "Statement",
+          "quote": "On the mini-element spaces of [[def-na-mini-element-p1-bubble-p1-spaces]], there is a Fortin operator $\\Pi_h:V\\to V_h$ preserving $b(v,q_h)$ for every $q_h\\in Q_h$, with $\\|\\Pi_hv\\|_V\\le C_F\\|v\\|_V$. The constant depends only on $d$ and the mesh shape-regularity bound, not on $h$. Consequently\n$$\\beta_h\\ge (C_FC_{\\rm div}(D))^{-1}.$$",
+          "uses": [
+            "2.2",
+            "2.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-na-babuska-brezzi-kernel-coercivity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V,Q$ be real Hilbert spaces, and let $a:V\\times V\\to\\mathbb R$ and $b:V\\times Q\\to\\mathbb R$ be bounded bilinear forms. If $Q=\\{0\\}$, the theorem reduces to Lax\u2013Milgram on $V$ with $Z=V$ and $p=0$. Otherwise, if $Q\\ne\\{0\\}$, assume $V\\ne\\{0\\}$. Define $B:V\\to Q$ by $(Bv,q)_Q=b(v,q)$ and set $\\beta:=\\inf_{q\\ne0}\\sup_{v\\ne0}b(v,q)/(\\|v\\|_V\\|q\\|_Q)>0$. Suppose $Z:=\\ker B$ is closed and $a(z,z)\\ge\\alpha\\|z\\|_V^2$ on $Z$, with $\\alpha>0$. For every $F\\in V'$ and $G\\in Q'$, there is a unique $(u,p)\\in V\\times Q$ satisfying\n$$a(u,v)+b(v,p)=F(v),\\qquad b(u,q)=G(q),$$\nfor all $v\\in V,q\\in Q$. If $M_a=\\|a\\|$, then one stability bound is\n$$\\|u\\|_V\\le\\beta^{-1}\\|G\\|+\\alpha^{-1}(\\|F\\|+M_a\\beta^{-1}\\|G\\|),\\qquad \\|p\\|_Q\\le\\beta^{-1}(\\|F\\|+M_a\\|u\\|_V).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the data of [[def-linear-elasticity-displacement-formulation-and-data]]. For every finite $\\lambda\\ge0$ there is a unique $u\\in V$ such that $\\mathcal E_\\lambda(u,v)=f(v)$ for every $v\\in V$. It satisfies\n$$\n\\|u\\|_V\\le\\mu_0^{-1}\\|f\\|_{V'},\\qquad \\sqrt{\\mathcal E_\\lambda(u,u)}\\le\\mu_0^{-1/2}\\|f\\|_{V'}.\n$$\nFor every finite-dimensional conforming subspace $V_h\\subset V$, the Galerkin solution $u_h$ is unique and\n$$\n\\|u-u_h\\|_V\\le\\frac{2\\mu_1+d\\lambda}{\\mu_0}\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.\n$$",
+          "uses": [
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-w-one-two-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. On $H^1(\\Omega)=W^{1,2}(\\Omega;\\mathbb K)$ ([[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]) define $$(u,v)_{H^1}:=(u,v)_{L^2}+\\sum_{i=1}^n(D_iu,D_iv)_{L^2},$$ with the $L^2$ inner product of [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Then $(\\cdot,\\cdot)_{H^1}$ is an inner product on the Sobolev classes whose induced norm is the $W^{1,2}$ norm of [[def-sobolev-space-wkp-and-its-norm]], and $H^1(\\Omega)$ is a Hilbert space for it. The zero-boundary space $H^1_0(\\Omega)$ is a closed subspace of $H^1(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]) and hence a Hilbert space for the restricted inner product. The pairing is linear in the first argument and conjugate-linear in the second, in the convention of [[def-real-and-complex-inner-product-space]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).\n\n1. On **real** $L^2(\\mu)$ the formula\n   $$\\langle f,g\\rangle:=\\int fg\\,d\\mu$$is a well-defined inner product, linear in both variables, positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\\mu;\\mathbb C)$ the formula$$\\langle f,g\\rangle:=\\int f\\overline g\\,d\\mu$$\n   is a well-defined inner product, linear in the first variable and\n   conjugate-linear in the second, positive definite, with\n   $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu;\\mathbb C)$ is a complex\n   Hilbert space ([[def-complex-lp-and-euclidean-test-function-conventions]]).\n\nIn both cases the inner product induces exactly the established quotient\n$L^2$ norm.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\n\nEvery $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ belongs to\n$W^{k,p}(\\Omega;\\mathbb K)$. Indeed $\\varphi$ is bounded with compact support,\nhence lies in $L^p(\\Omega;\\mathbb K)$ for every exponent in range, and each of\nits classical partial derivatives is again smooth and compactly supported,\nhence lies in $L^p(\\Omega;\\mathbb K)$ and is the corresponding weak derivative\nby [[lem-classical-derivatives-are-weak-derivatives]].\n\nDefine the **zero-boundary Sobolev space**\n$$W_0^{k,p}(\\Omega;\\mathbb K):=\\overline{C_c^\\infty(\\Omega;\\mathbb K)},$$\nthe closure taken in the normed space\n$(W^{k,p}(\\Omega;\\mathbb K),\\|\\cdot\\|_{W^{k,p}(\\Omega)})$ of\n[[def-sobolev-space-wkp-and-its-norm]]. The norm is a genuine norm on classes\nby [[lem-sobolev-norm-is-well-defined-and-definite]], so this is the usual\nmetric closure of a subset of a normed space: $u\\in W_0^{k,p}(\\Omega;\\mathbb K)$\nif and only if for every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with\n$\\|u-\\varphi\\|_{W^{k,p}(\\Omega)}<\\delta$. Write\n$H_0^k(\\Omega):=W_0^{k,2}(\\Omega;\\mathbb K)$ when the scalar field is fixed by\ncontext.\n\nThree warnings are part of the definition. First, this is a closure of\nalmost-everywhere classes, and all its equalities are equalities of Sobolev\nclasses. Second, no pointwise boundary values and no trace characterization\nare asserted: a description of $W_0^{k,p}$ by vanishing boundary data belongs\nto the later trace theory and is not used here. Third, the closure is defined\nfor every $1\\le p\\le\\infty$, but for $p=\\infty$ it is not claimed that every\ncompactly supported $W^{k,\\infty}(\\Omega)$ function lies in $W_0^{k,\\infty}(\\Omega)$;\nthe definition merely names the closure of the test functions.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-na-homogeneous-dirichlet-poincare",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open, and suppose its first coordinate projection is contained in an interval $(a,b)$ of width $L=b-a$. For every real $v\\in H^1_0(D)$,\n$$\\|v\\|_{L^2(D)}\\le L\\|\\partial_1v\\|_{L^2(D)}\\le L\\|\\nabla v\\|_{L^2(D)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-linear-elasticity-mixed-pressure-gauge-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open, let $0<\\lambda<\\infty$, and let $u\\in H^1_0(D;\\mathbb R^d)$. Since $D$ has finite measure, H\u00f6lder's inequality makes every $L^2(D)$ representative integrable, and almost-everywhere equal representatives have the same integral. Thus the local mean-zero space\n$$Q_D:=\\left\\{q\\in L^2(D;\\mathbb R):\\int_Dq=0\\right\\}.$$\nSet $p=-\\lambda\\operatorname{div}u$. Then $p\\in Q_D$. If additionally $d\\in\\{2,3\\}$ and $D$ is nonempty, connected, and Lipschitz, this $Q_D$ is exactly the space $Q=L^2_0(D)$ of [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]], so $p$ belongs to the mixed elasticity model's pressure space.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The pointwise bounds $|\\varepsilon(v)|_F\\le|\\nabla v|_F$ and $|\\operatorname{div}v|\\le\\sqrt d|\\nabla v|_F$, together with [F9], give $|a_\\mu(u,v)|\\le2\\mu_1\\|u\\|_V\\|v\\|_V$ and $|b(v,q)|\\le\\sqrt d\\|v\\|_V\\|q\\|_Q$. By [F3], $a_\\mu(v,v)\\ge2\\mu_0\\|\\varepsilon(v)\\|_2^2\\ge\\mu_0\\|v\\|_V^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The space $V$ is a closed subspace of $H^1(D;\\mathbb R^d)$ and its gradient norm is equivalent to the $H^1$ norm by [F8]; $Q$ is the closed kernel of the bounded integral functional on $L^2(D)$. Thus both are real Hilbert spaces under [A1]. Also $Q\\ne\\{0\\}$: two disjoint positive-measure balls inside $D$ give a nonzero difference of indicator functions with zero integral. And $V\\ne\\{0\\}$: choose a ball $B(x_0,r)$ with closure in $D$ and set $\\phi(x)=\\exp(-1/(r^2-|x-x_0|^2))$ inside it and zero outside. Its derivatives vanish at the sphere, so $\\phi\\in C_c^\\infty(D)$ is nonzero and $(\\phi,0,\\ldots,0)\\in V$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F8",
+            "F9",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For finite $\\lambda>0$, take the primal solution from [F7] and set $p_\\lambda=-\\lambda\\operatorname{div}u_\\lambda$. By [F2, F10], $p_\\lambda\\in Q$. Then $a_\\mu(u_\\lambda,v)+b(v,p_\\lambda)=a_\\mu(u_\\lambda,v)+\\lambda(\\operatorname{div}u_\\lambda,\\operatorname{div}v)=f(v)$, while $b(u_\\lambda,q)-\\lambda^{-1}(p_\\lambda,q)=-(\\operatorname{div}u_\\lambda,q)+(\\operatorname{div}u_\\lambda,q)=0$. Conversely, any mixed solution has $s=\\operatorname{div}u+\\lambda^{-1}p\\in Q$ by [F2]; its second equation gives $(s,q)=0$ for every $q\\in Q$, hence $s=0$ by choosing $q=s$. It therefore solves the unique primal equation and has the same pressure.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F2",
+            "F7",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $\\lambda=0$, use the primal solution and set $p_0=0$ by convention. At $\\lambda=\\infty$, apply [F6] to $V,Q$, $a=a_\\mu$, and $b$ with $G=0$: [F1] and step 1.1 give bounded forms, step 1.1 gives coercivity on all of $V$, [F4] gives the inf-sup bound, and step 1.2 gives real Hilbert spaces with both $V,Q$ nonzero. This yields a unique mean-zero pair $(u_\\infty,p_\\infty)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For each discrete pair, [F5] supplies a positive $\\beta_h$ bounded below independently of $h$. For finite $\\lambda>0$ or $\\lambda=\\infty$, write $c=\\lambda^{-1}\\ge0$, with $c=0$ at infinity. A homogeneous discrete mixed solution $(w_h,r_h)$ satisfies $a_\\mu(w_h,v_h)+b(v_h,r_h)=0$ and $b(w_h,q_h)-c(r_h,q_h)=0$. Test with $v_h=w_h$ and $q_h=r_h$ and subtract the second equality from the first to get $a_\\mu(w_h,w_h)+c\\|r_h\\|_Q^2=0$. Step 1.1 forces $w_h=0$, and then discrete inf-sup forces $r_h=0$. The square finite-dimensional block matrix is injective, hence bijective, so the discrete system has a unique solution for every right-hand side.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The same stability estimate applies to any solution of $a_\\mu(w,v)+b(v,r)=F(v)$, $b(w,q)-c(r,q)=G(q)$ when the inf-sup constant is $\\beta>0$. Put $U=\\|w\\|_V$, $P=\\|r\\|_Q$, $F_0=\\|F\\|_{V'}$, and $G_0=\\|G\\|_{Q'}$. Testing with $v=w$ and $q=r$ and subtracting gives $\\mu_0U^2\\le F_0U+G_0P$. The first equation and inf-sup give $\\beta P\\le F_0+2\\mu_1U$. With $S=F_0+G_0$ and $A=1+2\\mu_1/\\beta$, substitution, using $F_0G_0\\le S^2/4$, yields $\\mu_0U^2\\le ASU+S^2/(4\\beta)$. Solving this quadratic gives $U\\le C_US$, where $C_U=(A+\\sqrt{A^2+\\mu_0/\\beta})/(2\\mu_0)$; then $P\\le C_PS$ with $C_P=\\beta^{-1}(1+2\\mu_1C_U)$. Thus $U+P\\le C_*S$ for $C_*=C_U+C_P$, and these constants do not depend on $c$.",
+          "step": "2.3",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0<\\lambda\\le\\mu_0$, let $P_h:Q\\to Q_h$ be the $L^2$-orthogonal projection. It exists uniquely: in a basis of the finite-dimensional $Q_h$, its defining normal equations have the positive-definite Gram matrix $((q_i,q_j))$, and orthogonality gives $\\|p-P_hp\\|_Q=\\inf_{q_h\\in Q_h}\\|p-q_h\\|_Q$. The second mixed equation gives $p_h=-\\lambda P_h\\operatorname{div}u_h$. Hence the first is the symmetric discrete equation $a_h(u_h,v_h)=f(v_h)$, where $a_h(w,v)=a_\\mu(w,v)+\\lambda(P_h\\operatorname{div}w,P_h\\operatorname{div}v)$. It is bounded by $M_0=2\\mu_1+d\\mu_0$ and coercive by $\\mu_0$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "step 1.3",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any $w_h\\in V_h$, subtract the equation for $a_h(w_h,\\cdot)$ from the continuous primal equation. For every $v_h\\in V_h$ this gives $a_h(u_h-w_h,v_h)=a_h(u-w_h,v_h)+\\lambda((I-P_h)\\operatorname{div}u,(I-P_h)\\operatorname{div}v_h)$. Since $p=-\\lambda\\operatorname{div}u$, $\\lambda(I-P_h)\\operatorname{div}u=-(I-P_h)p$; orthogonal projection gives $\\|I-P_h\\|\\le1$, while $\\|\\operatorname{div}v_h\\|_2\\le\\sqrt d\\|v_h\\|_V$, so Cauchy\u2013Schwarz bounds the remainder by $\\sqrt d\\|p-P_hp\\|_Q\\|v_h\\|_V$. Testing with $v_h=u_h-w_h$ and using coercivity yields the displacement estimate; if $u_h=w_h$ it is immediate, and otherwise divide by $\\mu_0\\|u_h-w_h\\|_V$ and take the infimum over $w_h$: $\\|u-u_h\\|_V\\le\\left(1+\\frac{M_0}{\\mu_0}\\right)\\inf_{w_h\\in V_h}\\|u-w_h\\|_V+\\frac{\\sqrt d}{\\mu_0}\\inf_{q_h\\in Q_h}\\|p-q_h\\|_Q$. Moreover, $p-p_h=(I-P_h)p-\\lambda P_h\\operatorname{div}(u-u_h)$, so $\\|p-p_h\\|_Q\\le\\inf_{q_h\\in Q_h}\\|p-q_h\\|_Q+\\mu_0\\sqrt d\\|u-u_h\\|_V$. Adding these bounds gives the claimed product-space best-approximation estimate with a constant depending only on $d,\\mu_0,\\mu_1$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F9",
+            "step 1.3",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Testing the continuous primal equation with $u$ and the equivalent discrete $a_h$ equation with $u_h$, coercivity gives $\\|u\\|_V,\\|u_h\\|_V\\le\\mu_0^{-1}\\|f\\|_{V'}$. The pressure identities and $\\lambda\\le\\mu_0$ then give $\\|p\\|_Q\\le\\lambda\\sqrt d\\|u\\|_V\\le\\sqrt d\\|f\\|_{V'}$ and $\\|p_h\\|_Q\\le\\lambda\\sqrt d\\|u_h\\|_V\\le\\sqrt d\\|f\\|_{V'}$.",
+          "step": "4.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "step 1.3",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $\\lambda=0$, [F7] gives the solution bounds and the displacement estimate with constant $2\\mu_1/\\mu_0$; $p_0=p_{h,0}=0$. For $0<\\lambda\\le\\mu_0$, step 4.2 gives uniform solution bounds and step 4.1 the uniform best-approximation estimate. For $\\lambda\\ge\\mu_0$ or $\\lambda=\\infty$, step 2.3 with the continuous inf-sup bound [F4] and discrete bound [F5] gives uniform solution bounds. For the same upper range, $c=\\lambda^{-1}\\le\\mu_0^{-1}$ and $|\\mathcal A_\\lambda((u,p),(v,q))|\\le2\\mu_1\\|u\\|_V\\|v\\|_V+\\sqrt d\\|v\\|_V\\|p\\|_Q+\\sqrt d\\|u\\|_V\\|q\\|_Q+\\mu_0^{-1}\\|p\\|_Q\\|q\\|_Q$, so its product-space operator norm is at most $M=2\\mu_1+2\\sqrt d+\\mu_0^{-1}$, independently of $\\lambda$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F7",
+            "F9",
+            "step 2.3",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Write $\\|(v,q)\\|_{V\\times Q}=\\|v\\|_V+\\|q\\|_Q$. Let $x=(u,p)$ be the continuous solution, $x_h=(u_h,p_h)$ its Galerkin solution, and fix $y_h=(v_h,q_h)\\in V_h\\times Q_h$. Galerkin orthogonality gives $\\mathcal A_\\lambda(x_h-y_h,z_h)=\\mathcal A_\\lambda(x-y_h,z_h)$ for every $z_h=(w_h,r_h)$. Thus $x_h-y_h$ solves the discrete mixed system with data $F_h(w_h)=\\mathcal A_\\lambda(x-y_h,(w_h,0))$ and $G_h(r_h)=\\mathcal A_\\lambda(x-y_h,(0,r_h))$. The bound on $\\mathcal A_\\lambda$ gives $\\|F_h\\|+\\|G_h\\|\\le2M\\|x-y_h\\|_{V\\times Q}$. Applying the stability bound of step 2.3 with $\\beta\\ge\\min(C_{\\rm div}(D)^{-1},\\beta_*)>0$, then the triangle inequality and the infimum over $y_h$, gives the required estimate with a constant at most $1+2MC_*$. Combining this with steps 1.3\u20132.1, 2.2, 4.1\u20134.2, and 5.1 covers every $\\lambda\\in[0,\\infty]$.",
+          "step": "6.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 4.1",
+            "step 4.2",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 constructs a nonzero mean-zero pressure, verifying the required nontrivial pressure space on the nonempty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.3: zero data give S=0 and the stability inequalities force U=P=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The spatial dimension is restricted to two or three; no exponent or cardinality parameter has a one-case branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.3: mu_0>0 and the stated positive inf-sup constants keep the stability constants nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 6.1 cover lambda=0 and lambda=infinity, respectively, and combine the finite-parameter ranges."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 use Countable Choice for Hilbert completeness and the continuous Babu\u0161ka\u2013Brezzi branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Uniform mixed stability gives the error estimate, without characterizing all stable discretizations by a rate.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Uniform mixed stability gives the error estimate, without characterizing all stable discretizations by a rate.",
+            "item_sha256": "57ba5b33fe3a79788909bb2b7cc32c33f9f113fd7f4d376b3a39086c4464d3a8",
+            "row_sha256": "d63ac3f91c6e5c8475cc86b795d3f2ef8d719cd0b49f0e9579a93af73694289d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Uniform mixed stability gives the error estimate, without characterizing all stable discretizations by a rate.",
+            "item_sha256": "57ba5b33fe3a79788909bb2b7cc32c33f9f113fd7f4d376b3a39086c4464d3a8",
+            "row_sha256": "d63ac3f91c6e5c8475cc86b795d3f2ef8d719cd0b49f0e9579a93af73694289d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The uniform estimate does not imply robustness beyond the stated heterogeneous-coefficient dependence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "The uniform estimate does not imply robustness beyond the stated heterogeneous-coefficient dependence.",
+            "item_sha256": "57ba5b33fe3a79788909bb2b7cc32c33f9f113fd7f4d376b3a39086c4464d3a8",
+            "row_sha256": "3e92b1abb056536c9ad504124424057dfc313b93f6070a845256e06e21356120",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "The uniform estimate does not imply robustness beyond the stated heterogeneous-coefficient dependence.",
+            "item_sha256": "57ba5b33fe3a79788909bb2b7cc32c33f9f113fd7f4d376b3a39086c4464d3a8",
+            "row_sha256": "3e92b1abb056536c9ad504124424057dfc313b93f6070a845256e06e21356120",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Independently reviewed all steps 1.1\u20136.1 and all sixteen direct dependency interfaces, including complete current continuous-inf-sup, MINI Fortin and Babuska\u2013Brezzi proofs. The real Hilbert, nonzero-space, mean-zero pressure, full Dirichlet and shape-regular conforming mesh assumptions match. Finite positive lambda equivalence follows by testing s=div u+p/lambda in Q; at infinity the same test with div u gives exact incompressibility; at zero the primal convention avoids division. Rechecked the energy subtraction sign and the quadratic stability constant for arbitrary data and c>=0 (including zero data). In the lower range 0<lambda<=mu0, the orthogonal-projection elimination, consistency remainder and pressure error identities yield the stated lambda-independent best approximation. In the upper range c<=1/mu0 the bounded mixed form and discrete stability applied to Galerkin orthogonality give the product estimate. Constants may depend on domain and coefficient bounds, never on h or lambda. Corroborated the MINI construction with Guermond Chapter 54 Lemma 54.5, pp. 411\u2013412. No defect."
+      }
+    },
+    "lem-linear-elasticity-rigid-body-gauge-system-is-nonsingular": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-linear-elasticity-rigid-body-nullspace-gauge",
+          "source_section": "Definition",
+          "quote": "Let $K\\in\\mathbb R^{N\\times N}$ be symmetric positive semidefinite, let $R\\in\\mathbb R^{N\\times r}$ have full column rank and satisfy $\\ker K=\\operatorname{range}R$, and let $f\\in\\mathbb R^N$ be compatible in the sense $R^Tf=0$. Define the gauge solve as the procedure:\n\n1. Form the square augmented matrix and right-hand side\n$$\n\\begin{bmatrix}K&R\\\\R^T&0\\end{bmatrix},\\qquad \\begin{bmatrix}f\\\\0\\end{bmatrix}.\n$$\n2. Solve for $(u,\\gamma)\\in\\mathbb R^N\\times\\mathbb R^r$.\n3. Return $u$, which is the representative satisfying $R^Tu=0$.\n\nThe input hypotheses must be checked for the particular stiffness matrix. The procedure does not identify an omitted nullspace or assert a load is compatible.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $(x,\\eta)$ lies in the nullspace of the augmented matrix. Then $Kx+R\\eta=0$ and $R^Tx=0$. Multiplying the first equation by $x^T$ gives $x^TKx+x^TR\\eta=0$, and the second equation makes the second term zero; hence $x^TKx=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $y\\in\\mathbb R^N$ and $t\\in\\mathbb R$, positive semidefiniteness gives $(x+ty)^TK(x+ty)=2t y^TKx+t^2y^TKy\\ge0$. If $y^TKx\\ne0$, choosing $t$ with the opposite sign and sufficiently small magnitude makes the right side negative. Thus $y^TKx=0$ for every $y$, so $Kx=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\ker K=\\operatorname{range}R$, write $x=Ra$. Then $0=R^Tx=R^TRa$; full column rank makes $R^TR$ positive definite, so $a=0$ and $x=0$. The first null equation now gives $R\\eta=0$, and full column rank yields $\\eta=0$. The augmented square matrix is injective and therefore nonsingular by finite-dimensional rank-nullity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Nonsingularity gives a unique solution for every right-hand side. For the right-hand side $[f;0]$, multiply $Ku+R\\gamma=f$ by $R^T$. Symmetry of $K$ and $KR=0$ imply $R^TK=0$, so $R^TR\\gamma=R^Tf=0$ and positive definiteness gives $\\gamma=0$. Hence $Ku=f$ and $R^Tu=0$. Conversely, any vector satisfying those two equations with multiplier zero solves the augmented system, so its uniqueness follows from step 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1: finite-dimensional injectivity implies nonsingularity, including the zero-dimensional matrix case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1: the homogeneous augmented null vector is forced to be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: the Gram-matrix and rank-nullity argument also covers one-dimensional matrices."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require R to have full column rank and ker K=range R; rank-deficient inputs are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or limiting endpoint occurs in the matrix statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is finite-dimensional linear algebra and selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: Step 4.1 multiplies the augmented equation by the rigid-mode transpose, obtaining zero multiplier from compatibility and full column rank, and hence the constrained displacement equations.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Step 4.1 multiplies the augmented equation by the rigid-mode transpose, obtaining zero multiplier from compatibility and full column rank, and hence the constrained displacement equations.",
+            "item_sha256": "03835d6cb5e0f9bc3419ce5c4b08b9987ed321bd9efe39e7d981f95915b9fdb5",
+            "row_sha256": "6699e5a5de11ad63fee457953cb89250998ec9db08b876f97dc72442f09d4847",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Step 4.1 multiplies the augmented equation by the rigid-mode transpose, obtaining zero multiplier from compatibility and full column rank, and hence the constrained displacement equations.",
+            "item_sha256": "03835d6cb5e0f9bc3419ce5c4b08b9987ed321bd9efe39e7d981f95915b9fdb5",
+            "row_sha256": "6699e5a5de11ad63fee457953cb89250998ec9db08b876f97dc72442f09d4847",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 inserts any constrained displacement together with multiplier zero into the augmented system; the nullspace argument in step 3.1 proves uniqueness.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Step 4.1 inserts any constrained displacement together with multiplier zero into the augmented system; the nullspace argument in step 3.1 proves uniqueness.",
+            "item_sha256": "03835d6cb5e0f9bc3419ce5c4b08b9987ed321bd9efe39e7d981f95915b9fdb5",
+            "row_sha256": "9f734b31a4df2d524256aac3ac9ca597d79647a3c2a4d7a648132d8334f43fa6",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Step 4.1 inserts any constrained displacement together with multiplier zero into the augmented system; the nullspace argument in step 3.1 proves uniqueness.",
+            "item_sha256": "03835d6cb5e0f9bc3419ce5c4b08b9987ed321bd9efe39e7d981f95915b9fdb5",
+            "row_sha256": "9f734b31a4df2d524256aac3ac9ca597d79647a3c2a4d7a648132d8334f43fa6",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Two-degree stiffness with one rigid mode",
+          "method": "exact matrix calculation",
+          "input": {
+            "K": "diag(1,0)",
+            "R": "(0,1)^T",
+            "f": "(g,0)^T"
+          },
+          "calculation": "The augmented matrix is [[1,0,0],[0,0,1],[0,1,0]], with determinant -1. Solving gives u=(g,0)^T and gamma=0.",
+          "expected": {
+            "determinant": "-1",
+            "gauge_solution": "(g,0)",
+            "multiplier": "0"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "ex-linear-elasticity-cantilever-manufactured-shear": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-elasticity-displacement-formulation-and-data",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected, and Lipschitz. Use the real spaces $V=H^1_0(D;\\mathbb R^d)$ and $Q=L^2_0(D)$, norms $\\|v\\|_V=\\|\\nabla v\\|_{L^2(D)}$ and $\\|q\\|_Q=\\|q\\|_{L^2(D)}$, and $b(v,q)=-\\int_Dq\\,\\operatorname{div}v$ as in [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]]. For a real normed space $X$, write $X'$ for its continuous real dual with operator norm $\\|F\\|_{X'}=\\sup_{\\|x\\|_X\\le1}|F(x)|$. Let $\\mu\\in L^\\infty(D;\\mathbb R)$ satisfy $0<\\mu_0\\le\\mu(x)\\le\\mu_1<\\infty$ almost everywhere, let $\\lambda\\ge0$ be a scalar, and let $f\\in V'$. For any $w,z\\in H^1(D;\\mathbb R^d)$ define $\\varepsilon(w)=(\\nabla w+\\nabla w^T)/2$ and\n$$a_\\mu(w,z)=2\\int_D\\mu\\,\\varepsilon(w):\\varepsilon(z),\\qquad \\mathcal E_\\lambda(w,z)=a_\\mu(w,z)+\\lambda\\int_D\\operatorname{div}w\\,\\operatorname{div}z,$$\nand $\\sigma_\\lambda(w)=2\\mu\\varepsilon(w)+\\lambda(\\operatorname{div}w)I_d$. The homogeneous-Dirichlet model restricts these forms to $V$, with displacement zero on the full boundary; an example may prescribe a different boundary partition but gains no well-posedness claim from this definition. This is a linear small-strain model; no nonlinear, injectivity, or contrast-independent estimate is asserted.\n\nCountable Choice is inherited through the imported Sobolev and Stokes-space conventions; this definition makes no arbitrary-index selection.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The gradient of $u=(0,x)$ is $\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix}$, so $\\varepsilon(u)=\\begin{pmatrix}0&1/2\\\\1/2&0\\end{pmatrix}$ and $\\operatorname{div}u=0$. Hence [F1] gives $\\sigma_\\lambda(u)=\\begin{pmatrix}0&\\mu\\\\\\mu&0\\end{pmatrix}$, independent of $\\lambda$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The stress is constant, so its row-wise divergence is zero. The displacement vanishes at $x=0$. Multiplication by the outward unit normals $(1,0)$, $(0,1)$, and $(0,-1)$ on the right, top, and bottom edges gives the three displayed tractions.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty unit square D=(0,1)^2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero field u(x,y)=(0,x); it makes no zero-field assertion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes dimension two and has no exponent or cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The coefficient hypothesis is mu>0; no zero-viscosity case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: lambda=0 is included and the computed stress is independent of every lambda>=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The field, domain, and boundary normals are explicit; the verification makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The manufactured shear explicitly satisfies its displayed boundary tractions, without characterizing all solutions of the mixed elasticity problem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The manufactured shear explicitly satisfies its displayed boundary tractions, without characterizing all solutions of the mixed elasticity problem.",
+            "item_sha256": "9aa8ed0c20c90027f73ab68e1671deec3f51b6c4592af84abd2bff53bd76bea0",
+            "row_sha256": "f370c429d84aef2760b73c804144c5a9099461a3ad64b6eb56745e4526de6d2c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The manufactured shear explicitly satisfies its displayed boundary tractions, without characterizing all solutions of the mixed elasticity problem.",
+            "item_sha256": "9aa8ed0c20c90027f73ab68e1671deec3f51b6c4592af84abd2bff53bd76bea0",
+            "row_sha256": "f370c429d84aef2760b73c804144c5a9099461a3ad64b6eb56745e4526de6d2c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Matching these tractions is not used to infer uniqueness with partial Dirichlet data, which the statement expressly declines to assert.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Matching these tractions is not used to infer uniqueness with partial Dirichlet data, which the statement expressly declines to assert.",
+            "item_sha256": "9aa8ed0c20c90027f73ab68e1671deec3f51b6c4592af84abd2bff53bd76bea0",
+            "row_sha256": "6de6135a034b2e751574b557bc64f82a085c7e69dddc736b12bcb6be8c069e7b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Matching these tractions is not used to infer uniqueness with partial Dirichlet data, which the statement expressly declines to assert.",
+            "item_sha256": "9aa8ed0c20c90027f73ab68e1671deec3f51b6c4592af84abd2bff53bd76bea0",
+            "row_sha256": "6de6135a034b2e751574b557bc64f82a085c7e69dddc736b12bcb6be8c069e7b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [
+        {
+          "name": "Exact shear stress and edge tractions",
+          "method": "symbolic matrix multiplication",
+          "input": {
+            "displacement": "(0,x)",
+            "mu": "mu>0",
+            "lambda": "lambda>=0"
+          },
+          "calculation": "grad u=[[0,0],[1,0]], epsilon=[[0,1/2],[1/2,0]], div u=0, sigma=[[0,mu],[mu,0]]. Multiplication by right, top, and bottom normals yields (0,mu), (mu,0), and (-mu,0).",
+          "expected": {
+            "stress": "[[0,mu],[mu,0]]",
+            "right": "(0,mu)",
+            "top": "(mu,0)",
+            "bottom": "(-mu,0)"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Checked the complete Statement and verification 1.1\u20132.1 against the current displacement definition and Countable Choice definition. Recomputed grad u, symmetric strain, zero divergence and constant off-diagonal stress; multiplying by the right/top/bottom outward normals gives (0,mu), (mu,0), (-mu,0). The left clamp is satisfied and the row-wise stress divergence vanishes, including lambda=0. The partial Dirichlet partition does not invoke the full-Dirichlet existence theorem and makes no uniqueness assertion. No defect; no choice is used by the calculation."
+      }
+    },
+    "ex-linear-elasticity-rigid-body-stiffness-nullspace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-linear-elasticity-rigid-body-nullspace-gauge",
+          "source_section": "Definition",
+          "quote": "Let $K\\in\\mathbb R^{N\\times N}$ be symmetric positive semidefinite, let $R\\in\\mathbb R^{N\\times r}$ have full column rank and satisfy $\\ker K=\\operatorname{range}R$, and let $f\\in\\mathbb R^N$ be compatible in the sense $R^Tf=0$. Define the gauge solve as the procedure:\n\n1. Form the square augmented matrix and right-hand side\n$$\n\\begin{bmatrix}K&R\\\\R^T&0\\end{bmatrix},\\qquad \\begin{bmatrix}f\\\\0\\end{bmatrix}.\n$$\n2. Solve for $(u,\\gamma)\\in\\mathbb R^N\\times\\mathbb R^r$.\n3. Return $u$, which is the representative satisfying $R^Tu=0$.\n\nThe input hypotheses must be checked for the particular stiffness matrix. The procedure does not identify an omitted nullspace or assert a load is compatible.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On each nondegenerate simplex, an affine map is uniquely determined by its values at the $d+1$ affinely independent vertices, so its nodal P1 interpolant equals it. On each shared face the affine traces are determined by the same face-vertex values, so they agree and define a global continuous member of $S_h$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\Omega$ is skew-symmetric, $\\varepsilon(r)=(\\Omega+\\Omega^T)/2=0$ and $\\operatorname{div}r=\\operatorname{tr}\\Omega=0$. Thus the stiffness bilinear form pairs $r$ to zero with every test basis function, which is exactly $Kr=0$ in coefficient coordinates. By [F1], every complete gauge basis must span these null vectors, although other null modes are not excluded here.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a connected conforming mesh of nondegenerate affine simplices."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the zero rigid motion is included and is annihilated by K."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has spatial dimension two or three and no scalar endpoint parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim only gives rigid motions in the kernel and explicitly does not assert that they exhaust it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No scalar limiting parameter occurs in the example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The affine nodal representation and matrix pairing are finite explicit constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every affine rigid translation or infinitesimal rotation has zero symmetric gradient and gives a stiffness-kernel vector. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "Every affine rigid translation or infinitesimal rotation has zero symmetric gradient and gives a stiffness-kernel vector. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "3741fcb187a8e2c8a48ba364250f54d28e9a29e24ce961f89ce0fb65dbc61c5d",
+            "row_sha256": "5ce2222322c855950e1739366f27d7ee20cba4c71393eb6251eca22e8ae0ada7",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "Every affine rigid translation or infinitesimal rotation has zero symmetric gradient and gives a stiffness-kernel vector. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "3741fcb187a8e2c8a48ba364250f54d28e9a29e24ce961f89ce0fb65dbc61c5d",
+            "row_sha256": "5ce2222322c855950e1739366f27d7ee20cba4c71393eb6251eca22e8ae0ada7",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every affine rigid translation or infinitesimal rotation has zero symmetric gradient and gives a stiffness-kernel vector. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "Every affine rigid translation or infinitesimal rotation has zero symmetric gradient and gives a stiffness-kernel vector. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "3741fcb187a8e2c8a48ba364250f54d28e9a29e24ce961f89ce0fb65dbc61c5d",
+            "row_sha256": "53716cd822a40f4ef19f8d79a2cf6f74ebe214ac3c093dc54a5d967f44437025",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "Every affine rigid translation or infinitesimal rotation has zero symmetric gradient and gives a stiffness-kernel vector. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "3741fcb187a8e2c8a48ba364250f54d28e9a29e24ce961f89ce0fb65dbc61c5d",
+            "row_sha256": "53716cd822a40f4ef19f8d79a2cf6f74ebe214ac3c093dc54a5d967f44437025",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Planar infinitesimal rotation",
+          "method": "exact affine-gradient calculation",
+          "input": {
+            "rigid_motion": "r(x,y)=(-y,x)",
+            "omega": "[[0,-1],[1,0]]"
+          },
+          "calculation": "The affine nodal interpolant is exact, epsilon=(omega+omega^T)/2=0 and div r=tr(omega)=0, so every stiffness pairing with this coefficient vector vanishes.",
+          "expected": {
+            "stiffness_action": "K r=0"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example"
+    },
+    "ex-linear-elasticity-p1-volumetric-locking-fixed-mesh": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the data of [[def-linear-elasticity-displacement-formulation-and-data]]. For every finite $\\lambda\\ge0$ there is a unique $u\\in V$ such that $\\mathcal E_\\lambda(u,v)=f(v)$ for every $v\\in V$. It satisfies\n$$\n\\|u\\|_V\\le\\mu_0^{-1}\\|f\\|_{V'},\\qquad \\sqrt{\\mathcal E_\\lambda(u,u)}\\le\\mu_0^{-1/2}\\|f\\|_{V'}.\n$$\nFor every finite-dimensional conforming subspace $V_h\\subset V$, the Galerkin solution $u_h$ is unique and\n$$\n\\|u-u_h\\|_V\\le\\frac{2\\mu_1+d\\lambda}{\\mu_0}\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.\n$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the model and mixed conventions of [[def-linear-elasticity-displacement-formulation-and-data]] and [[def-linear-elasticity-near-incompressible-mixed-mini-pair]]. Let $D$ be bounded, connected, and Lipschitz, $d\\in\\{2,3\\}$, $0<\\mu_0\\le\\mu\\le\\mu_1$, and $f\\in V'$. For every $\\lambda\\in[0,\\infty]$ the continuous problem has a unique solution; at $\\lambda=0$ use the primal problem and set $p_0=0$, while at $\\lambda=\\infty$ impose $\\operatorname{div}u=0$. If $D$ is polygonal or polyhedral and $\\{\\mathcal T_h\\}$ is any conforming shape-regular affine simplicial mesh family with a common shape-regularity bound, the mini-element discrete problem has a unique solution for every $h$ and every $\\lambda\\in[0,\\infty]$, with $p_{h,0}=0$. There is a constant $C$ depending only on $d,D,\\mu_0,\\mu_1$ and the common shape-regularity bound, but independent of $\\lambda$ and $h$, such that\n$$\\|u_\\lambda\\|_V+\\|p_\\lambda\\|_Q\\le C\\|f\\|_{V'},\\qquad \\|u_\\lambda-u_{h,\\lambda}\\|_V+\\|p_\\lambda-p_{h,\\lambda}\\|_Q\\le C\\inf_{v_h\\in V_h,\\,q_h\\in Q_h}\\bigl(\\|u_\\lambda-v_h\\|_V+\\|p_\\lambda-q_h\\|_Q\\bigr).$$\nAt $\\lambda=\\infty$ the constraint is $\\operatorname{div}u=0$. The estimate makes no heterogeneous-coefficient robustness claim beyond the displayed dependence.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-na-mini-element-p1-bubble-p1-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$, $d=2$ or $3$, be a bounded connected Lipschitz polygonal/polyhedral domain with a conforming shape-regular affine simplicial mesh $\\mathcal T_h$. On a simplex $K$ with barycentric coordinates $\\lambda_0,\\ldots,\\lambda_d$, define the scalar interior bubble $b_K=(d+1)^{d+1}\\prod_{i=0}^d\\lambda_i$. Let\n$$S^1_h=\\{w\\in C^0(\\overline D):w|_K\\in P_1(K)\\},\\quad S^1_{h,0}=S^1_h\\cap H^1_0(D).$$\nThe **mini-element spaces** are\n$$V_h=[S^1_{h,0}]^d\\oplus\\bigoplus_{K\\in\\mathcal T_h}b_K\\mathbb R^d\\subset H^1_0(D;\\mathbb R^d),\\qquad Q_h=S^1_h\\cap L^2_0(D).$$\nEach bubble is extended by zero off its cell. The zero-boundary conformity of the piecewise affine part is supplied by [[thm-zero-boundary-piecewise-polynomials-in-w10p]]. The local/global dimensions are proved in the next dimension lemma.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\n\nEvery $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ belongs to\n$W^{k,p}(\\Omega;\\mathbb K)$. Indeed $\\varphi$ is bounded with compact support,\nhence lies in $L^p(\\Omega;\\mathbb K)$ for every exponent in range, and each of\nits classical partial derivatives is again smooth and compactly supported,\nhence lies in $L^p(\\Omega;\\mathbb K)$ and is the corresponding weak derivative\nby [[lem-classical-derivatives-are-weak-derivatives]].\n\nDefine the **zero-boundary Sobolev space**\n$$W_0^{k,p}(\\Omega;\\mathbb K):=\\overline{C_c^\\infty(\\Omega;\\mathbb K)},$$\nthe closure taken in the normed space\n$(W^{k,p}(\\Omega;\\mathbb K),\\|\\cdot\\|_{W^{k,p}(\\Omega)})$ of\n[[def-sobolev-space-wkp-and-its-norm]]. The norm is a genuine norm on classes\nby [[lem-sobolev-norm-is-well-defined-and-definite]], so this is the usual\nmetric closure of a subset of a normed space: $u\\in W_0^{k,p}(\\Omega;\\mathbb K)$\nif and only if for every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with\n$\\|u-\\varphi\\|_{W^{k,p}(\\Omega)}<\\delta$. Write\n$H_0^k(\\Omega):=W_0^{k,2}(\\Omega;\\mathbb K)$ when the scalar field is fixed by\ncontext.\n\nThree warnings are part of the definition. First, this is a closure of\nalmost-everywhere classes, and all its equalities are equalities of Sobolev\nclasses. Second, no pointwise boundary values and no trace characterization\nare asserted: a description of $W_0^{k,p}$ by vanishing boundary data belongs\nto the later trace theory and is not used here. Third, the closure is defined\nfor every $1\\le p\\le\\infty$, but for $p=\\infty$ it is not claimed that every\ncompactly supported $W^{k,\\infty}(\\Omega)$ function lies in $W_0^{k,\\infty}(\\Omega)$;\nthe definition merely names the closure of the test functions.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-na-homogeneous-dirichlet-korn-identity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For bounded open $D\\subset\\mathbb R^d$ and $v\\in H^1_0(D;\\mathbb R^d)$, put $\\varepsilon(v)=(\\nabla v+\\nabla v^T)/2$. Then\n$$2\\|\\varepsilon(v)\\|_2^2=\\|\\nabla v\\|_2^2+\\|\\operatorname{div}v\\|_2^2,$$\nso $\\|\\nabla v\\|_2\\le\\sqrt2\\|\\varepsilon(v)\\|_2$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $\\eta(t)=\\exp(-1/((t-1/4)(3/4-t)))$ for $1/4<t<3/4$ and $\\eta(t)=0$ otherwise. At each endpoint every derivative from the interior is a finite sum of reciprocal-distance powers multiplied by $\\exp(-c/\\text{distance})$ for some $c>0$, hence tends to zero; so $\\eta\\in C_c^\\infty(0,1)$. Put $\\psi(x,y)=\\eta(x)\\eta(y)$ and $u=(\\partial_y\\psi,-\\partial_x\\psi)$. Equality of mixed derivatives gives $\\operatorname{div}u=0$. Since $\\eta(1/2)>0$ and $\\eta(1/4)=0$, the mean value theorem gives $y\\in(1/4,1/2)$ with $\\eta'(y)>0$; hence $u_1(1/2,y)=\\eta(1/2)\\eta'(y)>0$. Thus $u\\ne0$ and is compactly supported in $D$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $f=-\\operatorname{div}(2\\varepsilon(u))\\in C_c^\\infty(D;\\mathbb R^2)$. For $v\\in C_c^\\infty(D;\\mathbb R^2)$, integration by parts and symmetry of $2\\varepsilon(u)$ give $2(\\varepsilon(u),\\varepsilon(v))=(f,v)$. By [A1, F5], choose such tests converging to any given $v\\in V$ in $H^1$; [F4] makes both pairings continuous under this convergence, so the identity holds for every $v\\in V$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "A P1 vector field in this mesh vanishes at every boundary vertex and is determined by its center value $z=(a,b)$. On the bottom triangle the edge vectors from the center to its corners are $(-1/2,-1/2)$ and $(1/2,-1/2)$; its affine gradient $G$ maps both to $-z$. Subtracting gives the first column of $G$ zero, and adding gives the second column $(2a,2b)$, so divergence is $2b$. On the right triangle the edge vectors are $(1/2,-1/2)$ and $(1/2,1/2)$; subtraction gives the second column zero and addition the first column $(-2a,-2b)$, hence divergence is $-2a$. On the top triangle the edge vectors are $(1/2,1/2)$ and $(-1/2,1/2)$; subtraction gives the first column zero and addition the second column $(-2a,-2b)$, hence divergence is $-2b$. On the left triangle the edge vectors are $(-1/2,1/2)$ and $(-1/2,-1/2)$; subtraction gives the second column zero and addition the first column $(2a,2b)$, hence divergence is $2a$. If all four divergences vanish, then $a=b=0$, so the elementwise divergence-free subspace is exactly $\\{0\\}$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\operatorname{div}u=0$, the volumetric term vanishes and step 1.2 gives $\\mathcal E_\\lambda(u,v)=f(v)$ for every $v\\in V$ and every finite $\\lambda\\ge0$. By [F1], this identifies the same nonzero $u$ as the unique continuous solution for each such $\\lambda$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $u_{h,\\lambda}$ be the P1 Galerkin solution, which exists uniquely by [F1]. Testing with $u_{h,\\lambda}$, using [F6] with $\\mu=1$, and applying [F4] gives $\\|u_{h,\\lambda}\\|_V\\le\\|f\\|_{V'}$ and $\\lambda\\|\\operatorname{div}u_{h,\\lambda}\\|_2^2\\le\\|f\\|_{V'}^2$. Thus along every sequence $\\lambda_n\\to\\infty$ the discrete solutions are bounded in the finite-dimensional P1 space and have a convergent subsequence; the divergence of its limit is zero because the divergence norms tend to zero and convergence in $H^1$ implies convergence of divergence in $L^2$. The limit is zero by step 1.3. If the full family did not converge to zero, a sequence bounded away from zero would have such a zero-convergent subsequence, a contradiction. Hence $u_{h,\\lambda}\\to0$ and the reverse triangle inequality gives $\\|u-u_{h,\\lambda}\\|_V\\to\\|u\\|_V>0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The mini mixed comparison is exactly the scoped result [F2] under the spaces [F3]; its estimate keeps the best-approximation term and its constant is independent of $\\lambda$ on this mesh family. No conclusion about a P1 rate as $h\\to0$ is used.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty unit square and its four nondegenerate fan triangles."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.3, and 3.1: the continuous exact field is nonzero, the only discrete divergence-free P1 field is zero, and the discrete limit is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes dimension two and has no exponent or cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The viscosity is fixed at mu=1 and the mesh is nondegenerate and shape regular."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1, 3.1, and 4.1: the primal endpoint, P1 limit as lambda tends to infinity, and mini mixed uniform estimate are handled."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2: Countable Choice selects the H^1_0 approximating sequence used to extend the integration-by-parts identity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fixed fan mesh has no nonzero divergence-free P1 field and hence exhibits the stated volumetric locking.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The fixed fan mesh has no nonzero divergence-free P1 field and hence exhibits the stated volumetric locking.",
+            "item_sha256": "e8d4157c8cfdf3ef8fa5136ef52bd684f1c94f699021fd805a50f1326200fdbc",
+            "row_sha256": "6520db7f5e0fa973fb7e1b7088ffb0223c45d84e3654b973993568939a1cd79f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The fixed fan mesh has no nonzero divergence-free P1 field and hence exhibits the stated volumetric locking.",
+            "item_sha256": "e8d4157c8cfdf3ef8fa5136ef52bd684f1c94f699021fd805a50f1326200fdbc",
+            "row_sha256": "6520db7f5e0fa973fb7e1b7088ffb0223c45d84e3654b973993568939a1cd79f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Locking on another mesh is not claimed to imply this center-node geometry or its two-coefficient calculation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "Locking on another mesh is not claimed to imply this center-node geometry or its two-coefficient calculation.",
+            "item_sha256": "e8d4157c8cfdf3ef8fa5136ef52bd684f1c94f699021fd805a50f1326200fdbc",
+            "row_sha256": "8ef7ab3c3d516d43907064f12607f5a9fee5cab1b87f8bb6c8bf97ccec82bf83",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "Locking on another mesh is not claimed to imply this center-node geometry or its two-coefficient calculation.",
+            "item_sha256": "e8d4157c8cfdf3ef8fa5136ef52bd684f1c94f699021fd805a50f1326200fdbc",
+            "row_sha256": "8ef7ab3c3d516d43907064f12607f5a9fee5cab1b87f8bb6c8bf97ccec82bf83",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [
+        {
+          "name": "Four fan-triangle P1 divergences",
+          "method": "exact affine-gradient calculation",
+          "input": {
+            "center_value": "(a,b)",
+            "boundary_vertex_values": "(0,0)"
+          },
+          "calculation": "The bottom, right, top, and left triangle divergences are respectively 2b, -2a, -2b, and 2a. Their simultaneous vanishing is equivalent to a=b=0.",
+          "expected": {
+            "divergences": [
+              "2b",
+              "-2a",
+              "-2b",
+              "2a"
+            ],
+            "divergence_free_dimension": 0
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Independently checked Statement, verification 1.1\u20134.1 and all nine direct dependencies, completing supplier reviews first. The explicit bump has vanishing endpoint derivatives; its rotated gradient is compactly supported, solenoidal and nonzero by the displayed mean-value argument. Integration by parts extends to H1-zero tests and f defines a bounded V-dual functional by Cauchy\u2013Schwarz and Poincare. Recomputed bottom/right/top/left affine divergences as 2b,-2a,-2b,2a, so their joint kernel is zero. Korn and the tested energy identity bound the discrete V norm and lambda times squared divergence; finite-dimensional subsequence compactness then forces every limit to zero, including the full parameter family by contradiction. Nonzero u has positive gradient norm and the reverse triangle inequality gives the positive limiting error. The same fixed mesh satisfies the MINI theorem hypotheses; its best-approximation term is retained and no h-uniform P1 rate is claimed. No defect."
+      }
+    }
+  }
+}

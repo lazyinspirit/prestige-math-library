@@ -1,0 +1,964 @@
+[
+  {
+    "order": 2630,
+    "id": "discrete-de-rham-complexes-and-edge-elements",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Discrete de Rham complexes and edge-element foundations",
+    "companion": "discrete-de-rham-complexes-and-edge-elements-examples",
+    "requires": [
+      "mixed-hdiv-fluxes-and-darcy-discretization",
+      "simply-connected-plane-domains",
+      "the-de-rham-theorem-and-degree",
+      "geodesics-the-exponential-map-completeness-and-hopf-rinow"
+    ],
+    "items": [
+      {
+        "id": "def-na-hcurl-space",
+        "kind": "definition",
+        "title": "The real H(curl) graph space on a polyhedron",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-test-function-space-d-of-an-open-set",
+          "def-test-function-topology",
+          "lem-test-function-lf-topology-universal-property",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-countable-choice",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define the vector-valued distributional curl, graph norm, and all domain and field conventions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice for weak-derivative uniqueness and the real $L^2$ product below, and let $\\Omega\\subset\\mathbb R^3$ be open. Here $L^2(\\Omega;\\mathbb R^3)$ is the set of triples of real scalar $L^2$ classes from [[def-l-p-space-as-a-quotient-by-null-functions]]. Define\n$$ (u,v)_{L^2(\\Omega)}:=\\sum_{j=1}^3\\int_\\Omega u_jv_j\\,dx,\\qquad \\|u\\|_{L^2(\\Omega)}^2:=\\sum_{j=1}^3\\|u_j\\|_{L^2(\\Omega)}^2. $$\nEach scalar pairing is well-defined and induces its quotient norm by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]; the finite sum is therefore a real inner product on the triple space with the displayed norm. A test field $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb R^3)$ means a triple of real-valued members of the test-function space $\\mathcal D(\\Omega)$ of [[def-test-function-space-d-of-an-open-set]]. Writing $\\varphi=(\\varphi_x,\\varphi_y,\\varphi_z)$, its classical curl is the coordinate expression of [[def-divergence-and-curl-of-a-c1-vector-field]],\n$$\\operatorname{curl}\\varphi=(\\partial_y\\varphi_z-\\partial_z\\varphi_y,\\partial_z\\varphi_x-\\partial_x\\varphi_z,\\partial_x\\varphi_y-\\partial_y\\varphi_x).$$\nFor $u\\in L^2(\\Omega;\\mathbb R^3)$, its distributional curl is the triple of scalar distributions whose action on a vector test field is the sum of the three component pairings, determined by\n$$\\langle \\operatorname{curl}u,\\varphi\\rangle=\\int_\\Omega u\\cdot\\operatorname{curl}\\varphi\\,dx,\\qquad \\varphi\\in C_c^\\infty(\\Omega;\\mathbb R^3).$$\nThe integral is finite because $u$ and the smooth compactly supported field $\\operatorname{curl}\\varphi$ are componentwise in $L^2$ and scalar Cauchy–Schwarz applies. On tests supported in a fixed compact $K\\Subset\\Omega$, the same estimate gives $|\\langle\\operatorname{curl}u,\\varphi\\rangle|\\le C_{u,K}\\max_{|\\alpha|\\le1}\\sup_K|D^\\alpha\\varphi|$ with a finite $C_{u,K}$. This proves continuity on each fixed-support test space; the LF universal property of [[lem-test-function-lf-topology-universal-property]], for the test topology of [[def-test-function-topology]], makes the pairing a vector distribution on $\\Omega$.\nIf this vector distribution is represented by an $L^2(\\Omega;\\mathbb R^3)$ class, that class is unique almost everywhere componentwise by the injection of locally integrable functions into scalar distributions in [[thm-locally-integrable-functions-embed-in-distributions]], under the stated Countable Choice assumption.\nDefine\n$$H(\\operatorname{curl};\\Omega)=\\{u\\in L^2(\\Omega;\\mathbb R^3):\\operatorname{curl}u\\text{ is represented by an element of }L^2(\\Omega;\\mathbb R^3)\\}$$\nwith graph norm $\\|u\\|_{H(\\operatorname{curl};\\Omega)}^2=\\|u\\|_{L^2(\\Omega)}^2+\\|\\operatorname{curl}u\\|_{L^2(\\Omega)}^2$. No boundary condition is imposed by this definition. Fields are real-valued; equality is equality of almost-everywhere classes."
+      },
+      {
+        "id": "lem-na-contractible-lipschitz-polyhedron-boundary-connected",
+        "kind": "lemma",
+        "title": "The boundary of a bounded contractible Lipschitz polyhedron is connected",
+        "statement": "Assume AC. A nonempty bounded contractible Lipschitz polyhedron $\\Omega\\subset\\mathbb R^3$ has nonempty connected boundary. In particular the connected-boundary clause of the regular-decomposition theorem follows from the domain assumptions in the discrete-compactness theorem.",
+        "deps": [
+          "thm-topological-collaring-for-manifold-boundaries",
+          "thm-poincare-lefschetz-duality",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "def-singular-chain-complex-and-singular-homology",
+          "def-singular-cohomology-with-coefficients",
+          "def-axiom-of-choice",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf",
+              "locator": "Section 2.2, second Betti number and boundary components; the full topological derivation is local below."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-na-lipschitz-scalar-h1-h2-extension",
+        "kind": "lemma",
+        "title": "Scalar H1 and H2 extension across a bounded Lipschitz boundary",
+        "statement": "Assume the Axiom of Choice. Let $D\\subset\\mathbb R^3$ be a nonempty bounded open set whose boundary is locally a Lipschitz graph, with $D$ on one side in each chart. It need not be connected. There is one linear operator $E:H^1(D)\\to H^1(\\mathbb R^3)$ with $Ef=f$ almost everywhere on $D$, which maps $H^2(D)$ boundedly into $H^2(\\mathbb R^3)$. Its support can be confined to a fixed bounded neighborhood of $\\overline D$. The bounds depend only on a finite choice of boundary charts and cutoffs. In particular no mesh enters them.",
+        "deps": [
+          "thm-sobolev-spaces-are-banach-spaces",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "cor-poincare-wirtinger-on-convex-domains",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "def-axiom-of-choice",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "thm-dominated-convergence",
+          "thm-heine-borel-rn",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf",
+              "locator": "Lemma 1; the reflected-Whitney construction below supplies rather than assumes the quoted extension result for orders 1 and 2."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-na-graded-whitney-mesh-size-and-boundary-shifts",
+        "kind": "lemma",
+        "title": "Graded Whitney mesh size and inward and outward boundary shifts",
+        "statement": "Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded Lipschitz polyhedron with a matching shape-regular affine tetrahedral mesh $\\mathcal T_h$. There are a positive continuous piecewise affine function $g_h$, a smooth bounded vector field $b$ on a neighborhood of $\\overline\\Omega$, and positive constants $c,C,r,\\epsilon_0$, independent of the mesh, with the following properties. On $K$, $c h_K\\le g_h\\le C h_K$ and $\\operatorname{Lip}(g_h)\\le C$, where $h_K=\\operatorname{diam}K$. Put\n$$F_{t,y}^{\\pm}(x)=x+t g_h(x)(\\pm b(x)+r y),\\qquad |y|\\le1,\\quad 0<t\\le\\epsilon_0.$$\nThe maps are uniformly bi-Lipschitz on their domain. For the plus sign, $F_{t,y}^{+}(\\overline\\Omega)\\subset\\Omega$. For the minus sign, $F_{t,y}^{-}(\\partial\\Omega)\\subset\\mathbb R^3\\setminus\\overline\\Omega$, at distance at least $ctg_h(x)$ from $\\partial\\Omega$. The same interior distance lower bound holds for the plus sign at boundary points. The images of $K$ and all homotopies $s\\mapsto F_{st,y}^{\\pm}(x)$, $x\\in K$, lie within distance $Ct h_K$ of $K$. Their intersections with $\\Omega$ are contained in a vertex patch $\\omega_K$ of uniformly bounded overlap, after decreasing $\\epsilon_0$ if necessary. All constants may depend on $\\Omega$ and the shape-regularity bound. No ratio of global maximum to minimum mesh size occurs.",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-na-lowest-order-whitney-de-rham-spaces",
+        "kind": "definition",
+        "title": "Lowest-order Whitney and Nedelec de Rham spaces",
+        "deps": [
+          "def-na-hcurl-space",
+          "def-matching-affine-simplicial-meshes",
+          "def-oriented-simplicial-cell-chains",
+          "def-covariant-contravariant-piola-maps-and-hdiv-hcurl",
+          "thm-affine-piola-differential-and-trace-moment-identities",
+          "def-na-hdiv-space"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define continuous P1, first-family lowest-order Nedelec, RT0, and cellwise P0 spaces, their orientations, affine transport, and global conformity conventions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "statement": "Let $\\Omega\\subset\\mathbb R^3$ have a finite matching affine tetrahedral mesh $\\mathcal T$ as in [[def-matching-affine-simplicial-meshes]]. The H(curl) and H(div) graph-space conventions used below carry their stated Countable Choice assumptions. Choose one orientation for every mesh edge and face and the ambient orientation for each tetrahedron, with incidence signs given by [[def-oriented-simplicial-cell-chains]]. Write $t_e$ for the unit tangent in the chosen direction of an edge $e$, and $n_F$ for the unit normal determined by the chosen orientation of a face $F$ and the ambient orientation. On a tetrahedron $K$ with barycentric coordinates $\\lambda_0,\\lambda_1,\\lambda_2,\\lambda_3$, list the vertices in any order and let $P_1(K)$ denote scalar polynomials of total degree at most one. For an ordered edge $[i,j]$, put $\\phi_{ij}=\\lambda_i\\nabla\\lambda_j-\\lambda_j\\nabla\\lambda_i$; reversing its orientation changes the sign. Set\n$$W_h^0:=\\{q\\in C^0(\\overline\\Omega):q|_K\\in P_1(K)\\text{ for every }K\\in\\mathcal T\\}.$$\nThe first-family lowest-order Nedelec space is\n$$N_h^1:=\\{u\\in H(\\operatorname{curl};\\Omega):u|_K\\in\\operatorname{span}\\{\\phi_{ij}:0\\le i<j\\le3\\}\\text{ for every }K\\in\\mathcal T,\\text{ and every global edge }e\\text{ has one common oriented circulation }\\int_e u|_K\\cdot t_e\\,ds\\text{ for all }K\\supset e\\}.$$\nThe local Raviart–Thomas space is $RT_0(K)=\\{a+c x:a\\in\\mathbb R^3,\\ c\\in\\mathbb R\\}$. With $H(\\operatorname{div};\\Omega)$ as defined by [[def-na-hdiv-space]], set\n$$N_h^2:=\\{v\\in H(\\operatorname{div};\\Omega):v|_K\\in RT_0(K)\\text{ for every }K\\in\\mathcal T,\\text{ and every global face }F\\text{ has one common oriented flux }\\int_F v|_K\\cdot n_F\\,dS\\text{ for all }K\\supset F\\},\\qquad N_h^3:=\\{q\\in L^2(\\Omega):q|_K\\text{ is constant for every }K\\in\\mathcal T\\}.$$\nThe covariant affine Piola map for $N_h^1$ and contravariant affine Piola map for $N_h^2$ use the orientation-preserving cell maps and conventions of [[def-covariant-contravariant-piola-maps-and-hdiv-hcurl]]. Their differential and moment identities are those of [[thm-affine-piola-differential-and-trace-moment-identities]]. The edge, face, and cell degrees of freedom are respectively the oriented edge circulation, oriented face-normal flux, and cell integral.\n\nIn the two conformity conditions above, each cellwise polynomial restriction has a unique polynomial representative on its closed cell, and those representatives define the displayed edge and face integrals. Thus the global edge and face moments are part of the assembled-space definition; their correspondence with all cochains is proved by the local unisolvence and commuting-moment items, not inferred from rough-field traces."
+      },
+      {
+        "id": "def-na-zero-tangential-hcurl",
+        "kind": "definition",
+        "title": "Zero tangential trace H(curl) space",
+        "deps": [
+          "def-na-hcurl-space"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define the zero tangential space as the H(curl)-closure of compactly supported smooth vector fields and state the boundary convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf"
+            }
+          ]
+        },
+        "statement": "Let $\\Omega\\subset\\mathbb R^3$ be open and set\n$$H_0(\\operatorname{curl};\\Omega):=\\overline{C_c^\\infty(\\Omega;\\mathbb R^3)}^{\\,H(\\operatorname{curl};\\Omega)},$$\nwhere the norm is that of [[def-na-hcurl-space]]. This is the closure-defined zero-tangential subspace used on this page. Identifying this closure with the full kernel of a particular boundary trace map is not part of the definition."
+      },
+      {
+        "id": "lem-na-compact-support-hcurl-fourier-splitting",
+        "kind": "lemma",
+        "title": "A whole-space Fourier splitting for compactly supported H(curl) fields",
+        "statement": "Assume AC. Let $U\\in H(\\operatorname{curl};\\mathbb R^3)$ be real and supported in a fixed bounded measurable set $A$ of finite measure. There are real fields $w\\in H^1(\\mathbb R^3;\\mathbb R^3)$ and $p\\in H^1(\\mathbb R^3)$ depending linearly on $U$ such that $U=w+\\nabla p$, $\\operatorname{div}w=0$, $\\operatorname{curl}w=\\operatorname{curl}U$, and\n$$\\|w\\|_2\\le\\|U\\|_2,\\qquad \\|\\nabla w\\|_2=\\|\\operatorname{curl}U\\|_2,\\qquad \\|p\\|_{H^1}\\le C_A\\|U\\|_2.$$",
+        "deps": [
+          "thm-plancherel",
+          "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "def-na-hcurl-space",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf",
+              "locator": "Lemma 3 and Theorem 2, Step 2; the low-frequency scalar potential is constructed explicitly below."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-na-weak-local-potentials-and-continuation",
+        "kind": "lemma",
+        "title": "Local weak scalar potentials and continuation on a simply connected open set",
+        "statement": "Assume AC. Let $G\\subset\\mathbb R^3$ be a nonempty open connected set, and let $v\\in L^2_{\\mathrm{loc}}(G;\\mathbb R^3)$ have zero distributional curl. Every ball compactly contained in $G$ has an $H^1$ primitive of $v$. If every based loop in $G$ is homotopic to a constant loop fixing its basepoint, these local primitives glue to $f\\in H^1_{\\mathrm{loc}}(G)$ with $\\nabla f=v$. Such $f$ is unique up to a constant. This assertion alone does not assert global $L^2$ integrability of $f$ on $G$.",
+        "deps": [
+          "def-na-hcurl-space",
+          "thm-poincare-inequality-on-a-ball",
+          "thm-zero-weak-gradient-implies-componentwise-constancy",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "def-axiom-of-choice",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "thm-lebesgue-number-lemma",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf",
+              "locator": "Section 2.2, equation (8); the weak continuation argument is supplied explicitly here."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-na-hcurl-curlfree-potential-contractible",
+        "kind": "lemma",
+        "title": "Weak curl-free fields on a contractible polyhedron are gradients",
+        "deps": [
+          "def-na-hcurl-space",
+          "lem-na-weak-local-potentials-and-continuation",
+          "lem-contractibility-implies-trivial-fundamental-group",
+          "lem-na-lipschitz-scalar-h1-h2-extension",
+          "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions",
+          "thm-zero-weak-gradient-implies-componentwise-constancy",
+          "thm-fatou-lemma",
+          "thm-dominated-convergence",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Prove local H1 potentials by mollification on balls, glue their constants using null-homotopy of loops, and establish global H1 integrability on the bounded Lipschitz domain.",
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded connected contractible Lipschitz polyhedron. If $u\\in H(\\operatorname{curl};\\Omega)$ has distributional curl zero, then there is $p\\in H^1(\\Omega)$ with $u=\\nabla p$ almost everywhere; $p$ is unique up to an additive constant.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-na-canonical-edge-moments-not-bounded-on-hcurl",
+        "kind": "counterexample",
+        "title": "Canonical edge moments are not bounded on H(curl)",
+        "deps": [
+          "def-na-hcurl-space",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-countable-choice",
+          "lem-smooth-bump-between-concentric-euclidean-balls"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use gradients of smooth vertex cutoffs whose H(curl) norms tend to zero while one edge circulation stays equal to one.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "statement": "For a fixed tetrahedral edge $e$, the canonical edge-circulation functional $u\\mapsto\\int_eu\\cdot t_e\\,ds$ extends to a bounded linear functional on $H(\\operatorname{curl};\\Omega)$."
+      },
+      {
+        "id": "def-na-curl-curl-kernel-quotient-gauge",
+        "kind": "definition",
+        "title": "Kernel quotient and gauge for discrete curl-curl",
+        "deps": [
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-hcurl-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the discrete curl kernel, its L2-orthogonal gauge complement, the quotient energy norm, and the multiplier formulation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice for the graph-space uniqueness and $L^2$ conventions of [[def-na-hcurl-space]]. Let $V_h=N_h^1$ be the lowest-order edge space on a finite tetrahedral mesh, as in [[def-na-lowest-order-whitney-de-rham-spaces]]. It is finite dimensional: restriction to the finitely many cells injects it into the finite product of the local spaces, each spanned by at most six Whitney edge fields. Injectivity holds because the cells cover $\\Omega$ up to their measure-zero facets. Use the componentwise real $L^2$ inner product defined in [[def-na-hcurl-space]]. Define its curl kernel and the $L^2$ gauge space by\n$$K_h:=\\{v_h\\in V_h:\\operatorname{curl}v_h=0\\},\\qquad Z_h:=V_h\\cap K_h^\\perp.$$\nThe quotient $\\dot V_h:=V_h/K_h$ has norm $\\|[v_h]\\|_{\\operatorname{curl}}:=\\|\\operatorname{curl}v_h\\|_{L^2(\\Omega)}$; this is well-defined and positive definite because two representatives differ by an element of $K_h$. The bilinear form induced by curl-curl is $a_h([u_h],[v_h])=(\\operatorname{curl}u_h,\\operatorname{curl}v_h)_{L^2}$. A representative of a quotient solution is fixed by the gauge condition $u_h\\in Z_h$. The mixed gauge system uses a multiplier $p_h\\in K_h$:\n$$a_h(u_h,v_h)+(p_h,v_h)_{L^2}=f(v_h)\\quad(v_h\\in V_h),\\qquad (u_h,q_h)_{L^2}=0\\quad(q_h\\in K_h).$$\nThe quotient energy norm, rather than the full $H(\\operatorname{curl})$ norm, is the norm controlled by this definition."
+      },
+      {
+        "id": "lem-na-nedelec-edge-unisolvence",
+        "kind": "lemma",
+        "title": "Lowest-order Nedelec edge circulation unisolvence",
+        "deps": [
+          "def-na-lowest-order-whitney-de-rham-spaces"
+        ],
+        "dependency_level": 2,
+        "strategy": "Show the six oriented edge circulation functionals are dual to the six Whitney edge basis functions on a tetrahedron and verify the local polynomial-space dimension.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "statement": "On an oriented tetrahedron $K$ with vertices $x_0,x_1,x_2,x_3$, let $\\phi_{ij}=\\lambda_i\\nabla\\lambda_j-\\lambda_j\\nabla\\lambda_i$ for $0\\le i<j\\le3$. Then the six edge circulations $\\ell_{rs}(v)=\\int_{[x_r,x_s]}v\\cdot t_{rs}\\,ds$ satisfy $\\ell_{rs}(\\phi_{ij})=\\delta_{(r,s),(i,j)}$. The six functions form a basis of the local space $\\operatorname{span}\\{\\phi_{ij}:i<j\\}=\\{a+b\\times x:a,b\\in\\mathbb R^3\\}$, so these edge circulations are unisolvent degrees of freedom."
+      },
+      {
+        "id": "lem-na-weak-hcurl-tangential-trace",
+        "kind": "lemma",
+        "title": "Weak tangential trace on a Lipschitz polyhedron",
+        "deps": [
+          "def-na-hcurl-space",
+          "def-na-zero-tangential-hcurl",
+          "def-matching-affine-simplicial-meshes",
+          "def-oriented-simplicial-cell-chains",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "lem-compact-support-zero-extension-in-wkp",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the boundary action on the H1 trace quotient by Green duality, prove lift independence and boundedness, and recover n cross u for smooth fields.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf"
+            }
+          ]
+        },
+        "statement": "Let $\\Omega\\subset\\mathbb R^3$ be a bounded Lipschitz polyhedron admitting a finite matching affine tetrahedral mesh as in [[def-matching-affine-simplicial-meshes]]. Use the product spaces $H^1(\\Omega;\\mathbb R^3):=(H^1(\\Omega;\\mathbb R))^3$ and $H_0^1(\\Omega;\\mathbb R^3):=(H_0^1(\\Omega;\\mathbb R))^3$, with $\\|v\\|_{H^1}^2:=\\sum_{j=1}^3(\\|v_j\\|_2^2+\\sum_{|\\alpha|=1}\\|D^\\alpha v_j\\|_2^2)$, using the scalar conventions of [[def-sobolev-space-wkp-and-its-norm]] and [[def-wkp-zero-as-a-sobolev-closure]]. Put $T(\\partial\\Omega):=H^1(\\Omega;\\mathbb R^3)/H_0^1(\\Omega;\\mathbb R^3)$ with quotient norm $\\|[v]\\|_T:=\\inf_{z\\in H_0^1}\\|v+z\\|_{H^1}$, and write $T(\\partial\\Omega)'$ for its real norm dual. For $u\\in H(\\operatorname{curl};\\Omega)$, the formula\n$$\\langle\\gamma_\\tau u,[v]\\rangle:=\\int_\\Omega(\\operatorname{curl}u\\cdot v-u\\cdot\\operatorname{curl}v)\\,dx$$\ndefines a bounded linear functional on $T(\\partial\\Omega)$, independent of the representative $v$. For smooth $u$ and smooth $v$ it equals $\\int_{\\partial\\Omega}(n\\times u)\\cdot v\\,dS$. Thus $\\gamma_\\tau u$ is the weak tangential trace in the trace-quotient norm. In particular, every element of [[def-na-zero-tangential-hcurl]] has zero weak tangential trace. No converse characterization of that closure is asserted here."
+      },
+      {
+        "id": "lem-na-lipschitz-support-and-zero-boundary-closure",
+        "kind": "lemma",
+        "title": "Whole-space support and the zero-boundary Sobolev closure",
+        "statement": "Assume AC. Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded open set with Lipschitz boundary.\n\n1. An $H^1(\\mathbb R^3)$ class $F$ that vanishes almost everywhere outside $\\overline\\Omega$ restricts to $H_0^1(\\Omega)$, and every $H_0^1(\\Omega)$ class has an $H^1$ zero extension.\n2. If $f\\in H^1(\\Omega)\\cap C(\\overline\\Omega)$ and $f=0$ on $\\partial\\Omega$, then $f\\in H_0^1(\\Omega)$.\n3. The zero extension $U$ of $u\\in H_0(\\operatorname{curl};\\Omega)$ belongs to $H(\\operatorname{curl};\\mathbb R^3)$, with $\\operatorname{curl}U$ equal to the zero extension of $\\operatorname{curl}u$; both component norms are preserved. Also $\\nabla H_0^1(\\Omega)\\subset H_0(\\operatorname{curl};\\Omega)$ and its elements have zero curl.\n\nAll statements apply componentwise to vector fields where appropriate.",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-na-zero-tangential-hcurl",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-acl-characterisation-of-w-one-p",
+          "def-axiom-of-choice",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-w-one-infinity-functions-have-lipschitz-representatives",
+          "thm-sobolev-chain-rule-for-globally-lipschitz-scalar-functions",
+          "lem-weak-product-rule-for-bounded-sobolev-functions",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf",
+              "locator": "Theorem 2, Step 4, and Remark 3; closure details are proved below."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-na-whitney-moments-commute-with-grad-curl-div",
+        "kind": "lemma",
+        "title": "Whitney edge, face, and cell moments commute with grad, curl, and div",
+        "deps": [
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-hcurl-space",
+          "def-na-hdiv-space",
+          "def-countable-choice",
+          "lem-na-nedelec-edge-unisolvence",
+          "lem-stokes-theorem-for-the-standard-simplex",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "thm-affine-piola-differential-and-trace-moment-identities",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "dependency_level": 3,
+        "strategy": "Derive the nodal-to-edge, edge-to-face, and face-to-cell incidence identities from endpoint differences, Stokes, Gauss-Green, and the actual Piola transformations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "statement": "Let $\\mathcal T$ be a finite matching affine tetrahedral mesh. The four face-normal fluxes are unisolvent on each $RT_0(K)$, and matching face fluxes assemble a global $H(\\operatorname{div})$ field. For smooth scalar $f$, smooth vector fields $u,v$, and the canonical interpolants determined by vertex values, oriented edge circulations, oriented face-normal fluxes, and cell integrals, the interpolation maps satisfy cellwise\n$$\\nabla I_h^0f=I_h^1\\nabla f,\\qquad \\operatorname{curl}I_h^1u=I_h^2\\operatorname{curl}u,\\qquad \\operatorname{div}I_h^2v=I_h^3\\operatorname{div}v.$$\nAny assignment of one real oriented value to each global mesh edge determines a unique assembled field in $N_h^1$; any assignment of one real oriented flux to each global mesh face determines a unique assembled field in $N_h^2$. These assemblies belong to $H(\\operatorname{curl};\\Omega)$ and $H(\\operatorname{div};\\Omega)$, respectively, with the global spaces and conventions of [[def-na-lowest-order-whitney-de-rham-spaces]]. Applying the local moment identities to polynomial cell restrictions also proves that the global finite-element spaces form the subcomplex $W_h^0\\xrightarrow{\\nabla}N_h^1\\xrightarrow{\\operatorname{curl}}N_h^2\\xrightarrow{\\operatorname{div}}N_h^3$. The canonical interpolation identities themselves apply to smooth inputs; they do not extend the canonical edge moments to arbitrary $H(\\operatorname{curl})$ inputs."
+      },
+      {
+        "id": "thm-na-stable-mixed-curl-curl-kernel-quotient",
+        "kind": "theorem",
+        "title": "Stable mixed curl-curl formulation with kernel gauge",
+        "deps": [
+          "def-na-curl-curl-kernel-quotient-gauge",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "thm-riesz-representation-in-finite-dimensions",
+          "def-algebraic-dual-and-linear-functional",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Split the finite-dimensional space into the curl kernel and its L2-orthogonal complement, prove the saddle system is uniquely solvable, and give the exact quotient-energy stability constants.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice for the graph spaces and real $L^2$ product as in [[def-na-curl-curl-kernel-quotient-gauge]]. Let $V_h$ be that finite-dimensional real edge space, $K_h=\\ker(\\operatorname{curl}|_{V_h})$, and $Z_h=V_h\\cap K_h^\\perp$. Here $V_h^*=\\operatorname{Hom}_{\\mathbb R}(V_h,\\mathbb R)$ is the algebraic dual of [[def-algebraic-dual-and-linear-functional]]. For every $f\\in V_h^*$ there is a unique pair $(u_h,p_h)\\in Z_h\\times K_h$ satisfying\n$$ (\\operatorname{curl}u_h,\\operatorname{curl}v_h)_{L^2}+(p_h,v_h)_{L^2}=f(v_h)\\quad(v_h\\in V_h),\\qquad (u_h,q_h)_{L^2}=0\\quad(q_h\\in K_h).$$\nThe gauge multiplier is the $L^2$ Riesz representative of $f|_{K_h}$. The quotient solution satisfies the exact stability identity\n$$\\|\\operatorname{curl}u_h\\|_{L^2}=\\|f|_{Z_h}\\|_{(Z_h,\\|\\operatorname{curl}(\\cdot)\\|_{L^2})^*},\\qquad \\|p_h\\|_{L^2}=\\|f|_{K_h}\\|_{(K_h,\\|\\cdot\\|_{L^2})^*}.$$\nThe constraint form $b(v,q)=(v,q)_{L^2}$ has inf-sup constant one when $K_h\\ne\\{0\\}$, $V_h$ has the $H(\\operatorname{curl})$ graph norm and $K_h$ has the $L^2$ norm; if $K_h=\\{0\\}$ the constraint is vacuous. The curl form is coercive with constant one on $Z_h$ in the quotient curl norm. No mesh-uniform estimate in the full graph norm is claimed here."
+      },
+      {
+        "id": "lem-na-full-dirichlet-hcurl-regular-decomposition",
+        "kind": "lemma",
+        "title": "A bounded regular decomposition with both summands satisfying full Dirichlet conditions",
+        "statement": "Assume AC. Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded Lipschitz open set. There are bounded real linear maps $R:H_0(\\operatorname{curl};\\Omega)\\to H_0^1(\\Omega;\\mathbb R^3)$ and $Q:H_0(\\operatorname{curl};\\Omega)\\to H_0^1(\\Omega)$ such that\n$$u=Ru+\\nabla Qu,\\qquad \\|Ru\\|_{H^1}+\\|Qu\\|_{H^1}\\le C_\\Omega\\|u\\|_{H(\\operatorname{curl})}.$$\nNo contractibility, connected boundary, or mesh hypothesis is required. The scalar estimate uses the full H(curl) norm; no estimate by curl alone is asserted.",
+        "deps": [
+          "lem-na-lipschitz-scalar-h1-h2-extension",
+          "lem-na-lipschitz-support-and-zero-boundary-closure",
+          "lem-na-compact-support-hcurl-fourier-splitting",
+          "def-na-zero-tangential-hcurl",
+          "def-axiom-of-choice",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "lem-weak-leibniz-rule-with-a-smooth-factor"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf",
+              "locator": "Theorem 2 and Remark 3, full Dirichlet specialization."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-na-regular-decomposition-zero-tangential-hcurl",
+        "kind": "theorem",
+        "title": "Regular decomposition of zero-tangential H(curl) fields",
+        "deps": [
+          "def-na-zero-tangential-hcurl",
+          "lem-na-full-dirichlet-hcurl-regular-decomposition",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Build the regular part from a Fourier vector potential of the zero extension of curl u and recover a scalar potential; prove the H1 stability and zero-trace boundary correction on the stated Lipschitz polyhedron.",
+        "statement": "Assume the Axiom of Choice. Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded contractible Lipschitz polyhedron with connected boundary. For every $u\\in H_0(\\operatorname{curl};\\Omega)$ there are $z\\in H_0^1(\\Omega;\\mathbb R^3)$ and $p\\in H^1(\\Omega)$ such that\n$$u=z+\\nabla p,\\qquad \\|z\\|_{H^1(\\Omega)}+\\|p-p_\\Omega\\|_{H^1(\\Omega)}\\le C_\\Omega\\|u\\|_{H(\\operatorname{curl};\\Omega)}.$$\nHere $H_0(\\operatorname{curl})$ is the closure definition of [[def-na-zero-tangential-hcurl]], and $p_\\Omega=|\\Omega|^{-1}\\int_\\Omega p$ fixes the additive constant. The constant may depend on the domain but not on a mesh.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes",
+        "kind": "theorem",
+        "title": "Discrete de Rham cohomology and contractible-mesh exactness",
+        "deps": [
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-hcurl-space",
+          "def-na-hdiv-space",
+          "def-matching-affine-simplicial-meshes",
+          "lem-na-nedelec-edge-unisolvence",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "def-oriented-simplicial-cell-chains",
+          "lem-simplicial-boundary-squared-zero",
+          "def-nullhomotopic-map-and-contractible-space",
+          "thm-simplicial-and-singular-homology-agree-for-simplicial-complexes",
+          "def-singular-simplex-and-singular-chain-group-with-coefficients",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "def-countable-choice",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-finite-dimensional-orthogonal-decomposition"
+        ],
+        "dependency_level": 4,
+        "strategy": "Identify local degrees of freedom with finite simplicial cochains, prove the cochain isomorphism, derive exactness for a contractible realization, and state the first and second harmonic quotients for nontrivial topology.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            },
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice for the H(curl), H(div), and real $L^2$ inner-product interfaces used here; no full Axiom of Choice is assumed. Let $\\mathcal T$ be a finite matching tetrahedral mesh with realization $|\\mathcal T|=\\overline\\Omega$. Define $C_k(\\mathcal T;\\mathbb R)$ by extending the oriented chain groups of [[def-oriented-simplicial-cell-chains]] to real coefficients, and put $C^k=\\operatorname{Hom}_{\\mathbb R}(C_k,\\mathbb R)$ with coboundary $\\delta^k=\\partial_{k+1}^*$. The degrees of freedom give a cochain isomorphism from\n$$W_h^0\\xrightarrow{\\nabla}N_h^1\\xrightarrow{\\operatorname{curl}}N_h^2\\xrightarrow{\\operatorname{div}}N_h^3$$\nto $C^0\\xrightarrow{\\delta^0}C^1\\xrightarrow{\\delta^1}C^2\\xrightarrow{\\delta^2}C^3$. Consequently the discrete cohomology in degree $k$ is naturally isomorphic to $\\operatorname{Hom}_{\\mathbb R}(H_k(|\\mathcal T|;\\mathbb R),\\mathbb R)$. If $\\overline\\Omega$ is nonempty, connected, and contractible, then the sequence is exact at every positive-degree space, $\\ker\\nabla$ consists of constants, and $\\operatorname{div}:N_h^2\\to N_h^3$ is onto. For general topology, define\n$$\\mathcal H_h^1:=\\ker(\\operatorname{curl}|_{N_h^1})\\cap(\\nabla W_h^0)^\\perp,\\qquad \\mathcal H_h^2:=\\ker(\\operatorname{div}|_{N_h^2})\\cap(\\operatorname{curl}N_h^1)^\\perp$$\nusing the $L^2$ inner product. Then $\\ker\\operatorname{curl}=\\nabla W_h^0\\oplus\\mathcal H_h^1$ and $\\ker\\operatorname{div}=\\operatorname{curl}N_h^1\\oplus\\mathcal H_h^2$, with $\\dim\\mathcal H_h^k=\\dim H_k(|\\mathcal T|;\\mathbb R)$ for $k=1,2$."
+      },
+      {
+        "id": "lem-na-relative-curl-kernel-is-zero-boundary-gradients",
+        "kind": "lemma",
+        "title": "The relative curl kernel on a contractible Lipschitz polyhedron",
+        "statement": "Assume AC. Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded contractible Lipschitz polyhedron. Then\n$$\\{u\\in H_0(\\operatorname{curl};\\Omega):\\operatorname{curl}u=0\\}=\\nabla H_0^1(\\Omega).$$\nThe gradient range is closed in $L^2(\\Omega;\\mathbb R^3)$, and $\\|q\\|_{H^1}\\le C_\\Omega\\|\\nabla q\\|_2$ for $q\\in H_0^1(\\Omega)$. The boundary is connected as a consequence of these stated geometric hypotheses; it is not an extra assumption.",
+        "deps": [
+          "lem-na-hcurl-curlfree-potential-contractible",
+          "lem-na-contractible-lipschitz-polyhedron-boundary-connected",
+          "lem-na-full-dirichlet-hcurl-regular-decomposition",
+          "lem-na-lipschitz-scalar-h1-h2-extension",
+          "lem-na-lipschitz-support-and-zero-boundary-closure",
+          "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces",
+          "thm-zero-weak-gradient-implies-componentwise-constancy",
+          "thm-poincare-inequality-on-a-ball",
+          "def-axiom-of-choice",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "thm-l-two-fourier-inversion",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-dominated-convergence",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair and Clemens Pechstein, Regular Decompositions of Vector Fields—Continuous, Discrete, and Structure-Preserving",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2019/2019-18.pdf",
+              "locator": "Section 2.2, equations (6)–(8), with the full Dirichlet and trivial topology specialization."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-na-whitney-averaged-pullback-moment-bounds",
+        "kind": "lemma",
+        "title": "Averaged pullback Whitney moments and uniform near identity",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Use the preceding mesh-size and boundary-shift lemma. All differential-form notation here is the following finite coefficient notation. A degree-$k$ form in $\\mathbb R^3$ is $u=\\sum_{I}u_I\\,dx^{i_1}\\wedge\\cdots\\wedge dx^{i_k}$, where the sum is over increasing $k$-tuples $I=(i_1,\\ldots,i_k)$, the wedge is alternating, and $\\|u\\|_2^2=\\sum_I\\|u_I\\|_2^2$. The empty wedge is one. Put $du=\\sum_I\\sum_{j=1}^3(\\partial_j u_I)dx^j\\wedge dx^I$, with derivatives interpreted distributionally through integration by parts against compactly supported scalar tests; repeated differentials are zero. The graph space $H\\Lambda^k$ consists of the coefficient vectors with $u,du\\in L^2$, with norm squared $\\|u\\|_2^2+\\|du\\|_2^2$; in top degree $d=0$. These formulas agree with the proved smooth coordinate exterior derivative. Identify vector fields with forms by $\\sum_{i=1}^3u_i dx_i$ in degree one, $v_1dx_2\\wedge dx_3+v_2dx_3\\wedge dx_1+v_3dx_1\\wedge dx_2$ in degree two, and $q\\,dx_1\\wedge dx_2\\wedge dx_3$ in degree three. Thus expansion of the finite formula for $d$ gives grad, curl, and div with exactly these signs; the degree-two coefficients in increasing order are $(v_3,-v_2,v_1)$, so their Euclidean norm equals that of $v$. For a smooth map $G$ from an open subset of $\\mathbb R^q$ to $\\mathbb R^3$, define its pullback by the finite tangent-Jacobian-minor formula\n$$G^*u=\\sum_{J}\\left(\\sum_I u_I(G)\\det\\bigl(\\partial_{j_b}G^{i_a}\\bigr)_{a,b=1}^k\\right)\\,dt^{j_1}\\wedge\\cdots\\wedge dt^{j_k}.$$\nHere $J$ ranges over increasing $k$-tuples in $1,\\ldots,q$; in degree zero this is composition. If $a:T_k\\to\\sigma$ is the oriented affine simplex parametrization, define $\\int_\\sigma G^*u$ as the integral over $T_k$ of the coefficient of $(G\\circ a)^*u$ on its positive top wedge. Orientation reversal changes its sign; in degree zero it is evaluation. For averaged moments of merely $L^2$ coefficients, the joint parameter integral is the definition and the estimates below prove it exists and is representative-independent. No unbounded trace of an $L^2$ form on a fixed lower-dimensional surface is being defined. This is the existing smooth simplex-integration convention, extended only through the displayed integrable averages. Write $E_h^k$ for the four full Whitney spaces and $E_{h,0}^k$ for the subspaces with all boundary $k$-simplex moments zero; $E_{h,0}^3=E_h^3$. Let $H_0\\Lambda^k$ be the graph closure of compactly supported smooth $k$-forms; in degrees zero and one these are $H_0^1$ and the defined $H_0(\\operatorname{curl})$.\n\nFix nonnegative $\\rho\\in C_c^\\infty(B_1)$ with integral one. For each oriented mesh $k$-simplex $\\sigma$, define\n$$m_{\\sigma}^{+,k}(u)=\\int_{B_1}\\rho(y)\\int_\\sigma(F_{\\epsilon,y}^{+})^*u\\,dy,\\qquad m_{\\sigma}^{-,k}(u)=\\int_{B_1}\\rho(y)\\int_\\sigma(F_{\\epsilon,y}^{-})^*\\widetilde u\\,dy,$$\nwhere $\\widetilde u$ is zero extension and a degree-zero simplex integral is evaluation. Whitney reconstruction from these moments defines $Q_h^{+,k}:L^2\\Lambda^k\\to E_h^k$ and $Q_h^{-,k}:L^2\\Lambda^k\\to E_{h,0}^k$. For $0<\\epsilon\\le\\epsilon_0$,\n$$\\|Q_h^{\\pm,k}u\\|_2\\le C\\epsilon^{-3/2}\\|u\\|_2,\\qquad \\|(Q_h^{\\pm,k}-I)v_h\\|_2\\le C\\epsilon\\|v_h\\|_2,$$\nwhere the second bound uses respectively $v_h\\in E_h^k$ or $v_h\\in E_{h,0}^k$. Constants are independent of $h,\\epsilon$. For $k=0,1,2$, $dQ_h^{+,k}=Q_h^{+,k+1}d$ on $H\\Lambda^k$ and $dQ_h^{-,k}=Q_h^{-,k+1}d$ on $H_0\\Lambda^k$. In degree three, both exterior derivatives are zero. The relative Whitney spaces equal $E_h^k\\cap H_0\\Lambda^k$.",
+        "deps": [
+          "lem-na-graded-whitney-mesh-size-and-boundary-shifts",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "def-na-zero-tangential-hcurl",
+          "def-countable-choice",
+          "thm-local-coordinate-formula-for-the-exterior-derivative",
+          "thm-the-exterior-derivative-commutes-with-pullback",
+          "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "lem-stokes-theorem-for-the-standard-simplex",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-distributional-derivatives-commute-with-convolution-against-test-functions",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-local-smooth-approximation-in-wkp",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-na-whitney-cochain-correction-and-strong-convergence",
+        "kind": "lemma",
+        "title": "Finite element correction and strong convergence of Whitney cochain projections",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Under the hypotheses and notation of the averaged-pullback lemma, choose one $\\epsilon>0$ so small that $\\|(Q_h^{\\pm,k}-I)|_{E_{h,\\pm}^k}\\|_{2\\to2}\\le1/2$ for every mesh and degree; here $E_{h,+}^k=E_h^k$ and $E_{h,-}^k=E_{h,0}^k$. Set\n$$A_h^{\\pm,k}=Q_h^{\\pm,k}|_{E_{h,\\pm}^k},\\qquad J_h^{\\pm,k}=(A_h^{\\pm,k})^{-1},\\qquad \\pi_h^{\\pm,k}=J_h^{\\pm,k}Q_h^{\\pm,k}.$$\nThese are uniformly $L^2$-bounded projections onto their indicated spaces. They commute with $d$ in degrees $k=0,1,2$ on respectively $H\\Lambda^k$ and $H_0\\Lambda^k$; the degree-three differential is zero. They are uniformly bounded in their graph norms. If $h_{\\max}\\to0$, then $\\pi_h^{\\pm,k}u\\to u$ in $L^2$ for every $L^2$ form, uniformly for $u$ in any compact $L^2$ subset. They converge in the graph norm on the corresponding graph domains.",
+        "deps": [
+          "lem-na-whitney-averaged-pullback-moment-bounds",
+          "def-countable-choice",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-na-uniformly-bounded-commuting-cochain-projection",
+        "kind": "theorem",
+        "title": "Uniformly bounded commuting projection for lowest-order Nedelec spaces",
+        "deps": [
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-zero-tangential-hcurl",
+          "lem-na-whitney-cochain-correction-and-strong-convergence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Construct a smoothed canonical projection with a boundary correction, prove the correction commutes with the full de Rham differential, and establish mesh-uniform graph-norm bounds and idempotence.",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded Lipschitz polyhedron and let $\\{\\mathcal T_h\\}$ be a shape-regular family of matching affine tetrahedral meshes with $h=\\max_{K\\in\\mathcal T_h}\\operatorname{diam}(K)\\to0$. For the full lowest-order spaces $E_h^0=W_h^0,E_h^1=N_h^1,E_h^2=N_h^2,E_h^3=N_h^3$ of [[def-na-lowest-order-whitney-de-rham-spaces]], there are linear projections $\\pi_h^k:L^2\\Lambda^k(\\Omega)\\to E_h^k$ satisfying $\\pi_h^k|_{E_h^k}=I$ and $d\\pi_h^k=\\pi_h^{k+1}d$ on $H\\Lambda^k(\\Omega)$ for $k=0,1,2$. In degree three the exterior derivative is zero. Their norms are uniformly bounded both in $L^2$ and in $H\\Lambda^k$, for $k=0,1,2,3$.\n\nThere is also a boundary-corrected family of projections $\\pi_{h,0}^k:L^2\\Lambda^k(\\Omega)\\to E_{h,0}^k$, where $E_{h,0}^k=E_h^k\\cap H_0\\Lambda^k(\\Omega)$ and $H_0\\Lambda^k$ is the graph closure of compactly supported smooth forms. These have the same uniform bounds, are the identity on $E_{h,0}^k$, and commute in degrees zero through two on the homogeneous complex; the terminal degree-three differential is zero. In particular,\n$$\\pi_{h,0}^0:H_0^1(\\Omega)\\to W_h^0\\cap H_0^1(\\Omega),\\qquad \\pi_{h,0}^1:H_0(\\operatorname{curl};\\Omega)\\to N_h^1\\cap H_0(\\operatorname{curl};\\Omega),\\qquad \\nabla\\pi_{h,0}^0=\\pi_{h,0}^1\\nabla.$$\nHere the zero tangential space uses [[def-na-zero-tangential-hcurl]]. Each family converges strongly in $L^2$ on every $L^2$ form, uniformly on compact $L^2$ subsets, and in the graph norm on its corresponding graph domain. The full and homogeneous families are separate operators. These are cochain projections; canonical edge moments are not asserted bounded on $H(\\operatorname{curl})$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            },
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-discrete-gradient-lift-gap-estimate",
+        "kind": "lemma",
+        "title": "Discrete gradient gap from a relative commuting projection",
+        "statement": "Assume AC. Let $\\Omega\\subset\\mathbb R^3$ be nonempty, bounded, and open. Write $H=L^2(\\Omega;\\mathbb R^3)$, $B=\\nabla H_0^1(\\Omega)$, and let $P_B$ denote the $H$-orthogonal projection onto $B$. Let $S_h\\subset H_0^1(\\Omega)$ and $V_h\\subset H_0(\\operatorname{curl};\\Omega)$ be finite-dimensional subspaces with $B_h=\\nabla S_h\\subset V_h$. Suppose linear projections $\\Pi_h^0:H_0^1\\to S_h$ and $\\Pi_h^1:H_0(\\operatorname{curl})\\to V_h$ satisfy $\\Pi_h^1\\nabla=\\nabla\\Pi_h^0$. For $v_h\\in V_h\\cap B_h^\\perp$, put $w_h=(I-P_B)v_h$. Then $w_h\\in H_0(\\operatorname{curl})\\cap B^\\perp$, $\\operatorname{curl}w_h=\\operatorname{curl}v_h$, and\n$$\\|v_h-w_h\\|_2\\le\\|\\Pi_h^1w_h-w_h\\|_2.$$\nIf moreover $\\sup_h\\|\\Pi_h^1\\|_{H\\to H}\\le M$ and $\\Pi_h^1f\\to f$ in $H$ for each fixed $f\\in H_0(\\operatorname{curl})$, every $H$-convergent sequence of lifts $w_h$ has $\\|v_h-w_h\\|_2\\to0$. Here the $H$ operator norm means that the graph-space operators possess bounded extensions to $H$.",
+        "deps": [
+          "thm-na-uniformly-bounded-commuting-cochain-projection",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-projection-onto-a-nonempty-closed-convex-set",
+          "thm-hilbert-projection-variational-characterization",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Author the complete typed local proof and exact prerequisite interfaces in the binding owner cycle1 packet; preserve all approved scope and actual foundational assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-na-discrete-compactness-and-poincare-lowest-order-nedelec",
+        "kind": "theorem",
+        "title": "Discrete compactness and uniform Poincare inequality for Nedelec fields",
+        "deps": [
+          "lem-na-discrete-gradient-lift-gap-estimate",
+          "thm-na-uniformly-bounded-commuting-cochain-projection",
+          "lem-na-full-dirichlet-hcurl-regular-decomposition",
+          "lem-na-relative-curl-kernel-is-zero-boundary-gradients",
+          "thm-rellich-compactness-from-w-one-p-zero-to-lp",
+          "thm-projection-onto-a-nonempty-closed-convex-set",
+          "thm-hilbert-projection-variational-characterization",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-zero-weak-gradient-implies-componentwise-constancy",
+          "thm-sobolev-spaces-are-banach-spaces"
+        ],
+        "dependency_level": 8,
+        "strategy": "Use the regular decomposition, commuting projection, topology-aware harmonic projection, and compact H1-to-L2 embedding to prove discrete compactness and the uniform curl Poincare bound on the gauged subspace.",
+        "statement": "Assume AC, including its CC and DC consequences. Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded contractible Lipschitz polyhedron and let $\\{\\mathcal T_h\\}$ be a shape-regular family of matching affine tetrahedral meshes with $h=\\max_K\\operatorname{diam}K\\to0$. Set $V_h=N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$ and $S_h=W_h^0\\cap H_0^1(\\Omega)$, and define\n$$X_h=\\{v_h\\in V_h:(v_h,\\nabla q_h)_{L^2}=0\\text{ for every }q_h\\in S_h\\}.$$\nEvery sequence $v_h\\in X_h$ bounded in $H(\\operatorname{curl};\\Omega)$ has a subsequence converging strongly in $L^2(\\Omega;\\mathbb R^3)$. Moreover there is $C$ independent of $h$ such that $\\|v_h\\|_2\\le C\\|\\operatorname{curl}v_h\\|_2$ for all $v_h\\in X_h$.\n\nThe precise harmonic-quotient version is as follows. On any bounded Lipschitz polyhedron for which the regular decomposition and relative commuting projections below are proved, put $K=\\ker(\\operatorname{curl}|_{H_0(\\operatorname{curl})})$, $K_h=\\ker(\\operatorname{curl}|_{V_h})$ and\n$$\\mathcal H=K\\cap(\\nabla H_0^1)^\\perp,\\qquad\\mathcal H_h=K_h\\cap(\\nabla S_h)^\\perp.$$\nBoth harmonic spaces are finite dimensional. Discrete compactness still holds on $X_h$, while the uniform curl Poincare inequality holds on $Z_h=V_h\\cap K_h^\\perp=X_h\\cap\\mathcal H_h^\\perp$. A nonzero vector of $\\mathcal H_h$ prevents that inequality on all of $X_h$. These are the harmonic spaces of the relative boundary complex; the full-space absolute cohomology dimensions do not identify them.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            },
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2631,
+    "id": "discrete-de-rham-complexes-and-edge-elements-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Discrete de Rham complexes and edge-element foundations — Examples",
+    "companion": "discrete-de-rham-complexes-and-edge-elements",
+    "requires": [
+      "discrete-de-rham-complexes-and-edge-elements"
+    ],
+    "items": [
+      {
+        "id": "ex-na-nedelec-edge-circulation-and-stokes",
+        "kind": "example",
+        "title": "An oriented Nedelec edge circulation on one tetrahedron",
+        "deps": [
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "lem-na-nedelec-edge-unisolvence",
+          "lem-na-whitney-moments-commute-with-grad-curl-div"
+        ],
+        "dependency_level": 4,
+        "strategy": "Compute a basis edge circulation and its induced oriented face curl flux, including reversal of orientation.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "On the reference tetrahedron with vertices $x_0=0$, $x_1=e_1$, $x_2=e_2$, $x_3=e_3$, take the Whitney edge field $\\phi_{01}=\\lambda_0\\nabla\\lambda_1-\\lambda_1\\nabla\\lambda_0$ and orient the face $[0,1,2]$ by the vertex order shown. Compute the circulation on $[0,1]$ and the curl flux through $[0,1,2]$."
+      },
+      {
+        "id": "ex-na-nodal-curlcurl-spurious-gradient-mode",
+        "kind": "example",
+        "title": "A nodal curl-free mode outside the compatible gradient image",
+        "deps": [
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-curl-curl-kernel-quotient-gauge",
+          "thm-na-stable-mixed-curl-curl-kernel-quotient",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Exhibit an explicit continuous piecewise-linear vector field with zero curl that is not the gradient of a continuous piecewise-linear scalar, and show why a gauge is required.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "On one tetrahedron, compare the naive vector nodal space $[P_1(K)]^3$ with the compatible scalar-to-edge gradient map $\\nabla W_h^0$ of [[def-na-lowest-order-whitney-de-rham-spaces]]. The vector field $v(x)=x_1e_1$ lies in the nodal vector space, has zero curl, and is not the gradient of a continuous piecewise-affine scalar. Thus the naive nodal curl-curl matrix has a zero-energy mode outside that compatible gradient image. This identifies a discrete kernel mismatch; it does not claim that gradients are absent from the continuum curl kernel."
+      },
+      {
+        "id": "ex-na-handle-domain-harmonic-edge-field",
+        "kind": "example",
+        "title": "A handle-domain harmonic field with nonzero circulation",
+        "deps": [
+          "def-na-hcurl-space",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "On a solid torus, compute an explicit curl-free and divergence-free azimuthal field with zero normal trace and nonzero circulation around the core loop.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf"
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $\\Omega=\\{(x,y,z):(\\sqrt{x^2+y^2}-R)^2+z^2<r^2\\}$ be a solid torus with $R>r>0$. Define\n$$u(x,y,z)=\\left(-\\frac{y}{x^2+y^2},\\frac{x}{x^2+y^2},0\\right).$$\nThis is a smooth curl-free and divergence-free field on $\\overline\\Omega$, tangent to the boundary, whose circulation around the core circle is $2\\pi$. Here “harmonic” means curl and divergence both vanish with zero normal boundary component. It is a concrete nonzero-period field caused by the handle; the nonzero period proves it is not the gradient of a single-valued $C^1$ potential. It is the continuous model for the nontrivial cohomology components described in [[thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes]]."
+      }
+    ]
+  }
+]

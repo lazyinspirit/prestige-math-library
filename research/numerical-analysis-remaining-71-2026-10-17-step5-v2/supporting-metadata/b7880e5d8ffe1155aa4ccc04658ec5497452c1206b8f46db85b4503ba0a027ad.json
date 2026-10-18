@@ -1,0 +1,848 @@
+[
+  {
+    "order": 2614,
+    "id": "riemann-solvers-for-hyperbolic-systems",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Riemann solvers for hyperbolic systems",
+    "companion": "riemann-solvers-for-hyperbolic-systems-examples",
+    "requires": [
+      "nonlinear-equations-and-newton-methods",
+      "periodic-orbit-shooting-collocation-and-floquet-error"
+    ],
+    "items": [
+      {
+        "id": "def-hyperbolic-system-and-characteristic-families",
+        "kind": "definition",
+        "title": "Strictly hyperbolic conservation systems and characteristic families",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $m\\ge1$, let $G\\subseteq\\mathbb R^m$ be open, and let\n$f:G\\to\\mathbb R^m$ be $C^3$ ([[def-c-one-map-and-local-inverse]];\nthe $C^3$ convention is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe one-dimensional conservation system with state domain $G$ is\n$$u_t+\\partial_x f(u)=0,\\qquad u(t,x)\\in G,$$\nwhere $u$ is the conserved state and $f$ its flux. Its flux Jacobian is\n$A(u)=Df(u)$. The system is **strictly hyperbolic on an open set $N\\subseteq G$**\nif, for every $u\\in N$, $A(u)$ has $m$ distinct real eigenvalues, written in\nincreasing order $\\lambda_1(u)<\\cdots<\\lambda_m(u)$. An **$i$th characteristic\nfamily** on $N$ is a $C^2$ right-eigenvector field $r_i:N\\to\\mathbb R^m\\setminus\\{0\\}$\nwith $A(u)r_i(u)=\\lambda_i(u)r_i(u)$. It is **genuinely nonlinear** on $N$ if\n$D\\lambda_i(u)r_i(u)$ is nowhere zero there; after shrinking $N$ its sign is\nconstant. It is **linearly degenerate** on $N$ if $D\\lambda_i(u)r_i(u)=0$\nthroughout $N$. Rescaling $r_i$ by a nonzero constant changes the wave-strength\nparameter but not the family.\n\nFor $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded map $u:Q\\to G$ is a\n**distributional weak solution with initial data $u_0$** if\n$$\\int_Q\\bigl(u\\cdot\\varphi_t+f(u)\\cdot\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every vector test function $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$ and\n$u(t,\\cdot)\\to u_0$ in $L^1_{\\rm loc}(\\mathbb R;\\mathbb R^m)$ as\n$t\\downarrow0$. A **Riemann initial datum** is the step\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$.\n\nIn this weak-solution clause, $u$ is required to be Lebesgue measurable and\n$f\\circ u\\in L^1_{\\rm loc}(Q;\\mathbb R^m)$, so the test-function integral is\ndefined. Local boundedness gives $u\\in L^1_{\\rm loc}(Q;\\mathbb R^m)$.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§§3.1–3.3, printed pp. 21–26: strict hyperbolicity and characteristic families"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-rankine-hugoniot-and-lax-shocks",
+        "kind": "definition",
+        "title": "Rankine–Hugoniot jumps and Lax shocks",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "dependency_level": 1,
+        "statement": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a system strictly hyperbolic on $N\\subseteq G$, states $u_L,u_R\\in N$,\nand $1\\le i\\le m$, it is a **strict Lax $i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§§2.2–2.3, printed pp. 13–15: Rankine–Hugoniot and Lax admissibility"
+            },
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 7 §§7.1, 7.4, printed pp. 70–78: Hugoniot locus and Lax entropy condition"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-smooth-simple-characteristic-eigenpairs",
+        "kind": "lemma",
+        "title": "Smooth local eigenpairs for a simple characteristic spectrum",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "thm-euclidean-implicit-function-theorem"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $f:G\\to\\mathbb R^m$ be $C^3$ and let $\\bar u\\in G$ be a state at which\n$A(\\bar u)=Df(\\bar u)$ has distinct real eigenvalues\n$\\lambda_1^0<\\cdots<\\lambda_m^0$. For each $i$, there is a neighborhood $N_i$\nof $\\bar u$ and $C^2$ functions $\\lambda_i:N_i\\to\\mathbb R$ and\n$r_i:N_i\\to\\mathbb R^m$ such that $A(u)r_i(u)=\\lambda_i(u)r_i(u)$,\n$\\lambda_i(\\bar u)=\\lambda_i^0$, and the eigenvectors can be normalized by a\nfixed linear functional. After intersecting these finitely many neighborhoods,\nthe eigenvalues remain real, simple, and ordered, and $r_1(u),\\ldots,r_m(u)$\nform a basis at each $u$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§§3.1–3.3, printed pp. 21–26: simple characteristic fields and eigenvectors"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-ideal-gas-euler-state-and-pressure",
+        "kind": "definition",
+        "title": "Admissible states and pressure for one-dimensional ideal-gas Euler",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "dependency_level": 1,
+        "statement": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Chs. 5 and 9, printed pp. 48–53 and 89–93: polytropic Euler variables and Riemann problem"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-roe-linearization-and-flux",
+        "kind": "definition",
+        "title": "Roe linearization and Roe numerical flux",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "dependency_level": 1,
+        "statement": "For states $u_L,u_R$ in the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], a **Roe matrix** is a map\n$\\widetilde A:G\\times G\\to\\mathbb R^{m\\times m}$ such that, for all\n$u,u_L,u_R\\in G$,\n$$\\widetilde A(u,u)=Df(u),\\qquad \\widetilde A(u_L,u_R)(u_R-u_L)=f(u_R)-f(u_L),$$\nand $\\widetilde A(u_L,u_R)$ is diagonalizable over $\\mathbb R$ with real\neigenvalues. The map $\\widetilde A$ is also continuous at each diagonal pair\n$(u,u)$. If $\\widetilde A=R\\Lambda R^{-1}$, define\n$|\\widetilde A|=R|\\Lambda|R^{-1}$ by replacing each diagonal eigenvalue with\nits absolute value. The **Roe flux associated with this matrix** is\n$$\\widehat f_{\\rm Roe}(u_L,u_R)=\\tfrac12(f(u_L)+f(u_R))-\\tfrac12|\\widetilde A(u_L,u_R)|(u_R-u_L).$$\nThe jump identity is an algebraic conservation property. This definition does\nnot assert entropy admissibility of the approximate wave pattern.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 14 §14.2, printed pp. 148–151: Roe matrix, jump property, and numerical flux"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-hll-two-wave-flux",
+        "kind": "definition",
+        "title": "HLL two-wave approximate flux",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "dependency_level": 1,
+        "statement": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 14 §14.1, printed pp. 146–148: approximate Riemann solutions and bounding wave speeds"
+            },
+            {
+              "title": "David I. Ketcheson, Randall J. LeVeque, and Mauricio J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Part II, Shallow-water approximate solvers, HLL solver: derivation, wave-speed bounds, and implementation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-scalar-convex-entropy-admissibility",
+        "kind": "definition",
+        "title": "Convex entropy admissibility for a scalar conservation law",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "dependency_level": 1,
+        "statement": "For the scalar case of [[def-hyperbolic-system-and-characteristic-families]],\nuse its definition of a weak solution on $Q=(0,\\infty)\\times\\mathbb R$. An\n**entropy pair** on $G$ is a function $\\eta\\in C^2(G)$ that is convex on each\ninterval component of $G$, together with $q\\in C^1(G)$ satisfying\n$q'(u)=\\eta'(u)f'(u)$. A weak solution $u$ is **entropy-admissible for this\npair** when $\\eta\\circ u,q\\circ u\\in L^1_{\\rm loc}(Q)$ and\n$\\partial_t\\eta(u)+\\partial_xq(u)\\le0$ in distributions; equivalently,\n$$\\int_Q\\bigl(\\eta(u)\\,\\varphi_t+q(u)\\,\\varphi_x\\bigr)\\,dt\\,dx\\ge0$$\nfor every nonnegative $\\varphi\\in C_c^\\infty(Q)$. For a single jump of speed\n$s$, the entropy inequality requires\n$q(u_R)-q(u_L)-s(\\eta(u_R)-\\eta(u_L))\\le0$.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 3 §3.8, printed pp. 36–40: entropy pairs and entropy inequalities"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-local-rarefaction-curve",
+        "kind": "definition",
+        "title": "Local characteristic rarefaction curve",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "lem-smooth-simple-characteristic-eigenpairs",
+          "thm-c2-ode-flow-on-common-tube",
+          "cor-uniform-picard-lindelof-for-nearby-initial-values"
+        ],
+        "dependency_level": 2,
+        "statement": "On a neighborhood where an eigenvector field $r_i$ is $C^2$, the local\n$i$-rarefaction curve through $u_0$ is the unique local solution\n$$\\frac{dR_i}{d\\sigma}(\\sigma;u_0)=r_i(R_i(\\sigma;u_0)),\\qquad R_i(0;u_0)=u_0.$$\nThe parameter $\\sigma$ is the signed integral-curve parameter for the chosen\nnormalization of $r_i$. Existence on a common small interval for nearby $u_0$\nfollows from [[cor-uniform-picard-lindelof-for-nearby-initial-values]]; the\n$C^2$ flow on a compact local tube follows from\n[[thm-c2-ode-flow-on-common-tube]]. No global integral curve is asserted.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§3.3, printed pp. 24–26: integral curves of characteristic fields"
+            },
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 8 §8.1, printed pp. 81–82: integral curves"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-rankine-hugoniot-jump-is-a-weak-solution",
+        "kind": "lemma",
+        "title": "A moving jump is a weak solution exactly under Rankine–Hugoniot",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-rankine-hugoniot-and-lax-shocks"
+        ],
+        "dependency_level": 2,
+        "statement": "For a conservation system as in\n[[def-hyperbolic-system-and-characteristic-families]], constant states\n$u_L,u_R\\in G$, and a constant speed $s$, define\n$u(t,x)=u_L$ for $x<st$ and $u(t,x)=u_R$ for $x>st$, and let\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$ (values on the jump lines\nare immaterial). Then $u$ is a distributional weak solution with initial datum\n$u_0$ in the sense of [[def-hyperbolic-system-and-characteristic-families]]\nif and only if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 7 §7.1, printed pp. 70–73: weak jumps and the Rankine–Hugoniot condition"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-local-characteristic-shock-curve",
+        "kind": "lemma",
+        "title": "Local shock curve by an augmented Rankine–Hugoniot equation",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "lem-smooth-simple-characteristic-eigenpairs",
+          "thm-euclidean-implicit-function-theorem",
+          "thm-heine-cantor-metric"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $G\\subseteq\\mathbb R^m$ be open, let $f:G\\to\\mathbb R^m$ be $C^3$, and\nlet $\\bar u\\in G$ be a state where $A(\\bar u)=Df(\\bar u)$ has $m$ distinct\nreal eigenvalues $\\lambda_1(\\bar u)<\\cdots<\\lambda_m(\\bar u)$.\nFix $i\\in\\{1,\\ldots,m\\}$ and its $i$th eigenpair\n$(\\lambda_i(\\bar u),r_i(\\bar u))$. There are a neighborhood $N_0$ of $\\bar u$,\n$\\eta>0$, and $C^1$ functions $v_i(\\sigma,u_0),s_i(\\sigma,u_0)$ for\n$u_0\\in N_0$, $|\\sigma|<\\eta$, such that, with $\\ell_i(u_0)$ the dual left\neigenvector normalized by $\\ell_i(u_0)\\cdot r_i(u_0)=1$,\n$$\\ell_i(u_0)\\cdot v_i(\\sigma,u_0)=1,\\qquad S_i(\\sigma;u_0)=u_0+\\sigma v_i(\\sigma,u_0),$$\nand for $\\sigma\\ne0$ the pair $(u_0,S_i(\\sigma;u_0))$ satisfies\nRankine–Hugoniot with speed $s_i(\\sigma,u_0)$. Also\n$S_i(0;u_0)=u_0$ and $\\partial_\\sigma S_i(0;u_0)=r_i(u_0)$. If the $i$th\nfield is genuinely nonlinear on $N_0$ and\n$d_i(u):=D\\lambda_i(u)r_i(u)$ has constant nonzero sign, then all sufficiently\nsmall nonzero strengths with $\\sigma d_i(u_0)<0$ give strict Lax $i$-shocks.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§2.2, printed pp. 13–14: shock curves from an augmented Rankine–Hugoniot system"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-one-dimensional-ideal-gas-euler-eigenstructure",
+        "kind": "theorem",
+        "title": "Eigenstructure of the admissible ideal-gas Euler system",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "dependency_level": 2,
+        "statement": "For $U=(\\rho,m,E)\\in\\mathcal G_\\gamma$, put $u=m/\\rho$,\n$H=(E+p)/\\rho$, and $c=\\sqrt{\\gamma p/\\rho}$. The flux Jacobian has the\nthree simple real eigenvalues and right eigenvectors\n$$\\lambda_-=u-c,\\qquad r_-=(1,u-c,H-uc)^T,$$\n$$\\lambda_0=u,\\qquad r_0=(1,u,u^2/2)^T,$$\n$$\\lambda_+=u+c,\\qquad r_+=(1,u+c,H+uc)^T.$$\nThe middle field is linearly degenerate; the acoustic fields are genuinely\nnonlinear, with $D\\lambda_-r_-=-(\\gamma+1)c/(2\\rho)$ and\n$D\\lambda_+r_+=(\\gamma+1)c/(2\\rho)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Chs. 5–6 and 9, printed pp. 48–54, 61–64, 89–92: Euler Jacobian, sound speed, and contact field"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-euler-star-pressure-response",
+        "kind": "definition",
+        "title": "Ideal-gas rarefaction and shock pressure response",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure"
+        ],
+        "dependency_level": 2,
+        "statement": "Fix $\\gamma>1$ and admissible left/right primitive states\n$(\\rho_K,u_K,p_K)$, $K\\in\\{L,R\\}$, with $\\rho_K,p_K>0$ and\n$c_K=\\sqrt{\\gamma p_K/\\rho_K}$. Set\n$$A_K=\\frac{2}{(\\gamma+1)\\rho_K},\\qquad B_K=\\frac{\\gamma-1}{\\gamma+1}p_K.$$\nFor a trial star pressure $p>0$, the wave pressure response from side $K$ is\n$$f_K(p)=\\begin{cases}\\dfrac{2c_K}{\\gamma-1}\\left[\\left(\\dfrac p{p_K}\\right)^{(\\gamma-1)/(2\\gamma)}-1\\right],&0<p\\le p_K,\\\\(p-p_K)\\sqrt{\\dfrac{A_K}{p+B_K}},&p\\ge p_K.\\end{cases}$$\nThe two formulas agree at $p=p_K$. The **star-pressure residual** is\n$$\\Phi(p)=f_L(p)+f_R(p)+u_R-u_L,\\qquad p>0.$$\nThis is a scalar root equation; it does not itself define a Riemann solution.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 9 §9.2, printed pp. 91–93: Euler star states reduced to a pressure equation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-roe-flux-is-consistent-and-conservative",
+        "kind": "theorem",
+        "title": "The Roe flux is consistent and conservative",
+        "deps": [
+          "def-roe-linearization-and-flux"
+        ],
+        "dependency_level": 2,
+        "statement": "For any supplied Roe matrix, the Roe flux is consistent:\n$\\widehat f_{\\rm Roe}(u,u)=f(u)$. For a finite periodic array define\n$$U_j^{new}=U_j-\\nu\\bigl(\\widehat f_{j+1/2}-\\widehat f_{j-1/2}\\bigr),$$\nwhere $\\widehat f_{j+1/2}=\\widehat f_{\\rm Roe}(U_j,U_{j+1})$ and indices are\nmodulo $n$, with $n\\ge1$. For any scalar $\\nu$, the update preserves the sum of cell states. The\nRoe jump property is the defining matrix identity in\n[[def-roe-linearization-and-flux]] and is not an entropy assertion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 14 §§14.2–14.2.2, printed pp. 148–152: Roe flux and sonic-rarefaction entropy failure"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hll-flux-is-consistent-and-conservative",
+        "kind": "theorem",
+        "title": "The HLL flux follows from the conservative two-wave model",
+        "deps": [
+          "def-hll-two-wave-flux",
+          "def-rankine-hugoniot-and-lax-shocks"
+        ],
+        "dependency_level": 2,
+        "statement": "When $S_L<0<S_R$, the HLL intermediate state\n$$u_* =\\frac{S_Ru_R-S_Lu_L-(f_R-f_L)}{S_R-S_L}$$\ntogether with the assigned model flux\n$$f_* = f_L+S_L(u_*-u_L)$$\nsatisfies the two model balances\n$$f_*-f_L=S_L(u_*-u_L),\\qquad f_R-f_*=S_R(u_R-u_*).$$\nThis $f_*$ is the middle formula in [[def-hll-two-wave-flux]]. In general\n$f_*\\ne f(u_*)$, even when $u_*\\in G$; the model is not asserted to be a\nweak solution of the original conservation law. For equal states\nthe HLL flux is consistent. A finite-volume update using the same HLL flux at\neach periodic interface is conservative: for any finite periodic array with\nadjacent pairs in the flux domain, define\n$$U_j^{new}=U_j-\\nu\\bigl(\\widehat f_{\\rm HLL}(U_j,U_{j+1})-\\widehat f_{\\rm HLL}(U_{j-1},U_j)\\bigr).$$\nHere $n\\ge1$. The result holds for any scalar $\\nu$ and assumes the supplied speeds; it does\nnot prove that they enclose a nonlinear Riemann fan.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 14 §14.1, printed pp. 146–148: approximate Riemann solutions and interface flux"
+            },
+            {
+              "title": "David I. Ketcheson, Randall J. LeVeque, and Mauricio J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Part II, Shallow-water approximate solvers, HLL solver derivation and two-wave flux"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-euler-acoustic-wave-pressure-response",
+        "kind": "lemma",
+        "title": "Ideal-gas acoustic wave curves have the stated pressure response",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "def-local-rarefaction-curve",
+          "def-euler-star-pressure-response",
+          "thm-one-dimensional-ideal-gas-euler-eigenstructure"
+        ],
+        "dependency_level": 3,
+        "statement": "For a side state $K=(\\rho_K,u_K,p_K)$ and any trial pressure $p>0$, the\nrarefaction/shock branches defined in\n[[def-euler-star-pressure-response]] give the scalar velocity response\n$f_K(p)$ along the corresponding acoustic wave. For a left 1-wave the star velocity is\n$u_*=u_L-f_L(p)$; for a right 3-wave it is $u_*=u_R+f_R(p)$. The star density\non a rarefaction branch is\n$$\\rho_*(p)=\\rho_K(p/p_K)^{1/\\gamma},$$\nand on a compressive shock branch, with $q=p/p_K>1$ and\n$\\beta=(\\gamma-1)/(\\gamma+1)$, it is\n$$\\rho_*(p)=\\rho_K\\frac{q+\\beta}{\\beta q+1}.$$\nThe shock branches satisfy the strict acoustic Lax inequalities. When the two\npressure responses match at a positive $p$, their star states are joined by a\nlinearly-degenerate contact at speed $u_*$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 9 §9.2, printed pp. 91–94: Euler pressure curve, shock/rarefaction responses, and intermediate states"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-local-rarefaction-fan",
+        "kind": "lemma",
+        "title": "A local genuinely nonlinear curve generates a centered rarefaction fan",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-local-rarefaction-curve",
+          "lem-smooth-simple-characteristic-eigenpairs"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $r_i$ be a $C^1$ genuinely nonlinear field on a neighborhood, with\n$D\\lambda_i(u)r_i(u)$ of constant nonzero sign. If $\\sigma\\ne0$ satisfies\n$\\sigma D\\lambda_i(u_0)r_i(u_0)>0$ and is sufficiently small, then the\nleft/right data $u_0,R_i(\\sigma;u_0)$ are connected by a centered rarefaction\nfan. It is a self-similar weak solution with those Riemann data.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§3.3, printed pp. 25–26: centered rarefaction profile and weak-solution verification"
+            },
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 8 §8.2, printed pp. 82–84: rarefaction waves along integral curves"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-linearly-degenerate-characteristic-contact",
+        "kind": "lemma",
+        "title": "A linearly-degenerate characteristic curve is a contact wave",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "def-local-rarefaction-curve",
+          "lem-rankine-hugoniot-jump-is-a-weak-solution"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $r_i$ be linearly degenerate on a neighborhood and let $R_i(\\sigma;u_0)$\nbe its local rarefaction curve. Then the states $u_0$ and\n$u_1=R_i(\\sigma;u_0)$ are joined by a Rankine–Hugoniot jump of speed\n$\\lambda_i(u_0)$, and the corresponding moving discontinuity is a weak\nsolution. The characteristic speed is equal on the two sides; this is a\ncontact wave, not a strict Lax shock.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§3.3, printed pp. 26–27: linearly-degenerate fields and contact discontinuities"
+            },
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 9 §9.1, printed pp. 89–91: Euler contact discontinuities"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-euler-star-pressure-root-and-vacuum-criterion",
+        "kind": "theorem",
+        "title": "The ideal-gas star-pressure root exists uniquely exactly below vacuum threshold",
+        "deps": [
+          "def-euler-star-pressure-response",
+          "lem-euler-acoustic-wave-pressure-response",
+          "thm-intermediate-value"
+        ],
+        "dependency_level": 4,
+        "statement": "For the data of [[def-euler-star-pressure-response]], let\n$$\\Phi(0+):=u_R-u_L-\\frac{2(c_L+c_R)}{\\gamma-1}.$$\nThe residual $\\Phi$ is $C^1$ and strictly increasing on $(0,\\infty)$.\nIf $\\Phi(0+)<0$, then $\\Phi$ has exactly one zero $p_*>0$. By the acoustic\nwave-response lemma this is the unique positive pressure at which the left and\nright wave curves can be joined by a contact. It lies in the\nexplicit bracket $0<p_*<P$, where, writing\n$D=\\max\\{0,u_L-u_R\\}$ and $K=\\sqrt{A_L}+\\sqrt{A_R}$,\n$$P=2\\max\\{p_L,p_R\\}+\\frac{6D^2}{K^2}+p_L.$$\nIf $\\Phi(0+)\\ge0$, then there is no positive matching pressure. The limiting\nleft and right rarefaction-tail velocities are ordered with a vacuum gap, or\ncoincide at the zero-pressure equality threshold. No other vacuum condition is\nasserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 9 §9.2, printed pp. 91–93: exact Euler Riemann solution and pressure equation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-mixed-characteristic-wave-curve",
+        "kind": "definition",
+        "title": "Mixed local wave curve for a genuinely nonlinear or linearly degenerate family",
+        "deps": [
+          "def-local-rarefaction-curve",
+          "lem-local-characteristic-shock-curve",
+          "lem-linearly-degenerate-characteristic-contact"
+        ],
+        "dependency_level": 4,
+        "statement": "Fix a local characteristic family on a neighborhood where it is either\ngenuinely nonlinear with constant sign $d_i=D\\lambda_i\\,r_i\\ne0$, or linearly\ndegenerate. For a genuinely nonlinear family define\n$$\\Psi_i(\\sigma;u)=\\begin{cases}R_i(\\sigma;u),&\\sigma d_i>0,\\\\S_i(\\sigma;u),&\\sigma d_i<0,\\\\u,&\\sigma=0.\\end{cases}$$\nwhere $R_i$ is the local rarefaction curve and $S_i$ the local shock curve of\n[[lem-local-characteristic-shock-curve]]. For a linearly degenerate family set\n$\\Psi_i(\\sigma;u)=R_i(\\sigma;u)$ for either sign; its nonzero-strength wave is\nthe contact of [[lem-linearly-degenerate-characteristic-contact]]. The\nparameter $\\sigma$ is local and is restricted so the entire curve stays in the\nchosen neighborhood.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§§3.3–3.4, printed pp. 24–28: shock, rarefaction, contact, and mixed wave curves"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-safeguarded-euler-star-pressure-solver",
+        "kind": "algorithm",
+        "title": "Finite-budget safeguarded Newton–bisection for Euler star pressure",
+        "deps": [
+          "def-euler-star-pressure-response",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-finite-budget-newton-for-vector-residuals"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume exact-real arithmetic in which each arithmetic operation, comparison,\nsquare root, real power on a positive argument, scalar residual evaluation,\nand call to the one-step Newton procedure terminates. **Inputs:**\nadmissible primitive states $(\\rho_L,u_L,p_L)$ and $(\\rho_R,u_R,p_R)$, gas\nconstant $\\gamma>1$, pressure-width tolerance $\\tau>0$, and iteration budget\n$N\\in\\mathbb N_0$. **Outputs:** `inadmissible-input`, `vacuum`,\n`pressure-bracket` with an interval, or `budget-exhausted` with an interval.\nThe procedure never treats a nonzero residual tolerance as an exact root.\n\n1. If $\\rho_L,\\rho_R,p_L,p_R$ are not all positive or $\\gamma\\le1$, return\n   `inadmissible-input` before evaluating a wave response.\n2. Compute $\\Phi(0+)$ from\n   [[thm-euler-star-pressure-root-and-vacuum-criterion]]. If $\\Phi(0+)\\ge0$,\n   return `vacuum`.\n3. Otherwise set the bracket $[a,b]=[0,P]$ with $P$ from that theorem. Its\n   endpoint convention is $\\Phi(a):=\\Phi(0+)<0<\\Phi(b)$.\n4. For at most $N$ iterations, in this order:\n   1. If $b-a\\le\\tau$, return `pressure-bracket` with $[a,b]$.\n   2. Let $m=(a+b)/2$. Call\n      [[alg-finite-budget-newton-for-vector-residuals]] on the scalar residual\n      $F(p)=\\Phi(p)$ over the open domain $(0,\\infty)$, starting at $m$, with\n      residual tolerance $0$ and update budget $1$.\n   3. If Newton returns $(r,\\texttt{root})$, return `pressure-bracket` with\n      $[r,r]$. If it\n      returns `iteration-budget-exhausted` with last iterate $q$ and\n      $a+(b-a)/4\\le q\\le b-(b-a)/4$, use $q$ as the query. In every other\n      status or when this central-quarter test fails, use $m$ as the query.\n   4. Evaluate $\\Phi$ at the query. If it is zero, return `pressure-bracket`\n      with the singleton interval. If negative, replace $a$ by the query; if\n      positive, replace $b$ by the query.\n5. After the budget, return `pressure-bracket` if the width is at most $\\tau$;\n   otherwise return `budget-exhausted` with the current bracket.\n\nThe returned interval uses the zero lower endpoint as a limiting endpoint, not\nan admissible pressure. This algorithm gives a finite status and bracket; the\nseparate theorem below proves its invariant and width reduction. It makes no\nclaim that an exhausted budget found a root.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 9 §9.2, printed pp. 91–93: pressure root solved iteratively; the bracket and status guarantees below are supplied locally"
+            },
+            {
+              "title": "E. Hairer and G. Wanner, Solving Ordinary Differential Equations II, Chapter VI: Iterative Methods—Nonlinear Equations",
+              "url": "https://www.unige.ch/~hairer/poly/chap6.pdf",
+              "locator": "§VI.3, printed pp. 138–141 / PDF pp. 5–7: finite Newton corrections and local iteration context"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-mixed-wave-curves-are-c1",
+        "kind": "lemma",
+        "title": "Mixed shock–rarefaction wave curves are continuously differentiable",
+        "deps": [
+          "def-mixed-characteristic-wave-curve",
+          "def-local-rarefaction-curve",
+          "lem-local-characteristic-shock-curve",
+          "lem-smooth-simple-characteristic-eigenpairs"
+        ],
+        "dependency_level": 5,
+        "statement": "Under the hypotheses of [[def-mixed-characteristic-wave-curve]], the map\n$(\\sigma,u)\\mapsto\\Psi_i(\\sigma;u)$ is $C^1$ near $(0,\\bar u)$, with\n$\\Psi_i(0;u)=u$ and $\\partial_\\sigma\\Psi_i(0;u)=r_i(u)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§§3.3–3.4, printed pp. 24–28: common tangent and wave-composition map"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-euler-pressure-solver-bracket-and-termination",
+        "kind": "lemma",
+        "title": "The safeguarded Euler pressure solver preserves its root bracket and terminates",
+        "deps": [
+          "alg-safeguarded-euler-star-pressure-solver",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-finite-budget-newton-for-vector-residuals",
+          "alg-newton-correction-for-vector-residuals"
+        ],
+        "dependency_level": 6,
+        "statement": "For admissible non-vacuum input data, the algorithm in\n[[alg-safeguarded-euler-star-pressure-solver]] terminates after at most $N$\nouter iterations and returns either a singleton exact root, a bracket\ncontaining the unique $p_*$ from [[thm-euler-star-pressure-root-and-vacuum-criterion]],\nor an explicit budget-exhausted status with that root still bracketed. After\n$k$ completed non-exact iterations the bracket width is at most\n$(3/4)^kP$. Thus any budget satisfying $(3/4)^N P\\le\\tau$ returns a\npressure-bracket status. No floating-point or nonlinear convergence guarantee\nis asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 9 §9.2, printed pp. 91–93: iterative pressure root context; the invariant and finite-budget guarantees are proved here"
+            },
+            {
+              "title": "E. Hairer and G. Wanner, Solving Ordinary Differential Equations II, Chapter VI: Iterative Methods—Nonlinear Equations",
+              "url": "https://www.unige.ch/~hairer/poly/chap6.pdf",
+              "locator": "§VI.3, printed pp. 138–141 / PDF pp. 5–7: Newton iteration context"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-local-small-data-riemann-solver",
+        "kind": "theorem",
+        "title": "Local small-data Riemann solver near a strictly hyperbolic state",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "lem-rankine-hugoniot-jump-is-a-weak-solution",
+          "lem-local-rarefaction-fan",
+          "lem-local-characteristic-shock-curve",
+          "lem-linearly-degenerate-characteristic-contact",
+          "def-mixed-characteristic-wave-curve",
+          "lem-mixed-wave-curves-are-c1",
+          "thm-euclidean-implicit-function-theorem"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $f:G\\to\\mathbb R^m$ be $C^3$, let $\\bar u\\in G$, and suppose on an open\nneighborhood $N$ of $\\bar u$ the system is strictly hyperbolic and each\ncharacteristic field is either genuinely nonlinear or linearly degenerate. Then\nthere are $\\delta,\\eta>0$ such that, whenever\n$\\|u_L-\\bar u\\|_2<\\delta$ and $\\|u_R-\\bar u\\|_2<\\delta$, there is a unique\nstrength vector $\\sigma\\in(-\\eta,\\eta)^m$ satisfying\n$$u_R=\\Psi_m(\\sigma_m;\\Psi_{m-1}(\\sigma_{m-1};\\cdots\\Psi_1(\\sigma_1;u_L)\\cdots)).$$\nFor the Riemann initial datum $u_0(x)=u_L$ for $x<0$ and $u_R$ for $x>0$,\nthe corresponding ordered superposition, with waves in increasing family\norder, is a self-similar weak solution, meaning it has the form\n$u(t,x)=q(x/t)$ for $t>0$. Its nonzero\ngenuinely nonlinear waves are rarefactions when $\\sigma_iD\\lambda_i r_i>0$\nand strict Lax shocks when $\\sigma_iD\\lambda_i r_i<0$; its linearly-degenerate\nwaves are contacts. The neighborhoods are local to $f,N,\\bar u$; no arbitrary\nlarge-data solution or uniqueness among all weak solutions is asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alberto Bressan, Hyperbolic Conservation Laws: An Illustrated Tutorial",
+              "url": "https://yulia-petrova.github.io/teaching/shocks/Bressan-tutorial.pdf",
+              "locator": "§§3.3–3.4, printed pp. 24–29: elementary waves and the local wave-composition construction"
+            },
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Chs. 7–8, §§7.6, 8.1–8.3, printed pp. 79–87: local system Riemann problems and integral curves"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-godunov-flux-from-a-local-riemann-solver",
+        "kind": "definition",
+        "title": "Godunov flux from the local Riemann solution",
+        "deps": [
+          "thm-local-small-data-riemann-solver",
+          "def-rankine-hugoniot-and-lax-shocks"
+        ],
+        "dependency_level": 7,
+        "statement": "For left/right states in the neighborhood of\n[[thm-local-small-data-riemann-solver]], let $u(\\xi)$ be its self-similar\nprofile, $\\xi=x/t$. If the profile is continuous at $\\xi=0$, define the\n**Godunov flux** by $G(u_L,u_R)=f(u(0))$. If it has a jump there, let\n$u(0-)$ and $u(0+)$ be its one-sided traces and define\n$$G(u_L,u_R)=f(u(0-))=f(u(0+)).$$\nThese fluxes agree by Rankine–Hugoniot at speed zero, so the definition does not\ndepend on the arbitrary point value assigned at the jump. This is a local\ndefinition on the data neighborhood where the local solver is established.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 13 §13.2, printed pp. 138–140: Godunov flux as the interface flux of the self-similar Riemann solution"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-godunov-flux-is-consistent-and-conservative",
+        "kind": "theorem",
+        "title": "The local Godunov flux is consistent and conservative",
+        "deps": [
+          "def-godunov-flux-from-a-local-riemann-solver",
+          "thm-local-small-data-riemann-solver"
+        ],
+        "dependency_level": 8,
+        "statement": "For all equal states $u$ in the local solver neighborhood,\n$G(u,u)=f(u)$. For any finite periodic array of length $n\\ge1$ whose adjacent pairs lie in the\nlocal flux domain, define the update (indices modulo $n$)\n$$U_j^{new}=U_j-\\nu\\bigl(G(U_j,U_{j+1})-G(U_{j-1},U_j)\\bigr).$$\nFor any scalar $\\nu$, this update using one two-state flux at each interface\npreserves the sum of cell states.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 13 §13.2, printed pp. 138–140: interface flux and finite-volume conservation"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2615,
+    "id": "riemann-solvers-for-hyperbolic-systems-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Riemann solvers for hyperbolic systems — Examples",
+    "companion": "riemann-solvers-for-hyperbolic-systems",
+    "requires": [
+      "riemann-solvers-for-hyperbolic-systems"
+    ],
+    "items": [
+      {
+        "id": "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+        "kind": "counterexample",
+        "title": "A Roe jump property does not imply entropy admissibility",
+        "deps": [
+          "def-roe-linearization-and-flux",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "def-scalar-convex-entropy-admissibility",
+          "lem-rankine-hugoniot-jump-is-a-weak-solution"
+        ],
+        "dependency_level": 3,
+        "statement": "For a scalar conservation law, the Roe exact flux-jump identity by itself\nguarantees entropy admissibility.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 14 §14.2.2, printed pp. 151–152: Roe's sonic expansion-shock entropy failure"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-ideal-gas-contact-discontinuity",
+        "kind": "example",
+        "title": "A contact discontinuity with equal velocity and pressure",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "thm-one-dimensional-ideal-gas-euler-eigenstructure",
+          "def-rankine-hugoniot-and-lax-shocks"
+        ],
+        "dependency_level": 3,
+        "statement": "Fix $\\gamma>1$, pressure $p_0>0$, velocity $u_0\\in\\mathbb R$, and distinct\npositive densities $\\rho_L,\\rho_R$. Set\n$E_K=p_0/(\\gamma-1)+\\rho_Ku_0^2/2$ and\n$U_K=(\\rho_K,\\rho_Ku_0,E_K)$ for $K=L,R$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 9 §9.1, printed pp. 89–91: contact discontinuities in Euler flow"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-euler-vacuum-threshold-boundary",
+        "kind": "example",
+        "title": "Euler vacuum detection at and above the pressure-root threshold",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-euler-star-pressure-response",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-safeguarded-euler-star-pressure-solver"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $\\gamma=7/5$, $\\rho_L=\\rho_R=1$, and $p_L=p_R=1$. Then\n$c_L=c_R=c=\\sqrt{7/5}$, and the vacuum threshold is\n$u_R-u_L\\ge 2(c_L+c_R)/(\\gamma-1)=10c$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 9 §9.2, printed pp. 91–93: exact Euler Riemann solution and vacuum condition"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-sod-tube-pressure-root",
+        "kind": "example",
+        "title": "Sod tube: a unique star-pressure root between the initial pressures",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-euler-star-pressure-response",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-safeguarded-euler-star-pressure-solver",
+          "lem-euler-pressure-solver-bracket-and-termination"
+        ],
+        "dependency_level": 7,
+        "statement": "For $\\gamma=7/5$, take left primitive data $(\\rho_L,u_L,p_L)=(1,0,1)$ and\nright data $(\\rho_R,u_R,p_R)=(1/8,0,1/10)$. Set\n$E_K=p_K/(\\gamma-1)+\\rho_Ku_K^2/2$ and\n$U_K=(\\rho_K,\\rho_Ku_K,E_K)$ for $K=L,R$; both conserved states lie in\n$\\mathcal G_\\gamma$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 9 §9.2, printed pp. 91–93: ideal-gas Riemann data and pressure equation"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-acoustic-system-local-riemann-solution",
+        "kind": "example",
+        "title": "An acoustic system resolved into two characteristic waves",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-local-rarefaction-curve",
+          "def-mixed-characteristic-wave-curve",
+          "thm-local-small-data-riemann-solver"
+        ],
+        "dependency_level": 7,
+        "statement": "Consider $U_t+A U_x=0$ with $A=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$,\nbase state $\\bar U=(0,0)^T$, and Riemann data $U_L=(0,0)^T$,\n$U_R=(-\\varepsilon,0)^T$. The eigenvalues are $-1,1$, so the system is\nstrictly hyperbolic and both fields are linearly degenerate. Use the constant\nfields $r_-=(1,-1)^T$ and $r_+=(1,1)^T$. Choose\n$0<\\varepsilon<\\delta$ and $\\varepsilon<2\\eta$, where $\\delta,\\eta>0$ are\nthe local solver radii at $\\bar U$ for these fields.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 6 §6.5, printed pp. 64–67: linear system Riemann decomposition"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

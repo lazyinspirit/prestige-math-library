@@ -1,0 +1,892 @@
+[
+  {
+    "order": 2662,
+    "id": "adaptive-finite-element-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Adaptive finite-element methods",
+    "companion": "adaptive-finite-element-methods-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas"
+    ],
+    "items": [
+      {
+        "id": "cor-afem-constant-convection-weak-wellposedness",
+        "kind": "corollary",
+        "title": "Weak well-posedness for constant divergence-free convection",
+        "deps": [
+          "def-countable-choice",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-hilbert-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-lax-milgram",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume Countable Choice as in the cited Sobolev and Lax–Milgram suppliers. Let $\\Omega\\subset\\mathbb R^2$ be a bounded polygon, $b\\in\\mathbb R^2$ constant, and $f\\in L^2(\\Omega;\\mathbb R)$. Here $H_0^1$ is the zero-boundary closure of [[def-wkp-zero-as-a-sobolev-closure]]. There is a unique real-valued $u\\in H_0^1(\\Omega;\\mathbb R)$ satisfying\n$$\\int_\\Omega \\nabla u\\cdot\\nabla v+(b\\cdot\\nabla u)v\\,dx=\\int_\\Omega fv\\,dx\\qquad(v\\in H_0^1(\\Omega)).$$\nNo $H^2$ regularity is asserted.",
+        "strategy": "Bound the form, show the constant-convection term is skew on H01, use Poincare coercivity, and apply Lax-Milgram.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 3",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture3.pdf",
+              "locator": "§§3.1–3.3, quasi-orthogonality and convection fine-mesh condition, PDF pp. 1–5."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-afem-local-moment-interpolant",
+        "kind": "definition",
+        "title": "A local moment interpolant for conforming P1 meshes",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume Countable Choice for the $H_0^1$ convention of [[def-countable-choice]].\n\nFix a finite conforming triangular mesh $\\mathcal T$. For each interior vertex $z$, choose the incident triangle with least fixed mesh index and denote it $K_z$. On the reference triangle $\\widehat K$, let $\\widehat\\lambda_1,\\widehat\\lambda_2,\\widehat\\lambda_3$ be its barycentric coordinates. The Gram matrix $G_{ij}=\\int_{\\widehat K}\\widehat\\lambda_i\\widehat\\lambda_j$ is positive definite because $\\int_{\\widehat K}p^2>0$ for every nonzero $p\\in P_1(\\widehat K)$. Thus there are unique dual affine polynomials $\\widehat\\psi_i\\in P_1(\\widehat K)$ with $\\int_{\\widehat K}\\widehat\\lambda_j\\widehat\\psi_i=\\delta_{ij}$. Pull them to $K_z$ by the affine map using the normalized measure so $\\int_{K_z}\\varphi_y\\psi_{z,K_z}=\\delta_{zy}$ for its three local nodal hats.\n\nFor $v\\in H_0^1(\\Omega)$ set $c_z(v)=\\int_{K_z}v\\psi_{z,K_z}$ at interior vertices and $c_z(v)=0$ at boundary vertices. Define\n$$I_{\\mathcal T}v=\\sum_{z\\ {\\rm interior}}c_z(v)\\varphi_z,$$\nwhere $\\varphi_z$ is the continuous piecewise-affine nodal hat. The sum is finite and belongs to the conforming zero-boundary P1 space. This is a moment quasi-interpolant; it is not a point-evaluation operator on arbitrary Sobolev classes.",
+        "strategy": "Specify the reference dual polynomials, cell selection for each vertex, and the induced conforming zero-boundary P1 function.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 1",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture1.pdf",
+              "locator": "§1.5, Clément interpolation and scaled trace estimate, PDF pp. 8–9."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-afem-nvb-labelled-triangulation-family",
+        "kind": "definition",
+        "title": "Compatible 2D newest-vertex-bisection meshes",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "dependency_level": 0,
+        "statement": "A compatible labeled initial mesh is a finite matching affine simplicial triangulation $\\mathcal T_0$ of a polygon in $\\mathbb R^2$ as in [[def-matching-affine-simplicial-meshes]], equipped with labels on its edges such that each triangle has one edge labeled $0$ and two labeled $1$, and every shared edge has the same label from both incident triangles. Matching means that distinct cell interiors are disjoint and any nonempty cell intersection is a whole common face: in two dimensions it may be a vertex or an edge. For a descendant triangle of generation $g(K)$, its three edge labels, in any order, are $(g(K)+1,g(K)+1,g(K))$. The unique edge labeled $g(K)$ is its reference edge.\n\nTo bisect $K$, join the midpoint of its reference edge to the opposite vertex. The two resulting triangles have generation $g(K)+1$. In each child, the two new half-edges and the bisector receive label $g(K)+2$; the one inherited nonreference edge retains label $g(K)+1$ and is the child's reference edge. A finite bisection forest is the collection of the initial triangles and all descendants reached by finitely many such bisections; its leaves form a triangulation when all shared-edge subdivisions agree. The admissible family $\\mathbb T(\\mathcal T_0)$ consists of the matching conforming leaf triangulations generated by these compatible bisections. A refinement $\\mathcal T\\le\\mathcal T_*$ means every cell of $\\mathcal T_*$ lies in a cell of $\\mathcal T$.\n\nFor deterministic operational ordering, fix a finite starting mesh in this family and a total order of its cells. Enumerate those operational roots as $K_1,\\ldots,K_N$ in that order; this starting mesh may already be a geometric descendant of $\\mathcal T_0$, and operational numbering does not reset its generations or edge labels. Give root $K_r$ identifier $(r,\\varnothing)$ and order its three vertices lexicographically by their two real coordinates. If a parent has identifier $(r,w)$, with $w$ a finite binary word, let $A$ be the earlier endpoint of its labeled reference edge in its stored vertex list, let $B$ be the other endpoint, let $C$ be the opposite vertex, and let $M=(A+B)/2$. Its children with vertex sets $\\{A,M,C\\}$ and $\\{B,M,C\\}$ receive identifiers $(r,w0)$ and $(r,w1)$, respectively. Each child's stored vertex list is the parent list restricted to its two retained vertices, in their previous order, followed by $M$. These lists are bookkeeping orders, independent of the orientation convention for affine reference maps. Compare identifiers first by root rank, then lexicographically by binary word, with $0<1$ and a proper prefix before its extensions. This is a total order, so every finite nonempty pending set has a unique least identifier. Distinct roots or distinct binary paths have distinct identifiers, and a retained cell keeps its identifier and vertex list through all subsequent calls. This operational decoration changes no geometric bisection, reference edge, admissible triangulation or finite-element space.\n\nThe compatible initial labeling is a hypothesis, not a consequence of an arbitrary initial triangulation. This definition is two-dimensional and makes no claim about three-dimensional closure or complexity.",
+        "strategy": "State edge labels, generations, reference edges, child labeling, and the finite forest convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-afem-p1-residual-estimator-and-data-oscillation",
+        "kind": "definition",
+        "title": "Residual indicators and data oscillation for P1 AFEM",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume Countable Choice for the $L^2$ and Sobolev conventions of [[def-countable-choice]].\n\nAll functions and data are real-valued. Let $\\Omega\\subset\\mathbb R^2$ be a bounded polygon and let $\\mathcal T$ be a finite conforming matching triangulation by nondegenerate affine triangles, with maximum shape-regularity constant $\\Gamma$. Write $h_K=\\operatorname{diam}K$ and $h_E=\\operatorname{diam}E$. Let $V(\\mathcal T)$ be the continuous, piecewise-affine zero-boundary subspace of [[def-broken-and-conforming-polynomial-spaces]], which lies in $H_0^1(\\Omega;\\mathbb R)$ by [[thm-matching-continuous-piecewise-polynomials-are-wkp]] and [[thm-zero-boundary-piecewise-polynomials-in-w10p]]. The exact weak model is\n$$-\\Delta u+b\\cdot\\nabla u=f,\\qquad u\\in H_0^1(\\Omega;\\mathbb R),\\quad f\\in L^2(\\Omega;\\mathbb R),\\quad b\\in\\mathbb R^2\\ \\text{constant}.$$\nThe weak form is $\\int_\\Omega\\nabla u\\cdot\\nabla v+(b\\cdot\\nabla u)v\\,dx=\\int_\\Omega fv\\,dx$ for every $v\\in H_0^1(\\Omega;\\mathbb R)$. The case $b=0$ is the symmetric Laplace model. Given $U\\in V(\\mathcal T)$, its cell residual is $R_K(U)=f|_K-b\\cdot\\nabla(U|_K)$; this is $f+\\Delta U-b\\cdot\\nabla U$ because $\\Delta U=0$ on each cell. For an interior edge $E=K^+\\cap K^-$ define the outward flux jump\n$$J_E(U)=\\nabla U|_{K^+}\\cdot n_{K^+}+\\nabla U|_{K^-}\\cdot n_{K^-},$$\nwhere $n_{K^\\pm}$ are the unit outward normals. Set\n$$\\eta_K(U)^2=h_K^2\\|R_K(U)\\|_{L^2(K)}^2+\\frac12\\sum_{E\\subset\\partial K,\\ E\\ {\\rm interior}}h_E\\|J_E(U)\\|_{L^2(E)}^2,$$\nand $\\eta(U,\\mathcal S)^2=\\sum_{K\\in\\mathcal S}\\eta_K(U)^2$ for $\\mathcal S\\subset\\mathcal T$. The factor $1/2$ assigns each interior-edge contribution once globally. Let $\\Pi_K^0$ be the $L^2(K)$ projection onto constants. The cell data oscillation is\n$$\\operatorname{osc}_K(U)^2=h_K^2\\|R_K(U)-\\Pi_K^0R_K(U)\\|_{L^2(K)}^2,\\qquad \\operatorname{osc}(U,\\mathcal S)^2=\\sum_{K\\in\\mathcal S}\\operatorname{osc}_K(U)^2.$$\nSince $b\\cdot\\nabla U$ is constant on $K$, this oscillation equals $h_K^2\\|f-\\Pi_K^0f\\|_2^2$.\n\nFor a separate definitional interface, consider the symmetric diffusion model $-\\operatorname{div}(A\\nabla u)=f$, where $A$ is a symmetric uniformly elliptic matrix field in the sense of [[def-uniformly-elliptic-divergence-form-operator]] and is Lipschitz on each cell. Its cell residual for a piecewise-affine $U$ is $R_K^A(U)=f+\\operatorname{div}(A\\nabla U)$, and its outward conormal-flux jump is the sum of $A\\nabla U\\cdot n_K$ from the two incident cells. Let $\\Pi_E^0$ be the $L^2(E)$ projection onto constants. The projected edge term $h_E\\|J_E^A-\\Pi_E^0J_E^A\\|_{L^2(E)}^2$ records nonconstant conormal flux. The reliability, contraction, and complexity results authored here concern $A=I$ only; this extension supplies notation and no coefficient-dependent theorem.",
+        "strategy": "Give exact residual, jump, estimator, projection, and oscillation formulas with the PDE and mesh hypotheses.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-vertex-patch-poincare",
+        "kind": "lemma",
+        "title": "Uniform Poincare inequalities on vertex and cell patches",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "thm-reference-simplex-poincare-wirtinger",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume Countable Choice, as in the reference-simplex trace and Poincare suppliers.\n\nLet $\\mathcal T$ be a conforming shape-regular triangular mesh. For an interior vertex $z$, let $\\omega_z$ be the union of its incident triangles; for a boundary vertex use the same patch. There is a constant $C$ depending only on the shape-regularity bound such that, at an interior vertex, every $v\\in H^1(\\omega_z)$ satisfies\n$$\\|v-v_{\\omega_z}\\|_{L^2(\\omega_z)}\\le C h_z\\|\\nabla v\\|_{L^2(\\omega_z)},$$\nwhere $v_{\\omega_z}$ is the patch mean and $h_z=\\max_{K\\subset\\omega_z}h_K$. On a boundary vertex patch, every $v\\in H_0^1(\\Omega)$ satisfies\n$$\\|v\\|_{L^2(\\omega_z)}\\le C h_z\\|\\nabla v\\|_{L^2(\\omega_z)}.$$\nFor a cell $K$, define $\\omega_K=\\bigcup_{z\\in\\mathcal V(K)}\\omega_z$, where $\\mathcal V(K)$ is its set of three vertices. If $K$ does not meet $\\partial\\Omega$, the corresponding mean-zero estimate holds on $\\omega_K$ with scale $h_K$; if $K$ meets $\\partial\\Omega$ and $v\\in H_0^1(\\Omega)$, then\n$$\\|v\\|_{L^2(\\omega_K)}\\le Ch_K\\|\\nabla v\\|_{L^2(\\omega_K)}.$$",
+        "strategy": "Scale simplex Poincare and trace bounds, compare neighboring cell means across shared edges, and use the bounded valence of each vertex star.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 1",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture1.pdf",
+              "locator": "§1.5, Clément interpolation and scaled trace estimate, PDF pp. 8–9."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-dorfler-marking-and-conforming-nvb-refinement",
+        "kind": "algorithm",
+        "title": "Dorfler marking and conforming newest-vertex refinement",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family"
+        ],
+        "dependency_level": 1,
+        "statement": "Input: a finite labeled conforming mesh $\\mathcal T$, exact nonnegative arrays $(\\eta_K^2)_{K\\in\\mathcal T}$ and $(o_K^2)_{K\\in\\mathcal T}$, where $\\eta_K^2$ is the cell estimator contribution and $o_K^2$ the cell data-oscillation contribution, bulk-fraction parameters $\\theta_E,\\theta_O\\in(0,1]$, a per-call total bisection budget $B\\in\\mathbb N_0$, and a stable total order of mesh identifiers. On the first call on a mesh not yet carrying operational forest identifiers, rank its cells by the supplied order and initialize the operational roots and vertex lists of [[def-afem-nvb-labelled-triangulation-family]]. This initialization preserves the supplied order on those cells and does not change their geometric generations or labels. On subsequent calls retain that forest decoration and use its identifier order. Thus each current input leaf, including every generated descendant, has a specified identifier. For an array $q_K\\ge0$ and $\\theta\\in(0,1]$, sort by decreasing $q_K$ and then increasing identifier. If $\\sum_Kq_K=0$, return the empty set. Otherwise return the shortest initial segment whose sum is at least $\\theta\\sum_Kq_K$. Thus these parameters are fractions of the squared contributions (the square-root convention for the usual estimator-norm parameter). Call the resulting sets $M_E,M_O$ and set $M=M_E\\cup M_O$.\n\nBefore modifying the mesh, form the original edge-neighbor request set\n$$Q=\\{L\\in\\mathcal T:L=K\\text{ or }L\\text{ shares an edge with some }K\\in M\\}.$$\nThus $M_E,M_O$ and their union $M$ remain the bulk marks; $Q$ is the larger refinement request, with $M\\subseteq Q$ and $\\#Q\\le4\\#M$ because a triangle has at most three edge neighbors. For $M=\\varnothing$, also $Q=\\varnothing$. Set a remaining-generation flag $q_K=3$ on each cell in $Q$ and $q_K=0$ on every other cell. Repeatedly take the pending leaf with least stable identifier and process its reference edge. If the reference edge is on the polygon boundary, bisect that leaf. If its interior reference neighbor has the same generation, bisect the compatible pair simultaneously. If the neighbor has generation one lower, recursively process that neighbor first and then re-inspect the original leaf; this follows the finite reference-edge chain until the edge can be split conformingly. Every split leaf $T$ is replaced by its two children with the binary-path identifiers and stored vertex lists prescribed by [[def-afem-nvb-labelled-triangulation-family]], each inheriting $q_T-1$ when $q_T>0$ and otherwise $0$. Thus conformity splits may propagate without scheduling extra uniform generations, while every originally requested cell in $Q$ and its descendants complete all three requested generations. Process simultaneous pairs in the same transaction and use the fixed identifier order for all pending leaves. Stop when all remaining-generation flags vanish. Count every bisection against $B$. If closure or a pending request would exceed the remaining budget, discard the tentative splits and their new identifiers, retaining the original identifiers and vertex lists, and return the original mesh with status budget-exhausted; otherwise return the refined matching mesh with status complete. Invalid arrays, nonfinite or negative entries, invalid parameters, or incompatible labels return invalid-input without changing the mesh. All arithmetic and comparisons in this mathematical algorithm are exact; implementation error, linear algebra, and quadrature are outside its scope.",
+        "strategy": "Sort by decreasing squared contribution with a fixed tie rule, mark estimator and oscillation bulk sets, then run bounded transactional refinement.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-afem-p1-approximation-class",
+        "kind": "definition",
+        "title": "The P1 AFEM approximation class",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-countable-choice",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-afem-p1-residual-estimator-and-data-oscillation"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice. The space $H_0^1(\\Omega)$ is the closure of $C_c^\\infty(\\Omega)$ in the $H^1$ norm, as in [[def-wkp-zero-as-a-sobolev-closure]] and [[def-countable-choice]].\n\nFix a compatible initial triangulation $\\mathcal T_0$, its 2D NVB family $\\mathbb T(\\mathcal T_0)$ from [[def-afem-nvb-labelled-triangulation-family]], and a weak solution $u\\in H_0^1(\\Omega)$ of the symmetric $A=I$, $b=0$ model in [[def-afem-p1-residual-estimator-and-data-oscillation]]. For a conforming refinement $\\mathcal T$, let $V(\\mathcal T)$ be its continuous P1 zero-boundary space and define\n$$E(\\mathcal T;u)=\\inf_{v\\in V(\\mathcal T)}\\|\\nabla(u-v)\\|_{L^2(\\Omega)},\\qquad E_N(u)=\\inf_{\\substack{\\mathcal T\\in\\mathbb T(\\mathcal T_0)\\\\ \\#\\mathcal T-\\#\\mathcal T_0\\le N}}E(\\mathcal T;u).$$\nFor $s>0$, the approximation seminorm and class are\n$$|u|_{\\mathbb A_s}=\\sup_{N\\ge0}(N+1)^sE_N(u),\\qquad \\mathbb A_s=\\{u\\in H_0^1(\\Omega):|u|_{\\mathbb A_s}<\\infty\\}.$$\nThe infimum is over a nonempty finite-budget set because $\\mathcal T_0$ is allowed. This definition concerns best energy approximation, not the number of cells selected by an algorithm. For the symmetric Laplace Galerkin solution, [[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]] supplies the unique exact solution, while [[lem-galerkin-orthogonality-for-conforming-galerkin-approximations]] gives orthogonality in the gradient inner product. Expanding the square shows that the exact Galerkin error equals $E(\\mathcal T;u)$.",
+        "strategy": "Use the mesh budget N and the supremum of (N+1)^s times best energy error.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 4",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture4.pdf",
+              "locator": "§§4.1–4.3, closure complexity, localized upper bound, and restricted P1 Laplace complexity, PDF pp. 1–4."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-convection-quasi-orthogonality-under-fine-mesh",
+        "kind": "lemma",
+        "title": "Quasi-orthogonality for constant convection on a fine initial mesh",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "def-countable-choice",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice, as in the zero-boundary Sobolev convention.\n\nLet $\\mathcal T_H\\le\\mathcal T_h$ be nested conforming meshes and let $U_H,U_h$ be exact P1 Galerkin solutions for the constant-convection model of [[def-afem-p1-residual-estimator-and-data-oscillation]]. Write $e_j=u-U_j$ and $d=U_h-U_H$. For $b=0$,\n$$\\|\\nabla e_h\\|_2^2=\\|\\nabla e_H\\|_2^2-\\|\\nabla d\\|_2^2.$$\nFor constant $b$, assume the explicit dual-pickup bound\n$$\\|e_h\\|_{L^2}\\le C_D h_0^s\\|\\nabla e_h\\|_{L^2}$$\nfor the nested sequence, with $s>0$, where $h_0=\\max_{K\\in\\mathcal T_0}\\operatorname{diam}K$, and put $\\mu=C_Dh_0^s|b|<1$. Then\n$$\\|\\nabla e_h\\|_2^2\\le(1-\\mu)^{-1}\\|\\nabla e_H\\|_2^2-\\|\\nabla d\\|_2^2.$$\nThe dual-pickup bound is an additional hypothesis. It is not asserted for every polygon or mesh.",
+        "strategy": "Expand the error across nested Galerkin spaces, integrate the skew convection term by parts, apply the dual L2 bound, and absorb it by Young's inequality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 3",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture3.pdf",
+              "locator": "§§3.1–3.3, quasi-orthogonality and convection fine-mesh condition, PDF pp. 1–5."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+        "kind": "lemma",
+        "title": "Shape regularity and local reduction under 2D newest-vertex bisection",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-shape-regular-affine-simplex-scaling"
+        ],
+        "dependency_level": 1,
+        "statement": "For any compatible 2D initial labeling from [[def-afem-nvb-labelled-triangulation-family]], every conforming NVB descendant has shape regularity bounded by a constant depending only on the initial mesh. Three complete generations of uniform bisection of a triangle split each original edge at its midpoint, create a new interior midpoint on the median from the opposite vertex, and give child diameters at most half the parent diameter.",
+        "strategy": "Classify the four similarity types generated by the midpoint rule, then list the vertices and edge lengths after three generations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            },
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 1",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture1.pdf",
+              "locator": "§1.5, Clément interpolation and scaled trace estimate, PDF pp. 8–9."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-p1-residual-representation",
+        "kind": "lemma",
+        "title": "Element and edge residual representation for P1 Galerkin errors",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice, as in the Sobolev and simplex trace suppliers.\n\nLet $\\mathcal T$ be a matching triangular mesh, $U\\in V(\\mathcal T)$, and $u$ solve the weak model from [[def-afem-p1-residual-estimator-and-data-oscillation]]. For every $v\\in H_0^1(\\Omega)$,\n$$\\int_\\Omega\\nabla(u-U)\\cdot\\nabla v+(b\\cdot\\nabla(u-U))v =\\sum_{K\\in\\mathcal T}\\int_K R_K(U)v-\\sum_{E\\ {\\rm interior}}\\int_EJ_E(U)v.$$",
+        "strategy": "Apply weak Gauss-Green on each triangle and cancel the two outward fluxes on each interior edge.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-afem-local-moment-interpolation-estimates",
+        "kind": "theorem",
+        "title": "Local approximation and reproduction of the P1 moment interpolant",
+        "deps": [
+          "def-afem-local-moment-interpolant",
+          "lem-afem-vertex-patch-poincare",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "lem-reference-polynomial-norm-equivalence",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice, as in the Sobolev, affine-scaling and trace suppliers.\n\nLet $\\mathcal T$ be a shape-regular conforming triangular mesh and let $I_{\\mathcal T}$ be the moment interpolant from [[def-afem-local-moment-interpolant]]. For each cell $K$, let $\\omega_K$ be the union of vertex stars of its vertices. There is a constant $C$ depending only on shape regularity such that for every $v\\in H_0^1(\\Omega)$,\n$$\\|v-I_{\\mathcal T}v\\|_{L^2(K)}\\le Ch_K\\|\\nabla v\\|_{L^2(\\omega_K)},\\quad \\|\\nabla I_{\\mathcal T}v\\|_{L^2(K)}\\le C\\|\\nabla v\\|_{L^2(\\omega_K)},$$\nand, for every interior edge $E\\subset\\partial K$,\n$$\\|v-I_{\\mathcal T}v\\|_{L^2(E)}\\le Ch_E^{1/2}\\|\\nabla v\\|_{L^2(\\omega_K\\cup\\omega_{K'})},$$\nwhere $K'$ is the other incident cell. The operator maps into $V(\\mathcal T)$ and reproduces every member of $V(\\mathcal T)$.",
+        "strategy": "Use vertex-patch Poincare, bounded reference dual moments, affine scaling, the scaled trace inequality, and bounded patch overlap.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 1",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture1.pdf",
+              "locator": "§1.5, Clément interpolation and scaled trace estimate, PDF pp. 8–9."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-common-refinement-overlay-and-cardinality",
+        "kind": "lemma",
+        "title": "Common NVB refinement and overlay cardinality",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties"
+        ],
+        "dependency_level": 2,
+        "statement": "For two compatible conforming NVB descendants $\\mathcal T_1,\\mathcal T_2$ of the same initial mesh $\\mathcal T_0$, the union of their bisection forests defines a smallest common conforming overlay $\\mathcal T_1\\oplus\\mathcal T_2$ and\n$$\\#(\\mathcal T_1\\oplus\\mathcal T_2)\\le\\#\\mathcal T_1+\\#\\mathcal T_2-\\#\\mathcal T_0.$$",
+        "strategy": "Use the full binary-tree representation, edge-label compatibility, and the leaf/internal-node count for each root tree.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 4",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture4.pdf",
+              "locator": "§§4.1–4.3, closure complexity, localized upper bound, and restricted P1 Laplace complexity, PDF pp. 1–4."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-data-oscillation-reduction-under-marked-refinement",
+        "kind": "lemma",
+        "title": "Data oscillation reduction under three-generation refinement",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice for the $L^2$ projection convention.\n\nSuppose the three-generation marked refinement call completes and returns $\\mathcal T_*\\ge\\mathcal T$, and let $\\operatorname{osc}_\\mathcal T(K)^2=h_K^2\\|f-\\Pi_K^0f\\|_2^2$. For a Dörfler set $M_O$ with parameter $\\theta_O\\in(0,1]$,\n$$\\operatorname{osc}_{\\mathcal T_*}^2\\le\\gamma_O\\operatorname{osc}_{\\mathcal T}^2,\\qquad \\gamma_O=1-\\frac34\\theta_O<1.$$",
+        "strategy": "Use nested L2 projections and the child-diameter reduction on the marked cells; leave unmarked contributions unchanged.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            },
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-localized-galerkin-refinement-estimate",
+        "kind": "lemma",
+        "title": "Localized energy estimate for nested Galerkin solutions",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-afem-p1-residual-representation",
+          "thm-afem-local-moment-interpolation-estimates",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice, as in the Sobolev interpolation suppliers.\n\nLet $\\mathcal T\\le\\mathcal T_*$ be conforming P1 meshes with exact Galerkin solutions $U,U_*$. Let $\\mathcal R=\\{K\\in\\mathcal T:K\\text{ is subdivided in }\\mathcal T_*\\}$ and let $\\omega(\\mathcal R)$ be the union of the vertex stars of cells in $\\mathcal R$. Then\n$$\\|\\nabla(U_*-U)\\|_{L^2(\\Omega)}^2\\le C\\sum_{K\\in\\mathcal R}\\eta_K(U)^2,$$\nwhere $C$ depends on shape regularity, $|b|h_{\\max}$, and the local interpolant constants.",
+        "strategy": "Use a local P1-reproducing moment interpolant that equals the fine solution difference away from refined patches, then apply the residual representation and finite overlap.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 4",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture4.pdf",
+              "locator": "§§4.1–4.3, closure complexity, localized upper bound, and restricted P1 Laplace complexity, PDF pp. 1–4."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+        "kind": "lemma",
+        "title": "Termination and cumulative complexity of NVB conformity closure",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties"
+        ],
+        "dependency_level": 2,
+        "statement": "Fix a compatible labeled initial mesh. Recursive reference-edge closure of any finite marked set terminates, produces a matching conforming NVB descendant, and preserves the shape bound of [[lem-afem-nvb-shape-regularity-and-three-generation-properties]]. For any sequence of finite request sets $Q_k$, with three uniform generations requested on each cell of $Q_k$, there is a constant $C_{\\rm gen}$ depending only on the initial mesh such that\n$$\\#\\mathcal T_n-\\#\\mathcal T_0\\le C_{\\rm gen}\\sum_{k=0}^{n-1}\\#Q_k.$$\nFor the algorithm [[alg-dorfler-marking-and-conforming-nvb-refinement]], keep $M_k=M_{E,k}\\cup M_{O,k}$ as the bulk-marked set and use its original edge-neighbor request set $Q_k$. Then $\\#Q_k\\le4\\#M_k$, so with $C_{\\rm cl}=4C_{\\rm gen}$,\n$$\\#\\mathcal T_n-\\#\\mathcal T_0\\le C_{\\rm cl}\\sum_{k=0}^{n-1}\\#M_k.$$\nThe constant is for the cumulative sequence; no uniform bound on the added cells in one single refinement call is asserted.",
+        "strategy": "Use generation-decreasing reference-edge chains for termination and a geometric allocation argument for the cumulative closure bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-afem-p1-residual-reliability-and-local-efficiency",
+        "kind": "theorem",
+        "title": "Residual reliability and local efficiency for P1 AFEM",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "lem-afem-p1-residual-representation",
+          "thm-afem-local-moment-interpolation-estimates",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "def-countable-choice",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice, as in the Sobolev trace and inverse-estimate suppliers.\n\nLet $\\mathcal T$ be a conforming shape-regular triangular mesh, let $u\\in H_0^1(\\Omega)$ solve the model of [[def-afem-p1-residual-estimator-and-data-oscillation]], and let $U\\in V(\\mathcal T)$ be its exact P1 Galerkin solution. There are constants $C_{\\rm rel},C_{\\rm eff}$ depending only on the shape bound and $|b|h_{\\max}$ such that\n$$\\|\\nabla(u-U)\\|_2^2\\le C_{\\rm rel}\\eta(U,\\mathcal T)^2,$$\nand for every $K\\in\\mathcal T$,\n$$\\eta_K(U)^2\\le C_{\\rm eff}\\left(\\|\\nabla(u-U)\\|_{L^2(\\omega_K)}^2+ \\operatorname{osc}(U,\\omega_K)^2\\right),$$\nwhere $\\omega_K$ is the union of $K$ and its edge neighbors. If $\\mathcal T_*\\ge\\mathcal T$ contains the uniform three-generation subdivision of every cell in the original edge-neighbor patch $\\omega(M)$ of $M\\subset\\mathcal T$ (in particular, every complete call of [[alg-dorfler-marking-and-conforming-nvb-refinement]] has this property) and $U_*$ is the exact fine Galerkin solution, then\n$$\\eta(U,\\ M)^2\\le C_{\\rm eff}\\left(\\|\\nabla(U_*-U)\\|_{L^2(\\omega(M))}^2+ \\operatorname{osc}(U,\\omega(M))^2\\right),$$\nwith $\\omega(M)$ the union of edge-neighbor patches of marked cells. All constants are independent of the refinement level.",
+        "strategy": "Test the residual representation against the local moment interpolation error for reliability and against cell and edge bubbles for local lower bounds.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-dorfler-marking-cardinality",
+        "kind": "lemma",
+        "title": "Dorfler marking is cardinality-optimal up to mesh closure",
+        "deps": [
+          "def-afem-p1-approximation-class",
+          "def-afem-nvb-labelled-triangulation-family",
+          "thm-afem-p1-residual-reliability-and-local-efficiency",
+          "lem-afem-common-refinement-overlay-and-cardinality",
+          "lem-afem-localized-galerkin-refinement-estimate",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "def-countable-choice",
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "lem-afem-convection-quasi-orthogonality-under-fine-mesh"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice for the Sobolev and residual-estimator suppliers.\n\nAssume $b=0$, $f$ is constant on each initial cell, and $\\mathcal T$ is a conforming descendant. Let $e_\\mathcal T$ and $\\eta_\\mathcal T$ be the exact P1 Galerkin energy error and residual estimator. Let $\\mathcal T_*$ be another conforming NVB descendant of $\\mathcal T_0$ with exact Galerkin solution $U_*$. If $e_{\\mathcal T_*}\\le\\lambda e_\\mathcal T$ for some $0<\\lambda<1$, then the cells subdivided in the overlay $\\mathcal T\\oplus\\mathcal T_*$ form a Dörfler set with parameter\n$$\\theta_*=(1-\\lambda^2)/(C_{\\rm loc}C_{\\rm eff})>0,$$\nwhere $C_{\\rm loc}$ is the localized refinement constant and $C_{\\rm eff}$ the global efficiency constant. Consequently the deterministic smallest-cardinality Dörfler set for any fixed $0<\\theta_E\\le\\min(1,\\theta_*)$ has cardinality at most $\\#\\mathcal T_*-\\#\\mathcal T_0$.",
+        "strategy": "Use Pythagorean orthogonality, the localized refinement estimate, estimator equivalence with zero oscillation, and the overlay cardinality bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 4",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture4.pdf",
+              "locator": "§§4.1–4.3, closure complexity, localized upper bound, and restricted P1 Laplace complexity, PDF pp. 1–4."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-afem-residual-estimator-reduction",
+        "kind": "lemma",
+        "title": "Reduction of the P1 residual estimator after marked refinement",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+          "def-countable-choice",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "lem-shape-regular-affine-simplex-scaling"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice, as in the residual and inverse-estimate suppliers.\n\nSuppose the refinement call completes with a matching descendant $\\mathcal T_*\\ge\\mathcal T$ and every cell in the Dörfler estimator set $M_E$ receives three generations of refinement, with exact Galerkin solutions $U,U_*$. For every $\\varepsilon>0$,\n$$\\eta_{\\mathcal T_*}(U_*)^2\\le(1+\\varepsilon)\\eta_\\mathcal T(U)^2-\\frac12\\eta_\\mathcal T(U,M_E)^2+ C_\\varepsilon(1+|b|^2h_{\\max}^2)\\|\\nabla(U_*-U)\\|_2^2.$$\nThe constant depends only on $\\varepsilon$ and the uniform shape bound.",
+        "strategy": "Split new residuals into old residuals and terms from the discrete correction; use mesh-size reduction, inverse trace estimates, and finite patch overlap.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-afem-error-and-oscillation-contraction",
+        "kind": "theorem",
+        "title": "Linear contraction of AFEM energy error and oscillation",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "cor-afem-constant-convection-weak-wellposedness",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "lem-afem-convection-quasi-orthogonality-under-fine-mesh",
+          "thm-afem-p1-residual-reliability-and-local-efficiency",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-afem-data-oscillation-reduction-under-marked-refinement",
+          "lem-afem-residual-estimator-reduction",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume the Axiom of Choice and Countable Choice for the weak elliptic existence suppliers used to instantiate either model branch.\n\nLet $(\\mathcal T_k,U_k)$ be generated by exact P1 Galerkin solves and the three-generation algorithm with $\\theta_E,\\theta_O\\in(0,1]$, and assume every per-call bisection budget is sufficient for a complete refinement. For the estimator and oscillation of [[def-afem-p1-residual-estimator-and-data-oscillation]], write $e_k=\\|\\nabla(u-U_k)\\|_2$, $\\eta_k=\\eta(U_k,\\mathcal T_k)$ and $\\operatorname{osc}_k=\\operatorname{osc}(U_k,\\mathcal T_k)$. On the symmetric branch $b=0$, no initial-mesh smallness is needed. On the constant-convection branch assume the uniform dual-pickup bound of [[lem-afem-convection-quasi-orthogonality-under-fine-mesh]] and set $\\mu=C_Dh_0^s|b|$. Define\n$$\\kappa=\\min\\left\\{\\frac12,\\frac{\\theta_E}{C_{\\rm eff}C_{\\rm rel}}\\right\\},\\qquad \\nu=\\begin{cases}0,&b=0,\\\\ \\mu/(1-\\mu),&b\\ne0.\\end{cases}$$\nIn the convection branch assume $\\mu<1$, so that $\\nu$ is defined and the quasi-orthogonality estimate applies, and assume $\\nu<\\kappa$. Then there are $\\beta>0$ and $0<\\alpha<1$, depending only on the displayed constants and marking parameters, such that\n$$e_{k+1}^2+\\beta\\operatorname{osc}_{k+1}^2 \\le\\alpha\\big(e_k^2+\\beta\\operatorname{osc}_{k}^2\\big).$$\n\nMoreover, after possibly reducing a positive weight $\\sigma$, there are $\\beta'>0$ and $0<\\alpha'<1$ such that\n$$e_{k+1}^2+\\beta'\\operatorname{osc}_{k+1}^2+\\sigma\\eta_{k+1}^2 \\le\\alpha'\\big(e_k^2+\\beta'\\operatorname{osc}_{k}^2+\\sigma\\eta_k^2\\big).$$\nThis second assertion records the residual-estimator reduction as part of the usual AFEM quasi-error. Constants and smallness hypotheses belong to the chosen marking and the stated dual-pickup bound.",
+        "strategy": "Reduce oscillation by bulk marking, derive a marked correction lower bound from local efficiency, use orthogonality or fine-mesh quasi-orthogonality, and choose a fixed weight to absorb the residual oscillation term.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            },
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 3",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture3.pdf",
+              "locator": "§§3.1–3.3, quasi-orthogonality and convection fine-mesh condition, PDF pp. 1–5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-afem-p1-poisson-optimal-complexity",
+        "kind": "theorem",
+        "title": "Optimal P1 AFEM complexity for the Laplacian",
+        "deps": [
+          "def-afem-p1-approximation-class",
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+          "lem-afem-dorfler-marking-cardinality",
+          "thm-afem-error-and-oscillation-contraction",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Choice and Countable Choice used by the weak Dirichlet Poisson existence supplier. Let $\\Omega$ be a bounded polygon, $\\mathcal T_0$ a compatible shape-regular 2D NVB mesh, and $u\\in H_0^1(\\Omega)$ solve $-\\Delta u=f$ with $f$ piecewise constant on $\\mathcal T_0$. Run the exact P1 algorithm with three-generation refinement; assume each per-call budget suffices for every refinement through iteration $k$. Write $U_k$ for the unique exact P1 Galerkin solution on $\\mathcal T_k$, estimator bulk parameter $0<\\theta_E\\le\\min(1,(1-\\lambda^2)/(C_{\\rm loc}C_{\\rm eff}))$ for a fixed $0<\\lambda<1$, as in [[lem-afem-dorfler-marking-cardinality]], and any fixed oscillation parameter $\\theta_O\\in(0,1]$. If $u\\in\\mathbb A_s$ from [[def-afem-p1-approximation-class]] for $0<s\\le\\frac12$, then\n$$\\|\\nabla(u-U_k)\\|_2\\le C|u|_{\\mathbb A_s}(1+\\#\\mathcal T_k-\\#\\mathcal T_0)^{-s},$$\nwhere $C$ depends on the initial mesh, marking parameters and estimator constants. This is an optimal-complexity theorem only for the Laplacian and P0 initial data.",
+        "strategy": "Compare each Dörfler set with an overlay of a near-best mesh, use geometric error contraction to sum marked-cell counts, and apply the cumulative NVB closure bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 4",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture4.pdf",
+              "locator": "§§4.1–4.3, closure complexity, localized upper bound, and restricted P1 Laplace complexity, PDF pp. 1–4."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2663,
+    "id": "adaptive-finite-element-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Adaptive finite-element methods — Examples",
+    "companion": "adaptive-finite-element-methods",
+    "requires": [
+      "adaptive-finite-element-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-afem-coefficient-jump-adds-flux-oscillation",
+        "kind": "example",
+        "title": "A coefficient jump creates nonzero edge-flux oscillation",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice for the cited Sobolev/L2 interface.\n\nLet $E=\\{(0,y):0\\le y\\le1\\}$ be shared by $K^-=\\operatorname{conv}\\{(-1,0),(0,0),(0,1)\\}$ and $K^+=\\operatorname{conv}\\{(1,0),(0,0),(0,1)\\}$. Set $A^-=1$, $A^+=1+y$, and $U(x,y)=x$. On each triangle $A$ is positive and Lipschitz; its traces differ on $E$.",
+        "strategy": "Evaluate the two outward conormal fluxes on the common edge and subtract their edge mean.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-afem-coarse-convection-mesh-misses-smallness-condition",
+        "kind": "example",
+        "title": "A coarse mesh can miss the convection smallness condition",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-afem-convection-quasi-orthogonality-under-fine-mesh",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice for the cited Sobolev/L2 interface.\n\nFix a positive mesh diameter $h_0$, exponent $s>0$, and a stipulated positive dual-pickup constant $C_D$. The sufficient small-mesh parameter in [[lem-afem-convection-quasi-orthogonality-under-fine-mesh]] is $\\mu=C_Dh_0^s|b|$.",
+        "strategy": "Substitute the chosen convection norm into the condition and conclude only that the sufficient estimate is unavailable.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 3",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture3.pdf",
+              "locator": "§§3.1–3.3, quasi-orthogonality and convection fine-mesh condition, PDF pp. 1–5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-afem-dorfler-marking-three-cells",
+        "kind": "example",
+        "title": "A deterministic Dörfler mark on three cells",
+        "deps": [
+          "alg-dorfler-marking-and-conforming-nvb-refinement"
+        ],
+        "dependency_level": 2,
+        "statement": "Take squared cell indicators $(9,4,1)$ in the stated identifier order and $\\theta_E=3/5$.",
+        "strategy": "Compute the total, threshold, sorted partial sums, and the minimality comparison.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            },
+            {
+              "title": "Cascón, Kreuzer, Nochetto & Siebert, Quasi-optimal convergence rate for an AFEM",
+              "url": "https://math.umd.edu/~rhn/papers/pdf/optimality.pdf",
+              "locator": "§§2.1–2.7, 3.2–3.3, Theorem 4.1, and §5."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-afem-data-oscillation-reduction-under-refinement",
+        "kind": "example",
+        "title": "Projected data oscillation on a reference triangle",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "lem-afem-data-oscillation-reduction-under-marked-refinement",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice for the cited Sobolev/L2 interface.\n\nLet $K=\\{(x,y):x\\ge0,\\ y\\ge0,\\ x+y\\le1\\}$, let $f=\\mathbf1_{\\{x+y\\le1/2\\}}$, and mark this single cell with $\\theta_O=1$. Use the uniform three-generation refinement, any estimator marking fraction, and a per-call budget sufficient for completion.",
+        "strategy": "Integrate the two subregions exactly and apply the projection contraction on each refined child.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo H. Nochetto, Adaptive Finite Element Methods, Lecture 2",
+              "url": "https://www.math.umd.edu/~rhn/lectures/lecture2.pdf",
+              "locator": "§2.1, residual representation, reliability, and bubble lower bound, PDF pp. 1–5."
+            },
+            {
+              "title": "Bonito, Canuto, Nochetto & Veeser, Adaptive Finite Element Methods (2024)",
+              "url": "https://people.tamu.edu/~bonito/Publications/Preprints/2024_afem_acta.pdf",
+              "locator": "§§3.5–3.6 on 2D newest-vertex bisection and §8.1.1–8.1.3 on chains and cumulative closure complexity."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

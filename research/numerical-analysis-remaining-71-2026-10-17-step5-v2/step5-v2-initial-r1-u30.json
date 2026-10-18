@@ -1,0 +1,525 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "30",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-rankine-hugoniot-and-lax-shocks",
+      "model": "gpt-6-luna",
+      "context_sha256": "0d4600e6822a782cca6b0edacdcf935b039c36cc1f9faa9278e148e16323a335",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The Lax clause used eigenvalues at arbitrary states in G although its supplier defines ordered real eigenvalues only on N. For f(x,y)=(y,x^2/2), Df has eigenvalues +/-sqrt(x) on x>0 but no real eigenvalues on x<0. The repaired clause requires both states in the stated hyperbolicity set N; the Rankine-Hugoniot identity remains valid on all of G.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+      "model": "gpt-6-luna",
+      "context_sha256": "2cd6835baf3ad048d608ffa720dbe0ebb08d19721d32cf8702e29cd10da96c8a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 attributed weak-solution necessity to a definition that only names the algebraic RH identity. F4 already supplies the complete moving-jump equivalence and initial trace, so this is a nonfatal citation defect. F3 now states exactly the definition. The Roe scalar (uL+uR)/2 has all required properties, and the stationary (-1,1) jump has entropy production 2/3>0 for eta=u^2/2 and q=u^3/3.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.clawpack.org/riemann_book/html/Burgers_approximate.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-euler-star-pressure-root-and-vacuum-criterion",
+      "model": "gpt-6-luna",
+      "context_sha256": "a3a1cae12f92a48946fb9f08d32fdef2324aedab24dc63c22780cb114a1d2ffb",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The intended threshold is correct, but the ordered phrase left velocity then right velocity followed by their difference makes the signed gap ambiguous/reversed. Explicitly vR-vL=uR-uL-2(cL+cR)/(gamma-1)=Phi(0+). F3 now cites only the actual positive-pressure velocity/contact interface, and step 4.1 derives its limiting velocities from step 2.1. Both derivative formulas are positive, match at pK, and the explicit P gives Phi(P)>0; IVT and strict increase prove the unchanged existence/uniqueness statement.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.clawpack.org/riemann_book/html/Euler.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-safeguarded-euler-star-pressure-solver",
+      "model": "gpt-6-luna",
+      "context_sha256": "a1b188bcd24fb3cfe872e4f24cf2554c64a55b676c174386729ad709c2f83dc8",
+      "outcome": "false_positive",
+      "reason": "The separate result exists: lem-euler-pressure-solver-bracket-and-termination is placed immediately after the intervening mixed-curve lemma on the same A page and depends on this algorithm. Its induction proves root containment and width <=(3/4)^k P, and its proof checks the finite one-update Newton call against the actual published procedures. The algorithm supplies the operational definition; adding the property lemma to deps would create a cycle. No missing guarantee or repair is established.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-acoustic-system-local-riemann-solution",
+      "model": "gpt-6-luna",
+      "context_sha256": "749baef5c6eab5ec17c28f785a545ae05cae5fbc42240ba363f119aac25dbe5e",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The original coefficient calculation was correct for r-=(1,-1), r+=(1,1), but its strength bound did not bind the solver radii to that normalization. The example now selects those constant fields before delta and eta, cites the integral/mixed-curve definitions, and solves their IVPs to obtain Psi(U,sigma)=U+sigma*r. Consequently sigma-=sigma+=-epsilon/2 is in the strength box, uniqueness identifies the composition, and direct multiplication verifies the two ordered contact jump balances.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.clawpack.org/riemann_book/html/Acoustics.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-sod-tube-pressure-root",
+      "model": "gpt-6-luna",
+      "context_sha256": "250c4cfa350af4a0e681a186be3d32103e25f4500c692c79fd4406a8946b7446",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The geometric budget inequality is sufficient, not necessary. The algorithm may return early at an exact Newton root or when an actual bracket is narrow enough even if the worst-case bound fails. Step 3.1 now states this explicitly and makes root containment conditional on the actual budget-exhausted status. The Sod pressure signs, positive-density state conversion, sound speeds and contact matching remain correct: Phi(0+)<0 and Phi(1/10)<0<Phi(1), hence 1/10<p*<1.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.clawpack.org/riemann_book/html/Euler.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-godunov-flux-is-consistent-and-conservative",
+      "model": "gpt-6-luna",
+      "context_sha256": "db36789c3af48834ad5d0ef6c21d3dbe7d49b15d17626e9464ce7486d8cad7a2",
+      "outcome": "false_positive",
+      "reason": "The actual local solver proof 2.1 explicitly observes that zero strengths solve the equal-data composition equation and invokes local uniqueness; its mixed-curve and rarefaction definitions have Psi_i(0;u)=u. The theorem constructs only the ordered elementary waves, so zero strengths give the constant profile. Thus F2 is an established consequence of the cited supplier, not an assertion of uniqueness among all weak solutions. Evaluating the physical flux gives G(u,u)=f(u), and each oriented interface flux cancels in the finite cyclic sum, including n=1. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-rankine-hugoniot-and-lax-shocks",
+      "disposition": "repaired",
+      "post_sha256": "049b1c99c7864f07a87a1662ee91846c60bd6850439716bb586fcd29eb506ec1",
+      "review_context_sha256": "3c9a5236bfc4041956824bd53a8f9ecb200d6c14a40451a26b40b8a4453cf630",
+      "reason": "The Lax clause used eigenvalues at arbitrary states in G although its supplier defines ordered real eigenvalues only on N. For f(x,y)=(y,x^2/2), Df has eigenvalues +/-sqrt(x) on x>0 but no real eigenvalues on x<0. The repaired clause requires both states in the stated hyperbolicity set N; the Rankine-Hugoniot identity remains valid on all of G.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+      "disposition": "repaired",
+      "post_sha256": "4c0c68fe725fecd5a1fdcdc30765688b1bc536f54fdca29c1fed83473cc2adc1",
+      "review_context_sha256": "bba6a91864106623b6bc2a135967587502bc9b3aa6972188f8adc02d23dcecb5",
+      "reason": "F3 attributed weak-solution necessity to a definition that only names the algebraic RH identity. F4 already supplies the complete moving-jump equivalence and initial trace, so this is a nonfatal citation defect. F3 now states exactly the definition. The Roe scalar (uL+uR)/2 has all required properties, and the stationary (-1,1) jump has entropy production 2/3>0 for eta=u^2/2 and q=u^3/3.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.clawpack.org/riemann_book/html/Burgers_approximate.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-euler-star-pressure-root-and-vacuum-criterion",
+      "disposition": "repaired",
+      "post_sha256": "6d90ba6d58ab7bd36cba5d4be172c9686ca3bae87dfe0e46185e179642ab2d04",
+      "review_context_sha256": "407e2f4dc23c1d0df0c7bcbeca4b236c8f5cd508ca6fc1dbbd2cfea6ffe4a400",
+      "reason": "The intended threshold is correct, but the ordered phrase left velocity then right velocity followed by their difference makes the signed gap ambiguous/reversed. Explicitly vR-vL=uR-uL-2(cL+cR)/(gamma-1)=Phi(0+). F3 now cites only the actual positive-pressure velocity/contact interface, and step 4.1 derives its limiting velocities from step 2.1. Both derivative formulas are positive, match at pK, and the explicit P gives Phi(P)>0; IVT and strict increase prove the unchanged existence/uniqueness statement.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.clawpack.org/riemann_book/html/Euler.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-safeguarded-euler-star-pressure-solver",
+      "disposition": "unaffected",
+      "post_sha256": "af39b2896cd5827817cf8c494ef723d77091d373bfb5a839005ff3dfa39db430",
+      "review_context_sha256": "0a440e40707a3e77b927e9b5bc167514e0666c7e187bd66b920baeec4060acb7",
+      "reason": "The separate result exists: lem-euler-pressure-solver-bracket-and-termination is placed immediately after the intervening mixed-curve lemma on the same A page and depends on this algorithm. Its induction proves root containment and width <=(3/4)^k P, and its proof checks the finite one-update Newton call against the actual published procedures. The algorithm supplies the operational definition; adding the property lemma to deps would create a cycle. No missing guarantee or repair is established.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-acoustic-system-local-riemann-solution",
+      "disposition": "repaired",
+      "post_sha256": "313246beed5435692b0161f5c21a68f83b89578c63bc9b8cc08e87aa1bfe76f2",
+      "review_context_sha256": "6ee50653d8bcf5df62a5ba088c92c6b6705270c2458144f8ffe944ca2a3e2242",
+      "reason": "The original coefficient calculation was correct for r-=(1,-1), r+=(1,1), but its strength bound did not bind the solver radii to that normalization. The example now selects those constant fields before delta and eta, cites the integral/mixed-curve definitions, and solves their IVPs to obtain Psi(U,sigma)=U+sigma*r. Consequently sigma-=sigma+=-epsilon/2 is in the strength box, uniqueness identifies the composition, and direct multiplication verifies the two ordered contact jump balances.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.clawpack.org/riemann_book/html/Acoustics.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-sod-tube-pressure-root",
+      "disposition": "repaired",
+      "post_sha256": "4f0dddfb8648e66c5ad5c2688e0d33921839c2a7c8d2288ee66c47141795ebb2",
+      "review_context_sha256": "bcb77d081f4b970d997f71254f1b73229ea4df3fd55adaa8f04194dc3a96461c",
+      "reason": "The geometric budget inequality is sufficient, not necessary. The algorithm may return early at an exact Newton root or when an actual bracket is narrow enough even if the worst-case bound fails. Step 3.1 now states this explicitly and makes root containment conditional on the actual budget-exhausted status. The Sod pressure signs, positive-density state conversion, sound speeds and contact matching remain correct: Phi(0+)<0 and Phi(1/10)<0<Phi(1), hence 1/10<p*<1.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.clawpack.org/riemann_book/html/Euler.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-godunov-flux-is-consistent-and-conservative",
+      "disposition": "unaffected",
+      "post_sha256": "c4fabef91d829805220639920816ef7fe121d263d08e975da679af459df4603f",
+      "review_context_sha256": "0b5d3edb630dec211f931d3bbd7bd715c58b18b0d4489c9fbf156d56bab79480",
+      "reason": "The actual local solver proof 2.1 explicitly observes that zero strengths solve the equal-data composition equation and invokes local uniqueness; its mixed-curve and rarefaction definitions have Psi_i(0;u)=u. The theorem constructs only the ordered elementary waves, so zero strengths give the constant profile. Thus F2 is an established consequence of the cited supplier, not an assertion of uniqueness among all weak solutions. Evaluating the physical flux gives G(u,u)=f(u), and each oriented interface flux cancels in the finite cyclic sum, including n=1. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+    "def-godunov-flux-from-a-local-riemann-solver",
+    "ex-ideal-gas-contact-discontinuity",
+    "ex-na-burgers-godunov-musc-shock",
+    "lem-euler-acoustic-wave-pressure-response",
+    "lem-linearly-degenerate-characteristic-contact",
+    "lem-local-characteristic-shock-curve",
+    "lem-rankine-hugoniot-jump-is-a-weak-solution",
+    "thm-hll-flux-is-consistent-and-conservative",
+    "thm-local-small-data-riemann-solver"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-rankine-hugoniot-and-lax-shocks",
+      "severity": "fatal",
+      "defect_type": "other",
+      "locus": "definition",
+      "reason": "The Lax clause used eigenvalues at arbitrary states in G although its supplier defines ordered real eigenvalues only on N. For f(x,y)=(y,x^2/2), Df has eigenvalues +/-sqrt(x) on x>0 but no real eigenvalues on x<0. The repaired clause requires both states in the stated hyperbolicity set N; the Rankine-Hugoniot identity remains valid on all of G.",
+      "path": "research/defect-ledger.jsonl"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "reason": "F3 attributed weak-solution necessity to a definition that only names the algebraic RH identity. F4 already supplies the complete moving-jump equivalence and initial trace, so this is a nonfatal citation defect. F3 now states exactly the definition. The Roe scalar (uL+uR)/2 has all required properties, and the stationary (-1,1) jump has entropy production 2/3>0 for eta=u^2/2 and q=u^3/3.",
+      "path": "research/defect-ledger.jsonl"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-euler-star-pressure-root-and-vacuum-criterion",
+      "severity": "nonfatal",
+      "locus": "proof-step",
+      "reason": "The intended threshold is correct, but the ordered phrase left velocity then right velocity followed by their difference makes the signed gap ambiguous/reversed. Explicitly vR-vL=uR-uL-2(cL+cR)/(gamma-1)=Phi(0+). F3 now cites only the actual positive-pressure velocity/contact interface, and step 4.1 derives its limiting velocities from step 2.1. Both derivative formulas are positive, match at pK, and the explicit P gives Phi(P)>0; IVT and strict increase prove the unchanged existence/uniqueness statement.",
+      "path": "research/defect-ledger.jsonl"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-acoustic-system-local-riemann-solution",
+      "severity": "nonfatal",
+      "locus": "proof-step",
+      "reason": "The original coefficient calculation was correct for r-=(1,-1), r+=(1,1), but its strength bound did not bind the solver radii to that normalization. The example now selects those constant fields before delta and eta, cites the integral/mixed-curve definitions, and solves their IVPs to obtain Psi(U,sigma)=U+sigma*r. Consequently sigma-=sigma+=-epsilon/2 is in the strength box, uniqueness identifies the composition, and direct multiplication verifies the two ordered contact jump balances.",
+      "path": "research/defect-ledger.jsonl"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-sod-tube-pressure-root",
+      "severity": "nonfatal",
+      "locus": "proof-step",
+      "reason": "The geometric budget inequality is sufficient, not necessary. The algorithm may return early at an exact Newton root or when an actual bracket is narrow enough even if the worst-case bound fails. Step 3.1 now states this explicitly and makes root containment conditional on the actual budget-exhausted status. The Sod pressure signs, positive-density state conversion, sound speeds and contact matching remain correct: Phi(0+)<0 and Phi(1/10)<0<Phi(1), hence 1/10<p*<1.",
+      "path": "research/defect-ledger.jsonl"
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "record-current-observation",
+      "id": "thm-c2-ode-flow-on-common-tube",
+      "route": "owner/maintenance",
+      "affected_use": "Step 4 batch-30 alert named proof 2.2 and 4.1, whose old time-interval symbol J was undefined. def-local-rarefaction-curve uses this theorem for joint C2 local flow regularity.",
+      "invalidated_claim": "The old undefined-symbol presentation concern is already corrected on the current published carrier: both steps now explicitly use [0,T_+], matching the Statement.",
+      "minimality": "No edit, published adjudication, or Step 5 gate is required from this unit; preserve the existing owner repair record and alert history.",
+      "evidence": "items/thm-c2-ode-flow-on-common-tube.md:39,72,76; existing verification.repair points to research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step4-published-alert-repair-records/thm-c2-ode-flow-on-common-tube.json. This is a focused current-symbol check, not a whole published-proof audit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "path": "research/published-consumer-supplier-ledger.md"
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "items": [
+      {
+        "id": "def-rankine-hugoniot-and-lax-shocks",
+        "claim": "RH states remain in G; strict Lax states must lie in N.",
+        "dependencies": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "sources": [
+          "items/def-hyperbolic-system-and-characteristic-families.md, Definition"
+        ],
+        "unresolved": [],
+        "next_action": "Completed; controller owns ordinary subsequent consumer routing, certification and rejudgment."
+      },
+      {
+        "id": "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+        "claim": "RH balance does not imply entropy admissibility; production is 2/3.",
+        "sources": [
+          "items/def-roe-linearization-and-flux.md, Definition",
+          "items/def-scalar-convex-entropy-admissibility.md, Definition",
+          "items/lem-rankine-hugoniot-jump-is-a-weak-solution.md, complete proof",
+          "https://www.clawpack.org/riemann_book/html/Burgers_approximate.html, sections Shock/Rarefaction and A Roe solver"
+        ],
+        "dependencies": [
+          "def-roe-linearization-and-flux",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "def-scalar-convex-entropy-admissibility",
+          "lem-rankine-hugoniot-jump-is-a-weak-solution"
+        ],
+        "unresolved": [],
+        "next_action": "Completed; controller owns ordinary subsequent consumer routing, certification and rejudgment."
+      },
+      {
+        "id": "thm-euler-star-pressure-root-and-vacuum-criterion",
+        "claim": "Phi strictly increases and has a positive root iff Phi(0+)<0; right-minus-left tail gap equals Phi(0+).",
+        "sources": [
+          "items/def-euler-star-pressure-response.md, Definition",
+          "items/lem-euler-acoustic-wave-pressure-response.md, Statement and complete proof",
+          "items/thm-intermediate-value.md, Statement",
+          "https://www.clawpack.org/riemann_book/html/Euler.html, Riemann invariants, integral curves, exact solution, vacuum sections"
+        ],
+        "dependencies": [
+          "def-euler-star-pressure-response",
+          "lem-euler-acoustic-wave-pressure-response",
+          "thm-intermediate-value"
+        ],
+        "unresolved": [],
+        "next_action": "Completed; controller owns ordinary subsequent consumer routing, certification and rejudgment."
+      },
+      {
+        "id": "alg-safeguarded-euler-star-pressure-solver",
+        "claim": "Finite exact-real one-update Newton proposals plus midpoint fallback; central accepted queries retain at most 3/4 width.",
+        "sources": [
+          "items/lem-euler-pressure-solver-bracket-and-termination.md, full statement and induction",
+          "items/alg-finite-budget-newton-for-vector-residuals.md, complete procedure",
+          "items/alg-newton-correction-for-vector-residuals.md, scalar procedure",
+          "library/numerical-pdes-and-spatial-discretization/riemann-solvers-for-hyperbolic-systems.md, ordered item placement"
+        ],
+        "dependencies": [
+          "def-euler-star-pressure-response",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-finite-budget-newton-for-vector-residuals"
+        ],
+        "unresolved": [],
+        "next_action": "Completed; controller owns ordinary subsequent consumer routing, certification and rejudgment."
+      },
+      {
+        "id": "ex-acoustic-system-local-riemann-solution",
+        "claim": "Chosen constant fields determine strengths -epsilon/2 and the displayed two-contact intermediate state.",
+        "sources": [
+          "items/def-local-rarefaction-curve.md, Definition",
+          "items/def-mixed-characteristic-wave-curve.md, Definition",
+          "items/thm-local-small-data-riemann-solver.md, complete composition construction",
+          "https://www.clawpack.org/riemann_book/html/Acoustics.html, Solution by characteristics and The Riemann problem"
+        ],
+        "dependencies": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-local-rarefaction-curve",
+          "def-mixed-characteristic-wave-curve",
+          "thm-local-small-data-riemann-solver"
+        ],
+        "unresolved": [],
+        "next_action": "Completed; controller owns ordinary subsequent consumer routing, certification and rejudgment."
+      },
+      {
+        "id": "ex-sod-tube-pressure-root",
+        "claim": "Unique root in (1/10,1), left rarefaction/right shock; budget bound is sufficient only.",
+        "sources": [
+          "items/def-ideal-gas-euler-state-and-pressure.md, Definition",
+          "items/def-euler-star-pressure-response.md, Definition",
+          "items/lem-euler-pressure-solver-bracket-and-termination.md, complete proof",
+          "items/alg-safeguarded-euler-star-pressure-solver.md, actual status branches",
+          "https://www.clawpack.org/riemann_book/html/Euler.html, exact solution and Sod sections"
+        ],
+        "dependencies": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-euler-star-pressure-response",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-safeguarded-euler-star-pressure-solver",
+          "lem-euler-pressure-solver-bracket-and-termination"
+        ],
+        "unresolved": [],
+        "next_action": "Completed; controller owns ordinary subsequent consumer routing, certification and rejudgment."
+      },
+      {
+        "id": "thm-godunov-flux-is-consistent-and-conservative",
+        "claim": "The ordered local solver is constant at equal data, so its Godunov flux is consistent; shared periodic fluxes telescope.",
+        "sources": [
+          "items/thm-local-small-data-riemann-solver.md, proof 2.1 and 5.1",
+          "items/def-mixed-characteristic-wave-curve.md, Definition",
+          "items/def-local-rarefaction-curve.md, Definition",
+          "items/def-godunov-flux-from-a-local-riemann-solver.md, Definition"
+        ],
+        "dependencies": [
+          "def-godunov-flux-from-a-local-riemann-solver",
+          "thm-local-small-data-riemann-solver"
+        ],
+        "unresolved": [],
+        "next_action": "Completed; controller owns ordinary subsequent consumer routing, certification and rejudgment."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-30.proof-contracts.json --strict --items def-rankine-hugoniot-and-lax-shocks,cex-roe-jump-property-does-not-imply-entropy-admissibility,thm-euler-star-pressure-root-and-vacuum-criterion,ex-acoustic-system-local-riemann-solution --json",
+        "exit_code": 0,
+        "result": "Four assigned contracts passed, no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/def-rankine-hugoniot-and-lax-shocks.md items/cex-roe-jump-property-does-not-imply-entropy-admissibility.md items/thm-euler-star-pressure-root-and-vacuum-criterion.md items/alg-safeguarded-euler-star-pressure-solver.md items/ex-acoustic-system-local-riemann-solution.md items/ex-sod-tube-pressure-root.md items/thm-godunov-flux-is-consistent-and-conservative.md",
+        "exit_code": 0,
+        "result": "7 files: 5 proofs passed, 2 definition/algorithm proofs not applicable, zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs --json items/def-rankine-hugoniot-and-lax-shocks.md items/cex-roe-jump-property-does-not-imply-entropy-admissibility.md items/thm-euler-star-pressure-root-and-vacuum-criterion.md items/alg-safeguarded-euler-star-pressure-solver.md items/ex-acoustic-system-local-riemann-solution.md items/ex-sod-tube-pressure-root.md items/thm-godunov-flux-is-consistent-and-conservative.md library/numerical-pdes-and-spatial-discretization/riemann-solvers-for-hyperbolic-systems.md library/numerical-pdes-and-spatial-discretization/riemann-solvers-for-hyperbolic-systems-examples.md",
+        "exit_code": 0,
+        "result": "9 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-rankine-hugoniot-and-lax-shocks.md items/cex-roe-jump-property-does-not-imply-entropy-admissibility.md items/thm-euler-star-pressure-root-and-vacuum-criterion.md items/ex-acoustic-system-local-riemann-solution.md items/ex-sod-tube-pressure-root.md",
+        "exit_code": 0,
+        "result": "5 items, 13 numbered steps, 0 defects; executed once after final item edits."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-30.proof-contracts.json --strict --items def-rankine-hugoniot-and-lax-shocks,cex-roe-jump-property-does-not-imply-entropy-admissibility,thm-euler-star-pressure-root-and-vacuum-criterion,alg-safeguarded-euler-star-pressure-solver,ex-acoustic-system-local-riemann-solution,ex-sod-tube-pressure-root,thm-godunov-flux-is-consistent-and-conservative --json",
+        "exit_code": 0,
+        "result": "All seven assigned contracts pass after final metadata synchronization, with no errors or warnings."
+      },
+      {
+        "command": "Read-only report and original/current section validation using itemHashGuard, statementHash and frozen initial-1.json",
+        "exit_code": 0,
+        "result": "Identity/input digest, exact rejected tuples, all seven guards/dispositions, original Definition reconstruction and sole changed Statement/Definition verified. No review context was recomputed."
+      }
+    ],
+    "downstream_examination": [
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "lem-rankine-hugoniot-jump-is-a-weak-solution",
+        "path": "items/lem-rankine-hugoniot-jump-is-a-weak-solution.md",
+        "affected_use": "Facts F1; proof 2.1: Uses only the unchanged algebraic equality [f]=s[u], with arbitrary states in G.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      },
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "lem-local-characteristic-shock-curve",
+        "path": "items/lem-local-characteristic-shock-curve.md",
+        "affected_use": "Facts F2; proof 5.1: The local eigenpair neighborhood and small shock endpoints are within its strict-hyperbolicity region, so the Lax inequalities remain applicable.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      },
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "lem-linearly-degenerate-characteristic-contact",
+        "path": "items/lem-linearly-degenerate-characteristic-contact.md",
+        "affected_use": "Facts F3; proof 2.1: Uses unchanged Rankine-Hugoniot balance and equality of contact speeds along the local characteristic curve.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      },
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "lem-euler-acoustic-wave-pressure-response",
+        "path": "items/lem-euler-acoustic-wave-pressure-response.md",
+        "affected_use": "Facts F4; proof 1.2 and 3.1: Positive Euler side/star densities and pressures lie in the Euler strict-hyperbolicity domain; the acoustic Lax comparisons remain defined.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      },
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "ex-ideal-gas-contact-discontinuity",
+        "path": "items/ex-ideal-gas-contact-discontinuity.md",
+        "affected_use": "Facts F3; proof 2.1: Both ideal-gas states have positive density/internal energy, so equal middle speeds are defined and still exclude a strict Lax shock.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      },
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "ex-na-burgers-godunov-musc-shock",
+        "path": "items/ex-na-burgers-godunov-musc-shock.md",
+        "affected_use": "Facts F5; verification 1.2 and 3.1: Scalar Burgers eigenvalue f-prime is defined on all real states; the RH equality and inequalities at states 1 and 0 are unchanged.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      },
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+        "path": "items/cex-roe-jump-property-does-not-imply-entropy-admissibility.md",
+        "affected_use": "Facts F3; counterexample 1.1: Uses only unchanged RH balance for Burgers states -1 and 1, in the globally hyperbolic scalar domain; its separate citation defect is assigned here.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      },
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "thm-hll-flux-is-consistent-and-conservative",
+        "path": "items/thm-hll-flux-is-consistent-and-conservative.md",
+        "affected_use": "Facts F2; proof 1.1: Uses only the unchanged physical Rankine-Hugoniot algebraic form, while expressly distinguishing assigned model fluxes.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      },
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "thm-local-small-data-riemann-solver",
+        "path": "items/thm-local-small-data-riemann-solver.md",
+        "affected_use": "Statement; proof 3.1 and 4.1: The hypothesis assumes hyperbolicity on N, and proof 3.1 explicitly shrinks all intermediate states to remain in N before using strict Lax shocks.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      },
+      {
+        "supplier": "def-rankine-hugoniot-and-lax-shocks",
+        "id": "def-godunov-flux-from-a-local-riemann-solver",
+        "path": "items/def-godunov-flux-from-a-local-riemann-solver.md",
+        "affected_use": "Definition, stationary-interface clause: Uses unchanged Rankine-Hugoniot at zero speed to identify one-sided physical fluxes; no new Lax requirement is invoked.",
+        "disposition": "sound_unchanged",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the use is valid on the clarified domain or only uses the unchanged RH clause.",
+        "minimality": "No consumer mathematical edit is necessary; exact supplier quotation mirrors may need refresh by their owner."
+      }
+    ],
+    "page_examination": [
+      {
+        "path": "library/numerical-pdes-and-spatial-discretization/riemann-solvers-for-hyperbolic-systems.md",
+        "reason": "The page already restricts local Lax waves to a strictly hyperbolic neighborhood and requires no prose repair."
+      }
+    ],
+    "interface_changes": [
+      {
+        "id": "def-rankine-hugoniot-and-lax-shocks",
+        "section": "Definition",
+        "comparison": "Direct literal comparison of the originally read Definition and current Definition; only the Lax hyperbolicity-domain clause changed.",
+        "before": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a strictly hyperbolic system and $1\\le i\\le m$, it is a **strict Lax\n$i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock.",
+        "after": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a system strictly hyperbolic on $N\\subseteq G$, states $u_L,u_R\\in N$,\nand $1\\le i\\le m$, it is a **strict Lax $i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock."
+      }
+    ],
+    "unchanged_interfaces": "The pressure-root Statement is byte-for-byte unchanged. The Roe refuted statement, safeguard Definition, acoustic Example other than its normalization clarification, Sod Example, and Godunov Statement retain their claims. No new item or new supplier interface was authored; the acoustic repair adds direct edges to two existing definitions.",
+    "repair_complete": true,
+    "unresolved": [],
+    "ownership": "Edited only five assigned draft item carriers and their assigned entries in the batch-30 manifest/proof contracts. Shared metadata used acquire/reread/edit/check/release. No judgments, stamps, certificates, round state, published items, or unassigned frontier items were edited.",
+    "new_prerequisites": "No new item was needed. Existing def-local-rarefaction-curve and def-mixed-characteristic-wave-curve supply the exact normalization equations for acoustic verification 2.1; both are now explicit deps and contract citations. The original dependency level 7 remains valid."
+  },
+  "supporting_evidence": {
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-30.pages.json": "b7880e5d8ffe1155aa4ccc04658ec5497452c1206b8f46db85b4503ba0a027ad",
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-30.proof-contracts.json": "89d1db7035f11531b4faf96df8e2eb3e81ffc49f3f3dd7152151556e8aa95006"
+  }
+}

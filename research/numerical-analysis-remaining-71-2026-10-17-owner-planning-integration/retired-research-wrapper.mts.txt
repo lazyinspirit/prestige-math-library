@@ -1,0 +1,10 @@
+// Run-local construction scheduling; native gates and owner boundaries are retained.
+import { stagesForRun as ownerStages, workflowRevision } from '../tools/autopilot/stages/owner-supervised.mts';
+export { workflowRevision };
+export function stagesForRun(ctx: any) {
+  if (ctx.run !== 'numerical-analysis-remaining-71-2026-10-17')
+    throw new Error('This construction policy belongs only to numerical-analysis-remaining-71-2026-10-17');
+  return ownerStages(ctx).map((stage: any) => stage.id === '1-scaffold'
+    ? { ...stage, deferConstructionArtifactsUntilDrain: true }
+    : stage);
+}

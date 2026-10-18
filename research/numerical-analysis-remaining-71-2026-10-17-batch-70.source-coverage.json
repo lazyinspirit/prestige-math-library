@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "70",
+  "dependency_level": 3,
+  "scheduling_input_sha256": "440346ab3c5cc06016bb3d05991ba08441e0b3960a4500fb1a3903e5ffa9e060",
+  "pages": [
+    {
+      "page": "semi-lagrangian-characteristic-transport",
+      "sources": [
+        {
+          "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+          "kind": "lecture-notes",
+          "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf",
+          "locator": "Complete 98-page lecture-note PDF inspected. Read Chapter 5 §§5.1–5.2 (printed pp. 49–51), §5.5's interpolation conventions (printed pp. 52–55), and §5.7 on trajectory computation (printed pp. 56–58).",
+          "reading_status": "The full-text PDF was opened and the complete relevant semi-Lagrangian sections were read. Section 5.1 derives the characteristic/departure-point update and interpolation step; §5.2 analyzes the linear interpolation stability factor; §5.7 describes iterative trajectory computation and explicitly notes that its three-iteration practice has no convergence test.",
+          "support": "Supports the method's departure-point/backtracking organization and the need to distinguish interpolation stability from trajectory accuracy. The batch supplies independent convex-weight, local-foot, and global-error proofs; the source is not a substitute for those proofs.",
+          "contents": [
+            {
+              "name": "Characteristic conservation and backtracking from a regular arrival grid to a departure point, followed by interpolation",
+              "disposition": "included",
+              "item": "alg-semilagrangian-backtracking-on-periodic-grid",
+              "detail": "The algorithm follows this structure and fixes a periodic tensor grid and explicit Euler foot. Its exact procedure and status rules are stated locally."
+            },
+            {
+              "name": "One-dimensional linear-interpolation stability analysis",
+              "disposition": "inline",
+              "item": "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+              "detail": "The source's Fourier calculation is context. The local proof establishes the stronger sup-norm contraction directly from nonnegative tensor weights summing to one."
+            },
+            {
+              "name": "Iterative departure-point computation with a fixed three-iteration practice and no convergence test",
+              "disposition": "out-of-scope",
+              "item": "alg-semilagrangian-backtracking-on-periodic-grid",
+              "reason": "The authored method uses one explicit Euler backward step with a proved O(dt^2) local defect; it does not use or claim convergence of a fixed-iteration implicit trajectory solve."
+            },
+            {
+              "name": "Cubic, quasi-monotone, spherical, and coupled atmospheric model branches",
+              "disposition": "out-of-scope",
+              "reason": "The assigned theorem is the periodic scalar linear-transport branch with tensor multilinear interpolation; no higher-order limiter, spherical coordinate, or coupled-equation claim is made."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf",
+              "at": "2026-10-17T13:06:28.751Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-17T13:06:28.751Z",
+            "bytes": 726172,
+            "sha256_16": "e1ba0f4f527f424a",
+            "kind": "pdf",
+            "pages": 98
+          },
+          "supported_items": [
+            "alg-semilagrangian-backtracking-on-periodic-grid",
+            "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting"
+          ]
+        },
+        {
+          "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+          "kind": "paper",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/",
+          "locator": "Full-text article inspected. §2.1 describes the semi-Lagrangian update and worst-case error growth with the number of steps; §4 derives the mean interpolation error and contrasts local conservation; §7 summarizes the limits of that error-growth observation. The one-dimensional model uses periodic boundary conditions.",
+          "reading_status": "The complete full-text article was opened and inspected. The full reasoning in §§2.1 and 4 was read, including the single-step interpolation formula, error accumulation argument, cell-averaged linear-interpolation calculation, and contrast with the conservative discontinuous-Galerkin reconstruction.",
+          "support": "Supports the repeated-projection error mechanism, the fact that higher spatial accuracy does not itself remove per-step error accumulation, and the warning that pointwise semi-Lagrangian interpolation is not generally conservative. The article's particular q convention and constant-velocity setting are not imported as the local theorem's hypotheses.",
+          "contents": [
+            {
+              "name": "A departure-point update requires interpolation because the foot need not be a grid node",
+              "disposition": "included",
+              "item": "alg-semilagrangian-backtracking-on-periodic-grid",
+              "detail": "The local algorithm states this update for a time-dependent velocity and a periodic tensor grid."
+            },
+            {
+              "name": "Worst-case error contribution accumulates with the number of time steps, while exact characteristics remove the temporal foot error",
+              "disposition": "inline",
+              "item": "thm-periodic-semilagrangian-global-error-from-local-defects",
+              "detail": "The source motivates the count of repeated local defects. The local proof separately tracks foot error O(dt^(q+1)) and interpolation error O(h^(r+1)), then sums the recurrence."
+            },
+            {
+              "name": "Linear interpolation need not conserve the spatial mean; conservative cellwise reconstruction is a separate method",
+              "disposition": "included",
+              "item": "ex-semilagrangian-pointwise-interpolation-can-change-grid-mass",
+              "detail": "The source supplies the warning only. The example gives a separate exact three-node smooth-velocity witness; the A-page overlap remap has its own mass/positivity argument."
+            },
+            {
+              "name": "The discontinuous-Galerkin conservative semi-Lagrangian method and its multi-coefficient state",
+              "disposition": "out-of-scope",
+              "reason": "The conservative branch here is the distinct exact characteristic-cell overlap transfer specified in the plan; no DG cell-polynomial scheme is claimed."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/",
+              "at": "2026-10-17T13:06:29.251Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-17T13:06:29.251Z",
+            "bytes": 166867,
+            "sha256_16": "a9e1c713e178fc7f",
+            "kind": "html",
+            "text_chars": 35466
+          },
+          "supported_items": [
+            "alg-semilagrangian-backtracking-on-periodic-grid",
+            "thm-periodic-semilagrangian-global-error-from-local-defects",
+            "ex-semilagrangian-pointwise-interpolation-can-change-grid-mass"
+          ]
+        }
+      ]
+    }
+  ]
+}

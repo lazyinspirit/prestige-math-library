@@ -1,0 +1,171 @@
+{
+  "group": "s",
+  "batches": ["56"],
+  "pages_read": [
+    "supg-and-residual-based-stabilized-finite-elements",
+    "supg-and-residual-based-stabilized-finite-elements-examples"
+  ],
+  "items_read": [
+    "def-supg-one-dimensional-convection-diffusion-model",
+    "def-supg-general-convection-diffusion-reaction-model",
+    "def-supg-pspg-grad-div-stokes-forms",
+    "def-supg-variational-multiscale-block-closure",
+    "def-supg-one-dimensional-residual-form",
+    "def-supg-general-residual-form",
+    "lem-supg-one-dimensional-l2-interpolation-estimate",
+    "lem-supg-general-p1-interpolation-estimate",
+    "thm-supg-pspg-stokes-coercivity",
+    "thm-supg-vms-schur-defect-bound",
+    "lem-supg-one-dimensional-optimal-parameter",
+    "thm-supg-general-p1-error-and-stability",
+    "thm-supg-one-dimensional-consistency-coercivity",
+    "thm-supg-one-dimensional-energy-error",
+    "ex-supg-q1-equal-order-pressure-checkerboard",
+    "ex-supg-grad-div-does-not-fix-pressure-kernel",
+    "ex-supg-vms-two-scale-closure-defect-sharp",
+    "ex-supg-overlarge-stabilization-smears-solution",
+    "ex-supg-convection-boundary-layer-coarse-mesh"
+  ],
+  "conventions": [
+    {
+      "convention": "The one-dimensional mesh is uniform with N≥1, h=1/N, ε>0 and b≠0. V_h has zero endpoint values; nonzero prescribed endpoints belong to S_h(g_0,g_1).",
+      "fixed_by": "def-supg-one-dimensional-convection-diffusion-model",
+      "matters_for": [
+        "thm-supg-one-dimensional-consistency-coercivity",
+        "thm-supg-one-dimensional-energy-error",
+        "ex-supg-overlarge-stabilization-smears-solution",
+        "ex-supg-convection-boundary-layer-coarse-mesh"
+      ]
+    },
+    {
+      "convention": "Pe=|b|h/(2ε) and τ=h/(2|b|)(coth(Pe)−1/Pe). Second derivatives in the residual are cellwise classical derivatives; the smooth consistency extension retains −εw″.",
+      "fixed_by": "def-supg-one-dimensional-residual-form",
+      "matters_for": [
+        "lem-supg-one-dimensional-optimal-parameter",
+        "thm-supg-one-dimensional-consistency-coercivity",
+        "thm-supg-one-dimensional-energy-error",
+        "ex-supg-convection-boundary-layer-coarse-mesh"
+      ]
+    },
+    {
+      "convention": "The multidimensional branch has d≥2, matching shape-regular affine simplices, zero data on the entire boundary, b∈C1, c∈C, and c−div(b)/2≥ω>0.",
+      "fixed_by": "def-supg-general-convection-diffusion-reaction-model",
+      "matters_for": [
+        "lem-supg-general-p1-interpolation-estimate",
+        "thm-supg-general-p1-error-and-stability"
+      ]
+    },
+    {
+      "convention": "δ_K=θ min{h_K²/ε,h_K/||b||∞,K,ω/||c||∞,K²}, with zero coefficient denominators interpreted as +∞ and 0<θ≤1/4.",
+      "fixed_by": "def-supg-general-residual-form",
+      "matters_for": ["thm-supg-general-p1-error-and-stability"]
+    },
+    {
+      "convention": "The mixed signs are −(p,div v)+(q,div u), PSPG tests the momentum residual against ∇q, and grad-div has nonnegative coefficient γ.",
+      "fixed_by": "def-supg-pspg-grad-div-stokes-forms",
+      "matters_for": [
+        "thm-supg-pspg-stokes-coercivity",
+        "ex-supg-q1-equal-order-pressure-checkerboard",
+        "ex-supg-grad-div-does-not-fix-pressure-kernel"
+      ]
+    },
+    {
+      "convention": "The PSPG coercivity theorem requires strictly positive cell parameters, connected cell adjacency, zero velocity boundary values and continuous mean-zero pressure. Pressure control is only in the mesh-dependent gradient stabilization norm.",
+      "fixed_by": "thm-supg-pspg-stokes-coercivity",
+      "matters_for": ["thm-supg-pspg-stokes-coercivity"]
+    },
+    {
+      "convention": "VMS is finite-dimensional real block algebra: A_ff is invertible, and T replaces its inverse in both the Schur operator and the Schur load. The defect theorem additionally requires the approximate Schur operator to be invertible.",
+      "fixed_by": "def-supg-variational-multiscale-block-closure",
+      "matters_for": [
+        "thm-supg-vms-schur-defect-bound",
+        "ex-supg-vms-two-scale-closure-defect-sharp"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-supg-one-dimensional-optimal-parameter",
+      "statement": "For s>0, m(s)=coth(s)−1/s and c_*=min{1/(3 sinh 1),coth 1−1}>0 satisfy c_* min{s,1}≤m(s)<1 and m(s)≤s/2. Consequently 0<(c_*/2)min{h²/(2ε),h/|b|}≤τ<h/(2|b|), and τ≤h²/(8ε).",
+      "used_by": [
+        "thm-supg-one-dimensional-consistency-coercivity",
+        "thm-supg-one-dimensional-energy-error",
+        "ex-supg-overlarge-stabilization-smears-solution",
+        "ex-supg-convection-boundary-layer-coarse-mesh"
+      ]
+    },
+    {
+      "id": "thm-supg-one-dimensional-consistency-coercivity",
+      "statement": "For the homogeneous one-dimensional model and exact C2 solution, a_h(u,v_h)=F_h(v_h). For every v_h∈V_h, a_h(v_h,v_h)=ε||v_h′||₂²+τb²Σ_K||v_h′||₂,K². This is a squared norm, and the finite-dimensional SUPG system has a unique solution.",
+      "used_by": ["thm-supg-one-dimensional-energy-error"]
+    },
+    {
+      "id": "lem-supg-general-p1-interpolation-estimate",
+      "statement": "On the stated shape-regular affine simplicial mesh family, for u∈C2(closure Ω) and M_2=|Ω|^(1/2)||D²u||∞, the nodal interpolant satisfies ||u−I_hu||₂≤C_I h²M_2 and ||∇(u−I_hu)||₂≤C_I hM_2, with C_I depending only on dimension and shape regularity. Zero boundary data are preserved.",
+      "used_by": ["thm-supg-general-p1-error-and-stability"]
+    },
+    {
+      "id": "def-supg-general-residual-form",
+      "statement": "The Galerkin form is augmented by Σ_K δ_K(R_K(w),b·∇v_h)_K, where R_K(w)=−εΔ_Kw+b·∇w+cw, with the matching stabilized load and the stated parameter scaling giving δ_K||c||∞,K²≤ω/4.",
+      "used_by": ["thm-supg-general-p1-error-and-stability"]
+    },
+    {
+      "id": "thm-supg-vms-schur-defect-bound",
+      "statement": "With G=A_ff^−1, an exact Schur solution u_c, r_f=F_f−A_fc u_c and invertible approximate Schur operator S̃, the coarse error is at most ||S̃^−1||||A_cf||||T−G||||r_f||. The fine error is at most ||T−G||||r_f||+||T||||A_fc||||ũ_c−u_c||.",
+      "used_by": ["ex-supg-vms-two-scale-closure-defect-sharp"]
+    },
+    {
+      "id": "ex-supg-q1-equal-order-pressure-checkerboard",
+      "statement": "On the periodic 2×2 unit-square Q1 mesh, nodal values (−1)^(i+j) define a nonzero mean-zero pressure orthogonal to every Q1 velocity divergence, while its pressure-gradient stabilization equals (8/3)Σ_K τ_K>0.",
+      "used_by": ["ex-supg-grad-div-does-not-fix-pressure-kernel"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-matching-affine-simplicial-meshes",
+      "used_for": "Affine simplex geometry, matching interfaces and the inradius-based shape-regularity convention used by the multidimensional model and interpolation proof.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit Countable Choice assumptions inherited through the published Gauss–Green and derivative-interpolation suppliers.",
+      "opened": true
+    },
+    {
+      "id": "lem-affine-simplex-gauss-green-formula",
+      "used_for": "Cellwise integration by parts in multidimensional SUPG consistency and the convection energy identity; its C1 flux and Countable Choice hypotheses match the uses.",
+      "opened": true
+    },
+    {
+      "id": "lem-one-dimensional-p1-interpolation-error",
+      "used_for": "The estimate ||(u−I_hu)′||₂≤h||u″||∞ and endpoint preservation in the one-dimensional energy-error theorem.",
+      "opened": true
+    },
+    {
+      "id": "thm-second-strang-lemma-for-nonconforming-galerkin",
+      "used_for": "Contextual inspection of the published variational-crimes prerequisite. The assigned SUPG proofs derive their estimates directly and do not invoke this theorem.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-supg-pspg-grad-div-stokes-forms",
+      "concern": "The Definition allows “Ω⊂R^d [to] have a finite cell partition” without boundedness, finite cell measure or integrability assumptions on the polynomial spaces, then says “For well-defined cell integrals, take σ∈L∞ ... β∈L∞ ... f∈L2”. These coefficient assumptions alone do not suffice on the literal stated domain. For example, Ω=R^d with one cell, V_h spanned by a nonzero constant vector, Q_h={0}, σ=1, β=0 and f=0 satisfy the listed conditions, but (σu_h,v_h)_Ω is infinite for that constant trial/test pair. Specify bounded finite-element cells or adequate space integrability so B_h is a real bilinear form. The bounded simplicial theorem and finite periodic examples do not exhibit this problem.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "ex-supg-overlarge-stabilization-smears-solution",
+      "concern": "The title is “Overlarge streamline stabilization suppresses a one-cell solution”, whereas the Example explicitly uses “one interior P1 degree of freedom on the two-cell mesh h=1/2”. The verification also uses derivatives +2 and −2 on two cells. The computation is sound; the title confuses one degree of freedom with one cell.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "supg-and-residual-based-stabilized-finite-elements",
+      "to": "energy-stable-incompressible-navier-stokes-discretization",
+      "faithful": true,
+      "note": "Read both page bodies and the finite-step MINI existence/energy theorem. This is a contextual page prerequisite: no assigned item imports a Navier–Stokes energy, pressure or convergence result. The supplier uses evolutionary MINI spaces, symmetric-gradient viscosity and skew convection; the consumer independently defines stationary equal-order PSPG with gradient viscosity. Neither page identifies these forms or transfers the supplier's stability conclusions to PSPG."
+    }
+  ]
+}

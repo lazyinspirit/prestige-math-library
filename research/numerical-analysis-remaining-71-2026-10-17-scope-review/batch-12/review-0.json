@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "12",
+  "round": 0,
+  "reviewed_items": [
+    "def-ewald-causal-cardinal-spline-window",
+    "def-ewald-three-dimensional-periodic-source-data",
+    "lem-ewald-screened-coulomb-kernel-and-self-limit",
+    "def-ewald-pme-cardinal-assignment-model",
+    "lem-ewald-gaussian-poisson-periodization",
+    "lem-ewald-lattice-shell-gaussian-tail-controllers",
+    "lem-ewald-smooth-torus-fourier-pairing",
+    "lem-ewald-pme-spline-alias-and-dft-normalization",
+    "thm-ewald-neutral-periodic-poisson-green-function",
+    "lem-ewald-pme-derivative-window-alias-bound",
+    "thm-ewald-alpha-independent-energy-and-potential",
+    "thm-ewald-pme-reciprocal-energy-force-error-bound",
+    "thm-ewald-real-reciprocal-cutoff-error-bounds",
+    "thm-ewald-total-pme-error-certificate",
+    "alg-ewald-certified-particle-mesh-evaluator",
+    "ex-ewald-nonneutral-zero-mode-obstruction",
+    "ex-ewald-neutral-dipole-cell",
+    "ex-ewald-source-collision-field-singularity",
+    "ex-ewald-alpha-cutoff-tradeoff",
+    "ex-ewald-mesh-energy-force-consistency"
+  ],
+  "reviewed_pages": [
+    "ewald-periodic-potentials-and-particle-mesh-error",
+    "ewald-periodic-potentials-and-particle-mesh-error-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch review found same-scope repairs for the evaluator instructions, the approved source-collision example scope, and two proof details.",
+  "findings": [
+    {
+      "id": "thm-ewald-alpha-independent-energy-and-potential",
+      "type": "local",
+      "reason": "Proof step 1.2 asserts that L_alpha has mean zero because its Fourier series omits k=0, but does not compute its zero Fourier coefficient. Show termwise integration using the established absolute convergence and character orthogonality over the cell."
+    },
+    {
+      "id": "ex-ewald-source-collision-field-singularity",
+      "type": "scope",
+      "reason": "The approved design requires the local 1/r potential and 1/r^2 field singularities, with the remaining periodic contribution bounded near the source. The example proves only U(x)=1/r+O(1); add the field expansion, such as grad U(x)=-(x-x_1)/|x-x_1|^3+O(1), and bound the nonself image and reciprocal derivative contributions using the existing suppliers."
+    },
+    {
+      "id": "thm-ewald-total-pme-error-certificate",
+      "type": "local",
+      "reason": "Proof step 2.1 cites “steps 1.3–2.2,” but step 2.2 does not exist. Replace this with valid references and tie the decomposition to the actual tail and mesh-error steps."
+    },
+    {
+      "id": "alg-ewald-certified-particle-mesh-evaluator",
+      "type": "local",
+      "reason": "Step 6 filters real-space images without giving a finite integer-index bound; Steps 1 and 6 also lack a status for cutoff comparisons unresolved by certified enclosures. Add finite enumeration bounds and an inconclusive branch. The Definition also states evaluator complexity claims, which belong in separate proved results under the algorithm rule."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ewald-periodic-potentials-and-particle-mesh-error",
+      "decision": "accept",
+      "reason": "The page lists the evaluator and summarizes its certificate; the requested enumeration and status clarifications do not alter that scope."
+    },
+    {
+      "id": "ewald-periodic-potentials-and-particle-mesh-error-examples",
+      "decision": "accept",
+      "reason": "The page lists the source-collision example and summarizes its singularity; adding the approved field expansion is consistent with its scope."
+    }
+  ]
+}

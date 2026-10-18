@@ -1,0 +1,1315 @@
+[
+  {
+    "order": 2696,
+    "id": "monotone-hjb-schemes-and-policy-iteration",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Monotone Hamilton–Jacobi–Bellman schemes and policy iteration",
+    "companion": "monotone-hjb-schemes-and-policy-iteration-examples",
+    "requires": [
+      "hyperbolic-finite-difference-methods",
+      "semi-lagrangian-characteristic-transport",
+      "hamilton-jacobi-equations-and-viscosity-solutions",
+      "sparse-high-dimensional-estimation-and-covariance",
+      "power-and-sample-size-planning",
+      "measures-and-their-basic-properties",
+      "lebesgue-measure-on-euclidean-space",
+      "countability-and-uncountability"
+    ],
+    "items": [
+      {
+        "id": "def-na-finite-state-discounted-bellman-system",
+        "kind": "definition",
+        "title": "Finite-state discounted generator Bellman system",
+        "deps": [
+          "def-natural-numbers",
+          "def-real-numbers",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define the finite nonempty state set, finite ordered nonempty actions, conservative generator rows, rewards, positive discount, Bellman equation, and policy matrix.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wang He, Reinforcement Learning: A Mathematical Introduction, Chapter 10, Policy Improvement and Policy Iteration",
+              "url": "https://wanghemath.github.io/Book-MathRL/chapters/chapter-07-policy-improvement-and-policy-iteration.html",
+              "locator": "§§10.2–10.9: finite discounted policy evaluation, greedy improvement, and policy iteration."
+            }
+          ]
+        },
+        "statement": "Let $S=\\{1,\\ldots,n\\}$ be a nonempty finite state set, let each state $i$\nhave a nonempty finite ordered action set $A_i$, and let $c>0$. For\n$a\\in A_i$, choose real coefficients $q^a_{ij}$ satisfying\n$$q^a_{ij}\\ge0\\quad(j\\ne i),\\qquad \\sum_{j=1}^nq^a_{ij}=0,$$\nand a reward $r_i^a\\in\\mathbb R$. The row $q_i^a$ is a conservative generator\nrow. A deterministic policy is a map $\\pi$ with $\\pi(i)\\in A_i$. Its policy\nmatrix and reward vector are\n$$A^\\pi_{ij}=c\\,\\delta_{ij}-q^{\\pi(i)}_{ij},\\qquad r^\\pi_i=r_i^{\\pi(i)}.$$\nThe **discounted finite-state Bellman system** is\n$$cV_i-\\max_{a\\in A_i}\\left(\\sum_{j=1}^nq^a_{ij}V_j+r_i^a\\right)=0, \\qquad i\\in S.$$\nThe policy evaluation equation for $\\pi$ is $A^\\pi V=r^\\pi$.\n\nHere $\\delta_{ij}$ is $1$ when $i=j$ and $0$ otherwise."
+      },
+      {
+        "id": "def-na-second-order-elliptic-semijets-and-closure",
+        "kind": "definition",
+        "title": "Second-order elliptic semijets and their value-sensitive closures",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "not-applicable",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Sections 2–3 and Appendix A, printed pp. 9–18 and 56–63."
+            }
+          ]
+        },
+        "statement": "Let $U\\subseteq\\mathbb R^m$ be open, $u:U\\to\\mathbb R$, and $z\\in U$. Write $\\mathbb S^m$ for the real symmetric $m$ by $m$ matrices. The second-order elliptic superjet consists of pairs $(p,X)\\in\\mathbb R^m\\times\\mathbb S^m$ such that\n$$u(z+h)\\le u(z)+p\\cdot h+\\tfrac12 h^{\\mathsf T}Xh+o(|h|^2)\\quad(h\\to0).$$\nHere the inequality means that its positive remainder divided by $|h|^2$ has limit zero. Denote this set by $J^{2,+}u(z)$. Define\n$$J^{2,-}u(z)=-J^{2,+}(-u)(z).$$\nThe closed superjet $\\overline J^{2,+}u(z)$ consists of all limits $(p,X)$ for which there are $z_n\\in U$ and $(p_n,X_n)\\in J^{2,+}u(z_n)$ satisfying\n$$(z_n,u(z_n),p_n,X_n)\\longrightarrow(z,u(z),p,X).$$\nDefine $\\overline J^{2,-}u(z)=-\\overline J^{2,+}(-u)(z)$. The value convergence is part of the definition. The same definitions work for functions allowed to equal $-\\infty$ away from the finite base point, with all approximating base values finite. A two-sided quadratic expansion means that both the upper and lower inequalities hold with the same $(p,X)$; it is also called a second-order Peano expansion. Matrix order means $X\\le Y$ iff $h^{\\mathsf T}Xh\\le h^{\\mathsf T}Yh$ for every $h$.\n\nFor space-time $z=(t,x)$ this is the full Euclidean jet, whose matrix also has time and mixed entries. No assertion about parabolic jets is included in this definition."
+      },
+      {
+        "id": "lem-na-convex-support-localization-and-lipschitz-dual-gradient",
+        "kind": "lemma",
+        "title": "Convex supports, localization, and the Lipschitz dual gradient",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-metric-ball",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-lipschitz-holder-contraction",
+          "thm-convex-functions-on-open-convex-sets-are-locally-lipschitz",
+          "thm-hahn-banach-dominated-extension",
+          "cor-bolzano-weierstrass-in-rn",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces, complete 168-page notes; Sections 2.6 and 3.3-3.4",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
+            },
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions, Appendix A, Theorem A.2 and pp. 58-60, notes pp. 62-63",
+              "url": "https://arxiv.org/pdf/math/9207212"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $f$ be finite convex, in the sense of [[def-convex-and-strictly-convex-functions-on-euclidean-sets]], on an open convex $U\\subseteq\\mathbb R^n$. At each $x\\in U$ the subdifferential $\\partial f(x)=\\{p:f(y)\\ge f(x)+p\\cdot(y-x)\\ (y\\in U)\\}$ is nonempty; it is locally bounded and its graph is locally closed. It is a singleton exactly when $f$ is differentiable, and then equals $\\{Df(x)\\}$. For every closed Euclidean ball $K\\subset U$ ([[def-metric-ball]]) there is a finite globally Lipschitz convex $H$ ([[def-lipschitz-holder-contraction]]) on $\\mathbb R^n$ equal to $f$ on $K$. For $F(x)=H(x)+|x|^2/2$, the conjugate $F^*(p)=\\sup_x(p\\cdot x-F(x))$ is finite and $C^1$, and $g=DF^*$ is globally one-Lipschitz with $g(p)=x$ iff $p\\in\\partial F(x)$."
+      },
+      {
+        "id": "lem-na-jensen-maximum-principle-semiconvex",
+        "kind": "lemma",
+        "title": "Jensen maximum principle for locally semiconvex functions",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-metric-ball",
+          "def-null-and-content-zero-in-rn",
+          "thm-convex-functions-on-open-convex-sets-are-locally-lipschitz",
+          "thm-lipschitz-images-of-null-sets-in-rn-are-null",
+          "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+          "lem-closed-open-and-cubic-covers-give-the-same-lebesgue-outer-measure",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Sections 2–3 and Appendix A, printed pp. 9–18 and 56–63."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $f$ be finite and locally semiconvex near $0\\in\\mathbb R^m$, $m\\ge1$: on some Euclidean ball ([[def-metric-ball]]), $f(x)+\\lambda|x|^2/2$ is convex ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]) for a finite $\\lambda\\ge0$. Suppose $0$ is a strict local maximum of $f$. For every sufficiently small $r>0$ and every $\\delta>0$, the set of points $x\\in B_r(0)$ where $f(x)+q\\cdot x$ has a local maximum for some $|q|\\le\\delta$ contains a compact subset of positive Lebesgue outer measure. Consequently, given any Lebesgue null set $N$, such a maximum can be chosen with $x\\notin N$, $|x|<r$, and $|q|\\le\\delta$."
+      },
+      {
+        "id": "lem-na-lipschitz-critical-image-null",
+        "kind": "lemma",
+        "title": "Critical images of Euclidean Lipschitz maps are null",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-lipschitz-holder-contraction",
+          "def-null-and-content-zero-in-rn",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions",
+          "def-metric-ball",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "prop-measure-monotonicity",
+          "thm-n-cross-n-countable",
+          "thm-rationals-countable",
+          "thm-product-of-countable",
+          "lem-rat-embeds-dense",
+          "thm-well-ordering-principle",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-nonnegative-extended-series",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "thm-zorn",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure"
+        ],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces, complete 168-page notes; Sections 2.6 and 3.3-3.4",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
+            },
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions, Appendix A, Theorem A.2 and pp. 58-60, notes pp. 62-63",
+              "url": "https://arxiv.org/pdf/math/9207212"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $g:\\mathbb R^n\\to\\mathbb R^n$ be $L$-Lipschitz in the Euclidean norm ([[def-lipschitz-holder-contraction]]), where $n\\ge1$. Write $B(x,r)$ for the Euclidean ball ([[def-metric-ball]]). Let\n$$C=\\{p\\in\\mathbb R^n:g(p+h)=g(p)+Dg(p)h+o(|h|)\\text{ as }h\\to0,\\ \\det Dg(p)=0\\}.$$\nThen $g(C)$ is null in $\\mathbb R^n$."
+      },
+      {
+        "id": "thm-na-rademacher-euclidean",
+        "kind": "theorem",
+        "title": "Rademacher differentiability in Euclidean space",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-countable-choice",
+          "def-null-and-content-zero-in-rn",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-null-agrees-with-elementary-nullity-in-rn",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-lipschitz-holder-contraction",
+          "def-metric-ball",
+          "lem-acl-representatives-reconstruct-weak-gradients-by-fubini",
+          "thm-c1-lipschitz-ac-bv-hierarchy",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n",
+          "thm-poincare-inequality-on-a-ball",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions",
+          "thm-rationals-countable",
+          "thm-product-of-countable",
+          "lem-rat-embeds-dense"
+        ],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces, complete 168-page notes; Sections 2.6 and 3.3-3.4",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
+            },
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions, Appendix A, Theorem A.2 and pp. 58-60, notes pp. 62-63",
+              "url": "https://arxiv.org/pdf/math/9207212"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. For every open $U\\subseteq\\mathbb R^n$ and locally Lipschitz map $u:U\\to\\mathbb R^m$ (each point has a neighborhood on which $|u(y)-u(z)|\\le L|y-z|$ for some finite $L$, [[def-lipschitz-holder-contraction]]), $u$ is Frechet differentiable outside a null subset of $U$. Here Frechet differentiability at $x$ means that a linear map $A:\\mathbb R^n\\to\\mathbb R^m$ satisfies $u(x+h)=u(x)+Ah+o(|h|)$."
+      },
+      {
+        "id": "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+        "kind": "definition",
+        "title": "Periodic Cartesian grids and tensor-product multilinear interpolation",
+        "deps": [
+          "def-natural-numbers",
+          "def-real-numbers",
+          "def-semilagrangian-periodic-grid-and-interpolant"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define the quotient torus, periodic grid indices, mesh conventions, and the explicit multilinear weights on each cell.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "Section 2, conditions (I1)–(I2), printed pp. 2–3: interpolation accuracy and nonnegative nodal weights."
+            }
+          ]
+        },
+        "statement": "Fix an integer $d\\ge1$ and integers $N_j\\ge3$, $1\\le j\\le d$. This is the\nunit-period specialization of the periodic tensor-grid definition in\n[[def-semilagrangian-periodic-grid-and-interpolant]], with each period\n$\\ell_j=1$. Put\n$h_j=1/N_j$ and define the periodic unit torus as\n$\\mathbb T^d=\\mathbb R^d/\\mathbb Z^d$; functions on it are identified with\n$\\mathbb Z^d$-periodic functions on $\\mathbb R^d$. The Cartesian grid has nodes\n$$x_i=(i_1h_1,\\ldots,i_dh_d)\\pmod{\\mathbb Z^d},\\qquad i_j\\in\\{0,\\ldots,N_j-1\\}.$$\nIndices on nodal arrays are always reduced modulo $N_j$ in coordinate $j$.\n\nFor a nodal array $V=(V_i)$ and $x$ in the cell with lower corner $x_i$, write\n$\\widetilde x_j=(i_j+\\theta_j)h_j$ in a periodic lift, where\n$0\\le\\theta_j\\le1$.\nWrite $I_h$ for the supplier's tensor-product multilinear interpolant. In\nthe local coordinates above, it is\n$$I_hV(x)=\\sum_{\\epsilon\\in\\{0,1\\}^d} \\left(\\prod_{j=1}^d\\theta_j^{\\epsilon_j}(1-\\theta_j)^{1-\\epsilon_j}\\right)V_{i+\\epsilon}.$$\nAt cell faces either adjacent cell formula gives the same value, because the\nweight of the opposite face is zero. The formula is periodic and therefore\ndefines $I_hV$ on $\\mathbb T^d$.\n\nIn dimension two the four nodal weights on one cell are shown below. The dot is\nthe evaluation point; the labels are exactly the four factors in the formula.\nThe diagram fixes the cell convention only; no later proof relies on it.\n\n```tikz\n\\begin{tikzpicture}[scale=1.1]\n  \\draw (0,0) rectangle (3,2);\n  \\fill (1.2,0.8) circle (1.5pt);\n  \\node[below left] at (0,0) {$V_{00}$};\n  \\node[below right] at (3,0) {$V_{10}$};\n  \\node[above left] at (0,2) {$V_{01}$};\n  \\node[above right] at (3,2) {$V_{11}$};\n  \\node[below] at (1.5,-0.35) {$(1-\\theta_1,\\,\\theta_1)$};\n  \\node[left] at (-0.45,1) {$(1-\\theta_2,\\,\\theta_2)$};\n  \\node[above right] at (1.2,0.8) {$x$};\n\\end{tikzpicture}\n```"
+      },
+      {
+        "id": "lem-na-discounted-bellman-policy-matrix-inverse-positive",
+        "kind": "lemma",
+        "title": "Inverse positivity of discounted finite-state policy matrices",
+        "deps": [
+          "def-na-finite-state-discounted-bellman-system",
+          "thm-invertible-matrix-theorem",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 1,
+        "strategy": "Apply a discrete maximum principle for nonsingularity and a convergent nonnegative Neumann series for inverse positivity and positive diagonal.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wang He, Reinforcement Learning: A Mathematical Introduction, Chapter 10, Policy Improvement and Policy Iteration",
+              "url": "https://wanghemath.github.io/Book-MathRL/chapters/chapter-07-policy-improvement-and-policy-iteration.html",
+              "locator": "§§10.3–10.6: finite exact policy evaluation and its linear system."
+            }
+          ]
+        },
+        "statement": "For every policy $\\pi$ in [[def-na-finite-state-discounted-bellman-system]],\nthe matrix $A^\\pi=cI-Q^\\pi$ is nonsingular, $(A^\\pi)^{-1}$ is entrywise\nnonnegative, and each diagonal entry of $(A^\\pi)^{-1}$ is strictly positive."
+      },
+      {
+        "id": "lem-na-sup-convolution-semiconvexity-and-jet-transfer",
+        "kind": "lemma",
+        "title": "Quadratic sup convolution and transfer of upper jets",
+        "deps": [
+          "def-na-second-order-elliptic-semijets-and-closure",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "thm-convex-functions-on-open-convex-sets-are-locally-lipschitz",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Sections 2–3 and Appendix A, printed pp. 9–18 and 56–63."
+            }
+          ]
+        },
+        "statement": "Let $m\\ge1$ and let $K\\subseteq\\mathbb R^m$ be nonempty compact, let $v:K\\to\\mathbb R$ be upper semicontinuous (so $\\limsup_{y\\to x}v(y)\\le v(x)$ for each $x\\in K$), and extend $v$ by $-\\infty$ off $K$. For $\\lambda>0$ define\n$$\\widehat v(\\xi)=\\max_{x\\in K}\\{v(x)-\\tfrac\\lambda2|x-\\xi|^2\\}.$$\nThis is finite, continuous and $\\lambda$-semiconvex on $\\mathbb R^m$, meaning that $\\widehat v(\\xi)+\\lambda|\\xi|^2/2$ is convex ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]). If $(q,Y)\\in J^{2,+}\\widehat v(\\eta)$, every maximizing point equals $y=\\eta+q/\\lambda$, and\n$$(q,Y)\\in J^{2,+}v(y),\\qquad v(y)=\\widehat v(\\eta)+\\frac{|q|^2}{2\\lambda}.$$\nThe jets of $v$ are understood for its extended function, or for its original local domain if $y$ is interior to $K$. These conclusions use no choice principle."
+      },
+      {
+        "id": "thm-na-semiconvex-alexandrov-second-order-differentiability",
+        "kind": "theorem",
+        "title": "Alexandrov second differentiability of locally semiconvex functions",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-countable-choice",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-metric-ball",
+          "def-null-and-content-zero-in-rn",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions",
+          "thm-na-rademacher-euclidean",
+          "lem-na-lipschitz-critical-image-null",
+          "lem-na-convex-support-localization-and-lipschitz-dual-gradient",
+          "cor-bolzano-weierstrass-in-rn",
+          "thm-lipschitz-images-of-null-sets-in-rn-are-null",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-c1-lipschitz-ac-bv-hierarchy"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces, complete 168-page notes; Sections 2.6 and 3.3-3.4",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
+            },
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions, Appendix A, Theorem A.2 and pp. 58-60, notes pp. 62-63",
+              "url": "https://arxiv.org/pdf/math/9207212"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $u:U\\to\\mathbb R$ be locally semiconvex: around each point there is a Euclidean ball ([[def-metric-ball]]) and $c\\ge0$ such that $x\\mapsto u(x)+c|x|^2/2$ is convex in the sense of [[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. Outside a set null in the cube-cover sense of [[def-null-and-content-zero-in-rn]], there are $p\\in\\mathbb R^n$ and a symmetric matrix $A$ with\n$$u(x+h)=u(x)+p\\cdot h+\\tfrac12h^{\\mathsf T}Ah+o(|h|^2)\\quad(h\\to0).$$\nThe remainder is uniform in direction. In particular $u$ is twice differentiable in the Peano sense almost everywhere."
+      },
+      {
+        "id": "alg-na-finite-control-howard-policy-iteration",
+        "kind": "algorithm",
+        "title": "Finite-budget Howard policy iteration for a discounted generator Bellman system",
+        "deps": [
+          "def-na-finite-state-discounted-bellman-system",
+          "lem-na-discounted-bellman-policy-matrix-inverse-positive",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define exact policy solves, strict-improvement states, least-index maximizing switches, deterministic tie retention, budget exhaustion, and the finite policy-count budget.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wang He, Reinforcement Learning: A Mathematical Introduction, Chapter 10, Policy Improvement and Policy Iteration",
+              "url": "https://wanghemath.github.io/Book-MathRL/chapters/chapter-07-policy-improvement-and-policy-iteration.html",
+              "locator": "§§10.6–10.9: policy improvement, exact policy iteration, deterministic ties, and finite termination."
+            }
+          ]
+        },
+        "statement": "For the finite system of [[def-na-finite-state-discounted-bellman-system]],\norder each finite set $A_i$ by its declared indices and put\n$P=\\prod_{i\\in S}|A_i|$. The procedure takes a positive integer evaluation\nbudget $K\\in\\mathbb N$, $K\\ge1$ (default $K=P$), and proceeds as follows.\n\n1. Initialize $\\pi_0(i)$ to the least-index action in $A_i$.\n2. For the current policy $\\pi_k$, solve exactly\n   $A^{\\pi_k}V^k=r^{\\pi_k}$.\n3. Form the strict-improvement set\n   $$J_k=\\left\\{i:\\max_{a\\in A_i}(Q_i^aV^k+r_i^a)>Q_i^{\\pi_k(i)}V^k+r_i^{\\pi_k(i)}\\right\\},$$\n   where $Q_i^aV=\\sum_jq^a_{ij}V_j$.\n4. If $J_k=\\varnothing$, return $(\\texttt{converged},\\pi_k,V^k)$.\n5. If $J_k\\ne\\varnothing$ and $k+1=K$, return\n   $(\\texttt{budget\\_exhausted},\\pi_k,V^k)$; this status makes no Bellman-solution\n   claim.\n6. Otherwise, at each $i\\in J_k$ switch to the least-index maximizing action\n   in $A_i$; retain $\\pi_k(i)$ at every state outside $J_k$ and continue.\n\nThe policy matrix solve is well-defined by\n[[lem-na-discounted-bellman-policy-matrix-inverse-positive]]. A budget of $P$\npolicy evaluations is sufficient by the theorem below."
+      },
+      {
+        "id": "def-na-first-order-hjb-cauchy-problem",
+        "kind": "definition",
+        "title": "Periodic first-order controlled Hamilton–Jacobi Cauchy problem",
+        "deps": [
+          "def-hamilton-jacobi-cauchy-problem",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ],
+        "dependency_level": 2,
+        "strategy": "Fix the periodic unit torus, compact or finite controls, coefficient hypotheses, Hamiltonian sign, initial data, and control-grid error convention.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton–Jacobi Equations: Theory and Applications, 2020 author manuscript",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 §§1–6, especially the first-order Cauchy problem and comparison theorem, printed pp. 9–29."
+            },
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "§1, controlled first-order and second-order HJB Cauchy equations, printed pp. 1–2."
+            }
+          ]
+        },
+        "statement": "Let $d,q\\ge1$, $T>0$, and let $A$ be a nonempty compact subset of\n$\\mathbb R^q$ (a finite action set is included). For each $a\\in A$, let\n$b_a:\\mathbb T^d\\times[0,T]\\to\\mathbb R^d$ and\n$\\ell_a:\\mathbb T^d\\times[0,T]\\to\\mathbb R$ be bounded and jointly\ncontinuous in $(x,t,a)$. Write $b_a,\\ell_a$ also for their periodic lifts to\n$\\mathbb R^d\\times[0,T]$. Assume there are constants $B,L<\\infty$ such that\n$$|b_a(x,t)|\\le B,\\qquad |\\ell_a(x,t)|\\le L,$$\nand for all $a\\in A$, $x,y\\in\\mathbb R^d$, and $t,s\\in[0,T]$,\n$$|b_a(x,t)-b_a(y,s)|+|\\ell_a(x,t)-\\ell_a(y,s)| \\le L(|x-y|+|t-s|).$$\nGiven continuous periodic initial data $u_0:\\mathbb T^d\\to\\mathbb R$, define\n$$H(x,t,p)=\\max_{a\\in A}\\{-b_a(x,t)\\cdot p-\\ell_a(x,t)\\}.$$\nThe **periodic first-order controlled Hamilton–Jacobi Cauchy problem** is\n$$u_t+H(x,t,Du)=0\\quad\\text{on }\\mathbb T^d\\times(0,T),\\qquad u(x,0)=u_0(x).$$\nThe signs are fixed by\n$u_t=\\min_{a\\in A}\\{b_a\\cdot Du+\\ell_a\\}$. Whenever the controls are\ndiscretized, use a sequence of finite nonempty sets $A_k\\subseteq A$ and define\n$$H_k(x,t,p):=\\max_{a\\in A_k}(-b_a\\cdot p-\\ell_a).$$\nDefine the Hamiltonian error by\n$$\\eta_k(R):=\\sup_{x,t,|p|\\le R}|H_k(x,t,p)-H(x,t,p)|.$$\nThe sequence is admissible when $\\eta_k(R)\\to0$ for every $R<\\infty$.\nExact minimization over $A$ corresponds to $\\eta_k=0$. Scheme convergence below\nuses this explicit control-grid error whenever the controls are discretized."
+      },
+      {
+        "id": "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+        "kind": "definition",
+        "title": "Periodic diagonal controlled-diffusion HJB Cauchy problem",
+        "deps": [
+          "def-viscosity-subsolution-and-supersolution",
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the finite-control periodic PDE, uniformly positive diagonal diffusion and bounded Lipschitz coefficients, initial data, and exact sign convention.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§1.6, controlled second-order HJB operators; §8, parabolic viscosity conventions and comparison."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§1 second-order viscosity definition and §2 monotone-stable-consistent convergence framework, printed pp. 272–276."
+            }
+          ]
+        },
+        "statement": "Let $d\\ge1$, $T>0$, and let $A$ be a nonempty finite ordered control set.\nFor each $a\\in A$ and $j=1,\\ldots,d$, let\n$\\alpha_j^a,b_j^a,f^a:\\mathbb T^d\\times[0,T]\\to\\mathbb R$ be bounded and\nperiodic, jointly continuous in $(x,t)$, and uniformly Lipschitz in $(x,t)$.\nAssume a common constant $\\alpha_*>0$ satisfies\n$$\\alpha_j^a(x,t)\\ge\\alpha_*\\qquad\\text{for every }a,j,x,t.$$\nThe **diagonal controlled-diffusion HJB Cauchy problem** is\n$$u_t-\\max_{a\\in A}\\left\\{ \\sum_{j=1}^d\\bigl(\\alpha_j^a(x,t)u_{x_jx_j}+b_j^a(x,t)u_{x_j}\\bigr)+f^a(x,t) \\right\\}=0\\quad\\text{on }\\mathbb T^d\\times(0,T),$$\nwith continuous periodic initial data $u(x,0)=u_0(x)$. In the convention\n$u_t+F(x,t,Du,D^2u)=0$, this has\n$$F(x,t,p,X)=-\\max_{a\\in A}\\left\\{ \\sum_j(\\alpha_j^a X_{jj}+b_j^a p_j)+f^a\\right\\},$$\nwhich is nonincreasing in each diagonal Hessian entry. No off-diagonal\ndiffusion or arbitrary anisotropic central stencil is covered."
+      },
+      {
+        "id": "lem-na-multilinear-interpolation-positive-and-second-order-accurate",
+        "kind": "lemma",
+        "title": "Positive partition of unity and interpolation error for periodic multilinear interpolation",
+        "deps": [
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 2,
+        "strategy": "Factor the tensor weights to prove nonnegativity and unit sum, then derive the cellwise O(h²) error from one-dimensional linear interpolation and telescoping.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "Section 2, interpolation conditions (I1)–(I2), printed pp. 2–3."
+            }
+          ]
+        },
+        "statement": "For the interpolant $I_h$ of [[def-na-periodic-grid-and-tensor-multilinear-interpolation]], every cell weight is nonnegative and the weights sum to one by\n[[lem-periodic-tensor-interpolant-is-convex-and-linf-contracting]]. Hence\n$V\\le W$ on grid nodes implies $I_hV\\le I_hW$, and\n$\\|I_hV\\|_{\\infty}\\le\\|V\\|_{\\infty}$. If $\\phi\\in C^2(\\mathbb T^d)$ and $V_i=\\phi(x_i)$, then\n$$\\|I_hV-\\phi\\|_{\\infty}\\le\\frac18\\sum_{j=1}^d h_j^2\\|\\partial_{jj}\\phi\\|_{\\infty}.$$"
+      },
+      {
+        "id": "thm-na-elliptic-theorem-of-sums",
+        "kind": "theorem",
+        "title": "Elliptic theorem of sums with the full block matrix bound",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-na-second-order-elliptic-semijets-and-closure",
+          "lem-na-jensen-maximum-principle-semiconvex",
+          "lem-na-sup-convolution-semiconvexity-and-jet-transfer",
+          "thm-na-semiconvex-alexandrov-second-order-differentiability",
+          "lem-symmetric-matrix-operator-norm-rayleigh",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-bolzano-weierstrass-in-rn"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Sections 2–3 and Appendix A, printed pp. 9–18 and 56–63."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $k\\ge1$, $n_i\\ge1$, let $U_i\\subseteq\\mathbb R^{n_i}$ be open, and let $u_i:U_i\\to\\mathbb R$ be upper semicontinuous, meaning $\\limsup_{y\\to x}u_i(y)\\le u_i(x)$ at each $x\\in U_i$. Suppose $\\phi$ is $C^2$ near $z=(z_1,\\ldots,z_k)\\in\\prod_iU_i$ and $\\sum_i u_i(x_i)-\\phi(x)$ has a local maximum at $z$. Set $A=D^2\\phi(z)$, and let $\\|A\\|$ be its Euclidean operator norm ([[def-operator-norm-on-a-finite-dimensional-inner-product-space]]). For every $\\varepsilon>0$ there are $X_i\\in\\mathbb S^{n_i}$ such that\n$$(D_i\\phi(z),X_i)\\in\\overline J^{2,+}u_i(z_i),$$\nand\n$$-\\left(\\varepsilon^{-1}+\\|A\\|\\right)I\\ \\le\\ \\operatorname{diag}(X_1,\\ldots,X_k)\\ \\le\\ A+\\varepsilon A^2.$$\nHere all jets are full Euclidean jets. In particular one may take each $U_i$ to be a space-time domain of dimension $d+1$. For a lower semicontinuous function $v$, applying the theorem to $-v$ and then negating its jet gives the corresponding closed subjet for $v$."
+      },
+      {
+        "id": "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+        "kind": "algorithm",
+        "title": "Explicit monotone diagonal-diffusion Bellman grid update",
+        "deps": [
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 3,
+        "strategy": "Define the periodic second-difference and sign-selected one-sided drift stencils, control maximum, diffusion-dominance condition, and explicit CFL.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§1.6, controlled second-order HJB operators and degenerate ellipticity."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2, monotone second-order schemes and the comparison-dependent convergence theorem, printed pp. 274–276."
+            }
+          ]
+        },
+        "statement": "Use the model of [[def-na-periodic-diagonal-controlled-diffusion-hjb-problem]] and a periodic grid with integers $N_j\\ge3$, $h_j=1/N_j$. Choose an integer $M\\ge1$, set $\\tau=T/M$, and put $t_n=n\\tau$ for $n=0,\\ldots,M$. For a nodal array $V$, define\n$$D_{jj}^hV_i=\\frac{V_{i+e_j}-2V_i+V_{i-e_j}}{h_j^2}.$$\nFor a control $a$, define\n$$D_{j,a}^{up}V_i=\\begin{cases}(V_i-V_{i-e_j})/h_j,&b_j^a(x_i,t_n)\\ge0,\\\\(V_{i+e_j}-V_i)/h_j,&b_j^a(x_i,t_n)<0.\\end{cases}$$\nThe recurrence is\n$$U_i^{n+1}=U_i^n+\\tau\\max_{a\\in A}\\left\\{\\sum_{j=1}^d\\left[\\alpha_j^a(x_i,t_n)D_{jj}^hU_i+b_j^a(x_i,t_n)D_{j,a}^{up}U_i\\right]+f^a(x_i,t_n)\\right\\}.$$\nAt each time level $n=0,\\ldots,M-1$, admit the update only when, at every node, control, and coordinate,\n$$|b_j^a(x_i,t_n)|h_j\\le\\alpha_j^a(x_i,t_n),$$\nand\n$$\\tau\\max_{i,a}\\sum_{j=1}^d\\left(\\frac{2\\alpha_j^a(x_i,t_n)}{h_j^2}+\\frac{|b_j^a(x_i,t_n)|}{h_j}\\right)\\le1.$$\nInitialize by $U_i^0=u_0(x_i)$ and perform the updates for $n=0,\\ldots,M-1$, evaluating coefficients at $(x_i,t_n)$. Return $U^M$. No claim about an arbitrary anisotropic central stencil is included."
+      },
+      {
+        "id": "alg-na-positive-interpolation-semilagrangian-hjb-step",
+        "kind": "algorithm",
+        "title": "Positive-interpolation semi-Lagrangian update for first-order HJB equations",
+        "deps": [
+          "def-na-first-order-hjb-cauchy-problem",
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "lem-na-multilinear-interpolation-positive-and-second-order-accurate",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 3,
+        "strategy": "Specify initial sampling, periodic wrapping, the finite controlled update, exact-minimization or finite-control error input, and output.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "§§2–4, positive interpolation and semi-Lagrangian HJB updates, printed pp. 2–5."
+            }
+          ]
+        },
+        "statement": "Choose integers $N_j\\ge3$, a number $M\\ge1$ of time steps, and\n$\\tau=T/M$. Sample $u_0$ at the grid nodes of\n[[def-na-periodic-grid-and-tensor-multilinear-interpolation]] and set\n$U_i^0=u_0(x_i)$. At each $n=0,\\ldots,M-1$, compute\n$$U_i^{n+1}=\\min_{a\\in A_k}\\left\\{ I_hU^n\\bigl(x_i+\\tau b_a(x_i,t_n)\\bigr)+\\tau\\ell_a(x_i,t_n) \\right\\},\\qquad t_n=n\\tau.$$\nThe position is evaluated on the torus, so its coordinates wrap modulo one.\nThe algorithm always uses a finite nonempty set $A_k\\subset A$. For a finite\ncontrol model take $A_k=A$; for a compact control model, supply finite sets\nwhose Hamiltonian errors $\\eta_k(R)$ from\n[[def-na-first-order-hjb-cauchy-problem]] tend to zero on every bounded\nmomentum set. This is the declared finite-control approximation branch; it\ndoes not presume an unimplemented continuous minimization oracle. Return\n$U^M$.\n\nThe update is the explicit Euler-footpoint semi-Lagrangian branch specified by\nthe plan. It defines its footpoint and interpolant locally; no unauthored\ncharacteristic-flow estimate is presumed."
+      },
+      {
+        "id": "alg-na-upwind-hjb-grid-step",
+        "kind": "algorithm",
+        "title": "CFL-monotone upwind update for first-order HJB equations",
+        "deps": [
+          "def-na-first-order-hjb-cauchy-problem",
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "def-periodic-one-way-advection-schemes",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 3,
+        "strategy": "Define the sign-reflected one-sided derivative for u_t=b·Du+ell, the periodic rows, control minimum, CFL condition, and output.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§§6.5–6.6, explicit upwind rows and sign conventions, PDF pp. 97–104."
+            }
+          ]
+        },
+        "statement": "Use the model and coefficient notation of [[def-na-first-order-hjb-cauchy-problem]] and the periodic grid of [[def-na-periodic-grid-and-tensor-multilinear-interpolation]]. Choose an integer $M\\ge1$, set $\\tau=T/M$, and put $t_n=n\\tau$ for $n=0,\\ldots,M$. Choose a finite nonempty control set $A_k\\subseteq A$. For a finite control model take $A_k=A$; for compact controls use a sequence of finite nonempty sets with the stated uniform Hamiltonian error. For each control and grid node put\n$$b_{a,j}^+=\\max\\{b_{a,j},0\\},\\qquad b_{a,j}^- =\\max\\{-b_{a,j},0\\},$$\nand define the explicit row\n$$G^a_i(V)=V_i+\\tau\\left[\\sum_{j=1}^d\\left(\\frac{b_{a,j}^+(x_i,t_n)}{h_j}(V_{i+e_j}-V_i)+\\frac{b_{a,j}^-(x_i,t_n)}{h_j}(V_{i-e_j}-V_i)\\right)+\\ell_a(x_i,t_n)\\right].$$\nThe periodic HJB upwind update at time $t_n$ is\n$$U_i^{n+1}=\\min_{a\\in A_k}G_i^a(U^n).$$\nAt every step $n=0,\\ldots,M-1$, require the CFL condition\n$$\\tau\\max_{a,i}\\sum_{j=1}^d\\frac{|b_{a,j}(x_i,t_n)|}{h_j}\\le1$$\nInitialize $U_i^0=u_0(x_i)$ and perform the updates for $n=0,\\ldots,M-1$. Return $U^M$. Since the transport velocity in [[def-periodic-one-way-advection-schemes]] is $-b_a$ for this Hamiltonian sign convention, the displayed one-sided direction is its sign-reflected upwind row."
+      },
+      {
+        "id": "def-na-second-order-parabolic-viscosity-solution",
+        "kind": "definition",
+        "title": "Second-order parabolic viscosity subsolutions and supersolutions",
+        "deps": [
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+          "def-viscosity-subsolution-and-supersolution"
+        ],
+        "dependency_level": 3,
+        "strategy": "Extend the local maximum/minimum test convention to C^{1,2} test functions and the diagonal controlled-diffusion operator.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§2 viscosity definitions and §8 parabolic problems, printed pp. 9–13 and 49–52."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§1, second-order viscosity subsolution and supersolution definition, printed pp. 272–274."
+            }
+          ]
+        },
+        "statement": "Let $u$ be upper semicontinuous and $v$ lower semicontinuous on the periodic\nspace-time cylinder. A **second-order parabolic viscosity subsolution** of\n[[def-na-periodic-diagonal-controlled-diffusion-hjb-problem]] is a function $u$\nsuch that every $C^{1,2}$ test function $\\phi$ for which $u-\\phi$ has a local\nmaximum at $(x_0,t_0)$, $0<t_0<T$, satisfies\n$$\\phi_t(x_0,t_0)-\\max_{a\\in A}\\left\\{\\sum_j\\left(\\alpha_j^a\\phi_{x_jx_j}+b_j^a\\phi_{x_j}\\right)(x_0,t_0)+f^a(x_0,t_0)\\right\\}\\le0.$$\nHere $C^{1,2}$ means that $\\phi_t$, all first spatial derivatives, and all\nsecond spatial derivatives exist and are continuous near the contact point.\nA **supersolution** is lower semicontinuous and satisfies the reverse\ninequality at every local minimum. A viscosity solution is both. For the Cauchy\nproblem, the relaxed initial conditions are\n$$\\limsup_{(y,s)\\to(x,0),\\ s>0}u(y,s)\\le u_0(x),\\qquad \\liminf_{(y,s)\\to(x,0),\\ s>0}v(y,s)\\ge u_0(x).$$"
+      },
+      {
+        "id": "lem-na-grid-contact-localization-for-half-relaxed-limits",
+        "kind": "lemma",
+        "title": "Localization of strict half-relaxed contacts to periodic mesh nodes",
+        "deps": [
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "lem-na-multilinear-interpolation-positive-and-second-order-accurate",
+          "def-half-relaxed-limits",
+          "def-countable-choice",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 3,
+        "strategy": "Use the set-defined half-relaxed envelope to recover near-contact points, replace interpolant values by a nodal value, then maximize on a finite grid in a strict-contact ball and exclude its annulus by compactness.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§6, half-relaxed limits; Appendix A strict-contact and approximation arguments, printed pp. 34–35 and 56–63."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2 proof of Theorem 2.1, strict contact and mesh-maximizer localization, printed pp. 275–276."
+            }
+          ]
+        },
+        "statement": "Let $V_k$ be locally bounded periodic interpolant extensions of finite nodal\narrays on grids with $h_k\\to0$ and time steps $\\tau_k\\to0$. Regard this\nsequence as the family $V_\\epsilon=V_k$ when\n$(k+1)^{-1}<\\epsilon\\le k^{-1}$, and form its upper and lower half-relaxed\nlimits as in\n[[def-half-relaxed-limits]]. If $\\overline V-\\phi$ has a strict local maximum\nat an interior point $z_0=(x_0,t_0)$ for a smooth test $\\phi$, then there are\nmesh indices $k_m\\to\\infty$ and grid points $z_m=(x_{i_m},t_{n_m})\\to z_0$\nsuch that $V_{k_m}(z_m)-\\phi(z_m)\\to\\overline V(z_0)-\\phi(z_0)$ and $z_m$ is\na local maximum of the corresponding nodal values minus $\\phi$ on a fixed\nclosed space-time ball. The lower half-relaxed limit has the dual strict\nminimum property. The proof uses Countable Choice only for sequential recovery\nfrom the set-defined half-relaxed limit."
+      },
+      {
+        "id": "thm-na-howard-policy-iteration-monotone-improvement-termination",
+        "kind": "theorem",
+        "title": "Monotone improvement and finite termination of exact Howard iteration",
+        "deps": [
+          "alg-na-finite-control-howard-policy-iteration",
+          "lem-na-discounted-bellman-policy-matrix-inverse-positive",
+          "def-na-finite-state-discounted-bellman-system",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 3,
+        "strategy": "Compare successive policy equations through inverse positivity, obtain strict value increase at switched states, exclude repeated policies, and identify the stopping policy as a Bellman solution.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wang He, Reinforcement Learning: A Mathematical Introduction, Chapter 10, Policy Improvement and Policy Iteration",
+              "url": "https://wanghemath.github.io/Book-MathRL/chapters/chapter-07-policy-improvement-and-policy-iteration.html",
+              "locator": "§§10.6–10.9: policy-improvement theorem, exact algorithm, and finite termination."
+            }
+          ]
+        },
+        "statement": "For exact policy evaluations, every strict switch in\n[[alg-na-finite-control-howard-policy-iteration]] weakly increases the policy\nvalue at every state and strictly increases it at each switched state. No\ndeterministic policy can recur after a strict switch. With budget\n$P=\\prod_i|A_i|$, the algorithm terminates within $P$ policy evaluations at\nthe unique solution of the Bellman system in\n[[def-na-finite-state-discounted-bellman-system]]. A smaller budget may return\n`budget_exhausted` without a solution claim."
+      },
+      {
+        "id": "lem-na-diagonal-diffusion-discrete-initial-trace",
+        "kind": "lemma",
+        "title": "Initial trace for the explicit diagonal-diffusion HJB scheme",
+        "deps": [
+          "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric"
+        ],
+        "dependency_level": 4,
+        "strategy": "Bound finite controlled random-walk displacement in second moment, then apply the common modulus of the initial data.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§6, initial-boundary conditions and half-relaxed stability; the local finite-step trace estimate is proved here."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2, stability and initial-data hypotheses for monotone approximation schemes; the controlled random-walk bound is proved here."
+            }
+          ]
+        },
+        "statement": "Let $u_0$ be continuous and periodic, and use the explicit diagonal-diffusion\nscheme of [[alg-na-explicit-diagonal-diffusion-hjb-grid-step]] with mesh\nwidths $h_{k,j}\\to0$, time steps $\\tau_k\\to0$, and its diffusion-dominance\nand CFL inequalities at every row. Then for every sequence of integers\n$n_k\\ge0$ with $t_k=n_k\\tau_k\\to0$ and $t_k$ within the computed horizon,\n$$\\sup_i|U_i^{n_k}-u_0(x_i)|\\longrightarrow0.$$\nThe estimate is uniform over all finite control choices generated by the\nmaximization in the scheme."
+      },
+      {
+        "id": "lem-na-diagonal-diffusion-stencil-is-monotone",
+        "kind": "lemma",
+        "title": "Nonnegative row weights for the diagonal-diffusion HJB stencil",
+        "deps": [
+          "alg-na-explicit-diagonal-diffusion-hjb-grid-step"
+        ],
+        "dependency_level": 4,
+        "strategy": "Expand each control row and verify the center, both directional neighbors, and row sum under the stated dominance and CFL inequalities.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§1.2 and §1.6, degenerate ellipticity and controlled second-order operators, printed pp. 4–7."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2 monotonicity requirement for second-order approximation schemes, printed pp. 274–276."
+            }
+          ]
+        },
+        "statement": "Under the two inequalities in [[alg-na-explicit-diagonal-diffusion-hjb-grid-step]],\nevery fixed-control row of its explicit update is an affine combination of the\ncenter and the two coordinate neighbors with nonnegative coefficients summing\nto one, plus $\\tau f^a$. Therefore the max over controls is order-preserving."
+      },
+      {
+        "id": "lem-na-elliptic-spacetime-jets-imply-parabolic-hjb-inequalities",
+        "kind": "lemma",
+        "title": "Closed elliptic space-time jets test the parabolic diagonal HJB inequality",
+        "deps": [
+          "def-na-second-order-elliptic-semijets-and-closure",
+          "def-na-second-order-parabolic-viscosity-solution",
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem"
+        ],
+        "dependency_level": 4,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 2, equations (2.3), (2.6), Remark 2.4; Section 8, Remark 8.1."
+            }
+          ]
+        },
+        "statement": "Let $u$ be a USC viscosity subsolution in the sense of\n[[def-na-second-order-parabolic-viscosity-solution]], and write the local\nspace-time variable as $z=(t,x)$. If\n$((a,p),H)\\in\\overline J^{2,+}u(t,x)$ is a closed elliptic jet in all $d+1$\nvariables ([[def-na-second-order-elliptic-semijets-and-closure]]), and $X$ is the spatial\nprincipal block of $H$, then\n$$a-\\max_{c\\in A}\\left\\{\\sum_j(\\alpha_j^c(x,t)X_{jj}+b_j^c(x,t)p_j)+f^c(x,t)\\right\\}\\le0.$$\nFor an LSC supersolution and a closed elliptic subjet the reverse inequality\nholds. All points are interior in time; local periodic lifts are understood."
+      },
+      {
+        "id": "lem-na-first-order-hjb-discrete-initial-trace",
+        "kind": "lemma",
+        "title": "Initial trace for the positive-interpolation and upwind HJB schemes",
+        "deps": [
+          "alg-na-positive-interpolation-semilagrangian-hjb-step",
+          "alg-na-upwind-hjb-grid-step",
+          "lem-na-multilinear-interpolation-positive-and-second-order-accurate",
+          "def-na-first-order-hjb-cauchy-problem",
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "thm-heine-cantor-metric",
+          "thm-heine-borel-rn"
+        ],
+        "dependency_level": 4,
+        "strategy": "Represent finite updates by finite controlled transition kernels and bound drift plus interpolation or upwind martingale variance near t=0.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "§§2–4, positive interpolation transitions and semi-Lagrangian scheme, printed pp. 2–5."
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton–Jacobi Equations: Theory and Applications, 2020 author manuscript",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 §§4–6, stability, initial data, and comparison for the Cauchy problem, printed pp. 21–29."
+            }
+          ]
+        },
+        "statement": "Let $u_0$ be continuous and periodic, and let $B$ and $L$ bound the drift and\nrunning cost in [[def-na-first-order-hjb-cauchy-problem]]. For the semi-Lagrangian\nscheme, if $t_n=n\\tau\\to0$, $h_{\\max}\\to0$, and\n$h_{\\max}^2/\\tau\\to0$, then\n$$\\sup_i|U_i^n-u_0(x_i)|\\longrightarrow0.$$\nFor the upwind scheme, the same conclusion holds when $t_n\\to0$,\n$h_{\\max}\\to0$, and its CFL condition holds. Both statements are uniform over\nall finite control policies and remain true for a finite control discretization."
+      },
+      {
+        "id": "lem-na-smooth-tests-suffice-for-first-and-second-order-hjb-viscosity",
+        "kind": "lemma",
+        "title": "Smooth test functions suffice for the first- and second-order HJB viscosity notions",
+        "deps": [
+          "def-na-first-order-hjb-cauchy-problem",
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+          "def-na-second-order-parabolic-viscosity-solution",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "thm-heine-cantor-metric",
+          "thm-ftc-first-part",
+          "thm-continuous-implies-integrable"
+        ],
+        "dependency_level": 4,
+        "strategy": "Strictify a C1 or C1,2 contact without changing its relevant jet, mollify in C1 or C1,2 on a compact neighborhood, and pass the smooth-test inequality through the maximizing contacts.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton–Jacobi Equations: Theory and Applications, 2020 author manuscript",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 §§1–2, test-function and viscosity definitions, printed pp. 15–22."
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§2, test-function viscosity definitions and second-order parabolic conventions, printed pp. 9–13 and 49–50."
+            }
+          ]
+        },
+        "statement": "For the continuous first-order Hamiltonian of\n[[def-na-first-order-hjb-cauchy-problem]], requiring the subsolution or\nsupersolution inequality only for smooth ($C^\\infty$) local test functions is\nequivalent to requiring it for all $C^1$ tests. For the diagonal second-order\noperator of [[def-na-periodic-diagonal-controlled-diffusion-hjb-problem]], the\nsame equivalence holds between smooth tests and all $C^{1,2}$ tests in\n[[def-na-second-order-parabolic-viscosity-solution]]. The result is local in\nspace-time and applies to upper semicontinuous subsolutions and lower\nsemicontinuous supersolutions."
+      },
+      {
+        "id": "thm-na-diagonal-diffusion-stencil-consistency",
+        "kind": "theorem",
+        "title": "Smooth consistency of the diagonal-diffusion Bellman stencil",
+        "deps": [
+          "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 4,
+        "strategy": "Taylor expand the central second differences, one-sided drift differences, and explicit time step with uniform coefficient bounds.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "§2, Taylor consistency conditions for controlled diffusion stencils, printed pp. 2–3."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2, test-function consistency requirement for second-order schemes, printed pp. 274–276."
+            }
+          ]
+        },
+        "statement": "Assume the coefficients are bounded and periodic and a periodic test function\n$\\phi$ is smooth with bounded derivatives $\\phi_{tt}$, $\\phi_{x_jx_j}$, and\n$\\phi_{x_jx_jx_jx_j}$, and the coefficients are bounded. For the scheme of\n[[alg-na-explicit-diagonal-diffusion-hjb-grid-step]], define the normalized\nlocal residual\n$$R_{h,\\tau}(x_i,t_n)=\\frac{\\phi(x_i,t_n+\\tau)-S_{h,\\tau}\\phi(\\cdot,t_n)_i}{\\tau}.$$\nThen\n$$R_{h,\\tau}=\\phi_t-\\max_{a\\in A}\\left\\{ \\sum_j(\\alpha_j^a\\phi_{x_jx_j}+b_j^a\\phi_{x_j})+f^a\\right\\} +O\\left(\\tau+\\max_j\\left[\\alpha_{j,\\max}h_j^2\\|\\phi_{x_j^4}\\|_\\infty+ |b_j|_{\\max}h_j\\|\\phi_{x_jx_j}\\|_\\infty\\right]\\right),$$\nwhere $\\alpha_{j,\\max}:=\\sup_{a,x,t}\\alpha_j^a(x,t)$ and\n$|b_j|_{\\max}:=\\sup_{a,x,t}|b_j^a(x,t)|$. The bound is uniform over nodes and\ntimes before the terminal step. The $O(\\cdot)$ is a\nsmooth-test residual estimate, not a solution-error rate."
+      },
+      {
+        "id": "thm-na-positive-interpolation-hjb-step-monotone-stable-consistent",
+        "kind": "theorem",
+        "title": "Monotonicity, L-infinity stability, and consistency of the semi-Lagrangian HJB step",
+        "deps": [
+          "alg-na-positive-interpolation-semilagrangian-hjb-step",
+          "lem-na-multilinear-interpolation-positive-and-second-order-accurate",
+          "def-na-first-order-hjb-cauchy-problem"
+        ],
+        "dependency_level": 4,
+        "strategy": "Use positive partition-of-unity weights for order and stability; Taylor expand the footpoint and time update for the O(dt+h²/dt) residual.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "§§2–4, positive interpolation, first-order drift approximation, and LISL monotonicity, printed pp. 2–5."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2, monotonicity and consistency assumptions for approximation schemes, printed pp. 274–276."
+            }
+          ]
+        },
+        "statement": "For the update $S_{h,\\tau}$ of\n[[alg-na-positive-interpolation-semilagrangian-hjb-step]], if $V\\le W$ at all\nnodes then $S_{h,\\tau}V\\le S_{h,\\tau}W$. If $|\\ell_a|\\le L$, then\n$$\\|S_{h,\\tau}V\\|_\\infty\\le\\|V\\|_\\infty+\\tau L.$$\nFor $\\phi\\in C^2$ in space and time with bounded derivatives, on a compact\ntest region with $|D\\phi|\\le P$,\n$$\\frac{\\phi(t_n+\\tau,x_i)-S_{h,\\tau}\\phi(t_n,\\cdot)_i}{\\tau} =\\phi_t(x_i,t_n)+H(x_i,t_n,D\\phi(x_i,t_n)) +O\\left(\\tau+\\frac{h_{\\max}^2}{\\tau}+\\eta_k(P)\\right).$$\nThe term $\\eta_k(P)$ is zero when the full finite control set is used."
+      },
+      {
+        "id": "thm-na-upwind-hjb-grid-step-monotone-stable-consistent",
+        "kind": "theorem",
+        "title": "Monotonicity, L-infinity stability, and consistency of the upwind HJB step",
+        "deps": [
+          "alg-na-upwind-hjb-grid-step",
+          "def-na-first-order-hjb-cauchy-problem",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 4,
+        "strategy": "Write each control row as a convex combination under the CFL condition, then use one-sided Taylor expansions for consistency.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§§6.5–6.6, explicit upwind row and smooth consistency, PDF pp. 97–104."
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton–Jacobi Equations: Theory and Applications, 2020 author manuscript",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 3 §4, monotone and consistent finite-difference schemes, printed pp. 100–103."
+            }
+          ]
+        },
+        "statement": "Assume the first-order HJB coefficients satisfy the hypotheses of\n[[def-na-first-order-hjb-cauchy-problem]]. Under the CFL condition in\n[[alg-na-upwind-hjb-grid-step]], each one-control update is a convex\ncombination of the current node and its one-sided neighbors plus\n$\\tau\\ell_a$. Consequently the control-minimum update is order-preserving and\n$$\\|U^{n+1}\\|_\\infty\\le\\|U^n\\|_\\infty+\\tau L.$$\nFor a smooth periodic test function $\\phi$ with bounded derivatives through\norder two, the normalized local residual satisfies\n$$\\frac{\\phi(t_n+\\tau,x_i)-S_{h,\\tau}\\phi(t_n,\\cdot)_i}{\\tau} =\\phi_t(x_i,t_n)+H(x_i,t_n,D\\phi(x_i,t_n))+O(\\tau+h_{\\max}+\\eta_k(P)),$$\nwhere $S_{h,\\tau}$ is the scheme map, $h_{\\max}=\\max_jh_j$, $P$ bounds\n$|D\\phi|$ on the tested compact set, and $\\eta_k(P)=0$ for exact control\nminimization."
+      },
+      {
+        "id": "thm-na-diagonal-diffusion-scheme-half-relaxed-limits",
+        "kind": "theorem",
+        "title": "Half-relaxed limits of the monotone diagonal-diffusion HJB scheme",
+        "deps": [
+          "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+          "lem-na-diagonal-diffusion-stencil-is-monotone",
+          "thm-na-diagonal-diffusion-stencil-consistency",
+          "lem-na-diagonal-diffusion-discrete-initial-trace",
+          "lem-na-grid-contact-localization-for-half-relaxed-limits",
+          "lem-na-smooth-tests-suffice-for-first-and-second-order-hjb-viscosity",
+          "def-half-relaxed-limits",
+          "def-na-second-order-parabolic-viscosity-solution",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "At local extrema of the half-relaxed limits, use the nonnegative stencil weights and smooth-test consistency; prove the initial trace from the same finite transition-kernel moment bound.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§6 stability of viscosity solutions and upper/lower relaxed limits; §8 parabolic test conventions, printed pp. 34–35 and 49–52."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2, Theorem 2.1 proof: monotonicity, consistency, and grid-contact half-relaxed passage, printed pp. 274–276."
+            }
+          ]
+        },
+        "statement": "Let $h_{k,j}\\to0$, $\\tau_k=T/M_k\\to0$, and let $U_k$ be the finite\nsolutions of [[alg-na-explicit-diagonal-diffusion-hjb-grid-step]] with its\ndiffusion-dominance and CFL inequalities at every row. Extend each array\nmultilinearly in space, constantly on each time interval, and by its initial\ninterpolant for $-1<t<0$; identify the mesh sequence with the parameter\nfamily convention of [[def-half-relaxed-limits]]. Its upper\nhalf-relaxed limit is a bounded upper semicontinuous viscosity subsolution,\nand its lower half-relaxed limit is a bounded lower semicontinuous viscosity\nsupersolution of the periodic diagonal-diffusion Cauchy problem, with the\nrespective relaxed initial inequalities equal to $u_0$. This is a stability\nstatement only; it does not claim that the two limits coincide."
+      },
+      {
+        "id": "thm-na-first-order-hjb-scheme-convergence",
+        "kind": "theorem",
+        "title": "Convergence of the positive-interpolation and upwind first-order HJB schemes",
+        "deps": [
+          "alg-na-positive-interpolation-semilagrangian-hjb-step",
+          "alg-na-upwind-hjb-grid-step",
+          "lem-na-multilinear-interpolation-positive-and-second-order-accurate",
+          "thm-na-positive-interpolation-hjb-step-monotone-stable-consistent",
+          "thm-na-upwind-hjb-grid-step-monotone-stable-consistent",
+          "lem-na-first-order-hjb-discrete-initial-trace",
+          "lem-na-grid-contact-localization-for-half-relaxed-limits",
+          "lem-na-smooth-tests-suffice-for-first-and-second-order-hjb-viscosity",
+          "def-na-first-order-hjb-cauchy-problem",
+          "def-half-relaxed-limits",
+          "def-viscosity-subsolution-and-supersolution",
+          "def-countable-choice",
+          "thm-comparison-for-first-order-hamilton-jacobi-equations",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric"
+        ],
+        "dependency_level": 5,
+        "strategy": "Prove the mesh-node subsolution and supersolution inequalities by monotonicity and consistency, enforce the initial trace, and squeeze the periodic envelopes using the exact published comparison hypotheses.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton–Jacobi Equations: Theory and Applications, 2020 author manuscript",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 3 §4, Theorem 3.15 and the grid-maximum proof for monotone consistent schemes, printed pp. 100–103."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2, assumptions (2.2)–(2.5), Theorem 2.1 and proof, printed pp. 274–276."
+            },
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "§§2–4, positive interpolation and first-order semi-Lagrangian HJB update, printed pp. 2–5."
+            }
+          ]
+        },
+        "statement": "Let $u_0$ and the coefficients satisfy\n[[def-na-first-order-hjb-cauchy-problem]]. Consider a sequence of periodic\ngrids with $h_{k,\\max}\\to0$, time steps $\\tau_k=T/M_k\\to0$, $M_k\\in\\mathbb N$,\nand finite nonempty control sets $A_k\\subseteq A$ whose Hamiltonian errors\n$\\eta_k(R)$ tend to zero for each finite $R$. For the positive-interpolation\nscheme additionally assume $h_{k,\\max}^2/\\tau_k\\to0$. For the upwind scheme\nassume its CFL condition at every step. Extend the initial interpolant\nconstantly for $-1<t<0$ and identify the mesh sequence with the parameter\nfamily $V_\\epsilon=V_k$ for $(k+1)^{-1}<\\epsilon\\le k^{-1}$ in\n[[def-half-relaxed-limits]]. Then the respective piecewise\nmultilinear-in-space, piecewise-constant-in-time extensions of the nodal\nsolutions converge locally uniformly on $\\mathbb T^d\\times[0,T)$ to the same\nbounded continuous viscosity solution of the Cauchy problem. This conclusion\nincludes exact finite-control models ($A_k=A$), where $\\eta_k=0$. The proof\ndoes not assert a rate."
+      },
+      {
+        "id": "thm-na-periodic-diagonal-hjb-second-order-comparison",
+        "kind": "theorem",
+        "title": "Comparison for periodic diagonal controlled-diffusion HJB equations",
+        "deps": [
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+          "def-na-second-order-parabolic-viscosity-solution",
+          "def-viscosity-subsolution-and-supersolution",
+          "thm-na-elliptic-theorem-of-sums",
+          "lem-na-elliptic-spacetime-jets-imply-parabolic-hjb-inequalities",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "thm-heine-borel-rn",
+          "cor-bolzano-weierstrass-in-rn",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "contradiction",
+        "statement": "Assume the Axiom of Choice and the exact finite-control coefficient hypotheses of\n[[def-na-periodic-diagonal-controlled-diffusion-hjb-problem]], in any dimension\n$d\\ge1$. Let $u$ be bounded upper semicontinuous and $v$ bounded lower\nsemicontinuous on $\\mathbb T^d\\times(0,T)$; assume their interior\n$C^{1,2}$-test inequalities are those of\n[[def-na-second-order-parabolic-viscosity-solution]], using the local\nmaximum/minimum contact convention of\n[[def-viscosity-subsolution-and-supersolution]]. Suppose the raw relaxed initial\ntraces are ordered at every $x\\in\\mathbb T^d$:\n$$\\limsup_{\\substack{(y,t)\\to(x,0)\\\\t>0}}u(y,t)\\le\\liminf_{\\substack{(y,t)\\to(x,0)\\\\t>0}}v(y,t).$$\nThen $u\\le v$ on $\\mathbb T^d\\times(0,T)$. In particular this applies to the\nmodel's common continuous initial datum and its two relaxed initial\ninequalities. Defining the values at $t=0$ by their respective raw upper and\nlower envelopes gives the same order there. No continuity, spatial Lipschitz\nbound, or differentiability of $u,v$ is assumed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 3, Theorem 3.2, Proposition 3.7 and Example 3.6; Section 8, Remark 8.1 and proof of Theorem 8.2."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-na-diagonal-diffusion-scheme-converges-under-comparison",
+        "kind": "corollary",
+        "title": "Conditional convergence of the diagonal-diffusion scheme under comparison",
+        "deps": [
+          "thm-na-diagonal-diffusion-scheme-half-relaxed-limits",
+          "def-half-relaxed-limits",
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+          "def-na-second-order-parabolic-viscosity-solution",
+          "thm-heine-borel-rn"
+        ],
+        "dependency_level": 6,
+        "strategy": "Assume comparison for the exact second-order coefficient class, identify both half-relaxed limits, and rule out failure of uniform convergence on the compact periodic cylinder.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2, Theorem 2.1 and proof: comparison squeezes upper/lower relaxed limits to a continuous limit, printed pp. 274–276."
+            },
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§6, stability and comparison route for half-relaxed limits, printed pp. 34–35."
+            }
+          ]
+        },
+        "statement": "For a sequence of diagonal-diffusion grid schemes satisfying the hypotheses\nof [[thm-na-diagonal-diffusion-scheme-half-relaxed-limits]], suppose in\naddition that the exact periodic Cauchy problem\n[[def-na-periodic-diagonal-controlled-diffusion-hjb-problem]] has a comparison\nprinciple for bounded upper semicontinuous subsolutions and bounded lower\nsemicontinuous supersolutions with ordered relaxed initial traces. Then the\nupper and lower half-relaxed limits coincide, define the unique bounded\ncontinuous viscosity solution, and the spatially interpolated numerical\nsolutions converge locally uniformly on $\\mathbb T^d\\times[0,T)$ to it.\nThis corollary is conditional on the stated second-order comparison property;\nit does not supply or assert that property."
+      },
+      {
+        "id": "thm-na-diagonal-diffusion-hjb-scheme-convergence",
+        "kind": "theorem",
+        "title": "Unconditional convergence and existence for the periodic diagonal-diffusion HJB scheme",
+        "deps": [
+          "thm-na-periodic-diagonal-hjb-second-order-comparison",
+          "thm-na-diagonal-diffusion-scheme-half-relaxed-limits",
+          "cor-na-diagonal-diffusion-scheme-converges-under-comparison",
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+          "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+          "def-half-relaxed-limits",
+          "thm-heine-borel-rn",
+          "lem-ceiling-and-least-positive-integer-threshold",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Crandall, Ishii and Lions, User's guide to viscosity solutions",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "Section 6, Remark 6.4; Section 8, comparison and initial data."
+            },
+            {
+              "title": "Barles and Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "Section 2, Theorem 2.1, comparison and half-relaxed squeezing."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. For the full model of\n[[def-na-periodic-diagonal-controlled-diffusion-hjb-problem]], let\n$h_{k,j}=1/N_{k,j}\\to0$, $N_{k,j}\\ge3$, and $\\tau_k=T/M_k\\to0$.\nAssume the explicit scheme\n[[alg-na-explicit-diagonal-diffusion-hjb-grid-step]] satisfies its\ndiffusion-dominance and CFL inequalities at every row, and initialize it by\n$U_{k,i}^0=u_0(x_{k,i})$. Its multilinear-in-space, constant-on-time-interval\nextensions converge locally uniformly on $\\mathbb T^d\\times[0,T)$ to the\nunique bounded continuous viscosity solution of the model Cauchy problem.\nSuch admissible mesh sequences exist for every model in this coefficient\nclass, so the conclusion also proves existence of that viscosity solution.\nComparison and uniqueness apply among all bounded continuous viscosity\nsolutions with the prescribed initial trace. There is no additional\ncomparison hypothesis and no claimed solution-error rate."
+      }
+    ]
+  },
+  {
+    "order": 2697,
+    "id": "monotone-hjb-schemes-and-policy-iteration-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Monotone Hamilton–Jacobi–Bellman schemes and policy iteration — Examples",
+    "companion": "monotone-hjb-schemes-and-policy-iteration",
+    "requires": [
+      "monotone-hjb-schemes-and-policy-iteration"
+    ],
+    "items": [
+      {
+        "id": "cex-na-centered-hjb-update-is-not-monotone",
+        "kind": "counterexample",
+        "title": "A centered HJB update can fail monotonicity",
+        "deps": [
+          "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+          "def-na-first-order-hjb-cauchy-problem",
+          "alg-na-upwind-hjb-grid-step"
+        ],
+        "dependency_level": 4,
+        "strategy": "Use nonnegative periodic data supported at one neighbor to make the centered update negative at the adjacent state.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton–Jacobi Equations: Theory and Applications, 2020 author manuscript",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 3 §4, monotone finite-difference schemes and the role of positive stencil weights, printed pp. 100–103."
+            },
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§§6.5–6.6, centered versus upwind treatment of advection stencils, PDF pp. 97–104."
+            }
+          ]
+        },
+        "statement": "On a periodic one-dimensional grid with $N\\ge3$, $h=1/N$, and controls\n$A=\\{-1,1\\}$, replace the upwind derivative in the HJB equation\n$u_t=\\min_{a\\in A}a u_x$ by the centered derivative and define\n$$S_c(V)_i=V_i+\\tau\\min_{a\\in\\{-1,1\\}} a\\frac{V_{i+1}-V_{i-1}}{2h}.$$\nThis map is not order-preserving: there are arrays $U\\le V$ with\n$S_c(U)_i>S_c(V)_i$."
+      },
+      {
+        "id": "ex-na-discounted-control-switching-policy-iteration",
+        "kind": "example",
+        "title": "A two-state switching example for discounted Howard iteration",
+        "deps": [
+          "def-na-finite-state-discounted-bellman-system",
+          "alg-na-finite-control-howard-policy-iteration",
+          "thm-na-howard-policy-iteration-monotone-improvement-termination"
+        ],
+        "dependency_level": 4,
+        "strategy": "Solve a two-state, two-action discounted generator system exactly and verify a strict policy switch, tie retention, and the final Bellman equation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wang He, Reinforcement Learning: A Mathematical Introduction, Chapter 10, Policy Improvement and Policy Iteration",
+              "url": "https://wanghemath.github.io/Book-MathRL/chapters/chapter-07-policy-improvement-and-policy-iteration.html",
+              "locator": "§§10.6–10.10, policy improvement, exact policy iteration, and finite-state example."
+            },
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "§1, controlled HJB operators and finite-control conventions, printed pp. 1–2."
+            }
+          ]
+        },
+        "statement": "Take states $S=\\{1,2\\}$ and discount $c=1$. At state $1$ the ordered actions\nare `stay`, with generator row $(q_{11},q_{12})=(0,0)$ and reward $0$, then\n`go`, with row $(-1,1)$ and reward $0$. At state $2$ the ordered actions are\n`exit`, `tied-exit`, and `reset`, with rows respectively $(q_{21},q_{22})=(0,0)$,\n$(0,0)$, and $(1,-1)$, and rewards $2,2,0$. The least-index initial policy\nis `(stay, exit)`. Howard iteration makes one strict switch at state $1$,\nretains `exit` at state `2` despite its tie, and terminates with value\n$V=(1,2)$."
+      },
+      {
+        "id": "ex-na-diagonal-diffusion-manufactured-solution",
+        "kind": "example",
+        "title": "A periodic manufactured solution for the diagonal-diffusion HJB stencil",
+        "deps": [
+          "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+          "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+          "thm-na-diagonal-diffusion-stencil-consistency"
+        ],
+        "dependency_level": 5,
+        "strategy": "Choose a smooth periodic trigonometric solution, derive its forcing exactly, and compute the discrete residual and its vanishing mesh limit.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions, User's guide to viscosity solutions of second order partial differential equations",
+              "url": "https://arxiv.org/pdf/math/9207212",
+              "locator": "§1.6, controlled-diffusion HJB operator and degenerate-elliptic sign convention."
+            },
+            {
+              "title": "Guy Barles and Panagiotis E. Souganidis, Convergence of approximation schemes for fully nonlinear second order equations",
+              "url": "https://benjaminmoll.com/wp-content/uploads/2021/04/barles-souganidis.pdf",
+              "locator": "§2, smooth test consistency requirement for second-order schemes, printed pp. 274–276."
+            }
+          ]
+        },
+        "statement": "For $d=1$, one control, $\\alpha=1$, and $b=0$ on $\\mathbb T^1$, set\n$$u(x,t)=e^{-t}\\cos(2\\pi x),\\qquad f(x,t)=(-1+4\\pi^2)e^{-t}\\cos(2\\pi x).$$\nThen $u_t-(u_{xx}+f)=0$ exactly. On a periodic grid $h=1/N$, the centered\ndiffusion scheme with $0<\\tau\\le h^2/2$ satisfies a normalized one-step\nresidual of order $O(\\tau+h^2)$ on the sampled exact solution. This is a\nlocal residual calculation, not a global solution-error estimate."
+      },
+      {
+        "id": "ex-na-compact-control-quantization-hamiltonian-error",
+        "kind": "example",
+        "title": "Uniform Hamiltonian error for an evenly spaced compact-control grid",
+        "deps": [
+          "def-na-first-order-hjb-cauchy-problem",
+          "alg-na-positive-interpolation-semilagrangian-hjb-step",
+          "thm-na-first-order-hjb-scheme-convergence"
+        ],
+        "dependency_level": 6,
+        "strategy": "For a scalar compact control interval, compute the exact Hamiltonian and bound the uniform error of an evenly spaced finite action grid on bounded momentum sets.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "§§1–3, compact-control HJB Hamiltonians and finite-control semi-Lagrangian approximation, printed pp. 1–4."
+            },
+            {
+              "title": "Hung Vinh Tran, Hamilton–Jacobi Equations: Theory and Applications, 2020 author manuscript",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 1 §6 and Chapter 3 §4, HJB comparison and finite-control scheme convergence, printed pp. 26–29 and 100–103."
+            }
+          ]
+        },
+        "statement": "Let $A=[-1,1]$, $b(a)=a$, and $\\ell(a)=a^2$. Then\n$$H(p)=\\max_{a\\in[-1,1]}(-ap-a^2)= \\begin{cases} p^2/4,&|p|\\le2,\\\\ |p|-1,&|p|>2. \\end{cases}$$\nFor $m\\ge1$, let $A_m=\\{-1+2r/m:r=0,\\ldots,m\\}$ and let\n$H_m(p)=\\max_{a\\in A_m}(-ap-a^2)$. The uniform control-grid error satisfies\n$$\\sup_{p\\in\\mathbb R}|H_m(p)-H(p)|\\le m^{-2}.$$\nThus $A_m$ satisfies the control approximation hypothesis of\n[[def-na-first-order-hjb-cauchy-problem]]. For any continuous periodic initial\ndatum, its semi-Lagrangian scheme falls under\n[[thm-na-first-order-hjb-scheme-convergence]] whenever the stated mesh\nrestrictions also hold."
+      },
+      {
+        "id": "ex-na-eikonal-kink-monotone-hjb-updates",
+        "kind": "example",
+        "title": "An eikonal kink and its monotone HJB grid updates",
+        "deps": [
+          "def-na-first-order-hjb-cauchy-problem",
+          "alg-na-positive-interpolation-semilagrangian-hjb-step",
+          "alg-na-upwind-hjb-grid-step",
+          "thm-na-first-order-hjb-scheme-convergence"
+        ],
+        "dependency_level": 6,
+        "strategy": "Compute the exact periodic-grid update of a Lipschitz eikonal profile at a kink and compare the two monotone branches.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hung Vinh Tran, Hamilton–Jacobi Equations: Theory and Applications, 2020 author manuscript",
+              "url": "https://people.math.wisc.edu/~htran24/HJ-equations-Tran-AMS.pdf",
+              "locator": "Chapter 3 §4, monotone first-order grid updates, printed pp. 100–103."
+            },
+            {
+              "title": "Kristian Debrabant and Espen R. Jakobsen, Semi-Lagrangian schemes for linear and fully non-linear Hamilton-Jacobi-Bellman equations",
+              "url": "https://arxiv.org/pdf/1403.1217",
+              "locator": "§§3–4, first-order semi-Lagrangian equation and positive interpolation, printed pp. 3–5."
+            }
+          ]
+        },
+        "statement": "On $\\mathbb T^1$, take $A=\\{-1,1\\}$, $b(a)=a$, $\\ell=0$, so\n$H(p)=|p|$. Let $d_{\\mathbb T^1}(x,0)=\\min_{k\\in\\mathbb Z}|x-k|$ and\n$$u(x,t)=\\max\\{d_{\\mathbb T^1}(x,0)-t,0\\},\\qquad 0\\le t\\le1/4.$$\nThis is the viscosity solution of $u_t+|u_x|=0$ with initial data\n$u_0(x)=d_{\\mathbb T^1}(x,0)$. On a grid with an even number $N\\ge4$ of\nnodes, $h=1/N$, and $0$ a node, one step with $0<\\tau\\le h$ gives both the positive-interpolation\nand upwind schemes value $\\tau$ at $x=0$, whereas the exact solution there is\n$0$. On the horizon $T=1/4$, choosing $M=N/2$ gives $\\tau=T/M=h/2$; along\nthis even-grid family the one-step error is exactly $\\tau$ and the\npositive-interpolation mesh condition is satisfied."
+      }
+    ]
+  }
+]

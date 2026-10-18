@@ -1,0 +1,3364 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "30",
+  "scope": [
+    "def-hyperbolic-system-and-characteristic-families",
+    "def-hll-two-wave-flux",
+    "def-ideal-gas-euler-state-and-pressure",
+    "def-rankine-hugoniot-and-lax-shocks",
+    "def-roe-linearization-and-flux",
+    "def-scalar-convex-entropy-admissibility",
+    "lem-smooth-simple-characteristic-eigenpairs",
+    "def-euler-star-pressure-response",
+    "def-local-rarefaction-curve",
+    "lem-local-characteristic-shock-curve",
+    "lem-rankine-hugoniot-jump-is-a-weak-solution",
+    "thm-hll-flux-is-consistent-and-conservative",
+    "thm-one-dimensional-ideal-gas-euler-eigenstructure",
+    "thm-roe-flux-is-consistent-and-conservative",
+    "lem-euler-acoustic-wave-pressure-response",
+    "lem-linearly-degenerate-characteristic-contact",
+    "lem-local-rarefaction-fan",
+    "def-mixed-characteristic-wave-curve",
+    "thm-euler-star-pressure-root-and-vacuum-criterion",
+    "alg-safeguarded-euler-star-pressure-solver",
+    "lem-mixed-wave-curves-are-c1",
+    "lem-euler-pressure-solver-bracket-and-termination",
+    "thm-local-small-data-riemann-solver",
+    "def-godunov-flux-from-a-local-riemann-solver",
+    "thm-godunov-flux-is-consistent-and-conservative",
+    "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+    "ex-ideal-gas-contact-discontinuity",
+    "ex-euler-vacuum-threshold-boundary",
+    "ex-acoustic-system-local-riemann-solution",
+    "ex-sod-tube-pressure-root"
+  ],
+  "page_requirements": [
+    {
+      "page": "nonlinear-equations-and-newton-methods",
+      "status": "published-page-prerequisite",
+      "supplier_item": "alg-finite-budget-newton-for-vector-residuals",
+      "supplier_item_status": "published",
+      "verification_precheck": "pending",
+      "exact_supplier_excerpt": "Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $F:U\\to\\mathbb R^n$ be\n$C^1$ ([[def-c-one-map-and-local-inverse]]) with Jacobian $J_F$ as in\n[[def-jacobian-matrix-and-gradient]]. The matrix of $DF(x)$ in the standard\nbasis is $J_F(x)$ by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]].\n**Inputs:** $x_0\\in U$, residual\ntolerance $\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$.\n**Output:** the last valid iterate and one of `root`, `singular-jacobian`,\n`invalid-trial`, or `iteration-budget-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in this order:\n\n1. Compute $F(x_k)$. If $\\|F(x_k)\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{root})$. Here `root` means the residual tolerance was met; it\n   does not certify an exact zero when $\\varepsilon>0$.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return\n   $(x_k,\\texttt{singular-jacobian})$.\n4. Let $s_k$ be its correction. If $x_k+s_k\\notin U$, return\n   $(x_k,\\texttt{invalid-trial})$. Otherwise set $x_{k+1}=x_k+s_k$.\n\nIt makes no arbitrary-start, global-convergence, or discretization-error claim.",
+      "hypotheses": [
+        "U=(0,∞) is open and Φ is C1 there by the local pressure-root theorem.",
+        "The initial point is the current bracket midpoint m>0.",
+        "Residual tolerance is ε=0, so the root status means an exact zero.",
+        "The Newton update budget is N=1 and the scalar correction procedure is used in dimension one.",
+        "Exact-real arithmetic and every residual evaluation and primitive operation terminate, as stated in the local algorithm."
+      ],
+      "used_by": [
+        "alg-safeguarded-euler-star-pressure-solver",
+        "lem-euler-pressure-solver-bracket-and-termination"
+      ],
+      "not_used_as_premise": [
+        {
+          "item": "lem-finite-budget-newton-work-and-status",
+          "verification_precheck": "pending",
+          "reason": "The pressure solver proves its own bounded one-update work from the actual algorithm and correction definitions; it does not rely on this pending work lemma."
+        }
+      ]
+    }
+  ],
+  "contracts": {
+    "def-hyperbolic-system-and-characteristic-families": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-c-one-map-and-local-inverse",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: m≥1 excludes a zero-dimensional state vector; an empty open set N makes the universal family conditions vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: eigenvalues may be zero; strict hyperbolicity requires them distinct and real, not nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: m=1 is allowed; its single real eigenvalue is ordered vacuously and gives one family."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated eigenvalues are excluded on N; genuine nonlinearity and linear degeneracy are explicitly distinguished."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-hyperbolic-system-and-characteristic-families has no an interval endpoint as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-hll-two-wave-flux": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-hll-two-wave-flux has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the branches include S_L=0 and S_R=0; the middle formula limits to f_L and f_R at those boundaries."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-hll-two-wave-flux has no a singleton-cardinality case as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: S_L<S_R excludes coincident wave speeds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: zero-speed endpoints are included in the left/right flux branches; no enclosing-speed claim is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-ideal-gas-euler-state-and-pressure": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the admissible set is nonempty, since (ρ,m,E)=(1,0,1/(γ−1)) belongs to G_γ."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: ρ=0 and nonpositive internal energy are excluded by the strict admissibility inequalities."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-ideal-gas-euler-state-and-pressure has no a singleton-cardinality case as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: p=0 is excluded, so c=√(γp/ρ) is positive and defined on the declared domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the strict inequalities leave the vacuum/internal-energy boundary outside G_γ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-rankine-hugoniot-and-lax-shocks": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: it explicitly omits empty family inequality lists for j<i or j>i, including i=1 and i=m."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a zero state jump satisfies Rankine–Hugoniot but cannot satisfy the strict middle-family inequalities."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for one family the lower and upper family lists are empty and the i=1 inequalities remain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a linearly-degenerate contact has equal family speeds and is excluded from strict Lax shocks."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: strict inequalities exclude equality at either characteristic-speed endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-roe-linearization-and-flux": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-roe-linearization-and-flux has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: for u_L=u_R, the jump term vanishes and the diagonal condition supplies the physical flux."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a one-dimensional real matrix is diagonalizable and the definition includes scalar state spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a zero eigenvalue is allowed and contributes zero to |Ã|; real diagonalizability keeps the formula defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-roe-linearization-and-flux has no an interval endpoint as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-scalar-convex-entropy-admissibility": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-scalar-convex-entropy-admissibility has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero test function gives equality, and constant convex entropies are allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the law is explicitly scalar, so the entropy inequality is one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: convexity need not be strict; a constant entropy has constant entropy flux and zero jump production."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Q uses t>0, so no entropy inequality at t=0 is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: the distributional inequality is stated equivalently as the nonnegative-test integral inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: the same test-function equivalence supplies the reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-smooth-simple-characteristic-eigenpairs": {
+      "kind": "lemma",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "thm-euclidean-implicit-function-theorem"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hyperbolic-system-and-characteristic-families",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $G\\subseteq\\mathbb R^m$ be open, and let\n$f:G\\to\\mathbb R^m$ be $C^3$ ([[def-c-one-map-and-local-inverse]];\nthe $C^3$ convention is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe one-dimensional conservation system with state domain $G$ is\n$$u_t+\\partial_x f(u)=0,\\qquad u(t,x)\\in G,$$\nwhere $u$ is the conserved state and $f$ its flux. Its flux Jacobian is\n$A(u)=Df(u)$. The system is **strictly hyperbolic on an open set $N\\subseteq G$**\nif, for every $u\\in N$, $A(u)$ has $m$ distinct real eigenvalues, written in\nincreasing order $\\lambda_1(u)<\\cdots<\\lambda_m(u)$. An **$i$th characteristic\nfamily** on $N$ is a $C^2$ right-eigenvector field $r_i:N\\to\\mathbb R^m\\setminus\\{0\\}$\nwith $A(u)r_i(u)=\\lambda_i(u)r_i(u)$. It is **genuinely nonlinear** on $N$ if\n$D\\lambda_i(u)r_i(u)$ is nowhere zero there; after shrinking $N$ its sign is\nconstant. It is **linearly degenerate** on $N$ if $D\\lambda_i(u)r_i(u)=0$\nthroughout $N$. Rescaling $r_i$ by a nonzero constant changes the wave-strength\nparameter but not the family.\n\nFor $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded map $u:Q\\to G$ is a\n**distributional weak solution with initial data $u_0$** if\n$$\\int_Q\\bigl(u\\cdot\\varphi_t+f(u)\\cdot\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every vector test function $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$ and\n$u(t,\\cdot)\\to u_0$ in $L^1_{\\rm loc}(\\mathbb R;\\mathbb R^m)$ as\n$t\\downarrow0$. A **Riemann initial datum** is the step\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $i$ and choose right and left eigenvectors $r_i^0,l_i^0$ for $\\lambda_i^0$. For a simple eigenvalue, $l_i^0\\cdot r_i^0\\ne0$: otherwise $r_i^0$ is orthogonal to the left kernel of $A(\\bar u)-\\lambda_i^0I$, hence lies in its range; a generalized eigenvector would then force algebraic multiplicity at least two. Normalize $l_i^0\\cdot r_i^0=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $F_i(u,\\lambda,r)=(A(u)r-\\lambda r,l_i^0\\cdot r-1)$. At $(\\bar u,\\lambda_i^0,r_i^0)$ it vanishes. Its derivative in $(r,\\lambda)$ sends $(v,\\mu)$ to $((A(\\bar u)-\\lambda_i^0I)v-\\mu r_i^0,l_i^0\\cdot v)$. If this is zero, pairing the first component with $l_i^0$ gives $\\mu=0$; then $v$ is a multiple of $r_i^0$, and the last component forces $v=0$. The square derivative is therefore invertible.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $F_i$ is $C^2$, [F2] gives a local $C^1$ eigenpair. The derivative formula in [F2] is $C^1$ because $DF_i$ is $C^1$ and matrix inversion is smooth on invertible matrices; hence the eigenpair is $C^2$. Continuity preserves the eigenvalue gaps and reality after shrinking the neighborhood.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Eigenvectors belonging to distinct eigenvalues are linearly independent: applying $\\prod_{j\\ne i}(A-\\lambda_jI)$ to a linear relation isolates its $i$th coefficient. Thus the $m$ eigenvectors form a basis. Intersecting the $m$ neighborhoods proves the simultaneous assertion.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for lem-smooth-simple-characteristic-eigenpairs has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof 2.1: no nonzero-eigenvalue assumption occurs; zero remains a simple real eigenvalue if separated from the others."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: m=1 is covered; the sole eigenvector forms a basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: repeated eigenvalues are excluded by the distinct-spectrum hypothesis; after shrinking, the eigenvalue gaps persist."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for lem-smooth-simple-characteristic-eigenpairs has no an interval endpoint as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1, 3.1, 4.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-euler-star-pressure-response": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-ideal-gas-euler-state-and-pressure"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-euler-star-pressure-response has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: p=p_K gives f_K(p_K)=0 in both branches."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-euler-star-pressure-response has no a singleton-cardinality case as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: p>0 and B_K>0 keep the shock denominator positive; p=0 is only a limit handled by the root theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: at the branch junction p=p_K both displayed responses equal zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-local-rarefaction-curve": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "lem-smooth-simple-characteristic-eigenpairs",
+          "thm-c2-ode-flow-on-common-tube",
+          "cor-uniform-picard-lindelof-for-nearby-initial-values"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-local-rarefaction-curve has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: R_i(0;u_0)=u_0 is the base state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one selected characteristic family is defined at a time; the construction also applies when m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-local-rarefaction-curve has no a degenerate or limiting branch as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the common local existence interval is finite and no endpoint or global continuation is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-local-characteristic-shock-curve": {
+      "kind": "lemma",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "lem-smooth-simple-characteristic-eigenpairs",
+          "thm-euclidean-implicit-function-theorem",
+          "thm-heine-cantor-metric"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hyperbolic-system-and-characteristic-families",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $G\\subseteq\\mathbb R^m$ be open, and let\n$f:G\\to\\mathbb R^m$ be $C^3$ ([[def-c-one-map-and-local-inverse]];\nthe $C^3$ convention is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe one-dimensional conservation system with state domain $G$ is\n$$u_t+\\partial_x f(u)=0,\\qquad u(t,x)\\in G,$$\nwhere $u$ is the conserved state and $f$ its flux. Its flux Jacobian is\n$A(u)=Df(u)$. The system is **strictly hyperbolic on an open set $N\\subseteq G$**\nif, for every $u\\in N$, $A(u)$ has $m$ distinct real eigenvalues, written in\nincreasing order $\\lambda_1(u)<\\cdots<\\lambda_m(u)$. An **$i$th characteristic\nfamily** on $N$ is a $C^2$ right-eigenvector field $r_i:N\\to\\mathbb R^m\\setminus\\{0\\}$\nwith $A(u)r_i(u)=\\lambda_i(u)r_i(u)$. It is **genuinely nonlinear** on $N$ if\n$D\\lambda_i(u)r_i(u)$ is nowhere zero there; after shrinking $N$ its sign is\nconstant. It is **linearly degenerate** on $N$ if $D\\lambda_i(u)r_i(u)=0$\nthroughout $N$. Rescaling $r_i$ by a nonzero constant changes the wave-strength\nparameter but not the family.\n\nFor $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded map $u:Q\\to G$ is a\n**distributional weak solution with initial data $u_0$** if\n$$\\int_Q\\bigl(u\\cdot\\varphi_t+f(u)\\cdot\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every vector test function $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$ and\n$u(t,\\cdot)\\to u_0$ in $L^1_{\\rm loc}(\\mathbb R;\\mathbb R^m)$ as\n$t\\downarrow0$. A **Riemann initial datum** is the step\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rankine-hugoniot-and-lax-shocks",
+          "source_section": "Definition",
+          "quote": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a strictly hyperbolic system and $1\\le i\\le m$, it is a **strict Lax\n$i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smooth-simple-characteristic-eigenpairs",
+          "source_section": "Statement",
+          "quote": "Let $f:G\\to\\mathbb R^m$ be $C^3$ and let $\\bar u\\in G$ be a state at which\n$A(\\bar u)=Df(\\bar u)$ has distinct real eigenvalues\n$\\lambda_1^0<\\cdots<\\lambda_m^0$. For each $i$, there is a neighborhood $N_i$\nof $\\bar u$ and $C^2$ functions $\\lambda_i:N_i\\to\\mathbb R$ and\n$r_i:N_i\\to\\mathbb R^m$ such that $A(u)r_i(u)=\\lambda_i(u)r_i(u)$,\n$\\lambda_i(\\bar u)=\\lambda_i^0$, and the eigenvectors can be normalized by a\nfixed linear functional. After intersecting these finitely many neighborhoods,\nthe eigenvalues remain real, simple, and ordered, and $r_1(u),\\ldots,r_m(u)$\nform a basis at each $u$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On a neighborhood where [F3] supplies the $C^2$ right-eigenvector frame, let $R(u)$ have columns $r_j(u)$ and let $\\ell_i(u)^T$ be row $i$ of $R(u)^{-1}$. Then $R^{-1}A=\\operatorname{diag}(\\lambda_j)R^{-1}$, so $\\ell_i^Tr_j=\\delta_{ij}$ and $\\ell_i$ is a left eigenvector. For $v$ near $r_i(\\bar u)$ define $G(u_0,\\sigma,v,s)=\\left(\\int_0^1 Df(u_0+t\\sigma v)v\\,dt-sv,\\;\\ell_i(u_0)\\cdot v-1\\right)$. Since $Df$ is $C^2$, this $G$ is $C^1$ in all variables and vanishes at $(\\bar u,0,r_i(\\bar u),\\lambda_i(\\bar u))$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The derivative of $G$ in $(v,s)$ at that point sends $(w,\\alpha)$ to $((A(\\bar u)-\\lambda_i I)w-\\alpha r_i(\\bar u),\\ell_i(\\bar u)\\cdot w)$. If it vanishes, pairing the first component with $\\ell_i(\\bar u)$ gives $\\alpha=0$; simplicity then makes $w$ a multiple of $r_i(\\bar u)$, and the last component forces $w=0$. Hence this square derivative is invertible.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F4] with parameter $(u_0,\\sigma)$ and unknowns $(v,s)$. It gives unique $C^1$ functions $v_i(\\sigma,u_0),s_i(\\sigma,u_0)$ on a product neighborhood. Set $S_i(\\sigma;u_0)=u_0+\\sigma v_i(\\sigma,u_0)$. For $\\sigma\\ne0$, multiplying the first equation by $\\sigma$ and using the fundamental theorem of calculus gives $f(S_i(\\sigma;u_0))-f(u_0)=s_i(\\sigma,u_0)(S_i(\\sigma;u_0)-u_0)$. At $\\sigma=0$, the unique normalized eigenvector is $v_i(0,u_0)=r_i(u_0)$; hence $\\partial_\\sigma S_i(0;u_0)=r_i(u_0)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "At any fixed $u_0\\in N_0$, differentiate the first component of $G=0$ at $\\sigma=0$. It gives $(A(u_0)-\\lambda_i I)\\partial_\\sigma v_i(0,u_0)+\\tfrac12D^2f(u_0)[r_i,r_i]-\\partial_\\sigma s_i(0,u_0)r_i=0$. Pairing with $\\ell_i(u_0)$ yields $\\partial_\\sigma s_i(0,u_0)=\\tfrac12\\ell_i(u_0)\\cdot D^2f(u_0)[r_i,r_i]=\\tfrac12D\\lambda_i(u_0)r_i(u_0)$; the last equality follows by differentiating $Ar_i=\\lambda_i r_i$ in direction $r_i$ and pairing with $\\ell_i$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Choose a closed ball $K$ about $\\bar u$ inside the IFT neighborhood, on which $|d_i(u_0)|$ and all eigenvalue gaps have positive lower bounds. The $C^1$ parameterized curves from step 3.1 have uniformly continuous first derivatives on $K$ by [F5], so their first-order expansions are uniform for small $|\\sigma|$: $\\lambda_i(S_i(\\sigma;u_0))=\\lambda_i(u_0)+\\sigma d_i(u_0)+o(|\\sigma|)$ and $s_i(\\sigma,u_0)=\\lambda_i(u_0)+\\tfrac12\\sigma d_i(u_0)+o(|\\sigma|)$. For $\\sigma d_i(u_0)<0$ this gives $\\lambda_i(S_i(\\sigma;u_0))<s_i(\\sigma,u_0)<\\lambda_i(u_0)$. The other-family inequalities in [F2] follow by continuity from the positive gaps, after shrinking $K$ and $\\eta$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F1",
+            "F2",
+            "F5",
+            "algebra",
+            "choose",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for lem-local-characteristic-shock-curve has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof step 3.1: S_i(0;u_0)=u_0 and its strength derivative is r_i(u_0); strict shocks are asserted only for nonzero compressive strengths."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: a simple real eigenpair suffices, including the sole family of a scalar system."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the curve exists for a simple field generally; strict Lax admissibility is conditional on genuine nonlinearity with nonzero sign."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: |σ|<η and u_0∈N_0 are local open restrictions; no claim is made at or beyond their boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1, 3.1, 4.1, 5.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-rankine-hugoniot-jump-is-a-weak-solution": {
+      "kind": "lemma",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-rankine-hugoniot-and-lax-shocks"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rankine-hugoniot-and-lax-shocks",
+          "source_section": "Definition",
+          "quote": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a strictly hyperbolic system and $1\\le i\\le m$, it is a **strict Lax\n$i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hyperbolic-system-and-characteristic-families",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $G\\subseteq\\mathbb R^m$ be open, and let\n$f:G\\to\\mathbb R^m$ be $C^3$ ([[def-c-one-map-and-local-inverse]];\nthe $C^3$ convention is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe one-dimensional conservation system with state domain $G$ is\n$$u_t+\\partial_x f(u)=0,\\qquad u(t,x)\\in G,$$\nwhere $u$ is the conserved state and $f$ its flux. Its flux Jacobian is\n$A(u)=Df(u)$. The system is **strictly hyperbolic on an open set $N\\subseteq G$**\nif, for every $u\\in N$, $A(u)$ has $m$ distinct real eigenvalues, written in\nincreasing order $\\lambda_1(u)<\\cdots<\\lambda_m(u)$. An **$i$th characteristic\nfamily** on $N$ is a $C^2$ right-eigenvector field $r_i:N\\to\\mathbb R^m\\setminus\\{0\\}$\nwith $A(u)r_i(u)=\\lambda_i(u)r_i(u)$. It is **genuinely nonlinear** on $N$ if\n$D\\lambda_i(u)r_i(u)$ is nowhere zero there; after shrinking $N$ its sign is\nconstant. It is **linearly degenerate** on $N$ if $D\\lambda_i(u)r_i(u)=0$\nthroughout $N$. Rescaling $r_i$ by a nonzero constant changes the wave-strength\nparameter but not the family.\n\nFor $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded map $u:Q\\to G$ is a\n**distributional weak solution with initial data $u_0$** if\n$$\\int_Q\\bigl(u\\cdot\\varphi_t+f(u)\\cdot\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every vector test function $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$ and\n$u(t,\\cdot)\\to u_0$ in $L^1_{\\rm loc}(\\mathbb R;\\mathbb R^m)$ as\n$t\\downarrow0$. A **Riemann initial datum** is the step\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $u=u_L+[u]H(x-st)$ and $f(u)=f(u_L)+[f]H(x-st)$, where $H$ is the unit step and $[u]=u_R-u_L$, $[f]=f(u_R)-f(u_L)$. Testing against a smooth compactly supported function and integrating by parts on the two sides of the line $x=st$ gives $\\partial_tu=-s[u]\\delta_{x=st}$ and $\\partial_xf=[f]\\delta_{x=st}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Their sum is $([f]-s[u])\\delta_{x=st}$; it vanishes as a distribution exactly when its constant coefficient is zero, which is [F1]. Thus both implications of the weak-solution/RH equivalence hold.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for lem-rankine-hugoniot-jump-is-a-weak-solution has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 2.1: when u_L=u_R the jump coefficient vanishes for every s and the constant state is weak."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the vector proof includes m=1 without a separate family restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: s=0 is permitted; the coefficient becomes [f] and the equivalence remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the distributional equation is on t>0 and no boundary condition at t=0 is part of the equivalence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 2.1 compute the distributional coefficient from RH and prove the forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 2.1 show a nonzero coefficient is detected by a test function, proving the reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-hll-flux-is-consistent-and-conservative": {
+      "kind": "theorem",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hll-two-wave-flux",
+          "def-rankine-hugoniot-and-lax-shocks"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hll-two-wave-flux",
+          "source_section": "Definition",
+          "quote": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rankine-hugoniot-and-lax-shocks",
+          "source_section": "Definition",
+          "quote": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a strictly hyperbolic system and $1\\le i\\le m$, it is a **strict Lax\n$i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $D=S_R-S_L>0$. Direct subtraction gives $u_*-u_L=(S_R(u_R-u_L)-(f_R-f_L))/D$ and $u_R-u_*=(-S_L(u_R-u_L)+(f_R-f_L))/D$. Define $f_*=f_L+S_L(u_*-u_L)$; substitution gives $f_*=(S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L))/D$. Then $f_*-f_L=S_L(u_*-u_L)$ and $f_R-f_*=S_R(u_R-u_*)$, which are [F2] for both jumps.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $u_L=u_R=u$, the middle numerator is $(S_R-S_L)f(u)$, so the middle flux is $f(u)$; the outer branches also equal $f(u)$ when applicable. In a periodic finite-volume sum, each shared interface flux cancels with the opposite sign from the neighboring cell. This proves consistency and conservation without claiming any bound on $S_L,S_R$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for thm-hll-flux-is-consistent-and-conservative has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof step 2.1: equal states give f(u), including the zero-speed outer branches."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof step 2.1: n=1 is allowed and its single interface flux cancels with itself in the periodic sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: equal states are allowed and the speed gap S_L<S_R remains strict."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition and proof step 2.1: the S_L=0 and S_R=0 branches agree with the middle-flux limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "scalar-hll-middle-state",
+          "claim": "For f(u)=u²/2, u_L=0, u_R=1, S_L=−1, S_R=2, the HLL state is 1/2 and flux is −1/2.",
+          "inputs": "D=3, f_L=0, f_R=1/2.",
+          "calculation": "u_*=(2−1/2)/3=1/2; f_*=(-1/2) from the middle flux formula; left and right RH differences are −1/2=−1(1/2) and 1=2(1/2).",
+          "evidence": "Proof step 1.1."
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-one-dimensional-ideal-gas-euler-eigenstructure": {
+      "kind": "theorem",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hyperbolic-system-and-characteristic-families",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $G\\subseteq\\mathbb R^m$ be open, and let\n$f:G\\to\\mathbb R^m$ be $C^3$ ([[def-c-one-map-and-local-inverse]];\nthe $C^3$ convention is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe one-dimensional conservation system with state domain $G$ is\n$$u_t+\\partial_x f(u)=0,\\qquad u(t,x)\\in G,$$\nwhere $u$ is the conserved state and $f$ its flux. Its flux Jacobian is\n$A(u)=Df(u)$. The system is **strictly hyperbolic on an open set $N\\subseteq G$**\nif, for every $u\\in N$, $A(u)$ has $m$ distinct real eigenvalues, written in\nincreasing order $\\lambda_1(u)<\\cdots<\\lambda_m(u)$. An **$i$th characteristic\nfamily** on $N$ is a $C^2$ right-eigenvector field $r_i:N\\to\\mathbb R^m\\setminus\\{0\\}$\nwith $A(u)r_i(u)=\\lambda_i(u)r_i(u)$. It is **genuinely nonlinear** on $N$ if\n$D\\lambda_i(u)r_i(u)$ is nowhere zero there; after shrinking $N$ its sign is\nconstant. It is **linearly degenerate** on $N$ if $D\\lambda_i(u)r_i(u)=0$\nthroughout $N$. Rescaling $r_i$ by a nonzero constant changes the wave-strength\nparameter but not the family.\n\nFor $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded map $u:Q\\to G$ is a\n**distributional weak solution with initial data $u_0$** if\n$$\\int_Q\\bigl(u\\cdot\\varphi_t+f(u)\\cdot\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every vector test function $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$ and\n$u(t,\\cdot)\\to u_0$ in $L^1_{\\rm loc}(\\mathbb R;\\mathbb R^m)$ as\n$t\\downarrow0$. A **Riemann initial datum** is the step\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $U=(\\rho,\\rho u,E)$ and use [F1] to obtain $H=u^2/2+c^2/(\\gamma-1)$. Differentiating the flux components with respect to $(\\rho,m,E)$ gives $DF(U)=\\begin{pmatrix}0&1&0\\\\(\\gamma-3)u^2/2&(3-\\gamma)u&\\gamma-1\\\\u((\\gamma-1)u^2/2-H)&H-(\\gamma-1)u^2&\\gamma u\\end{pmatrix}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiplying $DF$ by $r_0$ gives $(u,u^2,u^3/2)^T=ur_0$. For $r_\\pm$, the first row gives $u\\pm c$; the second gives $(3-\\gamma)u^2/2+(\\gamma-1)H\\pm2uc=u^2+c^2\\pm2uc=(u\\pm c)^2$; and the third gives $\\gamma uH-(\\gamma-1)u^3/2\\pm c(H+u^2)=u(H+c^2)\\pm c(H+u^2)=(u\\pm c)(H\\pm uc)$. Each row therefore equals the matching component of $(u\\pm c)r_\\pm$, using $H=u^2/2+c^2/(\\gamma-1)$. Since $c>0$, the eigenvalues are distinct and strictly ordered.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For a state increment $(d\\rho,dm,dE)$, differentiating the definitions gives $du=(dm-u\\,d\\rho)/\\rho$ and $dp=(\\gamma-1)(dE-u\\,dm+u^2d\\rho/2)$. Along $r_\\pm$, these yield $du=\\pm c/\\rho$ and $dp=c^2$; hence $dc=\\frac12c(dp/p-d\\rho/\\rho)=(\\gamma-1)c/(2\\rho)$. Along $r_0$ they give $du=dp=dc=0$. Therefore the stated directional derivatives of $u-c,u,u+c$ follow.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $c,\\rho,\\gamma$ are positive, the acoustic directional derivatives are nonzero with the displayed signs, while the middle one is zero. This proves genuine nonlinearity of the two acoustic fields and linear degeneracy of the contact field.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for thm-one-dimensional-ideal-gas-euler-eigenstructure has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof step 2.1: u=0 is allowed; the eigenvalues are −c,0,c and remain distinct."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the spatial system has three simple families; no extra dimensional parameter is hidden."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 3.1: c>0 excludes acoustic degeneracy while the middle field is explicitly linearly degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for thm-one-dimensional-ideal-gas-euler-eigenstructure has no an interval endpoint as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1, 2.2, 3.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "gamma-two-rest-state",
+          "claim": "For γ=2, ρ=p=1, u=0, the eigenvalues are −√2, 0, √2 and H=2.",
+          "inputs": "c=√(γp/ρ)=√2 and E=p/(γ−1)=1.",
+          "calculation": "H=(E+p)/ρ=2; substitute u=0 and c=√2 into the stated eigenstructure.",
+          "evidence": "Statement and proof steps 1.1 and 2.1."
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-roe-flux-is-consistent-and-conservative": {
+      "kind": "theorem",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-roe-linearization-and-flux"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-roe-linearization-and-flux",
+          "source_section": "Definition",
+          "quote": "For states $u_L,u_R$ in the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], a **Roe matrix** is a real matrix\n$\\widetilde A(u_L,u_R)$ such that\n$$\\widetilde A(u,u)=Df(u),\\qquad \\widetilde A(u_L,u_R)(u_R-u_L)=f(u_R)-f(u_L),$$\nand $\\widetilde A(u_L,u_R)$ is diagonalizable over $\\mathbb R$ with real\neigenvalues. If $\\widetilde A=R\\Lambda R^{-1}$, define\n$|\\widetilde A|=R|\\Lambda|R^{-1}$ by replacing each diagonal eigenvalue with\nits absolute value. The **Roe flux associated with this matrix** is\n$$\\widehat f_{\\rm Roe}(u_L,u_R)=\\tfrac12(f(u_L)+f(u_R))-\\tfrac12|\\widetilde A(u_L,u_R)|(u_R-u_L).$$\nThe jump identity is an algebraic conservation property. This definition does\nnot assert entropy admissibility of the approximate wave pattern.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $u_L=u_R=u$, the jump is zero, so [F1] gives $\\widehat f_{\\rm Roe}(u,u)=\\tfrac12(f(u)+f(u))=f(u)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting the displayed periodic update into the sum of all cells gives $-\\nu\\sum_j(\\widehat f_{j+1/2}-\\widehat f_{j-1/2})$. Each interface flux occurs once with each sign, so the sum is zero. The Roe jump identity is not used in this telescoping argument and no entropy inequality follows from it.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for thm-roe-flux-is-consistent-and-conservative has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof 1.1: equal-state jumps vanish and the Roe flux is f(u)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof step 2.1: a periodic array with n=1 has one shared interface flux that cancels."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition and proof 1.1: zero eigenvalues are allowed in |Ã| and do not affect equal-state consistency."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for thm-roe-flux-is-consistent-and-conservative has no an interval endpoint as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-euler-acoustic-wave-pressure-response": {
+      "kind": "lemma",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "def-local-rarefaction-curve",
+          "def-euler-star-pressure-response",
+          "thm-one-dimensional-ideal-gas-euler-eigenstructure"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-one-dimensional-ideal-gas-euler-eigenstructure",
+          "source_section": "Statement",
+          "quote": "For $U=(\\rho,m,E)\\in\\mathcal G_\\gamma$, put $u=m/\\rho$,\n$H=(E+p)/\\rho$, and $c=\\sqrt{\\gamma p/\\rho}$. The flux Jacobian has the\nthree simple real eigenvalues and right eigenvectors\n$$\\lambda_-=u-c,\\qquad r_-=(1,u-c,H-uc)^T,$$\n$$\\lambda_0=u,\\qquad r_0=(1,u,u^2/2)^T,$$\n$$\\lambda_+=u+c,\\qquad r_+=(1,u+c,H+uc)^T.$$\nThe middle field is linearly degenerate; the acoustic fields are genuinely\nnonlinear, with $D\\lambda_-r_-=-(\\gamma+1)c/(2\\rho)$ and\n$D\\lambda_+r_+=(\\gamma+1)c/(2\\rho)$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euler-star-pressure-response",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and admissible left/right primitive states\n$(\\rho_K,u_K,p_K)$, $K\\in\\{L,R\\}$, with $\\rho_K,p_K>0$ and\n$c_K=\\sqrt{\\gamma p_K/\\rho_K}$. Set\n$$A_K=\\frac{2}{(\\gamma+1)\\rho_K},\\qquad B_K=\\frac{\\gamma-1}{\\gamma+1}p_K.$$\nFor a trial star pressure $p>0$, the wave pressure response from side $K$ is\n$$f_K(p)=\\begin{cases}\\dfrac{2c_K}{\\gamma-1}\\left[\\left(\\dfrac p{p_K}\\right)^{(\\gamma-1)/(2\\gamma)}-1\\right],&0<p\\le p_K,\\\\(p-p_K)\\sqrt{\\dfrac{A_K}{p+B_K}},&p\\ge p_K.\\end{cases}$$\nThe two formulas agree at $p=p_K$. The **star-pressure residual** is\n$$\\Phi(p)=f_L(p)+f_R(p)+u_R-u_L,\\qquad p>0.$$\nThis is a scalar root equation; it does not itself define a Riemann solution.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-rankine-hugoniot-and-lax-shocks",
+          "source_section": "Definition",
+          "quote": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a strictly hyperbolic system and $1\\le i\\le m$, it is a **strict Lax\n$i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Along an acoustic rarefaction integral curve, [F2] gives $dp/d\\rho=\\gamma p/\\rho$. Integrating $d(\\log p-\\gamma\\log\\rho)=0$ from the side state yields $\\rho_*(p)=\\rho_K(p/p_K)^{1/\\gamma}$ and $c_*(p)=c_K(p/p_K)^{(\\gamma-1)/(2\\gamma)}$. Also $du=\\pm c\\,d\\rho/\\rho=\\pm2\\,dc/(\\gamma-1)$, so the 1-family change is $u_*-u_L=-f_L(p)$ and the 3-family change is $u_*-u_R=f_R(p)$ on their expansion branches.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a compressive shock from side state $K$ to star state $*$ with trial pressure $p>p_K$ and speed $s$, set $w=u-s$, $v=1/\\rho$, $e=pv/(\\gamma-1)$, $j=\\rho w$, and $E'=E-sm+\\tfrac12s^2\\rho=\\rho e+\\tfrac12\\rho w^2$. Write $[g]=g_*-g_K$, $F_\\rho=\\rho u$, $F_m=\\rho u^2+p$, $F_E=u(E+p)$, and $F_{E'}=F_E-sF_m+\\tfrac12s^2F_\\rho$; for a right-going 3-shock, reversing the physical state order changes both sides of each RH equation by the same sign. Mass RH makes $j$ equal on both sides; momentum RH minus $s$ times mass RH makes $p+j^2v$ equal. Since $p\\ne p_K$, this identity forces $j\\ne0$. The linear combination of energy, momentum, and mass RH gives $[F_{E'}]=s[E']$. Substitution gives $F_{E'}-sE'=u(E+p)-s(\\rho u^2+p)+\\tfrac12s^2\\rho u-s(E-sm+\\tfrac12s^2\\rho)=(u-s)(E'+p)=w(E'+p)$, so $[w(E'+p)]=0$. Since $w=jv$, division by $j$ gives equality of $e+\\tfrac12w^2+pv$ on both sides. Using $w=jv$, the energy equality reads $e_*-e_K+\\tfrac12j^2(v_*^2-v_K^2)+p v_*-p_Kv_K=0$. From $j^2(v_*-v_K)=-(p-p_K)$, the kinetic term is $-\\tfrac12(p-p_K)(v_*+v_K)$; combining it with the pressure terms gives $e_*-e_K+\\tfrac12(p+p_K)(v_*-v_K)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $p>p_K$ be the trial pressure, set $q=p/p_K>1$, and use $\\beta=(\\gamma-1)/(\\gamma+1)$. Substituting $e=pv/(\\gamma-1)$ into step 1.2 and dividing by $p_Kv_K$ gives $(qx-1)/(\\gamma-1)+(q+1)(x-1)/2=0$, where $x=v_*/v_K$. Solving this linear equation gives $x=(\\beta q+1)/(q+\\beta)$ and $\\rho_*/\\rho_K=1/x=(q+\\beta)/(\\beta q+1)$. Hence $1-x=(1-\\beta)(q-1)/(q+\\beta)$, and using $q=p/p_K$, $B_K=\\beta p_K$, and $A_K=(1-\\beta)/\\rho_K$ gives $v_K-v_*=(p-p_K)A_K/(p+B_K)$. Define $V:=v_K\\sqrt{(p-p_K)/(v_K-v_*)}>0$. Since $1-x=(v_K-v_*)/v_K$, $V(1-x)=\\sqrt{(p-p_K)(v_K-v_*)}=(p-p_K)\\sqrt{A_K/(p+B_K)}=f_K(p)$. For a left 1-shock choose $s=u_K-V$ and $j=\\rho_KV$; mass RH gives $u_*=u_K-V(1-x)$. For a right 3-shock oriented from the star state to $K$, choose $s=u_K+V$ and $j=-\\rho_KV$; mass RH gives $u_*=u_K+V(1-x)$. These choices establish the response signs.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $q=p/p_K$ and $x=v_*/v_K=(\\beta q+1)/(q+\\beta)$, so $0<x<1$. The relative shock speeds on the two sides have magnitudes $V=|j|v_K$ and $W=|j|v_*=xV$. The identities in steps 1.2–2.2 give $V^2/c_K^2=(q+\\beta)/(\\gamma(1-\\beta))>1$ and $W^2/c_*^2=(\\beta q+1)/(\\gamma q(1-\\beta))<1$. The first inequality follows from $q+\\beta>1+\\beta=2\\gamma/(\\gamma+1)$, and the second from $\\beta q+1<\\gamma q(1-\\beta)$, equivalent to $q>1$. For a 1-shock, $s=u_*-W<u_*$ and $W<c_*$ give $\\lambda_-(u_*)<s$; $V>c_K$ gives $s<\\lambda_-(u_K)$. For a 3-shock, $s=u_*+W>u_*$ and $W<c_*$ give $s<\\lambda_+(u_*)$; $V>c_K$ gives $\\lambda_+(u_K)<s$. The other-family Lax inequalities follow from $\\lambda_-<\\lambda_0<\\lambda_+$ and $s<u_*$ for a 1-shock or $s>u_*$ for a 3-shock.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Equality of the left and right star velocities is $u_L-f_L(p)=u_R+f_R(p)$, which rearranges to $\\Phi(p)=0$. At such a positive pressure the two Euler states have common $u_*,p$ and differ only in density. From [F1], $F(U)-u_*U=(0,p,u_*p)$ is independent of density, so $F(U_R^*)-F(U_L^*)=u_*(U_R^*-U_L^*)$. By [F2], $u_*$ is the middle characteristic speed on both sides, so this is a linearly-degenerate contact.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for lem-euler-acoustic-wave-pressure-response has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: p=p_K gives a zero wave response; strict Lax inequalities are claimed only on p>p_K."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for lem-euler-acoustic-wave-pressure-response has no a singleton-cardinality case as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof steps 2.1 and 3.1: q=1 is the branch junction, while the shock calculation explicitly assumes q>1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: trial pressures satisfy p>0; the zero-pressure limit is handled separately by the root/vacuum theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 1.2, 2.1, 3.1, 4.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "gamma-five-thirds-compression",
+          "claim": "For γ=5/3, ρ_K=p_K=1 and p=4, the shock density ratio is 17/8 and f_K(p)=3√(3/17).",
+          "inputs": "q=4, β=1/4, A_K=3/4, B_K=1/4.",
+          "calculation": "(q+β)/(βq+1)=(17/4)/2=17/8; (p-p_K)√(A_K/(p+B_K))=3√((3/4)/(17/4))=3√(3/17).",
+          "evidence": "Proof steps 2.1 and 3.1."
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-linearly-degenerate-characteristic-contact": {
+      "kind": "lemma",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "def-local-rarefaction-curve",
+          "lem-rankine-hugoniot-jump-is-a-weak-solution"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hyperbolic-system-and-characteristic-families",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $G\\subseteq\\mathbb R^m$ be open, and let\n$f:G\\to\\mathbb R^m$ be $C^3$ ([[def-c-one-map-and-local-inverse]];\nthe $C^3$ convention is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe one-dimensional conservation system with state domain $G$ is\n$$u_t+\\partial_x f(u)=0,\\qquad u(t,x)\\in G,$$\nwhere $u$ is the conserved state and $f$ its flux. Its flux Jacobian is\n$A(u)=Df(u)$. The system is **strictly hyperbolic on an open set $N\\subseteq G$**\nif, for every $u\\in N$, $A(u)$ has $m$ distinct real eigenvalues, written in\nincreasing order $\\lambda_1(u)<\\cdots<\\lambda_m(u)$. An **$i$th characteristic\nfamily** on $N$ is a $C^2$ right-eigenvector field $r_i:N\\to\\mathbb R^m\\setminus\\{0\\}$\nwith $A(u)r_i(u)=\\lambda_i(u)r_i(u)$. It is **genuinely nonlinear** on $N$ if\n$D\\lambda_i(u)r_i(u)$ is nowhere zero there; after shrinking $N$ its sign is\nconstant. It is **linearly degenerate** on $N$ if $D\\lambda_i(u)r_i(u)=0$\nthroughout $N$. Rescaling $r_i$ by a nonzero constant changes the wave-strength\nparameter but not the family.\n\nFor $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded map $u:Q\\to G$ is a\n**distributional weak solution with initial data $u_0$** if\n$$\\int_Q\\bigl(u\\cdot\\varphi_t+f(u)\\cdot\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every vector test function $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$ and\n$u(t,\\cdot)\\to u_0$ in $L^1_{\\rm loc}(\\mathbb R;\\mathbb R^m)$ as\n$t\\downarrow0$. A **Riemann initial datum** is the step\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-local-rarefaction-curve",
+          "source_section": "Definition",
+          "quote": "On a neighborhood where an eigenvector field $r_i$ is $C^2$, the local\n$i$-rarefaction curve through $u_0$ is the unique local solution\n$$\\frac{dR_i}{d\\sigma}(\\sigma;u_0)=r_i(R_i(\\sigma;u_0)),\\qquad R_i(0;u_0)=u_0.$$\nThe parameter $\\sigma$ is the signed integral-curve parameter for the chosen\nnormalization of $r_i$. Existence on a common small interval for nearby $u_0$\nfollows from [[cor-uniform-picard-lindelof-for-nearby-initial-values]]; the\n$C^2$ flow on a compact local tube follows from\n[[thm-c2-ode-flow-on-common-tube]]. No global integral curve is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rankine-hugoniot-and-lax-shocks",
+          "source_section": "Definition",
+          "quote": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a strictly hyperbolic system and $1\\le i\\le m$, it is a **strict Lax\n$i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-rankine-hugoniot-jump-is-a-weak-solution",
+          "source_section": "Statement",
+          "quote": "For constant states $u_L,u_R$ and a constant speed $s$, the function equal to\n$u_L$ on $x<st$ and $u_R$ on $x>st$ solves $u_t+\\partial_xf(u)=0$ in\ndistributions on $t>0$ if and only if\n$f(u_R)-f(u_L)=s(u_R-u_L)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Along the curve, the chain rule gives $\\frac{d}{d\\sigma}\\lambda_i(R_i(\\sigma;u_0))=D\\lambda_i(R_i)r_i(R_i)=0$, so $\\lambda_i(R_i)=\\lambda_i(u_0)$. Also $\\frac{d}{d\\sigma}f(R_i)=Df(R_i)r_i(R_i)=\\lambda_i(u_0)r_i(R_i)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integrating the second identity from $0$ to $\\sigma$ yields $f(u_1)-f(u_0)=\\lambda_i(u_0)(u_1-u_0)$, the Rankine–Hugoniot equality [F3]. Applying [F4] gives the weak moving contact wave; equality of the characteristic speed on both sides was proved in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for lem-linearly-degenerate-characteristic-contact has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof 1.2: σ=0 gives the trivial contact u_1=u_0 at the common speed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: one linearly-degenerate family is treated and no system dimension greater than one is needed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof 1.1: Dλ_i r_i=0 is the defining hypothesis and yields equal speeds across the curve."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the result is only for the supplied local curve and makes no global continuation claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-local-rarefaction-fan": {
+      "kind": "lemma",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-local-rarefaction-curve",
+          "lem-smooth-simple-characteristic-eigenpairs"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hyperbolic-system-and-characteristic-families",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $G\\subseteq\\mathbb R^m$ be open, and let\n$f:G\\to\\mathbb R^m$ be $C^3$ ([[def-c-one-map-and-local-inverse]];\nthe $C^3$ convention is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe one-dimensional conservation system with state domain $G$ is\n$$u_t+\\partial_x f(u)=0,\\qquad u(t,x)\\in G,$$\nwhere $u$ is the conserved state and $f$ its flux. Its flux Jacobian is\n$A(u)=Df(u)$. The system is **strictly hyperbolic on an open set $N\\subseteq G$**\nif, for every $u\\in N$, $A(u)$ has $m$ distinct real eigenvalues, written in\nincreasing order $\\lambda_1(u)<\\cdots<\\lambda_m(u)$. An **$i$th characteristic\nfamily** on $N$ is a $C^2$ right-eigenvector field $r_i:N\\to\\mathbb R^m\\setminus\\{0\\}$\nwith $A(u)r_i(u)=\\lambda_i(u)r_i(u)$. It is **genuinely nonlinear** on $N$ if\n$D\\lambda_i(u)r_i(u)$ is nowhere zero there; after shrinking $N$ its sign is\nconstant. It is **linearly degenerate** on $N$ if $D\\lambda_i(u)r_i(u)=0$\nthroughout $N$. Rescaling $r_i$ by a nonzero constant changes the wave-strength\nparameter but not the family.\n\nFor $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded map $u:Q\\to G$ is a\n**distributional weak solution with initial data $u_0$** if\n$$\\int_Q\\bigl(u\\cdot\\varphi_t+f(u)\\cdot\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every vector test function $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$ and\n$u(t,\\cdot)\\to u_0$ in $L^1_{\\rm loc}(\\mathbb R;\\mathbb R^m)$ as\n$t\\downarrow0$. A **Riemann initial datum** is the step\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-local-rarefaction-curve",
+          "source_section": "Definition",
+          "quote": "On a neighborhood where an eigenvector field $r_i$ is $C^2$, the local\n$i$-rarefaction curve through $u_0$ is the unique local solution\n$$\\frac{dR_i}{d\\sigma}(\\sigma;u_0)=r_i(R_i(\\sigma;u_0)),\\qquad R_i(0;u_0)=u_0.$$\nThe parameter $\\sigma$ is the signed integral-curve parameter for the chosen\nnormalization of $r_i$. Existence on a common small interval for nearby $u_0$\nfollows from [[cor-uniform-picard-lindelof-for-nearby-initial-values]]; the\n$C^2$ flow on a compact local tube follows from\n[[thm-c2-ode-flow-on-common-tube]]. No global integral curve is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Along the curve, $\\frac{d}{ds}\\lambda_i(R_i(s;u_0))=D\\lambda_i(R_i(s;u_0))r_i(R_i(s;u_0))$ keeps its nonzero sign. Therefore the map $s\\mapsto\\lambda_i(R_i(s;u_0))$ is strictly monotone, and for each speed between its endpoint values there is a unique curve parameter $s$. Since $\\sigma D\\lambda_i(u_0)r_i(u_0)>0$ and the sign remains constant, $\\lambda_i(R_i(\\sigma;u_0))>\\lambda_i(u_0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $q(\\xi)=u_0$ for $\\xi\\le\\lambda_i(u_0)$, $q(\\xi)=R_i(\\sigma;u_0)$ for $\\xi\\ge\\lambda_i(R_i(\\sigma;u_0))$, and inside this interval let $q(\\xi)=R_i(s;u_0)$ for the unique $s$ with $\\xi=\\lambda_i(R_i(s;u_0))$. In the fan, differentiating this identity shows $q'(\\xi)$ is parallel to $r_i(q)$; hence $Df(q)q'=\\lambda_i(q)q'=\\xi q'$. For $u(t,x)=q(x/t)$ the chain rule gives $u_t+Df(u)u_x=t^{-1}(Df(q)-(x/t)I)q'=0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The profile is continuous at the two fan edges, so there is no jump measure there. The fan occupies a bounded $x$-interval of length proportional to $t$; outside it the solution equals the initial left or right state. Hence its local $L^1$ trace as $t\\downarrow0$ is the Riemann step data, and the classical equation in step 2.1 is also the distributional equation.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for lem-local-rarefaction-fan has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: σ≠0 is required; the zero-strength limit is the constant state, not a nontrivial fan."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: a single characteristic family generates the fan."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: genuine nonlinearity with nonzero constant sign is required; the linearly-degenerate case is handled by the contact lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 2.1 and 3.1: the fan joins continuously to the two constant states at its endpoint speeds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1, 3.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-mixed-characteristic-wave-curve": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-local-rarefaction-curve",
+          "lem-local-characteristic-shock-curve",
+          "lem-linearly-degenerate-characteristic-contact"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-mixed-characteristic-wave-curve has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: σ=0 is explicitly assigned the base state u."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one family curve is defined at a time and the scalar parameter σ works for m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the genuinely nonlinear branches and the linearly-degenerate contact branch are given separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: strengths are restricted to a local range keeping the curve inside the chosen neighborhood."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-euler-star-pressure-root-and-vacuum-criterion": {
+      "kind": "theorem",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-euler-star-pressure-response",
+          "lem-euler-acoustic-wave-pressure-response",
+          "thm-intermediate-value"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euler-star-pressure-response",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and admissible left/right primitive states\n$(\\rho_K,u_K,p_K)$, $K\\in\\{L,R\\}$, with $\\rho_K,p_K>0$ and\n$c_K=\\sqrt{\\gamma p_K/\\rho_K}$. Set\n$$A_K=\\frac{2}{(\\gamma+1)\\rho_K},\\qquad B_K=\\frac{\\gamma-1}{\\gamma+1}p_K.$$\nFor a trial star pressure $p>0$, the wave pressure response from side $K$ is\n$$f_K(p)=\\begin{cases}\\dfrac{2c_K}{\\gamma-1}\\left[\\left(\\dfrac p{p_K}\\right)^{(\\gamma-1)/(2\\gamma)}-1\\right],&0<p\\le p_K,\\\\(p-p_K)\\sqrt{\\dfrac{A_K}{p+B_K}},&p\\ge p_K.\\end{cases}$$\nThe two formulas agree at $p=p_K$. The **star-pressure residual** is\n$$\\Phi(p)=f_L(p)+f_R(p)+u_R-u_L,\\qquad p>0.$$\nThis is a scalar root equation; it does not itself define a Riemann solution.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-euler-acoustic-wave-pressure-response",
+          "source_section": "Statement",
+          "quote": "For a side state $K=(\\rho_K,u_K,p_K)$ and any trial pressure $p>0$, the\nrarefaction/shock branches defined in\n[[def-euler-star-pressure-response]] give the magnitude of the velocity change\nalong the corresponding acoustic wave. For a left 1-wave the star velocity is\n$u_*=u_L-f_L(p)$; for a right 3-wave it is $u_*=u_R+f_R(p)$. The star density\non a rarefaction branch is\n$$\\rho_*(p)=\\rho_K(p/p_K)^{1/\\gamma},$$\nand on a compressive shock branch, with $q=p/p_K>1$ and\n$\\beta=(\\gamma-1)/(\\gamma+1)$, it is\n$$\\rho_*(p)=\\rho_K\\frac{q+\\beta}{\\beta q+1}.$$\nThe shock branches satisfy the strict acoustic Lax inequalities. When the two\npressure responses match at a positive $p$, their star states are joined by a\nlinearly-degenerate contact at speed $u_*$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $0<p\\le p_K$, differentiation gives $f'_K(p)=\\frac{c_K}{\\gamma p_K}\\left(\\frac p{p_K}\\right)^{-(\\gamma+1)/(2\\gamma)}>0$; on $p\\ge p_K$, it gives $f'_K(p)=\\frac{\\sqrt{A_K}(p+p_K+2B_K)}{2(p+B_K)^{3/2}}>0$. At $p=p_K$ both derivatives equal $1/\\sqrt{\\gamma\\rho_Kp_K}$, so $f_K$ is $C^1$ and strictly increasing on $(0,\\infty)$. Thus $\\Phi$ is also $C^1$ and strictly increasing.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $p\\ge2p_K$, we have $p-p_K\\ge p/2$ and $p+B_K\\le3p/2$, because $0<B_K<p_K\\le p/2$. The shock formula therefore gives $f_K(p)\\ge\\sqrt{A_Kp/6}$. The stated $P$ exceeds both $2p_K$ and $6D^2/K^2$, so $f_L(P)+f_R(P)\\ge K\\sqrt{P/6}>D$, and consequently $\\Phi(P)>0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The rarefaction formula in [F1] tends to $-2c_K/(\\gamma-1)$ as $p\\downarrow0$, hence $\\lim_{p\\downarrow0}\\Phi(p)=\\Phi(0+)$. If this limit is nonnegative, strict increase makes $\\Phi(p)>0$ for every $p>0$, so there is no positive zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\Phi(0+)<0$, continuity at the extended endpoint $0$ gives some $\\epsilon\\in(0,P)$ with $\\Phi(\\epsilon)<0$. Applying [F2] to $\\Phi$ on $[\\epsilon,P]$ gives a zero in $(\\epsilon,P)$; strict increase from step 1.1 makes it unique on $(0,\\infty)$. Thus $0<p_*<P$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F3], the left limiting tail velocity is $u_L+2c_L/(\\gamma-1)$ and the right limiting tail velocity is $u_R-2c_R/(\\gamma-1)$; their difference is $\\Phi(0+)$. If it is nonnegative, the tails leave a vacuum gap or meet at equality. If negative, step 3.1 gives the unique positive pressure at which the two wave responses match and the LD contact joins their star states. This proves the stated threshold and matching interpretation.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for thm-euler-star-pressure-root-and-vacuum-criterion has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.2 and 4.1: Φ(0+)=0 is the equality vacuum threshold and yields no positive root."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof step 3.1: the positive root, when present, is unique."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.1: the p=p_K branch junction has equal positive derivatives, so Φ remains strictly increasing."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.2, 2.1, and 3.1: the p↓0 limit and positive upper bracket P are both handled."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 1.2, 2.1, 3.1, 4.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Proof steps 2.1 and 3.1 establish that Φ(0+)<0 implies exactly one positive root."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Proof step 1.2 establishes that Φ(0+)≥0 excludes positive roots, giving the converse."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "alg-safeguarded-euler-star-pressure-solver": {
+      "kind": "algorithm",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-euler-star-pressure-response",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-finite-budget-newton-for-vector-residuals"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: N=0 is an allowed empty iteration budget and is handled by the initial/final width checks."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: residual tolerance is fixed at zero and only an exact zero is returned as a singleton root."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N=1 performs at most one outer pass and one Newton update."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: exact roots and vacuum-threshold data return before a pressure iteration; the algorithm defines each branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: a=0 denotes Φ(0+) as a limiting endpoint and is never evaluated as an admissible pressure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-mixed-wave-curves-are-c1": {
+      "kind": "lemma",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-mixed-characteristic-wave-curve",
+          "def-local-rarefaction-curve",
+          "lem-local-characteristic-shock-curve",
+          "lem-smooth-simple-characteristic-eigenpairs"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-local-rarefaction-curve",
+          "source_section": "Definition",
+          "quote": "On a neighborhood where an eigenvector field $r_i$ is $C^2$, the local\n$i$-rarefaction curve through $u_0$ is the unique local solution\n$$\\frac{dR_i}{d\\sigma}(\\sigma;u_0)=r_i(R_i(\\sigma;u_0)),\\qquad R_i(0;u_0)=u_0.$$\nThe parameter $\\sigma$ is the signed integral-curve parameter for the chosen\nnormalization of $r_i$. Existence on a common small interval for nearby $u_0$\nfollows from [[cor-uniform-picard-lindelof-for-nearby-initial-values]]; the\n$C^2$ flow on a compact local tube follows from\n[[thm-c2-ode-flow-on-common-tube]]. No global integral curve is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-local-characteristic-shock-curve",
+          "source_section": "Statement",
+          "quote": "Let $f$ be $C^3$ and let $\\bar u$ have a simple real eigenpair\n$(\\lambda_i(\\bar u),r_i(\\bar u))$. There are a neighborhood $N_0$ of $\\bar u$,\n$\\eta>0$, and $C^1$ functions $v_i(\\sigma,u_0),s_i(\\sigma,u_0)$ for\n$u_0\\in N_0$, $|\\sigma|<\\eta$, such that, with $\\ell_i(u_0)$ the dual left\neigenvector normalized by $\\ell_i(u_0)\\cdot r_i(u_0)=1$,\n$$\\ell_i(u_0)\\cdot v_i(\\sigma,u_0)=1,\\qquad S_i(\\sigma;u_0)=u_0+\\sigma v_i(\\sigma,u_0),$$\nand for $\\sigma\\ne0$ the pair $(u_0,S_i(\\sigma;u_0))$ satisfies\nRankine–Hugoniot with speed $s_i(\\sigma,u_0)$. Also\n$S_i(0;u_0)=u_0$ and $\\partial_\\sigma S_i(0;u_0)=r_i(u_0)$. If the $i$th\nfield is genuinely nonlinear on $N_0$ and\n$d_i(u):=D\\lambda_i(u)r_i(u)$ has constant nonzero sign, then all sufficiently\nsmall nonzero strengths with $\\sigma d_i(u_0)<0$ give strict Lax $i$-shocks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-mixed-characteristic-wave-curve",
+          "source_section": "Definition",
+          "quote": "Fix a local characteristic family on a neighborhood where it is either\ngenuinely nonlinear with constant sign $d_i=D\\lambda_i\\,r_i\\ne0$, or linearly\ndegenerate. For a genuinely nonlinear family define\n$$\\Psi_i(\\sigma;u)=\\begin{cases}R_i(\\sigma;u),&\\sigma d_i>0,\\\\S_i(\\sigma;u),&\\sigma d_i<0,\\\\u,&\\sigma=0.\\end{cases}$$\nwhere $R_i$ is the local rarefaction curve and $S_i$ the local shock curve of\n[[lem-local-characteristic-shock-curve]]. For a linearly degenerate family set\n$\\Psi_i(\\sigma;u)=R_i(\\sigma;u)$ for either sign; its nonzero-strength wave is\nthe contact of [[lem-linearly-degenerate-characteristic-contact]]. The\nparameter $\\sigma$ is local and is restricted so the entire curve stays in the\nchosen neighborhood.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a linearly-degenerate family, [F1] directly gives the claim. For a genuinely nonlinear family, each branch in [F3] is $C^1$ on its closed half-neighborhood by [F1] and [F2]. At $\\sigma=0$ both values equal $u$, both state derivatives equal the identity, and both strength derivatives equal $r_i(u)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At a boundary point $(u,0)$, the first-order expansions of either branch are $u+h+r_i(u)\\sigma+o(\\|h\\|+|\\sigma|)$ for state increment $h$; the remainder is uniform over the two branches because there are only two and each is $C^1$. Thus the joined function is differentiable there with derivative $(h,\\sigma)\\mapsto h+r_i(u)\\sigma$. The branch derivatives tend to this common derivative as $\\sigma\\to0$, so the joined derivative is continuous.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The derivatives and values just obtained prove $C^1$ regularity and the asserted value and strength derivative at zero.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for lem-mixed-wave-curves-are-c1 has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof 1.1–2.1: both branches take the value u at σ=0 and share derivative r_i(u)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the proof is for a single family and includes m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.1: the linearly-degenerate branch uses R_i directly; genuine nonlinear branches join at zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: C1 regularity is local near (0,ū), not at the outer endpoints of a global curve."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1, 3.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-euler-pressure-solver-bracket-and-termination": {
+      "kind": "lemma",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "alg-safeguarded-euler-star-pressure-solver",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-finite-budget-newton-for-vector-residuals",
+          "alg-newton-correction-for-vector-residuals"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-euler-star-pressure-response]], let\n$$\\Phi(0+):=u_R-u_L-\\frac{2(c_L+c_R)}{\\gamma-1}.$$\nIf $\\Phi(0+)<0$, then $\\Phi$ has exactly one zero $p_*>0$. By the acoustic\nwave-response lemma this is the unique positive pressure at which the left and\nright wave curves can be joined by a contact. It lies in the\nexplicit bracket $0<p_*<P$, where, writing\n$D=\\max\\{0,u_L-u_R\\}$ and $K=\\sqrt{A_L}+\\sqrt{A_R}$,\n$$P=2\\max\\{p_L,p_R\\}+\\frac{6D^2}{K^2}+p_L.$$\nIf $\\Phi(0+)\\ge0$, then there is no positive matching pressure. The limiting\nleft and right rarefaction-tail velocities are ordered with a vacuum gap, or\ncoincide at the zero-pressure equality threshold. No other vacuum condition is\nasserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-safeguarded-euler-star-pressure-solver",
+          "source_section": "Definition",
+          "quote": "Assume exact-real arithmetic in which each arithmetic operation, comparison,\nsquare root, real power on a positive argument, scalar residual evaluation,\nand call to the one-step Newton procedure terminates. **Inputs:**\nadmissible primitive states $(\\rho_L,u_L,p_L)$ and $(\\rho_R,u_R,p_R)$, gas\nconstant $\\gamma>1$, pressure-width tolerance $\\tau>0$, and iteration budget\n$N\\in\\mathbb N_0$. **Outputs:** `inadmissible-input`, `vacuum`,\n`pressure-bracket` with an interval, or `budget-exhausted` with an interval.\nThe procedure never treats a nonzero residual tolerance as an exact root.\n\n1. If $\\rho_L,\\rho_R,p_L,p_R$ are not all positive or $\\gamma\\le1$, return\n   `inadmissible-input` before evaluating a wave response.\n2. Compute $\\Phi(0+)$ from\n   [[thm-euler-star-pressure-root-and-vacuum-criterion]]. If $\\Phi(0+)\\ge0$,\n   return `vacuum`.\n3. Otherwise set the bracket $[a,b]=[0,P]$ with $P$ from that theorem. Its\n   endpoint convention is $\\Phi(a):=\\Phi(0+)<0<\\Phi(b)$.\n4. For at most $N$ iterations, in this order:\n   1. If $b-a\\le\\tau$, return `pressure-bracket` with $[a,b]$.\n   2. Let $m=(a+b)/2$. Call\n      [[alg-finite-budget-newton-for-vector-residuals]] on the scalar residual\n      $F(p)=\\Phi(p)$ over the open domain $(0,\\infty)$, starting at $m$, with\n      residual tolerance $0$ and update budget $1$.\n   3. If Newton returns $(r,\\texttt{root})$, return `pressure-bracket` with\n      $[r,r]$. If it\n      returns `iteration-budget-exhausted` with last iterate $q$ and\n      $a+(b-a)/4\\le q\\le b-(b-a)/4$, use $q$ as the query. In every other\n      status or when this central-quarter test fails, use $m$ as the query.\n   4. Evaluate $\\Phi$ at the query. If it is zero, return `pressure-bracket`\n      with the singleton interval. If negative, replace $a$ by the query; if\n      positive, replace $b$ by the query.\n5. After the budget, return `pressure-bracket` if the width is at most $\\tau$;\n   otherwise return `budget-exhausted` with the current bracket.\n\nThe returned interval uses the zero lower endpoint as a limiting endpoint, not\nan admissible pressure. This algorithm gives a finite status and bracket; the\nseparate theorem below proves its invariant and width reduction. It makes no\nclaim that an exhausted budget found a root.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-finite-budget-newton-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $F:U\\to\\mathbb R^n$ be\n$C^1$ ([[def-c-one-map-and-local-inverse]]) with Jacobian $J_F$ as in\n[[def-jacobian-matrix-and-gradient]]. The matrix of $DF(x)$ in the standard\nbasis is $J_F(x)$ by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]].\n**Inputs:** $x_0\\in U$, residual\ntolerance $\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$.\n**Output:** the last valid iterate and one of `root`, `singular-jacobian`,\n`invalid-trial`, or `iteration-budget-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in this order:\n\n1. Compute $F(x_k)$. If $\\|F(x_k)\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{root})$. Here `root` means the residual tolerance was met; it\n   does not certify an exact zero when $\\varepsilon>0$.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return\n   $(x_k,\\texttt{singular-jacobian})$.\n4. Let $s_k$ be its correction. If $x_k+s_k\\notin U$, return\n   $(x_k,\\texttt{invalid-trial})$. Otherwise set $x_{k+1}=x_k+s_k$.\n\nIt makes no arbitrary-start, global-convergence, or discretization-error claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-newton-correction-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $A:\\mathbb R^n\\to\\mathbb R^n$ be a linear map, and let\n$r\\in\\mathbb R^n$ be a residual vector. If $A$ is not invertible in the sense\nof [[def-invertible-euclidean-linear-map]], return\n$(\\texttt{singular-jacobian},\\varnothing)$. If $A$ is invertible, return\n$(\\texttt{correction},s)$, where $s$ is the unique vector solving\n$$As=-r.$$\n\nUse the following exact-arithmetic procedure, with exact real zero tests.\nRepresent $A$ by its matrix in the standard basis, with indices $0\\le i,j<n$.\n\n1. To compute the determinant of any matrix $M=(m_{ij})$ below, initialize\n   $d=0$. Enumerate the permutations $\\sigma$ of $\\{0,\\ldots,n-1\\}$ in\n   lexicographic order. For each, count its inversions\n   $\\nu(\\sigma)=\\#\\{(i,j):i<j,\\ \\sigma(i)>\\sigma(j)\\}$, multiply\n   $p=\\prod_{i=0}^{n-1}m_{\\sigma(i),i}$ in increasing index order, and add\n   $(-1)^{\\nu(\\sigma)}p$ to $d$. The resulting $d$ is the determinant in\n   [[def-determinant-of-a-square-matrix]].\n2. Compute $d=\\det(A)$ by step 1. If $d=0$, return\n   $(\\texttt{singular-jacobian},\\varnothing)$, using\n   [[thm-real-square-matrix-invertible-iff-determinant-nonzero]] for the\n   invertibility test.\n3. Otherwise, for $j=0,\\ldots,n-1$, copy $A$ to $A_j$, replace column $j$\n   by $-r$, compute $d_j=\\det(A_j)$ by step 1, and set $s_j=d_j/d$.\n   Return $(\\texttt{correction},s)$, the solution specified by\n   [[thm-cramers-rule-over-a-commutative-ring]] over $\\mathbb R$.\n\nThe output is a linear correction, not a claim that $r$ came from a nonlinear\nfunction or that applying the correction decreases a residual.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $k=0$, [F2] initializes $[0,P]$ with $\\Phi(0+)<0<\\Phi(P)$ by [F1], so it contains $p_*$. This establishes the initial bracket.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume the current bracket contains $p_*$ with nonpositive left and nonnegative right residuals. A midpoint query lies in its central half; any accepted Newton query is in the central quarter, and all other Newton outcomes use the midpoint. By strict increase in [F1], a negative query residual leaves the root to its right and a positive one to its left, so the corresponding endpoint replacement preserves the bracket; an exact zero returns the singleton. Every nonexact query is at least one quarter of the old width from either endpoint, so the new width is at most $3/4$ of the old width.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "IH",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induction on completed nonexact queries using the base step 1.1 and the preserved-bracket transition in step 1.2 gives containment and width at most $(3/4)^kP$. Each outer pass calls the Newton procedure with budget $1$, so [F3] supplies at most one correction and finitely many scalar residual evaluations; the one-dimensional correction is finite by [F4], and all primitive operations terminate by [A1]. At most $N$ passes therefore return one of the defined statuses.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F3",
+            "F4",
+            "A1",
+            "IH",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $(3/4)^N P\\le\\tau$, the width test in [F2] succeeds no later than the final check, so the algorithm returns a pressure bracket unless it already returned an exact singleton. Otherwise a budget-exhausted result retains the bracket invariant from step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof step 3.1: N=0 leaves the initial bracket and the final width/status check still terminates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof step 1.2: an exact zero returns a singleton bracket; τ is assumed strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 2.1: each finite pass uses one Newton update and a scalar correction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.2: the exact-root branch is separated from nonexact quarter-bracket contraction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1: the lower endpoint a=0 uses Φ(0+) as a limit and remains in the bracket invariant."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 1.2, 2.1, 3.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-local-small-data-riemann-solver": {
+      "kind": "theorem",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "lem-rankine-hugoniot-jump-is-a-weak-solution",
+          "lem-local-rarefaction-fan",
+          "lem-local-characteristic-shock-curve",
+          "lem-linearly-degenerate-characteristic-contact",
+          "def-mixed-characteristic-wave-curve",
+          "lem-mixed-wave-curves-are-c1",
+          "thm-euclidean-implicit-function-theorem"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hyperbolic-system-and-characteristic-families",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $G\\subseteq\\mathbb R^m$ be open, and let\n$f:G\\to\\mathbb R^m$ be $C^3$ ([[def-c-one-map-and-local-inverse]];\nthe $C^3$ convention is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe one-dimensional conservation system with state domain $G$ is\n$$u_t+\\partial_x f(u)=0,\\qquad u(t,x)\\in G,$$\nwhere $u$ is the conserved state and $f$ its flux. Its flux Jacobian is\n$A(u)=Df(u)$. The system is **strictly hyperbolic on an open set $N\\subseteq G$**\nif, for every $u\\in N$, $A(u)$ has $m$ distinct real eigenvalues, written in\nincreasing order $\\lambda_1(u)<\\cdots<\\lambda_m(u)$. An **$i$th characteristic\nfamily** on $N$ is a $C^2$ right-eigenvector field $r_i:N\\to\\mathbb R^m\\setminus\\{0\\}$\nwith $A(u)r_i(u)=\\lambda_i(u)r_i(u)$. It is **genuinely nonlinear** on $N$ if\n$D\\lambda_i(u)r_i(u)$ is nowhere zero there; after shrinking $N$ its sign is\nconstant. It is **linearly degenerate** on $N$ if $D\\lambda_i(u)r_i(u)=0$\nthroughout $N$. Rescaling $r_i$ by a nonzero constant changes the wave-strength\nparameter but not the family.\n\nFor $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded map $u:Q\\to G$ is a\n**distributional weak solution with initial data $u_0$** if\n$$\\int_Q\\bigl(u\\cdot\\varphi_t+f(u)\\cdot\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every vector test function $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$ and\n$u(t,\\cdot)\\to u_0$ in $L^1_{\\rm loc}(\\mathbb R;\\mathbb R^m)$ as\n$t\\downarrow0$. A **Riemann initial datum** is the step\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-mixed-characteristic-wave-curve",
+          "source_section": "Definition",
+          "quote": "Fix a local characteristic family on a neighborhood where it is either\ngenuinely nonlinear with constant sign $d_i=D\\lambda_i\\,r_i\\ne0$, or linearly\ndegenerate. For a genuinely nonlinear family define\n$$\\Psi_i(\\sigma;u)=\\begin{cases}R_i(\\sigma;u),&\\sigma d_i>0,\\\\S_i(\\sigma;u),&\\sigma d_i<0,\\\\u,&\\sigma=0.\\end{cases}$$\nwhere $R_i$ is the local rarefaction curve and $S_i$ the local shock curve of\n[[lem-local-characteristic-shock-curve]]. For a linearly degenerate family set\n$\\Psi_i(\\sigma;u)=R_i(\\sigma;u)$ for either sign; its nonzero-strength wave is\nthe contact of [[lem-linearly-degenerate-characteristic-contact]]. The\nparameter $\\sigma$ is local and is restricted so the entire curve stays in the\nchosen neighborhood.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-mixed-wave-curves-are-c1",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[def-mixed-characteristic-wave-curve]], the map\n$(\\sigma,u)\\mapsto\\Psi_i(\\sigma;u)$ is $C^1$ near $(0,\\bar u)$, with\n$\\Psi_i(0;u)=u$ and $\\partial_\\sigma\\Psi_i(0;u)=r_i(u)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-rankine-hugoniot-jump-is-a-weak-solution",
+          "source_section": "Statement",
+          "quote": "For constant states $u_L,u_R$ and a constant speed $s$, the function equal to\n$u_L$ on $x<st$ and $u_R$ on $x>st$ solves $u_t+\\partial_xf(u)=0$ in\ndistributions on $t>0$ if and only if\n$f(u_R)-f(u_L)=s(u_R-u_L)$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-local-characteristic-shock-curve",
+          "source_section": "Statement",
+          "quote": "Let $f$ be $C^3$ and let $\\bar u$ have a simple real eigenpair\n$(\\lambda_i(\\bar u),r_i(\\bar u))$. There are a neighborhood $N_0$ of $\\bar u$,\n$\\eta>0$, and $C^1$ functions $v_i(\\sigma,u_0),s_i(\\sigma,u_0)$ for\n$u_0\\in N_0$, $|\\sigma|<\\eta$, such that, with $\\ell_i(u_0)$ the dual left\neigenvector normalized by $\\ell_i(u_0)\\cdot r_i(u_0)=1$,\n$$\\ell_i(u_0)\\cdot v_i(\\sigma,u_0)=1,\\qquad S_i(\\sigma;u_0)=u_0+\\sigma v_i(\\sigma,u_0),$$\nand for $\\sigma\\ne0$ the pair $(u_0,S_i(\\sigma;u_0))$ satisfies\nRankine–Hugoniot with speed $s_i(\\sigma,u_0)$. Also\n$S_i(0;u_0)=u_0$ and $\\partial_\\sigma S_i(0;u_0)=r_i(u_0)$. If the $i$th\nfield is genuinely nonlinear on $N_0$ and\n$d_i(u):=D\\lambda_i(u)r_i(u)$ has constant nonzero sign, then all sufficiently\nsmall nonzero strengths with $\\sigma d_i(u_0)<0$ give strict Lax $i$-shocks.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-linearly-degenerate-characteristic-contact",
+          "source_section": "Statement",
+          "quote": "Let $r_i$ be linearly degenerate on a neighborhood and let $R_i(\\sigma;u_0)$\nbe its local rarefaction curve. Then the states $u_0$ and\n$u_1=R_i(\\sigma;u_0)$ are joined by a Rankine–Hugoniot jump of speed\n$\\lambda_i(u_0)$, and the corresponding moving discontinuity is a weak\nsolution. The characteristic speed is equal on the two sides; this is a\ncontact wave, not a strict Lax shock.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-local-rarefaction-fan",
+          "source_section": "Statement",
+          "quote": "Let $r_i$ be a $C^1$ genuinely nonlinear field on a neighborhood, with\n$D\\lambda_i(u)r_i(u)$ of constant nonzero sign. If $\\sigma\\ne0$ satisfies\n$\\sigma D\\lambda_i(u_0)r_i(u_0)>0$ and is sufficiently small, then the\nleft/right data $u_0,R_i(\\sigma;u_0)$ are connected by a centered rarefaction\nfan. It is a self-similar weak solution with those Riemann data.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\mathcal W(u_L,\\sigma)=\\Psi_m(\\sigma_m;\\Psi_{m-1}(\\sigma_{m-1};\\cdots\\Psi_1(\\sigma_1;u_L)\\cdots))$ and $F(u_L,u_R,\\sigma)=\\mathcal W(u_L,\\sigma)-u_R$. By [F2] and [F3], $F$ is $C^1$, $F(\\bar u,\\bar u,0)=0$, and the columns of $D_\\sigma F(\\bar u,\\bar u,0)$ are $r_1(\\bar u),\\ldots,r_m(\\bar u)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "These eigenvectors are linearly independent by strict hyperbolicity, so $D_\\sigma F$ is invertible. Applying [F4] with parameter $(u_L,u_R)$ gives neighborhoods $P$ of $(\\bar u,\\bar u)$ and $Q$ of $0$, and a unique $C^1$ vector $\\sigma(u_L,u_R)\\in Q$ for every pair in $P$. If $u_L=u_R$, then $\\sigma=0$ solves the composition equation by [F2], so this is the unique strength vector. Choose $\\delta,\\eta>0$ so that the two radius-$\\delta$ state balls lie in $P$ and $(-\\eta,\\eta)^m\\subseteq Q$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Shrink these neighborhoods so all intermediate states stay in $N$. Since $N$ is a neighborhood of $\\bar u$ and there are finitely many continuous wave curves, this is possible. The characteristic-speed gaps at $\\bar u$ are positive; continuity of eigenvalues, shock speeds and rarefaction speeds lets us further shrink the neighborhoods until the speed range of each family lies in a disjoint interval ordered by $i$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each strength, use the rarefaction fan from [F8] when $\\sigma_iD\\lambda_i r_i>0$, the Lax shock from [F6] when it is negative, and the contact from [F7] for a linearly-degenerate family. Each shock/contact satisfies Rankine–Hugoniot, hence is a weak jump by [F5].",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The family speed intervals from step 3.1 are disjoint and ordered, so the elementary waves paste into a single-valued self-similar profile from $u_L$ to $u_R$. Each fan satisfies the equation classically by [F8]; integration by parts across each shock/contact gives boundary coefficient $[f]-s[u]=0$ by [F5], [F6], and [F7], and the continuous fan edges contribute no jump term. Thus the pasted profile is a distributional weak solution. Its wave speeds are bounded, so its nonconstant region has length at most a constant times $t$ and its $L^1_{\\rm loc}$ trace is the Riemann step as $t\\downarrow0$. The endpoint states match by the composition equation in step 1.1. Uniqueness of $\\sigma$ from step 2.1 gives uniqueness of this ordered local elementary-wave construction, not of arbitrary weak solutions.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: m≥1 is inherited from the conservation-system definition; zero families are not part of the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1: equal left and right data have the unique zero strength vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof step 2.1: m=1 gives a one-variable inverse-function problem with one characteristic family."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof step 4.1: genuinely nonlinear shock/rarefaction branches and linearly-degenerate contacts are both included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof steps 2.1 and 3.1: the state and strength neighborhoods are open and only interior data are claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1, 3.1, 4.1, 5.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-godunov-flux-from-a-local-riemann-solver": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "thm-local-small-data-riemann-solver",
+          "def-rankine-hugoniot-and-lax-shocks"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-godunov-flux-from-a-local-riemann-solver has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: equal states give the constant profile and hence G(u,u)=f(u)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-godunov-flux-from-a-local-riemann-solver has no a singleton-cardinality case as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: the claim for def-godunov-flux-from-a-local-riemann-solver has no a degenerate or limiting branch as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: if a zero-speed jump lies at ξ=0, Rankine–Hugoniot makes the two physical flux traces equal."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-godunov-flux-is-consistent-and-conservative": {
+      "kind": "theorem",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems",
+        "examined": [
+          "def-godunov-flux-from-a-local-riemann-solver",
+          "thm-local-small-data-riemann-solver"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-godunov-flux-from-a-local-riemann-solver",
+          "source_section": "Definition",
+          "quote": "For left/right states in the neighborhood of\n[[thm-local-small-data-riemann-solver]], let $u(\\xi)$ be its self-similar\nprofile, $\\xi=x/t$. The **Godunov flux** is the physical flux through the\ninterface ray $\\xi=0$:\n$$G(u_L,u_R)=f(u(0)).$$\nIf the profile jumps at $\\xi=0$, the two traces have the same physical flux by\nRankine–Hugoniot with speed zero, so $G$ is single-valued. This is a local\ndefinition on the data neighborhood where the local solver is established.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-small-data-riemann-solver",
+          "source_section": "Statement",
+          "quote": "Let $f:G\\to\\mathbb R^m$ be $C^3$, let $\\bar u\\in G$, and suppose on an open\nneighborhood $N$ of $\\bar u$ the system is strictly hyperbolic and each\ncharacteristic field is either genuinely nonlinear or linearly degenerate. Then\nthere are $\\delta,\\eta>0$ such that, whenever\n$\\|u_L-\\bar u\\|_2<\\delta$ and $\\|u_R-\\bar u\\|_2<\\delta$, there is a unique\nstrength vector $\\sigma\\in(-\\eta,\\eta)^m$ satisfying\n$$u_R=\\Psi_m(\\sigma_m;\\Psi_{m-1}(\\sigma_{m-1};\\cdots\\Psi_1(\\sigma_1;u_L)\\cdots)).$$\nFor the Riemann initial datum $u_0(x)=u_L$ for $x<0$ and $u_R$ for $x>0$,\nthe corresponding ordered superposition, with waves in increasing family\norder, is a self-similar weak solution, meaning it has the form\n$u(t,x)=q(x/t)$ for $t>0$. Its nonzero\ngenuinely nonlinear waves are rarefactions when $\\sigma_iD\\lambda_i r_i>0$\nand strict Lax shocks when $\\sigma_iD\\lambda_i r_i<0$; its linearly-degenerate\nwaves are contacts. The neighborhoods are local to $f,N,\\bar u$; no arbitrary\nlarge-data solution or uniqueness among all weak solutions is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With equal data, uniqueness of the local strength vector gives $\\sigma=0$, so [F2] makes the profile constant. Evaluating it at $\\xi=0$ in [F1] gives $G(u,u)=f(u)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The periodic update in the statement sums to $\\sum_jU_j-\\nu\\sum_j(G(U_j,U_{j+1})-G(U_{j-1},U_j))$; each shared interface flux appears once with coefficient $-\\nu$ and once with $+\\nu$, so the second sum is zero. This uses the same oriented two-state flux at each interface and asserts no stability or CFL condition.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the claim for thm-godunov-flux-is-consistent-and-conservative has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof 1.1: equal data give G(u,u)=f(u); ν=0 also leaves every cell unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof step 2.1: n=1 is allowed and the single interface flux cancels in the periodic sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: no CFL or stability condition is imposed, so arbitrary scalar ν is allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: a shock exactly at ξ=0 gives the same flux from both traces by Rankine–Hugoniot."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1, 2.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "cex-roe-jump-property-does-not-imply-entropy-admissibility": {
+      "kind": "counterexample",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems-examples",
+        "examined": [
+          "def-roe-linearization-and-flux",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "def-scalar-convex-entropy-admissibility"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-roe-linearization-and-flux",
+          "source_section": "Definition",
+          "quote": "For states $u_L,u_R$ in the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], a **Roe matrix** is a real matrix\n$\\widetilde A(u_L,u_R)$ such that\n$$\\widetilde A(u,u)=Df(u),\\qquad \\widetilde A(u_L,u_R)(u_R-u_L)=f(u_R)-f(u_L),$$\nand $\\widetilde A(u_L,u_R)$ is diagonalizable over $\\mathbb R$ with real\neigenvalues. If $\\widetilde A=R\\Lambda R^{-1}$, define\n$|\\widetilde A|=R|\\Lambda|R^{-1}$ by replacing each diagonal eigenvalue with\nits absolute value. The **Roe flux associated with this matrix** is\n$$\\widehat f_{\\rm Roe}(u_L,u_R)=\\tfrac12(f(u_L)+f(u_R))-\\tfrac12|\\widetilde A(u_L,u_R)|(u_R-u_L).$$\nThe jump identity is an algebraic conservation property. This definition does\nnot assert entropy admissibility of the approximate wave pattern.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-scalar-convex-entropy-admissibility",
+          "source_section": "Definition",
+          "quote": "For the scalar case of [[def-hyperbolic-system-and-characteristic-families]],\non $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded function $u$ is a weak\nsolution of $u_t+f(u)_x=0$ if\n$$\\int_Q\\bigl(u\\,\\varphi_t+f(u)\\,\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every $\\varphi\\in C_c^\\infty(Q)$. An **entropy pair** is a convex $C^2$\nfunction $\\eta$ and a $C^1$ flux $q$ satisfying $q'(u)=\\eta'(u)f'(u)$. A weak\nsolution is **entropy-admissible for this pair** if\n$\\partial_t\\eta(u)+\\partial_xq(u)\\le0$ in distributions; equivalently,\n$$\\int_Q\\bigl(\\eta(u)\\,\\varphi_t+q(u)\\,\\varphi_x\\bigr)\\,dt\\,dx\\ge0$$\nfor every nonnegative $\\varphi\\in C_c^\\infty(Q)$. For a single jump of speed\n$s$, the entropy inequality requires\n$q(u_R)-q(u_L)-s(\\eta(u_R)-\\eta(u_L))\\le0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rankine-hugoniot-and-lax-shocks",
+          "source_section": "Definition",
+          "quote": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a strictly hyperbolic system and $1\\le i\\le m$, it is a **strict Lax\n$i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For Burgers' flux $f(u)=u^2/2$ with $u_L=-1,u_R=1$, the Roe scalar $\\widetilde a(u_L,u_R)=(u_L+u_R)/2$ satisfies the jump identity for every pair because $f(u_R)-f(u_L)=\\frac12(u_L+u_R)(u_R-u_L)$; its equal-state value is $\\widetilde a(u,u)=u=f'(u)$. At $(-1,1)$ the speed is zero and $f(1)-f(-1)=0$, so the stationary jump satisfies both the Roe identity [F1] and weak Rankine–Hugoniot [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For [A1], the entropy production coefficient is $[q]-s[\\eta]=(1/3-(-1/3))-0\\cdot(1/2-1/2)=2/3>0$. This violates the necessary entropy inequality [F2]. Thus the Roe jump property and weak Rankine–Hugoniot balance do not guarantee entropy admissibility.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Counterexample: the claim for cex-roe-jump-property-does-not-imply-entropy-admissibility has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Counterexample steps 1.1 and 2.1: the Roe speed and flux jump are both zero, while entropy production remains positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Counterexample: the scalar Burgers law is the one-component Roe case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample step 2.1: the stationary expansion shock is weak but violates the convex entropy inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Counterexample: the claim for cex-roe-jump-property-does-not-imply-entropy-admissibility has no an interval endpoint as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample and proof steps 1.1, 2.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Counterexample: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Counterexample: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "burgers-entropy-production",
+          "claim": "The stationary Burgers jump from −1 to 1 has entropy production 2/3>0.",
+          "inputs": "η(u)=u²/2, q(u)=u³/3, s=0.",
+          "calculation": "[q]−s[η]=1/3−(−1/3)=2/3.",
+          "evidence": "Counterexample steps 1.1 and 2.1."
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-ideal-gas-contact-discontinuity": {
+      "kind": "example",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems-examples",
+        "examined": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "thm-one-dimensional-ideal-gas-euler-eigenstructure",
+          "def-rankine-hugoniot-and-lax-shocks"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-one-dimensional-ideal-gas-euler-eigenstructure",
+          "source_section": "Statement",
+          "quote": "For $U=(\\rho,m,E)\\in\\mathcal G_\\gamma$, put $u=m/\\rho$,\n$H=(E+p)/\\rho$, and $c=\\sqrt{\\gamma p/\\rho}$. The flux Jacobian has the\nthree simple real eigenvalues and right eigenvectors\n$$\\lambda_-=u-c,\\qquad r_-=(1,u-c,H-uc)^T,$$\n$$\\lambda_0=u,\\qquad r_0=(1,u,u^2/2)^T,$$\n$$\\lambda_+=u+c,\\qquad r_+=(1,u+c,H+uc)^T.$$\nThe middle field is linearly degenerate; the acoustic fields are genuinely\nnonlinear, with $D\\lambda_-r_-=-(\\gamma+1)c/(2\\rho)$ and\n$D\\lambda_+r_+=(\\gamma+1)c/(2\\rho)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rankine-hugoniot-and-lax-shocks",
+          "source_section": "Definition",
+          "quote": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a\ndiscontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is\na **Rankine–Hugoniot jump** if\n$$f(u_R)-f(u_L)=s(u_R-u_L).$$\nFor a strictly hyperbolic system and $1\\le i\\le m$, it is a **strict Lax\n$i$-shock** if it is a Rankine–Hugoniot jump and\n$$\\lambda_j(u_L)<s\\ (j<i),\\qquad \\lambda_i(u_R)<s<\\lambda_i(u_L),\\qquad s<\\lambda_j(u_R)\\ (j>i).$$\nAn empty family of inequalities is omitted. A linearly-degenerate contact has\nequal $i$-speeds on both sides, so it is not a strict Lax shock.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both states are admissible because $\\rho_K>0$ and their internal energy is $p_0/(\\gamma-1)>0$. For either state, $F(U_K)-u_0U_K=(0,p_0,u_0p_0)$; subtracting the two identities gives $F(U_R)-F(U_L)=u_0(U_R-U_L)$, the Rankine–Hugoniot equality at speed $u_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] the speed $u_0$ is the middle characteristic speed on both sides, so the Rankine–Hugoniot jump from step 1.1 is a linearly-degenerate contact. Density, energy, and momentum may jump while pressure and velocity remain continuous; [F3] says this contact is not a strict Lax shock because its two middle characteristic speeds are equal.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the claim for ex-ideal-gas-contact-discontinuity has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: distinct densities are required; if they coincide the jump is zero and the same flux identity remains true."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the three-component one-dimensional Euler state is fixed explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and verification step 2.1: the common middle speed identifies a linearly-degenerate contact, not a strict Lax shock."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example: the claim for ex-ideal-gas-contact-discontinuity has no an interval endpoint as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and proof steps 1.1, 2.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "contact-flux-difference",
+          "claim": "For any ρ_L,ρ_R>0 with common p_0,u_0, the flux difference is u_0 times the state difference.",
+          "inputs": "F(U_K)−u_0U_K=(0,p_0,u_0p_0) for K=L,R.",
+          "calculation": "Subtract the two identical flux remainders.",
+          "evidence": "Verification steps 1.1 and 2.1."
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-euler-vacuum-threshold-boundary": {
+      "kind": "example",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems-examples",
+        "examined": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-euler-star-pressure-response",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-safeguarded-euler-star-pressure-solver"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euler-star-pressure-response",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and admissible left/right primitive states\n$(\\rho_K,u_K,p_K)$, $K\\in\\{L,R\\}$, with $\\rho_K,p_K>0$ and\n$c_K=\\sqrt{\\gamma p_K/\\rho_K}$. Set\n$$A_K=\\frac{2}{(\\gamma+1)\\rho_K},\\qquad B_K=\\frac{\\gamma-1}{\\gamma+1}p_K.$$\nFor a trial star pressure $p>0$, the wave pressure response from side $K$ is\n$$f_K(p)=\\begin{cases}\\dfrac{2c_K}{\\gamma-1}\\left[\\left(\\dfrac p{p_K}\\right)^{(\\gamma-1)/(2\\gamma)}-1\\right],&0<p\\le p_K,\\\\(p-p_K)\\sqrt{\\dfrac{A_K}{p+B_K}},&p\\ge p_K.\\end{cases}$$\nThe two formulas agree at $p=p_K$. The **star-pressure residual** is\n$$\\Phi(p)=f_L(p)+f_R(p)+u_R-u_L,\\qquad p>0.$$\nThis is a scalar root equation; it does not itself define a Riemann solution.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-euler-star-pressure-response]], let\n$$\\Phi(0+):=u_R-u_L-\\frac{2(c_L+c_R)}{\\gamma-1}.$$\nIf $\\Phi(0+)<0$, then $\\Phi$ has exactly one zero $p_*>0$. By the acoustic\nwave-response lemma this is the unique positive pressure at which the left and\nright wave curves can be joined by a contact. It lies in the\nexplicit bracket $0<p_*<P$, where, writing\n$D=\\max\\{0,u_L-u_R\\}$ and $K=\\sqrt{A_L}+\\sqrt{A_R}$,\n$$P=2\\max\\{p_L,p_R\\}+\\frac{6D^2}{K^2}+p_L.$$\nIf $\\Phi(0+)\\ge0$, then there is no positive matching pressure. The limiting\nleft and right rarefaction-tail velocities are ordered with a vacuum gap, or\ncoincide at the zero-pressure equality threshold. No other vacuum condition is\nasserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-safeguarded-euler-star-pressure-solver",
+          "source_section": "Definition",
+          "quote": "Assume exact-real arithmetic in which each arithmetic operation, comparison,\nsquare root, real power on a positive argument, scalar residual evaluation,\nand call to the one-step Newton procedure terminates. **Inputs:**\nadmissible primitive states $(\\rho_L,u_L,p_L)$ and $(\\rho_R,u_R,p_R)$, gas\nconstant $\\gamma>1$, pressure-width tolerance $\\tau>0$, and iteration budget\n$N\\in\\mathbb N_0$. **Outputs:** `inadmissible-input`, `vacuum`,\n`pressure-bracket` with an interval, or `budget-exhausted` with an interval.\nThe procedure never treats a nonzero residual tolerance as an exact root.\n\n1. If $\\rho_L,\\rho_R,p_L,p_R$ are not all positive or $\\gamma\\le1$, return\n   `inadmissible-input` before evaluating a wave response.\n2. Compute $\\Phi(0+)$ from\n   [[thm-euler-star-pressure-root-and-vacuum-criterion]]. If $\\Phi(0+)\\ge0$,\n   return `vacuum`.\n3. Otherwise set the bracket $[a,b]=[0,P]$ with $P$ from that theorem. Its\n   endpoint convention is $\\Phi(a):=\\Phi(0+)<0<\\Phi(b)$.\n4. For at most $N$ iterations, in this order:\n   1. If $b-a\\le\\tau$, return `pressure-bracket` with $[a,b]$.\n   2. Let $m=(a+b)/2$. Call\n      [[alg-finite-budget-newton-for-vector-residuals]] on the scalar residual\n      $F(p)=\\Phi(p)$ over the open domain $(0,\\infty)$, starting at $m$, with\n      residual tolerance $0$ and update budget $1$.\n   3. If Newton returns $(r,\\texttt{root})$, return `pressure-bracket` with\n      $[r,r]$. If it\n      returns `iteration-budget-exhausted` with last iterate $q$ and\n      $a+(b-a)/4\\le q\\le b-(b-a)/4$, use $q$ as the query. In every other\n      status or when this central-quarter test fails, use $m$ as the query.\n   4. Evaluate $\\Phi$ at the query. If it is zero, return `pressure-bracket`\n      with the singleton interval. If negative, replace $a$ by the query; if\n      positive, replace $b$ by the query.\n5. After the budget, return `pressure-bracket` if the width is at most $\\tau$;\n   otherwise return `budget-exhausted` with the current bracket.\n\nThe returned interval uses the zero lower endpoint as a limiting endpoint, not\nan admissible pressure. This algorithm gives a finite status and bracket; the\nseparate theorem below proves its invariant and width reduction. It makes no\nclaim that an exhausted budget found a root.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the equality case take $u_L=-5c,u_R=5c$. Then $u_R-u_L=10c$, so [F2] gives $\\Phi(0+)=0$. All thermodynamic states remain admissible by [F1]; [F3] gives no positive pressure root and [F4] returns `vacuum`.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In a strict case take $u_L=-6,u_R=6$. Then $u_R-u_L=12>10\\sqrt{7/5}=10c$, since $144>140$. Thus $\\Phi(0+)>0$ and the same conclusions follow from [F3]–[F4]. These cases show the threshold equality and strict-vacuum branches without using an approximate numerical pressure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the claim for ex-euler-vacuum-threshold-boundary has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example verification 1.1: equality gives Φ(0+)=0 exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: identical positive thermodynamic data are used on the two sides."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example verification steps 1.1 and 2.1 check both threshold equality and strict-vacuum inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example verification step 1.1: the equality threshold is included in the no-positive-root branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and proof steps 1.1, 2.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "vacuum-threshold-arithmetic",
+          "claim": "For γ=7/5, ρ_L=ρ_R=p_L=p_R=1, the threshold is 10√(7/5); the strict data have gap 12 above it.",
+          "inputs": "u_L=−6, u_R=6, c=√(7/5).",
+          "calculation": "12²=144>140=(10c)².",
+          "evidence": "Example and verification steps 1.1 and 2.1."
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-acoustic-system-local-riemann-solution": {
+      "kind": "example",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems-examples",
+        "examined": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "thm-local-small-data-riemann-solver"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hyperbolic-system-and-characteristic-families",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $G\\subseteq\\mathbb R^m$ be open, and let\n$f:G\\to\\mathbb R^m$ be $C^3$ ([[def-c-one-map-and-local-inverse]];\nthe $C^3$ convention is that of [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe one-dimensional conservation system with state domain $G$ is\n$$u_t+\\partial_x f(u)=0,\\qquad u(t,x)\\in G,$$\nwhere $u$ is the conserved state and $f$ its flux. Its flux Jacobian is\n$A(u)=Df(u)$. The system is **strictly hyperbolic on an open set $N\\subseteq G$**\nif, for every $u\\in N$, $A(u)$ has $m$ distinct real eigenvalues, written in\nincreasing order $\\lambda_1(u)<\\cdots<\\lambda_m(u)$. An **$i$th characteristic\nfamily** on $N$ is a $C^2$ right-eigenvector field $r_i:N\\to\\mathbb R^m\\setminus\\{0\\}$\nwith $A(u)r_i(u)=\\lambda_i(u)r_i(u)$. It is **genuinely nonlinear** on $N$ if\n$D\\lambda_i(u)r_i(u)$ is nowhere zero there; after shrinking $N$ its sign is\nconstant. It is **linearly degenerate** on $N$ if $D\\lambda_i(u)r_i(u)=0$\nthroughout $N$. Rescaling $r_i$ by a nonzero constant changes the wave-strength\nparameter but not the family.\n\nFor $Q=(0,\\infty)\\times\\mathbb R$, a locally bounded map $u:Q\\to G$ is a\n**distributional weak solution with initial data $u_0$** if\n$$\\int_Q\\bigl(u\\cdot\\varphi_t+f(u)\\cdot\\varphi_x\\bigr)\\,dt\\,dx=0$$\nfor every vector test function $\\varphi\\in C_c^\\infty(Q;\\mathbb R^m)$ and\n$u(t,\\cdot)\\to u_0$ in $L^1_{\\rm loc}(\\mathbb R;\\mathbb R^m)$ as\n$t\\downarrow0$. A **Riemann initial datum** is the step\n$u_0(x)=u_L$ for $x<0$ and $u_0(x)=u_R$ for $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-small-data-riemann-solver",
+          "source_section": "Statement",
+          "quote": "Let $f:G\\to\\mathbb R^m$ be $C^3$, let $\\bar u\\in G$, and suppose on an open\nneighborhood $N$ of $\\bar u$ the system is strictly hyperbolic and each\ncharacteristic field is either genuinely nonlinear or linearly degenerate. Then\nthere are $\\delta,\\eta>0$ such that, whenever\n$\\|u_L-\\bar u\\|_2<\\delta$ and $\\|u_R-\\bar u\\|_2<\\delta$, there is a unique\nstrength vector $\\sigma\\in(-\\eta,\\eta)^m$ satisfying\n$$u_R=\\Psi_m(\\sigma_m;\\Psi_{m-1}(\\sigma_{m-1};\\cdots\\Psi_1(\\sigma_1;u_L)\\cdots)).$$\nFor the Riemann initial datum $u_0(x)=u_L$ for $x<0$ and $u_R$ for $x>0$,\nthe corresponding ordered superposition, with waves in increasing family\norder, is a self-similar weak solution, meaning it has the form\n$u(t,x)=q(x/t)$ for $t>0$. Its nonzero\ngenuinely nonlinear waves are rarefactions when $\\sigma_iD\\lambda_i r_i>0$\nand strict Lax shocks when $\\sigma_iD\\lambda_i r_i<0$; its linearly-degenerate\nwaves are contacts. The neighborhoods are local to $f,N,\\bar u$; no arbitrary\nlarge-data solution or uniqueness among all weak solutions is asserted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives eigenpairs $(-1,r_-= (1,-1)^T)$ and $(1,r_+=(1,1)^T)$. Since the system is linear, its two characteristic fields are linearly degenerate. The jump is $U_R-U_L=(-\\varepsilon,0)^T=-\\tfrac{\\varepsilon}{2}r_--\\tfrac{\\varepsilon}{2}r_+$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The strengths have absolute value $\\varepsilon/2<\\eta$, and both states are in the prescribed solver neighborhood, so [F2] applies. After the first wave the intermediate state is $U_M=U_L-\\tfrac{\\varepsilon}{2}r_-=(-\\tfrac{\\varepsilon}{2},\\tfrac{\\varepsilon}{2})^T$; after the second, $U_M-\\tfrac{\\varepsilon}{2}r_+=U_R$. For the first jump $A(U_M-U_L)=(-1)(U_M-U_L)$, and for the second $A(U_R-U_M)=(U_R-U_M)$. Thus the two jumps satisfy Rankine–Hugoniot at speeds $-1$ and $1$ and are ordered.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The profile equal to $U_L$ for $x/t<-1$, to $U_M$ for $-1<x/t<1$, and to $U_R$ for $x/t>1$ is therefore the two-contact local Riemann solution.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the claim for ex-acoustic-system-local-riemann-solution has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: ε>0 is required; as ε tends to zero the two strengths and the jump tend to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the two-family decomposition is explicit and uses both characteristic fields."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example verification 1.1: both eigenvalues are constant, so both fields are linearly degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: ε is strictly smaller than δ and 2η, so no assertion is made on the neighborhood boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and proof steps 1.1, 2.1, 3.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "two-wave-decomposition",
+          "claim": "The jump (−ε,0) equals −εr_-/2−εr_+/2 and gives the displayed intermediate state.",
+          "inputs": "r_-=(1,−1), r_+=(1,1), U_L=(0,0).",
+          "calculation": "U_M=(−ε/2,ε/2); U_M−εr_+/2=(−ε,0).",
+          "evidence": "Verification steps 1.1 and 2.1."
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-sod-tube-pressure-root": {
+      "kind": "example",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "riemann-solvers-for-hyperbolic-systems-examples",
+        "examined": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-euler-star-pressure-response",
+          "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "alg-safeguarded-euler-star-pressure-solver",
+          "lem-euler-pressure-solver-bracket-and-termination"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euler-star-pressure-response",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and admissible left/right primitive states\n$(\\rho_K,u_K,p_K)$, $K\\in\\{L,R\\}$, with $\\rho_K,p_K>0$ and\n$c_K=\\sqrt{\\gamma p_K/\\rho_K}$. Set\n$$A_K=\\frac{2}{(\\gamma+1)\\rho_K},\\qquad B_K=\\frac{\\gamma-1}{\\gamma+1}p_K.$$\nFor a trial star pressure $p>0$, the wave pressure response from side $K$ is\n$$f_K(p)=\\begin{cases}\\dfrac{2c_K}{\\gamma-1}\\left[\\left(\\dfrac p{p_K}\\right)^{(\\gamma-1)/(2\\gamma)}-1\\right],&0<p\\le p_K,\\\\(p-p_K)\\sqrt{\\dfrac{A_K}{p+B_K}},&p\\ge p_K.\\end{cases}$$\nThe two formulas agree at $p=p_K$. The **star-pressure residual** is\n$$\\Phi(p)=f_L(p)+f_R(p)+u_R-u_L,\\qquad p>0.$$\nThis is a scalar root equation; it does not itself define a Riemann solution.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euler-star-pressure-root-and-vacuum-criterion",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-euler-star-pressure-response]], let\n$$\\Phi(0+):=u_R-u_L-\\frac{2(c_L+c_R)}{\\gamma-1}.$$\nIf $\\Phi(0+)<0$, then $\\Phi$ has exactly one zero $p_*>0$. By the acoustic\nwave-response lemma this is the unique positive pressure at which the left and\nright wave curves can be joined by a contact. It lies in the\nexplicit bracket $0<p_*<P$, where, writing\n$D=\\max\\{0,u_L-u_R\\}$ and $K=\\sqrt{A_L}+\\sqrt{A_R}$,\n$$P=2\\max\\{p_L,p_R\\}+\\frac{6D^2}{K^2}+p_L.$$\nIf $\\Phi(0+)\\ge0$, then there is no positive matching pressure. The limiting\nleft and right rarefaction-tail velocities are ordered with a vacuum gap, or\ncoincide at the zero-pressure equality threshold. No other vacuum condition is\nasserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-euler-pressure-solver-bracket-and-termination",
+          "source_section": "Statement",
+          "quote": "For admissible non-vacuum input data, the algorithm in\n[[alg-safeguarded-euler-star-pressure-solver]] terminates after at most $N$\nouter iterations and returns either a singleton exact root, a bracket\ncontaining the unique $p_*$ from [[thm-euler-star-pressure-root-and-vacuum-criterion]],\nor an explicit budget-exhausted status with that root still bracketed. After\n$k$ completed non-exact iterations the bracket width is at most\n$(3/4)^kP$. Thus any budget satisfying $(3/4)^N P\\le\\tau$ returns a\npressure-bracket status. No floating-point or nonlinear convergence guarantee\nis asserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The densities and pressures are positive, so [F1] gives admissible states. The sound speeds are $c_L=\\sqrt{7/5}$ and $c_R=\\sqrt{28/25}$. Since both velocities are zero, $\\Phi(0+)=-2(c_L+c_R)/(\\gamma-1)<0$. By [F3] there is one positive star pressure $p_*$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $p=1/10=p_R$, $f_R(p)=0$ while $p<p_L$ makes the left rarefaction response strictly negative; hence $\\Phi(1/10)<0$. At $p=1=p_L$, $f_L(p)=0$ while $p>p_R$ makes the right shock response strictly positive; hence $\\Phi(1)>0$. Strict increase gives $1/10<p_*<1$, so the left wave is a rarefaction and the right wave is a shock.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The contact between the two acoustic waves has pressure $p_*$ and common velocity $u_*=u_L-f_L(p_*)=u_R+f_R(p_*)$. Equality follows by rearranging $\\Phi(p_*)=0$. The explicit theorem bracket $[0,P]$ and [F4] give a finite-budget enclosure of any prescribed positive width when the budget meets its bound; insufficient budgets return `budget-exhausted` with the root still bracketed.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the claim for ex-sod-tube-pressure-root has no an empty-object input as a separate assertion; it is limited to the objects and hypotheses stated in its carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example verification 1.1: Φ(0+)<0 is strict, so the data lie below the vacuum threshold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example verification step 2.1: strict endpoint signs and monotonicity give exactly one root."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example verification step 2.1: the pressure endpoints p_R and p_L lie on different wave branches, away from the vacuum case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example verification step 2.1: Φ(p_R)<0<Φ(p_L), so the unique root is strictly between the initial pressures."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and proof steps 1.1, 2.1, 3.1: all constructions use explicit finite formulas, unique local solutions, or supplied inputs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: the item states no biconditional in this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: the item states no biconditional in this direction."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "sod-pressure-signs",
+          "claim": "For the stated data, Φ(0+)<0, Φ(1/10)<0 and Φ(1)>0, so the unique root lies in (1/10,1).",
+          "inputs": "γ=7/5, c_L=√(7/5), c_R=√(28/25), u_L=u_R=0.",
+          "calculation": "At p_R the right response is zero and left rarefaction response negative; at p_L the left response is zero and right shock response positive.",
+          "evidence": "Verification steps 1.1 and 2.1."
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; every proof is choice-free.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    }
+  }
+}

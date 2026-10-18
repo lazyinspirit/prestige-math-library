@@ -15,8 +15,8 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
   precheck: pass
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-published-local-repairs/thm-gamma-meromorphic-continuation.json
 sources:
   scraped: []
   references:
@@ -53,6 +53,8 @@ $$\Gamma(z)=\frac{\Gamma(z+m+1)}{z(z+1)\cdots(z+m)}.$$
 
 1.1 For each integer $m\ge0$, define $$G_m(z):=\frac{\Gamma(z+m+1)}{z(z+1)\cdots(z+m)}$$ on the half-plane $\operatorname{Re}z>-m-1$ with the nonpositive integers $0,-1,\dots,-m$ removed. By repeated use of [L1], $G_m(z)=\Gamma(z)$ whenever $\operatorname{Re}z>0$. [given, L1, construct]
 
-2.1 The functions $G_m$ and $G_{m+1}$ agree on their common domain because both equal $\Gamma(z)$ on the nonempty open half-plane $\operatorname{Re}z>0$. Hence the $G_m$ glue to a meromorphic continuation of Gamma to $\mathbb C$, and step 1.1 is exactly the displayed continuation formula on the domain of $G_m$. The denominator in step 1.1 shows that the only possible poles are the nonpositive integers, and each is simple. [step 1.1, L1, algebra]
+2.1 On the common domain of $G_m$ and $G_{m+1}$, put $w=z+m+1$. Then $\operatorname{Re}w>0$, so [L1] gives $\Gamma(w+1)=w\Gamma(w)$, and $w\ne0$. Thus $$G_{m+1}(z)=\frac{\Gamma(z+m+2)}{z(z+1)\cdots(z+m)(z+m+1)}=G_m(z).$$ Each quotient also defines a meromorphic function on the full half-plane $\operatorname{Re}z>-m-1$, with at most simple poles at $0,-1,\dots,-m$; the equality just proved persists there as equality of meromorphic functions, since the quotients have equal values on a punctured neighborhood of every removed point. These half-planes are nested and cover $\mathbb C$, and adjacent compatibility gives compatibility for every pair. Hence the quotients glue to a meromorphic continuation of Gamma, with no possible poles except the nonpositive integers, all at most simple. [step 1.1, L1, algebra]
 
-3.1 Near $z=-n$, take $m=n$. Then $$\Gamma(z)=\frac{\Gamma(z+n+1)} {z(z+1)\cdots(z+n-1)(z+n)}.$$ Using [L2], the numerator tends to $\Gamma(1)=1$ and the product excluding $z+n$ tends to $(-n)(-n+1)\cdots(-1)=(-1)^n n!$. Therefore $$\operatorname{Res}(\Gamma,-n)= \frac{1}{(-1)^n n!}=\frac{(-1)^n}{n!}.$$ [step 2.1, L2, algebra] ∎
+3.1 For $z$ off the nonpositive integers, choose $N$ so large that $\operatorname{Re}(z+N+1)>0$. Applying [L1] to $z+N+1$ and cancelling the nonzero factor $z+N+1$ gives $$\Gamma(z+1)=G_N(z+1)=\frac{\Gamma(z+N+1)}{(z+1)\cdots(z+N)}=zG_N(z)=z\Gamma(z).$$ Iteration proves the displayed continuation formula wherever both sides are finite. Near every remaining pole away from $0,-1,\dots,-m$, it is an equality on a punctured neighborhood and therefore an equality of meromorphic functions there as well. [step 2.1, L1, algebra]
+
+4.1 Near $z=-n$, take $m=n$. Then $$\Gamma(z)=\frac{\Gamma(z+n+1)} {z(z+1)\cdots(z+n-1)(z+n)}.$$ Using [L2], the numerator tends to $\Gamma(1)=1$ and the product excluding $z+n$ tends to $(-n)(-n+1)\cdots(-1)=(-1)^n n!$. Therefore $$\operatorname{Res}(\Gamma,-n)= \frac{1}{(-1)^n n!}=\frac{(-1)^n}{n!}.$$ [step 2.1, L2, algebra] ∎

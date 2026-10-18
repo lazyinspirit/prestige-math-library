@@ -1,0 +1,1188 @@
+[
+  {
+    "order": 2600,
+    "id": "numerical-algebraic-riccati-equations-and-stabilizing-branches",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Numerical algebraic riccati equations and stabilizing branches",
+    "companion": "numerical-algebraic-riccati-equations-and-stabilizing-branches-examples",
+    "requires": [
+      "generalized-eigenvalue-pencils-and-qz-methods",
+      "matrix-functions-and-scaling-squaring"
+    ],
+    "items": [
+      {
+        "id": "def-lqr-stabilizability-and-detectability",
+        "kind": "definition",
+        "title": "Stabilizability and detectability for continuous and discrete linear systems",
+        "deps": [
+          "def-hurwitz-matrix-and-continuous-lyapunov-equation",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, $n,m,p\\ge1$, $A\\in F^{n\\times n}$, $B\\in F^{n\\times m}$, and $C\\in F^{p\\times n}$. A matrix is **Hurwitz** when every complex eigenvalue has strictly negative real part, as in [[def-hurwitz-matrix-and-continuous-lyapunov-equation]]. It is **Schur stable** when every complex eigenvalue has modulus strictly less than one.\n\nThe pair $(A,B)$ is **continuously stabilizable** if some $K\\in F^{m\\times n}$ makes $A-BK$ Hurwitz. The pair $(A,C)$ is **continuously detectable** if some $L\\in F^{n\\times p}$ makes $A-LC$ Hurwitz.\n\nThe pair $(A,B)$ is **discretely stabilizable** if some $K\\in F^{m\\times n}$ makes $A-BK$ Schur stable. The pair $(A,C)$ is **discretely detectable** if some $L\\in F^{n\\times p}$ makes $A-LC$ Schur stable. These are exact existential properties of the given finite matrices. A residual size or an approximate spectral estimate does not itself establish any of them.",
+        "source_path": "items/def-lqr-stabilizability-and-detectability.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node113.html",
+              "locator": "§6.2.1, monotone and bounded finite-horizon values and CARE limit"
+            },
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, CARE assumptions, Hamiltonian graph, and Newton methods"
+            },
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§5.1, definitions of discrete stabilizability and detectability"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-reachable-decomposition-and-state-feedback-pole-placement",
+        "kind": "lemma",
+        "title": "Reachable block decomposition and same-field state-feedback pole placement",
+        "deps": [
+          "thm-rank-nullity",
+          "thm-row-rank-equals-column-rank",
+          "lem-characteristic-polynomial-of-block-triangular-matrix",
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum"
+        ],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "justified_by": [],
+        "statement": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, let $n,m\\ge0$, and let $A\\in F^{n\\times n}$ and $B\\in F^{n\\times m}$. The real case is viewed over $\\mathbb C$ when a complex spectral parameter or rank is used. Define\n$$\\mathcal R=\\operatorname{span}_F\\{A^jBe_\\ell:0\\le j<n,\\ 1\\le\\ell\\le m\\},\\qquad r=\\dim_F\\mathcal R,$$\nwhere a span of an empty family is $\\{0\\}$. Then there is an invertible $P\\in F^{n\\times n}$ such that\n$$P^{-1}AP=\\begin{bmatrix}A_r&D\\\\0&A_u\\end{bmatrix},\\qquad P^{-1}B=\\begin{bmatrix}B_r\\\\0\\end{bmatrix}.$$\nThe pair $(A_r,B_r)$ is reachable on $F^r$ in the displayed algebraic sense, and empty blocks are permitted. For every $\\lambda\\in\\mathbb C$,\n$$\\operatorname{rank}_{\\mathbb C}[\\lambda I-A\\ \\ B]=n\\quad\\Longleftrightarrow\\quad \\lambda\\notin\\sigma_{\\mathbb C}(A_u^{\\mathbb C}),$$\nwhere $A_u^{\\mathbb C}$ is the complexification of $A_u$ when $F=\\mathbb R$ and is $A_u$ itself when $F=\\mathbb C$.\n\nIf $r=n$, then for every prescribed list $\\mu_1,\\ldots,\\mu_n\\in F$ there is a gain $K\\in F^{m\\times n}$ satisfying\n$$\\det(zI-A+BK)=\\prod_{j=1}^n(z-\\mu_j).$$\nThus a real reachable pair can be assigned any real pole list, including repetitions, and a complex reachable pair any complex list. The pole-placement claim does not assert arbitrary nonreal conjugate-pair placement for a real pair.",
+        "source_path": "items/lem-reachable-decomposition-and-state-feedback-pole-placement.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl J. Åström and Richard M. Murray, Feedback Systems: An Introduction for Scientists and Engineers",
+              "url": "https://faculty.sites.iastate.edu/tesfatsi/archive/tesfatsi/FeedbackSystems.AstromMurray.pdf",
+              "locator": "Version 2.11b complete book; §6.1, pp.167–174, reachability; §6.2, pp.175–181, SISO state-feedback pole placement; §7.2, pp.207–208, observer duality. The local proof establishes the multi-input claims."
+            },
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§2.3, printed pp.5–7, controllability Gramian and reachable-subspace context; §5.1, printed pp.21–23, DARE hypotheses. The local proof below supplies the multi-input result."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-finite-budget-stable-block-reordering-for-schur-and-qz",
+        "kind": "algorithm",
+        "title": "Finite-budget stable block reordering for Schur and QZ forms",
+        "deps": [
+          "def-real-and-complex-schur-forms",
+          "def-generalized-schur-form",
+          "def-verified-linear-residual-certificate-data",
+          "thm-uniform-linear-residual-solution-enclosure",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-gram-schmidt-orthonormalisation",
+          "lem-neumann-inverse-norm-bound",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "thm-finite-budget-stable-block-reordering-correctness-and-status"
+        ],
+        "statement": "Inputs are an order $d\\ge0$ real or complex Schur matrix $T$, or a regular real or complex generalized Schur pair $(S,T)$, with the declared diagonal block partition. Complex Schur and QZ forms have scalar blocks; real Schur forms have scalar blocks or real $2\\times2$ blocks; real generalized Schur forms have real $1\\times1$ or $2\\times2$ blocks. Each generalized diagonal block pair must be regular. Optional accumulated factors are exact unitary/orthogonal products; if omitted they are identity. Other inputs are a CARE selector (strict left half-plane) or DARE selector (strict unit disk), a required integer selected dimension $0\\le r\\le d$, nonnegative integer budgets $K$ and $W$, a positive local separation threshold $\\eta$, and either an exact arithmetic controller or a bounded outward evaluator.\n\nUse the CARE selector with an ordinary Schur form and the DARE selector with a generalized Schur form; an unmatched form-selector combination returns invalid-form.\n\nThe entries of the input arrays are treated as their exact represented real or complex values. All local transformed arrays and accumulated factors are retained exactly as finite products; a rounded dense copy is only a separately evaluated diagnostic. Before each scalar primitive or outward evaluation, return work-budget-exhausted if no units of $W$ remain; otherwise consume one unit before requesting the operation. Charge validation, label and inversion-count scans, local construction, and the final ordering scan to this same budget. For rational or dyadic arrays, the exact core uses rational arithmetic and positive square roots, with exact real-algebraic sign comparisons where needed. Exact decisions on arbitrary real inputs are an exact-real arithmetic model, not a bit-computability claim. The bounded-evaluator branch returns arithmetic-inconclusive whenever a needed zero, sign, division, or normalization remains unresolved.\n\n1. Validate dimensions, the declared block pattern, and regularity of each generalized diagonal pair in one finite scan. For ordinary scalar blocks over either field classify $t_{ii}$ by $\\operatorname{Re}t_{ii}<0$ or $>0$ for CARE; for real $2\\times2$ blocks first verify negative discriminant and then classify by trace less than or greater than zero. For generalized scalar blocks over either field $[s_{ii}:t_{ii}]$, verify the pair is nonzero and classify by $|s_{ii}|<|t_{ii}|$ or $|s_{ii}|>|t_{ii}|$ for DARE; thus $t_{ii}=0$, $s_{ii}\\ne0$ is complementary and represents infinity without division. For a real generalized $2\\times2$ block, verify $\\det(T_b)\\ne0$ and that $\\det(S_b-\\lambda T_b)$ has negative discriminant; its conjugate roots have common squared modulus $\\det(S_b)/\\det(T_b)$, so classify by strict comparison of this ratio with one, cross-multiplying with the certified sign of $\\det(T_b)$. Exact equality with the selected boundary returns boundary-spectrum. A bounded enclosure touching the boundary returns separation-inconclusive. Require that the selected block sizes sum to $r$, or return dimension-mismatch. Invalid patterns or singular local homogeneous pairs return invalid-form. Compute the initial inversion count once by scanning all ordered block pairs after classification.\n\n2. Give every whole block its selected or complementary label. Locate the leftmost adjacent complementary-selected inversion. If none exists, return ordered with the current exact arrays and accumulated factors. If an inversion exists but $K$ swap attempts have already been made, return swap-budget-exhausted. Otherwise consume one attempt before starting its local construction. Never split a real conjugate pair.\n\n3. Let $p,q\\in\\{1,2\\}$ be the two adjacent block sizes (over $\\mathbb C$, $p=q=1$), with local blocks\n$$T_{JJ}=\\begin{bmatrix}A&C\\\\0&B\\end{bmatrix}$$\nfor ordinary Schur form, or\n$$S_{JJ}=\\begin{bmatrix}A&C\\\\0&B\\end{bmatrix},\\qquad T_{JJ}=\\begin{bmatrix}D&F\\\\0&E\\end{bmatrix}$$\nfor QZ form. With column-vectorization, form the local coefficient system\n$$H=I_q\\otimes A-B^T\\otimes I_p,\\qquad h=-\\operatorname{vec}(C)$$\nfor ordinary Schur, with unknown $\\operatorname{vec}(R)$, and\n$$H=\\begin{bmatrix}I_q\\otimes A&-B^T\\otimes I_p\\\\I_q\\otimes D&-E^T\\otimes I_p\\end{bmatrix},\\qquad h=-\\begin{bmatrix}\\operatorname{vec}(C)\\\\\\operatorname{vec}(F)\\end{bmatrix}$$\nfor QZ, with unknown $[\\operatorname{vec}(R);\\operatorname{vec}(L)]$. The transpose in $B^T$ and $E^T$ is intentional, also over $\\mathbb C$. Solve $Hx=h$ and $HY=I$ by finite Gaussian elimination with complete pivoting: at each stage scan the finite remaining submatrix, choose an entry of largest certified modulus with lexicographic ties, swap rows and columns, eliminate, and back-substitute while undoing column permutations. An exact all-zero remaining submatrix returns swap-singular. An unresolved pivot or range failure returns separation-inconclusive or range-failure. Verify $Hx=h$ and $HY=I$ exactly, or verify a usable approximate-inverse certificate $\\|I-YH\\|_2\\le\\theta<1$ and still solve $Hx=h$ exactly. In the latter case it gives $\\|H^{-1}\\|_2\\le\\|Y\\|_2/(1-\\theta)$. In the exact-inverse branch take $\\beta=\\|Y\\|_F$ in exact arithmetic, or an outward upper bound for that norm; in the approximate-inverse branch take an outward bound for $\\|Y\\|_2/(1-\\theta)$. Require $\\eta\\beta\\le1$; otherwise return swap-separation-inconclusive. Record the threshold, solves, pivot decisions and certificate.\n\n4. For ordinary Schur form set $V=[R;I_q]$. For QZ set $V=[R;I_q]$ and $W_L=[L;I_q]$. Complete the columns of $V$, and separately $W_L$, to exact orthonormal bases by Gram–Schmidt: process the graph columns first, then $e_1,\\ldots,e_{p+q}$, skipping exactly zero residuals and normalizing each nonzero residual by the positive square root of its squared norm. The graph columns are independent because their last $q$ rows form $I_q$; the coordinate scan completes a basis. An unresolved zero or normalization decision in bounded mode returns arithmetic-inconclusive.\n\n5. Let $Z_{\\rm loc}$ be the ordinary orthogonal/unitary completion; for QZ let $Z_{\\rm loc}$ be the right completion and $Q_{\\rm loc}$ the left completion. Propose the local transform $Z_{\\rm loc}^*T Z_{\\rm loc}$ in the ordinary case, or $Q_{\\rm loc}^*SZ_{\\rm loc}$ and $Q_{\\rm loc}^*TZ_{\\rm loc}$ in the QZ case. Apply it to the entire affected row and column panels, including upper off-diagonal blocks. The lower-left block is set to exact zero only by the local equations solved in step 3. For a real QZ form, factor each newly formed real $2\\times2$ diagonal block as $T_b=L_bR_b$ by Gram–Schmidt on its two columns, apply the embedded $L_b^*$ to the corresponding rows of both arrays, and update $Q_{\\rm loc}\\leftarrow Q_{\\rm loc}L_b$ with the same embedded factor; such a block is nonsingular because its roots are finite and nonreal. A size-one infinite pair requires no division by its zero second coordinate. Commit the provisional panels and factor updates only after every required local operation succeeds; otherwise return the previous committed arrays with a failed-attempt diagnostic.\n\n6. After a committed exchange, swap the two labels and sizes and return to step 2. Ordinary accumulated factors are updated by right multiplication with $Z_{\\rm loc}$; generalized accumulated factors are updated as $Q\\leftarrow QQ_{\\rm loc}$ and $Z\\leftarrow ZZ_{\\rm loc}$. The first $r$ columns of the updated factor are reported as the selected basis candidate; in QZ the right factor $Z$, not the left factor $Q$, supplies the right deflating basis.\n\nOn every exit return the current partial form, exact product factors, status, selected dimension, boundary and separation predicates, initial inversion count, attempts, accepted swaps, primitive/evaluator counts, original residual certificates, local inverse-norm certificates, and any residual transport data. Other statuses are work-budget-exhausted, arithmetic-inconclusive, range-failure, invalid-form, dimension-mismatch, boundary-spectrum, separation-inconclusive, swap-singular, swap-separation-inconclusive, and swap-budget-exhausted. ordered is distinct from any Riccati acceptance status. Reordering a computed form does not assert a structured Hamiltonian or symplectic backward-error theorem.",
+        "source_path": "items/alg-finite-budget-stable-block-reordering-for-schur-and-qz.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "LAPACK auxiliary routine DLAEXC, double-precision real Schur block exchange",
+              "url": "https://www.netlib.org/lapack/double/dlaexc.f",
+              "locator": "Complete source, adjacent 1x1 and 2x2 Schur block exchanges, local solve, tentative transform, whole-panel updates and explicit rejection."
+            },
+            {
+              "title": "LAPACK auxiliary routine DTGEX2, double-precision generalized real Schur block exchange",
+              "url": "https://www.netlib.org/lapack/double/dtgex2.f",
+              "locator": "Complete source, coupled generalized Sylvester solve, two-sided transformations, whole-panel updates and ill-conditioning rejection. The repository procedure uses its own exact arithmetic contract and does not adopt LAPACK's rounded thresholds."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-standard-continuous-and-discrete-riccati-equations",
+        "kind": "definition",
+        "title": "Standard CARE and DARE data, equations, and conventions",
+        "deps": [
+          "def-lqr-stabilizability-and-detectability",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, $A\\in F^{n\\times n}$, $B\\in F^{n\\times m}$, $C\\in F^{p\\times n}$, and $R=R^*\\in F^{m\\times m}$ be positive definite. Write $Q=C^*C$ and $G=BR^{-1}B^*$. The inverse $R^{-1}$ is well-defined: [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]] supplies an invertible factor $R=LL^*$, so $R^{-1}=L^{-*}L^{-1}$. Thus $v^*Gv=\\|L^{-1}B^*v\\|_2^2\\ge0$ and $v^*Qv=\\|Cv\\|_2^2\\ge0$. The symbol $^*$ is transpose over $\\mathbb R$ and conjugate transpose over $\\mathbb C$.\n\nThe **continuous algebraic Riccati equation (CARE)** is\n$$A^*X+XA-XGX+Q=0.$$\nIts residual is $F_c(X)=A^*X+XA-XGX+Q$, its feedback is $K_c(X)=R^{-1}B^*X$, and its closed-loop matrix is $A_c(X)=A-BK_c(X)=A-GX$.\n\nFor $X=X^*\\succeq0$, $S_X:=R+B^*XB$ is positive definite because\n$v^*S_Xv=v^*Rv+(Bv)^*X(Bv)>0$ for every nonzero $v$. The **discrete\nalgebraic Riccati equation (DARE)** is\n$$X=Q+A^*XA-A^*XB(R+B^*XB)^{-1}B^*XA.$$\nIts residual is $F_d(X)=Q+A^*XA-A^*XB(R+B^*XB)^{-1}B^*XA-X$. Whenever $X=X^*$, the matrix $R+B^*XB$ is positive definite if $X\\succeq0$. Its feedback and closed-loop matrix are\n$$K_d(X)=(R+B^*XB)^{-1}B^*XA,\\qquad A_c(X)=A-BK_d(X).$$\nA CARE solution is **stabilizing** when it is Hermitian and $A_c(X)$ is Hurwitz. A DARE solution is **stabilizing** when it is Hermitian, $R+B^*XB\\succ0$, and $A_c(X)$ is Schur stable. No inverse of $A$ is part of either definition.\n\nFor Hermitian $X$ with $S_X$ invertible, multiplication gives\n$$(I+GX)^{-1}=I-BS_X^{-1}B^*X,\\qquad X(I+GX)^{-1}=X-XB S_X^{-1}B^*X.$$\nIn either product, the additional coefficient of $B$ is\n$R^{-1}-S_X^{-1}-S_X^{-1}(B^*XB)R^{-1}=0$, because\n$S_X=R+B^*XB$. Thus the DARE is equivalently\n$X=Q+A^*X(I+GX)^{-1}A$, and its closed-loop matrix is\n$A_c(X)=(I+GX)^{-1}A$.\n\nThe associated homogeneous symplectic pencil is\n$$N=\\begin{bmatrix}A&0\\\\-Q&I\\end{bmatrix},\\qquad M=\\begin{bmatrix}I&G\\\\0&A^*\\end{bmatrix},\\qquad \\mathcal P(\\alpha,\\beta)=\\beta N-\\alpha M.$$\nThe homogeneous-coordinate convention is that a finite eigenvalue\n$\\lambda$ is $[\\alpha:\\beta]=[\\lambda:1]$ and $[1:0]$ denotes infinity.",
+        "source_path": "items/def-standard-continuous-and-discrete-riccati-equations.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node113.html",
+              "locator": "§6.2.1, monotone and bounded finite-horizon values and CARE limit"
+            },
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, CARE assumptions, Hamiltonian graph, and Newton methods"
+            },
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§§5.1–5.2, DARE graph, symplectic matrix, doubling formula"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§§2.5–2.7, finite invariant subspaces, pencil regularity, infinite eigenvalues"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-powers-of-a-schur-stable-matrix-decay",
+        "kind": "lemma",
+        "title": "Powers of a Schur-stable matrix decay geometrically up to a polynomial factor",
+        "deps": [
+          "def-lqr-stabilizability-and-detectability",
+          "thm-schur-triangularisation",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-every-complex-polynomial-splits-into-linear-factors",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "def-characteristic-polynomial-of-a-matrix",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $M\\in\\mathbb C^{n\\times n}$ be Schur stable and let $r$ satisfy $\\rho(M)<r<1$. For the Euclidean induced operator norm there is a finite $C_r$ such that\n$$\\|M^k\\|_2\\le C_r r^k\\qquad(k\\ge0).$$\nFor a real matrix, interpret the same statement on its complexification.",
+        "source_path": "items/lem-powers-of-a-schur-stable-matrix-decay.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§§5.1–5.2, Schur-stable DARE feedback and doubling convergence"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§§2.5–2.7, stable finite invariant subspaces and DARE pencil spectrum"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-stabilizability-and-detectability-pbh-necessary-conditions",
+        "kind": "lemma",
+        "title": "Stabilizability and detectability imply the closed-region PBH rank tests",
+        "deps": [
+          "def-lqr-stabilizability-and-detectability",
+          "thm-row-rank-equals-column-rank",
+          "thm-rank-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For $F\\in\\{\\mathbb R,\\mathbb C\\}$, $n,m,p\\ge1$, $A\\in F^{n\\times n}$, $B\\in F^{n\\times m}$, and $C\\in F^{p\\times n}$, the following necessary conditions hold.\n\nIf $(A,B)$ is continuously stabilizable, then $\\operatorname{rank}[\\lambda I-A\\;B]=n$ for every $\\lambda\\in\\mathbb C$ with $\\operatorname{Re}\\lambda\\ge0$. If it is discretely stabilizable, the same rank is $n$ for every $|\\lambda|\\ge1$.\n\nIf $(A,C)$ is continuously detectable, then $\\operatorname{rank}\\begin{bmatrix}\\lambda I-A\\\\C\\end{bmatrix}=n$ for every $\\operatorname{Re}\\lambda\\ge0$. If it is discretely detectable, the same rank is $n$ for every $|\\lambda|\\ge1$.\n\nThis proves the necessary half of the PBH tests. The converse pole-placement implication is not asserted here.",
+        "source_path": "items/lem-stabilizability-and-detectability-pbh-necessary-conditions.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node113.html",
+              "locator": "§§6.2.1–6.2.4, stabilizability and detectability assumptions for continuous LQR"
+            },
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, stabilizability/detectability hypotheses and CARE theorem"
+            },
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§§5.1–5.2, discrete stabilizability/detectability and DARE convergence"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§§2.5–2.7, DARE stabilizability/detectability context and pencil spectrum"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-finite-budget-stable-block-reordering-correctness-and-status",
+        "kind": "theorem",
+        "title": "Finite-budget stable block reordering has exact adjacent-swap correctness and status",
+        "deps": [
+          "alg-finite-budget-stable-block-reordering-for-schur-and-qz",
+          "thm-sylvester-unique-solvability-spectral-separation",
+          "thm-root-bound-for-polynomials-over-a-domain",
+          "thm-operator-invertible-iff-determinant-nonzero",
+          "thm-rank-nullity",
+          "thm-gram-schmidt-orthonormalisation",
+          "thm-determinant-multiplicative",
+          "lem-block-upper-triangular-pencil-determinant-factorizes",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "lem-neumann-inverse-norm-bound",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity"
+        ],
+        "strategy": "direct",
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "For an order-$d$ real or complex Schur form, or a regular generalized Schur form, run [[alg-finite-budget-stable-block-reordering-for-schur-and-qz]] with its declared selector, selected dimension $r$, swap budget $K$, primitive/evaluator budget $W$, and positive local threshold $\\eta$. Every execution returns after its finite scans or an explicit budget, boundary, form, separation, arithmetic, or range status. Every committed exact swap uses orthogonal/unitary transformations, preserves the appropriate Schur form over the original field, and exchanges exactly the two adjacent block spectra; for generalized Schur form it exchanges the homogeneous roots with multiplicity, including infinity.\n\nLet $b$ be the initial number of diagonal blocks and $I$ the number of complementary-before-selected block pairs. If the initial selected block sizes sum to $r$, all selector comparisons are strict, every local construction and certificate succeeds, every inverse-norm threshold passes, $K\\ge I$, and $W$ suffices for the entire execution, including validation, label and inversion scans, all $I$ swaps, and the final ordering scan, the procedure returns ordered. The first $r$ columns of the updated ordinary Schur factor then span the selected invariant subspace of the current computed form; the first $r$ columns of the updated right QZ factor span the selected right deflating subspace of the current computed pencil. When an original reduction residual is present, this is the exact subspace of its represented nearby matrix or pencil, not automatically the original data's subspace. Each accepted swap decreases the inversion count by one and $I\\le b(b-1)/2$. Boundary, small-gap, arithmetic, or budget exits do not prove that a stabilizing Riccati solution does not exist.\n\nIf the ordinary input relation is $Q_0^*AQ_0=T_0+R_0$ and the cumulative exact reordering factor is $V$, then $Q_{\\rm new}=Q_0V$, $T_{\\rm new}=V^*T_0V$, and the new residual is $V^*R_0V$, with unchanged Frobenius norm. If the generalized input relations are $Q_0^*AZ_0=S_0+R_A$ and $Q_0^*BZ_0=T_0+R_B$, then for cumulative left and right factors $U,V$ the new residuals are $U^*R_AV$ and $U^*R_BV$, again with unchanged Frobenius norms. Thus exact reordering preserves the original unstructured reduction certificate but creates no structured Hamiltonian or symplectic error theorem.\n\nFor $k$ local swap attempts, the scalar-core work is $O(d^2+kd)$ in the declared exact scalar/evaluator unit model: the initial structure scan costs $O(d^2)$ and each local system has order at most eight while whole-panel updates touch $O(d)$ entries. On success $k=I$, so the worst-case swap core is $O(d^3)$. Exact algebraic bit cost, evaluator implementation cost beyond the declared units, and dense evaluation of product factors are separate. From $L_0$ bounded-support input factors, directly evaluating the first $r$ columns costs $O(L_0dr+Idr)$; a dense residual multiplication, if used, has its own actual $O(d^3)$ cost.",
+        "source_path": "items/thm-finite-budget-stable-block-reordering-correctness-and-status.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "LAPACK auxiliary routine DLAEXC, double-precision real Schur block exchange",
+              "url": "https://www.netlib.org/lapack/double/dlaexc.f",
+              "locator": "Complete source, adjacent Schur-block exchanges and whole-panel transformation. Its rounded thresholds are not asserted here."
+            },
+            {
+              "title": "LAPACK auxiliary routine DTGEX2, double-precision generalized real Schur block exchange",
+              "url": "https://www.netlib.org/lapack/double/dtgex2.f",
+              "locator": "Complete source, coupled generalized Sylvester solve and two-sided block exchange. Its rounded thresholds are not asserted here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-finite-budget-newton-kleinman-policy-iteration",
+        "kind": "algorithm",
+        "title": "Finite-budget exact or safeguarded inexact Newton-Kleinman policy iteration",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "alg-bartels-stewart-sylvester-equation",
+          "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
+          "def-verified-linear-residual-certificate-data",
+          "thm-uniform-linear-residual-solution-enclosure",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "alg-point-verified-linear-system-certifier",
+          "thm-point-verified-linear-system-certifier-soundness",
+          "lem-sylvester-vectorization-isometry-and-kronecker-identity",
+          "thm-continuous-lyapunov-integral-and-positivity",
+          "lem-neumann-inverse-norm-bound",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "justified_by": [
+          "lem-riccati-finite-budget-wrappers-return-a-status"
+        ],
+        "dependency_level": 2,
+        "statement": "Inputs are CARE data with $Q=C^*C\\succeq0$, $R\\succ0$, a supplied stabilizing gain $K_0$, a finite outer budget $N$, and either exact or safeguarded-inexact solve mode. In inexact mode, each pass also takes a Hermitian proposal $\\widetilde P_j$, a stored candidate $\\widehat X_j$ and approximate inverses for the finite Lyapunov systems below, and finite factorization witnesses for each trial. Stored point-solve data are exact dyadics and use the operationwise controller of [[alg-point-verified-linear-system-certifier]]; every scalar enclosure uses a finite outward evaluator with a declared work budget. Write $S(K)=Q+K^*RK$ and $\\mathcal L_A(P)=A^*P+PA$.\n\nFor $j=0,\\ldots,N-1$, put $A_j=A-BK_j$. In exact mode, use [[alg-bartels-stewart-sylvester-equation]] to solve\n$$\\mathcal L_{A_j}(X_j)=-S(K_j).$$\nIf it does not return success, stop with its status. Otherwise set $K_{j+1}=R^{-1}B^*X_j$, append the gain and residual, and continue.\n\nIn safeguarded-inexact mode, $X_j$ denotes the unique exact solution of $\\mathcal L_{A_j}(X_j)=-S(K_j)$; it exists because $K_0$ is stabilizing and every previously accepted trial has a Hurwitz witness. Under column vectorization, use the point matrix $I_n\\otimes A_j^*+A_j^T\\otimes I_n$ for $\\mathcal L_{A_j}$, as in [[lem-sylvester-vectorization-isometry-and-kronecker-identity]]. First call [[alg-point-verified-linear-system-certifier]] with this matrix, right-hand side $-\\operatorname{vec}(S(K_j))$, the supplied inverse proposal and $\\widehat X_j$ as the solution proposal. A `range-failure` returns that status; an `inconclusive` result returns `safeguard-inconclusive`. Let its solution ball have center $\\widehat X_j$ and radius $s_j$, replacing the center by its Hermitian part if needed. Set $D_j=\\widetilde P_j-\\widehat X_j$ and compute the outward Gershgorin upper bound\n$$\\eta_j=s_j+\\max_i\\left((D_j)_{ii}+\\sum_{k\\ne i}|(D_j)_{ik}|\\right).$$\nFor Hermitian $D_j$, the maximum row bound above is at least $\\lambda_{\\max}(D_j)$, by applying the eigenvector equation at a coordinate of maximal modulus. Define $\\widetilde K_j=R^{-1}B^*\\widetilde P_j$ and inspect the finite line-search list $\\theta_\\ell=2^{-\\ell}$, $0\\le\\ell\\le L$. For each trial $K_\\ell=K_j+\\theta_\\ell(\\widetilde K_j-K_j)$, let $A_\\ell=A-BK_\\ell$ and use its supplied exact factor witnesses $W_\\ell=L_\\ell^*L_\\ell$ with nonsingular $L_\\ell$, and $Z_\\ell$ satisfying\n$$A_\\ell^*W_\\ell+W_\\ell A_\\ell\\preceq-\\mu_\\ell I,$$\nwhere $\\mu_\\ell>0$ and $-A_\\ell^*W_\\ell-W_\\ell A_\\ell-\\mu_\\ell I=Z_\\ell^*Z_\\ell$. Verify these exact factor identities; otherwise reject the trial and continue. Vectorize $\\mathcal L_{A_\\ell}$ using the same coefficient matrix as for $A_j$. Outward-evaluate $I-R_\\ell\\mathcal L_{A_\\ell}$ and let $q_\\ell$ be a Frobenius upper bound. If no finite enclosure is available or $q_\\ell\\ge1$, reject the trial and continue. Set $\\kappa_\\ell=\\|R_\\ell\\|_F/(1-q_\\ell)$; the Neumann estimate and $\\|T\\|_2\\le\\|T\\|_F$ give $\\kappa_\\ell\\ge\\|\\mathcal L_{A_\\ell}^{-1}\\|_{F\\to F}$. Separately outward-evaluate the raw residual and set $r_\\ell$ to an upper bound for\n$$\\mathcal L_{A_\\ell}(\\widetilde P_j)+Q+K_\\ell^*RK_\\ell,$$\nwith Frobenius norm. Accept the first trial satisfying $\\eta_j+\\kappa_\\ell r_\\ell\\le0$; then set $K_{j+1}=K_\\ell$, append the accepted gain and its certificates, and proceed to pass $j+1$. If no trial passes, return `safeguard-inconclusive` without changing $K_j$. Any unavailable outward bound is inconclusive. All certificate witnesses and bounds use the finite outward evaluator and residual-certificate convention of [[def-verified-linear-residual-certificate-data]]; a non-finite operation returns its range status. After at most $N$ accepted updates return the gain sequence, solve residuals, cost-matrix data and terminal status. An arbitrary approximate Lyapunov solve is never accepted without the separate stability and descent checks above.",
+        "source_path": "items/alg-finite-budget-newton-kleinman-policy-iteration.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 28–29, Newton-Kleinman iteration"
+            },
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node116.html",
+              "locator": "§6.2.2–6.2.4, value and stability identities"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-finite-budget-structure-preserving-doubling-for-dare",
+        "kind": "algorithm",
+        "title": "Finite-budget structure-preserving doubling iteration for the DARE",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "alg-point-verified-linear-system-certifier",
+          "thm-point-verified-linear-system-certifier-soundness"
+        ],
+        "justified_by": [
+          "lem-riccati-finite-budget-wrappers-return-a-status",
+          "lem-sda-doubling-composition-and-psd-invariants"
+        ],
+        "dependency_level": 2,
+        "statement": "Input $F\\in\\{\\mathbb R,\\mathbb C\\}$, dimensions $n,m,p\\ge1$, standard DARE data $A\\in F^{n\\times n}$, $B\\in F^{n\\times m}$, $C\\in F^{p\\times n}$, and $R\\in F^{m\\times m}$ with $R=R^*\\succ0$, a finite iteration budget $N$, and the operationwise arithmetic/range controller. In finite mode also supply stored dyadic inverse and solution proposals for every recurrence and residual solve. Set $G_0=BR^{-1}B^*$, $H_0=Q=C^*C$, and $A_0=A$. The coefficients $G_0,H_0$ are therefore the standard DARE coefficients of [[def-standard-continuous-and-discrete-riccati-equations]].\n\nIn exact mode, for each $j=0,\\ldots,N-1$, form $M_j=I+G_jH_j$ and solve $M_jW_j=I$ by Gaussian elimination with complete pivoting: at stage $k$, scan the remaining submatrix, choose a nonzero entry of largest exact modulus with lexicographic tie-breaking, swap its row and column into pivot position, eliminate below it, and back-substitute for all columns of $I$, undoing the accumulated column permutation in the solution. If the remaining submatrix is exactly zero before all pivots, return `inverse-inconclusive`. This is a finite exact-arithmetic procedure; no bit-complexity bound is asserted.\n\nIn finite arithmetic, form the stored dyadic matrix $\\widehat M_j=\\operatorname{fl}(I+G_jH_j)$. For each standard basis vector $e_k$, call [[alg-point-verified-linear-system-certifier]] with $(\\widehat M_j,e_k,R_j,\\widehat w_{j,k})$, using the supplied stored dyadic inverse and solution proposals. Assemble the returned solution centers as $\\widehat W_j$. If any call returns `range-failure`, return `range-failure`; if any call is `inconclusive`, return `inverse-inconclusive`; otherwise apply the recurrence updates below using $\\widehat W_j$ and the declared operationwise arithmetic. The point certifier's solution balls are diagnostics for the stored solve and do not make the rounded recurrence an exact PSD-preserving recurrence.\n\nIn exact mode let $W_j$ be the exact solve result; in finite mode let $W_j=\\widehat W_j$. The recurrence formulas are\n$$\nA_{j+1}=A_jW_jA_j,\\qquad G_{j+1}=G_j+A_jW_jG_jA_j^*,\\qquad H_{j+1}=H_j+A_j^*H_jW_jA_j.\n$$\nThese formulas use no inverse of $A_j$. Any range failure while forming a stored matrix or applying an update returns `range-failure` with the current raw matrices.\n\nAt initialization and after each update, preserve the raw matrices and report $\\|G_j-G_j^*\\|_F$ and $\\|H_j-H_j^*\\|_F$. To report the standard DARE residual, form the exact dyadic matrix $S_j=R+B^*H_jB$ from the stored input entries and independently solve $S_jV_j=I$, using the same exact elimination or point-certified finite solve rule with its separate proposal packet. If that solve is unavailable or inconclusive, mark the residual unavailable without changing the recurrence status; otherwise outward-evaluate the residual from [[def-standard-continuous-and-discrete-riccati-equations]] over the certified solution balls. Symmetrization may be used only to form a candidate and must be followed by fresh residual and positivity checks. On every exit return the current raw matrices, status, completed updates, symmetry defects, and available residual and solve certificates. No exact positive-semidefinite or structure-preserving backward-error claim is made from a rounded recurrence alone.",
+        "source_path": "items/alg-finite-budget-structure-preserving-doubling-for-dare.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§5.2, DARE structure-preserving doubling formulas and subspace iteration"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§2, finite and infinite generalized eigenvalues"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pbh-stabilizability-and-detectability-equivalence",
+        "kind": "theorem",
+        "title": "Closed-region PBH rank tests characterize continuous and discrete stabilizability and detectability",
+        "deps": [
+          "def-lqr-stabilizability-and-detectability",
+          "lem-stabilizability-and-detectability-pbh-necessary-conditions",
+          "lem-reachable-decomposition-and-state-feedback-pole-placement",
+          "lem-characteristic-polynomial-of-block-triangular-matrix",
+          "thm-row-rank-equals-column-rank"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "justified_by": [],
+        "statement": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$ and let $A\\in F^{n\\times n}$, $B\\in F^{n\\times m}$ and $C\\in F^{p\\times n}$ have the domains in [[def-lqr-stabilizability-and-detectability]]. All rank tests below are over $\\mathbb C$, including for real matrices.\n\n- $(A,B)$ is continuously stabilizable if and only if $\\operatorname{rank}_{\\mathbb C}[\\lambda I-A\\ \\ B]=n$ for every $\\lambda$ with $\\operatorname{Re}\\lambda\\ge0$.\n- $(A,B)$ is discretely stabilizable if and only if that horizontal rank is $n$ for every $\\lambda$ with $|\\lambda|\\ge1$.\n- $(A,C)$ is continuously detectable if and only if $\\operatorname{rank}_{\\mathbb C}\\begin{bmatrix}\\lambda I-A\\\\C\\end{bmatrix}=n$ for every $\\lambda$ with $\\operatorname{Re}\\lambda\\ge0$.\n- $(A,C)$ is discretely detectable if and only if that vertical rank is $n$ for every $\\lambda$ with $|\\lambda|\\ge1$.\n\nWhenever the converse direction constructs a feedback or injection, its entries lie in the original field $F$. The boundary $\\operatorname{Re}\\lambda=0$ or $|\\lambda|=1$ is included in each forbidden region. These are exact finite-dimensional tests; a small equation residual or approximate eigenvalue does not imply them.",
+        "source_path": "items/thm-pbh-stabilizability-and-detectability-equivalence.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl J. Åström and Richard M. Murray, Feedback Systems: An Introduction for Scientists and Engineers",
+              "url": "https://faculty.sites.iastate.edu/tesfatsi/archive/tesfatsi/FeedbackSystems.AstromMurray.pdf",
+              "locator": "Version 2.11b complete book; §6.1, pp.167–174, reachability; §6.2, pp.175–181, SISO state-feedback pole placement; §7.2, pp.207–208, observer duality. The local proof establishes the multi-input equivalences."
+            },
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§2.3 controllability and §5.1 DARE stabilizability/detectability context. The local proof establishes the closed-region PBH equivalences."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-care-stabilizing-psd-solution-and-value",
+        "kind": "theorem",
+        "title": "Stabilizability and detectability give the unique stabilizing positive-semidefinite CARE solution",
+        "deps": [
+          "def-lqr-stabilizability-and-detectability",
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "lem-hurwitz-matrix-exponential-decay-bound",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $A\\in F^{n\\times n}$, $B\\in F^{n\\times m}$, $C\\in F^{p\\times n}$, $R=R^*\\succ0$, $Q=C^*C$, and $G=BR^{-1}B^*$. Assume $(A,B)$ is continuously stabilizable and $(A,C)$ is continuously detectable, using [[def-lqr-stabilizability-and-detectability]]. Then the CARE of [[def-standard-continuous-and-discrete-riccati-equations]] has exactly one Hermitian positive-semidefinite solution $X$. Its closed-loop matrix $A_c=A-GX$ is Hurwitz, and for every initial state $x_0$ the infinite-horizon value\n$$\\inf_u\\int_0^\\infty\\bigl(x(t)^*Qx(t)+u(t)^*Ru(t)\\bigr)\\,dt=x_0^*Xx_0$$\nis attained by $u(t)=-R^{-1}B^*Xx(t)$. Controls are locally square-integrable and states are locally absolutely continuous solutions of $\\dot x=Ax+Bu$. A finite value also forces the terminal term $x(T)^*Xx(T)$ to tend to zero; this transversality is proved below.",
+        "source_path": "items/thm-care-stabilizing-psd-solution-and-value.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node113.html",
+              "locator": "§§6.2.1–6.2.4, finite-horizon limit and infinite-horizon LQR"
+            },
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, CARE theorem, Hamiltonian graph, and Newton methods"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-dare-stabilizing-psd-solution-and-value",
+        "kind": "theorem",
+        "title": "Stabilizability and detectability give the unique stabilizing positive-semidefinite DARE solution",
+        "deps": [
+          "def-lqr-stabilizability-and-detectability",
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "lem-powers-of-a-schur-stable-matrix-decay",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-rank-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $A\\in F^{n\\times n}$, $B\\in F^{n\\times m}$, $C\\in F^{p\\times n}$, $R=R^*\\succ0$, and $Q=C^*C$. Assume $(A,B)$ is discretely stabilizable and $(A,C)$ discretely detectable, using [[def-lqr-stabilizability-and-detectability]]. Then the DARE of [[def-standard-continuous-and-discrete-riccati-equations]] has exactly one Hermitian positive-semidefinite solution $X$. For the equivalent Riccati map $f(P)=Q+A^*P(I+GP)^{-1}A$, its finite-horizon iterates $P_0=0$, $P_{k+1}=f(P_k)$ satisfy $0\\preceq P_k\\uparrow X$. For all Hermitian positive-semidefinite $Y,Z$,\n$$f(Y)-f(Z)=A_c(Y)^*(Y-Z)A_c(Z),\\qquad A_c(Y)=(I+GY)^{-1}A.$$\nThe solution satisfies $R+B^*XB\\succ0$, and its closed loop $A_c=A-B(R+B^*XB)^{-1}B^*XA$ is Schur stable. For each $x_0$, the infinite-horizon discrete cost\n$$\\inf_{(u_k)}\\sum_{k=0}^\\infty(x_k^*Qx_k+u_k^*Ru_k),\\qquad x_{k+1}=Ax_k+Bu_k,$$\nover sequences with finite cost equals $x_0^*Xx_0$ and is attained by $u_k=-K_dx_k$. Singular $A$ is allowed throughout; no inverse of $A$ is used.",
+        "source_path": "items/thm-dare-stabilizing-psd-solution-and-value.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§§5.1–5.2, DARE graph, symplectic matrix, and doubling"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§§2.5–2.7, finite invariant subspaces, pencil regularity, and infinite eigenvalues"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sda-doubling-composition-and-psd-invariants",
+        "kind": "lemma",
+        "title": "The DARE doubling recurrence composes two Riccati steps and preserves positive semidefiniteness",
+        "deps": [
+          "alg-finite-budget-structure-preserving-doubling-for-dare",
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For Hermitian $G,H\\succeq0$, define $\\Phi_G(X)=X(I+GX)^{-1}$ and $f(X)=H+A^*\\Phi_G(X)A$ on $X\\succeq0$. One step of the exact inverse recurrence in [[alg-finite-budget-structure-preserving-doubling-for-dare]] is well-defined, preserves $G_j,H_j\\succeq0$, and its updated triple satisfies\n$$f\\circ f(X)=H_1+A_1^*X(I+G_1X)^{-1}A_1,$$\nwhere\n$$A_1=A(I+GH)^{-1}A,\\quad G_1=G+A(I+GH)^{-1}GA^*,\\quad H_1=H+A^*H(I+GH)^{-1}A.$$\nConsequently, starting from $(A,G,H)$, the exact recurrence satisfies $H_j=f^{2^j}(0)$ after $j$ updates. These claims concern exact arithmetic; the rounded branch has only its separately reported diagnostics.",
+        "source_path": "items/lem-sda-doubling-composition-and-psd-invariants.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§5.2, DARE structure-preserving doubling formulas and subspace iteration"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§2, finite and infinite generalized eigenvalues"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-care-hamiltonian-stable-graph",
+        "kind": "proposition",
+        "title": "The stabilizing CARE solution is the Hamiltonian stable invariant graph",
+        "deps": [
+          "thm-care-stabilizing-psd-solution-and-value",
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "lem-characteristic-polynomial-of-block-triangular-matrix",
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "cor-every-complex-polynomial-splits-into-linear-factors",
+          "cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $X\\succeq0$ be the stabilizing CARE solution from [[thm-care-stabilizing-psd-solution-and-value]], let $G=BR^{-1}B^*$, and define\n$$H=\\begin{bmatrix}A&-G\\\\-Q&-A^*\\end{bmatrix},\\qquad A_c=A-GX.$$\nThen\n$$H\\begin{bmatrix}I\\\\X\\end{bmatrix}=\\begin{bmatrix}I\\\\X\\end{bmatrix}A_c.$$\nMoreover, $H$ has exactly $n$ eigenvalues in the open left half-plane and $n$ in the open right half-plane, none on the imaginary axis, and $\\operatorname{Ran}\\begin{bmatrix}I\\\\X\\end{bmatrix}$ is its stable invariant subspace.",
+        "source_path": "items/prop-care-hamiltonian-stable-graph.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, Hamiltonian invariant graph and stable solution"
+            },
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node116.html",
+              "locator": "§6.2.4, CARE uniqueness and infinite-horizon LQR"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-dare-symplectic-pencil-graph-and-stable-spectrum",
+        "kind": "proposition",
+        "title": "The stabilizing DARE solution is the stable deflating graph of a regular symplectic pencil",
+        "deps": [
+          "thm-dare-stabilizing-psd-solution-and-value",
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "def-regular-generalized-eigenvalue-pencil",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "lem-block-upper-triangular-pencil-determinant-factorizes",
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "cor-every-complex-polynomial-splits-into-linear-factors",
+          "cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $X\\succeq0$ be the stabilizing DARE solution, $G=BR^{-1}B^*$, and\n$$N=\\begin{bmatrix}A&0\\\\-Q&I\\end{bmatrix},\\qquad M=\\begin{bmatrix}I&G\\\\0&A^*\\end{bmatrix},\\qquad A_c=A-B(R+B^*XB)^{-1}B^*XA.$$\nThen\n$$N\\begin{bmatrix}I\\\\X\\end{bmatrix}=M\\begin{bmatrix}I\\\\X\\end{bmatrix}A_c.$$\nThe pencil $(N,M)$ is regular. Its homogeneous determinant has n roots strictly inside the unit disk and n roots strictly outside the closed unit disk, with infinite roots counted in the latter group. Thus it has no unit-circle roots, even if $A$ is singular, and $\\operatorname{Ran}\\begin{bmatrix}I\\\\X\\end{bmatrix}$ is its stable deflating graph.",
+        "source_path": "items/prop-dare-symplectic-pencil-graph-and-stable-spectrum.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§§5.1–5.2, DARE graph and symplectic matrix"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§§2.5–2.7, invariant-subspace/pencil identity and infinite eigenvalues"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-inexact-newton-kleinman-safeguard",
+        "kind": "proposition",
+        "title": "Verified Lyapunov residual, descent, and stability checks make an inexact Newton-Kleinman step safe",
+        "deps": [
+          "alg-finite-budget-newton-kleinman-policy-iteration",
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "thm-continuous-lyapunov-integral-and-positivity",
+          "thm-sylvester-unique-solvability-spectral-separation",
+          "def-verified-linear-residual-certificate-data",
+          "thm-uniform-linear-residual-solution-enclosure",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Consider a trial gain $K_t$ in the safeguarded-inexact branch of [[alg-finite-budget-newton-kleinman-policy-iteration]], with $A_t=A-BK_t$. Suppose outward certificates give $W\\succ0$, $\\mu>0$, $A_t^*W+WA_t\\preceq-\\mu I$, an inverse bound $\\kappa\\ge\\|\\mathcal L_{A_t}^{-1}\\|_{F\\to F}$, a residual bound $r$ for a Hermitian approximation $\\widetilde P$ to\n$$A_t^*P+PA_t+Q+K_t^*RK_t=0,$$\nand an upper bound $\\eta\\ge\\lambda_{\\max}(\\widetilde P-X_j)$ with $\\eta+\\kappa r\\le0$. Then $A_t$ is Hurwitz, its exact cost matrix $P_t$ exists and is positive semidefinite, and $P_t\\preceq X_j$. Thus every accepted line-search step preserves stability and does not increase the exact closed-loop cost matrix.",
+        "source_path": "items/prop-inexact-newton-kleinman-safeguard.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 28–29, Newton-Kleinman iteration"
+            },
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node116.html",
+              "locator": "§6.2.2–6.2.4, value and stability identities"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-care-local-residual-ball-certificate",
+        "kind": "theorem",
+        "title": "A CARE residual and Lyapunov margin certify a unique stabilizing root in a matrix ball",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "thm-care-stabilizing-psd-solution-and-value",
+          "def-frobenius-matrix-norm",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "thm-sylvester-unique-solvability-spectral-separation",
+          "thm-continuous-lyapunov-integral-and-positivity",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "def-verified-linear-residual-certificate-data",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $\\widehat X=\\widehat X^*$ be a CARE candidate, $\\widehat A_c=A-G\\widehat X$, and\n$$\\mathcal L(E)=\\widehat A_c^*E+E\\widehat A_c,\\qquad F_c(X)=A^*X+XA-XGX+Q.$$\nAssume $\\widehat A_c$ is certified Hurwitz, $\\mathcal L$ is invertible on Hermitian matrices, and outward-verified bounds satisfy\n$$\\kappa\\ge\\|\\mathcal L^{-1}\\|_{F\\to F},\\quad r\\ge\\|F_c(\\widehat X)\\|_F,\\quad g\\ge\\|G\\|_2,$$\nwith $\\rho>0$ such that\n$$\\kappa(r+g\\rho^2)\\le\\rho,\\qquad 2\\kappa g\\rho<1.$$\nThen there is exactly one Hermitian CARE root in the closed Frobenius ball $\\|X-\\widehat X\\|_F\\le\\rho$.\n\nIf also a verified Hermitian $W\\succ0$ and $\\gamma>0$ satisfy\n$$-(\\widehat A_c^*W+W\\widehat A_c)\\succeq\\gamma I,\\qquad 2\\|W\\|_2g\\rho<\\gamma,$$\nthen that root is Hurwitz-stabilizing. Under the standard CARE hypotheses of [[thm-care-stabilizing-psd-solution-and-value]], it is the unique stabilizing positive-semidefinite solution.",
+        "source_path": "items/thm-care-local-residual-ball-certificate.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node114.html",
+              "locator": "§6.2.2, square-completion value characterization"
+            },
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, CARE theorem and Newton methods"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-dare-local-residual-ball-certificate",
+        "kind": "theorem",
+        "title": "A DARE residual, Stein inverse bound, and Lyapunov margin certify a stabilizing root",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "thm-dare-stabilizing-psd-solution-and-value",
+          "lem-powers-of-a-schur-stable-matrix-decay",
+          "def-frobenius-matrix-norm",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "def-verified-linear-residual-certificate-data",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $\\widehat X=\\widehat X^*$ be a DARE candidate, $S(X)=R+B^*XB$, $K(X)=S(X)^{-1}B^*XA$, $A_c(X)=A-BK(X)$, and let\n$$F_d(X)=Q+A^*XA-A^*XB S(X)^{-1}B^*XA-X.$$\nSuppose $S(\\widehat X)\\succeq\\delta_0I$ is outward-certified. For a proposed radius $\\rho>0$ put\n$$a=\\|A\\|_2,\\quad b=\\|B\\|_2,\\quad m=\\|\\widehat X\\|_F+\\rho,\\quad \\delta=\\delta_0-b^2\\rho.$$\nRequire $\\delta>0$ and define\n$$L_K=\\frac{ab}{\\delta}+\\frac{ab^3m}{\\delta^2},\\quad M_c=a+\\frac{ab^2m}{\\delta},\\quad L_c=bL_K,\\quad L_D=2M_cL_c.$$\nLet $D(E)=A_c(\\widehat X)^*EA_c(\\widehat X)-E$ be invertible on Hermitian matrices, with outward-certified $\\kappa\\ge\\|D^{-1}\\|_{F\\to F}$ and $r\\ge\\|F_d(\\widehat X)\\|_F$. If\n$$\\kappa(r+L_D\\rho^2/2)\\le\\rho,\\qquad \\kappa L_D\\rho<1,$$\nthere is exactly one Hermitian DARE root in the closed Frobenius $\\rho$-ball, and $R+B^*XB\\succeq\\delta I$ throughout that ball.\n\nFor the stabilizing branch, additionally suppose $\\widehat A_c=A_c(\\widehat X)$ is Schur stable and an outward-certified $W\\succ0$ satisfies\n$$W-\\widehat A_c^*W\\widehat A_c\\succeq\\gamma I.$$\nIf, with $\\eta=L_c\\rho$,\n$$\\|W\\|_2(2M_c\\eta+\\eta^2)<\\gamma,$$\nthen the root is Schur-stabilizing. Under the standard DARE hypotheses of [[thm-dare-stabilizing-psd-solution-and-value]], it is the unique stabilizing positive-semidefinite solution.",
+        "source_path": "items/thm-dare-local-residual-ball-certificate.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§§5.1–5.2, DARE and doubling"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§§2.5–2.7, DARE pencil and infinite eigenvalues"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-newton-kleinman-exact-global-and-local-quadratic-convergence",
+        "kind": "theorem",
+        "title": "Exact Newton-Kleinman iteration preserves stability, decreases cost matrices, and converges quadratically locally",
+        "deps": [
+          "alg-finite-budget-newton-kleinman-policy-iteration",
+          "thm-care-stabilizing-psd-solution-and-value",
+          "thm-continuous-lyapunov-integral-and-positivity",
+          "lem-hurwitz-matrix-exponential-decay-bound",
+          "def-standard-continuous-and-discrete-riccati-equations"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Assume the continuous stabilizability and detectability hypotheses of [[thm-care-stabilizing-psd-solution-and-value]]. From a supplied stabilizing $K_0$, define the infinite exact recurrence, for every $j\\ge0$, by\n$A_j=A-BK_j,\\qquad A_j^*X_j+X_jA_j=-(Q+K_j^*RK_j),\\qquad K_{j+1}=R^{-1}B^*X_j.$\nThese exact Lyapunov solutions exist uniquely. Every closed loop $A_j=A-BK_j$ is Hurwitz, every exact Lyapunov matrix $X_j$ is positive semidefinite, and $X_{j+1}\\preceq X_j$. The sequence converges to the unique stabilizing CARE solution $X_*$. Once $j$ is sufficiently large, there is a finite constant $C$ such that\n$$\\|X_{j+1}-X_*\\|_F\\le C\\|X_j-X_*\\|_F^2.$$\nEvery successful exact update of [[alg-finite-budget-newton-kleinman-policy-iteration]] agrees with this recurrence, so a finite call returns only a prefix, possibly shortened by a solver failure. Convergence and the eventual quadratic estimate concern the infinite recurrence; no such guarantee is asserted for arbitrary inexact solves.",
+        "source_path": "items/thm-newton-kleinman-exact-global-and-local-quadratic-convergence.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 28–29, Newton-Kleinman iteration"
+            },
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node116.html",
+              "locator": "§6.2.2–6.2.4, value and stability identities"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-finite-budget-schur-qz-riccati-candidate-extraction",
+        "kind": "algorithm",
+        "title": "Finite-budget CARE and DARE candidate extraction from ordered Schur and QZ forms",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "alg-finite-budget-francis-schur-reduction",
+          "thm-finite-budget-francis-schur-termination-and-status",
+          "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+          "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+          "thm-computed-qz-pair-has-certified-backward-error",
+          "alg-finite-budget-stable-block-reordering-for-schur-and-qz",
+          "thm-finite-budget-stable-block-reordering-correctness-and-status",
+          "thm-uniform-linear-residual-solution-enclosure",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "lem-neumann-inverse-norm-bound",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-care-local-residual-ball-certificate",
+          "thm-dare-local-residual-ball-certificate"
+        ],
+        "justified_by": [
+          "lem-riccati-finite-budget-wrappers-return-a-status"
+        ],
+        "dependency_level": 4,
+        "statement": "Inputs are finite CARE or DARE data from [[def-standard-continuous-and-discrete-riccati-equations]], finite Schur or QZ sweep budgets, an adjacent-swap budget $K$, a scalar/evaluator work budget $W$, a positive local separation threshold $\\eta$, and the exact arithmetic controller or bounded outward evaluator for [[alg-finite-budget-stable-block-reordering-for-schur-and-qz]]. The budget $W$ also charges every graph-product enclosure and local acceptance comparison. The graph stage also takes finite dyadic proposals $R_g,\\widehat Y$ for a point inverse and solution matrix, together with outward enclosures of the exact product-factor entries and the certificate data required by the applicable local residual-ball theorem. If a proposal, enclosure, or certificate is unavailable, the corresponding graph or acceptance result is inconclusive. For CARE form $H=\\begin{bmatrix}A&-G\\\\-Q&-A^*\\end{bmatrix}$; for DARE form $N=\\begin{bmatrix}A&0\\\\-Q&I\\end{bmatrix}$ and $M=\\begin{bmatrix}I&G\\\\0&A^*\\end{bmatrix}$. The procedure never forms $A^{-1}$ and does not require a separately supplied ordered basis.\n\nEach local residual-ball packet contains its proposed radius, residual and inverse-norm bounds, norm bounds, and the required Lyapunov or Stein witness matrices with exact factorization witnesses for positive-definite and positive-semidefinite inequalities. Check all supplied matrix equalities exactly and all scalar bounds with the finite outward evaluator. A missing witness or unresolved comparison returns inconclusive; failure of a sufficient residual-ball test alone does not reject a candidate.\n\n1. For CARE, run [[alg-finite-budget-francis-schur-reduction]] on $H$. For DARE, run [[alg-finite-budget-qz-iteration-with-deflation-and-residual]] on $(N,M)$. Propagate any budget, range, invariant-pattern, or pencil-regularity failure as an explicit inconclusive status. The returned residuals and factor backward-error certificates are those specified by the corresponding supplier items; they are not interpreted as structure-preserving perturbations.\n2. On a successful reduction, invoke [[alg-finite-budget-stable-block-reordering-for-schur-and-qz]] with the CARE strict-left-half-plane selector or DARE strict-unit-disk selector and required selected dimension $n$. Propagate every non-ordered result as its explicit status, including boundary-spectrum, separation-inconclusive, swap-separation-inconclusive, arithmetic-inconclusive, range-failure, swap-budget-exhausted, and work-budget-exhausted. The returned exact product factors, together with [[thm-finite-budget-stable-block-reordering-correctness-and-status]], certify ordering of the represented computed form and transport the original unstructured reduction residual. For CARE take the first $n$ columns of the updated Schur factor; for DARE take the first $n$ columns of the updated **right** QZ factor, never the left factor. If the relevant exact factor or residual certificate is unavailable, keep the corresponding diagnostic inconclusive.\n3. Write the ordered exact product basis as $U=\\begin{bmatrix}U_1\\\\U_2\\end{bmatrix}$ and view the supplied $n\\times n$ matrix $\\widehat Y$ by columns $\\widehat y_j$. Enclose the entries of $A_g=U_1^*$ and $B_g=U_2^*$ by finite outward rectangles. Using the supplied dyadic proposals, outward-evaluate $I-R_gA_g$ once and let $q$ be an upper bound for its Frobenius norm; the same enclosure applies to every matrix in the product of entry rectangles. If $q\\ge1$ or the enclosure is unavailable, return graph-block-inconclusive. For each column $b_j$ of $B_g$, outward-evaluate the full uniform residual enclosure $R_g(b_j-A_g\\widehat y_j)$ over the rectangles and choose a common finite upper bound $r$ for its Euclidean norm. If any enclosure fails, return graph-block-inconclusive. Apply [[thm-uniform-linear-residual-solution-enclosure]] to each column: the exact system $A_gY=B_g$ has a unique solution and each column is within $r/(1-q)$ of the corresponding column of $\\widehat Y$. Moreover $A_g$ and hence $U_1$ are invertible, and $\\|U_1^{-1}\\|_2\\le\\|R_g\\|_F/(1-q)$ by the Neumann bound and submultiplicativity. Return this bound as the graph-block certificate; no explicit inverse is formed.\n4. Set $X_0=\\widehat Y^*$ and $\\widehat X=(X_0+X_0^*)/2$. Compute outward enclosures for the CARE or DARE residual, the Hermitian symmetry defect, and, for DARE, $R+B^*\\widehat X B$. Validate the supplied certificate packet against the hypotheses of [[thm-care-local-residual-ball-certificate]] or [[thm-dare-local-residual-ball-certificate]], respectively. If the theorem certifies a unique stabilizing root in the stated ball, return the candidate, residual data, graph-block bound, stability witness and certified root ball. A direct exact witness that the candidate fails a required positivity or stability condition returns candidate-rejected; failure of a sufficient theorem test or unavailable data returns inconclusive. No residual by itself certifies the stabilizing branch or a nearby positive $Q,R$.\n\nThis is the finite candidate-extraction stage for the ordered Schur/QZ solvers. Its ordering prerequisite is the finite adjacent-block routine and correctness theorem cited above; a successful order applies to the represented computed form, with the separately stated diagnostics still required for Riccati acceptance.",
+        "source_path": "items/alg-finite-budget-schur-qz-riccati-candidate-extraction.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, Schur-vector method and Riccati numerical methods"
+            },
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§5.1, invariant-subspace solution recovery"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-graph-basis-yields-care-or-dare-solution",
+        "kind": "proposition",
+        "title": "An invertible graph block converts an exact stable Schur or QZ basis into a Riccati solution",
+        "deps": [
+          "prop-care-hamiltonian-stable-graph",
+          "prop-dare-symplectic-pencil-graph-and-stable-spectrum",
+          "def-standard-continuous-and-discrete-riccati-equations"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For the CARE case, suppose the exact Hamiltonian stable invariant subspace has a basis $U=\\begin{bmatrix}U_1\\\\U_2\\end{bmatrix}$ with $U_1$ invertible, and set $X=U_2U_1^{-1}$. If $X=X^*$, then $X$ solves the CARE and the restriction matrix on the graph is $A-GX$.\n\nFor the DARE case, suppose an exact stable deflating basis for the pencil $(N,M)$ is $U=\\begin{bmatrix}U_1\\\\U_2\\end{bmatrix}$ with $U_1$ invertible, and set $X=U_2U_1^{-1}$. If $X=X^*$ and $R+B^*XB\\succ0$, then $X$ solves the DARE and the restriction matrix is $A_c=(I+GX)^{-1}A=A-B(R+B^*XB)^{-1}B^*XA$.",
+        "source_path": "items/prop-graph-basis-yields-care-or-dare-solution.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§§5.1–5.2, DARE graph and symplectic matrix"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§§2.5–2.7, invariant-subspace/pencil identity and infinite eigenvalues"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sda-convergence-and-eventual-quadratic-envelope",
+        "kind": "theorem",
+        "title": "DARE structure-preserving doubling converges with a quantified quadratic error envelope",
+        "deps": [
+          "alg-finite-budget-structure-preserving-doubling-for-dare",
+          "lem-sda-doubling-composition-and-psd-invariants",
+          "thm-dare-stabilizing-psd-solution-and-value",
+          "lem-powers-of-a-schur-stable-matrix-decay",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Under the discrete stabilizability and detectability hypotheses of [[thm-dare-stabilizing-psd-solution-and-value]], start the exact recurrence of [[alg-finite-budget-structure-preserving-doubling-for-dare]] from $A_0=A$, $G_0=BR^{-1}B^*$, and $H_0=Q$. Then all inverses exist, $G_j,H_j\\succeq0$, and $H_j$ converges to the stabilizing DARE solution $X_*$. More quantitatively, there are $q\\in(0,1)$, an index $j_0$, and $C>0$ such that\n$$\\|H_j-X_*\\|_{F,W^{-1}}\\le Cq^{2^{j+1}}\\qquad(j\\ge j_0),$$\nwhere $W\\succ0$ is a Stein witness constructed from the closed-loop matrix. The envelope $\\epsilon_j=Cq^{2^{j+1}}$ obeys $\\epsilon_{j+1}=\\epsilon_j^2/C$. The constants are conditional on the closed-loop spectral separation and its norm conditioning; no uniform constant depending only on dimension is asserted.",
+        "source_path": "items/thm-sda-convergence-and-eventual-quadratic-envelope.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§5.2, DARE structure-preserving doubling formulas and subspace iteration"
+            },
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§2, finite and infinite generalized eigenvalues"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-dare-stable-deflating-subspace-perturbation-bound",
+        "kind": "proposition",
+        "title": "Separated DARE pencils have quantitatively stable deflating graphs",
+        "deps": [
+          "prop-dare-symplectic-pencil-graph-and-stable-spectrum",
+          "def-generalized-schur-form",
+          "def-regular-generalized-eigenvalue-pencil",
+          "thm-singular-value-decomposition",
+          "def-frobenius-matrix-norm",
+          "cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "lem-powers-of-a-schur-stable-matrix-decay",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "lem-block-upper-triangular-pencil-determinant-factorizes",
+          "lem-neumann-inverse-norm-bound",
+          "thm-determinant-multiplicative",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "strategy": "direct",
+        "dependency_level": 4,
+        "justified_by": [],
+        "statement": "Let $(N,M)$ be the order-$2n$ DARE pencil in [[prop-dare-symplectic-pencil-graph-and-stable-spectrum]], with $n\\ge1$. Work over $\\mathbb C$, also for real input. Suppose exact unitary matrices $Q,V$ give an ordered complex generalized Schur pair\n$$Q^*NV=S=\\begin{bmatrix}S_{11}&S_{12}\\\\0&S_{22}\\end{bmatrix},\\qquad Q^*MV=T=\\begin{bmatrix}T_{11}&T_{12}\\\\0&T_{22}\\end{bmatrix},$$\nwhere each diagonal block has order $n$, all four diagonal blocks are upper triangular, the leading homogeneous roots are strictly inside the unit disk, and the trailing roots are strictly outside its closure, including infinity. This ordered representation is an explicit input; existence of an unordered generalized Schur form is not an ordering certificate.\n\nGive pairs of $n\\times n$ matrices the product Frobenius norm\n$$\\|(Y,Z)\\|_P=(\\|Y\\|_F^2+\\|Z\\|_F^2)^{1/2},$$\nand define the lower-oriented generalized Sylvester separation\n$$\\gamma=\\min_{\\|(Y,Z)\\|_P=1}\\|(S_{22}Y-ZS_{11},T_{22}Y-ZT_{11})\\|_P.$$\nThen $\\gamma>0$. Write $\\kappa=\\gamma^{-1}$, $h=(\\|S_{12}\\|_2^2+\\|T_{12}\\|_2^2)^{1/2}$. For arbitrary pencil perturbations $\\Delta_N,\\Delta_M$, put $E=Q^*\\Delta_NV$, $F=Q^*\\Delta_MV$, and $\\delta=(\\|E\\|_F^2+\\|F\\|_F^2)^{1/2}=(\\|\\Delta_N\\|_F^2+\\|\\Delta_M\\|_F^2)^{1/2}$. If $r>0$ satisfies\n$$\\kappa[\\delta+2\\delta r+(h+\\delta)r^2]\\le r,\\qquad \\kappa[2\\delta+2(h+\\delta)r]<1,$$\nthere is a unique pair $(Y,Z)$ in the product radius-$r$ ball for which the right and left graphs $V[I;Y]$ and $Q[I;Z]$ form matching deflating spaces of the perturbed pair. In particular $\\|Y\\|_F,\\|Z\\|_F\\le r$. For $\\delta>0$, a sufficient choice is $r=2\\kappa\\delta$ whenever, with $\\theta=\\kappa\\delta$,\n$$4\\theta+4\\kappa h\\theta+4\\theta^2<1.$$\nFor $\\delta=0$, take $Y=Z=0$.\n\nHere are separate sufficient margins identifying these graphs as the stable spaces. Set\n$$a=\\delta+(\\|S_{12}\\|_2+\\delta)r,\\qquad b=\\delta+(\\|T_{12}\\|_2+\\delta)r,$$\n$$K_s=T_{11}^{-1}S_{11},\\qquad K_u=S_{22}^{-1}T_{22}.$$\nThe inverses exist and $K_s,K_u$ are Schur stable. For $j=s,u$, choose $W_j\\succ0$ with $W_j-K_j^*W_jK_j=I$; the convergent Stein series supplies such a matrix. Require\n$$\\|T_{11}^{-1}\\|_2b<1,\\qquad \\|S_{22}^{-1}\\|_2a<1,$$\nand define\n$$\\epsilon_s=\\frac{\\|T_{11}^{-1}\\|_2(a+b\\|K_s\\|_2)}{1-\\|T_{11}^{-1}\\|_2b},\\qquad \\epsilon_u=\\frac{\\|S_{22}^{-1}\\|_2(b+a\\|K_u\\|_2)}{1-\\|S_{22}^{-1}\\|_2a}.$$\nIf\n$$\\|W_j\\|_2(2\\|K_j\\|_2\\epsilon_j+\\epsilon_j^2)<1\\qquad(j=s,u),$$\nthen the perturbed pencil is regular, has precisely $n$ stable roots and $n$ outside roots, and the constructed right graph is its stable deflating space. For fixed ordered input these margins hold for all sufficiently small $\\delta$ with $r=2\\kappa\\delta$.\n\nFor normalized right bases, write $V=[U\\ V_2]$ and\n$$\\widehat U=(U+V_2Y)(I+Y^*Y)^{-1/2},\\qquad y=\\|Y\\|_2,\\qquad \\beta(y)=\\sqrt{2\\left(1-\\frac1{\\sqrt{1+y^2}}\\right)}.$$\nThen $\\widehat U^*\\widehat U=I$, $\\|\\widehat U-U\\|_2=\\beta(y)\\le y\\le r$, and\n$$\\|(I-UU^*)\\widehat U\\|_2=\\frac{y}{\\sqrt{1+y^2}}.$$\nIf the physical top block $U_1$ of $U=[U_1;U_2]$ is invertible, $X=U_2U_1^{-1}$, and $\\|U_1^{-1}\\|_2\\beta(y)<1$, then $\\widehat U_1$ is invertible and\n$$\\|\\widehat U_2\\widehat U_1^{-1}-X\\|_2\\le\\frac{(1+\\|X\\|_2)\\beta(y)}{\\|U_1^{-1}\\|_2^{-1}-\\beta(y)}.$$\nFor the directly computable bound with $\\beta(r)$, impose the stronger margin $\\|U_1^{-1}\\|_2\\beta(r)<1$; replacing $\\beta(y)$ by $\\beta(r)$ then gives a valid weaker estimate. An independently rotated orthonormal basis of the same perturbed space produces the identical chart, so it need not be close to $U$ before alignment. The conclusion concerns an unstructured perturbed pencil; it does not certify Hermitian symmetry, Riccati residual, positive data, or the stabilizing Riccati branch after symmetrization.",
+        "source_path": "items/prop-dare-stable-deflating-subspace-perturbation-bound.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "LAPACK Users' Guide, generalized nonsymmetric eigenproblem error bounds",
+              "url": "https://www.netlib.org/lapack/lug/node102.html",
+              "locator": "§4.11.1.3 overview of regular-pair eigenvalue and left/right deflating-subspace error bounds; no local constants are copied."
+            },
+            {
+              "title": "LAPACK Users' Guide, condition numbers for generalized eigenproblems",
+              "url": "https://www.netlib.org/lapack/lug/node104.html",
+              "locator": "§4.11.1.3, generalized Sylvester equations, the ordered pair-separation operator and the distinction between its two orientations."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-riccati-finite-budget-wrappers-return-a-status",
+        "strategy": "Complete same-frontier prerequisite authored by the assigned Codex escalation owner; see the exact scope report and source-local proof.",
+        "kind": "lemma",
+        "title": "Finite Riccati candidate, Newton-Kleinman, and doubling wrappers return a status",
+        "deps": [
+          "alg-finite-budget-schur-qz-riccati-candidate-extraction",
+          "alg-finite-budget-newton-kleinman-policy-iteration",
+          "alg-finite-budget-structure-preserving-doubling-for-dare",
+          "thm-finite-budget-francis-schur-termination-and-status",
+          "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+          "thm-finite-budget-stable-block-reordering-correctness-and-status",
+          "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
+          "thm-uniform-linear-residual-solution-enclosure",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-computed-qz-pair-has-certified-backward-error",
+          "alg-point-verified-linear-system-certifier",
+          "thm-point-verified-linear-system-certifier-soundness",
+          "def-verified-linear-residual-certificate-data",
+          "def-standard-continuous-and-discrete-riccati-equations"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf"
+            },
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf"
+            }
+          ]
+        },
+        "statement": "Use admitted inputs and the finite solver/arithmetic/evaluator controllers\nstipulated by each of\n[[alg-finite-budget-schur-qz-riccati-candidate-extraction]],\n[[alg-finite-budget-newton-kleinman-policy-iteration]], and\n[[alg-finite-budget-structure-preserving-doubling-for-dare]]. Then each\nprocedure terminates with its declared output or status, retaining its\nspecified failure diagnostics.\n\nCandidate extraction makes one matching Schur or QZ reduction, at most one\nstable-block reordering call, and at most $n$ graph-column certificate passes\nfollowed by finite acceptance checks. Exact Newton–Kleinman makes at most $N$\npolicy evaluations; its safeguarded mode inspects at most $N(L+1)$ trial gains\nand makes at most $N$ point-certificate calls for the current cost matrices. SDA makes at most $N$\nsolve/update passes, at most $nN$ point-certificate calls for recurrence\nsolves, and at most $n(N+1)$ calls for residual solves, followed by finite\nsymmetry/residual reporting. Early\nfailures may shorten these counts. These conclusions are conditional on the\ndeclared finite controller contracts; they do not derive termination of an\nunspecified certificate-producing routine from an enclosure theorem.\n\nSuccessful ordering concerns the represented computed form. The original\nRiccati residual, symmetry, positivity and closed-loop checks remain separate.\nThis finite-status result asserts no convergence for arbitrary inexact\nproposals and no rounded PSD or structured-backward-error guarantee.",
+        "dependency_level": 5
+      },
+      {
+        "id": "prop-riccati-dense-work-and-acceptance-diagnostics",
+        "kind": "proposition",
+        "title": "Dense Riccati work counts and numerical acceptance require equation-level diagnostics",
+        "deps": [
+          "alg-finite-budget-schur-qz-riccati-candidate-extraction",
+          "alg-finite-budget-stable-block-reordering-for-schur-and-qz",
+          "thm-finite-budget-stable-block-reordering-correctness-and-status",
+          "alg-finite-budget-newton-kleinman-policy-iteration",
+          "alg-finite-budget-structure-preserving-doubling-for-dare",
+          "alg-finite-budget-francis-schur-reduction",
+          "thm-finite-budget-francis-schur-termination-and-status",
+          "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+          "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+          "thm-computed-qz-pair-has-certified-backward-error",
+          "alg-bartels-stewart-sylvester-equation",
+          "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "def-frobenius-matrix-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "In the dense arithmetic model, a single-matrix Schur reduction or regular-pair QZ reduction of order $n$ with at most $s$ Francis/QZ sweeps has core work $O(n^3+sn^2)$: the initial Hessenberg or Hessenberg-triangular reduction costs $O(n^3)$ and each full bulge-chasing sweep costs $O(n^2)$. Forming a graph candidate by solving $XU_1=U_2$ with dense $n\\times n$ factorization, $n$ right-hand sides, and residual multiplication costs $O(n^3)$.\n\nAfter an order-$d$ reduction, finite stable-block reordering with $k$ actual attempts costs $O(d^2+kd)$ scalar operations. If the form has $b$ diagonal blocks and $I$ complementary-before-selected inversions, then $I\\le b(b-1)/2$; successful ordering requires $K\\ge I$ and enough scalar/evaluator budget $W$ for the entire execution, including validation, label and inversion scans, all $I$ swaps, and the final ordering scan. For a Riccati pencil or Hamiltonian with $d=2n$, successful reordering, graph solve and equation-level residual multiplication preserve the $O(n^3+sn^2)$ scalar-core bound. This exact postprocessing count excludes algebraic bit cost, evaluator implementation cost beyond its declared unit budget, dense product-factor evaluation, local residual-ball certificate production or validation beyond the charged dense operations, and any additional dense residual multiplication. It is not a fixed-precision floating-point flop or structured backward-stability bound.\n\nOne dense Bartels–Stewart Lyapunov solve in its specified cubic branch costs $O(n^3)$; $J$ exact Newton-Kleinman policy evaluations therefore cost $O(m^3+Jn^3+J(n^2m+nm^2))$ for state dimension $n$ and input dimension $m$, charging one factorization of $R$ of order $m$ once. One exact-arithmetic SDA recurrence step costs $O(n^3)$, so $N$ exact steps cost $O(Nn^3)$; finite point-certificate and residual-enclosure work is separate.\n\nEvery computed candidate still requires its actual CARE/DARE residual and Hermitian symmetry defect. A DARE candidate also requires a positive lower bound for $R+B^*XB$; both equations require an independently certified closed-loop Hurwitz/Schur condition before the stabilizing branch is accepted. A computed QZ backward error for an unstructured nearby pencil does not certify nearby Hamiltonian/symplectic structure or positive $Q,R$.",
+        "source_path": "items/prop-riccati-dense-work-and-acceptance-diagnostics.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Valeria Simoncini, Computational Methods for Linear Matrix Equations",
+              "url": "https://www.dm.unibo.it/~simoncin/matrixeq.pdf",
+              "locator": "§§2–3, dense Sylvester/Lyapunov equation algorithms and arithmetic work"
+            },
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, Schur-vector and Newton-Kleinman methods"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-riccati-sensitivity-and-graph-subspace-conditioning",
+        "kind": "proposition",
+        "title": "Riccati residual sensitivity and invariant graph conditioning retain spectral separation",
+        "deps": [
+          "thm-care-stabilizing-psd-solution-and-value",
+          "thm-dare-stabilizing-psd-solution-and-value",
+          "prop-care-hamiltonian-stable-graph",
+          "prop-dare-symplectic-pencil-graph-and-stable-spectrum",
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "thm-care-local-residual-ball-certificate",
+          "thm-dare-local-residual-ball-certificate",
+          "def-sylvester-operator-and-separation-number",
+          "thm-sylvester-unique-solvability-spectral-separation",
+          "thm-continuous-lyapunov-integral-and-positivity",
+          "lem-powers-of-a-schur-stable-matrix-decay",
+          "def-frobenius-matrix-norm",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "prop-dare-stable-deflating-subspace-perturbation-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Let $X_c$ and $X_d$ be the stabilizing CARE and DARE solutions under the hypotheses of [[thm-care-stabilizing-psd-solution-and-value]] and [[thm-dare-stabilizing-psd-solution-and-value]]. Their residual derivatives on Hermitian matrices are\n$$\\mathcal L_c(E)=A_c(X_c)^*E+EA_c(X_c),\\qquad \\mathcal L_d(E)=A_c(X_d)^*EA_c(X_d)-E.$$\nWhen invertible, the local residual condition numbers are $\\kappa_c=\\|\\mathcal L_c^{-1}\\|_{F\\to F}$ and $\\kappa_d=\\|\\mathcal L_d^{-1}\\|_{F\\to F}$. If additive Hermitian residual perturbations admit radii satisfying the contraction and separate stability-margin hypotheses of [[thm-care-local-residual-ball-certificate]] or [[thm-dare-local-residual-ball-certificate]], the perturbed equations have stabilizing roots within those radii; the linear leading sensitivity is $-\\mathcal L_c^{-1}\\Delta$ or $-\\mathcal L_d^{-1}\\Delta$.\n\nFor CARE, write $T_X=\\begin{bmatrix}I&0\\\\X_c&I\\end{bmatrix}$ and let $\\sigma=\\operatorname{sep}(-A_c(X_c)^*,A_c(X_c))>0$, with $\\kappa_s=1/\\sigma$. For a Hamiltonian perturbation $\\Delta H$, put $Z=T_X^{-1}\\Delta H T_X$, $\\zeta=\\|Z\\|_F$, $\\theta=\\kappa_s\\zeta$, and $\\mu=\\kappa_s\\|G\\|_2$. If $6\\theta+4\\mu\\theta+4\\theta^2<1$, the perturbed Hamiltonian has an invariant graph $\\operatorname{Ran}[I;X_c+Y]$ with $\\|Y\\|_F\\le2\\theta$. If its restriction is certified Hurwitz and the perturbed Hamiltonian is certified to have exactly $n$ left-half-plane eigenvalues, this graph is its stable subspace.\n\nFinally, for either an exact CARE invariant graph basis or DARE deflating graph basis $U=[U_1;U_2]$ with invertible $U_1$, let $X=U_2U_1^{-1}$ and let $\\widetilde U=U+\\Delta U$. If $\\|U_1^{-1}\\|_2\\|\\Delta U_1\\|_2<1$, then $\\widetilde U_1$ remains invertible and\n$$\\|\\widetilde U_2\\widetilde U_1^{-1}-X\\|_2\\le\\frac{\\|\\Delta U_2\\|_2+\\|X\\|_2\\|\\Delta U_1\\|_2}{\\|U_1^{-1}\\|_2^{-1}-\\|\\Delta U_1\\|_2}.$$\nThis basis-chart estimate does not by itself certify a perturbed QZ deflating subspace.\n\nFor the DARE pencil, [[prop-dare-stable-deflating-subspace-perturbation-bound]] gives a separate perturbation-to-stable-deflating-space estimate from a generalized Sylvester separation, explicit contraction inequalities, and distinct leading/trailing Stein margins. Under those conditions its aligned orthonormal stable basis changes by at most $\\beta(r)\\le r$. The computable physical chart estimate additionally requires $\\|U_1^{-1}\\|_2\\beta(r)<1$; without that margin the chart remains inconclusive. A QZ pencil backward-error bound alone supplies none of these conditions.",
+        "source_path": "items/prop-riccati-sensitivity-and-graph-subspace-conditioning.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Valeria Simoncini, Computational Methods for Linear Matrix Equations",
+              "url": "https://www.dm.unibo.it/~simoncin/matrixeq.pdf",
+              "locator": "Lyapunov and Sylvester separation, conditioning of matrix equations"
+            },
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, Hamiltonian invariant graph and Riccati sensitivity"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2601,
+    "id": "numerical-algebraic-riccati-equations-and-stabilizing-branches-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Numerical algebraic riccati equations and stabilizing branches — Examples",
+    "companion": "numerical-algebraic-riccati-equations-and-stabilizing-branches",
+    "requires": [
+      "numerical-algebraic-riccati-equations-and-stabilizing-branches"
+    ],
+    "items": [
+      {
+        "id": "ex-scalar-care-two-stabilizing-branches",
+        "kind": "example",
+        "title": "A scalar CARE has two real roots but only one stabilizing branch",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Take the scalar continuous data $A=B=C=R=1$. Then $Q=1$ and $G=1$.",
+        "source_path": "items/ex-scalar-care-two-stabilizing-branches.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node116.html",
+              "locator": "§6.2.2, scalar algebraic Riccati solution and stabilizing branch"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-singular-a-dare-infinite-pencil-eigenvalue",
+        "kind": "example",
+        "title": "A singular A can give a stable DARE solution and an infinite pencil eigenvalue",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Take scalar $A=B=0$, $C=R=1$. Then $Q=1$ and the state matrix $A$ is singular.",
+        "source_path": "items/ex-singular-a-dare-infinite-pencil-eigenvalue.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A.A. Stoorvogel and A. Saberi, The discrete algebraic Riccati equation and linear matrix inequality, Memorandum COSOR 94-16",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/2465804/427410.pdf",
+              "locator": "§§2.5–2.7, homogeneous DARE pencil with singular A and infinite eigenvalues"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-unstabilizable-or-undetectable-mode-breaks-stability",
+        "kind": "example",
+        "title": "Unstabilizable and undetectable unstable modes break the CARE conclusion",
+        "deps": [
+          "def-lqr-stabilizability-and-detectability",
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "thm-care-stabilizing-psd-solution-and-value"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Two scalar cases isolate the roles of continuous stabilizability and detectability for the CARE conclusion.",
+        "source_path": "items/ex-unstabilizable-or-undetectable-mode-breaks-stability.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction, Chapter 6",
+              "url": "https://liberzon.csl.illinois.edu/teaching/cvoc/node115.html",
+              "locator": "§6.2.3, detectability and the stabilizing branch"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-near-boundary-riccati-residual-inconclusive",
+        "kind": "example",
+        "title": "A tiny CARE residual is inconclusive near the stability boundary",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "thm-care-local-residual-ball-certificate"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Let $\\varepsilon=10^{-8}$ and take scalar CARE data $A=\\varepsilon$, $B=R=1$, $C=\\varepsilon$, hence $Q=\\varepsilon^2$ and $G=1$. Use the candidate $\\widehat X=1.1\\varepsilon$.",
+        "source_path": "items/ex-near-boundary-riccati-residual-inconclusive.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 26–29, Hamiltonian separation and CARE conditioning"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-newton-kleinman-exact-and-inexact-step",
+        "kind": "example",
+        "title": "Exact Newton-Kleinman decreases the cost while an unchecked inexact step can lose stability",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "alg-finite-budget-newton-kleinman-policy-iteration",
+          "prop-inexact-newton-kleinman-safeguard"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Take scalar CARE data $A=B=C=R=1$ and the stabilizing starting gain $K_0=2$.",
+        "source_path": "items/ex-newton-kleinman-exact-and-inexact-step.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Benner and Lihong Feng, Model Reduction for Dynamical Systems, Lecture 8",
+              "url": "https://www.mpi-magdeburg.mpg.de/2943737/lecture8.pdf",
+              "locator": "slides 28–29, exact Newton-Kleinman iteration"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-sda-psd-blocks-and-symmetry-defect",
+        "kind": "example",
+        "title": "SDA preserves PSD blocks exactly and exposes a finite-precision symmetry defect",
+        "deps": [
+          "def-standard-continuous-and-discrete-riccati-equations",
+          "alg-finite-budget-structure-preserving-doubling-for-dare",
+          "lem-sda-doubling-composition-and-psd-invariants"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For one exact SDA step, take $A=I_2$, $G_0=\\operatorname{diag}(1,0)$, and $H_0=\\begin{bmatrix}1&1\\\\1&1\\end{bmatrix}$.",
+        "source_path": "items/ex-sda-psd-blocks-and-symmetry-defect.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Federico Poloni, Lecture notes on Riccati-type matrix equations",
+              "url": "https://pages.di.unipi.it/fpoloni/videolezioni/phd25/notes.pdf",
+              "locator": "§5.2, structure-preserving doubling formulas"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

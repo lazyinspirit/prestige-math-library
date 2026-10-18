@@ -1,0 +1,3827 @@
+
+PAGE 1
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Introduction and Basic Implementation for Finite
+Element Methods
+Chapter 9: Finite elements for 2D unsteady Navier-Stokes
+equations
+Xiaoming He
+Department of Mathematics & Statistics
+Missouri University of Science & Technology
+Email: hex@mst.edu
+Homepage: https://web.mst.edu/~hex/
+1 / 77
+
+
+PAGE 2
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Outline
+1
+Weak formulation
+2
+Semi-discretization
+3
+Full discretization
+4
+Newton’s iteration
+5
+Matrix formulation
+6
+FE method
+7
+More Discussion
+2 / 77
+
+
+PAGE 3
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Outline
+1
+Weak formulation
+2
+Semi-discretization
+3
+Full discretization
+4
+Newton’s iteration
+5
+Matrix formulation
+6
+FE method
+7
+More Discussion
+3 / 77
+
+
+PAGE 4
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Target problem
+Consider the 2D unsteady unsteady Navier-Stokes equation
+equation
+ut + (u · ∇)u −∇· T(u, p) = f,
+in Ω×[0, T],
+∇· u = 0
+in Ω×[0, T],
+u = g,
+on ∂Ω×[0, T],
+u = u0, p = p0,
+at t = 0 and in Ω.
+where Ωis a 2D domain, [0, T] is the time interval, f(x, y, t)
+is a given function on Ω×[0, T], g(x, y, t) is a given function
+on ∂Ω×[0, T], u0(x, y) and p0(x, y) are given functions on Ω
+at t = 0, u(x, y, t) and p(x, y, t) are the unknown functions,
+and
+u(x, y, t) = (u1, u2)t,
+f(x, y, t) = (f1, f2)t,
+g(x, y, t) = (g1, g2)t,
+u0(x, y) = (u10, u20)t.
+4 / 77
+
+
+PAGE 5
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Target problem
+The nonlinear advection is deﬁned as
+(u · ∇)u =
+ 
+u1 ∂u1
+∂x + u2 ∂u1
+∂y
+u1 ∂u2
+∂x + u2 ∂u2
+∂y
+!
+.
+The stress tensor T(u, p) is deﬁned as
+T(u, p) = 2νD(u) −pI
+where ν is the viscosity and the deformation tensor
+D(u) = 1
+2(∇u + (∇u)t).
+5 / 77
+
+
+PAGE 6
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Target problem
+In more details, the deformation tensor can be written as
+D(u) =
+
+
+∂u1
+∂x
+1
+2
+
+∂u1
+∂y + ∂u2
+∂x
+
+1
+2
+
+∂u1
+∂y + ∂u2
+∂x
+
+∂u2
+∂y
+
+.
+Hence the stress tensor can be written as
+T(u, p) =
+
+
+2ν ∂u1
+∂x −p
+ν
+
+∂u1
+∂y + ∂u2
+∂x
+
+ν
+
+∂u1
+∂y + ∂u2
+∂x
+
+2ν ∂u2
+∂y −p
+
+.
+6 / 77
+
+
+PAGE 7
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+First, take the inner product with a vector function
+v(x, y) = (v1, v2)t on both sides of the unsteady
+Navier-Stokes equation:
+ut + (u · ∇)u −∇· T(u, p) = f in Ω
+⇒
+ut · v + (u · ∇)u · v −∇· T(u, p) · v = f · v in Ω
+⇒
+Z
+Ω
+ut · v dxdy +
+Z
+Ω
+(u · ∇)u · v dxdy
+−
+Z
+Ω
+(∇· T(u, p)) · v dxdy =
+Z
+Ω
+f · v dxdy
+7 / 77
+
+
+PAGE 8
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+Second, multiply the divergence free equation by a function
+q(x, y):
+∇· u = 0
+⇒
+(∇· u)q = 0
+⇒
+Z
+Ω
+(∇· u)q dxdy = 0.
+u(x, y, t) and p(x, y, t) are called trail functions and v(x, y)
+and q(x, y) are called test functions.
+8 / 77
+
+
+PAGE 9
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+Using integration by parts in multi-dimension:
+Z
+Ω
+(∇· T) · v dxdy =
+Z
+∂Ω
+(Tn) · v ds −
+Z
+Ω
+T : ∇v dxdy,
+where n = (n1, n2)t is the unit outer normal vector of ∂Ω, we
+obtain
+Z
+Ω
+ut · v dxdy +
+Z
+Ω
+(u · ∇)u · v dxdy +
+Z
+Ω
+T(u, p) : ∇v dxdy
+−
+Z
+∂Ω
+(T(u, p)n) · v ds =
+Z
+Ω
+f · v dxdy.
+Here,
+A : B
+=
+ a11
+a12
+a21
+a22
+
+:
+ b11
+b12
+b21
+b22
+
+=
+a11b11 + a12b12 + a21b21 + a22b22.
+9 / 77
+
+
+PAGE 10
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+Using the above deﬁnition for A : B, it is not diﬃcult to verify
+(an independent study project topic) that
+T(u, p) : ∇v
+=
+(2νD(u) −pI) : ∇v
+=
+2νD(u) : D(v) −p(∇· v).
+Hence we obtain
+Z
+Ω
+ut · v dxdy +
+Z
+Ω
+(u · ∇)u · v dxdy +
+Z
+Ω
+2νD(u) : D(v) dxdy
+−
+Z
+Ω
+p(∇· v) dxdy −
+Z
+∂Ω
+(T(u, p)n) · v ds =
+Z
+Ω
+f · v dxdy,
+−
+Z
+Ω
+(∇· u)q dxdy = 0.
+Here we multiply the second equation by −1 in order to keep
+the matrix formulation symmetric later.
+10 / 77
+
+
+PAGE 11
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+Since the solution on the domain boundary ∂Ωare given by
+u(x, y, t) = g(x, y, t), then we can choose the test function
+v(x, y) such that v = 0 on ∂Ω.
+HenceZ
+Ω
+ut · v dxdy +
+Z
+Ω
+(u · ∇)u · v dxdy +
+Z
+Ω
+2νD(u) : D(v) dxdy
+−
+Z
+Ω
+p(∇· v) dxdy =
+Z
+Ω
+f · v dxdy,
+−
+Z
+Ω
+(∇· u)q dxdy = 0.
+Deﬁne [H1(Ω)]2 = H1(Ω) × H1(Ω) and
+H1(0, T; [H1(Ω)]2)
+=
+{v(·, t), ∂v
+∂t (·, t) ∈[H1(Ω)]2, ∀t ∈[0, T]},
+L2(0, T; L2(Ω))
+=
+{q(·, t) ∈L2(Ω), ∀t ∈[0, T]}.
+11 / 77
+
+
+PAGE 12
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+Weak formulation in the vector format: ﬁnd
+u ∈H1(0, T; [H1(Ω)]2) and p ∈L2(0, T; L2(Ω)) such that
+Z
+Ω
+ut · v dxdy +
+Z
+Ω
+(u · ∇)u · v dxdy
++
+Z
+Ω
+2νD(u) : D(v) dxdy −
+Z
+Ω
+p(∇· v) dxdy
+=
+Z
+Ω
+f · v dxdy,
+−
+Z
+Ω
+(∇· u)q dxdy = 0,
+for any v ∈[H1
+0(Ω)]2 and q ∈L2(Ω).
+12 / 77
+
+
+PAGE 13
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+Deﬁne
+c(w, u, v) =
+Z
+Ω
+(w · ∇)u · v dxdy,
+a(u, v) =
+Z
+Ω
+2νD(u) : D(v) dxdy,
+b(u, q) = −
+Z
+Ω
+(∇· u)q dxdy,
+(f, v) =
+Z
+Ω
+f · v dxdy.
+Weak formulation: ﬁnd u ∈H1(0, T; [H1(Ω)]2) and
+p ∈L2(0, T; L2(Ω)) such that
+(ut, v) + c(u, u, v) + a(u, v) + b(v, p)
+=
+(f, v),
+b(u, q)
+=
+0,
+for any v ∈[H1
+0(Ω)]2 and q ∈L2(Ω).
+13 / 77
+
+
+PAGE 14
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+In more details,
+D(u) : D(v)
+=
+
+
+∂u1
+∂x
+1
+2
+
+∂u1
+∂y + ∂u2
+∂x
+
+1
+2
+
+∂u1
+∂y + ∂u2
+∂x
+
+∂u2
+∂y
+
+
+:
+
+
+∂v1
+∂x
+1
+2
+
+∂v1
+∂y + ∂v2
+∂x
+
+1
+2
+
+∂v1
+∂y + ∂v2
+∂x
+
+∂v2
+∂y
+
+
+=
+∂u1
+∂x
+∂v1
+∂x + 1
+4
+∂u1
+∂y + ∂u2
+∂x
+ ∂v1
+∂y + ∂v2
+∂x
+
++1
+4
+∂u1
+∂y + ∂u2
+∂x
+ ∂v1
+∂y + ∂v2
+∂x
+
++ ∂u2
+∂y
+∂v2
+∂y .
+14 / 77
+
+
+PAGE 15
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+Hence
+D(u) : D(v)
+=
+∂u1
+∂x
+∂v1
+∂x + ∂u2
+∂y
+∂v2
+∂y + 1
+2
+∂u1
+∂y
+∂v1
+∂y
++1
+2
+∂u1
+∂y
+∂v2
+∂x + 1
+2
+∂u2
+∂x
+∂v1
+∂y + 1
+2
+∂u2
+∂x
+∂v2
+∂x .
+Then
+Z
+Ω
+2νD(u) : D(v) dxdy
+=
+Z
+Ω
+ν
+
+2∂u1
+∂x
+∂v1
+∂x + 2∂u2
+∂y
+∂v2
+∂y + ∂u1
+∂y
+∂v1
+∂y
++∂u1
+∂y
+∂v2
+∂x + ∂u2
+∂x
+∂v1
+∂y + ∂u2
+∂x
+∂v2
+∂x
+
+dxdy.
+15 / 77
+
+
+PAGE 16
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+We also have
+Z
+Ω
+ut · v dxdy =
+Z
+Ω
+∂u1
+∂t v1 dxdy +
+Z
+Ω
+∂u2
+∂t v2 dxdy,
+Z
+Ω
+(u · ∇)u · v dxdy
+=
+Z
+Ω
+
+u1
+∂u1
+∂x v1 + u2
+∂u1
+∂y v1 + u1
+∂u2
+∂x v2 + u2
+∂u2
+∂y v2
+
+dxdy,
+Z
+Ω
+p(∇· v) dxdy =
+Z
+Ω
+
+p∂v1
+∂x + p∂v2
+∂y
+
+dxdy,
+Z
+Ω
+f · v dxdy =
+Z
+Ω
+(f1v1 + f2v2) dxdy,
+Z
+Ω
+(∇· u)q dxdy =
+Z
+Ω
+∂u1
+∂x q + ∂u2
+∂y q
+
+dxdy.
+16 / 77
+
+
+PAGE 17
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Weak formulation
+Weak formulation in the scalar format: ﬁnd u1 ∈H1(Ω),
+u2 ∈H1(Ω), and p ∈L2(Ω) such that
+Z
+Ω
+∂u1
+∂t v1 dxdy +
+Z
+Ω
+∂u2
+∂t v2 dxdy
++
+Z
+Ω
+
+u1
+∂u1
+∂x v1 + u2
+∂u1
+∂y v1 + u1
+∂u2
+∂x v2 + u2
+∂u2
+∂y v2
+
+dxdy
++
+Z
+Ω
+ν
+
+2∂u1
+∂x
+∂v1
+∂x + 2∂u2
+∂y
+∂v2
+∂y + ∂u1
+∂y
+∂v1
+∂y
++∂u1
+∂y
+∂v2
+∂x + ∂u2
+∂x
+∂v1
+∂y + ∂u2
+∂x
+∂v2
+∂x
+
+dxdy
+−
+Z
+Ω
+
+p ∂v1
+∂x + p ∂v2
+∂y
+
+dxdy =
+Z
+Ω
+(f1v1 + f2v2) dxdy.
+−
+Z
+Ω
+∂u1
+∂x q + ∂u2
+∂y q
+
+dxdy = 0.
+for any v1 ∈H1
+0(Ω), v2 ∈H1
+0(Ω), and q ∈L2(Ω).
+17 / 77
+
+
+PAGE 18
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Outline
+1
+Weak formulation
+2
+Semi-discretization
+3
+Full discretization
+4
+Newton’s iteration
+5
+Matrix formulation
+6
+FE method
+7
+More Discussion
+18 / 77
+
+
+PAGE 19
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Galerkin formulation
+Consider a ﬁnite element space Uh ⊂H1(Ω) for the velocity
+and a ﬁnite element space Wh ⊂L2(Ω) for the pressure.
+Deﬁne Uh0 to be the space which consists of the functions of
+Uh with value 0 on the Dirichlet boundary.
+Then the Galerkin formulation is to ﬁnd uh ∈H1(0, T; [Uh]2)
+and p ∈L2(0, T; Wh) such that
+(uht, v) + c(uh, uh, vh) + a(uh, vh) + b(vh, ph)
+=
+(f, vh),
+b(uh, qh)
+=
+0,
+for any vh ∈[Uh0]2 and qh ∈Wh.
+19 / 77
+
+
+PAGE 20
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Galerkin formulation
+For an easier implementation, we use the following Galerkin
+formulation (without considering the Dirichlet boundary
+condition, which will be handled later): ﬁnd
+uh ∈H1(0, T; [Uh]2) and p ∈L2(0, T; Wh) such that
+(uht, v) + c(uh, uh, vh) + a(uh, vh) + b(vh, ph)
+=
+(f, vh),
+b(uh, qh)
+=
+0,
+for any vh ∈[Uh]2 and qh ∈Wh.
+20 / 77
+
+
+PAGE 21
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Galerkin formulation
+In more details of the vector format, the Galerkin formulation
+(without considering the Dirichlet boundary condition, which
+will be handled later) is to ﬁnd uh ∈H1(0, T; [Uh]2) and
+p ∈L2(0, T; Wh) such that
+Z
+Ω
+uht · vh dxdy +
+Z
+Ω
+(uh · ∇)uh · vh dxdy
++
+Z
+Ω
+2νD(uh) : D(vh) dxdy −
+Z
+Ω
+ph(∇· vh) dxdy
+=
+Z
+Ω
+f · vh dxdy,
+−
+Z
+Ω
+(∇· uh)qh dxdy = 0,
+for any vh ∈[Uh]2 and qh ∈Wh.
+21 / 77
+
+
+PAGE 22
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Galerkin formulation
+In our numerical example, Uh = span{φj}Nb
+j=1 and
+Wh = span{ψj}Nbp
+j=1 are chosen to be the ﬁnite element spaces
+with the quadratic global basis functions {φj}Nb
+j=1 and linear
+global basis functions {ψj}Nbp
+j=1, which are deﬁned in Chapter
+2. They are called Taylor-Hood ﬁnite elements.
+Why do we choose the pairs of ﬁnite elements in this way?
+Stability of mixed ﬁnite elements: inf-sup condition.
+inf
+0̸=qh∈Wh
+sup
+0̸=uh∈Uh×Uh
+b(uh, qh)
+∥∇uh∥0 ∥qh∥0
+> β,
+where β > 0 is a constant independent of mesh size h.
+See other course materials and references for the theory and
+more examples of stable mixed ﬁnite elements for unsteady
+Navier-Stokes equation.
+22 / 77
+
+
+PAGE 23
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Galerkin formulation
+In the scalar format, the Galerkin formulation is to ﬁnd
+u1h ∈H1(0, T; Uh), u2h ∈H1(0, T; Uh), and ph ∈L2(0, T; Wh) such
+that Z
+Ω
+∂u1h
+∂t v1h dxdy +
+Z
+Ω
+∂u2h
+∂t v2h dxdy
++
+Z
+Ω
+
+u1h
+∂u1h
+∂x v1h + u2h
+∂u1h
+∂y v1h + u1h
+∂u2h
+∂x v2h + u2h
+∂u2h
+∂y v2h
+
+dxdy
++
+Z
+Ω
+ν
+
+2∂u1h
+∂x
+∂v1h
+∂x + 2∂u2h
+∂y
+∂v2h
+∂y
++ ∂u1h
+∂y
+∂v1h
+∂y
++∂u1h
+∂y
+∂v2h
+∂x + ∂u2h
+∂x
+∂v1h
+∂y
++ ∂u2h
+∂x
+∂v2h
+∂x
+
+dxdy
+−
+Z
+Ω
+
+ph
+∂v1h
+∂x + ph
+∂v2h
+∂y
+
+dxdy =
+Z
+Ω
+(f1v1h + f2v2h) dxdy.
+−
+Z
+Ω
+∂u1h
+∂x qh + ∂u2h
+∂y qh
+
+dxdy = 0.
+for any v1h ∈Uh, v2h ∈Uh, and qh ∈Wh.
+23 / 77
+
+
+PAGE 24
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Outline
+1
+Weak formulation
+2
+Semi-discretization
+3
+Full discretization
+4
+Newton’s iteration
+5
+Matrix formulation
+6
+FE method
+7
+More Discussion
+24 / 77
+
+
+PAGE 25
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Full discretization
+Assume that we have a uniform partition of [0, T] into Mm
+elements with mesh size △t.
+The mesh nodes are tm = m△t, m = 0, 1, · · · , Mm.
+Let u0
+h and p0
+h denote the given initial condition at t0.
+Let um
+h and pm
+h denote the numerical solution at tm.
+For a simple illustration, we consider the full discretization
+with backward Euler scheme (without considering the
+Dirichlet boundary condition, which will be handled later): for
+m = 0, · · · , Mm −1, ﬁnd um+1
+h
+∈[Uh]2 and pm+1
+h
+∈Wh such
+that
+(um+1
+h
+−um
+h
+△t
+, v) + c(um+1
+h
+, um+1
+h
+, vh) + a(um+1
+h
+, vh)
++b(vh, pm+1
+h
+) = (f(tm+1), vh),
+b(um+1
+h
+, qh) = 0,
+25 / 77
+
+
+PAGE 26
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Full discretization
+That is, for m = 0, · · · , Mm −1, ﬁnd um+1
+h
+∈[Uh]2 and
+pm+1
+h
+∈Wh such that
+Z
+Ω
+um+1
+h
+−um
+h
+△t
+· vh dxdy +
+Z
+Ω
+(um+1
+h
+· ∇)um+1
+h
+· vh dxdy
++
+Z
+Ω
+2νD(um+1
+h
+) : D(vh) dxdy −
+Z
+Ω
+pm+1
+h
+(∇· vh) dxdy
+=
+Z
+Ω
+f(tm+1) · vh dxdy,
+−
+Z
+Ω
+(∇· um+1
+h
+)qh dxdy = 0,
+for any vh ∈[Uh]2 and qh ∈Wh.
+26 / 77
+
+
+PAGE 27
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Full discretization
+For m = 0, · · · , Mm −1, ﬁnd um+1
+1h
+, um+1
+2h
+∈Uh and pm+1
+h
+∈Wh such that
+Z
+Ω
+um+1
+1h
+−um
+1h
+△t
+v1h dxdy +
+Z
+Ω
+um+1
+2h
+−um
+2h
+△t
+v2h dxdy +
+Z
+Ω
+um+1
+1h
+∂um+1
+1h
+∂x
+v1h
++um+1
+2h
+∂um+1
+1h
+∂y
+v1h + um+1
+1h
+∂um+1
+2h
+∂x
+v2h + um+1
+2h
+∂um+1
+2h
+∂y
+v2h
+
+dxdy
++
+Z
+Ω
+ν
+
+2∂um+1
+1h
+∂x
+∂v1h
+∂x
++ 2∂um+1
+2h
+∂y
+∂v2h
+∂y
++ ∂um+1
+1h
+∂y
+∂v1h
+∂y
++ ∂um+1
+1h
+∂y
+∂v2h
+∂x
++∂um+1
+2h
+∂x
+∂v1h
+∂y
++ ∂um+1
+2h
+∂x
+∂v2h
+∂x
+
+dxdy −
+Z
+Ω
+
+pm+1
+h
+∂v1h
+∂x
++ pm+1
+h
+∂v2h
+∂y
+
+dxdy
+=
+Z
+Ω
+f1(tm+1)v1h dxdy
+Z
+Ω
+f2(tm+1)v2h dxdy,
+−
+Z
+Ω
+(∂um+1
+1h
+∂x
+qh + ∂um+1
+2h
+∂y
+qh)dxdy = 0,
+for any v1h ∈Uh, v2h ∈Uh, and qh ∈Wh.
+27 / 77
+
+
+PAGE 28
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Outline
+1
+Weak formulation
+2
+Semi-discretization
+3
+Full discretization
+4
+Newton’s iteration
+5
+Matrix formulation
+6
+FE method
+7
+More Discussion
+28 / 77
+
+
+PAGE 29
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Newton’s iteration
+How to handle the nonlinear terms in the full discretization?
+At each time iteration step of the full discretization, we have
+a steady nonlinear problem, which is similar to to the steady
+Navier-Stokes equation.
+Newton’s iteration at each time iteration step!
+Given the initial condition u0
+h and p0
+h at the initial time
+29 / 77
+
+
+PAGE 30
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Newton’s iteration at each time iteration step
+At the (m + 1)th step (m = 0, · · · , Mm −1) of the time iteration,
+we consider the following Newton’s iteration:
+Initial guess: um+1,(0)
+h
+and pm+1,(0)
+h
+. Usually they can be the
+solutions um
+h and pm
+h of the previous time iteration step.
+Newton’s iteration for full discretization: for l = 1, 2, · · · , L,
+ﬁnd um+1,(l)
+h
+∈Uh × Uh and pm+1,(l)
+h
+∈Wh such that
+(um+1,(l)
+h
+−um
+h
+△t
+, v) + c(um+1,(l)
+h
+, um+1,(l−1)
+h
+, vh)
++c(um+1,(l−1)
+h
+, um+1,(l)
+h
+, vh) + a(um+1,(l)
+h
+, vh) + b(vh, pm+1,(l)
+h
+)
+= (f(tm+1), vh)+c(um+1,(l−1)
+h
+, um+1,(l−1)
+h
+, vh),
+b(um+1,(l)
+h
+, qh) = 0,
+for any vh ∈Uh × Uh and qh ∈Wh.
+Let um+1
+h
+be the ﬁnal um+1,(l)
+h
+from the above iteration.
+30 / 77
+
+
+PAGE 31
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Newton’s iteration at each time iteration step
+Initial guess: um+1,(0)
+h
+and pm+1,(0)
+h
+. Usually they can be the solutions um
+h
+and pm
+h of the previous time iteration step.
+Newton’s iteration for full discretization in the vector format: for
+l = 1, 2, · · · , L, ﬁnd um+1,(l)
+h
+∈Uh × Uh and pm+1,(l)
+h
+∈Wh such that
+Z
+Ω
+um+1,(l)
+h
+−um
+h
+△t
+· vh dxdy +
+Z
+Ω
+(um+1,(l)
+h
+· ∇)um+1,(l−1)
+h
+· vh dxdy
++
+Z
+Ω
+(um+1,(l−1)
+h
+· ∇)um+1,(l)
+h
+· vh dxdy
++
+Z
+Ω
+2νD(um+1,(l)
+h
+) : D(vh) dxdy −
+Z
+Ω
+pm+1,(l)
+h
+(∇· vh) dxdy
+=
+Z
+Ω
+f · vh dxdy+
+Z
+Ω
+(um+1,(l−1)
+h
+· ∇)um+1,(l−1)
+h
+· vh dxdy,
+−
+Z
+Ω
+(∇· um+1,(l)
+h
+)qh dxdy = 0,
+for any vh ∈Uh × Uh and qh ∈Wh.
+Let um+1
+h
+be the ﬁnal um+1,(l)
+h
+from the above iteration.
+31 / 77
+
+
+PAGE 32
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Newton’s iteration at each time iteration step
+Initial guess: um+1,(0)
+1h
+, um+1,(0)
+2h
+, and pm+1,(0)
+h
+. Usually they
+can be the solutions um
+1h, um
+2h, and pm
+h of the previous time
+iteration step.
+Newton’s iteration for full discretization in the scalar format:
+for l = 1, 2, · · · , L, ﬁnd um+1,(l)
+1h
+∈Uh, um+1,(l)
+2h
+∈Uh, and
+pm+1,(l)
+h
+∈Wh such that
+32 / 77
+
+
+PAGE 33
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Newton’s iteration at each time iteration step
+Z
+Ω
+um+1,(l)
+1h
+−um
+1h
+△t
+v1h dxdy +
+Z
+Ω
+um+1,(l)
+2h
+−um
+2h
+△t
+v2h dxdy +
+Z
+Ω
+um+1,(l)
+1h
+∂um+1,(l−1)
+1h
+∂x
+v1h
++um+1,(l)
+2h
+∂um+1,(l−1)
+1h
+∂y
+v1h + um+1,(l)
+1h
+∂um+1,(l−1)
+2h
+∂x
+v2h + um+1,(l)
+2h
+∂um+1,(l−1)
+2h
+∂y
+v2h
+
+dxdy
++
+Z
+Ω
+um+1,(l−1)
+1h
+∂um+1,(l)
+1h
+∂x
+v1h + um+1,(l−1)
+2h
+∂um+1,(l)
+1h
+∂y
+v1h + um+1,(l−1)
+1h
+∂um+1,(l)
+2h
+∂x
+v2h
++um+1,(l−1)
+2h
+∂um+1,(l)
+2h
+∂y
+v2h
+
+dxdy
++
+Z
+Ω
+ν
+
+2 ∂um+1,(l)
+1h
+∂x
+∂v1h
+∂x
++ 2 ∂um+1,(l)
+2h
+∂y
+∂v2h
+∂y
++ ∂um+1,(l)
+1h
+∂y
+∂v1h
+∂y
++ ∂um+1,(l)
+1h
+∂y
+∂v2h
+∂x
++ ∂um+1,(l)
+2h
+∂x
+∂v1h
+∂y
++ ∂um+1,(l)
+2h
+∂x
+∂v2h
+∂x
+
+dxdy −
+Z
+Ω
+
+pm+1,(l)
+h
+∂v1h
+∂x
++ pm+1,(l)
+h
+∂v2h
+∂y
+
+dxdy
+=
+Z
+Ω
+(f1v1h + f2v2h) dxdy+
+Z
+Ω
+
+um+1,(l−1)
+1h
+∂um+1,(l−1)
+1h
+∂x
+v1h + um+1,(l−1)
+2h
+∂um+1,(l−1)
+1h
+∂y
+v1h
++um+1,(l−1)
+1h
+∂um+1,(l−1)
+2h
+∂x
+v2h + um+1,(l−1)
+2h
+∂um+1,(l−1)
+2h
+∂y
+v2h
+
+dxdy,
+33 / 77
+
+
+PAGE 34
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Newton’s iteration at each time iteration step
+Continued formulation:
+−
+Z
+Ω
+ 
+∂um+1,(l)
+1h
+∂x
+qh + ∂um+1,(l)
+2h
+∂y
+qh
+!
+dxdy = 0.
+for any v1h ∈Uh, v2h ∈Uh, and qh ∈Wh.
+Let um+1
+1h
+and um+1
+2h
+be the ﬁnal um+1,(l)
+1h
+and um+1,(l)
+2h
+from
+the above iteration.
+34 / 77
+
+
+PAGE 35
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Outline
+1
+Weak formulation
+2
+Semi-discretization
+3
+Full discretization
+4
+Newton’s iteration
+5
+Matrix formulation
+6
+FE method
+7
+More Discussion
+35 / 77
+
+
+PAGE 36
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Since um+1,(l)
+1h
+, um+1,(l)
+2h
+, um
+1h, um
+2h ∈Uh = span{φj}Nb
+j=1 and
+pm+1,(l)
+h
+, pm
+h ∈Wh = span{ψj}Nbp
+j=1, then
+um+1,(l)
+1h
+=
+Nb
+X
+j=1
+um+1,(l)
+1j
+φj, um
+1h =
+Nb
+X
+j=1
+um
+1jφj,
+um+1,(l)
+2h
+=
+Nb
+X
+j=1
+um+1,(l)
+2j
+φj, um
+2h =
+Nb
+X
+j=1
+um
+2jφj
+pm+1,(l)
+h
+=
+Nbp
+X
+j=1
+pm+1,(l)
+j
+ψj, pm
+h =
+Nbp
+X
+j=1
+pm
+j ψj,
+for some coeﬃcients um+1,(l)
+1j
+, um+1,(l)
+2j
+, um
+1j, um
+2j
+(j = 1, · · · , Nb), and pm+1,(l)
+j
+, pm
+j , (j = 1, · · · , Nbp).
+36 / 77
+
+
+PAGE 37
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+If we can set up a linear algebraic system for um+1,(l)
+1j
+,
+um+1,(l)
+2j
+(j = 1, · · · , Nb), and pm+1,(l)
+j
+(j = 1, · · · , Nbp),
+then we can solve it to obtain the ﬁnite element solution
+um+1,(l)
+h
+= (um+1,(l)
+1h
+, um+1,(l)
+2h
+)t and pm+1,(l)
+h
+at the step
+l (l = 1, 2, · · · , L) of Newton’s iteration.
+For the ﬁrst equation at the step l (l = 1, 2, · · · , L) of
+Newton’s iteration, we choose vh = (φi, 0)t (i = 1, · · · , Nb)
+and vh = (0, φi)t (i = 1, · · · , Nb). That is, in the ﬁrst set of
+test functions, we choose v1h = φi (i = 1, · · · , Nb) and
+v2h = 0; in the second set of test functions, we choose
+v1h = 0 and v2h = φi (i = 1, · · · , Nb).
+For the second equation at the step l (l = 1, 2, · · · , L) of
+Newton’s iteration, we choose qh = ψi (i = 1, · · · , Nbp).
+37 / 77
+
+
+PAGE 38
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Set vh = (φi, 0)t, i.e., v1h = φi and v2h = 0 (i = 1, · · · , Nb), in the ﬁrst
+equation at the step l (l = 1, 2, · · · , L) of Newton’s iteration. Then
+1
+△t
+Z
+Ω
+
+
+Nb
+X
+j=1
+um+1,(l)
+1j
+φj
+
+φi dxdy −
+1
+△t
+Z
+Ω
+
+
+Nb
+X
+j=1
+um
+1jφj
+
+φi dxdy
++
+Z
+Ω
+∂um+1,(l−1)
+1h
+∂x
+
+
+Nb
+X
+j=1
+um+1,(l)
+1j
+φj
+
+φidxdy +
+Z
+Ω
+∂um+1,(l−1)
+1h
+∂y
+
+
+Nb
+X
+j=1
+um+1,(l)
+2j
+φj
+
+φidxdy
++
+Z
+Ω
+um+1,(l−1)
+1h
+
+
+Nb
+X
+j=1
+um+1,(l)
+1j
+∂φj
+∂x
+
+φidxdy +
+Z
+Ω
+um+1,(l−1)
+2h
+
+
+Nb
+X
+j=1
+um+1,(l)
+1j
+∂φj
+∂y
+
+φidxdy
++2
+Z
+Ω
+ν
+
+
+Nb
+X
+j=1
+um+1,(l)
+1j
+∂φj
+∂x
+
+∂φi
+∂x dxdy +
+Z
+Ω
+ν
+
+
+Nb
+X
+j=1
+um+1,(l)
+1j
+∂φj
+∂y
+
+∂φi
+∂y dxdy
++
+Z
+Ω
+ν
+
+
+Nb
+X
+j=1
+um+1,(l)
+2j
+∂φj
+∂x
+
+∂φi
+∂y dxdy −
+Z
+Ω
+
+
+Nbp
+X
+j=1
+pm+1,(l)
+j
+ψj
+
+∂φi
+∂x dxdy
+=
+Z
+Ω
+f1φidxdy+
+Z
+Ω
+um+1,(l−1)
+1h
+∂um+1,(l−1)
+1h
+∂x
+φidxdy +
+Z
+Ω
+um+1,(l−1)
+2h
+∂um+1,(l−1)
+1h
+∂y
+φidxdy.
+38 / 77
+
+
+PAGE 39
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Set vh = (0, φi)t, i.e., v1h = 0 and v2h = φi (i = 1, · · · , Nb), in the ﬁrst
+equation of the Galerkin formulation at the step l (l = 1, 2, · · · , L) of Newton’s
+iteration. Then
+1
+△t
+Z
+Ω
+(
+Nb
+X
+j=1
+um+1,(l)
+2j
+φj)φi dxdy −
+1
+△t
+Z
+Ω
+(
+Nb
+X
+j=1
+um
+2jφj)φi dxdy
++
+Z
+Ω
+∂um+1,(l−1)
+2h
+∂x
+(
+Nb
+X
+j=1
+um+1,(l)
+1j
+φj)φidxdy +
+Z
+Ω
+∂um+1,(l−1)
+2h
+∂y
+(
+Nb
+X
+j=1
+um+1,(l)
+2j
+φj)φidxdy
++
+Z
+Ω
+um+1,(l−1)
+1h
+(
+Nb
+X
+j=1
+um+1,(l)
+2j
+∂φj
+∂x )φidxdy +
+Z
+Ω
+um+1,(l−1)
+2h
+(
+Nb
+X
+j=1
+um+1,(l)
+2j
+∂φj
+∂y )φidxdy
++2
+Z
+Ω
+ν(
+Nb
+X
+j=1
+um+1,(l)
+2j
+∂φj
+∂y ) ∂φi
+∂y dxdy +
+Z
+Ω
+ν(
+Nb
+X
+j=1
+um+1,(l)
+1j
+∂φj
+∂y ) ∂φi
+∂x dxdy
++
+Z
+Ω
+ν(
+Nb
+X
+j=1
+um+1,(l)
+2j
+∂φj
+∂x ) ∂φi
+∂x dxdy −
+Z
+Ω
+(
+Nbp
+X
+j=1
+pm+1,(l)
+j
+ψj) ∂φi
+∂y dxdy
+=
+Z
+Ω
+f2φidxdy+
+Z
+Ω
+um+1,(l−1)
+1h
+∂um+1,(l−1)
+2h
+∂x
+φidxdy +
+Z
+Ω
+um+1,(l−1)
+2h
+∂um+1,(l−1)
+2h
+∂y
+φidxdy.
+39 / 77
+
+
+PAGE 40
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Set qh = ψi (i = 1, · · · , Nbp) in the second equation of the
+Galerkin formulation at the step l (l = 1, 2, · · · , L) of
+Newton’s iteration. Then
+−
+Z
+Ω
+
+
+Nb
+X
+j=1
+um+1,(l)
+1j
+∂φj
+∂x
+
+ψi dxdy −
+Z
+Ω
+
+
+Nb
+X
+j=1
+um+1,(l)
+2j
+∂φj
+∂y
+
+ψi dxdy = 0.
+40 / 77
+
+
+PAGE 41
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Simplify the above three sets of equations, we obtain
+Nb
+X
+j=1
+um+1,(l)
+1j
+ 1
+△t
+Z
+Ω
+φjφi dxdy + 2
+Z
+Ω
+ν ∂φj
+∂x
+∂φi
+∂x dxdy +
+Z
+Ω
+ν ∂φj
+∂y
+∂φi
+∂y dxdy
++
+Z
+Ω
+∂um+1,(l−1)
+1h
+∂x
+φjφi dxdy +
+Z
+Ω
+um+1,(l−1)
+1h
+∂φj
+∂x φi dxdy
++
+Z
+Ω
+um+1,(l−1)
+2h
+∂φj
+∂y φi dxdy
+
++
+Nb
+X
+j=1
+um+1,(l)
+2j
+ Z
+Ω
+ν ∂φj
+∂x
+∂φi
+∂y dxdy
++
+Z
+Ω
+∂um+1,(l−1)
+1h
+∂y
+φjφi dxdy
+
++
+Nbp
+X
+j=1
+pm+1,(l)
+j
+
+−
+Z
+Ω
+ψj ∂φi
+∂x dxdy
+
+=
+Z
+Ω
+f1φidxdy+
+Z
+Ω
+um+1,(l−1)
+1h
+∂um+1,(l−1)
+1h
+∂x
+φi dxdy
++
+Z
+Ω
+um+1,(l−1)
+2h
+∂um+1,(l−1)
+1h
+∂y
+φi dxdy+
+Nb
+X
+j=1
+um
+1j
+ 1
+△t
+Z
+Ω
+φjφi dxdy
+
+,
+41 / 77
+
+
+PAGE 42
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Continued formulation:
+Nb
+X
+j=1
+um+1,(l)
+1j
+ Z
+Ω
+ν ∂φj
+∂y
+∂φi
+∂x dxdy+
+Z
+Ω
+∂um+1,(l−1)
+2h
+∂x
+φjφi dxdy
+!
++
+Nb
+X
+j=1
+um+1,(l)
+2j
+ 1
+△t
+Z
+Ω
+φjφi dxdy + 2
+Z
+Ω
+ν ∂φj
+∂y
+∂φi
+∂y dxdy
++
+Z
+Ω
+ν ∂φj
+∂x
+∂φi
+∂x dxdy+
+Z
+Ω
+∂um+1,(l−1)
+2h
+∂y
+φjφi dxdy +
+Z
+Ω
+um+1,(l−1)
+1h
+∂φj
+∂x φi dxdy
++
+Z
+Ω
+um+1,(l−1)
+2h
+∂φj
+∂y φi dxdy
+
++
+Nbp
+X
+j=1
+pm+1,(l)
+j
+
+−
+Z
+Ω
+ψj ∂φi
+∂y dxdy
+
+=
+Z
+Ω
+f2φidxdy+
+Z
+Ω
+um+1,(l−1)
+1h
+∂um+1,(l−1)
+2h
+∂x
+φi dxdy
++
+Z
+Ω
+um+1,(l−1)
+2h
+∂um+1,(l−1)
+2h
+∂y
+φi dxdy+
+Nb
+X
+j=1
+um
+2j
+ 1
+△t
+Z
+Ω
+φjφi dxdy
+
+,
+42 / 77
+
+
+PAGE 43
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Continued formulation:
+Nb
+X
+j=1
+um+1,(l)
+1j
+
+−
+Z
+Ω
+∂φj
+∂x ψi dxdy
+
++
+Nb
+X
+j=1
+um+1,(l)
+2j
+
+−
+Z
+Ω
+∂φj
+∂y ψi dxdy
+
++
+Nbp
+X
+j=1
+pm+1,(l)
+j
+∗0
+=
+0.
+43 / 77
+
+
+PAGE 44
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Deﬁne
+A1 =
+Z
+Ω
+ν ∂φj
+∂x
+∂φi
+∂x dxdy
+Nb
+i,j=1
+,
+A2 =
+Z
+Ω
+ν ∂φj
+∂y
+∂φi
+∂y dxdy
+Nb
+i,j=1
+,
+A3 =
+Z
+Ω
+ν ∂φj
+∂x
+∂φi
+∂y dxdy
+Nb
+i,j=1
+,
+A4 =
+Z
+Ω
+ν ∂φj
+∂y
+∂φi
+∂x dxdy
+Nb
+i,j=1
+,
+A5 =
+Z
+Ω
+−ψj
+∂φi
+∂x dxdy
+Nb,Nbp
+i=1,j=1
+,
+A6 =
+Z
+Ω
+−ψj
+∂φi
+∂y dxdy
+Nb,Nbp
+i=1,j=1
+,
+A7 =
+Z
+Ω
+−∂φj
+∂x ψi dxdy
+Nbp,Nb
+i=1,j=1
+,
+A8 =
+Z
+Ω
+−∂φj
+∂y ψi dxdy
+Nbp,Nb
+i=1,j=1
+.
+Deﬁne a zero matrix O1 = [0]Nbp,Nbp
+i=1,j=1 whose size is Nbp × Nbp. Then
+A =
+
+
+2A1 + A2
+A3
+A5
+A4
+2A2 + A1
+A6
+A7
+A8
+O1
+
+
+44 / 77
+
+
+PAGE 45
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Each matrix above can be obtained by Algorithm I-3 in
+Chapter 3.
+It is not diﬃcult to verify (an independent study project topic)
+that
+A4 = At
+3,
+A7 = At
+5,
+A8 = At
+6.
+Hence the matrix A is actually symmetric:
+A =
+
+
+2A1 + A2
+A3
+A5
+At
+3
+2A2 + A1
+A6
+At
+5
+At
+6
+O1
+
+
+45 / 77
+
+
+PAGE 46
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Another format of full discretization
+Deﬁne the basic mass matrix
+Me = [mij]Nb
+i,j=1 =
+Z
+Ω
+φjφi dxdy
+Nb
+i,j=1
+.
+The mass matrix Me can be obtained by Algorithm I-3 in
+Chapter 3, with r = s = p = q = 0 and c = 1.
+Deﬁne zero matrices O2 = [0]Nb,Nbp
+i=1,j=1 and O3 = [0]Nb,Nb
+i=1,j=1.
+Then deﬁne the block mass matrix
+M =
+
+
+Me
+O3
+O2
+O3
+Me
+O2
+Ot
+2
+Ot
+2
+O1
+
+
+46 / 77
+
+
+PAGE 47
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Deﬁne
+AN1 =
+"Z
+Ω
+∂um+1,(l−1)
+1h
+∂x
+φjφi dxdy
+#Nb
+i,j=1
+,
+AN2 =
+Z
+Ω
+um+1,(l−1)
+1h
+∂φj
+∂x φi dxdy
+Nb
+i,j=1
+AN3 =
+Z
+Ω
+um+1,(l−1)
+2h
+∂φj
+∂y φi dxdy
+Nb
+i,j=1
+,
+AN4 =
+"Z
+Ω
+∂um+1,(l−1)
+1h
+∂y
+φjφi dxdy
+#Nb
+i,j=1
+AN5 =
+"Z
+Ω
+∂um+1,(l−1)
+2h
+∂x
+φjφi dxdy
+#Nb
+i,j=1
+,
+AN6 =
+"Z
+Ω
+∂um+1,(l−1)
+2h
+∂y
+φjφi dxdy
+#Nb
+i,j=1
+Then
+AN =
+
+
+AN1 + AN2 + AN3
+AN4
+O2
+AN5
+AN6 + AN2 + AN3
+O2
+Ot
+2
+Ot
+2
+O1
+
+
+Each matrix above can be obtained by Algorithm VIII in Chapter 7.
+47 / 77
+
+
+PAGE 48
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Deﬁne the load vector
+⃗b =
+
+
+
+⃗b1
+⃗b2
+⃗0
+
+
+
+where
+⃗b1 =
+Z
+Ω
+f1φidxdy
+Nb
+i=1
+, ⃗b2 =
+Z
+Ω
+f2φidxdy
+Nb
+i=1
+.
+Here the size of the zero vector is Nbp × 1. That is, ⃗0 = [0]Nbp
+i=1.
+Each of ⃗b1 and ⃗b2 can be obtained by Algorithm II-5 in
+Chapter 4.
+48 / 77
+
+
+PAGE 49
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Deﬁne the vector
+−→
+bN =
+
+
+
+−→
+bN1 + −→
+bN2
+−→
+bN3 + −→
+bN4
+⃗0
+
+
+
+where ⃗0 = [0]Nbp
+i=1 and
+−→
+bN1 =
+"Z
+Ω
+um+1,(l−1)
+1h
+∂um+1,(l−1)
+1h
+∂x
+φi dxdy
+#Nb
+i=1
+,
+−→
+bN2 =
+"Z
+Ω
+um+1,(l−1)
+2h
+∂um+1,(l−1)
+1h
+∂y
+φi dxdy
+#Nb
+i=1
+,
+−→
+bN3 =
+"Z
+Ω
+um+1,(l−1)
+1h
+∂um+1,(l−1)
+2h
+∂x
+φi dxdy
+#Nb
+i=1
+,
+−→
+bN4 =
+"Z
+Ω
+um+1,(l−1)
+2h
+∂um+1,(l−1)
+2h
+∂y
+φi dxdy
+#Nb
+i=1
+.
+49 / 77
+
+
+PAGE 50
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Each vector above can be obtained by Algorithm IX in
+Chapter 7.
+Deﬁne the known vector from the previous time iteration step:
+−→
+X m =
+
+
+
+−→
+X m
+1
+−→
+X m
+2
+−→
+X m
+3
+
+
+
+where
+⃗X m
+1 =
+
+um
+1j
+Nb
+j=1 ,
+⃗X m
+2 =
+
+um
+2j
+Nb
+j=1 ,
+⃗X m
+3 =
+
+pm
+j
+Nbp
+j=1 .
+50 / 77
+
+
+PAGE 51
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Deﬁne the unknown vector
+⃗X m+1,(l) =
+
+
+
+⃗X m+1,(l)
+1
+⃗X m+1,(l)
+2
+⃗X m+1,(l)
+3
+
+
+
+where
+⃗X m+1,(l)
+1
+=
+h
+um+1,(l)
+1j
+iNb
+j=1 ,
+⃗X m+1,(l)
+2
+=
+h
+um+1,(l)
+2j
+iNb
+j=1 ,
+⃗X m+1,(l)
+3
+=
+h
+pm+1,(l)
+j
+iNbp
+j=1 .
+51 / 77
+
+
+PAGE 52
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Matrix formulation
+Deﬁne
+Am+1,(l) = M
+△t + A + AN, ⃗bm+1,(l) = ⃗b + M
+△t
+−→
+X m + −→
+bN.
+For step l (l = 1, 2, · · · , L) of the Newton’s iteration at the
+(m + 1)th step of the time iteration, we obtain the linear
+algebraic system
+Am+1,(l)⃗X m+1,(l) = ⃗bm+1,(l).
+Let X m+1 be the ﬁnal ⃗X m+1,(l) from the above Newton’s
+iteration at the (m + 1)th step of the time iteration.
+52 / 77
+
+
+PAGE 53
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Outline
+1
+Weak formulation
+2
+Semi-discretization
+3
+Full discretization
+4
+Newton’s iteration
+5
+Matrix formulation
+6
+FE method
+7
+More Discussion
+53 / 77
+
+
+PAGE 54
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of a time-independent matrix
+Recall Algorithm I-3 from Chapter 3:
+Initialize the matrix: A = sparse(Ntest
+b
+, Ntrial
+b
+);
+Compute the integrals and assemble them into A:
+FOR n = 1, · · · , N
+FOR α = 1, · · · , Ntrial
+lb
+FOR β = 1, · · · , Ntest
+lb
+Compute r =
+R
+En c ∂r+sϕnα
+∂xr∂ys
+∂p+qψnβ
+∂xp∂yq dxdy;
+Add r to A(T test
+b
+(β, n), T trial
+b
+(α, n)).
+END
+END
+END
+54 / 77
+
+
+PAGE 55
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of the time-independent stiﬀness matrix
+Call Algorithm I-3 with r = 1, s = 0, p = 1, q = 0, c = ν , basis type of
+u for trial function, and basis type of u for test function, to obtain A1.
+Call Algorithm I-3 with r = 0, s = 1, p = 0, q = 1, c = ν , basis type of
+u for trial function, and basis type of u for test function, to obtain A2.
+Call Algorithm I-3 with r = 1, s = 0, p = 0, q = 1, c = ν , basis type of
+u for trial function, and basis type of u for test function, to obtain A3.
+Call Algorithm I-3 with r = 0, s = 0, p = 1, q = 0, c = −1 , basis type
+of p for trial function, and basis type of u for test function, to obtain A5.
+Call Algorithm I-3 with r = 0, s = 0, p = 0, q = 1, c = −1 , basis type
+of p for trial function, and basis type of u for test function, to obtain A6.
+Generate a zero matrix O whose size is Nbp × Nbp.
+Then the stiﬀness matrix
+A = [2A1 + A2 A3 A5; At
+3 2A2 + A1 A6; At
+5 At
+6 O].
+55 / 77
+
+
+PAGE 56
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of the mass matrix
+Call Algorithm I-3 with r = 0, s = 0, p = 0, q = 0, c = 1 ,
+basis type of u for trial function, and basis type of u for test
+function, to obtain the basic mass matrix Me.
+Generate three zero matrices O1, O2, and O3 whose sizes are
+Nbp × Nbp, Nb × Nbp, and Nb × Nb, respectively.
+Then the block mass matrix
+M = [Me O3 O2; O3 Me O2; Ot
+2 Ot
+2 O1].
+56 / 77
+
+
+PAGE 57
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of a time-independent vector
+Recall Algorithm II-3 from Chapter 3:
+Initialize the matrix: b = sparse(Nb, 1);
+Compute the integrals and assemble them into b:
+FOR n = 1, · · · , N:
+FOR β = 1, · · · , Nlb:
+Compute r =
+R
+En f ∂p+qψnβ
+∂xp∂yq dxdy;
+b(Tb(β, n), 1) = b(Tb(β, n), 1) + r;
+END
+END
+57 / 77
+
+
+PAGE 58
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of a time-dependent vector
+Recall Algorithm II-5 from Chapter 4:
+Specify a value for the time t based on the input time;
+Initialize the vector: b = sparse(Nb, 1);
+Compute the integrals and assemble them into b:
+FOR n = 1, · · · , N:
+FOR β = 1, · · · , Nlb:
+Compute r =
+R
+En f (t)∂p+qψnβ
+∂xp∂yq dxdy;
+b(Tb(β, n), 1) = b(Tb(β, n), 1) + r;
+END
+END
+58 / 77
+
+
+PAGE 59
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of the load vector
+Call Algorithm II-5 with p = q = 0 and f = f1 to obtain b1(t).
+Call Algorithm II-5 with p = q = 0 and f = f2 to obtain b2(t).
+Deﬁne a zero column vector ⃗0 whose size is Nbp × 1.
+Then the load vector ⃗b = [b1(t); b2(t);⃗0].
+If f1 and f2 do not depend on t, then this part is exactly the
+same as the assembly of the load vector with Algorithm II-3 in
+Chapter 7.
+59 / 77
+
+
+PAGE 60
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of a matrix for an integral with a ﬁnite element
+coeﬃcient function
+Recall Algorithm VIII from Chapter 7:
+Initialize the matrix: A = sparse(Ntest
+b
+, Ntrial
+b
+);
+Compute the integrals and assemble them into A:
+FOR n = 1, · · · , N:
+FOR α = 1, · · · , Ntrial
+lb
+:
+FOR β = 1, · · · , Ntest
+lb :
+Compute r =
+R
+En
+∂d+ech
+∂xd∂ye
+∂r+sϕnα
+∂xr∂ys
+∂p+qψnβ
+∂xp∂yq dxdy;
+Add r to A(Tb(β, n), Tb(α, n)).
+END
+END
+END
+60 / 77
+
+
+PAGE 61
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of a matrix for an integral with a ﬁnite element
+coeﬃcient function
+Call Algorithm VIII with d = 1, e = 0, r = 0, s = 0, p = 0,
+q = 0, ch = u(l−1)
+1h
+, basis type of u for both trial and test
+functions, to obtain AN1.
+Call Algorithm VIII with d = 0, e = 0, r = 1, s = 0, p = 0,
+q = 0, ch = u(l−1)
+1h
+, basis type of u for both trial and test
+functions, to obtain AN2.
+Call Algorithm VIII with d = 0, e = 0, r = 0, s = 1, p = 0,
+q = 0, ch = u(l−1)
+2h
+, basis type of u for both trial and test
+functions, to obtain AN3.
+Call Algorithm VIII with d = 0, e = 1, r = 0, s = 0, p = 0,
+q = 0, ch = u(l−1)
+1h
+, basis type of u for both trial and test
+functions, to obtain AN4.
+61 / 77
+
+
+PAGE 62
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of a matrix for an integral with a ﬁnite element
+coeﬃcient function
+Call Algorithm VIII with d = 1, e = 0, r = 0, s = 0, p = 0,
+q = 0, ch = u(l−1)
+2h
+, basis type of u for both trial and test
+functions, to obtain AN5.
+Call Algorithm VIII with d = 0, e = 1, r = 0, s = 0, p = 0,
+q = 0, ch = u(l−1)
+2h
+, basis type of u for both trial and test
+functions, to obtain AN6.
+Generate a zero matrix O1 = [0]Nbp
+i,j=1, O2 = [0]Nb,Nbp
+i=1,j=1 and
+O3 = [0]Nb,Nbp
+i=1,j=1.
+Then the stiﬀness matrix
+A = [AN1+AN2+AN3 AN4 O2; AN5 AN6+AN2+AN3 O3; Ot
+2 Ot
+3 O1].
+62 / 77
+
+
+PAGE 63
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of the vector for an integral with two ﬁnite
+element coeﬃcient functions
+Recall Algorithm IX from Chapter 7:
+Initialize the vector: b = sparse(Nb, 1);
+Compute the integrals and assemble them into b:
+FOR n = 1, · · · , N:
+FOR β = 1, · · · , Nlb:
+Compute r =
+R
+En
+∂d+ef1h
+∂xd∂ye
+∂r+sf2h
+∂xr∂ys
+∂p+qψnβ
+∂xp∂yq dxdy;
+b(Tb(β, n), 1) = b(Tb(β, n), 1) + r;
+END
+END
+63 / 77
+
+
+PAGE 64
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Assembly of the vector for an integral with two ﬁnite
+element coeﬃcient functions
+Call Algorithm IX with d = 0, e = 0, r = 1, s = 0, p = 0,
+q = 0 and fh1 = u(l−1)
+1h
+, fh2 = u(l−1)
+1h
+to obtain bN1.
+Call Algorithm IX with d = 0, e = 0, r = 0, s = 1, p = 0,
+q = 0 and fh1 = u(l−1)
+2h
+, fh2 = u(l−1)
+1h
+to obtain bN2.
+Call Algorithm IX with d = 0, e = 0, r = 1, s = 0, p = 0,
+q = 0 and fh1 = u(l−1)
+1h
+, fh2 = u(l−1)
+2h
+to obtain bN3.
+Call Algorithm IX with d = 0, e = 0, r = 0, s = 1, p = 0,
+q = 0 and fh1 = u(l−1)
+2h
+, fh2 = u(l−1)
+2h
+to obtain bN4.
+Deﬁne a zero column vector ⃗0 whose size is Nbp × 1
+Then the load vector −→
+bN = [bN1 + bN2; bN3 + bN4;⃗0].
+64 / 77
+
+
+PAGE 65
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Time-dependent Dirichlet boundary condition
+Recall Algorithm III-4 from Chapter 8:
+Specify a value for the time t based on the input time;
+Deal with the Dirichlet boundary conditions:
+FOR k = 1, · · · , nbn:
+If boundarynodes(1, k) shows Dirichlet condition, then
+i = boundarynodes(2, k);
+¯A(i, :) = 0;
+¯A(i, i) = 1;
+¯b(i) = g1(Pb(:, i), t);
+¯A(Nb + i, :) = 0;
+¯A(Nb + i, Nb + i) = 1;
+¯b(Nb + i) = g2(Pb(:, i), t);
+ENDIF
+END
+65 / 77
+
+
+PAGE 66
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Main pseudo code
+Algorithm B:
+Generate the mesh information matrices P and T.
+Assemble the mass matrix M and stiﬀness matrix A by using Algorithm I-3.
+Generate the initial vector ⃗X 0.
+Iterate in time: FOR m = 0, · · · , Mm −1
+tm+1 = (m + 1)△t;
+Assemble the load vector ⃗b by using Algorithm II-5.
+Newton iteration: FOR l = 1, 2, · · · , L
+Assemble the matrix AN by using Algorithm VIII.
+Assemble the vector −→
+bN by using Algorithm IX.
+Am+1,(l) =
+M
+△t + A + AN and ⃗bm+1,(l) = ⃗b + M
+△t ⃗X m + −→
+bN
+Treat Dirichlet boundary for Am+1,(l) and ⃗bm+1,(l) by Algorithm III-4.
+Solve Am+1,(l)⃗X m+1,(l) = ⃗bm+1,(l) for ⃗X.
+END
+Let X m+1 be the ﬁnal ⃗X m+1,(l) from the above Newton’s iteration.
+END
+66 / 77
+
+
+PAGE 67
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Numerical example
+Example 1: On the domain Ω= [0, 1] × [−0.25, 0], consider
+the time-dependent Navier-Stokes equation
+ut + (u · ∇)u −∇· T(u, p) = f
+in Ω× [0, 1],
+∇· u = 0
+in Ω× [0, 1].
+67 / 77
+
+
+PAGE 68
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Numerical example
+Independent study topic:
+(1) Following the traditional way, which was used to set up
+the numerical examples in the previous chapters, determine
+the source term f, initial condition, Dirichlet boundary
+conditions, and ﬁxed value of p at (0, 0) such that the
+analytic solutions of this problem are
+u1 = (x2y2 + e−y)cos(2πt),
+u2 =
+
+−2
+3xy3 + 2 −π sin(πx)
+
+cos(2πt),
+p = −[2 −π sin(πx)] cos(2πy)cos(2πt).
+(2)Choose h = 1/8, 1/16, 1/32 and △t = 8h3. Use the
+Taylor-Hood ﬁnite elements with backward Euler scheme to
+solve this equation and provide the numerical errors of u and
+p in L2, L∞, and H1 norms.
+68 / 77
+
+
+PAGE 69
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Outline
+1
+Weak formulation
+2
+Semi-discretization
+3
+Full discretization
+4
+Newton’s iteration
+5
+Matrix formulation
+6
+FE method
+7
+More Discussion
+69 / 77
+
+
+PAGE 70
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Mixed boundary conditions
+The treatment of the stress/Robin boundary conditions is
+similar to that of Chapter 8.
+If the functions in the stress/Robin boundary conditions are
+independent of time, then the same subroutines from Chapter
+7 can be used before the time iteration starts.
+If the functions in the stress/Robin boundary conditions
+depend on time, then the same algorithms as those in Chapter
+7 can be used at each time iteration step. But the time needs
+to be speciﬁed in these algorithms.
+70 / 77
+
+
+PAGE 71
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Mixed boundary conditions
+Consider
+ut + (u · ∇)u −∇· T(u, p) = f in Ω×[0, T],
+∇· u = 0 in Ω×[0, T],
+T(u, p)n = p on ΓS×[0, T],
+T(u, p)n + ru = q on ΓR×[0, T],
+u = g on ΓD×[0, T],
+u = u0,
+at t = 0 and in Ω.
+where ΓS, ΓR ⊂∂Ωand ΓD = ∂Ω/(ΓS ∪ΓR).
+71 / 77
+
+
+PAGE 72
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Mixed boundary conditions
+Recall
+Z
+Ω
+ut · v dxdy +
+Z
+Ω
+(u · ∇)u · v dxdy +
+Z
+Ω
+2νD(u) : D(v) dxdy
+−
+Z
+Ω
+p(∇· v) dxdy −
+Z
+∂Ω
+(T(u, p)n) · v ds =
+Z
+Ω
+f · v dxdy,
+−
+Z
+Ω
+(∇· u)q dxdy = 0.
+Since the solution on ΓD = ∂Ω/(ΓS ∪ΓR) is given by u = g,
+then we can choose the test function v(x, y) such that v = 0
+on ∂Ω/(ΓS ∪ΓR).
+72 / 77
+
+
+PAGE 73
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Mixed boundary conditions
+Hence, similar to the treatment of the mixed boundary
+condition in Chapter 7, the weak formulation is to ﬁnd
+u ∈H1(0, T; [H1(Ω)]2) and p ∈L2(0, T; L2(Ω)) such that
+Z
+Ω
+ut · v dxdy +
+Z
+Ω
+(u · ∇)u · v dxdy
++
+Z
+Ω
+2νD(u) : D(v) dxdy −
+Z
+Ω
+p(∇· v) dxdy+
+Z
+ΓR
+ru · v ds
+=
+Z
+Ω
+f · v dxdy+
+Z
+ΓR
+q · v ds +
+Z
+ΓS
+p · v ds,
+−
+Z
+Ω
+(∇· u)q dxdy = 0.
+for any v ∈[H1
+0D(Ω)]2 and q ∈L2(Ω) where
+H1
+0D(Ω) = {w ∈H1(Ω) : w = 0 on ΓD}.
+Code? Combine all of the subroutines for Dirichlet/Stress/Robin
+boundary conditions.
+73 / 77
+
+
+PAGE 74
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Mixed boundary conditions in normal/tangential directions
+Consider
+ut + (u · ∇)u −∇· T(u, p) = f in Ω×[0, T],
+∇· u = 0 in Ω×[0, T],
+ntT(u, p)n = pn, τ tT(u, p)n = pτ on ΓS×[0, T],
+ntT(u, p)n + rntu = qn, τ tT(u, p)n + rτ tu = qτ on ΓR×[0, T],
+u = g on ΓD×[0, T],
+u = u0,
+at t = 0 and in Ω.
+where ΓS, ΓR ⊂∂Ω, ΓD = ∂Ω/(ΓS ∪ΓR), n = (n1, n2)t is
+the unit outer normal vector of ∂Ω, and τ = (τ1, τ2)t is the
+corresponding unit tangential vector of ∂Ω.
+74 / 77
+
+
+PAGE 75
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Mixed boundary conditions in normal/tangential directions
+Recall
+Z
+Ω
+ut · v dxdy +
+Z
+Ω
+(u · ∇)u · v dxdy +
+Z
+Ω
+2νD(u) : D(v) dxdy
+−
+Z
+Ω
+p(∇· v) dxdy −
+Z
+∂Ω
+(T(u, p)n) · v ds =
+Z
+Ω
+f · v dxdy,
+−
+Z
+Ω
+(∇· u)q dxdy = 0.
+Since the solution on ΓD = ∂Ω/(ΓS ∪ΓR) is given by u = g,
+then we can choose the test function v(x, y) such that v = 0
+on ∂Ω/(ΓS ∪ΓR).
+75 / 77
+
+
+PAGE 76
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Mixed boundary conditions in normal/tangential directions
+Similar to the derivation of mixed boundary conditions in
+normal/tangential directions in Chapter 7, we obtain
+Z
+∂Ω
+(T(u, p)n) · v ds
+=
+Z
+ΓS
+(T(u, p)n) · v ds +
+Z
+ΓR
+(T(u, p)n) · v ds
++
+Z
+∂Ω/(ΓS∪ΓR)
+(T(u, p)n) · v ds
+=
+Z
+ΓS
+pn(ntv) ds +
+Z
+ΓS
+pτ(τ tv) ds
+
++
+Z
+ΓR
+qn(ntv) ds +
+Z
+ΓR
+qτ(τ tv) ds
+
+−
+Z
+ΓR
+(rntu)(ntv) ds +
+Z
+ΓR
+(rτ tu)(τ tv) ds
+
+,
+76 / 77
+
+
+PAGE 77
+Weak formulation
+Semi-discretization
+Full discretization
+Newton’s iteration
+Matrix formulation
+FE method
+More Discussion
+Mixed boundary conditions in normal/tangential directions
+Hence, similar to the treatment of the mixed boundary conditions in
+normal/tangential directions in Chapter 7, the weak formulation is
+to ﬁnd u ∈H1(0, T; [H1(Ω)]2) and p ∈L2(0, T; L2(Ω)) such that
+Z
+Ω
+ut · v dxdy +
+Z
+Ω
+(u · ∇)u · v dxdy +
+Z
+Ω
+2νD(u) : D(v) dxdy
+−
+Z
+Ω
+p(∇· v) dxdy+
+Z
+ΓR
+(rntu)(ntv) ds +
+Z
+ΓR
+(rτ tu)(τ tv) ds
+=
+Z
+Ω
+f · v dxdy+
+Z
+ΓR
+qn(ntv) ds +
+Z
+ΓR
+qτ(τ tv) ds
++
+Z
+ΓS
+pn(ntv) ds +
+Z
+ΓS
+pτ(τ tv) ds,
+−
+Z
+Ω
+(∇· u)q dxdy = 0,
+for any v ∈[H1
+0D(Ω)]2 and q ∈L2(Ω).
+Code? Combine all of the subroutines for Dirichlet/Stress/Robin
+boundary conditions.
+77 / 77

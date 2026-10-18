@@ -1,0 +1,3650 @@
+[PDF PAGE 1]
+ERROR ANALYSIS OF BDF 1–6 TIME-STEPPING METHODS FOR
+THE TRANSIENT STOKES PROBLEM:
+VELOCITY AND PRESSURE ESTIMATES∗
+ALESSANDRO CONTRI†, BAL´AZS KOV´ACS‡, AND ANDR´E MASSING§
+Abstract. We present a new stability and error analysis of fully discrete approximation schemes
+for the transient Stokes equation. For the spatial discretization, we consider a wide class of Galerkin
+finite element methods which includes both inf-sup stable spaces and symmetric pressure stabilized
+formulations. We extend the results from Burman and Fern´andez [SIAM J. Numer. Anal., 47 (2009),
+pp. 409-439] and provide a unified theoretical analysis of backward difference formulae (BDF meth-
+ods) of order 1 to 6. The main novelty of our approach lies in deriving optimal-order stability and
+error estimates for both the velocity and the pressure using Dahlquist’s G-stability concept together
+with the multiplier technique introduced by Nevanlinna and Odeh and recently by Akrivis et al.
+[SIAM J. Numer. Anal., 59 (2021), pp. 2449-2472]. When combined with a method dependent Ritz
+projection for the initial data, unconditional stability can be shown while for arbitrary interpolation,
+pressure stability is subordinate to the fulfilment of a mild inverse CFL-type condition between space
+and time discretizations.
+Key words. Transient Stokes equation, backward finite differences, G-stability, multiplier tech-
+nique, symmetric pressure stabilization
+AMS subject classifications. 65M12, 65M15, 65M60, 76M10
+1. Introduction. Let Ω⊂Rd, d ∈{2, 3} be a Lipschitz domain with bound-
+ary ∂Ωand J := (0, T), T > 0 be a finite time interval. We consider the transient
+Stokes equation as a simplified prototype problem for the time-dependent flow of an
+incompressible fluid: find u: Ω× J →Rd and p: Ω× J →R such that
+(1.1)
+
+
+
+
+
+
+
+
+
+∂tu −ν∆u + ∇p = f
+in Ω× J,
+∇· u = 0
+in Ω× J,
+u = 0
+on ∂Ω× J,
+u(·, 0) = u0
+in Ω,
+where f : Ω× J →R is an external force field, u0 : Ω→Rd is the given initial,
+divergence-free velocity field and ν > 0 denotes a constant kinematic viscosity.
+1.1. State of the art. This paper is concerned with the stability and error
+analysis of fully discrete formulations of the transient Stokes equation (1.1). We an-
+alyze BDF methods of order 1–6 in combination with a large class of Galerkin finite
+element methods which utilize so-called symmetric pressure stabilizations. For the
+classical analysis of inf-sup stable Galerkin finite elements paired with lower order
+time stepping schemes, we refer to [23, Part XIV] and [29, Chapter 3–7]. Due to the
+complexity of constructing mixed finite elements which provably satisfy a discrete uni-
+form inf-sup condition, stabilized methods have been developed and analyzed which
+circumvent the inf-sup condition and allow for equal-order interpolation spaces. Here,
+a main challenge in the design and theoretical analysis of the fully discrete transient
+∗Submitted to the editors December 12, 2023.
+Funding: The work of B.K. is funded by DFG Heisenberg Programme (Pr.-ID 446431602).
+†Department of Mathematical Sciences, NTNU, Trondheim, Norway (alessandro.contri@ntnu.no).
+‡Institut f¨ur Mathematik, Universit¨at Paderborn, Paderborn, Germany (balazs.kovacs@math.uni-
+paderborn.de).
+§Department of Mathematical Sciences, NTNU, Trondheim, Norway (andre.massing@ntnu.no).
+1
+arXiv:2312.05511v1  [math.NA]  9 Dec 2023
+
+[PDF PAGE 2]
+2
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+Stokes problem is the intricate interplay between the selected stabilized space dis-
+cretization of the Stokes operator and the chosen time stepping scheme. For instance,
+the popular strongly consistent Pressure Stabilized Petrov–Galerkin (PSPG) method,
+proposed in [28], introduces a coupling between the time derivative of the velocity
+and the pressure gradient in the transient case. As a result, pressure instabilities can
+occur when an inverse parabolic Courant–Friedrichs–Lewy (CFL) condition between
+the time step τ and the mesh size h in the form τ > Ch2/ν is not satisfied. Moreover,
+H1-conform discrete velocity spaces are also subject to an inverse parabolic or hyper-
+bolic CFL condition for BDF-1 or BDF-2 schemes, respectively, see [13]. These small
+time step instabilities can be avoided by a careful construction of the initial data [30].
+As an alternative to residual-based stabilization approaches such as the PSPG
+method, a number of weakly consistent symmetric pressure stabilizations have been
+proposed. They have the favorable property that they typically commute with the
+discretization of both temporal operators and optimal control problems. Instances
+include the pressure gradient stabilization by Brezzi and Pitk¨aranta [10], Orthogonal
+Subscale Stabilizations (OSS) [17], methods based on certain pressure projections
+such as the Local Projection Stabilization (LPS) [8] or the method by Dohrmann
+and Bochev [20], and methods based on a Continuous Interior Penalty (CIP) for
+H1-conform discrete pressure variable [14]. In [12], all the aforementioned symmetric
+pressure stabilized formulations were put into a general abstract framework to provide
+a unified analysis of fully discrete formulations employing either BDF-1, BDF-2 or
+Crank-Nicolson time stepping methods. Optimal convergence rates for the velocity
+and pressure are derived if a suitable Ritz projection is used for the initial data,
+otherwise a weak inverse CFL condition of the form τ > Ch2k must be satisfied,
+where k is the polynomial degree of the employed velocity approximation space. The
+analysis was later expanded to the full Navier–Stokes case in [24].
+The majority of analyses of either inf-sup stable or stabilized formulations of the
+transient Stokes equation are restricted to at most second order in time schemes such
+as BDF-1, BDF-2 or Crank-Nicolson methods. Notable exceptions are discontinuous
+Galerkin time stepping methods, and we refer to [16] and [1] for the case of inf-sup
+stable and LPS stabilized spatial discretizations, respectively, and to [9] for an analysis
+which involves inf-sup stable spaces and only minimal regularity assumptions on the
+data. To the best of our knowledge, the only available analysis of higher order BDF
+methods for the transient Stokes problem is provided in [33], which considers BDF-q
+schemes up to order 5 on both stationary and moving domains. The analysis is quite
+elaborate as it requires the solution of a nonlinear system of coefficients that are needed
+to guarantee that certain telescopic properties of the discrete time derivative and a
+positivity condition for the energy bilinear form are upheld when suitable discrete
+velocity test functions are inserted into the momentum equation. The coefficients
+do not come in close form and are computed numerically for q = 3, 4, 5 while the
+case q = 6 could not be treated. Most importantly, the described approach does not
+provide stability or error estimates for the pressure approximation. However, in recent
+years, Dahlquist’s G-stability theory [19] in connection with the multiplier technique
+devised by Nevanlinna and Odeh [37] has developed into a powerful technique to
+analyse higher order BDF time stepping methods for parabolic problems in an elegant
+and unified way. Originally developed for the stability analysis of linear multistep
+methods for contractive nonlinear ordinary differential equations, the use of these
+techniques for parabolic PDEs using BDF up to order 5 has been first presented
+in [34]. The extension to quasi-linear parabolic PDEs is due to [7]. These results
+have been successively extended to a larger class of problems (see [6, 5, 3]) and the
+
+[PDF PAGE 3]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+3
+original estimates by Nevanlinna ([35, 36]) were sharpened in [4]. The case of BDF-6 is
+treated in [2]. We refer to [25, 26] for the theory of BDF methods and G-stability. For
+PDEs, fully discrete error analysis of high-order BDF methods utilizing approaches
+similar to what is done in this text are considered in [34] with application to moving
+surfaces, while [31, 32] and [3] used the multiplier techniques but testing with the
+time derivatives. The multiplier technique is also used in the analysis of the so called
+Scalar Auxiliary Variable (SAV) method to prove convergence of higher order time
+stepping schemes, see for example [27].
+1.2. New contributions and outline of the paper. To the best of our know-
+ledge there is no fully discrete analysis of the transient Stokes problem for BDF-q from
+1 to 6 providing stability and optimal error estimates for both velocity and pressure.
+The goal of our paper is therefore to close this gap, and at the same time, we wish
+to exemplify how the concept of G-stability and multiplier techniques can be used
+to analyze time-dependent saddle point problems by mimicking arguments from the
+stability analysis of the continuous problems. We start therefore by reviewing the
+weak formulation of the transient Stokes problem in Section 2, with a particular
+emphasis on how bounds for the velocity and its time-derivate in the respectively L2–
+H1 and L2–L2 norms lead to a pressure estimate in the L2–L2 norm via the inf-sup
+condition. Section 3 then provides details on the fully discrete formulation of the
+transient Stokes problem and collects the relevant theoretical results for its analysis.
+We recall the spatial discretization framework from [12] which includes a large family
+of Galerkin finite element methods including symmetric pressure stabilized and inf-
+sup stable formulations. Each spatial discretization yields a method-dependent Ritz
+projection that will play an important role later in the analysis. For the discretization
+in time, we use BDF-q methods of order q = 1, . . . , 6, and we recall the main results
+from Dahlquist’s theory of G-stability [19] and multiplier techniques by Nevanlinna–
+Odeh [37] and Akrivis et al. [2] that will be crucial for the subsequent stability analysis.
+In Section 4, we start the development of the new stability analysis of the fully
+discrete transient Stokes problem. As a first step, L∞in time bounds for the ve-
+locity and pressure with respect to H1-norm for the velocity and the stabilization
+induced semi-norm for the pressure are established by combining G-stability with the
+Nevanlinna–Odeh multiplier technique, similar to analysis in [34, 7]. But in contrast
+to the parabolic case, we also exploit the stabilized discrete formulation of the incom-
+pressibility constraint to recast certain pressure-velocity coupling terms as pressure
+contribution measured in a semi-norm. Next, we establish a bound for the discrete
+time-derivative of the velocity with respect to the L2–L2 norm. This is the trickiest
+part of our stability analysis as we need to test the weak momentum equation at the
+current and previous time-step with suitably scaled discrete time-derivatives to use
+the multiplier technique and G-stability, similar to analysis in [31, 3]. Again, the
+weak incompressibility equation allows us to handle velocity-pressure coupled terms
+which arise during the testing procedure. Moreover, unconditional stability for the
+pressure is only ensured if the initial values are divergence-free in a suitable discrete
+sense. The final bound for the pressure is derived from the modified discrete inf-sup
+condition similar to the continuous case. Section 5 is then devoted to extend our
+stability analysis to BDF-6. Since there is no Nevanlinna–Odeh multiplier for BDF-6,
+we combine our analysis with the approach from [2] and use a relaxed multiplier which
+in turn requires a Toepliz matrix based argument to ensure that certain cross term
+contributions remain positive after telescoping as explained in [2]. However, the final
+stability estimates are completely analogous to the ones derived in Section 4.
+
+[PDF PAGE 4]
+4
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+The derivation of optimal-order error bounds for both the velocity and pressure is
+performed in Section 6. The Ritz projection is used to split the total error and allows
+us to rely on the stability estimates of Section 4 and Section 5. Concerning the velocity
+errors, optimal-order error bounds are derived using the finite element interpolation of
+a sufficiently regular initial data. For the pressure, the stability constraint of discretely
+divergence-free initial data results in being crucial in order to obtain optimal-order
+error bounds. Afterwards in Section 7, we briefly describe how the stability analysis
+can be adapted if the initial data is given without such a property, leading to the
+same small time-step limit phenomena previously analyzed in [12] for low-order time
+stepping schemes. Finally, we present a series of numerical experiments in Section 8
+which illustrate and complement our theoretical results.
+2. The transient Stokes problem. In this section we present the weak for-
+mulation of the transient Stokes problem and introduce the notation used throughout
+this paper. While we focus on the specific case of the transient Stokes problem, our
+derivations are presented in such a form that they can easily be applied to general
+time-dependent saddle point problems which exhibit the same structure in their weak
+formulations. The main purpose of this section is to review the main arguments in
+the stability analysis for the velocity and the pressure in the fully continuous setting,
+as our main contribution is to show how to translate these arguments to the full
+discretization to prove stability and convergence of the numerical method.
+2.1. Notation. Throughout the paper the standard notation for Sobolev spaces
+is used (see, for example, [21]). Given a measurable domain Ω∈Rd, d = 2, 3 the
+norm (resp. semi-norm) in W m,p(Ω) is denoted by ∥· ∥m,p (resp. | · |m,p). The case
+p = 2 will be distinguished by using Hm(Ω) to denote the space W m,2(Ω) and by
+using the norm (resp. semi-norm) notation ∥· ∥m (resp. | · |m). The space H1
+0(Ω)
+is the closure in H1(Ω) of the set of infinitely differentiable functions with compact
+support in Ω, and H−1(Ω) is its dual.
+We denote by (·, ·) the inner product in
+[L2(Ω)]d (the domain of integration Ωis taken for granted) and we define L2
+0(Ω) =
+{q ∈L2(Ω) : (q, 1) = 0}.
+Given the Banach space W and a time interval J, we
+denote the corresponding Bochner space, i.e. the space of functions defined on the
+time interval J with values in W, by Lp(J; W) with norm ∥· ∥Lp(J,W ). We also define
+Hq(J, W) := {∂(i)
+t v ∈L2(J; W), i = 0, . . . , q}. Identifying [L2(Ω)]d with its dual, the
+spaces H1
+0(Ω) ⊂L2(Ω) ⊂H−1(Ω) constitutes a Gelfand triple.
+2.2. Weak formulation. We recast the transient Stokes problem into a general
+time-dependent saddle point problem in weak formulation where we seek (u(t), p(t)) ∈
+V × Q such that
+(∂tu(t), v) + a(u(t), v) + b(p(t), v) = (f(t), v)
+a.e. in J,
+(2.1a)
+b(q, u(t)) = 0
+a.e. in J,
+(2.1b)
+u(0) = u0
+a.e. in Ω,
+(2.1c)
+for all (v, q) ∈V × Q and t > 0. Here, V and Q are appropriate Hilbert spaces
+endowed with the respective norms ∥·∥V and ∥·∥Q. As usual, we assume that the
+involved bilinear forms are bounded so that
+(2.2)
+a(u, v) ⩽C1∥u∥V ∥v∥V ,
+b(v, q) ⩽C2∥v∥V ∥q∥Q ,
+holds for some positive finite constants C1, C2 ⩾0. To ensure well-posedness of (2.1),
+we require that a(·, ·) is coercive and that the Ladyzhenskaya–Babˆuska–Brezzi (LBB)
+
+[PDF PAGE 5]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+5
+condition (also known as inf-sup condition) holds for b(·, ·),
+a(v, v) ⩾α∥v∥2
+V ,
+∀v ∈V,
+(2.3a)
+β∥q∥Q ⩽sup
+v∈V
+|b(q, v)|
+∥v∥V
+∀q ∈Q,
+(2.3b)
+for some constants α, β > 0. To ease the notation, most inequalities will be written
+down with generic constants C that are independent of the mesh size and data, and we
+will be explicit only when the constants are crucial for the analysis. For the concrete
+case of the transient Stokes equation, the bilinear forms in (2.1) are given by
+(2.4)
+a(u, v) = (ν∇u, ∇v) ,
+b(p, v) = −(p, ∇· v) ,
+where following time independent function spaces and associated norms are employed,
+H = [L2(Ω)]d,
+V = [H1
+0(Ω)]d,
+Q = L2
+0(Ω),
+(2.5)
+∥v∥H = (v, v)
+1
+2 ,
+∥v∥V = ∥ν
+1
+2 ∇v∥H = a(v, v)
+1
+2 ,
+∥q∥Q = ∥ν−1
+2 q∥H.
+(2.6)
+In particular note that the norm ∥·∥V identifies with the so called energy norm result-
+ing in the equality a(v, v) = ∥v∥2
+V . By imposing homogeneous Dirichlet boundary
+conditions on the whole boundary, the Poincar´e inequality ∥v∥H ⩽cP ν−1
+2 ∥v∥V holds,
+see, e.g., [21, Lemma 3.27].
+Remark 2.1. The analysis that will follow depends on the fact that we work with
+the equality a(v, v) = ∥v∥2
+V . In the case of a general saddle point problem posed on
+Hilbert spaces where assumptions (2.2) and (2.3) hold, we can always work with the
+energy norm defined by a(v, v) = ∥·∥2
+V and continue to have a well-posed problem.
+More details can be found in [22, Section 49.2.3].
+2.3. Stability of the transient Stokes problem. As usual, the a priori error
+estimates in this paper will be shown by separating the issues of stability and con-
+sistency. The stability proofs then all aim to bound the numerical solution in terms
+of forcing terms and initial values. Here, we review the basic mechanism behind the
+stability proofs for the fully continuous Stokes problem, which we subsequently will
+try to mimic in order to derive a priori stability estimates for the numerical method.
+This allows us to sketch the big picture used in the fully discrete stability analysis
+proposed in this article. It is our intention to derive a priori stability estimates for
+both the velocity and the pressure, where the latter requires the stability of the ve-
+locity derivative. For the continuous case it is possible to derive an a priori bound in
+L2(J; V ′) by using time distributional derivatives, see [23, Section 72.4]. For simplic-
+ity we follow the analysis in [23, Section 72.3] and choose f ∈L2(J; H) instead. We
+also define V0,div := {v ∈V |∇· v = 0} and require u0 ∈V0,div together with (u, p) in
+L2(J; V ) × L2(J; Q). An equivalent reformulation of (2.1) is then that
+(2.7)
+Z
+J
+ (∂tu(t), v) + a(u(t), v) + b(p(t), v) −b(q, u(t))
+
+dt =
+Z
+J
+(f(t), v) dt
+holds for all v ∈L2(J; V ) and all q ∈L2(J; Q). Under all these assumptions (2.1)
+is well posed and admits a unique solution, see [23, Section 72.2]. We also have that
+∂tu ∈L2(J; H) and that (2.1b) implies u ∈L2(J, V0,div).
+
+[PDF PAGE 6]
+6
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+Velocity bound. Assuming sufficient regularity of the solutions, we start by
+choosing as test functions v = u(t) ∈V and q = p(t) ∈Q in the weak form (2.1).
+Subtracting then (2.1b) from (2.1a), the contributions of the bilinear form b(·, ·) cancel
+out, yielding
+1
+2
+d
+dt∥u(t)∥2 + ∥u(t)∥2
+V = (∂tu(t), u(t)) + a(u(t), u(t)) = (f(t), u(t))
+(2.8)
+⩽c2
+P
+2ν ∥f(t)∥2
+H + 1
+2∥u(t)∥2
+V ,
+(2.9)
+after the use of a Cauchy–Schwarz inequality, the Poincar´e inequality and modified
+Young’s inequalities. A successive integration in time over J = (0, T) and rearrange-
+ment of terms gives the bound
+(2.10)
+∥u(T)∥2
+H + ∥u∥2
+L2(J;V ) ⩽∥u0∥2
+H + c2
+P
+ν ∥f∥2
+L2(J;H) .
+Pressure bound. A bound for the pressure can be obtained starting from the
+inf-sup condition (2.3),
+(2.11)
+∥p(t)∥Q ⩽1
+β sup
+v∈V
+b(p(t), v)
+∥v∥V
+= 1
+β sup
+v∈V
+(f(t), v) −a(u(t), v) −(∂tu(t), v)
+∥v∥V
+⩽1
+β sup
+v∈V
+∥f(t)∥H ∥v∥H + ∥u(t)∥V ∥v∥V + ∥∂tu(t)∥H ∥v∥H
+∥v∥V
+= 1
+β
+ cP
+ν
+1
+2 ∥f(t)∥H + ∥u(t)∥V + cP
+ν
+1
+2 ∥∂tu(t)∥H
+
+.
+We recognize at this point that a bound for ∂tu(t) in the H-norm is needed, which
+can be obtained by formally testing (2.1) with v = ∂tu(t) and q = 0 leading to
+∥∂tu(t)∥2
+H + 1
+2
+d
+dt∥u(t)∥2
+V = ∥∂tu(t)∥2
+H + a(u(t), ∂tu(t)) = (f(t), ∂tu(t))
+(2.12)
+⩽1
+2∥f(t)∥2
+H + 1
+2∥∂tu(t)∥2
+H
+(2.13)
+Given the initial condition u0,div ∈V0,div and integrating in J leads to
+(2.14)
+∥∂tu∥2
+L2(J;H) + ∥u(T)∥2
+V ⩽∥u0∥2
+V + ∥f∥2
+L2(J;H).
+Technically, ∂tu(t) /∈V and cannot be inserted directly into the bilinear forms a(·, ·),
+b(·, ·). We thus have to follow a semi-discrete Galerkin-type argument and appeal to
+compactness results in order to arrive to (2.14) and we refer to [23, p.234-239] for the
+details. As only a bound on the velocity derivative in terms of the Bochner norm is
+obtained, the pressure is typically estimated in the same way by integrating (2.11)
+over J,
+(2.15)
+∥p∥2
+L2(J;Q) ⩽1
+β2
+Z t
+0
+ cP
+ν
+1
+2 ∥f(s)∥H + ∥u(s)∥V + cP
+ν
+1
+2 ∥∂tu(s)∥H
+2
+ds
+⩽3
+β2
+Z t
+0
+c2
+P
+ν ∥f(s)∥2
+H + ∥u(s)∥2
+V + c2
+P
+ν ∥∂tu(s)∥2
+H
+
+ds
+⩽3
+β2
+
+∥u0∥2
+H + c2
+P
+ν ∥u0∥2
+V + 3c2
+P
+ν ∥f∥2
+L2(J;H)
+
+.
+
+[PDF PAGE 7]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+7
+Combined stability bound. Summing (2.10) and (2.15), we obtain the follow-
+ing stability estimate for sufficiently regular solutions of the transient Stokes equation
+(2.16)
+∥u(T)∥2
+H + ∥u∥2
+L2(J;V ) + ∥p∥2
+L2(J;Q) ⩽C
+
+∥u0∥2
+H + c2
+P
+ν ∥u0∥2
+V + c2
+P
+ν ∥f∥2
+L2(J;H)
+
+.
+3. Preliminaries and notation. In this section, we collect the main assump-
+tions and theoretical tools for the spatial and temporal discretization approaches
+considered in this paper. First, we briefly recap the spatial discretization framework
+of Galerkin finite element methods with symmetric pressure stabilization. Afterwards,
+the q-step Backward Difference Formulas and related stability concepts are reviewed.
+3.1. Space semi-discretization based on symmetric pressure stabiliza-
+tion. We proceed with describing the spatial semi-discretization of the problem where
+we closely follow the presentation in [12].
+Let {Th}0<h⩽1 be a family of quasi-
+uniform triangulations of the domain Ω.
+The subscript h refers to the mesh size
+h = maxT ∈Th hT of Th where hT is the diameter of a mesh cell T ∈Th. We define the
+spaces of continuous and (possibly) discontinuous piecewise polynomial functions of
+degree k ⩾1 and l ⩾0 (k −1 ⩽l ⩽k), respectively,
+Xh = {vh ∈C(Ω) : vh ∈Pk
+c(Th) and vh|T ∈Pk(T) ∀T ∈Th},
+(3.1a)
+Mh = {qh ∈L2(Ω) : qh ∈Pl
+dc(Th)}.
+(3.1b)
+The approximate velocities will belong to the space Vh = [Xh]d ∩V , and for the
+pressure we will use either Qh = Mh ∩Q or Qh = Mh ∩Q ∩C0(Ω).
+To handle mixed finite element spaces which violate the discrete counterpart of
+the inf-sup condition (2.3b), we allow for the addition of a pressure stabilization form
+jh : Qh × Qh →R to the discrete weak formulation of the transient Stokes problem.
+We require that the stabilization form jh is symmetric, positive semi-definite and
+satisfy the boundedness properties
+|jh(ph, qh)| ⩽|ph|jh|qh|jh ⩽C∥ph∥Q ∥qh∥Q
+∀ph, qh ∈Qh,
+(3.2)
+where the first inequality for the jh-induced semi-norms |·|jh is automatically satisfied.
+Next, we assume the existence of a quasi-interpolation operator Ip
+h : Q →Qh such
+that
+|Ip
+hq|
+1
+2
+jh ⩽C hsp
+ν ∥q∥sp
+∀q ∈Hs(Ω)
+(3.3)
+∥q −Ip
+hq∥Q ⩽C hl+1
+ν
+1
+2 ∥q∥l+1
+∀q ∈Hl+1(Ω).
+(3.4)
+where sp
+def
+= min{s, ¯l, l + 1}, ¯l ⩾1 is the order of weak consistency of the stabilization
+operator. We also assume the existence of a quasi-interpolation operator Iu
+h : V →Vh
+satisfying the approximation properties
+∥v −Iu
+h v∥H + hν−1
+2 ∥v −Iu
+h v∥V ⩽CIhru∥v∥ru ,
+(3.5a)
+|b(qh, v −Iu
+h v)| ⩽C|qh|jh
+
+ν
+1
+2 h−1 (vh −Iu
+h v)
+
+H + ∥vh −Iu
+h v∥V
+
+,
+(3.5b)
+for all v ∈[Hr(Ω)]d, ru
+def
+= min{r, k + 1}, and (qh, v) ∈Qh × V . Many methods fall
+under the umbrella of this type of symmetric pressure stabilization, and a compre-
+hensive list and respective description can be found in [12] and [24]. The assumptions
+above ensure that the following modified inf-sup condition holds, see [12][Lemma 3.1].
+
+[PDF PAGE 8]
+8
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+Lemma 3.1. There exist two constants C, β, independent of h and ν, such that
+(3.6)
+β∥qh∥Q ⩽
+sup
+vh∈[Vh]d
+|b(qh, vh)|
+∥vh∥V
++ C|qh|jh
+∀qh ∈Qh.
+Now we are in the position to present the semi-discrete formulation of the transient
+Stokes problem (2.1) which is to find uh ∈H1(J; Vh) and ph ∈L2(J; Qh) such that
+(∂tuh(t), vh) + a(uh(t), vh) + b(ph(t), vh) = (f(t), vh) ,
+(3.7a)
+b(qh, uh(t)) −jh(qh, ph(t)) = 0
+(3.7b)
+holds true in L2(J) for all vh ∈Vh and all qh ∈Qh. Under the above assumptions,
+the well-posedness of Problem (3.7) is ensured, see for instance [23, p.243].
+Remark 3.2. If the spaces Vh and Qh constitute an inf-sup stable pair, it is enough
+to take jh(·, ·)
+def
+= 0 to guarantee the well-posedness of the semi-discrete problem (3.7).
+As a crucial tool in the forthcoming analysis, we recall from [12, equation (3.16)]
+the definition of the (Stokes) Ritz projection operator Sh : V × Q →Vh × Qh: for
+each (u, p) ∈V × Q, the velocity and pressure component of the Ritz projection
+(Su
+h , Sp
+h) := Sh(u, p) ∈Vh × Qh are defined as the unique solution of Stokes problem
+a(Su
+h , vh) + b(Sp
+h, vh) = a(u, vh) + b(p, vh)
+∀vh ∈Vh,
+(3.8a)
+b(qh, Su
+h ) −jh(Sp
+h, qh) = 0
+∀qh ∈Qh.
+(3.8b)
+Problem (3.8) is well posed thanks to the inf-sup condition (3.6), and satisfies a priori
+stability estimate of the form
+(3.9)
+∥Su
+h ∥2
+V + |Sp
+h|2
+jh ⩽C
+
+∥u∥2
+V + ∥p∥2
+Q
+
+.
+Moreover, the following error estimates for the Ritz map were shown in [12].
+Lemma 3.3. Let (u, p) ∈C1([0, T], [Hr(Ω)]d ∩V0,div × Hs(Ω)) with r ⩾2 and
+s ⩾1. The following error estimate for the projection Sh holds with α ∈{0, 1} (recall
+that ru = min{r, k + 1} and sp = min{s, ¯l, l + 1}):
+∥∂α
+t (u −Su
+h )∥V + |∂α
+t Sp
+h|jh ⩽C
+
+ν
+1
+2 hru−1∥∂α
+t u∥ru + ν−1
+2 hsp∥∂α
+t p∥sp
+
+,
+(3.10a)
+∥p −Sp
+h∥Q ⩽C
+
+ν
+1
+2 hru−1∥u∥ru + ν−1
+2 hsp∥p∥sp
+
+,
+(3.10b)
+for all t ∈[0, T] and C > 0 independent of ν and h. Moreover, provided the domain Ω
+is sufficiently smooth and if ˜l ⩾1, an improved error estimate is given in the weaker
+H ≡L2-norm, see [22, 31.4, 32.3]. This reads
+(3.11)
+∥∂α
+t (u −Su
+h )∥H ⩽Ch
+
+∥∂α
+t (u −Su
+h )∥V + |∂α
+t Sp
+h|jh
+
+.
+3.2. Time discretization using BDF methods. For the temporal discretiza-
+tion, we consider the q-step backward difference formulae (BDF methods).
+Let
+tn = nτ, n = 0, . . . , N be a uniform partition of the time interval [0, T] with time
+step τ = T/N, then the BDF approximation of the time derivative is given by
+(3.12)
+¯∂qun
+h = 1
+τ
+q
+X
+i=0
+δi un−i
+h
+,
+n ⩾q,
+
+[PDF PAGE 9]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+9
+where the method coefficients δi are determined from the relation
+(3.13)
+δ(ζ) =
+q
+X
+i=0
+δiζi =
+q
+X
+l=1
+1
+l (1 −ζ)l.
+The BDF methods are known to be stable and of classical order q for 1 ⩽q ⩽6, see
+[25, 26]. We assume f ∈C0( ¯J; L2(Ω)) and set f(tn) = f n. The fully discrete system
+reads: for n ⩾q and given values un−1, . . . , un−q, find (un
+h, pn
+h) ∈Vh × Qh such that
+ ¯∂qun
+h, vh
+
++ a(un
+h, vh) + b(pn
+h, vh) = (f n, vh)
+∀vh ∈Vh,
+(3.14a)
+b(qh, un
+h) −j(qh, pn
+h) = 0
+∀qh ∈Qh.
+(3.14b)
+For the fully discrete solution defined by the collection of time step solution {un
+h}N
+n=q,
+we also use the shorthand notation uτ
+h, i.e., uτ
+h(tn) = un
+h for n = q, . . . , N. The initial
+values ui
+h, i = 0, . . . , q −1, are either determined by a one-step method of order q, or
+by a lower order method with a sufficiently small step size.
+3.3. G-stability of BDF schemes. We collect here some results on G-stability
+for BDF schemes that allow us to use the energy estimates to prove stability. For
+more details we refer to [18, 19].
+Lemma 3.4 (Dahlquist’s G-stability [18]).
+Let δ(ζ) and µ(ζ) be polynomials of
+degree at most q that have no common divisor. Let (·, ·) be an Euclidean inner product
+on RN with associated Euclidean norm | · |. If
+(3.15)
+Re δ(ζ)
+µ(ζ) > 0
+∀ζ ∈C, |ζ| < 1,
+then there exists a symmetric positive-definite (s.p.d.) matrix G = [gij] ∈Rq×q and
+real numbers γ0, . . . , γq such that for all v0, . . . , vq ∈RN,
+(3.16)
+Re
+
+
+q
+X
+i=0
+δivq−i,
+q
+X
+j=0
+µjvq−j
+
+=
+q
+X
+i,j=1
+gij
+ vi, vj
+−
+q
+X
+i,j=1
+gij
+ vi−1, vj−1
++
+
+q
+X
+i=0
+γivi
+
+2
+.
+In order to apply Lemma 3.4 to an arbitrary semi-inner product on some infinite
+dimensional function space, we need the following extension of the above lemma.
+Lemma 3.5. Let δ(ζ) and µ(ζ) be the polynomials of Lemma 3.4. Let (·, ·) be a
+semi-inner product on a Hilbert space H with associated norm | · |. Then there exists
+a symmetric s.p.d. matrix G = [gij] ∈Rq×q such that for all v0, . . . , vq ∈H,
+(3.17)
+Re
+
+
+q
+X
+i=0
+δivq−i,
+q
+X
+j=0
+µjvq−j
+
+⩾
+q
+X
+i,j=1
+gij
+ vi, vj
+−
+q
+X
+i,j=1
+gij
+ vi−1, vj−1
+.
+Proof. See Appendix A.
+The application of G-stability to BDF schemes is ensured by the following lemma.
+Lemma 3.6 (Multiplier technique of Nevanlinna and Odeh [37]). For q = 1, . . . , 5
+there exist 0 ⩽ηq < 1 such that for δ(ζ) = Pq
+l=1(1/l)(1 −ζ)l and µ(ζ) = 1 −ηqζ,
+Re δ(ζ)
+µ(ζ) > 0
+∀ζ ∈C, |ζ| < 1.
+(3.18)
+
+[PDF PAGE 10]
+10
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+The classical values of ηq from [37] are found to be
+(3.19)
+η1 = η2 = 0, η3 = 0.0769, η4 = 0.2878,
+and η5 = 0.8097.
+If there is no risk of confusion, we drop the index q and simply write η. For more
+details on multiplier values η (e.g. for the optimal multipliers values), we refer to [4]
+and the references therein.
+The previous two lemmata motivate the definition of a G-norm associated with
+a semi-inner product (·, ·) on a Hilbert space H: Given a collection of vectors V n =
+[vn, . . . , vn−q+1] ⊂H, we introduce the notation
+|V n|2
+G =
+q
+X
+i,j=1
+gij(vn−i+1, vn−j+1),
+(3.20)
+where G = [gij] is the s.p.d. matrix appearing in (3.14). The identity (3.20) defines a
+semi-norm on Hq satisfying
+c0|vn|2 ⩽c0
+q
+X
+j=1
+|vn−j+1|2 ⩽|V n|2
+G ⩽c1
+q
+X
+j=1
+|vn−j+1|2,
+(3.21)
+where c0 and c1 denotes the smallest and the largest eigenvalue of G, respectively,
+and |·| is the semi-norm induced by the semi-inner product (·, ·).
+Remark 3.7. It was shown in [2] that for six-step BDF method, there is no
+Nevanlinna–Odeh multiplier of the form µ(ζ) = 1 −η6ζ, with 1 −|η6| > 0. Instead,
+multipliers satisfying a certain relaxed positivity condition were found, which in turn
+allowed the authors of [2] to derive stability estimate for BDF-6 using energy-type
+techniques. In Section 5, we will discuss how our stability analysis of fully discrete
+transient Stokes problem can be adapted to the case q = 6 using the results from [2].
+4. Stability. The goal of this section is to demonstrate how the stability of the
+fully discrete scheme (3.14) can be established by mimicking the approach for the
+continuous case, cf. Section 2.3, and taking advantage of the results on G-stability
+presented in Section 3.3. To obtain optimal stability estimates for the pressure, we
+here require that the initial data provided for the first q −1 steps are discretely
+divergence-free as specified in the assumptions of Theorem 4.2 and Theorem 4.3,
+while the more general case is briefly discussed in Section 7.
+Our analysis pivots
+around (3.14) in the equivalent form
+ ¯∂qun
+h, vh
+
++ a(un
+h, vh) + b(pn
+h, vh) −b(qh, un
+h) + jh(qh, pn
+h) = (f n, vh) .
+(4.1)
+To emphasize the similarity between the fully discrete stability estimate and its con-
+tinuous counterpart (2.10), we introduce the time-discrete (semi-)norm
+(4.2)
+∥wτ∥2
+ℓ2(Jq;H) = τ
+N
+X
+n=q
+∥wn∥2
+H
+for any sequence wτ = (wn)N
+n=q ⊂H in a Hilbert space H related to either the
+velocity or the pressure, where we set Jq = (tq, T).
+
+[PDF PAGE 11]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+11
+Theorem 4.1. Let {(un
+h, pn
+h)}N
+n=q be the solution of the fully discrete problem
+(3.14) with initial values ui
+h ∈Vh, i = 0, . . . , q −1.
+Then the following stability
+estimate holds for 0 ⩽Nτ ⩽T,
+(4.3)
+∥uN
+h ∥2
+H + ∥uτ
+h∥2
+ℓ2(Jq;V ) + |pτ
+h|2
+ℓ2(Jq;jh) ⩽C
+"q−1
+X
+i=0
+∥ui
+h∥2
+H + c2
+P
+ν ∥f∥2
+ℓ2(Jq;H)
+#
+,
+with a constant C > 0 independent of h, N, τ and the final time T.
+Proof. The main idea is to mimic the test procedure used to establish the stability
+estimate (2.16) for the continuous problem. To replace the integration with respect
+to the time variable in the fully discrete setting, Dahlquist’s G-stability, Lemma 3.5,
+and the multiplier technique of Nevanlinna and Odeh, Lemma 3.6 are combined to
+arrive at an estimate for a telescopic expression for ∥un
+h∥2
+H. For other parabolic-type
+PDEs, similar arguments were used in [34, 7, 31], and [3].
+We start by testing equation (4.1) with (vh, qh) = (un
+h −ηun−1
+h
+, pn
+h) where η is
+the multiplier defined in Lemma 3.6 and depends on the order of the chosen BDF
+scheme. This yields
+(4.4)
+ ¯∂qun
+h, un
+h −ηun−1
+h
+
++ a
+ un
+h, un
+h −ηun−1
+h
+
++ b
+ pn
+h, un
+h −ηun−1
+h
+
+−b(pn
+h, un
+h) + jh(pn
+h, pn
+h) =
+ f n, un
+h −ηun−1
+h
+
+.
+Thanks to the bilinearity of b(·, ·), two terms cancel immediately. Recalling (3.20) we
+now define
+(4.5)
+|U n
+h|2
+G =
+q
+X
+i,j=1
+gij(un−i+1
+h
+, un−j+1
+h
+)
+and directly apply the multiplier technique Lemma 3.6 in the form (3.17) to the first
+term in (4.4). From jh(qh, qh) = |qh|2
+jh and the coercivity of a(vh, vh) = ∥vh∥2
+V , we
+obtain
+(4.6)
+1
+τ
+
+|U n
+h|2
+G −|U n−1
+h
+|2
+G
+
++ ∥un
+h∥2
+V + |pn
+h|2
+jh−ηa
+ un
+h, un−1
+h
+
+−ηb
+ pn
+h, un−1
+h
+
+⩽
+ f n, un
+h −ηun−1
+h
+
+.
+Thanks to (3.14b), we have b
+ pn
+h, un−1
+h
+
+= jh
+ pn
+h, pn−1
+h
+
+for n ⩾q + 1, allowing us to
+rewrite (4.6) as
+(4.7)
+1
+τ
+
+|U n
+h|2
+G −|U n−1
+h
+|2
+G
+
++ ∥un
+h∥2
+V + |pn
+h|2
+jh−ηa
+ un
+h, un−1
+h
+
+−ηjh
+ pn
+h, pn−1
+h
+
+⩽
+ f n, un
+h −ηun−1
+h
+
+.
+Next, invoking the the continuity of a(·, ·) and jh(·, ·) and successively applying a
+Cauchy–Schwarz inequality, a modified Young’s inequality of the form AB ⩽
+1
+2ϵA2 +
+
+[PDF PAGE 12]
+12
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+ϵ
+2B2, and the Poincar´e inequality, we estimate that
+−ηa
+ un
+h, un−1
+h
+
+⩾−η∥un
+h∥V ∥un−1
+h
+∥V ⩾−η ∥un
+h∥2
+V
+2
+−η ∥un−1
+h
+∥2
+V
+2
+,
+(4.8a)
+−ηjh
+ pn
+h, pn−1
+h
+
+⩾−η|pn
+h|jh|pn−1
+h
+|jh ⩾−η |pn
+h|2
+jh
+2
+−η |pn−1
+h
+|2
+jh
+2
+,
+(4.8b)
+ f n, un
+h −ηun−1
+h
+
+= (f n, un
+h) −η
+ f n, un−1
+h
+
+(4.8c)
+⩽cP ν−1
+2 ∥f n∥H∥un
+h∥V + ηcP ν−1
+2 ∥f n∥H∥un−1
+h
+∥V
+⩽c2
+P
+ν
+∥f n∥2
+H
+2ϵ
++ ϵ
+2∥un
+h∥2
+V + η c2
+P
+ν
+∥f n∥2
+H
+2ϵ
++ η ϵ
+2∥un−1
+h
+∥2
+V .
+Combing these bounds, we arrive at
+(4.9)
+1
+τ
+
+|U n
+h|2
+G −|U n−1
+h
+|2
+G
+
++ 2 −η −ϵ
+2
+∥un
+h∥2
+V −η 1 + ϵ
+2
+∥un−1
+h
+∥2
+V
++2 −η
+2
+|pn
+h|2
+jh −η
+2|pn−1
+h
+|2
+jh ⩽(1 + η) c2
+P
+2ϵν ∥f n∥2
+H,
+where ϵ > 0 is the free parameter of the modified Young’s inequality. In order to be
+able to perform telescoping for the velocity in the ∥·∥V norm, we must ensure that
+2−η−ϵ
+2
+−η 1+ϵ
+2
+> 0 and in order to do the same for the pressure, 2−η
+2
+−η
+2 = 1 −η > 0
+must hold. The latter condition 1−η > 0 is already satisfied thanks to the properties
+of the multipliers and regarding the first one, it is enough to choose ϵ such that
+0 < ϵ < 2−2η
+1+η . Multiplying (4.9) by τ and summing for n = q + 1, . . . , N yields
+(4.10)
+|U N
+h |2
+G + τ 2 −2η −ϵ(1 + η)
+2
+N
+X
+n=q+1
+∥un
+h∥2
+V + τ(1 −η)
+N
+X
+n=q+1
+|pn
+h|2
+jh ⩽|U q
+h|2
+G
++τη 1 + ϵ
+2
+∥uq
+h∥2
+V + τ η
+2|pq
+h|2
+jh + τ(1 + η) c2
+P
+2ϵν
+N
+X
+n=q+1
+∥f n∥2
+H,
+where the sum is limited to n ⩾q + 1 due to the validity range of the change from
+(4.6) to (4.7). Exploiting the bounds (3.21) for the multiplier technique norm, we see
+that
+(4.11)
+∥uN
+h ∥2
+H + τ
+N
+X
+n=q+1
+∥un
+h∥2
+V + τ
+N
+X
+n=q+1
+|pn
+h|2
+jh ⩽C
+"
+∥uq
+h∥2
+H + τη∥uq
+h∥2
+V + τη|pq
+h|2
+jh
++
+q−1
+X
+i=1
+∥ui
+h∥2
+H + τ c2
+P
+ν
+N
+X
+n=q+1
+∥f n∥2
+H
+#
+.
+To arrive at the final estimate, quantities for n = q still have to be added to the
+left-hand side of (4.11), and then need to be estimated in terms of the initial data.
+We proceed by testing (4.4) at n = q with vh = uq
+h and qh = pq
+h, obtaining
+(4.12)
+δ0
+τ ∥uq
+h∥2
+H + ∥uq
+h∥V + |pq
+h|jh = (f q, uq
+h) −
+ q
+X
+i=1
+δi
+τ uq−i
+h
+, uq
+h
+!
+.
+Multiplying the resulting identity by τ combined with multiple applications of the
+Cauchy–Schwarz inequality, Young’s inequality, and the triangle inequality for the
+
+[PDF PAGE 13]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+13
+right-hand side leaves us with the estimate
+(4.13)
+∥uq
+h∥2
+H + τ∥uq
+h∥2
+V + τ|pq
+h|2
+jh ⩽C
+"q−1
+X
+i=0
+∥ui
+h∥2 + τ c2
+P
+ν ∥f q∥2
+H
+#
+.
+Combining the estimates (4.11) and (4.13) yields the desired stability bound
+(4.14)
+∥uN
+h ∥2
+H + τ
+N
+X
+n=q
+∥un
+h∥2
+V + τ
+N
+X
+n=q
+|pn
+h|2
+jh ⩽C
+"q−1
+X
+i=0
+∥ui
+h∥2
+H + τ c2
+P
+ν
+N
+X
+n=q
+∥f n∥2
+H
+#
+.
+Next, we wish to derive a stability bound for the fully discrete pressure in a form
+analogous to (2.15). The main idea is again to follow the approach outlined in the
+continuous case in Section 2.3 with the following key differences:
+– The continuous inf-sup condition (2.3b) needs to be substituted by its discrete
+analogue (3.6);
+– the substitution of the continuous derivative with its discrete analogue (3.12).
+As in the continuous case, we will see that a bound for the discrete velocity
+derivative is needed, which we established first, and only afterwards we conclude with
+the derivation of the pressure bound.
+Theorem 4.2. Let {(un
+h, pn
+h)}N
+n=q be the solution of the fully discrete problem
+(3.14) with initial values ui
+h ∈Vh, i = 0, . . . , q −1. Suppose that the initial values
+{ui
+h}q−1
+i=0 are discretely divergence-free in the sense that for each ui
+h ∈Vh there exists
+corresponding pi
+h ∈Qh such that
+(4.15)
+b
+ qh, ui
+h
+
+−jh
+ pi
+h, qh
+
+= 0,
+∀qh ∈Qh.
+Then the following stability estimate holds for 0 ⩽Nτ ⩽T,
+(4.16) ∥¯∂quτ
+h∥2
+ℓ2(Jq;H) + ∥uN
+h ∥2
+V + |pN
+h |2
+jh ⩽C
+"q−1
+X
+i=0
+(∥ui
+h∥2
+V + |pi
+h|2
+jh) + ∥f∥2
+ℓ2(Jq;H)
+#
+,
+with a constant C > 0 independent of h, N, τ and the final time T.
+Proof. As in the proof of Theorem 4.1, the key idea is to adapt the test procedure
+used in the continuous case, cf. Section 2.3, to the fully discrete setting by utilizing
+Dahlquist’s G-stability from Lemma 3.5, and the multiplier technique of Nevanlinna
+and Odeh from Lemma 3.6.
+We start by testing (4.1) with vh = ¯∂qun
+h and qh = 0, yielding
+(4.17)
+∥¯∂qun
+h∥2
+H + a
+ un
+h, ¯∂qun
+h
+
++ b
+ pn
+h, ¯∂qun
+h
+
+=
+ f n, ¯∂qun
+h
+
+.
+Compared to the continuous case (2.13), the non-symmetric bilinear form b(pn
+h, ¯∂qun
+h)
+is still present since in general un
+h /∈V0,div. To handle this, we exploit that b(un
+h, qh) =
+j(pn
+h, qh) for 0 ⩽n ⩽N thanks to (3.14b) and the assumption (4.15) on the initial
+values. With this in mind, we test (4.1) with vh = 0 and qh = pn
+h at tn−i for n ⩾q +1
+and i = 0, . . . , q to deduce that
+(4.18)
+b
+ pn
+h, ¯∂qun
+h
+
+= 1
+τ
+q
+X
+i=0
+δib(pn
+h, un−i
+h
+) = 1
+τ δi
+q
+X
+i=0
+jh(pn
+h, pn−i
+h
+) = jh(pn
+h, ¯∂qpn
+h).
+
+[PDF PAGE 14]
+14
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+Consequently, we see that for n ⩾q + 1,
+(4.19)
+∥¯∂qun
+h∥2
+H + a
+ un
+h, ¯∂qun
+h
+
++ jh(pn
+h, ¯∂qpn
+h) =
+ f n, ¯∂qun
+h
+
+.
+To bound the left-hand side of (4.19) from below, we would like to make use of G-
+stability and the multiplier technique. This can be achieved as follows. First, we test
+(3.14a) at time step n −1 with vh = −η ¯∂qun
+h ∈Vh to obtain
+(4.20)
+−η
+ ¯∂qun−1
+h
+, ¯∂qun
+h
+
++ a
+ un−1
+h
+, ¯∂qun
+h
+
++ b
+ pn−1
+h
+, ¯∂qun
+h
+
+= −η
+ f n−1, ¯∂qun
+h
+
+.
+Next, we repeat the argument followed in the derivation of (4.19) maintaining the
+same range of validity to deduce
+(4.21)
+b
+ pn−1
+h
+, ¯∂qun
+h
+
+= jh(pn−1
+h
+, ¯∂qpn
+h),
+and therefore
+(4.22) −η
+ ¯∂qun−1
+h
+, ¯∂qun
+h
+
++ a
+ un−1
+h
+, ¯∂qun
+h
+
++ jh
+ pn−1
+h
+, ¯∂qpn
+h
+
+= −η
+ f n−1, ¯∂qun
+h
+
+.
+Adding (4.22) to (4.19), we get
+(4.23)
+∥¯∂qun
+h∥2
+H −η
+ ¯∂qun−1
+h
+, ¯∂qun
+h
+
++ a
+ un
+h −ηun−1
+h
+, ¯∂qun
+h
+
++ jh(pn
+h −ηpn−1
+h
+, ¯∂qpn
+h)
+=
+ f n −ηf n−1, ¯∂qun
+h
+
+.
+Note that for the moment, we only consider (4.23) for n ⩾q + 1 since ¯∂qun−1
+h
+is not
+defined for n = q. Analogously to (3.20), we define G-norm equivalents for the energy
+norm and the semi-norm induced by the pressure stabilization,
+(4.24)
+|U n
+h|2
+F =
+q
+X
+i,j=1
+gija(un−i+1
+h
+, un−j+1
+h
+),
+|P n
+h |2
+M =
+q
+X
+i,j=1
+gijjh(pn−i+1
+h
+, pn−j+1
+h
+).
+Thanks to Lemma 3.5, the G-norms exist since a(·, ·) and jh(·, ·) define respectively
+an inner product and a semi-inner product. We apply the multiplier technique to the
+third and fourth term in (4.23) which yields the bound
+(4.25)
+∥¯∂qun
+h∥2
+H −η
+ ¯∂qun−1
+h
+, ¯∂qun
+h
+
++ 1
+τ
+
+|U n
+h|2
+F −|U n−1
+h
+|2
+F
+
++ 1
+τ
+
+|P n
+h |2
+M −|P n−1
+h
+|2
+M
+
+⩽
+ f n −ηf n−1, ¯∂qun
+h
+
+.
+Applying the Cauchy–Schwarz inequality and a scaled Young’s inequality to the sec-
+ond and the last term in (4.25), upon rearranging we see that
+(4.26)
+1
+2∥¯∂qun
+h∥2
+H −η
+2∥¯∂qun−1
+h
+∥2
+H + 1
+τ
+
+|U n
+h|2
+F −|U n−1
+h
+|2
+F
+
++ 1
+τ
+
+|P n
+h |2
+M −|P n−1
+h
+|2
+M
+
+⩽
+1
+2(1 −η)
+f n −ηf n−12
+H .
+We sum up for q + 1 ⩽n ⩽N and obtain
+(4.27)
+τ 1 −η
+2
+N
+X
+n=q+1
+∥¯∂qun
+h∥2
+H + |U N
+h |2
+F + |P N
+h |2
+M ⩽τ η
+2∥¯∂quq
+h∥2
+H + |U q
+h|2
+F + |P q
+h|2
+M
++Cτ
+N
+X
+n=q
+∥f n∥2
+H .
+
+[PDF PAGE 15]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+15
+Exploiting once more the norm equivalence (3.21) available for G-norms, we have
+(4.28)
+τ
+N
+X
+n=q+1
+∥¯∂qun
+h∥2
+H + ∥uN
+h ∥2
+V + |pN
+h |2
+jh
+⩽C
+"
+τη∥¯∂quq
+h∥2
+H +
+q
+X
+i=1
+
+∥ui
+h∥2
+V + |pi
+h|2
+jh
+
++ τ
+N
+X
+n=q
+∥f n∥2
+H
+#
+.
+As in the final steps of the proof of Theorem 4.1, the stability estimate is still to
+depend only on initial values and f n.
+Thus, we need to both complete the sum
+τ PN
+n=q∥¯∂qun
+h∥2
+H on the left-hand side and bound the term τη∥¯∂quq
+h∥2
+H+∥uq
+h∥2
+V +|pq
+h|2
+jh
+on the right-hand side. This can be achieved at once with the following arguments.
+For n = q we test (4.1) with vh = ¯∂quq
+h and qh = δ0
+τ pq
+h (with δ0 > 0 being the leading
+coefficient of the BDF method, see (3.13)). Collecting the resulting terms and using
+assumption (4.15), we obtain
+(4.29)
+∥¯∂quq
+h∥2
+H + δ0
+τ ∥uq
+h∥2
+V + δ0
+τ |pq
+h|2
+jh
+=
+ f q, ¯∂quq
+h
+
+−1
+τ
+"
+a
+
+uq
+h,
+q
+X
+i=1
+δiuq−i
+h
+
++ b
+
+pq
+h,
+q
+X
+i=1
+δiuq−i
+h
+#
+=
+ f q, ¯∂quq
+h
+
+−1
+τ
+"
+a
+
+uq
+h,
+q
+X
+i=1
+δiuq−i
+h
+
++ jh
+
+pq
+h,
+q
+X
+i=1
+δipq−i
+h
+#
+.
+It will be crucial now that it holds δ0 > 0. We multiply (4.29) by τ and then estimate
+the result by invoking the continuity of a(·, ·) and j(·, ·) combined with scaled Young’s
+inequalities to see that
+(4.30)
+τ∥¯∂quq
+h∥2
+H + δ0
+
+∥uq
+h∥2
+V + |pq
+h|2
+jh
+
+⩽τ
+2∥¯∂quq
+h∥2
+H + τ
+2∥f q∥2
+H
++δ0
+2
+
+∥uq
+h∥2
+V + |pq
+h|2
+jh
+
++ 1
+2δ0
+"
+q
+X
+i=1
+δiuq−i
+h
+
+2
+V +
+
+q
+X
+i=1
+δipq−i
+h
+
+2
+jh
+#
+,
+and consequently, after a kick-back argument, we deduce that
+(4.31)
+τ∥¯∂quq
+h∥2
+H + ∥uq
+h∥2
+V + |pq
+h|2
+jh ⩽C
+"q−1
+X
+i=0
+(∥ui
+h∥2
+V + |pi
+h|2
+jh) + τ∥f q∥2
+H
+#
+.
+Now we use (4.31) to add the contribution τ∥¯∂quq
+h∥2
+H with its relative bound to (4.28)
+and then employ it again to bound the remaining terms with n = q on the right-hand
+side of (4.28) to arrive at the desired estimate
+(4.32) τ
+N
+X
+n=q
+∥¯∂qun
+h∥2
+H + ∥uN
+h ∥2
+V + |pN
+h |2
+jh ⩽C
+"q−1
+X
+i=0
+(∥ui
+h∥2
+V + |pi
+h|2
+jh) + τ
+N
+X
+n=q
+∥f n∥2
+H
+#
+.
+Recalling the definition of the discrete ℓ2-norms finishes the proof.
+We are now ready to state and prove the stability estimate for the pressure. For
+this part we again refer to Section 2.3 for the underlying ideas.
+
+[PDF PAGE 16]
+16
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+Theorem 4.3. Let {(un
+h, pn
+h)}N
+n=q be the solution of the fully discrete problem
+(3.14) with initial values ui
+h ∈Vh, i = 0, . . . , q −1 and assume that the initial values
+satisfy (4.15). Then the following stability estimate holds for 0 ⩽Nτ ⩽T,
+(4.33)
+∥pτ
+h∥2
+ℓ2(Jq;Q) ⩽C
+"q−1
+X
+i=0
+
+∥ui
+h∥2
+H + c2
+P
+ν ∥ui
+h∥2
+V + c2
+P
+ν |pi
+h|2
+jh
+
++ c2
+P
+ν ∥f∥2
+ℓ2(Jq;H)
+#
+,
+with a constant C > 0 independent of h, N, τ and the final time T.
+Proof. As in Section 2.3, the starting point is the modified inf-sup stability (3.6)
+from which, together with (3.11) and the usual procedures already seen, we deduce
+(4.34)
+β∥pn
+h∥Q ⩽
+sup
+vh∈Vh
+|b(pn
+h, vh)|
+∥vh∥V
++ C|pn
+h|jh
+=
+sup
+vh∈Vh
+|−
+ ¯∂qun
+h, vh
+
+−a(un
+h, vh) −(f n, vh)|
+∥vh∥V
++ C|pn
+h|jh
+⩽cpν−1
+2 ∥¯∂qun
+h∥H + ∥un
+h∥V + cpν−1
+2 ∥f n∥H + C|pn
+h|jh .
+Squaring (4.34), multiplying it by τ and summing from n = q to N yields
+(4.35)
+∥pτ
+h∥2
+ℓ2(J;Q) ⩽C
+c2
+P
+ν ∥¯∂quτ
+h∥2
+ℓ2(Jq;H) + ∥uτ
+h∥2
+ℓ2(Jq;V ) + |pτ
+h|2
+ℓ2(Jq;jh) + c2
+P
+ν ∥f∥2
+ℓ2(Jq;H)
+
+.
+Combining (4.35) with (4.3) and (4.16) yields the desired result.
+5. Stability for the six-step BDF method. In this section we sketch how
+our stability results can be extended to the six-step BDF method. We use the energy
+techniques based on the multipliers first derived in [2], wherein a multiplier for the
+six-step BDF method was first found and has the form, see [2, Proposition 2.3]:
+(5.1)
+η(ζ) = 1 −η1ζ1 −· · · −η6ζ6,
+where
+η1 = 13
+9 ,
+η2 = −25
+36,
+η3 = 1
+9,
+η4 = η5 = η6 = 0.
+In this section, by a slight abuse of notation with respect to 3.3, the values ηi are
+now all related to the multiplier for the BDF-6 method. It is crucial to note that this
+is not a multiplier in the Nevanlinna–Odeh sense, but a relaxed version which only
+satisfies a relaxed positivity assumption
+1 −η1 cos(x) −η2 cos(2x) −. . . −η6 cos(6x) > 0,
+(5.2)
+see Remark 2.1 and Definition 2.2 in [2].
+Further, [2, Section 2.2] shows that for
+BDF-6 there are no multipliers which satisfy a strict positivity condition
+1 −|η1| −|η2| −. . . −|η6| > 0.
+(5.3)
+In Section 3.1 and 3.2 of [2], energy estimates for the six-step BDF method were
+derived considering an abstract parabolic PDE in a Hilbert space. In this section we
+show how the techniques from [2] can be employed to extend Theorem 4.1 and 4.2 to
+the BDF-6 case. Since many steps are similar to the proofs of the corresponding two
+theorems in Section 4 herein, we only highlight the main differences.
+
+[PDF PAGE 17]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+17
+Theorem 5.1 (Theorem 4.1 for BDF-6).
+Let {(un
+h, pn
+h)}N
+n=q be the solution of
+the fully discrete problem (3.14) with initial values ui
+h ∈Vh, i = 0, . . . , q −1 with
+q = 6. Then the following stability estimate holds for 0 ⩽Nτ ⩽T,
+(5.4)
+∥uN
+h ∥2
+H + ∥uτ
+h∥2
+ℓ2(Jq;V ) + |pτ
+h|2
+ℓ2(Jq;jh) ⩽C
+"q−1
+X
+i=0
+∥ui
+h∥2
+H + c2
+P
+ν ∥f∥2
+ℓ2(Jq;H)
+#
+,
+with a constant C > 0 independent of h, N, τ and the final time T.
+Proof. According to (5.1), we test equation (4.1) with
+vh = un
+h −13
+9 un−1
+h
++ 25
+36un−2
+h
+−1
+9un−3
+h
+:= un
+h −⃗ηT U n−1
+h
+,
+qh = pn
+h,
+where we used the notation
+U n−1
+h
+= [un−1
+h
+; . . . ; un−6
+h
+]
+and
+⃗η := ⃗η6 = [ 13
+9 ; −25
+36; 1
+9; 0; 0; 0] ∈R6.
+(5.5)
+This yields
+(5.6)
+ ¯∂qun
+h, un
+h −⃗ηT U n−1
+h
+
++ a
+ un
+h, un
+h −⃗ηT U n−1
+h
+
++ b
+ pn
+h, un
+h −⃗ηT U n−1
+h
+
+−b(pn
+h, un
+h) + jh(pn
+h, pn
+h) =
+ f n, un
+h −⃗ηT U n−1
+h
+
+.
+Similarly as in the proof of Theorem 4.1, the mixed terms ±b(pn
+h, un
+h) cancel
+again, and following [2, Section 3.1], we use that Lemma 3.5, (3.14b) is valid for the
+multiplier (5.1) to obtain the BDF-6 analogue of (4.7): for n ⩾q + 1 = 7, we have
+(5.7)
+1
+τ
+
+|U n
+h|2
+G −|U n−1
+h
+|2
+G
+
++ ∥un
+h∥2
+V + |pn
+h|2
+jh−a
+ un
+h, ⃗ηT U n−1
+h
+
+−jh
+ pn
+h, ⃗ηT P n−1
+h
+
+⩽
+ f n, un
+h −⃗ηT U n−1
+h
+
+.
+At this point, since we are not dealing with a classical Nevanlinna–Odeh multiplier
+(recall that 1 −|η1| −|η2| −|η3| < 0), and since a bound for a
+ un
+h, ⃗ηT U n−1
+h
+
+−
+jh
+ pn
+h, ⃗ηT P n−1
+h
+
+suitable for telescoping cannot be found, a new argument is needed.
+The solution developed in [2] is to avoid bounding these terms for each time-step and
+instead summing up and dealing with the resulting terms. In particular, summing
+(5.7) from n = 6 to n = N gives
+(5.8)
+|U N
+h |2
+G + τ
+N
+X
+n=6
+a
+ un
+h, un
+h −⃗ηT U n−1
+h
+
++ τ
+N
+X
+n=6
+jh
+ pn
+h, pn
+h −⃗ηT P n−1
+h
+
+⩽|U 5
+h|2
+G + τ
+N
+X
+n=6
+ f n, un
+h −⃗ηT U n−1
+h
+
+.
+In [2, Section 3.1], the authors were able to bound the sums expression on the left-
+hand side of (5.8) from below by recasting the sums into a weighted double sum of
+inner products where the weights stem from a Toepliz matrix which turns out to
+be non-negative thanks to relaxed positivity assumption (5.2). For the velocity the
+resulting estimate reads
+(5.9)
+N
+X
+n=6
+a
+ un
+h, un
+h −⃗ηT U n−1
+h
+
+⩾1
+32
+N
+X
+n=9
+∥un
+h∥2 −a(u6
+h, µ1u5
+h + µ2u4
+h + µ3u3
+h)
+−a(u7
+h, µ2u5
+h + µ3u4
+h) −a(u8
+h, µ3u5
+h).
+
+[PDF PAGE 18]
+18
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+An analogous expression holds for the pressure term. Estimating the components
+involving the forcing term or starting approximations can be done with classical tech-
+niques as the one seen in (4.12), and detailed in [2, Section 3.1]. Properties of the
+G-norms (e.g. (3.21)) then yield the stability estimate for the six-step BDF method.
+Theorem 5.2 (Theorem 4.2 for BDF-6).
+Under the same hypothesis of Theo-
+rem 4.2, the following stability estimate holds for the BDF-q method with q = 6 for
+0 ⩽Nτ ⩽T,
+(5.10) ∥¯∂quτ
+h∥2
+ℓ2(Jq;H) + ∥uN
+h ∥2
+V + |pN
+h |2
+jh ⩽C
+"q−1
+X
+i=0
+(∥ui
+h∥2
+V + |pi
+h|2
+jh) + ∥f∥2
+ℓ2(Jq;H)
+#
+,
+with a constant C > 0 independent of h, N, τ and the final time T.
+Proof. The procedure is once again analogous to the proof of Theorem 4.2. Similar
+to the calculations in (4.19)–(4.23) we have to sum back in time to be able to use the
+multiplier technique. Testing at every time step with ¯∂qun
+h and ¯∂qpn
+h yields
+(5.11)
+ ¯∂qun
+h, ¯∂qun
+h
+
++ a
+ un
+h, ¯∂qun
+h
+
++ jh
+ pn
+h, ¯∂qpn
+h
+
+=
+ f n, ¯∂qun
+h
+
+,
+−η1
+ ¯∂qun−1
+h
+, ¯∂qun
+h
+
++ a
+ un−1
+h
+, ¯∂qun
+h
+
++ jh
+ pn−1
+h
+, ¯∂qpn
+h
+
+= −η1
+ f n−1, ¯∂qun
+h
+
+,
+−η2
+ ¯∂qun−2
+h
+, ¯∂qun
+h
+
++ a
+ un−2
+h
+, ¯∂qun
+h
+
++ jh
+ pn−1
+h
+, ¯∂qpn
+h
+
+= −η2
+ f n−2, ¯∂qun
+h
+
+,
+−η3
+ ¯∂qun−3
+h
+, ¯∂qun
+h
+
++ a
+ un−3
+h
+, ¯∂qun
+h
+
++ jh
+ pn−3
+h
+, ¯∂qpn
+h
+
+= −η3
+ f n−3, ¯∂qun
+h
+
+.
+Summing up the identities in (5.11), we see that
+(5.12)
+
+¯∂qun
+h −⃗ηT ˙U
+n−1
+h
+, ¯∂qun
+h
+
++ a
+ un
+h −⃗ηT U n−1
+h
+, ¯∂qun
+h
+
++ jh
+ pn
+h −⃗ηT P n−1
+h
+, ¯∂qpn
+h
+
+=
+ f n −⃗ηT F n−1
+h
+, ¯∂qun
+h
+
+,
+where we set ˙U
+n−1
+h
+:= [¯∂qun−1
+h
+; . . . ; ¯∂qun−6
+h
+] and F n−1 := [f n−1; . . . ; f n−6]. Then
+G-stability for the generalized multiplier yields
+(5.13)
+a
+ un
+h −⃗ηT U n−1
+h
+, ¯∂qun
+h
+
++ jh
+ pn
+h −⃗ηT P n−1
+h
+, ¯∂qpn
+h
+
+⩾1
+τ
+
+|U n
+h|2
+F −|U n−1
+h
+|2
+F
+
++ 1
+τ
+
+|P n
+h |2
+M −|P n−1
+h
+|2
+M
+
+.
+Finally, the remaining terms can be handled in the same way as in the previous proof
+using the properties of the associated Toepliz matrix, leading to
+(5.14)
+N
+X
+n=9
+
+¯∂qun
+h −⃗ηT ˙U
+n−1
+h
+, ¯∂qun
+h
+
+⩾1
+32
+N
+X
+n=9
+∥¯∂qun
+h∥2 −(¯∂qu9
+h, µ1 ¯∂qu8
+h + µ2 ¯∂qu7
+h + µ3 ¯∂qu6
+h)
+−(¯∂qu10
+h , µ2 ¯∂qu8
+h + µ3 ¯∂qu7
+h) −(¯∂qu11
+h , µ3 ¯∂qu8
+h).
+Bounding the components involving forcing terms and starting approximations can
+be done as explained in [2, equation (3.30)–(3.32)], which are natural extensions of
+what seen in (4.29). The final estimate then again follows from the properties of the
+G-norms.
+Since the pressure stability in (4.35) is independent of the given BDF order,
+Theorem 5.1 and Theorem 5.2 immediately imply the corresponding stability estimate
+for the pressure in the BDF-6 case.
+
+[PDF PAGE 19]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+19
+6. Convergence. In this section, we derive a priori error estimates for the fully
+discrete formulation (3.20) for BDF schemes of order 1 to 6. Thanks to the linearity
+of the transient Stokes problem and the stability estimates provided in Section 4 and
+Section 5, we can follow the standard recipe, see for instance [23, Chapter 73]: First,
+we split the total discretization error into an interpolation and a discrete error. Then
+we derive an error equation for the latter which has the form of the fully discrete tran-
+sient Stokes problem but with a “small” right-hand side (the “defect”) which encodes
+interpolation and consistency errors in space and time. Finally, the stability estimates
+allow us to deduce convergence rates for the velocity and pressure approximation error
+from the corresponding rates for the defect. Throughout this Section we will assume
+our domain Ωsatisfies the required smoothness properties.
+To obtain optimal error estimates we use the Ritz projection (Su
+h (tn), Sp
+h(tn)) :=
+Sh(u(tn), p(tn)) ∈Vh × Qh defined in (3.8). We decompose the velocity and pressure
+error into an interpolation error and a discrete error,
+u(tn) −un
+h = u(tn) −Su
+h (tn)
+|
+{z
+}
+=:en
+π
++ Su
+h (tn) −un
+h
+|
+{z
+}
+=:en
+h
+,
+(6.1a)
+p(tn) −pn
+h = p(tn) −Sp
+h(tn)
+|
+{z
+}
+=:δn
+π
++ Sp
+h(tn) −pn
+h
+|
+{z
+}
+=:δn
+h
+.
+(6.1b)
+Recall that the discrete solution satisfies the discrete weak formulation
+(6.2)
+ ¯∂qun
+h, vh
+
++ a(un
+h, vh) + b(pn
+h, vh) −b(qh, un
+h) + jh(qh, pn
+h) = (f n, vh)
+for (vh, qh) ∈Vh ×Qh, cf. (4.1). Inserting the projected velocity Su
+h (tn) and projected
+pressure Sp
+h(tn) in place of the discrete solution into (6.2) and using the properties
+of the defining equation (3.8), we deduce that the Ritz projection satisfies the fully-
+discrete transient Stokes equation up to some defect.
+(6.3)
+ ¯∂qSu
+h (tn), vh
+
++ a(Su
+h (tn), vh) + b(Sp
+h(tn), vh) −b(qh, Su
+h (tn))
++jh(qh, Sp
+h(tn)) = (f n, vh) + (dn, vh) ,
+where the defect dn is given by
+(6.4)
+dn = ¯∂qSu
+h (tn) −∂tu(tn) = ¯∂qu(tn) −∂tu(tn) −¯∂qen
+π.
+Thanks to linearity of the problem, subtracting (6.2) from (6.3) leads to
+(6.5)
+ ¯∂qen
+h, vh
+
++ a(en
+h, vh) + b(δn
+h, vh) −b(qh, en
+h) + jh(qh, δn
+h) = (dn, vh) .
+We are now in a similar situation to (4.1) and it is enough to bound the right-hand
+side in an appropriate way and to use the stability estimates derived in Theorem 4.1,
+Theorem 4.2, and Theorem 4.3, or their corresponding counterparts for BDF-6 from
+Section 5. To this end, the defect satisfies the bound
+(6.6)
+∥dn∥2
+H ⩽C
+τ
+
+τ 2q∥∂(q+1)
+t
+u∥2
+L2((tn−q,tn);H) + h2ru∥∂tu∥2
+L2((tn−q,tn);Hru(Ω))
+
+,
+which follows from standard approximation results, and a step-by-step derivation is
+provided in Appendix B for the reader’s convenience. Consequently,
+(6.7)
+∥dτ∥ℓ2(Jq;H) ⩽C
+
+τ 2q∥∂(q+1)
+t
+u∥2
+L2(J;H) + h2ru∥∂tu∥2
+L2(J;Hru(Ω))
+
+,
+
+[PDF PAGE 20]
+20
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+where we wish to recall that ru
+def
+= min{r, k + 1}, where u ∈Hr(Ω), and k is the
+polynomial order of Vh = V k
+h , see (3.1a). Analogously, we have sp
+def
+= min{s, ˜l, l + 1},
+where p ∈Hs(Ω), l is the polynomial order of Qh = Ql
+h (see (3.1b)), and ˜l is the order
+of weak consistency of the stabilization. As a result, we obtain the following estimate
+for the ℓ∞(J; H) norm of the velocity error.
+Theorem 6.1. Assume that u ∈H1(J; [Hr(Ω)]d) ∩Hq+1(J; [L2(Ω)]d) and p ∈
+C0(J; Hs(Ω)) with r ⩾2 and s ⩾1. Let the initial values ui
+h ∈Vh, i = 0, . . . , q −1
+satisfy the approximation property (3.5a). Then the fully discrete numerical solution
+(3.14) using BDF method of order 1, . . . , 6 satisfies the velocity error estimates
+(6.8)
+∥uN
+h −u(tN)∥2
+H ⩽C
+"
+h2ru∥u(tN)∥2
+ru
++
+q−1
+X
+i=0
+
+(1 + ν)h2ru∥u(ti)∥2
+ru + ν−1h2(sp+1)∥p(ti)∥2
+sp
+
++ c2
+P
+ν
+
+τ 2q∥∂(q+1)
+t
+u∥2
+L2(J;H) + h2ru∥∂tu∥2
+L2(J;Hru(Ω))
+#
+,
+(6.9)
+∥uτ
+h −u∥2
+ℓ2(Jq;V ) ⩽C
+"
+νh2(ru−1)∥u∥2
+ℓ2(Jq;Hru)
++
+q−1
+X
+i=0
+
+(1 + ν)h2ru∥u(ti)∥2
+ru + ν−1h2(sp+1)∥p(ti)∥2
+sp
+
++ c2
+P
+ν
+
+τ 2q∥∂(q+1)
+t
+u∥2
+L2(J;H) + h2ru∥∂tu∥2
+L2(J;Hru(Ω))
+#
+.
+Proof. The stability bounds from Theorem 4.1 and Theorem 5.1 in conjunction
+with error equation (6.5) allows us to deduce that the discrete error is bounded by
+(6.10)
+∥eN
+h ∥2
+H + ∥eτ
+h∥2
+ℓ2(Jq;V ) + |δτ
+h|2
+ℓ2(Jq;jh) ⩽C
+"q−1
+X
+i=0
+∥ei
+h∥2
+H + c2
+P
+ν ∥dτ∥2
+ℓ2(Jq;H)
+#
+.
+The only thing to clarify now is the order of convergence of ∥ei
+h∥2
+H for i = 0, . . . , q −1.
+For a general interpolant satisfying assumption (3.5), we have
+(6.11)
+∥ei
+h∥2
+H = ∥Su
+h (ti) −Iu
+h u(ti)∥2
+H ⩽∥Su
+h (ti) −u(ti)∥2
+H + ∥u(ti) −Iu
+h u(ti)∥2
+H.
+Invoking (3.10), (3.11) and (3.5) now leads to
+(6.12)
+∥ei
+h∥2
+H ⩽C
+
+(1 + ν)h2ru∥u(ti)∥2
+ru + ν−1h2(sp+1)∥p(ti)∥2
+sp
+
+.
+Inserting the bound for the defect given in (6.6), shows that the discrete velocity error
+is bounded by
+(6.13)
+∥eN
+h ∥2
+H + ∥eτ
+h∥2
+ℓ2(Jq,V ) ⩽C
+"q−1
+X
+i=0
+
+(1 + ν)h2ru∥u(ti)∥2
+ru + ν−1h2(sp+1)∥p(ti)∥2
+sp
+
++ c2
+P
+ν
+
+τ 2q∥∂(q+1)
+t
+u∥2
+L2(J;H) + h2ru∥∂tu∥2
+L2(J;Hru(Ω))
+#
+.
+
+[PDF PAGE 21]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+21
+To conclude the proof of the first estimate (6.8), we simply combine a triangle inequal-
+ity ∥uN
+h −u(tN)∥H ⩽∥eN
+h ∥H + ∥eN
+π ∥H with the bound ∥eN
+π ∥H ⩽Chru∥u(tN)∥ru,
+which follows directly from the interpolation estimate (3.5a). The same estimate also
+implies that ∥eτ
+π∥2
+ℓ2(Jq;V ) ⩽Cνh2(ru−1)∥u∥2
+ℓ2(Jq;Hru), which in conjunction with the
+triangle inequality ∥uτ
+h −u∥ℓ2(Jq;V ) ⩽∥eτ
+h∥ℓ2(Jq;V ) + ∥eτ
+π∥ℓ2(Jq;V ) leads to our second
+estimate (6.9).
+Theorem 6.2. Assume that u ∈H1(J; [Hr(Ω)]d) ∩Hq+1(J; [L2(Ω)]d) and p ∈
+C0(J; Hs(Ω)) with r ⩾2 and s ⩾1. Set initial values as Ritz projection (ui
+h, pi
+h) =
+(Ru
+h(ti), Rp
+h(ti)) = Rh(u(ti), 0) thus satisfying both (4.15) and (3.5a). Then the
+fully discrete numerical solution (3.14) using BDF method of order 1, . . . , 6 satisfies
+the pressure error estimate
+(6.14)
+∥p −pτ
+h∥2
+ℓ2(Jq;Q) ⩽C
+"
+ν−1h2(l+1)∥p∥2
+ℓ2(Jq;Hl+1)
++ νh2ru 1 + c2
+P ν−1h−2 q−1
+X
+i=0
+∥u(ti)∥2
+ru
++ ν−1h2sp h2 + c2
+P ν−1 q−1
+X
+i=0
+∥p(ti)∥2
+sp
++ c2
+P
+ν
+
+τ 2q∥∂(q+1)
+t
+u∥2
+L2(J;H) + h2ru∥∂tu∥2
+L2(J;Hru(Ω))
+#
+.
+Proof. The triangle inequality leads to
+(6.15)
+∥pτ
+h −p∥2
+ℓ2(Jq;Q) ⩽∥δτ
+h∥2
+ℓ2(Jq;Q) + ∥δτ
+π∥2
+ℓ2(Jq;Q).
+By (3.4), we already have that ∥δτ
+π∥2
+ℓ2(Jq;Q) ⩽Cν−1h2(l+1)∥p∥2
+ℓ2(Jq;Hl+1). Moreover,
+according to Theorem 4.3, we have
+(6.16)
+∥δτ
+h∥2
+ℓ2(Jq;Q) ⩽C
+"q−1
+X
+i=0
+
+∥ei
+h∥2
+H + c2
+P
+ν ∥ei
+h∥2
+V + c2
+P
+ν |δi
+h|2
+jh
+
++ c2
+P
+ν ∥dτ∥2
+ℓ2(Jq;H)
+#
+.
+Thanks to (3.11), we have
+(6.17)
+∥ei
+h∥2
+H ⩽C
+h
+νh2ru∥u(ti)∥2
+ru + ν−1h2sp+2∥p(ti)∥2
+sp
+i
+.
+Next, we use the properties of the Ritz projection (3.10a) to deduce that
+(6.18)
+∥ei
+h∥2
+V + |δi
+h|2
+jh = ∥Su
+h (ti) −Ru
+h(ti)∥2
+V + |Sp
+h(ti) −Rp
+h(ti)|2
+jh
+⩽∥Su
+h (ti) −u(ti)∥2
+V + |Sp
+h(ti)|2
+jh
++ ∥Ru
+h(ti) −u(ti)∥2
+V + |Rp
+h(ti)|2
+jh
+⩽C
+h
+νh2(ru−1)∥u(ti)∥2
+ru + ν−1h2sp∥p(ti)∥2
+sp
+i
+.
+Inserting (6.17), (6.18) and (6.7) into (6.16) yields the desired estimate for the discrete
+
+[PDF PAGE 22]
+22
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+pressure error,
+∥δτ
+h∥2
+ℓ2(J;Q) ⩽C
+"q−1
+X
+i=0
+ 
+νh2ru∥u(ti)∥ru + ν−1h2(sp+1)∥p(ti)∥sp
++ c2
+P
+ν
+
+νh2(ru−1)∥u(ti)∥2
+ru + ν−1h2sp∥p(ti)∥2
+sp
+!
+(6.19)
++ c2
+P
+ν
+
+τ 2q∥∂(q+1)
+t
+u∥2
+L2(J;H) + h2ru∥∂tu∥2
+L2(J;Hru(Ω))
+#
+.
+7. General initial data and small time-step limit. In this section, we briefly
+discuss how the observations and results from [12] regarding the use of general initial
+data for the velocity can be generalized to our setting. As already discussed in [12] for
+BDF-1, we note that the bounds on the pressure and its error derived in Section 4 and
+Section 6 rely strongly on the discrete divergence-free assumption (4.15) for the initial
+values and on the properties of the Ritz projection (3.8). These conditions allow us
+to untangle the dependency of the first q computed values of ph from the dependency
+on the first q initial velocity values given as input. This is clear considering that we
+can perform telescoping only until (4.21) holds.
+If the initial values do not satisfy (4.15), the range of validity of (4.26) is restricted
+to 2q ⩽n ⩽N. For the steps q ⩽n ⩽2q −1 we can argue similarly to what is done
+in (4.29) but we have to give up on the substitution of the b(·, ·) form with jh(·, ·)
+stabilization, leaving some bilinear forms b(·, ·) explicit. Instead of (4.16), we end up
+with the estimate
+(7.1)
+∥¯∂quτ
+h∥2
+ℓ2(Jq;H) + ∥uN
+h ∥2
+V + |pN
+h |2
+jh ⩽C
+"q−1
+X
+i=0
+∥ui
+h∥2
+V + ∥f∥2
+ℓ2(Jq;H)
++
+q−1
+X
+i,j=0
+b(pq+j
+h
+, ui
+h)
+#
+.
+The same behaviour is then passed to the pressure stability, which becomes
+(7.2)
+∥pτ
+h∥2
+ℓ2(Jq;Q) ⩽C
+"q−1
+X
+i=0
+
+∥ui
+h∥2
+H + c2
+P
+ν ∥ui
+h∥2
+V
+
++ c2
+P
+ν ∥f∥2
+ℓ2(Jq;H) + c2
+P
+ν
+q−1
+X
+i,j=0
+b(pq+j
+h
+, ui
+h)
+#
+.
+This highlights the close interplay between the initial data and the first q com-
+puted pressures. If the initial ui
+h are not weakly divergence-free in the sense of as-
+sumption (4.15), then a conditional pressure stability has to be expected. This is
+what happens for example in [12], where the only information on ui
+h is that it is a
+general interpolant of the exact initial velocity u(ti), which is by definition strongly
+divergence-free. To guarantee pressure stability, [12] bounds the remaining b(·, ·) in
+the following way,
+(7.3)
+b(pq+j
+h
+, ui
+h) = b(pq+j
+h
+, ui
+h −u(ti)) ⩽∥pq+j
+h
+∥Q∥ui
+h −u(ti)∥V
+⩽∥pq+j
+h
+∥Qν
+1
+2 hru−1∥u(ti)∥ru ⩽νh2(ru−1)
+2
+∥pq+j
+h
+∥2
+Q + 1
+2∥u(ti)∥2
+ru.
+
+[PDF PAGE 23]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+23
+Under the inverse CFL-type assumption τ > Ch2(ru−1), one can absorb the
+pressure-dependent terms in (7.3) on the left-hand side of (7.2), thus restoring pres-
+sure stability. It should be noticed that this comes to the expense of not only of a
+weak inverse CFL-type condition but also of a higher regularity assumption for stabil-
+ity which would not have come into play otherwise. We would also like to emphasize
+that the non-fulfilment of this weak inverse CFL-type condition does not result into
+abnormal solution behavior involving non-physical oscillations or blow-ups. Instead,
+δ-scaled Young’s inequality can be used to ensure that τ −δCh2(ru−1) > 0 which in
+turn leads to correspondingly growing error constants, causing an increasing initial
+error for time step decreasing below the critical inverse CFL value.
+8. Numerical experiments. We conclude our presentation with a number of
+numerical experiments which corroborate our theoretical findings.
+8.1. Convergence studies. To confirm the convergence rates predicted by The-
+orem 6.1 and Theorem 6.2 numerically, we conducted a series of numerical experiments
+where we used a manufactured solution and then computed the errors between the
+exact solution and the approximated one. We considered problem (1.1) in two di-
+mensions with Ω= [0, 1] × [0, 1], final time T = 1, and non-homogeneous boundary
+conditions. For easier comparison with the results presented in [12], the right-hand
+side f and the boundary and initial data are chosen such that the exact solution is
+given by
+u(x, y, t) = g(t)
+ 
+sin(πx −0.7) sin(πy + 0.2)
+cos(πx −0.7) cos(πy + 0.2)
+!
+,
+(8.1a)
+p(x, y, t) = g(t)(sin(x) cos(y) + (cos(1) −1) sin(1)),
+(8.1b)
+with g(t) = 1 + 5t + e−10t + sin(t). We focused on the case of inf-sup unstable equal-
+interpolation spaces where the non-zero stabilization jh(·, ·) is given by the continuous
+interior penalty stabilization (CIP, see [15, 11]). In all simulations below, we used a k-
+step BDF time stepping scheme in time given a finite element space with polynomials
+of degree k in space. The initialization is always performed using the correspondent
+Ritz projection in order to guarantee optimal convergence. All computations have
+been performed using open source finite element software NGSolve, [39], [38].
+In Figure 1 we plot the discrete analogous of the norms L∞(J; L2), L2(J; H1)
+and L2(J; L2) (left to right) for the quantities of interest versus the time step size for
+various spatial refinements. We test BDF-3 and BDF-6 with the pair P3–P3 and P6–
+P6 in space, respectively. Note that ∥v∥L2(J;V ) = ∥ν
+1
+2 ∇v∥L2(J;L2) and ∥v∥L2(J;Q) =
+∥ν−1
+2 v∥L2(J;L2). Both graphs show the predicted optimal-order convergence in time
+as the error in space becomes smaller and smaller. The error curves flatten out since
+the spatial error starts dominating for very small time steps. For completeness, we
+also conducted convergence experiments in space which are summarized in Figure 2
+showing that the expected optimal spatial convergence order.
+8.2. Behavior in the small time step limit. Finally, we briefly revisit the
+observations and experiments in [12] and illustrate how the initial velocity approxima-
+tion can affect the error of the pressure approximation for small time steps also in the
+case of higher-order BDF time stepping methods, cf. Section 7. For initial velocity
+approximations which are not discretely divergence free, we expect a larger starting
+error when the small time-step limit is not fulfilled. As in [12], the exact solution is
+chosen as in (8.1) with g(t) = 1 and corresponding right-hand side f, boundary and
+
+[PDF PAGE 24]
+24
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+10−2
+10−1
+10−8
+10−7
+10−6
+10−5
+10−4
+10−3
+1
+3
+BDF-3 errors
+∥u −uh∥L∞(J;L2)
+dof = 3289
+dof = 7186
+dof = 16375
+dof = 36634
+dof = 81436
+dof = 182137
+10−2
+10−1
+10−5
+10−4
+10−3
+1
+3
+∥u −uh∥L2(J;V )
+dof = 3289
+dof = 7186
+dof = 16375
+dof = 36634
+dof = 81436
+dof = 182137
+10−2
+10−1
+10−6
+10−5
+10−4
+10−3
+10−2
+1
+3
+∥p −ph∥L2(J;Q)
+dof = 3289
+dof = 7186
+dof = 16375
+dof = 36634
+dof = 81436
+dof = 182137
+10−2
+10−1
+10−14
+10−13
+10−12
+10−11
+10−10
+10−9
+1
+6
+timestep size (τ)
+BDF-6 errors
+dof = 15952
+dof = 36796
+dof = 81472
+dof = 183568
+10−2
+10−1
+10−11
+10−10
+10−9
+10−8
+1
+6
+timestep size (τ)
+dof = 15952
+dof = 36796
+dof = 81472
+dof = 183568
+10−2
+10−1
+10−11
+10−10
+10−9
+10−8
+1
+6
+timestep size (τ)
+dof = 15952
+dof = 36796
+dof = 81472
+dof = 183568
+Fig. 1: Temporal convergence studies for various mesh sizes. Top: BDF-3, the pair
+P3–P3 and CIP stabilization. Bottom: BDF-6, the pair P6–P6 and CIP stabilization.
+initial data. We compare the error in the pressure after the first computed time step
+of the BDF scheme, i.e.
+τ
+1
+2 ∥p(tq) −pq
+h∥Q,
+with two different initial velocity approximation. In Figure 3 the difference between
+the use of the Ritz projection and the use of a Lagrange interpolant for BDF-3 and
+BDF-6 is shown (right-hand side column). We verify that the instability already seen
+in [12] for BDF-1 extends to higher order BDF schemes when the time-step decreases.
+Also, in the same figure we show how the use of a Ritz projection for the initial data
+resolves this issue in both cases (left-hand side column).
+Acknowledgements. The work of Bal´azs Kov´acs is funded by the Heisenberg
+Programme of the Deutsche Forschungsgemeinschaft (DFG, German Research Foun-
+dation) – Project-ID 446431602.
+During the early preparation of the manuscript
+B.K. was working at the University of Regensburg.
+Appendix A. G-stability for semi-inner product.
+Lemma 3.5 is equivalent,
+as stated in [18, p.65], to require that
+(A.1)
+q
+X
+j=0
+q
+X
+j=0
+sij(vi, vj) ⩾0,
+
+[PDF PAGE 25]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+25
+10−1.5
+10−1
+10−7
+10−6
+10−5
+10−4
+10−3
+1
+4
+BDF-3 errors
+∥u −uh∥L∞(J;L2)
+τ = 0.1
+τ = 0.05
+τ = 0.025
+τ = 0.0125
+τ = 0.00625
+τ = 0.003125
+10−1.5
+10−1
+10−4
+10−3
+10−2
+1
+3
+∥u −uh∥L2(J;V )
+τ = 0.1
+τ = 0.05
+τ = 0.025
+τ = 0.0125
+τ = 0.00625
+τ = 0.003125
+10−1.5
+10−1
+10−5
+10−4
+10−3
+10−2
+10−1
+1
+3
+∥p −ph∥L2(J;Q)
+τ = 0.1
+τ = 0.05
+τ = 0.025
+τ = 0.0125
+τ = 0.00625
+τ = 0.003125
+10−1.5
+10−1
+10−14
+10−12
+10−10
+10−8
+1
+7
+mesh size (h)
+BDF-6 errors
+τ = 0.1
+τ = 0.05
+τ = 0.025
+τ = 0.0125
+τ = 0.00625
+10−1.5
+10−1
+10−11
+10−10
+10−9
+10−8
+10−7
+10−6
+1
+6
+mesh size (h)
+τ = 0.1
+τ = 0.05
+τ = 0.025
+τ = 0.0125
+τ = 0.00625
+10−1.5
+10−1
+10−11
+10−10
+10−9
+10−8
+10−7
+10−6
+10−5
+1
+6
+mesh size (h)
+τ = 0.1
+τ = 0.05
+τ = 0.025
+τ = 0.0125
+τ = 0.00625
+Fig. 2: Spatial convergence studies for various time step lengths. Top: BDF-3, the pair
+P3–P3 and CIP stabilization. Bottom: BDF-6, the pair P6–P6 and CIP stabilization.
+with
+(A.2) S = [sij] =
+
+
+δ0
+...
+δq
+
+
+µ0
+. . .
+µq
+
++
+
+
+µ0
+...
+µq
+
+
+δ0
+. . .
+δq
+
++
+ G
+0q
+0T
+q
+0
+
++
+ 0
+0T
+q
+0q
+G
+
+,
+where 0q = [0, . . . , 0]T is the q-th zero vector.
+One can see that the matrix S is
+independent from the semi-inner product chosen, but only dependent on the polyno-
+mials and thus positive semi-definite by hypothesis. Also, relation (A.1) holds for any
+semi-inner product by definition of semi-inner product, thus the Lemma is proven.
+Appendix B. Estimation of the defect.
+We want to bound the term ∥¯∂qu(tn) −∂tu(tn) −¯∂qen
+π∥2
+H. By the property of
+the BDF methods (see [25]) we have that
+(B.1)
+¯∂qu(tn) −∂tu(tn) = ¯∂qRn −Rt(tn),
+where
+(B.2)
+R(t) = 1
+q!
+Z tn
+tn−q
+(t −s)q∂(q+1)
+t
+u(s) ds,
+and the following estimate holds, where the Cauchy–Schwarz inequality is used in the
+
+[PDF PAGE 26]
+26
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+10−1.8
+10−1.6
+10−1.4
+10−1.2
+10−1
+10−5
+10−4
+10−3
+10−2
+1
+2
+BDF-3 errors
+τ
+1
+2 ∥p(tq) −pq
+h∥Q - Ritz projection
+τ = 1e-1
+τ = 1e-3
+τ = 1e-6
+10−1.4
+10−1.2
+10−1
+10−2
+10−1
+100
+1
+2
+τ
+1
+2 ∥p(tq) −pq
+h∥Q - Lagrange Interpolation
+τ = 1e-1
+τ = 1e-3
+τ = 1e-6
+10−1.8
+10−1.6
+10−1.4
+10−1.2
+10−1
+10−5
+10−4
+10−3
+10−2
+1
+2
+mesh size (h)
+BDF-6 errors
+τ = 1e-1
+τ = 1e-3
+τ = 1e-6
+10−1.4
+10−1.2
+10−1
+10−2
+10−1
+100
+1
+2
+mesh size (h)
+τ = 1e-1
+τ = 1e-3
+τ = 1e-6
+Fig. 3: Pressure error studies in the small time-step limit using Ritz projection (left)
+and Lagrange interpolation (right) for the initial values. Top: BDF-3, the pair P1–P1
+and CIP stabilization. Bottom: BDF-6, the pair P1–P1 and CIP stabilization.
+last passage
+(B.3)
+∥¯∂qu(tn) −∂tu(tn)∥H ⩽C
+
+τ q−1
+Z tn
+tn−q
+∥∂(q+1)
+t
+u(s)∥H ds
+
+= C
+ 
+τ q−2
+Z tn
+tn−q
+τ∥∂(q+1)
+t
+u(s)∥H ds
+!
+⩽Cτ q−1
+2 ∥∂(q+1)
+t
+u∥L2((tn−q,tn);H).
+Moreover, from (B.3), (6.12), (3.1) and using the fact that Pq
+i=0 αi = 0 we have
+(B.4)
+∥¯∂qen
+π∥H =
+
+1
+τ
+q
+X
+i=0
+
+αien−i
+π
+−αien−q
+π
+
+H
+=
+
+1
+τ
+q
+X
+i=0
+αi
+Z tn−1
+tn−q
+∂teπ(s) ds
+
+H
+⩽Cτ −1
+q
+X
+i=0
+
+Z tn−1
+tn−q
+∂teπ(s) ds
+
+H
+⩽Cτ −1
+q
+X
+i=0
+Z tn−i
+tn−q
+∥∂teπ(s)∥H ds
+⩽Cτ −1
+2 ∥∂teπ(s)∥L2((tn−q,tn);H) ⩽Cτ −1
+2 hru∥∂tu∥L2((tn−q,tn);Hru(Ω)).
+
+[PDF PAGE 27]
+ERROR ANALYSIS OF BDF METHODS FOR TRANSIENT STOKES
+27
+Overall
+(B.5)
+∥¯∂qu(tn) −∂tu(tn) −¯∂qen
+π∥2
+H ⩽∥¯∂qu(tn) −∂tu(tn)∥2
+H + ∥¯∂qen
+π∥2
+H
+⩽C
+
+τ 2q−1∥∂(q+1)
+t
+u∥2
+L2((tn−q,tn);H) + τ −1h2ru∥∂tu∥2
+L2((tn−q,tn);Hru(Ω))
+
+.
+REFERENCES
+[1] N. Ahmed, S. Becher, and G. Matthies, Higher-order discontinuous Galerkin time stepping
+and local projection stabilization techniques for the transient Stokes problem, Computer
+Methods in Applied Mechanics and Engineering, 313 (2017), pp. 28–52, https://doi.org/
+10.1016/j.cma.2016.09.026.
+[2] G. Akrivis, M. Chen, F. Yu, and Z. Zhou, The energy technique for the six-step BDF method,
+SIAM J. Numer. Anal., 59 (2021), pp. 2449–2472, https://doi.org/10.1137/21M1392656,
+https://doi.org/10.1137/21M1392656.
+[3] G. Akrivis, M. Feischl, B. Kov´acs, and C. Lubich, Higher-order linearly implicit full
+discretization of the Landau–Lifshitz–Gilbert equation, Mathematics of Computation, 90
+(2021), pp. 995–1038, https://doi.org/10.1090/mcom/3597.
+[4] G. Akrivis and E. Katsoprinakis, Backward difference formulae:
+New multipliers and
+stability properties for parabolic equations, Mathematics of Computation, 85 (2015),
+pp. 2195–2216, https://doi.org/10.1090/mcom3055.
+[5] G. Akrivis and B. Li, Maximum norm analysis of implicit–explicit backward difference
+formulae for nonlinear parabolic equations, IMA Journal of Numerical Analysis, 38 (2017),
+pp. 75–101, https://doi.org/10.1093/imanum/drx008.
+[6] G. Akrivis, B. Li, and C. Lubich, Combining maximal regularity and energy estimates for
+time discretizations of quasilinear parabolic equations, Mathematics of Computation, 86
+(2017), pp. 1527–1552, https://doi.org/10.1090/mcom/3228.
+[7] G. Akrivis and C. Lubich, Fully implicit, linearly implicit and implicit–explicit backward
+difference formulae for quasi-linear parabolic equations, Numerische Mathematik, 131
+(2015), pp. 713–735, https://doi.org/10.1007/s00211-015-0702-0.
+[8] R. Becker and M. Braack, A finite element pressure gradient stabilization for the Stokes
+equations based on local projections, Calcolo, 38 (2001), pp. 173–199, https://doi.org/10.
+1007/s10092-001-8180-4.
+[9] N. Behringer, B. Vexler, and D. Leykekhman, Fully discrete best-approximation-type
+estimates in L∞(I; L2(Ω)d) for finite element discretizations of the transient Stokes
+equations, IMA Journal of Numerical Analysis, 43 (2022), pp. 852–880, https://doi.org/
+10.1093/imanum/drac009.
+[10] F. Brezzi and J. Pitk¨aranta, On the stabilization of finite element approximations of the
+Stokes equations, in Efficient Solutions of Elliptic Systems, ViewegTeubner Verlag, 1984,
+pp. 11–19, https://doi.org/10.1007/978-3-663-14169-3 2.
+[11] E. Burman and M. A. Fern´andez, Continuous interior penalty finite element method for
+the time-dependent Navier–Stokes equations: space discretization and convergence, Nu-
+merische Mathematik, 107 (2007), pp. 39–77, https://doi.org/10.1007/s00211-007-0070-5.
+[12] E. Burman and M. A. Fern´andez, Galerkin finite element methods with symmetric pressure
+stabilization for the transient Stokes equations:
+Stability and convergence analysis,
+SIAM Journal on Numerical Analysis, 47 (2009), pp. 409–439, https://doi.org/10.1137/
+070707403.
+[13] E. Burman and M. A. Fern´andez, Analysis of the PSPG method for the transient Stokes’
+problem, Computer Methods in Applied Mechanics and Engineering, 200 (2011), pp. 2882–
+2890, https://doi.org/10.1016/j.cma.2011.05.001.
+[14] E. Burman and P. Hansbo, Edge stabilization for the generalized Stokes problem:
+A
+continuous interior penalty method, Comput. Methods Appl. Mech. Engrg., 195 (2006),
+pp. 2393–2410, https://doi.org/10/cgbc89.
+[15] E. Burman and P. Hansbo, Edge stabilization for the generalized Stokes problem:
+A
+continuous interior penalty method, Computer Methods in Applied Mechanics and En-
+gineering, 195 (2006), pp. 2393–2410, https://doi.org/10.1016/j.cma.2005.05.009.
+[16] K. Chrysafinos and N. Walkington, Discontinuous Galerkin approximations of the Stokes
+and Navier-Stokes equations, Math. Comp., 79 (2010), pp. 2135–2167, https://doi.org/10/
+dgc87n.
+[17] R. Codina and J. Blasco, A finite element formulation for the Stokes problem allowing equal
+velocity-pressure interpolation, Computer Methods in Applied Mechanics and Engineering,
+
+[PDF PAGE 28]
+28
+A. CONTRI, B. KOV´ACS, AND A. MASSING
+143 (1997), pp. 373–391, https://doi.org/10.1016/s0045-7825(96)01154-1.
+[18] G. Dahlquist, Error analysis for a class of methods for stiff non-linear initial value problems,
+in Lecture Notes in Mathematics, Springer Berlin Heidelberg, 1976, pp. 60–72, https:
+//doi.org/10.1007/bfb0080115.
+[19] G. Dahlquist, G-stability is equivalent to A-stability, BIT, 18 (1978), pp. 384–401, https:
+//doi.org/10.1007/bf01932018.
+[20] C. R. Dohrmann and P. B. Bochev, A stabilized finite element method for the Stokes problem
+based on polynomial pressure projections, International Journal for Numerical Methods in
+Fluids, 46 (2004), pp. 183–201, https://doi.org/10.1002/fld.752.
+[21] A. Ern and J.-L. Guermond, Finite Elements I, Springer International Publishing, 2021,
+https://doi.org/10.1007/978-3-030-56341-7.
+[22] A. Ern and J.-L. Guermond, Finite Elements II, Springer International Publishing, 2021,
+https://doi.org/10.1007/978-3-030-56923-5.
+[23] A. Ern and J.-L. Guermond, Finite Elements III, Springer International Publishing, 2021,
+https://doi.org/10.1007/978-3-030-57348-5.
+[24] B. Garc´ıa-Archilla, V. John, and J. Novo, Symmetric pressure stabilization for equal-order
+finite element approximations to the time-dependent Navier–Stokes equations, IMA Jour-
+nal of Numerical Analysis, 41 (2020), pp. 1093–1129, https://doi.org/10.1093/imanum/
+draa037.
+[25] E. Hairer and G. Wanner, Solving Ordinary Differential Equations I, Springer Berlin Hei-
+delberg, 1993, https://doi.org/10.1007/978-3-540-78862-1.
+[26] E. Hairer and G. Wanner, Solving Ordinary Differential Equations II, Springer Berlin Hei-
+delberg, 1996, https://doi.org/10.1007/978-3-642-05221-7.
+[27] F. Huang and J. Shen, Stability and error analysis of a class of high-order IMEX schemes for
+Navier–Stokes equations with periodic boundary conditions, SIAM Journal on Numerical
+Analysis, 59 (2021), pp. 2926–2954, https://doi.org/10.1137/21m1404144.
+[28] T. Hughes, L. Franca, and M. Balestra, A new finite element formulation for computational
+fluid dynamics. V. Circumventing the Babuˇska-Brezzi condition: A stable Petrov-Galerkin
+formulation of the Stokes problem accommodating equal-order interpolations, Comput.
+Methods Appl. Mech. Engrg., 59 (1986), pp. 85–99.
+[29] V. John, Finite Element Methods for Incompressible Flow Problems, Springer International
+Publishing, 2016, https://doi.org/10.1007/978-3-319-45750-5.
+[30] V. John and J. Novo, Analysis of the pressure stabilized Petrov–Galerkin method for the
+evolutionary Stokes equations avoiding time step restrictions, SIAM Journal on Numerical
+Analysis, 53 (2015), pp. 1005–1031, https://doi.org/10.1137/130944941.
+[31] B. Kov´acs, B. Li, and C. Lubich, A convergent evolving finite element algorithm for mean
+curvature flow of closed surfaces, Numerische Mathematik, 143 (2019), pp. 797–853, https:
+//doi.org/10.1007/s00211-019-01074-2.
+[32] B. Kov´acs, B. Li, and C. Lubich, A convergent evolving finite element algorithm for Willmore
+flow of closed surfaces, Numerische Mathematik, 149 (2021), pp. 595–643, https://doi.org/
+10.1007/s00211-021-01238-z.
+[33] J. Liu, Simple and efficient ALE methods with provable temporal accuracy up to fifth order
+for the Stokes equations on time varying domains, SIAM Journal on Numerical Analysis,
+51 (2013), pp. 743–772, https://doi.org/10.1137/110825996.
+[34] C. Lubich, D. Mansour, and C. Venkataraman, Backward difference time discretization of
+parabolic differential equations on evolving surfaces, IMA Journal of Numerical Analysis,
+33 (2013), pp. 1365–1385, https://doi.org/10.1093/imanum/drs044.
+[35] O. Nevanlinna and W. Liniger, Contractive methods for stiff differential equations part i,
+BIT, 18 (1978), pp. 457–474, https://doi.org/10.1007/bf01932025.
+[36] O. Nevanlinna and W. Liniger, Contractive methods for stiff differential equations part II,
+BIT, 19 (1979), pp. 53–72, https://doi.org/10.1007/bf01931222.
+[37] O. Nevanlinna and F. Odeh, Multiplier techniques for linear multistep methods, Numerical
+Functional Analysis and Optimization, 3 (1981), pp. 377–423, https://doi.org/10.1080/
+01630568108816097.
+[38] J. Schoeberl, C++11 implementation of finite elements in NGSolve, Vienna University of
+Technology - Institute for Analysis and Scientific Computing, (2014).
+[39] J. Sch¨oberl, NETGEN an advancing front 2d/3d-mesh generator based on abstract rules,
+Computing and Visualization in Science, 1 (1997), pp. 41–52, https://doi.org/10.1007/
+s007910050004.

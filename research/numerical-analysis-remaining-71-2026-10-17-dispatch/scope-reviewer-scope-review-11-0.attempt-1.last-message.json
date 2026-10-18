@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "11",
+  "round": 0,
+  "reviewed_items": [
+    "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+    "lem-orthogonal-projector-power-error-inequality",
+    "alg-gaussian-randomized-range-finder",
+    "lem-finite-real-gaussian-increment-comparison",
+    "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+    "alg-randomized-power-subspace-iteration-with-qr",
+    "lem-randomized-rangefinder-deterministic-svd-partition-error",
+    "lem-real-scaled-gaussian-product-expectation",
+    "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+    "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+    "thm-randomized-power-rangefinder-error-transfer",
+    "lem-normalized-complex-gaussian-block-affine-spectral-second-moments",
+    "lem-wide-gaussian-pseudoinverse-spectral-moments-and-tail",
+    "lem-normalized-complex-rangefinder-direct-spectral-expectation",
+    "thm-real-gaussian-rangefinder-expected-spectral-error",
+    "thm-gaussian-rangefinder-expected-spectral-error",
+    "thm-real-gaussian-power-rangefinder-expected-error",
+    "thm-gaussian-power-rangefinder-expected-error",
+    "ex-gaussian-rangefinder-exact-on-rank-k-matrices",
+    "ex-power-rangefinder-loses-small-mode-without-qr",
+    "ex-slow-singular-tail-rangefinder-error-term"
+  ],
+  "reviewed_pages": [
+    "randomized-low-rank-approximation",
+    "randomized-low-rank-approximation-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The real and normalized-complex claims preserve the approved targets, but assigned proofs omit several explicit measure and integration prerequisites. The A-page manifest also adds a page requirement absent from the approved plan, and two outside-batch consumer proofs need repair.",
+  "findings": [
+    {
+      "id": "randomized-low-rank-approximation",
+      "type": "scope",
+      "reason": "The current batch page record requires conjugate-families-and-posterior-prediction in addition to the two pages in plan-spec.json. That page supplies def-gamma-distribution-shape-rate, used by the complex block lemma, so the edge may be intended; it is not in the approved requirements and needs owner reconciliation."
+    },
+    {
+      "id": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+      "type": "prerequisite",
+      "reason": "Proof step 1.1 changes variables under G ↦ U*GV but does not declare or prove Lebesgue change of variables. Add thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, whose Countable Choice hypothesis is already stated."
+    },
+    {
+      "id": "lem-finite-real-gaussian-increment-comparison",
+      "type": "prerequisite",
+      "reason": "Proof step 1.1 uses coordinatewise Gaussian integration by parts without a supplier or complete truncated derivation. Cite thm-integration-by-parts and make the Gaussian-tail limit explicit."
+    },
+    {
+      "id": "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+      "type": "prerequisite",
+      "reason": "Proof steps 1.1–2.1 invoke the Schur-complement inverse formula and transformations for real squares, complex squared moduli, and Gamma convolutions. Add thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions and thm-polar-coordinates-formula-for-lebesgue-measure; derive the block inverse identity locally or cite a supplier."
+    },
+    {
+      "id": "lem-wide-gaussian-pseudoinverse-spectral-moments-and-tail",
+      "type": "prerequisite",
+      "reason": "Proof step 1.1 asserts real and complex Gaussian square laws and applies the Jacobian-s transformation for sphere moments, but declares neither change-of-variables nor polar-coordinate suppliers. Add those suppliers or include complete local derivations."
+    },
+    {
+      "id": "lem-gaussian-squared-norm-tail",
+      "type": "outside-batch",
+      "reason": "Batch 17 consumer steps 1.1, 2.1–2.2, and 3.1 use Gaussian scaling/polar integrals, Markov's inequality, logarithmic integral estimates, and a finite union bound; its deps list only the Gaussian law and Countable Choice. Route repair outside this batch, including the missing integration suppliers and cor-markov-inequality-for-random-variables and thm-finite-union-bound."
+    },
+    {
+      "id": "thm-gaussian-oblivious-l2-subspace-embedding",
+      "type": "outside-batch",
+      "reason": "Batch 17 consumer step 1.1 uses the assigned fixed-unitary invariance with matching hypotheses. Step 2.1 invokes a finite union bound without declaring thm-finite-union-bound; route that consumer repair outside this batch."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "hierarchical-low-rank-matrices-and-error-propagation",
+      "decision": "accept",
+      "reason": "The page uses the randomized approximation page as context; its actual claims retain deterministic low-rank assumptions and do not use either expected-error theorem."
+    },
+    {
+      "id": "sketched-least-squares-and-subspace-embeddings",
+      "decision": "accept",
+      "reason": "The page-level context is sound. Its direct Gaussian-law and invariance consumer items are reported separately."
+    },
+    {
+      "id": "lem-gaussian-squared-norm-tail",
+      "decision": "escalate",
+      "reason": "Its Gaussian-law interface matches, but the proof has outside-batch prerequisite omissions in its MGF, Markov, logarithmic-integral, and union-bound steps."
+    },
+    {
+      "id": "thm-gaussian-oblivious-l2-subspace-embedding",
+      "decision": "escalate",
+      "reason": "Its use of the assigned Gaussian law and invariance is valid; its finite-union step needs an undeclared supplier, and its Gaussian-tail dependency also needs the outside-batch repair above."
+    }
+  ]
+}

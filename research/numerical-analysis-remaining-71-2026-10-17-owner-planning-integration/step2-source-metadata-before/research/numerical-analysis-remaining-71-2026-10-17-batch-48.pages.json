@@ -1,0 +1,612 @@
+[
+  {
+    "order": 2650,
+    "id": "nystrom-product-integration-and-fredholm-error",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nystrom product integration and fredholm error",
+    "companion": "nystrom-product-integration-and-fredholm-error-examples",
+    "requires": [
+      "composite-quadrature-rules",
+      "gaussian-quadrature",
+      "compact-operators-and-riesz-schauder-theory"
+    ],
+    "items": [
+      {
+        "id": "def-nystrom-quadrature-and-finite-rank-operators",
+        "kind": "definition",
+        "title": "Nyström quadrature operators and their reconstructed equations",
+        "statement": "Let $X:=C([0,1],\\mathbb R)$ be the real continuous functions on $[0,1]$\n([[def-continuous-real-functions-on-a-compact-metric-space]]) with the supremum\nnorm $\\|u\\|_\\infty:=\\sup_{0\\le x\\le1}|u(x)|$; this is a Banach space by\n[[thm-c-k-complete-in-the-sup-metric]]. Fix a continuous real kernel\n$k:[0,1]^2\\to\\mathbb R$. The integral $\\int_0^1$ below is the ordinary Riemann\nintegral, equivalently the Riemann–Stieltjes integral with integrator $y\\mapsto y$\n([[def-riemann-stieltjes-sum-and-integral]]). For $u\\in X$, define\n$$(Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy,\\qquad 0\\le x\\le1.$$\nThe integrand is continuous in $y$, so this integral exists by\n[[thm-continuous-implies-integrable]].\n\nA finite quadrature rule on $[0,1]$ consists of an integer $m\\ge1$, nodes\n$y_1,\\ldots,y_m\\in[0,1]$, and real weights $w_1,\\ldots,w_m$. It acts on a\nfunction $g$ defined at the nodes by\n$$Q(g):=\\sum_{j=1}^m w_jg(y_j).$$\nIts Nyström operator is the finite-sum rule\n$$(K_Q u)(x):=Q\\bigl(k(x,\\cdot)u(\\cdot)\\bigr)        =\\sum_{j=1}^m w_jk(x,y_j)u(y_j).$$\nIn particular, for the composite midpoint rule with $N\\ge1$ panels,\n$h:=1/N$, $y_j:=(j+\\tfrac12)h$ for $0\\le j<N$, and $w_j=h$, the operator\nis denoted $K_N$. The nodes and weights are those of\n[[alg-composite-midpoint-rule]].\n\nFor a right-hand side $f\\in X$, the Nyström equation is\n$$u_Q-K_Qu_Q=f.$$\nThis definition asserts neither consistency nor convergence of $K_Q$ to $K$.",
+        "proof_strategy": "direct",
+        "deps": [
+          "alg-composite-midpoint-rule",
+          "def-continuous-real-functions-on-a-compact-metric-space",
+          "thm-c-k-complete-in-the-sup-metric",
+          "def-riemann-stieltjes-sum-and-integral",
+          "thm-continuous-implies-integrable"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Method 3.12 and equations (3.18)–(3.23), printed pp. 60–61."
+          },
+          {
+            "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.4.1",
+            "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+            "locator": "Chapter 1, §1.4.1, printed pp. 14–15."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "source_path": "items/def-nystrom-quadrature-and-finite-rank-operators.md"
+      },
+      {
+        "id": "lem-finite-node-equation-reconstruction-equivalence",
+        "kind": "lemma",
+        "title": "Finite-node Nyström equations are equivalent to their reconstructed equations",
+        "statement": "Let $X:=C([0,1],\\mathbb R)$ ([[def-continuous-real-functions-on-a-compact-metric-space]]), let $m\\ge1$, let $y_1,\\ldots,y_m\\in[0,1]$, and let $\\psi_1,\\ldots,\\psi_m\\in X$. Define the finite-rank linear map $$ (Fu)(x):=\\sum_{j=1}^m\\psi_j(x)u(y_j) $$ and, for $f\\in X$, define the square matrix and vector $$ M_{ij}:=\\delta_{ij}-\\psi_j(y_i),\\qquad b_i:=f(y_i),\\qquad 1\\le i,j\\le m. $$ Then the solutions of $(I-F)u=f$ are in bijection with the solutions $c\\in\\mathbb R^m$ of $Mc=b$, via $$u(x)=f(x)+\\sum_{j=1}^m\\psi_j(x)c_j,\\qquad c_i=u(y_i).$$ The nullspaces of $I-F$ and $M$ are linearly isomorphic by $c\\mapsto\\sum_j\\psi_jc_j$. In particular, $I-F$ is bijective if and only if $M$ is nonsingular.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-continuous-real-functions-on-a-compact-metric-space",
+          "thm-rank-nullity",
+          "def-linear-map"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Method 3.12 and equations (3.21)–(3.23), printed pp. 60–61."
+          },
+          {
+            "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.4.1",
+            "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+            "locator": "Theorem 1.10, printed p. 15."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/lem-finite-node-equation-reconstruction-equivalence.md"
+      },
+      {
+        "id": "lem-continuous-kernel-integral-operator-is-compact-on-c",
+        "kind": "lemma",
+        "title": "A continuous kernel defines a compact integral operator on C of an interval",
+        "statement": "Assume Countable Choice and Dependent Choice. Let $X:=C([0,1],\\mathbb R)$ with $\\|u\\|_\\infty:=\\sup_{x\\in[0,1]}|u(x)|$ ([[def-continuous-real-functions-on-a-compact-metric-space]], [[thm-c-k-complete-in-the-sup-metric]]) and let $k:[0,1]^2\\to\\mathbb R$ be continuous. The map $$ (Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy $$ uses the ordinary Riemann integral of [[def-riemann-stieltjes-sum-and-integral]] and defines a bounded linear operator $K:X\\to X$, and it is compact ([[def-compact-linear-operator]]).",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-continuous-real-functions-on-a-compact-metric-space",
+          "def-riemann-stieltjes-sum-and-integral",
+          "thm-c-k-complete-in-the-sup-metric",
+          "def-compact-linear-operator",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-continuous-implies-integrable",
+          "thm-linearity-of-the-integral",
+          "lem-uniform-integral-error-bound",
+          "thm-heine-cantor-metric"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §2.2",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Chapter 2, §2.2 and the continuous-kernel compactness argument; printed pp. 15–16."
+          },
+          {
+            "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.3",
+            "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+            "locator": "Chapter 1, §1.3, continuous-kernel Fredholm operator setup and the compact-operator approximation results, printed pp. 10–13."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/lem-continuous-kernel-integral-operator-is-compact-on-c.md"
+      },
+      {
+        "id": "thm-collectively-compact-operator-stability-and-error",
+        "kind": "theorem",
+        "title": "Collective compactness gives eventual Fredholm invertibility and solution error bounds",
+        "statement": "Assume the Axiom of Choice. Let $X\\ne\\{0\\}$ be a Banach space ([[def-banach-space]]), let $K:X\\to X$ be compact, and let $(K_n)_{n\\ge1}$ be bounded linear operators such that $$\\overline{\\bigcup_{n\\ge1}K_n(B_X)}$$ is compact for the closed unit ball $B_X:=\\{x\\in X:\\|x\\|\\le1\\}$ and $K_nx\\to Kx$ in norm for every $x\\in X$. Suppose $I-K$ is injective. Then there are $n_0\\ge1$ and $C<\\infty$ such that $I-K_n$ is boundedly invertible for every $n\\ge n_0$ and $$\\sup_{n\\ge n_0}\\|(I-K_n)^{-1}\\|\\le C.$$ For any $f,f_n\\in X$, if $u$ and $u_n$ solve $(I-K)u=f$ and $(I-K_n)u_n=f_n$, then for $n\\ge n_0$, $$\\|u_n-u\\|\\le C\\bigl(\\|(K_n-K)u\\|+\\|f_n-f\\|\\bigr).$$ The theorem does not assert that $\\|K_n-K\\|\\to0$.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-banach-space",
+          "def-compact-linear-operator",
+          "def-operator-norm",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-metric-compactness-equivalences",
+          "thm-fredholm-alternative-for-identity-minus-compact"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Lemmas 3.13–3.16, Theorems 3.18–3.19 and Corollary 3.20, printed pp. 60–64."
+          },
+          {
+            "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.3",
+            "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+            "locator": "Theorems 1.7–1.9, printed pp. 12–13."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/thm-collectively-compact-operator-stability-and-error.md"
+      },
+      {
+        "id": "lem-half-order-singular-integral-exists",
+        "kind": "lemma",
+        "title": "The half-order diagonal singularity defines a bounded improper integral",
+        "statement": "For $x\\in[0,1]$, $g\\in C([0,1],\\mathbb R)$, and $0<\\varepsilon<1$, let $$S_{x,\\varepsilon}(g):=\\int_{[0,1]\\setminus(x-\\varepsilon,x+\\varepsilon)}|x-y|^{-1/2}g(y)\\,dy,$$ where the integral is the sum of the ordinary Riemann integrals on the at most two remaining closed intervals, and an empty interval contributes zero. The limit $$S_x(g):=\\lim_{\\varepsilon\\downarrow0}S_{x,\\varepsilon}(g)$$ exists. The map $S_x:C([0,1],\\mathbb R)\\to\\mathbb R$ is linear and positive, and its operator norm ([[def-operator-norm]]) is $$\\|S_x\\|=S_x(1)=2\\sqrt{x}+2\\sqrt{1-x}\\le2\\sqrt2.$$",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-continuous-real-functions-on-a-compact-metric-space",
+          "def-riemann-stieltjes-sum-and-integral",
+          "thm-continuous-implies-integrable",
+          "thm-monotonicity-of-the-integral",
+          "thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators",
+          "thm-reals-cauchy-complete",
+          "thm-linearity-of-the-integral",
+          "def-operator-norm",
+          "thm-c-k-complete-in-the-sup-metric",
+          "thm-additivity-over-subintervals"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Jiri Lebl, Basic Analysis I, §5.5 Improper Integrals, Definition 5.5.1 and Proposition 5.5.2",
+            "url": "https://www.jirka.org/ra/html/sec_impropriemann.html",
+            "locator": "Definition 5.5.1 and Proposition 5.5.2, especially the endpoint p-test for 0<p<1."
+          },
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Chapter 3, §3.3, quadrature rule treatment of integral operators, printed pp. 60–64."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/lem-half-order-singular-integral-exists.md"
+      },
+      {
+        "id": "lem-half-order-kernel-translation-modulus-in-l1",
+        "kind": "lemma",
+        "title": "Translations of the half-order kernel are continuous in the improper L1 norm",
+        "statement": "Put $s(t):=|t|^{-1/2}$ for $t\\in[-1,1]\\setminus\\{0\\}$. For $x,x'\\in[0,1]$, define $$T(x,x'):=\\int_0^1|s(x-y)-s(x'-y)|\\,dy$$ as an improper Riemann integral split at the distinct points among $x$ and $x'$; an endpoint value at a singular point is omitted. If $x=x'$, set $T(x,x)=0$. These improper integrals exist and are finite. The modulus $$\\tau(d):=\\sup\\{T(x,x'):x,x'\\in[0,1],\\ |x-x'|\\le d\\}$$ is finite and satisfies $\\tau(d)\\to0$ as $d\\downarrow0$.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators",
+          "thm-reals-cauchy-complete",
+          "thm-continuous-implies-integrable",
+          "thm-additivity-over-subintervals",
+          "thm-monotonicity-of-the-integral",
+          "thm-heine-cantor-metric",
+          "cor-cauchy-reals-lub-complete"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Jiri Lebl, Basic Analysis I, §5.5 Improper Integrals",
+            "url": "https://www.jirka.org/ra/html/sec_impropriemann.html",
+            "locator": "Definition 5.5.1 and Proposition 5.5.2, the endpoint p-test for 0<p<1; specialize to p=1/2."
+          },
+          {
+            "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.4",
+            "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+            "locator": "Chapter 1, §1.4, printed p. 14: singular kernels require method-specific treatment; this item supplies the local L1 translation proof."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/lem-half-order-kernel-translation-modulus-in-l1.md"
+      },
+      {
+        "id": "thm-nystrom-operator-norm-perturbation-error",
+        "kind": "theorem",
+        "title": "The operator-norm Nyström perturbation bound",
+        "statement": "Use $X$, $K$, and the finite quadrature Nyström operator $K_Q$ from\n[[def-nystrom-quadrature-and-finite-rank-operators]]. Suppose $A:=I-K$ has a\nbounded inverse, put $R:=\\|A^{-1}\\|$, and let $\\varepsilon:=\\|K_Q-K\\|$ as an\noperator on $X$. If $q:=R\\varepsilon<1$, then $I-K_Q$ has a bounded inverse and\n$$\\|(I-K_Q)^{-1}\\|\\le\\frac{R}{1-q}.$$\nFor $f,f_Q\\in X$, let $u$ and $u_Q$ solve $(I-K)u=f$ and\n$(I-K_Q)u_Q=f_Q$. Then\n$$\\|u_Q-u\\|_\\infty\\le\\frac{R}{1-q}    \\bigl(\\|(K_Q-K)u\\|_\\infty+\\|f_Q-f\\|_\\infty\\bigr).$$\nWhen $Q$ is point sampling on all of $C([0,1],\\mathbb R)$, this theorem is\nconditional: its hypothesis is an actual operator-norm bound, not merely\nconvergence of the quadrature on each fixed continuous integrand.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-nystrom-quadrature-and-finite-rank-operators",
+          "lem-finite-node-equation-reconstruction-equivalence",
+          "lem-neumann-series-and-small-perturbations-of-bounded-inverses",
+          "def-operator-norm",
+          "def-bounded-linear-operator",
+          "lem-composition-operator-norm-inequality"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.3",
+            "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+            "locator": "Theorem 1.5 and its complete proof, printed pp. 10–12."
+          },
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Method 3.12 and the error term in Theorem 3.18, printed pp. 60–63."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/thm-nystrom-operator-norm-perturbation-error.md"
+      },
+      {
+        "id": "lem-midpoint-nystrom-collective-compactness-and-consistency",
+        "kind": "lemma",
+        "title": "Composite midpoint Nyström operators are collectively compact and consistent",
+        "statement": "Assume AC. Let $k:[0,1]^2\\to\\mathbb R$ be continuous and let $K$ be its integral operator from [[def-nystrom-quadrature-and-finite-rank-operators]]. For each $N\\ge1$, let $K_N$ use the composite midpoint rule with $h=1/N$. Then $K$ is compact, the family $(K_N)_{N\\ge1}$ is collectively compact (the union of the images of the unit ball has compact closure in $X$), and $$\\|K_Nu-Ku\\|_\\infty\\longrightarrow0\\qquad\\text{for every }u\\in X.$$",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-nystrom-quadrature-and-finite-rank-operators",
+          "lem-continuous-kernel-integral-operator-is-compact-on-c",
+          "alg-composite-midpoint-rule",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-heine-cantor-metric",
+          "thm-additivity-over-subintervals",
+          "thm-monotonicity-of-the-integral",
+          "lem-uniform-integral-error-bound",
+          "thm-c-k-complete-in-the-sup-metric"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Theorem 3.19 and its proof, printed pp. 63–64."
+          },
+          {
+            "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §§1.3–1.4",
+            "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+            "locator": "Theorems 1.11–1.12 and their proofs, printed pp. 15–16."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/lem-midpoint-nystrom-collective-compactness-and-consistency.md"
+      },
+      {
+        "id": "def-half-order-product-integration",
+        "kind": "definition",
+        "title": "Piecewise-linear product integration for a half-order diagonal singularity",
+        "statement": "Let $X:=C([0,1],\\mathbb R)$ and let $a:[0,1]^2\\to\\mathbb R$ be continuous.\nUse $S_x$ from [[lem-half-order-singular-integral-exists]] to define\n$$(Ku)(x):=S_x\\bigl(y\\mapsto a(x,y)u(y)\\bigr).$$\nFor an integer $n\\ge1$, set $h:=1/n$ and $y_j:=jh$ for $j=0,\\ldots,n$.\nDefine the nonnegative piecewise-linear hat functions by\n$$\\phi_{n,0}(y):=\\max(1-y/h,0),\\qquad   \\phi_{n,n}(y):=\\max(1-(1-y)/h,0),$$\nand, for $1\\le j<n$,\n$$\\phi_{n,j}(y):=\\max(1-|y-y_j|/h,0).$$\nTheir piecewise-linear interpolant is\n$$I_ng:=\\sum_{j=0}^n g(y_j)\\phi_{n,j}.$$\nThe product weights and product-integration operator are\n$$w_{n,j}(x):=S_x(\\phi_{n,j}),\\qquad   (K_nu)(x):=\\sum_{j=0}^n w_{n,j}(x)a(x,y_j)u(y_j)   =S_x\\bigl(I_n(y\\mapsto a(x,y)u(y))\\bigr).$$\nThe kernel factor $s(x,y)=|x-y|^{-1/2}$ is integrated in the weights; the smooth\nfactor $a(x,y)u(y)$ is interpolated. This item defines the pointwise formulas;\nthe subsequent results on this page establish their mapping properties,\nstability, and error estimates.",
+        "proof_strategy": "not-applicable",
+        "deps": [
+          "lem-half-order-singular-integral-exists",
+          "def-continuous-real-functions-on-a-compact-metric-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "The Nyström and product-quadrature framework, Chapter 3, §3.3, printed pp. 60–65."
+          },
+          {
+            "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.4",
+            "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+            "locator": "Chapter 1, §1.4, continuous-kernel Nyström method and its distinction from singular-kernel methods, printed pp. 14–16."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_path": "items/def-half-order-product-integration.md"
+      },
+      {
+        "id": "lem-half-order-product-weights-closed-form",
+        "kind": "lemma",
+        "title": "Closed forms for the half-order piecewise-linear product weights",
+        "statement": "Use the nodes, hats, and weights $w_{n,j}(x)=S_x(\\phi_{n,j})$ of\n[[def-half-order-product-integration]]. For $x\\in[0,1]$, $0\\le\\alpha\\le\\beta\\le1$,\nand $u,v\\in\\mathbb R$, put $C:=u+vx$ and, for $r\\ge0$, define\n$$P_{x,u,v}(r):=2C\\sqrt r+\\frac23v r\\sqrt r,\\qquad   Q_{x,u,v}(r):=2C\\sqrt r-\\frac23v r\\sqrt r.$$\nWrite $r_+:=\\max(r,0)$ and set\n$$\\mathcal J_x[\\alpha,\\beta;u,v]:= Q_{x,u,v}((x-\\alpha)_+)-Q_{x,u,v}((x-\\beta)_+) +P_{x,u,v}((\\beta-x)_+)-P_{x,u,v}((\\alpha-x)_+).$$\nThen this is the exact improper Riemann integral\n$$\\mathcal J_x[\\alpha,\\beta;u,v] =\\int_\\alpha^\\beta |x-y|^{-1/2}(u+vy)\\,dy,$$\nwith the integral split at $x$ if $x\\in[\\alpha,\\beta]$. In particular, for\n$h=1/n$ and $y_j=jh$,\n$$w_{n,0}(x)=\\mathcal J_x[0,h;1,-h^{-1}],$$\n$$w_{n,j}(x)=\\mathcal J_x[y_{j-1},y_j;-y_{j-1}/h,h^{-1}] +\\mathcal J_x[y_j,y_{j+1};y_{j+1}/h,-h^{-1}],\\quad 1\\le j<n,$$\nand\n$$w_{n,n}(x)=\\mathcal J_x[y_{n-1},1;-y_{n-1}/h,h^{-1}].$$\nThe formulas include $x$ at a panel endpoint and the one-panel case $n=1$.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-half-order-product-integration",
+          "lem-half-order-singular-integral-exists",
+          "thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-continuous-implies-integrable",
+          "thm-additivity-over-subintervals",
+          "thm-nth-roots-exist"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": [
+          {
+            "title": "Jiri Lebl, Basic Analysis I, §5.5 Improper Integrals",
+            "url": "https://www.jirka.org/ra/html/sec_impropriemann.html",
+            "locator": "Definition 5.5.1 and Proposition 5.5.2, the endpoint p-test for 0<p<1; specialize to p=1/2."
+          },
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Chapter 3, §3.3, Method 3.12 and the Nyström/product-quadrature weight convention, printed pp. 60–61; the half-order closed form is derived locally."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/lem-half-order-product-weights-closed-form.md"
+      },
+      {
+        "id": "thm-midpoint-nystrom-smooth-solution-error",
+        "kind": "theorem",
+        "title": "Smooth-solution error bound for composite midpoint Nyström discretization",
+        "statement": "Assume AC. Let $k:[0,1]^2\\to\\mathbb R$ be continuous, $K$ its integral operator, and $K_N$ its composite midpoint Nyström operator with panel width $h=1/N$. Suppose $I-K$ is injective and $u$ solves $(I-K)u=f$. Assume that $g_x(y):=k(x,y)u(y)$ is twice continuously differentiable in $y$ for every $x$, with the uniform bound $$M_2:=\\sup_{x,y\\in[0,1]}|\\partial_y^2g_x(y)|<\\infty.$$ Then there are $N_0$ and $C<\\infty$ such that for every $N\\ge N_0$ the Nyström matrix is nonsingular, its reconstruction $u_N$ solving $(I-K_N)u_N=f_N$ exists for each $f_N\\in X$, and $$\\|u_N-u\\|_\\infty\\le C\\left(\\|f_N-f\\|_\\infty+\\frac{h^2}{24}M_2\\right).$$ In the standard Nyström method $f_N=f$. The regularity assumption is on the actual function $k(x,\\cdot)u(\\cdot)$, not on every function in the unit ball of $C([0,1],\\mathbb R)$.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-nystrom-quadrature-and-finite-rank-operators",
+          "lem-finite-node-equation-reconstruction-equivalence",
+          "lem-continuous-kernel-integral-operator-is-compact-on-c",
+          "thm-collectively-compact-operator-stability-and-error",
+          "lem-midpoint-nystrom-collective-compactness-and-consistency",
+          "thm-composite-midpoint-error-bound",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Corollary 3.20 and Remark 3.21, printed pp. 64–65; the rate is derived from the quadrature error of the actual solution integrand."
+          },
+          {
+            "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+            "url": "https://fncbook.com/integration/",
+            "locator": "The composite midpoint error formula and its regularity hypothesis; the exact bound used is also supplied by the published local midpoint theorem."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/thm-midpoint-nystrom-smooth-solution-error.md"
+      },
+      {
+        "id": "lem-half-order-product-integration-stability-and-consistency",
+        "kind": "lemma",
+        "title": "Stability, collective compactness, and consistency of half-order product integration",
+        "statement": "Assume AC and let $a:[0,1]^2\\to\\mathbb R$ be continuous. For $K$ and $K_n$\nfrom [[def-half-order-product-integration]], put $A:=\\|a\\|_\\infty$ and\n$h:=1/n$. Then both operators map $X=C([0,1],\\mathbb R)$ to itself, $K$ is\ncompact, and $(K_n)$ is collectively compact and converges pointwise in norm to\n$K$. Their product weights satisfy\n$$w_{n,j}(x)\\ge0,\\qquad \\sum_{j=0}^n|w_{n,j}(x)|  =2\\sqrt{x}+2\\sqrt{1-x}\\le2\\sqrt2$$\nfor every $x\\in[0,1]$. If each $g_x(y):=a(x,y)u(y)$ extends to a $C^2$\nfunction on a neighborhood of $[0,1]$ and\n$M_2:=\\sup_{x,y}|\\partial_y^2g_x(y)|<\\infty$, then\n$$\\|K_nu-Ku\\|_\\infty\\le\\frac{\\sqrt2}{4}M_2h^2.$$",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-half-order-product-integration",
+          "lem-half-order-singular-integral-exists",
+          "lem-half-order-kernel-translation-modulus-in-l1",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-heine-cantor-metric",
+          "lem-linear-interpolation-error-bound",
+          "def-higher-derivatives-and-smoothness",
+          "def-compact-linear-operator",
+          "thm-c-k-complete-in-the-sup-metric"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Nyström convergence framework, printed pp. 60–65; the half-order weights and estimates are proved locally here."
+          },
+          {
+            "title": "Jiri Lebl, Basic Analysis I, §5.5 Improper Integrals",
+            "url": "https://www.jirka.org/ra/html/sec_impropriemann.html",
+            "locator": "Definition 5.5.1 and Proposition 5.5.2, endpoint improper-integral convention."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/lem-half-order-product-integration-stability-and-consistency.md"
+      },
+      {
+        "id": "thm-half-order-product-integration-fredholm-error",
+        "kind": "theorem",
+        "title": "Fredholm error bound for half-order product integration",
+        "statement": "Assume AC. Let $a:[0,1]^2\\to\\mathbb R$ be continuous, let $K,K_n$ be the\nhalf-order product-integration operators of\n[[def-half-order-product-integration]], and suppose $I-K$ is injective. Let\n$u$ solve $(I-K)u=f$, and assume each $g_x(y):=a(x,y)u(y)$ extends to a $C^2$\nfunction on a neighborhood of $[0,1]$, with\n$$M_2:=\\sup_{x,y\\in[0,1]}|\\partial_y^2(a(x,y)u(y))|<\\infty.$$\nThen there are $n_0$ and $C<\\infty$ such that for every $n\\ge n_0$, the finite\nNyström grid matrix is nonsingular, its reconstructed solution $u_n$ exists,\nand\n$$\\|u_n-u\\|_\\infty\\le C\\left(\\|f_n-f\\|_\\infty+\\frac{\\sqrt2}{4}M_2h^2\\right), \\qquad h=1/n,$$\nwhenever $(I-K_n)u_n=f_n$. In particular, for the exact right-hand side\n$f_n=f$, the solution error is $O(h^2)$ under the stated smoothness of the\nregular factor times the exact solution.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-half-order-product-integration",
+          "lem-half-order-product-integration-stability-and-consistency",
+          "thm-collectively-compact-operator-stability-and-error",
+          "lem-finite-node-equation-reconstruction-equivalence",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Theorem 3.18, Theorem 3.19, and Corollary 3.20, printed pp. 62–64; the singular product weights are proved locally."
+          },
+          {
+            "title": "Jiri Lebl, Basic Analysis I, §5.5 Improper Integrals",
+            "url": "https://www.jirka.org/ra/html/sec_impropriemann.html",
+            "locator": "Definition 5.5.1 and Proposition 5.5.2; the local item gives the specific diagonal-kernel limit and error bound."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/thm-half-order-product-integration-fredholm-error.md"
+      }
+    ]
+  },
+  {
+    "order": 2651,
+    "id": "nystrom-product-integration-and-fredholm-error-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nystrom product integration and fredholm error — Examples",
+    "companion": "nystrom-product-integration-and-fredholm-error",
+    "requires": [
+      "nystrom-product-integration-and-fredholm-error"
+    ],
+    "items": [
+      {
+        "id": "ex-gaussian-two-node-nystrom-exact-separable-equation",
+        "kind": "example",
+        "title": "A two-node Gaussian Nyström rule solves a rank-two separable equation exactly",
+        "statement": "Assume Countable Choice. Let $\\mu$ be Lebesgue measure on $[0,1]$, take $\\alpha=1/4$, $\\beta=1/2$, and set $k(x,y)=\\alpha+\\beta xy$ and $f(x)=1$. The equation $$u(x)-\\int_{[0,1]}k(x,y)u(y)\\,d\\mu(y)=1$$ has the unique solution $$u(x)=\\frac{80+24x}{57}.$$ The two-node Gaussian rule for $\\mu$ gives the exact same solution and a nonsingular two-by-two grid system. The continuous integrals can equivalently be read as Riemann integrals under Countable Choice.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-nystrom-quadrature-and-finite-rank-operators",
+          "lem-finite-node-equation-reconstruction-equivalence",
+          "def-countable-choice",
+          "def-gauss-moment-data",
+          "def-gauss-quadrature-rule",
+          "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Method 3.12 and its finite linear system, printed pp. 60–61."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/ex-gaussian-two-node-nystrom-exact-separable-equation.md"
+      },
+      {
+        "id": "ex-near-resonant-midpoint-solution-error",
+        "kind": "example",
+        "title": "A near-resonant Nyström equation amplifies midpoint quadrature error",
+        "statement": "For $0<\\delta<1$, set $\\lambda:=3(1-\\delta)$, define $$ (Ku)(x):=\\lambda x\\int_0^1 yu(y)\\,dy,$$ and let $f(x)=1$. The exact solution of $u-Ku=f$ is $$u(x)=1+\\frac{\\lambda}{2\\delta}x.$$ For the $N$-panel composite midpoint rule with $h=1/N$, the Nyström solution is $$u_N(x)=1+\\frac{\\lambda}{2(\\delta+\\lambda h^2/12)}x.$$ Its error is the midpoint residual multiplied by a factor $$(\\delta+\\lambda h^2/12)^{-1},$$ which is at least $(2\\delta)^{-1}$ whenever $\\lambda h^2/12\\le\\delta$. Thus a small quadrature residual can produce a much larger solution error as $\\delta$ approaches the resonance value $0$.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-nystrom-quadrature-and-finite-rank-operators",
+          "alg-composite-midpoint-rule"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Theorem 3.18 and Remark 3.21, printed pp. 62–65; the example gives an exact finite-dimensional instance."
+          },
+          {
+            "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+            "url": "https://fncbook.com/integration/",
+            "locator": "Composite midpoint quadrature conventions; the exact polynomial moments below are derived locally."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/ex-near-resonant-midpoint-solution-error.md"
+      },
+      {
+        "id": "cex-standard-midpoint-nystrom-not-operator-norm-convergent",
+        "kind": "counterexample",
+        "title": "Standard midpoint Nyström operators need not converge in operator norm on C",
+        "statement": "For every continuous kernel $k$ on $[0,1]^2$, the composite midpoint Nyström operators $K_N$ converge to the integral operator $K$ in the operator norm on $C([0,1],\\mathbb R)$.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-nystrom-quadrature-and-finite-rank-operators",
+          "alg-composite-midpoint-rule"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "The discussion after equations (3.21)–(3.23) and Remark 3.21, printed pp. 60 and 64."
+          },
+          {
+            "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.4",
+            "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+            "locator": "Theorem 1.11 and its proof, printed pp. 15–16."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/cex-standard-midpoint-nystrom-not-operator-norm-convergent.md"
+      },
+      {
+        "id": "ex-half-order-midpoint-order-loss",
+        "kind": "example",
+        "title": "Direct midpoint quadrature loses order on a half-order singularity",
+        "statement": "At $x=0$, take the weakly singular kernel $s(0,y)=y^{-1/2}$ and smooth factor $a\\equiv1$, $u\\equiv1$. The exact integral is $2$. The composite midpoint rule on panels of width $h=1/N$ underestimates it by at least $$(2-\\sqrt2)\\sqrt h,$$ so direct midpoint sampling of this singular integrand is not second order. The product-integration rule of [[def-half-order-product-integration]] is exact for this constant smooth factor, because its interpolant is identically $1$.",
+        "proof_strategy": "direct",
+        "deps": [
+          "def-half-order-product-integration",
+          "lem-half-order-singular-integral-exists",
+          "alg-composite-midpoint-rule"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": [
+          {
+            "title": "Jiri Lebl, Basic Analysis I, §5.5 Improper Integrals",
+            "url": "https://www.jirka.org/ra/html/sec_impropriemann.html",
+            "locator": "Definition 5.5.1 and Proposition 5.5.2, the integrable endpoint power $y^{-1/2}$."
+          },
+          {
+            "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+            "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+            "locator": "Method 3.12 and the dependence of Nyström error on the actual integrand regularity, printed pp. 60–65."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/ex-half-order-midpoint-order-loss.md"
+      }
+    ]
+  }
+]

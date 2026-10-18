@@ -1,0 +1,2593 @@
+{
+  "version": 1,
+  "scope": [
+    "def-meshfree-cell-quadrature-and-fill-radius",
+    "def-scaled-symmetric-compact-kernel-family",
+    "def-regularized-conservative-sph-system",
+    "lem-cellwise-particle-quadrature-oscillation-bound",
+    "lem-symmetric-kernel-moment-cancellation",
+    "lem-compact-kernel-derivative-moment-identities",
+    "lem-scaled-kernel-moments-and-derivative-bounds",
+    "lem-sph-pair-forces-antisymmetric-and-central",
+    "thm-second-order-meshfree-convolution-bias",
+    "lem-regularized-sph-vector-field-lipschitz-on-positive-density-tube",
+    "prop-sph-conserves-linear-and-angular-momentum",
+    "prop-sph-matched-internal-energy-conserves-total-energy",
+    "thm-first-derivative-meshfree-convolution-bias",
+    "thm-meshfree-particle-kernel-quadrature-error",
+    "cor-meshfree-joint-refinement-consistency",
+    "thm-regularized-sph-local-wellposedness",
+    "thm-forward-euler-global-error-on-controlled-sph-tube",
+    "cex-truncated-kernel-loses-boundary-constant-reproduction",
+    "ex-interior-constant-and-affine-kernel-reproduction",
+    "ex-two-particle-sph-force-pair",
+    "cex-fixed-neighbor-irregular-derivative-not-consistent",
+    "cex-conservative-sph-can-clump-under-positive-pressure"
+  ],
+  "contracts": {
+    "def-meshfree-cell-quadrature-and-fill-radius": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty open domain has no nonempty cell rule to approximate; the definition makes no approximation claim for it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: each cell has positive volume and fill radius h; zero-volume cells are excluded from this quadrature rule."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the interior-point condition includes the full closed kernel footprint, so a cell on the footprint edge is not silently discarded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "definition"
+    },
+    "def-scaled-symmetric-compact-kernel-family": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a nonnegative normalized kernel of integral one, so the zero or empty kernel is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the unit-mass normalization ∫W=1 is explicit and is used by the scaled moment identities."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "definition"
+    },
+    "def-regularized-conservative-sph-system": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The state has a fixed finite particle count N≥1; an empty particle system is outside the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "definition"
+    },
+    "lem-cellwise-particle-quadrature-oscillation-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-meshfree-cell-quadrature-and-fill-radius",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^d$ be open. Write $B(x,r)$ for the open Euclidean ball from [[def-metric-ball]] with distance induced by [[def-euclidean-inner-product]]. A family of cells is **locally finite** here when every compact subset of $\\Omega$ meets only finitely many cells. A bounded set is **Jordan measurable** when its Jordan inner and outer contents agree ([[def-jordan-inner-and-outer-content]]). A **cell particle rule** is a nonempty locally finite family of bounded Jordan-measurable cells $C_j\\subseteq\\Omega$ whose interiors are disjoint and whose union covers $\\Omega$ up to their shared boundaries, together with nodes $x_j\\in C_j$ and positive volumes $V_j=\\int 1_{C_j}$. The cell volume integral is Riemann-defined and equals the Jordan content ([[def-riemann-integral-over-a-jordan-set]]). Its fill radius is $h=\\sup_j\\sup_{y\\in C_j}|y-x_j|$, using the Euclidean norm from [[def-euclidean-inner-product]]; require $0<h<\\infty$. Assume finite constants $C_V,C_L>0$ satisfy $V_j\\le C_Vh^d$ and the local volume bound\n\n$$\\sum_{j:C_j\\cap B(x,r)\\ne\\varnothing}V_j\\le C_L(r+h)^d$$\n\nfor every $x\\in\\mathbb R^d$ and $r>0$. For continuous $g:\\mathbb R^d\\to\\mathbb R$ with compact support contained in $\\Omega$ (support as in [[def-support-and-compactly-supported-riemann-integral-in-rn]]), define $Q_hg=\\sum_jV_jg(x_j)$; local finiteness makes this sum finite. At kernel width $\\varepsilon$, an evaluation point is **interior** when $B(x,R\\varepsilon+2h)\\subset\\Omega$. For periodic calculations, use the periodic extensions of the field and particle rule on $\\mathbb R^d$, so no kernel support is truncated.\n\nThe cell rule is integration-compatible: for every continuous $g:\\mathbb R^d\\to\\mathbb R$ with compact support contained in $\\Omega$, only finitely many cells meet $\\operatorname{supp}(g)$, every cell integral appearing below is Riemann-defined, and\n$$\\int_\\Omega g(y)\\,dy=\\sum_{j:C_j\\cap\\operatorname{supp}(g)\\ne\\varnothing}\\int_{C_j}g(y)\\,dy.$$\nThis finite partition identity is part of the quadrature data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By the integration-compatible partition in [F1] and linearity in [F3], subtracting Q_hg cell by cell gives ∫_Ωg−Q_hg=Σ_{j∈J_g}∫_{C_j}(g(y)−g(x_j))dy, using ∫_{C_j}g(x_j)=V_jg(x_j). On a bounding rectangle for each cell, [F3] gives |∫_{C_j}(g−g(x_j))|≤∫_{C_j}|g−g(x_j)|≤V_j osc_{C_j}(g). Summing proves the first inequality.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For y,z∈C_j, [F1] gives |y−x_j|≤h and |z−x_j|≤h; the triangle inequality in [F2] gives |y−z|≤2h. Hence |g(y)−g(z)|≤2hL_g and osc_{C_j}(g)≤2hL_g. Substituting this bound in step 1.1 proves the second inequality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "When no active cell meets the support of g, the partition identity makes both the integral and the quadrature sum zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "lem-symmetric-kernel-moment-cancellation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scaled-symmetric-compact-kernel-family",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. An **admissible smoothing kernel** is a radial function $W\\in C_c^2(\\mathbb R^d,[0,\\infty))$, supported in the closed Euclidean ball $\\overline B(0,R)$ of some radius $R>0$ ([[def-metric-ball]]), with $\\int_{\\mathbb R^d}W(z)\\,dz=1$. Here radial means $W(z)=w(|z|)$ for some function $w:[0,\\infty)\\to[0,\\infty)$, and $C_c^2$ means twice continuously differentiable with compact support. All vector norms are the Euclidean norm from [[def-euclidean-inner-product]], and $\\|D^2W\\|_\\infty$ uses the induced operator norm. Throughout this pair, $L^\\infty$ norms are suprema of Euclidean norms, and norms of multilinear derivatives are the induced operator norms. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], where $\\operatorname{supp}f$ is the closure of the set on which $f$ is nonzero.\n\nFor $\\varepsilon>0$ define the scaled kernel $W_\\varepsilon(z)=\\varepsilon^{-d}W(z/\\varepsilon)$. Write $M_0=\\|W\\|_\\infty$, $M_1=\\|\\nabla W\\|_\\infty$, $M_2=\\|D^2W\\|_\\infty$, $m_2=\\int |z|^2W(z)\\,dz$, and $m_3=\\int |z|^3|\\nabla W(z)|\\,dz$. The norm functions and moment integrands are continuous with compact support. They are bounded and Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]], so these constants are finite.\n\nFor continuous $f:\\mathbb R^d\\to\\mathbb R$, define the full-space smoother and its kernel-gradient operator by\n$$S_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(x-z)W_\\varepsilon(z)\\,dz,\\qquad D_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(y)\\nabla W_\\varepsilon(x-y)\\,dy.$$\nFor each fixed $x$, both scalar integrands and every component of the vector integrand are continuous and compactly supported, hence Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. Thus the displayed integrals exist as compactly supported Riemann integrals; the vector integral defining $D_\\varepsilon f$ is taken componentwise.\n\nThis page fixes $\\varepsilon$ in the finite-particle system. Limits $\\varepsilon\\to0$ are used only in the stated kernel-bias and joint-refinement results.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-change-of-variables-for-compactly-supported-functions",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\\mathbb R^n\\to\\mathbb R$ be compactly supported Riemann integrable and suppose $\\operatorname{supp}f\\subseteq g(U)$. Define\n$$h(x)=\\begin{cases}f(g(x))|\\det Dg(x)|,&x\\in U,\\\\0,&x\\notin U.\\end{cases}$$\nThen $h$ is compactly supported Riemann integrable and\n$$\\int_{\\mathbb R^n}f(y)\\,dy=\\int_{\\mathbb R^n}h(x)\\,dx.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each coordinate k, g_k(z)=z_kW(z) is continuous and compactly supported by [F1], hence Riemann integrable on a bounding box by [F3]. It satisfies g_k(−z)=−g_k(z). Apply [F2] to T(z)=−z, whose determinant has absolute value one: ∫g_k(z)dz=∫g_k(−z)dz=−∫g_k(z)dz. Hence ∫z_kW(z)dz=0.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each k, z_kW_ε(z) is continuous and compactly supported, so [F3] makes it integrable on a bounding box. Apply [F2] to T(u)=εu: ∫z_kW_ε(z)dz=ε∫u_kW(u)du=0 by step 1.1. This holds for every k, so both vector first moments vanish.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero first moment is the asserted value; step 1.1 proves it coordinatewise."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "lem-compact-kernel-derivative-moment-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scaled-symmetric-compact-kernel-family",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. An **admissible smoothing kernel** is a radial function $W\\in C_c^2(\\mathbb R^d,[0,\\infty))$, supported in the closed Euclidean ball $\\overline B(0,R)$ of some radius $R>0$ ([[def-metric-ball]]), with $\\int_{\\mathbb R^d}W(z)\\,dz=1$. Here radial means $W(z)=w(|z|)$ for some function $w:[0,\\infty)\\to[0,\\infty)$, and $C_c^2$ means twice continuously differentiable with compact support. All vector norms are the Euclidean norm from [[def-euclidean-inner-product]], and $\\|D^2W\\|_\\infty$ uses the induced operator norm. Throughout this pair, $L^\\infty$ norms are suprema of Euclidean norms, and norms of multilinear derivatives are the induced operator norms. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], where $\\operatorname{supp}f$ is the closure of the set on which $f$ is nonzero.\n\nFor $\\varepsilon>0$ define the scaled kernel $W_\\varepsilon(z)=\\varepsilon^{-d}W(z/\\varepsilon)$. Write $M_0=\\|W\\|_\\infty$, $M_1=\\|\\nabla W\\|_\\infty$, $M_2=\\|D^2W\\|_\\infty$, $m_2=\\int |z|^2W(z)\\,dz$, and $m_3=\\int |z|^3|\\nabla W(z)|\\,dz$. The norm functions and moment integrands are continuous with compact support. They are bounded and Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]], so these constants are finite.\n\nFor continuous $f:\\mathbb R^d\\to\\mathbb R$, define the full-space smoother and its kernel-gradient operator by\n$$S_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(x-z)W_\\varepsilon(z)\\,dz,\\qquad D_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(y)\\nabla W_\\varepsilon(x-y)\\,dy.$$\nFor each fixed $x$, both scalar integrands and every component of the vector integrand are continuous and compactly supported, hence Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. Thus the displayed integrals exist as compactly supported Riemann integrals; the vector integral defining $D_\\varepsilon f$ is taken componentwise.\n\nThis page fixes $\\varepsilon$ in the finite-particle system. Limits $\\varepsilon\\to0$ are used only in the stated kernel-bias and joint-refinement results.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-symmetric-kernel-moment-cancellation",
+          "source_section": "Statement",
+          "quote": "For the kernel W and its scaled family W_ε of [[def-scaled-symmetric-compact-kernel-family]], the first moment vanishes: ∫zW(z) dz=0 and ∫zW_ε(z) dz=0 for every ε>0.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-integration-by-parts-with-interior-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Let $F,G:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Suppose $f,g:[a,b]\\to\\mathbb R$ are Riemann integrable and agree on $(a,b)$ with $F'$ and $G'$, respectively. Then $Fg$ and $fG$ are Riemann integrable and\n\n$$\\int_a^b F(x)g(x)\\,dx+\\int_a^b f(x)G(x)\\,dx=F(b)G(b)-F(a)G(a).$$\n\nEquivalently,\n\n$$\\int_a^b Fg=[FG]_a^b-\\int_a^b fG.$$\n\nNo endpoint derivative of either factor is assumed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a box with the support of W in its interior. Every integrand below is continuous on this box by [F1] and integrable by [F5]. Fix all coordinates except z_k. Applying [F4] with F=W and G=1 gives ∫∂_kW dz_k=0 because W vanishes near the two endpoints. Applying it with G=z_j gives ∫z_j∂_kW dz_k=−δ_{jk}∫W dz_k. Integrating the section identities over the remaining coordinates by [F3] gives the first identity and ∫z_j∂_kW dz=−δ_{jk}∫W dz=−δ_{jk}.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With G=z_jz_l, [F4] gives ∫z_jz_l∂_kW dz=−δ_{jk}∫z_lW dz−δ_{lk}∫z_jW dz after [F3] integrates the other coordinates. Both moments vanish by [F2]. Finally |z|³|∇W| is continuous and compactly supported, so [F5] makes its integral finite; this is m₃.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the derivative zeroth moment is zero and is computed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "lem-scaled-kernel-moments-and-derivative-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scaled-symmetric-compact-kernel-family",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. An **admissible smoothing kernel** is a radial function $W\\in C_c^2(\\mathbb R^d,[0,\\infty))$, supported in the closed Euclidean ball $\\overline B(0,R)$ of some radius $R>0$ ([[def-metric-ball]]), with $\\int_{\\mathbb R^d}W(z)\\,dz=1$. Here radial means $W(z)=w(|z|)$ for some function $w:[0,\\infty)\\to[0,\\infty)$, and $C_c^2$ means twice continuously differentiable with compact support. All vector norms are the Euclidean norm from [[def-euclidean-inner-product]], and $\\|D^2W\\|_\\infty$ uses the induced operator norm. Throughout this pair, $L^\\infty$ norms are suprema of Euclidean norms, and norms of multilinear derivatives are the induced operator norms. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], where $\\operatorname{supp}f$ is the closure of the set on which $f$ is nonzero.\n\nFor $\\varepsilon>0$ define the scaled kernel $W_\\varepsilon(z)=\\varepsilon^{-d}W(z/\\varepsilon)$. Write $M_0=\\|W\\|_\\infty$, $M_1=\\|\\nabla W\\|_\\infty$, $M_2=\\|D^2W\\|_\\infty$, $m_2=\\int |z|^2W(z)\\,dz$, and $m_3=\\int |z|^3|\\nabla W(z)|\\,dz$. The norm functions and moment integrands are continuous with compact support. They are bounded and Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]], so these constants are finite.\n\nFor continuous $f:\\mathbb R^d\\to\\mathbb R$, define the full-space smoother and its kernel-gradient operator by\n$$S_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(x-z)W_\\varepsilon(z)\\,dz,\\qquad D_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(y)\\nabla W_\\varepsilon(x-y)\\,dy.$$\nFor each fixed $x$, both scalar integrands and every component of the vector integrand are continuous and compactly supported, hence Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. Thus the displayed integrals exist as compactly supported Riemann integrals; the vector integral defining $D_\\varepsilon f$ is taken componentwise.\n\nThis page fixes $\\varepsilon$ in the finite-particle system. Limits $\\varepsilon\\to0$ are used only in the stated kernel-bias and joint-refinement results.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-symmetric-kernel-moment-cancellation",
+          "source_section": "Statement",
+          "quote": "For the kernel W and its scaled family W_ε of [[def-scaled-symmetric-compact-kernel-family]], the first moment vanishes: ∫zW(z) dz=0 and ∫zW_ε(z) dz=0 for every ε>0.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-change-of-variables-for-compactly-supported-functions",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\\mathbb R^n\\to\\mathbb R$ be compactly supported Riemann integrable and suppose $\\operatorname{supp}f\\subseteq g(U)$. Define\n$$h(x)=\\begin{cases}f(g(x))|\\det Dg(x)|,&x\\in U,\\\\0,&x\\notin U.\\end{cases}$$\nThen $h$ is compactly supported Riemann integrable and\n$$\\int_{\\mathbb R^n}f(y)\\,dy=\\int_{\\mathbb R^n}h(x)\\,dx.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If W_ε(z)≠0 then z/ε∈supp W, so |z|≤Rε. The chain rule in [F5] applied to ε^(−d)W(z/ε) gives the displayed pointwise first and second derivative formulas; taking suprema and substituting u=z/ε gives the claimed derivative sup norms.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The functions W_ε, zW_ε, and |z|²W_ε are continuous and compactly supported, hence integrable on a bounding box by [F4]. In the integrals, the affine substitution z=εu has Jacobian determinant ε^d. Thus ∫W_ε=∫W=1, ∫zW_ε(z)dz=ε∫uW(u)du=0 by [F2], and ∫|z|²W_ε(z)dz=ε²∫|u|²W(u)du=ε²m₂.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "lem-sph-pair-forces-antisymmetric-and-central": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-conservative-sph-system",
+          "source_section": "Definition",
+          "quote": "Fix d,N≥1, positive masses m_1,…,m_N, ε>0, the kernel W_ε from [[def-scaled-symmetric-compact-kernel-family]], and a pressure map P∈C¹((0,∞)×R,R). Positions q_i and velocities v_i lie in R^d with the Euclidean inner product from [[def-euclidean-inner-product]], and specific internal energies e_i lie in R. Define\n\n$$\\rho_i(q)=\\sum_{j=1}^Nm_jW_\\varepsilon(q_i-q_j),\\qquad p_i=P(\\rho_i,e_i),\\qquad A_i=\\frac{p_i}{\\rho_i^2}.$$\n\nThe state domain is U={ (q,v,e): ρ_i(q)>0 for every i }. On U, the fixed-width semidiscrete system is\n\n$$\\dot q_i=v_i,\\qquad \\dot v_i=-\\sum_{j=1}^Nm_j(A_i+A_j)\\nabla W_\\varepsilon(q_i-q_j),\\qquad \\dot e_i=A_i\\sum_{j=1}^Nm_j(v_i-v_j)\\cdot\\nabla W_\\varepsilon(q_i-q_j).$$\n\nA controlled tube is a compact subset of U on which ρ_i≥ρ_*>0 for every i. The system is semidiscrete: time remains continuous while the spatial state is represented by finitely many particles. It has fixed masses and fixed ε, includes the displayed matched internal-energy equation, and contains no artificial viscosity. No continuum Euler convergence is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-scaled-symmetric-compact-kernel-family",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. An **admissible smoothing kernel** is a radial function $W\\in C_c^2(\\mathbb R^d,[0,\\infty))$, supported in the closed Euclidean ball $\\overline B(0,R)$ of some radius $R>0$ ([[def-metric-ball]]), with $\\int_{\\mathbb R^d}W(z)\\,dz=1$. Here radial means $W(z)=w(|z|)$ for some function $w:[0,\\infty)\\to[0,\\infty)$, and $C_c^2$ means twice continuously differentiable with compact support. All vector norms are the Euclidean norm from [[def-euclidean-inner-product]], and $\\|D^2W\\|_\\infty$ uses the induced operator norm. Throughout this pair, $L^\\infty$ norms are suprema of Euclidean norms, and norms of multilinear derivatives are the induced operator norms. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], where $\\operatorname{supp}f$ is the closure of the set on which $f$ is nonzero.\n\nFor $\\varepsilon>0$ define the scaled kernel $W_\\varepsilon(z)=\\varepsilon^{-d}W(z/\\varepsilon)$. Write $M_0=\\|W\\|_\\infty$, $M_1=\\|\\nabla W\\|_\\infty$, $M_2=\\|D^2W\\|_\\infty$, $m_2=\\int |z|^2W(z)\\,dz$, and $m_3=\\int |z|^3|\\nabla W(z)|\\,dz$. The norm functions and moment integrands are continuous with compact support. They are bounded and Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]], so these constants are finite.\n\nFor continuous $f:\\mathbb R^d\\to\\mathbb R$, define the full-space smoother and its kernel-gradient operator by\n$$S_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(x-z)W_\\varepsilon(z)\\,dz,\\qquad D_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(y)\\nabla W_\\varepsilon(x-y)\\,dy.$$\nFor each fixed $x$, both scalar integrands and every component of the vector integrand are continuous and compactly supported, hence Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. Thus the displayed integrals exist as compactly supported Riemann integrals; the vector integral defining $D_\\varepsilon f$ is taken componentwise.\n\nThis page fixes $\\varepsilon$ in the finite-particle system. Limits $\\varepsilon\\to0$ are used only in the stated kernel-bias and joint-refinement results.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since W_ε(−r)=W_ε(r), differentiating the identity in r using [F3] gives ∇W_ε(−r)=−∇W_ε(r). The scalar coefficient m_im_j(A_i+A_j) is symmetric in i,j, so F_ji=−F_ij.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If r≠0 and u·r=0, then |r+tu|²=|r|²+t²|u|², so the derivative at t=0 of W_ε(r+tu), which is w_ε(|r+tu|), is zero by the chain rule [F3]. Thus ∇W_ε(r) is orthogonal to every u orthogonal to r and lies in span(r). At r=0, differentiable evenness gives ∇W_ε(0)=0 by [F3]. Hence each F_ij is central.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: coincident particles are not singular for W_ε; at zero separation even differentiability gives zero gradient in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "thm-second-order-meshfree-convolution-bias": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-scaled-kernel-moments-and-derivative-bounds",
+          "source_section": "Statement",
+          "quote": "For the scaled kernels of [[def-scaled-symmetric-compact-kernel-family]] and every ε>0, supp W_ε⊂\\overline B(0,Rε), ∫W_ε=1, ∫zW_ε(z)dz=0, and ∫|z|²W_ε(z)dz=ε²m₂. Pointwise, ∇W_ε(z)=ε^(−d−1)∇W(z/ε) and D²W_ε(z)=ε^(−d−2)D²W(z/ε); consequently their sup norms equal ε^(−d−1)M₁ and ε^(−d−2)M₂.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-scaled-symmetric-compact-kernel-family",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. An **admissible smoothing kernel** is a radial function $W\\in C_c^2(\\mathbb R^d,[0,\\infty))$, supported in the closed Euclidean ball $\\overline B(0,R)$ of some radius $R>0$ ([[def-metric-ball]]), with $\\int_{\\mathbb R^d}W(z)\\,dz=1$. Here radial means $W(z)=w(|z|)$ for some function $w:[0,\\infty)\\to[0,\\infty)$, and $C_c^2$ means twice continuously differentiable with compact support. All vector norms are the Euclidean norm from [[def-euclidean-inner-product]], and $\\|D^2W\\|_\\infty$ uses the induced operator norm. Throughout this pair, $L^\\infty$ norms are suprema of Euclidean norms, and norms of multilinear derivatives are the induced operator norms. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], where $\\operatorname{supp}f$ is the closure of the set on which $f$ is nonzero.\n\nFor $\\varepsilon>0$ define the scaled kernel $W_\\varepsilon(z)=\\varepsilon^{-d}W(z/\\varepsilon)$. Write $M_0=\\|W\\|_\\infty$, $M_1=\\|\\nabla W\\|_\\infty$, $M_2=\\|D^2W\\|_\\infty$, $m_2=\\int |z|^2W(z)\\,dz$, and $m_3=\\int |z|^3|\\nabla W(z)|\\,dz$. The norm functions and moment integrands are continuous with compact support. They are bounded and Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]], so these constants are finite.\n\nFor continuous $f:\\mathbb R^d\\to\\mathbb R$, define the full-space smoother and its kernel-gradient operator by\n$$S_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(x-z)W_\\varepsilon(z)\\,dz,\\qquad D_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(y)\\nabla W_\\varepsilon(x-y)\\,dy.$$\nFor each fixed $x$, both scalar integrands and every component of the vector integrand are continuous and compactly supported, hence Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. Thus the displayed integrals exist as compactly supported Riemann integrals; the vector integral defining $D_\\varepsilon f$ is taken componentwise.\n\nThis page fixes $\\varepsilon$ in the finite-particle system. Limits $\\varepsilon\\to0$ are used only in the stated kernel-bias and joint-refinement results.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each x,z apply [F2] with increment −z. It gives f(x−z)=f(x)−∇f(x)·z+R(x,z), where |R(x,z)|≤(1/2)||D²f||∞|z|².",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integrate this identity against the nonnegative W_ε. Linearity in [F3] and [F1] make the constant term integrate to f(x) and the linear term zero. The absolute-value estimate and monotonicity in [F3], together with W_ε≥0, bound the remainder by (1/2)||D²f||∞∫|z|²W_ε=(m₂/2)ε²||D²f||∞.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "lem-regularized-sph-vector-field-lipschitz-on-positive-density-tube": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-conservative-sph-system",
+          "source_section": "Definition",
+          "quote": "Fix d,N≥1, positive masses m_1,…,m_N, ε>0, the kernel W_ε from [[def-scaled-symmetric-compact-kernel-family]], and a pressure map P∈C¹((0,∞)×R,R). Positions q_i and velocities v_i lie in R^d with the Euclidean inner product from [[def-euclidean-inner-product]], and specific internal energies e_i lie in R. Define\n\n$$\\rho_i(q)=\\sum_{j=1}^Nm_jW_\\varepsilon(q_i-q_j),\\qquad p_i=P(\\rho_i,e_i),\\qquad A_i=\\frac{p_i}{\\rho_i^2}.$$\n\nThe state domain is U={ (q,v,e): ρ_i(q)>0 for every i }. On U, the fixed-width semidiscrete system is\n\n$$\\dot q_i=v_i,\\qquad \\dot v_i=-\\sum_{j=1}^Nm_j(A_i+A_j)\\nabla W_\\varepsilon(q_i-q_j),\\qquad \\dot e_i=A_i\\sum_{j=1}^Nm_j(v_i-v_j)\\cdot\\nabla W_\\varepsilon(q_i-q_j).$$\n\nA controlled tube is a compact subset of U on which ρ_i≥ρ_*>0 for every i. The system is semidiscrete: time remains continuous while the spatial state is represented by finitely many particles. It has fixed masses and fixed ε, includes the displayed matched internal-energy equation, and contains no artificial viscosity. No continuum Euler convergence is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-scaled-kernel-moments-and-derivative-bounds",
+          "source_section": "Statement",
+          "quote": "For the scaled kernels of [[def-scaled-symmetric-compact-kernel-family]] and every ε>0, supp W_ε⊂\\overline B(0,Rε), ∫W_ε=1, ∫zW_ε(z)dz=0, and ∫|z|²W_ε(z)dz=ε²m₂. Pointwise, ∇W_ε(z)=ε^(−d−1)∇W(z/ε) and D²W_ε(z)=ε^(−d−2)D²W(z/ε); consequently their sup norms equal ε^(−d−1)M₁ and ε^(−d−2)M₂.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-mean-value-inequality",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a < b$,\nand let $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-vector-valued-functions-limits-and-continuity]],\n[[def-vector-valued-derivative-and-integral]], [[def-interval]]). Let\n$M \\in \\mathbb{R}$ with $M \\ge 0$ satisfy\n\n$$\\lVert f'(t)\\rVert_2 \\;\\le\\; M \\qquad \\text{for every } t \\in (a,b).$$\n\nThen\n\n$$\\lVert f(b) - f(a)\\rVert_2 \\;\\le\\; M\\,(b-a).$$\n\n**No integrability of $f'$ is assumed**, so the theorem applies to every\ndifferentiable $f$; that is why it is proved from the scalar mean value theorem\nrather than from\n[[thm-norm-inequality-for-the-vector-valued-integral]].\n[[cor-vector-valued-ftc-and-lipschitz-bound]] records the comparison between the\ntwo routes.\n\n**The equality form is not asserted, and for $m \\ge 2$ it is false.** There need\nbe **no** $\\xi \\in (a,b)$ with $f(b)-f(a) = f'(\\xi)(b-a)$; the companion page\ncarries a differentiable witness on $[0,1]$. The $\\xi$ produced in the proof\nbelow depends on the fixed vector $u = f(b)-f(a)$ and is a mean value point of\nthe **real** function $t \\mapsto \\langle u, f(t)\\rangle$, not of $f$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let z,z′∈K, δ=||z−z′||#, and z(s)=(1−s)z+sz′ for 0≤s≤1; convexity keeps this segment in K. Differentiating ρ_i(q(s)) using [F5] and the finite-sum rule [F6] gives Σ_jm_j∇W_ε(q_i(s)−q_j(s))·(q_i′−q_i−q_j′+q_j), whose absolute value is at most 2MK₁δ by [F1], [F2], and Cauchy-Schwarz [F7]. Along the same segment, A_i(s)=a(ρ_i(q(s)),e_i(s)) has derivative bounded by 2MK₁A_ρδ+A_eδ=A_Lipδ, by [F5]. The one-dimensional mean value inequality [F3] on s∈[0,1] yields |A_i−A_i′|≤A_Lipδ.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the acceleration component, subtract its two finite sums. The coefficient difference contributes at most 2MA_LipK₁δ, and the kernel-gradient difference at most 4MA₀K₂δ because the triangle inequality [F7] gives |(q_i−q_j)−(q_i′−q_j′)|≤2δ and [F3] bounds the change in ∇W_ε by K₂ times its argument change. Thus |v̇_i−v̇_i′|≤M(2A_LipK₁+4A₀K₂)δ.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For ė_i, the coefficient difference contributes at most 2MVA_LipK₁δ; the relative-velocity difference at most 2MA₀K₁δ by the triangle inequality [F7]; and the kernel-gradient difference at most 4MA₀VK₂δ by [F3]. Also |q̇_i−q̇_i′|≤δ. Taking the maximum of the three component bounds gives the stated L.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "lemma"
+    },
+    "prop-sph-conserves-linear-and-angular-momentum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-conservative-sph-system",
+          "source_section": "Definition",
+          "quote": "Fix d,N≥1, positive masses m_1,…,m_N, ε>0, the kernel W_ε from [[def-scaled-symmetric-compact-kernel-family]], and a pressure map P∈C¹((0,∞)×R,R). Positions q_i and velocities v_i lie in R^d with the Euclidean inner product from [[def-euclidean-inner-product]], and specific internal energies e_i lie in R. Define\n\n$$\\rho_i(q)=\\sum_{j=1}^Nm_jW_\\varepsilon(q_i-q_j),\\qquad p_i=P(\\rho_i,e_i),\\qquad A_i=\\frac{p_i}{\\rho_i^2}.$$\n\nThe state domain is U={ (q,v,e): ρ_i(q)>0 for every i }. On U, the fixed-width semidiscrete system is\n\n$$\\dot q_i=v_i,\\qquad \\dot v_i=-\\sum_{j=1}^Nm_j(A_i+A_j)\\nabla W_\\varepsilon(q_i-q_j),\\qquad \\dot e_i=A_i\\sum_{j=1}^Nm_j(v_i-v_j)\\cdot\\nabla W_\\varepsilon(q_i-q_j).$$\n\nA controlled tube is a compact subset of U on which ρ_i≥ρ_*>0 for every i. The system is semidiscrete: time remains continuous while the spatial state is represented by finitely many particles. It has fixed masses and fixed ε, includes the displayed matched internal-energy equation, and contains no artificial viscosity. No continuum Euler convergence is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sph-pair-forces-antisymmetric-and-central",
+          "source_section": "Statement",
+          "quote": "For the system in [[def-regularized-conservative-sph-system]], set g_ij=∇W_ε(q_i−q_j) and define the force contribution F_ij=−m_im_j(A_i+A_j)g_ij. Radial evenness gives g_ji=−g_ij and g_ii=0, so for i≠j, F_ji=−F_ij; also F_ij is parallel to q_i−q_j (the zero vector is allowed).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-mean-value-inequality",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a < b$,\nand let $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-vector-valued-functions-limits-and-continuity]],\n[[def-vector-valued-derivative-and-integral]], [[def-interval]]). Let\n$M \\in \\mathbb{R}$ with $M \\ge 0$ satisfy\n\n$$\\lVert f'(t)\\rVert_2 \\;\\le\\; M \\qquad \\text{for every } t \\in (a,b).$$\n\nThen\n\n$$\\lVert f(b) - f(a)\\rVert_2 \\;\\le\\; M\\,(b-a).$$\n\n**No integrability of $f'$ is assumed**, so the theorem applies to every\ndifferentiable $f$; that is why it is proved from the scalar mean value theorem\nrather than from\n[[thm-norm-inequality-for-the-vector-valued-integral]].\n[[cor-vector-valued-ftc-and-lipschitz-bound]] records the comparison between the\ntwo routes.\n\n**The equality form is not asserted, and for $m \\ge 2$ it is false.** There need\nbe **no** $\\xi \\in (a,b)$ with $f(b)-f(a) = f'(\\xi)(b-a)$; the companion page\ncarries a differentiable witness on $[0,1]$. The $\\xi$ produced in the proof\nbelow depends on the fixed vector $u = f(b)-f(a)$ and is a mean value point of\nthe **real** function $t \\mapsto \\langle u, f(t)\\rangle$, not of $f$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate P using the finite-sum rule [F3]. The self terms vanish because ∇W_ε(0)=0 by [F2], and grouping the remaining terms by unordered pairs gives Ṗ=Σ_{i<j}(F_ij+F_ji)=0.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiate J using the coordinatewise product rule [F3]; the terms v_i⊗v_i cancel, leaving Σ_i(q_i⊗m_iq̈_i−m_iq̈_i⊗q_i). Grouping each pair gives (q_i−q_j)⊗F_ij−F_ij⊗(q_i−q_j)=0 because [F2] makes F_ij parallel to q_i−q_j. Thus J̇=0. Applying [F4] to P and to each component of J on every closed subinterval shows both are constant.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: coincident particle positions remain in the regularized domain; the self and coincident radial gradients vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "proposition"
+    },
+    "prop-sph-matched-internal-energy-conserves-total-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-conservative-sph-system",
+          "source_section": "Definition",
+          "quote": "Fix d,N≥1, positive masses m_1,…,m_N, ε>0, the kernel W_ε from [[def-scaled-symmetric-compact-kernel-family]], and a pressure map P∈C¹((0,∞)×R,R). Positions q_i and velocities v_i lie in R^d with the Euclidean inner product from [[def-euclidean-inner-product]], and specific internal energies e_i lie in R. Define\n\n$$\\rho_i(q)=\\sum_{j=1}^Nm_jW_\\varepsilon(q_i-q_j),\\qquad p_i=P(\\rho_i,e_i),\\qquad A_i=\\frac{p_i}{\\rho_i^2}.$$\n\nThe state domain is U={ (q,v,e): ρ_i(q)>0 for every i }. On U, the fixed-width semidiscrete system is\n\n$$\\dot q_i=v_i,\\qquad \\dot v_i=-\\sum_{j=1}^Nm_j(A_i+A_j)\\nabla W_\\varepsilon(q_i-q_j),\\qquad \\dot e_i=A_i\\sum_{j=1}^Nm_j(v_i-v_j)\\cdot\\nabla W_\\varepsilon(q_i-q_j).$$\n\nA controlled tube is a compact subset of U on which ρ_i≥ρ_*>0 for every i. The system is semidiscrete: time remains continuous while the spatial state is represented by finitely many particles. It has fixed masses and fixed ε, includes the displayed matched internal-energy equation, and contains no artificial viscosity. No continuum Euler convergence is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sph-pair-forces-antisymmetric-and-central",
+          "source_section": "Statement",
+          "quote": "For the system in [[def-regularized-conservative-sph-system]], set g_ij=∇W_ε(q_i−q_j) and define the force contribution F_ij=−m_im_j(A_i+A_j)g_ij. Radial evenness gives g_ji=−g_ij and g_ii=0, so for i≠j, F_ji=−F_ij; also F_ij is parallel to q_i−q_j (the zero vector is allowed).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-mean-value-inequality",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a < b$,\nand let $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-vector-valued-functions-limits-and-continuity]],\n[[def-vector-valued-derivative-and-integral]], [[def-interval]]). Let\n$M \\in \\mathbb{R}$ with $M \\ge 0$ satisfy\n\n$$\\lVert f'(t)\\rVert_2 \\;\\le\\; M \\qquad \\text{for every } t \\in (a,b).$$\n\nThen\n\n$$\\lVert f(b) - f(a)\\rVert_2 \\;\\le\\; M\\,(b-a).$$\n\n**No integrability of $f'$ is assumed**, so the theorem applies to every\ndifferentiable $f$; that is why it is proved from the scalar mean value theorem\nrather than from\n[[thm-norm-inequality-for-the-vector-valued-integral]].\n[[cor-vector-valued-ftc-and-lipschitz-bound]] records the comparison between the\ntwo routes.\n\n**The equality form is not asserted, and for $m \\ge 2$ it is false.** There need\nbe **no** $\\xi \\in (a,b)$ with $f(b)-f(a) = f'(\\xi)(b-a)$; the companion page\ncarries a differentiable witness on $[0,1]$. The $\\xi$ produced in the proof\nbelow depends on the fixed vector $u = f(b)-f(a)$ and is a mean value point of\nthe **real** function $t \\mapsto \\langle u, f(t)\\rangle$, not of $f$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate K=Σ_im_i|v_i|²/2 using [F3] coordinatewise and substitute [F1]. Pairing the (i,j) and (j,i) terms using [F2] yields K̇=−Σ_{i<j}m_im_j(A_i+A_j)(v_i−v_j)·g_ij.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Differentiate U=Σ_im_ie_i using [F3] and substitute [F1]. The (i,j) term is m_im_jA_i(v_i−v_j)·g_ij, while the (j,i) term equals m_im_jA_j(v_i−v_j)·g_ij by [F2]. Hence U̇=Σ_{i<j}m_im_j(A_i+A_j)(v_i−v_j)·g_ij.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 cancel term by term, so Ḣ=K̇+U̇=0. Applying [F4] with derivative bound M=0 on any closed subinterval shows H is constant on each solution interval.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "proposition"
+    },
+    "thm-first-derivative-meshfree-convolution-bias": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-scaled-kernel-moments-and-derivative-bounds",
+          "source_section": "Statement",
+          "quote": "For the scaled kernels of [[def-scaled-symmetric-compact-kernel-family]] and every ε>0, supp W_ε⊂\\overline B(0,Rε), ∫W_ε=1, ∫zW_ε(z)dz=0, and ∫|z|²W_ε(z)dz=ε²m₂. Pointwise, ∇W_ε(z)=ε^(−d−1)∇W(z/ε) and D²W_ε(z)=ε^(−d−2)D²W(z/ε); consequently their sup norms equal ε^(−d−1)M₁ and ε^(−d−2)M₂.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compact-kernel-derivative-moment-identities",
+          "source_section": "Statement",
+          "quote": "For W from [[def-scaled-symmetric-compact-kernel-family]] and coordinate indices j,k,l,\n\n$$\\int \\partial_kW(z)\\,dz=0,\\qquad \\int z_j\\partial_kW(z)\\,dz=-\\delta_{jk},\\qquad \\int z_jz_l\\partial_kW(z)\\,dz=0.$$\n\nAlso m₃=∫|z|³|∇W(z)|dz is finite.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-change-of-variables-for-compactly-supported-functions",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g:U\\to\\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\\mathbb R^n\\to\\mathbb R$ be compactly supported Riemann integrable and suppose $\\operatorname{supp}f\\subseteq g(U)$. Define\n$$h(x)=\\begin{cases}f(g(x))|\\det Dg(x)|,&x\\in U,\\\\0,&x\\notin U.\\end{cases}$$\nThen $h$ is compactly supported Riemann integrable and\n$$\\int_{\\mathbb R^n}f(y)\\,dy=\\int_{\\mathbb R^n}h(x)\\,dx.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The scalar components of f(x−z)∇W_ε(z) are continuous and compactly supported, so [F5] makes them Riemann integrable on a bounding box. Apply [F4] with z=εu componentwise to rewrite D_εf(x)=ε^(−1)∫f(x−εu)∇W(u)du.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each x,u, [F3] gives f(x−εu)=f(x)−ε∇f(x)·u+(ε²/2)D²f(x)[u,u]+R(x,u), with |R(x,u)|≤(ε³/6)||D³f||∞|u|³.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integrate the expansion of step 1.2 against ε^(−1)∇W(u). Linearity [F6] and [F2] make the constant and quadratic terms vanish; the linear term in coordinate k equals −∂_kf(x)Σ_j∫u_j∂_kW(u)du=∂_kf(x). Thus the integrated polynomial part is ∇f(x).",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put G(u)=R(x,u)∇W(u), a continuous compactly supported vector function, and v=∫G componentwise. If v≠0 set a=v/||v||₂; then ||a||₂=1 and ||v||₂=∫⟨a,G(u)⟩≤∫|⟨a,G(u)⟩|≤∫||G(u)||₂ by linearity, monotonicity, and [F7]. If v=0 the same upper bound is immediate. The pointwise remainder estimate in step 1.2 and [F2] therefore give ||v||₂≤(ε³/6)||D³f||∞∫|u|³|∇W(u)|du=(ε³m₃/6)||D³f||∞. Multiplication by ε^(−1) from step 1.1 proves the stated bound.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: for constant f the kernel-gradient integral and ∇f are both zero by the derivative moment identities used in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "thm-meshfree-particle-kernel-quadrature-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scaled-symmetric-compact-kernel-family",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. An **admissible smoothing kernel** is a radial function $W\\in C_c^2(\\mathbb R^d,[0,\\infty))$, supported in the closed Euclidean ball $\\overline B(0,R)$ of some radius $R>0$ ([[def-metric-ball]]), with $\\int_{\\mathbb R^d}W(z)\\,dz=1$. Here radial means $W(z)=w(|z|)$ for some function $w:[0,\\infty)\\to[0,\\infty)$, and $C_c^2$ means twice continuously differentiable with compact support. All vector norms are the Euclidean norm from [[def-euclidean-inner-product]], and $\\|D^2W\\|_\\infty$ uses the induced operator norm. Throughout this pair, $L^\\infty$ norms are suprema of Euclidean norms, and norms of multilinear derivatives are the induced operator norms. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], where $\\operatorname{supp}f$ is the closure of the set on which $f$ is nonzero.\n\nFor $\\varepsilon>0$ define the scaled kernel $W_\\varepsilon(z)=\\varepsilon^{-d}W(z/\\varepsilon)$. Write $M_0=\\|W\\|_\\infty$, $M_1=\\|\\nabla W\\|_\\infty$, $M_2=\\|D^2W\\|_\\infty$, $m_2=\\int |z|^2W(z)\\,dz$, and $m_3=\\int |z|^3|\\nabla W(z)|\\,dz$. The norm functions and moment integrands are continuous with compact support. They are bounded and Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]], so these constants are finite.\n\nFor continuous $f:\\mathbb R^d\\to\\mathbb R$, define the full-space smoother and its kernel-gradient operator by\n$$S_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(x-z)W_\\varepsilon(z)\\,dz,\\qquad D_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(y)\\nabla W_\\varepsilon(x-y)\\,dy.$$\nFor each fixed $x$, both scalar integrands and every component of the vector integrand are continuous and compactly supported, hence Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. Thus the displayed integrals exist as compactly supported Riemann integrals; the vector integral defining $D_\\varepsilon f$ is taken componentwise.\n\nThis page fixes $\\varepsilon$ in the finite-particle system. Limits $\\varepsilon\\to0$ are used only in the stated kernel-bias and joint-refinement results.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-meshfree-cell-quadrature-and-fill-radius",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^d$ be open. Write $B(x,r)$ for the open Euclidean ball from [[def-metric-ball]] with distance induced by [[def-euclidean-inner-product]]. A family of cells is **locally finite** here when every compact subset of $\\Omega$ meets only finitely many cells. A bounded set is **Jordan measurable** when its Jordan inner and outer contents agree ([[def-jordan-inner-and-outer-content]]). A **cell particle rule** is a nonempty locally finite family of bounded Jordan-measurable cells $C_j\\subseteq\\Omega$ whose interiors are disjoint and whose union covers $\\Omega$ up to their shared boundaries, together with nodes $x_j\\in C_j$ and positive volumes $V_j=\\int 1_{C_j}$. The cell volume integral is Riemann-defined and equals the Jordan content ([[def-riemann-integral-over-a-jordan-set]]). Its fill radius is $h=\\sup_j\\sup_{y\\in C_j}|y-x_j|$, using the Euclidean norm from [[def-euclidean-inner-product]]; require $0<h<\\infty$. Assume finite constants $C_V,C_L>0$ satisfy $V_j\\le C_Vh^d$ and the local volume bound\n\n$$\\sum_{j:C_j\\cap B(x,r)\\ne\\varnothing}V_j\\le C_L(r+h)^d$$\n\nfor every $x\\in\\mathbb R^d$ and $r>0$. For continuous $g:\\mathbb R^d\\to\\mathbb R$ with compact support contained in $\\Omega$ (support as in [[def-support-and-compactly-supported-riemann-integral-in-rn]]), define $Q_hg=\\sum_jV_jg(x_j)$; local finiteness makes this sum finite. At kernel width $\\varepsilon$, an evaluation point is **interior** when $B(x,R\\varepsilon+2h)\\subset\\Omega$. For periodic calculations, use the periodic extensions of the field and particle rule on $\\mathbb R^d$, so no kernel support is truncated.\n\nThe cell rule is integration-compatible: for every continuous $g:\\mathbb R^d\\to\\mathbb R$ with compact support contained in $\\Omega$, only finitely many cells meet $\\operatorname{supp}(g)$, every cell integral appearing below is Riemann-defined, and\n$$\\int_\\Omega g(y)\\,dy=\\sum_{j:C_j\\cap\\operatorname{supp}(g)\\ne\\varnothing}\\int_{C_j}g(y)\\,dy.$$\nThis finite partition identity is part of the quadrature data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-scaled-kernel-moments-and-derivative-bounds",
+          "source_section": "Statement",
+          "quote": "For the scaled kernels of [[def-scaled-symmetric-compact-kernel-family]] and every ε>0, supp W_ε⊂\\overline B(0,Rε), ∫W_ε=1, ∫zW_ε(z)dz=0, and ∫|z|²W_ε(z)dz=ε²m₂. Pointwise, ∇W_ε(z)=ε^(−d−1)∇W(z/ε) and D²W_ε(z)=ε^(−d−2)D²W(z/ε); consequently their sup norms equal ε^(−d−1)M₁ and ε^(−d−2)M₂.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cellwise-particle-quadrature-oscillation-bound",
+          "source_section": "Statement",
+          "quote": "Let g be compactly supported and Lipschitz with constant L_g, meaning |g(y)−g(x)|≤L_g|y−x|, with supp(g)⊂Ω, and use the cells and nodes of [[def-meshfree-cell-quadrature-and-fill-radius]]. Define osc_C(g)=sup_{y,z∈C}|g(y)−g(z)| and let J_g={j:C_j∩supp(g)≠∅}. Then\n\n$$\\left|\\int_\\Omega g(y)dy-Q_hg\\right|\\le\\sum_{j\\in J_g}V_j\\operatorname{osc}_{C_j}(g)\\le 2hL_g\\sum_{j\\in J_g}V_j.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-mean-value-inequality",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a < b$,\nand let $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-vector-valued-functions-limits-and-continuity]],\n[[def-vector-valued-derivative-and-integral]], [[def-interval]]). Let\n$M \\in \\mathbb{R}$ with $M \\ge 0$ satisfy\n\n$$\\lVert f'(t)\\rVert_2 \\;\\le\\; M \\qquad \\text{for every } t \\in (a,b).$$\n\nThen\n\n$$\\lVert f(b) - f(a)\\rVert_2 \\;\\le\\; M\\,(b-a).$$\n\n**No integrability of $f'$ is assumed**, so the theorem applies to every\ndifferentiable $f$; that is why it is proved from the scalar mean value theorem\nrather than from\n[[thm-norm-inequality-for-the-vector-valued-integral]].\n[[cor-vector-valued-ftc-and-lipschitz-bound]] records the comparison between the\ntwo routes.\n\n**The equality form is not asserted, and for $m \\ge 2$ it is false.** There need\nbe **no** $\\xi \\in (a,b)$ with $f(b)-f(a) = f'(\\xi)(b-a)$; the companion page\ncarries a differentiable witness on $[0,1]$. The $\\xi$ produced in the proof\nbelow depends on the fixed vector $u = f(b)-f(a)$ and is a mean value point of\nthe **real** function $t \\mapsto \\langle u, f(t)\\rangle$, not of $f$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put g₀(y)=f(y)W_ε(x−y). On any segment y(t)=y₀+t(y₁−y₀), [F6] gives the chain and product rules, and Cauchy-Schwarz [F7] gives |(g₀∘y)'(t)|≤(ε^(−d)M₀||∇f||∞+ε^(−d−1)M₁||f||∞)|y₁−y₀| by [F3]. Applying [F5] on that segment gives the same Lipschitz constant for g₀. Its support is contained in the closed ball \\overline B(x,Rε), hence in B(x,(R+1)ε). By [F2], the total volume of cells meeting that support is at most C_L((R+1)ε+h)^d≤C_L(R+2)^dε^d. Apply [F4] and cancel ε^d; the factor 2 is absorbed into C. This gives the first inequality.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put g₁(y)=f(y)∇W_ε(x−y). On any segment y(t)=y₀+t(y₁−y₀), [F6] gives componentwise chain and product rules, and Cauchy-Schwarz [F7] gives ||(g₁∘y)'(t)||₂≤(ε^(−d−1)M₁||∇f||∞+ε^(−d−2)M₂||f||∞)|y₁−y₀| by [F3]. Applying the vector mean value inequality [F5] bounds its Lipschitz constant by this expression. Its support is contained in the same closed ball, so [F2] gives the active-volume bound from step 1.1. Apply [F4] to each vector component; taking the Euclidean norm costs at most a factor √d, and [F4] contributes a factor 2; both are absorbed into C. Cancelling ε^d proves the second inequality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "If the compact kernel support meets no cell, both kernel integrands vanish and the stated error bounds hold with zero left side."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "cor-meshfree-joint-refinement-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-second-order-meshfree-convolution-bias",
+          "source_section": "Statement",
+          "quote": "Let f∈C²(R^d) have bounded Hessian and define S_εf(x)=∫f(x−z)W_ε(z)dz. Then for every ε>0 and x∈R^d,\n\n$$|S_\\varepsilon f(x)-f(x)|\\le \\frac{m_2}{2}\\varepsilon^2\\|D^2f\\|_\\infty.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-first-derivative-meshfree-convolution-bias",
+          "source_section": "Statement",
+          "quote": "Let f∈C³(R^d) have bounded third derivative and define D_εf(x)=∫f(y)∇W_ε(x−y)dy. Then for every ε>0 and x∈R^d,\n\n$$|D_\\varepsilon f(x)-\\nabla f(x)|\\le \\frac{m_3}{6}\\varepsilon^2\\|D^3f\\|_\\infty,$$\n\nwhere ||D³f||∞ is the supremum of the operator norm of the trilinear derivative.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-meshfree-particle-kernel-quadrature-error",
+          "source_section": "Statement",
+          "quote": "Assume the cell rule of [[def-meshfree-cell-quadrature-and-fill-radius]], h≤ε≤1, x is interior, and f∈C¹(R^d) is bounded with bounded first derivative. Define\n\n$$Q^0_{\\varepsilon,h}f(x)=\\sum_jV_jf(x_j)W_\\varepsilon(x-x_j),\\qquad Q^1_{\\varepsilon,h}f(x)=\\sum_jV_jf(x_j)\\nabla W_\\varepsilon(x-x_j).$$\n\nLet S_εf(x)=∫f(y)W_ε(x−y)dy and D_εf(x)=∫f(y)∇W_ε(x−y)dy. There is C=C(d,R,C_L,W), independent of ε,h,x, such that\n\n$$|Q^0_{\\varepsilon,h}f(x)-S_\\varepsilon f(x)|\\le Ch\\bigl(\\|\\nabla f\\|_\\infty+\\varepsilon^{-1}\\|f\\|_\\infty\\bigr),$$\n\n$$|Q^1_{\\varepsilon,h}f(x)-D_\\varepsilon f(x)|\\le Ch\\bigl(\\varepsilon^{-1}\\|\\nabla f\\|_\\infty+\\varepsilon^{-2}\\|f\\|_\\infty\\bigr).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Add and subtract S_εf(x): |Q⁰_{ε,h}f−f|≤|Q⁰_{ε,h}f−S_εf|+|S_εf−f|. Apply [F1] and the first bound in [F3] to obtain the first inequality after increasing constants.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Add and subtract D_εf(x): |Q¹_{ε,h}f−∇f|≤|Q¹_{ε,h}f−D_εf|+|D_εf−∇f|. Apply [F2] and the second bound in [F3] to obtain the second inequality.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If ε→0 and h/ε²→0, then ε²→0, h/ε²→0, and h/ε≤h/ε² because ε≤1. Every term on the right sides of steps 1.1 and 1.2 therefore tends to zero uniformly at the stated interior points.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "corollary"
+    },
+    "thm-regularized-sph-local-wellposedness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-conservative-sph-system",
+          "source_section": "Definition",
+          "quote": "Fix d,N≥1, positive masses m_1,…,m_N, ε>0, the kernel W_ε from [[def-scaled-symmetric-compact-kernel-family]], and a pressure map P∈C¹((0,∞)×R,R). Positions q_i and velocities v_i lie in R^d with the Euclidean inner product from [[def-euclidean-inner-product]], and specific internal energies e_i lie in R. Define\n\n$$\\rho_i(q)=\\sum_{j=1}^Nm_jW_\\varepsilon(q_i-q_j),\\qquad p_i=P(\\rho_i,e_i),\\qquad A_i=\\frac{p_i}{\\rho_i^2}.$$\n\nThe state domain is U={ (q,v,e): ρ_i(q)>0 for every i }. On U, the fixed-width semidiscrete system is\n\n$$\\dot q_i=v_i,\\qquad \\dot v_i=-\\sum_{j=1}^Nm_j(A_i+A_j)\\nabla W_\\varepsilon(q_i-q_j),\\qquad \\dot e_i=A_i\\sum_{j=1}^Nm_j(v_i-v_j)\\cdot\\nabla W_\\varepsilon(q_i-q_j).$$\n\nA controlled tube is a compact subset of U on which ρ_i≥ρ_*>0 for every i. The system is semidiscrete: time remains continuous while the spatial state is represented by finitely many particles. It has fixed masses and fixed ε, includes the displayed matched internal-energy equation, and contains no artificial viscosity. No continuum Euler convergence is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regularized-sph-vector-field-lipschitz-on-positive-density-tube",
+          "source_section": "Statement",
+          "quote": "Let K be a nonempty compact convex subset of the positive-density domain of [[def-regularized-conservative-sph-system]]. Use ||z||#=max_i{|q_i|,|v_i|,|e_i|}, M=Σ_im_i, V=sup_{z∈K}max_i|v_i|, K₁=||∇W_ε||∞, K₂=||D²W_ε||∞, and a(ρ,e)=P(ρ,e)/ρ². Define A₀=max_{z∈K,,i}|a(ρ_i(q),e_i)|, A_ρ=max_{z∈K,,i}|∂_ρa(ρ_i(q),e_i)|, A_e=max_{z∈K,,i}|∂_ea(ρ_i(q),e_i)|, and A_Lip=2MK₁A_ρ+A_e. By [[thm-extreme-value-metric]], these suprema are finite and the displayed maxima are attained, since K is nonempty compact and the functions involved are continuous. Then the full state vector field F is Lipschitz on K with constant\n\n$$L=\\max\\{1,\\ M(2K_1A_{\\mathrm{Lip}}+4A_0K_2),\\ 2MVA_{\\mathrm{Lip}}K_1+2MA_0K_1+4MA_0VK_2\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each ρ_i is continuous by [F1], so U is open as the finite intersection of the inverse images of (0,∞). On U, denominators ρ_i² are nonzero, P is C¹, W_ε is C², and the finite sums defining F are continuous.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix z₀∈U. Since U is open, choose a nonempty nondegenerate closed box K about z₀ small enough to lie in U. It is convex and compact by [F4]. Each ρ_i is continuous and positive on K, so [F4] gives a positive minimum for each; taking the minimum over finitely many i gives a positive lower density bound on K. [F2] makes F Lipschitz there. Regard F as time-independent on R×U and apply [F3] to obtain a unique local C¹ solution. No choice principle is used.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 is allowed; positive self-density is the condition, and self-force terms vanish by even differentiability."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "thm-forward-euler-global-error-on-controlled-sph-tube": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-regularized-sph-local-wellposedness",
+          "source_section": "Statement",
+          "quote": "For the system of [[def-regularized-conservative-sph-system]], U={z:ρ_i(q)>0 for every i} is open and its finite-dimensional vector field F is continuous and locally Lipschitz on U. From each initial state z₀∈U there is a unique local C¹ solution.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-regularized-sph-vector-field-lipschitz-on-positive-density-tube",
+          "source_section": "Statement",
+          "quote": "Let K be a nonempty compact convex subset of the positive-density domain of [[def-regularized-conservative-sph-system]]. Use ||z||#=max_i{|q_i|,|v_i|,|e_i|}, M=Σ_im_i, V=sup_{z∈K}max_i|v_i|, K₁=||∇W_ε||∞, K₂=||D²W_ε||∞, and a(ρ,e)=P(ρ,e)/ρ². Define A₀=max_{z∈K,,i}|a(ρ_i(q),e_i)|, A_ρ=max_{z∈K,,i}|∂_ρa(ρ_i(q),e_i)|, A_e=max_{z∈K,,i}|∂_ea(ρ_i(q),e_i)|, and A_Lip=2MK₁A_ρ+A_e. By [[thm-extreme-value-metric]], these suprema are finite and the displayed maxima are attained, since K is nonempty compact and the functions involved are continuous. Then the full state vector field F is Lipschitz on K with constant\n\n$$L=\\max\\{1,\\ M(2K_1A_{\\mathrm{Lip}}+4A_0K_2),\\ 2MVA_{\\mathrm{Lip}}K_1+2MA_0K_1+4MA_0VK_2\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$1+x\\le\\exp(x).$$\nConsequently, if $0\\le p\\le1$ and $m\\in\\mathbb N$, then\n$$ (1-p)^m\\le\\exp(-mp). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The local defect from an exact start is z(t+h)−z(t)−hF(z(t))=∫₀ʰ(F(z(t+s))−F(z(t)))ds by [F2]. Since the exact path lies in K, its speed is at most B; applying [F7] to ż=F gives ||z(t+s)−z(t)||#≤Bs. Then [F3] bounds the defect integrand by LBs. A second application of [F7] and integration of LBs give the local defect norm bound LBh²/2.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose Z_k∈K. By convexity of K the segment from Z_k to z(kh) lies in K, so [F3] gives ||Z_k+hF(Z_k)−(z(kh)+hF(z(kh)))||#≤(1+hL)||Z_k−z(kh)||#. The triangle and homogeneity properties in [F6], together with the defect from step 1.1, yield e_{k+1}≤(1+hL)e_k+LBh²/2, where e_k=||Z_k−z(kh)||#.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Starting with e₀=0 and iterating step 2.1 gives e_k≤(Bh/2)((1+hL)^k−1) when L>0, by the finite geometric-sum identity; when L=0 the defect is zero and e_k=0. Since 1+hL≤exp(hL) by [F4] and exp(khL)=exp(Lkh) by repeated [F5], e_k≤E_h for k≤n.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Initially Z₀=z(0)∈K. If Z₀,…,Z_k∈K, steps 2.1–3.1 give e_{k+1}≤E_h<δ. The exact state z((k+1)h) is at distance at least δ from Kᶜ, so Z_{k+1}∈K. Induction proves all Euler states remain in K and the bound holds for every k.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a specified nonempty mathematical structure and assigns no result to an empty structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the L=0 branch is explicit; step 3.1 gives zero error when the vector field is constant on the tube."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: n=1 is allowed, so the single-step endpoint is covered by the same recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the grid includes k=0 and k=n, and the maximum error bound includes both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "theorem"
+    },
+    "cex-truncated-kernel-loses-boundary-constant-reproduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scaled-symmetric-compact-kernel-family",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. An **admissible smoothing kernel** is a radial function $W\\in C_c^2(\\mathbb R^d,[0,\\infty))$, supported in the closed Euclidean ball $\\overline B(0,R)$ of some radius $R>0$ ([[def-metric-ball]]), with $\\int_{\\mathbb R^d}W(z)\\,dz=1$. Here radial means $W(z)=w(|z|)$ for some function $w:[0,\\infty)\\to[0,\\infty)$, and $C_c^2$ means twice continuously differentiable with compact support. All vector norms are the Euclidean norm from [[def-euclidean-inner-product]], and $\\|D^2W\\|_\\infty$ uses the induced operator norm. Throughout this pair, $L^\\infty$ norms are suprema of Euclidean norms, and norms of multilinear derivatives are the induced operator norms. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], where $\\operatorname{supp}f$ is the closure of the set on which $f$ is nonzero.\n\nFor $\\varepsilon>0$ define the scaled kernel $W_\\varepsilon(z)=\\varepsilon^{-d}W(z/\\varepsilon)$. Write $M_0=\\|W\\|_\\infty$, $M_1=\\|\\nabla W\\|_\\infty$, $M_2=\\|D^2W\\|_\\infty$, $m_2=\\int |z|^2W(z)\\,dz$, and $m_3=\\int |z|^3|\\nabla W(z)|\\,dz$. The norm functions and moment integrands are continuous with compact support. They are bounded and Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]], so these constants are finite.\n\nFor continuous $f:\\mathbb R^d\\to\\mathbb R$, define the full-space smoother and its kernel-gradient operator by\n$$S_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(x-z)W_\\varepsilon(z)\\,dz,\\qquad D_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(y)\\nabla W_\\varepsilon(x-y)\\,dy.$$\nFor each fixed $x$, both scalar integrands and every component of the vector integrand are continuous and compactly supported, hence Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. Thus the displayed integrals exist as compactly supported Riemann integrals; the vector integral defining $D_\\varepsilon f$ is taken componentwise.\n\nThis page fixes $\\varepsilon$ in the finite-particle system. Limits $\\varepsilon\\to0$ are used only in the stated kernel-bias and joint-refinement results.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $g:U\\to\\mathbb R^n$ be injective and $C^1$, and suppose $Dg(x)$ is invertible for every $x\\in U$. Let $K\\subseteq U$ be compact and Jordan measurable. For a bounded function $f:g(K)\\to\\mathbb R$, the following are equivalent:\n\n1. $f$ is Riemann integrable on $g(K)$;\n2. $x\\mapsto f(g(x))|\\det Dg(x)|$ is Riemann integrable on $K$.\n\nWhen either condition holds,\n$$\\int_{g(K)}f(y)\\,dy=\\int_K f(g(x))|\\det Dg(x)|\\,dx.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed W is nonnegative, even, supported on [−1,1], and C² at ±1 because its value and first two inside derivatives vanish there. [F3] makes it integrable on [−1,1], and its integral is (35/32)·2(1−1+3/5−1/7)=1, so it satisfies [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At x=0, evenness and support reduce T_ε1(0) to ∫_0^εW_ε(y)dy. Apply [F2] on K=[0,1] with T(s)=εs; since W_ε(εs)=ε^(−1)W(s), this equals ∫_0^1W(s)ds. By [F1], W is even and normalized, so the half-interval integral is (1/2)∫_{−1}^1W(s)ds=1/2.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The truncated value 1/2 differs from the constant 1, so the claimed boundary reproduction fails.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a nonzero normalized kernel and a nonempty half-line domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the witness uses f=1 rather than zero data; the zero function would give zero on both sides and is not the claimed boundary failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the witness uses the unit constant field, and step 2.1 computes its truncated value as one half."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the open half-line is nondegenerate; the loss is due to truncation, not a zero-width domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the half-line endpoint x=0 is the explicit evaluation point and step 2.1 accounts for exactly half the kernel mass."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Half-line kernel mass at the boundary",
+          "method": "exact finite calculation",
+          "input": {
+            "kernel": "W(s)=(35/32)(1-s^2)^3 for |s|≤1",
+            "evaluation_point": "x=0",
+            "domain": "[0,∞)"
+          },
+          "calculation": "The polynomial integral on [-1,1] is (35/32)·2(1−1+3/5−1/7)=1. Evenness therefore gives ∫_0^∞W_ε(y)dy=1/2 for every ε>0.",
+          "expected": {
+            "whole_mass": "1",
+            "truncated_mass": "1/2"
+          },
+          "steps": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "kind": "counterexample"
+    },
+    "ex-interior-constant-and-affine-kernel-reproduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scaled-symmetric-compact-kernel-family",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. An **admissible smoothing kernel** is a radial function $W\\in C_c^2(\\mathbb R^d,[0,\\infty))$, supported in the closed Euclidean ball $\\overline B(0,R)$ of some radius $R>0$ ([[def-metric-ball]]), with $\\int_{\\mathbb R^d}W(z)\\,dz=1$. Here radial means $W(z)=w(|z|)$ for some function $w:[0,\\infty)\\to[0,\\infty)$, and $C_c^2$ means twice continuously differentiable with compact support. All vector norms are the Euclidean norm from [[def-euclidean-inner-product]], and $\\|D^2W\\|_\\infty$ uses the induced operator norm. Throughout this pair, $L^\\infty$ norms are suprema of Euclidean norms, and norms of multilinear derivatives are the induced operator norms. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], where $\\operatorname{supp}f$ is the closure of the set on which $f$ is nonzero.\n\nFor $\\varepsilon>0$ define the scaled kernel $W_\\varepsilon(z)=\\varepsilon^{-d}W(z/\\varepsilon)$. Write $M_0=\\|W\\|_\\infty$, $M_1=\\|\\nabla W\\|_\\infty$, $M_2=\\|D^2W\\|_\\infty$, $m_2=\\int |z|^2W(z)\\,dz$, and $m_3=\\int |z|^3|\\nabla W(z)|\\,dz$. The norm functions and moment integrands are continuous with compact support. They are bounded and Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]], so these constants are finite.\n\nFor continuous $f:\\mathbb R^d\\to\\mathbb R$, define the full-space smoother and its kernel-gradient operator by\n$$S_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(x-z)W_\\varepsilon(z)\\,dz,\\qquad D_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(y)\\nabla W_\\varepsilon(x-y)\\,dy.$$\nFor each fixed $x$, both scalar integrands and every component of the vector integrand are continuous and compactly supported, hence Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. Thus the displayed integrals exist as compactly supported Riemann integrals; the vector integral defining $D_\\varepsilon f$ is taken componentwise.\n\nThis page fixes $\\varepsilon$ in the finite-particle system. Limits $\\varepsilon\\to0$ are used only in the stated kernel-bias and joint-refinement results.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-scaled-kernel-moments-and-derivative-bounds",
+          "source_section": "Statement",
+          "quote": "For the scaled kernels of [[def-scaled-symmetric-compact-kernel-family]] and every ε>0, supp W_ε⊂\\overline B(0,Rε), ∫W_ε=1, ∫zW_ε(z)dz=0, and ∫|z|²W_ε(z)dz=ε²m₂. Pointwise, ∇W_ε(z)=ε^(−d−1)∇W(z/ε) and D²W_ε(z)=ε^(−d−2)D²W(z/ε); consequently their sup norms equal ε^(−d−1)M₁ and ε^(−d−2)M₂.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-symmetric-kernel-moment-cancellation",
+          "source_section": "Statement",
+          "quote": "For the kernel W and its scaled family W_ε of [[def-scaled-symmetric-compact-kernel-family]], the first moment vanishes: ∫zW(z) dz=0 and ∫zW_ε(z) dz=0 for every ε>0.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expand the affine function at x: f(x−z)=a+b·(x−z)=f(x)−b·z.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute this expansion into [F1]. The constant term integrates to f(x) by [F2], and the linear term vanishes by [F3]. Thus S_εf(x)=f(x).",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes an admissible normalized kernel, which cannot have empty support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the constant term of an affine field is reproduced with unit mass in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-two-particle-sph-force-pair": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-conservative-sph-system",
+          "source_section": "Definition",
+          "quote": "Fix d,N≥1, positive masses m_1,…,m_N, ε>0, the kernel W_ε from [[def-scaled-symmetric-compact-kernel-family]], and a pressure map P∈C¹((0,∞)×R,R). Positions q_i and velocities v_i lie in R^d with the Euclidean inner product from [[def-euclidean-inner-product]], and specific internal energies e_i lie in R. Define\n\n$$\\rho_i(q)=\\sum_{j=1}^Nm_jW_\\varepsilon(q_i-q_j),\\qquad p_i=P(\\rho_i,e_i),\\qquad A_i=\\frac{p_i}{\\rho_i^2}.$$\n\nThe state domain is U={ (q,v,e): ρ_i(q)>0 for every i }. On U, the fixed-width semidiscrete system is\n\n$$\\dot q_i=v_i,\\qquad \\dot v_i=-\\sum_{j=1}^Nm_j(A_i+A_j)\\nabla W_\\varepsilon(q_i-q_j),\\qquad \\dot e_i=A_i\\sum_{j=1}^Nm_j(v_i-v_j)\\cdot\\nabla W_\\varepsilon(q_i-q_j).$$\n\nA controlled tube is a compact subset of U on which ρ_i≥ρ_*>0 for every i. The system is semidiscrete: time remains continuous while the spatial state is represented by finitely many particles. It has fixed masses and fixed ε, includes the displayed matched internal-energy equation, and contains no artificial viscosity. No continuum Euler convergence is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sph-pair-forces-antisymmetric-and-central",
+          "source_section": "Statement",
+          "quote": "For the system in [[def-regularized-conservative-sph-system]], set g_ij=∇W_ε(q_i−q_j) and define the force contribution F_ij=−m_im_j(A_i+A_j)g_ij. Radial evenness gives g_ji=−g_ij and g_ii=0, so for i≠j, F_ji=−F_ij; also F_ij is parallel to q_i−q_j (the zero vector is allowed).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two-particle acceleration equations contain precisely F_12 in the first momentum equation and F_21 in the second, by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F2] gives F_12+F_21=0 and makes each force a scalar multiple of q_1−q_2; hence the pair exerts no net force or torque.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two particles with positive masses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero-input case is within the displayed formulas and makes both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "kind": "example"
+    },
+    "cex-fixed-neighbor-irregular-derivative-not-consistent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scaled-symmetric-compact-kernel-family",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. An **admissible smoothing kernel** is a radial function $W\\in C_c^2(\\mathbb R^d,[0,\\infty))$, supported in the closed Euclidean ball $\\overline B(0,R)$ of some radius $R>0$ ([[def-metric-ball]]), with $\\int_{\\mathbb R^d}W(z)\\,dz=1$. Here radial means $W(z)=w(|z|)$ for some function $w:[0,\\infty)\\to[0,\\infty)$, and $C_c^2$ means twice continuously differentiable with compact support. All vector norms are the Euclidean norm from [[def-euclidean-inner-product]], and $\\|D^2W\\|_\\infty$ uses the induced operator norm. Throughout this pair, $L^\\infty$ norms are suprema of Euclidean norms, and norms of multilinear derivatives are the induced operator norms. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], where $\\operatorname{supp}f$ is the closure of the set on which $f$ is nonzero.\n\nFor $\\varepsilon>0$ define the scaled kernel $W_\\varepsilon(z)=\\varepsilon^{-d}W(z/\\varepsilon)$. Write $M_0=\\|W\\|_\\infty$, $M_1=\\|\\nabla W\\|_\\infty$, $M_2=\\|D^2W\\|_\\infty$, $m_2=\\int |z|^2W(z)\\,dz$, and $m_3=\\int |z|^3|\\nabla W(z)|\\,dz$. The norm functions and moment integrands are continuous with compact support. They are bounded and Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]], so these constants are finite.\n\nFor continuous $f:\\mathbb R^d\\to\\mathbb R$, define the full-space smoother and its kernel-gradient operator by\n$$S_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(x-z)W_\\varepsilon(z)\\,dz,\\qquad D_\\varepsilon f(x)=\\int_{\\mathbb R^d}f(y)\\nabla W_\\varepsilon(x-y)\\,dy.$$\nFor each fixed $x$, both scalar integrands and every component of the vector integrand are continuous and compactly supported, hence Riemann integrable on a bounding Jordan box by [[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]. Thus the displayed integrals exist as compactly supported Riemann integrals; the vector integral defining $D_\\varepsilon f$ is taken componentwise.\n\nThis page fixes $\\varepsilon$ in the finite-particle system. Limits $\\varepsilon\\to0$ are used only in the stated kernel-bias and joint-refinement results.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-meshfree-cell-quadrature-and-fill-radius",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^d$ be open. Write $B(x,r)$ for the open Euclidean ball from [[def-metric-ball]] with distance induced by [[def-euclidean-inner-product]]. A family of cells is **locally finite** here when every compact subset of $\\Omega$ meets only finitely many cells. A bounded set is **Jordan measurable** when its Jordan inner and outer contents agree ([[def-jordan-inner-and-outer-content]]). A **cell particle rule** is a nonempty locally finite family of bounded Jordan-measurable cells $C_j\\subseteq\\Omega$ whose interiors are disjoint and whose union covers $\\Omega$ up to their shared boundaries, together with nodes $x_j\\in C_j$ and positive volumes $V_j=\\int 1_{C_j}$. The cell volume integral is Riemann-defined and equals the Jordan content ([[def-riemann-integral-over-a-jordan-set]]). Its fill radius is $h=\\sup_j\\sup_{y\\in C_j}|y-x_j|$, using the Euclidean norm from [[def-euclidean-inner-product]]; require $0<h<\\infty$. Assume finite constants $C_V,C_L>0$ satisfy $V_j\\le C_Vh^d$ and the local volume bound\n\n$$\\sum_{j:C_j\\cap B(x,r)\\ne\\varnothing}V_j\\le C_L(r+h)^d$$\n\nfor every $x\\in\\mathbb R^d$ and $r>0$. For continuous $g:\\mathbb R^d\\to\\mathbb R$ with compact support contained in $\\Omega$ (support as in [[def-support-and-compactly-supported-riemann-integral-in-rn]]), define $Q_hg=\\sum_jV_jg(x_j)$; local finiteness makes this sum finite. At kernel width $\\varepsilon$, an evaluation point is **interior** when $B(x,R\\varepsilon+2h)\\subset\\Omega$. For periodic calculations, use the periodic extensions of the field and particle rule on $\\mathbb R^d$, so no kernel support is truncated.\n\nThe cell rule is integration-compatible: for every continuous $g:\\mathbb R^d\\to\\mathbb R$ with compact support contained in $\\Omega$, only finitely many cells meet $\\operatorname{supp}(g)$, every cell integral appearing below is Riemann-defined, and\n$$\\int_\\Omega g(y)\\,dy=\\sum_{j:C_j\\cap\\operatorname{supp}(g)\\ne\\varnothing}\\int_{C_j}g(y)\\,dy.$$\nThis finite partition identity is part of the quadrature data.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-first-derivative-meshfree-convolution-bias",
+          "source_section": "Statement",
+          "quote": "Let f∈C³(R^d) have bounded third derivative and define D_εf(x)=∫f(y)∇W_ε(x−y)dy. Then for every ε>0 and x∈R^d,\n\n$$|D_\\varepsilon f(x)-\\nabla f(x)|\\le \\frac{m_3}{6}\\varepsilon^2\\|D^3f\\|_\\infty,$$\n\nwhere ||D³f||∞ is the supremum of the operator norm of the trilinear derivative.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The adjacent gaps in one period are 3ε/5, 7ε/5, 3ε/2, and ε/2, so the fill radius is h=3ε/4. The four Voronoi-cell lengths per period are 11ε/20, ε, 29ε/20, and ε; hence every volume is at most 2h. If a cell meets B(x,r), its node lies in B(x,r+h). Nodes are separated by at least ε/2, so at most 1+4(r+h)/ε such nodes can lie in that interval. Each cell volume is at most 29ε/20, and r+h≥3ε/4; therefore the total active volume is at most (29/20)ε+(29/5)(r+h)≤(116/15)(r+h)≤8(r+h). The local-volume bound holds with C_L=8. In particular, the cells at −ε/2 and 3ε/5 are [−5ε/4,−ε/4] and [3ε/10,13ε/10], each of volume ε.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The nearest-node intervals tile R, repeat with period 4ε, and have gaps between their endpoints only at shared cell boundaries. Every compact support meets finitely many intervals. For any compactly supported continuous g, choose a finite consecutive block of cells containing supp(g); [F4] makes g integrable on its compact union, and repeated [F5] splits that integral into the cell integrals. Cells outside the block have zero integral because they do not meet supp(g). Thus the integration-compatibility identity in [F2] holds for every compactly supported continuous g.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On |s|<1, W′(s)=−(105/16)s(1−s²)². For f(y)=y at x=0, set g(y)=y\\,\\partial_xW_\\varepsilon(x-y)|_{x=0}. By [F1], g vanishes outside [−ε,ε], and [F2] defines its particle sum as Q_hg=Σ_jV_jg(x_j). The node at 0 contributes zero; only y=−ε/2 and y=3ε/5 contribute, with values −W′(1/2)/2=945/1024 and −(3/5)W′(3/5)=3024/3125. Thus Q_hg=945/1024+3024/3125, independent of ε.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Here f′(0)=1 and f‴=0, so [F3] gives D_εf(0)=1 exactly. Since each summand in the value from step 3.1 exceeds 1/2, that value is greater than 1 for every ε. The derivative error therefore does not tend to zero although h/ε=3/4 remains fixed.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness has an explicit nonempty periodic particle family; no empty mesh is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the witness is the nonzero affine function y; the zero function would have zero derivative error and is not the asserted failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the compact-kernel endpoint derivative vanishes; step 2.1 therefore omits no endpoint contribution."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Periodic cell geometry and local volume bound",
+          "method": "exact finite calculation",
+          "input": {
+            "scaled_gaps": [
+              "3/5",
+              "7/5",
+              "3/2",
+              "1/2"
+            ],
+            "period": "4ε"
+          },
+          "calculation": "The fill radius is 3ε/4; cell widths in one period are 11ε/20, ε, 29ε/20, ε. The minimum node spacing is ε/2. Packing centers in B(x,r+h) bounds active cell volume by (29/20)ε+(29/5)(r+h)≤(116/15)(r+h)≤8(r+h).",
+          "expected": {
+            "fill_radius": "3ε/4",
+            "cell_volume_constant": "C_V=2",
+            "local_volume_constant": "C_L=8"
+          },
+          "steps": [
+            "1.1"
+          ]
+        },
+        {
+          "name": "Affine derivative sum on the fixed stencil",
+          "method": "exact finite calculation",
+          "input": {
+            "field": "f(y)=y",
+            "evaluation_point": "x=0",
+            "scaled_nodes": [
+              "-1/2",
+              "0",
+              "3/5"
+            ]
+          },
+          "calculation": "The two nonzero terms are −W′(1/2)/2=945/1024 and −(3/5)W′(3/5)=3024/3125. Their sum is 6049701/3200000, independent of ε, while the continuous derivative target is 1.",
+          "expected": {
+            "particle_sum": "6049701/3200000",
+            "continuous_target": "1",
+            "error": "2849701/3200000"
+          },
+          "steps": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "kind": "counterexample"
+    },
+    "cex-conservative-sph-can-clump-under-positive-pressure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-conservative-sph-system",
+          "source_section": "Definition",
+          "quote": "Fix d,N≥1, positive masses m_1,…,m_N, ε>0, the kernel W_ε from [[def-scaled-symmetric-compact-kernel-family]], and a pressure map P∈C¹((0,∞)×R,R). Positions q_i and velocities v_i lie in R^d with the Euclidean inner product from [[def-euclidean-inner-product]], and specific internal energies e_i lie in R. Define\n\n$$\\rho_i(q)=\\sum_{j=1}^Nm_jW_\\varepsilon(q_i-q_j),\\qquad p_i=P(\\rho_i,e_i),\\qquad A_i=\\frac{p_i}{\\rho_i^2}.$$\n\nThe state domain is U={ (q,v,e): ρ_i(q)>0 for every i }. On U, the fixed-width semidiscrete system is\n\n$$\\dot q_i=v_i,\\qquad \\dot v_i=-\\sum_{j=1}^Nm_j(A_i+A_j)\\nabla W_\\varepsilon(q_i-q_j),\\qquad \\dot e_i=A_i\\sum_{j=1}^Nm_j(v_i-v_j)\\cdot\\nabla W_\\varepsilon(q_i-q_j).$$\n\nA controlled tube is a compact subset of U on which ρ_i≥ρ_*>0 for every i. The system is semidiscrete: time remains continuous while the spatial state is represented by finitely many particles. It has fixed masses and fixed ε, includes the displayed matched internal-energy equation, and contains no artificial viscosity. No continuum Euler convergence is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sph-pair-forces-antisymmetric-and-central",
+          "source_section": "Statement",
+          "quote": "For the system in [[def-regularized-conservative-sph-system]], set g_ij=∇W_ε(q_i−q_j) and define the force contribution F_ij=−m_im_j(A_i+A_j)g_ij. Radial evenness gives g_ji=−g_ij and g_ii=0, so for i≠j, F_ji=−F_ij; also F_ij is parallel to q_i−q_j (the zero vector is allowed).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-sph-conserves-linear-and-angular-momentum",
+          "source_section": "Statement",
+          "quote": "Every C¹ solution of [[def-regularized-conservative-sph-system]] conserves total linear momentum P=Σ_im_iv_i and the antisymmetric angular-momentum tensor J=Σ_im_i(q_i⊗v_i−v_i⊗q_i), where (a⊗b)_kl=a_kb_l.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-sph-matched-internal-energy-conserves-total-energy",
+          "source_section": "Statement",
+          "quote": "Every C¹ solution of [[def-regularized-conservative-sph-system]] conserves H=Σ_im_i(|v_i|²/2+e_i). The identity uses exactly the displayed matched internal-energy equation.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-regularized-sph-local-wellposedness",
+          "source_section": "Statement",
+          "quote": "For the system of [[def-regularized-conservative-sph-system]], U={z:ρ_i(q)>0 for every i} is open and its finite-dimensional vector field F is continuous and locally Lipschitz on U. From each initial state z₀∈U there is a unique local C¹ solution.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The polynomial kernel is nonnegative and even. At s=±1 its value and first two inside derivatives vanish, so extension by zero is C²; its integral is (35/32)·2(1−1+3/5−1/7)=1. Each density is positive because its self term W_ε(0)>0. The chosen internal energies give p_i=(γ−1)ρ_ie_i=p_0ρ_i²>0 and A_i=p_0 at t=0. By [F1] and [F5], a unique local solution exists; pressure positivity persists for a short interval by continuity.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For 0<s<1, |W′(s)|=(105/16)s(1−s²)². Direct substitution gives |W′(2/5)|/|W′(9/10)|=28224/3249>2. Also |q_3−q_1|=13ε/10>ε, so the 1–3 kernel-gradient term vanishes.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let r(t)=q_2(t)−q_1(t). From [F1] and step 1.2, the accelerations at t=0 are q̈_1=−2p_0ε^(−2)|W′(9/10)| and q̈_2=2p_0ε^(−2)(|W′(9/10)|−|W′(2/5)|). Therefore r̈(0)=2p_0ε^(−2)(2|W′(9/10)|−|W′(2/5)|)<0.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since ṙ(0)=0 and r̈ is continuous, ṙ(t)<0 and r(t)<r(0) for all sufficiently small t>0. Thus the adjacent gap closes initially under strictly positive pressure.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The exact pair antisymmetry and matched internal-energy identity apply by [F2] and [F4], so total momentum and H are conserved throughout this same local motion. The example therefore refutes the claimed gap-stability implication while retaining those invariants.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness fixes three particles with positive masses and densities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero initial velocities are explicitly included; step 2.1 computes a nonzero inward relative acceleration."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the parameter value one is allowed, and the proof uses no division by a quantity that vanishes there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate zero-width kernel is excluded by ε>0; no zero-scale limit is asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: kernel support endpoints are included; C² compact support makes the kernel and its first derivative agree with zero at the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use only explicitly indexed finite particles or coordinates and deterministic cell data; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no biconditional direction to contract."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states or refutes a one-way claim and contains no reverse implication to contract."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Three-particle pressure derivative and gap acceleration",
+          "method": "exact finite calculation",
+          "input": {
+            "scaled_positions": [
+              "0",
+              "9/10",
+              "13/10"
+            ],
+            "kernel": "W(s)=(35/32)(1-s^2)^3 for |s|≤1",
+            "pressure": "P(ρ,e)=(γ−1)ρe",
+            "γ": ">1"
+          },
+          "calculation": "The derivative ratio |W′(2/5)|/|W′(9/10)| is 28224/3249=3136/361>2; |q3−q1|=13ε/10>ε removes the 1–3 term. The gap acceleration is 2p0ε^(−2)(2|W′(9/10)|−|W′(2/5)|)<0.",
+          "expected": {
+            "derivative_ratio": "3136/361",
+            "initial_gap_acceleration": "negative"
+          },
+          "steps": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "kind": "counterexample"
+    }
+  }
+}

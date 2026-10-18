@@ -1,0 +1,2712 @@
+arXiv:2011.03368v2  [math.NA]  26 Dec 2021
+AAA manuscript No.
+(will be inserted by the editor)
+Randomized Quaternion Singular Value Decomposition for
+Low-Rank Approximation
+Dedicated to Professor Musheng Wei on the occasion of his 75th birthday
+Qiaohua Liu · Sitao Ling · Zhigang Jia
+Received: date / Accepted: date
+Abstract This paper presents a randomized quaternion singular value decomposition (QSVD)
+algorithm for low-rank matrix approximation problems, which are widely used in color face
+recognition, video compression, and signal processing problems. With quaternion normal distri-
+bution based random sampling, the randomized QSVD algorithm projects a high-dimensional
+data to a low-dimensional subspace and then identiﬁes an approximate range subspace of
+the quaternion matrix. The key statistical properties of quaternion Wishart distribution are
+proposed and used to perform the approximation error analysis of the algorithm. Theoretical
+results show that the randomized QSVD algorithm can trace dominant singular value de-
+composition triplets of a quaternion matrix with acceptable accuracy. Numerical experiments
+also indicate the rationality of proposed theories. Applied to color face recognition problems,
+the randomized QSVD algorithm obtains higher recognition accuracies and behaves more ef-
+ﬁcient than the known Lanczos-based partial QSVD and a quaternion version of fast frequent
+directions algorithm.
+Keywords randomized quaternion SVD; quaternion Wishart distribution; low-rank approxi-
+mation; error analysis.
+Qiaohua Liu
+Department of Mathematics, Shanghai University, Shanghai 200444, P.R. China
+Supported by the National Natural Science Foundation of China under grant 11001167.
+E-mail: qhliu@shu.edu.cn
+Sitao Ling
+School of Mathematics, China University of Mining and Technology, Xuzhou, Jiangsu, 221116, P.R. China.
+E-mail: lingsitao2004@163.com
+Zhigang Jia (Corresponding author)
+School of Mathematics and Statistics, Jiangsu Normal University, Xuzhou 221116, P. R. China
+Research Institute of Mathematical Science, Jiangsu Normal University, Xuzhou 221116, P. R. China
+Supported by National Natural Science Foundation of China grants 12171210, 12090011 and 11771188; the
+Major Projects of Universities in Jiangsu Province (No. 21KJA110001); the Priority Academic Program
+Development Project (PAPD); the Top-notch Academic Programs Project (No. PPZY2015A013) of Jiangsu
+Higher Education Institutions.
+E-mail: zhgjia@jsnu.edu.cn
+
+2
+Qiaohua Liu et al.
+1 Introduction
+Low-rank approximations of quaternion matrices play an important role in color image pro-
+cessing area [16,17], in which color images are represented by pure quaternion matrices. Based
+on the color principal component analysis [43], the optimal rank-k approximations preserve the
+main features and the important low frequency information of original color image samples.
+The core work of generating low-rank approximations is to compute the dominant quaternion
+singular value decomposition (QSVD) triplets (i.e., left singular vectors, singular values and
+right singular vectors). However, there are still few eﬃcient algorithms to do this work when
+quaternion matrices are of large-scale sizes. No rigorous error analysis of computed approxima-
+tions have also been given in the literature. In this paper, we present a new randomized QSVD
+algorithm and propose important theoretical results about the feasibility and the reliability of
+the algorithm.
+In these years, quaternions [12] and quaternion matrices [41] have been more and more
+attractive in many research ﬁelds such as signal processing [6], image data analysis [2,19], and
+machine learning [28,43]. Because of non-commutative multiplication of quaternions, quater-
+nion matrix computations contain more abundant challenging topics than real or complex
+matrix computations. The algorithms designed for quaternion matrices are also feasible for
+the real or complex case, but the converse is not always true. As we are concerned on, QSVD
+triplets can be achieved in three totally diﬀerent ways. The ﬁrst one is to call the svd command
+from Quaternion toolbox for Matlab (QTFM) developed by Sangwine and Bihan in 2005. For
+the principle of the algorithm, we refer to [32]. The codes in QTFM are based on quater-
+nion arithmetic operations and is less eﬃcient for large matrices. The second one is to use
+the real structure-preserving QSVD method [38]. Its main idea is to perform real operations
+on the real counterparts of quaternion matrices with structure preserving scheme. In practi-
+cal implementations, only the ﬁrst block row or column of the real counterpart is explicitly
+stored and updated, and the other subblocks are implicitly formulated with the aid of the al-
+gebraic symmetry structure. The real matrix-matrix multiplication-based BLAS-3 operations
+make the computation more eﬃcient. The concept of structure-preserving was ﬁrstly proposed
+to solve quaternion eigenvalue problem in [13], and then extended to the computations of
+quaternion LU [22, 37] and QR [21] factorizations. Recently, Jia et al. [14] developed a new
+structure-preserving quaternion QR algorithm for eigenvalue problems of general quaternion
+matrices, by constructing feasible frameworks of calculation for new quaternion Householder
+reﬂections and generalized Givens transformations. For more issues about structure-preserving
+algorithms, we refer to two monographs [38] by Wei et al. and [18] by Jia. The above two ways
+are based on the truncation of the full QSVD and the computational cost is expensive in com-
+puting all singular values and corresponding left and right singular vectors. Thus they are not
+feasible for large-scale quaternion matrices. Jia et al. [15] proposed a promising iterative algo-
+rithm to compute dominant QSVD triplets, based on the Lanczos bidiagonalization [8] with
+reorthogonalization and thick-restart techniques. This method is referred to as the lansvdQ
+method. The superiority of lansvdQ method over the full QSVD was revealed in [15], through
+a number of practical applications such as color face recognition, video compression and color
+image completion. When the target rank k increases, the matrix-vector products at each it-
+eration of lansvdQ make the computational cost increase. Is there any method with lower
+computational cost for the quaternion low-rank approximation problem?
+In the past decade, randomized algorithms for computing approximations of real matri-
+ces have been receiving more and more attention. Randomized projection and randomized
+sampling are two commonly used techniques to deal with large-scale problems eﬃciently.
+Randomized projection combines rows or columns together to produce a small sketch of
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+3
+M ∈Rm×n(m ≥n) [33]. Possible techniques include subspace iterations [10], subspace embed-
+ding (SpEmb) [27], frequent directions (FD) [7] and etc. Recently, Teng and Chu [34] implanted
+SpEmb in FD to develop a fast frequent direction (SpFD) algorithm. Through the experimental
+results on world datasets and applications in network analysis, the superiority of SpFD over
+FD is displayed, not only in the eﬃciency, but also in the eﬀectiveness.
+Randomized sampling ﬁnds a small subset of rows or columns based on a pre-assigned
+probability distribution, say, by pre-multiplying M on an n × ℓ(ℓ≪n) random Gaussian
+matrix Ω, and identiﬁes a low-dimensional approximate range subspace of M, after which a
+small-size matrix approximation is also obtained. The idea of a randomized sampling procedure
+can be traced to a 2006 technical report of paper [26], and later analyzed and elaborated
+in [5, 10, 11, 25, 31, 34, 40, 42]. They are computationally eﬃcient for large-scale problems and
+adapt to the case that the numerical rank is known or can be estimated in advance. When the
+singular values have relatively fast decay rate, the algorithm is inherently stable. For singular
+values with slow decay rate, the randomized algorithm with power scheme will enhance the
+stability of the algorithm.
+In this paper we consider the randomized sampling algorithm for quaternion low-rank
+matrix approximations. The targeted randomized QSVD algorithm is expected to have lower
+computational cost and to be appropriate for choosing a small number of dominant QSVD
+triplets of large-scale quaternion matrices. It seems natural to utilize the research framework in
+[11] and generalize the real randomized SVD algorithm to quaternion matrices. Unfortunately,
+the theoretical analysis is long and arduous. It involves doses of statistics related to quaternion
+variables and several diﬃculties block us to go further.
+– What kind of quaternion distribution is appropriate for the randomized QSVD algorithm?
+The proper quaternion distribution should be invariant under unitary transformations,
+which will bring convenience for approximation error analysis of the proposed algorithm.
+However, few studies have been seen on the probability distribution of quaternion variables
+in the literature.
+– What are the distributions of the norms of the pseudoinverse Ω† of quaternion random
+Gaussian matrix Ω? Due to the non-commutative multiplication of quaternions, quater-
+nion determinant and integrals could not be deﬁned similar to the real case. Hence, real
+probability theories could not be directly used to evaluate the norms of quaternion random
+Gaussian matrices.
+– What are statistical evaluations of spectral norms of Ωand its real counterpart? The real
+counter part ΥΩ(see (2.1)) is a non-Gaussian random matrix. It is necessary to develop
+novel techniques to evaluate the expectation and probability bounds of ∥Ω∥2 and its scaled
+norms.
+Based on the investigations on key features of Ω, we will give expectation and deviation
+bounds for approximation errors of the quaternion randomized SVD algorithm. To the best
+of our knowledge, these results are new and no developments have been made on the pro-
+posed algorithm and theories about quaternion matrix approximation problems. With high
+probability, the theoretical results show that the low rank approximations can be computed
+quickly for quaternion matrices with rapidly decaying singular values. Through the numerical
+experiments, the superiority of the proposed algorithm will be displayed, in comparison with
+the quaternion Lanczos method and a quaternion version of SpFD [34].
+The paper is organized as follows. In Section 2, we review some preliminary results about
+quaternion matrices and randomized SVD for real matrices. The randomized QSVD algorithm
+and implement details for low-rank approximation problems will be studied in Section 3. In
+Section 4, the theoretical analysis is provided for the approximation errors. In Section 5, we test
+
+4
+Qiaohua Liu et al.
+the theories and numerical behaviors of the proposed algorithms through several experiments
+and show their eﬃciency over Lanczos-based partial QSVD algorithm and quaternion SpFD
+for color face recognition problems.
+Throughout this paper, we denote by Rm×n and Qm×n the spaces of all m × n real and
+quaternion matrices, respectively. The norm ∥· ∥a denotes either the spectral norm or the
+Frobenius norm. For quaternion matrix A ∈Qm×n, A† is the pseudoinverse of A, and R(A)
+represents the column range space of A. tr(·) denotes the trace of a quaternion or real square
+matrix, and etr(·)=exp(tr(·)) means the exponential operation of the trace. Let P{·} denote the
+probability of an event and E(·) denote the expectation of a random variable. For diﬀerentials
+dy1, dy2 of real random variables y1, y2, dy1∧dy2 denotes the non-commutative exterior product
+of dy1, dy2, under which dy1 ∧dy2 = −dy2 ∧dy1 and dy1 ∧dy1 = 0.
+2 Preliminaries
+In this section, we ﬁrst introduce some basic information of quaternion matrices and quaternion
+SVD. The basic randomized SVD for real matrices is described thereafter.
+2.1 Quaternion matrix and QSVD
+The quaternion skew-ﬁeld Q is an associative but non-commutative algebra of rank four over
+R, and any quaternion q ∈Q has one real part and three imaginary parts given by q =
+q0 + q1i + q2j + q3k, where q0, q1, q2, q3 ∈R, and i, j and k are three imaginary units satisfying
+i2 = j2 = k2 = ijk = −1. The conjugate and modulus of q are deﬁned by q∗= q0−q1i−q2j−q3k
+and |q| =
+p
+q2
+0 + q2
+1 + q2
+2 + q2
+3, respectively.
+For any quaternion matrices P = P0 +P1i+P2j+P3k ∈Qm×n, Q = Q0+Q1i+Q2j+Q3k ∈
+Qm×n, denote Q∗= QT
+0 −QT
+1 i −QT
+2 j −QT
+3 k and the sum of P, Q as P + Q = (P0 + Q0) +
+(P1 + Q1)i + (P2 + Q2)j + (P3 + Q3)k, and for quaternion matrix S ∈Qn×ℓ, the multiplication
+QS is given by
+(Q0S0 −Q1S1 −Q2S2 −Q3S3) + (Q0S1 + Q1S0 + Q2S3 −Q3S2)i +
+(Q0S2 −Q1S3 + Q2S0 + Q3S1)j + (Q0S3 + Q1S2 −Q2S1 + Q3S0)k.
+For Q ∈Qm×n, deﬁne the real counterpart ΥQ and the column representation Qc as
+ΥQ =
+
+
+Q0 −Q1 −Q2 −Q3
+Q1
+Q0 −Q3
+Q2
+Q2
+Q3
+Q0 −Q1
+Q3 −Q2
+Q1
+Q0
+
+,
+Qc =
+
+
+Q0
+Q1
+Q2
+Q3
+
+.
+(2.1)
+Note that ΥQ has special real algebraic structure that is preserved under the following opera-
+tions [13,21]:
+Υk1P+k2Q = k1ΥP + k2ΥQ (k1, k2 ∈R),
+ΥQ∗= Υ T
+Q,
+ΥQS = ΥQΥS.
+(2.2)
+For determinants of quaternion square matrices, a variety of deﬁnitions have emerged
+in terms of the complex and real counterparts to avoid the diﬃculties caused by the non-
+commutativity of quaternion multiplications; see [20, 30, 41] and reference therein. However
+these deﬁnitions do not coincide with the standard determinant of a real matrix. In this paper,
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+5
+we only consider the determinant of Hermitian quaternion matrices, which was deﬁned by
+Li [20] as
+det(Q) = λ1λ2 · · · λn,
+Q ∈Qn×n is Hermitian,
+(2.3)
+where λ1, . . . , λn are eigenvalues of Q, and they are proved to be real [13,20]. This deﬁnition in
+(2.3) is consistent with the determinant of a real symmetric matrix, but does not adapt to the
+quaternion non-Hermitian matrices, since a quaternion non-Hermitian matrix has signiﬁcantly
+diﬀerent properties in its left and right eigenvalues, and there is no very close relation between
+left and right eigenvalues [41]. When Q is Hermitian, the left and right eigenvalues are coincided
+to be the same real value. Throughout this paper we use det(Q) to distinguish it from the
+real determinant symbol “det”. Moreover, if Q is positive semideﬁnite so that λi ≥0, then
+the quaternion determinant det(Q) can be represented in terms of a determinant of a real
+matrix [20] as
+det(Q) = det(ΥQ)1/4 ,
+Q is Hermitian and positive semideﬁnite.
+(2.4)
+Deﬁnition 1 The spectral norm (2-norm) of a quaternion vector x = [xi] ∈Qn is ∥x∥2 :=
+pP
+i |xi|2. The 2-norm of a quaternion matrix A = [aij] ∈Qm×n are ∥A∥2 := max σ(A), where
+σ(A) is the set of singular values of A. The Frobenius norm of A is ∥A∥F =   P
+i,j
+|aij|21/2 =
+[tr(A∗A)]1/2 .
+QSVD was ﬁrstly proposed in [41, Theorem 7.2] and the partial QSVD was presented
+in [15].
+Lemma 1 (QSVD [41]) Let A ∈Qm×n. Then there exist two quaternion unitary matrices U ∈
+Qm×m and V ∈Qn×n such that U∗AV = Σ, where Σ = diag(σ1, σ2, . . . , σl) ∈Rm×n with σi ≥0
+denoting the i-th largest singular value of A and l = min(m, n).
+From [15], the optimal rank-k approximation of A is given by Ak = UkΣkV∗
+k, where Uk
+and Vk are respectively submatrices of U and V by taking their ﬁrst k columns, and Σk =
+diag(σ1, . . . , σk). Furthermore, by the real counterpart of QSVD: Υ T
+UΥAΥV = ΥΣ, where ΥU
+and ΥV are real orthogonal matrices, and ΥΣ = diag(Σ, Σ, Σ, Σ). As a result, spectral and
+Frobenius norms of a quaternion matrix can be represented by the ones of real matrices as
+below
+∥A∥2 = ∥ΥA∥2,
+∥A∥F = 1
+2∥ΥA∥F = ∥Ac∥F .
+(2.5)
+Moreover, for consistent quaternion matrices A and B, it is obvious that
+∥AB∥F ≤∥A∥2∥B∥F ,
+∥AB∥F ≤∥A∥F ∥B∥2.
+(2.6)
+2.2 Real randomized SVD and low-rank approximation
+Given a real matrix M ∈Rm×n, randomized sampling methods [11, 23, 25, 26, 39] apply the
+input matrix M onto a diverse set of random sample vectors Ω= [ω1 . . . ωℓ], expecting MΩ
+to capture the main information of the range space of M and to maintain safe approximation
+error bounds with high probability. In [11], a random Gaussian matrix Ωis used. By applying
+M to Ω, and then computing the orthogonormal basis Q of the range space of MΩvia skinny
+QR factorization in Matlab:
+Ω= randn(n, ℓ),
+[Q, ∼] =
+qr(Y,0),
+where Y = MΩ,
+
+6
+Qiaohua Liu et al.
+one can get an approximate orthogonal range space of M. Here ℓ= k + p and p is a small
+oversampling factor (say, p = 5). In this case, the matrix M is approximated by M ≈QN, where
+QQT is an orthogonal projector and the matrix N := QT M is of small size ℓ× n. The problem
+then reduces to compute the full SVD of N as N = ˆU ˆS ˆV T . Therefore M ≈QN = Q ˆU ˆS ˆV T ,
+and once a suitable rank k has been chosen based on the decay of ˆS, the low-rank SVD factors
+can be determined as
+¯Uk = Q ˆU(:,1 : k),
+¯Sk = ˆS(1 : k, 1 : k),
+and
+¯Vk = ˆV (:,1 : k)
+such that Mk ≈¯Uk ¯Sk ¯V T
+k . We refer to the above method as the randomized SVD.
+The idea is simple, but whether the projection QQT can capture the range of M well
+depends not only on the property of random matrix, but also on the singular values si of the
+matrix M we are dealing with. It was shown in [11, Theorems 10.5 and 10.6] that for p ≥2,
+the expectation of the approximation error satisﬁes
+E∥(I −QQT )M∥2 ≤
+
+1 +
+q
+k
+p−1
+
+sk+1 + e√k+p
+p
+ min(m,n)
+P
+j=k+1
+s2
+j
+1/2
+,
+E∥(I −QQT )M∥F ≤
+
+1 +
+k
+p−1
+1/2 min(m,n)
+P
+j=k+1
+s2
+j
+1/2
+.
+(2.7)
+It is observed that when the singular values of M decay very slowly, the method fails
+to work well, because the singular vectors associated with the tail singular values capture a
+signiﬁcant fraction of the range of M, and the range of Y = MΩas well. Power scheme can be
+used to enhance the eﬀect of the approximation, i.e., by applying power operation to generate
+Y = (MMT )qMΩ, where (MMT )qM has the same singular space as M, but with a faster
+decay rate in its singular values.
+3 Quaternion randomized SVD
+In this section, we develop the randomized QSVD (randsvdQ) algorithm in Algorithm 1 and
+present some measures to improve the eﬃciency of the algorithm in practical implementations.
+How to choose the random test matrix in the algorithm? Consider a simple case about
+the rank-1 approximation A1 = σ1u1v∗
+1 of the quaternion matrix A. It is easy to prove that
+{y∗, z∗} = {u1, v1} is the maximizer of
+max
+∥y∥2=∥z∥2=1 |y∗Az|, and |y∗˜z| = |y∗Az| approximates
+σ1 for y = u1 and ˜z = Av1 ∈R(A), in which the columns of A are spanned with quaternion
+coeﬃcients. In order to capture the main information of R(A) spanned by dominant left
+singular vectors of A, it is natural to use a set of n × 1 quaternion random vectors Ω=
+[ω(1) . . . ω(ℓ)] to span the columns of A, with random standard real Gaussian matrices as the
+four parts of Ω. That means the n × ℓquaternion random test matrix
+Ω= Ω0 + Ω1i + Ω2j + Ω3k,
+(3.1)
+where the entries of Ω0, Ω1, Ω2, Ω3 are random and independently drawn from the N(0, 1)-
+normal distribution. The detailed description of randomized QSVD is given in Algorithm 1.
+Algorithm 1 ((randsvdQ) Randomized QSVD with ﬁxed rank) (1) Given A ∈Qm×n, choose
+target rank k, oversampling parameter p and the power scheme parameter q. Set ℓ= k + p, and
+draw an n × ℓquaternion random test matrix Ωas in (3.1).
+(2) Construct Y0 = AΩand for i = 1,2, . . . , q, compute
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+7
+ˆYi = A∗Yi−1
+and
+Yi = A ˆYi.
+(3) Construct an m × ℓquaternion orthonormal basis Q for the range of Yq by the quaternion
+QR decomposition and generate B = Q∗A.
+(4) Compute the QSVD of a small-size matrix B: B = ˜U ˜Σ ˜V∗.
+(5) Form the rank-k approximation of A: bA(q)
+k
+= ˆUk ˆΣk ˆV∗
+k, where
+ˆUk = Q ˜U(:,1 : k),
+ˆΣk = ˜Σ(1 : k, 1 : k),
+ˆVk = ˜V(:, 1 : k).
+To implement Algorithm 1 eﬃciently, we recommend fast structure-preserving quaternion
+Householder QR [14,21] and QSVD algorithms [21,38]. Based on structure-preserving proper-
+ties (2.2) of the real counterpart of a quaternion matrix, the essence of fast structure-preserving
+algorithm is to store the four parts Q0, Q1, Q2, Q3 of a quaternion matrix Q only. When the
+left (or right) quaternion matrix transformation Tl (or Tr) is applied on Q, it is equivalent
+to implementing the real matrix multiplication ΥTlΥQ (or ΥQΥTr). In order to reduce the
+computational cost, only the ﬁrst block column (or row) of ΥQ is updated and stored. Other
+blocks in the updated matrix are not explicitly stored and formed, and they can be determined
+according to the real symmetry structure. For example, in Step 2 of Algorithm 1, the four parts
+of quaternion matrices Y0, ˆYi and Yi can be found from the computations of matrices
+(Y0)c = ΥAΩc,
+  ˆYi
+
+c = Υ T
+A(Yi−1)c,
+ Yi
+
+c = ΥA
+  ˆYi
+
+c,
+respectively, and in Step 3, the four parts of quaternion matrix B can be found from Bc =
+Υ T
+QAc. Note that the computations of (Y0)c := ΥAΩc and the quaternion matrix multiplication
+Y0 = AΩhave the same real ﬂops, while the former utilizes BLAS-3 based matrix-matrix
+operations better, and hence leads to eﬃcient computations.
+Once Yq is obtained, the fast structure-preserving quaternion Householder QR algorithm
+[21] can be applied to get the orthonormal basis matrix Q. Here the quaternion Householder
+transformation H to reduce a vector u ∈Qs into Hu = ae1 in the QR process takes the form
+H = Is −2vv∗,
+with
+v =
+u −ae1
+∥u −ae1∥2
+,
+a =
+ −u1
+|u1|∥u∥2, u1 ̸= 0,
+−∥u∥2,
+otherwise,
+where e1 is the ﬁrst column of the identity matrix Is.
+After computing B = Q∗A in Step 3, the structure-preserving QSVD [38] of B ﬁrst factor-
+izes B into a real bidiagonal matrix ˜B [21], with the help of Golub and Reinsch’s idea [9] and
+quaternion Householder transformation H0 [21]:
+H0u := diag
+
+a∗
+|a|, Is−1
+
+Hu = |a|e1 = ∥u∥2e1.
+(3.2)
+Afterwards, the standard SVD of the real matrix ˜B completes the QSVD algorithm.
+Remark 1 The basis matrix Q in the algorithm is designed to approximate the left dominant
+singular subspace of A. To get Q, the structure-preserving quaternion Householder QR has
+better numerical stability through our numerous experiments, but with more computational
+cost since all columns of a unitary matrix are computed. Structure-preserving quaternion
+modiﬁed Gram-Schmidt (QMGS) [38, Chp. 2.4.3] is an economical alternative for getting the
+thin orthonormal factor Q, but might lose the accuracy during the orthogonalization process
+when the input matrix has relatively small singular values. However, when we are dealing with
+low-rank approximation of a large input matrix, only a small number of dominant SVD triplets
+are taken into account, and QMGS sometimes is suﬃcient to get an orthonormal basis with
+expected accuracy (See Example 2 in Section 5).
+
+8
+Qiaohua Liu et al.
+Remark 2 If ℓis much smaller than n, i.e., B is a “short-and-wide” matrix, the direct appli-
+cation of QSVD on B might lead to large computational cost. Alternatively, we recommend
+implementing the QMGS of B∗as
+B∗= ˆQ1 ˆR1,
+for
+ˆQ1 ∈Qn×ℓ,
+ˆR1 ∈Qℓ×ℓ,
+(3.3)
+and then computing the QSVD of the ℓ× ℓquaternion matrix ˆR1 as ˆR1 = ˆT1 ˆS1ˆZ∗
+1, from
+which the QSVD of B is given by B = ˜U ˜Σ ˜V∗for ˜U = ˆZ1, ˜Σ = ˆS1 and ˜V = ˆQ1 ˆT1. We call the
+corresponding method the preconditioned randomized QSVD (prandsvdQ).
+Remark 3 If A is Hermitian, it can be approximated as [11, (5.13)]:
+A ≈QQ∗AQQ∗.
+(3.4)
+Then we form the matrix B = Q∗AQ, and use the structure-preserving eigQ algorithm in [13]
+to compute the eigen-decomposition of B. The corresponding algorithm is referred to as the
+randeigQ algorithm in the context.
+Note that both randeigQ and prandsvdQ reduce a large n × n problem into a smaller ℓ× ℓ
+problem. The essence of randeigQ computes the eigen-decomposition of a Hermitian matrix
+Q∗AQ, while the prandsvdQ algorithm of A computes the QSVD of ˆR1 = ˆQ∗
+1AQ. For large
+problems with ℓ≪n, the cost of the two randomized algorithms is dominated by the quaternion
+QR procedure for getting Q and ˆQ1, and prandsvdQ will cost more CPU time for the extra
+computation of ˆQ1, but might be more accurate in estimating the eigenvalues of A. That is
+because the columns of ˆQ1 span the range space R(AQ), and it is exactly R(A2Ω), while Q is
+the low-rank basis of R(AΩ), therefore R( ˆQ1) might have a better approximation of the left
+dominant singular subspace than R(Q). We will compare the numerical behaviors of the two
+algorithms in Section 5.
+For the error approximation of randeigQ, if for some parameter ε, ∥(Im −QQ∗)A∥a ≤ε,
+then by [11, (5.10)], the error of approximating A is given by ∥A −QQ∗AQQ∗∥a ≤2ε, where
+ε will be evaluated in next section.
+Remark 4 When the power scheme is not used in Algorithm 1 (i.e. q = 0), note that the input
+matrix A in Algorithm 1 is revisited. However, in some circumstance, the matrix is too large
+to be stored. Using a similar technique to [4], we develop a method that requires just one pass
+over the matrix. For the input Hermitian matrix A, according to (3.4) and B = Q∗AQ, the
+sample matrix
+Y = AΩ≈QQ∗AQQ∗Ω= QBQ∗Ω,
+and the approximation of the matrix B could be obtained by solving BQ∗Ω≈Q∗Y.
+If A is not Hermitian, analogue to [11, (5.14)-(5.15)], the single-pass algorithm can be
+constructed based on the relation A ≈QQ∗A ˜Q˜Q∗, where ˜Q is the low-rank basis of R(A∗)
+by applying A∗on a random test matrix ˜Ω. The matrix B = Q∗A ˜Q can be approximated by
+ﬁnding a minimum-residual solution to the system of relations B ˜Q∗Ω= Q∗Y, B∗Q∗˜Ω= ˜Q∗˜Y
+for Y = AΩand ˜Y = A∗˜Ω.
+4 Error analysis
+The error analysis of Algorithm 3.1 consists of two parts, including the expected values of
+approximation errors ∥(I −QQ∗)A∥a = ∥bA(q)
+k+p −A∥a in spectral or Frobenius norm, and
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+9
+the probability bounds of a large deviation as well. The argument relies on special statistical
+properties of quaternion test matrix Ω. Specially, we need to evaluate the Frobenius and
+spectral norms of Ωand Ω†.
+Our theories are established based on the framework of [11]. To start the analysis, we
+require to use the information of quaternion normal distributions, chi-squared and Wishart
+distributions. Some of results are provided in the literature, e.g. [20, 24], while some other
+information needs a rather lengthy deduction. In Section 4.1, we ﬁrst summarize the main
+results in Theorems 1-3 to show the properties of quaternion randomized algorithm. After
+investigating the statistical properties of quaternion distributions in Section 4.2, we will give
+the detailed proofs of Theorems 1-3 in Section 4.3.
+4.1 Main results
+Theorem 1 (Average Frobenius error of the randsvdQ algorithm) Let the QSVD of the m × n
+(m ≥n) quaternion matrix A be
+A = UΣV∗= U
+
+Σ1 0
+0 Σ2
+ 
+V∗
+1
+V∗
+2
+
+,
+Σ1 ∈Rk×k,
+V1 ∈Qn×k,
+where the singular value matrix Σ = diag(σ1, σ2, . . . , σn) with σ1 ≥σ2 ≥· · · ≥σn ≥0, k is the
+target rank. For oversampling parameter p ≥1, let q = 0, ℓ= k + p ≤n and the sample matrix
+Y0 = AΩ, where Ωis an n × ℓquaternion random test matrix as in (3.1), and Ω1 = V∗
+1Ωis
+assumed to have full row rank, then the expected approximation error for the rank-(k + p) matrix
+bA(0)
+k+p via the power scheme-free randsvdQ algorithm satisﬁes
+E∥bA(0)
+k+p −A∥F ≤
+
+1 +
+4k
+4p + 2
+1/2
+
+X
+j>k
+σ2
+j
+
+
+1/2
+.
+Theorem 2 (Average spectral error of the randsvdQ algorithm) With the notations in Theorem 1,
+the expected spectral norm of the approximation error in the power scheme-free algorithm satisﬁes
+E∥bA(0)
+k+p −A∥2 ≤
+
+1 + 3
+r
+k
+4p + 2
+
+σk+1 + 3e√4k + 4p + 2
+2p + 2
+ X
+j>k
+σ2
+j
+1/2
+.
+(4.1)
+If q > 0 and the power scheme is used, then for the rank-(k + p) matrix bA(q)
+k+p, the spectral error
+satisﬁes
+E∥bA(q)
+k+p −A∥2 ≤
+
+
+
+1 + 3
+r
+k
+4p + 2
+
+σ2q+1
+k+1 + 3e√4k + 4p + 2
+2p + 2
+
+X
+j>k
+σ2(2q+1)
+j
+
+
+1/2
+
+1/(2q+1)
+.
+Theorem 3 (Deviation bound for approximation errors of the randsvdQ algorithm) With the no-
+tations in Theorem 1, we have the following estimate for the Frobenius error
+∥bA(0)
+k+p −A∥F ≤
+
+1 + t
+r
+3k
+p + 1
+ X
+j>k
+σ2
+j
+1/2
++ ute√4k + 4p + 2
+4p + 4
+σk+1,
+(4.2)
+
+10
+Qiaohua Liu et al.
+except with the probability 2t−4p + e−u2/2. For the spectral error,
+∥bA(0)
+k+p −A∥2 ≤
+
+1 + 3t
+2
+r
+3k
+p + 1 + utηk,p
+
+σk+1 + 3tηk,p
+
+X
+j>k
+σ2
+j
+
+
+1/2
+,
+(4.3)
+except with the probability 2t−4p + e−u2/2, in which ηk,p = e√4k+4p+2
+4p+4
+.
+Theorems 1-3 reveal that the performance of the randomized algorithm depends strongly on
+the properties of singular values of A. When the singular values of A have fast decay rate, it is
+much easier to identify a good low-rank basis Q and provide acceptable error bounds. However,
+when the singular values of A decay slowly, the constructed basis Q may have low accuracy,
+and the power scheme will increase the decay rate of the singular values of C = (AA∗)qA, and
+generate a better low-rank basis matrix.
+4.2 Statistical analysis of quaternion random test matrix
+In this subsection, we aim to investigate Frobenius and spectral norms of the quaternion test
+matrix G and its pseudoinverse, where
+G = G0 + G1i + G2j + G3k ∈Qm×n,
+m ≤n,
+(4.4)
+and G0, . . . , G3 are standard Gaussian matrices whose entries are random and independently
+drawn from the normal distribution N(0, 1). Note that the norms of ∥G†∥a for a = 2, F are
+closely related to the measure of  GG∗−1, where the matrix GG∗is named as a quaternion
+Wishart matrix. As a result, we ﬁrst recall some well known results about the quaternion
+normal distribution and Wishart distribution.
+Deﬁnition 2 ([35]) Let z = z0 + z1i + z2j + z3k be a random m × 1 quaternion vector with
+zero mean. Deﬁne the quaternion covariance matrix Σm = cov(z, z) = E(zz∗) as
+Σm = E[(z0 + z1i + z2j + z3k)(zT
+0 −zT
+1 i −zT
+2 j −zT
+3 k)]
+= Σ00 + Σ11 + Σ22 + Σ33 + (−Σ01 + Σ10 −Σ23 + Σ32)i
++(−Σ02 + Σ13 + Σ20 −Σ31)j + (−Σ03 + Σ30 −Σ12 + Σ21)k,
+in which Σij = cov(zi, zj) ∈Rm×m is the real covariance of random vectors zi and zj.
+In particular, when the four parts z0, z1, z2, z3 of the quaternion vector z are real inde-
+pendent random vectors drawn from the normal distribution N(0, Im), then the quaternion
+random vector z follows the quaternion normal distribution N(0,4Im) law, with the possibility
+density function (pdf) [35]: pdf(z) = (2π)−2metr(−1
+2z∗z). We remark that when z ∼N(0,4Im),
+∥z∥2
+2 represents the sum of 4m independent real variables and each variable follows N(0, 1) law.
+Thus by the concept of real chi-squared distribution, ∥z∥2
+2 follows real chi-squared distribution
+χ2
+4m with 4m degrees of freedom.
+The following lemma indicates that the quaternion normal distribution N(0, 4Im) is uni-
+tarily invariant.
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+11
+Lemma 2 ([20]) For an m × 1 quaternion random vector z ∼N(0,4Im), let y = Bz + u, where
+B is an m-by-m nonsingular quaternion matrix, and u is an m-by-1 quaternion vector, then y ∼
+N(u, 4BB∗).
+The rigorous deﬁnition of the Wishart distribution is given as follows.
+Deﬁnition 3 ([35,36]) Let Z = [z1 z2 . . . zn], where z1, . . . , zn are m×1 random independent
+quaternion vectors drawn from the same distribution, i.e., zi ∼N(0, Σ)(1 ≤i ≤n). Then
+A = ZZ∗∈Qm×m is said to have the quaternion Wishart distribution with n degrees of
+freedom and covariance matrix Σ. We will write that A ∼Wm(n, Σ).
+Note that the matrix Σ could be quaternion or real. In this paper, we are only interested
+in the real case and use the notation Σ for a distinguishment. The matrix A is singular
+when n < m, and the pdf of A doesn’t exist in this case. When m ≤n, the pdf [20, 36] (See
+also [24, Theorem 4.2.1]) of A exists. Before giving the pdf, we ﬁrst recall the deﬁnitions of
+exterior products, which are vital for the volume element of a multivariate density function.
+Deﬁnition 4 ([20, 29]) For any m × n real matrix X, let dX = [dxij] denote the matrix of
+diﬀerentials, deﬁne the mn-exterior product {dX} of the mn distinct and free elements in X
+as {dX} ≡∧
+i,j dxij. For any m × n quaternion matrix X = X0 + X1i + X2j + X3k, denote
+dX = dX0 + dX1 i + dX2 j + dX3 k, and deﬁne {dX} = {dX0} ∧{dX1} ∧{dX2} ∧{dX3}. If
+X is Hermitian, then X0 is symmetric, while X2, X3, X4 are skew-symmetric, and {dX} takes
+the form
+{dX} =
+ m∧
+i≤j d(X0)ij
+
+∧
+ m∧
+i<j d(X1)ij
+
+∧
+ m∧
+i<j d(X2)ij
+
+∧
+ m∧
+i<j d(X3)ij
+
+.
+In the deﬁnition, the exterior product of diﬀerential form in diﬀerent order might diﬀer
+by a factor ±1. Since we are integrating exterior diﬀerential forms representing probability
+density functions, we ignore the sign of exterior diﬀerential forms for the sake of convenience.
+Based on the notation for the exterior product, the pdf of the quaternion Wishart matrix is
+given as follows.
+Lemma 3 ([20,24]) Let the quaternion Wishart matrix A ∼Wm(n, Σ), then the pdf of A satisﬁes
+pdf(A){dA} = βm,n [det(Σ)]−2n [det(A)]2(n−m)+1 etr(−2Σ−1A){dA},
+(4.5)
+in which {dA} represents the volume element of this multivariate density function, and
+βm,n = 22mnπ−m(m−1)
+ m
+Y
+i=1
+Γ 2(n −i + 1)
+!−1
+,
+with the Gamma function Γ(·) deﬁned by Γ(x) =
+Z ∞
+0
+tx−1e−tdt(x > 0).
+The properties of the quaternion Wishart matrix are given as follows.
+Theorem 4 Given A ∼Wm(n, Σ).
+(i) For M ∈Qk×m with rank(M) = k, we have MAM∗∼Wk(n, MΣM∗).
+(ii) Partition
+A =
+
+A11 A12
+A∗
+12 A22
+
+,
+Σ =
+
+Σ11 Σ12
+Σ21 Σ22
+
+,
+in which A11 ∈Qk×k, Σ11 ∈Rk×k. Let A11,2 = A11 −A12A−1
+22 A∗
+12, Σ11,2 = Σ11 −Σ12Σ−1
+22 Σ21,
+then
+A11,2 ∼Wk(n −m + k, Σ11,2).
+
+12
+Qiaohua Liu et al.
+Proof (i) Note that A =
+nP
+i=1
+ziz∗
+i with zi ∼N(0, Σ). It follows that ˆzi := 2Σ−1/2zi ∼N(0,4Im)
+from the deﬁnition of quaternion covariance. By applying Lemma 2, Mzi = 1
+2(MΣ1/2ˆzi) ∼
+N(0, MΣM∗), and hence
+MAM∗=
+n
+X
+i=1
+Mzi(Mzi)∗∼Wk(n, MΣM∗).
+(ii) Let Z =
+
+Ik
+0
+−A−1
+22 A∗
+12 Im−k
+
+, and change the variables of A into A11,2, B12 = A12 and
+B22 = A22 through the following transformation
+AZ :=
+
+A11 A12
+A∗
+12 A22
+ 
+Ik
+0
+−A−1
+22 A∗
+12 Im−k
+
+=
+
+A11,2 B12
+0
+B22
+
+.
+(4.6)
+The quaternion matrix Z is not Hermitian, and det(Z) is not well deﬁned. In order to
+express det(A) in terms of det(A11,2) and det(B22), we consider the transformation Z∗AZ to
+get Z∗AZ = diag(A11,2, B22) =: F, where A11,2 and B22 are Hermitian and positive deﬁnite
+matrices.
+Take the real counter parts on both sides of Z∗AZ = F, the properties in (2.2) gives
+Υ T
+Z ΥAΥZ = ΥF and the standard determinant of real matrix ΥF satisﬁes
+det(ΥF) = (det(ΥZ))2 det(ΥA),
+(4.7)
+where by writing the (2,1)-subblock of Z as −A−1
+22 A∗
+12 = ¯A0 + ¯A1i + ¯A2j + ¯
+A3k, and using the
+identity matrices in block columns 2,4,6,8 of ΥZ:
+ΥZ =
+
+
+I 0
+0
+0
+0
+0
+0
+0
+¯A0 I −¯A1 0 −¯A2 0 −¯A3 0
+0 0
+I
+0
+0
+0
+0
+0
+¯A1 0
+¯A0 I −¯A3 0
+¯A2 0
+0 0
+0
+0
+I
+0
+0
+0
+¯A2 0
+¯A3 0
+¯A0 I −¯A1 0
+0 0
+0
+0
+0
+0
+I
+0
+¯A3 0 −¯A2 0
+¯A1 0
+¯A0 I
+
+
+to eliminate the subblocks ± ¯Ai to zero, we get det(ΥZ) = det(I4m) = 1. Thus in (4.7),
+det(ΥA) = det(ΥF). The applications of (2.4) and the deﬁnition (2.3) to this equality give
+det(A) = det(F) = det(A11,2)det(B22).
+(4.8)
+For the real matrix Σ, it is obvious that
+det(Σ) = det(Σ22) det(Σ11,2).
+(4.9)
+By putting C = Σ−1 =
+
+C11 C12
+C21 C22
+
+, we conclude that C11 = Σ−1
+11,2 and
+tr(Σ−1A) = tr
+
+C11 C12
+C21 C22
+ 
+A11,2 + B12B−1
+22 B∗
+12 B12
+B∗
+12
+B22
+
+= tr(C11A11,2) + tr(∆1) + tr(∆2) = tr(Σ−1
+11,2A11,2) + tr(∆1) + tr(∆2),
+(4.10)
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+13
+where ∆1 = Σ−1
+11,2B12B−1
+22 B∗
+12 + C12B∗
+12, ∆2 = C21B12 + C22B22.
+Note that the diﬀerential of A12A−1
+22 A∗
+12 satisﬁes
+d(A12A−1
+22 A∗
+12) = (dA12)A−1
+22 A∗
+12 + A12(dA−1
+22 )A∗
+12 + A12A−1
+22 (dA∗
+12),
+in which the diﬀerential d(A−1
+22 ) can be derived by diﬀerentiating A−1
+22 A22 = Im−k as
+(dA−1
+22 )A22 + A−1
+22 (dA22) = 0,
+or equivalently,
+dA−1
+22 = −A−1
+22 (dA22)A−1
+22 .
+Since the exterior products of repeated diﬀerentials are zero, we then get {d(A12A−1
+22 A∗
+12)} ∧
+{dA12} ∧{dA22} = 0. Thus
+{dA} = {dA11} ∧{dA12} ∧{dA22} = {d(A11 −A12A−1
+22 A∗
+12)} ∧{dA12} ∧{dA22}
+= {dA11,2} ∧{dB12} ∧{dB22}.
+(4.11)
+Substituting (4.8)-(4.11) into pdf(A){dA} in Lemma 3, we obtain
+pdf(A){dA} = βm,n
+
+[det(Σ11,2)]−2n [det(A11,2)]2(n−m)+1 etr(−2Σ−1
+11,2A11,2)
+
+×
+
+[det(Σ22)]−2n [det(B22)]2(n−m)+1 etr(−2∆1)etr(−2∆2)
+
+{dA11,2} ∧{dB12} ∧{dB22},
+(4.12)
+from which we see that A11,2 is independent of B12, B22, because of the density function
+factors. Notice that A11,2 is k × k, and [det(A11,2)]2(n−m)+1 = [det(A11,2)]2((n−m+k)−k)+1 .
+Moreover, the terms in (4.12) including A11,2 have close relations to the pdf of a Wishart
+matrix, therefore we can ﬁnd the pdf of A11,2 from pdf(A) so that pdf(A11,2) takes the form
+βk,n−m+k[det(Σ11,2)]−2(n−m+k) [det(A11,2)]2((n−m+k)−k)+1 etr(−2Σ−1
+11,2A11,2),
+which means A11,2 ∼Wk(n −m + k, Σ11,2). The remaining terms in (4.12) correspond to the
+joint pdf of B12, B22, whose distributions will not be considered here.
+Theorem 4 includes the properties of a real Wishart matrix [29, Theorems 3.2.5 and 3.2.10]
+as special cases. With Theorem 4, the expectation of ∥G†∥2
+F is deduced in the following theo-
+rem.
+Theorem 5 Let the quaternion random matrix G ∈Qm×n(m ≤n) be given by (4.4). Then the
+expectation of ∥G†∥2
+F satisﬁes
+E∥G†∥2
+F =
+m
+4(n −m) + 2.
+Proof It is obvious that each column in G follows N(0, 4Im) and
+E∥G†∥2
+F = E
+
+tr
+h
+(GG∗)−1i
+= E
+m
+X
+i=1
+(eT
+i A−1ei) =
+m
+X
+i=1
+E(eT
+i A−1ei),
+(4.13)
+where ei is the i-th column of the identity matrix Im, and A = GG∗∼Wm(n, 4Im).
+For each ﬁxed i, let Π1,i be the permutation matrix obtained by interchanging columns
+1, i in the m × m identity matrix, and denote C = ΠT
+1,iAΠ1,i =
+
+C11 C12
+C21 C22
+
+with C11 ∈Q1×1,
+then C ∼Wm(n, 4Im) by Theorem 4(i). Moreover,
+
+eT
+i A−1ei
+−1
+=
+
+eT
+1 C−1e1
+−1
+= C11 −
+C12C−1
+22 C21.
+
+14
+Qiaohua Liu et al.
+According to Theorem 4(ii),
+
+eT
+i A−1ei
+−1
+∼W1(n−m+1, 4), indicating that there exists
+an (n −m + 1)-dimensional quaternion column vector z ∼N(0,4In−m+1) satisfying
+
+eT
+i A−1ei
+−1
+= ∥z∥2
+2 ∼χ2
+4(n−m+1).
+(4.14)
+By the expectation of the inverted chi-squared distribution in [11, Proposition A.8], we know
+that
+E
+
+eT
+i A−1ei
+
+= E
+1
+χ2
+4(n−m+1)
+=
+1
+4(n −m) + 2.
+The assertion in the theorem then follows.
+The theorem below provides a bound on the probability of a large deviation above the
+mean.
+Theorem 6 Let the quaternion random matrix G ∈Qm×n with n−m ≥1 be given by (4.4). Then
+for each t ≥1,
+P
+
+∥G†∥2
+F >
+3m
+4(n −m + 1)t
+
+≤t−2(n−m).
+(4.15)
+Proof According to (4.13)–(4.14), Z = ∥G†∥2
+F =
+m
+P
+i=1
+Xi with Xi = eT
+i A−1ei and X−1
+i
+∼
+χ2
+4(n−m+1). Let q = 2(n −m) and when n −m ≥1, the result in [11, Lemma A.9] ensures
+that ∥Xi∥Lq := [E(|Xi|q)]1/q <
+3
+4(n −m + 1). Using the triangle inequality for the Lq-norm,
+we obtain
+∥Z∥Lq ≤
+m
+X
+i=1
+∥Xi∥Lq <
+3m
+4(n −m + 1) =: γ.
+With Markov’s inequality, P {Z ≥γt} = P {Zq ≥γqtq} ≤E(Zq)
+γqtq
+< t−q = t−2(n−m), leading to
+the desired result.
+We now turn to the estimate of ∥G†∥2. Note that ∥G†∥2 = (λmin(A))−1/2, where λmin(A)
+denotes the smallest eigenvalue of A. We therefore need to study the pdf of the smallest
+eigenvalue of A, based on the following lemma and a frame work in [3] for discussing the
+eigenvalues of a real Wishart matrix.
+Lemma 4 ([20]) Let the quaternion Wishart matrix A ∼Wm(n, Im), then the pdf for the eigen-
+values λ1 ≥λ2 ≥· · · ≥λm > 0 of A is given by
+f(λ1, λ2, · · · , λm) = Km,n
+m
+Y
+i=1
+λ2(n−m)+1
+i
+m
+Y
+i<j
+(λi −λj)4 e−2 Pm
+i=1 λi,
+where K−1
+m,n = 2−2mnπ2m m
+Q
+i=1
+Γ
+
+2(n −i + 1)
+
+Γ
+
+2(m −i + 1)
+
+.
+The following lemma gives the lower and upper bounds of the pdf of λmin(A).
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+15
+Lemma 5 Let the quaternion Wishart matrix A ∼Wm(n, Im), and fλmin(λ) denote the pdf of
+the smallest eigenvalue of quaternion Wishart matrix A, then fλmin(λ) satisﬁes
+Lm,ne−2mλλ2(n−m)+1 ≤fλmin(λ) ≤Lm,ne−2λλ2(n−m)+1,
+(4.16)
+where
+Lm,n =
+22(n−m+1)π−2Γ(2n + 2)
+Γ(2n −2m + 4)Γ(2n −2m + 2)Γ(2m).
+(4.17)
+Proof For λ ≥0, let Rm−1(λ) = {(λ1, λ2, . . . , λm−1) : λ1 ≥· · · ≥λm−1 ≥λ} ⊆R1×(m−1). From
+the pdf of the eigenvalues of A in Lemma 4, we have
+fλmin(λ) =
+Z
+Rm−1(λ)
+f(λ1, λ2, · · · , λm−1, λ)dλ1dλ2 · · · dλm−1
+= Km,ne−2λλ2(n−m)+1
+Z
+Rm−1(λ)
+e−2 Pm−1
+i=1
+λi
+m−1
+Y
+i=1
+λ2(n−m)+1
+i
+m−1
+Y
+i=1
+(λi −λ)4
+m−2
+Y
+i=1
+m−1
+Y
+j=i+1
+(λi −λj)4dλ1dλ2 · · · dλm−1.
+By the inequality (λi −λ)4 ≤λ4
+i , we ﬁnd that
+fλmin(λ) ≤Km,ne−2λλ2(n−m)+1
+Z
+Rm−1(0)
+e−2 Pm−1
+i=1
+λi
+m−1
+Y
+i=1
+λ2(n−m)+5
+i
+m−2
+Y
+i=1
+m−1
+Y
+j=i+1
+(λi −λj)4dλ1dλ2 · · · dλm−1
+=: Km,ne−2λλ2(n−m)+1Cm,n.
+For the lower bound, set µi = λi −λ(i = 1, . . . , m −1), then µ1 ≥µ2 ≥· · · ≥µm−1 ≥0, and
+fλmin(λ) = Km,ne−2mλλ2(n−m)+1
+Z
+Rm−1(0)
+e−2 Pm−1
+i=1
+µi
+m−1
+Y
+i=1
+(µi + λ)2(n−m)+1
+m−1
+Y
+i=1
+µ4
+i
+m−2
+Y
+i=1
+m−1
+Y
+j=i+1
+(µi −µj)4dµ1dµ2 · · · dµm−1
+≥Km,ne−2mλλ2(n−m)+1
+Z
+Rm−1(0)
+e−2 Pm−1
+i=1
+µi
+m−1
+Y
+i=1
+µ2(n−m)+5
+i
+m−2
+Y
+i=1
+m−1
+Y
+j=i+1
+(µi −µj)4dµ1dµ2 · · · dµm−1
+= Km,ne−2mλλ2(n−m)+1Cm,n.
+Note that f(λ1, . . . , λm) is a probability density function, therefore by the expression of
+Km,n in Lemma 4,
+Z
+Rm(0)
+e−2 Pm
+i=1 λi
+m
+Y
+i=1
+λ2(n−m)+1
+i
+m−1
+Y
+i=1
+m
+Y
+j=i+1
+(λi −λj)4dλ1dλ2 · · · dλm = K−1
+m,n.
+It then follows that Cm,n = K−1
+m−1,n+1 and hence the inequality (4.16) holds, where Lm,n =
+Km,n
+Km−1,n+1 and it takes the form (4.17) by Theorem 4(i). The assertion in the lemma then
+follows.
+
+16
+Qiaohua Liu et al.
+Theorem 7 Let G ∈Qm×n be given by (4.4). Then
+P
+∥G†∥2 >
+e
+√4n + 2
+4(n −m + 1)t	
+≤
+π−3
+4(n −m + 1)(2n −2m + 3)t−4(n−m+1),
+(4.18)
+and E∥G†∥2 ≤
+e√4n+2
+2n−2m+2.
+Proof Note that the columns of G follow N(0, 4Im) law, therefore according to Theorem 4(i),
+A = 1
+4GG∗∼Wm(n, Im).
+Assume that λmin is the smallest eigenvalue of A. By Lemma 5, we know that
+P
+λmin < γ	 =
+Z γ
+0
+fλmin(t)dt ≤Lm,n
+Z γ
+0
+t2(n−m)+1dt
+≤22(n−m+1)π−2(2n + 1)2(n−m+1)Γ(2m)
+Γ(2n −2m + 4)Γ(2n −2m + 2)Γ(2m)
+γ2n−2m+2
+2n −2m + 2
+=
+π−2(4n + 2)2n−2m+2
+(2n −2m + 3)[Γ(2n −2m + 3)]2 γ2n−2m+2
+≈
+π−3
+4(n −m + 1)(2n −2m + 3)
+h e
+√4n + 2
+2n −2m + 2
+i2(2n−2m+2)
+γ2n−2m+2
+=: Cγ2n−2m+2,
+where we have used the Stirling’s approximation formula Γ(n + 1) = n! ≈
+√2πn  n
+e
+n. Thus
+P
+∥G†∥2 > τ	 = P
+λmin < 1
+4τ −2	
+≤¯Cτ −2(2n−2m+2),
+for ¯C = C/42n−2m+2. The estimate in (4.18) is derived.
+To estimate E∥G†∥2, set ℓ= 2(n −m + 1), then for any a ≥0,
+E∥G†∥2 =
+Z +∞
+0
+P
+∥G†∥2 > τ	dτ ≤a +
+Z +∞
+a
+P
+∥G†∥2 > τ	dτ ≤a +
+¯Ca1−2ℓ
+2ℓ−1 ,
+where the right-hand side is minimized for a = ¯C1/(2ℓ) = 2−1C1/(2ℓ). Then
+E∥G†∥2 ≤(1 +
+1
+2ℓ−1) ¯C1/(2ℓ) ≤2 ¯C1/(2ℓ) ≤
+e
+√4n + 2
+2n −2m + 2.
+The assertion for E∥G†∥2 then follows.
+The spectral or Frobenius norm of G is also vital for our error analysis. For the real
+Gaussian matrix ˜G, the expectation of spectral or Frobenius norm of the scaled matrix ˜S ˜G ˜T
+has been proven to satisfy the following sharp bounds [11, Proposition 10.1]:
+E∥˜S ˜G ˜T∥2
+F = ∥˜S∥2
+F ∥˜T∥2
+F ,
+E∥˜S ˜G ˜T∥2 ≤∥˜S∥2∥˜T ∥F + ∥˜S∥F ∥˜T ∥2.
+(4.19)
+Based on above results, we present the estimates for the norms of quaternion scaled matrix
+SGT.
+Lemma 6 Let G ∈Qm×n be given by (4.4), and S ∈Ql×m, T ∈Qn×r be any two ﬁxed quaternion
+matrices, then
+E∥SGT∥2
+F = 4∥S∥2
+F ∥T∥2
+F ,
+(4.20)
+E∥SGT∥2 ≤3(∥S∥2∥T∥F + ∥S∥F ∥T∥2).
+(4.21)
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+17
+Proof Note that the distribution of G and Frobenius norm of a matrix are both invariant under
+unitary transformations. As a result, without loss of generality, we assume that S, T are real
+diagonal matrices whose diagonal entries are exactly their singular values. Write S = S, T = T,
+it follows that
+E∥SGT∥2
+F = E
+X
+k,j
+(|skkgkjtjj|)2 =
+X
+k,j
+|skk|2|tjj|2E|gkj|2 = 4∥S∥2
+F ∥T∥2
+F ,
+where E|gkj|2 = 4 because the quaternion number gkj follows N(0,4) law.
+For the spectral norm, by the real counter part of SGT, we know that ∥SGT∥2 = ∥ΥSΥGΥT ∥2
+in which ΥG has dependent subblocks, and hence it is not a real Gaussian matrix. In order to
+apply the result in (4.19) to the quaternion spectral norm estimation, write ΥG in terms of its
+ﬁrst block column Gc:
+ΥG = [J0Gc
+J1Gc
+J2Gc
+J3Gc],
+(4.22)
+where Gc is a real Gaussian matrix, J0 = I4m and
+J1 =
+
+
+−eT
+2
+eT
+1
+eT
+4
+−eT
+3
+
+⊗Im,
+J2 =
+
+
+−eT
+3
+−eT
+4
+eT
+1
+eT
+2
+
+⊗Im,
+J3 =
+
+
+−eT
+4
+eT
+3
+−eT
+2
+eT
+1
+
+⊗Im,
+(4.23)
+and ei is the i-th column of the 4 × 4 identity matrix.
+Note that for four arbitrary real matrices M0, . . . , M3 with the same rows,
+∥[M0 M1 M2 M3]∥2 = ∥
+3
+X
+i=0
+MiM∗
+i ∥1/2
+2
+≤2 max
+0≤i≤3 ∥Mi∥2.
+Using this inequality to evaluate the spectral norm of SGT, we obtain
+∥SGT∥2 = ∥ΥS[J0GcT
+J1GcT
+J2GcT
+J3GcT]∥2 ≤2 max
+0≤k≤3 ∥ΥSJkGcT ∥2 = 2∥ΥSGcT ∥2,
+where we have used the facts JT
+k ΥSJk = ΥS and ∥ΥSJkGcT ∥2 = ∥ΥSGcT ∥2.
+Therefore by (4.19) and (2.5), we have
+E∥SGT∥2 ≤2 (∥ΥS∥2∥T ∥F + ∥ΥS∥F ∥T ∥2) = 2∥S∥2∥T∥F + 4∥S∥F ∥T∥2.
+By applying above estimates to evaluate E∥SGT∥2 = E∥T∗G∗S∗∥2, we obtain E∥SGT∥2 ≤
+2∥S∥F ∥T∥2+4∥S∥2∥T∥F . Take the average of the two upper bounds of E∥SGT∥2, the assertion
+in (4.21) follows.
+4.3 Proofs of Theorems 1-3
+Throughout this subsection, ∥· ∥a denotes either the spectral norm or Frobenius norm.
+Proof of Theorem 1. Let Q be the orthonormal basis for the range of the sample matrix
+Y0 = AΩ. Set Ωi = V∗
+i Ωfor i = 1, 2, then by a similar deduction to [11, Theorem 9.1], the
+following inequality
+∥bA(0)
+k+p −A∥2
+a = ∥(Im −QQ∗)A∥2
+a ≤∥Σ2∥2
+a + ∥Σ2Ω2Ω†
+1∥2
+a ≤
+
+∥Σ2∥a + ∥Σ2Ω2Ω†
+1∥a
+2
+, (4.24)
+
+18
+Qiaohua Liu et al.
+also holds for the quaternion case, in which V∗Ωfollows the N(0,4In) law. By Lemma 2,
+Ω1, Ω2 are disjoint submatrices of V∗Ωwith the k × (k + p) matrix Ω1 of full row rank with
+probability one.
+By Jensen’s inequality to (4.24), we know that
+E∥bA(0)
+k+p −A∥F ≤
+
+E∥bA(0)
+k+p −A∥2
+F
+1/2
+≤
+
+∥Σ2∥2
+F + E∥Σ2Ω2Ω†
+1∥2
+F
+1/2
+,
+where by conditioning on the value of Ω1 and applying (4.20) to the scaled matrix Σ2Ω2Ω†
+1,
+E∥Σ2Ω2Ω†
+1∥2
+F = E
+
+E
+h
+∥Σ2Ω2Ω†
+1∥2
+F | Ω1
+i
+= 4∥Σ2∥2
+F E∥Ω†
+1∥2
+F ,
+which is exactly
+4k
+4p + 2∥Σ2∥2
+F according to Theorem 5. The assertion in Theorem 1 then
+follows.
+□
+Proof of Theorem 2. From (4.24), it is obvious that E∥bA(0)
+k+p−A∥2 ≤∥Σ2∥2+E∥Σ2Ω2Ω†
+1∥2,
+where by conditioning on the value of Ω1 and applying (4.21) to the scaled matrix Σ2Ω2Ω†
+1,
+E∥Σ2Ω2Ω†
+1∥2 = E
+
+E
+h
+∥Σ2Ω2Ω†
+1∥2|Ω1
+i
+≤3E(∥Σ2∥2∥Ω†
+1∥F + ∥Σ2∥F ∥Ω†
+1∥2)
+≤3∥Σ2∥2
+
+E∥Ω†
+1∥2
+F
+1/2
++ 3∥Σ2∥F E∥Ω†
+1∥2.
+The estimate for the expectation of the error then follows from Theorems 5 and 7.
+For the power scheme, let ˜Q be the orthonormal basis for the range of Yq = CΩ=
+(AA∗)q AΩ= UΣ2q+1V∗. By Jensen’s inequality and a similar deduction to [11, Theorem
+9.2], we know that
+E∥bA(q)
+k+p −A∥2 = E∥(Im −˜Q ˜Q∗)A∥2 ≤
+
+E∥(Im −˜Q ˜QT )C∥2
+1/(2q+1)
+,
+where σ2q+1
+1
+, . . . , σ2q+1
+n
+are the singular values of C. The assertion for the power scheme comes
+true by invoking the result in (4.1).
+□
+Remark 5 By using the relation P
+j>k
+σ2q+1
+j
+≤(min(m, n) −k)σ2q+1
+k+1 , the spectral error in Theo-
+rem 2 is bounded by E∥bA(q)
+k+p−A∥2 ≤σk+1
+h
+1 + 3
+q
+k
+4p+2 + 3e√4k+4p+2
+2p+2
+p
+min(m, n) −k
+i1/(2q+1)
+.
+The power scheme drives the extra factor in the error to one exponentially fast through in-
+creasing the exponent q, and by the time q ∼log(min(m, n)), E∥bA(q)
+k+p −A∥2 ∼σk+1.
+The analysis of deviation bounds for approximation errors in Theorem 3 relies on the
+following well-known concentration result [11, Proposition 10.3] for functions of a real Gaussian
+matrix.
+Lemma 7 ([11]) Suppose that h(·) is a Lipschitz function on real matrices: |h(X) −h(Y )| ≤
+L∥X −Y ∥F for all X, Y ∈Rs×t. Then for an s × t standard real Gaussian matrix G, P{h(G) ≥
+Eh(G) + Lu} ≤e−u2/2.
+Proof of Theorem 3. For t ≥1, deﬁne the parameterized event on which the spectral and
+Frobenius norms of Ω1 are both controlled:
+Et =
+
+Ω1 : ∥Ω†
+1∥2 ≤e√4k + 4p + 2
+4(p + 1)
+· t and ∥Ω†
+1∥F ≤
+r
+3k
+4p + 4 · t
+
+.
+(4.25)
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+19
+By Theorems 6 and 7, the probability of the complement of this event satisﬁes a simple bound
+P(Ec
+t ) ≤t−(4p+4) + t−4p ≤2t−4p,
+according to the estimates in (4.15)-(4.18).
+Set ¯h(X) = ∥Σ2XΩ†
+1∥F , in which the real counter part of an (n −k) × k quaternion matrix
+X can be represented on the basis of Xc as ΥX = [J0Xc J1Xc J2Xc J3Xc] for J = [J0 J1 J2 J3],
+and Jk ∈R4(n−k)×4(n−k) has similar structure to the one in (4.23).
+Owing to (2.5)-(2.6), ¯h(X) = 1
+2∥ΥΣ2ΥXΥΩ†
+1∥F and we could write ¯h(X) as a function of Xc
+with h(Xc) := ¯h(X). Notice that h(Xc) is a Lipschitz function on real matrices:
+|h(Xc) −h(Yc)| =
+∥Σ2XΩ†
+1∥F −∥Σ2YΩ†
+1∥F
+ ≤∥Σ2(X −Y)Ω†
+1∥F
+≤∥Σ2∥2∥Ω†
+1∥2∥X −Y∥F = ∥Σ2∥2∥Ω†
+1∥2∥Xc −Yc∥F ,
+(4.26)
+with a Lipschitz constant L ≤∥Σ2∥2∥Ω†
+1∥2. With Jensen’s inequality and Lemma 6, we get
+E[¯h(Ω2) | Ω1] ≤
+
+E[ ¯h(Ω2)2 | Ω1]
+1/2
+= 2∥Σ2∥F ∥Ω†
+1∥F ,
+where ¯h(Ω2) = h (Ω2)c
+, and (Ω2)c is a real Gaussian matrix. Applying Lemma 7, condition-
+ally to the random variable ¯h(Ω2) = ∥Σ2Ω2Ω†
+1∥F gives
+Pu,t := P
+n
+∥Σ2Ω2Ω†
+1∥F > 2∥Σ2∥F ∥Ω†
+1∥F + ∥Σ2∥2∥Ω†
+1∥2u | Et
+o
+≤e−u2/2.
+In (4.25), consider the upper bounds associated with the event Et and substitute them into
+the above inequality, then we can get
+P
+
+∥Σ2Ω2Ω†
+1∥F >
+r
+3k
+p + 1∥Σ2∥F t + e√4k + 4p + 2
+4p + 4
+∥Σ2∥2ut | Et
+
+≤Pu,t ≤e−u2/2.
+Using P(Ec
+t ) ≤2t−4p to remove the conditioning, we obtain
+P
+
+
+∥Σ2Ω2Ω†
+1∥F >
+r
+3k
+p + 1
+ X
+j>k
+σ2
+j
+1/2
+t + ute√4k + 4p + 2
+4p + 4
+σk+1
+
+
+≤2t−4p + e−u2/2.
+In terms of (4.24), ∥bA(0)
+k+p −A∥F ≤∥Σ2∥F + ∥Σ2Ω2Ω†
+1∥F , the desired probability bound in
+(4.2) follows.
+For the deviation bound of the spectral error, set ˜h(X) = ∥Σ2XΩ†
+1∥2, and view ˜h(X) as a
+function of Xc, i.e. ˇh(Xc) = ˜h(X), then
+|ˇh(Xc) −ˇh(Yc)| ≤∥Σ2∥2∥X −Y∥2∥Ω†
+1∥2 ≤∥Σ2∥2∥Ω†
+1∥2∥X −Y∥F = ∥Σ2∥2∥Ω†
+1∥2∥Xc −Yc∥F ,
+from which we know that ˇh(·) is also a Lipschitz function with the Lipschitz constant L ≤
+∥Σ2∥2∥Ω†
+1∥2. Using the upper bound for the expectation of ˜h(Ω):
+E[˜h(Ω2) | Ω1] ≤3
+
+∥Σ2∥2∥Ω†
+1∥F + ∥Σ2∥F ∥Ω†
+1∥2
+
+,
+and the concentration result in Lemma 7, it follows that
+P
+n
+∥Σ2Ω2Ω†
+1∥2 > 3(∥Σ2∥2∥Ω†
+1∥F + ∥Σ2∥F ∥Ω†
+1∥2) + ∥Σ2∥2∥Ω†
+1∥2u | Et
+o
+≤e−u2/2.
+The bound in (4.3) could be derived from (4.24)-(4.25) with a similar technique.
+□
+
+20
+Qiaohua Liu et al.
+Corollary 1 (Simple deviation bound for the spectral error of power scheme-free algorithm) With
+the notations in Theorem 1, we have the simple upper bound
+∥bA(0)
+k+p −A∥2 ≤
+
+1 + 18
+r
+1 +
+k
+p + 1
+
+σk+1 + 6√4k + 4p + 2
+p + 1
+
+X
+j>k
+σ2
+j
+
+
+1/2
+,
+(4.27)
+except with the probability 3e−4p.
+Proof Taking u = 2√2p, t = e in Theorem 3 leads to
+∥bA(0)
+k+p −A∥2 ≤
+
+1 + 3e
+2
+q
+3k
+p+1 + 2√2pe2
+2√p+1
+q
+1 +
+k
+p+1
+
+σk+1 + 3e2√4k+4p+2
+4p+4
+ 
+P
+j>k
+σ2
+j
+!1/2
+≤
+
+1 + ( 3
+√
+3e
+2
++
+√2e2)
+q
+1 +
+k
+p+1
+
+σk+1 + 6√4k+4p+2
+p+1
+ 
+P
+j>k
+σ2
+j
+!1/2
+,
+from which the desired upper bound follows.
+5 Numerical examples
+In this section, we give ﬁve examples to test the features of randomized QSVD algorithms.
+The following numerical examples are performed via MATLAB with machine precision u =
+2.22e −16 in a laptop with Intel Core (TM) i5-8250U CPU @ 1.80GHz and the memory is 8
+GB. Algorithms such as quaternion QR, QSVD are coded based on the structure-preserving
+scheme.
+Example 1 In this example, we test the rationality of estimated bounds for approximation
+errors ∥bA(q)
+k+p −A∥a. To this end, we construct an m × n(m ≥n) quaternion random matrix
+A as A = U
+h
+Σ1
+0
+i
+V∗, where U, V are quaternion Householder matrices taking the form U =
+Im −2uu∗, V = In −2vv∗, u, v are quaternion unit vectors, and Σ1 = diag(σ1, . . . , σn) is the
+real n × n diagonal matrix. Consider singular values with diﬀerent decay rate as
+(1) σ1 = 1, σi+1/σi = 0.9 for i = 1 . . . , n −1 or
+(2) σ1 = 1, σi+1/σi = 0.1 for i = 1 . . . , n −1,
+where in case (1), the smallest singular value is σ80 ≈2.18 · 10−4, while in case (2), for the
+threshold θ = 10−15, the numerical rank of the matrix is 16.
+For each case with diﬀerent values of k, p, we run Algorithm 1 with q = 0 for 1000 times,
+and plot the histograms for exact values of ∥bA(0)
+k+p −A∥a with a = 2, F. Below each histogram,
+the upper bounds of the errors are listed, where we take p = 4 for all cases, and the bound ηea
+for average errors is estimated via Theorems 1 and 2, while the bound ηda for deviation errors
+is based on (4.2) and (4.27), respectively, in which u = 2√2p, t = e. For p ≥4, the bounds hold
+with probability 99.99%.
+In Figure 1, it is observed that for case (1) with slow decay rate in the singular values,
+the upper bounds ηe
+2 and ηd
+2 are respectively about 15 and 40 times the actual values of
+∥bA(0)
+k+p −A∥2, while for the Frobenius error ∥bA(0)
+k+p −A∥F , the estimated upper bounds ηe
+F and
+ηd
+F are much tighter, and they are only about 2 and 10 times the actual values, respectively.
+In Figure 2 and for case (2) with fast decay rate in the singular values, a relative large
+oversampling size p = 4 gives upper bounds that are not sharp enough, and there may be a
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+21
+0.35
+0.4
+0.45
+0.5
+0.55
+0
+20
+40
+60
+80
+100
+ηe
+2 = 5.67,
+ηd
+2 = 17.22
+0.75
+0.8
+0.85
+0.9
+0.95
+0
+20
+40
+60
+80
+100
+ηe
+F = 1.34,
+ηd
+F = 10.91
+0.06
+0.08
+0.1
+0.12
+0
+20
+40
+60
+80
+100
+120
+ηe
+2 = 1.04,
+ηd
+2 = 3.13
+0.13
+0.14
+0.15
+0.16
+0.17
+0.18
+0
+20
+40
+60
+80
+100
+120
+ηe
+F = 0.25,
+ηd
+F = 2.06
+k=11,p=4,q=0
+k=11,p=4,q=0
+k=31,p=4,q=0
+k=31,p=4,q=0
+Fig. 1 Approximation errors and upper bounds for a 100×80 matrix whose singular values decay very slowly
+(decay rate: 0.9). The left ﬁgures are for the estimates of spectral errors, while the right ones correspond to
+the Frobenius errors.
+10
+−10
+10
+−9
+10
+−8
+0
+50
+100
+150
+200
+ηe
+2 = 8.04e −6,
+ηd
+2 = 3.55e −5
+10
+−10
+10
+−9
+10
+−8
+0
+50
+100
+150
+200
+ηe
+F = 1.54e −6,
+ηd
+F = 1.97e −5
+10
+−7
+10
+−6
+10
+−5
+0
+50
+100
+150
+200
+ηe
+2 = 1.52e −5,
+ηd
+2 = 5.35e −5
+10
+−7
+10
+−6
+10
+−5
+0
+50
+100
+150
+200
+ηe
+2 = 2.25e −6,
+ηd
+F = 2.35e −5
+k=6,p=4,q=0
+k=6,p=4,q=0
+k=6,p=1,q=0
+k=6,p=1,q=0
+Fig. 2 Approximation errors and upper bounds for a 100× 80 matrix whose singular values decay very fast
+(decay rate: 0.1) The left ﬁgures are for the estimates of spectral errors, while the right ones correspond to
+Frobenius errors.
+
+22
+Qiaohua Liu et al.
+0
+200
+400
+600
+10
+−10
+10
+−5
+10
+0
+10
+5
+σk
+0
+50
+100
+150
+200
+0
+0.2
+0.4
+0.6
+0.8
+1
+σk+1/σk
+Fig. 3 Singular values and adjacent singular value ratios for color image lena512.
+factor O(104) between the estimated upper bounds and actual approximation errors. When we
+take p = 1, the estimates for the upper bounds have been greatly enhanced. The reason is that
+the tested matrix A has fast decay rate in its singular values, therefore the orthonormal basis
+of R(AΩ) gives a good approximation of an ℓ-dimensional (ℓ= k + p) left dominant singular
+subspace of A, which makes ∥bA(0)
+k+p −A∥2 ≈σk+p+1, and when p = 4, it is much smaller than
+the estimated bound ηe
+2 ≈O(σk+1).
+Overall, the test results in Figures 1-2 illustrate the rationality of theoretical estimates for
+approximation errors.
+Example 2 In this example, we test how diﬀerent values of q in the power scheme aﬀect the
+approximation errors ∥bA(q)
+k
+−A∥a. We use standard test image lena5121 with 512 ×512 pixels.
+This color image is characterized by a 512 × 512 pure quaternion matrix A with entries Aij =
+Riji + Gijj + Bijk, where Rij, Gij, Bij represent the red, green and blue pixel values at the
+location (i, j) in the image, respectively. The singular values and adjacent singular value ratio
+σk+1/σk of A are depicted in Figure 3.
+Based on the structure-preserving quaternion Householder QR and QMGS processes for
+getting the orthonormal basis matrix Q, we take the oversampling p = 4 and depict the
+approximation errors ∥bA(q)
+k
+−A∥a for k ranging from 5 to 200 with step 5 in Figures 4–5,
+where svdQ plots the optimal rank-k approximation errors obtained via the structure-preserving
+QSVD algorithm [38].
+It is observed that when k ≥5, the adjacent singular value ratio is greater than 0.8,
+the power scheme with q = 0 gives the worst estimates for the rank-k approximation errors
+among three cases. In the quaternion Householder QR-based algorithm, the case with q = 2
+behaves better than that for q = 1, since a smaller adjacent singular value ratio
+
+σk+1
+σk
+2q+1
+of
+(AA∗)qA helps generate better basis matrix Q and rank-k matrix approximation. Although
+the approximation errors from randomized algorithms are not as accurate as the svdQ-based
+ones, they still deliver acceptable peak signal-to-noise ratio (PNSR) and relative approximate
+errors as listed in Table 5.1, in which the PSNR is deﬁned by
+PSNR(bA(q)
+k , A) = 10 log10
+2552mn
+∥bA(q)
+k
+−A∥2
+F
+.
+1 lena512: https://www.ece.rice.edu/∼wakin/images/
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+23
+0
+50
+100
+150
+200
+10
+2
+10
+3
+10
+4
+10
+5
+∥bA
+(q)
+k −A∥2
+ 
+ 
+svdQ
+randsvdQ(q=0)
+randsvdQ(q=1)
+randsvdQ(q=2)
+0
+50
+100
+150
+200
+10
+2
+10
+3
+10
+4
+10
+5
+∥bA
+(q)
+k −A∥F
+ 
+ 
+svdQ
+randsvdQ(q=0)
+randsvdQ(q=1)
+randsvdQ(q=2)
+Fig. 4 Errors incurred for diﬀerent power schemes, in which the orthonormal basis Q in randsvdQ is
+obtained via quaternion Householder QR procedure.
+Table 5.1 The peak signal-to-noise ratio and relative approximating errors for randsvdQ
+k
+q
+PNSR
+∥b
+A(q)
+k
+−A∥2
+∥A∥2
+∥b
+A(q)
+k
+−A∥F
+∥A∥F
+50
+1
+24.7780
+0.0115
+0.0602
+2
+25.0501
+0.0106
+0.0583
+100
+1
+29.4102
+0.0057
+0.0353
+2
+29.7303
+0.0051
+0.0340
+150
+1
+32.8041
+0.0035
+0.0239
+2
+33.1368
+0.0032
+0.0230
+It is observed that q = 1 is acceptable for the desired accuracy.
+In Figure 5, QMGS-based method is compared with quaternion Householder QR proce-
+dure. QMGS gives satisfactory approximations for k < 160 and q = 1 or 2, while for q = 2 and
+k ≥160, the estimates become worse. That is partly because for q = 2,   σ1
+σ165
+2q+1 = 1.1e + 13
+and Yq = (AA∗)qAΩtends to be an ill-conditioned matrix, which leads to a great loss of
+orthogonality in the matrix Q during the QMGS procedure. However, the low-rank approx-
+imation problem only captures the dominant SVD triplets, the target rank is usually small,
+and in the randomized algorithm we usually deal with the QMGS of a well-conditioned matrix,
+the QMGS with q = 1 is preferred, since it is more eﬃcient than the quaternion Householder
+QR.
+
+24
+Qiaohua Liu et al.
+0
+40
+80
+120
+160
+200
+10
+2
+10
+3
+10
+4
+10
+5
+∥bA
+(q)
+k −A∥2
+ 
+ 
+svdQ
+randsvdQ(q=0)
+randsvdQ(q=1)
+randsvdQ(q=2)
+0
+50
+100
+150
+200
+10
+2
+10
+3
+10
+4
+10
+5
+∥ˆA
+(q)
+k −A∥F
+ 
+ 
+svdQ
+randsvdQ(q=0)
+randsvdQ(q=1)
+randsvdQ(q=2)
+Fig. 5 Errors incurred for diﬀerent power schemes, in which the orthonormal basis Q in randsvdQ is
+obtained via quaternion MGS.
+Example 3 In this example, we compare numerical behaviors of randeigQ and prandsvdQ algo-
+rithms in computing the rank-k approximation of a large quaternion Hermitian matrix. It is
+well known that the real Laplacian matrix plays important roles in image denoising, inpainting
+problems for the grayscale image. Recently in [1], complex Laplacian matrix is also discussed
+in the mixed graph with some directed and some undirected edges, and its zero eigenvalue is
+proved to be related to the connection of the mixed graph. Our example involves a quaternion
+graph Laplacian matrix for a color image, which is modiﬁed from real [11] and complex cases.
+For this purpose, we begin resizing lena512 to a 60 × 60-pixel color image, owing to the
+restricted memory of Laptop. For each pixel i in color channel s ∈{r, g, b}, form a vector
+x(i)
+s
+∈R25 by gathering the 25 intensities of the pixels in a 5×5 neighborhood centered at pixel
+i. Next, we form a 3600×3600 pure quaternion Hermitian weight matrix W = Wri+Wgj+Wbk
+with wji = w∗
+ij, wii = 0, and wij = (wr)ij i + (wg)ij j + (wb)ij k for i < j, which is determined
+by
+(ws)ij = exp
+n
+−∥x(i)
+s
+−x(j)
+s ∥2
+2/σ2
+s
+o
+,
+j > i,
+s ∈{r, g, b}.
+Here the entries in their strictly upper triangular part of Ws reﬂect the similarities between
+patches, and the parameter σs controls the level of sensitivity in each channel. By zeroing
+out all entries of skew-symmetric matrices Wr, Wg and Wb except the four largest ones in
+magnitude in each row, we obtain sparse weight matrices f
+Ws and f
+W. Similar to the complex
+case, let D be a diagonal matrix with dii = P
+j
+|wij|, and deﬁne the quaternion Laplacian
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+25
+0
+1000
+2000
+3000
+4000
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+cumulative  propertion of eigenvalues
+0
+50
+100
+150
+200
+1.2
+1.4
+1.6
+1.8
+2
+2.2
+Eigenvalues
+ 
+ 
+eigQ
+randeigQ(q=0)
+prandsvdQ(q=0)
+randeigQ(q=1)
+prandsvdQ(q=1)
+randeigQ(q=2)
+prandsvdQ(q=2)
+Fig. 6 The cumulative proportion of eigenvalues of a quaternion Laplacian matrix and eigenvalues com-
+puted via randeigQ and prandsvdQ for k = 200, p = 10.
+matrix L as
+L = I −D−1/2f
+WD−1/2.
+For all s ∈{r, g, b}, take σs = 50, store the 14400 × 3600 real matrix Lc, and use structure-
+preserving algorithm eigQ [13] to compute all eigenvalues of L. Here the Hermitian matrix L
+is a very extreme case with positive eigenvalues, and the smallest ratio σk+1/σk of adjacent
+eigenvalues (singular values) of L is greater than 0.98.
+Take k = 200, p = 10, q = 0, 1, 2 to compare the eigenvalues of L via randeigQ, prandsvdQ.
+In all cases, the approximations of eigenvalues are not good enough, because k = 200 only
+captures less than 10% proportion of eigenvalues in this extreme case, as revealed in the left
+ﬁgure of Figure 6. Due to the quite slow decay rate of eigenvalues, when q is small, say for q = 0,
+the eigenvalues computed via randeigQ, prandsvdQ are not accurate enough, but prandsvdQ still
+approximates eigenvalues better than randeigQ, as predicted in Remark 3. The accuracy is
+improved as q increases, and for this extreme example, q = 2 is suﬃcient to guarantee the
+eigenvalues from two algorithms with almost the same accuracy. For general cases, we believe
+that randeigQ is as reliable as prandsvdQ but more eﬃcient for practical low-rank Hermitian
+matrix approximation problems with dominant singular values.
+Example 4 In this example, we consider the color face recognition problem [15] based on color
+principal component analysis (CPCA) approach. Suppose that there are s training color image
+samples, denoted by m × n pure quaternion matrices F1, F2, . . . , Fs, and the average is Ψ =
+
+26
+Qiaohua Liu et al.
+Fig. 7 Sample images for one individual of the Georgia Tech face database
+1
+s
+sP
+t=1
+Ft ∈Qm×n. Let X = [vec(F1) −vec(Ψ), · · · , vec(Fs) −vec(Ψ)], where vec(·) means to
+stack the columns of a matrix into a single long vector. The core work of CPCA approach is
+to compute the left singular vectors corresponding to the ﬁrst k largest singular values of X,
+which are called the eigenfaces. The eigenfaces can also be obtained from the eigQ algorithm [13]
+applied to XX∗or XX∗.
+For color image samples, we use the Georgia Tech face database2, and all images are
+manually cropped, and then resized to 120 × 120 pixels. The samples of the cropped images
+are shown in Figure 7. There are 50 persons to be used. The ﬁrst ten face images per individual
+person are chosen for training and the remaining ﬁve face images are used for testing. The
+number of chosen eigenfaces, k, increases from 1 to 30. We need to compute k SVD triplets of
+a 14400 × 500 quaternion matrix X, in which the 14400 rows refer to 120 × 120 pixels and the
+500 columns refer to 50 persons with 10 faces each.
+As revealed in [15], the matrix is very large and the svdQ algorithm does not ﬁnish the
+computation of the singular value decomposition of X in 2 hours and eigQ needs about seven
+times of the running CPU time via the quaternion Lanczos-based algorithm (lansvdQ)3. In this
+experiment we consider the lansvdQ, randsvdQ, prandsvdQ algorithms of X, and randeigQ algo-
+rithm of X∗X, where the orthonormal basis is derived based on quaternion MGS process, and
+in randeigQ, the matrix X∗X is not explicitly formed. The detailed comparisons of recognition
+accuracy and running CPU time of candidate methods are depicted in Figure 8, in which the
+accuracy of face recognition is the percentage of correctly recognized persons for given 250 test
+images. For p = 4 and q = 0, randomized algorithms have higher recognition accuracy than
+lansvdQ, and are much more eﬃcient than lansvdQ. Moreover, the preconditioning technique
+for randsvdQ can slightly enhance the eﬃciency of the algorithm. Unlike lansvdQ, the CPU
+time for randomized algorithms does not increase signiﬁcantly with the target rank (number
+of eigenfaces). lansvdQ is much less eﬃcient partly because it uses for-end loop and performs
+matrix-vector products at each iteration, while the randomized algorithms make full use of the
+matrix-matrix products that have been highly optimized for maximum eﬃciency on modern
+serial and parallel architectures [8].
+Example 5 In this example, we generalize the fast frequent directions via subspace embedding
+(SpFD) method [34] to the quaternion case. The corresponding algorithm is referred to as
+2 The Georgia Tech face database. http://www.aneﬁan.com/research/face reco.htm
+3 https://hkumath.hku.hk/∼mng/mng ﬁles/LANQSVDToolbox.zip
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+27
+0
+5
+10
+15
+20
+25
+30
+0.35
+0.4
+0.45
+0.5
+0.55
+0.6
+0.65
+0.7
+0.75
+0.8
+0.85
+Number of eigenfaces
+Accuracy of face recognition
+ 
+ 
+CPCA−lansvdQ
+CPCA−randeigQ
+CPCA−randsvdQ
+CPCA−prandsvdQ
+0
+5
+10
+15
+20
+25
+30
+0
+10
+20
+30
+40
+50
+60
+Number of eigenfaces
+CPUtime(seconds)
+ 
+ 
+CPCA−lansvdQ
+CPCA−randeigQ
+CPCA−randsvdQ
+CPCA−prandsvdQ
+Fig. 8 The color face recognition accuracy and CPU time by lansvdQ, randsvdQ, randeigQ and prandsvdQ
+methods with parameters p = 4, q = 0.
+SpFDQ, and is compared with prandsvdQ through the color face recognition problem in Example
+4.
+Given a real matrix A ∈Rm×n (m ≥n), the SpFD(ℓ,t) algorithm squeezes the rows of A
+by pre-multiplying SP on A, where t is assumed to be a factor of m (if not, append zero rows
+to the end of A until m is), P is a random permutation matrix, and S = diag(S1, . . . , St) is
+a sparse sketching matrix with Si ∈Rℓ× m
+t being generated on a probability distribution. At
+the start of the algorithm, it extracts and shrinks the top ℓimportant right singular vectors
+of a two-layered matrix
+h
+S1P A
+S2P A
+i
+via SVD, and then combines them with the next ℓrows in
+SPA to form a new two-layered matrix. Repeat the procedure until the last ℓrows of SPA is
+combined into the computation. Finally, an orthonormal basis Vℓ∈Rn×ℓfor the row space of
+SPA is obtained, and a rank-k approximation of A is derived based on the SVD of AVℓ. The
+algorithm consists of (t −1) iterations, and the total cost is
+2nnz(A)(ℓ+ 1) + [24nℓ2 + 160ℓ3](t −1) + 6mℓ2 + 20ℓ3 + 2mℓk + 2mnℓ,
+t > 1,
+where m ≥n ≥ℓ≥k, m ≫ℓ. The choice of t = 2, ℓ= k corresponds to an algorithm with the
+cheapest cost, while for t = ⌈m/ℓ⌉, SpFD(ℓ,t) reduces to a slight modiﬁcation of FD in [7].
+In the SpFDQ(ℓ,t) algorithm, A is taken to be the 14400×500 matrix X in Example 4, and
+the choice of sketching matrix S is the same as the real case. To perform a fair comparison, we
+also consider the preconditioned technique in the QSVD of a short-and-wide or tall-and-narrow
+
+28
+Qiaohua Liu et al.
+0
+5
+10
+15
+20
+25
+30
+0.4
+0.45
+0.5
+0.55
+0.6
+0.65
+0.7
+0.75
+0.8
+0.85
+Number of eigenfaces(k)
+Accuracy of face recognition
+ 
+ 
+CPCA−SpFDQ(2k,4)
+CPCA−SpFDQ(k,4)
+CPCA−SpFDQ(k,2)
+CPCA−prandsvdQ
+0
+5
+10
+15
+20
+25
+30
+0
+5
+10
+15
+20
+25
+30
+Number of eigenfaces(k)
+CPUtime(seconds)
+ 
+ 
+CPCA−SpFDQ(2k,4)
+CPCA−SpFDQ(k,4)
+CPCA−SpFDQ(k,2)
+CPCA−prandsvdQ
+Fig. 9 The color face recognition accuracy and CPU time by SpFDQ(ℓ, t) and prandsvdQ methods with
+parameters p = 4, q = 0.
+quaternion matrix. During the (t −1) rounds of QSVD in the iteration, due to the potential
+singularity of the sketching matrix Si that might lead to a singular two-layered matrix, we
+apply quaternion Householder QR ﬁrst and then implement the QSVD on a small-size matrix.
+In the last round of QSVD of AVℓ, the QSVD of AVℓis obtained via the QMGS of AVℓﬁrst
+and then applying QSVD to a small upper triangular factor.
+The accuracy of face recognition and running CPU time of SpFDQ(ℓ,t) and prandsvdQ algo-
+rithms are shown in Figure 9. The depicted results demonstrate that SpFDQ(k,2) is the most
+eﬃcient one among all SpFDQ(ℓ,t) algorithms, while prandsvdQ is a little more eﬃcient than
+SpFDQ(k,2) when k increases. For the recognition accuracy, prandsvdQ has higher recognition
+accuracy for most parameter values of k, while there also exists a parameter, say for k = 22,
+prandsvdQ has lower recognition accuracy than other candidate methods. That is partly be-
+cause the sketching matrix S and random Ωare randomly generated on speciﬁc distributions,
+and the recognition accuracy is sometimes aﬀected by the properties of some speciﬁc random
+matrices.
+In order to perform a fair comparison, in Table 5.2 we execute each algorithm 20 times, and
+display the average (avrg), maximal (max) and minimal (min) numbers of correctly recognized
+persons among 250 test faces for 50 persons, and the average running CPU time (avtime) is
+also given. It is observed that when k is small, say for k ≤9, there exist big ﬂuctuations on
+the recognition accuracy of SpFDQ(k,2), and the average numbers of recognized faces increase
+when the sketching size in SpFDQ(2k,2) is increased, but SpFDQ(2k,2) still has lower recognition
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+29
+accuracy than prandsvdQ. When k increases, the diﬀerence of face recognition accuracy becomes
+smaller, while for the running time, prandsvdQ is the most eﬃcient.
+Table 5.2 Comparisons of SpFDQ(ℓ,2) with prandsvdQ for PCA-based color image recognition problems
+SpFDQ(k,2)
+k
+3
+6
+9
+12
+15
+18
+21
+24
+27
+30
+avrg
+153.25
+178.65
+184.70
+188.05
+189.80
+189.85
+190.00
+190.80
+190.95
+192.40
+max
+184
+188
+191
+194
+195
+193
+195
+195
+195
+196
+min
+130
+169
+176
+182
+183
+185
+184
+187
+187
+187
+avtime
+2.97
+3.29
+3.68
+4.10
+4.63
+5.47
+5.62
+6.02
+6.86
+7.45
+SpFDQ(2k,2)
+k
+3
+6
+9
+12
+15
+18
+21
+24
+27
+30
+avrg
+161.35
+178.75
+184.85
+190.30
+189.25
+190.00
+188.95
+190.60
+190.85
+191.80
+max
+172
+186
+190
+194
+192
+192
+192
+193
+196
+196
+min
+150
+172
+180
+186
+186
+187
+186
+188
+186
+188
+avtime
+3.18
+3.92
+4.72
+5.60
+6.96
+7.91
+9.27
+10.47
+12.09
+13.56
+prandsvdQ
+k
+3
+6
+9
+12
+15
+18
+21
+24
+27
+30
+avrg
+174.35
+187.10
+190.55
+191.30
+190.65
+191.15
+192.65
+193.45
+192.25
+192.85
+max
+182
+195
+201
+198
+194
+198
+196
+198
+197
+197
+min
+164
+182
+183
+185
+185
+184
+187
+188
+188
+189
+avtime
+3.02
+3.30
+3.44
+3.70
+4.11
+4.44
+4.73
+5.02
+5.50
+5.82
+6 Conclusion
+In this paper we have presented the randomized QSVD algorithm for quaternion low-rank ma-
+trix approximation problems. For large scale problems with a small target rank, the randomized
+algorithm compresses the size of the input matrix by the quaternion normal distribution-based
+random sampling, and approximates dominant SVD triplets with good accuracy and high ef-
+ﬁciency. The approximation errors of the randomized algorithm are illustrated by the detailed
+theoretical analysis and numerical examples. Compared to the Lanczos-based QSVD (lansvdQ)
+and fast frequent direction via subspace embedding (SpFDQ) algorithms, the randomized algo-
+rithms display their eﬀectiveness and eﬃciency for PCA-based color image recognition prob-
+lems.
+Acknowledgments. The authors are grateful to the handling editor and three anonymous
+referees for their useful comments and suggestions, which greatly improved the original pre-
+sentation.
+References
+1. R. B. Bapat, D. Kalita and S. Patib, On weighted directed graphs, Linear Algebra Appl., 436 (2012),
+pp. 99-111.
+2. N. L. Bihan and S. J. Sangwine, Quaternion principal component analysis of color images, IEEE
+International Conference on Image Processing, 1 (2003), pp. 809-812.
+3. Z. Z. Chen and J. J. Dongarra, Condition numbers of Gaussian random matrices, SIAM J. Matrix
+Anal. Appl., 27 (2005), pp. 603-620.
+
+30
+Qiaohua Liu et al.
+4. K. L. Clarkson and D. P. Woodruff, Numerical linear algebra in the streaming model, STOC ‘09:
+Proc. 41st Ann. ACM 476 Symp. Theory of Computing, 2009.
+5. J. A. Duersch and M. Gu, Randomized projection for rank-revealing matrix factorizations and low-rank
+approximations, SIAM Rev., 62 (2020), pp. 661-682.
+6. T. A. Ell, N. L. Bihan and S. J. Sangwine, Quaternion Fourier Transforms for Signal and Image
+Processing, Wiley, Hoboken, NJ, USA, 2014.
+7. M. Ghashami, E. Liberty, J. M. Phillips and D. P. Woodruff, Frequent directions: simple and
+deterministic matrix sketching, SIAM J. Comput., 45 (2016), pp. 1762-1792.
+8. G. H. Golub and C. F. Van Loan, Matrix Computations(4ed.),
+Johns Hopkins University Press,
+Baltimore, 2013.
+9. G. H. Golub and C. Reinsch, Singular value decomposition and least squares solutions, Numer. Math.,
+14 (1970), pp. 403-420.
+10. M. Gu, Subspace iteration randomization and singular value problems, SIAM J. Sci. Comput., 37 (2015),
+A1139-A1173.
+11. N. Halko, P. G. Martinsson and J. A. Tropp, Finding structure with randomness: probabilistic
+algorithms for constructing approximate matrix decompositions, SIAM Rev., 53 (2011), pp. 217-288.
+12. W. R Hamilton, Elements of Quaternions, Chelsea, New York, 1969.
+13. Z. G. Jia, M. S. Wei and S. T. Ling, A new structure-preserving method for quaternion Hermitian
+eigenvalue problems, J. Comput. Appl. Math., 239 (2013), pp. 12-24.
+14. Z. G. Jia, M. S. Wei, M. X. Zhao and Y. Chen, A new real structure-preserving quaternion QR
+algorithm, J. Comput. Appl. Math., 343 (2018), pp. 26-48.
+15. Z. G. Jia, M. K. Ng and G. J. Song, Lanczos method for large-scale quaternion singular value decom-
+position, Numer. Algorithms, 82 (2019), pp. 699-717.
+16. Z. G. Jia, M. K. Ng and G. J. Song, Robust quaternion matrix completion with applications to image
+inpainting, Numer. Linear Algebra Appl., 26 (2019), e2245.
+17. Z. G. Jia, M. K. Ng and W. Wang, Color image restoration by saturation-value (SV) total variation,
+SIAM J. Imag. Sci., 12 (2019), pp. 972-1000.
+18. Z. G. Jia, The Eigenvalue Problem of Quaternion Matrix: Structure-Preserving Algorithms and Appli-
+cations, Science Press, Beijing, 2019.
+19. Z. G. Jia and M. K. Ng, Structure preserving quaternion generalized minimal residual method, SIAM
+J. Matrix Anal. Appl., 42 (2021), pp. 616-634.
+20. S. M. Li, A theory of statistical analysis based on normal distrubution of quaternion (in Chinese), Ph.D
+Thesis, Sun Yat-sen University, 2001.
+21. Y. Li, M. S. Wei, F. X. Zhang and J. L. Zhao, Real structure-preserving algorithms of Householder
+based transformations for quaternion matrices, J. Comput. Appl. Math., 305 (2016), pp. 82-91.
+22. Y. Li, M. S. Wei, F. X. Zhang and J. L. Zhao, A structure-preserving method for the quaternion LU
+decomposition, Calcolo, 54 (2017), pp. 1553-1563.
+23. E. Liberty, F. Woolfe, P. Martinsson, V. Rokhlin and M. Tygert, Randomized algorithms for
+the low-rank approximation of matrices, Proceedings of the National Academy of Sciences, 104 (2007),
+pp. 20167-20172.
+24. M. T. Loots, On the development of the quaternion normal distribution, Master Thesis, University of
+Pretoria, Pretoria, 2010.
+25. M. W. Mahoney, Randomized algorithms for matrices and data, Foundations and Trends in Machine
+Learning, 3 (2011), pp. 123-224.
+26. P. G. Martinsson, V. Rokhlin and M. Tygert, A randomized algorithm for the decomposition of
+matrices, Appl. Comput. Harmon. Anal., 30 (2011), pp. 47-68.
+27. X. Meng and M.W. Mahoney, Low-distortion subspace embeddings in input-sparsity time and appli-
+cations to robust linear regression, Proc. 45th Annu. ACM Symp. Theory Comput., 2013, pp. 91-100.
+28. T. Minemoto, T. Isokawa, H. Nishimura and N. Matsui, Feed forward neural network with random
+quaternionic neurons, Signal Processing, 136 (2017), pp. 59-68.
+29. R. J. Muirhead, Aspects of Multivariate Statistical Theory, Wiley, New York, NY, 1982.
+30. L. Rodman, Topics in Quaternion Linear Algebra, Princeton University Press, 2014.
+31. B. J. Saap, Randomized algorithms for low rank matrix decomposition, Technical Report, Computer
+and Information Science, University of Pennsylvania, 2011.
+32. S. J. Sangwine and N. L. Bihan, Quaternion singular value decomposition based on bidiagonalization
+to a real or complex matrix using quaternion Householder transformations, Appl. Math. Comput. 182
+(2006), pp. 727-738.
+33. T. Sarl´os, Improved approximation algorithms for large matrices via random projections, Proc. 47th
+Annu. IEEE Symp. Foundations Comput. Sci., 2006, pp. 143-152.
+34. D. Teng and D. L. Chu, A fast frequent directions algorithm for low rank approximation, IEEE Trans.
+Pattern Anal. Mach. Intell., 41 (2019), pp. 1279-1293.
+
+Randomized Quaternion Singular Value Decomposition for Low-Rank Approximation
+31
+35. C. Y. Teng and K. T. Fang, Statistical analysis based on normal distribution of quaternion, Interna-
+tional Symposium on Contemporary Multivariate Analysis and its Applications, 1997.
+36. C. Y. Teng and S. M. Li, Exterior diﬀerential form on quaternion matrices and its application (in
+Chinese), Acta Scientiarum Naturalium Universitatis SunYatseni, 38 (1999), pp. 12-16.
+37. M. H. Wang, W. H. Ma, A structure-preserving method for the quaternion LU decomposition in quater-
+nionic quantum theory, Comput. Phys. Comm., 184 (2013), pp. 2182-2186.
+38. M. S. Wei, Y. Li, F. X. Zhang, J. L. Zhao, Quaternion Matrix Computations, Nova Science Publishers,
+2018.
+39. F. Woolfe, E. Liberty, V. Rokhlin and M. Tygert, A fast randomized algorithm for the approxi-
+mation of matrices, Appl. Comput. Harm. Anal., 25 (2008), pp. 335-366.
+40. W. J. Yu, Y. Gu and Y. H. Li, Eﬃcient randomized algorithms for the ﬁxed-precision low-rank matrix
+approximation, SIAM J. Matrix Anal. Appl., 39 (2018), pp. 1339-1359.
+41. F. Z. Zhang, Quaternions and matrices of quaternion, Linear Algebra Appl., 251 (1997), pp. 21-57.
+42. L. P. Zhang and Y. M. Wei, Randomized core reduction for discrete ill-posed problem, J. Comput.
+Appl. Math., 375 (2020), 112797.
+43. M. X. Zhao, Z. G. Jia, Y. F. Cai, X. Chen and D. W. Gong, Advanced variations of two-dimensional
+principal component analysis for face recognition, Neurocomputing, 452 (2021), pp. 653-664.

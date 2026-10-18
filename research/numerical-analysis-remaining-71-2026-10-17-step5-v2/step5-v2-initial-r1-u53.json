@@ -1,0 +1,143 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "53",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-sipdg-bilinear-form-and-energy-norm",
+      "model": "gpt-6-luna",
+      "context_sha256": "510a7cbadd79c5704158ac0511d1fd5952b3868a6978912c93f23150e6a9e9cf",
+      "outcome": "false_positive",
+      "reason": "The Definition explicitly introduces a new cellwise constant symmetric matrix A_K and writes A|_K=A_K. Its use of def-matching-affine-simplicial-meshes imports the cells and mesh geometry, not an equation identifying the new coefficient with a reference-map matrix. No reference map F_K occurs in this Definition; the trace supplier independently denotes its geometric matrix by B. Local rebinding therefore imposes ellipticity only on the diffusion coefficient, with no restriction on the geometric map. All volume, flux and penalty expressions are well defined on the stated domain.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-sipdg-energy-error-estimate",
+      "model": "gpt-6-luna",
+      "context_sha256": "2aa28f84cc4d72ec3135304b0ae2d322f478c0b8037f90140789506157e011c9",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.1 omits a local justification for inferring positive DG energy from z_h!=0: F5 supplies only a seminorm, and F2 records only its coercivity inequality. Definiteness is true, proved in lem-sipdg-energy-seminorm-is-a-norm and used by the cited coercivity theorem, so this is a nonfatal justification omission rather than a false estimate or substantial mathematical gap. Repaired by testing ||z_h||_DG=0 directly, proving the desired bound immediately there and dividing only in the positive-energy branch. No definiteness supplier is needed by the repaired argument.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-sipdg-bilinear-form-and-energy-norm",
+      "disposition": "unaffected",
+      "post_sha256": "7f65d0ff8ee1c4799d3773688bf8165aee8341bdcc7edebf9c8c51193df54979",
+      "review_context_sha256": "4ce63d147062919f81d52e910463c52112aaf3c85e75a06afc6d98cef06f9a5c",
+      "reason": "Checked the complete Definition, owning contract and page against the matching-mesh, broken-polynomial, jump and physical-simplex trace suppliers. The coefficient is locally introduced; the affine trace argument uses B. H2 functions have H1 coefficient fluxes because the coefficient is constant; smooth relative-facet tests determine the L2 normal flux uniquely. Outward signs give q_F=(r_minus-r_plus)/2 internally and r on the boundary. Positive h_F and gamma make all terms finite and symmetric. Neither definiteness nor a convergence rate is asserted here; Countable Choice is retained. No item or metadata repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-sipdg-energy-error-estimate",
+      "disposition": "repaired",
+      "post_sha256": "654c3c519b75263b0f80b6aa652b32a608d69675e7dac44435e2b49d692ad4cb",
+      "review_context_sha256": "18b3be2174b17fcdab010b1a706e3bd1a97403d7ca7976631b486b3e68c2ef4c",
+      "reason": "Checked all three steps against the actual form domain, exact-consistency, coercivity, inverse-flux and augmented-boundedness suppliers, and checked the owning contract/page interface. D_h is linear since weak divergence and unique normal flux traces are linear. Galerkin consistency gives a(z_h,z_h)=a(u-w_h,z_h); the inverse-flux estimate bounds its augmented norm by sqrt(1+C_flux) times DG energy. The revised zero-energy branch needs no division, and the other branch divides by an explicitly positive quantity. The D_h seminorm triangle then proves the unchanged constant and the infimum assertion without assuming a minimizer. Countable Choice and the absence of any approximation-rate claim are preserved. This is a repair review, not independent acceptance of my own edit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "def-sipdg-bilinear-form-and-energy-norm",
+      "outcome": "false_positive",
+      "reason": "The Definition explicitly introduces a new cellwise constant symmetric matrix A_K and writes A|_K=A_K. Its use of def-matching-affine-simplicial-meshes imports the cells and mesh geometry, not an equation identifying the new coefficient with a reference-map matrix. No reference map F_K occurs in this Definition; the trace supplier independently denotes its geometric matrix by B. Local rebinding therefore imposes ellipticity only on the diffusion coefficient, with no restriction on the geometric map. All volume, flux and penalty expressions are well defined on the stated domain.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-sipdg-energy-error-estimate",
+      "outcome": "confirmed_nonfatal",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "location": "Proof step 2.1",
+      "finding": "The positive-division inference used norm definiteness without an explicit local fact, although definiteness is proved in the existing coercivity prerequisite chain.",
+      "correction": "Replace the z_h=0 branch with the zero-DG-energy branch, prove the desired bound directly there, and divide only in the positive-energy branch. Mirror the derivation and zero-boundary evidence in the owning proof contract.",
+      "reason": "Step 2.1 omits a local justification for inferring positive DG energy from z_h!=0: F5 supplies only a seminorm, and F2 records only its coercivity inequality. Definiteness is true, proved in lem-sipdg-energy-seminorm-is-a-norm and used by the cited coercivity theorem, so this is a nonfatal justification omission rather than a false estimate or substantial mathematical gap. Repaired by testing ||z_h||_DG=0 directly, proving the desired bound immediately there and dividing only in the positive-energy branch. No definiteness supplier is needed by the repaired argument.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "def-sipdg-bilinear-form-and-energy-norm",
+      "thm-sipdg-energy-error-estimate"
+    ],
+    "next_action": "Controller collection and any required independent rejudgment/certification; no workers or judges were launched by this unit.",
+    "unresolved_obligations": [],
+    "sources_consulted": [
+      {
+        "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+        "locator": "Sections 38.2.1-38.2.2 and 38.3, printed pp. 192-195 and 197-198. The source treats Poisson diffusion; coefficient-weighted bounds are checked from the actual local suppliers."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-sipdg-bilinear-form-and-energy-norm.md items/thm-sipdg-energy-error-estimate.md",
+        "exit_code": 0,
+        "result": "1 proof checked, 0 failing; definition has no proof."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-sipdg-bilinear-form-and-energy-norm.md items/thm-sipdg-energy-error-estimate.md",
+        "exit_code": 0,
+        "result": "2 files passed actual KaTeX and renderer YAML checks."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-53.proof-contracts.json --strict --items def-sipdg-bilinear-form-and-energy-norm,thm-sipdg-energy-error-estimate",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 2/2 items checked; step 2.1 derivation and zero boundary mirror the repaired proof."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-sipdg-energy-error-estimate.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "repair_complete": true,
+    "statement_comparisons": [
+      {
+        "id": "def-sipdg-bilinear-form-and-energy-norm",
+        "statement_sha256": "6c0fe27d81f9b7f1674736528dc359123cbc6570e34e745796930e151ecf4433",
+        "unchanged": true
+      },
+      {
+        "id": "thm-sipdg-energy-error-estimate",
+        "statement_sha256": "dbd41a4b4b8982af8d3f7b1e42356377d14c425b52e97dd34362efcc8b6bf20a",
+        "unchanged": true
+      }
+    ],
+    "downstream_reason": "Both original defining sections match their frozen initial hashes exactly. The definition is unchanged; the theorem repair changes only Proof step 2.1. No new interface, direct-consumer propagation or outside maintenance is triggered.",
+    "published_ledger": "No published item was edited or found defective in the examined prerequisites. No published-consumer ledger update is proposed.",
+    "independent_review": "No independent acceptance of this unit’s own repair is claimed; original round evidence and verification fields are unchanged."
+  },
+  "supporting_evidence": {
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-53.proof-contracts.json": "f06b95697b56b29e50be47b06861d356e2616b9de42a95471d510ac9a77e05fa"
+  }
+}

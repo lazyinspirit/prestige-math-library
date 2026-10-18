@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "44",
+  "round": 0,
+  "reviewed_items": [
+    "def-fv-admissible-cell-face-mesh",
+    "def-tpfa-harmonic-face-scheme",
+    "def-hybrid-mimetic-fv-scheme",
+    "thm-tpfa-green-coercivity-maximum-principle",
+    "thm-path-certified-fv-discrete-poincare",
+    "prop-hybrid-mimetic-scheme-coercive-conservative-affine-exact",
+    "thm-tpfa-flux-energy-convergence-smooth-interface",
+    "lem-mimetic-fv-parabolic-limit-identification",
+    "ex-orthogonal-voronoi-harmonic-diffusion",
+    "cex-nonorthogonal-two-point-flux-inconsistent",
+    "ex-harmonic-transmissibility-material-interface",
+    "ex-anisotropic-mimetic-flux-on-skew-cell"
+  ],
+  "reviewed_pages": [
+    "finite-volume-diffusion-and-mimetic-fluxes",
+    "finite-volume-diffusion-and-mimetic-fluxes-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The TPFA and local mimetic arguments and all four examples are sound under their stated hypotheses. Escalate because the approved PE13 proof closure requires compactness and weak-gradient identification that the batch does not establish; its parabolic result remains conditional on scheme-specific properties not proved here. A local repair is also needed for the undefined d_F notation.",
+  "findings": [
+    {
+      "id": "scope-pe13-compactness",
+      "type": "scope",
+      "reason": "The PE13 design requires discrete compactness and weak-gradient identification. The batch proves path-certified Poincaré and smooth-solution TPFA energy convergence, but has no discrete Rellich/weak-gradient result for the TPFA family. The approved proof closure therefore remains incomplete."
+    },
+    {
+      "id": "prereq-hybrid-parabolic-bridge",
+      "type": "prerequisite",
+      "reason": "lem-mimetic-fv-parabolic-limit-identification assumes conforming reconstructions and bounds, strong state convergence, vanishing residuals, and an energy limsup (A2; proof steps 1.1 and 2.1–2.2). No item derives these from the defined p-growth backward-Euler hybrid scheme or proves its mesh-family compactness and consistency. The PE12 suppliers apply after these hypotheses are supplied. A scheme-specific bridge and its exact geometric/time assumptions are the smallest missing prerequisites. The cited generic gradient-scheme theorem likewise requires coercivity, consistency, limit-conformity, and compactness to be verified for the chosen discretization; adapting it to this scheme remains unverified ([Droniou–Eymard](https://arxiv.org/abs/2003.09067)). A-page and lemma remain affected."
+    },
+    {
+      "id": "local-tpfa-distance",
+      "type": "local",
+      "reason": "In def-tpfa-harmonic-face-scheme, d_F is used in the harmonic coefficient and reconstructed gradient but is never defined. Add d_F := |x_L-x_K| = d_{K,F}+d_{L,F} before those formulas."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-mimetic-fv-parabolic-limit-identification",
+      "decision": "escalate",
+      "reason": "Steps 1.1 and 2.1–2.2 rely on scheme-specific reconstruction, convergence, residual, and energy hypotheses that no assigned supplier proves."
+    },
+    {
+      "id": "finite-volume-diffusion-and-mimetic-fluxes",
+      "decision": "escalate",
+      "reason": "Its approved proof closure still lacks the discrete compactness and weak-gradient result, and the nonlinear scheme bridge."
+    }
+  ]
+}

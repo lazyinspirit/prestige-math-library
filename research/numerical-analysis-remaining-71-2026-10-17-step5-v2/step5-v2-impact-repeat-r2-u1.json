@@ -1,0 +1,150 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "impact-repeat",
+  "round": 2,
+  "unit": "1",
+  "input_sha256": "8c9cacad9d63ede3c497d70a66645fdac4ac0e6a7d2370073efceb1e2dac3cc1",
+  "decisions": [],
+  "reviews": [
+    {
+      "id": "lem-riccati-finite-budget-wrappers-return-a-status",
+      "disposition": "unaffected",
+      "post_sha256": "5dad2a2e02b4eac4bb08259cebec988b8dfe2dfbde4d9d1a63bcad1be77e9688",
+      "review_context_sha256": "c08e6ece0b8451588cefb6d803d51168704589302c3ef853489a7814cc0b2260",
+      "reason": "The Statement, F7 and proof 1.4/3.1 already assert finite return with the declared status and retain the correct nN recurrence and m(N+1) residual certificate bounds. The supplier now explicitly returns budget-exhausted after N successful updates, including N=0; this adds no solve, update or residual evaluation, and unavailable residuals still leave recurrence status unchanged. No item edit is needed. Repaired only its owning batch-23 F7 full-Definition quotation, which omitted the newly inserted return paragraph.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-sda-doubling-composition-and-psd-invariants",
+      "disposition": "unaffected",
+      "post_sha256": "d69a1886cc6bc712afdbaba2d2d6566a06d0e19336347c9495f0f71efc5d827c",
+      "review_context_sha256": "a450540658750e20a581de9ab8a3594dc6f97891c15c937b23f94a5f845d7986",
+      "reason": "The Statement and F1 use precisely the unchanged exact inverse recurrence. Checked proof 1.1 kernel invertibility and PSD square-root identities, proof 1.2 resolvent composition with the required outside A* and A factors, and proof 2.1 continuity to singular PSD X and induction H_j=f^(2^j)(0). The normal-return status changes neither the matrices after any completed update nor the exact-only restriction, so the item remains unchanged. Repaired only its owning batch-23 F1 full-Definition quotation to include the new normal-return paragraph.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_reviews_and_metadata_repairs_complete",
+    "assigned_items": [
+      "lem-riccati-finite-budget-wrappers-return-a-status",
+      "lem-sda-doubling-composition-and-psd-invariants"
+    ],
+    "supplier": "alg-finite-budget-structure-preserving-doubling-for-dare",
+    "exact_interface_delta": "The previous full Definition quotations in both owning contracts agree byte for byte with the current Definition after removing only the new budget-exhausted normal-return paragraph. Their Statement hash equals the frozen repeat-2 pre-repair hash c1a1ced62bcc800ccb144d90693a764630676602b6c21ecf8c7bbb32cae50774. Current supplier Statement hash is c42468913d51fa2de6485fc856b3380e4ad488552d0886128eeac4c3ae9e0257.",
+    "item_findings": {
+      "lem-riccati-finite-budget-wrappers-return-a-status": "Statement, F7 and proof 1.4/3.1 already cover finite N update passes, nN recurrence calls and m(N+1) residual calls. The new return supplies the empty/successful loop status and adds no arithmetic or solve. Content correction is unnecessary; the full F7 contract quote is stale.",
+      "lem-sda-doubling-composition-and-psd-invariants": "Statement, F1 and proof 1.1-2.1 use the exact recurrence formulas, which are unchanged. PSD inverse identities and composition survive singular G,H,A,X; the new return label makes no rounded PSD claim. Content correction is unnecessary; the full F1 contract quote is stale."
+    },
+    "sources_consulted": [
+      {
+        "path": "items/alg-finite-budget-structure-preserving-doubling-for-dare.md",
+        "locator": "Definition, all branches and formulas"
+      },
+      {
+        "path": "items/lem-riccati-finite-budget-wrappers-return-a-status.md",
+        "locator": "Statement, F7, proof 1.4 and 3.1; remaining proof read as context"
+      },
+      {
+        "path": "items/lem-sda-doubling-composition-and-psd-invariants.md",
+        "locator": "complete Statement, facts and proof"
+      },
+      {
+        "path": "items/def-standard-continuous-and-discrete-riccati-equations.md",
+        "locator": "Definition, DARE map and order-m residual inverse"
+      },
+      {
+        "path": "items/alg-point-verified-linear-system-certifier.md",
+        "locator": "Definition, dyadic inputs and finite branches"
+      },
+      {
+        "path": "items/thm-point-verified-linear-system-certifier-soundness.md",
+        "locator": "Statement"
+      },
+      {
+        "path": "items/thm-non-negative-square-root-exists-and-is-unique.md",
+        "locator": "Statement"
+      },
+      {
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-23.proof-contracts.json",
+        "locator": "assigned F7/F1 quotation rows and derivations"
+      },
+      {
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-repeat-r2-u23.json",
+        "locator": "supplier repair and exact interface change"
+      }
+    ],
+    "external_sources_consulted": [],
+    "familiarity": "Elementary finite-loop and matrix-identity impact checks; no external source was needed or consulted.",
+    "validation": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-23.proof-contracts.json --items lem-riccati-finite-budget-wrappers-return-a-status,lem-sda-doubling-composition-and-psd-invariants --strict --json",
+        "exit_code": 1,
+        "result": "Exactly two citation-quote-mismatch errors: wrapper F7 and PSD/composition F1 cite the old full SDA Definition."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-23.proof-contracts.json --items lem-riccati-finite-budget-wrappers-return-a-status,lem-sda-doubling-composition-and-psd-invariants --strict --json",
+        "exit_code": 0,
+        "result": "Both assigned contracts checked; ok=true, no errors or warnings."
+      },
+      {
+        "command": "node tools/defect-ledger.mjs append --file /tmp/step5-v2-impact-repeat-r2-u1-ledger-rows.json",
+        "exit_code": 0,
+        "result": "Validated and appended the two assigned nonfatal contract rows; existing supplier fixed finding was reused, and the canonical view was regenerated."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-analysis-remaining-71-2026-10-17 --items lem-riccati-finite-budget-wrappers-return-a-status,lem-sda-doubling-composition-and-psd-invariants",
+        "exit_code": 0,
+        "result": "Captured both review contexts immediately after the stable batch review and owning-contract repairs. Both item guards equal the frozen assigned before hashes."
+      },
+      {
+        "command": "Focused read-only Node report-integrity assertions using itemHashGuard, statementHash and SHA-256",
+        "exit_code": 0,
+        "result": "Verified exact frozen semantic input hash, complete two-item assignment, unchanged raw bytes/guards/Statements, both current assigned contract quotations, and exactly one fixed ledger row for each reconciled finding."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Hand off this report to the deterministic engine for collection; current central certification, judging and scoped full batteries remain engine-owned.",
+    "repair_complete": true,
+    "contract_repair": {
+      "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-23.proof-contracts.json",
+      "changed_rows": [
+        "contracts.lem-riccati-finite-budget-wrappers-return-a-status.citations[F7, alg-finite-budget-structure-preserving-doubling-for-dare].quote",
+        "contracts.lem-sda-doubling-composition-and-psd-invariants.citations[F1, alg-finite-budget-structure-preserving-doubling-for-dare].quote"
+      ],
+      "change": "Inserted only the new normal-return paragraph into each existing full-Definition quotation; all other assigned contract fields and every other item contract were preserved from the fresh under-lock read.",
+      "before_raw_sha256": "c84ad39a7e5e2a3cda76fa0bae066bfc0f8614925850a131a6db45bf6718874d",
+      "after_raw_sha256": "8e745976eda081e889c7cac79fd58f00c9193551a4bc821c745481792c976265",
+      "level_contract": "Generated level file was not edited."
+    },
+    "item_bytes_unchanged": {
+      "lem-riccati-finite-budget-wrappers-return-a-status": "b2f223a895026b23108a7ca30e568e149e00e1edc8ae5dc022ae9aa2c1c49ace",
+      "lem-sda-doubling-composition-and-psd-invariants": "ac246b9212804b637206d616f893a858890c24b98a2ae9af2aee8dff5c6b6ba4"
+    },
+    "ledger_reconciliation": {
+      "canonical_ledger": "research/defect-ledger.jsonl",
+      "supplier_proposal": "ledger_updates/0 in impact-repeat-2.json",
+      "already_recorded_supplier_finding": "na71-step5-repeat-r2-u23-sda-normal-status",
+      "supplier_duplicate_appended": false,
+      "new_nonfatal_contract_rows": [
+        "na71-step5-impact-repeat-r2-u1-contract-f7",
+        "na71-step5-impact-repeat-r2-u1-contract-f1"
+      ],
+      "generated_view": "research/DEFECT-LEDGER.md regenerated by the canonical append command.",
+      "published_ledger": "No published supplier defect or repair arose; draft-only findings were not added to the published-consumer-supplier ledger.",
+      "independent_review": false
+    },
+    "shared_lock": "Contract/ledger edits were made only while holding step5-v2-impact-repeat-r2-u1; the latest files were reread under the lock, checked, and the lock was released. The supplier finding was already present at that under-lock read and was not appended again.",
+    "proof_layout": "No item file was edited or formatted, so no changed-item proof-layout invocation was required.",
+    "propagation": "Neither assigned Statement nor Definition changed. No new prerequisite, dependency or AC use was added; no further consumer hop is triggered. The two exact assigned supplier uses are documented in the reviews. Other seed consumers already belong to the other frozen lanes.",
+    "outside_consumer_findings": []
+  }
+}

@@ -1,0 +1,902 @@
+[
+  {
+    "order": 2608,
+    "id": "gaussian-basis-integral-recurrences-and-boys-error",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Gaussian basis integral recurrences and boys error",
+    "companion": "gaussian-basis-integral-recurrences-and-boys-error-examples",
+    "requires": [
+      "stable-special-function-recurrences-and-certified-evaluation"
+    ],
+    "items": [
+      {
+        "id": "def-cartesian-gaussian-primitives-and-contractions",
+        "kind": "definition",
+        "title": "Cartesian Gaussian primitives, contractions, and integral conventions",
+        "deps": [
+          "def-real-exponential-function-and-e",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; primitive Cartesian Gaussians on pp. 3–6 and integral conventions on pp. 17–28."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §§II–IV, especially pp. 5–18."
+            }
+          ]
+        },
+        "statement": "Write $\\mathbb N_0=\\{0,1,2,\\ldots\\}$ and $\\|x\\|_2=(x_1^2+x_2^2+x_3^2)^{1/2}$ for $x\\in\\mathbb R^3$. For $\\alpha=(\\alpha_1,\\alpha_2,\\alpha_3)\\in\\mathbb N_0^3$, exponent $a>0$, and center $A\\in\\mathbb R^3$, a **primitive Cartesian Gaussian** is\n$$g_{\\alpha,a,A}(x)=\\prod_{j=1}^3(x_j-A_j)^{\\alpha_j}\\exp(-a\\|x-A\\|_2^2),\\qquad x\\in\\mathbb R^3.$$\nA **finite Gaussian contraction** is a finite sum $\\phi=\\sum_{k=1}^q c_k g_{\\alpha_k,a_k,A_k}$ with $q\\in\\mathbb N_0$, $c_k\\in\\mathbb C$, $a_k>0$, and $A_k\\in\\mathbb R^3$. The zero-term sum is the zero function. Bras are conjugated.\n\nFor a pair of contractions put $f_{\\phi,\\psi}(x)=\\overline{\\phi(x)}\\psi(x)$. For pair densities $f,g$, define the **Coulomb form**\n$$\\mathcal C(f,g)=\\int_{\\mathbb R^3}\\int_{\\mathbb R^3}\\frac{\\overline{f(x)}g(y)}{\\|x-y\\|_2}\\,dy\\,dx.$$\nFor finite contractions $\\phi,\\psi,\\rho,\\sigma$, define the overlap, kinetic, point-nucleus attraction, and two-electron Coulomb expressions by\n$$S(\\phi,\\psi)=\\int_{\\mathbb R^3}\\overline{\\phi(x)}\\psi(x)\\,dx,\\qquad T(\\phi,\\psi)=-\\frac12\\int_{\\mathbb R^3}\\overline{\\phi(x)}\\,\\Delta\\psi(x)\\,dx,$$\n$$V_C(\\phi,\\psi)=\\int_{\\mathbb R^3}\\frac{\\overline{\\phi(x)}\\psi(x)}{\\|x-C\\|_2}\\,dx,$$\n$$G(\\phi,\\psi;\\rho,\\sigma)=\\mathcal C(f_{\\phi,\\psi},f_{\\rho,\\sigma}).$$\nThe primitives and their finite contractions are smooth: [[thm-derivative-of-exponential]] supplies smoothness of exp, and repeated coordinatewise applications of [[lem-derivative-algebra-and-chain-rules]] supply all polynomial-product and composition derivatives. Thus the following Laplacian is well defined.\n\nHere $\\Delta\\psi=\\sum_{j=1}^3\\partial_{x_j}^2\\psi$ is the Cartesian Laplacian.\nAll displayed integrals mean Lebesgue integrals in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]]. A finite nuclear attraction is any finite real linear combination of the $V_C$ terms, with its centers and weights specified. This definition alone asserts neither convergence nor a physical approximation postulate."
+      },
+      {
+        "id": "def-boys-function-and-coulomb-auxiliary-recurrence",
+        "kind": "definition",
+        "title": "Boys functions and lower incomplete-gamma notation",
+        "deps": [
+          "def-real-exponential-function-and-e",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-euler-gamma-function"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Boys function definition, properties, and Coulomb-integral reduction on pp. 18–27."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §III, pp. 10–18, auxiliary Boys integrals and recurrence table."
+            }
+          ]
+        },
+        "statement": "Write $\\mathbb N_0=\\{0,1,2,\\ldots\\}$. For $m\\in\\mathbb N_0$ and $T\\in\\mathbb R$, define the finite-integral extension\n$$F_m(T)=\\int_0^1 t^{2m}\\exp(-Tt^2)\\,dt.$$\nThe **Boys function** is the restriction to the conventional domain $T\\ge0$. The extension to negative $T$ is used only for ordinary center derivatives at the boundary value $T=0$; the finite evaluator below accepts no negative argument.\nFor $s>0$ and $T>0$, write the lower incomplete-gamma integral as\n$$\\gamma(s,T)=\\int_0^T u^{s-1}\\exp(-u)\\,du.$$\nThe complete Euler Gamma function $\\Gamma(s)$ has the existing meaning in [[def-euler-gamma-function]], namely $\\Gamma(s)=\\int_0^\\infty u^{s-1}e^{-u}\\,du$ for real $s>0$.\n\nThe integrand defining $F_m$ is continuous on $[0,1]$ and positive on $(0,1]$, so $F_m(T)$ exists, is positive, and, for $T\\ge0$, satisfies $F_m(T)\\le1/(2m+1)$. The index $m$ is an arbitrary nonnegative integer; no fixed maximum order is part of this definition."
+      },
+      {
+        "id": "def-finite-gaussian-basis-variational-energy-and-gradient",
+        "kind": "definition",
+        "title": "Finite tensor contractions and their variational energy and gradient",
+        "deps": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; finite one- and two-electron integral tensors and contractions on pp. 2 and 27–28."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §§III–V, finite integral arrays and contraction loops on pp. 10–20."
+            }
+          ]
+        },
+        "statement": "Let $n,r\\ge1$ be integers, $C\\in\\mathbb R^{n\\times r}$, $D\\in\\mathbb R^{r\\times r}$, $H\\in\\mathbb R^{n\\times n}$, and $G\\in\\mathbb R^{n\\times n\\times n\\times n}$. Define their transformed tensors by\n$$H'_{pq}=\\sum_{a,b=1}^n C_{ap}H_{ab}C_{bq},\\qquad G'_{pqrs}=\\sum_{a,b,c,d=1}^n C_{ap}C_{bq}C_{cr}C_{ds}G_{abcd},$$\nfor $1\\le p,q,r,s\\le r$. Define the finite **variational energy functional**\n$$E(C;D,H,G)=\\sum_{p,q=1}^r D_{pq}H'_{pq}+\\frac12\\sum_{p,q,r,s=1}^r D_{pq}D_{rs}G'_{pqrs}.$$\nIts gradient $\\nabla_C E$ is the ordinary Euclidean gradient with respect to the $nr$ real entries of $C$. The basis dimension is $n$, the contracted dimension is $r$, and for any finite matrix or tensor $A$, $\\|A\\|_F=(\\sum |A_{i_1\\ldots i_k}|^2)^{1/2}$, with the sum over all its entries. This is a finite algebraic functional; it assumes no Hartree–Fock, self-consistency, or minimizing-state postulate.\n\nFor perturbed integral tensors $\\widetilde H,\\widetilde G$, write $\\widetilde E$ for the same functional with those tensors and the same fixed $C,D$. The word “variational” here names the finite coefficient functional only; no claim about a stationary point or physical energy is included."
+      },
+      {
+        "id": "thm-gaussian-product-theorem-and-polynomial-shift",
+        "kind": "theorem",
+        "title": "Gaussian product theorem and finite polynomial shifts",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Gaussian product rule and overlap-distribution shifts, pp. 11–13."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; Gaussian product identity and polynomial shifts, §II, pp. 5–7."
+            }
+          ]
+        },
+        "statement": "Let $a,b>0$, $A,B\\in\\mathbb R^3$, $p=a+b$, $\\mu=ab/p$, and $P=(aA+bB)/p$. Then for every $x\\in\\mathbb R^3$,\n$$\\exp(-a\\|x-A\\|_2^2)\\exp(-b\\|x-B\\|_2^2)=\\exp(-\\mu\\|A-B\\|_2^2)\\exp(-p\\|x-P\\|_2^2).$$\nFor any multi-indices $\\alpha,\\beta\\in\\mathbb N_0^3$, the polynomial factor $(x-A)^\\alpha(x-B)^\\beta$ is a finite polynomial in $x-P$ of total degree at most $|\\alpha|+|\\beta|$. Moreover, $P=(a/p)A+(b/p)B$ lies on the closed segment from $A$ to $B$."
+      },
+      {
+        "id": "thm-boys-integral-identities-series-and-incomplete-gamma",
+        "kind": "theorem",
+        "title": "Boys integral, power series, recurrence, and incomplete-gamma representation",
+        "deps": [
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "def-real-exponential-function-and-e",
+          "def-euler-gamma-function",
+          "thm-gaussian-integral",
+          "thm-gamma-functional-equation",
+          "thm-substitution-for-improper-integrals",
+          "thm-integration-by-parts",
+          "thm-dominated-convergence",
+          "lem-mean-value-theorem-on-closed-interval",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Boys definition, positivity, series, recurrence, and incomplete-gamma change of variables, pp. 19–21 and 24–25."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §IV.B, pp. 17–18, Boys recurrence and finite numerical branches."
+            }
+          ]
+        },
+        "statement": "For every $m\\in\\mathbb N_0$ and real $T$, the extension in [[def-boys-function-and-coulomb-auxiliary-recurrence]] satisfies\n$$0<F_m(T)\\le\\frac1{2m+1},\\qquad F_m(0)=\\frac1{2m+1},$$\n$$F_m(T)=\\sum_{k=0}^{\\infty}\\frac{(-T)^k}{k!(2m+2k+1)},\\qquad \\frac{d}{dT}F_m(T)=-F_{m+1}(T).$$\nThe upper bound in the first display is asserted for $T\\ge0$. For $T>0$ the function also satisfies\n$$2T F_{m+1}(T)=(2m+1)F_m(T)-e^{-T},\\qquad F_m(T)=\\frac{\\gamma(m+\\tfrac12,T)}{2T^{m+1/2}}.$$\nThe complete Gamma factor at a half-integer is\n$$\\Gamma(m+\\tfrac12)=\\frac{(2m)!}{4^m m!}\\sqrt\\pi.$$"
+      },
+      {
+        "id": "lem-boys-positive-midpoint-enclosure",
+        "kind": "lemma",
+        "title": "A positive midpoint enclosure for Boys functions on bounded arguments",
+        "deps": [
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "lem-mean-value-theorem-on-closed-interval",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Boys-function numerical evaluation discussion, pp. 20–21. The source describes evaluation regimes; the midpoint enclosure and constant are proved here."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §IV.B, pp. 17–18. The certified midpoint bound is derived locally."
+            }
+          ]
+        },
+        "statement": "For $m\\in\\mathbb N_0$, $T\\ge0$, and integer $N\\ge1$, let $h=1/N$, $t_j=(j-\\tfrac12)h$ for $1\\le j\\le N$, and\n$$Q_{m,N}(T)=h\\sum_{j=1}^N t_j^{2m}e^{-Tt_j^2}.$$\nThen all quadrature weights and summands are positive and\n$$|F_m(T)-Q_{m,N}(T)|\\le\\frac{m+T}{2N}.$$\nConsequently, for $0\\le T\\le T_{\\max}$, the same positive rule has the uniform enclosure error $(m+T_{\\max})/(2N)$."
+      },
+      {
+        "id": "lem-cartesian-gaussian-moments-and-parameter-derivatives",
+        "kind": "lemma",
+        "title": "Cartesian Gaussian moments and exponent-parameter derivatives",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "def-real-exponential-function-and-e",
+          "thm-gaussian-integral",
+          "thm-substitution-for-improper-integrals",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-integration-by-parts",
+          "lem-mean-value-theorem-on-closed-interval",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Gaussian moments and Hermite-Gaussian integration, pp. 6–9 and 14."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §§II–III, pp. 5–12, Gaussian moments and differentiated Gaussian integrals."
+            }
+          ]
+        },
+        "statement": "Let $p>0$ and $\\alpha\\in\\mathbb N_0^3$. If any component of $\\alpha$ is odd, then\n$$\\int_{\\mathbb R^3}x^\\alpha e^{-p\\|x\\|_2^2}\\,dx=0.$$\nIf $\\alpha_j=2k_j$ for $j=1,2,3$, then\n$$\\int_{\\mathbb R^3}x^\\alpha e^{-p\\|x\\|_2^2}\\,dx=\\pi^{3/2}\\prod_{j=1}^3\\frac{(2k_j)!}{4^{k_j}k_j!\\,p^{k_j+1/2}}.$$\nFor every $q\\in\\mathbb N_0$, differentiation with respect to $p$ is valid and\n$$\\frac{d^q}{dp^q}\\int_{\\mathbb R^3}x^\\alpha e^{-p\\|x\\|_2^2}\\,dx=(-1)^q\\int_{\\mathbb R^3}\\|x\\|_2^{2q}x^\\alpha e^{-p\\|x\\|_2^2}\\,dx.$$"
+      },
+      {
+        "id": "thm-gaussian-contraction-error-energy-gradient-bounds",
+        "kind": "theorem",
+        "title": "Explicit finite-dimensional contraction error bounds for energy and gradient",
+        "deps": [
+          "def-finite-gaussian-basis-variational-energy-and-gradient",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; finite tensor contraction and Coulomb-potential contractions on pp. 2 and 27–28. The norm bounds below are proved locally."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §V and Table 1, finite contraction loops on pp. 19–21."
+            }
+          ]
+        },
+        "statement": "Let $n,r\\ge1$, $C\\in\\mathbb R^{n\\times r}$ with $\\|C\\|_F\\le B$, and $D\\in\\mathbb R^{r\\times r}$ with $\\|D\\|_F\\le M$. Suppose $|\\widetilde H_{ab}-H_{ab}|\\le\\varepsilon_2$ and $|\\widetilde G_{abcd}-G_{abcd}|\\le\\varepsilon_4$ for every entry. With the functional of [[def-finite-gaussian-basis-variational-energy-and-gradient]],\n$$|\\widetilde E-E|\\le MrnB^2\\varepsilon_2+\\frac12M^2r^2n^2B^4\\varepsilon_4,$$\nand\n$$\\|\\nabla_C\\widetilde E-\\nabla_CE\\|_F\\le2nrBM\\varepsilon_2+2n^2r^2B^3M^2\\varepsilon_4.$$"
+      },
+      {
+        "id": "def-hermite-gaussian-coulomb-auxiliary-functions",
+        "kind": "definition",
+        "title": "Hermite Gaussian and Boys Coulomb auxiliary functions",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules",
+          "thm-boys-integral-identities-series-and-incomplete-gamma"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Hermite Gaussians and Coulomb auxiliary functions on pp. 6–8 and 23–27."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §IV, pp. 16–18, the $R^n_{tuv}$ auxiliary family and recurrence table."
+            }
+          ]
+        },
+        "statement": "Using $\\mathbb N_0=\\{0,1,2,\\ldots\\}$ from [[def-cartesian-gaussian-primitives-and-contractions]], for $p>0$, $P\\in\\mathbb R^3$, and $t,u,v\\in\\mathbb N_0$, the **Hermite Gaussian** is\n$$\\Lambda_{tuv}(x;p,P)=\\frac{\\partial^{t+u+v}}{\\partial P_1^t\\partial P_2^u\\partial P_3^v}\\exp(-p\\|x-P\\|_2^2).$$\nFor $\\eta>0$, $P,C\\in\\mathbb R^3$, and $n,t,u,v\\in\\mathbb N_0$, define the **Boys Coulomb auxiliary function**\n$$R^n_{tuv}(\\eta,P-C)=(-2\\eta)^n\\frac{\\partial^{t+u+v}}{\\partial P_1^t\\partial P_2^u\\partial P_3^v}F_n\\!\\left(\\eta\\|P-C\\|_2^2\\right).$$\nEach derivative is an ordinary derivative of a smooth real function of the displayed center coordinates. For the Gaussian this follows from [[thm-derivative-of-exponential]] and repeated coordinatewise product and chain rules in [[lem-derivative-algebra-and-chain-rules]]. For the Boys composition, [[thm-boys-integral-identities-series-and-incomplete-gamma]] gives $F_n^{(k)}(T)=(-1)^kF_{n+k}(T)$ by iteration on the full real extension; these derivatives are continuous by its integral representation and compact-uniform domination. The chain rules therefore also apply when $P=C$, where the Boys argument is zero. The multi-index $(t,u,v)$ records derivative order and $n$ records Boys order; both are nonnegative integers."
+      },
+      {
+        "id": "thm-cartesian-gaussian-integrals-absolutely-convergent",
+        "kind": "theorem",
+        "title": "Absolute convergence and local parameter domination for Gaussian basis integrals",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "lem-cartesian-gaussian-moments-and-parameter-derivatives",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules",
+          "lem-mean-value-theorem-on-closed-interval"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; one- and two-electron Gaussian integral definitions and Coulomb reduction, pp. 17–27. Absolute-convergence majorants are supplied here."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §§II–III, pp. 5–15. Local singular-integrability arguments are supplied here."
+            }
+          ]
+        },
+        "statement": "Every overlap, kinetic, point-nucleus attraction, and two-electron Coulomb integral defined in [[def-cartesian-gaussian-primitives-and-contractions]] exists absolutely for finite Cartesian Gaussian contractions. The same holds after any fixed finite number of spatial derivatives or one derivative with respect to a primitive center or positive exponent. With nuclear positions fixed, if primitive centers remain in compact sets and all exponents remain in a compact subset of $(0,\\infty)$, these differentiated integrands have a common integrable majorant. Thus differentiation with respect to primitive centers or exponents may be passed under any of these integrals."
+      },
+      {
+        "id": "lem-boys-small-taylor-remainder",
+        "kind": "lemma",
+        "title": "A monotone-range Taylor remainder for small Boys arguments",
+        "deps": [
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "thm-boys-integral-identities-series-and-incomplete-gamma"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; small-argument Boys series on p. 20. The monotone-term condition and explicit first-omitted-term bound are proved here."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §IV.B, pp. 17–18. The certified small-$T$ remainder is proved here."
+            }
+          ]
+        },
+        "statement": "Let $m,N\\in\\mathbb N_0$, $T\\ge0$, and $N+2\\ge T$. Then\n$$\\left|F_m(T)-\\sum_{k=0}^N\\frac{(-T)^k}{k!(2m+2k+1)}\\right|\\le\\frac{T^{N+1}}{(N+1)!(2m+2N+3)}.$$\nIn particular, this is a valid finite Taylor certificate whenever $0\\le T\\le1$."
+      },
+      {
+        "id": "lem-boys-incomplete-gamma-large-t-tail-bound",
+        "kind": "lemma",
+        "title": "A scaled incomplete-gamma tail bound for large Boys arguments",
+        "deps": [
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "def-euler-gamma-function",
+          "thm-boys-integral-identities-series-and-incomplete-gamma",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; large-$T$ Boys approximation and incomplete-gamma context on p. 20. The finite tail bound is proved here."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §IV.B, pp. 17–18. The certified scaled tail enclosure is proved here."
+            }
+          ]
+        },
+        "statement": "Let $m\\in\\mathbb N_0$, $s=m+\\tfrac12$, and $T>\\max\\{s-1,0\\}$. Then\n$$F_m(T)=\\frac{\\Gamma(s)-R_s(T)}{2T^s},\\qquad R_s(T)=\\int_T^\\infty u^{s-1}e^{-u}\\,du,$$\nand\n$$0\\le R_s(T)\\le\\frac{T^{s-1}e^{-T}}{1-\\max\\{s-1,0\\}/T}.$$\nConsequently a certified enclosure of $\\Gamma(s)$ and $e^{-T}$ gives the interval\n$$\\left[\\frac{\\Gamma(s)}{2T^s}-\\frac{T^{s-1}e^{-T}}{2T^s(1-\\max\\{s-1,0\\}/T)},\\frac{\\Gamma(s)}{2T^s}\\right]$$\nafter intersecting its lower endpoint with zero. In the evaluator's large branch $T>2m+1$, the denominator is at least $1/2$."
+      },
+      {
+        "id": "lem-boys-upward-downward-recurrence-error-amplification",
+        "kind": "lemma",
+        "title": "Upward and downward Boys recurrence error amplification bounds",
+        "deps": [
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "thm-boys-integral-identities-series-and-incomplete-gamma",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "lem-directed-dyadic-rounding-enclosure-and-error"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; upward/downward Boys recurrences and numerical regimes on p. 20. Error-amplification inequalities are proved here."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §IV.B, pp. 17–18, recurrence directions and their numerical warning."
+            }
+          ]
+        },
+        "statement": "Let $m\\ge0$, $T>0$, and let $I_m=[c_m-r_m,c_m+r_m]$ enclose $F_m(T)$ while $J=[c_e-r_e,c_e+r_e]$ encloses $e^{-T}$. The exact upward recurrence image for $F_{m+1}$ has radius at most\n$$\\frac{(2m+1)r_m+r_e}{2T},$$\nand the exact downward recurrence image for $F_m$, from an interval of radius $r_{m+1}$ for $F_{m+1}$, has radius at most\n$$\\frac{2Tr_{m+1}+r_e}{2m+1}.$$\nWhen both outward endpoint conversions are finite, the stored interval radius exceeds the exact-image radius by at most the mean of the two endpoint-rounding errors. If either endpoint conversion overflows, no finite recurrence interval or finite propagated estimate is asserted for that step. Iterating the displayed bounds gives valid finite error-amplification estimates over any requested order range for which every endpoint conversion is finite. Upward recurrence is undefined at $T=0$; direct values $F_m(0)=1/(2m+1)$ are exact."
+      },
+      {
+        "id": "thm-cartesian-pair-hermite-expansion-and-coefficient-recurrence",
+        "kind": "theorem",
+        "title": "Finite Hermite expansion and coefficient recurrences for a Cartesian Gaussian pair",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "def-hermite-gaussian-coulomb-auxiliary-functions",
+          "thm-gaussian-product-theorem-and-polynomial-shift",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Hermite Gaussian definition, multiplication recurrence, and McMurchie–Davidson coefficient recursion, pp. 6–13 and 23–27."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §II, pp. 5–9, Hermite expansion coefficients and recurrence identities."
+            }
+          ]
+        },
+        "statement": "In one dimension, let $g_i(x_A,a)=x_A^ie^{-ax_A^2}$ and $g_j(x_B,b)=x_B^je^{-bx_B^2}$, with $x_A=x-A$, $x_B=x-B$, $p=a+b$, $P=(aA+bB)/p$, and $K=e^{-ab(A-B)^2/p}$. There are unique coefficients $E_{ij}^t$ such that\n$$g_i(x_A,a)g_j(x_B,b)=\\sum_{t=0}^{i+j}E_{ij}^t\\Lambda_t(x;p,P).$$\nWith $E_{00}^0=K$ and $E_{ij}^t=0$ outside $0\\le t\\le i+j$, they satisfy\n$$E_{i+1,j}^t=\\frac{E_{ij}^{t-1}}{2p}+(P-A)E_{ij}^t+(t+1)E_{ij}^{t+1},$$\n$$E_{i,j+1}^t=\\frac{E_{ij}^{t-1}}{2p}+(P-B)E_{ij}^t+(t+1)E_{ij}^{t+1}.$$\nIn three dimensions the pair expansion is the product of the three one-dimensional expansions, so it is a finite sum of $\\Lambda_{tuv}$ with $0\\le t\\le\\alpha_1+\\beta_1$, $0\\le u\\le\\alpha_2+\\beta_2$, and $0\\le v\\le\\alpha_3+\\beta_3$."
+      },
+      {
+        "id": "thm-cartesian-gaussian-raising-lowering-and-kinetic-recurrences",
+        "kind": "theorem",
+        "title": "Cartesian Gaussian raising, lowering, and kinetic-energy recurrences",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "thm-cartesian-gaussian-integrals-absolutely-convergent",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Cartesian Gaussian differentiation and kinetic-energy integrals on pp. 6 and 16."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; derivative charge distributions in §II and kinetic terms in §III, pp. 8–12."
+            }
+          ]
+        },
+        "statement": "For $g_{\\alpha,a,A}$ from [[def-cartesian-gaussian-primitives-and-contractions]], let $e_j$ be the $j$th coordinate vector. With terms having negative indices interpreted as zero,\n$$\\partial_{x_j}g_{\\alpha,a,A}=\\alpha_jg_{\\alpha-e_j,a,A}-2ag_{\\alpha+e_j,a,A},\\qquad \\partial_{A_j}g_{\\alpha,a,A}=-\\alpha_jg_{\\alpha-e_j,a,A}+2ag_{\\alpha+e_j,a,A}.$$\nThe second spatial derivative and kinetic operator are\n$$\\partial_{x_j}^2g_{\\alpha,a,A}=\\alpha_j(\\alpha_j-1)g_{\\alpha-2e_j,a,A}-2a(2\\alpha_j+1)g_{\\alpha,a,A}+4a^2g_{\\alpha+2e_j,a,A},$$\n$$-\\frac12\\Delta g_{\\alpha,a,A}=\\sum_{j=1}^3\\left(-\\frac{\\alpha_j(\\alpha_j-1)}2g_{\\alpha-2e_j,a,A}+a(2\\alpha_j+1)g_{\\alpha,a,A}-2a^2g_{\\alpha+2e_j,a,A}\\right).$$\nConsequently every kinetic integral of finite contractions is a finite linear combination of overlap integrals with these shifted multi-indices."
+      },
+      {
+        "id": "thm-positive-coulomb-bilinear-cauchy-schwarz-screening",
+        "kind": "theorem",
+        "title": "Positive Coulomb bilinear form, Cauchy–Schwarz, and screening bound",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "def-finite-gaussian-basis-variational-energy-and-gradient",
+          "thm-cartesian-gaussian-integrals-absolutely-convergent",
+          "thm-gaussian-integral",
+          "thm-substitution-for-improper-integrals",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Gaussian electrostatics and Cauchy–Schwarz prescreening on pp. 21–22 and 35. Positivity is proved locally here."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §V, pp. 19–21, computational considerations and contraction-loop scheme. The local positivity and screening bounds are proved here."
+            }
+          ]
+        },
+        "statement": "For pair densities $f,g$ arising as finite products of Gaussian contractions in [[def-cartesian-gaussian-primitives-and-contractions]], let\n$$\\mathcal C(f,g)=\\int_{\\mathbb R^3}\\int_{\\mathbb R^3}\\frac{\\overline{f(x)}g(y)}{\\|x-y\\|_2}\\,dy\\,dx.$$\nThen $\\mathcal C$ is a well-defined Hermitian positive-semidefinite sesquilinear form on their finite linear span, and\n$$|\\mathcal C(f,g)|^2\\le\\mathcal C(f,f)\\mathcal C(g,g).$$\nFor orbitals $\\phi_a,\\phi_b,\\phi_c,\\phi_d$ and pair densities $f_{ab}=\\overline{\\phi_a}\\phi_b$, the integral convention in [[def-cartesian-gaussian-primitives-and-contractions]] gives\n$$|G(\\phi_a,\\phi_b;\\phi_c,\\phi_d)|\\le\\sqrt{G(\\phi_a,\\phi_b;\\phi_a,\\phi_b)G(\\phi_c,\\phi_d;\\phi_c,\\phi_d)},$$\nwhere each diagonal quantity is nonnegative. For the real finite energy functional in [[def-finite-gaussian-basis-variational-energy-and-gradient]], let $C\\in\\mathbb R^{n\\times r}$, $D\\in\\mathbb R^{r\\times r}$, and define the input-basis density coefficients $W_{ab}=\\sum_{p,q=1}^r C_{ap}D_{pq}C_{bq}$. Here the $n$ input basis functions may themselves be contractions; a primitive basis is the singleton-contraction special case. Reindexing the finite two-body energy gives $E_2=\\tfrac12\\sum_{a,b,c,d}W_{ab}W_{cd}G_{ab,cd}$. Thus for any finite set $S$ of input-basis quartets omitted from that contraction,\n$$B_S=\\frac12\\sum_{(a,b,c,d)\\in S}|W_{ab}W_{cd}|\\sqrt{G_{ab,ab}G_{cd,cd}}$$\nis an accumulated upper bound for the absolute omitted energy contribution. This does not assert that a screened integral is zero."
+      },
+      {
+        "id": "thm-gaussian-coulomb-hermite-recurrences-and-integral-formulas",
+        "kind": "theorem",
+        "title": "Hermite recurrence formulas for Gaussian nuclear-attraction and two-electron Coulomb integrals",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "def-hermite-gaussian-coulomb-auxiliary-functions",
+          "lem-cartesian-gaussian-moments-and-parameter-derivatives",
+          "thm-cartesian-gaussian-integrals-absolutely-convergent",
+          "thm-gaussian-product-theorem-and-polynomial-shift",
+          "thm-cartesian-pair-hermite-expansion-and-coefficient-recurrence",
+          "thm-boys-integral-identities-series-and-incomplete-gamma",
+          "thm-gaussian-integral",
+          "thm-substitution-for-improper-integrals",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Laplace representation, Boys reduction, Hermite Coulomb derivatives, and recurrences on pp. 18–27. The convergence and derivative justifications are completed locally."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §§III–IV, pp. 10–18, one- and two-electron auxiliary integral formulas and recurrence table."
+            }
+          ]
+        },
+        "statement": "For $p>0$, $P,C\\in\\mathbb R^3$, and $\\eta=pq/(p+q)$ with $p,q>0$, the Hermite Coulomb auxiliaries of [[def-hermite-gaussian-coulomb-auxiliary-functions]] satisfy\n$$R^n_{000}(p,P-C)=(-2p)^nF_n(p\\|P-C\\|^2),$$\n$$R^n_{t+1,u,v}=(P_1-C_1)R^{n+1}_{tuv}+tR^{n+1}_{t-1,u,v},$$\nwith the corresponding coordinate formulas for increasing $u$ or $v$ and with negative-index terms zero. The one-center and two-center base Coulomb integrals are\n$$\\int_{\\mathbb R^3}\\frac{e^{-p\\|x-P\\|^2}}{\\|x-C\\|}\\,dx=\\frac{2\\pi}{p}F_0(p\\|P-C\\|^2),$$\n$$\\int\\!\\!\\int\\frac{e^{-p\\|x-P\\|^2}e^{-q\\|y-Q\\|^2}}{\\|x-y\\|}\\,dy\\,dx=\\frac{2\\pi^{5/2}}{pq\\sqrt{p+q}}F_0(\\eta\\|P-Q\\|^2).$$\nFor a primitive pair expansion $g_ag_b=\\sum_{tuv}E_{ab}^{tuv}\\Lambda_{tuv}$, the nuclear attraction integral is\n$$V_C(g_a,g_b)=\\frac{2\\pi}{p}\\sum_{tuv}E_{ab}^{tuv}R^0_{tuv}(p,P-C).$$\nFor two primitive pairs, with coefficients $E_{ab}$ and $E_{cd}$ and centers $P,Q$, the Coulomb integral is\n$$G(g_a,g_b;g_c,g_d)=\\frac{2\\pi^{5/2}}{pq\\sqrt{p+q}}\\sum_{tuv}\\sum_{\\tau\\nu\\phi}\\overline{E_{ab}^{tuv}}E_{cd}^{\\tau\\nu\\phi}(-1)^{\\tau+\\nu+\\phi}R^0_{t+\\tau,u+\\nu,v+\\phi}(\\eta,P-Q).$$\nAll sums are finite; the largest Boys order is bounded by the total polynomial degree in the participating primitives."
+      },
+      {
+        "id": "alg-certified-boys-finite-budget-branch-evaluation",
+        "kind": "algorithm",
+        "title": "Finite-budget certified evaluation of Boys function tables",
+        "deps": [
+          "alg-certified-elementary-range-evaluation",
+          "def-outward-rounded-interval-and-ball-operations",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "def-certified-evaluation-result-contract",
+          "alg-certified-gamma-loggamma-evaluation",
+          "thm-certified-gamma-loggamma-enclosures",
+          "thm-real-elementary-range-enclosures",
+          "thm-boys-integral-identities-series-and-incomplete-gamma",
+          "lem-boys-small-taylor-remainder",
+          "lem-boys-positive-midpoint-enclosure",
+          "lem-boys-incomplete-gamma-large-t-tail-bound",
+          "lem-boys-upward-downward-recurrence-error-amplification"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; the Boys function and its small-/large-argument regimes are discussed on pp. 20–21. This finite certified branch table and all conditional statuses are specified here."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §IV.B, pp. 17–18. The numerical regimes are context; error certificates and finite failure branches are defined here."
+            }
+          ]
+        },
+        "statement": "Input a nonnegative integer $M$, a finite dyadic interval $\\mathcal T=[T_-,T_+]\\subset[0,\\infty)$, absolute tolerance $\\varepsilon_a>0$, optional relative tolerance $\\varepsilon_r>0$, a finite integer work cap $W$, a finite integer precision cap $P\\ge2$, and a dyadic format with precision $2\\le p\\le P$, exponent bounds and elementary truncation index $K\\ge1$. These are the backend parameters of [[def-certified-evaluation-result-contract]]. The output is a table of real dyadic intervals $I_m$ for $0\\le m\\le M$, with status `success`, `inconclusive`, `domain`, or `range`.\n\nAll arithmetic uses [[def-outward-rounded-interval-and-ball-operations]]. Every real elementary call means a typed DAG call to [[alg-certified-elementary-range-evaluation]] at the supplied format and fixed $K$. Embed an exact rational argument by outward rounding; check the domain of the entire rounded argument before calling. Square roots use the outward square-root operation. No machine elementary value is an endpoint certificate. Maintain a shared work counter: charge each arithmetic operation, conversion, comparison, loop update, summand and primitive child operation before executing it. Interrupt a child when the remaining counter reaches zero. A cap exhaustion, unresolved enclosure test, intermediate overflow, or child non-success on otherwise valid data makes the affected seed or directional candidate unavailable; if no candidate succeeds, return `inconclusive`. Return `range` only when a certified bound proves that an exact requested table value lies outside the largest finite magnitude of the supplied format. Invalid original inputs give `domain`; a domain test obscured only by intermediate rounding gives `inconclusive`.\n\n1. Validate the stated input conditions and supported format. Process the distinct endpoints in increasing order; process the distinct seed orders $m\\in\\{0,M\\}$ in increasing order. At an endpoint $\\tau=0$, form the exact rationals $1/(2m+1)$ for every $0\\le m\\le M$. If any exact value exceeds the largest finite magnitude of the format, return `range`; otherwise round the rationals outward to the output format. Use this table without a recurrence. A rational is retained exactly internally, but a non-dyadic rational is not returned as a singleton dyadic interval.\n\n2. For each positive endpoint $\\tau$, perform refinements $k=0,1,\\ldots,W-1$, subject to the shared work counter. At refinement $k$, try the two seed orders separately using their own $m$ and $s=m+\\tfrac12$:\n\n   - If $0<\\tau\\le1$, evaluate the Taylor polynomial through $N=k$ from [[thm-boys-integral-identities-series-and-incomplete-gamma]], then enlarge by the outward upper bound for $\\tau^{N+1}/((N+1)!(2m+2N+3))$ from [[lem-boys-small-taylor-remainder]]. The condition $N+2\\ge\\tau$ holds throughout this branch.\n   - If $1<\\tau\\le2m+1$, use $N=2^k$ panels of [[lem-boys-positive-midpoint-enclosure]], in increasing node order $j=1,\\ldots,N$, and enlarge the positive midpoint sum by $(m+\\tau)/(2N)$. Its dyadic nodes are formed exactly before storage; evaluate their exponentials by the finite real elementary call.\n   - If $\\tau>2m+1$, request the Gamma target from [[alg-certified-gamma-loggamma-evaluation]] on the exact rectangle $[s,s]+i[0,0]$, with child absolute tolerance $\\varepsilon_a/2^{k+2}$, no relative request, base format precision $p_0=p$, the same exponent bounds and fixed elementary truncation $K$, child precision cap $P$, and child work cap $w=\\lfloor R/4\\rfloor$, where $R$ is the remaining parent work at call entry. If $w<1$, stop `inconclusive`. Debit its actual work, including unsuccessful work, to the parent counter. A successful child rectangle has real projection containing the real number $\\Gamma(s)$: its reality follows from the positive-real Euler integral, also evaluated by the half-integer identity in [[thm-boys-integral-identities-series-and-incomplete-gamma]]. Use this projection as the real Gamma enclosure. Evaluate $e^{-\\tau}$ by the real elementary call, and use [[lem-boys-incomplete-gamma-large-t-tail-bound]] to form the enclosing interval for $F_m(\\tau)$. Compute $\\tau^s=\\tau^m\\sqrt\\tau$ and $\\tau^{s-1}=\\tau^s/\\tau$ by outward operations; the exact denominator $1-\\max(s-1,0)/\\tau$ is positive. Replace a negative lower endpoint by zero, retaining the upper endpoint. A child `range`, a child `domain` on this valid positive argument, or a child `inconclusive` invalidates that seed attempt and permits the next bounded refinement; no child status is propagated as a range claim for the Boys output.\n\n   A finite seed interval is available to its direction only when its radius is at most $\\varepsilon_a$. A failed attempt does not invalidate a successfully enclosed seed for the other direction. Every panel and child loop is subject to the counter, even when its formal index bound is very large.\n\n3. At each refinement obtain one finite real interval $J$ for $e^{-\\tau}$. From an available order-zero seed form the upward candidate for orders $0,\\ldots,M$; from an available order-$M$ seed form the downward candidate for orders $M,\\ldots,0$. Use the exact affine recurrence maps in [[lem-boys-upward-downward-recurrence-error-amplification]]: compute each affine image's endpoints by exact rational endpoint arithmetic, then convert those two endpoints outward once. If either conversion overflows, discard that directional candidate at this refinement. Otherwise record the two conversion errors and propagate the lemma's radius bounds, including half their sum at each step. This prescription avoids omitting rounding at intermediate nodes. A table is admissible only if every entry satisfies the propagated bound and the requested absolute and, if requested, zero-excluding relative-radius test. Keep the admissible candidate with smaller maximum radius, ties upward. If neither direction is admissible, continue to the next refinement. Once an endpoint table is chosen, proceed to the next endpoint. No upward division is attempted at zero.\n\n4. With both endpoint tables, form $I_m=\\operatorname{hull}(I_m(T_+),I_m(T_-))$ for every requested order, using endpoint minima and maxima. By $F'_m(T)=-F_{m+1}(T)<0$ from [[thm-boys-integral-identities-series-and-incomplete-gamma]], this encloses the full range over $\\mathcal T$. Return `success` only after every output radius is at most $\\varepsilon_a$ and, when relative tolerance is requested, the interval excludes zero and satisfies the relative-radius test in [[def-certified-evaluation-result-contract]]. Otherwise return `inconclusive`. Exhausting the finite refinement list or shared work counter also returns `inconclusive`. At a positive endpoint, return `range` only if a certified lower bound for some requested exact Boys value exceeds the largest finite magnitude of the format; a merely overflowing enclosure endpoint gives `inconclusive`. No branch promises success for every valid box or finite cap."
+      },
+      {
+        "id": "thm-boys-branch-evaluation-enclosures-are-sound",
+        "kind": "theorem",
+        "title": "Soundness of every successful finite-budget Boys enclosure",
+        "deps": [
+          "alg-certified-elementary-range-evaluation",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "alg-certified-boys-finite-budget-branch-evaluation",
+          "def-certified-evaluation-result-contract",
+          "alg-certified-gamma-loggamma-evaluation",
+          "thm-certified-gamma-loggamma-enclosures",
+          "thm-real-elementary-range-enclosures",
+          "lem-boys-small-taylor-remainder",
+          "lem-boys-positive-midpoint-enclosure",
+          "lem-boys-incomplete-gamma-large-t-tail-bound",
+          "lem-boys-upward-downward-recurrence-error-amplification",
+          "thm-boys-integral-identities-series-and-incomplete-gamma"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Boys integral and recurrence identities on pp. 19–21. The general finite enclosure certificate is proved here."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §IV.B, pp. 17–18. Its evaluation regimes do not assert the finite certified accuracy proved here."
+            }
+          ]
+        },
+        "statement": "Every call to [[alg-certified-boys-finite-budget-branch-evaluation]] terminates after finitely many operations bounded by its declared caps. Whenever it returns `success` on $\\mathcal T\\subset[0,\\infty)$, each returned interval $I_m$ contains the exact range $\\{F_m(T):T\\in\\mathcal T\\}$ for $0\\le m\\le M$ and has the absolute and any reported relative accuracy required by [[def-certified-evaluation-result-contract]]. It may instead return `inconclusive`, `domain`, or `range`; no success for every finite input or cap is asserted."
+      },
+      {
+        "id": "alg-finite-gaussian-basis-integral-recurrence-evaluation",
+        "kind": "algorithm",
+        "title": "Finite primitive and contracted Gaussian integral evaluation with certified screening",
+        "deps": [
+          "alg-certified-elementary-range-evaluation",
+          "def-outward-rounded-interval-and-ball-operations",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "def-certified-evaluation-result-contract",
+          "thm-real-elementary-range-enclosures",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "def-hermite-gaussian-coulomb-auxiliary-functions",
+          "def-finite-gaussian-basis-variational-energy-and-gradient",
+          "lem-cartesian-gaussian-moments-and-parameter-derivatives",
+          "thm-cartesian-gaussian-integrals-absolutely-convergent",
+          "thm-gaussian-product-theorem-and-polynomial-shift",
+          "thm-cartesian-gaussian-raising-lowering-and-kinetic-recurrences",
+          "thm-cartesian-pair-hermite-expansion-and-coefficient-recurrence",
+          "thm-positive-coulomb-bilinear-cauchy-schwarz-screening",
+          "thm-gaussian-contraction-error-energy-gradient-bounds",
+          "alg-certified-boys-finite-budget-branch-evaluation",
+          "thm-boys-branch-evaluation-enclosures-are-sound",
+          "thm-gaussian-coulomb-hermite-recurrences-and-integral-formulas"
+        ],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; overlap, kinetic, attraction, two-electron recurrence, and screening workflow on pp. 11–28 and 35. The finite error/status contract is defined here."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §§II–V and Table 1, pp. 5–21, pair recurrences and finite contraction loops. Error certification is developed locally."
+            }
+          ]
+        },
+        "statement": "**Inputs.** A finite list of input basis contractions $\\phi_a=\\sum_{i=1}^{q_a}d_{ai}g_{ai}$, $1\\le a\\le n$, from [[def-cartesian-gaussian-primitives-and-contractions]], represented by finite dyadic intervals for real centers and positive exponents and finite dyadic intervals or complex rectangles for coefficients; a finite nuclear list $((C_\\ell,w_\\ell))_{\\ell=1}^J$ whose centers and signed real weights are represented by finite dyadic intervals; a requested subset $\\mathcal I\\subseteq\\{S,T,V,G\\}$ of integral outputs (overlap, kinetic, nuclear attraction, and Coulomb); and Boolean energy and gradient requests, with a gradient request requiring an energy request. Require at least one requested output. Supply a positive integral tolerance $\\varepsilon_I$ for every requested integral and for integrals used internally by an energy request; supply a positive energy tolerance $\\varepsilon_E$ when energy is requested and, for a gradient request, an optional positive gradient tolerance defaulting to $\\varepsilon_E$. An optional positive screening tolerance is allowed only for an energy request. Also supply finite positive integer work and precision caps $W,P$ and a dyadic format of precision $2\\le p\\le P$ with exponent bounds and fixed elementary truncation index $K\\ge1$. A primitive request is the singleton-contraction case. An energy/gradient request additionally requires $n,r\\ge1$, real primitive-contraction coefficients $d_{ai}$ and real nuclear data, real matrices $C\\in\\mathbb R^{n\\times r},D\\in\\mathbb R^{r\\times r}$ given by dyadic boxes (exact matrices are singleton boxes), and uniform finite bounds $B\\ge\\sup\\|C\\|_F$, $M_D\\ge\\sup\\|D\\|_F$ from [[def-finite-gaussian-basis-variational-energy-and-gradient]]. Internal primitive labels $(a,i)$ are distinct from the input basis labels $a$; $C$ is a subsequent transform of the input basis.\n\n**Outputs.** A status `success`, `inconclusive`, `domain`, or `range`; outward real intervals or complex rectangles for the integrals in $\\mathcal I$; an energy interval when energy is requested; a gradient center and Frobenius gradient-error bound when gradient is requested; and a separately accumulated discarded-energy bound when screening is enabled. Success encloses every parameter value in the input boxes. No status declares an omitted integral zero.\n\n**Finite calls and accounting.** Use [[def-outward-rounded-interval-and-ball-operations]] for arithmetic. Every real elementary call means a typed DAG call to [[alg-certified-elementary-range-evaluation]] at the supplied format and $K$. Enclose $\\pi$ by the $K$-term Machin/arctangent certificate in [[lem-trigonometric-identities-machin-and-range-reduction]], with exact rational tail endpoints before final outward conversion. A shared counter charges each conversion, comparison, loop update, arithmetic operation, recurrence update and summand, including every primitive operation executed by a child. Check the counter before executing an operation and interrupt any child at exhaustion. A required Boys call receives remaining work $R$ as its finite work cap, precision cap $P$, the same format and $K$, absolute tolerance $\\varepsilon_I/2$ and no relative request; its actual work is charged to the parent. A required child non-success on otherwise valid data or an intermediate overflow makes the current integral evaluation `inconclusive`; a rounded intermediate failing a domain certification on valid original data is also `inconclusive`. Return `range` only when a certified lower bound for a requested exact output component exceeds the largest finite magnitude of the format or a certified upper bound is below its negative. A mere overflow of a conservative intermediate or enclosure endpoint is not enough to claim `range`. Invalid original inputs return `domain`; cap exhaustion returns `inconclusive`. These choices are conservative and need not permit success under every cap or tolerance.\n\n1. Validate the request specification, positive exponent lower endpoints, finite input boxes, indices in $\\mathbb N_0^3$, supported format and positive tolerances/caps. Invalid original data return `domain`. If energy/gradient is requested, verify realness and dimensions and certify the norm bounds by outward Frobenius upper bounds on the complete boxes. If this sufficient norm test cannot certify the supplied bounds, return `inconclusive`; do not claim that an unknown represented matrix violates its bound. Form finite primitive-pair and quartet lists for the requested integrals and any energy/gradient dependencies, lexicographically. Include all shifted overlap pairs required by the kinetic raising/lowering formula; a negative index contributes zero.\n\n2. For each ordered primitive pair with exponents $a,b$, indices $\\alpha,\\beta$ and centers $A,B$, compute $p=a+b$, $P=(aA+bB)/p$, and $K_{ab}=\\exp(-ab\\|A-B\\|^2/p)$ by outward arithmetic and the real elementary call. Compute the Hermite coefficients by [[thm-cartesian-pair-hermite-expansion-and-coefficient-recurrence]], raising the first primitive in x,y,z order and then the second, storing each intermediate degree table until its successors have been formed. The final table has $\\prod_{j=1}^3(\\alpha_j+\\beta_j+1)$ entries; every intermediate table update is also charged. Compute overlap by the finite shifted polynomial expansion and the moments in [[lem-cartesian-gaussian-moments-and-parameter-derivatives]], and kinetic by [[thm-cartesian-gaussian-raising-lowering-and-kinetic-recurrences]]. Certified square roots and integer powers evaluate all half-integer factors in those moment formulas.\n\n3. To evaluate an attraction primitive pair, put $L=|\\alpha|+|\\beta|$ and use exponent $\\eta=p$ and center difference $P-C_{\\rm nuc}$. To evaluate a primitive Coulomb quartet, including any diagonal self quartet, put $L=|\\alpha|+|\\beta|+|\\gamma|+|\\delta|$, $\\eta=pq/(p+q)$ and center difference $P-Q$, where the second pair has exponent $q$. Form the nonnegative Boys argument interval $\\mathcal T=\\eta\\|P-Q\\|^2$, with the evident attraction substitution, using interval squaring and the positive exponent bounds. Request Boys orders $0,\\ldots,L$ from [[alg-certified-boys-finite-budget-branch-evaluation]]. If rounding prevents certification of a required positive denominator, return `inconclusive`.\n\n4. Initialize $R^j_{000}=(-2\\eta)^jF_j(\\mathcal T)$ for $0\\le j\\le L$. For total derivative degree $d=1,\\ldots,L$, enumerate $(t,u,v)$ lexicographically with $t+u+v=d$, choose its first nonzero coordinate in x,y,z order, and apply that coordinate's recurrence in [[thm-gaussian-coulomb-hermite-recurrences-and-integral-formulas]] for $0\\le j\\le L-d$. Negative-index terms are zero. For example, when $t>0$, use $R^j_{tuv}=(P_1-Q_1)R^{j+1}_{t-1,u,v}+(t-1)R^{j+1}_{t-2,u,v}$. Each predecessor is at a smaller derivative degree and within its stored Boys-order range. Contract the finite Hermite sums in that theorem to get each primitive integral.\n\n5. Contract primitive integrals to input-basis integrals by the finite coefficient sums. For overlap, kinetic and attraction the coefficient is $\\overline{d_{ai}}d_{bj}$. For the defined pair-density Coulomb convention, the primitive quartet coefficient is $d_{ai}\\overline{d_{bj}}\\overline{d_{ck}}d_{dl}$: expand $\\overline{f_{ab}(x)}f_{cd}(y)$ in [[def-cartesian-gaussian-primitives-and-contractions]]. In the real energy branch these are the four real contraction coefficients. Cache only identical ordered parameter boxes, angular indices, format and truncation context; an $R$ cache record also stores its cutoff $L$. Reuse a table only if its stored cutoff is at least the needed cutoff; otherwise compute the larger table under the counter.\n\n6. Optional Coulomb-energy screening applies to whole input-basis quartets, before their off-diagonal primitive quartets are evaluated. First compute every required contracted diagonal $G_{ab,ab}$ without screening by steps 2–5, including all coefficients $d$. Obtain finite nonnegative upper endpoints $U_{ab}$ from their real projections, justified by [[thm-positive-coulomb-bilinear-cauchy-schwarz-screening]]. Form the outward real interval $W_{ab}=\\sum_{p,q}C_{ap}D_{pq}C_{bq}$ and its upper absolute bound $A_{ab}=\\max(|\\inf W_{ab}|,|\\sup W_{ab}|)$. Compute nonnegative outward upper bounds $Q_{abcd}\\ge\\sqrt{U_{ab}U_{cd}}$ and $w_{abcd}\\ge\\tfrac12A_{ab}A_{cd}Q_{abcd}$. Enumerate all ordered candidate basis quartets lexicographically, with no unrecorded symmetry compression. Skip a quartet only if the outward accumulated sum after adding $w_{abcd}$ is at most the screening tolerance; otherwise compute its primitive sums. Store a skipped real entry as $[-Q_{abcd},Q_{abcd}]$ and report the actual accumulated weighted sum. Thus entrywise radius uses $Q$, while the discarded-energy bound uses $w$. Even a skipped integral must pass its requested integral-tolerance test. No screening is required or performed when this optional real-energy branch is absent.\n\n7. If energy or gradient is requested, form the one-body matrix on the input basis by $H_{ab}=T_{ab}+\\sum_{\\ell=1}^Jw_\\ell V_{C_\\ell}(\\phi_a,\\phi_b)$, using the supplied signed nuclear weights, and form the Coulomb tensor $G$ on that basis. Use the midpoint tensors $\\widetilde H,\\widetilde G$ and largest entrywise radii $\\varepsilon_2,\\varepsilon_4$, including every screened interval. Evaluate the finite polynomial $E(C;D,\\widetilde H,\\widetilde G)$ by outward arithmetic over the full $C,D$ boxes, and enlarge its interval by $\\delta_E=M_DrnB^2\\varepsilon_2+\\tfrac12M_D^2r^2n^2B^4\\varepsilon_4$ from [[thm-gaussian-contraction-error-energy-gradient-bounds]]. If gradient is requested, evaluate every formal partial derivative of this same finite polynomial by differentiating its two and four factors of $C$ and using outward finite sums. If their intervals have midpoints $c_{a\\mu}$ and radii $\\rho_{a\\mu}$, return gradient center $c$ with outward upper Frobenius error bound $\\sqrt{\\sum_{a,\\mu}\\rho_{a\\mu}^2}+\\delta_\\nabla$, where $\\delta_\\nabla=2nrBM_D\\varepsilon_2+2n^2r^2B^3M_D^2\\varepsilon_4$. This includes uncertainty in $C,D$ as well as integral error; nuclear and contraction-coefficient uncertainty was already included in the integral boxes. Count all these operations. If a final certified bound proves that a requested output range lies wholly outside the finite format, return `range`; a final endpoint overflow without this proof returns `inconclusive`. Return `success` only when every requested integral radius, energy radius and gradient-error bound meets its own declared tolerance; all remaining failures return `inconclusive`.\n\nAn $R$ table with cutoff $L$ stores $\\sum_{d=0}^L(L-d+1)\\binom{d+2}{2}$ entries. All input, pair, primitive-quartet and auxiliary tables are finite. Every update and child evaluation is also subject to the shared finite work counter, so valid inputs may return `inconclusive` when their tolerance or work requirement cannot be certified."
+      },
+      {
+        "id": "thm-finite-gaussian-integral-evaluator-soundness-and-screening-error",
+        "kind": "theorem",
+        "title": "Soundness and accumulated error bounds for the finite Gaussian integral evaluator",
+        "deps": [
+          "alg-finite-gaussian-basis-integral-recurrence-evaluation",
+          "def-certified-evaluation-result-contract",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-real-elementary-range-enclosures",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "alg-certified-boys-finite-budget-branch-evaluation",
+          "thm-boys-branch-evaluation-enclosures-are-sound",
+          "thm-gaussian-coulomb-hermite-recurrences-and-integral-formulas",
+          "thm-positive-coulomb-bilinear-cauchy-schwarz-screening",
+          "thm-gaussian-contraction-error-energy-gradient-bounds",
+          "thm-cartesian-gaussian-raising-lowering-and-kinetic-recurrences",
+          "lem-cartesian-gaussian-moments-and-parameter-derivatives",
+          "def-finite-gaussian-basis-variational-energy-and-gradient"
+        ],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; finite recurrence formulas and Cauchy–Schwarz screening on pp. 23–28 and 35. Error guarantees are proved locally."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §V and Table 1, pp. 19–21. The local theorem supplies the certified discarded-error conclusion."
+            }
+          ]
+        },
+        "statement": "Every invocation of [[alg-finite-gaussian-basis-integral-recurrence-evaluation]] terminates after finitely many operations bounded by its work and child-evaluator caps. If it returns `success`, each integral interval contains the exact integral range over the supplied parameter boxes. For the real energy/gradient branch, the returned energy interval and gradient-error bound contain the corresponding values of the finite functional in [[def-finite-gaussian-basis-variational-energy-and-gradient]]. The reported discarded-energy bound is at least the sum of the absolute Cauchy–Schwarz bounds for all skipped terms. The evaluator may return `inconclusive`, `domain`, or `range`; no universal success or exact-sparsity claim is made."
+      }
+    ]
+  },
+  {
+    "order": 2609,
+    "id": "gaussian-basis-integral-recurrences-and-boys-error-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Gaussian basis integral recurrences and boys error — Examples",
+    "companion": "gaussian-basis-integral-recurrences-and-boys-error",
+    "requires": [
+      "gaussian-basis-integral-recurrences-and-boys-error"
+    ],
+    "items": [
+      {
+        "id": "ex-highly-contracted-gaussian-coefficients-amplify-error",
+        "kind": "example",
+        "title": "Highly contracted Gaussian coefficients amplify primitive integral error",
+        "deps": [
+          "def-finite-gaussian-basis-variational-energy-and-gradient",
+          "thm-gaussian-contraction-error-energy-gradient-bounds"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; primitive-to-contracted finite tensor sums on pp. 4–5 and 27–28."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §V and Table 1, finite contraction sums on pp. 19–21."
+            }
+          ]
+        },
+        "statement": "Let $n=2$, $r=1$, $D=(1)$, $C=(K,K)^T$ with $K>0$, and suppose every primitive four-index tensor error is $\\Delta G_{abcd}=\\varepsilon>0$ while $\\Delta H=0$. Then the transformed four-index error is $16K^4\\varepsilon$, the energy error is $8K^4\\varepsilon$, and the gradient error has Frobenius norm $16\\sqrt2K^3\\varepsilon$. Both bounds in [[thm-gaussian-contraction-error-energy-gradient-bounds]] are attained for this aligned-sign perturbation."
+      },
+      {
+        "id": "ex-overlap-near-linear-dependence",
+        "kind": "example",
+        "title": "Nearly duplicate Gaussian primitives produce an ill-conditioned overlap matrix",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "lem-cartesian-gaussian-moments-and-parameter-derivatives",
+          "thm-gaussian-product-theorem-and-polynomial-shift"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; Cartesian s functions and overlap integrals on pp. 3–6 and 14."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §§II–III, pp. 5–12, Gaussian products and overlap moments."
+            }
+          ]
+        },
+        "statement": "For $a,b>0$, define normalized s primitives $h_a(x)=(2a/\\pi)^{3/4}e^{-a\\|x\\|^2}$. Their overlap is\n$$S(h_a,h_b)=\\left(\\frac{2\\sqrt{ab}}{a+b}\\right)^{3/2}.$$\nFor $a=b$ the two-function overlap matrix has eigenvalues $2$ and $0$. For distinct exponents $a,b$ it has eigenvalues $1\\pm S(h_a,h_b)$, and as $b\\to a$ its condition number tends to infinity."
+      },
+      {
+        "id": "ex-same-center-s-orbital-integrals",
+        "kind": "example",
+        "title": "Exact same-center s-orbital overlap, kinetic, attraction, and Coulomb integrals",
+        "deps": [
+          "def-cartesian-gaussian-primitives-and-contractions",
+          "def-boys-function-and-coulomb-auxiliary-recurrence",
+          "thm-boys-integral-identities-series-and-incomplete-gamma",
+          "thm-cartesian-gaussian-raising-lowering-and-kinetic-recurrences",
+          "thm-gaussian-coulomb-hermite-recurrences-and-integral-formulas",
+          "lem-cartesian-gaussian-moments-and-parameter-derivatives",
+          "thm-gaussian-product-theorem-and-polynomial-shift"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; the spherical-Gaussian, Boys, and one-/two-electron Coulomb formulas are derived on pp. 18–26."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §§III–IV, pp. 10–18, closed s-Gaussian and Coulomb auxiliary formulas."
+            }
+          ]
+        },
+        "statement": "Let $g_a(x)=e^{-a\\|x\\|^2}$ and $g_b(x)=e^{-b\\|x\\|^2}$ for $a,b>0$, both centered at the origin. Put $p=a+b$. Then\n$$S(g_a,g_b)=\\frac{\\pi^{3/2}}{p^{3/2}},\\qquad T(g_a,g_b)=\\frac{3ab\\pi^{3/2}}{p^{5/2}},\\qquad V_0(g_a,g_b)=\\frac{2\\pi}{p}.$$\nFor $c,d>0$, put $q=c+d$. The same-center two-electron integral is\n$$G(g_a,g_b;g_c,g_d)=\\frac{2\\pi^{5/2}}{pq\\sqrt{p+q}}.$$"
+      },
+      {
+        "id": "ex-small-t-upward-boys-cancellation",
+        "kind": "example",
+        "title": "Small-argument cancellation in the upward Boys recurrence",
+        "deps": [
+          "alg-certified-boys-finite-budget-branch-evaluation",
+          "thm-boys-branch-evaluation-enclosures-are-sound",
+          "lem-boys-small-taylor-remainder",
+          "lem-boys-upward-downward-recurrence-error-amplification",
+          "def-real-exponential-function-and-e",
+          "thm-boys-integral-identities-series-and-incomplete-gamma"
+        ],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; the upward recurrence and its small-$T$ numerical warning are on p. 20."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §IV.B, pp. 17–18, recurrence directions and small-$T$ loss warning."
+            }
+          ]
+        },
+        "statement": "For $0<T\\le\\tfrac14$, the upward formula for the first two Boys orders is\n$$F_1(T)=\\frac{F_0(T)-e^{-T}}{2T}.$$\nBoth subtracted quantities are close to one, while their difference is of order $T$. If the input intervals for them have radii $r_0,r_e$, the propagated upward interval radius is bounded by $(r_0+r_e)/(2T)$ plus endpoint-rounding error. Thus fixed input radii can be strongly amplified as $T\\downarrow0$. The direct Taylor branch has the certified remainder $T^2/10$ for $F_0$ after its linear term, so it avoids this division by a small $T$."
+      },
+      {
+        "id": "ex-screened-coulomb-blocks-accumulate-error",
+        "kind": "example",
+        "title": "Coulomb screening must accumulate every discarded-block bound",
+        "deps": [
+          "thm-positive-coulomb-bilinear-cauchy-schwarz-screening",
+          "thm-finite-gaussian-integral-evaluator-soundness-and-screening-error",
+          "alg-finite-gaussian-basis-integral-recurrence-evaluation"
+        ],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Trygve Helgaker, Molecular Integral Evaluation, 10th Sostrup Summer School lecture notes (2008)",
+              "url": "https://trygvehelgaker.no/Presentations/Sostrup_Integrals_2008.pdf",
+              "locator": "Complete 41-page PDF; positive Coulomb matrix and Cauchy–Schwarz prescreening on p. 35."
+            },
+            {
+              "title": "L. E. McMurchie and E. R. Davidson, One and Two Electron Integrals over Cartesian Gaussian Functions, UCRL-13791 (1976)",
+              "url": "https://digital.library.unt.edu/ark:/67531/metadc1057442/m2/1/high_res_d/5184486.pdf",
+              "locator": "Complete 23-page report; §V, pp. 19–21, computational considerations and contraction-loop scheme. The accumulated screening bound is demonstrated locally."
+            }
+          ]
+        },
+        "statement": "Suppose a finite screening queue has three candidate input-basis Coulomb quartets (which may be singleton-contraction primitive quartets), each with a verified weighted energy bound $w_j=0.4\\tau$, and the total discarded-energy budget is $\\tau>0$. Each first two blocks fits individually and together contribute $0.8\\tau$. The third would raise the cumulative bound to $1.2\\tau$, so it must be evaluated or left unscreened. The reported discarded bound is $0.8\\tau$; none of the skipped integrals is claimed to be zero."
+      }
+    ]
+  }
+]

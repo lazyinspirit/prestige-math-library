@@ -1,0 +1,708 @@
+[
+  {
+    "order": 2654,
+    "id": "substructuring-feti-dp-and-bddc-preconditioners",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Substructuring, FETI-DP and BDDC",
+    "companion": "substructuring-feti-dp-and-bddc-preconditioners-examples",
+    "requires": [
+      "overlapping-schwarz-and-stable-subspace-decompositions"
+    ],
+    "items": [
+      {
+        "id": "def-pe26-scalar-substructuring-model",
+        "kind": "definition",
+        "title": "Scalar finite-element substructuring model",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-reference-finite-element-and-unisolvent-dofs"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Fix the 2D scalar diffusion finite-element model, its matching shape-regular P1 subdomain meshes, local energy forms, interface and interior degrees of freedom, and the global Dirichlet problem.",
+        "source_path": "items/def-pe26-scalar-substructuring-model.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 35\u201337, 83\u201389",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Oliver Rheinbach, Parallel Scalable Iterative Substructuring, Chapter 2, \u00a7\u00a72.1\u20132.4",
+              "url": "https://d-nb.info/983219192/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe26-preconditioned-operator-norm-bound",
+        "kind": "lemma",
+        "title": "Eigenvalue bounds from a left-inverse preconditioner",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "If A is SPD and LT=I, the eigenvalues of (LA^{-1}L^T)(T^TAT) lie between 1 and the squared A-operator norm of TL.",
+        "source_path": "items/lem-pe26-preconditioned-operator-norm-bound.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a74, Lemma 4.1",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            },
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 94\u201395",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe26-local-energy-kernel-and-interior-spd",
+        "kind": "theorem",
+        "title": "Floating local kernels and positive interior blocks",
+        "deps": [
+          "def-pe26-scalar-substructuring-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "On a connected triangulated subdomain the Neumann diffusion energy has exactly the constant functions as its kernel, while the interior stiffness block with zero boundary trace is positive definite.",
+        "source_path": "items/thm-pe26-local-energy-kernel-and-interior-spd.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 35\u201337 and 83\u201384",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Oliver Rheinbach, Parallel Scalable Iterative Substructuring, Chapter 2, \u00a7\u00a72.1\u20132.3",
+              "url": "https://d-nb.info/983219192/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe26-primal-interface-spaces-and-jumps",
+        "kind": "definition",
+        "title": "Primal interface spaces and jump convention",
+        "deps": [
+          "def-pe26-scalar-substructuring-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Define broken, fully assembled and partially assembled interface spaces, primal corner and edge-average constraints, the jump map, and the redundant-multiplier range convention.",
+        "source_path": "items/def-pe26-primal-interface-spaces-and-jumps.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 83\u201389",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a73.1",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe26-discrete-harmonic-extension-and-schur-complement",
+        "kind": "definition",
+        "title": "Discrete harmonic extension and interface Schur complement",
+        "deps": [
+          "def-pe26-scalar-substructuring-model",
+          "def-pe26-primal-interface-spaces-and-jumps",
+          "thm-pe26-local-energy-kernel-and-interior-spd",
+          "def-block-lu-factorisation",
+          "thm-block-lu-factorisation-via-an-invertible-leading-block"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Use the interior/interface ordering of [[def-pe26-scalar-substructuring-model]]. The boundary-trace spaces $W_i$, $W=\\prod_iW_i$, the conforming space $\\widehat W$, the partially assembled space $\\widetilde W$, and the inclusion $R:\\widehat W\\to W$ are those of [[def-pe26-primal-interface-spaces-and-jumps]]. In particular, $R$ identifies the copies of a conforming interface trace. In subdomain $i$, write its stiffness matrix as\n\n$$K_i=\\begin{pmatrix}K_{II}^{(i)}&K_{I\\Gamma}^{(i)}\\\\K_{\\Gamma I}^{(i)}&K_{\\Gamma\\Gamma}^{(i)}\\end{pmatrix}.$$\n\nBy [[thm-pe26-local-energy-kernel-and-interior-spd]], $K_{II}^{(i)}$ is positive definite when nonempty; on the zero-dimensional interior space its unique endomorphism is invertible. For admissible boundary trace $g_i$, the **discrete harmonic extension** is\n\n$$H_i g_i:=\\begin{pmatrix}-(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}g_i\\\\g_i\\end{pmatrix}.$$\n\nThe local **interface Schur complement** is\n\n$$S_i:=K_{\\Gamma\\Gamma}^{(i)}-K_{\\Gamma I}^{(i)}(K_{II}^{(i)})^{-1}K_{I\\Gamma}^{(i)}.$$\n\nThis is the Schur complement in [[def-block-lu-factorisation]]. The local Schur form on a trace is $g_i^TS_i g_i$. The block identity and the associated block LU factorization use [[thm-block-lu-factorisation-via-an-invertible-leading-block]] with leading block $K_{II}^{(i)}$. Assembling local Schur forms on $\\widehat W$ gives $\\widehat S=R^T(\\operatorname{diag}_i S_i)R$; restricting the same block-diagonal form to $\\widetilde W$ gives the partially assembled operator $\\widetilde S$.",
+        "source_path": "items/def-pe26-discrete-harmonic-extension-and-schur-complement.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 35\u201337",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Oliver Rheinbach, Parallel Scalable Iterative Substructuring, Chapter 2, \u00a7\u00a72.1\u20132.3",
+              "url": "https://d-nb.info/983219192/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe26-primal-constraints-remove-floating-kernels",
+        "kind": "theorem",
+        "title": "Primal constraints remove local floating kernels",
+        "deps": [
+          "def-pe26-primal-interface-spaces-and-jumps",
+          "thm-pe26-local-energy-kernel-and-interior-spd",
+          "def-pe26-discrete-harmonic-extension-and-schur-complement"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "If each connected floating subdomain component has an anchored primal vertex and the global Dirichlet boundary is nonempty, the partially assembled energy is positive definite and each local dual solve is uniquely solvable.",
+        "source_path": "items/thm-pe26-primal-constraints-remove-floating-kernels.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 83\u201386",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Oliver Rheinbach, Parallel Scalable Iterative Substructuring, Chapter 2, \u00a7\u00a72.1\u20132.3",
+              "url": "https://d-nb.info/983219192/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe26-harmonic-extension-minimizes-energy",
+        "kind": "theorem",
+        "title": "Discrete harmonic extension minimizes energy",
+        "deps": [
+          "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "thm-pe26-local-energy-kernel-and-interior-spd"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For fixed admissible interface values, the discrete harmonic extension is the unique local finite-element energy minimizer, and its energy equals the Schur-complement quadratic form.",
+        "source_path": "items/thm-pe26-harmonic-extension-minimizes-energy.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 35\u201337",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Oliver Rheinbach, Parallel Scalable Iterative Substructuring, Chapter 2, \u00a7\u00a72.1\u20132.3",
+              "url": "https://d-nb.info/983219192/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe26-static-condensation-is-exact-interface-solve",
+        "kind": "theorem",
+        "title": "Static condensation is the exact interface problem",
+        "deps": [
+          "def-pe26-scalar-substructuring-model",
+          "thm-pe26-local-energy-kernel-and-interior-spd",
+          "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "thm-block-lu-factorisation-via-an-invertible-leading-block"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Block elimination of all subdomain interior variables gives an exactly equivalent interface Schur system; reconstruction by K_II^-1(f_I-K_IG u_G) recovers the unique global finite-element solution, with discrete harmonic extension as the homogeneous trace-dependent part.",
+        "source_path": "items/thm-pe26-static-condensation-is-exact-interface-solve.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 35\u201337",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a75",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe26-scaled-averaging-and-bddc-preconditioner",
+        "kind": "definition",
+        "title": "Coefficient-scaled averaging and BDDC",
+        "deps": [
+          "def-pe26-primal-interface-spaces-and-jumps",
+          "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "thm-pe26-primal-constraints-remove-floating-kernels"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Define a partition-of-unity scaled averaging projection, the BDDC interface preconditioner, and its constrained partially assembled minimization problem.",
+        "source_path": "items/def-pe26-scaled-averaging-and-bddc-preconditioner.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 87\u201390 and 96\u201397",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a7\u00a73.1\u20133.2",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe26-discrete-trace-schur-equivalence",
+        "kind": "lemma",
+        "title": "Discrete Schur energy and the fractional trace norm",
+        "deps": [
+          "def-pe26-scalar-substructuring-model",
+          "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "thm-pe26-harmonic-extension-minimizes-energy"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For shape-regular polygonal subdomains and matching quasiuniform P1 meshes, the local Schur energy modulo constants is uniformly equivalent to the intrinsic H1/2 boundary seminorm, with a boundary-preserving finite-element lifting.",
+        "source_path": "items/lem-pe26-discrete-trace-schur-equivalence.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 24\u201326",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Oliver Rheinbach, Parallel Scalable Iterative Substructuring, Chapter 1 \u00a71.7 and Chapter 2 \u00a72.4",
+              "url": "https://d-nb.info/983219192/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-pe26-bddc-constrained-local-minimization",
+        "kind": "proposition",
+        "title": "BDDC is the constrained partial-energy minimizer",
+        "deps": [
+          "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "thm-pe26-primal-constraints-remove-floating-kernels"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "For each assembled residual, the partially assembled BDDC solve is the unique minimizer of the strictly convex partial energy minus the averaged residual work, and averaging returns its conforming correction.",
+        "source_path": "items/prop-pe26-bddc-constrained-local-minimization.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a73.2",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            },
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, \u00a7\u00a787\u201388",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe26-feti-dp-dual-system-and-preconditioner",
+        "kind": "definition",
+        "title": "FETI-DP dual system and preconditioner",
+        "deps": [
+          "def-pe26-primal-interface-spaces-and-jumps",
+          "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "thm-pe26-primal-constraints-remove-floating-kernels",
+          "def-pe26-scaled-averaging-and-bddc-preconditioner"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Define the FETI-DP saddle system, multiplier Schur operator on the range of the jump map, coefficient-scaled right inverse, and dual preconditioner.",
+        "source_path": "items/def-pe26-feti-dp-dual-system-and-preconditioner.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, \u00a7\u00a783\u201390",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a7\u00a73.1 and 3.3",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe26-log-edge-cutoff-and-discrete-sobolev",
+        "kind": "lemma",
+        "title": "Two-dimensional logarithmic edge cutoff estimates",
+        "deps": [
+          "def-pe26-scalar-substructuring-model",
+          "lem-pe26-discrete-trace-schur-equivalence"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "The piecewise-linear edge cutoff has squared H1/2_00 norm O(1+log(H/h)); multiplication by it costs at most the squared logarithm after the discrete P1 L-infinity bound, which is proved from a cone estimate.",
+        "source_path": "items/lem-pe26-log-edge-cutoff-and-discrete-sobolev.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 25\u201333",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Oliver Rheinbach, Parallel Scalable Iterative Substructuring, Chapter 2 \u00a72.4, pp. 40\u201344",
+              "url": "https://d-nb.info/983219192/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-pe26-feti-dp-is-dual-schur-complement",
+        "kind": "proposition",
+        "title": "FETI-DP is the exact dual Schur system",
+        "deps": [
+          "def-pe26-feti-dp-dual-system-and-preconditioner",
+          "def-pe26-primal-interface-spaces-and-jumps",
+          "thm-pe26-primal-constraints-remove-floating-kernels"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "Eliminating the partially assembled displacement from the FETI-DP saddle equations gives the positive-definite multiplier Schur system, and the exact multiplier solution reconstructs the conforming interface solution.",
+        "source_path": "items/prop-pe26-feti-dp-is-dual-schur-complement.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a73.3",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            },
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, \u00a7\u00a783\u201384 and 89",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe26-complementary-primal-dual-spectrum",
+        "kind": "lemma",
+        "title": "Complementary primal and dual projections share nonunit spectrum",
+        "deps": [
+          "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "def-pe26-feti-dp-dual-system-and-preconditioner"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "For a finite-dimensional SPD energy and complementary primal and dual projections satisfying the BDDC/FETI-DP right-inverse identities, the two preconditioned operators have the same eigenvalues, with multiplicities, away from the eigenvalue one.",
+        "source_path": "items/lem-pe26-complementary-primal-dual-spectrum.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a74, Lemmas 4.1\u20134.2",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            },
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 90\u201393",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe26-scaled-averaging-energy-bound",
+        "kind": "lemma",
+        "title": "Two-dimensional scaled averaging energy bound",
+        "deps": [
+          "def-pe26-scalar-substructuring-model",
+          "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "def-pe26-primal-interface-spaces-and-jumps",
+          "lem-pe26-discrete-trace-schur-equivalence",
+          "lem-pe26-log-edge-cutoff-and-discrete-sobolev"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "For scalar diffusion with positive subdomain-constant coefficients, all subdomain vertices primal, bounded polygon shape complexity, and matching quasiuniform shape-regular 2D P1 meshes, the scaled jump projection has energy norm at most C(1+log(H/h)).",
+        "source_path": "items/lem-pe26-scaled-averaging-energy-bound.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 94\u201397",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Oliver Rheinbach, Parallel Scalable Iterative Substructuring, Chapter 2 \u00a72.4, pp. 39\u201344",
+              "url": "https://d-nb.info/983219192/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-pe26-conditioning-and-work-are-separate",
+        "kind": "remark",
+        "title": "Conditioning and solver work are separate claims",
+        "deps": [
+          "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "def-pe26-feti-dp-dual-system-and-preconditioner"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "The condition-number estimate controls ideal preconditioned iteration counts, not total work; local and coarse factorization costs depend on solver choices and coarse dimension.",
+        "source_path": "items/rem-pe26-conditioning-and-work-are-separate.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 3 and 87\u201389",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe26-nontrivial-spectrum-bddc-feti-dp",
+        "kind": "theorem",
+        "title": "BDDC and FETI-DP have matching nontrivial spectra",
+        "deps": [
+          "def-pe26-feti-dp-dual-system-and-preconditioner",
+          "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "lem-pe26-complementary-primal-dual-spectrum"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "With identical primal constraints and coefficient scalings, the quotient-space BDDC and FETI-DP operators have the same positive eigenvalues except possibly for one; any zero modes from redundant multiplier coordinates disappear under the declared range convention.",
+        "source_path": "items/thm-pe26-nontrivial-spectrum-bddc-feti-dp.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a74",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            },
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 90\u201393",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe26-condition-number-2d-polylogarithmic",
+        "kind": "theorem",
+        "title": "The two-dimensional BDDC and FETI-DP polylogarithmic bound",
+        "deps": [
+          "def-pe26-scalar-substructuring-model",
+          "def-pe26-feti-dp-dual-system-and-preconditioner",
+          "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "thm-pe26-nontrivial-spectrum-bddc-feti-dp",
+          "lem-pe26-preconditioned-operator-norm-bound",
+          "lem-pe26-scaled-averaging-energy-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "For the stated scalar second-order 2D diffusion family, both BDDC and FETI-DP preconditioned condition numbers are bounded by C(1+log(H/h))^2, independent of h, H, subdomain count, and positive subdomain-constant coefficient jumps.",
+        "source_path": "items/thm-pe26-condition-number-2d-polylogarithmic.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 94\u201397",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            },
+            {
+              "title": "Oliver Rheinbach, Parallel Scalable Iterative Substructuring, Chapter 2 \u00a72.4, Theorems 2.4.1\u20132.4.3",
+              "url": "https://d-nb.info/983219192/34"
+            },
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a74",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2655,
+    "id": "substructuring-feti-dp-and-bddc-preconditioners-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Substructuring, FETI-DP and BDDC \u2014 Examples",
+    "companion": "substructuring-feti-dp-and-bddc-preconditioners",
+    "requires": [
+      "substructuring-feti-dp-and-bddc-preconditioners"
+    ],
+    "items": [
+      {
+        "id": "ex-pe26-missing-primal-corner",
+        "kind": "example",
+        "title": "A floating component without a constant-detecting primal constraint remains singular",
+        "deps": [
+          "def-pe26-scalar-substructuring-model",
+          "def-pe26-primal-interface-spaces-and-jumps",
+          "thm-pe26-local-energy-kernel-and-interior-spd",
+          "thm-pe26-primal-constraints-remove-floating-kernels"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "A floating local Laplace stiffness block with no primal anchor retains its constant null vector, so the local dual solve is not uniquely defined.",
+        "source_path": "items/ex-pe26-missing-primal-corner.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 83\u201386",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe26-two-floating-poisson-subdomains",
+        "kind": "example",
+        "title": "Two floating Poisson subdomains and primal anchoring",
+        "deps": [
+          "def-pe26-scalar-substructuring-model",
+          "thm-pe26-local-energy-kernel-and-interior-spd",
+          "def-pe26-primal-interface-spaces-and-jumps",
+          "thm-pe26-primal-constraints-remove-floating-kernels",
+          "def-pe26-discrete-harmonic-extension-and-schur-complement",
+          "thm-pe26-harmonic-extension-minimizes-energy",
+          "thm-pe26-static-condensation-is-exact-interface-solve",
+          "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "def-pe26-feti-dp-dual-system-and-preconditioner"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "Compute the local floating Poisson stiffness kernel on two matching square subdomains, show how primal corner values remove the local constant modes, and identify the resulting exact interface solve.",
+        "source_path": "items/ex-pe26-two-floating-poisson-subdomains.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olof B. Widlund, Introduction to the Design and Theory of Domain Decomposition Algorithms, DD20 Tutorial, pp. 35\u201337 and 83\u201384",
+              "url": "https://cs.nyu.edu/~widlund/SD_rev_tutorial.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe26-matching-primal-dual-spectrum",
+        "kind": "example",
+        "title": "A finite-dimensional BDDC/FETI-DP spectral match",
+        "deps": [
+          "def-pe26-scaled-averaging-and-bddc-preconditioner",
+          "def-pe26-feti-dp-dual-system-and-preconditioner",
+          "lem-pe26-complementary-primal-dual-spectrum",
+          "thm-pe26-nontrivial-spectrum-bddc-feti-dp"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "For a two-coordinate SPD interface energy with one primal and one dual coordinate, compute the BDDC and FETI-DP preconditioned eigenvalue and verify that both equal 4/3.",
+        "source_path": "items/ex-pe26-matching-primal-dual-spectrum.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Mandel and Bed\u0159ich Soused\u00edk, BDDC and FETI-DP under Minimalist Assumptions, \u00a7\u00a73\u20134",
+              "url": "https://arxiv.org/pdf/0708.4031"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe26-coarse-solve-work-bottleneck",
+        "kind": "example",
+        "title": "A dense coarse solve can dominate local work",
+        "deps": [
+          "thm-pe26-condition-number-2d-polylogarithmic"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "statement": "In a dense direct-solve cost model, increasing the number of primal constraints can make the cubic coarse factorization dominate parallel local factorizations even when the condition number bound is unchanged.",
+        "source_path": "items/ex-pe26-coarse-solve-work-bottleneck.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

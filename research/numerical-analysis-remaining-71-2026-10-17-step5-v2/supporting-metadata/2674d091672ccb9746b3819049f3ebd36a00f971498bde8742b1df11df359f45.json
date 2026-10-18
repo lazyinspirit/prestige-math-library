@@ -1,0 +1,836 @@
+[
+  {
+    "order": 2692,
+    "id": "isogeometric-galerkin-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Isogeometric Galerkin discretization",
+    "companion": "isogeometric-galerkin-methods-examples",
+    "requires": [
+      "spline-evaluation-and-interpolation-algorithms",
+      "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "elasticity-near-incompressibility-and-locking-free-discretization",
+      "sard-theorem-and-transversality",
+      "finite-element-meshes-and-interpolation",
+      "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "variational-crimes-and-strang-lemmas"
+    ],
+    "items": [
+      {
+        "id": "def-nurbs-patch-map-and-rational-spline-space",
+        "kind": "definition",
+        "title": "Tensor-product NURBS patch maps and rational spline spaces",
+        "statement": "Let $d\\in\\{2,3\\}$ and let the reference patch be $\\widehat\\Omega=(0,1)^d$. For each coordinate $r$, fix a degree $p_r\\in\\mathbb N_0$, a finite clamped knot vector $\\Xi_r$ on $[0,1]$, and its one-dimensional B-spline basis $B^{(r)}_{i_r,p_r,\\Xi_r}$ from [[def-b-spline-space-and-basis]]. For a multi-index $\\alpha=(i_1,\\ldots,i_d)$ in the finite product index set $\\mathcal I$, define the tensor-product basis function\n$$N_\\alpha(\\xi_1,\\ldots,\\xi_d):=\\prod_{r=1}^d B^{(r)}_{i_r,p_r,\\Xi_r}(\\xi_r).$$\n\nChoose finitely many control points $P_\\alpha\\in\\mathbb R^d$ and positive weights $w_\\alpha$, and write $0<w_-:=\\min_\\alpha w_\\alpha\\le\\max_\\alpha w_\\alpha=:w_+<\\infty$. The weight denominator, rational basis, and associated rational spline space are\n$$W(\\xi):=\\sum_{\\alpha\\in\\mathcal I}w_\\alpha N_\\alpha(\\xi),\\qquad R_\\alpha(\\xi):=\\frac{w_\\alpha N_\\alpha(\\xi)}{W(\\xi)},\\qquad \\mathcal N_h:=\\operatorname{span}\\{R_\\alpha:\\alpha\\in\\mathcal I\\}.$$\nThe corresponding NURBS geometry map is\n$$F(\\xi):=\\sum_{\\alpha\\in\\mathcal I}R_\\alpha(\\xi)P_\\alpha.$$\nEquivalently, let $\\widetilde F(\\xi):=\\sum_{\\alpha\\in\\mathcal I}(w_\\alpha P_\\alpha,w_\\alpha)N_\\alpha(\\xi)\\in\\mathbb R^{d+1}$ and let $\\Pi(y,z):=y/z$ for $z>0$. Then $F=\\Pi\\circ\\widetilde F$ wherever $W>0$.\nThe basis properties in [[thm-spline-polynomial-reproduction]] give nonnegative tensor factors summing to one. Consequently the weights' convex combination satisfies $W\\ge w_->0$; the later item `lem-positive-nurbs-basis-and-quotient-derivative` records the full rational-basis consequences.\n\nAn admissible NURBS patch map is a continuous, globally injective, bi-Lipschitz map $F:\\overline{\\widehat\\Omega}\\to\\overline\\Omega$ whose restriction to every nonempty knot cell is a $C^1$ diffeomorphism onto its image. There are constants $0<j_-\\le j_+<\\infty$ and $1\\le L<\\infty$ such that, almost everywhere on every cell,\n$$j_-\\le J_F:=\\det DF\\le j_+,\\qquad \\|DF\\|_{\\mathrm{op}}\\le L,\\qquad \\|DF^{-1}\\|_{\\mathrm{op}}\\le L.$$\nThe physical image $\\Omega$ is required to be a bounded Lipschitz domain. The images of the finite knot cells form a face-to-face partition with the piecewise $C^1$ boundary presentation of [[def-bounded-piecewise-c-one-euclidean-domain]]; the map agrees on each shared cell face.\n\nA finite multipatch geometry consists of finitely many such patch maps with disjoint physical interiors, a connected bounded Lipschitz union, and matching full physical faces wherever two patches meet. Positive weights only define a positive denominator and a convex rational basis; they do not assert global injectivity, positive Jacobian, or interface matching. Exact NURBS representation means exact representation of the specified CAD map and does not assert that this map is the exact geometry of a target physical domain.",
+        "deps": [
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction",
+          "def-bounded-piecewise-c-one-euclidean-domain"
+        ],
+        "dependency_level": 0,
+        "strategy": "State the tensor-product indices, weights, denominator, rational basis, map domain and range, map admissibility, and the exact limits of the definition.",
+        "source_path": "items/def-nurbs-patch-map-and-rational-spline-space.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            },
+            {
+              "title": "Tom Lyche, Carla Manni, Hendrik Speleers, B-Splines and Spline Approximation, complete lecture notes",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-compactly-supported-h1-belongs-to-h-zero",
+        "kind": "lemma",
+        "title": "Compactly supported H1 functions lie in H1_0",
+        "statement": "Assume Countable Choice. Let $U\\subset\\mathbb R^d$ be open and let $z\\in H^1(U)$ vanish almost everywhere outside a compact set $K\\subset U$. Then $z\\in H^1_0(U)$, where $H^1_0(U)$ is the $H^1$ closure of $C_c^\\infty(U)$.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-compact-support-zero-extension-in-wkp",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Extend by zero, approximate in H1 on R^d, multiply by a cutoff equal to one on the compact support, and prove cutoff multiplication preserves H1.",
+        "source_path": "items/lem-compactly-supported-h1-belongs-to-h-zero.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Juha Kinnunen, Sobolev Spaces, Chapter 1 §1.3 and Chapter 2, complete lecture notes",
+              "url": "https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf"
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations, §3.4",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
+            },
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tensor-q1-interpolation-h1-estimate",
+        "kind": "lemma",
+        "title": "Tensor Q1 nodal interpolation has a first-order H1 error bound",
+        "statement": "Let $d\\in\\{2,3\\}$ and let the unit cube be partitioned into uniform tensor cells of side length $h=1/N$. Let $g\\in C^1([0,1]^d)$ have Lipschitz gradient with constant $M_g$, meaning $|\\nabla g(x)-\\nabla g(y)|\\le M_g|x-y|$ for all $x,y$. Let $I_hg$ be the continuous tensor-product, degree-one nodal interpolant matching $g$ at every grid vertex. Then $I_hg$ lies in the tensor-product degree-one $C^0$ spline space and\n$$\\|g-I_hg\\|_{H^1((0,1)^d)}\\le C_d h M_g,\\qquad C_d:=d+\\sqrt d+2^{d-1}d\\sqrt d.$$",
+        "deps": [
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "dependency_level": 0,
+        "strategy": "On each cell subtract the affine Taylor polynomial, use the explicit Q1 nodal shape functions, bound their gradients, and sum cellwise L2 estimates.",
+        "source_path": "items/lem-tensor-q1-interpolation-h1-estimate.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-isogeometric-pullback-energy-norm-equivalence",
+        "kind": "lemma",
+        "title": "Bi-Lipschitz NURBS maps preserve H1 and energy norms",
+        "statement": "Assume Countable Choice and the admissible piecewise $C^1$ NURBS map $F:\\widehat\\Omega\\to\\Omega$ of [[def-nurbs-patch-map-and-rational-spline-space]]. Write $J_F=\\det DF$, and assume $j_-\\le J_F\\le j_+$ and $\\|DF\\|_{\\mathrm{op}},\\|DF^{-1}\\|_{\\mathrm{op}}\\le L$ almost everywhere on the cells. For every $u\\in H^1(\\Omega)$, its pullback $\\widehat u=u\\circ F$ lies in $H^1(\\widehat\\Omega)$, with cellwise weak gradient\n$$\\nabla_\\xi\\widehat u=DF^\\mathsf T(\\nabla_xu)\\circ F.$$\nThe inverse pullback also preserves $H^1$, and\n$$\\|\\widehat u\\|_{H^1(\\widehat\\Omega)}\\le j_-^{-1/2}\\sqrt{1+L^2}\\,\\|u\\|_{H^1(\\Omega)},\\qquad \\|u\\|_{H^1(\\Omega)}\\le j_+^{1/2}\\sqrt{1+L^2}\\,\\|\\widehat u\\|_{H^1(\\widehat\\Omega)}.$$\nPullback maps $H^1_0(\\Omega)$ onto $H^1_0(\\widehat\\Omega)$. For a vector field $\\widehat v=v\\circ F$, the physical gradient is $(\\nabla_\\xi\\widehat v)DF^{-1}$, so the scalar diffusion and finite-Lamé elasticity forms are transformed by the same Jacobian and inverse-map factors.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "lem-compactly-supported-h1-belongs-to-h-zero",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove the estimates for smooth functions cellwise, extend by Meyers-Serrin density and H1 completeness, and pass the weak-gradient identity and zero-boundary closure through compactly supported approximants.",
+        "source_path": "items/lem-isogeometric-pullback-energy-norm-equivalence.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-matching-nurbs-patch-traces-give-h1-conformity",
+        "kind": "lemma",
+        "title": "Matching NURBS patch traces give global H1 conformity",
+        "statement": "Assume Countable Choice. Let a bounded open set $\\Omega\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, be the union of finitely many bounded knot-cell images with disjoint interiors and a face-to-face finite piecewise $C^1$ presentation. Let $m\\ge1$ and let $v: \\Omega\\to\\mathbb R^m$ be $C^1$ on the closure of each cell, with each component's cell gradient square integrable. Suppose the two one-sided vector values agree on every shared face. Then $v\\in H^1(\\Omega;\\mathbb R^m)$; its weak gradient is the piecewise classical componentwise gradient. This is the interface condition used to form conforming multipatch isogeometric spaces. Boundary conditions remain an additional restriction such as membership in $H^1_0(\\Omega;\\mathbb R^m)$.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Test the distributional derivative on a smooth compactly supported function, integrate by parts on each cell, cancel matching interface traces, and identify the remaining L2 cell gradients.",
+        "source_path": "items/lem-matching-nurbs-patch-traces-give-h1-conformity.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-positive-nurbs-basis-and-quotient-derivative",
+        "kind": "lemma",
+        "title": "Positive weights give a bounded partition-of-unity NURBS basis",
+        "statement": "For the finite tensor-product basis and weights of [[def-nurbs-patch-map-and-rational-spline-space]], the denominator satisfies $w_-\\le W(\\xi)\\le w_+$, the rational basis is nonnegative and sums to one, and\n$$\\mathcal N_h=\\{s/W:s\\in S_h\\},\\qquad S_h:=\\operatorname{span}\\{N_\\alpha:\\alpha\\in\\mathcal I\\}.$$\nOn each open knot cell, the rational basis functions are differentiable and\n$$\\nabla R_\\alpha=\\frac{w_\\alpha}{W}\\nabla N_\\alpha-\\frac{w_\\alpha N_\\alpha}{W^2}\\nabla W.$$\nIn particular, if $G_N:=\\max_\\alpha\\|\\nabla N_\\alpha\\|_{L^\\infty(\\text{cells})}$ and $G_W:=w_+\\sum_\\alpha\\|\\nabla N_\\alpha\\|_{L^\\infty(\\text{cells})}$, then\n$$\\|\\nabla R_\\alpha\\|_{L^\\infty(\\text{cells})}\\le \\frac{w_+G_N}{w_-}+\\frac{w_+G_W}{w_-^2}.$$\nThese derivative bounds depend on the fixed degrees and knot cells; no degree-independent bound is asserted.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use products of the one-dimensional partition identities, bound the denominator by a convex combination of weights, then differentiate the quotient on each knot cell.",
+        "source_path": "items/lem-positive-nurbs-basis-and-quotient-derivative.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            },
+            {
+              "title": "Tom Lyche, Carla Manni, Hendrik Speleers, B-Splines and Spline Approximation, complete lecture notes",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nurbs-laplace-tensor-gap-under-map-error",
+        "kind": "lemma",
+        "title": "Unit-Laplace pullback tensors are Lipschitz in the Jacobian matrix",
+        "statement": "Let $d\\in\\{2,3\\}$, let $F,G:(0,1)^d\\to\\mathbb R^d$ be admissible piecewise $C^1$ maps on a common finite refinement of their knot partitions, and suppose almost everywhere that both maps have positive Jacobian determinants and\n$$\\|DF\\|_{\\rm op},\\|DG\\|_{\\rm op},\\|DF^{-1}\\|_{\\rm op},\\|DG^{-1}\\|_{\\rm op}\\le M,\\qquad M\\ge1.$$\nSet $\\delta=\\|DF-DG\\|_{L^\\infty({\\rm op})}$, the essential supremum of the operator-norm difference on that common refinement, and define the unit-diffusion pullback tensors\n$$K_F=(\\det DF)DF^{-1}DF^{-\\mathsf T},\\qquad K_G=(\\det DG)DG^{-1}DG^{-\\mathsf T}.$$\nThen, almost everywhere,\n$$\\|K_F-K_G\\|_{\\rm op}\\le(dM^{d+1}+2M^{d+3})\\delta.$$\nConsequently, for $v,w\\in H^1((0,1)^d)$,\n$$\\left|\\int_{(0,1)^d}(K_F-K_G)\\nabla v\\cdot\\nabla w\\right|\\le(dM^{d+1}+2M^{d+3})\\delta\\,\\|\\nabla v\\|_2\\|\\nabla w\\|_2.$$\nThe discrepancy is a derivative-map error; a bound on $\\|F-G\\|_\\infty$ alone is not used.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use determinant multilinearity, the inverse-matrix difference identity, and a product expansion to bound the transformed tensors.",
+        "source_path": "items/lem-nurbs-laplace-tensor-gap-under-map-error.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            },
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nurbs-quotient-best-approximation-transfer",
+        "kind": "theorem",
+        "title": "NURBS quotient spaces transfer numerator H1 approximation",
+        "statement": "Assume Countable Choice. Let $F:\\widehat\\Omega\\to\\Omega$ be an admissible NURBS map and $W$ its continuous denominator, with $W\\ge w_->0$ and cellwise $G_W:=\\|\\nabla W\\|_{L^\\infty}<\\infty$. Let $\\widehat u$ be real-valued and let $s\\in S_h$ be a real numerator spline; assume both are $C^1$ up to the boundary of each cell in the common refinement of the geometry and analysis knot grids, with matching traces, and put $g:=W\\widehat u$. Then the physical rational spline $v_h:=(s/W)\\circ F^{-1}$ belongs to $H^1(\\Omega;\\mathbb R)$ and\n$$\\|u-v_h\\|_{H^1(\\Omega)}\\le C_F C_W\\|g-s\\|_{H^1(\\widehat\\Omega)},\\qquad C_F:=\\sqrt{j_+}\\sqrt{1+L^2},\\quad C_W:=\\frac{2}{w_-}+\\frac{G_W}{w_-^2},$$\nwhere $u:=\\widehat u\\circ F^{-1}$. This result transfers a specified numerator approximation bound; it does not assert a polynomial-degree-independent rate or a general $H^1$ rate for arbitrary knot families.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Write u-s/W=(Wu-s)/W and apply the weak product rule and the positive lower bound to control both the value and gradient errors.",
+        "source_path": "items/thm-nurbs-quotient-best-approximation-transfer.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nurbs-knot-cell-simplicial-geometry-adapter",
+        "kind": "lemma",
+        "title": "Matching simplex subdivisions give a NURBS knot-cell geometry interface",
+        "statement": "Assume Countable Choice. Let $F,G$ be two admissible tensor-product NURBS maps on $\\overline Q=[0,1]^d$, $d\\in\\{2,3\\}$, with finite knot partitions. Geometry continuity is required even if a representation allows a degree-plus-one interior knot; in particular it follows from degrees $p_r\\ge1$ and interior multiplicities $\\mu_r\\le p_r$. Take the union of all distinct knots in each coordinate, discard zero-length spans, and let $\\mathcal C$ be the resulting common rectangular partition. On each closed $C\\in\\mathcal C$, use the polynomial expressions inherited from the incident open cell, rather than a discontinuous evaluation convention at an endpoint. Their positive denominators, positive Jacobian lower bounds and bounded map/inverse derivatives are required on these expressions. They follow by continuity from uniform cellwise admissibility bounds. No agreement of cross-face normal derivatives is required.\n\nFor $C=a+\\operatorname{diag}(\\ell_1,\\ldots,\\ell_d)[0,1]^d$, subdivide by the $d!$ simplices\n$$T_{C,\\pi}=\\{a+\\operatorname{diag}(\\ell_1,\\ldots,\\ell_d)t:0\\le t_{\\pi(1)}\\le\\cdots\\le t_{\\pi(d)}\\le1\\},\\qquad \\pi\\in\\mathfrak S_d.$$\nThese form a matching affine simplicial mesh of $\\overline Q$. The restricted maps $F|_{T_{C,\\pi}}$ and $G|_{T_{C,\\pi}}$ are admissible curved-cell maps in [[def-isoparametric-curved-cell-map]], with the reference simplices taken in parameter coordinates. Their images are matching curved partitions, and the two global maps satisfy [[def-curved-domain-geometry-approximation]] with $\\Phi=F$, $\\Phi_h=G$, $\\Omega=F(Q)$ and $\\Omega_h=G(Q)$. The geometry errors are precisely $e_0=\\|F-G\\|_\\infty$ and $e_1=\\|DF-DG\\|_{L^\\infty(\\text{cells};op)}$ on the box; subdivision does not change their essential suprema. Matching traces means agreement within each mapped mesh across shared facets, not $F=G$ on the exterior boundary. A prescribed common exterior boundary requires a separate equality of those traces. Common image topology is given by the homeomorphism $G\\circ F^{-1}$.\n\nFor each finite cell, the rational expression has a smooth extension to a neighborhood of its closed rectangle: its polynomial numerator and denominator extend there and the denominator remains positive after shrinking the neighborhood. Its second derivatives are therefore bounded on that closed cell. For a sequence of grids, uniform reference-simplex shape regularity follows if $\\max_r\\ell_r/\\min_r\\ell_r\\le\\kappa$ on every rectangle with fixed $\\kappa$. Uniform curved-map bounds additionally require uniform first, inverse and second derivative bounds of the rational cell expressions. Neither uniform second derivative bounds nor a shape constant follows from a first derivative error bound alone. The construction changes the geometry presentation only; rational analysis functions remain rational and are not reclassified as affine P1 functions.",
+        "deps": [
+          "def-countable-choice",
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "def-isoparametric-curved-cell-map",
+          "def-curved-domain-geometry-approximation",
+          "def-matching-affine-simplicial-meshes",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-heine-borel-rn",
+          "cor-bolzano-weierstrass-in-rn",
+          "prop-the-image-of-a-lower-dimensional-c1-manifold-is-null"
+        ],
+        "dependency_level": 2,
+        "strategy": "Triangulate the common knot-cell rectangles by coordinate order; prove matching faces, local C2 extensions, curved-cell admissibility, and unchanged map errors.",
+        "sources": {
+          "references": [
+            {
+              "title": "Guermond, Finite Element Interpolation, Chapter 8, Meshes, complete 12-page chapter, §§8.1–8.2",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "source_path": "items/lem-nurbs-knot-cell-simplicial-geometry-adapter.md"
+      },
+      {
+        "id": "lem-boundary-preserving-tensor-schoenberg-h1-approximation",
+        "kind": "lemma",
+        "title": "Greville comparison splines preserve faces and give an explicit H1 estimate",
+        "statement": "On $[0,1]^d$, $d\\in\\{2,3\\}$, choose in coordinate $r$ any finite clamped knot vector $\\Xi_r=(\\xi^{(r)}_i)$ of degree $p_r\\ge1$, with interior multiplicity at most $p_r+1$. Let $h_r$ be its maximum positive span length, $B^{(r)}_i$ its canonical degree-$p_r$ basis, and $t^{(r)}_i=p_r^{-1}\\sum_{k=1}^{p_r}\\xi^{(r)}_{i+k}$ its Greville points. For a real-valued $g\\in C^1([0,1]^d)$ with $M_g$-Lipschitz gradient, define the actual tensor comparison spline\n$$\\mathcal Sg(x)=\\sum_{i_1,\\ldots,i_d}g(t^{(1)}_{i_1},\\ldots,t^{(d)}_{i_d})\\prod_{r=1}^d B^{(r)}_{i_r}(x_r).$$\nPut\n$$R=\\left(\\sum_{r=1}^d(p_r+1)^2h_r^2\\right)^{1/2},\\qquad E=2\\sum_{r=1}^d(2p_r+3)^2h_r^2,\\qquad B=E+\\sqrt d\\,R.$$\nThen $\\mathcal Sg$ is a continuous tensor spline, including at fully repeated knots, and\n$$\\|g-\\mathcal Sg\\|_{L^\\infty}\\le M_gE,\\qquad \\|\\nabla(g-\\mathcal Sg)\\|_{L^\\infty(\\mathrm{cells})}\\le\\sqrt d\\,M_gR.$$\nFor the Sobolev conclusion assume Countable Choice. Then $\\mathcal Sg\\in H^1((0,1)^d)$ and $\\|g-\\mathcal Sg\\|_{H^1}\\le M_gB$. The finite construction, pointwise cell bounds, continuity and face identities do not use this additional choice assumption.\nThe operator restricts on a coordinate face to the same construction in the tangential coordinates applied to the face data. Thus it preserves zero face data. If two face grids/degrees agree after coordinate permutation and coordinate reflections $t\\mapsto1-t$, their face operators agree under that identification and commute with multiplication of the face data by a constant. No knot-ratio bound is needed. All degree and continuity dependence is retained through the actual knots and the displayed degree factors. This comparison operator need not be idempotent.",
+        "deps": [
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "cor-mean-value-theorem",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use Greville reproduction and derivative identities with local mean-value estimates; tensorize, then verify repeated-knot continuity and face compatibility.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf",
+              "locator": "Theorem 8 and equations (49)-(50); derivative, local Taylor, tensor, and boundary estimates proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/lem-boundary-preserving-tensor-schoenberg-h1-approximation.md"
+      },
+      {
+        "id": "thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry",
+        "kind": "theorem",
+        "title": "Homogeneous knot insertion preserves an admissible NURBS patch",
+        "statement": "Let $F$ be the tensor-product NURBS patch of [[def-nurbs-patch-map-and-rational-spline-space]]. Insert a knot $u$ that is new and strictly inside a nonempty span in one coordinate direction. Apply [[alg-single-new-b-spline-knot-insertion]] to every control-net slice in that direction, using homogeneous controls $(w_\\alpha P_\\alpha,w_\\alpha)\\in\\mathbb R^{d+1}$. Then the updated homogeneous tensor spline is pointwise unchanged, every updated weight is positive, and the rational patch map remains exactly $F$ on $\\overline{\\widehat\\Omega}$.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "alg-single-new-b-spline-knot-insertion",
+          "thm-single-new-knot-insertion-preserves-b-spline-curve"
+        ],
+        "dependency_level": 3,
+        "strategy": "Lift each tensor-product control point to homogeneous coordinates, apply the proved curve-preserving insertion to every coefficient slice, and project back using the positive last coordinate.",
+        "source_path": "items/thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter XI, pp. 135–138",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nurbs-homogeneous-data-perturbation-geometry-bounds",
+        "kind": "lemma",
+        "title": "Homogeneous NURBS data errors generate geometry and metric error bounds",
+        "statement": "Assume Countable Choice. Let $Q=(0,1)^d$, $d\\in\\{2,3\\}$. Use a common finite tensor-product B-spline basis $N_\\alpha$ of coordinate degrees $p_r\\ge1$, clamped endpoint multiplicities $p_r+1$, and interior multiplicities at most $p_r$. Only positive-length knot spans are cells. Exact homogeneous re-representation on this common basis must be established before comparing data on originally different grids; it is not inferred from a common geometric image. Let\n$$A=\\sum_\\alpha a_\\alpha N_\\alpha,\\quad W=\\sum_\\alpha w_\\alpha N_\\alpha,\\quad F=A/W,\\qquad A'=\\sum_\\alpha a'_\\alpha N_\\alpha,\\quad W'=\\sum_\\alpha w'_\\alpha N_\\alpha,\\quad G=A'/W'.$$\nHere $a_\\alpha=w_\\alpha P_\\alpha\\in\\mathbb R^d$ and $a'_\\alpha=w'_\\alpha P'_\\alpha$. Suppose $F$ is admissible in [[def-nurbs-patch-map-and-rational-spline-space]], $w_-\\le w_\\alpha\\le w_+$, $\\|DF\\|,\\|(DF)^{-1}\\|\\le L$, $\\det DF\\ge j_->0$, and the global lower Lipschitz bound is explicitly $|F(x)-F(y)|\\ge c|x-y|$ on $\\overline Q$, $c>0$. The latter is the reciprocal of a global inverse Lipschitz bound and need not equal $1/L$.\n\nDefine finite data quantities\n$$\\epsilon_A=\\max_\\alpha|a'_\\alpha-a_\\alpha|,\\quad \\epsilon_W=\\max_\\alpha|w'_\\alpha-w_\\alpha|<w_-,\\quad m=w_--\\epsilon_W>0,\\quad R=\\max_\\alpha|P_\\alpha|,$$\n$$H=\\sum_\\alpha\\max_C\\|\\nabla N_\\alpha\\|_{L^\\infty(C)},\\quad T=\\epsilon_A+R\\epsilon_W,\\qquad E_0=T/m,$$\n$$E_1=\\frac{H\\epsilon_A+L\\epsilon_W+RH\\epsilon_W}{m}+\\frac{T(w_++\\epsilon_W)H}{m^2}.$$\nAll vector norms are Euclidean and all derivative norms are operator norms. $H$ is defined by the actual cell polynomials, so retains every degree, knot-spacing and multiplicity dependence. It is finite on each fixed finite nondegenerate grid; no uniform bound over degenerating grids is asserted. Then $w'_\\alpha\\ge m$, $G$ is continuous on $\\overline Q$, and\n$$e_0:=\\|F-G\\|_\\infty\\le E_0,\\qquad e_1:=\\|DF-DG\\|_{L^\\infty(\\text{cells};op)}\\le E_1.$$\nIf $E_1<\\min(c,1/L)$, then $G$ is globally injective and bi-Lipschitz onto its image, and\n$$|G(x)-G(y)|\\ge(c-E_1)|x-y|,\\quad \\|DG\\|\\le L+E_1,\\quad \\|(DG)^{-1}\\|\\le\\frac{L}{1-LE_1},\\quad \\det DG\\ge j_-(1-LE_1)^d>0.$$\nThe image $G(Q)$ is open. For the admissible-patch conclusion, retain the explicit boundary hypothesis that $G(Q)$ is a Lipschitz domain with its finite piecewise $C^1$ knot-cell presentation. A sufficient verifiable alternative is that $G$ extends $C^1$ to a neighborhood of $\\overline Q$ with nonsingular derivative there; this alternative holds when every interior multiplicity is at most $p_r-1$. With either boundary condition $G$ is admissible. No equality of the physical boundaries of $F(Q)$ and $G(Q)$ is asserted; their correspondence is $G\\circ F^{-1}$.\n\nFor these admissible maps put\n$$M=\\max\\left(1,L,L+E_1,\\frac{L}{1-LE_1}\\right),\\qquad C_M=dM^{d+1}+2M^{d+3}.$$\nTheir unit-Laplace tensors satisfy $\\|K_F-K_G\\|_\\infty\\le C_ME_1$, and their bilinear-form difference is at most $C_ME_1\\|\\nabla v\\|_2\\|\\nabla w\\|_2$. For any family with uniformly bounded $L,c^{-1},R,w_+,m^{-1}$ and $H\\epsilon_A+H\\epsilon_W+\\epsilon_W=O(h^s)$, $s>0$, the geometry form defect is $O(h^s)$. The bound is generated from homogeneous data; convergence of those data remains a separate approximation or certification obligation. Loads, quadrature and boundary-lift defects remain separate.\n\nA concrete geometry generator is scalar rounding of every component of $a_\\alpha$ and every $w_\\alpha$ to the nearest multiple of $2^{-b}$ (ties go to the smaller integer), followed by $P'_\\alpha=a'_\\alpha/w'_\\alpha$. Put $\\eta_b=2^{-b-1}$ and\n$$D=\\frac{2H\\sqrt d+2L+2RH}{w_-}+\\frac{4(\\sqrt d+R)(w_++w_-/2)H}{w_-^2}.$$\nChoose an integer $b\\ge0$ such that $\\eta_b<\\min(w_-/2,c/(2D),1/(2LD))$. Then this generator has $\\epsilon_A\\le\\sqrt d\\,\\eta_b$, $\\epsilon_W\\le\\eta_b$, $e_0\\le2(\\sqrt d+R)\\eta_b/w_-$, and $e_1\\le D\\eta_b$; in particular it generates the positive denominator, Jacobian, and global injectivity bounds above. In the $C^1$ knot branch ($\\mu_r\\le p_r-1$) it generates admissible approximate domains without an independent boundary certificate. Taking $b$ so that $D\\eta_b\\le h^s$ produces a stated geometry derivative rate for any supplied grid family, with its actual $D$, rather than claiming a rate from positive weights or knot refinement alone.",
+        "deps": [
+          "def-countable-choice",
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "lem-nurbs-laplace-tensor-gap-under-map-error",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-banach-fixed-point",
+          "thm-euclidean-space-complete",
+          "thm-heine-borel-rn",
+          "cor-bolzano-weierstrass-in-rn",
+          "lem-integer-part",
+          "lem-geometric-sequence-null",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 3,
+        "strategy": "Derive value and derivative errors from homogeneous coefficient changes, establish global bi-Lipschitz stability and the boundary branches, then propagate tensor and dyadic bounds.",
+        "sources": {
+          "references": [
+            {
+              "title": "Guermond, Finite Element Interpolation, Chapter 8, Meshes, complete 12-page chapter",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Takacs, Numerical Analysis of Isogeometric Methods, geometry and rational-spline conventions",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "source_path": "items/lem-nurbs-homogeneous-data-perturbation-geometry-bounds.md"
+      },
+      {
+        "id": "def-isogeometric-galerkin-patch-space-and-refinement",
+        "kind": "definition",
+        "title": "Conforming isogeometric Galerkin spaces and h/p/k refinement",
+        "statement": "For one admissible patch map $F:\\widehat\\Omega\\to\\Omega$, let $S_h$ be a finite tensor-product B-spline space on a knot grid refining the geometry grid, and let $W$ be the positive denominator of the geometry representation. The parametric rational analysis space is\n$$\\widehat V_h:=\\{s/W:s\\in S_h\\}.$$\nIts physical push-forward is $\\{\\,\\widehat v\\circ F^{-1}:\\widehat v\\in\\widehat V_h\\,\\}$. The homogeneous-Dirichlet conforming space is the subspace of these functions that belongs to $H^1_0(\\Omega)$; the unconstrained conforming version is the subspace belonging to $H^1(\\Omega)$. These spaces are finite dimensional because the tensor B-spline coefficient set is finite.\n\nFor vector-valued elasticity in $\\mathbb R^d$, use the componentwise product $\\widehat V_h^{\\,d}:=(\\widehat V_h)^d$, push it forward component by component, and intersect with $H^1(\\Omega;\\mathbb R^d)$ or $H^1_0(\\Omega;\\mathbb R^d)$ as appropriate. This remains finite dimensional because it is a subspace of the finite product of scalar coefficient spaces. Trace equality is required componentwise on each shared full face.\n\nFor finitely many matching patches, use one such local rational space on each patch. A global trial function is a piecewise physical function whose traces agree pointwise on every shared full face and which belongs to the chosen global $H^1$ or $H^1_0$ space. Under [[def-countable-choice|Countable Choice]], the vector-valued trace-matching lemma [[lem-matching-nurbs-patch-traces-give-h1-conformity]] proves the H1 part of this interface rule componentwise, including the Cartesian product used for elasticity. Nonmatching interfaces are excluded; a mortar or Nitsche method requires a separate stability and consistency result.\n\nThe refinement labels have the following meanings.\n\n- **h-refinement** inserts a new knot into a nonempty span at fixed degree and updates homogeneous control data by [[alg-single-new-b-spline-knot-insertion]]. Theorem [[thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry]] proves exact map preservation for this operation.\n- **p-refinement** raises a coordinate degree and replaces the homogeneous representation only when an exact representation with positive new weights is supplied. A degree label alone does not certify geometry preservation or an approximation rate.\n- **k-refinement** raises degree and chooses knot multiplicities to obtain a declared continuity, commonly the maximal $C^{p_r-1}$ continuity at simple interior knots. Exact geometry preservation requires the same positive homogeneous representation check as p-refinement.\n\nOn each cell, the pullback of scalar gradients and of the linear-elasticity strain is computed using [[lem-isogeometric-pullback-energy-norm-equivalence]]. Exact geometry does not assert exact quadrature. A discretization using an approximate map or quadrature must retain its separate form and load defects.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "alg-single-new-b-spline-knot-insertion",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Specify the finite-dimensional coefficient spaces, trace compatibility across matching interfaces, the H1_0 restriction, and the distinct geometric obligations for h, p, and k changes.",
+        "source_path": "items/def-isogeometric-galerkin-patch-space-and-refinement.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-isogeometric-elasticity-galerkin-quasioptimality",
+        "kind": "theorem",
+        "title": "Finite-Lamé isogeometric elasticity is conforming and quasi-optimal",
+        "statement": "Assume Countable Choice and the real displacement formulation of [[def-linear-elasticity-displacement-formulation-and-data]] on a nonempty bounded, connected Lipschitz domain $D\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$. Let $V=H^1_0(D;\\mathbb R^d)$ with the gradient norm, let the measurable shear modulus satisfy $0<\\mu_0\\le\\mu(x)\\le\\mu_1<\\infty$ almost everywhere, let $0\\le\\lambda<\\infty$, and let $f\\in V'$. For a finite conforming isogeometric subspace $V_h\\subset V$ built from the matching NURBS patches of [[def-isogeometric-galerkin-patch-space-and-refinement]], the elasticity variational problem has a unique solution $u$, the Galerkin problem has a unique solution $u_h$, and\n$$\\|u-u_h\\|_V\\le\\frac{2\\mu_1+d\\lambda}{\\mu_0}\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe estimate is for each finite $\\lambda$ and has a factor growing with $\\lambda$; it is not a locking-free or $\\lambda$-uniform NURBS result.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Match the homogeneous Dirichlet model and finite-dimensional conforming trial-space hypotheses exactly, then apply the current Batch 35 elasticity Galerkin theorem.",
+        "source_path": "items/thm-isogeometric-elasticity-galerkin-quasioptimality.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation, §4.1 and §5.1",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf"
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications, Chapter 8 §8.12.1",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf"
+            },
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-isogeometric-perturbed-geometry-quadrature-strang-bound",
+        "kind": "theorem",
+        "title": "Isogeometric geometry and quadrature defects enter through Strang's bound",
+        "statement": "Assume Countable Choice and use real scalar Sobolev spaces. Let $\\widehat\\Omega=(0,1)^d$, $d\\in\\{2,3\\}$, and $V=H^1_0(\\widehat\\Omega;\\mathbb R)$ with the gradient norm. Let $F$ be an exact admissible patch map and $G$ an approximate admissible map on the same reference box, with a common finite refinement of their cell grids. Let $f$ be a bounded real-linear functional on $H^1_0(F(\\widehat\\Omega);\\mathbb R)$ equipped with its physical gradient norm, and define the exact pulled-back unit-diffusion form and load by\n$$\\widehat a_F(v,w)=\\int_{\\widehat\\Omega}K_F\\nabla v\\cdot\\nabla w,\\quad K_F=(\\det DF)DF^{-1}DF^{-\\mathsf T},\\qquad \\widehat\\ell_F(w)=\\langle f,w\\circ F^{-1}\\rangle.$$\nDefine $\\widehat a_G$ by the same tensor formula with $G$. Let $u\\in V$ solve $\\widehat a_F(u,w)=\\widehat\\ell_F(w)$ for every $w\\in V$. Let $V_h\\subset V$ be a finite conforming rational spline space and let bounded $a_h$ and $\\ell_h$ be a discrete form and load assembled using $G$ and a specified quadrature rule. Assume $a_h$ is coercive on $V_h$ with inherited norm and constant $\\alpha_h>0$, and let $M_F$ be a boundedness constant for $\\widehat a_F$. Define\n$$\\delta_{\\rm geom}(v_h):=\\sup_{w_h\\ne0}\\frac{|\\widehat a_F(v_h,w_h)-\\widehat a_G(v_h,w_h)|}{\\|w_h\\|_V},\\quad \\delta_{\\rm quad}(v_h):=\\sup_{w_h\\ne0}\\frac{|\\widehat a_G(v_h,w_h)-a_h(v_h,w_h)|}{\\|w_h\\|_V},$$\nand $\\delta_{\\rm load}:=\\sup_{w_h\\ne0}|\\widehat\\ell_F(w_h)-\\ell_h(w_h)|/\\|w_h\\|_V$. When $V_h=\\{0\\}$ define all three defects to be zero. Let $u_h\\in V_h$ solve the discrete problem; then\n$$\\|u-u_h\\|_V\\le\\inf_{v_h\\in V_h}\\left((1+M_F/\\alpha_h)\\|u-v_h\\|_V+\\frac{\\delta_{\\rm geom}(v_h)+\\delta_{\\rm quad}(v_h)+\\delta_{\\rm load}}{\\alpha_h}\\right).$$\nIf $\\delta=\\|DF-DG\\|_{L^\\infty({\\rm op})}$ and both map derivative and inverse bounds are at most $M\\ge1$, then the geometry defect obeys\n$$\\delta_{\\rm geom}(v_h)\\le(dM^{d+1}+2M^{d+3})\\delta\\,\\|v_h\\|_V.$$\nThe hypotheses require discrete coercivity; neither exact geometry nor positive NURBS weights imply it. The estimate retains the load defect and makes no convergence claim for any geometry or quadrature rule.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "lem-nurbs-laplace-tensor-gap-under-map-error",
+          "def-variational-crime-error-framework",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "def-countable-choice",
+          "lem-nurbs-knot-cell-simplicial-geometry-adapter",
+          "lem-nurbs-homogeneous-data-perturbation-geometry-bounds",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-na-homogeneous-dirichlet-poincare"
+        ],
+        "dependency_level": 5,
+        "strategy": "Pull the exact problem to the common parameter domain, split the form defect into geometry and quadrature parts, retain the load defect, and apply the published first Strang estimate.",
+        "source_path": "items/thm-isogeometric-perturbed-geometry-quadrature-strang-bound.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-isogeometric-poisson-galerkin-quasioptimality",
+        "kind": "theorem",
+        "title": "Exact-geometry isogeometric Poisson Galerkin estimate",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, be bounded, connected, and Lipschitz, and let $V=H^1_0(D;\\mathbb R)$ with norm $\\|v\\|_V=\\|\\nabla v\\|_{L^2(D)}$. Let $A:D\\to\\mathbb R^{d\\times d}$ be measurable and symmetric, with constants $0<\\alpha\\le\\beta<\\infty$ such that\n$$\\zeta\\cdot A(x)\\zeta\\ge\\alpha|\\zeta|^2\\quad\\text{and}\\quad\\|A(x)\\|_{\\rm op}\\le\\beta\\quad\\text{for a.e. }x\\in D,\\ \\zeta\\in\\mathbb R^d.$$\nFor $f\\in V'$, define $a(u,v)=\\int_D A\\nabla u\\cdot\\nabla v$ and $F(v)=f(v)$. Let $V_h\\subset V$ be any finite conforming isogeometric subspace on the exact admissible patch geometry. Then the weak problem and its Galerkin restriction have unique solutions $u$ and $u_h$, and\n$$\\|u-u_h\\|_V\\le\\frac{\\beta}{\\alpha}\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThis is an exact-form estimate; it makes no assertion about approximate geometry, quadrature, polynomial-degree-independent constants, or a rate without a separate numerator approximation theorem.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Check that the NURBS trial space is finite dimensional and conforming, then apply the published Céa theorem with the displayed form constants.",
+        "source_path": "items/thm-isogeometric-poisson-galerkin-quasioptimality.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 26, Basic error analysis",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap26.pdf"
+            },
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nurbs-tensor-product-l2-approximation",
+        "kind": "theorem",
+        "title": "Tensorized spline quasi-interpolation gives a NURBS L2 rate",
+        "statement": "Assume the Axiom of Choice. On each coordinate interval $[0,1]$, let a clamped degree-$p_r$ analysis knot mesh have largest cell size $h_r$, and let $Q_r$ be a family as in [[def-local-spline-quasi-interpolant]] with reproduction order $0\\le\\ell_r\\le p_r$, local constant $M_r$, and stability constant $C_r$. Require each analysis knot mesh to refine the corresponding geometry knot vector, and let $S_h=\\bigotimes_{r=1}^d S_{p_r,\\xi^{(r)}}$ be the corresponding numerator space defining the patch trial space in [[def-isogeometric-galerkin-patch-space-and-refinement]]. Suppose $g:\\widehat\\Omega\\to\\mathbb R$ belongs to $L^2(\\widehat\\Omega)$, has weak pure derivatives $\\partial_r^{\\ell_r+1}g\\in L^2(\\widehat\\Omega)$, and, for each $r$, almost every section in coordinate $r$ belongs to $W^{\\ell_r+1,2}(0,1)$ and satisfies the hypotheses of the one-dimensional estimate in [[thm-sobolev-spline-quasi-interpolant-rate]]. Require each $Q_r$ to have its bounded extension to $L^2(\\widehat\\Omega)$, acting in coordinate $r$, with norm at most $S_r=C_r\\sqrt{M_r}$; require the coordinate operators to commute pairwise and to commute with weak derivatives in every other coordinate on this class. These are explicit hypotheses on the supplied family, not conclusions of the univariate rate theorem. Under the Axiom of Choice, completed-product Fubini is available, and the sectionwise operators and derivatives are assumed measurable. Define $\\mathcal Q:=Q_d\\cdots Q_1$ and set $A_r:=(1+C_r)M_r^{\\ell_r+1+1/2}/\\ell_r!$. Then $\\mathcal Qg\\in S_h$ and\n$$\\|g-\\mathcal Qg\\|_{L^2(\\widehat\\Omega)} \\le\\sum_{r=1}^d A_r\\!\\left(\\prod_{j\\ne r}S_j\\right)h_r^{\\ell_r+1}\\|\\partial_r^{\\ell_r+1}g\\|_{L^2(\\widehat\\Omega)}.$$\nIf $g=W(\\widehat u)$ and $v_h:=(\\mathcal Qg/W)\\circ F^{-1}$, then\n$$\\|u-v_h\\|_{L^2(\\Omega)}\\le \\frac{\\sqrt{j_+}}{w_-}\\|g-\\mathcal Qg\\|_{L^2(\\widehat\\Omega)},\\qquad u:=\\widehat u\\circ F^{-1}.$$\nThis is an $L^2$ approximation estimate. It does not imply an $H^1$ energy rate.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "def-local-spline-quasi-interpolant",
+          "thm-sobolev-spline-quasi-interpolant-rate",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral"
+        ],
+        "dependency_level": 5,
+        "strategy": "Tensorize the coordinate operators, prove their L2 stability by summing local bounds with finite overlap, telescope I minus the product, and transfer the numerator estimate through W and F.",
+        "source_path": "items/thm-nurbs-tensor-product-l2-approximation.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            },
+            {
+              "title": "Tom Lyche, Carla Manni, Hendrik Speleers, B-Splines and Spline Approximation, complete lecture notes",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nurbs-p1-tensor-spline-h1-error-rate",
+        "kind": "theorem",
+        "title": "Smooth compactly supported data have a degree-one NURBS energy rate",
+        "statement": "Assume Countable Choice. Let $F:\\widehat\\Omega\\to D$ be one admissible NURBS patch, $\\widehat\\Omega=(0,1)^d$, $d\\in\\{2,3\\}$, with determinant upper bound $j_+$, derivative and inverse-derivative bound $L$, and continuous denominator $W$ that is $C^1$ on each knot cell, satisfies $W\\ge w_->0$, and has $\\|\\nabla W\\|_{L^\\infty}\\le G_W$. Let $g\\in C^1(\\overline{\\widehat\\Omega})$ have Lipschitz gradient with constant $M_g$ and support contained in a nonempty compact set $K\\Subset\\widehat\\Omega$, and set $\\widehat u=g/W$ and $u=\\widehat u\\circ F^{-1}$. Let the uniform tensor grid of side $h=1/N$ refine the geometry knot grid, let $S_h$ be its tensor-product degree-one $C^0$ numerator space, and let $V_h=\\{(s/W)\\circ F^{-1}:s\\in S_h\\}\\cap H^1_0(D)$ be the corresponding isogeometric trial space. Let $I_hg$ be the tensor Q1 nodal interpolant. If $h<\\operatorname{dist}(K,\\partial\\widehat\\Omega)/\\sqrt d$, then $v_h=(I_hg/W)\\circ F^{-1}$ belongs to $V_h$. If $u$ is the weak solution of an exact symmetric scalar elliptic problem with coefficient operator bound $\\beta$ and coercivity bound $\\alpha$ as in [[thm-isogeometric-poisson-galerkin-quasioptimality]], and $u_h$ its exact-form isogeometric Galerkin solution in $V_h$, then\n$$\\|u-u_h\\|_{H^1_0(D),\\nabla}\\le\\frac\\beta\\alpha\\,C_F C_W C_d\\,hM_g,$$\nwhere $C_F=\\sqrt{j_+}\\sqrt{1+L^2}$, $C_W=2/w_-+G_W/w_-^2$, and $C_d=d+\\sqrt d+2^{d-1}d\\sqrt d$. These constants retain their map, weight, coefficient, and dimension dependence. This proves only the degree-one compact-support branch; it is not a general high-degree, knot-family, or locking-free rate.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "thm-nurbs-quotient-best-approximation-transfer",
+          "thm-isogeometric-poisson-galerkin-quasioptimality",
+          "lem-compactly-supported-h1-belongs-to-h-zero",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "lem-tensor-q1-interpolation-h1-estimate",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use tensor Q1 nodal interpolation of the numerator, reproduce its affine Taylor polynomial on each cell, bound derivative errors by the Hessian supremum, transfer through W and F, and apply Céa.",
+        "source_path": "items/thm-nurbs-p1-tensor-spline-h1-error-rate.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-boundary-preserving-nurbs-projector-and-h1-rate",
+        "kind": "theorem",
+        "title": "Boundary-preserving NURBS projection and matching-patch energy approximation",
+        "statement": "Assume Countable Choice and use real-valued scalar Sobolev spaces throughout. Let $D\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, be a nonempty bounded connected Lipschitz domain with a finite face-to-face admissible NURBS patch partition as in [[def-isogeometric-galerkin-patch-space-and-refinement]]. Let $V_h\\subset H^1_0(D;\\mathbb R)$ be its full finite rational trial space with matching physical traces and homogeneous Dirichlet boundary condition. For any such finite space, including the zero space, there is a real-linear projector $\\Pi_h:H^1_0(D;\\mathbb R)\\to V_h$ specified by\n$$\\int_D\\bigl(\\Pi_hu\\,v_h+\\nabla\\Pi_hu\\cdot\\nabla v_h\\bigr)=\\int_D\\bigl(u v_h+\\nabla u\\cdot\\nabla v_h\\bigr)\\qquad(v_h\\in V_h).$$\nIt fixes every $v_h\\in V_h$, satisfies $\\Pi_h^2=\\Pi_h$, preserves the homogeneous boundary condition for every $H^1_0$ input, and\n$$\\|\\Pi_hu\\|_{H^1(D)}\\le\\|u\\|_{H^1(D)},\\qquad \\|u-\\Pi_hu\\|_{H^1(D)}\\le\\inf_{v_h\\in V_h}\\|u-v_h\\|_{H^1(D)}.$$\nThis is a global variational projector, defined without point evaluation of $H^1$ inputs.\n\nFor the following actual approximation estimate, on patch $a$ let $F_a$ have determinant upper bound $j_{+,a}$ and inverse/forward derivative bound $L_a$, and let its fixed continuous positive geometry denominator satisfy $W_a\\ge w_{-,a}>0$ and $\\|\\nabla W_a\\|_{L^\\infty(\\mathrm{cells})}\\le G_a$. Require the analysis knot grids defining $V_h$ to refine the geometry knot grids. Choose the tensor clamped analysis knots defining the local numerator spaces of $V_h$ with degrees $p_{a,r}\\ge1$, maximum spans $h_{a,r}$, and interior multiplicities at most $p_{a,r}+1$; require their numerator spaces to contain the geometry numerator and denominator after any exact re-representation. Use $R_a,E_a,B_a$ from [[lem-boundary-preserving-tensor-schoenberg-h1-approximation]] for these actual knots.\n\nFor each shared face, require its parameter identification to be a permutation and reflections of tangential coordinates, its tangential degrees and knot vectors to agree under that identification, and\n$$W_a|_f=c_{ab}\\,W_b|_{f'}\\circ T_{ab}\\quad\\text{for a specified constant }c_{ab}>0.$$\nThese are explicit sufficient compatibility data for the approximation branch, checked on finite face representations; a single patch needs none. For $u\\in H^1_0(D)$ require $g_a:=W_a(u\\circ F_a)$ to have a $C^1$ representative on the closed reference box with $M_a$-Lipschitz gradient, to vanish on every exterior face, and to satisfy $g_a|_f=c_{ab}g_b|_{f'}\\circ T_{ab}$ on each shared face. These pointwise conditions concern only this smooth approximation class. Define\n$$C_a=\\sqrt{j_{+,a}}\\sqrt{1+L_a^2}\\left(\\frac2{w_{-,a}}+\\frac{G_a}{w_{-,a}^2}\\right),\\qquad \\varepsilon_h=\\left(\\sum_a C_a^2 M_a^2B_a^2\\right)^{1/2}.$$\nThen the explicitly constructed $v_h|_{F_a((0,1)^d)}=(\\mathcal S_ag_a/W_a)\\circ F_a^{-1}$ belongs to $V_h$ and\n$$\\|u-\\Pi_hu\\|_{H^1(D)}\\le\\|u-v_h\\|_{H^1(D)}\\le\\varepsilon_h.$$\nFor fixed bounded degrees and uniform map/weight/numerator bounds this is an $O(\\max_{a,r}h_{a,r})$ H1 estimate on arbitrary graded meshes, including simple-knot maximal-continuity families. If degrees vary with refinement, retain the actual $B_a$; convergence follows whenever the displayed $\\varepsilon_h$ tends to zero. This does not assert an optimal $h^{p}$ rate or a degree-independent constant.\n\nUnder the exact scalar elliptic data of [[thm-isogeometric-poisson-galerkin-quasioptimality]], its Galerkin solution obeys $\\|u-u_h\\|_{\\nabla}\\le(\\beta/\\alpha)\\varepsilon_h$. Componentwise the same construction applies to finite-Lamé elasticity: if $M_{a,q}$ bounds the gradient Lipschitz constant of component numerator $q$, replace $M_a^2$ by $\\sum_qM_{a,q}^2$ in $\\varepsilon_h^2$ and obtain $\\|u-u_h\\|_{\\nabla}\\le(2\\mu_1+d\\lambda)\\mu_0^{-1}\\varepsilon_h$ under that supplier's full data.\n\nFor the single-patch reference-domain problem in [[thm-isogeometric-perturbed-geometry-quadrature-strang-bound]], assume $g=Wu$ satisfies the same $C^{1,1}$ and zero-boundary conditions above. Apply the construction with the reference-domain projector $\\Pi_h$ and put $\\widehat\\varepsilon_h=(2/w_-+G/w_-^2)M_gB$. Then its original defects and constants give\n$$\\|u-u_h\\|_{\\nabla}\\le(1+M_F/\\alpha_h)\\widehat\\varepsilon_h+\\alpha_h^{-1}\\bigl(\\delta_{\\rm geom}(\\Pi_hu)+\\delta_{\\rm quad}(\\Pi_hu)+\\delta_{\\rm load}\\bigr).$$\nIn particular its existing geometry bound gives $\\delta_{\\rm geom}(\\Pi_hu)\\le(dM^{d+1}+2M^{d+3})\\|DF-DG\\|_\\infty\\|u\\|_{H^1}$; discrete coercivity, load error and quadrature error remain separate hypotheses/terms.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-boundary-preserving-tensor-schoenberg-h1-approximation",
+          "thm-nurbs-quotient-best-approximation-transfer",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "lem-compactly-supported-h1-belongs-to-h-zero",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "thm-isogeometric-poisson-galerkin-quasioptimality",
+          "thm-isogeometric-elasticity-galerkin-quasioptimality",
+          "thm-isogeometric-perturbed-geometry-quadrature-strang-bound",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "thm-dominated-convergence",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-heine-borel-rn",
+          "def-rationals",
+          "lem-q-and-irrationals-dense-r",
+          "thm-rationals-countable",
+          "thm-product-of-countable",
+          "prop-the-image-of-a-lower-dimensional-c1-manifold-is-null",
+          "def-countable-choice",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use full-H1 Céa for the orthogonal projector; construct a compatible Greville numerator approximation, prove its zero-boundary membership, and transfer patchwise H1 errors.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf",
+              "locator": "Theorem 8, Greville identities (49)-(50), Theorem 32 and Example 33; the rational, boundary and multipatch arguments are local."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 26, Basic error analysis",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap26.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "source_path": "items/thm-boundary-preserving-nurbs-projector-and-h1-rate.md"
+      }
+    ]
+  },
+  {
+    "order": 2693,
+    "id": "isogeometric-galerkin-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Isogeometric Galerkin discretization — Examples",
+    "companion": "isogeometric-galerkin-methods",
+    "requires": [
+      "isogeometric-galerkin-methods"
+    ],
+    "items": [
+      {
+        "id": "cex-positive-nurbs-weights-do-not-imply-admissible-patch",
+        "kind": "counterexample",
+        "title": "Positive NURBS weights do not imply an admissible patch",
+        "statement": "On $[0,1]^2$, take degree-one tensor Bernstein functions in each coordinate, all four weights equal to one, and control net\n$$P_{00}=(0,0),\\quad P_{10}=(1,0),\\quad P_{01}=(0,1),\\quad P_{11}=(1,-1).$$\nThe resulting positive-weight bilinear NURBS map is $F(\\xi,\\eta)=(\\xi,\\eta(1-2\\xi))$. Its Jacobian vanishes at $\\xi=1/2$, changes sign across that line, and the map is not injective; hence positive weights alone do not give an admissible patch.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the four control points for F(xi,eta)=(xi,eta(1-2xi)), compute its determinant, and exhibit distinct parameters with the same image.",
+        "source_path": "items/cex-positive-nurbs-weights-do-not-imply-admissible-patch.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-isogeometric-quarter-annulus-nurbs-patch",
+        "kind": "example",
+        "title": "A tensor NURBS patch exactly covers a quarter annulus",
+        "statement": "Assume Countable Choice. Fix $0<r_0<1$. Use a linear radial coordinate $\\rho(s)=r_0+(1-r_0)s$ and a rational quadratic angular curve with control points $Q_0=(1,0)$, $Q_1=(1,1)$, $Q_2=(0,1)$ and weights $(1,1/\\sqrt2,1)$. Tensor their bases, use control points $P_{ij}=r_iQ_j$ for $r_i\\in\\{r_0,1\\}$, and tensor weights $w_{ij}=w_j$. The resulting patch maps $[0,1]^2$ bijectively onto $\\{(x,y):r_0\\le\\sqrt{x^2+y^2}\\le1,\\ x,y\\ge0\\}$ with strictly positive Jacobian, and its exact map satisfies the norm-equivalence hypotheses of [[lem-isogeometric-pullback-energy-norm-equivalence]].",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Compute the rational quadratic arc, verify the unit-circle identity and strict angular monotonicity, then compute the radial-angular Jacobian.",
+        "source_path": "items/ex-isogeometric-quarter-annulus-nurbs-patch.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-multipatch-trace-mismatch-not-h1",
+        "kind": "counterexample",
+        "title": "Matching patch geometry does not repair a field trace jump",
+        "statement": "Let $D=(0,2)\\times(0,1)$ and take the two adjacent identity NURBS rectangles $D_L=(0,1)\\times(0,1)$ and $D_R=(1,2)\\times(0,1)$. They partition $D$ up to the null interface $\\Gamma=\\{1\\}\\times(0,1)$, so $D=D_L\\cup\\Gamma\\cup D_R$. Define $v=0$ on $D_L\\cup\\Gamma$ and $v=1$ on $D_R$; any other value on $\\Gamma$ gives the same almost-everywhere class. Then $v\\in L^2(D)$ but $v\\notin H^1(D)$, although the patch geometries match exactly. Thus matching physical geometry does not replace the matching-field-trace condition in [[def-isogeometric-galerkin-patch-space-and-refinement]].",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function"
+        ],
+        "dependency_level": 5,
+        "strategy": "Integrate by parts on the two rectangles to identify the interface measure in the distributional derivative, then use a concentrating test-function sequence to rule out an L2 weak derivative.",
+        "source_path": "items/cex-multipatch-trace-mismatch-not-h1.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            },
+            {
+              "title": "Annalisa Buffa, Gregor Gantner, Carlotta Giannelli, Dirk Praetorius, Rafael Vázquez, Mathematical Foundations of Adaptive Isogeometric Analysis, Archives of Computational Methods in Engineering 29 (2022)",
+              "url": "https://d-nb.info/1278950273/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-isogeometric-k-refinement-of-the-identity-patch",
+        "kind": "example",
+        "title": "Degree elevation and simple-knot insertion preserve the identity patch",
+        "statement": "Start with the degree-one identity map $F(\\xi,\\eta)=(\\xi,\\eta)$ on $[0,1]^2$, represented by its four tensor control points and unit weights. Elevate both coordinate degrees to two using control net $P_{ij}=(i/2,j/2)$ for $i,j\\in\\{0,1,2\\}$ and retain unit weights. Inserting a simple knot at $1/2$ in both coordinate directions leaves the geometry exactly the identity and gives degree-two analysis splines with $C^1$ continuity at the new interior knots.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry",
+          "thm-single-new-knot-insertion-preserves-b-spline-curve",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "dependency_level": 5,
+        "strategy": "Verify the degree-two Bernstein representation of each coordinate, then apply the homogeneous knot-insertion preservation theorem in each coordinate.",
+        "source_path": "items/ex-isogeometric-k-refinement-of-the-identity-patch.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, A Practical Guide to Splines, revised edition, Chapter IX and Chapter XI",
+              "url": "https://www.stat.cmu.edu/~brian/valerie/617-2022/week07/spline%20references/pdfcookie.com_a-practical-guide-to-splines.pdf"
+            },
+            {
+              "title": "Stefan Takacs, Numerical Analysis of Isogeometric Methods, complete JKU lecture notes, 2018/19",
+              "url": "https://numa.jku.at/media/filer_public/3c/2a/3c2a6222-fd4d-4405-b866-e3757698fe8c/lecture_notes_iga.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

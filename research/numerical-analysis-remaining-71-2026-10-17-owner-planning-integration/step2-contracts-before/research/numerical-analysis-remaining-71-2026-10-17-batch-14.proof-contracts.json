@@ -1,0 +1,2752 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-barycentric-denominator-polynomial-nonzero",
+    "lem-divided-difference-lagrange-formula-and-symmetry",
+    "thm-pade-solvable-system-gives-local-order",
+    "lem-adjacent-window-divided-difference-recurrence",
+    "lem-divided-difference-repeated-rolle-bound",
+    "lem-hermite-genocchi-simplex-integral",
+    "prop-barycentric-rational-quotient-well-defined",
+    "lem-hermite-genocchi-bv-window-variation",
+    "lem-floater-hormann-local-mesh-ratio-bounded-by-global",
+    "lem-floater-hormann-window-polynomial-interpolates",
+    "thm-aaa-loewner-minimum-and-support-interpolation",
+    "lem-floater-hormann-weight-and-blend-identity",
+    "lem-floater-hormann-window-newton-remainder",
+    "lem-floater-hormann-gap-partial-sums-positive",
+    "lem-floater-hormann-denominator-lower-bound",
+    "thm-floater-hormann-no-real-poles",
+    "thm-floater-hormann-error-rate-bv",
+    "thm-floater-hormann-error-rate-c2",
+    "ex-pade-singular-system-and-froissart-cancellation",
+    "ex-aaa-small-sample-error-does-not-control-off-grid",
+    "ex-aaa-transfer-function-pole",
+    "cex-floater-hormann-cd1-seminorm-rate-fails"
+  ],
+  "contracts": {
+    "lem-barycentric-denominator-polynomial-nonzero": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an index $j\\in\\{1,\\ldots,k\\}$. At $z=z_j$, each summand with index different from $j$ contains the factor $z_j-z_j=0$, so $$ Q(z_j)=w_j\\prod_{\\ell\\ne j}(z_j-z_\\ell). $$ This is the support-node evaluation of $Q$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every factor in the product in step 1.1 is nonzero because the nodes are distinct, and $w_j\\ne0$. Thus $Q(z_j)\\ne0$; an identically zero polynomial would vanish at $z_j$, so $Q$ is not identically zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1\u20131.2 show the cleared denominator is nonzero at every support node under the stated nonzero-weight hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and first proof steps include the one-node or order-zero case; empty products and q=0 are explicitly covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The hypotheses require distinct nodes (and 0\u2264d<n where applicable); the proof uses these conditions exactly to keep all denominators nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is over finite complex support/sample data and has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Since k>=1, step 1.1 fixes a support index j and evaluates Q there."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-divided-difference-lagrange-formula-and-symmetry": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-distinct-node-divided-difference",
+          "source_section": "Definition",
+          "quote": "Let $q\\ge 0$, let $t_0,\\ldots,t_q$ be distinct real numbers, and let $f$ be\nreal-valued at these nodes. Define the **divided difference** recursively by\n$f[t_0]:=f(t_0)$ and, for $q\\ge1$,\n$$f[t_0,\\ldots,t_q]:= \\frac{f[t_1,\\ldots,t_q]-f[t_0,\\ldots,t_{q-1}]}{t_q-t_0}.$$\nAll sublists in the recursion remain distinct. The denominator is nonzero\nbecause $t_q\\ne t_0$, so this recursion gives a finite real number from the\nnode data.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $j$ define $L_j(t)=\\prod_{k\\ne j}(t-t_k)/(t_j-t_k)$. Its denominators are nonzero, and $L_j(t_k)$ equals $1$ when $k=j$ and $0$ otherwise. By [F2], $P(t)=\\sum_{j=0}^q f(t_j)L_j(t)$ is the unique polynomial of degree at most $q$ taking the assigned values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The coefficient of $t^q$ in $P$ is the displayed sum, because the leading coefficient of $L_j$ is $1/\\prod_{k\\ne j}(t_j-t_k)$. The sum is unchanged by any permutation of the nodes, since the permutation only reorders its terms and their symmetric denominators.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "We prove that the recursively defined divided difference equals this leading coefficient by induction on $q$ using [F4]. Since $0\\in\\mathbb N$ by [F3], for $q=0$ both are $f(t_0)$. For $q\\ge1$, substitute the induction formula for the two order-$(q-1)$ differences in [F1] and divide by $t_q-t_0$. For an interior index $0<j<q$, the resulting coefficient of $f(t_j)$ is $$\\frac{1}{t_q-t_0} \\left(\\frac{1}{t_j-t_q}-\\frac{1}{t_j-t_0}\\right) \\frac{1}{\\prod_{\\substack{1\\le k\\le q-1\\\\k\\ne j}}(t_j-t_k)} =\\frac{1}{\\prod_{k\\ne j}(t_j-t_k)}.$$ For $j=0$, only the second recursive term contributes and its minus sign supplies the missing factor $t_0-t_q$; for $j=q$, only the first term contributes and division supplies $t_q-t_0$. Their coefficients are also $1/\\prod_{k\\ne j}(t_j-t_k)$. This is exactly the coefficient in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Step 3.1 proves the q=0 base case before using the recursive rule for q>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and first proof steps include the one-node or order-zero case; empty products and q=0 are explicitly covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The hypotheses require distinct nodes (and 0\u2264d<n where applicable); the proof uses these conditions exactly to keep all denominators nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns distinct real nodes and assigned values; no closed interval endpoint hypothesis is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof defines a Lagrange basis for every fixed node index and makes no existential choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "thm-pade-solvable-system-gives-local-order": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pade-coefficient-matching",
+          "source_section": "Definition",
+          "quote": "Input nonnegative integers $m,n$ and coefficients $c_0,\\ldots,c_{m+n}\\in\n\\mathbb C$ of a formal power series or of an analytic function at $0$. Set\n$c_k=0$ for negative $k$. Seek a normalized denominator\n$q(z)=1+\\sum_{j=1}^nq_jz^j$. Form the $n\\times n$ moment system\n$$\\sum_{j=1}^{n}q_jc_{m+\\ell-j}=-c_{m+\\ell}, \\qquad 1\\le\\ell\\le n.$$\nClassify it by exact Gaussian elimination on the augmented matrix. Start with\npivot row $r=1$ and scan columns $j=1,\\ldots,n$ in order. In column $j$, if\nall entries in rows $r$ through $n$ are zero, leave that column free and\ncontinue. Otherwise choose the first row $s\\ge r$ with a nonzero entry in\ncolumn $j$, swap rows $s$ and $r$, divide row $r$ by its column-$j$ entry,\nand subtract the resulting row multiple from every other row to make the\nother entries in column $j$ zero; then increment $r$. After all columns, a\nrow whose coefficient entries are all zero and whose augmented entry is\nnonzero makes the system inconsistent, so return status\n$\\texttt{full-order-inconsistent}$. If the system is consistent but has\nrank less than $n$, return status $\\texttt{defective-nonunique}$ together\nwith the rank and reduced system; do not select a denominator from its\naffine solution set. Here rank is the number of pivot rows; consistency and rank are\nread from the reduced augmented matrix. If the system has rank $n$, return the unique solution\n$(q_1,\\ldots,q_n)$ and set\n$$p_k=\\sum_{j=0}^{\\min(k,n)}q_jc_{k-j}, \\qquad 0\\le k\\le m,\\qquad q_0:=1.$$\nThe output is the coefficient-matching candidate $p/q$ with its full-order\nstatus. If $n=0$, the empty denominator system is uniquely solved by $q=1$\nand the returned numerator coefficients are $p_k=c_k$ for $0\\le k\\le m$.\nThis procedure claims no pole-location or analytic-continuation guarantee.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiplication of the Taylor series of $f$ by $q$ gives coefficient $\\sum_{j=0}^{\\min(k,n)}q_jc_{k-j}$ at degree $k$. By [F1], for each $0\\le k\\le m$ this coefficient is $p_k$, so the coefficients of $qf-p$ through degree $m$ vanish.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $m<k\\le m+n$, write $k=m+\\ell$ with $1\\le\\ell\\le n$. The moment equation in [F1] says $\\sum_{j=1}^nq_jc_{k-j}=-c_k$, exactly the assertion that the degree-$k$ coefficient of $qf$ is zero, because $q_0=1$. Therefore every coefficient of $qf-p$ through degree $m+n$ vanishes.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Analyticity implies $qf-p$ has a Taylor expansion whose first possibly nonzero term has degree at least $m+n+1$, so $qf-p=O(z^{m+n+1})$. By [A1], divide by the nonvanishing $q$ near zero to obtain the asserted local order for $f-p/q$. This proof uses only the solvable coefficient equations; it makes no claim about zeros of $q$ away from $0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Step 3.1 applies to n=0, when the normalized denominator system is empty and q=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and first proof steps include the one-node or order-zero case; empty products and q=0 are explicitly covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Step 3.1 uses q(0)=1 to bound 1/q in a neighborhood of the expansion point z=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-adjacent-window-divided-difference-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-distinct-node-divided-difference",
+          "source_section": "Definition",
+          "quote": "Let $q\\ge 0$, let $t_0,\\ldots,t_q$ be distinct real numbers, and let $f$ be\nreal-valued at these nodes. Define the **divided difference** recursively by\n$f[t_0]:=f(t_0)$ and, for $q\\ge1$,\n$$f[t_0,\\ldots,t_q]:= \\frac{f[t_1,\\ldots,t_q]-f[t_0,\\ldots,t_{q-1}]}{t_q-t_0}.$$\nAll sublists in the recursion remain distinct. The denominator is nonzero\nbecause $t_q\\ne t_0$, so this recursion gives a finite real number from the\nnode data.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-divided-difference-lagrange-formula-and-symmetry",
+          "source_section": "Statement",
+          "quote": "For distinct real nodes $t_0,\\ldots,t_q$ and assigned values $f(t_j)$,\n$$f[t_0,\\ldots,t_q] =\\sum_{j=0}^{q}\\frac{f(t_j)}{\\prod_{\\substack{0\\le k\\le q\\\\k\\ne j}}(t_j-t_k)}.$$\nConsequently the divided difference is symmetric in its nodes. It is the\ncoefficient of $t^q$ in the unique polynomial of degree at most $q$ that takes\nthe assigned values at those nodes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply the recursive endpoint rule [F1] to the order-$(d+2)$ divided difference on the ordered endpoints $x_i,x_{i+d+1}$ and the intermediate list $x_{i+1},\\ldots,x_{i+d},x$. Symmetry [F2] identifies its two numerator terms as $G_{i+1}$ and $G_i$, respectively, so $$f[x_i,\\ldots,x_{i+d+1},x] =\\frac{G_{i+1}-G_i}{x_{i+d+1}-x_i}.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The denominator in step 1.1 is positive because the nodes are strictly ordered. Rearranging that identity gives the stated identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The allowed d=0 and smallest n=1 case use the same recursive divided-difference identity in step 1.1; distinct ordered endpoints keep its denominator positive, and step 2.1 rearranges it. No rank condition is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The allowed d=0 and smallest n=1 case use the same recursive divided-difference identity in step 1.1; distinct ordered endpoints keep its denominator positive, and step 2.1 rearranges it. No rank condition is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The allowed d=0 and smallest n=1 case use the same recursive divided-difference identity in step 1.1; distinct ordered endpoints keep its denominator positive, and step 2.1 rearranges it. No rank condition is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is over finite complex support/sample data and has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-divided-difference-repeated-rolle-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-distinct-node-divided-difference",
+          "source_section": "Definition",
+          "quote": "Let $q\\ge 0$, let $t_0,\\ldots,t_q$ be distinct real numbers, and let $f$ be\nreal-valued at these nodes. Define the **divided difference** recursively by\n$f[t_0]:=f(t_0)$ and, for $q\\ge1$,\n$$f[t_0,\\ldots,t_q]:= \\frac{f[t_1,\\ldots,t_q]-f[t_0,\\ldots,t_{q-1}]}{t_q-t_0}.$$\nAll sublists in the recursion remain distinct. The denominator is nonzero\nbecause $t_q\\ne t_0$, so this recursion gives a finite real number from the\nnode data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-divided-difference-lagrange-formula-and-symmetry",
+          "source_section": "Statement",
+          "quote": "For distinct real nodes $t_0,\\ldots,t_q$ and assigned values $f(t_j)$,\n$$f[t_0,\\ldots,t_q] =\\sum_{j=0}^{q}\\frac{f(t_j)}{\\prod_{\\substack{0\\le k\\le q\\\\k\\ne j}}(t_j-t_k)}.$$\nConsequently the divided difference is symmetric in its nodes. It is the\ncoefficient of $t^q$ in the unique polynomial of degree at most $q$ that takes\nthe assigned values at those nodes.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rolle",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]), and suppose\n\n$$f(a) \\;=\\; f(b) .$$\n\nThen there is $c \\in (a,b)$ with $f'(c) = 0$.\n\n**Three hypotheses, three different jobs.** Continuity on the **closed**\ninterval is what the extreme value theorem consumes; differentiability on the\n**open** interval is what Fermat's theorem consumes, and it is asked for\nnowhere else; and $f(a) = f(b)$ is what forces the extremum inside when neither\nextremum is attained in the interior. Continuity at the two endpoints cannot be\ndropped, and a false statement later on this page records a witness for that.\n\n**Differentiability is meant with respect to the domain $[a,b]$.** For $c$ in\nthe open interval that is the same condition as differentiability of any\nrestriction of $f$ to a subinterval around $c$, since only points near $c$\nenter, but the phrase is fixed here so that the citation of\n[[thm-fermat-interior-extremum]], whose hypothesis is interiority in the\ndomain, is exact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $q=0$, which is allowed by [F4], then $f[t_0]=f(t_0)$, so the claim is $|f(t_0)|\\le\\|f\\|_{\\infty,[a,b]}$. The norm is finite by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $q\\ge1$, and let $P$ be the Lagrange interpolant in [F1], with leading coefficient $c=f[t_0,\\ldots,t_q]$. The function $g=f-P$ has a zero at each of the $q+1$ distinct ordered nodes. Order those nodes increasingly and apply [F3] on each consecutive interval to obtain $q$ distinct zeros of $g'$. Applying [F3] between consecutive zeros of $g'$ gives $q-1$ distinct zeros of $g''$; continuing, after $r$ rounds $g^{(r)}$ has $q+1-r$ distinct zeros. Because $f\\in C^q$ by [F2] and $P$ is a polynomial, each derivative through order $q$ is continuous and its predecessor is differentiable, so every application satisfies [F3]. After $q$ rounds one zero $\\xi$ of $g^{(q)}$ remains. Since $P$ has degree at most $q$ and leading coefficient $c$, its $q$th derivative is the constant $q!c$. Hence $f^{(q)}(\\xi)=q!c$, and the claimed bound follows by taking absolute values. The derivative norm is finite by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The closed-interval hypotheses include endpoint nodes; the proof treats node values and extends each open-gap estimate to the endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Lagrange interpolant is uniquely specified by the nodes; the repeated Rolle argument makes no choice from an unspecified set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-hermite-genocchi-simplex-integral": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-distinct-node-divided-difference",
+          "source_section": "Definition",
+          "quote": "Let $q\\ge 0$, let $t_0,\\ldots,t_q$ be distinct real numbers, and let $f$ be\nreal-valued at these nodes. Define the **divided difference** recursively by\n$f[t_0]:=f(t_0)$ and, for $q\\ge1$,\n$$f[t_0,\\ldots,t_q]:= \\frac{f[t_1,\\ldots,t_q]-f[t_0,\\ldots,t_{q-1}]}{t_q-t_0}.$$\nAll sublists in the recursion remain distinct. The denominator is nonzero\nbecause $t_q\\ne t_0$, so this recursion gives a finite real number from the\nnode data.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-divided-difference-lagrange-formula-and-symmetry",
+          "source_section": "Statement",
+          "quote": "For distinct real nodes $t_0,\\ldots,t_q$ and assigned values $f(t_j)$,\n$$f[t_0,\\ldots,t_q] =\\sum_{j=0}^{q}\\frac{f(t_j)}{\\prod_{\\substack{0\\le k\\le q\\\\k\\ne j}}(t_j-t_k)}.$$\nConsequently the divided difference is symmetric in its nodes. It is the\ncoefficient of $t^q$ in the unique polynomial of degree at most $q$ that takes\nthe assigned values at those nodes.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $q=0$, which is allowed by [F5], the integral convention gives $f(t_0)=f[t_0]$ and the zero-dimensional simplex has volume one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F6], use induction on $q\\in\\mathbb N$. Suppose the formula is established in order $q-1$, where $q\\ge1$. In the recursive rule [F1], express the two order-$(q-1)$ divided differences by the induction hypothesis. The bottom face $u_q=0$ has argument $t_0+\\sum_{j=1}^{q-1}u_j(t_j-t_0)$ and gives $f[t_0,\\ldots,t_{q-1}]$. On the top face $u_q=1-\\sum_{j=1}^{q-1}u_j$, the same argument is $t_q+\\sum_{j=1}^{q-1}u_j(t_j-t_q)$ and gives $f[t_1,\\ldots,t_q]$ by symmetry [F2]. For fixed $u_1,\\ldots,u_{q-1}$ with sum less than $1$, the derivative with respect to $u_q$ of $$f^{(q-1)}\\!\\left(t_0+\\sum_{j=1}^{q}u_j(t_j-t_0)\\right)$$ is $(t_q-t_0)f^{(q)}(\\sum_{j=0}^q u_jt_j)$. The derivative is continuous by [F3], hence Riemann integrable. Applying [F4] on the $u_q$ interval, followed by integration over the other coordinates, shows that the difference of the two face integrals is $(t_q-t_0)$ times the $q$-dimensional integral in the statement. When the outer coordinates sum to $1$, the inner $u_q$ interval is $[0,0]$ and its integral is zero; for $q=1$ there are no outer coordinates and the interval is $[0,1]$. Division by $t_q-t_0\\ne0$ gives the order-$q$ formula.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F6], prove the volume formula by induction, with its $q=0$ case from step 1.1. For $q\\ge1$, fix the outer coordinate $u_1\\in[0,1]$. The remaining coordinates form a $(q-1)$-simplex scaled by $1-u_1$. If $q=1$, its zero-dimensional volume is $1$; if $q\\ge2$ and $u_1<1$, the dilation to $\\Delta_{q-1}$ has Jacobian $(1-u_1)^{q-1}$, while the section at $u_1=1$ has $(q-1)$-volume zero. Thus, by induction, the section volume is $(1-u_1)^{q-1}/(q-1)!$. The function $H(u)=-(1-u)^q/q!$ has derivative $(1-u)^{q-1}/(q-1)!$; applying [F4] to $H$ on $[0,1]$ gives $H(1)-H(0)=1/q!$. $$\\operatorname{vol}(\\Delta_q) =\\int_0^1\\frac{(1-u_1)^{q-1}}{(q-1)!}\\,du_1 =\\frac1{q!}.$$ The induction and the divided-difference identity prove the statement.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F6",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the order-zero or empty-moment boundary; the statement also allows the corresponding zero index."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and first proof steps include the one-node or order-zero case; empty products and q=0 are explicitly covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The closed-interval hypotheses include endpoint nodes; the proof treats node values and extends each open-gap estimate to the endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "prop-barycentric-rational-quotient-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-barycentric-rational-quotient",
+          "source_section": "Definition",
+          "quote": "Let $k\\ge1$, let $z_1,\\ldots,z_k\\in\\mathbb C$ be distinct support nodes, let\n$f_1,\\ldots,f_k\\in\\mathbb C$ be data, and let each weight $w_j\\in\\mathbb C$ be\nnonzero. Define the cleared polynomials\n$$P(z)=\\sum_{j=1}^{k}w_jf_j\\prod_{\\ell\\ne j}(z-z_\\ell), \\qquad Q(z)=\\sum_{j=1}^{k}w_j\\prod_{\\ell\\ne j}(z-z_\\ell).$$\nThe **barycentric rational quotient** is the rational function $r=P/Q$.\nAway from the support nodes this equals\n$$r(z)= \\frac{\\sum_{j=1}^{k} w_jf_j/(z-z_j)} {\\sum_{j=1}^{k} w_j/(z-z_j)}.$$\nAt a support node its value is given by the cleared quotient $P(z_j)/Q(z_j)$.\nA **pole** means a zero of the denominator after all common polynomial\nfactors of numerator and denominator have been canceled.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-barycentric-denominator-polynomial-nonzero",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge1$, let $z_1,\\ldots,z_k\\in\\mathbb C$ be distinct, and let\n$w_1,\\ldots,w_k\\in\\mathbb C$ be nonzero. Then the polynomial\n$$\nQ(z)=\\sum_{j=1}^kw_j\\prod_{\\ell\\ne j}(z-z_\\ell)\n$$\nis not identically zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $Q$ is not the zero polynomial. The definition [F1] therefore forms a rational function $P/Q$ for these data.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $z_j$, all summands of $P$ and $Q$ except the $j$th vanish. Thus $P(z_j)=w_jf_j\\prod_{\\ell\\ne j}(z_j-z_\\ell)=f_jQ(z_j)$, and [F2] gives $Q(z_j)\\ne0$. Hence $r(z_j)=f_j$. Canceling a common polynomial factor cannot introduce a zero into the reduced denominator at $z_j$, since the original $Q(z_j)$ is nonzero. This proves the support convention.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1\u20131.2 show the cleared denominator is nonzero at every support node under the stated nonzero-weight hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and first proof steps include the one-node or order-zero case; empty products and q=0 are explicitly covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The hypotheses require distinct nodes (and 0\u2264d<n where applicable); the proof uses these conditions exactly to keep all denominators nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is over finite complex support/sample data and has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-hermite-genocchi-bv-window-variation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hermite-genocchi-simplex-integral",
+          "source_section": "Statement",
+          "quote": "Let $q\\in\\mathbb N$, let $f\\in C^q([a,b])$, and let\n$t_0,\\ldots,t_q\\in[a,b]$ be distinct real nodes. For $q\\ge1$, define\n$$\\Delta_q=\\{(u_1,\\ldots,u_q)\\in[0,\\infty)^q:\\ u_1+\\cdots+u_q\\le1\\}, \\qquad u_0=1-\\sum_{j=1}^q u_j.$$\nThen\n$$f[t_0,\\ldots,t_q] =\\int_{\\Delta_q}f^{(q)}\\!\\left(\\sum_{j=0}^q u_jt_j\\right) \\,du_1\\cdots du_q, \\qquad \\operatorname{vol}(\\Delta_q)=\\frac1{q!}.$$\nFor $q=0$, the integral is by convention evaluation at $t_0$, and\n$\\operatorname{vol}(\\Delta_0):=1$.\nFor $q\\ge1$, the integral over $\\Delta_q$ is the iterated Riemann integral\nwith $0\\le u_1\\le1$ and, successively,\n$0\\le u_j\\le1-\\sum_{k=1}^{j-1}u_k$ for $2\\le j\\le q$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bounded-variation-and-total-variation",
+          "source_section": "Definition",
+          "quote": "Let $a\\le b$ and let $f:[a,b]\\to\\mathbb R$ ([[def-interval]]). If $a<b$ and\n$P=(n,t)$ is a partition of $[a,b]$ ([[def-partition-and-refinement]]), the\n**variation of $f$ over $P$** is\n\n$$V(f,P):=\\sum_{i<n}|f(t_{i+1})-f(t_i)|.$$\n\nThe sum is finite ([[def-finite-sum]], [[lem-finite-sum-laws]]) and nonnegative\n([[def-abs-value]]). The set of all such sums is nonempty, since $[a,b]$ has the\npartition with point set $\\{a,b\\}$. The function $f$ has **bounded variation**\non $[a,b]$ when this set of sums is bounded above ([[def-bounded-set]]). In that\ncase its **total variation** is\n\n$$\\operatorname{Var}_{[a,b]}(f):=\\sup_P V(f,P).$$\n\nCompleteness of $\\mathbb R$ gives this supremum and [[lem-sup-unique]] makes it\nunique ([[def-complete-ordered-field]]). On a singleton interval, by convention,\n$\\operatorname{Var}_{[a,a]}(f):=0$; no partition from\n[[def-partition-and-refinement]], whose standing hypothesis is $a<b$, is invoked.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], $d+1\\in\\mathbb N$, so apply [F1] to each $G_i$, using the same simplex coordinates for each window and using the final coordinate for the fixed point $x$. Thus $$G_i=\\int_{\\Delta_{d+1}}g(y_i(u))\\,du,\\qquad y_i(u)=u_xx+\\sum_{k=0}^{d}u_kx_{i+k},$$ where all coefficients are nonnegative and sum to one. By [F3], $g$ is continuous on the closed interval. Therefore every $y_i(u)$ lies in $[x_0,x_n]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each fixed $u$, the sequence $y_0(u),y_1(u),\\ldots,y_{n-d}(u)$ is nondecreasing: each summand $x_{i+k}$ is nondecreasing in $i$ and has coefficient $u_k\\ge0$. Remove repeated values from this finite sequence and insert the interval endpoints; the definition [F2] then gives $$\\sum_{i=0}^{n-d-1}|g(y_{i+1}(u))-g(y_i(u))|\\le V.$$ Using [F1], the triangle inequality for integrals, and this pointwise bound, $$\\sum_i|G_{i+1}-G_i| \\le\\int_{\\Delta_{d+1}}\\sum_i|g(y_{i+1}(u))-g(y_i(u))|\\,du \\le V\\,\\operatorname{vol}(\\Delta_{d+1}) =\\frac{V}{(d+1)!}.$$ This is the claimed total variation bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The closed-interval hypotheses include endpoint nodes; the proof treats node values and extends each open-gap estimate to the endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-floater-hormann-local-mesh-ratio-bounded-by-global": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-floater-hormann-local-mesh-ratio",
+          "source_section": "Definition",
+          "quote": "For ordered nodes $x_0<\\cdots<x_n$, $n\\ge1$, set $\\beta:=0$ if $n\\le2$. If\n$n\\ge3$, define the **local mesh ratio**\n$$\\beta= \\max_{1\\le\\alpha\\le n-2} \\min\\left\\{ \\frac{x_{\\alpha+1}-x_\\alpha}{x_\\alpha-x_{\\alpha-1}}, \\frac{x_{\\alpha+1}-x_\\alpha}{x_{\\alpha+2}-x_{\\alpha+1}} \\right\\}.$$\nAll denominators are positive. This parameter is used only for the\ndegree-zero error bound.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since every adjacent gap is at most $h$ and at least $h_{\\min}>0$, each ratio appearing in [F1] is positive and at most $h/h_{\\min}=\\rho$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By step 1.1, their minimum is in $[0,\\rho]$, and the maximum of these minima also lies in $[0,\\rho]$. When $n\\le2$, $\\beta=0\\le\\rho$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For n=1 or2, beta=0 by F1 and rho>0 from the positive gaps; step 2.1 covers this explicit zero branch. For n>=3, each adjacent-gap ratio is bounded by rho in step 1.1 and min/max preserve the bound in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 or2, beta=0 by F1 and rho>0 from the positive gaps; step 2.1 covers this explicit zero branch. For n>=3, each adjacent-gap ratio is bounded by rho in step 1.1 and min/max preserve the bound in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For n=1 or2, beta=0 by F1 and rho>0 from the positive gaps; step 2.1 covers this explicit zero branch. For n>=3, each adjacent-gap ratio is bounded by rho in step 1.1 and min/max preserve the bound in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The ratio compares adjacent positive gaps; it makes no query-point or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-floater-hormann-window-polynomial-interpolates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-floater-hormann-window-polynomial",
+          "source_section": "Definition",
+          "quote": "For the nodes, data, and degree parameter of\n[[def-floater-hormann-interpolant]], let $0\\le i\\le n-d$. The local\n**window polynomial** is\n$$p_i(t)=\\sum_{k=i}^{i+d}f_k \\prod_{\\substack{i\\le j\\le i+d\\\\j\\ne k}} \\frac{t-x_j}{x_k-x_j}.$$\nAll denominators are nonzero because the nodes are distinct. Empty products\nequal one, in particular when $d=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each summand in [F1] is a polynomial of degree at most $d$, so $p_i$ has degree at most $d$. At a local node $x_\\ell$, every summand with $k\\ne\\ell$ contains the zero factor $x_\\ell-x_\\ell$, while the $k=\\ell$ product equals one. Therefore $p_i(x_\\ell)=f_\\ell$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], $d\\in\\mathbb N$, so [F2] applies and $p_i$ is the unique polynomial of degree at most $d$ with these window values. The constant polynomial $1$ has the value $1$ at each local node; uniqueness makes its Lagrange interpolant equal to $1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item concerns a finite local node window and has no closed interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "thm-aaa-loewner-minimum-and-support-interpolation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-aaa-finite-sample-rational-approximation",
+          "source_section": "Definition",
+          "quote": "Input a nonempty ordered list of distinct sample points\n$Z=(z_1,\\ldots,z_N)\\subset\\mathbb C$, data\n$F=(f_1,\\ldots,f_N)\\in\\mathbb C^N$, an absolute tolerance $\\tau\\ge0$, an\ninteger support budget $B$ with $0\\le B\\le\\lfloor N/2\\rfloor$, and a finite\nbidiagonal-QR sweep budget $S\\ge0$. The procedure is evaluated in exact\narithmetic; its finite-precision implementation makes no optimality claim.\nFor $v\\in\\mathbb C^k$, use the standard Hermitian inner product and Euclidean\nnorm $\\|v\\|_2=(\\sum_{j=1}^k|v_j|^2)^{1/2}$.\n\n1. Set the initial rational candidate $r_0$ to the constant mean\n$\\bar f=N^{-1}\\sum_i f_i$. Compute\n$\\eta_0=\\max_i|f_i-\\bar f|$. If $\\eta_0\\le\\tau$, return\n$(r_0,\\varnothing,\\texttt{tolerance-met})$.\n\n2. For $m=1,\\ldots,B$, choose the least original index among the remaining\nsample points that maximizes the absolute residual from the last accepted\nrational candidate. Append that point and its datum provisionally to the\nsupport list; remove it from the remaining sample list.\n\n3. Form the $(N-m)\\times m$ Loewner matrix\n$L_{ij}=(f_i-f_{s_j})/(z_i-z_{s_j})$, where $i$ ranges over the remaining\nsample indices and $s_j$ are the provisional support indices. The denominator\nis nonzero because all sample points are distinct.\n\n4. Compute an exact full singular value decomposition (SVD) of $L$ by applying\n[[alg-householder-bidiagonalization]] followed by\n[[alg-implicit-shifted-bidiagonal-qr-with-deflation]] with zero deflation\ntolerance and budget $S$. If either call returns failure or the QR budget is\nexhausted, return the last accepted candidate and status\n$\\texttt{inconclusive}$.\n\n5. Let $E$ be the right singular subspace for the smallest singular value of\n$L$, and let $P_E$ be its orthogonal projection. Choose the least coordinate\nindex $j$ for which $P_Ee_j\\ne0$ and set $w=P_Ee_j/\\|P_Ee_j\\|_2$. This rule\napplies at every multiplicity, including dimension one. Multiply by the\nunique unit scalar that makes the first nonzero coordinate of $w$ positive\nreal. If any coordinate of $w$ is zero, reject this provisional support and\nreturn the last accepted candidate with status $\\texttt{zero-support-weight}$.\n\n6. Form the barycentric rational quotient using the provisional support\nnodes, their data, and $w$ as its weights. If this rational function has a\ngenuine pole at any remaining sample point, reject this provisional support\nand return the last accepted candidate with status $\\texttt{pole-status}$.\nOtherwise accept the candidate and record both its maximum sampled residual\n$\\eta_m$ and the Loewner residual $\\sigma_m=\\|Lw\\|_2$. If\n$\\eta_m\\le\\tau$, return status $\\texttt{tolerance-met}$.\n\n7. If all $B$ iterations finish without another return, return the last\naccepted candidate with status $\\texttt{support-budget-exhausted}$. In\nparticular $B=0$ returns the initial constant with this status when step 1\ndoes not return.\n\nThe support tie rule and the projection rule make the exact procedure\ndeterministic, including when the smallest singular value has multiplicity\ngreater than one. Rank deficiency is permitted: if the smallest singular\nvalue is zero and all selected weights are nonzero and the quotient is finite\nat the remaining sample points, the candidate is accepted and its exact\nsample residual is evaluated. The algorithm asserts no uniform off-grid error\nbound and no minimax optimality. The Loewner residual $\\sigma_m$ is a linear\nleast-squares residual, not the nonlinear sampled residual $\\eta_m$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-barycentric-rational-quotient-well-defined",
+          "source_section": "Statement",
+          "quote": "For the data and nonzero weights in [[def-barycentric-rational-quotient]],\n$Q$ is not the zero polynomial, the rational function $P/Q$ is well-defined,\nand $r(z_j)=f_j$ for each support node $z_j$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $v_1,\\ldots,v_m$ be a full orthonormal right singular-vector basis for $L$, with singular values $\\sigma_1\\ge\\cdots\\ge\\sigma_m\\ge0$ and $\\sigma_m=\\sigma_{\\min}(L)$. For any unit vector $v=\\sum_jc_jv_j$, orthonormality gives $\\sum_j|c_j|^2=1$, and the SVD gives $$\\|Lv\\|_2^2=\\sum_{j=1}^{m}\\sigma_j^2|c_j|^2 \\ge\\sigma_m^2.$$ The selected $w$ lies in the right singular subspace for $\\sigma_m$, so equality holds. Hence $\\|Lw\\|_2=\\sigma_{\\min}(L)$ and no unit vector gives a smaller Loewner residual.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The right singular subspace $E$ is nonzero. If every projection $P_Ee_j$ of a coordinate basis vector vanished, then every vector of $E$ would be orthogonal to every coordinate basis vector and hence would be zero, a contradiction. Thus the least index with nonzero projection exists; the normalization and phase convention in [F1] choose a unique unit vector in $E$, also when the smallest singular value is repeated or zero.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "On the successful-weight branch, every support weight is nonzero. By [F3], the barycentric quotient is defined and its value at each selected support node is the corresponding datum. The candidate is returned only after the algorithm's reduced-denominator pole check succeeds at all remaining sample points, so its finite residual there is defined.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each iteration removes one previously remaining point and the budget satisfies $B\\le\\lfloor N/2\\rfloor$. Every branch either returns immediately or proceeds to the next integer $m\\le B$, so the algorithm makes at most $B$ iterations and terminates. The minimized quantity in step 1.1 is $\\|Lw\\|_2$; the procedure separately records $\\eta_m$ and makes no minimax or uniform-error claim.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is over finite complex support/sample data and has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Step 1.2 proves that some coordinate projection is nonzero and that the least such index exists."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-floater-hormann-weight-and-blend-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-floater-hormann-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $x_0<\\cdots<x_n$ be distinct real nodes, let\n$f_0,\\ldots,f_n\\in\\mathbb R$ be data, and let $d$ be an integer with\n$0\\le d<n$. For $j=0,\\ldots,n$, define\n$$w_j=(-1)^{j-d} \\sum_{i=\\max(0,j-d)}^{\\min(j,n-d)} \\prod_{\\substack{i\\le k\\le i+d\\\\k\\ne j}}|x_j-x_k|^{-1}.$$\nThe index range is nonempty and every product is positive, so every $w_j$ is\nnonzero. The **Floater\u2013Hormann interpolant of degree parameter $d$** is the\nbarycentric rational quotient of these nodes, data, and weights from\n[[def-barycentric-rational-quotient]]. Away from the nodes, exact evaluation\nuses the quotient with this denominator;\na zero of the reduced denominator is reported as pole status. The no-real-pole\ntheorem below proves that this status never occurs for admissible exact real\ninputs.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-floater-hormann-window-polynomial",
+          "source_section": "Definition",
+          "quote": "For the nodes, data, and degree parameter of\n[[def-floater-hormann-interpolant]], let $0\\le i\\le n-d$. The local\n**window polynomial** is\n$$p_i(t)=\\sum_{k=i}^{i+d}f_k \\prod_{\\substack{i\\le j\\le i+d\\\\j\\ne k}} \\frac{t-x_j}{x_k-x_j}.$$\nAll denominators are nonzero because the nodes are distinct. Empty products\nequal one, in particular when $d=0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-floater-hormann-window-polynomial-interpolates",
+          "source_section": "Statement",
+          "quote": "For each window $i$, the polynomial $p_i$ in\n[[def-floater-hormann-window-polynomial]] has degree at most $d$ and satisfies\n$p_i(x_k)=f_k$ for every $i\\le k\\le i+d$. It is the unique polynomial of\ndegree at most $d$ with those values. In particular, when all local data\nequal $1$, the local Lagrange basis functions sum to the constant polynomial\n$1$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-barycentric-rational-quotient",
+          "source_section": "Definition",
+          "quote": "Let $k\\ge1$, let $z_1,\\ldots,z_k\\in\\mathbb C$ be distinct support nodes, let\n$f_1,\\ldots,f_k\\in\\mathbb C$ be data, and let each weight $w_j\\in\\mathbb C$ be\nnonzero. Define the cleared polynomials\n$$P(z)=\\sum_{j=1}^{k}w_jf_j\\prod_{\\ell\\ne j}(z-z_\\ell), \\qquad Q(z)=\\sum_{j=1}^{k}w_j\\prod_{\\ell\\ne j}(z-z_\\ell).$$\nThe **barycentric rational quotient** is the rational function $r=P/Q$.\nAway from the support nodes this equals\n$$r(z)= \\frac{\\sum_{j=1}^{k} w_jf_j/(z-z_j)} {\\sum_{j=1}^{k} w_j/(z-z_j)}.$$\nAt a support node its value is given by the cleared quotient $P(z_j)/Q(z_j)$.\nA **pole** means a zero of the denominator after all common polynomial\nfactors of numerator and denominator have been canceled.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $P_0(x)=\\prod_{j=0}^n(x-x_j)$ and $m=n-d$. Counting the $m$ factors to the right of a window gives $$\\mu_i(x)=(-1)^mP_0(x)\\lambda_i(x).$$ Indeed, after cancellation each right factor $x_k-x$ contributes one minus sign when rewritten as $x-x_k$, and the remaining denominator factors are exactly the window nodes. Thus the cleared products agree as polynomials, including at nodes; summing gives the stated cleared-denominator identity. Away from nodes it also shows that the blend quotient with $\\lambda_i$ equals the quotient with $\\mu_i$ and $s$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Expand each $p_i$ using [F2], and interchange the two finite sums. The coefficient of $f_j/(x-x_j)$ in $\\sum_i\\lambda_i p_i$ is $$\\widetilde w_j= \\sum_{i=\\max(0,j-d)}^{\\min(j,n-d)} (-1)^i\\prod_{\\substack{i\\le k\\le i+d\\\\k\\ne j}} \\frac1{x_j-x_k}.$$ Within a window exactly $i+d-j$ factors $x_j-x_k$ are negative, so each summand has sign $(-1)^{2i+d-j}=(-1)^{j-d}$ and absolute value $\\prod_{k\\ne j}|x_j-x_k|^{-1}$. Thus $\\widetilde w_j=w_j$ as in [F1].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same expansion for constant data $f_k=1$ has each window polynomial equal to $1$ by [F2]. Therefore the coefficient of $1/(x-x_j)$ in $\\sum_i\\lambda_i$ is also $\\widetilde w_j=w_j$. Dividing the expanded numerator by the expanded denominator proves that the blend equals the barycentric quotient in [F3] away from support nodes.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At a node $x_\\alpha$, $\\mu_i(x_\\alpha)$ is zero unless $\\max(0,\\alpha-d)\\le i\\le\\min(\\alpha,m)$; for these indices all its factors are positive. This index set is nonempty, and every corresponding window contains $x_\\alpha$. By [F2], $p_i(x_\\alpha)=f_\\alpha$, so the blend has numerator $f_\\alpha s(x_\\alpha)$ and $s(x_\\alpha)>0$. Its value is therefore $f_\\alpha$, agreeing with the support convention in [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Step 3.1 evaluates the blend at every node x_alpha, including the first and last nodes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-floater-hormann-window-newton-remainder": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-floater-hormann-window-polynomial",
+          "source_section": "Definition",
+          "quote": "For the nodes, data, and degree parameter of\n[[def-floater-hormann-interpolant]], let $0\\le i\\le n-d$. The local\n**window polynomial** is\n$$p_i(t)=\\sum_{k=i}^{i+d}f_k \\prod_{\\substack{i\\le j\\le i+d\\\\j\\ne k}} \\frac{t-x_j}{x_k-x_j}.$$\nAll denominators are nonzero because the nodes are distinct. Empty products\nequal one, in particular when $d=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-floater-hormann-window-polynomial-interpolates",
+          "source_section": "Statement",
+          "quote": "For each window $i$, the polynomial $p_i$ in\n[[def-floater-hormann-window-polynomial]] has degree at most $d$ and satisfies\n$p_i(x_k)=f_k$ for every $i\\le k\\le i+d$. It is the unique polynomial of\ndegree at most $d$ with those values. In particular, when all local data\nequal $1$, the local Lagrange basis functions sum to the constant polynomial\n$1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-distinct-node-divided-difference",
+          "source_section": "Definition",
+          "quote": "Let $q\\ge 0$, let $t_0,\\ldots,t_q$ be distinct real numbers, and let $f$ be\nreal-valued at these nodes. Define the **divided difference** recursively by\n$f[t_0]:=f(t_0)$ and, for $q\\ge1$,\n$$f[t_0,\\ldots,t_q]:= \\frac{f[t_1,\\ldots,t_q]-f[t_0,\\ldots,t_{q-1}]}{t_q-t_0}.$$\nAll sublists in the recursion remain distinct. The denominator is nonzero\nbecause $t_q\\ne t_0$, so this recursion gives a finite real number from the\nnode data.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-divided-difference-lagrange-formula-and-symmetry",
+          "source_section": "Statement",
+          "quote": "For distinct real nodes $t_0,\\ldots,t_q$ and assigned values $f(t_j)$,\n$$f[t_0,\\ldots,t_q] =\\sum_{j=0}^{q}\\frac{f(t_j)}{\\prod_{\\substack{0\\le k\\le q\\\\k\\ne j}}(t_j-t_k)}.$$\nConsequently the divided difference is symmetric in its nodes. It is the\ncoefficient of $t^q$ in the unique polynomial of degree at most $q$ that takes\nthe assigned values at those nodes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], $d+1\\in\\mathbb N$, so [F3] supplies the degree-at-most-$(d+1)$ Lagrange interpolant $q_i$ through the $d+2$ nodes $x_i,\\ldots,x_{i+d},x$. By [F2] its leading coefficient is $c=f[x_i,\\ldots,x_{i+d},x]$. By [F1], $q_i-p_i$ has degree at most $d+1$, has leading coefficient $c$, and vanishes at each of the $d+1$ window nodes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $R(t)=q_i(t)-p_i(t)-c\\prod_{k=i}^{i+d}(t-x_k)$. The degree-$(d+1)$ leading terms cancel by step 1.1, so $R$ has degree at most $d$; it vanishes at all $d+1$ window nodes. By [F4], $d\\in\\mathbb N$, and [F3] says the only degree-at-most-$d$ polynomial with these zero values is $0$. Thus $R=0$. Evaluating $q_i-p_i=c\\prod_{k=i}^{i+d}(t-x_k)$ at $t=x$, where $q_i(x)=f(x)$, proves the stated remainder.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The query is only required to differ from the finite window nodes; no interval endpoint is specified."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-floater-hormann-gap-partial-sums-positive": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-floater-hormann-weight-and-blend-identity",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $0\\le d<n$, define\n$$\\lambda_i(x)=\\frac{(-1)^i}{\\prod_{k=i}^{i+d}(x-x_k)},\\qquad \\mu_i(x)=\\prod_{j<i}(x-x_j)\\prod_{k>i+d}(x_k-x), \\qquad 0\\le i\\le n-d,$$\nwhere empty products equal $1$. Put $s(x)=\\sum_i\\mu_i(x)$ and let $p_i$ be\nthe window polynomials in [[def-floater-hormann-window-polynomial]]. For\n$x\\notin\\{x_0,\\ldots,x_n\\}$, the Floater\u2013Hormann quotient is\n$$r_d(x)=\\frac{\\sum_i\\lambda_i(x)p_i(x)}{\\sum_i\\lambda_i(x)} =\\frac{\\sum_i\\mu_i(x)p_i(x)}{s(x)}.$$\nMoreover, clearing the node factors in the barycentric denominator gives\n$\\prod_{j=0}^n(x-x_j)\\sum_i\\lambda_i(x)=(-1)^{n-d}s(x)$.\nAfter clearing and canceling the displayed factors, this is a polynomial\nidentity valid at every real $x$, including the nodes.\nExpanding this expression into a support-node barycentric quotient gives\nexactly the weights in [[def-floater-hormann-interpolant]]. Its continuous\nvalues at the nodes are the assigned data.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $i\\in I_2$, every factor in $\\mu_i(x)$ is positive: left indices lie strictly below $x_\\alpha<x$, and right indices lie strictly above $x<x_{\\alpha+1}$. Thus all terms in a nonempty $I_2$ are positive. If $d=0$, $I_2$ is empty.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $I_3$ is nonempty, its first index is $\\alpha+1$ and $\\mu_{\\alpha+1}(x)>0$. For $\\alpha+1\\le i<n-d$, $$\\frac{\\mu_{i+1}(x)}{\\mu_i(x)} =\\frac{x-x_i}{x_{i+d+1}-x}<0,\\qquad \\left|\\frac{\\mu_{i+1}(x)}{\\mu_i(x)}\\right|<1.$$ The numerator is negative and its magnitude is smaller than the positive denominator because $x_i<x_{i+d+1}$. Consecutive terms therefore alternate with strictly decreasing magnitudes. Pairing from the first positive term gives a positive sum, including when one positive term remains.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $I_1$ is nonempty, its last index is $\\alpha-d$ and $\\mu_{\\alpha-d}(x)>0$. Read backward. For $i\\le\\alpha-d$ with $i>0$, $$\\frac{\\mu_{i-1}(x)}{\\mu_i(x)} =\\frac{x_{i+d}-x}{x-x_{i-1}}<0,\\qquad \\left|\\frac{\\mu_{i-1}(x)}{\\mu_i(x)}\\right|<1.$$ Here $x_{i+d}\\le x_\\alpha<x$ and $x_{i-1}<x_i\\le x_{i+d}$, so the numerator is negative and its magnitude is smaller than the positive denominator. Pairing backward from the first positive term proves the $I_1$ sum is positive.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The hypotheses require distinct nodes (and 0\u2264d<n where applicable); the proof uses these conditions exactly to keep all denominators nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is restricted to an open node gap and does not assert a boundary-gap limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "lem-floater-hormann-denominator-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-floater-hormann-weight-and-blend-identity",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $0\\le d<n$, define\n$$\\lambda_i(x)=\\frac{(-1)^i}{\\prod_{k=i}^{i+d}(x-x_k)},\\qquad \\mu_i(x)=\\prod_{j<i}(x-x_j)\\prod_{k>i+d}(x_k-x), \\qquad 0\\le i\\le n-d,$$\nwhere empty products equal $1$. Put $s(x)=\\sum_i\\mu_i(x)$ and let $p_i$ be\nthe window polynomials in [[def-floater-hormann-window-polynomial]]. For\n$x\\notin\\{x_0,\\ldots,x_n\\}$, the Floater\u2013Hormann quotient is\n$$r_d(x)=\\frac{\\sum_i\\lambda_i(x)p_i(x)}{\\sum_i\\lambda_i(x)} =\\frac{\\sum_i\\mu_i(x)p_i(x)}{s(x)}.$$\nMoreover, clearing the node factors in the barycentric denominator gives\n$\\prod_{j=0}^n(x-x_j)\\sum_i\\lambda_i(x)=(-1)^{n-d}s(x)$.\nAfter clearing and canceling the displayed factors, this is a polynomial\nidentity valid at every real $x$, including the nodes.\nExpanding this expression into a support-node barycentric quotient gives\nexactly the weights in [[def-floater-hormann-interpolant]]. Its continuous\nvalues at the nodes are the assigned data.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-floater-hormann-gap-partial-sums-positive",
+          "source_section": "Statement",
+          "quote": "Let $x_0<\\cdots<x_n$ and $0\\le d<n$, and use the $\\mu_i$ and\n$s=\\sum_{i=0}^{n-d}\\mu_i$ of\n[[lem-floater-hormann-weight-and-blend-identity]]. For\n$x_\\alpha<x<x_{\\alpha+1}$, partition the indices into\n$$I_1=\\{i\\le\\alpha-d\\},\\quad I_2=\\{\\alpha-d+1\\le i\\le\\alpha\\},\\quad I_3=\\{i\\ge\\alpha+1\\},$$\nintersecting each set with $\\{0,\\ldots,n-d\\}$. Each nonempty partial sum\n$\\sum_{i\\in I_k}\\mu_i(x)$ is positive. More precisely, if $I_3$ is nonempty,\nits terms alternate starting positive with strictly decreasing magnitudes; if\n$I_1$ is nonempty, its terms have the same property when read backward from\n$i=\\alpha-d$. If $d\\ge1$, every term in $I_2$ is positive.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-floater-hormann-local-mesh-ratio",
+          "source_section": "Definition",
+          "quote": "For ordered nodes $x_0<\\cdots<x_n$, $n\\ge1$, set $\\beta:=0$ if $n\\le2$. If\n$n\\ge3$, define the **local mesh ratio**\n$$\\beta= \\max_{1\\le\\alpha\\le n-2} \\min\\left\\{ \\frac{x_{\\alpha+1}-x_\\alpha}{x_\\alpha-x_{\\alpha-1}}, \\frac{x_{\\alpha+1}-x_\\alpha}{x_{\\alpha+2}-x_{\\alpha+1}} \\right\\}.$$\nAll denominators are positive. This parameter is used only for the\ndegree-zero error bound.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $d\\ge1$. The middle block $I_2$ contains at least one index: $j=\\max(0,\\alpha-d+1)$ satisfies $j\\le\\alpha$, $j+d\\ge\\alpha+1$, and $j\\le n-d$. Thus its window contains both endpoints of the gap and $\\mu_j(x)>0$. By [F2], $s(x)=s_1(x)+s_2(x)+s_3(x)\\ge s_2(x)\\ge\\mu_j(x)$, with empty block sums interpreted as zero. From [F1], $$|D_d(x)|=\\frac{s(x)}{\\prod_{k=0}^{n}|x-x_k|} \\ge\\frac{\\mu_j(x)}{\\prod_{k=0}^{n}|x-x_k|} =|\\lambda_j(x)| =\\frac{1}{\\prod_{k=j}^{j+d}|x-x_k|}.$$ This reduces the denominator estimate to one window product.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Now let $d=0$. On the first gap, $I_1=\\{0\\}$ and the other nonempty block sums are positive by [F2], hence $s\\ge\\mu_0$ and $|D_0(x)|\\ge|\\lambda_0(x)|=1/(x-x_0)\\ge1/h$. On the last gap it gives $I_3=\\{n\\}$ and the other nonempty block sums are positive, hence $s\\ge\\mu_n$ and $|D_0(x)|\\ge1/(x_n-x)\\ge1/h$. These bounds imply the claimed inequality because $\\beta\\ge0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $u=\\alpha-j+1$ and $v=j+d-\\alpha$, so $u,v\\ge1$ and $u+v=d+1$. For $j\\le k\\le\\alpha$, $|x-x_k|\\le x_{\\alpha+1}-x_k\\le(\\alpha+1-k)h$; for $\\alpha+1\\le k\\le j+d$, $|x-x_k|\\le x_k-x_\\alpha\\le(k-\\alpha)h$. Multiplying these $d+1$ bounds gives $$\\prod_{k=j}^{j+d}|x-x_k|\\le u!\\,v!\\,h^{d+1}\\le d!\\,h^{d+1}.$$ The last inequality follows from $\\binom{d+1}{u}=(d+1)!/(u!v!)\\ge d+1$. Substitution in step 1.1 proves the $d\\ge1$ bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $1\\le\\alpha\\le n-2$, both $I_1$ and $I_3$ are nonempty. The first two terms from $I_3$ and first two read backward from $I_1$ form positive pairs. With $\\Delta=x_{\\alpha+1}-x_\\alpha$, $\\delta_R=x_{\\alpha+2}-x_{\\alpha+1}$ and $\\delta_L=x_\\alpha-x_{\\alpha-1}$, [F1]\u2013[F2] yield $$|D_0(x)|\\ge \\max\\left\\{ \\frac1{x_{\\alpha+1}-x}-\\frac1{x_{\\alpha+2}-x}, \\frac1{x-x_\\alpha}-\\frac1{x-x_{\\alpha-1}} \\right\\}.$$ Writing $t=x_{\\alpha+1}-x\\le\\Delta$ in the first difference gives $\\delta_R/[t(t+\\delta_R)]\\ge 1/[h(1+\\Delta/\\delta_R)]$. Writing $u=x-x_\\alpha\\le\\Delta$ in the second gives $\\delta_L/[u(u+\\delta_L)]\\ge 1/[h(1+\\Delta/\\delta_L)]$. Hence $$|D_0(x)|\\ge \\frac{1}{h\\left(1+\\min\\{\\Delta/\\delta_L,\\Delta/\\delta_R\\}\\right)} \\ge\\frac1{h(1+\\beta)}$$ by [F3]. For $n\\le2$ there is no such interior index, so steps 1.2 cover all gaps.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The hypotheses require distinct nodes (and 0\u2264d<n where applicable); the proof uses these conditions exactly to keep all denominators nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement estimates D only at points strictly inside an open node gap; node endpoints are excluded from that bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 chooses an index j whose window contains both endpoints of the specified open gap."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "thm-floater-hormann-no-real-poles": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-floater-hormann-weight-and-blend-identity",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $0\\le d<n$, define\n$$\\lambda_i(x)=\\frac{(-1)^i}{\\prod_{k=i}^{i+d}(x-x_k)},\\qquad \\mu_i(x)=\\prod_{j<i}(x-x_j)\\prod_{k>i+d}(x_k-x), \\qquad 0\\le i\\le n-d,$$\nwhere empty products equal $1$. Put $s(x)=\\sum_i\\mu_i(x)$ and let $p_i$ be\nthe window polynomials in [[def-floater-hormann-window-polynomial]]. For\n$x\\notin\\{x_0,\\ldots,x_n\\}$, the Floater\u2013Hormann quotient is\n$$r_d(x)=\\frac{\\sum_i\\lambda_i(x)p_i(x)}{\\sum_i\\lambda_i(x)} =\\frac{\\sum_i\\mu_i(x)p_i(x)}{s(x)}.$$\nMoreover, clearing the node factors in the barycentric denominator gives\n$\\prod_{j=0}^n(x-x_j)\\sum_i\\lambda_i(x)=(-1)^{n-d}s(x)$.\nAfter clearing and canceling the displayed factors, this is a polynomial\nidentity valid at every real $x$, including the nodes.\nExpanding this expression into a support-node barycentric quotient gives\nexactly the weights in [[def-floater-hormann-interpolant]]. Its continuous\nvalues at the nodes are the assigned data.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-floater-hormann-gap-partial-sums-positive",
+          "source_section": "Statement",
+          "quote": "Let $x_0<\\cdots<x_n$ and $0\\le d<n$, and use the $\\mu_i$ and\n$s=\\sum_{i=0}^{n-d}\\mu_i$ of\n[[lem-floater-hormann-weight-and-blend-identity]]. For\n$x_\\alpha<x<x_{\\alpha+1}$, partition the indices into\n$$I_1=\\{i\\le\\alpha-d\\},\\quad I_2=\\{\\alpha-d+1\\le i\\le\\alpha\\},\\quad I_3=\\{i\\ge\\alpha+1\\},$$\nintersecting each set with $\\{0,\\ldots,n-d\\}$. Each nonempty partial sum\n$\\sum_{i\\in I_k}\\mu_i(x)$ is positive. More precisely, if $I_3$ is nonempty,\nits terms alternate starting positive with strictly decreasing magnitudes; if\n$I_1$ is nonempty, its terms have the same property when read backward from\n$i=\\alpha-d$. If $d\\ge1$, every term in $I_2$ is positive.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At a node $x=x_\\alpha$, a term $\\mu_i(x_\\alpha)$ vanishes if $i>\\alpha$ or $i+d<\\alpha$. Otherwise every factor in $\\mu_i(x_\\alpha)$ is strictly positive. The index set $\\max(0,\\alpha-d)\\le i\\le\\min(\\alpha,n-d)$ is nonempty, so $s(x_\\alpha)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $x_\\alpha<x<x_{\\alpha+1}$. By [F2], every nonempty block sum over $I_1,I_2,I_3$ is positive. Their index sets partition $\\{0,\\ldots,n-d\\}$, so $s(x)>0$ throughout each interior node gap.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $x<x_0$, then $\\mu_0>0$ and the terms in increasing index order alternate in sign with decreasing magnitudes, since $\\mu_{i+1}/\\mu_i=(x-x_i)/(x_{i+d+1}-x)<0$ and $|\\mu_{i+1}/\\mu_i|=(x_i-x)/(x_{i+d+1}-x)<1$. Pairing from the first term gives $s(x)>0$. If $x>x_n$, then $\\mu_{n-d}>0$ and reading backward gives alternating decreasing magnitudes: $\\mu_{i-1}/\\mu_i=(x_{i+d}-x)/(x-x_{i-1})<0$ and $|\\mu_{i-1}/\\mu_i|=(x-x_{i+d})/(x-x_{i-1})<1$. Pairing from the last term again gives $s(x)>0$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The cleared polynomial denominator of the barycentric quotient is a nonzero constant multiple of $s$ by [F1]. Steps 1.1, 1.2, and 2.1 show that this polynomial has no real zero. Cancelling common polynomial factors cannot create a real denominator zero, so the reduced rational function has no real poles.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1\u20132.2 show the exact denominator polynomial is strictly positive after the stated sign normalization, so it has no real zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The hypotheses require distinct nodes (and 0\u2264d<n where applicable); the proof uses these conditions exactly to keep all denominators nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The closed-interval hypotheses include endpoint nodes; the proof treats node values and extends each open-gap estimate to the endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "thm-floater-hormann-error-rate-bv": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-floater-hormann-weight-and-blend-identity",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $0\\le d<n$, define\n$$\\lambda_i(x)=\\frac{(-1)^i}{\\prod_{k=i}^{i+d}(x-x_k)},\\qquad \\mu_i(x)=\\prod_{j<i}(x-x_j)\\prod_{k>i+d}(x_k-x), \\qquad 0\\le i\\le n-d,$$\nwhere empty products equal $1$. Put $s(x)=\\sum_i\\mu_i(x)$ and let $p_i$ be\nthe window polynomials in [[def-floater-hormann-window-polynomial]]. For\n$x\\notin\\{x_0,\\ldots,x_n\\}$, the Floater\u2013Hormann quotient is\n$$r_d(x)=\\frac{\\sum_i\\lambda_i(x)p_i(x)}{\\sum_i\\lambda_i(x)} =\\frac{\\sum_i\\mu_i(x)p_i(x)}{s(x)}.$$\nMoreover, clearing the node factors in the barycentric denominator gives\n$\\prod_{j=0}^n(x-x_j)\\sum_i\\lambda_i(x)=(-1)^{n-d}s(x)$.\nAfter clearing and canceling the displayed factors, this is a polynomial\nidentity valid at every real $x$, including the nodes.\nExpanding this expression into a support-node barycentric quotient gives\nexactly the weights in [[def-floater-hormann-interpolant]]. Its continuous\nvalues at the nodes are the assigned data.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-floater-hormann-window-newton-remainder",
+          "source_section": "Statement",
+          "quote": "Let $x\\notin\\{x_i,\\ldots,x_{i+d}\\}$. For any real data at these nodes and at\n$x$, the local polynomial from\n[[def-floater-hormann-window-polynomial]] satisfies\n$$f(x)-p_i(x)= \\left(\\prod_{k=i}^{i+d}(x-x_k)\\right) f[x_i,\\ldots,x_{i+d},x].$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hermite-genocchi-bv-window-variation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $0\\le d<n$, let $x_0<\\cdots<x_n$ be real nodes, and fix a real query point\n$x\\in[x_0,x_n]$ distinct from the nodes. Let $f\\in C^{d+1}([x_0,x_n])$, put\n$g=f^{(d+1)}$, and suppose $g$ has finite total variation\n$V=\\operatorname{Var}_{[x_0,x_n]}(g)$ as defined in\n[[def-bounded-variation-and-total-variation]]. For $0\\le i\\le n-d$, put\n$G_i=f[x_i,\\ldots,x_{i+d},x]$. Then\n$$\\sum_{i=0}^{n-d-1}|G_{i+1}-G_i|\\le \\frac{V}{(d+1)!}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hermite-genocchi-simplex-integral",
+          "source_section": "Statement",
+          "quote": "Let $q\\in\\mathbb N$, let $f\\in C^q([a,b])$, and let\n$t_0,\\ldots,t_q\\in[a,b]$ be distinct real nodes. For $q\\ge1$, define\n$$\\Delta_q=\\{(u_1,\\ldots,u_q)\\in[0,\\infty)^q:\\ u_1+\\cdots+u_q\\le1\\}, \\qquad u_0=1-\\sum_{j=1}^q u_j.$$\nThen\n$$f[t_0,\\ldots,t_q] =\\int_{\\Delta_q}f^{(q)}\\!\\left(\\sum_{j=0}^q u_jt_j\\right) \\,du_1\\cdots du_q, \\qquad \\operatorname{vol}(\\Delta_q)=\\frac1{q!}.$$\nFor $q=0$, the integral is by convention evaluation at $t_0$, and\n$\\operatorname{vol}(\\Delta_0):=1$.\nFor $q\\ge1$, the integral over $\\Delta_q$ is the iterated Riemann integral\nwith $0\\le u_1\\le1$ and, successively,\n$0\\le u_j\\le1-\\sum_{k=1}^{j-1}u_k$ for $2\\le j\\le q$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-floater-hormann-denominator-lower-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $0\\le d<n$, $x_0<\\cdots<x_n$, and\n$h=\\max_j(x_{j+1}-x_j)$. Let $D_d(x)=\\sum_{j=0}^n w_j/(x-x_j)$ be the\nFloater\u2013Hormann denominator from\n[[def-floater-hormann-interpolant]]. For every open gap\n$x_\\alpha<x<x_{\\alpha+1}$,\n$$|D_d(x)|\\ge \\begin{cases} \\dfrac{1}{d!\\,h^{d+1}}, & d\\ge1,\\\\[4pt] \\dfrac{1}{h(1+\\beta)}, & d=0, \\end{cases}$$\nwhere $\\beta$ is the local ratio of\n[[def-floater-hormann-local-mesh-ratio]].",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-floater-hormann-no-real-poles",
+          "source_section": "Statement",
+          "quote": "For any $n\\ge1$, any distinct ordered real nodes $x_0<\\cdots<x_n$, any real\ndata $f_0,\\ldots,f_n$, and any integer $0\\le d<n$, the exact\nFloater\u2013Hormann rational function in\n[[def-floater-hormann-interpolant]] has no real poles.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-bounded-variation-and-total-variation",
+          "source_section": "Definition",
+          "quote": "Let $a\\le b$ and let $f:[a,b]\\to\\mathbb R$ ([[def-interval]]). If $a<b$ and\n$P=(n,t)$ is a partition of $[a,b]$ ([[def-partition-and-refinement]]), the\n**variation of $f$ over $P$** is\n\n$$V(f,P):=\\sum_{i<n}|f(t_{i+1})-f(t_i)|.$$\n\nThe sum is finite ([[def-finite-sum]], [[lem-finite-sum-laws]]) and nonnegative\n([[def-abs-value]]). The set of all such sums is nonempty, since $[a,b]$ has the\npartition with point set $\\{a,b\\}$. The function $f$ has **bounded variation**\non $[a,b]$ when this set of sums is bounded above ([[def-bounded-set]]). In that\ncase its **total variation** is\n\n$$\\operatorname{Var}_{[a,b]}(f):=\\sup_P V(f,P).$$\n\nCompleteness of $\\mathbb R$ gives this supremum and [[lem-sup-unique]] makes it\nunique ([[def-complete-ordered-field]]). On a singleton interval, by convention,\n$\\operatorname{Var}_{[a,a]}(f):=0$; no partition from\n[[def-partition-and-refinement]], whose standing hypothesis is $a<b$, is invoked.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-mean-value-theorem-on-closed-interval",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on\n$(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that\n$$\nf(b)-f(a)=f'(c)(b-a).\n$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F9], $d+1\\in\\mathbb N$. Fix $x$ in an open node gap. By [F7], the derivatives in [F1] exist and are continuous. By [F1], $f(x)-r_d(x)=N(x)/D(x)$ with $N(x)=\\sum_{i=0}^{m}(-1)^iG_i$. [F10] makes the derivative sup norm in the statement finite. Pair successive terms as $(G_0-G_1)+(G_2-G_3)+\\cdots$. The sum of the absolute values of these pair differences is bounded by the full adjacent-increment sum in [F2], hence by $V/(d+1)!$. If $m$ is even there is one unpaired term $G_m$; otherwise there is none.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F9",
+            "F10",
+            "algebra",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The integral formula [F3] and its simplex volume give $|G_m|\\le\\|g\\|_\\infty/(d+1)!$. Thus in both parity cases $$|N(x)|\\le\\frac{V+\\epsilon\\|g\\|_\\infty}{(d+1)!}.$$ This bounds the numerator in either parity case.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $d\\ge1$, divide step 2.1 by the lower bound $|D(x)|\\ge1/(d!h^{d+1})$ from [F4] to obtain $$|f(x)-r_d(x)|\\le\\frac{h^{d+1}}{d+1} \\bigl(V+\\epsilon\\|g\\|_\\infty\\bigr).$$ This is the required open-gap bound for $d\\ge1$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $d=0$, $g=f'$ and [F4] instead gives $$|f(x)-r_0(x)|\\le h(1+\\beta) \\bigl(V+\\epsilon\\|f'\\|_\\infty\\bigr).$$ This is the required open-gap bound for $d=0$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "At every node the error is zero by [F5]. Since $r_d$ has no real poles, $f-r_d$ is continuous on the compact interval and has a finite supremum by [F10]. The estimates on the open gaps therefore imply the stated supremum bounds. If $f\\in C^{d+2}$, then for any partition [F8] gives $|g(t_{i+1})-g(t_i)|\\le\\|f^{(d+2)}\\|_\\infty(t_{i+1}-t_i)$; summing and taking the supremum yields $V\\le(b-a)\\|f^{(d+2)}\\|_\\infty$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The closed-interval hypotheses include endpoint nodes; the proof treats node values and extends each open-gap estimate to the endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes an arbitrary gap and applies the partition supremum in the stated variation definition; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "thm-floater-hormann-error-rate-c2": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-floater-hormann-weight-and-blend-identity",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $0\\le d<n$, define\n$$\\lambda_i(x)=\\frac{(-1)^i}{\\prod_{k=i}^{i+d}(x-x_k)},\\qquad \\mu_i(x)=\\prod_{j<i}(x-x_j)\\prod_{k>i+d}(x_k-x), \\qquad 0\\le i\\le n-d,$$\nwhere empty products equal $1$. Put $s(x)=\\sum_i\\mu_i(x)$ and let $p_i$ be\nthe window polynomials in [[def-floater-hormann-window-polynomial]]. For\n$x\\notin\\{x_0,\\ldots,x_n\\}$, the Floater\u2013Hormann quotient is\n$$r_d(x)=\\frac{\\sum_i\\lambda_i(x)p_i(x)}{\\sum_i\\lambda_i(x)} =\\frac{\\sum_i\\mu_i(x)p_i(x)}{s(x)}.$$\nMoreover, clearing the node factors in the barycentric denominator gives\n$\\prod_{j=0}^n(x-x_j)\\sum_i\\lambda_i(x)=(-1)^{n-d}s(x)$.\nAfter clearing and canceling the displayed factors, this is a polynomial\nidentity valid at every real $x$, including the nodes.\nExpanding this expression into a support-node barycentric quotient gives\nexactly the weights in [[def-floater-hormann-interpolant]]. Its continuous\nvalues at the nodes are the assigned data.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-floater-hormann-window-newton-remainder",
+          "source_section": "Statement",
+          "quote": "Let $x\\notin\\{x_i,\\ldots,x_{i+d}\\}$. For any real data at these nodes and at\n$x$, the local polynomial from\n[[def-floater-hormann-window-polynomial]] satisfies\n$$f(x)-p_i(x)= \\left(\\prod_{k=i}^{i+d}(x-x_k)\\right) f[x_i,\\ldots,x_{i+d},x].$$",
+          "uses": [
+            "1.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-adjacent-window-divided-difference-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, $n\\ge1$, and $d\\in\\mathbb N$ with $d<n$; let\n$x_0<\\cdots<x_n$, and let $x$ be distinct from these nodes. For every\n$0\\le i<n-d$, put\n$$G_i:=f[x_i,\\ldots,x_{i+d},x].$$\nThen\n$$G_i-G_{i+1} =-(x_{i+d+1}-x_i)f[x_i,\\ldots,x_{i+d+1},x].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-divided-difference-repeated-rolle-bound",
+          "source_section": "Statement",
+          "quote": "Let $a\\le b$, $q\\in\\mathbb N$, let $f\\in C^q([a,b])$, and let $t_0,\\ldots,t_q$ be distinct\npoints of $[a,b]$. Then\n$$\n|f[t_0,\\ldots,t_q]|\\le \\frac{\\|f^{(q)}\\|_{\\infty,[a,b]}}{q!},\n$$\nwhere $0!:=1$, $f^{(0)}:=f$, and\n$\\|g\\|_{\\infty,[a,b]}:=\\sup_{x\\in[a,b]}|g(x)|$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-floater-hormann-denominator-lower-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $0\\le d<n$, $x_0<\\cdots<x_n$, and\n$h=\\max_j(x_{j+1}-x_j)$. Let $D_d(x)=\\sum_{j=0}^n w_j/(x-x_j)$ be the\nFloater\u2013Hormann denominator from\n[[def-floater-hormann-interpolant]]. For every open gap\n$x_\\alpha<x<x_{\\alpha+1}$,\n$$|D_d(x)|\\ge \\begin{cases} \\dfrac{1}{d!\\,h^{d+1}}, & d\\ge1,\\\\[4pt] \\dfrac{1}{h(1+\\beta)}, & d=0, \\end{cases}$$\nwhere $\\beta$ is the local ratio of\n[[def-floater-hormann-local-mesh-ratio]].",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-floater-hormann-no-real-poles",
+          "source_section": "Statement",
+          "quote": "For any $n\\ge1$, any distinct ordered real nodes $x_0<\\cdots<x_n$, any real\ndata $f_0,\\ldots,f_n$, and any integer $0\\le d<n$, the exact\nFloater\u2013Hormann rational function in\n[[def-floater-hormann-interpolant]] has no real poles.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a point $x$ in an open node gap. By [F6], the stated smoothness hypothesis supplies the derivatives used below. By [F8], their sup norms are finite. By [F1], the error equals $N(x)/D(x)$, where $$N(x)=\\sum_{i=0}^{m}(-1)^iG_i,\\qquad G_i=f[x_i,\\ldots,x_{i+d},x],\\qquad D(x)=\\sum_i\\lambda_i(x).$$ This identity follows by writing $f-r_d=\\sum_i\\lambda_i(f-p_i)/D$ and substituting the window remainder; $\\lambda_i\\prod_{k=i}^{i+d}(x-x_k)=(-1)^i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Pair the terms of $N$ as $(G_0-G_1)+(G_2-G_3)+\\cdots$. If $m$ is odd, these pairs exhaust the sum. If $m$ is even, the final term $G_m$ remains. By [F2] each pair is $-(x_{i+d+1}-x_i)f[x_i,\\ldots,x_{i+d+1},x]$. The order-$(d+2)$ Rolle bound [F3] bounds its divided difference by $\\|f^{(d+2)}\\|_\\infty/(d+2)!$. Each interval length $x_{i+d+1}-x_i$ is the sum of $d+1$ adjacent mesh gaps, and each gap occurs in at most $d+1$ windows. Hence the sum of lengths over the even indices in the pairing is at most $(d+1)(b-a)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $m$ is odd, step 2.1 gives $|N|\\le (d+1)(b-a)\\|f^{(d+2)}\\|_\\infty/(d+2)!$. If $m$ is even, it gives the same bound plus $|G_m|\\le\\|f^{(d+1)}\\|_\\infty/(d+1)!$ by [F3] and [F7]. Thus both cases are $$|N|\\le \\frac{(d+1)(b-a)\\|f^{(d+2)}\\|_\\infty}{(d+2)!} +\\epsilon\\frac{\\|f^{(d+1)}\\|_\\infty}{(d+1)!}.$$ This bounds the numerator in either parity case.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $d\\ge1$, divide the numerator bound in step 3.1 by $|D|\\ge1/(d!h^{d+1})$ from [F4]. Simplifying factorials gives $$|f(x)-r_d(x)| \\le h^{d+1}\\left( \\frac{(b-a)\\|f^{(d+2)}\\|_\\infty}{d+2} +\\epsilon\\frac{\\|f^{(d+1)}\\|_\\infty}{d+1} \\right).$$ This is the required open-gap bound for $d\\ge1$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "If $d=0$, the same numerator bound in step 3.1, with $|D|\\ge1/[h(1+\\beta)]$ from [F4], gives $$|f(x)-r_0(x)| \\le h(1+\\beta)\\left( \\frac{(b-a)\\|f''\\|_\\infty}{2} +\\epsilon\\|f'\\|_\\infty \\right).$$ This is the required open-gap bound for $d=0$.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "At every node the error is zero by [F5]. The no-real-pole property makes $r_d$ continuous on the compact interval, so the pointwise estimates on the open gaps extend to the supremum over all $[a,b]$; finiteness of that supremum follows from [F8]. The two cases prove the stated bounds.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F8",
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim has no zero-valued denominator or zero-rank branch as an admissible input; nonzero conditions are stated where needed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The closed-interval hypotheses include endpoint nodes; the proof treats node values and extends each open-gap estimate to the endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes an arbitrary point in an open gap and uses finite sums; it makes no selection from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "ex-pade-singular-system-and-froissart-cancellation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pade-coefficient-matching",
+          "source_section": "Definition",
+          "quote": "Input nonnegative integers $m,n$ and coefficients $c_0,\\ldots,c_{m+n}\\in\n\\mathbb C$ of a formal power series or of an analytic function at $0$. Set\n$c_k=0$ for negative $k$. Seek a normalized denominator\n$q(z)=1+\\sum_{j=1}^nq_jz^j$. Form the $n\\times n$ moment system\n$$\\sum_{j=1}^{n}q_jc_{m+\\ell-j}=-c_{m+\\ell}, \\qquad 1\\le\\ell\\le n.$$\nClassify it by exact Gaussian elimination on the augmented matrix. Start with\npivot row $r=1$ and scan columns $j=1,\\ldots,n$ in order. In column $j$, if\nall entries in rows $r$ through $n$ are zero, leave that column free and\ncontinue. Otherwise choose the first row $s\\ge r$ with a nonzero entry in\ncolumn $j$, swap rows $s$ and $r$, divide row $r$ by its column-$j$ entry,\nand subtract the resulting row multiple from every other row to make the\nother entries in column $j$ zero; then increment $r$. After all columns, a\nrow whose coefficient entries are all zero and whose augmented entry is\nnonzero makes the system inconsistent, so return status\n$\\texttt{full-order-inconsistent}$. If the system is consistent but has\nrank less than $n$, return status $\\texttt{defective-nonunique}$ together\nwith the rank and reduced system; do not select a denominator from its\naffine solution set. Here rank is the number of pivot rows; consistency and rank are\nread from the reduced augmented matrix. If the system has rank $n$, return the unique solution\n$(q_1,\\ldots,q_n)$ and set\n$$p_k=\\sum_{j=0}^{\\min(k,n)}q_jc_{k-j}, \\qquad 0\\le k\\le m,\\qquad q_0:=1.$$\nThe output is the coefficient-matching candidate $p/q$ with its full-order\nstatus. If $n=0$, the empty denominator system is uniquely solved by $q=1$\nand the returned numerator coefficients are $p_k=c_k$ for $0\\le k\\le m$.\nThis procedure claims no pole-location or analytic-continuation guarantee.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pade-solvable-system-gives-local-order",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge0$, $R>0$, and\n$f(z)=\\sum_{k=0}^\\infty c_kz^k$ for $|z|<R$, with the series convergent\nthere. Suppose $q_0=1,q_1,\\ldots,q_n$ solve the full normalized\nPad\u00e9 moment equations of [[alg-pade-coefficient-matching]]. Define\n$p_k=\\sum_{j=0}^{\\min(k,n)}q_jc_{k-j}$ for $0\\le k\\le m$, and\n$p(z)=\\sum_{k=0}^mp_kz^k$, $q(z)=\\sum_{j=0}^nq_jz^j$. Then\n$$\nf(z)-\\frac{p(z)}{q(z)}=O(z^{m+n+1})\\quad\\text{as }z\\to0.\n$$\nThis is a local Taylor-matching statement only; it gives no pole-location\nclaim and no guarantee about analytic continuation beyond the neighborhood\nwhere $f$ is given.\n\nHere $h(z)=O(z^M)$ as $z\\to0$ means there are constants $C,\\delta>0$ such\nthat $|h(z)|\\le C|z|^M$ whenever $0<|z|<\\delta$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $f(z)=1$ and type $(1,1)$, the sole equation is $q_1c_1=-c_2$, namely $0q_1=0$. It is consistent with rank zero, so [F1] returns $\\texttt{defective-nonunique}$. If one arbitrarily selects $q_1=-1$, the convolution formula gives $p(z)=1-z$ and $q(z)=1-z$; after canceling their common factor the rational function is the constant $1$, so the apparent zero of the unreduced denominator is not a pole.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $f_\\varepsilon(z)=1+\\varepsilon z+z^2$ and type $(1,1)$, the equation is $\\varepsilon q_1=-1$, so its unique solution is $q_1=-1/\\varepsilon$. The numerator coefficients are $p_0=1$ and $p_1=\\varepsilon+q_1=-(1-\\varepsilon^2)/\\varepsilon$. Thus $$r_{11}(z)= \\frac{1-(1-\\varepsilon^2)z/\\varepsilon}{1-z/\\varepsilon}.$$ Its denominator has a simple zero at $z=\\varepsilon$ while the numerator there equals $\\varepsilon^2\\ne0$, so this is a genuine pole. The numerator zero is $z=\\varepsilon/(1-\\varepsilon^2)$, and its distance from the pole is $\\varepsilon^3/(1-\\varepsilon^2)$. The residue at the pole is $\\varepsilon^2/(-1/\\varepsilon)=-\\varepsilon^3$. Hence the exact coefficient-matching rational function has a pole-zero pair with arbitrarily small separation and residue as $\\varepsilon\\downarrow0$, although the target $f_\\varepsilon$ is a polynomial.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the second case the system is solved, so [F2] gives only the stated local Taylor order at the origin. Step 1.2 shows that this does not prevent a nearby pole-zero pair, while step 1.1 shows that a singular system can leave denominator coefficients nonunique. Neither case supplies analytic continuation or a target pole-location guarantee.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 computes the zero equation 0 q_1=0 and reports its rank-zero defective branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is over finite complex support/sample data and has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "ex-aaa-small-sample-error-does-not-control-off-grid": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-aaa-finite-sample-rational-approximation",
+          "source_section": "Definition",
+          "quote": "Input a nonempty ordered list of distinct sample points\n$Z=(z_1,\\ldots,z_N)\\subset\\mathbb C$, data\n$F=(f_1,\\ldots,f_N)\\in\\mathbb C^N$, an absolute tolerance $\\tau\\ge0$, an\ninteger support budget $B$ with $0\\le B\\le\\lfloor N/2\\rfloor$, and a finite\nbidiagonal-QR sweep budget $S\\ge0$. The procedure is evaluated in exact\narithmetic; its finite-precision implementation makes no optimality claim.\nFor $v\\in\\mathbb C^k$, use the standard Hermitian inner product and Euclidean\nnorm $\\|v\\|_2=(\\sum_{j=1}^k|v_j|^2)^{1/2}$.\n\n1. Set the initial rational candidate $r_0$ to the constant mean\n$\\bar f=N^{-1}\\sum_i f_i$. Compute\n$\\eta_0=\\max_i|f_i-\\bar f|$. If $\\eta_0\\le\\tau$, return\n$(r_0,\\varnothing,\\texttt{tolerance-met})$.\n\n2. For $m=1,\\ldots,B$, choose the least original index among the remaining\nsample points that maximizes the absolute residual from the last accepted\nrational candidate. Append that point and its datum provisionally to the\nsupport list; remove it from the remaining sample list.\n\n3. Form the $(N-m)\\times m$ Loewner matrix\n$L_{ij}=(f_i-f_{s_j})/(z_i-z_{s_j})$, where $i$ ranges over the remaining\nsample indices and $s_j$ are the provisional support indices. The denominator\nis nonzero because all sample points are distinct.\n\n4. Compute an exact full singular value decomposition (SVD) of $L$ by applying\n[[alg-householder-bidiagonalization]] followed by\n[[alg-implicit-shifted-bidiagonal-qr-with-deflation]] with zero deflation\ntolerance and budget $S$. If either call returns failure or the QR budget is\nexhausted, return the last accepted candidate and status\n$\\texttt{inconclusive}$.\n\n5. Let $E$ be the right singular subspace for the smallest singular value of\n$L$, and let $P_E$ be its orthogonal projection. Choose the least coordinate\nindex $j$ for which $P_Ee_j\\ne0$ and set $w=P_Ee_j/\\|P_Ee_j\\|_2$. This rule\napplies at every multiplicity, including dimension one. Multiply by the\nunique unit scalar that makes the first nonzero coordinate of $w$ positive\nreal. If any coordinate of $w$ is zero, reject this provisional support and\nreturn the last accepted candidate with status $\\texttt{zero-support-weight}$.\n\n6. Form the barycentric rational quotient using the provisional support\nnodes, their data, and $w$ as its weights. If this rational function has a\ngenuine pole at any remaining sample point, reject this provisional support\nand return the last accepted candidate with status $\\texttt{pole-status}$.\nOtherwise accept the candidate and record both its maximum sampled residual\n$\\eta_m$ and the Loewner residual $\\sigma_m=\\|Lw\\|_2$. If\n$\\eta_m\\le\\tau$, return status $\\texttt{tolerance-met}$.\n\n7. If all $B$ iterations finish without another return, return the last\naccepted candidate with status $\\texttt{support-budget-exhausted}$. In\nparticular $B=0$ returns the initial constant with this status when step 1\ndoes not return.\n\nThe support tie rule and the projection rule make the exact procedure\ndeterministic, including when the smallest singular value has multiplicity\ngreater than one. Rank deficiency is permitted: if the smallest singular\nvalue is zero and all selected weights are nonzero and the quotient is finite\nat the remaining sample points, the candidate is accepted and its exact\nsample residual is evaluated. The algorithm asserts no uniform off-grid error\nbound and no minimax optimality. The Loewner residual $\\sigma_m$ is a linear\nleast-squares residual, not the nonlinear sampled residual $\\eta_m$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sample values are $f_M(0)=f_M(1)=0$, so their mean is zero and the initial candidate $r_0$ is the zero function. Its residual at both sample points is zero, hence the tolerance-zero stopping rule in [F1] returns $r_0$ before selecting any support node.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At the unsampled point $t=1/2$, $f_M(1/2)=M/4$ and $r_0(1/2)=0$. Thus the sampled residual is exactly zero while $\\|f_M-r_0\\|_{\\infty,[0,1]}\\ge M/4$. Since $M$ is arbitrary, no finite uniform off-grid error bound follows from this sample residual alone.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes zero sample values and zero initial residual, so the tolerance-zero branch returns the zero candidate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is over finite complex support/sample data and has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is direct finite algebra or a fixed construction and makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "ex-aaa-transfer-function-pole": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-aaa-finite-sample-rational-approximation",
+          "source_section": "Definition",
+          "quote": "Input a nonempty ordered list of distinct sample points\n$Z=(z_1,\\ldots,z_N)\\subset\\mathbb C$, data\n$F=(f_1,\\ldots,f_N)\\in\\mathbb C^N$, an absolute tolerance $\\tau\\ge0$, an\ninteger support budget $B$ with $0\\le B\\le\\lfloor N/2\\rfloor$, and a finite\nbidiagonal-QR sweep budget $S\\ge0$. The procedure is evaluated in exact\narithmetic; its finite-precision implementation makes no optimality claim.\nFor $v\\in\\mathbb C^k$, use the standard Hermitian inner product and Euclidean\nnorm $\\|v\\|_2=(\\sum_{j=1}^k|v_j|^2)^{1/2}$.\n\n1. Set the initial rational candidate $r_0$ to the constant mean\n$\\bar f=N^{-1}\\sum_i f_i$. Compute\n$\\eta_0=\\max_i|f_i-\\bar f|$. If $\\eta_0\\le\\tau$, return\n$(r_0,\\varnothing,\\texttt{tolerance-met})$.\n\n2. For $m=1,\\ldots,B$, choose the least original index among the remaining\nsample points that maximizes the absolute residual from the last accepted\nrational candidate. Append that point and its datum provisionally to the\nsupport list; remove it from the remaining sample list.\n\n3. Form the $(N-m)\\times m$ Loewner matrix\n$L_{ij}=(f_i-f_{s_j})/(z_i-z_{s_j})$, where $i$ ranges over the remaining\nsample indices and $s_j$ are the provisional support indices. The denominator\nis nonzero because all sample points are distinct.\n\n4. Compute an exact full singular value decomposition (SVD) of $L$ by applying\n[[alg-householder-bidiagonalization]] followed by\n[[alg-implicit-shifted-bidiagonal-qr-with-deflation]] with zero deflation\ntolerance and budget $S$. If either call returns failure or the QR budget is\nexhausted, return the last accepted candidate and status\n$\\texttt{inconclusive}$.\n\n5. Let $E$ be the right singular subspace for the smallest singular value of\n$L$, and let $P_E$ be its orthogonal projection. Choose the least coordinate\nindex $j$ for which $P_Ee_j\\ne0$ and set $w=P_Ee_j/\\|P_Ee_j\\|_2$. This rule\napplies at every multiplicity, including dimension one. Multiply by the\nunique unit scalar that makes the first nonzero coordinate of $w$ positive\nreal. If any coordinate of $w$ is zero, reject this provisional support and\nreturn the last accepted candidate with status $\\texttt{zero-support-weight}$.\n\n6. Form the barycentric rational quotient using the provisional support\nnodes, their data, and $w$ as its weights. If this rational function has a\ngenuine pole at any remaining sample point, reject this provisional support\nand return the last accepted candidate with status $\\texttt{pole-status}$.\nOtherwise accept the candidate and record both its maximum sampled residual\n$\\eta_m$ and the Loewner residual $\\sigma_m=\\|Lw\\|_2$. If\n$\\eta_m\\le\\tau$, return status $\\texttt{tolerance-met}$.\n\n7. If all $B$ iterations finish without another return, return the last\naccepted candidate with status $\\texttt{support-budget-exhausted}$. In\nparticular $B=0$ returns the initial constant with this status when step 1\ndoes not return.\n\nThe support tie rule and the projection rule make the exact procedure\ndeterministic, including when the smallest singular value has multiplicity\ngreater than one. Rank deficiency is permitted: if the smallest singular\nvalue is zero and all selected weights are nonzero and the quotient is finite\nat the remaining sample points, the candidate is accepted and its exact\nsample residual is evaluated. The algorithm asserts no uniform off-grid error\nbound and no minimax optimality. The Loewner residual $\\sigma_m$ is a linear\nleast-squares residual, not the nonlinear sampled residual $\\eta_m$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-aaa-loewner-minimum-and-support-interpolation",
+          "source_section": "Statement",
+          "quote": "At an AAA iteration with Loewner matrix $L\\in\\mathbb C^{(N-m)\\times m}$,\nthe selected unit weight vector $w$ minimizes $\\|Lv\\|_2$ among all\n$v\\in\\mathbb C^m$ with $\\|v\\|_2=1$; its residual is the smallest singular\nvalue of $L$. If every selected weight is nonzero and the iteration does not\nreturn pole status, its barycentric candidate interpolates all selected\nsupport data. The finite support budget makes the procedure terminate after\nat most $B$ iterations. These claims concern finite sampled data and do not\nassert minimax optimality or uniform off-grid convergence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-barycentric-rational-quotient",
+          "source_section": "Definition",
+          "quote": "Let $k\\ge1$, let $z_1,\\ldots,z_k\\in\\mathbb C$ be distinct support nodes, let\n$f_1,\\ldots,f_k\\in\\mathbb C$ be data, and let each weight $w_j\\in\\mathbb C$ be\nnonzero. Define the cleared polynomials\n$$P(z)=\\sum_{j=1}^{k}w_jf_j\\prod_{\\ell\\ne j}(z-z_\\ell), \\qquad Q(z)=\\sum_{j=1}^{k}w_j\\prod_{\\ell\\ne j}(z-z_\\ell).$$\nThe **barycentric rational quotient** is the rational function $r=P/Q$.\nAway from the support nodes this equals\n$$r(z)= \\frac{\\sum_{j=1}^{k} w_jf_j/(z-z_j)} {\\sum_{j=1}^{k} w_j/(z-z_j)}.$$\nAt a support node its value is given by the cleared quotient $P(z_j)/Q(z_j)$.\nA **pole** means a zero of the denominator after all common polynomial\nfactors of numerator and denominator have been canceled.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-householder-bidiagonalization",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$. Put $p=\\min(m,n)$ and $M=\\max(m,n)$. If $m\\ge n$, set $C=A$; if $m<n$, set $C=A^*$. Thus $C\\in\\mathbb F^{M\\times p}$.\n\nSave the input as $C_0=C$ and initialize $U=I_M$, $V=I_p$, and empty ordered lists of stored local left and right transformations. For $k=1,\\ldots,p$, in this order:\n\n1. Let $x=C_{k:M,k}$. If $x=0$, use the identity left transformation. Otherwise choose $\\phi=x_1/|x_1|$ when $x_1\\ne0$ and $\\phi=1$ when $x_1=0$, set $\\alpha=-\\phi\\|x\\|_2$, $v=x-\\alpha e_1$, and $h=v/\\|v\\|_2$. Use the Householder reflector $H=I-2hh^*$ on rows $k:M$. Update $C\\leftarrow H^*C$ on those rows and append this local transformation to the left list. In exact arithmetic update $U\\leftarrow U\\operatorname{diag}(I_{k-1},H)$. In finite precision update columns $k:M$ of the dense accumulator $U$ by right application of the same stored local reflector data, using the separate-block branch of [[alg-scaled-complex-householder-and-givens-updates]] and making no target-zero write to $U$.\n2. If $k<p$, let $y=C_{k,k+1:p}^*$. If $y=0$, use the identity right transformation. Otherwise apply the same phase and normalization rule to $y$ to form the Householder reflector $G$, then apply $C\\leftarrow C\\operatorname{diag}(I_k,G)$ and append this local transformation to the right list. In exact arithmetic update $V\\leftarrow V\\operatorname{diag}(I_k,G)$. In finite precision update columns $k+1:p$ of the dense accumulator $V$ by right application of the same stored local reflector data, using the separate-block branch of [[alg-scaled-complex-householder-and-givens-updates]] and making no target-zero write to $V$.\n\nSet $B$ to the leading $p\\times p$ block of the final work matrix $C$, and return $B,U,V$ together with the ordered local transformation lists.\n\nIn finite precision, each left/right reflector uses [[alg-scaled-complex-householder-and-givens-updates]], including its real/complex scaled formation, range checks and exact target-column/row zero writes. This is the arithmetic realization of the exact steps above. A zero active vector takes the identity branch. Any helper `range-failure`, invalid operation, nonfinite value, or nonzero exact intermediate outside the normal range returns `range-failure` with the partial factors and stored local transformations; otherwise return `success`, $B,U,V$, the ordered stored local transformations, the reconstruction residual $\\|C_0-U\\begin{bmatrix}B\\\\0\\end{bmatrix}V^*\\|_F$, and the two orthogonality residuals $\\|U^*U-I\\|_F$ and $\\|V^*V-I\\|_F$. The reconstruction uses the saved input $C_0$, not the overwritten work matrix. The exact products of the stored unitary representatives are the theoretical factors; the dense finite-precision accumulators are rounded and their residuals are computed quantities, not certified bounds by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+          "source_section": "Definition",
+          "quote": "Input the original $A\\in\\mathbb F^{m\\times n}$, the successful output record of [[alg-householder-bidiagonalization]] for $C=A$ if $m\\ge n$ and $C=A^*$ otherwise, a deflation tolerance $\\tau\\ge0$, and a finite nonnegative integer sweep budget $N$. The reduction record supplies the upper bidiagonal work matrix $B_0$, dense accumulators $U_B,V_B$, and ordered stored local transformation data. Initialize $B=B_0$, the sweep accumulators $U_\\Sigma,V_\\Sigma$ to identities of order $p=\\min(m,n)$, empty ordered left/right transformation lists, an empty deflation record, a pass counter $t=0$, and a sweep counter $s=0$. Write the diagonal as $d_i$ and superdiagonal as $e_i$, and set $e_0=0$.\n\nAt the start of each pass, set $t\\leftarrow t+1$, set $e_i$ to zero and append $(t,i,e_i^{old})$ to the deflation record whenever $|e_i|\\le\\tau(|d_i|+|d_{i+1}|)$. The corresponding additive matrix change has entry $-e_i^{old}$ at $(i,i+1)$ and zero elsewhere. Record any later non-target sparsity cleanup the same way with its row, column, and old value. The zero entries split the active blocks. If every active block has size one, stop with `converged`. Otherwise process the active blocks in increasing order of $\\ell$, skipping singleton blocks. Before each block sweep, if $s=N$, stop with `budget-exhausted`; otherwise form only the tridiagonal entries of $T=B^*B$ on that block: $T_{ii}=|d_i|^2+|e_{i-1}|^2$ and $T_{i,i+1}=\\overline{d_i}e_i$. Choose $\\mu$ to be the eigenvalue of the trailing Hermitian block $\\begin{bmatrix}T_{r-1,r-1}&T_{r-1,r}\\\\T_{r,r-1}&T_{rr}\\end{bmatrix}$ closest to $T_{rr}$, resolving a tie by the smaller eigenvalue. If the leading pivot $d_\\ell$ is zero or has magnitude at most $\\tau\\max(|e_{\\ell-1}|,|e_\\ell|)$, use the zero-shift branch $\\mu=0$ and choose the initial right Givens factor $G_\\ell$ so that $(d_\\ell,e_\\ell)G_\\ell=(\\rho,0)$, avoiding division by the small or zero diagonal.\n\n**Finite-precision shift and comparison schedule.** The preceding exact-arithmetic formulas retain their exact meaning. For finite precision use the scalar order, six-real-operation complex product, scaled real-component norm, and first-failing-primitive range policy of [[alg-scaled-complex-householder-and-givens-updates]] also for the following stages. All assignments below are stored; do not fuse operations. Comparisons, maxima, copies, conjugations, sign changes, and real absolute values are exact operations on stored finite values. Evaluate each complex magnitude by that helper's scaled two-component norm, with zero magnitude returned exactly as zero. At each pass visit deflation indices increasingly; at index $i$ evaluate $a_i=|e_i|$, $b_i=|d_i|$, $c_i=|d_{i+1}|$ in that order, then $h_i=\\operatorname{fl}(b_i+c_i)$ and $k_i=\\operatorname{fl}(\\tau h_i)$, and deflate exactly when $a_i\\le k_i$.\n\nFor each nonsingleton block, form its Gram diagonal entries in increasing index order, followed by its upper off-diagonal entries in increasing index order. To form $T_{ii}$, square $\\Re d_i,\\Im d_i,\\Re e_{i-1},\\Im e_{i-1}$ separately with rounding, add the first two rounded squares, add the last two, and add these two rounded sums, rounding each addition. Form $T_{i,i+1}$ by the helper's complex product for $\\overline{d_i}e_i$ and copy its conjugate to the lower off-diagonal. No other Gram entries are formed. Write the stored trailing block as $\\begin{bmatrix}a&z\\\\\\overline z&c\\end{bmatrix}$. In this order compute $h=\\operatorname{fl}(\\operatorname{fl}(a+c)/2)$, $\\delta=\\operatorname{fl}(\\operatorname{fl}(a-c)/2)$, and $k$ by the helper's scaled norm on the ordered four-real-component list $(\\delta,0,\\Re z,\\Im z)$, corresponding to the complex vector $(\\delta,z)$, returning exact zero for the zero list. Then compute $\\mu_-=\\operatorname{fl}(h-k)$, $\\mu_+=\\operatorname{fl}(h+k)$, $q_-=|\\operatorname{fl}(\\mu_--c)|$, and $q_+=|\\operatorname{fl}(\\mu_+-c)|$. Choose $\\mu=\\mu_-$ if $q_-\\le q_+$ and $\\mu=\\mu_+$ otherwise. In exact arithmetic these are the two Hermitian eigenvalues and the stated nearest-eigenvalue/tie rule; in finite precision they specify the shift estimates without asserting their accuracy.\n\nNext evaluate $|d_\\ell|$, $|e_{\\ell-1}|$, and $|e_\\ell|$ in that order and form $w=\\operatorname{fl}(\\tau\\max(|e_{\\ell-1}|,|e_\\ell|))$. Use the zero-shift branch exactly when $d_\\ell=0$ or $|d_\\ell|\\le w$. In the ordinary branch form the first shift-vector entry as $\\operatorname{fl}(T_{\\ell\\ell}-\\mu)$ and use the stored lower Gram entry as its second entry. If any of these primitives fails the helper's normal-range/finite-value requirements, return the existing `range-failure` record immediately, before any sweep transformation for that block. This rule permits range failure in shift formation and makes no unconditional progress claim. For $p=0$ or only singleton active blocks none of the block stages is requested.\n\nIn the ordinary branch choose the first right Givens factor $G_\\ell$ so that $G_\\ell^*(T_{\\ell\\ell}-\\mu,T_{\\ell+1,\\ell})^T=(\\rho,0)^T$, where $T_{\\ell+1,\\ell}=\\overline{e_\\ell}d_\\ell$. In either branch, apply $B\\leftarrow BG_\\ell$, update columns $\\ell,\\ell+1$ of $V_\\Sigma$ by right multiplication by this same stored rotation, and append its exact unitary representative to the right list. For $j=\\ell,\\ldots,r-1$, choose a left Givens factor $H_j$ so that $H_j^*(B_{j,j},B_{j+1,j})^T=(\\rho,0)^T$; apply it to rows $j,j+1$, update columns $j,j+1$ of $U_\\Sigma$ by right multiplication by this same stored rotation, and append its exact unitary representative to the left list. If $j<r-1$, choose a right Givens factor $G_{j+1}$ so that $(B_{j,j+1},B_{j,j+2})G_{j+1}=(\\rho,0)$; apply it to columns $j+1,j+2$, update the corresponding columns of $V_\\Sigma$ by right multiplication by this same stored rotation, and append its exact unitary representative to the right list. Continue until the bulge reaches the active block endpoint. A zero annihilation vector uses the identity rotation. In finite precision each Givens formation/update uses [[alg-scaled-complex-householder-and-givens-updates]], conjugate-transposed as needed for the stated left/right orientation; accumulator multiplications use the same stored local data but omit all target-zero writes. The dense accumulator multiplications follow the operationwise arithmetic model, while the ordered lists retain the exact unitary representatives used in analysis. Target zero writes to $B$ are included in their local error bounds. The initial shift-vector rotation does not zero an unrelated entry of $B$. Each Givens factor is chosen using [[def-real-and-complex-givens-transformations]] and its annihilation guarantee in [[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]].\n\nAfter each processed block, increment $s$ by one. Once all current active blocks have been processed, start a new pass. If any operation, norm or pivot is invalid or nonfinite, or a nonzero exact intermediate is outside the normal range, return `range-failure` with the partial $B$, accumulators, transformation lists, deflation record, and available residual reports. On `budget-exhausted`, return the current $B$, accumulators, transformation lists, deflation record, triplet residuals, and orthogonality residuals. On `converged`, set $B_{\\mathrm{final}}=B$ and return it with both dense accumulators, both transformation lists, the deflation record, triplet/orthogonality residuals, and its tall embedding $\\overline B_{\\mathrm{final}}=\\begin{bmatrix}B_{\\mathrm{final}}\\\\0_{M-p,p}\\end{bmatrix}$.\n\nFor every exit other than `range-failure`, let $B_{\\mathrm{out}}$ be the current work matrix, and let $d_i=(B_{\\mathrm{out}})_{ii}$. Obtain each candidate value as $\\widehat\\sigma_i=|d_i|$ by the scaled two-component modulus evaluation (real absolute value is exact). On `converged`, the active-block condition makes $B_{\\mathrm{out}}=B_{\\mathrm{final}}$ diagonal; after `budget-exhausted`, the diagonal values are estimates only and carry no accuracy claim.\n\nLet $W_B=\\operatorname{diag}(U_\\Sigma,I_{M-p})$. In exact arithmetic the tall-orientation accumulated factors are $U_C=U_BW_B$ and $V_C=V_BV_\\Sigma$. In finite precision form each dense product by row-by-column multiplication, with six-real-operation complex products and sequential componentwise rounded additions under the operationwise model; return `range-failure` if any required intermediate is invalid, nonfinite, or outside the normal range. Their exact theoretical factors are the products represented by the ordered local transformation lists together with the bidiagonal-reduction lists. If $m\\ge n$, set $\\widehat U=U_C$ and $\\widehat V=V_C$; for each nonzero $d_i$, multiply column $i$ of $\\widehat U$ by $d_i/|d_i|$ in exact arithmetic, using componentwise division by the successful scaled modulus readout in finite precision. If $m<n$, set $\\widehat U=V_C$ and $\\widehat V=U_C$; in this wide orientation multiply column $i$ of $\\widehat V$ by $d_i/|d_i|$ instead. Sort the candidate values in nonincreasing order, breaking ties by their original diagonal index, and permute the corresponding columns of the returned triplet vectors in the same way; leave $B_{\\mathrm{out}}$ and the transformation lists in their algorithmic order. For every candidate triplet $(\\widehat\\sigma_i,\\widehat u_i,\\widehat v_i)$, report $\\|A\\widehat v_i-\\widehat\\sigma_i\\widehat u_i\\|_2$ and $\\|A^*\\widehat u_i-\\widehat\\sigma_i\\widehat v_i\\|_2$. Also report $\\|\\widehat U^*\\widehat U-I\\|_F$ and $\\|\\widehat V^*\\widehat V-I\\|_F$. The reports expose finite-budget and rounding behavior; they do not certify convergence by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]]. Any additional sparsity cleanup is recorded separately in the deflation record with its discarded-entry perturbation.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-and-complex-givens-transformations",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 2$ and let $0\\le i<j\\le n-1$.\n\nA **real Givens rotation** in the $(i,j)$-plane is the identity matrix except on\nrows and columns $i,j$, where it has the $2\\times 2$ block\n\n$$\\begin{pmatrix}c&s\\\\-s&c\\end{pmatrix}\\qquad(c,s\\in\\mathbb R,\\ c^2+s^2=1).$$A **complex Givens transformation** in the $(i,j)$-plane is the identity except on rows and columns $i,j$, where it has block$$\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix},$$\n\nwith $c\\in\\mathbb R_{\\ge 0}$, $s\\in\\mathbb C$, and $c^2+|s|^2=1$. The modulus\n$|s|$ is the one from [[def-complex-conjugate-real-imaginary-part-and-modulus]].\n\nSuch transformations act only on the two chosen coordinates and are designed to\nzero one targeted entry while preserving the Euclidean norm from\n[[def-inner-product-norm]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-exact-householder-bidiagonal-reduction",
+          "source_section": "Statement",
+          "quote": "For $A\\in\\mathbb F^{m\\times n}$ over $\\mathbb F=\\mathbb R$ or $\\mathbb C$, the exact-arithmetic algorithm [[alg-householder-bidiagonalization]] returns unitary $U,V$ and an upper bidiagonal $B\\in\\mathbb F^{p\\times p}$, $p=\\min(m,n)$, such that if $m\\ge n$ then $U^*AV=\\begin{bmatrix}B\\\\0\\end{bmatrix}$, and if $m<n$ then $U^*A^*V=\\begin{bmatrix}B\\\\0\\end{bmatrix}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The data in order are $(-1/2,-1,1,1/2)$, with mean zero. Thus $\\eta_0=1>\\tau=0$, so the initial tolerance test does not return. Their largest absolute residuals are tied at $z=1$ and $z=3$; [F1] selects the earlier sample $z=1$. The first Loewner matrix is the single column $(-1/2,1,1/2)^T$, since its entries are $$\\frac{H(0)-H(1)}{0-1}=-\\frac12,\\qquad \\frac{H(3)-H(1)}{3-1}=1,\\qquad \\frac{H(4)-H(1)}{4-1}=\\frac12.$$ Since its right domain is one-dimensional, the selected unit weight is $1$ under the phase rule. Its Householder reduction has a single diagonal entry; by [F5] there is only a singleton block, so the SVD call converges without using a sweep. The one-support quotient is the constant $-1$. Its remaining residual magnitudes are $1/2,2,3/2$ at $z=0,3,4$, respectively, so $\\eta_1=2>\\tau$ and the second support is $z=3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The remaining sample points are $0$ and $4$. In that row and support order, the Loewner matrix is $$L=\\begin{bmatrix}-1/2&1/2\\\\1/2&-1/2\\end{bmatrix}.$$ The rows are negatives of one another and $L(1,1)^T=0$, so $L$ has rank one, its smallest singular value is zero, and its right nullspace is spanned by $(1,1)$. The orthogonal projection of $e_1$ onto this line is $(1/2,1/2)$; normalizing it and applying the positive-real phase rule [F1] gives $w=(1,1)/\\sqrt2$, whose components are both nonzero.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution into the barycentric quotient [F3] gives $$r(z)= \\frac{-1/(z-1)+1/(z-3)}{1/(z-1)+1/(z-3)} =\\frac1{z-2}.$$ The denominator reduces to a nonzero constant times $z-2$, so its sole finite pole is $2$. The values at $z=0,4$ are $-1/2,1/2$; the support values at $z=1,3$ are $-1,1$ by [F2]. Thus this quotient matches all four data.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the second support addition the Loewner matrix in step 1.2 is $$L=\\begin{bmatrix}-1/2&1/2\\\\1/2&-1/2\\end{bmatrix}.$$ Its first column has norm $1/\\sqrt2$ and its second is its negative. By [F4] and [F7], the left Householder sends the first column to $(1/\\sqrt2,0)^T$ and the second to $(-1/\\sqrt2,0)^T$. The one-dimensional right active scalar is $-1/\\sqrt2$; its phase is $-1$, its reflector vector is $-1$, and its Householder factor is $[-1]$. Thus the bidiagonal reduction returns $$B_0=\\begin{bmatrix}1/\\sqrt2&1/\\sqrt2\\\\0&0\\end{bmatrix}.$$ Then $$B_0^*B_0=\\begin{bmatrix}1/2&1/2\\\\1/2&1/2\\end{bmatrix}.$$ Its eigenvalues are $0$ and $1$, each at distance $1/2$ from the trailing diagonal entry $1/2$, so [F5] chooses shift $0$. The initial shift vector is $(1/2,1/2)^T$. The real Givens factor $$G=\\frac1{\\sqrt2}\\begin{bmatrix}1&-1\\\\1&1\\end{bmatrix}$$ satisfies $G^*(1/2,1/2)^T=(1/\\sqrt2,0)^T$, and $B_0G=\\operatorname{diag}(1,0)$. The left rotation is the identity because the subdiagonal entry is already zero. Thus one block sweep makes the superdiagonal zero; the next zero-tolerance pass deflates it and sees only singleton blocks before checking the exhausted budget, so the SVD call succeeds with $S=1$. Step 2.1 shows all four samples match, hence $\\eta_2=0=\\tau$ and [F1]'s tolerance branch returns the exact quotient.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite support, node set, sample set, or a positive interval count; an empty input is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 computes a zero smallest singular value and a null vector with both support weights nonzero; step 2.1 verifies the reduced quotient."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element limiting case is singled out by this statement; its full finite-index hypotheses are used directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result has no additional degenerate-parameter branch beyond the explicit hypotheses in its statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is over finite complex support/sample data and has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the greedy support tie and step 1.2 verifies the selected singular subspace vector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct claim or construction and contains no equivalence to split into implications."
+        }
+      ]
+    },
+    "cex-floater-hormann-cd1-seminorm-rate-fails": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-floater-hormann-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $x_0<\\cdots<x_n$ be distinct real nodes, let\n$f_0,\\ldots,f_n\\in\\mathbb R$ be data, and let $d$ be an integer with\n$0\\le d<n$. For $j=0,\\ldots,n$, define\n$$w_j=(-1)^{j-d} \\sum_{i=\\max(0,j-d)}^{\\min(j,n-d)} \\prod_{\\substack{i\\le k\\le i+d\\\\k\\ne j}}|x_j-x_k|^{-1}.$$\nThe index range is nonempty and every product is positive, so every $w_j$ is\nnonzero. The **Floater\u2013Hormann interpolant of degree parameter $d$** is the\nbarycentric rational quotient of these nodes, data, and weights from\n[[def-barycentric-rational-quotient]]. Away from the nodes, exact evaluation\nuses the quotient with this denominator;\na zero of the reduced denominator is reported as pole status. The no-real-pole\ntheorem below proves that this status never occurs for admissible exact real\ninputs.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-floater-hormann-no-real-poles",
+          "source_section": "Statement",
+          "quote": "For any $n\\ge1$, any distinct ordered real nodes $x_0<\\cdots<x_n$, any real\ndata $f_0,\\ldots,f_n$, and any integer $0\\le d<n$, the exact\nFloater\u2013Hormann rational function in\n[[def-floater-hormann-interpolant]] has no real poles.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-barycentric-rational-quotient",
+          "source_section": "Definition",
+          "quote": "Let $k\\ge1$, let $z_1,\\ldots,z_k\\in\\mathbb C$ be distinct support nodes, let\n$f_1,\\ldots,f_k\\in\\mathbb C$ be data, and let each weight $w_j\\in\\mathbb C$ be\nnonzero. Define the cleared polynomials\n$$P(z)=\\sum_{j=1}^{k}w_jf_j\\prod_{\\ell\\ne j}(z-z_\\ell), \\qquad Q(z)=\\sum_{j=1}^{k}w_j\\prod_{\\ell\\ne j}(z-z_\\ell).$$\nThe **barycentric rational quotient** is the rational function $r=P/Q$.\nAway from the support nodes this equals\n$$r(z)= \\frac{\\sum_{j=1}^{k} w_jf_j/(z-z_j)} {\\sum_{j=1}^{k} w_j/(z-z_j)}.$$\nAt a support node its value is given by the cleared quotient $P(z_j)/Q(z_j)$.\nA **pole** means a zero of the denominator after all common polynomial\nfactors of numerator and denominator have been canceled.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $d\\ge0$. For every integer $n\\ge2d+2$, take $h=1/n$, $x_j=jh$ on $[0,1]$, and query $x=h/2$. This family has $h/h_{\\min}=1$. From [F1], after multiplying every weight by the same positive factor $h^dd!$, its weights are $$\\widetilde w_j=(-1)^{j-d}\\delta_j,\\qquad \\delta_j=\\sum_{i=\\max(0,j-d)}^{\\min(j,n-d)}\\binom d{j-i}.$$ Indeed, on a uniform mesh each reciprocal-distance product in [F1] equals $h^{-d}/((j-i)!(i+d-j)!)$. Thus $1\\le\\delta_j\\le2^d$, and $\\delta_j=2^d$ for $d\\le j\\le n-d$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Define $$\\phi(t)= \\begin{cases} (1-16t^2)^{d+2},& |t|\\le1/4,\\\\ 0,& |t|>1/4. \\end{cases}$$ At both support endpoints the polynomial has a zero of multiplicity $d+2$, so its derivatives through order $d+1$ vanish there and agree with the zero extension; hence $\\phi\\in C^{d+1}(\\mathbb R)$ and $\\phi(0)=1$. Expanding the polynomial and differentiating each term gives $$\\|\\phi^{(d+1)}\\|_\\infty\\le M_d:=4^{d+1} \\sum_{k=\\lceil(d+1)/2\\rceil}^{d+2} \\binom{d+2}{k}\\frac{(2k)!}{(2k-d-1)!}<\\infty.$$ This is a finite bound depending only on $d$, and its $k=d+2$ term shows $M_d>0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $D(x)=\\sum_{j=0}^n\\widetilde w_j/(x-x_j)$ be the denominator at the query. If $d=0$, its $j=0$ term has magnitude $2/h$, and the remaining terms form an alternating decreasing sequence beginning with magnitude $2/h$, so $|D(x)|\\le4/h$. If $d\\ge1$, the endpoint blocks $j=0,\\ldots,d-1$ and $j=n-d+1,\\ldots,n$ each contain $d$ terms of magnitude at most $2^{d+1}/h$. The middle block $j=d,\\ldots,n-d$ has constant $\\delta_j=2^d$ and alternating decreasing magnitudes, so its sum has magnitude at most $2^{d+1}/h$. Hence in both cases $$0<|D(x)|\\le \\frac{2^d(4d+4)}h,$$ The strict lower inequality follows from [F2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The real number $\\widetilde w_j/(x-x_j)$ is nonzero. Define $\\sigma_j=1$ if it is positive and $\\sigma_j=-1$ if it is negative, and set $$f_n(t)=h^{d+1}\\sum_{j=0}^{n} \\sigma_j\\phi\\!\\left(\\frac{t-x_j}{h}\\right),\\qquad 0\\le t\\le1.$$ The supports have radius $h/4$ about distinct nodes, so they are disjoint; the query $x=h/2$ is outside every support. Therefore $f_n(x)=0$, $f_n(x_j)=h^{d+1}\\sigma_j$, $f_n\\in C^{d+1}([0,1])$, and $\\|f_n^{(d+1)}\\|_\\infty\\le M_d$ by [F3] and the derivative estimate in step 1.2.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the barycentric quotient formula [F4] and the signs $\\sigma_j$, the numerator at $x$ is $h^{d+1}\\sum_j|\\widetilde w_j/(x-x_j)|$. Restricting to $j=d+1,\\ldots,n-d$ and using $\\delta_j=2^d$ and $|x-x_j|=h(j-\\tfrac12)$, step 2.1 gives $$|f_n(x)-r_d(x)| \\ge\\frac{h^{d+1}}{4d+4} \\sum_{j=d+1}^{n-d}\\frac1{j-\\tfrac12}.$$ Since $t\\mapsto1/(t-\\tfrac12)$ is decreasing, $$\\sum_{j=d+1}^{n-d}\\frac1{j-\\tfrac12} \\ge \\int_{d+1}^{n-d+1}\\frac{dt}{t-\\tfrac12} =\\log\\frac{n-d+\\tfrac12}{d+\\tfrac12}.$$ This lower bound grows without limit as $n$ increases.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F2], $f_n-r_d$ is continuous on $[0,1]$, so [F5] makes its uniform norm finite. It follows that $$\\frac{\\|f_n-r_d\\|_\\infty} {h^{d+1}M_d} \\ge \\frac{\\log((n-d+\\tfrac12)/(d+\\tfrac12))} {(4d+4)M_d} \\longrightarrow\\infty \\qquad(n\\to\\infty).$$ Every mesh in the family has ratio one, but no fixed $C(d,1)$ can satisfy the refuted inequality. Thus it fails even at $\\rho=1$ for each fixed $d$.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 2.2",
+            "step 3.1",
+            "algebra",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes d and uses n\u22652d+2, so its node set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 2.1 and 3.1 use the no-real-pole supplier and the nonzero barycentric denominator to bound a positive sum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The construction includes the d=0 branch explicitly in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement uses a uniform mesh of distinct nodes, so repeated nodes and zero mesh gaps are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Step 2.2 restricts the smooth bump construction to [0,1] and verifies its endpoint-compatible C^(d+1) extension."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction defines every bump sign from a fixed nonzero term and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a one-way estimate and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a one-way estimate and asserts no converse."
+        }
+      ]
+    }
+  }
+}

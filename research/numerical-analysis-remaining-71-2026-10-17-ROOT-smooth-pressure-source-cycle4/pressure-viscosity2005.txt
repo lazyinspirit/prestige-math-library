@@ -1,0 +1,3208 @@
+[PDF PAGE 1]
+arXiv:math/0502549v1  [math.AP]  26 Feb 2005
+Divorcing pressure from viscosity in
+incompressible Navier-Stokes dynamics
+Jian-Guo Liu1, Jie Liu2, and Robert L. Pego3
+August 21, 2018
+Abstract
+We show that in bounded domains with no-slip boundary conditions, the Navier-
+Stokes pressure can be determined in a such way that it is strictly dominated by
+viscosity. As a consequence, in a general domain we can treat the Navier-Stokes equa-
+tions as a perturbed vector diﬀusion equation, instead of as a perturbed Stokes system.
+We illustrate the advantages of this view in a number of ways. In particular, we provide
+simple proofs of (i) local-in-time existence and uniqueness of strong solutions for an
+unconstrained formulation of the Navier-Stokes equations, and (ii) the unconditional
+stability and convergence of diﬀerence schemes that are implicit only in viscosity and
+explicit in both pressure and convection terms, requiring no solution of stationary
+Stokes systems or inf-sup conditions.
+1
+Introduction
+The pressure term has always created problems for understanding the Navier-
+Stokes equations of incompressible ﬂow. Pressure plays a role like a Lagrange
+multiplier to enforce the incompressibility constraint, and this has been a main
+source of diﬃculties. Our general aim in this paper is to show that the pressure
+can be obtained in a way that leads to considerable simpliﬁcations in both
+computation and analysis.
+From the computational point of view, typical diﬃculties are related to the
+lack of an evolution equation for updating the pressure dynamically and the lack
+of useful boundary conditions for determining the pressure by solving boundary-
+value problems. Existing methods able to handle these diﬃculties are sophis-
+ticated and lack the robustness and ﬂexibility that would be useful to address
+more complex problems. For example, ﬁnite element methods have required
+1Department of Mathematics & Institute for Physical Science and Technology, University
+of Maryland, College Park MD 20742. Email: jliu@math.umd.edu
+2Department of Mathematics, University of Maryland, College Park MD 20742. Email:
+jieliu@math.umd.edu
+3Department of Mathematical Sciences, Carnegie Mellon University, Pittsburgh, PA 15213.
+Email: rpego@cmu.edu
+1
+
+[PDF PAGE 2]
+Divorcing pressure from viscosity
+2
+carefully arranging approximation spaces for velocity and pressure to satisfy an
+inf-sup compatibility condition [GR]. Projection methods too have typically en-
+countered problems related to low-accuracy approximation of the pressure near
+boundaries [Ch, Te2, OID]. Yet much of the scientiﬁc and technological signif-
+icance of the Navier-Stokes equations derives from their role in the modeling
+of physical phenomena such as lift, drag, boundary-layer separation and vortex
+shedding, for which the behavior of the pressure near boundaries is of great
+importance.
+Our main results in this article indicate that in bounded domains with no-slip
+boundary conditions, the Navier-Stokes pressure can be determined in a such
+way that it is strictly dominated by viscosity. To explain, let us take Ωto be a
+bounded, connected domain in RN (N ≥2) with C3 boundary Γ = ∂Ω. The
+Navier-Stokes equations for incompressible ﬂuid ﬂow in Ωwith no-slip boundary
+conditions on Γ take the form
+∂t⃗u + ⃗u·∇⃗u + ∇p = ν∆⃗u + ⃗f
+in Ω,
+(1)
+∇· ⃗u = 0
+in Ω,
+(2)
+⃗u = 0
+on Γ.
+(3)
+Here ⃗u is the ﬂuid velocity, p the pressure, and ν is the kinematic viscosity
+coeﬃcient, assumed to be a ﬁxed positive constant.
+A standard way to determine p is via the Helmholtz-Hodge decomposition.
+We let P denote the Helmholtz projection operator onto divergence-free ﬁelds,
+and recall that it is deﬁned as follows. Given any ⃗a ∈L2(Ω, RN), there is a
+unique q ∈H1(Ω) with R
+Ωq = 0 such that P⃗a := ⃗a + ∇q satisﬁes
+0 =
+Z
+Ω
+(P⃗a) · ∇φ =
+Z
+Ω
+(⃗a + ∇q) · ∇φ
+for all φ ∈H1(Ω).
+(4)
+The pressure p in (1) is determined by taking ⃗a = ⃗u·∇⃗u −⃗f −ν∆⃗u. Then (1)
+is rewritten as
+∂t⃗u + P(⃗u·∇⃗u −⃗f −ν∆⃗u) = 0.
+(5)
+In this formulation, solutions formally satisfy ∂t(∇· ⃗u) = 0. Consequently
+the zero-divergence condition (2) needs to be imposed only on initial data. Nev-
+ertheless, the pressure is determined from (5) in principle even for velocity ﬁelds
+that do not respect the incompressibility constraint. However, the dissipation
+in (5) appears degenerate due to the fact that P annihilates gradients, so the
+analysis of (5) is usually restricted to spaces of divergence-free ﬁelds.
+Alternatives are possible in which the pressure is determined diﬀerently when
+the velocity ﬁeld has non-zero divergence. Instead of (5), we propose to consider
+∂t⃗u + P(⃗u·∇⃗u −⃗f −ν∆⃗u) = ν∇(∇· ⃗u).
+(6)
+Of course there is no diﬀerence as long as ∇· ⃗u = 0.
+But we argue that
+(6) enjoys superior stability properties, for two reasons. The ﬁrst is heuristic.
+The incompressibility constraint is enforced in a more robust way, because the
+
+[PDF PAGE 3]
+Divorcing pressure from viscosity
+3
+divergence of velocity satisﬁes a weak form of the diﬀusion equation with no-ﬂux
+(Neumann) boundary conditions — Due to (4), for all appropriate test functions
+φ we have
+Z
+Ω
+∂t⃗u · ∇φ = ν
+Z
+Ω
+∇(∇· ⃗u) · ∇φ.
+(7)
+Taking φ = ∇· ⃗u we get the dissipation identity
+d
+dt
+1
+2
+Z
+Ω
+(∇· ⃗u)2 + ν
+Z
+Ω
+|∇(∇· ⃗u)|2 = 0.
+(8)
+Due to the Poincar´e inequality and the fact that
+R
+Ω∇· ⃗u = 0, the divergence
+of velocity is smoothed and decays exponentially in L2 norm.
+Naturally, if
+∇· ⃗u = 0 initially, this remains true for all later time, and one has a solution of
+the standard Navier-Stokes equations (1)–(3).
+The second reason is much deeper. To explain, we recast (6) in the form
+(1) while explicitly identifying the separate contributions to the pressure term
+made by the convection and viscosity terms. Using the Helmholtz projection
+operator P, we introduce the Euler pressure pE and Stokes pressure pS via the
+relations
+P(⃗u·∇⃗u −⃗f) = ⃗u·∇⃗u −⃗f + ∇pE,
+(9)
+P(−∆⃗u) = −∆⃗u + ∇(∇· ⃗u) + ∇pS.
+(10)
+This puts (6) into the form (1) with p = pE + νpS:
+∂t⃗u + ⃗u·∇⃗u + ∇pE + ν∇pS = ν∆⃗u + ⃗f.
+(11)
+Identifying the Euler and Stokes pressure terms in this way allows one to focus
+separately on the diﬃculties peculiar to each. The Euler pressure is nonlinear,
+but of lower order. Since the Helmholtz projection is orthogonal, naturally the
+Stokes pressure satisﬁes
+Z
+Ω
+|∇pS|2 ≤
+Z
+Ω
+|∆⃗u|2
+if ∇· ⃗u = 0.
+(12)
+The key observation is that the Stokes pressure term is actually strictly domi-
+nated by the viscosity term, regardless of the divergence constraint. We regard
+the following theorem as the main achievement of this paper.
+Theorem 1 Let Ω⊂RN (N ≥2) be a connected bounded domain with C3
+boundary. Then for any ε > 0, there exists C ≥0 such that for all vector ﬁelds
+⃗u ∈H2 ∩H1
+0(Ω, RN), the Stokes pressure pS determined by (10) satisﬁes
+Z
+Ω
+|∇pS|2 ≤β
+Z
+Ω
+|∆⃗u|2 + C
+Z
+Ω
+|∇⃗u|2,
+(13)
+where β = 2
+3 + ε.
+
+[PDF PAGE 4]
+Divorcing pressure from viscosity
+4
+This theorem allows one to see that (6) is fully dissipative.
+To begin to
+see why, recall that the Laplace operator ∆: H2(Ω) ∩H1
+0(Ω) →L2(Ω) is an
+isomorphism, and note that ∇pS is determined by ∆⃗u via
+∇pS = (I −P −Q)∆⃗u,
+Q := ∇∇· ∆−1.
+(14)
+Equation (6) can then be written
+∂t⃗u + P(⃗u·∇⃗u −⃗f)
+=
+ν(P + Q)∆⃗u
+=
+ν∆⃗u −ν(I −P −Q)∆⃗u.
+(15)
+Theorem 1 will allow us to regard the last term as a controlled perturbation.
+We can take ∆⃗u = ⃗g arbitrary in L2(Ω, RN) and reinterpret Theorem 1 as
+follows. The last term in (13) can be interpreted as the squared norm of ⃗u
+in H1
+0(Ω, RN), giving the norm of ⃗g in the dual space H−1(Ω, RN). Thus the
+conclusion of Theorem 1 is equivalent to the following estimate, which says that
+I −P is approximated by the bounded operator Q : L2(Ω, RN) →∇H1(Ω):
+Corollary 1 For all vector ﬁelds ⃗g ∈L2(Ω, RN) we have
+∥(I −P −Q)⃗g∥2
+L2 ≤β∥⃗g∥2
+L2 + C∥⃗g∥2
+H−1.
+(16)
+There are several diﬀerent ways to interpret the Stokes pressure as we have
+deﬁned it. In this vein we make a few further observations. First, note that
+P∇(∇· ⃗u) = 0 for all ⃗u in H2 ∩H1
+0(Ω, RN), since ∇· ⃗u lies in H1(Ω). Then
+∇pS = (I −P)(∆⃗u −∇(∇· u)).
+(17)
+Now A⃗u := ∆⃗u −∇(∇· ⃗u) has zero divergence in the sense of distributions and
+is in L2(Ω, RN), so A⃗u lies in the space H(div; Ω) consisting of vector ﬁelds in
+L2(Ω, RN) with divergence in L2(Ω). By consequence, ∆pS = 0 in the sense of
+distributions and so ∇pS is in H(div; Ω) also. By a well-known trace theorem
+(see [GR], theorem 2.5), the normal components of A⃗u and ∇pS belong to the
+Sobolev space H−1/2(Γ), and from the deﬁnition of P we have
+0 =
+Z
+Ω
+(∇pS −A⃗u) · ∇φ =
+Z
+Γ
+φ⃗n · (∇pS −A⃗u)
+(18)
+for all φ ∈H1(Ω). So pS is determined as the zero-mean solution of the Neumann
+boundary-value problem
+∆pS = 0
+in Ω,
+⃗n · ∇pS = ⃗n · (∆−∇∇·)⃗u
+on Γ.
+(19)
+Furthermore, in two and three dimensions, we have
+∇pS = −(I −P)(∇× ∇× ⃗u)
+(20)
+due to the identity ∇× ∇× ⃗u = −∆⃗u + ∇(∇· u). Green’s formula yields
+Z
+Γ
+⃗n · (∇× ∇× ⃗u)φ =
+Z
+Ω
+(∇× ∇× ⃗u) · ∇φ = −
+Z
+Γ
+(∇× ⃗u) · (⃗n × ∇φ)
+(21)
+
+[PDF PAGE 5]
+Divorcing pressure from viscosity
+5
+and so pS (with zero average) is determined through the weak formulation [JL]
+Z
+Ω
+∇pS · ∇φ =
+Z
+Γ
+(∇× ⃗u) · (⃗n × ∇φ)
+for all φ ∈H1(Ω).
+(22)
+(Note that ∇× ⃗u ∈H1/2(Γ, RN), and ⃗n × ∇φ ∈H−1/2(Γ, RN) by a standard
+trace theorem [GR, Theorem 2.11], since ∇φ lies in H(curl; Ω), the space of
+vector ﬁelds in L2(Ω, RN) with curl in L2.)
+As indicated by (19) or (22), the Stokes pressure is generated by the tangen-
+tial part of vorticity at the boundary. In the whole space RN or in the case of
+a periodic box without boundary, the Helmholtz projection is exactly given via
+Fourier transform by P = I −Q and the Stokes pressure vanishes. Essentially,
+the Stokes pressure supplies the correction to this formula induced by the no-slip
+boundary conditions. By consequence, the results of the present paper should
+have nothing to do with the global regularity question for the three-dimensional
+Navier-Stokes equations. But as we have mentioned, many important physi-
+cal phenomena modeled by the Navier-Stokes equations involve boundaries and
+boundary-layer eﬀects, and it is exactly here where the Stokes pressure should
+play a key role.
+The unconstrained formulation (6) is not without antecedents in the litera-
+ture. Orszag et al. [OID] used the boundary condition in (19) as a way of enforc-
+ing consistency for a Neumann problem in the context of the projection method.
+After the results of this paper were completed, we found that the formulation (6)
+is exactly equivalent to one studied by Grubb and Solonnikov [GS1, GS2]. These
+authors also study several other types of boundary conditions, and argue that
+this formulation is parabolic in a nondegenerate sense. They perform an anal-
+ysis based on a general theory of parabolic pseudo-diﬀerential initial-boundary
+value problems, and also show that for strong solutions, the divergence satisﬁes
+a diﬀusion equation with Neumann boundary conditions.
+Due to our Theorem 1, we can treat the Navier-Stokes equations in bounded
+domains simply as a perturbation of the vector diﬀusion equation ∂t⃗u = ν∆⃗u,
+regarding both the pressure and convection terms as dominated by the viscosity
+term. This stands in contrast to the usual approach that regards the Navier-
+Stokes equations as a perturbation of the Stokes system ∂t⃗u = ν∆⃗u −∇p,
+∇· ⃗u = 0.
+Discussing this usual approach to analysis, Tartar [Ta2, p. 68]
+comments
+“The diﬃculty comes from the fact that one does not have adequate
+boundary conditions for p. . . .[S]ending the nonlinear term to play
+with f, one considers the Navier-Stokes equations as a perturbation
+of Stokes equation, and this is obviously not a good idea, but no one
+has really found how to do better yet.”
+By way of seeking to do better, in this paper we exploit Theorem 1 in a number
+of ways. In particular, we develop a simple proof of local-in-time existence and
+uniqueness for strong solutions of the unconstrained formulation (11) and conse-
+quently for the original Navier-Stokes equations, based upon demonstrating the
+
+[PDF PAGE 6]
+Divorcing pressure from viscosity
+6
+unconditional stability of a simple time-discretization scheme with explicit time-
+stepping for the pressure and nonlinear convection terms and that is implicit
+only in the viscosity term.
+The discretization that we use is related to a class of extremely eﬃcient
+numerical methods for incompressible ﬂow [Ti, Pe, JL, GuS]. Thanks to the
+explicit treatment of the convection and pressure terms, the computation of the
+momentum equation is completely decoupled from the computation of the kine-
+matic pressure Poisson equation used to enforce incompressibility. No stationary
+Stokes solver is necessary to handle implicitly diﬀerenced pressure terms. For
+three-dimensional ﬂow in a general domain, the computation of incompressible
+Navier-Stokes dynamics is basically reduced to solving a heat equation and a
+Poisson equation at each time step. This class of methods is very ﬂexible and
+can be used with all kinds of spatial discretization methods [JL], including ﬁ-
+nite diﬀerence, spectral, and ﬁnite element methods. The stability properties
+we establish here should be helpful in analyzing these methods.
+Indeed, we will show below that our stability analysis easily adapts to proving
+unconditional stability and convergence for corresponding fully discrete ﬁnite-
+element methods with C1 elements for velocity and C0 elements for pressure. It
+is important to note that we impose no inf-sup compatibility condition between
+the ﬁnite-element spaces for velocity and pressure. The inf-sup condition (also
+known as the Ladyzhenskaya-Babuˇska-Brezzi condition) has long been a central
+foundation for ﬁnite-element methods for all saddle-point problems including the
+stationary Stokes equation. Its beautiful theory is a masterpiece documented in
+many ﬁnite-element books. In the usual approach, the inf-sup condition serves to
+force the approximate solution to stay close to the divergence-free space where
+the Stokes operator P∆is dissipative. However, due to the fully dissipative
+nature of the unconstrained formulation (11) which follows as a consequence
+of Theorem 1, as far as our stability analysis in section 6 is concerned, the
+ﬁnite-element spaces for velocity and pressure can be completely unrelated.
+The proof of Theorem 1 will be carried out in section 3.
+Important in-
+gredients in the proof are: (i) an estimate near the boundary that is related
+to boundedness of the Neumann-to-Dirichlet map for boundary values of har-
+monic functions — this estimate is proved in section 2, see Theorem 2; and (ii)
+a representation formula for the Stokes pressure in terms of a part of velocity
+near and parallel to the boundary. In section 2 we also describe the space ∇Sp
+of all possible Stokes pressure gradients (i.e., the range of I −P −Q). In R3
+it turns out that this is the space of square-integrable vector ﬁelds that are
+simultaneously gradients and curls (see Theorem 4 in section 3.5 below).
+In section 4 we establish the unconditional stability of the time-discretiza-
+tion scheme, and in section 5 we use this to study existence and uniqueness
+for strong solutions with no-slip boundary conditions. In section 6 we adapt
+the stability analysis to prove the unconditional stability and convergence of
+corresponding C1/C0 ﬁnite-element methods.
+In section 7 we show that Theorem 1 also allows one to treat the linearized
+equations (an unconstrained version of the Stokes system) easily by analytic
+semigroup theory. We deal with non-homogeneous boundary conditions in sec-
+
+[PDF PAGE 7]
+Divorcing pressure from viscosity
+7
+tion 8. From these results, in section 9 we deduce an apparently new result for
+the linear Stokes system, namely an isomorphism theorem between the solution
+space and a space of data for non-homogeneous side conditions in which only
+the average ﬂux through the boundary vanishes.
+2
+Integrated Neumann-to-Dirichlet estimates in
+tubes
+2.1
+Notation
+Let Ω⊂RN be a bounded domain with C3 boundary Γ. For any ⃗x ∈Ωwe let
+Φ(⃗x) = dist(x, Γ) denote the distance from x to Γ. For any s > 0 we denote the
+set of points in Ωwithin distance s from Γ by
+Ωs = {⃗x ∈Ω| Φ(⃗x) < s},
+(23)
+and set Ωc
+s = Ω\Ωs and Γs = {⃗x ∈Ω| Φ(⃗x) = s}. Since Γ is C3 and compact,
+there exists s0 > 0 such that Φ is C3 in Ωs0 and its gradient is a unit vector,
+with |∇Φ(⃗x)| = 1 for every ⃗x ∈Ωs0. We let
+⃗n(⃗x) = −∇Φ(⃗x),
+(24)
+then ⃗n(⃗x) is the outward unit normal to Γs = ∂Ωc
+s for s = Φ(⃗x), and ⃗n ∈
+C2(¯Ωs0, RN).
+We let
+
+f, g
+
+Ω=
+R
+Ωfg denote the L2 inner product of functions f and g in
+Ω, and let ∥·∥Ωdenote the corresponding norm in L2(Ω). We drop the subscript
+on the inner product and norm when the domain of integration is understood
+in context.
+2.2
+Statement of results
+Our strategy for proving Theorem 1 crucially involves an integrated Neumann-
+to-Dirichlet–type estimate for harmonic functions in the tubular domains Ωs for
+small s > 0.
+The theorem below contains two estimates of this type. The ﬁrst, (26) in
+part (i), can be obtained from a standard Neumann-to-Dirichlet estimate for
+functions harmonic in Ω, of the form
+β0
+Z
+Γr
+|(I −⃗n⃗nt)∇p|2 ≤
+Z
+Γr
+|⃗n ·∇p|2,
+(25)
+by integrating over r ∈(0, s), provided one shows that β0 > 0 can be chosen
+independent of r for small r > 0. On the ﬁrst reading, the reader is encouraged
+to take (26) for granted and proceed directly to section 3.2 at this point; it is
+only necessary to replace (111) in the proof of Theorem 1 by the corresponding
+result from (26) to establish that the estimate in Theorem 1 is valid for some
+β < 1 depending upon Ω.
+
+[PDF PAGE 8]
+Divorcing pressure from viscosity
+8
+The second estimate, in part (ii), will be used with β1 close to 1 to establish
+the full result in Theorem 1 for any number β greater than 2
+3, independent of
+the domain.
+Theorem 2 Let Ωbe a bounded domain with C3 boundary. (i) There exists
+β0 > 0 such that for suﬃciently small s > 0, whenever p is a harmonic function
+in Ωs we have
+β0
+Z
+Ωs
+|(I −⃗n⃗nt)∇p|2 ≤
+Z
+Ωs
+|⃗n ·∇p|2.
+(26)
+(ii) Let β1 < 1. Then for any suﬃciently small s > 0, whenever p is a harmonic
+function in Ωs and p0 is constant on each component of Ωs, we have
+β1
+Z
+Ωs
+|(I −⃗n⃗nt)∇p|2 ≤
+Z
+Ωs
+|⃗n ·∇p|2 + 24
+s2
+Z
+Ωs
+|p −p0|2.
+(27)
+Our proof is motivated by the case of slab domains with periodic bound-
+ary conditions in the transverse directions. In this case the analysis reduces
+to estimates for Fourier series expansions in the transverse variables. For gen-
+eral domains, the idea is to approximate −∆in thin tubular domains Ωs by
+the Laplace-Beltrami operator on Γ × (0, s). This operator has a direct-sum
+structure, and we obtain the integrated Neumann-to-Dirichlet–type estimate by
+separating variables and expanding in series of eigenfunctions of the Laplace-
+Beltrami operator on Γ. For basic background in Riemannian geometry and the
+Laplace-Beltrami operator we refer to [Au] and [Ta].
+2.3
+Harmonic functions on Γ × (0, s)
+Geometric preliminaries. We consider the manifold G = Γ×I with I = (0, s)
+as a Riemannian submanifold of RN ×R with boundary ∂G = Γ×{0, s}. We let
+γ denote the metric on Γ induced from RN, let ι denote the standard Euclidean
+metric on I, and let g denote the metric on the product space G. Any vector ⃗a
+tangent to G at z = (y, r) has components ⃗aΓ tangent to Γ at y and ⃗aI tangent
+to I at r. For any two such vectors ⃗a and ⃗b, we have
+g(⃗a,⃗b) = γ(⃗aΓ,⃗bΓ) + ι(⃗aI,⃗bI).
+(28)
+Given a C1 function z = (y, r) 7→f(y, r) on G, its gradient ∇Gf at z is a
+tangent vector to G determined from the diﬀerential via the metric, through
+requiring
+g(∇Gf,⃗a) = df · ⃗a
+for all ⃗a ∈TzG.
+(29)
+By keeping r ﬁxed, the function y 7→f(y, r) determines the gradient vector ∇Γf
+tangent to Γ in similar fashion, and by keeping y ﬁxed, the function r 7→f(y, r)
+determines the gradient vector ∇If tangent to I. These gradients are also the
+components of ∇Gf:
+(∇Gf)Γ = ∇Γf,
+(∇Gf)I = ∇If.
+
+[PDF PAGE 9]
+Divorcing pressure from viscosity
+9
+If u = (u1, . . . , uN−1) 7→y = (y1, . . . , yN) is a local coordinate chart for
+Γ, the metric is given by γij dui duj (summation over repeated indices implied)
+with matrix elements
+γij = ∂yk
+∂ui
+∂yk
+∂uj .
+For I ⊂R the identity map serves as coordinate chart. In these coordinates the
+tangent vectors are written (in a form that aids in tracking coordinate changes)
+as
+∇Γf = γij ∂f
+∂ui
+∂
+∂uj ,
+∇If = ∂f
+∂r
+∂
+∂r.
+(30)
+As usual, the matrix (γij) = (γij)−1. Given two C1 functions f, ˜f on G,
+γ(∇Γf, ∇Γ ˜f) = γij ∂f
+∂ui
+∂˜f
+∂uj ,
+ι(∇If, ∇I ˜f) = ∂f
+∂r
+∂˜f
+∂r .
+(31)
+In these coordinates, the (positive) Laplace-Beltrami operators on Γ and I
+respectively take the form
+∆Γf = −1
+√γ
+∂
+∂ui
+√γγij ∂
+∂uj
+f
+
+,
+∆If = −∂2
+∂r2 f,
+(32)
+where √γ =
+p
+det(γij) is the change-of-variables factor for integration on Γ —
+if a function f on Γ is supported in the range of the local coordinate chart then
+Z
+Γ
+f(y) dS(y) =
+Z
+RN−1 f(y(u)) √γ du.
+(33)
+(Since orthogonal changes of coordinates in RN and RN−1 leave the integral
+invariant, one can understand √γ as the product of the singular values of the
+matrix ∂y/∂u.)
+Whenever f ∈H1(Γ) and ˜f ∈H2(Γ), one has the integration-by-parts
+formula
+Z
+Γ
+f∆Γ ˜f =
+Z
+Γ
+γ(∇Γf, ∇Γ ˜f).
+(34)
+One may extend ∆Γ to be a map from H1(Γ) →H−1(Γ) by using this equation
+as a deﬁnition of ∆Γ ˜f as a functional on H1(Γ). In standard fashion [Ta], one
+ﬁnds that I + ∆Γ : H1(Γ) →H−1(Γ) is an isomorphism, and that (I + ∆Γ)−1 is
+a compact self-adjoint operator on L2(Γ), hence L2(Γ) admits an orthonormal
+basis of eigenfunctions of ∆Γ. Since the coeﬃcient functions in (32) are C1,
+standard interior elliptic regularity results ([GT, Theorem 8.8], [Ta, p. 306,
+Proposition 1.6]) imply that the eigenfunctions belong to H2(Γ). We denote
+the eigenvalues of ∆Γ by ν2
+k, k = 1, 2, . . ., with 0 = ν1 ≤ν2 ≤. . . where νk →∞
+as k →∞, and let ψk be corresponding eigenfunctions forming an orthonormal
+basis of L2(Γ). If ∆Γψ = 0 then ψ is constant on each component of Γ, so if m
+is the number of components of Γ, then 0 = νm < νm+1.
+In the coordinates ˆu = (u, r) 7→z = (y, r) for G, the metric g takes the
+form γij dui duj + dr2, and the Laplace-Beltrami operator ∆G = ∆Γ + ∆I.
+
+[PDF PAGE 10]
+Divorcing pressure from viscosity
+10
+Similar considerations as above apply to ∆G, except G has boundary. Whenever
+f ∈H1
+0(G) and ˜f ∈H2(G) we have
+Z
+G
+f∆G ˜f =
+Z
+G
+g(∇Gf, ∇G ˜f).
+(35)
+One extends ∆G to map H1(G) to H−1(G) by using this equation as a deﬁnition
+of ∆G ˜f as a functional on H1
+0(G).
+We introduce notation for L2 inner products and norms on G as follows:
+⟨f, ˜f⟩G =
+Z
+G
+f ˜f
+∥f∥2
+G =
+Z
+G
+|f|2,
+(36)
+⟨∇Γf, ∇Γ ˜f⟩G =
+Z
+G
+γ(∇Γf, ∇Γ ˜f),
+∥∇Γf∥2
+G =
+Z
+G
+γ(∇Γf, ∇Γf),
+(37)
+⟨∇If, ∇I ˜f⟩G =
+Z
+G
+(∂rf)(∂r ˜f),
+∥∇If∥2
+G =
+Z
+G
+(∂rf)2,
+(38)
+⟨∇Gf, ∇G ˜f⟩G =
+Z
+G
+g(∇Gf, ∇G ˜f) = ⟨∇Γf, ∇Γ ˜f⟩G + ⟨∇If, ∇I ˜f⟩G,
+(39)
+∥∇Gf∥2
+G =
+Z
+G
+g(∇Gf, ∇Gf) = ∥∇Γf∥2
+G + ∥∇If∥2
+G.
+(40)
+Lemma 1 Suppose f ∈H1(G) and ∆Gf = 0 on G = Γ × I where I = (0, s).
+Then, (i) there exists ˆβ0 ∈(0, 1) independent of f such that
+ˆβ0∥∇Γf∥2
+G ≤∥∇If∥2
+G,
+(41)
+and (ii)
+∥∇Γf∥2
+G ≤∥∇If∥2
+G + 12
+s2 ∥f −f0∥2
+G
+(42)
+whenever f0 is constant on Γi × (0, s) for every component Γi of Γ.
+Proof: Suppose ∆Gf = 0 on G.
+Since the coeﬃcient functions in (32) are
+C1, the aforementioned interior elliptic regularity results imply that that f ∈
+H2
+loc(G). For any r ∈(0, s), ﬁxing r yields a trace of f in H1(Γ), and as a function
+of r, we can regard f = f(y, r) as in the space L2([a, b], H2(Γ))∩H2([a, b], L2(Γ))
+for any closed interval [a, b] ⊂(0, s).
+Now, for each r we have the L2(Γ)-
+convergent expansion
+f(y, r) =
+X
+k
+ˆf(k, r)ψk(y)
+(43)
+where
+ˆf(k, r) =
+Z
+Γ
+f(y, r)ψk(y) dS(y).
+(44)
+For each k ∈N, the map r 7→ˆf(k, r) is in H2
+loc(0, s) and
+∂r ˆf(k, r) =
+Z
+Γ
+∂rf(y, r)ψk(y) dS(y).
+(45)
+
+[PDF PAGE 11]
+Divorcing pressure from viscosity
+11
+For any smooth ξ ∈C∞
+0 (0, s), taking ˜f(y, r) = ψk(y)ξ(r) we compute that
+∇Γ ˜f = ξ(r)∇Γψk,
+∂r ˜f = ψk∂rξ,
+(46)
+and so by (35), (28), and (34), we have
+0 =
+Z
+G
+(∆Gf) ˜f =
+Z
+I
+Z
+Γ
+
+γ(∇Γf, ∇Γ ˜f) + (∂rf)(∂r ˜f)
+
+=
+Z
+I
+ξ(r)
+Z
+Γ
+γ(∇Γf, ∇Γψk) +
+Z
+I
+(∂rξ)
+Z
+Γ
+(∂rf)ψk
+=
+Z
+I
+ξ(r)
+Z
+Γ
+f∆Γψk +
+Z
+I
+(∂rξ)∂r ˆf(k, r)
+=
+Z s
+0
+
+ξ(r)ν2
+k ˆf(k, r) + (∂rξ)∂r ˆf(k, r)
+
+dr.
+(47)
+Therefore ˆf(k, ·) is a weak solution of ∂2
+r ˆf = ν2
+k ˆf in H2
+loc(0, s) and hence is C2
+and it follows that whenever νk ̸= 0, there exist ak, bk such that
+ˆf(k, r) = ak sinh νkτ + bk cosh νkτ,
+τ = r −s/2.
+(48)
+Now
+∥f∥2
+G =
+X
+k
+Z s
+0
+| ˆf(k, r)|2 dr,
+(49)
+∥∇Γf∥2
+G =
+X
+k
+Z s
+0
+|νk ˆf(k, r)|2 dr,
+(50)
+∥∇If∥2
+G =
+X
+k
+Z s
+0
+|∂r ˆf(k, r)|2 dr.
+(51)
+Let γk =
+R s/2
+−s/2 sinh2 νkτ dτ. Then γk increases with k, and
+γk + s =
+Z s/2
+−s/2
+cosh2 νkτ dτ ≥
+Z s/2
+−s/2
+(1 + ν2
+kτ 2) dτ ≥ν2
+ks3
+12 .
+(52)
+Whenever νk ̸= 0 we get
+Z s
+0
+| ˆf(k, r)|2 dr = |ak|2γk + |bk|2(γk + s),
+(53)
+Z s
+0
+|∂r ˆf(k, r)|2 dr = ν2
+k(|ak|2(γk + s) + |bk|2γk),
+(54)
+and since ˆβ0(γk + s) ≤γk where ˆβ0 = γm+1/(γm+1 + s), it follows
+ˆβ0
+Z s
+0
+|νk ˆf(k, r)|2 dr ≤
+Z s
+0
+|∂r ˆf(k, r)|2 dr,
+(55)
+Z s
+0
+|νk ˆf(k, r)|2 dr ≤
+Z s
+0
+|∂r ˆf(k, r)|2 dr + 12
+s2
+Z s
+0
+| ˆf(k, r)|2 dr.
+(56)
+The results in (i) and (ii) follow by summing over k. □
+
+[PDF PAGE 12]
+Divorcing pressure from viscosity
+12
+2.4
+Global coordinates on Γ × (0, s)
+It will be important for comparison with the Laplacian on Ωs to coordinatize G
+for small s > 0 globally via the coordinate chart Ωs →G given by
+x 7→z = (y, r) = (x + Φ(x)⃗n(x), Φ(x)).
+(57)
+In these coordinates, the metric on G that is inherited from RN+1 has the
+representation gij dxi dxj with matrix elements given by
+gij = ∂zk
+∂xi
+∂zk
+∂xj = ∂yk
+∂xi
+∂yk
+∂xj + ∂r
+∂xi
+∂r
+∂xj .
+(58)
+Let us write ∂i = ∂/∂xi and let ∇f = (∂1f, . . . , ∂Nf) denote the usual gradient
+vector in RN. The components of ⃗n are ni = −∂iΦ and so ∂inj = ∂jni, meaning
+the matrix ∇⃗n is symmetric. Since |⃗n|2 = 1 we have ni∂jni = 0 = ni∂inj. Then
+the N × N matrix
+∂y
+∂x = I −⃗n⃗nt + Φ∇⃗n = (I −⃗n⃗nt)(I + Φ∇⃗n)(I −⃗n⃗nt),
+(59)
+and the matrix
+G = (gij) = (I −⃗n⃗nt)(I + Φ∇⃗n)2(I −⃗n⃗nt) + ⃗n⃗nt = (I + Φ∇⃗n)2.
+(60)
+With √g =
+√
+det G, the integral of a function f on G in terms of these
+coordinates is given by
+Z
+G
+f =
+Z
+Ωs
+f √g dx.
+(61)
+Given two C1 functions f, ˜f on G, we claim that the following formulae are
+valid in the coordinates from (57):
+g(∇Gf, ∇G ˜f) = (∇f)tG−1(∇˜f) = gij∂if∂j ˜f,
+(62)
+γ(∇Γf, ∇Γ ˜f) = (∇f)t(I −⃗n⃗nt)G−1(I −⃗n⃗nt)(∇˜f),
+(63)
+ι(∇If, ∇I ˜f) = (⃗n ·∇f)(⃗n ·∇˜f) = (∇f)t⃗n⃗nt(∇˜f).
+(64)
+Of course (62) simply expresses the metric in the x-coordinates from (57). To
+prove (64), ﬁrst note that along any curve τ 7→x(τ) satisfying ∂τx = ⃗n(x) we
+ﬁnd ∂τ⃗n(x) = nj∂jni = 0, so ⃗n(x) is constant and the curve is a straight line
+segment. Hence in the chart from (57), ⃗n(x) = ⃗n(y) and we have x = y −r⃗n(y).
+Given a C1 function f then, we ﬁnd that in these Ωs-coordinates,
+∂rf(y, r) = (∂rxj)(∂jf) = nj∂jf = ⃗n ·∇f,
+(65)
+and (64) follows from (31). Finally, (63) follows directly from (62) and (64)
+using (28) — since ⃗n⃗nt∇⃗n = 0 we have ⃗n⃗ntG = ⃗n⃗nt so ⃗n⃗nt = ⃗n⃗ntG−1 and
+hence
+(I −⃗n⃗nt)G−1(I −⃗n⃗nt) = G−1 −⃗n⃗nt.
+(66)
+
+[PDF PAGE 13]
+Divorcing pressure from viscosity
+13
+2.5
+Proof of Theorem 2
+Let β1 < 1. Suppose ∆p = 0 in Ωs. We may assume p ∈H1(Ωs) without loss
+of generality by establishing the result in subdomains where Φ(x) ∈(a, b) with
+[a, b] ⊂(0, s) and taking a →0, b →s. We write
+p = p1 + p2,
+where p1 ∈H1
+0(Ωs) is found by solving a weak form of ∆Gp1 = ∆Gp:
+⟨∇Gp1, ∇Gφ⟩G = ⟨∇Gp, ∇Gφ⟩G
+for all φ ∈H1
+0(Ωs).
+(67)
+For small s > 0, G = (gij) = I + O(s) and √g = 1 + O(s). Since ⟨∇p, ∇p1⟩= 0,
+taking φ = p1 we have
+∥∇Gp1∥2
+G =
+Z
+Ωs
+(∇p)t(G−1√g −I)∇p1 dx ≤Cs∥∇p∥Ωs∥∇Gp1∥G,
+(68)
+where C is a constant independent of s. By Poincar´e’s inequality we also have
+∥p1∥2
+G ≤s2
+π2 ∥∇Gp1∥2
+G
+(69)
+since the eigenvalues of ∆G on the product space Γ×[0, s] with Dirichlet bound-
+ary conditions all have the form µ = ν2
+k+j2π2/s2 for j, k ∈N, so that µ ≥π2/s2.
+Let us ﬁrst prove part (ii). For 0 < ε < 1, using (63), (61) and (37) we
+deduce
+∥(I −⃗n⃗nt)∇p∥2
+Ωs
+≤
+(1 + Cs)∥∇Γp∥2
+G
+≤
+(1 + Cs)
+ (1 + ε)∥∇Γp2∥2
+G + (1 + ε−1)∥∇Γp1∥2
+G
+
+≤
+(1 + Cs)(1 + ε)
+ ∥∇Γp2∥2
+G + ε−1C2s2∥∇p∥2
+Ωs
+
+. (70)
+Now p2 = p −p1 satisﬁes ∆Gp2 = 0 in Ωs and p2 ∈H1(G), hence for any p0
+constant on each component of Ωs we have
+∥∇Γp2∥2
+G
+≤
+∥∇Ip2∥2
+G + 12
+s2 ∥p2 −p0∥2
+G,
+(71)
+∥∇Ip2∥2
+G
+≤
+(1 + ε)∥∇Ip∥2
+G + (1 + ε−1)∥∇Ip1∥2
+G
+≤
+(1 + ε)(1 + Cs)
+ ∥⃗n ·∇p∥2
+Ωs + ε−1C2s2∥∇p∥2
+Ωs
+
+, (72)
+12
+s2 ∥p2 −p0∥2
+G
+≤
+24
+s2
+ ∥p −p0∥2
+G + ∥p1∥2
+G
+
+≤
+24
+s2 ∥p −p0∥2
+G + 24
+π2 ∥∇Gp1∥2
+G
+≤
+24
+s2 (1 + Cs)∥p −p0∥2
+Ωs + C2s2∥∇p∥2
+Ωs
+(73)
+Presuming Cs < 1
+3ε, assembling these estimates yields
+∥(I −⃗n⃗nt)∇p∥2
+Ωs ≤(1 + ε)4
+
+∥⃗n ·∇p∥2
+Ωs + 24
+s2 ∥p −p0∥2
+Ωs + ε∥∇p∥2
+Ωs
+
+≤(1 + ε)5
+
+∥⃗n ·∇p∥2
+Ωs + 24
+s2 ∥p −p0∥2
+Ωs + ε∥(I −⃗n⃗nt)∇p∥2
+Ωs
+
+,
+(74)
+
+[PDF PAGE 14]
+Divorcing pressure from viscosity
+14
+since |∇p|2 = |⃗n·∇p|2+|(I−⃗n⃗nt)∇p|2. Fixing ε > 0 small so that (1+ε)−5−ε >
+β1 proves part (ii).
+To prove part (i), instead of (71) we use
+ˆβ0∥∇Γp2∥2
+G ≤∥∇Ip2∥2
+G
+(75)
+(from part (i) of Lemma 1) together with (70) and (72) and obtain
+ˆβ0∥(I −⃗n⃗nt)∇p∥2
+Ωs
+≤
+(1 + ε)4
+
+∥⃗n ·∇p∥2
+Ωs + 2ε
+9 ∥∇p∥2
+Ωs
+
+≤
+(1 + ε)5  ∥⃗n ·∇p∥2
+Ωs + ε∥(I −⃗n⃗nt)∇p∥2
+Ωs
+
+. (76)
+Now taking ε > 0 so small that ε(1 + ε)5 < ˆβ0 ﬁnishes the proof. □
+3
+Analysis of the Stokes pressure
+The main purpose of this section is to prove Theorem 1. We also describe the
+range of the map ⃗u 7→∇pS from velocity ﬁelds to Stokes pressure gradients.
+For motivation for the proof of Theorem 1, the reader can proceed directly to
+section 3.3 at this point. Here, we ﬁrst establish some key preliminary results.
+3.1
+An L2 estimate
+The following L2 estimate on the Stokes pressure will be used to obtain the full
+result of Theorem 1 for arbitrary β > 2
+3. It is not needed to prove the weaker
+statement that (13) holds for some β < 1.
+Lemma 2 Let Ω⊂RN (N ≥2) be any bounded connected domain with C1,1
+boundary.
+For any ε > 0, there is a constant C ≥0 so that for any ⃗u ∈
+H2 ∩H1
+0(Ω, RN), the associated Stokes pressure pS deﬁned by (10) with zero
+average satisﬁes
+∥pS∥≤ε∥∆⃗u∥+ C∥⃗u∥.
+(77)
+Proof: For any φ ∈L2(Ω), deﬁne ψ by
+∆ψ = φ −¯φ,
+⃗n · ∇ψ
+
+Γ = 0,
+(78)
+where ¯φ is the average value of φ over Ω. Recall ¯pS = 0. Then,
+
+pS, φ
+
+=
+
+pS, φ −¯φ
+
+=
+
+pS, ∆ψ
+
+= −
+
+∇pS, ∇ψ
+
+.
+(79)
+From (22), we know
+
+∇pS, ∇ψ
+
+=
+
+∇× ⃗u,⃗n × ∇ψ
+
+Γ when N = 2 or 3. For
+general N, using the notation ∂i := ∂/∂xi and automatic summation upon
+repeated indices, from (19) we derive
+
+∇pS, ∇ψ
+
+= 1
+2
+Z
+Γ
+(∂jui −∂iuj)(nj∂iψ −ni∂jψ).
+(80)
+
+[PDF PAGE 15]
+Divorcing pressure from viscosity
+15
+Plug (80) into (79), take the absolute value and use the trace theorem to get
+|
+
+pS, φ
+
+| ≤c0∥∇⃗u∥L2(Γ)∥∇ψ∥L2(Γ) ≤c1∥⃗u∥H3/2(Ω)∥ψ∥H3/2(Ω).
+(81)
+By the regularity theory for Poisson’s equation (78),
+∥ψ∥H3/2(Ω) ≤c2∥φ −¯φ∥≤c2∥φ∥.
+(82)
+By a standard interpolation theorem, for any δ > 0, there is a constant c, so
+∥⃗u∥H3/2(Ω) ≤δ∥∆⃗u∥+ c∥⃗u∥.
+(83)
+Plugging (82) and (83) into (81), we get
+|
+
+pS, φ
+
+| ≤
+ δ∥∆⃗u∥+ c∥⃗u∥
+
+c1c2∥φ∥.
+(84)
+Thus,
+∥pS∥= sup
+φ∈L2
+|
+
+pS, φ
+
+|
+∥φ∥
+≤ε∥∆⃗u∥+ cc1c2∥⃗u∥.
+□
+(85)
+3.2
+Identities at the boundary
+A key part of the proof of Theorem 1 involves boundary values of two quantities
+that involve the decomposition of ⃗u = (I −⃗n⃗nt)⃗u + ⃗n⃗nt⃗u into parts parallel and
+normal to the boundary. Our goal in this subsection is to prove the following.
+Lemma 3 Let Ω⊂RN be a bounded domain with boundary Γ of class C3.
+Then for any ⃗u ∈H2(Ω, RN) with ⃗u|Γ = 0, the following is valid on Γ:
+(i) ∇·
+ (I −⃗n⃗nt)⃗u
+
+= 0 in H1/2(Γ).
+(ii) ⃗n · (∆−∇∇·)
+ ⃗n⃗nt⃗u
+
+= 0 in H−1/2(Γ).
+The proof will reduce to the case ⃗u ∈C2(¯Ω, RN), due to the following density
+result.
+Lemma 4 Let Ω⊂RN be a bounded domain with boundary Γ of class C2,α
+where 0 < α < 1. Then for any ⃗u ∈H2 ∩H1
+0(Ω, RN), there exists a sequence
+⃗uk ∈C2,α(¯Ω) such that ⃗uk|Γ = 0 and ∥⃗uk −⃗u∥H2(Ω) →0.
+Proof: Deﬁne ⃗f = ∆⃗u. Since ⃗f ∈L2, we can ﬁnd a sequence ⃗fk ∈C1(¯Ω) so
+that ∥⃗fk −⃗f∥L2 →0. Construct ⃗uk by solving
+∆⃗uk = ⃗fk,
+⃗uk
+
+∂Ω= 0.
+Classical elliptic regularity theory in H¨older spaces (see [GT], theorem 15.13)
+says that a unique ⃗uk exists and is in C2,α(¯Ω). By standard regularity theory
+in Sobolev spaces,
+∥⃗uk −⃗u∥H2 ≤C∥⃗fk −⃗f∥L2 →0.
+□
+
+[PDF PAGE 16]
+Divorcing pressure from viscosity
+16
+Proof of Lemma 3: To begin, recall ⃗n = −∇Φ. Equality of mixed partial
+derivatives yields ∂jni = ∂inj for all i, j = 1, . . . , N. Together with the fact
+nini = 1, we infer that for small s > 0, throughout Ωs we have
+ni∂jni = 0
+and
+ni∂inj = 0.
+(86)
+(i) First, for any f ∈C1(¯Ω), if f = 0 on Γ then ∇f ∥⃗n on Γ, which means
+(I −⃗n⃗nt)∇f = 0,
+or
+(∂k −nknj∂j)f = 0
+for k = 1, . . . , N.
+(87)
+Now suppose ⃗u ∈C2(¯Ω, RN) with ⃗u = 0 on Γ. Then, after taking derivatives in
+Ωs for some s > 0 and then taking the trace on Γ, using (87) we get
+∇·
+ (I −⃗n⃗nt)⃗u
+
+= ∂j
+ uj −njnkuk
+
+= ∂juj −njnk∂juk = ∂juj −∂kuk = 0.
+For general ⃗u ∈H2(Ω, RN) with ⃗u|Γ = 0, the expression ∇·
+ (I −⃗n⃗nt)⃗u
+
+is
+in H1(Ωs) for small s > 0 and hence is in H1/2(Γ) by a trace theorem. After
+approximating ⃗u using Lemma 4 we obtain the result in (i).
+(ii) At ﬁrst we suppose ⃗u ∈C2(¯Ω, RN) with ⃗u = 0 on Γ. We claim in fact
+that for any f ∈C2(¯Ω) with f
+
+Γ = 0,
+⃗n · (∆−∇∇·)(⃗nf) = 0
+on Γ.
+(88)
+This yields (ii) by taking f = ⃗n · ⃗u. We prove (88) in two steps.
+1. The formula in (i) holds in C(Γ) if ⃗u is C1. Since I −⃗n⃗nt = (I −⃗n⃗nt)2,
+we can use ⃗u = (I −⃗n⃗nt)∇f in (i) to ﬁnd that
+∇·
+ (I −⃗n⃗nt)∇f
+
+= 0
+on Γ.
+(89)
+2. Using (86) it is easy to verify the following identities in Ωs:
+⃗n · ∆(⃗nf)
+=
+∆f + f ⃗n · ∆⃗n,
+(90)
+⃗n ·∇∇· (⃗nf)
+=
+(⃗n⃗nt) : ∇2f + (∇· ⃗n)⃗n ·∇f + f⃗n ·∇∇· ⃗n,
+(91)
+∇· (⃗n⃗nt∇f)
+=
+(⃗n⃗nt) : ∇2f + (∇· ⃗n)⃗n ·∇f.
+(92)
+Here (⃗n⃗nt) : ∇2f := ninj∂i∂jf. It directly follows that
+⃗n · (∆−∇∇·)(⃗nf) = ∇· (I −⃗n⃗nt)∇f + f⃗n · (∆−∇∇·)⃗n.
+(93)
+Using this with (89) proves (88), and establishes (ii) when ⃗u ∈C2(¯Ω) with ⃗u = 0
+on Γ.
+To establish (ii) for arbitrary ⃗u ∈H2(Ω, RN), we restrict to Ωs for small
+s and let ⃗a = (∆−∇∇·)(⃗n⃗nt⃗u). Then ⃗a ∈L2(Ωs, RN) and ∇· ⃗a = 0 in the
+sense of distributions, so ⃗a ∈H(div; Ωs) and a well-known trace theorem (see
+[GR], theorem 2.5) yields that the map H2(Ωs, RN) →H(div; Ωs) →H−1/2(Γ)
+given by ⃗u 7→⃗a 7→⃗n · ⃗a is continuous. To conclude the proof, simply apply the
+approximation lemma above to infer ⃗n · ⃗a|Γ = 0. □
+
+[PDF PAGE 17]
+Divorcing pressure from viscosity
+17
+3.3
+Identities for the Stokes pressure
+Given ⃗u ∈H2 ∩H1
+0(Ω, RN), recall that P(∇∇· ⃗u) = 0, so that the Stokes
+pressure deﬁned in (10) satisﬁes
+∇pS = ∆⃗u −∇∇· ⃗u −P∆⃗u = (I −P)(∆−∇∇·)⃗u.
+(94)
+Also recall that whenever ⃗a ∈L2(Ω, RN) and ∇· ⃗a ∈L2(Ω), ⃗n · ⃗a ∈H−1/2(Γ)
+by the trace theorem for H(div; Ω). If ∇· ⃗a = 0 and ⃗n · ⃗a|Γ = 0, then we have
+
+⃗a, ∇φ
+
+= 0 for all φ ∈H1(Ω) and this means (I −P)⃗a = 0. Thus, the Stokes
+pressure is not aﬀected by any part of the velocity ﬁeld that contributes nothing
+to ⃗n · ⃗a|Γ where ⃗a = (∆−∇∇·)⃗u. Indeed, this means that the Stokes pressure
+is not aﬀected by the part of the velocity ﬁeld in the interior of Ωaway from
+the boundary, nor is it aﬀected by the normal component of velocity near the
+boundary, since ⃗n · (∆−∇∇·)(⃗n⃗nt⃗u)|Γ = 0 by Lemma 3.
+This motivates us to focus on the part of velocity near and parallel to the
+boundary. We make the following decomposition. Let ρ : [0, ∞) →[0, 1] be a
+smooth decreasing function with ρ(t) = 1 for t < 1
+2 and ρ(t) = 0 for t ≥1. For
+small s > 0, the cutoﬀfunction given by ξ(x) = ρ(Φ(x)/s) is C3, with ξ = 1
+when Φ(x) < 1
+2s and ξ = 0 when Φ(x) ≥s. Then we can write
+⃗u = ⃗u⊥+ ⃗u∥
+(95)
+where
+⃗u⊥= (1 −ξ)⃗u + ξ⃗n⃗nt⃗u,
+⃗u∥= ξ(I −⃗n⃗nt)⃗u.
+(96)
+Since ⃗u⊥= (⃗n⃗nt)⃗u in Ωs/2, with ⃗a⊥= (∆−∇∇·)⃗u⊥we have
+⃗a⊥∈L2(Ω, RN),
+∇· ⃗a⊥= 0
+and
+⃗n · ⃗a⊥|Γ = 0
+(97)
+by Lemma 3(ii). Hence
+
+⃗a⊥, ∇φ
+
+= 0 for all φ ∈H1(Ω), that is,
+(I −P)(∆−∇∇·)⃗u⊥= 0.
+(98)
+Combining this with (94) and (95) proves part (i) of the following.
+Lemma 5 Let Ω⊂RN be a bounded domain with C3 boundary, and let ⃗u ∈
+H2 ∩H1
+0(Ω, RN).
+Let pS and ⃗u∥be deﬁned as in (94) and (96) respectively.
+Then
+(i) The Stokes pressure is determined by ⃗u∥according to the formula
+∇pS = (I −P)(∆−∇∇·)⃗u∥.
+(99)
+(ii) For any q ∈H1(Ω) that satisﬁes ∆q = 0 in the sense of distributions,
+
+∆⃗u∥−∇pS, ∇q
+
+= 0.
+(100)
+(iii) In particular we can let q = pS in (ii), so
+
+∆⃗u∥−∇pS, ∇pS
+
+= 0 and
+∥∆⃗u∥∥2 = ∥∆⃗u∥−∇pS∥2 + ∥∇pS∥2.
+(101)
+
+[PDF PAGE 18]
+Divorcing pressure from viscosity
+18
+Proof: We already proved (i). For (ii), note by Lemma 3(i) we have
+∇· ⃗u∥|Γ = 0,
+(102)
+so ∇· ⃗u∥∈H1
+0(Ω), thus
+
+∇∇· ⃗u∥, ∇q
+
+= −
+
+∇· ⃗u∥, ∆q
+
+= 0. Now (i) entails
+
+∇pS, ∇q
+
+=
+
+∆⃗u∥, ∇q
+
+.
+(103)
+This proves (ii), and then (iii) follows by the L2 orthogonality. □
+3.4
+Proof of Theorem 1
+Let ε > 0 and β = 2
+3 + ε. We ﬁx β1 < 1 such that 1 + ε0 := β(1 + 1
+2β2
+1) > 1,
+and ﬁx s > 0 small so Theorem 2 (ii) applies in Ωs with this β1.
+Let ⃗u ∈
+H2 ∩H1
+0(Ω, RN) and deﬁne the Stokes pressure ∇pS by (10) and the decompo-
+sition ⃗u = ⃗u⊥+⃗u∥as in the previous subsection. Then by part (iii) of Lemma 5
+we have
+∥∆⃗u∥2 = ∥∆⃗u⊥∥2 + 2
+
+∆⃗u⊥, ∆⃗u∥
+
++ ∥∆⃗u∥−∇pS∥2 + ∥∇pS∥2.
+(104)
+We will establish the Theorem with the help of two further estimates.
+Claim 1: For any ε1 > 0, there exists a constant C1 > 0 independent of ⃗u such
+that
+
+∆⃗u⊥, ∆⃗u∥
+
+≥−ε1∥∆⃗u∥2 −C1∥∇⃗u∥2.
+(105)
+Claim 2: For any ε1 > 0 there exists a constant C2 independent of ⃗u such that
+∥∆⃗u∥−∇pS∥2 ≥β2
+1
+2 ∥∇pS∥2 −ε1∥∆⃗u∥2 −C2∥∇⃗u∥2.
+(106)
+Proof of claim 1: From the deﬁnitions in (96), we have
+∆⃗u⊥= ξ⃗n⃗nt∆⃗u + (1 −ξ)∆⃗u + R1,
+∆⃗u∥= ξ(I −⃗n⃗nt)∆⃗u + R2,
+(107)
+where ∥R1∥+ ∥R2∥≤C∥∇⃗u∥with C independent of ⃗u.
+Since I −⃗n⃗nt =
+(I −⃗n⃗nt)2,
+ ξ⃗n⃗nt∆⃗u + (1 −ξ)∆⃗u
+
+·
+ ξ(I −⃗n⃗nt)∆⃗u
+
+= 0 + ξ(1 −ξ)|(I −⃗n⃗nt)∆⃗u|2 ≥0.
+This means the leading term of
+
+∆⃗u⊥, ∆⃗u∥
+
+is non-negative.
+Using the in-
+equality |
+
+a, b
+
+| ≤(ε1/C)∥a∥2 + (4C/ε1)∥b∥2 and the bounds on R1 and R2 to
+estimate the remaining terms, it is easy to obtain (105).
+Proof of claim 2: Recall that ⃗u∥is supported in Ωs, and note
+∆⃗u∥= ξ(I −⃗n⃗nt)∆⃗u + R3
+(108)
+where ∥R3∥≤C∥∇⃗u∥. Since ⃗n · (I −⃗n⃗nt)∆⃗u = 0 we ﬁnd
+∥⃗n · ∆⃗u∥∥Ωs ≤C2∥∇⃗u∥
+(109)
+
+[PDF PAGE 19]
+Divorcing pressure from viscosity
+19
+with C2 > 0 independent of ⃗u. We use |a + b|2 ≥(1 −ε2)|b|2 −|a|2/ε2 to get
+∥∆⃗u∥−∇pS∥2
+Ω≥
+Z
+Ωc
+s
+|∇pS|2 +
+Z
+Ωs
+|⃗n · (∆⃗u∥−∇pS)|2
+≥
+Z
+Ωcs
+|∇pS|2 + (1 −ε2)
+Z
+Ωs
+|⃗n · ∇pS|2 −1
+ε2
+Z
+Ωs
+|⃗n · ∆⃗u∥|2.
+(110)
+Next we use part (ii) of Theorem 2 with p0 = 0 and with β1
+R
+Ωs |⃗n ·∇p|2 added
+to both sides, together with Lemma 2 and Poincar´e’s inequality, to deduce that
+β1
+2
+Z
+Ωs
+|∇pS|2 ≤
+Z
+Ωs
+|⃗n ·∇pS|2 + ε1
+Z
+Ωs
+|∆⃗u|2 + C
+Z
+Ωs
+|∇⃗u|2.
+(111)
+Taking 1 −ε2 = β1 and combining (109), (110) and (111) establishes Claim 2.
+Now we conclude the proof of the theorem. Combining the two claims with
+(104), we get
+(1 + 3ε1)∥∆⃗u∥2 ≥
+
+1 + β2
+1
+2
+
+∥∇pS∥2 −(C2 + 2C1)∥∇⃗u∥2.
+(112)
+Multiplying by β and taking ε1 > 0 so that 3ε1 < ε0 concludes the proof. □
+3.5
+The space of Stokes pressures
+According to (21)–(22), the space of Stokes pressures, obtainable via (10) from
+velocity ﬁelds ⃗u ∈H2 ∩H1
+0(Ω, RN), can be characterized as the space
+Sp := {p ∈H1(Ω)/R | ∆p = 0 in Ωand ⃗n ·∇p|Γ ∈SΓ},
+(113)
+where SΓ is the subspace of H−1/2(Γ) given by
+SΓ := {f = ⃗n · (∆−∇∇·)⃗u|Γ | ⃗u ∈H2 ∩H1
+0(Ω, RN)}.
+(114)
+The Stokes pressure p with zero average is determined uniquely by f = ⃗n·∇p|Γ ∈
+SΓ, with ∥p∥H1(Ω) ≤C∥f∥H−1/2(Γ) by the Lax-Milgram lemma.
+The space SΓ may be characterized as follows.
+Theorem 3 Assume Ω⊂RN is a bounded, connected domain and its boundary
+Γ is of class C3. Denote the connected components of Γ by Γi, i = 1, . . . , m.
+Then
+SΓ = {f ∈H−1/2(Γ) |
+Z
+Γi
+f = 0 for i = 1, . . . , m},
+and moreover, the map ⃗u 7→⃗n · (∆−∇∇·)⃗u|Γ from H2 ∩H1
+0(Ω, RN) to SΓ
+admits a bounded right inverse.
+Proof.
+First we check the necessity of the integral conditions.
+Let u ∈
+H2 ∩H1
+0(Ω, RN) and let f = ⃗n · (∆−∇∇·)⃗u|Γ. For each connected compo-
+nent Γi of Γ, there is an si > 0 small enough and a smooth cut-oﬀfunction ρi
+
+[PDF PAGE 20]
+Divorcing pressure from viscosity
+20
+deﬁned in Ωwhich satisﬁes ρi(x) = 1 when dist(x, Γi) < si and ρi(x) = 0 when
+dist(x, Γj) < si for all j ̸= i. Let ⃗a = (∆−∇∇·)(ρi⃗u). Then ⃗a ∈L2(Ω, RN)
+and ∇· ⃗a = 0, so
+Z
+Γi
+f =
+Z
+Γ
+⃗n · ⃗a =
+Z
+Ω
+∇· ⃗a = 0.
+(115)
+Next, let f ∈H−1/2(Γ) with
+R
+Γi f = 0 for all i. Treating each boundary
+component separately, we can then solve the problem
+∆Γψ = −f
+on Γ,
+Z
+Γi
+ψ = 0
+for i = 1, . . . , m,
+(116)
+where ∆Γ is the (positive) Laplace-Beltrami operator on Γ. Denote the mapping
+f 7→ψ by T . Then T : H−1(Γ) →H1(Γ) is bounded ([Au, theorem 1.71, theo-
+rem 4.7], [Ta, p. 306, Proposition 1.6]). Also T : L2(Γ) →H2(Γ) is bounded, by
+elliptic regularity theory [Ta, p. 306, Proposition 1.6]. So, interpolation implies
+(see [LM, vol I, p. 37, Remark 7.6])
+∥ψ∥H3/2(Γ) ≤C∥f∥H−1/2(Γ).
+(117)
+Now by an inverse trace theorem [RR, Theorem 6.109], there exists a map
+ψ 7→q ∈H3(Ω) with
+q = 0 and ⃗n ·∇q = ψ
+on Γ,
+∥q∥H3(Ω) ≤C∥ψ∥H3/2(Γ).
+(118)
+We may assume q is supported in a small neighborhood of Γ. Deﬁne
+⃗u = (I −⃗n⃗nt)∇q.
+(119)
+Then f 7→⃗u is bounded from SΓ to H2 ∩H1
+0(Ω, RN). We claim
+⃗n · (∆−∇∇·)⃗u = f
+on Γ.
+(120)
+The proof of this claim amounts to showing, by calculations similar to those
+in the proof of Lemma 3, that the normal derivative ⃗n·∇and normal projection
+⃗n⃗nt commute on the boundary with the tangential gradient and divergence
+operators (I −⃗n⃗nt)∇and ∇· (I −⃗n⃗nt) for the functions involved.
+First, since ⃗n · ⃗u = 0, by expanding ∆(⃗n · ⃗u) we get
+⃗n · ∆⃗u = −(∆⃗n) · ⃗u −2∇⃗n : ∇⃗u = 0
+on Γ,
+(121)
+since for each i, ∇ni is tangential and ∇ui is normal to Γ — indeed, using
+∂jni = ∂inj and (86) and (87), we have that
+∇⃗n : ∇⃗u = (∂jni)(∂jui) = (∂inj)(njnk∂kui) = 0
+on Γ.
+(122)
+Next we calculate in Ωthat
+⃗n ·∇∇· ⃗u = ∇· (⃗n ·∇⃗u) −∇⃗n : ∇⃗u.
+(123)
+
+[PDF PAGE 21]
+Divorcing pressure from viscosity
+21
+Note that ⃗n ·∇(⃗n⃗nt) = 0 by (86), so ⃗n ·∇commutes with I −⃗n⃗nt in Ω. Then
+since ⃗u = (I −⃗n⃗nt)⃗u from (119) we get
+⃗n ·∇⃗u = (I −⃗n⃗nt)(⃗n ·∇)⃗u = (I −⃗n⃗nt)(⃗n ·∇)∇q.
+(124)
+Now
+(⃗n ·∇)∇q = ∇(⃗n ·∇q) −⃗a
+(125)
+where
+ai = (∂inj)(∂jq) = (∂jni)(∂jq)
+(126)
+This quantity lies in H2(Ω) and vanishes on Γ since ∇q = (⃗n⃗nt)∇q on Γ. (This
+can be proved by approximation using Lemma 4.) Using part (i) of Lemma 3,
+we have that ∇·(I −⃗n⃗nt)⃗a = 0 on Γ. Combining (121)–(125) we conclude that
+⃗n · (∆−∇∇·)⃗u = −∇· (I −⃗n⃗nt)∇(⃗n ·∇q)
+on Γ.
+(127)
+But it is well known that at any point x where Φ(x) = r ∈(0, s), for any smooth
+function φ on Ωs,
+∇· (I −⃗n⃗nt)∇φ = ∆φ −(∇· ⃗n)(⃗n ·∇φ) −(⃗n ·∇)2φ = −∆Γr(φ|Γr).
+(128)
+where ∆Γr is the Laplace-Beltrami operator on Γr. So taking r →0 we see that
+the right hand side of (127) is exactly −∆Γ(⃗n ·∇q|Γ). So by (116) and (118) we
+have established the claim in (120). This ﬁnishes the proof. □
+Remark 1. Given a velocity ﬁeld ⃗u ∈H2 ∩H1
+0(Ω, R3), the associated Stokes
+pressure is determined by the normal component at the boundary of the curl
+of the vorticity ω = ∇× ⃗u, which is a vector ﬁeld in H1(Ω, R3). A question
+related to Theorem 3 is whether the space SΓ of such boundary values ⃗n· ∇× ω
+is constrained in any way, as compared to the space of boundary values ⃗n·∇×⃗v
+where ⃗v ∈H1(Ω, R3) is arbitrary.
+The answer is no. In [Te1, Appendix I, Proposition 1.3], Temam proves
+∇× H1(Ω, R3) = {⃗g ∈L2(Ω, R3) | ∇· ⃗g = 0,
+Z
+Γi
+⃗n · ⃗g = 0 ∀i}.
+(129)
+Clearly SΓ ⊂⃗n · ∇× H1(Ω, R3) by (114).
+For the other direction, let ⃗v ∈
+H1(Ω, R3) be arbitrary, and let f = ⃗n · ∇× ⃗v|Γ. By (129) or otherwise, f ∈
+H−1/2(Γ) and
+R
+Γi f = 0 for all i, hence f ∈SΓ. This shows that for N = 3,
+SΓ = ⃗n · ∇× H1(Ω, R3).
+(130)
+A related point is that for N = 3, the space of Stokes pressure gradients
+∇Sp can be characterized as the space of simultaneous gradients and curls.
+Theorem 4 Assume Ω⊂R3 is a bounded, connected domain and its boundary
+Γ is of class C3. Then
+∇Sp = ∇H1(Ω) ∩∇× H1(Ω, R3).
+(131)
+
+[PDF PAGE 22]
+Divorcing pressure from viscosity
+22
+Proof. Indeed, ∇Sp ⊂∇× H1 by (129) and Theorem 3. On the other hand, if
+⃗g = ∇×⃗v = ∇p then ∆p = ∇·⃗g = 0 and ⃗n·∇p|Γ ∈SΓ by (129) and Theorem 3,
+so ∇p ∈∇Sp. □
+Remark 2. In the book [Te1] (see Theorem 1.5) Temam establishes the or-
+thogonal decomposition L2(Ω, RN) = H ⊕H1 ⊕H2, which means that for any
+g ∈L2(Ω, RN),
+⃗g = P⃗g + ∇q + ∇∆−1∇· ⃗g,
+(132)
+where q satisﬁes ∆q = 0 and ⃗n · ∇q|Γ = ⃗n · (⃗g −∇∆−1∇· ⃗g). By contrast, we
+have shown
+⃗g = P⃗g + ∇p + ∇∇· ∆−1⃗g
+(133)
+where p satisﬁes ∆p = 0 and ⃗n · ∇p|Γ = ⃗n · (⃗g −∇∇· ∆−1⃗g), i.e., p is the Stokes
+pressure associated with ∆−1⃗g. Thus the map ⃗g 7→∇p −∇q is the commutator
+∇∆−1∇·−∇∇·∆−1. The decomposition (132) is orthogonal, and q satisﬁes
+
+⃗n·
+∇q, 1
+
+Γ = 0. In our decomposition (133), the gradient terms are not orthogonal,
+but the Stokes pressure term enjoys the bounds stated in Corollary 1, and if Γ
+is not connected, it has the extra property that
+
+⃗n · ∇p, 1
+
+Γi = 0 for every i.
+4
+Unconditional stability of time discretization
+with pressure explicit
+In this section we exploit Theorem 1 to establish the unconditional stability of
+a simple time discretization scheme for the initial-boundary-value problem for
+(6), our unconstrained formulation of the Navier-Stokes equations. We focus
+here on the case of two and three dimensions. In subsequent sections we shall
+proceed to prove an existence and uniqueness theorem based on this stability
+result.
+Let Ωbe a bounded domain in RN with boundary Γ of class C3. We consider
+the initial-boundary-value problem
+∂t⃗u + ⃗u·∇⃗u + ∇pE + ν∇pS = ν∆⃗u + ⃗f
+(t > 0, x ∈Ω),
+(134)
+⃗u = 0
+(t ≥0, x ∈Γ),
+(135)
+⃗u = ⃗uin
+(t = 0, x ∈Ω).
+(136)
+We assume ⃗uin ∈H1
+0(Ω, RN) and ⃗f ∈L2(0, T ; L2(Ω, RN)) for some given T > 0.
+As before, the Euler and Stokes pressures pE and pS are deﬁned by the relations
+P(⃗u·∇⃗u −⃗f) = ⃗u·∇⃗u −⃗f + ∇pE,
+(137)
+P(−∆⃗u) = −∆⃗u + ∇(∇· ⃗u) + ∇pS.
+(138)
+Theorem 1 tells us that the Stokes pressure can be strictly controlled by
+the viscosity term.
+This allows us to treat the pressure term explicitly, so
+that the update of pressure is decoupled from that of velocity. This can make
+corresponding fully discrete numerical schemes very eﬃcient (see [JL]). Here,
+
+[PDF PAGE 23]
+Divorcing pressure from viscosity
+23
+through Theorem 1, we will prove that the following spatially continuous time
+discretization scheme has surprisingly good stability properties:
+⃗un+1 −⃗un
+∆t
+−ν∆⃗un+1 = ⃗f n −⃗un · ∇⃗un −∇pn
+E −ν∇pn
+S ,
+(139)
+∇pn
+E = (I −P)(⃗f n −⃗un · ∇⃗un),
+(140)
+∇pn
+S = (I −P)∆⃗un −∇(∇· ⃗un),
+(141)
+⃗un
+Γ = 0.
+(142)
+We set
+⃗f n = 1
+∆t
+Z (n+1)∆t
+n∆t
+⃗f(t) dt,
+(143)
+and take ⃗u0 ∈H2 ∩H1
+0(Ω, RN) to approximate ⃗uin in H1
+0(Ω, RN). It is evident
+that for all n = 0, 1, 2, . . ., given ⃗un ∈H2 ∩H1
+0 one can determine ∇pn
+E ∈L2
+and ∇pn
+S ∈L2 from (140) and (141) and advance to time step n + 1 by solving
+(139) as an elliptic boundary-value problem with Dirchlet boundary values to
+obtain ⃗un+1.
+This simple scheme is related to one studied by Timmermans et al. [Ti]. In
+the time-diﬀerencing scheme described in [Ti] for the linear Stokes equation, the
+pressure pn = pn
+E + νpn
+S is updated in nearly equivalent fashion, if one omits the
+velocity correction step that imposes zero divergence, and uses ﬁrst-order time
+diﬀerences in (15) and (18) of [Ti]. Also see [Pe, GuS, JL].
+Let us begin making estimates — our main result is stated as Theorem 5
+below. Dot (139) with −∆un+1 and use (140) and ∥I −P∥≤1 to obtain
+1
+2∆t
+
+∥∇⃗un+1∥2 −∥∇⃗un∥2 + ∥∇⃗un+1 −∇⃗un∥2
++ ν∥∆⃗un+1∥2
+≤∥∆⃗un+1∥
+
+2∥⃗f n −⃗un · ∇⃗un∥+ ν∥∇pn
+S ∥
+
+≤ε1
+2 ∥∆⃗un+1∥2 + 2
+ε1
+∥⃗f n −⃗un · ∇⃗un∥2 + ν
+2
+ ∥∆⃗un+1∥2 + ∥∇pn
+S ∥2
+(144)
+for any ε1 > 0. (This is not optimal for ∇pn
+E but is convenient.) This gives
+1
+∆t
+
+∥∇⃗un+1∥2 −∥∇⃗un∥2
++ (ν −ε1)∥∆⃗un+1∥2
+≤8
+ε1
+
+∥⃗f n∥2 + ∥⃗un · ∇⃗un∥2
++ ν∥∇pn
+S ∥2.
+(145)
+Fix any β with 2
+3 < β < 1. By Theorem 1 one has
+ν∥∇pn
+S ∥2 ≤νβ∥∆⃗un∥2 + νCβ∥∇⃗un∥2.
+(146)
+
+[PDF PAGE 24]
+Divorcing pressure from viscosity
+24
+Using this in (145), one obtains
+1
+∆t
+
+∥∇⃗un+1∥2−∥∇⃗un∥2
++ (ν −ε1)
+ ∥∆⃗un+1∥2 −∥∆⃗un∥2
++ (ν −ε1 −νβ)∥∆⃗un∥2
+≤8
+ε1
+ ∥⃗f n∥2 + ∥⃗un · ∇⃗un∥2
++ νCβ∥∇⃗un∥2.
+(147)
+At this point there are no remaining diﬃculties with controlling the pres-
+sure. It remains only to use the viscosity to control the nonlinear term. We
+focus on the physically most interesting cases N = 2 and 3. We make use of
+Ladyzhenskaya’s inequalities [La]
+Z
+RN g4 ≤2
+Z
+RN g2
+ Z
+RN |∇g|2
+
+(N = 2),
+(148)
+Z
+RN g4 ≤4
+Z
+RN g2
+1/2 Z
+RN |∇g|2
+3/2
+(N = 3),
+(149)
+valid for g ∈H1(RN) with N = 2 and 3 respectively, together with the fact that
+the standard bounded extension operator H1(Ω) →H1(RN) is also bounded in
+L2 norm, to infer that for all g ∈H1(Ω),
+∥g∥2
+L4 ≤C∥g∥L2∥g∥H1
+(N = 2),
+(150)
+∥g∥2
+L3 ≤∥g∥2/3
+L2 ∥g∥4/3
+L4 ≤C∥g∥L2∥g∥H1
+(N = 3).
+(151)
+Using that H1(Ω) embeds into L4 and L6, these inequalities lead to the estimates
+Z
+Ω
+|⃗un · ∇⃗un|2 ≤
+(
+∥⃗un∥2
+L4∥∇⃗un∥2
+L4 ≤C∥u∥L2∥∇⃗un∥2
+L2∥∇⃗un∥H1
+(N = 2),
+∥⃗un∥2
+L6∥∇⃗un∥2
+L3 ≤C∥∇⃗un∥3
+L2∥∇⃗un∥H1
+(N = 3).
+(152)
+By the elliptic regularity estimate ∥∇⃗u∥H1 ≤∥⃗u∥H2 ≤C∥∆⃗u∥, we conclude
+∥⃗un · ∇⃗un∥2 ≤
+(
+ε2∥∆⃗un∥2 + 4Cε−1
+2 ∥⃗un∥2∥∇⃗un∥4
+(N = 2),
+ε2∥∆⃗un∥2 + 4Cε−1
+2 ∥∇⃗un∥6
+(N = 2 or 3).
+(153)
+for any ε2 > 0. Plug this into (147) and take ε1, ε2 > 0 satisfying ν −ε1 > 0
+and ε := ν −ε1 −νβ −8ε2/ε1 > 0. We get
+1
+∆t
+ ∥∇⃗un+1∥2 −∥∇⃗un∥2
++ (ν −ε1)
+ ∥∆⃗un+1∥2 −∥∆⃗un∥2
++ ε∥∆⃗un∥2
+≤8
+ε1
+∥⃗f n∥2 + 32C
+ε1ε2
+∥∇⃗un∥6 + νCβ∥∇⃗un∥2.
+(154)
+A simple discrete Gronwall-type argument leads to our main stability result:
+
+[PDF PAGE 25]
+Divorcing pressure from viscosity
+25
+Theorem 5 Let Ωbe a bounded domain in RN (N = 2 or 3) with C3 bound-
+ary, and assume ⃗f ∈L2(0, T ; L2(Ω, RN)) for some given T > 0 and ⃗u0 ∈
+H1
+0(Ω, RN)∩H2(Ω, RN). Consider the time-discrete scheme (139)-(143). Then
+there exist positive constants T ∗and C3, such that whenever n∆t ≤T ∗, we have
+sup
+0≤k≤n
+∥∇⃗uk∥2 +
+n
+X
+k=0
+∥∆⃗uk∥2∆t ≤C3,
+(155)
+n−1
+X
+k=0
+ 
+⃗uk+1 −⃗uk
+∆t
+
+2
++ ∥⃗uk · ∇⃗uk∥2
+!
+∆t ≤C3.
+(156)
+The constants T ∗and C3 depend only upon Ω, ν and
+M0 := ∥∇⃗u0∥2 + ν∆t∥∆⃗u0∥2 +
+Z T
+0
+∥⃗f∥2.
+Proof: Put
+zn = ∥∇⃗un∥2 + (ν −ε1)∆t∥∆⃗un∥2,
+wn = ε∥∆⃗un∥2,
+bn = ∥⃗f n∥2,
+(157)
+and note that from (143) we have that as long as n∆t ≤T ,
+n−1
+X
+k=0
+∥⃗fk∥2∆t ≤
+Z T
+0
+|⃗f(t)|2 dt.
+(158)
+Then by (154),
+zn+1 + wn∆t ≤zn + C∆t(bn + zn + z3
+n),
+(159)
+where we have replaced max{8/ε1, 32C/(ε1ε2), νCβ} by C. Summing from 0 to
+n −1 and using (158) yields
+zn +
+n−1
+X
+k=0
+wk∆t ≤CM0 + C∆t
+n−1
+X
+k=0
+(zk + z3
+k) =: yn.
+(160)
+The quantities yn so deﬁned increase with n and satisfy
+yn+1 −yn = C∆t(zn + z3
+n) ≤C∆t(yn + y3
+n).
+(161)
+Now set F(y) = ln(
+p
+1 + y2/y) so that F ′(y) = −(y + y3)−1. Then on (0, ∞),
+F is positive, decreasing and convex, and we have
+F(yn+1) −F(yn) = F ′(ξn)(yn+1 −yn) ≥−yn+1 −yn
+yn + y3n
+≥−C∆t,
+(162)
+whence
+F(yn) ≥F(y0) −Cn∆t = F(CM0) −Cn∆t.
+(163)
+
+[PDF PAGE 26]
+Divorcing pressure from viscosity
+26
+Choosing any T ∗> 0 so that C∗:= F(CM0) −CT ∗> 0, we infer that as long
+as n∆t ≤T ∗we have yn ≤F −1(C∗), and this together with (160) yields the
+stability estimate (155).
+Now, using (153) and elliptic regularity, we get from (155) that
+n
+X
+k=0
+∥⃗uk · ∇⃗uk∥2∆t ≤C
+n
+X
+k=0
+∥∇⃗uk∥2
+L2∥∇⃗uk∥2
+H1∆t ≤C
+n
+X
+k=0
+∥∆⃗uk∥2∆t ≤C.
+(164)
+Then the diﬀerence equation (139) yields
+n−1
+X
+k=0
+
+⃗uk+1 −⃗uk
+∆t
+
+2
+∆t ≤C.
+(165)
+This yields (156) and ﬁnishes the proof of the Theorem. □
+5
+Existence and uniqueness of strong solutions
+The stability estimates in Theorem 5 lead directly to the following existence and
+uniqueness theorem for strong solutions of the unconstrained formulation (6) of
+the Navier-Stokes equations. Regarding the constrained Navier-Stokes equa-
+tions there are of course many previous works; see [Am] for a recent comprehen-
+sive treatment. For unconstrained formulations of the Navier-Stokes equations
+with a variety of boundary conditions including the one considered in the present
+paper, Grubb and Solonnikov [GS1, GS2] lay out a general existence theory in
+anisotropic Sobolev spaces using a theory of pseudodiﬀerential initial-boundary-
+value problems developed by Grubb.
+Theorem 6 Let Ωbe a bounded domain in R3 with boundary Γ of class C3,
+and let ⃗f ∈L2(0, T ; L2(Ω, RN)), ⃗uin ∈H1
+0(Ω, RN). Then, there exists T ∗> 0
+depending only upon Ω, ν and M1 := ∥∇⃗uin∥2+R T
+0 ∥⃗f∥2, so that a unique strong
+solution of (134)-(136) exists on [0, T ∗], with
+⃗u ∈L2(0, T ∗; H2(Ω, RN)) ∩H1(0, T ∗; L2(Ω, RN)),
+∇p = ∇pE + ν∇pS ∈L2(0, T ∗; L2(Ω, RN)),
+where pE and pS are as in (9) and (10). Moreover, ⃗u ∈C([0, T ∗], H1(Ω, RN)),
+and ∇· ⃗u ∈C∞((0, T ∗], C∞(Ω)) is a classical solution of the heat equation with
+no-ﬂux boundary conditions. The map t 7→∥∇· ⃗u∥2 is smooth for t > 0 and we
+have the dissipation identity
+d
+dt
+1
+2∥∇· ⃗u∥2 + ν∥∇(∇· ⃗u)∥2 = 0.
+(166)
+Proof of existence: We shall give a simple proof of existence based on the
+ﬁnite diﬀerence scheme considered in section 4, using a classical compactness
+argument [Ta1, Te1, LM]. However, in contrast to similar arguments in other
+
+[PDF PAGE 27]
+Divorcing pressure from viscosity
+27
+sources, for example by Temam [Te1] for a time-discrete scheme with implicit
+diﬀerencing of pressure terms, we do not make any use of regularity theory for
+stationary Stokes systems.
+First we smooth the initial data.
+Given ⃗uin ∈H1
+0(Ω, RN) and ∆t > 0,
+determine ⃗u0 in H1
+0 ∩H2(Ω, RN) by solving (I −∆t ∆)⃗u0 = ⃗uin. An energy
+estimate yields
+∥∇⃗u0∥2 + ∆t∥∆⃗u0∥2 ≤∥∇⃗uin∥∥∇⃗u0∥≤∥∇⃗uin∥2.
+Then ∥∆t ∆⃗u0∥2 = O(∆t) as ∆t →0, so ⃗u0 →⃗uin strongly in L2 and weakly
+in H1.
+The stability constant C3 in Theorem 5 is then uniformly bounded
+independent of ∆t.
+We deﬁne the discretized solution ⃗un by (139)-(142) of section 4, and note
+⃗un+1 −⃗un
+∆t
++ P(⃗un · ∇⃗un −⃗f n −ν∆⃗un) = ν∆(⃗un+1 −⃗un) + ν∇∇· ⃗un. (167)
+With tn = n∆t, we put ⃗u∆t(tn) = ⃗U∆t(tn) = ⃗un for n = 0, 1, 2, . . ., and
+deﬁne ⃗u∆t(t) and ⃗U∆t(t) on each subinterval [tn, tn + ∆t) through linear inter-
+polation and as piecewise constant respectively:
+⃗u∆t(tn + s) = ⃗un + s
+⃗un+1 −⃗un
+∆t
+
+,
+s ∈[0, ∆t),
+(168)
+⃗U∆t(tn + s) = ⃗un,
+s ∈[0, ∆t).
+(169)
+Then (167) means that whenever t > 0 with t ̸= tn,
+∂t⃗u∆t + P(⃗U∆t · ∇⃗U∆t −⃗f∆t −ν∆⃗U∆t) = ν∆(⃗U∆t(· + ∆t) −⃗U∆t) + ν∇∇· ⃗U∆t,
+(170)
+where ⃗f∆t(t) = ⃗f n for t ∈[tn, tn + ∆t).
+We will use the simpliﬁed notation X(Y ) to denote a function space of the
+form X([0, T ∗], Y (Ω, RN)), and we let Q = Ω× [0, T ∗] where T ∗is given by
+Theorem 5. The estimates in Theorem 5 say that ⃗u∆t is bounded in the Hilbert
+space
+V0 := L2(H2 ∩H1
+0) ∩H1(L2),
+(171)
+and also that ⃗U∆t is bounded in L2(H2), uniformly for ∆t > 0.
+Moreover,
+estimate (155) says ⃗u∆t is bounded in C(H1). This is also a consequence of the
+embedding V0 ֒→C(H1), see [Ta1, p. 42] or [Ev, p. 288].
+Along some subsequence ∆tj →0, then, we have that ⃗u∆t converges weakly
+in V0 to some ⃗u ∈V0, and ⃗U∆t and ⃗U∆t(· + ∆t) converge weakly in L2(H2)
+to some ⃗U1 and ⃗U2 respectively.
+Since clearly V0 ֒→H1(Q), and since the
+embedding H1(Q) ֒→L2(Q) is compact, we have that ⃗u∆t →⃗u strongly in
+L2(Q). Note that by estimate (156),
+∥⃗u∆t −⃗U∆t∥2
+L2(Q) ≤∥⃗U∆t(· + ∆t) −⃗U∆t∥2
+L2(Q) =
+n−1
+X
+k=0
+∥⃗un+1 −⃗un∥2∆t ≤C∆t2.
+(172)
+
+[PDF PAGE 28]
+Divorcing pressure from viscosity
+28
+Therefore ⃗U∆t(· + ∆t) and ⃗U∆t converge to ⃗u strongly in L2(Q) also, so ⃗U1 =
+⃗U2 = ⃗u.
+We want to show ⃗u is a strong solution of (134) by passing to the limit in
+(170). From the deﬁnition of ⃗f n in (143), it is a standard result which can be
+proved by using a density argument that
+∥⃗f −⃗f∆t∥2
+L2(Q) →0
+as ∆t →0.
+We are now justiﬁed in passing to the limit weakly in L2(Q) in all terms in
+(170) except the nonlinear term, which (therefore) converges weakly to some
+⃗w ∈L2(Q). But since ∇⃗U∆t converges to ∇⃗u weakly and ⃗U∆t to ⃗u strongly
+in L2(Q), we can conclude ⃗U∆t · ∇⃗U∆t converges to ⃗u · ∇⃗u in the sense of
+distributions on Q. So ⃗w = ⃗u · ∇⃗u, and upon taking limits in (170) it follows
+that
+∂t⃗u + P
+ ⃗u · ∇⃗u −⃗f −ν∆⃗u
+
+= ν∇∇· ⃗u.
+(173)
+That is, ⃗u is indeed a strong solution of (134). That ⃗u(0) = ⃗uin is a consequence
+of the continuity of the map ⃗u →⃗u(0) from V0 through C(H1) to H1(Ω, RN).
+It remains to study ∇· ⃗u. Dot (173) with ∇φ, φ ∈H1(Ω). We get
+Z
+Ω
+∂t⃗u · ∇φ = ν
+Z
+Ω
+∇(∇· ⃗u) · ∇φ.
+(174)
+This says that w = ∇· ⃗u is a weak solution of the heat equation with Neumann
+boundary conditions:
+∂tw = ν∆w
+in Ω,
+⃗n ·∇w = 0
+on Γ.
+(175)
+Indeed, the operator A := ν∆deﬁned on L2(Ω) with domain
+D(A) = {w ∈H2(Ω) | ⃗n · ∇w = 0 on Γ}
+(176)
+is self-adjoint and non-positive, so generates an analytic semigroup. For any
+φ ∈D(A) we have that t 7→
+
+w(t), φ
+
+= −
+
+u(t), ∇φ
+
+is absolutely continuous,
+and using (174) we get (d/dt)
+
+w(t), φ
+
+=
+
+w(t), Aφ
+
+for a. e. t. By Ball’s charac-
+terization of weak solutions of abstract evolution equations [Ba], w(t) = eAtw(0)
+for all t ∈[0, T ∗]. It follows w ∈C([0, T ∗], L2(Ω)), and w(t) ∈D(Am) for every
+m > 0 [Pa, theorem 6.13]. Since Amw(t) = eA(t−τ)Amw(τ) if 0 < τ < t we infer
+that for 0 < t ≤T ∗, w(t) is analytic in t with values in D(Am). Using interior
+estimates for elliptic equations, we ﬁnd w ∈C∞((0, T ∗], C∞(Ω)) as desired.
+The dissipation identity follows by dotting with w.
+This ﬁnishes the proof of existence. □
+
+[PDF PAGE 29]
+Divorcing pressure from viscosity
+29
+Proof of uniqueness: Suppose ⃗u1 and ⃗u2 are both solutions of (134)–(136)
+belonging to V0. Put ⃗u = ⃗u1−⃗u2 and ∇pS = (I −P)(∆−∇∇·)⃗u. Then ⃗u(0) = 0
+and
+∂t⃗u + P
+ ⃗u1 · ∇⃗u + ⃗u · ∇⃗u2) = ν∆⃗u −ν∇pS.
+(177)
+Dot with −∆⃗u and use Theorem 1 to get
+
+ν∆⃗u −ν∇pS, −∆⃗u
+
+≤−ν
+2 ∥∆⃗u∥2 + ν
+2 ∥∇pS∥2 ≤−νβ
+2 ∥∆⃗u∥2 + C∥∇⃗u∥2. (178)
+Next, use the Cauchy-Schwarz inequality for the nonlinear terms, estimating
+them as follows in a manner similar to (150)-(152), using that ⃗u1 and ⃗u2 are a
+priori bounded in H1 norm:
+∥⃗u1 · ∇⃗u∥∥∆⃗u∥≤C∥∇⃗u1∥∥∇⃗u∥1/2∥∆⃗u∥3/2 ≤ε∥∆⃗u∥2 + C∥∇⃗u∥2,
+(179)
+∥⃗u · ∇⃗u2∥∥∆⃗u∥≤C∥∇⃗u∥∥∇⃗u2∥H1∥∆⃗u∥≤ε∥∆⃗u∥2 + C∥∆⃗u2∥2∥∇⃗u∥2. (180)
+Lastly, since ⃗u ∈V0 we infer that
+
+∂t⃗u, −∆⃗u
+
+∈L1(0, T ) and t 7→∥∇⃗u∥2 is
+absolutely continuous with
+
+∂t⃗u, −∆⃗u
+
+= 1
+2
+d
+dt∥∇⃗u∥2.
+(181)
+This can be shown by using the density of smooth functions in V0; see [Ev, p.
+287] for a detailed proof of a similar result.
+Through this quite standard-style approach, we get
+d
+dt∥∇⃗u∥2 + α∥∆⃗u∥2 ≤C(1 + ∥∆⃗u2∥2)∥∇⃗u∥2
+(182)
+for some positive constants α and C. Because ∥∆⃗u2∥2 ∈L1(0, T ), by Gronwall’s
+inequality we get ∥∇⃗u∥≡0. This proves the uniqueness. □
+Since the interval of existence [0, T∗] depends only upon M1, in standard
+fashion we may extend the unique strong solution to a maximal interval of time,
+and infer that the approximations considered above converge to this solution up
+to the maximal time.
+Corollary 2 Given the assumptions of Theorem 6, system (134)-(136) admits
+a unique strong solution ⃗u on a maximal interval [0, Tmax) with the property that
+if Tmax < T then
+∥⃗u(t)∥H1 →∞
+as t →Tmax.
+(183)
+For every ˆT ∈[0, Tmax), the approximations ⃗u∆t constructed in (168) converge
+to ⃗u weakly in
+L2([0, ˆT], H2 ∩H1
+0(Ω, RN)) ∩H1([0, ˆT], L2(Ω, RN))
+and strongly in L2([0, ˆT] × Ω, RN).
+
+[PDF PAGE 30]
+Divorcing pressure from viscosity
+30
+6
+Unconditional stability and convergence for
+C1/C0 ﬁnite element methods without inf-sup
+conditions
+The simplicity of the stability proof for the time-discrete scheme in section 4
+allows us to easily establish the unconditional stability and convergence (up to
+the maximal time of existence for the strong solution) of corresponding fully
+discrete ﬁnite-element methods that use C1 elements for the velocity ﬁeld and
+C0 elements for pressure. To motivate the discretization, we write the uncon-
+strained Navier-Stokes formulation (11) in weak form as follows, in terms of
+total pressure p = pE + νpS:
+
+⃗ut + ∇p −ν∆⃗u + ⃗u·∇⃗u −⃗f, ∆⃗v
+
+= 0
+∀v ∈H2 ∩H1
+0(Ω, RN),
+(184)
+
+∇p + ν∇∇· ⃗u −ν∆⃗u + ⃗u·∇⃗u −⃗f, ∇φ
+
+= 0
+∀φ ∈H1(Ω).
+(185)
+We suppose that for some sequence of positive values of h approaching zero,
+Xh ⊂H2 ∩H1
+0(Ω, RN) is a ﬁnite-dimensional space containing the approximate
+velocity ﬁeld, and suppose Yh ⊂H1(Ω)/R is a ﬁnite-dimensional space contain-
+ing approximate pressures. We assume these spaces have the approximation
+property that
+∀⃗v ∈H2 ∩H1
+0(Ω, RN) ∀h ∃⃗vh ∈Xh,
+∥∆(⃗v −⃗vh)∥→0
+as h →0,
+(186)
+∀φ ∈H1(Ω)/R ∀h ∃φh ∈Yh,
+∥∇(φ −φh)∥→0
+as h →0.
+(187)
+As we have emphasized in the introduction to this paper, we impose no inf-sup
+condition between the spaces Xh and Yh. (We remark that in general, practical
+ﬁnite element methods usually use spaces deﬁned on domains that approximate
+the given Ω. For simplicity here we suppose Ωcan be kept ﬁxed, such that
+ﬁnite-element spaces Xh and Yh can be found as described with C1 elements
+for velocity and C0 elements for pressure.
+Though generally impractical, in
+principle this should be possible whenever Ωhas a piecewise polynomial C3
+boundary.)
+We discretize (184)-(185) in a straightforward way, implicitly only in the
+viscosity term and explicitly in the pressure and nonlinear terms. The resulting
+scheme was also derived in [JL] and is equivalent to a space discretization of
+the scheme in (139)–(143). Given the approximate velocity ⃗uh
+n at the n-th time
+step, we determine pn
+h ∈Yh and ⃗un+1
+h
+∈Xh by requiring
+
+∇pn
+h + ν∇∇· ⃗un
+h −ν∆⃗un
+h + ⃗un
+h·∇⃗un
+h −⃗f n, ∇φh
+
+= 0
+∀φh ∈Yh,
+(188)
+
+∇⃗un+1
+h
+−∇⃗un
+h
+∆t
+, ∇⃗vh
+
++
+
+ν∆⃗un+1
+h
+, ∆⃗vh
+
+=
+
+∇pn
+h + ⃗un
+h·∇⃗un
+h −⃗f n, ∆⃗vh
+
+∀⃗vh ∈Xh.
+(189)
+Stability. We are to show the scheme above is unconditionally stable. First,
+we take φh = ph in (188). Due to the fact that
+
+P(∆−∇∇·)⃗un
+h, ∇pn
+h
+
+= 0,
+
+[PDF PAGE 31]
+Divorcing pressure from viscosity
+31
+we directly deduce from the Cauchy-Schwarz inequality that
+∥∇pn
+h∥≤∥ν∇pS(un
+h)∥+ ∥⃗un
+h·∇⃗un
+h −⃗f n∥
+(190)
+where
+∇pS(un
+h) = (I −P)(∆−∇∇·)⃗un
+h
+(191)
+is the Stokes pressure associated with ⃗un
+h. (Note ∇pS(un
+h) need not lie in the
+space Yh). Now, taking ⃗vh = ⃗un+1
+h
+in (189) and arguing just as in (144), we
+obtain an exact analog of (145), namely
+1
+∆t
+
+∥∇⃗un+1
+h
+∥2 −∥∇⃗un
+h∥2
++ (ν −ε1)∥∆⃗un+1
+h
+∥2
+≤8
+ε1
+
+∥⃗f n∥2 + ∥⃗un
+h · ∇⃗un
+h∥2
++ ν∥∇pS(⃗un
+h)∥2.
+(192)
+Proceeding now exactly as in section 4 leads to the following unconditional
+stability result.
+Theorem 7 Let Ωbe a bounded domain in RN (N = 2 or 3) with C3 boundary,
+and suppose spaces Xh ⊂H2 ∩H1
+0(Ω, RN), Yh ⊂H1(Ω)/R satisfy (186)–(187).
+Assume ⃗f ∈L2(0, T ; L2(Ω, RN)) for some given T > 0 and ⃗u0
+h ∈Xh. Consider
+the ﬁnite-element scheme (188)-(189) with (143). Then there exist positive con-
+stants T ∗and C4, such that whenever n∆t ≤T ∗, we have
+sup
+0≤k≤n
+∥∇⃗uk
+h∥2 +
+n
+X
+k=0
+∥∆⃗uk
+h∥2∆t ≤C4,
+(193)
+n−1
+X
+k=0
+
+
+
+⃗uk+1
+h
+−⃗uk
+h
+∆t
+
+2
++ ∥⃗uk
+h · ∇⃗uk
+h∥2
+
+∆t ≤C4.
+(194)
+The constants T ∗and C4 depend only upon Ω, ν and
+M0h := ∥∇⃗u0
+h∥2 + ν∆t∥∆⃗u0
+h∥2 +
+Z T
+0
+∥⃗f∥2.
+Convergence. We prove the convergence of the ﬁnite-element scheme de-
+scribed above by taking h →0 to obtain the solution of the time-discrete scheme
+studied in section, then ∆t →0 as before. Because of the uniqueness of the so-
+lution of the time-discrete scheme and of the strong solution of the PDE, it
+suﬃces to prove convergence for some subsequence of any given sequence of val-
+ues of h tending toward 0. The bounds obtained in Theorem 7 make this rather
+straightforward.
+Fix ∆t > 0. The bounds in Theorem 7 and in (190) imply that for all positive
+integers n < T∗/∆t, the ⃗un
+h are bounded in H2 ∩H1
+0(Ω, RN) and the ∇pn
+h are
+bounded in L2(Ω, RN) uniformly in h. So from any sequence of h approaching
+zero, we may extract a subsequence along which we have weak limits
+⃗un
+h ⇀⃗un in H2(Ω, RN),
+∇pn
+h ⇀∇pn, ⃗un
+h · ∇⃗un
+h ⇀⃗wn in L2(Ω, RN)
+(195)
+
+[PDF PAGE 32]
+Divorcing pressure from viscosity
+32
+for all n. Then ⃗un
+h →⃗un strongly in H1
+0(Ω, RN) and so ⃗wn = ⃗un · ∇⃗un since the
+nonlinear term converges strongly in L1.
+Now, for any ⃗v ∈H2 ∩H1
+0(Ω, RN) and φ ∈H1(Ω), by assumption there exist
+⃗vh ∈Xh, φh ∈H1(Ω) such that ⃗vh →⃗v strongly in H2(Ω, RN) and ∇φh →∇φ
+strongly in L2(Ω, RN). Applying these convergence properties in (188)–(189)
+yields that the weak limits in (195) satisfy
+
+∇pn + ν∇∇· ⃗un −ν∆⃗un + ⃗un·∇⃗un −⃗f n, ∇φ
+
+= 0,
+(196)
+
+⃗un+1 −⃗un
+∆t
+−ν∆⃗un+1 + ∇pn + ⃗un·∇⃗un −⃗f n, ∆⃗v
+
+= 0.
+(197)
+But this means exactly that ⃗un satisﬁes (139) with pn = pn
+E +νpn
+S , where pn
+E and
+pn
+S are given by (140)–(141). So in the limit h →0 we obtain the solution of the
+time-discrete scheme studied in section (4). Then the limit ∆t →0 yields the
+unique strong solution on a maximal time interval as established in section 5.
+7
+Semigroup approach for the homogeneous lin-
+ear case
+There are many other approaches to existence theory for the Navier-Stokes
+equations, of course — Galerkin’s method, molliﬁcation, semigroup theory, etc.
+We will not discuss any of them here, except to note that the linearization of the
+unconstrained system (11) can be treated easily by analytic semigroup theory
+using Theorem 1.
+Take ν = 1 without loss of generality, and consider (11)
+without the nonlinear and forcing terms, i.e., consider the unconstrained Stokes
+equation
+⃗ut −∆⃗u + ∇pS = 0
+(t > 0, x ∈Ω),
+(198)
+with the no-slip boundary condition (135) and initial condition (136), where
+∇pS is given by (10) as before. In the space X = L2(Ω, RN) deﬁne operators
+B0 and B1 by
+B0⃗u = −∆⃗u,
+B1⃗u = ∇pS = (I −P)∆⃗u −∇∇· ⃗u,
+(199)
+with domain D(B0) = D(B1) = H2 ∩H1
+0(Ω, RN). Then B0 is a positive self-
+adjoint operator in X with compact resolvent, and by using Theorem 1 together
+with the interpolation estimate
+∥∇⃗u∥≤ε∥∆⃗u∥+ Cε∥u∥
+valid for any ε > 0 for all ⃗u ∈D(B0), we deduce that
+∥B1⃗u∥≤a∥B0⃗u∥+ K∥⃗u∥
+(200)
+for all ⃗u ∈D(B0), where a and K are positive constants, with a < 1.
+
+[PDF PAGE 33]
+Divorcing pressure from viscosity
+33
+Theorem 8 The unconstrained Stokes operator B = B0 + B1 in the space
+X = L2(Ω, RN) is sectorial and generates an analytic semigroup. The resolvent
+of B is compact and the spectrum of B consists entirely of isolated eigenvalues
+of ﬁnite multiplicity, all of which are positive. Moreover, for any α ≥0, given
+⃗uin ∈D(Bα) equation (198) has the solution
+⃗u = e−Bt⃗uin ∈C([0, T ], D(Bα)) ∩C∞((0, T ], D(Bm))
+for any T > 0 and all m > 0, and this is the unique weak solution of ∂t⃗u+B⃗u =
+0, ⃗u(0) = ⃗uin in the sense of Ball [Ba].
+Proof. That B is sectorial is a consequence of (200) and the self-adjointness of
+B0. Indeed, by a theorem on the perturbation of sectorial operators [He, p. 19,
+theorem 1.3.2], it suﬃces to show that for some φ0 < π/2,
+a sup
+λ∈S0
+∥B0(λ −B0)−1∥< 1
+(201)
+where S0 ⊂C is the sector where φ0 < | arg λ| ≤π. By expanding any element
+of (complexiﬁed) X with respect to an orthonormal basis of eigenfunctions of
+B0, for any λ /∈σ(B0) we get
+∥B0(λ −B0)−1∥=
+sup
+µ∈σ(B0)
+
+µ
+λ −µ
+ .
+Fix ˜a ∈(a, 1). For any µ > 0, we have |µ| ≤|λ −µ| whenever ℜλ ≤0, and
+it is straightforward to check that whenever ℜλ > 0 and |ℑλ| > ˜a|λ|, then
+˜a|µ| ≤|λ −µ|. Then (201) follows, proving that B is sectorial.
+That (λ−B)−1 is compact for λ /∈σ(B)∪σ(B0) follows from the compactness
+of (λ −B0)−1 together with the identity
+(λ −B)−1 = (λ −B0)−1 + (λ −B0)−1B1(λ −B)−1.
+It follows that the spectrum of B is discrete, consisting only of isolated eigen-
+values of ﬁnite multiplicity [Ka, III.6.29].
+Suppose now that (λ −B)⃗u = 0 for some non-zero ⃗u ∈D(B), so λ⃗u =
+−P∆⃗u −∇∇· ⃗u. Then the function w = ∇· ⃗u satisﬁes λw = −∆w in Ω,
+⃗n ·∇w = 0 on Γ, i.e., (λ + A)w = 0 (see (176)). So if λ /∈σ(−A) ⊂R+, then
+∇· ⃗u = 0, and since ⃗n · ⃗u = 0 on Γ we have ⃗u = P⃗u. Then
+λ
+
+⃗u, ⃗u
+
+=
+
+−P∆⃗u, ⃗u
+
+=
+
+−∆⃗u, P⃗u
+
+= ∥∇⃗u∥2,
+so λ > 0. If λ = 0, then ∇· ⃗u is constant, but R
+Ω∇· ⃗u = 0 so ∇· ⃗u = 0 and
+arguing as above we infer ⃗u = 0. Hence 0 is not an eigenvalue, and so 0 is in
+the resolvent set of B.
+Lastly, for any α ≥0, given ⃗uin ∈D(Bα), the regularity results for e−Bt⃗uin
+are standard consequences of the fact that Bα is an isomorphism between its
+domain and X and commutes with e−Bt [Pa, p. 74, Theorem 6.13]. For unique-
+ness, see [Ba]. □
+
+[PDF PAGE 34]
+Divorcing pressure from viscosity
+34
+Remark 3. The equation B⃗u = ⃗f has an interesting interpretation in terms of a
+stationary Stokes system with prescribed divergence. Given any ⃗f ∈L2(Ω, RN)
+there is a unique ⃗u ∈H2 ∩H1
+0(Ω, RN) such that B⃗u = ⃗f, since 0 is in the
+resolvent set of B by the above theorem. We can write P ⃗f = ⃗f + ∇q where
+q ∈H1(Ω) with
+R
+Ωq = 0. Since B⃗u = −P∆⃗u −∇∇· ⃗u, we have P ⃗f = −P∆⃗u,
+so ∇(q + ∇· ⃗u) = 0. Let pS be the Stokes pressure associated with ⃗u. Then
+(⃗u, pS) form a solution to the Stokes system
+−∆⃗u + ∇pS = ⃗f
+in Ω,
+(202)
+−∇· ⃗u = q
+in Ω,
+(203)
+⃗u = 0
+on Γ.
+(204)
+As a corollary, we can characterize the domains of positive integer powers of
+B by using the regularity theory for the stationary Stokes equation (see for
+example [Soh, p. 123, theorem 1.5.3] or [Te1, p. 23, proposition 2.2]).
+Corollary 3 Let Ωbe a bounded domain with C2m boundary Γ, where m > 1
+is an integer. Then
+D(Bm) = {⃗u | ⃗u ∈H2m(Ω, RN), ⃗u = B⃗u = . . . = Bm−1⃗u = 0 on Γ}.
+Proof: When m = 1, the conclusion is true. Suppose it is true when m =
+k −1. When m = k, take any ⃗u ∈D(Bk). By the deﬁnition of D(Bk), we
+have ⃗u ∈D(Bk−1) and B⃗u ∈D(Bk−1). By assumption, ⃗f := B⃗u ∈H2k−2
+and Bk−1⃗u = Bk−2(B⃗u) = 0 on Γ.
+Since P is bounded on H2k−2 [Te1, I,
+Remark 1.6] we ﬁnd that q ∈H2k−1(Ω). Now (202)-(204) hold, and we can use
+the regularity theory of the stationary Stokes equation cited above to conclude
+⃗u ∈H2k(Ω, RN). This ﬁnishes the proof. □
+Remark 4. We note that B and B0 have the same domain and that D(B1/2
+0
+)
+is the closure of D(B0) = H2 ∩H1
+0(Ω, RN) in norm equivalent to
+∥⃗u∥2
+X1/2 = ∥B1/2
+0
+⃗u∥2 =
+
+−∆⃗u, ⃗u
+
+= ∥∇⃗u∥2,
+the ordinary H1 norm.
+So D(B1/2
+0
+) = H1
+0(Ω, RN).
+It is known that if B
+has bounded imaginary powers then for 0 < α < 1, D(Bα) can be obtained
+by interpolation between X and D(B) = D(B0) and so D(Bα) = D(Bα
+0 ).
+The result that indeed B + cI has bounded imaginary powers for some c > 0
+apparently follows from a recent analysis of Abels [Ab] related to the formulation
+of Grubb and Solonnikov (although the ﬁnal result in [Ab] is stated in terms of
+the constrained Stokes operator in divergence-free spaces).
+8
+Non-homogeneous side conditions
+Looking back at the Stokes pressure pS associated with ⃗u, one recognizes that the
+no-slip boundary condition for ⃗u was essential for getting the crucial equalities
+
+[PDF PAGE 35]
+Divorcing pressure from viscosity
+35
+(99)-(101) using Lemma 3. So the important question arises, if general boundary
+conditions ⃗u = ⃗g on Γ are imposed, do we still have an unconstrained formulation
+like (134)-(136)? Moreover, what can we say if the velocity ﬁeld is not divergence
+free but is speciﬁed as ∇· ⃗u = h? Such issues are likely to be relevant in the
+analysis of problems involving complex ﬂuids and low Mach number ﬂows, for
+example.
+In this section we develop and study an unconstrained formulation for such
+non-homogeneous problems. In this new formulation, ∇·⃗u−h satisﬁes the heat
+equation with no-ﬂux boundary conditions. The main theorem of this section
+establishes existence and uniqueness for strong solutions.
+8.1
+An unconstrained formulation
+Consider the Navier-Stokes equations with non-homogeneous boundary condi-
+tions and divergence constraint:
+∂t⃗u + ⃗u ·∇⃗u + ∇p = ν∆⃗u + ⃗f
+(t > 0, x ∈Ω),
+(205)
+∇· ⃗u = h
+(t ≥0, x ∈Ω),
+(206)
+⃗u = ⃗g
+(t ≥0, x ∈Γ),
+(207)
+⃗u = ⃗uin
+(t = 0, x ∈Ω).
+(208)
+What we have done before can be viewed as replacing the divergence constraint
+(206) by decomposing the pressure via the formulae in (9) and (10) in such a
+way that the divergence constraint is enforced automatically. It turns out that
+in the non-homogeneous case a very similar procedure works. One can simply
+use the Helmholtz decomposition to identify Euler and Stokes pressure terms
+exactly as before via the formulae (9) and (10), but in addition another term is
+needed in the total pressure to deal with the inhomogeneities. Equation (6) is
+replaced by
+∂t⃗u + P(⃗u·∇⃗u −⃗f −ν∆⃗u) + ∇pgh = ν∇(∇· ⃗u).
+(209)
+The equation that determines the inhomogeneous pressure pgh can be found by
+dotting with ∇φ for φ ∈H1(Ω), formally integrating by parts and plugging in
+the side conditions: We require
+
+∇pgh, ∇φ
+
+= −
+
+∂t(⃗n · ⃗g), φ
+
+Γ +
+
+∂th, φ
+
++
+
+ν∇h, ∇φ
+
+(210)
+for all φ ∈H1(Ω). With this deﬁnition, we see from (209) that
+
+∂t⃗u, ∇φ
+
+−
+
+∂t(⃗n · ⃗g), φ
+
+Γ +
+
+∂th, φ
+
+=
+
+ν∇(∇· ⃗u −h), ∇φ
+
+(211)
+for every φ ∈H1(Ω). This will mean w := ∇· ⃗u −h is a weak solution of
+∂tw = ν∆w in Ω,
+⃗n ·∇w = 0 on Γ,
+(212)
+with initial condition w = ∇· ⃗uin −h
+
+t=0. So the divergence constraint will be
+enforced through exponential diﬀusive decay as before (see (232) below).
+
+[PDF PAGE 36]
+Divorcing pressure from viscosity
+36
+The total pressure in (205) now has the representation
+p = pE + νpS + pgh,
+(213)
+where the Euler pressure pE and the Stokes pressure pS are determined exactly
+by (9) and (10) as before, and pgh is determined up to a constant by the forcing
+functions g and h through the weak-form pressure Poisson equation (210). (See
+Lemma 6 below.) Our unconstrained formulation of (205)-(208) then takes the
+form
+∂t⃗u + ⃗u·∇⃗u + ∇pE + ν∇pS + ∇pgh = ν∆⃗u + ⃗f
+(t > 0, x ∈Ω),
+(214)
+⃗u = ⃗g
+(t ≥0, x ∈Γ),
+(215)
+⃗u = ⃗uin
+(t = 0, x ∈Ω).
+(216)
+Although the deﬁnition of Stokes pressure does not require a no-slip velocity
+ﬁeld, clearly the analysis that we performed in section 2 does rely in crucial ways
+on no-slip boundary conditions. So in order to analyze the new unconstrained
+formulation, we will decompose the velocity ﬁeld ⃗u in two parts. We introduce
+a ﬁxed ﬁeld ˜u in Ω× [0, T ] that satisﬁes ˜u = ⃗g on Γ, and let
+⃗v = ⃗u −˜u.
+(217)
+Then ⃗v = 0 on Γ. With this ⃗v, similar to (9) and (10) we introduce
+∇qE = (P −I)(⃗v ·∇⃗v −⃗f),
+∇qS = (I −P)∆⃗v −∇∇· ⃗v.
+(218)
+Then we can rewrite (214) as an equation for ⃗v:
+∂t⃗v + ⃗v ·∇⃗v + ∇qE + ν∇qS + P(˜u ·∇⃗v + ⃗v ·∇˜u) = ν∆⃗v + ⃗f −˜f,
+(219)
+where
+˜f := ∂t˜u + P(˜u ·∇˜u −ν∆˜u) −ν∇∇· ˜u + ∇pgh.
+(220)
+8.2
+Existence, uniqueness and dissipation identity
+We will ﬁrst answer questions concerning the existence and regularity of ˜u and
+pgh, then state an existence and uniqueness result for strong solutions of the
+unconstrained formulation (214)–(216). Let Ωbe a bounded, connected domain
+in RN (N = 2 or 3) with boundary Γ of class C3. We assume
+⃗uin ∈Huin := H1(Ω, RN),
+(221)
+⃗f ∈Hf := L2(0, T ; L2(Ω, RN)),
+(222)
+⃗g ∈Hg := H3/4(0, T ; L2(Γ, RN)) ∩L2(0, T ; H3/2(Γ, RN))
+∩{⃗g
+ ∂t(⃗n · ⃗g) ∈L2(0, T ; H−1/2(Γ))},
+(223)
+h ∈Hh := L2(0, T ; H1(Ω)) ∩H1(0, T ; (H1)′(Ω)).
+(224)
+
+[PDF PAGE 37]
+Divorcing pressure from viscosity
+37
+Here (H1)′ is the space dual to H1. We also make the compatibility assumptions
+⃗g = ⃗uin
+when t = 0, x ∈Γ,
+(225)
+
+∂t(⃗n · ⃗g), 1
+
+Γ =
+
+∂th, 1
+
+Ω.
+(226)
+We remark that most of the literature on nonhomogeneous Navier-Stokes prob-
+lems [La, Sol, Gr1, GS1, GS2] treats the constrained case with h = 0 in Ωand
+imposes the condition ⃗n · ⃗g = 0 on Γ. Amann recently studied very weak so-
+lutions without imposing the latter condition, but only in spaces of very low
+regularity that exclude the case considered here [Am2].
+We deﬁne
+V := L2(0, T ; H2(Ω, RN)) ∩H1(0, T ; L2(Ω, RN)),
+(227)
+and note we have the embeddings ([Ta1, p. 42], [Ev, p. 288], [Te1, p. 176])
+V ֒→C([0, T ], H1(Ω, RN)),
+Hh ֒→C([0, T ], L2(Ω)).
+(228)
+Notice that we have always used an arrow or tilde to denote a vector. So, without
+confusion, we can use Y (Ω) to denote Y (Ω, RN) or Y (Ω) as appropriate, and
+further use X(Y (Ω)) to denote X(0, T ; Y (Ω)).
+Lemma 6 Assume (221)-(226). Then, there exists some ˜u ∈V that satisﬁes
+˜u(0) = ⃗uin,
+˜u
+
+Γ = ⃗g,
+(229)
+and there exists pgh ∈L2(H1(Ω)/R) satisfying (210). Moreover,
+∥˜u∥2
+V ≤C
+ ∥⃗g∥2
+H3/4(L2(Γ))∩H3/2(Γ)) + ∥⃗uin∥2
+H1(Ω)
+
+,
+(230)
+∥pgh∥L2(H1(Ω)/R) ≤C
+ ∥∂t(⃗n · ⃗g)∥L2(H−1/2(Γ)) + ∥h∥L2(H1)∩H1((H1)′)
+
+.
+(231)
+Proof: (i) By a trace theorem of Lions and Magenes [LM, vol II, Theorem 2.3],
+the fact ⃗g ∈H3/4(L2(Γ)) ∩L2(H3/2(Γ)) together with (221) and the compati-
+bility condition (225) implies the existence of ˜u ∈V satisfying (229).
+(ii) One applies the Lax-Milgram lemma for a.e. t to (210) in the space of
+functions in H1(Ω) with zero average. We omit the standard details. □
+Theorem 9 Let Ωbe a bounded, connected domain in RN (N = 2 or 3) and
+assume (221)-(226). Then there exists T ∗> 0 so that a unique strong solution
+of (214)-(216) exists on [0, T ∗], with
+⃗u ∈L2(0, T ∗; H2(Ω, RN)) ∩H1(0, T ∗; L2(Ω, RN)),
+p =νpS + pE + pgh ∈L2(0, T ∗; H1(Ω)/R),
+where pE and pS are deﬁned in (9) and (10) after introducing the ˜u and pgh from
+Lemma 6. Moreover, ⃗u ∈C([0, T ∗], H1(Ω, RN)) and
+∇· ⃗u −h ∈L2(0, T ∗; H1(Ω)) ∩H1(0, T ∗; (H1)′(Ω))
+
+[PDF PAGE 38]
+Divorcing pressure from viscosity
+38
+is a smooth solution of the heat equation for t > 0 with no-ﬂux boundary condi-
+tions. The map t 7→∥∇·⃗u−h∥2 is smooth for t > 0 and we have the dissipation
+identity
+d
+dt
+1
+2∥∇· ⃗u −h∥2 + ν∥∇(∇· ⃗u −h)∥2 = 0.
+(232)
+If we further assume h ∈Hh.s := L2(0, T ; H2(Ω))∩H1(0, T ; L2(Ω)) and ∇·⃗uin ∈
+H1(Ω), then
+∇· ⃗u ∈L2(0, T ∗; H2(Ω)) ∩H1(0, T ∗; L2(Ω)).
+Proof: First rewrite (214) as (219). Then we note that there are only two
+diﬀerences between (219) and (134):
+(i) There is an extra forcing term ˜f in (219). But by Lemma 6, all terms in
+˜f are known to be in L2(L2(Ω)) and thus they won’t be a problem.
+(ii) Equation (219) has some extra linear terms:
+P(˜u ·∇⃗v + ⃗v ·∇˜u).
+(233)
+We know ˜u ∈V ֒→C([0, T ], H1(Ω, RN)), so we can discretize these terms
+explicitly by setting ˜un = ˜u(n∆t). Similar to (153), we get
+∥P(˜u ·∇⃗v)∥2 ≤ε∥∆⃗v∥2 + C
+ε ∥˜u∥4
+H1∥∇⃗v∥2.
+(234)
+We estimate the other term in (233) by using Gagliardo-Nirenberg inequalities
+[Fr, Thm. 10.1] and the Sobolev embeddings of H1 into L3 and L6:
+∥⃗v∥L∞≤
+
+
+
+C∥∆⃗v∥1/2
+L3/2∥⃗v∥1/2
+L3 ≤C∥∆⃗v∥1/2∥∇⃗v∥1/2
+(N = 2),
+C∥∆⃗v∥1/2∥⃗v∥1/2
+L6 ≤C∥∆⃗v∥1/2∥∇⃗v∥1/2
+(N = 3).
+(235)
+Then for N = 2 and 3 we have
+∥P(⃗v ·∇˜u)∥2 ≤∥⃗v∥2
+L∞∥∇˜u∥2 ≤ε∥∆⃗v∥2 + C
+ε ∥˜u∥4
+H1∥∇⃗v∥2.
+(236)
+With these estimates, the rest of the proof of existence and uniqueness is essen-
+tially the same as that of Theorem 6, and therefore we omit the details.
+To prove the regularity of ∇· ⃗u, we argue in a manner similar to the proof
+of Theorem 6. We go from (214) to (209) by using (9) and (10). Then using
+(210) we get (211) for any φ ∈H1(Ω). With w = ∇· ⃗u −h, taking φ ∈D(A) as
+in (176), we have
+
+w, φ
+
+=
+
+⃗n · ⃗g, φ
+
+Γ −
+
+⃗u, ∇φ
+
+−
+
+h, φ
+
+,
+(237)
+therefore t 7→
+
+w, φ
+
+is absolutely continuous, and (211) yields (d/dt)
+
+w, φ
+
+=
+
+w, Aφ
+
+for a.e. t. This means w is a weak solution in the sense of Ball [Ba],
+and the rest of the proof goes as before.
+
+[PDF PAGE 39]
+Divorcing pressure from viscosity
+39
+If we further assume h ∈Hh.s and ∇·⃗uin ∈H1(Ω), then w(0) ∈H1(Ω). We
+claim
+H1(Ω) = D((−A)1/2).
+(238)
+Then semigroup theory yields w ∈C([0, T ∗], D((−A)1/2)), so since
+0 =
+
+−∆w, ∂tw −ν∆w
+
+= d
+dt
+1
+2∥∇w∥2 + ν∥∆w∥2
+(239)
+for t > 0, we deduce w ∈L2(0, T ∗; H2(Ω)) ∩H1(0, T ∗; L2(Ω)), and ∇· ⃗u is in
+the same space.
+To prove (238), note X := D((−A)1/2) is the closure of D(A) from (176) in
+the norm given by
+∥w∥2
+X = ∥w∥2 + ∥(−A)1/2w∥2 =
+
+(I −ν∆)w, w
+
+=
+Z
+Ω
+|w|2 + ν|∇w|2.
+Clearly X ⊂H1(Ω).
+For the other direction, let w ∈H1(Ω) be arbitrary.
+We may suppose w ∈C∞(¯Ω) since this space is dense in H1(Ω).
+Now we
+only need to construct a sequence of C2 functions wn →0 in H1 norm with
+⃗n ·∇wn = ⃗n ·∇w on Γ. This is easily accomplished using functions of the form
+wn(x) = ξn(dist(x, Γ))⃗n ·∇w(x), where ξn(s) = ξ(ns)/n with ξ smooth and
+satisfying ξ(0) = 0, ξ′(0) = 1 and ξ(s) = 0 for s > 1. This proves (238).
+We can prove the uniqueness by the same method as in Theorem 6. □
+9
+Isomorphism theorems for non-homogeneous
+Stokes systems
+Drop the nonlinear term and consider the non-homogeneous Stokes system:
+∂t⃗u + ∇p −ν∆⃗u = ⃗f
+(t > 0, x ∈Ω),
+(240)
+∇· ⃗u = h
+(t ≥0, x ∈Ω),
+(241)
+⃗u = ⃗g
+(t ≥0, x ∈Γ),
+(242)
+⃗u = ⃗uin
+(t = 0, x ∈Ω).
+(243)
+The unconstrained formulation is
+∂t⃗u + ∇p −ν∆⃗u = ⃗f
+(t > 0, x ∈Ω),
+(244)
+⃗u = ⃗g
+(t ≥0, x ∈Γ),
+(245)
+⃗u = ⃗uin
+(t = 0, x ∈Ω),
+(246)
+with
+∇p = (I −P)⃗f + ν∇pS + ∇pgh,
+(247)
+where pS and pgh are deﬁned as before via (10) and (210).
+The aim of this section is to obtain an isomorphism between the space of
+solutions and the space of data {⃗f,⃗g, h, ⃗uin}, for this unconstrained formulation
+
+[PDF PAGE 40]
+Divorcing pressure from viscosity
+40
+and for the original Stokes system. In examining this question we are motivated
+by the classic works of Lions and Magenes [LM] which provide a satisfactory
+description of the correspondence between solutions and data for elliptic bound-
+ary value problems. In the spirit of these results, a satisfactory theory of a given
+system of partial diﬀerential equations should describe exactly how, in the space
+of all functions involved, the manifold of solutions can be parametrized. Yet we
+are not aware of any such complete treatment of the non-homogeneous Stokes
+system. (See further remarks on this issue below.)
+First we consider the mapping from data to solution. Thanks to the absence
+of the nonlinear term, we can repeat much easier what we did in the proof
+of Theorems 6 and 9 and get the global existence and uniqueness of a strong
+solution of (244)-(247) under the same assumptions as Theorem 9. The data
+{⃗f,⃗g, h, ⃗uin} lie inside the space
+ΠF := Hf × Hg × Hh × Huin
+(248)
+from (221)–(224), and need to satisfy the compatibility conditions (225)–(226).
+Corresponding to such data, we get a unique solution ⃗u of (244)-(247) in the
+space
+Hu := L2(0, T ; H2(Ω, RN)) ∩H1(0, T ; L2(Ω, RN))
+∩{⃗u | ∂t(⃗n · ⃗u)|Γ ∈L2(0, T ; H−1/2(Γ))}.
+(249)
+The total pressure p lies in
+Hp := L2(0, T ; H1(Ω)/R),
+(250)
+and the pair {⃗u, p} satisﬁes (240), (242) and (243). As in Theorem 9, we can
+show w = ∇· ⃗u −h satisﬁes a heat equation with no-ﬂux boundary conditions.
+Equation (241) says that w = 0, and this will hold if and only if w(0) = 0, i.e.,
+the following additional compatibility condition holds:
+∇· ⃗uin = h(0).
+(251)
+For the non-homogeneous Stokes system (240)–(243), then, we deﬁne the data
+and solution spaces by
+ΠF.c :=
+n
+{⃗f,⃗g, h, ⃗uin} ∈ΠF : (225), (226) and (251) hold
+o
+,
+(252)
+ΠU := Hu × Hp.
+(253)
+From what we have said so far, we get a map ΠF.c →ΠU by solving the
+unconstrained system (244)–(247). Due to the absence of nonlinear terms, the
+estimates in the proof ensure that this map is bounded. In the other direction,
+given {⃗u, p} ∈ΠU, we simply deﬁne {⃗f,⃗g, h, ⃗uin} using (240)–(243) and check
+that this lies in ΠF.c.
+
+[PDF PAGE 41]
+Divorcing pressure from viscosity
+41
+Note that in Theorem 9, one has more regularity on ∇· ⃗u if one assumes
+more on ∇· ⃗uin and h. Correspondingly, like Hh.s deﬁned in Theorem 9, we
+introduce spaces of stronger regularity by
+Huin.s := H1(Ω, RN) ∩{⃗uin
+ ∇· ⃗uin ∈H1(Ω)},
+(254)
+ΠF.s := Hf × Hg × Hh.s × Huin.s.
+(255)
+The solution ⃗u then lies in
+Hu.s := L2(0, T ; H2(Ω, RN)) ∩H1(0, T ; L2(Ω, RN))
+∩{⃗u
+ ∇· ⃗u ∈L2(0, T ; H2(Ω)) ∩H1(0, T ; L2(Ω))}.
+(256)
+(Note, if ⃗u ∈Hu.s then ∂t⃗u ∈L2(H(div; Ω)) so ⃗n · ∂t⃗u ∈L2(H−1/2(Γ)).) So
+as an alternative to the spaces in (252)–(253), we also obtain an isomorphism
+between the data and solution spaces with stronger regularity deﬁned by
+ΠF.c.s :=
+n
+{⃗f,⃗g, h, ⃗uin} ∈ΠF.s : (225), (226) and (251) hold
+o
+,
+(257)
+ΠU.s := Hu.s × Hp.
+(258)
+Summarizing, we have proved the following isomorphism theorem for the
+non-homogeneous Stokes system (240)–(243).
+Theorem 10 Let Ωbe a bounded, connected domain in RN with N any positive
+integer ≥2, and let T > 0. The map {⃗f,⃗g, h, ⃗uin} 7→{⃗u, p}, given by solving the
+unconstrained system (244)–(247), deﬁnes an isomorphism from ΠF.c onto ΠU.
+The same solution procedure deﬁnes an isomorphism from ΠF.c.s onto ΠU.s.
+Remark 5. For the standard Stokes system with zero-divergence constraints
+∇· ⃗uin = 0 and h = 0, existence and uniqueness results together with the
+estimates
+sup
+0≤t≤T
+∥⃗u(t)∥H1 + ∥⃗u∥L2(0,T ;H2) + ∥p∥L2(0,T ;H1/R)
+≤C
+ ∥⃗f∥L2(0,T ;L2) + ∥⃗uin∥H1 + ∥⃗g∥H3/4(L2(Γ)) + ∥⃗g∥L2(H3/2(Γ))
+
+(259)
+were obtained in the classic work of Solonnikov [Sol, Theorem 15], where more
+general Lp estimates were also proved. (Also see [GS1, GS2].) However, instead
+of the necessary compatibility condition
+Z
+Γ
+⃗n · ⃗g = 0,
+(260)
+Solonnikov made the stronger constraining assumption that both the data ⃗g and
+solution ⃗u have zero normal component on Γ, and correspondingly his estimates
+do not contain a term ∥∂t(⃗n · ⃗g)∥L2(H−1/2(Γ)) on the right hand side of (259).
+(Note that when ∇· ⃗uin = 0 and h = 0, we have
+R
+Γ ⃗n · ⃗g|t=0 =
+R
+Ω∇· ⃗uin = 0 by
+(225), whence (260) is equivalent to (226).)
+
+[PDF PAGE 42]
+Divorcing pressure from viscosity
+42
+Remark 6. For the unconstrained Stokes system (244)-(246) there is an extra
+subtlety in determining an isomorphism from data to solution. We obtain a
+unique solution pair {⃗u, p} ∈ΠU given any data {⃗f,⃗g, h, ⃗uin} ∈ΠF that satisfy
+only the compatibility conditions (225) and (226) without (251). Consequently
+the map from data to {⃗u, p} is not one-to-one. And, in the other direction, given
+{⃗u, p}, we can recover
+⃗f = ∂t⃗u + ∇p −ν∆⃗u,
+⃗g = ⃗u
+
+Γ,
+⃗uin = ⃗u|t=0.
+(261)
+But how are we to recover h? We need to use the fact, that follows from the
+deﬁnition of pgh in (210), that ∇· ⃗u −h satisﬁes a heat equation with no-ﬂux
+boundary conditions. In fact, to be able to recover h we need to know one more
+item, hin, the initial value of h. We have
+h = ∇· ⃗u −w
+(262)
+where w is the solution of
+∂tw = ν∆w in Ω,
+⃗n · ∇w = 0 on Γ,
+w(0) = ∇· ⃗u|t=0 −hin.
+(263)
+This procedure indicates that we should count the triple {⃗u, p, hin} as our solu-
+tion in order to build an isomorphism with the data. Of course, the regularity
+of hin must match that of h, recalling the embeddings in (228).
+Consequently, we see that solving the unconstrained system (244)–(247) de-
+ﬁnes an isomorphism between the data spaces
+˜ΠF.c :=
+n
+{⃗f,⃗g, h, ⃗uin} ∈ΠF : (225) and (226) hold
+o
+,
+(264)
+˜ΠF.c.s :=
+n
+{⃗f,⃗g, h, ⃗uin} ∈ΠF.s : (225) and (226) hold
+o
+,
+(265)
+and, respectively, the solution spaces for {⃗u, p, hin} given by
+ΠU.w = Hu × Hp × Hhin,
+Hhin = L2(Ω),
+(266)
+ΠU.s = Hu.s × Hp × Hhin.s,
+Hhin.s = H1(Ω).
+(267)
+Acknowledgments
+The fact (related to Theorem 2) that ⃗n·∇p ∈L2(Ωs) implies ∇p ∈L2(Ω) for har-
+monic p was proved some years ago by Oscar Gonzalez and RLP (unpublished)
+through a partitioning and ﬂattening argument. RLP is grateful for this collab-
+oration. This material is based upon work supported by the National Science
+Foundation under grant no. DMS 03-05985 (RLP) and DMS-0107218 (JGL).
+JGL and RLP are thankful for the support of the Institute for Mathematical
+Sciences at the National University of Singapore. RLP acknowledges support
+by the Distinguished Ordway Visitors Program of the School of Mathematics,
+and the Institute for Mathematics and its Applications, at the University of
+Minnesota.
+
+[PDF PAGE 43]
+Divorcing pressure from viscosity
+43
+References
+[Ab]
+H. Abels, Bounded imaginary powers and H∞-calculus of the Stokes
+operator in unbounded domains, preprint.
+[Am]
+H. Amann, On the strong solvability of the Navier-Stokes equations, J.
+Math. Fluid Mech. 2 (2000) 16–98.
+[Am2] H. Amann, Nonhomogeneous Navier-Stokes equations with integrable
+low-regularity data, in Nonlinear Problems in Mathematical Physics and
+Related Topics II, Int. Math. Ser., Kluwer/Plenum, New York (2002),
+1–28.
+[Au]
+T. Aubin, Nonlinear Analysis on Manifolds. Monge-Amp`ere Equations.
+Springer-Verlag, New York, 1982.
+[Ba]
+J. M. Ball, Strongly continuous semigroups, weak solutions, and the vari-
+ation of constants formula. Proc. Amer. Math. Soc. 63 (1977) 370–373.
+[Ch]
+A. J. Chorin, Numerical solution of the Navier-Stokes equations, Math.
+Comp., 22 (1968) 745–762
+[Ev]
+L. C. Evans, Partial Diﬀerential Equations, Amer. Math. Soc., Provi-
+dence, 1998.
+[Fr]
+A. Friedman, Partial Diﬀerential Equations, Holt, Rinehart and Win-
+ston, New York, 1969.
+[GR]
+V. Girault and P-A. Raviart, Finite Element Methods for Navier-Stokes
+Equations: Theory and Algorithms. Springer-Verlag, Berlin, 1986.
+[Gr1]
+G. Grubb, Nonhomogeneous Dirichlet Navier-Stokes problems in low reg-
+ularity Lp Sobolev spaces, J. Math. Fluid Mech. 3 (2001), 57–81.
+[GS1] G. Grubb and V. A. Solonnikov, Reduction of basic initial-boundary
+value problems of the Navier-Stokes equations to initial-boundary value
+problems for nonlinear parabolic systems of pseudodiﬀerential equations,
+J. Soviet Math. 56 (1991) 2300–2308.
+[GS2] G. Grubb and V. A. Solonnikov, Boundary value problems for the nonsta-
+tionary Navier-Stokes equations treated by pseudodiﬀerential methods,
+Math. Scand. 69 (1991) 217–290.
+[GT]
+D. Gilbarg and N.S. Trudinger, Elliptic Partial Diﬀerential Equations of
+Second Order, 3rd ed, Springer-Verlag, Berlin, 1998.
+[GuS] J. L. Guermond and J. Shen, A new class of truly consistent splitting
+schemes for incompressible ﬂows, J. Comp. Phys. 192 (2003) 262–276.
+[He]
+D. Henry, Geometric Theory of Semilinear Parabolic Equations. LNM
+840, Springer-Verlag, Berlin, 1981.
+[Ka]
+T. Kato, Perturbation Theory for Linear Operators, 2nd ed, Springer-
+Verlag, Berlin, 1976.
+[JL]
+H. Johnston and J.-G. Liu, Accurate, stable and eﬃcient Navier-Stokes
+solvers based on explicit treatment of the pressure term, J. Comp. Phys.
+199 (1) (2004) 221–259
+
+[PDF PAGE 44]
+Divorcing pressure from viscosity
+44
+[La]
+O. A. Ladyzhenskaya, The Mathematical Theory of Viscous Incompress-
+ible Flow, Gordon and Breach, New York, 1969
+[LM]
+J. L. Lions and E. Magenes, Non-homogeneous Boundary Value Problems
+and Applications, vol. I and II. Springer-Verlag, Berlin, 1972
+[OID] S. A. Orszag, M. Israeli and M. Deville, Boundary conditions for incom-
+pressible ﬂows. J. Sci. Comput. 1, (1986) 75–111
+[Pa]
+A. Pazy, Semigroups of Linear Operators and Applications to Partial
+Diﬀerential Equations, Springer-Verlag, New York, 1983.
+[Pe]
+N. A. Petersson, Stability of pressure boundary conditions for Stokes and
+Navier-Stokes equations, J. Comp. Phys. 172 (2001) 40-70.
+[RR]
+M. Renardy and R. C. Rogers. An Introduction to Partial Diﬀerential
+Equations. Springer-Verlag, New York, 1993.
+[Soh]
+H. Sohr, The Navier-Stokes Equations, An Elementary Functional Ana-
+lytic Approach. Birkh¨auser Verlag, Basel, 2001.
+[Sol]
+V. A. Solonnikov, Estimates of the solutions of a nonstationary linearized
+system of Navier-Stokes equations. Amer. Math. Soc. Transl. 75, (1968)
+1–116.
+[Ta1]
+L. Tartar, Topics in Nonlinear Analysis. Publications math´ematiques
+d’Orsay 78.13. Universit´e de Paris Sud, France, 1978.
+[Ta2]
+L.
+Tartar,
+Introduction
+to
+Oceanography.
+Lecture
+notes,
+Carnegie
+Mellon
+Univ.,
+1999.
+Available
+at
+http://www.math.cmu.edu/cna/publications.html
+[Ta]
+M. Taylor, Partial Diﬀerential Equations:
+Basic Theory. Springer-
+Verlag, New York, 1996.
+[Te1]
+R. Temam, Navier-Stokes Equations: Theory and Numerical Analysis.
+AMS Chelsea, Providence, 2001.
+[Te2]
+R. Temam, Sur l’approximation de la solution des equations de Navier-
+Stokes par la m´ethode des fractionnarires II, Arch. Rational Mech. Anal.,
+33, (1969), 377–385
+[Ti]
+L. J. P. Timmermans, P. D. Minev, F. N. Van De Vosse, An approximate
+projection scheme for incompressible ﬂow using spectral elements, Int. J.
+Numer. Methods Fluids 22 (1996) 673–688.

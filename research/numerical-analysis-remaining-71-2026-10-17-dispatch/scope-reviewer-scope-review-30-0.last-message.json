@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "30",
+  "round": 0,
+  "reviewed_items": [
+    "def-hyperbolic-system-and-characteristic-families",
+    "def-hll-two-wave-flux",
+    "def-ideal-gas-euler-state-and-pressure",
+    "def-rankine-hugoniot-and-lax-shocks",
+    "def-roe-linearization-and-flux",
+    "def-scalar-convex-entropy-admissibility",
+    "lem-smooth-simple-characteristic-eigenpairs",
+    "def-euler-star-pressure-response",
+    "def-local-rarefaction-curve",
+    "lem-local-characteristic-shock-curve",
+    "lem-rankine-hugoniot-jump-is-a-weak-solution",
+    "thm-hll-flux-is-consistent-and-conservative",
+    "thm-one-dimensional-ideal-gas-euler-eigenstructure",
+    "thm-roe-flux-is-consistent-and-conservative",
+    "lem-euler-acoustic-wave-pressure-response",
+    "lem-linearly-degenerate-characteristic-contact",
+    "lem-local-rarefaction-fan",
+    "def-mixed-characteristic-wave-curve",
+    "thm-euler-star-pressure-root-and-vacuum-criterion",
+    "alg-safeguarded-euler-star-pressure-solver",
+    "lem-mixed-wave-curves-are-c1",
+    "lem-euler-pressure-solver-bracket-and-termination",
+    "thm-local-small-data-riemann-solver",
+    "def-godunov-flux-from-a-local-riemann-solver",
+    "thm-godunov-flux-is-consistent-and-conservative",
+    "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+    "ex-ideal-gas-contact-discontinuity",
+    "ex-euler-vacuum-threshold-boundary",
+    "ex-acoustic-system-local-riemann-solution",
+    "ex-sod-tube-pressure-root"
+  ],
+  "reviewed_pages": [
+    "riemann-solvers-for-hyperbolic-systems",
+    "riemann-solvers-for-hyperbolic-systems-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch and approved scope were reviewed, including direct published suppliers and their uses. Two defects can be repaired within the assigned A page.",
+  "findings": [
+    {
+      "id": "lem-local-characteristic-shock-curve",
+      "type": "prerequisite",
+      "reason": "The statement assumes only one simple real eigenpair, but proof steps 1.1 and 5.1 use a complete real eigenframe and positive gaps between all ordered families; step 5.1 then asserts the full strict Lax inequalities. Require strict hyperbolicity at the base state (so it persists locally after shrinking)."
+    },
+    {
+      "id": "lem-rankine-hugoniot-jump-is-a-weak-solution",
+      "type": "local",
+      "reason": "The definition of weak solution also requires the L1_loc trace to the Riemann initial step. The proof establishes only the distributional PDE identity, then claims the weak-solution equivalence. State the natural initial datum and verify the trace; on a compact spatial set the discrepancy is confined to an interval of length |s|t."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-mixed-characteristic-wave-curve",
+      "decision": "accept",
+      "reason": "Its local characteristic family is defined on a strictly hyperbolic neighborhood under def-hyperbolic-system-and-characteristic-families, satisfying the clarified shock-curve hypothesis."
+    },
+    {
+      "id": "lem-mixed-wave-curves-are-c1",
+      "decision": "accept",
+      "reason": "It inherits the mixed-curve hypotheses and uses the shock curve only under that local family scope."
+    },
+    {
+      "id": "lem-linearly-degenerate-characteristic-contact",
+      "decision": "accept",
+      "reason": "The jump result's clarified Riemann trace supplies the weak-solution condition used here."
+    },
+    {
+      "id": "thm-local-small-data-riemann-solver",
+      "decision": "accept",
+      "reason": "It states strict hyperbolicity explicitly and independently verifies the composite profile's initial trace in proof step 5.1."
+    },
+    {
+      "id": "def-godunov-flux-from-a-local-riemann-solver",
+      "decision": "accept",
+      "reason": "Its local solver supplier has explicit strict-hyperbolicity hypotheses; the added jump trace does not narrow its flux definition."
+    },
+    {
+      "id": "thm-godunov-flux-is-consistent-and-conservative",
+      "decision": "accept",
+      "reason": "It uses the local solver and Godunov flux within their stated domains."
+    },
+    {
+      "id": "ex-acoustic-system-local-riemann-solution",
+      "decision": "accept",
+      "reason": "The example's matrix has the distinct real eigenvalues -1 and 1, and its local solver use satisfies the clarified hypothesis."
+    },
+    {
+      "id": "riemann-solvers-for-hyperbolic-systems",
+      "decision": "accept",
+      "reason": "The page summary already scopes the local construction to strictly hyperbolic systems and describes weak jumps."
+    },
+    {
+      "id": "riemann-solvers-for-hyperbolic-systems-examples",
+      "decision": "accept",
+      "reason": "Its examples page requires the A page; its examples remain within the clarified local solver and weak-solution scope."
+    }
+  ]
+}

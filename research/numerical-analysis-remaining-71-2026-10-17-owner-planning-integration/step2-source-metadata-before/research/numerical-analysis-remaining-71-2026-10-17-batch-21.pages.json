@@ -1,0 +1,198 @@
+[
+  {
+    "order": 2596,
+    "id": "alternating-tensor-optimization-and-effective-eigenproblems",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Alternating tensor optimization and effective eigenproblems",
+    "companion": "alternating-tensor-optimization-and-effective-eigenproblems-examples",
+    "requires": [
+      "tensor-train-compression-and-truncation-error",
+      "restarted-and-block-eigensolvers"
+    ],
+    "items": [
+      {
+        "id": "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+        "kind": "lemma",
+        "title": "Finite Hermitian ground vectors and a deterministic tie rule",
+        "statement": "A finite real symmetric or complex Hermitian matrix attains its least Rayleigh quotient on a unit ground eigenvector; a standard-basis projection rule selects one deterministically from a degenerate ground eigenspace.",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "def-rayleigh-quotient",
+          "thm-courant-fischer-min-max-principle",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-finite-dimensional-orthogonal-decomposition"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-na-normalized-rayleigh-energy-perturbation",
+        "kind": "lemma",
+        "title": "Rayleigh energy perturbation for normalized finite states",
+        "statement": "For unit vectors psi and phi in a finite tensor-array space and a Hermitian H, the energy difference is at most 2 times the operator norm of H times the distance between psi and phi.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "def-self-adjoint-and-normal-endomorphism"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-na-finite-mps-state-and-hermitian-hamiltonian",
+        "kind": "definition",
+        "title": "Finite matrix-product states and Hermitian Hamiltonians",
+        "statement": "Defines normalized finite real or complex MPS/TT states in open-boundary and periodic trace forms, finite Hermitian Hamiltonian inputs, and their Rayleigh energy.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-na-periodic-mps-to-open-tt",
+        "kind": "lemma",
+        "title": "A periodic finite MPS has an exact open-boundary TT conversion",
+        "statement": "A finite periodic trace MPS with cyclic bond dimensions r_k has an exactly equal open-boundary TT representation with internal bond dimensions r_0 r_k.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-na-mixed-canonical-qr-gauge-preserves-state",
+        "kind": "lemma",
+        "title": "Rank-revealing QR sweeps give exact mixed canonical gauge",
+        "statement": "Every nonzero finite open-boundary TT can be transformed without changing its tensor into a mixed canonical gauge; dependent bond directions are removed exactly by deterministic rank-revealing QR.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "thm-gram-schmidt-orthonormalisation"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+        "kind": "lemma",
+        "title": "Canonical MPS environments are isometric and the effective Hamiltonian is Hermitian",
+        "statement": "For a one-site or two-site center between left- and right-isometric TT environments, the center-to-full-state embedding is isometric and the pulled-back finite Hamiltonian is Hermitian.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-na-exact-local-dmrg-update-does-not-increase-energy",
+        "kind": "proposition",
+        "title": "An exact local DMRG ground solve does not increase Rayleigh energy",
+        "statement": "In a mixed canonical one-site or two-site subspace, replacing the current center by an exact lowest eigenvector of the effective Hermitian Hamiltonian weakly decreases the global Rayleigh energy before truncation.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+        "kind": "algorithm",
+        "title": "Finite alternating tensor optimization with effective eigenproblems",
+        "statement": "Defines an exact-arithmetic finite-budget one-site or two-site sweep procedure with canonical QR gauge, local effective Hamiltonians, deterministic exact ground solves, SVD splitting, optional TT rounding, recorded tails, and explicit status.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "lem-na-periodic-mps-to-open-tt",
+          "lem-na-mixed-canonical-qr-gauge-preserves-state",
+          "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "alg-tensor-train-rounding",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-na-dmrg-sweep-truncation-energy-increase-bound",
+        "kind": "theorem",
+        "title": "TT discarded weights bound the post-sweep DMRG energy increase",
+        "statement": "If an exact finite DMRG sweep is followed by TT rounding with discarded tails delta_k and tau=sqrt(sum delta_k^2)<1, the normalized rounded energy is at most the starting energy plus 4 times the Hamiltonian operator norm times tau.",
+        "deps": [
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "prop-na-exact-local-dmrg-update-does-not-increase-energy",
+          "lem-na-normalized-rayleigh-energy-perturbation",
+          "alg-tensor-train-rounding",
+          "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "lem-reverse-triangle-inequality-in-a-normed-space"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-na-convergent-exact-dmrg-sweeps-are-coordinatewise-stationary",
+        "kind": "theorem",
+        "title": "Convergent fixed-rank exact sweeps are coordinatewise stationary",
+        "statement": "For fixed bond dimensions, if the canonical core arrays at every update stage of exact no-truncation DMRG sweeps are bounded and converge componentwise in one gauge, the limit is coordinatewise stationary; no convergence or global optimality is asserted.",
+        "deps": [
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 2597,
+    "id": "alternating-tensor-optimization-and-effective-eigenproblems-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Alternating tensor optimization and effective eigenproblems — Examples",
+    "companion": "alternating-tensor-optimization-and-effective-eigenproblems",
+    "requires": [
+      "alternating-tensor-optimization-and-effective-eigenproblems"
+    ],
+    "items": [
+      {
+        "id": "ex-na-two-site-spin-chain-exact-local-solve",
+        "kind": "example",
+        "title": "A two-site spin-chain local solve reaches the exact ground state",
+        "statement": "For H=-Z tensor I-I tensor Z-Z tensor Z, the exact two-site update from |11> returns |00> and decreases energy from 1 to -3.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-na-two-site-tt-truncation-can-increase-energy",
+        "kind": "example",
+        "title": "A two-site TT truncation can increase energy after an exact solve",
+        "statement": "An exact local ground solve returns an entangled two-site ground state whose rank-one TT truncation is normalized to a higher-energy product state; the discarded-weight bound remains valid.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "alg-tensor-train-rounding",
+          "thm-na-dmrg-sweep-truncation-energy-increase-bound"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-na-degenerate-local-ground-state-tie-break",
+        "kind": "example",
+        "title": "A degenerate local ground eigenspace has a deterministic tie choice",
+        "statement": "For H=Z tensor Z, the degenerate two-site ground space is span{|01>,|10>}; the deterministic standard-basis rule returns |01>.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

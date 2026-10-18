@@ -1,0 +1,71 @@
+--- before/alg-na-periodic-incremental-pressure-correction
+
++++ current/alg-na-periodic-incremental-pressure-correction
+
+@@ -2,8 +2,10 @@
+
+ 
+ Fix $d\ge1$, $N\ge2$, $h=1/N$, viscosity $\nu>0$, and time step $k>0$.
+ Given $u^n\in V_h$ with $D_hu^n=0$, a mean-zero
+-pressure $p^n\in Q_h$, and a mean-zero force $f^{n+1}\in V_h$, define the next
+-step by the following two solves and update:
++pressure $p^n\in Q_h$, and a force $f^{n+1}\in V_h$ whose components each
++have zero discrete mean,
++$$h^d\sum_{j\in J_N}f_{i,j}^{n+1}=0\qquad(1\le i\le d),$$
++define the next step by the following two solves and update:
+ 
+ 1. Find $\widetilde u^{n+1}\in V_h$ satisfying
+ $$ \frac{\widetilde u^{n+1}-u^n}{k}+\nu A_h\widetilde u^{n+1}+G_hp^n=f^{n+1}. $$
+
+--- before/alg-na-bdf2-incremental-and-rotational-pressure-correction
+
++++ current/alg-na-bdf2-incremental-and-rotational-pressure-correction
+
+@@ -2,7 +2,10 @@
+
+ 
+ Fix $d\ge1$, $N\ge2$, $h=1/N$, $\nu>0$, $k>0$, and a step $n\ge1$. Supply
+ $u^{n-1},u^n\in V_h$ with zero discrete divergence, a mean-zero
+-$p^n\in Q_h$, and mean-zero $f^{n+1}\in V_h$. Compute a predictor
++$p^n\in Q_h$, and $f^{n+1}\in V_h$ whose components each have zero discrete
++mean,
++$$h^d\sum_{j\in J_N}f_{i,j}^{n+1}=0\qquad(1\le i\le d).$$
++Compute a predictor
+ $\widetilde u^{n+1}\in V_h$ from
+ $$ \frac{3\widetilde u^{n+1}-4u^n+u^{n-1}}{2k} +\nu A_h\widetilde u^{n+1}+G_hp^n=f^{n+1}, $$
+ then solve for the unique mean-zero $\phi^{n+1}\in Q_h$ from
+
+--- before/thm-na-periodic-pressure-correction-first-order-velocity-error
+
++++ current/thm-na-periodic-pressure-correction-first-order-velocity-error
+
+@@ -10,7 +10,10 @@
+
+ the staggered faces and $p,f$ at their corresponding grid locations; subtract
+ the discrete mean from each sampled pressure and force component. Start the
+ backward-Euler incremental pressure-correction algorithm with
+-$u_h^0=P_hR_hu(0)$. Then its velocity satisfies
++$$
++u_h^0=P_hR_hu(0),\qquad p_h^0=R_hp(0)-h^d\sum_{j\in J_N}(R_hp(0))_j.
++$$
++Then its velocity satisfies
+ $$ \max_{0\le n\le M}\|u_h^n-R_hu(t_n)\|_{M_h} \le C_T(h^2+k),\qquad t_n=nk, $$
+ where $C_T$ is independent of $h,k$ and depends only on $d,T,\nu$ and the
+ displayed smoothness bounds. The estimate is for velocity; no pressure-error
+
+--- before/ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum
+
++++ current/ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum
+
+@@ -2,7 +2,9 @@
+
+ 
+ Take $A=[1]$, $B=[1]$, $M_Q=[1]$, and $\gamma=1$ in the symmetric
+ saddle-point and block-preconditioning convention of
+-[[def-na-symmetric-saddle-point-system-and-block-preconditioners]]. Then
++[[def-na-symmetric-saddle-point-system-and-block-preconditioners]]. Interpret
++$V=Q=\mathbb R$ with Euclidean norms, $a(v,w)=vw$, and $b(v,q)=qv$; thus the
++pressure-Schur hypotheses hold with $\alpha=\Lambda=C_b=\beta=1$. Then
+ $$ K=\begin{pmatrix}1&1\\1&0\end{pmatrix},\qquad P_1=I. $$
+ The symmetrically preconditioned eigenvalues are
+ $$ \frac{1-\sqrt5}{2},\qquad\frac{1+\sqrt5}{2}. $$

@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "2",
+  "round": 1,
+  "reviewed_items": [
+    "def-rbf-kernels-sites-and-augmented-interpolation",
+    "lem-rbf-augmented-system-is-invertible",
+    "def-normalized-matern-spectral-kernel",
+    "lem-matern-spectral-integral-and-normalization",
+    "def-bessel-potential-space-and-restriction-quotient",
+    "lem-matern-weighted-fourier-space-is-hilbert-and-injective",
+    "lem-schwartz-dense-in-fourier-bessel-potential-space",
+    "lem-matern-native-space-fourier-identity-and-positive-definiteness",
+    "lem-restricted-matern-native-space-is-sobolev",
+    "lem-cone-sites-admit-stable-polynomial-norming-stencils",
+    "lem-sobolev-zeros-bound-on-a-cone-domain",
+    "thm-native-interpolation-projection-and-power-function",
+    "thm-matern-interpolation-fill-distance-error",
+    "lem-separated-sites-matern-gram-bound",
+    "cor-matern-mesh-ratio-conditioning-bound",
+    "alg-augmented-rbf-finite-difference-weights",
+    "thm-rbf-fd-polynomial-reproduction-and-local-truncation",
+    "ex-smooth-scattered-surface-matern-rate",
+    "ex-duplicate-rbf-sites-singular-gram-matrix",
+    "ex-small-fill-distance-can-have-poor-rbf-conditioning"
+  ],
+  "reviewed_pages": [
+    "radial-basis-and-kernel-interpolation",
+    "radial-basis-and-kernel-interpolation-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The carried round-0 findings are resolved in the current sources. This final review found two remaining undeclared prerequisite uses; under the second-review rule they must go to the owner.",
+  "findings": [
+    {
+      "id": "lem-matern-spectral-integral-and-normalization",
+      "type": "prerequisite",
+      "reason": "Step 1.2 uses complex Lebesgue integration by parts on finite intervals to derive the Gaussian Fourier differential equation, but neither deps nor Facts declares a matching supplier. The published lem-complex-integration-by-parts-on-intervals-and-decaying-lines supplies this identity; add it or provide the full local justification. This is a proof-only issue with no downstream interface change."
+    },
+    {
+      "id": "lem-schwartz-dense-in-fourier-bessel-potential-space",
+      "type": "prerequisite",
+      "reason": "Steps 1.2 and 3.1 use integration by parts for complex Lebesgue Fourier integrals. F7's thm-integration-by-parts supplier covers real Riemann integrals on intervals, and the source does not supply the complex Lebesgue bridge. The published lem-complex-integration-by-parts-on-intervals-and-decaying-lines is applicable; declare it or justify the use locally. This is a proof-only issue with no downstream interface change."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "radial-basis-and-kernel-interpolation-examples",
+      "decision": "accept",
+      "reason": "The page remains consistent with the repaired smooth-grid rate and augmented near-duplicate family with diverging exact conditioning; it is the only downstream consumer of those example claims."
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+[
+  {
+    "order": 2688,
+    "id": "ale-interface-and-partitioned-multiphysics-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "ALE, interfaces and partitioned multiphysics coupling",
+    "companion": "ale-interface-and-partitioned-multiphysics-discretization-examples",
+    "requires": [
+      "energy-stable-incompressible-navier-stokes-discretization",
+      "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "elasticity-near-incompressibility-and-locking-free-discretization",
+      "imex-and-operator-splitting-methods"
+    ],
+    "items": [
+      {
+        "id": "cor-ale-exact-splitting-residual-orders",
+        "kind": "corollary",
+        "title": "Conditional finite-dimensional Lie and Strang splitting residual orders",
+        "statement": "For two C3 vector fields on a common compact convex tube with exact subflows and the hypotheses of the cited finite-dimensional splitting theorem, Lie and Strang updates have global orders one and two respectively; approximate subflow errors remain separate under the theorem's explicit budgets and stability bound.",
+        "deps": [
+          "def-additive-ode-and-partition",
+          "def-exact-split-flows-lie-strang-and-bracket",
+          "thm-lie-strang-global-orders-and-subflow-error"
+        ],
+        "dependency_level": 0,
+        "strategy": "Instantiate the exact finite-dimensional Lie-Strang theorem and preserve all of its common-tube, regularity, exact-flow, and approximate-subflow hypotheses."
+      },
+      {
+        "id": "def-ale-linear-diffusion-transmission-model",
+        "kind": "definition",
+        "title": "Finite-dimensional backward-Euler diffusion transmission model",
+        "statement": "Two finite-dimensional real subdomain spaces have positive-definite mass and coercive diffusion matrices; backward Euler produces positive-definite local blocks, a common nonzero trace space, local Schur fluxes q_i=S_i lambda_i-f_i, trace continuity, and monolithic flux balance q_1+q_2=0.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Define the real inner products, matrix blocks, trace coordinates, local flux sign, condensed data, and monolithic interface conditions."
+      },
+      {
+        "id": "def-ale-moving-domain-map",
+        "kind": "definition",
+        "title": "ALE moving-domain map and mesh velocity",
+        "statement": "A C2 orientation-preserving diffeomorphism A_t from a fixed bounded reference domain with compact Jordan closure; in dimension one the domain is a finite union of intervals, and in dimension at least two it has a finite piecewise-C1 boundary presentation. Define J=det D_xi A_t>0 and w_m=partial_t A_t composed with A_t^{-1}.",
+        "deps": [
+          "def-jordan-inner-and-outer-content"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define the map, its domains, regularity, Jacobian, and spatial mesh velocity."
+      },
+      {
+        "id": "def-ale-periodic-moving-grid",
+        "kind": "definition",
+        "title": "Periodic one-dimensional moving grid",
+        "statement": "A finite N-cell periodic reference grid with positive cell Jacobians J_i^n, periodic face velocities w_{i+1/2}^n, face update x_{i+1/2}^{n+1}=x_{i+1/2}^n+Delta t w_{i+1/2}^n, and constant physical advection speed a.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "State the periodic indexing, positive cell widths, time step, face motion, and relative speed convention."
+      },
+      {
+        "id": "def-ale-toy-added-mass-recurrence",
+        "kind": "definition",
+        "title": "Scalar added-mass staggered recurrence",
+        "statement": "For structure mass m_s>0, fluid added mass m_f>0, and scalar velocity increment delta v_n, the specified toy sequential update is m_s delta v_{n+1}=-m_f delta v_n.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Declare the exact scalar recurrence and its restricted toy-model scope."
+      },
+      {
+        "id": "alg-ale-upwind-finite-volume-step",
+        "kind": "algorithm",
+        "title": "Conservative upwind ALE finite-volume step",
+        "statement": "Move the periodic faces, return mesh_crossing before state update if any new J_i is nonpositive, otherwise use the relative-speed upwind flux and conservative cell-average update specified in the Definition.",
+        "deps": [
+          "def-ale-periodic-moving-grid"
+        ],
+        "dependency_level": 1,
+        "strategy": "Give exact inputs, status branch, flux convention, update order, and output."
+      },
+      {
+        "id": "lem-ale-jacobi-geometric-conservation-identity",
+        "kind": "lemma",
+        "title": "Jacobi identity for the ALE mesh Jacobian",
+        "statement": "For the ALE map A_t, the Jacobian satisfies partial_t J=J div_x w_m.",
+        "deps": [
+          "def-ale-moving-domain-map"
+        ],
+        "dependency_level": 1,
+        "strategy": "Differentiate the determinant and identify the trace of the spatial velocity gradient."
+      },
+      {
+        "id": "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+        "kind": "lemma",
+        "title": "Moving faces satisfy the one-dimensional discrete GCL",
+        "statement": "The periodic face update gives J_i^{n+1}=J_i^n+(Delta t/Delta xi)(w_{i+1/2}^n-w_{i-1/2}^n).",
+        "deps": [
+          "def-ale-periodic-moving-grid"
+        ],
+        "dependency_level": 1,
+        "strategy": "Subtract the two adjacent face updates and divide by Delta xi."
+      },
+      {
+        "id": "lem-ale-schur-complement-positive-and-minimizes-energy",
+        "kind": "lemma",
+        "title": "The diffusion Schur complement is positive and minimizes energy",
+        "statement": "For a symmetric positive-definite local backward-Euler block, its Schur complement on the trace space is positive definite and its quadratic form is the minimum local energy among states with that trace.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model"
+        ],
+        "dependency_level": 1,
+        "strategy": "Complete the square in interior variables and use positivity of the full local block."
+      },
+      {
+        "id": "thm-ale-monolithic-backward-euler-energy-identity",
+        "kind": "theorem",
+        "title": "Monolithic backward Euler transmission energy identity",
+        "statement": "For matching traces and balanced outward interface fluxes, the finite-dimensional monolithic backward-Euler step has a unique solution and satisfies the exact mass-energy difference identity with the time-jump, diffusion-dissipation, and forcing terms.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use positive definiteness for unique solvability, cancel paired interface flux work, test by the new state, and expand the mass inner product."
+      },
+      {
+        "id": "alg-ale-robin-robin-partitioned-iteration",
+        "kind": "algorithm",
+        "title": "Finite-budget Robin-Robin transmission iteration",
+        "statement": "For positive-definite Schur operators S_1,S_2, loads f_i, alpha>0, incoming datum r_1^0, tolerance epsilon>0, and finite pass budget M>=1, perform the two Robin solves and exchanges; return a trace only when the stated contraction-based stop test passes, otherwise return budget_exhausted with the last trace.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model",
+          "lem-ale-schur-complement-positive-and-minimizes-energy"
+        ],
+        "dependency_level": 2,
+        "strategy": "Specify each sequential solve and exchange, the finite stopping rule, and the exhaustion output."
+      },
+      {
+        "id": "lem-ale-schur-residual-controls-interface-energy-error",
+        "kind": "lemma",
+        "title": "Schur residual controls trace and reconstruction energy error",
+        "statement": "If rho=(S_1+S_2)lambda_tilde-(f_1+f_2), then the trace error is bounded by ||(S_1+S_2)^{-1}|| ||rho|| and the reconstructed subdomain backward-Euler energy error is bounded by sqrt(||(S_1+S_2)^{-1}||)||rho||.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model",
+          "lem-ale-schur-complement-positive-and-minimizes-energy"
+        ],
+        "dependency_level": 2,
+        "strategy": "Express trace error through the inverse Schur sum and use the Schur energy-minimization identity."
+      },
+      {
+        "id": "thm-ale-one-dimensional-reynolds-transport-identity",
+        "kind": "theorem",
+        "title": "Choice-free one-dimensional ALE Reynolds transport identity",
+        "statement": "For a one-dimensional ALE map on a finite union of bounded intervals and C1 scalar data, the moving-domain integral derivative equals the spatial integral of partial_t g plus the endpoint flux sum; this branch is proved without Choice.",
+        "deps": [
+          "cor-mean-value-theorem",
+          "def-ale-moving-domain-map",
+          "def-riemann-integral-over-a-jordan-set",
+          "lem-ale-jacobi-geometric-conservation-identity",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "thm-ftc-second-part",
+          "thm-heine-cantor-metric",
+          "thm-jordan-content-and-indicator-integrability",
+          "thm-multidimensional-integral-properties"
+        ],
+        "dependency_level": 2,
+        "strategy": "Differentiate on the fixed finite union of intervals, change variables, and apply the one-dimensional fundamental theorem on each endpoint pair."
+      },
+      {
+        "id": "thm-ale-reynolds-transport-identity",
+        "kind": "theorem",
+        "title": "Countable-choice Reynolds transport identity on piecewise-C1 moving domains",
+        "statement": "Assume Countable Choice and d>=2. For g C1 on the moving domain, d/dt int_{Omega(t)} g dx=int_{Omega(t)} partial_t g dx+int_{partial Omega(t)} g w_m dot n dS under the stated ALE and finite piecewise-C1 boundary hypotheses.",
+        "deps": [
+          "cor-mean-value-theorem",
+          "def-ale-moving-domain-map",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "def-countable-choice",
+          "def-riemann-integral-over-a-jordan-set",
+          "lem-ale-jacobi-geometric-conservation-identity",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "thm-heine-cantor-metric",
+          "thm-jordan-content-and-indicator-integrability",
+          "thm-multidimensional-integral-properties"
+        ],
+        "dependency_level": 2,
+        "strategy": "Pull the integral back to the fixed reference domain, differentiate using Jacobi's identity, then apply change of variables and the divergence theorem."
+      },
+      {
+        "id": "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+        "kind": "theorem",
+        "title": "The upwind ALE step conserves mass and preserves constants",
+        "statement": "Whenever the ALE step succeeds, it preserves periodic total mass and maps every constant cell state to the same constant, for every face-velocity table; no CFL condition is needed for these two properties.",
+        "deps": [
+          "def-ale-periodic-moving-grid",
+          "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+          "alg-ale-upwind-finite-volume-step"
+        ],
+        "dependency_level": 2,
+        "strategy": "Sum the periodic flux differences for mass and use the discrete GCL to cancel mesh-flux changes for a constant state."
+      },
+      {
+        "id": "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+        "kind": "theorem",
+        "title": "Robin-Robin iteration contracts to the monolithic trace",
+        "statement": "For positive-definite S_i and alpha>0, the Robin-Robin fixed point is exactly the unique monolithic trace; the homogeneous incoming-data error map is R_2 R_1 with R_i=(alpha I-S_i)(alpha I+S_i)^{-1}; the finite stop test certifies trace error at most epsilon.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model",
+          "lem-ale-schur-complement-positive-and-minimizes-energy",
+          "alg-ale-robin-robin-partitioned-iteration",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 3,
+        "strategy": "Prove fixed-point equivalence, diagonalize the positive Schur operators to get strict contractions, and sum the geometric tail for the stop certificate."
+      },
+      {
+        "id": "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+        "kind": "theorem",
+        "title": "CFL monotonicity and weighted L1 contraction for the ALE step",
+        "statement": "If (Delta t/Delta xi)(c_{i+1/2}^+-c_{i-1/2}^-)<=J_i^n for every cell and all new Jacobians are positive, then the upwind ALE update is monotone, preserves nonnegative states, and contracts the Jacobian-weighted discrete L1 norm of differences.",
+        "deps": [
+          "def-ale-periodic-moving-grid",
+          "alg-ale-upwind-finite-volume-step",
+          "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream"
+        ],
+        "dependency_level": 3,
+        "strategy": "Expand the update into nonnegative neighbor coefficients, use constant preservation for row sums, and use mass conservation for weighted column sums."
+      }
+    ]
+  },
+  {
+    "order": 2689,
+    "id": "ale-interface-and-partitioned-multiphysics-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "ALE, interfaces and partitioned multiphysics coupling — Examples",
+    "companion": "ale-interface-and-partitioned-multiphysics-discretization",
+    "requires": [
+      "ale-interface-and-partitioned-multiphysics-discretization"
+    ],
+    "items": [
+      {
+        "id": "ex-ale-added-mass-toy-recurrence-instability",
+        "kind": "example",
+        "title": "A toy sequential coupling can amplify velocity error",
+        "statement": "For the defined recurrence with m_s=1, m_f=2, and nonzero delta v_0, the increments satisfy delta v_n=(-2)^n delta v_0 and grow geometrically in magnitude.",
+        "deps": [
+          "def-ale-toy-added-mass-recurrence"
+        ],
+        "dependency_level": 1,
+        "strategy": "Iterate the scalar recurrence and compare successive absolute values."
+      },
+      {
+        "id": "ex-ale-expanding-mesh-free-stream",
+        "kind": "example",
+        "title": "An expanding cell preserves a constant state",
+        "statement": "On a two-cell periodic grid with Delta xi=1, Delta t=0.1, a=0, face velocities 0 and 0.1, and initial cell averages U, the first cell expands to Jacobian 1.01, the second contracts to 0.99, and the ALE update preserves U and total mass 2U.",
+        "deps": [
+          "def-ale-periodic-moving-grid",
+          "alg-ale-upwind-finite-volume-step",
+          "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream"
+        ],
+        "dependency_level": 3,
+        "strategy": "Compute both updated Jacobians, relative fluxes, and the two cell updates exactly."
+      },
+      {
+        "id": "ex-ale-two-domain-heat-interface-flux-balance",
+        "kind": "example",
+        "title": "A two-domain heat trace balances outward fluxes",
+        "statement": "For two positive-definite condensed backward-Euler blocks with S_1=2, S_2=1, f_1=1, f_2=5, alpha=1, incoming datum r_1^0=2, tolerance 0.1, and budget two, the monolithic trace is 2, the outward fluxes are 3 and -3, and the partitioned iteration certifies the exact trace on its second pass.",
+        "deps": [
+          "def-ale-linear-diffusion-transmission-model",
+          "lem-ale-schur-complement-positive-and-minimizes-energy",
+          "thm-ale-monolithic-backward-euler-energy-identity",
+          "alg-ale-robin-robin-partitioned-iteration",
+          "thm-ale-robin-robin-iteration-contracts-and-certifies-stop"
+        ],
+        "dependency_level": 4,
+        "strategy": "Exhibit positive local blocks realizing the stated Schur scalars and perform both Robin passes exactly."
+      }
+    ]
+  }
+]

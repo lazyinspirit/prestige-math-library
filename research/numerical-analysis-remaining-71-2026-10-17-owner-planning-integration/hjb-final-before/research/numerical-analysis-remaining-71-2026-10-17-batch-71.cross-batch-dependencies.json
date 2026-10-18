@@ -1,0 +1,146 @@
+[
+  {
+    "kind": "page",
+    "consumer": "monotone-hjb-schemes-and-policy-iteration",
+    "consumer_batch": "71",
+    "supplier": "semi-lagrangian-characteristic-transport",
+    "supplier_batch": "70",
+    "status": "verified",
+    "required_hypotheses": [
+      "def-semilagrangian-periodic-grid-and-interpolant supplies a periodic rectangular torus, wrapped tensor-grid nodes, and the tensor-product multilinear interpolation formula. The PE32 local grid specializes it to unit periods and N_j>=3.",
+      "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting proves nonnegative weights summing to one and pointwise L-infinity contraction at every periodic foot; the PE32 interpolation-accuracy supplier uses this property.",
+      "alg-semilagrangian-backtracking-on-periodic-grid and thm-periodic-c1-velocity-has-global-characteristic-flow require a C1 velocity. PE32 coefficients are only uniformly Lipschitz; those stronger flow claims are deliberately not imported. The PE32 frozen-time Euler foot x_i+tau b_a(x_i,t_n), periodic wrap, and running-cost update are defined and analyzed locally."
+    ],
+    "affected_claims": [
+      "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+      "lem-na-multilinear-interpolation-positive-and-second-order-accurate",
+      "alg-na-positive-interpolation-semilagrangian-hjb-step",
+      "thm-na-positive-interpolation-hjb-step-monotone-stable-consistent",
+      "lem-na-first-order-hjb-discrete-initial-trace",
+      "thm-na-first-order-hjb-scheme-convergence",
+      "ex-na-eikonal-kink-monotone-hjb-updates",
+      "ex-na-compact-control-quantization-hamiltonian-error"
+    ],
+    "unresolved_supplier_ids": [],
+    "evidence": "Inspected the current batch-70 manifest, complete bodies of def-semilagrangian-periodic-grid-and-interpolant and lem-periodic-tensor-interpolant-is-convex-and-linf-contracting, and the current Step-1 records for both (ready, owner=false). Their hypotheses and exact formulas match the two PE32 imported interfaces. The actual PE31 characteristic-flow and backtracking bodies were also inspected; their C1 assumption is stronger than PE32's Lipschitz coefficient class, so no flow theorem is used. The PE32 Euler-footpoint scheme and all claims depending on it are proved locally. Batch-70 draft readiness records are not independent acceptance.",
+    "supplier_item_ids": [
+      "def-semilagrangian-periodic-grid-and-interpolant",
+      "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting"
+    ],
+    "not_used_supplier_items": [
+      {
+        "id": "alg-semilagrangian-backtracking-on-periodic-grid",
+        "reason": "The PE31 algorithm uses a C1 velocity and backward flow formulation; the PE32 control coefficients are Lipschitz and the selected HJB scheme is the locally defined frozen-time Euler footpoint."
+      },
+      {
+        "id": "thm-periodic-c1-velocity-has-global-characteristic-flow",
+        "reason": "Its C1 coefficient hypothesis is stronger than PE32 needs; no exact characteristic-flow error is asserted by the PE32 explicit Euler scheme."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+    "consumer_batch": "71",
+    "supplier": "def-semilagrangian-periodic-grid-and-interpolant",
+    "supplier_batch": "70",
+    "status": "verified",
+    "required_hypotheses": [
+      "Specialize the supplier's periodic box T^d_ell and interpolation to ell_j=1 and N_j>=3. Preserve the supplier's floor/fraction convention and periodic index wrap; the local item fixes the unit-torus notation and the N_j>=3 stencil convention."
+    ],
+    "affected_claims": [
+      "the unit periodic nodes x_i=(i_1h_1,...,i_dh_d) mod Z^d",
+      "the local notation I_h and periodic interpolation-foot convention used throughout PE32"
+    ],
+    "unresolved_supplier_ids": [],
+    "evidence": "The current supplier Definition explicitly permits positive periods ell_j and integer N_j>=1, gives wrapped nodes and the product interpolation formula, and its Step-1 record is ready. The PE32 carrier makes the stated unit-period restriction and N_j>=3 visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-na-multilinear-interpolation-positive-and-second-order-accurate",
+    "consumer_batch": "71",
+    "supplier": "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+    "supplier_batch": "70",
+    "status": "verified",
+    "required_hypotheses": [
+      "Finite periodic nodal arrays on the tensor grid; the supplier proves convexity, positivity and L-infinity contraction for every periodic query point without a displacement restriction. The local accuracy proof additionally assumes a periodic C2 test function and uses the Taylor remainder supplier."
+    ],
+    "affected_claims": [
+      "positive interpolation weights and order preservation in the PE32 semi-Lagrangian step",
+      "the L-infinity interpolation bound used in the local tensor interpolation error proof"
+    ],
+    "unresolved_supplier_ids": [],
+    "evidence": "Read the complete current lemma statement, Facts & Assumptions, and proof. It derives nonnegative tensor weights and their unit sum directly from the actual periodic-grid definition, including wrapped/repeated corner labels; its current Step-1 record is ready. The supplier's convexity claim matches PE32's unit-period specialization. This is an interface check, not independent proof acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "monotone-hjb-schemes-and-policy-iteration",
+    "consumer_batch": "71",
+    "supplier": "hyperbolic-finite-difference-methods",
+    "supplier_batch": null,
+    "status": "verified",
+    "required_hypotheses": [
+      "def-periodic-one-way-advection-schemes supplies the positive-speed explicit upwind row and periodic indexing. The PE32 HJB convention u_t=min_a(b_a dot Du+ell_a) uses transport velocity -b_a, so the one-sided direction is sign-reflected. Only the periodic first-order formula is consumed; finite-interval boundary clauses are not used."
+    ],
+    "affected_claims": [
+      "alg-na-upwind-hjb-grid-step",
+      "thm-na-upwind-hjb-grid-step-monotone-stable-consistent",
+      "lem-na-first-order-hjb-discrete-initial-trace",
+      "thm-na-first-order-hjb-scheme-convergence",
+      "cex-na-centered-hjb-update-is-not-monotone"
+    ],
+    "unresolved_supplier_ids": [],
+    "evidence": "Read the complete published definition and its stated transport sign convention and explicit upwind rows. The PE32 algorithm reflects the velocity to -b and proves its own multidimensional CFL row weights and consistency.",
+    "supplier_item_ids": [
+      "def-periodic-one-way-advection-schemes"
+    ],
+    "supplier_pipeline_run": "numerical-optimization-dynamics-2026-10-16"
+  },
+  {
+    "kind": "page",
+    "consumer": "monotone-hjb-schemes-and-policy-iteration",
+    "consumer_batch": "71",
+    "supplier": "hamilton-jacobi-equations-and-viscosity-solutions",
+    "supplier_batch": null,
+    "status": "verified",
+    "required_hypotheses": [
+      "def-hamilton-jacobi-cauchy-problem fixes the first-order Cauchy problem and spatial-gradient convention.",
+      "def-viscosity-subsolution-and-supersolution uses C1 upper tests at local maxima and lower tests at local minima, with relaxed initial inequalities.",
+      "def-half-relaxed-limits defines set-based upper and lower envelopes; its sequential recovery property invokes def-countable-choice.",
+      "thm-comparison-for-first-order-hamilton-jacobi-equations case (a) requires bounded semicontinuous sub/supersolutions, pointwise initial ordering, and global Lipschitz bounds in (x,t,p); the PE32 compact-control Hamiltonian satisfies them with C=max(1,L,B)."
+    ],
+    "affected_claims": [
+      "def-na-first-order-hjb-cauchy-problem",
+      "lem-na-grid-contact-localization-for-half-relaxed-limits",
+      "lem-na-smooth-tests-suffice-for-first-and-second-order-hjb-viscosity",
+      "thm-na-first-order-hjb-scheme-convergence"
+    ],
+    "unresolved_supplier_ids": [],
+    "evidence": "Inspected the actual published definitions and the complete proof of thm-comparison-for-first-order-hamilton-jacobi-equations. The exact whole-space hypotheses, initial face convention, periodic extension, and Countable Choice use are recorded in the PE32 carriers.",
+    "supplier_item_ids": [
+      "def-hamilton-jacobi-cauchy-problem",
+      "def-viscosity-subsolution-and-supersolution",
+      "def-half-relaxed-limits",
+      "thm-comparison-for-first-order-hamilton-jacobi-equations"
+    ],
+    "supplier_pipeline_run": "frontier-39-analysis-30"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-na-grid-contact-localization-for-half-relaxed-limits",
+    "consumer_batch": "71",
+    "supplier": "def-countable-choice",
+    "supplier_batch": null,
+    "supplier_pipeline_run": "session",
+    "status": "verified",
+    "required_hypotheses": [
+      "AC_omega asserts a choice function for every sequence of nonempty sets. The mesh-contact lemma uses it only for sequential recovery from the set-defined upper/lower half-relaxed-limit formulas; its compact-annulus localization uses all qualifying rational neighborhoods and finite subcovers instead."
+    ],
+    "affected_claims": [
+      "sequential near-recovery pairs in lem-na-grid-contact-localization-for-half-relaxed-limits",
+      "the first- and second-order half-relaxed scheme passages"
+    ],
+    "unresolved_supplier_ids": [],
+    "evidence": "Read the current published Definition and checked its exact countable family hypothesis. The PE32 carriers declare A1 and use the axiom only at the recovery selections; finite grid and rational-cover choices are deterministic/choice-free."
+  }
+]

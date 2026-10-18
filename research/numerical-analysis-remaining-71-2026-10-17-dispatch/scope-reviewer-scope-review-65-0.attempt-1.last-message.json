@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "65",
+  "round": 0,
+  "reviewed_items": [
+    "def-periodic-scalar-diffusion-data",
+    "def-periodic-zero-mean-cell-space",
+    "def-periodic-cell-problem",
+    "lem-periodic-cell-poincare",
+    "lem-periodic-cell-corrector-wellposedness",
+    "def-periodic-cell-correctors-and-effective-tensor",
+    "thm-periodic-effective-tensor-symmetric-elliptic",
+    "lem-periodic-averaging-on-cube",
+    "def-periodic-two-scale-convergence",
+    "thm-two-scale-compactness-for-l2-bounded-sequences",
+    "lem-unit-cube-h01-separability-and-l2-compactness",
+    "lem-two-scale-gradient-decomposition-for-h01",
+    "thm-periodic-dirichlet-homogenization-on-unit-cube",
+    "cor-periodic-dirichlet-homogenization-strong-l2",
+    "lem-periodic-flux-corrector",
+    "thm-periodic-boundary-layer-corrector-estimate",
+    "alg-fehmm-periodic-cell-micro-macro",
+    "lem-fehmm-micro-cell-solves-wellposedness",
+    "lem-fehmm-micro-tensor-approximation-error",
+    "lem-fehmm-period-aligned-sampling-has-zero-resonance",
+    "lem-fehmm-one-dimensional-nonaligned-resonance-bound",
+    "thm-fehmm-macro-micro-resonance-error-decomposition",
+    "ex-layered-periodic-effective-tensor",
+    "ex-periodic-effective-tensor-high-contrast-no-uniform-condition-number",
+    "ex-fehmm-macro-micro-resonance-ledger",
+    "ex-nonaligned-periodic-sampling-resonance"
+  ],
+  "reviewed_pages": [
+    "homogenization-and-multiscale-finite-element-methods",
+    "homogenization-and-multiscale-finite-element-methods-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch review found repairable local proof, prerequisite, procedure, and scope defects. The actual Bolzano–Weierstrass supplier proof gives deterministic subsequence extraction, so the Countable Choice claims do not require escalation to dependent choice.",
+  "findings": [
+    {
+      "id": "homogenization-and-multiscale-finite-element-methods",
+      "type": "scope",
+      "reason": "The current page inventory also requires finite-element-pde-constrained-optimization, while the controlling PE21 plan-spec and generated task require adaptive-finite-element-methods only. No assigned claim uses the extra page; remove that unapproved edge at owner metadata reconciliation and retain the AFEM prerequisite."
+    },
+    {
+      "id": "def-periodic-scalar-diffusion-data",
+      "type": "prerequisite",
+      "reason": "Identifying coefficients a.e. on Y and defining a(x/ε) requires affine pullbacks to preserve measurability and null sets. The same missing premise occurs in periodic rescaling and FE-HMM sampling. Declare the published thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions (under its Countable Choice hypothesis) at this definition and at standalone rescaling items, or prove the concrete affine cases locally. Uses include lem-periodic-averaging-on-cube 1.1–1.2, lem-unit-cube-h01-separability-and-l2-compactness 1.3/2.1, alg-fehmm-periodic-cell-micro-macro 39–41, lem-fehmm-one-dimensional-nonaligned-resonance-bound 49/51, lem-fehmm-period-aligned-sampling-has-zero-resonance 53–55, thm-periodic-boundary-layer-corrector-estimate 71, and ex-nonaligned-periodic-sampling-resonance 34."
+    },
+    {
+      "id": "lem-periodic-averaging-on-cube",
+      "type": "local",
+      "reason": "Step 1.1 asserts convergence of the grid Riemann sums without giving the estimate. Add the short cellwise uniform-continuity bound (the same cell partition already controls the replacement error)."
+    },
+    {
+      "id": "thm-periodic-dirichlet-homogenization-on-unit-cube",
+      "type": "local",
+      "reason": "Step 3.1 uses φ for both the macroscopic term and oscillatory factor; step 4.1 then sets φ=0 while retaining that factor as η, which step 3.1 did not establish. Use independent slow factors in v_n=φ+εηw(x/ε); this preserves the result and yields the cell test."
+    },
+    {
+      "id": "thm-periodic-dirichlet-homogenization-on-unit-cube",
+      "type": "prerequisite",
+      "reason": "F7 and step 4.1 require rational zero-mean trigonometric polynomials to be dense in V#. The cited averaging supplier gives rescaling bounds and weak averaging, while the Fourier supplier gives L2 completeness, not H1# density. Prove weighted Fourier truncation for smooth periodic functions and pass to the H1 closure. Also state that F_w is L2 and invoke test-function density when inferring F_w=0 a.e."
+    },
+    {
+      "id": "thm-two-scale-compactness-for-l2-bounded-sequences",
+      "type": "local",
+      "reason": "Step 2.1 moves from rational linearity of L0 to a real-linear extension without showing real homogeneity. Add the continuity argument using rational scalars converging to each real scalar before applying real Riesz representation."
+    },
+    {
+      "id": "cor-periodic-dirichlet-homogenization-strong-l2",
+      "type": "local",
+      "reason": "Step 1.1 uses a uniform H1 bound as [F1], but the homogenization theorem's Statement does not include that bound. Derive it here by testing the oscillatory weak equation with u_ε, or make the bound an explicit supplier conclusion."
+    },
+    {
+      "id": "alg-fehmm-periodic-cell-micro-macro",
+      "type": "local",
+      "reason": "The Definition specifies the micro and macro variational systems but leaves their exact finite solve as an unspecified 'solve' operation. Give an exact real-arithmetic procedure, including a basis/order, assembled systems, solver steps or a declared solver call, and loop/branch behavior; preserve the current inputs, outputs, and equations."
+    },
+    {
+      "id": "homogenization-and-multiscale-finite-element-methods",
+      "type": "local",
+      "reason": "The page calls x_K+δY a square centered at x_K, but x_K is its lower corner and its center is x_K+δ(1/2,1/2). Clarify the prose to match the current sampling formula."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-periodic-averaging-on-cube",
+      "decision": "repair",
+      "reason": "Add the affine change-of-variables prerequisite and the local Riemann-sum estimate."
+    },
+    {
+      "id": "lem-unit-cube-h01-separability-and-l2-compactness",
+      "decision": "repair",
+      "reason": "Step 1.3/2.1 rescales to a side-3 torus; declare or prove the affine measure change."
+    },
+    {
+      "id": "alg-fehmm-periodic-cell-micro-macro",
+      "decision": "repair",
+      "reason": "Add exact finite solve instructions; its sampled coefficient also relies on the affine pullback premise."
+    },
+    {
+      "id": "lem-fehmm-micro-cell-solves-wellposedness",
+      "decision": "accept",
+      "reason": "Its cell equations and coercivity argument use the algorithm's unchanged b_K, W_M, and macro-system interfaces; the coefficient pullback premise is supplied by the requested data-definition dependency."
+    },
+    {
+      "id": "lem-fehmm-micro-tensor-approximation-error",
+      "decision": "accept",
+      "reason": "The energy identity uses the unchanged full and discrete cell equations and tensor outputs."
+    },
+    {
+      "id": "lem-fehmm-period-aligned-sampling-has-zero-resonance",
+      "decision": "accept",
+      "reason": "Its exact cell and sampled-flux uses remain valid; affine phase transport is covered by the requested coefficient-data prerequisite."
+    },
+    {
+      "id": "lem-fehmm-one-dimensional-nonaligned-resonance-bound",
+      "decision": "accept",
+      "reason": "The harmonic-mean calculation and bound are sound; affine measurability and substitution are covered transitively through the coefficient-data prerequisite."
+    },
+    {
+      "id": "thm-periodic-boundary-layer-corrector-estimate",
+      "decision": "accept",
+      "reason": "Its strip rescaling and cell integral use the unchanged periodic bounds; the requested affine pullback dependency covers these uses."
+    },
+    {
+      "id": "ex-nonaligned-periodic-sampling-resonance",
+      "decision": "accept",
+      "reason": "The numerical integrals are correct; the affine substitution is supplied transitively by its resonance-bound dependency after repair."
+    },
+    {
+      "id": "thm-fehmm-macro-micro-resonance-error-decomposition",
+      "decision": "accept",
+      "reason": "Its error argument uses the unchanged B_H, sampled tensors, and macro solution equations."
+    },
+    {
+      "id": "ex-fehmm-macro-micro-resonance-ledger",
+      "decision": "accept",
+      "reason": "Its conditional arithmetic uses the unchanged FE-HMM error statement."
+    },
+    {
+      "id": "cor-periodic-dirichlet-homogenization-strong-l2",
+      "decision": "repair",
+      "reason": "Derive the uniform energy bound locally before invoking compact L2 subsequences."
+    },
+    {
+      "id": "homogenization-and-multiscale-finite-element-methods",
+      "decision": "repair",
+      "reason": "Clarify the micro-square location on the page; the mathematical sampling interface can remain unchanged."
+    }
+  ]
+}

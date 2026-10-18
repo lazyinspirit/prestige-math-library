@@ -1,0 +1,2366 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "8",
+  "scope": [
+    "def-nufft-finite-array-norms",
+    "def-nufft-periodized-gaussian-gridding-kernel",
+    "lem-nufft-finite-euclidean-norm-triangle",
+    "def-nufft-transform-types-and-mode-conventions",
+    "lem-nufft-gaussian-periodization-converges",
+    "lem-nufft-gaussian-image-tail-bound",
+    "lem-nufft-gaussian-periodization-fourier-series",
+    "lem-nufft-gaussian-spread-truncation-tail",
+    "lem-nufft-gaussian-grid-alias-identity-and-bound",
+    "alg-nufft-certified-gaussian-gridding-type1-type2",
+    "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+    "ex-nufft-mri-fourier-samples",
+    "ex-nufft-small-deconvolution-mode-is-inconclusive",
+    "ex-nufft-clustered-sources-l1-error"
+  ],
+  "contracts": {
+    "def-nufft-finite-array-norms": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-intervals-rectangles-and-complex-balls",
+          "source_section": "Definition",
+          "quote": "A **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nonnegative-square-root-exists-and-unique",
+          "source_section": "Statement",
+          "quote": "In a Dedekind-complete ordered field, every $x\\ge0$ has a unique $y\\ge0$ with\n$y^2=x$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complete-ordered-real-field",
+          "source_section": "Definition",
+          "quote": "A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $E=\\varnothing$ all three values are stipulated as zero. If $E$ is nonempty finite, enumerate its elements and induct on the number of entries. A one-entry list of real moduli has a maximum; given a maximum for the first $n$ entries, compare it with the $(n+1)$st modulus using [F2] and [F4] and keep the larger. Induction [F5] constructs the maximum of the finite modulus list. The finite sum formulas in [F1] are well-defined.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Every term $|z_e|^2$ is nonnegative by [F2], so the finite sum in the Euclidean norm is nonnegative; [F3] supplies its unique nonnegative square root. Thus all three displayed values are defined, including the separately stipulated empty-array case.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1: The definition assigns zero to all three norms on the empty index set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1: The finite formulas and proof steps make no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "def-nufft-periodized-gaussian-gridding-kernel": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite formulas and proof steps make no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "lem-nufft-finite-euclidean-norm-triangle": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nufft-finite-array-norms",
+          "source_section": "Definition",
+          "quote": "For a finite index set $E$ and a complex array $z=(z_e)_{e\\in E}$, define\n$$\\|z\\|_1=\\sum_{e\\in E}|z_e|,\\qquad \\|z\\|_2=\\left(\\sum_{e\\in E}|z_e|^2\\right)^{1/2},\\qquad \\|z\\|_\\infty=\\max_{e\\in E}|z_e|.$$\nFor $z,w\\in\\mathbb C^E$, define the counting inner product by $\\langle z,w\\rangle_E=\\sum_{e\\in E}z_e\\overline{w_e}$. By [[lem-complex-conjugation-and-modulus-laws]], $\\langle z,z\\rangle_E=\\sum_{e\\in E}|z_e|^2$, so $\\|z\\|_2=\\sqrt{\\langle z,z\\rangle_E}$. For $E=\\varnothing$, all three norms and this inner product are defined to be zero. For nonempty finite $E$, the maximum exists by repeated comparison in the real order. Complex modulus is as in [[def-intervals-rectangles-and-complex-balls]], conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]], finite sums as in [[def-finite-sum-in-a-commutative-monoid]], and the square root is the unique nonnegative root.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complete-ordered-real-field",
+          "source_section": "Definition",
+          "quote": "A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-square-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$. For\nevery $a \\in F$ with $a \\neq 0$ we have $a^2 > 0$, where $a^2 = a \\cdot a$. In\nparticular, every nonzero square is positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "First prove Cauchy–Schwarz for these arrays. If $y=0$, its inner product with $x$ is zero. If $y\\ne0$, choose $e_0$ with $y_{e_0}\\ne0$; [F2]–[F3] give $\\|y\\|_2^2=\\sum_e|y_e|^2>0$. Put $a=\\langle x,y\\rangle_E$ and $c=a/\\|y\\|_2^2$. Expanding the finite sum using [F1] and conjugation laws gives $0\\le\\|x-cy\\|_2^2=\\|x\\|_2^2-\\frac{|a|^2}{\\|y\\|_2^2}.$ Multiplying by the positive denominator yields $|\\langle x,y\\rangle_E|^2\\le\\|x\\|_2^2\\|y\\|_2^2$; all quantities are nonnegative, so [F4] gives $|\\langle x,y\\rangle_E|\\le\\|x\\|_2\\|y\\|_2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Expand the squared norm: $\\|x+y\\|_2^2=\\|x\\|_2^2+2\\operatorname{Re}\\langle x,y\\rangle_E+\\|y\\|_2^2\\le(\\|x\\|_2+\\|y\\|_2)^2,$ where the inequality follows from step 1.1 and $\\operatorname{Re}z\\le|z|$, itself immediate from $|a+ib|^2=a^2+b^2\\ge a^2$ and [F4]. Both sides before squaring are nonnegative, so [F4] gives the stated triangle inequality.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite formulas and proof steps make no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "def-nufft-transform-types-and-mode-conventions": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\sin ^2x+\\cos ^2x=1$, $\\sin(-x)=-\\sin x$, and $\\cos(-x)=\\cos x$. Wherever the displayed quotients are defined, $\\tan(-x)=-\\tan x$, $\\cot(-x)=-\\cot x$, $\\sec(-x)=\\sec x$, $\\csc(-x)=-\\csc x$, $1+\\tan^2x=\\sec^2x$, and $1+\\cot^2x=\\csc^2x$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-generalised-associativity",
+          "source_section": "Statement",
+          "quote": "Let $(M,\\cdot,e)$ be a monoid and let $g : \\mathbb{N} \\to M$, with finite products\n$\\prod_{i<n} g_i$ as in [[def-monoid-finite-product]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $j<N$ and $k\\in\\mathcal K$, and put $t=2\\pi k\\cdot x_j\\in\\mathbb R$. By [F1]–[F2], $e^{-it}=\\cos(-t)+i\\sin(-t)=\\cos t-i\\sin t$. Applying [F3] gives $\\overline{e^{-it}}=\\cos t+i\\sin t=e^{it}$. Thus $(A^*)_{jk}=\\overline{A_{kj}}=e^{+2\\pi i k\\cdot x_j}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For any $c\\in\\mathbb C^N$ and $f\\in\\mathbb C^{\\mathcal K}$, expand the finite sums: $\\langle Ac,f\\rangle_{\\mathcal K}=\\sum_{k\\in\\mathcal K}\\sum_{j<N}c_j e^{-2\\pi i k\\cdot x_j}\\overline{f_k} =\\sum_{j<N}c_j\\overline{\\sum_{k\\in\\mathcal K}f_k e^{+2\\pi i k\\cdot x_j}} =\\langle c,A^*f\\rangle_{\\{j<N\\}}.$ The first equality uses finite distributivity/reordering from [F4]; the second uses step 1.1 and the stated inner-product convention. Thus the type-2 sum is exactly the conjugate-transpose action under matching finite inner products.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The definition assigns zero to the empty source sum and permits an empty output list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite formulas and proof steps make no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "lem-nufft-gaussian-periodization-converges": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nufft-periodized-gaussian-gridding-kernel",
+          "source_section": "Definition",
+          "quote": "The series is the formal periodization; [[lem-nufft-gaussian-periodization-converges]] proves that it converges absolutely and locally uniformly, so its value is a continuous one-periodic real function. Its Fourier coefficient at $r\\in\\mathbb Z$ is denoted $\\widehat\\phi_\\tau(r)=\\int_0^1\\phi_\\tau(x)e^{-2\\pi i r x}\\,dx$ when this integral is used; [[lem-nufft-gaussian-periodization-fourier-series]] computes it exactly. The kernel is nonnegative and satisfies $\\phi_\\tau(x+1)=\\phi_\\tau(x)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-archimedean-property-from-completeness",
+          "source_section": "Statement",
+          "quote": "In a Dedekind-complete ordered field, the natural numbers are unbounded above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $\\alpha=\\pi/\\tau>0$ using [F5] and $\\tau>0$, and set $q=\\exp(-\\alpha)\\in(0,1)$ by [F4]. Fix $R>0$ and choose an integer $n_0>R+1$ by [F2]. For $|x|\\le R$ and $|n|\\ge n_0$, one has $|x+n|\\ge|n|-R>1$, hence $(x+n)^2\\ge(|n|-R)^2\\ge|n|-R$. Since $\\exp$ is increasing, the $n$th nonnegative summand is at most $\\exp(-\\alpha(|n|-R))=\\exp(\\alpha R)q^{|n|}$ by [F6]. The two-sided geometric tail is finite and tends to zero uniformly in $x\\in[-R,R]$ as its starting index tends to infinity, by [F3]. This proves absolute and uniform convergence on every compact interval.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Each finite partial sum is continuous by [F1] and [F4]. Fix $x_0\\in\\mathbb R$ and $\\varepsilon>0$, choose $R>|x_0|+1$, and choose a partial-sum index for which the uniform tail on $[-R,R]$ is below $\\varepsilon/3$ by step 1.1. Continuity of that finite partial sum at $x_0$ gives a neighborhood where its change is below $\\varepsilon/3$; the two tail values contribute less than $2\\varepsilon/3$. Thus the full sum is continuous at $x_0$. Absolute convergence permits the reindexing $m=n+1$ in $\\phi_\\tau(x+1)=\\sum_n\\exp(-\\alpha(x+1+n)^2)$, giving $\\phi_\\tau(x+1)=\\phi_\\tau(x)$. Since $x_0$ was arbitrary, the sum is continuous and one-periodic.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite formulas and proof steps make no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "lem-nufft-gaussian-image-tail-bound": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nufft-periodized-gaussian-gridding-kernel",
+          "source_section": "Definition",
+          "quote": "The series is the formal periodization; [[lem-nufft-gaussian-periodization-converges]] proves that it converges absolutely and locally uniformly, so its value is a continuous one-periodic real function. Its Fourier coefficient at $r\\in\\mathbb Z$ is denoted $\\widehat\\phi_\\tau(r)=\\int_0^1\\phi_\\tau(x)e^{-2\\pi i r x}\\,dx$ when this integral is used; [[lem-nufft-gaussian-periodization-fourier-series]] computes it exactly. The kernel is nonnegative and satisfies $\\phi_\\tau(x+1)=\\phi_\\tau(x)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nufft-gaussian-periodization-converges",
+          "source_section": "Statement",
+          "quote": "For every $\\tau>0$, the series defining $\\phi_\\tau(x)$ converges absolutely and uniformly on each compact interval of $x$. Its sum is continuous on $\\mathbb R$ and has period one.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $q=\\exp(-\\pi L/\\tau)\\in(0,1)$ by [F2]–[F3]. For positive omitted indices write $n=L+h$ with $h\\ge1$. Since $0\\le x\\le1$, $(x+n)^2\\ge n^2=(L+h)^2\\ge L^2+Lh$, so their sum is at most $\\exp(-\\pi L^2/\\tau)\\sum_{h\\ge1}q^h$. By [F4] this is at most $\\exp(-\\pi L^2/\\tau)/(1-q)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For negative omitted indices write $n=-(L+1+h)$ with $h\\ge0$. Then $|x+n|=L+1+h-x\\ge L+h$, and $(L+h)^2\\ge L^2+Lh$. Their sum is at most $\\exp(-\\pi L^2/\\tau)\\sum_{h\\ge0}q^h=\\exp(-\\pi L^2/\\tau)/(1-q)$ by [F4].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The two omitted tails are nonnegative and exhaust the indices outside $[-L,L]$. Adding steps 1.1 and 1.2 gives the claimed remainder $R_{\\tau,L}$; [F3] also proves its denominator is positive.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1: The closed interval x∈[0,1] includes both endpoint image-tail cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite formulas and proof steps make no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "lem-nufft-gaussian-periodization-fourier-series": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-poisson-summation-for-schwartz-functions",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $f\\in\\mathcal S(\\mathbb R^n)$,\n$$\\sum_{k\\in\\mathbb Z^n}f(x+k)=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e^{2\\pi ik\\cdot x}\\qquad(x\\in\\mathbb R^n).$$\nThe left series converges locally uniformly with every derivative; the right series converges absolutely uniformly on all of $\\mathbb R^n$. At $x=0$ this gives $\\sum_kf(k)=\\sum_k\\widehat f(k)$, both sums absolutely convergent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $n\\ge1$, $t>0$, and $\\xi\\in\\mathbb R^n$,\n$$\\mathcal F(e^{-\\pi t|x|^2})(\\xi)=t^{-n/2}e^{-\\pi|\\xi|^2/t}.$$\nEvery polynomial times a positive real Gaussian is absolutely integrable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-nufft-gaussian-periodization-converges",
+          "source_section": "Statement",
+          "quote": "For every $\\tau>0$, the series defining $\\phi_\\tau(x)$ converges absolutely and uniformly on each compact interval of $x$. Its sum is continuous on $\\mathbb R$ and has period one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $h_\\tau(u)=\\exp(-\\pi u^2/\\tau)$. By [F4], induction on derivative order gives $h_\\tau^{(q)}(u)=P_q(u)\\exp(-\\pi u^2/\\tau)$ for a polynomial $P_q$. For every $m,q$, the quantity $|u|^m|P_q(u)|\\exp(-\\pi u^2/\\tau)$ tends to zero as $|u|\\to\\infty$: bound the polynomial by a finite sum of powers, set $z=u^2$, and apply [F5] with $a=\\pi/\\tau>0$ by [F7]. On a compact interval it is bounded by continuity. Thus every seminorm in [F3] is finite and $h_\\tau\\in\\mathcal S(\\mathbb R)$.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply [F1] to $h_\\tau$ from step 1.1. By [F2] with $t=1/\\tau$, its Fourier transform at integer $r$ is $\\sqrt{\\tau}\\exp(-\\pi\\tau r^2)$. The left periodization is $\\phi_\\tau$ by [F6], so [F1] gives the displayed Fourier series, its coefficient formula, and both convergence assertions.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is named where the periodized-Gaussian alias/error result requires it; finite constructions add no stronger choice use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "lem-nufft-gaussian-spread-truncation-tail": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-nufft-gaussian-periodization-converges",
+          "source_section": "Statement",
+          "quote": "For every $\\tau>0$, the series defining $\\phi_\\tau(x)$ converges absolutely and uniformly on each compact interval of $x$. Its sum is continuous on $\\mathbb R$ and has period one.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix one coordinate, write $M=M_r$, $\\tau=\\tau_r$, $w=w_r$, $a=\\pi/(\\tau M^2)>0$ by [F6], and $y=Mx_r$. Reindexing the finite grid index and period index by $m=\\ell+nM$ gives $\\sum_{\\ell=0}^{M-1}\\phi_\\tau(\\ell/M-x_r)=\\sum_{m\\in\\mathbb Z}\\exp(-a(m-y)^2).$ For every integer $s\\ge0$, at most two integers satisfy $s\\le|m-y|<s+1$. Their terms are at most $\\exp(-as^2)$; for $s\\ge1$, $s^2\\ge s$. Thus the sum is at most $2\\sum_{s=0}^{\\infty}\\exp(-as)=2/(1-\\exp(-a))=S_r$ by [F2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "If $\\ell\\notin W_r(x_r)$, then every $m=\\ell+nM$ satisfies $|m-y|>w$. On either side of $y$, the lattice distances form a unit-spaced sequence $d+n$ with $d>w$. The first term is at most $\\exp(-aw^2)$. For each later term, monotonicity of $f_a$ gives $f_a(d+n)\\le\\int_{d+n-1}^{d+n}f_a(t)\\,dt$. For $R>w$, [F3]–[F4] give $\\int_w^R f_a(t)\\,dt\\le\\frac1w\\int_w^Rt f_a(t)\\,dt=\\frac{\\exp(-aw^2)-\\exp(-aR^2)}{2aw}\\le\\frac{\\exp(-aw^2)}{2aw}.$ By [F5], the last subtracted term tends to zero as $R\\to\\infty$. Taking limits of the finite tail sums, which converge by [F1], bounds each side by $\\exp(-aw^2)(1+1/(2aw))$. Both sides together yield $\\sum_{\\ell\\notin W_r(x_r)}\\phi_\\tau(\\ell/M-x_r)\\le T_r$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The complement of the product set $W(x)$ is the union of the $d$ sets where at least one coordinate index is outside its $W_r(x_r)$. Since all kernel terms are nonnegative, the total omitted product mass is at most the sum of the $d$ coordinate-tail product sums. Each such finite product factors into the one-coordinate tail in step 1.2 and the full-coordinate masses in step 1.1; hence it is at most $T_r\\prod_{s\\ne r}S_s$. Summing over $r$ gives $T_d$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.2: The support rule includes its cutoff ≤w_r/M_r and bounds the complementary tail."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite formulas and proof steps make no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "lem-nufft-gaussian-grid-alias-identity-and-bound": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nufft-gaussian-periodization-fourier-series",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For $\\tau>0$, the Fourier coefficient of $\\phi_\\tau$ at each integer $r$ is $\\widehat\\phi_\\tau(r)=\\sqrt{\\tau}\\exp(-\\pi\\tau r^2)$, and\n$$\\phi_\\tau(x)=\\sum_{r\\in\\mathbb Z}\\sqrt{\\tau}\\exp(-\\pi\\tau r^2)e^{2\\pi i r x}.$$\nThe periodized series on the left converges locally uniformly, and the Fourier series on the right converges absolutely and uniformly.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nufft-transform-types-and-mode-conventions",
+          "source_section": "Definition",
+          "quote": "The **type-1 nonuniform discrete Fourier transform** maps source coefficients to integer-mode samples:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-nonnegative-square-root-exists-and-unique",
+          "source_section": "Statement",
+          "quote": "In a Dedekind-complete ordered field, every $x\\ge0$ has a unique $y\\ge0$ with\n$y^2=x$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Substitute [F1] into each factor of $\\Phi_\\tau$ and then into $\\widetilde g_k$. Absolute uniform convergence in [F1] permits interchanging the finite grid/source sums with the absolutely convergent Fourier series. For an integer $m_r$, the coordinate root sum is $\\frac1{M_r}\\sum_{\\ell_r=0}^{M_r-1}e^{2\\pi i(m_r-k_r)\\ell_r/M_r}=\\begin{cases}1,&m_r-k_r\\in M_r\\mathbb Z,\\\\0,&m_r-k_r\\notin M_r\\mathbb Z.\\end{cases}$ Indeed, in the first case every term is $1$; in the second, $z=e^{2\\pi i(m_r-k_r)/M_r}\\ne1$ by [F3] while $z^{M_r}=1$, so the finite geometric sum is $(1-z^{M_r})/(1-z)=0$. Thus only $m_r=k_r+q_rM_r$ remain in each coordinate, giving the displayed exact alias identity.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The $q=0$ term of that identity is $\\widehat\\Phi(k)F_k$ by [F1]–[F2]. Each factor $\\sqrt{\\tau_r}\\exp(-\\pi\\tau_r k_r^2)$ is positive by [F6], so division by $\\widehat\\Phi(k)$ is valid. For each $q$, its coefficient ratio is $\\frac{\\widehat\\Phi(k+q\\odot M)}{\\widehat\\Phi(k)}=\\prod_r\\exp\\!\\left(-\\pi\\tau_r((k_r+q_rM_r)^2-k_r^2)\\right).$ Separating $q=0$ proves the deconvolution identity.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $M_r>2K_r$, $\\tau_r>0$ and $\\pi>0$ by [F6], the exponent parameter $\\lambda_r=\\pi\\tau_rM_r(M_r-2K_r)$ is positive. Positivity and strict monotonicity of $\\exp$ in [F6] imply $0<s_r=e^{-\\lambda_r}<1$. Fix one coordinate $r$. If $q_r=\\pm h$ with integer $h\\ge1$ and $|k_r|\\le K_r$, then $(k_r+q_rM_r)^2-k_r^2=q_r^2M_r^2+2q_rM_rk_r\\ge h^2M_r^2-2hM_rK_r\\ge hM_r(M_r-2K_r)>0.$ Hence the absolute alias multiplier for that coordinate is at most $s_r^h$. By [F5] its sum over nonzero $q_r$ is at most $2s_r/(1-s_r)$, so the sum over all coordinate multi-indices other than zero is at most the product of the coordinate sums including their unit terms, minus the all-zero term, namely $A$. The unit-modulus fact [F4] and the triangle inequality bound each source phase sum by $\\sum_j|c_j|$. This gives the asserted alias bound.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 3.1: The inclusive mode bounds |k_r|≤K_r are used in the signed alias estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is named where the periodized-Gaussian alias/error result requires it; finite constructions add no stronger choice use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "alg-nufft-certified-gaussian-gridding-type1-type2": {
+      "risk": "medium",
+      "kind": "algorithm",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nufft-transform-types-and-mode-conventions",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$. Let $\\mathbb T^d=[0,1)^d$ be the chosen representatives for period-one coordinates; all coordinates in a type-1 or type-2 transform are interpreted modulo integer shifts. Here $\\pi$ is the real constant defined in [[def-real-elementary-functions-and-domains]]. For $x\\in\\mathbb R^d$ and $k\\in\\mathbb Z^d$, write $k\\cdot x=\\sum_{r=1}^d k_rx_r$. Let $N,J\\ge0$ be finite integers, let $x_0,\\ldots,x_{N-1}\\in\\mathbb T^d$, let $c=(c_j)_{j<N}\\in\\mathbb C^N$, and choose integers $K_r\\ge0$. The rectangular mode set is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-certified-elementary-range-evaluation",
+          "source_section": "Definition",
+          "quote": "Input: a finite, well-formed, typed expression DAG with one or more designated\noutput nodes; finite real interval or complex rectangle assignments for its\ninput nodes; exact dyadic constants or constants supplied with certified\nenclosing intervals/rectangles; a finite dyadic format $(p,e_{\\min},e_{\\max})$\nwith $p\\ge2$ and $e_{\\min}\\le e_{\\max}$; and an integer truncation index\n$N\\ge1$. Input interval endpoints and supplied constant enclosures use this\nformat. All constants, including every Machin enclosure of $\\pi$, use the\nsame fixed $N$ and format throughout a call. Real nodes support input and\nconstant nodes and the operations $+,-,\\times,\\div,\\sqrt{\\phantom{x}},\n\\exp,\\ln,\\arctan,\\sin,\\cos,\\tan$. Complex nodes support input and constant\nnodes and $+,-,\\times,\\div,\\exp,\\operatorname{Log}$. Each operation has\nhomogeneous real or complex inputs of its stated type; no implicit conversion\nbetween real and complex nodes is performed. Unsupported node types, arities,\nor type combinations return `inconclusive` with the offending node.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-na-computed-unitary-radix-two-fft",
+          "source_section": "Definition",
+          "quote": "For direction `forward`, at $N=1$ return $x_0$. For $N>1$, if $d_{\\max}=0$ return `inconclusive` with the `subdivision-cap-exhausted` status. Otherwise split $x$ into even and odd subsequences and recursively compute their unitary transforms $E,O$ by calling this routine with the same phase parameters and depth cap $d_{\\max}-1$. For each $0\\le k<N/2$, call [[alg-na-certified-unit-circle-phase]] on $(q,\\tau,e_{\\min},e_{\\max},p_0,p_{\\max},J)$ with $q=-2k/N$, obtaining $(\\widehat w_k,\\epsilon_k)$ approximating $w_k=e^{-2\\pi ik/N}$. Compute the six-real-operation complex product $t_k=\\operatorname{fl}_{\\mathbb C}(\\widehat w_kO_k)$, componentwise rounded sums $s_k^+=\\operatorname{fl}_{\\mathbb C}(E_k+t_k)$ and $s_k^-=\\operatorname{fl}_{\\mathbb C}(E_k-t_k)$, and $\\widehat c=\\operatorname{fl}(\\sqrt{1/2})$. Set output entries $k$ and $k+N/2$ to the componentwise rounded real scalings $\\operatorname{fl}_{\\mathbb C}(\\widehat c s_k^+)$ and $\\operatorname{fl}_{\\mathbb C}(\\widehat c s_k^-)$, respectively. For direction `inverse`, conjugate the input, run the forward routine with the same phase parameters and $d_{\\max}$, and conjugate its output; conjugation is exact in the operationwise model. Propagate any failed phase certificate; on arithmetic failure return the operationwise range status and index. Accuracy is asserted only by the separate theorem and only on a successful no-range-failure execution.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "source_section": "Statement",
+          "quote": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nufft-finite-array-norms",
+          "source_section": "Definition",
+          "quote": "For a finite index set $E$ and a complex array $z=(z_e)_{e\\in E}$, define\n$$\\|z\\|_1=\\sum_{e\\in E}|z_e|,\\qquad \\|z\\|_2=\\left(\\sum_{e\\in E}|z_e|^2\\right)^{1/2},\\qquad \\|z\\|_\\infty=\\max_{e\\in E}|z_e|.$$\nFor $z,w\\in\\mathbb C^E$, define the counting inner product by $\\langle z,w\\rangle_E=\\sum_{e\\in E}z_e\\overline{w_e}$. By [[lem-complex-conjugation-and-modulus-laws]], $\\langle z,z\\rangle_E=\\sum_{e\\in E}|z_e|^2$, so $\\|z\\|_2=\\sqrt{\\langle z,z\\rangle_E}$. For $E=\\varnothing$, all three norms and this inner product are defined to be zero. For nonempty finite $E$, the maximum exists by repeated comparison in the real order. Complex modulus is as in [[def-intervals-rectangles-and-complex-balls]], conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]], finite sums as in [[def-finite-sum-in-a-commutative-monoid]], and the square root is the unique nonnegative root.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Every loop in a candidate is finite: the dimension, source and mode lists, grid-cell lists, image ranges $[-L_r,L_r]$, expression DAGs, and series budgets are finite by [F1]–[F2], while every FFT length is a finite power of two by [F3]. The finite norm sums used in the radius construction are defined by [F5]. Thus a candidate either returns a result or reaches one of its explicitly named failure branches after finitely many operations.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Every division in step 1 is preceded by the denominator, $s_r<1$, and $d_{\\min}^->0$ checks; every type-1 or type-2 mode division is preceded by its own positive-lower-endpoint test in steps 3–4. Hence all performed divisions have divisor intervals excluding zero. A failed interval, range, FFT, denominator or mode-positivity check rejects the candidate as inconclusive and makes no finite error claim. Sound containment of every returned finite interval follows from [F2] and [F4].",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The ordered candidate list is finite, and processing terminates for each candidate by step 1.1. The procedure returns the first successful candidate whose outward absolute-error bound meets tolerance; if no candidate does so, it returns inconclusive with a recorded failure status. Therefore every certified return has passed its finite checks, and the failure return claims no approximation bound.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.2: A denominator or mode interval with lower endpoint ≤0 takes the inconclusive branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is named where the periodized-Gaussian alias/error result requires it; finite constructions add no stronger choice use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "thm-nufft-gaussian-gridding-error-and-type2-adjoint": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nufft-transform-types-and-mode-conventions",
+          "source_section": "Definition",
+          "quote": "For the type-1 matrix $A=(e^{-2\\pi i k\\cdot x_j})_{k\\in\\mathcal K,\\,j<N}$, define its conjugate transpose by $(A^*)_{jk}=\\overline{A_{kj}}$. Use the finite counting inner products from [[def-nufft-finite-array-norms]]; the type-2 matrix is $A^*$ as proved below.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nufft-gaussian-grid-alias-identity-and-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge1$, $N\\ge0$, $c_j\\in\\mathbb C$, $x_j\\in[0,1)^d$, integers $K_r\\ge0$, positive integers $M_r>2K_r$, and $\\tau_r>0$. Write $P=\\prod_{r=1}^dM_r$, define $\\Phi_\\tau(z)=\\prod_{r=1}^d\\phi_{\\tau_r}(z_r)$, and let\n$$g_\\ell=\\sum_{j=0}^{N-1}c_j\\Phi_\\tau(\\ell_1/M_1-x_{j,1},\\ldots,\\ell_d/M_d-x_{j,d}),\\quad 0\\le\\ell_r<M_r.$$\nFor $k\\in\\mathcal K=\\prod_r\\{-K_r,\\ldots,K_r\\}$ define the normalized grid DFT\n$$\\widetilde g_k=\\frac1P\\sum_{\\ell_1=0}^{M_1-1}\\cdots\\sum_{\\ell_d=0}^{M_d-1}g_\\ell\\exp\\!\\left(-2\\pi i\\sum_{r=1}^d k_r\\ell_r/M_r\\right).$$\nPut $\\widehat\\Phi(m)=\\prod_r\\sqrt{\\tau_r}\\exp(-\\pi\\tau_r m_r^2)$. Then\n$$\\widetilde g_k=\\sum_{q\\in\\mathbb Z^d}\\widehat\\Phi(k+q\\odot M)\\sum_{j=0}^{N-1}c_j\\exp(-2\\pi i(k+q\\odot M)\\cdot x_j),$$\nwhere $(q\\odot M)_r=q_rM_r$. In particular, $\\widehat\\Phi(k)>0$ and\n$$\\frac{\\widetilde g_k}{\\widehat\\Phi(k)}=F_k+\\sum_{q\\ne0}\\left[\\prod_{r=1}^d\\exp\\!\\left(-\\pi\\tau_r((k_r+q_rM_r)^2-k_r^2)\\right)\\right]\\sum_{j=0}^{N-1}c_j\\exp(-2\\pi i(k+q\\odot M)\\cdot x_j).$$\nFor $s_r=\\exp(-\\pi\\tau_rM_r(M_r-2K_r))\\in(0,1)$ and\n$$A=\\prod_{r=1}^d\\left(1+\\frac{2s_r}{1-s_r}\\right)-1,$$\nthe alias error satisfies\n$$\\left|\\frac{\\widetilde g_k}{\\widehat\\Phi(k)}-F_k\\right|\\le A\\sum_{j=0}^{N-1}|c_j|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nufft-gaussian-spread-truncation-tail",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $\\tau_r>0$, and integers $M_r,w_r\\ge1$ satisfy $M_r\\ge2w_r+1$. Define $a_r=\\pi/(\\tau_rM_r^2)$ and\n$$S_r=\\frac{2}{1-\\exp(-a_r)},\\qquad T_r=2\\exp(-a_rw_r^2)\\left(1+\\frac{1}{2a_rw_r}\\right).$$\nFor $x=(x_r)_{r=1}^d\\in[0,1)^d$, let\n$$W_r(x_r)=\\left\\{\\ell\\in\\{0,\\ldots,M_r-1\\}:\\min_{n\\in\\mathbb Z}|\\ell/M_r-x_r-n|\\le w_r/M_r\\right\\},\\quad W(x)=\\prod_{r=1}^dW_r(x_r).$$\nWith $\\Phi_\\tau(z)=\\prod_{r=1}^d\\phi_{\\tau_r}(z_r)$, the omitted spreading mass obeys\n$$\\sum_{\\ell\\in\\prod_r\\{0,\\ldots,M_r-1\\}\\setminus W(x)}\\Phi_\\tau(\\ell_1/M_1-x_1,\\ldots,\\ell_d/M_d-x_d)\\le T_d,\\qquad T_d:=\\sum_{r=1}^dT_r\\prod_{s\\ne r}S_s.$$\nAlso $\\sum_{\\ell_r=0}^{M_r-1}\\phi_{\\tau_r}(\\ell_r/M_r-x_r)\\le S_r$ for every coordinate and point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-nufft-gaussian-image-tail-bound",
+          "source_section": "Statement",
+          "quote": "For $\\tau>0$, integer $L\\ge1$, and $x\\in[0,1]$, put\n$$\\phi_{\\tau,L}(x)=\\sum_{n=-L}^{L}\\exp\\!\\left(-\\frac{\\pi(x+n)^2}{\\tau}\\right),\\qquad R_{\\tau,L}=\\frac{2\\exp(-\\pi L^2/\\tau)}{1-\\exp(-\\pi L/\\tau)}.$$\nThen $0\\le\\phi_\\tau(x)-\\phi_{\\tau,L}(x)\\le R_{\\tau,L}$, and the denominator defining $R_{\\tau,L}$ is positive.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-elementary-range-enclosures",
+          "source_section": "Statement",
+          "quote": "Every finite interval returned for a requested real output node by\n[[alg-certified-elementary-range-evaluation]] on an input interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of the corresponding function on that\ninterval. For the same typed DAG and designated real output node, if all\ninput intervals are nested coordinatewise, all constant enclosures are fixed,\nand both calls use the same finite dyadic format and truncation index $N$,\nthen, whenever both calls return finite enclosures, the canonical branch-cell\nand fixed-term construction makes the smaller domain's computed enclosure a\nsubset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "source_section": "Statement",
+          "quote": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-na-computed-unitary-radix-two-fft-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $N=2^m$, $m\\ge0$, and suppose a successful execution of [[alg-na-computed-unitary-radix-two-fft]] has no range failures. If every twiddle certificate satisfies $\\epsilon_\\ell\\le\\epsilon_{\\rm tw}\\le1/4$ and $u\\le1/16$, put $\\eta=10u+\\epsilon_{\\rm tw}$. Then",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-parseval-and-plancherel",
+          "source_section": "Statement",
+          "quote": "so $\\mathcal F_N$ preserves the counting inner product; invertibility of $\\mathcal F_N$ is not asserted here.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "source_section": "Definition",
+          "quote": "3. For either transform type, put $\\eta=10u+\\epsilon_{\\rm tw}$, $\\rho_r=(1+\\eta)^{q_r}-1$ for each axis, and $\\rho=\\prod_r(1+\\rho_r)-1$. For type 1, run the computed unitary radix-two FFT from [[alg-na-computed-unitary-radix-two-fft]] successively along grid axes $1,\\ldots,d$, using a fixed lexicographic line order. Enlarge every computed unitary Fourier coordinate by the complex ball radius $\\rho U$, then scale by $P^{-1/2}$, where $P=\\prod_rM_r$. For each required mode evaluate the multiplier interval $d_k=\\prod_r\\sqrt{\\tau_r}\\exp(-\\pi\\tau_rk_r^2)$ with the same controls; if its lower endpoint is $\\le0$, reject this candidate as inconclusive before division. Otherwise divide by that certified positive interval. Use outward complex-rectangle arithmetic. For each $k\\in\\mathcal K$, return the lower-left corner $z_k$ and an outward radius $r_k$ containing the resulting rectangle. Set\n$$\\epsilon_{\\rm ana}=A^++\\frac{T_d^+}{P\\,d_{\\min}^-},\\qquad B_{\\rm round}=\\max_{k\\in\\mathcal K}r_k+ \\frac{E_{\\rm eval}}{\\sqrt{P}\\,d_{\\min}^-}.$$\nThe returned error certificate is $\\epsilon_{\\rm ana}$ and $B_{\\rm round}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-radix-two-fft-arithmetic-complexity",
+          "source_section": "Statement",
+          "quote": "In particular there is the explicit constant $C=2$ with $T_m\\le C\\,m\\,2^{m}$ for every $m$, so at length $N=2^{m}$ the algorithm uses at most $2N\\log_2N$ complex arithmetic operations, whereas independent direct evaluation of all $N$ coefficients uses $N(N-1)$ additions and $N^{2}$ multiplications. The count is of arithmetic operations only: integer index arithmetic, twiddle evaluation, memory access and bit complexity are not counted, and no numerical-stability claim is made.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "source_section": "Definition",
+          "quote": "3. For either transform type, put $\\eta=10u+\\epsilon_{\\rm tw}$, $\\rho_r=(1+\\eta)^{q_r}-1$ for each axis, and $\\rho=\\prod_r(1+\\rho_r)-1$. For type 1, run the computed unitary radix-two FFT from [[alg-na-computed-unitary-radix-two-fft]] successively along grid axes $1,\\ldots,d$, using a fixed lexicographic line order. Enlarge every computed unitary Fourier coordinate by the complex ball radius $\\rho U$, then scale by $P^{-1/2}$, where $P=\\prod_rM_r$. For each required mode evaluate the multiplier interval $d_k=\\prod_r\\sqrt{\\tau_r}\\exp(-\\pi\\tau_rk_r^2)$ with the same controls; if its lower endpoint is $\\le0$, reject this candidate as inconclusive before division. Otherwise divide by that certified positive interval. Use outward complex-rectangle arithmetic. For each $k\\in\\mathcal K$, return the lower-left corner $z_k$ and an outward radius $r_k$ containing the resulting rectangle. Set\n$$\\epsilon_{\\rm ana}=A^++\\frac{T_d^+}{P\\,d_{\\min}^-},\\qquad B_{\\rm round}=\\max_{k\\in\\mathcal K}r_k+ \\frac{E_{\\rm eval}}{\\sqrt{P}\\,d_{\\min}^-}.$$\nThe returned error certificate is $\\epsilon_{\\rm ana}$ and $B_{\\rm round}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "source_section": "Statement",
+          "quote": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-real-elementary-range-enclosures",
+          "source_section": "Statement",
+          "quote": "Every finite interval returned for a requested real output node by\n[[alg-certified-elementary-range-evaluation]] on an input interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of the corresponding function on that\ninterval. For the same typed DAG and designated real output node, if all\ninput intervals are nested coordinatewise, all constant enclosures are fixed,\nand both calls use the same finite dyadic format and truncation index $N$,\nthen, whenever both calls return finite enclosures, the canonical branch-cell\nand fixed-term construction makes the smaller domain's computed enclosure a\nsubset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-nufft-transform-types-and-mode-conventions",
+          "source_section": "Definition",
+          "quote": "The rectangular mode set is\n\n$$\\mathcal K=\\prod_{r=1}^d\\{-K_r,-K_r+1,\\ldots,K_r\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-nufft-finite-array-norms",
+          "source_section": "Definition",
+          "quote": "For a finite index set $E$ and a complex array $z=(z_e)_{e\\in E}$, define\n$$\\|z\\|_1=\\sum_{e\\in E}|z_e|,\\qquad \\|z\\|_2=\\left(\\sum_{e\\in E}|z_e|^2\\right)^{1/2},\\qquad \\|z\\|_\\infty=\\max_{e\\in E}|z_e|.$$\nFor $z,w\\in\\mathbb C^E$, define the counting inner product by $\\langle z,w\\rangle_E=\\sum_{e\\in E}z_e\\overline{w_e}$. By [[lem-complex-conjugation-and-modulus-laws]], $\\langle z,z\\rangle_E=\\sum_{e\\in E}|z_e|^2$, so $\\|z\\|_2=\\sqrt{\\langle z,z\\rangle_E}$. For $E=\\varnothing$, all three norms and this inner product are defined to be zero. For nonempty finite $E$, the maximum exists by repeated comparison in the real order. Complex modulus is as in [[def-intervals-rectangles-and-complex-balls]], conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]], finite sums as in [[def-finite-sum-in-a-commutative-monoid]], and the square root is the unique nonnegative root.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "source_section": "Definition",
+          "quote": "4. For type 2, form the conjugate-transpose finite gridding factorization: for each input mode evaluate its multiplier interval and reject the candidate as inconclusive if its lower endpoint is $\\le0$; otherwise divide by that positive interval. For the resulting mode rectangles choose lower-left dyadic centers $v_k$ and radii $e_k$ enclosing their deviations. Set $E_f$ to an outward upper bound for $(\\sum_ke_k^2)^{1/2}$ and $V$ to an outward upper bound for $\\|v\\|_2$. Zero-fill the unused grid modes with zero centers and zero radii; apply the positive-sign unitary FFT on the same axes, and enlarge every computed output by radius $E_f+\\rho V$. Scale by $P^{-1/2}$ and interpolate at each source point using the conjugate of the same truncated real Gaussian window, with outward complex-rectangle arithmetic at every operation. Return the lower-left corner $z_j$ and an outward radius $r_j$ containing each resulting rectangle; the type-2 rounding certificate is $B_{\\rm round}^*=\\max_jr_j$. Its analytic certificate is the same $\\epsilon_{\\rm ana}$ from step 3.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-nonnegative-square-root-exists-and-unique",
+          "source_section": "Statement",
+          "quote": "In a Dedekind-complete ordered field, every $x\\ge0$ has a unique $y\\ge0$ with\n$y^2=x$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-logarithm-to-a-base",
+          "source_section": "Definition",
+          "quote": "For $b>0$ with $b\\ne1$ and $x>0$, define\n$$\\log_b x:=\\frac{\\log x}{\\log b}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "source_section": "Definition",
+          "quote": "2. For each source-grid interaction retained by the periodic nearest-point rule\n$$W_j=\\prod_{r=1}^d\\left\\{\\ell_r\\in\\mathbb Z/M_r\\mathbb Z: \\min_{n\\in\\mathbb Z}|\\ell_r/M_r-x_{j,r}-n|\\le w_r/M_r\\right\\},$$\nreduce each exact dyadic displacement $\\ell_r/M_r-x_{j,r}$ modulo one to $z_r\\in[0,1)$. Enclose the one-dimensional kernel by evaluating the finite image sum\n$$\\sum_{n=-L_r}^{L_r}\\exp\\!\\left(-\\pi(z_r+n)^2/\\tau_r\\right)$$\nwith [[alg-certified-elementary-range-evaluation]], then add the symmetric interval with radius $R_r$ from step 1. All kernel and coefficient products and sums use outward interval arithmetic. For each grid cell $\\ell$, this gives a complex rectangle enclosing its exact truncated-spread value $g_\\ell$. Choose its lower-left corner $u_\\ell$ as a dyadic center and an upward dyadic radius $e_\\ell$ large enough to enclose $g_\\ell-u_\\ell$. Let $E_{\\rm eval}$ be an outward upper bound for $(\\sum_\\ell e_\\ell^2)^{1/2}$ and let $U$ be an outward upper bound for $\\|u\\|_2=(\\sum_\\ell|u_\\ell|^2)^{1/2}$. Empty-source input returns the exact zero output and zero radii.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "lem-nufft-finite-euclidean-norm-triangle",
+          "source_section": "Statement",
+          "quote": "For a finite index set $E$ and arrays $x,y\\in\\mathbb C^E$, the Euclidean norm of [[def-nufft-finite-array-norms]] satisfies\n$$\\|x+y\\|_2\\le\\|x\\|_2+\\|y\\|_2.$$",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "def-nufft-periodized-gaussian-gridding-kernel",
+          "source_section": "Definition",
+          "quote": "For a real parameter $\\tau>0$, define the period-one Gaussian gridding kernel by the series",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $N=0$, [F17] and the finite sums in [F1] give exact zero type-1 output and an empty type-2 output; [F12] assigns zero to empty norms, so both error assertions hold with zero radii. For the remaining proof assume $N>0$. Let $S_\\infty$ be the full spread matrix with entries $(S_\\infty)_{\\ell j}=\\Phi_\\tau(\\ell_1/M_1-x_{j,1},\\ldots,\\ell_d/M_d-x_{j,d})$, and let $S$ keep only the entries in each source's product neighborhood. Define the mode-by-grid matrix $Q_{k\\ell}=P^{-1}e^{-2\\pi i\\sum_rk_r\\ell_r/M_r}$ and the diagonal mode matrix $D_{kk}=d_k$, with $D^{-1}_{kk}=1/d_k$ by the positive-multiplier premise. The products below use the finite matrix multiplication of [F19]. The normalized grid sum in [F2], applied to the unit source vector $e_j$, says that every entry of $D^{-1}QS_\\infty-A$ has modulus at most $\\alpha$. For each column $j$, [F3] bounds the sum of the nonnegative deleted entries by $T_d$; since $|Q_{k\\ell}|=P^{-1}$, it follows that $|(Q(S_\\infty-S))_{kj}|\\le T_d/P$. By [F10], $|k_r|\\le K_r$, and [F14]–[F15], $d_k\\ge d_{\\min}>0$, so $|(D^{-1}Q(S_\\infty-S))_{kj}|\\le T_d/(P d_{\\min})$. Adding the two matrix differences gives $|(D^{-1}QS-A)_{kj}|\\le\\epsilon_0$ for every $k,j$. For each row, multiplication by $c$ and the triangle inequality give $|((D^{-1}QS-A)c)_k|\\le\\epsilon_0\\sum_j|c_j|$, hence $\\|(D^{-1}QS-A)c\\|_\\infty\\le\\epsilon_0\\|c\\|_1$ by [F12]. Finally [F9] gives $\\epsilon_0\\le\\epsilon_{\\rm ana}$ for the returned outward bound.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "F10",
+            "F12",
+            "F14",
+            "F15",
+            "F17",
+            "F19",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $g=Sc$ be the exact truncated spread and $u$ the dyadic center grid computed by the algorithm. The finite image sums and symmetric remainder intervals enclose every exact kernel by [F4]; isotonicity of the outward DAG operations then gives $\\|g-u\\|_2\\le E_{\\rm eval}$, with norms as in [F12]. By [F18], the counting Euclidean norm has the triangle inequality. For coordinate axis $r$, regard its $P/M_r$ length-$M_r$ FFTs as one block-diagonal operator. Squaring and summing the linewise supplier bound [F5] gives a normwise error at most $\\rho_r$ times the block input norm; the exact block transform is unitary by [F6]. If $x_r$ and $y_r$ are the computed and exact outputs after axes $1,\\ldots,r$, the triangle inequality [F18], the local error bound and unitarity give $\\|x_r\\|_2\\le(1+\\rho_r)\\|x_{r-1}\\|_2$ and $\\|x_r-y_r\\|_2\\le\\|x_{r-1}-y_{r-1}\\|_2+\\rho_r\\|x_{r-1}\\|_2$. Starting with $x_0=y_0=u$ and iterating gives $\\|x_d-y_d\\|_2\\le U\\sum_{r=1}^d\\rho_r\\prod_{s<r}(1+\\rho_s)=U(\\prod_r(1+\\rho_r)-1)=\\rho U$. The algorithm encloses this FFT error and all subsequent finite division/rounding in each returned radius $r_k$, by [F7]. To transfer the grid-center enclosure, write $Q=P^{-1/2}U_P$ followed by restriction to $\\mathcal K$, where $U_P$ is the exact unitary grid DFT. For any finite array $z$, each $|z_k|^2$ is a nonnegative summand of $\\sum_\\ell|z_\\ell|^2$, so [F12] gives $\\|z\\|_\\infty\\le\\|z\\|_2$. Parseval and contraction under coordinate restriction in [F6] then yield $\\|Q(u-g)\\|_\\infty\\le\\|Q(u-g)\\|_2\\le E_{\\rm eval}/\\sqrt P$. By [F10], [F14] and [F15], each $d_k\\ge d_{\\min}$. Thus the additional deconvolution error is at most $E_{\\rm eval}/(\\sqrt P d_{\\min})$. The algorithm defines $B_{\\rm round}=\\max_k r_k+E_{\\rm eval}/(\\sqrt P d_{\\min}^-)$; using $d_{\\min}^-\\le d_{\\min}$, taking the maximum returned $r_k$ and adding its grid-center term gives the asserted radius.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "F10",
+            "F12",
+            "F14",
+            "F15",
+            "F18",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F19], the finite gridding matrix is $\\widetilde A=D^{-1}QS$. Step 1.1 bounds its analytic discrepancy by $\\epsilon_{\\rm ana}\\|c\\|_1$, and step 2.1 bounds the finite-arithmetic discrepancy from $\\widetilde A c$ by $B_{\\rm round}$. The triangle inequality gives $\\|\\widehat F-Ac\\|_\\infty\\le\\epsilon_{\\rm ana}\\|c\\|_1+B_{\\rm round}$, and [F1] identifies $Ac=F$.",
+          "inputs": [
+            "F1",
+            "F9",
+            "F19",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "The type-2 exact finite matrix computed by the algorithm is $\\widetilde A^*$. By [F19], $(\\widetilde A)_{kj}=d_k^{-1}\\sum_\\ell Q_{k\\ell}S_{\\ell j}$. Since $d_k$ and $S_{\\ell j}$ are real by [F14]–[F15] and [F20], conjugating this entry gives $d_k^{-1}\\sum_\\ell\\overline{Q_{k\\ell}}S_{\\ell j}$; this is exactly the $(j,k)$ entry of $S^*Q^*D^{-1}$ by the same finite-product formula. Thus $\\widetilde A^*=S^*Q^*D^{-1}$. Step 1.1 gives $|(\\widetilde A-A)_{kj}|\\le\\epsilon_0$ for each entry, so $|((\\widetilde A^*-A^*)f)_j|\\le\\sum_{k\\in\\mathcal K}|(\\widetilde A-A)_{kj}|\\,|f_k|\\le\\epsilon_0\\|f\\|_1.$ It remains to bound the finite-arithmetic discrepancy. Let $v=D^{-1}f$ be the exact deconvolved mode vector and $v^c$ the dyadic centers of the component rectangles computed in step 4 of the algorithm. That step defines $E_f,V$ with $\\|v-v^c\\|_2\\le E_f$ and $\\|v^c\\|_2\\le V$ by [F12]–[F13]. The positive-sign computed unitary FFT has axis error factors $\\rho_r$ and total $\\rho=\\prod_r(1+\\rho_r)-1$; its bound is the same as the type-1 calculation in step 2.1 because [F5] gives the same factor for the conjugated inverse routine. Thus its computed center differs from the exact transform of $v^c$ by at most $\\rho V$. The exact unitary transform preserves the input uncertainty norm by [F6], so [F18] bounds the computed FFT center's distance from the exact transform of $v$ by $E_f+\\rho V$. After scaling by $P^{-1/2}$, each used grid coordinate is therefore within $(E_f+\\rho V)/\\sqrt P$ of the exact $Q^*v$ coordinate. The algorithm encloses this discrepancy, evaluates every real spread-window coefficient with a finite image interval containing its exact value by [F4] and [F20], and applies only sound outward rectangle operations. Hence the final rectangle at source $j$ contains $(S^*Q^*D^{-1}f)_j=(\\widetilde A^*f)_j$; its center has error at most its radius $r_j$. Taking the maximum over the finite output set gives $\\|\\widehat g-\\widetilde A^*f\\|_\\infty\\le B_{\\rm round}^*$. Combining this finite bound with the displayed analytic entry estimate proves the type-2 claim, using [F12] for the finite norms.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "F18",
+            "F19",
+            "F20",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "There are $P/M_r$ length-$M_r$ transforms on axis $r$, so [F8] gives $O(P\\log_2M_r)$ work on that axis. Since $1\\le M_r\\le P$ and $2>1$, [F11] gives $\\log2>\\log1=0$. Formula [F16] therefore shows that $\\log_2$ is increasing on positive arguments, hence $\\log_2M_r\\le\\log_2P$; fixed $d$ gives $O(P\\log P)$ over all axes. Each source contributes to at most $\\prod_r(2w_r+1)$ retained grid cells. Evaluating its coordinatewise image sums costs at most a constant multiple of $\\sum_r(2L_r+1)$ per retained product cell, and the mode deconvolution pass costs $O(|\\mathcal K|)$; interval-series evaluator internals are excluded as stated. These counts yield the displayed bound. This analysis covers types 1 and 2 only; the type-3 frequency ranges require separate scaling and work estimates.",
+          "inputs": [
+            "given",
+            "F8",
+            "F11",
+            "F16",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1: The zero-source branch returns exact zero type 1 and an empty type-2 output."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is named where the periodized-Gaussian alias/error result requires it; finite constructions add no stronger choice use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "ex-nufft-mri-fourier-samples": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nufft-transform-types-and-mode-conventions",
+          "source_section": "Definition",
+          "quote": "The **type-3 nonuniform discrete Fourier transform** takes a finite source list $x_0,\\ldots,x_{N-1}\\in\\mathbb R^d$, coefficients $c_j\\in\\mathbb C$, and a separately specified finite frequency list $\\xi_0,\\ldots,\\xi_{J-1}\\in\\mathbb R^d$, and returns",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "For $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $\\xi_0=(0,0)$, both dot products are zero, so [F1] gives $G_0=1\\cdot e^0+2\\cdot e^0=3$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $\\xi_1=(1/3,1/5)$, the dot products are $\\xi_1\\cdot x_0=1/12$ and $\\xi_1\\cdot x_1=1/6+1/20=13/60$. Substituting these and the weights in [F1] yields $G_1=e^{-2\\pi i/12}+2e^{-2\\pi i(13/60)}$, as claimed.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 2.1: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite formulas and proof steps make no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "ex-nufft-small-deconvolution-mode-is-inconclusive": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dyadic-floating-point-format-and-directed-rounding",
+          "source_section": "Definition",
+          "quote": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "source_section": "Definition",
+          "quote": "1. For each coordinate compute outward enclosures for\n$$a_r=\\frac{\\pi}{\\tau_rM_r^2},\\quad s_r=\\exp\\!\\bigl(-\\pi\\tau_rM_r(M_r-2K_r)\\bigr),\\quad d_r=\\sqrt{\\tau_r}\\exp(-\\pi\\tau_rK_r^2),$$\n$$S_r=\\frac2{1-\\exp(-a_r)},\\quad T_r=2\\exp(-a_rw_r^2)\\left(1+\\frac{1}{2a_rw_r}\\right),\\quad R_r=\\frac{2\\exp(-\\pi L_r^2/\\tau_r)}{1-\\exp(-\\pi L_r/\\tau_r)}.$$\nUse [[alg-certified-elementary-range-evaluation]] for all real exponential and square-root nodes, with $\\pi$ enclosed by its Machin interval; use the outward interval operations for the rational DAGs. Set\n$$A=\\prod_{r=1}^d\\left(1+\\frac{2s_r}{1-s_r}\\right)-1,\\qquad T_d=\\sum_{r=1}^dT_r\\prod_{s\\ne r}S_s,\\qquad d_{\\min}=\\prod_{r=1}^d d_r.$$\nStore outward upper bounds $A^+,T_d^+$ and a lower bound $d_{\\min}^-$. If any required enclosure is non-finite, if a denominator interval in $A,S_r,T_r,R_r$ contains zero, if some $s_r$ enclosure is not strictly below $1$, or if $d_{\\min}^-\\le0$, reject this candidate as inconclusive; no division by an unverified multiplier is performed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-nonnegative-square-root-exists-and-unique",
+          "source_section": "Statement",
+          "quote": "In a Dedekind-complete ordered field, every $x\\ge0$ has a unique $y\\ge0$ with\n$y^2=x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The format's subnormal spacing is $\\eta=2^{-2-5+1}=2^{-6}=1/64$ by [F1], and the exact multiplier is positive by [F3], [F5] and $\\tau=1/40>0$. Since $1/40<1/36=(1/6)^2$, [F5] gives $\\sqrt{1/40}<1/6$; also $\\pi\\ge2$ by [F6]. Thus $d_{\\min}=\\sqrt{1/40}\\,e^{-49\\pi/40}<\\frac16e^{-49/20}.$ For $x=49/20>0$, the positive exponential series gives $e^x>\\sum_{n=0}^{5}\\frac{x^n}{n!}=\\frac{4{,}277{,}427{,}349}{384{,}000{,}000}>\\frac{32}{3}.$ Taking positive reciprocals therefore yields $d_{\\min}<\\frac16\\cdot\\frac3{32}=1/64=\\eta$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], any positive finite dyadic endpoint is at least $\\eta$. A sound lower endpoint for the exact multiplier must be at most $d_{\\min}<\\eta$ by step 1.1, so it cannot be positive. The algorithm's explicit check [F4] consequently rejects this candidate as inconclusive if its finite multiplier enclosure is reached; if an earlier range operation is non-finite, [F4] gives the same inconclusive outcome. Thus this candidate cannot yield a certified transform result.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1: A sound representable lower endpoint is nonpositive and triggers the stated inconclusive check."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite formulas and proof steps make no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    },
+    "ex-nufft-clustered-sources-l1-error": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nufft-transform-types-and-mode-conventions",
+          "source_section": "Definition",
+          "quote": "The **type-1 nonuniform discrete Fourier transform** maps source coefficients to integer-mode samples:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the input hypotheses of [[alg-nufft-certified-gaussian-gridding-type1-type2]]. If $N=0$, the type-1 output is exactly zero and the type-2 output is empty, so their coordinatewise errors are zero. For $N>0$, fix a successful candidate with $P=\\prod_rM_r$, exact multipliers $d_k=\\prod_r\\sqrt{\\tau_r}\\exp(-\\pi\\tau_rk_r^2)$, $d_{\\min}=\\prod_r\\sqrt{\\tau_r}\\exp(-\\pi\\tau_rK_r^2)>0$, $s_r=\\exp(-\\pi\\tau_rM_r(M_r-2K_r))$, and the exact spread-tail quantity $T_d$ of [[lem-nufft-gaussian-spread-truncation-tail]]. Put\n$$\\alpha=\\prod_{r=1}^d\\left(1+\\frac{2s_r}{1-s_r}\\right)-1,\\qquad \\epsilon_0=\\alpha+\\frac{T_d}{P d_{\\min}}.$$\nThe algorithm returns an outward upper bound $\\epsilon_{\\rm ana}\\ge\\epsilon_0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\sin ^2x+\\cos ^2x=1$, $\\sin(-x)=-\\sin x$, and $\\cos(-x)=\\cos x$. Wherever the displayed quotients are defined, $\\tan(-x)=-\\tan x$, $\\cot(-x)=-\\cot x$, $\\sec(-x)=\\sec x$, $\\csc(-x)=-\\csc x$, $1+\\tan^2x=\\sec^2x$, and $1+\\cot^2x=\\csc^2x$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "For every real $R\\ge0$, the factorial series\n$\\sum_{n=0}^{\\infty}R^n/n!$ converges. If $N\\ge0$ and\n$q=R/(N+2)<1$, its tail after index $N$ satisfies\n$$\\sum_{n=N+1}^{\\infty}\\frac{R^n}{n!} \\le \\frac{R^{N+1}}{(N+1)!(1-q)}.$$\nConsequently the series defining $\\exp x$, $\\sin x$, $\\cos x$ and each of\ntheir formal derivative series converge absolutely and uniformly on every\nbounded interval $|x|\\le R$. For $0\\le r<1$, the geometric series and the\nodd power series $\\sum_{k\\ge0}x^{2k+1}/(2k+1)$, with their formal derivative\nseries, converge absolutely and uniformly on $|x|\\le r$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "Every integral below is the oriented Riemann integral constructed from upper\nand lower Darboux sums in\n[[lem-continuous-functions-riemann-integrable]]. It exists for each displayed\ncontinuous integrand on the finite interval between its endpoints, is additive\nin intervals, reverses sign when the endpoints are reversed, is monotone in\nthe integrand, and satisfies\n$|\\int_a^b g(t)\\,dt|\\le|b-a|\\max_{t\\text{ between }a\\text{ and }b}|g(t)|$.\nThese properties also\ngive constant comparison bounds and the average-value difference quotient\nused to differentiate the integral-defined functions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-elementary-functions-and-domains",
+          "source_section": "Definition",
+          "quote": "The exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nufft-finite-array-norms",
+          "source_section": "Definition",
+          "quote": "For a finite index set $E$ and a complex array $z=(z_e)_{e\\in E}$, define\n$$\\|z\\|_1=\\sum_{e\\in E}|z_e|,\\qquad \\|z\\|_2=\\left(\\sum_{e\\in E}|z_e|^2\\right)^{1/2},\\qquad \\|z\\|_\\infty=\\max_{e\\in E}|z_e|.$$\nFor $z,w\\in\\mathbb C^E$, define the counting inner product by $\\langle z,w\\rangle_E=\\sum_{e\\in E}z_e\\overline{w_e}$. By [[lem-complex-conjugation-and-modulus-laws]], $\\langle z,z\\rangle_E=\\sum_{e\\in E}|z_e|^2$, so $\\|z\\|_2=\\sqrt{\\langle z,z\\rangle_E}$. For $E=\\varnothing$, all three norms and this inner product are defined to be zero. For nonempty finite $E$, the maximum exists by repeated comparison in the real order. Complex modulus is as in [[def-intervals-rectangles-and-complex-balls]], conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]], finite sums as in [[def-finite-sum-in-a-commutative-monoid]], and the square root is the unique nonnegative root.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $c_0=1$ and $c_1=-1$, [F7] gives $\\|c\\|_1=|1|+|-1|=2$. For mode $1$, substitute the source locations into [F1] to obtain $F_1=e^{-2\\pi i/4}-e^{-2\\pi i(1/4+\\delta)}=e^{-\\pi i/2}(1-e^{-2\\pi i\\delta}).$ This is a direct factorization of the exact two-term sum.",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $t=\\pi\\delta$. By the complex exponential addition law and [F3], $1-e^{-2it}=e^{-it}(e^{it}-e^{-it})=e^{-it}(2i\\sin t),$ so $|1-e^{-2it}|=2|\\sin t|$ by [F3] and [F8]. From [F3]–[F5], for $t\\ge0$ we have $|\\sin t|=\\left|\\int_0^t\\cos s\\,ds\\right|\\le t\\max_{0\\le s\\le t}|\\cos s|\\le t.$ Since $t=\\pi\\delta>0$ by [F6] and $|e^{-\\pi i/2}|=1$, step 1.1 yields $|F_1|\\le2t=2\\pi\\delta$. As $\\delta\\downarrow0$ this tends to zero while step 1.1 keeps $\\|c\\|_1=2$ by [F7]. The absolute bound in [F2] contains no division by $|F_1|$; because this family has arbitrarily small $|F_1|$, it supplies no uniform relative-error estimate without an additional lower bound on the exact output.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1: As δ decreases to zero, the two source points coalesce and the selected coefficient tends to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1: The displayed finite formula or proof includes this boundary without changing its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is named where the periodized-Gaussian alias/error result requires it; finite constructions add no stronger choice use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: This item states a definition, worked example, or one-way estimate and makes no iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-8 author",
+        "notes": "Authoring completeness review only; exact supplier excerpts and proof-step inputs are recorded, with no independent proof approval."
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "38",
+  "round": 0,
+  "reviewed_items": [
+    "def-na-hcurl-space",
+    "lem-na-contractible-lipschitz-polyhedron-boundary-connected",
+    "lem-na-lipschitz-scalar-h1-h2-extension",
+    "lem-na-graded-whitney-mesh-size-and-boundary-shifts",
+    "def-na-lowest-order-whitney-de-rham-spaces",
+    "def-na-zero-tangential-hcurl",
+    "lem-na-compact-support-hcurl-fourier-splitting",
+    "lem-na-weak-local-potentials-and-continuation",
+    "lem-na-hcurl-curlfree-potential-contractible",
+    "cex-na-canonical-edge-moments-not-bounded-on-hcurl",
+    "def-na-curl-curl-kernel-quotient-gauge",
+    "lem-na-nedelec-edge-unisolvence",
+    "lem-na-weak-hcurl-tangential-trace",
+    "lem-na-lipschitz-support-and-zero-boundary-closure",
+    "lem-na-whitney-moments-commute-with-grad-curl-div",
+    "thm-na-stable-mixed-curl-curl-kernel-quotient",
+    "lem-na-full-dirichlet-hcurl-regular-decomposition",
+    "thm-na-regular-decomposition-zero-tangential-hcurl",
+    "thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes",
+    "lem-na-relative-curl-kernel-is-zero-boundary-gradients",
+    "lem-na-whitney-averaged-pullback-moment-bounds",
+    "lem-na-whitney-cochain-correction-and-strong-convergence",
+    "thm-na-uniformly-bounded-commuting-cochain-projection",
+    "lem-na-discrete-gradient-lift-gap-estimate",
+    "thm-na-discrete-compactness-and-poincare-lowest-order-nedelec",
+    "ex-na-nedelec-edge-circulation-and-stokes",
+    "ex-na-nodal-curlcurl-spurious-gradient-mode",
+    "ex-na-handle-domain-harmonic-edge-field"
+  ],
+  "reviewed_pages": [
+    "discrete-de-rham-complexes-and-edge-elements",
+    "discrete-de-rham-complexes-and-edge-elements-examples"
+  ],
+  "decision": "repair",
+  "reason": "The assigned inventory and relevant cross-page and PE08 supplier interfaces were reviewed. One local repair pass is needed for the topology-dependent projection interface and three proof gaps.",
+  "findings": [
+    {
+      "id": "thm-na-uniformly-bounded-commuting-cochain-projection",
+      "type": "prerequisite",
+      "reason": "The general-topology branch of thm-na-discrete-compactness-and-poincare-lowest-order-nedelec consumes the relative projections, but this theorem states them only for contractible domains. Its construction and proof do not use contractibility. Remove that restriction so the approved harmonic-quotient branch has its stated prerequisite; downstream consumers are listed below."
+    },
+    {
+      "id": "thm-na-discrete-compactness-and-poincare-lowest-order-nedelec",
+      "type": "local",
+      "reason": "Step 3.1 infers matching interior face values and zero boundary face values for a piecewise-affine q from H^1 and H_0^1 membership without establishing those trace facts. The closure definition does not itself assert a trace characterization. These facts are needed to conclude K_h=B_h and the curl Poincare inequality on X_h. Add a local face-jump argument, using the zero extension for boundary faces."
+    },
+    {
+      "id": "lem-na-graded-whitney-mesh-size-and-boundary-shifts",
+      "type": "local",
+      "reason": "Step 1.1 asserts uniform lower solid-angle and within-cell edge-ratio bounds from shape regularity without deriving them; later vertex-valence and patch-size bounds depend on them. Add the short affine-reference-map derivation from the stated diameter-to-inradius bound."
+    },
+    {
+      "id": "lem-na-whitney-averaged-pullback-moment-bounds",
+      "type": "local",
+      "reason": "Step 1.1 uses s_min(A_K) and ||A_K|| comparable to h_K for the scaled moment and inverse estimates, but does not prove that scaling. Add its derivation from shape regularity locally."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-na-discrete-gradient-lift-gap-estimate",
+      "decision": "accept",
+      "reason": "The abstract statement assumes the projection identities and bounds it uses; broadening the FEEC projection interface supports its concrete use."
+    },
+    {
+      "id": "thm-na-discrete-compactness-and-poincare-lowest-order-nedelec",
+      "decision": "repair",
+      "reason": "Its general-topology branch needs the broadened relative-projection interface, and Step 3.1 also needs the local face-trace justification reported above."
+    },
+    {
+      "id": "lem-maxwell-magnetic-compatible-initial-projection",
+      "decision": "accept",
+      "reason": "Its statement assumes a contractible Lipschitz domain, so the broadened projection interface retains every condition used."
+    },
+    {
+      "id": "thm-maxwell-edge-fem-smooth-solution-error",
+      "decision": "accept",
+      "reason": "Its contractible-domain assumptions and magnetic-initialization consumer remain supported by the projection interface."
+    },
+    {
+      "id": "thm-pe11-edge-maxwell-spectral-approximation",
+      "decision": "accept",
+      "reason": "It assumes the exact contractible cavity and mesh hypotheses retained by the projection interface."
+    },
+    {
+      "id": "discrete-de-rham-complexes-and-edge-elements",
+      "decision": "accept",
+      "reason": "Its full and relative projection narrative remains supported; the statement broadening preserves the current contractible case."
+    },
+    {
+      "id": "yee-fdtd-and-transient-maxwell-discretization",
+      "decision": "accept",
+      "reason": "Its magnetic initialization claim uses the contractible Maxwell consumer, whose stated scope remains satisfied."
+    }
+  ]
+}

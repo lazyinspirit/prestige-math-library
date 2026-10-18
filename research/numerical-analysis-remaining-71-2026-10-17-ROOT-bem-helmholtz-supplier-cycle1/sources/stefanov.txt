@@ -1,0 +1,4168 @@
+Scattering and Inverse Scattering in Rn
+Plamen Stefanov
+Last updated: March 29, 2023
+
+This is a draft of lecture notes of a graduate course that I was teaching in 2013. Sources
+are the lecture notes of Melrose [9] and Zworski [26], Sj¨ostrand [16], Taylor [25, Chapter 9],
+Reed and Simon [14], Petkov [12], and of course, H¨ormander [4]. The inverse scattering
+material comes from many papers, including some of mine.
+
+Contents
+Chapter I.
+Introduction
+iv
+1.
+Typical examples
+iv
+2.
+Abstract (Time-Dependent) Scattering Theory; brief introduction
+v
+3.
+A few remarks about the Stationary Scattering Theory
+vi
+Chapter II.
+Scattering Theory for compactly supported perturbations of the Laplacian
+in Rn
+1
+1.
+The stationary Scattering Theory for the Laplacian in Rn
+1
+2.
+Potential Scattering
+13
+3.
+Obstacle Scattering
+19
+4.
+Scattering by Metrics
+23
+5.
+Black Box Scattering
+24
+Chapter III.
+Introduction to the Time-Dependent Scattering Theory for the perturbed
+wave equation in R × Rn
+30
+1.
+Introduction
+30
+2.
+Scattering for the “free” wave equation
+31
+3.
+Scattering for time-dependent potentials
+35
+4.
+Scattering for the time-dependent Schr¨odinger equation (a few remarks only)
+41
+Chapter IV.
+Inverse Scattering
+43
+1.
+Introduction
+43
+2.
+Inverse potential scattering
+43
+3.
+Inverse Obstacle Scattering
+59
+4.
+Inverse Scattering by metrics
+62
+5.
+Inverse Boundary Value Problems and Inverse Black Box Scattering
+62
+Chapter V.
+Appendix
+67
+1.
+Spherical harmonics, Hankel functions and radial separation of variables for the
+Helmholtz equation
+67
+Bibliography
+71
+iii
+
+CHAPTER I
+Introduction
+1. Typical examples
+We start with the basics of the scattering theory in Rn, n ≥2. We are interested in
+operators P that are compactly supported perturbations of the Laplacian −∆, satisfying
+some additional reasonable “black box” assumptions. The most important examples are
+potential scattering, obstacle scattering, and scattering by a metric.
+In potential scattering, P is the Schr¨odinger operator
+(1.1)
+P = −∆+ V,
+where the potential V = V (x) ∈L∞is compactly supported. The perturbation of −∆is in
+a lower order term (−2 degrees lower), which means Euclidean geometry dictated by −∆.
+The PDEs we study are either the wave equation
+(1.2)
+(∂2
+t + P)u = 0
+or the “stationary wave equation”; or the Helmholtz one
+(1.3)
+(P −λ2)u = 0,
+where λ is a spectral parameter, not necessarily real. Equation (1.3) is just a Fourier trans-
+formed version of (1.2).
+In obstacle scattering, we have a compact set O ⊂Rn with a smooth boundary and some
+choice of self-adjoint coercive boundary conditions on ∂O, usually Dirichlet or Neumann. We
+can assume that the exterior Rn\O is connected (otherwise there will be connected bounded
+components disjoint from the unbounded interior, playing no role in the scattering). Then
+P = −∆in Rn \ O with the corresponding boundary conditions. One can consider a more
+general second order elliptic self-adjoint operator. The PDEs are still (1.2) or (1.3) but in
+Rt × (Rn \ O)x, and Rn \ O, respectively.
+In the scattering by a metric example, P = −∆g is the Laplace-Beltrami operator related
+to a given Riemannian metric g in Rn so that g is Euclidean, i.e., g = δij, for |x| > R0 with
+some R0 > 0. One can include lower order terms as well.
+Another important example: transparent obstacle...
+Scattering Theory studies solutions of time dependent equations like (1.2) or (1.3) for
+large values of time t and/or large value of the spatial variable x. Inverse Scattering tries
+to recover the operator P (i.e., the potential, or the obstacle, or the metric) from scattering
+data (from the scattering operator, for example). In some applications, like astronomy or
+quantum mechanics, inverse scattering is the only (more or less) way to see what is there.
+The time dependent scattering theory deals with equations of the type (1.2). The sta-
+tionary scattering theory studies equations without a time variable, like (1.2).
+iv
+
+2. ABSTRACT (TIME-DEPENDENT) SCATTERING THEORY; BRIEF INTRODUCTION
+v
+2. Abstract (Time-Dependent) Scattering Theory; brief introduction
+Reference: [14].
+The time dependent scattering theory usually compares one unperturbed dynamics to
+a perturbed one.
+Let P0 (say, P0 = −∆) and P be self-adjoint operators in a Hilbert
+space H as in (1.1), and let the “free dynamics” U0(t) = exp(itP0) and the “perturbed one”
+U(t) = exp(itP) be the corresponding solution unitary groups (Stone’s theorem). We want
+to compare U(t) to U0(t) for ±t ≫1.
+Take U(t)f, where f is the initial condition. We can expect that U(t) would look like a
+“free solution” for ±t ≫1. In other words, given f, we would expect that there exist g±,
+viewed as incoming/outgoing “profiles” of U(t)f at |t| ≫1, so that
+(2.1)
+∥U(t)f −U0(t)g±∥→0,
+±t →∞.
+This is equivalent to
+∥g± −U0(−t)U(t)f∥→0,
+±t →∞.
+This is not guaranteed by any means; we expect to be true under “reasonable” assumptions.
+Then
+g± = W±(P0, P)f := lim
+t→± U0(−t)U(t)f.
+Note that we have a strong limit here. It would be wrong to expect limit in the operator
+norm. If W±(P0, P) exist, we have scattering theory for P0 and P. This is equivalent to the
+completeness property below. Then
+(2.2)
+S : g−7−→g+
+is the scattering operator. It is not well defined yet before we understand the properties of
+the wave operators. Formally,
+g+ = Sg−= W+(P0, P)W −1
+−(P0, P)g−
+but this is a correct definition only if the wave operators have the completeness properties
+below.
+Proving existence of W±(P0, P)f is usually not easy. The following wave operators are
+much easier to show that they exist
+W±(P, P0)g := lim
+t→± U(−t)U0(t)g.
+If they exist (as strong limits, again), we call them complete if
+Ran W−(P, P0) = Ran W+(P, P0) = Hac.
+The latter space corresponds to the absolutely continuous spectrum of P, by the spectral
+theorem. If the completeness holds (the “= Hac” condition is not needed for this definition),
+then the scattering operator is given by
+Sg−= W −1
++ (P, P0)W−(P, P0)g−.
+Now, this is a well defined operator. It is unitary.
+
+vi
+I. INTRODUCTION
+The main goal of Scattering Theory is to prove the existence of S, which can be done
+by showing that the wave operators W±(P, P0) exists are a complete. It does not stop there
+however. We want to know as much as we can about S, find a representation, etc.
+The wave and the scattering operators were defined by a limit t →±∞. It is not obvious
+that |x| large are involved there as well. The latter is true but implicit. Typical dynamics
+U0(t) have the local energy decay property:
+(2.3)
+∥1KU0(t)f∥→0,
+as |t| →∞
+for any compact set K, where 1K is the multiplication by the characteristic function of K.
+Then U0(t)g “goes to infinity” for any g; and if we want (2.1) to be true as well, so would
+U(t)f.
+3. A few remarks about the Stationary Scattering Theory
+The Stationary Scattering Theory studies systems without an explicit time variable like
+(1.1) for large values of the spatial variable x. The spectral parameter λ might vary; then we
+want to know how everything depends on it; including what the analytic or the meromorphic
+properties of the various objects (the natural version of the scattering operator S, for exam-
+ple) are in the complex plane C. Of particular interests are the high-frequency asymptotics,
+λ →∞.
+The frequency λ > 0 might be fixed. Then we still have scattering theory.
+It turns out that for many interesting systems (operators P), the various scattering
+objects associated with it have certain meromorphic extensions to C. Their poles are the
+scattering poles or the resonances (there is a slight difference between those two notions).
+Since there is no time involved, the behavior as |x| →∞is what determines the scattering
+properties. We will see below that there is a natural notion of incoming and outgoing term
+in that asymptotic behavior of the perturbed system; then the scattering matrix S(λ) is
+defined as in (2.2), mapping the incoming term to the outgoing one.
+
+CHAPTER II
+Scattering Theory for compactly supported perturbations of the
+Laplacian in Rn
+1. The stationary Scattering Theory for the Laplacian in Rn
+In these notes, the unperturbed operator is the Laplace operator P0 = −∆, although
+in some important cases like elasticity, Maxwell’s equations, etc., we must make a different
+choice.
+The goal of the stationary theory is to understand the large x behavior of the
+perturbed system (1.3), and to compare it to that of the unperturbed one, corresponding to
+P0. Even though that P0 = −∆is a simple enough operator; we need first to understand
+the behavior of solutions of the Helmholtz equation
+(1.1)
+(−∆−λ2)u = 0,
+|x| ≫1
+near infinity.
+1.1. The free outgoing resolvent. A fundamental object is the free outgoing (or
+incoming) resolvent. Take any solution of (1.1), multiply by a smooth cut-off χ equal to one
+near infinity; and zero in a neighborhood of the compact set where (1.1) may not hold to get
+(1.2)
+(−∆−λ2)χu = −[∆, χ]u,
+x ∈Rn.
+The r.h.s. depends on the values of u in some annulus R1 ≤|x| ≤R2 only. Alternatively, we
+may want to solve a boundary value problem in the exterior of some sphere. We therefore
+naturally get the following inhomogeneous equation
+(1.3)
+(−∆−λ2)u = f,
+x ∈Rn
+where f is compactly supported. Clearly, there is no uniqueness of the solution of (1.3). The
+homogeneous Helmholtz equation has infinitely many solutions, for example eiλx·ω, for any
+unit ω, any linear combination of that; and more generally, any integral w.r.t. ω w.r.t. any
+reasonable density on the unit sphere. Add any such solution to u in (1.3), and we still get
+a solution. It turns out that there is unique outgoing/incoming choice however.
+We will seek tempered solutions to (1.3). Take a Fourier transform of both sides (assume
+f ∈C∞
+0 for now) to get
+(1.4)
+ |ξ|2 −λ2
+ˆu = ˆf.
+Divide to get
+(1.5)
+ˆu(ξ) =
+ˆf(ξ)
+|ξ|2 −λ2.
+1
+
+2
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+The problem with this formula is that we are dividing by zero for ξ on the sphere |ξ| = |λ|,
+when R ∋λ ̸= 0 (we assume λ ̸= 0 in what follows). The singularity is bad enough to be not
+locally integrable. The formula is OK however for λ ∈C \ R, and represents the resolvent
+(−∆−λ2)−1 in functional analysis sense. Note that −∆naturally can be considered as a
+self-adjoint operator on L2(Rn) with domain {f ∈L2; ∆f ∈L2}; and a conjugation with
+the Fourier transform (scaled to a unitary one) reduces it to a multiplication by |ξ|2. Then
+non-real λ’s are in the resolvent set and “in the Fourier domain”, the resolvent is just a
+multiplication by (|ξ|2 −λ2)−1, i.e.,
+(1.6)
+R0(λ) =
+ −∆−λ2−1 = F−1  |ξ|2 −λ2−1 F,
+λ ̸∈R.
+The outgoing resolvent R0(λ) is defined as the analytic continuation of the operator (1.5)
+from ℑλ > 0 to a small neighborhood (at least) of R in C. To justify this definition we need
+to prove that such an extension exists in appropriate spaces. This is certainly not true if
+R(λ) is considered as an operator on L2(Rn) because λ2 is in the spectrum [0, ∞) of −∆for
+real λ. It is possible however of we shrink the domain and expand the range appropriately.
+Theorem 1.1. Let n ≥3 be odd. Then the operator
+R0(λ) =
+ −∆−λ2−1 : L2(Rn) →L2(Rn)
+defined a priori for ℑλ > 0 extends to an entire operator-valued function
+R0(λ) : L2
+comp(Rn) →L2
+loc(Rn)
+of λ in the whole complex plane C.
+Note that the extension is not given by the formula (1.6) for ℑλ < 0! This would become
+more explicit below. We could also extend the resolvent from ℑλ < 0 to C. That would give
+us the incoming resolvent R−
+0 (λ).
+In even dimensions, the extension is to the logarithmic covering of the complex plane.
+There are several ways to prove the theorem.
+1.1.1. Time-dependent approach. See [26, Chapter 3]. We go back to the time-dependent
+wave approach. In odd dimensions n ≥3, we have the strong Huygens’ Principle: if (∂2
+t −
+∆)u = 0 and the support of the Cauchy data (u, ut)|t=0 is in the ball |x| ≤R, then supp u(t, ·)
+is in t −R < |x| < t + R. When t ≤R, the first inequality carries no information but when
+t > R it says that the wave has a “back front”. In even dimensions, we can only say that
+supp u(t, ·) is in |x| < t + R, which is just finite speed of propagation (speed ≤1), actually.
+The strong Huygens’ Principle, valid in odd dimensions, can be interpreted as wave speed
+equal to one exactly.
+The analytic continuation of R0(λ) from ℑλ > 0 to C follows directly from the strong
+Huygens’ Principle, as we will show below.
+Recall the textbook Kirchoff’s formula for the solution of the wave equation in odd
+dimensions n ≥3:
+(1.7)
+(∂2
+t −∆)u = 0,
+(u, ut)|t=0 = (f1, f2).
+The solution is given by
+(1.8)
+u = ∂tU(t)f1 + U(t)f2,
+
+1. THE STATIONARY SCATTERING THEORY FOR THE LAPLACIAN IN Rn
+3
+where
+U(t)ψ(x) = Cn(t−1∂t)(n−3)/2tn−2
+Z
+|ω|=1
+ψ(x + tω)dω.
+The strong Huygens’ Principle follow directly now from this formula.
+The following formula relates the time-dependent theory and the stationary one:
+(1.9)
+R0(λ)f =
+Z ∞
+0
+eiλtU(t)f dt,
+f ∈L2,
+ℑλ > 0.
+Indeed, |eiλt| = e−tℑλ decays exponentially with t. It enough to show that U(t)f grows
+no faster than a polynomial in L2 to show that the integral is absolutely convergent. This
+follows from the representation
+U(t) = sin(t
+√
+−∆)
+√
+−∆
+(which in turn follows from using the Fourier transform to solve the wave equation). Since
+| sin(t|ξ|)|/|ξ| ≤|t| for all t, ξ (easy to prove), we have ∥U(t)∥≤C|t|. Apply −∆−λ2 to the
+r.h.s. of (1.9) now; call it g. Use the fact that U(t)f solves the wave equation with initial
+conditions (0, f) and integrate by parts. The latter is justified by the fact that all integrals
+which arise are absolutely convergent. We will get (−∆−λ2)g = f. For ℑλ > 0, this has
+unique solution for g; namely g = R0(λ)f. This proves (1.9).
+Now, it is enough to show that for any χ ∈C∞
+0 , the “cut-off resolvent” χR0(λ)χ has
+entire continuation from ℑλ > 0 to C. This follows immediately from (1.9) and the strong
+Huygens’ Principle. Indeed,
+χR0(λ)χf =
+Z ∞
+0
+eiλtχU(t)χf dt,
+ℑλ > 0.
+If supp χ ⊂B(0, R) for some R (and such an R always exists), then U(t)χf = 0 for |x| ≤
+t −R. Therefore, χU(t)χf = 0 for t > 2R, ∀x. The integral above is taken over the finite
+interval t ∈[0, 2R] only. Then it clearly extends to an entire function of λ.
+Note that there is no clear choice which continuation to call incoming and which outgoing.
+We could have started from ℑλ < 0 (which is our incoming choice now) as the physical half-
+plane. Then we have the formula (1.9) again but with i replaced by −i. Then we show that
+there is a homomorphic extension to C. We can easily declare this to be our outgoing choice;
+and in fact, this is done in many papers. This discussion reveals something else. In (1.9),
+t appears as the dual variable to λ because of the choice of the sign of the phase in eiλt.
+In other words, the Helmholtz equation (1.3) is the inverse Fourier transform of the wave
+equation (1.2). If we change that sign, we are thinking as λ as the dual variable to t, i.e., the
+Helmholtz equation (1.3) is now the Fourier transform of the wave equation (1.2). In either
+case, one of the equations is transformed into the other but with two different (adjoint to
+each other) transforms. Which way to go is a matter of taste.
+1.1.2. Explicit formula for R0(λ) in 3D. Another way to prove the analytic extension is
+just to compute the Schwartz kernel R0(x −y, λ) (which is clearly a convolution, see below)
+of R0(λ). By (1.6),
+R0(x, λ) = cn
+Z
+eix·ξ
+|ξ|2 −λ2dξ,
+ℑλ > 0.
+
+4
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+The integral is a Fourier transform, and not absolutely convergent. When n = 3 at least,
+one could pass to polar coordinates, modify the contour of integration in the integral w.r.t.
+the radial variable to get the formula in Proposition 1.2 below. One can do the following
+instead. The kernel R0(x, λ)f solves
+(1.10)
+(−∆−λ2)R0 = δ,
+and is clearly radially symmetric. Passing to polar coordinates, we get
+ d2
+dr2 + n −1
+r
+d
+dr + λ2
+
+R0 = 0,
+r > 0.
+Since the polar change of variables is singular at r = 0, there is no simple way of including
+the delta on the right at this point. The equation we got is of Bessel type and can be reduced
+to the actual Bessel equation by the substitution R0 = r1−n/2ψ(r), see also [24, Ch.6.3]. Let
+us consider the case n = 3 only. Then
+ d2
+dr2 + 2
+r
+d
+dr + λ2
+
+R0 = 0,
+r > 0,
+and the substitution R = ϕ(r)/r (different form the one above!) reduces this to the equation
+ψ′′ + λ2ψ = 0,
+r > 0
+That substitution is in any PDE textbook as a way to solve the 3D wave equation. Now,
+ψ = c1eiλr + c2e−iλr; therefore,
+R0 = c1
+eiλr
+r
++ c2
+e−iλr
+r
+,
+r = |x| > 0.
+Remember, we need a kernel that is a tempered function of λ for ℑλ > 0, since by the spectral
+theorem, ∥R0(λ)∥≤|ℑλ2|−1. This eliminates the e−iλr term, so we get R0 = Ceiλr/r, r > 0,
+n = 3. Recall that we do not really know that R0 solves (1.10). We derived this by assuming
+that it does.
+Now, we go back to Cartesian coordinates and look for a constant C (which may a priori
+depend on λ!) so that
+(1.11)
+(−∆−λ2)C eiλr
+r
+= δ
+(and we have an intelligent guess that such a constant must exist). If λ = 0, then the right
+constant is C = (4π)−1 since it is well known that (4πr)−1 is a fundamental solution of −∆.
+The expression we integrate is locally integrable; so it is a distribution. Use the Chain rule,
+valid for distributions multiplied by a smooth function as well:
+(∆+ λ2)eiλr
+r
+= (∆+ λ2)eiλr
+r
++ 2(∂xeiλr) · (∂x
+1
+r) + eiλr∆1
+r
+The first derivatives of r and 1/r can be computed in the classical way and the results are
+locally integrable, therefore distributions as well (every distribution is differentiable but the
+point here is how to compute the derivatives). Since ∆(4πr)−1 = −δ, we get
+(∆+ λ2)eiλr
+r
+= (−λ2 + (2/r)(iλ) + λ2)eiλr
+r
++ 2iλeiλr x
+r ·
+
+−x
+r2
+
++ eiλr(−4πδ).
+
+1. THE STATIONARY SCATTERING THEORY FOR THE LAPLACIAN IN Rn
+5
+Therefore,
+(∆+ λ2)eiλr
+r
+= −4πδ,
+so C = (4π)−1,
+So we proved the following.
+Proposition 1.2. For n = 3,
+[R0(λ)f](x) =
+Z
+eiλ|x−y|
+4π|x −y|f(y) dy.
+The analytic extension from ℑλ > 0 to C follows immediately from this formula. The
+Limiting Absorption Principle below gives another way to prove the existence of an analytic
+extension.
+1.2. The outgoing Green’s function. The kernel of R0(λ) is called the outgoing
+Green’s function G0(x, y, λ) of the free Laplacian. Clearly, G0(x, y, λ) = R0(x −y, λ). As we
+showed above,
+(1.12)
+G0(x, y, λ) =
+eiλ|x−y|
+4π|x −y|,
+n = 3.
+In all dimensions, including even ones, G0 is expressed in terms of some Hankel function:
+(1.13)
+G0(x, y, λ) = 1
+2i(2π)1−n/2λn−2(λr)1−n/2H(1)
+n/2−1(λr),
+r = |x −y|,
+see [15].
+1.3. Resolvent estimates.
+Theorem 1.3. For any λ > 0 and any χ ∈C∞
+0 ,
+∥χR0(λ)χ∥L2→L2 ≤C
+λ .
+Proof. We will prove it for n odd only, following [26].
+Let U(t) be as above. By (1.9), if R is such that supp χ ⊂B(0, R),
+λχU(t)χf = χ
+Z 2R
+0
+λeiλtU(t)χf dt = χ
+Z 2R
+0
+1
+i
+d
+dteiλtU(t)χf dt
+= iχ2 + iχ
+Z 2R
+0
+eiλtU ′(t)χf dt.
+We have U ′(t) = −i cos(t
+√
+−∆) = O(1) as an operator in L2. Therefore, the right-hand side
+above is uniformly bounded in λ, which proves the theorem.
+□
+It is worth noticing that
+∥χR0(λ)χ∥L2→Hs ≤
+C
+λ1−s,
+s = 0, 1, 2.
+The proof can be found in [26]. The idea is, roughly speaking that to estimate the H2
+norm, for example, we need to apply −∆and estimate the result. Then we write −∆=
+(−∆−λ2) + λ2.
+
+6
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+1.4. The Limiting Absorption Principle. The microlocal view of the resolvent R0(λ)
+is the following. We have a Fourier multiplier with a symbol (|ξ|2 −z)−1, z = λ2, see (1.6),
+where z = λ2. When ℜλ > 0 and 0 ≤ℑλ ≪1, we have ℜz ≈ℜλ2, ℑz = 2ℜλℑλ, so we
+still have ℜz > 0, 0 < ℑz ≪1. The zeros of |ξ|2 −z then are simple (f(ξ) = 0 implies
+df(ξ) ̸= 0). So the question is; how do we divide, in the Fourier domain, by functions with
+simple zeros? A good reference for that is [4, XIV.14.2].
+If f(x) is a function with a simple zero at, say, zero, then in some local coordinates wit
+would look as f = t, where t is one of the variables. A known fact in theory of distributions
+is that the limits
+(t ± i0)−1
+exist in D′(R). Moreover,
+(1.14)
+1
+t ± i0 = pv1
+t ∓iπδ(t).
+In particular,
+1
+t + i0 −
+1
+t −i0 = −2πiδ(t).
+Now, this is also true if we set t = p(ξ), ξ ∈Rn under the assumption dp(0) ̸= 0:
+1
+p(ξ) + i0 −
+1
+p(ξ) −i0 = −2πiδ(p(ξ)).
+Recall that δ(p(ξ)) = |dp(ξ)|−1δp−1(0)(ξ). Apply this to p(ξ) = |ξ|2 −τ, τ > 0, to get
+1
+|ξ|2 −τ + i0 −
+1
+|ξ|2 −τ −i0 = −πi|ξ|−1δ|ξ|2=τ(ξ).
+Set τ = λ2, λ > 0, to get
+1
+|ξ|2 −(λ + i0)2 −
+1
+|ξ|2 + (λ + i0)2 = πiλ−1δ|ξ|=λ(ξ).
+By (1.6),
+[R0(λ + i0)f −R0(λ −i0)f] (x) = πiλ−1(2π)−n
+Z
+|ξ|=λ
+eix·ξ ˆf(ξ) dS(ξ)
+= πiλ−1(2π)−nλn−1
+Z
+|θ|=1
+eiλx·θ ˆf(λθ) dθ
+= i
+2(2π)−n+1λn−2
+Z
+|θ|=1
+eiλx·θ ˆf(λθ) dθ
+= i
+2(2π)−n+1λn−2
+ZZ
+|θ|=1
+eiλ(x−y)·θf(y) dθ dy.
+Recall that we call R0(λ + i0) just R0(λ). Then R0(λ + i0) is the incoming resolvent, which
+is easily seen to be R∗
+0(λ) for λ ∈R, and also R0(−λ).
+We proved the following limiting absorption principle (Stone’s theorem in fact):
+
+1. THE STATIONARY SCATTERING THEORY FOR THE LAPLACIAN IN Rn
+7
+Theorem 1.4. For λ ∈R, n ≥2,
+(1.15)
+R0(λ)f −R0(−λ)f = i
+2(2π)−n+1λn−2
+ZZ
+|θ|=1
+eiλ(x−y)·θf(y) dθ dy.
+We proved the theorem for λ > 0. The proof for all real λ follows by analytic continuation
+once we establish that the latter exists near the real axis (true in even dimensions as well
+but we have to remove the origin then). We can continue analytically anywhere when the
+right-hand side is analytic, of course.
+The operator on the right can be interpreted as a spectral projection, see [9]. The theorem
+in particular shows that the difference between the outgoing continuation (from ℑλ > 0)
+and the incoming one (from ℑλ < 0) to the real axis is a non-trivial operator.
+Remark 1.1. The kernel in the integral above is just the Fourier transform of the delta
+function on the unit sphere evaluated at ξ = −λ(x−y). This can be computed — that delta
+function is a radial distribution, and then Fourier transform reduces to the Hankel transform
+of order n −1/2
+F(ρ) = (2π)n/2ρn/2−1
+Z ∞
+0
+f(r)Jn/2−1(ρr)rn/2 dr,
+where F(ρ), ρ = |ξ|, is the Fourier transform of the radial function f(r). When f = δ(r −1),
+we get
+F(ρ) = (2π)n/2ρn/2−1Jn/2−1(ρ),
+see http://math.unc.edu/Faculty/met/bessel.pdf. Then the integral in (1.15) is just
+F(λ|x−y|) for λ > 0, compare it with (1.13). When n = 3, since ρ−1/2J1/2(ρ) =
+p
+2/π sin ρ/ρ,
+we get (n = 3)
+R0(λ)f −R0(−λ)f = i
+2π
+Z sin(λ|x −y|)
+|x −y|
+f(y) dy.
+We could have obtained the same result by just subtracting R0(λ) in Proposition 1.2 and its
+incoming version R0(−λ).
+1.5. Asymptotics.
+Theorem 1.5. For n ≥2 and any f ∈E′(Rn), we have
+(a)
+(1.16)
+[R0(λ)f](rθ) =
+eiλr
+r(n−1)/2h(r, θ),
+h(r, θ) ∼
+∞
+X
+j=0
+r−jhj(θ),
+as r →∞,
+and
+h0(θ) =
+1
+4πi
+ λ
+2π
+ 1
+2 (n−3)
+e
+1
+4 πi(n−1) ˆf(λθ).
+In particular, if n = 3, then
+[R0(λ)f](rθ) = eiλr
+4πr
+
+ˆf(λθ) + O
+1
+r
+
+,
+as r →∞.
+
+8
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+(b) Next, u = R0(λ)f satisfies the following Sommerfeld radiation condition
+(1.17)
+(∂r −iλ) u(rθ) = o
+ r−(n−1)/2
+,
+r →∞,
+uniformly in θ ∈Sn−1.
+Proof. I will prove the n = 3 case only. For the general case, see e.g., [26].
+For n = 3, write
+|rθ −y| = r −θ · y + O(1/r),
+|rθ −y|−1 = r−1(1 + O(r−1)),
+r →∞
+and use Proposition 1.2 with x = rθ.
+The proof of (b) follows directly by applying (∂r −iλ) to the kernel. Notice that we
+actually get O
+ r−(n+1)/2
+.
+□
+1.6. Outgoing and incoming solutions.
+Definition 1.6. Given λ ∈C, we say that the function u is λ-outgoing (or simply,
+outgoing, if λ is understood from the context), if there exists a > 0 and f ∈E′ such that
+u||x|>a = R0(λ)f||x|>a.
+When n is even, one has to assume that λ belongs to the logarithmic covering of C,
+actually. If we stay close to R, then there is no problem even then.
+Clearly, any outgoing u solves (1.1). By elliptic regularity, it is real analytic for |x| ≫1.
+One defines incoming solution in a similar way. Note that outgoing and incoming solutions
+satisfy
+(1.18)
+u = O(1/r(n−1)/2),
+r = |x| →∞.
+There are many solutions to the Helmholtz equation for |x| ≫1 which do not satisfy such
+an estimate. For example, eiλρ·x, for ρ ∈Cn is a solution whenever ρ2
+1 + · · · + ρ2
+n = 1, and it
+is exponentially increasing for ρ ̸∈Rn; take for example ρ = (t, i
+√
+t2 −1, 0, . . . , 0), t > 1.
+We show below that the Sommerfeld radiation condition (1.17) guarantees the outgoing
+properties of solutions to the Helmholtz equation. This condition is clearly satisfied by the
+first term in (1.16) (as well as for the whole expansion, as we proved above). The incoming
+condition is the same with iλ replaced by −iλ. Another way to think about it is the following.
+Since t is the dual variable to λ, ∂t corresponds to −iλ. The Sommerfeld condition then say
+that, up to lower order terms, (∂t + ∂r)v = 0, where v is the Fourier transform of u w.r.t. λ.
+Then v = f(r −t) modulo lower order terms. This is a wave going to infinity, as t →∞, so
+it deserves to be called outgoing. The incoming condition would be f(r + t).
+Theorem 1.7. Let λ > 0.
+The function u is λ-outgoing if and only if u solves the
+Helmholtz equation for |x| ≫1 and satisfies the Sommerfeld outgoing condition (1.17).
+Moreover,
+(a) For any compact set K ⊂Rn with smooth boundary and connected complement and
+for any h ∈H3/2(∂K), the problem
+(1.19)
+(−∆−λ2)u = 0
+in Rn \ K,
+u|∂K = h
+has unique outgoing solution.
+
+1. THE STATIONARY SCATTERING THEORY FOR THE LAPLACIAN IN Rn
+9
+(b) For any f ∈L2
+comp(Rn), the problem
+(1.20)
+(−∆−λ2)u = f
+in Rn
+has unique outgoing solution given by u = R0(λ)f.
+We will start with the following uniqueness statement, see also (a). We follow [25, Ch. 9]
+here.
+Proposition 1.8. Let λ > 0. If
+(1.21)
+(−∆−λ2)u = 0
+in Rn \ K,
+u|∂K = 0
+and u satisfies (1.17), then u = 0.
+Proof. Let SR = {|x| = R}. For R ≫1, SR ⊂Rn \ K, and
+(1.22)
+Z
+Sr
+|ur −iλu|2dS =
+Z
+SR
+ |ur|2 + λ2|u|2
+dS −iλ
+Z
+SR
+(u¯ur −¯uur) dS.
+The integral on the right vanishes because by Green’s formula
+Z
+SR
+(u¯ur −¯uur) dS =
+Z
+∂K
+
+u∂¯u
+∂ν −¯u∂u
+∂ν
+
+dS = 0.
+On the other hand, by (1.17),
+Z
+SR
+|ur −iλu|2dS −→0,
+as R →∞
+because in polar coordinates, dS = Rn−1dS0, where dS0 is the natural measure on the unit
+sphere. Then (1.22) implies
+(1.23)
+Z
+SR
+|u|2 dS −→0,
+as R →∞.
+The proof is completed by the following lemma.
+□
+Lemma 1.9. If u solves the Helmholtz equation (−∆−λ2)u = 0 for |x| > R0 > 0 and
+(1.23) holds, then u = 0 for |x| > R0.
+Proof. Any such solution u has the representation (1.12). By Parseval’s identity,
+alm(λ)h(1)
+l (λr) + blm(λ)C2h(2)
+l (λr)
+2 = o(r(n−1)/2),
+as r →∞.
+It is easy to see, using (1.9) in Chapter V, that no non-trivial linear combination satisfies
+this, thus alm = blm = 0.
+□
+Proof of Theorem 1.7. We start with (b). Clearly, R0(λ)f is an outgoing solution,
+by definition, satisfies the Sommerfeld radiation condition (1.17), by Theorem 1.5; therefore
+it is unique by what we just proved. This in particular proves the “only if” part of the first
+statement of the theorem.
+The proof of the existence part of (b) will be given in Theorem 3.1, see also [25], pp.147–
+151. We first show there that the problem is uniquely solvable for ℑλ > 0 by reducing it to
+a problem for the inhomogeneous equation (1.20) outside K with a compactly supported f
+and zero Dirichlet data on ∂K. Then we can just apply the resolvent (−∆D −λ2)−1, where
+
+10
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+∆D is the Dirichlet realization of the Laplacian. Then we show that the limiting absorption
+principle applies, and we can take the limit ℑλ →0+.
+Finally, we need to prove the “if” statement. Let u solve the Helmholtz equation for
+|x| ≫1 and satisfy (1.17). Then it solves (1.2) as well. Then by (b), u = −R0(λ)[∆, χ]u.
+Therefore, u is outgoing.
+□
+1.7. Far field pattern. Our definition of incoming/outgoing solutions, combined with
+Theorem 1.5, implies the following.
+Corollary 1.10. Every outgoing (incoming) solution u satisfies the following asymp-
+totic
+(1.24)
+u(x) =
+e±iλ|x|
+|x|(n−1)/2h(x/|x|) + O
+
+1
+|x|(n+1)/2
+
+,
+as |x| →∞
+with some h ∈C∞(Sn−1).
+The function h is called the applied literature the far field pattern of u. Equation (1.2)
+and Theorem 1.5 imply the following
+(1.25)
+f(θ) = cn(λ)F([∆, χ]u)(λθ),
+cn(λ) = −1
+4πi
+ λ
+2π
+ 1
+2 (n−3)
+e
+1
+4 πi(n−1),
+where χ ∈C∞
+0 is such that u solves the Helmholtz equation on supp χ. This shows that h is
+actually a real analytic function of θ.
+Theorem 1.11 (The Rellich Iniqueness Theorem). Let u be an outgoing (incoming)
+solution with zero far field pattern. Then supp u is compact.
+Proof. It follows directly from Lemma 1.9. In this case, it is even simpler because
+blm = 0.
+□
+1.8. The absolute scattering matrix. We follow [9] here. For any unit θ, the function
+eiλθ·x solves the Helmholtz equation. Those functions are viewed as harmonic plane waves
+“moving” in the direction θ.
+Their Fourier transform in λ, up to a constant factor, is
+δ(t −x · ω), known as plane waves.
+Clearly,
+(1.26)
+Z
+Sn−1 eiλθ·xg(θ) dθ
+is also a solution of the Helmholtz equation in Rn for any g ∈D′(Sn−1) (the integral is
+understood in distributional sense).
+In fact, all tempered solutions u of the Helmholtz
+equation in Rn are of that type for λ > 0. Indeed, any such u has a Fourier transform ˆu and
+the latter solves (|ξ|2 −λ2)ˆu(ξ) = 0. Therefore, ˆu is supported on λSn−1. Since |ξ|2 −λ2 has
+simple zeros on the sphere λSn−1, ˆu is a delta-type of distribution on it.
+
+1. THE STATIONARY SCATTERING THEORY FOR THE LAPLACIAN IN Rn
+11
+Lemma 1.12. For λ > 0,
+Z
+Sn−1 eiλθ·xg(θ) dθ ∼e
+1
+4 π(n−1)i(2π)(n−1)/2
+e−iλ|x|
+(λ|x|)(n−1)/2
+X
+j≥0
+|x|−jh−
+j (x/|x|)
++ e−1
+4 π(n−1)i(2π)(n−1)/2
+eiλ|x|
+(λ|x|)(n−1)/2
+X
+j≥0
+|x|−jh+
+j (x/|x|),
+as |x| →∞, where, in particular, h±
+0 (ω) = g(±ω), and h±
+j for j ≥1 are given by linear
+combinations of certain derivatives of g(±θ).
+The proof is based on the stationary phase method. The phase λrθ · ω (we set x = rω)
+has stationary points at θ = ±ω.
+Note that in particular,
+Z
+Sn−1 eiλθ·xg(θ) dθ = (2πi)(n−1)/2
+
+e−iλ|x|
+(λ|x|)(n−1)/2g
+
+−x
+|x|
+
++
+eiλ|x|
+(λ|x|)(n−1)/2(−i)n−1g
+ x
+|x|
+
++ O
+
+1
+|x|(n+1)/2
+
+.
+(1.27)
+As in the time dependent case, we want to define the scattering operator as the operator
+mapping the incoming part of any solution to its the outgoing one. Here we do not have a
+perturbed dynamics yet but the question is still meaningful one. In the classical Newtonian
+case, where the dynamics is given by (x, v) 7→(x+tv, v), the incoming and the outgoing parts
+can be both associated with the same point in the phase space: (x, v). Then the scattering
+operator S would be identity, S = I. This has a lot to do with the way we parametrize the
+incoming and the outgoing points and directions. We could also think of −v as an incoming
+direction — where we have to look at to see the particle coming. Then S = −I.
+Relation (1.27) shows that the incoming-to-outgoing maps would be
+g(ω)
+7−→
+(−i)n−1g(−ω)
+as the following lemma shows.
+Lemma 1.13. For each λ > 0 and for each h ∈C∞(Sn−1), there is a unique solution u
+of the Helmholtz equation in Rn so that
+(1.28)
+u(rθ) =
+e−iλr
+r(n−1)/2h(θ) +
+eiλr
+r(n−1)/2 ˜h(θ) + O
+
+1
+r(n+1)/2
+
+and necessarily,
+(1.29)
+˜h(θ) = (−i)n−1h(−θ).
+The map (1.29) is the absolute scattering matrix (the term “matrix” comes from physics).
+We would expect to be identity but it is not. On the other hand, it is a unitary isomorphism
+in L2(Sn−1). Once and tweak a bit the definition of what is considered incoming and outgoing
+patterns (see (1.28)) to make it exactly identity.
+
+12
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+Proof. The existence follows from (1.27): u is given by the l.h.s. of (1.27) with g being
+a multiple of h(−θ). To prove the uniqueness, let u1 and u2 be two such solutions. Then
+v = u1 −u2 would be an outgoing solution in the whole space Rn. Then both (a) and (b)
+of Theorem 1.1 hold. Take x ̸= 0 then, to deduce 2clm = alm = blm, by (1.8). On the other
+hand, blm = 0 since u is outgoing. Then blm = 0 as well.
+□
+
+2. POTENTIAL SCATTERING
+13
+2. Potential Scattering
+The first scattering problem we consider is the stationary scattering theory for the “sta-
+tionary Schr¨odinger equation”
+(2.1)
+ −∆+ V (x) −λ2
+u = 0
+in Rn.
+Here, the potential V will be assumed to be real-valued and in L∞
+comp but sometimes we may
+assume higher regularity, like C∞
+0 (Rn). The compactness of the support is not so essential
+as long as V is short-range
+(2.2)
+|V (x)| ≤C(1 + |x|)−1−ε,
+ε > 0.
+This condition can be relaxed a bit but when ε = 0, or more generally, for −1 < ε < 0, the
+potential is called long-range and the whole theory needs to redone.
+Equation (2.1) is related to the wave equation
+(2.3)
+(∂2
+t −∆+ V )u = 0
+through the Fourier transform Fλ→t; and to the Schr¨odinger equation
+(2.4)
+(−i∂t −∆+ V )u = 0
+through the Fourier transform Fλ2→t. The links to the time-dependent scattering theory in
+each case will be discussed later.
+2.1. The perturbed resolvent R(λ). Note first that P = −∆+ V is a self-adjoint
+(with the same domain as −∆). It is actually a relatively compact perturbation of the latter
+and as such, the essential spectrum of P is the same as that of −∆, namely, [0, ∞). The
+whole spectrum is in [−C0, ∞), where −C0 ≤0 is such that −C0 ≤V . Then the true
+resolvent
+R(λ) = (−∆+ V −λ2)−1
+exists for λ away from the spectrum. If V can take negative values, it is possible, in principle,
+that P would have negative eigenvalues −µj. Then ℑλ > 0 is not sufficient for λ to be in the
+resolvent set since at the points λj = i√µj, the resolvent would have a pole. For ℑλ > √C0
+this cannot happen however.
+Sometimes, complex values potentials are of interest as well. Then P is not self-adjoint
+anymore but (P −λ2)−1 can be shown to exist for ℑλ ≫0 as well, as the first part of the
+theorem below asserts.
+Theorem 2.1. Let V ∈L∞
+comp(Rn; C), and let n ≥3 be odd. Then
+(a) the resolvent R(λ) is a meromorphic family of operators in ℑλ > 0 (and also, in
+ℑλ < 0).
+(b) R(λ) extends as a meromorphic operator-valued function
+R(λ) : L2
+comp(Rn) →L2
+loc(Rn)
+from ℑλ > 0 to the whole complex plane C.
+
+14
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+(c) The following estimate holds: for any χ ∈C∞
+0 ,
+∥χR(λ)χ∥≤C
+λ ,
+λ > 0.
+Note that when V is real-valued, (a) is trivial, and R(λ) is actually without poles there,
+as we already mentioned.
+Proof. First we show that R(λ) exists for ℑλ ≫1. If course, for real-valued potentials,
+this is trivial. If there were a resolvent for some λ, then it would satisfy the resolvent identity
+(2.5)
+R(λ) −R0(λ) = −R(λ)V R0(λ).
+This, and some of its versions, is known as the Lipmann-Schwinger equation. Hence,
+(2.6)
+R(λ)(I + V R0(λ)) = R0(λ).
+If we can invert I + V R0(λ), we are done, and we can write
+(2.7)
+R(λ) = R0(λ)(I + V R0(λ))−1.
+One can check directly that this is a left and right inverse. On the other hand,
+∥R0(λ)∥≤1/dist(ℑλ2, R+) ≤1/|ℑλ|2,
+therefore, for ℑλ ≫1, I + V R0(λ) is invertible, indeed. For ℑλ > 0, V R0(λ) is compact,
+and the analytic Fredholm theorem completes the proof of (a).
+To prove (b), we would like to apply the analytic Fredholm theorem again. Note first that
+we cannot apply it directly to (2.7) because we have proved existence of analytic extension
+of V R0(λ) only as an operator from L2
+comp(Rn) to L2 but not from L2 to itself (the latter
+is not true). Instead, we will do the following. Choose χ ∈C∞
+0
+so that χV = V . Then by
+(2.5),
+R(λ)χ −R0(λ)χ = −R(λ)χV R0(λ)χ.
+Therefore,
+R(λ)χ (I + V R0(λ)χ) = R0(λ)χ.
+For ℑλ ≫1, the operator I + V R0(λ)χ is invertible by the arguments above. Then
+(2.8)
+R(λ)χ = R0(λ)χ (I + V R0(λ)χ)−1 : L2(Rn) 7−→L2
+loc(Rn).
+We are ready to apply the analytic Fredholm theorem now.
+The operator V R0(λ)χ
+is compact, depends analytically on λ ∈C, and I + V R0(λ)χ is invertible for ℑλ ≫1.
+Therefore, χR(λ)χ extends to a meromorphic family.
+Part (c) follows from (2.8) and Theorem 1.3 directly because ∥(I + V R0(λ)χ)−1∥≤2 for
+λ ≫1.
+□
+Remark 2.1. Note that we can get (2.8) by expanding (2.7) in Neumann series for
+ℑλ ≫0 and applying χ to the right. Indeed, for ℑλ ≫0,
+(2.9)
+R(λ) = R0(λ) + R0(λ)V R0(λ) + R0(λ)V R0(λ)V R0(λ) + . . . .
+
+2. POTENTIAL SCATTERING
+15
+Therefore,
+R(λ)χ = R0(λ)χ −R0(λ)χV R0(λ)χ + R0(λ)χV R0(λ)χV R0(λ)χ + . . .
+= R0(λ)χ (I −V R0(λ)χ + V R0(λ)χV R0(λ)χ + . . . )
+= R0(λ)χ (I + V R0(λ)χ)−1
+for ℑλ ≫0, and by meromorphic continuation, is true everywhere. We also note for future
+reference that the same arguments imply the following
+(2.10)
+χR(λ) = (I + χR0(λ)V )−1 χR0(λ).
+Definition 2.2. The poles of R(λ) are called (scattering) resonances. The multiplicity
+m(λ) of each resonance is given by
+m(λ) = rank
+I
+|ζ−λ|=ε
+R(ζ) dζ,
+where the circle |ζ −λ| = ε > 0 is so small that λ is the only pole inside it.
+When V is real-valued, the only resonances in ℑλ > 0 are the ones corresponding to
+negative eigenvalues, λj = i√µj. Also, there are no resonances on R \ 0, see [26].
+Theorem 2.3. Let L∞
+comp(Rn) be real valued. Then
+(a) There are no non-trivial outgoing solutions of (2.1).
+(b) There are no non-zero real scattering poles.
+Proof. For (a), we follow the proof of Proposition 1.8. Let u be an outgoing solutions
+of (2.1). We start with (1.22). The integral in the r.h.s. there vanishes as well; to see that,
+we integrate ¯u(∆+V −λ2)u = 0 over the ball B(0, R). Then we arrive at (1.23). Lemma 1.9
+then implies that u = 0 for |x| ≫1. By unique continuation, u = 0 everywhere.
+To prove (b), it is enough to show that I + χR0(λ)V , see (2.10), is invertible. Since the
+operator V R0(λ)χ is compact, it is enough to show that I + χR0(λ)V has a trivial kernel.
+Let
+(2.11)
+(I + χR0(λ)V )ψ = 0,
+ψ ∈L2.
+Then the outgoing function v := −R0(λ)V ψ solves (−∆−λ2)v+V ψ = 0. By (2.11), ψ = χv,
+therefore,
+(−∆+ V −λ2)v = 0.
+By (a), v = 0.
+□
+2.2. The “naive” scattering theory. The scattering amplitude. We start with
+an intuitive view of scattering theory which is dominant in (some of) the physical and in
+(most of) the applied math literature.
+The “harmonic plane wave” solutions of the Helmholtz equation eiλx·θ, |θ| = 1, are
+viewed as elementary waves “propagating” in the direction θ. They are neither incoming
+nor outgoing. Even though there is no time in the stationary theory, we are thinking about
+(2.1) as an inverse (by the choice of our convention) Fourier transformed version of the wave
+equation (2.3). Then (2π)−nFλ→teiλx·θ = δ(t−x·θ); and the later is a “plane wave” moving in
+the direction θ. It is an analog of the classical particles x = tθ moving in the same direction.
+
+16
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+So we illuminate the system with the harmonic plane wave eiλx·θ, let it interact with the
+potential, and look for the difference usc = u −eiλx·θ, where u is the solution; as a sign of
+how the potential has interacted with that illumination. This intuitive view of the scattering
+process suggests that we should require usc to be outgoing. If V = 0, usc = 0. The large |x|
+limit (the far-field pattern) of usc is our scattering data, called the scattering amplitude a.
+The latter is a function of the incoming direction θ, the frequency/energy λ and the outgoing
+direction ω = x/|x|, i.e., a = a(λ, θ, ω). The scattering amplitude is basically the kernel of
+the scattering operator S minus identity, as we will see later.
+The discussion above suggests the following. We should look for a solution u(x, θ, λ) of
+(2.1) of the form
+(2.12)
+u = eiλx·θ + usc,
+with usc outgoing. Then usc is the outgoing solution of
+(2.13)
+(−∆+ V −λ2)usc = −V eiλx·θ.
+Then
+(2.14)
+usc = −R(λ)
+ V eiλx·θ
+,
+where, somewhat incorrectly, R(λ)
+ V eiλx·θ
+stands for R(λ) applied to the function x →
+V (x)eiλx·θ. Indeed, by (2.8), for any compactly supported f, R(λ) is outgoing.
+Another equation for usc can be obtained by writing
+(−∆−λ2)usc = −V u.
+Since usc is outgoing, we get
+(2.15)
+usc = −R0(λ)V u,
+therefore,
+(2.16)
+u(x, θ, λ) = eiλx·θ −
+Z
+G0(x, y, λ)V (y)u(y, θ, λ) dy,
+which is the classical Lippmann-Schwinger equation in quantum mechanics. Recall that if
+n = 3, the kernel G0 of R0 takes the simple form (1.12).
+Since usc is outgoing, it has a far field pattern, see (1.7). Therefore, there exists a function
+a(θ, ω, λ), where ω = x/|x|, so that
+(2.17)
+u(x, θ, λ) = eiλx·θ +
+eiλ|x|
+|x|(n−1)/2a(x/|x|, θ, λ) + O
+
+1
+|x|(n+1)/2
+
+,
+as |x| →∞.
+Definition 2.4. The function a(ω, θ, λ), where (ω, θ, λ) ∈Sn−1 × Sn−1 × R+ is called
+the scattering amplitude associated with V .
+In other words, the scattering amplitude is what controls the first non-trivial term in the
+expansion of u as |x| →∞, up to the obligatory factor |x|−(n−1)/2.
+To obtain a representation of a, we take the far-field pattern of the integral term in (2.16).
+By Theorem 1.5,
+(2.18)
+a(ω, θ, λ) = −1
+4πi
+ λ
+2π
+ 1
+2 (n−3)
+e
+1
+4 πi(n−1)
+Z
+e−iλω·yV (y)u(y, θ, λ) dy.
+
+2. POTENTIAL SCATTERING
+17
+Of course, the interesting part is the integral there, and very often, the scattering amplitude
+is just defined as
+(2.19)
+a0(ω, θ, λ) =
+Z
+e−iλω·xV (x)u(x, θ, λ) dx.
+We will call a0 the reduced scattering amplitude. The representation (2.19), together with
+the formulas (2.12) and (2.14) allow us to express the reduced scattering amplitude a0 directly
+trough the resolvent R(λ):
+(2.20)
+a0(ω, θ, λ) =
+Z
+e−iλω·xV (x)
+ (I −R(λ)V )eiλx·θ
+dx.
+We therefore get the following.
+Proposition 2.5. Let n ≥3 be odd. Then the scattering amplitude a(ω, θ, λ) extends
+to a meromorphic functions of λ ∈C with possible poles at the scattering resonances, with
+values in the real-analytic function of (θ, ω) .
+In particular, away from the scattering poles, a is analytic w.r.t. all of its variables.
+Actually, one can take θ and ω in the complex manifold ξ2 = 1. Note that this representation
+does not prove that a must have a pole at each scattering pole — in principle, the singular
+part of R(λ) may cancel by the integration. In fact, this cannot happen in ℑλ < 0 but this
+will be established later.
+2.3. The relative and the absolute scattering matrix. The “naive” scattering
+theory does not go further — if we can determine the scattering effect of the potential for
+every illumination θ ∈Sn−1, we have full scattering data, intuitively. We now relate the
+scattering amplitude to the scattering matrix, defined similarly to section 1.8.
+By (1.27) and (2.17), for any g ∈C∞(Sn−1),
+Z
+Sn−1u(x, θ, λ)g(θ) dθ
+= (2πi)(n−1)/2
+
+e−iλ|x|
+(λ|x|)(n−1)/2g
+
+−x
+|x|
+
++
+eiλ|x|
+(λ|x|)(n−1)/2
+h
+(−i)n−1g
+ x
+|x|
+
++ λ(n−1)/2
+Z
+Sn−1 a(x/|x|, θ, λ)g(θ) dθ
+i
++ O
+
+1
+|x|(n+1)/2
+
+,
+as |x| →∞.
+(2.21)
+Therefore, the l.h.s. above is a sum of an outgoing and an incoming functions; with corre-
+sponding far-field patterns g(−ω) and (−i)n−1g(ω) + λ(n−1)/2a(ω, θ, λ). This motivates the
+following.
+Definition 2.6.
+(a) The absolute scattering matrix is the map
+Sabs(λ) : g(ω) 7−→(−i)n−1g(−ω) + λ(n−1)/2
+Z
+Sn−1 a(−ω, θ, λ)g(θ) dθ.
+
+18
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+(b) The (relative) scattering matrix is the map
+S(λ) : g(ω) 7−→g(ω) + in−1λ(n−1)/2
+Z
+Sn−1 a(ω, θ, λ)g(θ) dθ.
+Note that the scattering matrix is the inverse of the absolute one for V = 0 composed
+with Sabs(λ). In particular, if V = 0, then S(λ) = I which restores the harmony.
+Theorem 2.7. For any λ > 0 and any h ∈C∞(Sn−1), there is unique solution v of (2.1)
+so that
+(2.22)
+v(rω) =
+e−iλr
+r(n−1)/2h(ω) +
+eiλr
+r(n−1)/2 ˜h(ω, λ) + O
+
+1
+r(n+1)/2
+
+,
+where, necessarily,
+˜h(·, λ) = Sabs(λ)h.
+Proof. The solution v is given by the integral in (2.21). The uniqueness follows from
+Theorem 2.3(a).
+□
+This theorem and its proof is an analog of the completeness property of the wave opera-
+tors.
+We list some properties of the scattering matrix.
+Theorem 2.8. Let n ≥3 be odd and let V ∈L∞
+comp(Rn) be complex-valued. Then S(λ)
+is meromorphic with poles of finite rank and satisfies
+S−1(λ) = S(−λ),
+λ ∈C.
+There are finitely many poles in ℑλ ≥0; and for any pole in ℑλ > 0, λ2 is in the spectrum
+of −∆+ V .
+If V is real valued, then
+S−1(λ) = S(¯λ)∗,
+λ ∈C.
+In particular, S(λ) is unitary on R and analytic on R.
+Definition 2.9. The poles of the scattering matrix S(λ) are called scattering poles.
+The scattering poles and the resonances coincide with a possible exception of finitely
+many on the imaginary axis. This will be shown later (hopefully).
+
+3. OBSTACLE SCATTERING
+19
+3. Obstacle Scattering
+Let O be a bounded compact (non-empty) set with smooth boundary and a connected
+exterior Ω= Rn \ O.
+We study the Helmholtz equation in Ωwith Dirichlet boundary
+conditions (Neumann boundary conditions are treated similarly)
+(3.1)
+(−∆−λ2)u = 0
+in Ω,
+u|∂Ω= 0.
+If we send a harmonic plane wave eiλθ·x, it will reflect from the obstacle, producing a response
+u = eiλθ·x + usc as before. We think of usc as the scattered wave, which reflected off ∂Ωand
+propagates to infinity.
+3.1. The resolvent. Let ∆D be the natural self-adjoint realization of ∆D corresponding
+to the Dirichlet boundary condition. In particular, the domain of ∆D is given by
+D(∆D) = H2(Ω) ∩H1
+0(Ω).
+The spectrum of −∆D coincides with [0, ∞). Then the resolvent
+R(λ) = (−∆D −λ2)−1
+exists for ℑλ > 0. We will show below that for n odd, it extends meromorhically to C. The
+proof of this will given in the more general black-box setting later but we will present the
+classical approach below which has its own merits. We refer also to [25, IX.7].
+Theorem 3.1. For n ≥3 odd, the resolvent R(λ) : L2
+comp(Ω) →L2
+loc(Ω) extends mero-
+morphically from ℑλ > 0 to C with poles in ℑλ < 0.
+As before, the resonances are defined as the poles of R(λ).
+Instead of studying the problem
+(3.2)
+(−∆−λ2)u = h,
+in Ω,
+u|∂Ω= 0,
+we will study the homogeneous Helmholtz equation in Ωwith prescribed data on ∂Ω:
+(3.3)
+(−∆−λ2)u = 0
+in Ω,
+u|∂Ω= f.
+Clearly, each one can easily be converted into the other.
+We define the usual single and double layer potentials by
+SL(f)(x) =
+Z
+∂Ω
+G0(x, y, λ)f(y) dSy,
+DL(f)(x) =
+Z
+∂Ω
+∂νyG0(x, y, λ)f(y) dSy.
+Here, ν is the outer unit normal and we recall the notation G0(x, y, λ) for the kernel of R0(λ).
+Each of those integrals is a solution of the Helmholtz equation away from ∂Ωfor any f ∈
+D′(∂Ω). Formally restricted to x ∈∂Ω, ∂νyG has a singularity of the kind dist(x, y)2−n, which
+is integrable on ∂Ω. On the other hand, ∂yG0(x, y, λ) a singularity of the kind dist(x, y)1−n
+which is not integrable on ∂Ω, but ∂νyG0(x, y, λ) has a weaker one, same as G0(x, y, λ).
+Therefore, the following operators are well-defined on ∂Ω, and are in fact compact ones on
+L2(∂Ω):
+Kf(x) =
+Z
+∂Ω
+G0(x, y, λ)f(y) dSy,
+Nf(x) =
+Z
+∂Ω
+∂νyG0(x, y, λ)f(y) dSy,
+x ∈∂Ω.
+
+20
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+If we let subscripts ± denote limits to ∂Ωfrom the interior, and, respectively, from the
+exterior of ∂Ω, it is known that
+(3.4)
+SL+ = SL−= K,
+DL± = ±1
+2I + N.
+We are looking for solutions of (3.3) of the form
+u = DL(g)
+(or u = SL(h) or any linear combination of both). Then g has to solve
+f = 1
+2g + Ng
+=⇒
+(I + 2N)g = 2f.
+If we can invert the Fredholm operator I + 2N, we would get
+(3.5)
+u = 2DL(λ)(I + 2N(λ))−1.
+We indicated above the fact that both operators depend on λ and in fact, they are entire
+functions of λ ∈C.
+Lemma 3.2. (I + 2N(λ))−1 is a meromorphic operator-valued function of λ ∈C with
+poles in ℑλ ≤0. The real poles are at λ such that λ2 is a Neumann eigenvalue of −∆in O.
+Proof. Since N(λ) is compact, I + 2N(λ) is invertible if and only if the equation (I +
+2N(λ))g = 0 has the trivial solution g = 0. Let g be a solution to that equation, and consider
+u = DL(λ)g defined away from ∂Ω. It solves the Helmholtz equation there. In Ω, it satisfies
+the zero boundary condition. For λ ̸= 0, it is outgoing, and by Theorem 1.7(a), u = 0 in Ω.
+For λ = 0 this follows by the maximum principle. For ℑλ > 0, λ2 is in the resolvent set of
+−∆D, therefore u = 0 then as well. Then ∂νu+ = 0 on ∂Ω.
+It is well known that the interior and the exterior normal derivatives of a double layer
+potential coincide. Hence, for ℑλ ≥0, ∂νu−on ∂Ωas well. Therefore, u|O is a Neumann
+eigenfunction of −∆with eigenvalue λ2.
+We therefore proved that (I+2N(λ))−1 exists for ℑλ ≥0 with the exception of λ for which
+λ2 is an interior Neumann eigenvalue. By the analytic Fredholm theorem, (I + 2N(λ))−1
+extends to a meromorphic function on C.
+□
+Proof of Theorem 3.1. Now, assume that λ0 is an interior Neumann eigenvalue of
+−∆. Then (I + 2N(λ))−1 has a pole at λ = λ0, and near λ0, we have the Laurent expansion
+(3.6)
+(I + 2N(λ))−1 = A0(λ) +
+N
+X
+j=1
+1
+(λ −λ0)j Aj,
+with A0(λ) holomorphic there, and N < ∞(the latter follows from the analytic Fredholm
+theorem, part of the definition of a meromorphic function). Since
+N(λ) −N(λ0) = (λ −λ0)
+Z 1
+0
+N ′(λ0 + s(λ −λ0)) ds,
+
+3. OBSTACLE SCATTERING
+21
+we have N(λ) = N(λ0) + (λ −λ0)N1(λ). Apply I + 2N(λ) = I + 2N(λ0) + 2(λ −λ0)N1(λ)
+to (3.6). On the left, we get identity; on the right, the most singular term would be
+1
+(λ −λ0)N (I + 2N(λ0))AN.
+Than term must vanish, therefore,
+(I + 2N(λ0))AN = 0.
+Choose f ∈L2(∂Ω) and let g = ANf. Then we are in the situation above, and we get
+u := DL(λ0)g = 0 in Ω. If the r.h.s. of (3.5) had a pole at λ = λ0, its most singular part
+would be
+1
+(λ −λ0)N DL(λ0)AN : L2(∂Ω) →L2
+loc(Ω),
+and we just established that this operator vanishes. Therefore, even though (I + 2N(λ))−1
+does have poles for λ square root of an interior Neumann eigenvalue, the operator DL(λ)(I+
+2N(λ))−1 does not — they are canceled by DL(λ).
+□
+3.1.1. The “naive” obstacle scattering theory and the scattering amplitude. We are look-
+ing again for a solution u(x, θ, λ) of (3.1) of the form
+(3.7)
+u = eiλx·θ + usc,
+with usc outgoing. Then usc is the outgoing solution of
+(3.8)
+(−∆−λ2)usc = 0,
+usc|∂Ω= −eiλx·θ.
+This solution is well defined for λ away from the resonances as we just showed.
+Being
+outgoing, it has a far field pattern; therefore u satisfies (2.17) and we can define the scattering
+amplitude as in Definition 2.4.
+Recall the notation G0(x, y, λ) for the kernel of R0(λ). Applying Green’s theorem, we
+get
+usc(x) =
+Z
+∂Ω
+ (∂νyG0)(x, y, λ)usc(y) −G0(x, y, λ)∂νusc(y)
+
+dSy,
+x ∈Ω,
+where we suppressed the dependence of usc on θ and λ. Here ν is the outer unit normal to
+O (and inner for Ω). We take the asymptotic |x| →∞using Theorem 1.5. Its proof (which
+we did for n = 3 only) easily implies an asymptotic expansion for ∂νyG0(x, y, λ) as well. We
+get
+a(ω, θ, λ) = 1
+4π
+ iλ
+2π
+ 1
+2 (n−3) Z
+∂Ω
+ usc(y)∂νye−iλy·ω −e−iλy·ω∂νusc(y)
+
+dSy.
+We proved the following.
+Theorem 3.3. We have
+a(ω, θ, λ) = −1
+4π
+ iλ
+2π
+ 1
+2 (n−3) Z
+∂Ω
+ iλω · ν(y)e−iλy·(ω−θ) + e−iλy·ω∂νusc(y, θ, λ)
+
+dSy.
+We see again that a(ω, θ, λ) extends to a meromorphic function of λ with possible poles
+at the resonances, with values in analytic functions of (θ, ω).
+
+22
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+3.1.2. The outgoing DN map. Let u be the outgoing solution to (3.3). Set
+N(λ)f = ∂u
+∂ν
+
+∂Ω.
+It is a well defined operator from Hs(∂Ω) to Hs−1(∂Ω) for s > 1 (at least, very often s = 1/2
+actually), meromorphically depending on λ, with possible poles at the resonances. With its
+aid, the formula above can be written as
+a(ω, θ, λ) = −1
+4π
+ iλ
+2π
+ 1
+2 (n−3) Z
+∂Ω
+ iλω · ν(y)e−iλy·(ω−θ) + e−iλy·ωN(λ)eiλ•·θ
+dSy.
+
+4. SCATTERING BY METRICS
+23
+4. Scattering by Metrics
+Let gij(x) be a Riemannian metric equal to the Euclidean one for large |x|, say, |x| > R0
+for some R0 > 0. The Laplace-Beltrami operator is given by
+∆g :=
+1
+√det g∂xigijp
+det g∂xj.
+Then we consider the equation (−∆g −λ2)u = 0. We could consider the more general second
+order elliptic operator
+P = −c−2∆g,A := c2
+1
+√det g (∂xi −Aj) gijp
+det g (∂xj −Aj) + q,
+where the “magnetic field” A(x) = (A1(x), . . . , An(x)) and the “electric field” q(x) vanish
+outside the ball B(0, R). We also assume that the “acoustic speed” c(x) equals 1 outside
+that ball.
+The reason to include c in the above definition is to have a direct way to treat both the
+operator c2∆and ∆g. Clearly, modulo first order terms, P coincides with −∆c−2g, so the
+metric which determines the high-frequency properties of P is c−2g.
+Since P is written in (almost) divergence form, when all coefficients are real (which we
+assume), P is self-adjoint on the space L2(Rn; c−2√det g dx). Its essential spectrum is again
+[0, ∞). One can define the resolvent
+R(λ) = (P −λ2)−1,
+ℑλ > 0.
+The meromorphic extension properties will be proved in the next section. Note that even
+though P is a compactly supported perturbation of −∆, the difference P −(∆) is not of
+lower order. Many properties are much closer to those of obstacle scattering than to the
+potential one.
+
+24
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+5. Black Box Scattering
+We present here the black box scattering framework introduced by Sj¨ostrand and Zworski
+[17]. It turns out that many (but not all!) properties like the existence of a meromorphic
+extension, some basic properties of the scattering matrix and amplitude, and even some
+properties of the resonances are the same for potential, obstacle scattering, and for general
+second order self-adjoint operators. This suggests that there might be a uniform approach
+which combines them all. Such an approach is the black box scattering framework.
+At the beginning, we follow [16].
+Let H and HR0 be two complex Hilbert spaces so that
+H = HR0 ⊕L2(Rn \ B(0, R0)),
+where R0 > 0.
+In potential scattering, HR0 = L2(B(0, R0)), in obstacle one, HR0 =
+L2(B(0, R0)\O), where O ⊂B(0, R0); and in the metric case, HR0 = L2(Rn; c−2√det g dx).
+Other examples are a compact manifolds with boundary (and possible “holes” and “han-
+dles”) glued to the exterior of B(0, R0).
+We denote by 1B(0,R0) (or u|B(0,R0)), and by 1Rn\B(0,R0) (or u|Rn\B(0,R0)) the projections
+to the first or the second component in the orthogonal decomposition above, respectively.
+Note that the former notation can be misleading: u|B(0,R0)) is the projection to HR0 which
+may not be a space of functions defined on B(0, R0). Multiplication by C∞
+0 (Rn) functions
+χ is well-defined when χ is constant near B(0, R0). We set
+Hcomp = {u ∈H; u|Rn\B(0,R0) has bounded support}
+Hloc = HR0 ⊕L2
+loc(Rn \ B(0, R0))
+We define P now as a self-adjoint operator on H with domain D(P). We want first P to
+be equal to −∆outside Ω:
+(5.1)
+Pu|Rn\B(0,R0) = −∆|Rn\B(0,R0).
+This needs to be complemented by the assumption that if u ∈D(P), then its restriction to
+Rn \ B(0, R0) is in H2; and that any u ∈H2(Rn \ B(0, R0) vanishing near B(0, R0) is in
+D(P) as well.
+The second essential property replaces the requirement that P is elliptic (the latter does
+not actually make sense in this abstract setting):
+(5.2)
+1B(0,R0)(P −i)−1
+is compact on H.
+Note that this condition is fulfilled in potential and in obstacle scattering.
+Theorem 5.1.
+(a) P can have only discrete spectrum in (−∞, 0).
+(b) (P −λ2)−1 : Hcomp 7→Hloc has a meromorphic extension from {ℑλ > 0; λ2 ̸∈
+spec(P) ∩(−∞, 0)} to C, when n ≥3 is odd; and to the logarithmic covering of C when n
+is even.
+Proof. The first step is to show that (5.2) implies the following more general property:
+(5.3)
+1B(0,R)(P −z)−1
+is compact on H for any R ≥R0 and any z ∈ρ(P),
+
+5. BLACK BOX SCATTERING
+25
+where ρ(P) is the resolvent set of P.
+Indeed, by the resolvent identity,
+(5.4)
+1B(0,R0)(P −z)−1 = 1B(0,R0)(P −z0)−1 −1B(0,R0)(P −z0)−1(z0 −z)(P −z)−1
+for any z0 and z in the resolvent set. Take z0 = i to conclude that 1B(0,R0)(P −z)−1 is
+compact. Also, (P −z)−11B(0,R0) is compact, being adjoint to a compact operator.
+Next, to show that we can replace R0 with any R > R0, notice that
+1B(0,R)\B(0,R0)(P −z)−1
+is compact because 1B(0,R) : H2(Rn \ B(0, R0)) →L2(Rn \ B(0, R0)) is compact.
+Next step is to construct an “approximate” resolvent. We use Sj¨ostrand’s notation here:
+for any functions χ1, χ2, we say that χ1 ≺χ2 is χ2 = 1 near supp χ1 (with χ1 ∈C∞
+0 ). Choose
+χ0, χ1, χ2 in C∞
+0
+so that 1B(0,R) ≺χ0 ≺χ1 ≺χ2 (the first relation has a natural meaning).
+Then we set
+(5.5)
+Q(λ) = (1 −χ0)R0(λ)(1 −χ1) + χ2R(λ0)χ1,
+where λ0 with λ2
+0 ∈ρ(P) will be chosen later, and ℑλ > 0. Roughly speaking, Q(λ) is like
+R0(λ) outside the black box, and equal to R(λ0) (with λ0 fixed) near the black box. We
+would like the latter to be R(λ) but we have not proved its meromorphic continuation yet
+— actually, we are trying to prove it now. The compactness of the difference, with a cutoff
+applied to the left, see (5.4), will give us a compact operator error only.
+Apply P −λ2 to the first operator on the r.h.s. of (5.5):
+(P −λ2)(1 −χ0)R0(λ)(1 −χ1) = 1 −χ1 + [∆, χ0]R0(λ)(1 −χ1) = 1 −χ1 + K0(λ),
+where K0(λ) is compact. Next,
+(P −λ2)χ2R(λ0)χ1 = χ2(P −λ2)R(λ0)χ1 −[∆, χ2]R(λ0)χ1
+= χ1 + χ2(λ2
+0 −λ2)R(λ0)χ1 −[∆, χ2]R(λ0)χ1
+= χ1 + K1(λ, λ0),
+where K2(λ, λ0) is compact as well.
+So we get
+(P −λ2)Q = I + K(λ, λ0),
+K := K0(λ) + K1(λ, λ0).
+Clearly, K depends analytically on λ in ℑλ > 0. We only need to show that I + K(λ, λ0) is
+invertible for some λ, with suitably chosen (but fixed) λ0. Then we can apply the analytic
+Fredholm theorem.
+We chose λ0 = eiπ/4µ, µ > 0; then λ2
+0 = iµ2. Then we claim that
+K(λ0, λ0) = O(|λ0|−1) : H →H.
+By the spectral theorem,
+R(λ0) = O(|λ0|−2) : H →H,
+R(λ0) = O(1) : H →D(P).
+The most difficult term to handle is [∆, χ2]R(λ0)χ1, see the definition of K1(λ). Note that
+1 −χ0 = 1 on the support of the coefficients of [∆, χ2]. Then we have the same estimates
+for (1 −χ0)R(λ0) and H, D(P) replaced by L2 and H2, respectively. By interpolation (or
+
+26
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+by applying the spectral theorem again), (1 −χ0)R(λ0) = O(1/|λ0|) : H →H2. We treat in
+the same way the other terms in K(λ0, λ0) to get
+K(λ0, λ0) = O(1/|λ0|) : H →H.
+We choose and fix λ0 so that that norm is less than 1/2. Then (I + K(λ, λ0))−1 exists for
+λ = λ0. By the analytic Fredholm theorem, it extends to a meromorphic family in ℑλ > 0
+(with the singular part in the Laurent expansion operators of finite rank). Note that at this
+point we cannot (and should not be able to) make the same conclusion for λ in ℑλ < 0
+because the first term in the definition of Q(λ) is analytic only in ℑλ > 0.
+We now write (with the notation K(λ) = K(λ, λ0))
+(P −λ2)−1 = Q(λ)(I + K(λ))−1,
+ℑλ > 0.
+So far, we did not prove many new meromorphic properties of (P −λ2)−1 but we did prove
+some new ones. We know that (P −λ2)−1 is an analytic function in ℑλ > 0 with possible
+singularities at λon iR so that λ2 is in the (negative) spectrum of P. Now, we see that the
+negative part of the spectrum of P must be discrete, which proves (a).
+To prove the meromorphic extension to ℑλ ≤0, as in (b), it is enough to show that
+R(λ)χ : H →Hloc has this property, for any χ ∈C∞
+0 .
+If we expand (I + K(λ))−1 in
+Neumann series, for λ close to λ0, we get
+(I + K)−1 = I −K + K2 −. . . .
+A quick inspection of the definition of K reveals that it is a sum of terms all having a compact
+cut-off on the left; more precisely, their range is always in Hcomp; with support in supp χ2.
+One of them however, [∆, χ0]R0(λ)(1 −χ1), does not have such a cut-off on the right. Since
+we always apply it to functions supported in supp χ2, except for the K term, we can just
+replace K with K(1 −χ), where χ2 ≺χ, and this would affect the K term only but not Kj,
+j ≥2. Therefore,
+(I + K)−1 = (I + Kχ)−1(1 −K(1 −χ)).
+This is true for λ near λ0 but also in ℑλ > 0 away from the poles, by analytic continuation.
+We can apply the analytic Fredholm theorem again (note that Kχ now is an analytic function
+of λ in C, if n is odd, and in the logarithmic cover of C, if n is even), to conclude that R(λ)
+has the claimed meromorphic extension (in the sense of (b)) given by
+R(λ) = Q(λ)(I + K(λ)χ)−1(I −K(λ)(1 −χ)).
+□
+As before, the poles of R(λ) are called resonances. Some authors exclude those in ℑλ > 0
+which come from the spectrum.
+Proposition 5.2.
+(a) For any f ∈Hcomp and any λ not a resonance, the function u = R(λ)f is λ-outgoing.
+Moreover, if χ is a smooth cut-off function such that χ = 1 for |x| > a, and χ = 0 in a
+neighborhood of B(0, R0) and supp f, then we have R(λ)f||x|>a = −R0(λ)[∆, χ]R(λ)f||x|>a.
+(b) Assume that u ∈Dloc(P), (P −λ2)u = f ∈Hcomp, λ is not a resonance, and u is
+λ-outgoing. Then u = R(λ)f.
+
+5. BLACK BOX SCATTERING
+27
+(c) Assume that u ∈Dloc(P), (P −λ2)u = 0 for 0 ̸= λ ∈R, and u is λ-outgoing. Then
+u has compact support.
+Proof. We will use the observation (1.2). Let 1B(0,R0) ≺1 −χ ∈C∞
+0 . For ℑλ > 0,
+(−∆−λ2)χ = −[∆, χ] + χ(−∆−λ2) = −[∆, χ] + χ(P −λ2).
+Apply R0(λ) on the left and R(λ) on the right to get
+(5.6)
+χR(λ) = −R0(λ)[∆, χ]R(λ) + R0(λ)χ.
+This can be extended meromorphically to the “non-physical sheet” considering both sides
+above as operators from Hcomp to Hloc This proves (a). In particular, this show that for any
+f ∈E′, R(λ)f is outgoing.
+For the proof of (b), see [16, 20].
+Consider (c). As in (1.22), we get
+Z
+Sr
+|ur −iλu|2dS =
+Z
+SR
+ |ur|2 + λ2|u|2
+dS −iλ
+Z
+SR
+(u¯ur −¯uur) dS.
+The integral on the right vanishes because by Green’s formula
+Z
+SR
+(u¯ur −¯uur) dS = (1B(0,R)(P −λ2)u, u) −(1B(0,R)u, (P −λ2)u),
+R > R0,
+which is easy to justify in the black-box framework. Then we show in the same way that
+u = 0 for |x| > R0.
+□
+Theorem 5.3. Let λ ∈R \ {0} be a resonance. Then λ2 is an eigenvalue of P and there
+exists a compactly supported eigenfunction corresponding to λ2.
+Proof. We will actually prove something more. Let λ0 be such a resonance. Then R(λ0)
+has a non-trivial Laurent expansion of the kind (3.6). Let AN be as there. In the same way,
+we show that (P −λ2
+0)AN = 0. Since AN ̸= 0, there exists f ∈Hcomp so that u := ANf ̸= 0.
+Then (P −λ2
+0)u = 0. Such functions are called resonant states.
+By (5.6), u is outgoing. By Proposition 5.2(c), it has compact support. Then u, which a
+priori is in Hloc only, is actually in H and is therefore an eigenfunction.
+□
+In most typical situations, P has no positive eigenvalues; then there are no real non-zero
+resonances.
+5.1. The scattering amplitude. Similarly to what we did before, we can build the
+“naive” scattering theory in the general black-box setting.
+Let 1B(0,R0) ≺1 −χ1 ∈C∞
+0 . For any θ ∈Sn−1, λ > 0, we are looking for a solution
+u(x, θ, λ) ∈Dloc(P) of
+(P −λ2)u = 0
+so that
+(5.7)
+u = χ1eiλθ·x + usc
+with usc outgoing. Then usc must solve
+(P −λ2)usc = [∆, χ1]eiλθ·x.
+
+28
+II. SCATTERING THEORY FOR COMPACTLY SUPPORTED PERTURBATIONS OF ∆IN Rn
+By Proposition 5.2(b) above,
+usc = R(λ)[∆, χ1]eiλθ·x.
+if λ > 0 is not a resonances. Choose χ2 ∈C∞so that χ2(x) = 0 for |x| ≫1 and χ = 0 on
+supp(1 −χ1). Then by Proposition 5.2(a),
+χ2usc = −R0(λ)[∆, χ2]R(λ)[∆, χ1]eiλθ·x.
+Take the asymptotic x = rω, r →∞. By Theorem 1.5,
+usc(rω, θ, λ) = −e
+1
+4 πi(n−1)
+4πir(n−1)/2
+ λ
+2π
+ 1
+2 (n−3)
+×
+Z
+e−iλω·xR0(λ)[∆, χ2]R(λ)[∆, χ1]eiλθ·•dx + O
+
+1
+r(n+1)/2
+
+.
+We define the scattering amplitude a in the same way as in (2.17). Then
+(5.8)
+a(ω, θ, λ) = −e
+1
+4 πi(n−1)
+4πi
+ λ
+2π
+ 1
+2 (n−3) Z
+e−iλω·x[∆, χ2]R(λ)[∆, χ1]eiλθ·•dx.
+This formula allows us to compute the scattering amplitude a knowing the resolvent R(λ). In
+particular, we get that, as before, λ 7→a(ω, θ, λ) extends meromorphically from the physical
+sheet to the non-physical one with values analytic functions of (ω, θ) and possible poles at
+the resonances.
+Set
+(5.9)
+(E±f)(ω) =
+Z
+e±iλω·xf(x) dx = ˆf(∓λω),
+E± : S′(Rn) →C∞(Sn−1),
+The transpose operators are given by
+(5.10)
+(E′
+±ϕ)(x) =
+Z
+Sn−1 e±iλω·xϕ(ω) dω,
+E± : D′(Sn−1) →S(Rn).
+Let us now view the scattering amplitude a(ω, θ, λ) as a kernel of an operator A(λ) :
+C∞(Sn−1) →C∞(Sn−1). Then
+(5.11)
+A(λ) = −e
+1
+4 πi(n−1)
+4πi
+ λ
+2π
+ 1
+2 (n−3)
+E−(λ)[∆, χ2]R(λ)[∆, χ1]E′
++(λ).
+This formula appeared for the first time in [13], to my knowledge. I am following [20] here.
+An even closer look at that formula reveals that
+A(λ) = c(λ)E−(λ)[∆, χ2]R(λ) (E+(λ)[∆, χ1])′ .
+This shows that we should probably try to understand the operator E−(λ)[∆, χ2] better.
+Take the Schwartz kernel G(x, y, λ) of R(λ). Then the kernel of E−(λ)[∆, χ2]R(λ) is just the
+far field pattern of G(x, y, λ) w.r.t. the x variable. The kernel of E−(λ)[∆, χ2]R(λ) (E+(λ)[∆, χ1])′
+is then the far field pattern of the result w.r.t. the y variable; and that is the scattering am-
+plitude, up to the factor c(λ). We will make this more precise later, when we discuss inverse
+scattering in the black-box setting.
+
+5. BLACK BOX SCATTERING
+29
+5.1.1. Asymptotics of R(λ)f. Similarly to Theorem 1.5, we can derive asymptotics for
+R(λ)f with f compactly supported.
+Theorem 5.4. For any f ∈E′(Rn),
+[R(λ)f](rθ) =
+1
+4πi
+ λ
+2π
+ 1
+2 (n−3)
+e
+1
+4 πi(n−1)
+eiλr
+r(n−1)/2
+Z
+¯u(y, −θ, −λ)f(y) dy.
+Proof. By Proposition 5.2, one needs to know the asymptotic of R0(λ)g for g compactly
+supported only. Then Theorem 1.5 implies (f can be a distribution there)
+[R(λ)f](rθ) = −1
+4πi
+ λ
+2π
+ 1
+2 (n−3)
+e
+1
+4 πi(n−1)
+×
+eiλr
+r(n−1)/2
+Z
+e−iλθ·y ([∆, χ]R(λ)f) (y) dy + O
+
+r−n−3
+2
+
+.
+Note that R∗(λ) = R(−¯λ), i.e., for the Green’s function G(x, y, λ) (the Schwartz kernel) we
+have G(y, x, λ) = G(x, y, −¯λ). Since [∆, χ] is formally skew self-adjoint in L2, for λ real we
+get
+Z
+e−iλθ·y (R(λ)f) (y) dy =
+Z
+f(y)
+
+R(−λ)[∆, χ]eiλθ·•
+
+(y) dy
+= −
+Z
+f(y)¯usc(x, −θ, −λ) dy,
+where usc is related to χ instead of χ1. We can replace ¯usc by ¯u, see (5.7), if χ has support
+separated from that of f.
+□
+Note that if P preserves real functions, i.e., Pf = P ¯f, then G(x, y, λ) = G(y, x, λ) and
+we can replace ¯u(x, −θ, −λ) by u(x, −θ, λ).
+What needs to be added: the general properties of the scattering amplitude,
+etc., are the same as in the potential scattering case. Wave operators and their
+kernels, etc.
+
+CHAPTER III
+Introduction to the Time-Dependent Scattering Theory for the
+perturbed wave equation in R × Rn
+1. Introduction
+I will present some basic facts about the time-dependent scattering theory for the per-
+turbed wave equation in R × Rn. I will not get into the whole Lax-Phillips theory. I am
+following here Friedlander, Lax-Phillips and Cooper-Strauss.
+The time-dependent theory is most of its part equivalent to the stationary one, roughly
+speaking. In some sense, it is more intuitive — one has the notion of time and there is finite
+speed of propagation.
+Some phenomena like time-depending perturbations are naturally
+better described by the time-dependent theory.
+The analog of the Helmholtz equation, describing propagation of “free waves”, is the
+wave equation
+(1.1)
+(∂2
+t −∆)u = 0,
+t ∈R, x ∈Rn.
+One of the basic examples of a perturbed system is the wave equation with a compactly
+supported potential
+(1.2)
+(∂2
+t −∆+ V (x))u = 0.
+Another one, in obstacle scattering, is equation (1.1) in the exterior Ωof a compactly sup-
+ported obstacle with, say, Dirichlet boundary conditions on it. An important example is the
+acoustic wave equation
+(1.3)
+(∂2
+t −c2(x)∆)u = 0
+with c > 0 equal to 1 for large |x|. One can involve a metric equal to the Euclidean for large
+|x|, etc.
+Another class of examples involve time-depending perturbations, for example,
+(1.4)
+(∂2
+t −∆+ q(t, x))u = 0,
+where q(t, x) = 0 for |x| > R0, R0 > 0. In the previous examples, one can take an inverse
+Fourier transform w.r.t. t to get a stationary problem. Here, we can still do this but we
+will get a convolution w.r.t. the spectral variable λ. This is related to the fact that time-
+dependent perturbations do not preserve the frequency, in general. Another example is the
+obstacle problem for an obstacle which moves and changes shape as well.
+30
+
+2. SCATTERING FOR THE “FREE” WAVE EQUATION
+31
+2. Scattering for the “free” wave equation
+2.1. Basic facts about the wave equation. The natural Cauchy problem for the
+wave equation is the following
+(2.1)
+(∂2
+t −∆)u = 0,
+(u, ut)|t=0 = (f1, f2).
+This problem is solvable for any (f1, f2) ∈D′(Rn) × D′(Rn), and there are those explicit
+textbook formulas.
+One basic property is finite speed of propagation:
+(2.2)
+supp u(t, ·) ⊂(supp f ∪supp g) + B(0, |t|).
+Physically, this means that “signals” propagate with speed one or less. Another basic prop-
+erty is the Huygens’ Principle valid in dimensions n ≥3, odd:
+(2.3)
+supp u(t, ·) ⊂(supp f ∪supp g) + S(0, |t|),
+where S(0, r) stands for the sphere |x| = r. Physically, this means that “signals” propagate
+with speed one exactly.
+Another basic property is energy preservation: the energy
+(2.4)
+E(u(t, ·)) := 1
+2
+Z  |∇xu|2 + |ut|2
+dx
+(if finite), is independent of t. We will make this more precise below.
+The following formalism is very convenient. We convert the wave equation into a system
+by setting u(t) = (u, ut); then
+(2.5)
+∂tu = Au,
+A :=
+
+0
+1
+∆
+0
+
+.
+The natural energy space of states of finite energy is defined as the completion of C∞
+0 × C∞
+0
+under the energy norm
+∥f∥2
+H = 1
+2
+Z  |∇f1|2 + |f2|2
+dx,
+f := (f1, f2).
+In particular, the first term defines the Dirichlet space HD(Rn) with norm ∥∇f∥L2. Surpris-
+ingly, when n = 2, that space contains elements that are not distributions [8]. When n ≥3,
+they are locally in L2, as it follows from the following Poincar´e inequality
+Z
+|x|<R
+|g|2 dx ≤
+R2
+2(n −2)
+Z
+|∇g|2 dx.
+The operator A naturally extends to a skew-selfadjoint one (i.e, iA is self-adjoint) on H.
+Then by Stone’s theorem, U0(t) = etA is a well-defined strongly continuous unitary group,
+and the solution of (2.1) is given by u(t) = U0(t)f. The unitarity means energy conservation,
+in particular.
+We define Hloc in the usual way. By the finite speed of propagation, the Cauchy problem
+(2.1) has a well defined solution in Hloc if the Cauchy data f is in Hloc only.
+We view
+those solutions as ones with (possibly) infinite energy but locally finite one.
+Then u ∈
+
+32
+III. TIME-DEPENDENT SCATTERING
+C(R; Hloc) and the wave equation is solved in distribution sense. One can easily extend this
+to distributions.
+2.2. Plane waves, translation representation and asymptotic wave profiles of
+free solutions. The harmonic plane waves eiλω·x played a fundamental role in the stationary
+theory. The time dependent analog are the plane waves
+δ(t −ω · x),
+where δ is the Dirac delta function. They solve the wave equation, obviously. They can be
+thought of as, well, plane waves propagating in the direction ω with speed one. If we replace
+t by t + s there, we can think of s as the delay time. The plane wave above is the Schwartz
+kernel of the Radon transform
+Rf(s, ω) =
+Z
+δ(t −ω · x)f(x) dx =
+Z
+x·ω=s
+f(x) dSx.
+For any density g(ω, s) (which can be a distribution as well), the superposition
+(2.6)
+u(t, x) :=
+Z
+R×Sn−1 δ(t + s −ω · x)g(s, ω) dω ds =
+Z
+Sn−1 g(ω · x −t, ω) dω
+is still a solution of the wave equation. The expression above can be recognized as the the
+transpose R′ of the Radon transform applied to gt(s, ω) := g(s−t, ω). The following natural
+question arises: are all solutions, in some space, at least, given by superpositions of the kind
+(2.6)? If so, then (u, ut)|t=0 should be able to generate all possible Cauchy data in that
+space. By (2.6),
+(u, ut)|t=0 = (R′g, −R′∂sg) = (f1, f2).
+We assume n ≥3 odd from now on. The first impression is that those equations form an over-
+determined system. This not the case however. It is known that with the right choice of the
+constant, cn∂(n−1)/2
+s
+R : L2(Rn) →L2
+e(R×Sn−1) is unitary and surjective, where the subscript
+e stands for the even functions in that space. Then so is cn∂(n−1)/2
+s
+R′ : L2
+e(R × Sn−1) →
+L2(Rn). This suggests that we should look for g of the kind g = cn∂(n−3)/2
+s
+(k, −∂sk). The
+removal of one s-derivative can be explained by the fact that we need the second component
+to be in L2, not the first one. Since R′g = R′ge, the equation cnR′∂(n−3)/2
+s
+k = f1 determines
+uniquely the even part of k. The equation −cnR′∂(n−1)/2
+s
+k = f2 determines uniquely the odd
+part. All this motivates the choice of R below.
+One of the first things we need to understand is the behavior of the solutions of the
+wave equation at infinity. In [8], Lax and Phillips defined the free translation representation
+R : H →L2(R × Sn−1) as follows
+(2.7)
+k(s, ω) = Rf(s, ω) = cn(−∂(n+1)/2
+s
+Rf1 + ∂(n−1)/2
+s
+Rf2),
+where R is the Radon transform and cn = 2−1(2π)(1−n)/2, c−
+n = 2−1(−2π)(1−n)/2. The inverse
+is given by
+(2.8)
+R−1k(x) = 2c−
+n
+Z
+Sn−1
+ −∂(n−3)/2
+s
+k(x · ω, ω), ∂(n−1)/2
+s
+k(x · ω, ω)
+
+dω.
+
+2. SCATTERING FOR THE “FREE” WAVE EQUATION
+33
+The map R is unitary, and (RU0(t)R−1k)(s, ω) = k(s −t, ω), which explains the name. We
+also set
+(2.9)
+u♯(s, ω) = (−1)(n−1)/2k(s, ω)
+and call u♯the asymptotic wave profile of the solution u(t) = U0(t)f. This name is justified
+by the theorem below, and it is the analog of the far free pattern for solutions of the free
+wave equation.
+Theorem 2.1 (Lax-Phillips, [8]). Let u(t) = U0(t)f, f ∈H. Then
+(2.10)
+Z ut −|x|−(n−1)/2u♯
+|x| −t, x
+|x|
+
+2
+dx →0,
+as |t| →∞.
+Sketch of the proof. Let k be the translation representation of u, see (2.7). Then
+U0(t)f = R−1k(· −t, ·). In particular,
+(2.11)
+ut =
+Z
+Sn−1 h(ω · x −t, ω) dω,
+h := c−
+n ∂(n−1)/2
+s
+k.
+We will assume in the rest of the proof that h is regular enough to justify the limits below,
+and in particular that h has compact support. We need to compute the limit
+lim
+t→∞t(n−1)/2ut(t, (t + s)θ),
+i.e.,
+lim
+t→∞t(n−1)/2
+Z
+Sn−1 h((t + s)ω · θ −t, ω) dω.
+As |t| →∞, the leading term in the argument of h is t(ω ·θ−1), which vanishes when ω ̸= θ.
+Then the behavior when θ is close to ω would determine the limit (this is our “stationary
+phase argument”). It is straightforward to see that if we just replace ω by theta in the second
+argument of h, we get an o(1) term as |t| →∞. Make this substitution and set ρ = ω · θ to
+get that the limit above equals the limit of
+|Sn−2|
+Z 1
+−1
+h((t + s)(ρ −1) + s, θ)(1 −ρ2)(n−3)/2 dρ.
+Set τ = |t + s|(ρ −1) to get
+2(n−3)/2|Sn−2||t + s|(1−n)/2
+Z ∞
+0
+h(s ∓τ, θ)τ (n−3)/2(1 + η) dτ,
+where η →0 as |t+s| →∞. Recall the definition (2.11) of h, and integrate by parts (n−1)/2
+times to complete the proof.
+□
+Remark 2.1. In [8], the factor (−1)(n−1)/2 is missing from (2.9), i.e., u♯= k. Cooper
+and Strauss in [2] claim that this factor must be present in (2.9). I follow their suggestion
+but I cannot (yet) guarantee that they are right. One has to check whether c−
+n is the right
+constant in (2.8) first.
+
+34
+III. TIME-DEPENDENT SCATTERING
+2.3. Outgoing solutions and their asymptotic wave profiles. We follow here [1,
+2]. Given u(t, x), we will use the notation u(t) := (u(t, ·), ut(t, ·)).
+Definition 2.2. The function u(t) ∈C(R; Hloc) is called outgoing if limt→−∞(u(t), U0(t)g) =
+0 for each g ∈C∞
+0 (Rn) × C∞
+0 (Rn).
+In this definition, u(t) does not need to be a solution of the wave equation (anywhere).
+On the other hand, if u(t, x) solves the wave equation in |x| > ρ for some ρ > 0, then, see
+[1, 2], u is outgoing if and only if for any T ∈R, U0(t −T)u(T) = 0 in the forward cone
+|x| < t −T −ρ.
+On simple example of non-trivial outgoing solutions (for |x| > ρ) is the following. The
+time-dependent analog of the non-homogeneous Helmholtz equation (∆−λ2)u = f is the
+source equation
+(2.12)
+(∂2
+t −∆)u = p(t, x)
+in R × Rn.
+Solve that equation with Cauchy data
+(u, ut)|t=t0 = (0, 0),
+where the source p satisfies p ∈L1(R; L2(Rn)). By Duhamel’s formula,
+u(t) =
+Z t
+t0
+U0(t −s)p(s) ds,
+p(s) := (0, p(s, ·)).
+The latter is well-defined in Hloc by finite speed of propagation. The solution for t < 0 is
+just zero. Then u is outgoing in a trivial way. Moreover, this is the unique outgoing solution
+of (2.12). Indeed, take the difference v of any two. Then v(t) = U0(t)f, where f is the initial
+condition. Then 0 = limt→−∞(v(t), U0(t)g) = (f, g), for any test function g; therefore, f = 0
+and then v = 0.
+This can be generalized as follows.
+Theorem 2.3 ([1, 2]). Let p ∈L1
+loc(R; L2(Rn)) and assume that for each t,
+(2.13)
+lim
+T→−∞
+Z t
+T
+U0(−s)p(s) ds
+exists in Hloc
+Then there exists a unique outgoing solution u ∈C(R; Hloc) of (2.12) given by
+u(t) =
+Z t
+−∞
+U0(t −s)p(s) ds,
+p(s) := (0, p(s, ·).
+Remark 2.2. Clearly, p ∈L1((−∞, a); L2(Rn)) for any a would guarantee the regularity
+assumption on p and (2.13).
+Proof. The absolute convergence of the integral in H0
+loc follows from the assumptions.
+To show that u is outgoing, for g ∈C∞
+0 × C∞
+0 , consider
+(u(t), U0(t)g) =
+Z t
+−∞
+(U0(t −s)p(s), U0(t)g) ds =
+Z t
+−∞
+(U0(−s)p(s), g) ds.
+The latter converges to 0 by assumption.
+□
+The following theorem is the analog of the asymptotics of R0(λ)f at infinity.
+
+3. SCATTERING FOR TIME-DEPENDENT POTENTIALS
+35
+Theorem 2.4. Let n ≥3 be odd. Let p ∈L1
+loc(R; L2(Rn)) with p(t, x) = 0 for |x| > ρ.
+Let u be the unique outgoing solution of (2.12).
+(a) Then there is a unique function u♯∈L2
+loc(R × Sn−1) such that for all R1 < R2 we
+have
+Z
+R1+t<|x|<R2+t
+ut(t, x) −|x|−(n−1)/2u♯
+
+|x| −t, x
+|x|
+
+2
+dx →0,
+as t →∞.
+(b) If p ∈C∞
+0 ,
+(2.14)
+u♯(s, ω) = c−
+n ∂(n−1)/2
+s
+Z
+p(ω · x −s, x) dx
+(c) The map p →u♯is continuous.
+Remark 2.3. For general p as in the theorem, u♯is still given by (2.14) but the derivative
+is in distribution sense; by (b), the result is in L2
+loc(R × Sn−1). Another way to write (2.14)
+is
+(2.15)
+Z
+u♯(s, ω)ϕ(s) ds = cn
+ZZ
+p(t, x)(∂(n−1)/2
+s
+ϕ)(ω · x −s, x) dt ds,
+∀ψ(s) ∈C∞
+0 (R).
+Proof. Motivated by Theorem 2.3, for fixed R1 < R2, set
+f =
+Z −R1+ρ
+−R2−ρ
+U0(−τ)p(τ) dτ,
+v(t) = U0(t)f.
+By Huygens’ principle, v(t) = u(t) for R1 + t < |x| < R2 + t. Therefore, v does have an
+asymptotic wave profile, and v♯(s, ω) = u♯(s, ω) for R1 < s < R2. On the other hand, we
+have a formula for v♯, (2.8) and (2.9) which say
+v♯(s, ω) = (−1)(n−1)/2(Rf)(s, ω)
+= c−
+n ∂(n−1)/2
+s
+Z −R1+ρ
+−R2−ρ
+Z
+x·ω=s+τ
+p(x · ω −s, x) dSx dτ.
+Then
+u♯(s, ω)|R1<s<R2 = v♯(s, ω) = c−
+n ∂(n−1)/2
+s
+Z
+p(x · ω −s, x) dx.
+Since R1 < R2 are arbitrary, this, combined with Theorem 2.3, proves (a); and (b) for
+p ∈C∞
+0 .
+The proof of (c) is straightforward: use (2.14) and take Fourier transform w.r.t. s. In
+particular, we get that the map p →u♯can be extended continuously in those spaces.
+□
+3. Scattering for time-dependent potentials
+3.1. Introduction. We consider now the wave equation with time dependent potential
+q(t, x)
+(3.1)
+(∂2
+t −∆+ q(t, x))u = 0.
+
+36
+III. TIME-DEPENDENT SCATTERING
+Scattering theory for it is interesting even when q is time independent despite having the
+stationary approach developed in the previous chapter. We assume q ∈C∞(this assumption
+is too strong) and that
+q(t, x) = 0
+for |x| > ρ
+for some ρ > 0.
+Similarly to the stationary case, we send a plane wave δ(t+s−x·ω) to the perturbation,
+let it interact with the potential, and measure that asymptotic wave profile u♯
+sc(s′, ω′; s, ω)
+of the scattered wave usc in the direction ω′ with “delay” s′.
+We should then solve the problem
+(3.2)
+(∂2
+t −∆+ q(t, x))u = 0,
+u|t<−s−ρ = δ(t + s −x · ω)
+first with (s, ω) ∈R × Sn−1 parameters. Then we set
+(3.3)
+usc = u −δ(t + s −x · ω).
+The distribution usc would be automatically outgoing since it vanishes for t ≪0. Then we
+could compute the asymptotic wave profile of usc, which would give us the analog of the
+scattering amplitude. As in the stationary case, we expect this to be “essentially” the kernel
+of the scattering operator minus identity.
+The difficulty with this program is that u is necessarily a distribution, and although usc
+is a function, it does not belong to the energy space even locally. This is not such a major
+problem — we can think as (u(t, x; s, ω), ut(t, x; s, ω) as distribution in the (s, ω) variables
+with values in Hloc. It is more convenient however to do the following. Let hj(t) = h(t)tj/j!,
+j = 1, 2 . . . , where h is the Heaviside function; and we also set h−1 = δ . Then h′
+j = hj−1,
+j = 0, 1, 2, . . . . We solve
+(3.4)
+(∂2
+t −∆+ q(t, x))Γ = 0,
+u|t<−s−ρ = h1(t + s −x · ω)
+first (notice that h1(t + s −x · ω) is locally in the energy space now), set
+(3.5)
+Γsc = Γ −h1(t + s −x · ω),
+compute the asymptotic wave profile Γ♯(s′, ω′; s, ω) of Γsc, and differentiate the result twice
+w.r.t. s to get the analog of the scattering amplitude. In particular, then
+(3.6)
+u(t, x; s, ω) = ∂2
+sΓ(t, x; s, ω),
+usc(t, x; s, ω) = ∂2
+sΓsc(t, x; s, ω).
+will be well defined as distributions.
+3.2. Existence of dynamics. By [7], see also [14, X.12], the solution to
+(3.7)
+(∂2
+t −∆+ q(t, x))u = 0,
+(u, ut)|t=s = (f1, f2)
+is given by u(t) = U(t, s)f, where f = (f1, f2) and U(t, s) is a two-parameter strongly
+continuous group of bounded operators with the properties
+(i) U(t, s)U(s, r) = U(s, r) for all t, s, r; and U(t, t) = I,
+(ii) ∥U(t, s)∥≤exp
+
+C|t −s| sups≤τ≤t, x∈Rn |q(τ, x)|
+	
+,
+(iii) for any f ∈D(A), we have U(t, s)f ∈D(A) and
+d
+dtU(t, s)f = (A −Q(t))U(t, s)f,
+d
+dsU(t, s)f = −U(t, s)(A −Q(t))f,
+
+3. SCATTERING FOR TIME-DEPENDENT POTENTIALS
+37
+where Q(t)f = (0, q(t, ·)f1) (and Q(t) is clearly bounded).
+The two-parameter semi-group admits the expansion
+(3.8)
+U(t, s) = U0(t −s) +
+∞
+X
+k=1
+Vk(t, s),
+where
+Vk(t, s)f = (−1)k
+Z t
+s
+ds1
+Z s1
+s
+dsk· · ·
+Z sk−1
+s
+dsk
+× U0(t −s1)Q(s1) . . . U0(sk−1 −sk)Q(sk)U0(sk −s)f,
+k ≫1.
+This expansion is an iterated version of the Duhamel’s formula
+U(t, s) = U0(t −s) +
+Z t
+s
+U(t, σ)Q(σ)U0(σ −s) dσ
+= U0(t −s) +
+Z t
+s
+U0(t −σ)Q(σ)U(σ, s) dσ.
+(3.9)
+The convergence of (3.8) follows from the estimate
+∥Vk(t, s)∥≤|t −s|k
+k!
+
+sup
+s≤τ≤t
+∥Q(τ)∥
+k
+.
+In particular, we get that we still have the finite speed of propagation property:
+supp U(t, s)f ⊂supp f + B(0, |t −s|).
+As before, the finite speed of propagation allows us to can extend U(t, s) to the space Hloc
+by a partition of unity.
+Finally, notice that when q is time independent, then U(t, s) depends on the difference
+t −s only, i.e., U(t, s) = U(t −s) where U is a group. It is not unitary however (unless
+q = 0) in the space H. If we redefine the energy norm by
+(3.10)
+∥f∥2
+Hq =
+Z  |∇f1|2 + q|f1|2 + |f2|2
+dx,
+(we need to know that it is a norm however, and q ≥0 suffices for that), then U(t) is unitary
+in Hq.
+3.3. The scattering amplitude and the scattering kernel. We are ready to fulfill
+our program now. Let Γ solve (3.4). Since the Cauchy data (h1(t+s−c·ω), h0(t+s−c·ω)),
+for say, t = −s −ρ −1, is in Hloc, a solution (Γ, Γt) with locally finite energy exists. Then
+Γsc is clearly outgoing. It solves the Cauchy problem
+(3.11)
+(∂2
+t −∆+ q(t, x))Γsc = −qΓ,
+Γsc|t<−s−ρ = 0.
+By Theorem 2.4, Γsc has an asymptotic wave profile Γ♯
+sc given by
+Γ♯
+sc(s′, ω′; s, ω) = −c−
+n ∂(n−1)/2
+s′
+Z
+q(x · ω′ −s′, x)Γ(x · ω′ −s′, x; s, ω) dx
+= −c−
+n ∂(n−1)/2
+s′
+Z
+q(t, x)Γ(t, x; s, ω)δ(t + s′ −x · ω′) dt dx.
+
+38
+III. TIME-DEPENDENT SCATTERING
+Differentiate twice w.r.t. s, see (3.6), to get u♯
+u♯
+sc(s′, ω′; s, ω) = −c−
+n ∂(n−1)/2
+s′
+Z
+q(t, x)u(t, x; s, ω)δ(t + s′ −x · ω′) dt dx.
+Definition 3.1. The scattering amplitude A♯is given by
+(3.12)
+A♯(s′, ω′; s, ω) =
+Z
+q(t, x)u(t, x; s, ω)δ(t + s′ −x · ω′) dt dx,
+where u solves (3.2).
+By the finite speed of propagation, u(t, x; s, ω) = 0 for x · ω > t + s. Therefore, the
+integrand vanishes outside of the region x · (ω −ω′) ≤s −s′. The l.h.s. has a lower bound
+−2ρ on supp q; therefore,
+(3.13)
+supp A♯⊂{s′ ≤s + ρ|ω −ω′|} ⊂{s′ ≤s + 2ρ}.
+Note that A and u♯can be reconstructed from each other thanks to that support property.
+We turn our attention now to the analog if scattering operator S, see (2.2) in Chapter I.
+Since the perturbed dynamics is a two-parameter group, we need to generalize the notion of
+the wave operators and the scattering scattering operator.
+Definition 3.2. We wave operators Ω−and W+ in H are defined as the strong limits
+Ω−= s - lim
+t→−∞U(0, t)U0(t);
+W+f = lim
+t→∞U0(−t)U(t, 0)f;
+f ∈RanΩ−
+if they exist and define continuous operators. In the latter case, the scattering operator S is
+defined by
+S = W+Ω−.
+This definition also makes sense on Hloc.
+Theorem 3.3.
+(a) The wave operator Ω−: Hcomp →H exists and
+(3.14)
+U(t, 0)Ω−f = 2c−
+n
+Z
+R×Sn−1 u(t, x; s, ω)∂(n−3)/2
+s
+(Rf)(s, ω) ds dω.
+(b) The wave operator W+ : H →Hloc exists
+(c) The scattering operator S : Hcomp →Hloc exists and
+(3.15)
+R(S −I)R−1 = −2−1(2π)1−n∂(n−1)/2
+s′
+∂(n−3)/2
+s
+A,
+where A is the operator with kernel A♯.
+Proof. Let k ∈L2
+comp(R×Sn−1), with k = 0 for |s| > R with some R, and let f = R−1k.
+Then for t < −R −ρ := t0, U(0, t)U0(t)f = U(0, t0)U0(t0)f. In particular, the limit defining
+Ω−f exists trivially and U(t, 0)Ω−f = U(t, t0)U0(t0)f.
+The r.h.s. of the latter solves the
+perturbed wave equation and equals U0(t0)f = R−1k(· −t0, ·) for t = t0. To prove (3.14), we
+need to show that the r.h.s. of (3.14), call it v(t), has the same initial condition for t ≤t0.
+For t ≤t0, u(t, x; s, ω) = δ(t + s −x · ω). Then by (2.8),
+v(t) = 2c−
+n
+Z
+R×Sn−1 δ(t + s −x · ω)∂(n−3)/2
+s
+k(s, ω) ds dω = (R−1k)1(· −t, ·),
+
+3. SCATTERING FOR TIME-DEPENDENT POTENTIALS
+39
+which proves (a).
+Express u as in (3.3) and plug in the formula above:
+v(t) = v0(t) −2cn
+Z
+R×Sn−1 usc(t, x; s, ω)∂(n−3)/2
+s
+v♯
+0(s, ω) ds dω,
+where v(t) = U(t, 0)Ω−f, v0(t) = U0(t)f. Take asymptotic wave profiles of both sides to get
+(3.16)
+v♯(s′, ω′) = v♯
+0(s′, ω′) + 2c−
+n
+Z
+R×Sn−1 ∂(n−3)/2
+s
+u♯
+sc(s′, ω′; s, ω)v♯
+0(s, ω) ds dω
+in L2
+loc(R × Sn−1).
+To prove (b), fix R > 0 and let 1B(0,R) be the characteristic function of that ball. By
+(3.9)
+(3.17)
+1B(0,R)U0(−t)U(t, s) = 1B(0,R)U0(−s) + 1B(0,R)
+Z t
+s
+U0(−σ)Q(σ)U(σ, s) dσ.
+By Huygens’ principle, 1B(0,R)U0(−σ)Q(σ) = 0 for σ > R+ρ. For t > R+ρ then the integral
+above is independent of t and therefore the strong limit 1B(0,R)W+ exists in a trivial way.
+Next, for any R1 < R2, ∥1B(0,R2)\B(0,R2)(U0(t)Sf −v(t))∥→0, as t →∞. Then U0(t)Sf
+and v(t) have the same asymptotic wave profiles. Then, by (2.9) and (3.16),
+RSf(s′, ω′) = Rf(s′, ω′) + 2c−
+n
+Z
+R×Sn−1 ∂(n−3)/2
+s
+u♯
+sc(s′, ω′; s, ω)(Rf)(s, ω) ds dω.
+The proof now follows from the definition of the scattering amplitude.
+□
+The theorem shows that even though S may not always exist in the energy space, it
+always does as S : Hcomp →Hloc. The scattering amplitude A♯is “essentially” the kernel of
+S −I in the translation representation. The kernel of S itself is called the scattering kernel
+and is given by
+S(s′, ω′; s, ω) = δ(s′ −s)δω(ω′) −2−1(2π)1−n∂(n−1)/2
+s′
+∂(n−3)/2
+s
+A(s′, ω′; s, ω).
+3.4. Time-independent potentials; connection to the stationary theory. When
+q = q(x) is independent of t, the solution is represented by a unitary group ˜U(t). Assume
+for simplicity that −∆+ q is a positive operator (q ≥0 would suffice for that). Then A −Q
+is skew-self-adjoint in Hq, see (3.10), and therefore generates a unitary group ˜U(t). Clearly,
+U(t, s) = U(t −s).
+The scattering kernel and the scattering amplitude are then of convolution type w.r.t.
+the time variable, i.e.,
+(3.18)
+S(s′, ω′; s, ω) = ˜S(s′ −s, ω′, ω),
+where ˜S(s′, ω′, ω) = S(s′, ω′; 0, ω); and similarly for the (time-dependent) scattering am-
+plitude A♯. Another way to say this is that the scattering operator commutes with time
+translations.
+Theorem 3.4. Let q(x) be time-independent. Then the wave operators
+Ω± : H →Hq
+
+40
+III. TIME-DEPENDENT SCATTERING
+are isometries and the scattering operator S defined in Theorem 3.3 extends to a unitary
+operator on H.
+Proof. The groups U0(t) and U(t) are unitary but in their own spaces only, H and
+Hq. The norms in those spaces however coincide outside B(0, ρ). Therefore, by the proof
+of Theorem 3.3, ∥Ω−f∥Hq = ∥f∥H. Therefore, Ω−: H →Hq extends to an isometry (not
+necessarily surjective).
+The scattering operator in Theorem 3.3(c) clearly extends to a bounded operator on H.
+We have
+∥U0(−t)U(t)Ω−f −Sf∥H →∞,
+as t →∞,
+therefore,
+∥U(t)Ω−f −U0(t)Sf∥H →∞,
+as t →∞
+Since Sf ∈H, it is easy to get by the Huygens’ principle that the energy of U0(t)Sf in
+B(0, ρ) decays as t →∞. Then the same must be true for U(t)Ω−f. This yields
+∥U(t)Ω−f∥H = ∥U0(t)Sf∥Hq + o(1),
+as t →∞,
+therefore, ∥Ω−f∥Hq = ∥Sf∥H.
+□
+We now connect the scattering solutions usc(x, θ, λ), see (2.12) in Chapter II to the
+their time-dependent analogs usc(t, x; s, ω), see (3.3). Since we assume now that q is time-
+independent, then usc will depend on t −s only, i.e., usc(t, x; s, ω) = vsc(t −s, x, ω) with
+vsc(t, x, ω) = usc(t −s, x; 0, ω). We have
+Proposition 3.5.
+(3.19)
+usc(x, θ, λ) =
+Z
+eiλtvsc(t, x, θ) dt.
+Proof. Recall that v = δ(t −x · θ) + vsc(t, x, θ) with vsc = 0 for t ≪0. Therefore, the
+r.h.s. Usc of (3.19) extends analytically to complex λ with ℑλ > 0. Clearly,
+eiλθ·x =
+Z
+eiλtδ(t −x · θ) dt.
+Therefore, for the distribution U defined as in (3.19) with vsc replaced by v, we get that U
+solves the (−∆+ q −λ2)U = 0, and Usc = U −eiλθ·x is outgoing in stationary sense. Such a
+solution is unique however, so we get Usc = usc.
+□
+In the stationary case, the time-dependent scattering amplitude A♯depends on s′−s only
+(as a function of (s′, s). Set A♯(s′, ω′; s, ω) = a♯(s′, ω′, ω). Since the stationary scattering
+amplitude a and the time-dependent one a♯can be expressed in terms of the outgoing
+solutions, see (2.19) in Chapter II and (3.12), we also get
+Proposition 3.6.
+(3.20)
+a0(ω, θ, λ) =
+Z
+eiλta♯(s, ω, θ) ds,
+where a0 is the normalized stationary scattering amplitude.
+
+4. SCATTERING FOR THE TIME-DEPENDENT SCHR¨ODINGER EQUATION (A FEW REMARKS ONLY)
+41
+Warning: poor notation for the various scattering amplitudes!
+Let us apply the proposition to the representation (3.15) which we rewrite in our case
+(q = q(x)) as
+R(S −I)R−1 = −2−1(2π)1−n(−1)(n−3)/2∂n−2
+s′
+a♯,
+where (another bad notation!), a♯is the operator with kernel a♯(s′ −s, ω′, ω). We get a
+convolution w.r.t. the s variable which can be expected, see (3.18). Let F∗
+1 be adjoint the
+Fourier transform in the s-variable, as in (3.20). Since convolution becomes multiplication
+in the Fourier domain, we get
+
+F∗
+1R(S −I)R−1F1h
+
+(θ, λ) = −2−1(2π)2−n(−1)(n−3)/2(−iλ)n−2
+Z
+Sn−1 a0(ω, θ, λ)h(θ, λ) dθ.
+The kernel of R is “essentially” that of the Radon transform, δ(s−x·θ). Composed with F∗
+1,
+it becomes “essentially” eiλx·θ. This is the kernel of the spectral projections E+, see (5.9) in
+Chapter II. Therefore, ignoring the monomial (in λ) factor above and the matrix structure
+of S, we get
+E+(λ)(S −I)E′
++(λ)h
+” = ”
+Z
+Sn−1 a0(ω, θ, λ)h(θ) dθ.
+In particular, the scattering operator S and the scattering matrix S(λ) are related by
+E+(λ)SE′
++(λ)
+” = ”
+S(λ).
+This connects the fundamental objects in the time dependent theory, the scattering operator
+S to the fundamental object in the stationary one, the scattering matrix S(λ).
+Note to myself: rewrite this.
+4. Scattering for the time-dependent Schr¨odinger equation (a few remarks
+only)
+Consider the time-dependent Schr¨odinger equation
+(4.1)
+1
+i ∂tu = (−∆+ V )u,
+where V is a potential as above. The natural energy space now is L2(Rn) (and in particular,
+the norm is independent of V ). The “Hamiltonian” H = −∆+ V extends naturally to a
+self-adjoint one (V is real), Set H0 = −∆. By Stone’s theorem, the following two unitary
+groups are well defined
+U0(t) = eitH0,
+U(t) = eitH
+and represent the solution groups of (4.1) (with V = 0 for U0). The scattering operators are
+defined as above.
+Scattering theory for (4.1) can be related to that of the acoustic equation. Note that for
+the generator A, see (2.5), we have
+(4.2)
+A2 :=
+
+0
+∆
+∆
+0
+
+.
+
+42
+III. TIME-DEPENDENT SCATTERING
+We get a similar expression if we replace ∆by ∆+ V . This allow to prove that (see [8],
+Chapter VI)
+SSchr(z) = S(√z),
+where SSchr is the scattering matrix for (4.1) (which needs to be defined first), and S(λ) is
+the scattering matrix for the acoustic equation. We will not go into details. Another way to
+get that relation is to relate (4.1) to the Helmholtz type of equation (−∆+ V −z)v = 0 by
+taking the Fourier transform Ft→z (which requires some work, of course) and then setting
+z = λ2 to use the link between the time-dependent theory for the acoustic equation and the
+stationary one for (−∆+ V −λ2)v = 0. In fact, the stationary theory can be considered
+as a stationary version of both the acoustic and the Schr¨odinger equations. This is a bit
+surprising because the latter two PDEs have very different properties in terms of finite speed
+of propagation, etc.
+
+CHAPTER IV
+Inverse Scattering
+1. Introduction
+Inverse scattering tries to recover the perturbation: the potential, the obstacle, etc., from
+scattering data. The latter means either the (whole) scattering operator/matrix/amplitude,
+or some partial information about it; like S(λ) for a fixed λ.
+The main questions are uniqueness, stability and reconstruction.
+Another important
+question is range characterization — what functions can be the scattering amplitude of a
+C∞
+0 potential, for example.
+2. Inverse potential scattering
+2.1. High frequency asymptotics and Born approximation. Uniqueness and
+recovery. A basic question is to understand the high-frequency behavior λ →∞of the
+scattering amplitude. This is the semi-classical regime as well, when h = 1/λ →∞.
+Theorem 2.1. Let V ∈L∞
+comp(Rn). Then
+a0(ω, θ, λ) = ˆV (λ(ω −θ)) + O(1/λ),
+as λ →∞
+with the remainder uniform in θ, ω.
+Proof. Follows directly from (2.20) and Theorem 2.1 (or from (2.18), (2.16) and The-
+orem 1.3).
+□
+Note first that the asymptotic above would not be so interesting if ω and θ are kept
+fixed because for V ∈C∞
+0 , first term on the right would decay faster that the remainder,
+if ω ̸= θ. On the other hand, we can choose sequences (ωk, θk, λk) with λ →∞so that
+ξk = λk(ωk −θk) stays bounded. Moreover, for each ξ we can choose sequences so that
+ξ = λk(ωk −θk), λk →∞, and then necessarily, θk −ωk →0. Therefore, we can recover ˆq
+from knowing a0.
+Corollary 2.2.
+ˆV (ξ) =
+lim
+ξ=λ(ω−θ)
+λ→∞
+a0(ω, θ, λ).
+In particular, this solves the inverse scattering problem: recover V from a. The compact
+support assumption is too strong here; short range is enough.
+Let us look closer at the estimates leading to the theorem. By (2.10) in Chapter II, if
+V = 0 outside the ball B(0, ρ), then
+∥1B(0,ρ)R(λ)1B(0,ρ)∥≤C
+λ
+ 1 −Cλ−1∥V ∥L∞−1 ,
+when ∥V ∥L∞≤λ/C,
+43
+
+44
+IV. INVERSE SCATTERING
+with some absolute constant C = C(n). In particular,
+∥1B(0,ρ)R(λ)1B(0,ρ)∥≤C
+λ ,
+when ∥V ∥L∞≤λ/C
+with C replaced by 2C. Then, see (2.14) in Chapter II,
+(2.1)
+∥usc∥L2(B(0,ρ)) ≤C
+λ ∥V ∥L∞,
+when ∥V ∥L∞≤λ/C.
+Then by (2.19) in Chapter II,
+(2.2)
+max
+ω,θ
+a0(ω, θ, λ) −ˆV (λ(ω −θ))
+ ≤C
+λ ∥V ∥2
+L∞,
+when ∥V ∥L∞≤λ/C.
+This is actually a linearization of a0 as a function of V , known as the Born approximation.
+Note that λ can be fixed there.
+Also, note that we actually proved that estimate with
+∥V ∥L∞∥V ∥L2 on the right, which is a slightly stronger estimate.
+2.2. Stability. Since we have an explicit recovery formula “of stable type”, stability
+follows easily. The following lemma is very useful.
+Lemma 2.3. Let V , ˜V be two potentials in L∞
+comp(Rn). Then for the corresponding scat-
+tering amplitudes a0, ˜a0, we have
+a0(ω, θ, λ) −˜a0(ω, θ, λ) =
+Z 
+V (x) −˜V (x)
+
+˜u(x, −ω, λ)u(x, θ, λ) dx,
+where u, ˜u are the corresponding “perturbed plane waves”.
+Proof. This is essentially a consequence of the resolvent identity
+R(λ) −˜R(λ) = R(λ)(V −˜V ) ˜R(λ)
+written in terms of the Schwartz kernels G and ˜G of the resolvents:
+G(x, y, λ) −˜G(x, y, λ) =
+Z
+G(x, z, λ)(V (z) −˜V (z)) ˜G(z, y, λ) dz.
+Next, we take the asymptotics x = rω, r →∞and y = r′θ, r′ →∞. [this needs to be
+done]
+We will give a more direct but less intuitive proof, following [19]. With u0(x, θ, λ) :=
+eiλθ·x, write
+a0(ω, θ, λ) =
+Z
+u0(x, −ω, λ)V (x)u(x, θ, λ) dx
+=
+Z
+(˜u −˜usc)(x, −ω, λ)V (x)u(x, θ, λ) dx
+=
+Z
+˜u(x, −ω, λ)V (x)u(x, θ, λ) dx + M,
+(2.3)
+
+2. INVERSE POTENTIAL SCATTERING
+45
+where, by (2.15),
+M = −
+Z
+˜usc(x, −ω, λ)V (x)u(x, θ, λ) dx
+=
+Z
+[R0(λ)˜V ˜u(·, −ω, λ)]V (x)u(x, θ, λ) dx.
+Since the kernel of R0(λ) is symmetric, when V = ˜V , we get a(ω, θ, λ) = a(−θ, −ω, λ). In
+the same way, we get
+˜a0(ω, θ, λ) = ˜a(−θ, −ω, λ) =
+Z
+u(x, θ, λ)˜V (x)˜u(x, −ω, λ) dx + ˜
+M,
+(2.4)
+where
+˜
+M =
+Z
+[R0(λ)V u(·, −θ, λ)]˜V (x)˜u(x, −ω, λ) dx = M.
+Subtract (2.4) from (2.3) to complete the proof.
+□
+We now apply (2.1) to u and ˜u. Set q = V −˜V . Then
+ˆq(λ(ω −θ)) = a0 −˜a0 + R,
+where
+|R| ≤C
+λ ∥q∥L∞
+and C > 0 depends on a-priori upper bounds on ∥V ∥L∞and ∥˜V ∥L∞. Given ξ ̸= 0, choose
+λn →∞, ωn and θn so that ξ = λn(ωn −θn). One way to do this is to fix a unit ω0 ⊥ξ and
+to set
+ωn =
+p
+1 −1/(4n2) ω0 +
+1
+2n|ξ|ξ,
+θn =
+p
+1 −1/(4n2) ω0 −
+1
+2n|ξ|ξ,
+λn = n|ξ|.
+Then
+|ˆq(ξ)| ≤∥a0 −˜a0∥L∞+ C
+n|ξ|∥q∥L∞.
+We can take the limit n →∞here but the norm ∥a −a0∥L∞is not such a good candidate
+— it can be even infinite if λ = 0 is a pole! Instead, let us assume that we want to obtain
+an estimate with a0 restricted to λ ≥λ0 for some λ0 > 0. Then n|ξ| ≥λ0, and
+|ˆq(ξ)| ≤∥a0 −˜a0∥L∞(λ>λ0) + C
+n|ξ|∥q∥L∞,
+n|ξ| ≥λ0,
+ξ ̸= 0.
+Now, we for any fixed ξ ̸= 0 we can take the limit n →∞to obtain the following.
+Theorem 2.4. For V , ˜V as above, for any λ0 > 0,
+∥F(V −˜V )∥L∞≤∥a0 −˜a0∥L∞(λ>λ0).
+
+46
+IV. INVERSE SCATTERING
+The l.h.s. above is clearly a norm. If we need a more conventional one, we need to use
+interpolation and a priori compactness assumption. Then we will get a conditional H¨older
+stability estimate.
+Note that the Lemma 2.3 was not really needed here but it will be needed later.
+2.3. Inverse potential scattering at a fixed frequency.
+Calder´on’s problem.
+Assume that we know the scattering amplitude a0(λ, ω, θ) in potential scattering for a fixed
+frequency λ > 0 only, and all θ, ω. It turns out that we can still recover V but the proof is
+much more delicate and the recovery is unstable.
+If we just count the number of the variables, a0(λ, ω, θ) depends on 2n−2 (one-dimensional)
+variables, while V depends on n. Then 2n−2 > n if n ≥3. This make the problem formally
+overdetermined in dimension n ≥3. When n = 2, 2n −2 = n. The problem is then formally
+determined. We can expect n = 2 to be a harder case, and that is actually true. We will
+restric the exposition to n ≥3.
+The main uniqueness result of this section is the following.
+Theorem 2.5. Let V and ˜V be in L∞
+comp(Rn), n ≥3. For a fixed λ0 > 0, assume
+a0(λ0, ω, θ) = ˜a0(λ0, ω, θ).
+Then V = ˜V .
+2.3.1. Calder´on’s problem. This problem is closely related to the Calder´on’s inverse bound-
+ary value problem. We will formulate the version of this problem related to the Schr¨odinger
+operator only. Let Ωbe a bounded domain with a smooth boundary ∂Ω. Assume that λ2
+0 is
+not a Dirichlet eigenvalue for the operator −∆+ V −λ2
+0 in Ω. Given f, let v be the unique
+solution of the IVP
+(−∆+ V −λ2
+0)v = 0
+in Ω,
+v = f
+on ∂Ω.
+Then we define the Dirichlet-to-Neumann map Λ by
+Λf = ∂νv|∂Ω,
+where ν is the exterior unit normal. Then Λ : H3/2(∂Ω) →H1/2(∂Ω).
+The Calder´on’s problem in this setting is: does Λ uniquely determine V ? Note that one
+can replace V there by V −λ2
+0 and require that 0 is not an Dirichlet eigenvalue. The latter
+requirement can be avoided if we replace Λ with the set of Cauchy data.
+The next theorem is due to Sylvester and Uhlmann [23].
+Theorem 2.6. Let V and ˜V be in L∞(Ω), n ≥3, and assume that λ0 > 0 is not a
+Dirichlet eigenvalue associated with neither potential. If
+Λ = ˜Λ,
+then V = ˜V .
+We will prove Theorem 2.6 first and then reduce the proof of Theorem 2.5 to it.
+The first step of the proof is the following “Alessndrini identity” (compare with Lemma 2.3).
+
+2. INVERSE POTENTIAL SCATTERING
+47
+Lemma 2.7. Let V and ˜V be two potentials in L∞(Ω) so that 0 is not a Dirichlet eigen-
+value for −∆+ V nor for −∆+ ˜V . Let Λ, ˜Λ be the corresponding DN maps. Then for any
+f, ˜f in H3/2(∂Ω),
+Z
+∂Ω
+f(Λ −˜Λ) ˜f dS =
+Z
+Ω
+(V −˜V )u˜u dx,
+where u is the solution of (∆+V )u = 0, u = f on ∂Ω; and ˜u is the solution of (∆+ ˜V )˜u = 0,
+˜u = ˜f on ∂Ω.
+Proof. By the Green’s formula,
+Z
+Ω
+(V −˜V )u˜u dx = −
+Z
+Ω
+((∆u)˜u −u∆˜u) dx = −
+Z
+∂Ω
+((Λf) ˜f −f ˜Λ ˜f)dS.
+If we take ˜V = V , we see that Λ has a symmetric kernel. This observation, and the formula
+above complete the proof.
+□
+2.3.2. Complex geometric optics. To prove Theorem 2.6, it remains to show that the
+products u˜u of various solutions u and ˜u form a dense set. This fact is based on the so-called
+complex geometric optics, developed in [23]. As explained above, we can assume λ0 = 0
+but in fact the construction below can be done for any fixed λ0 ∈R. The idea goes back
+to Calder´on. He linearized the problem near V = 0 to reduce the problem to the following:
+let q = V −˜V be orthogonal (in L2(Ω)) to the product of any pair of harmonic functions;
+is it true that q = 0? He suggested the following: choose u = eζ1·x, ˜u = eζ2·x, where ζ1, ζ2
+are in Cn and ζ2
+1 = ζ2
+2 = 0. Here, ζ2 = ζ2
+1 + · · · + ζ2
+n. Clearly, u and ˜u are harmonic. Then
+u˜u = e(ζ1+ζ2)·x, and we get
+Z
+q(x)e(ζ1+ζ2)·xdx = 0
+for any such ζ1, ζ2. Fix ξ ∈Rn and choose
+(2.5)
+ζ1,2 = 1
+2(±η −iξ),
+where η ∈Rn, η ⊥ξ, |η| = |ξ|.
+Then ζ2
+1 = ζ2
+2 = 0 and ζ1 + ζ2 = −iξ, and we get ˆq(ξ) = 0, ∀ξ, therefore, q = 0.
+When V ̸= 0, u = eζ·x do not solve (−∆+ V )u = 0. Uhlmann and Sylvester’s idea was
+to construct solutions which look like the Calder´on’s harmonic ones only asymptotically in
+the sense
+(2.6)
+u = eζ·x(1 + O(|ζ|−1),
+ζ →∞.
+Theorem 2.8. Let ρ > 0, n ≥2.
+There is a constant C0 = C0(n) > 0 so that if
+∥V ∥L∞< C0|ζ|, supp V ⊂B(0, ρ) and ζ2 = 0, then there exists a solution u(x, ζ) of the
+equation
+(2.7)
+(−∆+ V )u = 0
+in Rn
+satisfying
+u(x, ζ) = eζ·x (1 + u0(x, ζ)) ,
+where
+∥u0∥L2(B(0,2ρ) ≤C
+|ρ|.
+
+48
+IV. INVERSE SCATTERING
+We will only sketch the proof. First, conjugate −∆+V with the operator of multiplication
+by eζ·x to get
+e−ζ·x(−∆+ V )eζ·x = −∆−2ζ · ∂+ V.
+Then u0 solves
+(2.8)
+(−∆−2ζ · ∂+ V )u0 = −V.
+To “invert” the operator −∆−2ζ · ∂+ V , we will first “invert” −∆ζ := −∆−2ζ · ∂. More
+precisely, we want to define an operator G(ζ) so that −∆ζG(ζ) = I. Clearly, G(ζ) is not
+uniquely defined, so we have to make some choices. The symbol of −∆ζ is given by
+σ(−∆ζ) = |ξ|2 −2iζ · ξ
+Assuming that we work with tempered distributions, we can use Fourier transform, and
+attempt to define G(ζ) as the Fourier multiplier with (|ξ|2 −2iζ · ξ)−1. The problem here is
+that |ξ|2 −2iζ · ξ has zeros. Let us look at them closely.
+One example of ζ with ζ2 = 0 is ζ = λ(1, i, 0, . . . , 0). In fact, all other ζ’s are equivalent
+to this, after a rotation. Indeed, write ζ = ℜζ + iℑζ. Then ζ2 = |ℜζ|2 −|ℑζ|2 + 2iℜζ · ℑζ.
+Therefore, ζ2 = 0 is equivalent to
+|ℜζ| = |ℑζ|,
+ℜζ · ℑζ = 0.
+Now, if ζ ̸= 0, we can choose a unitary linear transformation so that ℜζ/|ℜζ| and ℑζ/|ℑζ|
+are first two vectors of the new basis, thus proving our claim. Next, under such unitary trans-
+formations U, ζ · x = (Uζ) · (Ux), therefore we can always assume that ζ = λ(1, i, 0, . . . , 0).
+Then
+−∆ζ = −∆−2λ∂1 −2λi∂2,
+σ(−∆ζ) = |ξ|2 −2iλξ1 + 2λξ2.
+The characteristic variety Σ = {σ(−∆ζ) = 0} is then given by the codimension 2 manifold
+Σ = {ξ1 = 0, (ξ2 + λ)2 + ξ3
+2 + . . . ξ2
+n = λ2}.
+This is the intersection of the plane ξ1 = 0 and the ball B((0, λ, 0, . . . ), λ).
+In R3, for
+example, it the 1D circle ξ1 = 0, (ξ2 + λ)2 + ξ2
+3 = λ2.
+Compare this with the Helmholtz operator −∆+ λ2. Its symbol is |ξ|2 −λ2 and its
+characteristic variety is the (codimension 1) sphere |ξ| = λ.
+Near Σ, in local coordinates, σ(−∆ζ) is given by ξ1 + iξ2. In fact, this is the so-called
+normal form of σ(−∆ζ). On the other hand, the symbol of the Helmholtz operator is ξ1 in
+local coordinates. This reveals the differences between the two cases: (ξ1 + iξ2)−1 is locally
+integrable near ξ1 = ξ2 = 0: indeed, for n = 2, the modulus of this function is |ξ|−1; and for
+n ≥3, we first integrate w.r.t. (ξ1, ξ2). On the other hand, ξ−1
+1
+is not locally integrable and
+we needed to consider the regularizations in (1.14), Chapter II.
+Note also that in both cases, λ is a large parameter, and the semi-classical calculus is
+a more appropriate tool, with h = 1/λ. Then the principal (and the full) symbol of −∆ζ
+is |ξ|2 −2iξ1 + 2λξ2, while its classical principal symbol would be |ξ|2 only. The principal
+symbol of the Helmholtz operator is then |ξ|2 −1. The characteristic varieties are as above
+with λ substituted by λ = 1.
+
+2. INVERSE POTENTIAL SCATTERING
+49
+This discussion brings us to the following candidate for a right inverse of −∆ζ, called
+in the literature also the complex geometric optics Green’s function (also identified with its
+kernel), is
+G(ζ) = F−1  |ξ|2 −2iζ · ξ
+−1 F.
+This Green’s function was also studied by Faddeev. The multiplier in the middle of the r.h.s.
+is locally L1 and globally tempered; and therefore G(ζ) : S →S′, at least. Next theorem
+proves something more; and provides a bound of the kind O(|ζ|−1) of the norm. Recall that
+the weighted L2 spaces L2
+δ(Rn) are defined through the norm
+∥f∥2
+L2
+δ =
+Z  1 + |x|2δ |f(x)|2 dx.
+Similarly, one defines the weighted Sobolev spaces Hm
+δ (Rn), m = 0, 1, . . . by the norm
+∥f∥2
+Hm
+δ =
+X
+|α|≤m
+∥Dαf∥2
+L2
+δ.
+Theorem 2.9 ([23]). Let ζ2 = 0, 0 < β ≤|ζ|, −1 < δ < 0. Then
+(a) There exists C(β, δ) > 0 so that
+(2.9)
+∥G(ζ)f∥L2
+δ ≤C(β, δ)
+|ζ|
+∥f∥L2
+δ+1.
+(b) For any f ∈L2
+δ, there is a unique w ∈L2
+δ+1 solving
+−∆ζw = f.
+Moreover, w = G(ζ)f, and
+∥w∥L2
+δ ≤C(β, δ)
+|ζ|
+∥f∥L2
+δ+1.
+Sketch of the proof. We will leave part (a) without a proof (see [23]]). The main
+idea is to prove (2.9) first for the normal form of −∆ζ first; i.e., for the Fourier multiplier
+(ξ1 + iξ2)−1.
+The latter (in 2D) is a convolution with the inverse Fourier transform of
+(ξ1 + iξ2)−1; and a direct computation shows this to be (x1 + ix2)−1. Next, convolution with
+the latter can be estimated directly. The next step of the proof if to localize G(ζ)f, for
+ζ = λ(1, i, 0 . . . ) in the Fourier domain near Σ; to apply the normal form estimate there;
+and to estimate the part away from Σ. The resulting estimate would be O(1/λ), which also
+implies O(1/|ζ|).
+The uniqueness part (b) follows from [3, Thm 7.1.27]. Indeed, under the assumption
+w ∈L2
+δ+1 (the uniqueness is claimed there only and not true in general, for example, we can
+add any constant to w), ˆw is well defined. Then ˆw(ξ) = 0 on Σ. H¨ormander’s lemma then
+implies w = 0.
+□
+Let us return now to the proof of Theorem 2.8. We want to solve (2.8). It is not uniquely
+solvable for sure but we only need to find a solution u0 = O(|ζ|−1). We look for a solution
+u0 of the form u0 = G(ζ)w. Then
+(I + V G0(ζ)) w = −V.
+
+50
+IV. INVERSE SCATTERING
+Then
+(2.10)
+V G0(ζ) : L2
+δ →L2
+δ = O(|ζ|−1),
+|ζ| ≫1.
+We can therefore use Neumann series to invert (I + V G0(ζ)) for |ζ| ≫1, the resolvent would
+be O(1), and
+w = −(I + V G0(ζ))−1V.
+A priori, w ∈L2
+δ with no other control on the large |x| behavior but we can see directly
+from (2.10) that w is supported in B(0, ρ). Note that resemblance with (2.13), (2.14) in
+Chapter II! In potential stationary scattering, to define usc, we need to invert the operator
+(I + V R0(λ), see (2.7) in Chapter II. When λ ≫1, this follows from the a priori estimate of
+R0(λ) of the kind O(1/λ).
+Now, we can set
+u0 = −G(ζ)(I + V G0(ζ))−1V,
+and this proves Theorem 2.8.
+2.3.3. Uniqueness for Calder´on’s problem.
+Proof of Theorem 2.6 . We will use the geometric optics solutions constructed in
+Theorem 2.8 in the identity of Lemma 2.7. Since Λ = ˜Λ, with q := V −˜V , we get
+Z
+q(x)u˜u dx = 0
+for any H2(Ω) solution u of (−∆+V )u = 0 in Ω, and any H2(Ω) solution ˜u of (−∆+ ˜V )˜u = 0.
+Note that the geometric optics solutions constructed in Theorem 2.8 are in H2(Ω) since they
+solve (2.7). Choose ζ1, ζ2 with
+(2.11)
+ζ2
+1 = ζ2
+2 = 0
+and let u(x, ζ1), ˜u(x, ζ2) be the corresponding solutions. Then
+Z
+q(x)e(ζ1+ζ2)·x(1 + u0(x, ζ1))(1 + ˜u0(x, ζ2)) dx = 0.
+Therefore,
+(2.12)
+Z
+q(x)e(ζ1+ζ2)·x dx = −
+Z
+q(x)e(ζ1+ζ2)·x (u0(x, ζ1) + ˜u0(x, ζ2) + u0(x, ζ1)˜u0(x, ζ2)) dx.
+We would like to choose appropriate ζ1, ζ2 and take the limits
+(2.13)
+|ζ1| →∞,
+|ζ2| →∞.
+On the left, we want to obtain the Fourier transform of q, i.e., for any fixed in advance ξ,
+we need
+(2.14)
+ζ1 + ζ2 = −iξ.
+If we choose them as in (2.5), then we cannot control |ζj|, j = 1, 2 because there, |ζj| = |ξ|2/2,
+which is fixed. It is easy to see that in R2, this is the only choice up to the change of the
+sign of η there. This is the reason we required n ≥3. This does not mean, of course, that
+the theorem is not true in 2D (it is). It only means that we cannot prove it that way.
+
+2. INVERSE POTENTIAL SCATTERING
+51
+To choose ζ1, ζ2 satisfying (2.11), (2.13) and (2.14), we proceed as follows. Since n ≥3,
+given ξ ̸= 0, we can choose real vectors η and p so that (ξ, η, p) form an orthogonal triple
+and |η|2 = |p|2 + |ξ|2/4. Then we set
+ζ1,2 = ±η ± ip −iξ/2.
+Then (2.11) holds; to satisfy (2.13), we will take a sequence of p’s (and hence of η’s) so that
+|p| →∞. Then we would also have (2.14), as desired, and by (2.12),
+|ˆq(ξ)| ≤C
+ |ζ1|−1 + |ζ2|−1 + |ζ1|−1|ζ2|−1
+.
+Take the limit (2.13) to get ˆq(ξ) = 0 for any ξ ̸= 0. This implies q = 0.
+□
+2.3.4. Proof of Theorem 2.5. Follows from Theorem 2.6 (uniqueness for the Calder´on
+problem) and Theorem 5.1 (the inverse scattering problem can be reduced, and is actually
+equivalent, to the Calder´on problem).
+2.3.5. Stability analysis. The Calder´on problem is very unstable, and the inverse scatter-
+ing one at a fixed energy is even worse. Alessandrini proved the following stability estimate
+(2.15)
+∥V −˜V ∥L∞≤C
+log ∥Λ −˜Λ∥H3/2→H1/2
+
+−µ
+,
+0 < µ < 1
+for all V and ˜V in L∞(B(0, R0) near (in L∞(B(0, R0)) some fixed V0 under the assumptions
+that 0 is not a Dirichlet eigenvalue for V0; and also assuming the following a priori bound
+(2.16)
+∥V ∥Ck + ∥˜V ∥Ck ≤A
+with some fixed k ≫1 and some A > 0. Moreover, it has been shown [ref] that this is the
+best estimate one can get. The condition (2.16) is of compactness type since it guarantees
+that the set of all V satisfying it, supported in B(0, R0), is compact in L∞(B(0, R0). By a
+functional analysis argument, an injective map A between two Banach spaces, restricted to
+a compact set K, has a bounded inverse form A(K) to K. The stability estimate above is a
+qualitative result; estimating the modulus of continuity to be at least
+ϕ(t) =
+
+log 1
+ϵ
+−µ
+,
+t > 0.
+This function tends to 0 as t →0 very slowly, slower than tα for any α > 0. Since this
+rate cannot be improved, this analysis actually proves that Calder´on’s problem is a very
+(exponentially) unstable one. Stability estimates requiring an additional a priori estimate
+like (2.16) are called conditional stability estimates. They are the most common ones for
+many non-linear inverse problems. Unconditional estimates are rare, and the most common
+stability for ”stable” non-linear problems is a conditional stability of H¨older type, when the
+modulus of continuity is
+ϕ(t) = tα,
+0 < α ≤1.
+When α = 1, it is called Lipschitz stability.
+
+52
+IV. INVERSE SCATTERING
+2.4. Concluding remarks. While the high-frequency asymptotic, and thus the unique-
+ness result (for all frequencies) can, and has been, be easily generalized to non-compactly
+supported short-range potentials, the fixed energy problem is quite different.
+There are
+counter-examples of polynomially decaying short-range potentials for which the uniqueness
+fails.
+The uniqueness has been extended to exponentially decaying potentials by Eskin-
+Ralston, see also Vasy-Uhlmann. [ref]
+
+2. INVERSE POTENTIAL SCATTERING
+53
+2.5. Inverse back-scattering. The inverse back-scattering problem in potential scat-
+tering consists of the following: can we recover the potential V from the scattering amplitude
+a at ω = −θ, for all θ and λ > 0? In other words, is the map
+V (x)
+7−→
+a(−θ, θ, λ)
+injective? This corresponds to measuring the scattered field at the same point (at infinity)
+at which the signal is sent. As usual, we start with counting the variables. The potential
+depends on n variables, and so does the back-scattering amplitude. This makes the problem
+formally determined and it is an indication that it would be harder than many formally
+overdetermined problems. In fact, uniqueness for the problem is still an open question, even
+for V ∈C∞
+0 . Partial results exist however.
+Perhaps the second thing to do is to try the Born approximation (2.2). Ignoring the error
+term, we get
+a0(−ω, ω, λ) ≈ˆV (−2λθ).
+Since we “know” that for every λ > 0 and every θ ∈Sn−1, setting ξ = −2λω, we get the
+Fourier transform of V for every ξ ̸= 0, and that determines V uniquely. In some circles,
+this actually passes for a proof.
+For small V , one can do the following. Let n = 3. Then the explicit form of the kernel
+G0 of R0(λ), see (1.12) in Chapter II, yields
+∥χR0(λ)χ∥≤C
+for any compactly supported cut-off χ, uniformly in λ. Then the series (2.9) in the same
+chapter converge for all λ > 0, as an operator from L2(K) to itself for any compact set K.
+Then by the representation formulas (2.18), (2.20) there,
+a0(ω, θ, λ) =
+Z
+e−iλω·xV (x) (I −R0(λ)V −R0(λ)V R0(λ)V −. . . ) eiλθ·• dx.
+Set ω = −θ to get the following.
+Theorem 2.10. For any R0 > 0 there exists a constant C > 0 so that if V ∈L∞(R3)
+and supp V ⊂B(0, R0), then
+ˆV (−2λθ) = a0(−θ, θ, λ) + O(∥V ∥2
+L∞),
+with the estimate on the remainder uniform in λ > 0 and θ.
+This does not prove uniqueness, and does not even imply that if the back-scattering
+amplitude vanishes, then V = 0 because the natural norm for ˆV is the L2 one but on the
+right, we have the L∞one, which is stronger.
+We will sketch here the approach in [19] to prove that for generic V ’s including small ones,
+there is local uniqueness. A more general result, which a much longer proof, was presented
+by Eskin and Ralston. They actually characterized the range of the inverse back-scattering
+transform, assuming that V belongs to a suitable space of short range potentials.
+Let W := W 4,∞
+(0) (B(0, R0) be the Banach space of all functions in the real W 4,∞
+(0) (R3)
+space (the theorem is true for complex potentials as well) supported in B(0, R0).
+The main result is the following.
+
+54
+IV. INVERSE SCATTERING
+Theorem 2.11. There exists and open and dense set O in W including 0, so that for
+any V0 ∈O, there exists ε > 0 with the following property. If
+∥V −V0∥W < ε,
+∥˜V −V0∥W < ε,
+and if
+a0(−θ, θ, λ) = ˜a0(−θ, θ, λ),
+then V = ˜V .
+Our starting formula point is the formula in Lemma 2.3. Assuming the same data, we
+get
+0 =
+Z
+e2iλθ·x(V −˜V )(x) dx +
+Z 
+(u˜u)(x, θ, λ) −e2iλθ·x
+(V −˜V )(x) dx.
+Set ξ = −2λθ and let χ ∈C∞
+0 be such that
+(2.17)
+χ(x) = 1 for |x| ≤1, χ(x) = 0 for |χ| ≥2, and 0 ≤χ ≤1.
+Set χa(ξ) = χ(ξ/a), χR0(x) = χ(x/R0). Denote q := V −˜V . We get
+0 = Fq(ξ) +
+Z 
+(u˜u)
+
+x, −ξ
+|ξ|, |ξ|
+2
+
+−e−iξ·x
+
+χR0(x)q(x) dx.
+Apply the operator χR0F−1(1 −χa), with some a > 0, to both sides. The low-frequency
+cut-off 1 −χa can be explained by the fact that we have high-frequency control of u but no
+low-frequency one. Note that
+χR0F−1(1 −χa)q = q −χR0F−1χaFq.
+We therefore get AV, ˜V q = 0, where
+AV, ˜V q = q −χR0F−1χaFq
++ χR0F−1(1 −χa)
+Z 
+(u˜u)
+
+x, −ξ
+|ξ|, |ξ|
+2
+
+−e−iξ·x
+
+χR0(x)q(x) dx.
+We therefore reduced the non-linear problem to a pseudo-linear one. If we can show that
+AV, ˜V is injective, say on L2, we proved uniqueness. Note that the latter problem is not
+equivalent to the original one. We cannot exclude the possibility that AV, ˜V is not injective
+but we still have uniqueness — i.e., that V −˜V is not in the kernel.
+Lemma 2.12. The operator
+A0,0 := I −χR0F−1χaF
+is invertible on L2(Rn).
+Proof. Clearly, the operator χR0F−1χaF is compact. Then it is enough to show that
+A0,0 has a trivial null-space. If A0,0f = 0, then
+∥f∥= ∥χR0F−1χaFf∥≤∥F−1χaFf∥≤∥χaFf∥≤∥ˆf∥= ∥f∥,
+where F is normalized so that it is unitary. Then all the inequalities above are actually
+equalities. Then χa ˆf = ˆf, and χR0f = f. Then both f and ˆf have compact support;
+therefore, f = 0.
+□
+
+2. INVERSE POTENTIAL SCATTERING
+55
+Next, we show that the operator
+Kf := χR0F−1(1 −χa)
+Z 
+(u˜u)
+
+x, −ξ
+|ξ|, |ξ|
+2
+
+−e−iξ·x
+
+χR0(x)q(x) dx
+is compact. This would show that the operator AV, ˜V is Fredholm. While this would not
+prove injectivity, it would show at least that the kernel is finitely dimensional.
+The operator K is actually a ΨDO of order −1, when V and ˜V are in C∞
+0 , and the
+cutoff χR0 makes it compact. The proof of that would require to study an infinite expansion
+of u and would require infinite smoothness. For our purposes, a finite expansion would be
+enough.
+We have
+u
+
+x, −ξ
+|ξ|, |ξ|
+2
+
+= e−iξ·x + usc
+
+x, −ξ
+|ξ|, |ξ|
+2
+
+.
+The estimate we have on usc = O(|ξ|−1) however does not seem to be not enough to show
+compactness. Indeed, K = χR0F−1 ˜K, where
+f
+7−→˜Kf(ξ) := (1 −χa)
+Z 
+(u˜u)
+
+x, −ξ
+|ξ|, |ξ|
+2
+
+−e−iξ·x
+
+χR0(x)q(x) dx.
+We would get that the kernel ˜K(ξ, x) of ˜K satisfies the estimate
+| ˜K(x, ξ)| ≤(1 −χa(ξ))χR0(x)
+|ξ|2
+.
+That estimate alone is not enough to claim compactness, or even boundedness (which does
+not mean it is not true). One of the ways to prove that we have a compact operator is to
+show that the kernel is Hilbert-Schmidt. The O(|ξ|−2) decay is not sufficient for that; but
+O(|ξ|−k), with k > n/2 would be. Actually, the reason for our troubles is that we neglect
+the oscillatory behavior of usc, and we are trying to estimate it with brute force.
+The strategy now is the following. We will compute explicitly the second term in the
+expansion of u, i.e., the leading one in the expansion of usc, as λ →∞. We will estimate
+its contribution using its explicit form, which would have an oscillatory behavior. For the
+remainder, we gained a power of |ξ|−1, which is enough to claim that it contributes a Hilbert-
+Schmidt operator when n = 2 and n = 3. In higher dimensions, we need to study higher
+order terms.
+2.5.1. High-frequency expansion of u(x, θ, λ). We stick to the 3D case here, but general-
+izations to higher dimensions are immediate.
+Define the so-called beam transform Bf of f:
+Bf(x, θ) =
+Z 0
+−∞
+f(x + sθ) ds.
+The next proposition is a typical geometric optics construction.
+Proposition 2.13. Let V ∈W 4,∞(R3) and V = 0 for |x| > R0. Then
+u(x, θ, λ) = eiλθ·x −i
+2λeiλθ·xBV (x, θ) + R(x, θ, λ),
+
+56
+IV. INVERSE SCATTERING
+where
+∥R(x, θ, λ)∥L2(B(0,2R0)) ≤C
+λ2,
+∥R(x, θ, λ)∥L∞(B(0,2R0)) ≤C
+λ .
+Moreover, if V belongs to the ball ∥V ∥W 4,∞≤M with some fixed M > 0, and λ > C0M
+with some absolute constant C0 > 0, then the constant C above can be chosen uniformly,
+depending on R0 and M only.
+Proof. By the Lippmann-Schwinger equation (2.16) in Chapter II, u = u0 −R0(λ)V u,
+where u0 := eiλθ·x. Iterate this to get
+u = u0 −R0(λ)V u0 + R0(λ)V R0(λ)V u.
+Therefore,
+R = −R0(λ)V u0 + i
+2λBV u0 + R0(λ)V R0(λ)V u.
+The last term is easy to estimate because χR0(λ)χ = O(λ−1) for any compactly supported
+cutoff χ. Moreover,
+∥R0(λ)∥L2(K)→L∞(K) = O(1)
+for any compact set K, which proves the second estimate for that term.
+It remains to estimate
+−R0(λ)V u0 + i
+2λBV u0.
+Let χ ∈C∞
+0
+be a cut-off function so that χ = 1 on B(0, 3R0). Note that BV solves the
+transport equation θ · ∂xBV = V . Since χV = V , we get
+(−∆−λ2)
+
+−R0(λ)V u0 + i
+2λχBV u0
+
+= −i
+2λ∆(χBV )u0 + (θ · χ)(BV )u0.
+Since −R0(λ)V u0 +
+i
+2λχBV u0 is outgoing,
+−R0(λ)V u0 + i
+2λχBV u0 = R0(λ)
+
+−i
+2λ∆(χBV )u0 + (θ · ∂xχ)(BV )u0
+
+.
+The first term on the right can now be estimated right away as before. The second term is
+R0(λ)[(θ · ∂xχ)(BV )u0] = 1
+4π
+Z eiλ(|x−y|+y·θ)
+|x −y|
+(θ · ∂xχ)(y)(BV )(y, θ) dy.
+The phase is ϕ = |x −y| + y · θ. To apply the stationary phase, compute
+∂yϕ = y −x
+|y −x| + θ.
+On the support of the integrand, that differential does not vanish, and in fact, θ·(y −x) > 0.
+Then we can integrate by parts once to estimate the integral by O(λ−2) in the L∞(B(0, 2R0)
+norm.
+□
+Warning: poor notation. R0 stands both for a radius of a ball where supp V is included,
+and for the free resolvent. Another poor notation: R stands for the remainder term above,
+and for the resolvent.
+Proposition 2.14. AV, ˜V : L2(R3) →L2(R3) is bounded; moreover, AV, ˜V −I is compact.
+
+2. INVERSE POTENTIAL SCATTERING
+57
+Sketch of the proof. It is enough to show that K is compact. The representation
+above allows us to estimate each term in (u˜u)
+
+x, −ξ
+|ξ|, |ξ|
+2
+
+−e−iξ·x and show that they con-
+tribute compact operators. The R ˜R term decays like |x∥−4, which is enough to claim that
+it gives us a Hilbert-Schmidt operator. Terms involving BV are not Hilbert-Schmidt. A
+typical operator that we need to study is the following
+f
+7−→
+F−11 −χa(ξ)
+|ξ|
+Z
+e−ix·ξ(BV )
+
+x, −ξ
+|ξ|
+
+χR0(x)f(x) dx.
+To prove compactness of the latter, it is enough to prove that the operator
+f
+7−→
+F−1(1 −χa)
+Z
+e−ix·ξ(BV )
+
+x, −ξ
+|ξ|
+
+χR0(x)f(x) dx
+is bounded. The operator adjoint to it is a formal ΨDO with symbol CχR0(x)(B ¯V )(x, −ξ/|ξ|)(1−
+χa(ξ)). If V is smooth, it is an actual ΨDO of order −1, and the cut-off χR0 makes it
+compact. Theorem 18.1.11’ in [5] however guarantees boundedness even under the finite
+regularity conditions we have.
+□
+The progress we made so far shows that the uniqueness question can be resolved if we
+show that
+AV, ˜V q = 0
+=⇒
+q = 0,
+and this is a Fredholm equation. In particular, we get immediately that the kernel must be
+finite dimensional. The next step is to apply the analytic Fredholm theorem. For that, we
+need an analytic dependence of a parameter.
+Proposition 2.15. The map
+W × W ∋(V, ˜V ) 7→AV, ˜V ∈L(L2, L2)
+is analytic.
+Sketch of the proof. The notion of analyticity in this setting can be found in Reed
+and Simon.
+We need to prove that (a) ∥AV +zh, ˜V +z˜h∥is uniformly bounded for z ∈C
+small enough and all h, ˜h with ∥h∥W ≤1, ∥˜h∥W ≤1 (easy to see); and (b) that the map
+z 7→AV +zh, ˜V +z˜h is analytic for any such h, ˜h and z near z = 0.
+Inspecting the proof above, we see that we need to prove analyticity of uV +zh, where the
+subscript indicates the dependence on the potential. Let χ be the characteristic function of
+B(0, R0), and denote for a moment χu by u again, and χR0(λ)χ by R0(λ) again. By the
+Lippmann-Schwinger equation,
+u = u0 −R0(λ)V u.
+For uV +zh we have
+uV +zh =
+
+I + z(I + R0(λ)V )−1R0(λ)h
+−1 (I + R0(λ)V )−1u0.
+We will use our freedom to control a now. Choose a so that for λ > a/2, we have ∥R0(λ)∥≤
+(2M)−1, ∥(I + R0(λ)V )−1∥≤2, where M is an a priori bound of ∥V ∥W and ˜|V ∥W. Then we
+can use a Neumann series above, and prove analyticity.
+□
+
+58
+IV. INVERSE SCATTERING
+Sketch of the proof of Theorem 2.11. Let
+O = {V ∈W; AV,V is an isomorphism}.
+First, O is open because AV,V depends continuously on V . Next, O is dense by the analytic
+Fredholm theorem. Indeed, the operator
+AzV,zV
+depends analytically on z for |z| < 2 a fixed V with ∥V ∥W ≤M and a = a(M). When
+z = 0, it is invertible by Lemma 2.12. By the analytic Fredholm theorem, it is invertible
+with a possible exception of a discrete set of z’s. If z = 1 is not one of those exceptional
+point, we are done. If it is, for any ε > 0, there is a real z with |z −1| < ε not in that set.
+Then AzV,zV with that z will be invertible, i.e., zV ∈O. Note that we showed in particular
+that 0 ∈O.
+□
+2.5.2. Stability analysis. This is a stable problem in the sense, that there is H¨older type
+of conditional stability. This, for example, follows from the fact that the linearization is
+stable (Fredholm), and by an abstract approach to stability, see [22].
+
+3. INVERSE OBSTACLE SCATTERING
+59
+2.6. Inverse scattering for time-dependent potentials.
+3. Inverse Obstacle Scattering
+3.1. Uniqueness with full all data. Recall that an obstacle O ⊂Rn is a compact set
+with smooth (C2 is enough) boundary and connected complement.
+The following theorem by Schiffer can be found in [8].
+Theorem 3.1. Let O, ˜O be two obstacles with a(ω, θ, λ) = ˜a(ω, θ, λ) for all λ > 0, ω
+and θ in Sn−1. Then O = ˜O.
+Of course, it would be enough to require that the scattering amplitudes are equal for an
+open set of (ω, θ, λ); then we can use analytic continuation.
+Proof. Let u(x, θ, λ), ˜u(x, θ, λ) be the scattering solutions defined before. The Rellich
+uniqueness theorem, applied for any fixed λ and θ implies that
+u(x, θ, λ) = ˜u(x, θ, λ),
+|x| ≫1.
+This can even be done in a constructive (but unstable) way, as shown in section 5.2. Let
+Ω+ be the connected unbounded component of Rn \ (O ∪˜O). Set Ω−= Rn \ ¯Ω+. Then
+¯Ω−⊃O ∪˜O. Note that Ω−is an open set containing the interior of O ∪˜O but also all
+components of Rn \ (O ∪˜O) disconnected from infinity. Since u is an analytic function of x
+outside Ω+, we get
+u(x, θ, λ) = ˜u(x, θ, λ),
+x ∈∂Ω+
+Assume O ̸= ˜O. Then either Ω−\ O is a nonempty open set, or Ω−\ ˜O is. Assume the
+former. Let G be any connected component of Ω−\ O. Then u = 0 on ∂Ω. Therefore, u
+solves the problem
+(−∆−λ2)u = 0
+in G,
+u|∂G = 0.
+Note that ∂G may not be smooth but this is still a well posed problem. We know that u
+cannot be identically zero in G because otherwise, it should be zero for large |x|. Therefore,
+λ2 is an eigenvalue of the Dirichlet Laplacian in D, and that is true for any λ. That could
+only happen for a discrete number of λ’s, however.
+□
+3.2. Uniqueness with partial data. There are several refinements of the uniqueness
+result. It is enough to know the scattering amplitude for all ω, a fixed λ0 > 0, and N incident
+directions θ; or for all ω, a fixed θ0, and N frequencies λ ≤λ0, where N is greater than
+the number of the Dirichlet eigenvalues λ2 ≤λ2
+0 of the Laplacian in a ball containing the
+obstacle. [refs] This requires an a priori knowledge of the size of the obstacle. In particular,
+if we fix either θ or λ, we get uniqueness for small enough obstacles. In 3D, the upper bound
+is given by λR < π, where R is the radius of such a ball. Those results are based on the
+following observation: We want to exclude the possibility that λ2 is a Dirichlet eigenvalue in
+some domain D ⊂(O \ ˜O)∪( ˜O \O), as above. If we have an a priori bound on the diameter
+of the smallest ball including both obstacles, we can use the monotonicity of the Dirichlet
+eigenvalues w.r.t. the domain (the smaller the domain, the larger the eigenvalues, as follows
+from the mini-max principle).
+
+60
+IV. INVERSE SCATTERING
+One open inverse problem in obstacle scattering is the following: Can we determine O
+from a(ω, θ0, λ0) known for all outgoing directions ω but for a fixed incident one θ and a
+fixed frequency λ0 > 0? As we mentioned above, if the obstacle is a priori small enough, we
+can. In [21], we proved that there is local uniqueness result.
+Theorem 3.2. Fix λ0 > 0, θ0 ∈Sn−1. Let O−⊂O+ be two obstacles and assume that
+Vol(O+ \ O−) < ωnλ−n
+0 . Let O−⊂Oj ⊂O+, j = 1, 2, be two other obstacles and assume
+that AO1(ω, θ0, λ0) = AO2(ω, θ0, λ0). Then O1 = O2.
+Here, ωn is the volume of the unit ball in Rn. The proof is based on the observation that
+we only need the volume of the domain to be small to claim that the eigenvalues are large,
+and therefore exceed λ0; the smallness of the diameter is not needed.
+3.3. Inverse scattering for strictly convex obstacles and high-frequency asymp-
+totics. The theorems above are not constructive, and the problem is unstable. Assuming
+strict convexity (this condition can be relaxed a bit), we have an explicit and stable recon-
+struction. This was first done by Majda.
+The starting point is Theorem 3.3 in Chapter II for the scattering amplitude for the
+Dirichlet problem:
+a(ω, θ, λ) = −1
+4πi
+ λ
+2π
+ 1
+2 (n−3)
+e
+1
+4 πi(n−1)
+Z
+∂Ω
+ iλω · ν(y)e−iλy·(ω−θ) + e−iλy·ω∂νusc(y, θ, λ)
+
+dSy.
+If we knew ∂νusc, we would have an expression for a which we could analyze and try to
+recover ∂Ω. In the applied literature, one uses the Kirchhoff approximation:
+∂νusc|∂O ≈−iλ|ν · θ|eiλy·θ,
+as λ →∞.
+Assume ν · θ < 0. This approximation is based on the fact that usc satisfies the boundary
+condition usc = −eiλy·θ on ∂Ω. If we formally extend this away from the boundary and
+differentiate, we would almost get the approximation , but with the wrong sign. The reason
+for the sign to be exactly the opposite of what this naive (and wrong) arguments suggests is
+that the wave gets reflected, and that reflection inverts the sign of the normal component of
+θ. It does more than this, of course, because the boundary is curved and the reflected wave
+is not that simple anymore. We will justify the Kirchhoff approximation below.
+The function usc is the outgoing solution of
+(−∆−λ2)usc = 0
+in Ω= Rn \ O,
+usc|∂Ω= −e−iλx·θ.
+Assume θ0 · ν(x0) < 0 (a ray with incident direction θ0 hits ∂Ωtransversely at x0), and we
+are going to work with (x, θ) near (x0, θ0). The geometric optics construction now works in
+the following way. We are looking for a parametrix of the form
+usc = eiλϕ(x,θ)(a0 + λ−1a1 + . . . ),
+with a phase function ϕ(x, θ) and amplitudes aj = aj(x, θ) which we will compute. Plug into
+the equation and equate the leading powers of λ to get the eikonal equation
+|∂ϕ|2 = 1,
+ϕ|∂Ω= x · θ,
+
+3. INVERSE OBSTACLE SCATTERING
+61
+and the first transport one:
+(2(∂ϕ) · ∂+ ∆ϕ)a0 = 0,
+a0|∂Ω= −1.
+The boundary condition for ϕ allows us to compute the tangential gradient ∂′ϕ = θ′ on ∂Ω,
+where θ′ = θ′(x) is the tangential projection of θ on ∂Ωat x. Since the total gradient is a
+unit vector, we have two choices for ∂ϕ|∂Ω: one of them is just θ, which points inside; and
+the other one is θ reflected off ∂Ωby the laws of geometric optics: same tangential projection
+and the opposite normal one. We chose the second one to be able to satisfy the outgoing
+condition. In particular, we get
+∂νϕ|∂Ω= −∂νx · θ|∂Ω= −ν · θ.
+The parametrix can be justified as usual: solve the PDE asymptotically and estimate the
+error by standard estimates. Then the discussion above implies
+∂νusc|∂Ω= iλ(∂νϕ)eiλϕ(x,θ)a0|∂Ω+ O(λ−1) = −iλν · θeiλx·θ + O(1),
+as claimed.
+The Kirchhoff approximation allows us to express the reduced scattering amplitude a0
+(the integral terms above) as
+a0 =
+Z
+∂Ω
+ iλω · ν(y)e−iλy·(ω−θ) −e−iλy·ωiλν(y) · θeiλy·θ
+dSy + O(1),
+therefore,
+a0 = iλ
+Z
+∂Ω
+e−iλy·(ω−θ)(ω −θ) · ν(y) dSy + O(λ−1),
+[needs to be completed]
+
+62
+IV. INVERSE SCATTERING
+4. Inverse Scattering by metrics
+5. Inverse Boundary Value Problems and Inverse Black Box Scattering
+5.1. From the far filed to the near field and back; uniqueness. Let P be an
+operator satisfying the black-box scattering assumptions in section 5, Chapter II. We want
+to link the inverse problem of “finding the black box” to a certain related inverse boundary
+value problem.
+Let Ω⊂B(0, R) be a bounded open set with smooth boundary, diffeomorphic to a ball.
+It would be enough to choose Ω= B(0, R1), R1 > R0. By (5.3) in Chapter II, 1Ω(P + i)−1 is
+compact on H. Using standard elliptic theory, we can show that the boundary value problem
+(5.1)
+(P −λ2)u = 0
+in Ω,
+u|∂Ω= f
+is of Fredholm type and it is uniquely solvable, if λ2 is not a Dirichlet eigenvalue of P in Ω.
+Recall that here “in Ω” is actually means that we work in the Hilbert space HR0 ⊕L2(Ω\
+B(0, R0)) which we intuitively think of as being L2(Ω). The non-eigenvalue condition can be
+achieved by perturbing the boundary of Ωa bit by the strict monotonicity of the eigenvalues
+w.r.t. the domain [needs to be expanded]. Then we have a well defined DN map Λ = Λ(λ)
+on ∂Ω.
+The inverse boundary value problem in this setting can be formulated as follows. Given
+(HR0, P) and ( ˜HR0, ˜P), does Λ = ˜Λ (for a fixed or for a range of frequencies λ) imply that
+(HR0, P) and ( ˜HR0, ˜P) are unitarily equivalent? We will leave that definition a bit vague on
+purpose. In potential scattering, we want to show that V = ˜V . In obstacle scattering, we
+want to show that g = ψ∗˜g, where ψ is a diffeomorphism in Ωfixing ∂Ω. If P is a general
+second order elliptic operator, we want to show invariance under gauge transformations, etc.
+The goal of this section is to show that the inverse scattering problem of recovery of
+(HR0, P) from the scattering amplitude a0(ω, θ, λ) and from the DN map are equivalent,
+without attempting to solve either one. Moreover, we show that those two problems are
+related in an explicit way.
+Theorem 5.1. Fix λ2 not a Dirichlet eigenvalue of P in Ω. Then the DN map Λ(λ)
+determines the scattering amplitude a0(λ, ·, ·) uniquely and vice versa.
+Proof. We will give a short uniqueness but not constructive proof. Let P and ˜P be two
+black-box operators, and let Λ and ˜Λ; and a0 and ˜a0 be the corresponding DN maps and
+scattering amplitudes.
+Assume Λ = ˜Λ first. Let u, ˜u be the corresponding scattering solutions. Let v be the
+solution of the BVP
+( ˜P −λ2)v = 0
+in Ω,
+v|∂Ω= u.
+If we replace ˜P by P, we would get u, of course. Then u and v have the same Dirichlet data
+on ∂Ω; but they also have the same (interior) Neumann one since Λ = ˜Λ. Set
+w := v
+in Ω;
+w := u
+in Rn \ Ω.
+Then ( ˜P −λ2)w = 0 away from ∂Ωbut since the Cauchy data of w of both sides of ∂Ωis
+the same, we also get ( ˜P −λ2)w = 0 globally. Then we get two solutions, ˜u and w, of the
+
+5. INVERSE BOUNDARY VALUE PROBLEMS AND INVERSE BLACK BOX SCATTERING
+63
+scattering problem for ˜P of the kind eiλθ·x +outgoing; and we know that there is unique one.
+Therefore, w = ˜u, hence u = ˜u for large |x|. The asymptotic of that gives us a0 = ˜a0,
+Assume now a0 = ˜a0. Then u −˜u = O(|x|−(n+1)/2) as |x| →∞, see (2.17) in Chapter II.
+Then by Lemma 1.9 there, ˜u−u = 0 for |x| > R0 (the situation is even simpler here because
+˜u −u = 0 is outgoing; in some papers, this is the actual formulation of the Rellich theorem).
+Then Λ = ˜Λ on the span of u(·, θ, λ) in, say, H3/2(∂Ω). The proof would be complete if we
+show that that span is dense.
+□
+Lemma 5.2. Fix λ ̸= 0 so that λ2 is not a Dirichlet eigenvalue of P in Ω. Then the set
+{u(·, θ, λ), θ ∈Sn−1} is dense in Hs(∂Ω) for any s.
+Proof. Take ϕ ∈C∞(∂Ω). It is enough to prove the following
+Z
+∂Ω
+u(x, θ, λ)ϕ(x) dSx = 0,
+∀θ ∈Sn−1
+=⇒
+ϕ = 0.
+This would prove density in L2(Ω) because ϕ ∈C∞(∂Ω) is dense there. It would also prove
+density in Hs(Ω) if we replace ϕ by (1−∆∂Ω)sϕ, where ∆∂Ωis the Laplace-Beltrami operator
+on ∂Ω. Then we would get (1 −∆∂Ω)sϕ = 0, hence ϕ = 0.
+Without loss of generality we may assume that we have ¯u(x, −θ, −λ) above. Then we can
+think about the integral above as the far field pattern of v := R(λ)ϕδ∂Ω, see Theorem (5.4),
+i.e., the far field pattern of
+v :=
+Z
+∂Ω
+G(x, y, λ)ϕ(y) dSy.
+This is a simple layer potential with kernel G. Since G −G0 is smooth (actually, analytic)
+near ∂Ω, then the jump relations (3.4) still hold.
+In particular, v is continuous across
+∂Ω. By the Rellich uniqueness theorem, Theorem 1.11, v has compact support. Since it is
+harmonic outside Ω, it actually vanishes there. By continuity, v|∂Ω= 0. Inside Ω, v solves
+(P −λ2)v = 0. Since λ2 is not a Dirichlet eigenvalue of P in Ω, v = 0 in Ω, as well. Then,
+in Rn,
+0 = (P −λ2)v = ϕδ∂Ω,
+therefore, ϕ = 0.
+□
+5.2. Constructive Rellich theorem. The Rellich uniqueness theorem, Theorem 1.11
+says that for every outgoing u, the far field pattern of u determines uniquely u away from
+the black box. This can be done in a constructive way, using the decomposition in spherical
+harmonics and Hankel functions, see Chapter V.
+Recall that by Corollary 1.10, for any outgoing u, we have
+(5.2)
+u(rω) =
+eiλr
+r(n−1)/2g(ω) + O(r−(n+1)/2),
+where g(θ) is the far field pattern of u. On the other hand, by Theorem 1.1 in Chapter V,
+(5.3)
+u(rω) =
+X
+l,m
+alm(λ)h(1)
+l (λr)Y m
+l (ω),
+
+64
+IV. INVERSE SCATTERING
+with some coefficients alm(λ). Let us expand g in spherical harmonics:
+g(ω) =
+X
+l,m
+glmY m
+l (ω),
+glm = (g, Y m
+l )L2(Sn−1).
+Then by (5.2),
+(5.4)
+u(rω) =
+eiλr
+r(n−1)/2
+X
+l,m
+glmY m
+l (ω) + O(r−(n+1)/2),
+On the other hand, for each (l, m), and λ > 0 fixed,
+(u(r·), Y m
+l )L2(Sn−1) = alm(λ)h(1)
+l (λr)
+= alm(λ)e−i(2l+n−1)π/4
+eiλr
+(λr)(n−1)/2 + O(r−(n+1)/2),
+r →∞,
+by (1.9) in Chapter V. Compare this with (5.4) to get the following
+(5.5)
+glm = e−i(2l+n−1)π/4λ−(n−1)/2alm.
+Proposition 5.3. Fix λ > 0 and let u be outgoing. Then u can be reconstructed from
+its far field pattern h by means of (5.3) , with coefficients alm obtained from the Fourier
+coefficients glm of g as in (5.5).
+Note that this reconstruction is highly unstable. For (5.3) to converge at any fixed r, the
+coefficients alm have to decay super-exponentially to be able to compensate for the faster
+than exponential growth of hl(λr) as l →∞, see (1.1) in Chapter V for the 3D case. If
+h is a far field pattern of some outgoing solution in |x| > R0, then this must be true for
+r > R0. This shows first that the Fourier coefficients of possible far field patterns decay
+super-exponentially. This should not be so unexpected because possible far field patterns
+must be analytic functions. Next, small changes in those coefficients (say, in l2), when l ≫1,
+would not only lead to big changes in u, but they may destroy the convergence of (5.3) in
+the first place. On the other hand, the stability of the map h 7→u||x|>R0 holds if we consider
+glm as members of some Sobolev space of sequences with an exponentially decaying weight,
+dictated by (1.1) in Chapter V. For more details, we refer to [18].
+The step h 7→u||x|>R0 can be stabilized under some a priori assumptions, for example
+that u extends to |x| ≤R−1 with R−1 < R0 as a solution of the Helmholtz equation and is
+a priori bounded there. We refer also to [6].
+5.3. From the scattering amplitude to the Green’s function away from the
+black box. The analysis above allows us to reconstruct explicitly Green’s function G(x, y, λ)
+(the Schwartz kernel of R(λ) for |x| > R0, |y| > R0 from the scattering amplitude a(ω, θ, λ).
+Recall that we already have an explicit way to get a from G(x, y, λ) known near the black
+box, see (5.6) in Chapter II. The Green’s function can be also explicitly connected to the
+DN map Λ on any domain Ω⊃B(0, R0) as above [10]. This would make to step a0 7→Λ
+constructive.
+Consider G(x, y, λ) −G0(x, y, λ). It is an analytic function in B(0, R0) × B(0, R0). We
+can view it as (R(λ) −R0(λ))δy. For R(λ)δy, we have the expansion of Theorem 5.4 in
+
+5. INVERSE BOUNDARY VALUE PROBLEMS AND INVERSE BLACK BOX SCATTERING
+65
+Chapter II. For R0(λ)δy, we have the expansion in Theorem 1.5 in that chapter ( ˆf = 1 in
+our case now). Subtract those two asymptotics to get
+G(x, y, λ) −G0(x, y, λ) = cn(λ)
+eiλ|y|
+|y|(n−1)/2 ¯usc
+
+x, −y
+|y|, −λ
+
+(1 + O(1/|y|)),
+cn(λ) := 1
+4π
+ iλ
+2π
+ 1
+2 (n−3)
+.
+(5.6)
+We can now use the asymptotic of usc as |x| →∞, see (5.6) and (2.17) in Chapter II, to get
+the following.
+Theorem 5.4. For |x| > R0, |y| > R0,
+G(x, y, λ) −G0(x, y, λ) =cn(λ)
+eiλ|x|
+|x|(n−1)/2
+eiλ|y|
+|y|(n−1)/2
+× ¯a
+ x
+|x|, −y
+|y|, −λ
+
+(1 + O(1/|y|))(1 + O(1/|x|)).
+(5.7)
+This theorem shows that G, known outside the black-box, determines a uniquely by
+taking the asymptotics |x| →∞, |y| →∞. The converse can be done in an explicit way as
+well.
+Let alml′m′ be the Fourier coefficients of ¯a(θ, −θ′, −λ). For operators P with the property
+Pf = P ¯f, those coefficients are the same as those of a(θ, −θ′, λ). In other words.
+alml′m′ =
+ZZ
+Sn−1×Sn−1 ¯a(θ, −θ′, −λ)¯Y m
+l (θ)¯Y m′
+l′ (θ′) dθdθ′.
+By (5.6) and Proposition 5.3,
+G(x, y, λ) −G0(x, y, λ) =
+X
+lm
+γlmh(1)
+l (λ|y|)Y m
+l (y/|y|)
+with
+e−i(2l+n−1)π/4λ−(n−1)/2γlm(x, λ) = cn(λ)
+Z
+Sn−1 usc(x, −θ′, −λ)¯Y m′
+l′ (θ′) dθ′.
+Apply Proposition 5.3 again in the x variable to get
+γlm(x, λ) =
+X
+l′m′
+γlml′m′h(1)
+l′ (λ|x|)Y m′
+l′ (x/|x|),
+where
+γlml′m′ = c′
+n(λ)
+ZZ
+Sn−1×Sn−1 ¯a(θ, −θ′, −λ)¯Y m
+l (θ)¯Y m′
+l′ (θ′) dθdθ′ = c′
+n(λ)alml′m′.
+with e−i(2l+n−1)π/4λ−(n−1)/2c′
+n(λ) = c2
+n(λ). All this implies the following.
+Theorem 5.5. For |x| > R0, |y| > R0,
+G(x, y, λ) −G0(x, y, λ)
+= c′
+n(λ)
+X
+lml′m′
+alml′m′h(1)
+l′ (λ|x|)Y m′
+l′ (x/|x|)h(1)
+l (λ|y|)Y m
+l (y/|y|),
+(5.8)
+
+66
+IV. INVERSE SCATTERING
+where alml′m′ are the Fourier coefficients of the scattering amplitude ¯a(θ, −θ′, −λ).
+This gives an explicit formula for recovering G(x, y, λ) for x, y outside the black box,
+knowing the scattering amplitude, for any fixed λ > 0.
+[Next: Nachman’s formula connecting G and Λ]
+
+CHAPTER V
+Appendix
+1. Spherical harmonics, Hankel functions and radial separation of variables for
+the Helmholtz equation
+1.1. Spherical harmonics and Hankel functions. We will recall some facts about
+separation of variables in polar coordinates for the Laplace operator, see e.g., Folland’s book
+on PDEs. If n = 2, then the Laplacian (with negative sign in front) on S1 is just −d2/dθ2,
+where θ is the polar angle, and the eigenvalues are l2, l = 0, 1, . . . with eigenfunctions 1 for
+l = 0 and eλlθ, e−λlθ for λ > 0. Clearly, all positive eigenvalues are of multiplicity two, and
+the eigenfunction expansion is just the classical Fourier series.
+Let n ≥3 now. Denote by Y m
+l , l = 0, 1, . . . , m = 1, . . . m(l), an orthonormal set of
+spherical harmonics on Sn−1. They are the eigenfunctions of the Laplacian ∆Sn−1 on Sn−1.
+We have
+−∆Sn−1Y m
+l
+= l(l + n −2)Y m
+l ,
+l = 0, 1, . . . ; m = 1, . . . , m(l).
+For each l, the multiplicity of the eigenvalue
+(1.1)
+µ(l) = l(l + n −2)
+is given by
+(1.2)
+m(l) = 2l + n −2
+n −2
+l + n −3
+n −3
+
+=
+2ln−2
+(n −2)!
+ 1 + O(l−1)
+
+.
+If n = 3, then the eigenvalues are l(l + 1) of multiplicities m(l) = 2l + 1.
+Let u solve the Helmholtz equation
+(1.3)
+(−∆−λ2)u = 0
+in some radially symmetric domain. We want to find representation of u in polar coordinates
+r > 0, ω ∈Sn−1. We need to keep in mind that r = 0 is a singular point for the polar change
+of variables, and all traps that this can possibly cause.
+We are looking first for solutions of the form u = R(r)Ω(ω). Plug in the Helmholtz
+equation and use the standard separation of variables techniques to get that possible solutions
+are of the form u = R(r)Y m
+l (ω), where Y m
+l
+is any of the spherical harmonics, and R(r)
+(depending on l but not on m) solves the ODE
+(1.4)
+R′′ + n −1
+r
+R′ +
+
+λ2 −µ(l)
+r2
+
+R = 0
+in view of the formula for ∆in polar coordinates
+(1.5)
+∆= ∂2
+∂r2 + n −1
+r
+∂
+∂r + 1
+r2∆Sn−1.
+67
+
+68
+V. APPENDIX
+Equation (1.4) (after we multiply by r2) resembles the Bessel equation
+(1.6)
+z2d2y
+dz2 + zdy
+dz + (z2 −α2)y = 0.
+To put it in that form, notice first that there is certain homogeneity there w.r.t. r: if we
+replace r by λr, λ becomes 1 and the rest does not change. So is natural to look for a solution
+which is a function of λr. Next, we really want the second term to be (1/r)d/dr after the
+change, not (n−1) times that. This suggests the change of variables R(r) = (λr)αv(λr), and
+a simple computation yields α = 1 −n/2. So we look for a solution R(r) = (λr)1−n/2v(λr)
+to get
+z2v′′ + zv′ +
+ z2 −
+ µ(l) + n2/4 −n + 1
+
+v = 0
+with v = v(z), z = λr. By (1.1), we can write the latter as
+z2v′′ + zv′ +
+ z2 −(l + n/2 −1)2
+v = 0.
+Therefore, the general solution is any linear combination of two linearly independent Bessel
+functions like (λr)1−n/2H(1,2)
+l+n/2−1(λr), (λr)1−n/2Jl+n/2−1(λr), etc. It is convenient to set (note
+that the definition depends on n)
+(1.7)
+h(k)
+l (z) =
+rπ
+2 z1−n/2H(k)
+l+n/2−1(z),
+k = 1, 2,
+jl(z) =
+rπ
+2 z1−n/2Jl+n/2−1(z).
+It is well known that
+(1.8)
+jl = 1
+2h(1)
+l
++ 1
+2h(2)
+l .
+Of those three Bessel functions, only jl is not singular at 0; and this is in fact a defining
+property of jl. On the other hand, when ν is a half-integer, H(1)
+ν (z) and H(2)
+ν (z) are rational
+functions multiplied by e±iz with pole at z = 0 (only).
+The Hankel functions have the
+asymptotic
+H(1)
+ν (z) =
+ 2
+πz
+ 1
+2
+ei(z−νπ/2−π/4) + O(z−3/2),
+as z →∞.
+Then
+(1.9)
+h(1)
+l (z) = e−i(2l+n−1)π/4
+eiz
+z(n−1)/2
+
+1 + O
+1
+z
+
+,
+as z →∞,
+and h(2)
+l (z) is just the conjugate of h(1)
+l (z) (for z real). In particular, when n = 3 (remember
+that h(1)
+l
+depends on n as well),
+(1.10)
+h(1)
+l (z) = (−i)l+1eiz
+z + O
+ 1
+z2
+
+,
+as z →∞.
+
+1. SPHERICAL HARMONICS, HANKEL FUNCTIONS
+69
+1.2. Radial separation of variables for the Helmholtz equation.
+Theorem 1.1. Let n ≥3.
+(a) Let u solve the Helmholtz equation in the ball |x| < R0 with some R0. Then
+(1.11)
+u(rω) =
+X
+l,m
+clm(λ)jl(λr)Y m
+l (ω),
+0 < r < R0, ω ∈Sn−1, with some coefficients clm(λ).
+(b) Let u solve the Helmholtz equation in the annulus R0 < |x| < R1 with some 0 ≤R0 <
+R1. Then
+(1.12)
+u(rω) =
+X
+l,m
+
+alm(λ)h(1)
+l (λr) + blm(λ)C2h(2)
+l (λr)
+
+Y m
+l (ω),
+R0 < r < R1, ω ∈Sn−1, with some coefficients alm(λ), blm(λ).
+(c) If R1 = ∞, and u is outgoing, then blm(λ) = 0; if u is incoming, then alm(λ) = 0.
+Proof. Let u solve the Helmholtz equation for |x| < R0 with some R0 > 0. Fix l and
+m and set
+f(r) =
+Z
+Sn−1 u(rω)¯Y m
+l (ω) dω.
+Then f solves the ODE (1.4) for 0 < r < R0 and can therefore be represented as a linear
+combination of jl(λr) and another linearly independent modified Bessel function of λr, say
+h(1)(λr). Only the first term remains bounded when r →0. Therefore, f(r) = clm(λ)jl(λr).
+Thus any solution u of the Helmholtz equation (−∆−λ2)u = 0 near 0 has the form (1.11).
+The convergence follows from the fact that ω 7→u(rω) is clearly in L2(Sn−1), for 0 < r < R0;
+and the above series is just an eigenfunction expansion for any such r.
+On the other hand, let u solve the Helmholtz equation for |x| > R0 with some R0 > 0.
+Then f defined as above solves the ODE (1.4) again for r > R0 and can therefore be
+represented as the following linear combination
+f(r) = alm(λ)h(1)
+l (λr) + blm(λ)C2h(2)
+l (λr).
+Neither term can be discarded without additional a priori knowledge. Then we get (1.12)
+with the same remark about the convergence.
+Assume now that u above is outgoing, see Definition 1.6. Then for any m, l, the function
+f defined above satisfies f(r) = eir/r(n−1)/2 + O(r−(n+1)/2), as r →∞, by Theorem 1.5. By
+(1.9), only h(1)
+l (λr) has this behavior and no other non-trivial combination of the two Hankel
+functions has this asymptotic. Therefore, blm = 0. Similarly, if u is incoming, alm = 0.
+□
+Remark 1.1. Just because the series (1.12) converges for R0 < r < R1 does not mean
+that it will converge for all or even some r > R1. Very strong, super-exponential decay of the
+coefficients alm and blm with respect to l is needed to guarantee convergence for all r > R1,
+see, e.g., [18].
+Remark 1.2. The previous remark is related to the following. The behavior of the Hankel
+functions when l →∞, which determines the convergence of the series, and the behavior as
+
+70
+V. APPENDIX
+z →∞“cannot be commuted”. Another way to say the that is that the asymptotic (1.9) is
+not uniform w.r.t. l as l →∞. In fact, when n = 3, we have the following
+(1.13)
+h(1)
+l (z) ∼−(2/e)1/2z−1
+2l + 1
+ez
+l
+,
+as l →∞.
+This is super-exponentially increasing with l and it can not be obtained from the leading
+term in (1.10) by taking the limit l →∞. What we have is a family of functions h(1)
+l (z)
+(and H(1)
+α (z)) with two parameters, z and l, respectively α. The latter solves the Bessel
+equation (1.6). If you consider α there as a large parameter, then that equation is elliptic
+in semi-classical sense when |α| > z > 0; and it is of hyperbolic type when |α| < z. The
+asymptotic (1.10) is then in the hyperbolic regime, and the leading term is oscillating; while
+the asymptotic (1.13) is in the elliptic one; and the leading term is of exponential type.
+Detailed two-parameter asymptotic expansions of the Bessel functions (for z complex!) can
+be found in works by Olver, see [11] and the references there, written in the 50s(!!).
+
+Bibliography
+[1] J. Cooper and W. Strauss. Representations of the scattering operator for moving obstacles. Indiana
+Univ. Math. J., 28(4):643–671, 1979.
+[2] J. Cooper and W. Strauss. Scattering of waves by periodically moving bodies. J. Funct. Anal., 47(2):180–
+229, 1982.
+[3] L. H¨ormander. The analysis of linear partial differential operators. I, volume 256. Springer-Verlag,
+Berlin, 1983. Distribution theory and Fourier analysis.
+[4] L. H¨ormander. The analysis of linear partial differential operators. II, volume 257. Springer-Verlag,
+Berlin, 1983. Differential operators with constant coefficients.
+[5] L. H¨ormander. The analysis of linear partial differential operators. III, volume 274. Springer-Verlag,
+Berlin, 1985. Pseudodifferential operators.
+[6] V. Isakov. Inverse problems for partial differential equations, volume 127 of Applied Mathematical Sci-
+ences. Springer, New York, second edition, 2006.
+[7] T. Kato. Linear evolution equations of “hyperbolic” type. J. Fac. Sci. Univ. Tokyo Sect. I, 17:241–258,
+1970.
+[8] P. D. Lax and R. S. Phillips. Scattering theory, volume 26 of Pure and Applied Mathematics. Academic
+Press Inc., Boston, MA, second edition, 1989. With appendices by Cathleen S. Morawetz and Georg
+Schmidt.
+[9] R. B. Melrose. Geometric scattering theory. Stanford Lectures. Cambridge University Press, Cambridge,
+1995.
+[10] A. I. Nachman. Reconstructions from boundary measurements. Ann. of Math. (2), 128(3):531–576, 1988.
+[11] F. W. J. Olver. Asymptotics and special functions. Academic Press, 1974. Computer Science and Applied
+Mathematics.
+[12] V. Petkov. Scattering theory for hyperbolic operators, volume 21 of Studies in Mathematics and its
+Applications. North-Holland Publishing Co., Amsterdam, 1989.
+[13] V. Petkov and M. Zworski. Semi-classical estimates on the scattering determinant. Ann. Henri Poincar´e,
+2(4):675–711, 2001. MR1852923.
+[14] M. Reed and B. Simon. Methods of modern mathematical physics. II. Fourier analysis, self-adjointness.
+Academic Press [Harcourt Brace Jovanovich, Publishers], New York-London, 1975.
+[15] A. Ruiz. Harmonic Analysis and Inverse Problems. http://www.uam.es/gruposinv/inversos/publicaciones/Inverseproblem
+[16] J. Sj¨ostrand. Lectures on resonances. http://sjostrand.perso.math.cnrs.fr/Coursgbg.pdf, 2002.
+[17] J. Sj¨ostrand and M. Zworski. Complex scaling and the distribution of scattering poles. J. Amer. Math.
+Soc., 4(4):729–769, 1991.
+[18] P. Stefanov. Stability of the inverse problem in potential scattering at fixed energy. Ann. Inst. Fourier
+(Grenoble), 40(4):867–884 (1991), 1990.
+[19] P. Stefanov. Generic uniqueness for two inverse problems in potential scattering. Comm. Partial Dif-
+ferential Equations, 17(1-2):55–68, 1992.
+[20] P. Stefanov. Estimates on the residue of the scattering amplitude. Asymptot. Anal., 32(3-4):317–333,
+2002.
+[21] P. Stefanov and G. Uhlmann. Local uniqueness for the fixed energy fixed angle inverse problem in
+obstacle scattering. Proc. Amer. Math. Soc., 132(5):1351–1354 (electronic), 2004.
+[22] P. Stefanov and G. Uhlmann. Linearizing non-linear inverse problems and an application to inverse
+backscattering. J. Funct. Anal., 256(9):2842–2866, 2009.
+71
+
+72
+BIBLIOGRAPHY
+[23] J. Sylvester and G. Uhlmann. A global uniqueness theorem for an inverse boundary value problem.
+Ann. of Math. (2), 125(1):153–169, 1987.
+[24] M. E. Taylor. Partial differential equations. I, volume 115 of Applied Mathematical Sciences. Springer-
+Verlag, New York, 1996. Basic theory.
+[25] M. E. Taylor. Partial differential equations. II, volume 116 of Applied Mathematical Sciences. Springer-
+Verlag, New York, 1996. Qualitative studies of linear equations.
+[26] M. Zworski. Lectures on scattering resonances. http://math.berkeley.edu/ zworski/res.pdf.

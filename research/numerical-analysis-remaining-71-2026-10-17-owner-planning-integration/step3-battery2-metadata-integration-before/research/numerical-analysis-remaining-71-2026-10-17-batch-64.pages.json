@@ -1,0 +1,555 @@
+[
+  {
+    "order": 2682,
+    "id": "exterior-wave-problems-absorbing-boundaries-and-pml",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Exterior waves, absorbing boundaries and PML",
+    "companion": "exterior-wave-problems-absorbing-boundaries-and-pml-examples",
+    "requires": [
+      "spectral-collocation-and-galerkin-methods",
+      "boundary-integral-equations-and-galerkin-bem"
+    ],
+    "items": [
+      {
+        "id": "def-pe18-cartesian-complex-stretch-pml",
+        "kind": "definition",
+        "title": "Cartesian complex-stretch PML for a homogeneous Helmholtz mode",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Let $k>0$, $x\\in\\mathbb R$ be the Cartesian normal coordinate, and $y\\in\\mathbb R^2$ the tangential coordinate. Let $\\sigma$ be nonnegative, continuous, piecewise $C^1$, and zero for $x\\le0$. Define\n$$S(x)=\\int_0^x\\sigma(t)\\,dt,\\qquad X(x)=x+iS(x),\\qquad s(x)=X'(x)=1+i\\sigma(x).$$\nThe pulled-back constant-coefficient Helmholtz operator in the layer is\n$$\\frac1{s(x)}\\partial_x\\left(\\frac1{s(x)}\\partial_x\\right)+\\Delta_y+k^2.$$\nThis definition concerns the homogeneous Cartesian branch only; it makes no claim for heterogeneous media, curved stretches, grazing or evanescent uniform attenuation, discretizations, or finite-element convergence.",
+        "local_order": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven G. Johnson, Notes on Perfectly Matched Layers (PMLs), §§3.1–3.2",
+              "url": "https://arxiv.org/pdf/2108.05348"
+            },
+            {
+              "title": "Michler, Demkowicz, Kurtz, and Pardo, Improving the performance of Perfectly Matched Layers by means of hp-adaptivity, §§2.1–2.2",
+              "url": "https://www.cs.ox.ac.uk/people/christian.michler/Homepage%20of%20Christian%20Michler/Publications_files/MicDemKurPar2007NMPDE.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe18-local-impedance-absorbing-boundary",
+        "kind": "definition",
+        "title": "First-order local impedance condition at an artificial plane",
+        "deps": [
+          "def-pe18-exterior-helmholtz-problem"
+        ],
+        "dependency_level": 1,
+        "statement": "Use the outgoing time convention $e^{-i\\omega t}$. On an artificial boundary with outward unit normal $n$, the first-order local impedance condition is $\\partial_nu-iku=0$. For the plane $x=R$ with $n=+e_x$, this is $\\partial_xu-iku=0$. It is the exact outgoing relation at normal incidence and an approximation for oblique propagating modes; no exactness or uniform small-reflection claim at grazing incidence is part of this definition.",
+        "local_order": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Galkowski, Lafontaine, and Spence, Local absorbing boundary conditions on fixed domains give order-one errors for high-frequency waves",
+              "url": "https://arxiv.org/pdf/2101.02154"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 10: Bessel Functions",
+              "url": "https://dlmf.nist.gov/10"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe18-pml-perfect-matching-and-propagating-mode-decay",
+        "kind": "theorem",
+        "title": "Perfect matching and attenuation for non-grazing propagating modes",
+        "deps": [
+          "def-pe18-cartesian-complex-stretch-pml"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $k>0$, $\\eta\\in\\mathbb R^2$ satisfy $|\\eta|<k$, and let $q=\\sqrt{k^2-|\\eta|^2}>0$ be the outgoing normal branch. In the stretch of [[def-pe18-cartesian-complex-stretch-pml]],\n$$u(x,y)=e^{iqX(x)+i\\eta\\cdot y}$$\nsolves the pulled-back Helmholtz equation. At $x=0$, its value and normal flux $(1/s)\\partial_xu$ agree with those of the physical mode $e^{iqx+i\\eta\\cdot y}$. Its modulus is $e^{-qS(x)}$. If a family of modes satisfies $q\\ge q_0>0$, then $|u(x,y)|\\le e^{-q_0S(x)}$ uniformly; whenever $S(x)\\ge\\sigma_0x$ for some $\\sigma_0>0$, this is at most $e^{-q_0\\sigma_0x}$. No uniform bound is asserted as $q\\downarrow0$.",
+        "local_order": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven G. Johnson, Notes on Perfectly Matched Layers (PMLs), §§3.1–3.2",
+              "url": "https://arxiv.org/pdf/2108.05348"
+            },
+            {
+              "title": "Michler, Demkowicz, Kurtz, and Pardo, Improving the performance of Perfectly Matched Layers by means of hp-adaptivity, §§2.1–2.2",
+              "url": "https://www.cs.ox.ac.uk/people/christian.michler/Homepage%20of%20Christian%20Michler/Publications_files/MicDemKurPar2007NMPDE.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe18-spherical-hankel-modulus-and-radiation-bounds",
+        "kind": "lemma",
+        "title": "Spherical Hankel modulus and uniform radial bounds",
+        "deps": [
+          "def-spherical-bessel-and-hankel-functions",
+          "lem-spherical-bessel-and-hankel-radial-solutions"
+        ],
+        "dependency_level": 2,
+        "statement": "For integers $\\ell\\ge0$ and real $z>0$, write $h_\\ell=h_\\ell^{(1)}$ using [[def-spherical-bessel-and-hankel-functions]]. Then\n$$|h_\\ell(z)|^2=\\sum_{m=0}^{\\ell}S_{\\ell m}z^{-2m-2},\\qquad S_{\\ell m}=\\frac{(2m)!(\\ell+m)!}{4^m(m!)^2(\\ell-m)!}.$$\nConsequently $|h_\\ell(z)|$ is nonincreasing in $z$, $|h_{\\ell-1}(z)|\\le|h_\\ell(z)|$ for $\\ell\\ge1$, and $|h_\\ell'(z)|\\le(1+(\\ell+1)/z)|h_\\ell(z)|$. For every fixed $z_0>0$ and all $z\\ge z_0$,\n$$\\frac{|z(h_\\ell'(z)-ih_\\ell(z))|}{|h_\\ell(z_0)|}\\le(\\ell+1)e^{2z_0}.$$",
+        "local_order": 4,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §§10.49–10.52",
+              "url": "https://dlmf.nist.gov/10"
+            },
+            {
+              "title": "Plamen Stefanov, Scattering and Inverse Scattering in R^n, graduate lecture notes",
+              "url": "https://www.math.purdue.edu/~stefanov/publications/SCATTERING.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe18-planar-impedance-reflection-coefficient",
+        "kind": "theorem",
+        "title": "Exact plane-wave reflection coefficient of the local impedance condition",
+        "deps": [
+          "def-pe18-local-impedance-absorbing-boundary"
+        ],
+        "dependency_level": 2,
+        "statement": "For $0<q\\le k$ and tangential wavevector $\\eta\\in\\mathbb R^2$ satisfying $q^2+|\\eta|^2=k^2$, consider\n$$u(x,y)=e^{i\\eta\\cdot y}\\left(e^{iq(x-R)}+\\mathcal R e^{-iq(x-R)}\\right).$$\nThe impedance condition [[def-pe18-local-impedance-absorbing-boundary]] gives\n$$\\mathcal R=\\frac{q-k}{q+k},\\qquad |\\mathcal R|=\\frac{k-q}{k+q}.$$\nThus reflection is zero at normal incidence $q=k$ and its magnitude tends to one as $q\\downarrow0$ (grazing incidence).",
+        "local_order": 5,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Galkowski, Lafontaine, and Spence, Local absorbing boundary conditions on fixed domains give order-one errors for high-frequency waves",
+              "url": "https://arxiv.org/pdf/2101.02154"
+            },
+            {
+              "title": "Steven G. Johnson, Notes on Perfectly Matched Layers (PMLs), §2",
+              "url": "https://arxiv.org/pdf/2108.05348"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe18-finite-pml-dirichlet-reflection",
+        "kind": "theorem",
+        "title": "Exact reflected-mode error from a finite Dirichlet-terminated PML",
+        "deps": [
+          "def-pe18-cartesian-complex-stretch-pml",
+          "thm-pe18-pml-perfect-matching-and-propagating-mode-decay"
+        ],
+        "dependency_level": 2,
+        "statement": "For $q>0$, $A\\ne0$, and a finite layer $0\\le x\\le L$ with $S(L)>0$, let a one-dimensional mode be $u(x)=Ae^{iqX(x)}+Be^{-iqX(x)}$, with the PML stretch from [[def-pe18-cartesian-complex-stretch-pml]]. Imposing $u(L)=0$ gives the reflected amplitude at the interface\n$$\\frac BA=-e^{2iqX(L)},\\qquad \\left|\\frac BA\\right|=e^{-2qS(L)}.$$\nThis is the exact continuous one-mode error for a Dirichlet termination.",
+        "local_order": 6,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven G. Johnson, Notes on Perfectly Matched Layers (PMLs), §3.3",
+              "url": "https://arxiv.org/pdf/2108.05348"
+            },
+            {
+              "title": "Michler, Demkowicz, Kurtz, and Pardo, Improving the performance of Perfectly Matched Layers by means of hp-adaptivity, §§2.1–2.2",
+              "url": "https://www.cs.ox.ac.uk/people/christian.michler/Homepage%20of%20Christian%20Michler/Publications_files/MicDemKurPar2007NMPDE.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe18-exact-spherical-dtn-map",
+        "kind": "definition",
+        "title": "Exact modal Dirichlet-to-Neumann map on a sphere",
+        "deps": [
+          "def-three-dimensional-spherical-harmonic-space",
+          "lem-three-dimensional-laplace-spherical-harmonic-addition-theorem",
+          "def-spherical-bessel-and-hankel-functions",
+          "lem-spherical-bessel-and-hankel-radial-solutions",
+          "lem-pe18-spherical-hankel-radial-identities",
+          "lem-pe18-spherical-hankel-modulus-and-radiation-bounds"
+        ],
+        "dependency_level": 3,
+        "statement": "For $k>0$, $R>0$, and $g\\in C^\\infty(\\mathbb S^2;\\mathbb C)$, let $g_\\ell$ be its $L^2(\\mathbb S^2)$-orthogonal projection onto $\\mathcal H_\\ell$ and set\n$$\\tau_\\ell(k,R)=k\\frac{(h_\\ell^{(1)})'(kR)}{h_\\ell^{(1)}(kR)},\\qquad T_{k,R}g=\\sum_{\\ell=0}^\\infty\\tau_\\ell(k,R)g_\\ell.$$\nThe associated outgoing extension for $r\\ge R$ is\n$$v(r,\\omega)=\\sum_{\\ell=0}^\\infty\\frac{h_\\ell^{(1)}(kr)}{h_\\ell^{(1)}(kR)}g_\\ell(\\omega).$$\nThe denominator is nonzero by [[lem-pe18-spherical-hankel-radial-identities]]. The convergence, smoothness, PDE, and radiation properties are asserted in [[thm-pe18-exact-spherical-dtn-map-on-smooth-data]].",
+        "justified_by": [
+          "thm-pe18-exact-spherical-dtn-map-on-smooth-data"
+        ],
+        "local_order": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 10: Bessel Functions",
+              "url": "https://dlmf.nist.gov/10"
+            },
+            {
+              "title": "Plamen Stefanov, Scattering and Inverse Scattering in R^n, Appendix 1, §§1.1–1.2",
+              "url": "https://www.math.purdue.edu/~stefanov/publications/SCATTERING.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe18-spherical-impedance-modal-reflection",
+        "kind": "theorem",
+        "title": "Exact spherical-mode reflection under the local impedance truncation",
+        "deps": [
+          "def-pe18-local-impedance-absorbing-boundary",
+          "lem-pe18-spherical-hankel-radial-identities"
+        ],
+        "dependency_level": 3,
+        "statement": "Fix $k,R>0$ and $\\ell\\ge0$. On $r=R$, write one radial mode as $u(r)=A h_\\ell^{(1)}(kr)+B h_\\ell^{(2)}(kr)$, where $h_\\ell^{(2)}=\\overline{h_\\ell^{(1)}}$. If $u$ satisfies $\\partial_ru-iku=0$ at $R$, then\n$$B=-\\frac{(h_\\ell^{(1)})'(kR)-ih_\\ell^{(1)}(kR)}{(h_\\ell^{(2)})'(kR)-ih_\\ell^{(2)}(kR)}A.$$\nThe denominator is nonzero. For $A\\ne0$, the exact reflected modal-amplitude ratio is therefore\n$$\\frac BA=-\\frac{(h_\\ell^{(1)})'(kR)-ih_\\ell^{(1)}(kR)}{(h_\\ell^{(2)})'(kR)-ih_\\ell^{(2)}(kR)}.$$\nIf $A=0$, the coefficient equality forces $B=0$ and no ratio is defined. No uniform-in-$\\ell$ smallness is asserted.",
+        "local_order": 8,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 10: Bessel Functions",
+              "url": "https://dlmf.nist.gov/10"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §§10.49–10.50",
+              "url": "https://dlmf.nist.gov/10"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe18-rellich-uniqueness-for-a-spherical-obstacle",
+        "kind": "theorem",
+        "title": "Rellich uniqueness for the sound-soft spherical obstacle",
+        "deps": [
+          "def-pe18-exterior-helmholtz-problem",
+          "lem-pe18-spherical-harmonic-structure-and-density",
+          "lem-pe18-spherical-hankel-radial-identities",
+          "lem-pe18-outgoing-spherical-mode-expansion"
+        ],
+        "dependency_level": 4,
+        "statement": "For $a>0$, $k>0$, and the convention in [[def-pe18-exterior-helmholtz-problem]], every classical outgoing solution of $(\\Delta+k^2)u=0$ on $r>a$ with zero Dirichlet trace at $r=a$ is identically zero.",
+        "local_order": 9,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Plamen Stefanov, Scattering and Inverse Scattering in R^n, Appendix 1, §§1.1–1.2",
+              "url": "https://www.math.purdue.edu/~stefanov/publications/SCATTERING.pdf"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 10: Bessel Functions",
+              "url": "https://dlmf.nist.gov/10"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe18-exact-spherical-dtn-map-on-smooth-data",
+        "kind": "theorem",
+        "title": "The spherical modal DtN map is well-defined and exact for smooth data",
+        "deps": [
+          "def-pe18-exact-spherical-dtn-map",
+          "lem-pe18-spherical-harmonic-structure-and-density",
+          "lem-pe18-spherical-hankel-radial-identities",
+          "lem-pe18-spherical-hankel-modulus-and-radiation-bounds",
+          "lem-pe18-outgoing-spherical-mode-expansion"
+        ],
+        "dependency_level": 4,
+        "statement": "For every $k,R>0$ and smooth $g$ on $\\mathbb S^2$, the series in [[def-pe18-exact-spherical-dtn-map]] converges in $C^\\infty(\\mathbb S^2)$ to $T_{k,R}g$, and $|\\tau_\\ell(k,R)|\\le k+(\\ell+1)/R$. Its outgoing extension converges in $C^2$ on each compact annulus $R\\le r\\le R_1$, solves $(\\Delta+k^2)v=0$, has trace $v(R,\\cdot)=g$ and radial derivative $\\partial_rv(R,\\cdot)=T_{k,R}g$, and satisfies the uniform outgoing Sommerfeld condition as $r\\to\\infty$. It is the unique classical outgoing extension of $g$.",
+        "local_order": 10,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 10: Bessel Functions",
+              "url": "https://dlmf.nist.gov/10"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §§10.49–10.52",
+              "url": "https://dlmf.nist.gov/10"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe18-spherical-dtn-truncated-variational-problem",
+        "kind": "definition",
+        "title": "Exact-DtN truncated modal variational formulation",
+        "deps": [
+          "def-pe18-exterior-helmholtz-problem",
+          "def-pe18-exact-spherical-dtn-map",
+          "thm-pe18-exact-spherical-dtn-map-on-smooth-data"
+        ],
+        "dependency_level": 5,
+        "statement": "Fix $0<a<R$ and $k>0$. The coefficient energy space $\\mathcal V_{a,R}$ consists of sequences $u=(u_\\ell)_{\\ell\\ge0}$ with $u_\\ell\\in H^1((a,R);\\mathcal H_\\ell)$ and\n$$\\|u\\|_{\\mathcal V}^2=\\sum_{\\ell=0}^\\infty\\int_a^R\\left(r^2\\|u_\\ell'(r)\\|_2^2+(1+\\ell(\\ell+1))\\|u_\\ell(r)\\|_2^2\\right)dr<\\infty.$$\nFor smooth inner data $f$ on $\\mathbb S^2$, let $f_\\ell$ be its projection onto $\\mathcal H_\\ell$ and define the affine trial space $\\mathcal V_f=\\{u\\in\\mathcal V_{a,R}:u_\\ell(a)=f_\\ell\\text{ for every }\\ell\\}$ and test space $\\mathcal V_0=\\{v\\in\\mathcal V_{a,R}:v_\\ell(a)=0\\text{ for every }\\ell\\}$. Traces and continuity of the following form are established in [[lem-pe18-modal-trace-and-form-continuity]]. With the inner product linear in its first argument, set\n$$\\mathfrak a_{k,a,R}(u,v)=\\sum_{\\ell=0}^\\infty\\int_a^R\\left(r^2\\langle u_\\ell',v_\\ell'\\rangle+(\\ell(\\ell+1)-k^2r^2)\\langle u_\\ell,v_\\ell\\rangle\\right)dr-R^2\\sum_{\\ell=0}^\\infty\\tau_\\ell(k,R)\\langle u_\\ell(R),v_\\ell(R)\\rangle.$$\nThe exact-DtN variational problem is to find $u\\in\\mathcal V_f$ such that $\\mathfrak a_{k,a,R}(u,v)=0$ for every $v\\in\\mathcal V_0$. The assigned theorem on this page proves existence and uniqueness.",
+        "justified_by": [
+          "lem-pe18-modal-trace-and-form-continuity"
+        ],
+        "local_order": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 10: Bessel Functions",
+              "url": "https://dlmf.nist.gov/10"
+            },
+            {
+              "title": "Plamen Stefanov, Scattering and Inverse Scattering in R^n, Appendix 1, §§1.1–1.2",
+              "url": "https://www.math.purdue.edu/~stefanov/publications/SCATTERING.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe18-modal-trace-and-form-continuity",
+        "kind": "lemma",
+        "title": "Modal trace bound and continuity of the exact-DtN variational form",
+        "deps": [
+          "def-pe18-spherical-dtn-truncated-variational-problem",
+          "thm-pe18-exact-spherical-dtn-map-on-smooth-data"
+        ],
+        "dependency_level": 6,
+        "statement": "Fix $0<a<R$, $k>0$, and let $\\mathcal V_{a,R}$ and $\\mathfrak a_{k,a,R}$ be as in [[def-pe18-spherical-dtn-truncated-variational-problem]]. There is $C=C(a,R,k)$ such that for every $u,v\\in\\mathcal V_{a,R}$,\n$$\\sum_{\\ell\\ge0}(1+\\ell)\\bigl(\\|u_\\ell(a)\\|_2^2+\\|u_\\ell(R)\\|_2^2\\bigr)\\le C\\|u\\|_{\\mathcal V}^2,\\qquad |\\mathfrak a_{k,a,R}(u,v)|\\le C\\|u\\|_{\\mathcal V}\\|v\\|_{\\mathcal V}.$$\nIn particular, the defining traces and boundary pairing are finite, the form is continuous, $\\mathcal V_{a,R}$ is a Hilbert direct sum, and finite-degree truncations converge in its norm.",
+        "local_order": 12,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 10: Bessel Functions",
+              "url": "https://dlmf.nist.gov/10"
+            },
+            {
+              "title": "Plamen Stefanov, Scattering and Inverse Scattering in R^n, Appendix 1, §§1.1–1.2",
+              "url": "https://www.math.purdue.edu/~stefanov/publications/SCATTERING.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe18-spherical-exact-dtn-variational-wellposedness",
+        "kind": "theorem",
+        "title": "Existence and uniqueness for the spherical exact-DtN variational problem",
+        "deps": [
+          "def-pe18-spherical-dtn-truncated-variational-problem",
+          "lem-pe18-modal-trace-and-form-continuity",
+          "thm-pe18-exact-spherical-dtn-map-on-smooth-data",
+          "lem-pe18-spherical-harmonic-structure-and-density",
+          "lem-pe18-spherical-hankel-radial-identities",
+          "lem-pe18-spherical-hankel-modulus-and-radiation-bounds"
+        ],
+        "dependency_level": 7,
+        "statement": "Fix $0<a<R$, $k>0$, and smooth $f$ on $\\mathbb S^2$. The exact-DtN variational problem of [[def-pe18-spherical-dtn-truncated-variational-problem]] has exactly one solution $u\\in\\mathcal V_f$. It is the restriction to $a\\le r\\le R$ of the outgoing modal field\n$$u(r,\\omega)=\\sum_{\\ell=0}^\\infty\\frac{h_\\ell^{(1)}(kr)}{h_\\ell^{(1)}(ka)}f_\\ell(\\omega),$$\nwhere $f_\\ell$ is the degree-$\\ell$ projection of $f$.",
+        "local_order": 13,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 10: Bessel Functions",
+              "url": "https://dlmf.nist.gov/10"
+            },
+            {
+              "title": "Plamen Stefanov, Scattering and Inverse Scattering in R^n, Appendix 1, §§1.1–1.2",
+              "url": "https://www.math.purdue.edu/~stefanov/publications/SCATTERING.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2683,
+    "id": "exterior-wave-problems-absorbing-boundaries-and-pml-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Exterior waves, absorbing boundaries and PML — Examples",
+    "companion": "exterior-wave-problems-absorbing-boundaries-and-pml",
+    "requires": [
+      "exterior-wave-problems-absorbing-boundaries-and-pml"
+    ],
+    "items": [
+      {
+        "id": "ex-pe18-pml-angle-dependent-attenuation",
+        "kind": "example",
+        "title": "PML attenuation vanishes at grazing and excludes evanescent modes",
+        "deps": [
+          "def-pe18-cartesian-complex-stretch-pml",
+          "thm-pe18-pml-perfect-matching-and-propagating-mode-decay"
+        ],
+        "dependency_level": 2,
+        "statement": "For a propagating angle $0\\le\\theta<\\pi/2$, $q=k\\cos\\theta$ and the one-way PML amplitude after accumulated stretch $S$ is $e^{-kS\\cos\\theta}$. It equals $e^{-kS}$ at normal incidence and tends to $1$ as $\\theta\\uparrow\\pi/2$. For a purely evanescent normal branch $q=i\\alpha$ with $\\alpha>0$, the factor $e^{iqX}=e^{-\\alpha x-i\\alpha S(x)}$ has modulus $e^{-\\alpha x}$, so this imaginary stretch adds no modulus decay.",
+        "local_order": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven G. Johnson, Notes on Perfectly Matched Layers (PMLs), §§6, 7.2",
+              "url": "https://arxiv.org/pdf/2108.05348"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe18-impedance-normal-and-grazing-incidence",
+        "kind": "example",
+        "title": "Normal, oblique, and grazing impedance reflection",
+        "deps": [
+          "thm-pe18-planar-impedance-reflection-coefficient"
+        ],
+        "dependency_level": 3,
+        "statement": "Write $q=k\\cos\\theta$ for $0\\le\\theta<\\pi/2$. The reflected amplitude is\n$$\\mathcal R(\\theta)=\\frac{\\cos\\theta-1}{\\cos\\theta+1}.$$\nIt is $0$ at normal incidence, equals $-1/3$ at $\\theta=\\pi/3$, and tends to $-1$ at grazing incidence.",
+        "local_order": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Galkowski, Lafontaine, and Spence, Local absorbing boundary conditions on fixed domains give order-one errors for high-frequency waves",
+              "url": "https://arxiv.org/pdf/2101.02154"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe18-insufficient-damping-near-resonant-cavity",
+        "kind": "example",
+        "title": "A weakly damped truncated layer can produce a resonant cavity response",
+        "deps": [
+          "def-pe18-cartesian-complex-stretch-pml",
+          "thm-pe18-finite-pml-dirichlet-reflection"
+        ],
+        "dependency_level": 3,
+        "statement": "Consider the one-dimensional interval $0\\le x\\le L$ with Dirichlet endpoints, source point $x_0=L/2$, and a PML beginning at $x_0$, so $X(x_0)=x_0$ and $X(L)=L+iS$ with $S>0$. For $kL=(2m+1)\\pi$, $m\\in\\mathbb N_0$, the Green function of $-d^2/dX^2-k^2$ at the source has magnitude\n$$|G(x_0,x_0)|=\\frac{\\coth(kS)}{k}\\sim\\frac1{k^2S}\\quad(S\\downarrow0).$$\nWhen $S=0$, $\\sin(kx)$ is a nonzero homogeneous Dirichlet mode, so the real-frequency problem is resonant. This is a single interval example, not a universal stability claim about PMLs.",
+        "local_order": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven G. Johnson, Notes on Perfectly Matched Layers (PMLs), §2",
+              "url": "https://arxiv.org/pdf/2108.05348"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe18-spherical-monopole-exterior-field",
+        "kind": "example",
+        "title": "The outgoing monopole field of a sound-soft sphere",
+        "deps": [
+          "def-pe18-exterior-helmholtz-problem",
+          "def-spherical-bessel-and-hankel-functions",
+          "lem-spherical-bessel-and-hankel-radial-solutions",
+          "thm-pe18-rellich-uniqueness-for-a-spherical-obstacle"
+        ],
+        "dependency_level": 5,
+        "statement": "For constant boundary data $f=1$ on the sphere of radius $a$, the outgoing solution is\n$$u(r)=\\frac{h_0^{(1)}(kr)}{h_0^{(1)}(ka)}=\\frac ar e^{ik(r-a)},\\qquad r\\ge a.$$",
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §§10.49–10.52",
+              "url": "https://dlmf.nist.gov/10"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe18-spherical-dtn-monopole-symbol",
+        "kind": "example",
+        "title": "The monopole symbol of the exact spherical DtN map",
+        "deps": [
+          "def-pe18-exact-spherical-dtn-map",
+          "thm-pe18-exact-spherical-dtn-map-on-smooth-data",
+          "def-spherical-bessel-and-hankel-functions"
+        ],
+        "dependency_level": 5,
+        "statement": "Since $h_0^{(1)}(z)=-ie^{iz}/z$, its logarithmic derivative is $h_0'(z)/h_0(z)=i-z^{-1}$. Therefore the degree-zero exact spherical DtN multiplier at radius $R$ is $\\tau_0(k,R)=ik-1/R$.",
+        "local_order": 5,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 10: Bessel Functions",
+              "url": "https://dlmf.nist.gov/10"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

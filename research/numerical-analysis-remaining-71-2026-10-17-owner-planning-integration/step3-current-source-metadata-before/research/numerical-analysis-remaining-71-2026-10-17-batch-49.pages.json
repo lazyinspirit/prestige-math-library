@@ -1,0 +1,632 @@
+[
+  {
+    "order": 2652,
+    "id": "projection-and-pressure-correction-for-incompressible-flow",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Projection, pressure correction and saddle-point solvers",
+    "companion": "projection-and-pressure-correction-for-incompressible-flow-examples",
+    "requires": [
+      "preconditioner-algorithms-and-residual-metrics",
+      "energy-stable-incompressible-navier-stokes-discretization"
+    ],
+    "items": [
+      {
+        "id": "def-na-periodic-staggered-grid-stokes-operators",
+        "kind": "definition",
+        "title": "Periodic staggered-grid velocity and pressure spaces",
+        "statement": "On the unit torus and the uniform N^d periodic cell grid, define the real cell-centred mean-zero pressure space, face-centred velocity space, their h^d mass inner products, the forward pressure gradient, backward velocity divergence, and the compatible periodic Laplacian \u0394_h=D_hG_h, with a fixed sign and index convention.",
+        "deps": [
+          "def-natural-numbers",
+          "thm-reals-field"
+        ],
+        "dependency_level": 0,
+        "strategy": "State cell and face locations, indexing, all operators and inner products; prove claimed well-definedness locally.",
+        "justified_by": [
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a7\u00a73.1\u20133.3, printed pp. 6012\u20136015: projection, incremental pressure correction, the rotational update, and wall-boundary cautions."
+            },
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "\u00a7\u00a72.3.1\u20132.3.3, printed pp. 45\u201347: fractional-step pressure projection, pressure update, and the staggered grid."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+        "kind": "definition",
+        "title": "Symmetric saddle-point system, Schur complement, and block preconditioners",
+        "statement": "For a real finite-dimensional saddle system K=[A B^T; B 0] with SPD A and full-row-rank B, define the positive pressure Schur matrix S=BA^{-1}B^T, its exact block-LU solve, the pressure-mass surrogate \u03b3M_Q, and the corresponding block-diagonal symmetric preconditioner, with all hypotheses and pressure gauge stated.",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-block-lu-factorisation",
+          "def-left-right-and-symmetric-positive-definite-preconditioning",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-reals-field"
+        ],
+        "dependency_level": 0,
+        "strategy": "Give the typed matrix inputs and output maps; reuse the published block-LU and symmetric-preconditioning conventions.",
+        "justified_by": [
+          "thm-na-saddle-point-exact-schur-solve"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michele Benzi, Gene H. Golub, and J\u00f6rg Liesen, Numerical solution of saddle point problems",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/bgl04.pdf",
+              "locator": "\u00a73.1, printed pp. 14\u201315, and \u00a710.1, printed pp. 61\u201363: block factorization, Schur complement, and block-diagonal preconditioning."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+        "kind": "lemma",
+        "title": "Periodic pressure Laplacian gauge, solvability, and uniform Poincare bound",
+        "statement": "For every N\u22652 and fixed d\u22651, \u0394_h maps mean-zero cell arrays bijectively to themselves, its only kernel on all cell arrays is the constants, every periodic discrete divergence has zero mean, and ||q||_{Q_h}\u2264\u221ad||G_hq||_{M_h} on mean-zero pressures with h=1/N.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "prop-standard-coordinate-inner-products",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove the discrete adjoint identity, characterize the kernel by connectedness, and count coordinate paths for the uniform Poincare estimate.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "PDF pp. 5\u201310 (slides 4\u20139), equations (5.4.4)\u2013(5.4.10): fractional-step projection, staggered cell/face placement, and centred differences; local estimates are proved here."
+            },
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a73.1, printed p. 6012: the projection onto the divergence-free subspace; the discrete kernel and grid inequality are proved locally here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+        "kind": "lemma",
+        "title": "Second-order consistency of staggered periodic sampling",
+        "statement": "For smooth periodic vector and scalar fields, face/cell sampling R_h on the unit torus satisfies D_hR_hu=R_h(div u)+O(h^2), A_hR_hu=R_h(\u2212\u0394u)+O(h^2), and G_hR_hp=R_h(\u2207p)+O(h^2), uniformly in the corresponding mass norms. The divergence consistency residual is measured in the h^d-weighted norm on all scalar cell arrays, which restricts to the pressure norm on Q_h.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "lem-taylor-lagrange-remainder-from-mean-value",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 1,
+        "strategy": "Give the exact face/cell sample maps and derive each centered-difference remainder from Taylor's formula with bounded derivatives.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "PDF pp. 5\u201310 (slides 4\u20139), equations (5.4.4)\u2013(5.4.10): fractional-step projection, staggered cell/face placement, and centred differences; local estimates are proved here."
+            },
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a7\u00a73.1\u20133.3, printed pp. 6012\u20136015: the periodic and pressure-correction context; all local truncation estimates are proved here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-saddle-point-exact-schur-solve",
+        "kind": "theorem",
+        "title": "Exact Schur solve for a full-row-rank symmetric saddle system",
+        "statement": "If A is SPD and B has full row rank, then S=BA^{-1}B^T is SPD, the matrix [A B^T; B 0] has the published block-LU factorization, and the unique solution of [A B^T; B 0][u;p]=[f;g] is p=S^{-1}(BA^{-1}f-g), u=A^{-1}(f-B^Tp).",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "thm-block-lu-factorisation-via-an-invertible-leading-block",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove Schur positivity from full row rank, instantiate the published block-LU result, and verify both equations by substitution.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michele Benzi, Gene H. Golub, and J\u00f6rg Liesen, Numerical solution of saddle point problems",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/bgl04.pdf",
+              "locator": "\u00a7\u00a73.1\u20133.2, printed pp. 14\u201317: block factorizations, Schur complements, and the full-row-rank invertibility condition."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+        "kind": "theorem",
+        "title": "Pressure Schur equivalence from inf-sup, continuity, and stiffness scaling",
+        "statement": "For finite-dimensional real Hilbert spaces with an SPD velocity form a, continuity constant C_b, inf-sup constant \u03b2>0, and \u03b1||v||_V^2\u2264a(v,v)\u2264\u039b||v||_V^2, the positive pressure Schur form satisfies (\u03b2^2/\u039b)||q||_Q^2\u2264(BA^{-1}B^Tq,q)_Q\u2264(C_b^2/\u03b1)||q||_Q^2; hence a scaled pressure mass matrix is spectrally equivalent only with these stated constants.",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "def-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 1,
+        "strategy": "Identify the Schur quadratic form with the squared dual norm of b(\u00b7,q), then apply the stated inf-sup, continuity, and energy equivalence bounds.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michele Benzi, Gene H. Golub, and J\u00f6rg Liesen, Numerical solution of saddle point problems",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/bgl04.pdf",
+              "locator": "\u00a7\u00a73.1\u20133.2 and \u00a710.1.3, printed pp. 14\u201317 and 70\u201371: Schur positivity, inf-sup dependence, and steady Stokes pressure-mass equivalence."
+            },
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a78, printed pp. 6030\u20136032: the role of the discrete inf-sup condition in pressure-correction analysis."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-na-periodic-incremental-pressure-correction",
+        "kind": "algorithm",
+        "title": "Backward-Euler incremental pressure correction on a periodic staggered grid",
+        "statement": "Fix $d\\ge1$, $N\\ge2$, $h=1/N$, viscosity $\\nu>0$, and time step $k>0$.\nGiven $u^n\\in V_h$ with $D_hu^n=0$, a mean-zero\npressure $p^n\\in Q_h$, and a force $f^{n+1}\\in V_h$ whose components each\nhave zero discrete mean,\n$$h^d\\sum_{j\\in J_N}f_{i,j}^{n+1}=0\\qquad(1\\le i\\le d),$$\ndefine the next step by the following two solves and update:\n\n1. Find $\\widetilde u^{n+1}\\in V_h$ satisfying\n$$ \\frac{\\widetilde u^{n+1}-u^n}{k}+\\nu A_h\\widetilde u^{n+1}+G_hp^n=f^{n+1}. $$\n\n2. Find the unique $\\phi^{n+1}\\in Q_h$ satisfying\n$$ \\Delta_h\\phi^{n+1}=k^{-1}D_h\\widetilde u^{n+1}. $$\n\n3. Set\n$$ u^{n+1}=\\widetilde u^{n+1}-kG_h\\phi^{n+1},\\qquad p^{n+1}=p^n+\\phi^{n+1}. $$\n\nThe pressure is kept in $Q_h$ after every solve; the constant pressure mode\nis set to zero. The procedure is only asserted for the periodic staggered\ngrid and the admissible data stated here. The separate well-definedness\ntheorem [[thm-na-periodic-pressure-correction-solves-well-defined]] verifies\nboth solves and the preserved constraints.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare"
+        ],
+        "dependency_level": 2,
+        "strategy": "Specify inputs, outputs, equations, solve order, gauge, and failure/status behavior; a separate theorem proves the solves well-defined.",
+        "justified_by": [
+          "thm-na-periodic-pressure-correction-solves-well-defined"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a73.2, printed pp. 6013\u20136014: the standard incremental pressure-correction predictor and pressure increment."
+            },
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "\u00a7\u00a72.3.1\u20132.3.3, printed pp. 45\u201347: the pressure projection, pressure update, and staggered grid."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+        "kind": "algorithm",
+        "title": "BDF2 standard and rotational incremental pressure-correction variants",
+        "statement": "Fix $d\\ge1$, $N\\ge2$, $h=1/N$, $\\nu>0$, $k>0$, and a step $n\\ge1$. Supply\n$u^{n-1},u^n\\in V_h$ with zero discrete divergence, a mean-zero\n$p^n\\in Q_h$, and $f^{n+1}\\in V_h$ whose components each have zero discrete\nmean,\n$$h^d\\sum_{j\\in J_N}f_{i,j}^{n+1}=0\\qquad(1\\le i\\le d).$$\nCompute a predictor\n$\\widetilde u^{n+1}\\in V_h$ from\n$$ \\frac{3\\widetilde u^{n+1}-4u^n+u^{n-1}}{2k} +\\nu A_h\\widetilde u^{n+1}+G_hp^n=f^{n+1}, $$\nthen solve for the unique mean-zero $\\phi^{n+1}\\in Q_h$ from\n$$ \\Delta_h\\phi^{n+1}=\\frac{3}{2k}D_h\\widetilde u^{n+1}. $$\nSet $u^{n+1}=\\widetilde u^{n+1}-(2k/3)G_h\\phi^{n+1}$. Choose exactly one\npressure update:\n\n- **Standard incremental:** $p^{n+1}=p^n+\\phi^{n+1}$.\n- **Rotational incremental:** $p^{n+1}=p^n+\\phi^{n+1}-\\nu D_h\\widetilde u^{n+1}$.\n\nIn both branches the pressure is gauged in $Q_h$. Initial values $u^0,u^1,p^1$\nare supplied by the caller; no initialization accuracy, stability, or\nconvergence rate is asserted here. The separate well-definedness theorem\n[[thm-na-periodic-pressure-correction-solves-well-defined]] verifies the\npredictor and pressure solves for either branch.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define both variants exactly, state starting-data and mean-zero conditions, and make no unproved stability or accuracy claim.",
+        "justified_by": [
+          "thm-na-periodic-pressure-correction-solves-well-defined"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a7\u00a73.2\u20133.3, printed pp. 6013\u20136015: standard BDF2 incremental and rotational incremental pressure-correction formulas."
+            },
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "PDF pp. 5\u201310 (slides 4\u20139), equations (5.4.4)\u2013(5.4.10): fractional-step projection, staggered cell/face placement, and centred differences; local estimates are proved here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+        "kind": "theorem",
+        "title": "Spectrum of a symmetrically pressure-mass-preconditioned saddle system",
+        "statement": "If the Schur matrix satisfies \u03bc_min M_Q\u2264S\u2264\u03bc_max M_Q for positive \u03bc_min,\u03bc_max and the block-diagonal preconditioner is diag(A,\u03b3M_Q), then every eigenvalue of its symmetric preconditioning lies in the exact intervals obtained from \u03bb_\u00b1(\u03bc)=(1\u00b1\u221a(1+4\u03bc))/2 with \u03bc\u2208[\u03bc_min/\u03b3,\u03bc_max/\u03b3], together with eigenvalue 1 on ker B; this is a spectral bound, not an iteration-count claim.",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use finite-dimensional symmetric spectral decomposition and singular pairs of the pressure-scaled divergence block; derive the two-by-two characteristic polynomial.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michele Benzi, Gene H. Golub, and J\u00f6rg Liesen, Numerical solution of saddle point problems",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/bgl04.pdf",
+              "locator": "\u00a73.1 and \u00a710.1.1, printed pp. 14\u201315 and 61\u201363: block diagonal preconditioning and its exact-Schur eigenvalue polynomial."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-periodic-pressure-correction-solves-well-defined",
+        "kind": "theorem",
+        "title": "Well-definedness of the periodic pressure-correction solves",
+        "statement": "For admissible data in the backward-Euler and BDF2 algorithms, the velocity predictor matrices are SPD, the divergence right-hand side has zero mean, and the pressure Poisson solve has a unique mean-zero solution; thus both variants return a unique next velocity and a uniquely gauged pressure increment.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 3,
+        "strategy": "Test each predictor against its unknown and use the discrete gradient energy; prove compatibility and uniqueness from the pressure Laplacian lemma.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a7\u00a73.2\u20133.3, printed pp. 6013\u20136015: standard and rotational pressure-correction solve structure."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-periodic-discrete-helmholtz-projection",
+        "kind": "theorem",
+        "title": "Mass-orthogonal periodic discrete Helmholtz projection and exact incompressibility",
+        "statement": "The map P_h=I\u2212G_h\u0394_h^{-1}D_h, with \u0394_h^{-1} taken on mean-zero cell pressures, is the mass-orthogonal projector onto ker D_h; the corrected velocity in the incremental pressure-correction algorithm is P_h\tilde u and is exactly divergence-free.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare"
+        ],
+        "dependency_level": 3,
+        "strategy": "Verify range, identity on the kernel, and orthogonality using the discrete adjoint relation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a7\u00a72.1\u20132.2 and \u00a73.1, printed pp. 6011\u20136013: the Helmholtz decomposition and projection step."
+            },
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "\u00a72.3.1, printed p. 45: pressure projection and exact divergence cancellation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-periodic-pressure-correction-modified-energy-identity",
+        "kind": "theorem",
+        "title": "Modified velocity-pressure energy identity for periodic pressure correction",
+        "statement": "For the backward-Euler incremental pressure-correction step on the periodic staggered grid, the exact identity is ||u^{n+1}||_M^2\u2212||u^n||_M^2+||\\tilde u^{n+1}\u2212u^n||_M^2+2\u03bd\u0394t||\\mathcal G_h\\tilde u^{n+1}||_M^2+\u0394t^2(||G_hp^{n+1}||_M^2\u2212||G_hp^n||_M^2)=2\u0394t(f^{n+1},\\tilde u^{n+1})_M.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "thm-na-periodic-discrete-helmholtz-projection"
+        ],
+        "dependency_level": 4,
+        "strategy": "Test the predictor by 2\u0394t\tilde u, use the discrete adjoint relation, and combine the projection square identity with the pressure increment.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a73.2, printed pp. 6013\u20136014: the incremental pressure-correction predictor, pressure increment, and exact projection relation."
+            },
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "\u00a7\u00a72.3.1\u20132.3.2, printed pp. 45\u201346: pressure projection and pressure update."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-periodic-pressure-correction-first-order-velocity-error",
+        "kind": "theorem",
+        "title": "First-order velocity accuracy for smooth periodic Stokes data",
+        "statement": "Let $d\\ge1$, $\\nu>0$, $T>0$, $N\\ge2$, $h=1/N$, and\n$k=T/M$ for an integer $M\\ge1$. Suppose smooth periodic fields $u,p,f$ on\n$[0,T]\\times\\mathbb T^d$ satisfy\n$$ u_t-\\nu\\Delta u+\\nabla p=f,\\qquad \\nabla\\cdot u=0, \\qquad \\int_{\\mathbb T^d}p(t,x)\\,dx=0, \\qquad \\int_{\\mathbb T^d}f_i(t,x)\\,dx=0 $$\nfor every $i,t$. Assume the time derivatives of $u$ through order two,\nthe spatial derivatives of $u$ through order four, of $p$ through order\nthree, and of $f$ through order two are continuous and bounded. Sample $u$ at\nthe staggered faces and $p,f$ at their corresponding grid locations; subtract\nthe discrete mean from each sampled pressure and force component. Start the\nbackward-Euler incremental pressure-correction algorithm with\n$$\nu_h^0=P_hR_hu(0),\\qquad p_h^0=R_hp(0)-h^d\\sum_{j\\in J_N}(R_hp(0))_j.\n$$\nThen its velocity satisfies\n$$ \\max_{0\\le n\\le M}\\|u_h^n-R_hu(t_n)\\|_{M_h} \\le C_T(h^2+k),\\qquad t_n=nk, $$\nwhere $C_T$ is independent of $h,k$ and depends only on $d,T,\\nu$ and the\ndisplayed smoothness bounds. The estimate is for velocity; no pressure-error\nrate is asserted.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "thm-na-periodic-pressure-correction-solves-well-defined",
+          "thm-na-periodic-discrete-helmholtz-projection",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+          "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-norm-inequality-for-the-vector-valued-integral"
+        ],
+        "dependency_level": 4,
+        "strategy": "Project the sampled Stokes equation, prove second-order spatial consistency by Taylor expansion, and apply the contractive backward-Euler recurrence to the discrete divergence-free velocity.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a73.2 and Remark 3.2, printed pp. 6013\u20136014: smooth-data velocity accuracy and the splitting-order caveat; the periodic staggered-grid estimate is proved locally here."
+            },
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "PDF pp. 5\u201310 (slides 4\u20139), equations (5.4.4)\u2013(5.4.10): fractional-step projection, staggered cell/face placement, and centred differences; local estimates are proved here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-na-mini-element-pressure-mass-schur-bounds",
+        "kind": "corollary",
+        "title": "Steady MINI Stokes pressure-mass Schur bounds",
+        "statement": "For the P1-bubble/P1 mini element on a bounded connected Lipschitz polygonal/polyhedral domain in d=2,3, the steady Stokes Schur matrix for a_\u03bd(u,v)=2\u03bd(\u03b5(u),\u03b5(v)) obeys (C_FC_div(D))^{-2}/(\u03bd(1+d)) M_Q\u2264BA_\u03bd^{-1}B^T\u2264d/\u03bd M_Q, with constants independent of h under the stated shape-regularity assumptions and Countable Choice.",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-na-mini-element-local-and-global-dimensions",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "lem-na-fortin-transfers-discrete-infsup",
+          "thm-na-mini-element-fortin-stability",
+          "prop-standard-coordinate-inner-products",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "Apply the mini-element Fortin inf-sup bound, the homogeneous Dirichlet strain identity, and the local divergence continuity estimate to the generic Schur theorem.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michele Benzi, Gene H. Golub, and J\u00f6rg Liesen, Numerical solution of saddle point problems",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/bgl04.pdf",
+              "locator": "\u00a7\u00a73.1\u20133.2 and \u00a710.1.3, printed pp. 14\u201317 and 70\u201371: steady Stokes Schur complement and pressure-mass scaling under inf-sup stability."
+            },
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a78, printed pp. 6030\u20136032: the role of the discrete inf-sup condition; the steady MINI mass-Schur estimate is derived here from the stated Fortin bound."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-na-mini-element-pressure-mass-block-spectrum",
+        "kind": "corollary",
+        "title": "MINI Stokes block-preconditioned spectral intervals",
+        "statement": "With the pressure mass preconditioner \u03bd^{-1}M_Q on the same steady mini-element Stokes branch, the symmetric block-preconditioned eigenvalues lie in the exact \u03bb_\u00b1 intervals corresponding to \u03bc\u2208[(C_FC_div(D))^{-2}/(1+d),d], with eigenvalue 1 on ker B and no generic iteration-count claim.",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+          "cor-na-mini-element-pressure-mass-schur-bounds",
+          "lem-na-mini-element-local-and-global-dimensions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "Substitute the proved mini-element Schur bounds into the general block spectrum theorem and state the resulting intervals.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michele Benzi, Gene H. Golub, and J\u00f6rg Liesen, Numerical solution of saddle point problems",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/bgl04.pdf",
+              "locator": "\u00a710.1.1 and \u00a710.1.3, printed pp. 61\u201363 and 70\u201371: symmetric block-diagonal eigenvalues and steady Stokes mass-Schur equivalence."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2653,
+    "id": "projection-and-pressure-correction-for-incompressible-flow-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Projection, pressure correction and saddle-point solvers \u2014 Examples",
+    "companion": "projection-and-pressure-correction-for-incompressible-flow",
+    "requires": [
+      "projection-and-pressure-correction-for-incompressible-flow"
+    ],
+    "items": [
+      {
+        "id": "ex-na-wall-pressure-correction-tangential-velocity-defect",
+        "kind": "example",
+        "title": "A Neumann pressure correction can break tangential no-slip",
+        "statement": "On the periodic channel (0,1)\u00d7T, a smooth provisional velocity with zero trace can have a Neumann pressure correction whose tangential gradient makes the corrected velocity nonzero at the wall; compute an explicit separated solution and the nonzero trace.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Solve the scalar Neumann Poisson equation exactly for a smooth Fourier mode and evaluate the tangential correction at the wall.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a73.2 and Remark 3.2, printed pp. 6013\u20136014: the artificial pressure Neumann condition and tangential wall-velocity defect."
+            },
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "\u00a72.3.3, printed pp. 46\u201347: boundary treatment caveats for pressure projection."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-na-collocated-central-difference-checkerboard-pressure-mode",
+        "kind": "counterexample",
+        "title": "A collocated central gradient misses an alternating pressure mode",
+        "statement": "For even N, the mean-zero collocated pressure p_j=(-1)^{j_1} has zero centered-difference gradient and therefore lies in the pressure-Poisson kernel; constants are not the full gauge kernel on this collocated grid.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators"
+        ],
+        "dependency_level": 1,
+        "strategy": "Evaluate the centered difference at every index and verify the checkerboard has zero discrete mean.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "\u00a72.3.3, printed pp. 46\u201347: collocated pressure oscillations and the role of staggered placement."
+            },
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a73.1, printed p. 6012: pressure projection and the staggered-grid context."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum",
+        "kind": "example",
+        "title": "A scalar saddle system has golden-ratio preconditioned eigenvalues",
+        "statement": "Take $A=[1]$, $B=[1]$, $M_Q=[1]$, and $\\gamma=1$ in the symmetric\nsaddle-point and block-preconditioning convention of\n[[def-na-symmetric-saddle-point-system-and-block-preconditioners]]. Interpret\n$V=Q=\\mathbb R$ with Euclidean norms, $a(v,w)=vw$, and $b(v,q)=qv$; thus the\npressure-Schur hypotheses hold with $\\alpha=\\Lambda=C_b=\\beta=1$. Then\n$$ K=\\begin{pmatrix}1&1\\\\1&0\\end{pmatrix},\\qquad P_1=I. $$\nThe symmetrically preconditioned eigenvalues are\n$$ \\frac{1-\\sqrt5}{2},\\qquad\\frac{1+\\sqrt5}{2}. $$\nFor right-hand side $(1,0)^T$, the unique saddle solution is $(u,p)=(0,1)$.\nThis exact example illustrates the spectrum only; it implies no solver-speed\nor iteration-count claim.",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "thm-na-symmetrically-preconditioned-saddle-point-spectrum"
+        ],
+        "dependency_level": 3,
+        "strategy": "Verify the 2\u00d72 matrix, its determinant polynomial, the block-LU solve, and the two eigenvalues exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michele Benzi, Gene H. Golub, and J\u00f6rg Liesen, Numerical solution of saddle point problems",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/bgl04.pdf",
+              "locator": "\u00a710.1.1, printed pp. 61\u201363: symmetric block-diagonal saddle preconditioning and its eigenvalue polynomial."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-na-periodic-single-mode-pressure-correction",
+        "kind": "example",
+        "title": "One staggered Fourier mode is removed exactly by pressure correction",
+        "statement": "For a nonconstant mean-zero cell mode q on the periodic staggered grid, a provisional velocity \tilde u=G_hq is corrected to zero by the pressure increment \u03c6=q/\u0394t, illustrating the exact projection and pressure gauge.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "thm-na-periodic-discrete-helmholtz-projection",
+          "thm-na-periodic-pressure-correction-solves-well-defined"
+        ],
+        "dependency_level": 4,
+        "strategy": "Use \u0394_hq=D_hG_hq and the unique zero-mean pressure solve, then compute the correction exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. L. Guermond, P. Minev, and J. Shen, An overview of projection methods for incompressible flows",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_minev_shen_CMAME_2006.pdf",
+              "locator": "\u00a73.1, printed p. 6012: the exact pressure projection relation; the single-mode arithmetic is verified locally."
+            },
+            {
+              "title": "NPTEL, Lecture 5.4: Methods based on Coupling of Pressure and Velocity",
+              "url": "https://archive.nptel.ac.in/content/storage2/courses/112106061/Module_5/Lecture_5.4.pdf",
+              "locator": "PDF pp. 5\u201310 (slides 4\u20139), equations (5.4.4)\u2013(5.4.10): fractional-step projection, staggered cell/face placement, and centred differences; local estimates are proved here."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

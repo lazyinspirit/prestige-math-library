@@ -1,0 +1,365 @@
+[
+  {
+    "order": 2676,
+    "id": "particle-in-cell-and-particle-mesh-kinetic-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Particle in cell and particle mesh kinetic methods",
+    "companion": "particle-in-cell-and-particle-mesh-kinetic-methods-examples",
+    "requires": [
+      "interacting-particle-mean-field-and-vortex-blob-error",
+      "elliptic-finite-difference-methods",
+      "spectral-collocation-and-galerkin-methods"
+    ],
+    "items": [
+      {
+        "id": "def-periodic-pic-grid-and-inner-product",
+        "kind": "definition",
+        "deps": [],
+        "dependency_level": 0,
+        "title": "Periodic uniform PIC grid and inner product"
+      },
+      {
+        "id": "lem-periodic-composite-trapezoid-error",
+        "kind": "lemma",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product"
+        ],
+        "dependency_level": 1,
+        "title": "Composite periodic trapezoidal error in a uniform tensor grid"
+      },
+      {
+        "id": "def-periodic-pic-shape-assignment-and-gather",
+        "kind": "definition",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product"
+        ],
+        "dependency_level": 1,
+        "title": "Periodic PIC deposition shape and gather operators"
+      },
+      {
+        "id": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product"
+        ],
+        "dependency_level": 1,
+        "title": "Periodic centered-difference Poisson solvability and zero-mean gauge"
+      },
+      {
+        "id": "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 2,
+        "title": "The periodic Poisson mean-zero pseudoinverse is linear and self-adjoint"
+      },
+      {
+        "id": "alg-periodic-pic-zero-mean-poisson-solver",
+        "kind": "algorithm",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 2,
+        "title": "Fourier diagonal solver for the periodic centered-difference Poisson equation"
+      },
+      {
+        "id": "thm-periodic-pic-charge-conservation-and-neutralized-source",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 2,
+        "title": "Periodic PIC deposition conserves charge and satisfies Poisson compatibility"
+      },
+      {
+        "id": "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-shape-assignment-and-gather"
+        ],
+        "dependency_level": 2,
+        "title": "Periodic PIC regularization gives a smooth compatible Poisson solution"
+      },
+      {
+        "id": "lem-periodic-pic-smooth-assignment-weights",
+        "kind": "lemma",
+        "deps": [
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth"
+        ],
+        "dependency_level": 3,
+        "title": "Smooth periodic PIC assignment weights have bounded derivatives"
+      },
+      {
+        "id": "thm-periodic-pic-deposition-potential-gather-adjointness",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather"
+        ],
+        "dependency_level": 2,
+        "title": "Periodic PIC deposition and potential gather are adjoint"
+      },
+      {
+        "id": "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint"
+        ],
+        "dependency_level": 3,
+        "title": "Periodic Poisson residual controls the gathered particle force"
+      },
+      {
+        "id": "def-periodic-pic-regularized-grid-interaction-kernel",
+        "kind": "definition",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source"
+        ],
+        "dependency_level": 3,
+        "title": "Fixed-regularization periodic PIC pair kernel"
+      },
+      {
+        "id": "lem-periodic-pic-shape-partition-and-quadrature-bound",
+        "kind": "lemma",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "lem-periodic-composite-trapezoid-error"
+        ],
+        "dependency_level": 3,
+        "title": "Partition and quadrature bounds for a periodic PIC shape"
+      },
+      {
+        "id": "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution",
+        "kind": "theorem",
+        "deps": [
+          "alg-periodic-pic-zero-mean-poisson-solver",
+          "def-periodic-pic-grid-and-inner-product",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 3,
+        "title": "The periodic PIC Poisson algorithm returns the unique gauged solution"
+      },
+      {
+        "id": "alg-periodic-pic-classical-rk4-step",
+        "kind": "algorithm",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-regularized-grid-interaction-kernel",
+          "alg-periodic-pic-zero-mean-poisson-solver",
+          "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution",
+          "def-euler-midpoint-rk4-tableaus"
+        ],
+        "dependency_level": 4,
+        "title": "Classical RK4 step for the fixed-grid regularized PIC particle ODE"
+      },
+      {
+        "id": "def-periodic-pic-separable-hamiltonian-grid-model",
+        "kind": "definition",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "lem-periodic-pic-smooth-assignment-weights",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source"
+        ],
+        "dependency_level": 4,
+        "title": "Matched variational Hamiltonian branch for periodic PIC"
+      },
+      {
+        "id": "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-regularized-grid-interaction-kernel",
+          "lem-periodic-pic-smooth-assignment-weights",
+          "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint"
+        ],
+        "dependency_level": 4,
+        "title": "Fixed-regularization periodic PIC kernels are globally Lipschitz"
+      },
+      {
+        "id": "thm-periodic-pic-smooth-density-grid-force-consistency",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "lem-periodic-pic-shape-partition-and-quadrature-bound",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "thm-periodic-pic-poisson-residual-to-gathered-force-bound"
+        ],
+        "dependency_level": 4,
+        "title": "Fixed-regularization periodic PIC force consistency on a smooth density"
+      },
+      {
+        "id": "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-separable-hamiltonian-grid-model",
+          "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "lem-periodic-pic-smooth-assignment-weights"
+        ],
+        "dependency_level": 5,
+        "title": "The matched periodic PIC grid force is a gradient and its ODE conserves energy"
+      },
+      {
+        "id": "thm-periodic-pic-mean-field-error-with-force-defect",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-regularized-grid-interaction-kernel",
+          "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+          "def-globally-lipschitz-mean-field-kernel",
+          "def-p-one-wasserstein-one",
+          "def-characteristic-mean-field-solution",
+          "def-mean-field-and-weighted-vortex-particle-systems",
+          "thm-gronwall-integral-inequality",
+          "thm-w1-dobrushin-stability-with-force-defect"
+        ],
+        "dependency_level": 5,
+        "title": "Periodic PIC particle and force errors under a prescribed initial coupling"
+      },
+      {
+        "id": "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+        "kind": "theorem",
+        "deps": [
+          "alg-periodic-pic-classical-rk4-step",
+          "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+          "prop-euler-midpoint-rk4-orders-and-stability-functions",
+          "lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube",
+          "lem-discrete-one-step-error-recurrence-bound"
+        ],
+        "dependency_level": 5,
+        "title": "Fourth-order RK4 trajectory error for the fixed-grid periodic PIC ODE"
+      },
+      {
+        "id": "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error",
+        "kind": "theorem",
+        "deps": [
+          "def-periodic-pic-separable-hamiltonian-grid-model",
+          "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+          "def-leapfrog-step-map",
+          "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+          "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+          "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "title": "Leapfrog geometry and finite-time order for the matched periodic PIC Hamiltonian"
+      },
+      {
+        "id": "thm-periodic-pic-staged-fixed-regularization-error-budget",
+        "kind": "theorem",
+        "deps": [
+          "thm-periodic-pic-smooth-density-grid-force-consistency",
+          "def-periodic-pic-regularized-grid-interaction-kernel",
+          "thm-periodic-pic-mean-field-error-with-force-defect",
+          "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+          "def-p-one-wasserstein-one"
+        ],
+        "dependency_level": 6,
+        "title": "Staged fixed-regularization PIC error budget"
+      }
+    ]
+  },
+  {
+    "order": 2677,
+    "id": "particle-in-cell-and-particle-mesh-kinetic-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Particle in cell and particle mesh kinetic methods — Examples",
+    "companion": "particle-in-cell-and-particle-mesh-kinetic-methods",
+    "requires": [
+      "particle-in-cell-and-particle-mesh-kinetic-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-periodic-high-frequency-pic-sampling-alias",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-fourier-collocation-grid",
+          "lem-periodic-fourier-mode-aliasing-under-sampling",
+          "alg-periodic-fourier-collocation-differentiation-matrix",
+          "thm-periodic-fourier-collocation-differentiation-is-exact"
+        ],
+        "dependency_level": 1,
+        "title": "A high Fourier mode aliases to a different periodic PIC grid force"
+      },
+      {
+        "id": "cex-periodic-nonneutral-source-has-no-poisson-solution",
+        "kind": "counterexample",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-centered-difference-poisson-zero-mode-and-gauge"
+        ],
+        "dependency_level": 2,
+        "title": "A periodic Poisson source without neutralization is incompatible"
+      },
+      {
+        "id": "ex-cold-two-stream-stipulated-pic-experiment",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "def-periodic-pic-regularized-grid-interaction-kernel"
+        ],
+        "dependency_level": 4,
+        "title": "A stipulated cold two-stream periodic PIC experiment"
+      },
+      {
+        "id": "ex-periodic-one-dimensional-pic-cic-charge-deposition",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "def-periodic-pic-shape-assignment-and-gather",
+          "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "thm-periodic-pic-deposition-potential-gather-adjointness"
+        ],
+        "dependency_level": 3,
+        "title": "One-dimensional periodic CIC deposition and adjoint potential gather"
+      },
+      {
+        "id": "ex-periodic-smooth-density-poisson-grid-force-error",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-grid-and-inner-product",
+          "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "thm-periodic-pic-smooth-density-grid-force-consistency"
+        ],
+        "dependency_level": 5,
+        "title": "A manufactured smooth periodic density for the PIC grid-force estimate"
+      },
+      {
+        "id": "ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode",
+        "kind": "example",
+        "deps": [
+          "def-periodic-pic-separable-hamiltonian-grid-model",
+          "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+          "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error",
+          "def-leapfrog-step-map"
+        ],
+        "dependency_level": 7,
+        "title": "Leapfrog changes the energy of an exact harmonic test mode"
+      }
+    ]
+  }
+]

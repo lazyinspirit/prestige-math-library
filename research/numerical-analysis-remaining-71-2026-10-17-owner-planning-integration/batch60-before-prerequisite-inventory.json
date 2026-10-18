@@ -1,0 +1,384 @@
+[
+  {
+    "order": 2674,
+    "id": "least-squares-fem-and-practical-dpg",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "First-order least-squares FEM and practical DPG",
+    "companion": "least-squares-fem-and-practical-dpg-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "discrete-de-rham-complexes-and-edge-elements"
+    ],
+    "items": [
+      {
+        "id": "lem-na-ultraweak-poisson-rotation-trace-2d",
+        "kind": "lemma",
+        "title": "Planar rotation carries H(div) normal traces to tangential traces",
+        "statement": "For the counterclockwise rotation R(a,b)=(-b,a) on an oriented planar simplicial mesh, curl(R sigma)=div(sigma) distributionally and the weak tangential trace of R sigma is the weak normal trace of sigma when each facet tangent is t=R n.",
+        "deps": [
+          "def-na-hdiv-space",
+          "lem-na-hdiv-weak-normal-trace",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the two-dimensional rotated H(curl) interface locally from the actual H(div) trace supplier; verify the distributional derivative identity and orientation sign without importing the 3D PE09 trace Statement."
+      },
+      {
+        "id": "def-na-least-squares-poisson-first-order",
+        "kind": "definition",
+        "title": "First-order least-squares formulation of the Dirichlet Poisson problem",
+        "statement": "On a bounded connected Lipschitz polygon with a finite conforming shape-regular triangular mesh, solve -Delta u=f with u in H^1_0 and define sigma=-grad u. The plan convention has residuals (sigma+grad u, div sigma-f), X_h=RT_0(T_h) x (P_1(T_h) intersect H^1_0), and J_h(sigma_h,u_h)=||sigma_h+grad u_h||_2^2+||div sigma_h-f||_2^2.",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "State the real spaces, load, sign convention, mesh, conforming RT0/P1 trial family, and squared residual functional; the proof suppliers establish conformity and norm equivalence separately."
+      },
+      {
+        "id": "def-na-ultraweak-poisson-dpg-formulation",
+        "kind": "definition",
+        "title": "Ultraweak Poisson DPG spaces and plan-consistent bilinear form",
+        "statement": "For a bounded connected Lipschitz polyhedron and a finite conforming shape-regular simplicial mesh in dimension d=2 or 3, define the trial space L^2(Omega)^d x L^2(Omega) x Uhat(T_h) x Qhat_n(T_h), broken tests H(div,T_h) x H^1(T_h), quotient skeleton norms from broken extensions, and the ultraweak form for sigma=-grad u and div sigma=f.",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-ultraweak-poisson-rotation-trace-2d",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Define each skeleton trace as a range quotient with its extension infimum; write all orientation and sign conventions explicitly. The local quotient/gluing theorem justifies well-definedness and completeness."
+      },
+      {
+        "id": "lem-na-least-squares-poisson-residual-norm-equivalence",
+        "kind": "lemma",
+        "title": "Least-squares residual norm is equivalent to H(div) x H1_0 error",
+        "statement": "For every bounded connected Lipschitz polygon, the residual map (delta sigma,delta u) -> (delta sigma+grad delta u, div delta sigma) is a norm on H(div;Omega) x H^1_0(Omega) equivalent to the product graph norm.",
+        "deps": [
+          "def-na-least-squares-poisson-first-order",
+          "def-na-hdiv-space",
+          "def-countable-choice",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "dependency_level": 5,
+        "strategy": "Use the H^1_0 density definition to establish the weak Green identity, pair the first residual with grad(delta u), apply bounded-domain Poincare, and recover both graph components; prove the reverse estimate by triangle inequalities."
+      },
+      {
+        "id": "alg-na-practical-dpg-finite-riesz-solves",
+        "kind": "algorithm",
+        "title": "Exact local finite Riesz solves for practical DPG tests",
+        "statement": "On each simplex, assemble the exact Gram matrix of the specified finite broken polynomial test basis and the exact trial-to-test right sides; solve the finite Riesz systems and return an explicit singular-test-matrix status if a Gram matrix is not positive definite.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "thm-riesz-representation-in-finite-dimensions"
+        ],
+        "dependency_level": 5,
+        "strategy": "Specify inputs, exact output tests, element-local Gram systems, an exact positive-definiteness check, and the failure status; numerical quadrature and floating solve errors are not included."
+      },
+      {
+        "id": "lem-na-hdiv-normal-trace-surjectivity",
+        "kind": "lemma",
+        "title": "Weak H(div) normal trace surjects onto the scalar trace dual",
+        "statement": "Assume Countable Choice and the DPG scalar trace convention. For every open real domain D, the weak normal trace H(div;D) -> (H1(D)/H1_0(D)) prime is onto and admits a lift with H(div) norm at most the dual trace norm.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "def-na-hdiv-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Represent a scalar trace-dual functional on H1 by Riesz; its vanishing on H1_0 forces the Riesz vector to solve Delta z=z distributionally, so grad z is H(div) and its weak normal trace is the original functional."
+      },
+      {
+        "id": "lem-na-ultraweak-poisson-skeleton-quotients",
+        "kind": "lemma",
+        "title": "Ultraweak Poisson skeleton spaces are Hilbert trace quotients",
+        "statement": "The compatible scalar trace range of H^1_0(Omega) and conservative normal-trace range of H(div;Omega), with their extension infimum norms, are real Hilbert quotient spaces; their norms equal the infima over broken element extensions that glue to the stated global spaces.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-hdiv-is-hilbert-and-h0div-closed",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+          "lem-na-simplex-h1-facet-trace-bound",
+          "lem-na-h1-interior-facet-traces-agree",
+          "def-countable-choice",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "dependency_level": 6,
+        "strategy": "Prove trace-map continuity and closed kernels, identify range norms with quotient norms, and prove the scalar and normal-trace gluing implications by elementwise Green identities and facet cancellation."
+      },
+      {
+        "id": "rem-na-practical-dpg-roundoff-and-normal-equations",
+        "kind": "remark",
+        "title": "Exact DPG stability does not certify quadrature or algebraic solve errors",
+        "statement": "The mathematical Fortin and Riesz arguments concern exact integrals and exact finite linear solves. They give no error bound for quadrature or floating-point solver perturbations; a normal-equation implementation squares the spectral condition number under the published full-column-rank hypothesis.",
+        "deps": [
+          "alg-na-practical-dpg-finite-riesz-solves",
+          "thm-normal-equations-square-the-spectral-condition-number"
+        ],
+        "dependency_level": 6,
+        "strategy": "State the exact-analysis boundary and quote only the literal normal-equation condition-number theorem; no numerical stability claim is inferred."
+      },
+      {
+        "id": "lem-na-ultraweak-poisson-bilinear-form-bounded",
+        "kind": "lemma",
+        "title": "The ultraweak Poisson DPG bilinear form is bounded",
+        "statement": "The plan-consistent ultraweak Poisson bilinear form is continuous on the stated trial and broken graph-test Hilbert spaces, with a mesh-independent bound obtained from the volume Cauchy-Schwarz inequalities and the two skeleton quotient norms.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-hdiv-weak-normal-trace",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "For each skeleton pairing choose an admissible global or broken lift, apply the local Green-dual trace bound, take the extension infimum, and combine the five terms by Cauchy-Schwarz."
+      },
+      {
+        "id": "lem-na-ultraweak-poisson-trial-kernel",
+        "kind": "lemma",
+        "title": "The ultraweak Poisson trial operator has trivial kernel",
+        "statement": "If an ultraweak Poisson trial tuple pairs to zero with every broken graph test, then all four trial components vanish.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "def-countable-choice",
+          "lem-na-hdiv-normal-trace-surjectivity",
+          "def-na-hdiv-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "dependency_level": 7,
+        "strategy": "Test first with compactly supported element fields to derive the distributional first-order and divergence equations, identify the skeleton traces by Green duality, glue to H^1_0 and H(div), then test the homogeneous weak Poisson solution with itself."
+      },
+      {
+        "id": "lem-na-least-squares-poisson-space-conformity",
+        "kind": "lemma",
+        "title": "The RT0/P1 least-squares family is conforming",
+        "statement": "For every conforming shape-regular triangular mesh, the prescribed RT0/P1 trial family is a finite-dimensional subspace of H(div;Omega) x H^1_0(Omega).",
+        "deps": [
+          "def-na-least-squares-poisson-first-order",
+          "lem-na-rt0-unisolvence-and-global-conformity",
+          "lem-na-h1-interior-facet-traces-agree",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Use the actual RT0 facet-flux unisolvence/conformity supplier for the flux and the global H^1_0 definition for the continuous piecewise P1 component; finite mesh polynomial spaces are finite dimensional."
+      },
+      {
+        "id": "lem-na-practical-dpg-fortin-p1-r3",
+        "kind": "lemma",
+        "title": "A uniformly bounded Fortin map for the practical P1/R3 DPG family",
+        "statement": "On every shape-regular triangular mesh, for volume trial variables in P1(K)^2 x P1(K), continuous skeleton trace P2, conservative normal skeleton P1, and broken tests P3(K)^2 x P3(K), there exists an element-local Fortin map with mesh-independent graph-norm bound, preserving the scalar cell mean and satisfying ||v-Pi_grad v||_L2(K) <= C h_K ||grad v||_L2(K).",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-simplex-h1-facet-trace-bound",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-countable-choice",
+          "thm-reference-simplex-poincare-wirtinger"
+        ],
+        "dependency_level": 7,
+        "strategy": "Construct the scalar moment map and RT2 subspace moment map explicitly for p=1,d=2; prove the full RT2 unisolvence needed by the moment system, all four DPG moment identities, the mean-zero local Poincare estimate, and shape-uniform reference-to-cell graph bounds."
+      },
+      {
+        "id": "alg-na-ultraweak-poisson-ideal-trial-to-test",
+        "kind": "algorithm",
+        "title": "Ideal Poisson DPG trial-to-test Riesz map",
+        "statement": "For each trial vector w in the stated ultraweak Hilbert trial space, define Tw as the unique test vector satisfying (Tw,v)_V=b(w,v) for every graph test v; the ideal discrete test space is T(U_h).",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Specify the bounded functional on the real Hilbert test space, invoke the exact published Riesz hypotheses, and define the ideal test space without claiming its computability."
+      },
+      {
+        "id": "thm-na-least-squares-poisson-best-approximation",
+        "kind": "theorem",
+        "title": "The conforming RT0/P1 least-squares Poisson minimizer is unique and best approximating",
+        "statement": "For f in L^2(Omega) on a bounded connected Lipschitz polygon, the exact weak Dirichlet solution supplied by the stated Poisson theorem has a unique minimizer of J_h in the conforming RT0 x P1 trial family, and the minimizer is the orthogonal best approximation in the residual norm, with the boundary condition retained in H^1_0.",
+        "deps": [
+          "def-na-least-squares-poisson-first-order",
+          "lem-na-least-squares-poisson-space-conformity",
+          "lem-na-least-squares-poisson-residual-norm-equivalence",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "Use the actual weak Poisson existence supplier under its Axiom of Choice and Countable Choice hypotheses, identify the least-squares residual with the linear residual map of the error, and use finite-dimensional orthogonal projection in the equivalent residual inner product."
+      },
+      {
+        "id": "thm-na-ultraweak-poisson-adjoint-graph-infsup",
+        "kind": "theorem",
+        "title": "Adjoint graph inf-sup for ultraweak Poisson on connected Lipschitz polyhedra",
+        "statement": "For every bounded connected Lipschitz polyhedron in dimension 2 or 3 and every finite conforming shape-regular simplicial mesh, the ultraweak Poisson form satisfies both primal and adjoint graph inf-sup bounds with constants independent of mesh size; hence its operator is boundedly invertible.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-ultraweak-poisson-bilinear-form-bounded",
+          "lem-na-ultraweak-poisson-trial-kernel",
+          "thm-na-infsup-bounded-right-inverse-hilbert",
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "The current complete Poisson DPG source route proves the adjoint graph inf-sup after a global Hodge decomposition under simple connectivity. Preserve the approved connected Lipschitz scope; a complete topology-corrected local proof is still required before readiness."
+      },
+      {
+        "id": "thm-na-ideal-ultraweak-poisson-energy-best-approximation",
+        "kind": "theorem",
+        "title": "Ideal ultraweak Poisson DPG is the energy best approximation",
+        "statement": "For any exact ultraweak Poisson solution and every finite-dimensional trial subspace, the ideal DPG solution exists uniquely and is the orthogonal projection in the induced energy norm; its energy error equals the full residual dual norm.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-ultraweak-poisson-trial-kernel",
+          "alg-na-ultraweak-poisson-ideal-trial-to-test",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "The trivial trial kernel makes the Riesz trial-to-test map injective; its image inner product is the energy inner product, and finite-dimensional orthogonal projection gives existence, uniqueness, best approximation, and the residual identity."
+      },
+      {
+        "id": "thm-na-practical-dpg-fortin-quasioptimality",
+        "kind": "theorem",
+        "title": "Fortin stability and quasi-optimality for practical DPG",
+        "statement": "For the practical P1^2 x P1 volume trial with continuous scalar skeleton P2, conservative normal skeleton P1, and broken vector/scalar P3 tests, if the continuous ultraweak form is bounded and satisfies the stated primal and adjoint graph inf-sup hypotheses, then the explicit Fortin map gives a unique practical DPG solution with an explicit best-approximation bound.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-bilinear-form-bounded",
+          "lem-na-ultraweak-poisson-trial-kernel",
+          "lem-na-practical-dpg-fortin-p1-r3",
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "def-countable-choice",
+          "thm-riesz-representation-for-hilbert-space",
+          "alg-na-practical-dpg-finite-riesz-solves",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-hdiv-is-hilbert-and-h0div-closed",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space"
+        ],
+        "dependency_level": 8,
+        "strategy": "Derive the discrete inf-sup bound from the explicit Fortin identities, express the practical DPG equations as the mixed residual Riesz system, apply the exact Babuška–Brezzi supplier, and prove the quasi-optimal estimate."
+      },
+      {
+        "id": "thm-na-practical-dpg-residual-estimator-equivalence",
+        "kind": "theorem",
+        "title": "Practical DPG residual is reliable and efficient up to data oscillation",
+        "statement": "Under bounded invertibility of the continuous trial-to-test operator and a bounded Fortin map, the discrete residual norm eta and Fortin data oscillation satisfy beta^2||x-x_tilde_h||_X^2 <= eta^2+(||Pi||eta+osc(F))^2 and eta<=||b||||x-x_tilde_h||_X, with osc(F)<=||b||||I-Pi|| inf_{xi_h}||x-xi_h||_X.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-practical-dpg-fortin-p1-r3",
+          "thm-na-practical-dpg-fortin-quasioptimality",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "Prove the full residual-representer reliability identity by orthogonal projection onto the discrete test space, use the Fortin property to bound the omitted component, derive efficiency from restriction of the full dual norm, and identify the Poisson data oscillation."
+      },
+      {
+        "id": "cor-na-practical-dpg-poisson-quasioptimality-estimator",
+        "kind": "corollary",
+        "title": "P1/R3 practical DPG quasi-optimality and residual estimator for Poisson",
+        "statement": "For the complete stated connected Lipschitz polyhedral Poisson scope, the P1/R3 practical DPG method is quasi-optimal and its computable local residual estimator is efficient and reliable, with the exact L2 cell-average data oscillation term and no omitted boundary condition.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "thm-na-ultraweak-poisson-adjoint-graph-infsup",
+          "lem-na-practical-dpg-fortin-p1-r3",
+          "thm-na-practical-dpg-fortin-quasioptimality",
+          "thm-na-practical-dpg-residual-estimator-equivalence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 10,
+        "strategy": "Instantiate the generic Fortin and residual theorems with p=1,d=2, use mean-preserving scalar moments to obtain the cell-average oscillation bound, and retain the connected-domain graph inf-sup proof obligation explicitly."
+      }
+    ]
+  },
+  {
+    "order": 2675,
+    "id": "least-squares-fem-and-practical-dpg-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "First-order least-squares FEM and practical DPG — Examples",
+    "companion": "least-squares-fem-and-practical-dpg",
+    "requires": [
+      "least-squares-fem-and-practical-dpg"
+    ],
+    "items": [
+      {
+        "id": "cex-na-least-squares-boundary-omission-nonunique",
+        "kind": "counterexample",
+        "title": "Dropping the H1-zero boundary condition makes least squares nonunique",
+        "statement": "For zero load, replacing H^1_0(Omega) by H^1(Omega) in the first-order least-squares Poisson problem leaves every constant u with sigma=0 as a zero-residual solution, so the minimizer is not unique.",
+        "deps": [
+          "def-na-least-squares-poisson-first-order"
+        ],
+        "dependency_level": 5,
+        "strategy": "Take f=0 and any nonzero constant; verify both residual components vanish and contrast with the actual H^1_0 boundary condition."
+      },
+      {
+        "id": "ex-na-least-squares-poisson-residual-certificate",
+        "kind": "example",
+        "title": "An exact polynomial Poisson solution has a zero residual certificate",
+        "statement": "On Omega=(0,1)^2, set u=x(1-x)y(1-y), sigma=-grad u and f=-Delta u. Then u vanishes on the boundary, sigma+grad u=0, div sigma-f=0, and the continuous least-squares residual is exactly zero.",
+        "deps": [
+          "def-na-least-squares-poisson-first-order",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-countable-choice",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-na-hdiv-space"
+        ],
+        "dependency_level": 5,
+        "strategy": "Differentiate the quartic polynomial, verify the four boundary restrictions, calculate div(-grad u)=-Delta u, and evaluate both squared residual terms."
+      },
+      {
+        "id": "cex-na-practical-dpg-too-small-test-space",
+        "kind": "counterexample",
+        "title": "A test space smaller than the trial space cannot be stable",
+        "statement": "On one triangle, a four-dimensional trial subspace paired with the three-dimensional constant vector/scalar test space gives a trial-to-test map with nontrivial kernel, so the practical DPG equations are not uniquely solvable for arbitrary data.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "alg-na-practical-dpg-finite-riesz-solves"
+        ],
+        "dependency_level": 6,
+        "strategy": "Compute the dimensions of P0(K)^2 x P0(K) and a four-vector trial subspace, then apply finite-dimensional rank-nullity to the Riesz trial-to-test map."
+      },
+      {
+        "id": "ex-na-ideal-and-practical-dpg-test-vectors",
+        "kind": "example",
+        "title": "An explicit finite model separates ideal and practical test vectors",
+        "statement": "For U=V=R^2 with Euclidean inner product, b(x,y)=(Ax) dot y, A=[[1,1],[0,1]], U_h=span(e2), and V_r=span(e1), the ideal test is Te2=(1,1) while the practical test is T^r e2=e1; for load F(y)=e1 dot y the ideal and practical trial coefficients are 1/2 and 1, respectively.",
+        "deps": [
+          "alg-na-ultraweak-poisson-ideal-trial-to-test",
+          "alg-na-practical-dpg-finite-riesz-solves",
+          "thm-riesz-representation-in-finite-dimensions"
+        ],
+        "dependency_level": 8,
+        "strategy": "Compute the two Riesz maps from the identity and one-dimensional Gram matrices, then solve the one-by-one ideal and practical Galerkin equations exactly."
+      }
+    ]
+  }
+]

@@ -1,0 +1,419 @@
+[
+  {
+    "order": 2584,
+    "id": "delaunay-triangulations-and-voronoi-computation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Delaunay triangulations and voronoi computation",
+    "companion": "delaunay-triangulations-and-voronoi-computation-examples",
+    "requires": [
+      "certified-geometric-predicates",
+      "polynomial-interpolation-and-remainder"
+    ],
+    "items": [
+      {
+        "id": "def-indexed-geometric-site-set",
+        "kind": "definition",
+        "title": "Finite indexed geometric site sets and duplicate handling",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "A nonempty finite indexed site list of exact dyadic sites in R2 or R3 has stable integer identifiers; collapse unweighted duplicates by coordinate and weighted duplicates by coordinate-weight pair, retaining the least identifier. The ambient real field is Dedekind complete and ordered.",
+        "source_path": "items/def-indexed-geometric-site-set.md"
+      },
+      {
+        "id": "lem-complete-ordered-field-is-archimedean",
+        "kind": "lemma",
+        "title": "A complete ordered field has cofinal canonical integers",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "In any complete ordered field F with 1>0, every x in F is strictly exceeded by a canonical integer.",
+        "source_path": "items/lem-complete-ordered-field-is-archimedean.md"
+      },
+      {
+        "id": "lem-linear-cardinal-interpolant-on-an-edge",
+        "kind": "lemma",
+        "title": "The affine edge interpolant is the unique degree-one cardinal polynomial",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Over any field, distinct nodes a,b and values y0,y1 have the unique degree-at-most-one interpolant y0+(y1-y0)(X-a)/(b-a).",
+        "source_path": "items/lem-linear-cardinal-interpolant-on-an-edge.md"
+      },
+      {
+        "id": "def-lexicographic-lift-tie-break",
+        "kind": "definition",
+        "title": "Stable-id lexicographic lift perturbation for cocircular and power ties",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-certified-geometric-predicate-determinants"
+        ],
+        "justified_by": [
+          "thm-lexicographic-lift-tie-break-consistent"
+        ],
+        "dependency_level": 1,
+        "statement": "For a fixed finite universe of indexed sites, including any synthetic sites, perturb each lifted height by epsilon to the power two-to-the-rank of its stable id; use the same universe-wide ranks in every tuple and resolve an exact zero by the first nonzero coefficient.",
+        "source_path": "items/def-lexicographic-lift-tie-break.md"
+      },
+      {
+        "id": "lem-lifted-power-sphere-determinant-identity",
+        "kind": "lemma",
+        "title": "The lifted determinant records a power-sphere side",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-certified-geometric-predicate-determinants"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For affinely independent base sites in dimension two or three and arbitrary dyadic weights, the determinant with lifted column norm-squared minus weight equals minus the base orientation determinant times the query power-distance difference from their common power sphere.",
+        "source_path": "items/lem-lifted-power-sphere-determinant-identity.md"
+      },
+      {
+        "id": "lem-voronoi-vertex-empty-circle",
+        "kind": "lemma",
+        "title": "A Voronoi vertex has a common empty circle of nearest sites",
+        "deps": [
+          "def-indexed-geometric-site-set"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "If at least three distinct closed Voronoi cells meet at x, their sites are vertices of one empty circle centered at x and their convex hull is a polygon.",
+        "source_path": "items/lem-voronoi-vertex-empty-circle.md"
+      },
+      {
+        "id": "def-planar-delaunay-voronoi-structures",
+        "kind": "definition",
+        "title": "Planar triangulations, Delaunay structures, and Voronoi cells",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-lexicographic-lift-tie-break",
+          "lem-voronoi-vertex-empty-circle"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For a finite deduplicated planar site set, define affine dimension, its lower-dimensional chain output, a triangulation of the convex hull, closed nearest-site Voronoi cells, their dual graph, weak empty-circle Delaunay faces, the convex-hull boundary convention, and the lexicographic tie convention for nonunique cocircular triangulations.",
+        "source_path": "items/def-planar-delaunay-voronoi-structures.md"
+      },
+      {
+        "id": "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+        "kind": "definition",
+        "title": "Three-dimensional Delaunay and weighted regular triangulations by lifting",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "lem-lifted-power-sphere-determinant-identity",
+          "def-lexicographic-lift-tie-break"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Lift each weighted site p with weight w to (p, norm-squared of p minus w) in R4; define the regular subdivision as the projection of the lower convex hull, the weight-zero Delaunay case, hidden sites, affine-dimension output, and a stable-id lexicographic lift refinement.",
+        "source_path": "items/def-three-dimensional-delaunay-and-weighted-regular-lower-hull.md"
+      },
+      {
+        "id": "thm-lexicographic-lift-tie-break-consistent",
+        "kind": "theorem",
+        "title": "The finite lexicographic lift tie-break is coherent",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-certified-geometric-predicate-determinants",
+          "lem-lifted-power-sphere-determinant-identity",
+          "def-lexicographic-lift-tie-break"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For d=2 or 3 and a tuple of d+2 distinct sites with an affinely independent base, the fixed finite lexicographic lift resolves zero determinants coherently and preserves every nonzero constant sign.",
+        "source_path": "items/thm-lexicographic-lift-tie-break-consistent.md"
+      },
+      {
+        "id": "def-barycentric-point-location-interpolation-and-voronoi-query",
+        "kind": "definition",
+        "title": "Barycentric point location, affine interpolation, and nearest-site queries",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures"
+        ],
+        "justified_by": [
+          "thm-barycentric-interpolation-and-nearest-neighbor-query-correct"
+        ],
+        "dependency_level": 3,
+        "statement": "On a nondegenerate simplex, define the unique affine barycentric coordinates, the vertex-data affine interpolant, exact point-in-cell status, outside-hull status, and the stable-id nearest-site Voronoi query.",
+        "source_path": "items/def-barycentric-point-location-interpolation-and-voronoi-query.md"
+      },
+      {
+        "id": "lem-euler-count-for-planar-triangulation",
+        "kind": "lemma",
+        "title": "Euler counting for a finite planar triangulation",
+        "deps": [
+          "def-planar-delaunay-voronoi-structures"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For n distinct planar sites of affine dimension two, k boundary sites, E edges and T triangular faces in any finite triangulation, 3T=2E-k and n-E+T=1; thus T=2n-2-k and E=3n-3-k.",
+        "source_path": "items/lem-euler-count-for-planar-triangulation.md"
+      },
+      {
+        "id": "lem-large-delaunay-supertriangle-exists",
+        "kind": "lemma",
+        "title": "A dyadic supertriangle contains the sites and excludes every input circumcircle",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "lem-complete-ordered-field-is-archimedean"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "A dyadic supertriangle strictly contains any finite full-dimensional planar dyadic set and has vertices outside every input circumcircle; with general-position input, it can also make the augmented set general position.",
+        "source_path": "items/lem-large-delaunay-supertriangle-exists.md"
+      },
+      {
+        "id": "lem-lifted-flip-potential-decreases",
+        "kind": "lemma",
+        "title": "An illegal planar Delaunay flip strictly decreases lifted interpolation volume",
+        "deps": [
+          "def-planar-delaunay-voronoi-structures",
+          "lem-lifted-power-sphere-determinant-identity",
+          "def-lexicographic-lift-tie-break",
+          "thm-lexicographic-lift-tie-break-consistent"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For a convex quadrilateral with a nonlegal diagonal, the triangulation using that diagonal has strictly larger integral of its piecewise-affine lifted-height interpolant than the flipped triangulation, using the common lexicographic lift to make cocircular ties strict.",
+        "source_path": "items/lem-lifted-flip-potential-decreases.md"
+      },
+      {
+        "id": "lem-lower-lifted-facets-cover-the-convex-hull",
+        "kind": "lemma",
+        "title": "Generic lower lifted facets project to a triangulation of the convex hull",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-lexicographic-lift-tie-break",
+          "thm-lexicographic-lift-tie-break-consistent",
+          "lem-lifted-power-sphere-determinant-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For a finite full-dimensional planar or 3D projected site set, the coherent formal lower simplices cover the convex hull, intersect in common faces, and have weakly empty original power spheres.",
+        "source_path": "items/lem-lower-lifted-facets-cover-the-convex-hull.md"
+      },
+      {
+        "id": "lem-simplicial-four-polytope-facet-count",
+        "kind": "lemma",
+        "title": "A convex 4-polytope has at most m(m−3)/2 facets",
+        "deps": [
+          "lem-euler-count-for-planar-triangulation"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Every full-dimensional convex 4-polytope with m≥5 vertices has at most m(m−3)/2 facets.",
+        "source_path": "items/lem-simplicial-four-polytope-facet-count.md"
+      },
+      {
+        "id": "thm-barycentric-interpolation-and-nearest-neighbor-query-correct",
+        "kind": "theorem",
+        "title": "Barycentric interpolation and nearest-site queries are correct",
+        "deps": [
+          "def-barycentric-point-location-interpolation-and-voronoi-query",
+          "def-planar-delaunay-voronoi-structures",
+          "lem-linear-cardinal-interpolant-on-an-edge"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Barycentric coordinates decide exact simplex membership and give the unique affine interpolant on each Delaunay cell; along each edge this is the unique degree-one cardinal interpolant, and a nearest-site query returns a minimizer with the stated inside- or outside-hull status.",
+        "source_path": "items/thm-barycentric-interpolation-and-nearest-neighbor-query-correct.md"
+      },
+      {
+        "id": "thm-planar-triangle-and-edge-count",
+        "kind": "theorem",
+        "title": "A planar triangulation has linearly many triangles and edges",
+        "deps": [
+          "def-planar-delaunay-voronoi-structures",
+          "lem-euler-count-for-planar-triangulation"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For n distinct planar sites of affine dimension two, every triangulation of their convex hull has 2n minus 2 minus k triangles and 3n minus 3 minus k edges, where k counts the sites on the hull boundary.",
+        "source_path": "items/thm-planar-triangle-and-edge-count.md"
+      },
+      {
+        "id": "alg-incremental-planar-delaunay-edge-flips",
+        "kind": "algorithm",
+        "title": "Incremental planar Delaunay insertion with exact edge flips",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "def-lexicographic-lift-tie-break",
+          "alg-certified-dyadic-geometric-predicate",
+          "lem-large-delaunay-supertriangle-exists"
+        ],
+        "justified_by": [
+          "thm-incremental-planar-delaunay-correctness-and-termination"
+        ],
+        "dependency_level": 5,
+        "statement": "Collapse duplicate sites and return the single site or sorted chain in lower dimension; otherwise insert any prescribed permutation into an exact containing supertriangle, split the containing face or edge, recursively legalize opposite edges by exact incircle tests and a fixed-universe lexicographic tie-break, then remove synthetic vertices.",
+        "source_path": "items/alg-incremental-planar-delaunay-edge-flips.md"
+      },
+      {
+        "id": "alg-incremental-three-dimensional-regular-cavity-repair",
+        "kind": "algorithm",
+        "title": "Finite exact 3D Delaunay and regular lower-hull cavity repair",
+        "deps": [
+          "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+          "def-lexicographic-lift-tie-break",
+          "alg-certified-dyadic-geometric-predicate",
+          "alg-exact-dyadic-determinant-sign",
+          "thm-lexicographic-lift-tie-break-consistent"
+        ],
+        "justified_by": [
+          "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination"
+        ],
+        "dependency_level": 5,
+        "statement": "For dyadic weighted 3D sites, collapse exact coordinate-weight duplicates, report lower affine dimension directly, record degenerate projected four-site bases, enumerate exact lower tetrahedra at every prefix, repair the set of violated lower cells on insertion, and report hidden sites.",
+        "source_path": "items/alg-incremental-three-dimensional-regular-cavity-repair.md"
+      },
+      {
+        "id": "alg-randomized-history-dag-point-location",
+        "kind": "algorithm",
+        "title": "Randomized planar point location by a history DAG",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "alg-incremental-planar-delaunay-edge-flips",
+          "lem-large-delaunay-supertriangle-exists"
+        ],
+        "justified_by": [
+          "thm-randomized-history-dag-expected-location-cost"
+        ],
+        "dependency_level": 6,
+        "statement": "For a finite full-dimensional planar input, choose a supertriangle so the augmented set has no three collinear or four cocircular sites, then insert in a uniform random order and maintain a history DAG for point location.",
+        "source_path": "items/alg-randomized-history-dag-point-location.md"
+      },
+      {
+        "id": "thm-incremental-planar-delaunay-correctness-and-termination",
+        "kind": "theorem",
+        "title": "Exact planar insertion terminates with a weak empty-circle triangulation",
+        "deps": [
+          "alg-incremental-planar-delaunay-edge-flips",
+          "lem-large-delaunay-supertriangle-exists",
+          "def-planar-delaunay-voronoi-structures",
+          "lem-lifted-power-sphere-determinant-identity",
+          "thm-lexicographic-lift-tie-break-consistent",
+          "lem-lifted-flip-potential-decreases",
+          "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+          "lem-lower-lifted-facets-cover-the-convex-hull"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "For every nonempty finite indexed dyadic planar set, exact insertion and recursive local edge flips terminate; each full-dimensional prefix is the common formal lift lower triangulation, and dimensions zero or one return the defined site or chain.",
+        "source_path": "items/thm-incremental-planar-delaunay-correctness-and-termination.md"
+      },
+      {
+        "id": "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination",
+        "kind": "theorem",
+        "title": "Exact 3D lower-hull insertion covers the hull and terminates",
+        "deps": [
+          "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+          "alg-incremental-three-dimensional-regular-cavity-repair",
+          "lem-lifted-power-sphere-determinant-identity",
+          "thm-lexicographic-lift-tie-break-consistent",
+          "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+          "alg-exact-dyadic-determinant-sign",
+          "lem-lower-lifted-facets-cover-the-convex-hull"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "On the full-dimensional projected branch, finite exact lower-facet enumeration and cavity repair terminate, cover the convex hull by common-face tetrahedra with weakly empty power spheres, identify hidden sites, and report degenerate bases; lower-dimensional inputs return a named status.",
+        "source_path": "items/thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination.md"
+      },
+      {
+        "id": "thm-randomized-history-dag-expected-location-cost",
+        "kind": "theorem",
+        "title": "Uniform random insertion gives expected O(n log n) location work",
+        "deps": [
+          "alg-randomized-history-dag-point-location",
+          "thm-incremental-planar-delaunay-correctness-and-termination",
+          "thm-planar-triangle-and-edge-count",
+          "lem-lifted-power-sphere-determinant-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "For a full-dimensional planar input and augmented supertriangle in general position, a uniform random insertion order gives expected O(n log n) total history-DAG point-location work and expected O(n) triangle creation and DAG storage; a conservative worst case is O(n^3).",
+        "source_path": "items/thm-randomized-history-dag-expected-location-cost.md"
+      },
+      {
+        "id": "thm-three-dimensional-delaunay-output-size-quadratic",
+        "kind": "theorem",
+        "title": "Three-dimensional Delaunay and regular output size is quadratic",
+        "deps": [
+          "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+          "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination",
+          "lem-simplicial-four-polytope-facet-count",
+          "thm-lexicographic-lift-tie-break-consistent"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "For n at least 4 weighted sites of projected affine dimension three, the fixed formal lift returns at most n(n minus 3)/2 Delaunay or regular tetrahedra, hence O(n squared), with no mesh-quality guarantee.",
+        "source_path": "items/thm-three-dimensional-delaunay-output-size-quadratic.md"
+      }
+    ]
+  },
+  {
+    "order": 2585,
+    "id": "delaunay-triangulations-and-voronoi-computation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Delaunay triangulations and voronoi computation — Examples",
+    "companion": "delaunay-triangulations-and-voronoi-computation",
+    "requires": [
+      "delaunay-triangulations-and-voronoi-computation"
+    ],
+    "items": [
+      {
+        "id": "ex-cocircular-four-site-lexicographic-tie",
+        "kind": "example",
+        "title": "A cocircular four-site tie selects the stable-id diagonal",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "def-lexicographic-lift-tie-break",
+          "thm-lexicographic-lift-tie-break-consistent",
+          "thm-incremental-planar-delaunay-correctness-and-termination"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "For the unit square with ids A=1, B=2, C=3, D=4 and zero weights, the four unperturbed lifted points are coplanar, the lexicographic height perturbation selects diagonal BD, and both selected triangles satisfy the original weak empty-circle condition.",
+        "source_path": "items/ex-cocircular-four-site-lexicographic-tie.md"
+      },
+      {
+        "id": "ex-collinear-sites-lower-dimensional-output",
+        "kind": "example",
+        "title": "Collinear and duplicate sites return a canonical chain",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "thm-incremental-planar-delaunay-correctness-and-termination",
+          "thm-planar-triangle-and-edge-count"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "For the finite input (0,0),(1,0),(1,0),(2,0) with distinct ids, duplicate collapse keeps the least id at (1,0), affine dimension is one, and the lower-dimensional Delaunay output is the ordered two-edge chain.",
+        "source_path": "items/ex-collinear-sites-lower-dimensional-output.md"
+      },
+      {
+        "id": "ex-scattered-linear-interpolation-over-delaunay-cell",
+        "kind": "example",
+        "title": "A scattered affine interpolant on one Delaunay cell",
+        "deps": [
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "def-barycentric-point-location-interpolation-and-voronoi-query",
+          "thm-barycentric-interpolation-and-nearest-neighbor-query-correct",
+          "thm-incremental-planar-delaunay-correctness-and-termination"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "On the Delaunay triangle with vertices (0,0),(2,0),(0,2) and vertex data 0,2,2, the query (1/2,1/2) has barycentric weights 1/2,1/4,1/4 and affine interpolated value 1.",
+        "source_path": "items/ex-scattered-linear-interpolation-over-delaunay-cell.md"
+      }
+    ]
+  }
+]

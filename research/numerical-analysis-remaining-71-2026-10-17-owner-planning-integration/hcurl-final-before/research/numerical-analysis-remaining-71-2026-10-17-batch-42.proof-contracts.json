@@ -1,0 +1,2462 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": 42,
+  "level": 3,
+  "scope": [
+    "def-transient-maxwell-system-with-material-interfaces",
+    "lem-maxwell-rectangular-stokes-identity",
+    "def-maxwell-discrete-cochain-and-yee-grid",
+    "lem-maxwell-discrete-incidence-identities",
+    "lem-maxwell-yee-step-matrix-is-positive-definite",
+    "alg-maxwell-yee-leapfrog-update",
+    "thm-maxwell-yee-gauss-constraints-propagate",
+    "thm-maxwell-yee-strict-cfl-modified-energy",
+    "thm-maxwell-yee-cartesian-dispersion-and-cfl",
+    "lem-maxwell-periodic-yee-consistency",
+    "thm-maxwell-periodic-yee-smooth-solution-error",
+    "thm-maxwell-yee-midpoint-conductivity-energy-balance",
+    "def-maxwell-edge-fem-semidiscretization",
+    "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+    "thm-maxwell-edge-fem-energy-conservation",
+    "def-maxwell-edge-ritz-projection",
+    "lem-maxwell-edge-ritz-projection-well-defined",
+    "lem-maxwell-nedelec-smooth-interpolation-estimate",
+    "lem-maxwell-magnetic-compatible-initial-projection",
+    "thm-maxwell-edge-fem-smooth-solution-error",
+    "ex-maxwell-yee-periodic-plane-wave-dispersion",
+    "ex-maxwell-incompatible-current-gauss-drift",
+    "ex-maxwell-pec-rectangular-cavity-mode",
+    "ex-maxwell-dielectric-jump-reflection"
+  ],
+  "contracts": {
+    "def-transient-maxwell-system-with-material-interfaces": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "lem-maxwell-rectangular-stokes-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "With the stated orientation, the four boundary contributions are $\\int_{y_0}^{y_1}E_y(x_0,y,z_0)\\,dy$, $\\int_{z_0}^{z_1}E_z(x_0,y_1,z)\\,dz$, $-\\int_{y_0}^{y_1}E_y(x_0,y,z_1)\\,dy$, and $-\\int_{z_0}^{z_1}E_z(x_0,y_0,z)\\,dz$. Apply [F1] to the two differences to rewrite their sum as $-\\int_{y_0}^{y_1}\\int_{z_0}^{z_1}\\partial_zE_y\\,dz\\,dy+\\int_{z_0}^{z_1}\\int_{y_0}^{y_1}\\partial_yE_z\\,dy\\,dz$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The two integrands $\\partial_yE_z$ and $\\partial_zE_y$ are continuous on the compact rectangle, so each is Riemann integrable by [F2]. Riemann–Fubini [F3] identifies each double integral with either order of its iterated integral. Thus the $\\partial_yE_z$ term in step 1.1 can be written in the same $dy$-then-$dz$ order as the other term.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Combining the two terms from step 1.1 using the ordering justified in step 2.1 gives $\\int_{y_0}^{y_1}\\int_{z_0}^{z_1}(\\partial_yE_z-\\partial_zE_y)\\,dz\\,dy$, exactly the $x$-component of the curl flux. Cyclic relabeling gives the other coordinate faces; reversing the orientation changes the sign of every boundary and flux term.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "def-maxwell-discrete-cochain-and-yee-grid": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "lem-maxwell-discrete-incidence-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-maxwell-discrete-cochain-and-yee-grid",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a finite oriented three-dimensional cell complex with vertex, edge, face, and volume cochains. An edge cochain records oriented electric line integrals, a face cochain records oriented magnetic fluxes, and a vertex cochain records electric charge. Write $N_v,N_e,N_f,N_c$ for the retained vertex, edge, face, and cell counts. On a periodic cell, identify opposite cells with orientation preserved and let $G,C,D$ be the full vertex-to-edge gradient, edge-to-face curl, and face-to-cell divergence incidence matrices, each the transpose of its signed oriented boundary matrix. For a PEC closure, “interior” means not in the boundary subcomplex. Keep only interior electric edges as unknowns and only interior vertices as volume-charge locations, but keep all face fluxes, including boundary-normal magnetic fluxes, and all cells. This closure has no separate boundary surface-charge cochain. Define $G$ and $C$ by restricting the absolute vertex-edge and edge-face incidence matrices to those rows and columns. This mixed closure imposes zero tangential electric edge cochains on the boundary while allowing a fixed normal magnetic flux on boundary faces. In both cases, $G\\in\\mathbb R^{N_e\\times N_v}$, $C\\in\\mathbb R^{N_f\\times N_e}$, and $D\\in\\mathbb R^{N_c\\times N_f}$ satisfy $CG=0$ and $DC=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "On an oriented triangle with ordered vertices $[v_0,v_1,v_2]$, the coboundary of a vertex cochain $q$ evaluated on the triangle is its oriented edge sum $(q(v_1)-q(v_0))+(q(v_2)-q(v_1))+(q(v_0)-q(v_2))=0$. Hence each triangular face row of $CG$ vanishes. The same calculation is the transpose of $partial_1\\partial_2=0$ under the incidence convention in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "On an oriented tetrahedron, each edge in the boundary of its oriented boundary is obtained by deleting two different vertices. For each such pair of deleted indices, the two possible deletion orders have opposite signs, since $(-1)^i(-1)^{j-1}+(-1)^j(-1)^i=0$ for $i<j$. Thus every edge coefficient in the boundary-of-boundary is zero, so the cell row of $DC$ vanishes. This is the transpose of $\\partial_2\\partial_3=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Periodic identification identifies faces with the prescribed orientation, so the quotient cell structure retains oriented boundary-of-boundary cancellation. For PEC, let $\\bar G,\\bar C,\\bar D$ be the absolute incidence matrices and let $P_e$ select interior edges and $P_v$ select interior vertices. The matrices are $G=P_e\\bar G P_v$, $C=\\bar C P_e^T$, and $D=\\bar D$. An interior vertex is incident to no boundary edge, so $P_e^TP_e\\bar G P_v=\\bar G P_v$. Hence $CG=\\bar C\\bar G P_v=0$, while $DC=\\bar D\\bar C P_e^T=0$. This retains boundary-face magnetic cochains although boundary electric edge values are fixed.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no additional endpoint claim beyond its displayed domain and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "lem-maxwell-yee-step-matrix-is-positive-definite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-maxwell-discrete-cochain-and-yee-grid",
+          "source_section": "Definition",
+          "quote": "The electric, magnetic, and conductive material matrices are real symmetric matrices $M_e\\in\\mathbb R^{N_e\\times N_e}$, $M_b\\in\\mathbb R^{N_f\\times N_f}$, and $S\\in\\mathbb R^{N_e\\times N_e}$, respectively. The first two are positive definite and represent the discrete weighted inner products induced by $\\epsilon$ and $\\mu^{-1}$; $S$ is positive semidefinite and represents conductivity. Write $\\langle e_1,e_2\\rangle_{M_e}=e_1^TM_ee_2$, $\\langle b_1,b_2\\rangle_{M_b}=b_1^TM_bb_2$, and $\\|e\\|_{M_e}^2=\\langle e,e\\rangle_{M_e}$, $\\|b\\|_{M_b}^2=\\langle b,b\\rangle_{M_b}$. In a homogeneous isotropic periodic Cartesian grid with spacings $h_x,h_y,h_z$ and cell volume $V=h_xh_yh_z$, the diagonal entries for an $x$-edge and an $x$-normal face are $\\epsilon V/h_x^2=\\epsilon h_yh_z/h_x$ and $\\mu^{-1}h_x/(h_yh_z)$; the $y$ and $z$ entries are obtained by cyclic permutation. These values are dual-volume Hodge weights for line-integral and face-flux cochains. A compatible PEC closure uses the corresponding truncated dual volumes for free electric edges, while the magnetic mass includes boundary faces; the resulting matrices remain positive definite. The discrete constraints are $G^TM_ee^n=\\rho^n$ on interior vertices and $Db^{n-1/2}=0$ on all cells.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The matrix $M_e+(\\Delta t/2)S$ is symmetric because both summands are symmetric. For each nonzero $x$, its quadratic form is $x^TM_ex+(\\Delta t/2)x^TSx>0+0=0$, using $\\Delta t>0$ and the two definiteness hypotheses. Hence it is positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "A positive definite square matrix has trivial kernel: if $(M_e+(\\Delta t/2)S)x=0$, then its quadratic form at $x$ is zero and step 1.1 forces $x=0$. A linear map from a finite-dimensional space to itself with trivial kernel is bijective, so the solve exists uniquely for every right-hand side.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "alg-maxwell-yee-leapfrog-update": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "thm-maxwell-yee-gauss-constraints-propagate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-maxwell-yee-leapfrog-update",
+          "source_section": "Definition",
+          "quote": "Choose a finite complex and boundary closure as in [[def-maxwell-discrete-cochain-and-yee-grid]], step size $\\Delta t>0$, initial $e^0\\in\\mathbb R^{N_e}$ and $b^{-1/2}\\in\\mathbb R^{N_f}$, and source rows $j^{n+1/2}\\in\\mathbb R^{N_e}$. The output is a sequence $e^n$ at integer times and $b^{n+1/2}$ at half-integer times. For each $n\\ge0$, perform the ordered instructions",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-maxwell-discrete-incidence-identities",
+          "source_section": "Statement",
+          "quote": "For the incidence matrices $G,C,D$ of [[def-maxwell-discrete-cochain-and-yee-grid]], one has $CG=0$ and $DC=0$. The conclusion holds for the full periodic complex and for the PEC mixed closure defined there.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-maxwell-discrete-cochain-and-yee-grid",
+          "source_section": "Definition",
+          "quote": "For current cochains $j^{n+1/2}$ and charge rows $\\rho^n$, the discrete continuity condition means\n$$\\rho^{n+1}-\\rho^n+\\Delta t\\,G^T\\left(j^{n+1/2}+S\\frac{e^{n+1}+e^n}{2}\\right)=0.$$\nFor PEC this is the interior-vertex volume-charge relation; this closure has no separate boundary surface-charge/current cochain.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Apply $D$ to the magnetic row in [F1]. Then $Db^{n+1/2}=Db^{n-1/2}-\\Delta t\\,DCe^n=Db^{n-1/2}$ by [F2]. Starting from $Db^{-1/2}=0$, induction gives $Db^{n-1/2}=0$ at every half step.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply $G^T$ to the electric row in [F1]. Since $G^TC^T=(CG)^T=0$, this gives $G^TM_e e^{n+1}-G^TM_e e^n=-\\Delta t G^T(j^{n+1/2}+S(e^{n+1}+e^n)/2)$. By [F3], the right side equals $\\rho^{n+1}-\\rho^n$. Thus the residual $G^TM_e e^n-\\rho^n$ is constant in $n$ and is initially zero, so it remains zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "thm-maxwell-yee-strict-cfl-modified-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-maxwell-discrete-cochain-and-yee-grid",
+          "source_section": "Definition",
+          "quote": "The electric, magnetic, and conductive material matrices are real symmetric matrices $M_e\\in\\mathbb R^{N_e\\times N_e}$, $M_b\\in\\mathbb R^{N_f\\times N_f}$, and $S\\in\\mathbb R^{N_e\\times N_e}$, respectively. The first two are positive definite and represent the discrete weighted inner products induced by $\\epsilon$ and $\\mu^{-1}$; $S$ is positive semidefinite and represents conductivity. Write $\\langle e_1,e_2\\rangle_{M_e}=e_1^TM_ee_2$, $\\langle b_1,b_2\\rangle_{M_b}=b_1^TM_bb_2$, and $\\|e\\|_{M_e}^2=\\langle e,e\\rangle_{M_e}$, $\\|b\\|_{M_b}^2=\\langle b,b\\rangle_{M_b}$. In a homogeneous isotropic periodic Cartesian grid with spacings $h_x,h_y,h_z$ and cell volume $V=h_xh_yh_z$, the diagonal entries for an $x$-edge and an $x$-normal face are $\\epsilon V/h_x^2=\\epsilon h_yh_z/h_x$ and $\\mu^{-1}h_x/(h_yh_z)$; the $y$ and $z$ entries are obtained by cyclic permutation. These values are dual-volume Hodge weights for line-integral and face-flux cochains. A compatible PEC closure uses the corresponding truncated dual volumes for free electric edges, while the magnetic mass includes boundary faces; the resulting matrices remain positive definite. The discrete constraints are $G^TM_ee^n=\\rho^n$ on interior vertices and $Db^{n-1/2}=0$ on all cells.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-maxwell-yee-leapfrog-update",
+          "source_section": "Definition",
+          "quote": "Choose a finite complex and boundary closure as in [[def-maxwell-discrete-cochain-and-yee-grid]], step size $\\Delta t>0$, initial $e^0\\in\\mathbb R^{N_e}$ and $b^{-1/2}\\in\\mathbb R^{N_f}$, and source rows $j^{n+1/2}\\in\\mathbb R^{N_e}$. The output is a sequence $e^n$ at integer times and $b^{n+1/2}$ at half-integer times. For each $n\\ge0$, perform the ordered instructions",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The quotient defining $\\lambda_{\\max}$ is continuous on the compact set $\\{e:e^TM_ee=1\\}$, so the maximum exists and is finite. Also $e^TKe=(Ce)^TM_b(Ce)\\ge0$, hence $\\lambda_{\\max}\\ge0$. From the first row of [F2], $b^{n-1/2}=b_c^n+\\Delta t Ce^n/2$ and $b^{n+1/2}=b_c^n-\\Delta t Ce^n/2$. Expanding their $M_b$ inner product gives $\\mathcal E^n=\\frac12\\|e^n\\|_{M_e}^2+\\frac12\\|b_c^n\\|_{M_b}^2-\\frac{\\Delta t^2}{8}\\|Ce^n\\|_{M_b}^2.$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Using [F2], the electric-energy increment is $\\frac12\\|e^{n+1}\\|_{M_e}^2-\\frac12\\|e^n\\|_{M_e}^2=\\left(\\frac{e^{n+1}+e^n}{2}\\right)^TM_e(e^{n+1}-e^n)=\\Delta t\\left(\\frac{e^{n+1}+e^n}{2}\\right)^TC^TM_bb^{n+1/2}.$ The magnetic cross-energy increment is $\\frac12(b^{n+1/2})^TM_b(b^{n+3/2}-b^{n-1/2})=-\\Delta t\\left(\\frac{e^{n+1}+e^n}{2}\\right)^TC^TM_bb^{n+1/2},$ by applying the Faraday row at times $n$ and $n+1$. The two increments cancel, proving conservation.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By the definition of $\\lambda_{\\max}$, $\\|Ce^n\\|_{M_b}^2=(e^n)^TKe^n\\le\\lambda_{\\max}\\|e^n\\|_{M_e}^2$. Substitution into step 1.1 gives the stated lower bound. When $\\Delta t^2\\lambda_{\\max}<4$, its electric coefficient is positive. If an admissible staggered state has zero energy, the bound forces $e^n=0$ and $b_c^n=0$; the Faraday row in [F2] then gives $b^{n+1/2}=b^{n-1/2}$, so $b_c^n=b^{n-1/2}=b^{n+1/2}=0$. Thus the energy is positive definite on update states.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Subtract the electric row in [F2] at indices $n$ and $n-1$, then use the magnetic row to replace $b^{n+1/2}-b^{n-1/2}$; this gives $M_e(e^{n+1}-2e^n+e^{n-1})+\\Delta t^2Ke^n=0$. If $\\Delta t^2\\lambda_{\\max}=4$, a maximizing vector $v$ satisfies $Kv=\\lambda_{\\max}M_ev$ by the constrained Rayleigh-quotient maximum. Thus $e^n=q_nv$ obeys $q_{n+1}-2q_n+q_{n-1}+\\Delta t^2\\lambda_{\\max}q_n=0$, whose characteristic polynomial is $(r+1)^2$. Hence $q_n=(-1)^n(a+bn)$ is a solution and grows linearly when $b\\ne0$. It is compatible with the full first-order rows by setting $b^{n+1/2}=(q_{n+1}-q_n)Cv/(\\Delta t\\lambda_{\\max})$: the Ampere row follows from $Kv=\\lambda_{\\max}M_ev$, and the Faraday row follows from the scalar recurrence. For $\\Delta t^2\\lambda_{\\max}>4$, the same recurrence has real reciprocal roots, one with modulus greater than one. This proves the endpoint caveat and instability above it.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "thm-maxwell-yee-cartesian-dispersion-and-cfl": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-maxwell-discrete-cochain-and-yee-grid",
+          "source_section": "Definition",
+          "quote": "The electric, magnetic, and conductive material matrices are real symmetric matrices $M_e\\in\\mathbb R^{N_e\\times N_e}$, $M_b\\in\\mathbb R^{N_f\\times N_f}$, and $S\\in\\mathbb R^{N_e\\times N_e}$, respectively. The first two are positive definite and represent the discrete weighted inner products induced by $\\epsilon$ and $\\mu^{-1}$; $S$ is positive semidefinite and represents conductivity. Write $\\langle e_1,e_2\\rangle_{M_e}=e_1^TM_ee_2$, $\\langle b_1,b_2\\rangle_{M_b}=b_1^TM_bb_2$, and $\\|e\\|_{M_e}^2=\\langle e,e\\rangle_{M_e}$, $\\|b\\|_{M_b}^2=\\langle b,b\\rangle_{M_b}$. In a homogeneous isotropic periodic Cartesian grid with spacings $h_x,h_y,h_z$ and cell volume $V=h_xh_yh_z$, the diagonal entries for an $x$-edge and an $x$-normal face are $\\epsilon V/h_x^2=\\epsilon h_yh_z/h_x$ and $\\mu^{-1}h_x/(h_yh_z)$; the $y$ and $z$ entries are obtained by cyclic permutation. These values are dual-volume Hodge weights for line-integral and face-flux cochains. A compatible PEC closure uses the corresponding truncated dual volumes for free electric edges, while the magnetic mass includes boundary faces; the resulting matrices remain positive definite. The discrete constraints are $G^TM_ee^n=\\rho^n$ on interior vertices and $Db^{n-1/2}=0$ on all cells.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-maxwell-yee-strict-cfl-modified-energy",
+          "source_section": "Statement",
+          "quote": "Set $K=C^TM_bC$ and\n$$\\lambda_{\\max}:=\\max_{e\\ne0}\\frac{e^TKe}{e^TM_ee}.$$\nFor a lossless, source-free update from [[alg-maxwell-yee-leapfrog-update]], define\n$$\\mathcal E^n:=\\frac12(e^n)^TM_ee^n+\\frac12(b^{n-1/2})^TM_bb^{n+1/2},\\qquad b_c^n:=\\frac{b^{n-1/2}+b^{n+1/2}}2.$$\nThen $\\mathcal E^n$ is independent of $n$, and\n$$\\mathcal E^n\\ge\\frac12\\left(1-\\frac{\\Delta t^2\\lambda_{\\max}}4\\right)\\|e^n\\|_{M_e}^2+\\frac12\\|b_c^n\\|_{M_b}^2.$$\nConsequently, the actual strict spectral condition $\\Delta t^2\\lambda_{\\max}<4$ makes this modified energy positive on admissible staggered states and controls the electric field and the centered magnetic field. When $\\lambda_{\\max}>0$, at equality the energy loses coercivity and a maximal mode has a repeated root $-1$; above equality a mode grows exponentially. If $\\lambda_{\\max}=0$, the strict condition is automatic for every $\\Delta t>0$ and neither endpoint case occurs.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-maxwell-yee-leapfrog-update",
+          "source_section": "Definition",
+          "quote": "Choose a finite complex and boundary closure as in [[def-maxwell-discrete-cochain-and-yee-grid]], step size $\\Delta t>0$, initial $e^0\\in\\mathbb R^{N_e}$ and $b^{-1/2}\\in\\mathbb R^{N_f}$, and source rows $j^{n+1/2}\\in\\mathbb R^{N_e}$. The output is a sequence $e^n$ at integer times and $b^{n+1/2}$ at half-integer times. For each $n\\ge0$, perform the ordered instructions",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "On a periodic Fourier mode, a forward edge difference in direction $j$ has multiplier $e^{i\\theta_j}-1=2i e^{i\\theta_j/2}\\sin(\\theta_j/2)$. The half-cell phase in the edge and face cochain locations is removed by a unitary diagonal change of Fourier basis, so the scaled directional symbol is $i d_j$ with $d_j=2\\sin(\\theta_j/2)/h_j$. The Cartesian curl symbol is therefore $i\\boldsymbol d\\times$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The cross-product matrix $\\boldsymbol d\\times$ is real skew-symmetric. The identity $-(\\boldsymbol d\\times)^2=|\\boldsymbol d|^2I-\\boldsymbol d\\boldsymbol d^T$ follows by expanding the vector triple product. Thus the curl-curl symbol is zero on the longitudinal vector $\\boldsymbol d$ and equals $|\\boldsymbol d|^2$ on its two-dimensional orthogonal complement. The Hodge weights in [F1] scale this eigenvalue by $c^2$, giving the stated $\\lambda(\\theta)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "For a transverse mode $e^n=q^n v$ with this eigenvalue, subtracting the electric row in [F3] at consecutive time indices and using its magnetic row gives $q^{n+1}-2q^n+q^{n-1}+\\Delta t^2\\lambda(\\theta)q^n=0$. Substitution of $q^n=e^{-i\\omega n\\Delta t}$ yields $4\\sin^2(\\omega\\Delta t/2)=\\Delta t^2\\lambda(\\theta)$, which is the displayed dispersion relation.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Since $0\\le\\sin^2(\\theta_j/2)\\le1$, $\\lambda(\\theta)\\le4c^2(h_x^{-2}+h_y^{-2}+h_z^{-2})$. When every $N_j$ is even, the allowed tuple $\\theta=(\\pi,\\pi,\\pi)$ attains equality; otherwise the exact maximum is the maximum over the finite allowed tuples. Applying [F2] gives the rectangular strict bound and its cubic specialization, while preserving the finite-grid endpoint distinction.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "lem-maxwell-periodic-yee-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-maxwell-discrete-cochain-and-yee-grid",
+          "source_section": "Definition",
+          "quote": "The electric, magnetic, and conductive material matrices are real symmetric matrices $M_e\\in\\mathbb R^{N_e\\times N_e}$, $M_b\\in\\mathbb R^{N_f\\times N_f}$, and $S\\in\\mathbb R^{N_e\\times N_e}$, respectively. The first two are positive definite and represent the discrete weighted inner products induced by $\\epsilon$ and $\\mu^{-1}$; $S$ is positive semidefinite and represents conductivity. Write $\\langle e_1,e_2\\rangle_{M_e}=e_1^TM_ee_2$, $\\langle b_1,b_2\\rangle_{M_b}=b_1^TM_bb_2$, and $\\|e\\|_{M_e}^2=\\langle e,e\\rangle_{M_e}$, $\\|b\\|_{M_b}^2=\\langle b,b\\rangle_{M_b}$. In a homogeneous isotropic periodic Cartesian grid with spacings $h_x,h_y,h_z$ and cell volume $V=h_xh_yh_z$, the diagonal entries for an $x$-edge and an $x$-normal face are $\\epsilon V/h_x^2=\\epsilon h_yh_z/h_x$ and $\\mu^{-1}h_x/(h_yh_z)$; the $y$ and $z$ entries are obtained by cyclic permutation. These values are dual-volume Hodge weights for line-integral and face-flux cochains. A compatible PEC closure uses the corresponding truncated dual volumes for free electric edges, while the magnetic mass includes boundary faces; the resulting matrices remain positive definite. The discrete constraints are $G^TM_ee^n=\\rho^n$ on interior vertices and $Db^{n-1/2}=0$ on all cells.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-maxwell-yee-leapfrog-update",
+          "source_section": "Definition",
+          "quote": "Choose a finite complex and boundary closure as in [[def-maxwell-discrete-cochain-and-yee-grid]], step size $\\Delta t>0$, initial $e^0\\in\\mathbb R^{N_e}$ and $b^{-1/2}\\in\\mathbb R^{N_f}$, and source rows $j^{n+1/2}\\in\\mathbb R^{N_e}$. The output is a sequence $e^n$ at integer times and $b^{n+1/2}$ at half-integer times. For each $n\\ge0$, perform the ordered instructions",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-transient-maxwell-system-with-material-interfaces",
+          "source_section": "Definition",
+          "quote": "In each material region the constitutive fields satisfy\n$$\\partial_t(\\epsilon E)=\\operatorname{curl}(\\mu^{-1}B)-J_{\\rm src}-\\sigma E,\\qquad \\partial_t B+\\operatorname{curl}E=0.$$\nHere $J_{\\rm src}$ is the impressed free-current density, while $\\sigma E$ is the conductive current. Electric charge $\\rho$ is constrained by $\\operatorname{div}(\\epsilon E)=\\rho$ and the total-current continuity equation $\\partial_t\\rho+\\operatorname{div}(J_{\\rm src}+\\sigma E)=0$; the magnetic constraint is $\\operatorname{div}B=0$. These equalities are distributional. In the lossless branch set $\\sigma=0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-maxwell-rectangular-stokes-identity",
+          "source_section": "Statement",
+          "quote": "Let $F=\\{(x_0,y,z):y_0\\le y\\le y_1,\\ z_0\\le z\\le z_1\\}$ be an oriented rectangle with normal $e_x$, and let $E$ be a $C^1$ vector field near $F$. Orient $\\partial F$ by the outward-normal-first convention. Then\n$$\\int_{\\partial F}E\\cdot t\\,ds=\\int_F(\\operatorname{curl}E)\\cdot e_x\\,dS=\\int_{y_0}^{y_1}\\int_{z_0}^{z_1}(\\partial_yE_z-\\partial_zE_y)(x_0,y,z)\\,dz\\,dy.$$\nThe identities for normals $e_y$ and $e_z$ follow by cyclic permutation of coordinates. Reversing a face orientation reverses both integrals.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Let $u_x=e_x/h_x$ denote the line average of the $x$ component on an $x$-edge; define $u_y,u_z$ cyclically. For values on the corresponding staggered locations, define $\\delta_i\\delta_j f(r)$ by the four-corner formula $[f(r+\\frac{h_i}{2}e_i+\\frac{h_j}{2}e_j)-f(r+\\frac{h_i}{2}e_i-\\frac{h_j}{2}e_j)-f(r-\\frac{h_i}{2}e_i+\\frac{h_j}{2}e_j)+f(r-\\frac{h_i}{2}e_i-\\frac{h_j}{2}e_j)]/(h_ih_j)$. Expanding the four signed face incidences around an $x$-edge and inserting [F1] gives the normalized electric operator $h_x^{-1}(M_e^{-1}C^TM_bCe)_x=c^2\\bigl(-\\delta_y^2u_x-\\delta_z^2u_x+\\delta_x\\delta_yu_y+\\delta_x\\delta_zu_z\\bigr),\\qquad c^2=(\\epsilon\\mu)^{-1},$ where $\\delta_j^2f=(f(x+h_je_j)-2f(x)+f(x-h_je_j))/h_j^2$ and $\\delta_i\\delta_j$ is the corresponding centered staggered mixed difference. The $y$ and $z$ components follow by the same cyclic incidence expansion.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "For every face, the exact circulation cochain $Ce_*^n$ equals the face flux of $\\operatorname{curl}E(t_n)$ by [F4]. Taylor’s formula in time around $t_n$ gives $\\int_{t_n-\\Delta t/2}^{t_n+\\Delta t/2}\\!\\!\\!\\int_F\\operatorname{curl}E(t)\\cdot n\\,dS\\,dt=\\Delta t\\int_F\\operatorname{curl}E(t_n)\\cdot n\\,dS+O(|F|\\Delta t^3\\|\\partial_t^2\\operatorname{curl}E\\|_\\infty).$ Faraday’s equation in [F3] identifies the left side with $-\\int_F(B(t_n+\\Delta t/2)-B(t_n-\\Delta t/2))\\cdot n\\,dS$. Thus each face entry of $s_h^n$ is bounded by $C|F|\\Delta t^3$ times the derivative bound. The face weights in [F1] turn the sum of their squared entries into at most $C_T\\Delta t^6$ times the fixed box volume, so $\\|s_h^n\\|_{M_b}\\le C_T\\Delta t^3\\le C_T'\\Delta t^2$ on the stated time range.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Taylor’s formula with integral remainder gives $\\delta_j^2f=\\partial_j^2f+O(h_j^2\\|\\partial_j^4f\\|_\\infty)$ and $\\delta_i\\delta_jf=\\partial_i\\partial_jf+O((h_i^2+h_j^2)\\|D^4f\\|_\\infty)$. Averaging along the edge changes the midpoint value of each needed derivative by at most $O(h^2)$ by the same symmetric Taylor estimate. Therefore the stencil in step 1.1 differs from $\\operatorname{curl}\\operatorname{curl}E$ by at most $C h^2$ pointwise. The centered time second difference of the exact edge integrals differs from the edge integral of $E_{tt}$ by at most $C\\Delta t^2$ times the stated fourth time-derivative bound. The continuous equation [F3] cancels the leading terms. For an $x$-edge, the resulting electric covector entry is bounded by $C\\epsilon h_yh_z(h^2+\\Delta t^2)$, with cyclic area factors for the other orientations. Summing squared entries with the reciprocal edge masses in [F1] contributes a factor proportional to $h_xh_yh_z$ per edge, so $\\|r_h^n\\|_{M_e^{-1}}\\le C_T(h^2+\\Delta t^2)$, since the dual cell volumes sum to the fixed box volume.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The electric bound from step 2.1 and the separate face bound from step 1.2 give the two asserted residual estimates.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "thm-maxwell-periodic-yee-smooth-solution-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-maxwell-yee-leapfrog-update",
+          "source_section": "Definition",
+          "quote": "Choose a finite complex and boundary closure as in [[def-maxwell-discrete-cochain-and-yee-grid]], step size $\\Delta t>0$, initial $e^0\\in\\mathbb R^{N_e}$ and $b^{-1/2}\\in\\mathbb R^{N_f}$, and source rows $j^{n+1/2}\\in\\mathbb R^{N_e}$. The output is a sequence $e^n$ at integer times and $b^{n+1/2}$ at half-integer times. For each $n\\ge0$, perform the ordered instructions",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-maxwell-yee-strict-cfl-modified-energy",
+          "source_section": "Statement",
+          "quote": "Set $K=C^TM_bC$ and\n$$\\lambda_{\\max}:=\\max_{e\\ne0}\\frac{e^TKe}{e^TM_ee}.$$\nFor a lossless, source-free update from [[alg-maxwell-yee-leapfrog-update]], define\n$$\\mathcal E^n:=\\frac12(e^n)^TM_ee^n+\\frac12(b^{n-1/2})^TM_bb^{n+1/2},\\qquad b_c^n:=\\frac{b^{n-1/2}+b^{n+1/2}}2.$$\nThen $\\mathcal E^n$ is independent of $n$, and\n$$\\mathcal E^n\\ge\\frac12\\left(1-\\frac{\\Delta t^2\\lambda_{\\max}}4\\right)\\|e^n\\|_{M_e}^2+\\frac12\\|b_c^n\\|_{M_b}^2.$$\nConsequently, the actual strict spectral condition $\\Delta t^2\\lambda_{\\max}<4$ makes this modified energy positive on admissible staggered states and controls the electric field and the centered magnetic field. When $\\lambda_{\\max}>0$, at equality the energy loses coercivity and a maximal mode has a repeated root $-1$; above equality a mode grows exponentially. If $\\lambda_{\\max}=0$, the strict condition is automatic for every $\\Delta t>0$ and neither endpoint case occurs.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-maxwell-periodic-yee-consistency",
+          "source_section": "Statement",
+          "quote": "Let a periodic rectangular cell be discretized by a uniform Cartesian Yee grid with spacings $h_x,h_y,h_z$, $h=\\max_jh_j$, and constant scalar coefficients $\\epsilon,\\mu>0$. Let $(E,B)$ be a source-free smooth periodic Maxwell solution on $[0,T]$, with the spatial derivatives of $E$ through total order four, $\\partial_t^4E$, and $\\partial_t^3B$ bounded. Sample $E(t_n)$ by exact oriented edge line integrals $e_*^n$ and $B(t_{n+1/2})$ by exact oriented face fluxes $b_*^{n+1/2}$. Define\n$$r_h^n=M_e\\frac{e_*^{n+1}-2e_*^n+e_*^{n-1}}{\\Delta t^2}+C^TM_bCe_*^n,\\qquad s_h^n=b_*^{n+1/2}-b_*^{n-1/2}+\\Delta t\\,Ce_*^n.$$\nWith the homogeneous diagonal Hodge weights of [[def-maxwell-discrete-cochain-and-yee-grid]], there is a constant $C_T$ independent of the cell counts such that, whenever $\\Delta t\\le t_n\\le T-\\Delta t$,\n$$\\|r_h^n\\|_{M_e^{-1}}\\le C_T(h^2+\\Delta t^2),\\qquad \\|s_h^n\\|_{M_b}\\le C_T\\Delta t^3.$$\nHere $\\|r\\|_{M_e^{-1}}^2=r^TM_e^{-1}r$. This is a smooth homogeneous periodic consistency result; it asserts no Taylor estimate across coefficient jumps or a PEC boundary closure.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-maxwell-discrete-cochain-and-yee-grid",
+          "source_section": "Definition",
+          "quote": "The electric, magnetic, and conductive material matrices are real symmetric matrices $M_e\\in\\mathbb R^{N_e\\times N_e}$, $M_b\\in\\mathbb R^{N_f\\times N_f}$, and $S\\in\\mathbb R^{N_e\\times N_e}$, respectively. The first two are positive definite and represent the discrete weighted inner products induced by $\\epsilon$ and $\\mu^{-1}$; $S$ is positive semidefinite and represents conductivity. Write $\\langle e_1,e_2\\rangle_{M_e}=e_1^TM_ee_2$, $\\langle b_1,b_2\\rangle_{M_b}=b_1^TM_bb_2$, and $\\|e\\|_{M_e}^2=\\langle e,e\\rangle_{M_e}$, $\\|b\\|_{M_b}^2=\\langle b,b\\rangle_{M_b}$. In a homogeneous isotropic periodic Cartesian grid with spacings $h_x,h_y,h_z$ and cell volume $V=h_xh_yh_z$, the diagonal entries for an $x$-edge and an $x$-normal face are $\\epsilon V/h_x^2=\\epsilon h_yh_z/h_x$ and $\\mu^{-1}h_x/(h_yh_z)$; the $y$ and $z$ entries are obtained by cyclic permutation. These values are dual-volume Hodge weights for line-integral and face-flux cochains. A compatible PEC closure uses the corresponding truncated dual volumes for free electric edges, while the magnetic mass includes boundary faces; the resulting matrices remain positive definite. The discrete constraints are $G^TM_ee^n=\\rho^n$ on interior vertices and $Db^{n-1/2}=0$ on all cells.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Subtract the exact-sample equations with residuals from the numerical rows. With $K=C^TM_bC$, this gives $M_e\\delta_{tt}w^n+Kw^n=-r_h^n,\\qquad z^{n+1/2}-z^{n-1/2}=-\\Delta t\\,Cw^n-s_h^n.$ The sign convention for $s_h^n$ is the one in the consistency statement.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Put $V^n=(w^{n+1}-w^n)/\\Delta t$, $\\bar w^n=(w^{n+1}+w^n)/2$, and $\\mathscr E^{n+1/2}=\\tfrac12\\|V^n\\|_{M_e}^2+\\tfrac12\\langle Cw^{n+1},Cw^n\\rangle_{M_b}.$ Expanding about $C\\bar w^n$ gives $\\mathscr E^{n+1/2}=\\frac12\\|V^n\\|_{M_e}^2+\\frac12\\|C\\bar w^n\\|_{M_b}^2-\\frac{\\Delta t^2}{8}\\|CV^n\\|_{M_b}^2$. The generalized Rayleigh bound in [F2] yields $\\mathscr E^{n+1/2}\\ge\\tfrac{\\gamma_0}{2}\\|V^n\\|_{M_e}^2+\\tfrac12\\|C\\bar w^n\\|_{M_b}^2.$ The initial assumptions therefore give $\\mathscr E^{1/2}\\ge0$ and $\\sqrt{\\mathscr E^{1/2}}\\le C(h^2+\\Delta t^2)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The kinetic-energy increment is $\\Delta t\\langle(V^n+V^{n-1})/2,M_e\\delta_{tt}w^n\\rangle_{M_e}$, and the curl-potential increment is $\\Delta t\\langle(V^n+V^{n-1})/2,Kw^n\\rangle$. Substituting step 1.1 gives $\\mathscr E^{n+1/2}-\\mathscr E^{n-1/2}=-\\Delta t\\left\\langle\\frac{V^n+V^{n-1}}2,r_h^n\\right\\rangle.$ By [F4] and Cauchy–Schwarz, the absolute value is at most $\\Delta t\\|r_h^n\\|_{M_e^{-1}}(\\|V^n\\|_{M_e}+\\|V^{n-1}\\|_{M_e})/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Coercivity in step 1.2 bounds both velocities by the square roots of their adjacent energies times $\\sqrt{2/\\gamma_0}$. Factoring the difference of squares and summing (with the zero-energy case obtained by continuity, or by first replacing each square root by $\\sqrt{\\mathscr E+\\delta}$ and letting $\\delta\\downarrow0$) gives $\\max_n(\\|V^n\\|_{M_e}+\\|C\\bar w^n\\|_{M_b})\\le C\\left(\\sqrt{\\mathscr E^{1/2}}+\\sum_n\\Delta t\\|r_h^n\\|_{M_e^{-1}}\\right)\\le C_T(h^2+\\Delta t^2).$ The sum has at most $T/\\Delta t$ terms, so [F3] gives the final inequality.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Since $w^n=w^0+\\Delta t\\sum_{m<n}V^m$, the initial bound and step 3.1 imply $\\max_n\\|w^n\\|_{M_e}\\le C_T(h^2+\\Delta t^2)$. Also $Cw^n=C\\bar w^{n-1}-\\Delta t CV^{n-1}/2$ and $\\Delta t\\|CV^{n-1}\\|_{M_b}\\le\\Delta t\\sqrt{\\lambda_{\\max}}\\|V^{n-1}\\|_{M_e}\\le2\\|V^{n-1}\\|_{M_e}$ by the strict CFL condition. Thus the same order holds for $\\|Cw^n\\|_{M_b}$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Summing the second equation in step 1.1 from the controlled start $z^{1/2}$ gives $\\|z^{n+1/2}\\|_{M_b}\\le\\|z^{1/2}\\|_{M_b}+\\Delta t\\sum_{m=1}^{n}\\|Cw^m\\|_{M_b}+\\sum_{m=1}^{n}\\|s_h^m\\|_{M_b}.$ The curl sum is bounded by $T\\max_m\\|Cw^m\\|_{M_b}$, and the residual sum is at most $(T/\\Delta t)C_T\\Delta t^3=C_TT\\Delta t^2$ by [F3]. The initial bound and step 4.1 therefore bound both terms by $C_T(h^2+\\Delta t^2)$. Combining the electric, curl and magnetic bounds proves the claim.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "given",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 5.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "thm-maxwell-yee-midpoint-conductivity-energy-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-maxwell-yee-leapfrog-update",
+          "source_section": "Definition",
+          "quote": "For $S=0$ this is the lossless Yee leapfrog scheme. For $S\\succeq0$, the midpoint term is the specified trapezoidal treatment of conductivity. The row is well defined for every input because its matrix is invertible by [[lem-maxwell-yee-step-matrix-is-positive-definite]]. This procedure makes no stability claim; the lossless stability condition is proved separately.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-maxwell-discrete-cochain-and-yee-grid",
+          "source_section": "Definition",
+          "quote": "The electric, magnetic, and conductive material matrices are real symmetric matrices $M_e\\in\\mathbb R^{N_e\\times N_e}$, $M_b\\in\\mathbb R^{N_f\\times N_f}$, and $S\\in\\mathbb R^{N_e\\times N_e}$, respectively. The first two are positive definite and represent the discrete weighted inner products induced by $\\epsilon$ and $\\mu^{-1}$; $S$ is positive semidefinite and represents conductivity. Write $\\langle e_1,e_2\\rangle_{M_e}=e_1^TM_ee_2$, $\\langle b_1,b_2\\rangle_{M_b}=b_1^TM_bb_2$, and $\\|e\\|_{M_e}^2=\\langle e,e\\rangle_{M_e}$, $\\|b\\|_{M_b}^2=\\langle b,b\\rangle_{M_b}$. In a homogeneous isotropic periodic Cartesian grid with spacings $h_x,h_y,h_z$ and cell volume $V=h_xh_yh_z$, the diagonal entries for an $x$-edge and an $x$-normal face are $\\epsilon V/h_x^2=\\epsilon h_yh_z/h_x$ and $\\mu^{-1}h_x/(h_yh_z)$; the $y$ and $z$ entries are obtained by cyclic permutation. These values are dual-volume Hodge weights for line-integral and face-flux cochains. A compatible PEC closure uses the corresponding truncated dual volumes for free electric edges, while the magnetic mass includes boundary faces; the resulting matrices remain positive definite. The discrete constraints are $G^TM_ee^n=\\rho^n$ on interior vertices and $Db^{n-1/2}=0$ on all cells.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-maxwell-yee-strict-cfl-modified-energy",
+          "source_section": "Statement",
+          "quote": "Set $K=C^TM_bC$ and\n$$\\lambda_{\\max}:=\\max_{e\\ne0}\\frac{e^TKe}{e^TM_ee}.$$\nFor a lossless, source-free update from [[alg-maxwell-yee-leapfrog-update]], define\n$$\\mathcal E^n:=\\frac12(e^n)^TM_ee^n+\\frac12(b^{n-1/2})^TM_bb^{n+1/2},\\qquad b_c^n:=\\frac{b^{n-1/2}+b^{n+1/2}}2.$$\nThen $\\mathcal E^n$ is independent of $n$, and\n$$\\mathcal E^n\\ge\\frac12\\left(1-\\frac{\\Delta t^2\\lambda_{\\max}}4\\right)\\|e^n\\|_{M_e}^2+\\frac12\\|b_c^n\\|_{M_b}^2.$$\nConsequently, the actual strict spectral condition $\\Delta t^2\\lambda_{\\max}<4$ makes this modified energy positive on admissible staggered states and controls the electric field and the centered magnetic field. When $\\lambda_{\\max}>0$, at equality the energy loses coercivity and a maximal mode has a repeated root $-1$; above equality a mode grows exponentially. If $\\lambda_{\\max}=0$, the strict condition is automatic for every $\\Delta t>0$ and neither endpoint case occurs.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Put $\\bar e^n=(e^{n+1}+e^n)/2$. The electric quadratic-energy increment is $\\frac12\\|e^{n+1}\\|_{M_e}^2-\\frac12\\|e^n\\|_{M_e}^2=(\\bar e^n)^TM_e(e^{n+1}-e^n)$. By [F1], this is $\\Delta t(\\bar e^n)^TC^TM_bb^{n+1/2}-\\Delta t(\\bar e^n)^Tj^{n+1/2}-\\Delta t(\\bar e^n)^TS\\bar e^n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The magnetic cross-energy increment is $\\frac12(b^{n+1/2})^TM_b(b^{n+3/2}-b^{n-1/2})$. Applying the magnetic row in [F1] at $n$ and $n+1$ gives $b^{n+3/2}-b^{n-1/2}=-\\Delta t C(e^{n+1}+e^n)=-2\\Delta t C\\bar e^n$. Therefore the magnetic increment is $-\\Delta t(\\bar e^n)^TC^TM_bb^{n+1/2}$ and cancels the electric curl work in step 1.1. The remaining terms are exactly the claimed balance.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "If $j^{n+1/2}=0$, the balance and [F2] imply $\\mathcal E^{n+1}\\le\\mathcal E^n$. When the strict CFL condition also holds, [F3] shows these nonnegative values control the admissible electric and centered magnetic state.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "def-maxwell-edge-fem-semidiscretization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 state the distinct choice branches; the finite matrix calculation takes no additional selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "lem-maxwell-finite-dimensional-ode-existence-uniqueness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-maxwell-edge-fem-semidiscretization",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a bounded contractible Lipschitz polyhedron with a finite matching affine tetrahedral mesh $\\mathcal T_h$, and use the real lowest-order spaces $W_h^0,N_h^1,N_h^2,N_h^3$ defined in [[def-na-lowest-order-whitney-de-rham-spaces]]. The electric trial field is $E_h(t)\\in N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$; the magnetic flux field is $B_h(t)\\in N_h^2$, with no imposed zero normal trace on $B_h$. PEC means the closure-defined zero tangential subspace from [[def-na-zero-tangential-hcurl]]. Periodic analogues use the periodic cell complex. Countable Choice is inherited from the H(div) and affine Piola space definitions in the suppliers; the finite matrix operations below use no additional choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "source_section": "Statement",
+          "quote": "Let $I=[a,b]\\subseteq\\mathbb R$ be a nonempty compact interval, let\n$C:I\\to M_n(\\mathbb R)$ be continuous, let $t_0\\in I$, and let\n$Y_0\\in M_n(\\mathbb R)$. For $n=0$, there is exactly one map $Y:I\\to M_0(\\mathbb R)$, namely the empty-matrix map, and all entrywise differential identities are vacuous. For $n\\ge1$ and $a<b$, the linear matrix initial value problem",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-maxwell-edge-fem-semidiscretization",
+          "source_section": "Definition",
+          "quote": "For edge basis $\\{\\phi_i\\}$ and face basis $\\{\\psi_a\\}$, define the symmetric mass matrices\n$$ (M_e)_{ij}=\\int_\\Omega \\phi_j^T\\epsilon\\phi_i\\,dx,\\qquad (M_b)_{ab}=\\int_\\Omega \\psi_b^T\\mu^{-1}\\psi_a\\,dx.$$\nThey are positive definite by the coefficient bounds in [[def-transient-maxwell-system-with-material-interfaces]] and linear independence of the finite element bases. Let $C$ and $D$ be the coefficient matrices of $\\operatorname{curl}:N_h^1\\to N_h^2$ and $\\operatorname{div}:N_h^2\\to N_h^3$ in the oriented edge, face, and cell moment bases; the moment-commuting supplier gives $DC=0$. Set $j_i(t)=\\int_\\Omega J_{\\rm src}(t)\\cdot\\phi_i\\,dx$, with $J_{\\rm src}\\in C([0,T];L^2(\\Omega;\\mathbb R^3))$. The lossless, conductivity-free semidiscretization with this source is\n$$M_e\\dot e-C^TM_b b=-j,\\qquad \\dot b+Ce=0.$$\nThis is a spatial Galerkin system only; no time integrator is included. The cochain convention and weak material-interface formulation come from the declared spaces and [[def-transient-maxwell-system-with-material-interfaces]]. Smooth interpolation and a uniformly bounded commuting projection are separate prerequisites for the later error estimate and are not asserted by this definition.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Put $x=(e,b)\\in\\mathbb R^N$, $N=N_e+N_f$, and $A=\\begin{pmatrix}0&M_e^{-1}C^TM_b\\\\-C&0\\end{pmatrix}$, $f(t)=(-M_e^{-1}j(t),0)$. By [F2], $x'=Ax+f(t)$. Form the continuous $(N+1)\\times(N+1)$ matrix $\\mathcal A(t)=\\begin{pmatrix}A&f(t)\\\\0&0\\end{pmatrix}$ and the initial matrix $Y_0$ whose last column is $(x_0,1)^T$ and whose other columns are zero.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [F1], $Y'=\\mathcal A(t)Y$, $Y(0)=Y_0$ has a unique global solution. Its last column $(x(t),s(t))^T$ satisfies $s'(t)=0$ and $s(0)=1$, so $s(t)=1$, while the top block satisfies $x'=Ax+f(t)$ and $x(0)=x_0$. Thus it gives a global solution of the Maxwell coefficient system. Any two such coefficient solutions yield two matrix solutions with the same last-column initial data; uniqueness in [F1] forces their last columns to agree.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 state the distinct choice branches; the finite matrix calculation takes no additional selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "thm-maxwell-edge-fem-energy-conservation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-maxwell-edge-fem-semidiscretization",
+          "source_section": "Definition",
+          "quote": "For edge basis $\\{\\phi_i\\}$ and face basis $\\{\\psi_a\\}$, define the symmetric mass matrices\n$$ (M_e)_{ij}=\\int_\\Omega \\phi_j^T\\epsilon\\phi_i\\,dx,\\qquad (M_b)_{ab}=\\int_\\Omega \\psi_b^T\\mu^{-1}\\psi_a\\,dx.$$\nThey are positive definite by the coefficient bounds in [[def-transient-maxwell-system-with-material-interfaces]] and linear independence of the finite element bases. Let $C$ and $D$ be the coefficient matrices of $\\operatorname{curl}:N_h^1\\to N_h^2$ and $\\operatorname{div}:N_h^2\\to N_h^3$ in the oriented edge, face, and cell moment bases; the moment-commuting supplier gives $DC=0$. Set $j_i(t)=\\int_\\Omega J_{\\rm src}(t)\\cdot\\phi_i\\,dx$, with $J_{\\rm src}\\in C([0,T];L^2(\\Omega;\\mathbb R^3))$. The lossless, conductivity-free semidiscretization with this source is\n$$M_e\\dot e-C^TM_b b=-j,\\qquad \\dot b+Ce=0.$$\nThis is a spatial Galerkin system only; no time integrator is included. The cochain convention and weak material-interface formulation come from the declared spaces and [[def-transient-maxwell-system-with-material-interfaces]]. Smooth interpolation and a uniformly bounded commuting projection are separate prerequisites for the later error estimate and are not asserted by this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "In the declared Countable Choice branch [A1], the FE bases and matrices in [F1] are fixed finite objects; the calculation below makes no selection. Differentiating the electric part gives $\\frac{d}{dt}\\frac12 e^TM_ee=e^TM_e\\dot e=e^TC^TM_bb$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Differentiating the magnetic part gives $\\frac{d}{dt}\\frac12 b^TM_bb=b^TM_b\\dot b=-b^TM_bCe=-e^TC^TM_bb$, because the scalar transpose equals itself. The two derivatives cancel, so $\\mathcal H_h'(t)=0$ throughout the interval of existence.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no additional endpoint claim beyond its displayed domain and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 state the distinct choice branches; the finite matrix calculation takes no additional selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "def-maxwell-edge-ritz-projection": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 state the distinct choice branches; the finite matrix calculation takes no additional selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "lem-maxwell-edge-ritz-projection-well-defined": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-maxwell-edge-ritz-projection",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice in the inherited edge/face finite-element space branch. Let $V=H_0(\\operatorname{curl};\\Omega)$ with the PEC convention in [[def-maxwell-edge-fem-semidiscretization]], and let $V_h=N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$. Define\n$$m(u,v)=\\int_\\Omega v^T\\epsilon u\\,dx,\\qquad a(u,v)=\\int_\\Omega (\\operatorname{curl}v)^T\\mu^{-1}\\operatorname{curl}u\\,dx,\\qquad a_+(u,v)=m(u,v)+a(u,v).$$\nFor $u\\in V$, the **Maxwell curl-energy Ritz projection** $R_hu\\in V_h$ is the solution of\n$$a_+(R_hu,v_h)=a_+(u,v_h)\\qquad(v_h\\in V_h).$$\nIts finite-dimensional well-definedness, orthogonality, and best-approximation property are supplied by [[lem-maxwell-edge-ritz-projection-well-defined]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-maxwell-edge-ritz-projection",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice in the inherited edge/face finite-element space branch. Let $V=H_0(\\operatorname{curl};\\Omega)$ with the PEC convention in [[def-maxwell-edge-fem-semidiscretization]], and let $V_h=N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$. Define\n$$m(u,v)=\\int_\\Omega v^T\\epsilon u\\,dx,\\qquad a(u,v)=\\int_\\Omega (\\operatorname{curl}v)^T\\mu^{-1}\\operatorname{curl}u\\,dx,\\qquad a_+(u,v)=m(u,v)+a(u,v).$$\nFor $u\\in V$, the **Maxwell curl-energy Ritz projection** $R_hu\\in V_h$ is the solution of\n$$a_+(R_hu,v_h)=a_+(u,v_h)\\qquad(v_h\\in V_h).$$\nIts finite-dimensional well-definedness, orthogonality, and best-approximation property are supplied by [[lem-maxwell-edge-ritz-projection-well-defined]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [F1], the Gram matrix of $a_+$ in any basis of the finite-dimensional $V_h$ is symmetric positive definite. Hence its kernel is zero and it is invertible, so the linear system defining $R_hu$ has exactly one solution.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Subtracting the defining equation from itself gives $a_+(u-R_hu,v_h)=0$ for every $v_h\\in V_h$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For arbitrary $w_h\\in V_h$, write $u-w_h=(u-R_hu)+(R_hu-w_h)$. The second summand lies in $V_h$, so [step 1.2] makes the cross term zero in the $a_+$ inner product. Thus $\\|u-w_h\\|_{a_+}^2=\\|u-R_hu\\|_{a_+}^2+\\|R_hu-w_h\\|_{a_+}^2\\ge\\|u-R_hu\\|_{a_+}^2$. Taking the infimum proves the claim.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no additional endpoint claim beyond its displayed domain and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 state the distinct choice branches; the finite matrix calculation takes no additional selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "lem-maxwell-nedelec-smooth-interpolation-estimate": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-lowest-order-whitney-de-rham-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ have a finite matching affine tetrahedral mesh $\\mathcal T$ as in [[def-matching-affine-simplicial-meshes]]. The H(curl) and H(div) graph-space conventions used below carry their stated Countable Choice assumptions. Choose one orientation for every mesh edge and face and the ambient orientation for each tetrahedron, with incidence signs given by [[def-oriented-simplicial-cell-chains]]. Write $t_e$ for the unit tangent in the chosen direction of an edge $e$, and $n_F$ for the unit normal determined by the chosen orientation of a face $F$ and the ambient orientation. On a tetrahedron $K$ with barycentric coordinates $\\lambda_0,\\lambda_1,\\lambda_2,\\lambda_3$, list the vertices in any order and let $P_1(K)$ denote scalar polynomials of total degree at most one. For an ordered edge $[i,j]$, put $\\phi_{ij}=\\lambda_i\\nabla\\lambda_j-\\lambda_j\\nabla\\lambda_i$; reversing its orientation changes the sign. Set",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-nedelec-edge-unisolvence",
+          "source_section": "Statement",
+          "quote": "On an oriented tetrahedron $K$ with vertices $x_0,x_1,x_2,x_3$, let $\\phi_{ij}=\\lambda_i\\nabla\\lambda_j-\\lambda_j\\nabla\\lambda_i$ for $0\\le i<j\\le3$. Then the six edge circulations $\\ell_{rs}(v)=\\int_{[x_r,x_s]}v\\cdot t_{rs}\\,ds$ satisfy $\\ell_{rs}(\\phi_{ij})=\\delta_{(r,s),(i,j)}$. The six functions form a basis of the local space $\\operatorname{span}\\{\\phi_{ij}:i<j\\}=\\{a+b\\times x:a,b\\in\\mathbb R^3\\}$, so these edge circulations are unisolvent degrees of freedom.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal T$ be a finite matching affine tetrahedral mesh. The four face-normal fluxes are unisolvent on each $RT_0(K)$, and matching face fluxes assemble a global $H(\\operatorname{div})$ field. For smooth scalar $f$, smooth vector fields $u,v$, and the canonical interpolants determined by vertex values, oriented edge circulations, oriented face-normal fluxes, and cell integrals, the interpolation maps satisfy cellwise\n$$\\nabla I_h^0f=I_h^1\\nabla f,\\qquad \\operatorname{curl}I_h^1u=I_h^2\\operatorname{curl}u,\\qquad \\operatorname{div}I_h^2v=I_h^3\\operatorname{div}v.$$\nAny assignment of one real oriented value to each global mesh edge determines a unique assembled field in $N_h^1$; any assignment of one real oriented flux to each global mesh face determines a unique assembled field in $N_h^2$. These assemblies belong to $H(\\operatorname{curl};\\Omega)$ and $H(\\operatorname{div};\\Omega)$, respectively, with the global spaces and conventions of [[def-na-lowest-order-whitney-de-rham-spaces]]. Applying the local moment identities to polynomial cell restrictions also proves that the global finite-element spaces form the subcomplex $W_h^0\\xrightarrow{\\nabla}N_h^1\\xrightarrow{\\operatorname{curl}}N_h^2\\xrightarrow{\\operatorname{div}}N_h^3$. The canonical interpolation identities themselves apply to smooth inputs; they do not extend the canonical edge moments to arbitrary $H(\\operatorname{curl})$ inputs.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-affine-piola-differential-and-trace-moment-identities",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d=2$ or $3$ and let $F(\\widehat x)=A\\widehat x+b$ map a reference\nsimplex to an affine cell with $\\det A>0$. The contravariant Piola map\n$\\mathcal P_F^{\\mathrm{div}}\\widehat v=(\\det A)^{-1}A\\widehat v\\circ F^{-1}$\nmaps $H(\\operatorname{div},\\widehat S_d)$ into $H(\\operatorname{div},K)$ and\n$$\\operatorname{div}(\\mathcal P_F^{\\mathrm{div}}\\widehat v) =(\\det A)^{-1}(\\widehat{\\operatorname{div}}\\widehat v)\\circ F^{-1}.$$\nThe covariant Piola map\n$\\mathcal P_F^{\\mathrm{curl}}\\widehat v=A^{-T}\\widehat v\\circ F^{-1}$\nmaps $H(\\operatorname{curl},\\widehat S_d)$ into $H(\\operatorname{curl},K)$;\nin $d=2$ its scalar curl is\n$(\\det A)^{-1}(\\widehat{\\operatorname{curl}}\\widehat v)\\circ F^{-1}$,\nand in $d=3$ its vector curl is\n$(\\det A)^{-1}A(\\widehat{\\operatorname{curl}}\\widehat v)\\circ F^{-1}$.\nFor every $\\widehat u\\in W^{1,2}(\\widehat S_d;\\mathbb R)$, the scalar\npullback $u=\\widehat u\\circ F^{-1}$ belongs to $W^{1,2}(K;\\mathbb R)$ and\nits gradient satisfies\n$$\\nabla u=\\mathcal P_F^{\\mathrm{curl}}(\\widehat\\nabla\\widehat u).$$\nFor smooth fields, contravariant normal fluxes satisfy\n$v\\cdot n\\,dS=\\widehat v\\cdot\\widehat n\\,d\\widehat S$; covariant tangential\npullbacks satisfy $v(F(\\widehat x))\\cdot A\\widehat\\tau=\n\\widehat v(\\widehat x)\\cdot\\widehat\\tau$ for every reference tangent\n$\\widehat\\tau$. Thus edge line integrals and normal-flux moments are\npreserved, and face tangential moments transform with this pullback and\nthe induced facet surface Jacobian. These formulas record the chosen\norientation; reversing a facet orientation reverses its signed moment.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "For each cell $K\\in\\mathcal T$, an affine bijection\n$$F_K:\\overline{\\widehat S_d}\\to K,\\qquad F_K(\\widehat x)=b_K+A_K\\widehat x,$$\nwith invertible $A_K\\in\\mathbb R^{d\\times d}$ is a **reference map**.\nChoose the vertex order so $\\det A_K>0$; this is the orientation convention\nused for Piola formulas. Write $h_K:=\\operatorname{diam}(K)$ and let\n$\\rho_K$ be the radius of the largest Euclidean ball contained in $K$.\nA family $\\{\\mathcal T_h\\}_{h\\in H}$ is **shape regular** if there is a\nfinite $\\sigma$ such that $h_K/\\rho_K\\le\\sigma$ for every\n$h\\in H$ and $K\\in\\mathcal T_h$. This universal condition is vacuous for\nan empty family.\nThis definition uses radius; references using the diameter of the inscribed\nball differ by a factor of two.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "On a fixed reference tetrahedron, each canonical basis function has finite $L^2$ norm. Under the covariant Piola map, [F4] and [F5] give $\\|\\phi_{K,e}\\|_{L^2(K)}\\le C_\\sigma h_K^{-1}h_K^{3/2}=C_\\sigma h_K^{1/2}$ for each edge basis function. Under the contravariant Piola map they give $\\|\\psi_{K,F}\\|_{L^2(K)}\\le C_\\sigma h_K^{-3}h_Kh_K^{3/2}=C_\\sigma h_K^{-1/2}$ for each unit-face-flux RT0 basis function.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "By [F3], $\\operatorname{div}I_K^2v=I_K^3\\operatorname{div}v$, and $I_K^3$ is the cell average because its defining degree of freedom is the cell integral. Thus $|\\operatorname{div}v(x)-I_K^3\\operatorname{div}v|\\le h_K\\|\\nabla\\operatorname{div}v\\|_{L^\\infty(K)}$ throughout $K$, and $\\|\\operatorname{div}(v-I_K^2v)\\|_{L^2(K)}\\le C h_K^{5/2}\\|\\nabla\\operatorname{div}v\\|_{L^\\infty(K)}$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Fix $K$ and $x_K\\in K$, and put $u_K=u(x_K)$, a constant vector in the local Nedelec space by [F2]. For each of its six edges, the mean-value bound gives $|\\int_e(u-u_K)\\cdot t\\,ds|\\le h_K^2\\|\\nabla u\\|_{L^\\infty(K)}$. By edge-moment unisolvence [F2], $I_K^1(u-u_K)$ is the sum of these six coefficients times the corresponding basis functions. Step 1.1 and $\\|u-u_K\\|_{L^2(K)}\\le C h_K^{5/2}\\|\\nabla u\\|_\\infty$ therefore yield $\\|u-I_K^1u\\|_{L^2(K)}\\le C_\\sigma h_K^{5/2}\\|\\nabla u\\|_{L^\\infty(K)}$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "Set $q=\\operatorname{curl}u$ and $q_K=q(x_K)$, a constant RT0 field. By the curl commuting identity [F3], $\\operatorname{curl}I_K^1u=I_K^2q$. Each face-flux coefficient of $q-q_K$ is at most $C h_K^3\\|\\nabla q\\|_{L^\\infty(K)}$; multiplying the four coefficients by the RT0 basis bounds in step 1.1 and adding $\\|q-q_K\\|_{L^2(K)}$ gives $\\|\\operatorname{curl}(u-I_K^1u)\\|_{L^2(K)}\\le C_\\sigma h_K^{5/2}\\|\\nabla\\operatorname{curl}u\\|_{L^\\infty(K)}$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-3",
+          "claim": "For $v$, set $v_K=v(x_K)$, again a constant in RT0. Each of the four face-flux coefficients of $v-v_K$ is bounded by $C h_K^3\\|\\nabla v\\|_{L^\\infty(K)}$. The RT0 basis scaling in step 1.1 and $\\|v-v_K\\|_{L^2(K)}\\le C h_K^{5/2}\\|\\nabla v\\|_\\infty$ give $\\|v-I_K^2v\\|_{L^2(K)}\\le C_\\sigma h_K^{5/2}\\|\\nabla v\\|_{L^\\infty(K)}$.",
+          "step": "2.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Square and sum the four local bounds. By [F5], $h_K^5\\le C_\\sigma h^2|K|$; the cell interiors are disjoint and sum to $\\Omega$. Taking square roots gives the displayed global estimate with the maximum cell derivative bound and the factor $|\\Omega|^{1/2}$. The matching traces and the conformity part of [F3] assemble the interpolants globally.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 state the distinct choice branches; the finite matrix calculation takes no additional selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "lem-maxwell-magnetic-compatible-initial-projection": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-na-uniformly-bounded-commuting-cochain-projection",
+          "source_section": "Statement",
+          "quote": "There is also a boundary-corrected family of projections $\\pi_{h,0}^k:L^2\\Lambda^k(\\Omega)\\to E_{h,0}^k$, where $E_{h,0}^k=E_h^k\\cap H_0\\Lambda^k(\\Omega)$ and $H_0\\Lambda^k$ is the graph closure of compactly supported smooth forms. These have the same uniform bounds, are the identity on $E_{h,0}^k$, and commute on the homogeneous complex. In particular,\n$$\\pi_{h,0}^0:H_0^1(\\Omega)\\to W_h^0\\cap H_0^1(\\Omega),\\qquad \\pi_{h,0}^1:H_0(\\operatorname{curl};\\Omega)\\to N_h^1\\cap H_0(\\operatorname{curl};\\Omega),\\qquad \\nabla\\pi_{h,0}^0=\\pi_{h,0}^1\\nabla.$$\nHere the zero tangential space uses [[def-na-zero-tangential-hcurl]]. Each family converges strongly in $L^2$ on every $L^2$ form, uniformly on compact $L^2$ subsets, and in the graph norm on its corresponding graph domain. The full and homogeneous families are separate operators. These are cochain projections; canonical edge moments are not asserted bounded on $H(\\operatorname{curl})$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-maxwell-edge-fem-semidiscretization",
+          "source_section": "Definition",
+          "quote": "For edge basis $\\{\\phi_i\\}$ and face basis $\\{\\psi_a\\}$, define the symmetric mass matrices\n$$ (M_e)_{ij}=\\int_\\Omega \\phi_j^T\\epsilon\\phi_i\\,dx,\\qquad (M_b)_{ab}=\\int_\\Omega \\psi_b^T\\mu^{-1}\\psi_a\\,dx.$$\nThey are positive definite by the coefficient bounds in [[def-transient-maxwell-system-with-material-interfaces]] and linear independence of the finite element bases. Let $C$ and $D$ be the coefficient matrices of $\\operatorname{curl}:N_h^1\\to N_h^2$ and $\\operatorname{div}:N_h^2\\to N_h^3$ in the oriented edge, face, and cell moment bases; the moment-commuting supplier gives $DC=0$. Set $j_i(t)=\\int_\\Omega J_{\\rm src}(t)\\cdot\\phi_i\\,dx$, with $J_{\\rm src}\\in C([0,T];L^2(\\Omega;\\mathbb R^3))$. The lossless, conductivity-free semidiscretization with this source is\n$$M_e\\dot e-C^TM_b b=-j,\\qquad \\dot b+Ce=0.$$\nThis is a spatial Galerkin system only; no time integrator is included. The cochain convention and weak material-interface formulation come from the declared spaces and [[def-transient-maxwell-system-with-material-interfaces]]. Smooth interpolation and a uniformly bounded commuting projection are separate prerequisites for the later error estimate and are not asserted by this definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal T$ be a finite matching affine tetrahedral mesh. The four face-normal fluxes are unisolvent on each $RT_0(K)$, and matching face fluxes assemble a global $H(\\operatorname{div})$ field. For smooth scalar $f$, smooth vector fields $u,v$, and the canonical interpolants determined by vertex values, oriented edge circulations, oriented face-normal fluxes, and cell integrals, the interpolation maps satisfy cellwise\n$$\\nabla I_h^0f=I_h^1\\nabla f,\\qquad \\operatorname{curl}I_h^1u=I_h^2\\operatorname{curl}u,\\qquad \\operatorname{div}I_h^2v=I_h^3\\operatorname{div}v.$$\nAny assignment of one real oriented value to each global mesh edge determines a unique assembled field in $N_h^1$; any assignment of one real oriented flux to each global mesh face determines a unique assembled field in $N_h^2$. These assemblies belong to $H(\\operatorname{curl};\\Omega)$ and $H(\\operatorname{div};\\Omega)$, respectively, with the global spaces and conventions of [[def-na-lowest-order-whitney-de-rham-spaces]]. Applying the local moment identities to polynomial cell restrictions also proves that the global finite-element spaces form the subcomplex $W_h^0\\xrightarrow{\\nabla}N_h^1\\xrightarrow{\\operatorname{curl}}N_h^2\\xrightarrow{\\operatorname{div}}N_h^3$. The canonical interpolation identities themselves apply to smooth inputs; they do not extend the canonical edge moments to arbitrary $H(\\operatorname{curl})$ inputs.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-maxwell-nedelec-smooth-interpolation-estimate",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice only in the H(div)/Piola space branch inherited from the suppliers below. Let $\\mathcal T_h$ be a finite matching affine tetrahedral mesh of a bounded polyhedron, with shape-regularity constant $\\sigma$ and $h=\\max_K h_K$. Assume material interfaces are mesh-aligned. Let $u,v$ be piecewise $C^1$ on cell closures, with $\\operatorname{curl}u$, $\\operatorname{div}v$ also piecewise $C^1$, and with matching tangential traces of $u$ and matching normal traces of $v$. The canonical edge and face moment interpolants $I_h^1,I_h^2$ are those in [[lem-na-whitney-moments-commute-with-grad-curl-div]]. Then\n$$\\begin{aligned} &\\|u-I_h^1u\\|_{L^2(\\Omega)}+\\|\\operatorname{curl}(u-I_h^1u)\\|_{L^2(\\Omega)} \\quad+\\|v-I_h^2v\\|_{L^2(\\Omega)}+\\|\\operatorname{div}(v-I_h^2v)\\|_{L^2(\\Omega)} \\le C_\\sigma h |\\Omega|^{1/2}\\max_{K\\in\\mathcal T_h}\\left(\\|\\nabla u\\|_{L^\\infty(K)}+\\|\\nabla\\operatorname{curl}u\\|_{L^\\infty(K)}+\\|\\nabla v\\|_{L^\\infty(K)}+\\|\\nabla\\operatorname{div}v\\|_{L^\\infty(K)}\\right). \\end{aligned}$$\nThe constant depends only on reference-element basis norms and $\\sigma$. This estimate is only for the canonical smooth-input interpolants; it makes no boundedness claim on all of $H(\\operatorname{curl})$ or $H(\\operatorname{div})$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The subspace $X_h$ is finite dimensional. In a basis of $X_h$, its $\\mu^{-1}$ Gram matrix is symmetric positive definite, so the normal equations have one solution for each $B_0-\\pi_h^2B_0$; this defines $P_{X_h}$. Its value lies in $X_h\\subset N_h^2$, and the definition of orthogonal projection gives $B_h^0-B_0=-(I-P_{X_h})(B_0-\\pi_h^2B_0)\\perp_{\\mu^{-1}}X_h$. Orthogonal decomposition yields $\\|B_h^0-B_0\\|_{\\mu^{-1}}\\le\\|B_0-\\pi_h^2B_0\\|_{\\mu^{-1}}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Since $I_h^2B_0\\in N_h^2$ and $\\pi_h^2$ is a projection, $\\pi_h^2 I_h^2B_0=I_h^2B_0$. Thus $B_0-\\pi_h^2B_0=(I-\\pi_h^2)(B_0-I_h^2B_0)$. Uniform boundedness of $\\pi_h^2$ on $H(\\operatorname{div})$, norm equivalence from the coefficient bounds, and [F3] imply $\\|B_0-\\pi_h^2B_0\\|_{\\mu^{-1}}\\le C h M_B$. Combining with step 1.1 gives the asserted approximation estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The projection identity and [F1] give $D\\pi_h^2B_0=\\pi_h^3(\\operatorname{div}B_0)=0$. Every element of $X_h$ is a discrete curl, so [F2] gives $D P_{X_h}(B_0-\\pi_h^2B_0)=0$. Adding the two terms proves $D B_h^0=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 state the distinct choice branches; the finite matrix calculation takes no additional selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "thm-maxwell-edge-fem-smooth-solution-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume the Countable Choice branch inherited from [[def-maxwell-edge-fem-semidiscretization]]. For any finite matching mesh, initial edge and face coefficients $(e_0,b_0)$, and continuous load vector $j:[0,T]\\to\\mathbb R^{N_e}$, the source-driven semidiscrete Maxwell system\n$$M_e\\dot e-C^TM_bb=-j(t),\\qquad \\dot b+Ce=0,\\qquad (e(0),b(0))=(e_0,b_0)$$\nhas one and only one global $C^1$ solution on $[0,T]$. The construction and uniqueness argument use finite-dimensional linear algebra and the matrix-ODE supplier; no choice axiom stronger than the inherited Countable Choice branch is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-transient-maxwell-system-with-material-interfaces",
+          "source_section": "Definition",
+          "quote": "For PEC, the weak Ampere equation is $(\\epsilon E_t,v)_{L^2}-(\\mu^{-1}B,\\operatorname{curl}v)_{L^2}=-(J_{\\rm src}+\\sigma E,v)_{L^2}$ for every $v\\in H_0(\\operatorname{curl};\\Omega)$ as defined in [[def-na-zero-tangential-hcurl]]; the periodic branch uses periodic $H(\\operatorname{curl})$ test fields. Faraday’s equation remains $B_t+\\operatorname{curl}E=0$ in distributions. These weak forms define the test-space and boundary convention used by the edge finite element method.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-maxwell-edge-fem-semidiscretization",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a bounded contractible Lipschitz polyhedron with a finite matching affine tetrahedral mesh $\\mathcal T_h$, and use the real lowest-order spaces $W_h^0,N_h^1,N_h^2,N_h^3$ defined in [[def-na-lowest-order-whitney-de-rham-spaces]]. The electric trial field is $E_h(t)\\in N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$; the magnetic flux field is $B_h(t)\\in N_h^2$, with no imposed zero normal trace on $B_h$. PEC means the closure-defined zero tangential subspace from [[def-na-zero-tangential-hcurl]]. Periodic analogues use the periodic cell complex. Countable Choice is inherited from the H(div) and affine Piola space definitions in the suppliers; the finite matrix operations below use no additional choice.\n\nFor edge basis $\\{\\phi_i\\}$ and face basis $\\{\\psi_a\\}$, define the symmetric mass matrices\n$$ (M_e)_{ij}=\\int_\\Omega \\phi_j^T\\epsilon\\phi_i\\,dx,\\qquad (M_b)_{ab}=\\int_\\Omega \\psi_b^T\\mu^{-1}\\psi_a\\,dx.$$\nThey are positive definite by the coefficient bounds in [[def-transient-maxwell-system-with-material-interfaces]] and linear independence of the finite element bases. Let $C$ and $D$ be the coefficient matrices of $\\operatorname{curl}:N_h^1\\to N_h^2$ and $\\operatorname{div}:N_h^2\\to N_h^3$ in the oriented edge, face, and cell moment bases; the moment-commuting supplier gives $DC=0$. Set $j_i(t)=\\int_\\Omega J_{\\rm src}(t)\\cdot\\phi_i\\,dx$, with $J_{\\rm src}\\in C([0,T];L^2(\\Omega;\\mathbb R^3))$. The lossless, conductivity-free semidiscretization with this source is\n$$M_e\\dot e-C^TM_b b=-j,\\qquad \\dot b+Ce=0.$$\nThis is a spatial Galerkin system only; no time integrator is included. The cochain convention and weak material-interface formulation come from the declared spaces and [[def-transient-maxwell-system-with-material-interfaces]]. Smooth interpolation and a uniformly bounded commuting projection are separate prerequisites for the later error estimate and are not asserted by this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-maxwell-edge-ritz-projection",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice in the inherited edge/face finite-element space branch. Let $V=H_0(\\operatorname{curl};\\Omega)$ with the PEC convention in [[def-maxwell-edge-fem-semidiscretization]], and let $V_h=N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$. Define\n$$m(u,v)=\\int_\\Omega v^T\\epsilon u\\,dx,\\qquad a(u,v)=\\int_\\Omega (\\operatorname{curl}v)^T\\mu^{-1}\\operatorname{curl}u\\,dx,\\qquad a_+(u,v)=m(u,v)+a(u,v).$$\nFor $u\\in V$, the **Maxwell curl-energy Ritz projection** $R_hu\\in V_h$ is the solution of\n$$a_+(R_hu,v_h)=a_+(u,v_h)\\qquad(v_h\\in V_h).$$\nIts finite-dimensional well-definedness, orthogonality, and best-approximation property are supplied by [[lem-maxwell-edge-ritz-projection-well-defined]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-maxwell-edge-ritz-projection-well-defined",
+          "source_section": "Statement",
+          "quote": "In the Countable Choice branch of [[def-maxwell-edge-ritz-projection]], the equation defining $R_hu$ has a unique solution for each $u\\in V$. Moreover, with $\\|v\\|_{a_+}^2=a_+(v,v)$,\n$$\\|u-R_hu\\|_{a_+}\\le\\inf_{v_h\\in V_h}\\|u-v_h\\|_{a_+}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-maxwell-nedelec-smooth-interpolation-estimate",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice only in the H(div)/Piola space branch inherited from the suppliers below. Let $\\mathcal T_h$ be a finite matching affine tetrahedral mesh of a bounded polyhedron, with shape-regularity constant $\\sigma$ and $h=\\max_K h_K$. Assume material interfaces are mesh-aligned. Let $u,v$ be piecewise $C^1$ on cell closures, with $\\operatorname{curl}u$, $\\operatorname{div}v$ also piecewise $C^1$, and with matching tangential traces of $u$ and matching normal traces of $v$. The canonical edge and face moment interpolants $I_h^1,I_h^2$ are those in [[lem-na-whitney-moments-commute-with-grad-curl-div]]. Then\n$$\\begin{aligned} &\\|u-I_h^1u\\|_{L^2(\\Omega)}+\\|\\operatorname{curl}(u-I_h^1u)\\|_{L^2(\\Omega)} \\quad+\\|v-I_h^2v\\|_{L^2(\\Omega)}+\\|\\operatorname{div}(v-I_h^2v)\\|_{L^2(\\Omega)} \\le C_\\sigma h |\\Omega|^{1/2}\\max_{K\\in\\mathcal T_h}\\left(\\|\\nabla u\\|_{L^\\infty(K)}+\\|\\nabla\\operatorname{curl}u\\|_{L^\\infty(K)}+\\|\\nabla v\\|_{L^\\infty(K)}+\\|\\nabla\\operatorname{div}v\\|_{L^\\infty(K)}\\right). \\end{aligned}$$\nThe constant depends only on reference-element basis norms and $\\sigma$. This estimate is only for the canonical smooth-input interpolants; it makes no boundedness claim on all of $H(\\operatorname{curl})$ or $H(\\operatorname{div})$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-maxwell-magnetic-compatible-initial-projection",
+          "source_section": "Statement",
+          "quote": "Assume the contractible Lipschitz domain and shape-regular mesh-family hypotheses of [[thm-na-uniformly-bounded-commuting-cochain-projection]], with matching affine tetrahedra and the PEC edge space of [[def-maxwell-edge-fem-semidiscretization]]. Assume Countable Choice as in that projection interface. Let $B_0\\in H(\\operatorname{div};\\Omega)$ be piecewise smooth, have matching normal traces, and satisfy $\\operatorname{div}B_0=0$. Let $\\pi_h^2$ be the degree-two cochain projection in that interface, let $X_h=\\operatorname{range}C\\subset N_h^2$, and let $P_{X_h}$ be orthogonal projection onto $X_h$ for $(u,v)_{\\mu^{-1}}=\\int_\\Omega u^T\\mu^{-1}v\\,dx$. Define\n$$B_h^0=\\pi_h^2B_0+P_{X_h}(B_0-\\pi_h^2B_0).$$\nThen $B_h^0\\in N_h^2$, $D B_h^0=0$, and\n$$(B_h^0-B_0,\\operatorname{curl}v_h)_{\\mu^{-1}}=0\\quad(v_h\\in V_h),\\qquad \\|B_h^0-B_0\\|_{\\mu^{-1}}\\le C h\\,M_B,$$\nwhere $V_h=N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$ and $M_B$ is the maximum of the piecewise first-derivative bounds for $B_0$ and $\\operatorname{div}B_0$ used by the smooth interpolation estimate. The error constant is uniform over the shape-regular family when the commuting projection norms are uniformly bounded.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-transient-maxwell-system-with-material-interfaces",
+          "source_section": "Definition",
+          "quote": "The weighted field norms are $\\|E\\|_\\epsilon^2=\\int_\\Omega E^T\\epsilon E\\,dx$ and $\\|B\\|_{\\mu^{-1}}^2=\\int_\\Omega B^T\\mu^{-1}B\\,dx$. The uniform coefficient bounds make them equivalent to the ordinary $L^2$ norms. All later smooth-error claims require smoothness separately on each mesh-aligned material region.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Differentiate the exact weak Ampere equation in [F2] and use $B_t=-\\operatorname{curl}E$. Since $\\mu$ is time-independent, this gives, for every $v\\in H_0(\\operatorname{curl};\\Omega)$, $(\\epsilon E_{tt},v)+(\\mu^{-1}\\operatorname{curl}E,\\operatorname{curl}v)=-(\\partial_tJ_{\\rm src},v).$ Differentiating the finite-dimensional Ampere row and using $\\dot b+Ce=0$ gives the identical Galerkin equation for $E_h$: $(\\epsilon \\ddot E_h,v_h)+(\\mu^{-1}\\operatorname{curl}E_h,\\operatorname{curl}v_h)=-(\\partial_tJ_{\\rm src},v_h).$ The solution exists by [F1], and the differentiation is valid because $J_{\\rm src}$ is $C^1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "The initialization gives $\\theta_h(0)=0$. Test the semidiscrete Ampere row at $t=0$ and subtract the exact weak row. By the curl orthogonality in [F5], $(\\mu^{-1}(B_h^0-B(0)),\\operatorname{curl}v_h)=0$ for every $v_h$, so $\\dot E_h(0)$ is the $\\epsilon$-orthogonal projection of $E_t(0)$ onto $V_h$. Its best-approximation error is at most $\\|E_t(0)-I_h^1E_t(0)\\|_\\epsilon\\le Ch$ by [F4]. Also $\\|R_hE_t(0)-E_t(0)\\|_\\epsilon\\le Ch$ by [F3,F4]. Hence $\\|\\dot\\theta_h(0)\\|_\\epsilon\\le Ch$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Let $R_h$ be fixed in time and put $\\theta_h=E_h-R_hE$. Its linearity and time-independent coefficients imply $(R_hE)_{tt}=R_hE_{tt}$. Subtract the two equations in step 1.1 and use Ritz orthogonality [F3], namely $a(E-R_hE,v_h)=-m(E-R_hE,v_h)$. For every $v_h\\in V_h$ this yields $m(\\ddot\\theta_h,v_h)+a(\\theta_h,v_h)=m((I-R_h)(E_{tt}-E),v_h).$ Best approximation [F3] and the canonical estimate [F4] show uniformly in time that $\\|(I-R_h)(E_{tt}-E)\\|_\\epsilon\\le C h$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Define $Q_h(t)=\\tfrac12(\\|\\dot\\theta_h(t)\\|_\\epsilon^2+\\|\\operatorname{curl}\\theta_h(t)\\|_{\\mu^{-1}}^2)$. Test the equation in step 2.1 with $v_h=\\dot\\theta_h$. Symmetry gives $Q_h'(t)=m((I-R_h)(E_{tt}-E),\\dot\\theta_h),\\qquad |Q_h'(t)|\\le\\|(I-R_h)(E_{tt}-E)\\|_\\epsilon\\sqrt{2Q_h(t)}.$ For $\\delta>0$, divide by $2\\sqrt{Q_h+\\delta}$ and integrate. Step 2.1 and the initial bound in step 1.2 yield $\\sqrt{Q_h(t)}\\le Ch$ on $[0,T]$ after letting $\\delta\\downarrow0$. Since $\\theta_h(0)=0$, integration of $\\dot\\theta_h$ also gives $\\sup_t\\|\\theta_h(t)\\|_\\epsilon\\le Ch$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "By step 3.1, $\\theta_h$ is $O(h)$ in the electric $L^2$ norm and its curl norm. The Ritz best-approximation estimate [F3] and interpolation estimate [F4] give $\\|R_hE-E\\|_{L^2}+\\|\\operatorname{curl}(R_hE-E)\\|_{L^2}\\le Ch$. The triangle inequality therefore gives the asserted electric and curl error bound.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Subtract the exact Faraday equation from the semidiscrete magnetic row and integrate in time: $B_h(t)-B(t)=B_h^0-B(0)-\\int_0^t\\operatorname{curl}(E_h(s)-E(s))\\,ds.$ The initial difference is $O(h)$ by [F5], and the curl error is $O(h)$ uniformly by step 4.1, so the magnetic $L^2$ error is at most $Ch+TCh$. Also $D B_h(t)=D B_h^0-\\int_0^t D C e_h(s)\\,ds=0$ by [F5] and the discrete identity $DC=0$ in [F2]. Norm equivalence [F6] completes the result.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 5.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 state the distinct choice branches; the finite matrix calculation takes no additional selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "ex-maxwell-yee-periodic-plane-wave-dispersion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-maxwell-yee-cartesian-dispersion-and-cfl",
+          "source_section": "Statement",
+          "quote": "Consider a homogeneous isotropic periodic Yee grid with $\\epsilon,\\mu>0$, wave speed $c=(\\epsilon\\mu)^{-1/2}$, spacings $h_x,h_y,h_z$, and $N_x,N_y,N_z$ cells. Its allowed wave angles are $\\theta_j=2\\pi m_j/N_j$. On a mode with wave vector $k_j=\\theta_j/h_j$, the transverse curl-curl eigenvalue is\n$$\\lambda(\\theta)=c^2\\sum_{j\\in\\{x,y,z\\}}\\frac{4}{h_j^2}\\sin^2\\left(\\frac{\\theta_j}{2}\\right),$$\nand the lossless Yee leapfrog dispersion relation is\n$$\\sin^2\\left(\\frac{\\omega\\Delta t}{2}\\right)=c^2\\Delta t^2\\sum_{j\\in\\{x,y,z\\}}\\frac{\\sin^2(\\theta_j/2)}{h_j^2}.$$\nThe exact finite-grid strict condition is $\\Delta t^2\\max_{\\theta}\\lambda(\\theta)<4$, as in [[thm-maxwell-yee-strict-cfl-modified-energy]]. The rectangular sufficient bound is\n$$\\Delta t<\\frac{1}{c\\sqrt{h_x^{-2}+h_y^{-2}+h_z^{-2}}};$$\nit is exact when every $N_j$ is even. For a cubic grid this bound is $\\Delta t<h/(c\\sqrt3)$. Odd cell counts may have a smaller finite-grid maximum, so the finite-grid eigenvalue is the exact criterion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For $\\theta=(\\pi,0,0)$, the sine-square sum is $1$, so $\\sin^2(\\omega_{\\rm ax}\\Delta t/2)=c^2\\Delta t^2/h^2$. Its symbol direction is the $x$-axis, and $p=(0,1,0)$ is orthogonal to it, so this is a transverse mode.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For $\\theta=(\\pi,\\pi,\\pi)$, the sum is $3$ and $p=(1,-1,0)/\\sqrt2$ is orthogonal to $(1,1,1)$. Thus $\\sin^2(\\omega_{\\rm corner}\\Delta t/2)=3c^2\\Delta t^2/h^2$. The maximum eigenvalue is $12c^2/h^2$, so strict positivity requires $\\Delta t<h/(c\\sqrt3)$; equality places the maximal mode at the repeated-root endpoint.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "ex-maxwell-incompatible-current-gauss-drift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-maxwell-yee-leapfrog-update",
+          "source_section": "Definition",
+          "quote": "Choose a finite complex and boundary closure as in [[def-maxwell-discrete-cochain-and-yee-grid]], step size $\\Delta t>0$, initial $e^0\\in\\mathbb R^{N_e}$ and $b^{-1/2}\\in\\mathbb R^{N_f}$, and source rows $j^{n+1/2}\\in\\mathbb R^{N_e}$. The output is a sequence $e^n$ at integer times and $b^{n+1/2}$ at half-integer times. For each $n\\ge0$, perform the ordered instructions",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-maxwell-discrete-incidence-identities",
+          "source_section": "Statement",
+          "quote": "For the incidence matrices $G,C,D$ of [[def-maxwell-discrete-cochain-and-yee-grid]], one has $CG=0$ and $DC=0$. The conclusion holds for the full periodic complex and for the PEC mixed closure defined there.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-maxwell-discrete-cochain-and-yee-grid",
+          "source_section": "Definition",
+          "quote": "The electric, magnetic, and conductive material matrices are real symmetric matrices $M_e\\in\\mathbb R^{N_e\\times N_e}$, $M_b\\in\\mathbb R^{N_f\\times N_f}$, and $S\\in\\mathbb R^{N_e\\times N_e}$, respectively. The first two are positive definite and represent the discrete weighted inner products induced by $\\epsilon$ and $\\mu^{-1}$; $S$ is positive semidefinite and represents conductivity. Write $\\langle e_1,e_2\\rangle_{M_e}=e_1^TM_ee_2$, $\\langle b_1,b_2\\rangle_{M_b}=b_1^TM_bb_2$, and $\\|e\\|_{M_e}^2=\\langle e,e\\rangle_{M_e}$, $\\|b\\|_{M_b}^2=\\langle b,b\\rangle_{M_b}$. In a homogeneous isotropic periodic Cartesian grid with spacings $h_x,h_y,h_z$ and cell volume $V=h_xh_yh_z$, the diagonal entries for an $x$-edge and an $x$-normal face are $\\epsilon V/h_x^2=\\epsilon h_yh_z/h_x$ and $\\mu^{-1}h_x/(h_yh_z)$; the $y$ and $z$ entries are obtained by cyclic permutation. These values are dual-volume Hodge weights for line-integral and face-flux cochains. A compatible PEC closure uses the corresponding truncated dual volumes for free electric edges, while the magnetic mass includes boundary faces; the resulting matrices remain positive definite. The discrete constraints are $G^TM_ee^n=\\rho^n$ on interior vertices and $Db^{n-1/2}=0$ on all cells.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Apply $G^T$ to the electric row in [F1]. Since $G^TC^T=(CG)^T=0$ and the initial Gauss relation holds, this gives $G^TM_ee^1-\\rho^1=-\\Delta t\\,G^Tj^{1/2}=-\\Delta t J G^T\\mathbf e_0.$ By [F2], the residual is $+\\Delta t J$ at $v_0$, $-\\Delta t J$ at $v_1$, and zero at the other vertices. It is nonzero because $J\\ne0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "If instead the charge were updated by $\\rho^1=\\rho^0-\\Delta t G^Tj^{1/2}$, the same calculation would give $G^TM_ee^1-\\rho^1=0$. The drift is therefore exactly the discrete-continuity defect.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "ex-maxwell-pec-rectangular-cavity-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-transient-maxwell-system-with-material-interfaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be a bounded Lipschitz polyhedron, or a periodic rectangular cell. The real electric field is $E(t,x)\\in\\mathbb R^3$ and the magnetic flux density is $B(t,x)\\in\\mathbb R^3$; the magnetic intensity is $H=\\mu^{-1}B$. Let $\\epsilon(x)$ and $\\mu(x)$ be measurable, time-independent, symmetric matrix fields for which there are constants $0<\\epsilon_0\\le\\epsilon_1$ and $0<\\mu_0\\le\\mu_1$ with\n$$\\epsilon_0|v|^2\\le v^T\\epsilon(x)v\\le\\epsilon_1|v|^2,\\qquad \\mu_0|v|^2\\le v^T\\mu(x)v\\le\\mu_1|v|^2$$\nfor almost every $x$ and every $v\\in\\mathbb R^3$. A conductivity tensor $\\sigma(x)$, when present, is measurable, symmetric, and positive semidefinite. The coefficients may jump across finitely many Lipschitz material interfaces. No derivative of a coefficient is part of the model.\n\nIn each material region the constitutive fields satisfy\n$$\\partial_t(\\epsilon E)=\\operatorname{curl}(\\mu^{-1}B)-J_{\\rm src}-\\sigma E,\\qquad \\partial_t B+\\operatorname{curl}E=0.$$\nHere $J_{\\rm src}$ is the impressed free-current density, while $\\sigma E$ is the conductive current. Electric charge $\\rho$ is constrained by $\\operatorname{div}(\\epsilon E)=\\rho$ and the total-current continuity equation $\\partial_t\\rho+\\operatorname{div}(J_{\\rm src}+\\sigma E)=0$; the magnetic constraint is $\\operatorname{div}B=0$. These equalities are distributional. In the lossless branch set $\\sigma=0$.\n\nThe boundary choice is one of the following. A **periodic boundary** identifies opposite traces of the rectangular cell. A **perfect electric conductor (PEC) boundary** imposes zero tangential trace $n\\times E=0$ on $\\partial\\Omega$. At a material interface with no singular surface charge or current, the weak equations are understood with the transmission conditions $[n\\times E]=0$, $[n\\cdot B]=0$, $[n\\times(\\mu^{-1}B)]=0$, and $[n\\cdot(\\epsilon E)]=0$, where $[q]$ is the trace from one side minus the trace from the other. The interface conditions are part of the model convention; no smooth Taylor expansion across a coefficient jump is asserted.\n\nFor PEC, the weak Ampere equation is $(\\epsilon E_t,v)_{L^2}-(\\mu^{-1}B,\\operatorname{curl}v)_{L^2}=-(J_{\\rm src}+\\sigma E,v)_{L^2}$ for every $v\\in H_0(\\operatorname{curl};\\Omega)$ as defined in [[def-na-zero-tangential-hcurl]]; the periodic branch uses periodic $H(\\operatorname{curl})$ test fields. Faraday’s equation remains $B_t+\\operatorname{curl}E=0$ in distributions. These weak forms define the test-space and boundary convention used by the edge finite element method.\n\nThe weighted field norms are $\\|E\\|_\\epsilon^2=\\int_\\Omega E^T\\epsilon E\\,dx$ and $\\|B\\|_{\\mu^{-1}}^2=\\int_\\Omega B^T\\mu^{-1}B\\,dx$. The uniform coefficient bounds make them equivalent to the ordinary $L^2$ norms. All later smooth-error claims require smoothness separately on each mesh-aligned material region.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The tangential electric field vanishes on $x=0,a$ and $y=0,b$ because $\\Phi=0$ there; it also vanishes on $z=0,d$ because the only component of $E$ is normal to those faces. Direct differentiation gives $\\operatorname{div}B=0$ and $\\operatorname{div}(\\epsilon E)=0$. Thus both divergence constraints and the PEC trace hold.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Differentiation gives $B_t=-\\operatorname{curl}E$. The $z$ component of $\\operatorname{curl}B$ is $-(k_x^2+k_y^2)\\Phi\\sin(\\omega t)/\\omega$, with the other two components zero. Since $\\epsilon\\omega^2=(k_x^2+k_y^2)/\\mu$, the expression $-(k_x^2+k_y^2)\\Phi\\sin(\\omega t)/(\\mu\\omega)$ equals $-\\epsilon\\omega\\Phi\\sin(\\omega t)=\\epsilon E_t$. Hence $\\epsilon E_t=\\operatorname{curl}(\\mu^{-1}B)$. The angular frequency is therefore $\\omega=(\\epsilon\\mu)^{-1/2}\\sqrt{(m\\pi/a)^2+(n\\pi/b)^2}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero/nonzero hypothesis or the zero-vector case of the stated algebraic bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 handles the stated time, boundary, interface, or strict-CFL endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    },
+    "ex-maxwell-dielectric-jump-reflection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-transient-maxwell-system-with-material-interfaces",
+          "source_section": "Definition",
+          "quote": "The boundary choice is one of the following. A **periodic boundary** identifies opposite traces of the rectangular cell. A **perfect electric conductor (PEC) boundary** imposes zero tangential trace $n\\times E=0$ on $\\partial\\Omega$. At a material interface with no singular surface charge or current, the weak equations are understood with the transmission conditions $[n\\times E]=0$, $[n\\cdot B]=0$, $[n\\times(\\mu^{-1}B)]=0$, and $[n\\cdot(\\epsilon E)]=0$, where $[q]$ is the trace from one side minus the trace from the other. The interface conditions are part of the model convention; no smooth Taylor expansion across a coefficient jump is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For a wave with sign $s=+1$ (right-going) or $s=-1$ (left-going), write its phasor as $E_z=Ae^{i(sk_ix-\\omega t)}$ and $H_y=-sA e^{i(sk_ix-\\omega t)}/\\eta_i$. Then $(\\operatorname{curl}E)_y=-isk_iE_z$ and $(\\operatorname{curl}H)_z=ik_iH_y=-ik_iA e^{i(sk_ix-\\omega t)}/\\eta_i$. Faraday's equation holds because $B_y=\\mu_iH_y=-s(k_i/\\omega)E_z$, and Ampere's equation holds because $k_i/\\eta_i=\\omega\\epsilon_i$. Also $\\operatorname{div}(\\epsilon_iE)=0$ since $E_z$ is independent of $z$, and $\\operatorname{div}B=0$ since $B_y$ is independent of $y$. Real parts also solve these real linear equations. At $x=0$, continuity of tangential $E_z$ and $H_y$ is exactly $1+R=T,\\qquad \\frac{1-R}{\\eta_1}=\\frac{T}{\\eta_2}.$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Solving the first equation for $T$ and substituting into the second gives $\\eta_2(1-R)=\\eta_1(1+R)$, hence $R=\\frac{\\eta_2-\\eta_1}{\\eta_1+\\eta_2},\\qquad T=\\frac{2\\eta_2}{\\eta_1+\\eta_2}.$ Because both fields have only tangential components, their normal traces vanish on both sides, so the normal interface conditions in [F1] also hold.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty domain, grid, interval, or prescribed field and makes no separate assertion for an empty object."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data branch is claimed; the statement covers only the displayed data class and hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim does not distinguish a singleton mesh, mode, cell, or time step as a separate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate cells, singular coefficients, and invalid zero-length intervals are excluded by the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no additional endpoint claim beyond its displayed domain and hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all constructions use fixed finite arrays or explicit formulas; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no forward implication branch applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so no reverse implication branch applies."
+        }
+      ]
+    }
+  }
+}

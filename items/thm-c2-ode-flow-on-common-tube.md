@@ -20,9 +20,10 @@ deps:
 proof_strategy: direct
 provenance:
   statement: literature-derived
-  proof: ai-generated
+  proof: ai-altered
 verification:
   precheck: pass
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step4-published-alert-repair-records/thm-c2-ode-flow-on-common-tube.json
 sources:
   references:
     - title: "Y. A. Kuznetsov, Elements of Applied Bifurcation Theory, 2nd ed., Chapter 1, §1.5"
@@ -68,10 +69,10 @@ In particular $\partial_t\Phi=f(\Phi)$, $\partial_{tx}\Phi=Df(\Phi)S$, and $\par
 
 2.1 For a direction $h\in\mathbb R^n$, define a matrix $B_h(t)$ by $B_h(t)v=D^2f(\Phi(t,x))[S(t,x)h,S(t,x)v]$. It is continuous and has norm at most $C\|h\|_2$ for a finite constant $C$, by [F3] and the bound on $S$. Let $H_h$ solve $H_h'=AH_h+B_h$, $H_h(0)=0$. For each column, adjoining a constant coordinate turns its inhomogeneous linear IVP into a homogeneous linear system; applying [F4] to the augmented matrix gives a unique solution on $[0,T_+]$. Its integral equation from [F6] and [F5] give $\|H_h\|_\infty\le C'\|h\|_2$ for a finite constant $C'$. [F3, F4, F5, F6, step 1.1, algebra]
 
-2.2 For small $h$ with $x+h\in W$, put $\Delta(t)=\Phi(t,x+h)-\Phi(t,x)$, $S_h(t)=S(t,x+h)$, and $A_h(t)=Df(\Phi(t,x+h))$. The uniform remainder in [F1] gives $\Delta=S h+o(\|h\|_2)$ uniformly on $J$. On each segment between $\Phi(t,x)$ and $\Phi(t,x+h)$, the chain rule [F7] and [F6] applied coordinatewise to $Df$ give $ A_h-A=\int_0^1 D^2f(\Phi+s\Delta)[\Delta,\cdot] ds. $ Uniform continuity of $D^2f$ on $K$ [F3] and $\Delta=S h+o(\|h\|)$ therefore imply $A_h-A=D^2f(\Phi)[S h,\cdot]+o(\|h\|_2)$ uniformly in $t$. [F1, F3, F6, F7, step 1.1, algebra]
+2.2 For small $h$ with $x+h\in W$, put $\Delta(t)=\Phi(t,x+h)-\Phi(t,x)$, $S_h(t)=S(t,x+h)$, and $A_h(t)=Df(\Phi(t,x+h))$. The uniform remainder in [F1] gives $\Delta=S h+o(\|h\|_2)$ uniformly on $[0,T_+]$. On each segment between $\Phi(t,x)$ and $\Phi(t,x+h)$, the chain rule [F7] and [F6] applied coordinatewise to $Df$ give $ A_h-A=\int_0^1 D^2f(\Phi+s\Delta)[\Delta,\cdot] ds. $ Uniform continuity of $D^2f$ on $K$ [F3] and $\Delta=S h+o(\|h\|)$ therefore imply $A_h-A=D^2f(\Phi)[S h,\cdot]+o(\|h\|_2)$ uniformly in $t$. [F1, F3, F6, F7, step 1.1, algebra]
 
 3.1 The variational equations give $S_h'=A_hS_h$ and $S'=AS$. Subtract these and the equation for $H_h$ from step 2.1, setting $R_h=S_h-S-H_h$, to obtain $ R_h'=A_hR_h+(A_h-A)S+(A_h-A)H_h-B_h,\qquad R_h(0)=0. $ By step 2.2, $(A_h-A)S-B_h=o(\|h\|)$ uniformly; also $A_h-A=O(\|h\|)$ and $H_h=O(\|h\|)$ by steps 2.2 and 2.1. Thus the forcing after $A_hR_h$ is $o(\|h\|)$ uniformly. The coefficients $A_h$ are uniformly bounded on $K$, so [F5] applied to the integral equation for $R_h$ from [F6] gives $\|R_h\|_\infty=o(\|h\|_2)$. Therefore $D_xS(t,x)[h]=H_h(t)$, proving existence of the second state derivative. [F1, F3, F5, F6, step 2.1, step 2.2, algebra]
 
-4.1 If $x_j\to x$, [F1] gives uniform convergence of $\Phi(\cdot,x_j)$ and $S(\cdot,x_j)$ on $J$. Continuity of $D^2f$ on $K$ then gives uniform convergence of the coefficients and forcing in the linear equations for $H_h$; subtracting their integral equations and applying [F5] proves $H_h(\cdot,x_j)\to H_h(\cdot,x)$ uniformly. Thus the second state derivative is continuous in $(t,x)$. [F1, F3, F5, F6, step 2.1, step 3.1]
+4.1 If $x_j\to x$, [F1] gives uniform convergence of $\Phi(\cdot,x_j)$ and $S(\cdot,x_j)$ on $[0,T_+]$. Continuity of $D^2f$ on $K$ then gives uniform convergence of the coefficients and forcing in the linear equations for $H_h$; subtracting their integral equations and applying [F5] proves $H_h(\cdot,x_j)\to H_h(\cdot,x)$ uniformly. Thus the second state derivative is continuous in $(t,x)$. [F1, F3, F5, F6, step 2.1, step 3.1]
 
 5.1 By [F2], $\partial_t\Phi=f(\Phi)$. Differentiating this identity in $x$ and in $t$ using [F7] gives $\partial_{tx}\Phi=Df(\Phi)S$ and $\partial_{tt}\Phi=Df(\Phi)f(\Phi)$. These derivatives and $D_x^2\Phi=H$ are continuous by steps 1.1 and 4.1, so $\Phi$ is jointly $C^2$ on the stated tube. [F2, F7, step 1.1, step 4.1] ∎

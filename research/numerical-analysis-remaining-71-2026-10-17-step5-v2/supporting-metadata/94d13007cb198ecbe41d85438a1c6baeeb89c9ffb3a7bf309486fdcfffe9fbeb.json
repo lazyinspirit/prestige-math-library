@@ -1,0 +1,395 @@
+[
+  {
+    "order": 2596,
+    "id": "alternating-tensor-optimization-and-effective-eigenproblems",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Alternating tensor optimization and effective eigenproblems",
+    "companion": "alternating-tensor-optimization-and-effective-eigenproblems-examples",
+    "requires": [
+      "tensor-train-compression-and-truncation-error",
+      "restarted-and-block-eigensolvers"
+    ],
+    "items": [
+      {
+        "id": "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+        "kind": "lemma",
+        "title": "Finite Hermitian ground vectors and a deterministic tie rule",
+        "statement": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $m\\ge1$, and let $A\\in\\mathbb F^{m\\times m}$ satisfy $A^*=A$. Define\n$$q_A(x):=\\frac{x^*Ax}{x^*x}\\qquad(x\\in\\mathbb F^m\\setminus\\{0\\}).$$\nThen $q_A$ has a minimum $\\lambda_{\\min}$, equal to the least eigenvalue of $A$, and its minimizers are precisely the nonzero vectors in the lowest eigenspace $E_{\\min}=\\ker(A-\\lambda_{\\min}I)$. There is a deterministic choice of a unit minimizer: let $P_{\\min}$ be the orthogonal projection onto $E_{\\min}$, scan the standard basis $e_1,\\ldots,e_m$, and take the first $j$ with $P_{\\min}e_j\\ne0$. Normalize $P_{\\min}e_j$; over $\\mathbb C$, if $z$ is its first nonzero coordinate, multiply by $\\overline z/|z|$, and over $\\mathbb R$ multiply by $z/|z|$.",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "def-rayleigh-quotient",
+          "thm-courant-fischer-min-max-principle",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-finite-dimensional-orthogonal-decomposition"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§6.3–6.4",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Grégoire Misguich, Introduction to matrix-product states and tensor networks, complete lecture notes (2026), §2.7",
+              "url": "https://arxiv.org/pdf/2606.24803"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-normalized-rayleigh-energy-perturbation",
+        "kind": "lemma",
+        "title": "Rayleigh energy perturbation for normalized finite states",
+        "statement": "Let $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ be a finite tensor-array space over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $H:\\mathcal H\\to\\mathcal H$ be self-adjoint, and let $\\psi,\\phi\\in\\mathcal H$ satisfy $\\|\\psi\\|_F=\\|\\phi\\|_F=1$. Then\n$$\\left|\\langle\\psi,H\\psi\\rangle_F-\\langle\\phi,H\\phi\\rangle_F\\right|\\le 2\\|H\\|_{\\mathrm{op}}\\|\\psi-\\phi\\|_F.$$",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "def-self-adjoint-and-normal-endomorphism"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §6.3",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Grégoire Misguich, Introduction to matrix-product states and tensor networks, complete lecture notes (2026), §2.7",
+              "url": "https://arxiv.org/pdf/2606.24803"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-finite-mps-state-and-hermitian-hamiltonian",
+        "kind": "definition",
+        "title": "Finite matrix-product states and Hermitian Hamiltonians",
+        "statement": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an order $d\\ge2$, and positive physical dimensions $n_1,\\ldots,n_d$. The finite coefficient space is the tensor-array space $\\mathcal H=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with the Frobenius pairing and lexicographic index conventions of [[def-finite-tensor-arrays-and-frobenius-inner-product]]. A **normalized finite state** is an array $\\psi\\in\\mathcal H$ with $\\|\\psi\\|_F=1$.\n\nAn **open-boundary matrix-product state (MPS), or tensor train (TT), presentation** is a TT core list from [[def-tensor-train-cores-bond-ranks-and-canonical-gauges]] with $r_0=r_d=1$ whose contraction is $\\psi$. In particular, each core has shape $r_{k-1}\\times n_k\\times r_k$ and the shared internal indices are summed.\n\nA **periodic MPS presentation** consists of positive integers $r_0,\\ldots,r_d$ with $r_d=r_0$ and matrices $A_k^{(i_k)}\\in\\mathbb F^{r_{k-1}\\times r_k}$ for each $1\\le i_k\\le n_k$. It represents the array\n$$\\psi_{i_1,\\ldots,i_d}=\\operatorname{tr}\\!\\left(A_1^{(i_1)}A_2^{(i_2)}\\cdots A_d^{(i_d)}\\right).$$\nA finite MPS/TT state is a normalized array admitting at least one of these exact presentations; a presentation need not be unique or canonical.\n\nA **finite Hermitian Hamiltonian input** is a linear endomorphism $H:\\mathcal H\\to\\mathcal H$ whose matrix in the standard lexicographic basis satisfies $H^*=H$, where $*$ is conjugate transpose as in [[def-finite-tensor-arrays-and-frobenius-inner-product]]. This page uses only that finite-dimensional Hermitian input and makes no claim about how a physical model assembles it. For nonzero $\\psi$, its Rayleigh energy is\n$$\\mathcal E_H(\\psi)=\\frac{\\langle\\psi,H\\psi\\rangle_F}{\\|\\psi\\|_F^2};$$\nfor a normalized state this equals $\\langle\\psi,H\\psi\\rangle_F$.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§4.1–4.4",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Grégoire Misguich, Introduction to matrix-product states and tensor networks, complete lecture notes (2026), §§2.1–2.4",
+              "url": "https://arxiv.org/pdf/2606.24803"
+            },
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §1",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-periodic-mps-to-open-tt",
+        "kind": "lemma",
+        "title": "A periodic finite MPS has an exact open-boundary TT conversion",
+        "statement": "Let a periodic MPS presentation have order $d\\ge2$, positive cyclic bond sizes $r_0,\\ldots,r_d$ with $r_d=r_0$, and matrices $A_k^{(i_k)}\\in\\mathbb F^{r_{k-1}\\times r_k}$. It has an exactly equal open-boundary TT presentation with internal bond sizes $s_k=r_k r_0$ for $1\\le k<d$. In the pair index convention $(a_k,a_0)$, define\n$$G_1(1,i_1,(a_1,a_0))=(A_1^{(i_1)})_{a_0,a_1},$$\n$$G_k((a_{k-1},b_0),i_k,(a_k,c_0))=\\delta_{b_0c_0}(A_k^{(i_k)})_{a_{k-1},a_k}\\quad(2\\le k<d,\\ 1\\le b_0,c_0\\le r_0),$$\nwhere $\\delta_{b_0c_0}=1$ for $b_0=c_0$ and $0$ otherwise, so every middle-core entry with unequal carried indices is zero,\nand\n$$G_d((a_{d-1},a_0),i_d,1)=(A_d^{(i_d)})_{a_{d-1},a_0}.$$\nFor $d=2$ the middle-core clause is empty.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§4.1, 4.6",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Grégoire Misguich, Introduction to matrix-product states and tensor networks, complete lecture notes (2026), §§2.1, 2.4.3",
+              "url": "https://arxiv.org/pdf/2606.24803"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-mixed-canonical-qr-gauge-preserves-state",
+        "kind": "lemma",
+        "title": "Rank-revealing QR sweeps give exact mixed canonical gauge",
+        "statement": "Let a nonzero finite open-boundary TT have order $d\\ge2$, and choose a center window $[s,t]$ with $1\\le s\\le t\\le d$ and $t-s+1\\in\\{1,2\\}$. There is an exact rank-revealing QR transformation of its cores that preserves the represented array, makes every core $k<s$ left-isometric and every core $k>t$ right-isometric, and removes exactly the dependent coordinates on each swept bond. No independent column direction is truncated; only exactly dependent directions are removed.\n\nFor each reshaped matrix $M$, the rank-revealing QR used here scans its columns in their fixed order, retaining a column exactly when it increases the span. It applies Gram–Schmidt to the retained columns, writes all other columns in that orthonormal span, and records the resulting permutation and coefficient factor.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "thm-gram-schmidt-orthonormalisation"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§4.1.2, 4.1.3, 4.4",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Grégoire Misguich, Introduction to matrix-product states and tensor networks, complete lecture notes (2026), §§2.4.1–2.4.3",
+              "url": "https://arxiv.org/pdf/2606.24803"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+        "kind": "lemma",
+        "title": "Canonical MPS environments are isometric and the effective Hamiltonian is Hermitian",
+        "statement": "Let a finite open-boundary TT have order $d\\ge2$ and be in the following mixed gauge about a one-site or two-site center window $J=[k,k+w-1]$, where $w\\in\\{1,2\\}$: every core strictly left of $J$ is left-isometric and every core strictly right of $J$ is right-isometric. The center coefficient array has shape $r_{k-1}\\times n_k\\times\\cdots\\times n_{k+w-1}\\times r_{k+w-1}$, with boundary ranks interpreted as one, and $x$ is its vectorization in the fixed lexicographic order. Hold every core outside $J$ fixed. Contracting the fixed prefix and suffix defines a linear embedding $E$ from center coefficients to the full tensor space. Then $E^*E=I$, so $\\|Ex\\|_F=\\|x\\|_2$. For every finite Hermitian Hamiltonian input $H$, the effective matrix\n$$H_{\\mathrm{eff}}:=E^*HE$$\nis Hermitian and satisfies\n$$\\langle Ex,HEx\\rangle_F=x^*H_{\\mathrm{eff}}x.$$",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-tensor-train-cores-bond-ranks-and-canonical-gauges"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§4.2, 4.4, 6.2–6.3",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Grégoire Misguich, Introduction to matrix-product states and tensor networks, complete lecture notes (2026), §§2.4.3, 2.7",
+              "url": "https://arxiv.org/pdf/2606.24803"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-na-exact-local-dmrg-update-does-not-increase-energy",
+        "kind": "proposition",
+        "title": "An exact local DMRG ground solve does not increase Rayleigh energy",
+        "statement": "Let $\\psi_0=Ex_0$ be a normalized finite MPS in mixed canonical gauge about a one-site or two-site center, with $\\|x_0\\|_2=1$. Let $H_{\\mathrm{eff}}=E^*HE$ be its effective Hermitian matrix, and replace the center by the deterministic unit ground vector $x_* $ of $H_{\\mathrm{eff}}$, giving $\\psi_*=Ex_*$. Then $\\psi_*$ is normalized and\n$$\\mathcal E_H(\\psi_*)\\le\\mathcal E_H(\\psi_0).$$\nThis claim is before any bond truncation.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§6.3–6.4",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Grégoire Misguich, Introduction to matrix-product states and tensor networks, complete lecture notes (2026), §2.7",
+              "url": "https://arxiv.org/pdf/2606.24803"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+        "kind": "algorithm",
+        "title": "Finite alternating tensor optimization with effective eigenproblems",
+        "statement": "Work in exact arithmetic over a fixed field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and order $d\\ge2$. The inputs are:\n\n- a normalized finite MPS/TT state $\\psi\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ together with one concrete presentation of $\\psi$, either an open-boundary TT core list or periodic trace matrices; the supplied presentation must contract to $\\psi$;\n- a finite Hermitian Hamiltonian $H$ on that same tensor-array coefficient space;\n- a positive integer sweep budget $M$;\n- a window width $w\\in\\{1,2\\}$; and\n- optionally, positive integer rank caps $c_1,\\ldots,c_{d-1}$.\n\nThe procedure is the following.\n\n1. If the supplied presentation is in periodic trace form, convert it exactly to the open-boundary TT form using [[lem-na-periodic-mps-to-open-tt]]. Otherwise take the supplied open-boundary core list. Keep the resulting open-boundary core list.\n\n2. For each of $M$ full sweeps, perform one forward pass and one backward pass. For width $w$, the windows are the $d$ single sites when $w=1$, or the $d-1$ adjacent site pairs when $w=2$. Visit them in increasing order in the forward pass and decreasing order in the backward pass.\n\n3. Before each window update, place the TT in mixed canonical gauge about that window using the deterministic rank-revealing QR sweeps of [[lem-na-mixed-canonical-qr-gauge-preserves-state]]. Contract the fixed left and right cores to form the isometric center embedding $E$ and compute the finite effective matrix $H_{\\mathrm{eff}}=E^*HE$.\n\n4. Apply the exact ground-vector rule of [[lem-na-finite-hermitian-ground-vector-with-deterministic-tie]] to $H_{\\mathrm{eff}}$. Let $x$ be the resulting unit eigenvector and replace the center coefficient vector by $x$. Record its local Rayleigh energy $x^*H_{\\mathrm{eff}}x=\\lambda_{\\min}$ and residual $\\|H_{\\mathrm{eff}}x-\\lambda_{\\min}x\\|_2$.\n\n5. For a two-site window, reshape the updated center as a matrix with row index (left bond, first physical index) and column index (second physical index, right bond). Compute an exact compact SVD $X=U\\Sigma V^*$. In a forward pass replace the first core by the reshape of $U$ and absorb $\\Sigma V^*$ into the second core. In a backward pass absorb $U\\Sigma$ into the first core and replace the second core by the reshape of $V^*$. Retain every positive singular direction, so this split changes no tensor entries. For a one-site window, keep that site as the center.\n\n6. After each complete forward/backward sweep, if rank caps were supplied, apply [[alg-tensor-train-rounding]] to the current TT and record its cut tails $\\delta_1,\\ldots,\\delta_{d-1}$ and $\\tau=(\\sum_{k=1}^{d-1}\\delta_k^2)^{1/2}$. If $\\tau<1$, normalize the rounded tensor and continue from it. If $\\tau\\ge1$, discard that rounded candidate, retain the last normalized unrounded tensor, and record status **rounding-skipped**. If no rank caps were supplied, do not round.\n\nReturn the final normalized TT state, the energy and local-residual records, all accepted discarded-tail records, and status **budget-complete** or **rounding-skipped** according to whether any requested rounding was skipped.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "lem-na-periodic-mps-to-open-tt",
+          "lem-na-mixed-canonical-qr-gauge-preserves-state",
+          "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "alg-tensor-train-rounding",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§6.2–6.4",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Grégoire Misguich, Introduction to matrix-product states and tensor networks, complete lecture notes (2026), §2.7",
+              "url": "https://arxiv.org/pdf/2606.24803"
+            },
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §3",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, lecture notes (March 11, 2026), §§1.2.2, 1.2.4–1.2.5",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-dmrg-sweep-truncation-energy-increase-bound",
+        "kind": "theorem",
+        "title": "TT discarded weights bound the post-sweep DMRG energy increase",
+        "statement": "Let $\\psi_0$ be a normalized finite MPS/TT state with a supplied concrete open-boundary TT core list or periodic trace presentation contracting to $\\psi_0$, and let $H$ be a finite Hermitian Hamiltonian on the same coefficient space. Run [[alg-na-alternating-tensor-optimization-and-effective-eigenproblems]] for one full forward/backward sweep of a fixed width $w\\in\\{1,2\\}$, with $M=1$ and no rank caps, from that presentation using exact local solves and exact SVD splits; call its normalized unrounded output $\\psi_*$. Apply exact TT rounding with rank caps $c_1,\\ldots,c_{d-1}\\in\\mathbb N_0$, obtaining $\\widetilde\\psi$ and discarded tails $\\delta_1,\\ldots,\\delta_{d-1}$. Put $\\tau=(\\sum_{k=1}^{d-1}\\delta_k^2)^{1/2}$. If $\\tau<1$, define $\\phi=\\widetilde\\psi/\\|\\widetilde\\psi\\|_F$. Then\n$$\\mathcal E_H(\\phi)\\le \\mathcal E_H(\\psi_0)+4\\|H\\|_{\\mathrm{op}}\\tau.$$\nIn particular,\n$$\\mathcal E_H(\\phi)-\\mathcal E_H(\\psi_*)\\le4\\|H\\|_{\\mathrm{op}}\\tau.$$\nNo normalized-output claim is made when $\\tau\\ge1$.",
+        "deps": [
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "prop-na-exact-local-dmrg-update-does-not-increase-energy",
+          "lem-na-normalized-rayleigh-energy-perturbation",
+          "alg-tensor-train-rounding",
+          "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "lem-reverse-triangle-inequality-in-a-normed-space"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§4.5, 6.4",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Ivan V. Oseledets, Tensor-Train Decomposition, SIAM Journal on Scientific Computing 33(5) (2011), §§2–3",
+              "url": "https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf"
+            },
+            {
+              "title": "Mi-Song Dupuy, Tensor trains for high-dimensional problems, lecture notes (March 11, 2026), §§1.2.2, 1.2.4–1.2.5",
+              "url": "https://msdupuy.github.io/teaching/TT_lectures_2026.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-convergent-exact-dmrg-sweeps-are-coordinatewise-stationary",
+        "kind": "theorem",
+        "title": "Convergent fixed-rank exact sweeps are coordinatewise stationary",
+        "statement": "Fix a finite Hermitian Hamiltonian $H$ on the coefficient space of the states. Consider an infinite sequence obtained by repeatedly applying one full no-truncation sweep of [[alg-na-alternating-tensor-optimization-and-effective-eigenproblems]], starting from a supplied concrete open-boundary TT core list or periodic trace presentation representing a normalized state, with fixed bond dimensions and a fixed finite list of one-site or two-site update windows. Assume the canonical core arrays at every stage of each sweep are bounded and converge componentwise in one consistent gauge to a single normalized canonical core tuple. Then the limit is **coordinatewise stationary**, meaning that for each update window, its limiting center vector minimizes the Rayleigh quotient of the effective Hermitian Hamiltonian over all unit center vectors with the other limiting cores fixed. In particular, each limiting center is a lowest eigenvector of its limiting effective Hamiltonian. This is conditional on the stated convergence; it asserts neither convergence of DMRG nor global minimality.",
+        "deps": [
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "lem-na-mps-environment-isometry-and-effective-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrich Schollwöck, The density-matrix renormalization group in the age of matrix product states, Annals of Physics 326 (2011), §§6.3–6.4",
+              "url": "https://arxiv.org/pdf/1008.3477"
+            },
+            {
+              "title": "Grégoire Misguich, Introduction to matrix-product states and tensor networks, complete lecture notes (2026), §2.7",
+              "url": "https://arxiv.org/pdf/2606.24803"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2597,
+    "id": "alternating-tensor-optimization-and-effective-eigenproblems-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Alternating tensor optimization and effective eigenproblems — Examples",
+    "companion": "alternating-tensor-optimization-and-effective-eigenproblems",
+    "requires": [
+      "alternating-tensor-optimization-and-effective-eigenproblems"
+    ],
+    "items": [
+      {
+        "id": "ex-na-two-site-spin-chain-exact-local-solve",
+        "kind": "example",
+        "title": "A two-site spin-chain local solve reaches the exact ground state",
+        "statement": "Take two spin-$1/2$ sites with computational basis $|00\\rangle,|01\\rangle,|10\\rangle,|11\\rangle$, Pauli matrix $Z=\\operatorname{diag}(1,-1)$, and finite Hamiltonian\n$$H=-Z\\otimes I-I\\otimes Z-Z\\otimes Z.$$\nSupply the initial product state $|11\\rangle$ by the rank-one open-boundary TT cores $G_k(1,i_k,1)=1_{\\{i_k=2\\}}$ for $k=1,2$. Starting from this presentation, one completed width-two exact sweep of [[alg-na-alternating-tensor-optimization-and-effective-eigenproblems]] returns $|00\\rangle$ and lowers the energy from $1$ to $-3$.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-degenerate-local-ground-state-tie-break",
+        "kind": "example",
+        "title": "A degenerate local ground eigenspace has a deterministic tie choice",
+        "statement": "For two spin-$1/2$ sites let $Z=\\operatorname{diag}(1,-1)$ and $H=Z\\otimes Z$. Use the initial state $|00\\rangle$ with rank-one open-boundary TT cores $G_k(1,i_k,1)=1_{\\{i_k=1\\}}$ for $k=1,2$, and run one width-two sweep without rank caps. The two-site ground eigenspace is $\\operatorname{span}\\{|01\\rangle,|10\\rangle\\}$. The deterministic standard-basis projection rule in [[lem-na-finite-hermitian-ground-vector-with-deterministic-tie]] selects $|01\\rangle$.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-two-site-tt-truncation-can-increase-energy",
+        "kind": "example",
+        "title": "A two-site TT truncation can increase energy after an exact solve",
+        "statement": "Let\n$$\\psi=\\frac{2\\sqrt2}{3}|00\\rangle+\\frac13|11\\rangle,\\qquad H=I_4-2\\psi\\psi^*.$$\nTake the initial state $|00\\rangle$ with rank-one open-boundary TT cores $G_k(1,i_k,1)=1_{\\{i_k=1\\}}$ for $k=1,2$, and run one width-two sweep with rank cap $c_1=1$. The exact two-site solve returns the unique ground state $\\psi$ with energy $-1$. The post-sweep rank-one TT rounding keeps the larger Schmidt term, returns the normalized state $|00\\rangle$, and raises the energy to $-7/9$, an increase of $2/9$.",
+        "deps": [
+          "def-na-finite-mps-state-and-hermitian-hamiltonian",
+          "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+          "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+          "alg-tensor-train-rounding",
+          "thm-na-dmrg-sweep-truncation-energy-increase-bound"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

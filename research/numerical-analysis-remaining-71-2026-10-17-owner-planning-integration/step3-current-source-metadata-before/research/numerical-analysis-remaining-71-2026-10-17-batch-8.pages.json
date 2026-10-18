@@ -1,0 +1,577 @@
+[
+  {
+    "order": 2570,
+    "id": "nonuniform-fast-fourier-transforms",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Nonuniform fast fourier transforms",
+    "companion": "nonuniform-fast-fourier-transforms-examples",
+    "requires": [
+      "computed-fast-transforms-and-convolution",
+      "outward-rounded-interval-and-ball-arithmetic",
+      "finite-precision-direct-factorizations"
+    ],
+    "items": [
+      {
+        "id": "def-nufft-finite-array-norms",
+        "kind": "definition",
+        "title": "Finite complex-array norms used by the NUFFT certificates",
+        "statement": "Define the finite complex-array l1, Euclidean, and maximum norms, including value zero on the empty index set.",
+        "deps": [
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-nonnegative-square-root-exists-and-unique",
+          "def-complete-ordered-real-field",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 0,
+        "strategy": "Give explicit finite-sum/max formulas and state the empty-set convention.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, fourth edition",
+              "url": "https://linear.axler.net/LADR4e.pdf",
+              "locator": "Section 6A, printed pp. 182–186: complex Euclidean norm and counting inner product, Example 6.3(a), Definition 6.7 and Example 6.8(a). The local finite-index/empty-index, l1 and maximum conventions and finite well-definedness proof are supplied explicitly here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nufft-periodized-gaussian-gridding-kernel",
+        "kind": "definition",
+        "title": "Periodized Gaussian gridding kernel",
+        "statement": "For tau>0 define the period-one Gaussian sum phi_tau(x)=sum_n exp(-pi(x+n)^2/tau); local convergence and continuity are established by a same-page lemma.",
+        "deps": [
+          "def-real-elementary-functions-and-domains",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-nufft-gaussian-periodization-converges"
+        ],
+        "strategy": "Use Gaussian decay and an explicit geometric majorant on each compact interval.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jens Keiner, Stefan Kunis, and Antje Vollrath, The Nonequispaced FFT and its Applications, Part I, slides 44–50 and 65–67",
+              "url": "https://math.aalto.fi/numericsyear/NFFT/nfft.pdf",
+              "locator": "Periodic Gaussian window, Fourier multiplier, gridding, deconvolution, and Gaussian error estimate"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "§2, printed pp. 445–446, equations (7)–(15)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nufft-finite-euclidean-norm-triangle",
+        "kind": "lemma",
+        "title": "Triangle inequality for the finite NUFFT Euclidean norm",
+        "statement": "For finite complex arrays, the counting Euclidean norm satisfies the triangle inequality.",
+        "deps": [
+          "def-nufft-finite-array-norms",
+          "def-complete-ordered-real-field",
+          "lem-of-square-positive",
+          "lem-of-square-monotone",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove finite-array Cauchy–Schwarz by expanding a nonnegative squared norm, then expand the norm of a sum.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, fourth edition",
+              "url": "https://linear.axler.net/LADR4e.pdf",
+              "locator": "Section 6A, printed pp. 188–190: orthogonal decomposition 6.13, Cauchy–Schwarz inequality 6.14 and complete proof, triangle inequality 6.17 and complete proof. The local finite-complex-array proof expands the same projection residual and squared norm directly, including the zero case."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nufft-transform-types-and-mode-conventions",
+        "kind": "definition",
+        "title": "Type-1, type-2, and type-3 nonuniform Fourier transforms",
+        "statement": "Fix the normalized torus, finite source and mode sets, signs, scaling, type-3 frequency lists, and the exact finite-sum conventions used by the page.",
+        "deps": [
+          "def-complex-exponential",
+          "def-real-elementary-functions-and-domains",
+          "def-nufft-finite-array-norms",
+          "def-finite-sum-in-a-commutative-monoid",
+          "thm-complex-numbers-form-a-field",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-generalised-associativity"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define each finite matrix explicitly and prove the type-2 formula is its conjugate transpose by finite expansion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jens Keiner, Stefan Kunis, and Antje Vollrath, The Nonequispaced FFT and its Applications, Part I, slides 40 and 69",
+              "url": "https://math.aalto.fi/numericsyear/NFFT/nfft.pdf",
+              "locator": "PDF slides 40 and 69; finite type-1 and type-2 sums and stated arithmetic scope"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "§1, printed pp. 443–445, equations (1)–(6)"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, NUFFT User's Guide, Version 1.2",
+              "url": "https://cs.nyu.edu/~berger/nufft/nufft_manual.pdf",
+              "locator": "§1, PDF pp. 2–3, one-, two-, and three-dimensional type-1, type-2, and type-3 sums"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nufft-gaussian-periodization-converges",
+        "kind": "lemma",
+        "title": "Local uniform convergence of the periodized Gaussian",
+        "statement": "The Gaussian periodization converges absolutely and locally uniformly, defines a continuous function, and is one-periodic, without a choice axiom.",
+        "deps": [
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "def-real-elementary-functions-and-domains",
+          "thm-geometric-series",
+          "lem-archimedean-property-from-completeness",
+          "thm-exponential-is-strictly-increasing",
+          "thm-exponential-addition-formula",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-continuity-and-derivative-on-real-interval",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 1,
+        "strategy": "On each compact interval bound both tails by a convergent geometric series, then prove continuity by a uniform-tail epsilon argument.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jens Keiner, Stefan Kunis, and Antje Vollrath, The Nonequispaced FFT and its Applications, Part I, slides 44–46",
+              "url": "https://math.aalto.fi/numericsyear/NFFT/nfft.pdf",
+              "locator": "Periodized Gaussian window and its Fourier representation"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "§2, printed pp. 445–446, periodic heat kernel definition"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nufft-gaussian-image-tail-bound",
+        "kind": "lemma",
+        "title": "Explicit tail for the periodized Gaussian image sum",
+        "statement": "A finite image sum on [0,1] encloses the periodized Gaussian after adding an explicit two-sided geometric remainder.",
+        "deps": [
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "lem-nufft-gaussian-periodization-converges",
+          "def-real-elementary-functions-and-domains",
+          "thm-geometric-series",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "dependency_level": 2,
+        "strategy": "Split the positive and negative omitted indices and bound each tail by a geometric series.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jens Keiner, Stefan Kunis, and Antje Vollrath, The Nonequispaced FFT and its Applications, Part I, slides 44–50",
+              "url": "https://math.aalto.fi/numericsyear/NFFT/nfft.pdf",
+              "locator": "Periodized Gaussian window and finite Gaussian gridding support"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "§3, printed pp. 447–448, periodic image terms and local spreading"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nufft-gaussian-periodization-fourier-series",
+        "kind": "lemma",
+        "title": "Fourier series of the periodized Gaussian",
+        "statement": "Under Countable Choice, the periodized Gaussian has Fourier coefficients sqrt(tau) exp(-pi tau r^2), and its absolutely convergent Fourier series equals the kernel.",
+        "deps": [
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "lem-nufft-gaussian-periodization-converges",
+          "def-real-elementary-functions-and-domains",
+          "thm-poisson-summation-for-schwartz-functions",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "def-countable-choice",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules",
+          "thm-exponential-beats-every-polynomial"
+        ],
+        "dependency_level": 2,
+        "strategy": "Show the underlying Gaussian is Schwartz, apply the inspected Schwartz Poisson-summation theorem, and substitute the exact two-pi Gaussian transform.",
+        "axiom_base": "Countable Choice is required by the Schwartz Poisson-summation and Gaussian Fourier-transform suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jens Keiner, Stefan Kunis, and Antje Vollrath, The Nonequispaced FFT and its Applications, Part I, slides 31–34",
+              "url": "https://math.aalto.fi/numericsyear/NFFT/nfft.pdf",
+              "locator": "One-dimensional and d-dimensional periodisation Fourier coefficients by Poisson summation"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "§2, printed pp. 445–446, periodized heat kernel and Gaussian Fourier multiplier"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nufft-gaussian-spread-truncation-tail",
+        "kind": "lemma",
+        "title": "Explicit periodized Gaussian spread-tail bound",
+        "statement": "Truncating each coordinate spread to the 2w+1 nearest periodic grid points has a uniform Gaussian-tail bound; the total omitted product-kernel mass is bounded by a coordinatewise union estimate.",
+        "deps": [
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "lem-nufft-gaussian-periodization-converges",
+          "def-real-elementary-functions-and-domains",
+          "def-continuity-and-derivative-on-real-interval",
+          "thm-derivative-of-exponential",
+          "lem-derivative-algebra-and-chain-rules",
+          "thm-ftc-second-part",
+          "thm-exponential-beats-every-polynomial",
+          "thm-geometric-series",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "dependency_level": 2,
+        "strategy": "Reindex periodic grid sums by the integer lattice, apply a shifted Gaussian tail comparison, and sum the complement of a product neighborhood by a union bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jens Keiner, Stefan Kunis, and Antje Vollrath, The Nonequispaced FFT and its Applications, Part I, slides 48 and 54–58",
+              "url": "https://math.aalto.fi/numericsyear/NFFT/nfft.pdf",
+              "locator": "Finite Gaussian window truncation and the aliasing/truncation error proof"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "§3, printed pp. 447–448, local Gaussian spreading to nearest grid points"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nufft-gaussian-grid-alias-identity-and-bound",
+        "kind": "lemma",
+        "title": "Exact Gaussian grid alias identity and explicit alias bound",
+        "statement": "For a rectangular power-of-two grid with M_r>2K_r, the normalized grid DFT deconvolves to the type-1 sum plus an absolutely convergent alias series bounded by ||c||_1 times a finite product of explicit geometric terms.",
+        "deps": [
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "lem-nufft-gaussian-periodization-fourier-series",
+          "def-countable-choice",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-geometric-series",
+          "def-real-elementary-functions-and-domains",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "lem-nonnegative-square-root-exists-and-unique",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_level": 3,
+        "strategy": "Substitute the absolutely convergent kernel Fourier series, use the finite root-of-unity sum coordinatewise, and bound nonzero signed aliases by a geometric series.",
+        "axiom_base": "Countable Choice is inherited from the local Gaussian periodization Fourier-series lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jens Keiner, Stefan Kunis, and Antje Vollrath, The Nonequispaced FFT and its Applications, Part I, slides 44–58",
+              "url": "https://math.aalto.fi/numericsyear/NFFT/nfft.pdf",
+              "locator": "Gaussian gridding/deconvolution and the full aliasing plus truncation error derivation"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "§2, printed pp. 445–447, periodic Gaussian smoothing and deconvolution"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "kind": "algorithm",
+        "title": "Certified Gaussian gridding for type 1 and type 2",
+        "statement": "Fix a dimension $d\\ge1$, finite mode bounds $K_r\\ge0$, a finite type-1 source list $(x_j,c_j)_{j<N}$ or type-2 data $(x_j)_{j<N},(f_k)_{k\\in\\mathcal K}$ as in [[def-nufft-transform-types-and-mode-conventions]], and a nonempty finite ordered list of candidate tuples\n$$\\mathcal C=\\bigl((\\tau_r,M_r,w_r,L_r)_{r=1}^d\\bigr)_{\\nu=1}^C,$$\nan interval-arithmetic format $(p,e_{\\min},e_{\\max})$ with integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$, and one operationwise arithmetic model from [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]] with the same binary precision $p$ and normal exponent limits $j_{\\min}=e_{\\min}$ and $j_{\\max}=e_{\\max}$. Let $u$ be a valid unit-roundoff bound for this selected model instance; it is not a separate free control, and require $u\\le1/16$. Use this same model instance for every computed FFT operation. Let $J\\ge1$ be the finite elementary-series truncation index, $0\\le\\epsilon_{\\rm tw}\\le1/4$ an exact rational maximum allowed twiddle certificate, $0<\\delta_{\\phi}\\le1/4$ an exact rational phase-evaluation tolerance, integers $2\\le p_{\\phi,0}\\le p_{\\phi,\\max}$ giving the initial and maximum phase precisions, and a finite recursion-depth cap $d_{\\rm FFT}\\ge0$. The phase evaluator uses exponent limits $e_{\\min},e_{\\max}$ and truncation index $J$. Also supply an exact positive dyadic requested absolute tolerance $\\varepsilon_{\\rm req}>0$. Source coordinates and coefficients are finite dyadics interpreted as exact real and complex inputs. Each candidate must have rational $\\tau_r>0$, a power-of-two grid length $M_r=2^{q_r}$ with integer $q_r\\ge0$, $M_r>2K_r$, integer width $w_r\\ge1$ with $M_r\\ge2w_r+1$, and integer image cutoff $L_r\\ge1$. A malformed global control or structurally invalid candidate returns `invalid-input` before arithmetic. Type 3 is not an input mode for this algorithm.\n\nAfter validating the global controls and candidate shapes, if $N=0$ return status certified immediately: type 1 returns the exact zero output array and zero radii, and type 2 returns the empty output array and zero radius. For $N>0$, process the candidates in supplied order; the first candidate that produces a complete interval certificate meeting $\\varepsilon_{\\rm req}$ is returned.\n\n1. For each coordinate compute outward enclosures for\n$$a_r=\\frac{\\pi}{\\tau_rM_r^2},\\quad s_r=\\exp\\!\\bigl(-\\pi\\tau_rM_r(M_r-2K_r)\\bigr),\\quad d_r=\\sqrt{\\tau_r}\\exp(-\\pi\\tau_rK_r^2),$$\n$$S_r=\\frac2{1-\\exp(-a_r)},\\quad T_r=2\\exp(-a_rw_r^2)\\left(1+\\frac{1}{2a_rw_r}\\right),\\quad R_r=\\frac{2\\exp(-\\pi L_r^2/\\tau_r)}{1-\\exp(-\\pi L_r/\\tau_r)}.$$\nUse [[alg-certified-elementary-range-evaluation]] for every real exponential and square-root node in the procedure, including the finite norms, normalization and complex moduli; use format $(p,e_{\\min},e_{\\max})$ and truncation index $N=J$ on every such call. Form every Machin enclosure of $\\pi$ with this same format and index. Use the outward interval operations for the rational DAGs. Set\n$$A=\\prod_{r=1}^d\\left(1+\\frac{2s_r}{1-s_r}\\right)-1,\\qquad T_d=\\sum_{r=1}^dT_r\\prod_{s\\ne r}S_s,\\qquad d_{\\min}=\\prod_{r=1}^d d_r.$$\nStore outward upper bounds $A^+,T_d^+$ and $R_r^+$, where $R_r^+$ bounds the exact image-tail constant $R_r$, and a lower bound $d_{\\min}^-$. If any required enclosure is non-finite, if a required denominator interval in $A,S_r,T_r,R_r$ contains zero, if some $s_r$ enclosure is not strictly below $1$, or if $d_{\\min}^-\\le0$, reject this candidate as inconclusive; no division by an unverified multiplier is performed.\n\n2. For every source define its periodic nearest-point set by\n$$W_j=\\prod_{r=1}^d\\left\\{\\ell_r\\in\\{0,\\ldots,M_r-1\\}: \\min_{n\\in\\mathbb Z}|\\ell_r/M_r-x_{j,r}-n|\\le w_r/M_r\\right\\},$$\nusing the selected candidate. For type 1 only, for each $\\ell\\in W_j$ reduce each exact dyadic displacement $\\ell_r/M_r-x_{j,r}$ modulo one to $z_r\\in[0,1)$. Enclose the one-dimensional kernel by evaluating the finite image sum\n$$\\sum_{n=-L_r}^{L_r}\\exp\\!\\left(-\\pi(z_r+n)^2/\\tau_r\\right)$$\nwith [[alg-certified-elementary-range-evaluation]] using $N=J$, then add the symmetric interval $[-R_r^+,R_r^+]$ from step 1. All kernel and coefficient products and sums use outward interval arithmetic. For each grid cell $\\ell$, this gives a complex rectangle enclosing its exact truncated-spread value $g_\\ell$. Choose its lower-left corner $u_\\ell$ as a dyadic center and an upward dyadic radius $e_\\ell$ large enough to enclose $g_\\ell-u_\\ell$. Let $E_{\\rm eval}$ be an outward upper bound for $(\\sum_\\ell e_\\ell^2)^{1/2}$ and let $U$ be an outward upper bound for $\\|u\\|_2=(\\sum_\\ell|u_\\ell|^2)^{1/2}$. Before a type-1 FFT call, require every real and imaginary coordinate of every $u_\\ell$ to belong to the representable set $\\mathbb F$ of the selected operationwise model; otherwise reject this candidate with a range-failure status before calling the FFT. Type 2 skips this spreading-grid construction; its source-window intervals are evaluated in step 4 using the sets $W_j$ just defined.\n\n3. For each mode $k\\in\\mathcal K$, define its grid slot by $\\kappa(k)=(k_r\\bmod M_r)_{r=1}^d$, using least nonnegative residues; $M_r>2K_r$ makes this map injective. Put $\\eta=10u+\\epsilon_{\\rm tw}$, $\\rho_r=(1+\\eta)^{q_r}-1$ for each axis, and $\\rho=\\prod_r(1+\\rho_r)-1$. For type 1, run [[alg-na-computed-unitary-radix-two-fft]] on each length-$M_r$ grid line along axes $1,\\ldots,d$ in a fixed lexicographic line order, with direction `forward`, the selected operationwise model, phase tolerance $\\delta_{\\phi}$, exponent limits $e_{\\min},e_{\\max}$, phase precisions $p_{\\phi,0},p_{\\phi,\\max}$, series cap $J$, and recursion cap $d_{\\rm FFT}$. The supplier passes the exact rational phase argument $q=-2m/M_r$ for its twiddle indexed by $m$ and returns a certificate $\\epsilon_\\ell$ for each twiddle it uses. Reject this candidate with the returned status if an FFT call is non-finite or inconclusive; otherwise verify for every returned twiddle certificate that $\\epsilon_\\ell\\le\\epsilon_{\\rm tw}$. If any certificate exceeds $\\epsilon_{\\rm tw}$, reject this candidate with status `twiddle-bound-not-met` and do not use that FFT output. This check applies literally when $\\epsilon_{\\rm tw}=0$, so every used twiddle must then have certificate zero. After all checks pass, extract the unitary Fourier coordinates at slots $\\kappa(k)$ for $k\\in\\mathcal K$ and scale by $P^{-1/2}$, where $P=\\prod_rM_r$. Use the range evaluator with format $(p,e_{\\min},e_{\\max})$ and $N=J$ for every real elementary node, including this scaling and the mode multipliers; use the same $J$ Machin enclosure of $\\pi$. For each required mode evaluate the multiplier interval $d_k=\\prod_r\\sqrt{\\tau_r}\\exp(-\\pi\\tau_rk_r^2)$; if its lower endpoint is $\\le0$, reject this candidate as inconclusive before division. Otherwise divide by that certified positive interval. Use outward complex-rectangle arithmetic. For each $k\\in\\mathcal K$, choose the lower-left corner $z_k$ of this computed scaling/deconvolution rectangle and an upward dyadic radius $b_k$ containing that rectangle about $z_k$. This rectangle alone concerns the computed FFT output, not the exact unitary transform. Separately form a certified outward upper bound $R_{\\rm FFT}$ for\n$$\\frac{\\rho U}{\\sqrt P\\,d_{\\min}^-}.$$\nHere $U$ is the certified norm bound of the actual dyadic input grid from step 2, and $\\rho$ uses the same selected model's valid bound $u$ and checked twiddle limit $\\epsilon_{\\rm tw}$ as the successful FFT calls. Evaluate this nonnegative radius DAG with outward interval operations: integer powers use finite products, and the normalization square root uses the same range format and index $J$. As with the existing model and rational constants, use certified enclosing constants throughout; in particular enclose the selected model's valid unit-roundoff bound. If that model supplies no tighter certified enclosure for $u$, use the already verified enclosure $[0,1/16]$, converted outward to the selected format; thus no additional oracle or input for $u$ is required. Reject the candidate as inconclusive if any radius enclosure is non-finite or the normalization denominator enclosure is not strictly positive before division. Define the returned coordinate radius by the upward dyadic sum $r_k=\\operatorname{ru}(b_k+R_{\\rm FFT})$; if this sum overflows, reject the candidate with its range status. Thus every returned radius includes both the scaling/deconvolution rectangle and the separately bounded error of its computed FFT relative to the exact transform of the dyadic center grid. Set\n$$\\epsilon_{\\rm ana}=A^++\\frac{T_d^+}{P\\,d_{\\min}^-},\\qquad B_{\\rm round}=\\max_{k\\in\\mathcal K}r_k+ \\frac{E_{\\rm eval}}{\\sqrt{P}\\,d_{\\min}^-}.$$\nThe returned error certificate is $\\epsilon_{\\rm ana}$ and $B_{\\rm round}$.\n\n4. For type 2, form the conjugate-transpose finite gridding factorization. For each input mode $k$, evaluate its multiplier interval using the same format and truncation setting $N=J$; if its lower endpoint is $\\le0$, reject the candidate as inconclusive before division. Otherwise divide by that certified positive interval. For the resulting mode rectangles choose lower-left dyadic centers $v_k$ and radii $e_k$ enclosing their deviations. Set $E_f$ to an outward upper bound for $(\\sum_ke_k^2)^{1/2}$ and $V$ to an outward upper bound for $\\|v\\|_2$. Require every real and imaginary coordinate of the $v_k$ to belong to $\\mathbb F$; otherwise reject this candidate with a range-failure status before calling the FFT. Embed each $v_k$ at grid slot $\\kappa(k)$, zero-fill all unused grid modes with zero centers and zero radii, and apply [[alg-na-computed-unitary-radix-two-fft]] in direction `inverse` on the same axes and in the same lexicographic line order, passing the same operationwise model and phase controls as in type 1. Reject a non-finite or inconclusive FFT call; for a finite return verify every returned twiddle certificate $\\epsilon_\\ell\\le\\epsilon_{\\rm tw}$, with the same literal zero-bound rule. Enlarge the unitary-grid output by radius $E_f+\\rho V$ and scale by $P^{-1/2}$. For each source $x_j$, use exactly the grid cells $\\ell\\in W_j$ from step 2; reduce each coordinate displacement $\\ell_r/M_r-x_{j,r}$ modulo one to $z_r\\in[0,1)$, enclose $\\sum_{n=-L_r}^{L_r}\\exp(-\\pi(z_r+n)^2/\\tau_r)$ by range-evaluator calls with format $(p,e_{\\min},e_{\\max})$ and $N=J$, and add $[-R_r^+,R_r^+]$. Multiply the coordinate window intervals, conjugate the resulting real window (which leaves it unchanged), and multiply and sum against the scaled grid rectangles using outward complex-rectangle arithmetic at every operation. Return the lower-left corner $z_j$ and an outward radius $r_j$ containing each resulting rectangle; the type-2 rounding certificate is $B_{\\rm round}^*=\\max_jr_j$. Its analytic certificate is the same $\\epsilon_{\\rm ana}$ from step 3.\n\n5. Enclose $\\|c\\|_1$ or $\\|f\\|_1$ from above by outward modulus and addition intervals. For each candidate whose operations succeed, compare the outward upper bound $\\epsilon_{\\rm ana}\\|c\\|_1+B_{\\rm round}$ (type 1), or $\\epsilon_{\\rm ana}\\|f\\|_1+B_{\\rm round}^*$ (type 2), exactly with $\\varepsilon_{\\rm req}$. If it is at most $\\varepsilon_{\\rm req}$, return the centers and their certificates with status certified. Otherwise record this candidate's first non-success reason as `requested-tolerance-not-met` together with its finite bound, then continue to the next candidate. For any candidate rejected by a range, interval, denominator, mode-positivity, FFT, or twiddle check, record its first failure status and location, then continue to the next candidate. If the finite candidate list is exhausted without a certified return, return status inconclusive with the first recorded non-success record in candidate order. In particular, if every candidate had finite valid bounds above $\\varepsilon_{\\rm req}$, return `inconclusive(requested-tolerance-not-met)` with the first such bound; no approximation is returned as certified on this branch.\n\nThe analytic term consists only of the exact infinite-grid alias contribution and the omitted finite-spread tail. The reported rounding radius contains the finite image-series enclosure, outward arithmetic, and computed FFT error. The signed-mode slot map $\\kappa$ is used for both type-1 extraction and type-2 embedding. The transform and FFT axes are fixed; a different normalization or sign convention is a different procedure.",
+        "deps": [
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-nufft-finite-array-norms",
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "lem-nufft-gaussian-periodization-fourier-series",
+          "lem-nufft-gaussian-grid-alias-identity-and-bound",
+          "lem-nufft-gaussian-spread-truncation-tail",
+          "lem-nufft-gaussian-image-tail-bound",
+          "def-countable-choice",
+          "alg-na-computed-unitary-radix-two-fft",
+          "thm-na-computed-unitary-radix-two-fft-error-bound",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "alg-certified-elementary-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "thm-na-interval-pi-matches-canonical-fourier-pi",
+          "def-real-elementary-functions-and-domains",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "dependency_level": 4,
+        "strategy": "Use the exact alias identity and product Gaussian tail, certify kernel and denominator enclosures, and transfer the published radix-two FFT norm error through interval deconvolution.",
+        "axiom_base": "The certificate branch carries Countable Choice through the local Schwartz Poisson-summation supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "lem-nufft-certified-gaussian-gridding-returns-a-status"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Jens Keiner, Stefan Kunis, and Antje Vollrath, The Nonequispaced FFT and its Applications, Part I, slides 44–69",
+              "url": "https://math.aalto.fi/numericsyear/NFFT/nfft.pdf",
+              "locator": "Gaussian gridding factorization, truncation/alias analysis, multivariate extension, and operation-count summary"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "§§2–3, printed pp. 445–448, Gaussian smoothing, deconvolution, fast gridding, and tensor-product implementation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nufft-certified-gaussian-gridding-returns-a-status",
+        "strategy": "Complete same-frontier prerequisite authored by the assigned Codex escalation owner; see the exact scope report and source-local proof.",
+        "kind": "lemma",
+        "title": "Certified Gaussian gridding terminates with a defined status",
+        "deps": [
+          "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-nufft-finite-array-norms",
+          "alg-certified-elementary-range-evaluation",
+          "alg-na-computed-unitary-radix-two-fft",
+          "alg-na-certified-unit-circle-phase",
+          "alg-dyadic-square-root-bisection",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-na-computed-unitary-radix-two-fft-error-bound"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "Gaussian gridding context; the finite-status property of the specified local certified procedure is proved here."
+            }
+          ]
+        },
+        "statement": "For finite exact dyadic data and finite encoded controls, the procedure\n[[alg-nufft-certified-gaussian-gridding-type1-type2]] terminates with a defined\nstatus. Malformed global controls or structurally invalid candidates return\n`invalid-input` as specified. On admissible controls, the empty-source branch\nreturns its exact zero or empty output; otherwise the procedure returns the\nfirst candidate whose complete finite outward bound meets the exact positive\nrequested tolerance with status `certified`, or returns `inconclusive` with\nthe first recorded non-success reason in candidate order after the finite\nlist is exhausted. This includes `requested-tolerance-not-met` when all\ncandidates have finite valid bounds exceeding the requested tolerance.\n\nEvery performed interval division has its prescribed nonzero divisor guard,\nFFT inputs and twiddle certificates pass the declared checks before use, and\nevery returned finite interval contains the exact value of its evaluated\nDAG. A candidate with a range failure or unresolved interval, denominator, phase, FFT,\nradius or tolerance check is not itself returned as certified; a later candidate\nmay still succeed. These are termination\nand well-defined-status assertions for the specified procedure; its complete\ntransform-error estimates are separate mathematical claims.",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+        "kind": "theorem",
+        "title": "Certified type-1 Gaussian gridding error and type-2 adjoint bound",
+        "statement": "For a successful algorithm result, type 1 has an explicit l-infinity error bounded by an analytic alias-plus-tail term times ||c||_1 and a computed outward rounding radius; the matching type-2 matrix is the conjugate transpose and has the analogous l-infinity bound.",
+        "deps": [
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-nufft-finite-array-norms",
+          "def-matrix-product-and-identity-matrix",
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "lem-nufft-gaussian-periodization-fourier-series",
+          "lem-nufft-gaussian-grid-alias-identity-and-bound",
+          "lem-nufft-gaussian-spread-truncation-tail",
+          "lem-nufft-gaussian-image-tail-bound",
+          "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "def-countable-choice",
+          "thm-na-computed-unitary-radix-two-fft-error-bound",
+          "thm-finite-parseval-and-plancherel",
+          "thm-radix-two-fft-arithmetic-complexity",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-real-elementary-range-enclosures",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-real-elementary-functions-and-domains",
+          "lem-nonnegative-square-root-exists-and-unique",
+          "lem-nufft-finite-euclidean-norm-triangle",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-of-square-monotone"
+        ],
+        "dependency_level": 5,
+        "strategy": "Bound exact grid aliases and omitted spreading, enclose the finite-precision FFT and interval deconvolution, then use the entrywise matrix bound to transfer the same analytic constant to the adjoint.",
+        "axiom_base": "Countable Choice is inherited through the local Schwartz Poisson-summation supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jens Keiner, Stefan Kunis, and Antje Vollrath, The Nonequispaced FFT and its Applications, Part I, slides 44–69",
+              "url": "https://math.aalto.fi/numericsyear/NFFT/nfft.pdf",
+              "locator": "Gaussian-window factorization, explicit alias/truncation error derivation, and operation-count summary"
+            },
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "§§2–3, printed pp. 445–448, periodic Gaussian deconvolution and tensor-product gridding"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2571,
+    "id": "nonuniform-fast-fourier-transforms-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Nonuniform fast fourier transforms — Examples",
+    "companion": "nonuniform-fast-fourier-transforms",
+    "requires": [
+      "nonuniform-fast-fourier-transforms"
+    ],
+    "items": [
+      {
+        "id": "ex-nufft-mri-fourier-samples",
+        "kind": "example",
+        "title": "Exact MRI Fourier samples from a two-point object",
+        "statement": "A two-point weighted object has exact type-3 samples at separately specified real frequencies, illustrating a finite point-source MRI Fourier model without acquisition or reconstruction claims.",
+        "deps": [
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-complex-exponential"
+        ],
+        "dependency_level": 2,
+        "strategy": "Substitute the two locations and weights into the type-3 definition; evaluate the zero sample and the dot products 1/12 and 13/60 exactly.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "Example 4, printed pp. 451–452: MRI sampling as nonuniform Fourier evaluation; this example recomputes a separate exact two-point model."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-nufft-small-deconvolution-mode-is-inconclusive",
+        "kind": "example",
+        "title": "A positive mode multiplier too small to certify",
+        "statement": "Use the dyadic interval format with precision $p=5$ and exponent limits $e_{\\min}=-2$, $e_{\\max}=8$, and select the matching operationwise model with a valid unit-roundoff bound $u=1/32$. Set the common range truncation index to $J=64$, twiddle bound to $\\epsilon_{\\rm tw}=1/32$, phase tolerance to $\\delta_\\phi=1/32$, phase precisions to $p_{\\phi,0}=5$ and $p_{\\phi,\\max}=8$, and the FFT recursion cap to $d_{\\rm FFT}=4$. Give the algorithm one type-1 source $x_0=0,c_0=1$, mode bound $K=7$, one candidate $\\tau=1/40$, $M=16$, $w=L=1$, and requested positive absolute tolerance $\\varepsilon_{\\rm req}=1$. Its least positive subnormal is $\\eta=2^{-6}=1/64$. The exact smallest deconvolution multiplier\n$$d_{\\min}=\\sqrt{1/40}\\,e^{-49\\pi/40}$$\nis positive but less than $\\eta$. Therefore a finite outward dyadic lower endpoint for this multiplier cannot be positive, and the algorithm must reject the candidate as inconclusive at its positive-lower-bound check (or at an earlier range check); it cannot return a certified result using this candidate.",
+        "deps": [
+          "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-real-elementary-functions-and-domains",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "lem-nonnegative-square-root-exists-and-unique"
+        ],
+        "dependency_level": 5,
+        "strategy": "Compare the exact positive multiplier with the least subnormal using a lower bound for pi and the positive exponential series.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-nufft-clustered-sources-l1-error",
+        "kind": "example",
+        "title": "Clustered sources and absolute l1 error",
+        "statement": "Let $0<\\delta<1/4$, take the one-dimensional type-1 data\n$$x_0=1/4,\\qquad x_1=1/4+\\delta,\\qquad c_0=1,\\quad c_1=-1,$$\nand include mode $k=1$. For every real $\\delta$ in this range, $\\|c\\|_1=2$ while\n$$F_1=e^{-\\pi i/2}(1-e^{-2\\pi i\\delta}),\\qquad |F_1|\\le2\\pi\\delta.$$\nThus this exact Fourier coefficient tends to zero as the source points cluster, although the coefficient l1 norm remains $2$. The dyadic subfamily, for example $\\delta=2^{-n}$ with $n\\ge3$, consists of admissible exact input coordinates and also tends to zero. For any such dyadic datum for which the algorithm has a successful run, the theorem gives an absolute l1-scaled error certificate; the exact family has no positive lower bound on $|F_1|$ from which that certificate alone yields a relative-error guarantee.",
+        "deps": [
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-nufft-finite-array-norms",
+          "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+          "def-countable-choice",
+          "def-real-elementary-functions-and-domains",
+          "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+          "thm-complex-exponential-addition-and-real-extension",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "thm-sine-and-cosine-derivatives",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-ftc-second-part",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "dependency_level": 6,
+        "strategy": "Compute the exact two-source sum and bound its small exponential difference with the sine and cosine derivative formulas.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  }
+]

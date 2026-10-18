@@ -1,0 +1,737 @@
+[
+  {
+    "order": 2648,
+    "id": "meshfree-kernel-approximation-and-conservative-sph",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Meshfree kernel approximation and conservative sph",
+    "companion": "meshfree-kernel-approximation-and-conservative-sph-examples",
+    "requires": [
+      "interacting-particle-mean-field-and-vortex-blob-error"
+    ],
+    "items": [
+      {
+        "id": "def-meshfree-cell-quadrature-and-fill-radius",
+        "kind": "definition",
+        "title": "Meshfree cell quadrature and fill radius",
+        "statement": "Let Ω⊂R^d be open. A cell rule is a locally finite family of bounded Jordan-measurable cells C_j⊂Ω whose interiors are disjoint and whose union covers Ω up to shared boundaries, with nodes x_j∈C_j and positive volumes V_j=∫1_{C_j}. Its fill radius is h=sup_j sup_{y∈C_j}|y−x_j|. Finite constants C_V,C_L>0 satisfy V_j≤C_Vh^d and Σ_{C_j∩B(x,r)≠∅}V_j≤C_L(r+h)^d for every x and r>0. For continuous g with compact support in Ω define Q_hg=Σ_jV_jg(x_j). An evaluation point is interior when B(x,Rε+2h)⊂Ω. Periodic calculations use periodic extensions. The rule includes existence of the cell integrals and the finite integration-compatibility identity ∫Ω g=Σ_{C_j∩supp(g)≠∅}∫_{C_j}g for each continuous compactly supported g.",
+        "strategy": "direct",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "def-jordan-inner-and-outer-content",
+          "def-riemann-integral-over-a-jordan-set",
+          "def-support-and-compactly-supported-riemann-integral-in-rn"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used in this definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-scaled-symmetric-compact-kernel-family",
+        "kind": "definition",
+        "title": "Scaled symmetric compactly supported kernel family",
+        "statement": "Fix d ≥ 1. An admissible kernel is a radial W ∈ C²_c(R^d,[0,∞)) supported in the closed ball of radius R>0 and normalized by ∫W(z) dz=1. Compactly supported integrals use [[def-support-and-compactly-supported-riemann-integral-in-rn]], whose support is the closure of the nonzero set. For ε>0 set W_ε(z)=ε^(−d)W(z/ε). Use the Euclidean norm from [[def-euclidean-inner-product]]. Define M₀=||W||∞, M₁=||∇W||∞, M₂=||D²W||∞, m₂=∫|z|²W(z) dz, and m₃=∫|z|³|∇W(z)| dz; all are finite by compact support and C² regularity. For continuous f, define the full-space smoother S_εf(x)=∫f(x−z)W_ε(z)dz and kernel-gradient operator D_εf(x)=∫f(y)∇W_ε(x−y)dy; these are compactly supported Riemann integrals for each x.",
+        "strategy": "direct",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "def-support-and-compactly-supported-riemann-integral-in-rn"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used in this definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-regularized-conservative-sph-system",
+        "kind": "definition",
+        "title": "Fixed-width regularized conservative SPH particle system",
+        "statement": "Fix d,N≥1, positive masses m_i, ε>0, the kernel W_ε of [[def-scaled-symmetric-compact-kernel-family]], and P∈C¹((0,∞)×R). For q=(q_i), define ρ_i(q)=Σ_jm_jW_ε(q_i−q_j); on the open state domain ρ_i>0 put p_i=P(ρ_i,e_i) and A_i=p_i/ρ_i². The fixed-width semidiscrete SPH system is q̇_i=v_i, v̇_i=−Σ_jm_j(A_i+A_j)∇W_ε(q_i−q_j), and ė_i=A_iΣ_jm_j(v_i−v_j)·∇W_ε(q_i−q_j). A controlled tube is a compact subset on which every ρ_i≥ρ_*>0. This definition includes the matched internal-energy equation and no artificial viscosity.",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used in this definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cellwise-particle-quadrature-oscillation-bound",
+        "kind": "lemma",
+        "title": "Cellwise oscillation bound for particle quadrature",
+        "statement": "For a compactly supported Lipschitz g and the cells of [[def-meshfree-cell-quadrature-and-fill-radius]], let J={j:C_j∩supp(g)≠∅}. Then |∫g−Q_hg|≤Σ_{j∈J}V_j osc_{C_j}(g)≤2h Lip(g)Σ_{j∈J}V_j.",
+        "strategy": "direct",
+        "deps": [
+          "def-meshfree-cell-quadrature-and-fill-radius"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-symmetric-kernel-moment-cancellation",
+        "kind": "lemma",
+        "title": "Symmetry cancels the first kernel moment",
+        "statement": "For W from [[def-scaled-symmetric-compact-kernel-family]], ∫zW(z) dz=0. Consequently every ε>0 has ∫zW_ε(z) dz=0.",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "cor-change-of-variables-for-compactly-supported-functions",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-compact-kernel-derivative-moment-identities",
+        "kind": "lemma",
+        "title": "Derivative moments of a compact radial kernel",
+        "statement": "For W from [[def-scaled-symmetric-compact-kernel-family]] and indices j,k,l, ∫∂_kW=0, ∫z_j∂_kW=−δ_jk, and ∫z_jz_l∂_kW=0. The quantity m₃=∫|z|³|∇W(z)|dz is finite.",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "lem-symmetric-kernel-moment-cancellation",
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-integration-by-parts-with-interior-derivatives",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-scaled-kernel-moments-and-derivative-bounds",
+        "kind": "lemma",
+        "title": "Scaling identities for kernel moments and derivatives",
+        "statement": "For W_ε(z)=ε^(−d)W(z/ε), supp W_ε is contained in the closed ball of radius Rε, ∫W_ε=1, ∫|z|²W_ε(z)dz=ε²m₂, ||W_ε||∞=ε^(−d)M₀, ||∇W_ε||∞=ε^(−d−1)M₁, and ||D²W_ε||∞=ε^(−d−2)M₂.",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "lem-symmetric-kernel-moment-cancellation",
+          "cor-change-of-variables-for-compactly-supported-functions",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sph-pair-forces-antisymmetric-and-central",
+        "kind": "lemma",
+        "title": "SPH pressure forces are equal-opposite and central",
+        "statement": "For the system of [[def-regularized-conservative-sph-system]], define g_ij=∇W_ε(q_i−q_j) and F_ij=−m_im_j(A_i+A_j)g_ij. Radial evenness gives g_ji=−g_ij and g_ii=0, so for i≠j, F_ji=−F_ij; F_ij is parallel to q_i−q_j (with F_ij=0 allowed).",
+        "strategy": "direct",
+        "deps": [
+          "def-regularized-conservative-sph-system",
+          "def-scaled-symmetric-compact-kernel-family"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-second-order-meshfree-convolution-bias",
+        "kind": "theorem",
+        "title": "Second-order convolution bias for an interior C² field",
+        "statement": "Let f∈C²(R^d) with bounded Hessian and define S_εf(x)=∫f(x−z)W_ε(z)dz. Then for every x, |S_εf(x)−f(x)|≤(m₂/2)ε²||D²f||∞.",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "lem-symmetric-kernel-moment-cancellation",
+          "lem-scaled-kernel-moments-and-derivative-bounds",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-regularized-sph-vector-field-lipschitz-on-positive-density-tube",
+        "kind": "lemma",
+        "title": "Explicit local Lipschitz bound for the regularized SPH vector field",
+        "statement": "Let K be a compact convex subset of the positive-density state domain in [[def-regularized-conservative-sph-system]]. Use ||z||#=max_i{|q_i|,|v_i|,|e_i|}, M=Σ_im_i, V=sup_K max_i|v_i|, K₁=||∇W_ε||∞, K₂=||D²W_ε||∞, a(ρ,e)=P(ρ,e)/ρ², and define A₀,Aρ,Ae as the maxima over z∈K and particle index i of |a(ρ_i(q),e_i)|, |∂ρa(ρ_i(q),e_i)|, and |∂ea(ρ_i(q),e_i)|. These maxima are finite; set A₁=2MK₁Aρ+Ae. The full vector field is Lipschitz on K with constant L=max{1,M(2K₁A₁+4A₀K₂),2MVA₁K₁+2MA₀K₁+4MA₀VK₂}.",
+        "strategy": "direct",
+        "deps": [
+          "def-regularized-conservative-sph-system",
+          "lem-scaled-kernel-moments-and-derivative-bounds",
+          "thm-mean-value-inequality"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-sph-conserves-linear-and-angular-momentum",
+        "kind": "proposition",
+        "title": "Linear and angular momentum are conserved by semidiscrete SPH",
+        "statement": "Every C¹ solution of [[def-regularized-conservative-sph-system]] conserves P=Σ_im_iv_i and J=Σ_im_i(q_i⊗v_i−v_i⊗q_i). Here (a⊗b)_kl=a_kb_l. No time discretization claim is made.",
+        "strategy": "direct",
+        "deps": [
+          "def-regularized-conservative-sph-system",
+          "lem-sph-pair-forces-antisymmetric-and-central"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-sph-matched-internal-energy-conserves-total-energy",
+        "kind": "proposition",
+        "title": "The matched internal-energy equation conserves total semidiscrete energy",
+        "statement": "Every C¹ solution of [[def-regularized-conservative-sph-system]] conserves H=Σ_im_i(|v_i|²/2+e_i). The identity uses exactly the displayed internal-energy equation.",
+        "strategy": "direct",
+        "deps": [
+          "def-regularized-conservative-sph-system",
+          "lem-sph-pair-forces-antisymmetric-and-central"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-first-derivative-meshfree-convolution-bias",
+        "kind": "theorem",
+        "title": "Second-order bias for the kernel particle gradient",
+        "statement": "Let f∈C³(R^d) with bounded third derivative and define D_εf(x)=∫f(y)∇W_ε(x−y)dy. Then |D_εf(x)−∇f(x)|≤(m₃/6)ε²||D³f||∞ for every x.",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "lem-scaled-kernel-moments-and-derivative-bounds",
+          "lem-compact-kernel-derivative-moment-identities",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "cor-change-of-variables-for-compactly-supported-functions",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-meshfree-particle-kernel-quadrature-error",
+        "kind": "theorem",
+        "title": "Explicit cellwise error for kernel value and gradient quadrature",
+        "statement": "Assume f∈C¹(R^d) with bounded f and ∇f, h≤ε≤1, and x is interior for the cell rule. Set Q⁰_{ε,h}f(x)=Σ_jV_jf(x_j)W_ε(x−x_j) and Q¹_{ε,h}f(x)=Σ_jV_jf(x_j)∇W_ε(x−x_j). There is C depending only on d,R,C_L,W such that |Q⁰_{ε,h}f(x)−S_εf(x)|≤Ch(||∇f||∞+ε^(−1)||f||∞) and |Q¹_{ε,h}f(x)−D_εf(x)|≤Ch(ε^(−1)||∇f||∞+ε^(−2)||f||∞).",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "def-meshfree-cell-quadrature-and-fill-radius",
+          "lem-scaled-kernel-moments-and-derivative-bounds",
+          "lem-cellwise-particle-quadrature-oscillation-bound",
+          "thm-mean-value-inequality"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-meshfree-joint-refinement-consistency",
+        "kind": "corollary",
+        "title": "Joint fill-distance and kernel-width refinement for value and derivative consistency",
+        "statement": "Under the hypotheses of [[thm-meshfree-particle-kernel-quadrature-error]], if f∈C³ and f with its derivatives through order three are bounded, then |Q⁰_{ε,h}f−f|≤Cε²||D²f||∞+Ch(||∇f||∞+ε^(−1)||f||∞) and |Q¹_{ε,h}f−∇f|≤Cε²||D³f||∞+Ch(ε^(−1)||∇f||∞+ε^(−2)||f||∞). Thus ε→0 and h/ε²→0 suffice for both errors to vanish uniformly at interior points. The constants are independent of h and ε.",
+        "strategy": "direct",
+        "deps": [
+          "def-meshfree-cell-quadrature-and-fill-radius",
+          "thm-second-order-meshfree-convolution-bias",
+          "thm-first-derivative-meshfree-convolution-bias",
+          "thm-meshfree-particle-kernel-quadrature-error"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-regularized-sph-local-wellposedness",
+        "kind": "theorem",
+        "title": "Local well-posedness of the regularized finite-particle SPH system",
+        "statement": "For P∈C¹ and W∈C² as above, the set U={z:ρ_i(q)>0 for every i} is open and the finite-dimensional SPH vector field is locally Lipschitz on U. From every z₀∈U there is a unique local C¹ solution. Any solution whose state remains in a compact positive-density tube satisfies the same local uniqueness wherever it is continued.",
+        "strategy": "direct",
+        "deps": [
+          "def-regularized-conservative-sph-system",
+          "lem-regularized-sph-vector-field-lipschitz-on-positive-density-tube",
+          "thm-picard-lindelof-local-existence-and-uniqueness"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-forward-euler-global-error-on-controlled-sph-tube",
+        "kind": "theorem",
+        "title": "Forward Euler has first-order global error and preserves a margin tube for the regularized SPH ODE",
+        "statement": "Let z(t), 0≤t≤T, be the unique SPH solution from [[thm-regularized-sph-local-wellposedness]]. Let K⊂U be compact and convex, with dist(z(t),Kᶜ)≥δ>0, and assume ||F||#≤B and Lip(F|K)≤L. For h=T/n define Z₀=z(0), Z_{k+1}=Z_k+hF(Z_k). If E_h=(Bh/2)(exp(LT)−1)<δ (with E_h=0 when L=0), then every Z_k∈K and max_k||Z_k−z(kh)||#≤E_h. The theorem is conditional on the exact path having the stated margin; it claims no Euler preservation of arbitrary tubes.",
+        "strategy": "direct",
+        "deps": [
+          "def-regularized-conservative-sph-system",
+          "lem-regularized-sph-vector-field-lipschitz-on-positive-density-tube",
+          "thm-regularized-sph-local-wellposedness",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-exponential-addition-formula",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2649,
+    "id": "meshfree-kernel-approximation-and-conservative-sph-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Meshfree kernel approximation and conservative sph — Examples",
+    "companion": "meshfree-kernel-approximation-and-conservative-sph",
+    "requires": [
+      "meshfree-kernel-approximation-and-conservative-sph"
+    ],
+    "items": [
+      {
+        "id": "cex-truncated-kernel-loses-boundary-constant-reproduction",
+        "kind": "counterexample",
+        "title": "A normalized kernel loses constant reproduction when truncated at a boundary",
+        "statement": "The claim that a normalized symmetric kernel preserves constants after arbitrary boundary truncation is false: for an explicit one-dimensional admissible kernel, the half-line truncated value at the boundary is 1/2 rather than 1.",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-interior-constant-and-affine-kernel-reproduction",
+        "kind": "example",
+        "title": "Interior constant and affine reproduction by a symmetric kernel",
+        "statement": "For every affine f(y)=a+b·y on R^d and every ε>0, full-space smoothing satisfies S_εf(x)=f(x) at every x. This is an interior or periodic statement; it does not include a truncated boundary integral.",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "lem-symmetric-kernel-moment-cancellation",
+          "lem-scaled-kernel-moments-and-derivative-bounds"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-two-particle-sph-force-pair",
+        "kind": "example",
+        "title": "Two SPH particles receive equal and opposite pressure forces",
+        "statement": "For two particles in the fixed-width system, the interaction force contributed by particle 2 to particle 1 is the negative of the force contributed by particle 1 to particle 2, and the common force line is their separation line.",
+        "strategy": "direct",
+        "deps": [
+          "def-regularized-conservative-sph-system",
+          "lem-sph-pair-forces-antisymmetric-and-central"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-fixed-neighbor-irregular-derivative-not-consistent",
+        "kind": "counterexample",
+        "title": "A disordered fixed-neighbor stencil can fail derivative consistency",
+        "statement": "There is a periodic one-dimensional cell rule with h/ε=3/4 and an affine field f(y)=y for which the particle kernel gradient at x=0 equals 945/1024+3024/3125 for every ε, whereas the exact convolution gradient equals 1. The node pattern in units of ε is fixed, so the active neighbor count at x=0 does not change under refinement; fixed-neighbor refinement therefore need not give a consistent derivative.",
+        "strategy": "direct",
+        "deps": [
+          "def-scaled-symmetric-compact-kernel-family",
+          "def-meshfree-cell-quadrature-and-fill-radius",
+          "thm-first-derivative-meshfree-convolution-bias",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "thm-additivity-over-subintervals"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-conservative-sph-can-clump-under-positive-pressure",
+        "kind": "counterexample",
+        "title": "A conservative positive-pressure SPH system can close a particle gap",
+        "statement": "The claim that positive pressure and semidiscrete momentum and energy conservation force every nearest-neighbor gap to have nonnegative initial acceleration is false. Three particles with a smooth positive pressure map and the compact kernel of [[def-scaled-symmetric-compact-kernel-family]] provide an explicit inward relative acceleration caused by a third-particle pressure force.",
+        "strategy": "direct",
+        "deps": [
+          "def-regularized-conservative-sph-system",
+          "lem-sph-pair-forces-antisymmetric-and-central",
+          "prop-sph-conserves-linear-and-angular-momentum",
+          "prop-sph-matched-internal-energy-conserves-total-energy",
+          "thm-regularized-sph-local-wellposedness"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Volker Springel, Smoothed Particle Hydrodynamics in Astrophysics, Annual Review of Astronomy and Astrophysics 48 (2010), author full text",
+              "url": "https://arxiv.org/html/1109.2219"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Numerical Methods for Partial Differential Equations, Lecture 25: Particle Methods (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/ff7d4237c8f958e646cca0702e4dd17b_MIT18_336S09_lec25.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

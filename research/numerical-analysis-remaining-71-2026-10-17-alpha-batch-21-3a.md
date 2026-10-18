@@ -1,0 +1,61 @@
+# Batch 21 Step 3a adjudication
+
+Run: `numerical-analysis-remaining-71-2026-10-17`; group: `batch-21`.
+
+Scope has no touched or page obligations; four findings and seven risk reviews are owed. All pre/post reader item, contract and manifest rows are identical: no reader repair needs acceptance/reversion. Current owned raw item hashes equal those pre/post rows before Alpha edits.
+
+## lem-na-finite-hermitian-ground-vector-with-deterministic-tie
+
+Reviewed all three steps and actual real/complex spectral, Courant–Fischer, matrix-adjoint and orthogonal-decomposition suppliers. Weighted averages characterize all minimizers in both directions. m>=1 ensures a nonzero least eigenspace; linearity of its orthogonal projection makes the finite ordered basis scan succeed, including m=1, A=0 and degenerate eigenvalues. Real sign and complex conjugate-phase factors make the first nonzero coordinate positive without changing norm or energy. Only finite selection; no AC. Context: Schollwöck §6.3 and Misguich §2.7; the stronger deterministic rule is proved locally. No defect found; carrier unchanged. Next: next routed item in dependency order.
+
+## lem-na-mixed-canonical-qr-gauge-preserves-state
+
+Reviewed steps 1.1–4.1, finite-array/core definitions and the Gram–Schmidt supplier (whose pairing is linear-first; applied to standard coefficient vectors this yields Q*Q=I). The column scan spans exactly the image, rectangular Q and coefficient factors multiply to the original matrix, and the adjoint factorization gives the right sweep. Absorption preserves every finite contraction and never revisits the completed prefix. Empty boundary sweeps and d=2 work; a zero swept core contradicts the nonzero input. No independent direction or numerical tolerance is discarded. Context: Schollwöck §4.4, Misguich §2.4; finite scan uses no AC. No defect found; carrier unchanged. Next: next routed item in dependency order.
+
+## lem-na-mps-environment-isometry-and-effective-hamiltonian
+
+Reviewed all three steps against conjugate-first Frobenius and exact core matricization definitions. Prefix L_j=(L_{j-1} tensor I)G_j and suffix R_j=G_j(I tensor R_{j+1}) have the stated shapes; induction gives L*L=I and RR*=I. Summing prefix/suffix indices in the pairing yields E*E=I, including empty environments and a full two-site center. (E*HE)*=E*HE requires exactly H*=H. Zero-dimensional bond cases obey the empty identity convention; actual normalized algorithm states have positive center dimension. Context: Misguich §2.7 equations 39–42, Schollwöck §6.3 equations 202–210. No AC. No defect found; carrier unchanged. Next: next routed item in dependency order.
+
+## alg-na-alternating-tensor-optimization-and-effective-eigenproblems — refuter:21:1
+
+Confirmed fatal bibliographic inaccuracy: linked Dupuy title page (PDF p. 1) names Mi-Song Dupuy and Tensor trains for high-dimensional problems, dated March 11, 2026. Corrected only author/title/date. Independently reviewed all six procedure instructions, finite sweep loops, periodic conversion, deterministic QR and ground solve, exact positive-rank SVD splitting, rank-cap rounding and skip branch. The supplied normalized state gives positive center dimension; the local solve and exact split preserve normalization. TT root-sum-square and tau<1 establish the accepted normalization branch; tau>=1 retains the prior state. No mathematical Definition or dependency change. No consumer repair is required. repair_confidence: 1. Next: local energy proposition risk review.
+
+## prop-na-exact-local-dmrg-update-does-not-increase-energy
+
+Reviewed both steps and the current environment and finite-ground-vector proofs. E*E=I identifies center and full norms, so the old center is an admissible unit competitor and the ground-vector minimum implies the global inequality by E*HE. Works for zero H, degeneracy, either field, either window width and boundary/full windows. No truncation or global-optimality claim. Misguich §2.7 equations 39–42 and Schollwöck §6.3 support the context. No AC. No defect found; carrier unchanged. Next: next ordered routed item.
+
+## thm-na-convergent-exact-dmrg-sweeps-are-coordinatewise-stationary
+
+Reviewed all three steps and current procedure, environment and ground-vector suppliers. Fixed dimensions and convergence at every update stage to ONE consistent normalized canonical tuple identify the post-update center with the same limiting outside cores. The fixed finite polynomial contractions give continuous effective matrices; unit norm and E*E=I survive limits. Fix an arbitrary unit competitor y before passing the local minimization inequality to the limit; this gives every competitor without any uniform or eigenvector-selection continuity assumption. The finite window list closes the stated coordinatewise result. Degenerate spectra allowed. No convergence, gap, global minimum or arbitrary-rank variation asserted; no AC. Schollwöck §6.3/Misguich §2.7 provide algorithm context, not this stronger conditional local proof. No defect found; carrier unchanged. Next: next ordered routed item.
+
+## thm-na-dmrg-sweep-truncation-energy-increase-bound — refuter:21:3
+
+Reviewed all four steps and the actual local-energy, normalized perturbation, rounding, TT root-sum-square, triangle and reverse-triangle suppliers. Independently checked supplier rounding Proof 1.2/4.1: orthonormal prefix and suffix interfaces make each local residual norm its tail and the retained suffix spaces nest, so the residual squares sum. Finite exact updates and splits give monotonic unrounded energy. e<=tau<1 gives rounded norm>=1-tau>0, reverse triangle gives normalization error<=e, hence normalized state distance<=2tau and energy error<=4||H||tau. Covers tau=0 and either field; a zero cap on a unit input discards norm one and cannot enter tau<1. No normalized result asserted at tau=1 or beyond. No AC. Dupuy §1.2.4 Thm 1.2.14 and Algorithm 1.3, and Oseledets Thm 2.2/proof provide truncation context; exact local rounded-tail bound is proved by the current supplier. Confirmed fatal author/title inaccuracy; corrected only the Dupuy reference as for refuter:21:1. No Statement, proof, manifest dependency or provenance category changes; repair_confidence: 1. Next: truncation example.
+
+## ex-na-two-site-tt-truncation-can-increase-energy — refuter:21:2
+
+Reviewed every verification step and actual finite-state, ground-vector, local procedure, rounding and energy-bound suppliers. Norm squared is 8/9+1/9=1; H=I-2psi psi* has eigenvalues -1,1,1,1. Full two-site center has E=I in both passes, and first basis projection is positive multiple of psi. Distinct Schmidt values 2sqrt(2)/3 and 1/3 force the rank-one rounded tensor and tau=1/3; normalized output has energy 1-16/9=-7/9, increasing by 2/9 from -1, below 4/3. No ambiguity from SVD phases affects the represented array. No AC. Current example is AI-generated and has no sources block; its local computation needs no external citation. False positive: no Sources/references[3] exists. Raw SHA-256 0ce56878f0ce1c82f509b663399e55d59e7632e01ffd49b24def82e5550443d8 equals BOTH immutable pre/post reader snapshots; the example is an untracked draft, so Git diff is not historical evidence. Thus this is not evidence of a historical repaired citation: the dispatched carrier never supplies that claimed reference. Retain the refuter allegation as evidence of a mistaken carrier attribution; no edit. Next: published reader finding and local checks.
+
+## Published dependency — reader:21:1
+
+The published definition uses an attained maximum for nonzero finite domain but has no justified_by. Current thm-operator-norm-is-the-largest-singular-value depends on the definition and proves the bound and attainment at a right-singular vector in steps 1.1–3.1, including zero map and zero codomain. Its existing deps direction allows justified_by without a cycle. Schema requires this relation; add only justified_by: [thm-operator-norm-is-the-largest-singular-value]. Owned normalized-Rayleigh consumer uses a nonzero coefficient domain and the valid bound; no consumer mathematical repair is needed. Published carrier left read-only; nonfatal-recorded and owner metadata maintenance pending. The current raw hash is fc79dd706c11a9f33fcbcdf14654e3251dfd4991f56fbec3843f7deb7015dc34; guard hash df8f7ce2af53a01c19df35b293c99e194b64f1e1b6d99d2f5f501554edfb3d15 matches the routed pre_sha256. Read the entire current definition, attainment proof and SVD supplier. No unmet mathematical prerequisite or escalation.
+
+## Sources and scope of independent reading
+
+Read the relevant passages, not entire books or papers: [Dupuy](https://msdupuy.github.io/teaching/TT_lectures_2026.pdf), title page and §1.2.4 Theorem 1.2.14/proof through PDF pp.20–22 and Algorithm 1.3, §1.2.5 mixed gauges; [Schollwöck](https://arxiv.org/pdf/1008.3477), §6.3 equations 202–210 and canonical norm simplification; [Misguich](https://arxiv.org/pdf/2606.24803), §2.7 equations 39–42; [Oseledets](https://users.math.msu.edu/users/iwenmark/Teaching/CMSE890/TENSOR_oseledets2011.pdf), Theorem 2.2 and full induction proof, printed pp.2299–2300. Those passages establish context; current local proofs supply the deterministic selection, complex-field treatment and rounded-tail energy implication. Contract source author metadata normalized; inherited full-document inspection claims are not independent Alpha claims.
+
+No new page/item, withdrawal, Statement/Definition change or published edit. Existing dependency records and stable IDs retained. Risk reviews are stored in the owning contract. Exactly four decisions, with one closed ledger row each (including the required false-positive disposition); no invented mathematical defect. Local checks are recorded below.
+
+## Final local checks and handoff
+
+- `node tools/tsx-run.mjs tools/precheck.mts items/alg-na-alternating-tensor-optimization-and-effective-eigenproblems.md items/thm-na-dmrg-sweep-truncation-energy-increase-bound.md`: pass; one proof checked, zero failures; algorithm has no phase proof.
+- `node tools/rendercheck.mjs` on those two explicit paths: pass, two files.
+- `node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-21.proof-contracts.json --strict`: pass, 11/11 items, zero errors/warnings.
+- `node tools/risk-report.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-21.proof-contracts.json`: run before risk entries; seven HIGH/CRITICAL items independently reviewed. The subsequent identical command with `--require-reviewed` passes, zero errors, 11 routed items.
+- `node tools/proof-layout.mjs items/alg-na-alternating-tensor-optimization-and-effective-eigenproblems.md items/thm-na-dmrg-sweep-truncation-energy-increase-bound.md`: run once after final item edits; pass, two items/four steps/zero defects.
+- `node tools/content-policy.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-21.pages.json`: pass, 13 scoped items, zero errors/warnings.
+- `node tools/defect-ledger.mjs validate --run numerical-analysis-remaining-71-2026-10-17`: pass, six current-run rows checked, zero errors. This dispatch appended four rows using the serialized append tool; unrelated rows preserved.
+
+Final raw hashes: algorithm `8f9e0d0a5176936ae0408d4cc9807ca518b9ce15c5283b17f8e07ac0bab41364`; sweep-bound theorem `04d62a0f17202121384413f8f3cea5e632cbf5252d32d6e680cda3c2c642cc3f`. Both differ from their pre-reader raw hashes solely by the bibliographic correction. Manifest source titles and contract source-author metadata updated coherently; no claim/proof/provenance-category/dependency change. The example remains byte-identical to its two reader snapshots. Published ledger updated after acquiring its dedicated lock and rereading it, with one deduplicated A-P index row; own lock released. Frontier dependency notes updated for owned consumers.
+
+All four routed obligations and all seven required risk reviews are complete. No mathematical escalation or proposed withdrawal. Published metadata repair remains pending its owner under the closed nonfatal disposition. No judge, stamps, engine transition, gate battery, publication or commit was initiated; the engine owns the next hash stamping and checks.

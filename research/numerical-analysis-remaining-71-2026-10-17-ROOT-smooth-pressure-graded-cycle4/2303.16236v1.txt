@@ -1,0 +1,1383 @@
+arXiv:2303.16236v1  [math.NA]  28 Mar 2023
+Discrete maximal regularity for the ﬁnite
+element approximation of the Stokes
+operator and its application
+Tomoya Kemmochi∗
+March 30, 2023
+Maximal regularity for the Stokes operator plays a crucial role in the the-
+ory of the non-stationary Navier–Stokes equations. In this paper, we con-
+sider the ﬁnite element semi-discretization of the non-stationary Stokes prob-
+lem and establish the discrete counterpart of maximal regularity in Lq for
+q ∈
+
+2N
+N+2, 2N
+N−2
+
+. For the proof of discrete maximal regularity, we introduce
+the temporally regularized Green’s function. With the aid of this notion,
+we prove discrete maximal regularity without the Gaussian estimate. As an
+application, we present Lp(0, T; Lq(Ω))-type error estimates for the approxi-
+mation of the non-stationary Stokes problem.
+1 Introduction
+In this paper, we consider the ﬁnite element approximation of the non-stationary Stokes
+problem
+
+
+
+
+
+
+
+
+
+
+
+∂tu −∆u + ∇ϕ = f,
+in Ω× J,
+div u = 0,
+in Ω× J,
+u = 0,
+on ∂Ω× J,
+u(0) = 0,
+in Ω,
+(1.1)
+where Ω⊂RN (N ≥2) is a bounded convex domain with smooth boundary, J =
+(0, T) ⊂R is an interval with T > 0, u: Ω× J →RN is an unknown velocity vector,
+ϕ: Ω×J →R is an unknown pressure, and f ∈Lp(J; Lq(Ω)N) is a given vector ﬁeld with
+p, q ∈(1, ∞). Throughout this paper, we write v(t) = v(·, t) (t ∈J) for a space-time
+function v. Let us moreover deﬁne the Stokes operator A = Aq on Lq(Ω)N by
+D(A) := W 2,q(Ω)N ∩W 1,q
+0 (Ω)N ∩Lq
+σ(Ω),
+Av = −Pσ∆v,
+v ∈D(A),
+where Lq
+σ(Ω) is the space of solenoidal vector ﬁelds in Lq(Ω)N and Pσ : Lq(Ω)N →
+Lq
+σ(Ω) is the Helmholtz projection. Throughout this paper, we do not distinguish Aq for
+∗Graduate School of Engineering, Nagoya University.
+Email: kemmochi@na.nuap.nagoya-u.ac.jp,
+Web: https://t-kemmochi.github.io/en/
+1
+
+diﬀerent q’s and we just denote it by A. Then, the Stokes problem (1.1) is expressed as
+an abstract Cauchy problem
+(
+∂tu(t) + Au(t) = Pσf(t),
+t ∈J,
+u(0) = 0
+(1.2)
+in Lq
+σ(Ω).
+It is well-known that u and ϕ satisfy the maximal regularity estimate
+∥∂tu∥Lp(J;Lq(Ω)) + ∥∇2u∥Lp(J;Lq(Ω)) + ∥∇ϕ∥Lp(J;Lq(Ω)) ≤C∥f∥Lp(J;Lq(Ω))
+(1.3)
+for p, q ∈(1, ∞) (see, e,g., [38, 12]). The estimate (1.3) is also described by
+∥∂tu∥Lp(J;Lq(Ω)) + ∥Au∥Lp(J;Lq(Ω)) ≤C∥f∥Lp(J;Lq(Ω)),
+(1.4)
+and thus it is understood as a property of the Stokes operator A.
+Maximal regularity plays an important role in the theory of the non-stationary Navier–
+Stokes equations. For example, in [38], the local well-posedness of the Navier–Stokes
+equations are derived via the maximal regularity. Moreover, it is known that, if the
+weak solution of the three-dimensional Navier–Stokes equations in the sense of Leray–
+Hopf belongs to Lp(J; Lq(Ω)3) with p, q satisfying
+2
+p + 3
+q = 1,
+q ∈[3, ∞],
+then the weak solution is the unique strong solution [36, 32, 37, 13, 17]. This class is
+known as the Serrin class today. It is suggested that Lp(J; Lq(Ω)N)-norm may play an
+important role in the theory of the Navier–Stokes equations.
+In this paper, we consider the ﬁnite element semi-discretization of the Stokes equations
+(1.1). Let Th be a shape-regular and quasi-uniform triangulation of Ω, Ωh ⊂Ωbe a
+polygonal approximation of Ωconsisting of elements in Th, and (Vh, Qh) ⊂H1
+0(Ωh)N ×
+H1(Ωh) be a pair of conforming ﬁnite element spaces associated to Th with suitable
+assumptions. Then, ﬁnite element semi-discretization of (1.1) is formulated as follows.
+Find uh : J →Vh and ϕh : J →Qh that satisfy
+
+
+
+
+
+(∂tuh, vh)h + (∇uh, ∇vh)h −(ϕh, div vh)h = (f, vh)h,
+∀vh ∈Vh,
+(div uh, ψh)h = 0,
+∀ψh ∈Qh,
+uh(0) = 0,
+(1.5)
+where (·, ·)h is the L2-inner product over Ωh. We moreover denote the discrete counter-
+part of the Stokes operator A by Ah, which are deﬁned in the subsequent section.
+The aim of this paper is to derive the ﬁnite element counterpart of the maximal
+regularity (1.3) and (1.4), namely,
+∥∂tuh∥Lp(J;Lq(Ωh)) + ∥Ahuh∥Lp(J;Lq(Ωh)) + ∥∇ϕh∥Lp(J;Lq(Ωh)) ≤C∥f∥Lp(J;Lq(Ω)),
+(1.6)
+with C independent of h and f, where uh and ϕh are the solution of (1.5). We succeeded
+in showing (1.6) for p ∈(1, ∞) and q ∈
+
+2N
+N+2, 2N
+N−2
+
+. The restriction for q stems from
+the result of [20], in which the author proved the Lq-resolvent estimate for Ah when
+q ∈
+
+2N
+N+2, 2N
+N−2
+
+. As an application of (1.6), we show error estimates for uh and ϕh in
+the Lp(J; Lq(Ωh))-type norms.
+2
+
+The result of the present paper is the ﬁrst result on the estimate of the form (1.6)
+for q ̸= 2, to the best of our knowledge. When q = 2, Ah has maximal regularity in
+L2 since Ah generates an analytic semigroup and L2 is a Hilbert space. However, for
+general q ̸= 2, a diﬀerent approach is necessary, as in the literature on Lq-theory of ﬁnite
+element methods. For the parabolic case, discrete counterpart of the maximal regularity
+is well-studied for both spatial and temporal discretization (e.g. [10, 25, 30, 19, 26, 18,
+28, 24, 22, 31, 2]). To establish the spatially discrete maximal regularity, the Gaussian
+estimate for the parabolic Green’s function plays an essential role (see e.g. [10, 25, 18]).
+For the Stokes case, however, such an estimate is unavailable since the Stokes operator
+does not generate an analytic semigroup in L1 (see [7]). Because of this diﬃculty, (1.6)
+for q ̸= 2 has not been established, and only Lq-resolvent estimate for Ah was established
+recently [20].
+It would be possible to apply our result to the fully discretized case.
+Indeed, an
+L∞(J; L2)-error estimate for full discretization of the non-stationary Stokes problem
+was recently established in [4]. To show the error estimate, the authors used maximal
+regularity for Ah in L2. Thus our result makes it possible to generalize the results in the
+Lq-setting. Namely, an L∞(J; Lq)-error estimate would be obtained for q ∈
+
+2N
+N+2, 2N
+N−2
+
+.
+Moreover, it is expected that the discrete maximal regularity (1.6) can be applied
+to numerical analysis of the non-stationary Navier–Stokes equations. Indeed, for the
+parabolic problems, the results of discrete maximal regularity mentioned above are suc-
+cessfully applied to numerical analysis of nonlinear parabolic equations (e.g. [11, 29,
+21, 23, 1]).
+Therefore, it would be interesting to proceed numerical analysis for the
+Navier–Stokes problem in this direction.
+As possible applications of our result, we would like to introduce related studies. In
+[15], it is shown that Ah is stable in fractional Sobolev spaces. This result is applied to
+show boundedness in the space-time fractional Sobolev space of the numerical solution
+to the Navier–Stokes equations in [14]. In these estimates, fractional Sobolev spaces of
+L2-type are addressed, since Lq-type estimates for the non-stationary Stokes problems
+were not developed at that time. Therefore, it would be possible to reﬁne the results
+by using our estimate (1.6). In [27], it is shown that, if a numerical solution of the
+three-dimensional Navier–Stokes problem is bounded in L∞(J; L4(Ω)), then there exists
+a unique strong solution to the original problem. Although the setting of discretization is
+diﬀerent from ours, discrete maximal regularity may be helpful to show the boundedness
+assumption. We here remark that the required regularity is stronger than the Serrin
+class.
+The outline of the proof of (1.6) is totally diﬀerent from that of the parabolic problems.
+In the literature on (spatially) discrete maximal regularity for parabolic equations, the
+estimate is reduced to an L1-type estimate of the so-called regularized Green’s function
+(cf. [10, 25, 18]), and to show such an estimate, the Gaussian estimate for the parabolic
+Green’s function is used as mentioned above, which is unavailable in our case.
+Instead of this, we introduce the “temporally regularized” Green’s function. Let η =
+ηa,ε ∈C∞
+0 (J) be an ε-approximation of the delta function with respect to a time a ∈J.
+Then, we consider the dual Stokes problem with an external force ηφh for arbitrary
+φh ∈Vh,σ, where Vh,σ is the discrete counterpart of Lp
+σ(Ω) (precise deﬁnition will be
+given later). We call the solution to this problem the temporally regularized Green’s
+function and denote it by g = ga,ε. We also consider the ﬁnite element approximation of
+g and denote it by gh. Then, the desired estimate (1.6) is reduced to a weighted estimate
+for g −gh. In order to show the weighted estimate, we use the Lq-resolvent estimate for
+Ah repeatedly, and this is why we assume q ∈
+
+2N
+N+2, 2N
+N−2
+
+.
+3
+
+We ﬁnally mention the temporal discretization. There are several results stating that,
+roughly speaking, (continuous) maximal regularity implies temporally discrete maximal
+regularity (cf. [3, 5, 22, 19, 24, 28, 2]). Since some of these results are established in an
+abstract setting, it is possible to establish full discretization of maximal regularity for
+the Stokes problem straightforwardly.
+The remainder of the present paper is as follows. In Section 2, we present the precise
+settings of this study and state our main results. In Section 3, we collect some preliminary
+estimates related to the discrete Stokes operator and the discrete Helmholtz projection.
+The proof of discrete maximal regularity (1.6) is given in Section 4, and ﬁnally we show
+error estimates for (1.5) in Section 5.
+Notation
+Throughout this paper, C denotes general constants that are independent of parameters
+such as h. The value of C may be diﬀerent at each appearance. For p ∈[1, ∞], we
+denote the H¨older conjugate by p′ = p/(p −1). The Lebesgue and the Sobolev spaces
+are denoted by Lp(Ω) and W s,p(Ω), respectively, for p ∈[1, ∞] and s > 0. Moreover,
+Lp
+σ(Ω), Lp
+0(Ω), and W 1,p
+0 (Ω) are as usual and W −1,p(Ω) is the dual of W 1,p′
+0
+(Ω).
+2 Main result
+In this section, we will present our main result. We start by giving the settings of this
+study. Let Ω⊂RN (N ≥2) be a bounded convex domain with smooth boundary, {Th}h
+be a family of triangulations of Ω, and Ωh ⊂Ωbe a polygonal approximation of Ω
+consisting of elements in Th. For v ∈W 1,1
+0 (Ωh), we extend v by zero outside Ωh and we
+identify v ∈W 1,1
+0 (Ω). We then let Vh ⊂H1
+0(Ωh)N and Qh ⊂H1(Ωh) be the conforming
+ﬁnite element spaces for the velocity and the pressure, respectively.
+As in [20], we assume the following hypotheses. Throughout this paper, (·, ·)h denotes
+the L2-inner product over Ωh.
+(H1) We assume that the family {Th}h is shape-regular and quasi-uniform. Namely,
+there exists C > 0 such that Ch ≤ρT for all T ∈Th and h > 0, where ρT is the
+radius of the maximum inscribed ball.
+(H2) There exists a quasi-interpolation operator Ih : W 1,1(Ω)N →Vh that satisﬁes the
+following properties:
+(i) For all v ∈W 1,1(Ω)N,
+(div(v −Ihv), ψh)h = (v · n, ˆψh)∂Ωh,
+∀ψh ∈Qh,
+(2.1)
+where ˆψh ∈L∞(Ωh) is a function determined by ψh satisfying supp ˆψh =
+suppψh and
+∥ˆψh∥Lp(∂Ωh) ≤Ch−1
+p ∥ψh∥Lp(Ωh).
+(ii) For each T ∈Th, there exists a macro-element ∆T including T that satisﬁes
+∥v −Ihv∥Lp(T) ≤Ch∥∇v∥Lp( ˜∆T ),
+(2.2)
+∥∇Ihv∥Lp(T) ≤C∥∇v∥Lp( ˜∆T ),
+(2.3)
+for all p ∈[1, ∞] and v ∈W 1,p
+0 (Ω)N, and
+∥v −Ihv∥Lp(T) ≤Ch2∥∇v∥W 1,p( ˜∆T ),
+(2.4)
+4
+
+∥∇(v −Ihv)∥Lp(T) ≤Ch2∥∇v∥W 1,p( ˜∆T ),
+(2.5)
+if v ∈W 2,p( ˜∆T )N in addition, where
+˜∆T = ∆T ∪
+(
+x ∈Ω\ Ωh
+ argmin
+S∈Th
+dist(x, S) ⊂∆T
+)
+and each ∆T includes at most L elements of Th with L independent of h, T.
+(H3) There exists a quasi-interpolation operator Jh : W 1,1(Ω) →Qh that satisﬁes the
+following estimates. For each T ∈Th, there exists a macro-element ∆T including
+T that satisﬁes
+∥ψ −Jhψ∥Lp(T) ≤Ch∥∇ψ∥Lp(∆T ),
+(2.6)
+∥∇Jhψ∥Lp(T) ≤C∥∇ψ∥Lp(∆T ),
+(2.7)
+∥∇(ψ −Jhψ)∥Lp(T) ≤Ch∥∇2ψ∥Lp(∆T ),
+if ψ ∈W 2,p(∆T )
+for all p ∈[1, ∞] and any ψ ∈W 1,p(∆T ), where ∆T includes at most L elements
+of Th with L independent of h, T.
+(H4) There exists another quasi-interpolation operator ˜Ih : C0(Ωh)N →Vh that satisﬁes
+(i) For all v ∈C0(Ωh)N ∩W 1,1
+0 (Ωh)N,
+(div(v −˜Ihv), ψh)h = 0,
+∀ψh ∈Qh.
+(ii) For each T ∈Th, there exists a macro-element ∆T including T that satisﬁes
+∥∇˜Ihv∥Lp(T) ≤C∥∇v∥Lp(∆T ),
+∀v ∈W 1,p(∆T )N,
+for all p ∈[1, ∞], where ∆T includes at most L elements of Th with L
+independent of h, T.
+(H5) The above operators ˜Ih and Jh satisfy the following super-approximation proper-
+ties. Let D ⊂Ωh be a subdomain and let
+Dd := {x ∈Ωh | dist(x, D) < d}
+for d > 0. Furthermore, let ω ∈C∞(Ωh) be a cut-oﬀfunction that satisﬁes
+supp ω ⊂Dd,
+0 ≤ω ≤1,
+ω|D ≡1,
+|∇ω| ≤Cd−1.
+Then, there exists c0 > 0 such that for all d ≥c0h, vh ∈Vh and ψh ∈Qh,
+∥ω2vh −˜Ih(ω2vh)∥D2d ≤Chd−1∥vh∥D3d,
+∥∇(ω2vh −˜Ih(ω2vh))∥D2d ≤Cd−1∥vh∥D3d,
+∥ω2ψh −Jh(ω2ψh)∥D2d ≤Chd−1∥ψh∥D3d,
+where c0 and C are independent of the domain D and parameters d, h.
+5
+
+We refer the reader to [20] for the construction of the above interpolation operators.
+We notice that (2.4) is not assumed in [20]; however, it holds true at least for the
+Taylor–Hood and MINI elements (see [20, Appendix]). By assumption (H1), the inverse
+inequality
+∥∇vh∥Lp(T) ≤Ch−1∥vh∥Lp(T)
+(2.8)
+holds for all p ∈[1, ∞], vh ∈Vh, and T ∈Th.
+Let us further introduce the discrete counterparts of Lp
+σ(Ω), the Helmholtz projection,
+and the Stokes operator as follows.
+Deﬁnition 1.
+(i) We deﬁne the space Vh,σ ⊂Vh by
+Vh,σ := {vh ∈Vh | (div vh, ψh)h = 0, ∀ψh ∈Qh}.
+(ii) We deﬁne the discrete Helmholtz projection Ph,σ : Lp(Ω)N →Vh,σ by
+(Ph,σv, wh)h = (v, wh)h,
+∀wh ∈Vh,σ
+for each v ∈Lp(Ω)N and p ∈(1, ∞)
+(iii) We deﬁne the discrete Stokes operator Ah : Vh,σ →Vh,σ by
+(Ahvh, wh)h = (∇vh, ∇wh)h,
+∀wh ∈Vh,σ,
+for each vh ∈Vh,σ.
+Then, the ﬁnite element approximation of the non-stationary Stokes equations (1.1)
+is the following.
+Find uh ∈C0( ¯J; Vh) ∩C1(J; Vh) and ϕh ∈L2(J; Qh) that satisfy (1.5).
+The solution uh and ϕh satisfy the Galerkin orthogonality (compatibility)
+(
+(∂t(u −uh), vh)h + (∇(u −uh), ∇vh)h −(ϕ −ϕh, div vh)h = 0,
+∀vh ∈Vh,
+(div(u −uh), ψh)h = 0,
+∀ψh ∈Qh.
+(2.9)
+Moreover, with the notation of Deﬁnition 1, equation (1.5) can be described as the
+Cauchy problem
+(
+∂tuh + Ahuh = Ph,σf,
+uh(0) = 0.
+(2.10)
+Now, our main result, namely maximal regularity for Ah, is stated as follows.
+Theorem 2.1. Let p ∈(1, ∞), q ∈
+
+2N
+N+2, 2N
+N−2
+
+, and f ∈Lp(J; Lq(Ω)N). Assume that
+hypotheses (H1)–(H5) hold. Then, the solution (uh, ϕh) of the discrete Stokes problem
+(1.5) satisﬁes
+∥∂tuh∥Lp(J;Lq(Ωh)) + ∥Ahuh∥Lp(J;Lq(Ωh)) ≤C∥f∥Lp(J;Lq(Ω)),
+(2.11)
+where C is independent of h and f.
+Remark 2.1. The restriction q ∈
+
+2N
+N+2, 2N
+N−2
+
+stems from the assumption to show the
+analyticity of the discrete Stokes semigroup e−tAh in Lq. See [20, Theorem 2.1] and
+Lemma 3.1 below.
+6
+
+As an application of the discrete maximal regularity (2.11), we obtain the following
+error estimates.
+Theorem 2.2. Let (u, ϕ) be the solution of (1.1). Then, under the same hypotheses as
+in Theorem 2.1, we have
+∥u −uh∥Lp(J;Lq(Ωh)) ≤Ch2∥f∥Lp(J;Lq(Ω)),
+(2.12)
+∥∇(u −uh)∥Lp(J;Lq(Ωh)) ≤Ch∥f∥Lp(J;Lq(Ω)),
+(2.13)
+∥∂t(u −uh)∥W −1,p(J;Lq(Ωh)) ≤Ch∥f∥Lp(J;Lq(Ω)),
+(2.14)
+∥Jhϕ −ϕh∥Lp(J;Lq(Ωh)) ≤Ch∥f∥Lp(J;Lq(Ω)),
+(2.15)
+where C is independent of h and f.
+The estimate for the pressure (2.15) immediately implies the error estimate for the
+pressure and the a priori estimate for ∇ϕh.
+Corollary 2.1. Under the same hypotheses as in Theorem 2.1, we have
+∥ϕ −ϕh∥Lp(J;Lq(Ωh)) ≤Ch∥f∥Lp(J;Lq(Ω))
+(2.16)
+and
+∥∇ϕh∥Lp(J;Lq(Ωh)) ≤C∥f∥Lp(J;Lq(Ω)),
+where C is independent of h and f.
+Proof. The error estimate (2.16) is an immediate consequence of (2.15), (2.6), and (1.3).
+Moreover, by (2.8), (2.7), (2.15), and (1.3), we obtain
+∥∇ϕh∥Lp(J;Lq(Ωh)) ≤∥∇(ϕh −Jhϕ)∥Lp(J;Lq(Ωh)) + ∥∇Jhϕ∥Lp(J;Lq(Ωh))
+≤Ch−1∥ϕh −Jhϕ∥Lp(J;Lq(Ωh)) + C∥∇ϕ∥Lp(J;Lq(Ωh))
+≤C∥f∥Lp(J;Lq(Ω)).
+Hence we complete the proof.
+3 Preliminaries
+Under the assumptions (H1)–(H5), the resolvent estimate for Ah holds [20, Theorems 2.1
+and 2.2]. With the notation of Deﬁnition 1, the result is summarized as follows.
+Lemma 3.1. Let q ∈
+
+2N
+N+2, 2N
+N−2
+
+and δ ∈(0, π). Assume (H1)–(H5) hold. Then, for
+any λ ∈C \ {0} with | arg λ| < π −δ and any g ∈Lq(Ω)N, we have
+(λ + Ah)−1Ph,σg
+
+Lq(Ωh) ≤C(1 + |λ|)−1∥g∥Lq(Ω),
+(3.1)
+
+(λ + Ah)−1Ph,σ −(λ + A)−1Pσ
+
+g
+
+Lq(Ωh) ≤Ch2∥g∥Lq(Ω),
+(3.2)
+
+(λ + Ah)−1Ph,σ −(λ + A)−1Pσ
+
+g
+
+W −1,q(Ω) ≤Ch|λ|−1∥g∥Lq(Ω),
+(3.3)
+where C is independent of h, λ, and g.
+From this result, we derive some preliminary estimates for the proofs of Theorems 2.1
+and 2.2.
+7
+
+3.1 Further estimates on the discrete Stokes resolvent problem
+Lemma 3.2. Let q ∈
+
+2N
+N+2, 2N
+N−2
+
+and δ ∈(0, π). Assume (H1)–(H5) hold. Then, for
+any λ ∈C \ {0} with | arg λ| < π −δ and any g ∈W 1,q
+0 (Ω)N, we have
+
+(λ + Ah)−1Ph,σ −(λ + A)−1Pσ
+
+g
+
+Lq(Ωh) ≤Ch|λ|−1∥∇g∥Lq(Ω),
+(3.4)
+where C is independent of h, λ, and g.
+Proof. Let u = (λ + A)−1Pσg and uh = (λ + Ah)−1Ph,σg. Then, u solves the Stokes
+resolvent problem
+
+
+
+
+
+λu −∆u + ∇ϕ = g,
+in Ω,
+div u = 0,
+in Ω,
+u = 0,
+on ∂Ω
+for some ϕ, and uh satisﬁes
+(
+λ(uh, vh)h + (∇uh, ∇vh)h −(ϕh, div vh)h = (g, vh)h,
+∀vh ∈Vh,
+(div uh, ψh)h = 0,
+∀ψh ∈Qh
+for some ϕh ∈Qh. Moreover, let φ ∈C∞
+0 (Ωh)N be arbitrary and consider the dual
+problems
+
+
+
+
+
+¯λU −∆U + ∇Φ = φ,
+in Ω,
+div U = 0,
+in Ω,
+U = 0,
+on ∂Ω
+and
+(
+λ(vh, Uh)h + (∇vh, ∇Uh)h −(div vh, Φh)h = (vh, φ)h,
+∀vh ∈Vh,
+(ψh, div Uh)h = 0,
+∀ψh ∈Qh.
+Then, as discussed in [20, §8.2], we have
+(u −uh, φ)h = (u −uh, φ) = (g, U −Uh),
+which implies
+|(u −uh, φ)h| ≤∥∇g∥Lq(Ω)∥U −Uh∥W −1,q′(Ω) ≤Ch|λ|−1∥∇g∥Lq(Ω)∥φ∥Lq′(Ω)
+owing to (3.3). Since φ ∈C∞
+0 (Ωh)N is arbitrary, we obtain (3.4).
+Corollary 3.1. Under the same assumptions as above, we have
+∥∇(λI + Ah)−1Ph,σg∥Lq(Ωh) ≤C|λ|−1∥∇g∥Lq(Ω)
+(3.5)
+for g ∈W 1,q
+0 (Ω).
+Proof. Let u = (λ + A)−1Pσg and uh = (λ + Ah)−1Ph,σg. Then, u satisﬁes the resolvent
+estimate of the form
+∥∇u∥Lq(Ω) ≤C|λ|−1∥∇g∥Lq(Ω),
+which is proved in [20, Lemma 3.2]. Therefore, by (2.8), (2.3), (2.2), and (3.4), we have
+∥∇uh∥Lq(Ωh) ≤∥∇(Ihu −uh)∥Lq(Ωh) + ∥∇Ihu∥Lq(Ωh)
+8
+
+≤Ch−1∥Ihu −uh∥Lq(Ωh) + C∥∇u∥Lq(Ωh)
+≤Ch−1∥u −uh∥Lq(Ωh) + Ch−1∥u −Ihu∥Lq(Ωh) + C∥∇u∥Lq(Ωh)
+≤C|λ|−1∥∇g∥Lq(Ωh),
+which is the desired estimate.
+The error estimate (3.2) implies an error estimate for the initial value problem
+(
+∂tu −∆u + ∇ϕ = 0,
+in Ω× J,
+u(0) = v
+for given v ∈Lp
+σ(Ω) (cf. [34, Lemma 5.1]).
+Lemma 3.3. Let q ∈
+
+2N
+N+2, 2N
+N−2
+
+and v ∈Lq(Ω)N. Then, the error estimate
+∂t
+e−tAPσ −e−tAhPh,σ
+
+v
+
+Lq(Ωh) ≤Ch2t−2∥v∥Lq(Ω),
+(3.6)
+for all t > 0, where C is independent of h.
+Proof. Since e−tA and e−tAh are analytic semigroups, we have
+∂t
+e−tAPσ −e−tAhPh,σ
+
+v =
+1
+2πi
+Z
+Γ
+λetλ
+(λI + A)−1Pσ −(λI + Ah)−1Ph,σ
+
+vdλ,
+where Γ = {re±i(π−δ) | r ≥0} for some δ ∈(0, π/2) and Γ is oriented so that Im λ
+decreases along Γ. Therefore, owing to (3.2), we obtain
+∂t
+e−tAPσ −e−tAhPh,σ
+
+v
+
+Lq(Ωh) ≤Ch2∥v∥Lq(Ωh)
+Z ∞
+0
+re−tr cos δdr
+≤Ch2t−2∥v∥Lq(Ω),
+which is the desired estimate (3.6).
+3.2 Properties of the discrete Helmholtz projection
+We derive some estimates for the discrete Helmholtz projection Ph,σ. We deﬁne
+Rhv := A−1
+h Ph,σAv
+for v ∈D(A) and begin with the error estimate for Rh.
+Lemma 3.4. Let q ∈
+
+2N
+N+2, 2N
+N−2
+
+and assume (H1)–(H5) hold. Then, we have
+∥(A−1Pσ −A−1
+h Ph,σ)g∥Lq(Ωh) ≤Ch2∥g∥Lq(Ω)
+(3.7)
+for g ∈Lq(Ω)N. Moreover, we have
+∥v −Rhv∥Lq(Ωh) ≤Ch2∥v∥W 2,q(Ω).
+(3.8)
+for v ∈D(A).
+Proof. Let g ∈Lq(Ω)N. Then, letting λ →0 in the estimate (3.2), we obtain (3.7).
+Moreover, let v ∈D(A). Then, setting g = Av in (3.7), we obtain (3.8) since A−1PσAv =
+v.
+9
+
+We then have the following estimates for Ph,σ. Similar estimates for q = 2 are already
+given in [33, 16].
+Lemma 3.5. Let q ∈
+
+2N
+N+2, 2N
+N−2
+
+and assume (H1)–(H5) hold. Then, we have the
+following estimates.
+(i) For v ∈Lq(Ω)N,
+∥Ph,σv∥Lq(Ωh) ≤C∥v∥Lq(Ω).
+(3.9)
+(ii) For v ∈W 1,q
+0 (Ω)N,
+∥∇Ph,σv∥Lq(Ωh) ≤C∥∇v∥Lq(Ω),
+(3.10)
+∥(Pσ −Ph,σ)v∥Lq(Ωh) ≤Ch∥∇v∥Lq(Ω).
+(3.11)
+(iii) For v ∈D(A),
+∥v −Ph,σv∥Lq(Ωh) ≤Ch2∥v∥W 2,q(Ω).
+(3.12)
+Here, each C is independent of h and g.
+Proof. Let λ > 0. Then, one obtains
+λ(λ + A)−1v →v
+(∀v ∈Lp
+σ(Ω)N),
+λ(λ + Ah)−1vh →vh
+(∀vh ∈Vh,σ),
+in Lq as λ →∞, by the general theory of semigroups (cf. [35, Lemma 3.2 in Chapter 1]).
+Therefore, we obtain (3.9), (3.10), and (3.11) by (3.1), (3.5), and (3.4), respectively.
+We show (3.12). Recalling that Rhv ∈Vh,σ for v ∈D(A), we have
+v −Ph,σv = (I −Ph,σ)(v −Rhv).
+This implies (3.12) together with (3.9) and (3.8).
+The stability property of Ph,σ implies the duality estimate for Vh,σ.
+Corollary 3.2. Let q ∈
+
+2N
+N+2, 2N
+N−2
+
+and assume (H1)–(H5) hold. Then,
+∥vh∥Lq(Ωh) ≤C
+sup
+wh∈Vh,σ
+(vh, wh)h
+∥wh∥Lq′(Ωh)
+,
+∀vh ∈Vh,σ,
+(3.13)
+where C is independent of h.
+Proof. Let vh ∈Vh,σ and set v∗
+h = Ph,σ(|vh|q−2vh) ∈Vh,σ. Then, by (3.9), we have
+∥v∗
+h∥Lq′(Ωh) ≤C∥vh∥q−1
+Lq(Ωh).
+This implies (3.13) since ∥vh∥q
+Lq(Ωh) = (vh, v∗
+h)h.
+10
+
+3.3 Estimates for the discrete Stokes operator
+The estimate (3.13) gives the operator norm of the discrete Stokes operator Ah.
+Corollary 3.3. Let q ∈
+
+2N
+N+2, 2N
+N−2
+
+and assume (H1)–(H5) hold. Then,
+∥Ahvh∥Lq(Ωh) ≤Ch−2∥vh∥Lq(Ωh),
+∀vh ∈Vh,σ,
+(3.14)
+where C is independent of h.
+Proof. Let vh ∈Vh,σ. Then, for any wh ∈Vh,σ, we have
+(Ahvh, wh)h = (∇vh, ∇wh)h ≤Ch−2∥vh∥Lp(Ωh)∥wh∥Lp(Ωh)
+by the inverse inequality (2.8). This implies (3.14) together with (3.13).
+The resolvent estimate (3.1) also implies that the fractional power Aθ
+h is well-deﬁned
+for any θ ∈R, and since Vh,σ is ﬁnite dimensional, Aθ
+hvh is well-deﬁned for any vh ∈Vh,σ.
+Moreover, the following estimates hold. The proof is clear by the interpolation estimates
+and thus we omit it.
+Lemma 3.6. Let θ ∈[0, 1] and q ∈
+
+2N
+N+2, 2N
+N−2
+
+. Then, for any vh ∈Vh,σ, we have
+∥Aθ
+hvh∥Lq(Ωh) ≤Ch−2θ∥vh∥Lq(Ωh),
+∥Aθ
+he−tAhvh∥Lq(Ωh) ≤Ct−θ∥vh∥Lq(Ωh),
+∀t > 0,
+where C is independent of h.
+4 Discrete maximal regularity
+This section is devoted to the proof of Theorem 2.1.
+4.1 Temporally regularized Green’s function
+Let a ∈J be an arbitrary time and ε > 0 be suﬃciently small. Then, we introduce an
+approximated delta-function η = ηa,ε ∈C∞
+0 (J) as a function that satisﬁes
+η ≥0,
+supp η ⊂J ∩[a −ε, a + ε],
+Z
+J
+ηdt = 1,
+(4.1)
+and
+η(l)
+Lp(J) ≤Cε−l−1−1
+p
+(4.2)
+for l ∈N and p ∈[1, ∞]. For example, the classical Friedrichs molliﬁer satisﬁes the
+above requirements.
+We further ﬁx φh ∈Vh,σ arbitrarily and then we deﬁne the temporally regularized
+Green’s function g = ga,ε : J →Lp
+σ(Ω) as the solution of the dual problem
+(
+−∂tg + Ag = ηPσφh,
+in J,
+g(T) = 0.
+11
+
+We denote by gh the ﬁnite element approximation of g. Namely, gh satisﬁes
+(
+−∂tgh + Ahgh = ηφh,
+in J,
+gh(T) = 0.
+Here we recall that φh ∈Vh,σ and thus Ph,σφh = φh.
+Hereafter, we assume q = p according to the general theory of maximal regularity
+(cf. [8, Theorem 4.2]).
+Then, keeping (3.13) in mind, we address (Ahuh(a), φh)h for
+φh ∈Vh,σ as above. We show the following expression formula.
+Lemma 4.1. Let a ∈J and φh ∈Vh,σ. Let further u and uh be the solution of (1.1)
+and (1.5), respectively. Then, we have
+(Ahuh(a), φh)h = I1(a; φh) + I2(a; φh) + I3(a; φh),
+where
+I1(a; φh) := −
+Z
+J
+(Ph,σf, ∂t(g −gh))hdt,
+I2(a; φh) :=
+Z
+J
+(−∂tu + f, ηφh)dt,
+I3(a; φh) :=
+Z
+J
+(Ahuh(a) −Ahuh(t), η(t)φh)hdt.
+Proof. Recalling (4.1), we have
+(Ahuh(a), φh)h =
+Z
+J
+(Ahuh(t), η(t)φh)hdt +
+Z
+J
+(Ahuh(a) −Ahuh(t), η(t)φh)hdt
+=
+Z
+J
+(Ahuh(t), η(t)φh)hdt + I3(a; φh).
+By the deﬁnition of gh and integration by parts in time, we have
+Z
+J
+(Ahuh(t), η(t)φh)hdt =
+Z
+J
+(Ahuh(t), −∂tgh + Ahgh)hdt
+=
+Z
+J
+(∂tuh + Ahuh, Ahgh)hdt
+=
+Z
+J
+(f, ∂tgh + ηφh)hdt
+=
+Z
+J
+(f, ∂tg + ηφh)dt + I1(a; φh).
+Here we used the fact that ∂tgh(t) + η(t)φh ∈Vh,σ for each t ∈J. Let us now address
+R
+J(f, ∂tg)dt. Since u satisﬁes (1.2) and ∂tg(t) ∈Lp′
+σ (Ω) for each t ∈J, we have
+Z
+J
+(f, ∂tg)dt =
+Z
+J
+(∂tu + Au, ∂tg)dt
+=
+Z
+J
+(∂tu, ∂tg −Ag)dt
+=
+Z
+J
+(∂tu, −ηφh)dt
+by integrating by parts in time again. Hence we have
+Z
+J
+(f, ∂tg + ηφh)dt =
+Z
+J
+(−∂tu + f, ηφh)dt = I2(a; φh),
+and we thus obtain the assertion.
+12
+
+Let Bp′
+h,σ = {φh ∈Vh,σ | ∥φh∥Lp′(Ωh) ≤1} and we will address
+
+
+Z
+J
+sup
+φh∈Bp′
+h,σ
+|Ij(a; φh)|pda
+
+
+1/p
+for j = 1, 2, 3. We ﬁrst show the estimates for I2 and I3.
+Lemma 4.2. For any ε > 0, we have
+
+
+Z
+J
+sup
+φh∈Bp′
+h,σ
+|I2(a; φh)|pda
+
+
+1/p
+≤C∥f∥Lp(Ω×J),
+(4.3)
+
+
+Z
+J
+sup
+φh∈Bp′
+h,σ
+|I3(a; φh)|pda
+
+
+1/p
+≤Cεh−2∥f∥Lp(Ω×J) + ∥Ahuh∥Lp(Ωh×J)
+
+.
+(4.4)
+In particular, letting ε = γh2 with γ > 0 suﬃciently small, we obtain
+
+
+Z
+J
+sup
+φh∈Bp′
+h,σ
+|I3(a; φh)|pda
+
+
+1/p
+≤C∥f∥Lp(Ω×J) + 1
+2∥Ahuh∥Lp(Ωh×J).
+(4.5)
+Proof. Recalling that supp η ⊂J ∩[a −ε, a + ε] and ∥η∥L∞(J) ≤Cε−1 (see (4.1) and
+(4.2)), we have
+|I2(a; φh)| ≤
+Z
+J∩[a−ε,a+ε]
+∥(−∂tu + f)(t)∥Lp(Ω)|η(t)|∥φh∥Lp′(Ωh)dt
+≤Cε−1+ 1
+p′ ∥φh∥Lp′(Ωh)
+ Z
+J∩[a−ε,a+ε]
+∥(−∂tu + f)(t)∥p
+Lp(Ω)dt
+!1/p
+,
+which implies
+Z
+J
+sup
+φh∈Bp′
+h,σ
+|I2(a; φh)|pda ≤C
+
+ε−1+ 1
+p′ p Z
+J
+Z
+J∩[a−ε,a+ε]
+∥(−∂tu + f)(t)∥p
+Lp(Ω)dtda
+≤Cε−1
+Z
+J
+∥(−∂tu + f)(t)∥p
+Lp(Ω)
+Z
+J∩[t−ε,t+ε]
+dadt
+≤C∥−∂tu + f∥p
+Lp(Ω×J).
+Therefore, by the maximal regularity (1.3), we obtain the ﬁrst assertion (4.3).
+We next address I3. It is clear that
+|I3(a; φh)| =
+
+Z
+J
+Z a
+t
+(∂tAhuh(s), η(t)φh)hdsdt
+
+≤
+Z
+J
+Z
+J
+χε(s, t, a)∥∂tAhuh(s)∥Lp(Ωh)|η(t)|∥φh∥Lp′(Ωh)dsdt
+holds, where
+χε(s, t, a) =
+(
+1
+if |t −a| ≤ε and |s −a| ≤ε,
+0
+otherwise.
+13
+
+Noticing that
+meas({(t, s) ∈J × J | χε(t, s, a) = 1}) ≤4ε2
+for each a, where meas(·) denotes the Lebesgue measure, we have
+|I3(a; φh)| ≤Cε
+2
+p′
+Z
+J
+Z
+J
+χε(s, t, a)∥∂tAhuh(s)∥p
+Lp(Ωh)|η(t)|pdsdt
+1/p
+∥φh∥Lp′(Ωh).
+This implies
+Z
+J
+sup
+φh∈Bp′
+h,σ
+|I3(a; φh)|pda
+≤C
+
+ε
+2
+p′ p Z
+J
+Z
+J
+Z
+J
+χε(s, t, a)∥∂tAhuh(s)∥p
+Lp(Ωh)|η(t)|pdsdtda
+≤Cεp−2
+Z
+J
+∥∂tAhuh(s)∥p
+Lp(Ωh)
+Z
+J
+Z
+J
+χε(s, t, a)dtdads
+≤Cεp∥∂tAhuh∥Lp(Ωh×J).
+Here we used |η| ≤Cε−1 and
+meas({(t, a) ∈J × J | χε(t, s, a) = 1}) ≤4ε2
+for each s. Moreover, by (2.10), (3.9), and (3.14), we have
+∥∂tAhuh∥Lp(Ωh×J) = ∥Ah(Ph,σf −Ahuh)∥Lp(Ωh×J)
+≤Ch−2∥f∥Lp(Ω×J) + ∥Ahuh∥Lp(Ωh×J)
+
+.
+Hence we obtain (4.4).
+Let us then consider I1. We introduce a weight function
+ω(t) = ωa(t) =
+p
+(t −a)2 + ε2,
+t ∈R.
+It is easy to see that, for r ∈[1, ∞] and β > 1/r,
+∥ω−β
+a ∥Lr(J) ≤Cε−β+ 1
+r
+(4.6)
+holds uniformly in a. Then, we have the following estimate.
+Lemma 4.3. Let
+Mα :=
+sup
+a∈J, φh∈Bp′
+h,σ
+∥ωα∂t(g −gh)∥Lp′(Ωh×J)
+for α > 0. Then, for α > 1/p, we have
+
+
+Z
+J
+sup
+φh∈Bp′
+h,σ
+|I1(a; φh)|pda
+
+
+1/p
+≤Cε−α+ 1
+p Mα∥f∥Lp(Ω×J).
+(4.7)
+Proof. By the H¨older inequality and the deﬁnition of Mα, we have
+|I1(a; φh)| ≤Mα∥ω−α
+a Ph,σf∥Lp(Ωh×J),
+14
+
+which implies
+
+
+Z
+J
+sup
+φh∈Bp′
+h,σ
+|I1(a; φh)|pda
+
+
+1/p
+≤Mα
+Z
+J
+Z
+J
+ωa(t)−αp∥Ph,σf(t)∥Lp(Ωh)dtda
+1/p
+= Mα
+Z
+J
+∥Ph,σf(t)∥Lp(Ωh)
+Z
+J
+ωa(t)−αpdadt
+1/p
+.
+Recall that, by (4.6),
+Z
+J
+ωa(t)−αpda =
+Z
+J
+ωt(a)−αpda = ∥ω−α
+t
+∥p
+Lp(J) ≤Cε−αp+1
+holds for α > 1/p. Therefore, we establish (4.7) owing to the above estimate.
+Let ε = γh2 with γ suﬃciently small so that (4.5) holds. Then, from Lemmas 4.1–4.3
+and (3.13), we have
+∥Ahuh∥Lp(Ωh×J) ≤C
+
+1 + ε−α+ 1
+p Mα
+
+∥f∥Lp(Ω×J)
+(4.8)
+for α > 1/p. Therefore, it suﬃces to show the weighted error estimate
+∥ωα
+a ∂t(g −gh)∥Lp′(Ωh×J) ≤Cεα−1
+p ∥φh∥Lp′(Ωh)
+(4.9)
+for some α > 1/p.
+4.2 Proof of the discrete maximal regularity
+We prove Theorem 2.1 by showing (4.9). Recall that it suﬃces to consider the case q = p
+by the general theory of maximal regularity.
+Proof of Theorem 2.1 for q = p. Let q = p ∈
+
+2N
+N+2, 2N
+N−2
+
+, φh ∈Bp′
+h,σ, a ∈J, and
+ε = γh2 be as above. We divide the interval J into three parts
+J0 = J ∩[a −2ε, a + 2ε],
+J1 = J ∩(−∞, a −2ε),
+J2 = J ∩(a + 2ε, ∞).
+Then, by the deﬁnition of g and gh, it is clear that g(t) ≡gh(t) ≡0 for t ∈J2. We
+now consider ∥ωα
+a ∂t(g −gh)∥Lp′(Ωh×J1). Let t ∈J1. Then, by the Duhamel formula and
+t < a −2ε, we have
+∂t(g −gh)(t) =
+Z
+J∩[a−ε,a+ε]
+∂t
+h
+e−(s−t)APσ −e−(s−t)i
+φhη(s)ds,
+which, together with Lemma 3.3, yields
+∥∂t(g −gh)(t)∥Lp′(Ωh) ≤Ch2
+Z
+J∩[a−ε,a+ε]
+(s −t)−2∥φh∥Lp′(Ωh)η(s)ds.
+Moreover, recalling (4.2) and s −t ≥a −ε −t for t ∈J1, we have
+∥∂t(g −gh)(t)∥Lp′(Ωh) ≤Ch2(a −ε −t)−2∥φh∥Lp′(Ωh).
+15
+
+Therefore, we obtain
+∥ωα
+a ∂t(g −gh)∥Lp(Ωh×J1) ≤Ch2∥φh∥Lp′(Ωh)
+Z a−2ε
+0
+ωa(t)αp′(a −ε −t)−2p′dt
+1/p′
+.
+Let a −t = εs in the last integration and assume now that α < 1
+p + 1. Then, we have
+Z a−2ε
+0
+ωa(t)αp′(a −ε −t)−2p′dt ≤Cε(α−2)p′+1
+Z ∞
+2
+(s2 + 1)αp′/2(s −1)−2p′ds
+= Cε(α−2)p′+1
+since α < 1
+p + 1 is equivalent to (α −2)p′ + 1 < 0. Hence we have
+∥ωα
+a ∂t(g −gh)∥Lp(Ωh×J1) ≤Ch2εα−2+ 1
+p′ ∥φh∥Lp′(Ωh) = Cεα−1
+p ∥φh∥Lp′(Ωh)
+(4.10)
+for α ∈
+
+1
+p, 1
+p + 1
+
+, since h2 = γ−1ε.
+We next address ∥ωα
+a ∂t(g −gh)∥Lp′(Ωh×J0). By the maximal regularity for g and (4.2),
+we have
+∥ωα
+a ∂t(g −gh)∥Lp′(Ωh×J0) ≤Cεα∥∂tg∥Lp′(Ωh×J) + Cεα∥∂tgh∥Lp′(Ωh×J0)
+≤Cε∥ηφh∥Lp′(Ωh×J) + Cεα∥∂tgh∥Lp′(Ωh×J0)
+≤Cεα−1
+p ∥φh∥Lp′(Ωh) + Cεα∥∂tgh∥Lp′(Ωh×J0).
+Here we used the fact that ωa(t) ≤Cε for t ∈J0. Thus we address ∥∂tgh∥Lp′(Ωh×J0).
+Let t ∈J0. In this case, we have
+∂tgh(t) = −η(t)φh +
+Z a+ε
+t
+Ahe−(s−t)Ahφhη(s)ds.
+Now, by Lemma 3.6 and h2 = γ−1ε, we have
+∥Ahe−(s−t)Ahφh∥Lp′(Ωh) = ∥A1−θ
+h
+e−(s−t)AhAθ
+hφh∥Lp′(Ωh)
+≤C(s −t)−1+θh−2θ∥φh∥Lp′(Ωh)
+≤C(s −t)−1+θε−θ∥φh∥Lp′(Ωh)
+for any θ ∈(0, 1), which implies
+
+Z a+ε
+t
+Ahe−(s−t)Ahφhη(s)ds
+
+Lp′(Ωh)
+≤Cε−θ−1∥φh∥Lp′(Ωh)
+Z a+ε
+t
+(s −t)−1+θds
+≤Cε−θ−1(a + ε −t)θ∥φh∥Lp′(Ωh)
+owing to |η| ≤Cε−1. Therefore, we obtain
+∥∂tgh∥Lp′(Ωh×J0) ≤∥ηφh∥Lp′(Ωh×J0) + Cε−θ−1∥φh∥Lp′(Ωh)
+Z a+2ε
+a−2ε
+(a + ε −t)θp′dt
+1/p′
+≤Cε−1
+p ∥φh∥Lp′(Ωh) + Cε−θ−1∥φh∥Lp′(Ωh) · εθ+ 1
+p′
+≤Cε−1
+p ∥φh∥Lp′(Ωh).
+16
+
+Hence we have
+∥ωα
+a ∂t(g −gh)∥Lp′(Ωh×J0) ≤Cεα−1
+p ∥φh∥Lp′(Ωh).
+(4.11)
+Summarizing (4.10) and (4.11), we establish (4.9) for α ∈
+
+1
+p, 1
+p + 1
+
+. Therefore, we
+obtain
+∥Ahuh∥Lp(Ωh×J) ≤C∥f∥Lp(Ω×J)
+owing to (4.8). Since ∂tuh = −Ahuh + Ph,σf, we immediately obtain
+∥∂tuh∥Lp(Ωh×J) ≤C∥f∥Lp(Ω×J)
+owing to (3.9). Hence we complete the proof of Theorem 2.1.
+Remark 4.1. In the proof of discrete maximal regularity (2.11), we used the following
+two facts only:
+(i) A has maximal regularity,
+(ii) Ah generates an analytic semigroup (uniformly in h).
+Therefore, if one applies the same idea to the parabolic case, one obtains another proof
+of discrete maximal regularity for elliptic operators without the Gaussian estimate.
+5 Application to error estimates
+The aim of this section is to show Theorem 2.2.
+Proof of Theorem 2.2. Let (u, ϕ) and (uh, ϕh) be the solutions of (1.1) and (1.5), re-
+spectively.
+(1) Lp(J; Lq(Ωh))-error estimate for the velocity. We ﬁrst show (2.12) by the argument
+similar to [11, Theorem 4.9]. Let ρ = u −Ph,σu and ρh = Ph,σu −uh. Then, by (3.12)
+and (1.3), we have
+∥ρ∥Lp(J;Lq(Ωh)) ≤Ch2∥f∥Lp(J;Lq(Ω)).
+We now address ρh. Since u and uh satisfy (1.2) and (2.10) respectively, one has
+∂tρh + Ahρh = (Ph,σ∂tu + AhPh,σu) −(∂tuh + Ahuh)
+= Ph,σ(Pσf −Au) + AhPh,σu −Ph,σf
+= Ph,σ(Pσ −I)f + Ah(Rh −Ph,σ)u.
+Therefore, A−1
+h ρh satisﬁes the Cauchy problem
+∂t(A−1
+h ρh) + Ah(A−1
+h ρh) = A−1
+h Ph,σ(Pσ −I)f + (Rh −Ph,σ)u
+= (A−1
+h Ph,σ −A−1Pσ)(Pσ −I)f + (Rh −Ph,σ)u,
+since Pσ(Pσ −I)f = 0.
+Hence, by the discrete maximal regularity (2.11) and error
+estimates (3.7) and (3.8), we obtain
+∥ρh∥Lp(J;Lq(Ωh)) = ∥Ah(A−1
+h ρh)∥Lp(J;Lq(Ωh)) ≤Ch2∥f∥Lp(J;Lq(Ω)),
+which implies the error estimate (2.12).
+17
+
+(2) Lp(J; W 1,q(Ωh))-error estimate for the velocity. Combining (2.12) with the inverse
+inequality (2.8) and the interpolation error estimates (2.4) and (2.5), we obtain
+∥∇(u −uh)∥Lp(J;Lq(Ωh)) ≤∥∇(u −Ihu)∥Lp(J;Lq(Ωh)) + Ch−1∥Ihu −uh∥Lp(J;Lq(Ωh))
+≤Ch∥f∥Lp(J;Lq(Ω)).
+Hence we obtain (2.13).
+(3) Lp(J; W −1,q(Ωh))-error estimate for ∂tu. Fix φ ∈Lp′(J; W 1,q′
+0
+(Ωh)N) arbitrarily.
+Then, almost everywhere in J, we have
+(∂t(u −uh), φ)h
+= ((Pσf −Au) −(Ph,σf −Ahuh), φ)h
+= (f, (Pσ −Ph,σ)φ)h + (∆u, Pσφ −Ph,σφ)h −(−∆u + Ahuh, Ph,σφ)h
+= (f + ∆u, (Pσ −Ph,σ)φ)h −(∇(u −uh), ∇Ph,σφ)h.
+Therefore, by (1.3), (3.11), (2.13), and (3.10), we obtain
+Z
+J
+(∂t(u −uh), φ)hdt ≤Ch∥f∥Lp(J;Lq(Ωh))∥∇φ∥Lp′(J;Lq′(Ωh)),
+which implies (2.14) since φ is arbitrary.
+(4) Pressure estimate. We ﬁrst recall that the discrete inf-sup condition
+inf
+ψh∈Q0
+h
+sup
+vh∈Vh
+(ψh, div vh)h
+∥∇vh∥Lq′(Ωh)∥ψh∥Lq(Ωh)
+≥C
+(5.1)
+holds true owing to (2.1), (2.3), and the existence of the Bogovski˘ı operator in Ωh (cf. [6]
+and [9, Lemma III.3.1]), where Q0
+h := Qh ∩L2
+0(Ωh). Now, let ζh = Jhϕ −ϕh ∈Qh and
+˜ζh = ζh + ζ0,
+ζ0 = −1
+|Ωh|
+Z
+Ωh
+ζhdx
+so that ˜ζh ∈Q0
+h. Then, as discussed in [20, §8.5], we have
+∥ζ0∥Lq(Ωh) ≤Ch∥ϕ∥W 1,q(Ω)
+almost everywhere in J, which yields
+∥ζ0∥Lp(J;Lq(Ωh)) ≤Ch∥f∥Lp(J;Lq(Ωh))
+(5.2)
+by (1.3). Moreover, by the discrete inf-sup condition (5.1), we have
+∥˜ζh∥Lq(Ωh) ≤C sup
+vh∈Vh
+(˜ζh, div vh)h
+∥∇vh∥Lq′(Ωh)
+almost everywhere in J. For vh ∈Vh, we have
+(˜ζh, div vh)h
+= (ζh, div vh)h
+= (Jhϕ −ϕ, div vh)h + (∂t(u −uh), vh)h + (∇(u −uh), ∇vh)h
+≤C
+h∥∇ϕ∥Lq(Ωh) + ∥∂t(u −uh)∥W −1,q(Ωh) + ∥∇(u −uh)∥Lq(Ωh)
+
+∥∇vh∥Lq′(Ωh)
+18
+
+by (2.6) and (2.9). Therefore, we obtain
+∥˜ζh∥Lq(Ωh) ≤C
+h∥∇ϕ∥Lq(Ωh) + ∥∂t(u −uh)∥W −1,q(Ωh) + ∥∇(u −uh)∥Lq(Ωh)
+
+almost everywhere in J. Integrating this in time, we obtain
+∥˜ζh∥Lp(J;Lq(Ωh)) ≤Ch∥f∥Lp(J;Lq(Ω))
+by (1.3), (2.14), and (2.13), which implies (2.15) together with (5.2). Hence we complete
+the proof of Theorem 2.2.
+References
+[1] G. Akrivis and B. Li. Linearization of the ﬁnite element method for gradient ﬂows
+by Newton’s method. IMA J. Numer. Anal., 41(2):1411–1440, 2021.
+[2] G. Akrivis and C. Makridakis. On maximal regularity estimates for discontinuous
+Galerkin time-discrete methods. SIAM J. Numer. Anal., 60(1):180–194, 2022.
+[3] A. Ashyralyev and P. E. Sobolevski˘ı. Well-posedness of parabolic diﬀerence equa-
+tions. Birkh¨auser Verlag, Basel, 1994.
+[4] N. Behringer, B. Vexler, and D. Leykekhman. Fully discrete best-approximation-
+type estimates in L∞(I; L2(Ω)d) for ﬁnite element discretizations of the transient
+Stokes equations. IMA J. Numer. Anal., 2022.
+[5] S ˙Blunck. Maximal regularity of discrete and continuous time evolution equations.
+Studia Math., 146(2):157–176, 2001.
+[6] M. E. Bogovski˘ı. Solution of the ﬁrst boundary value problem for an equation of
+continuity of an incompressible medium. Dokl. Akad. Nauk SSSR, 248(5):1037–1040,
+1979.
+[7] W. Desch, M. Hieber, and J. Pr¨uss. Lp-theory of the Stokes equation in a half
+space. J. Evol. Equ., 1(1):115–142, 2001.
+[8] G. Dore. Lp regularity for abstract diﬀerential equations. In Functional analysis
+and related topics, 1991 (Kyoto), volume 1540 of Lecture Notes in Math., pages
+25–38. Springer, Berlin, 1993.
+[9] G. P. Galdi. An introduction to the mathematical theory of the Navier-Stokes equa-
+tions. Steady-state problems. Springer, New York, second edition, 2011.
+[10] M. Geissert. Discrete maximal Lp regularity for ﬁnite element operators. SIAM J.
+Numer. Anal., 44(2):677–698, 2006.
+[11] M. Geissert. Applications of discrete maximal Lp regularity for ﬁnite element op-
+erators. Numer. Math., 108(1):121–149, 2007.
+[12] M. Geissert, M. Hess, M. Hieber, C. Schwarz, and K. Stavrakidis. Maximal Lp-Lq-
+estimates for the Stokes equation: a short proof of Solonnikov’s theorem. J. Math.
+Fluid Mech., 12(1):47–60, 2010.
+[13] Y. Giga. Analyticity of the semigroup generated by the Stokes operator in Lr spaces.
+Math. Z., 178(3):297–329, 1981.
+19
+
+[14] J.-L. Guermond. Faedo-Galerkin weak solutions of the Navier-Stokes equations with
+Dirichlet boundary conditions are suitable. J. Math. Pures Appl. (9), 88(1):87–106,
+2007.
+[15] J.-L. Guermond and J. E. Pasciak. Stability of discrete Stokes operators in fractional
+Sobolev spaces. J. Math. Fluid Mech., 10(4):588–610, 2008.
+[16] J. G. Heywood and R. Rannacher. Finite element approximation of the nonsta-
+tionary Navier-Stokes problem. I. Regularity of solutions and second-order error
+estimates for spatial discretization. SIAM J. Numer. Anal., 19(2):275–311, 1982.
+[17] L. Iskauriaza, G. A. Ser¨egin, and V. Shverak. L3,∞-solutions of Navier-Stokes equa-
+tions and backward uniqueness. Uspekhi Mat. Nauk, 58(2(350)):3–44, 2003.
+[18] T. Kashiwabara and T. Kemmochi. Stability, analyticity, and maximal regularity for
+parabolic ﬁnite element problems on smooth domains. Math. Comp., 89(324):1647–
+1679, 2020.
+[19] T. Kemmochi. Discrete maximal regularity for abstract Cauchy problems. Studia
+Math., 234(3):241–263, 2016.
+[20] T. Kemmochi. Lp-resolvent estimate for ﬁnite element approximation of the Stokes
+operator. Preprint, arXiv:2208.11892.
+[21] T. Kemmochi and N. Saito. Discrete maximal regularity and the ﬁnite element
+method for parabolic equations. Numer. Math., 138(4):905–937, 2018.
+[22] B. Kov´acs, B. Li, and C. Lubich. A-stable time discretizations preserve maximal
+parabolic regularity. SIAM J. Numer. Anal., 54(6):3600–3624, 2016.
+[23] P. C. Kunstmann, B. Li, and C. Lubich. Runge-Kutta time discretization of nonlin-
+ear parabolic equations studied via discrete maximal parabolic regularity. Found.
+Comput. Math., 18(5):1109–1130, 2018.
+[24] D. Leykekhman and B. Vexler. Discrete maximal parabolic regularity for Galerkin
+ﬁnite element methods. Numer. Math., 135(3):923–952, 2017.
+[25] B. Li. Maximum-norm stability and maximal Lp regularity of FEMs for parabolic
+equations with Lipschitz continuous coeﬃcients. Numer. Math., 131(3):489–516,
+2015.
+[26] B. Li. Analyticity, maximal regularity and maximum-norm stability of semi-discrete
+ﬁnite element solutions of parabolic equations in nonconvex polyhedra.
+Math.
+Comp., 88(315):1–44, 2019.
+[27] B. Li. A bounded numerical solution with a small mesh size implies existence of
+a smooth solution to the Navier-Stokes equations. Numer. Math., 147(2):283–304,
+2021.
+[28] B. Li. Maximal regularity of multistep fully discrete ﬁnite element methods for
+parabolic equations. IMA J. Numer. Anal., 42(2):1700–1734, 2022.
+[29] B. Li and W. Sun. Maximal Lp error analysis of FEMS for nonlinear parabolic
+equations with nonsmooth coeﬃcients. Int. J. Numer. Anal. Model., 14(4-5):670–
+687, 2017.
+20
+
+[30] B. Li and W. Sun. Maximal Lp analysis of ﬁnite element solutions for parabolic equa-
+tions with nonsmooth coeﬃcients in convex polyhedra. Math. Comp., 86(305):1071–
+1102, 2017.
+[31] B. Li and W. Sun. Maximal regularity of fully discrete ﬁnite element solutions of
+parabolic equations. SIAM J. Numer. Anal., 55(2):521–542, 2017.
+[32] K. Masuda.
+Weak solutions of Navier-Stokes equations.
+Tohoku Math. J. (2),
+36(4):623–646, 1984.
+[33] H. Okamoto. On the semidiscrete ﬁnite element approximation for the nonstationary
+Navier-Stokes equation. J. Fac. Sci. Univ. Tokyo Sect. IA Math., 29(3):613–651,
+1982.
+[34] H. Okamoto. On the semidiscrete ﬁnite element approximation for the nonstationary
+Stokes equation. J. Fac. Sci. Univ. Tokyo Sect. IA Math., 29(1):241–260, 1982.
+[35] A. Pazy.
+Semigroups of linear operators and applications to partial diﬀerential
+equations. Springer-Verlag, New York, 1983.
+[36] J. Serrin. The initial value problem for the Navier-Stokes equations. In Nonlinear
+Problems (Proc. Sympos., Madison, Wis., 1962), pages 69–98. Univ. Wisconsin
+Press, Madison, Wis., 1963.
+[37] H. Sohr and W. von Wahl. On the singular set and the uniqueness of weak solutions
+of the Navier-Stokes equations. Manuscripta Math., 49(1):27–59, 1984.
+[38] V. A. Solonnikov. Estimates for solutions of nonstationary Navier-Stokes equations.
+J. Sov. Math., 8:467–529, 1977.
+21

@@ -13,6 +13,7 @@ import { currentHashesMany } from './step5-terminal-resolution.mjs';
 import { MODELS } from './models.mjs';
 import { loadOwnerReviewWithdrawal, withdrawnOwnerReport, withdrawalAllowsFreshPass, freshWithdrawalEvidence } from './step5-owner-review-withdrawal.mjs';
 import { supportingQuoteHistory } from './step5-quote-history.mjs';
+import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
 import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
 import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
 import { createdMaintenanceBasis } from './step5-created-maintenance-cert.mjs';
@@ -197,6 +198,7 @@ function repairedRun44LedgerHistory(history,path,expected) {
 // This run's recovery binds exact historical bytes to unchanged native reports;
 // it supplies no current-source review or gate coverage.
 function supportingMetadataHistory(history,path,expected) {
+  const siblings = supportingSiblingContractHistory(history,path,expected); if (siblings) return siblings;
   const quotes = supportingQuoteHistory(history,path,expected);
   if (quotes) return quotes;
   const metadata = initialMetadataSupportingHistory(history,path,expected);
@@ -320,7 +322,7 @@ function frozenSupportingEvidence(root,run,supporting) {
     if(existsSync(archive))requireValue(readFileSync(archive,'utf8')===bytes,'immutable supporting metadata conflict');
     else writeFileSync(archive,bytes,{flag:'wx'});
     evidence[archive]=hash;
-    if(history)evidence[history.marker]=digest(readFileSync(history.marker,'utf8'));
+    if(history){evidence[history.marker]=digest(readFileSync(history.marker,'utf8'));Object.assign(evidence,history.evidence??{});}
   }
   return evidence;
 }

@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "41",
+  "round": 0,
+  "reviewed_items": [
+    "lem-na-halfline-heat-logarithmic-mass-loss",
+    "lem-na-shrinking-boundary-stream-corrector",
+    "lem-na-solenoidal-scalar-equations-give-weak-continuity",
+    "def-na-evolutionary-skew-convective-form",
+    "def-na-evolutionary-incompressible-ns-weak-solution",
+    "lem-na-evolutionary-skew-convective-form-bound",
+    "def-na-mini-navier-stokes-backward-euler-scheme",
+    "def-na-solenoidal-energy-weak-ns-velocity",
+    "lem-na-evolutionary-ns-weak-form-is-well-defined",
+    "thm-na-ns-weak-solution-uniqueness-2d-and-weak-strong-3d",
+    "lem-na-mini-be-scheme-is-well-defined",
+    "lem-na-two-dimensional-solenoidal-energy-velocity-uniqueness",
+    "lem-na-continuous-pressure-recovery-from-solenoidal-residual",
+    "lem-na-mini-fortin-l2-approximation",
+    "thm-na-mini-be-step-existence-energy",
+    "lem-na-mini-fortin-h2-approximation",
+    "lem-na-mini-weak-solenoidal-compactness",
+    "thm-na-mini-solenoidal-stokes-projection-error",
+    "thm-na-mini-be-smooth-velocity-error",
+    "thm-na-mini-navier-stokes-be-subsequential-limit",
+    "lem-na-solenoidal-evolution-integrated-pressure-recovery",
+    "thm-na-mini-be-smooth-integrated-pressure-error",
+    "rem-na-pe06-pressure-recovery-escalation",
+    "ex-na-zero-mean-pressure-gauge",
+    "ex-na-periodic-taylor-green-vortex",
+    "ex-na-unit-square-mini-mesh-family",
+    "ex-na-mini-backward-euler-energy-budget",
+    "ex-na-conditional-three-dimensional-flow-computation",
+    "cex-na-polyhedral-energy-ns-pressure-endpoint",
+    "cex-na-graded-mini-mass-initialization-pressure-rate"
+  ],
+  "reviewed_pages": [
+    "energy-stable-incompressible-navier-stokes-discretization",
+    "energy-stable-incompressible-navier-stokes-discretization-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The local velocity, energy, uniqueness, and pressure-primitive arguments reviewed do not present a confirmed local defect. Acceptance is blocked by an unresolved PE06 prerequisite-interface conflict and uncertainty about the novel graded-mesh pressure counterexample on which several scope statements rely; no single local repair is justified.",
+  "findings": [
+    {
+      "id": "energy-stable-incompressible-navier-stokes-discretization",
+      "type": "scope",
+      "reason": "The PE06 prerequisite section in research/plan-numerical-spatial-track.md names same-frontier NA36 (parabolic-finite-element-methods), while the active plan-spec and batch dispatch requirements omit NA36. The page uses evolution-triple and chain-rule suppliers from PE12. The controlling prerequisite interface needs owner reconciliation; it cannot be settled on the assigned page."
+    },
+    {
+      "id": "cex-na-graded-mini-mass-initialization-pressure-rate",
+      "type": "uncertainty",
+      "reason": "The exact-scope pressure-rate refutation depends on a long new chain: recursive mass-DtN transfer, the all-state complementary bound and eigenchannel, fractional divergence growth, and the pressure-observation/nonlinear/backward-Euler bridge (notably Parts 23–28, including the bound ||Q U||<=e2 and the source-visible eigenfunctional). I checked substantial supporting portions but cannot certify every cross-referenced estimate, particularly the seven-node pressure-extension and incoming-kernel arguments. The cited literature is general background, not a proof of this construction. The adjacent projection result I found concerns standard finite-element spaces on suitably graded triangulations, not the constrained MINI kernel: [Karkulik–Pfeiler–Praetorius](https://arxiv.org/abs/1307.0917). This is unresolved uncertainty, not a confirmed false inference."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "energy-stable-incompressible-navier-stokes-discretization",
+      "decision": "escalate",
+      "reason": "Its approved prerequisite interface conflicts with the active plan/dispatch interface, and its summary treats the graded-mesh pressure-rate refutation as established."
+    },
+    {
+      "id": "energy-stable-incompressible-navier-stokes-discretization-examples",
+      "decision": "escalate",
+      "reason": "The companion page summarizes the graded-mesh construction as refuting the smooth pressure-rate claim; that status remains uncertain pending owner reconciliation."
+    },
+    {
+      "id": "thm-na-mini-be-smooth-velocity-error",
+      "decision": "escalate",
+      "reason": "The positive velocity theorem is independently argued, but its Remarks and forward reference state that the original instantaneous pressure-rate claim is refuted by the uncertain counterexample."
+    },
+    {
+      "id": "thm-na-mini-be-smooth-integrated-pressure-error",
+      "decision": "escalate",
+      "reason": "The primitive-pressure estimate is independently argued, but its Remarks state that the original instantaneous pressure-rate claim is refuted by the uncertain counterexample."
+    },
+    {
+      "id": "lem-na-solenoidal-evolution-integrated-pressure-recovery",
+      "decision": "escalate",
+      "reason": "The primitive-recovery result is independently argued, but its Remarks use the uncertain graded-mesh counterexample to characterize the separate smooth pressure-rate claim."
+    },
+    {
+      "id": "rem-na-pe06-pressure-recovery-escalation",
+      "decision": "escalate",
+      "reason": "This item records the instantaneous smooth pressure-rate claim as refuted by the uncertain counterexample; owner reconciliation is required before that scope disposition is accepted."
+    }
+  ]
+}

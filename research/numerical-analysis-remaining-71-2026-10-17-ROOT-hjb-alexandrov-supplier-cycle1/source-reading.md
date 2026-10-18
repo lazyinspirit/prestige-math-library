@@ -1,0 +1,10 @@
+# Source reading and limits
+
+Complete authoritative files downloaded in this packet:
+
+- `sources/kinnunen.pdf`, 168 PDF pages, Juha Kinnunen, *Sobolev Spaces*, https://math.aalto.fi/~jkkinnun/files/sobolev_spaces.pdf . Extracted with PyMuPDF into `sources/kinnunen.txt`. Actually read the full Theorem 2.36/Remarks 2.37 ACL interface and beginning of its proof, and the entire Theorem 3.28 proof, Theorem 3.31 proof and Corollary 3.32 statement, printed pp. 55–56 and 78–81. Existing canonical ACL reconstruction and ball Poincare carriers were read fully, including assumptions. The proposed proof deliberately uses the simpler L1 Poincare + equi-Lipschitz upgrade rather than silently importing Morrey. The whole 168 pages were not read.
+- `sources/cil.pdf`, 69 PDF pages, Crandall–Ishii–Lions, *User’s guide to viscosity solutions*, https://arxiv.org/pdf/math/9207212 . Extracted into `sources/cil.txt`. Actually read all of Appendix A Step 2, Theorem A.2 proof and Lemma A.3 proof, printed pp. 58–60, and the complete foundational notes printed pp. 62–63. The whole paper was not read. CIL explicitly uses Rademacher, null-image preservation, a singular-image area-formula consequence and an inverse-solvability assertion. This packet supplies each needed conclusion locally: Rademacher via ACL/Poincare; null-image by cube covers; critical image by flattened tube covers with full-AC fivefold selection; inverse control by the closed, bounded subgradient graph, with no inverse-function theorem or area formula. The source's semiconvex quadratic conclusion is retained.
+
+Existing canonical carriers actually read fully: the six named in the initial read (null image, Lebesgue differentiation, fivefold countable covering, ball Poincare, convex local Lipschitz, Fenchel–Young), ACL reconstruction, Lipschitz characterization within AC, and Hahn–Banach dominated extension. Elementary compactness carriers were identified as exact interfaces; no claim of fully auditing their proofs is made.
+
+No extracted search hit or unread bibliography is represented as a read proof. References are provenance, never substitutes for local arguments.

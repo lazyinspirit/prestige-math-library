@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "37",
+  "round": 0,
+  "reviewed_items": [
+    "def-pe05-shallow-water-balance-law",
+    "def-pe05-hydrostatic-hll-scheme",
+    "lem-pe05-strong-l1-limit-preserves-dry-admissibility",
+    "prop-pe05-shallow-water-admissible-state-set-is-convex",
+    "lem-pe05-hll-depth-flux-decomposition",
+    "lem-pe05-hll-dry-face-direction-and-zero-flux",
+    "thm-pe05-hydrostatic-reconstruction-is-well-balanced",
+    "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+    "lem-pe05-source-quadrature-consistency",
+    "lem-pe05-discrete-weak-identity-with-source",
+    "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1",
+    "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law",
+    "ex-pe05-lake-at-rest-over-a-dry-crest",
+    "ex-pe05-hll-dam-break-wets-dry-cell",
+    "cex-pe05-centered-source-produces-spurious-current"
+  ],
+  "reviewed_pages": [
+    "well-balanced-balance-laws-and-wet-dry-fronts",
+    "well-balanced-balance-laws-and-wet-dry-fronts-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete review found locally repairable proof gaps in four items. Their approved statements can be retained; no supplier Statement or Definition change or outside-scope repair is required.",
+  "findings": [
+    {
+      "id": "lem-pe05-source-quadrature-consistency",
+      "type": "local",
+      "reason": "Steps 1.1–2.1 use a Taylor remainder uniform on a fixed compact for arbitrary d>0, although x_i±d may leave it; Step 3.1 has the same local-derivative issue. Preserve the claim by using Taylor estimates for d≤1 on a fixed enlargement and the direct bound |S_i^(2)|≤gH²/(2d), together with a local bound on b', for d≥1. Make explicit that the source-convergence consequence is as d→0."
+    },
+    {
+      "id": "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1",
+      "type": "local",
+      "reason": "Step 2.1 extracts almost-everywhere convergence only for shifted h_k,u_k, although both unshifted and shifted cell data enter each face flux. Step 4.1 then applies the Riesz subsequence theorem to the flux sequence without first establishing convergence in measure. Jointly extract the unshifted and shifted pairs along each subsequence, then use the resulting subsequence criterion or a direct bounded-convergence subsubsequence argument to justify full L1 convergence."
+    },
+    {
+      "id": "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+      "type": "local",
+      "reason": "Step 3.1 invokes the PE03 definition to call K invariant for a specified one-step map after proving preservation only for inputs satisfying the data-dependent CFL condition. PE03 defines invariance as Φ(K^N)⊂K^N for a fixed map. Remove that extra assertion; the theorem's stated conditional preservation claim is proved."
+    },
+    {
+      "id": "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law",
+      "type": "local",
+      "reason": "Step 2.1 passes the discrete sums using L1 convergence on test support that can touch t=0, while the hypotheses give strong convergence only on compact subsets of (0,T). Split the integrals at t=ε, use interior convergence above ε, bound state, flux and source integrands near zero from the stated initial-layer bounds and local bed regularity, then let ε decrease to zero."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law",
+      "decision": "repair",
+      "reason": "Its source and flux supplier uses match the vanishing-grid hypotheses, but Step 2.1 has the separate initial-layer passage gap described above."
+    },
+    {
+      "id": "ex-pe05-hll-dam-break-wets-dry-cell",
+      "decision": "accept",
+      "reason": "It uses the hydrostatic update theorem's conditional admissibility result under the stated CFL, which the proof establishes; the extra invariant-domain assertion is not used."
+    },
+    {
+      "id": "ex-pe05-lake-at-rest-over-a-dry-crest",
+      "decision": "accept",
+      "reason": "The well-balanced supplier proof and the example's reconstructed depths, corrected pressures, and zero updates check out."
+    }
+  ]
+}

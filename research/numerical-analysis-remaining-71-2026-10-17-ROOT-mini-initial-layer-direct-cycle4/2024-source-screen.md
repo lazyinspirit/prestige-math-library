@@ -1,0 +1,7 @@
+# Screened modern source: stronger hypotheses do not transfer
+
+Downloaded arXiv:2307.14217, Vexler--Wagner, *Error estimates for finite element discretizations of the instationary Navier--Stokes equations* (2023 preprint; journal DOI 10.1051/m2an/2024006). Read its Stokes regularity discussion around Proposition 3.4 and Theorem 3.5, spatial-discretization subsection 4.1, and reference list. This was a targeted section inspection, **not** a full-paper reading. PDF and extracted text are saved here.
+
+The paper's general setup is a convex polygon in two dimensions; subsection 4.1 explicitly assumes a family of quasi-uniform meshes. It distinguishes the more general shape-regular validity of the local interpolation hypotheses from that global mesh assumption. The discrete bounds comparing full discrete Laplacian and Stokes operator, gradient L4 control, and L-infinity control consequently cannot be imported into the original arbitrary graded 2D/3D polyhedral MINI scope. Its continuous pressure discussion assumes the initial semigroup trace norm V_(1-1/s), rather than proving that every L2 initial velocity belongs to that norm. Thus it does not override the initialization pressure obstruction.
+
+Relevant cited suppliers include Guermond--Pasciak (2008), Hansbo (2002), and Heywood--Rannacher (1982), already natural leads for the other source route. No theorem from this screened source was used as a logical supplier or claimed to settle the current missing estimate.

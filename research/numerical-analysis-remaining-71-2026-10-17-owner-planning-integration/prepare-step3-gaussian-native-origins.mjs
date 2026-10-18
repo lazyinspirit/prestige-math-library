@@ -1,0 +1,34 @@
+import {readFileSync as read,writeFileSync as write,mkdirSync,existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {itemHashGuard,itemHashJudge} from '../../tools/item-hash.mjs';
+const run='numerical-analysis-remaining-71-2026-10-17',base=`research/${run}-owner-planning-integration`,dir=`${base}/step3-gaussian-native-origins`;
+mkdirSync(dir,{recursive:true});
+const sha=x=>createHash('sha256').update(x).digest('hex');
+const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x;
+const hash=x=>sha(JSON.stringify(canonical(x)));
+const marker=path=>({path,sha256:sha(read(path))});
+const baseline=JSON.parse(read(`research/${run}-step3-auditor-baseline.json`));
+const capturePath=`${base}/step3-gaussian-final-owner-native-metadata-before.json`,capture=JSON.parse(read(capturePath));
+const manifestPath=capture.sources.find(x=>x.source===`research/${run}-batch-11.pages.json`).archive;
+const contractPath=capture.sources.find(x=>x.source===`research/${run}-batch-11.proof-contracts.json`).archive;
+const manifest=JSON.parse(read(manifestPath)),contracts=JSON.parse(read(contractPath)),pages=Array.isArray(manifest)?manifest:manifest.pages;
+const before=JSON.parse(read(`${base}/step3-gaussian-final-owner-before.json`));
+const ids=['lem-gaussian-matrix-law-normalization-and-second-moments','lem-finite-scan-range-basis-is-borel','lem-power-rangefinder-projector-is-borel'];
+const resultFile='alpha-3a-batch-11.attempt-1.result.json',prefix=`research/${run}-dispatch/alpha-3a-batch-11.attempt-1`;
+const refs={result:marker(`${prefix}.result.json`),prompt:marker(`${prefix}.prompt.md`),log:marker(`${prefix}.log`)};
+const result=JSON.parse(read(refs.result.path));
+if(!result.ok||result.exit_code!==0||result.label!=='3a-batch-11')throw Error('Native author did not complete');
+const outputs=[];
+for(const id of ids){
+ const path=`${dir}/${id}-evidence.json`;if(existsSync(path))throw Error('Evidence already prepared '+id);
+ const b=before.sources.find(x=>x.id===id),source=read(b.native_source_preimage,'utf8');
+ if(sha(source)!==b.raw_pre_sha256)throw Error('Changed native preimage '+id);
+ const matches=pages.flatMap(p=>(p.items??[]).filter(x=>x.id===id).map(item=>({page:p.id,item})));
+ if(matches.length!==1||!contracts.contracts[id])throw Error('Missing unique native item '+id);
+ const {page,item}=matches[0],raw=sha(source),manifestHash=hash({...item,__step4_page_id:page}),contractHash=hash(contracts.contracts[id]);
+ const carriers={guard_sha256:itemHashGuard(source),judge_sha256:itemHashJudge(source),item_file_sha256:raw,manifest_sha256:manifestHash,contract_sha256:contractHash,step3_subject_sha256:hash({item_sha256:raw,manifest_sha256:manifestHash,contract_sha256:contractHash})};
+ const evidence={version:1,policy:'native-created-step3-origin-evidence-v1',run,step:3,id,owner_identity:'/root',reason:'Preserve the actual native Alpha11 creation before the first whole-stage certificate; genuine subsequent independent Codex proof repairs and later root metadata maintenance are separately attributed, without reconstructing historical mtimes or granting new native coverage.',native_execution_credit:false,mathematical_acceptance:false,baseline_sha256:sha(JSON.stringify(baseline)),page,batch:'11',author_result:resultFile,author_evidence:refs,native_item:marker(b.native_source_preimage),native_manifest:marker(manifestPath),native_contract:marker(contractPath),native_metadata_capture:marker(capturePath),carriers,replay:{policy:'literal-python-item-writer-v1',writer_script:'/tmp/b11-repair.py',...(id===ids[0]?{transform_script:'/tmp/b11-consumers.py'}:{})}};
+ write(path,JSON.stringify(evidence,null,2)+'\n',{flag:'wx'});outputs.push({id,path});
+}
+write(`${dir}/prepared.json`,JSON.stringify({run,at:new Date().toISOString(),outputs,source_edits:false,native_coverage_credit:false},null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify(outputs));

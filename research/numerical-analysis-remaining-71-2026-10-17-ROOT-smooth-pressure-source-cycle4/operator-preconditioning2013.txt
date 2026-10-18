@@ -1,0 +1,3745 @@
+[PDF PAGE 1]
+Optimal Operator Preconditioning for
+Boundary Elements on Open Curves
+R. Hiptmair and C. Jerez-Hanckes and C. Urzua
+Research Report No. 2013-48
+November 2013
+Seminar für Angewandte Mathematik
+Eidgenössische Technische Hochschule
+CH-8092 Zürich
+Switzerland
+____________________________________________________________________________________________________
+Funding: This work was partially funded by Fondecyt Iniciacion 11121166 and Conicyt Anillo ACT1118 (ANANUM)
+Submitted to SIAM Journal on Numerical Analysis.
+
+[PDF PAGE 2]
+OPTIMAL OPERATOR PRECONDITIONING FOR BOUNDARY
+ELEMENTS ON OPEN CURVES
+RALF HIPTMAIR∗, CARLOS JEREZ-HANCKES†, AND CAROLINA URZ´UA-TORRES‡
+Abstract. Boundary value problems for the Poisson equation in the exterior of an open bounded
+Lipschitz curve C can be recast as ﬁrst-kind boundary integral equations featuring weakly singular
+or hypersingular boundary integral operators (BIEs). Based on the recent discovery in [C. Jerez-
+Hanckes and J. N´ed´elec, Explicit variational forms for the inverses of integral logarithmic op-
+erators over an interval, SIAM Journal on Mathematical Analysis, 44 (2012), pp. 2666–2694.] of
+inverses of these BIEs for C = [−1, 1], we pursue operator preconditioning of the linear systems of
+equations arising from Galerkin-Petrov discretization by means of zeroth and ﬁrst order boundary
+elements. The preconditioners rely on boundary element spaces deﬁned on dual meshes and they
+can be shown to perform uniformly well independently of the number of degrees of freedom even for
+families of locally reﬁned meshes.
+Key words. Calder´on preconditioning, screen problems, fracture problems, boundary integral
+operators
+AMS subject classiﬁcations. 65R20 (65F35 65N22 65N38)
+1. Introduction. We consider the following Dirichlet and Neumann boundary
+value problems (BVPs) in the exterior of a open curve C ⊂R2,
+−∆U = 0
+in R2 \ ¯C
+,
+U = g
+or
+∂U
+∂n = f
+on C ,
+(1.1)
+plus appropriate decay conditions at ∞, see [18, Thm. 8.9] and with suitable boundary
+data g or f. If C is a regular Lipschitz curve, then (1.1) possesses a unique weak
+solution in H1
+loc(R2 \ ¯C). Exterior BVPs like (1.1) play a central role in a number
+of mathematical models like crack models in elasticity [9] or dimensionally reduced
+antenna models in electromagnetics [23].
+For the approximate numerical solution of boundary value problems like (1.1),
+posed on an unbounded homogeneous exterior domain, boundary element methods are
+an attractive option, because they respect the decay conditions at inﬁnity and require
+a mesh of C only. They exploit the possibility that (1.1) can be converted into ﬁrst-
+kind boundary integral equations (BIEs) for the unknown jump of the complementary
+boundary data on C. These boundary integral equations, their variational formulation
+in suitable Sobolev spaces, and boundary element Galerkin discretization have been
+studied thoroughly, prominently by E. Stephan and coworkers. Please refer to [29,
+32, 8, 31], and the textbook [22, Sect. 3.5.3].
+Since we face ﬁrst-kind BIEs, the spectral condition numbers of the linear systems
+of equations arising from low-order Galerkin boundary element methods (BEM) for
+(1.1) using the customary locally supported basis functions will grow like O(h−1),
+where h is the size of the smallest cell of the mesh, see [22, Sect. 4.5]. Thus, eﬀective
+preconditioning becomes indispensable when conjugate gradient type iterative solvers
+are used to compute BEM solutions on (locally) ﬁne meshes.
+∗Seminar for Applied Mathematics, ETH Zurich, Raemistrasse 101, 8092 Zurich, Switzerland.
+ralf.hiptmair@sam.math.ethz.ch.
+†School of Engineering, Pontiﬁcia Universidad Cat´olica de Chile, Av. Vicu˜na Mackenna 4860,
+Macul, Santiago, Chile.
+cjerez@ing.puc.cl.
+‡School of Engineering, Pontiﬁcia Universidad Cat´olica de Chile, Av. Vicu˜na Mackenna 4860,
+Macul, Santiago, Chile.
+curzuat@uc.cl.
+This work was partially funded by Fondecyt Iniciaci´on
+11121166 and Conicyt Anillo ACT1118 (ANANUM).
+1
+
+[PDF PAGE 3]
+2
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+Admittedly, on curves satisfactory resolution can already be achieved with mod-
+erate numbers of degrees of freedom, which allows the assembly of the dense Galerkin
+matrices and the use of direct solvers.
+This is no longer the case for the three-
+dimensional counterpart of (1.1), where C has to be replaced with an oriented two-
+dimensional Lipschitz manifold. Then we encounter a genuine screen problem, for
+which we may have to resort to ﬁne triangulations of C, which, in turns, entails the
+use of matrix compression and iterative solvers. Then preconditioning becomes a key
+issue. Thus, this article with its focus on curves and numerical analysis, should be
+viewed as a ﬁrst “proof of concept” for a preconditioning strategy that, we believe,
+can be extended to three dimensions.
+A powerful preconditioning technique for BEM on closed surfaces is the so-called
+policy of Calder´on preconditioning, which exploits Calder´on identities, that is, the
+fact that certain products of boundary integral operators evaluate to the identity
+map plus a compact perturbation [22, Sect. 3.6]. It ﬁts the more general strategy
+of operator preconditioning for Galerkin discretizations, introduced in [10], see also
+[17]. For low-order Galerkin BEM on closed surfaces, it takes pairs of primal and
+dual meshes to realize this approach to preconditioning, as has been discovered by
+Steinbach and Wendland in [28]. A very general perspective was developed by Buﬀa
+and Christiansen in [5] and it paved the way for the application of Calder´on pre-
+conditioning to electromagnetic boundary integral equations. The new technique has
+quickly been adopted in computational engineering [2, 1, 6], which highlights its huge
+potential for practical simulations.
+For open curves, analogues of Calder´on identities had been elusive until recently,
+which hampered the adaption of Calder´on preconditioning. One can still pursue a
+weaker version, the idea of preconditioning with operators of opposite order. This
+was done in by McLean and Steinbach [19], where the single layer operator provided
+a preconditioner for the discrete hypersingular BIE on an arc. Yet, this method is
+not asymptotically optimal in a strict sense, because the condition number of the
+preconditioned linear system still grows like O(| log h|). The reason is that on open
+curves the boundary integral operators have to be considered on Sobolev spaces that
+take into account special conditions at the endpoints. These spaces fail to provide the
+duality relationships that form the foundations of operator preconditioning.
+Several approaches have been proposed in the literature to overcome this diﬃculty
+by extending the classical Calder´on relations to the case of open surfaces. Recently,
+Bruno and Lintner in [15, 4] have developed a generalized Calder´on formula for open
+surfaces.
+When combined with their high-order numerical methods, they observe
+excellent performance of their Calder´on preconditioner for a wide range of geometries
+and wave propagation problems. However, no mathematical analysis of this method
+is available, let alone results about asymptotic optimality of the preconditioner.
+In this article we propose the ﬁrst provably asymptotically optimal Calder´on
+preconditioning approach for low-order Galerkin BEM for the BIE arising from (1.1).
+This has been made possible by a breakthrough result achieved by N´ed´elec and one
+of the authors in [13, 12].
+They have found explicit inverses for weakly singular
+and hypersingular integral operators on a line segment. These new relations are a
+perfect substitute for the conventional Calder´on identities in the context of operator
+preconditioning, and in this article we are going to elaborate this rigorously.
+Throughout we take pains to cover rather general locally reﬁned meshes in our
+analysis. This is important, because we can expect pronounced singularities of the
+solutions of the BIEs at the endpoints. More precisely, they behave as 1/
+√
+d where d
+
+[PDF PAGE 4]
+Operator Preconditioning for BIEs on open curves
+3
+is the distance to the endpoints [7, 20, 14]. For piecewise polynomial approximation
+spaces this entails using algebraically or geometrically graded meshes, for which cells
+adjacent to the endpoints are much smaller than those in the middle of C.
+Operator preconditioning. Awareness of the gist of operator preconditioning
+as presented in [10] is crucial for appreciating the considerations in the remainder of
+the article. Thus, we brieﬂy recall the main result of [10].
+Theorem 1.1 (Theorem 2.1 [10]). Let X, Y be reﬂexive Banach spaces, Xh :=
+span{ϕi}N
+i=0 ⊂X, Yh := span{φj}M
+j=0 ⊂Y ﬁnite-dimensional subspaces with bases
+{ϕi}N
+i=0 and {φj}M
+j=0. Further, let a ∈L(X × X, C) and b ∈L(Y × Y, C) be con-
+tinuous sesquilinear forms (with norms ∥a∥and ∥b∥, resp.), each satisfying discrete
+inf-sup conditions with constants cA, cB > 0 on Xh and Yh, respectively. If there is
+a continuous sesquilinear form t ∈L(X × Y, C) that also satisﬁes a discrete inf-sup
+condition on Xh × Yh with constant cT > 0, then the associated Galerkin matrices:
+Ah := (a(ϕi, ϕj))N
+i,j=1 , Bh := (b(φi, φj))M
+i,j=1 , Th := (t(ϕi, φj))N,M
+i,j=1 ,
+satisfy
+κ(T−1
+h BhT−H
+h
+Ah) ≤∥a∥∥b∥∥t∥2
+cAcBc2
+T
+,
+(1.3)
+where κ designates the spectral condition number.
+As this theorem targets variational problems and Galerkin discretization, we will
+always focus on the weak form of boundary integral equations. Moreover, as explained
+in [10, Sect. 4], Calder´on preconditioning boils down to an application of Theorem 1.1
+where the spaces X and Y are dual to each other, with duality induced by the pairing
+sesquilinear form t. For the concrete trace spaces, on which the weak BIEs are posed,
+t will be an extension of the inner product in L2(C).
+In light of Theorem 1.1, when confronted with a variational BIE a(u, v) = ℓ(v),
+v ∈X, ℓ∈X′, on a trace space X, the key questions are,
+(Q1) whether we can ﬁnd another boundary integral operator that induces a bounded
+sesqui-linear form on Y := X′,
+(Q2) what sub-spaces Xh ⊂X and Yh ⊂Y furnish stable Galerkin discretizations,
+(Q3) if the pairs Xh and Yh allow an X/Y -stable L2-pairing (, for which a necessary
+condition is dim Xh = dim Yh).
+Given positive answers to these questions and assuming that all inf-sup constants
+can be chosen independently of the (local) mesh width, Theorem 1.1 will permit us
+to conclude that the product T−1
+h BhT−H
+h
+of Galerkin matrices represents an asymp-
+totically optimal preconditioner for Ah.
+Remark 1.2. We stress that the assertion of Theorem 1.1 is valid for any choice
+of bases for Xh and Yh and the associated Galerkin matrices. Thus, the focus can
+exclusively be on the construction of appropriate spaces Xh and Yh.
+Outline. Next, in Section 2 we give a precise description of the relevant Sobolev
+spaces, and afterwards, we introduce the boundary integral operators, along with el-
+liptic boundary integral equations in variational form. This will done on a straight
+line segment, but Section 2.4 will argue, why the case of a smooth open curve is fully
+covered. Theorems 2.1 and 2.5 will answer Questions (Q1) and (Q2). Piecewise poly-
+nomial boundary element spaces on primal and dual meshes are deﬁned in Section 3.
+In Section 4 uniform inf-sup conditions for discrete L2-duality pairings are estab-
+lished, thus verifying the last missing assumption of Theorem 1.1, see Theorem 4.3.
+
+[PDF PAGE 5]
+4
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+The proofs take the cue from the general technique developed by O. Steinbach in
+[26]. In the ﬁnal section, a number of numerical experiments conﬁrm the power and
+asymptotic optimality of the new preconditioner.
+2. Boundary Integral Operators (BIO).
+2.1. Sobolev spaces. We employ the usual notations for Sobolev spaces from
+[18, Ch. 3]; let O ⊆Rd, with d = 1, 2, be open. For s ∈R, Hs(O) denotes standard
+Sobolev spaces [18, 27]. If s > 0 and O ⊂Rd is a Lipschitz domain, eHs(O) stands for
+the space of distributions in Hs(O) whose extension by zero to Rd belongs to Hs(Rd).
+We introduce
+eH−1/2(O) ≡(H1/2(O))′
+and
+H−1/2(O) ≡( eH1/2(O))′.
+(2.1)
+Here and below primes designate dual spaces and duality pairings will be indicated
+by angular brackets ⟨·, ·⟩. Using L2(O) as pivot space, this yields the Gelfand triples
+H1/2(O) ⊂L2(O) ⊂eH−1/2(O)
+,
+eH1/2(O) ⊂L2(O) ⊂H−1/2(O) ,
+with continuous and dense embeddings.
+Below we are going to examine integral equations on a special curve, namely the
+straight line segment (−1, 1) × {0} ⊂R2. Thus, we abbreviate Γ := (−1, 1). Based
+on the weight function
+ω(x) :=
+p
+1 −x2,
+x ∈Γ ,
+let us introduce the subspaces
+eH−1/2
+⟨0⟩
+(Γ) :=
+n
+ϕ ∈eH−1/2(Γ) : ⟨1 , ϕ⟩e
+H−1/2(Γ) = 0
+o
+,
+(2.2)
+H1/2
+∗
+(Γ) :=
+n
+g ∈H1/2(Γ) :
+
+g , ω−1
+e
+H−1/2(Γ) = 0
+o
+.
+(2.3)
+Analogous to (2.1), we ﬁnd duality with respect to the pivot space L2(Γ):
+eH−1/2
+⟨0⟩
+(Γ) = (H1/2
+∗
+(Γ))′ .
+(2.4)
+2.2. Boundary integral operators on a segment. Following the notation
+in [11], we introduce the standard weakly singular boundary integral operator (BIO)
+associated with the Laplacian −∆as V, and recall that it is deﬁned by
+V ϕ(x) :=
+Z
+Γ
+log
+1
+|x −y|ϕ(y) dy,
+x ∈Γ,
+ϕ ∈C∞
+0 (Γ) .
+Additionally, taking the cue from [12, Sec. 3], we deﬁne a modiﬁed version of the
+weakly singular BIO as
+¯Vϕ(x) :=
+Z
+Γ
+log M(x, y)
+|x −y| ϕ(y) dy,
+x ∈Γ,
+ϕ ∈C∞(Γ) ,
+where
+M(x, y) := 1
+2
+
+(y −x)2 + (ω(x) + ω(y))2
+,
+(x, y) ∈Γ × Γ .
+
+[PDF PAGE 6]
+Operator Preconditioning for BIEs on open curves
+5
+Analogously, we deﬁne the Laplace standard hypersingular operator W and its mod-
+iﬁed version ¯W as
+W := −
+  d
+dx
+∗◦V ◦d
+dx ,
+¯W := −d
+dx ◦¯V ◦
+  d
+dx
+∗.
+Here,
+d
+dx is the standard derivative on C1(Γ), which gives rise to a mapping
+d
+dx :
+eH1/2(Γ) →eH−1/2
+⟨0⟩
+(Γ) with continuous adjoint
+  d
+dx
+∗: H1/2
+∗
+(Γ) →H−1/2(Γ). The
+following fundamental result establishes key continuity properties of the integral op-
+erators.
+Theorem 2.1 ([12, Prop. 3.1 and 3.3]). The boundary integral operators introduced
+above can be extended to bounded operators
+V : eH−1/2
+⟨0⟩
+(Γ) →H1/2
+∗
+(Γ) ,
+¯V : H−1/2(Γ) →eH1/2(Γ) ,
+and
+W : eH1/2(Γ) →H−1/2(Γ),
+¯W : H1/2
+∗
+(Γ) →eH−1/2
+⟨0⟩
+(Γ).
+The signiﬁcance of this theorem for operator preconditioning is evident: ﬁrst of
+all, in light of (2.1) and (2.4), it conﬁrms that every operator maps continuously from
+a space to its L2-dual, which naturally relates them to bilinear forms. Secondly, we
+see that ¯W and ¯V induce continuous bilinear forms on the image spaces of V and W,
+respectively. In a sense, Theorem 2.1 answers Question (Q1) for the operators V and
+W.
+We would like to point out that the pairs V ↔¯W and W ↔¯V of operators are
+even connected by a particularly simple “Calder´on identity”, expressed in the next
+theorem.
+Theorem 2.2 ([12, Prop. 3.6]). The following identities hold:
+¯V ◦W = Id e
+H1/2(Γ),
+V ◦¯W = IdH1/2
+∗
+(Γ),
+(2.5a)
+¯W ◦V = Id e
+H−1/2
+⟨0⟩
+(Γ),
+W ◦¯V = IdH−1/2(Γ) .
+(2.5b)
+However, we emphasize that it is Theorem 2.1 that paves the way for operator
+preconditioning. The result of Theorem 2.2 merely bolsters conﬁdence that excellent
+condition numbers can be achieved.
+Remark 2.3. We would like to alert the reader to the striking diﬀerences between
+the cases of closed (boundaries) and open curves.
+In the former the single layer
+and hypersingular operators map continuously back and forth between H1/2(∂Ω) and
+H−1/2(∂Ω). These spaces are in natural duality, so that operator preconditioning can
+rely on these operators alone. Conversely, on open curves the “˜-spaces” come into
+play and we need to modify the integral operators in order to ensure continuity on the
+L2-duals of these ˜-spaces.
+2.3. (Augmented) boundary integral equations. In line with the perspec-
+tive of operator preconditioning, we introduce the weak form of the boundary integral
+equations. First, consider the variational problem for the weakly singular operator V:
+given g ∈H1/2
+∗
+(Γ) ﬁnd ϕ ∈eH−1/2
+⟨0⟩
+(Γ) such that
+aV(ϕ, ψ) = ⟨V ϕ , ψ⟩e
+H−1/2(Γ) = ⟨g , ψ⟩e
+H−1/2(Γ) ,
+∀ψ ∈eH−1/2
+⟨0⟩
+(Γ).
+(2.6)
+This variational problem is connected with the Dirichlet problem of (1.1), when C is
+the line segment {0} × Γ, see [30].
+
+[PDF PAGE 7]
+6
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+The variational problem for the hypersingular operator W (Case B) can be stated
+as: ﬁnd u ∈eH1/2(Γ) such that for f ∈H−1/2(Γ)
+aW(u, w) = ⟨W u , w⟩e
+H1/2(Γ) = ⟨f , w⟩e
+H1/2(Γ) ,
+∀w ∈eH1/2(Γ).
+(2.7)
+As demonstrated in [32], this variational problem is satisﬁed by the jump of the
+Dirichlet trace of the solution of the Neumann problem (1.1) in the exterior of the
+line segment.
+The next two variational problems are not directly related to the boundary value
+problems (1.1). Nevertheless, we are going to discuss operator preconditioning also for
+them. For the modiﬁed weakly singular operator ¯V the associated variational problem
+reads as follows (Case C): for g ∈eH1/2(Γ) ﬁnd φ ∈H−1/2(Γ) such that
+a¯V(φ, ψ) =
+
+¯Vφ , ψ
+
+H−1/2(Γ) = ⟨g , ψ⟩H−1/2(Γ)
+∀ψ ∈H−1/2(Γ).
+(2.8)
+Finally the variational problem for the modiﬁed hypersingular operator ¯W is: ﬁnd
+v ∈H1/2
+∗
+(Γ) such that for a given f ∈eH−1/2
+⟨0⟩
+(Γ), it holds
+a ¯W(v, w) :=
+
+ ¯Wv , w
+
+H1/2(Γ) = ⟨f , w⟩H1/2(Γ)
+∀w ∈H1/2
+∗
+(Γ).
+(2.9)
+Direct Galerkin discretization of aV(ϕ, ψ) and a ¯W(w, v) would require trial and
+test spaces to comply with the constraints in (2.2) and (2.3). In order to avoid this,
+we suppress the orthogonality restrictions and deﬁne two augmented bilinear forms.
+First introduce for α ∈R
+eaV[α](ϕ, ψ) := ⟨V ϕ , ψ⟩+ α ⟨1 , ϕ⟩⟨1 , ψ⟩,
+ϕ, ψ ∈eH−1/2(Γ) ,
+(2.10)
+with duality pairings ⟨· , ·⟩on eH−1/2(Γ). Obviously, eaV[α] : eH−1/2(Γ)× eH−1/2(Γ) →C
+is continuous for any α ∈R. Similarly, deﬁne for β ∈R
+ea ¯W[β](v, w) :=
+
+ ¯Wv , w
+
++ β
+
+v , ω−1 
+w , ω−1
+,
+v, w ∈H1/2(Γ) ,
+(2.11)
+where ea ¯W[β] : H1/2(Γ) × H1/2(Γ) →C is bounded for any β ∈R. Now we consider
+α > 0 and β > 0 ﬁxed and usually drop [α] and [β] from the notation for the bilinear
+forms. To begin with we note that augmentation does not change the solutions of the
+variational problems. The proof is given in Appendix A.
+Theorem 2.4.
+The variational problem (2.6) is equivalent to the augmented
+variational problem (Case A): ﬁnd ϕ ∈eH−1/2(Γ) such that
+eaV(ϕ, ψ) = ⟨g , ψ⟩,
+∀ψ ∈eH−1/2(Γ) ,
+(2.12)
+and the variational problem (2.9) is equivalent to the augmented variational problem
+(Case D): ﬁnd v ∈H1/2(Γ) such that
+ea ¯W(v, w) = ⟨f , w⟩H1/2(Γ) ,
+∀w ∈H1/2(Γ) .
+(2.13)
+The next result essentially conﬁrms the unique solvability of all (augmented)
+variational problems. Its proof relies on the eH−1/2
+⟨0⟩
+(Γ)-ellipticity of V and the H1/2
+∗
+(Γ)-
+ellipticity of ¯W, both established in [12, Prop. 3.1].
+
+[PDF PAGE 8]
+Operator Preconditioning for BIEs on open curves
+7
+Theorem 2.5.
+For any α, β ∈R+ the (augmented) bilinear forms eaV, aW, a¯V,
+and ea¯V are bounded and elliptic on eH−1/2(Γ), eH1/2(Γ), H−1/2(Γ), and H1/2(Γ),
+respectively.
+Thanks to the Lax-Milgram lemma Theorem 2.5 gives a positive answer to Ques-
+tion (Q2) for any conforming choice of trial/test spaces for the Galerkin discretization
+of the variational problems (2.7), (2.8), (2.12), and (2.13): throughout the elliptic-
+ity constants will supply possible constants in the inf-sup conditions and those will
+obviously be independent of the ﬁnite dimensional spaces.
+2.4. Generalizations. We argue that the setting of the line segment {0} ×
+Γ is suﬃciently general for the discussion of operator preconditioning, because the
+variational problems (2.6)– (2.9) can be lifted to an open curve C deﬁned by a C2-
+parameterization s : Γ →C with ∥˙s(τ)∥= 1 for all τ ∈Γ. For instance, the bilinear
+form associated with the weakly singular integral operator on C reads
+aV,C(φ, ψ) :=
+1
+Z
+−1
+1
+Z
+−1
+log
+1
+∥s(x) −s(y)∥φ(s(x))ψ(s(y)) dy dx ,
+φ, ψ ∈eH−1/2(C) .
+It can be pulled back to Γ, which yields
+aV,C(φ, ψ) :=
+1
+Z
+−1
+1
+Z
+−1
+log
+1
+∥s(x) −s(y)∥φ(x)ψ(y) dy dx ,
+φ, ψ ∈eH−1/2(Γ) .
+Slightly abusing notation, we have kept the same symbol aV,C. Analogous considera-
+tions apply to the other bilinear forms aW,C, a¯V,C, and a ¯W,C deﬁned for functions on
+C. We point out that it is exactly the bilinear forms aV,C and aW,C that occur in the
+variational boundary integral equations associated with (1.1).
+Proposition 2.6. The following bilinear forms are compact
+aV −aV,C : eH−1/2(Γ) × eH−1/2(Γ) →R ,
+aW −aW,C
+: eH1/2(Γ) × eH1/2(Γ) →R ,
+a¯V −a¯V,C : H−1/2(Γ) × H−1/2(Γ) →R ,
+a ¯W −a ¯W,C
+: H1/2(Γ) × H1/2(Γ) →R .
+Proof. We focus on the modiﬁed weakly singular integral operator ¯V and note
+that
+(a¯V −a¯V,C)(φ, ψ) =
+1
+Z
+−1
+1
+Z
+−1
+
+log ∥s(x) −s(y)∥
+|x −y|
++ log MC(s(x), s(y))
+M(x, y)
+
+φ(x)ψ(y) dy dx ,
+where MC(x, y) := 1
+2
+ ∥x −y∥2 + (dist(x, ∂C) + dist(y, ∂C))2
+. By Taylor expansion
+about x = y and using ∥˙s∥= 1, we ﬁnd for x ≈y
+log ∥s(x) −s(y)∥
+|x −y|
+= log(1 + ˙s(x) · ¨s(x)(x −y) + O(|x −y|2)) = O(|x −y|) ,
+log MC(s(x), s(y))
+M(x, y)
+= log ∥s(x) −s(y)∥2 + (ω(x) + ω(y))2
+|x −y|2 + (ω(x) + ω(y))2
+≤O(|x −y|) .
+
+[PDF PAGE 9]
+8
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+−1
+−0.5
+0
+0.5
+1
+−1
+−0.5
+0
+0.5
+1
+−0.7
+−0.6
+−0.5
+−0.4
+−0.3
+−0.2
+−0.1
+0
+ x
+ y
+ kernel(x,y)
+−1
+−0.5
+0
+0.5
+1
+−1
+−0.5
+0
+0.5
+1
+−0.7
+−0.6
+−0.5
+−0.4
+−0.3
+−0.2
+−0.1
+0
+ x
+ y
+ kernel(x,y)
+Fig. 2.1: Plot of kernel δk associated with a¯V −a¯V,C for s(t) =
+ sin(t)
+cos(t)
+
+(arc curve, left)
+and s(t) = t+0.01
+√
+2
+ cos(log( t+0.01
+√
+2
+))
+sin(log( t+0.01
+√
+2
+))
+
+(spiral, right). The kernels are piecewise smooth and
+continuous.
+Hence, the diﬀerence a¯V −a¯V,C of the bilinear forms is induced by an integral operator
+δ V with a piecewise smooth and globally Lipschitz continuous kernel δk = δk(x, y),
+see Figure 2.1 for plots of two specimens.
+In particular, the kernel δk belongs to W 1,1(Γ×Γ), the Sobolev space of functions
+in L1(Γ × Γ) such that its ﬁrst order weak derivatives are also L1(Γ × Γ). Recalling
+that integral operators with L1-kernels induce compact mappings L2(Γ) →L2(Γ), we
+conclude that a kernel in W 1,1(Γ × Γ) spawns a compact operator L2(Γ) →H1(Γ).
+Hence, after subtracting a linear function, which is a simple compact modiﬁcation,
+we end up with a compact mapping L2(Γ) →H1
+0(Γ). Thanks to the symmetry of
+the kernel, it agrees with its adjoint (modulo a compact perturbation), which will
+be a compact mapping H−1(Γ) →L2(Γ). By interpolation between L2(Γ)/H−1(Γ)
+and H1(Γ)/L2(Γ) we ﬁnally infer that δ V is an integral operator mapping compactly
+H−1/2(Γ) →H1/2(Γ).
+Similar arguments apply to the other diﬀerences of bilinear forms. As regards aV−
+aV,C and aW −aW,C we can simply appeal to the continuous embeddings eH−1/2(Γ) ⊂
+H−1/2(Γ) and eH1/2(Γ) ⊂H1/2(Γ).
+A ﬁrst conclusion we can draw from this theorem is that the stability of Galerkin
+discretizations of the bilinear forms on C can be inferred from Theorem 2.5, provided
+that the resolution of the trial and test spaces is large enough, cf. [22, Sect. 4.2.3].
+Further, as compact perturbations of a bilinear form do not aﬀect the asymptotic
+performance of operator preconditioning, this result conﬁrms that a ¯W is suitable for
+preconditioning aV,C, a¯V spawns a preconditioner for aW,C, and so on. Of course, the
+constants will depend on the shape of C.
+The building blocks of operator preconditioning as they have been assembled so
+far, are listed in Table 2.1.
+The missing pieces, namely the families of boundary
+element spaces Xh and Yh, will be speciﬁed in the next section.
+Remark 2.7. As another generalization of the variational problems studied in
+Section 2.3 we may consider the boundary integral operators associated with boundary
+value problems for the Helmholtz equation −∆u −k2u = 0 with wave number k > 0.
+For the line segment the corresponding weakly singular and hypersingular operators,
+
+[PDF PAGE 10]
+Operator Preconditioning for BIEs on open curves
+9
+a
+b
+X
+Y
+Case A:
+eaV,C, cf. (2.12)
+a ¯W,C
+eH−1/2(C)
+H1/2(C)
+Case B:
+aW,C, cf. (2.7)
+a¯V,C
+eH1/2(C)
+H−1/2(C)
+Case C:
+a¯V,C, cf. (2.8)
+aW,C
+H−1/2(C)
+eH1/2(C)
+Case D:
+ea ¯W,C, cf. (2.13)
+aV,C
+H1/2(C)
+eH−1/2(C)
+Table 2.1: (Partial) summary of operator preconditioning strategy for variational
+boundary integral equations on an open curve C. For notations see Theorem 1.1.
+Vk and Wk, read
+Vk ϕ(x) := i
+4
+Z
+Γ
+H(1)
+0 (k |x −y|)ϕ(y) dy ,
+x ∈Γ ,
+ϕ ∈C∞
+0 (Γ) ,
+Wk := −
+  d
+dx
+∗◦Vk ◦d
+dx + k2 Vk ,
+(2.14)
+where H(1)
+0 (ξ) stands for the Hankel function of the ﬁrst kind [22, Eq. (3.3)]. Since
+the following representation holds [23, Sect. 2.3.1]
+H(1)
+0 (k |x −y|) = 1
+π log
+1
+|x −y| + K(k |x −y|) ,
+(2.15)
+one can write the operators as
+Vk = i
+4π V + Hk,
+and
+Wk = i
+4π
+ W +k2 V
+
++ Lk ,
+(2.16)
+with compact operators Hk : eH−1/2
+⟨0⟩
+(Γ) →H1/2
+∗
+(Γ) and Lk : eH1/2(Γ) →H−1/2(Γ),
+as the convolution kernel K(·) is piecewise smooth and continuous, and integration is
+over a bounded domain [21]. As a consequence, the bilinear forms for the Helmholtz
+counterparts of the variational problems (2.6) and (2.7) will be compact perturbations
+of aV and aW, respectively, cf. [22, Lemma 3.9.8].
+3. Boundary Element Spaces. We employ low-order mapped piecewise poly-
+nomial conforming boundary element spaces Xh ⊂X and Yh ⊂Y for the Galerkin
+discretization of the various bilinear forms a and b as listed in Table 2.1 and deﬁned
+in Section 2.4. These spaces a are built upon partitions of Γ and, by virtue of the
+mapping approach outlined in Section 2.4, all considerations can be conﬁned to Γ.
+3.1. Primal and dual meshes. First we construct primal and dual meshes of Γ
+as explained in [26, Sect. 2.2], [10, Section 4], and [5]. We introduce a primal mesh Γh
+of the interval Γ and denote its N nodes by −1 =: x1 < x2 < · · · < xN−1 < xN := 1,
+N ∈N.
+Based on Γh we build a dual mesh ˆΓh of Γ, whose nodes are the midpoints of
+intervals of Γh plus the points −1 and +1.
+More explicitly, the N + 1 nodes ηi,
+i = 0, . . . , N, of the dual mesh ˆΓh are given by
+η0 := −1 ,
+ηi := 1
+2(xi + xi+1) ,
+i = 1, . . . , N −1 ,
+ηN := 1 .
+(3.1)
+
+[PDF PAGE 11]
+10
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+3.2. Dual pairs of spaces. A positive answer to Question (Q3) entails a judi-
+cious construction of dual pairs of spaces Xh ⊂X, Yh ⊂Y in each of the four cases.
+They will be based on pairs of primal and dual meshes. Throughout, we write Pm for
+the space of uni-variate polynomials of degree ≤m.
+Primal: S−1,0(Γh) ⊂˜
+H−1/2(Γ)
+Dual : ¯S0,1(ˆΓh) ⊂H1/2(Γ)
+b
+b
+b
+b
+η1
+η2
+η3
+η4
+...
+b1
+b2
+b3
+b
+b
+b
+b
+ηN−4
+ηN−3
+ηN−2
+ηN−1
+bN−3
+bN−2
+bN−1
+|
+|
+|
+|
+x1
+η0
+x2
+x3
+x4
+|
+|
+|
+|
+xN−2
+xN−1
+xN
+ηN
+q1
+q2
+q3
+qN−3
+qN−2
+qN−1
+xN−3
+Fig. 3.1: Case A: X := eH−1/2, Y := H1/2, piecewise constant basis functions qj
+for Xh := S−1,0(Γh) in blue, piecewise linear basis functions (“tent functions”) bj
+for Yh := ¯S0,1(ˆΓh) in red/green.
+Note the extended “ramp functions” (in green)
+supported in the two leftmost and rightmost intervals of the dual mesh.
+Case A: Discrete spaces for X := eH−1/2, Y := H1/2 (Row 1 of Table 2.1).
+This case addresses the variational equation (2.12) with a = eaV using b = ea ¯W as pre-
+conditioning bilinear form, cf. Theorem 1.1. The primal and dual boundary element
+spaces are given by
+Xh := S−1,0(Γh) = {ϕh ∈L2(Γ) : ϕh|[xj,xj+1] ∈P0, j = 1, . . . , N −1} ⊂X ,
+Yh := ¯S0,1(ˆΓh) :=
+
+vh ∈C0(Γ) :
+vh|[ηj−1,ηj] ∈P1, j = 3, . . . , N −2
+vh|[η0,η2], vh|[ηN−2,ηN] ∈P1
+
+⊂Y .
+By means of their canonical basis functions the spaces are visualized in Figure 3.1.
+Obviously, they have the same dimension, which is N.
+Case B: Discrete spaces for X := eH1/2, Y := H−1/2 (Row 2 of Table 2.1).
+This setting arises from the variational equation (2.7) where a = aW.
+Thus, we
+precondition a by the bilinear form b = a¯V, cf. Theorem 1.1. The primal and dual
+boundary element spaces are deﬁned as follows
+Xh := S0,1
+0 (Γh) := {vh ∈C0(Γ), vh|[xj−1,xj] ∈P1, j = 2, . . . , N −1} ⊂X ,
+Yh := ¯S−1,0(ˆΓh) :=
+
+ϕh ∈L2(Γ) :
+ϕh|[ηj,ηj+1] ∈P0, j = 2, . . . , N −3
+ϕh|[η0,η2], ϕh|[ηN−2,ηN ] ∈P0
+
+⊂Y .
+Figure 3.2 shows these spaces’ representation in terms of their canonical basis func-
+tions. Note that both spaces have dimension N −2.
+Case C: Discrete spaces for X := H−1/2, Y := eH1/2 (Row 3 of Table 2.1).
+In order to perform operator preconditioning for the variational equation (2.8), we
+employ b = aW as preconditioning bilinear form.
+The primal and dual boundary
+
+[PDF PAGE 12]
+Operator Preconditioning for BIEs on open curves
+11
+Primal: S0,1
+0
+(Γh) ⊂˜
+H1/2(Γ)
+Dual : ¯S−1,0(ˆΓh) ⊂H−1/2(Γ)
+b
+b
+b
+b
+b
+b
+b
+b
+|
+|
+|
+|
+|
+|
+|
+qN−4
+qN−3
+qN−2
+q1
+q2
+q3
+η1
+η2
+η3
+η4
+...
+b1
+b2
+b3
+ηN−4
+ηN−3
+ηN−2
+ηN−1
+bN−2
+bN−4
+bN−3
+x1
+η0
+x2
+x3
+x4
+xN−3
+xN−2
+xN−1
+xN
+ηN
+Fig. 3.2: Case B: X := eH1/2, Y := H−1/2, piecewise linear basis functions (“tent
+functions”) bj for Xh := S0,1
+0 (Γh) in blue, piecewise constant basis functions qj for
+Yh := ¯S−1,0(ˆΓh) in red/green. Note the extended “characteristic functions” (in green)
+for the two leftmost and rightmost intervals of the dual mesh.
+element spaces are given by
+Xh := S−1,0(Γh) = {ϕh ∈L2(Γ) : ϕh |[xj,xj+1] ∈P0, j = 1, . . . , N −1} ⊂X ,
+Yh := S0,1
+0 (ˆΓh) :=
+
+vh ∈C0(Γ) :
+vh|[ηj−1,ηj] ∈P1, j = 1, . . . , N,
+vh(η0) = vh(ηN) = 0
+
+⊂Y .
+This yields dimension N−1 in both cases, as the reader may see from Figure 3.3, where
+the boundary element spaces are illustrated using their canonical basis functions.
+Primal: S−1,0(Γh) ⊂H−1/2(Γ)
+Dual: S0,1
+0
+(ˆΓh) ⊂˜
+H1/2(Γ)
+b
+b
+b
+b
+η1
+η2
+η3
+η4
+...
+b1
+b2
+b3
+b4
+b
+b
+b
+b
+ηN−4
+ηN−3
+ηN−2
+ηN−1
+bN−4
+bN−3
+bN−2
+bN−1
+|
+|
+|
+|
+x1
+η0
+x2
+x3
+x4
+|
+|
+|
+xN−3
+xN−2
+xN−1
+xN
+ηN
+q1
+q2
+q3
+qN−3
+qN−2
+qN−1
+|
+Fig. 3.3: Case C: X := H−1/2,Y := eH1/2, piecewise constant basis functions qj for
+Xh := S−1,0(Γh) in blue, piecewise linear basis functions (“tent functions”) bj for
+Yh := S0,1
+0 (ˆΓh) in red/green. Note that no basis functions are assigned to η0 and ηN.
+Case D: Discrete spaces for X := H1/2, Y := eH−1/2 (Row 4 of Table 2.1).
+This last case corresponds to the variational equation (2.9) where a = ea ¯W. Hence, we
+use bilinear form b = eaV to build the preconditioner. One can deﬁne the primal and
+dual boundary element spaces as follows
+Xh := S0,1(Γh) = {vh ∈C0(Γ), vh|[xj−1,xj] ∈P1, j = 2, . . . , N} ⊂X ,
+Yh := S−1,0(ˆΓh) := {ϕh ∈L2(Γ) : ϕh|[ηj−1,ηj] ∈P0, j = 1, . . . , N} ⊂Y .
+
+[PDF PAGE 13]
+12
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+As in the previous cases, we provide their canonical representation in Figure 3.4.
+Observe both spaces have dimension N.
+Primal: S0,1(Γh) ⊂H1/2(Γ)
+Dual : S−1,0(ˆΓh) ⊂˜H−1/2(Γ)
+b
+b
+b
+b
+b
+b
+b
+|
+|
+|
+|
+|
+|
+qN−1
+qN−3
+qN
+q1
+q2
+q3
+q4
+η1
+η2
+η3
+η4
+...
+b1
+b2
+b3
+b4
+ηN−4
+ηN−3
+ηN−2
+ηN−1
+bN−1
+bN−3
+bN−2
+x1
+η0
+x2
+x3
+x4
+xN−3
+xN−2
+xN−1
+xN
+ηN
+qN−2
+bN
+b
+|
+|
+Fig. 3.4: Case D: X := H1/2, Y := eH−1/2, piecewise linear basis functions (“tent
+functions”) bj for Xh := S0,1(Γh) in blue, basis functions qj for Yh := S−1,0(ˆΓh), the
+characteristic functions of the dual mesh intervals, in red/green.
+The choices for the discrete spaces Xh and Yh are summarized in Table 3.1, whose
+rows correspond to those of Table 2.1.
+Table 3.1: Summary of operator preconditioning strategy for variational boundary
+integral equations on the interval Γ. For notations see Theorem 1.1.
+Continuous
+Discrete
+a
+b
+X
+Y
+Xh
+Yh
+Case A
+eaV
+ea ¯W
+eH−1/2(Γ)
+H1/2(Γ)
+S−1,0(Γh)
+¯S0,1(ˆΓh)
+Case B
+aW
+a¯V
+eH1/2(Γ)
+H−1/2(Γ)
+S0,1
+0 (Γh)
+¯S−1,0(ˆΓh)
+Case C
+a¯V
+aW
+H−1/2(Γ)
+eH1/2(Γ)
+S−1,0(Γh)
+S0,1
+0 (ˆΓh)
+Case D
+ea ¯W
+eaV
+H1/2(Γ)
+eH−1/2(Γ)
+S0,1(Γh)
+S−1,0(ˆΓh)
+4. Stability of Discrete Duality Pairings. Now we tackle Question (Q3)
+for the pairs (Xh, Yh) of discrete spaces deﬁned for Cases A–D in Section 3.2. We
+closely follow the policy developed by O. Steinbach in [24, 25, 26] for the case when
+X = H1/2(Γ) (Case D), and we are going to extend his results to the other remaining
+cases.
+Since we aim for mesh-uniform stability results, we consider an inﬁnite family of
+meshes {Γh}h∈H of Γ, whose members are labelled by h from the index set H and serve
+as primal meshes. Concrete specimens of such families will be presented in Section 4.3.
+All of the constants introduced below can be chosen independently of h. Suppressing
+the dependence on h we continue using the notations xi and ηj to designate the nodes
+of the primal mesh Γh and its associated dual mesh ˆΓh, see Section 3.1. We also keep
+N for the total number of nodes of Γh.
+4.1. Assumptions on mesh geometry. The stability results will hinge on cer-
+tain assumptions on local properties of the meshes Γh, h ∈H. From the elaborations
+of Section 4.2 it will become clear that cases A, D, and B,C are connected by duality.
+
+[PDF PAGE 14]
+Operator Preconditioning for BIEs on open curves
+13
+Therefore, only two sets of assumptions on the geometry of the meshes will suﬃce,
+corresponding to the cases A/D and B/C.
+Below, we are going to use the same notations for entities that will be diﬀerent
+for diﬀerent cases. The concrete meaning should always be clear from the context
+of the current case being discussed. Moreover, in what follows, many notations are
+borrowed from [26]. In particular, we designate by τl := (xl, xl+1) a mesh interval of
+the primal mesh Γh with length hl := xl+1 −xl, l = 1, . . . , N −1.
+Case D (Case A). In this case we set ˆh1 :=
+1
+3h1, ˆhk :=
+1
+3(hk−1 + hk), k =
+2, . . . , N −1, ˆhN := hN−1. Then we deﬁne the following 2 × 2 matrices associated
+with the intervals of the primal mesh
+˜Gl = hl
+8
+ 3
+1
+1
+3
+
+,
+Gl = hl
+6
+ 2
+1
+1
+2
+
+,
+Hl =
+ 
+ˆh1/2
+l
+0
+0
+ˆh1/2
+l+1
+!
+,
+(4.1)
+for l = 1, . . . , N −1.
+Case B (Case C). In this case we deﬁne ˆhk := 1
+3(hk + hk+1), k = 1, . . . , N −2.
+Further, for l = 2, . . . , N −2, the 2 × 2-matrices ˜Gl, Gl, and Hl are deﬁned exactly as
+in (4.1). Besides, for mesh intervals adjacent to the endpoints −1 and 1 these matrices
+reduce to the following 1 × 1-matrices (numbers)
+˜Gl = hl
+2
+,
+Dl = hl
+3
+,
+Hl = ˆhl ,
+for l = 1, N −1 .
+(4.2)
+Using the notations just introduced, we now state geometric assumptions on the
+meshes Γh valid for all cases. Throughout, l runs through the maximum possible
+index interval, and Ml ∈{1, 2} designates the size of the matrices ˜Gl, Gl, and Hl,
+from (4.1) and (4.2), respectively.
+Assumption 4.1 (Assumption 1.1 in [26]).
+There are constants cG
+1 , cG
+2
+> 0
+independent of h and l such that
+cG
+1 (Dlxl, xl) ≤(Glxl, xl) ≤cG
+2 (Dlxl, xl),
+∀xl ∈RMl ,
+(4.3)
+where Dl := diag(Dl).
+Assumption 4.2 (Assumption 2 in [26]). We can ﬁnd a constant c0 > 0 such
+that
+(Hl ˜GT
+l H−1
+l
+xl, xl) ≥c0 · (Dlxl, xl),
+∀xl ∈RMl
+(4.4)
+for all l and h.
+4.2. Stability Results. Now we establish the crucial stability results for the
+four cases A-D. Their proof will be elaborated in several steps throughout this section.
+
+[PDF PAGE 15]
+14
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+Theorem 4.3. Let Assumptions 4.1 and 4.2 be satisﬁed. Then, for the following
+combinations of discrete spaces
+Case A:
+Xh = S−1,0(Γh)⊂X = eH−1/2(Γ),
+Yh = ¯S0,1(ˆΓh) ⊂Y = H1/2(Γ),
+Case B:
+Xh = S0,1
+0 (Γh) ⊂X = eH1/2(Γ),
+Yh = ¯S−1,0(ˆΓh)⊂Y = H−1/2(Γ),
+Case C:
+Xh = S−1,0(Γh)⊂X = H−1/2(Γ),
+Yh = S0,1
+0 (ˆΓh) ⊂Y = eH1/2(Γ),
+Case D:
+Xh = S0,1(Γh) ⊂X = H1/2(Γ),
+Yh = S−1,0(ˆΓh)⊂Y = eH−1/2(Γ),
+the discrete inf-sup condition:
+sup
+vh∈Yh
+|⟨wh , vh⟩|
+∥vh∥Y
+≥1
+cs
+∥wh∥X ,
+∀wh ∈Xh.
+(4.5)
+holds with a positive constant cs independent of h.
+Given the assertion of this theorem, all the abstract assumptions of Theorem 1.1
+have now been veriﬁed. Theorem 2.1 provides the continuity of the bilinear forms,
+Theorem 2.5 uniform stability of the (discrete) variational problems, and, ﬁnally,
+Theorem 4.3 the stability of the discrete duality pairing. Hence, for all the concrete
+choices listed in Table 3.1 operator preconditioning will yield preconditioners that
+achieve bounded condition numbers independently of the resolution of the mesh: they
+are asymptotically optimal.
+We split the proof of Theorem 4.3 into the individual cases. Moreover, inherent
+dependencies suggest to treat them in the order to D-B-C-A.
+Proof of Theorem 4.3 for Case D. As stated before, this case follows as a
+Corollorary of [26, Theorem 2.1 and 2.2].
+Proof of Theorem 4.3 for Case B. In order to prove this case, we extend the
+stability results developed for Case D [26, Theorem 2.2], using an analogous policy.
+We start with an assertion of L2-stability of the discrete pairing, see Appendix B for
+a proof using elementary local estimates.
+Lemma 4.4. The L2-stability holds
+sup
+ψh∈S−1,0(ˆΓh)
+|⟨ψh , wh⟩|
+∥ψh∥L2(Γ)
+≥cst ∥wh∥L2(Γ) ,
+∀wh ∈S0,1
+0 (Γh), ∀h ∈H,
+(4.6)
+where cst = 1
+2.
+Next, consider the standard Galerkin L2-Projection Qh : L2(Γ) →S0,1
+0 (Γh), and
+the generalized Galerkin L2-Projection ˜Qh : L2(Γ) →S0,1
+0 (Γh), for a given u ∈L2(Γ)
+deﬁned according to
+⟨Qhu , vh⟩L2(Γ) = ⟨u , vh⟩L2(Γ) ,
+∀vh ∈S0,1
+0 (Γh),
+(4.7)
+D
+˜Qhu , φh
+E
+L2(Γ) = ⟨u , φh⟩L2(Γ) ,
+∀φh ∈S−1,0(ˆΓh) .
+(4.8)
+Lemma 4.4 ensures that ˜Qh is well-deﬁned, because it guarantees unique solvabil-
+ity of (4.8). It also furnishes the stability estimate
+ ˜Qhu
+
+L2(Γ) ≤1
+cst
+∥u∥L2(Γ) ,
+for all u ∈L2(Γ) .
+(4.9)
+
+[PDF PAGE 16]
+Operator Preconditioning for BIEs on open curves
+15
+Additionally, we want to prove the H1-stability of ˜Qh and, following [26, Section
+1.5], resort to a quasi-interpolation operator. For the sake of clarity, the proof of the
+following will also be provided in Appendix B.
+Proposition 4.5.
+Let Assumptions 4.1 and 4.2 be satisﬁed.
+Then the L2-
+projection ˜Qh : H1
+0(Γ) →Xh = S0,1
+0 (Γh) deﬁned in (4.8) satisﬁes
+ ˜Qhu
+
+H1(Γ) ≤˜cst ∥u∥H1(Γ) ,
+∀u ∈H1
+0(Γ),
+(4.10)
+with ˜cst a positive constant independent of h.
+Now we are in a position to proof the key stability results for Case B.
+Proof of Theorem 4.3 for Case B eH1/2(Γ) can be obtained by interpolating be-
+tween L2(Γ) and H1
+0(Γ), see [16, Thm. 11.7]. Thus, by interpolation of bounded linear
+operators we obtain from (4.9) and Proposition 4.5 that
+ ˜Qhu
+ e
+H1/2(Γ) ≤cB ∥u∥e
+H1/2(Γ) ,
+∀u ∈eH1/2(Γ), h ∈H .
+(4.11)
+Introduce the projection operators Πh : eH1/2(Γ) →S−1,0(ˆΓh) ⊆H−1/2(Γ), sat-
+isfying
+⟨Πhu , wh⟩L2(Γ) = ⟨u , wh⟩e
+H1/2(Γ) ,
+∀wh ∈S0,1
+0 (Γh), h ∈H
+(4.12)
+where ⟨u , wh⟩e
+H1/2(Γ) denotes the eH1/2(Γ)-inner product. By the dual norm deﬁnition
+and continuity of ˜Qh, one can derive
+∥Πhu∥H−1/2(Γ) ≤cB ∥u∥e
+H1/2(Γ) ,
+∀u ∈eH1/2(Γ), h ∈H.
+Finally, for any wh ∈S0,1
+0 (Γh) by the above inequality we obtain the assertion
+∥wh∥e
+H1/2(Γ) =
+⟨wh , wh⟩e
+H1/2(Γ)
+
+∥wh∥e
+H1/2(Γ)
+=
+⟨wh , Πhwh⟩L2(Γ)
+
+∥wh∥e
+H1/2(Γ)
+≤cB
+⟨wh , Πhwh⟩L2(Γ)
+
+∥Πhwh∥H−1/2(Γ)
+≤cB
+sup
+0̸=vh∈S−1,0(ˆΓh)
+⟨wh , vh⟩L2(Γ)
+
+∥vh∥H−1/2(Γ)
+.
+Proof of Theorem 4.3 for Case C. We appeal to an analogue of Lemma 4.4
+to deﬁne ˜Q2
+h : L2(Γ) →S0,1
+0 (ˆΓh) for a given u ∈L2(Γ) as solution of the variational
+problem
+D
+˜Q2
+hu , φh
+E
+L2(Γ) = ⟨u , φh⟩L2(Γ) ,
+∀φh ∈S−1,0(Γh) .
+(4.13)
+Along the same lines as above one can prove that
+ ˜Q2
+hu
+ e
+H1/2(Γ) ≤cC ∥u∥e
+H1/2(Γ) ,
+∀u ∈eH1/2(Γ), h ∈H .
+(4.14)
+The arguments are very similar to those employed in the proof of Proposition 4.5
+and (4.9) for ˜Qh. Next, using the dual norm deﬁnition and (4.14), we have for all
+
+[PDF PAGE 17]
+16
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+vh ∈S−1,0(Γh) that
+∥vh∥H−1/2(Γ) =
+sup
+0̸=w∈e
+H1/2(Γ)
+⟨vh , w⟩L2(Γ)
+
+∥w∥e
+H1/2(Γ)
+=
+sup
+0̸=w∈e
+H1/2(Γ)
+
+D
+vh , ˜Q2
+hw
+E
+L2(Γ)
+
+∥w∥e
+H1/2(Γ)
+≤cC
+sup
+0̸=w∈e
+H1/2(Γ)
+
+D
+vh , ˜Q2
+hw
+E
+L2(Γ)
+
+ ˜Q2
+hw
+ e
+H1/2(Γ)
+≤cC
+sup
+0̸=wh∈e
+S0,1(ˆΓh)
+⟨vh , wh⟩L2(Γ)
+
+∥wh∥e
+H1/2(Γ)
+,
+which amounts to the assertion in Case C.
+Proof of Theorem 4.3 for Case A. The assertion for Case A follows in a
+similar way from Case D as Case C from Case B.
+4.3. Local mesh conditions. For important families of meshes that feature
+local reﬁnement towards the endpoints of Γ, we demonstrate that the constraints
+imposed by Assumption 4.2 are not severe. As explained above, we need consider only
+the cases D and B. In the interest of reducing this mesh condition to an eigenvalue
+problem, we use the symmetric form of Assumption 4.2 as in [26, Assumption 2.1]:
+with
+GS
+l := 1
+2
+h
+Hl ˜GT
+l H−1
+l
++ H−1
+l
+˜GlHl
+i
+,
+(4.15)
+(4.4) becomes equivalent to
+(GS
+l xl, xl) ≥c0 · (Dlxl, xl),
+for all xl ∈RMl .
+(4.16)
+We will study the following non-uniform meshes, all of which are symmetric to
+x = 0:
+• For odd N and q > 1 geometric meshes whose nodes are
+xk :=
+
+
+
+
+
+
+
+−1
+, for k = 1 ,
+−1 + q−N−1
+2
++k−1
+, for k = 2, . . . , N−1
+2
++ 1 ,
+1 −q
+N−1
+2
+−k+1
+, for k = N−1
+2
++ 2, . . . , N −1 ,
+1
+, for k = N .
+(4.17)
+• For even N and grading factor α > 0 algebraically graded meshes deﬁned by
+xk :=
+
+
+
+
+
+−1 +
+
+2 k−1
+N−1
+α
+, for k = 1, . . . , N
+2 ,
+1 −
+
+2 −2 k−1
+N−1
+α
+, for k = N
+2 + 1, . . . , N .
+(4.18)
+• Chebychev meshes with nodes
+xk := −cos
+
+π k−1
+N−1
+
+,
+k = 1, . . . , N .
+(4.19)
+
+[PDF PAGE 18]
+Operator Preconditioning for BIEs on open curves
+17
+Case D. As can easily be deduced from the deﬁnition of the matrices from (4.1),
+Assumption 4.2 boils down to
+λmin
+
+
+
+
+6
+r
+ˆhl
+ˆhl+1 +
+r
+ˆhl+1
+ˆhl
+r
+ˆhl
+ˆhl+1 +
+r
+ˆhl+1
+ˆhl
+6
+
+
+
+
+= 6 −
+
+
+s
+ˆhl
+ˆhl+1
++
+s
+ˆhl+1
+ˆhl
+
+≥16
+3 c0
+for l = 1, . . . , N −1 .
+Hence, if this minimal eigenvalue is positive, we can set
+c0 =
+min
+l=1,...,N−1
+3
+16
+
+6 −
+
+
+s
+ˆhl
+ˆhl+1
++
+s
+ˆhl+1
+ˆhl
+
+
+
+.
+(4.20)
+Note that the minimum will be attained for extremal values of the ratios ˆhl : ˆhl+1.
+Case B. As mentioned in Section 4.1, we get the same matrices (4.1) for l =
+2, . . . , N −2. Hence, for the internal mesh intervals, we obtain the same formulas as
+in Case D. For the terminal intervals we merely have to compare the numbers from
+(4.2) and ﬁnd that this just means c0 ≤3
+2.
+Hence, for all cases we have to check the existence of c0 > 0 given by (4.20). We
+introduce the abbreviation rl :=
+ˆhl
+ˆhl+1 and note that thanks to symmetry, only the
+mesh intervals in [−1, 0] have to be examined.
+For the geometrically graded mesh (4.17) we ﬁnd hl = q−N−1
+2
++l−1(q −1), k =
+1, .., N−1
+2 , and end up with
+rl =
+(
+1 + q
+for l = 1 ,
+q
+for l = 2, . . . , N−1
+2
++ 1 .
+From this we conclude
+c0 = 3
+16
+
+6 −
+p
+1 + q −
+p
+1 + q
+−1
+> 0 ,
+if
+q < 16 + 12
+√
+2 ≈32.9 .
+For the algebraically graded mesh (4.18) we obtain
+rl =
+(
+2α
+for l = 1 ,
+(l+1)α−(l−1)α
+(l)α−(l−2)α
+for l = 2, . . . , N
+2 .
+Here rl attains its extremal value for l = 1 and we ﬁnd
+c0 = 3
+16(6 −2α/2 −
+1
+2α/2 ) > 0 ,
+if
+α < 2log(3 +
+√
+2)
+log 2
+≈4.28 .
+For the Chebychev meshes, we ﬁnd
+rl =
+
+
+
+
+
+sin2(
+π
+2(N−1) )
+sin2(
+π
+N−1 )
+for l = 1, N −1 ,
+sin(
+πl
+N−1 )
+sin( π(l−1)
+N−1 )
+for l = 2, . . . , N −2 ,
+which attains its extremal values for l = 1, N −1. Furthermore, λmin ց 7
+2 as N →∞
+and we can chose c0 = 21
+32.
+
+[PDF PAGE 19]
+18
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+5. Numerical Experiments. Theory merely gives estimates with undetermined
+constants. In order to get clues of their sizes, we report the practical performance
+of operator preconditioning for the line segment, for all cases listed in Table 3.1, and
+three diﬀerent families of meshes: (i) uniform meshes with equidistant nodes, (ii)
+Chebychev meshes according to (4.19), and (iii) algebraically graded meshes with
+grading factor α = 3 as speciﬁed in (4.18). As elaborated in Section 4.3, all these
+meshes meet the geometric constraints of Assumptions 4.1, 4.2. The parameters α
+and β in the augmented bilinear forms from (2.10) and (2.11) were simply set to 1
+throughout.
+As stipulated by Theorem 1.1 the matrix Mh := T−1
+h BhT−H
+h
+was used as a pre-
+conditioner for the Galerkin matrix Ah; please refer to Theorem 1.1 for the deﬁnition
+of the matrices. The spaces Xh and Yh in Cases A-D are chosen as deﬁned in Sec-
+tion 3, see Table 3.1 for a summary. Throughout the locally supported canonical basis
+functions illustrated in Figures 3.1– 3.4 were used for the computations. We add that
+t agrees with the inner product in L2(Γ), which renders the Th’s sparse “primal-dual
+mass matrices”. Semi-analytic formulas were used for the computations of the entries
+of the Galerkin matrices for integral operators with singular kernels. For numerical
+integration we used (tensor product) Gauss-Legendre quadrature of order eight1.
+In the numerical experiments, we monitor the spectral condition numbers κ(D−1
+h Ah)
+and κ(MhAh) for sequences of meshes with increasing number of nodes. Here Dh
+stands for the diagonal part of Ah. In addition, we recorded the number of iterations
+it took the preconditioned conjugate gradient method2 to achieve a reduction of the
+residual norm by a factor 1010. Initial guess was zero and the right hand side vectors
+hat entries +1 in its upper half, −1 for the remaining components. In some cases we
+also plot the spectrum of MhAh for diﬀerent meshes.
+5.1. Weakly singular operator (Case A, row 1 of Table 3.1). In this
+case Ah is related to the weakly singular operator V, whereas Bh arises from the
+modiﬁed hypersingular operator ¯W. The results are documented in Table 5.1 and
+reveal that the new operator preconditioning strategy achieves condition numbers
+that are essentially independent of the resolution of the meshes. Moreover, in Figure
+5.1 we observe pronounced and mesh-independent clustering of the eigenvalues of the
+preconditioned matrices.
+For comparison we include results obtained for operator preconditioning with
+“operators of opposite order” in the spirit of [19]. There Bh is replaced with Galerkin
+matrices associated with the unmodiﬁed hypersingular operator W. For its discretiza-
+tion we used two diﬀerent boundary element spaces:
+1. We may choose the trial and test space S0,1
+0 (bΓh) on the dual mesh (from
+Case C, see Figure 3.3) and obtain the Galerkin matrix bBC
+h . This spawns the
+preconditioning matrix c
+MC
+h := T−1
+h bBC
+h T−T
+h .
+2. We may also refrain from enforcing zero boundary conditions and use the
+space ¯S0,1(ˆΓh) on the dual mesh (from Case A, see Figure 3.1). However, by
+doing this, we will end up with a singular Galerkin matrix bBA
+h . Consequently,
+we have to regularize it by adding a rank-1 correction that removes the ker-
+nel. To state it, we write g1 and gω for the column vectors that arise from
+1The numerical experiments presented in this section were performed with MATLAB R2013a,
+64-bit.
+2We used the implementation of the preconditioned conjugate gradient method provided by
+MATLAB’s pcg function.
+
+[PDF PAGE 20]
+Operator Preconditioning for BIEs on open curves
+19
+the Galerkin discretization of the linear forms v 7→⟨1 , v⟩and v 7→⟨ω , v⟩,
+respectively, on ¯S0,1(ˆΓh). Then the correction can be implemented by adding
+the matrices g1gT
+1 or gωgT
+ω. This yields the following matrix representations
+of the preconditioners:
+c
+MA
+1h := T−1
+h
+
+bBA
+h + g1gT
+1
+
+T−T
+h ,
+c
+MA
+ωh := T−1
+h
+
+bBA
+h + gωgT
+ω
+
+T−T
+h ,
+For all these preconditioners we still expect a logarithmic growth of κ(c
+M∗
+∗hAh). The
+measured condition numbers are listed in Table 5.2 and display the expected mod-
+erate growth as the meshes are reﬁned. Obviously, judged by the condition numbers,
+our new preconditioner Mh is superior to any c
+M∗
+∗h. The gain in terms of speed of
+convergence of the CG iteration is not as impressive.
+Table 5.1: Performance of preconditioners for Vh (Case A, row 1 of Table 3.1).
+Uniform mesh
+Chebychev mesh
+Algebraic mesh
+N
+D−1
+h Ah
+c
+MC
+h Ah
+MhAh D−1
+h Ah
+c
+MC
+h Ah
+MhAh D−1
+h Ah
+c
+MC
+h Ah
+MhAh
+Spectral Condition numbers κ
+128
+272.8
+26.56
+2.117
+314.2
+57
+1.836
+392.7
+94.62
+1.760
+256
+547.7
+30.51
+2.167
+660.8
+64.53
+1.852
+845.6
+108.2
+1.765
+512
+1098
+33.95
+2.210
+1375
+72.03
+1.865
+1794
+122.1
+1.771
+1024
+2198
+37.11
+2.248
+2841
+79.62
+1.878
+3765
+136.2
+1.776
+2048
+4397
+40.13
+2.282
+5837
+87.34
+1.890
+7843
+150.7
+1.781
+4096
+8797
+43.08
+2.313
+11950
+95.17
+1.901
+16240
+165.4
+1.785
+Numbers of PCG iterations
+128
+56
+11
+10
+67
+13
+10
+63
+15
+8
+256
+77
+12
+10
+98
+14
+10
+90
+15
+8
+512
+106
+12
+10
+140
+14
+11
+127
+15
+8
+1024
+145
+12
+10
+205
+14
+11
+177
+16
+8
+2048
+201
+12
+10
+290
+15
+11
+249
+16
+8
+4096
+273
+12
+10
+417
+15
+11
+347
+16
+8
+Table 5.2: Results for operator preconditioning of Vh (Case A) with diﬀerent (regu-
+larized) discrete versions of the unmodiﬁed hypersingular operator W
+Uniform mesh
+Chebychev mesh
+Algebraic mesh
+N
+c
+MA
+1hAh
+c
+MA
+ωhAh
+c
+MC
+h Ah c
+MA
+1hAh
+c
+MA
+ωhAh
+c
+MC
+h Ah c
+MA
+1hAh
+c
+MA
+ωhAh
+c
+MC
+h Ah
+Spectral Condition numbers κ
+128
+7.113
+7.035
+26.56
+9.661
+9.638
+57
+16.18
+16.17
+94.62
+256
+7.714
+7.648
+30.51
+11.61
+11.59
+64.53
+20.38
+20.38
+108.2
+512
+8.370
+8.311
+33.95
+13.75
+13.75
+72.03
+25.08
+25.08
+122.1
+1024
+9.082
+9.028
+37.11
+16.12
+16.12
+79.62
+30.29
+30.29
+136.2
+2048
+9.845
+9.796
+40.13
+18.68
+18.67
+87.34
+36.01
+36.01
+150.7
+4096
+10.66
+10.61
+43.08
+21.43
+21.42
+95.17
+42.25
+42.25
+165.4
+Numbers of PCG iterations
+128
+11
+11
+11
+13
+12
+13
+15
+14
+15
+256
+11
+11
+12
+14
+13
+14
+16
+15
+15
+512
+12
+11
+12
+14
+14
+14
+16
+16
+15
+1024
+12
+11
+12
+15
+14
+14
+17
+16
+16
+2048
+12
+12
+12
+16
+15
+15
+18
+17
+16
+4096
+12
+12
+12
+16
+15
+15
+18
+17
+16
+
+[PDF PAGE 21]
+20
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+Fig. 5.1: Plot of spectrum for Vh preconditioned by Mh (Case A, row 1 of Table 3.1)
+for our three meshes. We use black triangles to show the eigenvalues when using
+an uniform mesh, blue circles for the Chebychev mesh, and red squares for the alge-
+braically graded mesh.
+128
+256
+512
+1024
+2048
+4096
+0.5
+1
+1.5
+2
+Number of DOFs
+Eigenvalues
+5.2. Hypersingular operator (Case B, row 2 of Table 3.1). Now, Ah is the
+Galerking matrix corresponding to the hypersingular operator W, and the modiﬁed
+weakly singular operator ¯V gives rise to Bh. As before, we also compare with the
+sub-optimal “opposite order” preconditioner c
+Mh obtained by replacing ¯V with the
+unmodiﬁed operator V.
+Mesh-independent performance of the new preconditioner and its superiority to
+other approaches is conﬁrmed by the data of Table 5.3. These results are consistent
+with the plot of the spectrum for MhAh, which is shown in Figure 5.2.
+Table 5.3: Performance of preconditioners for for Wh (Case B, row 2 of Table 3.1).
+Uniform mesh
+Chebychev mesh
+Algebraic mesh
+N
+D−1
+h Ah
+c
+MhAh
+MhAh D−1
+h Ah
+c
+MhAh
+MhAh D−1
+h Ah
+c
+MhAh
+MhAh
+128
+62.1
+6.16
+1.335
+46.46
+13.27
+4.729
+42.07
+54.72
+12.89
+256
+124.8
+7.003
+1.335
+93.28
+16.36
+4.731
+84.51
+69.87
+12.89
+512
+250.2
+7.902
+1.335
+186.9
+19.79
+4.732
+169.7
+86.95
+12.89
+1024
+500.9
+8.861
+1.335
+374.2
+23.58
+4.732
+341.3
+105.8
+12.90
+2048
+1002
+9.879
+1.335
+748.8
+27.71
+4.732
+682.8
+126.7
+12.90
+4096
+2006
+10.96
+1.335
+1499
+32.2
+4.732
+1366
+149.6
+12.90
+Numbers of PCG iterations
+128
+28
+9
+9
+26
+13
+9
+27
+16
+10
+256
+40
+9
+8
+37
+14
+9
+39
+17
+10
+512
+58
+10
+8
+52
+15
+9
+57
+17
+10
+1024
+84
+10
+8
+74
+16
+9
+110
+18
+10
+2048
+119
+12
+8
+101
+16
+9
+156
+18
+10
+4096
+169
+11
+8
+136
+16
+9
+222
+20
+10
+5.3. Modiﬁed weakly singular operator (Case C, row 3 of Table 3.1).
+Although one would not try to solve an equation associated to ¯V, it is interesting to
+also study the preconditioning strategy related to the case when Ah and Bh arise
+
+[PDF PAGE 22]
+Operator Preconditioning for BIEs on open curves
+21
+Fig. 5.2: Plot of spectrum for Wh preconditioned by Mh (Case B, row 2 of Ta-
+ble 3.1) for our three meshes. We use black triangles to show the eigenvalues when
+using an uniform mesh, blue circles for the Chebychev mesh, and red squares for the
+algebraically graded mesh.
+128
+256
+512
+1024
+2048
+4096
+0
+0.5
+1
+1.5
+Number of DOFs
+Eigenvalues
+from ¯V and W, respectively. For this reason we just show the obtained condition
+numbers in Table 5.4, where we observe the growth of the condition number is once
+again minimal.
+Table 5.4: Spectral condition numbers obtained for ¯Vh (Case C, row 3 of Table 3.1).
+Uniform mesh
+Chebychev mesh
+Algebraic mesh
+N
+κ(D−1
+h Ah)
+κ(MhAh)
+κ(D−1
+h Ah)
+κ(MhAh)
+κ(D−1
+h Ah)
+κ(MhAh)
+128
+210
+8.726
+154
+11.78
+111.5
+13.01
+256
+420.4
+9.195
+308.5
+11.82
+223.8
+13.01
+512
+840
+9.442
+616.7
+11.83
+448.1
+13.01
+1024
+1677
+9.569
+1232
+11.83
+895.9
+13.01
+2048
+3348
+9.634
+2459
+11.83
+1812
+13.01
+4096
+6684
+9.666
+4911
+11.84
+3675
+13.01
+5.4. Modiﬁed hypersingular operator (Case D, row 4 of Table 3.1). For
+this ﬁnal case, Ah is related to ¯W and Bh comes from V.
+Once again, since the
+operator is not related to a BVP, we are just interested in studying the obtained con-
+dition numbers. The results in Table 5.5 support that our preconditioner is performs
+excellently independent of the (locally reﬁned) mesh.
+5.5. Boundary integral operators for Helmholtz equation. In order to
+precondition the Galerkin matrices spawned by Vk
+h and Wk
+h from (2.14), we use the
+splittings (2.16) and pursue the same strategy that we used for Vh (case A) and Wh
+(case B), respectively. For the sake of clarity, we will denote by Mh the precondi-
+tioner arising from ¯Wh, and f
+Mh the one related to ¯Vh. Table 5.6 gives measurements
+of numbers of GMRES iterations for the diagonally scaled and operator precondi-
+tioned Helmholtz operators using uniform mesh and for diﬀerent wave numbers k.
+
+[PDF PAGE 23]
+22
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+Table 5.5: Spectral condition numbers obtained for ¯Wh (Case D, row 4 of Table 3.1).
+Uniform mesh
+Chebychev mesh
+Algebraic mesh
+N
+κ(D−1
+h Ah)
+κ(MhAh)
+κ(D−1
+h Ah)
+κ(MhAh)
+κ(D−1
+h Ah)
+κ(MhAh)
+128
+54.17
+1.695
+51.53
+1.693
+72.14
+1.741
+256
+108.9
+1.694
+103.3
+1.693
+144.2
+1.744
+512
+218.4
+1.694
+206.8
+1.693
+288.2
+1.744
+1024
+437.3
+1.693
+413.9
+1.693
+576.4
+1.745
+2048
+875.2
+1.693
+828.1
+1.693
+1153
+1.745
+4096
+1751
+1.693
+1657
+1.693
+2305
+1.745
+Observe that for ﬁxed k, the number of iterations for each operator becomes almost
+independent of N, when our new operator preconditioning approach is applied.
+Table 5.6: GMRES iteration counts for Helmholtz operators using k = 1, 4, 8 as wave
+numbers.
+Case A
+Case B
+N
+V1
+h
+Mh V1
+h
+V4
+h
+Mh V4
+h
+V8
+h
+Mh V8
+h
+W1
+h
+f
+Mh W1
+h
+W4
+h
+f
+Mh W4
+h
+W8
+h
+f
+Mh W8
+h
+128
+43
+10
+44
+14
+44
+19
+26
+9
+24
+12
+21
+16
+256
+55
+10
+55
+14
+56
+19
+38
+8
+36
+12
+31
+16
+512
+69
+10
+70
+14
+70
+19
+56
+8
+51
+12
+44
+16
+1024
+87
+11
+87
+14
+87
+19
+79
+8
+73
+12
+63
+15
+2048
+109
+11
+109
+14
+109
+19
+112
+7
+104
+12
+89
+15
+4096
+136
+11
+136
+14
+136
+19
+158
+7
+147
+11
+126
+15
+6. Conclusions. We have demonstrated, both through rigorous analysis and
+numerical tests, the great potential of the Jerez-N´ed´elec Calder´on-type identities
+for boundary integral operators on the line segment to induce asymptotically op-
+timal operator preconditioners for low-order Galerkin BEM for the BIE arising from
+(1.1) on any smooth open curve. In particular, highly non-uniform meshes were cov-
+ered. Forthcoming work will extend this preconditioning strategy to two-dimensional
+screens in three dimensions.
+Acknowledgments. We thank the valuable insights provided by professor Olaf
+Steinbach during informal conversations on a draft of the present work.
+REFERENCES
+[1] F. Andriulli, K. Cools, H. Bagci, F. Olyslager, A. Buffa, S. Christiansen, and
+E. Michielssen, A multiplicative Calderon preconditioner for the electric ﬁeld integral
+equation, IEEE Trans. Antennas and Propagation, 56 (2008), pp. 2398–2412.
+[2] H. Bagci, F. Andriulli, K. Cools, F. Olyslager, and E. Michielssen, A Calder´on multi-
+plicative preconditioner for the combined ﬁeld integral equation, Antennas and Propagation,
+IEEE Transactions on, 57 (2009), pp. 3387 –3392.
+[3] J. H. Bramble, J. E. Pasciak, and O. Steinbach, On the stability of the L2 projection in
+H1, Math. Comp, 71 (2002), pp. 147–156.
+[4] O. P. Bruno and S. K. Lintner, Second-kind integral solvers for TE and TM problems of
+diﬀraction by open arcs, Radio Science, 47 (2012), p. 6006.
+[5] A. Buffa and S. Christiansen, A dual ﬁnite element complex on the barycentric reﬁnement,
+Math. Comp., 76 (2007), pp. 1743–1769.
+[6] K. Cools, F. Andriulli, and F. Olyslager, A Calder´on preconditioned PMCHWT equation,
+in Proceedgins of the International Conference on Electromagnetics in Advanced Applica-
+tions, 2009, Torino, Italy. ICEAA ’09., Sept. 2009, pp. 521 –524.
+
+[PDF PAGE 24]
+Operator Preconditioning for BIEs on open curves
+23
+[7] M. Costabel, M. Dauge, and R. Duduchava, Asymptotics without logarithmic terms for
+crack problems†, Communications in Partial Diﬀerential Equations, 28 (2003), pp. 869–
+926.
+[8] V. J. Ervin and E. P. Stephan, A boundary element Galerkin method for a hypersingular
+integral equation on open surfaces, Math. Methods Appl. Sci., 13 (1990), pp. 281–289.
+[9] D. Gross and T. Seelig, Fracture Mechanics with an Introduction to Micromechanics, Me-
+chanical Engineering Series, Springer, 2nd ed., 2011.
+[10] R. Hiptmair, Operator preconditioning, Computers and Mathematics with Applications, 52
+(2006), pp. 699–706.
+[11] G. C. Hsiao and W. L. Wendland, Boundary integral equations, vol. 164 of Applied Mathe-
+matical Sciences, Springer-Verlag, Berlin, 2008.
+[12] C. Jerez-Hanckes and J. N´ed´elec, Explicit variational forms for the inverses of integral
+logarithmic operators over an interval, SIAM Journal on Mathematical Analysis, 44 (2012),
+pp. 2666–2694.
+[13] C. Jerez-Hanckes and J.-C. N´ed´elec, Variational forms for the inverses of integral loga-
+rithmic operators over an interval, C. R. Math. Acad. Sci. Paris, 349 (2011), pp. 547–552.
+[14] C. T. Kelley, Iterative methods for optimization, vol. 18 of Frontiers in Applied Mathematics,
+Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA, 1999.
+[15] S. Lintner and O. Bruno, A generalized calderon formula for open-arc diﬀraction problems:
+theoretical considerations, Preprint arXiv:1204.3699 [math.AP], arXiv, April 2012.
+[16] J. Lions and F. Magenes, Nonhomogeneous boundary value problems and applications,
+Springer–Verlag, Berlin, 1972.
+[17] K.-A. Mardal and R. Winther, Preconditioning discretizations of systems of partial diﬀer-
+ential equations, Num. Lin. Alg. Appl., 18 (2011), pp. 1–40.
+[18] W. McLean, Strongly Elliptic Systems and Boundary Integral Equations, Cambridge Univer-
+sity Press, Cambridge, UK, 2000.
+[19] W. McLean and O. Steinbach, Boundary element preconditioners for a hypersingular integral
+equations on an interval, Adv. Comp. Math., 11 (1999), pp. 271–286.
+[20] J. Meixner, The behavior of electromagnetic ﬁelds at edges, IEEE Trans. Antennas and Prop-
+agation, AP-20 (1972), pp. 442–444.
+[21] B. L. Moiseiwitsch, Integral equations, Longman, London, 1977.
+Longman Mathematical
+Texts.
+[22] S. Sauter and C. Schwab, Boundary Element Methods, vol. 39 of Springer Series in Compu-
+tational Mathematics, Springer, Heidelberg, 2010.
+[23] Y. Shestopalov, Y. Smirnov, and E. Chernokozhin, Logarithmic Integral Equations in
+Electromagnetics, De Gruyter, Berln, Boston, 2000.
+[24] O. Steinbach, On the stability of the L2 projection in fractional Sobolev spaces, Numer. Math.,
+88 (2001), pp. 367–379.
+[25]
+, On a generalized L2 projection and some related stability estimates in Sobolev spaces,
+Numer. Math., 90 (2002), pp. 775–786.
+[26]
+, Stability estimates for hybrid coupled domain decomposition methods, vol. 1809 of Lec-
+ture Notes in Mathematics, Springer-Verlag, Berlin, 2003.
+[27]
+, Numerical approximation methods for elliptic boundary value problems: Finite and
+boundary elements, Springer, New York, 2008. Finite and boundary elements, Translated
+from the 2003 German original.
+[28] O. Steinbach and W. Wendland, The construction of some eﬃcient preconditioners in the
+boundary element method, Adv. Comput. Math, 9 (1998), pp. 191–216.
+[29] E. Stephan, Boundary integral equations for screen problems in R3, Integral Equations and
+Operator Theory, 10 (1987), pp. 236–257.
+[30] E. P. Stephan and W. L. Wendland, An augmented Galerkin procedure for the boundary
+integral method applied to two-dimensional screen and crack problems, Applicable Anal.,
+18 (1984), pp. 183–219.
+[31] T. Tran, The K-operator and the Galerkin method for strongly elliptic equations on smooth
+curves: local estimates, Math. Comp., 64 (1995), pp. 501–513.
+[32] W. L. Wendland and E. P. Stephan, A hypersingular boundary integral method for two-
+dimensional screen and crack problems, Arch. Rational Mech. Anal., 112 (1990), pp. 363–
+390.
+Appendix A. Proof of Proposition 2.4.
+We ﬁrst introduce the following auxiliary lemma
+
+[PDF PAGE 25]
+24
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+Lemma A.1. The following equalities hold
+ω−1 e
+H−1/2(Γ) = ∥1∥H1/2(Γ) = 1.
+(A.1)
+Proof. From [12], if ψ(x) ∈eH−1/2(Γ), it can be expanded as
+ψ(x) =
+∞
+X
+n=0
+ψn
+Tn(x)
+ω(x) ,
+x ∈[−1, 1].
+and its norm is given by
+∥ψ∥e
+H−1/2(Γ) = ψ2
+0 +
+∞
+X
+n=1
+1
+nψ2
+n.
+Since ω−1(x) = 1T0(x)
+ω(x) , we have shown the ﬁrst assertion. Similarly, from [12], if
+g(x) ∈H1/2(Γ), the following expansion follows
+g(x) =
+∞
+X
+n=0
+gnTn(x),
+x ∈[−1, 1] .
+and its norm is given by
+∥g∥H1/2(Γ) = g2
+0 +
+∞
+X
+n=1
+ng2
+n.
+Thus, 1(x) = 1T0(x), from were we conclude our proof.
+Proof of Proposition 2.4. Recall we ﬁrst want to prove that the augmented operators
+pencil eV[α] and e¯W[β] are bounded and elliptic in eH−1/2(Γ) and H1/2(Γ), respectively,
+for α, β ∈R+ bounded.
+Notice that eaV[α] is well deﬁned by continuity and linearity of both V and the
+duality product, thus showing the boundedness of eV[α]. One can derive
+⟨1 , ϕ⟩≤∥1∥H1/2(Γ) ∥ϕ∥e
+H−1/2(Γ) ,
+(Lemma A.1)
+≤∥ϕ∥e
+H−1/2(Γ) .
+From this we obtain the following bound
+|⟨V ϕ , φ⟩+ α ⟨1 , ϕ⟩⟨1 , φ⟩| ≤cV
+2 ∥ϕ∥e
+H−1/2(Γ) ∥φ∥e
+H−1/2(Γ)
++ α ∥ϕ∥e
+H−1/2(Γ) ∥φ∥e
+H−1/2(Γ)
+= (cV
+2 + α) ∥ϕ∥e
+H−1/2(Γ) ∥φ∥e
+H−1/2(Γ) ,
+and we deﬁne the continuity constant
+c
+eV
+2 (α) := cV
+2 + α.
+(A.2)
+Now, consider the unique decomposition for ϕ ∈eH−1/2(Γ):
+ϕ = ˜ϕ + ζω−1,
+where
+eϕ ∈eH−1/2
+⟨0⟩
+(Γ)
+and
+ζ = ⟨1 , ϕ⟩.
+(A.3)
+
+[PDF PAGE 26]
+Operator Preconditioning for BIEs on open curves
+25
+Given eϕ ∈eH−1/2
+⟨0⟩
+(Γ), one can prove that eV[α]eϕ = Veϕ ∈H1/2
+∗
+(Γ) in the weak sense,
+whence
+D
+eV[α]eϕ , ω−1E
+is equal to zero. From this we deduce
+D
+eV[α]ϕ , ϕ
+E
+=
+D
+eV[α](eϕ + ζω−1) , eϕ + ζω−1E
+=
+D
+eV[α]eϕ , eϕ
+E
++ 2ζ
+D
+eV[α]eϕ , ω−1E
++ ζ2 D
+eV[α]ω−1 , ω−1E
+= ⟨V eϕ , eϕ⟩+ ζ2 D
+eV[α]ω−1 , ω−1E
+≥cV
+1 ∥eϕ∥2
+e
+H−1/2(Γ) + ζ2 D
+eV[α]ω−1 , ω−1E
+≥min
+n
+cV
+1 ,
+D
+eV[α]ω−1 , ω−1Eo 
+∥eϕ∥2
+e
+H−1/2(Γ) + ζ2
+,
+(A.4)
+where cV
+1 is the ellipticity constant of V [12]. Since V ω−1 = π log 2 = Cω, Cω being
+a positive constant, the duality product on the second term on the right-hand side in
+(A.4) is equal to
+D
+eV[α]ω−1 , ω−1E
+=
+
+V ω−1 , ω−1
++ α
+
+1 , ω−12
+= π2(log 2 + α) > 0,
+(A.5)
+by Chebychev’s polynomial’s properties on I. Futhermore, the decomposition (A.3)
+satisﬁes
+∥ϕ∥2
+e
+H−1/2(Γ) =
+eϕ + ζω−12
+e
+H−1/2(Γ)
+≤
+
+∥eϕ∥e
+H−1/2(Γ) + ζ
+ω−1 e
+H−1/2(Γ)
+2
+≤2
+
+∥eϕ∥2
+e
+H−1/2(Γ) + ζ2 ω−12
+e
+H−1/2(Γ)
+
+(by Lemma A.1) ≤2
+
+∥eϕ∥2
+e
+H−1/2(Γ) + ζ2
+.
+(A.6)
+Then, combining (A.5), (A.4), and (A.6), ellipticity follows with constant
+c
+eV
+1 (α) := min
+
+cV
+1 , π2 (log 2 + α)
+	
+2
+,
+for all α > 0.
+(A.7)
+On the other hand, using similar steps to those employed in (A.2), the sesquilinear
+form a ¯W[β](w, v) has a continuity constant equal to
+c
+e¯W
+2 (β) := c
+¯W
+2 + β,
+(A.8)
+for β ﬁxed. Moreover, for v ∈H1/2(Γ), the following decomposition holds
+v = v∗+ η
+where
+v∗∈H1/2
+∗
+(Γ)
+and
+η =
+
+v , ω−1
+.
+(A.9)
+Since ¯Wρ = 0 for any constant ρ, we consider Ker ¯W = span{1}. In order to show
+ellipticity, we recall g ∈eH−1/2
+⟨0⟩
+(Γ) and use v0 = 1 as a test function. Consequently,
+D e¯Wv∗, 1
+E
+=
+
+ ¯Wv∗, 1
+
++ β
+
+v∗, ω−1 
+1 , ω−1
+=
+
+v∗, ¯W1
+
++ β
+
+v∗, ω−1 
+1 , ω−1
+= 0.
+
+[PDF PAGE 27]
+26
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+Thus, as in (A.5), we observe
+D e¯Wv , v
+E
+=
+D e¯W(v∗+ η) , v∗+ η
+E
+≥min
+n
+c
+¯W
+1 ,
+D e¯W1 , 1
+Eo 
+∥v∗∥2
+H1/2(Γ) + η2
+,
+by ellipticity of ¯W with constant c ¯W
+1 , and derive
+D e¯W1 , 1
+E
+=
+
+ ¯W1 , 1
+
++ β
+
+1 , ω−1 
+1 , ω−1
+= π2β > 0.
+Then, considering ∥1∥H1/2(Γ) = 1, one can prove in an analogous way to (A.6) that
+∥v∥2
+H1/2(Γ) = ∥v∗+ η∥2
+H1/2(Γ)
+≤2
+
+∥v∗∥2
+H1/2(Γ) + η2
+,
+and so ellipticity of e¯W[β] follows with constant
+c
+e¯W
+1 (β) :=
+min
+n
+c ¯W
+1 , π2β
+o
+2
+,
+for all β > 0.
+(A.10)
+In what follows, we are interested in showing that the augmented variational problems
+are equivalent to their original problems.
+Our ﬁrst departure problem is to ﬁnd
+φ ∈eH−1/2
+⟨0⟩
+(Γ) such that (2.6) is satisﬁed for all ψ ∈eH−1/2
+⟨0⟩
+(Γ). Instead of solving
+problem (2.6) with a constraint, consider the following saddle point problem: ﬁnd
+(φ, λ) ∈eH−1/2(Γ) × R such that
+⟨V φ , ψ⟩+ λ ⟨1 , ψ⟩= ⟨f , ψ⟩,
+∀ψ ∈eH−1/2(Γ),
+(A.11a)
+⟨1 , φ⟩
+= 0.
+(A.11b)
+Again, since V ω−1 = Cω, Cω > 0, we have
+
+V ω−1 , ψ
+
+= 0 for all ψ ∈eH−1/2
+⟨0⟩
+(Γ). On
+the other hand, as it is shown in [12, Proposition 3.1] f ∈Im e
+H−1/2
+⟨0⟩
+(Γ)(V) ≡H1/2
+∗
+(Γ).
+Hence, we can use ω−1 as a test function in (A.11a) to derive
+
+φ , V ω−1
++ λ
+
+1 , ω−1
+= 0,
+where we have used the symmetry of V. Finally, by (A.11b) we obtain
+λ
+
+1 , ω−1
+= 0,
+and therefore λ ≡0. Consequently, the saddle point problem (A.11) is equivalent to
+ﬁnding (φ, λ) ∈eH−1/2(Γ) × R such that
+⟨V φ , ψ⟩+ λ ⟨1 , ψ⟩= ⟨f , ψ⟩,
+∀ψ ∈eH−1/2(Γ),
+⟨1 , φ⟩
+−λ/α
+= 0,
+(A.12)
+with α ∈R+ a parameter to be chosen later. We obtain a new augmented variational
+problem by eliminating λ from (A.12): ﬁnd φ ∈eH−1/2(Γ) such that
+eaV[α](φ, ψ) = ⟨f , ψ⟩,
+∀ψ ∈eH−1/2(Γ),
+α > 0,
+(A.13)
+
+[PDF PAGE 28]
+Operator Preconditioning for BIEs on open curves
+27
+where eaV[α] : eH−1/2(Γ) × eH−1/2(Γ) →C is the sesquilinear form pencil associated to
+the augmented weakly singular operator eV[α] deﬁned as
+D
+eV[α]ϕ , ψ
+E
+:= ⟨V ϕ , ψ⟩+ α ⟨1 , ϕ⟩⟨1 , ψ⟩,
+∀ϕ, ψ ∈eH−1/2(Γ),
+(A.14)
+with clear duality pairing.
+Lastly, ellipticity allows the use of the Lax-Milgram lemma to guarantee unique-
+ness and existence of solutions for (A.13). Now, since f ∈H1/2
+∗
+(Γ), when testing
+(A.13) with ψ = ω−1 we obtain
+Cω ⟨1 , ϕ⟩+ α ⟨1 , ϕ⟩
+
+1 , ω−1
+= 0,
+with
+
+1 , ω−1
+> 0,
+(A.15)
+and consequently, ϕ ∈eH−1/2
+⟨0⟩
+(Γ), thereby proving the equivalence between the aug-
+mented problem (A.13) and the original one (2.6).
+Now we focus on e¯W[β]. Instead of solving problem (2.9) with a constraint, we
+consider the following saddle point problem: ﬁnd (w, Λ) ∈H1/2(Γ) × R such that
+
+ ¯Ww , v
+
++ Λ
+
+ω−1 , v
+
+= ⟨g , v⟩,
+∀v ∈H1/2(Γ),
+(A.16a)
+
+w , ω−1
+= 0.
+(A.16b)
+The proof follows analogously to the previous case, only this time we use the fact that
+Ker ¯W = span{1} and v0 = 1 as a test function in (A.16a). Then, since g ∈eH−1/2
+⟨0⟩
+(Γ)
+we get
+Λ
+
+ω−1 , 1
+
+= 0,
+and therefore Λ ≡0. From this, and using similar arguments as before, we derive the
+augmented variational problem. The uniqueness and existence for any g ∈eH−1/2
+⟨0⟩
+(Γ)
+follows from the ellipticity as well. In particular, when testing with v = 1, we deduce
+β
+
+w , ω−1 
+1 , ω−1
+= 0,
+
+1 , ω−1
+> 0,
+(A.17)
+from where w must lie in H1/2
+∗
+(Γ),thus showing the equivalence between the aug-
+mented and original problem (2.9).
+Appendix B. Stability results for Xh = S0,1
+0 (Γh) ⊂X =
+eH1/2, Yh =
+¯S−1,0(ˆΓh) ⊂Y = H−1/2 (case B ).
+As a tool we rely on the “tent functions” bk ∈S0,1(Γh), k = 1, . . . , N −2, deﬁned
+by bk(xi) = δ(k+1)i (Kronecker symbol), and we write ωk := supp(bk), which consists
+of two adjacent mesh intervals for k = 1, . . . , N −2.
+Refer to Figure 3.2 for an
+illustration (drawn in blue). Moreover, we employ the piecewise constant functions
+qj ∈S−1,0(ˆΓh), j = 1, . . . , N −2 which are equal to 1 on (ηj−1, ηj) and vanish outside
+this interval of the dual mesh, see Figure 3.2 (red/green).
+B.1. Proof of Lemma 4.4. We use our trial bases to write wh := PN−2
+j=1 wibi ∈
+S0,1(Γh), and ψh := PN−2
+j=1 ψjqj ∈S−1,0(ˆΓh). Hence, we can write the dual product
+operator in its matricial form
+|⟨ψh , wh⟩| :=
+ψT TB w
+ ,
+(B.1)
+
+[PDF PAGE 29]
+28
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+where TB [l, k] := ⟨bl , qk⟩. Furthermore, TB ∈RN−2,N−2 is a tridiagonal matrix
+given by the following expression
+TB = 1
+8
+
+
+
+
+
+
+
+
+h1 + 3c1
+h2
+0
+0
+0
+0
+· · ·
+0
+0
+0
+...
+...
+...
+...
+0
+0
+0
+· · ·
+hi
+3ci
+hi+1
+· · ·
+0
+0
+0
+...
+...
+...
+...
+0
+0
+0
+· · ·
+0
+0
+0
+0
+hN−2
+3cN−2 + hN−1
+
+
+
+
+
+
+
+
+,
+where hi = xi+1 −xi > 0 and ci := hi + hi+1 > 0. Observe TB is a strict diagonally
+dominant matrix, futhermore it is symmetric.
+Then, by Gershgorin we know its
+eigenvalues λ1, ..., λk, ...λN−2 ∈R satisfy
+λk ∈(3c1, 5h1 + 3h2) ∪
+N−3
+[
+i=2
+(2ci, 4ci) ∪(3cN−2, 5hN−2 + 3hN−1), ∀k = 1, . . . , N −2.
+Consequently, λmin > 0 and TB is invertible. Recall wh := PN−2
+i=1 wibi. Now let
+ψ∗
+h := PN−2
+i=1 wiqi. Then, by setting w0 = wN−1 = 0, we have
+⟨ψ∗
+h , wh⟩= wT TB w = 1
+8
+n
+w1((4h1 + 3h2)w1 + h2w2)
++
+N−3
+X
+i=2
+wi(hiwi−1 + 3(hi + hi+1)wi + hi+1wi+1)
++ wN−2(hN−2wN−3 + (3hN−2 + 4hN−1)wN−2)
+o
+= 1
+8
+n N−2
+X
+i=1
+(hi + hi+1)w2
+i + h1w2
+1 + hN−1w2
+N−2
+o
++ 1
+8
+n
+w1(2(h1 + h2)w1 + h2w2)
++
+N−3
+X
+i=2
+wi(hiwi−1 + 2(hi + hi+1)wi + hi+1wi+1)
++ wN−2(hN−2wN−3 + 2(hN−2 + hN−1)wN−2)
+o
+,
+(B.2)
+where the last expression on the right hand side can be seen as wT ˜Tw, with ˜T
+denoting a strict diagonally dominant matrix. Hence, that last term is positive and
+we can bound (B.2) by
+⟨ψ∗
+h , wh⟩≥1
+8
+n N−2
+X
+i=1
+(hi + hi+1)w2
+i + h1w2
+1 + hN−1w2
+N−2
+o
+≥1
+3(DBw, w),
+(B.3)
+where DB = diag(TB). On the other hand,
+∥wh∥2
+L2(Γ) = ⟨wh , wh⟩= 1
+3wT diag(hi + hi+1)w ≤8
+9wT diag(TB)w = 8
+9(DBw, w),
+(B.4)
+
+[PDF PAGE 30]
+Operator Preconditioning for BIEs on open curves
+29
+and
+∥ψ∗
+h∥2
+L2(Γ) = ⟨ψ∗
+h , ψ∗
+h⟩
+= 1
+2wT
+
+
+
+
+
+
+
+
+(2h1 + h2)
+0
+0
+· · ·
+0
+0
+...
+...
+...
+0
+· · ·
+0
+(hi + hi+1)
+0
+· · ·
+0
+...
+...
+...
+0
+0
+· · ·
+0
+0
+(hN−2 + 2hN−1)
+
+
+
+
+
+
+
+
+w
+≤1
+2wT diag(TB)w = 1
+2(DBw, w).
+(B.5)
+Finally, by combining (B.3), (B.5) and (B.4), we obtain
+sup
+ψh∈S−1,0(Γh)
+|⟨ψh , wh⟩|
+∥ψh∥L2(Γ)
+≥⟨ψ∗
+h , wh⟩
+∥ψ∗
+h∥L2(Γ)
+≥
+√
+2
+3 (DBα, α)1/2
+≥
+r
+9
+8
+√
+2
+3 ∥wh∥L2(Γ) = 1
+2 ∥wh∥L2(Γ) .
+(B.6)
+B.2. Proof of Proposition 4.5 . We aim to prove the H1-stability for ˜Qh.
+With this purpose in mind, we will introduce a quasi interpolation operator as in [26,
+Section 1.5].
+First recall ωk = supp{bk}, then deﬁne the related space locally by Xh(ωk) :=
+{bj|ωk : bj ∈S0,1
+0 (Γh)}. Let Qk
+h denote the Galerkin L2-Projection onto the local
+trial space Xh(ωk), such that for u ∈L2(ωk)
+
+Qk
+hu , vh
+
+L2(ωk) = ⟨u , vh⟩L2(ωk) ,
+∀vh ∈Xh(ωk), h ∈H.
+(B.7)
+Due to Assumption 4.1, we have the stability estimate as well as the quasi optimal
+error estimate
+Qk
+hu
+
+L2(ωk) ≤∥u∥L2(ωk) , for all u ∈L2(ωk),
+(B.8)
+(Id −Qk
+h)u
+
+L2(ωk) ≤cloc
+st ˆhk |u|H1(ωk) , for all u ∈H1(ωk).
+(B.9)
+Futhermore, local quasi-uniformity gives us the following stability estimate
+Qk
+hu
+
+H1(ωk) ≤˜cloc
+st ˆhk ∥u∥H1(ωk) for all u ∈H1(ωk).
+(B.10)
+Then, it is possible to deﬁne a quasi interpolation operator by
+(Phu)(x) =
+N−2
+X
+k=1
+(Qk
+hu)(xk) · bk(x),
+(B.11)
+which is also a projection onto S0,1
+0 (Γh). Moreover, Ph have properties which will be
+key pieces for the proof of Proposition 4.5. We introduce these results in the following
+two lemmas.
+
+[PDF PAGE 31]
+30
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+Lemma B.1 (Extension of Lemma 1.9 [26]). Let u ∈H1
+0(Γ). Then, there exists
+a positive constant cp1 independent of h such that
+∥(Id −Ph)u∥L2(Γ) ≤cp1
+X
+k∈J(l)
+ˆhk |u|H1(ωk) ,
+l = 1, . . . , N −1.
+(B.12)
+Moreover,
+∥Phu∥H1(Γ) ≤cp1 ∥u∥H1(Γ) ,
+for all u ∈H1
+0(Γ),
+(B.13)
+and
+N−2
+X
+k=1
+ˆh−2
+k
+∥(Id −Ph)u∥2
+L2(ωk) ≤cp1 ∥u∥H1(Γ) ,
+for all u ∈H1
+0(Γ).
+(B.14)
+Since the only diﬀerence with the original Lemma is due to the endpoints, where the
+arguments involved also hold, proof follows from [26, Lemma 1.9].
+Lemma B.2 (Extension of Lemma 2.3 [26]). Let condition (4.4) be satisﬁed and
+qk ∈S−1,0(ˆΓh), k = 1, . . . , N −2. Then
+N−1
+X
+l=1
+h−2
+l
+∥vh∥2
+L2(τl) ≤cp2
+N−2
+X
+k=1
+"
+⟨vh , qk⟩L2(Γ)
+ˆhk ∥qk∥L2(Γ)
+#2
+,
+(B.15)
+for all vh ∈S0,1
+0 (Γh) with a positive constant cp2.
+Proof. This proof can be derived by adapting Steinbach’s original proof (similarly
+to what it was shown in [3]). Therefore, we introduce his notation for the following
+two index sets: I(k) := {l ∈{1, . . ., N −1} : τl ∩ωk ̸= ∅} (indices of elements τl
+where bk is not zero) and J(l) := {k ∈{1, . . ., N −2} : ωk ∩τl ̸= ∅)} (indices of hat
+functions that do not vanish on τl). Since vh = PN−2
+k=1 vkbk ∈S0,1
+0 (Γh) we can write
+N−1
+X
+l=1
+h−2
+l
+∥vh∥L2(τl) ≤cp
+N−1
+X
+l=1
+h−2
+l
+X
+k∈J(l)
+v2
+k ∥bk∥2
+L2(τl)
+≤cp
+N−2
+X
+k=1
+v2
+k
+X
+l∈I(k)
+h−2
+l
+∥bk∥2
+L2(τl) = cp
+N−2
+X
+k=1
+v2
+kγ2
+k,
+where γk :=
+qP
+l∈I(k) h−2
+l
+∥bk∥2
+L2(τl). Setting xk := vkγk this gives
+N−1
+X
+l=0
+h−2
+l
+∥vh∥2
+L2(τl) ≤cp ∥x∥2
+2 .
+On the other hand,
+N−2
+X
+k=1
+"
+⟨vh , qk⟩L2(Γ)
+ˆhk ∥qk∥L2(Γ)
+#2
+=
+N−2
+X
+k=1
+
+
+N−2
+X
+j=1
+vj
+⟨bj , qk⟩L2(Γ)
+ˆhk ∥qk∥L2(Γ)
+
+
+2
+=
+N−2
+X
+k=1
+
+
+N−2
+X
+j=1
+xj
+⟨bj , qk⟩L2(Γ)
+γjˆhk ∥qk∥L2(Γ)
+
+
+2
+= ∥Ax∥2
+2 ,
+
+[PDF PAGE 32]
+Operator Preconditioning for BIEs on open curves
+31
+where A is a matrix given by
+A := D−1
+q
+˜GhD−1
+γ ,
+Dq := diag(ˆhk ∥qk∥L2(ωk)),
+Dγ := diag(γk).
+Let ¯Gh = H−1 ˜GhH. Deﬁne for any y ∈RN−2
+uh :=
+N−2
+X
+k=1
+hkykbk ∈S0,1
+0 (Γh),
+φh :=
+N−2
+X
+k=1
+h−1
+k ykqk ∈S−1,0(ˆΓh).
+Then, using
+(H−1
+l
+˜GlHlxl, xl) ≥c0(Dlxl, xl)
+for all xl ∈RMl,
+l = 1...N −1,
+(B.16)
+which is transposed to (4.4), we derive the following bound:
+( ¯Ghy, y) = (H−1 ˜GhHy, y) = ( ˜GhHy, H−1y) = ⟨uh , φh⟩L2(Γ) =
+N−1
+X
+l=1
+⟨uh , φh⟩L2(τl)
+=
+N−1
+X
+l=1
+(H−1
+l
+˜GlHlyl, yl) ≥c0
+N−1
+X
+l=1
+(Dlyl, yl) = c0(Dy, y).
+Now, set D1/2
+h
+:= diag(∥bk∥L2(ωk)). From
+c0
+D1/2
+h
+y
+
+2
+2 = c0(Dy, y) ≤( ¯Ghy, y) = (D−1/2
+h
+¯Ghy, D1/2
+h
+y)
+≤
+D−1/2
+h
+¯Ghy
+
+2
+D1/2
+h
+y
+
+2 ,
+we conclude that
+c0
+D1/2
+h
+y
+
+2 ≤
+D−1/2
+h
+¯Ghy
+
+2 .
+Taking z := Dγy, this is equivalent to
+c0
+D1/2
+h
+D−1
+γ z
+
+2 ≤
+D−1/2
+h
+DqD−1
+q
+¯GhD−1
+γ z
+
+2 .
+From (B.4) and (B.5), the deﬁnition of ˆhk, and local quasi-uniformity, the ratio
+of the diagonal entries satisﬁes
+D1/2
+h
+[k, k]
+Dγ[k, k] =
+∥bk∥L2(Γ)
+qP
+l∈I(k) h−2
+l
+∥bk∥2
+L2(τl)
+≥cˆhk,
+due to
+D1/2
+h
+[k, k]
+Dγ[k, k] =
+q
+hk−1+hk
+3
+q
+h−2
+k−1
+hk−1
+3
++ h−2
+k
+hk
+3
+=
+q
+hk−1+hk
+3
+q
+hk−1+hk
+3hkhk−1
+=
+p
+hkhk−1
+≥
+r
+1
+cL
+h2
+k =
+r
+1
+cL
+hk ≥cQ
+r
+1
+cL
+ˆhk,
+for k = 1..N −2,
+
+[PDF PAGE 33]
+32
+R. HIPTMAIR, C. JEREZ-HANCKES AND C. URZ´UA-TORRES
+and
+Dq[k, k]
+D1/2
+h
+[k, k]
+=
+ˆhk ∥qk∥L2(Γ)
+∥bk∥L2(Γ)
+≤cˆhk.
+We derive this last result from
+Dq[k, k]
+D1/2
+h
+[k, k]
+=
+ˆhk ∥qk∥L2(Γ)
+∥bk∥L2(Γ)
+=
+r
+1
+6(hk−1 + hk) = 3
+r
+1
+6
+ˆhk,
+for k = 2, .., N −2,
+Dq[k, k]
+D1/2
+h
+[k, k]
+=
+ˆhk ∥qk∥L2(Γ)
+∥bk∥L2(Γ)
+≤
+r
+1
+3(hk−1 + hk) = 3
+r
+1
+3
+ˆhk,
+for k = 1, N −2.
+Thus, by taking x = Hz
+cp ∥x∥2 = cp ∥Hz∥2 ≤
+HD−1
+q
+¯GhD−1
+γ z
+
+2 =
+HD−1
+q H−1 ˜GhHD−1
+γ H−1x
+
+2 = ∥Ax∥2 .
+Proof of Proposition (4.5). With the above, we can ﬁnally show
+∥˜Qhu∥2
+H1(Γ) ≤2
+n
+∥Phu∥2
+H1(Γ) + ∥( ˜Qh −Ph)u∥2
+H1(Γ)
+o
+(B.13)
+≤2
+n
+cp1∥u∥2
+H1(Γ) + ∥( ˜Qh −Ph)u∥2
+H1(Γ)
+o
+≤2
+(
+cp1∥u∥2
+H1(Γ) +
+N−1
+X
+l=1
+h−2
+l
+∥( ˜Qh −Ph)u∥2
+L2(τl)
+)
+(Lemma B.1)
+≤2
+
+
+
+
+
+
+
+cp1∥u∥2
+H1(Γ) + cp2
+N−2
+X
+k=1
+
+
+D
+( ˜Qh −Ph)u , qk
+E
+L2(Γ)
+ˆhk∥qk∥L2(Γ)
+
+
+2
+
+
+
+
+
+
+≤2
+
+
+cp1∥u∥2
+H1(Γ) + cp2
+N−2
+X
+k=1
+"
+⟨(Id −Ph)u , qk⟩L2(ωk)
+ˆhk∥qk∥L2(Γ)
+#2
+
+
+≤2
+(
+cp1∥u∥2
+H1(Γ) + cp2
+N−2
+X
+k=1
+ˆh−2
+k ∥(Id −Ph)u∥2
+L2(ωk)
+)
+(B.14)
+≤˜cst∥u∥2
+H1(Γ).
+(B.17)
+
+[PDF PAGE 34]
+Recent Research Reports
+Nr.
+Authors/Title
+2013-38
+W. E and A. Jentzen and H. Shen
+Renormalized powers of Ornstein-Uhlenbeck processes and well-posedness of
+stochastic Ginzburg-Landau equations
+2013-39
+D. Schoetzau and Ch. Schwab and T.P. Wihler
+hp-dGFEM for Second-Order Mixed Elliptic Problems in Polyhedra
+2013-40
+S. Mishra and F. Fuchs and A. McMurry and N.H. Risebro
+Explicit and implicit finite volume schemes for radiation mhd and the effects of
+radiation on wave propagation in stratified atmospheres.
+2013-41
+J. Ernest and P. LeFloch and S. Mishra
+Schemes with Well controlled Dissipation (WCD) I: Non-classical shock waves
+2013-42
+S. Mishra and N. Risebro and F. Weber
+Convergence rates of finite difference schemes for the wave equation with rough
+coeffiicients
+2013-43
+U. Koley and S. Mishra and N. Risebro and F. Weber
+Robust finite difference schemes for a nonlinear variational wave equation modeling
+liquid crystals
+2013-44
+G. Coclite and S. Mishra and N. Risebro and F. Weber
+Analysis and Numerical approximation of Brinkman regularization of two-phase flows
+in porous media
+2013-45
+M. Hutzenthaler and A. Jentzen
+Numerical approximations of stochastic differential equations with non-globally
+Lipschitz continuous coefficients
+2013-46
+G. Da Prato and A. Jentzen and M. Röckner
+A mild Itô formula for SPDEs
+2013-47
+P. Grohs and S. Keiper and G. Kutyniok and M. Schaefer
+Parabolic Molecules: Curvelets, Shearlets, and Beyond

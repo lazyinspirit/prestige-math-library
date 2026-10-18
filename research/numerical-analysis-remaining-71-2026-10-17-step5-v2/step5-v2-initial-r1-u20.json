@@ -1,0 +1,359 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "20",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "model": "gpt-6-luna",
+      "context_sha256": "b57b0fd63355b8d7f698c7d4138d840a9f4c2badce11d9826e13fbfec4fd791e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The explicit hypotheses allowed m=0 although the cited Galerkin definition requires 1<=m<=n. For n=1 and the empty one-row prolongation, full column rank holds but the named correction is outside that definition. Restored its exact dimension domain in Statement and Given; all matrix identities and both range inclusions remain proved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+      "model": "gpt-6-luna",
+      "context_sha256": "b4cfca2d4efa3608075cd17b66c59b33838d79f4d8680a4de1ef67debb9739b4",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "With A0=[[2,-1],[-1,2]], theta=1/2, n_min=1 and L=1, the first pass aggregates both vertices, but returning to old step 1 resets ell=0 and repeats the same pass indefinitely. Moved initialization outside the level loop; its successful branch now retains ell+1 and reaches the one-dimensional coarse matrix. All five step numbers and terminal-status branches are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-two-grid-energy-contraction-under-joint-estimate",
+      "model": "gpt-6-luna",
+      "context_sha256": "99f757cdf7a0e82feaa1cd765e85e88f6464c14e875047638d749b83f0a12999",
+      "outcome": "false_positive",
+      "reason": "The imported energy inner product is defined for HPD matrices in the sense of def-cholesky-factorisation-with-positive-diagonal, whose Definition starts with n>=1. This is already an original supplier convention, independently of the projector repair. Thus n=0 is inadmissible and F6 really does apply. Checked the quadratic identity, self-adjointness and eigenvalue bounds; no item edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "disposition": "repaired",
+      "post_sha256": "49d67f6fef2e01d47e2e3c1a38acd3e096306d1756f4d8a59389e07dcf86e131",
+      "review_context_sha256": "5f9ab420c289a70084eec2654ec704c76618a5134c639dddcaee63b7b40b8f95",
+      "reason": "Checked coarse positivity by injectivity of P, inverse symmetry by uniqueness, idempotence, CP=0, energy self-adjointness and both range inclusions. Added only the required 1<=m<=n domain already promised by the owning contract. Finite matrix algebra uses no choice assumption. This is repairer verification, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+      "disposition": "repaired",
+      "post_sha256": "23caac045d10f10cbea9e4eca2f459b927fdba7b410312d2ecaed1cb72624080",
+      "review_context_sha256": "3cfa536e27835bc35075af042e7f27a54095f9eb6ca8d796ca6ed852469a92ce",
+      "reason": "Checked the exact deterministic graph, least-unassigned aggregation, partition and indicator rank, Galerkin product and all branches. A graph is built only for n_ell>n_min>=1, so row maxima have nonempty finite domains. Successful prolongations have 1<=n_(ell+1)<n_ell and hence meet the repaired projector domain; ell increases without resetting and the finite cap bounds attempts. No convergence guarantee or choice axiom is added. This is repairer verification.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-two-grid-energy-contraction-under-joint-estimate",
+      "disposition": "unaffected",
+      "post_sha256": "06589f75fb3d281129072e6e373ca115fcaf1373ce96bd49e51db8f5c719b9a2",
+      "review_context_sha256": "bb8bc36754ffd6f00083d941aa8be54f2df534013048f16cb1c5b31bae5b6f97",
+      "reason": "C self-adjoint and idempotent gives <Ex,x>_A=||CSx||_A^2 and E self-adjoint; the joint estimate places every eigenvalue in [0,rho]. The energy-orthonormal eigenbasis gives ||Ex||_A<=rho||x||_A, and Cholesky n>=1 validates the attained unit-sphere maximum. The supplier domain repair has been examined and is satisfied. Item bytes are unchanged; the assigned F2 contract quotation now mirrors the repaired supplier Statement.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-aggregation-based-algebraic-multigrid-hierarchy",
+    "alg-finite-galerkin-v-cycle",
+    "def-overlapping-schwarz-subspace-correction-data",
+    "def-symmetric-two-grid-error-operator",
+    "ex-one-dimensional-poisson-two-grid-uniform-contraction",
+    "lem-one-dimensional-poisson-smoothing-and-approximation",
+    "lem-schwarz-local-corrections-are-energy-orthogonal-projections",
+    "lem-schwarz-local-matrices-are-well-defined",
+    "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+    "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+    "thm-two-grid-energy-contraction-under-joint-estimate"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "locus": "statement",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "reason": "The explicit hypotheses allowed m=0 although the cited Galerkin definition requires 1<=m<=n. For n=1 and the empty one-row prolongation, full column rank holds but the named correction is outside that definition. Restored its exact dimension domain in Statement and Given; all matrix identities and both range inclusions remain proved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+      "locus": "definition",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "With A0=[[2,-1],[-1,2]], theta=1/2, n_min=1 and L=1, the first pass aggregates both vertices, but returning to old step 1 resets ell=0 and repeats the same pass indefinitely. Moved initialization outside the level loop; its successful branch now retains ell+1 and reaches the one-dimensional coarse matrix. All five step numbers and terminal-status branches are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-two-grid-energy-contraction-under-joint-estimate",
+      "locus": "proof-step 2.1",
+      "status": "false_positive",
+      "reason": "The imported energy inner product is defined for HPD matrices in the sense of def-cholesky-factorisation-with-positive-diagonal, whose Definition starts with n>=1. This is already an original supplier convention, independently of the projector repair. Thus n=0 is inadmissible and F6 really does apply. Checked the quadratic identity, self-adjointness and eigenvalue bounds; no item edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Assigned repair complete. The projector Statement and Given now explicitly match its existing 1<=m<=n definition/contract domain; its proof is unchanged apart from heading separation. Aggregation initializes ell=0 once before the five level steps; all instruction numbers, admissible inputs, outputs and statuses are preserved. Direct section comparisons confirm these are the only two changed mathematical interfaces.",
+    "The third rejection is a false positive on the original supplied conventions: the energy inner product imports the Cholesky definition whose domain is n>=1. No mathematical source or verification stamp was changed in that item. Only its owning contract F2 quote now mirrors the repaired supplier Statement, under acquire/reread/edit/check/release with owner step5-v2-initial-r1-u20.",
+    "All mathematics here is familiar finite real matrix algebra and finite deterministic looping. Local dependencies and relevant complete proofs/definitions were read as recorded in reviews and consumer_examinations. No external source reading is claimed, no choice assumption added, no new item authored, and no unresolved mathematical uncertainty remains in assigned work.",
+    "Eleven unique direct frontier item consumers and both owning pages were examined. Their exact uses remain sound. No outside or published direct consumer was found, so there is no published-consumer ledger proposal or separate maintenance subject. Unassigned contract quote mirrors remain with their ordinary frontier owners; they are metadata consequences, not new mathematical defects. No unassigned source, proof contract entry, ledger, judgment or round state was edited.",
+    "The engine retains all independent rejudgment, consumer-context routing, convergence-threshold and certification obligations. These self-checks do not constitute independent review of the repairs."
+  ],
+  "consumer_examinations": [
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+      "path": "items/alg-aggregation-based-algebraic-multigrid-hierarchy.md",
+      "locus": "Definition step 5",
+      "source_excerpt": "form the Galerkin coarse matrix $A_{\\ell+1}=P_\\ell^{\\mathsf T}A_\\ell P_\\ell$",
+      "affected_use": "Nonempty disjoint aggregates give 1<=n_(ell+1)<=n_ell; the successful branch requires strict reduction. The stated dimension domain is met at every use.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "alg-finite-galerkin-v-cycle",
+      "path": "items/alg-finite-galerkin-v-cycle.md",
+      "locus": "Definition hierarchy and step 1",
+      "source_excerpt": "with $n_j\\ge1$",
+      "affected_use": "Full column rank implies n_(j-1)<=n_j and explicit n_j>=1 supplies every lower bound. The exact base solve and recursive coarse solves remain valid.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "def-overlapping-schwarz-subspace-correction-data",
+      "path": "items/def-overlapping-schwarz-subspace-correction-data.md",
+      "locus": "Definition local and coarse matrices",
+      "source_excerpt": "with $1\\le n_i\\le n$",
+      "affected_use": "The Schwarz data explicitly supply all new dimension bounds for R_i and the coarse P=R_0; its SPD and inverse conclusion is unchanged.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "def-symmetric-two-grid-error-operator",
+      "path": "items/def-symmetric-two-grid-error-operator.md",
+      "locus": "Definition opening",
+      "source_excerpt": "let $C$ be the Galerkin projector\nof [[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]]",
+      "affected_use": "This definition imports the theorem data for C. It continues to define the same energy adjoint and E on the admitted nonempty coarse/fine spaces.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "ex-one-dimensional-poisson-two-grid-uniform-contraction",
+      "path": "items/ex-one-dimensional-poisson-two-grid-uniform-contraction.md",
+      "locus": "deps, Example and Verification step 2.1",
+      "source_excerpt": "$P=(1/2,1,1/2)^{\\mathsf T}$",
+      "affected_use": "The sole coarse column is nonzero and the fine dimension is three, so m=1,n=3. The example computes A_H=4 and C explicitly; the direct dependency needs no correction.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "lem-one-dimensional-poisson-smoothing-and-approximation",
+      "path": "items/lem-one-dimensional-poisson-smoothing-and-approximation.md",
+      "locus": "Statement, F2 and Proof step 1.1",
+      "source_excerpt": "$N=2M\\ge4$",
+      "affected_use": "Coarse dimension M-1>=1 and fine dimension N-1>=M-1; even interpolation rows are the coarse identity. All uses of coarse SPD and C are within the corrected domain.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "lem-schwarz-local-corrections-are-energy-orthogonal-projections",
+      "path": "items/lem-schwarz-local-corrections-are-energy-orthogonal-projections.md",
+      "locus": "F3 and Proof step 1.2",
+      "source_excerpt": "$C=I-PA_0^{-1}P^{\\mathsf T}A$",
+      "affected_use": "For a present coarse index the imported Schwarz data require 1<=n_0<=n. Thus the complement projector and Pi_0=I-C still have the stated energy projection properties.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "lem-schwarz-local-matrices-are-well-defined",
+      "path": "items/lem-schwarz-local-matrices-are-well-defined.md",
+      "locus": "F2 and Proof step 1.2",
+      "source_excerpt": "$A_0=P^{\\mathsf T}AP$ is SPD",
+      "affected_use": "The Given imports Schwarz data with 1<=n_i<=n. The coarse SPD use in step 1.2 is within the new explicit domain; noncoarse matrices are proved positive directly.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+      "path": "items/thm-aggregation-amg-hierarchy-preserves-spd-and-terminates.md",
+      "locus": "F2 and Proof steps 1.1-2.1",
+      "source_excerpt": "[F2] and step 1.1",
+      "affected_use": "The partition proof gives at least one and at most n_ell nonempty aggregates, and indicator rank is proved directly. Therefore each application of coarse SPD meets 1<=m<=n.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+      "path": "items/thm-fas-linear-cycle-reduces-to-galerkin-correction.md",
+      "locus": "F3 and Proof steps 1.1-1.2",
+      "source_excerpt": "$A_{j-1}=P_j^{\\mathsf T}A_jP_j$ is SPD and invertible",
+      "affected_use": "Both compared procedures import the finite SPD Galerkin hierarchy. The correction-cycle definition explicitly requires positive n_j and full column rank forces n_(j-1)<=n_j, so the F3 inversion use remains sound.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "id": "thm-two-grid-energy-contraction-under-joint-estimate",
+      "path": "items/thm-two-grid-energy-contraction-under-joint-estimate.md",
+      "locus": "F2 and Proof steps 1.1-1.2",
+      "source_excerpt": "$C^2=C$ and $C$ is self-adjoint in the energy inner product",
+      "affected_use": "Its Statement imports the symmetric two-grid data and hence the named Galerkin projector. Its energy-inner-product supplier independently imports Cholesky n>=1. The corrected coarse domain and unit-sphere norm use are satisfied.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None: the actual input data satisfy the explicit 1<=m<=n restriction.",
+      "minimality": "No consumer Statement, Definition or proof change is necessary."
+    },
+    {
+      "supplier": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+      "id": "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+      "path": "items/thm-aggregation-amg-hierarchy-preserves-spd-and-terminates.md",
+      "locus": "Statement, F1 and Proof step 2.2",
+      "source_excerpt": "or the procedure advances to the next level.",
+      "affected_use": "The termination proof step 2.2 counts attempts at successive ell values. The corrected one-time initialization makes precisely that advancement operational; step 1 still performs the same coarse-size test and the step numbers are unchanged.",
+      "disposition": "unchanged_sound",
+      "route": "frontier_owner",
+      "invalidated_claim": "None after the defining loop repair; the existing termination theorem now follows from its actual algorithm.",
+      "minimality": "No consumer edit: its statement and proof already express the intended advancing-level procedure."
+    }
+  ],
+  "page_examinations": [
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/multigrid-methods-and-complexity.md",
+      "affected_use": "The coarse-matrix/projector summary and diagram use the Galerkin definition and its domain; the aggregation paragraph promises a finite hierarchy with three statuses. The restored domain and loop now support both summaries.",
+      "disposition": "unchanged_sound"
+    },
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/multigrid-methods-and-complexity-examples.md",
+      "affected_use": "The examples summary states every convergence claim uses the A-page hypotheses. None of the examples uses an empty coarse space or the defective aggregation return target.",
+      "disposition": "unchanged_sound"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-galerkin-coarse-correction-is-energy-orthogonal-projector.md items/alg-aggregation-based-algebraic-multigrid-hierarchy.md items/thm-two-grid-energy-contraction-under-joint-estimate.md --json",
+      "exit_code": 0,
+      "result": "3 files: 2 checked proofs passed; aggregation algorithm not-applicable; 0 failures."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-galerkin-coarse-correction-is-energy-orthogonal-projector.md items/alg-aggregation-based-algebraic-multigrid-hierarchy.md items/thm-two-grid-energy-contraction-under-joint-estimate.md --json",
+      "exit_code": 0,
+      "result": "3 files checked; no errors or warnings."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-20.proof-contracts.json --strict --items thm-galerkin-coarse-correction-is-energy-orthogonal-projector,alg-aggregation-based-algebraic-multigrid-hierarchy,thm-two-grid-energy-contraction-under-joint-estimate --json",
+      "exit_code": 0,
+      "result": "All 3 selected entries passed, no errors or warnings, after correcting the assigned F2 quotation. The earlier focused check correctly found that stale quotation."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-galerkin-coarse-correction-is-energy-orthogonal-projector.md items/alg-aggregation-based-algebraic-multigrid-hierarchy.md",
+      "exit_code": 0,
+      "result": "2 items, 4 steps, 0 defects; executed once after final item edits."
+    }
+  ],
+  "metadata_followup": [
+    {
+      "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-20.proof-contracts.json",
+      "id": "lem-one-dimensional-poisson-smoothing-and-approximation",
+      "fact": "F2",
+      "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "action": "Owning frontier lane should refresh this supplier quotation if its exact excerpt no longer occurs; mathematical consumer examined and unchanged sound."
+    },
+    {
+      "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-20.proof-contracts.json",
+      "id": "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+      "fact": "F1",
+      "source": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+      "action": "Owning frontier lane should refresh this supplier quotation if its exact excerpt no longer occurs; mathematical consumer examined and unchanged sound."
+    },
+    {
+      "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-20.proof-contracts.json",
+      "id": "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+      "fact": "F2",
+      "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "action": "Owning frontier lane should refresh this supplier quotation if its exact excerpt no longer occurs; mathematical consumer examined and unchanged sound."
+    },
+    {
+      "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-45.proof-contracts.json",
+      "id": "lem-schwarz-local-matrices-are-well-defined",
+      "fact": "F2",
+      "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "action": "Owning frontier lane should refresh this supplier quotation if its exact excerpt no longer occurs; mathematical consumer examined and unchanged sound."
+    },
+    {
+      "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-45.proof-contracts.json",
+      "id": "lem-schwarz-local-corrections-are-energy-orthogonal-projections",
+      "fact": "F3",
+      "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "action": "Owning frontier lane should refresh this supplier quotation if its exact excerpt no longer occurs; mathematical consumer examined and unchanged sound."
+    },
+    {
+      "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-46.proof-contracts.json",
+      "id": "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+      "fact": "F3",
+      "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+      "action": "Owning frontier lane should refresh this supplier quotation if its exact excerpt no longer occurs; mathematical consumer examined and unchanged sound."
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+[
+  {
+    "order": 2624,
+    "id": "elasticity-near-incompressibility-and-locking-free-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Linear elasticity, nearly incompressible limits and locking",
+    "companion": "elasticity-near-incompressibility-and-locking-free-discretization-examples",
+    "requires": [
+      "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "mixed-finite-elements-and-stokes-stability"
+    ],
+    "items": [
+      {
+        "id": "alg-linear-elasticity-rigid-body-nullspace-gauge",
+        "kind": "algorithm",
+        "title": "Algebraic gauge for a rigid-body stiffness nullspace",
+        "statement": "Given a real symmetric positive-semidefinite stiffness matrix K, a full-column-rank matrix R with ker K=range R, and a compatible load f with R^T f=0, solve the augmented system [K R; R^T 0][u; gamma]=[f;0] and return the unique gauge representative u satisfying R^T u=0.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Give the inputs, admissibility conditions, exact augmented system, and output; prove its algebraic properties separately."
+      },
+      {
+        "id": "lem-linear-elasticity-rigid-body-gauge-system-is-nonsingular",
+        "kind": "lemma",
+        "title": "The rigid-body gauge system is nonsingular",
+        "statement": "Let K be real symmetric positive semidefinite and R have full column rank with ker K=range R. Then [K R; R^T 0] is nonsingular. If R^T f=0, its solution with right-hand side [f;0] has gamma=0 and is the unique solution of Ku=f with R^T u=0.",
+        "deps": [
+          "alg-linear-elasticity-rigid-body-nullspace-gauge"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove the homogeneous augmented system has only the zero solution, then use finite-dimensional rank-nullity and compatibility."
+      },
+      {
+        "id": "def-linear-elasticity-displacement-formulation-and-data",
+        "kind": "definition",
+        "title": "Linear isotropic elasticity: displacement form and data",
+        "statement": "Assume Countable Choice. Let d in {2,3}, D be nonempty, bounded, connected and Lipschitz, and V=H^1_0(D;R^d), Q=L^2_0(D), with gradient norm and b(v,q)=-int_D q div v as in def-na-stokes-zero-mean-pressure-and-velocity-spaces. For measurable mu in L-infinity(D) with 0<mu_0<=mu<=mu_1 almost everywhere, scalar lambda>=0, and f in V-prime, define epsilon(w)=(grad w+grad w^T)/2, a_mu(w,z)=2 int_D mu epsilon(w):epsilon(z), E_lambda(w,z)=a_mu(w,z)+lambda int_D div w div z, and sigma_lambda(w)=2 mu epsilon(w)+lambda (div w) I_d for w,z in H^1(D;R^d). The homogeneous-Dirichlet model restricts these forms to V; examples may prescribe another boundary partition without inheriting a well-posedness claim. No nonlinear, injectivity, or contrast-independent claim is made.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the typed model and exact coefficient, strain, stress, load, boundary, and norm conventions."
+      },
+      {
+        "id": "lem-linear-elasticity-mixed-pressure-gauge-is-well-defined",
+        "kind": "lemma",
+        "title": "The mixed pressure has the mean-zero gauge",
+        "statement": "For every finite lambda>0 and u in H^1_0(D;R^d), the pressure p=-lambda div u defined in the mixed elasticity formulation belongs to Q=L^2_0(D).",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use the zero-mean divergence supplier and closure of L2_0 under scalar multiplication."
+      },
+      {
+        "id": "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+        "kind": "theorem",
+        "title": "Dirichlet elasticity energy bound and Galerkin estimate",
+        "statement": "Assume Countable Choice and the data of def-linear-elasticity-displacement-formulation-and-data. For every finite lambda>=0 there is a unique u in V with E_lambda(u,v)=f(v) for all v in V, and ||u||_V<=mu_0^{-1}||f||_{V-prime} and sqrt(E_lambda(u,u))<=mu_0^{-1/2}||f||_{V-prime}. For every finite-dimensional conforming V_h subset V, the Galerkin solution u_h is unique and ||u-u_h||_V <= (2 mu_1+d lambda)/mu_0 times inf_{v_h in V_h} ||u-v_h||_V.",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-lax-milgram",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations"
+        ],
+        "dependency_level": 3,
+        "strategy": "Bound the form, use the homogeneous Korn identity for coercivity, apply Lax-Milgram, test with the solution, and apply the stated Céa theorem."
+      },
+      {
+        "id": "def-linear-elasticity-near-incompressible-mixed-mini-pair",
+        "kind": "definition",
+        "title": "Displacement-pressure formulation and mini-element pair",
+        "statement": "For the model of def-linear-elasticity-displacement-formulation-and-data and lambda>0, set p=-lambda div u in Q and use a_mu(u,v)+b(v,p)=f(v), b(u,q)-lambda^{-1}(p,q)=0; at lambda=infinity set lambda^{-1}=0 and impose b(u,q)=0. On a conforming shape-regular affine simplicial mesh of a connected polygonal or polyhedral D in d=2 or 3, use exactly the mini-element spaces V_h and Q_h of def-na-mini-element-p1-bubble-p1-spaces in the same mixed equations. The lambda=0 case is the primal displacement problem with p=0, not a mixed saddle system.",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-countable-choice",
+          "lem-linear-elasticity-mixed-pressure-gauge-is-well-defined"
+        ],
+        "dependency_level": 3,
+        "strategy": "State the pressure sign, compressibility term, incompressible convention, finite-element spaces, and the separate lambda=0 branch."
+      },
+      {
+        "id": "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error",
+        "kind": "theorem",
+        "title": "Uniform mini-element stability through the incompressible limit",
+        "statement": "Assume Countable Choice and the stated elasticity model. For every lambda in [0,infinity], the continuous problem has a unique solution, using the primal problem with p=0 at lambda=0 and div u=0 at lambda=infinity. On any polygonal or polyhedral domain with a common shape-regular family of conforming affine simplicial meshes, the mini-element discrete problems are unique. The continuous solution bound and discrete product-space best-approximation bound have constants depending only on dimension, domain, viscosity bounds, and the common shape-regularity bound, independently of lambda and h.",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "def-linear-elasticity-near-incompressible-mixed-mini-pair",
+          "lem-linear-elasticity-mixed-pressure-gauge-is-well-defined",
+          "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice",
+          "thm-na-continuous-stokes-divergence-infsup",
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "thm-na-mini-element-fortin-stability"
+        ],
+        "dependency_level": 8,
+        "strategy": "Separate the low-lambda projected primal branch from the high-lambda perturbed saddle branch; handle lambda=infinity by kernel coercivity and inf-sup, then prove uniform best-approximation bounds."
+      }
+    ]
+  },
+  {
+    "order": 2625,
+    "id": "elasticity-near-incompressibility-and-locking-free-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Linear elasticity, nearly incompressible limits and locking — Examples",
+    "companion": "elasticity-near-incompressibility-and-locking-free-discretization",
+    "requires": [
+      "elasticity-near-incompressibility-and-locking-free-discretization"
+    ],
+    "items": [
+      {
+        "id": "ex-linear-elasticity-rigid-body-stiffness-nullspace",
+        "kind": "example",
+        "title": "Rigid motions in a free-body stiffness nullspace",
+        "statement": "On a connected polygonal or polyhedral domain with a finite conforming affine simplicial mesh and no essential boundary constraints, define the continuous P1 vector space and constant-coefficient isotropic stiffness matrix as stated. Each infinitesimal rigid motion r(x)=a+Omega x with Omega^T=-Omega has an exact nodal P1 vector annihilated by K, so a complete nullspace basis used by the algebraic gauge must span these modes; the example does not claim they exhaust the nullspace.",
+        "deps": [
+          "alg-linear-elasticity-rigid-body-nullspace-gauge"
+        ],
+        "dependency_level": 1,
+        "strategy": "Represent each rigid motion exactly in the continuous P1 space and evaluate its strain and divergence."
+      },
+      {
+        "id": "ex-linear-elasticity-cantilever-manufactured-shear",
+        "kind": "example",
+        "title": "A manufactured shear field on a clamped rectangle",
+        "statement": "On D=(0,1)^2 with the left edge clamped, constant mu>0, lambda>=0, and u(x,y)=(0,x), compute the strain, stress, equilibrium divergence, and tractions on the other three edges. This is an exact manufactured linear-elasticity field and asserts no uniqueness result for partial Dirichlet data.",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Compute the affine gradient, symmetric strain, constant stress, and boundary tractions directly."
+      },
+      {
+        "id": "ex-linear-elasticity-p1-volumetric-locking-fixed-mesh",
+        "kind": "example",
+        "title": "A fixed-mesh P1 volumetric-locking obstruction",
+        "statement": "On the square split into four corner-to-center triangles, the continuous P1 vector space with zero boundary values has no nonzero elementwise divergence-free vector. A nonzero smooth compactly supported divergence-free displacement solves the continuous elasticity problem for every lambda>=0, whereas its P1 displacement Galerkin solutions on this fixed mesh tend to zero as lambda tends to infinity, so their V-norm error tends to a positive value. The mini mixed pair on the same mesh retains the lambda-uniform best-approximation bound of thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error; no mesh-uniform P1 rate is claimed.",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "def-linear-elasticity-near-incompressible-mixed-mini-pair",
+          "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "Compute all four element divergences, construct one smooth solenoidal exact solution, and use finite-dimensional compactness to prove the P1 discrete limit is zero."
+      }
+    ]
+  }
+]

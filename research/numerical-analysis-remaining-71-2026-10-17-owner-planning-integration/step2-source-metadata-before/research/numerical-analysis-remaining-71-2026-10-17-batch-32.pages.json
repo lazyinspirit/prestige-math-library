@@ -1,0 +1,172 @@
+[
+  {
+    "order": 2618,
+    "id": "high-resolution-tvd-eno-and-weno-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "High-resolution TVD, ENO and WENO reconstruction",
+    "companion": "high-resolution-tvd-eno-and-weno-methods-examples",
+    "requires": [
+      "polynomial-interpolation-and-remainder",
+      "monotone-finite-volume-entropy-convergence",
+      "riemann-solvers-for-hyperbolic-systems"
+    ],
+    "items": [
+      {
+        "id": "def-na-high-resolution-reconstruction",
+        "kind": "definition",
+        "title": "Finite-volume MUSCL, nodal ENO2 and WENO5 reconstruction conventions",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "On a uniform grid, distinguish cell averages from nodal values and define the scalar MUSCL/minmod, nodal ENO2 and left-biased cell-average WENO5-JS/WENO-Z face reconstructions, including their scalar-advection update and characteristic-system interpretation."
+      },
+      {
+        "id": "thm-na-linear-monotone-first-order-barrier",
+        "kind": "theorem",
+        "title": "A monotone linear one-step advection scheme cannot be second order at noninteger CFL",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "For a fixed noninteger Courant number, no finite-stencil translation-invariant conservative linear one-step scheme for scalar advection is both monotone and second-order accurate."
+      },
+      {
+        "id": "lem-na-eno2-reconstruction-third-order",
+        "kind": "lemma",
+        "title": "The selected nodal ENO2 quadratic reconstructs the face to third order",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "thm-lagrange-interpolation-remainder"
+        ],
+        "dependency_level": 1,
+        "statement": "For nodal data from a C3 scalar function on a uniform grid, either quadratic selected by the stated ENO2 divided-difference rule approximates the intervening face value with error O(h^3), including ties."
+      },
+      {
+        "id": "lem-na-weno5-optimal-linear-reconstruction",
+        "kind": "lemma",
+        "title": "The WENO5 ideal linear weights reproduce quartics at the right face",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 1,
+        "statement": "The ideal WENO5 weights (1/10, 6/10, 3/10) combine the three displayed cell-average candidate functionals into a fifth-order right-face reconstruction."
+      },
+      {
+        "id": "thm-na-musc-minmod-second-order-on-smooth-data",
+        "kind": "theorem",
+        "title": "MUSCL/minmod face states are second order on smooth monotone data",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 1,
+        "statement": "If a C3 scalar profile is strictly monotone near a uniform-grid cell, its minmod-limited MUSCL face states approximate the exact face values with error O(h^2)."
+      },
+      {
+        "id": "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl",
+        "kind": "theorem",
+        "title": "Direct forward-Euler MUSCL/minmod is TVD under the sharp two-thirds CFL bound",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "For the unchanged direct linear-advection forward-Euler MUSCL/minmod update, finite-variation bi-infinite or periodic data have nonincreasing total variation for |a|Δt/h≤2/3, including equality; the bound is sharp throughout the original CFL range through one."
+      },
+      {
+        "id": "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+        "kind": "counterexample",
+        "title": "The specified direct MUSCL/minmod flux update is not TVD at CFL one",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "The direct reconstructed-upwind forward-Euler update in the PE02 design is not total-variation diminishing for every CFL number in [0,1]."
+      },
+      {
+        "id": "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+        "kind": "theorem",
+        "title": "Fixed-epsilon WENO-JS and WENO-Z face reconstructions are fifth order",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction"
+        ],
+        "dependency_level": 2,
+        "statement": "For C5 data and a fixed positive dimensionally scaled epsilon, the displayed WENO-JS and WENO-Z cell-average reconstructions have fifth-order face error as h tends to zero."
+      }
+    ]
+  },
+  {
+    "order": 2619,
+    "id": "high-resolution-tvd-eno-and-weno-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "High-resolution TVD, ENO and WENO reconstruction — Examples",
+    "companion": "high-resolution-tvd-eno-and-weno-methods",
+    "requires": [
+      "high-resolution-tvd-eno-and-weno-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-na-minmod-extremum-clipping",
+        "kind": "example",
+        "title": "Minmod clips the slope at a smooth quadratic maximum",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "For cell averages of u(x)=1-x^2 on a uniform grid centered at zero, minmod sets the central slope to zero and reconstructs both adjacent face states as the central average."
+      },
+      {
+        "id": "cex-na-unlimited-centered-reconstruction-overshoots",
+        "kind": "counterexample",
+        "title": "Unlimited centered reconstruction creates new extrema on a step",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "Unlimited centered slopes with the reconstructed upwind forward-Euler update can increase total variation and create values outside the initial range even at CFL one half."
+      },
+      {
+        "id": "ex-na-smooth-linear-advection-reconstruction",
+        "kind": "example",
+        "title": "MUSCL and WENO reconstruct a translating affine profile exactly",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction",
+          "thm-na-musc-minmod-second-order-on-smooth-data",
+          "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction"
+        ],
+        "dependency_level": 3,
+        "statement": "For u(x,t)=x-at on a uniform grid, minmod MUSCL and every normalized WENO variant reconstruct the upwind face value exactly and the conservative update advances the cell averages exactly."
+      },
+      {
+        "id": "ex-na-weno-js-critical-point-epsilon-scaling",
+        "kind": "example",
+        "title": "A first-order critical point exposes WENO-JS epsilon scaling",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction",
+          "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction"
+        ],
+        "dependency_level": 3,
+        "statement": "For cell averages of u(x)=x^2+x^3 at the face x=0, the WENO-JS choice epsilon=h^4 gives a fourth-order face error, while fixed epsilon and the displayed WENO-Z comparison retain at least fifth order."
+      },
+      {
+        "id": "ex-na-burgers-godunov-musc-shock",
+        "kind": "example",
+        "title": "Positive-state Burgers shock and the monotone finite-volume baseline",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme",
+          "def-kruzhkov-entropy-solution",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "thm-monotone-finite-volume-entropy-convergence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "For the Burgers Riemann datum 1 to 0, the entropy shock travels at speed 1/2; the positive-state Godunov flux is monotone and the batch-29 convergence theorem applies to its first-order finite-volume baseline."
+      }
+    ]
+  }
+]

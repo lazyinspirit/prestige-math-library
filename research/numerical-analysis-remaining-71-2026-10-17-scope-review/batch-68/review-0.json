@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "68",
+  "round": 0,
+  "reviewed_items": [
+    "def-hp-integrated-legendre-projector",
+    "def-hp-variable-degree-spaces-on-matching-meshes",
+    "lem-legendre-gauss-lobatto-nodes-are-distinct",
+    "lem-reference-jacobi-weighted-endpoint-kernel",
+    "thm-hp-simplex-weighted-spectral-projection",
+    "lem-hp-triangle-degree-uniform-strong-edge-lift",
+    "lem-hp-unweighted-legendre-derivative-tail",
+    "lem-hp-analytic-polynomial-approximation-on-a-triangle",
+    "lem-hp-weighted-analytic-corner-pointwise-control",
+    "def-legendre-gauss-lobatto-rule-on-affine-boxes",
+    "lem-hp-corner-uniform-degree-dof-count",
+    "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+    "thm-hp-analytic-p-convergence-on-fixed-tensor-mesh",
+    "thm-hp-reference-interval-integrated-legendre-projection",
+    "thm-hp-simplex-p-dependent-face-trace-inverse",
+    "thm-hp-triangle-unweighted-smooth-approximation",
+    "lem-hp-simplex-p-explicit-conforming-interpolant",
+    "thm-hp-galerkin-energy-error-on-fixed-mesh",
+    "thm-hp-gll-top-mode-and-puniform-energy-equivalence",
+    "thm-hp-corner-exponential-energy-convergence",
+    "thm-hp-gll-strang-error-with-aliasing-defect",
+    "cex-hp-degree-independent-sipdg-penalty-loses-coercivity",
+    "ex-hp-analytic-p-refinement-on-a-fixed-box",
+    "ex-hp-gll-mass-top-mode-correction",
+    "ex-hp-reentrant-corner-h-versus-hp"
+  ],
+  "reviewed_pages": [
+    "hp-finite-elements-and-spectral-element-methods",
+    "hp-finite-elements-and-spectral-element-methods-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Full batch and direct suppliers were reviewed. The A page retains an unresolved page-level curved-mesh prerequisite, and the approved energy-error scope needs owner reconciliation. Local proof and example defects are also identified.",
+  "findings": [
+    {
+      "id": "hp-finite-elements-and-spectral-element-methods",
+      "type": "prerequisite",
+      "reason": "The A page requires curved-mesh-geometry-and-conservative-mesh-transfer, whose current page and five listed supplier items are draft. The assigned claims are affine and do not use them; the A page says this edge is unused and open. The unresolved relation is the page-level A-to-PE17 prerequisite; owner reconciliation is needed."
+    },
+    {
+      "id": "hp-finite-elements-and-spectral-element-methods",
+      "type": "scope",
+      "reason": "The approved PE28 design calls for energy error with actual h, p, and regularity dependence. The fixed-mesh theorem explicitly excludes h-dependent and ordinary Sobolev simplex rates, while the corner theorem covers only the weighted-analytic graded case. The local interpolant and Cea supplier may compose to meet the broader clause, but no assigned result states that general bound; the owner should confirm scope or authorize its addition."
+    },
+    {
+      "id": "ex-hp-analytic-p-refinement-on-a-fixed-box",
+      "type": "local",
+      "reason": "The example uses the one-dimensional interval, while the tensor-box definition is introduced under d >= 2 and the approved PE28 box scope is quadrilaterals/hexahedra. Repair locally by using a square box and u(x,y) = 1/(4-x); the analytic rate proof is preserved."
+    },
+    {
+      "id": "lem-hp-simplex-p-explicit-conforming-interpolant",
+      "type": "local",
+      "reason": "The final rate uses F4's H2-to-H1 edge trace and tangential-derivative commutation, but the cited trace theorem states only H1-to-L2. The listed smooth-density and trace suppliers suffice; add the local H2 approximation argument and pass the tangential derivative identity in distributions."
+    },
+    {
+      "id": "lem-hp-analytic-polynomial-approximation-on-a-triangle",
+      "type": "local",
+      "reason": "In Step 5.1, endpoint preservation uses integral_0^1 f' = f(1)-f(0). Orthogonality to constants only shows integral(Pi f') = integral(f'); supply the FTC justification explicitly."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "hp-finite-elements-and-spectral-element-methods-examples",
+      "decision": "escalate",
+      "reason": "The B page requires the A page, so its page-level readiness inherits the unresolved PE17 relation. Its example arguments use the assigned affine results and do not use curved-mesh claims."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "kind": "owner-authorized-published-proof-repair-applied",
+  "recorded_at": "2026-10-18T03:43:08.756410+00:00",
+  "reviewer": "/root/gate_url_linear",
+  "id": "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+  "source": "items/thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block.md",
+  "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step4-published-qr18-repair-proposal.json",
+  "pre_edit_authority": {
+    "group": "step4-published-18-owner",
+    "pre_sha256": "8840cd90948d3bb5bc758ea4f33d6893c9d9e8650d0aff08b18edca8c7de9ffb",
+    "before_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step4-published-alerts-before/thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block.md",
+    "actual_current_source_equal_to_released_archive_before_write": true,
+    "root_release": "Engine paused/drained4judge; root serialized successful ordinary pre-edit claim and released these three guarded proof paragraph replacements."
+  },
+  "actual_body_changes": [
+    {
+      "section": "Proof",
+      "step": "1.1",
+      "guard_unique_current_text": "1.1 After $k$ pivot steps, the first $k$ pivoted columns span the same subspace as the first $k$ columns of $QR$, and the next pivot diagonal entry $r_{kk}$ is the norm of the residual of the chosen column after projection onto that span. Hence $r_{kk}\\ne 0$ exactly when some remaining column still has a nonzero residual, that is, still lies outside the span of the first $k$ chosen columns. [L1, L2, algebra]",
+      "proposed_replacement": "1.1 Use zero-based row and column indices. Suppose $k$ pivot steps have been completed and the first $k$ chosen columns are independent; for $k=0$ this condition is vacuous. Their upper triangular leading block is nonsingular, so their span is the span of the first $k$ columns of $Q$. Orthogonality or unitarity identifies the residual of each remaining column after projection onto this span with its active coordinates in rows $k$ onward. The next pivot has index $k$; the transformations in [L2] concentrate its active coordinates in row $k$ and preserve their norm. Thus $|r_{kk}|$ is the norm of that residual, without any diagonal sign or phase convention. By the greedy rule, $r_{kk}\\ne0$ exactly when some remaining column lies outside the span of the first $k$ chosen columns. [L1, L2, algebra]"
+    },
+    {
+      "section": "Proof",
+      "step": "2.1",
+      "guard_unique_current_text": "2.1 For $k<r$, the chosen columns cannot already span every column of $A$, because then all columns would lie in a $k$-dimensional span and [L4] would give rank at most $k<r$. Therefore some remaining column has nonzero residual, and by the greedy rule step 1.1 gives $r_{kk}\\ne 0$. Thus the first $r$ diagonal entries of $R$ are nonzero. [step 1.1, L4, algebra]",
+      "proposed_replacement": "2.1 Induct over $k=0,\\ldots,r-1$. If the first $k$ chosen columns are independent, their span has dimension $k<r$, so [L4] implies that some remaining column lies outside it. Step 1.1 and the greedy rule give $r_{kk}\\ne0$, and the new chosen column is independent of its predecessors. Starting with the empty list proves that the first $r$ chosen columns are independent and that $r_{00},\\ldots,r_{r-1,r-1}$ are nonzero. [step 1.1, L4, induction, algebra]"
+    },
+    {
+      "section": "Proof",
+      "step": "3.1",
+      "guard_unique_current_text": "3.1 After $r$ pivot columns have been chosen, [L4] says no further independent column exists. Hence every remaining column lies in the span of the first $r$ chosen columns, so every remaining residual is zero. Step 1.1 then forces every entry below and on the diagonal in the trailing block to be zero, giving $$R=\\begin{pmatrix}R_{11}&R_{12}\\\\0&0\\end{pmatrix}.$$ The block $R_{11}$ is upper triangular with nonzero diagonal by step 2.1, so it is invertible. [step 1.1, step 2.1, L3, L4, algebra]",
+      "proposed_replacement": "3.1 The first $r$ chosen columns are independent by step 2.1 and therefore span every column of $A$ by [L4]. Their span is the span of the first $r$ columns of $Q$, so all coordinates of every column of $Q^*A\\Pi$ in rows indexed $r$ onward are zero. This gives the whole zero lower block, including every entry of the trailing block, not merely its diagonal. Hence $$R=\\begin{pmatrix}R_{11}&R_{12}\\\\0&0\\end{pmatrix}.$$ The block $R_{11}$ is upper triangular with nonzero diagonal by step 2.1; back-substitution solves $R_{11}x=b$ uniquely for every $b$, giving a two-sided inverse as in [L3]. For $r=0$, all columns of $A$ are zero and $R_{11}$ is the empty identity, which is its own inverse under [L3]. [step 1.1, step 2.1, L1, L3, L4, algebra]"
+    }
+  ],
+  "statement_changed": false,
+  "frontmatter_changed": false,
+  "dependencies_changed": false,
+  "other_body_changed": false,
+  "mathematical_resolution": {
+    "indexing": "Explicit zero-based pivot indexing and induction over k=0,...,r-1 remove ambiguity; this matches the actual cited QR construction and explicitly includes the final nonzero pivot.",
+    "phase": "The norm invariant is stated as |r_kk| equal to residual norm, allowing real signs and complex phases without changing nonvanishing or pivot selection.",
+    "trailing_block": "The span of the first r independent pivoted columns is the whole matrix image, so all transformed coordinates in rows r onward vanish. This proves the entire lower block is zero.",
+    "rank_zero": "The proof now explicitly records the rank-zero matrix and self-inverse empty leading block under the existing cited invertibility convention."
+  },
+  "consumer_disposition": [
+    {
+      "id": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "path": "items/alg-strong-rank-revealing-qr-with-finite-swaps.md",
+      "actual_use": "Exact initialization step 1 requires full column rank and a nonsingular selected leading block. It does not require a positive diagonal, and the finite-precision branch already distinguishes rounded factors and separately certified exact identities.",
+      "disposition": "Current interface use remains sound; no consumer source change."
+    },
+    {
+      "id": "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+      "path": "items/cex-classical-column-pivoted-qr-is-not-strong-with-factor-one.md",
+      "actual_use": "Fact F3 and Proof 1.1 use greedy residual-norm selection at full rank. Proof 2.1 explicitly chooses Q=I,R=A for its particular positive-diagonal triangular input; it does not infer positivity from the general theorem.",
+      "disposition": "Counterexample remains sound unchanged."
+    },
+    {
+      "id": "batch-18 ID consumers",
+      "actual_use": "Step4 alert reaches the published theorem through the exact RRQR initializer; it only requires a nonsingular leading block, which is preserved with the same full-column-rank hypothesis.",
+      "disposition": "No expanded interface or downstream source correction is created by this proof-only clarification."
+    }
+  ],
+  "interface_change": false,
+  "review_limits": "The applied text is exactly the three replacements reviewed in the proposal. No additional mathematical source edits or broadened consumer work were performed. Root owns actual current checks and context binding.",
+  "checks_and_hashes": "No hashes computed; no checkers, tests, gates or proof-layout run. No verification, metadata, ledger, receipt, contract, manifest or native workflow artifact edited."
+}

@@ -1,0 +1,535 @@
+[
+  {
+    "order": 2626,
+    "id": "hyperbolic-dg-and-summation-by-parts-discretizations",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Hyperbolic DG and summation-by-parts methods",
+    "companion": "hyperbolic-dg-and-summation-by-parts-discretizations-examples",
+    "requires": [
+      "finite-element-meshes-and-interpolation",
+      "invariant-domain-and-entropy-stable-conservative-schemes",
+      "runge-kutta-methods-and-order"
+    ],
+    "items": [
+      {
+        "id": "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+        "kind": "definition",
+        "title": "Oriented interval meshes and broken polynomial spaces",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Define a finite increasing partition of a bounded interval and its cellwise polynomial space, traces, and jumps.",
+        "strategy": "The published simplicial-mesh definition is explicitly for dimension at least two; supply the separate one-dimensional convention needed by the transport and SBP cases.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bernardo Cockburn, An Introduction to the Discontinuous Galerkin Method for Convection-Dominated Problems, CIME lecture notes",
+              "url": "https://www-users.cse.umn.edu/~bcockbur/lecture_notes/DG-1.pdf",
+              "locator": "\u00a7\u00a73.2\u20133.4, printed pp. 161\u2013164: one-dimensional interval partition, broken polynomial trial space, and left/right traces."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe04-diagonal-norm-sbp-element-data",
+        "kind": "definition",
+        "title": "Diagonal-norm summation-by-parts element data",
+        "deps": [
+          "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "dependency_level": 1,
+        "statement": "Define positive diagonal volume norms, derivative matrices, face trace maps and positive face quadrature matrices satisfying the exact multidirectional SBP and constant-preservation identities, with paired interface nodes.",
+        "strategy": "Make all matrix sizes, orientations, positivity requirements and exact identities part of the data; assert no existence for arbitrary meshes.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Travis C. Fisher and Mark H. Carpenter, High-Order Entropy Stable Finite Difference Schemes for Nonlinear Conservation Laws: Finite Domains, NASA/TM-2013-217971",
+              "url": "https://ntrs.nasa.gov/api/citations/20130011028/downloads/20130011028.pdf",
+              "locator": "\u00a72.3.2, printed p. 8: positive diagonal norm, derivative matrix, and the SBP matrix identity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe04-upwind-dg-transport-discretization",
+        "kind": "definition",
+        "title": "Upwind discontinuous Galerkin discretization of constant transport",
+        "deps": [
+          "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "dependency_level": 1,
+        "statement": "Define the elementwise weak upwind DG method for scalar constant-coefficient transport, with inflow data and matching interior numerical fluxes, in dimensions one and at least two.",
+        "strategy": "State both mesh branches, every trace convention, the weak form, and the boundary and interior fluxes.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bernardo Cockburn, An Introduction to the Discontinuous Galerkin Method for Convection-Dominated Problems, CIME lecture notes",
+              "url": "https://www-users.cse.umn.edu/~bcockbur/lecture_notes/DG-1.pdf",
+              "locator": "\u00a7\u00a73.2\u20133.4, printed pp. 161\u2013164; \u00a74.2, printed pp. 201\u2013203: elementwise weak form and upwind face flux."
+            },
+            {
+              "title": "Bernardo Cockburn and Chi-Wang Shu, Runge\u2013Kutta Discontinuous Galerkin Methods for Convection-Dominated Problems, Journal of Scientific Computing 16 (2001)",
+              "url": "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf",
+              "locator": "\u00a7\u00a72.1 and 3.1, printed pp. 184\u2013186 and 201\u2013203: weak DG form, traces, and multidimensional flux convention."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-pe04-first-order-upwind-forward-euler",
+        "kind": "algorithm",
+        "title": "Forward-Euler step for degree-zero upwind DG transport",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "dependency_level": 2,
+        "statement": "Define the periodic degree-zero upwind DG update on a matching affine simplicial mesh: return CFL-inadmissible if any cellwise face-CFL number exceeds one, and otherwise return the displayed updated cell means.",
+        "strategy": "Give the exact volume-weighted coefficient form of the one-step cell update; make periodic indexing explicit.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bernardo Cockburn, An Introduction to the Discontinuous Galerkin Method for Convection-Dominated Problems, CIME lecture notes",
+              "url": "https://www-users.cse.umn.edu/~bcockbur/lecture_notes/DG-1.pdf",
+              "locator": "\u00a7\u00a73.2\u20133.5, printed pp. 161\u2013165: piecewise-constant DG is the first-order finite-volume update and uses shared numerical fluxes."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe04-cellwise-l2-projection",
+        "kind": "definition",
+        "title": "Cellwise L2 projection relation onto broken polynomials",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-measure-space",
+          "def-calligraphic-l-p-on-a-measure-space"
+        ],
+        "dependency_level": 2,
+        "statement": "Define the cellwise orthogonality relation that specifies an L2 projection onto the stated broken polynomial trial space.",
+        "strategy": "State the inner-product equations without assuming existence or uniqueness; prove both before using the projection operator.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bernardo Cockburn, An Introduction to the Discontinuous Galerkin Method for Convection-Dominated Problems, CIME lecture notes",
+              "url": "https://www-users.cse.umn.edu/~bcockbur/lecture_notes/DG-1.pdf",
+              "locator": "\u00a73.5, printed p. 164: local L2 projection for the initial DG data."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe04-upwind-sbp-sat-transport-discretization",
+        "kind": "definition",
+        "title": "Upwind SBP-SAT discretization of constant transport",
+        "deps": [
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "dependency_level": 2,
+        "statement": "Define the strong-form diagonal-norm SBP transport operator with an upwind SAT at every face and inflow boundary data.",
+        "strategy": "State the exact SAT sign and use the same oriented upwind flux as the DG definition.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Travis C. Fisher and Mark H. Carpenter, High-Order Entropy Stable Finite Difference Schemes for Nonlinear Conservation Laws: Finite Domains, NASA/TM-2013-217971",
+              "url": "https://ntrs.nasa.gov/api/citations/20130011028/downloads/20130011028.pdf",
+              "locator": "\u00a72.3.2, printed p. 8: SBP derivative and norm matrices; \u00a72.3.5, printed pp. 11\u201312: weak-form boundary treatment."
+            },
+            {
+              "title": "Bernardo Cockburn, An Introduction to the Discontinuous Galerkin Method for Convection-Dominated Problems, CIME lecture notes",
+              "url": "https://www-users.cse.umn.edu/~bcockbur/lecture_notes/DG-1.pdf",
+              "locator": "\u00a74.2, printed pp. 201\u2013203: multidimensional DG face flux and quadrature conventions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe04-upwind-dg-l2-energy-stability",
+        "kind": "theorem",
+        "title": "Upwind DG transport satisfies the semidiscrete L2 energy identity",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+          "def-matching-affine-simplicial-meshes",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "def-countable-choice",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $d\\ge1$. If $d=1$, let $\\mathcal T_h$ be a finite oriented interval mesh of $\\Omega=(a,b)$, $a<b$, from [[def-pe04-one-dimensional-interval-mesh-and-broken-polynomials]]; if $d\\ge2$, let $\\mathcal T_h$ be a finite matching affine simplicial mesh of $\\Omega$. Let $\\beta\\in\\mathbb R^d$ be constant, and let $u_h$ solve [[def-pe04-upwind-dg-transport-discretization]] with inflow data $g$. Assume Countable Choice when $d\\ge2$, as required by the affine-simplex Green supplier; no choice assumption is needed for the interval branch. Write $\\Gamma_+=\\{x\\in\\partial\\Omega:\\beta\\cdot n>0\\}$ and $\\Gamma_- =\\{x\\in\\partial\\Omega:\\beta\\cdot n<0\\}$. For an interior facet $F=K^-\\cap K^+$ choose a unit normal $n_F$ from $K^-$ to $K^+$ and write $[u_h]=u_h^+-u_h^-$. In dimension one, integrals over facets and boundary points mean sums with respect to zero-dimensional surface measure. Then\n$$\\frac12\\frac{d}{dt}\\sum_{K\\in\\mathcal T_h}\\|u_h\\|_{L^2(K)}^2+\\frac12\\sum_{F\\text{ interior}}\\int_F|\\beta\\cdot n_F|[u_h]^2\\,dS+\\frac12\\int_{\\Gamma_+}(\\beta\\cdot n)u_h^2\\,dS+\\frac12\\int_{\\Gamma_-}|\\beta\\cdot n|(u_h-g)^2\\,dS=\\frac12\\int_{\\Gamma_-}|\\beta\\cdot n|g^2\\,dS.$$\nIn particular, zero inflow data give a nonincreasing semidiscrete $L^2$ norm. This result is semidiscrete and makes no claim about a time integrator.",
+        "strategy": "Use the actual simplex Green identity and opposite interior normals, then calculate each signed upwind face contribution.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bernardo Cockburn, An Introduction to the Discontinuous Galerkin Method for Convection-Dominated Problems, CIME lecture notes",
+              "url": "https://www-users.cse.umn.edu/~bcockbur/lecture_notes/DG-1.pdf",
+              "locator": "\u00a7\u00a73.2\u20133.4, printed pp. 161\u2013164: weak DG form, upwind flux, and linear stability analysis."
+            },
+            {
+              "title": "Bernardo Cockburn and Chi-Wang Shu, Runge\u2013Kutta Discontinuous Galerkin Methods for Convection-Dominated Problems, Journal of Scientific Computing 16 (2001)",
+              "url": "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf",
+              "locator": "\u00a72.1, printed pp. 184\u2013187: linear transport upwind DG and L2 stability."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe04-flux-differencing-sbp-systems",
+        "kind": "definition",
+        "title": "Conservative flux-differencing SBP method for nonlinear systems",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe03-system-entropy-pair-and-potential",
+          "def-pe03-tadmor-entropy-conservative-flux",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "dependency_level": 3,
+        "statement": "Define the affine-element flux-differencing volume residual from symmetric consistent directional entropy-conservative two-point fluxes, paired face quadrature and a conservative normal numerical flux satisfying Tadmor's interface inequality.",
+        "strategy": "State the entropy-pair and flux assumptions direction by direction, the exact SBP/metric identities, paired nodes, face SAT and boundary entropy condition; exclude curved meshes.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Travis C. Fisher and Mark H. Carpenter, High-Order Entropy Stable Finite Difference Schemes for Nonlinear Conservation Laws: Finite Domains, NASA/TM-2013-217971",
+              "url": "https://ntrs.nasa.gov/api/citations/20130011028/downloads/20130011028.pdf",
+              "locator": "\u00a7\u00a73.1\u20133.2, printed pp. 13\u201320: semidiscrete entropy analysis, SBP flux differencing, and two-point entropy-consistent flux conditions."
+            },
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17 (2016)",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "\u00a7\u00a74.1\u20134.2, printed pp. 477\u2013479: entropy variables/potentials and the two-point entropy-conservative jump identity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+        "kind": "lemma",
+        "title": "The cellwise L2 projection exists uniquely and is best approximation",
+        "deps": [
+          "def-pe04-cellwise-l2-projection",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 3,
+        "statement": "Prove existence, uniqueness, orthogonality and the L2 best-approximation inequality for the cellwise projection.",
+        "strategy": "Use positive definiteness of the finite-dimensional Gram matrix and the Pythagorean identity.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bernardo Cockburn, An Introduction to the Discontinuous Galerkin Method for Convection-Dominated Problems, CIME lecture notes",
+              "url": "https://www-users.cse.umn.edu/~bcockbur/lecture_notes/DG-1.pdf",
+              "locator": "\u00a73.5, printed p. 164: the elementwise L2 projection equations; the finite-dimensional existence and best-approximation proof is supplied locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy",
+        "kind": "theorem",
+        "title": "The degree-zero upwind forward-Euler step preserves mass and convex entropy",
+        "deps": [
+          "alg-pe04-first-order-upwind-forward-euler",
+          "def-pe04-upwind-dg-transport-discretization",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Under the stated face CFL, prove conservation of the cell-volume-weighted mean and nonincrease of the weighted sum of every convex scalar entropy.",
+        "strategy": "Rewrite each cell update as a convex combination using the zero total normal flux identity, apply Jensen, and reindex paired face contributions.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bernardo Cockburn and Chi-Wang Shu, Runge\u2013Kutta Discontinuous Galerkin Methods for Convection-Dominated Problems, Journal of Scientific Computing 16 (2001)",
+              "url": "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf",
+              "locator": "\u00a7\u00a72.1\u20132.3, printed pp. 184\u2013191: the degree-zero finite-volume specialization, monotone forward-Euler map, and explicit CFL requirement."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe04-upwind-sbp-sat-l2-energy-stability",
+        "kind": "theorem",
+        "title": "Upwind SBP-SAT transport satisfies the semidiscrete L2 energy identity",
+        "deps": [
+          "def-pe04-upwind-sbp-sat-transport-discretization",
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $d\\ge1$. If $d=1$, let the cells be a finite oriented interval mesh from [[def-pe04-one-dimensional-interval-mesh-and-broken-polynomials]]; if $d\\ge2$, let them form a finite matching affine simplicial mesh. On every cell assume diagonal-norm SBP data of [[def-pe04-diagonal-norm-sbp-element-data]], with paired interior face nodes, equal paired weights, and opposite outward normals. Let $\\beta\\in\\mathbb R^d$ be constant, and let the differentiable nodal state $U_K(t)$ solve the upwind SBP-SAT method of [[def-pe04-upwind-sbp-sat-transport-discretization]] with prescribed inflow values $g_{F,q}$ where $b_{K,F}:=\\beta\\cdot n_{K,F}<0$. Write $\\omega_{F,q}$ for the diagonal entries of the face norm. On an interior face oriented from $K^-$ to $K^+$, set $b_F=\\beta\\cdot n_F$ and $[U]_{F,q}=U^+_{F,q}-U^-_{F,q}$. Let $\\Gamma_+$ and $\\Gamma_-$ denote the boundary faces with positive and negative outward speed, respectively. For $d=1$, each face has one endpoint node and its face sum is a one-point sum. The discrete energy $E_h=\\frac12\\sum_K U_K^TH_KU_K$ satisfies\n$$\\frac{dE_h}{dt}+\\frac12\\sum_{F\\text{ interior}}\\sum_q\\omega_{F,q}|b_F|[U]_{F,q}^2+\\frac12\\sum_{F\\subset\\Gamma_+}\\sum_q\\omega_{F,q}b_{K,F}U_{F,q}^2+\\frac12\\sum_{F\\subset\\Gamma_-}\\sum_q\\omega_{F,q}|b_{K,F}|(U_{F,q}-g_{F,q})^2=\\frac12\\sum_{F\\subset\\Gamma_-}\\sum_q\\omega_{F,q}|b_{K,F}|g_{F,q}^2.$$\nConsequently, zero inflow data give a nonincreasing SBP norm.",
+        "strategy": "Contract the matrix ODE with the state, apply the stated SBP identity, and pair the two traces at each interface.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Travis C. Fisher and Mark H. Carpenter, High-Order Entropy Stable Finite Difference Schemes for Nonlinear Conservation Laws: Finite Domains, NASA/TM-2013-217971",
+              "url": "https://ntrs.nasa.gov/api/citations/20130011028/downloads/20130011028.pdf",
+              "locator": "\u00a72.3.2, printed p. 8: the SBP matrix integration-by-parts identity and positive diagonal norm."
+            },
+            {
+              "title": "Bernardo Cockburn, An Introduction to the Discontinuous Galerkin Method for Convection-Dominated Problems, CIME lecture notes",
+              "url": "https://www-users.cse.umn.edu/~bcockbur/lecture_notes/DG-1.pdf",
+              "locator": "\u00a7\u00a73.2\u20133.4, printed pp. 161\u2013164: linear transport upwinding and the elementwise energy calculation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe04-dg-smooth-solution-l2-error-bound",
+        "kind": "theorem",
+        "title": "Smooth-solution L2 error bound for upwind DG transport",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+          "def-pe04-cellwise-l2-projection",
+          "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+          "def-matching-affine-simplicial-meshes",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "prop-measure-monotonicity",
+          "def-countable-choice",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $d\\ge1$. If $d=1$, let $\\Omega=(a,b)$, $a<b$, have a finite oriented interval mesh $\\mathcal T_h$ from [[def-pe04-one-dimensional-interval-mesh-and-broken-polynomials]]; if $d\\ge2$, let $\\mathcal T_h$ be a finite matching affine simplicial mesh of $\\Omega$. Let $\\beta\\in\\mathbb R^d$ be constant, and let $u\\in C^1([0,T]\\times\\overline\\Omega)$ solve $u_t+\\beta\\cdot\\nabla u=0$ with inflow data equal to its boundary trace. Assume Countable Choice for the imported affine-simplex Green and Lebesgue-measure suppliers; the full-support and finite-measure properties on each cell are established below. Let $u_h$ be the semidiscrete upwind DG solution of degree $p\\ge0$, and let $\\Pi_h$ be the cellwise L2 projection with respect to Lebesgue measure on each cell. Use $\\|w\\|_{L^2(\\Omega)}^2=\\sum_K\\int_K|w|^2\\,dx$ and put $\\eta=\\Pi_hu-u$. For an interior face with chosen normal $n_F$, let $\\eta^{\\mathrm{up}}$ be the trace of $\\eta$ from the upwind side. In dimension one, face and boundary integrals are sums with respect to zero-dimensional surface measure. Define\n$$R_h(t)^2=\\sum_{F\\text{ interior}}\\int_F|\\beta\\cdot n_F|\\,|\\eta^{\\mathrm{up}}|^2\\,dS+\\int_{\\Gamma_+}(\\beta\\cdot n)|\\eta|^2\\,dS.$$\nThen\n$$\\|u_h(T)-u(T)\\|_{L^2(\\Omega)}\\le\\left(\\|u_h(0)-\\Pi_hu(0)\\|_{L^2(\\Omega)}^2+2\\int_0^TR_h(t)^2\\,dt\\right)^{1/2}+\\|\\Pi_hu(T)-u(T)\\|_{L^2(\\Omega)}.$$\nThis is an exact projection-trace residual bound. It asserts no mesh-order rate unless the displayed projection errors are separately estimated.",
+        "strategy": "Subtract the exact weak equation, use cellwise projection orthogonality to cancel volume residuals, and absorb face residuals with upwind dissipation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bernardo Cockburn, An Introduction to the Discontinuous Galerkin Method for Convection-Dominated Problems, CIME lecture notes",
+              "url": "https://www-users.cse.umn.edu/~bcockbur/lecture_notes/DG-1.pdf",
+              "locator": "\u00a7\u00a73.6 and 3.16, printed pp. 165\u2013169 and 189\u2013200: the linear DG projection, consistency, upwind dissipation, and complete error-estimate appendix; the exact trace-residual estimate here is proved locally."
+            },
+            {
+              "title": "Bernardo Cockburn and Chi-Wang Shu, Runge\u2013Kutta Discontinuous Galerkin Methods for Convection-Dominated Problems, Journal of Scientific Computing 16 (2001)",
+              "url": "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf",
+              "locator": "\u00a72.1, printed pp. 184\u2013187: local DG weak form and L2-projection initial data."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe04-flux-differencing-sbp-conservation-and-entropy-stability",
+        "kind": "theorem",
+        "title": "Flux-differencing SBP is conservative and semidiscretely entropy stable",
+        "deps": [
+          "def-pe04-flux-differencing-sbp-systems",
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe03-system-entropy-pair-and-potential",
+          "def-pe03-tadmor-entropy-conservative-flux",
+          "lem-oriented-facet-cancellation-on-matching-meshes"
+        ],
+        "dependency_level": 4,
+        "statement": "Prove conservation of the nodal weighted total state on periodic meshes and the global semidiscrete entropy identity under the paired-node SBP identities and nonnegative physical boundary entropy contribution. Identified periodic pairs have matching nodes/weights and opposite normals, contribute interface entropy dissipation, and are omitted from the physical boundary sum.",
+        "strategy": "Use symmetry and directional Tadmor identities in the volume pair sum, convert to face terms with SBP, cancel conservative state fluxes and retain entropy jump dissipation on ordinary and periodic interfaces.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Travis C. Fisher and Mark H. Carpenter, High-Order Entropy Stable Finite Difference Schemes for Nonlinear Conservation Laws: Finite Domains, NASA/TM-2013-217971",
+              "url": "https://ntrs.nasa.gov/api/citations/20130011028/downloads/20130011028.pdf",
+              "locator": "\u00a7\u00a73.1\u20133.2 and \u00a74.2.3, printed pp. 13\u201320 and 31\u201335: SBP entropy contraction, entropy-conservative two-point fluxes, and spatial entropy stability."
+            },
+            {
+              "title": "Eitan Tadmor, Entropy Stable Schemes, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17 (2016)",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "\u00a7\u00a74.1\u20134.2 and \u00a75.1, printed pp. 477\u2013478 and 485: entropy variables, jump identity, semidiscrete dissipation, and the separate forward-time entropy-production term."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe04-ssprk33-first-order-upwind-entropy-preservation",
+        "kind": "theorem",
+        "title": "SSPRK(3,3) preserves the degree-zero upwind entropy bound",
+        "deps": [
+          "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy",
+          "alg-pe04-first-order-upwind-forward-euler",
+          "alg-ssprk33",
+          "prop-ssprk33-third-order-and-convex-preservation",
+          "def-convex-subset-of-euclidean-space",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "statement": "For the exact SSPRK(3,3) three-stage recurrence and the same step bound, prove preservation of the degree-zero periodic upwind method's convex entropy bound by the proved forward-Euler transfer result.",
+        "strategy": "Instantiate NA15's coefficient-one convex transfer with the weighted scalar entropy; assert no transfer to the high-order nonlinear DG/SBP semidiscretization.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bernardo Cockburn and Chi-Wang Shu, Runge\u2013Kutta Discontinuous Galerkin Methods for Convection-Dominated Problems, Journal of Scientific Computing 16 (2001)",
+              "url": "https://helper.ipam.ucla.edu/publications/pcatut2005/pcatut_5473_reprint2.pdf",
+              "locator": "\u00a71.1 and \u00a72.2, printed pp. 175\u2013176 and 188\u2013190, Table 2.1: SSP convex-combination transfer, the three-stage method, and the forward-Euler step restriction."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2627,
+    "id": "hyperbolic-dg-and-summation-by-parts-discretizations-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Hyperbolic DG and summation-by-parts methods \u2014 Examples",
+    "companion": "hyperbolic-dg-and-summation-by-parts-discretizations",
+    "requires": [
+      "hyperbolic-dg-and-summation-by-parts-discretizations"
+    ],
+    "items": [
+      {
+        "id": "cex-pe04-underintegrated-burgers-collocation-entropy-growth",
+        "kind": "counterexample",
+        "title": "Underintegrated Burgers collocation can increase quadratic entropy",
+        "deps": [
+          "def-pe04-diagonal-norm-sbp-element-data"
+        ],
+        "dependency_level": 2,
+        "statement": "Give exact three-node Gauss-Lobatto SBP data and a periodic Burgers state for which the naively collocated strong form has positive quadratic-entropy production.",
+        "strategy": "Verify the SBP matrix identity and compute the exact nodal residual and weighted entropy derivative.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-pe04-central-versus-upwind-periodic-transport",
+        "kind": "example",
+        "title": "Central and upwind fluxes have different periodic dissipation",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "dependency_level": 2,
+        "statement": "Compare the degree-zero central and upwind two-cell periodic scalar transport schemes and calculate their discrete L2 energy rates.",
+        "strategy": "Substitute the fixed cell values into both shared face-flux updates and sum the weighted energy derivative.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe04-upwind-transport-with-inflow",
+        "kind": "example",
+        "title": "A constant upwind DG state with inflow data on one interval",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "dependency_level": 2,
+        "statement": "Compute the exact degree-zero DG ODE and its energy balance on one right triangle for constant horizontal transport with prescribed inflow.",
+        "strategy": "Evaluate the three oriented face fluxes and simplify the scalar energy identity.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe04-sbp-inflow-sat-energy-identity",
+        "kind": "example",
+        "title": "The SBP inflow SAT produces the boundary energy term",
+        "deps": [
+          "def-pe04-upwind-sbp-sat-transport-discretization",
+          "thm-pe04-upwind-sbp-sat-l2-energy-stability"
+        ],
+        "dependency_level": 4,
+        "statement": "Verify the inflow SAT energy identity for the two-node diagonal-norm SBP derivative on one interval.",
+        "strategy": "Insert the explicit H, D and boundary vectors, then contract the exact SAT equation with the nodal state.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

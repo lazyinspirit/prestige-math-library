@@ -1,0 +1,1978 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+    "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+    "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+    "lem-wide-gaussian-pseudoinverse-spectral-moments-and-tail",
+    "lem-finite-real-gaussian-increment-comparison",
+    "lem-real-scaled-gaussian-product-expectation",
+    "lem-randomized-rangefinder-deterministic-svd-partition-error",
+    "thm-real-gaussian-rangefinder-expected-spectral-error",
+    "thm-gaussian-rangefinder-expected-spectral-error",
+    "lem-orthogonal-projector-power-error-inequality",
+    "thm-randomized-power-rangefinder-error-transfer",
+    "thm-real-gaussian-power-rangefinder-expected-error",
+    "thm-gaussian-power-rangefinder-expected-error",
+    "ex-gaussian-rangefinder-exact-on-rank-k-matrices",
+    "ex-slow-singular-tail-rangefinder-error-term",
+    "ex-power-rangefinder-loses-small-mode-without-qr"
+  ],
+  "contracts": {
+    "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice so that the repository's Lebesgue measure\non each finite-dimensional real coordinate space is a measure. A **standard\nreal Gaussian scalar** has Lebesgue density\n$$\\varphi_R(x)=(2\\pi)^{-1/2}e^{-x^2/2}.$$\nA **normalized complex Gaussian scalar** is $z=(x+iy)/\\sqrt2$ for independent\nstandard real Gaussian scalars $x,y$; its density on $\\mathbb C\\simeq\\mathbb\nR^2$ is $\\varphi_C(z)=\\pi^{-1}e^{-|z|^2}$ and $\\mathbb E|z|^2=1$.\n\nFor $F=\\mathbb R$ or $\\mathbb C$, an **iid standard Gaussian matrix** in\n$F^{a\\times b}$ has independent entries with the corresponding scalar law.\nAll its expectations are finite-dimensional Lebesgue integrals against the\nproduct density. Independence means this product-density factorization.\nThe normalized complex convention is fixed throughout; it is not the\nunnormalized law $x+iy$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard a matrix as its finite list of real coordinates. Multiplying the independent scalar densities in [F1] gives joint density $C e^{-\\|G\\|_F^2/2}$ over $\\mathbb R$ or $C'e^{-\\|G\\|_F^2}$ over $\\mathbb C$. The maps $G\\mapsto U^*GV$ are real-linear isometries for the Frobenius norm; their real Jacobian matrix $O$ satisfies $O^TO=I$, hence $|\\det O|=1$. Change of variables therefore preserves the joint density, so the transformed matrix has the same law.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The density in [F1] factors over all transformed entries because its exponent is the sum of the entrywise squared moduli and its normalizing constant is the product of the scalar normalizers. Thus the entries remain independent and each retains its original scalar law.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the invariance with $U=W$ and $V=I$. Disjoint coordinate blocks of the resulting iid matrix have a joint density that factors into the product of their block densities, which is exactly independence; both blocks have their declared standard laws.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement fixes positive dimensions or k>=1; the corresponding setup is explicit in Statement or Given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement includes the degenerate zero matrix; norm preservation and the product density remain valid at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows 1 by 1 orthogonal or unitary transformations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement imposes no invertibility condition on the Gaussian realization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The assertion has no limiting parameter or endpoint; it holds for each given compatible orthogonal or unitary matrix."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The compatible transformations U and V are part of the Statement hypotheses; step 1.1 handles their coordinate maps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice so that the repository's Lebesgue measure\non each finite-dimensional real coordinate space is a measure. A **standard\nreal Gaussian scalar** has Lebesgue density\n$$\\varphi_R(x)=(2\\pi)^{-1/2}e^{-x^2/2}.$$\nA **normalized complex Gaussian scalar** is $z=(x+iy)/\\sqrt2$ for independent\nstandard real Gaussian scalars $x,y$; its density on $\\mathbb C\\simeq\\mathbb\nR^2$ is $\\varphi_C(z)=\\pi^{-1}e^{-|z|^2}$ and $\\mathbb E|z|^2=1$.\n\nFor $F=\\mathbb R$ or $\\mathbb C$, an **iid standard Gaussian matrix** in\n$F^{a\\times b}$ has independent entries with the corresponding scalar law.\nAll its expectations are finite-dimensional Lebesgue integrals against the\nproduct density. Independence means this product-density factorization.\nThe normalized complex convention is fixed throughout; it is not the\nunnormalized law $x+iy$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "source_section": "Statement",
+          "quote": "Let $G\\in F^{a\\times b}$ have the iid Gaussian law of\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. If $U,V$\nare compatible orthogonal matrices for $F=\\mathbb R$ or unitary matrices for\n$F=\\mathbb C$, then $U^*GV$ has the same iid law as $G$. In particular, if\n$W\\in F^{n\\times n}$ is orthogonal/unitary and $\\Omega\\in F^{n\\times\\ell}$\nis iid Gaussian, then any two disjoint row blocks of $W^*\\Omega$ are\nindependent standard Gaussian matrices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A fixed proper real or complex linear subspace $L\\subsetneq F^\\ell$ has probability zero for one Gaussian row: choose an orthogonal/unitary coordinate change sending $L$ into $\\{z_1=0\\}$, use [F2], and integrate the density over this coordinate subspace. It is Lebesgue-null: inside each bounded box $[-M,M]^d$ it lies in a coordinate hyperplane coverable by a box of width $2\\varepsilon$ and bounded remaining sides, whose volume tends to zero with $\\varepsilon$; [F4] makes that hyperplane null, and countable subadditivity covers the whole hyperplane.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induct on the number $j\\le k$ of revealed rows. The first row is nonzero almost surely by step 1.1 applied to the zero subspace. The dependence event for $j$ rows is measurable because it is the common zero set of the finitely many $j\\times j$ minors. If the first $j-1$ rows are independent, their span is proper since $j-1<k<\\ell$; for each fixed such tuple, step 1.1 makes the section of the event that row $j$ lies in their span null. The exceptional dependent tuples are null by induction. Applying [F3] to the nonnegative indicator of dependence gives probability zero for the first $j$ rows to be dependent. The induction is finite and concludes at $j=k$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Outside this null event, the $k$ rows are linearly independent, hence the row rank equals $k$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The dimensions satisfy k>=1 and ell>k, so no empty row family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The first-row zero event is a proper-subspace null event in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The j=1 induction base and k=1 case are included in steps 1.1–1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The dependent-row event and its null sections are treated by induction in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict inequality ell>k keeps each partial row span proper in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each fixed proper span is carried by an orthogonal/unitary coordinate map to a coordinate hyperplane in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "lem-wide-gaussian-pseudoinverse-frobenius-moments": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice so that the repository's Lebesgue measure\non each finite-dimensional real coordinate space is a measure. A **standard\nreal Gaussian scalar** has Lebesgue density\n$$\\varphi_R(x)=(2\\pi)^{-1/2}e^{-x^2/2}.$$\nA **normalized complex Gaussian scalar** is $z=(x+iy)/\\sqrt2$ for independent\nstandard real Gaussian scalars $x,y$; its density on $\\mathbb C\\simeq\\mathbb\nR^2$ is $\\varphi_C(z)=\\pi^{-1}e^{-|z|^2}$ and $\\mathbb E|z|^2=1$.\n\nFor $F=\\mathbb R$ or $\\mathbb C$, an **iid standard Gaussian matrix** in\n$F^{a\\times b}$ has independent entries with the corresponding scalar law.\nAll its expectations are finite-dimensional Lebesgue integrals against the\nproduct density. Independence means this product-density factorization.\nThe normalized complex convention is fixed throughout; it is not the\nunnormalized law $x+iy$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge1$, $\\ell>k$, and let $G\\in F^{k\\times\\ell}$ have iid standard\nreal Gaussian or normalized complex Gaussian entries. Then\n$\\operatorname{rank}(G)=k$ almost surely.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-real-beta-gamma-identity",
+          "source_section": "Statement",
+          "quote": "For $p,q>0$, $B(p,q)=\\Gamma(p)\\Gamma(q)/\\Gamma(p+q)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-gamma-function-by-the-euler-integral",
+          "source_section": "Definition",
+          "quote": "For $s>0$, define $\\Gamma(s)=\\int_0^\\infty t^{s-1}e^{-t}\\,dt$.\n\nThe integral is improper at both $0$ and $+\\infty$. Its convergence for every $s>0$, and its failure for $s\\le0$, are proved in [[thm-real-gamma-euler-integral-convergence]], which justifies the definition on exactly the displayed domain. The integrand is positive, so $\\Gamma(s)>0$ throughout $(0,\\infty)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-real-gamma-one-half-is-root-pi",
+          "source_section": "Statement",
+          "quote": "$\\Gamma(1/2)=\\sqrt\\pi$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "source_section": "Statement",
+          "quote": "Let $G\\in F^{a\\times b}$ have the iid Gaussian law of\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. If $U,V$\nare compatible orthogonal matrices for $F=\\mathbb R$ or unitary matrices for\n$F=\\mathbb C$, then $U^*GV$ has the same iid law as $G$. In particular, if\n$W\\in F^{n\\times n}$ is orthogonal/unitary and $\\Omega\\in F^{n\\times\\ell}$\nis iid Gaussian, then any two disjoint row blocks of $W^*\\Omega$ are\nindependent standard Gaussian matrices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $G=\\begin{bmatrix}g\\\\H\\end{bmatrix}$ with first row $g$ and remaining $k-1$ rows $H$. If $k=1$, set $P=I_{k+p}$; then $GG^*=gg^*=gPg^*$ and the inverse-diagonal identity is immediate. If $k>1$, [F2] gives full row rank of $H$, so $P=I-H^*(HH^*)^{-1}H$ is the orthogonal projector onto $\\ker H$, of dimension $(k+p)-(k-1)=p+1$. The Schur complement of $HH^*$ in $GG^*$ is $gPg^*$, so the block inverse formula gives $((GG^*)^{-1})_{11}=(gPg^*)^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each fixed $H$, choose orthonormal coordinates in which $P$ is diagonal with $p+1$ ones. Independence of $g$ from $H$ and invariance [F7] show that $gPg^*$ is a sum of $p+1$ independent squared real Gaussians, or squared moduli of normalized complex Gaussians. A change of variables from $x=\\pm\\sqrt u$ gives the real square density $u^{-1/2}e^{-u/2}/\\sqrt{2\\pi}=u^{-1/2}e^{-u/2}/(\\sqrt2\\Gamma(1/2))$ by [F6]; polar coordinates give the normalized complex square density $e^{-u}$. If independent Gamma variables have common scale $\\theta$ and shapes $a,b$, their sum has convolution density proportional to $e^{-s/\\theta}\\int_0^s u^{a-1}(s-u)^{b-1}du$. Substituting $u=st$ and using [F3] makes this $e^{-s/\\theta}s^{a+b-1}B(a,b)$, which is the Gamma density of shape $a+b$ and scale $\\theta$. Iterating this finite convolution gives $gPg^*\\sim\\Gamma((p+1)/2,2)$ over $\\mathbb R$ and $gPg^*\\sim\\Gamma(p+1,1)$ over $\\mathbb C$. Tonelli [F5] integrates first over $g$ and then over $H$, so the reciprocal law holds unconditionally for the first diagonal entry; row permutation invariance gives the same law for every index.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Direct integration of the Gamma density yields $\\mathbb E U^{-1}=\\theta^{-1}\\Gamma(a-1)/\\Gamma(a)$ for $U\\sim\\Gamma(a,\\theta)$ and $a>1$. Integration by parts gives $\\Gamma(a)=(a-1)\\Gamma(a-1)$; the boundary terms vanish since $u^{a-1}\\to0$ at zero and $u^{a-1}e^{-u}\\to0$ at infinity. Thus step 2.1 gives $\\mathbb E((GG^*)^{-1})_{11}=1/(p-1)$ over $\\mathbb R$ and $1/p$ over $\\mathbb C$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By step 2.1 all inverse diagonal entries have the same reciprocal-Gamma law and finite mean in the stated ranges, so $\\mathbb E\\operatorname{tr}(GG^*)^{-1}$ is $k$ times the value in step 3.1. Put $B=G^*(GG^*)^{-1}$. Then $GB=I_k$, $BG$ is self-adjoint and idempotent, so $GBG=G$, $BGB=B$, $(GB)^*=GB$, and $(BG)^*=BG$; these are the four Penrose equations [F8], hence uniqueness [F9] gives $B=G^\\dagger$. Also $B^*B=(GG^*)^{-1}$, and therefore $\\|G^\\dagger\\|_F^2=\\operatorname{tr}(GG^*)^{-1}$ almost surely.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F2",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes k>=1 and positive integer p, so both matrix dimensions are positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The complement projector has dimension p+1 and the Schur complement is positive almost surely by full row rank in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For k=1 the proof sets P=I directly in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exceptional rank-deficient set is null by F2 and the inverse formulas are used only on its complement in steps 1.1 and 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower oversampling limits p>=2 over R and p>=1 over C make the inverse Gamma mean finite in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The projector kernel is diagonalized in orthonormal coordinates in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "lem-wide-gaussian-pseudoinverse-spectral-moments-and-tail": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge1$ and let $p$ be a positive integer, with $p\\ge2$ over $\\mathbb R$\nand $p\\ge1$ over normalized $\\mathbb C$. Let $G\\in F^{k\\times(k+p)}$ have iid entries as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. Then $G$\nhas full row rank almost surely and\n$$\n\\mathbb E\\|G^\\dagger\\|_F^2=\n\\begin{cases}k/(p-1),&F=\\mathbb R,\\\\k/p,&F=\\mathbb C.\\end{cases}\n$$\nThe complex entry convention is variance one, $\\mathbb E|G_{ij}|^2=1$. Write\n$G^\\dagger=G^+$ for the Moore–Penrose pseudoinverse of\n[[def-moore-penrose-pseudoinverse]]. On the full-row-rank event,\n$$G^\\dagger=G^*(GG^*)^{-1},\\qquad (G^\\dagger)^*G^\\dagger=(GG^*)^{-1}.$$\nHere $U\\sim\\Gamma(a,\\theta)$ means that $U$ has density\n$u^{a-1}e^{-u/\\theta}/(\\theta^a\\Gamma(a))$ for $u>0$. For every diagonal\nindex $i$, $((GG^*)^{-1})_{ii}$ has distribution $1/U$ with\n$U\\sim\\Gamma((p+1)/2,2)$ over $\\mathbb R$ and $U\\sim\\Gamma(p+1,1)$ over\n$\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "source_section": "Statement",
+          "quote": "Let $G\\in F^{a\\times b}$ have the iid Gaussian law of\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. If $U,V$\nare compatible orthogonal matrices for $F=\\mathbb R$ or unitary matrices for\n$F=\\mathbb C$, then $U^*GV$ has the same iid law as $G$. In particular, if\n$W\\in F^{n\\times n}$ is orthogonal/unitary and $\\Omega\\in F^{n\\times\\ell}$\nis iid Gaussian, then any two disjoint row blocks of $W^*\\Omega$ are\nindependent standard Gaussian matrices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-real-beta-gamma-identity",
+          "source_section": "Statement",
+          "quote": "For $p,q>0$, $B(p,q)=\\Gamma(p)\\Gamma(q)/\\Gamma(p+q)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-gamma-is-smooth",
+          "source_section": "Statement",
+          "quote": "The real Gamma function is smooth on $(0,\\infty)$. For every natural $k$ and every $s>0$, $\\Gamma^{(k)}(s)=\\int_0^\\infty(\\log t)^kt^{s-1}e^{-t}\\,dt$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an\nintegrable real random variable, let $I\\subseteq\\mathbb R$ be an interval\ncontaining $X(\\omega)$ for almost every $\\omega$, and let $\\varphi:I\\to\\mathbb R$\nbe convex.\n\nAssume additionally that $\\varphi(X)$ is either integrable or nonnegative, so\nits expectation is defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Then\n$$\\varphi(\\mathbb E[X])\\le\\mathbb E[\\varphi(X)].$$\nIn the nonnegative case the right-hand side may be $+\\infty$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-real-gamma-one-half-is-root-pi",
+          "source_section": "Statement",
+          "quote": "$\\Gamma(1/2)=\\sqrt\\pi$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice so that the repository's Lebesgue measure\non each finite-dimensional real coordinate space is a measure. A **standard\nreal Gaussian scalar** has Lebesgue density\n$$\\varphi_R(x)=(2\\pi)^{-1/2}e^{-x^2/2}.$$\nA **normalized complex Gaussian scalar** is $z=(x+iy)/\\sqrt2$ for independent\nstandard real Gaussian scalars $x,y$; its density on $\\mathbb C\\simeq\\mathbb\nR^2$ is $\\varphi_C(z)=\\pi^{-1}e^{-|z|^2}$ and $\\mathbb E|z|^2=1$.\n\nFor $F=\\mathbb R$ or $\\mathbb C$, an **iid standard Gaussian matrix** in\n$F^{a\\times b}$ has independent entries with the corresponding scalar law.\nAll its expectations are finite-dimensional Lebesgue integrals against the\nproduct density. Independence means this product-density factorization.\nThe normalized complex convention is fixed throughout; it is not the\nunnormalized law $x+iy$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-real-gamma-functional-equation",
+          "source_section": "Statement",
+          "quote": "For every $s>0$, $\\Gamma(s+1)=s\\Gamma(s)$, and $\\Gamma(1)=1$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $h=0$, define $v$ arbitrarily; this event is null under the density [F9]. If $k=1$, then $|v_1|=1$ and both displayed sphere-moment formulas equal $1$. Suppose $k\\ge2$. The independent variables $|h_1|^2$ and $\\sum_{j=2}^k|h_j|^2$ have Gamma shapes $(1/2,(k-1)/2)$ and common scale $2$ over $\\mathbb R$, and shapes $(1,k-1)$ and common scale $1$ over $\\mathbb C$. In their joint density set $s=x+y$, $t=x/(x+y)$; the Jacobian is $s$, so the density factors into a Gamma$(a+b,\\theta)$ factor in $s$ and a Beta$(a,b)$ factor in $t$ after scaling by the common scale $\\theta$. Thus $\\mathbb E t^q=B(a+q,b)/B(a,b)$; [F3] gives $c_R(q)=\\Gamma(k/2)\\Gamma(q+1/2)/(\\sqrt\\pi\\Gamma(k/2+q))$ over $\\mathbb R$ and $c_C(q)=\\Gamma(k)\\Gamma(q+1)/\\Gamma(k+q)$ over $\\mathbb C$. Invariance makes the same moment hold for $|\\langle v,u\\rangle|$ for every fixed unit $u$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "F9",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $a,s>0$, $\\Gamma(a+s)/\\Gamma(a)\\le(a+s)^s$. If $U\\sim\\Gamma(x,1)$, direct integration and [F10] give $\\mathbb EU=\\Gamma(x+1)/\\Gamma(x)=x$. The density makes $\\log U$ integrable, since $u^{x-1}|\\log u|$ is integrable near zero and the exponential factor controls infinity. Thus [F4] gives $\\psi(x):=\\Gamma'(x)/\\Gamma(x)=\\mathbb E\\log U$. Jensen [F5] for the convex function $-\\log$ yields $\\mathbb E\\log U\\le\\log\\mathbb EU=\\log x$. Integrating $\\psi$ from $a$ to $a+s$ yields $\\log\\Gamma(a+s)-\\log\\Gamma(a)\\le s\\log(a+s)$ and hence the ratio bound.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For an integer $p\\ge1$, $\\Gamma((p+1)/2)\\ge\\sqrt\\pi(p/(2e))^{p/2}$. If $p=2r$, use [F10] and [F6] to write $\\Gamma(r+1/2)=\\sqrt\\pi\\prod_{j=1}^r(j-1/2)$; [F7] gives $(\\log x)''=-1/x^2<0$. For $j\\ge2$, midpoint concavity yields $\\log(j-1/2)\\ge\\int_{j-1}^j\\log x\\,dx$; for $j=1$, $\\log(1/2)\\ge\\int_0^1\\log x\\,dx=-1$. The product is at least $\\sqrt\\pi(r/e)^r$. If $p=2r+1$, [F10] gives $\\Gamma((p+1)/2)=r!$ and midpoint concavity gives $\\log(r!)\\ge\\int_{1/2}^{r+1/2}\\log x\\,dx$; hence $r!\\ge\\sqrt{2e}((r+1/2)/e)^{r+1/2}\\ge\\sqrt\\pi((r+1/2)/e)^{r+1/2}$, since $e>2$ from its series and $\\pi<4$ from the unit disk lying in a square of area $4$. Also $p!\\ge(p/e)^p$ follows from $\\sum_{j=1}^p\\log j\\ge\\int_1^p\\log x\\,dx$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $M=(GG^*)^{-1}$. By the pseudoinverse identity in the proof of [F1], $X^2=\\lambda_{\\max}(M)$ by [F11]. For each fixed positive $M$, choose a unit eigenvector $u$ for its largest eigenvalue. Then $v^*Mv\\ge\\lambda_{\\max}(M)|\\langle v,u\\rangle|^2$, so integrating over $v$ and using the sphere moment $c_F(q)$ from step 1.1 gives $\\mathbb E_v(v^*Mv)^q\\ge\\lambda_{\\max}(M)^q c_F(q)$. Tonelli [F8] interchanges the nonnegative integrals over $G$ and $v$. For each fixed $v$, invariance [F2] makes $v^*Mv$ distributed as $M_{11}$. Using the reciprocal Gamma law [F1] and dividing by $c_F(q)$ gives exactly $C_R(q)$ or $C_C(q)$ in the statement.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F8",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Use the real moment bound from step 2.1 with $q=p/2$, the Gamma-ratio estimate in step 1.2, and the lower bound in step 1.3 to obtain $\\mathbb E X^p\\le(e\\sqrt{k+p}/p)^p$. For the complex case, use the $C_C$ moment bound from step 2.1 with $q=p$, the ratio estimate from step 1.2, and the factorial bound in step 1.3 twice to obtain $\\mathbb E X^{2p}\\le(e\\sqrt{k+p}/p)^{2p}$. Jensen for the convex powers gives $\\mathbb E X\\le(\\mathbb E X^p)^{1/p}$ in the real case and $\\mathbb E X\\le(\\mathbb E X^{2p})^{1/(2p)}$ in the complex case. For either exponent $r=p$ or $r=2p$, the pointwise inequality $t^r\\mathbf1_{\\{X>t\\}}\\le X^r$ implies $\\mathbb P\\{X>t\\}\\le\\mathbb EX^r/t^r$; using the moment bounds and also $\\mathbb P\\{X>t\\}\\le1$ gives the displayed tails. Since $r>1$ for $p\\ge2$, $t\\mapsto(a/t)^r$ is integrable on $[1,\\infty)$, so these tails are integrable at infinity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "step 1.3",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes k>=1 and a positive integer oversampling parameter."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The h=0 event is null, and v is defined arbitrarily there in Given and step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The k=1 sphere moment is handled separately in step 1.1; the p=1 Gamma bound is not used in the p>=2 tail clause."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite Gaussian full-row-rank event and its reciprocal-Gamma law are supplied by F1 in steps 1.2–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The open q ranges are exactly those making the inverse Gamma moment finite; the integer p>=2 tail endpoint is handled in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A top eigenvector of the positive matrix and a unit sphere direction are chosen in steps 1.1–1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "lem-finite-real-gaussian-increment-comparison": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice so that the repository's Lebesgue measure\non each finite-dimensional real coordinate space is a measure. A **standard\nreal Gaussian scalar** has Lebesgue density\n$$\\varphi_R(x)=(2\\pi)^{-1/2}e^{-x^2/2}.$$\nA **normalized complex Gaussian scalar** is $z=(x+iy)/\\sqrt2$ for independent\nstandard real Gaussian scalars $x,y$; its density on $\\mathbb C\\simeq\\mathbb\nR^2$ is $\\varphi_C(z)=\\pi^{-1}e^{-|z|^2}$ and $\\mathbb E|z|^2=1$.\n\nFor $F=\\mathbb R$ or $\\mathbb C$, an **iid standard Gaussian matrix** in\n$F^{a\\times b}$ has independent entries with the corresponding scalar law.\nAll its expectations are finite-dimensional Lebesgue integrals against the\nproduct density. Independence means this product-density factorization.\nThe normalized complex convention is fixed throughout; it is not the\nunnormalized law $x+iy$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-differentiation-under-dominated-improper-multiple-integrals",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open and $I\\subseteq\\mathbb R$ be an open interval. Suppose $f$ and $\\partial_tf$ are continuous on $D\\times I$, one slice $f_{t_*}$ is absolutely improperly integrable, and for every compact interval $C\\subseteq I$ there is a nonnegative improperly integrable $g_C$ with $|\\partial_tf(x,t)|\\le g_C(x)$ for $x\\in D$ and $t\\in C$. Then every slice is absolutely improperly integrable, the function $F(t)=\\int_Df(x,t)\\,dx$ is continuously differentiable, and\n\n$$F'(t)=\\int_D\\partial_tf(x,t)\\,dx.$$\n\nThe parameter derivative may be passed through the improper multiple integral under an integrable uniform derivative bound.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take independent copies of $X,Y$, with covariance entries $(C_X)_{ij}=\\mathbb E(X_iX_j)$ and $(C_Y)_{ij}=\\mathbb E(Y_iY_j)$, and represent them as independent linear images of standard Gaussian coordinates using [A1]. For $0<t<1$ put $Z(t)=\\sqrt tY+\\sqrt{1-t}X$ and $F_\\beta(z)=\\beta^{-1}\\log\\sum_{i=1}^Ne^{\\beta z_i}$ with $w_i=e^{\\beta z_i}/\\sum_je^{\\beta z_j}$. The soft maximum has at most linear growth, so its Gaussian slice is integrable. On each compact subinterval of $(0,1)$, $|\\partial_tF_\\beta(Z(t))|\\le\\|\\nabla F_\\beta\\|_2(\\|Y\\|_2/(2\\sqrt t)+\\|X\\|_2/(2\\sqrt{1-t}))$ has an integrable uniform bound, so [F3] passes the derivative under the finite Gaussian integral. For a standard coordinate $g_j$, integration by parts in its density uses $g_je^{-g_j^2/2}=-\\frac{d}{dg_j}e^{-g_j^2/2}$; the boundary term vanishes because $F_\\beta$ and its first derivatives are bounded. Applying this coordinatewise to a linear image $W=L g$ gives $\\mathbb E[W_i f(W)]=\\sum_j\\operatorname{Cov}(W_i,W_j)\\mathbb E[\\partial_jf(W)]$, including singular covariance matrices. Apply it separately to $X,Y$ in the derivative to obtain $\\frac{d}{dt}\\mathbb EF_\\beta(Z(t))=\\frac12\\sum_{i,j}(C_Y-C_X)_{ij}\\mathbb E[\\partial_{ij}F_\\beta(Z(t))]$. Since $\\partial_{ij}F_\\beta=\\beta(w_i\\mathbf1_{i=j}-w_iw_j)$, symmetry rewrites this as $\\frac\\beta4\\mathbb E\\sum_{i,j}w_iw_j(\\mathbb E(Y_i-Y_j)^2-\\mathbb E(X_i-X_j)^2)\\ge0$ by the assumed increment order.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integrate the nonnegative derivative on $(0,1)$. As $t\\downarrow0$ or $t\\uparrow1$, $Z(t)$ converges pointwise to $X$ or $Y$ and $|F_\\beta(Z(t))|$ is bounded by a constant plus $\\|X\\|_2+\\|Y\\|_2$, so [F4] gives endpoint continuity and $\\mathbb EF_\\beta(Y)\\ge\\mathbb EF_\\beta(X)$. For every $z\\in\\mathbb R^N$, $\\max_i z_i\\le F_\\beta(z)\\le\\max_i z_i+\\log N/\\beta$. Letting $\\beta\\to\\infty$ proves the asserted expected-maximum comparison.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes N>=1; for N=1 the comparison follows from the soft-maximum limit in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero increments contribute zero to the derivative formula in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The N=1 case has vacuous increment conditions and the conclusion follows in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular covariance families are represented as linear images of standard Gaussian coordinates in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Continuity at t=0 and t=1 is used to integrate the derivative in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite Gaussian vectors are given; no eigenvector, basis, or nonempty set is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "lem-real-scaled-gaussian-product-expectation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice so that the repository's Lebesgue measure\non each finite-dimensional real coordinate space is a measure. A **standard\nreal Gaussian scalar** has Lebesgue density\n$$\\varphi_R(x)=(2\\pi)^{-1/2}e^{-x^2/2}.$$\nA **normalized complex Gaussian scalar** is $z=(x+iy)/\\sqrt2$ for independent\nstandard real Gaussian scalars $x,y$; its density on $\\mathbb C\\simeq\\mathbb\nR^2$ is $\\varphi_C(z)=\\pi^{-1}e^{-|z|^2}$ and $\\mathbb E|z|^2=1$.\n\nFor $F=\\mathbb R$ or $\\mathbb C$, an **iid standard Gaussian matrix** in\n$F^{a\\times b}$ has independent entries with the corresponding scalar law.\nAll its expectations are finite-dimensional Lebesgue integrals against the\nproduct density. Independence means this product-density factorization.\nThe normalized complex convention is fixed throughout; it is not the\nunnormalized law $x+iy$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-real-gaussian-increment-comparison",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ be an integer, and let $(X_i)_{i=1}^N$ and $(Y_i)_{i=1}^N$ be\nfinite centered real Gaussian families. If $\\mathbb E(X_i-X_j)^2\\le\\mathbb E(Y_i-Y_j)^2$ for every\n$i,j$, then $\\mathbb E\\max_iX_i\\le\\mathbb E\\max_iY_i$.\nHere a finite centered real Gaussian family means a finite real vector that\nis a real-linear image of finitely many independent standard real Gaussian\nscalars.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an\nintegrable real random variable, let $I\\subseteq\\mathbb R$ be an interval\ncontaining $X(\\omega)$ for almost every $\\omega$, and let $\\varphi:I\\to\\mathbb R$\nbe convex.\n\nAssume additionally that $\\varphi(X)$ is either integrable or nonnegative, so\nits expectation is defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Then\n$$\\varphi(\\mathbb E[X])\\le\\mathbb E[\\varphi(X)].$$\nIn the nonnegative case the right-hand side may be $+\\infty$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $(SGT)_{\\alpha\\beta}=\\sum_{i=1}^r\\sum_{j=1}^sS_{\\alpha i}G_{ij}T_{j\\beta}$. Expanding gives $\\mathbb E\\|SGT\\|_F^2=\\sum_{\\alpha=1}^a\\sum_{\\beta=1}^b\\sum_{i,u=1}^r\\sum_{j,v=1}^sS_{\\alpha i}T_{j\\beta}S_{\\alpha u}T_{v\\beta}\\mathbb E(G_{ij}G_{uv})$. Independence, zero means, and unit variances give $\\mathbb E(G_{ij}G_{uv})=\\mathbf1_{i=u}\\mathbf1_{j=v}$, so this reduces to $\\sum_{\\alpha,\\beta,i,j}S_{\\alpha i}^2T_{j\\beta}^2=(\\sum_{\\alpha,i}S_{\\alpha i}^2)(\\sum_{j,\\beta}T_{j\\beta}^2)=\\|S\\|_F^2\\|T\\|_F^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For unit vectors $x\\in\\mathbb R^a,y\\in\\mathbb R^b$, set $u=S^Tx$, $v=Ty$, $U=\\|u\\|$, $V=\\|v\\|$, and define centered Gaussian processes $X_{xy}=u^TGv+zUV$ and $Y_{xy}=Vg^Tu+Uh^Tv$, where $z\\in\\mathbb R$, $g\\in\\mathbb R^r$, and $h\\in\\mathbb R^s$ are independent standard real Gaussian variables/vectors, independent of $G$. For a second pair $(x',y')$, write $u'=S^Tx'$, $v'=Ty'$, $U'=\\|u'\\|$, $V'=\\|v'\\|$, $c=u^Tu'$, and $d=v^Tv'$. At each index both processes have variance $2U^2V^2$, and their cross-covariances are $\\operatorname{Cov}(X_{xy},X_{x'y'})=cd+UU'VV'$ and $\\operatorname{Cov}(Y_{xy},Y_{x'y'})=cVV'+UU'd$. The difference is $(UU'-c)(VV'-d)\\ge0$ by Cauchy–Schwarz; subtracting twice the covariance from the sum of the two variances gives $\\mathbb E(X_{xy}-X_{x'y'})^2\\le\\mathbb E(Y_{xy}-Y_{x'y'})^2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to increasing finite subsets of normalized rational vectors in the product of unit spheres. They are dense; both sample paths are continuous, and their absolute suprema are bounded by $\\|S\\|_2\\|T\\|_2(\\|G\\|_F+|z|)$ for $X$ and $\\|T\\|_2\\|Sg\\|_2+\\|S\\|_2\\|T^Th\\|_2$ for $Y$. These bounds are integrable because independence and unit coordinate variances give $\\mathbb E\\|G\\|_F^2=rs$, $\\mathbb E z^2=1$, $\\mathbb E\\|Sg\\|_2^2=\\|S\\|_F^2$, and $\\mathbb E\\|T^Th\\|_2^2=\\|T\\|_F^2$. Dominated convergence [F4] passes the finite comparisons to the full spheres. For fixed $G$, $z\\mapsto\\sup_{x,y}(u^TGv+zUV)$ is convex with integrable growth, so Jensen [F3] gives $\\mathbb E_z\\sup_{x,y}X_{xy}\\ge\\sup_{x,y}\\mathbb E_zX_{xy}=\\sup_{x,y}u^TGv=\\|SGT\\|_2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every unit $x,y$, $Y_{xy}\\le\\|T\\|_2\\|Sg\\|_2+\\|S\\|_2\\|T^Th\\|_2$. Taking suprema and expectations, [F3] applied to the convex square gives $\\mathbb E\\|Sg\\|_2\\le(\\mathbb E\\|Sg\\|_2^2)^{1/2}=\\|S\\|_F$ and $\\mathbb E\\|T^Th\\|_2\\le\\|T\\|_F$. Combining with step 2.1 proves the spectral estimate.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All four matrix dimensions are stipulated positive; zero-dimensional spheres are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If S or T is zero then both sides of each asserted inequality are zero by steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Positive dimensions equal to one are allowed; the finite sphere comparison still applies in steps 2.1–2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires no invertibility or positive-rank premise on S or T, so zero singular values are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no limiting parameter or open endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Positive a,b make the unit spheres nonempty; countable dense directions are used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "lem-randomized-rangefinder-deterministic-svd-partition-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-gaussian-randomized-range-finder",
+          "source_section": "Definition",
+          "quote": "Input a fixed matrix $A\\in F^{m\\times n}$, a positive integer sketch width $\\ell$,\nand a Gaussian draw primitive as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. Draw\n$\\Omega\\in F^{n\\times\\ell}$ with iid entries in the chosen field and form\n$Y=A\\Omega$. Select $Q$ deterministically by scanning columns of $Y$ in\norder, subtracting projections onto already retained columns, skipping zero\nresiduals, and normalizing each nonzero residual. In the complex case fix each\nphase by making its first nonzero coordinate positive real. Return this\northonormal basis $Q$ and the approximation $\\widehat A=QQ^*A$.\n\nThe basis has $r=\\operatorname{rank}(Y)\\le\\ell$ columns; a rank-deficient\nsample returns that smaller basis and is not an algorithm failure. The finite\nscan makes only finitely many exact zero/nonzero branches, and no vector is\ndivided by zero. These tests partition the input space into finitely many\nBorel strata; on each stratum, residual updates, normalization of nonzero\nvectors, and the first-nonzero-coordinate phase adjustment are continuous.\nThus the chosen basis and returned projector are Borel functions of the sketch.\nFor every $\\Omega$, including exceptional draws, the finite-dimensional range\nhas an orthonormal basis. No truncated rank-$k$ factorization, finite-precision\nstability result, or deterministic error certificate is part of this\nprocedure. Expectation statements below concern the draw of $\\Omega$ in exact\narithmetic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the SVD from [F1] and set $\\widetilde\\Omega=V^*\\Omega=[\\Omega_1^T\\ \\Omega_2^T]^T$. Left multiplication by $U^*$ carries the sample range to $\\operatorname{Ran}(\\Sigma\\widetilde\\Omega)$, preserves the operator norm because it maps unit vectors bijectively to unit vectors by [F3], and carries $QQ^*$ to the orthogonal projector $P$ onto that range. It suffices to prove the estimate for $\\Sigma$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\Omega_1$ has full row rank, put $\\Omega_1^\\dagger=\\Omega_1^*(\\Omega_1\\Omega_1^*)^{-1}$, so $\\Omega_1\\Omega_1^\\dagger=I_k$. Let $Y=\\Sigma[\\Omega_1^T\\ \\Omega_2^T]^T$ and $C=Y\\Omega_1^\\dagger[I_k\\ 0]$. The range of $C$ lies in $\\operatorname{Ran}(Y)$, hence $(I-P)C=0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The first $k$ rows of $\\Sigma-C$ vanish because $\\Omega_1\\Omega_1^\\dagger=I_k$, and the remaining rows form $[-\\Sigma_2\\Omega_2\\Omega_1^\\dagger\\ \\ \\Sigma_2]$. Thus $\\|(I-P)\\Sigma\\|_2=\\|(I-P)(\\Sigma-C)\\|_2\\le\\|\\Sigma-C\\|_2\\le\\|\\Sigma_2\\Omega_2\\Omega_1^\\dagger\\|_2+\\|\\Sigma_2\\|_2$: the horizontal block is a sum of two zero-padded blocks, so the triangle inequality applies. By [F1] and [F4], $\\|\\Sigma_2\\|_2=\\sigma_{k+1}$, including zero-tail and rank-deficient cases.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The strict dimension conditions k<ell<=min(m,n) force positive matrix and sketch dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero trailing block gives sigma_(k+1)=0, and the rank-deficient case is included in Statement and step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The hypotheses allow k=1; the block algebra in step 3.1 uses only full row rank of Omega_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No inverse of the leading singular-value block is used, so rank(A)<k is covered by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The case ell=min(m,n) is allowed and a zero-width tail block gives zero tail norm in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "An SVD and an orthonormal basis of the sampled range are used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "thm-real-gaussian-rangefinder-expected-spectral-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "source_section": "Statement",
+          "quote": "Let $G\\in F^{a\\times b}$ have the iid Gaussian law of\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. If $U,V$\nare compatible orthogonal matrices for $F=\\mathbb R$ or unitary matrices for\n$F=\\mathbb C$, then $U^*GV$ has the same iid law as $G$. In particular, if\n$W\\in F^{n\\times n}$ is orthogonal/unitary and $\\Omega\\in F^{n\\times\\ell}$\nis iid Gaussian, then any two disjoint row blocks of $W^*\\Omega$ are\nindependent standard Gaussian matrices.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge1$, $\\ell>k$, and let $G\\in F^{k\\times\\ell}$ have iid standard\nreal Gaussian or normalized complex Gaussian entries. Then\n$\\operatorname{rank}(G)=k$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-wide-gaussian-pseudoinverse-frobenius-moments",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge1$ and let $p$ be a positive integer, with $p\\ge2$ over $\\mathbb R$\nand $p\\ge1$ over normalized $\\mathbb C$. Let $G\\in F^{k\\times(k+p)}$ have iid entries as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. Then $G$\nhas full row rank almost surely and\n$$\n\\mathbb E\\|G^\\dagger\\|_F^2=\n\\begin{cases}k/(p-1),&F=\\mathbb R,\\\\k/p,&F=\\mathbb C.\\end{cases}\n$$\nThe complex entry convention is variance one, $\\mathbb E|G_{ij}|^2=1$. Write\n$G^\\dagger=G^+$ for the Moore–Penrose pseudoinverse of\n[[def-moore-penrose-pseudoinverse]]. On the full-row-rank event,\n$$G^\\dagger=G^*(GG^*)^{-1},\\qquad (G^\\dagger)^*G^\\dagger=(GG^*)^{-1}.$$\nHere $U\\sim\\Gamma(a,\\theta)$ means that $U$ has density\n$u^{a-1}e^{-u/\\theta}/(\\theta^a\\Gamma(a))$ for $u>0$. For every diagonal\nindex $i$, $((GG^*)^{-1})_{ii}$ has distribution $1/U$ with\n$U\\sim\\Gamma((p+1)/2,2)$ over $\\mathbb R$ and $U\\sim\\Gamma(p+1,1)$ over\n$\\mathbb C$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-wide-gaussian-pseudoinverse-spectral-moments-and-tail",
+          "source_section": "Statement",
+          "quote": "For $G\\in F^{k\\times(k+p)}$ as in\n[[lem-wide-gaussian-pseudoinverse-frobenius-moments]], put $X=\\|G^\\dagger\\|_2$.\nFor $0<q<(p+1)/2$ over $\\mathbb R$ and $0<q<p+1$ over normalized $\\mathbb C$,\n$$\n\\mathbb E X^{2q}\\le C_R(q):=\\frac{2^{-q}\\sqrt\\pi\\,\\Gamma((p+1)/2-q)\\Gamma(k/2+q)}{\\Gamma((p+1)/2)\\Gamma(k/2)\\Gamma(q+1/2)},\n$$\n$$\n\\mathbb E X^{2q}\\le C_C(q):=\\frac{\\Gamma(p+1-q)\\Gamma(k+q)}{\\Gamma(p+1)\\Gamma(k)\\Gamma(q+1)}.\n$$\nFor integers $p\\ge2$, writing $\\ell=k+p$ and $a=e\\sqrt\\ell/p$,\n$$\n\\mathbb E X^p\\le a^p\\quad(F=\\mathbb R),\\qquad\n\\mathbb E X^{2p}\\le a^{2p}\\quad(F=\\mathbb C).\n$$\nConsequently $\\mathbb E X\\le a$ and\n$$\n\\mathbb P\\{X>t\\}\\le\\min(1,(a/t)^p)\\quad(F=\\mathbb R),\\qquad\n\\mathbb P\\{X>t\\}\\le\\min(1,(a/t)^{2p})\\quad(F=\\mathbb C),\n$$\nfor $t>0$. In the randomized range-finder application $p\\ge2$, so these tails\nare integrable at infinity.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-real-scaled-gaussian-product-expectation",
+          "source_section": "Statement",
+          "quote": "Let $a,r,s,b$ be positive integers, let $S\\in\\mathbb R^{a\\times r}$ and $T\\in\\mathbb R^{s\\times b}$ be fixed,\nand let $G\\in\\mathbb R^{r\\times s}$ have independent standard real Gaussian\nentries. Then\n$$\\mathbb E\\|SGT\\|_F^2=\\|S\\|_F^2\\|T\\|_F^2,\\qquad\n\\mathbb E\\|SGT\\|_2\\le\\|S\\|_2\\|T\\|_F+\\|S\\|_F\\|T\\|_2.$$\nThe spectral estimate in this lemma is real-field only.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-randomized-rangefinder-deterministic-svd-partition-error",
+          "source_section": "Statement",
+          "quote": "Let $A\\in F^{m\\times n}$, $k\\ge1$, and $k<\\ell\\le\\min(m,n)$. Partition an\n$n\\times\\ell$ matrix $\\Omega$ in right-singular-vector coordinates as\n$V^*\\Omega=[\\Omega_1^T\\ \\Omega_2^T]^T$, where $\\Omega_1\\in F^{k\\times\\ell}$\nhas full row rank. If $Q$ is any orthonormal basis of $\\operatorname{Ran}(A\\Omega)$,\nthen\n$$\\|(I-QQ^*)A\\|_2\\le\\sigma_{k+1}+\\|\\Sigma_2\\Omega_2\\Omega_1^\\dagger\\|_2,$$\nwhere $A=U\\Sigma V^*$ is an SVD, $\\Sigma_2$ is the trailing block, and\n$\\sigma_{k+1}=0$ when fewer than $k+1$ singular values are positive. No\ninverse of the leading singular-value block is used, so this includes\n$\\operatorname{rank}(A)<k$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an\nintegrable real random variable, let $I\\subseteq\\mathbb R$ be an interval\ncontaining $X(\\omega)$ for almost every $\\omega$, and let $\\varphi:I\\to\\mathbb R$\nbe convex.\n\nAssume additionally that $\\varphi(X)$ is either integrable or nonnegative, so\nits expectation is defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Then\n$$\\varphi(\\mathbb E[X])\\le\\mathbb E[\\varphi(X)].$$\nIn the nonnegative case the right-hand side may be $+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-eckart-young-best-rank-k-approximation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, let\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nbe a singular value decomposition with $s_1\\ge\\cdots\\ge s_r>0$, and fix an\ninteger $k$ with $0\\le k<\\dim V$. Define\n\n$$T_kv:=\\sum_{j=1}^{\\min(k,r)} s_j\\langle v,e_j\\rangle f_j.$$\n\nThen $\\operatorname{rank}T_k\\le k$, one has\n\n$$\\lVert T-T_k\\rVert=s_{k+1}$$\n\nwith the convention $s_{k+1}=0$ when $k\\ge r$, and every linear map\n$A:V\\to W$ with $\\operatorname{rank}A\\le k$ satisfies\n\n$$\\lVert T-A\\rVert\\ge s_{k+1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F9], $\\sigma_{k+1}$ is the optimal rank-$k$ comparator. Choose an SVD $A=U\\Sigma V^*$ and write $V^*\\Omega=[\\Omega_1^T\\ \\Omega_2^T]^T$ with $k$ top rows. By [F1] the blocks are independent standard Gaussian matrices; by [F2] and the wide-row-rank result $\\Omega_1$ has full row rank almost surely. Thus [F6] gives $\\|A-QQ^*A\\|_2\\le\\sigma_{k+1}+\\|\\Sigma_2\\Omega_2\\Omega_1^\\dagger\\|_2$ off a null set. The error is bounded by $\\|A\\|_2$ for every draw, so the exceptional null set does not change its expectation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "F9",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $\\Omega_1$ and integrate first over the independent block $\\Omega_2$. By [F5], $\\mathbb E_{\\Omega_2}\\|\\Sigma_2\\Omega_2\\Omega_1^\\dagger\\|_2\\le\\|\\Sigma_2\\|_2\\|\\Omega_1^\\dagger\\|_F+\\|\\Sigma_2\\|_F\\|\\Omega_1^\\dagger\\|_2$. Tonelli [F8] and the finite moments [F3]–[F4] justify this iterated expectation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Take expectation over $\\Omega_1$. By [F7] and [F3], $\\mathbb E\\|\\Omega_1^\\dagger\\|_F\\le\\sqrt{k/(p-1)}$; [F4] supplies $\\mathbb E\\|\\Omega_1^\\dagger\\|_2\\le e\\sqrt{k+p}/p$. Since $\\|\\Sigma_2\\|_2=\\sigma_{k+1}$ and $\\|\\Sigma_2\\|_F=(\\sum_{j>k}\\sigma_j^2)^{1/2}$, substituting into steps 1.1–2.1 gives the claimed bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F3",
+            "F4",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "k>=2, p>=2 and ell<=min(m,n) force nonempty matrix blocks."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If A=0 then every sampled approximation and both error terms are zero; the deterministic bound in step 1.1 applies."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem requires k>=2; k=1 is outside this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Rank(A)<k and the exceptional null event for Omega_1 are covered by F2/F6 in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At p=2 the Frobenius inverse moment is finite; ell=min(m,n) is permitted by Statement and step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The SVD and finite Gaussian block split are chosen in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "thm-gaussian-rangefinder-expected-spectral-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-real-gaussian-rangefinder-expected-spectral-error",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the finite-dimensional Gaussian probability\nmeasure. Let $A\\in\\mathbb R^{m\\times n}$ be fixed, $k\\ge2$, $p\\ge2$,\n$\\ell=k+p\\le\\min(m,n)$, and draw $\\Omega\\in\\mathbb R^{n\\times\\ell}$ with\niid standard real Gaussian entries. If $Q$ is an orthonormal basis for\n$\\operatorname{Ran}(A\\Omega)$, then\n$$\\mathbb E\\|A-QQ^*A\\|_2\\le\n\\left(1+\\sqrt{\\frac{k}{p-1}}\\right)\\sigma_{k+1}\n+\\frac{e\\sqrt{k+p}}{p}\\left(\\sum_{j>k}\\sigma_j^2\\right)^{1/2}.$$\nThe rank of $Q$ may be smaller than $\\ell$; exact arithmetic is assumed.\nThe comparator $\\sigma_{k+1}$ is the minimum spectral error among all\nrank-at-most-$k$ approximations.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $F=\\mathbb R$, all hypotheses and constants coincide with [F1], which proves the claimed expected bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 covers the real-field branch.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proved real branch requires k>=2 and p>=2; the full-field complex claim remains escalated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "On the proved real branch A=0 gives zero error and zero right side by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem assumes k>=2; no k=1 claim is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The real branch includes rank-deficient A through its deterministic supplier in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proved real branch includes p=2 and ell=min(m,n) by Statement and step 1.1; the complex branch is not accepted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The real branch selects an SVD and Gaussian coordinate split in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ],
+      "escalation": {
+        "status": "owner-escalation",
+        "unresolved_supplier": "lem-normalized-complex-scaled-gaussian-product-expectation",
+        "affected_branch": "normalized-complex expected spectral error",
+        "note": "Only the real branch is proved by numbered steps. The current owner direction requires the normalized-complex branch; no source excerpt or acceptance is supplied for the missing exact product comparison."
+      }
+    },
+    "lem-orthogonal-projector-power-error-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an\nintegrable real random variable, let $I\\subseteq\\mathbb R$ be an interval\ncontaining $X(\\omega)$ for almost every $\\omega$, and let $\\varphi:I\\to\\mathbb R$\nbe convex.\n\nAssume additionally that $\\varphi(X)$ is either integrable or nonnegative, so\nits expectation is defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Then\n$$\\varphi(\\mathbb E[X])\\le\\mathbb E[\\varphi(X)].$$\nIn the nonnegative case the right-hand side may be $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose an SVD $A=U\\Sigma V^*$ and put $D=\\Sigma\\Sigma^*$ and $R=U^*(I-P)U$. Then $D$ is diagonal positive semidefinite and $R$ is an orthogonal projector. By [F1]–[F3], $\\|(I-P)A\\|_2^2=\\|RDR\\|_2$ and $\\|(I-P)(AA^*)^qA\\|_2^2=\\|RD^{2q+1}R\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\lambda=\\|RDR\\|_2=0$, [step 1.1] gives $\\|(I-P)A\\|_2=0$, so the asserted inequality follows. If $\\lambda>0$, choose a unit eigenvector $x$ for the top eigenvalue of $RDR$; then $Rx=x$ and $\\lambda=x^*Dx=\\sum_i d_i|x_i|^2$, with $d_i\\ge0$. The weights $|x_i|^2$ sum to $1$, so [F4] for $t\\mapsto t^{2q+1}$ gives $\\lambda^{2q+1}\\le\\sum_i d_i^{2q+1}|x_i|^2=x^*D^{2q+1}x\\le\\|RD^{2q+1}R\\|_2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute $\\lambda=\\|(I-P)A\\|_2^2$ from step 1.1 into step 2.1 and take the nonnegative $(2q+1)$st root. This yields the asserted inequality, also for $q=0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The matrix dimensions are finite positive dimensions and the assertion is for any such A."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The lambda=0 case is handled explicitly in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "q=0 is explicitly included in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero eigenvalues and non-full-rank A are permitted by the nonnegative diagonal D in steps 1.1–1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The exponent 2q+1 is positive for every integer q>=0, including q=0 in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "When lambda>0, a top unit eigenvector is selected in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "thm-randomized-power-rangefinder-error-transfer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-randomized-power-subspace-iteration-with-qr",
+          "source_section": "Definition",
+          "quote": "Input $F\\in\\{\\mathbb R,\\mathbb C\\}$, a fixed matrix $A\\in F^{m\\times n}$,\nintegers $\\ell\\ge1$ and $q\\ge0$, and draw $\\Omega\\in F^{n\\times\\ell}$ with\niid standard real or normalized complex Gaussian entries as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. Put $Q_0$\nequal to the orthonormal basis\nselected by the finite scan in [[alg-gaussian-randomized-range-finder]] for\n$\\operatorname{Ran}(A\\Omega)$. For $j=1,\\ldots,q$, form $A^*Q_{j-1}$ and\nselect $\\widetilde Q_j$ from its range by the same scan, then form\n$A\\widetilde Q_j$ and select $Q_j$ from its range by that scan. Return $Q_q$.\nThus exact QR/range orthogonalization follows each application of $A^*$ and\n$A$; empty or rank-deficient ranges return bases of their actual ranges. Each\nselected basis is a measurable finite-scan function of its input matrix; the\northogonal projector onto each returned range is independent of the basis\nchoice. The procedure is defined in exact arithmetic and makes no\nfinite-precision error guarantee.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-orthogonal-projector-power-error-inequality",
+          "source_section": "Statement",
+          "quote": "Let $A\\in F^{m\\times n}$, let $P$ be an orthogonal projector on $F^m$, and\nlet $q\\ge0$ be an integer. Then\n$$\\|(I-P)A\\|_2\\le\\|(I-P)(AA^*)^qA\\|_2^{1/(2q+1)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an\nintegrable real random variable, let $I\\subseteq\\mathbb R$ be an interval\ncontaining $X(\\omega)$ for almost every $\\omega$, and let $\\varphi:I\\to\\mathbb R$\nbe convex.\n\nAssume additionally that $\\varphi(X)$ is either integrable or nonnegative, so\nits expectation is defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Then\n$$\\varphi(\\mathbb E[X])\\le\\mathbb E[\\varphi(X)].$$\nIn the nonnegative case the right-hand side may be $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $\\xi$, write $S_0=\\operatorname{Ran}(A\\Omega(\\xi))$. At iteration $j$, the intermediate range is $A^*S_{j-1}$ and the next output range is $AA^*S_{j-1}$, because replacing a matrix by an orthonormal basis of its range preserves that range. Induction gives $\\operatorname{Ran}(Q_q)=S_q=\\operatorname{Ran}((AA^*)^qA\\Omega(\\xi))$, so its projector is the $P(\\xi)$ in the statement.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $Z=\\|(I-P)(AA^*)^qA\\|_2$. By [F2], $\\|(I-P)A\\|_2\\le Z^{1/(2q+1)}$ pointwise. Since $Z$ is integrable and $Z^{1/(2q+1)}\\le1+Z$, Jensen [F3] applied to the convex function $-t^{1/(2q+1)}$ gives $\\mathbb EZ^{1/(2q+1)}\\le(\\mathbb EZ)^{1/(2q+1)}$. Taking expectations of the pointwise inequality proves the result.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sketch width ell is a positive integer and the probability space is a probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If powered error Z=0, the pointwise inequality in step 2.1 forces original error zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At q=0 the exponent is one, covered by the Jensen argument in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Rank-deficient intermediate ranges are handled because each algorithm stage uses the actual range in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint q=0 is allowed, and the concavity/Jensen step is valid at exponent one in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No element is selected from a possibly empty family; the output is the actual finite-dimensional range."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "thm-real-gaussian-power-rangefinder-expected-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-real-gaussian-rangefinder-expected-spectral-error",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the finite-dimensional Gaussian probability\nmeasure. Let $A\\in\\mathbb R^{m\\times n}$ be fixed, $k\\ge2$, $p\\ge2$,\n$\\ell=k+p\\le\\min(m,n)$, and draw $\\Omega\\in\\mathbb R^{n\\times\\ell}$ with\niid standard real Gaussian entries. If $Q$ is an orthonormal basis for\n$\\operatorname{Ran}(A\\Omega)$, then\n$$\\mathbb E\\|A-QQ^*A\\|_2\\le\n\\left(1+\\sqrt{\\frac{k}{p-1}}\\right)\\sigma_{k+1}\n+\\frac{e\\sqrt{k+p}}{p}\\left(\\sum_{j>k}\\sigma_j^2\\right)^{1/2}.$$\nThe rank of $Q$ may be smaller than $\\ell$; exact arithmetic is assumed.\nThe comparator $\\sigma_{k+1}$ is the minimum spectral error among all\nrank-at-most-$k$ approximations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-randomized-power-rangefinder-error-transfer",
+          "source_section": "Statement",
+          "quote": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, let $(\\Xi,\\mathcal A,\\mathbb P)$ be a\nprobability space, let $A\\in F^{m\\times n}$ be fixed, let $\\ell\\ge1$ be an\ninteger, and let $q\\ge0$ be an integer. Let $\\Omega:\\Xi\\to F^{n\\times\\ell}$\nbe measurable and let $P:\\Xi\\to F^{m\\times m}$ be a measurable orthogonal\nprojector-valued map whose value $P(\\xi)$ projects onto the output range of the procedure in\n[[alg-randomized-power-subspace-iteration-with-qr]] applied to $A,\\Omega(\\xi),q$.\nAssume\n$$\\mathbb E\\|(I-P)(AA^*)^qA\\|_2<\\infty,$$\nwhere expectation is with respect to $\\mathbb P$. Then\n$$\\mathbb E\\|(I-P)A\\|_2\\le\n\\left(\\mathbb E\\|(I-P)(AA^*)^qA\\|_2\\right)^{1/(2q+1)}.$$\nThis is a transfer inequality; it assumes the powered error expectation has\nalready been bounded.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] to the fixed matrix $B=(AA^*)^qA$, which has the same dimensions as $A$ and uses the same Gaussian sketch dimensions. By [F3], its singular values are $\\sigma_j(B)=\\sigma_j(A)^{2q+1}$, including zero singular values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute the resulting bound for $\\mathbb E\\|(I-QQ^*)B\\|_2$ into the transfer inequality [F2]. Taking the nonnegative $1/(2q+1)$ power gives exactly the displayed expression.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The base hypotheses force positive dimensions and q is a nonnegative integer."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If A=0, B=(AA*)^qA=0 and both sides are zero by steps 1.1–1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "q=0 returns the real base range-finder bound through steps 1.1–1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The base theorem covers rank-deficient A, and the SVD power keeps zero singular values zero in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The base lower endpoint p=2 and the power endpoint q=0 are covered by the cited Statements and step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "An SVD for A is used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ]
+    },
+    "thm-gaussian-power-rangefinder-expected-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-real-gaussian-power-rangefinder-expected-error",
+          "source_section": "Statement",
+          "quote": "Under the real-field hypotheses of\n[[thm-real-gaussian-rangefinder-expected-spectral-error]], let $q\\ge0$ be an\ninteger, draw the same Gaussian sketch $\\Omega$, and let $Q$ be the basis\nreturned by [[alg-randomized-power-subspace-iteration-with-qr]] on $A,\\Omega,q$.\nEquivalently, if $B=(AA^*)^qA$, then $\\operatorname{Ran}(Q)=\\operatorname{Ran}(B\\Omega)$. Then\n$$\n\\mathbb E\\|(I-QQ^*)A\\|_2\\le\n\\left[\n\\left(1+\\sqrt{\\frac{k}{p-1}}\\right)\\sigma_{k+1}^{2q+1}\n+\\frac{e\\sqrt{k+p}}{p}\n\\left(\\sum_{j>k}\\sigma_j^{2(2q+1)}\\right)^{1/2}\n\\right]^{1/(2q+1)}.\n$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $F=\\mathbb R$, [F1] gives the displayed bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 covers the real-field branch.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem inherits positive dimensions from the base theorem and assumes integer q>=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proved real branch at A=0 is covered by the base theorem in step 1.1; complex remains escalated."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proved real q=0 branch is covered by step 1.1; complex remains escalated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proved real branch permits rank-deficient A through step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proved real branch includes p=2 and q=0 by step 1.1; complex remains escalated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The SVD transfer in the proved real branch is used at step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ],
+      "escalation": {
+        "status": "owner-escalation",
+        "unresolved_supplier": "lem-normalized-complex-scaled-gaussian-product-expectation",
+        "affected_branch": "normalized-complex expected spectral error",
+        "note": "Only the real branch is proved by numbered steps. The current owner direction requires the normalized-complex branch; no source excerpt or acceptance is supplied for the missing exact product comparison."
+      }
+    },
+    "ex-gaussian-rangefinder-exact-on-rank-k-matrices": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gaussian-randomized-range-finder",
+          "source_section": "Definition",
+          "quote": "Input a fixed matrix $A\\in F^{m\\times n}$, a positive integer sketch width $\\ell$,\nand a Gaussian draw primitive as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. Draw\n$\\Omega\\in F^{n\\times\\ell}$ with iid entries in the chosen field and form\n$Y=A\\Omega$. Select $Q$ deterministically by scanning columns of $Y$ in\norder, subtracting projections onto already retained columns, skipping zero\nresiduals, and normalizing each nonzero residual. In the complex case fix each\nphase by making its first nonzero coordinate positive real. Return this\northonormal basis $Q$ and the approximation $\\widehat A=QQ^*A$.\n\nThe basis has $r=\\operatorname{rank}(Y)\\le\\ell$ columns; a rank-deficient\nsample returns that smaller basis and is not an algorithm failure. The finite\nscan makes only finitely many exact zero/nonzero branches, and no vector is\ndivided by zero. These tests partition the input space into finitely many\nBorel strata; on each stratum, residual updates, normalization of nonzero\nvectors, and the first-nonzero-coordinate phase adjustment are continuous.\nThus the chosen basis and returned projector are Borel functions of the sketch.\nFor every $\\Omega$, including exceptional draws, the finite-dimensional range\nhas an orthonormal basis. No truncated rank-$k$ factorization, finite-precision\nstability result, or deterministic error certificate is part of this\nprocedure. Expectation statements below concern the draw of $\\Omega$ in exact\narithmetic.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "source_section": "Statement",
+          "quote": "Let $G\\in F^{a\\times b}$ have the iid Gaussian law of\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. If $U,V$\nare compatible orthogonal matrices for $F=\\mathbb R$ or unitary matrices for\n$F=\\mathbb C$, then $U^*GV$ has the same iid law as $G$. In particular, if\n$W\\in F^{n\\times n}$ is orthogonal/unitary and $\\Omega\\in F^{n\\times\\ell}$\nis iid Gaussian, then any two disjoint row blocks of $W^*\\Omega$ are\nindependent standard Gaussian matrices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-wide-gaussian-matrix-has-full-row-rank-almost-surely",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge1$, $\\ell>k$, and let $G\\in F^{k\\times\\ell}$ have iid standard\nreal Gaussian or normalized complex Gaussian entries. Then\n$\\operatorname{rank}(G)=k$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed diagonal matrix has rank $2$ and SVD $A=U\\Sigma V^*$ with $U=V=I$ and $\\Sigma_2=0$. Write $\\Omega_1$ for its first two rows. By [F2]–[F3], $\\Omega_1$ has row rank $2$ almost surely.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every such draw, $A\\Omega=\\begin{bmatrix}4&0\\\\0&1\\\\0&0\\\\0&0\\end{bmatrix}\\Omega$ has range exactly $\\operatorname{span}(e_1,e_2)$, since the first two rows of $\\Omega$ have rank $2$ and multiplication by $\\operatorname{diag}(4,1)$ preserves rank. Thus $QQ^*$ is the projector onto this span and $QQ^*A=A$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a 4 by 4 matrix and positive sketch dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The trailing singular block is exactly zero in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes target rank k=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The matrix has rank exactly k and the leading Gaussian block has full row rank almost surely in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement fixes p=2 and ell=4, satisfying p>=2 and ell<=min(m,n)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The displayed identity SVD and sampled range basis are explicit in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "claim": "Exact recovery for the displayed rank-2 matrix with k=p=2.",
+          "calculation": "A=diag(4,1,0,0), ell=4, and Omega_1 is 2 by 4 iid real Gaussian; its full row rank probability is one by the cited supplier. Hence Ran(A Omega)=span(e_1,e_2), QQ*A=A, and the residual norm is 0.",
+          "result": "The tail singular values are all 0, so both displayed error terms are 0."
+        }
+      ]
+    },
+    "ex-slow-singular-tail-rangefinder-error-term": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-real-gaussian-rangefinder-expected-spectral-error",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the finite-dimensional Gaussian probability\nmeasure. Let $A\\in\\mathbb R^{m\\times n}$ be fixed, $k\\ge2$, $p\\ge2$,\n$\\ell=k+p\\le\\min(m,n)$, and draw $\\Omega\\in\\mathbb R^{n\\times\\ell}$ with\niid standard real Gaussian entries. If $Q$ is an orthonormal basis for\n$\\operatorname{Ran}(A\\Omega)$, then\n$$\\mathbb E\\|A-QQ^*A\\|_2\\le\n\\left(1+\\sqrt{\\frac{k}{p-1}}\\right)\\sigma_{k+1}\n+\\frac{e\\sqrt{k+p}}{p}\\left(\\sum_{j>k}\\sigma_j^2\\right)^{1/2}.$$\nThe rank of $Q$ may be smaller than $\\ell$; exact arithmetic is assumed.\nThe comparator $\\sigma_{k+1}$ is the minimum spectral error among all\nrank-at-most-$k$ approximations.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The diagonal entries are decreasing, so they are the singular values of $A_n$, and $\\sigma_{k+1}=(k+1)^{-1/2}$ while $\\sum_{j>k}\\sigma_j^2=\\sum_{j=k+1}^n1/j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $x\\mapsto1/x$ is decreasing, $\\sum_{j=k+1}^n1/j\\ge\\int_{k+1}^{n+1}dx/x=\\log((n+1)/(k+1))$, which diverges with $n$. The coefficient $e\\sqrt{k+p}/p$ is positive and fixed, while the first-term coefficient and $\\sigma_{k+1}$ are fixed. Therefore the ratio of the second term to the first tends to infinity; choosing $n$ large makes the tail-Frobenius contribution dominate by any prescribed factor.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The family starts at n>=k+p with k,p>=2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every diagonal entry of A_n is positive; no zero spectrum is used."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The construction uses all indices j>k and has no one-dimensional boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Each A_n is full rank; the example concerns the growing squared tail."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For every finite n>=k+p the tail sum is positive, and the logarithmic lower bound in step 2.1 holds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For each finite n the displayed diagonal matrix and singular values are explicit in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "claim": "The tail-Frobenius term dominates the leading singular-value term for the finite family.",
+          "calculation": "For A_n=diag(j^{-1/2})_{j=1}^n, sigma_{k+1}=(k+1)^(-1/2) and sum_{j=k+1}^n sigma_j^2=sum_{j=k+1}^n 1/j >= log((n+1)/(k+1)).",
+          "result": "With k,p fixed, the second bound term grows like sqrt(log n) while the first is constant; their ratio is unbounded."
+        }
+      ]
+    },
+    "ex-power-rangefinder-loses-small-mode-without-qr": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-randomized-power-subspace-iteration-with-qr",
+          "source_section": "Definition",
+          "quote": "Input $F\\in\\{\\mathbb R,\\mathbb C\\}$, a fixed matrix $A\\in F^{m\\times n}$,\nintegers $\\ell\\ge1$ and $q\\ge0$, and draw $\\Omega\\in F^{n\\times\\ell}$ with\niid standard real or normalized complex Gaussian entries as in\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. Put $Q_0$\nequal to the orthonormal basis\nselected by the finite scan in [[alg-gaussian-randomized-range-finder]] for\n$\\operatorname{Ran}(A\\Omega)$. For $j=1,\\ldots,q$, form $A^*Q_{j-1}$ and\nselect $\\widetilde Q_j$ from its range by the same scan, then form\n$A\\widetilde Q_j$ and select $Q_j$ from its range by that scan. Return $Q_q$.\nThus exact QR/range orthogonalization follows each application of $A^*$ and\n$A$; empty or rank-deficient ranges return bases of their actual ranges. Each\nselected basis is a measurable finite-scan function of its input matrix; the\northogonal projector onto each returned range is independent of the basis\nchoice. The procedure is defined in exact arithmetic and makes no\nfinite-precision error guarantee.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Without intermediate QR, the second diagonal entry of $(AA^*)^qA\\Omega$ is $(2^{-10})^{2q+1}=2^{-90}<2^{-70}$, whereas the leading entry is $1$. The stated threshold therefore rounds the second column to zero, leaving rank $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With QR after each multiplication, the first sample is $A\\Omega=\\operatorname{diag}(1,2^{-10})$. Both columns are nonzero and orthogonal; because $2^{-10}>2^{-70}$, exact column normalization yields $Q_0=I_2$. Each subsequent $A^*Q$ and $A\\widetilde Q$ is again $\\operatorname{diag}(1,2^{-10})$, so the same QR step returns $I_2$ and neither mode is rounded away.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a 2 by 2 matrix and identity start block."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Thresholding rounds the powered second mode to zero while retaining the leading entry in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The power count q=4 and exponent 2q+1=9 are evaluated explicitly in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The unorthogonalized output loses rank while the QR procedure retains both modes in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The values 2^-90<2^-70<2^-10 verify both sides of the chosen threshold in steps 1.1–2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The identity sketch gives the explicit coordinate basis at step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states an estimate or one-way construction, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "claim": "The thresholded arithmetic separates the unorthogonalized and reorthogonalized outcomes.",
+          "calculation": "For A=diag(1,2^-10), q=4 gives the unorthogonalized second factor (2^-10)^9=2^-90<2^-70; after each QR the second column is normalized from 2^-10>2^-70.",
+          "result": "The unorthogonalized product has rank 1 after thresholding; every QR-reorthogonalized pass retains both coordinate directions."
+        }
+      ]
+    }
+  }
+}

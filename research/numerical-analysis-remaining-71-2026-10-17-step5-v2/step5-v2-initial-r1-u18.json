@@ -1,0 +1,141 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "18",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-cur-reconstruction-cores",
+      "model": "gpt-6-luna",
+      "context_sha256": "b14500552e7d6397ade3025b017fb3bfa6289c2747523a80d487e5cbe1bc7900",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The unqualified assertion that the cores are distinct is false as a matrix inequality: A=[1], I=J=(1) gives C=R=W=[1], all three pseudoinverses [1], and both cores [1]. At k=0 both cores are the unique 0-by-0 matrix. The Definition now explicitly permits coincidence and gives the scalar witness; neither core formula nor its scope is weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-cur-reconstruction-cores",
+      "disposition": "repaired",
+      "post_sha256": "4658c5df79f0e167dd90a129efe324e9cdfee9ff2a98b18b478c71c7ec2150f4",
+      "review_context_sha256": "e7ff182bed94bf12fe95b5105546f78c49bd6ba5e7e2a5a79a57a740ab13d6be",
+      "reason": "Checked all matrix shapes: W dagger and C dagger A R dagger are k-by-k, and both reconstructions are m-by-n, including empty selections. The two published Moore-Penrose dependencies supply the four equations and unique finite pseudoinverses; [1] satisfies those equations directly. Associativity gives the stated projected reconstruction. Replaced only the false unconditional distinctness sentence; selections, singular cases, and the projection-bound caveat are preserved. This is a repair-author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-skeleton-cur-exactness",
+    "thm-cur-projection-residual-bound",
+    "ex-exact-rank-two-skeleton-cur"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-cur-reconstruction-cores",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Definition, final paragraph",
+      "finding": "The assertion that the two core choices are distinct fails for A=[1], I=J=(1), and for k=0.",
+      "repair": "Explicitly permit equal core matrices and give the scalar witness, preserving both original formulas and the projection-bound caveat.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_files": [
+      "items/def-cur-reconstruction-cores.md",
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-18.pages.json",
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-18.proof-contracts.json"
+    ],
+    "interface_change": {
+      "section": "Definition",
+      "before": "The two core choices are distinct.",
+      "after": "The two core constructions may yield the same matrix: for $A=[1]$ and $I=J=(1)$, both cores equal $[1]$."
+    },
+    "dependencies_read": [
+      "items/def-moore-penrose-pseudoinverse.md",
+      "items/thm-moore-penrose-pseudoinverse-exists-and-is-unique.md"
+    ],
+    "consumer_dispositions": [
+      {
+        "id": "thm-skeleton-cur-exactness",
+        "path": "items/thm-skeleton-cur-exactness.md",
+        "affected_use": "Statement and F1 define C=A(:,J), R=A(I,:), W=A(I,J); proof step 3.1 identifies the skeleton reconstruction as C W dagger R.",
+        "disposition": "unchanged_sound",
+        "reason": "The unchanged proof establishes W dagger=W inverse and A=CW inverse R; it never needs unequal core values."
+      },
+      {
+        "id": "thm-cur-projection-residual-bound",
+        "path": "items/thm-cur-projection-residual-bound.md",
+        "affected_use": "Statement, F1 and proof step 1.1 identify C(C dagger A R dagger)R with (CC dagger)A(R dagger R).",
+        "disposition": "unchanged_sound",
+        "reason": "The contraction proof uses only the projected formula and orthogonal projectors. Its caveat does not assert inequality of the cores."
+      },
+      {
+        "id": "ex-exact-rank-two-skeleton-cur",
+        "path": "items/ex-exact-rank-two-skeleton-cur.md",
+        "affected_use": "F1 and Verification step 1.1 extract C,R,W, use W=I_2 and W dagger=I_2, and identify the reconstruction as CR.",
+        "disposition": "unchanged_sound",
+        "reason": "The direct product CR=A and rank calculation use only the skeleton formula, with no distinctness premise."
+      }
+    ],
+    "page_disposition": {
+      "path": "library/numerical-linear-algebra-and-approximation/interpolative-cur-and-nystrom-decompositions.md",
+      "affected_use": "CUR paragraph separately defines the skeleton and projected cores and assigns exactness and the residual bound to their respective formulas.",
+      "disposition": "unchanged_sound",
+      "reason": "Separately defined formulas may coincide; the page makes no unconditional inequality claim."
+    },
+    "outside_consumers": [],
+    "published_ledger_updates_needed": false,
+    "source_evidence": "Elementary matrix calculation and the two local Moore-Penrose dependencies; no external source consultation claimed.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-cur-reconstruction-cores.md --json",
+        "exit_code": 0,
+        "result": "1 file, 0 checked proofs, 0 failures; definition not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-cur-reconstruction-cores.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-cur-reconstruction-cores.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-18.proof-contracts.json --strict --items def-cur-reconstruction-cores,thm-skeleton-cur-exactness,thm-cur-projection-residual-bound,ex-exact-rank-two-skeleton-cur --json",
+        "exit_code": 0,
+        "result": "ok=true; all four selected contracts checked, with no errors or warnings."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-analysis-remaining-71-2026-10-17 --items def-cur-reconstruction-cores",
+        "exit_code": 0,
+        "result": "Final post_sha256 and review_context_sha256 copied into the review after examining the exact citation-mirror updates; hashes remain unchanged from the completed mathematical review."
+      }
+    ],
+    "pending": [],
+    "metadata_repairs": "Updated the assigned manifest Definition mirror and the three existing consumer F1 full-Definition citation quotes, under acquire/reread/edit/check/release locking. Consumer mathematical carriers and historical template_review/reviewed evidence were not edited.",
+    "additional_page_disposition": {
+      "path": "library/numerical-linear-algebra-and-approximation/interpolative-cur-and-nystrom-decompositions-examples.md",
+      "affected_use": "The page lists ex-exact-rank-two-skeleton-cur and describes its exact rank-two reconstruction.",
+      "disposition": "unchanged_sound",
+      "reason": "The page uses the unchanged skeleton reconstruction formula and makes no claim that the two core values differ."
+    },
+    "discovery": "Literal ID/dependency/reference search and a separate formula/terminology search found only the three recorded direct CUR item consumers; an unrelated Markov-chain skeleton-core terminology match has no CUR use. No outside or published consumer needs maintenance from this interface change."
+  }
+}

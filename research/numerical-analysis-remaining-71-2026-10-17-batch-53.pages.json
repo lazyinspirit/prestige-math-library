@@ -1,0 +1,438 @@
+[
+  {
+    "order": 2660,
+    "id": "discontinuous-galerkin-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Symmetric interior-penalty discontinuous Galerkin",
+    "companion": "discontinuous-galerkin-methods-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "finite-element-meshes-and-interpolation",
+      "ceas-lemma-and-aubin-nitsche-error-estimates"
+    ],
+    "items": [
+      {
+        "id": "lem-sipdg-physical-simplex-trace-green",
+        "kind": "lemma",
+        "title": "Sobolev traces and Gauss–Green formula on physical simplices",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-smooth-density-on-reference-simplex",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-holder-inequality-for-integrals",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.2.1, printed pp. 192–194: affine matching cells, face traces, and the elementwise Green identity used in SIP consistency."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§§3.1–3.3, printed pp. 1756–1759: elementwise Sobolev traces, integration by parts, consistency, and adjoint consistency."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $d\\ge2$, let $\\widehat S_d$ be the reference simplex, and let $F_K(\\widehat x)=b+B\\widehat x$ map $\\overline{\\widehat S_d}$ affinely onto a nondegenerate closed simplex $K$, with $\\det B>0$. Sobolev spaces on $K$ mean spaces on its open interior. For every scalar $u\\in W^{1,2}(K)$ and vector field $G\\in W^{1,2}(K;\\mathbb R^d)$, each physical facet has bounded $L^2$ traces $\\gamma_Fu$ and $\\gamma_FG$, obtained by affine transfer from the reference trace maps. These traces are independent of the chosen orientation-preserving reference map, and they satisfy\n$$\\int_K u\\,\\operatorname{div}G+\\nabla u\\cdot G\\,dx=\\sum_{F\\subset\\partial K}\\int_F(\\gamma_Fu)(\\gamma_FG)\\cdot n_{K,F}\\,dS,$$\nwhere $n_{K,F}$ is the outward unit normal."
+      },
+      {
+        "id": "def-sipdg-jump-average-convention",
+        "kind": "definition",
+        "title": "Jump and average conventions for symmetric interior-penalty DG",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.2.1, printed pp. 192–193: oriented interior faces, jumps, averages, and the one-sided boundary convention."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§§3.1–3.2, printed pp. 1756–1758: jump/average identities and the primal DG formulation."
+            }
+          ]
+        },
+        "statement": "Let $d\\ge2$ and let $\\mathcal T$ be a finite matching affine simplicial mesh of a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, with shape-regularity bound $\\sigma$, as in [[def-matching-affine-simplicial-meshes]]. Write $\\mathcal F_h^{\\rm int}$ for its interior facets and $\\mathcal F_h^{\\rm bdy}$ for its boundary facets, and put $\\mathcal F_h=\\mathcal F_h^{\\rm int}\\cup\\mathcal F_h^{\\rm bdy}$. Fix a degree $k\\in\\mathbb N_0$ for this broken space. The trial functions below belong to the broken scalar polynomial space $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$ from [[def-broken-and-conforming-polynomial-spaces]].\n\nFor each interior facet $F=K^-\\cap K^+$, choose a unit normal $n_F$ pointing from $K^-$ to $K^+$. For a scalar or vector field $g$ with traces from both cells, define\n$$[g]_F:=g^- - g^+,\\qquad \\{g\\}_F:=\\tfrac12(g^-+g^+).$$\nFor a boundary facet $F\\subset\\partial K\\cap\\partial\\Omega$, let $n_F=n_K$ be the outward unit normal and define $[g]_F:=g|_K$ and $\\{g\\}_F:=g|_K$. Reversing the chosen interior normal also reverses $[g]_F$, so the scalar jump/average contractions used in the form are independent of that choice.\n\nFor one-dimensional interval examples, use the following separate extension of the same formulas. At an interior point shared by a left cell $K^-$ and right cell $K^+$, orient from left to right and set $[g]_F=g^- - g^+$ and $\\{g\\}_F=(g^-+g^+)/2$. At either endpoint use the one-sided trace for both jump and average, and use counting measure on the zero-dimensional face. This extension is not an instance of the published $d\\ge2$ mesh definition above.\n\nThe following diagram records the interior orientation; the formulas above are the definitions, and the diagram is only a convention aid.\n\n```tikz\n\\begin{tikzpicture}[baseline=-0.5ex]\n  \\fill[blue!8] (0,0) rectangle (1.5,1.5);\n  \\fill[orange!10] (1.5,0) rectangle (3,1.5);\n  \\draw[thick] (0,0) rectangle (1.5,1.5);\n  \\draw[thick] (1.5,0) rectangle (3,1.5);\n  \\draw[very thick] (1.5,0)--(1.5,1.5);\n  \\draw[->,thick] (1.2,0.75)--(2.1,0.75) node[midway,below] {$n_F$};\n  \\node at (0.75,1.15) {$K^-$};\n  \\node at (2.25,1.15) {$K^+$};\n  \\node[rotate=90] at (1.5,0.75) {$F$};\n\\end{tikzpicture}\n```"
+      },
+      {
+        "id": "def-sipdg-bilinear-form-and-energy-norm",
+        "kind": "definition",
+        "title": "Symmetric interior-penalty DG form and energy seminorm",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-sipdg-jump-average-convention",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-sipdg-physical-simplex-trace-green",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.2.1–38.2.2, printed pp. 192–195: SIP bilinear form, gamma_0/h_F penalty, and broken energy norm."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§§3.2–3.3, printed pp. 1757–1759: primal formulation, consistency, and adjoint consistency."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice for the Sobolev notation below. Each cell $K$ is the closed simplex from [[def-matching-affine-simplicial-meshes]]; in $W^{m,2}(K)$ notation, $K$ means its open interior, and its facets are the boundary faces of that interior. Write $H^m(K):=W^{m,2}(K;\\mathbb R)$ for $m=1,2$. Use the mesh and jump convention of [[def-sipdg-jump-average-convention]]. Specialize [[def-broken-and-conforming-polynomial-spaces]] to scalar real polynomials of a fixed degree $k\\ge1$, so $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$. On every cell $K$, let $A_K\\in\\mathbb R^{d\\times d}$ be a constant symmetric matrix. Assume common bounds $0<\\lambda\\le\\Lambda<\\infty$ such that\n$$\\lambda|\\xi|^2\\le \\xi^TA_K\\xi\\le\\Lambda|\\xi|^2\\qquad(\\xi\\in\\mathbb R^d,\\ K\\in\\mathcal T).$$\nWrite $A|_K=A_K$, let $h_F:=\\operatorname{diam}(F)>0$, and fix a penalty parameter $\\gamma>0$. Define $\\mathcal D_h$ to consist of broken real-valued functions $v$ with $v|_K\\in H^1(K)$, distributional $\\operatorname{div}(A_K\\nabla v|_K)\\in L^2(K)$, and an $L^2(F)$ one-sided normal coefficient-flux trace $r_{K,F}(v)$ on every facet $F$ of each cell $K$. Precisely, $r_{K,F}(v)$ is the unique $L^2(F)$ function satisfying\n$$\\int_K A_K\\nabla v\\cdot\\nabla\\phi+\\operatorname{div}(A_K\\nabla v)\\,\\phi\\,dx=\\sum_{F\\subset\\partial K}\\int_F r_{K,F}(v)\\,\\gamma_F\\phi\\,dS\\qquad(\\phi\\in C^\\infty(\\overline K)).$$\nHere $\\gamma_F\\phi$ is the value trace from [[lem-sipdg-physical-simplex-trace-green]]; uniqueness follows by testing smooth functions supported near the relative interior of each facet, whose restrictions are dense in $L^2(F)$. If $F=K^-\\cap K^+$ and $n_F$ points outward from $K^-$, set $q_F(v):=\\tfrac12(r_{K^-,F}(v)-r_{K^+,F}(v))$; on a boundary facet set $q_F(v):=r_{K,F}(v)$ with the outward normal. These definitions agree with $\\{A\\nabla_hv\\}_F\\cdot n_F$ whenever the classical one-sided vector flux traces exist. Broken polynomials and cellwise $H^2$ functions belong to $\\mathcal D_h$ by [[lem-sipdg-physical-simplex-trace-green]]. For $v,w\\in\\mathcal D_h$, define\n$$a_h(v,w):=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(v)[w]_F\\,dS-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(w)[v]_F\\,dS+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\int_F[v]_F[w]_F\\,dS,$$\nAll facet integrals and $L^2(F)$ norms use $(d-1)$-dimensional surface measure for the stated mesh dimension $d\\ge2$. Counting measure is reserved for the separate one-dimensional interval examples in [[def-sipdg-jump-average-convention]]. The expression is real and symmetric.\n\nDefine the energy expression and its augmented version on $\\mathcal D_h$ by\n$$\\|v\\|_{DG}^2:=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla v\\,dx+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\|[v]_F\\|_{L^2(F)}^2,$$\n$$\\|v\\|_{DG,*}^2:=\\|v\\|_{DG}^2+\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v)\\|_{L^2(F)}^2.$$\nThe first expression is initially a seminorm on $V_h^{\\rm br}$; its definiteness is not part of this definition. The stated Sobolev notation follows [[def-sobolev-space-wkp-and-its-norm]]. Cellwise $H^2$ functions have the required value and normal coefficient-flux traces by [[lem-sipdg-physical-simplex-trace-green]], because $A_K$ is constant. The augmented expression is defined whenever $v\\in\\mathcal D_h$, so it applies in particular to the exact functions, dual functions and discrete polynomials used below.\n\nFor $f\\in L^2(\\Omega)$ define the discrete load $\\ell_h(w):=\\sum_{K\\in\\mathcal T}\\int_K f w\\,dx$. A symmetric interior-penalty DG solution is a function $u_h\\in V_h^{\\rm br}$ satisfying $a_h(u_h,w_h)=\\ell_h(w_h)$ for every $w_h\\in V_h^{\\rm br}$."
+      },
+      {
+        "id": "lem-sipdg-discrete-flux-inverse-bound",
+        "kind": "lemma",
+        "title": "Discrete inverse-trace bound for SIPDG coefficient fluxes",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.2.2, printed pp. 194–195: the discrete trace inequality used to bound the consistency flux."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§4.1, printed pp. 1763–1764: inverse-trace control of the face consistency terms."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $\\mathcal T$, $A_K$, $k$, $\\lambda$, $\\Lambda$, $h_F$, and $q_F$ be as in [[def-sipdg-bilinear-form-and-energy-norm]]. There is a constant $C_{\\rm flux}<\\infty$, depending only on $d$, $k$, $\\sigma$, $\\lambda$, and $\\Lambda$, such that every $v_h\\in V_h^{\\rm br}$ satisfies\n$$\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v_h)\\|_{L^2(F)}^2\\le C_{\\rm flux}\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v_h\\cdot\\nabla v_h\\,dx.$$\nThe constant is uniform over the mesh family and does not depend on its cell sizes. In particular, the penalty threshold derived from this estimate is mesh-degree and shape dependent; it is not a universal numerical constant."
+      },
+      {
+        "id": "lem-sipdg-energy-seminorm-is-a-norm",
+        "kind": "lemma",
+        "title": "The SIPDG broken energy expression is definite",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "def-matching-affine-simplicial-meshes",
+          "lem-sipdg-physical-simplex-trace-green",
+          "thm-holder-inequality-for-integrals",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.2.2, printed p. 194: why the broken energy expression is a norm under weak homogeneous Dirichlet enforcement."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§4.1, printed p. 1763: the mesh-dependent DG expressions are norms by the discrete Poincaré inequality."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let $\\|\\cdot\\|_{DG}$ be the energy expression from [[def-sipdg-bilinear-form-and-energy-norm]] on a finite matching simplicial mesh of a nonempty bounded polyhedral domain, with $\\lambda>0$ and $\\gamma>0$. Then $\\|\\cdot\\|_{DG}$ is a norm on $V_h^{\\rm br}$."
+      },
+      {
+        "id": "lem-sipdg-boundedness-augmented-norm",
+        "kind": "lemma",
+        "title": "Boundedness of the SIPDG form in the augmented norm",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.3, Lemma 38.9, printed pp. 197–198: face-aware boundedness of the SIP consistency terms."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§4.1, printed pp. 1763–1764: boundedness of the primal DG form in the face-aware norm."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the SIPDG setting of [[def-sipdg-bilinear-form-and-energy-norm]], with $\\gamma>0$. For all $v,w\\in\\mathcal D_h$,\n$$|a_h(v,w)|\\le C_B\\|v\\|_{DG,*}\\|w\\|_{DG,*},\\qquad C_B:=2+2\\gamma^{-1/2}.$$\nThe energy expression $\\|\\cdot\\|_{DG}$ is also a seminorm on $\\mathcal D_h$."
+      },
+      {
+        "id": "thm-sipdg-exact-consistency",
+        "kind": "theorem",
+        "title": "Exact consistency of the symmetric interior-penalty DG form",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "def-sipdg-jump-average-convention",
+          "lem-sipdg-physical-simplex-trace-green",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.2.1, Lemma 38.2, printed pp. 193–194: exact consistency by elementwise integration by parts."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§3.3, printed pp. 1758–1759: consistency and Galerkin orthogonality of the primal formulation."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Let the mesh, coefficients, and SIPDG form be as in [[def-sipdg-bilinear-form-and-energy-norm]]. Suppose $u|_K\\in H^2(K)$ on every cell, its facet traces agree across every interior facet, its boundary trace is zero, and $f|_K=-\\nabla\\cdot(A_K\\nabla u)$ on each cell with $f\\in L^2(\\Omega)$. Assume also that the normal coefficient fluxes agree across interior facets: $(A_{K^-}\\nabla u^- )\\cdot n_F=(A_{K^+}\\nabla u^+ )\\cdot n_F$. Then for every $w_h\\in V_h^{\\rm br}$,\n$$a_h(u,w_h)=\\ell_h(w_h):=\\sum_{K\\in\\mathcal T}\\int_K f w_h\\,dx.$$"
+      },
+      {
+        "id": "lem-sipdg-adjoint-consistency-h2",
+        "kind": "lemma",
+        "title": "SIPDG adjoint consistency for piecewise H2 dual solutions",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "lem-sipdg-physical-simplex-trace-green",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.2.1 and §38.3, printed pp. 193 and 198–199: the symmetric adjoint-consistency term and its duality role."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§3.3 and §5.1, printed pp. 1758–1759 and 1767–1768: the adjoint-consistency condition and its use in the L2 duality identity."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the mesh and coefficient hypotheses of [[def-sipdg-bilinear-form-and-energy-norm]]. Let $e|_K\\in H^2(K)$ on every cell, and let $z|_K\\in H^2(K)$ be a dual solution with matching interior traces, zero boundary trace, matching normal coefficient fluxes, and $-\\nabla\\cdot(A_K\\nabla z)=e$ on every cell. Then the SIPDG form, extended to these piecewise regular functions by its same formula, satisfies\n$$a_h(e,z)=\\|e\\|_{L^2(\\Omega)}^2.$$"
+      },
+      {
+        "id": "thm-sipdg-coercivity-large-penalty",
+        "kind": "theorem",
+        "title": "SIPDG coercivity above the discrete inverse-trace threshold",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "lem-sipdg-discrete-flux-inverse-bound",
+          "lem-sipdg-energy-seminorm-is-a-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.2.2, Lemma 38.6, printed pp. 194–195: inverse-trace threshold, coercivity, and well-posedness."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§4.2, printed pp. 1765–1766: penalty terms absorb the consistency terms once the threshold exceeds the inverse-trace bound."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Use the mesh, coefficient field, energy norm, and form of [[def-sipdg-bilinear-form-and-energy-norm]], and let $C_{\\rm flux}$ be the constant of [[lem-sipdg-discrete-flux-inverse-bound]]. If $\\gamma\\ge4C_{\\rm flux}$, then\n$$a_h(v_h,v_h)\\ge\\tfrac12\\|v_h\\|_{DG}^2\\qquad(v_h\\in V_h^{\\rm br}).$$\nThus the discrete bilinear form is coercive with constant $1/2$ in the broken energy norm. For every $f\\in L^2(\\Omega)$, the finite-dimensional SIPDG system has a unique solution. The sufficient threshold depends on the polynomial degree, shape regularity, and coefficient ellipticity bounds; no universal penalty value is asserted."
+      },
+      {
+        "id": "thm-sipdg-l2-error-under-adjoint-regularity",
+        "kind": "theorem",
+        "title": "SIPDG L2 error under adjoint consistency and dual approximation",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "lem-sipdg-physical-simplex-trace-green",
+          "thm-sipdg-exact-consistency",
+          "lem-sipdg-adjoint-consistency-h2",
+          "lem-sipdg-boundedness-augmented-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.3, Theorem 38.12 and its dual-problem setup, printed pp. 198–199: the s>1/2 regularity index and h^s ell_Omega^(1-s) L2 estimate."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§5.1, printed pp. 1767–1768: adjoint consistency, Galerkin orthogonality, and duality for the L2 error."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the SIPDG setting of [[def-sipdg-bilinear-form-and-energy-norm]]. Let $u$ satisfy all hypotheses of [[thm-sipdg-exact-consistency]], and let $u_h\\in V_h^{\\rm br}$ satisfy $a_h(u_h,v_h)=\\ell_h(v_h)$ for all $v_h\\in V_h^{\\rm br}$. Set $e:=u-u_h$, let $V:=H_0^1(\\Omega;\\mathbb R)=W_0^{1,2}(\\Omega;\\mathbb R)$ as in [[def-wkp-zero-as-a-sobolev-closure]], and let $h:=\\max_{K\\in\\mathcal T}h_K$, with $0<h\\le\\ell_\\Omega:=\\operatorname{diam}(\\Omega)$. Suppose $s\\in(1/2,1]$ and a dual solution $z_e\\in V$ exists satisfying\n$$\\sum_{K\\in\\mathcal T}\\int_KA_K\\nabla v\\cdot\\nabla z_e\\,dx=\\int_\\Omega ve\\,dx\\qquad(v\\in V),$$\nwith the following properties:\n\n1. Its one-sided normal coefficient-flux traces are in $L^2(F)$ in the weak Green sense defining $\\mathcal D_h$. In the branch $s=1$, assume also $z_e|_K\\in H^2(K)$ on every cell, with matching interior value traces, zero boundary value trace, and matching interior normal coefficient fluxes; then [[lem-sipdg-adjoint-consistency-h2]] gives $a_h(e,z_e)=\\|e\\|_{L^2(\\Omega)}^2$. In the branch $s<1$, assume this adjoint-consistency identity as an additional hypothesis. The weak dual equation gives $\\operatorname{div}(A_K\\nabla z_e)|_K=-e|_K\\in L^2(K)$, so the stated flux and trace conditions place $z_e$ in the form domain $\\mathcal D_h$ of [[def-sipdg-bilinear-form-and-energy-norm]].\n2. The specified normed dual-regularity space $\\mathcal R_s$ is a subspace of $V\\cap\\mathcal D_h$, and $\\|z_e\\|_{\\mathcal R_s}\\le C_{\\rm reg}\\|e\\|_{L^2(\\Omega)}$ for some $C_{\\rm reg}\\ge0$.\n3. There is $z_h\\in V_h^{\\rm br}$ such that\n$$\\|z_e-z_h\\|_{DG,*}\\le C_{\\rm app}h^s\\ell_\\Omega^{1-s}\\|z_e\\|_{\\mathcal R_s}.$$\nHere $C_{\\rm app}\\ge0$.\n\nThen\n$$\\|e\\|_{L^2(\\Omega)}\\le (2+2\\gamma^{-1/2})C_{\\rm app}C_{\\rm reg}h^s\\ell_\\Omega^{1-s}\\|e\\|_{DG,*}.$$\nThe theorem retains the dual regularity exponent and the half-order face-flux contribution in $\\|\\cdot\\|_{DG,*}$. It does not infer the dual approximation estimate or adjoint-consistency identity from elliptic regularity alone."
+      },
+      {
+        "id": "thm-sipdg-energy-error-estimate",
+        "kind": "theorem",
+        "title": "A direct Strang-type energy error estimate for SIPDG",
+        "deps": [
+          "def-sipdg-bilinear-form-and-energy-norm",
+          "thm-sipdg-coercivity-large-penalty",
+          "thm-sipdg-exact-consistency",
+          "lem-sipdg-discrete-flux-inverse-bound",
+          "lem-sipdg-boundedness-augmented-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VIII, Chapter 38: Discontinuous Galerkin",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap38.pdf",
+              "locator": "§38.3, Theorem 38.10, printed pp. 197–198: stability, consistency/boundedness, and the DG energy error estimate."
+            },
+            {
+              "title": "Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, and L. Donatella Marini, Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems, SIAM Journal on Numerical Analysis 39(5) (2002)",
+              "url": "https://www.math.purdue.edu/~santos/research/disc_galerkin_ref/siam_DG_2002.pdf",
+              "locator": "§5.1, printed pp. 1767–1768: the stable, consistent DG energy estimate derived from coercivity, boundedness, and approximation."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice and the mesh, coefficient, penalty, and exact-solution hypotheses of [[thm-sipdg-exact-consistency]] and [[thm-sipdg-coercivity-large-penalty]]. Let $u_h\\in V_h^{\\rm br}$ be the unique discrete solution, so $a_h(u_h,v_h)=\\ell_h(v_h)$ for every $v_h\\in V_h^{\\rm br}$. Let $C_{\\rm flux}$ be the constant in [[lem-sipdg-discrete-flux-inverse-bound]] and put $C_B:=2+2\\gamma^{-1/2}$. Then for every $w_h\\in V_h^{\\rm br}$,\n$$\\|u-u_h\\|_{DG}\\le\\bigl(1+2C_B\\sqrt{1+C_{\\rm flux}}\\bigr)\\|u-w_h\\|_{DG,*}.$$\nConsequently $\\|u-u_h\\|_{DG}\\le\\bigl(1+2C_B\\sqrt{1+C_{\\rm flux}}\\bigr)\\inf_{w_h\\in V_h^{\\rm br}}\\|u-w_h\\|_{DG,*}$. The augmented approximation term retains the face-flux trace needed to bound the SIP consistency terms; no approximation rate is asserted without a separate bound on that term."
+      }
+    ]
+  },
+  {
+    "order": 2661,
+    "id": "discontinuous-galerkin-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Symmetric interior-penalty discontinuous Galerkin — Examples",
+    "companion": "discontinuous-galerkin-methods",
+    "requires": [
+      "discontinuous-galerkin-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-sipdg-broken-function-is-not-h1",
+        "kind": "example",
+        "title": "A broken polynomial with a nonzero jump is not globally H1",
+        "deps": [
+          "def-sipdg-jump-average-convention",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "On the interval partition $K^-=(0,1/2)$, $K^+=(1/2,1)$, let $v=1$ on $K^-$ and $v=0$ on $K^+$. This is a broken piecewise-constant polynomial with jump $[v]=1$ at the interior face. Its distributional derivative is a point mass, so $v\\notin W^{1,2}(0,1)$."
+      },
+      {
+        "id": "ex-sipdg-one-dimensional-interior-jump",
+        "kind": "example",
+        "title": "One-dimensional SIPDG jump and penalty calculation",
+        "deps": [
+          "def-sipdg-jump-average-convention"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "This is a self-contained one-dimensional interval specialization of the jump convention in [[def-sipdg-jump-average-convention]]. Let $K^-=(0,1/2)$ and $K^+=(1/2,1)$, take unit coefficient, and set $h_F=1/2$ at the interior point face. Define $v(x)=x$ on $K^-$ and $v(x)=x-1$ on $K^+$. Then $v(0)=v(1)=0$, while the interior jump at $x=1/2$ is $1$ and the average derivative is $1$. The face contributions are $-\\{v'\\}[v]-\\{v'\\}[v]+\\gamma h_F^{-1}[v]^2$. With penalty parameter $\\gamma=1$, the bilinear form has value $a_h(v,v)=1$."
+      },
+      {
+        "id": "ex-sipdg-small-penalty-loses-coercivity",
+        "kind": "example",
+        "title": "A too-small SIPDG penalty destroys coercivity",
+        "deps": [
+          "def-sipdg-jump-average-convention"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Use the two-cell interval specialization and piecewise affine function described in **Given** below. At this mesh and with penalty $\\gamma=1/4$, the function satisfies $a_h(v,v)=-1/2$. Hence the form is not coercive in this case, even though its energy expression on $v$ is positive."
+      }
+    ]
+  }
+]

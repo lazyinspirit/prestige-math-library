@@ -1,0 +1,325 @@
+[
+  {
+    "order": 2578,
+    "id": "ewald-periodic-potentials-and-particle-mesh-error",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Ewald periodic potentials and particle mesh error",
+    "companion": "ewald-periodic-potentials-and-particle-mesh-error-examples",
+    "requires": [
+      "computed-fast-transforms-and-convolution",
+      "poisson-summation-sampling-and-lattice-duality"
+    ],
+    "items": [
+      {
+        "id": "def-ewald-causal-cardinal-spline-window",
+        "kind": "definition",
+        "title": "Causal cardinal spline window",
+        "deps": [
+          "def-convolution-of-two-functions-on-rn"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define the causal order-P cardinal window by its finite truncated-power formula so periodic assignment is pointwise and finite."
+      },
+      {
+        "id": "def-ewald-three-dimensional-periodic-source-data",
+        "kind": "definition",
+        "title": "Neutral point sources and Fourier data on a three-dimensional torus",
+        "deps": [
+          "def-full-rank-lattice-covolume-and-dual-lattice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Fix the physical and reciprocal lattices, torus coordinates, Fourier convention, and neutral finite source data."
+      },
+      {
+        "id": "lem-ewald-screened-coulomb-kernel-and-self-limit",
+        "kind": "lemma",
+        "title": "Gaussian screened Coulomb kernel and its self limit",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "thm-chain-rule",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "thm-ftc-first-part",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-gaussian-integral"
+        ],
+        "dependency_level": 0,
+        "strategy": "Differentiate the radial error-function potential, verify its distributional source by the flux at the origin, and compute the finite self part."
+      },
+      {
+        "id": "def-ewald-pme-cardinal-assignment-model",
+        "kind": "definition",
+        "title": "Periodic cardinal-spline assignment and unitary mesh transform",
+        "deps": [
+          "def-ewald-causal-cardinal-spline-window",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define the causal order-P periodic window, residue accumulation, signed retained modes, denominator guard, and exact output convention."
+      },
+      {
+        "id": "lem-ewald-gaussian-poisson-periodization",
+        "kind": "lemma",
+        "title": "Poisson periodization of a normalized Gaussian on a full-rank lattice",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "thm-poisson-summation-for-a-full-rank-lattice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Apply the published Schwartz lattice Poisson theorem only to the normalized Gaussian and convert its ordinary dual frequency to angular physical frequency."
+      },
+      {
+        "id": "lem-ewald-lattice-shell-gaussian-tail-controllers",
+        "kind": "lemma",
+        "title": "Uniform lattice-shell counts and explicit Gaussian tail controllers",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-full-rank-lattice-covolume-and-dual-lattice",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "lem-lattice-fundamental-parallelotope-partitions-euclidean-space",
+          "thm-integration-by-parts",
+          "thm-of-archimedean"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use disjoint balls around lattice points for a uniform shell count and an integral-test controller for every Gaussian-polynomial tail used later."
+      },
+      {
+        "id": "lem-ewald-smooth-torus-fourier-pairing",
+        "kind": "lemma",
+        "title": "Smooth torus test functions have rapidly convergent Fourier pairings",
+        "deps": [
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-character-orthogonality-on-a-lattice-fundamental-domain",
+          "lem-lattice-fundamental-parallelotope-partitions-euclidean-space",
+          "lem-lattice-periodic-continuous-functions-are-determined-by-their-lattice-fourier-coefficients",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integration-by-parts",
+          "thm-p-series-real-exponents",
+          "thm-uniform-derivative-limit-on-a-closed-interval",
+          "thm-weierstrass-m-test-for-complex-function-series"
+        ],
+        "dependency_level": 1,
+        "strategy": "Repeated periodic integration by parts gives coefficient decay; lattice counting and the uniform derivative theorem give convergence in every smooth seminorm."
+      },
+      {
+        "id": "lem-ewald-pme-spline-alias-and-dft-normalization",
+        "kind": "lemma",
+        "title": "Exact three-dimensional spline assignment aliases and FFT normalization",
+        "deps": [
+          "def-convolution-of-two-functions-on-rn",
+          "def-ewald-causal-cardinal-spline-window",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-ewald-pme-cardinal-assignment-model",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-p-series-real-exponents",
+          "thm-sine-and-cosine-derivatives",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-weierstrass-m-test-for-complex-function-series"
+        ],
+        "dependency_level": 2,
+        "strategy": "Prove the partition and Fourier multiplier of the causal cardinal window, derive every signed alias, and bound the source-alias series by explicit p-series remainders."
+      },
+      {
+        "id": "thm-ewald-neutral-periodic-poisson-green-function",
+        "kind": "theorem",
+        "title": "The mean-zero Fourier distribution solves the neutral periodic Poisson equation",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-smooth-torus-fourier-pairing"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the distribution by its polynomially bounded Fourier coefficients, test against all smooth periodic functions, and prove uniqueness after fixing the zero mode."
+      },
+      {
+        "id": "lem-ewald-pme-derivative-window-alias-bound",
+        "kind": "lemma",
+        "title": "Derivative-window alias bounds including the P=2 knot branch",
+        "deps": [
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-ewald-pme-cardinal-assignment-model",
+          "lem-ewald-pme-spline-alias-and-dft-normalization",
+          "thm-p-series-real-exponents",
+          "thm-uniform-derivative-limit-on-a-closed-interval"
+        ],
+        "dependency_level": 3,
+        "strategy": "For P>=3 sum the differentiated signed aliases with a p-series tail; for P=2 use the finite piecewise derivative-window formula and explicit knot values."
+      },
+      {
+        "id": "thm-ewald-alpha-independent-energy-and-potential",
+        "kind": "theorem",
+        "title": "The alpha-independent Ewald potential and renormalized energy",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-gaussian-poisson-periodization",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "lem-lattice-fundamental-parallelotope-partitions-euclidean-space",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-ewald-neutral-periodic-poisson-green-function",
+          "thm-gaussian-integral",
+          "thm-integration-by-parts",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Show the short and Gaussian-smoothed distributions sum to the unique neutral mean-zero solution, then take the regular part at each source."
+      },
+      {
+        "id": "thm-ewald-pme-reciprocal-energy-force-error-bound",
+        "kind": "theorem",
+        "title": "Deterministic PME reciprocal energy and force error, with exact self correction",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-ewald-pme-cardinal-assignment-model",
+          "lem-ewald-pme-derivative-window-alias-bound",
+          "lem-ewald-pme-spline-alias-and-dft-normalization",
+          "thm-chain-rule",
+          "thm-ewald-alpha-independent-energy-and-potential",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "dependency_level": 4,
+        "strategy": "Compare finite mesh and exact retained reciprocal energies and their declared forces by a product identity, separating source aliases, derivative aliases, gather error, and self correction."
+      },
+      {
+        "id": "thm-ewald-real-reciprocal-cutoff-error-bounds",
+        "kind": "theorem",
+        "title": "Explicit real and reciprocal Ewald energy and force tail bounds",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "thm-chain-rule",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-ewald-alpha-independent-energy-and-potential",
+          "thm-sine-and-cosine-derivatives",
+          "thm-uniform-derivative-limit-on-a-closed-interval",
+          "thm-uniform-limit-continuous-real-functions"
+        ],
+        "dependency_level": 4,
+        "strategy": "Bound omitted image and reciprocal shells separately for energy and differentiated force, retaining cell-shape constants and collision conventions."
+      },
+      {
+        "id": "thm-ewald-total-pme-error-certificate",
+        "kind": "theorem",
+        "title": "Total deterministic Ewald and particle-mesh error certificate",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-pme-cardinal-assignment-model",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "def-full-rank-lattice-covolume-and-dual-lattice",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "thm-chain-rule",
+          "thm-ewald-alpha-independent-energy-and-potential",
+          "thm-ewald-pme-reciprocal-energy-force-error-bound",
+          "thm-ewald-real-reciprocal-cutoff-error-bounds",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "dependency_level": 5,
+        "strategy": "Add exact cutoff tails, finite mesh alias and differentiation bounds, and supplied outward arithmetic radii; return inconclusive whenever a required radius or denominator guard is unavailable."
+      },
+      {
+        "id": "alg-ewald-certified-particle-mesh-evaluator",
+        "kind": "algorithm",
+        "title": "Certified three-dimensional particle-mesh Ewald evaluator",
+        "deps": [
+          "alg-na-computed-fast-transforms-and-convolution",
+          "def-countable-choice",
+          "def-ewald-pme-cardinal-assignment-model",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "thm-ewald-total-pme-error-certificate",
+          "thm-na-arbitrary-length-fft-correctness-and-cost"
+        ],
+        "dependency_level": 6,
+        "strategy": "Specify the charge spread, tensor FFT, safe deconvolution, reciprocal solve, gather, optional diagonal self correction, certified error ledger, and every failure status."
+      }
+    ]
+  },
+  {
+    "order": 2579,
+    "id": "ewald-periodic-potentials-and-particle-mesh-error-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Ewald periodic potentials and particle mesh error — Examples",
+    "companion": "ewald-periodic-potentials-and-particle-mesh-error",
+    "requires": [
+      "ewald-periodic-potentials-and-particle-mesh-error"
+    ],
+    "items": [
+      {
+        "id": "ex-ewald-nonneutral-zero-mode-obstruction",
+        "kind": "example",
+        "title": "A nonneutral periodic source has no periodic Poisson solution",
+        "deps": [
+          "def-ewald-three-dimensional-periodic-source-data"
+        ],
+        "dependency_level": 1,
+        "strategy": "Test the weak equation against the constant function to isolate the necessary zero-mode compatibility condition."
+      },
+      {
+        "id": "ex-ewald-neutral-dipole-cell",
+        "kind": "example",
+        "title": "A neutral dipole in a periodic cell",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "thm-ewald-alpha-independent-energy-and-potential"
+        ],
+        "dependency_level": 4,
+        "strategy": "Compute the signed structure factor of a two-charge neutral cell and state its zero mode and reciprocal selection."
+      },
+      {
+        "id": "ex-ewald-source-collision-field-singularity",
+        "kind": "example",
+        "title": "Point-source collision prevents a uniform field bound",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-screened-coulomb-kernel-and-self-limit",
+          "thm-ewald-alpha-independent-energy-and-potential"
+        ],
+        "dependency_level": 4,
+        "strategy": "Isolate the local 1/r and 1/r^2 singular terms and bound every remaining periodic contribution near a source."
+      },
+      {
+        "id": "ex-ewald-alpha-cutoff-tradeoff",
+        "kind": "example",
+        "title": "The Gaussian parameter trades real and reciprocal cutoff error",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-lattice-shell-gaussian-tail-controllers",
+          "thm-ewald-real-reciprocal-cutoff-error-bounds"
+        ],
+        "dependency_level": 5,
+        "strategy": "Read the opposite monotonic dependence on alpha from the two explicit Gaussian tail controllers at fixed cutoffs."
+      },
+      {
+        "id": "ex-ewald-mesh-energy-force-consistency",
+        "kind": "example",
+        "title": "Energy-gradient and declared mesh-force conventions",
+        "deps": [
+          "def-countable-choice",
+          "def-ewald-pme-cardinal-assignment-model",
+          "def-ewald-three-dimensional-periodic-source-data",
+          "lem-ewald-pme-spline-alias-and-dft-normalization",
+          "thm-ewald-pme-reciprocal-energy-force-error-bound"
+        ],
+        "dependency_level": 5,
+        "strategy": "Differentiate the finite mesh energy, exhibit the position-dependent diagonal term, and distinguish the P=2 knot branch from a classical gradient."
+      }
+    ]
+  }
+]

@@ -1,0 +1,498 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "56",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-supg-general-convection-diffusion-reaction-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "3c6ea5501d516a90b4703073758c6b14f87ef71426a7300c1e40e9a720390f35",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "An individual finite nondegenerate mesh has some finite maximum h_K/rho_K, which may diverge across meshes. The original each-mesh wording omitted the single family bound defined by def-matching-affine-simplicial-meshes and needed for the downstream interpolation constant. The Definition now explicitly requires one sigma for all cells of all meshes; coefficients, domain and solution class are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-supg-one-dimensional-convection-diffusion-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "34e9b964a75708b5dfc49f50cf1caa3d4f9034f3d068df7ca1c0bebbf780e156",
+      "outcome": "confirmed_nonfatal",
+      "reason": "For nonzero endpoint data the nodal set is an affine translate, not a vector subspace: zero need not satisfy the endpoints. Added the precise affine-space terminology and the explicit lifting ell(x)=(1-x)g0+xg1; V_h remains the homogeneous vector space. N=1 gives a singleton affine trial space and zero homogeneous space. Every actual trial set and PDE hypothesis is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-supg-pspg-grad-div-stokes-forms",
+      "model": "gpt-6-luna",
+      "context_sha256": "d7e3e1b105ad3e6bd608df08b10511bd3f23ee385834997659ed7a4c4f47902c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original hypotheses admit Omega=R^d, a one-cell constant velocity space, Q_h={0}, sigma=1, beta=f=0; the reaction pairing of that constant with itself is infinite. This is a failure of real bilinear-form well-definedness. Added L2 integrability of velocities, cellwise first derivatives/Laplacians, pressures and cellwise pressure gradients. Bounded coefficients and Cauchy-Schwarz now make every residual, load, mixed, diffusion and grad-div integral finite; finite sums and nonnegative finite parameters cause no additional issue. No boundary or stability claim was added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-supg-one-dimensional-l2-interpolation-estimate",
+      "model": "gpt-6-luna",
+      "context_sha256": "2e373bd0e307dfdec6022ab5bd005879281c9f3ad4a1aa367787d6c10c5bc061",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 attributed arbitrary-partition nodal interpolation to a model defining only a uniform P1 space, and that supplier never defines I_hu. The Statement itself defines the interpolant, so F1 now explicitly derives its affine/nodal properties from that definition; the inaccurate citation contract was removed. The existing proof is sound: averaging u-prime gives a cell derivative error at most h_K times M, integration gives h_K squared times M, and summing h_K fifth powers yields at most h to the fourth. The general partition and bound are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-supg-convection-boundary-layer-coarse-mesh",
+      "model": "gpt-6-luna",
+      "context_sha256": "2becfadcd148802fa05100029a5ec04e8b6645b983eea641c60bc4f4ac963b1f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 incorrectly presented the tau and Pe formulas as conclusions of the parameter-bound lemma. The residual-form Definition supplies tau and the model Definition supplies Pe; the facts now say so. F3 correctly records the lemma positivity and step 2.1 uses it to show D>0. Independently recomputed the two-cell equation D(2U-1)/h+b/2=0, D=(bh/2)coth(Pe), U=1/(exp(2Pe)+1), and the exact midpoint match. At x=.99, u_h=.98+.02U tends to .98 while the exponential exact solution tends to zero. The Example is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-supg-overlarge-stabilization-smears-solution",
+      "model": "gpt-6-luna",
+      "context_sha256": "efca2bf25f1ff42531e6037d4a4e83c3730aa6f21a4b61172f7fc48325649453",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The body and verification correctly use two half-unit cells and one interior hat-function coefficient. Only the title said one-cell; it now says two-cell. Checked the exact solution u=x-(exp(x)-1)/(e-1), u*=1/2-1/(sqrt(e)+1)>0, integral phi squared-gradient=4, integral phi=1/2, zero convection and stabilization load, and U=1/[8(1+M tau)]. Positivity of tau gives U tending to zero and the stated sufficient half-value threshold. The Example and verification are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-supg-general-convection-diffusion-reaction-model",
+      "disposition": "repaired",
+      "post_sha256": "6718f5edbbfe6ac387e3a08d4a9dfb8b523ee504ca092f5dcd60efa922f0430d",
+      "review_context_sha256": "98be78e4e9551ea833782ecf915cf8c37475f84bc80102d24f9655a4690ced04",
+      "reason": "An individual finite nondegenerate mesh has some finite maximum h_K/rho_K, which may diverge across meshes. The original each-mesh wording omitted the single family bound defined by def-matching-affine-simplicial-meshes and needed for the downstream interpolation constant. The Definition now explicitly requires one sigma for all cells of all meshes; coefficients, domain and solution class are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-supg-one-dimensional-convection-diffusion-model",
+      "disposition": "repaired",
+      "post_sha256": "962eb78e8884639f84d4e4f502b918ea2475d378b6efdaee59b57359662492b5",
+      "review_context_sha256": "fb02f6009ae7c25608f84cbdae0f40095aefb713eb21d909a968a60035903d37",
+      "reason": "For nonzero endpoint data the nodal set is an affine translate, not a vector subspace: zero need not satisfy the endpoints. Added the precise affine-space terminology and the explicit lifting ell(x)=(1-x)g0+xg1; V_h remains the homogeneous vector space. N=1 gives a singleton affine trial space and zero homogeneous space. Every actual trial set and PDE hypothesis is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-supg-pspg-grad-div-stokes-forms",
+      "disposition": "repaired",
+      "post_sha256": "47dc7e8ef66b5b3ffb81e311c078d8ac98932336f469ceb75631b9e9048fee4f",
+      "review_context_sha256": "2f672f41bb060f4a5e149dddcea20b4a491b4c358901b43710129970365bb4a5",
+      "reason": "The original hypotheses admit Omega=R^d, a one-cell constant velocity space, Q_h={0}, sigma=1, beta=f=0; the reaction pairing of that constant with itself is infinite. This is a failure of real bilinear-form well-definedness. Added L2 integrability of velocities, cellwise first derivatives/Laplacians, pressures and cellwise pressure gradients. Bounded coefficients and Cauchy-Schwarz now make every residual, load, mixed, diffusion and grad-div integral finite; finite sums and nonnegative finite parameters cause no additional issue. No boundary or stability claim was added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-supg-one-dimensional-l2-interpolation-estimate",
+      "disposition": "repaired",
+      "post_sha256": "ffa804ae9b0652189446feeb3a446a2efbf620b8946b47701ffba0d54a52cc1f",
+      "review_context_sha256": "8e525b723dc81eeee507a4aedfb8d6d8805b37b1bd350c637a06e713c215e11c",
+      "reason": "F1 attributed arbitrary-partition nodal interpolation to a model defining only a uniform P1 space, and that supplier never defines I_hu. The Statement itself defines the interpolant, so F1 now explicitly derives its affine/nodal properties from that definition; the inaccurate citation contract was removed. The existing proof is sound: averaging u-prime gives a cell derivative error at most h_K times M, integration gives h_K squared times M, and summing h_K fifth powers yields at most h to the fourth. The general partition and bound are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-supg-convection-boundary-layer-coarse-mesh",
+      "disposition": "repaired",
+      "post_sha256": "d71165e4a5bca1ee2ac185f4229be53fe7fc9ca49065a31856d3f383e7c31b99",
+      "review_context_sha256": "301be9a58de67e07d19c2868f0caea9cc3663182158a9f8facc02f1d35e9d6de",
+      "reason": "F3 incorrectly presented the tau and Pe formulas as conclusions of the parameter-bound lemma. The residual-form Definition supplies tau and the model Definition supplies Pe; the facts now say so. F3 correctly records the lemma positivity and step 2.1 uses it to show D>0. Independently recomputed the two-cell equation D(2U-1)/h+b/2=0, D=(bh/2)coth(Pe), U=1/(exp(2Pe)+1), and the exact midpoint match. At x=.99, u_h=.98+.02U tends to .98 while the exponential exact solution tends to zero. The Example is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-supg-overlarge-stabilization-smears-solution",
+      "disposition": "repaired",
+      "post_sha256": "11281a3c048c00644bc521b2cadf3ad8954b0fc3d995bb714cb0791dcde0cf4d",
+      "review_context_sha256": "24e054029427d5e7e0b603fc2adde80fc73f7acab5912a36bf3f2455202f3551",
+      "reason": "The body and verification correctly use two half-unit cells and one interior hat-function coefficient. Only the title said one-cell; it now says two-cell. Checked the exact solution u=x-(exp(x)-1)/(e-1), u*=1/2-1/(sqrt(e)+1)>0, integral phi squared-gradient=4, integral phi=1/2, zero convection and stabilization load, and U=1/[8(1+M tau)]. Positivity of tau gives U tending to zero and the stated sufficient half-value threshold. The Example and verification are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-supg-general-residual-form",
+    "lem-supg-general-p1-interpolation-estimate",
+    "thm-supg-general-p1-error-and-stability",
+    "def-supg-one-dimensional-residual-form",
+    "lem-supg-one-dimensional-l2-interpolation-estimate",
+    "lem-supg-one-dimensional-optimal-parameter",
+    "thm-supg-one-dimensional-consistency-coercivity",
+    "thm-supg-one-dimensional-energy-error",
+    "ex-supg-convection-boundary-layer-coarse-mesh",
+    "ex-supg-overlarge-stabilization-smears-solution",
+    "thm-supg-pspg-stokes-coercivity",
+    "ex-supg-q1-equal-order-pressure-checkerboard",
+    "ex-supg-grad-div-does-not-fix-pressure-kernel"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-supg-general-convection-diffusion-reaction-model",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "An individual finite nondegenerate mesh has some finite maximum h_K/rho_K, which may diverge across meshes. The original each-mesh wording omitted the single family bound defined by def-matching-affine-simplicial-meshes and needed for the downstream interpolation constant. The Definition now explicitly requires one sigma for all cells of all meshes; coefficients, domain and solution class are unchanged.",
+      "post_sha256": "6718f5edbbfe6ac387e3a08d4a9dfb8b523ee504ca092f5dcd60efa922f0430d",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-supg-one-dimensional-convection-diffusion-model",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "For nonzero endpoint data the nodal set is an affine translate, not a vector subspace: zero need not satisfy the endpoints. Added the precise affine-space terminology and the explicit lifting ell(x)=(1-x)g0+xg1; V_h remains the homogeneous vector space. N=1 gives a singleton affine trial space and zero homogeneous space. Every actual trial set and PDE hypothesis is unchanged.",
+      "post_sha256": "962eb78e8884639f84d4e4f502b918ea2475d378b6efdaee59b57359662492b5",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-supg-pspg-grad-div-stokes-forms",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "The original hypotheses admit Omega=R^d, a one-cell constant velocity space, Q_h={0}, sigma=1, beta=f=0; the reaction pairing of that constant with itself is infinite. This is a failure of real bilinear-form well-definedness. Added L2 integrability of velocities, cellwise first derivatives/Laplacians, pressures and cellwise pressure gradients. Bounded coefficients and Cauchy-Schwarz now make every residual, load, mixed, diffusion and grad-div integral finite; finite sums and nonnegative finite parameters cause no additional issue. No boundary or stability claim was added.",
+      "post_sha256": "47dc7e8ef66b5b3ffb81e311c078d8ac98932336f469ceb75631b9e9048fee4f",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-supg-one-dimensional-l2-interpolation-estimate",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "F1 attributed arbitrary-partition nodal interpolation to a model defining only a uniform P1 space, and that supplier never defines I_hu. The Statement itself defines the interpolant, so F1 now explicitly derives its affine/nodal properties from that definition; the inaccurate citation contract was removed. The existing proof is sound: averaging u-prime gives a cell derivative error at most h_K times M, integration gives h_K squared times M, and summing h_K fifth powers yields at most h to the fourth. The general partition and bound are preserved.",
+      "post_sha256": "ffa804ae9b0652189446feeb3a446a2efbf620b8946b47701ffba0d54a52cc1f",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-supg-convection-boundary-layer-coarse-mesh",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "F3 incorrectly presented the tau and Pe formulas as conclusions of the parameter-bound lemma. The residual-form Definition supplies tau and the model Definition supplies Pe; the facts now say so. F3 correctly records the lemma positivity and step 2.1 uses it to show D>0. Independently recomputed the two-cell equation D(2U-1)/h+b/2=0, D=(bh/2)coth(Pe), U=1/(exp(2Pe)+1), and the exact midpoint match. At x=.99, u_h=.98+.02U tends to .98 while the exponential exact solution tends to zero. The Example is unchanged.",
+      "post_sha256": "d71165e4a5bca1ee2ac185f4229be53fe7fc9ca49065a31856d3f383e7c31b99",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-supg-overlarge-stabilization-smears-solution",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "The body and verification correctly use two half-unit cells and one interior hat-function coefficient. Only the title said one-cell; it now says two-cell. Checked the exact solution u=x-(exp(x)-1)/(e-1), u*=1/2-1/(sqrt(e)+1)>0, integral phi squared-gradient=4, integral phi=1/2, zero convection and stabilization load, and U=1/[8(1+M tau)]. Positivity of tau gives U tending to zero and the stated sufficient half-value threshold. The Example and verification are unchanged.",
+      "post_sha256": "11281a3c048c00644bc521b2cadf3ad8954b0fc3d995bb714cb0791dcde0cf4d",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "no-update",
+      "reason": "No published consumer defect or outside-frontier affected consumer was discovered. All thirteen direct consumers of the three changed Definitions are draft frozen-frontier items; their exact mathematical uses and soundness dispositions are recorded in repair_notes.consumer_examinations. No published item was edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "obligations": [],
+    "completed": [
+      {
+        "id": "def-supg-general-convection-diffusion-reaction-model",
+        "claim": "Uniform inradius shape regularity over the entire mesh family; full original domain/coefficient boundary retained.",
+        "sources": [
+          "items/def-matching-affine-simplicial-meshes.md: Definition"
+        ],
+        "validation": "Mathematical review complete; focused mechanical checks pending.",
+        "unresolved": [],
+        "next_action": "Review one-dimensional model."
+      },
+      {
+        "id": "def-supg-one-dimensional-convection-diffusion-model",
+        "claim": "S_h(g0,g1)=ell+V_h with V_h homogeneous vector space; fixed uniform mesh, b nonzero, epsilon positive.",
+        "sources": [
+          "items/def-supg-one-dimensional-convection-diffusion-model.md: Definition"
+        ],
+        "validation": "Affine translation and N=1 boundary checked; focused mechanics pending.",
+        "unresolved": [],
+        "next_action": "Review Stokes residual forms."
+      },
+      {
+        "id": "def-supg-pspg-grad-div-stokes-forms",
+        "claim": "Finite real PSPG residual, mixed form, load and grad-div pairings under explicit L2 requirements; no new stability conclusion.",
+        "sources": [
+          "items/def-supg-pspg-grad-div-stokes-forms.md: Definition",
+          "items/thm-supg-pspg-stokes-coercivity.md: Statement and Proof 1.1"
+        ],
+        "validation": "Every product is L2 times L2 after bounded coefficient multiplication; focused mechanics pending.",
+        "unresolved": [],
+        "next_action": "Repair local interpolation premise attribution."
+      },
+      {
+        "id": "lem-supg-one-dimensional-l2-interpolation-estimate",
+        "claim": "For any finite strict partition of [0,1], ||u-I_hu||_2 <= h^2 ||u-second||_infinity for C2 u; Statement unchanged.",
+        "sources": [
+          "items/lem-supg-one-dimensional-l2-interpolation-estimate.md: Statement and Proof 1.1–3.1"
+        ],
+        "validation": "Scoped precheck: 1 checked, 0 failures. Strict one-item proof-contract: ok, 0 errors/warnings.",
+        "unresolved": [],
+        "next_action": "Repair boundary-layer example fact attribution."
+      },
+      {
+        "id": "ex-supg-convection-boundary-layer-coarse-mesh",
+        "claim": "For fixed b>0, epsilon>0, f=0, endpoint 0/1 and h=1/2, exact SUPG nodal fitting coexists with .98 limiting off-node error.",
+        "sources": [
+          "items/def-supg-one-dimensional-convection-diffusion-model.md: Definition",
+          "items/def-supg-one-dimensional-residual-form.md: Definition",
+          "items/lem-supg-one-dimensional-optimal-parameter.md: Statement and Proof",
+          "items/ex-supg-convection-boundary-layer-coarse-mesh.md: Verification 1.1–3.1"
+        ],
+        "dependencies": [
+          "def-supg-one-dimensional-convection-diffusion-model",
+          "def-supg-one-dimensional-residual-form",
+          "lem-supg-one-dimensional-optimal-parameter"
+        ],
+        "validation": "Strict scoped proof-contract check: ok, no errors or warnings.",
+        "unresolved": [],
+        "next_action": "Correct overlarge-parameter example title and finish focused validation."
+      },
+      {
+        "id": "ex-supg-overlarge-stabilization-smears-solution",
+        "claim": "Fixed two-cell, one-degree-of-freedom homogeneous SUPG solve with epsilon=b=f=1 and oversized M tau.",
+        "sources": [
+          "items/ex-supg-overlarge-stabilization-smears-solution.md: Example and Verification 1.1–2.1",
+          "items/def-supg-one-dimensional-residual-form.md: Definition",
+          "items/lem-supg-one-dimensional-optimal-parameter.md: Statement"
+        ],
+        "dependencies": [
+          "def-supg-one-dimensional-convection-diffusion-model",
+          "def-supg-one-dimensional-residual-form",
+          "lem-supg-one-dimensional-optimal-parameter"
+        ],
+        "validation": "Title mirror corrected; full focused checks passed.",
+        "unresolved": [],
+        "next_action": "Handoff to engine for consumer context work and subsequent independent rejudgment."
+      }
+    ],
+    "consumer_examinations": [
+      {
+        "supplier": "def-supg-general-convection-diffusion-reaction-model",
+        "id": "def-supg-general-residual-form",
+        "path": "items/def-supg-general-residual-form.md",
+        "affected_use": "Definition: Use the model and notation; delta_K and cell residuals on the matching mesh.",
+        "disposition": "unchanged_sound",
+        "reason": "The same finite simplices and coefficients remain admissible under the intended uniform family condition. No parameter formula or integral changes."
+      },
+      {
+        "supplier": "def-supg-general-convection-diffusion-reaction-model",
+        "id": "lem-supg-general-p1-interpolation-estimate",
+        "path": "items/lem-supg-general-p1-interpolation-estimate.md",
+        "affected_use": "Statement and Given: mesh family with shape-regularity bound sigma; Proof 2.1 uses |grad lambda_i| <= sigma/h_K.",
+        "disposition": "unchanged_sound",
+        "reason": "Its explicit family-bound assumption is now supplied verbatim by the model; the Taylor estimate and finite sum remain valid. Owning contract supplier quotation may need mechanical refresh by the owner."
+      },
+      {
+        "supplier": "def-supg-general-convection-diffusion-reaction-model",
+        "id": "thm-supg-general-p1-error-and-stability",
+        "path": "items/thm-supg-general-p1-error-and-stability.md",
+        "affected_use": "Statement imports the model; Proof 1.3 and 6.1 use a mesh-independent interpolation constant C_I.",
+        "disposition": "unchanged_sound",
+        "reason": "Uniform family shape regularity supplies exactly the dependence already declared for C_I and C_*; no theorem clause changes. Owning supplier quotation may require owner refresh."
+      },
+      {
+        "supplier": "def-supg-general-convection-diffusion-reaction-model",
+        "path": "library/numerical-pdes-and-spatial-discretization/supg-and-residual-based-stabilized-finite-elements.md",
+        "affected_use": "Page summary: multidimensional P1 branch with reaction-divergence positivity and small stabilization.",
+        "disposition": "unchanged_sound",
+        "reason": "The page asserts no incompatible mesh assumptions or broader error scope."
+      },
+      {
+        "supplier": "def-supg-one-dimensional-convection-diffusion-model",
+        "id": "def-supg-one-dimensional-residual-form",
+        "path": "items/def-supg-one-dimensional-residual-form.md",
+        "affected_use": "Definition: w in S_h(g0,g1)+C2, v_h in V_h; trial/test spaces and uniform h, Pe.",
+        "disposition": "unchanged_sound",
+        "reason": "The sum of sets and cellwise residual integrals require no vector-space structure on S_h. The explicit affine lift preserves all admissible functions."
+      },
+      {
+        "supplier": "def-supg-one-dimensional-convection-diffusion-model",
+        "id": "lem-supg-one-dimensional-l2-interpolation-estimate",
+        "path": "items/lem-supg-one-dimensional-l2-interpolation-estimate.md",
+        "affected_use": "Facts F1 and Proof 1.1 refer to nodal affine interpolation on arbitrary interval cells.",
+        "disposition": "unchanged_sound",
+        "reason": "The affine-space correction has no effect on the estimate. Its separately assigned overstatement of F1 will be repaired locally without changing Statement."
+      },
+      {
+        "supplier": "def-supg-one-dimensional-convection-diffusion-model",
+        "id": "lem-supg-one-dimensional-optimal-parameter",
+        "path": "items/lem-supg-one-dimensional-optimal-parameter.md",
+        "affected_use": "Facts F1 and Proof 3.1 use Pe=|b|h/(2epsilon)>0.",
+        "disposition": "unchanged_sound",
+        "reason": "No coefficient, mesh or Peclet formula changes; the parameter inequalities are unaffected."
+      },
+      {
+        "supplier": "def-supg-one-dimensional-convection-diffusion-model",
+        "id": "thm-supg-one-dimensional-consistency-coercivity",
+        "path": "items/thm-supg-one-dimensional-consistency-coercivity.md",
+        "affected_use": "Statement assumes g0=g1=0; Proof 3.1 uses the finite-dimensional vector space V_h.",
+        "disposition": "unchanged_sound",
+        "reason": "The zero-data space is exactly the vector space needed for the kernel/bijectivity argument."
+      },
+      {
+        "supplier": "def-supg-one-dimensional-convection-diffusion-model",
+        "id": "thm-supg-one-dimensional-energy-error",
+        "path": "items/thm-supg-one-dimensional-energy-error.md",
+        "affected_use": "Statement assumes the homogeneous problem; Proof 1.1 puts I_hu and e_h in V_h.",
+        "disposition": "unchanged_sound",
+        "reason": "Zero endpoints still give I_hu and the discrete error in V_h; the interpolation and energy estimates are unchanged."
+      },
+      {
+        "supplier": "def-supg-one-dimensional-convection-diffusion-model",
+        "id": "ex-supg-convection-boundary-layer-coarse-mesh",
+        "path": "items/ex-supg-convection-boundary-layer-coarse-mesh.md",
+        "affected_use": "Verification 2.1 writes u_h=U phi+chi_h with chi_h in S_h(0,1).",
+        "disposition": "unchanged_sound",
+        "reason": "This is precisely an affine lifting and uses no vector-space assertion for the nonzero-data set. The assigned F3 citation correction remains pending."
+      },
+      {
+        "supplier": "def-supg-one-dimensional-convection-diffusion-model",
+        "id": "ex-supg-overlarge-stabilization-smears-solution",
+        "path": "items/ex-supg-overlarge-stabilization-smears-solution.md",
+        "affected_use": "Example and Verification 1.2 use the two-cell homogeneous P1 space spanned by phi.",
+        "disposition": "unchanged_sound",
+        "reason": "Only V_h is used and it remains a vector space; no scalar equation or limit changes."
+      },
+      {
+        "supplier": "def-supg-one-dimensional-convection-diffusion-model",
+        "path": "library/numerical-pdes-and-spatial-discretization/supg-and-residual-based-stabilized-finite-elements.md",
+        "affected_use": "Page summary uses the homogeneous one-dimensional branch and exact tau parameter.",
+        "disposition": "unchanged_sound",
+        "reason": "The page retains the zero-data vector space and makes no assertion that the lifted trial set is a vector space."
+      },
+      {
+        "supplier": "def-supg-pspg-grad-div-stokes-forms",
+        "id": "thm-supg-pspg-stokes-coercivity",
+        "path": "items/thm-supg-pspg-stokes-coercivity.md",
+        "affected_use": "Statement and F1 import the PSPG residual and grad-div terms; Proof 1.1 cancels mixed pairings and sets cell Laplacians to zero.",
+        "disposition": "unchanged_sound",
+        "reason": "Finite bounded simplicial cells and polynomial velocities/pressures give L2 values and every required derivative. The diagonal identity, norm definiteness and finite-dimensional unique solve are unchanged."
+      },
+      {
+        "supplier": "def-supg-pspg-grad-div-stokes-forms",
+        "id": "ex-supg-q1-equal-order-pressure-checkerboard",
+        "path": "items/ex-supg-q1-equal-order-pressure-checkerboard.md",
+        "affected_use": "F1 and Verification 3.1 use the PSPG residual at u_h=0, p_h=q_h, f=0, yielding sum tau_K ||grad q_h||^2.",
+        "disposition": "unchanged_sound",
+        "reason": "The finite 2x2 square has bounded polynomial cells, so all added L2 requirements hold; the 8/3 per-cell gradient calculation and divergence orthogonality remain unchanged."
+      },
+      {
+        "supplier": "def-supg-pspg-grad-div-stokes-forms",
+        "id": "ex-supg-grad-div-does-not-fix-pressure-kernel",
+        "path": "items/ex-supg-grad-div-does-not-fix-pressure-kernel.md",
+        "affected_use": "F1 and Verification 1.1 use only the mixed pressure/divergence and grad-div pairings on the same periodic square.",
+        "disposition": "unchanged_sound",
+        "reason": "All functions and cell derivatives are L2 on the bounded finite mesh; the pair (0,q_h) still annihilates the form without PSPG."
+      },
+      {
+        "supplier": "def-supg-pspg-grad-div-stokes-forms",
+        "path": "library/numerical-pdes-and-spatial-discretization/supg-and-residual-based-stabilized-finite-elements.md",
+        "affected_use": "Page summary distinguishes the P1 Stokes stabilization norm from mesh-uniform pressure estimates.",
+        "disposition": "unchanged_sound",
+        "reason": "The page uses the bounded simplicial theorem; integrability is automatic and no page assertion changes."
+      }
+    ],
+    "repair_complete": true,
+    "independent_review_of_repairs_claimed": false,
+    "source_consultation": "All six assigned items, owning contracts and page interfaces, the complete cited local model/form/parameter arguments, and all direct consumer uses were inspected. These elementary affine-space, L2 product, calculus and finite-element computations are familiar. No external URL was consulted; historical source-reading claims in existing contracts are not adopted as this review evidence.",
+    "interface_changes": [
+      "def-supg-general-convection-diffusion-reaction-model",
+      "def-supg-one-dimensional-convection-diffusion-model",
+      "def-supg-pspg-grad-div-stokes-forms"
+    ],
+    "unchanged_interfaces": [
+      "lem-supg-one-dimensional-l2-interpolation-estimate",
+      "ex-supg-convection-boundary-layer-coarse-mesh",
+      "ex-supg-overlarge-stabilization-smears-solution"
+    ],
+    "downstream_scope": "Only the three original Definition sections changed. Direct old/current dependency and reference uses were searched in items/ and library/; no aliases or outside consumers were found. Proof/fact/title edits do not propagate. No consumer item was edited; the engine owns subsequent frontier owner/context processing. Supplier quote mirrors in unassigned consumers remain owner metadata work, not mathematical defects.",
+    "metadata_repairs": [
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-56.pages.json: assigned three Definition mirrors and two-cell example title only.",
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-56.proof-contracts.json: removed interpolation F1 citation; refreshed assigned examples F1 model quotes and boundary-layer step 2.1 derivation. Shared writes used acquire/reread/edit/check/release; original historical review records retained."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/def-supg-general-convection-diffusion-reaction-model.md items/def-supg-one-dimensional-convection-diffusion-model.md items/def-supg-pspg-grad-div-stokes-forms.md items/lem-supg-one-dimensional-l2-interpolation-estimate.md items/ex-supg-convection-boundary-layer-coarse-mesh.md items/ex-supg-overlarge-stabilization-smears-solution.md",
+        "exit_code": 0,
+        "result": "6 files; 3 proof sections checked, 0 failures; three definitions not applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs --json items/def-supg-general-convection-diffusion-reaction-model.md items/def-supg-one-dimensional-convection-diffusion-model.md items/def-supg-pspg-grad-div-stokes-forms.md items/lem-supg-one-dimensional-l2-interpolation-estimate.md items/ex-supg-convection-boundary-layer-coarse-mesh.md items/ex-supg-overlarge-stabilization-smears-solution.md",
+        "exit_code": 0,
+        "result": "6 checked, 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-56.proof-contracts.json --strict --items def-supg-general-convection-diffusion-reaction-model,def-supg-one-dimensional-convection-diffusion-model,def-supg-pspg-grad-div-stokes-forms,lem-supg-one-dimensional-l2-interpolation-estimate,ex-supg-convection-boundary-layer-coarse-mesh,ex-supg-overlarge-stabilization-smears-solution --json",
+        "exit_code": 0,
+        "result": "All six assigned contracts checked; ok:true, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-supg-general-convection-diffusion-reaction-model.md items/def-supg-one-dimensional-convection-diffusion-model.md items/def-supg-pspg-grad-div-stokes-forms.md items/lem-supg-one-dimensional-l2-interpolation-estimate.md items/ex-supg-convection-boundary-layer-coarse-mesh.md items/ex-supg-overlarge-stabilization-smears-solution.md",
+        "exit_code": 0,
+        "result": "6 items, 9 steps, 0 defects; run once after all final item edits."
+      },
+      {
+        "command": "In-memory assigned source/guard/interface/manifest checks",
+        "exit_code": 0,
+        "result": "All six current itemHashGuard values match the recorded reviews and all pre-edit guards match the frozen assignment; only three Definitions changed; 13 consumers are in frozen frontier; assigned title and Definition manifest mirrors match current source."
+      }
+    ],
+    "operational_attempts": [
+      "An initial direct node tools/precheck.mts --help invocation failed with ERR_UNKNOWN_FILE_EXTENSION; corrected focused execution used tools/tsx-run.mjs and passed.",
+      "rendercheck.mjs does not implement --help; that unintended unscoped read-only invocation was interrupted without a result. The subsequent explicit six-item render check passed."
+    ],
+    "remaining_obligations": [],
+    "handoff": "No new items, published repairs, outside maintenance, unresolved mathematics or assigned gate diagnostics. The controller retains independent rejudgment, consumer-context routing, fatal-threshold rounds and certification duties."
+  },
+  "supporting_evidence": {
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-56.pages.json": "25c21159d01bf2713bd4f29e1934b08ee9b791f558c5893b6a3f8a926c34a11b",
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-56.proof-contracts.json": "e3626206db05a31aab6b0201200172e3ffc2bbf88c598ba54391c9a55b6593e5"
+  }
+}

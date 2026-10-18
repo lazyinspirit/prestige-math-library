@@ -1,0 +1,250 @@
+[
+  {
+    "order": 2602,
+    "id": "square-root-covariance-update-error-and-stability",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Square root covariance update error and stability",
+    "companion": "square-root-covariance-update-error-and-stability-examples",
+    "requires": [
+      "numerical-algebraic-riccati-equations-and-stabilizing-branches",
+      "kalman-filtering"
+    ],
+    "items": [
+      {
+        "id": "lem-square-root-kalman-householder-error-rational-envelope",
+        "kind": "lemma",
+        "title": "An explicit rational envelope for the scaled Householder QR error",
+        "deps": [
+          "lem-scaled-householder-step-meets-local-backward-error-premise"
+        ],
+        "justified_by": [],
+        "source_path": "items/lem-square-root-kalman-householder-error-rational-envelope.md",
+        "statement": "Let $q\\ge n\\ge1$, $u>0$, and let $\\kappa_q$ be the local scaled-Householder coefficient of [[lem-scaled-householder-step-meets-local-backward-error-premise]] at active row dimension $q$. Set $$ \\beta_{q,n}=(1+\\kappa_q)^n-1,\\qquad C_{q,n}=200qn. $$ If $C_{q,n}u<1$, then $$ \\beta_{q,n}\\le\\eta_{q,n}:=\\frac{C_{q,n}u}{1-C_{q,n}u}. $$ Thus the QR backward-error factor can be bounded by the stated rational dimension-dependent expression in this precision range.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-square-root-kalman-gram-perturbation-bound",
+        "kind": "lemma",
+        "title": "A factor perturbation gives an explicit Gram-matrix error",
+        "deps": [
+          "def-frobenius-matrix-norm",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $G,E\\in\\mathbb R^{m\\times n}$ and set $\\widehat G=G+E$. Then $$ \\|\\widehat G\\widehat G^T-GG^T\\|_F \\le 2\\|G\\|_F\\|E\\|_F+\\|E\\|_F^2. $$ The estimate is valid for all ranks, including $G=0$ and rank-deficient factors.",
+        "source_path": "items/lem-square-root-kalman-gram-perturbation-bound.md"
+      },
+      {
+        "id": "lem-square-root-kalman-measurement-block-factor-identity",
+        "kind": "lemma",
+        "title": "The block QR measurement update gives the canonical Kalman update",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-one-step-kalman-gaussian-conditioning",
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $P^-=L^- (L^-)^T$ and $R=L_RL_R^T$, with real factors of arbitrary rank. Let $H\\in\\mathbb R^{p\\times n}$ and suppose $$S=H P^-H^T+R\\succ0.$$ Pad $L_R$ with zero columns so it has at least $p$ columns and form $$ Z=\\begin{bmatrix}L_R^{\\mathrm{pad}}&HL^-\\\\0&L^-\\end{bmatrix}. $$ Take an exact reduced QR factorization $Z^T=UR$ with $U^TU=I$, set $L=R^T$, and partition $$ L=\\begin{bmatrix}L_{11}&0\\\\L_{21}&L_{22}\\end{bmatrix} $$ at the observation and state dimensions. If needed, multiply each of the first $p$ rows of $R$ by the sign of its diagonal entry, so that $L_{11}$ has positive diagonal. Then $$ L_{11}L_{11}^T=S,\\qquad L_{21}L_{11}^T=P^-H^T, $$ and $$ L_{22}L_{22}^T",
+        "source_path": "items/lem-square-root-kalman-measurement-block-factor-identity.md"
+      },
+      {
+        "id": "lem-square-root-kalman-prediction-factor-identity",
+        "kind": "lemma",
+        "title": "QR prediction preserves the canonical covariance factor",
+        "deps": [
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $P=LL^T$ with $L\\in\\mathbb R^{d\\times r}$ and let $Q=L_Q L_Q^T$ with $L_Q\\in\\mathbb R^{n\\times s}$, where zero columns and rank deficiency are allowed. For any real $F\\in\\mathbb R^{n\\times d}$, form $G=[FL\\;L_Q]$ and append zero columns if needed so that the transpose has at least $n$ rows. In exact arithmetic, if $G^T=UR$ is a reduced QR factorization with $U^TU=I$, then $L^-:=R^T$ satisfies $$ L^-(L^-)^T=FPF^T+Q. $$",
+        "source_path": "items/lem-square-root-kalman-prediction-factor-identity.md"
+      },
+      {
+        "id": "lem-square-root-kalman-schur-perturbation-bound",
+        "kind": "lemma",
+        "title": "Innovation, gain, and posterior errors follow from joint covariance perturbations",
+        "deps": [
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $S=S^T\\in\\mathbb R^{p\\times p}$ satisfy $x^TSx\\ge\\mu\\|x\\|_2^2$ for all $x\\in\\mathbb R^p$, with $\\mu>0$. Let $B\\in\\mathbb R^{n\\times p}$, $D=D^T\\in\\mathbb R^{n\\times n}$, and let symmetric $E_S$ and matrices $E_B,E_D$ satisfy $$ \\|E_S\\|_F\\le e_S<\\mu,\\qquad \\|E_B\\|_F\\le e_B,\\qquad \\|E_D\\|_F\\le e_D. $$ Put $\\widehat S=S+E_S$, $\\widehat B=B+E_B$, $\\widehat D=D+E_D$, $\\Phi=D-BS^{-1}B^T$, and $\\widehat\\Phi=\\widehat D-\\widehat B\\widehat S^{-1}\\widehat B^T$. If $b\\ge\\|B\\|_2$, define $\\beta=(\\mu-e_S)^{-1}$. Then $\\widehat S\\succeq(\\mu-e_S)I\\succ0$ and $$ \\|\\widehat S^{-1}\\|_2\\le\\beta,\\qquad \\|\\widehat S^{-1}-S^{-1}\\|_2\\le\\mu^{-1}\\beta e_S, $$ $$ \\|\\widehat B\\widehat S^{-1}-BS^",
+        "source_path": "items/lem-square-root-kalman-schur-perturbation-bound.md"
+      },
+      {
+        "id": "lem-square-root-kalman-triangular-solve-forward-bound",
+        "kind": "lemma",
+        "title": "An innovation solve residual gives a singular-value forward bound",
+        "deps": [
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "source_path": "items/lem-square-root-kalman-triangular-solve-forward-bound.md",
+        "statement": "Let $p\\ge1$ and $T\\in\\mathbb R^{p\\times p}$ be nonsingular, define $$ \\sigma_{\\min}(T):=\\min_{\\|x\\|_2=1}\\|Tx\\|_2, $$ and let $z_*=T^{-1}y$. For any computed vector $\\widehat z$ with residual $r=T\\widehat z-y$, $$ \\|\\widehat z-z_*\\|_2\\le\\frac{\\|r\\|_2}{\\sigma_{\\min}(T)}. $$ If $S=TT^T$ also satisfies $x^TSx\\ge\\nu\\|x\\|_2^2$ for all $x$, with $\\nu>0$, then $\\sigma_{\\min}(T)\\ge\\sqrt\\nu$ and therefore $$ \\|\\widehat z-z_*\\|_2\\le\\frac{\\|r\\|_2}{\\sqrt\\nu}. $$",
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-finite-budget-square-root-kalman-filter",
+        "kind": "algorithm",
+        "title": "Finite-horizon square-root Kalman filter by rectangular factors and QR",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-linear-gaussian-state-space-model-with-independent-noises",
+          "alg-kalman-filter",
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "thm-kalman-filter-is-exact-posterior",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "alg-scaled-householder-reflector-formation-and-application",
+          "lem-square-root-kalman-prediction-factor-identity",
+          "lem-square-root-kalman-measurement-block-factor-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Fix a finite horizon $T\\ge0$, positive state dimensions $d_k$ for $0\\le k\\le T$, and positive observation dimensions $p_k$ for $1\\le k\\le T$. Inputs are real finite matrices $F_k\\in\\mathbb R^{d_k\\times d_{k-1}}$, $H_k\\in\\mathbb R^{p_k\\times d_k}$, observation vectors $y_k\\in\\mathbb R^{p_k}$, and an initial mean $m_0\\in\\mathbb R^{d_0}$. For each covariance supply a rectangular real factor $$ L_0\\in\\mathbb R^{d_0\\times r_0},\\qquad L_{Q,k}\\in\\mathbb R^{d_k\\times r_{Q,k}},\\qquad L_{R,k}\\in\\mathbb R^{p_k\\times r_{R,k}}, $$ where each column count is any finite nonnegative integer. The represented covariances are $P_0=L_0L_0^T$, $Q_k=L_{Q,k}L_{Q,k}^T$, and $R_k=L_{R,k}L_{R,k}^T",
+        "source_path": "items/alg-finite-budget-square-root-kalman-filter.md"
+      },
+      {
+        "id": "lem-square-root-kalman-prearray-qr-error-bound",
+        "kind": "lemma",
+        "title": "Product and Householder QR errors bound the represented joint covariance",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "alg-scaled-householder-reflector-formation-and-application",
+          "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "thm-scaled-householder-qr-backward-stability",
+          "lem-square-root-kalman-gram-perturbation-bound",
+          "lem-square-root-kalman-householder-error-rational-envelope"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $G\\in\\mathbb R^{n\\times q}$, with $q\\ge n$, be an exact prediction or measurement prearray. Let $\\widehat G$ be its computed version and assume $$ \\|\\widehat G-G\\|_F\\le e_{\\mathrm{form}}+e_{\\mathrm{in}}, $$ where $e_{\\mathrm{form}},e_{\\mathrm{in}}\\ge0$, $e_{\\mathrm{form}}$ bounds rounded products used to form the array, and $e_{\\mathrm{in}}$ bounds separately specified input-factor uncertainty. If the successful scaled-Householder QR of $\\widehat G^T\\in\\mathbb R^{q\\times n}$ has reduced upper factor $R$ and $L=R^T$, set $$ \\kappa_q=\\kappa_q(u),\\qquad \\beta_{q,n}=(1+\\kappa_q)^n-1,\\qquad \\epsilon=e_{\\mathrm{form}}+e_{\\mathrm{in}}+ \\beta_{q,n}\\|\\widehat G\\|_F, $$ where $",
+        "source_path": "items/lem-square-root-kalman-prearray-qr-error-bound.md"
+      },
+      {
+        "id": "thm-square-root-kalman-finite-procedure-status",
+        "kind": "theorem",
+        "title": "The square-root Kalman procedure returns a finite status",
+        "deps": [
+          "alg-finite-budget-square-root-kalman-filter",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "alg-scaled-householder-reflector-formation-and-application",
+          "lem-scaled-real-householder-step-termination-and-status"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For every finite admissible input to [[alg-finite-budget-square-root-kalman-filter]] with finite state and observation dimensions, the procedure returns after finitely many arithmetic operations. For $T>0$ its outcome is one of success, range-failure, or innovation-factorization-failure. This is a termination and status result only; it asserts neither that the numerical factorization succeeds nor that an error bound holds.",
+        "source_path": "items/thm-square-root-kalman-finite-procedure-status.md"
+      },
+      {
+        "id": "thm-square-root-kalman-finite-horizon-perturbation-bound",
+        "kind": "theorem",
+        "title": "The square-root filter has an explicit conditioned finite-horizon error bound",
+        "deps": [
+          "alg-finite-budget-square-root-kalman-filter",
+          "alg-kalman-filter",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "lem-square-root-kalman-prediction-factor-identity",
+          "lem-square-root-kalman-measurement-block-factor-identity",
+          "lem-square-root-kalman-prearray-qr-error-bound",
+          "lem-square-root-kalman-schur-perturbation-bound",
+          "lem-square-root-kalman-triangular-solve-forward-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Fix a finite horizon $T$ and let $(m_{k|k},P_{k|k})$ and $(m_k^-,P_k^-)$ be the exact real-arithmetic prediction and update recursions of [[alg-kalman-filter]]. Let $$ S_k=H_kP_k^-H_k^T+R_k,\\qquad B_k=P_k^-H_k^T,\\qquad v_k=y_k-H_km_k^-. $$ Suppose each innovation has a certified lower bound $$ x^TS_kx\\ge\\mu_k\\|x\\|_2^2\\quad(x\\in\\mathbb R^{p_k}),\\qquad \\mu_k>0. $$ Let the procedure [[alg-finite-budget-square-root-kalman-filter]] output represented covariances $\\widehat P_{k|k}=\\widehat L_{k|k}\\widehat L_{k|k}^T$ and means $\\widehat m_{k|k}$. At step $k$, assume certified local bounds $$ \\begin{aligned} &\\|\\widehat P_k^--(F_k\\widehat P_{k-1|k-1}F_k^T+Q_k)\\|_2\\le e_k^P,\\\\ &\\|",
+        "source_path": "items/thm-square-root-kalman-finite-horizon-perturbation-bound.md"
+      }
+    ]
+  },
+  {
+    "order": 2603,
+    "id": "square-root-covariance-update-error-and-stability-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Square root covariance update error and stability — Examples",
+    "companion": "square-root-covariance-update-error-and-stability",
+    "requires": [
+      "square-root-covariance-update-error-and-stability"
+    ],
+    "items": [
+      {
+        "id": "ex-square-root-kalman-perturbed-prearray-psd-factor",
+        "generation": {
+          "role": "example"
+        },
+        "kind": "example",
+        "title": "A nonzero prearray perturbation changes the posterior but keeps its factor product PSD",
+        "deps": [
+          "lem-square-root-kalman-gram-perturbation-bound",
+          "lem-square-root-kalman-measurement-block-factor-identity"
+        ],
+        "justified_by": [],
+        "source_path": "items/ex-square-root-kalman-perturbed-prearray-psd-factor.md",
+        "statement": "Use a scalar state and observation with $P^-=R=H=1$. The exact measurement prearray is $$ Z=\\begin{bmatrix}1&1\\\\0&1\\end{bmatrix}. $$ For the perturbation calculation take $$ E=\\begin{bmatrix}0&1/10\\\\0&0\\end{bmatrix}, \\qquad \\widehat Z=Z+E. $$ This is a mathematical backward-perturbation example; it does not assert that a particular floating-point QR produces this exact $E$.",
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+        "generation": {
+          "role": "example"
+        },
+        "kind": "example",
+        "title": "A rounded subtractive covariance update can become indefinite",
+        "deps": [
+          "alg-kalman-filter",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "lem-square-root-kalman-measurement-block-factor-identity"
+        ],
+        "justified_by": [],
+        "source_path": "items/ex-subtractive-kalman-update-loses-positive-semidefiniteness.md",
+        "statement": "Use binary floating-point arithmetic with precision $p=24$, round-to-nearest ties-to-even, and a normal exponent range containing the values below. Let $$ c=1-2^{-24},\\qquad P^-=\\begin{bmatrix}1&c\\\\c&1\\end{bmatrix},\\qquad H=\\begin{bmatrix}1&1\\end{bmatrix},\\qquad R=2^{-22}. $$ Compute $B= P^-H^T$, then $S=HB+R$, then $K=B/S$, and finally $P_{\\rm sub}=P^- - (KS)K^T$, rounding every displayed operation in the specified format.",
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-square-root-kalman-singular-prior-positive-innovation",
+        "generation": {
+          "role": "example"
+        },
+        "kind": "example",
+        "title": "A singular prior factor with a positive innovation remains admissible",
+        "deps": [
+          "alg-finite-budget-square-root-kalman-filter",
+          "lem-square-root-kalman-measurement-block-factor-identity"
+        ],
+        "justified_by": [],
+        "source_path": "items/ex-square-root-kalman-singular-prior-positive-innovation.md",
+        "statement": "Take one state and one observation, one update step, $m_0=2$, $F=H=1$, $y=7$, and factors $L_0=L_Q=0$, $L_R=1$. The initial, process, and measurement covariances are $P_0=Q=0$ and $R=1$.",
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-square-root-kalman-nearly-noiseless-solve-sensitivity",
+        "generation": {
+          "role": "example"
+        },
+        "kind": "example",
+        "title": "A nearly noiseless weakly scaled observation amplifies innovation-solve residual",
+        "deps": [
+          "alg-finite-budget-square-root-kalman-filter",
+          "lem-square-root-kalman-measurement-block-factor-identity",
+          "thm-square-root-kalman-finite-horizon-perturbation-bound"
+        ],
+        "justified_by": [],
+        "source_path": "items/ex-square-root-kalman-nearly-noiseless-solve-sensitivity.md",
+        "statement": "Take a scalar predicted variance $P^-=1$, observation coefficient $H=10^{-3}$, and measurement variance $R=10^{-12}$. For innovation $v=1$, suppose the computed triangular solve has residual $L_{11}\\widehat z-v=10^{-9}$, with no other mean-update error.",
+        "dependency_level": 3
+      }
+    ]
+  }
+]

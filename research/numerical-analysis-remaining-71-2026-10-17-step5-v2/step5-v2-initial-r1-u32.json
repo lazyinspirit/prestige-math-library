@@ -1,0 +1,53 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "32",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+      "model": "gpt-6-luna",
+      "context_sha256": "30e5d932ff2ba2720750bb6320bf6d679c7f40a21e718541723332d026833bf2",
+      "outcome": "false_positive",
+      "reason": "The cited def-na-high-resolution-reconstruction explicitly defines TV(U) as the sum over i in Z, so its scalar grid data are bi-infinite and negative indices are admissible. The natural-index convention in def-sequence concerns ordinary real sequences and does not override this explicit local grid convention. Direct substitution gives slope increments 1/2, 0, -1/2 at indices -1, 0, 1; the updated nonzero states are -1/4, 3/4, 5/4, 1/4 at indices -1, 0, 1, 2. All other states remain zero. Hence TV increases from 2 to 3 at a=h=delta_t=1, correctly refuting the universal TVD assertion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+      "disposition": "unaffected",
+      "post_sha256": "68ad75b24b82b1dae2d967418b0673c5d8664443a9e01fac9288d56b8b0e0998",
+      "review_context_sha256": "fc3f9f94b2f0fe34019361908ed31e00f8d654e966061a17a13e0127f0fdb4fe",
+      "reason": "Reviewed the complete counterexample, its actual reconstruction dependency, owning proof contract, manifest entry and page interface. The supplier explicitly uses integer-indexed total variation. The finite-support witness is admissible, its five face fluxes are 0, 3/4, 1, 1/4, 0, and its exact updated variation is 3 rather than 2. The dependency supplies both minmod and the direct forward-Euler update; no choice principle or additional lemma is needed. The contract mirrors the three proof steps and the bi-infinite convention accurately. The item guard equals the assignment's before guard; no item or metadata repair was made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+      "model": "gpt-6-luna",
+      "context_sha256": "30e5d932ff2ba2720750bb6320bf6d679c7f40a21e718541723332d026833bf2",
+      "reason": "The negative-index objection conflicts with the cited reconstruction definition's explicit sum over Z. The finite-support witness and all flux and variation calculations are valid; no mathematical defect or published-consumer repair is identified.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "No source or metadata edits. Statement/Definition interfaces are unchanged, so no downstream propagation or creation is triggered.",
+    "Focused independent arithmetic check: a Node assertion script recomputed minmod slopes, all five relevant face fluxes, four updated nonzero states, and both total variations using exactly represented dyadic rationals. All assertions passed; exit code 0.",
+    "The required review-contexts command completed successfully and supplied the recorded post and review-context hashes immediately after mathematical review. No later supplier edit was performed.",
+    "No changed item paths require proof-layout, and no gate diagnostics were assigned. External sources were not consulted; the adjudication follows the complete local defining formula and explicit finite arithmetic. No unresolved mathematical obligation remains for this assignment."
+  ]
+}

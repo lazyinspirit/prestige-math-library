@@ -1,0 +1,488 @@
+[
+  {
+    "order": 2616,
+    "id": "mixed-finite-elements-and-stokes-stability",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Mixed finite elements and Stokes stability",
+    "companion": "mixed-finite-elements-and-stokes-stability-examples",
+    "requires": [
+      "finite-element-meshes-and-interpolation",
+      "lax-milgram-and-weak-elliptic-solutions",
+      "fourier-multipliers-and-sobolev-characterisations",
+      "fredholm-elliptic-problems-and-the-elliptic-spectrum",
+      "decomposition-inertia-and-frobenius"
+    ],
+    "items": [
+      {
+        "id": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+        "kind": "definition",
+        "title": "Stokes velocity and pressure spaces and weak forms",
+        "statement": "For a bounded connected Lipschitz domain D in R^d, d in {2,3}, define the real spaces V=H^1_0(D;R^d), Q=L^2_0(D), the gradient norm on V, the L2 norm on Q, epsilon(v), b(v,q)=-int_D q div v, and a_nu(u,v)=2 nu int_D epsilon(u):epsilon(v), nu>0. Distinguish the continuous domain class from the polygonal/polyhedral mesh subclass used by the mini element.",
+        "deps": [
+          "lem-na-homogeneous-dirichlet-poincare",
+          "def-countable-choice",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 1,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally."
+      },
+      {
+        "id": "lem-na-zero-mean-of-zero-boundary-divergence",
+        "kind": "lemma",
+        "title": "Zero mean of the divergence of a zero-boundary field",
+        "statement": "For every bounded open D and v in H^1_0(D;R^d), div v is in L2(D) and has integral zero.",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "lem-na-homogeneous-dirichlet-poincare",
+        "kind": "lemma",
+        "title": "A bounded-domain Poincare inequality for H1-zero fields",
+        "statement": "If D is bounded and lies in a slab of width L in one coordinate direction, every scalar component v in H^1_0(D) satisfies ||v||_2 <= L ||grad v||_2.",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "lem-na-homogeneous-dirichlet-korn-identity",
+        "kind": "lemma",
+        "title": "The homogeneous Dirichlet strain identity",
+        "statement": "For v in H^1_0(D;R^d), 2||epsilon(v)||_2^2=||grad v||_2^2+||div v||_2^2, hence ||grad v||_2<=sqrt(2)||epsilon(v)||_2.",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "lem-na-lipschitz-domain-finite-star-shaped-cover",
+        "kind": "lemma",
+        "title": "Finite star-shaped cover of a bounded Lipschitz domain",
+        "statement": "A bounded connected Lipschitz domain D in R^d has a finite open cover D=union_i U_i with each U_i bounded, contained in D and star-shaped with respect to an interior ball; the intersection graph is connected. Record a measurable partition subordinate to the cover and normalized smooth bumps on a spanning-tree set of overlaps.",
+        "deps": [
+          "thm-heine-borel-rn"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "lem-na-finite-cover-zero-mean-data-decomposition",
+        "kind": "lemma",
+        "title": "Zero-mean L2 decomposition over a finite cover",
+        "statement": "Given the finite cover and its tree bumps, every q in L2_0(D) decomposes linearly as q=sum_i q_i, where q_i in L2_0(U_i), with explicit finite bounds ||q_i||_2<=C_i||q||_2.",
+        "deps": [
+          "lem-na-lipschitz-domain-finite-star-shaped-cover",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 1,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "def-na-star-shaped-bogovskii-integral",
+        "kind": "definition",
+        "title": "The Bogovskii integral on a star-shaped set",
+        "statement": "For a bounded open U star-shaped with respect to an interior ball and a smooth unit-mass bump omega supported in that ball, define B_U f(x)=int_U f(y)(x-y) int_0^1 omega(y+(x-y)/t) dt/t^(d+1) dy for smooth compactly supported f; use its zero extension and the stated real Fourier convention.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally."
+      },
+      {
+        "id": "lem-na-bogovskii-kernel-support-and-divergence",
+        "kind": "lemma",
+        "title": "Support, integrability, and divergence identity for the Bogovskii kernel",
+        "statement": "For smooth compactly supported f, the Bogovskii formula defines an L2 vector field supported in a compact subset of U and div B_U f=f-omega int_U f distributionally. In particular div B_U f=f when f has mean zero.",
+        "deps": [
+          "def-na-star-shaped-bogovskii-integral",
+          "def-countable-choice",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-compactness-under-continuous-maps",
+          "def-distributional-derivative",
+          "thm-heine-borel-rn"
+        ],
+        "dependency_level": 1,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "lem-na-bogovskii-truncated-derivative-fourier-formula",
+        "kind": "lemma",
+        "title": "Truncated Fourier formula for derivatives of the Bogovskii operator",
+        "statement": "For smooth compactly supported data and phi in C_c^infinity, define the truncated distributional operator T_phi,j and prove its limit and the identity hat(T^<_{phi,j} f)(xi)=2 pi i xi_j int_0^(1/2) hat(phi)(t xi) hat(f)((1-t)xi) dt.",
+        "deps": [
+          "def-na-star-shaped-bogovskii-integral",
+          "def-countable-choice",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-na-bogovskii-kernel-support-and-divergence"
+        ],
+        "dependency_level": 2,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "lem-na-bogovskii-fourier-ray-and-derivative-ltwo-bound",
+        "kind": "lemma",
+        "title": "Elementary Fourier ray and derivative L2 bounds",
+        "statement": "For phi in C_c^infinity and each coordinate j, prove the ray bound 2 pi |xi_j| int_0^infinity |hat(phi)(t xi)|dt <= rho^-1||phi||_1+rho||partial_j^2 phi||_1 and deduce the corresponding L2 bound for T_phi,j with its bounded-kernel tail.",
+        "deps": [
+          "lem-na-bogovskii-truncated-derivative-fourier-formula",
+          "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 3,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "thm-na-star-shaped-bogovskii-bounded-right-inverse",
+        "kind": "theorem",
+        "title": "Bounded Bogovskii right inverse on a star-shaped domain",
+        "statement": "For bounded U star-shaped with respect to an interior ball, construct a bounded linear map B_U:L2_0(U)->H1_0(U;R^d) with div B_U f=f and ||grad B_U f||_2<=C_U||f||_2; state the explicit constant from the coordinate derivative bounds.",
+        "deps": [
+          "lem-na-bogovskii-kernel-support-and-divergence",
+          "lem-na-bogovskii-fourier-ray-and-derivative-ltwo-bound",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "def-countable-choice",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-na-star-shaped-bogovskii-integral",
+          "lem-na-bogovskii-truncated-derivative-fourier-formula",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "thm-l-one-approximate-identities-converge-in-l-p"
+        ],
+        "dependency_level": 4,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+        "kind": "theorem",
+        "title": "Divergence right inverse on bounded connected Lipschitz domains",
+        "statement": "For every bounded nonempty connected Lipschitz D in R^d, d=2,3, construct a bounded linear B_D:L2_0(D)->H1_0(D;R^d) with div B_D q=q and ||grad B_Dq||_2<=C_div(D)||q||_2, where the explicit finite constant depends on the chosen cover but not on a finite-element mesh.",
+        "deps": [
+          "lem-na-lipschitz-domain-finite-star-shaped-cover",
+          "lem-na-finite-cover-zero-mean-data-decomposition",
+          "thm-na-star-shaped-bogovskii-bounded-right-inverse",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "thm-na-infsup-bounded-right-inverse-hilbert",
+        "kind": "theorem",
+        "title": "Hilbert inf-sup gives a bounded constraint right inverse",
+        "statement": "For real Hilbert spaces V,Q and bounded b(v,q)=(Bv,q)_Q, if inf_{q!=0} sup_{v!=0} b(v,q)/(||v||||q||)>=beta>0, then B:V->Q is onto and has a linear right inverse R with ||R||<=beta^-1.",
+        "deps": [
+          "thm-lax-milgram",
+          "def-hilbert-space",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "thm-na-continuous-stokes-divergence-infsup",
+        "kind": "theorem",
+        "title": "Continuous Stokes divergence inf-sup on a Lipschitz domain",
+        "statement": "For V=H1_0(D;R^d) with gradient norm and Q=L2_0(D), b(v,q)=-int q div v is bounded by sqrt(d), and its inf-sup constant is at least C_div(D)^-1.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 6,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "def-na-fortin-operator",
+        "kind": "definition",
+        "title": "Fortin operator for a discrete constraint",
+        "statement": "For conforming finite-dimensional V_h subset V and Q_h subset Q, define a Fortin operator as a bounded linear Pi_h:V->V_h satisfying b(Pi_h v,q_h)=b(v,q_h) for every v and q_h.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally."
+      },
+      {
+        "id": "lem-na-fortin-transfers-discrete-infsup",
+        "kind": "lemma",
+        "title": "Fortin operators transfer the continuous inf-sup bound",
+        "statement": "If the continuous inf-sup constant is beta and a Fortin operator has ||Pi_h||<=C_F, then the discrete inf-sup constant beta_h is at least beta/C_F.",
+        "deps": [
+          "def-na-fortin-operator"
+        ],
+        "dependency_level": 3,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "thm-na-babuska-brezzi-kernel-coercivity",
+        "kind": "theorem",
+        "title": "Babuska-Brezzi solvability by kernel coercivity and inf-sup",
+        "statement": "For real Hilbert V,Q, bounded a and b, coercivity of a on ker B, and inf-sup beta>0, prove unique solvability and stability of a(u,v)+b(v,p)=F(v), b(u,q)=G(q), including pressure uniqueness in the declared Q gauge.",
+        "deps": [
+          "thm-na-infsup-bounded-right-inverse-hilbert",
+          "thm-lax-milgram",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "thm-na-mixed-galerkin-quasioptimality",
+        "kind": "theorem",
+        "title": "Mixed Galerkin error bound retaining beta_h",
+        "statement": "For conforming V_h,Q_h with discrete inf-sup beta_h>0, prove solvability and a mixed best-approximation bound with explicit constants depending on coercivity, continuity and beta_h; do not hide beta_h in a generic constant.",
+        "deps": [
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "thm-na-infsup-bounded-right-inverse-hilbert",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+        "kind": "lemma",
+        "title": "Boundary-preserving face-average P1 interpolation",
+        "statement": "On a conforming shape-regular simplicial mesh of a bounded polyhedral domain, define a continuous P1 face-average quasi-interpolant without point evaluation. Prove H1 stability, L2 error O(h)|v|H1, and H1 error O(h)|v|H2 for H2 functions, including zero-boundary preservation and boundary patches.",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "thm-reference-simplex-poincare-wirtinger",
+          "thm-bramble-hilbert-on-reference-simplex",
+          "def-countable-choice",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field",
+          "lem-affine-pullback-weak-derivatives-and-scaling"
+        ],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "def-na-mini-element-p1-bubble-p1-spaces",
+        "kind": "definition",
+        "title": "The conforming P1-bubble/P1 mini element",
+        "statement": "For d=2,3 and a connected conforming shape-regular affine simplicial mesh of a polygon/polyhedron D, define V_h as continuous P1 vector fields with zero trace enriched by one interior scalar simplex bubble per component and cell, and Q_h as continuous P1 scalar functions with zero mean.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally."
+      },
+      {
+        "id": "lem-na-mini-element-local-and-global-dimensions",
+        "kind": "lemma",
+        "title": "Local and global dimensions of the mini element",
+        "statement": "On a d-simplex the local mini velocity dimension is d(d+2) and local pressure dimension d+1; globally dim V_h=d N_int+d N_K and dim Q_h=N_vertex-1 for a connected mesh.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-countable-choice",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 3,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "thm-na-mini-element-fortin-stability",
+        "kind": "theorem",
+        "title": "Uniform Fortin stability of the mini element",
+        "statement": "Construct the boundary-preserving Scott-Zhang plus cell-bubble mean correction Fortin map for the mini element. Prove exact preservation of b against continuous P1 pressure, uniform V-bound, and beta_h>=1/(C_F C_div(D)) independently of mesh size.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "def-na-fortin-operator",
+          "lem-na-fortin-transfers-discrete-infsup",
+          "thm-na-continuous-stokes-divergence-infsup",
+          "def-countable-choice",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-affine-pullback-weak-derivatives-and-scaling"
+        ],
+        "dependency_level": 7,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "def-na-discrete-weak-and-exact-divergence-free-spaces",
+        "kind": "definition",
+        "title": "Weak and pointwise divergence-free discrete velocities",
+        "statement": "Define the discrete weak constraint kernel Z_h={v_h:b(v_h,q_h)=0 for all q_h in Q_h} and the exact kernel Z_h^0={v_h:div v_h=0 a.e.}; prove the inclusion Z_h^0 subset Z_h from the stated pairings.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-mini-element-p1-bubble-p1-spaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Give the typed definition and all conventions; prove any claimed well-definedness locally."
+      },
+      {
+        "id": "thm-na-mini-element-h1-pressure-error",
+        "kind": "theorem",
+        "title": "Mini-element H1 velocity and L2 pressure error estimate",
+        "statement": "For a weak Stokes solution with u in H2(D)^d intersect H1_0(D)^d and p in H1(D) intersect L2_0(D), prove the mini-element bound ||u-u_h||H1+||p-p_h||2<=C h (||u||H2+||p||H1), with beta_h and viscosity dependence explicit and mesh-independent for a shape-regular family.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "thm-na-mixed-galerkin-quasioptimality",
+          "thm-na-mini-element-fortin-stability",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 8,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "thm-na-discrete-helmholtz-projection-and-pressure-schur",
+        "kind": "theorem",
+        "title": "Discrete Helmholtz projection and pressure Schur identities",
+        "statement": "In the finite mini-element spaces, prove the mass-orthogonal projector onto ker B_h is P_M=I-M^-1 B^T(BM^-1B^T)^-1B, and prove the mass and stiffness pressure Schur matrices are positive definite on mean-zero pressures; explain the constant-pressure null mode before gauge fixing.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "thm-na-mini-element-fortin-stability",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-countable-choice",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-homogeneous-dirichlet-korn-identity"
+        ],
+        "dependency_level": 8,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "thm-na-weak-stokes-solvability-lipschitz-domain",
+        "kind": "theorem",
+        "title": "Weak Stokes solvability on bounded connected Lipschitz domains",
+        "statement": "For nu>0 and F in V prime on a bounded connected Lipschitz D, prove a unique (u,p) in H1_0(D;R^d) x L2_0(D) satisfying the weak Stokes equations with b(v,p)=-int p div v and b(u,q)=0, and give a stability bound.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "thm-na-continuous-stokes-divergence-infsup",
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 7,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      }
+    ]
+  },
+  {
+    "order": 2617,
+    "id": "mixed-finite-elements-and-stokes-stability-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Mixed finite elements and Stokes stability — Examples",
+    "companion": "mixed-finite-elements-and-stokes-stability",
+    "requires": [
+      "mixed-finite-elements-and-stokes-stability"
+    ],
+    "items": [
+      {
+        "id": "ex-na-mini-element-bubble-moment",
+        "kind": "example",
+        "title": "A mini-element bubble detects an affine pressure gradient",
+        "statement": "On a simplex K, for a nonconstant affine pressure q and bubble velocity b_K grad q, compute b_K(v,q)=int_K b_K |grad q|^2>0.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "ex-na-taylor-hood-pressure-mode",
+        "kind": "example",
+        "title": "A Taylor-Hood local pressure mode on a right triangle",
+        "statement": "On K={(x,y):x>=0,y>=0,x+y<=1}, use q=x-1/3 and v=(x^2,0) to compute the local pairing b(v,q)=-1/18; this only detects a mode and proves no global stability claim.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "cex-na-q1-p0-checkerboard-pressure-mode",
+        "kind": "counterexample",
+        "title": "The alternating Q1/P0 checkerboard pressure defeats the discrete inf-sup condition",
+        "statement": "On a 2x2 Cartesian square mesh, the alternating mean-zero cellwise-constant pressure annihilates every boundary-zero continuous Q1 velocity, so the discrete inf-sup constant is zero.",
+        "deps": [
+          "lem-na-fortin-transfers-discrete-infsup"
+        ],
+        "dependency_level": 4,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      },
+      {
+        "id": "ex-na-weakly-versus-exactly-divergence-free-mini-velocity",
+        "kind": "example",
+        "title": "A weakly divergence-free mini velocity need not be pointwise divergence-free",
+        "statement": "On the square split into two triangles, the mini velocity dimension exceeds the mean-zero continuous P1 pressure dimension; rank-nullity gives a nonzero weak-kernel velocity, while disjoint cell bubble supports force its divergence to be nonzero on at least one cell.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "lem-na-mini-element-local-and-global-dimensions",
+          "thm-rank-nullity",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Complete local proof with the cited suppliers; the source ledger is evidence, not a substitute for proof."
+      }
+    ]
+  }
+]

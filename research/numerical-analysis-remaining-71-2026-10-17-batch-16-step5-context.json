@@ -1,0 +1,251 @@
+{
+  "group": "f",
+  "batches": [
+    "16"
+  ],
+  "pages_read": [
+    "hierarchical-low-rank-matrices-and-error-propagation",
+    "hierarchical-low-rank-matrices-and-error-propagation-examples"
+  ],
+  "items_read": [
+    "def-hlr-cluster-trees-and-geometric-admissibility",
+    "lem-hlr-balanced-cluster-tree-size-and-depth",
+    "lem-hlr-block-cluster-leaves-partition-index-pairs",
+    "alg-hlr-core-svd-recompression-with-tolerance",
+    "def-hlr-and-h2-block-matrix-representations",
+    "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+    "def-h2-nested-cluster-bases-and-interaction-lists",
+    "alg-hlr-block-matvec",
+    "alg-hlr-bottom-up-recompression",
+    "thm-hlr-separated-cauchy-block-rank-bound",
+    "alg-hlr-compress-exact-lu-factors",
+    "lem-hlr-bottom-up-recompression-error-bound",
+    "alg-hlr-block-addition",
+    "alg-hlr-block-product",
+    "thm-hlr-block-matvec-correct",
+    "alg-h2-matrix-vector-multiplication",
+    "thm-hlr-blockwise-error-propagation",
+    "thm-hlr-storage-and-matvec-complexity",
+    "thm-h2-matrix-vector-multiplication-correct",
+    "thm-hlr-approximate-factorization-residual-and-inverse-error",
+    "ex-hlr-nearfield-block-requires-full-rank",
+    "ex-hlr-accumulated-truncation-can-destroy-positive-definiteness",
+    "ex-hlr-separated-cauchy-block"
+  ],
+  "conventions": [
+    {
+      "convention": "Index sets are finite, nonempty and totally ordered. Balanced binary trees split ordered clusters into floor/ceiling halves and stop at the declared leaf threshold.",
+      "fixed_by": "def-hlr-cluster-trees-and-geometric-admissibility",
+      "matters_for": [
+        "lem-hlr-balanced-cluster-tree-size-and-depth",
+        "lem-hlr-block-cluster-leaves-partition-index-pairs",
+        "thm-hlr-storage-and-matvec-complexity"
+      ]
+    },
+    {
+      "convention": "Admissibility requires strictly positive distance and distance ≥ η times the larger diameter. Repeated geometric points are permitted. Block recursion splits one eligible nonleaf cluster at a time, resolving cardinality ties on the row side.",
+      "fixed_by": "def-hlr-cluster-trees-and-geometric-admissibility",
+      "matters_for": [
+        "def-hlr-and-h2-block-matrix-representations",
+        "thm-hlr-separated-cauchy-block-rank-bound",
+        "ex-hlr-nearfield-block-requires-full-rank"
+      ]
+    },
+    {
+      "convention": "Far blocks store UV* with rank bounded by an assumed cap; near blocks remain dense. Geometric admissibility alone supplies no low-rank guarantee.",
+      "fixed_by": "def-hlr-and-h2-block-matrix-representations",
+      "matters_for": [
+        "alg-hlr-block-matvec",
+        "alg-hlr-block-addition",
+        "alg-hlr-block-product",
+        "thm-hlr-storage-and-matvec-complexity"
+      ]
+    },
+    {
+      "convention": "Core-SVD uses absolute Frobenius tolerance, selects the smallest feasible integer rank including zero, and returns tolerance-not-met if no rank within the cap meets that tolerance. Empty factors and zero represented matrices return rank zero.",
+      "fixed_by": "alg-hlr-core-svd-recompression-with-tolerance",
+      "matters_for": [
+        "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+        "alg-hlr-bottom-up-recompression",
+        "alg-hlr-compress-exact-lu-factors",
+        "ex-hlr-accumulated-truncation-can-destroy-positive-definiteness"
+      ]
+    },
+    {
+      "convention": "Bottom-up recompression adds all nodewise discarded-tail bounds within a factor-sum tree. Failure concerns the chosen tree and local budgets, not impossibility of approximating the exact full sum at the requested rank.",
+      "fixed_by": "alg-hlr-bottom-up-recompression",
+      "matters_for": [
+        "lem-hlr-bottom-up-recompression-error-bound",
+        "alg-hlr-block-addition",
+        "alg-hlr-block-product",
+        "thm-hlr-blockwise-error-propagation"
+      ]
+    },
+    {
+      "convention": "H² bases satisfy child restriction = child basis times child-to-parent transfer. Only leaf bases are stored explicitly; internal bases are reconstructed through transfers.",
+      "fixed_by": "def-h2-nested-cluster-bases-and-interaction-lists",
+      "matters_for": [
+        "alg-h2-matrix-vector-multiplication",
+        "thm-h2-matrix-vector-multiplication-correct",
+        "thm-hlr-storage-and-matvec-complexity"
+      ]
+    },
+    {
+      "convention": "The complexity theorem uses leaf threshold b=k and explicit bounds on far side-size sums per block-tree level, total near blocks, and total H² couplings. These are additional assumptions, not consequences of admissibility.",
+      "fixed_by": "thm-hlr-storage-and-matvec-complexity",
+      "matters_for": [
+        "thm-hlr-storage-and-matvec-complexity"
+      ]
+    },
+    {
+      "convention": "The LU certificate assumes supplied exact factors A=LU, successful compression, exact arithmetic and exact norms. The inverse conclusion additionally requires ||A⁻¹||₂η<1.",
+      "fixed_by": "thm-hlr-approximate-factorization-residual-and-inverse-error",
+      "matters_for": [
+        "thm-hlr-approximate-factorization-residual-and-inverse-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-hlr-block-cluster-leaves-partition-index-pairs",
+      "statement": "Let I,J be nonempty finite index sets with finite cluster trees, and construct the block-cluster tree as in def-hlr-cluster-trees-and-geometric-admissibility. Its terminal rectangles are pairwise disjoint and their union is I×J.",
+      "used_by": [
+        "def-hlr-and-h2-block-matrix-representations",
+        "thm-hlr-block-matvec-correct",
+        "thm-h2-matrix-vector-multiplication-correct",
+        "thm-hlr-blockwise-error-propagation",
+        "thm-hlr-approximate-factorization-residual-and-inverse-error"
+      ]
+    },
+    {
+      "id": "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+      "statement": "On success at rank q, the returned matrix has rank q and Frobenius residual equal to the singular-value tail at q, at most δ; no lower-rank matrix meets that tolerance. On tolerance-not-met, no matrix of rank at most k meets the tolerance.",
+      "used_by": [
+        "alg-hlr-bottom-up-recompression",
+        "lem-hlr-bottom-up-recompression-error-bound",
+        "thm-hlr-blockwise-error-propagation",
+        "thm-hlr-approximate-factorization-residual-and-inverse-error",
+        "ex-hlr-accumulated-truncation-can-destroy-positive-definiteness"
+      ]
+    },
+    {
+      "id": "lem-hlr-bottom-up-recompression-error-bound",
+      "statement": "Whenever all calls in a subtree succeed, its returned matrix has rank at most k and Frobenius error at most the reported sum of discarded-tail norms over that subtree, bounded by the sum of its node tolerances.",
+      "used_by": [
+        "alg-hlr-block-addition",
+        "alg-hlr-block-product",
+        "thm-hlr-blockwise-error-propagation"
+      ]
+    },
+    {
+      "id": "thm-hlr-blockwise-error-propagation",
+      "statement": "Disjoint block residual bounds δ_b give assembled Frobenius error at most (Σ_b δ_b²)¹ᐟ². Successful addition and product of approximations satisfy the stated input-perturbation bounds plus this output-compression budget.",
+      "used_by": [
+        "thm-hlr-approximate-factorization-residual-and-inverse-error"
+      ]
+    },
+    {
+      "id": "def-h2-nested-cluster-bases-and-interaction-lists",
+      "statement": "H² far blocks are U_τ S_τσ V_σ*, with nested row and column cluster bases of ranks at most k; near blocks remain dense, and explicit basis storage is restricted to leaves.",
+      "used_by": [
+        "alg-h2-matrix-vector-multiplication",
+        "thm-h2-matrix-vector-multiplication-correct",
+        "thm-hlr-storage-and-matvec-complexity"
+      ]
+    },
+    {
+      "id": "lem-hlr-balanced-cluster-tree-size-and-depth",
+      "statement": "For n≥1 and integer 1≤b≤n, cluster sizes at depth h are at most ceil(n/2^h); depth is at most ceil(log₂(n/b)), with at most 2n/b leaves and 4n/b−1 nodes.",
+      "used_by": [
+        "thm-hlr-storage-and-matvec-complexity"
+      ]
+    },
+    {
+      "id": "thm-hlr-separated-cauchy-block-rank-bound",
+      "statement": "For samples x_i∈[0,a], y_j∈[b,b+c], 0≤a<b, c≥0, and integer r≥1, the r-term geometric expansion has rank at most r, entrywise error at most (a/b)^r/(b−a), and Frobenius error at most √(mn) times that bound. The stated additional separation and cap hypotheses make it a permitted far-block representation.",
+      "used_by": [
+        "ex-hlr-separated-cauchy-block"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-finite-tensor-arrays-and-frobenius-inner-product",
+      "used_for": "External batch-10 draft supplier: finite real/complex matrix rank, conjugate transpose and entrywise Frobenius norm conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-best-rank-k-frobenius-matrix-approximation",
+      "used_for": "External batch-10 draft supplier: optimality and exact tail error of truncated SVD, including rank zero; also the Frobenius singular-value identity used in the inverse certificate.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Existence of compact singular decompositions and lifting the core SVD through orthonormal factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Frobenius and vector triangle inequalities and entrywise derivations of product-norm bounds. The modulus inequality remains valid under the conjugate-first Frobenius convention.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Maximum unit-vector stretch, operator submultiplicativity and inverse perturbation estimates; interpretation of the identity-block example.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "The spectral norm is at most the Frobenius norm in the factorization certificate.",
+      "opened": true
+    },
+    {
+      "id": "thm-eckart-young-best-rank-k-approximation",
+      "used_for": "Every rank-at-most-one approximation of I₂ has operator-norm error at least one.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Injectivity of the compressed square matrix implies its image has dimension n.",
+      "opened": true
+    },
+    {
+      "id": "thm-dimension-of-a-linear-subspace",
+      "used_for": "An n-dimensional image subspace of the n-dimensional coordinate space is the whole space.",
+      "opened": true
+    },
+    {
+      "id": "thm-invertible-matrices-correspond-to-linear-isomorphisms",
+      "used_for": "Converting bijectivity of the compressed matrix action into matrix invertibility.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-hlr-compress-exact-lu-factors",
+      "concern": "The input supplies exact matrix factors L,U, while the Procedure says to “apply [[alg-hlr-core-svd-recompression-with-tolerance]]” to each admissible block without specifying the factor-list input required by that routine. For a dense m_b×n_b block D, the exact pair (D,I_n_b) closes this immediately, as already specified in the bottom-up routine. The conversion should be explicit here to make the procedure executable from its declared inputs.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "hierarchical-low-rank-matrices-and-error-propagation",
+      "to": "randomized-low-rank-approximation",
+      "faithful": true,
+      "note": "Checked supplier page prose and owned consumer bodies. This is contextual prerequisite material: no owned item invokes a Gaussian expectation bound. Deterministic rank assumptions and local certificates are stated independently, so no expectation is promoted to a per-draw guarantee."
+    },
+    {
+      "from": "hierarchical-low-rank-matrices-and-error-propagation",
+      "to": "tensor-train-compression-and-truncation-error",
+      "faithful": true,
+      "note": "Read the supplier page and both actual external item suppliers. Owned uses preserve finite real/complex dimensions, adjoint conventions, Frobenius tails and arbitrary nonnegative rank budgets. No TT orthogonality or root-sum-square truncation theorem is asserted for the overlapping factor-sum updates."
+    },
+    {
+      "from": "fast-multipole-expansions-and-error",
+      "to": "hierarchical-low-rank-matrices-and-error-propagation",
+      "faithful": true,
+      "note": "Checked the downstream page and its item dependency/citation fields against the owned interfaces. The edge is contextual: no downstream item cites an HLR/H² result. The FMM page retains its own separation, list-count and translation assumptions and does not import the conditional HLR complexity bounds."
+    }
+  ]
+}

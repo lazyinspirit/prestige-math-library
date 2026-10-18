@@ -1,0 +1,315 @@
+[
+  {
+    "order": 2638,
+    "id": "yee-fdtd-and-transient-maxwell-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Yee FDTD and transient Maxwell finite elements",
+    "companion": "yee-fdtd-and-transient-maxwell-discretization-examples",
+    "requires": [
+      "hyperbolic-finite-difference-methods",
+      "parabolic-finite-element-methods",
+      "discrete-de-rham-complexes-and-edge-elements"
+    ],
+    "items": [
+      {
+        "id": "def-transient-maxwell-system-with-material-interfaces",
+        "kind": "definition",
+        "title": "Transient Maxwell system with piecewise materials and boundary conditions",
+        "deps": [
+          "def-na-zero-tangential-hcurl"
+        ],
+        "dependency_level": 2,
+        "strategy": "State the real-field first-order Maxwell system, weighted energy spaces, charge continuity, PEC and periodic boundaries, and distributional interface convention without differentiating discontinuous coefficients."
+      },
+      {
+        "id": "lem-maxwell-rectangular-stokes-identity",
+        "kind": "lemma",
+        "title": "Stokes identity on a rectangular Yee face",
+        "deps": [
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-riemann-fubini-on-product-rectangles"
+        ],
+        "dependency_level": 0,
+        "strategy": "Write the four oriented boundary integrals and use the one-dimensional fundamental theorem in each coordinate to obtain the face curl integral, with cyclic coordinate cases."
+      },
+      {
+        "id": "def-maxwell-discrete-cochain-and-yee-grid",
+        "kind": "definition",
+        "title": "Oriented Maxwell cochains, masses, and the Yee update",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Define vertex, edge, face, and cell arrays, oriented incidence operators, positive material mass matrices, PEC relative and periodic closures, and the lossless and midpoint-conductive Yee leapfrog rows."
+      },
+      {
+        "id": "lem-maxwell-discrete-incidence-identities",
+        "kind": "lemma",
+        "title": "Incidence curl has zero discrete divergence and gradient curl",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid"
+        ],
+        "dependency_level": 4,
+        "strategy": "Prove the two incidence compositions vanish by expanding oriented simplex/cubical boundaries and cancelling each codimension-two face with opposite signs, including PEC-relative and periodic identifications."
+      },
+      {
+        "id": "lem-maxwell-yee-step-matrix-is-positive-definite",
+        "kind": "lemma",
+        "title": "The midpoint-conductivity Yee electric solve is well defined",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid"
+        ],
+        "dependency_level": 4,
+        "strategy": "Show the electric step matrix is symmetric positive definite when the permittivity mass is positive definite and conductivity is positive semidefinite."
+      },
+      {
+        "id": "alg-maxwell-yee-leapfrog-update",
+        "kind": "algorithm",
+        "title": "Lossless or midpoint-conductive Yee leapfrog update",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "lem-maxwell-yee-step-matrix-is-positive-definite"
+        ],
+        "dependency_level": 5,
+        "strategy": "Specify the input cochains, source and conductivity samples, staggered time indices, exact magnetic and electric update rows, and their admissibility conditions."
+      },
+      {
+        "id": "thm-maxwell-yee-gauss-constraints-propagate",
+        "kind": "theorem",
+        "title": "Compatible discrete charge and magnetic divergence propagate",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "lem-maxwell-discrete-incidence-identities",
+          "alg-maxwell-yee-leapfrog-update"
+        ],
+        "dependency_level": 6,
+        "strategy": "Apply the transpose incidence identities to Ampere and the divergence incidence to Faraday, then use the stated discrete charge-continuity equation."
+      },
+      {
+        "id": "thm-maxwell-yee-strict-cfl-modified-energy",
+        "kind": "theorem",
+        "title": "Strict spectral CFL positivity and Yee modified energy",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update"
+        ],
+        "dependency_level": 6,
+        "strategy": "Derive the exact staggered cross-energy identity, rewrite it using midpoint fields, and bound its negative curl term by the largest generalized curl-curl eigenvalue; treat equality separately."
+      },
+      {
+        "id": "thm-maxwell-yee-cartesian-dispersion-and-cfl",
+        "kind": "theorem",
+        "title": "Cartesian Yee symbol, numerical dispersion, and grid CFL bound",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "thm-maxwell-yee-strict-cfl-modified-energy"
+        ],
+        "dependency_level": 7,
+        "strategy": "Compute the staggered Fourier symbol, identify longitudinal and transverse modes, derive the discrete plane-wave dispersion relation, and maximize the symbol for rectangular and cubic grids."
+      },
+      {
+        "id": "lem-maxwell-periodic-yee-consistency",
+        "kind": "lemma",
+        "title": "Second-order consistency of the homogeneous periodic Yee curl-curl stencil",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces",
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "lem-maxwell-rectangular-stokes-identity"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use exact staggered central-difference formulas and Taylor remainders to bound the spatial curl-curl and centered time residual for smooth constant-coefficient periodic fields."
+      },
+      {
+        "id": "thm-maxwell-periodic-yee-smooth-solution-error",
+        "kind": "theorem",
+        "title": "Finite-time Yee error for smooth homogeneous periodic Maxwell fields",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "thm-maxwell-yee-strict-cfl-modified-energy",
+          "lem-maxwell-periodic-yee-consistency"
+        ],
+        "dependency_level": 7,
+        "strategy": "Apply the forced modified-energy identity to the sampled-solution residual and sum the energy increments under a strict CFL margin, with compatible exact starting rows."
+      },
+      {
+        "id": "thm-maxwell-yee-midpoint-conductivity-energy-balance",
+        "kind": "theorem",
+        "title": "Midpoint conductivity dissipates the Yee discrete energy",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "thm-maxwell-yee-strict-cfl-modified-energy"
+        ],
+        "dependency_level": 7,
+        "strategy": "Take the material inner products of both staggered rows and show the curl exchanges cancel while the midpoint current contributes nonpositive work."
+      },
+      {
+        "id": "def-maxwell-edge-fem-semidiscretization",
+        "kind": "definition",
+        "title": "Edge-face Maxwell finite element semidiscretization",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-zero-tangential-hcurl",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Use lowest-order Nedelec edge and RT0 face spaces, their oriented discrete curl, exact coefficient-weighted mass matrices, the PEC boundary subcomplex, and the corresponding first-order and second-order transient equations."
+      },
+      {
+        "id": "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+        "kind": "lemma",
+        "title": "Existence and uniqueness for the finite-dimensional Maxwell ODE",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Construct the matrix-exponential Duhamel solution for continuous loads and prove uniqueness by differentiating the inverse homogeneous flow."
+      },
+      {
+        "id": "thm-maxwell-edge-fem-energy-conservation",
+        "kind": "theorem",
+        "title": "Semidiscrete edge-face Maxwell energy conservation",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Differentiate the coefficient-weighted electric and magnetic quadratic energies and cancel the transposed discrete-curl pair."
+      },
+      {
+        "id": "def-maxwell-edge-ritz-projection",
+        "kind": "definition",
+        "title": "Maxwell curl-energy Ritz projection",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Define the unique finite-dimensional projection for the sum of the permittivity L2 form and permeability-weighted curl form."
+      },
+      {
+        "id": "lem-maxwell-edge-ritz-projection-well-defined",
+        "kind": "lemma",
+        "title": "Well-definedness and best approximation of the Maxwell Ritz map",
+        "deps": [
+          "def-maxwell-edge-ritz-projection",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Prove coercivity, uniqueness and orthogonality of the finite-dimensional variational projection, then derive its best-approximation estimate."
+      },
+      {
+        "id": "lem-maxwell-nedelec-smooth-interpolation-estimate",
+        "kind": "lemma",
+        "title": "Smooth lowest-order Nedelec and RT0 interpolation estimate",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-matching-affine-simplicial-meshes",
+          "thm-affine-piola-differential-and-trace-moment-identities",
+          "lem-na-nedelec-edge-unisolvence",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "On shape-regular affine tetrahedra, subtract constant local approximants, bound the edge and face moment coefficients, scale the fixed reference bases, and sum the local curl and field estimates."
+      },
+      {
+        "id": "lem-maxwell-magnetic-compatible-initial-projection",
+        "kind": "lemma",
+        "title": "Compatible magnetic initial projection for the Maxwell edge method",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "thm-na-uniformly-bounded-commuting-cochain-projection",
+          "lem-maxwell-nedelec-smooth-interpolation-estimate",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Correct the bounded commuting projection by its magnetic-mass orthogonal projection onto the discrete curl range; prove divergence preservation, curl orthogonality, and the smooth O(h) bound."
+      },
+      {
+        "id": "thm-maxwell-edge-fem-smooth-solution-error",
+        "kind": "theorem",
+        "title": "Smooth PEC edge-finite-element Maxwell error from commuting projections",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces",
+          "def-maxwell-edge-fem-semidiscretization",
+          "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+          "def-maxwell-edge-ritz-projection",
+          "lem-maxwell-edge-ritz-projection-well-defined",
+          "lem-maxwell-nedelec-smooth-interpolation-estimate",
+          "lem-maxwell-magnetic-compatible-initial-projection",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "Use the PE09 cochain projection for compatible initial fields and divergence constraints, a local smooth interpolation estimate for O(h) approximation, and the Maxwell Ritz projection plus the semidiscrete energy identity for finite-time error."
+      }
+    ]
+  },
+  {
+    "order": 2639,
+    "id": "yee-fdtd-and-transient-maxwell-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Yee FDTD and transient Maxwell finite elements \u2014 Examples",
+    "companion": "yee-fdtd-and-transient-maxwell-discretization",
+    "requires": [
+      "yee-fdtd-and-transient-maxwell-discretization"
+    ],
+    "items": [
+      {
+        "id": "ex-maxwell-yee-periodic-plane-wave-dispersion",
+        "kind": "example",
+        "title": "Periodic Yee plane-wave dispersion and the cubic CFL limit",
+        "deps": [
+          "thm-maxwell-yee-cartesian-dispersion-and-cfl"
+        ],
+        "dependency_level": 8,
+        "strategy": "Substitute a single transverse Fourier mode into the exact three-dimensional symbol and evaluate the axis and corner frequency relations."
+      },
+      {
+        "id": "ex-maxwell-incompatible-current-gauss-drift",
+        "kind": "example",
+        "title": "A current violating discrete continuity creates Gauss-law drift",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "lem-maxwell-discrete-incidence-identities"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use an oriented periodic edge current with nonzero incidence divergence but a fixed charge row, then compute the first-step Gauss residual exactly."
+      },
+      {
+        "id": "ex-maxwell-pec-rectangular-cavity-mode",
+        "kind": "example",
+        "title": "A smooth Maxwell eigenmode in a rectangular PEC cavity",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Construct an explicit divergence-free trigonometric field, verify all tangential PEC traces vanish, and compute its continuous frequency."
+      },
+      {
+        "id": "ex-maxwell-dielectric-jump-reflection",
+        "kind": "example",
+        "title": "Normal-incidence reflection at a dielectric jump",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Match tangential electric and magnetic traces at a planar interface and solve the resulting two scalar equations for reflection and transmission amplitudes."
+      }
+    ]
+  }
+]

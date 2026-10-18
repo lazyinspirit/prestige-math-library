@@ -7,12 +7,13 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts, def-invertible-matrix-and-general-linear-group, def-rank-and-nullity]
+deps: [ def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts, def-invertible-matrix-and-general-linear-group, def-rank-and-nullity ]
 aliases: []
 proof_strategy: direct
 verification:
   audited: 2026-08-30
   precheck: pass
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step4-published-alert-repair-records/thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block.json
 sources:
   scraped: []
   references:
@@ -52,10 +53,10 @@ hence is invertible.
 
 **Proof technique:** compare the greedy residuals with the rank.
 
-1.1 After $k$ pivot steps, the first $k$ pivoted columns span the same subspace as the first $k$ columns of $QR$, and the next pivot diagonal entry $r_{kk}$ is the norm of the residual of the chosen column after projection onto that span. Hence $r_{kk}\ne 0$ exactly when some remaining column still has a nonzero residual, that is, still lies outside the span of the first $k$ chosen columns. [L1, L2, algebra]
+1.1 Use zero-based row and column indices. Suppose $k$ pivot steps have been completed and the first $k$ chosen columns are independent; for $k=0$ this condition is vacuous. Their upper triangular leading block is nonsingular, so their span is the span of the first $k$ columns of $Q$. Orthogonality or unitarity identifies the residual of each remaining column after projection onto this span with its active coordinates in rows $k$ onward. The next pivot has index $k$; the transformations in [L2] concentrate its active coordinates in row $k$ and preserve their norm. Thus $|r_{kk}|$ is the norm of that residual, without any diagonal sign or phase convention. By the greedy rule, $r_{kk}\ne0$ exactly when some remaining column lies outside the span of the first $k$ chosen columns. [L1, L2, algebra]
 
-2.1 For $k<r$, the chosen columns cannot already span every column of $A$, because then all columns would lie in a $k$-dimensional span and [L4] would give rank at most $k<r$. Therefore some remaining column has nonzero residual, and by the greedy rule step 1.1 gives $r_{kk}\ne 0$. Thus the first $r$ diagonal entries of $R$ are nonzero. [step 1.1, L4, algebra]
+2.1 Induct over $k=0,\ldots,r-1$. If the first $k$ chosen columns are independent, their span has dimension $k<r$, so [L4] implies that some remaining column lies outside it. Step 1.1 and the greedy rule give $r_{kk}\ne0$, and the new chosen column is independent of its predecessors. Starting with the empty list proves that the first $r$ chosen columns are independent and that $r_{00},\ldots,r_{r-1,r-1}$ are nonzero. [step 1.1, L4, induction, algebra]
 
-3.1 After $r$ pivot columns have been chosen, [L4] says no further independent column exists. Hence every remaining column lies in the span of the first $r$ chosen columns, so every remaining residual is zero. Step 1.1 then forces every entry below and on the diagonal in the trailing block to be zero, giving $$R=\begin{pmatrix}R_{11}&R_{12}\\0&0\end{pmatrix}.$$ The block $R_{11}$ is upper triangular with nonzero diagonal by step 2.1, so it is invertible. [step 1.1, step 2.1, L3, L4, algebra]
+3.1 The first $r$ chosen columns are independent by step 2.1 and therefore span every column of $A$ by [L4]. Their span is the span of the first $r$ columns of $Q$, so all coordinates of every column of $Q^*A\Pi$ in rows indexed $r$ onward are zero. This gives the whole zero lower block, including every entry of the trailing block, not merely its diagonal. Hence $$R=\begin{pmatrix}R_{11}&R_{12}\\0&0\end{pmatrix}.$$ The block $R_{11}$ is upper triangular with nonzero diagonal by step 2.1; back-substitution solves $R_{11}x=b$ uniquely for every $b$, giving a two-sided inverse as in [L3]. For $r=0$, all columns of $A$ are zero and $R_{11}$ is the empty identity, which is its own inverse under [L3]. [step 1.1, step 2.1, L1, L3, L4, algebra]
 
 4.1 Steps 2.1 and 3.1 prove the claim. [step 2.1, step 3.1] ∎

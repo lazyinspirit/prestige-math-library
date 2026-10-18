@@ -1,0 +1,1897 @@
+
+PAGE 1
+DIVERGENCE-FREE RECONSTRUCTION OPERATORS FOR
+PRESSURE-ROBUST STOKES DISCRETIZATIONS WITH
+CONTINUOUS PRESSURE FINITE ELEMENTS
+PHILIP L. LEDERER∗, ALEXANDER LINKE†, CHRISTIAN MERDON‡, AND JOACHIM
+SCH¨OBERL†
+Abstract. Classical inf-sup stable mixed ﬁnite elements for the incompressible (Navier–)Stokes
+equations are not pressure-robust, i.e., their velocity errors depend on the continuous pressure. How-
+ever, a modiﬁcation only in the right hand side of a Stokes discretization is able to reestablish
+pressure-robustness, as shown recently for several inf-sup stable Stokes elements with discontinuous
+discrete pressures. In this contribution, this idea is extended to low and high order Taylor–Hood
+and mini elements, which have continuous discrete pressures. For the modiﬁcation of the right hand
+side a velocity reconstruction operator is constructed that maps discretely divergence-free test func-
+tions to exactly divergence-free ones. The reconstruction is based on local H(div)-conforming ﬂux
+equilibration on vertex patches, and fulﬁlls certain orthogonality properties to provide consistency
+and optimal a-priori error estimates. Numerical examples for the incompressible Stokes and Navier–
+Stokes equations conﬁrm that the new pressure-robust Taylor–Hood and mini elements converge
+with optimal order and outperform signiﬁcantly the classical versions of those elements when the
+continuous pressure is comparably large.
+Key words. incompressible Navier–Stokes equations, mixed ﬁnite elements, pressure robustness,
+exact divergence-free velocity reconstruction, ﬂux equilibration
+AMS subject classiﬁcations. 65N12, 65N30, 76D07, 76D05, 76M10
+1. Introduction and notation.
+1.1. Introduction. The classical Taylor–Hood element [42, 19, 31], its higher
+order extensions [13] and the classical mini element [1, 19] are among the most popu-
+lar discretizations for the incompressible Navier–Stokes equations, since they are easy
+to implement, fulﬁll a discrete LBB condition and converge with optimal order. Nev-
+ertheless they suﬀer from a common lack of robustness: since they use continuous
+discrete pressures, they relax the divergence constraint and are thus not pressure-
+robust [23], i.e., their velocity error is pressure-dependent, as one can see for an
+incompressible Stokes model problem −ν∆u + ∇p = f, div u = 0 with homogeneous
+Dirichlet velocity boundary conditions (with ν > 0). Here, the velocity errors for the
+Taylor–Hood and mini elements read as
+∥∇(u −uh)∥L2(Ω) ≤C
+inf
+wh∈Vh ∥∇(u −wh)∥L2(Ω) + 1
+ν
+inf
+qh∈Qh ∥p −qh∥L2(Ω) ,
+where Vh and Qh denote the discrete trial/test spaces for the velocities and the
+pressures, and C is a O(1) constant. This velocity error estimate is sharp and shows
+some kind of locking phenomenon [23, 27, 33, 15, 34]: for small parameters ν ≪1 the
+velocity error can become really large. The issue is well-known in the literature, it
+shows up in real-world situations [10, 18, 29, 23] and it is sometimes called poor mass
+conservation [17], since for H1-conforming mixed methods such large velocity errors
+are accompanied by large divergence errors.
+∗Institute
+for
+Analysis
+and
+Scientiﬁc
+Computing,
+TU
+Wien,
+Austria
+(philip.lederer@tuwien.ac.at,joachim.schoeberl@tuwien.ac.at ).
+†Weierstrass Institute for Applied Analysis and Stochastics, Germany (alexander.linke@wias-
+berlin.de, christian.merdon@wias-berlin.de).
+1
+arXiv:1609.03701v1  [math.NA]  13 Sep 2016
+
+
+PAGE 2
+Recently, it was shown for several mixed ﬁnite element methods like the non-
+conforming Crouzeix–Raviart element [27, 6] and the conforming P +
+2 -P disc
+1
+element
+[28] (and also for a ﬁnite volume [26] and for some Hybrid Discontinuous Galerkin
+methods [9]), which all use discontinuous pressures, that a modiﬁcation only in the
+right hand side of the Stokes discretization is able to reestablish pressure-robustness.
+This approach leads to a velocity error estimate [27, 28]
+∥∇(u −uh)∥L2(Ω) ≤C
+inf
+wh∈Vh ∥∇(u −wh)∥L2(Ω) + Cconshl+1|u|Hl+1(Ω),
+where l denotes the approximation order of the discrete pressure space and Ccons
+denotes an O(1) constant, arising due to a consistency error in the discrete right hand
+side. Note that similar pressure-robust velocity error estimates can be achieved also
+with divergence-free mixed methods like [38, 44, 45, 21, 22, 25, 16]. The key idea for
+the modiﬁcation of the Stokes right hand side in [27] is that discrete divergence-free
+velocity test functions are mapped to exact divergence-free ones by some velocity
+reconstruction operator.
+Then, irrotational parts (in the sense of the continuous
+Helmholtz decomposition) in the exterior force f of the above Stokes model problem
+are orthogonal in the L2 vector product to (mapped) discrete-divergence velocity test
+functions and do not spoil the discrete velocity solution uh [27].
+Indeed, the so-
+called poor mass conservation arises just due to a lack of L2 orthogonality between
+discrete-divergence-free velocity test functions and arbitrary gradient ﬁelds ∇ψ [26,
+27, 23]. For LBB-stable mixed ﬁnite element methods with discontinuous pressures
+the corresponding velocity reconstruction operators employ H(div)-conforming ﬁnite
+element spaces.
+The velocity reconstruction operator is deﬁned elementwise, and
+fulﬁlls several consistency properties [28].
+At the heart of the present contribution lies the construction of novel velocity
+reconstruction operators for the Taylor–Hood element family and the mini element,
+which have continuous discrete pressures, such that a modiﬁcation of the Stokes right
+hand side yields a pressure-robust mixed method. A ﬁrst version of such velocity re-
+construction operators has been presented in [24]. Similarly, velocity reconstructions
+in the spirit of [20] could be probably adapted also. Since the new corresponding
+mixed methods have the same stiﬀness matrix like their classical counterparts, the
+discrete LBB condition is inherited from the original method. Optimal convergence of
+the new pressure-robust mixed methods is shown. The novel velocity reconstructions
+require the solution of local discrete problems, which are deﬁned on vertex patches.
+The reconstructions map H1-conforming velocity test functions to H(div)-conforming
+ones, which preserve the discrete divergence. Especially, discrete divergence-free ve-
+locities are mapped to exact divergence-free ones. The construction uses ideas from
+ﬂux equilibration for a-posteriori estimates [8, 5]. In order to achieve optimal conver-
+gence order for the novel mixed methods, the velocity reconstructions have to fulﬁll
+some consistency properties, which are incorporated in the local problems to be solved.
+For this, bubble projectors [14], averaging operators [35] and properties of the Koszul
+complex [2] have to be exploited.
+1.2. Structure of this paper. After deﬁning some notation in the next subsec-
+tion, in Section 2 the continuous Stokes problem is introduced and the new pressure-
+robust mixed ﬁnite element methods for its discretizations are presented in a quite
+abstract manner. The main Theorem 2 summarizes the most important properties
+of the velocity reconstruction operator Rh, while the proofs of these properties are
+postponed to Section 4 in case of the Taylor–Hood element family and to Section
+5 in case of the mini element.
+Section 3 presents a common ﬁnite element error
+2
+
+
+PAGE 3
+analysis for the proposed Taylor–Hood and mini element variants. It is shown that
+their velocity errors are indeed pressure-robust, and that — quite surprisingly — even
+pressure-robustness results hold for their pressure errors, when measured in some dis-
+crete pressure norms. In Section 4, diﬀerent ﬁnite element spaces and ﬁnite element
+tools like bubble projectors [14] and Oswald interpolators are introduced, and local
+(saddle-point) problems on vertex patches are deﬁned that are fundamental for the
+deﬁnition of the novel velocity reconstruction operators for the Taylor–Hood ﬁnite
+element family. Besides proving the unique solvability of these local problems, the
+properties of the corresponding reconstruction operators stated in Theorem 2 are
+proved. Similar to Section 4, in Section 5 velocity reconstruction operators for lowest
+and higher order mini elements are deﬁned solving local problems on vertex patches,
+and the properties of Theorem 2 are proved also in these cases. Section 6 presents
+several numerical examples for the incompressible Stokes equations in 2D and 3D that
+show that the pressure-robust Taylor–Hood and mini element variants can outperform
+clearly their classical counterparts in the best case, and are only slightly worse than
+the classical discretizations in the worst case. Section 7 serves as an Appendix where
+some properties of the Koszul complex in 3D are demonstrated.
+1.3. Preliminaries. We introduce some basic notation and assumptions.
+In
+this work we assume an open bounded domain Ω⊂Rd with d = 2, 3 and a Lipschitz
+boundary Γ. On Ωwe deﬁne a partition Ω= SNT
+i=1 Ti into sub-domains called elements
+Ti which will be triangles and tetrahedrons in two and three dimensions respectively.
+We shall denote T as such a partition which fulﬁlls a shape regular assumption, so
+all elements fulﬁll |T| ≽diam(T)d. Furthermore we call T quasi–uniform when all
+elements are essentially of the same size, i.e., there exists one global h such that
+h ≈diam(T), ∀T ∈T , see for example [4]. The set of vertices is deﬁned as V and for
+each vertex V ∈V we deﬁne the vertex patch ωV and the corresponding triangulation
+TωV as
+ωV :=
+[
+T :V ∈T
+T ⊂Ω
+and
+TωV := {T : V ∈T} ⊂T ,
+and deﬁne the local mesh size hV := max{diam(T) : T ∈TωV }.
+We deﬁne the
+polynomial spaces of order m on Ωas Πm(Ω) and on the triangulation as
+Πm(T ) := {qh : qh|T ∈Πm(T) ∀T ∈T } =
+Y
+T ∈T
+Πm(T),
+(1.1)
+and similar for ωV and TωV . Furthermore we deﬁne the spaces
+L2
+0(Ω) := {q ∈L2(Ω) :
+Z
+Ω
+q dx = 0} =: Q,
+H1
+0(Ω) := {u ∈H1(Ω) : tr u = 0 on ∂Ω},
+H0(div, Ω) := {σ ∈H(div, Ω) : trnσ = 0 on ∂Ω},
+V := [H1
+0(Ω)]d,
+V0 := {v ∈V : div v = 0}.
+where tr and trn denote the trace operators for H1(Ω) and H(div, Ω). We also deﬁne
+the L2 projector on polynomials of order m as Pm
+Ω, and the Oswald interpolator
+S : Πm(T ) →Πm(T ) ∩C0(Ω) (see [35] or the averaging operator in [12]) that maps
+discontinuous polynomials to continuous ones. Depending on the dimension we deﬁne
+3
+
+
+PAGE 4
+the Koszul operator (see [2]) for d = 2 with ⃗x = (x, y) and for d = 3 with ⃗x = (x, y, z)
+as
+κ⃗x : L2(Ω) →[L2(Ω)]2
+κ⃗x : [L2(Ω)]3 →[L2(Ω)]3
+κ⃗x(a) :=
+−y
+x
+
+a
+κ⃗x(a) := ⃗x × a.
+Furthermore we deﬁne the Curl operator for d = 2
+Curl : Πm(Ω) →[Πm(Ω)]2
+Curl (u) := (−∂yu, ∂xu)t.
+In a similar way all the above introduced spaces and operators can be deﬁnes on ωV .
+In this work we use a ≼b when there exists a constant c independent of a, b, m, h such
+that a ≤cb
+2. Continuous and discrete Stokes problems and the velocity recon-
+struction operator. The incompressible Stokes problem for a right hand side forc-
+ing f ∈[L2(Ω)]d is given in weak formulation by [19]: search for (u, p) ∈V × Q such
+that for all (v, q) ∈V × Q holds
+a(u, v) + b(v, p) = l(v),
+b(u, q) = 0,
+(2.1)
+where the bilinear forms a : V × V →R and b : V × Q →R and the linear form
+l : [L2(Ω)]d →R are deﬁned by
+a(u, v) =
+Z
+Ω
+ν∇u : ∇v dx,
+b(v, q) =
+Z
+Ω
+q div v dx,
+l(v) =
+Z
+Ω
+f · v dx.
+(2.2)
+Note that for the continuous Stokes problem holds the LBB condition
+(2.3)
+inf
+q∈Q sup
+v∈V
+b(v, q)
+∥q∥L2(Ω) ∥∇v∥L2(Ω)
+≥β > 0,
+where β denotes the LBB constant.
+For the discretization of the continuous Stokes problem (2.1) by inf-sup stable
+mixed ﬁnite element methods [19, 4] we introduce conforming ﬁnite element spaces
+for the velocity Vh ⊂V and the pressure Qh ⊂Q. We assume that for the pair
+Vh × Qh of discrete spaces holds a discrete LBB condition
+(2.4)
+inf
+qh∈Qh sup
+vh∈Vh
+b(vh, qh)
+∥qh∥L2(Ω) ∥∇vh∥L2(Ω)
+≥βh > 0.
+We remind the reader that the discrete LBB condition implies the existence of a Fortin
+interpolator IF : V →Vh such that for all v ∈V and for all qh ∈Qh holds
+(2.5)
+b(IF v, qh) = b(v, qh)
+and
+∥∇IF v∥L2(Ω) ≤CF ∥∇v∥L2(Ω) ,
+4
+
+
+PAGE 5
+where CF denotes the stability constant of the Fortin interpolator [19, 4]. Introducing
+the space of discrete divergence-free velocity functions
+(2.6)
+V0
+h := {vh ∈Vh : b(vh, qh) = 0 for all qh ∈Qh},
+the following lemma is a classical result by the theory of mixed ﬁnite element methods
+[19, 4].
+Lemma 1. Let the ﬁnite element spaces Vh and Qh fulﬁll the discrete LBB con-
+dition (2.4), then it holds for all v ∈V0
+inf
+vh∈V0
+h
+∥∇v −∇vh∥L2(Ω) ≤(1 + CF )
+inf
+wh∈Vh ∥∇v −∇wh∥L2(Ω) .
+In the following we propose a non-standard discretization of the right hand side
+of the Stokes equations, in order to obtain pressure-robust velocity error estimates.
+Key is the deﬁnition of a velocity reconstruction operator in the spirit of [26, 27] that
+maps discrete divergence-free velocity test functions to exact divergence-free ones.
+The novelty of this contribution is that we deﬁne such reconstruction operators for
+mixed ﬁnite element methods, which possess only continuous discrete pressures. The
+most prominent examples of such mixed ﬁnite element methods are given by the
+Taylor–Hood element family and the mini element [19, 4]. From now on we focus on
+the Taylor–Hood element of order k ≥2 so
+Vh := [Πk(T )]d ∩[C0(Ω)]d
+and
+Qh := Πk−1(T ) ∩C0(Ω),
+and give a detailed description for the mini element in Section 5. The velocity recon-
+struction operators
+Rh : Vh →Vh + Σh
+with some H(div)-conforming ﬁnite element space Σh are deﬁned by solving local
+problems on vertex patches. A precise deﬁnition is given in Section 4. We introduce
+the discrete space of scalar functions
+(2.7)
+eQh := div(RhVh),
+and we assume that it holds Qh ⊂eQh. The Oswald interpolator is now deﬁned from
+S : eQh →Qh with the property
+S|Qh(Ω) = id.
+(2.8)
+For the error estimates of the ﬁnite element method to be proposed, we use the
+following abstract properties of Rh, which are summarized in the following theorem.
+Theorem 2. For the reconstruction operator Rh deﬁned by equation (4.19) holds
+i.
+(div Rhwh, ˜qh)L2(Ω) = (div wh, S˜qh)L2(Ω)
+∀˜qh ∈eQh,
+(2.9)
+ii.
+(div (wh −Rhwh), qh)L2(Ω) = 0
+∀wh ∈Vh, ∀qh ∈Qh,
+(2.10)
+iii.
+(div wh, qh)L2(Ω) = 0 ∀qh ∈Qh ⇒(div Rhwh, ˜qh)L2(Ω) = 0 ∀˜qh ∈eQh,
+(2.11)
+i.e.
+div Rhwh = 0,
+iv.
+(g, wh −Rhwh)L2(Ω) ≤Ccons|||g|||k−2∥∇wh∥L2(Ω) for any g ∈[L2(Ω)]d
+(2.12)
+with data oscillation deﬁned by |||g|||m :=
+ P
+V ∈V
+h2
+V
+g −Pm
+ωV g
+2
+L2(ωV )
+ 1
+2
+.
+5
+
+
+PAGE 6
+Remark 3. The data oscillation |||·|||m is similar to a estimation used for the anal-
+ysis of adaptive methods, see for example [43, p. 60]. Note that for g ∈Hl(Ω) and a
+quasi–uniform triangulation T it follows using a scaling argument that
+|||g|||m ≼hmin{m+2,l+1}|g|Hl(Ω).
+The discrete Stokes problem can now be deﬁned by: search for (uh, ph) ∈Vh × Qh
+such that for all (vh, qh) ∈Vh × Qh holds
+a(uh, vh) + b(vh, ph) = l(Rhvh),
+b(uh, qh) = 0.
+(2.13)
+Remark 4. The stiﬀness matrix of the proposed discretization (2.13) is the same
+as for standard inf-sup stable mixed ﬁnite element methods. However, the discretiza-
+tion of the right hand side is non-standard. The main reason for this non-standard
+discretization is: for the continuous Stokes problem (2.1) it holds that (u, ψ) is the
+solution for arbitrary right hand sides of the form f = ∇ψ with ψ ∈H1(Ω)
+
+R, i.e.,
+irrotational forces f = ∇ψ lead to a no-ﬂow velocity solution u = 0 [26, 27]. This is
+due to the L2 orthogonality
+R
+Ω∇ψ · w dx = 0 for all w ∈H0(div, Ω) with div w = 0.
+Similarly it holds uh = 0 for the discretization (2.13), since due to Theorem 2 discrete
+divergence-free velocity test functions are mapped to divergence-free ones [26, 27].
+3. Error estimation for the pressure-robust Stokes discretization. In
+this section, an a-priori error analysis is performed for the solution of the discrete
+Stokes problem (uh, ph) in (2.13). The following lemma is needed to estimate the
+consistency error introduced due to the non-standard discretization of the right hand
+side in (2.13).
+Lemma 5. For v ∈V with ∆v ∈[L2(Ω)]d and for all wh ∈Vh it holds
+|(∆v, Rhwh) + (∇v, ∇wh)| ≤Ccons|||∆v|||k−2∥∇wh∥L2(Ω).
+Proof. By calculating and applying (2.12), one obtains
+(∆v, Rhwh) + (∇v, ∇wh) = (∆v, Rhwh −wh) + (∆v, wh) + (∇v, ∇wh)
+= (∆v, Rhwh −wh) ≤Ccons|||∆v|||k−2 ∥∇wh∥L2(Ω) .
+Theorem 6. For the discrete solution (uh, ph) ∈Vh × Qh in (2.13) and the
+continuous solution (u, p) ∈(V, Q) of (2.1), assuming the regularity ∆u ∈[L2(Ω)]d
+the following a-priori errors hold
+i.
+∥∇(u −uh)∥L2(Ω) ≤2(1 + CF )
+inf
+wh∈Vh ∥∇(u −wh)∥L2(Ω) + Ccons|||∆u|||k−2,
+ii.
+∥SP e
+Qhp −ph∥L2(Ω) ≤ν
+βh
+
+∥∇(u −uh)∥L2(Ω) + Ccons|||∆u|||k−2
+
+,
+(3.1)
+iii.
+∥p −ph∥L2(Ω) ≤∥p −SP e
+Qhp∥L2(Ω)
++ ν
+βh
+
+∥∇(u −uh)∥L2(Ω) + Ccons|||∆u|||k−2
+
+.
+6
+
+
+PAGE 7
+Proof. Note that from ∆u ∈[L2(Ω)]d and f ∈[L2]d(Ω) follows p ∈H1(Ω). i) For
+an arbitrary vh ∈V0
+h we deﬁne wh := uh −vh ∈V0
+h.
+ν ∥∇wh∥2
+L2(Ω) = a(wh, wh) = a(uh, wh) −a(vh, wh)
+= (−ν∆u + ∇p, Rhwh) −a(vh, wh)
+= a(u −vh, wh) −ν ((∆u, Rhwh) + (∇u, ∇wh)) ,
+where it was used that div Rhwh = 0 holds due to (2.11) and that thus ∇p and Rhwh
+are orthogonal in L2. Using Lemma 5 and the Cauchy–Schwarz inequality yields
+ν ∥∇wh∥2
+L2(Ω) ≤ν ∥∇(u −vh)∥L2(Ω) ∥∇wh∥L2(Ω) + νCcons|||∆u|||k−2 ∥∇wh∥L2(Ω) .
+Therefore it holds
+∥∇wh∥L2(Ω) ≤
+inf
+vh∈V0
+h
+∥∇(u −vh)∥L2(Ω) + Ccons|||∆u|||k−2.
+With the triangle inequality it follows
+∥∇(u −uh)∥L2(Ω) ≤∥∇(u −vh)∥L2(Ω) + ∥∇wh∥L2(Ω) .
+Applying Lemma 1 yields the ﬁrst statement.
+ii) For proving the pressure error, one computes for an arbitrary vh ∈Vh
+(SP e
+Qhp −ph, div vh) = (SP e
+Qhp, div vh) + (f, Rhvh) −a(uh, vh)
+= (P e
+Qhp, div Rhvh) + (∇p, Rhvh) −(ν∆u, Rhvh) −a(uh, vh)
+= −(ν∆u, Rhvh) −a(uh, vh)
+= −(ν∆u, Rhvh) −a(u, vh) −a(uh −u, vh),
+where (2.9) was used. Using the discrete LBB condition (2.4), one concludes
+∥SP e
+Qhp −ph∥L2(Ω) ≤ν
+βh
+
+∥∇(u −uh)∥L2(Ω) + Ccons|||∆u|||k−2
+
+.
+iii) The last statement follows by the triangle inequality.
+Remark 7. The statement i) in Theorem 6 shows the pressure-robustness of the
+a-priori velocity error. Interesting is also statement ii) in Theorem 6. It shows that
+also the pressure error is pressure-robust in the sense that ph = SP e
+Qhp up to an
+error, which is only velocity-dependent. Note that this is completely analogous to
+pressure-robust mixed methods with discontinuous pressures [28, 30, 6]. There, Qh
+and eQh coincide and ph is even the best approximation of p in Qh up to an error,
+which is also only velocity-dependent.
+Corollary 8. Assume a quasi-uniform triangulation T and a solution u ∈
+[Hk+1(Ω)]d and p ∈Hk(Ω) of the continuous problem (2.1).
+Then, the solution
+(uh, ph) of (2.13) satisﬁes
+∥u −uh∥H1(Ω) ≤(2(1 + CF ) + Ccons) hk|u|Hk+1(Ω),
+and
+(3.2)
+∥p −ph∥L2(Ω) ≤ν (2(1 + CF ) + 2Ccons)
+β
+hk|u|Hk+1(Ω) + hk|p|Hk(Ω).
+(3.3)
+7
+
+
+PAGE 8
+Proof. Follows by Theorem 3.1 and standard scaling arguments.
+Remark 9. In order to increase the accuracy of the solution one may want to use
+a local reﬁnement of the mesh T . This is indeed possible with the modiﬁed method
+due to local properties of the data oscillation.
+Corollary 10. Under the assumptions of Theorem 6, Corollary 8 and the con-
+vexity of Ωit holds
+∥u −uh∥L2(Ω) ≼hk+1|u|Hk+1(Ω).
+Proof. The proof follows by an Aubin–Nitsche argument [4, 3, 32]. For an ar-
+bitrary g ∈[L2(Ω)]d one employs a dual Stokes problem with a solution ug ∈
+V0 ∩[H2(Ω)]d. Extending the domain of deﬁnition of the reconstruction operator
+Rh to V0 one sees at once that it holds Rhw = w for all w ∈V0. Then, Rhug = ug
+and the arguments in [28] deliver the desired optimal pressure-robust L2-estimate.
+4. Construction and analysis of the reconstruction operator.
+4.1. Deﬁnition of the operators and spaces. In this section we deﬁne local
+problems on each vertex patch ωV and proof theorem 2.
+For an arbitrary vertex
+V ∈V we start by deﬁning the spaces
+Σh,0(TωV ) := {σh ∈RT k−1(TωV ) : trnσh = 0 on ∂ωV } ⊂H0(div, ωV )
+eQh(TωV ) := Πk−1(TωV ) ⊂L2(ωV )
+eQ0
+h(TωV ) := eQh(TωV ) ∩L2
+0(ωV ),
+where RT k−1 is the Raviart-Thomas space of order k −1 see [4] and [36] , and for
+k ≥3 using the Koszul operator also
+Wh(ωV ) := κ⃗x−V (Πk−3(ωV )) ⊂ΛV := κ⃗x−V (L2(ωV ))
+for
+d = 2
+Wh(ωV ) := κ⃗x−V ([Πk−3(ωV )]3) ⊂ΛV := κ⃗x−V ([L2(ωV )]3)
+for
+d = 3.
+Note that eQh consists of element-wise polynomials and Πk−3(ωV ) are polynomials on
+the patch. Furthermore we have the property
+div Σh,0(TωV ) = eQ0
+h(TωV ).
+(4.1)
+We continue with the deﬁnition of the bilinearform B : (H0(div, ωV )×L2
+0(ωV )×ΛV )×
+(H0(div, ωV ) × L2
+0(ωV ) × ΛV ) →R by
+B((σ, φ, λ), (τ, ψ, µ)) :=
+Z
+ωV
+σ · τ dx +
+Z
+ωV
+div τφ dx +
+Z
+ωV
+τ · λ dx +
+Z
+ωV
+div σψ dx +
+Z
+ωV
+σ · µ dx.
+Now let T be an arbitrary element T ∈T , and VT be the set of vertices of T with
+NT := |VT |. Let {φj}NT
+j=1 be the local (Lagrangian) basis on T for the interpolation
+points {xj}NT
+j=1 and {qj}NT
+j=1 be the coeﬃcients of an arbitrary q ∈Πk−1(T), so
+φj(xl) = δjl
+∀j, l = 1, . . . , NT
+and
+q(x) =
+NT
+X
+j=1
+qjφj(x).
+8
+
+
+PAGE 9
+V
+q1
+q2
+q3
+q4
+q5
+q6
+V
+q1
+0
+0
+0
+q5/2
+q6/2
+Fig. 1: Visualisation of the nodal coeﬃcients q1, . . . , q6 of a quadratic polynomial
+q ∈Π2(T) (left) and the coeﬃcients of its bubble projector PB
+T,V q (right) on a triangle
+T with respect to the vertex V .
+Then we deﬁne for each V ∈VT an operator PB
+T,V : Πk−1(T) →Πk−1(T) by setting
+the coeﬃcients as
+(PB
+T,V q)j = qjλV (xj),
+(4.2)
+where λV is the barycentric coordinate function of the vertex V . Figure 1 visualizes
+the change in the coeﬃcients for a quadratic polynomial in two dimensions. It holds
+trPB
+T,V q = 0 on Fop
+and
+X
+V ∈VT
+PB
+T,V q = q,
+(4.3)
+where Fop is the opposite edge of V for d = 2 and the opposite face for d = 3. Using
+a trivial extension by 0 on Ω\ T, we can expand the range of PB
+T,V on eQh(T ). By
+that we deﬁne for every vertex V the bubble projector PB
+V : eQh(T ) →eQh(T ) as
+PB
+V ˜qh :=
+X
+T ∈TωV
+PB
+T,V ˜qh
+∀˜qh ∈eQh(T ),
+(4.4)
+with the property
+trPB
+V ˜qh = 0
+on
+∂ωV .
+(4.5)
+PB
+V ˜qh = 0
+on
+Ω\ ωV .
+(4.6)
+In Figure 2 an example of a projected arbitrary ˜qh ∈eQh is given.
+Remark 11. More complicated, but polynomial-robust bubble projectors are given
+in [41] and [14]. If this robustness is an issue, these operators could be used instead
+of PB
+V .
+4.2. Deﬁnition of the local problem. On the vertex patch, we deﬁne the
+problem: For a given function div wh ∈eQh(TωV ) ﬁnd (σV
+h , φh, λh) ∈(Σh,0(TωV ) ×
+eQ0
+h(TωV ) × Wh(ωV )) so that
+B((σV
+h , φh, λh), (τ h, ψh,µh)) =
+ div wh, PB
+V (ψh −Sψh)
+
+L2(ωV )
+(4.7)
+∀(τ h, ψh, µh) ∈Σh,0(TωV ) × eQ0
+h(TωV ) × Wh(ωV ).
+9
+
+
+PAGE 10
+(a) Arbitrary polynomial function ˜qh
+(b) Applying the bubble Projector PB
+V ˜qh
+Fig. 2: An example for the bubble projector on ωV (dark gray)
+Theorem 12. Equation 4.7 has a unique solution (σV
+h , φh, λh) satisfying
+i.
+σV
+h
+
+L2(ωV ) ≼hV ∥div wh∥L2(ωV ) ,
+(4.8)
+ii.
+ div σV
+h , ˜qh
+
+L2(Ω) =
+ div wh, PB
+V (˜qh −S˜qh)
+
+L2(ωV )
+∀˜qh ∈eQh(T )
+(4.9)
+where σV
+h was trivially extended by 0 on Ω,
+iii.
+and the solution is L2(ωV )-orthogonal to polynomials of order k −2, i.e.
+ σV
+h , ξ
+
+L2(ωV ) = 0
+∀ξ ∈[Πk−2(ωV )]d.
+(4.10)
+Proof of existence, uniqueness and i. We start with the considered norms
+∥τ h∥Σh,0(TωV ) := ∥τ h∥L2(ωV ) + hV ∥div τ h∥L2(ωV ) ,
+∥ψh∥e
+Qh(TωV ) := 1
+hV
+∥ψh∥L2(ωV ) ,
+∥µh∥Wh(ωV ) := ∥µh∥L2(ωV ) .
+In this part of the proof we use Σh,0 as symbol for Σh,0(TωV ) and similar for eQh(TωV )
+and Wh(TωV ). Next we deﬁne the bilinearforms
+aσ(σh, τ h) :=
+Z
+ωV
+σh · τ h dx
+∀(σh, τ h) ∈Σh,0 × Σh,0,
+b1(σh, ψh) :=
+Z
+ωV
+div σhψh dx
+∀(σh, ψh) ∈Σh,0 × eQh,
+b2(σh, µh) :=
+Z
+ωV
+σh · µh dx
+∀(σh, µh) ∈Σh,0 × Wh.
+Using the Cauchy Schwarz inequality we see that aσ, b1 and b2 are all continuous
+aσ(σh, τ h) ≼∥σh∥L2(ωV ) ∥τ h∥L2(ωV ) ≼∥σh∥Σh,0 ∥τ h∥Σh,0
+b1(σh, ψh) ≼∥div σh∥L2(ωV ) ∥ψh∥L2(ωV ) ≼∥σh∥Σh,0 ∥ψh∥e
+Qh
+b2(σh, µh) ≼∥σh∥L2(ωV ) ∥µh∥L2(ωV ) = ∥σh∥Wh ∥µh∥Wh .
+As
+B((σV
+h , φh, λh),(τ h, ψh, µh)) =
+aσ(σh, τ h) + b1(σh, ψh) + b2(σh, µh) + b1(τ h, φh) + b2(τ h, λh),
+10
+
+
+PAGE 11
+we show the existence and uniqueness of the saddle point problem (4.7) as in chapter
+4 in [4], so it remains to show the ellipticity of aσ(·, ·), i.e.
+aσ(σh, σh) ≽∥σh∥2
+Σh,0
+∀σh ∈Σ0
+h,0
+(4.11)
+on the kernel
+Σ0
+h,0 := {σh ∈Σh,0 : b1(σh, ψh) + b2(σh, µh) = 0 ∀(ψh, µh) ∈eQ0
+h × Wh},
+and the LBB condition with some βσ > 0 such that, for all (ψh, µh) ∈eQ0
+h × Wh,
+sup
+σh∈Σh,0
+b1(σh, ψh) + b2(σh, µh)
+∥σh∥Σh,0
+≽βσ(∥ψh∥e
+Qh + ∥µh∥Wh).
+(4.12)
+For a function σh in the kernel Σ0
+h,0 it holds in particular
+b1(σh, ψh) = 0
+∀ψh ∈eQ0
+h,
+and hence div σh = 0, thus
+∥σh∥L2(ωV ) = ∥σh∥Σh,0
+∀σh ∈Σ0
+h,0.
+This implies (4.11). To show (4.12) we will proceed in three steps. First we show the
+LBB condition for the bilinearform b1(·, ·) and then for b2(·, ·) by choosing proper can-
+didates that do not destroy the ﬁrst condition, and ﬁnally combine the two estimates.
+For b1(·, ·) we ﬁrst show the LBB condition on the reference patch c
+ωV and then on
+ωV . It should be mentioned that there exist diﬀerent reference patches due to the
+number of elements that belong to a vertex, but for each triangulation T there exist a
+ﬁnite number of reference patches. We use the standard Raviart-Thomas interpolator
+IRT of order k −1 (see [4], or [11]) that provides
+b1(IRT σ, ψh) = b1(σ, ψh)
+∀ψh ∈eQh( c
+ωV )
+∀σ ∈H(div, c
+ωV )
+and
+∥IRT σ∥H(div, c
+ωV ) ≼∥σ∥H1( c
+ωV )
+∀σ ∈[H1( c
+ωV )]d.
+For an arbitrary ˆ
+ψh ∈eQ0
+h( c
+ωV ) we have
+sup
+ˆσh∈Σh,0( c
+ωV )
+b1(ˆσh, ˆψh)
+∥ˆσh∥H(div, c
+ωV )
+≽
+sup
+ˆσ∈[H1
+0( c
+ωV )]d
+b1(IRT ˆσ, ˆψh)
+∥IRT ˆσ∥H(div, c
+ωV )
+≽
+sup
+ˆσ∈[H1
+0( c
+ωV )]d
+b1(ˆσ, ˆψh)
+∥ˆσ∥H1( c
+ωV )
+.
+Next we use the continuous Stokes LBB condition (2.3) to get
+sup
+ˆσh∈Σh,0( c
+ωV )
+b1(ˆσh, ˆψh)
+∥ˆσh∥H(div, c
+ωV )
+≥β1∥ˆψh∥L2( c
+ωV ),
+(4.13)
+11
+
+
+PAGE 12
+with β1 > 0 that depends only of the shape and size of the triangles on the reference
+patch. To show the condition on ωV we recall the deﬁnition of the Piola transforma-
+tion. Let F : ˆT →T be the mapping of the reference triangle to an arbitrary element
+T. Then the Piola transformation is deﬁned as
+P(ˆσ) :=
+1
+det F ′ F ′ ˆσ
+∀ˆσ ∈[L2( ˆT)]d.
+For an arbitrary ψh we now choose ˆψh = ψh, and deﬁne σ1
+h := P(ˆσh) for ˆσh that
+delivers the supremum of Equation (4.13). Standard scaling arguments yield
+b1(σ1
+h, ψh)
+∥σ1
+h∥Σh,0
+=
+R
+ωV div σ1
+hψh dx
+∥σ1
+h∥L2(ωV ) + hV ∥div σ1
+h∥L2(ωV )
+≽
+h(d−2)/2
+V
+R
+c
+ωV div ˆσh ˆψh dx
+∥ˆσh∥L2( c
+ωV ) + ∥div ˆσh∥L2( c
+ωV )
+(4.14)
+≥h(d−2)/2
+V
+β1∥ˆψh∥L2( c
+ωV ) = β1
+1
+hV
+∥ψh∥L2(ωV ) = β1 ∥ψh∥e
+Qh .
+We continue with the LBB condition for b2(·, ·).
+We start with the case d = 3.
+Choose an arbitrary µh = κ⃗x−V (ξh) ∈Wh with ξh ∈[Πk−3(ωV )]3. Furthermore, due
+to theorem 20, we can assume that div ξh = 0. Now we deﬁne
+σ2
+h := −curl (λV ξh)
+where λV is the hat function of the vertex V . Note that we have
+b1(σ2
+h, ψh) = 0.
+(4.15)
+Using integration by parts we get
+b2(σ2
+h, µh) = −
+Z
+ωV
+curl (λV ξh) · κ⃗x−V (ξh) dx
+= −
+Z
+ωV
+(λV ξh) · curl ((⃗x −V ) × ξh) dx.
+Using basic vector calculus leads to
+curl ((⃗x −V ) × ξh) = (⃗x −V ) div ξh
+| {z }
+=0
++ ∇(⃗x −V )
+|
+{z
+}
+I
+ξh −ξh div (⃗x −V )
+|
+{z
+}
+=3
+−∇ξh(⃗x −V )
+= −2ξh −∇ξh(⃗x −V )
+and so
+b2(σ2
+h, µh) = −
+Z
+ωV
+(λV ξh) · (−2ξh −∇ξh(⃗x −V )) dx
+=
+Z
+ωV
+2λV ξ2
+h dx +
+Z
+ωV
+λV ξh · ∇ξh(⃗x −V ) dx
+=
+Z
+ωV
+2λV ξ2
+h dx + 1
+2
+Z
+ωV
+λV ∇ξ2
+h · (⃗x −V ) dx
+=
+Z
+ωV
+2λV ξ2
+h dx −1
+2
+Z
+ωV
+ξ2
+h div ((⃗x −V )λV )
+|
+{z
+}
+3λV +∇λV (⃗x−V )
+dx
+= 1
+2
+Z
+ωV
+λV ξ2
+h dx −1
+2
+Z
+ωV
+ξ2
+h∇λV (⃗x −V ) dx.
+12
+
+
+PAGE 13
+On any T ⊂TωV the gradient of λV is equivalent to the scaled normal vector nV on
+the face opposite to V , and one can see that −nV · (⃗x −V ) ≤0, what ﬁnally leads to
+b2(σ2
+h, µh) ≽β2 ∥ξh∥2
+L2(ωV ) ≽β2 ∥µh∥2
+Wh .
+(4.16)
+For the case d = 2 we proceed similar. For an arbitrary µh = κ⃗x−V (ξh) ∈Wh with
+ξh ∈Πk−3(ωV ) we deﬁne
+σ2
+h := −Curl (λV ξh)
+Again it holds property (4.15) and we see
+b2(σ2
+h, µh) = −
+Z
+ωV
+Curl (λV ξh) · κ⃗x−V (ξh) dx
+= −
+Z
+ωV
+∇(λV ξh) · (⃗x −V )ξh dx
+=
+Z
+ωV
+(λV ξh) div ((⃗x −V )ξh) dx
+=
+Z
+ωV
+2λV ξ2
+h + 1
+2
+Z
+ωV
+λV (⃗x −V )∇ξ2
+h dx.
+The rest is similar as before. Now we can show (4.12). For an arbitrary ψh ∈eQ0
+h and
+µh ∈Wh we choose the functions σ1
+h, σ2
+h that fulﬁll Equations (4.14) and (4.16) and
+(4.15). Furthermore we can scale σ1
+h and σ2
+h so that
+σ1
+h
+
+Σh,0 = ∥ψh∥e
+Qh
+and
+σ2
+h
+
+Σh,0 = ∥µh∥Wh .
+For α =
+1
+β1β2 we deﬁne then σh = σ1
+h + ασ2
+h and get
+b1(σh, ψh) + b2(σh, µh) = b1(σ1
+h, ψh) + b2(σ1
+h, µh) + αb2(σ2
+h, µh)
+≽β1 ∥ψh∥2
+e
+Qh −
+σ1
+h
+
+Σh,0 ∥µh∥Wh + αβ2 ∥µh∥2
+Wh
+≽β1 ∥ψh∥2
+e
+Qh −∥ψh∥e
+Qh ∥µh∥Wh + αβ2 ∥µh∥2
+Wh .
+Using Young’s inequality we have
+∥ψh∥e
+Qh ∥µh∥Wh ≤β1
+2 ∥ψh∥2
+e
+Qh +
+1
+2β1
+∥µh∥2
+Wh ,
+and so
+b1(σh, ψh) + b2(σh, µh) ≽β1
+2 ∥ψh∥2
+e
+Qh +
+1
+2β1
+∥µh∥2
+Wh
+≽
+β1
+2 +
+1
+2β1
+
+(∥ψh∥e
+Qh + ∥µh∥Wh)2.
+As ∥σh∥Σh,0 =
+σ1
+h + ασ2
+h
+
+Σh,0 ≤(1 + α)(∥ψh∥e
+Qh + ∥µh∥Wh) we get
+b1(σh, ψh) + b2(σh, µh)
+∥σh∥Σh,0
+≽β(∥ψh∥e
+Qh + ∥µh∥Wh)
+13
+
+
+PAGE 14
+and thus (4.12) holds with βσ =
+β2
+1+1
+2β1(1+α). Using the theory of saddle point problems,
+chapter 4 in [4], Equation (4.7) has a unique and stable solution σV
+h that fulﬁlls
+σV
+h
+
+L2(ωV ) ≼∥div wh∥e
+Q′
+h ≼hV ∥div wh∥L2(ωV ) ,
+(4.17)
+so property (4.8) was shown.
+Remark 13. In the ﬁrst step of the above estimation the constant depends on the
+operator norms of PB
+V und S which are independent of h. For S we refer to [35],[12].
+For the PB
+V using the implementation given by the coeﬃcients (4.2) the estimation is
+clear as λVi(xj) ∈(0, 1).
+Proof of ii. and iii.. Now let c ∈R be a constant on the patch, then the right
+hand side of Equation (4.7) reads as
+Z
+ωV
+div wh PB
+V (c −Sc
+|
+{z
+}
+=0
+) dx = 0,
+but as also
+Z
+ωV
+div σV
+h c dx = c
+Z
+∂ωV
+σV
+h · n dx = 0,
+it follows that the solution σV
+h fulﬁlls even
+Z
+ωV
+div σV
+h ψh dx =
+ div wh, PB
+V (ψh −Sψh)
+
+L2(ωV )
+∀ψh ∈eQh(TωV ),
+in contrast to the restriction on eQ0
+h(TωV ). Using a trivial extension by 0 on Ω\ ωV
+we get (4.9). To show (4.10) we use a decomposition of the polynomial space of order
+k −2 given by
+[Πk−2(ωV )]2 = ∇Πk−1(ωV ) ⊕κ⃗x−V (Πk−3(ωV ))
+[Πk−2(ωV )]3 = ∇Πk−1(ωV ) ⊕κ⃗x−V ([Πk−3(ωV )]3),
+(4.18)
+see [2], Equation (3.11). Note that by the shift invariance of polynomial spaces, the
+origin of the Koszul operator κ can be set to an arbitrary point V . For an arbitrary
+bh ∈Πk−1(ωV ) ⊂eQh(TωV ) we get using the properties of the bubble projector (4.5)
+and the Oswald operator
+Z
+ωV
+σV
+h · ∇bh dx = −
+Z
+ωV
+div σV
+h bh dx = −
+Z
+ωV
+div wh PB
+V (bh −Sbh
+|
+{z
+}
+=0
+) dx = 0.
+As κ⃗x−V ([Πk−3(ωV )]3) = Wh(ωV ) we already know that the solution σV
+h of (4.7)
+fulﬁlls
+b2(σV
+h , µh) =
+Z
+ωV
+σV
+h · κ⃗x−V (ξh) dx = 0
+and so it follows (4.10). For the case d = 2 the argument is the same.
+14
+
+
+PAGE 15
+4.3. Deﬁnition of the reconstruction Rh. Now we can deﬁne the reconstruc-
+tion. For that we deﬁne the space
+Σh := RT k−1(T ) ⊂H(div, Ω).
+For a given wh ∈Vh and all V ∈V let σV
+h be the solution of Equation (4.7) on ωV
+extended by 0 on Ω\ ωV . Then we deﬁne the reconstruction as
+Rhwh := wh −σh ∈Vh + Σh
+with
+σh :=
+X
+V ∈V
+σV
+h .
+(4.19)
+Remark 14. Due to the zero normal trace of the solutions σV
+h on the patches ωV
+the sum σh is still normal continuous over facets thus σh ∈Σh.
+Proof of theorem 2. For an arbitrary ˜qh ∈eQh it holds using (4.9), (4.4) and the
+properties of the bubble projector (4.3)
+(div Rhwh, ˜qh)L2(Ω) = (div wh, ˜qh)L2(Ω) −
+X
+V ∈V
+(div σV
+h , ˜qh)L2(ωV )
+= (div wh, ˜qh)L2(Ω) −
+X
+V ∈V
+(div wh, PB
+V (˜qh −S˜qh))L2(ωV )
+= (div wh, ˜qh)L2(Ω) −(div wh,
+X
+V ∈V
+PB
+V
+| {z }
+=I
+(˜qh −S˜qh))L2(Ω)
+= (div wh, ˜qh)L2(Ω) −(div wh, ˜qh)L2(Ω) + (div wh, S˜qh)L2(Ω)
+= (div wh, S˜qh)L2(Ω).
+By that it follows for an arbitrary qh ∈Qh, due Sqh = qh, that
+(div (wh −Rhwh), qh)L2(Ω) = 0,
+and if (div wh, qh)L2(Ω) = 0 ∀qh ∈Qh that
+(div Rhwh, ˜qh)L2(Ω) = (div wh, S˜qh
+|{z}
+∈Qh
+)L2(Ω) = 0.
+(4.20)
+Finally, using (4.10) and (4.8) we get
+(g, wh −Rhwh)L2(Ω) =
+X
+V ∈V
+(g, σV
+h )L2(ωV ) =
+X
+V ∈V
+(g −Pk−2
+ωV g, σV
+h )L2(ωV )
+≼
+X
+V ∈V
+∥g −Pk−2
+ωV g∥L2(ωV )∥σV
+h ∥L2(ωV )
+≼
+X
+V ∈V
+∥g −Pk−2
+ωV g∥L2(ωV )hV ∥div wh∥L2(ωV )
+≼|||g|||k−2∥∇wh∥L2(Ω).
+15
+
+
+PAGE 16
+5. The Reconstruction operator for the mini ﬁnite element method.
+For the mini ﬁnite element method [1] the bubble enriched velocity spaces read
+Πk
++(T) := Πk(T) ⊕
+
+Πk+d(T) ∩H1
+0(T)
+	
+,
+and
+Πk
++(T ) := {qh : qh|T ∈Πk
++(T) ∀T ∈T }.
+The deﬁnition of the mini element now reads as
+Vh := [Πk
++(T )]d ∩[C0(Ω)]d
+and
+Qh := Πk(T ) ∩C0(Ω).
+As in the Taylor–Hood case we solve small problems on the vertex patch ωV but
+slightly change the right hand side and the polynomial orders. For that we deﬁne
+Σh,0(TωV ) := {σh ∈RT k+d−1(TωV ) : trnσh = 0 on ∂ωV } ⊂H0(div, ωV )
+eQh(TωV ) := Πk+d−1(TωV ) ⊂L2(ωV )
+eQ0
+h(TωV ) := eQh(TωV ) ∩L2
+0(ωV ),
+and for k ≥2 also
+Wh(ωV ) := κ⃗x−V (Πk−2(ωV )) ⊂ΛV := κ⃗x−V (L2(ωV ))
+for
+d = 2
+Wh(ωV ) := κ⃗x−V ([Πk−2(ωV )]3) ⊂ΛV := κ⃗x−V ([L2(ωV )]3)
+for
+d = 3.
+So for a given function wh ∈Vh we have div wh ∈eQh(TωV ) and seek (σV
+h , φh, λh) ∈
+(Σh,0(TωV ) × eQ0
+h(TωV ) × Wh(ωV )) so that
+B((σV
+h , φh, λh), (τ h, ψh,µh)) =
+
+div wh, PB
+V
+
+ψh −˜Sψh
+
+L2(ωV )
+(5.1)
+∀(τ h, ψh, µh) ∈Σh,0(TωV ) × eQ0
+h(TωV ) × Wh(ωV ),
+where ˜S : eQh(TωV ) →Qh(TωV ). Note that ˜S now maps element-wise polynomials of
+degree k + d −1 to continuous element-wise polynomials of order k.
+Remark 15. This new operator ˜S can be seen as the Oswald operator S of order
+k applied to polynomials of higher degree.
+Proposition 16. Equation 5.1 has a unique solution (σV
+h , φh, λh) satisfying
+i.
+σV
+h
+
+L2(ωV ) ≼hV ∥div wh∥L2(ωV ) ,
+ii.
+ div σV
+h , ˜qh
+
+L2(Ω) =
+
+div wh, PB
+V
+
+˜qh −˜S˜qh
+
+L2(ωV )
+∀˜qh ∈eQh(T )
+where σV
+h was trivially extended by 0 on Ω,
+iii.
+and the solution is L2(ωV )-orthogonal on polynomials of order k −1, i.e.
+ σV
+h , ξ
+
+L2(ωV ) = 0
+∀ξ ∈[Πk−1(ωV )]d.
+Proof. The proof uses exactly the same arguments as the proof of theorem 12.
+The reconstruction is deﬁned as in (4.19).
+Proposition 17. For the reconstruction operator Rh deﬁned by (4.19) holds
+i.
+(div Rhwh, ˜qh)L2(Ω) =
+
+div wh, ˜S˜qh
+
+L2(Ω)
+∀˜qh ∈eQh,
+ii.
+(div (wh −Rhwh), qh)L2(Ω) = 0
+∀wh ∈Vh, ∀qh ∈Qh,
+iii.
+(div wh, qh)L2(Ω) = 0 ∀qh ∈Qh ⇒(div Rhwh, ˜qh)L2(Ω) = 0
+∀˜qh ∈eQh,
+i.e.
+div Rhwh = 0,
+iv.
+(g, wh −Rhwh)L2(Ω) ≤Ccons|||g|||k−1∥∇wh∥L2(Ω).
+(5.2)
+16
+
+
+PAGE 17
+Proof. The proof uses exactly the same arguments as the proof of theorem 2. In
+Equation (4.20) it is important that the Oswald operator maps to Qh, which is the
+reason to replace S by ˜S for the mini element.
+Remark 18. The modiﬁed mini ﬁnite element method also ﬁts in the abstract
+setting of Section 3, but here the consistency error is of order k + 1 due to (5.2), i.e.
+∥∇(u −uh)∥L2 ≤2(1 + CF )
+inf
+wh∈Vh ∥∇(u −wh)∥L2 + Ccons|||∆u|||k−1.
+Hence, also in case of the mini ﬁnite element methods, the pressure-dependent term
+from the classical estimate is replaced by a pressure-independent consistency error of
+the same order.
+6. Numerical examples. In this section we give several numerical examples to
+validate and conﬁrm the theoretical ﬁndings. As computational framework, including
+the implementation of the reconstruction operator Rh, we used NGSolve (see [40])
+and the NGSpy interface. For all numerical examples we use unstructered, shape
+regular and quasi-uniform triangulations T generated by Netgen (see [39]).
+6.1. 2d example. The ﬁrst example studies the solution
+u := curl ζ
+with
+ζ := x2(x −1)2y2(y −1)2
+and
+p := x7 + y7 −1
+4,
+of the Stokes problem on the unit square Ω= (0, 1)2 with ν = 10−3 and the right
+hand side f := −ν∆u −∇p.
+Tables 1-3 show the L2 velocity and pressure errors and their estimated order
+of convergence (eoc) for the modiﬁed Taylor–Hood ﬁnite element methods of order
+k = 2, 3, 4. All methods show the optimal convergence orders as expected by the
+theory.
+Table 4 allows the same conclusions for the modiﬁed mini ﬁnite element
+method of lowest order.
+To clearly see the consequences of pressure-robustness, Figure 3 shows the L2
+errors for diﬀerent ν = 10j for j = −8, . . . , 3 on three ﬁxed meshes for the classical
+and the modiﬁed Taylor–Hood ﬁnite element method of order k = 2. There are several
+observations to make:
+• For ν ≥1 the irrotational part in the right-hand side f is not larger than the
+divergence-free part. In this situation both methods deliver similar errors.
+Due to the additional consistency error, the errors of the modiﬁed method
+are a bit larger than the errors of the classical method.
+• For ν < 1 the irrotational part in the right-hand side f begins to dominate
+and so does the pressure-dependent term in the a priori error estimate. As
+predicted by these estimates, the errors of the classical Taylor–Hood ﬁnite
+element method deteriorate and scale with 1/ν. The modiﬁed Taylor–Hood
+method, due to its divergence-free test functions in the right-hand side, does
+not see the irrotational force and the errors are independent of ν.
+• The transition point ν ≈1 where the error becomes pressure-dominated is the
+same on all three meshes. Hence, mesh reﬁnement cannot heal this behaviour.
+• The velocity error of the modiﬁed method is independent of ν, since uh is ex-
+actly the same for every ν by construction of the discretization. The pressure
+error however increases for large ν in both the unmodiﬁed and the modiﬁed
+method. This is consistent with the error estimate (3.1).
+For the mini ﬁnite element method the observations are almost identical. How-
+ever, since the pressure space has the same order as the velocity space, the pressure-
+17
+
+
+PAGE 18
+10−9
+10−7
+10−5
+10−3
+10−1
+101
+103
+10−6
+10−3
+100
+103
+106
+ν
+Without Reconstruction
+∥u −uh∥H1(Ω)
+∥u −uh∥L2(Ω)
+∥p −ph∥L2(Ω)
+ndofs = 332
+ndofs = 1236
+ndofs = 4772
+10−9
+10−7
+10−5
+10−3
+10−1
+101
+103
+10−6
+10−3
+100
+103
+106
+ν
+With Reconstruction
+Fig. 3: Errors for the classical (left) and the modiﬁed (right) Taylor–Hood ﬁnite
+element method of order k = 2 on three ﬁxed meshes and several choices of ν in
+section 6.1.
+#dof
+∥u −uh∥H1
+eoc
+∥u −uh∥L2
+eoc
+∥p −ph∥L2
+eoc
+96
+2.05 · 10−2
+1.43 · 10−3
+7.79 · 10−2
+332
+5.91 · 10−3
+1.794
+1.83 · 10−4
+2.966
+2.69 · 10−2
+1.533
+1,236
+1.54 · 10−3
+1.941
+2.36 · 10−5
+2.956
+7.14 · 10−3
+1.913
+4,772
+3.88 · 10−4
+1.988
+2.95 · 10−6
+3.000
+1.8 · 10−3
+1.988
+18,756
+9.7 · 10−5
+1.999
+3.68 · 10−7
+3.005
+4.51 · 10−4
+1.999
+Table 1: Errors for the modiﬁed Taylor–Hood ﬁnite element method of order k = 2
+in Section 6.1.
+dependent contributions in the a priori error estimates converge faster and can com-
+pensate smaller values of ν to some extent.
+6.2. 3d example. The second example investigates the velocity and pressure
+u := curl (ζ, ζ, ζ)
+with
+ζ := x2(x −1)2y2(y −1)2z2(z −1)2
+p := x5 + y5 + z5 −1
+2,
+on the unit cube Ω= (0, 1)3 for ν = 10−3. Table 5 lists the L2 errors for the modiﬁed
+Taylor–Hood ﬁnite element method of order k = 2. Also in this 3D example the
+convergence rates are optimal.
+Remark 19. For the ease of implementation in NGSolve we used Brezzi-Douglas-
+Marini elements of order k (see [4] and [7]) instead of the Raviart-Thomas elements
+of order k −1 as basis for the H(div)-conforming spaces Σh(T ) and the local spaces
+Σh,0(TωV ). This does not aﬀect the convergence order of the error.
+18
+
+
+PAGE 19
+#dof
+∥u −uh∥H1
+eoc
+∥u −uh∥L2
+eoc
+∥p −ph∥L2
+eoc
+212
+3.5 · 10−3
+1.03 · 10−4
+1.99 · 10−2
+772
+4.95 · 10−4
+2.823
+7.02 · 10−6
+3.875
+3.39 · 10−3
+2.554
+2,948
+6.07 · 10−5
+3.026
+4.39 · 10−7
+3.999
+4.71 · 10−4
+2.848
+11,524
+7.45 · 10−6
+3.028
+2.74 · 10−8
+4.003
+6.08 · 10−5
+2.953
+45,572
+9.23 · 10−7
+3.012
+1.71 · 10−9
+3.998
+7.67 · 10−6
+2.986
+Table 2: Errors for the modiﬁed Taylor–Hood ﬁnite element method of order k = 3
+in Section 6.1.
+#dof
+∥u −uh∥H1
+eoc
+∥u −uh∥L2
+eoc
+∥p −ph∥L2
+eoc
+376
+6.04 · 10−4
+1.46 · 10−5
+2.95 · 10−3
+1,404
+3.86 · 10−5
+3.967
+4.73 · 10−7
+4.948
+2.02 · 10−4
+3.868
+5,428
+2.34 · 10−6
+4.042
+1.47 · 10−8
+5.011
+1.23 · 10−5
+4.034
+21,348
+1.44 · 10−7
+4.028
+4.54 · 10−10
+5.014
+7.6 · 10−7
+4.021
+84,676
+8.89 · 10−9
+4.013
+1.41 · 10−11
+5.008
+4.73 · 10−8
+4.007
+Table 3: Errors for the modiﬁed Taylor–Hood ﬁnite element method of order k = 4
+in Section 6.1.
+6.3. Navier–Stokes for a 2D potential ﬂow. This example studies a two-
+dimensional potential ﬂow for the harmonic potential χ := x5 −10x3y2 + 5xy4. Note
+that χ is the real part of the analytic function z5 (with z = x + iy). We look for the
+solution of the steady incompressible Navier–Stokes equations −ν∆u+(u·∇)u+∇p =
+0, div u = 0 with inhomogeneous Dirichlet boundary conditions for ν = 0.1. The exact
+solution of the velocity is given by u = ∇χ and p = 664/63−25/2(x2+y2)4, modelling
+the collision of ﬁve jets in the plane. For the construction and signiﬁcance of potential
+ﬂows the reader may consult [37]. For the nonlinear term holds (u · ∇)u = 1/2∇(u2).
+Looking at the weak formulation of this term, it holds for all v ∈V0
+Z
+Ω
+(u · ∇)u · v dx =
+Z
+Ω
+∇
+u2
+2
+
+· v dx = −
+Z
+Ω
+u2
+2
+
+div v dx = 0.
+This orthogonality may not hold in the discrete case, so similar as for the modiﬁed
+Stokes problem (2.13), a non-standard discretization of the nonlinear convection term
+is proposed that employs the reconstruction Rh in the velocity test functions
+Z
+Ω
+(uh · ∇)uh · Rhvh dx.
+In Tables 6 and 7 one can see the diﬀerences in the errors, when standard or non-
+standard discretizations of the nonlinear convection term are used in case of Taylor–
+Hood elements of order k = 2, 3, 4 on two consecutive meshes with 352 and 1408
+elements. Note that for k = 4 the exact solution satisﬁes u ∈Vh, but only for the
+non-standard discretization the velocity error vanishes. Similar to the Stokes example
+6.1 we see that a mesh reﬁnement does not heal the observed problems.
+19
+
+
+PAGE 20
+#dof
+∥u −uh∥H1
+eoc
+∥u −uh∥L2
+eoc
+∥p −ph∥L2
+eoc
+72
+5.27 · 10−2
+5.01 · 10−3
+0.11
+252
+2.58 · 10−2
+1.032
+1.44 · 10−3
+1.794
+4.2 · 10−2
+1.418
+948
+1.28 · 10−2
+1.007
+3.9 · 10−4
+1.890
+1.17 · 10−2
+1.838
+3,684
+6.27 · 10−3
+1.033
+9.75 · 10−5
+1.998
+3.03 · 10−3
+1.955
+14,532
+3.09 · 10−3
+1.021
+2.41 · 10−5
+2.016
+7.63 · 10−4
+1.988
+Table 4: Errors for the modiﬁed lowest-order mini ﬁnite element method in Section 6.1.
+#dof
+∥u −uh∥H1
+eoc
+∥u −uh∥L2
+eoc
+∥p −ph∥L2
+eoc
+115
+3.48 · 10−3
+2.35 · 10−4
+0.15
+603
+2.07 · 10−3
+0.745
+1.18 · 10−4
+0.992
+8.03 · 10−2
+0.866
+3,913
+6.38 · 10−4
+1.701
+1.79 · 10−5
+2.717
+2.21 · 10−2
+1.859
+28,269
+1.87 · 10−4
+1.772
+2.53 · 10−6
+2.828
+5.54 · 10−3
+1.998
+2.15 · 105
+4.86 · 10−5
+1.942
+3.25 · 10−7
+2.958
+1.38 · 10−3
+2.005
+Table 5: Errors for the modiﬁed Taylor–Hood ﬁnite element method of order k = 2
+in Section 6.2.
+7. Appendix.
+Theorem 20. For Ω⊆R3, V ∈Ωand k ≥0 it holds
+{κ⃗x−V (q1) : q1 ∈[Πk(Ω)]3} = {κ⃗x−V (q2) : q2 ∈[Πk(Ω)]3, div q2 = 0}
+Proof. Without loss of generality we can set V = 0. For k = 0 there is nothing
+to prove. In the case k ≥1, for q1 ∈[Πk(Ω)]3 we deﬁne
+q2 := q1 + ⃗xw
+with w ∈Πk−1(Ω). Note that
+κ⃗x(q2) = ⃗x × q2 = ⃗x × q1 + ⃗x × ⃗x
+| {z }
+=0
+w = κ⃗x(q1),
+(7.1)
+and
+div q2 = div(q1 + ⃗xw) = div q1 + div(⃗x)w + ⃗x · ∇w = div q1 + 3w + ⃗x · ∇w.
+As we want to have div q2 = 0, we have to solve the equation
+3w + ⃗x · ∇w = −div q1.
+(7.2)
+Due to the ﬁnite dimensionality of Πk−1(Ω), this linear inhomogeneous equation can
+be solved, if we show that from
+3w + ⃗x · ∇w = 0
+it follows
+⇒w = 0.
+(7.3)
+20
+
+
+PAGE 21
+without reconstruction
+k
+#dof
+∥u −uh∥H1
+∥u −uh∥L2
+∥p −ph∥L2
+2
+1,748
+1.42
+2.21 · 10−2
+0.27
+3
+4,132
+8.91 · 10−2
+9.02 · 10−4
+1.25 · 10−2
+4
+7,572
+1.33 · 10−3
+7.4 · 10−6
+2.49 · 10−4
+with reconstruction
+k
+#dof
+∥u −uh∥H1
+∥u −uh∥L2
+∥p −ph∥L2
+2
+1,748
+8.5 · 10−2
+8.08 · 10−4
+0.26
+3
+4,132
+9.76 · 10−4
+7.39 · 10−6
+1.48 · 10−2
+4
+7,572
+3.66 · 10−12
+1.66 · 10−14
+4.94 · 10−4
+Table 6: Errors for the Taylor–Hood and the modiﬁed Taylor–Hood ﬁnite element
+method for the Navier–Stokes example |T | = 352
+without reconstruction
+k
+#dof
+∥u −uh∥H1
+∥u −uh∥L2
+∥p −ph∥L2
+2
+6,600
+0.39
+2.91 · 10−3
+6.55 · 10−2
+3
+16,004
+1.25 · 10−2
+6.56 · 10−5
+1.59 · 10−3
+4
+29,572
+8.29 · 10−5
+2.27 · 10−7
+1.56 · 10−5
+with reconstruction
+k
+#dof
+∥u −uh∥H1
+∥u −uh∥L2
+∥p −ph∥L2
+2
+6,600
+2.12 · 10−2
+1.04 · 10−4
+6.46 · 10−2
+3
+16,004
+1.2 · 10−4
+4.55 · 10−7
+1.88 · 10−3
+4
+29,572
+4.28 · 10−12
+9.59 · 10−15
+2.99 · 10−5
+Table 7: Errors for the Taylor–Hood and the modiﬁed Taylor–Hood ﬁnite element
+method for the Navier–Stokes example with |T | = 1408
+For k = 1 it holds w ∈Π0(Ω) and q1 ∈[Π1(Ω)]3 and the statement is obviously true.
+In the case k ≥2 we use the following representation of w
+w(x, y, z) = ˜w(x, y, z) +
+k−1
+X
+i=0
+k−1−i
+X
+j=0
+cijxiyjzk−1−i−j,
+with ˜w ∈Πk−2(Ω). Using assumption (7.3) and 3 ˜w + ⃗x · ∇˜w =: ˆw ∈Πk−2(Ω) we now
+21
+
+
+PAGE 22
+have
+3w + ⃗x · ∇w = ˆw +
+k−1
+X
+i=0
+k−1−i
+X
+j=0
+(k −1)cijxiyjzk−1−i−j = 0
+∀(x, y, z) ∈Ω,
+what leads to cij = 0 ∀i, j and so ˆw = 3 ˜w +⃗x·∇˜w = 0. By induction it follows w = 0.
+Therefore, we can solve equation (7.2) and for every q1 we ﬁnd a q2 with div q2 = 0
+and due to (7.1) the theorem is shown.
+REFERENCES
+[1] D. N. Arnold, F. Brezzi, and M. Fortin, A stable ﬁnite element for the Stokes equations,
+Calcolo, 21 (1984), pp. 337–344 (1985).
+[2] D. N. Arnold, R. S. Falk, and R. Winther, Finite element exterior calculus, homological
+techniques, and applications, Acta Numerica, 15 (2006), pp. 1–155.
+[3] J. Aubin, Approximation of elliptic boundary-value problems, Pure and applied mathematics,
+Wiley-Interscience, 1972.
+[4] D. Boffi, M. Fortin, and F. Brezzi, Mixed ﬁnite element methods and applications, Springer
+series in computational mathematics, Springer, Berlin, Heidelberg, 2013.
+[5] D. Braess and J. Sch¨oberl, Equilibrated residual error estimator for edge elements, Math.
+Comp., 77 (2008), pp. 651–672.
+[6] C. Brennecke, A. Linke, C. Merdon, and J. Sch¨oberl, Optimal and pressure-independent
+L2 velocity error estimates for a modiﬁed Crouzeix-Raviart Stokes element with BDM
+reconstructions, J. Comput. Math., 33 (2015), pp. 191–208.
+[7] F. Brezzi, J. Douglas, and L. D. Marini, Two families of mixed ﬁnite elements for second
+order elliptic problems, Numerische Mathematik, 47 (1985), pp. 217–235.
+[8] P. Destuynder and B. M´etivet, Explicit error bounds in a conforming ﬁnite element method,
+Math. Comp., 68 (1999), pp. 1379–1396.
+[9] D. A. Di Pietro, A. Ern, A. Linke, and F. Schieweck, A discontinuous skeletal method for
+the viscosity-dependent Stokes problem, Comput. Methods Appl. Mech. Engrg., 306 (2016),
+pp. 175–195.
+[10] O. Dorok, W. Grambow, and L. Tobiska, Aspects of ﬁnite element discretizations for solving
+the Boussinesq approximation of the Navier–Stokes Equations, Notes on Numerical Fluid
+Mechanics: Numerical Methods for the Navier-Stokes Equations., 47 (1994), pp. 50–61.
+[11] R. G. Dur´an and A. L. Lombardi, Error estimates for the raviartthomas interpolation under
+the maximum angle condition, SIAM Journal on Numerical Analysis, 46 (2008), pp. 1442–
+1453.
+[12] A. Ern and J.-L. Guermond, Finite element quasi-interpolation and best approximation,
+ArXiv e-prints, (2015), arXiv:1505.06931.
+[13] R. S. F. F. Brezzi, Stability of higher-order Hood-Taylor method, SIAM J. Numer. Anal., 28
+(1991).
+[14] R. S. Falk and R. Winther, The bubble transform: A new tool for analysis of ﬁnite element
+methods, Foundations of Computational Mathematics, 16 (2016), pp. 297–328.
+[15] L. Franca and T. Hughes, Two classes of mixed ﬁnite element methods, Computer Methods
+in Applied Mechanics and Engineering, 69 (1988), pp. 89–129.
+[16] G. Fu, Y. Jin, and W. Qiu, Parameter-free superconvergent H(div)-conforming HDG methods
+for the Brinkman equations, ArXiv e-prints, (2016), arXiv:1607.07662.
+[17] K. Galvin, A. Linke, L. Rebholz, and N. Wilson, Stabilizing poor mass conservation in
+incompressible ﬂow problems with large irrotational forcing and application to thermal
+convection, Comput. Methods Appl. Mech. Engrg., 237/240 (2012), pp. 166–176.
+[18] J.-F. Gerbeau, C. Le Bris, and M. Bercovier, Spurious velocities in the steady ﬂow of
+an incompressible ﬂuid subjected to external forces, International Journal for Numerical
+Methods in Fluids, 25 (1997), pp. 679–695.
+[19] V. Girault and P.-A. Raviart, Finite Element Methods for Navier-Stokes Equations, vol. 5
+of Springer Series in Computational Mathematics, Springer-Verlag, Berlin, 1986.
+[20] B. Gmeiner, C. Waluga, and B. Wohlmuth, Local mass-corrections for continuous pressure
+approximations of incompressible ﬂow, SIAM J. Numer. Anal., 52 (2014), pp. 2931–2956.
+[21] J. Guzm´an and M. Neilan, Conforming and divergence-free Stokes elements in three dimen-
+sions, IMA J. Numer. Anal., 34 (2014), pp. 1489–1508.
+22
+
+
+PAGE 23
+[22] J. Guzm´an and M. Neilan, Conforming and divergence-free Stokes elements on general tri-
+angular meshes, Math. Comp., 83 (2014), pp. 15–36.
+[23] V. John, A. Linke, C. Merdon, M. Neilan, and L. Rebholz, On the divergence constraint
+in mixed ﬁnite element methods for incompressible ﬂows, SIAM Review, accepted (2016).
+[24] P. Lederer, Pressure-robust discretizations for Navier–Stokes equations: Divergence-free re-
+construction for Taylor–Hood elements and high order Hybrid Discontinuous Galerkin
+methods, master’s thesis, Vienna Technical University, 2016.
+[25] C. Lehrenfeld and J. Sch¨oberl, High order exactly divergence-free Hybrid Discontinuous
+Galerkin Methods for unsteady incompressible ﬂows, Comput. Methods Appl. Mech. En-
+grg., 307 (2016), pp. 339–361.
+[26] A. Linke, A divergence-free velocity reconstruction for incompressible ﬂows, C. R. Math. Acad.
+Sci. Paris, 350 (2012), pp. 837–840.
+[27] A. Linke, On the role of the Helmholtz decomposition in mixed methods for incompressible
+ﬂows and a new variational crime, Comput. Methods Appl. Mech. Engrg., 268 (2014),
+pp. 782–800.
+[28] A. Linke, G. Matthies, and L. Tobiska, Robust arbitrary order mixed ﬁnite element methods
+for the incompressible Stokes equations with pressure independent velocity errors, ESAIM:
+M2AN, 50 (2016), pp. 289–309.
+[29] A. Linke and C. Merdon, On velocity errors due to irrotational forces in the Navier–Stokes
+momentum balance, Journal of Computational Physics, 313 (2016), pp. 654–661.
+[30] A. Linke, C. Merdon, and W. Wollner, Optimal L2 velocity error estimate for a modi-
+ﬁed pressure-robust Crouzeix-Raviart Stokes element, IMA Journal of Numerical Analy-
+sis, (2016), doi:10.1093/imanum/drw019, http://imajna.oxfordjournals.org/content/early/
+2016/05/17/imanum.drw019.abstract.
+[31] K.-A. Mardal, J. Sch¨oberl, and R. Winther, A uniformly stable Fortin operator for the
+Taylor-Hood element, Numer. Math., 123 (2013), pp. 537–551.
+[32] J. Nitsche, Ein Kriterium f¨ur die Quasi-Optimalit¨at des Ritzschen Verfahrens, Numerische
+Mathematik, 11 (1968), pp. 346–348.
+[33] M. Olshanskii and A. Reusken, Grad-div stabilization for Stokes equations, Math. Comp.,
+73 (2004), pp. 1699–1718.
+[34] M. A. Olshanskii, G. Lube, T. Heister, and J. L¨owe, Grad-div stabilization and subgrid
+pressure models for the incompressible Navier-Stokes equations, Comput. Methods Appl.
+Mech. Engrg., 198 (2009), pp. 3975–3988.
+[35] P. Oswald, On a BPX preconditioner for P1 elements, Computing, 51 (1993), pp. 125–133.
+[36] J. M. T. P. A. Raviart, Primal hybrid ﬁnite element methods for 2nd order elliptic equations,
+Mathematics of Computation, 31 (1977), pp. 391–413.
+[37] L. Prandtl, Prandtl—Essentials of ﬂuid mechanics, vol. 158 of Applied Mathematical Sci-
+ences, Springer, New York, third ed., 2010.
+[38] J. Qin, On the convergence of some low order mixed ﬁnite elements for incompressible ﬂuids,
+PhD thesis, Pennsylvania State University, 1994.
+[39] J. Sch¨oberl, NETGEN An advancing front 2D/3D-mesh generator based on abstract rules,
+Computing and Visualization in Science, 1 (1997), pp. 41–52.
+[40] J. Sch¨oberl, C++11 Implementation of Finite Elements in NGSolve, Institute for Analysis
+and Scientiﬁc Computing, Vienna University of Technology, (2014).
+[41] J. Sch¨oberl, J. M. Melenk, C. Prechstein, and S. Zaglmayr, Additive Schwarz precondi-
+tioning for p-version triangular and tetrahedral ﬁnite elements, IMA Journal of Numerical
+Analysis, 28 (2007), pp. 1–24.
+[42] R. Verf¨urth, Error estimates for a mixed ﬁnite element approximation of the Stokes equa-
+tions, RAIRO Anal. Num´er., 18 (1984), pp. 175–182.
+[43] R. Verf¨urth, A Posteriori Error Estimation Techniques for Finite Element Methods., Oxford
+University Press, Oxford, 2013.
+[44] S. Zhang, A new family of stable mixed ﬁnite elements for the 3d Stokes equations, Math.
+Comp., 74 (2005), pp. 543–554.
+[45] S. Zhang, A family of Qk+1,k × Qk,k+1 divergence-free ﬁnite elements on rectangular grids,
+SIAM J. Numer. Anal., 47 (2009), pp. 2090–2107.
+23

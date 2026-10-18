@@ -1,0 +1,209 @@
+{
+  "group": "m",
+  "batches": [
+    "37"
+  ],
+  "pages_read": [
+    "well-balanced-balance-laws-and-wet-dry-fronts",
+    "well-balanced-balance-laws-and-wet-dry-fronts-examples"
+  ],
+  "items_read": [
+    "def-pe05-shallow-water-balance-law",
+    "def-pe05-hydrostatic-hll-scheme",
+    "lem-pe05-strong-l1-limit-preserves-dry-admissibility",
+    "prop-pe05-shallow-water-admissible-state-set-is-convex",
+    "lem-pe05-hll-depth-flux-decomposition",
+    "thm-pe05-hydrostatic-reconstruction-is-well-balanced",
+    "lem-pe05-source-quadrature-consistency",
+    "lem-pe05-discrete-weak-identity-with-source",
+    "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1",
+    "lem-pe05-hll-dry-face-direction-and-zero-flux",
+    "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law",
+    "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+    "cex-pe05-centered-source-produces-spurious-current",
+    "ex-pe05-lake-at-rest-over-a-dry-crest",
+    "ex-pe05-hll-dam-break-wets-dry-cell"
+  ],
+  "conventions": [
+    {
+      "convention": "Gravity is positive. Conserved states are U=(h,m), with K consisting of all positive-depth states and the single dry state (0,0). Velocity and physical flux are zero at the dry state.",
+      "fixed_by": "def-pe05-shallow-water-balance-law",
+      "matters_for": [
+        "lem-pe05-strong-l1-limit-preserves-dry-admissibility",
+        "prop-pe05-shallow-water-admissible-state-set-is-convex",
+        "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1",
+        "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+        "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law"
+      ]
+    },
+    {
+      "convention": "At each face the reconstruction uses the maximum neighboring bed. Reconstructed velocities retain the cell velocity at positive reconstructed depth and reset to zero at zero reconstructed depth. HLL speeds include zero in their extrema; both-zero speeds select the first branch and return zero.",
+      "fixed_by": "def-pe05-hydrostatic-hll-scheme",
+      "matters_for": [
+        "lem-pe05-hll-depth-flux-decomposition",
+        "lem-pe05-hll-dry-face-direction-and-zero-flux",
+        "thm-pe05-hydrostatic-reconstruction-is-well-balanced",
+        "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1"
+      ]
+    },
+    {
+      "convention": "The update subtracts the right cell-side corrected flux minus the left cell-side corrected flux. Its equivalent source is g times the right reconstructed squared depth minus the left reconstructed squared depth, divided by twice the cell width.",
+      "fixed_by": "def-pe05-hydrostatic-hll-scheme",
+      "matters_for": [
+        "lem-pe05-source-quadrature-consistency",
+        "lem-pe05-discrete-weak-identity-with-source",
+        "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law"
+      ]
+    },
+    {
+      "convention": "Finite chains have N≥1 updated cells and two supplied admissible ghost states. The depth CFL is λ(a_R at the right face − a_L at the left face)≤1, including equality.",
+      "fixed_by": "def-pe05-hydrostatic-hll-scheme",
+      "matters_for": [
+        "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+        "ex-pe05-hll-dam-break-wets-dry-cell"
+      ]
+    },
+    {
+      "convention": "A lake at rest has zero momentum, the same free-surface level in wet cells, and dry-cell beds at or above that level. Finite-chain ghost data must extend the same profile for rest preservation.",
+      "fixed_by": "thm-pe05-hydrostatic-reconstruction-is-well-balanced",
+      "matters_for": [
+        "ex-pe05-lake-at-rest-over-a-dry-crest"
+      ]
+    },
+    {
+      "convention": "The weak-limit theorem assumes countable choice, a C² stationary bed sampled at cell centers, vanishing space and time steps, strong local convergence of states and primitive velocities, zero limiting dry velocity, uniform depth/velocity bounds through the initial layer, and local L1 convergence of initial reconstructions.",
+      "fixed_by": "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law",
+      "matters_for": [
+        "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-pe05-hydrostatic-hll-scheme",
+      "statement": "Defines maximum-bed hydrostatic reconstruction, dry-safe HLL branches, one-sided pressure corrections, their equivalent source, and the face-specific depth CFL.",
+      "used_by": [
+        "lem-pe05-hll-depth-flux-decomposition",
+        "thm-pe05-hydrostatic-reconstruction-is-well-balanced",
+        "lem-pe05-source-quadrature-consistency",
+        "lem-pe05-discrete-weak-identity-with-source",
+        "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1",
+        "lem-pe05-hll-dry-face-direction-and-zero-flux",
+        "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+        "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law",
+        "ex-pe05-lake-at-rest-over-a-dry-crest",
+        "ex-pe05-hll-dam-break-wets-dry-cell"
+      ]
+    },
+    {
+      "id": "lem-pe05-hll-depth-flux-decomposition",
+      "statement": "At a scheme face, with α=a_R and β=−a_L, there are p,q≥0 such that the depth flux is p h_L*−q h_R*, p≤α and q≤β. If α>0 and h_L*>0 then p<α; if β>0 and h_R*>0 then q<β. This includes zero-speed and all-dry branches.",
+      "used_by": [
+        "lem-pe05-hll-dry-face-direction-and-zero-flux",
+        "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility"
+      ]
+    },
+    {
+      "id": "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1",
+      "statement": "Assuming countable choice, vanishing uniform mesh widths and time steps, a C¹ locally Lipschitz sampled bed, strongly locally L1-convergent piecewise-constant depths and velocities, locally uniform bounds, and zero velocities on the discrete and limiting dry sets, the reconstructed face fluxes converge strongly locally in L1 to F(h,hu).",
+      "used_by": [
+        "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law"
+      ]
+    },
+    {
+      "id": "lem-pe05-source-quadrature-consistency",
+      "statement": "For a C² sampled bed and bounded nonnegative depths, the hydrostatic source satisfies |S_i^(2)+g h_i b′(x_i)|≤Cd. Consequently, strong local L1 convergence of locally uniformly bounded depth reconstructions implies strong local L1 convergence of the source reconstruction to (0,−ghb′).",
+      "used_by": [
+        "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law"
+      ]
+    },
+    {
+      "id": "lem-pe05-discrete-weak-identity-with-source",
+      "statement": "The shared-flux finite-volume recurrence, tested against space-time cell averages of a compactly supported smooth vector test, gives the stated exact sum of initial, backward test-time differences, forward test-space differences, and source terms equal to zero.",
+      "used_by": [
+        "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law"
+      ]
+    },
+    {
+      "id": "lem-pe05-hll-dry-face-direction-and-zero-flux",
+      "statement": "At a scheme face with dry reconstructed right state, the depth flux is nonnegative; with dry reconstructed left state, it is nonpositive. In either orientation, zero depth flux implies zero full vector flux.",
+      "used_by": [
+        "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility"
+      ]
+    },
+    {
+      "id": "lem-pe05-strong-l1-limit-preserves-dry-admissibility",
+      "statement": "A strong local L1 limit of nonnegative bulk depths is nonnegative and yields an admissible state when m=hu with zero dry velocity. Strong local L1 limits of admissible initial states remain admissible when their primitive velocities are locally uniformly bounded.",
+      "used_by": [
+        "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law"
+      ]
+    },
+    {
+      "id": "thm-pe05-hydrostatic-reconstruction-is-well-balanced",
+      "statement": "For any discrete bed values, the hydrostatic HLL update leaves every defined lake-at-rest profile unchanged, including dry cells above the free-surface level. Finite-chain ghost data must extend the same profile.",
+      "used_by": [
+        "ex-pe05-lake-at-rest-over-a-dry-crest"
+      ]
+    },
+    {
+      "id": "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+      "statement": "For a finite chain with admissible ghost states or a periodic mesh, one hydrostatic HLL step under the stated cellwise CFL preserves K. Finite-chain water changes by net boundary discharge; periodic total water is conserved.",
+      "used_by": [
+        "ex-pe05-hll-dam-break-wets-dry-cell"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit AC_ω assumption in the face-flux convergence lemma and weak-limit theorem.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Converts almost-everywhere flux convergence under a uniform bound on a finite-measure compact rectangle into L1 convergence.",
+      "opened": true
+    },
+    {
+      "id": "thm-l-one-convergence-implies-convergence-in-measure",
+      "used_for": "Applies to sums of scalar primitive-state errors before extracting common almost-everywhere convergent subsequences.",
+      "opened": true
+    },
+    {
+      "id": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+      "used_for": "Finite measure of bounded measurable rectangles and integrability of bounded cutoffs, under the explicitly inherited countable-choice assumption.",
+      "opened": true
+    },
+    {
+      "id": "thm-riesz-subsequence-theorem-for-convergence-in-measure",
+      "used_for": "Extracts almost-everywhere convergent subsequences of scalar sums of primitive-state errors; its least-index construction requires no additional choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+      "used_for": "Spatial translation continuity with p=1 for compactly supported cutoffs on R², establishing convergence of neighboring cell reconstructions.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-pe05-lake-at-rest-over-a-dry-crest",
+      "concern": "Verification step 1.1 says “The four face maxima, including the periodic face between cells 4 and 0, are (1,2,2,1,0)”. There are five faces and five correctly listed maxima; “four” is a wording error.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-pe05-hll-dam-break-wets-dry-cell",
+      "concern": "The Example uses a “full-line unit grid”, while F2 invokes thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility, whose Statement covers finite chains or periodic meshes. The local admissibility use is justified immediately by applying that theorem to each single-cell chain with its two actual neighboring states as ghosts, but this localization is unstated. The displayed two-cell calculation itself is correct.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "well-balanced-balance-laws-and-wet-dry-fronts",
+      "to": "invariant-domain-and-entropy-stable-conservative-schemes",
+      "faithful": true,
+      "note": "Read the supplier page and def-pe03-convex-invariant-domain. The actual item-level use is the segment definition of convexity in prop-pe05-shallow-water-admissible-state-set-is-convex, which is stated faithfully. The hydrostatic positivity proof supplies its own flux algebra and does not import an HLL invariant-domain theorem without its half-cell hypotheses. Neither page claims that semidiscrete entropy stability supplies a fully discrete entropy result here."
+    }
+  ]
+}

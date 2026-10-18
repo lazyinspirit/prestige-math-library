@@ -1,0 +1,1174 @@
+
+PAGE 1
+Part XI, Chapter 53
+Stokes equations: Basic ideas
+The Stokes equations constitute the basic linear model for incompressible
+ﬂuid mechanics. We ﬁrst derive a weak formulation of the Stokes equations
+and establish its well-posedness. The approximation is then realized by means
+of mixed ﬁnite elements, that is, we consider a pair of ﬁnite elements, where
+the ﬁrst component of the pair is used to approximate the velocity and the
+second component is used to approximate the pressure. Following the ideas of
+Chapter 50, the ﬁnite element pair is said to be stable whenever the discrete
+velocity and the discrete pressure spaces satisfy an inf-sup condition. In this
+chapter, we list some classical unstable pairs. Examples of stable pairs are
+reviewed in the following two chapters.
+53.1 Incompressible ﬂuid mechanics
+Let D be a Lipschitz domain in Rd. We are interested in modeling the behav-
+ior of incompressible ﬂuid ﬂows in D in the time-independent Stokes regime,
+i.e., the inertial forces are assumed to be negligible. Given a vector-valued
+ﬁeld f : D →Rd (the body force acting on the ﬂuid) and a scalar-valued
+ﬁeld g : D →R (the mass production rate), the Stokes problem consists of
+seeking the velocity ﬁeld u : D →Rd and the pressure ﬁeld p : D →R such
+that the following balance equations hold true:
+−∇·s(u) + ∇p = f
+in D,
+(53.1a)
+∇·u = g
+in D,
+(53.1b)
+u|∂Dd = ad,
+s(u)|∂Dnn −p|∂Dnn = an
+on ∂D.
+(53.1c)
+The equations (53.1a)-(53.1b) express, respectively, the balance of momen-
+tum and mass. The second-order tensor
+s(u) in (53.1a) is the viscous stress
+tensor. Notice that we abuse the notation in (53.1a) since we should write
+∇·(s(u)) instead of ∇·s(u). As for linear elasticity (see §42.1), the principle
+
+
+PAGE 2
+392
+Chapter 53. Stokes equations: Basic ideas
+of conservation of angular momentum implies that
+s(u) is symmetric and,
+assuming the ﬂuid to be Newtonian, Galilean invariance implies that
+s(u) = 2µe(u) + λ(∇·u)I,
+e(u) := 1
+2(∇u + (∇u)T),
+(53.2)
+where I is the d×d identity tensor. The quantity
+e(u) is called (linearized)
+strain rate tensor, and the constants µ > 0, λ ≥0 are the dynamic and bulk
+viscosities, respectively. In (53.1c), the subsets ∂Dd, ∂Dn form a partition
+of the boundary ∂D, and we assume for simplicity that |∂Dd| > 0. The
+boundary data are the prescribed velocity ad on ∂Dd (Dirichlet condition)
+and the prescribed normal force an on ∂Dn (Neumann condition).
+Remark 53.1 (Total stress tensor).
+After introducing the total stress
+tensor
+r(u, p) :=
+s(u) −pI, one can rewrite the momentum balance equa-
+tion (53.1a) in the form −∇·r(u, p) = f, and the Neumann condition on ∂Dn
+as
+r(u, p)|∂Dnn = an.
+⊓⊔
+Remark 53.2 (Incompressibility). The ﬁeld u is said to be incompress-
+ible, or divergence-free, if ∇·u = g = 0. In the incompressible regime, (53.2)
+simpliﬁes to
+s(u) = 2µe(u).
+⊓⊔
+Remark 53.3 (Laplacian/Cauchy–Navier form). When g = 0 and the
+dynamic viscosity is constant, the momentum equation can be simpliﬁed by
+observing that ∇·((∇u)T) = ∇(∇·u) = 0. The momentum equation can then
+be rewritten in the Laplacian (or Cauchy–Navier) form −µ∆u + ∇p = f,
+and the Neumann boundary condition becomes µ∂nu|∂Dn −p|∂Dnn = an.
+⊓⊔
+Remark 53.4 (Pressure constant).
+When ∂D = ∂Dd, the data ﬁelds g
+and ad must satisfy the compatibility condition
+R
+D g dx =
+R
+∂D ad·n ds, and
+the pressure is determined up to an additive constant. This indetermination
+is usually removed by assuming that
+R
+D p dx = 0.
+⊓⊔
+Remark 53.5 (λ = 0).
+Since ∇·(λ(∇·u)I) = ∇(λ∇·u), we can redeﬁne
+the pressure and the viscous stress tensor by setting p′ := p −λ∇·u and
+s′(u) := 2µe(u). Then the momentum balance equation (53.1a) becomes
+−∇·s′(u) + ∇p′ = f. We adopt this change of variable in what follows, i.e.,
+we assume that
+s(u) := 2µe(u) from now on.
+⊓⊔
+Remark 53.6 (Homogeneous Dirichlet condition). Let us assume that
+there is a function ud (smooth enough) s.t. (ud)|∂Dd = ad. Then we can make
+the change of variable u′ := u −ud so that u′ satisﬁes the homogeneous
+boundary condition u′
+|∂Dd = 0. Upon denoting f ′ := f + ∇·(s(ud)), g′ :=
+g −∇·ud, and inserting the deﬁnition u = u′ + ud into (53.1), one observes
+that the pair (u′, p) solves a Stokes problem with homogeneous Dirichlet data
+and with source terms f ′ and g′. From now on, we abuse the notation and
+use the symbols u, f, g instead of u′, f ′, g′. This is equivalent to assuming
+that ad = 0.
+⊓⊔
+
+
+PAGE 3
+Part XI. PDEs in mixed form
+393
+53.2 Weak formulation and well-posedness
+In this section, we present a weak formulation of the Stokes equations and
+we establish its well-posedness using the Babuˇska–Brezzi theorem (Theo-
+rem 49.13).
+53.2.1 Weak formulation
+Let w be a suﬃciently smooth Rd-valued test function. Since the velocity
+u vanishes on ∂Dd, we only consider test functions w that vanish on ∂Dd.
+Multiplying (53.1a) by w and integrating over D gives
+−
+Z
+D
+(∇·s(u))·w dx +
+Z
+D
+∇p·w dx =
+Z
+D
+f·w dx.
+Integrating by parts the term involving the viscous stress tensor, we obtain
+−
+Z
+D
+(∇·
+s(u))·w dx =
+Z
+D
+s(u):∇w dx −
+Z
+∂Dn
+(s(u)n)·w ds,
+where n := (n1, . . . , nd)T is the outward unit normal to D. The boundary
+integral over ∂Dd is zero since w vanishes on ∂Dd. The symmetry of
+s(u)
+implies that
+s(u):∇w =
+s(u):
+e(w). Similarly, the term R
+D ∇p·w dx is equal
+to −
+R
+D p∇·w dx +
+R
+∂Dn pn·w ds. Combining the above equations and using
+the Neumann boundary condition
+s(u)|∂Dnn −p|∂Dnn = an, the weak form
+of the momentum equation is
+Z
+D
+(s(u):
+e(w) −p∇·w) dx =
+Z
+D
+f·w dx +
+Z
+∂Dn
+an·w ds.
+The three integrals are well deﬁned if p ∈L2(D), f ∈L2(D), an ∈L2(∂Dn),
+and if u, w are in the space
+Vd(D) := {v ∈H1(D) | γg(v)|∂Dd = 0},
+(53.3)
+with the Rd-valued trace operator γg : H1(D) →H
+1
+2 (∂D) acting compo-
+nentwise as the scalar-valued trace operator γg : H1(D) →H
+1
+2 (∂D). We
+equip the space Vd with the norm ∥v∥Vd := |v|H1(D) = ∥∇v∥L2(D). Since
+|∂Dd| > 0, we infer from the Poincar´e–Steklov inequality (42.9) that there
+is a constant ˜Cps > 0 s.t. ˜Cps∥v∥L2(D) ≤ℓD∥∇v∥L2(D) for all v ∈Vd (re-
+call that ℓD is a length scale associated with D, e.g., ℓD := diam(D)). This
+argument shows that ∥·∥Vd is a norm on Vd, equivalent to the ∥·∥H1(D)-norm.
+A weak formulation of the mass conservation (53.1b) is obtained as above
+by testing the equation against a suﬃciently smooth scalar-valued function
+q. No integration by parts needs to be performed, and we simply write
+
+
+PAGE 4
+394
+Chapter 53. Stokes equations: Basic ideas
+Z
+D
+q∇·u dx =
+Z
+D
+gq dx.
+The left-hand side is well deﬁned provided q ∈L2(D) and u is in Vd. Note
+that if ∂D = ∂Dd, the compatibility condition R
+D g dx = 0 implies the equal-
+ity
+R
+D ∇·u dx =
+R
+D g dx, meaning that the mass conservation equation need
+not be tested against constant functions. In this particular case, the test
+functions q must be restricted to be of zero mean over D. This motivates the
+following deﬁnition:
+Q :=
+(
+L2(D)
+if ∂D ̸= ∂Dd,
+L2
+∗(D) := {q ∈L2(D) |
+R
+D q dx = 0}
+if ∂D = ∂Dd.
+(53.4)
+We equip the space Q with the L2-norm. Let us deﬁne the bilinear forms
+a(v, w) :=
+Z
+D
+s(v):
+e(w) dx,
+b(w, q) := −
+Z
+D
+q∇·w dx,
+(53.5)
+on Vd×Vd and Vd×Q, respectively. We also deﬁne the linear forms F(w) :=
+R
+D f·w dx +
+R
+∂Dn an·w ds, G(q) := −
+R
+D gq dx on Vd and Q, respectively.
+Assuming enough smoothness on f, an, and g, it is reasonable to expect that
+F ∈L(Vd; R) and G ∈L(Q; R). We obtain the following weak formulation:
+
+
+
+
+
+Find u ∈Vd and p ∈Q such that
+a(u, w) + b(w, p) = F(w),
+∀w ∈Vd,
+b(u, q) = G(q),
+∀q ∈Q.
+(53.6)
+Proposition 53.7 (Weak solution). Assume f ∈L2(D), g ∈Q, and an ∈
+L2(∂Dn). Any weak solution (u, p) to (53.6) satisﬁes (53.1a)-(53.1b) a.e. in
+D and satisﬁes the boundary condition (53.1c) a.e. on ∂D.
+Proof. Let us set
+r(u, p) :=
+s(u)−pI ∈L2(D). Testing the momentum equa-
+tion in (53.6) against an arbitrary function w ∈C∞
+0 (D), we infer that
+r(u, p)
+has a weak divergence in L2(D) equal to −f. Since ∇·r(u, p) = ∇·s(u)−∇p,
+we infer that (53.1a) is satisﬁed a.e. in D. Testing the mass equation in (53.6)
+against an arbitrary function q ∈C∞
+0 (D), we infer that (53.1b) is satisﬁed
+a.e. in D (if ∂D = ∂Dd, the compatibility condition
+R
+D g dx = 0 implies
+that b(u, q) = G(q) for all q ∈L2(D)). The Dirichlet boundary condition
+u|∂Dd = 0 is a natural consequence of the trace theorem (Theorem 3.10)
+and u being in Vd. To derive the Neumann condition, we proceed as in
+§31.3.3. Since ∇·r(u, p) = −f ∈L2(D), we have
+r(u, p) ∈H(div; D) (i.e.,
+each row of
+r(u, p) is in H(div; D)). Owing to Theorem 4.15, we infer that
+r(u, p)n ∈H−1
+2 (∂D). As a result, we have
+
+
+PAGE 5
+Part XI. PDEs in mixed form
+395
+⟨r(u, p)n, γg(w)⟩∂D =
+Z
+D
+( r(u, p):∇w + (∇·
+r(u, p))·w) dx
+=
+Z
+D
+(s(u):
+e(w) −p∇·w −f·w) dx =
+Z
+∂Dn
+an·γg(w) ds,
+∀w ∈Vd,
+which implies that the Neumann condition
+r(u, p)n = an is satisﬁed in
+f
+H
+1
+2 (∂Dn)′, with f
+H
+1
+2 (∂Dn) := {v ∈H
+1
+2 (∂Dn) | ev ∈H
+1
+2 (∂D)} (recall that
+ev is the zero extension of v to ∂D). Actually, the Neumann condition is sat-
+isﬁed a.e. on ∂Dn since we assumed an ∈L2(∂Dn).
+⊓⊔
+Remark 53.8 (Neumann data). The above proof shows that it is possible
+to take more generally an ∈f
+H
+1
+2 (∂Dn)′.
+⊓⊔
+53.2.2 Well-posedness
+One readily sees that the bilinear form a(v, w) := (s(v),
+e(w))L2(D) deﬁned
+in (53.5) is coercive and bounded on Vd×Vd. The coercivity of a has been
+established in Theorem 42.11 as a consequence of Korn’s inequalities. In
+particular, there is Ck > 0 s.t. ∥e(v)∥L2(D) ≥Ck|v|H1(D) for all v ∈Vd, and
+this implies that (see (42.15) with ρmin := 2µ in the present setting)
+a(v, v) ≥2µC2
+k|v|2
+H1(D),
+∀v ∈Vd.
+(53.7)
+Moreover, the Cauchy–Schwarz inequality and the bound ∥e(v)∥L2(D) ≤
+|v|H1(D) show that the boundedness constant of the bilinear form a satis-
+ﬁes ∥a∥≤2µ. Hence, the key argument for the well-posedness of the Stokes
+problem is the surjectivity of the divergence operator ∇· : Vd →Q. This
+result is a bit more subtle than Lemma 51.2 since Vd is a smaller space than
+H(div; D).
+Lemma 53.9 (∇· is surjective).
+Let D be a Lipschitz domain in Rd. (i)
+Case ∂D = ∂Dd. ∇· : H1
+0(D) →L2
+∗(D) is surjective. (ii) Case ∂D ̸= ∂Dd.
+Consider the partition ∂D = ∂Dd ∪∂Dn with |∂Dd| > 0. Assume that
+|∂Dn| > 0 and that there exists a subset O of ∂Dn with |O| > 0 and n|O ∈
+H
+1
+2 (O). Then the operator ∇· : X := {v ∈Vd | γg(v)|∂Dn×n = 0} →L2(D)
+is surjective. (iii) In all the cases, identifying Q′ with Q we have
+inf
+q∈Q sup
+v∈Vd
+|
+R
+D q∇·v dx|
+∥q∥L2(D)|v|H1(D)
+:= βD > 0.
+(53.8)
+Proof. (i) We refer the reader to Girault and Raviart [217, pp. 18-26] for a
+proof of the surjectivity of ∇· : H1
+0(D) →L2
+∗(D), (see also Exercise 53.1 if
+D is a smooth domain). (ii) Let us now consider the second case. Let q be in
+L2(D). Let ρ be a smooth nonnegative function compactly supported in O
+such that
+R
+O ρ ds > 0 (this is possible since |O| > 0). Let g := cρn be a vector
+ﬁeld in O, where the constant c is chosen s.t.
+R
+O g·n ds =
+R
+D q dx. Let eg be
+
+
+PAGE 6
+396
+Chapter 53. Stokes equations: Basic ideas
+the zero extension of g to ∂D. Since n|O ∈H
+1
+2 (O), we have ρn ∈f
+H
+1
+2 (O).
+Hence, eg is in H
+1
+2 (∂D) so that it is possible to ﬁnd a function w in H1(D)
+s.t. γg(w) = eg on ∂D. We have γg(w)|∂Dd = 0 and γg(w)|∂Dn×n = 0, i.e.,
+w ∈X. Now let q0 := ∇·w −q. The above deﬁnitions and the divergence
+formula imply that q0 ∈L2(D) and
+R
+D q0 dx = 0. Hence, q0 is in L2
+∗(D).
+Since ∇· : H1
+0(D) →L2
+∗(D) is surjective, there is w0 ∈H1
+0(D) such that
+∇·w0 = −q0. Thus, for all q in L2(D) the function w + w0 is in X with
+∇·(w + w0) = q, that is, ∇·X →L2(D) is surjective. This also implies that
+∇· : Vd →Q is surjective. (iii) The inf-sup condition (53.8) follows from the
+surjectivity of ∇· : Vd →Q and Lemma C.40.
+⊓⊔
+Remark 53.10 (Inf-sup condition in W 1,p-Lp′). Let p ∈(1, ∞) and let
+p′ ∈(1, ∞) be s.t. 1
+p + 1
+p′ = 1. Then the operator ∇· : W 1,p
+0
+(D) →Lp
+∗(D) :=
+{q ∈Lp(D) |
+R
+D q dx = 0} is surjective (see Auscher et al. [30, Lem. 10]),
+that is, identifying (Lp
+∗(D))′ with Lp′
+∗(D), we have
+inf
+q∈Lp′
+∗(D)
+sup
+v∈W 1,p
+0
+(D)
+|
+R
+D q∇·v dx|
+∥q∥Lp′(D)|v|W 1,p(D)
+:= βD,p > 0.
+(53.9)
+The assumption that D is Lipschitz can be weakened. For instance, the inf-
+sup condition (53.9) holds true also if D is a bounded open set in Rd and if
+D is star-shaped with respect to an open ball B ⊂D, i.e., for all x ∈D and
+z ∈B, the segment joining x and z is contained in D; see Bogovski˘ı [66],
+Galdi [210, Lem. 3.1, Chap. III], Dur´an and Muschietti [181], Dur´an et al.
+[180], Solonnikov [349, Prop. 2.1], Costabel and McIntosh [146].
+⊓⊔
+Let B : Vd →Q′ be s.t. ⟨B(v), q⟩Q′,Q := b(v, q) = −
+R
+D q(∇·v) dx. Identify-
+ing Q and Q′, we have B(v) = −∇·v, and ker(B) := {v ∈Vd | ∇·v = 0}.
+Theorem 53.11 (Well-posedness). (i) The weak formulation (53.6) of the
+Stokes problem is well-posed. (ii) There is c such that for all f ∈L2(D), all
+g ∈Q, and all an ∈L2(∂Dn),
+2µ|u|H1(D) + ∥p∥L2(D) ≤c
+
+ℓD∥f∥L2(D) + µ∥g∥L2(D) + ℓ
+1
+2
+D∥an∥L2(∂Dn)
+
+.
+Proof. We apply the Babuˇska–Brezzi theorem (Theorem 49.13). The inf-sup
+condition (49.37) on the bilinear form b follows from Lemma 53.9. The two
+conditions in (49.36) are satisﬁed owing to the coercivity of the bilinear form
+a on Vd (see (53.7)). Finally, the stability estimate follows from (49.38).
+⊓⊔
+One can formulate a more precise stability result on the product space
+Y := Vd×Q equipped with the norm ∥(v, q)∥2
+Y := µ|v|2
+H1(D) + µ−1∥p∥2
+L2(D),
+and the bilinear form t((v, q), (w, r)) := a(v, w) + b(w, q) −b(v, r) on Y ×Y.
+Lemma 53.12 (Inf-sup condition). The following holds true:
+
+
+PAGE 7
+Part XI. PDEs in mixed form
+397
+inf
+(v,q)∈Y
+sup
+(w,r)∈Y
+|t((v, q), (w, r))|
+∥(v, q)∥Y ∥(w, r)∥Y
+=: γ > 0,
+(53.10)
+where γ is uniform w.r.t. µ > 0.
+Proof. Let (v, q) ∈Y and let us set S := sup(w,r)∈Y
+|t((v,q),(w,r))|
+∥(w,r)∥Y
+. Owing
+to (53.7), we have
+2µC2
+k|v|2
+H1(D) ≤a(v, v) = t((v, q), (v, q)) ≤S∥(v, q)∥Y .
+(53.11)
+Moreover, owing to Lemma 53.9, there is wq ∈Vd s.t. ∇·wq = −µ−1q and
+|wq|H1(D) ≤(βDµ)−1∥q∥L2(D). We obtain
+µ−1∥q∥2
+L2(D) = −(q, ∇·wq) = −t((v, q), (wq, 0)) + a(v, wq)
+≤Sµ
+1
+2 |wq|H1(D) + 2µ
+1
+2 |v|H1(D)µ
+1
+2 |wq|H1(D)
+≤c′ (S + S
+1
+2 ∥(v, q)∥
+1
+2
+Y )µ
+1
+2 |wq|H1(D),
+where we used that |a(v, w)| ≤2µ|v|H1(D)|w|H1(D) and then (53.11). Using
+the bound on |wq|H1(D) and Young’s inequality leads to
+µ−1∥q∥2
+L2(D) ≤c (S2 + S∥(v, q)∥Y ).
+We can now combine this bound with (53.11) to infer that
+∥(v, q)∥2
+Y ≤c (S2 + S∥(v, q)∥Y ).
+Applying one more time Young’s inequality yields ∥(v, q)∥Y ≤cS.
+⊓⊔
+Remark 53.13 (Helmholtz decomposition). Letting H1
+∗(D) := H1(D)∩
+L2
+∗(D) and H := {v ∈L2(D) | ∇·v = 0, v|∂D·n = 0}, the following L2-
+orthogonal Helmholtz decomposition holds true: L2(D) = H⊕∇(H1
+∗(D)) (see
+Lemma 74.1). The L2-orthogonal projection PH : L2(D) →H resulting from
+this decomposition is often called Leray projection. Let (u, p) solve (53.6). As-
+sume for simplicity that the homogeneous Dirichlet condition u|∂D = 0 is en-
+forced over the whole boundary and assume that g = 0. Since u is divergence-
+free and vanishes at the boundary, we have (f, u)L2(D) = (PH(f), u)L2(D).
+Then taking w := u in (53.6) and invoking the coercivity of a shows that
+2µC2
+k|u|2
+H1(D) ≤a(u, u) = (PH(f), u)L2(D). Owing to the Cauchy–Schwarz
+inequality and the Poincar´e–Steklov inequality, we get
+2µ|u|H1(D) ≤C−1
+ps C−2
+k ℓD∥PH(f)∥L2(D).
+This a priori estimate on the velocity is sharper than the one from The-
+orem 53.11 since ∥PH(f)∥L2(D) appears on the right-hand side instead of
+∥f∥L2(D). One should bear in mind that, even if p ∈H1
+∗(D), the ﬁelds
+
+
+PAGE 8
+398
+Chapter 53. Stokes equations: Basic ideas
+−∇·s(u) and PH(f) are generally diﬀerent since the normal component of
+∇·s(u) at ∂D is generally nonzero.
+⊓⊔
+53.2.3 Regularity pickup
+Regularity properties for the Stokes problems can be established when µ and
+λ are both constant (or smooth) and |∂Dn| = 0. For instance, if ∂D is of
+class C∞, for all s > 0 there is c, depending on D and s, such that
+µℓ−1
+D ∥u∥H1+s(D) + ∥p∥Hs(D) ≤c (ℓD∥f∥Hs−1(D) + µ∥g∥Hs(D)).
+(53.12)
+There is an upper limit on s when D is not smooth. For instance, let D be
+a two-dimensional convex polygon. Let ρ : D →R be the distance to the
+closest vertex of D. It is shown in Kellogg and Osborn [266, Thm. 2] that
+there is a constant c that depends only on D such that
+µ|u|H2(D)+|p|H1(D) ≤c
+∥f∥L2(D)+µℓ−1
+D (|g|H1(D)+∥ρ−1g∥L2(D))
+
+. (53.13)
+The situation is a bit more complicated in dimension three. We refer to Dauge
+[153] for an overview of the problem. Assuming that g = 0, it is shown in
+[153, p. 75] that (53.12) holds true in the following situations: (i) For all s ≤1
+if D is a convex polyhedron; (ii) For all s < 3
+2 if D is any convex domain with
+wedge angles ≤2
+3π; (iii) For all s < 1
+2 if D has a piecewise smooth boundary,
+and its faces meet two by two or three by three with independent normal
+vectors at the meeting points.
+53.3 Conforming approximation
+In the rest of this chapter, we assume that D is a polyhedron in Rd and
+(Th)h∈H is a shape-regular sequence of matching meshes so that each mesh
+covers D exactly. We also assume that ∂Dd is a union of mesh faces. Let
+(Vhd ⊂Vd)h∈H and (Qh ⊂Q)h∈H be sequences of ﬁnite-dimensional spaces
+built using (Th)h∈H. Notice that the inclusion Vhd ⊂Vd means that the
+homogeneous Dirichlet condition on the velocity is strongly enforced on ∂Dd.
+The discrete counterpart of the problem (53.6) is as follows:
+
+
+
+
+
+Find uh ∈Vhd and ph ∈Qh such that
+a(uh, vh) + b(vh, ph) = F(vh),
+∀vh ∈Vhd,
+b(uh, qh) = G(qh),
+∀qh ∈Qh.
+(53.14)
+Since Vhd is Vd-conforming, the discrete formulation inherits the coercivity
+of a. Unfortunately, there is no reason a priori for the discrete formulation to
+inherit the surjectivity of the divergence operator established in Lemma 53.9.
+
+
+PAGE 9
+Part XI. PDEs in mixed form
+399
+Verifying this condition is the crucial step in devising stable mixed ﬁnite
+elements for the Stokes problem.
+Proposition 53.14 (Well-posedness). The discrete problem (53.14) is
+well-posed if and only if the following inf-sup condition holds true:
+inf
+qh∈Qh
+sup
+vh∈Vhd
+|
+R
+D qh∇·vh dx|
+∥qh∥L2(D)|vh|H1(D)
+=: βh > 0.
+(53.15)
+Proof. Apply Proposition 50.1.
+⊓⊔
+We henceforth say that the inf-sup condition (53.15) holds uniformly w.r.t.
+h ∈H if infh∈H βh =: β0 > 0.
+Deﬁnition 53.15 (Stable/unstable pair). We say that a pair of ﬁnite
+elements used to approximate the velocity and the pressure is stable if the
+inf-sup condition (53.15) holds true uniformly w.r.t. h ∈H, and we say that
+it is unstable otherwise.
+Remark 53.16 (Inf-sup condition in W 1,p-Lp′). Let p ∈(1, ∞) and let
+p′ ∈(1, ∞) be s.t. 1
+p + 1
+p′ = 1. As in Remark 53.10, a more general variant of
+the inf-sup condition (53.15) is
+inf
+qh∈Qh
+sup
+vh∈Vhd
+|
+R
+D qh∇·vh dx|
+∥qh∥Lp′(D)|vh|W 1,p(D)
+=: βh > 0.
+(53.16)
+We will see in the next chapters that many stable ﬁnite element pairs for the
+Stokes equations satisfy this more general inf-sup condition.
+⊓⊔
+Let us deﬁne the discrete operator Bh : Vhd →Q′
+h s.t. ⟨Bh(vh), qh⟩Q′
+h,Qh :=
+b(vh, qh) = −
+R
+D qh∇·vh dx for all (vh, qh) ∈Vhd×Qh. We have
+(53.15)
+⇐⇒
+Bh is surjective,
+(53.17a)
+ker(Bh) = {vh ∈Vhd | (qh, ∇·vh)L2(D) = 0, ∀qh ∈Qh}.
+(53.17b)
+The operator Bh : Vhd →Q′
+h is the discrete counterpart of the divergence
+operator B : Vd →Q′ introduced just above Theorem 53.11. We observe
+that the inf-sup condition (53.15) is equivalent to asserting the surjectivity
+of Bh. Moreover, assuming for simplicity that g = 0 in the mass conservation
+equation, the discrete Stokes problem (53.14) produces a velocity ﬁeld uh ∈
+ker(Bh). One then says that the discrete velocity ﬁeld is weakly divergence-
+free. However, ker(Bh) may not be a subspace of ker(B), i.e., the discrete
+velocity ﬁeld uh is not necessarily strongly (or pointwise) divergence-free.
+Several techniques are available to prove the inf-sup condition (53.15), and
+we refer the reader to the next two chapters for various examples. Recall in
+particular that (53.15) is equivalent to the existence of a Fortin operator
+Πh ∈L(Vd; Vhd) s.t. b(Πh(v) −v, qh) = 0 for all qh ∈Qh (see Lemma 26.9).
+
+
+PAGE 10
+400
+Chapter 53. Stokes equations: Basic ideas
+Theorem 53.17 (Error estimate). Let (u, p) solve (53.6). Assume (53.15)
+and let (uh, ph) solve (53.14). Then we have
+|u −uh|H1(D) ≤c1h
+inf
+vh∈Vhd |u −vh|H1(D) + c2h
+inf
+qh∈Qh ∥p −qh∥L2(D),
+∥p −ph∥L2(D) ≤c3h
+inf
+vh∈Vhd |u −vh|H1(D) + c4h
+inf
+qh∈Qh ∥p −qh∥L2(D),
+where c1h := (1 + ∥a∥
+α )(1 + ∥Πh∥L(Vd;Vhd)) for any Fortin operator Πh ∈
+L(Vd; Vhd), c2h := 0 if ker(Bh) ⊂ker(B) and c2h := ∥b∥
+α
+otherwise, c3h :=
+c1h
+∥a∥
+βh , and c4h := 1+ ∥b∥
+βh +c2h
+∥a∥
+βh . Here, α ≥2µC2
+k is the coercivity constant
+of the bilinear form a on Vd×Vd, ∥a∥≤2µ its norm, and ∥b∥≤1 the norm
+of the bilinear form b on Vd×Q.
+Proof. This is a direct application of Corollary 50.5.
+⊓⊔
+Remark 53.18 (βh vs. β0). The estimates from Theorem 53.17 show that
+it is important that the inf-sup condition (53.15) be satisﬁed uniformly w.r.t.
+h ∈H. Indeed, the factor
+1
+βh appears in the coeﬃcients c3h and c4h in the
+pressure error bound, and a factor
+1
+βh may appear in the constant c1h aﬀecting
+both error bounds if ∥Πh∥L(Vd;Vhd) ∼∥b∥
+βh for every Fortin operator.
+⊓⊔
+We say that the pair (ξ(r), φ(r)) ∈Vd×Q is the solution to the adjoint
+problem of (53.6) with source term r ∈L2(D) if a(v, ξ(r)) + b(v, φ(r)) =
+R
+D r·v dx for all v ∈Vd and b(ξ(r), q) = 0 for all q ∈Q.
+Theorem 53.19 (L2-velocity error estimate). Let (u, p) solve (53.6).
+Assume (53.15) and let (uh, ph) solve (53.14). Assume that there exist
+real numbers csmo and s ∈(0, 1] s.t. µℓ−1
+D ∥ξ(r)∥H1+s(D) + ∥φ(r)∥Hs(D) ≤
+csmoℓD∥r∥L2(D) for all r ∈L2(D),
+and that there is c such that for all
+h ∈H, infvh∈Vhd |v −vh|H1(D) ≤chs|v|H1+s(D) for all v ∈Vd ∩H1+s(D)
+and infqh∈Qh ∥q −qh∥L2(D) ≤chs|q|Hs(D) for all q ∈Q ∩Hs(D). Then there
+is c s.t. for all h ∈H,
+∥u −uh∥L2(D) ≤c hsℓ1−s
+D
+
+inf
+vh∈Vhd|u −vh|H1(D)+ ∥b∥
+∥a∥
+inf
+qh∈Qh∥p −qh∥L2(D)
+
+.
+Proof. Apply Lemma 50.11 or see Exercise 53.3.
+⊓⊔
+Let us give some further insight into the velocity error estimate from The-
+orem 53.17. For simplicity, we assume that g = 0. Let us deﬁne the projection
+operator P S
+h : Vd →ker(Bh) such that
+a(P
+S
+h(v), wh) = a(v, wh),
+∀(v, wh) ∈Vd × ker(Bh).
+(53.18)
+Lemma 53.20 (Quasi-optimality). Assume (53.15). The following holds
+true for all v ∈Vd and any Fortin operator Πh ∈L(Vd; Vhd):
+
+
+PAGE 11
+Part XI. PDEs in mixed form
+401
+|v −P
+S
+h(v)|H1(D) ≤˜c1h
+inf
+vh∈Vhd |v −vh|H1(D),
+(53.19)
+with ˜c1h := ∥a∥
+α (1 + ∥Πh∥L(Vd;Vhd)).
+Proof. Since the bilinear form a is bounded and coercive, we have
+|v −P
+S
+h(v)|H1(D) ≤∥a∥
+α
+inf
+vh∈ker(Bh) |v −vh|H1(D).
+The assertion then follows from Lemma 50.3 (notice that Πh(u) ∈ker(Bh)
+since ∇·u = g = 0 by assumption, see Remark 50.4).
+⊓⊔
+Lemma 53.21 (Discrete velocity estimate). Let (u, p) solve (53.6). As-
+sume (53.15) and let (uh, ph) solve (53.14). As in Theorem 53.17, set c2h := 0
+if ker(Bh) ⊂ker(B) and c2h := ∥b∥
+α
+otherwise. The following holds true:
+|uh −P
+S
+h(u)|H1(D) ≤c2h
+inf
+qh∈Qh ∥p −qh∥L2(D).
+(53.20)
+Proof. The proof follows a similar, yet simpler, path to that of Lemma 50.2.
+Since a(uh, wh)+b(wh, ph) = F(wh) = a(u, wh)+b(wh, p) = a(P S
+h(u), wh)+
+b(wh, p) for all wh ∈ker(Bh) ⊂Vhd ⊂Vd, setting eh := uh −P S
+h(u) ∈
+ker(Bh), we infer that a(eh, wh) = b(wh, p −ph) for all wh ∈ker(Bh). Since
+eh ∈ker(Bh), invoking the coercivity of a then yields
+α |eh|2
+H1(D) ≤b(eh, p −ph).
+If ker(Bh) ⊂ker(B), then |eh|H1(D) = 0 which proves (53.20). Otherwise, we
+use that eh ∈ker(Bh) to write α|eh|2
+H1(D) ≤b(eh, p −qh) for all qh ∈Qh,
+and invoke the boundedness of b to prove (53.20).
+⊓⊔
+The bound (53.20) implies that uh = P S
+h(u) whenever ker(Bh) ⊂ker(B).
+Moreover, in the general case, combining (53.20) with (53.19) and using the
+triangle inequality we obtain again the velocity error estimate from Theo-
+rem 53.17 with the slightly sharper constant ˜c1h instead of c1h.
+Remark 53.22 (Well-balanced scheme).
+In the particular case where
+f = ∇φ for some φ ∈H1(D) ∩L2
+∗(D), the solution to the Stokes prob-
+lem (53.6) is (u, p) = (0, φ). This situation is encountered with hydrostatic
+(or curl-free) body forces. One says that the discrete problem (53.14) is
+well-balanced w.r.t. hydrostatic body forces if uh = 0 as well. (One also
+sometimes says that the discretization is pressure robust.) A well-balanced
+discretization of the Stokes equations can be desirable even if f is not curl-
+free, but has a relatively large curl-free component. In this case, a discretiza-
+tion that is not well-balanced can lead to a rather poor velocity approx-
+imation, even on meshes that seem rather ﬁne. Lemma 53.21 shows that
+(53.14) is well-balanced whenever ker(Bh) ⊂ker(B). The scheme can be
+
+
+PAGE 12
+402
+Chapter 53. Stokes equations: Basic ideas
+made well-balanced when ker(Bh) ̸⊂ker(B) by slightly modifying the dis-
+crete momentum equation. Considering Dirichlet conditions over the whole
+boundary for simplicity, one introduces a lifting operator L : Vhd →Vd such
+that L(ker(Bh)) ⊂ker(B) and then replaces the ﬁrst equation in (53.14) by
+a(uh, wh)+b(wh, ph) = (f, L(wh))L2(D) for all wh ∈Vhd. The lifting opera-
+tor L must satisfy some consistency conditions to preserve the optimal decay
+rates of the error estimate. This idea has been introduced by Linke [283] and
+explored more thoroughly by Lederer et al. [279] in the context of mixed ﬁnite
+elements with continuous pressures; see also John et al. [261] for an overview.
+Examples of curl-free body forces in ﬂuid mechanics are the Coriolis force if
+d = 2, the gravity, and the centrifugal force. Obviously, if f ≈∇φ and φ is
+explicitly known, one can always make the change of variable p →p −φ to
+alleviate the above diﬃculty if the scheme is not well-balanced.
+⊓⊔
+53.4 Classical examples of unstable pairs
+We study in this section three pairs of ﬁnite elements that look appealing
+at ﬁrst sight, but that unfortunately do not satisfy the inf-sup condition
+(53.15). For simplicity, we consider a homogeneous Dirichlet condition on the
+velocity over the whole boundary, so that Vd := H1
+0(D) and we write Vh0
+instead of Vhd for the discrete velocity space. Since the approximation setting
+is conforming, we have Vh0 ⊂H1
+0(D) in all cases.
+Recall that the inf-sup condition (53.15) is not satisﬁed if and only if B∗
+h :
+Qh →V ′
+h0 is not injective (or, once global shape functions have been chosen,
+the associated matrix does not have full column rank). In this case, a nonzero
+pressure ﬁeld in ker(B∗
+h) is called spurious pressure mode. Equivalently, the
+inf-sup condition is not satisﬁed if and only if Bh : Vh0 →Q′
+h is not surjective.
+53.4.1 The (Q1, P0) pair: Checkerboard instability
+A well-known pair of incompatible ﬁnite elements is the (Q1, P0) pair ob-
+tained when approximating the velocity with continuous piecewise bilinear
+polynomials and the pressure with piecewise constants. This pair produces
+an instability often called checkerboard instability.
+Let us restrict ourselves to the two-dimensional setting and assume that
+D := (0, 1)2. We deﬁne a uniform Cartesian mesh on D as follows: Let N be
+an integer larger than 2. Set h := 1
+I , and for all i, j ∈{0:I−1}, denote by
+aij the point with Cartesian coordinates (ih, jh). Let Kij be the square cell
+whose bottom left node is aij; see Figure 53.1. The resulting mesh is denoted
+by Th := S
+i,j Kij. Consider the following ﬁnite element spaces:
+Vh0 := {vh ∈C0(D) | ∀Kij ∈Th, vh ◦TKij ∈Q1,d, vh|∂D = 0},
+(53.21a)
+Qh := {qh ∈L2
+∗(D) | ∀Kij ∈Th, qh ◦TKij ∈P0,d}.
+(53.21b)
+
+
+PAGE 13
+Part XI. PDEs in mixed form
+403
+Recall that for all K ∈Th, TK : bK →K denotes the geometric mapping; see
+§8.1. For all ph ∈Qh, set pi+ 1
+2 ,j+ 1
+2 := ph|Kij, and for all vh ∈Vh0, denote by
+(uij, vij) the values of the two Cartesian components of vh at the node aij.
+X
+Kij
+aij
+−1
++1
+−1
++1
+−1
++1
+−1
++1
+−1
++1
+−1
++1
+−1
++1
+−1
++1
+−1
++1
+−1
+−1
+−1
++1
++1
+−1
++1
+Fig. 53.1 (Q1, P0) pair: mesh (left) and spurious pressure mode (right).
+To prove that the inf-sup constant is zero, it is suﬃcient to prove the
+existence of a nonzero pressure ﬁeld ph ∈ker(B∗
+h), i.e.,
+R
+D ph∇·vh dx = 0 for
+all vh ∈Vh0. Since ph is constant on each cell, we have
+Z
+Kij
+ph∇·vh dx = pi+ 1
+2 ,j+ 1
+2
+Z
+∂Kij
+vh·n ds
+= 1
+2hpi+ 1
+2 ,j+ 1
+2 (ui+1,j + ui+1,j+1 + vi+1,j+1 + vi,j+1
+−ui,j −ui,j+1 −vi,j −vi+1,j) .
+Summing over all the cells and rearranging the sum yields R
+D ph∇·vh dx =
+−h2 P
+i,j∈{0: N−1}(ui,jG1,ij(ph) + vi,jG2,ij(ph)), where
+G1,ij(ph) :=
+1
+2h(pi+ 1
+2 ,j+ 1
+2 + pi+ 1
+2 ,j−1
+2 −pi−1
+2 ,j+ 1
+2 −pi−1
+2 ,j−1
+2 ),
+G2,ij(ph) :=
+1
+2h(pi+ 1
+2 ,j+ 1
+2 + pi−1
+2 ,j+ 1
+2 −pi+ 1
+2 ,j−1
+2 −pi−1
+2 ,j−1
+2 ).
+We infer that R
+D ph∇·vh dx = 0 for all vh ∈Vh0 if and only if
+pi+ 1
+2 ,j+ 1
+2 = pi−1
+2 ,j−1
+2
+and
+pi−1
+2 ,j+ 1
+2 = pi+ 1
+2 ,j−1
+2 .
+The solution set of this linear system is a two-dimensional vector space. One
+dimension is spanned by the constant ﬁeld ph = 1, but span{1} must be
+excluded from the solution set since the elements in Qh must have a zero
+mean. The other dimension is spanned by the ﬁeld whose value is alternatively
++1 and −1 on adjacent cells in a checkerboard pattern, as shown on the right
+panel of Figure 53.1. This is a spurious pressure mode, and if N is even, this
+spurious mode is in Qh (i.e., it satisﬁes the zero-mean condition). In this case,
+the inf-sup condition is not satisﬁed, i.e., the (Q1, P0) pair is incompatible
+for the Stokes problem.
+
+
+PAGE 14
+404
+Chapter 53. Stokes equations: Basic ideas
+Remark 53.23 (Filtering). Since the (Q1, P0) pair is very simple to pro-
+gram, one may be tempted to cure its deﬁciencies by restricting the size of
+Qh. For instance, one could enforce the pressure to be orthogonal (in the L2-
+sense) to the space spanned by the spurious pressure mode. Unfortunately,
+this remedy is not strong enough to produce a healthy ﬁnite element pair,
+since it can be shown that in this case there are positive constants c, c′ s.t.
+ch ≤βh ≤c′h uniformly w.r.t. h ∈H; see Boland and Nicolaides [68] or Gi-
+rault and Raviart [217, p. 164]. This shows that the method may not converge
+since the factor
+1
+βh appears in the error bound on the velocity and the factor
+1
+β2
+h appears in the error bound on the pressure (see Theorem 53.17).
+⊓⊔
+53.4.2 The (P1, P1) pair: Checkerboard-like instability
+Because it is very simple to program, the continuous P1 ﬁnite element for
+both the velocity and the pressure is a natural choice for approximating the
+Stokes problem. Unfortunately, the (P1, P1) pair does not satisfy the inf-sup
+condition (53.15). To understand the origin of the problem, let us construct a
+two-dimensional counterexample in D := (0, 1)2. Consider a uniform Carte-
+sian mesh composed of squares of side h and split each square along one
+diagonal as shown in the left panel of Figure 53.2. Let Th be the resulting
+triangulation and let the velocity and the pressure ﬁnite element spaces be
+Vh0 := P g
+1,0(Th),
+Qh := P g
+1 (Th) ∩L2
+∗(D),
+(53.22)
+where P g
+1,0(Th) is the vector-valued version of the space P g
+1,0(Th) deﬁned
+in §19.4. Let {zn,K}n∈{0:2} be the three vertices of the mesh cell K ∈Th.
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+−1
+−1
+−1
+−1
+−1
+−1
+−1
+−1
+−1
+−1
+−1
+−1
++1
++1
++1
++1
++1
++1
++1
++1
++1
++1
++1
++1
+Fig. 53.2 (P1, P1) pair: the mesh (left) and one spurious pressure mode (right).
+Now consider a pressure ﬁeld ph such that P
+n∈{0:2} ph(zn,K) is zero on each
+triangle K. An example of such a spurious pressure mode is shown in the
+right panel of Figure 53.2. Then we have for all vh ∈Vh0,
+
+
+PAGE 15
+Part XI. PDEs in mixed form
+405
+Z
+D
+ph∇·vh dx =
+X
+K∈Th
+(∇·vh)|K
+Z
+K
+ph dx,
+=
+X
+K∈Th
+(∇·vh)|K
+|K|
+3
+X
+n∈{0:2}
+ph(zn,K) = 0.
+Hence, ph satisﬁes
+R
+D ph∇·vh dx = 0 for all vh ∈Vh0. In other words, the
+ﬁeld ph is a spurious pressure mode, and the inf-sup constant is zero.
+53.4.3 The (P1, P0) pair: Locking eﬀect
+A simple alternative to the (Q1, P0) pair consists of using the (P1, P0) pair,
+i.e., assuming that Th is composed of simplices, the velocity is approximated
+with continuous, piecewise linear polynomials and the pressure with piecewise
+constants. We observe that ker(Bh) ⊂ker(B) in this case since the divergence
+of the velocity is piecewise constant. Unfortunately, the (P1, P0) pair does not
+satisfy the inf-sup condition (53.15). Let us produce a two-dimensional coun-
+terexample. Assume that D is a simply connected polygon. Let Nc, N i
+v, and
+N ∂
+e denote the number of elements, internal vertices, and boundary edges in
+Th, respectively. The Euler relations give Nc = 2N i
+v+N ∂
+e −2 (see Remark 8.13
+and Exercise 8.2). Since dim(Qh) = Nc −1 and dim(Vh0) = 2N i
+v, the rank
+nullity theorem implies that
+dim(ker(B∗
+h)) = dim(Qh) −dim(im(B∗
+h)) ≥dim(Qh) −dim(Vh0)
+= Nc −1 −2N i
+v = N ∂
+e −3.
+Hence, there are at least N ∂
+e −3 spurious pressure modes. This means that
+the space Qh is far too rich for Bh to be surjective. Actually, in some cases,
+it can be shown that Bh is injective, i.e., the only member of ker(Bh) is zero.
+This situation is referred to as locking in the literature.
+Remark 53.24 (Comparison with (P1, P1)).
+Note that the dimension
+of the pressure ﬁnite element space is smaller for the (P1, P1) pair (where
+dim(Qh) = Nv −1) than for the (P1, P0) pair (where dim(Qh) = Nc −1).
+Indeed, we have Nc ∼2Nv on ﬁne meshes (see Exercise 8.2).
+⊓⊔
+Exercises
+Exercise 53.1 (∇· is surjective). Let D ⊂R2 be a domain of class C2.
+Prove that ∇· : H1
+0(D) →L2
+∗(D) is continuous and surjective. (Hint: con-
+struct v ∈H1
+0(D) such that v = ∇q + ∇×ψ, where q solves a Poisson
+problem, ψ solves a biharmonic problem, and ∇×ψ := (∂2ψ, −∂1ψ)T.)
+Exercise 53.2 (de Rham). Let D be a bounded open set in Rd and assume
+that D is star-shaped with respect to an open ball B ⊂D. Prove that the
+
+
+PAGE 16
+406
+Chapter 53. Stokes equations: Basic ideas
+continuous linear forms on W 1,p
+0
+(D) that are zero on ker(∇·) are gradients of
+functions in Lp′
+∗(D). (Hint: use Remark 53.10 and the closed range theorem.)
+Exercise 53.3 (L2-estimate). Prove Theorem 53.19 directly, i.e., without
+invoking Lemma 50.11.
+Exercise 53.4 (Projection). Let (Vh0, Qh)h∈H be a sequence of pairs of
+ﬁnite element spaces. Let p ∈[1, ∞] and let p′ ∈[1, ∞] be s.t. 1
+p + 1
+p′ = 1.
+Let ΠZ
+h : Qh →Zh be an operator, where Zh is a ﬁnite-dimensional sub-
+space of Lp(D). Assume that there are β1, β2 > 0 such that for all h ∈H,
+supvh∈Vh0
+|
+R
+D qh∇·vh dx|
+|vh|W 1,p(D)
+≥β1∥qh −ΠZ
+h (qh)∥Lp′(D) for all qh ∈Qh and
+supvh∈Vh0
+|
+R
+D qh∇·vh dx|
+|vh|W 1,p(D)
+≥β2∥qh∥Lp′(D) for all qh ∈Zh. (i) Show that ΠZ
+h
+is bounded uniformly w.r.t. h ∈H. (ii) Show that the (Vh0, Qh) pair satisﬁes
+an inf-sup condition uniformly w.r.t. h ∈H.
+Exercise 53.5 (Spurious mode for the (Q1, Q1) pair). (i) Let bK :=
+[0, 1]2 be the unit square. Let baij := ( i
+2, j
+2), for all i, j ∈{0:2}. Show that
+the quadrature
+R
+b
+K f(bx) dbx ≈P
+i,j wijf(baij), where wij :=
+1
+36(3i(2 −i) +
+1)(3j(j −2) + 1) (wij :=
+1
+36 for the four vertices of bK, wij := 1
+9 for the four
+edge midpoints, and wij := 4
+9 at the barycenter of bK) is exact for all f ∈Q2.
+(Hint: write the Q2 Lagrange shape functions in tensor-product form and
+use Simpson’s rule in each direction.) (ii) Consider D := (0, 1)2 and a mesh
+composed of I×I squares, I ≥2. Consider the points alm := ( l
+2I , m
+2I ) for
+all l, m ∈{0:2I}. Let ph be the continuous, piecewise bilinear function such
+that ph(a2k,2n) := (−1)k+n for all k, n ∈{0:I}. Show that ph is a spurious
+pressure mode for the (Q1, Q1) pair (continuous velocity and pressure).

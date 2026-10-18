@@ -1,0 +1,2801 @@
+arXiv:2307.14217v2  [math.NA]  11 Dec 2023
+Mathematical Modelling and Numerical Analysis
+Will be set by the publisher
+Mod´elisation Math´ematique et Analyse Num´erique
+ERROR ESTIMATES FOR FINITE ELEMENT DISCRETIZATIONS OF THE INSTATIONARY
+NAVIER-STOKES EQUATIONS
+BORIS VEXLER1 AND JAKOB WAGNER2
+Abstract. In this work we consider the two dimensional instationary Navier-Stokes equations with homogeneous
+Dirichlet/no-slip boundary conditions. We show error estimates for the fully discrete problem, where a discontin-
+uous Galerkin method in time and inf-sup stable ﬁnite elements in space are used. Recently, best approximation
+type error estimates for the Stokes problem in the L∞(I; L2(Ω)), L2(I; H1(Ω)) and L2(I; L2(Ω)) norms have
+been shown. The main result of the present work extends the error estimate in the L∞(I; L2(Ω)) norm to the
+Navier-Stokes equations, by pursuing an error splitting approach and an appropriate duality argument. In order to
+discuss the stability of solutions to the discrete primal and dual equations, a specially tailored discrete Gronwall
+lemma is presented. The techniques developed towards showing the L∞(I; L2(Ω)) error estimate, also allow us to
+show best approximation type error estimates in the L2(I; H1(Ω)) and L2(I; L2(Ω)) norms, which complement
+this work.
+2020 Mathematics Subject Classiﬁcation. 35Q30, 65M60, 65M15, 65M22, 76D05, 76M10.
+The dates will be set by the publisher.
+1. INTRODUCTION
+In this paper, we consider the instationary Navier-Stokes equations in two space dimensions with homogeneous bound-
+ary conditions, i.e.,
+
+
+
+
+
+
+
+
+
+∂tu −ν∆u + (u · ∇)u + ∇p = f
+in I × Ω,
+∇· u = 0
+in I × Ω,
+u(0) = u0
+in Ω,
+u = 0
+on I × ∂Ω.
+(1)
+Here ν > 0 denotes the viscosity, I = (0, T ] ⊂R a bounded, half-open interval for some ﬁxed ﬁnite endtime T > 0,
+and Ω⊂R2 a bounded convex polygonal domain. The equations are discretized in time by a discontinuous Galerkin
+(dG) method, i.e., the solution is approximated by piecewise polynomials in time, deﬁned on subintervals of I, without
+any requirement of continuity at the time nodes, see, e.g., [24,49]. The parameter indicating the time discretization will
+be denoted by k and corresponds to the length of the largest subinterval in the partition of I. To discretize in space, we
+use inf-sup stable pairs of ﬁnite element spaces for the velocity and pressure components. The parameter indicating the
+Keywords and phrases: Navier-Stokes, transient, instationary, ﬁnite elements, discontinuous Galerkin, error estimates, best approximation, fully
+discrete
+1 Chair of Optimal Control, Technical University of Munich, School of Computation Information and Technology, Department of Mathematics ,
+Boltzmannstraße 3, 85748 Garching b. Munich, Germany (vexler@tum.de).
+2 Chair of Optimal Control, Technical University of Munich, School of Computation Information and Technology, Department of Mathematics ,
+Boltzmannstraße 3, 85748 Garching b. Munich, Germany (wagnerja@cit.tum.de) ORCID: https://orcid.org/0000-0001-8510-9790.
+© EDP Sciences, SMAI 1999
+
+
+2
+TITLE WILL BE SET BY THE PUBLISHER
+spatial discretization will be denoted by h and corresponds to the largest diameter of cells in the mesh.
+Due to the variational formulation of the dG time discretization, this discretization scheme is particularly suited for treating
+optimal control problems. See, e.g., [13, 14] for optimal control problems governed by the Navier-Stokes equations,
+also [37,42] for optimal control of general parabolic problems. While in [13,14] the focus was put on low order schemes,
+recently the authors of [2] analyzed dG schemes of arbitrary order for the Navier-Stokes equations. Another advantage of
+the dG time discretization is the fact, that the maximal parabolic regularity, exhibited by parabolic problems, is preserved
+on the discrete level, and moreover can be extended to the limiting cases L1 and L∞in time, at the expense of a logarithmic
+factor, see [35, Theorems 11 & 12]. The natural energy norm for the Navier-Stokes equations is the norm of the space
+L∞(I; L2(Ω)2) ∩L2(I; H1(Ω)2). Indeed by formally testing (1) with the solution u, one obtains
+∥u∥L∞(I;L2(Ω)) + ∥u∥L2(I;H1(Ω)) ≤C
+∥u0∥L2(Ω) + ∥f∥L1(I;L2(Ω))
+
+.
+This bound is also preserved on the discrete level, i.e., holds for the fully discrete solution ukh, see Theorem 4.13. Our
+main goal in writing this paper, was the investigation of the discretization error in terms of the L∞(I; L2(Ω))-norm. In
+particular, such estimates are required for the analysis of optimal control problems, subject to state constraints pointwise
+in time, see [42], as the corresponding Lagrange multiplier in this case is a measure in time. There have been numerous
+approaches in the literature, deriving error estimates for the Navier-Stokes equations. In [13, Theorem 4.7], the same
+combination of dG-cG discretization schemes was used, and for f ∈L2(I; L2(Ω)2) an estimate
+∥u −ukh∥L∞(I;L2(Ω)) ≤C(
+√
+k + h)
+(2)
+was shown. Additional terms arise, when changes in the spatial mesh on different time intervals are permitted. Under the
+much stricter assumption f ∈W 1,∞(I; L2(Ω)2) and for the implicit Euler time discretization, in [31] the estimate
+∥u −ukh∥L∞(I;L2(Ω)) ≤C(k + h2)
+(3)
+was shown. It was extended to the Crank-Nicholson scheme in [32] under the assumption of f ∈W 2,∞(I; L2(Ω)2),
+yielding an error estimate at the time nodes of order O(k2 + h2). Beyond the references mentioned above, there are many
+works analyzing the stationary equations, e.g., [27, 45], semidiscrete equations in space, e.g., [9, 20], or semidiscrete
+equations in time, e.g., [4, 23, 46]. Fully discrete error estimates for stabilized discretization schemes can be found
+e.g., in [2, 5, 18, 34]. The error estimates are most often derived assuming the necessary regularity of u, such that the
+discretization schemes can exhibit their full approximative power. The main drawback of the results in the literature is the
+fact, that usually the errors in L∞(I; L2(Ω)) and L2(I; H1(Ω)) are estimated in a combined fashion. Thus the estimate
+always has to account for the spatial error in the H1 norm, yielding an order reduction for the estimate of the error in the
+spatial L2 norm. The goal of this paper is to prove an error estimate which can be formulated as a best approximation type
+error estimate, which thus estimates the error in the L∞(I; L2(Ω)) norm in an isolated manner. Such an estimate for the
+instationary Stokes equations, has been derived recently in [7]. More speciﬁcally, for velocity and pressure ﬁelds (w, r),
+solving the instationary Stokes equations on the continuous level, and their fully discrete approximations (wkh, rkh), it
+holds
+∥w −wkh∥L∞(I;L2(Ω)) ≤C ln
+T
+k
+ 
+inf
+χkh∈Vkh ∥w −χkh∥L∞(I;L2(Ω)) + ∥w −RS
+h(w, r)∥L∞(I;L2(Ω))
+
+,
+where Vkh is the space of discretely divergence free space-time ﬁnite element functions. The operator RS
+h denotes a
+stationary Stokes projection, see [7] or Section 5 for a formal deﬁnition. Using this Stokes result, we will show that a best
+approximation type result also holds for the nonlinear Navier-Stokes equations. This main result is stated in Theorem 5.6.
+In Corollary 5.8, for f ∈L∞(I; L2(Ω)2), we then obtain an estimate in terms of O(lk(k + h2)), where lk denotes a
+logarithmic term depending on k. This result provides a better order of convergence compared to the estimate (2), shown
+in [13]. The order of convergence in the estimate (3), that was presented in [31] is comparable, but requires a much
+stronger regularity assumption. The main tools used in this paper for proving the proposed L∞(I; L2(Ω)) error estimate
+are an error splitting approach and a bootstrapping argument, to apply the corresponding error estimate for the Stokes
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+3
+equations to the ﬁrst part of the error. In order to apply such an argument, understanding the precise regularity of the
+occuring nonlinear term (u · ∇)u is crucial. The second part of the error will be estimated by a duality argument. This
+is possible due to the variational nature of the dG time discretization. We will derive a stability result for a discrete dual
+equation. For this result, a specially adapted version of a discrete Gronwall lemma, Lemma 4.11, will be presented. For
+the analysis of the discrete dual problem, we require an estimate in the L2(I; H1(Ω)) norm, which is why we formulate
+this result ﬁrst. We shall then show the error estimate in L∞(I; L2(Ω)) with the tools presented above. The proof of the
+error estimate in the L2(I; L2(Ω)) norm is then straightforward and concludes our work. Summarizing, our main results
+read
+∥u −ukh∥L2(I;H1(Ω)) ≤C
+√
+k + h
+
+if f ∈L2(I; L2(Ω)2) and u0 ∈V,
+∥u −ukh∥L∞(I;L2(Ω)) ≤C ln(T/k)2 k + h2
+if f ∈L∞(I; L2(Ω)2) and u0 ∈V ∩H2(Ω)2,
+∥u −ukh∥L2(I;L2(Ω)) ≤C
+k + h2
+if f ∈L2(I; L2(Ω)2) and u0 ∈V,
+and can be found in Theorems 4.16, 5.6 and 5.7 and Corollaries 5.8 and 5.9. All three results are, up to logarithmic terms,
+optimal in terms of order of convergence and in terms of required regularity. The structure of this paper will be as follows.
+First, we ﬁx some notation and function spaces in Section 2. We proceed in Section 3 by stating the appropriate weak
+formulations of (1) with and without pressure and recall some known regularity results. We conclude the section with an
+analysis of the regularity properties of the nonlinear term (u · ∇)u. Section 4 will be devoted to the spatial and temporal
+discretizations. We present a version of a discrete Gronwall lemma, which allows us to treat problems with right hand
+sides that are only L1 in time, and show stability results for fully discrete primal equations. With this result, we derive
+an error estimate for the Navier-Stokes equations in L2(I; H1(Ω)). Lastly, in Section 5, we show stability results for a
+discrete dual problem, which in the end allows us to show the error estimates in the L∞(I; L2(Ω)) and L2(I; L2(Ω))
+norms.
+2. PRELIMINARY
+For a convex, polygonal domain Ω⊂R2, 1 ≤p ≤∞and k ∈N, we denote by Lp(Ω), W k,p(Ω), Hk(Ω) and
+H1
+0(Ω) the usual Lebesgue and Sobolev spaces. The inner product on L2(Ω) will be denoted by (·, ·)Ω. The space L2
+0(Ω)
+is the subspace of L2(Ω), consisting of all functions, that have zero mean. For s ∈R\N, s > 0 the fractional order
+Sobolev(-Slobodeckij) space W s,p(Ω) is deﬁned, see, e.g., [21], as
+W s,p(Ω) :=
+
+
+v ∈W ⌊s⌋,p(Ω) :
+X
+|α|=⌊s⌋
+ZZ
+Ω×Ω
+|Dαv(x) −Dαv(y)|p
+|x −y|(s−⌊s⌋)p+2
+dxdy < +∞
+
+
+.
+In case p = 2 we again use the notation Hs(Ω). Note that in this case Hs(Ω) can equivalently be obtained via real
+or complex interpolation of the integer degree spaces Hk(Ω). This is due to the fact, that in the Hilbert space setting,
+all resulting Bessel potential spaces Hs
+2(Ω), Besov spaces Bs
+2,2(Ω) and Sobolev-(Slobodeckij) spaces Hs(Ω) coincide,
+see [50, pp. 12,39]. For X being any function space over Ω, we denote by X∗its topological dual space, and abbreviate
+the duality pairing by ⟨·, ·⟩Ω. We will also use the notation H1
+0(Ω)∗= H−1(Ω). The structure of the Stokes and Navier-
+Stokes equations requires also the deﬁnition of some vector valued spaces, consisting of divergence free vector ﬁelds. We
+denote by ∇· the divergence operator and introduce the spaces
+V := { v ∈C∞
+0 (Ω)2 : ∇· v = 0 }
+H1(Ω)
+and
+H := { v ∈C∞
+0 (Ω)2 : ∇· v = 0 }
+L2(Ω).
+Note that instead of the deﬁnition via closures, in the case of Ωbeing bounded and Lipschitz, these spaces are alternatively
+characterized in the following way, see [48, Chapter 1, Theorems 1.4 & 1.6]:
+V =
+
+v ∈H1
+0(Ω)2 : ∇· v = 0
+	
+and
+H =
+
+v ∈L2(Ω)2 : ∇· v = 0, u · n = 0 on ∂Ω
+	
+,
+
+
+4
+TITLE WILL BE SET BY THE PUBLISHER
+where by u · n we denote the normal trace of the vector ﬁeld u. To improve readability, whenever vectorial spaces like
+H1(Ω)2 would arise in the subscript of some norm, we shall drop the outer superscript (·)2. For a Banach space X and
+I = (0, T ] we denote by Lp(I; X) the Bochner space of X valued functions, for which the following norm is ﬁnite
+∥v∥Lp(I;X) =
+Z
+I
+∥v(t)∥p
+X dt
+1/p
+,
+with the usual convention when p = +∞. It holds Lp(I; Lp(Ω)) ∼= Lp(I ×Ω), and for p = 2, we denote the inner product
+by (·, ·)I×Ω. Whenever X is separable and 1 ≤p < ∞, it holds (Lp(I; X))∗∼= Lp∗(I; X∗), where 1/p + 1/p∗= 1.
+The duality pairing for such spaces will be denoted by ⟨·, ·⟩I×Ω. By W k,p(I; X) and Hk(I; X) for k ∈N we denote the
+spaces of functions v satisfying ∂j
+t v ∈Lp(I; X), j = 0, ..., k.
+3. NAVIER-STOKES EQUATIONS
+We start by recalling some regularity results for the Navier-Stokes equations, and we are going to prove some additional
+results, especially adapted to the situation considered in this paper. Throughout this paper, we shall always assume the
+convexity of Ω. We will state explicitly, whenever results also hold in a more general setting. It is a well known result,
+that for f ∈L2(I; V ∗) + L1(I; L2(Ω)2) and u0 ∈H, there exists a unique weak solution, i.e., the following Proposition
+holds, see [48, Chapter 3, Theorem 3.1 & Remark 3.1]:
+Proposition 3.1. Let f ∈L2(I; V ∗) + L1(I; L2(Ω)2) and u0 ∈H. Then there exists a unique weak solution u ∈
+L2(I; V ) ∩C(¯I; L2(Ω)2) of (1), satisfying
+⟨∂tu, v⟩Ω+ ν (∇u, ∇v)Ω+ ((u · ∇)u, v)Ω= (f, v)Ω
+for all v ∈V
+(4)
+in the sense of distributions on I, and u(0) = u0. Moreover, there holds an estimate
+∥u∥L∞(I;L2(Ω)) + √ν∥u∥L2(I;V ) ≤C
+∥u0∥H + ∥f∥L2(I;V ∗)+L1(I;L2(Ω))
+
+.
+Note that the constant C above only depends on ν and Ω, but is independent of T , see [47, Theorems V.1.4.2, V.1.5.3,
+V.3.1.1]. It is well known, that under the assumptions of Proposition 3.1, the nonlinearity satisﬁes for 1 ≤s, q < 2:
+(u · ∇)u ∈Ls(I; Lq(Ω)2)
+whenever
+1
+s + 1
+q ≥3
+2,
+(5)
+see [47, Lemma V.1.2.1]. Equation (4) is the weak formulation of (1) in divergence free spaces. The proof of the above
+proposition relies heavily on the fact, that the trilinear form c(·, ·, ·) deﬁned by
+c : H1
+0(Ω)2 × H1
+0(Ω)2 × H1
+0(Ω)2 →R,
+c (u, v, w) = ((u · ∇)v, w)Ω,
+posesses the properties summarized in the following lemma.
+Lemma 3.2. Let Ω⊂R2 be an open Lipschitz domain, then there holds the estimate
+∥v∥L4(Ω) ≤C∥v∥
+1
+2
+L2(Ω)∥v∥
+1
+2
+H1(Ω)
+for all v ∈H1(Ω),
+(6)
+due to which, the trilinear form c (·, ·, ·) satisﬁes for all u, v, w ∈H1
+0(Ω)2:
+c (u, v, w) ≤∥u∥L4(Ω)∥∇v∥L2(Ω)∥w∥L4(Ω),
+c (u, v, u) ≤C∥u∥L2(Ω)∥∇u∥L2(Ω)∥∇v∥L2(Ω).
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+5
+Let further ∇· u = 0. Then it holds
+c (u, v, w) = −c (u, w, v)
+and
+c (u, v, v) = 0.
+Proof. The estimate for the L4(Ω) norm can be found in [26, Lemma II.3.2] and [1, Theorem 3]. The properties of the
+trilinear forms are then consequences of H¨older’s inequality and integration by parts, and are shown, e.g., in [26, Lemma
+IX.2.1].
+□
+In what follows, we often consider the trilinear form c integrated in time, which we denote by
+c ((u, v, w)) :=
+Z
+I
+c (u, v, w) dt.
+In analyzing the Navier-Stokes equations, the instationary Stokes equations frequently arise as an auxiliary problem. For
+initial data u0 ∈H and right hand side f ∈L1(I; L2(Ω)2)+L2(I; V ∗), there exists a unique solution w ∈L2(I; V ) ∩
+L∞(I; L2(Ω)2) to the Stokes equations
+(
+⟨∂tw, v⟩Ω+ ν (∇w, ∇v)Ω= (f, v)Ω
+for all v ∈V,
+w(0) = u0,
+(7)
+where the ﬁrst line of (7) is understood in the sense of distributions on I. We introduce the Stokes operator A: D(A) →H
+deﬁned by
+(Aw, v)Ω= ν (∇w, ∇v)Ω
+for all v ∈V,
+with domain D(A) :=
+
+v ∈V : ∆v ∈L2(Ω)2 	
+and the projection operator P : L2(Ω)2 →H, deﬁned by
+(Pw, v)Ω= (w, v)Ω
+for all v ∈H,
+which is called the Helmholtz or Leray projection. Note that with the vector-valued Laplacian
+−∆: D(∆) →L2(Ω)2,
+with domain D(∆) :=
+
+v ∈H1
+0(Ω)2 : ∆v ∈L2(Ω)2 	
+, the Stokes operator also satisﬁes the representation
+A = −P∆.
+For convex Ω, the domains of the operators introduced above satisfy the representations
+D(∆) = H1
+0(Ω)2 ∩H2(Ω)2
+and
+D(A) = V ∩H2(Ω)2,
+see [17] for the H2 regularity of the Stokes operator. The Stokes operator A generates an analytic semigroup in H,
+see [7,40], also [6] for a detailled general analysis. One important feature of the Stokes problem is the maximal parabolic
+regularity, which indicates, that both the time derivative ∂tw and the Stokes operator Aw individually inherit certain
+regularity properties of f, see Proposition 3.4 below. For homogeneous initial data, this consequence of the analyticity
+of the semigroup has been shown in [19], see also [47, Chapter IV, Theorem 1.6.3]. Since our analysis should also treat
+inhomogeneous initial data u0, we need to deﬁne the proper spaces for the initial data:
+V1−1/s :=
+
+v ∈H : ∥v∥V1−1/s < ∞
+	
+,
+see also [7] and [6, Chapter 1, Section 3.3], where
+∥v∥V1−1/s :=
+Z
+I
+∥A exp(−tA)v∥s
+H dt
+1/s
++ ∥v∥H.
+
+
+6
+TITLE WILL BE SET BY THE PUBLISHER
+Remark 3.3. Instead of using the spaces V1−1/s explicitly as a requirement for the initial data, we can make use of the
+following imbedding results: For 1 < s ≤2 it holds V ֒→V1−1/s and for 1 < s < ∞, it holds V ∩D(∆) ֒→V1−1/s,
+see [7, Remarks 2.8, 2.9].
+The Stokes problem exhibits the following regularity properties, see [7, Proposition 2.6].
+Proposition 3.4 (Maximal parabolic regularity). Let 1 < s < ∞, f ∈Ls(I; L2(Ω)2) and u0 ∈V1−1/s. Then the solution
+w of the Stokes equations (7) satisﬁes
+∥∂tw∥Ls(I;L2(Ω)) + ∥Aw∥Ls(I;L2(Ω)) ≤C
+∥f∥Ls(I;L2(Ω)) + ∥u0∥V1−1/s
+
+.
+In the setting of Proposition 3.4, the Stokes problem (7) formulated in divergence free spaces is equivalent to the
+following velocity-pressure formulation: Find (w, r) ∈
+
+L2(I; H1
+0(Ω)2) ∩C(¯I; L2(Ω)2)
+
+× Ls(I; L2
+0(Ω)) satisfying
+⟨∂tw, v⟩I×Ω+ ν (∇w, ∇v)I×Ω−(r, ∇· v)I×Ω+ (q, ∇· w)I×Ω= (f, v)I×Ω
+(8)
+for all (v, q) ∈
+
+L2(I; H1
+0(Ω)2) ∩L∞(I; L2(Ω)2)
+
+×L2(I; L2
+0(Ω)) and w(0) = u0, see [7, Theorem 2.10]. Furthermore,
+the maximal parabolic regularity results of Proposition 3.4 imply the following estimate for the pressure:
+∥r∥Ls(I;L2(Ω)) ≤C
+∥f∥Ls(I;L2(Ω)) + ∥u0∥V1−1/s
+
+.
+Without additional smoothness assumptions, the maximal parabolic regularity for the Stokes problem does not imme-
+diately extend to the Navier-Stokes equations. A partial result can be obtained by considering that the maximal para-
+bolic regularity of the Stokes operator was recently extended to the Lp(Ω) setting, where p in general depends on the
+smoothness of Ω. For a general Lipschitz domain Ω, [25, Theorem 1.6] shows that for some ε > 0 and any p, such
+that |1/p −1/2| < 1/4 + ε, the maximal parabolic regularity holds. With this, we obtain the following result for the
+Navier-Stokes equations.
+Theorem 3.5. Let f ∈Ls(I; L2(Ω)2) and u0 ∈V1−1/s for some s > 1 and u ∈L2(I; V ) ∩L∞(I; L2(Ω)2) the unique
+solution of (4). Then for γ := min{s, 4/3} it holds
+∂tu , Au ∈Lγ(I; L4/3(Ω)2).
+Further, there exists a unique p ∈Lγ(I; L2
+0(Ω)), such that
+⟨∂tu, v⟩Ω+ ν (∇u, ∇v)Ω+ ((u · ∇)u, v)Ω−(p, ∇· v)Ω+ (∇· u, q)Ω= (f, v)Ω
+for all v ∈H1
+0(Ω)2, q ∈L2
+0(Ω) in the sense of distributions on I, and u(0) = u0.
+Proof. Due to (5) it holds (u · ∇)u ∈L4/3(I; L4/3(Ω)2). Since f ∈Ls(I; L2(Ω)), this implies ˜f := f −(u · ∇)u ∈
+Lγ(I; L4/3(Ω)2). Since |3/4−1/2| = 1/4, [25, Theorem 1.6] shows that the Stokes problem posesses maximal parabolic
+regularity in L4/3(Ω), which applied to u0 and ˜f then yields ∂tu, Au ∈Lγ(I; L4/3(Ω)2).The existence of a pressure can
+then be proven as in [7, Theorem 2.10].
+□
+The above result only recovers parts of the regularity available for the Stokes problem. Using H2 regularity, we will
+now show improved regularity results for the Navier-Stokes equations. Note that from now on we explicitly require the
+convexity of Ω, whereas Propositions 3.1 and 3.4 and Theorem 3.5 also hold for general Lipschitz domains.
+Theorem 3.6 (H2 regularity). Let u0 ∈V and f ∈L2(I; L2(Ω)2). Then the weak solution u to the Navier-Stokes
+equations (4) satisﬁes the improved regularity
+u ∈L2(I; H2(Ω)2) ∩H1(I; L2(Ω)2) ֒→C(¯I; H1(Ω)2),
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+7
+and there exist constants C1, C2 > 0, depending on ν, Ωbut independent of T , such that there hold the bounds
+∥u∥L∞(I;H1(Ω)) ≤C1
+∥u0∥V + ∥f∥L2(I×Ω)
+
+exp
+
+C2
+
+∥u0∥4
+H + ∥f∥4
+L1(I;L2(Ω))
+
+,
+∥u∥L2(I;H2(Ω)) ≤C1
+∥u0∥V + ∥f∥L2(I×Ω)
+ 
+1 + ∥u0∥2
+H + ∥f∥2
+L1(I;L2(Ω))
+
+exp
+
+C2
+
+∥u0∥4
+H + ∥f∥4
+L1(I;L2(Ω))
+
+.
+Proof. The proof of this result for C2 domains can be found in [48, Chapter 3, Theorem 3.10]. Instead of a C2 boundary,
+we can also use the H2 regularity for the Stokes operator on convex, polygonal domains, see, e.g., [17, Theorem 5.5]
+or [33, Theorem 2], to obtain the claimed regularity. The norm bounds are obtained by the Gronwall lemma.
+□
+Note that contrary to the H2 regularity for the instationary Stokes problem, for the Navier-Stokes problem, even the
+proofs of the regularities ∂tu, Au ∈L2(I; L2(Ω)2), that are contained in the above result, require convexity of the domain.
+We shall state a corresponding estimate for ∥∂tu∥L2(I×Ω) after discussing the regularity of the nonlinearity.
+Remark 3.7. By H¨older’s inequality, with this H2 regularity result, and the imbedding H2(Ω) ֒→L∞(Ω), we immedi-
+ately obtain
+(u · ∇)u ∈L2(I; L2(Ω)2).
+The regularity u ∈C(¯I; H1(Ω)2) almost yields that u is uniformly bounded over the whole space time cylinder. However,
+since in two dimensions H1(Ω) ̸֒→L∞(Ω), the boundedness in space has to be shown via an additional argument.
+We ﬁrst show, that the nonlinearity actually posesses more regularity, than what was claimed in Remark 3.7.
+Theorem 3.8. Let the assertions of Theorem 3.6 be satisﬁed, i.e., u0 ∈V and f ∈L2(I; L2(Ω)2), and let u be the unique
+solution to the Navier-Stokes equations (4). Then the nonlinearity satisﬁes
+(u · ∇)u ∈Ls(I; L2(Ω)2)
+for any 1 ≤s < ∞,
+and for any 0 < δ ≤min{2, s} there holds the estimate
+∥(u · ∇)u∥Ls(I;L2(Ω)) ≤C∥u∥
+δ
+s
+L2(I;H2(Ω))∥u∥
+2−δ
+s
+L∞(I;H1(Ω)),
+where the norms of u on the right hand side can be estimated by Theorem 3.6.
+Proof. The proof follows the ideas of [47, Theorem V.1.8.2], however we will use interpolation spaces instead of fractional
+powers of the Stokes operator. With H¨older’s inequality and the Sobolev imbedding H1+ δ
+s (Ω) ֒→C(Ω), it holds for any
+s < ∞and δ > 0:
+∥(u · ∇)u∥s
+L2(Ω) ≤∥u∥s
+L∞(Ω)∥∇u∥s
+L2(Ω) ≤C∥u∥s
+H1+ δ
+s (Ω)∥∇u∥s
+L2(Ω).
+Since δ ≤s, we can express the space H1+ δ
+s (Ω) as interpolation space [H1(Ω), H2(Ω)]δ/s, and obtain from [11, Theorem
+1] the estimate
+∥u∥H1+ δ
+s (Ω) ≤C∥u∥
+1−δ
+s
+H1(Ω)∥u∥
+δ
+s
+H2(Ω).
+All in all, we see that
+∥(u · ∇)u∥s
+L2(Ω) ≤C∥u∥δ
+H2(Ω)∥u∥2s−δ
+H1(Ω),
+which is integrable in time, since u ∈L∞(I; H1(Ω)2) ∩L2(I; H2(Ω)2), by Theorem 3.6 and δ ≤2. With H¨older’s
+inequality, we obtain the proposed estimate, which concludes the proof.
+□
+Remark 3.9. The previous result (u · ∇)u ∈Ls(I; L2(Ω)2) shows, that the Navier-Stokes equations inherit the maximal
+parabolic regularity of the Stokes problem, in cases where f ∈Ls(I; L2(Ω)2) and u0 ∈V1−1/s for some 2 ≤s < ∞.
+Especially it also holds Au, ∂tu ∈Ls(I; L2(Ω)2) with
+∥∂tu∥Ls(I;L2(Ω)) + ∥Au∥Ls(I;L2(Ω)) ≤C
+∥u0∥V1−1/s + ∥f∥Ls(I;L2(Ω)) + ∥(u · ∇)u∥Ls(I;L2(Ω))
+
+.
+
+
+8
+TITLE WILL BE SET BY THE PUBLISHER
+With Theorem 3.8, and slightly higher regularity of the data, we obtain the boundedness of u in the space-time cylinder:
+Theorem 3.10. Let ε > 0, f ∈L2+ε(I; L2(Ω)2) and u0 ∈V1−1/(2+ε). Then the unique weak solution u to (1) satisﬁes
+additionally
+u ∈C(¯I × ¯Ω)2,
+and for ε sufﬁciently small, there holds the estimate
+∥u∥L∞(I×Ω) ≤C
+
+∥u0∥V1−1/(2+ε) + ∥f∥L2+ε(I;L2(Ω)) + ∥u∥ε
+L2(I;H2(Ω))∥u∥2−ε
+L∞(I;H1(Ω))
+
+,
+where the norms of u on the right hand side can be estimated by Theorem 3.6.
+Proof. Applying Theorem 3.8, we observe, that it holds especially (u · ∇)u ∈L2+ε(I; L2(Ω)2). For ε small enough,
+such that δ := ε(2 + ε) ≤2, there moreover holds
+∥(u · ∇)u∥L2+ε(I;L2(Ω)) ≤C∥u∥ε
+L2(I;H2(Ω))∥u∥2−ε
+L∞(I;H1(Ω)).
+By a bootstrapping argument, since f ∈L2+ε(I; L2(Ω)2) and u0 ∈V1−1/ε, we can apply the maximal parabolic regular-
+ity of Proposition 3.4, and obtain together with H2 regularity
+∂tu ∈L2+ε(I; L2(Ω)2),
+u ∈L2+ε(I; H2(Ω)2).
+Hence u ∈W 1,2+ε(I; L2(Ω)2)∩L2+ε(I; H2(Ω)2). With the deﬁnitions p := 2+ε, s :=
+1
+2+ε/2, θ := 1−
+1
+2+ε/4 = 1
+2+ 2ε
+8+ε
+it holds 1/p < s < 1/2 and 1/2 < θ < 1 −s. We can thus apply [3, Theorem 3], see also [22, Lemma 2.11 b)], and
+obtain
+u ∈Cs−1/p(¯I; (L2(Ω), H2(Ω))2
+θ,1).
+Applying [8, Theorems 3.4.1 & 6.4.5], and [21, Theorem 4.57], we moreover have
+u ∈Cs−1/p(¯I; (L2(Ω), H2(Ω))2
+θ,2) = C
+ε
+8+6ε+ε2 (¯I; H1+ 4ε
+8+ε (Ω)2) ֒→C(¯I × ¯Ω)2.
+Note that here we have used, that for the L2(Ω) case, all corresponding Sobolev-Slobodeckij, Besov, Bessel-potential and
+interpolation spaces coincide, see, e.g., [41]. For an overview over the topic of function spaces, see also [50]. From the
+used embeddings, we moreover have the proposed estimate. This concludes the proof.
+□
+Corollary 3.11. Let the assertions of Theorem 3.10 be satisﬁed, i.e., f ∈L2+ε(I; L2(Ω)2) and u0 ∈V1−1/(2+ε) for some
+ε > 0. Then the nonlinear term in the Navier-Stokes equations satisﬁes
+(u · ∇)u ∈L∞(I; L2(Ω)2),
+and there holds the estimate
+∥(u · ∇)u∥L∞(I;L2(Ω)) ≤C
+
+∥u0∥V1−1/(2+ε) + ∥f∥L2+ε(I;L2(Ω)) + ∥u∥
+2
+2+ε
+L2(I;H2(Ω))∥u∥
+2−
+2
+2+ε
+L∞(I;H1(Ω))
+
+∥u∥L∞(I;H1(Ω)).
+where the norms of u on the right hand side can be estimated by Theorem 3.6.
+Proof. This is a direct consequence of Theorems 3.6 and 3.10 and application of H¨older’s inequality.
+□
+In the formulation of equation (4), we have used divergence free test functions. Whenever we want to test the equation
+with functions, that are not divergence free, we have to consider an alternative, equivalent formulation, that includes the
+pressure. The following theorem guarantees, that we can freely switch between the two formulations, when u0 ∈V and
+f ∈L2(I; L2(Ω)2).
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+9
+Theorem 3.12. Let the assertions of Theorem 3.6 be satisﬁed, i.e., u0 ∈V and f ∈L2(I; L2(Ω)2). Then there exists a
+unique solution (u, p) with
+u ∈L2(I; H2(Ω)2) ∩C(¯I; V ), ∂tu ∈L2(I; L2(Ω)2)
+and
+p ∈L2(I; H1(Ω) ∩L2
+0(Ω)),
+such that u(0) = u0 and
+(∂tu, v)I×Ω+ ν (∇u, ∇v)I×Ω+ ((u · ∇)u, v)I×Ω−(p, ∇· v)I×Ω+ (q, ∇· u)I×Ω= (f, v)I×Ω,
+(9)
+for all (v, q) ∈L2(I; H1
+0(Ω)2) × L2(I; L2
+0(Ω)). Further it holds
+∥p∥L2(I;H1(Ω)) ≤C
+∥u0∥V + ∥f∥L2(I;L2(Ω)) + ∥u∥L2(I;H2(Ω))∥u∥L∞(I;H1(Ω))
+
+,
+where the norms of u on the right hand side can be estimated by Theorem 3.6.
+Proof. This result can be shown using Theorem 3.8 with the choice s = 2, together with a bootstrapping argument.
+Moving (u · ∇)u ∈L2(I; L2(Ω)2) to the right hand side and applying Proposition 3.4 yields ∂tu, Au ∈L2(I; L2(Ω)2).
+The pressure is then obtained by following the same steps as [7, Theorem 2.10, Corollary 2.11], where its uniqueness is
+given by its construction.
+□
+4. DISCRETIZATION
+After discussing the continuous formulation of the Navier-Stokes equations, we now turn towards their discretization.
+4.1. Spatial discretization
+Let {Th} denote a family of quasi-uniform triangulations of Ωconsisting of closed simplices. The index h denotes the
+maximum meshsize. We discretize the velocity u by a discrete function space Uh ⊂H1
+0(Ω)2 and the pressure p by the
+discrete space Mh ⊂L2
+0(Ω), where (Uh, Mh) satisfy the discrete, uniform LBB-condition
+sup
+vh∈Uh
+(∇· vh, qh)Ω
+∥∇vh∥L2(Ω)
+≥β∥qh∥L2(Ω)
+for all qh ∈Mh,
+with a constant β > 0 independent of h. Throughout this work, we will assume the following approximation properties of
+the spaces Uh and Mh. This assumption is valid, e.g., for Taylor-Hood and MINI ﬁnite elements, even on shape regular
+meshes, see [7, Assumption 7.2].
+Assumption 4.1. There exist interpolation operators ih : H2(Ω)2 ∩H1
+0(Ω)2 →Uh and rh : L2(Ω) →Mh, such that
+∥∇(v −ihv)∥L2(Ω) ≤ch∥∇2v∥L2(Ω)
+for all v ∈H2(Ω)2 ∩H1
+0(Ω)2,
+∥q −rhq∥L2(Ω) ≤ch∥∇q∥L2(Ω)
+for all q ∈H1(Ω).
+The (vector valued) discrete Laplacian ∆h : Uh →Uh is deﬁned by
+(∇uh, ∇vh)Ω= −(∆huh, vh)Ω
+for all vh ∈Uh.
+We introduce the space Vh of discretely divergence free functions as
+Vh := {vh ∈Uh : (∇· vh, qh)Ω= 0 for all qh ∈Mh} .
+The L2 projection onto this space will be denoted by Ph : L2(Ω)2 →Vh, satisfying
+(Phv, φh)Ω= (v, φh)Ω
+for all φh ∈Vh,
+
+
+10
+TITLE WILL BE SET BY THE PUBLISHER
+and allows us to introduce the discrete Stokes operator Ah : Vh →Vh, Ahvh = −Ph∆hvh. Having deﬁned these discrete
+spaces and operators, we can now consider the Ritz projection for the stationary Stokes problem. For any (w, r) ∈
+H1
+0(Ω)2 × L2(Ω), the projection
+
+RS
+h(w, r), RS,p
+h (w, r)
+
+∈Uh × Mh is deﬁned by
+∇
+w −RS
+h(w, r)
+
+, ∇φh
+
+Ω−
+
+r −RS,p
+h (w, r), ∇· φh
+
+Ω= 0
+for all φh ∈Uh
+∇·
+w −RS
+h(w, r)
+
+, ψh
+
+Ω= 0
+for all ψh ∈Mh.
+(10)
+In case that w is discretely divergence free, i.e., (∇· w, ψh)Ω= 0 for all ψh ∈Mh, it holds RS
+h(w, r) ∈Vh. Note that
+the space Vh is in general not a subspace of the space V of pointwise divergence free functions. This means, that on the
+discrete space Vh, the form c (·, ·, ·) does not posess the anti symmetry properties shown in Lemma 3.2. Hence we deﬁne,
+as in [16,31], an anti symmetric variant:
+ˆc : H1
+0(Ω)2 × H1
+0(Ω)2 × H1
+0(Ω)2 →R,
+ˆc (u, v, w) = 1
+2c (u, v, w) −1
+2c (u, w, v) .
+(11)
+Analogously to the trilinear form c ((·, ·, ·)), we will use the notation
+ˆc ((u, v, w)) :=
+Z
+I
+ˆc (u, v, w) dt.
+Remark 4.2. Note that, due to Lemma 3.2, we can equivalently replace c(·, ·, ·) in the continuous formulation of the
+Navier-Stokes equations (4) by ˆc(·, ·, ·), as the two forms coincide on V .
+By its deﬁnition, ˆc (·, ·, ·) now has the following antisymmetric properties on the space Vh, which will later allow us to
+show the stability of the fully discrete solutions.
+Lemma 4.3. The trilinear form ˆc (·, ·, ·) satisﬁes
+ˆc (uh, vh, wh) ≤C∥∇uh∥L2(Ω)∥∇vh∥L2(Ω)∥∇wh∥L2(Ω)
+for all uh, vh, wh ∈Uh,
+ˆc (uh, vh, wh) = −ˆc (uh, wh, vh)
+for all uh, vh, wh ∈Uh,
+ˆc (uh, vh, vh) = 0
+for all uh, vh ∈Uh.
+Proof. The last two identities are a direct consequence of the deﬁnition of ˆc (·, ·, ·). The ﬁrst estimate follows from
+Lemma 3.2 and the imbedding H1
+0(Ω) ֒→L4(Ω).
+□
+Note that due to the above lemma, formally we are still allowed to switch the second and third argument of ˆc (·, ·, ·).
+The original form c (·, ·, ·) however had a strict disctinction between the two arguments, as it contains the gradient of the
+second argument, but only the function values of the third argument. This is of importance when estimating the form in
+terms of its arguments. In ˆc (·, ·, ·) gradients occur in the second and third argument, thus switching the arguments does
+not allow us to obtain improved estimates. For this reason, we state the following lemma, which allows us to switch the
+second and third arguments of c (·, ·, ·) by introducing an additional term, even if the ﬁrst argument is not (pointwise)
+divergence free.
+Lemma 4.4. Let u, v, w ∈H1
+0(Ω)2. Then it holds
+c (u, v, w) = −c (u, w, v) −(∇· u, v · w)Ω.
+Proof. The proof is simply an application of integration by parts, and can also be seen, e.g., from [2, Equation 2.9].
+□
+We conclude this subsection on the space discretization by recalling some important interpolation estimates. On the
+continuous level, applying (6) to the ﬁrst order derivatives, and using H2 regularity, yields
+∥∇w∥L4(Ω) ≤C∥∇w∥
+1
+2
+L2(Ω)∥Aw∥
+1
+2
+L2(Ω)
+for all w ∈H2(Ω)2.
+(12)
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+11
+Using the Stokes operator on the right hand side, instead of second order derivatives, allows us to translate this result to
+the discrete setting. This is facilitated by the following result, showing that for discretely divergence free functions, the
+discrete Laplacian ∆h can be bounded in terms of the discrete Stokes operator Ah:
+∥∆hwh∥L2(Ω) ≤C∥Ahwh∥L2(Ω)
+for all wh ∈Vh,
+(13)
+see [30, Corollary 4.4] or [28, Lemma 4.1]. With this, we can translate (12) to the discrete setting, by considering for
+some ﬁxed wh ∈Vh the solution w ∈H1
+0(Ω)2 to the continuous problem
+(∇w, ∇v)Ω= (−∆hwh, v)Ω
+for all v ∈H1
+0(Ω)2.
+By the stability of the Poisson Ritz projection in W 1,4(Ω), (12) and (13), we then obtain the discrete version of (12).
+∥∇wh∥L4(Ω) ≤C∥∇wh∥
+1
+2
+L2(Ω)∥Ahwh∥
+1
+2
+L2(Ω)
+for all wh ∈Vh.
+(14)
+Analogously, the Gagliardo-Nirenberg inequality,
+∥w∥L∞(Ω) ≤C∥w∥
+1
+2
+L2(Ω)∥Aw∥
+1
+2
+L2(Ω),
+(15)
+which is a consequence of [1, Theorem 3] together with H2 regularity, has a discrete analogon. It can be shown using the
+standard discrete Gagliardo-Nirenberg inequality
+∥wh∥L∞(Ω) ≤C∥wh∥
+1
+2
+L2(Ω)∥∆hwh∥
+1
+2
+L2(Ω)
+for all wh ∈Uh,
+which was proven in [29, Lemma 3.3]. The proof stated there for smooth domains remains the same for convex domains.
+The discrete version of (15) is then again obtained by applying (13) and reads
+∥wh∥L∞(Ω) ≤C∥wh∥
+1
+2
+L2(Ω)∥Ahwh∥
+1
+2
+L2(Ω)
+for all wh ∈Vh.
+(16)
+Straightforward calculations, using the deﬁnition of Ah, also give
+∥∇wh∥L2(Ω) ≤C∥wh∥
+1
+2
+L2(Ω)∥Ahwh∥
+1
+2
+L2(Ω)
+for all wh ∈Vh.
+(17)
+With these considerations regarding the spatial discretization, we can now consider the fully discrete Navier-Stokes equa-
+tions by also discretizing in time.
+4.2. Temporal discretization
+For discretization in time, we employ the discontinuous Galerkin method of order q (dG(q)), which is also used,
+e.g., in [7, 16, 24]. The time interval I = (0, T ] is partitioned into M half-open sub-intervals Im = (tm−1, tm] with
+0 = t0 < t1 < t2 < ... < tM = T . We denote each timestep by km = tm −tm−1 and for ﬁxed M the maximal
+timestep by k := max1≤m≤M km, as well as the minimal one by kmin := min1≤m≤M km. If we want to emphasize that
+Im belongs to a discretization level k, we denote it by Im,k. We make some standard assumptions on the properties on
+the time discretization:
+(1) There are constants C, β > 0 independent of k, such that
+kmin ≥Ckβ.
+(2) There is a constant κ > 0 independent of k, such that for all m = 1, 2, ..., M −1
+κ−1 ≤
+km
+km−1
+≤κ.
+
+
+12
+TITLE WILL BE SET BY THE PUBLISHER
+(3) It holds k ≤T
+4 .
+A dG(q) function with values in a given Banach space B is then given as a function in the space
+Xq
+k(B) :=
+
+v ∈L2(I; B) : v|Im ∈Pq(Im; B)
+for all 1 ≤m ≤M
+	
+,
+where on each Im the space Pq(Im; B) is given as the space of polynomials in time up to degree q with values in B:
+Pq(Im; B) =
+
+
+v ∈L2(Im; B) : ∃v0, ..., vq ∈B s.t. v =
+q
+X
+j=0
+vjtj
+
+
+.
+Note that no continuity is required at the time nodes tm, which is why we use the following standard notations for one
+sided limits and jump terms:
+v+
+m := lim
+ε→0+ v(tm + ε),
+v−
+m := lim
+ε→0+ v(tm −ε),
+[v]m := v+
+m −v−
+m.
+We introduce the compact notations
+Vkh := Xq
+k(Vh),
+Ukh := Xq
+k(Uh),
+Mkh := Xq
+k(Mh),
+Ykh := Ukh × Mkh.
+Having deﬁned these dG spaces, we introduce the following projection operator in time: πτ : C(I; L2(Ω)) →Xq
+k(L2(Ω))
+deﬁned by
+(
+(πτv −v, ϕ)Im×Ω= 0
+for all ϕ ∈Pq−1(Im; L2(Ω)), if q > 0,
+πτv(t−
+m) = v(t−
+m),
+(18)
+for all m = 1, 2, ..., M. In case q = 0, the projection operator is deﬁned solely by the second condition.
+Remark 4.5. In this paper we will restrict ourselves to the two lowest cases q = 0 and q = 1. Since we work in a setting
+of low regularity of the right hand side f, the error estimates would not beneﬁt from higher order schemes. Also, since
+the Navier-Stokes equations already pose a challenging large system to solve, higher order schemes in many applications
+are not feasible from the standpoint of computational cost.
+We can now introduce the time-discretized formulation of the Navier-Stokes equations. We deﬁne the time-discrete
+bilinear form for the transient Stokes equations as in [7] by
+B(u, v) :=
+M
+X
+m=1
+(∂tu, v)Im×Ω+ ν (∇u, ∇v)I×Ω+
+M
+X
+m=2
+[u]m−1, v+
+m−1
+
+Ω+
+u+
+0 , v+
+0
+
+Ω.
+Since we frequently will test some discrete equations with their respective solutions, let us recall the following lemma.
+Lemma 4.6. For any vk ∈Xq
+k(L2(Ω)) it holds
+(∂tvk, vk)Im×Ω+
+
+[vk]m−1, v+
+kh,m−1
+
+Ω= 1
+2
+
+∥v−
+k,m∥2
+L2(Ω) + ∥[vk]m−1∥2
+L2(Ω) −∥v−
+k,m−1∥2
+L2(Ω)
+
+,
+−(vk, ∂tvk)Im×Ω−
+
+v−
+k,m, [vk]m
+
+Ω= 1
+2
+
+∥v+
+k,m−1∥2
+L2(Ω) + ∥[vk]m∥2
+L2(Ω) −∥v+
+k,m∥2
+L2(Ω)
+
+.
+Proof. For the ﬁrst equality, we can express the integral over the time derivatives via
+(∂tvk, vk)Im×Ω= 1
+2∥v−
+k,m∥2 −1
+2∥v+
+k,m−1∥2.
+Writing v+
+k,m−1 = [v]k,m−1 + v−
+k,m−1 and recombining terms gives the ﬁrst identity. The proof of the second equality
+works completely anologous.
+□
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+13
+The fully discrete formulation of the transient Navier-Stokes equations, using the anti symmetrized trilinear form
+ˆc (·, ·, ·), introduced in (11), is now given as: Find ukh ∈Vkh, such that
+B(ukh, vkh) + ˆc ((ukh, ukh, vkh)) = (f, vkh)I×Ω+
+
+u0, v+
+kh,0
+
+Ω
+for all vkh ∈Vkh.
+(19)
+Since in general Vh ̸⊂V , the discrete solution ukh ∈Vkh is not divergence free, and thus, we are not allowed to use it as a
+test function for the divergence-free continuous formulation (4). Because of this, we introduce an equivalent formulation
+with pressure: Find (ukh, pkh) ∈Ykh, such that for all (vkh, qkh) ∈Ykh it holds
+B((ukh, pkh), (vkh, qkh)) + ˆc ((ukh, ukh, vkh)) = (f, vkh)I×Ω+
+
+u0, v+
+kh,0
+
+Ω,
+(20)
+where the mixed bilinear form B is deﬁned by
+B((u, p), (v, q)) :=
+M
+X
+m=1
+(∂tu, v)Im×Ω+ ν (∇u, ∇v)I×Ω+
+M
+X
+m=2
+[u]m−1, v+
+m−1
+
+Ω+
+u+
+0 , v+
+0
+
+Ω
+−(∇· v, p)I×Ω+ (∇· u, q)I×Ω.
+Theorem 4.7. The two formulations (19) and (20) are equivalent in the sense that, if ukh ∈Vkh satisﬁes (19), then there
+exists pkh ∈Mkh such that (ukh, pkh) solves (20). Conversely, if (ukh, pkh) satisﬁes (20), then ukh is an element of Vkh
+and satisﬁes (19).
+Proof. This can be shown by using the same arguments as [7, Proposition 4.3].
+□
+4.3. Stokes error estimates
+Before further analyzing the fully discrete Navier-Stokes equations, let us recall the discrete formulation of the Stokes
+equations (8), and the available error estimates that we wish to extend to the Navier-Stokes equations in this work. The
+fully discrete formulation of the instationary Stokes equation reads: Find (wkh, rkh) ∈Ykh satisfying
+B((wkh, rkh), (φkh, ψkh)) =
+
+u0, φ+
+kh,0
+
+Ω+ (f, φkh)I×Ω
+for all (φkh, ψkh) ∈Ykh.
+(21)
+In the recent contributions [7, 36], best approximation type error estimates for the Stokes problem were shown in the
+norms of L∞(I; L2(Ω)), L2(I; L2(Ω)) and L2(I; H1(Ω)). There hold the following results, formulated in terms of best
+approximation error terms and the errors of the projection in time πτ, deﬁned in (18), and the Stokes Ritz projection RS
+h,
+deﬁned in (10).
+Proposition 4.8 ( [36, Theorems 6.1& 6.3]). Let f ∈L2(I; L2(Ω)2) and u0 ∈V , let (w, r) and (wkh, rkh) be the
+continuous and fully discrete solutions to the Stokes problems (8) and (21). Then for any χkh ∈Vkh, there holds
+∥w −wkh∥L2(I×Ω)) ≤C
+∥w −χkh∥L2(I×Ω) + ∥w −πτw∥L2(I×Ω) + ∥w −RS
+h(w, r)∥L2(I×Ω)
+
+∥∇(w −wkh)∥L2(I×Ω)) ≤C
+∥∇(w −χkh)∥L2(I×Ω) + ∥∇(w −πτw)∥L2(I×Ω) + ∥∇(w −RS
+h(w, r))∥L2(I×Ω)
+
+.
+Proposition 4.9 ( [7, Corollary 6.4]). Let f ∈Ls(I; L2(Ω)2) and u0 ∈V1−1/s for some s > 1, and let (w, r) and
+(wkh, rkh) be the continuous and fully discrete solutions to the Stokes equations (8) and (21). Then for any χkh ∈Vkh,
+there holds
+∥w −wkh∥L∞(I;L2(Ω)) ≤C
+
+ln T
+k
+ ∥w −χkh∥L∞(I;L2(Ω)) + ∥w −RS
+h(w, r)∥L∞(I;L2(Ω))
+
+.
+
+
+14
+TITLE WILL BE SET BY THE PUBLISHER
+Having shown these error estimates for the Stokes equations, the natural question arises, whether these results can be
+extended to the Navier-Stokes equations. We ﬁrst give a positive answer for the L2(I; H1(Ω)) error in Theorem 4.16.
+The main result of this work is the error estimate in the L∞(I; L2(Ω)) norm, presented in Theorem 5.6. With the same
+techniques, the proof of the L2(I; L2(Ω)) error estimate is then straightforward, and we state the result in Theorem 5.7.
+4.4. Existence and stability results
+We begin our analysis of the fully discrete Navier-Stokes equations by presenting some stability results, followed by
+an existence result of fully discrete solutions. To show these, let us ﬁrst recall the following version of a discrete Gronwall
+lemma, which is stated in [32, Lemma 5.1] for a constant timestep k, but its proof can easily be adapted to the setting of
+variable timesteps km.
+Lemma 4.10. Let {kn}, {an}, {bn}, {cn}, {γn} be sequences of nonnegative numbers and B ≥0 a constant, such that
+for each n ∈N0 it holds
+an +
+n
+X
+m=0
+kmbm ≤
+n
+X
+m=0
+kmγmam +
+n
+X
+m=0
+kmcm + B,
+and kmγm < 1 for all m ∈{0, ..., n}. Then with σm := (1 −kmγm)−1 it holds
+an +
+n
+X
+m=0
+kmbm ≤exp
+ 
+n
+X
+m=0
+kmσmγm
+!
+·
+ 
+n
+X
+m=0
+kmcm + B
+!
+.
+Proof. By choosing ek = 1, eγm = kmγm and ecm = kmcm, the quantities withe· correspond to the notation of [32, Lemma
+5.1]. The result then directly follows from this redeﬁnition.
+□
+Continuous and discrete Gronwall lemmas are stated in many different forms in the literature, see, e.g., [38] and the
+references therein for an overview over different generalizations of the original lemma. Note that, since the sum on the
+right hand side of the assumed bound goes up to n, the additional assumption kmγm < 1 is needed. This is not the case
+in explicit forms of discrete Gronwall lemmas, where the sum on the right goes only up to n −1, which is the form most
+often considered in the literature, e.g., [43]. In the context of dG timestepping schemes, the sequences {an} and {bn}
+often correspond to squared norms at time nodes or over subintervals. It therefore seems natural to also state the following
+version of a Gronwall lemma, where we also include a sum over non-squared contributions. To the best of the authors
+knowledge, a result like this has not been explicitly used in the literature. In later sections of this work, this lemma will
+facilitate the analysis of discrete problems with right hand sides that are L1 in time. Here the norms of the solution occur in
+a non squared contribution. The following lemma shows, that the weights of the squared sum enter exponentially into the
+estimate, whereas the weights of the linear sum enter linearly in the estimate for xn. It can be understood as an adaptation
+of Bihari’s inequality to the discrete setting, see [10,39]. To improve readability, we drop the explicit mentioning of the
+timesteps km, as we can always apply a transformation as done in the proof of Lemma 4.10.
+Lemma 4.11. Let {xn}, {bn}, {cn}, {dn}, {γn} be sequences of nonnegative numbers and B ≥0 a constant, such that
+for each n ∈N0 it holds
+x2
+n +
+n
+X
+m=0
+bm ≤
+n
+X
+m=0
+γmx2
+m +
+n
+X
+m=0
+dmxm +
+n
+X
+m=0
+cm + B,
+and γm < 1 for all m ∈{0, ..., n}. Then with σm := (1 −γm)−1 it holds
+x2
+n +
+n
+X
+m=0
+bm ≤2 exp
+ 
+2
+n
+X
+m=0
+σmγm
+!
+·
+
+
+ 
+n
+X
+m=0
+dm
+!2
++
+n
+X
+m=0
+cm + B
+
+.
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+15
+Proof. For n ∈N0 deﬁne δn ≥0 such that
+x2
+n +
+n
+X
+m=0
+bm + δn =
+n
+X
+m=0
+γmx2
+m +
+n
+X
+m=0
+dmxm +
+n
+X
+m=0
+cm + B,
+(22)
+and set Xn :=
+p
+x2n + Pn
+m=0 bm + δn. We will show
+X2
+n ≤2 exp
+ 
+2
+n
+X
+m=0
+σmγm
+!
+·
+
+
+ 
+n
+X
+m=0
+dm
+!2
++
+n
+X
+m=0
+cm + B
+
+
+for all n ∈N0,
+from which the assertion follows by the deﬁnition of Xn. Note that by assumption it holds
+X2
+n −X2
+n−1 = γnx2
+n + dnxn + cn ≥0
+for all n ∈N,
+and thus the sequences {X2
+n} and {Xn} are monotonically increasing. By Xn ≥xn and the monotonicity of Xn, from
+(22) we obtain
+X2
+n ≤
+n
+X
+m=0
+γmX2
+m +
+n
+X
+m=0
+dmXm +
+n
+X
+m=0
+cm + B
+≤
+ 
+n
+X
+m=0
+γmXm +
+n
+X
+m=0
+dm
+!
+Xn +
+n
+X
+m=0
+cm + B.
+(23)
+Let us now recall, that for a, b > 0, an estimate x2 ≤ax + b implies x ≤a +
+√
+b. To see this, we start by computing
+the roots of the quadratic polynomial, yielding x ≤a
+2 +
+q
+a2
+4 + b. The root of the polynomial can then be estimated by
+a
+2 +
+q
+a2
+4 + b ≤a +
+√
+b, which can be shown by subtracting a/2 and squaring both sides. Applied to equation (23), we
+have thus for every n ∈N0 the estimate
+Xn ≤
+n
+X
+m=0
+γmXm +
+n
+X
+m=0
+dm +
+v
+u
+u
+t
+n
+X
+m=0
+cm + B =
+n
+X
+m=0
+γmXm +
+n
+X
+m=0
+˜cm + ˜B,
+where we have deﬁned ˜B := 0 as well as
+˜c0 :=
+
+d0 +
+p
+c0 + B
+
+≥0,
+and
+˜cm :=
+
+dm +
+v
+u
+u
+t
+m
+X
+j=0
+cj + B −
+v
+u
+u
+t
+m−1
+X
+j=0
+cj + B
+
+≥0 for m > 0.
+We can thus apply Lemma 4.10 to Xn and obtain after resubstituting the tilded quantities:
+Xn ≤exp
+ 
+n
+X
+m=0
+γmσm
+!
+·
+ 
+n
+X
+m=0
+˜cm + ˜B
+!
+≤exp
+ 
+n
+X
+m=0
+γmσm
+!
+·
+
+
+n
+X
+m=0
+dm +
+v
+u
+u
+t
+n
+X
+m=0
+cm + B
+
+.
+Squaring and estimating the square of the sum yields the result.
+□
+With these technical lemmas, we can show stability of the discrete solutions in different norms under different assump-
+tions on f. Solutions to the discrete problem also satisfy the same energy bounds as the weak solutions, i.e., there holds
+the following proposition, see [16, Lemma 5.1, Theorem A.1].
+
+
+16
+TITLE WILL BE SET BY THE PUBLISHER
+Proposition 4.12 (Stability of discrete Navier-Stokes). Let f ∈L2(I; H−1(Ω)2), u0 ∈H and ukh ∈Vkh satisfy (19).
+Then there hold the bounds
+∥ukh∥L∞(I;L2(Ω)) + ∥ukh∥L2(I;H1(Ω)) ≤C
+∥u0∥H + ∥f∥L2(I;H−1(Ω))
+
+,
+if q = 0,
+∥ukh∥L∞(I;L2(Ω))
+ 1
+2 + ∥ukh∥L2(I;H1(Ω)) ≤C
+∥u0∥H + ∥f∥L2(I;H−1(Ω))
+
+,
+if q ≥1,
+with a constant C depending on the domain Ωand the viscosity ν.
+Note that for the case q ≥1, contrary to the continuous setting of Proposition 3.1, due to the exponent 1
+2 on the left
+hand side, the above proposition states a bound for ∥ukh∥L∞(I;L2(Ω)), which depends on the squared norms of the data
+u0 and f. For the two low order cases q = 0 and q = 1, and f ∈L2(I; L2(Ω)2), [16, Lemma 5.1] also shows an estimate
+of the form
+max
+1≤m≤M ∥u−
+kh,m∥L2(Ω) + ∥ukh∥L2(I;H1(Ω)) ≤C1eC2T ∥u0∥H + ∥f∥L2(I;L2(Ω))
+
+.
+With our discrete Gronwall estimate Lemma 4.11, we can generalize this result to f ∈L1(I; L2(Ω)2). Furthermore, by
+using the version of Gronwall’s lemma presented here, contrary to [16], the bound does not grow exponentially in T . This
+is in agreement with the result of Proposition 3.1 in the continuous setting. We obtain the following result, which now
+yields an estimate for the norms of ukh, that is linear in terms of the data.
+Theorem 4.13. Let f ∈L1(I; L2(Ω)2)+L2(I; H−1(Ω)2), u0 ∈H and ukh ∈Vkh satisfy equation (19) for either q = 0
+or q = 1. Then there holds the bound
+∥ukh∥L∞(I;L2(Ω)) + √ν∥ukh∥L2(I;H1(Ω)) ≤C
+∥u0∥H + ∥f∥L1(I;L2(Ω))+L2(I;H−1(Ω))
+
+,
+with a constant C only depending on Ω, ν. If f ∈L1(I; L2(Ω)2), then C only depends on Ω.
+Proof. We ﬁrst prove the result for f ∈L1(I; L2(Ω)2) and remark at the end, which modiﬁcations are needed to also
+cover the case, where f is partly in L2(I; H−1(Ω)2). Note that in the special case of f ∈L2(I; H−1(Ω)2) and q = 0, this
+theorem is precisely the ﬁrst statement of [16, Lemma 5.1]. For notational simplicity, we use the convention u−
+kh,0 := u0
+and accordingly [ukh]0 = u+
+kh,0 −u0. By testing (19) with ukh|Im and using Lemma 4.3 we arrive on each time interval
+at:
+(∂tukh, ukh)Im×Ω+ ν (∇ukh, ∇ukh)Im×Ω+
+
+[ukh]m−1, u+
+kh,m−1
+
+Ω= (f, ukh)Im×Ω.
+Applying Lemma 4.6 gives
+1
+2∥u−
+kh,m∥2
+L2(Ω) + 1
+2∥[ukh]m−1∥2
+L2(Ω) + ν∥∇ukh∥2
+L2(Im×Ω) = 1
+2∥u−
+kh,m−1∥2
+L2(Ω) + (f, ukh)Im×Ω.
+Multiplying by two and summing up the identity over the intervals 1, ..., n, we obtain
+∥u−
+kh,n∥2
+L2(Ω) +
+n
+X
+m=1
+∥[ukh]m−1∥2
+L2(Ω) + 2ν∥∇ukh∥2
+L2(Im×Ω) = ∥u−
+kh,0∥2
+L2(Ω) + 2
+n
+X
+m=1
+(f, ukh)Im×Ω.
+(24)
+From this point on, we have to treat the two cases q = 0 and q = 1 separately.
+Case 1: If q = 0, then it holds ∥ukh∥L∞(Im;L2(Ω)) = ∥u−
+kh,m∥L2(Ω). Thus with H¨older’s inequality, the terms in the last
+sum of (24) can be estimated as
+(f, ukh)Im×Ω≤∥f∥L1(Im;L2(Ω))∥ukh∥L∞(Im;L2(Ω)) ≤∥f∥L1(Im;L2(Ω))∥u−
+kh,m∥L2(Ω).
+Hence, from (24) we obtain the following
+∥u−
+kh,n∥2
+L2(Ω) +
+n
+X
+m=1
+∥[ukh]m−1∥2
+L2(Ω) + 2ν∥∇ukh∥2
+L2(Im×Ω) ≤∥u0∥2
+L2(Ω) + 2
+n
+X
+m=1
+∥f∥L1(Im;L2(Ω))∥u−
+kh,m∥L2(Ω).
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+17
+An application of Lemma 4.11 proves the assertion.
+Case 2: If q = 1, then the L∞(Im) norm can be estimated by the evaluation at the two endpoints of the interval:
+∥ukh∥L∞(Im;L2(Ω)) ≤max{∥u−
+kh,m∥L2(Ω), ∥u+
+kh,m−1∥L2(Ω)}.
+With triangle inequality we can estimate the right sided limit in terms of a left sided limit and a jump:
+∥ukh∥L∞(Im;L2(Ω)) ≤max{∥u−
+kh,m∥L2(Ω), ∥u−
+kh,m−1∥L2(Ω) + ∥[ukh]m−1∥L2(Ω)}.
+Deﬁning x2
+n := ∥u−
+kh,n∥2
+L2(Ω) + Pn
+m=1 ∥[ukh]m−1∥2
+L2(Ω) for n = 1, ..., M yields from (24) the estimate
+x2
+n + 2ν
+n
+X
+m=1
+∥∇ukh∥2
+L2(Im;L2(Ω)) ≤∥u0∥2
+L2(Ω) + 2
+n
+X
+m=1
+∥f∥L1(Im;L2(Ω))(xm + xm−1),
+or after an index shift
+x2
+n + 2ν
+n
+X
+m=1
+∥∇ukh∥2
+L2(Im;L2(Ω)) ≤∥u0∥2
+L2(Ω) + 2∥f∥L1(I1;L2(Ω))∥u0∥+ 2
+n
+X
+m=1
+∥f∥L1(Im∪Im+1;L2(Ω)) · xm.
+In order to shorten the notation, we have added here a term ∥f∥L1(In+1;L2(Ω))xn, where in case n = M we use the
+convention IM+1 = ∅. Again we can apply Lemma 4.11, which yields the estimate
+x2
+n + 2ν
+n
+X
+m=1
+∥∇ukh∥2
+L2(Im;L2(Ω)) ≤2
+
+
+ 
+2
+n
+X
+m=1
+∥f∥L1(Im∪Im+1;L2(Ω))
+!2
++ ∥u0∥2
+L2(Ω) + 2∥f∥L1(I1;L2(Ω))∥u0∥
+
+.
+Using Young’s inequality, to estimate the term 2∥f∥L1(I1;L2(Ω))∥u0∥, concludes the proof. In case f = f1 + f2, with
+f1 ∈L1(I; L2(Ω)2), f2 ∈L2(I; H−1(Ω)2), the contribution of f1 can be treated as above. For the f2 contribution, in
+(24) one applies H¨older’s and Young’s inequalities, and absorbs the ∥∇ukh∥L2(Im;L2(Ω)) term to the left. Note that in
+both cases q = 0, 1, in the estimates before the application of Lemma 4.11, no x2
+m terms are summed on the right hand
+side, thus no exponential dependency is introduced in the ﬁnal estimate.
+□
+The techniques presented above now allow us to show the existence of solutions to the discrete equations (19).
+Theorem 4.14. Let u0 ∈H and f ∈L1(I; L2(Ω)2) + L2(I; H−1(Ω)2). Let further either q = 0 or q = 1. Then there
+exists a solution ukh ∈Vkh of (19).
+Proof. The existence can be shown by applying a standard ﬁxpoint argument, using the stability result of Theorem 4.13.
+□
+Remark 4.15. Note that uniqueness of solutions ukh to (19) is not known at this point. We shall show this later in
+Theorem 4.19, as we ﬁrst need to obtain a ﬁrst convergence result, that allows us to apply Lemma 4.11.
+4.5. L2(I; H1(Ω)) error estimates
+With the stability results presented thus far, we can show a ﬁrst error estimate in the norm of L2(I; H1(Ω)). For
+this norm, [16, Theorem 5.2] shows a result, estimating the error for the Navier-Stokes equations in terms of the error
+of a Stokes problem. The discrete Stokes problem there is deﬁned with right hand side ∂tu −ν∆u, which corresponds
+to f −∇p −(u · ∇)u, i.e., the pressure is included on the right. This means, that when applying the corresponding
+orthogonality relations, a pressure term remains. In the following result, we use a different right hand side for the discrete
+Stokes problem, yielding the following error estimate for the Navier-Stokes equations in L2(I; H1(Ω)).
+
+
+18
+TITLE WILL BE SET BY THE PUBLISHER
+Theorem 4.16. Let f ∈L2(I; L2(Ω)2), u0 ∈V and let (u, p), (ukh, pkh) solve the continuous and fully discrete Navier-
+Stokes equations (9) and (20) respectively. Further let k be small enough. Then for any χkh ∈Vkh, there holds
+∥∇(u −ukh)∥L2(I×Ω) ≤C
+∥∇(u −χkh)∥L2(I×Ω) + ∥∇(u −πτu)∥L2(I×Ω) + ∥∇(u −RS
+h(u, p))∥L2(I×Ω)
+
+.
+Proof. The proof uses the same arguments as the one of [16, Theorem 5.2]. We repeat the main steps, in order to motivate,
+why due to the choice of our instationary Stokes projection, no error term for the pressures arises on the right hand side.
+We denote by e := u −ukh the error, which we want to estimate, and introduce (˜ukh, ˜pkh) ∈Ykh as the instationary
+Stokes-projection of (u, p), i.e., the solution to
+B((˜ukh, ˜pkh), (φkh, ψkh)) = (f, vkh)I×Ω−c ((u, u, vkh)) +
+
+u0, v+
+kh,0
+
+Ω
+for all (φkh, ψkh) ∈Ykh.
+(25)
+Note that for the deﬁnition of this equation, we can equivalently choose c or ˆc, as we have u with ∇· u = 0 in its
+ﬁrst argument. There exists a solution (˜ukh, ˜pkh) to this discrete problem, since the assumptions on f and u0 yield
+(u · ∇)u ∈L2(I; L2(Ω)2), see Theorem 3.8. Furthermore, due to [16, Theorem 4.10], the solution ˜ukh to the above
+discrete Stokes problem satisﬁes a bound
+∥˜ukh∥L∞(I;H1(Ω)) ≤C,
+(26)
+with C depending on f, u0, but independent of k, h. We split the velocity error into two components e = ξ + ηkh where
+ξ := u −˜ukh and ηkh := ˜ukh −ukh. The error in the pressure will be denoted by r := p −pkh, and we will split it into
+the same contributions, r = ω + κkh, with ω := p −˜pkh and κkh := ˜pkh −pkh. The error of the Stokes projection ξ
+is then bounded by Proposition 4.8 since by Theorem 3.8 it holds f −(u · ∇)u ∈L2(I; L2(Ω)2). It remains to estimate
+ηkh. By deﬁnition, we have the following Galerkin orthogonalities: for all (φkh, ψkh) ∈Ykh it holds
+B((u −ukh, p −pkh), (φkh, ψkh)) + ˆc ((u, u, φkh)) −ˆc ((ukh, ukh, φkh)) = 0,
+B((ξ, ω), (φkh, ψkh)) = 0.
+Subtracting the two and choosing (φkh, ψkh) = (ηkh, κkh) yields
+B((ηkh, κkh), (ηkh, κkh)) + ˆc ((u, u, ηkh)) −ˆc ((ukh, ukh, ηkh)) = 0.
+(27)
+The two trilinear forms in (27) satisfy the relation
+ˆc ((u, u, ηkh)) −ˆc ((ukh, ukh, ηkh)) = ˆc ((ξ, u, ηkh)) + ˆc ((˜ukh, ξ, ηkh)) + ˆc ((ηkh, ˜ukh, ηkh)) + ˆc ((ukh, ηkh, ηkh)) ,
+Due to Lemma 4.3, the last term on the right hand side vanishes, and for the remaining ones, we obtain by H¨older’s and
+Young’s inequalities
+ˆc ((ξ, u, ηkh)) ≤
+M
+X
+m=1
+∥ξ∥L2(Im;H1(Ω))∥u∥L∞(I;H1(Ω))∥ηkh∥L2(Im;H1(Ω))
+≤
+M
+X
+m=1
+C∥ξ∥2
+L2(Im;H1(Ω))∥u∥2
+L∞(I;H1(Ω)) + ν
+4 ∥ηkh∥2
+L2(Im;H1(Ω)),
+ˆc ((ξ, ˜ukh, ηkh)) ≤
+M
+X
+m=1
+∥ξ∥L2(Im;H1(Ω))∥˜ukh∥L∞(I;H1(Ω))∥ηkh∥L2(Im;H1(Ω))
+≤
+M
+X
+m=1
+C∥ξ∥2
+L2(Im;H1(Ω))∥˜ukh∥2
+L∞(I;H1(Ω)) + ν
+4 ∥ηkh∥L2(Im;H1(Ω)),
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+19
+ˆc ((ηkh, ˜ukh, ηkh)) ≤
+M
+X
+m=1
+Z
+Im
+∥ηkh∥
+3
+2
+H1(Ω)∥ηkh∥
+1
+2
+L2(Ω)∥˜ukh∥H1(Ω) dt
+≤
+M
+X
+m=1
+C∥˜ukh∥4
+L∞(I;H1(Ω))km∥ηkh∥2
+L∞(Im;L2(Ω)) + ν
+4 ∥ηkh∥2
+L2(Im;H1(Ω).
+Due to ukh and ˜ukh both being discretely divergence free, all pressure contributions in (27) vanish, and with the above
+estimates, after absorbing all ν
+4∥ηkh∥L2(Im;H1(Ω)) terms to the left, we obtain
+M
+X
+m=1
+(∂tηkh, ηkh)Im×Ω+ ν
+4 (∇ηkh, ∇ηkh)Im×Ω+
+M
+X
+m=1
+
+[ηkh]m−1, η+
+kh,m−1
+
+Ω
+≤C
+
+∥u∥2
+L∞(I;H1(Ω)) + ∥˜ukh∥2
+L∞(I;H1(Ω))
+
+∥ξ∥2
+L2(I;H1(Ω)) + C∥˜ukh∥4
+L∞(I;H1(Ω))
+M
+X
+m=1
+km∥ηkh∥2
+L∞(Im;L2(Ω)).
+To abbreviate notation we have used here [ηkh]0 := η+
+kh,0. Choosing k small enough, and using the boundedness of
+∥˜ukh∥L∞(I;H1(Ω)), due to (26) as well as of ∥u∥L∞(I;H1(Ω)), shown in Theorem 3.6, allows us to apply the discrete
+Gronwall Lemma 4.11 as in Theorem 4.13, which concludes the proof.
+□
+4.6. Uniqueness and strong stability of discrete solutions
+We next show the uniqueness and stability of the discrete solution ukh in stronger norms, comparable to the continuous
+result of Theorem 3.6. These results will be obtained, by applying the discrete Gronwall Lemma 4.11, to which end we
+need the two following technical lemmas, guaranteeing, that the coefﬁcients in the Gronwall lemma become arbitrarily
+small, uniformly in m, as (k, h) →0.
+Lemma 4.17. Let I ⊂R a bounded interval, ε > 0 and ζ ∈L1(I). Then
+sup
+x∈¯I
+Z x+ε
+x
+|ζ(s)| ds
+ε→0
+−−−→0.
+To keep notation simple, we formally extend ζ to [0, T + ε] by values 0 such that the integration is well deﬁned.
+Proof. The proof relies on dominated convergence and Dini’s theorem, see, e.g., [12, p. 125]. We ﬁrst deﬁne for ﬁxed ε
+the function σε : ¯I →R, x 7→
+R x+ε
+x
+|ζ(s)| ds. Note that for each ε > 0 this function σε is continuous. To see this, let
+x ∈I be ﬁxed and let y →x. W.l.o.g. let y > x:
+|σε(x) −σε(y)| ≤
+
+Z y
+x
+|ζ(s)| ds +
+Z y+ε
+x+ε
+|ζ(s)| ds
+ =
+
+Z
+I
+χx,y(s)|ζ(s)| ds
+
+where χx,y(s) = 1 if s ∈(x, y) ∪(x + ε, y + ε), and 0 otherwise. For a ﬁxed s, the integrand χx,y(s)|ζ(s)| →0 as
+y →x, thus the integrand converges pointwise to 0. By the dominated convergence theorem, this means that the integral
+converges to 0. For ﬁxed ε > 0 this shows the continuity of σε. Moreover, by the same argument we can show, that for
+ﬁxed x and ε →0 it holds σε(x) →0. Thus the sequence σε converges pointwise to 0. Note moreover, that for δ > ε,
+and ﬁxed x, it holds σδ(x) ≥σε(x), as the integration covers a larger interval. We thus have shown, that when ε →0
+monotonically, also this pointwise convergence of σε(x) is monotone. Hence we can apply Dini’s theorem, see [12, p.
+125], to obtain
+∥σε∥L∞(I) →0,
+as ε →0.
+□
+
+
+20
+TITLE WILL BE SET BY THE PUBLISHER
+Lemma 4.18. Let u ∈L2(I; H1
+0(Ω)2), and ukh ∈Ukh such that ∥u −ukh∥L2(I;H1(Ω)) →0 as (k, h) →0. Then it holds
+sup
+1≤m≤M
+Z
+Im,k
+∥∇u∥2
+L2(Ω) dt
+(k,h)→0
+−−−−−→0
+and
+sup
+1≤m≤M
+Z
+Im,k
+∥∇ukh∥2
+L2(Ω) dt
+(k,h)→0
+−−−−−→0.
+Proof. We ﬁrst show the statement for u. To this end, note that for k = max1≤m≤M |Im,k|
+sup
+1≤m≤M
+Z
+Im,k
+∥∇u∥2
+L2(Ω) dt ≤sup
+x∈¯I
+Z x+k
+x
+∥∇u∥2
+L2(Ω) dt
+k→0
+−−−→0
+by Lemma 4.17. In order to show the result for the discrete solution ukh, we cannot directly apply the previous lemma,
+as ukh depends on k. We thus insert insert ±u and apply the triangle inequality to obtain
+sup
+1≤m≤M
+Z
+Im,k
+∥∇ukh∥2
+L2(Ω) dt ≤2
+sup
+1≤m≤M
+Z
+Im,k
+∥∇u∥2
+L2(Ω) dt + 2
+Z
+I
+∥∇(u −ukh)∥2
+L2(Ω) dt.
+With the claim for u and ukh →u in L2(I; H1(Ω)), we have shown the claim for ukh.
+□
+With these technical lemmas, we can show two results, the uniqueness of solutions ukh and their boundedness in
+stronger norms. We ﬁrst obtain the following uniqueness result.
+Theorem 4.19. Let f ∈L2(I; L2(Ω)2) and u0 ∈V . Then for (k, h) small enough, the solution ukh to (19) is unique.
+Proof. To show uniqueness, we assume two solutions u1
+kh, u2
+kh and deﬁne ekh := u1
+kh −u2
+kh. Testing the equations for
+m = 1, ..., M with ekhχm, where χm denotes the characteristic function of the interval Im, and subtracting them leads to
+B(ekh, ekhχm) + ˆc
+u1
+kh, u1
+kh, ekhχm
+
+−ˆc
+u2
+kh, u2
+kh, ekhχm
+
+= 0
+Adding and subtracting ˆc
+u1
+kh, u2
+kh, ekhχm
+
+and applying Lemma 4.3 yields
+B(ekh, ekhχm) + ˆc
+ekh, u2
+kh, ekhχm
+
+= 0.
+Applying Lemma 4.6, the bilinear form can be written as
+B(ekh, ekhχm) = 1
+2
+
+∥e−
+kh,m∥2
+L2(Ω) + ∥[ekh]m−1∥2
+L2(Ω) −∥e−
+kh,m−1∥2
+L2(Ω)
+
++ ν∥∇ekh∥2
+L2(Im;L2(Ω)).
+From the deﬁnition of ˆc, the estimates of Lemma 3.2, and H¨older’s inequality in time, we obtain
+ˆc
+ekh, u2
+kh, ekhχm
+
+= 1
+2
+h(ekh · ∇)u2
+kh, ekh
+
+Im×Ω−
+(ekh · ∇)ekh, u2
+kh
+
+Im×Ω
+i
+≤C∥ekh∥L∞(Im;L2(Ω))∥∇ekh∥L2(Im;L2(Ω))∥∇u2
+kh∥L2(Im;L2(Ω))
++ C∥ekh∥
+1
+2
+L∞(Im;L2(Ω))∥∇ekh∥
+3
+2
+L2(Im;L2(Ω))∥u2
+kh∥
+1
+2
+L∞(Im;L2(Ω))∥∇u2
+kh∥
+1
+2
+L2(Im;L2(Ω)).
+We can apply Young’s inequality and obtain
+ˆc
+ekh, u2
+kh, ekhχm
+
+≤ν
+2 ∥∇ekh∥2
+L2(Im;L2(Ω)) + C∥ekh∥2
+L∞(Im;L2(Ω))
+
+1 + ∥u2
+kh∥2
+L∞(Im;L2(Ω))
+
+∥∇u2
+kh∥2
+L2(Im;L2(Ω)).
+where the ﬁrst summand can be absorbed into B(ekh, ekhχm). Thus on each time interval, there holds the bound
+1
+2
+
+∥e−
+kh,m∥2
+L2(Ω) + ∥[ekh]m−1∥2
+L2(Ω) −∥e−
+kh,m−1∥2
+L2(Ω) + ν∥∇ekh∥2
+L2(Im;L2(Ω))
+
+≤C∥ekh∥2
+L∞(Im;L2(Ω))
+
+1 + ∥u2
+kh∥2
+L∞(Im;L2(Ω))
+
+∥∇u2
+kh∥2
+L2(Im;L2(Ω)).
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+21
+Multiplying the derived inequality by 2 and summing up the inequalities for m = 1, ..., n yields for any n ∈{1, ..., M}
+∥e−
+kh,n∥2
+L2(Ω) +
+n
+X
+m=1
+
+∥[ekh]m−1∥2
+L2(Ω) + ν∥∇ekh∥2
+L2(Im;L2(Ω))
+
+≤C
+n
+X
+m=1
+∥ekh∥2
+L∞(Im;L2(Ω))
+
+1 + ∥u2
+kh∥2
+L∞(Im;L2(Ω))
+
+∥∇u2
+kh∥2
+L2(Im;L2(Ω)).
+Here we have used e−
+kh,0 = 0 as u1
+kh and u2
+kh satisfy the same initial condition. As in the proof of Theorem 4.13,
+∥ekh∥L∞(Im;L2(Ω)) can be bounded by evaluations of one-sided limits at the time nodes. Due to f ∈L2(I; L2(Ω)2) and
+u0 ∈V , Theorem 4.16 holds, and thus Lemma 4.18 yields ∥∇u2
+kh∥2
+L2(Im;L2(Ω)) →0 uniformly in m for (k, h) →0.
+Together with Theorem 4.13, bounding ∥u2
+kh∥L∞(Im;L2(Ω)), we can choose the discretization ﬁne enough, such that
+C(1 + ∥u2
+kh∥2
+L∞(Im;L2(Ω)))∥∇u2
+kh∥2
+L2(Im;L2(Ω)) <
+1
+2 for all m. All in all, as in Theorem 4.13, an application of the
+Gronwall Lemma 4.11 shows that ekh = 0, concluding the proof of uniqueness.
+□
+We now turn toward proving the stability of ukh in stronger norms. The proof follows the steps of the continuous
+result, shown in [48, Chapter 3, Theorem 3.10], using the discrete analogons of the inequalities presented in Section 4.1,
+and the discrete Gronwall Lemma 4.11. For the application of the lemma, we need coefﬁcients, that become small, as
+k →0. These coefﬁcients depend on ukh, and thus on k, h, hence we apply Theorem 4.16 together with Lemma 4.18, in
+order to have coefﬁcients, that converge to 0 uniformly in m. There holds the following.
+Theorem 4.20. Let f ∈L2(I; L2(Ω)2) and u0 ∈V , then for (k, h) small enough, the unique solution ukh ∈Vkh to (19)
+satisﬁes
+∥ukh∥L∞(I;H1(Ω)) + ∥Ahukh∥L2(I;L2(Ω)) ≤C1 exp
+
+C2∥ukh∥2
+L∞(I;L2(Ω))∥∇ukh∥2
+L2(I;L2(Ω))
+
+×
+∥f∥L2(I;L2(Ω)) + ∥u0∥H1(Ω)
+
+,
+with constants C1, C2 independent of k, h. The L∞(I; L2(Ω)) and L2(I; H1(Ω)) norms of ukh can be estimated by the
+results of Theorem 4.13.
+Proof. For m = 1, ..., M, we test (19) with Ahukh|Im, which yields with the convention [ukh]0 := u+
+kh,0 −u0
+(∂tukh, Ahukh)Im×Ω+ ν (∇ukh, ∇Ahukh)Im×Ω
++
+
+[ukh]m−1, Ahu+
+kh,m−1
+
+Ω+ ˆc ((ukh, ukh, AhukhχIm)) = (f, Ahukh)Im×Ω,
+From the above identity, for m = 2, ..., M, the deﬁnition of Ah gives
+(∂t∇ukh, ∇ukh)Im×Ω+ ν∥Ahukh∥2
+L2(Im;L2(Ω))
++
+
+[∇ukh]m−1, ∇u+
+kh,m−1
+
+Ω+ ˆc ((ukh, ukh, AhukhχIm)) = (f, Ahukh)Im×Ω.
+(28)
+Here the terms containing time derivatives and jumps can be combined according to Lemma 4.6. Some care has to be
+taken on the ﬁrst time interval. It holds
+
+u0, Ahu+
+kh,0
+
+Ω= −
+
+u0, Ph∆hu+
+kh,0
+
+Ω= −
+
+Phu0, ∆hu+
+kh,0
+
+Ω=
+
+∇Phu0, ∇u+
+kh,0
+
+Ω
+Thus on the ﬁrst time interval, with the same arguments as in the proof of Lemma 4.6, it holds
+(∂tukh, Ahukh)I1×Ω+
+
+u+
+kh,0 −u0, Ahu+
+kh,0
+
+Ω= 1
+2
+
+∥∇u−
+kh,1∥2
+L2(Ω) + ∥∇(u+
+kh,0 −Phu0)∥2
+L2(Ω) −∥∇Phu0∥2
+L2(Ω)
+
+.
+
+
+22
+TITLE WILL BE SET BY THE PUBLISHER
+For a more compact notation, we shall write [∇ukh]0 := ∇(u+
+kh,0 −Phu0). Note the need to include the projection on
+the right hand side. With this slight abuse of notation, (28) also holds on the ﬁrst time interval. Since u0 ∈V we can use
+the stability of Ph in H1 for continuously divergence free functions, see [36, Lemma 5.4], yielding an estimate
+∥∇Phu0∥L2(Ω) ≤C∥∇u0∥L2(Ω).
+(29)
+For the terms of (28) involving the right hand side f, it holds
+(f, Ahukh)Im×Ω≤∥f∥L2(Im;L2(Ω))∥Ahukh∥L2(Im;L2(Ω)) ≤C∥f∥2
+L2(Im;L2(Ω)) + ν
+4 ∥Ahukh∥2
+L2(Im;L2(Ω)),
+where we can absorb the Ahukh term. We now turn towards estimating the trilinear form remaining in (28), which poses
+the main difﬁculty of this proof. Due to Lemma 4.4, the trilinear term satisﬁes the expression
+ˆc ((ukh, ukh, AhukhχIm)) = ((ukh · ∇)ukh, Ahukh)Im×Ω+ 1
+2 (∇· ukh, ukh · Ahukh)Im×Ω,
+which we can estimate with H¨older’s inequality by
+ˆc ((ukh, ukh, AhukhχIm)) ≤C
+Z
+Im
+∥ukh∥L∞(Ω)∥∇ukh∥L2(Ω)∥Ahukh∥L2(Ω) dt.
+Using (16) and Young’s inequality, we obtain the estimate
+ˆc ((ukh, ukh, AhukhχIm)) ≤
+Z
+Im
+C∥ukh∥2
+L2(Ω)∥∇ukh∥4
+L2(Ω) + ν
+4 ∥Ahukh∥2
+L2(Ω) dt.
+The latter term can be absorbed, hence we proceed by discussing the ﬁrst one. It holds
+Z
+Im
+C∥ukh∥2
+L2(Ω)∥∇ukh∥4
+L2(Ω) dt ≤C∥ukh∥2
+L∞(I;L2(Ω))∥∇ukh∥2
+L2(Im;L2(Ω))∥∇ukh∥2
+L∞(Im;L2(Ω)).
+Let us introduce γm := C∥ukh∥2
+L∞(I;L2(Ω))∥∇ukh∥2
+L2(Im;L2(Ω)). All in all, we have derived from (28) an estimate of the
+form
+1
+2
+
+∥∇u−
+kh,m∥2
+L2(Ω) + ∥[∇ukh]m−1∥2
+L2(Ω) −∥∇u−
+kh,m−1∥2
+L2(Ω)
+
++ 1
+2ν∥Ahukh∥2
+L2(Im;L2(Ω))
+≤∥f∥2
+L2(Im;L2(Ω)) + γm∥∇ukh∥2
+L∞(Im;L2(Ω)),
+with the usual modiﬁcations on the ﬁrst time interval. Multiplying this by 2 and summing up from m = 1, ..., n yields for
+any n ∈{1, ..., M} an estimate of the form
+∥∇u−
+kh,m∥2
+L2(Ω) +
+n
+X
+m=1
+
+∥[∇ukh]m−1∥2
+L2(Ω) + ν∥Ahukh∥2
+L2(Im;L2(Ω))
+
+≤C∥∇u0∥2
+L2(Ω) +
+n
+X
+m=1
+
+∥f∥2
+L2(Im;L2(Ω)) + 2γm∥∇ukh∥2
+L∞(Im;L2(Ω))
+
+,
+where due to (29) we have dropped the projection Ph of the initial data on the right hand side. Since f ∈L2(I; L2(Ω)2)
+and u0 ∈V , Theorem 4.16 shows that ukh →u in L2(I; H1(Ω)) as (k, h) →0. Hence, due to Lemma 4.18, and
+Theorem 4.13, it holds γm →0 uniformly, as (k, h) →0. This implies that by following the same steps as the proof of
+Theorem 4.13, we obtain the result as a consequence of the discrete Gronwall Lemma 4.11.
+□
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+23
+5. ERROR ESTIMATES
+5.1. Duality based best approximation type estimates
+In this concluding section of our work, we will show the main results, which are the L∞(I; L2(Ω)) and L2(I; L2(Ω))
+error estimates. Their proofs are based on duality arguments, and hence we begin this section by showing two stability
+results for discrete dual equations. Let us ﬁrst motivate the speciﬁc dual problem, that we will consider. Due to the
+nonlinear structure of the Navier-Stokes equations, there does not hold a Galerkin orthogonality with respect to the bilinear
+form B, i.e., for solutions (u, p) of (9) and their discrete counterparts (ukh, pkh) of (20), it holds for test functions
+(vkh, qkh) ∈Ykh:
+B((u −ukh, p −pkh), (vkh, qkh)) = −ˆc ((u, u, vkh)) + ˆc ((ukh, ukh, vkh)) ,
+where the right hand side is nonzero in general. Since we want to use this orthogonality relation after testing the dual
+equation with u −ukh, we need to reformulate the trilinear terms, such that u −ukh occurs linearly. To this end, we use
+the identity
+ˆc ((u, u, vkh)) −ˆc ((ukh, ukh, vkh)) = ˆc ((uukh, u −ukh, vkh)) + ˆc ((u −ukh, uukh, vkh)) ,
+(30)
+where we linearize around the average of continuous and discrete solutions to the Navier-Stokes equations
+uukh := 1
+2(u + ukh).
+(31)
+With these considerations, we have the following lemma:
+Lemma 5.1. Let (u, p) be a solution to the Navier-Stokes equations (9), and (ukh, pkh) their discrete approximation
+solving (20). Let further uukh denote the average of u and ukh as deﬁned by (31). Then for any (vkh, qkh) ∈Ykh, it holds
+B((u −ukh, p −pkh), (vkh, qkh)) + ˆc ((uukh, u −ukh, vkh)) + ˆc ((u −ukh, uukh, vkh)) = 0.
+Proof. This result is an immediate consequence of the deﬁnitions of solutions to (9) and (20), together with the identity
+(30)
+□
+This motivates the choice of uukh as linearization point for setting up a dual equation:
+Find (zkh, ̺kh) ∈Ykh such that for all (φkh, ψkh) ∈Ykh it holds
+B((φkh, ψkh), (zkh, ̺kh)) + ˆc ((uukh, φkh, zkh)) + ˆc ((φkh, uukh, zkh)) = ⟨g, φkh⟩I×Ω,
+(32)
+where the right hand side g will be chosen appropriately, see the proofs of Theorems 5.6 and 5.7. Note that the right hand
+side of (32) implicitly prescribes the ﬁnal data z+
+kh,M = 0. This dual equation will help us in deriving the sought error
+estimates, which we will do in the following section.
+Remark 5.2. To analyze this dual problem, it will be convenient, to have dual represenations of B and B at hand, which
+are obtained by partial integration on each Im and rearranging the terms. Note that in this representation, the time
+derivative is applied to the second argument. It holds
+B(u, v) = −
+M
+X
+m=1
+(u, ∂tv)Im×Ω+ ν (∇u, ∇v)I×Ω−
+M−1
+X
+m=1
+u−
+m, [v]m
+
+Ω+
+u−
+M, v−
+M
+
+Ω,
+(33)
+B((u, p), (v, q)) = −
+M
+X
+m=1
+(u, ∂tv)Im×Ω+ ν (∇u, ∇v)I×Ω−
+M−1
+X
+m=1
+u−
+m, [v]m
+
+Ω+
+u−
+M, v−
+M
+
+Ω
++ (∇· u, q)I×Ω−(∇· v, p)I×Ω,
+(34)
+
+
+24
+TITLE WILL BE SET BY THE PUBLISHER
+see also [7,35].
+Remark 5.3. Similar to the discrete Navier-Stokes equations, we can consider an equivalent formulation for the discrete
+dual equation in discretely divergence free spaces: Find zkh ∈Vkh satisfying
+B(φkh, zkh) + ˆc ((uukh, φkh, zkh)) + ˆc ((φkh, uukh, zkh)) = ⟨g, φkh⟩I×Ω
+for all φkh ∈Vkh.
+(35)
+With the same argument as [7, Proposition 4.3], there holds: If zkh ∈Vkh solves (35), then there exists ̺kh ∈Mkh such
+that (zkh, ̺kh) ∈Ykh solves (32). If (zkh, ̺kh) ∈Ykh solves (32), then zkh ∈Vkh and it solves (35).
+We ﬁrst show unique solvability of the discrete dual problem, and the stability in L∞(I; L2(Ω))∩L2(I; H1(Ω)). Since
+both u and ukh occur in the formulation of the discrete problem, we need both results of Lemma 4.18 to hold true.
+Theorem 5.4. Let f ∈L2(I; L2(Ω)2), u0 ∈V and u,ukh ∈L∞(I; L2(Ω)2) ∩L2(I; H1(Ω)2) be solutions to the weak
+and fully discretized Navier-Stokes equations (4) and (19) for either q = 0 or q = 1. Then for (k, h) small enough,
+problem (35) has a unique solution zkh ∈Vkh for any g ∈L1(I; L2(Ω)2), and there holds the bound
+∥zkh∥L∞(I;L2(Ω)) + ∥zkh∥L2(I;H1(Ω)) ≤K
+∥uukh∥L2(I;H1(Ω))∩L∞(I;L2(Ω))
+
+∥g∥L1(I;L2(Ω)),
+where K : [0, +∞) →[0, +∞) is a strictly monotonically increasing, continuous nonlinear function, independent of
+k, h.
+Proof. On the continuous level and for g ∈L2(I; H−1(Ω)2), the proof of a corresponding estimate can be found in [15,
+Proposition 2.7]. We adapt it to the discrete setting and to g ∈L1(I; L2(Ω)2), making use of the previously derived
+discrete Gronwall Lemma 4.11. We only have to prove the norm bound, since problem (32) is a quadratic system of
+linear equations, thus is solvable, if it is injective. The norm bound yields, that for right hand side g = 0, zkh = 0 is
+the only solution, thus the norm bound implies existence and uniqueness. For ease of notation, we use the convention
+[zkh]M = −z−
+kh,M. Testing equation (35) with zkhχIm, m = 1, ..., M, where by χIm we denote the indicator function of
+the subinterval Im, yields:
+−(zkhχIm, ∂tzkh)Im×Ω+ ν (∇zkhχIm, ∇zkh)I×Ω−
+
+z−
+kh,m, [zkh]m
+
+Ω
++ ˆc ((uukh, zkhχIm, zkh)) + ˆc ((zkhχIm, uukh, zkh))=(g, zkhχIm)I×Ω.
+Applying Lemma 4.6 and writing the inner product as norm yields
+1
+2∥z+
+kh,m−1∥2
+L2(Ω) + 1
+2∥[zkh]m∥2
+L2(Ω) + ν∥∇zkh∥2
+L2(Im;L2(Ω))
++ˆc ((uukh, zkhχIm, zkh)) + ˆc ((zkhχIm, uukh, zkh))= 1
+2∥z+
+kh,m∥2
+L2(Ω) +(g, zkh)Im×Ω.
+(36)
+We proceed by estimating the trilinear forms. According to its deﬁnition (11), the ﬁrst term vanishes, and for the second
+one, it holds
+ˆc ((zkhχIm, uukh, zkh)) = 1
+2c ((zkhχIm, uukh, zkh)) −1
+2c ((zkhχIm, zkh, uukh)) .
+After applying H¨older’s inequality in space, we obtain
+ˆc ((zkhχIm, uukh, zkh)) ≤1
+2
+Z
+Im
+
+∥zkh∥2
+L4(Ω)∥∇uukh∥L2(Ω) + ∥zkh∥L4(Ω)∥uukh∥L4(Ω)∥∇zkh∥L2(Ω)
+
+dt.
+After estimating the L4 norms by Lemma 3.2 and applying H¨older’s inequality in time, we arrive at
+ˆc ((zkhχIm, uukh, zkh)) ≤C(∥∇zkh∥L2(Im×Ω)∥zkh∥L∞(Im;L2(Ω))∥∇uukh∥L2(Im×Ω)
++ ∥zkh∥
+1
+2
+L∞(Im;L2(Ω))∥∇zkh∥
+3
+2
+L2(Im×Ω)∥uukh∥
+1
+2
+L∞(Im;L2(Ω))∥∇uukh∥
+1
+2
+L2(Im×Ω)).
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+25
+An application of Young’s inequality yields
+ˆc ((zkhχIm, uukh, zkh)) ≤ν
+2 ∥∇zkh∥2
+L2(Im×Ω) + C∥zkh∥2
+L∞(Im;L2(Ω))
+
+1 + ∥uukh∥2
+L∞(Im;L2(Ω))
+
+∥∇uukh∥2
+L2(Im×Ω).
+In order to abbreviate the notation, we introduce γm := C∥∇uukh∥2
+L2(Im×Ω)
+
+1 + ∥uukh∥2
+L∞(Im;L2(Ω))
+
+.We insert the
+above estimate into (36), absorb terms, and multiply by 2, which yields
+∥z+
+kh,m−1∥2
+L2(Ω) + ∥[zkh]m∥2
+L2(Ω) + ν∥∇zkh∥2
+L2(Im;L2(Ω)) ≤γm∥zkh∥2
+L∞(Im;L2(Ω)) + ∥z+
+kh,m∥2
+L2(Ω) + 2(g, zkh)Im×Ω.
+After an application of H¨older’s inequality, we obtain
+∥z+
+kh,m−1∥2
+L2(Ω) + ∥[zkh]m∥2
+L2(Ω) + ν∥∇zkh∥2
+L2(Im;L2(Ω)) ≤γm∥zkh∥2
+L∞(Im;L2(Ω)) + ∥z+
+kh,m∥2
+L2(Ω)
++ 2∥g∥L1(Im;L2(Ω))∥zkh∥L∞(Im;L2(Ω)).
+(37)
+Since we have assumed q = 0 or q = 1, we can estimate the ∥zkh∥L∞(Im;L2(Ω)) terms by evaluations at the right and left
+endpoints: ∥zkh∥L∞(Im;L2(Ω)) = max{∥z+
+kh,m−1∥L2(Ω), ∥z−
+kh,m∥L2(Ω}. With triangle inequality there hold the following
+estimates:
+∥zkh∥L∞(Im;L2(Ω)) ≤max{∥z+
+kh,m−1∥L2(Ω), ∥z+
+kh,m∥L2(Ω) + ∥[zkh]m∥L2(Ω)},
+∥zkh∥2
+L∞(Im;L2(Ω)) ≤max{∥z+
+kh,m−1∥2
+L2(Ω), 2∥z+
+kh,m∥2
+L2(Ω) + 2∥[zkh]m∥2
+L2(Ω)}.
+We introduce x2
+n := ∥z+
+kh,n−1∥2
+L2(Ω)+PM
+m=n ∥[zkh]m∥2
+L2(Ω)+ν∥∇zkh∥2
+L2(Im;L2(Ω)). Note that by the terminal condition
+for zkh, it holds xM+1 = 0. Then after summing up (37) from m = n to m = M, we have:
+x2
+n ≤
+M
+X
+m=n
+2γm(x2
+m + x2
+m+1) + 2∥g∥L1(Im;L2(Ω))(xm + xm+1).
+Shifting indices, we arrive at
+x2
+n ≤
+M
+X
+m=n
+2(γm + γm−1)x2
+m + 2∥g∥L1(Im∪Im−1;L2(Ω))xm,
+where for n = 1 we use the convention I0 = ∅. Hence we are in the setting of Lemma 4.11, where formally we have to
+introduce an index transformation ˜n = M −n. In order to apply the lemma, we need to verify 2(γm + γm−1) < 1 for
+all m. Due to f ∈L2(I; L2(Ω)2) and u0 ∈V , Theorem 4.16 shows ∥u −ukh∥L2(I;H1(Ω)) →0 as (k, h) →0 and we
+can apply Lemma 4.18 and obtain with triangle inequality, that sup1≤m≤M ∥∇uukh∥2
+L2(Im;L2(Ω)) →0 as (k, h) →0.
+Together with the bounds from Proposition 3.1 and Theorem 4.13 for ∥u∥L∞(I;L2(Ω)) and ∥ukh∥L∞(I;L2(Ω)), we obtain
+that γm →0 uniformly in n for (k, h) →0. Thus we can choose the discretization ﬁne enough, such that γm < 1/8, and
+thus we obtain from Lemma 4.11
+∥z+
+kh,n−1∥2
+L2(Ω) +
+M
+X
+m=n
+∥[zkh]m∥2
+L2(Ω) + ν∥∇zkh∥2
+L2(Im;L2(Ω))
+≤C1 exp
+
+C2∥∇uukh∥2
+L2(I×Ω)
+
+1 + ∥uukh∥2
+L∞(I,L2(Ω))
+
+∥g∥2
+L1(I;L2(Ω)).
+(38)
+□
+The next theorem, similar to Theorem 4.20, states a stability result for the discrete dual solution in stronger norms,
+whenever the right hand side posesses more regularity.
+
+
+26
+TITLE WILL BE SET BY THE PUBLISHER
+Theorem 5.5. Let the assumptions of Theorem 5.4 hold true, i.e., let f ∈L2(I; L2(Ω)2), u0 ∈V and u,ukh be solutions
+to the weak and fully discretized Navier-Stokes equations (4) and (19) for either q = 0 or q = 1. Then for (k, h) small
+enough, for any g ∈L2(I; L2(Ω)2), the unique solution zkh ∈Vkh to (35) satisﬁes the bound
+∥zkh∥L∞(I;H1(Ω)) + ∥Ahzkh∥L2(I;L2(Ω)) ≤Cu,ukh∥g∥L2(I×Ω),
+with a constant Cu,ukh depending on u, ukh in the form
+Cu,ukh = C1 exp
+
+C2
+
+∥Au∥2
+L2(I;L2(Ω))∥u∥2
+L∞(I;L2(Ω)) + ∥Ahukh∥2
+L2(I;L2(Ω))∥ukh∥2
+L∞(I;L2(Ω))
+
+,
+where the norms of u, ukh are bounded by Proposition 3.1 and Theorems 3.6, 4.13 and 4.20, due to the assumptions on f
+and u0.
+Proof. The proof follows the same steps as the proof the stability of ukh in stronger norms, presented in Theorem 4.20.
+We begin by testing the dual equation with AhzkhχIm for arbitrary m = 1, ..., M, where χIm denotes the characteristic
+function of the time interval Im. The nonlinear terms that occur for the discrete dual equation are of the form
+ˆc ((uukh, AhzkhχIm, zkh)) + ˆc ((AhzkhχIm, uukh, zkh)) .
+By H¨older’s inequality in space, (17) and the discrete Gagliardo-Nirenberg inequality (16), these terms can be estimated
+by
+C
+Z
+Im
+∥zkh∥
+1
+2
+L2(Ω)∥Ahzkh∥
+3
+2
+L2(Ω)
+∥∇uukh∥L2(Ω) + ∥uukh∥L∞(Ω)
+
+dt.
+Applying the continuous and discrete Gagliardo-Nirenberg inequalities (15) and (16), and (17) to uukh, it remains
+C
+Z
+Im
+∥zkh∥
+1
+2
+L2(Ω)∥Ahzkh∥
+3
+2
+L2(Ω)
+
+∥u∥
+1
+2
+L2(Ω)∥Au∥
+1
+2
+L2(Ω) + ∥ukh∥
+1
+2
+L2(Ω)∥Ahukh∥
+1
+2
+L2(Ω)
+
+dt.
+An application of Young’s inequality, absorbing terms and summing over the subintervals allows us to conclude the proof.
+By Theorem 5.4 it holds zkh ∈L∞(I; L2(Ω)2) with a bound independent on k, h and linear in ∥g∥L1(I;L2(Ω)). Further,
+the terms involving u, ukh are summable, since the L∞(I; L2(Ω)) norms of u, ukh remain bounded via Proposition 3.1
+and Theorem 4.13, and the Au, Ahukh terms are summable by Theorem 3.6 and Theorem 4.20, where the latter holds
+true for (k, h) small enough, due to f ∈L2(I; L2(Ω)2) and u0 ∈V .
+□
+We now turn towards showing the main result of our work, i.e., the error estimate for the Navier-Stokes equations in
+the L∞(I; L2(Ω)) norm. As in the proof of Theorem 4.16, we will split the error u −ukh into an error for a Stokes
+problem, and a remainder term, which we will estimate using the discrete dual equation (35), to which we can apply the
+results of Theorem 5.4. Similar to the result for the Stokes equations of Proposition 4.9, the error estimate will consist of
+two terms with the ﬁrst one being a best approximation error, and the second one being the error of the stationary Stokes
+Ritz projection introduced in (10). This result estimates the L∞(I; L2(Ω)) norm in an isolated fashion, and thus does not
+suffer from an order reduction, which is observed in results that estimate the error norm combined with the L2(I; H1(Ω))
+norm.
+Theorem 5.6. Let f ∈L2(I; L2(Ω)2) and u0 ∈V . Let (u, p) be the unique solution to the Navier-Stokes equations (9),
+and (ukh, pkh) the corresponding solution to the discretized equations (20) for a discontinuous Galerkin method in time
+with order q = 0 or q = 1, for sufﬁciently small discretization parameters (k, h). Then there holds
+∥u −ukh∥L∞(I;L2(Ω)) ≤C
+
+ln T
+k
+ 
+inf
+χkh∈Vkh ∥u −χkh∥L∞(I;L2(Ω)) + ∥u −RS
+h(u, p)∥L∞(I;L2(Ω))
+
+.
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+27
+Proof. We use the same notation as in the proof of Theorem 4.16 and denote the velocity error by e := u −ukh and the
+pressure error by r := p −pkh. We consider the Stokes projection (˜ukh, ˜pkh) of (u, p), solving (25), and the induced
+splitting of the error into e = ξ + ηkh, r = ω + κkh, where ξ = u −˜ukh, ηkh = ˜ukh −ukh, ω = p −˜pkh and
+κkh = ˜pkh −pkh. We immediately obtain the estimate
+∥ξ∥L∞(I;L2(Ω)) ≤C
+
+ln T
+k
+ 
+inf
+χkh∈Vkh ∥u −χkh∥L∞(I;L2(Ω)) + ∥u −RS
+h(u, p)∥L∞(I;L2(Ω))
+
+,
+by Proposition 4.9, since by Theorem 3.8 it holds f −(u · ∇)u ∈L2(I; L2(Ω)2). Thus to ﬁnalize the proof, we have
+to estimate the L2(Ω) norm of ηkh pointwise in time. To this end, as in [7, Theorem 6.2], we ﬁx ˜t ∈I and construct
+θ ∈C∞
+0 (I) in such a way, that supp θ ⊂Im where m is chosen such that ˜t ∈Im, and
+ηkh(˜t)θ, φkh
+
+I×Ω=
+ηkh(˜t), φkh(˜t)
+
+Ωfor all φkh ∈Ukh,
+∥θ∥L1(I) ≤C independent of ˜t and k.
+For the construction of such a function θ serving the purpose of a regularized Dirac measure, we refer to [44, Appendix
+A.5]. We then deﬁne the dual solution zkh ∈Vkh such that for all φkh ∈Vkh, it satisﬁes
+B(φkh, zkh) + ˆc ((uukh, φkh, zkh)) + ˆc ((φkh, uukh, zkh)) =
+ηkh(˜t)θ, φkh
+
+I×Ω.
+By Theorem 5.4 we have the existence, uniqueness and regularity of zkh, satisfying the bound
+∥zkh∥L∞(I;L2(Ω)) + ∥∇zkh∥L2(I×Ω) ≤K
+∥uukh∥L2(I;H1(Ω))∩L∞(I;L2(Ω))
+
+∥ηkh(˜t)θ∥L1(I;L2(Ω)),
+(39)
+for (k, h) small enough. From Remark 5.3, we obtain the existence of an associated pressure ̺kh ∈Mkh, such that for
+all (φkh, ψkh) ∈Ykh, it holds
+B((φkh, ψkh), (zkh, ̺kh)) + ˆc ((uukh, φkh, zkh)) + ˆc ((φkh, uukh, zkh)) =
+ηkh(˜t)θ, φkh
+
+I×Ω.
+Choosing the speciﬁc test functions (φkh, ψkh) = (ηkh, κkh) ∈Ykh, we have
+∥ηkh(˜t)∥2
+L2(Ω) =
+ηkh(˜t)θ, ηkh
+
+I×Ω
+= B((ηkh, κkh), (zkh, ̺kh)) + ˆc ((uukh, ηkh, zkh)) + ˆc ((ηkh, uukh, zkh))
+= B((e −ξ, r −ω), (zkh, ̺kh)) + ˆc ((uukh, e −ξ, zkh)) + ˆc ((e −ξ, uukh, zkh))
+= B((e, r), (zkh, ̺kh)) + ˆc ((uukh, e, zkh)) + ˆc ((e, uukh, zkh))
+−B((ξ, ω), (zkh, ̺kh)) −ˆc ((uukh, ξ, zkh)) −ˆc ((ξ, uukh, zkh)) .
+For ξ we can use the Galerkin orthogonality with respect to B, i.e., from (25), we obtain
+B((ξ, ω), (φkh, ψkh)) = 0
+for all (φkh, ψkh) ∈Ykh.
+Furthermore, due to Lemma 5.1 it holds
+B((e, r), (zkh, ̺kh)) + ˆc ((uukh, e, zkh)) + ˆc ((e, uukh, zkh)) = 0.
+Thus we see directly
+∥ηkh(˜t)∥2
+L2(Ω) = −ˆc ((uukh, ξ, zkh)) −ˆc ((ξ, uukh, zkh)) .
+We want to make use of the L∞(I; L2(Ω)) estimate of ξ and thus have to move it to an argument of ˆc that has no spatial
+gradient applied to it. Since ˆc was obtained by anti-symmetrizing c, there are gradients in the second and third argument
+of ˆc, which is why we revert to the original trilinear form c. The ﬁrst argument has no gradient, and thus
+∥ηkh(˜t)∥2
+L2(Ω) = −1
+2c ((uukh, ξ, zkh)) + 1
+2c ((uukh, zkh, ξ)) −ˆc ((ξ, uukh, zkh)) .
+(40)
+
+
+28
+TITLE WILL BE SET BY THE PUBLISHER
+Lemma 4.4 allows us to switch ξ to the third argument, and we thus have
+∥ηkh(˜t)∥2
+L2(Ω) = 1
+2 (∇· uukh, zkh · ξ)I×Ω+ c ((uukh, zkh, ξ)) −ˆc ((ξ, uukh, zkh)) .
+After application of H¨older’s inequality, we obtain
+∥ηkh(˜t)∥2
+L2(Ω) ≤C∥ξ∥L∞(I;L2(Ω))∥1∥L4(I;L∞(Ω))
+×
+∥zkh∥L4(I;L4(Ω))∥∇uukh∥L2(I;L4(Ω)) + ∥∇zkh∥L2(I×Ω)∥uukh∥L4(I;L∞(Ω))
+
+.
+(41)
+By Theorem 3.6 and Theorem 4.20, the solutions u,ukh satisfy the bound
+∥uukh∥L∞(I;H1(Ω)) + ∥u∥L2(I;H2(Ω)) + ∥Ahukh∥L2(I;L2(Ω)) ≤C,
+with a constant depending on the data. H¨older’s inequality and the continuous and discrete Gagliardo-Nirenberg inequal-
+ities (15) and (16) yield moreover
+∥uukh∥L4(I;L∞(Ω)) ≤C
+
+∥u∥
+1
+2
+L∞(I;L2(Ω))∥Au∥
+1
+2
+L2(I;L2(Ω)) + ∥ukh∥
+1
+2
+L∞(I;L2(Ω))∥Ahukh∥
+1
+2
+L2(I;L2(Ω))
+
+.
+From (12) and (14), we further obtain
+∥∇uukh∥L2(I;L4(Ω)) ≤C
+
+∥∇u∥
+1
+2
+L∞(I;L2(Ω))∥Au∥
+1
+2
+L2(I;L2(Ω)) + ∥∇ukh∥
+1
+2
+L∞(I;L2(Ω))∥Ahukh∥
+1
+2
+L2(I;L2(Ω))
+
+.
+With the above estimates, we thus obtain from (41)
+∥ηkh(˜t)∥2
+L2(Ω) ≤CT
+1
+4 ∥ξ∥L∞(I;L2(Ω))
+∥zkh∥L4(I;L4(Ω)) + ∥∇zkh∥L2(I×Ω)
+
+.
+With Lemma 3.2, we further obtain the estimate
+∥zkh∥L4(I;L4(Ω)) ≤∥zkh∥
+1
+2
+L∞(I;L2(Ω))∥∇zkh∥
+1
+2
+L2(I×Ω).
+Hence, applying (39) yields
+∥ηkh(˜t)∥2
+L2(Ω) ≤CT
+1
+4 ∥ξ∥L∞(I;L2(Ω))∥ηkh(˜t)θ∥L1(I;L2(Ω)).
+(42)
+By deﬁnition of θ we can estimate ∥ηkh(˜t)θ∥L1(I;L2(Ω)) by C∥ηkh(˜t)∥L2(Ω). This allows us to divide (42) by ∥ηkh(˜t)∥L2(Ω)
+which shows the bound
+∥ηkh(˜t)∥L2(Ω) ≤CT
+1
+4 ∥ξ∥L∞(I;L2(Ω)).
+As ˜t ∈I was arbitrary, this shows
+∥ηkh∥L∞(I;L2(Ω)) ≤CT
+1
+4 ∥ξ∥L∞(I;L2(Ω)).
+Making use of the previously derived bound for ∥ξ∥L∞(I;L2(Ω)) and triangle inequality for e = ξ + ηkh concludes the
+proof.
+□
+The above theorem is the main result of this work, and the development of the discrete Gronwall lemma and analysis of
+the dual problem were the key ingredients, in order to prove it. With these techniques established, it is now straightforward,
+to also prove an error estimate in the L2(I; L2(Ω)) norm. If we follow the steps of the proof of Theorem 5.6 up to (40),
+we then have to estimate the occuring trilinear form in terms of ∥ξ∥L2(I;L2(Ω)), i.e., the L2(I; L2(Ω)) norm of the Stokes
+error. This implies that we need to estimate the occuring trilinear terms by stronger norms of the dual state zkh, which are
+bounded by the results presented in Theorem 5.5 With these considerations, we can show the following theorem.
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+29
+Theorem 5.7. Let f ∈L2(I; L2(Ω)2) and u0 ∈V . Further let (u, p) and (ukh, pkh) be the continuous and fully discrete
+solutions to the Navier-Stokes equations (9) and (20), for sufﬁciently small discretization parameters (k, h). Then for any
+χkh ∈Vkh, there holds
+∥u −ukh∥L2(I×Ω) ≤C
+∥u −χkh∥L2(I×Ω) + ∥u −πτu∥L2(I×Ω) + ∥u −RS
+h(u, p)∥L2(I×Ω)
+
+.
+Proof. To deduce the error estimate for the Navier-Stokes equations from the corresponding Stokes result of Proposi-
+tion 4.8, we follow a duality argument similar to the proof of Theorem 5.6. We split the error in the same fashion
+u −ukh = u −˜ukh + ˜ukh −ukh where ξ := u −˜ukh is estimated by the Stokes result, and for ηkh = ˜ukh −ukh we
+consider zkh a solution to the dual problem
+B((φkh, ψkh), (zkh, ρkh)) + ˆc ((uukh, φkh, zkh)) + ˆc ((φkh, uukh, zkh)) = (ηkh, φkh)I×Ω.
+As before, we test the dual equation with ηkh and obtain after elimination of terms by applying Galerkin orthogonalities
+and Lemma 4.4:
+∥ηkh∥2
+L2(I×Ω) = 1
+2 (∇· uukh, zkh · ξ)I×Ω+ c ((uukh, zkh, ξ)) −ˆc ((ξ, uukh, zkh)) .
+Applying H¨older’s inequality yields
+∥ηkh∥2
+L2(I×Ω) ≤C∥ξ∥L2(I×Ω)∥1∥L4(I;L∞(Ω))
+×
+∥uukh∥L4(I;L∞(Ω))∥∇zkh∥L∞(I;L2(Ω)) + ∥zkh∥L4(I;L∞(Ω))∥∇uukh∥L∞(I;L2(Ω))
+
+.
+By Proposition 3.1, Theorem 3.6, Theorem 4.13 and Theorem 4.20 all terms containing u, ukh are bounded. Together
+with the discrete Gagliardo-Nirenberg inequality (16) and Young’s inequality, we obtain
+∥ηkh∥2
+L2(I×Ω) ≤C(u, ukh)∥ξ∥L2(I×Ω)T
+1
+4 ∥Ahzkh∥L2(I;L2(Ω)) + ∥∇zkh∥L∞(I;L2(Ω)) + ∥zkh∥L2(I;L2(Ω))
+
+.
+Using Theorem 5.5, we can bound the norms of zkh and obtain
+∥ηkh∥2
+L2(I×Ω) ≤C(u, ukh)T
+1
+4 ∥ξ∥L2(I×Ω)∥ηkh∥L2(I×Ω).
+Canceling terms concludes the proof.
+□
+5.2. Explicit orders of convergence
+Using the same arguments from before, instead of the best approximation type estimate, we can also directly use the
+error estimate for the Stokes projection, shown in [7, Theorem 7.4] and [36, Corollaries 6.2& 6.4] to obtain the following
+corollaries, yielding explicit orders of convergence.
+Corollary 5.8. Let Assumption 4.1 be fulﬁlled. Further let f ∈L∞(I; L2(Ω)2), u0 ∈V ∩H2(Ω)2 and let u, ukh be the
+continuous and fully discrete solutions to the Navier-Stokes equations (4) and (19) respectively. Then there holds
+∥u −ukh∥L∞(I;L2(Ω))) ≤C
+
+ln T
+k
+2
+(k + h2)
+∥f∥L∞(I;L2(Ω)) + ∥u0∥V ∩H2(Ω)2 + ∥(u · ∇)u∥L∞(I;L2(Ω))
+
+,
+where the constants C depend continuously on ∥f∥L2(I;L2(Ω)) and ∥u0∥V . The last term ∥(u · ∇)u∥L∞(I;L2(Ω)) can be
+bounded in terms of ∥f∥L∞(I;L2(Ω)) and ∥u0∥V ∩H2(Ω)2 by Corollary 3.11.
+Proof. From Corollary 3.11 and Remark 3.3, we obtain (u · ∇)u ∈L∞(I; L2(Ω)2). Hence this result is a direct conse-
+quence of Theorem 5.6 and [7, Theorem 7.4].
+□
+
+
+30
+TITLE WILL BE SET BY THE PUBLISHER
+Corollary 5.9. Let Assumption 4.1 hold true. Further let f ∈L2(I; L2(Ω)2), u0 ∈V and let u, ukh be the continuous
+and fully discrete solutions to the Navier-Stokes equations (4) and (19) respectively. Then there hold the estimates
+∥∇(u −ukh)∥L2(I;L2(Ω)) ≤C
+
+k
+1
+2 + h
+
+, and
+∥(u −ukh)∥L2(I;L2(Ω)) ≤C
+k + h2
+,
+where the constants C depend continuously on ∥f∥L2(I;L2(Ω)) and ∥u0∥V .
+Proof. This result is a direct consequence of Theorem 4.16, Theorem 5.7 and [36, Corollaries 6.2 & 6.4].
+□
+REFERENCES
+[1] R. ADAMS AND J. FOURNIER, Cone conditions and properties of Sobolev spaces, Journal of Mathematical Analysis and Applications, 61 (1977),
+pp. 713–734.
+[2] N. AHMED AND G. MATTHIES, Higher-order discontinuous Galerkin time discretizations for the evolutionary Navier–Stokes equations, IMA
+Journal of Numerical Analysis, 41 (2021), pp. 3113–3144.
+[3] H. AMANN, Linear parabolic problems involving measures, Real Academia de Ciencias Exactas, Fisicas y Naturales. Revista. Serie A, Matemat-
+icas, 95 (2001), pp. 85–119.
+[4] D. ARNDT, H. DALLMANN, AND G. LUBE, Local projection FEM stabilization for the time-dependent incompressible Navier-Stokes problem,
+Numerical Methods for Partial Differential Equations, 31 (2015), pp. 1224–1250.
+[5]
+, Quasi-optimal error estimates for the incompressible Navier-Stokes problem discretized by ﬁnite element methods and pressure-correction
+projection with velocity stabilization, arXiv:1609.00807, (2016).
+[6] A. ASHYRALYEV AND P. E. SOBOLEVSKII, Well-Posedness of Parabolic Difference Equations, Birkh¨auser Basel, 1994.
+[7] N. BEHRINGER, B. VEXLER, AND D. LEYKEKHMAN, Fully discrete best-approximation-type estimates in L∞(I; L2(Ω)d) for ﬁnite element
+discretizations of the transient Stokes equations, IMA Journal of Numerical Analysis, 43 (2022), pp. 852–880.
+[8] J. BERGH AND J. L ¨OFSTR ¨OM, Interpolation Spaces: An Introduction, vol. 223 of Grundlehren der mathematischen Wissenschaften, Springer
+Berlin Heidelberg, 1976.
+[9] C. BERNARDI AND G. RAUGEL, A conforming ﬁnite element method for the time-dependent Navier–Stokes equations, SIAM Journal on Numerical
+Analysis, 22 (1985), pp. 455–473.
+[10] I. BIHARI, A generalization of a lemma of Bellman and its application to uniqueness problems of differential equations, Acta Mathematica
+Academiae Scientiarum Hungaricae, 7 (1956), pp. 81–94.
+[11] H. BREZIS AND P. MIRONESCU, Gagliardo-Nirenberg inequalities and non-inequalities: The full story, Annales de l’Institut Henri Poincar´e C,
+Analyse non lin´eaire, 35 (2018), pp. 1355–1376.
+[12] M. BROKATE AND G. KERSTING, Measure and Integral, Springer International Publishing, 2015.
+[13] E. CASAS AND K. CHRYSAFINOS, A discontinuous Galerkin time-stepping scheme for the velocity tracking problem, SIAM Journal on Numerical
+Analysis, 50 (2012), pp. 2281–2306.
+[14]
+, Analysis of the velocity tracking control problem for the 3d evolutionary Navier–Stokes equations, SIAM Journal on Control and Opti-
+mization, 54 (2016), pp. 99–128.
+[15] E. CASAS AND K. KUNISCH, Well-posedness of evolutionary Navier-Stokes equations with forces of low regularity on two-dimensional domains,
+ESAIM: Control, Optimisation and Calculus of Variations, 27 (2021).
+[16] K. CHRYSAFINOS AND N. WALKINGTON, Discontinuous Galerkin approximations of the Stokes and Navier-Stokes equations, Mathematics of
+Computation, 79 (2010), pp. 2135–2167.
+[17] M. DAUGE, Stationary Stokes and Navier–Stokes systems on two- or three-dimensional domains with corners. part I. linearized equations, SIAM
+Journal on Mathematical Analysis, 20 (1989), pp. 74–97.
+[18] J. DE FRUTOS, B. GARC´IA-ARCHILLA, V. JOHN, AND J. NOVO, Error analysis of non inf-sup stable discretizations of the time-dependent
+Navier–Stokes equations with local projection stabilization, IMA Journal of Numerical Analysis, 39 (2019), pp. 1747–1786.
+[19] L. DE SIMON, Un’applicazione della teoria degli integrali singolari allo studio delle equazioni differenziali lineari astratte del primo ordine,
+Rendiconti del Seminario Matematico della Universit`a di Padova, 34 (1964), pp. 205–223.
+[20] K. DECKELNICK AND M. HINZE, Semidiscretization and error estimates for distributed control of the instationary Navier-Stokes equations,
+Numerische Mathematik, 97 (2004), pp. 297–320.
+[21] F. DEMENGEL AND G. DEMENGEL, Functional Spaces for the Theory of Elliptic Partial Differential Equations, Universitext, Springer London,
+2012.
+[22] K. DISSER, A. TER ELST, AND J. REHBERG, H¨older estimates for parabolic operators on domains with rough boundary, Annali Scuola Normale
+Superiore di Pisa, Classe di Scienze, XVII (2017), pp. 65–79.
+[23] E. EMMRICH, Error of the two-step BDF for the incompressible Navier-Stokes problem, ESAIM: Mathematical Modelling and Numerical Analy-
+sis, 38 (2004), pp. 757–764.
+[24] K. ERIKSSON, C. JOHNSON, AND V. THOM´EE, Time discretization of parabolic problems by the discontinuous Galerkin method, ESAIM:
+Mathematical Modelling and Numerical Analysis, 19 (1985), pp. 611–643.
+
+
+TITLE WILL BE SET BY THE PUBLISHER
+31
+[25] F. GABEL AND P. TOLKSDORF, The Stokes operator in two-dimensional bounded Lipschitz domains, 340 (2022), pp. 227–272.
+[26] G. GALDI, An Introduction to the Mathematical Theory of the Navier-Stokes Equations, Springer Monographs in Mathematics, Springer New
+York, 2011.
+[27] V. GIRAULT AND P.-A. RAVIART, Finite Element Methods for Navier-Stokes Equations, vol. 5 of Springer Series in Computational Mathematics,
+Springer Berlin Heidelberg, 1986.
+[28] J.-L. GUERMOND AND J. E. PASCIAK, Stability of discrete Stokes operators in fractional Sobolev spaces, Journal of Mathematical Fluid Me-
+chanics, 10 (2008), pp. 588–610.
+[29] A. HANSBO, Strong stability and non-smooth data error estimates for discretizations of linear parabolic problems, BIT Numerical Mathematics,
+42 (2002), pp. 351–379.
+[30] J. G. HEYWOOD AND R. RANNACHER, Finite element approximation of the nonstationary Navier–Stokes problem. I. regularity of solutions and
+second-order error estimates for spatial discretization, SIAM Journal on Numerical Analysis, 19 (1982).
+[31]
+, Finite element approximation of the nonstationary Navier–Stokes problem, part II: Stability of solutions and error estimates uniform in
+time, SIAM Journal on Numerical Analysis, 23 (1986), pp. 750–777.
+[32] J. G. HEYWOOD AND R. RANNACHER, Finite-element approximation of the nonstationary Navier-Stokes problem part IV: Error analysis for
+second order time discretization, SIAM Journal on Numerical Analysis, 27 (1990), pp. 353–384.
+[33] R. KELLOGG AND J. OSBORN, A regularity result for the Stokes problem in a convex polygon, Journal of Functional Analysis, 21 (1976),
+pp. 397–431.
+[34] K. KIRK, T. HORV ´ATH, AND S. RHEBERGEN, Analysis of an exactly mass conserving space-time hybridized discontinuous Galerkin method for
+the time-dependent Navier–Stokes equations, Mathematics of Computation, 92 (2022), pp. 525–556.
+[35] D. LEYKEKHMAN AND B. VEXLER, Discrete maximal parabolic regularity for Galerkin ﬁnite element methods, Numerische Mathematik, 135
+(2017), pp. 923–952.
+[36]
+, L2(I; H1(Ω)) and L2(I; L2(Ω)) best approximation type error estimates for Galerkin solutions of transient Stokes problems,
+arXiv:2304.13839, (2023). Accepted for publication in Calcolo.
+[37] D. LEYKEKHMAN, B. VEXLER, AND D. WALTER, Numerical analysis of sparse initial data identiﬁcation for parabolic problems, ESAIM:
+Mathematical Modelling and Numerical Analysis, 54 (2020), pp. 1139–1180.
+[38] Z. LI, Some generalized Gronwall-Bellman type difference inequalities and applications, Journal of Mathematical Inequalities, (2021), pp. 173–
+200.
+[39] O. LIPOVAN, A retarded Gronwall-like inequality and its applications, Journal of Mathematical Analysis and Applications, 252 (2000), pp. 389–
+401.
+[40] A. LUNARDI, Analytic semigroups and optimal regularity in parabolic problems, Modern Birkh¨auser classics, Birkh¨auser, 2012.
+[41] E. MAGENES, Interpolational spaces and partial differential equations, Uspekhi Mat. Nauk, 21 (1966), pp. 169–218.
+[42] D. MEIDNER, R. RANNACHER, AND B. VEXLER, A priori error estimates for ﬁnite element discretizations of parabolic optimization problems
+with pointwise state constraints in time, SIAM Journal on Control and Optimization, 49 (2011), pp. 1961–1997.
+[43] B. PACHPATTE, Integral and Finite Difference Inequalities and Applications, vol. 205 of North-Holland Mathematics Studies, Elsevier, 2006.
+[44] A. H. SCHATZ AND L. B. WAHLBIN, Interior maximum-norm estimates for ﬁnite element methods, part II, Mathematics of Computation, 64
+(1995), p. 907.
+[45] F. SCHIEWECK AND L. TOBISKA, An optimal order error estimate for an upwind discretization of the Navier-Stokes equations, Numerical
+Methods for Partial Differential Equations, 12 (1996), pp. 407–421.
+[46] J. SHEN, On error estimates of projection methods for Navier-Stokes equations: First-order schemes, SIAM Journal on Numerical Analysis, 29
+(1992), pp. 57–77.
+[47] H. SOHR, The Navier-Stokes Equations, Springer Basel, 2001.
+[48] R. TEMAM, Navier-Stokes Equations: Theory and Numerical Analysis, North-Holland Publ. Co., Amsterdam, 1977.
+[49] V. THOM´EE, Galerkin ﬁnite element methods for parabolic problems, no. v. 25 in Springer series in computational mathematics, Springer, 2nd
+ed ed., 2006.
+[50] H. TRIEBEL, Theory of Function Spaces II, Springer Basel, 1992.

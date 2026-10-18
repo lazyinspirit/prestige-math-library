@@ -1,0 +1,277 @@
+[
+  {
+    "order": 2640,
+    "id": "maxwell-eigenproblems-and-compatible-vector-waves",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Maxwell eigenproblems and compatible vector wave approximation",
+    "companion": "maxwell-eigenproblems-and-compatible-vector-waves-examples",
+    "requires": [
+      "finite-element-eigenvalue-approximation",
+      "discrete-de-rham-complexes-and-edge-elements"
+    ],
+    "items": [
+      {
+        "id": "lem-pe11-compact-self-adjoint-spectral-approximation",
+        "kind": "lemma",
+        "title": "Spectral convergence under collectively compact positive approximations",
+        "statement": "For compact nonnegative self-adjoint operators T_n converging strongly to T, sequential collective compactness gives convergence of every isolated positive eigenvalue cluster with its full multiplicity, convergence of the associated eigenspaces in symmetric gap, and excludes nonzero spectral pollution.",
+        "deps": [
+          "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-rank-nullity",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-countable-choice",
+          "thm-bolzano-weierstrass"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pe11-hcurl-weak-limit",
+        "kind": "lemma",
+        "title": "Weak graph limits preserve zero tangential H(curl)",
+        "statement": "A strongly L2-convergent sequence in H0(curl) with bounded curls has a subsequence whose limit remains in H0(curl), with its distributional curl given by the weak L2 limit of the curls.",
+        "deps": [
+          "def-na-hcurl-space",
+          "def-na-zero-tangential-hcurl",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-pde-l2-control-space-separable",
+          "lem-separable-hilbert-bounded-sequence-weak-subsequence",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "Section 2, pp. 6–8, and Section 3, pp. 8–10: PEC curl spaces, kernel/gauge and distributional de Rham context only. The precise local auxiliary claim and complete proof here are supplied independently from the listed canonical Facts; this source is not a proof of the weak-graph lemma or the infinite-dimensional construction."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-pe11-maxwell-cavity-eigenproblem",
+        "kind": "definition",
+        "title": "PEC Maxwell cavity eigenproblem and full-kernel gauge",
+        "statement": "Let $\\Omega\\subset\\mathbb R^3$ be a bounded connected open set whose\nboundary is locally the graph of a Lipschitz function (a bounded Lipschitz\ndomain). The zero-tangential boundary condition is the perfect-electric-\nconductor (PEC) condition. We use PEC to name the closure convention below;\nfor a smooth field this is the usual condition $n\\times u=0$ on the boundary.\nIts space is\n$$V:=H_0(\\operatorname{curl};\\Omega),$$\nwith the graph norm and closure convention of\n[[def-na-hcurl-space]] and [[def-na-zero-tangential-hcurl]]. For a positive\nconstant permittivity $\\epsilon$ and a positive constant permeability $\\mu$,\nwrite\n$$(u,v)_\\epsilon:=\\epsilon\\int_\\Omega u\\cdot v\\,dx,\\qquad K:=\\{u\\in V:\\operatorname{curl}u=0\\},\\qquad X:=V\\cap K^{\\perp_\\epsilon}.$$\nThus $X$ removes the entire PEC curl kernel, without identifying that kernel\nwith a scalar gradient range.\n\nFor a bounded polyhedral subcase with a finite matching affine tetrahedral\nmesh $\\mathcal T_h$ as in [[def-matching-affine-simplicial-meshes]], let\n$$V_h:=N_h^1\\cap V,\\qquad K_h:=\\{v_h\\in V_h:\\operatorname{curl}v_h=0\\},\\qquad X_h:=V_h\\cap K_h^{\\perp_\\epsilon},$$\nwhere $N_h^1$ is the lowest-order first-family edge space of\n[[def-na-lowest-order-whitney-de-rham-spaces]]. The notation for $K_h$ and\nthe $L^2$ quotient gauge follows [[def-na-curl-curl-kernel-quotient-gauge]],\nrestricted to this PEC subspace. The continuous PEC eigenproblem\nis to find $\\lambda>0$ and $0\\ne u\\in X$ such that\n$$\\mu^{-1}(\\operatorname{curl}u,\\operatorname{curl}v)_{L^2} =\\lambda (u,v)_\\epsilon\\qquad(v\\in X).$$\nThe discrete problem replaces $X$ by $X_h$ and tests against every $v_h\\in X_h$.\nThe unquotiented PEC pencil on $V$ is to find $\\lambda\\ge0$ and\n$0\\ne u\\in V$ such that the same weak equation holds for every $v\\in V$.\nThe positive constants are homogeneous scalar coefficients. The coefficient\nextensions to variable or tensor-valued media require their own weighted\ncompactness hypotheses and are not inferred from the unweighted PE09\ndiscrete-compactness interface.",
+        "deps": [
+          "def-na-hcurl-space",
+          "def-na-zero-tangential-hcurl",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-curl-curl-kernel-quotient-gauge",
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-pe11-zero-eigenvalue-is-curl-kernel",
+        "kind": "lemma",
+        "title": "The unquotiented zero eigenspace is the PEC curl kernel",
+        "statement": "For the full PEC curl-curl pencil with positive homogeneous coefficients, the eigenrelation at zero holds exactly on the full curl kernel.",
+        "deps": [
+          "def-na-pe11-maxwell-cavity-eigenproblem"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "Section 2, pp. 6–8, and Section 3, pp. 8–10: PEC curl spaces, kernel/gauge and distributional de Rham context only. The precise local auxiliary claim and complete proof here are supplied independently from the listed canonical Facts; this source is not a proof of the weak-graph lemma or the infinite-dimensional construction."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe11-gauge-space-infinite-dimensional",
+        "kind": "lemma",
+        "title": "The PEC full-kernel gauge is infinite-dimensional",
+        "statement": "Every nonempty open three-dimensional cavity has infinitely many linearly independent compactly supported curl fields orthogonal to every curl-free PEC field, so its full-kernel gauge is infinite-dimensional.",
+        "deps": [
+          "def-na-pe11-maxwell-cavity-eigenproblem",
+          "def-na-hcurl-space",
+          "lem-smooth-bump-between-concentric-euclidean-balls"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "Section 2, pp. 6–8, and Section 3, pp. 8–10: PEC curl spaces, kernel/gauge and distributional de Rham context only. The precise local auxiliary claim and complete proof here are supplied independently from the listed canonical Facts; this source is not a proof of the weak-graph lemma or the infinite-dimensional construction."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe11-smooth-nedelec-approximation",
+        "kind": "lemma",
+        "title": "Smooth fields are approximated by the lowest-order edge family",
+        "statement": "For compactly supported smooth vector fields and a shape-regular refining affine tetrahedral family, the canonical edge interpolant is well-defined, belongs to the PEC edge space for sufficiently small mesh size, and converges in H(curl).",
+        "deps": [
+          "def-na-pe11-maxwell-cavity-eigenproblem",
+          "def-na-zero-tangential-hcurl",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-matching-affine-simplicial-meshes",
+          "lem-na-nedelec-edge-unisolvence",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "def-l-one-approximate-identity-on-rn",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-pe11-continuous-gauge-compact-embedding",
+        "kind": "lemma",
+        "title": "Compact embedding and curl Poincare inequality for the continuous PEC quotient",
+        "statement": "Assume the Axiom of Choice, Countable Choice and Dependent Choice. Let\n$\\Omega\\subset\\mathbb R^3$ be a bounded contractible Lipschitz polyhedron\nwith connected boundary, and let $X$ be the full-kernel orthogonal gauge of\n[[def-na-pe11-maxwell-cavity-eigenproblem]]. Every sequence in $X$ bounded in\n$H(\\operatorname{curl};\\Omega)$ has a subsequence converging strongly in\n$L^2(\\Omega;\\mathbb R^3)$. Equivalently, the inclusion of $X$, with its\n$H(\\operatorname{curl})$ graph norm, into $L^2$ is compact. Moreover there\nis a constant $C_\\Omega$ such that\n$$\\|u\\|_{L^2(\\Omega)}\\le C_\\Omega\\|\\operatorname{curl}u\\|_{L^2(\\Omega)} \\qquad(u\\in X).$$\nThus the curl form is coercive on $X$ in its $H(\\operatorname{curl})$ graph\nnorm.",
+        "deps": [
+          "def-na-pe11-maxwell-cavity-eigenproblem",
+          "def-na-hcurl-space",
+          "def-na-zero-tangential-hcurl",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-na-regular-decomposition-zero-tangential-hcurl",
+          "thm-rellich-compactness-from-w-one-p-zero-to-lp",
+          "lem-pe11-hcurl-weak-limit",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-pe11-gauge-conforming-edge-approximation",
+        "kind": "lemma",
+        "title": "Kernel projection gives dense conforming gauge approximants",
+        "statement": "Every continuous full-kernel-gauged PEC field is approximated in H(curl) by discrete edge fields orthogonal to the entire discrete curl kernel, by correcting smooth edge interpolants with the finite-dimensional kernel projection.",
+        "deps": [
+          "def-na-pe11-maxwell-cavity-eigenproblem",
+          "def-na-zero-tangential-hcurl",
+          "lem-pe11-smooth-nedelec-approximation",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-pe11-edge-maxwell-spectral-approximation",
+        "kind": "theorem",
+        "title": "Spectral convergence and no nonzero pollution for PEC edge elements",
+        "statement": "On a bounded contractible Lipschitz polyhedral PEC cavity with positive homogeneous coefficients and a shape-regular refining tetrahedral family, after quotienting the full continuous and discrete curl kernels, every isolated positive Maxwell eigenvalue is approximated with its full multiplicity, eigenspaces converge in L2 gap, and no nonzero spurious spectral limits occur, provided the declared PE09 regular-decomposition, discrete-compactness and commuting-projection interfaces hold.",
+        "deps": [
+          "def-na-pe11-maxwell-cavity-eigenproblem",
+          "def-na-hcurl-space",
+          "def-na-zero-tangential-hcurl",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-matching-affine-simplicial-meshes",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-nullhomotopic-map-and-contractible-space",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "lem-na-nedelec-edge-unisolvence",
+          "lem-pe11-continuous-gauge-compact-embedding",
+          "lem-pe11-gauge-space-infinite-dimensional",
+          "lem-pe11-smooth-nedelec-approximation",
+          "lem-pe11-gauge-conforming-edge-approximation",
+          "lem-pe11-compact-self-adjoint-spectral-approximation",
+          "lem-pe11-hcurl-weak-limit",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-na-discrete-compactness-and-poincare-lowest-order-nedelec",
+          "thm-na-uniformly-bounded-commuting-cochain-projection",
+          "def-na-curl-curl-kernel-quotient-gauge",
+          "thm-compact-coercive-form-spectrum-and-minmax",
+          "lem-finite-dimensional-galerkin-minmax",
+          "lem-separable-hilbert-bounded-sequence-weak-subsequence",
+          "lem-pde-l2-control-space-separable",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 2641,
+    "id": "maxwell-eigenproblems-and-compatible-vector-waves-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Maxwell eigenproblems and compatible vector wave approximation — Examples",
+    "companion": "maxwell-eigenproblems-and-compatible-vector-waves",
+    "requires": [
+      "maxwell-eigenproblems-and-compatible-vector-waves"
+    ],
+    "items": [
+      {
+        "id": "ex-pe11-spherical-shell-pec-zero-mode",
+        "kind": "example",
+        "title": "A topological PEC zero mode on a spherical shell",
+        "statement": "On a spherical shell the radial field x divided by |x| cubed is a nonzero curl-free PEC field; it lies in the kernel removed by the full quotient gauge and is not generated by a zero-boundary scalar potential.",
+        "deps": [
+          "def-na-pe11-maxwell-cavity-eigenproblem",
+          "def-na-hcurl-space",
+          "def-na-zero-tangential-hcurl",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "lem-pe11-zero-eigenvalue-is-curl-kernel",
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-tonelli-and-fubini-for-completed-product-measures"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-pe11-unit-cube-maxwell-mode",
+        "kind": "example",
+        "title": "An explicit PEC standing wave in the unit cube",
+        "statement": "On the unit cube, the field e3 sin(pi x) sin(pi y) is divergence-free, satisfies the PEC tangential condition, and is a Maxwell eigenfield with eigenvalue 2 pi squared divided by epsilon mu; the edge spectral theorem approximates its eigenvalue as part of its full cluster.",
+        "deps": [
+          "def-na-pe11-maxwell-cavity-eigenproblem",
+          "def-na-zero-tangential-hcurl",
+          "thm-pe11-edge-maxwell-spectral-approximation",
+          "thm-compact-coercive-form-spectrum-and-minmax",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 10
+      },
+      {
+        "id": "ex-pe11-repeated-cube-maxwell-cluster",
+        "kind": "example",
+        "title": "A repeated unit-cube Maxwell eigenvalue cluster",
+        "statement": "On the unit cube with constant $\\epsilon,\\mu>0$, the two fields\n$$E_1=(0,0,\\sin(\\pi x)\\sin(2\\pi y)),\\qquad E_2=(0,0,\\sin(2\\pi x)\\sin(\\pi y))$$\nare independent PEC eigenfields with the same eigenvalue\n$5\\pi^2/(\\epsilon\\mu)$. Thus the continuous eigenspace at this value has\nmultiplicity at least two, and a convergent edge discretization must reproduce\nthe full cluster. The theorem asserts convergence of eigenspaces, not a\ncanonical choice of one eigenvector.",
+        "deps": [
+          "def-na-pe11-maxwell-cavity-eigenproblem",
+          "def-na-zero-tangential-hcurl",
+          "thm-pe11-edge-maxwell-spectral-approximation",
+          "thm-compact-coercive-form-spectrum-and-minmax",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 10
+      }
+    ]
+  }
+]

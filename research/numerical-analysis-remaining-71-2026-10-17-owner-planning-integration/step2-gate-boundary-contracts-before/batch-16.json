@@ -1,0 +1,1675 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-16",
+  "scope": [
+    "lem-hlr-balanced-cluster-tree-size-and-depth",
+    "lem-hlr-block-cluster-leaves-partition-index-pairs",
+    "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+    "alg-hlr-bottom-up-recompression",
+    "thm-hlr-separated-cauchy-block-rank-bound",
+    "lem-hlr-bottom-up-recompression-error-bound",
+    "thm-hlr-block-matvec-correct",
+    "thm-hlr-blockwise-error-propagation",
+    "thm-hlr-storage-and-matvec-complexity",
+    "thm-h2-matrix-vector-multiplication-correct",
+    "thm-hlr-approximate-factorization-residual-and-inverse-error",
+    "ex-hlr-nearfield-block-requires-full-rank",
+    "ex-hlr-accumulated-truncation-can-destroy-positive-definiteness",
+    "ex-hlr-separated-cauchy-block"
+  ],
+  "contracts": {
+    "lem-hlr-balanced-cluster-tree-size-and-depth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hlr-cluster-trees-and-geometric-admissibility",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a nonempty finite totally ordered set, let $d\\ge1$, and assign a point $\\xi_i\\in\\mathbb R^d$ to each $i\\in I$. A **cluster** is a nonempty subset of $I$. For a cluster $\\tau$, write $X_\\tau=\\{\\xi_i:i\\in\\tau\\}$, $\\operatorname{diam}(\\tau)=\\max_{i,j\\in\\tau}\\|\\xi_i-\\xi_j\\|_2$, and $\\operatorname{dist}(\\tau,\\sigma)=\\min_{i\\in\\tau,j\\in\\sigma}\\|\\xi_i-\\xi_j\\|_2$. These extrema exist because the index sets are finite and nonempty; repeated geometric points are allowed.\n\nA **balanced cluster tree with leaf threshold $b$**, where $1\\le b\\le |I|$, is the rooted binary tree whose root is $I$, whose children of an internal cluster $\\tau$ are its first $\\lfloor|\\tau|/2\\rfloor$ and last $\\lceil|\\tau|/2\\rceil$ indices in the fixed order, and which stops splitting at clusters of size at most $b$. Its two children are disjoint and their union is $\\tau$. Row and column index sets may have separate trees and separate point assignments.\n\nFix an admissibility parameter $\\eta>0$. A pair of clusters $(\\tau,\\sigma)$ is **admissible** when $\\operatorname{dist}(\\tau,\\sigma)>0$ and $\\operatorname{dist}(\\tau,\\sigma)\\ge\\eta\\max(\\operatorname{diam}(\\tau),\\operatorname{diam}(\\sigma))$. The strict positive-distance condition keeps coincident or intersecting clusters in the near field, including diagonal singleton blocks.\n\nThe **block-cluster tree** starts at $(I,J)$. It stops at a pair if that pair is admissible or if both clusters are leaves. Otherwise it splits a nonleaf cluster of larger cardinality; ties are resolved by splitting the row cluster. The children of a split are the corresponding child-cluster pairs. Its terminal pairs are called **block-cluster leaves**. Admissible leaves are **far blocks**; nonadmissible leaves, which have two leaf clusters, are **near blocks**.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At depth zero the root has size $n=\\lceil n/2^0\\rceil$. If a cluster at depth $h$ has size at most $\\lceil n/2^h\\rceil$, each child has size at most $\\lceil\\lceil n/2^h\\rceil/2\\rceil=\\lceil n/2^{h+1}\\rceil$, since the split sizes differ by at most one. Induction proves the size bound at every depth.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $H=\\lceil\\log_2(n/b)\\rceil$. Then $2^H\\ge n/b$, so $\\lceil n/2^H\\rceil\\le b$. By step 1.1 every cluster at depth $H$ has size at most $b$ and is a leaf; hence the tree depth is at most $H$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If a leaf is not the root, its parent has an integer size $m>b$, so the smaller child has size $\\lfloor m/2\\rfloor\\ge\\lfloor(b+1)/2\\rfloor\\ge b/2$. The same lower bound on leaf size holds when the root is a leaf because then there is one leaf and $n\\ge b/2$. Since the leaves partition $I$, their number $L$ satisfies $Lb/2\\le n$, hence $L\\le2n/b$. A full binary tree with $L$ leaves has $L-1$ internal nodes, so it has $2L-1\\le4n/b-1$ nodes.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the zero or rank-zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles the singleton or rank-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "lem-hlr-block-cluster-leaves-partition-index-pairs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hlr-cluster-trees-and-geometric-admissibility",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a nonempty finite totally ordered set, let $d\\ge1$, and assign a point $\\xi_i\\in\\mathbb R^d$ to each $i\\in I$. A **cluster** is a nonempty subset of $I$. For a cluster $\\tau$, write $X_\\tau=\\{\\xi_i:i\\in\\tau\\}$, $\\operatorname{diam}(\\tau)=\\max_{i,j\\in\\tau}\\|\\xi_i-\\xi_j\\|_2$, and $\\operatorname{dist}(\\tau,\\sigma)=\\min_{i\\in\\tau,j\\in\\sigma}\\|\\xi_i-\\xi_j\\|_2$. These extrema exist because the index sets are finite and nonempty; repeated geometric points are allowed.\n\nA **balanced cluster tree with leaf threshold $b$**, where $1\\le b\\le |I|$, is the rooted binary tree whose root is $I$, whose children of an internal cluster $\\tau$ are its first $\\lfloor|\\tau|/2\\rfloor$ and last $\\lceil|\\tau|/2\\rceil$ indices in the fixed order, and which stops splitting at clusters of size at most $b$. Its two children are disjoint and their union is $\\tau$. Row and column index sets may have separate trees and separate point assignments.\n\nFix an admissibility parameter $\\eta>0$. A pair of clusters $(\\tau,\\sigma)$ is **admissible** when $\\operatorname{dist}(\\tau,\\sigma)>0$ and $\\operatorname{dist}(\\tau,\\sigma)\\ge\\eta\\max(\\operatorname{diam}(\\tau),\\operatorname{diam}(\\sigma))$. The strict positive-distance condition keeps coincident or intersecting clusters in the near field, including diagonal singleton blocks.\n\nThe **block-cluster tree** starts at $(I,J)$. It stops at a pair if that pair is admissible or if both clusters are leaves. Otherwise it splits a nonleaf cluster of larger cardinality; ties are resolved by splitting the row cluster. The children of a split are the corresponding child-cluster pairs. Its terminal pairs are called **block-cluster leaves**. Admissible leaves are **far blocks**; nonadmissible leaves, which have two leaf clusters, are **near blocks**.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If a block node $(\\tau,\\sigma)$ is split on the row side, its child rectangles $(\\tau_i,\\sigma)$ are disjoint and cover $\\tau\\times\\sigma$ because the $\\tau_i$ partition $\\tau$. If it is split on the column side, the rectangles $(\\tau,\\sigma_j)$ are disjoint and cover $\\tau\\times\\sigma$ because the $\\sigma_j$ partition $\\sigma$. Thus every split replaces a block by a disjoint cover of that block.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each split increases the depth of one cluster in a finite tree, so along every branch the sum of the remaining row and column depths decreases and the recursion terminates. Induct on this finite sum: a terminal node is its own terminal cover; a nonterminal node has children whose terminal covers partition their respective rectangles by the induction hypothesis, and step 1.1 shows that their union is a disjoint cover of the parent rectangle. Applying this to the root $(I,J)$ proves that the terminal rectangles partition $I\\times J$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Two distinct terminal rectangles lie in different children of their first common split, whose rectangles are disjoint by step 1.1. Hence all terminal rectangles are pairwise disjoint, completing the partition claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This item has no zero or rank-zero boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item has no singleton or rank-one boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no inclusive threshold/equality boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "thm-hlr-core-svd-recompression-is-best-rank-tolerance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-hlr-core-svd-recompression-with-tolerance",
+          "source_section": "Definition",
+          "quote": "**Input:** A field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, positive integers $m,n$, a finite factor list $U_s\\in\\mathbb F^{m\\times r_s}$ and $V_s\\in\\mathbb F^{n\\times r_s}$ representing $M=\\sum_s U_sV_s^*$, a rank cap $0\\le k\\le\\min(m,n)$, and a Frobenius tolerance $\\delta\\ge0$. The conjugate transpose $M^*$ and Frobenius norm are those of [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\n**Procedure:** Concatenate the factors as $U=[U_1\\ \\cdots\\ U_p]$ and $V=[V_1\\ \\cdots\\ V_p]$, so $M=UV^*$. Take compact singular value decompositions $U=Q_UR_U$ and $V=Q_VR_V$, where the columns of $Q_U,Q_V$ are orthonormal and span the respective column spaces. Form the core $C=R_UR_V^*$ and compute an SVD $C=P\\Sigma Q^*$. Let its positive singular values be $s_1\\ge\\cdots\\ge s_t>0$. Find the smallest $q\\in\\{0,\\ldots,\\min(k,t)\\}$ for which $e_q:=(\\sum_{j>q}s_j^2)^{1/2}\\le\\delta$. If no such $q$ exists, return **tolerance-not-met**. Otherwise return **success** with factors $\\widehat U=Q_UP_{[:,1:q]}\\Sigma_q$ and $\\widehat V=Q_VQ_{[:,1:q]}$, where $\\Sigma_q=\\operatorname{diag}(s_1,\\ldots,s_q)$, and the exact discarded-tail certificate $e_q$; when $q=0$, use empty $m\\times0$ and $n\\times0$ factors.\n\nThe compact decompositions retain only positive singular directions. If the factor list is empty or its represented matrix is zero, then $t=0$ and the procedure returns the rank-zero representation because $\\delta\\ge0$. Any SVD choices in repeated singular subspaces are permitted. No result is returned when the requested cap cannot certify the tolerance.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-best-rank-k-frobenius-matrix-approximation",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, where $m,n\\ge1$, have a singular value decomposition\n$$ A=\\sum_{j=1}^{q}\\sigma_j u_jv_j^*,\\qquad \\sigma_1\\ge\\cdots\\ge\\sigma_q>0, $$\nwhere $q=\\operatorname{rank}(A)$. For an integer $k\\ge0$, put\n$$ A_k=\\sum_{j=1}^{\\min(k,q)}\\sigma_j u_jv_j^*, \\qquad \\delta_k^2=\\sum_{j=k+1}^{q}\\sigma_j^2 $$\nwith an empty sum equal to zero. Then $\\operatorname{rank}(A_k)\\le k$, $\\|A-A_k\\|_F=\\delta_k$, and every matrix $B$ with $\\operatorname{rank}(B)\\le k$ satisfies $\\|A-B\\|_F\\ge\\delta_k$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The compact SVDs in [F1] give $U=Q_UR_U$ and $V=Q_VR_V$ with orthonormal columns in $Q_U,Q_V$. Hence $M=Q_U(R_UR_V^*)Q_V^*=Q_UCQ_V^*$. If $C=P\\Sigma Q^*$ is its SVD, then $M=(Q_UP)\\Sigma(Q_VQ)^*$; both outer factors have orthonormal columns, so completing them by orthonormal bases gives an SVD of $M$. Thus the core and $M$ have the same positive singular values.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On success, the output factors in [F1] form the rank-$q$ truncation of the lifted SVD in step 1.1. Its retained singular values are positive and their singular vectors are orthonormal, so its rank is exactly $q$. Applying [F4] gives $\\|M-\\widehat M\\|_F=(\\sum_{j>q}s_j(M)^2)^{1/2}\\le\\delta$. By the minimal choice in [F1], every smaller $r<q$ has discarded tail greater than $\\delta$; [F4] then rules out every rank-at-most-$r$ approximation meeting the tolerance. If the algorithm fails, then $k<t$ and the tail at $k$ is greater than $\\delta$ (otherwise $q=k$ would pass); [F4] rules out every rank-at-most-$k$ approximation. This includes $q=0$, $k=0$, zero factors, and repeated singular values.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the zero or rank-zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item has no singleton or rank-one boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the degenerate or repeated-data case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "alg-hlr-bottom-up-recompression": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This item has no zero or rank-zero boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item has no singleton or rank-one boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the defining procedure explicitly handles the inclusive threshold/equality boundary. Property material is carried by the declared ordinary justified_by result."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "algorithm"
+    },
+    "thm-hlr-separated-cauchy-block-rank-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hlr-cluster-trees-and-geometric-admissibility",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a nonempty finite totally ordered set, let $d\\ge1$, and assign a point $\\xi_i\\in\\mathbb R^d$ to each $i\\in I$. A **cluster** is a nonempty subset of $I$. For a cluster $\\tau$, write $X_\\tau=\\{\\xi_i:i\\in\\tau\\}$, $\\operatorname{diam}(\\tau)=\\max_{i,j\\in\\tau}\\|\\xi_i-\\xi_j\\|_2$, and $\\operatorname{dist}(\\tau,\\sigma)=\\min_{i\\in\\tau,j\\in\\sigma}\\|\\xi_i-\\xi_j\\|_2$. These extrema exist because the index sets are finite and nonempty; repeated geometric points are allowed.\n\nA **balanced cluster tree with leaf threshold $b$**, where $1\\le b\\le |I|$, is the rooted binary tree whose root is $I$, whose children of an internal cluster $\\tau$ are its first $\\lfloor|\\tau|/2\\rfloor$ and last $\\lceil|\\tau|/2\\rceil$ indices in the fixed order, and which stops splitting at clusters of size at most $b$. Its two children are disjoint and their union is $\\tau$. Row and column index sets may have separate trees and separate point assignments.\n\nFix an admissibility parameter $\\eta>0$. A pair of clusters $(\\tau,\\sigma)$ is **admissible** when $\\operatorname{dist}(\\tau,\\sigma)>0$ and $\\operatorname{dist}(\\tau,\\sigma)\\ge\\eta\\max(\\operatorname{diam}(\\tau),\\operatorname{diam}(\\sigma))$. The strict positive-distance condition keeps coincident or intersecting clusters in the near field, including diagonal singleton blocks.\n\nThe **block-cluster tree** starts at $(I,J)$. It stops at a pair if that pair is admissible or if both clusters are leaves. Otherwise it splits a nonleaf cluster of larger cardinality; ties are resolved by splitting the row cluster. The children of a split are the corresponding child-cluster pairs. Its terminal pairs are called **block-cluster leaves**. Admissible leaves are **far blocks**; nonadmissible leaves, which have two leaf clusters, are **near blocks**.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hlr-and-h2-block-matrix-representations",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $I,J$ be nonempty finite index sets with point assignments as in [[def-hlr-cluster-trees-and-geometric-admissibility]], and let $\\mathcal P$ be the block-cluster leaves of [[lem-hlr-block-cluster-leaves-partition-index-pairs]]. Fix an integer rank cap $k\\ge1$. An **H-matrix representation with cap $k$** assigns to each far block $b=(\\tau,\\sigma)\\in\\mathcal P$ factors $U_b\\in\\mathbb F^{\\tau\\times r_b}$ and $V_b\\in\\mathbb F^{\\sigma\\times r_b}$ with $0\\le r_b\\le k$, representing that block by $U_bV_b^*$. Each near block is stored as its full dense matrix $D_b\\in\\mathbb F^{\\tau\\times\\sigma}$. Since $\\mathcal P$ partitions $I\\times J$, these blocks determine a unique represented matrix $\\widetilde A\\in\\mathbb F^{I\\times J}$.\n\nThe rank cap on far blocks is an assumption about the representation or the target's approximability; geometric admissibility alone does not imply that a given matrix block has low rank. Near blocks remain dense and receive no low-rank guarantee.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $z=x/y$ one has $(1-z)\\sum_{\\ell=0}^{r-1}z^\\ell=1-z^r$. Since $y-x>0$, division by $y(1-x/y)$ gives the exact identity $\\frac1{y-x}=\\sum_{\\ell=0}^{r-1}\\frac{x^\\ell}{y^{\\ell+1}}+\\frac{x^r}{y^r(y-x)}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $0\\le x_i/y_j\\le a/b=q$ and $y_j-x_i\\ge b-a$, step 1.1 gives $|K_{ij}-\\widetilde K_{ij}|=x_i^r/(y_j^r(y_j-x_i))\\le q^r/(b-a)$. Each summand of $\\widetilde K$ is the outer product of $(x_i^\\ell)_{i=1}^m$ and $(y_j^{-(\\ell+1)})_{j=1}^n$, so its column image lies in the span of at most $r$ vectors and its rank is at most $r$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing the squared entrywise bound from step 2.1 over the $mn$ entries and using [F2] gives $\\|K-\\widetilde K\\|_F\\le\\sqrt{mn}\\,q^r/(b-a)$. The sample clusters have distance at least $b-a$ and diameters at most $a$ and $c$; since $b-a>0$, the additional inequality in the Statement implies admissibility by [F1]. The rank bound in step 2.1 and $k\\ge r$ then meet the far-block representation in [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This item has no zero or rank-zero boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item has no singleton or rank-one boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-hlr-block-matvec-correct": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hlr-and-h2-block-matrix-representations",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $I,J$ be nonempty finite index sets with point assignments as in [[def-hlr-cluster-trees-and-geometric-admissibility]], and let $\\mathcal P$ be the block-cluster leaves of [[lem-hlr-block-cluster-leaves-partition-index-pairs]]. Fix an integer rank cap $k\\ge1$. An **H-matrix representation with cap $k$** assigns to each far block $b=(\\tau,\\sigma)\\in\\mathcal P$ factors $U_b\\in\\mathbb F^{\\tau\\times r_b}$ and $V_b\\in\\mathbb F^{\\sigma\\times r_b}$ with $0\\le r_b\\le k$, representing that block by $U_bV_b^*$. Each near block is stored as its full dense matrix $D_b\\in\\mathbb F^{\\tau\\times\\sigma}$. Since $\\mathcal P$ partitions $I\\times J$, these blocks determine a unique represented matrix $\\widetilde A\\in\\mathbb F^{I\\times J}$.\n\nThe rank cap on far blocks is an assumption about the representation or the target's approximability; geometric admissibility alone does not imply that a given matrix block has low rank. Near blocks remain dense and receive no low-rank guarantee.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "source_section": "Statement",
+          "quote": "Let $I,J$ be nonempty finite index sets with finite cluster trees, and construct the block-cluster tree as in [[def-hlr-cluster-trees-and-geometric-admissibility]]. Its terminal rectangles $\\tau\\times\\sigma$ are pairwise disjoint and their union is $I\\times J$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-hlr-block-matvec",
+          "source_section": "Definition",
+          "quote": "**Input:** An H-matrix representation $\\widetilde A$ on a finite block-cluster partition $\\mathcal P$ as in [[def-hlr-and-h2-block-matrix-representations]], and a vector $x\\in\\mathbb F^J$.\n\n**Procedure:** Initialize $y\\in\\mathbb F^I$ to zero. For every far block $b=(\\tau,\\sigma)$ with factors $U_b,V_b$, compute $z_b=V_b^*x|_\\sigma$ and add $U_bz_b$ to $y|_\\tau$. For every near block with dense entries $D_b$, compute $D_bx|_\\sigma$ and add it to $y|_\\tau$. Return $y$. All arithmetic is exact; contributions to a row cluster are summed over its block leaves.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $\\widetilde A$ is the matrix obtained by placing its stored block matrices on their index rectangles and putting no entries outside those rectangles.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], each pair $(i,j)\\in I\\times J$ lies in exactly one leaf rectangle. By [F3], the algorithm adds the contribution $\\widetilde A_{ij}x_j$ to output coordinate $i$ from that leaf, and no other leaf includes that entry. Summing over the finite partition gives $y_i=\\sum_{j\\in J}\\widetilde A_{ij}x_j$ for every $i\\in I$, which is exactly $y=\\widetilde A x$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This item has no zero or rank-zero boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the singleton or rank-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-h2-matrix-vector-multiplication-correct": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-h2-nested-cluster-bases-and-interaction-lists",
+          "source_section": "Definition",
+          "quote": "In the H-matrix setting of [[def-hlr-and-h2-block-matrix-representations]], an **H² representation** assigns a row basis $U_\\tau\\in\\mathbb F^{\\tau\\times r_\\tau}$ to every row cluster $\\tau$ and a column basis $V_\\sigma\\in\\mathbb F^{\\sigma\\times s_\\sigma}$ to every column cluster $\\sigma$, with $0\\le r_\\tau,s_\\sigma\\le k$. For every internal row cluster $\\tau$ with children $\\tau_1,\\tau_2$, it stores transfer matrices $E^U_{\\tau_i}\\in\\mathbb F^{r_{\\tau_i}\\times r_\\tau}$ satisfying\n\n$$U_\\tau|_{\\tau_i}=U_{\\tau_i}E^U_{\\tau_i}\\qquad(i=1,2).$$\n\nFor every internal column cluster $\\sigma$ with children $\\sigma_1,\\sigma_2$, it stores transfer matrices $E^V_{\\sigma_j}\\in\\mathbb F^{s_{\\sigma_j}\\times s_\\sigma}$ satisfying $V_\\sigma|_{\\sigma_j}=V_{\\sigma_j}E^V_{\\sigma_j}$. These identities are the **nested-basis conditions**. An admissible block leaf $(\\tau,\\sigma)$ is represented by $U_\\tau S_{\\tau\\sigma}V_\\sigma^*$ with coupling matrix $S_{\\tau\\sigma}\\in\\mathbb F^{r_\\tau\\times s_\\sigma}$; near block leaves remain dense.\n\nLet $\\mathcal P_{\\rm far}$ denote the admissible leaves of the block-cluster partition. The row interaction list of $\\tau$ is $\\mathcal L_U(\\tau)=\\{\\sigma:(\\tau,\\sigma)\\in\\mathcal P_{\\rm far}\\}$, and the column interaction list of $\\sigma$ is $\\mathcal L_V(\\sigma)=\\{\\tau:(\\tau,\\sigma)\\in\\mathcal P_{\\rm far}\\}$. An H² representation may impose a bound on these list lengths or on their total count; any complexity theorem must state which bound it uses.\n\n**Storage convention:** Store the basis arrays explicitly only at leaf clusters. Store each internal cluster's child-to-parent transfer matrices; the basis of an internal cluster is reconstructed recursively from its children and these transfers.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hlr-and-h2-block-matrix-representations",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $I,J$ be nonempty finite index sets with point assignments as in [[def-hlr-cluster-trees-and-geometric-admissibility]], and let $\\mathcal P$ be the block-cluster leaves of [[lem-hlr-block-cluster-leaves-partition-index-pairs]]. Fix an integer rank cap $k\\ge1$. An **H-matrix representation with cap $k$** assigns to each far block $b=(\\tau,\\sigma)\\in\\mathcal P$ factors $U_b\\in\\mathbb F^{\\tau\\times r_b}$ and $V_b\\in\\mathbb F^{\\sigma\\times r_b}$ with $0\\le r_b\\le k$, representing that block by $U_bV_b^*$. Each near block is stored as its full dense matrix $D_b\\in\\mathbb F^{\\tau\\times\\sigma}$. Since $\\mathcal P$ partitions $I\\times J$, these blocks determine a unique represented matrix $\\widetilde A\\in\\mathbb F^{I\\times J}$.\n\nThe rank cap on far blocks is an assumption about the representation or the target's approximability; geometric admissibility alone does not imply that a given matrix block has low rank. Near blocks remain dense and receive no low-rank guarantee.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "source_section": "Statement",
+          "quote": "Let $I,J$ be nonempty finite index sets with finite cluster trees, and construct the block-cluster tree as in [[def-hlr-cluster-trees-and-geometric-admissibility]]. Its terminal rectangles $\\tau\\times\\sigma$ are pairwise disjoint and their union is $I\\times J$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-h2-matrix-vector-multiplication",
+          "source_section": "Definition",
+          "quote": "**Input:** An H² representation $\\widetilde A$ with row bases $U_\\tau$, column bases $V_\\sigma$, transfer matrices from [[def-h2-nested-cluster-bases-and-interaction-lists]], and a vector $x\\in\\mathbb F^J$.\n\n**Procedure:**\n\n1. Initialize an upward coefficient vector $z_\\sigma$ for each column cluster. At each leaf $\\sigma$, set $z_\\sigma=V_\\sigma^*x|_\\sigma$. At each internal cluster $\\sigma$ with children $\\sigma_1,\\sigma_2$, set $z_\\sigma=\\sum_{j=1}^2(E^V_{\\sigma_j})^*z_{\\sigma_j}$.\n2. Initialize a downward coefficient vector $w_\\tau=0$ for each row cluster and an output vector $y=0$. For each admissible leaf $(\\tau,\\sigma)$, add $S_{\\tau\\sigma}z_\\sigma$ to $w_\\tau$. For each near leaf $(\\tau,\\sigma)$, add $D_{\\tau\\sigma}x|_\\sigma$ to $y|_\\tau$.\n3. Traverse the row tree from root to leaves. For each parent $\\tau$ and child $\\tau_i$, add $E^U_{\\tau_i}w_\\tau$ to $w_{\\tau_i}$. At each row leaf $\\tau$, add $U_\\tau w_\\tau$ to $y|_\\tau$. Return $y$.\n\nThe upward and downward traversals follow the finite cluster trees; block and cluster contributions are accumulated in exact arithmetic.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At a column leaf $\\sigma$, the algorithm sets $z_\\sigma=V_\\sigma^*x|_\\sigma$. Suppose this identity holds for both children $\\sigma_1,\\sigma_2$ of an internal cluster $\\sigma$. By the nestedness in [F1] and the disjoint union of child indices, $V_\\sigma^*x|_\\sigma=\\sum_{j=1}^2(E^V_{\\sigma_j})^*V_{\\sigma_j}^*x|_{\\sigma_j}=\\sum_{j=1}^2(E^V_{\\sigma_j})^*z_{\\sigma_j}$, exactly the upward update in [F4]. Induction gives $z_\\sigma=V_\\sigma^*x|_\\sigma$ for every column cluster.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a far block $(\\tau,\\sigma)$. Its coupling contributes $S_{\\tau\\sigma}z_\\sigma=S_{\\tau\\sigma}V_\\sigma^*x|_\\sigma$ to $w_\\tau$. Each downward transfer from a parent to a child applies the corresponding $E^U$; repeated nestedness [F1] therefore turns $U_\\tau S_{\\tau\\sigma}V_\\sigma^*x|_\\sigma$ into exactly its restriction on every descendant row leaf. Summing the finite far-block contributions gives their full matrix action.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] and [F4], every near block contributes its exact dense product $D_{\\tau\\sigma}x|_\\sigma$. The far and near block leaves partition $I\\times J$ by [F3], so adding their actions gives every entry of $\\widetilde A x$ exactly once in the matrix sum. Thus the returned vector is $\\widetilde A x$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This item has no zero or rank-zero boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item has no singleton or rank-one boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-hlr-blockwise-error-propagation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-hlr-block-addition",
+          "source_section": "Definition",
+          "quote": "**Input:** Two H-matrix representations $A,B$ on the same block-cluster partition $\\mathcal P$, a rank cap $k\\ge1$, and for each far block $b\\in\\mathcal P$ a factor-sum tree with node tolerances whose total is at most $\\delta_b\\ge0$. The tree leaves are the exact factors of $A_b$ and $B_b$.\n\n**Procedure:** For each near block, store the exact dense sum $A_b+B_b$ and report local error $e_b=0$. For each far block, run [[alg-hlr-bottom-up-recompression]] on its factor-sum tree with cap $k$. If any block returns **tolerance-not-met**, return that status and the block identity; otherwise store the root factors, report the certified error bound $e_b$ returned by that routine, and retain the block partition. The input's node budgets sum to at most $\\delta_b$, so $e_b\\le\\delta_b$ by the bottom-up error guarantee.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-hlr-block-product",
+          "source_section": "Definition",
+          "quote": "**Input:** H-matrix representations $A\\in\\mathbb F^{I\\times K}$ and $B\\in\\mathbb F^{K\\times J}$, a recursively generated output block-cluster partition as in [[def-hlr-cluster-trees-and-geometric-admissibility]], a rank cap $k\\ge1$, local tolerances $\\delta_b\\ge0$ for far output blocks, and for each output block $b=(\\tau,\\sigma)$ a finite intermediate-cluster family $\\mathcal K_b$ partitioning $K$ such that the restrictions $A_{\\tau\\kappa}$ and $B_{\\kappa\\sigma}$ are available in dense or factorized form for each $\\kappa\\in\\mathcal K_b$. For a far output block, its factor-sum tree has one exact product term for each $\\kappa\\in\\mathcal K_b$ and node tolerances totaling at most $\\delta_b$. This compatibility condition is part of the input.\n\n**Procedure:** For each output block, use the exact identity $C_b=\\sum_{\\kappa\\in\\mathcal K_b}A_{\\tau\\kappa}B_{\\kappa\\sigma}$. If the output block is near, form and store this dense sum exactly and report $e_b=0$. For a far output block, convert each product term to factor form: $UV^*\\cdot PQ^*=U(V^*P)Q^*$ when both factors are low rank; $UV^*\\cdot D=U(D^*V)^*$ and $D\\cdot PQ^*=(DP)Q^*$ when one factor is dense; and $D_1D_2=D_1(D_2^*)^*$ when both are dense. These formulas produce factors with matching inner dimensions. Run [[alg-hlr-bottom-up-recompression]] on the resulting finite factor-sum tree with cap $k$. If any block returns **tolerance-not-met**, return that status and block identity; otherwise store the root factors and its certified bound $e_b\\le\\delta_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hlr-bottom-up-recompression-error-bound",
+          "source_section": "Statement",
+          "quote": "Use [[alg-hlr-bottom-up-recompression]] on a finite factor-sum tree for one admissible block over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, with exact arithmetic, rank cap $k\\ge1$, node tolerances $\\theta_v\\ge0$, and $\\sum_v\\theta_v\\le\\delta_b$. Let $T_v$ be the subtree rooted at $v$, and let $M_v$ be the sum of its exact leaf contributions. Whenever all calls in $T_v$ succeed, the returned factors represent a matrix $\\widehat M_v$ of rank at most $k$, and the reported bound satisfies\n$$\\|M_v-\\widehat M_v\\|_F\\le e_v=\\sum_{w\\in T_v}\\rho_w\\le\\sum_{w\\in T_v}\\theta_w.$$\nIn particular, if the routine succeeds at the root,\n$$\\operatorname{rank}(\\widehat M_{\\rm root})\\le k,\\qquad \\|M_{\\rm root}-\\widehat M_{\\rm root}\\|_F\\le e_{\\rm root}=\\sum_w\\rho_w\\le\\sum_w\\theta_w\\le\\delta_b.$$\nHere $\\rho_w$ is the exact discarded-tail norm returned at node $w$. A **tolerance-not-met** status at a node only means this chosen tree and these assigned local budgets did not produce the requested certificate; it does not assert that no rank-$k$ approximation of the exact full sum meets $\\delta_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "source_section": "Statement",
+          "quote": "Let $I,J$ be nonempty finite index sets with finite cluster trees, and construct the block-cluster tree as in [[def-hlr-cluster-trees-and-geometric-admissibility]]. Its terminal rectangles $\\tau\\times\\sigma$ are pairwise disjoint and their union is $I\\times J$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\Delta_b$ be the actual residual in output block $b$. For near blocks it is zero; for far blocks [F1] and [F2] give $\\|\\Delta_b\\|_F\\le e_b\\le\\delta_b$. By [F3] their entry supports are disjoint, so [F4] gives $\\|\\Delta\\|_F^2=\\sum_b\\|\\Delta_b\\|_F^2\\le\\sum_b\\delta_b^2$. Hence $\\|\\Delta\\|_F\\le\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For addition, write $\\widehat S=\\widetilde A+\\widetilde B+\\Delta$. Expanding the squared Frobenius norm as the finite entry inner product and applying [F5] gives the triangle inequality. Therefore $\\|A+B-\\widehat S\\|_F\\le\\|A-\\widetilde A\\|_F+\\|B-\\widetilde B\\|_F+\\|\\Delta\\|_F\\le\\epsilon_A+\\epsilon_B+\\delta$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For multiplication, put $E_A=\\widetilde A-A$ and $E_B=\\widetilde B-B$. Since $\\widehat C=\\widetilde A\\widetilde B+\\Delta$, expansion gives $AB-\\widehat C=-(E_AB+AE_B+E_AE_B+\\Delta)$. For any conformable $X,Y$, entrywise Cauchy–Schwarz gives $|(XY)_{ij}|^2\\le(\\sum_\\ell|X_{i\\ell}|^2)(\\sum_\\ell|Y_{\\ell j}|^2)$; summing over $i,j$ gives $\\|XY\\|_F^2\\le\\|X\\|_F^2\\|Y\\|_F^2$. Thus $\\|E_AB\\|_F\\le\\epsilon_A\\|B\\|_F$, $\\|AE_B\\|_F\\le\\|A\\|_F\\epsilon_B$, and $\\|E_AE_B\\|_F\\le\\epsilon_A\\epsilon_B$. The triangle inequality from [F4,F5] and step 1.1 give the stated product bound.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the zero or rank-zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item has no singleton or rank-one boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-hlr-storage-and-matvec-complexity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hlr-cluster-trees-and-geometric-admissibility",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a nonempty finite totally ordered set, let $d\\ge1$, and assign a point $\\xi_i\\in\\mathbb R^d$ to each $i\\in I$. A **cluster** is a nonempty subset of $I$. For a cluster $\\tau$, write $X_\\tau=\\{\\xi_i:i\\in\\tau\\}$, $\\operatorname{diam}(\\tau)=\\max_{i,j\\in\\tau}\\|\\xi_i-\\xi_j\\|_2$, and $\\operatorname{dist}(\\tau,\\sigma)=\\min_{i\\in\\tau,j\\in\\sigma}\\|\\xi_i-\\xi_j\\|_2$. These extrema exist because the index sets are finite and nonempty; repeated geometric points are allowed.\n\nA **balanced cluster tree with leaf threshold $b$**, where $1\\le b\\le |I|$, is the rooted binary tree whose root is $I$, whose children of an internal cluster $\\tau$ are its first $\\lfloor|\\tau|/2\\rfloor$ and last $\\lceil|\\tau|/2\\rceil$ indices in the fixed order, and which stops splitting at clusters of size at most $b$. Its two children are disjoint and their union is $\\tau$. Row and column index sets may have separate trees and separate point assignments.\n\nFix an admissibility parameter $\\eta>0$. A pair of clusters $(\\tau,\\sigma)$ is **admissible** when $\\operatorname{dist}(\\tau,\\sigma)>0$ and $\\operatorname{dist}(\\tau,\\sigma)\\ge\\eta\\max(\\operatorname{diam}(\\tau),\\operatorname{diam}(\\sigma))$. The strict positive-distance condition keeps coincident or intersecting clusters in the near field, including diagonal singleton blocks.\n\nThe **block-cluster tree** starts at $(I,J)$. It stops at a pair if that pair is admissible or if both clusters are leaves. Otherwise it splits a nonleaf cluster of larger cardinality; ties are resolved by splitting the row cluster. The children of a split are the corresponding child-cluster pairs. Its terminal pairs are called **block-cluster leaves**. Admissible leaves are **far blocks**; nonadmissible leaves, which have two leaf clusters, are **near blocks**.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hlr-balanced-cluster-tree-size-and-depth",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a finite ordered set of size $n\\ge1$, and let $b$ be an integer with $1\\le b\\le n$. In the balanced cluster tree of [[def-hlr-cluster-trees-and-geometric-admissibility]], every cluster at depth $h$ has size at most $\\lceil n/2^h\\rceil$. The tree has depth at most $\\lceil\\log_2(n/b)\\rceil$, at most $2n/b$ leaves, and at most $4n/b-1$ nodes.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hlr-and-h2-block-matrix-representations",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $I,J$ be nonempty finite index sets with point assignments as in [[def-hlr-cluster-trees-and-geometric-admissibility]], and let $\\mathcal P$ be the block-cluster leaves of [[lem-hlr-block-cluster-leaves-partition-index-pairs]]. Fix an integer rank cap $k\\ge1$. An **H-matrix representation with cap $k$** assigns to each far block $b=(\\tau,\\sigma)\\in\\mathcal P$ factors $U_b\\in\\mathbb F^{\\tau\\times r_b}$ and $V_b\\in\\mathbb F^{\\sigma\\times r_b}$ with $0\\le r_b\\le k$, representing that block by $U_bV_b^*$. Each near block is stored as its full dense matrix $D_b\\in\\mathbb F^{\\tau\\times\\sigma}$. Since $\\mathcal P$ partitions $I\\times J$, these blocks determine a unique represented matrix $\\widetilde A\\in\\mathbb F^{I\\times J}$.\n\nThe rank cap on far blocks is an assumption about the representation or the target's approximability; geometric admissibility alone does not imply that a given matrix block has low rank. Near blocks remain dense and receive no low-rank guarantee.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-h2-nested-cluster-bases-and-interaction-lists",
+          "source_section": "Definition",
+          "quote": "In the H-matrix setting of [[def-hlr-and-h2-block-matrix-representations]], an **H² representation** assigns a row basis $U_\\tau\\in\\mathbb F^{\\tau\\times r_\\tau}$ to every row cluster $\\tau$ and a column basis $V_\\sigma\\in\\mathbb F^{\\sigma\\times s_\\sigma}$ to every column cluster $\\sigma$, with $0\\le r_\\tau,s_\\sigma\\le k$. For every internal row cluster $\\tau$ with children $\\tau_1,\\tau_2$, it stores transfer matrices $E^U_{\\tau_i}\\in\\mathbb F^{r_{\\tau_i}\\times r_\\tau}$ satisfying\n\n$$U_\\tau|_{\\tau_i}=U_{\\tau_i}E^U_{\\tau_i}\\qquad(i=1,2).$$\n\nFor every internal column cluster $\\sigma$ with children $\\sigma_1,\\sigma_2$, it stores transfer matrices $E^V_{\\sigma_j}\\in\\mathbb F^{s_{\\sigma_j}\\times s_\\sigma}$ satisfying $V_\\sigma|_{\\sigma_j}=V_{\\sigma_j}E^V_{\\sigma_j}$. These identities are the **nested-basis conditions**. An admissible block leaf $(\\tau,\\sigma)$ is represented by $U_\\tau S_{\\tau\\sigma}V_\\sigma^*$ with coupling matrix $S_{\\tau\\sigma}\\in\\mathbb F^{r_\\tau\\times s_\\sigma}$; near block leaves remain dense.\n\nLet $\\mathcal P_{\\rm far}$ denote the admissible leaves of the block-cluster partition. The row interaction list of $\\tau$ is $\\mathcal L_U(\\tau)=\\{\\sigma:(\\tau,\\sigma)\\in\\mathcal P_{\\rm far}\\}$, and the column interaction list of $\\sigma$ is $\\mathcal L_V(\\sigma)=\\{\\tau:(\\tau,\\sigma)\\in\\mathcal P_{\\rm far}\\}$. An H² representation may impose a bound on these list lengths or on their total count; any complexity theorem must state which bound it uses.\n\n**Storage convention:** Store the basis arrays explicitly only at leaf clusters. Store each internal cluster's child-to-parent transfer matrices; the basis of an internal cluster is reconstructed recursively from its children and these transfers.",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-hlr-block-matvec",
+          "source_section": "Definition",
+          "quote": "**Input:** An H-matrix representation $\\widetilde A$ on a finite block-cluster partition $\\mathcal P$ as in [[def-hlr-and-h2-block-matrix-representations]], and a vector $x\\in\\mathbb F^J$.\n\n**Procedure:** Initialize $y\\in\\mathbb F^I$ to zero. For every far block $b=(\\tau,\\sigma)$ with factors $U_b,V_b$, compute $z_b=V_b^*x|_\\sigma$ and add $U_bz_b$ to $y|_\\tau$. For every near block with dense entries $D_b$, compute $D_bx|_\\sigma$ and add it to $y|_\\tau$. Return $y$. All arithmetic is exact; contributions to a row cluster are summed over its block leaves.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-h2-matrix-vector-multiplication",
+          "source_section": "Definition",
+          "quote": "**Input:** An H² representation $\\widetilde A$ with row bases $U_\\tau$, column bases $V_\\sigma$, transfer matrices from [[def-h2-nested-cluster-bases-and-interaction-lists]], and a vector $x\\in\\mathbb F^J$.\n\n**Procedure:**\n\n1. Initialize an upward coefficient vector $z_\\sigma$ for each column cluster. At each leaf $\\sigma$, set $z_\\sigma=V_\\sigma^*x|_\\sigma$. At each internal cluster $\\sigma$ with children $\\sigma_1,\\sigma_2$, set $z_\\sigma=\\sum_{j=1}^2(E^V_{\\sigma_j})^*z_{\\sigma_j}$.\n2. Initialize a downward coefficient vector $w_\\tau=0$ for each row cluster and an output vector $y=0$. For each admissible leaf $(\\tau,\\sigma)$, add $S_{\\tau\\sigma}z_\\sigma$ to $w_\\tau$. For each near leaf $(\\tau,\\sigma)$, add $D_{\\tau\\sigma}x|_\\sigma$ to $y|_\\tau$.\n3. Traverse the row tree from root to leaves. For each parent $\\tau$ and child $\\tau_i$, add $E^U_{\\tau_i}w_\\tau$ to $w_{\\tau_i}$. At each row leaf $\\tau$, add $U_\\tau w_\\tau$ to $y|_\\tau$. Return $y$.\n\nThe upward and downward traversals follow the finite cluster trees; block and cluster contributions are accumulated in exact arithmetic.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $h=\\lceil\\log_2(n/k)\\rceil$. By [F1], each split descends one level in either the row tree or the column tree, whose depths are each at most $h$ by [F2]. Hence the block tree has depth at most $2h$. At each level, the first counting hypothesis bounds the total participating far-block side sizes by $2sn$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each far H block stores at most $k(|\\tau|+|\\sigma|)$ scalar factor entries. Summing over at most $2h+1$ levels gives $O(sk n(h+1))$ far storage. Every near block has both cluster sizes at most $k$ by [F1], so it stores at most $k^2$ entries; the second counting hypothesis bounds total near storage by $s\\lceil n/k\\rceil k^2=O(sk n)$ because $k\\le n$. This proves the H storage bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In [F5], a far-block product first multiplies an $r_b\\times|\\sigma|$ factor by $x|_\\sigma$ and then a $|\\tau|\\times r_b$ factor by the result, so it costs $O(k(|\\tau|+|\\sigma|))$. A near-block product costs $O(|\\tau||\\sigma|)\\le O(k^2)$. The same level and near-block counts used in step 2.1 therefore give H matvec work $O(sk n(h+1))=O(sk n\\log_2(2n/k))$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "By the storage convention in [F4], the leaf row and column bases require at most $2kn$ entries because the leaves partition $I$ and each basis rank is at most $k$. By [F2], each tree has $O(n/k)$ nodes, so all $k\\times k$ transfer matrices require $O(kn)$ entries. The third counting hypothesis gives $O(kn)$ entries for all coupling matrices, and step 2.1 bounds dense near blocks by $O(sk n)$. Thus H² storage is $O(sk n)$.",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The leaf basis products in [F5] cost $O(kn)$ because their index sets partition $I$ and $J$. Each transfer product costs at most $O(k^2)$ and there are $O(n/k)$ internal clusters by [F2]; each coupling product costs at most $O(k^2)$ and the third hypothesis bounds their number by $s\\lceil n/k\\rceil$. Dense near products cost $O(sk n)$ by step 2.1. Summing gives H² matvec work $O(sk n)$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This item has no zero or rank-zero boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item has no singleton or rank-one boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-hlr-approximate-factorization-residual-and-inverse-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-hlr-compress-exact-lu-factors",
+          "source_section": "Definition",
+          "quote": "**Input:** An exact factorization $A=LU$ of a square matrix $A\\in\\mathbb F^{n\\times n}$, with $L$ block lower triangular and $U$ block upper triangular on a common ordered cluster partition; a rank cap $k\\ge1$; and a local Frobenius tolerance for each admissible off-diagonal block of $L$ and $U$. The factorization $A=LU$ is supplied as a hypothesis, not computed by this procedure.\n\n**Procedure:** Copy every dense nearfield block and every diagonal block exactly. For each strictly lower admissible block of $L$ and each strictly upper admissible block of $U$, apply [[alg-hlr-core-svd-recompression-with-tolerance]] with effective cap $\\min(k,m_b,n_b)$, where $m_b\\times n_b$ are that block's dimensions, and its given local tolerance. Keep structural zero blocks zero. If any compression reports **tolerance-not-met**, return that status and the factor/block identity. Otherwise return $\\widehat L,\\widehat U$ and the local discarded-tail bounds $\\epsilon_b^L,\\epsilon_c^U$ reported by the recompressions. The exact diagonal blocks preserve block triangularity; no claim is made that the compressed factors are exact factors of $A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "source_section": "Statement",
+          "quote": "Let $M=\\sum_s U_sV_s^*$ be the finite matrix input to [[alg-hlr-core-svd-recompression-with-tolerance]], and let $k$ and $\\delta\\ge0$ be its rank cap and Frobenius tolerance. If the algorithm returns **success** with rank $q$, its returned matrix $\\widehat M$ has rank $q$ and satisfies $\\|M-\\widehat M\\|_F=(\\sum_{j>q}s_j(M)^2)^{1/2}\\le\\delta$. No lower-rank matrix meets the same tolerance. If the algorithm returns **tolerance-not-met**, no matrix of rank at most $k$ meets the tolerance.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hlr-blockwise-error-propagation",
+          "source_section": "Statement",
+          "quote": "For any finite matrix partition into disjoint blocks, if each local residual satisfies $\\|E_b\\|_F\\le\\delta_b$, then the assembled residual satisfies $\\|E\\|_F\\le(\\sum_b\\delta_b^2)^{1/2}$. In particular, let $A,B$ be conformable finite real or complex matrices, and let $\\widetilde A,\\widetilde B$ be approximations with $\\|A-\\widetilde A\\|_F\\le\\epsilon_A$ and $\\|B-\\widetilde B\\|_F\\le\\epsilon_B$. If a successful block addition or block product from [[alg-hlr-block-addition]] or [[alg-hlr-block-product]] returns $\\widehat S$ or $\\widehat C$, with disjoint output blocks $b$ and local Frobenius errors $e_b\\le\\delta_b$, put $\\delta=(\\sum_b\\delta_b^2)^{1/2}$. Then\n\n$$\\|A+B-\\widehat S\\|_F\\le\\epsilon_A+\\epsilon_B+\\delta,$$\n\nand\n\n$$\\|AB-\\widehat C\\|_F\\le\\epsilon_A\\|B\\|_F+\\|A\\|_F\\epsilon_B+\\epsilon_A\\epsilon_B+\\delta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-best-rank-k-frobenius-matrix-approximation",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, where $m,n\\ge1$, have a singular value decomposition\n$$ A=\\sum_{j=1}^{q}\\sigma_j u_jv_j^*,\\qquad \\sigma_1\\ge\\cdots\\ge\\sigma_q>0, $$\nwhere $q=\\operatorname{rank}(A)$. For an integer $k\\ge0$, put\n$$ A_k=\\sum_{j=1}^{\\min(k,q)}\\sigma_j u_jv_j^*, \\qquad \\delta_k^2=\\sum_{j=k+1}^{q}\\sigma_j^2 $$\nwith an empty sum equal to zero. Then $\\operatorname{rank}(A_k)\\le k$, $\\|A-A_k\\|_F=\\delta_k$, and every matrix $B$ with $\\operatorname{rank}(B)\\le k$ satisfies $\\|A-B\\|_F\\ge\\delta_k$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-invertible-matrices-correspond-to-linear-isomorphisms",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_n(F)$, let $L_A:M_{n\\times1}(F)\\to M_{n\\times1}(F)$ be\n$L_A(x)=Ax$. Then $A$ is invertible if and only if $L_A$ is a linear\nisomorphism.\n\nMore generally, if $T:V\\to W$ is a linear isomorphism between finite-dimensional\nspaces and $\\mathcal B,\\mathcal C$ are ordered bases, then\n$[T]_{\\mathcal B}^{\\mathcal C}$ is invertible and\n\n$$[T^{-1}]_{\\mathcal C}^{\\mathcal B}=([T]_{\\mathcal B}^{\\mathcal C})^{-1}.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The factor compression in [F1] copies every near and diagonal block and gives local discarded-tail errors on the disjoint admissible blocks. By [F2] these are the actual local Frobenius residuals, so [F3] gives $\\|L-\\widehat L\\|_F\\le\\epsilon_L$ and $\\|U-\\widehat U\\|_F\\le\\epsilon_U$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $A-\\widehat A=LU-\\widehat L\\widehat U=(L-\\widehat L)U+\\widehat L(U-\\widehat U)$. For conformable $X,Y$, entrywise Cauchy–Schwarz [F5] gives $|(XY)_{ij}|^2\\le(\\sum_\\ell|X_{i\\ell}|^2)(\\sum_\\ell|Y_{\\ell j}|^2)$; summing over $i,j$ gives $\\|XY\\|_F^2\\le\\|X\\|_F^2\\|Y\\|_F^2$. Also $\\|X+Y\\|_F^2=\\|X\\|_F^2+\\|Y\\|_F^2+2\\operatorname{Re}\\langle X,Y\\rangle_F\\le(\\|X\\|_F+\\|Y\\|_F)^2$ by [F4,F5], so the Frobenius triangle inequality follows. Together with step 1.1 this yields $\\|A-\\widehat A\\|_F\\le\\epsilon_L\\|U\\|_F+\\|\\widehat L\\|_F\\epsilon_U=\\eta$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any matrix $R$, [F7] gives $\\|R\\|_2=\\sigma_1(R)$, while [F8] at rank cap zero gives $\\|R\\|_F=(\\sum_j\\sigma_j(R)^2)^{1/2}$. Hence $\\|R\\|_2\\le\\|R\\|_F$. Applying this to $R=A-\\widehat A$ and using step 2.1 proves $\\|A-\\widehat A\\|_2\\le\\eta$.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $E=\\widehat A-A$ and $q=\\|A^{-1}\\|_2\\eta<1$. For every $x$, the operator-norm definition [F6] gives $\\|A^{-1}Ex\\|_2\\le\\|A^{-1}\\|_2\\|E\\|_2\\|x\\|_2\\le q\\|x\\|_2$ by step 3.1. If $\\widehat A x=0$, then $x=-A^{-1}Ex$, so $\\|x\\|_2\\le q\\|x\\|_2$ and therefore $x=0$. Thus $\\widehat A$ is injective. By [F9], its image has dimension $n$; [F10] makes that image all of $\\mathbb F^n$, so its multiplication map is an isomorphism and [F11] gives invertibility.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F9",
+            "F10",
+            "F11",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Set $F=A^{-1}E$. The definition [F6] gives $\\|F\\|_2\\le q$ by the same estimate as in step 4.1. Since $\\widehat A=A(I+F)$ is invertible, so is $I+F$. For $z=(I+F)^{-1}y$, the vector triangle inequality from [F5] gives $\\|z\\|_2\\le\\|y\\|_2+\\|Fz\\|_2\\le\\|y\\|_2+q\\|z\\|_2$, hence $\\|(I+F)^{-1}\\|_2\\le(1-q)^{-1}$. Since $\\widehat A^{-1}=(I+F)^{-1}A^{-1}$ and $(I+F)^{-1}-I=-(I+F)^{-1}F$, operator-norm submultiplicativity follows from [F6] and gives $\\|\\widehat A^{-1}-A^{-1}\\|_2\\le q\\|A^{-1}\\|_2/(1-q)=\\|A^{-1}\\|_2^2\\eta/(1-q)$.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles the zero or rank-zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item has no singleton or rank-one boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "ex-hlr-accumulated-truncation-can-destroy-positive-definiteness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-hlr-core-svd-recompression-with-tolerance",
+          "source_section": "Definition",
+          "quote": "**Input:** A field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, positive integers $m,n$, a finite factor list $U_s\\in\\mathbb F^{m\\times r_s}$ and $V_s\\in\\mathbb F^{n\\times r_s}$ representing $M=\\sum_s U_sV_s^*$, a rank cap $0\\le k\\le\\min(m,n)$, and a Frobenius tolerance $\\delta\\ge0$. The conjugate transpose $M^*$ and Frobenius norm are those of [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\n**Procedure:** Concatenate the factors as $U=[U_1\\ \\cdots\\ U_p]$ and $V=[V_1\\ \\cdots\\ V_p]$, so $M=UV^*$. Take compact singular value decompositions $U=Q_UR_U$ and $V=Q_VR_V$, where the columns of $Q_U,Q_V$ are orthonormal and span the respective column spaces. Form the core $C=R_UR_V^*$ and compute an SVD $C=P\\Sigma Q^*$. Let its positive singular values be $s_1\\ge\\cdots\\ge s_t>0$. Find the smallest $q\\in\\{0,\\ldots,\\min(k,t)\\}$ for which $e_q:=(\\sum_{j>q}s_j^2)^{1/2}\\le\\delta$. If no such $q$ exists, return **tolerance-not-met**. Otherwise return **success** with factors $\\widehat U=Q_UP_{[:,1:q]}\\Sigma_q$ and $\\widehat V=Q_VQ_{[:,1:q]}$, where $\\Sigma_q=\\operatorname{diag}(s_1,\\ldots,s_q)$, and the exact discarded-tail certificate $e_q$; when $q=0$, use empty $m\\times0$ and $n\\times0$ factors.\n\nThe compact decompositions retain only positive singular directions. If the factor list is empty or its represented matrix is zero, then $t=0$ and the procedure returns the rank-zero representation because $\\delta\\ge0$. Any SVD choices in repeated singular subspaces are permitted. No result is returned when the requested cap cannot certify the tolerance.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "source_section": "Statement",
+          "quote": "Let $M=\\sum_s U_sV_s^*$ be the finite matrix input to [[alg-hlr-core-svd-recompression-with-tolerance]], and let $k$ and $\\delta\\ge0$ be its rank cap and Frobenius tolerance. If the algorithm returns **success** with rank $q$, its returned matrix $\\widehat M$ has rank $q$ and satisfies $\\|M-\\widehat M\\|_F=(\\sum_{j>q}s_j(M)^2)^{1/2}\\le\\delta$. No lower-rank matrix meets the same tolerance. If the algorithm returns **tolerance-not-met**, no matrix of rank at most $k$ meets the tolerance.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The exact sum is $A=\\operatorname{diag}(1,-1/50+3/50+3/50)=\\operatorname{diag}(1,1/10)$. For every nonzero $z=(z_1,z_2)^{\\mathsf T}$, $z^*Az=|z_1|^2+(1/10)|z_2|^2>0$, so $A$ is positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each $D_i$ has rank one and its only positive singular value is $3/50$, so its rank-zero discarded tail and Frobenius error are both $3/50=\\delta$ by [F3]. Thus [F1] accepts each update as zero, and [F2] gives its exact local error.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After both updates are replaced by zero, the sum is $M$. Its quadratic form at $e_2$ is $e_2^*Me_2=-1/50<0$, so it is not positive definite. The accumulated perturbation is $D_1+D_2=(3/25)e_2e_2^*$, whose action in this direction exceeds either local error; hence the two separate local tolerances do not preserve definiteness of the assembled sum.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the zero or rank-zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly handles the singleton or rank-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no inclusive threshold/equality boundary case in its stated hypotheses or argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [
+        "Exact arithmetic gives diag(1,-1/50)+2 diag(0,3/50)=diag(1,1/10), whose diagonal entries are positive.",
+        "Each rank-one update has sole singular value and Frobenius error 3/50; dropping both yields diag(1,-1/50), with e2 quadratic form -1/50."
+      ],
+      "kind": "example"
+    },
+    "ex-hlr-nearfield-block-requires-full-rank": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hlr-cluster-trees-and-geometric-admissibility",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a nonempty finite totally ordered set, let $d\\ge1$, and assign a point $\\xi_i\\in\\mathbb R^d$ to each $i\\in I$. A **cluster** is a nonempty subset of $I$. For a cluster $\\tau$, write $X_\\tau=\\{\\xi_i:i\\in\\tau\\}$, $\\operatorname{diam}(\\tau)=\\max_{i,j\\in\\tau}\\|\\xi_i-\\xi_j\\|_2$, and $\\operatorname{dist}(\\tau,\\sigma)=\\min_{i\\in\\tau,j\\in\\sigma}\\|\\xi_i-\\xi_j\\|_2$. These extrema exist because the index sets are finite and nonempty; repeated geometric points are allowed.\n\nA **balanced cluster tree with leaf threshold $b$**, where $1\\le b\\le |I|$, is the rooted binary tree whose root is $I$, whose children of an internal cluster $\\tau$ are its first $\\lfloor|\\tau|/2\\rfloor$ and last $\\lceil|\\tau|/2\\rceil$ indices in the fixed order, and which stops splitting at clusters of size at most $b$. Its two children are disjoint and their union is $\\tau$. Row and column index sets may have separate trees and separate point assignments.\n\nFix an admissibility parameter $\\eta>0$. A pair of clusters $(\\tau,\\sigma)$ is **admissible** when $\\operatorname{dist}(\\tau,\\sigma)>0$ and $\\operatorname{dist}(\\tau,\\sigma)\\ge\\eta\\max(\\operatorname{diam}(\\tau),\\operatorname{diam}(\\sigma))$. The strict positive-distance condition keeps coincident or intersecting clusters in the near field, including diagonal singleton blocks.\n\nThe **block-cluster tree** starts at $(I,J)$. It stops at a pair if that pair is admissible or if both clusters are leaves. Otherwise it splits a nonleaf cluster of larger cardinality; ties are resolved by splitting the row cluster. The children of a split are the corresponding child-cluster pairs. Its terminal pairs are called **block-cluster leaves**. Admissible leaves are **far blocks**; nonadmissible leaves, which have two leaf clusters, are **near blocks**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hlr-and-h2-block-matrix-representations",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $I,J$ be nonempty finite index sets with point assignments as in [[def-hlr-cluster-trees-and-geometric-admissibility]], and let $\\mathcal P$ be the block-cluster leaves of [[lem-hlr-block-cluster-leaves-partition-index-pairs]]. Fix an integer rank cap $k\\ge1$. An **H-matrix representation with cap $k$** assigns to each far block $b=(\\tau,\\sigma)\\in\\mathcal P$ factors $U_b\\in\\mathbb F^{\\tau\\times r_b}$ and $V_b\\in\\mathbb F^{\\sigma\\times r_b}$ with $0\\le r_b\\le k$, representing that block by $U_bV_b^*$. Each near block is stored as its full dense matrix $D_b\\in\\mathbb F^{\\tau\\times\\sigma}$. Since $\\mathcal P$ partitions $I\\times J$, these blocks determine a unique represented matrix $\\widetilde A\\in\\mathbb F^{I\\times J}$.\n\nThe rank cap on far blocks is an assumption about the representation or the target's approximability; geometric admissibility alone does not imply that a given matrix block has low rank. Near blocks remain dense and receive no low-rank guarantee.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-eckart-young-best-rank-k-approximation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, let\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nbe a singular value decomposition with $s_1\\ge\\cdots\\ge s_r>0$, and fix an\ninteger $k$ with $0\\le k<\\dim V$. Define\n\n$$T_kv:=\\sum_{j=1}^{\\min(k,r)} s_j\\langle v,e_j\\rangle f_j.$$\n\nThen $\\operatorname{rank}T_k\\le k$, one has\n\n$$\\lVert T-T_k\\rVert=s_{k+1}$$\n\nwith the convention $s_{k+1}=0$ when $k\\ge r$, and every linear map\n$A:V\\to W$ with $\\operatorname{rank}A\\le k$ satisfies\n\n$$\\lVert T-A\\rVert\\ge s_{k+1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\operatorname{dist}(\\tau,\\tau)=0$, $(\\tau,\\tau)$ is not admissible. The cluster has size $b$ and is a leaf, so its block pair is terminal and near by [F1]; [F2] therefore stores this block densely.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The singular values of $I_2$ are $1,1$. Applying [F3] with rank cap one shows $\\|I_2-B\\|_2\\ge1$ for every rank-at-most-one $B$, where [F4] identifies this norm as the maximum unit-vector stretch. Thus a rank-one far-block representation cannot meet any spectral error tolerance strictly below one.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly includes the zero or rank-zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the singleton or rank-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [
+        "The identity I2 has singular values 1,1, so every rank-at-most-one approximation has spectral error at least 1."
+      ],
+      "kind": "example"
+    },
+    "ex-hlr-separated-cauchy-block": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hlr-separated-cauchy-block-rank-bound",
+          "source_section": "Statement",
+          "quote": "Let $0\\le a<b$, $c\\ge0$, and choose $m,n\\ge1$ points $x_i\\in[0,a]$ and $y_j\\in[b,b+c]$. Put $q=a/b<1$ and define the Cauchy block $K_{ij}=1/(y_j-x_i)$. For any integer $r\\ge1$, the matrix $\\widetilde K$ with entries $\\widetilde K_{ij}=\\sum_{\\ell=0}^{r-1}x_i^\\ell y_j^{-(\\ell+1)}$ has rank at most $r$ and satisfies $|K_{ij}-\\widetilde K_{ij}|\\le q^r/(b-a)$ and $\\|K-\\widetilde K\\|_F\\le\\sqrt{mn}\\,q^r/(b-a)$. If $b-a\\ge\\eta\\max(a,c)$ and the H-matrix rank cap satisfies $k\\ge r$, the sampled clusters are admissible and $\\widetilde K$ is a permitted rank-at-most-$k$ far-block representation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The exact block is $K=\\begin{pmatrix}1/2&1/3\\\\1&1/2\\end{pmatrix}$. The rank-one approximation is $\\widetilde K=\\begin{pmatrix}1/2&1/3\\\\1/2&1/3\\end{pmatrix}=(1,1)^{\\mathsf T}(1/2,1/3)$, so its rank is one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The residual is $K-\\widetilde K=\\begin{pmatrix}0&0\\\\1/2&1/6\\end{pmatrix}$, hence $\\|K-\\widetilde K\\|_F=\\sqrt{1/4+1/36}=\\sqrt{10}/6\\le1=\\sqrt{2\\cdot2}\\,(1/2)/(2-1)$ by [F2]. This attains the stated finite block bound at the entry $(2,1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes finite nonempty index sets, positive dimensions, or a nonempty finite tree; empty objects are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly includes the zero or rank-zero boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the singleton or rank-one boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item has no degenerate or repeated-data case case in its stated hypotheses or argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the inclusive threshold/equality boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses explicit finite recursions, finite-dimensional decompositions, or named finite witnesses and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as an equivalence."
+        }
+      ],
+      "source_locators": "Börm–Grasedyck–Hackbusch, MiS Lecture Note 21 and Hiptmair, AdvNumCSE lecture document; exact sections are listed in batch-16.coverage.json.",
+      "finite_checks": [
+        "K=[[1/2,1/3],[1,1/2]], Khat=[[1/2,1/3],[1/2,1/3]], residual=[[0,0],[1/2,1/6]], and ||K-Khat||F=sqrt(10)/6<=1."
+      ],
+      "kind": "example"
+    },
+    "lem-hlr-bottom-up-recompression-error-bound": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-hlr-core-svd-recompression-with-tolerance",
+          "source_section": "Definition",
+          "quote": "**Input:** A field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, positive integers $m,n$, a finite factor list $U_s\\in\\mathbb F^{m\\times r_s}$ and $V_s\\in\\mathbb F^{n\\times r_s}$ representing $M=\\sum_s U_sV_s^*$, a rank cap $0\\le k\\le\\min(m,n)$, and a Frobenius tolerance $\\delta\\ge0$. The conjugate transpose $M^*$ and Frobenius norm are those of [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\n**Procedure:** Concatenate the factors as $U=[U_1\\ \\cdots\\ U_p]$ and $V=[V_1\\ \\cdots\\ V_p]$, so $M=UV^*$. Take compact singular value decompositions $U=Q_UR_U$ and $V=Q_VR_V$, where the columns of $Q_U,Q_V$ are orthonormal and span the respective column spaces. Form the core $C=R_UR_V^*$ and compute an SVD $C=P\\Sigma Q^*$. Let its positive singular values be $s_1\\ge\\cdots\\ge s_t>0$. Find the smallest $q\\in\\{0,\\ldots,\\min(k,t)\\}$ for which $e_q:=(\\sum_{j>q}s_j^2)^{1/2}\\le\\delta$. If no such $q$ exists, return **tolerance-not-met**. Otherwise return **success** with factors $\\widehat U=Q_UP_{[:,1:q]}\\Sigma_q$ and $\\widehat V=Q_VQ_{[:,1:q]}$, where $\\Sigma_q=\\operatorname{diag}(s_1,\\ldots,s_q)$, and the exact discarded-tail certificate $e_q$; when $q=0$, use empty $m\\times0$ and $n\\times0$ factors.\n\nThe compact decompositions retain only positive singular directions. If the factor list is empty or its represented matrix is zero, then $t=0$ and the procedure returns the rank-zero representation because $\\delta\\ge0$. Any SVD choices in repeated singular subspaces are permitted. No result is returned when the requested cap cannot certify the tolerance.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "source_section": "Statement",
+          "quote": "Let $M=\\sum_s U_sV_s^*$ be the finite matrix input to [[alg-hlr-core-svd-recompression-with-tolerance]], and let $k$ and $\\delta\\ge0$ be its rank cap and Frobenius tolerance. If the algorithm returns **success** with rank $q$, its returned matrix $\\widehat M$ has rank $q$ and satisfies $\\|M-\\widehat M\\|_F=(\\sum_{j>q}s_j(M)^2)^{1/2}\\le\\delta$. No lower-rank matrix meets the same tolerance. If the algorithm returns **tolerance-not-met**, no matrix of rank at most $k$ meets the tolerance.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At a leaf $v$, the routine compresses its exact contribution $M_v$; by [F1] and [F2], $\\|M_v-\\widehat M_v\\|_F=\\rho_v=e_v\\le\\theta_v$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $v$ is internal with children $v_1,v_2$. Their exact targets add to $M_v$, and their returned approximations add to the matrix $Z_v$ supplied to the core-SVD call. The Frobenius triangle inequality from [F3,F4] gives $\\|M_v-Z_v\\|_F\\le e_{v_1}+e_{v_2}$. By [F1,F2], $\\|Z_v-\\widehat M_v\\|_F=\\rho_v$, hence $\\|M_v-\\widehat M_v\\|_F\\le e_{v_1}+e_{v_2}+\\rho_v=e_v$. Step 1.1 is the leaf base case; induction over the finite tree proves the root error bound. The recurrence for $e_v$ gives $e_{\\rm root}=\\sum_{v\\in T}\\rho_v\\le\\sum_{v\\in T}\\theta_v\\le\\delta_b$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition applies only to its declared admissible finite structure or nonempty geometric domain; it asserts no extension to absent input structures."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition: The Statement admits zero node tolerances and zero discarded tails, a single-leaf tree, both scalar fields and locally clipped rank caps. Its error assertion is conditional on successful calls; tolerance-not-met makes no global infeasibility claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: The Statement admits zero node tolerances and zero discarded tails, a single-leaf tree, both scalar fields and locally clipped rank caps. Its error assertion is conditional on successful calls; tolerance-not-met makes no global infeasibility claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: The Statement admits zero node tolerances and zero discarded tails, a single-leaf tree, both scalar fields and locally clipped rank caps. Its error assertion is conditional on successful calls; tolerance-not-met makes no global infeasibility claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition: The Statement admits zero node tolerances and zero discarded tails, a single-leaf tree, both scalar fields and locally clipped rank caps. Its error assertion is conditional on successful calls; tolerance-not-met makes no global infeasibility claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition: The Statement admits zero node tolerances and zero discarded tails, a single-leaf tree, both scalar fields and locally clipped rank caps. Its error assertion is conditional on successful calls; tolerance-not-met makes no global infeasibility claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This prerequisite states an admissible definition or one-way property/estimate, without an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This prerequisite states an admissible definition or one-way property/estimate, without an iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "root metadata integration after genuine assigned Codex source repair",
+        "notes": "Authoring/contract completeness only; actual repair evidence research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/scope16-algorithm-property-separation.md. No independent mathematical review or native creation/review coverage is supplied."
+      }
+    }
+  }
+}

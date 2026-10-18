@@ -1,0 +1,14 @@
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
+import {spawnSync} from 'node:child_process';
+import {splitFrontmatter,sourceSectionText} from '../../tools/facts-block.mjs';
+const run='numerical-analysis-remaining-71-2026-10-17',b=`research/${run}-owner-planning-integration`,archive=`${b}/gaussian-cycle4-display-before`,id='lem-normalized-complex-rangefinder-direct-spectral-expectation',p=`items/${id}.md`,mf=`research/${run}-batch-11.pages.json`,ct=`research/${run}-batch-11.proof-contracts.json`;
+if(existsSync(archive))throw Error('already formatted');
+const raw=readFileSync(p,'utf8'),next=raw.replace(/\$\$([\s\S]*?)\$\$/g,(full,math)=>{if(/(?<!\\)%/.test(math))throw Error('TeX comment');return '$$'+math.replace(/\r?\n/g,' ').trim()+'$$';});
+if(raw.replace(/\s/g,'')!==next.replace(/\s/g,''))throw Error('mathematical token change');
+const before=f=>{const d=`${archive}/${f}`;mkdirSync(d.slice(0,d.lastIndexOf('/')),{recursive:true});writeFileSync(d,readFileSync(f),{flag:'wx'});};
+const pages=JSON.parse(readFileSync(mf,'utf8'));const item=pages.flatMap(x=>x.items).find(x=>x.id===id);if(!item)throw Error('not owned');
+for(const f of [p,mf,ct])before(f);
+writeFileSync(p,next);item.statement=sourceSectionText(splitFrontmatter(next).body,'Statement').trim();writeFileSync(mf,JSON.stringify(pages,null,2)+'\n');
+const contracts=JSON.parse(readFileSync(ct,'utf8')),ids=Object.keys(contracts.contracts).filter(x=>x===id||(contracts.contracts[x].citations??[]).some(c=>c.source===id));
+const result=spawnSync(process.execPath,['tools/regen-contract-entries.mjs',ct,...ids],{encoding:'utf8'});if(result.status!==0)throw Error(result.stdout+result.stderr);
+writeFileSync(`${b}/gaussian-cycle4-display-reconciliation.json`,JSON.stringify({run,at:new Date().toISOString(),archive,item:id,non_whitespace_tokens_identical:true,operation:'Joined only source line breaks inside three existing display math spans; no mathematical change',manifest_mirrored:true,regenerated:ids,regen_output:result.stdout,native_gate_credit:false},null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({changed_item:id,contracts:ids}));

@@ -1,0 +1,266 @@
+{
+  "group": "c",
+  "batches": [
+    "7"
+  ],
+  "pages_read": [
+    "certified-geometric-predicates",
+    "certified-geometric-predicates-examples"
+  ],
+  "items_read": [
+    "def-certified-geometric-predicate-determinants",
+    "alg-interval-geometric-predicate-filter",
+    "alg-symbolic-geometric-determinant-tie-break",
+    "lem-dyadic-determinant-integer-clearance-preserves-sign",
+    "lem-leibniz-determinant-forward-error-bound",
+    "lem-two-and-three-by-three-nonsingular-dyadic-system-solvable",
+    "alg-exact-dyadic-determinant-sign",
+    "alg-floating-filter-for-geometric-determinants",
+    "lem-nondegenerate-dyadic-simplex-determines-unique-sphere",
+    "thm-interval-geometric-predicate-filter-sound",
+    "lem-lifted-determinant-sign-matches-sphere-side",
+    "thm-floating-filter-sign-is-exact",
+    "alg-certified-dyadic-geometric-predicate",
+    "thm-symbolic-geometric-determinant-tie-break-consistent",
+    "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+    "ex-uncertain-coordinate-interval-with-ambiguous-sign",
+    "ex-nearly-cocircular-sites-certified-incircle",
+    "ex-nearly-collinear-triangle-certified-orientation"
+  ],
+  "conventions": [
+    {
+      "convention": "Coordinates are exact dyadic rationals. Orientation rows are (p_i,1); lifted rows are (p_i, squared norm,1), in the displayed point order. Ordinary predicates preserve exact zero.",
+      "fixed_by": "def-certified-geometric-predicate-determinants",
+      "matters_for": [
+        "alg-exact-dyadic-determinant-sign",
+        "alg-certified-dyadic-geometric-predicate",
+        "lem-lifted-determinant-sign-matches-sphere-side",
+        "ex-nearly-cocircular-sites-certified-incircle",
+        "ex-nearly-collinear-triangle-certified-orientation"
+      ]
+    },
+    {
+      "convention": "For a nonzero base orientation O_d, the normalized sphere-side sign is sign(O_d L_d): positive inside, zero on, negative outside. A zero base orientation permits only the raw lifted sign.",
+      "fixed_by": "def-certified-geometric-predicate-determinants",
+      "matters_for": [
+        "lem-lifted-determinant-sign-matches-sphere-side",
+        "alg-certified-dyadic-geometric-predicate",
+        "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+        "ex-nearly-cocircular-sites-certified-incircle"
+      ]
+    },
+    {
+      "convention": "Interval coordinates retain their uncertainty. The interval filter certifies a uniform raw determinant sign only when its finite enclosure excludes zero; otherwise it returns indeterminate without midpoint substitution or exact-point fallback.",
+      "fixed_by": "alg-interval-geometric-predicate-filter",
+      "matters_for": [
+        "thm-interval-geometric-predicate-filter-sound",
+        "ex-uncertain-coordinate-interval-with-ambiguous-sign"
+      ]
+    },
+    {
+      "convention": "The floating determinant uses lexicographic permutation order, s−1 left-to-right multiplications per term, exact sign changes, and s!−1 left-to-right additions. Its relative-error bound requires zero or normal-range exact operation results and qu<1, where q=s+s!−2.",
+      "fixed_by": "lem-leibniz-determinant-forward-error-bound",
+      "matters_for": [
+        "alg-floating-filter-for-geometric-determinants",
+        "thm-floating-filter-sign-is-exact",
+        "ex-nearly-cocircular-sites-certified-incircle",
+        "ex-nearly-collinear-triangle-certified-orientation"
+      ]
+    },
+    {
+      "convention": "Symbolic tie-breaking requires one finite point universe and stable integer IDs. Coordinate slots are ranked from zero by ID then coordinate index, and slot k receives ε^(3^k). This separately declared procedure does not replace ordinary exact zeros.",
+      "fixed_by": "alg-symbolic-geometric-determinant-tie-break",
+      "matters_for": [
+        "thm-symbolic-geometric-determinant-tie-break-consistent"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-certified-geometric-predicate-determinants",
+      "statement": "Orientation uses O_d=det((p_i,1)); the raw lifted predicate uses L_d=det((p_i, sum_j p_{i,j}^2,1)), for d∈{2,3}, with the stated row and column orders. For O_d≠0 the normalized side sign is sign(O_d L_d).",
+      "used_by": [
+        "alg-interval-geometric-predicate-filter",
+        "alg-symbolic-geometric-determinant-tie-break",
+        "lem-dyadic-determinant-integer-clearance-preserves-sign",
+        "lem-leibniz-determinant-forward-error-bound",
+        "lem-nondegenerate-dyadic-simplex-determines-unique-sphere",
+        "lem-lifted-determinant-sign-matches-sphere-side",
+        "alg-certified-dyadic-geometric-predicate"
+      ]
+    },
+    {
+      "id": "lem-leibniz-determinant-forward-error-bound",
+      "statement": "For an exactly represented s×s matrix, s≥2, the specified left-to-right Leibniz computation satisfies |D̂−det M|≤γ_q S, where q=s+s!−2, γ_q=qu/(1−qu), and S is the sum of absolute Leibniz products, provided every rounded operation has zero or normal-range exact result, satisfies the relative model with unit roundoff u, and qu<1.",
+      "used_by": [
+        "alg-floating-filter-for-geometric-determinants",
+        "thm-floating-filter-sign-is-exact",
+        "ex-nearly-cocircular-sites-certified-incircle",
+        "ex-nearly-collinear-triangle-certified-orientation"
+      ]
+    },
+    {
+      "id": "lem-dyadic-determinant-integer-clearance-preserves-sign",
+      "statement": "For every finite s×s matrix over dyadic rationals with s≥1, multiplying each row by a suitable positive power of two gives an integer matrix whose determinant has the same sign and is zero exactly when the original determinant is zero.",
+      "used_by": [
+        "alg-exact-dyadic-determinant-sign",
+        "thm-certified-dyadic-geometric-predicate-sound-and-terminates"
+      ]
+    },
+    {
+      "id": "lem-lifted-determinant-sign-matches-sphere-side",
+      "statement": "For d∈{2,3}, dyadic base points with O_d≠0 determine a unique sphere S(c,r). For q=p_{d+1}, L_d=−O_d(sum_j(q_j−c_j)^2−r^2). Consequently O_d L_d is positive inside, zero on, and negative outside.",
+      "used_by": [
+        "alg-certified-dyadic-geometric-predicate",
+        "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+        "thm-symbolic-geometric-determinant-tie-break-consistent",
+        "ex-nearly-cocircular-sites-certified-incircle"
+      ]
+    },
+    {
+      "id": "thm-floating-filter-sign-is-exact",
+      "statement": "Whenever alg-floating-filter-for-geometric-determinants returns positive or negative, the exact determinant has that same sign. An inconclusive or nonfinite result carries no sign claim.",
+      "used_by": [
+        "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+        "ex-nearly-cocircular-sites-certified-incircle",
+        "ex-nearly-collinear-triangle-certified-orientation"
+      ]
+    },
+    {
+      "id": "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+      "statement": "For every finite encoded dyadic point tuple and every orientation or lifted determinant request in alg-certified-dyadic-geometric-predicate, the returned raw sign equals the exact determinant sign, including zero, and the procedure terminates. A nondegenerate sphere-side result agrees with the orientation-normalized convention.",
+      "used_by": [
+        "ex-nearly-cocircular-sites-certified-incircle",
+        "ex-nearly-collinear-triangle-certified-orientation",
+        "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination"
+      ]
+    },
+    {
+      "id": "thm-symbolic-geometric-determinant-tie-break-consistent",
+      "statement": "For a finite set of uniquely indexed dyadic points and predicate tuples with pairwise distinct IDs, every orientation, incircle and insphere determinant after the shared perturbation is a nonzero polynomial. Its first nonzero coefficient gives its sign for sufficiently small positive ε; one value works simultaneously for the finite predicate family, and originally nonzero signs are preserved.",
+      "used_by": [
+        "alg-symbolic-geometric-determinant-tie-break"
+      ]
+    },
+    {
+      "id": "thm-interval-geometric-predicate-filter-sound",
+      "statement": "Any positive or negative result returned by alg-interval-geometric-predicate-filter is the exact determinant sign for every admissible tuple represented by the coordinate intervals. An indeterminate result makes no uniform-sign claim.",
+      "used_by": [
+        "ex-uncertain-coordinate-interval-with-ambiguous-sign"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-complete-ordered-real-field",
+      "used_for": "Real coefficient order, field arithmetic, squared-distance comparisons and finite positive thresholds.",
+      "opened": true
+    },
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "used_for": "Exact dyadic representation, representability, exponent ranges, spacing and directed endpoint rounding.",
+      "opened": true
+    },
+    {
+      "id": "def-intervals-rectangles-and-complex-balls",
+      "used_for": "Finite closed coordinate intervals and expression DAG semantics.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Operationwise relative error, exact-zero rule and exclusion of underflow and overflow.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Absolute matrix entries in the outward absolute-term-sum computation.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Multiplicative absolute value and coefficient bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Finite-sum bounds in floating error analysis and perturbation-tail estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-nonnegative-square-root-exists-and-unique",
+      "used_for": "Existence and uniqueness of the nonnegative circumradius.",
+      "opened": true
+    },
+    {
+      "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+      "used_for": "Upward error-radius enclosure and exact representable endpoint conversion.",
+      "opened": true
+    },
+    {
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "used_for": "Interval determinant evaluation and the outward absolute-term-sum computation.",
+      "opened": true
+    },
+    {
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "used_for": "Uniform determinant enclosure and S≤U for finite outward computations.",
+      "opened": true
+    },
+    {
+      "id": "alg-dyadic-square-root-bisection",
+      "used_for": "Checking the square-root procedure underlying the published outward-operation supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-dyadic-square-root-bisection-encloses",
+      "used_for": "Checking enclosure and monotonicity used by the published DAG-soundness supplier.",
+      "opened": true
+    },
+    {
+      "id": "lem-real-and-complex-modulus-rules",
+      "used_for": "Checking modulus bounds in the published outward-operation soundness proof.",
+      "opened": true
+    },
+    {
+      "id": "def-ordered-field",
+      "used_for": "Checking the ordered-field assumptions of the absolute-value suppliers.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-mult-neg",
+      "used_for": "Checking sign identities cited by the absolute-value supplier.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-sign-rules",
+      "used_for": "Checking product-sign rules cited by the absolute-value supplier.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-add-order",
+      "used_for": "Checking the strict order statements and their explicit nonstrict extension in the triangle-inequality supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-floating-filter-for-geometric-determinants",
+      "concern": "The introductory instructions say to set γ_q=qu/(1−qu) before checking whether qu≥1. At qu=1 that displayed assignment divides by zero. The intended early-return guard is clear, but the operational ordering should put the qu≥1 test before forming γ_q.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-nearly-cocircular-sites-certified-incircle",
+      "concern": "Verification step 1.2 says, “By [F6] its outward upper endpoint is U=S.” F6 proves enclosure, which gives only U≥S; exact representability of the final S alone does not establish exact intermediate arithmetic. The missing justification closes here: exact rational enumeration confirms that every partial product and absolute-term partial sum needs at most 107 significant binary bits, so the specified 113-bit computation is exact under the stated range assumption.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "delaunay-triangulations-and-voronoi-computation",
+      "to": "certified-geometric-predicates",
+      "faithful": true,
+      "note": "Checked downstream determinant conventions, weighted power-sphere identity, lexicographic height perturbation, 3D cavity algorithm and termination theorem against the batch suppliers. Row/column order and normalized side signs agree. Ordinary orientation uses the certified exact predicate; formal weighted coefficients use integer determinant signs. The downstream height-only perturbation is separately declared and proved, without claiming it is the coordinate perturbation supplied here. Exact raw zeros remain distinct from declared tie signs."
+    }
+  ]
+}

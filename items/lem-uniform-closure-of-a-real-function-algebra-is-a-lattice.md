@@ -13,7 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-02
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-published-stone-weierstrass-local-repairs/lem-uniform-closure-of-a-real-function-algebra-is-a-lattice.json
 sources:
   scraped: []
   references:
@@ -38,10 +38,11 @@ If $A\subseteq C(K,\mathbb R)$ is a unital real function algebra and $\overline 
 
 **Proof technique:** direct.
 
-1.1 Choose $a_n\in A$ converging uniformly to $u$. Their ranges, together with that of $u$, lie in one bounded interval. [given, choose]
+1.1 The closure $\overline A$ is a real subalgebra. Indeed, fix $w,z\in\overline A$, real $\alpha,\beta$, and a target error $\eta>0$. For each $\delta>0$ there are two witnesses $a,b\in A$ with $\|a-w\|_\infty<\delta$ and $\|b-z\|_\infty<\delta$. Then $\alpha a+\beta b,ab\in A$, and   $$\|\alpha a+\beta b-(\alpha w+\beta z)\|_\infty\le(|\alpha|+|\beta|)\delta,\qquad \|ab-wz\|_\infty\le\delta(\|w\|_\infty+\|z\|_\infty+\delta).$$ Choose $0<\delta<\min\{1,\eta/(1+|\alpha|+|\beta|+\|w\|_\infty+\|z\|_\infty)\}$ to make both errors less than $\eta$. Constants already belong to $A$. This proves the asserted algebra closure using only finitely many witnesses for each target error. [given, L1, algebra]
 
-1.2 By [L2], choose polynomials $p_j$ with $p_j(0)=0$ converging uniformly to $|t|$ on that interval. Then $p_j(a_n)\in A$ by [L1]. [L1, L2, choose]
 
-2.1 A diagonal choice of $j,n$ makes $p_j(a_n)$ uniformly converge to $|u|$, so $|u|\in\overline A$. [step 1.1, step 1.2, algebra]
+1.2 Fix $\eta>0$ and put $M=\|u\|_\infty+1$. Choose one $a\in A$ with $\|a-u\|_\infty<\min\{1,\eta/3\}$. Then $|a(x)|\le M$ on $K$. By [L2], choose one real polynomial $p$ with $\sup_{|t|\le M}|p(t)-|t||<\eta/3$. Since $A$ is unital, $p(a)\in A$, including its constant term. The inequality $||r|-|s||\le|r-s|$ gives   $$\|p(a)-|u|\|_\infty\le\|p(a)-|a|\|_\infty+\||a|-|u|\|_\infty<2\eta/3<\eta.$$ Thus $|u|\in\overline A$ by the metric definition of closure. No sequence of approximants or diagonal choice is used. [given, L1, L2, algebra]
 
-3.1 The identities $u\vee v=(u+v+|u-v|)/2$ and $u\wedge v=(u+v-|u-v|)/2$ and [L1] give the remaining closure. [step 2.1, L1, algebra] ∎
+
+2.1 Step 1.1 puts $u-v$ and $u+v$ in $\overline A$, and step 1.2 applies to $u-v$. The identities $u\vee v=(u+v+|u-v|)/2$ and $u\wedge v=(u+v-|u-v|)/2$ therefore give the remaining closure. [step 1.1, step 1.2, algebra] ∎
+

@@ -1,0 +1,2469 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "48",
+  "level": 0,
+  "scheduling_input_sha256": "a9c2867eaa03cf0691cfe311c2db2df06f2bb75d230effbc8a099369ec33749c",
+  "scope": [
+    "def-nystrom-quadrature-and-finite-rank-operators",
+    "lem-finite-node-equation-reconstruction-equivalence",
+    "lem-continuous-kernel-integral-operator-is-compact-on-c",
+    "thm-collectively-compact-operator-stability-and-error",
+    "lem-half-order-singular-integral-exists",
+    "lem-half-order-kernel-translation-modulus-in-l1",
+    "thm-nystrom-operator-norm-perturbation-error",
+    "lem-midpoint-nystrom-collective-compactness-and-consistency",
+    "def-half-order-product-integration",
+    "lem-half-order-product-weights-closed-form",
+    "thm-midpoint-nystrom-smooth-solution-error",
+    "lem-half-order-product-integration-stability-and-consistency",
+    "thm-half-order-product-integration-fredholm-error",
+    "ex-gaussian-two-node-nystrom-exact-separable-equation",
+    "ex-near-resonant-midpoint-solution-error",
+    "cex-standard-midpoint-nystrom-not-operator-norm-convergent",
+    "ex-half-order-midpoint-order-loss"
+  ],
+  "contracts": {
+    "def-nystrom-quadrature-and-finite-rank-operators": {
+      "kind": "definition",
+      "risk": "low",
+      "proof_strategy": "direct",
+      "axiom_use": "No separate proof is required.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the fixed domain is [0,1], and the stated quadrature/product grid has at least one node or panel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero input functions and zero weights are permitted by the formulas and give the zero operator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the minimum index N or n=1 (where present) is admitted by the stated range."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the formulas do not require distinct nodes; repeated nodes or zero coefficients remain defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the closed interval includes 0 and 1, and endpoint nodes/functions are within the declared domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only the finite node list supplied in the input is used; no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-node-equation-reconstruction-equivalence": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No choice axiom is used beyond the stated supplier hypotheses.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-continuous-real-functions-on-a-compact-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space\n([[def-metric-compactness]]). Define\n\n$$C(K,\\mathbb{R}):=\\{\\,f\\in\\mathbb{R}^{K}:f:(K,d)\\to(\\mathbb{R},d_{\\mathbb{R}})\\text{ is continuous}\\,\\},$$\n\nwhere $\\mathbb{R}^{K}$ is the function space of [[def-function-space]] and\n$d_{\\mathbb{R}}(s,t)=|s-t|$ is the usual metric\n([[lem-real-line-is-a-metric-space]], [[def-metric-continuity]]).\n\nThis definition introduces the set of continuous functions only. Boundedness\nand the supremum metric are assertions to be proved, not clauses of the\ndefinition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $u$ solves $(I-F)u=f$, put $c_i:=u(y_i)$. Evaluating $u(x)-\\sum_j\\psi_j(x)u(y_j)=f(x)$ at $x=y_i$ gives $c_i-\\sum_j\\psi_j(y_i)c_j=f(y_i)$ for every $i$, which is exactly $Mc=b$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, if $Mc=b$, define $u(x):=f(x)+\\sum_j\\psi_j(x)c_j$. By [F1] this lies in $X$. The matrix equation gives $u(y_i)=f(y_i)+\\sum_j\\psi_j(y_i)c_j=c_i$ for each $i$, so $u=f+Fu$ and it solves $(I-F)u=f$. These constructions are inverse because each reconstructed function has the prescribed grid values.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $Mc=0$ and $c\\ne0$, set $v(x):=\\sum_j\\psi_j(x)c_j$. The homogeneous matrix equations imply $v(y_i)=c_i$; hence $v\\ne0$ and $Fv=v$. Thus a nonzero matrix kernel gives a nonzero kernel of $I-F$. Conversely, if $(I-F)v=0$ and $v\\ne0$, then $c_i:=v(y_i)$ satisfies $Mc=0$; if $c=0$, the formula $v=Fv=\\sum_j\\psi_jv(y_j)$ would give $v=0$, a contradiction. Therefore the two kernels are simultaneously trivial. By [F2] this is equivalent to $M$ being nonsingular; [step 2.1] then gives bijective solvability of the reconstructed equation exactly when the matrix is nonsingular.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed estimates and linear equations remain valid when the relevant residual or input is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one case is a separate assertion in this operator theorem/example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate-parameter branch; its stated hypotheses are used without division by a degenerate quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is an abstract operator statement and has no variable endpoint branch beyond the fixed domain in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses only the listed finite choices or algebraic facts and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: A function solution yields its grid vector by evaluation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: A grid vector reconstructs a function solution."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-continuous-kernel-integral-operator-is-compact-on-c": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Assume Countable Choice and Dependent Choice, exactly as required by the cited real Arzelà–Ascoli theorem; no full Axiom of Choice is used in this item.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linearity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. $f + g$ is integrable on $[a,b]$ and\n   $\\int_a^b (f+g) = \\int_a^b f + \\int_a^b g$;\n2. for every real $\\lambda$, $\\lambda f$ is integrable on $[a,b]$ and\n   $\\int_a^b \\lambda f = \\lambda \\int_a^b f$;\n3. consequently, for all reals $\\lambda, \\mu$ the function $\\lambda f + \\mu g$ is\n   integrable and\n   $$\\int_a^b(\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f \\;+\\; \\mu\\int_a^b g ;$$\n4. the same identity holds with oriented limits: if $u, v \\in [a,b]$ and $f, g$\n   are integrable between $u$ and $v$ ([[def-oriented-integral]]), then\n   $\\int_u^v(\\lambda f + \\mu g) = \\lambda\\int_u^v f + \\mu\\int_u^v g$.\n\n**Linearity of the integral is not linearity of the Darboux sums**, and the\nproof of claim 1 has to squeeze rather than compute. On a subinterval the\ninequality $\\sup(f+g) \\le \\sup f + \\sup g$ can be strict — take $f(x) = x$ and\n$g(x) = -x$ on $[0,1]$, where the left side is $0$ and the right side is $1$ —\nso $U(f+g,P)$ is in general strictly below $U(f,P) + U(g,P)$ and no identity\nbetween upper sums is available. Claim 2, by contrast, is an identity at the\nlevel of the sums, with the roles of $\\sup$ and $\\inf$ exchanged when\n$\\lambda < 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-uniform-integral-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $u,v\\in\\mathbb{R}$, and let $f$ and $g$ be integrable between $u$ and $v$.\nIf $\\eta\\ge0$ and\n\n$$|f(x)-g(x)|\\le\\eta$$\n\nthroughout the closed interval with endpoints $u$ and $v$, then\n\n$$\\left|\\int_u^v f-\\int_u^v g\\right|\\le \\eta\\,|v-u|.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-arzela-ascoli-for-real-ck",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice ([[def-countable-choice]]) and the Axiom of Dependent Choice ([[def-dependent-choice]]).** Let $K$ be a nonempty compact metric space and $\\mathcal F\\subseteq C(K,\\mathbb R)$. Its closure in the supremum metric is compact if and only if $\\mathcal F$ is equicontinuous and pointwise bounded.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space. Every member of\n$C(K,\\mathbb{R})$ is bounded, so the supremum metric\n\n$$d_\\infty(f,g):=\\sup_{x\\in K}|f(x)-g(x)|$$\n\nis defined on $C(K,\\mathbb{R})$. With this metric,\n$C(K,\\mathbb{R})$ is complete.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F6], $M$ is finite. For each $u\\in X$ and $x\\in[0,1]$, the function $y\\mapsto k(x,y)u(y)$ is continuous, so its Riemann integral exists by [F1]. Linearity [F2] makes $K$ linear. Since $|k(x,y)u(y)|\\le M\\|u\\|_\\infty$, [F3] applied against the zero function gives $|Ku(x)|\\le M\\|u\\|_\\infty$; hence $K$ is bounded.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x,x'\\in[0,1]$, [F3] applied to the two continuous integrands gives $|Ku(x)-Ku(x')|\\le\\sup_{y\\in[0,1]}|k(x,y)-k(x',y)|\\,\\|u\\|_\\infty\\le\\omega(|x-x'|)\\|u\\|_\\infty.$ By [F4], $\\omega(\\delta)\\to0$ as $\\delta\\downarrow0$, so $Ku$ is continuous and $K$ maps $X$ into $X$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $u$ in the closed unit ball, step 1.1 gives $\\|Ku\\|_\\infty\\le M$, while step 2.1 gives the common equicontinuity modulus $\\omega$. Thus the image of the unit ball is pointwise bounded and equicontinuous.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [A1] and [F5], the image of the unit ball has compact closure in the supremum metric. Since $X$ is complete by [F6], this is compact as a subset of $X$; [F7] therefore makes $K$ compact.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed estimates and linear equations remain valid when the relevant residual or input is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one case is a separate assertion in this operator theorem/example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate-parameter branch; its stated hypotheses are used without division by a degenerate quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is an abstract operator statement and has no variable endpoint branch beyond the fixed domain in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC supplies Countable Choice and Dependent Choice only for the Arzelà–Ascoli compactness conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-collectively-compact-operator-stability-and-error": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "AC is used to obtain Countable Choice and Dependent Choice for the compact-subsequence argument, to choose near-minimizing unit vectors, and in the Fredholm alternative for I-K and I-K_n.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "source_section": "Statement",
+          "quote": "In ZF, assume the Axiom of Choice. Then the Axiom of Countable Choice holds.\nMoreover, if $R\\subseteq X\\times X$ is a serial relation on a nonempty set\n$X$ and $a\\in X$, there is a sequence $(x_n)_{n\\in\\mathbb N}$ such that\n$x_0=a$ and $x_nRx_{n+1}$ for every $n$. Thus AC supplies the\nprescribed-initial-point form of Dependent Choice.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fredholm-alternative-for-identity-minus-compact",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a Banach space\nover a fixed field $F\\in\\{\\mathbb R,\\mathbb C\\}$, let $K:X\\to X$ be a compact operator\n([[def-compact-linear-operator]]) and put $A:=I-K$. Then:\n\n1. $A$ is injective if and only if it is surjective, and in that case $A$ is\n   boundedly invertible;\n2. for every $y\\in X$ the equation $Ax=y$ has a solution if and only if\n   $\\varphi(y)=0$ for every $\\varphi\\in\\ker A^*$, the transpose\n   $A^*=I-K^*$ acting on $X^*$\n   ([[def-transpose-of-a-bounded-operator]]);\n3. $\\ker A$ and the cokernel $X/\\operatorname{ran}A$\n   ([[def-quotient-vector-space-coset-notation]]) are finite dimensional with\n   equal dimensions over $F$ ([[def-dimension]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-metric-compactness-equivalences",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice ([[def-countable-choice]]) and the Axiom\nof Dependent Choice ([[def-dependent-choice]]).** Let $(X,d)$ be a metric space\n([[def-metric-space]]). Then the following five conditions are equivalent.\n\n- **(a)** $(X,d)$ is compact ([[def-metric-compactness]]).\n- **(b)** $(X,d)$ is countably compact ([[def-metric-compactness-variants]]).\n- **(c)** $(X,d)$ is limit point compact.\n- **(d)** $(X,d)$ is sequentially compact.\n- **(e)** $(X,d)$ is complete ([[def-complete-metric-space]]) and totally bounded\n  ([[def-totally-bounded]]).\n\n**The two hypotheses are not needed everywhere, and the statement should not be\nread as if they were.** Of the implications assembled below, all but two are\ntheorems of ZF. Dependent choice is used only for \"sequentially compact implies\ntotally bounded\" ([[thm-sequentially-compact-implies-totally-bounded]]), and\ncountable choice only for \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]). Each is an upper bound on\nthe cost of the proof given in this library and not a claim of necessity; the\nimplication-by-implication account is\n[[rem-compactness-choice-ledger-metric]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-compact-subset-is-closed-and-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $K \\subseteq X$ be a\ncompact subset ([[def-metric-compactness]]). Then $K$ is closed in $X$\n([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]).\n\nNo choice principle is used: both covers below are given by a rule, and the\nindexed form of [[lem-compactness-is-intrinsic]] returns indices rather than\nsets.\n\n**The converse is false in general.** A closed and bounded subset of an arbitrary\nmetric space need not be compact\n([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]); it is exactly\nin $\\mathbb{R}^n$ that the converse holds ([[thm-heine-borel-rn]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $K$ is compact and $I-K$ is injective, [F1] gives a bounded inverse $(I-K)^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "We claim there are $n_0$ and $c>0$ such that $\\|(I-K_n)x\\|\\ge c\\|x\\|$ for all $x\\in X$ and $n\\ge n_0$. Otherwise, for each integer $m\\ge1$, failure of the bound $c=1/m$ for all $n\\ge m$ gives an index $n_m\\ge m$ and a unit vector $x_m$ with $\\|(I-K_{n_m})x_m\\|<1/m$; [A1] permits choosing such a sequence. Then $x_m=(I-K_{n_m})x_m+K_{n_m}x_m.$ The sequence $(K_{n_m}x_m)$ lies in the compact closure of the union in the Statement, so [F2] gives a convergent subsequence, say $K_{n_{m_j}}x_{m_j}\\to y$. The displayed identity and $\\|(I-K_{n_{m_j}})x_{m_j}\\|\\to0$ imply $x_{m_j}\\to y$, hence $\\|y\\|=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], choose $M<\\infty$ bounding the norms of all vectors in the compact union closure. Every $K_n$ maps the unit ball into this closure, so [F5] gives $\\|K_n\\|\\le M$ for all $n$. Along the subsequence in step 1.2, $\\|K_{n_{m_j}}x_{m_j}-K_{n_{m_j}}y\\|\\le M\\|x_{m_j}-y\\|\\to0,$ while pointwise convergence for the fixed vector $y$ gives $K_{n_{m_j}}y\\to Ky$. Therefore the same sequence converges to both $y$ and $Ky$, so $Ky=y$. This contradicts injectivity of $I-K$ because $\\|y\\|=1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The contradiction in step 2.1 establishes the eventual lower bound claimed in step 1.2, so each $I-K_n$ is injective for $n\\ge n_0$. Its unit-ball image is contained in the compact closure from the Statement, so $K_n$ is compact by [F4]; applying [F1] to each $K_n$ makes $I-K_n$ surjective with bounded inverse. For $z=(I-K_n)x$, the same lower bound gives $\\|(I-K_n)^{-1}z\\|=\\|x\\|\\le c^{-1}\\|z\\|$, hence the inverse norms are uniformly at most $C:=c^{-1}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Subtracting the equations gives $(I-K_n)(u_n-u)=f_n-f+(K_n-K)u.$ Applying the inverse from step 3.1 and the triangle inequality yields the stated error estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed estimates and linear equations remain valid when the relevant residual or input is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one case is a separate assertion in this operator theorem/example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate-parameter branch; its stated hypotheses are used without division by a degenerate quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is an abstract operator statement and has no variable endpoint branch beyond the fixed domain in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is stated; step 2.1 uses it to select near-minimizing unit vectors, and the proof identifies every such use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-nystrom-operator-norm-perturbation-error": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "None. This branch assumes a bounded inverse and a norm bound, and uses only the Neumann series.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nystrom-quadrature-and-finite-rank-operators",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ be the real continuous functions on $[0,1]$\n([[def-continuous-real-functions-on-a-compact-metric-space]]) with the supremum\nnorm $\\|u\\|_\\infty:=\\sup_{0\\le x\\le1}|u(x)|$; this is a Banach space by\n[[thm-c-k-complete-in-the-sup-metric]]. Fix a continuous real kernel\n$k:[0,1]^2\\to\\mathbb R$. The integral $\\int_0^1$ below is the ordinary Riemann\nintegral, equivalently the Riemann–Stieltjes integral with integrator $y\\mapsto y$\n([[def-riemann-stieltjes-sum-and-integral]]). For $u\\in X$, define\n$$(Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy,\\qquad 0\\le x\\le1.$$\nThe integrand is continuous in $y$, so this integral exists by\n[[thm-continuous-implies-integrable]].\n\nA finite quadrature rule on $[0,1]$ consists of an integer $m\\ge1$, nodes\n$y_1,\\ldots,y_m\\in[0,1]$, and real weights $w_1,\\ldots,w_m$. It acts on a\nfunction $g$ defined at the nodes by\n$$Q(g):=\\sum_{j=1}^m w_jg(y_j).$$\nIts Nyström operator is the finite-sum rule\n$$(K_Q u)(x):=Q\\bigl(k(x,\\cdot)u(\\cdot)\\bigr)        =\\sum_{j=1}^m w_jk(x,y_j)u(y_j).$$\nIn particular, for the composite midpoint rule with $N\\ge1$ panels,\n$h:=1/N$, $y_j:=(j+\\tfrac12)h$ for $0\\le j<N$, and $w_j=h$, the operator\nis denoted $K_N$. The nodes and weights are those of\n[[alg-composite-midpoint-rule]].\n\nFor a right-hand side $f\\in X$, the Nyström equation is\n$$u_Q-K_Qu_Q=f.$$\nThis definition asserts neither consistency nor convergence of $K_Q$ to $K$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-node-equation-reconstruction-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ ([[def-continuous-real-functions-on-a-compact-metric-space]]),\nlet $m\\ge1$, let $y_1,\\ldots,y_m\\in[0,1]$, and let\n$\\psi_1,\\ldots,\\psi_m\\in X$. Define the finite-rank linear map\n$$ (Fu)(x):=\\sum_{j=1}^m\\psi_j(x)u(y_j) $$\nand, for $f\\in X$, define the square matrix and vector\n$$ M_{ij}:=\\delta_{ij}-\\psi_j(y_i),\\qquad b_i:=f(y_i),\\qquad 1\\le i,j\\le m. $$\nThen the solutions of $(I-F)u=f$ are in bijection with the solutions $c\\in\\mathbb R^m$\nof $Mc=b$, via\n$$u(x)=f(x)+\\sum_{j=1}^m\\psi_j(x)c_j,\\qquad c_i=u(y_i).$$\nThe nullspaces of $I-F$ and $M$ are linearly isomorphic by\n$c\\mapsto\\sum_j\\psi_jc_j$. In particular, $I-F$ is bijective if and only if\n$M$ is nonsingular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-neumann-series-and-small-perturbations-of-bounded-inverses",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be Banach spaces over the same scalar field\n([[def-banach-space]]).\n\n1. If $R\\in\\mathcal B(X)$ satisfies $\\|R\\|<1$\n   ([[def-bounded-linear-operator]], [[def-operator-norm]]), then $I-R$ is\n   invertible with inverse the operator-norm limit of the partial sums\n   $\\sum_{n<N}R^n$, the norm limit being taken in\n   $\\mathcal B(X)$ ([[def-space-of-bounded-linear-operators]]), and\n   $$\\Bigl\\|\\sum_{n=0}^{\\infty}R^n\\Bigr\\|\\le\\frac{1}{1-\\|R\\|}.$$\n2. If $A\\in\\mathcal B(X,Y)$ is invertible with $A^{-1}\\in\\mathcal B(Y,X)$ and\n   $E\\in\\mathcal B(X,Y)$ satisfies $\\|A^{-1}E\\|<1$, then $A+E$ is invertible\n   with $(A+E)^{-1}=\\bigl(I+A^{-1}E\\bigr)^{-1}A^{-1}\\in\\mathcal B(Y,X)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-composition-operator-norm-inequality",
+          "source_section": "Statement",
+          "quote": "Let $X$, $Y$, and $Z$ be normed spaces over the same scalar field. If\n$T \\in \\mathcal B(X,Y)$ and $S \\in \\mathcal B(Y,Z)$, then\n\n$$\\|ST\\| \\le \\|S\\|\\,\\|T\\|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A $\\mathbb K$-linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $K_Q-K$ is bounded by [F6], its norm $\\varepsilon$ is defined by [F4]. Put $E:=K-K_Q$; then $I-K_Q=A+E=A(I+A^{-1}E)$ and $\\|A^{-1}E\\|\\le\\|A^{-1}\\|\\|E\\|=R\\varepsilon=q<1$ by [F5]. Applying both parts of [F3], with $R_0:=-A^{-1}E$, gives invertibility and $\\|(I-K_Q)^{-1}\\|=\\|(I+A^{-1}E)^{-1}A^{-1}\\| \\le\\frac{R}{1-\\|A^{-1}E\\|}\\le\\frac{R}{1-q}.$ The coefficient functions $x\\mapsto w_jk(x,y_j)$ are continuous because $k$ is continuous, so [F2] applies and the associated finite system has the same unique solvability.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Subtracting $(I-K)u=f$ from $(I-K_Q)u_Q=f_Q$ in the form $(I-K_Q)(u_Q-u)=f_Q-f+(K_Q-K)u$ and applying the inverse from step 1.1 yields the stated error estimate by the triangle inequality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two displayed conclusions are exactly the inverse and solution bounds obtained in steps 1.1 and 2.1. This proof uses the norm hypothesis $\\varepsilon$ itself and asserts no norm convergence of the point-sampling operators.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed estimates and linear equations remain valid when the relevant residual or input is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one case is a separate assertion in this operator theorem/example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The strict condition q<1 excludes the singular boundary q=1; at q=0 the stated inverse bound reduces to R."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is an abstract operator statement and has no variable endpoint branch beyond the fixed domain in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses only the listed finite choices or algebraic facts and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-half-order-singular-integral-exists": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "None. The truncated integrals form a real Cauchy family, and the proof uses only real completeness.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-riemann-stieltjes-sum-and-integral",
+          "source_section": "Definition",
+          "quote": "Let $a<b$, let $f,\\alpha:[a,b]\\to\\mathbb R$, and let $P=(n,t)$ be a partition\n([[def-partition-and-refinement]]). A choice of tags\n$\\xi_i\\in[t_i,t_{i+1}]$ for $i<n$ makes $(P,\\xi)$ a tagged partition as in\n[[def-tagged-partition-and-riemann-sum]]. Its **Riemann-Stieltjes sum** is\n\n$$S(f,\\alpha;P,\\xi):=\\sum_{i<n}f(\\xi_i)\\bigl(\\alpha(t_{i+1})-\\alpha(t_i)\\bigr).$$\n\nThe function $f$ is **Riemann-Stieltjes integrable with respect to $\\alpha$** on\n$[a,b]$ if there is $I\\in\\mathbb R$ such that for every $\\varepsilon>0$ there is\n$\\delta>0$ for which every tagged partition with $\\|P\\|<\\delta$ satisfies\n$|S(f,\\alpha;P,\\xi)-I|<\\varepsilon$. Then\n$I=\\int_a^b f\\,d\\alpha$.\n\nIf $f$ is bounded ([[def-bounded-set]]) and $\\alpha$ is nondecreasing\n([[def-monotone-function]]), put\n\n$$m_i:=\\inf_{x\\in[t_i,t_{i+1}]}f(x),\\qquad M_i:=\\sup_{x\\in[t_i,t_{i+1}]}f(x),$$\n$$L_\\alpha(f,P):=\\sum_{i<n}m_i\\Delta_i\\alpha,\\qquad U_\\alpha(f,P):=\\sum_{i<n}M_i\\Delta_i\\alpha,$$\n\nwhere $\\Delta_i\\alpha=\\alpha(t_{i+1})-\\alpha(t_i)\\ge0$. These are the lower and\nupper Stieltjes sums. Each subinterval is nonempty and its image under bounded\n$f$ is bounded above and below, so the suprema exist by\n[[def-complete-ordered-field]] and the infima by [[def-infimum]] and\n[[thm-infimum-property]]. Finite sums use [[def-finite-sum]] and\n[[lem-finite-sum-laws]]. On $[a,a]$ the integral is $0$; for $b<a$ set\n$\\int_a^b f\\,d\\alpha=-\\int_b^a f\\,d\\alpha$, matching\n[[def-oriented-integral]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $\\alpha:[a,b]\\to\\mathbb R$ is continuous, differentiable on $(a,b)$, and its derivative extends to a continuous function $q:[a,b]\\to\\mathbb R$.\n\n1. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and continuous at $c$, then $A(x):=\\int_a^x f\\,d\\alpha$ is differentiable at $c$ and $A'(c)=f(c)q(c)$.\n2. If $f$ is Riemann integrable, $G:[a,b]\\to\\mathbb R$ is continuous and differentiable on $(a,b)$, and $G'(x)=f(x)q(x)$ there, then $\\int_a^b f\\,d\\alpha=G(b)-G(a)$.\n\nEndpoint derivatives in clause 1 are relative. Clause 2 does not divide by $q$ and remains valid where $q$ vanishes.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real\nnumber. Together with [[thm-reals-ordered-field]], this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. $f + g$ is integrable on $[a,b]$ and\n   $\\int_a^b (f+g) = \\int_a^b f + \\int_a^b g$;\n2. for every real $\\lambda$, $\\lambda f$ is integrable on $[a,b]$ and\n   $\\int_a^b \\lambda f = \\lambda \\int_a^b f$;\n3. consequently, for all reals $\\lambda, \\mu$ the function $\\lambda f + \\mu g$ is\n   integrable and\n   $$\\int_a^b(\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f \\;+\\; \\mu\\int_a^b g ;$$\n4. the same identity holds with oriented limits: if $u, v \\in [a,b]$ and $f, g$\n   are integrable between $u$ and $v$ ([[def-oriented-integral]]), then\n   $\\int_u^v(\\lambda f + \\mu g) = \\lambda\\int_u^v f + \\mu\\int_u^v g$.\n\n**Linearity of the integral is not linearity of the Darboux sums**, and the\nproof of claim 1 has to squeeze rather than compute. On a subinterval the\ninequality $\\sup(f+g) \\le \\sup f + \\sup g$ can be strict — take $f(x) = x$ and\n$g(x) = -x$ on $[0,1]$, where the left side is $0$ and the right side is $1$ —\nso $U(f+g,P)$ is in general strictly below $U(f,P) + U(g,P)$ and no identity\nbetween upper sums is available. Claim 2, by contrast, is an identity at the\nlevel of the sums, with the roles of $\\sup$ and $\\inf$ exchanged when\n$\\lambda < 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space. Every member of\n$C(K,\\mathbb{R})$ is bounded, so the supremum metric\n\n$$d_\\infty(f,g):=\\sup_{x\\in K}|f(x)-g(x)|$$\n\nis defined on $C(K,\\mathbb{R})$. With this metric,\n$C(K,\\mathbb{R})$ is complete.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F7], $M=\\|g\\|_\\infty$ is finite. The integrand $y\\mapsto |x-y|^{-1/2}g(y)$ is continuous on each closed interval in $[0,1]\\setminus(x-\\varepsilon,x+\\varepsilon)$, because that set stays away from $x$. Thus the truncated integrals are finite and defined by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $m\\ge2$, put $a_m:=S_{x,1/m}(g)$. By [F8], the difference $a_m-a_\\ell$ integrates only over the two annuli between the cutoffs $1/m$ and $1/\\ell$. On each annulus, $|g(y)|\\le M$; by [F2] and [F3], its absolute integral is bounded by $M\\int_{\\min(1/m,1/\\ell)}^{\\max(1/m,1/\\ell)}r^{-1/2}dr$. Adding at most two sides gives $|a_m-a_\\ell|\\le4M|m^{-1/2}-\\ell^{-1/2}|$, so $(a_m)$ is Cauchy and has a limit $L$ by [F5]. For any $\\varepsilon>0$, choose $m$ with $1/m<\\varepsilon$; comparing the two cutoffs gives $|S_{x,\\varepsilon}(g)-a_m|\\le4M\\sqrt\\varepsilon$. Letting $m\\to\\infty$ along such choices yields $|S_{x,\\varepsilon}(g)-L|\\le4M\\sqrt\\varepsilon$, so $S_{x,\\varepsilon}(g)\\to L$ as $\\varepsilon\\downarrow0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $\\varepsilon$, comparison on the left and right of $x$ with the positive function $r^{-1/2}$ gives $|S_{x,\\varepsilon}(g)|\\le M\\left(2\\sqrt{x}+2\\sqrt{1-x}\\right).$ Taking the limit from step 1.2 proves the same bound for $S_x(g)$. For $g=1$, the truncated integrals increase to the sum of the two endpoint integrals by [F8], so $S_x(1)=2\\sqrt{x}+2\\sqrt{1-x}$. Since $(2x-1)^2\\ge0$, we have $2\\sqrt{x(1-x)}\\le1$, and therefore $S_x(1)^2=4\\bigl(1+2\\sqrt{x(1-x)}\\bigr)\\le8$. Thus $S_x(1)\\le2\\sqrt2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each truncated functional is linear and nonnegative on nonnegative $g$; limits preserve those equalities and inequalities, so $S_x$ is linear and positive. Step 2.1 gives $|S_x(g)|\\le S_x(1)\\|g\\|_\\infty$, and the input $g=1$ attains equality, hence $\\|S_x\\|=S_x(1)$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed estimates and linear equations remain valid when the relevant residual or input is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one case is a separate assertion in this operator theorem/example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate-parameter branch; its stated hypotheses are used without division by a degenerate quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The formula for S_x(1) includes x=0 and x=1, where one of the two side integrals vanishes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses only the listed finite choices or algebraic facts and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-midpoint-nystrom-collective-compactness-and-consistency": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "AC supplies Countable Choice and Dependent Choice for the local continuous-kernel compactness lemma and the real Arzelà–Ascoli compactness step. The consistency estimate itself is choice-free.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "source_section": "Statement",
+          "quote": "In ZF, assume the Axiom of Choice. Then the Axiom of Countable Choice holds.\nMoreover, if $R\\subseteq X\\times X$ is a serial relation on a nonempty set\n$X$ and $a\\in X$, there is a sequence $(x_n)_{n\\in\\mathbb N}$ such that\n$x_0=a$ and $x_nRx_{n+1}$ for every $n$. Thus AC supplies the\nprescribed-initial-point form of Dependent Choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nystrom-quadrature-and-finite-rank-operators",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ be the real continuous functions on $[0,1]$\n([[def-continuous-real-functions-on-a-compact-metric-space]]) with the supremum\nnorm $\\|u\\|_\\infty:=\\sup_{0\\le x\\le1}|u(x)|$; this is a Banach space by\n[[thm-c-k-complete-in-the-sup-metric]]. Fix a continuous real kernel\n$k:[0,1]^2\\to\\mathbb R$. The integral $\\int_0^1$ below is the ordinary Riemann\nintegral, equivalently the Riemann–Stieltjes integral with integrator $y\\mapsto y$\n([[def-riemann-stieltjes-sum-and-integral]]). For $u\\in X$, define\n$$(Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy,\\qquad 0\\le x\\le1.$$\nThe integrand is continuous in $y$, so this integral exists by\n[[thm-continuous-implies-integrable]].\n\nA finite quadrature rule on $[0,1]$ consists of an integer $m\\ge1$, nodes\n$y_1,\\ldots,y_m\\in[0,1]$, and real weights $w_1,\\ldots,w_m$. It acts on a\nfunction $g$ defined at the nodes by\n$$Q(g):=\\sum_{j=1}^m w_jg(y_j).$$\nIts Nyström operator is the finite-sum rule\n$$(K_Q u)(x):=Q\\bigl(k(x,\\cdot)u(\\cdot)\\bigr)        =\\sum_{j=1}^m w_jk(x,y_j)u(y_j).$$\nIn particular, for the composite midpoint rule with $N\\ge1$ panels,\n$h:=1/N$, $y_j:=(j+\\tfrac12)h$ for $0\\le j<N$, and $w_j=h$, the operator\nis denoted $K_N$. The nodes and weights are those of\n[[alg-composite-midpoint-rule]].\n\nFor a right-hand side $f\\in X$, the Nyström equation is\n$$u_Q-K_Qu_Q=f.$$\nThis definition asserts neither consistency nor convergence of $K_Q$ to $K$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continuous-kernel-integral-operator-is-compact-on-c",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $X:=C([0,1],\\mathbb R)$ with\n$\\|u\\|_\\infty:=\\sup_{x\\in[0,1]}|u(x)|$\n([[def-continuous-real-functions-on-a-compact-metric-space]],\n[[thm-c-k-complete-in-the-sup-metric]]) and let\n$k:[0,1]^2\\to\\mathbb R$ be continuous. The map\n$$ (Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy $$\nuses the ordinary Riemann integral of [[def-riemann-stieltjes-sum-and-integral]] and defines a bounded linear operator $K:X\\to X$, and it is compact\n([[def-compact-linear-operator]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-composite-midpoint-rule",
+          "source_section": "Definition",
+          "quote": "Input real endpoints $a,b$, an integer $n$, and a function $f$. If $a\\ge b$\nor $n<1$, return invalid-grid without evaluating $f$. For the remaining inputs,\nrequire a real-valued function $f:[a,b]\\to\\mathbb R$ evaluable at every point\nof $[a,b]$. Put $h=(b-a)/n$ and $m_j=a+(j+\\tfrac12)h$ for $0\\le j<n$. The\ncomposite midpoint rule returns\n\n$$Q_M(f;a,b,n):=h\\sum_{j<n} f(m_j).$$\n\nThe sum is the finite sum of [[def-finite-sum]]. The admissibility conditions\n$a<b$ and $n\\ge1$ ensure $h>0$ and all $m_j\\in(a+jh,a+(j+1)h)$. The rule is an\nexact-real formula; floating-point evaluation and summation error are separate\nfrom its quadrature error.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-arzela-ascoli-for-real-ck",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice ([[def-countable-choice]]) and the Axiom of Dependent Choice ([[def-dependent-choice]]).** Let $K$ be a nonempty compact metric space and $\\mathcal F\\subseteq C(K,\\mathbb R)$. Its closure in the supremum metric is compact if and only if $\\mathcal F$ is equicontinuous and pointwise bounded.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-uniform-integral-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $u,v\\in\\mathbb{R}$, and let $f$ and $g$ be integrable between $u$ and $v$.\nIf $\\eta\\ge0$ and\n\n$$|f(x)-g(x)|\\le\\eta$$\n\nthroughout the closed interval with endpoints $u$ and $v$, then\n\n$$\\left|\\int_u^v f-\\int_u^v g\\right|\\le \\eta\\,|v-u|.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space. Every member of\n$C(K,\\mathbb{R})$ is bounded, so the supremum metric\n\n$$d_\\infty(f,g):=\\sup_{x\\in K}|f(x)-g(x)|$$\n\nis defined on $C(K,\\mathbb{R})$. With this metric,\n$C(K,\\mathbb{R})$ is complete.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Compactness of $K$ is [F2], whose Countable Choice and Dependent Choice hypotheses follow from [A1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F7], $M=\\|k\\|_\\infty$ is finite. For $\\|u\\|_\\infty\\le1$, [F1] and [F3] give $|K_Nu(x)|\\le hNM=M$ for every $x$. For $x,x'\\in[0,1]$ they also give $|K_Nu(x)-K_Nu(x')|\\le\\sup_{y\\in[0,1]}|k(x,y)-k(x',y)|.$ Uniform continuity of $k$ on the square makes the right side a common modulus tending to zero as $|x-x'|\\to0$. Thus the union of all unit-ball images is pointwise bounded and equicontinuous.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5] and [A1], the closure of that union is compact, so $(K_N)$ is collectively compact.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $u\\in X$ and put $G_u(x,y):=k(x,y)u(y)$. By [F4], its uniform modulus in the $y$ variable, $\\omega_u(\\rho):=\\sup\\{|G_u(x,y)-G_u(x,y')|:x\\in[0,1],\\ |y-y'|\\le\\rho\\}$, tends to zero as $\\rho\\downarrow0$. On each midpoint panel $I_j=[jh,(j+1)h]$ with midpoint $m_j$, [F6] gives $\\left|hG_u(x,m_j)-\\int_{I_j}G_u(x,y)\\,dy\\right|\\le h\\,\\omega_u(h/2).$ Adding the $N$ panel bounds and using $Nh=1$ yields $\\|K_Nu-Ku\\|_\\infty\\le\\omega_u(h/2)\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed estimates and linear equations remain valid when the relevant residual or input is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The stated N or n range includes 1; the first-panel argument also covers the single-panel case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate-parameter branch; its stated hypotheses are used without division by a degenerate quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is an abstract operator statement and has no variable endpoint branch beyond the fixed domain in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC supplies Countable Choice and Dependent Choice only for the Arzelà–Ascoli compactness conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-midpoint-nystrom-smooth-solution-error": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "AC is used only through the collectively compact stability theorem and the Arzelà–Ascoli input establishing collective compactness; the fixed-solution quadrature estimate is choice-free.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nystrom-quadrature-and-finite-rank-operators",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ be the real continuous functions on $[0,1]$\n([[def-continuous-real-functions-on-a-compact-metric-space]]) with the supremum\nnorm $\\|u\\|_\\infty:=\\sup_{0\\le x\\le1}|u(x)|$; this is a Banach space by\n[[thm-c-k-complete-in-the-sup-metric]]. Fix a continuous real kernel\n$k:[0,1]^2\\to\\mathbb R$. The integral $\\int_0^1$ below is the ordinary Riemann\nintegral, equivalently the Riemann–Stieltjes integral with integrator $y\\mapsto y$\n([[def-riemann-stieltjes-sum-and-integral]]). For $u\\in X$, define\n$$(Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy,\\qquad 0\\le x\\le1.$$\nThe integrand is continuous in $y$, so this integral exists by\n[[thm-continuous-implies-integrable]].\n\nA finite quadrature rule on $[0,1]$ consists of an integer $m\\ge1$, nodes\n$y_1,\\ldots,y_m\\in[0,1]$, and real weights $w_1,\\ldots,w_m$. It acts on a\nfunction $g$ defined at the nodes by\n$$Q(g):=\\sum_{j=1}^m w_jg(y_j).$$\nIts Nyström operator is the finite-sum rule\n$$(K_Q u)(x):=Q\\bigl(k(x,\\cdot)u(\\cdot)\\bigr)        =\\sum_{j=1}^m w_jk(x,y_j)u(y_j).$$\nIn particular, for the composite midpoint rule with $N\\ge1$ panels,\n$h:=1/N$, $y_j:=(j+\\tfrac12)h$ for $0\\le j<N$, and $w_j=h$, the operator\nis denoted $K_N$. The nodes and weights are those of\n[[alg-composite-midpoint-rule]].\n\nFor a right-hand side $f\\in X$, the Nyström equation is\n$$u_Q-K_Qu_Q=f.$$\nThis definition asserts neither consistency nor convergence of $K_Q$ to $K$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-node-equation-reconstruction-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ ([[def-continuous-real-functions-on-a-compact-metric-space]]),\nlet $m\\ge1$, let $y_1,\\ldots,y_m\\in[0,1]$, and let\n$\\psi_1,\\ldots,\\psi_m\\in X$. Define the finite-rank linear map\n$$ (Fu)(x):=\\sum_{j=1}^m\\psi_j(x)u(y_j) $$\nand, for $f\\in X$, define the square matrix and vector\n$$ M_{ij}:=\\delta_{ij}-\\psi_j(y_i),\\qquad b_i:=f(y_i),\\qquad 1\\le i,j\\le m. $$\nThen the solutions of $(I-F)u=f$ are in bijection with the solutions $c\\in\\mathbb R^m$\nof $Mc=b$, via\n$$u(x)=f(x)+\\sum_{j=1}^m\\psi_j(x)c_j,\\qquad c_i=u(y_i).$$\nThe nullspaces of $I-F$ and $M$ are linearly isomorphic by\n$c\\mapsto\\sum_j\\psi_jc_j$. In particular, $I-F$ is bijective if and only if\n$M$ is nonsingular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-continuous-kernel-integral-operator-is-compact-on-c",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $X:=C([0,1],\\mathbb R)$ with\n$\\|u\\|_\\infty:=\\sup_{x\\in[0,1]}|u(x)|$\n([[def-continuous-real-functions-on-a-compact-metric-space]],\n[[thm-c-k-complete-in-the-sup-metric]]) and let\n$k:[0,1]^2\\to\\mathbb R$ be continuous. The map\n$$ (Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy $$\nuses the ordinary Riemann integral of [[def-riemann-stieltjes-sum-and-integral]] and defines a bounded linear operator $K:X\\to X$, and it is compact\n([[def-compact-linear-operator]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "source_section": "Statement",
+          "quote": "In ZF, assume the Axiom of Choice. Then the Axiom of Countable Choice holds.\nMoreover, if $R\\subseteq X\\times X$ is a serial relation on a nonempty set\n$X$ and $a\\in X$, there is a sequence $(x_n)_{n\\in\\mathbb N}$ such that\n$x_0=a$ and $x_nRx_{n+1}$ for every $n$. Thus AC supplies the\nprescribed-initial-point form of Dependent Choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-midpoint-nystrom-collective-compactness-and-consistency",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $k:[0,1]^2\\to\\mathbb R$ be continuous and let $K$ be its integral\noperator from [[def-nystrom-quadrature-and-finite-rank-operators]]. For each\n$N\\ge1$, let $K_N$ use the composite midpoint rule with $h=1/N$. Then $K$ is\ncompact, the family $(K_N)_{N\\ge1}$ is collectively compact (the union of the\nimages of the unit ball has compact closure in $X$), and\n$$\\|K_Nu-Ku\\|_\\infty\\longrightarrow0\\qquad\\text{for every }u\\in X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-collectively-compact-operator-stability-and-error",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X\\ne\\{0\\}$ be a Banach space ([[def-banach-space]]), let $K:X\\to X$\nbe compact, and let $(K_n)_{n\\ge1}$ be bounded linear operators such that\n$$\\overline{\\bigcup_{n\\ge1}K_n(B_X)}$$\nis compact for the closed unit ball $B_X:=\\{x\\in X:\\|x\\|\\le1\\}$ and\n$K_nx\\to Kx$ in norm for every $x\\in X$. Suppose $I-K$ is injective. Then\nthere are $n_0\\ge1$ and $C<\\infty$ such that $I-K_n$ is boundedly invertible\nfor every $n\\ge n_0$ and\n$$\\sup_{n\\ge n_0}\\|(I-K_n)^{-1}\\|\\le C.$$\nFor any $f,f_n\\in X$, if $u$ and $u_n$ solve $(I-K)u=f$ and\n$(I-K_n)u_n=f_n$, then for $n\\ge n_0$,\n$$\\|u_n-u\\|\\le C\\bigl(\\|(K_n-K)u\\|+\\|f_n-f\\|\\bigr).$$\nThe theorem does not assert that $\\|K_n-K\\|\\to0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-composite-midpoint-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $n\\ge1$ be an integer, and put $h=(b-a)/n$. If\n$f\\in C^2([a,b])$, define $M_2=\\max_{x\\in[a,b]}|f''(x)|$. The composite\nmidpoint value $Q_M(f;a,b,n)$ of [[alg-composite-midpoint-rule]] satisfies\n\n$$\\left|\\int_a^b f(x)\\,dx-Q_M(f;a,b,n)\\right|\\le\\frac{(b-a)h^2}{24}M_2.$$\n\nThe integral is the Riemann integral. This is an exact-arithmetic quadrature\nbound; evaluation and summation roundoff are not included.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], $K$ is compact; [F4] gives the required collective compactness and pointwise convergence; the Statement assumes $I-K$ injective. Thus [F5] supplies $N_0$ and a common bound $C$ for $(I-K_N)^{-1}$ for all $N\\ge N_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each fixed $x$, apply [F6] to the $C^2$ function $g_x(y)=k(x,y)u(y)$. The common derivative bound gives $|K_Nu(x)-Ku(x)|\\le h^2M_2/24$ for every $x$, hence $\\|K_Nu-Ku\\|_\\infty\\le h^2M_2/24$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function-equation inverse from step 1.1 and [F2] make the finite matrix nonsingular and define its unique reconstruction $u_N$. Subtracting the exact and discrete equations gives $(I-K_N)(u_N-u)=f_N-f+(K_N-K)u.$ Applying the inverse bound $C$ from step 1.1, then the triangle inequality and step 1.2, proves the stated estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed estimates and linear equations remain valid when the relevant residual or input is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one case is a separate assertion in this operator theorem/example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate-parameter branch; its stated hypotheses are used without division by a degenerate quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is an abstract operator statement and has no variable endpoint branch beyond the fixed domain in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is invoked only through the compactness and Fredholm-stability suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-half-order-product-integration": {
+      "kind": "definition",
+      "risk": "low",
+      "proof_strategy": "not-applicable",
+      "axiom_use": "No separate proof is required.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the fixed domain is [0,1], and the stated quadrature/product grid has at least one node or panel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero input functions and zero weights are permitted by the formulas and give the zero operator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the minimum index N or n=1 (where present) is admitted by the stated range."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the formulas do not require distinct nodes; repeated nodes or zero coefficients remain defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the closed interval includes 0 and 1, and endpoint nodes/functions are within the declared domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only the finite node list supplied in the input is used; no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-half-order-product-integration-stability-and-consistency": {
+      "kind": "lemma",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "AC is used only for the Arzelà–Ascoli compactness conclusions; the weight stability, translation modulus, consistency, and interpolation error bounds are choice-free.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "source_section": "Statement",
+          "quote": "In ZF, assume the Axiom of Choice. Then the Axiom of Countable Choice holds.\nMoreover, if $R\\subseteq X\\times X$ is a serial relation on a nonempty set\n$X$ and $a\\in X$, there is a sequence $(x_n)_{n\\in\\mathbb N}$ such that\n$x_0=a$ and $x_nRx_{n+1}$ for every $n$. Thus AC supplies the\nprescribed-initial-point form of Dependent Choice.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-half-order-product-integration",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ and let $a:[0,1]^2\\to\\mathbb R$ be continuous.\nUse $S_x$ from [[lem-half-order-singular-integral-exists]] to define\n$$(Ku)(x):=S_x\\bigl(y\\mapsto a(x,y)u(y)\\bigr).$$\nFor an integer $n\\ge1$, set $h:=1/n$ and $y_j:=jh$ for $j=0,\\ldots,n$.\nDefine the nonnegative piecewise-linear hat functions by\n$$\\phi_{n,0}(y):=\\max(1-y/h,0),\\qquad   \\phi_{n,n}(y):=\\max(1-(1-y)/h,0),$$\nand, for $1\\le j<n$,\n$$\\phi_{n,j}(y):=\\max(1-|y-y_j|/h,0).$$\nTheir piecewise-linear interpolant is\n$$I_ng:=\\sum_{j=0}^n g(y_j)\\phi_{n,j}.$$\nThe product weights and product-integration operator are\n$$w_{n,j}(x):=S_x(\\phi_{n,j}),\\qquad   (K_nu)(x):=\\sum_{j=0}^n w_{n,j}(x)a(x,y_j)u(y_j)   =S_x\\bigl(I_n(y\\mapsto a(x,y)u(y))\\bigr).$$\nThe kernel factor $s(x,y)=|x-y|^{-1/2}$ is integrated in the weights; the smooth\nfactor $a(x,y)u(y)$ is interpolated. This item defines the pointwise formulas;\nthe subsequent results on this page establish their mapping properties,\nstability, and error estimates.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-half-order-singular-integral-exists",
+          "source_section": "Statement",
+          "quote": "For $x\\in[0,1]$, $g\\in C([0,1],\\mathbb R)$, and $0<\\varepsilon<1$, let\n$$S_{x,\\varepsilon}(g):=\\int_{[0,1]\\setminus(x-\\varepsilon,x+\\varepsilon)}|x-y|^{-1/2}g(y)\\,dy,$$\nwhere the integral is the sum of the ordinary Riemann integrals on the at most\ntwo remaining closed intervals, and an empty interval contributes zero. The\nlimit\n$$S_x(g):=\\lim_{\\varepsilon\\downarrow0}S_{x,\\varepsilon}(g)$$\nexists. The map $S_x:C([0,1],\\mathbb R)\\to\\mathbb R$ is linear and positive, and its\noperator norm ([[def-operator-norm]]) is\n$$\\|S_x\\|=S_x(1)=2\\sqrt{x}+2\\sqrt{1-x}\\le2\\sqrt2.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-half-order-kernel-translation-modulus-in-l1",
+          "source_section": "Statement",
+          "quote": "Put $s(t):=|t|^{-1/2}$ for $t\\in[-1,1]\\setminus\\{0\\}$. For $x,x'\\in[0,1]$,\ndefine\n$$T(x,x'):=\\int_0^1|s(x-y)-s(x'-y)|\\,dy$$\nas an improper Riemann integral split at the distinct points among $x$ and\n$x'$; an endpoint value at a singular point is omitted. If $x=x'$, set\n$T(x,x)=0$. These improper integrals exist and are finite. The modulus\n$$\\tau(d):=\\sup\\{T(x,x'):x,x'\\in[0,1],\\ |x-x'|\\le d\\}$$\nis finite and satisfies $\\tau(d)\\to0$ as $d\\downarrow0$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-arzela-ascoli-for-real-ck",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice ([[def-countable-choice]]) and the Axiom of Dependent Choice ([[def-dependent-choice]]).** Let $K$ be a nonempty compact metric space and $\\mathcal F\\subseteq C(K,\\mathbb R)$. Its closure in the supremum metric is compact if and only if $\\mathcal F$ is equicontinuous and pointwise bounded.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-linear-interpolation-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and let $f$ be $C^2$ on an open interval containing $[a,b]$. Put\n$M:=\\sup_{t\\in[a,b]}|f''(t)|$, which is finite, and let $L$ be the unique affine\nfunction with $L(a)=f(a)$ and $L(b)=f(b)$. Then for every $x\\in[a,b]$,\n$$|f(x)-L(x)|\\le \\frac{M}{2}(x-a)(b-x).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space. Every member of\n$C(K,\\mathbb{R})$ is bounded, so the supremum metric\n\n$$d_\\infty(f,g):=\\sup_{x\\in K}|f(x)-g(x)|$$\n\nis defined on $C(K,\\mathbb{R})$. With this metric,\n$C(K,\\mathbb{R})$ is complete.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F7], $A=\\|a\\|_\\infty$ is finite. The hat functions in [F1] are nonnegative and on each panel the two adjacent hats add to $1$, while all other hats vanish. Hence $\\sum_{j=0}^n\\phi_{n,j}=1$ pointwise. Positivity and linearity in [F2] give $w_{n,j}(x)\\ge0$ and $\\sum_j|w_{n,j}(x)|=\\sum_jw_{n,j}(x)=S_x(1)=2\\sqrt{x}+2\\sqrt{1-x}\\le2\\sqrt2.$ The same bound shows $\\|K_nu\\|_\\infty\\le2\\sqrt2 A\\|u\\|_\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $d:=|x-x'|$, [F3] gives an upper bound $\\tau(d)$ for the improper kernel translation integral, with $\\tau(d)\\to0$ as $d\\downarrow0$.",
+          "step": "1.2",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $u$, [F4] makes $(x,y)\\mapsto g_x(y)$ uniformly continuous. By step 1.1 the hats are nonnegative and sum to $1$, so on a panel $[y_j,y_{j+1}]$, $I_ng_x(y)$ is a convex combination of the two endpoint values. Hence $\\|I_ng_x-g_x\\|_\\infty\\to0$ uniformly in $x$, and the operator bound in [F2] yields $\\|K_nu-Ku\\|_\\infty\\le2\\sqrt2\\|I_ng_x-g_x\\|_\\infty\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Write $g_x(y)=a(x,y)u(y)$. The identities in [F1], the translation bound in [F3], and the operator bound in [F2] show $|Ku(x)-Ku(x')|\\le A\\|u\\|_\\infty\\tau(d)+2\\sqrt2\\|u\\|_\\infty\\omega_a(d),$ where $\\tau(d)$ is the translation bound from step 1.2 and $\\omega_a(d):=\\sup_{|x-x'|\\le d,y}|a(x,y)-a(x',y)|\\to0$ by [F4]. Replacing $g_x$ by $I_ng_x$ gives the same bound for $K_nu$: by step 1.1 the interpolant is a convex combination of nodal values, so $\\|I_ng_x\\|_\\infty\\le\\|g_x\\|_\\infty$ and $\\|I_n(g_x-g_{x'})\\|_\\infty\\le\\|g_x-g_{x'}\\|_\\infty$. This proves that $K$ and all $K_n$ are continuous-valued maps, uniformly bounded on the unit ball and with one common equicontinuity modulus. By [F5] and [A1], $K$ is compact and $(K_n)$ is collectively compact.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each fixed $n,j$, take $a\\equiv1$ and $u=\\phi_{n,j}$ in the preceding continuity argument; then $K_nu(x)=w_{n,j}(x)$, so each weight function is continuous. Consequently the coefficient functions $x\\mapsto w_{n,j}(x)a(x,y_j)$ in the finite-node representation are continuous.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Under the $C^2$ extension hypothesis, [F6] bounds $\\|I_ng_x-g_x\\|_\\infty\\le M_2h^2/8$ uniformly in $x$. Applying [F2] gives $\\|K_nu-Ku\\|_\\infty\\le2\\sqrt2 M_2h^2/8=\\sqrt2 M_2h^2/4$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the fixed nonempty interval [0,1]; no empty-domain case is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The zero input is covered by the linearity and operator bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The mesh index n=1 is admissible and the two-hat partition and one-panel estimates remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If a is zero or M₂=0, the same weight and interpolation bounds remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The weight identity holds at both x=0 and x=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC supplies the choice hypotheses used for the Arzelà–Ascoli compactness conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves estimates and compactness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves estimates and compactness, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-half-order-product-integration-fredholm-error": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "AC supplies the compactness and Fredholm alternatives used for eventual discrete invertibility. The scalar singular weights and the O(h^2) interpolation residual are choice-free.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "source_section": "Statement",
+          "quote": "In ZF, assume the Axiom of Choice. Then the Axiom of Countable Choice holds.\nMoreover, if $R\\subseteq X\\times X$ is a serial relation on a nonempty set\n$X$ and $a\\in X$, there is a sequence $(x_n)_{n\\in\\mathbb N}$ such that\n$x_0=a$ and $x_nRx_{n+1}$ for every $n$. Thus AC supplies the\nprescribed-initial-point form of Dependent Choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-half-order-product-integration",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ and let $a:[0,1]^2\\to\\mathbb R$ be continuous.\nUse $S_x$ from [[lem-half-order-singular-integral-exists]] to define\n$$(Ku)(x):=S_x\\bigl(y\\mapsto a(x,y)u(y)\\bigr).$$\nFor an integer $n\\ge1$, set $h:=1/n$ and $y_j:=jh$ for $j=0,\\ldots,n$.\nDefine the nonnegative piecewise-linear hat functions by\n$$\\phi_{n,0}(y):=\\max(1-y/h,0),\\qquad   \\phi_{n,n}(y):=\\max(1-(1-y)/h,0),$$\nand, for $1\\le j<n$,\n$$\\phi_{n,j}(y):=\\max(1-|y-y_j|/h,0).$$\nTheir piecewise-linear interpolant is\n$$I_ng:=\\sum_{j=0}^n g(y_j)\\phi_{n,j}.$$\nThe product weights and product-integration operator are\n$$w_{n,j}(x):=S_x(\\phi_{n,j}),\\qquad   (K_nu)(x):=\\sum_{j=0}^n w_{n,j}(x)a(x,y_j)u(y_j)   =S_x\\bigl(I_n(y\\mapsto a(x,y)u(y))\\bigr).$$\nThe kernel factor $s(x,y)=|x-y|^{-1/2}$ is integrated in the weights; the smooth\nfactor $a(x,y)u(y)$ is interpolated. This item defines the pointwise formulas;\nthe subsequent results on this page establish their mapping properties,\nstability, and error estimates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-half-order-product-integration-stability-and-consistency",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $a:[0,1]^2\\to\\mathbb R$ be continuous. For $K$ and $K_n$\nfrom [[def-half-order-product-integration]], put $A:=\\|a\\|_\\infty$ and\n$h:=1/n$. Then both operators map $X=C([0,1],\\mathbb R)$ to itself, $K$ is\ncompact, and $(K_n)$ is collectively compact and converges pointwise in norm to\n$K$. Their product weights satisfy\n$$w_{n,j}(x)\\ge0,\\qquad \\sum_{j=0}^n|w_{n,j}(x)|  =2\\sqrt{x}+2\\sqrt{1-x}\\le2\\sqrt2$$\nfor every $x\\in[0,1]$. If each $g_x(y):=a(x,y)u(y)$ extends to a $C^2$\nfunction on a neighborhood of $[0,1]$ and\n$M_2:=\\sup_{x,y}|\\partial_y^2g_x(y)|<\\infty$, then\n$$\\|K_nu-Ku\\|_\\infty\\le\\frac{\\sqrt2}{4}M_2h^2.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-collectively-compact-operator-stability-and-error",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X\\ne\\{0\\}$ be a Banach space ([[def-banach-space]]), let $K:X\\to X$\nbe compact, and let $(K_n)_{n\\ge1}$ be bounded linear operators such that\n$$\\overline{\\bigcup_{n\\ge1}K_n(B_X)}$$\nis compact for the closed unit ball $B_X:=\\{x\\in X:\\|x\\|\\le1\\}$ and\n$K_nx\\to Kx$ in norm for every $x\\in X$. Suppose $I-K$ is injective. Then\nthere are $n_0\\ge1$ and $C<\\infty$ such that $I-K_n$ is boundedly invertible\nfor every $n\\ge n_0$ and\n$$\\sup_{n\\ge n_0}\\|(I-K_n)^{-1}\\|\\le C.$$\nFor any $f,f_n\\in X$, if $u$ and $u_n$ solve $(I-K)u=f$ and\n$(I-K_n)u_n=f_n$, then for $n\\ge n_0$,\n$$\\|u_n-u\\|\\le C\\bigl(\\|(K_n-K)u\\|+\\|f_n-f\\|\\bigr).$$\nThe theorem does not assert that $\\|K_n-K\\|\\to0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-node-equation-reconstruction-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ ([[def-continuous-real-functions-on-a-compact-metric-space]]),\nlet $m\\ge1$, let $y_1,\\ldots,y_m\\in[0,1]$, and let\n$\\psi_1,\\ldots,\\psi_m\\in X$. Define the finite-rank linear map\n$$ (Fu)(x):=\\sum_{j=1}^m\\psi_j(x)u(y_j) $$\nand, for $f\\in X$, define the square matrix and vector\n$$ M_{ij}:=\\delta_{ij}-\\psi_j(y_i),\\qquad b_i:=f(y_i),\\qquad 1\\le i,j\\le m. $$\nThen the solutions of $(I-F)u=f$ are in bijection with the solutions $c\\in\\mathbb R^m$\nof $Mc=b$, via\n$$u(x)=f(x)+\\sum_{j=1}^m\\psi_j(x)c_j,\\qquad c_i=u(y_i).$$\nThe nullspaces of $I-F$ and $M$ are linearly isomorphic by\n$c\\mapsto\\sum_j\\psi_jc_j$. In particular, $I-F$ is bijective if and only if\n$M$ is nonsingular.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $K$ is compact and $(K_n)$ is collectively compact and pointwise norm converges to $K$. With AC and the assumed injectivity of $I-K$, [F3] gives $n_0$ and $C$ such that $I-K_n$ is invertible and $\\|(I-K_n)^{-1}\\|\\le C$ for all $n\\ge n_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inverse in step 1.1 gives a unique solution to $(I-K_n)u_n=f_n$. By [F2] each coefficient function in [F1] is continuous, so [F4] applies: the finite grid matrix is nonsingular and its solution reconstructs exactly this $u_n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Subtracting $(I-K)u=f$ from $(I-K_n)u_n=f_n$ gives $(I-K_n)(u_n-u)=f_n-f+(K_n-K)u.$ Apply the inverse bound in [F3] and then the consistency bound in [F2]: $\\|u_n-u\\|_\\infty\\le C\\bigl(\\|f_n-f\\|_\\infty+\\|K_nu-Ku\\|_\\infty\\bigr) \\le C\\left(\\|f_n-f\\|_\\infty+\\frac{\\sqrt2}{4}M_2h^2\\right).$ This is the claimed error estimate.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The displayed estimates and linear equations remain valid when the relevant residual or input is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one case is a separate assertion in this operator theorem/example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Injectivity of I-K is an explicit hypothesis; the Fredholm alternative is applied only after it is verified."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is an abstract operator statement and has no variable endpoint branch beyond the fixed domain in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is an explicit hypothesis for Fredholm stability; the scalar weights and interpolation estimate are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-gaussian-two-node-nystrom-exact-separable-equation": {
+      "kind": "example",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is used only to identify the continuous Riemann integrals with the Lebesgue-measure integrals in the Gaussian exactness interface. The finite-rank algebra uses no choice.",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gauss-moment-data",
+          "source_section": "Definition",
+          "quote": "Let $a<b$ be real numbers, let $m\\ge1$ be an integer, and let\n$r\\in\\{2m-1,2m\\}$. A **Gaussian quadrature moment datum of order $r$** is a\nfinite positive measure $\\mu$ on the relative Borel sigma-algebra\n$\\mathcal B([a,b])$ ([[def-borel-sigma-algebra]], [[def-measure-space]],\n[[def-measure]], [[def-finite-sigma-finite-and-semifinite-measures]]) such that\n$\\mu([a,b])>0$, and whose **relative support**\n$$ S_\\mu:=\\{x\\in[a,b]:\\mu(U)>0\\text{ for every relatively open }U\\subseteq[a,b]\\text{ with }x\\in U\\} $$\ncontains at least $m+1$ distinct points. For every integer $0\\le k\\le r$,\nrequire $x\\mapsto |x|^k$ to be integrable with respect to $\\mu$\n([[def-integrable-real-and-complex-functions-and-their-integrals]]) and put\n$M_k:=\\int_{[a,b]}x^k\\,d\\mu(x)$. Powers use the natural-exponent\nrecursion of [[def-integer-power]], with $x^0=1$ for every real $x$, including\n$x=0$; thus $M_0$ is the integral of the constant function $1$.\n\nThe branch $r=2m-1$ supplies all moments used to construct the monic\ndegree-$m$ orthogonal polynomial and prove rule exactness. The stronger branch\n$r=2m$ also defines its squared norm and is used for the remainder formula.\nBecause $[a,b]$ is bounded and $\\mu$ is finite, these absolute-moment\nintegrability conditions follow from finiteness; they are stated to make the\ntwo moment interfaces explicit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gauss-quadrature-rule",
+          "source_section": "Definition",
+          "quote": "Let $(a,b,m,2m-1,\\mu)$ be moment data as in\n[[def-gauss-moment-data]]. Let $p_m$ be its monic degree-$m$ orthogonal\npolynomial and write its ordered roots as\n$a<x_1<\\cdots<x_m<b$, as established in\n[[thm-gauss-orthogonal-polynomial-has-simple-interior-zeros]]. For\n$i=1,\\ldots,m$, define the Lagrange cardinal polynomial\n$$ \\ell_i(X):=\\prod_{\\substack{1\\le j\\le m\\\\j\\ne i}}\\frac{X-x_j}{x_i-x_j} $$\nusing the convention of [[def-cardinal-polynomial-interpolation]]. Define\nthe **Gaussian quadrature weights** and the **m-node Gaussian rule** by\n$$ w_i:=\\int_{[a,b]}\\ell_i(x)\\,d\\mu(x),\\qquad Q_m(f):=\\sum_{i=1}^{m}w_i f(x_i) $$\nfor any real-valued function $f$ defined at the nodes. This definition\nasserts no accuracy; well-definedness of the nodes, cardinal polynomials,\nweights, and finite sum is proved in\n[[lem-gauss-quadrature-rule-data-well-defined]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+          "source_section": "Statement",
+          "quote": "Let $(a,b,m,2m-1,\\mu)$ be moment data as in\n[[def-gauss-moment-data]], and let $Q_m$ and $w_i$ be the rule and weights of\n[[def-gauss-quadrature-rule]]. For every real polynomial $f$ of degree at most\n$2m-1$,\n$$ \\int_{[a,b]} f(x)\\,d\\mu(x)=Q_m(f)=\\sum_{i=1}^{m}w_if(x_i). $$\nMoreover, $w_i>0$ for every $i$ and $\\sum_iw_i=\\mu([a,b])$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nystrom-quadrature-and-finite-rank-operators",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ be the real continuous functions on $[0,1]$\n([[def-continuous-real-functions-on-a-compact-metric-space]]) with the supremum\nnorm $\\|u\\|_\\infty:=\\sup_{0\\le x\\le1}|u(x)|$; this is a Banach space by\n[[thm-c-k-complete-in-the-sup-metric]]. Fix a continuous real kernel\n$k:[0,1]^2\\to\\mathbb R$. The integral $\\int_0^1$ below is the ordinary Riemann\nintegral, equivalently the Riemann–Stieltjes integral with integrator $y\\mapsto y$\n([[def-riemann-stieltjes-sum-and-integral]]). For $u\\in X$, define\n$$(Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy,\\qquad 0\\le x\\le1.$$\nThe integrand is continuous in $y$, so this integral exists by\n[[thm-continuous-implies-integrable]].\n\nA finite quadrature rule on $[0,1]$ consists of an integer $m\\ge1$, nodes\n$y_1,\\ldots,y_m\\in[0,1]$, and real weights $w_1,\\ldots,w_m$. It acts on a\nfunction $g$ defined at the nodes by\n$$Q(g):=\\sum_{j=1}^m w_jg(y_j).$$\nIts Nyström operator is the finite-sum rule\n$$(K_Q u)(x):=Q\\bigl(k(x,\\cdot)u(\\cdot)\\bigr)        =\\sum_{j=1}^m w_jk(x,y_j)u(y_j).$$\nIn particular, for the composite midpoint rule with $N\\ge1$ panels,\n$h:=1/N$, $y_j:=(j+\\tfrac12)h$ for $0\\le j<N$, and $w_j=h$, the operator\nis denoted $K_N$. The nodes and weights are those of\n[[alg-composite-midpoint-rule]].\n\nFor a right-hand side $f\\in X$, the Nyström equation is\n$$u_Q-K_Qu_Q=f.$$\nThis definition asserts neither consistency nor convergence of $K_Q$ to $K$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-node-equation-reconstruction-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ ([[def-continuous-real-functions-on-a-compact-metric-space]]),\nlet $m\\ge1$, let $y_1,\\ldots,y_m\\in[0,1]$, and let\n$\\psi_1,\\ldots,\\psi_m\\in X$. Define the finite-rank linear map\n$$ (Fu)(x):=\\sum_{j=1}^m\\psi_j(x)u(y_j) $$\nand, for $f\\in X$, define the square matrix and vector\n$$ M_{ij}:=\\delta_{ij}-\\psi_j(y_i),\\qquad b_i:=f(y_i),\\qquad 1\\le i,j\\le m. $$\nThen the solutions of $(I-F)u=f$ are in bijection with the solutions $c\\in\\mathbb R^m$\nof $Mc=b$, via\n$$u(x)=f(x)+\\sum_{j=1}^m\\psi_j(x)c_j,\\qquad c_i=u(y_i).$$\nThe nullspaces of $I-F$ and $M$ are linearly isomorphic by\n$c\\mapsto\\sum_j\\psi_jc_j$. In particular, $I-F$ is bijective if and only if\n$M$ is nonsingular.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $Ku(x)=\\alpha m_0+\\beta x m_1$, any solution is affine and has the form $u(x)=1+\\alpha m_0+\\beta x m_1$. Integrating this identity against $1$ and against $y$ gives $\\begin{pmatrix}1-\\alpha&-\\beta/2\\\\-\\alpha/2&1-\\beta/3\\end{pmatrix} \\begin{pmatrix}m_0\\\\m_1\\end{pmatrix} =\\begin{pmatrix}1\\\\1/2\\end{pmatrix}.$ At the specified parameters the determinant is $(3/4)(5/6)-(1/4)(1/8)=19/32\\ne0$, and solving gives $m_0=92/57$, $m_1=16/19$, hence $u(x)=(80+24x)/57$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $u$ is affine and $yu(y)$ is quadratic, so [F3] gives $Q_2(u)=m_0$ and $Q_2(yu)=m_1$. Substituting these two exact quadrature moments into the Nyström formula [F4] yields $1+\\alpha m_0+\\beta x m_1=u(x)$ for every $x$; thus the continuous solution is also a Nyström solution.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Any solution $v$ of the inhomogeneous two-node Nyström equation has the form $v(x)=1+\\alpha Q_2(v)+\\beta xQ_2(yv)$, hence is affine. Exactness [F3] then makes its two moments satisfy the same nonsingular system in step 1.1, so those moments and the reconstructed function are unique; step 2.1 supplies existence. A nonzero vector in the grid-matrix kernel would, by the nullspace correspondence [F5], give a nonzero homogeneous solution, which could be added to this solution and contradict uniqueness. Thus the grid matrix is nonsingular, and its reconstruction is the displayed solution.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero right-hand side or norm-one witness, so it asserts no zero-input case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is specifically a two-node Gaussian rule; it makes no one-node claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate-parameter branch; its stated hypotheses are used without division by a degenerate quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is an abstract operator statement and has no variable endpoint branch beyond the fixed domain in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Countable Choice is stated for the Riemann/Lebesgue integral interface; the finite-rank algebra is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-near-resonant-midpoint-solution-error": {
+      "kind": "example",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "None. All operators have rank one and all calculations are finite sums and elementary integrals.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nystrom-quadrature-and-finite-rank-operators",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ be the real continuous functions on $[0,1]$\n([[def-continuous-real-functions-on-a-compact-metric-space]]) with the supremum\nnorm $\\|u\\|_\\infty:=\\sup_{0\\le x\\le1}|u(x)|$; this is a Banach space by\n[[thm-c-k-complete-in-the-sup-metric]]. Fix a continuous real kernel\n$k:[0,1]^2\\to\\mathbb R$. The integral $\\int_0^1$ below is the ordinary Riemann\nintegral, equivalently the Riemann–Stieltjes integral with integrator $y\\mapsto y$\n([[def-riemann-stieltjes-sum-and-integral]]). For $u\\in X$, define\n$$(Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy,\\qquad 0\\le x\\le1.$$\nThe integrand is continuous in $y$, so this integral exists by\n[[thm-continuous-implies-integrable]].\n\nA finite quadrature rule on $[0,1]$ consists of an integer $m\\ge1$, nodes\n$y_1,\\ldots,y_m\\in[0,1]$, and real weights $w_1,\\ldots,w_m$. It acts on a\nfunction $g$ defined at the nodes by\n$$Q(g):=\\sum_{j=1}^m w_jg(y_j).$$\nIts Nyström operator is the finite-sum rule\n$$(K_Q u)(x):=Q\\bigl(k(x,\\cdot)u(\\cdot)\\bigr)        =\\sum_{j=1}^m w_jk(x,y_j)u(y_j).$$\nIn particular, for the composite midpoint rule with $N\\ge1$ panels,\n$h:=1/N$, $y_j:=(j+\\tfrac12)h$ for $0\\le j<N$, and $w_j=h$, the operator\nis denoted $K_N$. The nodes and weights are those of\n[[alg-composite-midpoint-rule]].\n\nFor a right-hand side $f\\in X$, the Nyström equation is\n$$u_Q-K_Qu_Q=f.$$\nThis definition asserts neither consistency nor convergence of $K_Q$ to $K$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-composite-midpoint-rule",
+          "source_section": "Definition",
+          "quote": "Input real endpoints $a,b$, an integer $n$, and a function $f$. If $a\\ge b$\nor $n<1$, return invalid-grid without evaluating $f$. For the remaining inputs,\nrequire a real-valued function $f:[a,b]\\to\\mathbb R$ evaluable at every point\nof $[a,b]$. Put $h=(b-a)/n$ and $m_j=a+(j+\\tfrac12)h$ for $0\\le j<n$. The\ncomposite midpoint rule returns\n\n$$Q_M(f;a,b,n):=h\\sum_{j<n} f(m_j).$$\n\nThe sum is the finite sum of [[def-finite-sum]]. The admissibility conditions\n$a<b$ and $n\\ge1$ ensure $h>0$ and all $m_j\\in(a+jh,a+(j+1)h)$. The rule is an\nexact-real formula; floating-point evaluation and summation error are separate\nfrom its quadrature error.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting $u=1+cx$ into $u=1+Ku$ gives $c=\\lambda(1/2+c/3)$, so $c(1-\\lambda/3)=\\lambda/2$. Since $1-\\lambda/3=\\delta>0$, the unique coefficient is $c=\\lambda/(2\\delta)$, proving the exact formula.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On each midpoint panel, direct integration gives $\\int_{jh}^{(j+1)h}y\\,dy=h(j+\\tfrac12)h$ and $\\int_{jh}^{(j+1)h}y^2\\,dy-h((j+\\tfrac12)h)^2=h^3/12.$ Summing the $N$ panels yields $Q_N(y)=1/2$ and $Q_N(y^2)=1/3-h^2/12$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Any discrete solution has the form $u_N(x)=1+c_Nx$ because the range of $K_N$ is contained in the span of $x$. Its coefficient satisfies $c_N=\\lambda(1/2+c_N(1/3-h^2/12))$, hence $c_N=\\lambda/(2(\\delta+\\lambda h^2/12))$; the denominator is positive, so the discrete solution is unique.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the direction $x$, $Kx=(\\lambda/3)x$, so $I-K$ scales that direction by $\\delta$. Also $K_Nx=\\lambda(1/3-h^2/12)x$, so $I-K_N$ scales it by $\\delta+\\lambda h^2/12$. Directly using the exact and discrete coefficients from steps 1.1 and 2.1 gives $\\|K_Nu-Ku\\|_\\infty=\\frac{\\lambda^2h^2}{24\\delta},\\qquad \\|u_N-u\\|_\\infty=\\frac{\\lambda^2h^2}{24\\delta(\\delta+\\lambda h^2/12)}.$ The ratio of solution error to quadrature residual is exactly $(\\delta+\\lambda h^2/12)^{-1}$, and the stated lower bound follows when $\\lambda h^2/12\\le\\delta$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero right-hand side or norm-one witness, so it asserts no zero-input case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The finite node or panel index is at its explicitly stated minimum, and the algebra remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The parameter satisfies 0<δ<1; the resonant endpoint δ=0 is excluded because the exact inverse would fail."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is an abstract operator statement and has no variable endpoint branch beyond the fixed domain in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The proof uses only the listed finite choices or algebraic facts and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-half-order-midpoint-order-loss": {
+      "kind": "example",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "None. The exact singular integral and all midpoint sums are one-dimensional calculations.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-half-order-singular-integral-exists",
+          "source_section": "Statement",
+          "quote": "For $x\\in[0,1]$, $g\\in C([0,1],\\mathbb R)$, and $0<\\varepsilon<1$, let\n$$S_{x,\\varepsilon}(g):=\\int_{[0,1]\\setminus(x-\\varepsilon,x+\\varepsilon)}|x-y|^{-1/2}g(y)\\,dy,$$\nwhere the integral is the sum of the ordinary Riemann integrals on the at most\ntwo remaining closed intervals, and an empty interval contributes zero. The\nlimit\n$$S_x(g):=\\lim_{\\varepsilon\\downarrow0}S_{x,\\varepsilon}(g)$$\nexists. The map $S_x:C([0,1],\\mathbb R)\\to\\mathbb R$ is linear and positive, and its\noperator norm ([[def-operator-norm]]) is\n$$\\|S_x\\|=S_x(1)=2\\sqrt{x}+2\\sqrt{1-x}\\le2\\sqrt2.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-half-order-product-integration",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ and let $a:[0,1]^2\\to\\mathbb R$ be continuous.\nUse $S_x$ from [[lem-half-order-singular-integral-exists]] to define\n$$(Ku)(x):=S_x\\bigl(y\\mapsto a(x,y)u(y)\\bigr).$$\nFor an integer $n\\ge1$, set $h:=1/n$ and $y_j:=jh$ for $j=0,\\ldots,n$.\nDefine the nonnegative piecewise-linear hat functions by\n$$\\phi_{n,0}(y):=\\max(1-y/h,0),\\qquad   \\phi_{n,n}(y):=\\max(1-(1-y)/h,0),$$\nand, for $1\\le j<n$,\n$$\\phi_{n,j}(y):=\\max(1-|y-y_j|/h,0).$$\nTheir piecewise-linear interpolant is\n$$I_ng:=\\sum_{j=0}^n g(y_j)\\phi_{n,j}.$$\nThe product weights and product-integration operator are\n$$w_{n,j}(x):=S_x(\\phi_{n,j}),\\qquad   (K_nu)(x):=\\sum_{j=0}^n w_{n,j}(x)a(x,y_j)u(y_j)   =S_x\\bigl(I_n(y\\mapsto a(x,y)u(y))\\bigr).$$\nThe kernel factor $s(x,y)=|x-y|^{-1/2}$ is integrated in the weights; the smooth\nfactor $a(x,y)u(y)$ is interpolated. This item defines the pointwise formulas;\nthe subsequent results on this page establish their mapping properties,\nstability, and error estimates.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-composite-midpoint-rule",
+          "source_section": "Definition",
+          "quote": "Input real endpoints $a,b$, an integer $n$, and a function $f$. If $a\\ge b$\nor $n<1$, return invalid-grid without evaluating $f$. For the remaining inputs,\nrequire a real-valued function $f:[a,b]\\to\\mathbb R$ evaluable at every point\nof $[a,b]$. Put $h=(b-a)/n$ and $m_j=a+(j+\\tfrac12)h$ for $0\\le j<n$. The\ncomposite midpoint rule returns\n\n$$Q_M(f;a,b,n):=h\\sum_{j<n} f(m_j).$$\n\nThe sum is the finite sum of [[def-finite-sum]]. The admissibility conditions\n$a<b$ and $n\\ge1$ ensure $h>0$ and all $m_j\\in(a+jh,a+(j+1)h)$. The rule is an\nexact-real formula; floating-point evaluation and summation error are separate\nfrom its quadrature error.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the first panel, $\\int_0^h y^{-1/2}dy=2\\sqrt h$ by [F1], while the midpoint contribution is $hg(h/2)=\\sqrt2\\sqrt h$. Their difference is $(2-\\sqrt2)\\sqrt h$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every later panel $[jh,(j+1)h]$, $j\\ge1$, the function $g$ is differentiable and $g'(y)=-\\tfrac12 y^{-3/2}$ is increasing. For $0\\le s\\le h/2$, the derivative of $g(m_j-s)+g(m_j+s)-2g(m_j)$ is $-g'(m_j-s)+g'(m_j+s)\\ge0$; its value at $s=0$ is zero. Integrating this nonnegative symmetric difference shows $\\int_{jh}^{(j+1)h}g(y)dy\\ge hg(m_j)$. Thus no later panel cancels the positive first-panel error, and the total midpoint error is at least $(2-\\sqrt2)\\sqrt h$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the product rule, $a\\equiv1$ and $u\\equiv1$ give $g_0\\equiv1$. On each panel the two adjacent hat formulas in [F2] sum to $1$, so $I_ng_0=1$. By [F1] and [F2], $K_nu(0)=S_0(1)=2=Ku(0)$. Hence this case is exact under product integration although direct midpoint sampling has only the lower-bound rate above.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero right-hand side or norm-one witness, so it asserts no zero-input case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The stated N or n range includes 1; the first-panel argument also covers the single-panel case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate-parameter branch; its stated hypotheses are used without division by a degenerate quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The example is at x=0, and step 1.1 evaluates the endpoint singular integral explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The proof uses only the listed finite choices or algebraic facts and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-standard-midpoint-nystrom-not-operator-norm-convergent": {
+      "kind": "counterexample",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "None. Each witness is an explicit continuous piecewise-linear function.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nystrom-quadrature-and-finite-rank-operators",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ be the real continuous functions on $[0,1]$\n([[def-continuous-real-functions-on-a-compact-metric-space]]) with the supremum\nnorm $\\|u\\|_\\infty:=\\sup_{0\\le x\\le1}|u(x)|$; this is a Banach space by\n[[thm-c-k-complete-in-the-sup-metric]]. Fix a continuous real kernel\n$k:[0,1]^2\\to\\mathbb R$. The integral $\\int_0^1$ below is the ordinary Riemann\nintegral, equivalently the Riemann–Stieltjes integral with integrator $y\\mapsto y$\n([[def-riemann-stieltjes-sum-and-integral]]). For $u\\in X$, define\n$$(Ku)(x):=\\int_0^1 k(x,y)u(y)\\,dy,\\qquad 0\\le x\\le1.$$\nThe integrand is continuous in $y$, so this integral exists by\n[[thm-continuous-implies-integrable]].\n\nA finite quadrature rule on $[0,1]$ consists of an integer $m\\ge1$, nodes\n$y_1,\\ldots,y_m\\in[0,1]$, and real weights $w_1,\\ldots,w_m$. It acts on a\nfunction $g$ defined at the nodes by\n$$Q(g):=\\sum_{j=1}^m w_jg(y_j).$$\nIts Nyström operator is the finite-sum rule\n$$(K_Q u)(x):=Q\\bigl(k(x,\\cdot)u(\\cdot)\\bigr)        =\\sum_{j=1}^m w_jk(x,y_j)u(y_j).$$\nIn particular, for the composite midpoint rule with $N\\ge1$ panels,\n$h:=1/N$, $y_j:=(j+\\tfrac12)h$ for $0\\le j<N$, and $w_j=h$, the operator\nis denoted $K_N$. The nodes and weights are those of\n[[alg-composite-midpoint-rule]].\n\nFor a right-hand side $f\\in X$, the Nyström equation is\n$$u_Q-K_Qu_Q=f.$$\nThis definition asserts neither consistency nor convergence of $K_Q$ to $K$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-composite-midpoint-rule",
+          "source_section": "Definition",
+          "quote": "Input real endpoints $a,b$, an integer $n$, and a function $f$. If $a\\ge b$\nor $n<1$, return invalid-grid without evaluating $f$. For the remaining inputs,\nrequire a real-valued function $f:[a,b]\\to\\mathbb R$ evaluable at every point\nof $[a,b]$. Put $h=(b-a)/n$ and $m_j=a+(j+\\tfrac12)h$ for $0\\le j<n$. The\ncomposite midpoint rule returns\n\n$$Q_M(f;a,b,n):=h\\sum_{j<n} f(m_j).$$\n\nThe sum is the finite sum of [[def-finite-sum]]. The admissibility conditions\n$a<b$ and $n\\ge1$ ensure $h>0$ and all $m_j\\in(a+jh,a+(j+1)h)$. The rule is an\nexact-real formula; floating-point evaluation and summation error are separate\nfrom its quadrature error.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $m_j:=(j+\\tfrac12)h$. Define $u_\\rho$ to equal $-1+2|y-m_j|/\\rho$ on each interval $|y-m_j|\\le\\rho$ and $1$ elsewhere. The windows are disjoint and lie inside $[0,1]$, so $u_\\rho$ is continuous and $\\|u_\\rho\\|_\\infty=1$. Its integral over each window is zero, hence $\\int_0^1u_\\rho(y)dy=1-2N\\rho$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every midpoint value is $u_\\rho(m_j)=-1$, so $K_Nu_\\rho=-1$ by [F1] and [F2], whereas $Ku_\\rho=1-2N\\rho$. Therefore $\\|(K-K_N)u_\\rho\\|_\\infty=2-2N\\rho$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The operators $K$ and $K_N$ both have norm at most $1$, because their defining integrals or positive quadrature weights have total mass $1$. Thus $\\|K-K_N\\|\\le2$. Letting $\\rho\\downarrow0$ in step 2.1 gives $\\|K-K_N\\|\\ge2$, so $\\|K-K_N\\|=2$ for every $N$. This disproves the claimed operator-norm convergence.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All claims use the fixed nonempty interval [0,1] or a nonzero Banach space as stated; no empty-domain branch is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero right-hand side or norm-one witness, so it asserts no zero-input case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one case is a separate assertion in this operator theorem/example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no separate degenerate-parameter branch; its stated hypotheses are used without division by a degenerate quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Counterexample: Each witness window lies inside [0,1], including the first and last midpoint panels."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample: The proof uses only the listed finite choices or algebraic facts and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-half-order-kernel-translation-modulus-in-l1": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "None. The improper tails are bounded explicitly and the smoothing argument uses only uniform continuity on a compact interval.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-riemann-stieltjes-sum-and-integral",
+          "source_section": "Definition",
+          "quote": "Let $a<b$, let $f,\\alpha:[a,b]\\to\\mathbb R$, and let $P=(n,t)$ be a partition\n([[def-partition-and-refinement]]). A choice of tags\n$\\xi_i\\in[t_i,t_{i+1}]$ for $i<n$ makes $(P,\\xi)$ a tagged partition as in\n[[def-tagged-partition-and-riemann-sum]]. Its **Riemann-Stieltjes sum** is\n\n$$S(f,\\alpha;P,\\xi):=\\sum_{i<n}f(\\xi_i)\\bigl(\\alpha(t_{i+1})-\\alpha(t_i)\\bigr).$$\n\nThe function $f$ is **Riemann-Stieltjes integrable with respect to $\\alpha$** on\n$[a,b]$ if there is $I\\in\\mathbb R$ such that for every $\\varepsilon>0$ there is\n$\\delta>0$ for which every tagged partition with $\\|P\\|<\\delta$ satisfies\n$|S(f,\\alpha;P,\\xi)-I|<\\varepsilon$. Then\n$I=\\int_a^b f\\,d\\alpha$.\n\nIf $f$ is bounded ([[def-bounded-set]]) and $\\alpha$ is nondecreasing\n([[def-monotone-function]]), put\n\n$$m_i:=\\inf_{x\\in[t_i,t_{i+1}]}f(x),\\qquad M_i:=\\sup_{x\\in[t_i,t_{i+1}]}f(x),$$\n$$L_\\alpha(f,P):=\\sum_{i<n}m_i\\Delta_i\\alpha,\\qquad U_\\alpha(f,P):=\\sum_{i<n}M_i\\Delta_i\\alpha,$$\n\nwhere $\\Delta_i\\alpha=\\alpha(t_{i+1})-\\alpha(t_i)\\ge0$. These are the lower and\nupper Stieltjes sums. Each subinterval is nonempty and its image under bounded\n$f$ is bounded above and below, so the suprema exist by\n[[def-complete-ordered-field]] and the infima by [[def-infimum]] and\n[[thm-infimum-property]]. Finite sums use [[def-finite-sum]] and\n[[lem-finite-sum-laws]]. On $[a,a]$ the integral is $0$; for $b<a$ set\n$\\int_a^b f\\,d\\alpha=-\\int_b^a f\\,d\\alpha$, matching\n[[def-oriented-integral]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $\\alpha:[a,b]\\to\\mathbb R$ is continuous, differentiable on $(a,b)$, and its derivative extends to a continuous function $q:[a,b]\\to\\mathbb R$.\n\n1. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and continuous at $c$, then $A(x):=\\int_a^x f\\,d\\alpha$ is differentiable at $c$ and $A'(c)=f(c)q(c)$.\n2. If $f$ is Riemann integrable, $G:[a,b]\\to\\mathbb R$ is continuous and differentiable on $(a,b)$, and $G'(x)=f(x)q(x)$ there, then $\\int_a^b f\\,d\\alpha=G(b)-G(a)$.\n\nEndpoint derivatives in clause 1 are relative. Clause 2 does not divide by $q$ and remains valid where $q$ vanishes.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real\nnumber. Together with [[thm-reals-ordered-field]], this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $x=x'$, then the integrand is zero away from the omitted singular point and $T(x,x')=0$. Suppose $x\\ne x'$. Split $[0,1]$ at $x$ and $x'$. On the interior of each resulting interval the integrand is continuous by [F4]. Near a singular endpoint $c\\in\\{x,x'\\}$, take a cutoff $\\rho<|x-x'|/3$. The other singular term is bounded there by $(2|x-x'|/3)^{-1/2}$, while the term singular at $c$ has tail integral at most $2\\sqrt\\rho$ by [F2] after the lower cutoff tends to zero. Thus each omitted endpoint tail is at most $2\\sqrt\\rho+2\\rho(2|x-x'|/3)^{-1/2}$, which tends to zero. Taking cutoffs $\\rho_m=|x-x'|/(4m)$ gives a Cauchy sequence of truncated sums by additivity and comparison [F5]; [F3] gives a finite limit. The same tail bound compares any sufficiently small cutoff with this cofinal sequence, so the improper limit exists. The argument also applies when a singular point is 0 or 1, with only one adjacent interval.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $t\\in[-1,1]$, define $s_\\eta(t):=\\min\\{\\eta^{-1/2},|t|^{-1/2}\\}$ when $t\\ne0$ and $s_\\eta(0):=\\eta^{-1/2}$. This is continuous. Direct integration using [F2] gives $\\int_{-1}^1|s(t)-s_\\eta(t)|\\,dt =2\\int_0^\\eta(t^{-1/2}-\\eta^{-1/2})\\,dt=2\\sqrt\\eta.$ The two translated tails on $y\\in[0,1]$ are each bounded by this full tail.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $y$ outside the finitely many singular points, the triangle inequality gives $|s(x-y)-s(x'-y)|\\le|s(x-y)-s_\\eta(x-y)|+|s_\\eta(x-y)-s_\\eta(x'-y)|+|s_\\eta(x'-y)-s(x'-y)|.$ Integrating truncated intervals and taking the limits from step 1.1, the first and third terms each contribute at most $2\\sqrt\\eta$ by step 1.2. The middle term is at most $\\omega_\\eta(d):=\\sup_{|t-t'|\\le d}|s_\\eta(t)-s_\\eta(t')|$, since the interval has length one. Thus $T(x,x')\\le4\\sqrt\\eta+\\omega_\\eta(d).$ By [F6], $\\omega_\\eta(d)\\to0$ as $d\\downarrow0$ for fixed $\\eta$, and $\\omega_\\eta(d)\\le2\\eta^{-1/2}$; the preceding bound therefore bounds every $T(x,x')$. The set in the definition of $\\tau(d)$ is nonempty because it contains $T(x,x)=0$, so [F7] gives its finite supremum. Given $\\epsilon>0$, first choose $\\eta$ with $4\\sqrt\\eta<\\epsilon/2$, then choose $d_0>0$ with $\\omega_\\eta(d_0)<\\epsilon/2$. For every $d\\le d_0$, the same bound gives $\\tau(d)\\le\\epsilon$, proving $\\tau(d)\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the fixed nonempty interval [0,1], so no empty-domain case is in scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The coincident case x=x′ is defined to have zero improper difference."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The maximum separation d=1 is included in the compact interval estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The coincident singular locations are handled explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: A singular point at 0 or 1 has only one adjacent interval in the tail estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The cutoff sequence is the explicit formula ρm=|x−x′|/(4m); no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states an existence and continuity bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states an existence and continuity bound, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-half-order-product-weights-closed-form": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "None. The weight formula follows from explicit one-sided antiderivatives and a finite sum over the two adjacent hat panels.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-half-order-product-integration",
+          "source_section": "Definition",
+          "quote": "Let $X:=C([0,1],\\mathbb R)$ and let $a:[0,1]^2\\to\\mathbb R$ be continuous.\nUse $S_x$ from [[lem-half-order-singular-integral-exists]] to define\n$$(Ku)(x):=S_x\\bigl(y\\mapsto a(x,y)u(y)\\bigr).$$\nFor an integer $n\\ge1$, set $h:=1/n$ and $y_j:=jh$ for $j=0,\\ldots,n$.\nDefine the nonnegative piecewise-linear hat functions by\n$$\\phi_{n,0}(y):=\\max(1-y/h,0),\\qquad   \\phi_{n,n}(y):=\\max(1-(1-y)/h,0),$$\nand, for $1\\le j<n$,\n$$\\phi_{n,j}(y):=\\max(1-|y-y_j|/h,0).$$\nTheir piecewise-linear interpolant is\n$$I_ng:=\\sum_{j=0}^n g(y_j)\\phi_{n,j}.$$\nThe product weights and product-integration operator are\n$$w_{n,j}(x):=S_x(\\phi_{n,j}),\\qquad   (K_nu)(x):=\\sum_{j=0}^n w_{n,j}(x)a(x,y_j)u(y_j)   =S_x\\bigl(I_n(y\\mapsto a(x,y)u(y))\\bigr).$$\nThe kernel factor $s(x,y)=|x-y|^{-1/2}$ is integrated in the weights; the smooth\nfactor $a(x,y)u(y)$ is interpolated. This item defines the pointwise formulas;\nthe subsequent results on this page establish their mapping properties,\nstability, and error estimates.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-half-order-singular-integral-exists",
+          "source_section": "Statement",
+          "quote": "For $x\\in[0,1]$, $g\\in C([0,1],\\mathbb R)$, and $0<\\varepsilon<1$, let\n$$S_{x,\\varepsilon}(g):=\\int_{[0,1]\\setminus(x-\\varepsilon,x+\\varepsilon)}|x-y|^{-1/2}g(y)\\,dy,$$\nwhere the integral is the sum of the ordinary Riemann integrals on the at most\ntwo remaining closed intervals, and an empty interval contributes zero. The\nlimit\n$$S_x(g):=\\lim_{\\varepsilon\\downarrow0}S_{x,\\varepsilon}(g)$$\nexists. The map $S_x:C([0,1],\\mathbb R)\\to\\mathbb R$ is linear and positive, and its\noperator norm ([[def-operator-norm]]) is\n$$\\|S_x\\|=S_x(1)=2\\sqrt{x}+2\\sqrt{1-x}\\le2\\sqrt2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $\\alpha:[a,b]\\to\\mathbb R$ is continuous, differentiable on $(a,b)$, and its derivative extends to a continuous function $q:[a,b]\\to\\mathbb R$.\n\n1. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and continuous at $c$, then $A(x):=\\int_a^x f\\,d\\alpha$ is differentiable at $c$ and $A'(c)=f(c)q(c)$.\n2. If $f$ is Riemann integrable, $G:[a,b]\\to\\mathbb R$ is continuous and differentiable on $(a,b)$, and $G'(x)=f(x)q(x)$ there, then $\\int_a^b f\\,d\\alpha=G(b)-G(a)$.\n\nEndpoint derivatives in clause 1 are relative. Clause 2 does not divide by $q$ and remains valid where $q$ vanishes.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $r>0$ and put $q:=\\sqrt r$, which is positive by [F3] because $q^2=r>0$. For $s>0$, rationalizing gives $|\\sqrt s-q|=|s-r|/(\\sqrt s+q)\\le|s-r|/q$, so $\\sqrt s\\to q$ as $s\\to r$. For $s\\ne r$ the difference quotient is $(\\sqrt s-q)/(s-r)=1/(\\sqrt s+q)$, and $\\left|1/(\\sqrt s+q)-1/(2q)\\right|=|q-\\sqrt s|/(2q(\\sqrt s+q))\\le|s-r|/(2q^3)$, so $(\\sqrt r)'=1/(2\\sqrt r)$. By the product rule [F4], $P'_{x,u,v}(r)=Cr^{-1/2}+v\\sqrt r=r^{-1/2}(C+vr)$ and $Q'_{x,u,v}(r)=Cr^{-1/2}-v\\sqrt r=r^{-1/2}(C-vr)$. Since $u+vy=C+v(y-x)$, [F8] makes $P_{x,u,v}(y-x)$ an antiderivative of $(y-x)^{-1/2}(u+vy)$ for $y>x$. Since $u+vy=C-v(x-y)$, [F8] makes $-Q_{x,u,v}(x-y)$ an antiderivative of $(x-y)^{-1/2}(u+vy)$ for $y<x$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $x>\\alpha$, truncate the left integral at $\\min(\\beta,x-\\delta)$. The integrand is continuous and integrable on this truncated closed interval by [F6], so [F5] evaluates it. Letting $\\delta\\downarrow0$, the term $Q_{x,u,v}(\\delta)$ vanishes, leaving $Q_{x,u,v}((x-\\alpha)_+)-Q_{x,u,v}((x-\\beta)_+)$. If $x\\le\\alpha$, the left contribution is zero and this same positive-part expression is zero. Likewise, if $x<\\beta$, truncate the right integral at $\\max(\\alpha,x+\\delta)$; [F6] and [F5] apply, and as $\\delta\\downarrow0$, $P_{x,u,v}(\\delta)\\to0$ and the right contribution is $P_{x,u,v}((\\beta-x)_+)-P_{x,u,v}((\\alpha-x)_+)$. If $x\\ge\\beta$, that positive-part expression is zero. Thus both improper one-sided integrals exist and have the displayed values. Splitting truncated intervals by [F7] and passing to their finite limits gives exactly $\\mathcal J_x[\\alpha,\\beta;u,v]$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $[0,h]$, $\\phi_{n,0}(y)=1-y/h$; for an interior index $j$, its left and right affine pieces are $(y-y_{j-1})/h$ and $(y_{j+1}-y)/h$; on $[y_{n-1},1]$, $\\phi_{n,n}(y)=(y-y_{n-1})/h$. Substituting these coefficients into the integral formula of step 2.1 gives the three displayed formulas for $w_{n,j}$. The endpoint cases use positive parts in $\\mathcal J$, so a singularity at a split point contributes a zero primitive value, and when $n=1$ the interior-index range is empty while both endpoint formulas remain valid.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the fixed nonempty interval [0,1], so no empty-domain case is in scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Taking u=v=0 gives the zero affine factor and zero weight formula. Step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The n=1 mesh is admitted; its two endpoint hat formulas remain valid. Step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If α=β, the integral interval has zero length and the positive-part terms cancel. Step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: x=0 and x=1 are included by the one-sided positive-part terms. Step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The formulas use only the supplied finite mesh and explicit real operations. Step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states an exact formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states an exact formula, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

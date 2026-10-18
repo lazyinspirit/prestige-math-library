@@ -1,0 +1,525 @@
+[
+  {
+    "order": 2628,
+    "id": "well-balanced-balance-laws-and-wet-dry-fronts",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Well-balanced balance laws and wet/dry fronts",
+    "companion": "well-balanced-balance-laws-and-wet-dry-fronts-examples",
+    "requires": [
+      "invariant-domain-and-entropy-stable-conservative-schemes"
+    ],
+    "items": [
+      {
+        "id": "def-pe05-shallow-water-balance-law",
+        "kind": "definition",
+        "title": "One-dimensional shallow-water balance law with a dry-state convention",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Fix gravity $g>0$ and a stationary bed $b:\\mathbb R\\to\\mathbb R$. A shallow-water state is a pair $U=(h,m)$ with depth $h\\ge0$ and momentum $m\\in\\mathbb R$. Its admissible wet/dry state set is\n$$K=\\{(h,m):h>0,\\ m\\in\\mathbb R\\}\\cup\\{(0,0)\\}.$$\nFor $U\\in K$, define velocity by $u=m/h$ when $h>0$ and $u=0$ when $h=0$. Thus a dry state has both $h=0$ and $m=0$. Define the free surface by $\\eta=h+b$ and the physical flux by\n$$F(U)=\\begin{cases}(m,\\ m^2/h+gh^2/2),&h>0,\\\\(0,0),&U=(0,0).\\end{cases}$$\nFor a continuously differentiable bed, the one-dimensional shallow-water balance law is\n$$U_t+\\partial_xF(U)=(0,-gh\\,b_x).$$\nThe source is evaluated as zero at a dry state.\n\nA discrete lake-at-rest profile with level $\\eta_0$ has $m_i=0$ and $h_i+b_i=\\eta_0$ in every wet cell; cells with $h_i=0$ are dry and satisfy $b_i\\ge\\eta_0$.",
+        "strategy": "Fix conserved-variable, dry-state, flux, source, free-surface and equilibrium conventions explicitly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; §1, equations (1.1)–(1.4), printed pp. 2050–2051."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions, Chapter 12",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Complete chapter; opening shallow-water system and conserved-variable convention, lines 0–14."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe05-hydrostatic-hll-scheme",
+        "kind": "definition",
+        "title": "Hydrostatic reconstruction with a dry-safe HLL flux and one-sided pressure corrections",
+        "deps": [
+          "def-pe05-shallow-water-balance-law"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $\\Delta x>0$ be a uniform cell width, let $i$ range over a finite chain or a periodic or bi-infinite mesh, and let $b_i$ be the bed value in cell $i$. At time level $n$, the cell state is $U_i^n=(h_i^n,m_i^n)\\in K$ from [[def-pe05-shallow-water-balance-law]], with velocity $u_i^n$ and free surface $\\eta_i^n=h_i^n+b_i$.\n\nFor a finite chain $i=1,\\ldots,N$ with $N\\ge1$, supply at each time level two ghost states $U_0^n,U_{N+1}^n\\in K$ and bed values $b_0,b_{N+1}\\in\\mathbb R$. These are boundary inputs, used only to evaluate the faces $1/2$ and $N+1/2$; only cells $1,\\ldots,N$ are updated. On a periodic mesh, identify neighboring indices periodically.\n\nAt face $i+1/2$, set\n$$b_{i+1/2}^*=\\max(b_i,b_{i+1}),\\qquad h_{i+1/2,L}^*=\\max(0,\\eta_i^n-b_{i+1/2}^*),\\qquad h_{i+1/2,R}^*=\\max(0,\\eta_{i+1}^n-b_{i+1/2}^*).$$\nFor $s=L,R$, set $u_{i+1/2,s}^*=u_i^n$ or $u_{i+1}^n$, respectively, when $h_{i+1/2,s}^*>0$, and set it to zero when $h_{i+1/2,s}^*=0$. Define $U_{i+1/2,s}^*=(h_{i+1/2,s}^*,h_{i+1/2,s}^*u_{i+1/2,s}^*)$ and $c_{i+1/2,s}^*=\\sqrt{g h_{i+1/2,s}^*}$. The face speeds are\n$$a_{L,i+1/2}=\\min(0,u_{i+1/2,L}^*-c_{i+1/2,L}^*,u_{i+1/2,R}^*-c_{i+1/2,R}^*),\\qquad a_{R,i+1/2}=\\max(0,u_{i+1/2,L}^*+c_{i+1/2,L}^*,u_{i+1/2,R}^*+c_{i+1/2,R}^*).$$\nThey satisfy $a_L\\le0\\le a_R$. Write $F_s^*=F(U_{i+1/2,s}^*)$. The common HLL face flux is\n$$\\widehat F_{i+1/2}^n=\\begin{cases}F_L^*,&a_{L,i+1/2}\\ge0,\\\\F_R^*,&a_{R,i+1/2}\\le0,\\\\\\dfrac{a_{R,i+1/2}F_L^*-a_{L,i+1/2}F_R^*+a_{L,i+1/2}a_{R,i+1/2}(U_{i+1/2,R}^*-U_{i+1/2,L}^*)}{a_{R,i+1/2}-a_{L,i+1/2}},&a_{L,i+1/2}<0<a_{R,i+1/2}.\\end{cases}$$\nIf both speeds are zero, both reconstructed states are dry and the first branch returns $(0,0)$; the middle denominator is never used in that case.\n\nThe one-sided corrected fluxes, where $L$ is the side of cell $i$ and $R$ the side of cell $i+1$, are\n$$G_{i+1/2,L}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_i^n)^2-(h_{i+1/2,L}^*)^2\\big)\\right),\\qquad G_{i+1/2,R}^n=\\widehat F_{i+1/2}^n+\\left(0,\\frac g2\\big((h_{i+1}^n)^2-(h_{i+1/2,R}^*)^2\\big)\\right).$$\nFor $\\Delta t>0$, put $\\lambda=\\Delta t/\\Delta x$ and update\n$$U_i^{n+1}=U_i^n-\\lambda\\big(G_{i+1/2,L}^n-G_{i-1/2,R}^n\\big).$$\nEquivalently, with $h_{i,+}^*=h_{i+1/2,L}^*$, $h_{i,-}^*=h_{i-1/2,R}^*$, and $\\widehat F$ the shared face flux,\n$$U_i^{n+1}=U_i^n-\\lambda(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)+\\Delta t\\,S_i^n,\\qquad S_i^n=\\left(0,\\frac{g}{2\\Delta x}\\big((h_{i,+}^*)^2-(h_{i,-}^*)^2\\big)\\right).$$\nThe face-specific depth CFL condition is\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad\\text{for every cell }i.$$\n\nThe diagram is a wet/wet face with $b_i<b_{i+1}$ and a common rest level $\\eta_0$. The dotted line marks the free surface, the solid step is the bed, and both reconstructed depths are measured from $b^*=\\max(b_i,b_{i+1})$. The displayed equations specify every state and orientation used in proofs.\n\n```tikz\n\\begin{tikzpicture}[x=1.1cm,y=1cm]\n  \\draw[->] (0,0) -- (4.5,0) node[right] {$x$};\n  \\draw[thick] (0,0.35) -- (2,0.35) -- (2,1.0) -- (4,1.0);\n  \\draw[dotted,thick] (0,1.8) -- (4,1.8) node[right] {$\\eta_0$};\n  \\draw[dashed] (2,1.0) -- (4,1.0);\n  \\draw[<->] (1,1.0) -- (1,1.8) node[midway,left] {$h_L^*$};\n  \\draw[<->] (3,1.0) -- (3,1.8) node[midway,right] {$h_R^*$};\n  \\draw (2,0.1) -- (2,1.95);\n  \\node at (1,0.12) {$b_i$};\n  \\node at (3,0.75) {$b_{i+1}=b^*$};\n  \\node at (2,2.08) {$i+\\tfrac12$};\n\\end{tikzpicture}\n```",
+        "strategy": "State every input, branch including the all-dry case, corrected flux orientation, update and cellwise CFL.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; §2.1, equations (2.1)–(2.16), printed pp. 2051–2054."
+            },
+            {
+              "title": "F. Bouchut, III. Shallow water problem – Hydrostatic reconstruction scheme",
+              "url": "https://www.lestudium-ias.com/sites/default/files/07_-_bouchut.pdf",
+              "locator": "Complete 20-page lecture; §III, equations (19)–(24), PDF pp. 8–10."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions, Chapter 12",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Complete chapter; §HLL solver, middle-state conservation formula and implementation, lines 365–426."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe05-strong-l1-limit-preserves-dry-admissibility",
+        "kind": "lemma",
+        "title": "A strong local L1 limit preserves shallow-water dry admissibility",
+        "deps": [
+          "def-pe05-shallow-water-balance-law"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $h_k\\ge0$ almost everywhere on $\\mathbb R\\times(0,T)$ and suppose $h_k\\to h$ strongly in $L^1_{\\mathrm{loc}}$. Let $u$ be measurable, put $m=hu$ almost everywhere, and suppose $u=0$ almost everywhere on $\\{h=0\\}$. Then $U=(h,m)$ belongs to the admissible state set $K$ from [[def-pe05-shallow-water-balance-law]] almost everywhere. Also, let initial reconstructions $U_k^0=(h_k^0,m_k^0)\\in K$ satisfy $m_k^0=h_k^0u_k^0$, $u_k^0=0$ where $h_k^0=0$, and $|u_k^0|\\le M_Q$ on each compact spatial interval $Q$ for a constant $M_Q$ independent of $k$. If $U_k^0\\to U_0=(h_0,m_0)$ strongly in $L^1_{\\mathrm{loc}}(\\mathbb R)$, then $U_0\\in K$ almost everywhere.",
+        "strategy": "Bound the negative part of the limit by the L1 error on a countable compact exhaustion, then use the dry velocity convention.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; §1 dry-depth convention and balance law, printed pp. 2050–2051."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions, Chapter 12",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Complete chapter; opening shallow-water conserved variables and dry-depth discussion, lines 0–14 and 518–552."
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-pe05-shallow-water-admissible-state-set-is-convex",
+        "kind": "proposition",
+        "title": "The shallow-water wet/dry state set is convex",
+        "deps": [
+          "def-pe05-shallow-water-balance-law",
+          "def-pe03-convex-invariant-domain"
+        ],
+        "dependency_level": 1,
+        "statement": "The admissible wet/dry state set $K$ from [[def-pe05-shallow-water-balance-law]] is convex.",
+        "strategy": "Check a convex combination by its nonnegative depth; zero depth forces both input depths and momenta to vanish.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J.-L. Guermond and B. Popov, Invariant Domains and First-Order Continuous Finite Element Approximation for Hyperbolic Systems",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_popov_sinum_hyperbolic_systems_2016.pdf",
+              "locator": "Complete 24-page paper; §2.2, Definition 2.4, PDF pp. 3–4."
+            },
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; §2.1, dry-depth convention, printed pp. 2052–2053."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe05-hll-depth-flux-decomposition",
+        "kind": "lemma",
+        "title": "HLL depth flux is a bounded outflow/inflow combination",
+        "deps": [
+          "def-pe05-hydrostatic-hll-scheme"
+        ],
+        "dependency_level": 2,
+        "statement": "At a face of the scheme in [[def-pe05-hydrostatic-hll-scheme]], write $\\alpha=a_R$ and $\\beta=-a_L$. There are coefficients $p,q\\ge0$ such that\n$$\\widehat F^h=p h_L^*-q h_R^*,\\qquad p\\le\\alpha,\\qquad q\\le\\beta.$$\nIf $\\alpha>0$ and $h_L^*>0$, then $p<\\alpha$; if $\\beta>0$ and $h_R^*>0$, then $q<\\beta$. These statements include the branches where one speed is zero and the all-dry branch.",
+        "strategy": "Expand the middle HLL formula and check the two equality-speed branches separately.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; §2.2, Proposition 2.2 and CFL proof, printed pp. 2056–2057; its homogeneous-flux positivity hypothesis is not imported."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions, Chapter 12",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Complete chapter; §HLL solver, middle-state conservation formula and HLL flux, lines 367–426. Its Roe-derived speed choice is not imported."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe05-hydrostatic-reconstruction-is-well-balanced",
+        "kind": "theorem",
+        "title": "The hydrostatic HLL update preserves lakes at rest, including dry cells",
+        "deps": [
+          "def-pe05-shallow-water-balance-law",
+          "def-pe05-hydrostatic-hll-scheme"
+        ],
+        "dependency_level": 2,
+        "statement": "For any discrete bed values, the update of [[def-pe05-hydrostatic-hll-scheme]] leaves every lake-at-rest profile of [[def-pe05-shallow-water-balance-law]] unchanged, including a wet/dry shoreline with dry cells above the free-surface level. On a finite chain, the supplied ghost states and bed values must extend the same lake-at-rest profile.",
+        "strategy": "Show the reconstructed states agree at each face, evaluate the consistent HLL flux, and cancel the one-sided corrected cell pressures.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; lake-at-rest reconstruction and Theorem 2.1(ii), §2.1, printed pp. 2052–2054."
+            },
+            {
+              "title": "F. Bouchut, III. Shallow water problem – Hydrostatic reconstruction scheme",
+              "url": "https://www.lestudium-ias.com/sites/default/files/07_-_bouchut.pdf",
+              "locator": "Complete 20-page lecture; shallow-water rest states and hydrostatic reconstruction, PDF pp. 8–11."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe05-source-quadrature-consistency",
+        "kind": "lemma",
+        "title": "Hydrostatic pressure corrections converge to the smooth-bed source",
+        "deps": [
+          "def-pe05-shallow-water-balance-law",
+          "def-pe05-hydrostatic-hll-scheme"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $b\\in C^2(\\mathbb R)$, let the uniform cell width be $d>0$, let $x_i$ be the center of cell $i$, and let $0\\le h_i^n\\le H$ on a fixed compact space-time cylinder. Set $b_i=b(x_i)$, $\\delta_{i,+}=(b(x_i+d)-b(x_i))_+$, and $\\delta_{i,-}=(b(x_i-d)-b(x_i))_+$. For the source term $S_i^n$ in [[def-pe05-hydrostatic-hll-scheme]],\n$$S_i^n=\\left(0,\\frac{g}{2d}\\left((h_i^n-\\delta_{i,+})_+^2-(h_i^n-\\delta_{i,-})_+^2\\right)\\right),$$\nthere is a constant $C$ depending only on the compact interval, $b$, $g$, and $H$ such that\n$$\\left|S_i^{(2)}+g h_i b'(x_i)\\right|\\le C d.$$\nFor time slabs $J_n=[n\\tau,(n+1)\\tau)$, define the piecewise-constant source reconstruction $\\mathcal S_d(x,t)=S_i^n$ on $[x_i-d/2,x_i+d/2)\\times J_n$. Consequently, as $d\\to0$, if the corresponding piecewise-constant depth reconstructions $h_d$ converge strongly in $L^1_{\\rm loc}(\\mathbb R\\times(0,T))$ to $h$ and are locally uniformly bounded, then $\\mathcal S_d\\to(0,-ghb')$ strongly in $L^1_{\\rm loc}$.",
+        "strategy": "Taylor-expand the adjacent bed increments, use the positive-part identity and a uniform quadratic remainder, then pass the depth factor through strong L1 convergence.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; equations (2.5)–(2.7), proof of Theorem 2.1(iii), §2.1, printed pp. 2052–2055."
+            },
+            {
+              "title": "F. Bouchut, III. Shallow water problem – Hydrostatic reconstruction scheme",
+              "url": "https://www.lestudium-ias.com/sites/default/files/07_-_bouchut.pdf",
+              "locator": "Complete 20-page lecture; smooth-consistency criterion (16), PDF pp. 6–7, and hydrostatic reconstruction (23)–(24), PDF pp. 10–11."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe05-discrete-weak-identity-with-source",
+        "kind": "lemma",
+        "title": "Exact space-time weak identity for the hydrostatic update",
+        "deps": [
+          "def-pe05-shallow-water-balance-law",
+          "def-pe05-hydrostatic-hll-scheme"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $d,\\tau>0$, $I_i=[id,(i+1)d)$, $t_n=n\\tau$, and $J_n=[t_n,t_{n+1})$. Suppose vector states and shared face fluxes satisfy\n$$d(U_i^{n+1}-U_i^n)+\\tau(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)=d\\tau S_i^n$$\nas in [[def-pe05-hydrostatic-hll-scheme]]. For $\\varphi\\in C_c^\\infty(\\mathbb R\\times(-\\infty,T);\\mathbb R^2)$ define the space-time cell average\n$$\\Phi_i^n=\\frac1{d\\tau}\\int_{J_n}\\int_{I_i}\\varphi(x,t)\\,dx\\,dt.$$\nChoose $N$ such that $\\varphi$ vanishes for $t\\ge t_{N-1}$. Then\n$$\\sum_i d\\,U_i^0\\cdot\\Phi_i^0+\\sum_{n=1}^{N-1}\\sum_i d\\,U_i^n\\cdot(\\Phi_i^n-\\Phi_i^{n-1})+\\sum_{n=0}^{N-1}\\sum_i\\tau\\,\\widehat F_{i+1/2}^n\\cdot(\\Phi_{i+1}^n-\\Phi_i^n)+\\sum_{n=0}^{N-1}\\sum_i d\\tau\\,S_i^n\\cdot\\Phi_i^n=0.$$\nEvery sum is finite because the test is compactly supported.",
+        "strategy": "Multiply the vector recurrence, telescope in time, reindex shared face fluxes in space, and retain the source term.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "Full 143-page course-note PDF inspected; Chapter 3, §§3.4.1 and 3.4.3, PDF pp. 94–99, on cell-average updates and shared-flux cancellation."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "Complete six-page lecture; pp. 1–2, cell-average states, signed face fluxes and the finite-volume update."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1",
+        "kind": "lemma",
+        "title": "Hydrostatic HLL face fluxes converge under strong state and velocity convergence",
+        "deps": [
+          "def-pe05-shallow-water-balance-law",
+          "def-pe05-hydrostatic-hll-scheme",
+          "def-countable-choice",
+          "thm-dominated-convergence",
+          "thm-l-one-convergence-implies-convergence-in-measure",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-riesz-subsequence-theorem-for-convergence-in-measure",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Let $d_k,\\tau_k>0$ tend to zero, set $I_i^k=[id_k,(i+1)d_k)$, $x_i^k=(i+\\tfrac12)d_k$, $t_n^k=n\\tau_k$, and $J_n^k=[t_n^k,t_{n+1}^k)$, and let $b\\in C^1(\\mathbb R)$ be locally Lipschitz. On each cell-time slab let $h_k,u_k$ be piecewise constant, with $h_k\\ge0$, $u_k=0$ when $h_k=0$, and $m_k=h_ku_k$. Suppose $h_k\\to h$ and $u_k\\to u$ strongly in $L^1_{\\rm loc}(\\mathbb R\\times(0,T))$, $u=0$ almost everywhere where $h=0$, and $h_k,|u_k|$ are locally uniformly bounded. Let $\\mathcal F_k(x,t)=\\widehat F_{i+1/2}^{k,n}$ for $(x,t)\\in I_i^k\\times J_n^k$, with face flux from [[def-pe05-hydrostatic-hll-scheme]] and bed samples $b(x_i^k)$. Then\n$$\\mathcal F_k\\longrightarrow F(h,hu)\\quad\\text{strongly in }L^1_{\\rm loc}(\\mathbb R\\times(0,T)).$$\nThe primitive-velocity convergence and uniform velocity bound are included because the assigned wave-speed formula uses $m/h$ on wet states, which is not continuous at a dry state as a function of $(h,m)$ alone.",
+        "strategy": "Use L1 translation continuity for neighboring cells, show hydrostatic height clipping is O(Delta x) and velocity resets vanish near dry limits, then use HLL diagonal continuity and a uniform flux bound.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "Full 143-page PDF; complete Chapter 3, §§3.4.1 and 3.4.3, PDF pp. 94–99. Its scalar Lax–Wendroff statement is not used as a system/source theorem."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "Complete six-page note; pp. 1–2, cell-average states and shared interface fluxes."
+            },
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; §2.1, equations (2.9)–(2.16), printed pp. 2052–2054."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe05-hll-dry-face-direction-and-zero-flux",
+        "kind": "lemma",
+        "title": "A dry HLL face sends water only into the dry side",
+        "deps": [
+          "def-pe05-hydrostatic-hll-scheme",
+          "lem-pe05-hll-depth-flux-decomposition"
+        ],
+        "dependency_level": 3,
+        "statement": "At any face in [[def-pe05-hydrostatic-hll-scheme]], if the reconstructed right state is dry, then $\\widehat F^h\\ge0$, and $\\widehat F=(0,0)$ whenever $\\widehat F^h=0$. If the reconstructed left state is dry, then $\\widehat F^h\\le0$, and again $\\widehat F^h=0$ implies $\\widehat F=(0,0)$.",
+        "strategy": "Check the zero-speed and middle branches; positive wet depth makes the corresponding HLL mass coefficient strictly positive.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; §2.1, equations (2.9)–(2.14) and Theorem 2.1 dry-depth proof, printed pp. 2052–2054."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions, Chapter 12",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Complete chapter; §HLL solver and §Entropy and positivity, lines 365–387 and 518–552. The local proof uses the assigned speed formula, not the chapter's different HLLE speeds."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe05-strong-limit-satisfies-smooth-bed-balance-law",
+        "kind": "theorem",
+        "title": "A strong limit of hydrostatic HLL updates solves the smooth-bed balance law weakly",
+        "deps": [
+          "def-pe05-shallow-water-balance-law",
+          "def-pe05-hydrostatic-hll-scheme",
+          "def-countable-choice",
+          "lem-pe05-strong-l1-limit-preserves-dry-admissibility",
+          "lem-pe05-source-quadrature-consistency",
+          "lem-pe05-discrete-weak-identity-with-source",
+          "lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $b\\in C^2(\\mathbb R)$ and consider a sequence of full-line uniform hydrostatic HLL grids from [[def-pe05-hydrostatic-hll-scheme]] with widths $d_k\\to0$ and time steps $\\tau_k\\to0$. Set $I_i^k=[id_k,(i+1)d_k)$, $x_i^k=(i+\\tfrac12)d_k$, $t_n^k=n\\tau_k$, and $J_n^k=[t_n^k,t_{n+1}^k)$, and sample $b_i^k=b(x_i^k)$. On $I_i^k\\times J_n^k$, let $\\mathcal U_k=(h_k,m_k)$ and $u_k$ be the piecewise-constant state and primitive-velocity reconstructions, with $m_k=h_ku_k$, $u_k=0$ on dry cells, and $U_i^{k,n}\\in K$. Define $\\mathcal F_k=\\widehat F_{i+1/2}^{k,n}$ and $\\mathcal S_k=S_i^{k,n}$ on that same slab, using the sampled bed. Assume that on every compact rectangle in $\\mathbb R\\times[0,T)$, including the initial layer, the depths and velocities are uniformly bounded; that on every compact rectangle in $\\mathbb R\\times(0,T)$, $h_k\\to h$ and $u_k\\to u$ strongly in $L^1$ and $m_k\\to m=hu$ strongly in $L^1$; that $u=0$ almost everywhere where $h=0$; and that the initial reconstructions converge locally in $L^1$ to $U_0=(h_0,m_0)$. Then $U=(h,m)$ satisfies, for every $\\varphi\\in C_c^\\infty(\\mathbb R\\times[0,T);\\mathbb R^2)$,\n$$\\int_0^T\\int_{\\mathbb R}\\left(U\\cdot\\varphi_t+F(U)\\cdot\\varphi_x+(0,-ghb_x)\\cdot\\varphi\\right)\\,dx\\,dt+\\int_{\\mathbb R}U_0(x)\\cdot\\varphi(x,0)\\,dx=0.$$\nThus the limit is a locally bounded distributional weak solution of the shallow-water balance law in [[def-pe05-shallow-water-balance-law]]. Strong convergence, primitive-velocity convergence and the source-quadrature hypotheses are assumptions; this theorem proves no compactness, entropy inequality or convergence rate.",
+        "strategy": "Pass the exact vector discrete weak identity to the limit using the local face-flux and source-convergence lemmas, and retain the initial boundary term.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "Full 143-page course-note PDF; complete Chapter 3, especially §3.4.1 and §3.4.3, PDF pp. 94–99. The stated Lax–Wendroff theorem lacks the strong-convergence hypotheses and proof used here."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "Complete six-page lecture; pp. 1–2, cell-average states and shared-flux update. It does not prove a source-bearing system weak-limit theorem."
+            },
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; balance law (1.1), source-consistency proof of Theorem 2.1(iii), §2.1, printed pp. 2050 and 2054–2055."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility",
+        "kind": "theorem",
+        "title": "The hydrostatic HLL step conserves water and preserves dry admissibility",
+        "deps": [
+          "def-pe05-shallow-water-balance-law",
+          "def-pe05-hydrostatic-hll-scheme",
+          "lem-pe05-hll-depth-flux-decomposition",
+          "lem-pe05-hll-dry-face-direction-and-zero-flux"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $N\\ge1$ cells form a finite chain, with two admissible ghost states used only to define the boundary faces, or let the cells be periodic. Apply one step of [[def-pe05-hydrostatic-hll-scheme]] to states in $K$ from [[def-pe05-shallow-water-balance-law]]. If\n$$\\lambda\\big(a_{R,i+1/2}-a_{L,i-1/2}\\big)\\le1\\quad(1\\le i\\le N),$$\nthen each updated state remains in $K$. The depth is nonnegative; if it is zero then the momentum is zero. On a finite chain the total water changes by the net boundary discharge, and on a periodic mesh total water is conserved.",
+        "strategy": "Expand the depth update into nonnegative inflows and bounded outflows, prove wet depths stay positive and dry cells cannot gain momentum at zero depth, then telescope the shared first-component flux.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; §2.1, equations (2.9)–(2.16), Theorem 2.1(i), and §2.2, Proposition 2.2, printed pp. 2052–2057."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions, Chapter 12",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Complete chapter; §HLL solver and §Entropy and positivity, lines 367–387 and 518–552. The assigned scheme's finite-volume CFL and dry-state extension are proved locally."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2629,
+    "id": "well-balanced-balance-laws-and-wet-dry-fronts-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Well-balanced balance laws and wet/dry fronts — Examples",
+    "companion": "well-balanced-balance-laws-and-wet-dry-fronts",
+    "requires": [
+      "well-balanced-balance-laws-and-wet-dry-fronts"
+    ],
+    "items": [
+      {
+        "id": "cex-pe05-centered-source-produces-spurious-current",
+        "kind": "counterexample",
+        "title": "A centered pressure flux and centered bed source move a discrete lake",
+        "deps": [
+          "def-pe05-shallow-water-balance-law"
+        ],
+        "dependency_level": 1,
+        "statement": "On a periodic three-cell grid, the central physical-flux rule $\\widehat F_{i+1/2}=(F(U_i)+F(U_{i+1}))/2$ with centered bed source $(0,-g h_i(b_{i+1}-b_{i-1})/(2\\Delta x))$ preserves every lake-at-rest state under the update\n$$U_i^+=U_i-\\frac{\\Delta t}{\\Delta x}(\\widehat F_{i+1/2}-\\widehat F_{i-1/2})+\\Delta t\\left(0,-\\frac{g h_i(b_{i+1}-b_{i-1})}{2\\Delta x}\\right).$$",
+        "strategy": "Specify one concrete central-flux/centered-source update and compute a nonzero momentum residual in one cell.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; motivation for exact lake-at-rest preservation, §1 and §2.1, printed pp. 2051–2054."
+            },
+            {
+              "title": "F. Bouchut, III. Shallow water problem – Hydrostatic reconstruction scheme",
+              "url": "https://www.lestudium-ias.com/sites/default/files/07_-_bouchut.pdf",
+              "locator": "Complete 20-page lecture; §II, smooth source consistency and well-balancing, PDF pp. 5–8."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-pe05-lake-at-rest-over-a-dry-crest",
+        "kind": "example",
+        "title": "A lake at rest over a bump with a dry crest",
+        "deps": [
+          "def-pe05-shallow-water-balance-law",
+          "def-pe05-hydrostatic-hll-scheme",
+          "thm-pe05-hydrostatic-reconstruction-is-well-balanced"
+        ],
+        "dependency_level": 3,
+        "statement": "Take five periodic cells, $g=1$, bed values $(b_0,b_1,b_2,b_3,b_4)=(0,1,2,1,0)$, and free-surface level $\\eta_0=2$. Set $m_i=0$ and $h_i=(2-b_i)_+$, so $(h_i)=(2,1,0,1,2)$; the crest cell is dry.",
+        "strategy": "Compute every shared reconstructed depth, HLL pressure flux, one-sided correction and cell-side cancellation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; lake-at-rest rest state (1.4), hydrostatic reconstruction (2.8)–(2.14), printed pp. 2051–2054."
+            },
+            {
+              "title": "F. Bouchut, III. Shallow water problem – Hydrostatic reconstruction scheme",
+              "url": "https://www.lestudium-ias.com/sites/default/files/07_-_bouchut.pdf",
+              "locator": "Complete 20-page lecture; rest state and reconstructed flux equations (21)–(24), PDF pp. 8–11."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe05-hll-dam-break-wets-dry-cell",
+        "kind": "example",
+        "title": "A first HLL step wets a dry cell without negative depth",
+        "deps": [
+          "def-pe05-shallow-water-balance-law",
+          "def-pe05-hydrostatic-hll-scheme",
+          "thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility"
+        ],
+        "dependency_level": 5,
+        "statement": "On the full-line unit grid, set $g=1$, $b_i=0$, $U_i^0=(1,0)$ for $i\\le0$, and $U_i^0=(0,0)$ for $i\\ge1$. Use $\\lambda=\\Delta t/\\Delta x=1/2$ for one hydrostatic HLL step.",
+        "strategy": "Evaluate the all-dry, wet/wet and wet/dry face fluxes, check every local CFL and compute the two updated states exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Audusse, F. Bouchut, M.-O. Bristeau, R. Klein, and B. Perthame, A Fast and Stable Well-Balanced Scheme with Hydrostatic Reconstruction for Shallow Water Flows",
+              "url": "https://publications.imp.fu-berlin.de/478/1/file_2004_siam.pdf",
+              "locator": "Complete 16-page paper; dry-state and nonnegative-depth construction, §2.1, printed pp. 2052–2057."
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions, Chapter 12",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Complete chapter; standard dam-break HLL example and positivity discussion, lines 460–552."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

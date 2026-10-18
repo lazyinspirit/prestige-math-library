@@ -1,5 +1,5 @@
 // Explicit native transition; historical execution is archived, never coverage.
-import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync, renameSync, appendFileSync, unlinkSync } from 'node:fs';
+import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync, renameSync, appendFileSync, unlinkSync, realpathSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -78,6 +78,71 @@ function historical(o: Options, state: any) {
   }
   return Object.fromEntries([...files].sort().map(path => [path, hash(bytes(join(o.repo, path)))]));
 }
+// A committed tooling base may advance while the exact previously owned patch
+// survives. Only explicit current additional-path ownership can bridge it.
+function supportingBaseSuccessors(o: Options, scope: any, prepared: any, base: string, head: string, commits: string[]) {
+  const policy = scope.policy ? JSON.parse(bytes(scope.policy.policyPath).toString()) : null;
+  const out = new Map<string, any>();
+  const bound = (ref: any) => {
+    if (!ref || typeof ref.path !== 'string' || !ref.path.startsWith(`research/${o.run}-`)
+      || ref.path.split('/').includes('..') || !/^[a-f0-9]{64}$/.test(ref.sha256 ?? '')) fail('invalid supporting successor reference');
+    const path = resolve(o.repo, ref.path);
+    if (!realpathSync(path).startsWith(realpathSync(join(o.repo, 'research')) + '/')) fail('supporting successor reference escaped research');
+    const value = bytes(path); if (hash(value) !== ref.sha256) fail('supporting successor evidence changed');
+    return value;
+  };
+  const protectedHash = (value: Buffer) => hash(Buffer.concat([Buffer.from('file\0'), value]));
+  const patch = (left: string, right: string) => {
+    let value: Buffer;
+    try { value = execFileSync('git', ['--literal-pathspecs', 'diff', '--no-ext-diff', '--no-textconv', '--no-renames', '--no-index', '--unified=0', '--', left, right],
+      { cwd: scope.gitRoot, env: { ...process.env, LC_ALL: 'C' }, maxBuffer: 256 * 1024 * 1024 }); }
+    catch (error: any) { if (error.status !== 1 || !Buffer.isBuffer(error.stdout)) throw error; value = error.stdout; }
+    const lines = value.toString().split('\n'), start = lines.findIndex(line => line.startsWith('@@ '));
+    if (start < 0) fail('supporting successor requires a nonempty textual owned patch');
+    return lines.slice(start).map(line => line.replace(/^@@ -\d+(?:,\d+)? \+\d+(?:,\d+)? @@/, '@@')).join('\n');
+  };
+  for (const row of policy?.additional_paths ?? []) {
+    const ownerBytes = bytes(resolve(o.repo, row.ownership_evidence)), owner = JSON.parse(ownerBytes.toString());
+    for (const proof of owner.supporting_git_base_successors ?? []) {
+      if (proof.path !== row.path) continue;
+      if (owner.run !== o.run || owner.authorized_by !== 'owner' || owner.owner_identity !== '/root'
+        || owner.kind !== 'owner-reviewed-supporting-git-base-successor' || owner.coverage_created !== false
+        || out.has(row.path) || !row.path.startsWith('tools/') || row.path.startsWith('tools/physics-support/')
+        || proof.original_head !== base || proof.current_head !== head
+        || JSON.stringify(proof.checked_descendant_commits) !== JSON.stringify(commits)
+        || typeof proof.reason !== 'string' || proof.reason.trim().length < 80
+        || proof.coverage_created !== false) fail('invalid committed supporting-base successor');
+      const oldPolicyBytes = bound(proof.previous_policy), oldPolicy = JSON.parse(oldPolicyBytes.toString());
+      const policyPath = `research/${o.run}-closeout-scope.json`;
+      if (prepared.source?.tree?.[policyPath] !== protectedHash(oldPolicyBytes)
+        || oldPolicy.run !== o.run || oldPolicy.authorized_by !== 'owner') fail('successor lacks actual preceding policy basis');
+      const oldRows = oldPolicy.additional_paths?.filter((r: any) => r.path === row.path) ?? [];
+      if (oldRows.length !== 1) fail('successor was not a previously authorized supporting path');
+      const oldOwnerPath = oldRows[0].ownership_evidence, oldOwnerBytes = bytes(resolve(o.repo, oldOwnerPath));
+      if (prepared.source?.tree?.[oldOwnerPath] !== protectedHash(oldOwnerBytes)) fail('previous supporting ownership changed');
+      const oldOwner = JSON.parse(oldOwnerBytes.toString()), oldWorking = bound(proof.previous_working);
+      if (oldOwner.run !== o.run || !oldOwner.owned_paths?.some((r: any) => r.path === row.path && r.sha256 === oldRows[0].sha256)
+        || hash(oldWorking) !== oldRows[0].sha256) fail('previous exact owned patch lacks genuine ownership');
+      const oldBase = bound(proof.original_base), newBase = bound(proof.current_base);
+      const originalRows = treeEntries(scope.gitRoot, base).filter((r: any) => r.path === row.path);
+      const currentRows = treeEntries(scope.gitRoot, head).filter((r: any) => r.path === row.path);
+      const indexed = indexEntries(scope.gitRoot).filter((r: any) => r.path === row.path);
+      if (originalRows.length !== 1 || currentRows.length !== 1 || indexed.length !== 1
+        || [originalRows[0], currentRows[0], indexed[0]].some((r: any) => r.mode !== '100644')
+        || indexed[0].flags !== '0' || indexed[0].stage !== 0 || indexed[0].oid !== currentRows[0].oid
+        || originalRows[0].oid === currentRows[0].oid
+        || !git(scope.gitRoot, ['cat-file', 'blob', originalRows[0].oid]).equals(oldBase)
+        || !git(scope.gitRoot, ['cat-file', 'blob', currentRows[0].oid]).equals(newBase)) fail('supporting successor HEAD/index bases differ');
+      const beforePatch = patch(resolve(o.repo, proof.original_base.path), resolve(o.repo, proof.previous_working.path));
+      const afterPatch = patch(resolve(o.repo, proof.current_base.path), resolve(o.repo, row.path));
+      if (beforePatch !== afterPatch || hash(beforePatch) !== proof.unchanged_patch_sha256
+        || hash(bytes(resolve(o.repo, row.path))) !== row.sha256) fail('supporting successor contains a new or foreign working delta');
+      out.set(row.path, { path: row.path, original: originalRows[0], current: currentRows[0],
+        ownership_evidence: row.ownership_evidence, ownership_sha256: hash(ownerBytes), proof });
+    }
+  }
+  return out;
+}
 // Read-only recovery proof for a failed current v3 transaction. It never resets
 // refs/index or adopts the old battery. Missing owned Git bases fail closed.
 function failedRefreshBasis(o: Options, state: any, events: Buffer) {
@@ -120,17 +185,19 @@ function failedRefreshBasis(o: Options, state: any, events: Buffer) {
     || Date.parse(predecessor.doneAt) < Date.parse(predecessor.gatesPassedAt)
     || Date.parse(predecessor.doneAt) > Date.parse(entered))
     fail('preceding native battery is incomplete or inconsistent');
-  const attempts: any[] = []; let pending: any = null;
+  const attempts: any[] = []; const supportingFailures = new Set<string>(); let pending: any = null;
   for (const row of rows.filter(row => Date.parse(row.at) >= Date.parse(entered))) {
     if (row.type === 'dispatch' && row.stage === '6-finalize-v3' && row.role === 'tool' && row.label === 'step6-finalize-v3') {
       if (pending) fail('unresolved finalizer event sequence');
       pending = row;
     }
     if (row.key === '6-finalize-v3:step6-finalize-v3' && row.type === 'dispatch-failed') {
-      if (!pending || row.ok !== false || ![
+      const supporting = /^tool\/step6-finalize-v3 exit=1 :: step6-finalize: closeout: supporting path bytes differ from owner authorization: (tools\/[a-zA-Z0-9_./-]+)(?![\s\S])/.exec(row.message ?? '');
+      if (!pending || row.ok !== false || (![
         'tool/step6-finalize-v3 exit=1 :: step6-finalize: Validated frontier/context changed before commit',
         'tool/step6-finalize-v3 exit=1 :: step6-finalize: Step-6 prepared source or derived evidence changed',
-      ].includes(row.message)) fail('finalizer failure is not an authenticated pre-ref refusal');
+      ].includes(row.message) && !supporting)) fail('finalizer failure is not an authenticated pre-ref refusal');
+      if (supporting) supportingFailures.add(supporting[1]);
       attempts.push({ dispatch: pending, failure: row }); pending = null;
     }
   }
@@ -152,6 +219,9 @@ function failedRefreshBasis(o: Options, state: any, events: Buffer) {
   if (plan && plan.spec.original_head !== base) fail('refresh Git bases disagree');
   git(scope.gitRoot, ['merge-base', '--is-ancestor', base, head]);
   const commits = textGit(scope.gitRoot, ['rev-list', '--reverse', `${base}..${head}`]).split('\n').filter(Boolean);
+  const successors = supportingBaseSuccessors(o, scope, prepared, base, head, commits);
+  if ([...supportingFailures].some(path => !successors.has(path))
+    || [...successors.keys()].some(path => !supportingFailures.has(path))) fail('supporting refusal lacks exact committed-base successor proof');
   const authorization = relative(o.repo, resolve(o.authorizationPath ?? join(o.repo, 'research', `${o.run}-step6-cutover-authorization.json`)));
   const own = new Set<string>(scope.paths.filter(path => path !== authorization)), special = new Map<string, any>();
   for (const row of scope.fragments) special.set(row.path, { kind: 'ledger', row, ids: new Set(row.ownedIds) });
@@ -161,7 +231,15 @@ function failedRefreshBasis(o: Options, state: any, events: Buffer) {
     if (kind === 'index' && selected.some(row => row.stage !== 0 || row.flags !== '0'))
       fail('owned index flags/stages require separate recovery');
     const map = new Map<string, any>(selected.map(row => [row.path, row]));
-    const ordinary = selected.filter(row => !special.has(row.path)).map(({ path, mode, oid }) => ({ path, mode, oid }))
+    const ordinary = selected.filter(row => !special.has(row.path)).map(({ path, mode, oid }) => {
+      const successor = successors.get(path);
+      if (successor) {
+        if (mode !== '100644' || ![successor.original.oid, successor.current.oid].includes(oid)) fail('unreviewed intervening supporting blob: ' + path);
+        if (kind === 'index' && oid !== successor.current.oid) fail('supporting index is not the current committed base');
+        oid = successor.original.oid;
+      }
+      return { path, mode, oid };
+    })
       .sort((a, b) => a.path.localeCompare(b.path));
     const shared = [...special].sort(([a], [b]) => a.localeCompare(b)).map(([path, value]) => {
       const entry = map.get(path);
@@ -200,6 +278,7 @@ function failedRefreshBasis(o: Options, state: any, events: Buffer) {
     owned_head_projection_sha256: hash(JSON.stringify(baseline)),
     owned_index_projection_sha256: hash(JSON.stringify(currentIndex)),
     index_sha256: (index as any).indexSnapshot.sha256, checked_descendant_commits: commits,
+    supporting_base_successors: [...successors.values()],
     scope_policy_sha256: scope.policy?.policySha256 ?? null,
     scope_context_sha256: scope.policy?.contextSha256 ?? null, commit_landed: false, coverage_created: false };
 }

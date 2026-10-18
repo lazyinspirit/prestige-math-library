@@ -1,0 +1,613 @@
+[
+  {
+    "order": 2666,
+    "id": "supg-and-residual-based-stabilized-finite-elements",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "SUPG, residual stabilization and variational multiscale methods",
+    "companion": "supg-and-residual-based-stabilized-finite-elements-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "energy-stable-incompressible-navier-stokes-discretization"
+    ],
+    "items": [
+      {
+        "id": "def-supg-one-dimensional-convection-diffusion-model",
+        "kind": "definition",
+        "title": "One-dimensional stationary convection–diffusion model and uniform P1 space",
+        "deps": [],
+        "justified_by": [],
+        "statement": "Fix an integer $N\\ge1$, put $h=1/N$, and let $x_j=jh$ for $j=0,\\ldots,N$. The cells are $K_j=[x_{j-1},x_j]$. For $g_0,g_1\\in\\mathbb R$, let $S_h(g_0,g_1)$ be the finite-dimensional space of continuous functions on $[0,1]$ that are affine on each cell and have endpoint values $g_0,g_1$. Write $V_h=S_h(0,0)$ for the homogeneous test and trial space. “P1” means polynomial degree at most one on each interval.\n\nLet $\\epsilon>0$, $b\\in\\mathbb R\\setminus\\{0\\}$, and $f\\in C([0,1])$. The stationary boundary-value problem is to find $u\\in C^2([0,1])$ such that $-\\epsilon u''+b u'=f$ on $(0,1)$, with prescribed endpoint values $u(0)=g_0$ and $u(1)=g_1$. Its dimensionless cell Péclet number is $\\mathrm{Pe}=|b|h/(2\\epsilon)>0$. The stability theorem on this page uses the homogeneous branch $g_0=g_1=0$; the general endpoint notation also permits the boundary-layer example.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Example 5.16, printed pp. 55–56: the steady one-dimensional P1 SUPG equation and the exact coth parameter."
+          },
+          {
+            "title": "Hans Petter Langtangen, INF5620: Numerical Methods for Partial Differential Equations, lecture slides",
+            "url": "https://hplgit.github.io/INF5620/doc/web/literature/slides5620_12_8.pdf",
+            "locator": "Slides 77–86, PDF pp. 9–10: perturbed test functions, streamline diffusion, consistency, and the optimal one-dimensional parameter."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 0,
+        "level": 0,
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "def-supg-general-convection-diffusion-reaction-model",
+        "kind": "definition",
+        "title": "Stationary multidimensional convection–diffusion–reaction P1 model",
+        "deps": [
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "justified_by": [],
+        "statement": "Fix $d\\ge2$ and a bounded connected polyhedral open set $\\Omega\\subset\\mathbb R^d$. For each mesh parameter $h$, let $\\mathcal T_h$ be a finite matching shape-regular affine simplicial mesh in the sense of [[def-matching-affine-simplicial-meshes]], and put $h=\\max_{K\\in\\mathcal T_h}h_K$. Let $V_h$ be the space of continuous functions on $\\overline\\Omega$ that are affine on every cell and vanish on $\\partial\\Omega$.\n\nLet $\\epsilon>0$, $b\\in C^1(\\overline\\Omega;\\mathbb R^d)$, $c\\in C(\\overline\\Omega)$, and $f\\in C(\\overline\\Omega)$. Define $B:=\\|b\\|_{L^\\infty(\\Omega)}$ and $C:=\\|c\\|_{L^\\infty(\\Omega)}$. Assume a fixed $\\omega>0$ satisfies $c-\\frac12\\nabla\\cdot b\\ge\\omega$ on $\\Omega$. The boundary condition for this branch is $u=0$ on the whole boundary, including the inflow part $\\{x\\in\\partial\\Omega:b(x)\\cdot n(x)<0\\}$. A classical exact solution is a function $u\\in C^2(\\overline\\Omega)$ satisfying $-\\epsilon\\Delta u+b\\cdot\\nabla u+cu=f$ in $\\Omega$ and this boundary condition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "§5.2, printed pp. 56–60: the stationary operator, the condition $c-\\frac12\\nabla\\cdot b\\ge\\omega$, the SUPG norm, coercivity, and the P1 error route."
+          },
+          {
+            "title": "Hans Petter Langtangen, INF5620: Numerical Methods for Partial Differential Equations, lecture slides",
+            "url": "https://hplgit.github.io/INF5620/doc/web/literature/slides5620_12_8.pdf",
+            "locator": "Slides 81–86, PDF pp. 10–11: streamline-direction stabilization, residual consistency, and the separation of multidimensional parameter choice."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 0,
+        "level": 0,
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "def-supg-pspg-grad-div-stokes-forms",
+        "kind": "definition",
+        "title": "Residual PSPG and grad-div terms for equal-order flow spaces",
+        "deps": [],
+        "justified_by": [],
+        "statement": "Let $d\\ge1$ and $\\Omega\\subset\\mathbb R^d$ have a finite cell partition $\\mathcal T$. Let $V_h$ be a finite-dimensional vector space of continuous vector-valued functions, each cellwise polynomial, and let $Q_h$ be a finite-dimensional scalar space of continuous cellwise polynomials with zero mean. Boundary conditions are stated with each application; the Stokes theorem below uses zero velocity boundary values, and the periodic example below uses periodic identification. The pair is **equal order** when velocity components and pressure use the same polynomial degree on each cell. On a cell $K$, derivatives in residuals are classical derivatives restricted to the cell interior. For well-defined cell integrals, take $\\sigma\\in L^\\infty(\\Omega)$, $\\beta\\in L^\\infty(\\Omega;\\mathbb R^d)$, $f\\in L^2(\\Omega;\\mathbb R^d)$, and parameters $\\tau_K\\ge0$, $\\gamma\\ge0$.\n\nFor viscosity $\\nu>0$, reaction coefficient $\\sigma\\ge0$, advective field $\\beta$, force $f$, and trial pair $(u_h,p_h)\\in V_h\\times Q_h$, define the strong momentum residual\n$$R_{M,K}(u_h,p_h):=\\sigma u_h+\\beta\\cdot\\nabla u_h-\\nu\\Delta_Ku_h+\\nabla p_h-f.$$\nFor test pairs $(v_h,q_h)$, the full residual PSPG mixed form is\n$$B_h((u_h,p_h),(v_h,q_h)):=\\nu(\\nabla u_h,\\nabla v_h)_\\Omega+(\\beta\\cdot\\nabla u_h+\\sigma u_h,v_h)_\\Omega-(p_h,\\nabla\\cdot v_h)_\\Omega+(q_h,\\nabla\\cdot u_h)_\\Omega+\\sum_K\\tau_K(\\nabla q_h,\\sigma u_h+\\beta\\cdot\\nabla u_h-\\nu\\Delta_Ku_h+\\nabla p_h)_K,$$\nwith load $(f,v_h)_\\Omega+\\sum_K\\tau_K(\\nabla q_h,f)_K$. The **grad-div** addend in velocity tests $v_h$ is $\\gamma\\sum_K(\\nabla\\cdot u_h,\\nabla\\cdot v_h)_K$ with $\\gamma\\ge0$. This definition alone asserts no inf-sup condition, pressure bound, energy estimate, or convergence result.\n\nFor piecewise affine velocities, $\\Delta_Ku_h=0$ on each cell. Therefore the standard P1 PSPG residual omits the cellwise viscous Laplacian of the exact velocity; this fact does not justify a pressure-accuracy or convergence claim. Such conclusions require separate consistency and stabilization analysis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Felipe Galarce and Douglas R. Q. Pacheco, Fully consistent lowest-order finite element methods for generalised Stokes flows with variable viscosity, arXiv:2411.02100v1",
+            "url": "https://arxiv.org/pdf/2411.02100",
+            "locator": "§§2–4, PDF pp. 1–7: generalized Stokes formulation, classical residual PSPG term, equal-order issue, and the low-order loss of the cellwise Laplacian residual."
+          },
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "§5.2, printed pp. 56–60: residual SUPG forms and explicit warnings that coercivity needs a parameter bound and an appropriate stabilized norm."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 0,
+        "level": 0,
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "def-supg-variational-multiscale-block-closure",
+        "kind": "definition",
+        "title": "Finite-dimensional resolved–unresolved VMS split and residual closure",
+        "deps": [],
+        "justified_by": [],
+        "statement": "Let $X_c$ and $X_f$ be finite-dimensional real vector spaces and set $X=X_c\\oplus X_f$; elements are written $(u_c,u_f)$, with $u_c$ the resolved component and $u_f$ the unresolved component. For a real vector space $Y$, let $Y^*$ be its space of real linear functionals. Let $A_{cc}:X_c\\to X_c^*$, $A_{cf}:X_f\\to X_c^*$, $A_{fc}:X_c\\to X_f^*$, and $A_{ff}:X_f\\to X_f^*$ be linear maps, with $A_{ff}$ invertible, and let $F_c\\in X_c^*$ and $F_f\\in X_f^*$. The linear equation on $X$ has block form\n$$\\begin{pmatrix}A_{cc}&A_{cf}\\\\A_{fc}&A_{ff}\\end{pmatrix}\\begin{pmatrix}u_c\\\\u_f\\end{pmatrix}=\\begin{pmatrix}F_c\\\\F_f\\end{pmatrix}.$$\nThe fine residual for a resolved vector $v_c$ is $r_f(v_c):=F_f-A_{fc}v_c$. Exact elimination gives $u_f=A_{ff}^{-1}r_f(u_c)$ and the Schur equation\n$$\\left(A_{cc}-A_{cf}A_{ff}^{-1}A_{fc}\\right)u_c=F_c-A_{cf}A_{ff}^{-1}F_f.$$\n\nA **residual closure** selects a linear map $T:X_f^*\\to X_f$ to approximate the exact inverse $A_{ff}^{-1}:X_f^*\\to X_f$. It defines $\\widetilde A_{cc}:=A_{cc}-A_{cf}TA_{fc}$, $\\widetilde F_c:=F_c-A_{cf}TF_f$, and the modeled fine component $\\widetilde u_f:=T r_f(\\widetilde u_c)$, where $\\widetilde u_c$ solves $\\widetilde A_{cc}\\widetilde u_c=\\widetilde F_c$. This is a finite-dimensional algebraic closure; an application to a PDE requires its own residual, spaces, invertibility, and approximation-defect analysis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Thomas J. R. Hughes, Guglielmo Scovazzi, and Leopoldo P. Franca, Multiscale and Stabilized Methods, Encyclopedia of Computational Mechanics, ICES Report 04-18 (2004)",
+            "url": "https://www.oden.utexas.edu/media/reports/2004/0418.pdf",
+            "locator": "§§3.1–3.2.2: exact coarse/fine space decomposition, residual-driven fine scales, and the distinction between the exact fine-scale Green operator and its approximation."
+          },
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "§5.2, printed pp. 56–60: residual-based stabilization, its norm, and parameter-dependent coercivity."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 0,
+        "level": 0,
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "def-supg-one-dimensional-residual-form",
+        "kind": "definition",
+        "title": "One-dimensional residual SUPG form with the exact cell parameter",
+        "deps": [
+          "def-supg-one-dimensional-convection-diffusion-model"
+        ],
+        "justified_by": [],
+        "statement": "Use the uniform mesh, coefficients, and spaces of [[def-supg-one-dimensional-convection-diffusion-model]]. On every cell set\n$$\\tau=\\frac{h}{2|b|}\\left(\\coth(\\mathrm{Pe})-\\frac1{\\mathrm{Pe}}\\right),\\qquad \\coth s:=\\frac{\\cosh s}{\\sinh s}.$$\nFor $w\\in S_h(g_0,g_1)+C^2([0,1])$ and $v_h\\in V_h$, define\n$$a_h(w,v_h):=\\epsilon\\int_0^1w'v_h'\\,dx+b\\int_0^1w'v_h\\,dx+\\sum_{K\\in\\mathcal T_h}\\tau\\int_K(-\\epsilon w''+bw')(bv_h')\\,dx,$$\n$$F_h(v_h):=\\int_0^1fv_h\\,dx+\\sum_{K\\in\\mathcal T_h}\\tau\\int_K f(bv_h')\\,dx.$$\nSecond derivatives are taken classically on each cell. The strong equation residual is $R_K(w):=-\\epsilon w''+bw'-f$. For P1 trial functions, $w_h''=0$ on each cell, so the cell term is $\\tau\\int_K(bw_h')(bv_h')$. On the smooth consistency extension it retains $-\\epsilon w''$; thus the full residual pairing is $\\tau\\int_K(R_K(w)+f)(bv_h')$, while the load contains the matching $f$ term. The SUPG equation is $a_h(w_h,v_h)=F_h(v_h)$ and adds the same residual-weighted streamline test perturbation to the differential equation and its load.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Definition 5.14 and Example 5.16, printed pp. 54–56: element residual, streamline test perturbation, and the one-dimensional P1 form."
+          },
+          {
+            "title": "Hans Petter Langtangen, INF5620: Numerical Methods for Partial Differential Equations, lecture slides",
+            "url": "https://hplgit.github.io/INF5620/doc/web/literature/slides5620_12_8.pdf",
+            "locator": "Slides 78–86, PDF pp. 9–10: the perturbation $v+\tau v'$ and its consistent residual formulation."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 1,
+        "level": 1,
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "def-supg-general-residual-form",
+        "kind": "definition",
+        "title": "Multidimensional P1 SUPG residual form and parameter scaling",
+        "deps": [
+          "def-supg-general-convection-diffusion-reaction-model"
+        ],
+        "justified_by": [],
+        "statement": "Use the model and notation of [[def-supg-general-convection-diffusion-reaction-model]]. Define $s_b(K)=h_K/\\|b\\|_{L^\\infty(K)}$ when that norm is positive and $s_b(K)=+\\infty$ otherwise; define $s_c(K)=\\omega/\\|c\\|_{L^\\infty(K)}^2$ when that norm is positive and $s_c(K)=+\\infty$ otherwise. For each cell set\n$$\\delta_K:=\\theta\\min\\left\\{\\frac{h_K^2}{\\epsilon},s_b(K),s_c(K)\\right\\},\\quad 0<\\theta\\le\\frac14.$$\nThe minimum is finite and positive because its first entry is finite and positive. This scaling gives $\\delta_K\\|c\\|_{L^\\infty(K)}^2\\le\\omega/4$.\n\nFor a trial function $w$ that is the sum of a cellwise smooth function and a member of $V_h$, and $v_h\\in V_h$, define the element residual $R_K(w):=-\\epsilon\\Delta_K w+b\\cdot\\nabla w+cw$, and\n$$a_h(w,v_h):=\\epsilon(\\nabla w,\\nabla v_h)_\\Omega+(b\\cdot\\nabla w+cw,v_h)_\\Omega+\\sum_{K\\in\\mathcal T_h}\\delta_K(R_K(w),b\\cdot\\nabla v_h)_K,$$\n$$F_h(v_h):=(f,v_h)_\\Omega+\\sum_{K\\in\\mathcal T_h}\\delta_K(f,b\\cdot\\nabla v_h)_K.$$\nHere $(g_1,g_2)_D:=\\int_Dg_1g_2\\,dx$ and $\\Delta_K$ is the classical Laplacian restricted to the interior of $K$. For $w_h\\in V_h$, $\\Delta_Kw_h=0$ because $w_h$ is affine on $K$. No stability claim is part of this definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Definition 5.14, Definition 5.21, and Theorems 5.22 and 5.26, printed pp. 54–60: residual form, streamline norm, admissible parameter bounds, and error analysis."
+          },
+          {
+            "title": "Thomas J. R. Hughes, Guglielmo Scovazzi, and Leopoldo P. Franca, Multiscale and Stabilized Methods, Encyclopedia of Computational Mechanics, ICES Report 04-18 (2004)",
+            "url": "https://www.oden.utexas.edu/media/reports/2004/0418.pdf",
+            "locator": "Sections 3.1–3.2.2: residual-based stabilization and the role of fine-scale residuals."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 1,
+        "level": 1,
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "lem-supg-one-dimensional-l2-interpolation-estimate",
+        "kind": "lemma",
+        "title": "One-dimensional P1 interpolation has an L2 error bound",
+        "deps": [
+          "def-supg-one-dimensional-convection-diffusion-model"
+        ],
+        "justified_by": [],
+        "statement": "Let $0=x_0<\\cdots<x_N=1$ be a finite interval partition with maximum cell length $h$, and let $u\\in C^2([0,1])$. Let $I_hu$ be the continuous piecewise-linear interpolant with the same nodal values as $u$. Then\n$$\\|u-I_hu\\|_{L^2(0,1)}\\le h^2\\|u''\\|_{L^\\infty(0,1)}.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Example 5.16, printed pp. 55–56: cellwise P1 interpolation and the exact one-dimensional SUPG mesh."
+          },
+          {
+            "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 24, Finite element error analysis",
+            "url": "https://jschoeberl.github.io/iFEM/FEM/erroranalysis.html",
+            "locator": "Complete Chapter 24 text; local interpolation-error argument and global mesh summation."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 1,
+        "level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-supg-general-p1-interpolation-estimate",
+        "kind": "lemma",
+        "title": "Shape-regular affine P1 interpolation estimates for C2 functions",
+        "deps": [
+          "def-supg-general-convection-diffusion-reaction-model",
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "justified_by": [],
+        "statement": "Use the fixed dimension $d\\ge2$ and the finite shape-regular affine simplicial mesh family from [[def-supg-general-convection-diffusion-reaction-model]] and [[def-matching-affine-simplicial-meshes]]. Let $u\\in C^2(\\overline\\Omega)$, and on each simplex $K$ let $I_Ku=\\sum_{i=0}^d u(a_i)\\lambda_i$ be its nodal affine interpolant, where $a_i$ are the vertices and $\\lambda_i$ the barycentric coordinates. Set $I_hu|_K=I_Ku$ and $M_2:=|\\Omega|^{1/2}\\|D^2u\\|_{L^\\infty(\\Omega)}$, using the Euclidean matrix norm for $D^2u$. There is a constant $C_I$ depending only on $d$ and the shape-regularity bound such that\n$$\\|u-I_hu\\|_{L^2(\\Omega)}\\le C_Ih^2M_2,\\qquad \\|\\nabla(u-I_hu)\\|_{L^2(\\Omega)}\\le C_IhM_2.$$\nIf $u=0$ on $\\partial\\Omega$, then $I_hu=0$ on every boundary facet.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Theorem 5.26 and its proof, printed pp. 59–62: the SUPG convergence route applies P1 interpolation estimates in each term of the stabilized norm."
+          },
+          {
+            "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 11, Local interpolation on affine meshes",
+            "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap11.pdf",
+            "locator": "§§11.2 and 11.4, printed pp. 120–125: affine scaling and local interpolation estimates."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 1,
+        "level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-supg-pspg-stokes-coercivity",
+        "kind": "theorem",
+        "title": "P1 PSPG Stokes form is coercive in its stabilization norm",
+        "deps": [
+          "def-supg-pspg-grad-div-stokes-forms"
+        ],
+        "justified_by": [],
+        "statement": "Let $d\\ge2$, let $\\Omega\\subset\\mathbb R^d$ be a bounded connected polyhedral open set, and let a finite conforming nondegenerate simplicial mesh have connected cell adjacency. Let $V_h$ be continuous vector-valued P1 functions vanishing on the boundary, and let $Q_h$ be continuous scalar P1 functions with zero mean. Let $f\\in L^2(\\Omega;\\mathbb R^d)$, $\\nu>0$, $\\tau_K>0$, and $\\gamma\\ge0$. For the stationary Stokes specialization of [[def-supg-pspg-grad-div-stokes-forms]], define\n$$B_h((u_h,p_h),(v_h,q_h)):=\\nu(\\nabla u_h,\\nabla v_h)_\\Omega-(p_h,\\nabla\\cdot v_h)_\\Omega+(q_h,\\nabla\\cdot u_h)_\\Omega+\\gamma(\\nabla\\cdot u_h,\\nabla\\cdot v_h)_\\Omega+\\sum_K\\tau_K(\\nabla q_h,-\\nu\\Delta_Ku_h+\\nabla p_h)_K.$$\nFor the residual load, set $F_h(v_h,q_h):=(f,v_h)_\\Omega+\\sum_K\\tau_K(\\nabla q_h,f)_K$. Define\n$$\\|(v_h,q_h)\\|_{h}^2:=\\nu\\|\\nabla v_h\\|_2^2+\\gamma\\|\\nabla\\cdot v_h\\|_2^2+\\sum_K\\tau_K\\|\\nabla q_h\\|_{0,K}^2.$$\nThen this is a norm, $B_h(z_h,z_h)=\\|z_h\\|_h^2$, and the discrete problem $B_h(z_h,\\cdot)=F_h(\\cdot)$ has a unique solution satisfying $\\|z_h\\|_h\\le\\|F_h\\|_{h,*}$, where $\\|F_h\\|_{h,*}:=\\sup_{y_h\\ne0}|F_h(y_h)|/\\|y_h\\|_h$. The estimate controls pressure in the mesh-dependent gradient stabilization norm; it does not assert a mesh-uniform $L^2$ pressure bound or convergence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Felipe Galarce and Douglas R. Q. Pacheco, Fully consistent lowest-order finite element methods for generalised Stokes flows with variable viscosity, arXiv:2411.02100v1",
+            "url": "https://arxiv.org/pdf/2411.02100",
+            "locator": "§§3.1 and 4.1, PDF pp. 2–4: the standard PSPG residual, equal-order motivation, and a coercivity proof under explicit stabilization conditions."
+          },
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Theorem 5.22, Corollary 5.23, and Remark 5.25, printed pp. 57–59: stabilized norms, tau restrictions, and coefficient-dependent coercivity."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 1,
+        "level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-supg-vms-schur-defect-bound",
+        "kind": "theorem",
+        "title": "Finite-dimensional VMS residual closure has an explicit Schur defect bound",
+        "deps": [
+          "def-supg-variational-multiscale-block-closure"
+        ],
+        "justified_by": [],
+        "statement": "Use the block operators and residual closure of [[def-supg-variational-multiscale-block-closure]]. Equip $X_c,X_f$ and their duals with norms, and use the corresponding induced operator norms. Let $G:=A_{ff}^{-1}$, assume the exact Schur system has a solution $u_c$, and put $r_f:=F_f-A_{fc}u_c$. Suppose the closure map $T$ has $\\widetilde S:=A_{cc}-A_{cf}TA_{fc}$ invertible, and let $\\widetilde u_c$ solve the approximate Schur system. Then\n$$\\|\\widetilde u_c-u_c\\|\\le\\|\\widetilde S^{-1}\\|\\,\\|A_{cf}\\|\\,\\|T-G\\|\\,\\|r_f\\|,$$\nand for the modeled fine component $\\widetilde u_f=T(F_f-A_{fc}\\widetilde u_c)$,\n$$\\|\\widetilde u_f-u_f\\|\\le\\|T-G\\|\\,\\|r_f\\|+\\|T\\|\\,\\|A_{fc}\\|\\,\\|\\widetilde u_c-u_c\\|.$$\nThe exact fine scale is $u_f=G r_f$. These bounds concern finite-dimensional algebraic blocks; they do not certify a universal PDE subgrid model.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Thomas J. R. Hughes, Guglielmo Scovazzi, and Leopoldo P. Franca, Multiscale and Stabilized Methods, Encyclopedia of Computational Mechanics, ICES Report 04-18 (2004)",
+            "url": "https://www.oden.utexas.edu/media/reports/2004/0418.pdf",
+            "locator": "§§3.2.1–3.2.2: exact residual-driven fine scales, Schur elimination, and the warning that the exact fine-scale Green operator is generally nonlocal."
+          },
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "§5.2, printed pp. 56–60: residual-based stabilization and the need to quantify the modeling parameter."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 1,
+        "level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-supg-one-dimensional-optimal-parameter",
+        "kind": "lemma",
+        "title": "The one-dimensional SUPG parameter is positive and bounded",
+        "deps": [
+          "def-supg-one-dimensional-convection-diffusion-model",
+          "def-supg-one-dimensional-residual-form"
+        ],
+        "justified_by": [],
+        "statement": "Let $s>0$ and define $m(s):=\\coth s-1/s$ and $c_*:=\\min\\{(3\\sinh 1)^{-1},\\coth 1-1\\}>0$. Then\n$$c_*\\min\\{s,1\\}\\le m(s)<1,\\qquad m(s)\\le s/2.$$\nConsequently, for the parameter in [[def-supg-one-dimensional-residual-form]],\n$$0<\\frac{c_*}{2}\\min\\left\\{\\frac{h^2}{2\\epsilon},\\frac{h}{|b|}\\right\\}\\le\\tau<\\frac{h}{2|b|},\\qquad \\tau\\le\\frac{h^2}{8\\epsilon}.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Example 5.16, printed p. 56: the exact coth parameter and its equivalent fitted one-dimensional scheme."
+          },
+          {
+            "title": "Hans Petter Langtangen, INF5620: Numerical Methods for Partial Differential Equations, lecture slides",
+            "url": "https://hplgit.github.io/INF5620/doc/web/literature/slides5620_12_8.pdf",
+            "locator": "Slide 80, PDF p. 9: the optimal one-dimensional parameter $\\coth(h/(2\\epsilon))-2\\epsilon/h$."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 2,
+        "level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-supg-general-p1-error-and-stability",
+        "kind": "theorem",
+        "title": "Multidimensional P1 SUPG consistency, coercivity, and error bound",
+        "deps": [
+          "def-supg-general-convection-diffusion-reaction-model",
+          "def-supg-general-residual-form",
+          "lem-supg-general-p1-interpolation-estimate",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Use the model of [[def-supg-general-convection-diffusion-reaction-model]] and form/parameter of [[def-supg-general-residual-form]]. Assume Countable Choice, and let $u\\in C^2(\\overline\\Omega)$ solve the stated strong problem. For every continuous, zero-boundary function $w$ whose restriction to each cell has square-integrable values and square-integrable weak first derivatives, define\n$$\\|w\\|_{\\mathrm{SD},h}^2:=\\epsilon\\|\\nabla w\\|_{L^2(\\Omega)}^2+\\omega\\|w\\|_{L^2(\\Omega)}^2+\\sum_K\\delta_K\\|b\\cdot\\nabla w\\|_{L^2(K)}^2.$$\n$$M_2:=|\\Omega|^{1/2}\\|D^2u\\|_{L^\\infty(\\Omega)},\\quad B:=\\|b\\|_{L^\\infty(\\Omega)},\\quad C:=\\|c\\|_{L^\\infty(\\Omega)},\\quad \\delta_*:=\\max_K\\delta_K.$$\nThen the discrete form is coercive:\n$$a_h(v_h,v_h)\\ge\\frac34\\|v_h\\|_{\\mathrm{SD},h}^2\\qquad(v_h\\in V_h),$$\nthe discrete problem has a unique solution $u_h$, and the method is consistent, $a_h(u,v_h)=F_h(v_h)$. Moreover, with $C_*$ depending only on dimension, shape regularity, and the interpolation constant,\n$$\\|u-u_h\\|_{\\mathrm{SD},h}\\le C_*M_2\\left[\\left(\\sqrt{\\epsilon}+\\frac{B}{\\sqrt{\\omega}}\\right)h+\\left(\\sqrt{\\omega}+\\frac{C}{\\sqrt{\\omega}}\\right)h^2+B\\sqrt{\\delta_*}\\,h+\\sqrt{\\delta_*}\\left(\\sqrt d\\,\\epsilon+Bh+Ch^2\\right)\\right].$$\nThis is a P1 estimate for the stated strong regularity and parameter branch; it does not claim stability for unrestricted multidimensional parameters or weaker regularity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Definition 5.14, Definition 5.21, Corollary 5.23, and Theorem 5.26 with its complete proof, printed pp. 54–62."
+          },
+          {
+            "title": "Hans Petter Langtangen, INF5620: Numerical Methods for Partial Differential Equations, lecture slides",
+            "url": "https://hplgit.github.io/INF5620/doc/web/literature/slides5620_12_8.pdf",
+            "locator": "Slides 81–86, PDF pp. 10–11: streamline-direction perturbation and the warning that parameter selection is a separate multidimensional problem."
+          }
+        ],
+        "axiom_use": "Countable Choice is assumed and used only through the stated affine-simplex Gauss–Green supplier; no Axiom of Choice is invoked.",
+        "dependency_level": 2,
+        "level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-supg-one-dimensional-consistency-coercivity",
+        "kind": "theorem",
+        "title": "One-dimensional P1 SUPG is consistent and coercive",
+        "deps": [
+          "def-supg-one-dimensional-convection-diffusion-model",
+          "def-supg-one-dimensional-residual-form",
+          "lem-supg-one-dimensional-optimal-parameter"
+        ],
+        "justified_by": [],
+        "statement": "Assume the one-dimensional model of [[def-supg-one-dimensional-convection-diffusion-model]] with homogeneous data $g_0=g_1=0$, and the form of [[def-supg-one-dimensional-residual-form]]. Let $u\\in C^2([0,1])$ solve $-\\epsilon u''+bu'=f$ with $u(0)=u(1)=0$. Then $a_h(u,v_h)=F_h(v_h)$ for every $v_h\\in V_h$. For every $v_h\\in V_h$,\n$$a_h(v_h,v_h)=\\epsilon\\|v_h'\\|_{L^2(0,1)}^2+\\tau b^2\\sum_{K\\in\\mathcal T_h}\\|v_h'\\|_{L^2(K)}^2.$$\nThe right-hand side is a squared norm on $V_h$. Consequently the finite-dimensional SUPG system has a unique solution.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Lemma 5.20, Corollary 5.23, and the P1 specialization of Theorem 5.22, printed pp. 57–58; the local proof here uses constant $b$, $c=0$."
+          },
+          {
+            "title": "Hans Petter Langtangen, INF5620: Numerical Methods for Partial Differential Equations, lecture slides",
+            "url": "https://hplgit.github.io/INF5620/doc/web/literature/slides5620_12_8.pdf",
+            "locator": "Slides 84–86, PDF pp. 10–11: the consistent SUPG residual, P1 cell second derivative, and the scope of the multidimensional extension."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 3,
+        "level": 3,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-supg-one-dimensional-energy-error",
+        "kind": "theorem",
+        "title": "One-dimensional SUPG energy error bound with explicit tau dependence",
+        "deps": [
+          "def-supg-one-dimensional-convection-diffusion-model",
+          "def-supg-one-dimensional-residual-form",
+          "lem-supg-one-dimensional-optimal-parameter",
+          "lem-supg-one-dimensional-l2-interpolation-estimate",
+          "thm-supg-one-dimensional-consistency-coercivity",
+          "lem-one-dimensional-p1-interpolation-error",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume the homogeneous one-dimensional problem and uniform P1 SUPG form of [[def-supg-one-dimensional-convection-diffusion-model]] and [[def-supg-one-dimensional-residual-form]]. Assume Countable Choice, and let $u\\in C^2([0,1])$ be the exact solution and $u_h\\in V_h$ the unique discrete solution from [[thm-supg-one-dimensional-consistency-coercivity]]. For every continuous, piecewise-H1 function $w$ with $w(0)=w(1)=0$, define\n$$\\|w\\|_{\\mathrm{SD}}^2:=\\epsilon\\|w'\\|_{L^2(0,1)}^2+\\tau b^2\\|w'\\|_{L^2(0,1)}^2,\\qquad M:=\\|u''\\|_{L^\\infty(0,1)}.$$\nThis is the product $L^2$ norm of $(\\sqrt{\\epsilon}w',\\sqrt{\\tau}|b|w')$, so it has the triangle inequality.\nThen\n$$\\|u-u_h\\|_{\\mathrm{SD}}\\le \\left[h\\sqrt{\\epsilon+\\tau b^2}+h\\sqrt{\\epsilon}+h|b|\\sqrt{\\tau}+\\epsilon\\sqrt{\\tau}+\\frac{h^2}{\\sqrt{\\tau}}\\right]M.$$\nWith $c_*$ from [[lem-supg-one-dimensional-optimal-parameter]], there is a universal $C_*>0$ such that also\n$$\\|u-u_h\\|_{\\mathrm{SD}}\\le C_*\\left(h\\sqrt{\\epsilon}+h^{3/2}\\sqrt{|b|}\\right)M.$$",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Theorem 5.26 and its complete proof, printed pp. 59–62: SUPG interpolation, Galerkin orthogonality, and the mesh-dependent stabilized-norm estimate."
+          },
+          {
+            "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 24, Finite element error analysis",
+            "url": "https://jschoeberl.github.io/iFEM/FEM/erroranalysis.html",
+            "locator": "Complete Chapter 24 text: the interpolation estimate and the energy-error proof route."
+          }
+        ],
+        "axiom_use": "Countable Choice is assumed only through the published one-dimensional interpolation supplier; no Axiom of Choice is invoked.",
+        "dependency_level": 4,
+        "level": 4,
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2667,
+    "id": "supg-and-residual-based-stabilized-finite-elements-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "SUPG, residual stabilization and variational multiscale methods — Examples",
+    "companion": "supg-and-residual-based-stabilized-finite-elements",
+    "requires": [
+      "supg-and-residual-based-stabilized-finite-elements"
+    ],
+    "items": [
+      {
+        "id": "ex-supg-q1-equal-order-pressure-checkerboard",
+        "kind": "example",
+        "title": "A periodic Q1/Q1 checkerboard pressure mode is invisible to divergence",
+        "deps": [
+          "def-supg-pspg-grad-div-stokes-forms"
+        ],
+        "justified_by": [],
+        "statement": "Take the periodic square with a $2\\times2$ unit-square Q1 mesh. At the grid node $(i,j)$, for $i,j\\in\\{0,1,2\\}$, set $q_{ij}=(-1)^{i+j}$ and identify opposite boundaries periodically. Assume $\\tau_K>0$ on every cell. These nodal values define a nonzero mean-zero Q1 pressure. It is invisible to the ordinary velocity-divergence coupling, although its PSPG pressure-gradient term is strictly positive.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Felipe Galarce and Douglas R. Q. Pacheco, Fully consistent lowest-order finite element methods for generalised Stokes flows with variable viscosity, arXiv:2411.02100v1",
+            "url": "https://arxiv.org/pdf/2411.02100",
+            "locator": "§§2–4, PDF pp. 1–7: equal-order pressure instability, PSPG residual terms, and why low-order residual stabilization does not by itself prove accuracy."
+          },
+          {
+            "title": "Thomas J. R. Hughes, Multiscale and Stabilized Methods",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/9781119176817.ecm2051",
+            "locator": "§§3.2.2–3.2.3: residual and interelement-jump contributions in finite-element multiscale formulations."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 1,
+        "level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-supg-grad-div-does-not-fix-pressure-kernel",
+        "kind": "example",
+        "title": "Grad-div alone does not remove the Q1 checkerboard pressure kernel",
+        "deps": [
+          "def-supg-pspg-grad-div-stokes-forms",
+          "ex-supg-q1-equal-order-pressure-checkerboard"
+        ],
+        "justified_by": [],
+        "statement": "On the same periodic Q1/Q1 mesh and with the same checkerboard pressure from [[ex-supg-q1-equal-order-pressure-checkerboard]], add any grad-div coefficient $\\gamma\\ge0$ to the velocity equation but omit PSPG. The pressure mode remains a nonzero null vector for every $\\gamma$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Felipe Galarce and Douglas R. Q. Pacheco, Fully consistent lowest-order finite element methods for generalised Stokes flows with variable viscosity, arXiv:2411.02100v1",
+            "url": "https://arxiv.org/pdf/2411.02100",
+            "locator": "§3, PDF pp. 2–3: equal-order pressure instability and the role of a pressure residual term."
+          },
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "§5.2, printed pp. 56–60: stabilization and pressure control are separate from the scalar SUPG coercivity argument."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 2,
+        "level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-supg-vms-two-scale-closure-defect-sharp",
+        "kind": "example",
+        "title": "A two-scale VMS closure attains its Schur defect bound",
+        "deps": [
+          "def-supg-variational-multiscale-block-closure",
+          "thm-supg-vms-schur-defect-bound"
+        ],
+        "justified_by": [],
+        "statement": "Let each resolved and unresolved space be $\\mathbb R$ with the absolute-value norm (and give its dual the corresponding dual norm). Take the block matrix $\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$, load $(1,0)$, and closure inverse $T=1/4$. The exact and modeled coarse solutions differ by exactly the defect bound in [[thm-supg-vms-schur-defect-bound]].",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Thomas J. R. Hughes, Guglielmo Scovazzi, and Leopoldo P. Franca, Multiscale and Stabilized Methods, Encyclopedia of Computational Mechanics, ICES Report 04-18 (2004)",
+            "url": "https://www.oden.utexas.edu/media/reports/2004/0418.pdf",
+            "locator": "§3.2.1, equations (57)–(68): exact fine-scale elimination and the residual-driven coarse equation."
+          },
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "§5.2, printed pp. 56–60: residual models require their own parameter and stability analysis."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 2,
+        "level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-supg-overlarge-stabilization-smears-solution",
+        "kind": "example",
+        "title": "Overlarge streamline stabilization suppresses a one-cell solution",
+        "deps": [
+          "def-supg-one-dimensional-convection-diffusion-model",
+          "def-supg-one-dimensional-residual-form",
+          "lem-supg-one-dimensional-optimal-parameter"
+        ],
+        "justified_by": [],
+        "statement": "Use $\\epsilon=b=1$, $f=1$, homogeneous endpoint values, and one interior P1 degree of freedom on the two-cell mesh $h=1/2$. Replace the exact parameter $\\tau$ by the deliberately oversized value $\\widetilde\\tau=M\\tau$, $M>0$. The discrete midpoint value tends to zero as $M\\to\\infty$, while the exact midpoint value is fixed and positive.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Remark 5.25 and Example 5.16, printed pp. 58 and 55–56: the stabilization parameter enters the norm and can add excessive streamline diffusion."
+          },
+          {
+            "title": "Hans Petter Langtangen, INF5620: Numerical Methods for Partial Differential Equations, lecture slides",
+            "url": "https://hplgit.github.io/INF5620/doc/web/literature/slides5620_12_8.pdf",
+            "locator": "Slides 78–80, PDF p. 9: artificial diffusion, the exact one-dimensional parameter, and its distinction from the upwind value."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 3,
+        "level": 3,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-supg-convection-boundary-layer-coarse-mesh",
+        "kind": "example",
+        "title": "A two-cell SUPG mesh misses the interior shape of an outflow layer",
+        "deps": [
+          "def-supg-one-dimensional-convection-diffusion-model",
+          "def-supg-one-dimensional-residual-form",
+          "lem-supg-one-dimensional-optimal-parameter"
+        ],
+        "justified_by": [],
+        "statement": "Take $b>0$, $\\epsilon>0$, $f=0$, and endpoint data $u(0)=0$, $u(1)=1$. On the two-cell mesh $h=1/2$, the exact-parameter P1 SUPG solution has the exact nodal value at $x=1/2$. Nevertheless, at a fixed point inside the outflow cell its error tends to $0.98$ as $\\epsilon\\downarrow0$. The example separates nodal fitting from resolution of the layer inside an element.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": [
+          {
+            "title": "Volker John, Numerical Methods for Convection-Dominated Problems, lecture notes, Chapter 5",
+            "url": "https://www.wias-berlin.de/people/john/LEHRE/NUM_KONV_PROB_13_14/num_conv_dom.pdf",
+            "locator": "Example 5.16, printed pp. 55–56, and Example 5.30, printed p. 64: exact one-dimensional nodal fitting and unresolved boundary layers."
+          },
+          {
+            "title": "Hans Petter Langtangen, INF5620: Numerical Methods for Partial Differential Equations, lecture slides",
+            "url": "https://hplgit.github.io/INF5620/doc/web/literature/slides5620_12_8.pdf",
+            "locator": "Slides 79–80, PDF p. 9: the one-dimensional optimal parameter and nodal exactness."
+          }
+        ],
+        "axiom_use": "No choice principle is used in this finite-dimensional definition, calculation, or proof.",
+        "dependency_level": 3,
+        "level": 3,
+        "strategy": "direct"
+      }
+    ]
+  }
+]

@@ -1,0 +1,413 @@
+[
+  {
+    "order": 2642,
+    "id": "finite-volume-diffusion-and-mimetic-fluxes",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Finite-volume diffusion on admissible meshes",
+    "companion": "finite-volume-diffusion-and-mimetic-fluxes-examples",
+    "requires": [
+      "elliptic-finite-difference-methods",
+      "conservative-finite-volume-weak-limits",
+      "nonlinear-parabolic-compactness-and-monotone-evolution"
+    ],
+    "items": [
+      {
+        "id": "def-fv-admissible-cell-face-mesh",
+        "kind": "definition",
+        "title": "Finite-volume cell-face meshes and geometric regularity",
+        "statement": "A finite partition into connected Lipschitz cells and faces, with cell and face measures, centers, normals, graph connectivity, and explicit regular-family bounds used by the finite-volume results.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Specify cell, face, boundary, center, measure, adjacency, and mesh-family conventions, including the exact regularity bounds used later.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, Definition 9.1, printed pp. 37–39: convex cells, faces, centers, orthogonality, transmissibilities, and Voronoï meshes."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§1.1, Definition 1.1, PDF pp. 3–4: cells, faces, centers, normals, and mesh size."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-tpfa-harmonic-face-scheme",
+        "kind": "definition",
+        "title": "Orthogonal TPFA diffusion with harmonic face transmissibility",
+        "statement": "The cell-balance TPFA scheme for isotropic, positive cellwise-constant diffusion on center-normal orthogonal meshes, including one-sided boundary transmissibilities and harmonic two-sided interface transmissibilities.",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Define orthogonality, cellwise coefficients, the series-resistance transmissibility, oriented face flux, cell balance, and the face-copy discrete gradient norm.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, Definition 9.1 and scheme equations (9.17)–(9.23), printed pp. 37–42; Chapter 11 §11.1, equations (11.3)–(11.5), printed pp. 78–81, for discontinuous coefficients and harmonic interface treatment."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§2, equations (2.1)–(2.7), PDF pp. 8–10: TPFA orthogonality, harmonic transmissibility, energy identity, and monotonicity."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-hybrid-mimetic-fv-scheme",
+        "kind": "definition",
+        "title": "Hybrid mimetic finite-volume diffusion on general meshes",
+        "statement": "A cell-and-face degree-of-freedom method on general convex cell-face meshes, with an affine-exact reconstructed gradient, residual stabilization, symmetric tensor diffusion, locally conservative face fluxes, and a monotone p-growth backward-Euler extension.",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Define cell and face averages, the divergence-based cell gradient, its affine residual, a positive local stabilization, the global hybrid balance, and the optional monotone p-growth evolution form.",
+        "axiom_base": "No choice axiom is used in the finite-dimensional method definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§4, equations (4.7)–(4.9), PDF pp. 19–20: hybrid/mimetic cell gradients, vanishing affine residuals, and stabilized variational formulation."
+            },
+            {
+              "title": "Konstantin Lipnikov and Gianmarco Manzini, Discretization of mixed formulations of elliptic problems on polyhedral meshes, 2016",
+              "url": "https://arxiv.org/pdf/1610.05850",
+              "locator": "§3, especially the mixed-hybrid construction and consistency/stability conditions, PDF pp. 8–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-tpfa-green-coercivity-maximum-principle",
+        "kind": "theorem",
+        "title": "TPFA discrete Green identity, coercivity, and maximum principle",
+        "statement": "On a finite connected orthogonal mesh whose cell graph is anchored to Dirichlet boundary faces, shared TPFA fluxes are locally conservative, the cell matrix is symmetric positive definite in the transmissibility energy, and nonnegative source and boundary data give nonnegative cell values.",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh",
+          "def-tpfa-harmonic-face-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Pair the cell balance with a test vector, collect the two signed contributions at each interior face, and use positivity plus boundary anchoring for injectivity and the minimum argument.",
+        "axiom_base": "No choice axiom is used; the graph and all sums are finite.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.3 and §9.4, discrete energy estimates and convergence, printed pp. 42–49."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§2.1–2.2, equations (2.6)–(2.7), PDF pp. 9–10: TPFA energy and the boundary-anchored minimum-principle argument."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-path-certified-fv-discrete-poincare",
+        "kind": "theorem",
+        "title": "Discrete Poincaré inequality from boundary paths",
+        "statement": "For a finite TPFA mesh supplied with cell-to-boundary paths and a finite congestion constant, the piecewise-constant cell reconstruction satisfies an explicit discrete Poincaré inequality in the transmissibility energy norm.",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh",
+          "def-tpfa-harmonic-face-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Write each cell value as the signed sum of its path increments, apply weighted Cauchy–Schwarz, and exchange the finite cell-edge sums using the stated congestion bound.",
+        "axiom_base": "No choice axiom is used; the paths are finite data and all sums are finite.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, Definition 9.2 and Lemma 9.1 with proof, printed pp. 39–41: discrete H1 norm and Poincaré inequality on admissible orthogonal meshes."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§1.2 and §2.1, PDF pp. 5–9: the discrete H1 norm and the role of a mesh-uniform Poincaré estimate."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "prop-hybrid-mimetic-scheme-coercive-conservative-affine-exact",
+        "kind": "proposition",
+        "title": "Coercivity, monotonicity, conservation, and affine exactness of the mimetic schemes",
+        "statement": "The symmetric linear hybrid mimetic method is locally coercive, globally positive definite under boundary anchoring, locally conservative, and affine-exact for cellwise-constant SPD tensors; its p-growth backward-Euler extension is monotone, coercive, and conservatively balanced.",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh",
+          "def-hybrid-mimetic-fv-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Use the divergence theorem to prove affine gradient reproduction, then use the residual stabilization and constant-vector kernel to prove coercivity, global uniqueness, and face balance.",
+        "axiom_base": "No choice axiom is used; all spaces are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§4, equations (4.7)–(4.9), PDF pp. 19–20: affine exactness, stabilization, and HMM coercivity/convergence discussion."
+            },
+            {
+              "title": "Konstantin Lipnikov and Gianmarco Manzini, Discretization of mixed formulations of elliptic problems on polyhedral meshes, 2016",
+              "url": "https://arxiv.org/pdf/1610.05850",
+              "locator": "§3.2–3.3, PDF pp. 9–16: consistency and stability conditions for mixed-hybrid mimetic schemes."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-tpfa-flux-energy-convergence-smooth-interface",
+        "kind": "theorem",
+        "title": "TPFA flux-energy convergence for smooth face-aligned interfaces",
+        "statement": "For a regular orthogonal mesh family and a cellwise-constant positive isotropic coefficient with jumps aligned to faces, a piecewise C2 solution with continuous normal flux has TPFA numerical face fluxes converging to the exact face-integrated flux in the transmissibility-dual energy norm at rate O(h).",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh",
+          "def-tpfa-harmonic-face-scheme",
+          "thm-tpfa-green-coercivity-maximum-principle"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Use the exact finite-volume balance, estimate each cell-center flux residual by one-dimensional Taylor expansion in the face-normal direction, and test the discrete error equation with the error.",
+        "axiom_base": "No choice axiom is used; the proof uses finite sums and Taylor's theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §§9.4–9.5, printed pp. 44–55: flux consistency, conservative error transfer, and regular-solution estimates; Chapter 11 §11.1, printed pp. 78–81, for discontinuous coefficients."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§1.2 Remark 1.3 and §2, PDF pp. 5–10: face-flux consistency, conservativity, and TPFA energy."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-mimetic-fv-parabolic-limit-identification",
+        "kind": "lemma",
+        "title": "Conditional monotone finite-volume parabolic limit identification",
+        "statement": "On the stated bounded open C1 domain and under the exact exponent/data hypotheses, if finite-volume state reconstructions admit conforming Sobolev reconstructions with the PE12 strong-state and weak-gradient limits, their discrete weak equations converge, and their energies satisfy the Minty limsup bound, then every such limit solves the parabolic equation with the correct monotone flux graph.",
+        "deps": [
+          "def-pe12-gelfand-triple",
+          "def-pe12-monotone-diffusion-flux",
+          "lem-pe12-space-time-gradient-weak-compactness",
+          "lem-pe12-minty-identification",
+          "lem-pe12-evolution-energy-chain-rule",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Apply PE12 weak compactness to the assumed conforming reconstructions, pass the discrete weak identity under the stated residual hypothesis, and apply Minty's lemma using the discrete energy limsup.",
+        "axiom_base": "Assume the Axiom of Choice. It is used only by the PE12 weak-gradient compactness and Minty supplier chain; no additional choice is used in the finite-volume balance passage.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§1.2 and §4, PDF pp. 5–20: discrete coercivity/compactness requirements and hybrid mimetic formulations."
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, Springer Universitext, 2011",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf",
+              "locator": "Theorem 5.16, Minty–Browder identification, PDF p. 159 (printed p. 145)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2643,
+    "id": "finite-volume-diffusion-and-mimetic-fluxes-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Finite-volume diffusion on admissible meshes — Examples",
+    "companion": "finite-volume-diffusion-and-mimetic-fluxes",
+    "requires": [
+      "finite-volume-diffusion-and-mimetic-fluxes"
+    ],
+    "items": [
+      {
+        "id": "ex-orthogonal-voronoi-harmonic-diffusion",
+        "kind": "example",
+        "title": "Harmonic TPFA flux on a rectangular Voronoï mesh",
+        "statement": "A two-cell rectangular Voronoï mesh reproduces the constant flux of the affine solution u(x,y)=x and conserves that flux across the shared face.",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh",
+          "def-tpfa-harmonic-face-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Compute cell and face centers, transmissibilities, and signed fluxes directly from the TPFA definition.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, Example 9.2, printed pp. 39–40: Voronoï meshes and admissible orthogonality."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-nonorthogonal-two-point-flux-inconsistent",
+        "kind": "counterexample",
+        "title": "A nonorthogonal two-point flux gives a false transverse flux",
+        "statement": "On two nonorthogonal cells, the Euclidean-distance TPFA formula applied to an affine state can return a nonzero flux when the exact normal diffusion flux is zero.",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh",
+          "def-tpfa-harmonic-face-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Give two explicit triangles sharing a vertical face and evaluate the naive two-point formula on u(x,y)=y.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§2.3 and §3, PDF pp. 10–16: failure of TPFA when the orthogonality condition fails and the motivation for multipoint methods."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-harmonic-transmissibility-material-interface",
+        "kind": "example",
+        "title": "Harmonic transmissibility across a one-dimensional material interface",
+        "statement": "For two half-intervals with coefficients 1 and 9, the resistance-weighted harmonic transmissibility reproduces the exact stationary interface flux while the arithmetic average does not.",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh",
+          "def-tpfa-harmonic-face-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Solve the two-resistance continuous problem exactly and compare its interface flux with harmonic and arithmetic TPFA transmissibilities.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 7 §7.2 and Chapter 11 §11.1, printed pp. 22–24 and 78–81: discontinuous diffusion and the harmonic mean induced by series resistances."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§2, equation (2.4) and Remark 2.1, PDF pp. 8–9: harmonic face transmissibility."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-anisotropic-mimetic-flux-on-skew-cell",
+        "kind": "example",
+        "title": "Affine anisotropic flux on a skew parallelogram",
+        "statement": "The hybrid mimetic method reconstructs the exact gradient and all four integrated face fluxes for an affine state on a skew parallelogram with a full anisotropic tensor.",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh",
+          "def-hybrid-mimetic-fv-scheme",
+          "prop-hybrid-mimetic-scheme-coercive-conservative-affine-exact"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Evaluate the face means and integrated outward normals, then verify the reconstructed gradient and tensor-weighted fluxes.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin Lipnikov and Gianmarco Manzini, Discretization of mixed formulations of elliptic problems on polyhedral meshes, 2016",
+              "url": "https://arxiv.org/pdf/1610.05850",
+              "locator": "§3, PDF pp. 8–16: mixed-hybrid mimetic consistency and stability on polyhedral meshes."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

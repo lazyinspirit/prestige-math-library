@@ -1,0 +1,107 @@
+--- native before/alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate
+
++++ owner entry/alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate
+
+@@ -103,12 +103,12 @@
+
+ certificate, it may return `certificate-resource-failure`, which carries no
+ certified $B$.
+ 
+-For $r\ge3$, the returned reconstruction on $[x_i,x_{i+1}]$ is the cubic
+-piece
++For $r\ge3$, associate to the returned vector $\widehat M$ the piecewise
++cubic reconstruction on each $[x_i,x_{i+1}]$ given by
+ $$
+ \widehat s_i(x)=\frac{\widehat M_i(x_{i+1}-x)^3+\widehat M_{i+1}(x-x_i)^3}{6h_i}+\left(y_i-\frac{\widehat M_i h_i^2}{6}\right)\frac{x_{i+1}-x}{h_i}+\left(y_{i+1}-\frac{\widehat M_{i+1}h_i^2}{6}\right)\frac{x-x_i}{h_i}.
+ $$
+-It interpolates the stored data and need not be $C^1$ at an interior knot;
++This reconstruction interpolates the stored data and need not be $C^1$ at an interior knot;
+ it is a piecewise cubic reconstruction, not necessarily a natural spline.
+ The certificate concerns exact evaluation of these pieces. Any floating-point
+ evaluation of them needs a separate piece-evaluation error allowance.
+
+--- native before/thm-natural-tridiagonal-cholesky-solve-residual-certificate
+
++++ owner entry/thm-natural-tridiagonal-cholesky-solve-residual-certificate
+
+@@ -4,9 +4,12 @@
+
+ algorithm of
+ [[alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate]]. If
+ assembly succeeds, its stored symmetric tridiagonal matrix $T$ is positive
+-definite. On every full successful call, with returned interior vector
+-$\widehat m$, rounded residual vector $\widehat w$, and exact rational
+-certificate $C$ from that algorithm,
++definite. On every full successful call, the algorithm returns
++$\operatorname{success}(\widehat M,C,\alpha,\beta,B)$. Let
++$\widehat m=(\widehat M_2,\ldots,\widehat M_{r-1})$ be the interior
++subvector, let $f$ be the stored right-hand side, and let $\widehat w$ be the
++computed rounded residual vector from the algorithm's residual-evaluation
++step. Then
+ $$
+ \|T\widehat m-f\|_\infty\le C.
+ $$
+@@ -16,13 +19,16 @@
+
+ $T\widehat m=f+e$ and $\|e\|_\infty\le C$. This absolute residual
+ certificate remains valid when $\widehat m=0$ or $f=0$.
+ 
+-The factor and solves are the successful outputs of the published dense
+-rounded Cholesky and triangular-substitution procedures on the same stored
+-$T$ and $f$, after deleting only exact-zero operations. Their failure tests
+-retain the published positive-normal pivot and operationwise range rules.
+-Exact positive definiteness does not guarantee rounded success.
++The algorithm's factorization and two substitutions are the successful
++executions of the published dense rounded Cholesky and triangular-substitution
++procedures on the same stored $T$ and $f$, after omitting only exact-zero
++operations. Their failure tests retain the published positive-normal pivot
++and operationwise range rules. Exact positive definiteness does not guarantee
++rounded success.
+ 
+-There are additional conditional backward-error statements. If
++Write $\widehat L$ and $z$ for the factor and forward-solve vector computed in
++this execution. There are additional conditional backward-error statements.
++If
+ $(n+3)u<1$, lower bidiagonal $D_1$ and upper bidiagonal $D_2$ satisfy
+ $$
+ (\widehat L+D_1)z=f,\qquad (\widehat L^T+D_2)\widehat m=z,\qquad |D_1|\le\tau|\widehat L|,\qquad |D_2|\le\tau|\widehat L|^T,\qquad \tau=\frac{(n+3)u}{1-(n+3)u}.
+
+--- native before/thm-computed-natural-cubic-spline-forward-error-certificate
+
++++ owner entry/thm-computed-natural-cubic-spline-forward-error-certificate
+
+@@ -4,10 +4,14 @@
+
+ [[alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate]]. Let
+ $s$ be the exact natural cubic interpolant of those data, supplied by
+ [[thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots]]. On a
+-successful call, let $\widehat s$ be the returned piecewise cubic
+-reconstruction with the returned second derivatives and exact evaluation of
+-its pieces. For $r\ge3$, with the exact certificate quantities
+-$H,\delta,C,\alpha,\beta$ returned by the algorithm,
++successful call, let $\widehat M$ be the returned second-derivative vector,
++put $\widehat m=(\widehat M_2,\ldots,\widehat M_{r-1})$, and let
++$\widehat s$ be the piecewise cubic reconstruction defined by the algorithm
++from $\widehat M$, evaluated exactly. For $r\ge3$, the success output is
++$\operatorname{success}(\widehat M,C,\alpha,\beta,B)$. The algorithm
++computes $H$, $\delta$, and $Q=\|\widehat m\|_\infty$ internally when
++forming $B$; these are not separate returned fields. The returned certificate
++fields satisfy
+ $$
+ \|\widehat s-s\|_{L^\infty([x_1,x_r])}\le B=\frac{H^2}{8\delta}\left(C+\alpha\|\widehat m\|_\infty+\beta\right).
+ $$
+@@ -15,10 +19,10 @@
+
+ natural-cubic system assembled from the stored input data and the rounded
+ matrix and right-hand side used by the factorization. If those systems are
+ exactly the same, then $\alpha=\beta=0$ and $B=H^2C/(8\delta)$. For $r=2$,
+-both the natural interpolant and returned reconstruction are the straight
+-line, and $B=0$.
++both the natural interpolant and the algorithm-defined reconstruction are
++the straight line, and $B=0$.
+ 
+-The returned reconstruction interpolates the stored data, but for $r\ge3$
++The algorithm-defined reconstruction interpolates the stored data, but for $r\ge3$
+ it need not be $C^1$ at its knots and is not asserted to be an exact natural
+ spline. The bound excludes floating-point error from evaluating the cubic
+ pieces and makes no unconditional arithmetic-success or general

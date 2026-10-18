@@ -1,0 +1,693 @@
+[
+  {
+    "order": 2562,
+    "id": "minimax-approximation-and-remez-algorithms",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Minimax approximation and remez algorithms",
+    "companion": "minimax-approximation-and-remez-algorithms-examples",
+    "requires": [
+      "polynomial-approximation-and-chebyshev-interpolation"
+    ],
+    "items": [
+      {
+        "id": "def-na-best-polynomial-uniform-error",
+        "kind": "definition",
+        "title": "Best uniform polynomial error on a compact interval",
+        "deps": [
+          "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "def-complete-ordered-field",
+          "def-continuity-real",
+          "def-interval",
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "thm-algebra-of-continuous-functions",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 73\u201374, best approximation problem and existence setup."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a7\u00a74.2\u20134.4",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 18\u201322, finite-dimensional uniform approximation on a compact interval."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-extrema-sign-block-polynomial",
+        "kind": "lemma",
+        "title": "A polynomial with the sign pattern of the active extrema",
+        "deps": [
+          "cor-of-reverse-triangle",
+          "def-interval",
+          "lem-of-triangle-inequality",
+          "lem-of-abs-value",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed p. 74, the perturbation step in the proof of Theorem 10.1."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a74.4",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 20\u201322, the alternation characterization for T-spaces."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-polynomial-alternating-signs-force-root-count",
+        "kind": "lemma",
+        "title": "Alternating polynomial signs force the Haar zero-count contradiction",
+        "deps": [
+          "thm-algebra-of-continuous-functions",
+          "thm-intermediate-value",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 73\u201375, Theorem 10.1 and its sign-change proof."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a74.4",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 20\u201322, Theorem 4.4 for T-spaces; the polynomial specialization is proved locally here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-polynomial-coefficient-bound-from-fixed-nodes",
+        "kind": "lemma",
+        "title": "Polynomial coefficients are bounded by values at fixed distinct nodes",
+        "deps": [
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, Polynomial interpolation",
+              "url": "https://fncbook.com/polyinterp/",
+              "locator": "Complete article, \u00a72.1, Lagrange interpolation."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 5",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 33\u201339, polynomial interpolation and cardinal formula."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-polynomial-interpolation-alternating-weight-annihilator",
+        "kind": "lemma",
+        "title": "Alternating interpolation weights annihilate lower-degree polynomials",
+        "deps": [
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a76.5",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 45\u201346, Lagrange interpolation weights used to prove uniqueness."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 24",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 205\u2013207, uniqueness argument for rational best approximants."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-reduced-rational-representation-unique",
+        "kind": "lemma",
+        "title": "Reduced real rational representations are unique up to scale",
+        "deps": [
+          "thm-bezout-identity-for-polynomials"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a76.2",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 43\u201344, reduced rational representations in Lemma 6.2."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 24",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 199\u2013200, rational functions in lowest terms and defect."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-weighted-rational-minimax-family",
+        "kind": "definition",
+        "title": "Weighted rational minimax families and defect",
+        "deps": [
+          "def-complete-ordered-field",
+          "def-interval",
+          "lem-na-reduced-rational-representation-unique",
+          "thm-algebra-of-continuous-functions",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 24",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 199\u2013200, real rational functions, reduced degrees, and defect."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a76",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 43\u201344, the irreducible type-(m,n) family and defect."
+            },
+            {
+              "title": "Silviu-Ioan Filip, Yuji Nakatsukasa, Lloyd N. Trefethen, and Bernhard Beckermann, Rational Minimax Approximation via Adaptive Barycentric Representations",
+              "url": "https://people.maths.ox.ac.uk/trefethen/minimax_published.pdf",
+              "locator": "\u00a71, pp. A2427\u2013A2429, rational type and defect."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-polynomial-remez-system-invertible",
+        "kind": "lemma",
+        "title": "The Remez alternation linear system has a unique solution",
+        "deps": [
+          "def-na-best-polynomial-uniform-error",
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "lem-na-polynomial-alternating-signs-force-root-count",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo Pach\u00f3n and Lloyd N. Trefethen, Barycentric-Remez Algorithms for Best Polynomial Approximation in the Chebfun System, \u00a72.1",
+              "url": "https://people.maths.ox.ac.uk/trefethen/remez_new2.pdf",
+              "locator": "Printed pp. 5\u20136, equation (2.6) and the trial reference system."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 73\u201379, polynomial minimax and alternation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-best-polynomial-approximation-exists",
+        "kind": "theorem",
+        "title": "Best uniform polynomial approximants exist",
+        "deps": [
+          "def-na-best-polynomial-uniform-error",
+          "lem-na-polynomial-coefficient-bound-from-fixed-nodes",
+          "thm-algebra-of-continuous-functions",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 73\u201374, existence of a best polynomial approximant."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a74",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 18\u201322, finite-dimensional uniform approximation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-polynomial-equioscillation-certificate",
+        "kind": "theorem",
+        "title": "Exact polynomial equioscillation certifies best approximation",
+        "deps": [
+          "def-na-best-polynomial-uniform-error",
+          "lem-na-polynomial-alternating-signs-force-root-count"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 73\u201375, Theorem 10.1, equioscillation sufficiency."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a74.4",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 20\u201322, Theorem 4.4, sufficiency for T-spaces."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-na-minimax-approximation-and-remez-algorithms",
+        "kind": "algorithm",
+        "title": "Finite-budget polynomial Remez exchange with an exact extrema oracle",
+        "deps": [
+          "def-na-best-polynomial-uniform-error",
+          "lem-na-polynomial-remez-system-invertible",
+          "thm-na-polynomial-equioscillation-certificate"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo Pach\u00f3n and Lloyd N. Trefethen, Barycentric-Remez Algorithms for Best Polynomial Approximation in the Chebfun System, \u00a7\u00a72.1\u20132.2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/remez_new2.pdf",
+              "locator": "Printed pp. 5\u20137, trial alternation system and first/second Remez exchange."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 73\u201379, best polynomial approximation and equioscillation."
+            }
+          ]
+        },
+        "statement": "**Inputs.** A nondegenerate interval $I=[a,b]$, a degree $n\\ge0$, a continuous\nreal function $f$ on $I$, an integer exchange budget $B\\in\\mathbb N_0$, and an initial reference\n$X=(x_0,\\ldots,x_{n+1})$ with $a\\le x_0<\\cdots<x_{n+1}\\le b$. Also supply an\nexact extrema oracle for a polynomial candidate $p$. On each call it returns\none of:\n\n- alternation$(E,y_0,\\ldots,y_{n+1})$, only when $E=\\|f-p\\|_{\\infty,I}$ and the\n  returned ordered distinct nodes lie in $I$ and satisfy\n  $f(y_i)-p(y_i)=\\sigma(-1)^iE$ for one fixed sign $\\sigma$;\n- maximum$(E,y)$, only when $y\\in I$, $E=\\|f-p\\|_{\\infty,I}$ and\n  $|f(y)-p(y)|=E$; or\n- inconclusive, when neither exact certificate can be returned.\n\n**Procedure.** For $k=0,\\ldots,B$, solve the unique real linear system\n$$p_k(x_i)+(-1)^i\\lambda_k=f(x_i),\\qquad 0\\le i\\le n+1,$$\nfor $p_k\\in\\mathcal P_n(I)$ and $\\lambda_k\\in\\mathbb R$, using\n[[lem-na-polynomial-remez-system-invertible]]. Query the oracle for $p_k$.\nIf it returns alternation$(0,Y)$ or maximum$(0,y)$, return exact$(p_k)$,\nsince either response certifies zero uniform error. If it returns\nalternation$(E,Y)$ with $E>0$, return certified$(p_k,E,Y)$; the optimality\nclaim is discharged by [[thm-na-polynomial-equioscillation-certificate]]. If\nit returns inconclusive, return oracle-inconclusive. If it returns\nmaximum$(E,y)$ with $E>0$ and $E=|\\lambda_k|$, return certified$(p_k,E,X)$,\nbecause the solved equations make $X$ an alternating set and the oracle\ncertifies the global norm. If $\\lambda_k=0<E$, return zero-level-no-exchange.\n\nIn the remaining case, let $s=\\operatorname{sgn}(f(y)-p_k(y))$. Find the\nsmallest index $i$ for which $s=\\operatorname{sgn}(\\lambda_k)(-1)^i$ and\nreplacing $x_i$ by $y$ preserves a strictly increasing reference tuple under\nthese tests: for $i=0$, require $a\\leq y<x_1$; for $i=n+1$, require\n$x_n<y\\leq b$; and for $0<i<n+1$, require $x_{i-1}<y<x_{i+1}$. Thus a\nglobal maximum at an endpoint may replace the corresponding endpoint reference\nnode, while distinctness and strict ordering are retained. Replace $x_i$ by\n$y$ and continue. If no such index exists, return\nno-order-preserving-exchange. If all $B+1$ iterations finish without a\ncertificate, return budget-exhausted with the last candidate and reference.\n\n**Outputs.** The procedure returns an exact best-approximation certificate,\nan exact zero-error candidate, or one of the explicit inconclusive,\nzero-level, no-exchange, or budget statuses. It asserts no convergence of the\niterates. Any implementation must ensure each exact solve and oracle call\nterminates."
+      },
+      {
+        "id": "lem-na-rational-perturbation-space",
+        "kind": "lemma",
+        "title": "The rational first-variation space has dimension set by defect",
+        "deps": [
+          "def-na-weighted-rational-minimax-family",
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "thm-bezout-identity-for-polynomials",
+          "thm-polynomial-degree-of-a-product-over-a-domain",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, Lemma 6.2",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed p. 44, dimension and T-space property of P_m+rP_n."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 24",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 199\u2013201, rational defect and numerator degree count."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-best-weighted-rational-approximation-exists",
+        "kind": "theorem",
+        "title": "Best weighted rational approximants exist",
+        "deps": [
+          "def-na-weighted-rational-minimax-family",
+          "def-complete-ordered-field",
+          "def-continuity-real",
+          "lem-na-reduced-rational-representation-unique",
+          "lem-na-polynomial-coefficient-bound-from-fixed-nodes",
+          "lem-real-polynomial-factor-at-a-root",
+          "thm-algebra-of-continuous-functions",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-intermediate-value",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "thm-polynomial-degree-of-a-product-over-a-domain"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 24",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 205\u2013206, rational best-approximation existence argument."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a76.1",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 43\u201344, Theorem 6.1 and denominator-zero cancellation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-polynomial-alternation-necessity",
+        "kind": "theorem",
+        "title": "A nonzero best polynomial error must alternate at n+2 extrema",
+        "deps": [
+          "def-na-best-polynomial-uniform-error",
+          "lem-na-extrema-sign-block-polynomial",
+          "thm-algebra-of-continuous-functions",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-na-best-polynomial-approximation-exists"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 74\u201375, necessity direction in Theorem 10.1."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a74.4",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 20\u201322, necessity direction in Theorem 4.4."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-na-best-polynomial-approximation-unique",
+        "kind": "corollary",
+        "title": "The best uniform polynomial approximant is unique",
+        "deps": [
+          "def-na-best-polynomial-uniform-error",
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "thm-na-best-polynomial-approximation-exists",
+          "thm-na-polynomial-alternation-necessity"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 74\u201375, uniqueness proof following Theorem 10.1."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a74.4",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 20\u201322, uniqueness consequences of alternation in a T-space."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-polynomial-remez-budget-termination",
+        "kind": "theorem",
+        "title": "A budgeted polynomial Remez exchange terminates within its finite cap",
+        "deps": [
+          "alg-na-minimax-approximation-and-remez-algorithms",
+          "lem-na-polynomial-remez-system-invertible"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo Pach\u00f3n and Lloyd N. Trefethen, Barycentric-Remez Algorithms for Best Polynomial Approximation in the Chebfun System, \u00a72",
+              "url": "https://people.maths.ox.ac.uk/trefethen/remez_new2.pdf",
+              "locator": "Printed pp. 5\u20137, finite reference-set updates and trial solves."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 73\u201379, polynomial Remez context."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-weighted-rational-alternation-characterization",
+        "kind": "theorem",
+        "title": "Weighted rational minimizers satisfy the defect-sensitive alternation criterion",
+        "deps": [
+          "def-na-weighted-rational-minimax-family",
+          "lem-na-extrema-sign-block-polynomial",
+          "lem-na-polynomial-interpolation-alternating-weight-annihilator",
+          "lem-na-polynomial-alternating-signs-force-root-count",
+          "lem-na-reduced-rational-representation-unique",
+          "lem-na-rational-perturbation-space",
+          "thm-algebra-of-continuous-functions",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-intermediate-value",
+          "thm-na-best-weighted-rational-approximation-exists"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 24",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 199\u2013207, defect-sensitive real rational equioscillation theorem and proof."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a7\u00a76.2\u20136.5",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 44\u201346, rational perturbation dimension, alternation theorem, and uniqueness."
+            },
+            {
+              "title": "Silviu-Ioan Filip, Yuji Nakatsukasa, Lloyd N. Trefethen, and Bernhard Beckermann, Rational Minimax Approximation via Adaptive Barycentric Representations",
+              "url": "https://people.maths.ox.ac.uk/trefethen/minimax_published.pdf",
+              "locator": "\u00a71, pp. A2427\u2013A2429, defect and alternant count."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-na-weighted-rational-remez-exchange",
+        "kind": "algorithm",
+        "title": "Finite-budget weighted rational Remez exchange with defect status",
+        "deps": [
+          "def-na-weighted-rational-minimax-family",
+          "thm-na-weighted-rational-alternation-characterization"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Silviu-Ioan Filip, Yuji Nakatsukasa, Lloyd N. Trefethen, and Bernhard Beckermann, Rational Minimax Approximation via Adaptive Barycentric Representations, \u00a7\u00a73\u20134.1",
+              "url": "https://people.maths.ox.ac.uk/trefethen/minimax_published.pdf",
+              "locator": "pp. A2432\u2013A2436, rational Remez equations, normalization, and solve branches."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 24",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 199\u2013207, rational defect and alternation."
+            }
+          ]
+        },
+        "statement": "**Inputs.** A nondegenerate interval $I=[a,b]$, degrees $m,n\\ge0$, continuous\nreal target $f$, strictly positive continuous weight $w$, a finite exchange\ninteger budget $B\\in\\mathbb N_0$, an initial reference\n$X=(x_0,\\ldots,x_{m+n+1})$ satisfying\n$a\\leq x_0<\\cdots<x_{m+n+1}\\leq b$, an\nexact rational alternation-solver procedure, and an exact weighted-extrema\noracle.\n\nThe alternation solver is an explicit input procedure. On a reference\n$X=(x_0,\\ldots,x_{m+n+1})$, it solves the nonlinear equations\n$$w(x_i)\\bigl(f(x_i)-p(x_i)/q(x_i)\\bigr)=(-1)^i\\lambda$$\nwith $p,q$ coprime, $\\deg p\\le m$, $\\deg q\\le n$, $q>0$ on $I$, and\n$\\|q\\|_{\\mathrm{coef},2}=1$. It reports one of: a unique candidate with\ndefect $d=0$ and its solved level $\\lambda$; an exact defective candidate\nwith its computed $d>0$ and solved level $\\lambda$; singular or nonunique\nsystem; no normal solution; or inconclusive. The procedure does not assume\nthat this nonlinear solve always succeeds.\n\nThe weighted-extrema oracle for a returned candidate $r=p/q$ reports one of:\n\n- alternation$(E,Y)$ only when $E=\\|w(f-r)\\|_{\\infty,I}$ and $Y$ consists of\n  $N_{m,n}(r)+2$ ordered distinct points in $I$ with weighted residuals\n  $\\sigma(-1)^iE$;\n- maximum$(E,x)$ only when $x\\in I$, $E=\\|w(f-r)\\|_{\\infty,I}$ and\n  $|w(x)(f(x)-r(x))|=E$; or\n- inconclusive.\n\n**Procedure.** For $k=0,\\ldots,B$, call the alternation solver on the current\nreference. Return its singular, no-normal-solution, or inconclusive status\nunchanged. If it returns a defective candidate, return\ndefective$(d,N_{m,n}(r))$ immediately; do not apply the normal\n$m+n+2$-point count. For a normal candidate $(r,\\lambda)$, query the\nweighted-extrema oracle. A response alternation$(0,Y)$ or maximum$(0,x)$\nreturns exact$(r)$, since either certifies zero weighted error. An\nalternation response with $E>0$ returns certified$(r,E,Y)$, with optimality supplied by\n[[thm-na-weighted-rational-alternation-characterization]]. For maximum$(E,x)$\nwith $E=|\\lambda|$, the current reference itself is an exact global\nalternation certificate, so return certified$(r,E,X)$. If $\\lambda=0<E$,\nreturn zero-level-no-exchange. If $E>|\\lambda|$,\nexchange the returned maximum point $x$ for the smallest reference node $x_i$\nwhose expected sign $\\operatorname{sgn}(\\lambda)(-1)^i$ matches the sign of\n$w(x)(f(x)-r(x))$ and for which replacing $x_i$ by $x$ preserves strict\nordering. If no such index exists, return no-valid-exchange. After $B+1$\nunsuccessful iterations, return budget-exhausted.\n\n**Outputs.** The procedure returns an exact minimax certificate, an exact\nzero-error candidate, or an explicit defect, singularity, no-solution,\noracle, exchange, or budget status. It claims no existence of a successful\nnonlinear solve and no iterative convergence."
+      },
+      {
+        "id": "thm-na-weighted-rational-remez-budget-termination",
+        "kind": "theorem",
+        "title": "A budgeted weighted rational Remez exchange terminates within its finite cap",
+        "deps": [
+          "alg-na-weighted-rational-remez-exchange"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Silviu-Ioan Filip, Yuji Nakatsukasa, Lloyd N. Trefethen, and Bernhard Beckermann, Rational Minimax Approximation via Adaptive Barycentric Representations, \u00a7\u00a73\u20134",
+              "url": "https://people.maths.ox.ac.uk/trefethen/minimax_published.pdf",
+              "locator": "pp. A2432\u2013A2436, finite rational Remez solve and update branches."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2563,
+    "id": "minimax-approximation-and-remez-algorithms-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Minimax approximation and remez algorithms \u2014 Examples",
+    "companion": "minimax-approximation-and-remez-algorithms",
+    "requires": [
+      "minimax-approximation-and-remez-algorithms"
+    ],
+    "items": [
+      {
+        "id": "ex-na-remez-zero-degree-equioscillation-certificate",
+        "kind": "example",
+        "title": "A two-node degree-zero Remez certificate",
+        "deps": [
+          "alg-na-minimax-approximation-and-remez-algorithms",
+          "lem-na-polynomial-remez-system-invertible",
+          "thm-na-polynomial-equioscillation-certificate"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ricardo Pach\u00f3n and Lloyd N. Trefethen, Barycentric-Remez Algorithms for Best Polynomial Approximation in the Chebfun System, \u00a72",
+              "url": "https://people.maths.ox.ac.uk/trefethen/remez_new2.pdf",
+              "locator": "Printed pp. 5\u20137, the trial reference equations and extremum exchange."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-degree-one-minimax-of-square",
+        "kind": "example",
+        "title": "The degree-one minimax approximation to x squared",
+        "deps": [
+          "cor-na-best-polynomial-approximation-unique",
+          "def-na-best-polynomial-uniform-error",
+          "thm-na-polynomial-equioscillation-certificate"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 10",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 73\u201379, best polynomial approximation and equioscillation."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-na-defective-rational-approximation-naive-count",
+        "kind": "counterexample",
+        "title": "A defective rational minimizer can have fewer than m+n+2 extrema",
+        "deps": [
+          "def-na-weighted-rational-minimax-family",
+          "thm-na-weighted-rational-alternation-characterization"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 24",
+              "url": "https://people.math.ethz.ch/~hiptmair/Seminars/RAP_22/TRE13.pdf",
+              "locator": "Printed pp. 199\u2013207, defect-sensitive rational alternation."
+            },
+            {
+              "title": "Andr\u00e1s Kro\u00f3 and Allan Pinkus, Strong Uniqueness, \u00a76",
+              "url": "https://pages.cs.wisc.edu/~deboor/sat/papers/12/12.pdf",
+              "locator": "Printed pp. 43\u201346, defective type-(m,n) rational approximants."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

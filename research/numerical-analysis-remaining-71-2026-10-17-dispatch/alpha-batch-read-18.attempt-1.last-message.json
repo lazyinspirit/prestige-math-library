@@ -1,0 +1,247 @@
+{
+  "group": "f",
+  "batches": ["18"],
+  "pages_read": [
+    "interpolative-cur-and-nystrom-decompositions",
+    "interpolative-cur-and-nystrom-decompositions-examples"
+  ],
+  "items_read": [
+    "alg-strong-rrqr-interpolative-decomposition",
+    "lem-moore-penrose-products-are-orthogonal-projectors",
+    "def-cur-reconstruction-cores",
+    "def-psd-nystrom-approximation",
+    "lem-strong-rrqr-interpolative-decomposition-returns-a-status",
+    "thm-strong-rrqr-interpolative-decomposition-error",
+    "thm-skeleton-cur-exactness",
+    "thm-cur-projection-residual-bound",
+    "lem-nystrom-square-root-projector-identity",
+    "thm-psd-nystrom-order-and-exactness",
+    "thm-nystrom-deterministic-spectral-residual-bound",
+    "cex-arbitrary-selected-columns-miss-dominant-direction",
+    "ex-exact-rank-two-skeleton-cur",
+    "ex-psd-nystrom-residual-is-psd"
+  ],
+  "conventions": [
+    {
+      "convention": "ID inputs have m ≥ n ≥ 1 and 0 ≤ k ≤ n. Endpoint branches return zero interpolation for k=0 and exact reconstruction for k=n; interior strong error guarantees require full column rank and exact-arithmetic success.",
+      "fixed_by": "alg-strong-rrqr-interpolative-decomposition",
+      "matters_for": [
+        "lem-strong-rrqr-interpolative-decomposition-returns-a-status",
+        "thm-strong-rrqr-interpolative-decomposition-error"
+      ]
+    },
+    {
+      "convention": "Finite-precision inputs denote their represented dyadic values. Core status, underlying RRQR certificate status, and direct ID-certificate status are separate; direct residual certification does not imply a strong singular-value-relative bound.",
+      "fixed_by": "alg-strong-rrqr-interpolative-decomposition",
+      "matters_for": [
+        "lem-strong-rrqr-interpolative-decomposition-returns-a-status",
+        "thm-strong-rrqr-interpolative-decomposition-error"
+      ]
+    },
+    {
+      "convention": "CUR selections are ordered lists of distinct indices of the same size k, with consistent cross-matrix ordering. Empty selections use ordinary empty-matrix multiplication. Skeleton core W† and projected core C†AR† are distinct.",
+      "fixed_by": "def-cur-reconstruction-cores",
+      "matters_for": [
+        "thm-skeleton-cur-exactness",
+        "thm-cur-projection-residual-bound",
+        "ex-exact-rank-two-skeleton-cur"
+      ]
+    },
+    {
+      "convention": "Nyström is defined for Hermitian PSD A over the real or complex field, n ≥ 1, and arbitrary finite sketch S of width s ≥ 0, using the unique Moore–Penrose inverse even for singular sketch Gram matrices.",
+      "fixed_by": "def-psd-nystrom-approximation",
+      "matters_for": [
+        "lem-nystrom-square-root-projector-identity",
+        "thm-psd-nystrom-order-and-exactness",
+        "thm-nystrom-deterministic-spectral-residual-bound",
+        "ex-psd-nystrom-residual-is-psd"
+      ]
+    },
+    {
+      "convention": "The deterministic Nyström bound allows 0 ≤ k ≤ n, assigns empty blocks norm zero and λ_(n+1)=0, and treats the 0-by-s leading sketch as full row rank vacuously.",
+      "fixed_by": "thm-nystrom-deterministic-spectral-residual-bound",
+      "matters_for": [
+        "thm-nystrom-deterministic-spectral-residual-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-moore-penrose-products-are-orthogonal-projectors",
+      "statement": "For any finite real or complex M, MM† and M†M are self-adjoint idempotents with ranges Ran(M) and Ran(M†), respectively. If M has full row rank, MM†=I.",
+      "used_by": [
+        "thm-cur-projection-residual-bound",
+        "lem-nystrom-square-root-projector-identity",
+        "thm-nystrom-deterministic-spectral-residual-bound"
+      ]
+    },
+    {
+      "id": "lem-nystrom-square-root-projector-identity",
+      "statement": "For Hermitian PSD A, arbitrary conformal S, and B=A^(1/2)S, the Nyström approximation equals A^(1/2)P_Ran(B)A^(1/2)=A^(1/2)B(B*B)†B*A^(1/2)=A^(1/2)BB†A^(1/2).",
+      "used_by": [
+        "thm-psd-nystrom-order-and-exactness",
+        "thm-nystrom-deterministic-spectral-residual-bound"
+      ]
+    },
+    {
+      "id": "alg-strong-rrqr-interpolative-decomposition",
+      "statement": "The endpoint branches return explicit zero or identity interpolation. Interior branches call capped strong RRQR and propagate nonsuccess; success constructs TΠ=[I X]. Finite precision separately retains RRQR certification and computes exact rational direct ID-certificate data for the actual returned J,T.",
+      "used_by": [
+        "lem-strong-rrqr-interpolative-decomposition-returns-a-status",
+        "thm-strong-rrqr-interpolative-decomposition-error"
+      ]
+    },
+    {
+      "id": "def-cur-reconstruction-cores",
+      "statement": "For C=A(:,J), R=A(I,:), and W=A(I,J), the skeleton reconstruction is CW†R and the projected reconstruction is C(C†AR†)R=(CC†)A(R†R).",
+      "used_by": [
+        "thm-skeleton-cur-exactness",
+        "thm-cur-projection-residual-bound",
+        "ex-exact-rank-two-skeleton-cur"
+      ]
+    },
+    {
+      "id": "def-psd-nystrom-approximation",
+      "statement": "For Hermitian PSD A and arbitrary conformal S, put W=S*AS and define the Nyström approximation as ASW†S*A.",
+      "used_by": [
+        "lem-nystrom-square-root-projector-identity",
+        "thm-psd-nystrom-order-and-exactness",
+        "thm-nystrom-deterministic-spectral-residual-bound",
+        "ex-psd-nystrom-residual-is-psd"
+      ]
+    },
+    {
+      "id": "thm-skeleton-cur-exactness",
+      "statement": "If rank(A)=rank(W)=k for the stated ordered selections, then CW†R=A, including the declared k=0 convention.",
+      "used_by": [
+        "ex-exact-rank-two-skeleton-cur"
+      ]
+    },
+    {
+      "id": "thm-psd-nystrom-order-and-exactness",
+      "statement": "For Hermitian PSD A and arbitrary conformal S, 0 ≤ Â_nys ≤ A in Loewner order. If Ran(AS)=Ran(A), then Â_nys=A.",
+      "used_by": [
+        "ex-psd-nystrom-residual-is-psd"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "used_for": "Interior ID procedure, finite rank and rounding semantics, capped swaps, score tests, and separate RRQR certificate.",
+      "opened": true
+    },
+    {
+      "id": "def-moore-penrose-pseudoinverse",
+      "used_for": "Four Penrose equations used throughout the projector, CUR, and Nyström arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "used_for": "Well-defined reconstruction cores and uniqueness arguments identifying explicit pseudoinverses.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Rowwise estimate establishing the direct ID spectral residual bound from its exact Frobenius residual data.",
+      "opened": true
+    },
+    {
+      "id": "thm-strong-rrqr-singular-value-comparisons",
+      "used_for": "Exact-success trailing-block comparison in the ID error theorem; checked the combined-score hypothesis and block proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Trailing-block norm in ID and norm identities in the deterministic Nyström bound, including zero-domain conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-rank-and-nullity",
+      "used_for": "Rank as image dimension in skeleton exactness.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Invertibility of the full-rank cross and independence of selected columns.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "PSD square root and its identification in an eigenbasis for all Nyström proofs.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Orthonormal eigenbasis and nonnegative eigenvalues of PSD matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Pseudoinverse construction and the Nyström identity ||X*X||₂=||X||₂².",
+      "opened": true
+    },
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "used_for": "Full QR shapes and permutation conventions underlying the called RRQR procedure.",
+      "opened": true
+    },
+    {
+      "id": "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+      "used_for": "Published RRQR initialization's invertible leading block.",
+      "opened": true
+    },
+    {
+      "id": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+      "used_for": "Finite exact QR transformations underlying RRQR sweeps and retriangularization.",
+      "opened": true
+    },
+    {
+      "id": "lem-singular-value-product-bound",
+      "used_for": "Multiplication inequalities in the published strong-RRQR comparison proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-singular-values-lipschitz-in-spectral-norm",
+      "used_for": "Residual-adjusted computed comparisons in the published RRQR supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Unitary invariance and spectral-to-Frobenius comparison in the published RRQR proof.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Induced norm and explicit zero-domain convention supporting empty-block cases.",
+      "opened": true
+    },
+    {
+      "id": "thm-eckart-young-best-rank-k-approximation",
+      "used_for": "Rank-truncation distance characterization used by the published singular-value multiplication and perturbation lemmas.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "interpolative-cur-and-nystrom-decompositions",
+      "concern": "The task assigns this page the prerequisite sketched-least-squares-and-subspace-embeddings, but its current frontmatter contains no requires field. The batch cross-dependency record nevertheless marks that edge verified and says actual_declared_edge=true. The deterministic mathematics does not import a sketch embedding theorem, but the declared page metadata and ledger assertion do not match the current carrier.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+      "finding": "In this published supplier, step 1.1 says: 'After $k$ pivot steps' the 'next pivot diagonal entry $r_{kk}$ is the norm of the residual' after projection onto the span of the first k chosen columns. The next pivot is indexed k+1, whereas r_kk belongs to the already selected kth column. Step 2.1 then uses k<r to conclude that 'the first $r$ diagonal entries' are nonzero, omitting the final pivot under its written indexing. Also, without a diagonal phase convention, the residual norm equals the modulus of the diagonal entry. The standard greedy-rank argument supports the theorem, but these written index and phase statements need clarification.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "interpolative-cur-and-nystrom-decompositions",
+      "to": "sketched-least-squares-and-subspace-embeddings",
+      "faithful": true,
+      "note": "Checked both page interfaces and the batch's actual dependencies. This is contextual reading order: the CUR/ID/Nyström results use deterministic algebra and published suppliers, without importing an embedding or randomized rate. The sketch page's exact-arithmetic and subspace hypotheses are not weakened or misquoted. The missing requires declaration is separately recorded as a concern."
+    }
+  ]
+}

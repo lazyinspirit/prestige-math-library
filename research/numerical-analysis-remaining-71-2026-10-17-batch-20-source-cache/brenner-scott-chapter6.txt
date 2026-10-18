@@ -1,0 +1,1264 @@
+
+===== PDF PAGE 167 =====
+Chapter 6
+Finite Element Multigrid Methods
+The multigrid method provides an optimal order algorithm for solving ellip-
+tic boundary value problems. The error bounds of the approximate solution
+obtained from the full multigrid algorithm are comparable to the theoretical
+bounds of the error in the ﬁnite element method, while the amount of com-
+putational work involved is proportional only to the number of unknowns
+in the discretized equations.
+The multigrid method has two main features: smoothing on the current
+grid and error correction on a coarser grid. The smoothing step has the eﬀect
+of damping out the oscillatory part of the error. The smooth part of the
+error can then be accurately corrected on the coarser grid.
+The discussion in this chapter is based on the papers (Bank & Dupont
+1981) and (Bramble & Pasciak 1987). It is restricted to a model problem
+for simplicity. We recommend the books (Hackbusch 1985), (McCormick
+1987), and (Bramble 1993), the survey article (Bramble & Zhang 2000),
+and the references therein for the general theory of multigrid methods.
+In practice, higher-order ﬁnite element equations would be precondi-
+tioned by a low-order solver, so we will only consider the piecewise linear
+case. Similarly, we restrict to the two-dimensional case to minimize techni-
+calities. For theory regarding the general case, see (Scott & Zhang 1992).
+6.1 A Model Problem
+Let Ω⊆IR2 be a convex polygon and
+(6.1.1)
+a(u, v) =
+
+Ω
+(α ∇u · ∇v + β u v) dx,
+where α and β are smooth functions such that for α0, α1, β1 ∈IR+ we have
+α0 ≤α(x) ≤α1 and 0 ≤β(x) ≤β1 for all x in Ω. We consider the Dirichlet
+problem:
+Find u ∈V := ˚
+H1(Ω) such that
+(6.1.2)
+a(u, v) = (f, v)
+∀v ∈V
+
+
+===== PDF PAGE 168 =====
+156
+Chapter 6. Finite Element Multigrid Methods
+where f ∈L2(Ω).
+Elliptic regularity (cf. (Grisvard 1985)) implies that u ∈H2(Ω) ∩
+˚
+H1(Ω). To approximate u, we consider a sequence of triangulations Tk
+of Ωdetermined as follows. Suppose T1 is given and let Tk, k ≥2, be
+obtained from Tk−1 via a “regular” subdivision: edge midpoints in Tk−1
+are connected by new edges to form Tk. Let Vk denote C0 piecewise linear
+functions with respect to Tk that vanish on ∂Ω. Note that
+(6.1.3)
+Tk ⊃Tk−1 =⇒Vk−1 ⊂Vk
+for all k ≥1.
+The discretized problem is:
+Find uk ∈Vk such that
+(6.1.4)
+a(uk, v) = (f, v)
+∀v ∈Vk.
+Let hk be the mesh size of Tk, i.e., hk := maxT ∈Tk diam T. Note that
+for any T ∈Tk−1, the four subtriangles in Tk of T are all similar to T and
+have half the size of T. Thus,
+(6.1.5)
+hk = 1
+2hk−1.
+Similarly, {Tk} is quasi-uniform, since each T ∈Tk is an exact replica of
+some ˆT ∈T1 in miniature, with the size ratio exactly hk/h1. Thus, we have
+from Theorem 5.7.6 and Theorem 4.4.20,
+(6.1.6)
+∥u −uk∥Hs(Ω) ≤C h2−s
+k
+∥u∥H2(Ω)
+s = 0, 1, k = 1, 2, . . . .
+Throughout this chapter, C, with or without subscripts, denotes a generic
+constant independent of k.
+Let nk = dim Vk. The goal of the multigrid method is to calculate
+ˆuk ∈Vk in O(nk) operations such that
+(6.1.7)
+∥uk −ˆuk∥Hs(Ω) ≤C h2−s
+k
+∥u∥H2(Ω),
+s = 0, 1, k = 1, 2, . . . .
+The O(nk) operation count means that the multigrid method is asymptot-
+ically optimal.
+(6.1.8) Remark. Full elliptic regularity is not essential for the convergence
+analysis (cf. (Bank & Dupont 1981), (Bramble, Pasciak, Wang & Xu 1991),
+(Zhang 1992), (Bramble & Pasciak 1993)) and (Brenner 2002). It is assumed
+here for simplicity.
+
+
+===== PDF PAGE 169 =====
+6.2 Mesh-Dependent Norms
+157
+6.2 Mesh-Dependent Norms
+(6.2.1) Deﬁnition. The mesh-dependent inner product (·, ·)k on Vk is de-
+ﬁned by
+(6.2.2)
+(v, w)k := h2
+k
+nk
+
+i=1
+v(pi) w(pi),
+where {pi}nk
+i=1 is the set of internal vertices of Tk.
+The operator Ak : Vk −→Vk is deﬁned by
+(6.2.3)
+(Akv, w)k = a(v, w)
+∀v, w ∈Vk.
+In terms of the operator Ak, the discretized equation (6.1.4) can be written
+as
+(6.2.4)
+Akuk = fk,
+where fk ∈Vk satisﬁes
+(6.2.5)
+(fk, v)k = (f, v)
+∀v ∈Vk.
+Since Ak is symmetric positive deﬁnite with respect to (·, ·)k, we can deﬁne
+a scale of mesh-dependent norms ||| · |||s,k in the following way:
+(6.2.6)
+|||v|||s,k :=
+6
+(As
+kv, v)k
+where As
+k denotes the s power of the symmetric, positive deﬁnite operator
+Ak (Halmos 1957).
+The mesh-dependent norms ||| · |||s,k will play an important role in the
+convergence analysis. Observe that the energy norm ∥· ∥E =
+
+a(·, ·) coin-
+cides with the ||| · |||1,k norm on Vk. Similarly, ||| · |||0,k is the norm associated
+with the mesh-dependent inner product (6.2.2). The following lemma shows
+that ||| · |||0,k is equivalent to the L2-norm.
+(6.2.7) Lemma. There exist positive constants C1 and C2 such that
+C1∥v∥L2(Ω) ≤|||v|||0,k ≤C2∥v∥L2(Ω)
+∀v ∈Vk.
+Proof. Using a quadrature formula for quadratic polynomials on triangles,
+we have
+∥v∥2
+L2(Ω) =
+
+T ∈Tk
+
+T
+v2 dx
+=
+
+T ∈Tk
+|T|
+3
+ 3
+
+i=1
+v2(mi)
+
+(see exercise 6.x.12)
+
+
+===== PDF PAGE 170 =====
+158
+Chapter 6. Finite Element Multigrid Methods
+where |T| denotes the area of T. By deﬁnition,
+|||v|||2
+0,k = (v, v)k
+= h2
+k
+nk
+
+i=1
+v2(pi).
+The fact that {Tk} is quasi-uniform implies that |T| is equivalent to h2
+k.
+Since v is linear, we have
+⎛
+⎝
+v(m1)
+v(m2)
+v(m3)
+⎞
+⎠=
+⎛
+⎝
+0
+1
+2
+1
+2
+1
+2
+0
+1
+2
+1
+2
+1
+2
+0
+⎞
+⎠
+⎛
+⎝
+v(p1)
+v(p2)
+v(p3)
+⎞
+⎠,
+where p1, p2, and p3 are the vertices of T, and mi is the midpoint of the
+edge opposite pi, i = 1, 2, 3. The lemma now follows.
+⊓⊔
+The spectral radius, Λ(Ak), of Ak is estimated in the next lemma.
+(6.2.8) Lemma. Λ(Ak) ≤C h−2
+k .
+Proof. Let λ be an eigenvalue of Ak with eigenvector φ. We have
+a(φ, φ) = (Akφ, φ)k
+= λ (φ, φ)k
+= λ |||φ|||2
+0,k.
+Therefore,
+λ = a(φ, φ)
+|||φ|||2
+0,k
+.
+Since |||φ|||2
+0,k is equivalent to ∥φ∥2
+L2(Ω), the lemma follows from (4.5.3):
+(6.2.9)
+∥v∥E ≤C h−1
+k ∥v∥L2(Ω)
+∀v ∈Vk.
+⊓⊔
+We end this section with a useful lemma whose proof is left as an
+exercise (cf. exercise 6.x.1).
+(6.2.10) Lemma. (Generalized Cauchy-Schwarz Inequality)
+|a(v, w)| ≤|||v|||1+t,k |||w|||1−t,k
+∀v, w ∈Vk
+for any t ∈IR.
+
+
+===== PDF PAGE 171 =====
+6.3 The Multigrid Algorithm
+159
+6.3 The Multigrid Algorithm
+The multigrid algorithm is an iterative solver. For each k there is an it-
+eration scheme for solving the equation Akz = g on Vk. This scheme has
+two main features: smoothing on Vk and error correction on Vk−1, using
+the iteration scheme developed on Vk−1. The smoothing step has the eﬀect
+of damping out the oscillatory part of the error, as shown in Fig. 6.1. A
+randomly chosen initial error is depicted together with three steps of the
+smoothing process (to be studied shortly) applied to this initial error. Af-
+ter a few such steps, the smooth part of the error is dominant and can be
+accurately captured on the coarser grid. This will be seen analytically in
+the proof of Theorem 6.5.7. Since the error correction is done on a coarser
+grid, less computational work is involved.
+(a)
+(b)
+(c)
+(d)
+Fig. 6.1. Eﬀect of smoothing step: (a) initial error, (b-d) one, two and three
+smoothing steps, resp., for the model problem (6.1.2) with α ≡1 and β ≡0 in
+(6.1.1).
+In order to describe the multigrid algorithm, we need to introduce the
+intergrid transfer operators.
+(6.3.1) Deﬁnition. (Intergrid Transfer Operators) The coarse-to-ﬁne oper-
+ator
+Ik
+k−1 : Vk−1 −→Vk
+is taken to be the natural injection. In other words,
+Ik
+k−1v = v
+∀v ∈Vk−1.
+
+
+===== PDF PAGE 172 =====
+160
+Chapter 6. Finite Element Multigrid Methods
+The ﬁne-to-coarse intergrid transfer operator
+Ik−1
+k
+: Vk −→Vk−1
+is deﬁned to be the transpose of Ik
+k−1 with respect to the (·, ·)k−1 and (·, ·)k
+inner products. In other words,
+(Ik−1
+k
+w, v)k−1 = (w, Ik
+k−1v)k
+= (w, v)k
+∀v ∈Vk−1, w ∈Vk.
+The kth Level Iteration. MG(k, z0, g) is the approximate solution of
+the equation
+Akz = g
+obtained from the kth level iteration with initial guess z0.
+For k = 1, MG(1, z0, g) is the solution obtained from a direct method. In
+other words,
+MG(1, z0, g) = A−1
+1 g.
+For k > 1, MG(k, z0, g) is obtained recursively in three steps.
+Presmoothing Step. For 1 ≤l ≤m1, let
+zl = zl−1 + 1
+Λk
+
+g −Akzl−1
+
+,
+where, from now on, we will assume that Λk denotes some upper-
+bound (Lemma 6.2.8) for the spectral radius of Ak satisfying
+(6.3.2)
+Λk ≤Ch−2
+k .
+Error Correction Step. Let g := Ik−1
+k
+(g −Akzm1) and q0 = 0. For
+1 ≤i ≤p, let
+qi = MG(k −1, qi−1, g).
+Then
+zm1+1 := zm1 + Ik
+k−1qp.
+Postsmoothing Step. For m1 + 2 ≤l ≤m1 + m2 + 1, let
+zl = zl−1 + 1
+Λk
+(g −Akzl−1).
+Then the output of the kth level iteration is
+MG(k, z0, g) := zm1+m2+1.
+Here m1 and m2 are positive integers, and p = 1 or 2. When p = 1, this is
+called a V-cycle method; p = 2 is called a W-cycle method.
+
+
+===== PDF PAGE 173 =====
+6.4 Approximation Property
+161
+In the application of the kth level iteration to (6.2.4), we follow the
+following strategy. We take the initial guess to be Ik
+k−1ˆuk−1, where ˆuk−1
+is the approximate solution already obtained for the equation Ak−1uk−1 =
+fk−1. Then we apply the kth level iteration r times. The full multigrid
+algorithm therefore consists of nested iterations.
+The Full Multigrid Algorithm
+For k = 1, ˆu1 = A−1
+1 f1.
+For k ≥2, the approximate solutions ˆuk are obtained recursively from
+uk
+0 = Ik
+k−1ˆuk−1
+uk
+l = MG(k, uk
+l−1, fk),
+1 ≤l ≤r,
+ˆuk = uk
+r.
+6.4 Approximation Property
+We will now discuss one of the key ingredients for the convergence analysis
+of both the W-cycle and V-cycle algorithms.
+(6.4.1) Deﬁnition. Let Pk : V −→Vk be the orthogonal projection with
+respect to a(·, ·). In other words, Pkv ∈Vk and
+a(v, w) = a(Pkv, w)
+∀w ∈Vk.
+The operator Pk−1 relates the error after presmoothing in the kth level
+iteration scheme to the exact solution of the residual equation on the coarser
+grid. Recall that in the error correction step of the kth level iteration we
+had g = Ik−1
+k
+(g −Akzm1). Let q ∈Vk−1 satisfy the coarse grid residual
+equation Ak−1q = g.
+(6.4.2) Lemma.
+q = Pk−1(z −zm1).
+Proof. For w ∈Vk−1,
+a(q, w) = (Ak−1q, w)k−1
+(by 6.2.3)
+= (g, w)k−1
+(deﬁnition of q)
+= (Ik−1
+k
+(g −Akzm1), w)k−1
+(deﬁnition of g)
+= (g −Akzm1, w)k
+(by 6.3.1)
+= (Ak(z −zm1), w)k
+(deﬁnition of z)
+= a(z −zm1, w).
+(by 6.2.3)
+⊓⊔
+
+
+===== PDF PAGE 174 =====
+162
+Chapter 6. Finite Element Multigrid Methods
+Therefore, if the residual equation is solved exactly on the coarser grid,
+the error after the correction step is z −(zm1 + q) = (I −Pk−1)(z −zm1).
+Hence, it is important to understand the operator I −Pk−1.
+(6.4.3) Lemma. There exists a positive constant C such that
+|||(I −Pk−1)v|||0,k ≤C hk |||(I −Pk−1)v|||1,k
+∀v ∈Vk.
+Proof. From Theorem 5.7.6 we know that
+∥(I −Pk−1)v∥L2(Ω) ≤C hk ∥(I −Pk−1)v∥E = C hk |||(I −Pk−1)v|||1,k.
+Using Lemma 6.2.7 completes the proof.
+⊓⊔
+We note the resemblance of the following result to, say, Theorem 5.4.4
+with m = 2. However, the function, v, being approximated here does not
+lie in H2(Ω).
+(6.4.4) Corollary. (Approximation Property)
+There exists a positive con-
+stant C such that
+|||(I −Pk−1)v|||1,k ≤C hk |||v|||2,k
+∀v ∈Vk.
+Proof.
+|||(I −Pk−1)v|||2
+1,k = ∥v −Pk−1v∥2
+E
+= a(v −Pk−1v, v −Pk−1v)
+= a(v −Pk−1v, v)
+≤|||v −Pk−1v|||0,k |||v|||2,k
+(by 6.2.10)
+≤C hk |||v −Pk−1v|||1,k |||v|||2,k.
+(Lemma 6.4.3)
+⊓⊔
+6.5 W-cycle Convergence for the kth Level Iteration
+In this section we will show that the kth level iteration scheme for a W-cycle
+method has a contraction number bounded away from 1 if the number of
+smoothing steps is large enough. In the next section we will prove the same
+result for a V-cycle method with one smoothing step, which implies that
+the number of smoothing steps in the W-cycle method can also be taken to
+be one (cf. exercises 6.x.9 and 6.x.10). But, the weaker result in this section
+can be obtained with less eﬀort, and the perturbation argument involved is
+also of independent interest.
+
+
+===== PDF PAGE 175 =====
+6.5 W-Cycle Convergence
+163
+For simplicity, we will consider the one-sided W-cycle method, i.e.,
+p = 2, m1 = m and m2 = 0 in the algorithm in Sect. 6.3. Let ei = z −zi
+for 0 ≤i ≤m + 1 be the errors in the kth level iteration. Then from the
+smoothing step we have for 1 ≤l ≤m
+(6.5.1)
+el = z −zl
+= z −zl−1 −1
+Λk
+Ak(z −zl−1)
+= el−1 −1
+Λk
+Akel−1
+= (I −1
+Λk
+Ak)el−1.
+(6.5.2) Deﬁnition. Rk := I −
+1
+Λk Ak : Vk −→Vk is the relaxation operator.
+Note that (cf. exercise 6.x.3)
+(6.5.3)
+|||Rkv|||s,k ≤|||v|||s,k
+∀v ∈Vk, s ∈IR
+and
+(Rkv, v)k ≤(v, v)k
+∀v ∈Vk.
+It follows immediately that the eﬀect of the smoothing step can be described
+by
+(6.5.4)
+em = Rm
+k e0.
+We will ﬁrst prove the convergence of a two-grid method. Let q ∈Vk−1
+satisfy Ak−1q = g, and deﬁne the output of the two-grid method to be
+(6.5.5)
+ˆzm+1 = zm + q.
+Note that the q2 in the multigrid algorithm in Sect. 6.3 is just an approxi-
+mation of q by using the k −1 level iteration twice. The ﬁnal error of the
+two-grid algorithm is related to the initial error by
+ˆem+1 = z −ˆzm+1
+(by 6.5.5)
+= z −zm −q
+(6.5.6)
+= em −q
+= em −Pk−1em
+(Lemma 6.4.2)
+= (I −Pk−1)Rm
+k e0.
+(by 6.5.4)
+We already have estimates for the operator I−Pk−1 (the approximation
+property). It remains to measure the eﬀect of Rm
+k .
+
+
+===== PDF PAGE 176 =====
+164
+Chapter 6. Finite Element Multigrid Methods
+(6.5.7) Theorem. (Smoothing Property for the W-cycle Algorithm)
+|||Rm
+k v|||2,k ≤C h−1
+k
+m−1/2 |||v|||1,k
+∀v ∈Vk.
+Proof. Let 0 < λ1 ≤λ2 ≤. . . ≤λnk be the eigenvalues of the operator
+Ak and ψi, 1 ≤i ≤nk, be the corresponding eigenvectors satisfying the
+orthonormal relation (ψi, ψj)k = δij. We can write v = nk
+i=1 νi ψi. Hence,
+Rm
+k v =
+
+I −1
+Λk
+Ak
+mv
+=
+nk
+
+i=1
+
+1 −λi
+Λk
+m νi ψi.
+Therefore,
+|||Rm
+k v|||2
+2,k =
+nk
+
+i=1
+	
+1 −λi
+Λk
+
+2m
+ν2
+i λ2
+i
+= Λk
+ nk
+
+i=1
+	
+1 −λi
+Λk
+
+2m 	 λi
+Λk
+
+λi ν2
+i
+
+≤Λk
+
+sup
+0≤x≤1
+(1 −x)2m x
+
+nk
+
+i=1
+λi ν2
+i
+(|λi| ≤Λk)
+≤C h−2
+k m−1|||v|||2
+1,k.
+(by 6.3.2)
+Hence,
+|||Rm
+k v|||2,k ≤C h−1
+k
+m−1/2|||v|||1,k.
+⊓⊔
+(6.5.8) Theorem. (Convergence of the Two-Grid Algorithm) There exists
+a positive constant C independent of k such that
+∥ˆem+1∥E ≤Cm−1/2∥e0∥E.
+Therefore, if m is large enough, the two-grid method is a contraction with
+contraction number independent of k.
+Proof.
+∥ˆem+1∥E = ∥
+
+I −Pk−1
+
+Rm
+k e0∥E
+(by 6.5.6)
+≤Chk|||Rm
+k e0|||2,k
+(by 6.4.4)
+≤C hk C h−1
+k m−1/2 |||e0|||1,k
+(by 6.5.7)
+≤Cm−1/2∥e0∥E .
+⊓⊔
+
+
+===== PDF PAGE 177 =====
+6.6 V-Cycle Convergence
+165
+We now use a perturbation argument to prove the convergence of the
+kth level iteration.
+(6.5.9) Theorem. (Convergence of the kth Level Iteration) For any 0 <
+γ < 1, m can be chosen large enough such that
+(6.5.10)
+∥z −MG(k, z0, g)∥E ≤γ ∥z −z0∥E,
+for k = 1, 2, . . . .
+Proof. Let C∗be the constant in Theorem 6.5.8 and let m be an integer
+greater than (C∗/(γ −γ2))2. Then (6.5.10) holds for this choice of m. The
+proof is by induction. For k = 1, (6.5.10) holds trivially since the left-hand
+side is 0. For k > 1, we have
+z −MG(k, z0, g) = z −zm+1
+= z −zm −q2
+= ˆem+1 + q −q2.
+Therefore,
+∥z−MG(k, z0, g)∥E
+≤∥ˆem+1∥E + ∥q −q2∥E
+≤C∗m−1/2∥e0∥E + γ2 ∥q∥E
+(ind. hyp. & Thm. 6.5.8)
+≤
+
+C∗m−1/2 + γ2
+∥e0∥E
+(by 6.4.2 & 6.5.3)
+≤γ ∥e0∥E .
+⊓⊔
+6.6 V-cycle Convergence for the kth Level Iteration
+In this section we will consider the symmetric V-cycle algorithm. In other
+words, we consider the algorithm in Sect. 6.3 with p = 1 and m1 = m2 = m.
+Since our goal is to prove convergence of this algorithm for any m, we
+can no longer just perform a two-grid analysis followed by a perturbation
+argument. We need to analyze directly the relation between the initial error
+z −z0 and the ﬁnal error z −MG(k, z0, g).
+(6.6.1) Deﬁnition. The error operator Ek : Vk −→Vk is deﬁned recursively
+by
+E1 = 0
+Ek = Rm
+k
+)
+I −(I −Ek−1)Pk−1
+*
+Rm
+k
+k > 1.
+
+
+===== PDF PAGE 178 =====
+166
+Chapter 6. Finite Element Multigrid Methods
+The following lemma shows that Ek relates the ﬁnal error of the kth
+level iteration to the initial error.
+(6.6.2) Lemma. If z, g ∈Vk satisfy Akz = g, then
+(6.6.3)
+Ek(z −z0) = z −MG(k, z0, g),
+k ≥1.
+Proof. The proof is by induction. The case k = 1 is trivial since MG(1, z0, g)
+= A−1
+1 g = z. Assume (6.6.3) holds for k−1. Let q ∈Vk−1 be the exact solu-
+tion on the coarser grid of the residual equation, i.e., Ak−1q = g. Since q1 =
+MG(k−1, 0, g), the induction hypothesis implies that q−q1 = Ek−1(q−0).
+Hence, by Lemma 6.4.2
+(6.6.4)
+q1 = (I −Ek−1)q
+= (I −Ek−1)Pk−1(z −zm).
+Therefore,
+z −MG(k, z0, g) = z −z2m+1
+= Rm
+k (z −zm+1)
+= Rm
+k (z −(zm + q1))
+= Rm
+k (z −zm −(I −Ek−1)Pk−1(z −zm))
+= Rm
+k (I −(I −Ek−1)Pk−1) (z −zm)
+= Rm
+k (I −(I −Ek−1)Pk−1) Rm
+k (z −z0)
+= Ek(z −z0).
+⊓⊔
+The operators Ek are clearly linear. It is less obvious that the Ek’s
+are positive semi-deﬁnite with respect to a(·, ·). In order to prove this fact,
+which simpliﬁes the convergence proof, we ﬁrst need a lemma, whose proof
+is left as an exercise (cf. exercise 6.x.6).
+(6.6.5) Lemma. For all v, w ∈Vk,
+a(Rkv, w) = a(v, Rkw).
+(6.6.6) Proposition. Ek is symmetric positive semi-deﬁnite with respect to
+a(·, ·) for k ≥1.
+Proof. The proof is by induction. It is obvious for k = 1. Assume the
+proposition is true for k −1. We ﬁrst prove that Ek is symmetric with
+respect to a(·, ·):
+
+
+===== PDF PAGE 179 =====
+6.6 V-Cycle Convergence
+167
+a(Ekv, w) = a(Rm
+k (I −Pk−1 + Ek−1Pk−1)Rm
+k v, w)
+(by 6.6.1)
+= a
+
+(I −Pk−1 + Ek−1Pk−1)Rm
+k v, Rm
+k w
+
+(Lemma 6.6.5 m times)
+= a
+
+(I −Pk−1)Rm
+k v, Rm
+k w
+
++ a
+
+Ek−1Pk−1Rm
+k v, Rm
+k w
+
+= a
+
+Rm
+k v, (I −Pk−1)Rm
+k w
+
++ a
+
+Ek−1Pk−1Rm
+k v, Rm
+k w
+
+= a
+
+Rm
+k v, (I −Pk−1)Rm
+k w
+
++ a
+
+Ek−1Pk−1Rm
+k v, Pk−1Rm
+k w
+
+(by 6.4.1)
+= a
+
+Rm
+k v, (I −Pk−1)Rm
+k w
+
++ a
+
+Pk−1Rm
+k v, Ek−1Pk−1Rm
+k w
+
+(induction hypothesis)
+= a
+
+Rm
+k v, (I −Pk−1)Rm
+k w
+
++ a
+
+Rm
+k v, Ek−1Pk−1Rm
+k w
+
+(by 6.4.1)
+= a
+
+Rm
+k v, (I −Pk−1 + Ek−1Pk−1)Rm
+k w
+
+= a(v, Rm
+k (I −Pk−1 + Ek−1Pk−1)Rm
+k w)
+(Lemma 6.6.5 again)
+= a(v, Ekw).
+We next show that Ek is positive, semi-deﬁnite with respect to a(·, ·):
+a(Ekv, v) = a
+
+Rm
+k (I −(I −Ek−1)Pk−1)Rm
+k v, v
+
+= a
+
+(I −(I −Ek−1)Pk−1)Rm
+k v, Rm
+k v
+
+= a(Rm
+k v, Rm
+k v) −a
+
+(I −Ek−1)Pk−1Rm
+k v, Rm
+k v
+
+= a(Rm
+k v, Rm
+k v) −a
+
+(I −Ek−1)Pk−1Rm
+k v, Pk−1Rm
+k v
+
+(by 6.4.1)
+= a(Rm
+k v, Rm
+k v) −a(Pk−1Rm
+k v, Pk−1Rm
+k v)
++ a(Ek−1Pk−1Rm
+k v, Pk−1Rm
+k v)
+= a((I −Pk−1)Rm
+k v, (I −Pk−1)Rm
+k v)
++ a(Ek−1Pk−1Rm
+k v, Pk−1Rm
+k v)
+≥0.
+(induction hypothesis)
+⊓⊔
+(6.6.7) Lemma.
+(Smoothing Property for the V-Cycle)
+a
+
+(I −Rk)R2m
+k v, v
+
+≤
+1
+2ma
+
+(I −R2m
+k )v, v
+
+.
+
+
+===== PDF PAGE 180 =====
+168
+Chapter 6. Finite Element Multigrid Methods
+Proof. We ﬁrst observe that for 0 ≤j ≤l,
+a
+
+(I −Rk)Rl
+kv, v
+
+=
+
+Ak(I −Rk)Rl
+kv, v
+
+k
+=
+
+AkΛ−1
+k AkRl
+kv, v
+
+k
+(6.6.8)
+= 1
+Λk
+
+Rl
+kAkv, Akv
+
+k
+≤1
+Λk
+(Rj
+kAkv, Akv)k
+(by 6.5.3)
+= a
+
+(I −Rk)Rj
+kv, v
+
+.
+Hence,
+(2m) a
+
+(I −Rk)R2m
+k v, v
+
+= a
+
+(I −Rk)R2m
+k v, v
+
++ a
+
+(I −Rk)R2m
+k v, v
+
++ . . .
++ a
+
+(I −Rk)R2m
+k v, v
+
+(2m terms)
+≤a
+
+(I −Rk)v, v
+
++ a
+
+(I −Rk)Rkv, v
+
++ . . .
++ a
+
+(I −Rk)R2m−1
+k
+v, v
+
+(by 6.6.8)
+≤a
+
+(I −R2m
+k )v, v
+
+.
+(telescopic cancellation)
+⊓⊔
+(6.6.9) Proposition. Let m be the number of smoothing steps. Then
+(6.6.10)
+a(Ekv, v) ≤
+C∗
+m + C∗a(v, v)
+∀v ∈Vk,
+where C∗is a positive constant independent of k.
+Proof. We ﬁrst estimate a
+
+(I −Pk−1)Rm
+k v, (I −Pk−1)Rm
+k v
+
+.
+a
+
+(I −Pk−1)Rm
+k v, (I −Pk−1)Rm
+k v
+
+= ∥(I −Pk−1)Rm
+k v∥2
+E
+≤C h2
+k |||Rm
+k v|||2
+2,k
+(by 6.4.4)
+= C h2
+k(A2
+kRm
+k v, Rm
+k v)k
+(by 6.2.6)
+(6.6.11)
+= C h2
+k a(AkRm
+k v, Rm
+k v)
+(by 6.2.3)
+= C h2
+k Λk a
+
+(I −Rk)Rm
+k v, Rm
+k v
+
+(by 6.5.2)
+≤C a
+
+(I −Rk)Rm
+k v, Rm
+k v
+
+(by 6.2.8)
+= C a
+
+(I −Rk)R2m
+k v, v
+
+(by 6.6.5)
+≤C
+m a
+
+(I −R2m
+k )v, v
+
+.
+(by 6.6.7)
+Let C∗be the constant C in the last inequality. Then (6.6.10) holds for
+k ≥1. The proof is by induction. For k = 1, (6.6.10) is trivially true since
+
+
+===== PDF PAGE 181 =====
+6.6 V-Cycle Convergence
+169
+E1 = 0. Assume that (6.6.10) holds for k−1. Then if we let γ = C∗/(m+C∗)
+(therefore, γ = (1 −γ)C∗/m),
+a(Ekv, v) =a(Rm
+k v, Rm
+k v) −a(Pk−1Rm
+k v, Pk−1Rm
+k v)
++ a(Ek−1Pk−1Rm
+k v, Pk−1Rm
+k v)
+(by 6.6.1)
+=a((I −Pk−1)Rm
+k v, (I −Pk−1)Rm
+k v)
++ a(Ek−1Pk−1Rm
+k v, Pk−1Rm
+k v)
+(by 6.4.1)
+≤a((I −Pk−1)Rm
+k v, (I −Pk−1)Rm
+k v)
++ γ a(Pk−1Rm
+k v, Pk−1Rm
+k v)
+(ind. hyp.)
+=(1 −γ)a
+
+(I −Pk−1)Rm
+k v, (I −Pk−1)Rm
+k v
+
++ γ a
+
+(I −Pk−1)Rm
+k v, (I −Pk−1)Rm
+k v
+
++ γ a(Pk−1Rm
+k v, Pk−1Rm
+k v)
+=(1 −γ) a
+
+(I −Pk−1)Rm
+k v, (I −Pk−1)Rm
+k v
+
++ γ a(Rm
+k v, Rm
+k v)
+(by 6.4.1)
+≤(1 −γ)C∗m−1a
+
+(I −R2m
+k )v, v
+
++ γa(Rm
+k v, Rm
+k v)
+(by 6.6.11)
+=γa
+
+(I −R2m
+k )v, v
+
++ γa(Rm
+k v, Rm
+k v)
+=γa(v, v).
+⊓⊔
+Proposition 6.6.9 implies immediately the following classical result by
+Braess and Hackbusch (cf. (Braess & Hackbusch 1983)).
+(6.6.12) Theorem.
+(Convergence of the kth Level Iteration for the V-
+cycle) Let m be the number of smoothing steps. Then
+∥z −MG(k, z0, g)∥E ≤
+C∗
+m + C∗∥z −z0∥E.
+Hence, the kth level iteration for any m is a contraction, with the contrac-
+tion number independent of k.
+Proof. From Lemma 6.6.2, it suﬃces to show
+∥Ekv∥E ≤
+C∗
+m + C∗∥v∥E
+∀v ∈Vk.
+In view of Proposition 6.6.6 we can apply the spectral theorem to Ek. Let
+0 ≤α1 ≤. . . ≤αnk be the eigenvalues of Ek and η1, η2, . . . , ηnk be the
+corresponding eigenvectors such that a(ηi, ηj) = δij.
+Write v =  νiηi. Then a(Ekv, v) =  αiν2
+i . Therefore, (6.6.10) im-
+plies that 0 ≤α1 ≤. . . ≤αnk ≤C∗/(m + C∗). Hence,
+
+
+===== PDF PAGE 182 =====
+170
+Chapter 6. Finite Element Multigrid Methods
+∥Ekv∥2
+E = a(Ekv, Ekv)
+=
+nk
+
+i=1
+α2
+i ν2
+i
+≤
+	
+C∗
+m + C∗
+
+2 
+ν2
+i
+=
+	
+C∗
+m + C∗
+
+2
+∥v∥2
+E.
+⊓⊔
+6.7 Full Multigrid Convergence Analysis and Work
+Estimates
+The following theorem shows that the convergence of the full multigrid
+method is a simple consequence of the convergence of the kth level iteration.
+(6.7.1) Theorem.
+(Full Multigrid Convergence)
+If the kth level iteration
+is a contraction with a contraction number γ independent of k and if r is
+large enough, then there exists a constant C > 0 such that
+∥uk −ˆuk∥E ≤C hk |u|H2(Ω).
+Proof. Deﬁne ˆek := uk −ˆuk. In particular, ˆe1 = 0. We have
+∥ˆek∥E ≤γr ∥uk −ˆuk−1∥E
+≤γr {∥uk −u∥E + ∥u −uk−1∥E + ∥uk−1 −ˆuk−1∥E}
+≤γr 1
+˜Chk|u|H2(Ω) + ∥ˆek−1∥E
+2
+.
+(by 6.1.6 & 6.1.5)
+By iterating the above inequality we have
+∥ˆek∥E ≤˜C hk γr |u|H2(Ω) + ˜C hk−1 γ2r |u|H2(Ω) + . . . + ˜C h1 γkr |u|H2(Ω)
+≤hk |u|H2(Ω)
+˜C γr
+1 −2 γr
+if 2 γr < 1. For such choice of r,
+∥ˆek∥E ≤C hk |u|H2(Ω).
+⊓⊔
+We now turn our attention to the work estimates. First we obtain
+an asymptotic estimate for nk (= dim Vk). Let eI
+k denote the number of
+internal edges of Tk, νI
+k denote the number of internal vertices of Tk, and
+tk denote the number of triangles in Tk. Euler’s formula implies that
+νI
+k −eI
+k + tk = 1.
+
+
+===== PDF PAGE 183 =====
+6.7 Full Multigrid Convergence Analysis and Work Estimates
+171
+Therefore,
+nk = νI
+k = 1 + eI
+k −tk.
+The diﬀerence equations for eI
+k and tk are
+(6.7.2)
+eI
+k+1 = 2eI
+k + 3tk
+tk+1 = 4tk.
+By solving (6.7.2) (cf. exercise 6.x.11), we obtain
+(6.7.3)
+nk ∼t1
+8 4k.
+(6.7.4) Proposition. The work involved in the full multigrid algorithm is
+O(nk).
+Proof. Let Wk denote the work in the kth level scheme. Together, the
+smoothing and correction steps yield
+(6.7.5)
+Wk ≤C ˜m nk + p Wk−1,
+where ˜m = m1 + m2. Iterating (6.7.5) and using the fact that p < 4 we
+obtain
+Wk ≤C ˜mnk + p(C ˜mnk−1) + p2(C ˜mnk−2) + . . . + pk−1(C ˜mn1)
+≤C ˜m4k + pC ˜m4k−1 + p2C ˜m4k−2 + . . . + pk−1C ˜m4
+≤C ˜m4k
+1 −p/4 ≤C 4k
+≤C nk.
+(by 6.7.3)
+Hence,
+Wk ≤C nk.
+Let ˆWk denote the work involved in obtaining ˆuk in the full multigrid
+algorithm. Then
+(6.7.6)
+ˆWk ≤ˆWk−1 + r Wk.
+Iterating (6.7.6), we have
+ˆWk ≤rCnk + rCnk−1 + . . . + rCn1
+≤rC(4k + 4k−1 + . . . + 4)
+(by 6.7.3)
+≤
+rC4k
+1 −1/4
+≤C4k
+≤Cnk.
+(by 6.7.3)
+⊓⊔
+
+
+===== PDF PAGE 184 =====
+172
+Chapter 6. Finite Element Multigrid Methods
+6.x Exercises
+6.x.1 Prove Lemma 6.2.10. (Hint: see the proof of Theorem 6.5.7.)
+6.x.2 Sketch the schedule for grids in the order they are visited for the
+W-cycle and V-cycle methods. Explain the reasons for the nomen-
+clature.
+6.x.3 Establish the inequalities in (6.5.3). (Hint: use the fact that Ak
+is self-adjoint in the inner-product (6.2.2) and that (Akv, v)k ≤
+Λk(v, v)k for all v ∈Vk.)
+6.x.4 Show that the two-grid algorithm is a contraction for any m. (Hint:
+Use (6.6.11).)
+6.x.5 Prove the convergence of the kth level iteration in the L2-norm for
+the W-cycle method when m is suﬃciently large. (Hint: Use the
+smoothing property, approximation property and a duality argu-
+ment.)
+6.x.6 Prove Lemma 6.6.5. (Hint: show that Ak is self-adjoint in the inner-
+product a(·, ·).)
+6.x.7 Show that the error operator Ek (k > 1), deﬁned by 6.6.1, can also
+be written as
+Ek = [(I −Pk) + Rm
+k Pk]
+)
+(I −Pk−1) + Rm
+k−1Pk−1
+*
+· · ·
+[(I −P2) + Rm
+2 P2] [I −P1] [(I −P2) + Rm
+2 P2] · · ·
+)
+(I −Pk−1) + Rm
+k−1Pk−1
+*
+[(I −Pk) + Rm
+k Pk] .
+6.x.8 Show that the error operator ˜Ek (k > 1) for the one-sided V-cycle
+method with m presmoothing steps can be written as
+˜Ek = (I −P1) [(I −P2) + Rm
+2 P2] · · ·
+)
+(I −Pk−1) + Rm
+k−1Pk−1
+*
+[(I −Pk) + Rm
+k Pk] ,
+while the error operator for the one-sided V-cycle method with m
+postsmoothing steps is ˜E∗
+k, the adjoint of ˜Ek in a(·, ·). Deduce that
+both methods converge for any m. (Hint: Use exercise 6.x.7 and
+Theorem 6.6.12).
+6.x.9 Show that the error operator ˜Ew
+k for the one-sided W-cycle method
+with m presmoothing steps can be written as
+˜Ew
+k = Fk ˜Ek,
+where ˜Ek is deﬁned as in 6.x.8 and ∥Fk∥E ≤1. Deduce the con-
+vergence of the one-sided W-cycle method for any m. (Hint: Use
+exercise 6.x.8.)

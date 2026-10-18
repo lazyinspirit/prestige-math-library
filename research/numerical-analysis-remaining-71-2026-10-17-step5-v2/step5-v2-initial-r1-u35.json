@@ -1,0 +1,193 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "35",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-linear-elasticity-displacement-formulation-and-data",
+      "model": "gpt-6-luna",
+      "context_sha256": "877ee5b16289354d113399e8203e4f0086543609f976f4911454e174a3617cd2",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed missing prerequisite: the imported Stokes definition and the published Sobolev and zero-boundary definitions explicitly require an open set. The stated boundary graph-chart condition alone also holds for a closed ball, so nonempty, bounded, connected and Lipschitz do not explicitly supply that hypothesis. Added open to D, preserving all model formulas, coefficient bounds, full-boundary condition and Countable Choice assumption.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-linear-elasticity-displacement-formulation-and-data",
+      "disposition": "repaired",
+      "post_sha256": "57aadefe7493dad8ae52648d618e53b1521a79302923d85a39c91f17d9ff75f1",
+      "review_context_sha256": "44f0143263e5e4df2247a3b346dabcf224ae312d7231f7d17834ec742956348e",
+      "reason": "Reviewed the complete definition, its Stokes-space interface, published Sobolev domain requirements, owning page and displacement well-definedness theorem. Explicit openness now meets the imported prerequisites. Bounded mu and square-integrable gradients make the strain, divergence, stress and bilinear forms well-defined; the positive gradient norm is imported through Poincare. Countable Choice and the partial-boundary caveat are preserved. This is my repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+    "def-linear-elasticity-near-incompressible-mixed-mini-pair",
+    "ex-linear-elasticity-cantilever-manufactured-shear",
+    "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error",
+    "ex-linear-elasticity-p1-volumetric-locking-fixed-mesh",
+    "def-signorini-elasticity-contact-model",
+    "thm-isogeometric-elasticity-galerkin-quasioptimality"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-linear-elasticity-displacement-formulation-and-data",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "locus": "definition",
+      "status": "fixed",
+      "reason": "Confirmed missing prerequisite: the imported Stokes definition and the published Sobolev and zero-boundary definitions explicitly require an open set. The stated boundary graph-chart condition alone also holds for a closed ball, so nonempty, bounded, connected and Lipschitz do not explicitly supply that hypothesis. Added open to D, preserving all model formulas, coefficient bounds, full-boundary condition and Countable Choice assumption.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "interface_change": {
+      "section": "Definition",
+      "before": "nonempty, bounded, connected, and Lipschitz",
+      "after": "nonempty, open, bounded, connected, and Lipschitz",
+      "minimality": "Only the missing openness hypothesis was inserted; no formula, coefficient, boundary, choice or estimate clause was weakened."
+    },
+    "local_evidence": [
+      "items/def-na-stokes-zero-mean-pressure-and-velocity-spaces.md: Definition requires a nonempty bounded connected Lipschitz open set.",
+      "items/def-sobolev-space-wkp-and-its-norm.md: Definition requires Omega open.",
+      "items/def-wkp-zero-as-a-sobolev-closure.md: Definition requires Omega open.",
+      "library/numerical-pdes-and-spatial-discretization/elasticity-near-incompressibility-and-locking-free-discretization.md: page scope is bounded connected Lipschitz domains."
+    ],
+    "metadata_repairs": [
+      {
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-35.pages.json",
+        "change": "Updated the assigned definition statement mirror only."
+      },
+      {
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-35.proof-contracts.json",
+        "change": "Updated the three exact supplier quotations in the displacement theorem, uniform mini theorem and manufactured-shear example contracts."
+      }
+    ],
+    "shared_write_protocol": "Acquired step5-shared-write-lock as step5-v2-initial-r1-u35, reread both metadata files, replaced only the exact domain phrase, checked replacement counts and parsed JSON, then released the lock.",
+    "consumer_checks": [
+      {
+        "id": "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+        "affected_use": "Statement assumes the data of the displacement definition; Facts F1 and proof steps 1.1–2.1 use its gradient-norm space and elasticity form.",
+        "reason": "The imported data now explicitly include openness, supplying the required Sobolev, Poincare and Korn domain hypotheses. No consumer statement change is necessary.",
+        "path": "items/thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound.md",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "def-linear-elasticity-near-incompressible-mixed-mini-pair",
+        "affected_use": "Definition imports the model, spaces and sign convention, then defines p=-lambda div u in Q and the mixed equations.",
+        "reason": "The model import inherits the open domain; its polygonal/polyhedral mesh branch adds restrictions to that same model. Pressure and equation conventions are unchanged.",
+        "path": "items/def-linear-elasticity-near-incompressible-mixed-mini-pair.md",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "ex-linear-elasticity-cantilever-manufactured-shear",
+        "affected_use": "Statement specifies D=(0,1)^2; Facts F1 imports the symmetric-gradient and stress formulas for the manufactured affine shear.",
+        "reason": "The square is explicitly open. Only unchanged algebraic strain and stress formulas are used, and the partial-boundary example claims no imported Dirichlet solvability.",
+        "path": "items/ex-linear-elasticity-cantilever-manufactured-shear.md",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error",
+        "affected_use": "Statement assumes the model and mixed conventions; Facts F1 imports V,Q,a_mu,b and proof step 1.2 chooses interior balls in D.",
+        "reason": "The initial model assumption now explicitly supplies openness, making the interior-ball and Sobolev-space uses admissible. Separate pre-existing notation omissions are routed below.",
+        "path": "items/thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error.md",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "ex-linear-elasticity-p1-volumetric-locking-fixed-mesh",
+        "affected_use": "Statement fixes D=(0,1)^2; proof step 2.1 identifies the divergence-free field as the continuous elasticity solution for every finite lambda.",
+        "reason": "The square is open and the energy form is unchanged, so the exact-solution identification and fixed-mesh argument are unaffected by the repaired domain hypothesis.",
+        "path": "items/ex-linear-elasticity-p1-volumetric-locking-fixed-mesh.md",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "def-signorini-elasticity-contact-model",
+        "affected_use": "Definition explicitly imports only the algebraic strain and elasticity-form formulas and uses its own partial-trace displacement space.",
+        "reason": "The imported formulas hold on H1 fields and are unchanged; the item expressly supplies coercivity and well-posedness locally rather than importing full-boundary solvability.",
+        "path": "items/def-signorini-elasticity-contact-model.md",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "thm-isogeometric-elasticity-galerkin-quasioptimality",
+        "affected_use": "Statement assumes the real displacement formulation on a Lipschitz domain; Facts F3 and proof step 2.1 match its data to the finite-Lame elasticity theorem.",
+        "reason": "A domain is open, and the statement also assumes the complete imported formulation. Its finite-dimensional conforming-space application retains all supplier hypotheses.",
+        "path": "items/thm-isogeometric-elasticity-galerkin-quasioptimality.md",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "uncertain": false
+      }
+    ],
+    "page_check": {
+      "path": "library/numerical-pdes-and-spatial-discretization/elasticity-near-incompressibility-and-locking-free-discretization.md",
+      "disposition": "unaffected",
+      "reason": "The page already states Lipschitz domains, whose standard domain convention includes openness; its model, mesh and boundary summary remains accurate."
+    },
+    "published_consumer_ledger": "No published or outside-frontier direct item consumer was found by searching current item and page references. No published-ledger update or separate outside-consumer maintenance is proposed.",
+    "outside_lane_findings": [
+      {
+        "id": "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error",
+        "path": "items/thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error.md",
+        "route": "frontier owner of this unassigned item",
+        "severity": "nonfatal",
+        "affected_use": "Proof steps 5.1 and 6.1 use A_lambda without defining the block form; step 6.1 uses beta_* without defining that uniform discrete lower bound.",
+        "evidence": "The complete current proof contains neither definition. Facts F5 already supplies beta_h >= (C_F C_div(D))^-1, and the mixed equations supply the intended block form. This independently confirms the digest concern as a recoverable notation omission.",
+        "minimal_repair": "Define A_lambda((u,p),(v,q))=a_mu(u,v)+b(v,p)+b(u,q)-lambda^-1(p,q) for the relevant positive/infinite-lambda branch, and beta_*=(C_F C_div(D))^-1, or substitute that explicit bound in step 6.1.",
+        "uncertain": false
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-linear-elasticity-displacement-formulation-and-data.md --json",
+        "exit_code": 0,
+        "result": "1 file; no proof applicable; 0 checked proofs; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-linear-elasticity-displacement-formulation-and-data.md --json",
+        "exit_code": 0,
+        "result": "1 checked; 0 errors; 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-linear-elasticity-displacement-formulation-and-data.md",
+        "exit_code": 0,
+        "result": "1 item; 0 steps; 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-35.proof-contracts.json --strict --items thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound,thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error,ex-linear-elasticity-cantilever-manufactured-shear --json",
+        "exit_code": 0,
+        "result": "All three changed quotation-bearing contracts passed; no errors or warnings."
+      }
+    ],
+    "unresolved_assigned_obligations": [],
+    "source_reading": "No external source was consulted or claimed; the domain and bilinear-form mathematics is familiar and the actual local supplier definitions were read.",
+    "next_action": "Controller collects this report, routes the direct frontier examination inventory and separate unassigned notation finding, and performs the ordinary independent rejudgment and certification workflow."
+  }
+}

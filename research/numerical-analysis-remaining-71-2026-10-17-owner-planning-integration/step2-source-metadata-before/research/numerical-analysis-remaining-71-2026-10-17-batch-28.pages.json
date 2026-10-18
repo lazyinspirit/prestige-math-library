@@ -1,0 +1,397 @@
+[
+  {
+    "order": 2610,
+    "id": "conservative-finite-volume-weak-limits",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Conservative finite-volume weak limits",
+    "companion": "conservative-finite-volume-weak-limits-examples",
+    "requires": [
+      "scalar-conservation-laws-and-entropy-solutions"
+    ],
+    "items": [
+      {
+        "id": "def-locally-bounded-distributional-weak-solution",
+        "kind": "definition",
+        "title": "Locally bounded distributional weak solutions of scalar laws",
+        "statement": "A locally bounded distributional weak formulation with the initial boundary term; it extends the published bounded definition only by allowing locally bounded states.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Define the local essential-bound condition and weak identity for tests that may meet t=0.",
+        "axiom_base": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.2.1, pp. 83–84, and §3.2.3, pp. 88–90: scalar conservation laws, integral balances and weak shocks."
+            },
+            {
+              "title": "Gregory A. Chechkin and Andrey Yu. Goritsky, S. N. Kruzhkov’s lectures on first-order quasilinear PDEs, complete lecture notes in Analytical and Numerical Aspects of PDEs (de Gruyter, 2009)",
+              "url": "https://www.math.ntnu.no/conservation/2009/011.pdf",
+              "locator": "Complete 67-page lecture notes; §4.1, equation (4.3), PDF p. 19 (printed p. 19): compactly supported test-function weak integral identity for the scalar conservation law."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-conservative-finite-volume-scheme",
+        "kind": "definition",
+        "title": "Conservative two-point finite-volume schemes for scalar laws",
+        "statement": "A uniform-grid two-point conservative update with cell-average initial data and a continuous diagonal-consistent numerical flux.",
+        "deps": [
+          "def-scalar-conservation-law-and-flux"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Specify full-line cells, cell-average initialization, one shared face flux and the conservative flux-difference update.",
+        "axiom_base": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.4.1, PDF pp. 94–96: cell averages, shared numerical face fluxes, update and the diagonal consistency condition; §3.4.3, pp. 97–99: cancellation of interior face fluxes."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods, complete six-page note",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "pp. 1–2: cell-average states, finite-volume update, Godunov reconstruction/evolution/averaging and the local Riemann problem."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-finite-volume-space-time-reconstruction",
+        "kind": "definition",
+        "title": "Piecewise-constant finite-volume state and face-flux reconstructions",
+        "statement": "Piecewise-constant state and face-flux reconstructions on each space-time cell, with face flux equal to F(U_j,U_{j+1}).",
+        "deps": [
+          "def-conservative-finite-volume-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Define both reconstructions from the scheme and fix null-boundary conventions.",
+        "axiom_base": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.4.1, pp. 94–96: cell averages, fluxes over time slabs and the space-time finite-volume grid."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods, complete six-page note",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "p. 1: a finite-volume value is the cell average and the scheme balances fluxes through cell boundaries."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-godunov-flux-for-burgers",
+        "kind": "definition",
+        "title": "Godunov numerical flux for Burgers' equation",
+        "statement": "The explicit two-state Godunov flux for convex Burgers flux f_B(s)=s^2/2.",
+        "deps": [
+          "def-conservative-finite-volume-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Give deterministic case formulas for increasing and decreasing states.",
+        "axiom_base": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.2.3 and §3.4.1, pp. 88–89 and 94–96: Burgers flux, shock speed, and the two-state numerical flux interface."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods, complete six-page note",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "pp. 1–2: Burgers equation, Godunov reconstruction/evolution/averaging and the local Riemann problem."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-godunov-flux-for-burgers-is-continuous-and-consistent",
+        "kind": "lemma",
+        "title": "The Burgers Godunov flux is continuous and consistent",
+        "statement": "The Burgers Godunov flux is continuous on R^2 and satisfies G(a,a)=f_B(a).",
+        "deps": [
+          "def-godunov-flux-for-burgers",
+          "def-conservative-finite-volume-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Check continuity on open branches and switching boundaries, then verify the diagonal.",
+        "axiom_base": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.4.1, pp. 94–96: the numerical flux has the diagonal consistency condition; §3.4.2, pp. 96–97: a scalar numerical flux is specified on pairs of states."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods, complete six-page note",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "pp. 1–2: Godunov construction for Burgers states."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-finite-volume-discrete-summation-by-parts",
+        "kind": "lemma",
+        "title": "Discrete weak identity for a conservative finite-volume update",
+        "statement": "Testing the conservative update by space-time cell averages gives the exact discrete weak identity.",
+        "deps": [
+          "def-conservative-finite-volume-scheme",
+          "def-finite-volume-space-time-reconstruction"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Multiply the update, telescope in time, reindex shared face fluxes in space, and retain the initial cell term.",
+        "axiom_base": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.4.1 and §3.4.3, pp. 94–99: cell-average updates, shared interface fluxes and cancellation of interior fluxes."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods, complete six-page note",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "p. 1: finite-volume cell averages and the conservative flux-difference update."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-conservative-fv-face-fluxes-converge-in-l1loc",
+        "kind": "lemma",
+        "title": "Strong local convergence of consistent finite-volume face fluxes",
+        "statement": "Under local uniform boundedness and strong local L1 convergence, continuous consistent face-flux reconstructions converge locally to f(u).",
+        "deps": [
+          "def-conservative-finite-volume-scheme",
+          "def-finite-volume-space-time-reconstruction",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-measure",
+          "prop-measure-monotonicity",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "thm-heine-cantor-metric",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Use spatial translation continuity, continuity on compact state ranges, and local control of the initial strip.",
+        "axiom_base": "Assume only the Axiom of Countable Choice ACω, used in step 2.1 through the published L1 translation-continuity theorem for a compactly supported cutoff. No dependent or arbitrary-index choice is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.4.1, pp. 94–96: consistent two-state numerical fluxes and face updates; the local convergence argument is supplied here."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods, complete six-page note",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "pp. 1–2: two-state numerical face fluxes; the L1 passage is proved locally using the declared published translation-continuity interface."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-conservative-finite-volume-weak-limit",
+        "kind": "theorem",
+        "title": "Conservative finite-volume strong-limit theorem",
+        "statement": "Strong local L1 convergence and local uniform state bounds for a conservative consistent two-point scheme imply the limit satisfies the distributional weak identity with cell-average initial data.",
+        "deps": [
+          "def-conservative-finite-volume-scheme",
+          "def-finite-volume-space-time-reconstruction",
+          "lem-finite-volume-discrete-summation-by-parts",
+          "lem-conservative-fv-face-fluxes-converge-in-l1loc",
+          "def-locally-bounded-distributional-weak-solution",
+          "def-scalar-conservation-law-and-flux",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Use discrete summation by parts, test-function quadrature estimates, strong state/face-flux convergence, and the initial boundary term; compactness and entropy are not conclusions.",
+        "axiom_base": "Assume ACω, inherited only for the local spatial-translation step in the face-flux convergence lemma. The cellwise summation and passage to the weak identity use no further choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.4.1 and §3.4.3, pp. 94–99: conservative cell updates and interior-flux cancellation; Theorem 3.1 on pp. 98–99 states a Lax–Wendroff conclusion without the compactness and bounded-range hypotheses or a proof. The complete conditional proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods, complete six-page note",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "pp. 1–2: cell-average states, conservative update and Godunov flux construction; the conditional weak-limit proof is supplied locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2611,
+    "id": "conservative-finite-volume-weak-limits-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Conservative finite-volume weak limits — Examples",
+    "companion": "conservative-finite-volume-weak-limits",
+    "requires": [
+      "conservative-finite-volume-weak-limits"
+    ],
+    "items": [
+      {
+        "id": "ex-godunov-fv-captures-burgers-shock-speed",
+        "kind": "example",
+        "title": "Godunov finite volumes preserve the Burgers shock speed",
+        "statement": "The Burgers Godunov update exactly preserves the stationary 1-to−1 shock, whose Rankine–Hugoniot speed is zero.",
+        "deps": [
+          "def-conservative-finite-volume-scheme",
+          "def-finite-volume-space-time-reconstruction",
+          "def-godunov-flux-for-burgers",
+          "lem-godunov-flux-for-burgers-is-continuous-and-consistent",
+          "thm-conservative-finite-volume-weak-limit",
+          "thm-rankine-hugoniot-jump-condition"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Evaluate interface fluxes, show the update is stationary, and compute the jump speed.",
+        "axiom_base": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.2.3 and §§3.4.1–3.4.3, pp. 88–99: Burgers shock speed, cell-average updates, Godunov fluxes and conservation."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods, complete six-page note",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "pp. 1–2: Burgers Godunov method and shock-wave Riemann problems."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-bounded-fv-reconstructions-need-not-be-strongly-compact",
+        "kind": "example",
+        "title": "Uniformly bounded cell reconstructions need not have a strong local limit",
+        "statement": "A dyadic sequence of uniformly bounded alternating cell reconstructions has no strongly L1loc-convergent subsequence.",
+        "deps": [
+          "thm-conservative-finite-volume-weak-limit"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Show pairwise L1 separation on one compact space-time rectangle; no update trajectory is asserted.",
+        "axiom_base": "No choice principle is used.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-conservative-fv-weak-limit-need-not-be-entropic",
+        "kind": "counterexample",
+        "title": "A conservative consistent finite-volume weak limit need not be entropic",
+        "statement": "The Burgers Godunov update with tau/h=2 has a strongly convergent bounded expansion-shock limit that is weak but not Kruzhkov entropic.",
+        "deps": [
+          "def-conservative-finite-volume-scheme",
+          "def-finite-volume-space-time-reconstruction",
+          "def-godunov-flux-for-burgers",
+          "lem-godunov-flux-for-burgers-is-continuous-and-consistent",
+          "thm-conservative-finite-volume-weak-limit",
+          "def-kruzhkov-entropy-solution",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Prove the exact one-cell shift, local L1 convergence, weak limit, and direct entropy-inequality violation; the CFL condition fails.",
+        "axiom_base": "Assume ACω, as required by the weak-limit and L1-translation suppliers; the entropy-defect calculation uses no further choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. De Sterck and P. Ullrich, Introduction to Computational PDEs, Chapter 3, complete chapter, PDF pp. 81–106",
+              "url": "https://climate.ucdavis.edu/AM452.pdf",
+              "locator": "§3.2.3 and §3.4, pp. 88–99: Rankine–Hugoniot speed and conservative finite-volume updates; the entropy-violating sequence is proved locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 19: Finite Volume Methods, complete six-page note",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/814ce5a38ea0db4c58eff0c5ad8b111a_MIT18_336S09_lec19.pdf",
+              "locator": "pp. 1–2: Godunov flux and conservative cell update; the CFL-violating trajectory and entropy defect are verified locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

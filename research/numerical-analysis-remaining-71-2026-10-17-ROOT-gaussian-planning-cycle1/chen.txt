@@ -1,0 +1,2182 @@
+
+---PDF PAGE 1---
+SIAM J. MATRIX ANAL. APPL.
+c
+⃝2005 Society for Industrial and Applied Mathematics
+Vol. 27, No. 3, pp. 603–620
+CONDITION NUMBERS OF GAUSSIAN RANDOM MATRICES∗
+ZIZHONG CHEN† AND JACK J. DONGARRA†
+Abstract. Let Gm×n be an m × n real random matrix whose elements are independent and
+identically distributed standard normal random variables, and let κ2(Gm×n) be the 2-norm condition
+number of Gm×n. We prove that, for any m ≥2, n ≥2, and x ≥|n −m| + 1, κ2(Gm×n) satisﬁes
+1
+√
+2π (c/x)|n−m|+1 < P(
+κ2(Gm×n)
+n/(|n−m|+1) > x) <
+1
+√
+2π (C/x)|n−m|+1, where 0.245 ≤c ≤2.000 and 5.013
+≤C ≤6.414 are universal positive constants independent of m, n, and x. Moreover, for any m ≥2
+and n ≥2, E(log κ2(Gm×n)) < log
+n
+|n−m|+1 + 2.258. A similar pair of results for complex Gaussian
+random matrices is also established.
+Key words. condition number, eigenvalues, random matrices, singular values, Wishart distri-
+bution
+AMS subject classiﬁcations. 15A52, 15A12
+DOI. 10.1137/040616413
+1. Introduction. In [5], Edelman obtained the limiting distributions and the
+limiting expected logarithms of the condition numbers of random rectangular matrices
+whose elements are independent and identically distributed standard normal random
+variables. The exact distributions of the condition numbers of 2 × n matrices are also
+given in [5] by Edelman.
+However, in the study of real-number and complex-number error correction codes
+based on random matrices [3] and their applications in fault tolerant high performance
+computing [4], in order to estimate the numerical stability and reliability of our coding
+schemes, we need to estimate the probabilities that the condition numbers of small
+random rectangular matrices are large. For example, what is the probability that the
+condition number of a 10 × 5 random matrix is larger than 102?
+In this paper, we investigate the tails of the condition number distributions of ran-
+dom rectangular matrices whose elements are independent and identically distributed
+standard normal real or complex random variables. We establish upper and lower
+bounds for the tails of the condition number distributions of these matrices. Upper
+bounds for the expected logarithms of the condition numbers of these matrices are
+also given.
+Based on our results, for random rectangular matrices whose elements are inde-
+pendent and identically distributed standard normal real or complex random variables,
+we are able to estimate the probabilities that their condition numbers are large. For
+example, based on our results, we are able to tell, for a 10 × 5 real random matrix
+whose elements are independent and identically distributed standard normal random
+∗Received by the editors October 5, 2004; accepted for publication (in revised form) by P. C.
+Hansen April 20, 2005; published electronically November 23, 2005. This research was supported
+in part by the Applied Mathematical Sciences Research Program of the Oﬃce of Mathematical,
+Information, and Computational Sciences, U.S. Department of Energy under contract DE-AC05-
+00OR22725 with UT-Battelle, LLC. The U.S. Government retains a nonexclusive, royalty-free license
+to publish or reproduce the published form of this contribution, or allow others to do so, for U.S.
+Government purposes. Copyright is owned by SIAM to the extent not limited by these rights.
+http://www.siam.org/journals/simax/27-3/61641.html
+†Department of Computer Science, The University of Tennessee, 203 Claxton Complex, 1122
+Volunteer Boulevard, Knoxville, TN 37996-3450 (zchen@cs.utk.edu, dongarra@cs.utk.edu).
+603
+
+
+---PDF PAGE 2---
+604
+ZIZHONG CHEN AND JACK J. DONGARRA
+variables, the probability that the condition number is larger than 102 is less than
+6 × 10−7.
+Our main results for the 2-norm condition number κ of an m × n real random
+matrix whose elements are independent and identically distributed standard normal
+random variables are
+1
+√
+2π
+ c
+x
+|n−m|+1
+< P
+
+κ
+n/(|n −m| + 1) > x
+
+<
+1
+√
+2π
+C
+x
+|n−m|+1
+and
+E(log κ) < log
+n
+|n −m| + 1 + 2.258,
+where 0.245 ≤c ≤2.000 and 5.013 ≤C ≤6.414 are universal positive constants
+independent of m, n, and x, and m ≥2, n ≥2, and x ≥|n −m| + 1.
+For an m × n complex random matrix whose elements are independent and iden-
+tically distributed standard normal random variables, our main results for the 2-norm
+condition number κ are
+1
+2π
+ c
+x
+2(|n−m|+1)
+< P
+
+κ
+n/(|n −m| + 1) > x
+
+< 1
+2π
+C
+x
+2(|n−m|+1)
+and
+E(log κ) < log
+n
+|n −m| + 1 + 2.240,
+where 0.319 ≤c ≤2.000 and 5.013 ≤C ≤6.298 are universal positive constants
+independent of m, n, and x, and m ≥2, n ≥2, and x ≥|n −m| + 1.
+After ﬁnishing the manuscript of this paper, we communicated with Edelman and
+learned that a similar problem was also being studied independently by Edelman and
+Sutton [7]. After simple formatting, the upper bounds in both papers actually can be
+uniﬁed into the same format,
+P (κ > x) ≤C(m, n, β)
+ 1
+x
+β(|n−m|+1)
+,
+where β = 1 for real random matrices, β = 2 for complex random matrices, and
+C(m, n, β) is a function of m, n, and β. However, the function C(m, n, β) in the two
+papers do take very diﬀerent forms and imply very diﬀerent meanings.
+On one hand, the bounds in [7] are asymptotically tight as x →∞, while the
+bounds in this paper are not. On the other hand, the bounds in this paper involve
+only elementary functions.
+Hence they are much simpler than the asymptotically
+tight bounds in [7] which involve high order moments of the largest eigenvalues of
+Wishart matrices. Although for the special case of large square random matrices,
+simple estimations for C(m, n, β) are given in [7], for general rectangular matrices, no
+simple estimation is available.
+It is well known that the joint eigenvalue density function of a Wishart matrix
+has a closed form expression [9].
+Therefore, P(κ > x) can actually be expressed
+accurately as a high-dimensional integration of this joint eigenvalue density function.
+One of the key aspects to estimate P(κ > x) is to ﬁnd a simple-to-use estimation of
+this accurate (but not simple-to-use) high-dimensional integral expression. This paper
+
+
+---PDF PAGE 3---
+CONDITION NUMBERS OF GAUSSIAN RANDOM MATRICES
+605
+is meaningful in that it ﬁnds out such a simple-to-use estimation by giving out simple
+upper and lower bounds which involve only elementary functions. We refer interested
+readers to [7] for more accurate asymptotically tight bounds and other related bounds
+for the tails of the condition numbers of general β-Laguerre ensembles.
+Above and in what follows in this paper, the constants C and c denote univer-
+sal positive constants independent of m, n, and x; however, identical symbols may
+represent diﬀerent numbers in diﬀerent place.
+2. Preliminaries and basic facts. Let X be an m × n matrix. If σ1 ≥σ2 ≥
+· · · ≥σp, where p = min{m, n}, are the p singular values of X, then the 2-norm
+condition number of X is
+κ2(X) = σ1
+σp
+.
+For any m × n matrix X, XT is an n × m matrix and κ2(X) = κ2(XT ). So,
+without loss of generality, in discussing the condition numbers of random matrices,
+it is enough to consider only random matrices with no more rows than columns.
+Therefore, when we speak of an m × n matrix, we will assume m ≤n in the rest of
+this paper.
+Let Gm×n be an m × n real random matrix whose elements are independent and
+identically distributed standard normal random variables. Let Wm,n denote the m×m
+random matrix Gm×nGT
+m×n. Wm,n is the well-known Wishart matrix named after
+John Wishart, who had ﬁrst studied its distribution.
+Similar to [5], in this paper, we will study the condition number of Gm×n through
+investigating the eigenvalues of the Wishart matrix Wm,n.
+The following lemma
+establishes a simple relationship between the condition number of Gm×n and the
+eigenvalues of Wm,n.
+Proposition 2.1. If λmax is the largest eigenvalue of Wm,n, and λmin is the
+smallest eigenvalue of Wm,n, then the 2-norm condition number of Gm×n satisﬁes
+κ2(Gm×n) =
+
+λmax
+λmin
+.
+Remarkably enough, the exact joint probability density function for the m eigen-
+values of the Wishart matrix Wm,n can be written down in a closed form [9].
+Lemma 2.2.
+If λ1 ≥· · · ≥λm are the m eigenvalues of Wm,n, then the joint
+probability density function of λ1 ≥· · · ≥λm is
+f(x1, . . . , xm) = Km,ne−1
+2
+m
+i=1 xi
+m
+
+i=1
+x
+1
+2 (n−m−1)
+i
+m−1
+
+i=1
+m
+
+j=i+1
+(xi −xj),
+(2.1)
+where
+K−1
+m,n =
+2n
+π
+m/2 m
+
+i=1
+Γ
+n −m + i
+2
+
+Γ
+ i
+2
+
+.
+(2.2)
+Let N(0, 1) denote the standard normal distribution.
+Let 	
+N(0, 1) denote the
+distribution of u + iv, where u and v are independent and identically distributed
+N(0, 1) random variables, and i = √−1. Let 	Gm×n be an m × n complex random
+matrix whose elements are independent and identically distributed 	
+N(0, 1) random
+
+
+---PDF PAGE 4---
+606
+ZIZHONG CHEN AND JACK J. DONGARRA
+variables. Let 
+Wm,n denote the m×m random matrix 	Gm×n 	GH
+m×n. In the literature,
+
+Wm,n is called the complex Wishart matrix.
+Similar to the real case, there is also a simple relationship between the condition
+number of 	Gm×n and the eigenvalues of 
+Wm,n.
+Proposition 2.3. If 	λmax is the largest eigenvalue of 
+Wm,n, and 	λmin is the
+smallest eigenvalue of 
+Wm,n, then the 2-norm condition number of 	Gm×n satisﬁes
+κ2
+ 	Gm×n
+
+=
+
+	λmax
+	λmin
+.
+Like the real case, the exact joint probability density function for the m eigen-
+values of the complex Wishart matrix 
+Wm,n can also be written down in a closed
+form [9].
+Lemma 2.4. If 	λ1 ≥· · · ≥	λm are the m eigenvalues of 
+Wm,n, then the joint
+probability density function of 	λ1 ≥· · · ≥	λm is
+	f(x1, . . . , xm) = 	Km,ne−1
+2
+m
+i=1 xi
+m
+
+i=1
+xn−m
+i
+m−1
+
+i=1
+m
+
+j=i+1
+(xi −xj)2,
+(2.3)
+where
+	K−1
+m,n = 2mn
+m
+
+i=1
+Γ (n −m + i) Γ (i) .
+(2.4)
+In the process of deriving our upper and lower bounds for the tails of the condition
+number distributions, some bounds for Gamma and incomplete Gamma functions are
+very useful.
+Lemma 2.5. Assume a > 0 and b > 0. If t ≤b
+a, then
+ t
+0
+e−axxbdx ≤e−attb+1.
+Proof. Let f(t) =
+ t
+0 e−axxbdx −e−attb+1. Then f ′(t) = e−attb(1 + at −(b + 1)).
+So f(t) decreases on [0, b
+a] and increases on [ b
+a, ∞). Since f(0) = 0 and f(∞) =
+ ∞
+0
+e−axxbdx > 0, if t ≤b
+a, then f(t) < 0. Therefore, if t ≤b
+a, then
+ t
+0 e−axxbdx ≤
+e−attb+1.
+Lemma 2.6. Assume a > 0, b > 0, and k > 1
+a. If t ≥
+kb
+ka−1, then
+ ∞
+t
+e−axxbdx ≤ke−attb.
+Proof. Let f(t) =
+ ∞
+t
+e−axxbdx −ke−attb. Then f ′(t) = e−attb(−1 + ka −kb
+t ). So
+f(t) decreases on [0,
+kb
+ka−1] and increases on [
+kb
+ka−1, ∞), since f(0) =
+ ∞
+0
+e−axxbdx >
+0 and f(∞) = 0. So, if t ≥
+kb
+ka−1, then f(t) < 0.
+Therefore, if t ≤
+kb
+ka−1, then
+ ∞
+t
+e−axxbdx ≤ke−attb.
+Lemma 2.7. If Γ(x) =
+ ∞
+0
+e−ttx−1dt, where x > 0, then
+√
+2πxx+ 1
+2 e−x < Γ(x + 1) <
+√
+2πxx+ 1
+2 e−x+
+1
+12x
+(2.5)
+
+
+---PDF PAGE 5---
+CONDITION NUMBERS OF GAUSSIAN RANDOM MATRICES
+607
+and
+Γ
+
+x + 1
+2
+
+< Γ(x)√x.
+(2.6)
+Proof. Inequality (2.5) follows straightforwardly from 6.1.38 in [1], and (2.6) can
+be obtained from the answer to Problem 9.60 in [8].
+3. Bounds for eigenvalue densities of Wishart matrices. In this section,
+we will prove some bounds for the probability density functions of the eigenvalues of
+Wishart matrices. These bounds are very useful in the derivation of the bounds for
+the tails of the condition number distributions.
+Let λmax denote the largest eigenvalue of Wm,n, and let λmin denote the smallest
+eigenvalue of Wm,n. In the following lemma, we prove an upper bound for the joint
+probability density function of λmax and λmin.
+Lemma 3.1. Let fλmax,λmin(x, y) denote the joint probability density function of
+λmax and λmin. Then fλmax,λmin(x, y) satisﬁes
+fλmax,λmin(x, y) ≤Cm,ne−1
+2 (x+y)x
+1
+2 (n+m−3)y
+1
+2 (n−m−1),
+(3.1)
+where
+Cm,n =
+1
+4Γ (m −1) Γ (n −m + 1).
+(3.2)
+Proof. Let Rx,y = {(x2, x3, . . . , xm−1) : x ≥x2 ≥· · · ≥xm−1 ≥y} ⊆Rm−2.
+From the joint probability density function of the m eigenvalues of Wm,n in Lemma
+2.2, we have
+fλmax,λmin(x, y) =
+
+Rx,y
+f(x, x2, . . . , xm−1, y)dx2dx3 · · · dxm−1
+(3.3)
+= Km,ne−1
+2 (x+y)x
+1
+2 (n−m−1)y
+1
+2 (n−m−1)
+×
+
+Rx,y
+e−1
+2
+m−1
+i=2
+xi
+m−1
+
+i=2
+x
+1
+2 (n−m−1)
+i
+× (x −y)
+m−1
+
+i=2
+(x −xi)(xi −y)
+m−2
+
+i=2
+m−1
+
+j=i+1
+(xi −xj)
+m−1
+
+i=2
+dxi.
+Let Rm−2 = {(x2, x3, . . . , xm−1) : x2 ≥· · · ≥xm−1 ≥0}. Then Rm−2 ⊆Rx,y.
+Note that, in (3.3), x ≥xi ≥y for i = 2, 3, . . . , m −1. Replacing x −y and x −xi by
+x, xi −y by xi for i = 2, 3, . . . , m −1, and Rx,y by Rm−2, we get
+fλmax,λmin(x, y) ≤Km,ne−1
+2 (x+y)x
+1
+2 (n+m−3)y
+1
+2 (n−m−1)
+
+Rm−2
+e−1
+2
+m−1
+i=2
+xi
+m−1
+
+i=2
+x
+1
+2 (n−m+1)
+i
+m−2
+
+i=2
+m−1
+
+j=i+1
+(xi −xj)
+m−1
+
+i=2
+dxi.
+(3.4)
+Note that f(x1, x2, . . . , xm) in (2.1) is a probability density function. Therefore,
+for any m ≤n, we have
+
+Rm
+e−1
+2
+m
+i=1 xi
+m
+
+i=1
+x
+1
+2 (n−m−1)
+i
+m−1
+
+i=1
+m
+
+j=i+1
+(xi −xj)
+m
+
+i=1
+dxi = K−1
+m,n,
+
+
+---PDF PAGE 6---
+608
+ZIZHONG CHEN AND JACK J. DONGARRA
+where Rm = {x1 ≥x2 ≥· · · ≥xm ≥0} ⊆Rm. Therefore, we have
+
+Rm−2
+e−1
+2
+m−1
+i=2
+xi
+m−1
+
+i=2
+x
+1
+2 (n−m+1)
+i
+m−2
+
+i=2
+m−1
+
+j=i+1
+(xi −xj)
+m−1
+
+i=2
+dxi = K−1
+m−2,n.
+(3.5)
+Substituting (3.5) into (3.4), we obtain
+fλmax,λmin(x, y) ≤
+Km,n
+Km−2,n
+e−1
+2 (x+y)x
+1
+2 (n+m−3)y
+1
+2 (n−m−1).
+(3.6)
+From (2.2), we have
+Km,n
+Km−2,n
+= π
+2n
+1
+Γ
+ m−1
+2
+
+Γ
+ m
+2
+
+Γ
+ n−m+1
+2
+
+Γ
+ n−m+2
+2
+
+(3.7)
+=
+1
+4Γ (m −1) Γ (n −m + 1).
+Substituting (3.6) into (3.5), we get (3.1) and (3.2) .
+Let 	λmax denote the largest eigenvalue of 
+Wm,n, and let 	λmin denote the smallest
+eigenvalue of 
+Wm,n. Similar to the real case, in the following lemma, we give an upper
+bound for the joint probability density function of 	λmax and 	λmin. The upper bound
+in the complex case can be proved using the same techniques used in the real case.
+Therefore, we omit the proof and only give the result here.
+Lemma 3.2. Let 	f	λmax,	λmin(x, y) denote the joint probability density function of
+	λmax and 	λmin. Then 	f	λmax,	λmin(x, y) satisﬁes
+	f	λmax,	λmin(x, y) ≤	Cm,ne−1
+2 (x+y)xn+m−2yn−m,
+(3.8)
+where
+	Cm,n =
+1
+22nΓ(m −1)Γ(m)Γ(n −m + 1)Γ(n −m + 2).
+(3.9)
+Bounds for the probability density functions of the smallest eigenvalues are also
+very useful in the derivation of the bounds for the tails of the condition number
+distributions.
+In the following lemma, we prove upper and lower bounds for the
+probability density function of the smallest eigenvalue of a real Wishart matrix.
+Lemma 3.3. Let fλmin(x) denote the probability density function of the smallest
+eigenvalue of Wm,n. Then fλmin(x) satisﬁes
+Lm,ne−m
+2 xx
+1
+2 (n−m−1) ≤fλmin(x) ≤Lm,ne−1
+2 xx
+1
+2 (n−m−1),
+(3.10)
+where
+Lm,n =
+2
+n−m−1
+2
+Γ
+ n+1
+2
+
+Γ
+ m
+2
+
+Γ (n −m + 1).
+(3.11)
+Proof. Let Rx = {(x1, x2, . . . , xm−1) : x1 ≥· · · ≥xm−1 ≥x} ⊆Rm−1. From the
+joint probability density function of the eigenvalues of Wm,n in Lemma 2.2, we have
+fλmin(x) =
+
+Rx
+f(x1, x2, . . . , xm−1, x)dx1dx2dxm−1
+
+
+---PDF PAGE 7---
+CONDITION NUMBERS OF GAUSSIAN RANDOM MATRICES
+609
+= Km,ne−1
+2 xx
+1
+2 (n−m−1)
+
+Rx
+e−1
+2
+m−1
+i=1
+xi
+m−1
+
+i=1
+x
+1
+2 (n−m−1)
+i
+×
+m−1
+
+i=1
+(xi −x)
+m−2
+
+i=1
+m−1
+
+j=i+1
+(xi −xj)
+m−1
+
+i=1
+dxi.
+For the lower bound part, taking the transformation yi = xi −x, where i =
+1, 2, . . . , m −1, we have
+fλmin(x) = Km,ne−m
+2 xx
+1
+2 (n−m−1)
+
+Ry
+e−1
+2
+m−1
+i=1
+yi
+m−1
+
+i=1
+(yi + x)
+1
+2 (n−m−1)
+×
+m−1
+
+i=1
+yi
+m−2
+
+i=1
+m−1
+
+j=i+1
+(yi −yj)
+m−1
+
+i=1
+dyi,
+where Ry = {y1 ≥y2 ≥· · · ≥ym−1 ≥0} ⊆Rm−1.
+Replacing yi + x by yi for i = 1, 2, . . . , m −1, we obtain
+fλmin(x) ≥Km,ne−m
+2 xx
+1
+2 (n−m−1)
+
+Ry
+e−1
+2
+m−1
+i=1
+yi
+m−1
+
+i=1
+y
+1
+2 (n−m+1)
+i
+×
+m−2
+
+i=1
+m−1
+
+j=i+1
+(yi −yj)
+m−1
+
+i=1
+dyi.
+Note that
+
+Ry
+e−1
+2
+m−1
+i=1
+yi
+m−1
+
+i=1
+y
+1
+2 (n−m+1)
+i
+m−2
+
+i=1
+m−1
+
+j=i+1
+(yi −yj)
+m−1
+
+i=1
+dyi = K−1
+m−1,n+1.
+Therefore, we obtain
+fλmin(x) ≥
+Km,n
+Km−1,n+1
+e−m
+2 xx
+1
+2 (n−m−1).
+(3.12)
+For the upper bound part, from [6], we have
+fλmin(x) ≤
+Km,n
+Km−1,n+1
+e−1
+2 xx
+1
+2 (n−m−1).
+(3.13)
+From (2.2), we have
+Km,n
+Km−1,n+1
+=
+√π
+ 1
+2
+ n−m+1
+2
+Γ
+ n+1
+2
+
+Γ
+ m
+2
+
+Γ
+ n−m+1
+2
+
+Γ
+ n−m+2
+2
+
+(3.14)
+=
+2
+n−m−1
+2
+Γ
+ n+1
+2
+
+Γ
+ m
+2
+
+Γ (n −m + 1).
+Substituting (3.14) into (3.1 3) and (3.12), we get (3.10) and (3.11) .
+Similar to the real case, in the following lemma, we give upper and lower bounds
+for the probability density function of the smallest eigenvalue 	λmin of a complex
+
+
+---PDF PAGE 8---
+610
+ZIZHONG CHEN AND JACK J. DONGARRA
+Wishart matrix. These bounds can be proved using the same techniques used in the
+real case. Therefore, we omit the proof and only give the result here.
+Lemma 3.4. Let 	f	λmin(x) denote the probability density function of the smallest
+eigenvalue of 
+Wm,n. Then 	f	λmin(x) satisﬁes
+	Lm,ne−m
+2 xxn−m ≤	f	λmin(x) ≤	Lm,ne−1
+2 xxn−m,
+(3.15)
+where
+	Lm,n =
+Γ(n + 1)
+2n−m+1Γ(m)Γ(n −m + 1)Γ(n −m + 2).
+(3.16)
+4. The upper bounds for the distribution tails. In this section, we will
+derive the upper bounds for the tails of the condition number distributions of ran-
+dom rectangular matrices whose elements are independent and identically distributed
+standard normal random variables. Our main results are Theorem 4.5 for real random
+matrices and Theorem 4.6 for complex random matrices.
+Lemma 4.1. For any A > 0, x > 0, and n ≥m ≥2, the largest eigenvalue λmax
+and the smallest eigenvalue λmin of Wm,n satisfy
+P
+λmax
+λmin
+> x2, λmin ≤A2n
+x2
+
+<
+1
+Γ(n −m + 2)
+An
+x
+n−m+1
+.
+Proof.
+From the upper bound for the probability density function of λmin in
+Lemma 3.2, we have
+P
+λmax
+λmin
+> x2, λmin ≤A2n
+x2
+
+< P
+
+λmin ≤A2n
+x2
+
+=
+
+A2n
+x2
+0
+fλmin(t)dt < Lm,n
+
+A2n
+x2
+0
+t
+1
+2 (n−m−1)dt
+=
+Γ
+ n+1
+2
+
+Γ
+ m
+2
+  n
+2
+ n−m+1
+2
+1
+Γ(n −m + 2)
+An
+x
+n−m+1
+.
+Since m ≤n, by applying (2.6) repeatedly, we can prove
+Γ
+m
+2
+ n
+2
+ n−m+1
+2
+> Γ
+n + 1
+2
+
+.
+Therefore, we have
+P
+λmax
+λmin
+> x2, λmin ≤A2n
+x2
+
+<
+1
+Γ(n −m + 2)
+An
+x
+n−m+1
+.
+Similar to real random matrices, for complex random matrices, we have the fol-
+lowing lemma, which can be proved using the same techniques as those for Lemma
+4.1, so we will omit the proof and only give the result.
+Lemma 4.2. For any A > 0, x > 0, and n ≥m ≥2, the largest eigenvalue 	λmax
+and the smallest eigenvalue 	λmin of 
+Wm,n satisfy
+P
+	λmax
+	λmin
+> x2, 	λmin ≤A2n
+x2
+
+<
+1
+Γ(n −m + 2)2
+A2n2
+2x2
+n−m+1
+.
+
+
+---PDF PAGE 9---
+CONDITION NUMBERS OF GAUSSIAN RANDOM MATRICES
+611
+The proof of the following lemma is based on the upper bound for the joint
+probability density function of λmax and λmin in Lemma 3.1 and the upper bound of
+the incomplete Gamma function in Lemma 2.6.
+Lemma 4.3. For any A ≥2.32, x > 0, and n ≥m ≥2, the largest eigenvalue
+λmax and the smallest eigenvalue λmin of Wm,n satisfy
+P
+λmax
+λmin
+> x2, λmin > A2n
+x2
+
+< 0.017
+1
+Γ(n −m + 2)
+An
+x
+n−m+1
+.
+Proof. From the upper bound for the joint probability density function of λmax
+and λmin in Lemma 3.1, we have
+P
+λmax
+λmin
+> x2, λmin > A2n
+x2
+
+=
+ ∞
+A2n
+x2
+ ∞
+tx2 fλmax,λmin(s, t)ds dt
+<
+ ∞
+A2n
+x2
+ ∞
+tx2 Cm,ne−1
+2 tt
+1
+2 (n−m−1)e−1
+2 ss
+1
+2 (n+m−3)ds dt.
+Taking the transform u = tx2, we have
+P
+λmax
+λmin
+> x2, λmin > A2n
+x2
+
+= Cm,n
+ 1
+x
+n−m+1  ∞
+A2n
+e−
+u
+2x2 u
+1
+2 (n−m−1)
+×
+ ∞
+u
+e−1
+2 ss
+1
+2 (n+m−3)ds
+
+du.
+According to Lemma 2.6, with k = 4, if u ≥2(n + m −3), then
+ ∞
+u
+e−1
+2 ss
+1
+2 (n+m−3)ds ≤4e−1
+2 uu
+1
+2 (n+m−3).
+Since A ≥2.32 and n ≥m, hence, u ≥A2n ≥2(n + m −3). Therefore, we have
+P
+λmax
+λmin
+> x2, λmin > A2n
+x2
+
+≤4Cm,n
+ 1
+x
+n−m+1  ∞
+A2n
+e−
+u
+2x2 −1
+2 uun−2du
+≤4Cm,n
+ 1
+x
+n−m+1  ∞
+A2n
+e−1
+2 uun−2du.
+Since A ≥2.32, so A2n ≥4(n −2). Applying Lemma 2.6 again, we have
+P
+λmax
+λmin
+> x2, λmin > A2n
+x2
+
+≤16Cm,ne−1
+2 A2nA2n−4nn−2
+ 1
+x
+n−m+1
+=
+4e−A2n
+2 A2n−4nm−3
+Γ(m −1)Γ(n −m + 1)
+n
+x
+n−m+1
+≤4e(2 ln A−A2
+2 )n
+A4
+nm−2
+Γ(m −1)
+1
+Γ(n −m + 2)
+n
+x
+n−m+1
+.
+(4.1)
+Note that, for any 2 ≤m ≤n, it can be proved that
+nm−2
+Γ(m −1) <
+en
+√
+4π .
+(4.2)
+
+
+---PDF PAGE 10---
+612
+ZIZHONG CHEN AND JACK J. DONGARRA
+Substituting (4.2) into (4.1), we have
+P
+λmax
+λmin
+> x2, λmin > A2n
+x2
+
+≤4e(2 ln A−A2
+2 +1)n
+√
+4πA4
+1
+Γ(n −m + 2)
+n
+x
+n−m+1
+.
+Since A ≥2.32, we have
+e(2 ln A−A2
+2 +1)n < 1.
+Therefore, when A ≥2.32, we have
+P
+λmax
+λmin
+> x2, λmin > A2n
+x2
+
+≤
+4
+√
+4πA4
+1
+Γ(n −m + 2)
+n
+x
+n−m+1
+≤0.017
+1
+Γ(n −m + 2)
+An
+x
+n−m+1
+.
+Similar to real random matrices, for complex random matrices, we have the fol-
+lowing lemma, which can be proved using the same techniques as those for Lemma
+4.3, so we will omit the proof and only give the result.
+Lemma 4.4. For any A ≥3.2735, x > 0, and n ≥m ≥2, the largest eigenvalue
+	λmax and the smallest eigenvalue 	λmin of 
+Wm,n satisfy
+P
+	λmax
+	λmin
+> x2, 	λmin > A2n
+x2
+
+< 0.0016
+1
+Γ(n −m + 2)2
+A2n2
+2x
+n−m+1
+.
+We are now prepared to prove our ﬁrst main result about the condition numbers
+of real random matrices whose elements are independent and identically distributed
+standard normal random variables.
+Theorem 4.5. For any n ≥m ≥2 and x ≥n −m + 1, the 2-norm condition
+number of Gm×n satisﬁes
+P
+
+κ2(Gm×n)
+n/(n −m + 1) > x
+
+<
+1
+√
+2π
+C
+x
+n−m+1
+,
+(4.3)
+where C ≤6.414 is a universal positive constant independent of m, n, and x.
+Proof. For any L > 0, inspired by [2], we ﬁrst break down P(κ2(Gm×n) > x) into
+two parts.
+P(κ2(Gm×n) > x) = P
+λmax
+λmin
+> x2
+
+= P
+λmax
+λmin
+> x2, λmin ≤L2n
+x2
+
++ P
+λmax
+λmin
+> x2, λmin > L2n
+x2
+
+.
+Let L = 2.32. Then based on Lemmas 4.1 and 4.3, we can get
+P(κ2(Gm×n) > x) <
+1
+Γ(n −m + 2)
+Ln
+x
+n−m+1
++ 0.017
+1
+Γ(n −m + 2)
+Ln
+x
+n−m+1
+<
+1
+Γ(n −m + 2)
+1.017Ln
+x
+n−m+1
+.
+
+
+---PDF PAGE 11---
+CONDITION NUMBERS OF GAUSSIAN RANDOM MATRICES
+613
+Note that, from Lemma 2.7, we have
+Γ(n −m + 2) >
+
+2π(n −m + 1)(n −m + 1)n−m+1e−(n−m+1).
+Therefore, we have
+P(κ2(Gm×n) > x) <
+1
+
+2π(n −m + 1)
+1.017eL
+n
+n−m+1
+x
+n−m+1
+.
+Therefore,
+P
+
+κ2(Gm×n)
+n/(n −m + 1) > x
+
+<
+1
+
+2π(n −m + 1)
+1.017eL
+x
+n−m+1
+<
+1
+√
+2π
+6.414
+x
+n−m+1
+.
+Let C = 6.414. Then we get (4.3).
+Remark. 1. The upper bound in Theorem 4.5 is for arbitrary n ≥m ≥2 and
+x ≥n −m + 1. For some special case of m and n, a more precise upper bound can
+be obtained. For example, for the special case of real random 2 × n matrices, based
+on the exact probability density function of κ2(G2×n) in [5], we can get
+P (κ2(G2×n) > x) =
+
+2x
+x2 + 1
+n−1
+<
+ 2
+x
+n−1
+.
+2. For the special case of real random m × m matrices, where m ≥3, it has been
+proved in [2] that
+P (κ2(Gm×m) > m · x) < C′
+x ,
+(4.4)
+where C′ ≤5.60 is a universal positive constant independent of x and m.
+In Theorem 4.5, if we take m = n, then we have
+P (κ2(Gm×m) > m · x) < 2.60
+x ,
+which is consistent with (4.4) except that we improved the upper bound for the
+constant C′ from 5.60 to 2.60. From the following (4.5), we know that the constant
+C′ in (4.4) actually must at least be 2.
+3. For the special case of large real random m × m matrices, it has been proved
+in [5] that
+lim
+m→∞P
+κ2(Gm×m)
+m
+< x
+
+= e−2
+x −2
+x2 .
+Therefore, we have
+lim
+m→∞P
+κ2(Gm×m)
+m
+> x
+
+= 1 −e−2
+x −2
+x2 ∼2
+x
+(4.5)
+as x →∞. Hence, the smallest possible universal constant C in Theorem 4.5 must be
+no smaller than 2
+√
+2π. Therefore, the universal constant C in Theorem 4.5 actually
+must satisfy
+C ≥2
+√
+2π ≈5.013.
+(4.6)
+
+
+---PDF PAGE 12---
+614
+ZIZHONG CHEN AND JACK J. DONGARRA
+Similar to real random matrices, for complex random matrices, we have the follow-
+ing theorem, which can be proved using the same techniques as those for Theorem 4.5,
+so we will omit the proof and only give the result.
+Theorem 4.6. For any n ≥m ≥2 and x ≥n −m + 1, the 2-norm condition
+number of 	Gm×n satisﬁes
+P
+
+κ2( 	Gm×n)
+n/(n −m + 1) > x
+
+< 1
+2π
+ 	C
+x
+2(n−m+1)
+,
+where 	C ≤6.298 is a universal positive constant independent of x, m, and n.
+5. The lower bounds for the distribution tails. In this section, we will
+prove the lower bounds for the tails of the condition number distributions of random
+rectangular matrices whose elements are independent and identically distributed stan-
+dard normal random variables. Our main results are Theorem 5.5 for real random
+matrices and Theorem 5.6 for complex random matrices.
+Lemma 5.1. For any B > 0, x > 0, and n ≥m ≥2, the smallest eigenvalue
+λmin of Wm,n satisﬁes
+P
+
+λmin ≤B2n
+x2
+
+>
+
+2e
+5
+6
+3 e−B2mn
+2x2
+1
+Γ(n −m + 2)
+
+e−1
+2 Bn
+x
+n−m+1
+.
+Proof.
+From the lower bound for the probability density function of λmin in
+Lemma 3.3, we have
+P
+
+λm ≤B2n
+x2
+
+=
+
+B2n
+x2
+0
+f(λm)dλm
+>
+
+B2n
+x2
+0
+Lm,ne−m
+2 λmλ
+1
+2 (n−m−1)
+m
+dλm
+> Lm,ne−B2mn
+2x2
+
+B2n
+x2
+0
+λ
+1
+2 (n−m−1)
+m
+dλm
+= Lm,ne−B2mn
+2x2
+2n
+n−m+1
+2
+n −m + 1
+B
+x
+n−m+1
+= e−B2mn
+2x2
+Γ
+ n+1
+2
+
+Γ
+ m
+2
+  n
+2
+ n−m+1
+2
+1
+Γ(n −m + 2)
+Bn
+x
+n−m+1
+.
+Note that
+n + 1
+2
+Γ
+n + 1
+2
+
+>
+√
+2π
+n + 1
+2
+ n+2
+2
+e−n+1
+2
+and
+m
+2 Γ
+m
+2
+
+<
+√
+2π
+m
+2
+ m+1
+2
+e−m
+2 +
+1
+6m .
+
+
+---PDF PAGE 13---
+CONDITION NUMBERS OF GAUSSIAN RANDOM MATRICES
+615
+Therefore,
+Γ
+ n+1
+2
+
+Γ
+ m
+2
+  n
+2
+ n−m+1
+2
+> e−n−m+1
+2
+−
+1
+6m
+
+(n + 1)n
+mm−1nn−m+1
+= e−n−m+1
+2
+−
+1
+6m
+
+nn+1(1 + 1/n)n+1
+(n + 1)mm−1nn−m+1
+> e−n−m+1
+2
+−
+1
+6m
+ ne
+n + 1.
+Since 2 ≤m ≤n, therefore, we have
+Γ
+ n+1
+2
+
+Γ
+ m
+2
+  n
+2
+ n−m+1
+2
+>
+
+2e
+5
+6
+3 e−n−m+1
+2
+.
+Therefore, we have
+P
+
+λm ≤B2n
+x2
+
+>
+
+2e
+5
+6
+3 e−B2mn
+2x2
+1
+Γ(n −m + 2)
+
+e−1
+2 Bn
+x
+n−m+1
+.
+Similar to real random matrices, we have the following lemma for complex random
+matrices. Lemma 5.2 can be proved using the same techniques as those for Lemma 5.1,
+so we will omit the proof and only give the result.
+Lemma 5.2. For any B > 0, x > 0, and 2 ≤m ≤n, the smallest eigenvalue
+	λmin of 
+Wm,n satisﬁes
+P
+
+	λmin ≤B2n
+x2
+
+> e1−
+1
+12m e−B2mn
+2x2
+1
+Γ(n −m + 2)2
+e−1B2n2
+2x2
+n−m+1
+.
+The proof of the following lemma is based on the upper bound of the joint prob-
+ability density function of λmax and λmin in Lemma 3.1 and the upper bound of the
+incomplete Gamma function in Lemma 2.5.
+Lemma 5.3. For any B ≤e−1.7, x > 0, and 2 ≤m ≤n, the largest eigenvalue
+λmax and the smallest eigenvalue λmin of Wm,n satisfy
+P
+
+λmin ≤B2n
+x2 , λmax
+λmin
+≤x2
+
+< 11Bm−1
+4
+√
+4π
+1
+Γ(n −m + 2)
+
+e−1
+2 Bn
+x
+n−m+1
+.
+Proof. From the upper bound for the joint probability density function of λmax
+and λmin in Lemma 3.1, we have
+P
+
+λmin ≤B2n
+x2 , λmax
+λmin
+≤x2
+
+=
+
+B2n
+x2
+0
+ tx2
+0
+fλmax,λmin(s, t) ds dt
+< Cm,n
+
+B2n
+x2
+0
+ tx2
+0
+e−1
+2 tt
+1
+2 (n−m−1)e−1
+2 ss
+1
+2 (n+m−3)ds dt.
+
+
+---PDF PAGE 14---
+616
+ZIZHONG CHEN AND JACK J. DONGARRA
+Taking the transform u = tx2, we have
+P
+
+λmin ≤B2n
+x2 , λmax
+λmin
+≤x2
+
+= Cm,n
+ 1
+x
+n−m+1  B2n
+0
+e−
+u
+2x2 u
+1
+2 (n−m−1)
+×
+ u
+0
+e−1
+2 ss
+1
+2 (n+m−3)ds
+
+du.
+According to Lemma 2.5, if u ≤n + m −3, then
+ u
+0
+e−1
+2 ss
+1
+2 (n+m−3)ds ≤e−1
+2 uu
+1
+2 (n+m−1).
+Therefore, when B ≤e−1.7, we have
+P
+
+λmin ≤B2n
+x2 , λmax
+λmin
+≤x2
+
+≤Cm,n
+ 1
+x
+n−m+1  B2n
+0
+e−
+u
+2x2 −1
+2 uun−1du
+≤Cm,n
+ 1
+x
+n−m+1  B2n
+0
+e−1
+2 uun−1du.
+Since B ≤e−1.7, so B2n ≤2(n −1). Applying Lemma 2.5 again, we have
+P
+
+λmin ≤B2n
+x2 , λmax
+λmin
+≤x2
+
+≤Cm,n
+ 1
+x
+n−m+1
+e−B2n
+2 B2nnn
+=
+e−B2n
+2 Bn+m−1nm−1
+4Γ(m −1)Γ(n −m + 1)
+Bn
+x
+n−m+1
+.
+From (4.2), we have
+nm−2
+Γ(m −1) <
+en
+√
+4π .
+Therefore, we have
+P
+
+λmin ≤B2n
+x2 , λmax
+λmin
+≤x2
+
+≤ene−B2n
+2 Bn+m−1n
+4
+√
+4πΓ(n −m + 1)
+Bn
+x
+n−m+1
+≤Bm−1n(n −m + 1)e
+3
+2 ne−B2n
+2 Bn
+4
+√
+4π
+×
+1
+Γ(n −m + 2)
+
+e−1
+2 Bn
+x
+n−m+1
+.
+When B ≤e−1.7, for all n ≥m ≥2, we have
+n(n −m + 1)e
+3
+2 ne−B2n
+2 Bn < 11.
+Therefore, when B ≤e−1.7, we have
+P
+
+λmin ≤Bn
+x2 , λmax
+λmin
+≤x2
+
+< 11Bm−1
+4
+√
+4π
+1
+Γ(n −m + 2)
+
+e−1
+2 Bn
+x
+n−m+1
+.
+
+
+---PDF PAGE 15---
+CONDITION NUMBERS OF GAUSSIAN RANDOM MATRICES
+617
+Similar to real random matrices, we have the following lemma for complex random
+matrices. Lemma 5.4 can be proved using the same techniques as those for Lemma 5.3,
+so we will omit the proof and only give the result.
+Lemma 5.4. For any B2 ≤e−1.2, x > 0, and 2 ≤m ≤n, the largest eigenvalue
+	λmax and the smallest eigenvalue 	λmin of 
+Wm,n satisfy
+P
+
+	λmin ≤Bn
+x2 ,
+	λmax
+	λmin
+≤x2
+
+< 0.0352
+1
+Γ(n −m + 2)2
+e−1B2n2
+2x2
+n−m+1
+.
+We are now prepared to derive the lower bounds for the tails of the condition num-
+ber distributions of random matrices whose elements are independent and identically
+distributed standard normal random variables
+Theorem 5.5. For any x ≥n −m + 1 and n ≥m ≥2, the 2-norm condition
+number of Gm×n satisﬁes
+P
+
+κ2(Gm×n)
+n/(n −m + 1) > x
+
+>
+1
+√
+2π
+ c
+x
+n−m+1
+,
+(5.1)
+where c ≥0.245 is a universal positive constant independent of x, m, and n.
+Proof. For any positive constant H, we have
+P(κ2(Gm×n) > x) = P
+ λ1
+λm
+> x2
+
+> P
+
+λm ≤H2n
+x2 , λ1
+λm
+> x2
+
+= P
+
+λm ≤H2n
+x2
+
+−P
+
+λm ≤H2n
+x2 , λ1
+λm
+≤x2
+
+.
+Let H = e−1.7. Then based on Lemmas 5.1 and 5.3, we have
+P(κ > x) >
+⎛
+⎝
+
+2e
+5
+6
+3 e−H2mn
+2x2
+−11Hm−1
+4
+√
+4π
+⎞
+⎠
+1
+Γ(n −m + 2)
+
+e−1
+2 Hn
+x
+n−m+1
+.
+From Lemma 2.7, we have
+Γ(n −m + 2) <
+
+2π(n −m + 1)(n −m + 1)n−m+1e−(n−m+1)+
+1
+12(n−m+1) .
+Note that, for 2 ≤m ≤n, we have
+√
+n −m + 1 < 1.21n−m+1
+and
+1
+12(n −m + 1) ≤1
+12.
+Therefore, we have
+P (κ2(Gm,n) > x) >
+⎛
+⎝
+
+2e
+5
+6
+3 e−H2mn
+2x2 −11Hm−1
+4
+√
+4π
+⎞
+⎠e−1
+12
+√
+2π
+
+e
+1.21(n−m+1)e−1
+2 Hn
+x
+n−m+1
+.
+Since H = e−1.7, x ≥1, and 2 ≤m ≤n, we have
+⎛
+⎝
+
+2e
+5
+6
+3 e−H2mn
+2x2
+−11Hm−1
+4
+√
+4π
+⎞
+⎠e−1
+12 > 0.99.
+
+
+---PDF PAGE 16---
+618
+ZIZHONG CHEN AND JACK J. DONGARRA
+Therefore, we have
+P (κ2(Gm,n) > x) > 0.99
+√
+2π
+0.248
+n
+n−m+1
+x
+n−m+1
+>
+1
+√
+2π
+0.245
+n
+n−m+1
+x
+n−m+1
+.
+Therefore,
+P
+
+κ2(Gm,n)
+n/(n −m + 1) > x
+
+>
+1
+√
+2π
+0.245
+x
+n−m+1
+.
+Let c = 0.245. Then we get (5.1).
+Remark. 1. The lower bound in Theorem 5.5 is for arbitrary n ≥m ≥2 and
+x ≥n −m + 1. For some special case of m and n, a more precise lower bound can
+be obtained. For example, for the special case of real random m × m matrices, where
+m ≥3, it has been proved in [2] that
+P (κ2(Gm×m) > m . x) > c
+x,
+where c ≥0.13 is a universal positive constant independent of x and m.
+In Theorem 5.5, however, if we take m = n, then we can only get
+P (κ2(Gm×m) > m . x) > 0.097
+x
+.
+2. For the special case of real random 2×n matrices, based on the exact probability
+density function of κ2(G2×n) in [5], we can get
+P (κ2(G2×n) > x) =
+
+2x
+x2 + 1
+n−1
+∼
+ 2
+x
+n−1
+as x →∞. Hence, the constant c in Theorem 5.5 is no larger than 2. Therefore, the
+constant c in Theorem 5.5 actually satisﬁes
+0.245 ≤c ≤2.
+(5.2)
+Similar to real random matrices, we have the following theorem for complex ran-
+dom matrices. Theorem 5.6 can be proved using the same techniques as those for
+Theorem 5.5, so we will omit the proof and only give the result.
+Theorem 5.6. For any x ≥n −m + 1 and n ≥m ≥2, the 2-norm condition
+number of Gm×n satisﬁes
+P
+
+κ2( 	Gm×n)
+n/(n −m + 1) > x
+
+> 1
+2π
+ c
+x
+2(n−m+1)
+,
+where c ≥0.319 is a universal positive constant independent of x, m, and n.
+
+
+---PDF PAGE 17---
+CONDITION NUMBERS OF GAUSSIAN RANDOM MATRICES
+619
+6. The upper bounds for the expected logarithms. For square Gaus-
+sian random matrix Gn×n, in [10], Smale asked for E(log κ2(Gn×n)).
+Similarly,
+for rectangular Gaussian random matrix Gm×n, it is also interesting to investigate
+E(log κ2(Gm×n)). In this section, we will derive upper bounds for E(log κ2(Gm×n))
+and E(log 	κ2(Gm×n)). Our main results are Theorems 6.1 and 6.2.
+Theorem 6.1.
+For any n ≥m ≥2, the 2-norm condition number of Gm×n
+satisﬁes
+E(log κ2(Gm×n)) < log
+n
+n −m + 1 + 2.258.
+(6.1)
+Proof. Let fκ(x) be the probability density function of κ2(Gm×n). Then
+E log
+
+κ2(Gm×n)
+6.414
+n
+n−m+1
+
+=
+ ∞
+1
+log
+
+x
+6.414
+n
+n−m+1
+
+fκ(x) dx
+<
+ ∞
+6.414
+n
+n−m+1
+log
+
+x
+6.414
+n
+n−m+1
+
+fκ(x) dx
+=
+ ∞
+6.414
+n
+n−m+1
+P(κ2(Gm×n) > x)
+1
+x dx.
+From Theorem 4.3, we have
+P (κ2(Gm×n) > x) <
+1
+√
+2π
+6.414
+n
+n−m+1
+x
+n−m+1
+.
+Therefore, we have
+E log
+
+κ2(Gm×n)
+6.414
+n
+n−m+1
+
+<
+1
+√
+2π
+ ∞
+6.414
+n
+n−m+1
+6.414
+n
+n−m+1
+x
+n−m+1
+1
+x dx
+=
+1
+(n −m + 1)
+√
+2π
+< 0.399.
+Therefore, we have
+E log(κ2(Gm×n)) < log
+n
+n −m + 1 + log 6.414 + 0.399
+< log
+n
+n −m + 1 + 2.258.
+Remark. 1. For the special case of real random m × m matrices, from the results
+in [11], we can get
+E log(κ2(Gm×m)) ≤log m + 3 + 3 log 2
+2
+≈2.54.
+(6.2)
+In Theorem 6.1, if we take m = n, then we have
+E log(κ2(Gm×n)) < log n + 2.258,
+which is a slightly improved version of (6.2).
+
+
+---PDF PAGE 18---
+620
+ZIZHONG CHEN AND JACK J. DONGARRA
+2. The upper bound in Theorem 6.1 is for arbitrary n ≥m ≥2. For some special
+case of m and n or large m and n, more precise results exist.
+For the special case of real random 2 × n matrices, it was shown in [6] that
+E log(κ2(G2×n)) = 1
+2
+√π Γ
+ n−1
+2
+
+Γ
+ n
+2
+ .
+For real random m × m matrices, it has been proved in [6] that
+E log(κ2(Gm×m)) = log m + c + o(1)
+as m →∞, where c ≈1.537.
+For rectangular matrix Gmn×n, if limn→∞mn/n = y and 0 < y < 1, then it has
+been proved in [6] that
+E log(κ2(Gmn×n)) = log 1 + √y
+1 −√y + o(1)
+as n →∞.
+Similar to real random matrices, we have the following theorem for complex ran-
+dom matrices. Theorem 6.2 can be proved using the same techniques as those for
+Theorem 6.1, so we will omit the proof and only give the result.
+Theorem 6.2.
+For any n ≥m ≥2, the 2-norm condition number of Gm×n
+satisﬁes
+E(log κ2( 	Gm×n)) < log
+n
+n −m + 1 + 2.240.
+Acknowledgment. We would like to thank Julien Langou for precious discus-
+sions. We are very grateful to referees for their helpful corrections, valuable comments,
+and constructive suggestions which have improved the presentation of this paper.
+REFERENCES
+[1] M. Abramowitz and I. A. Stegun, eds., Handbook of Mathematical Functions, Dover, New
+York, 1970.
+[2] J. M. Azais and M. Wschebor, Upper and lower bounds for the tails of the distribution
+of the condition number of a Gaussian matrix, SIAM J. Matrix Anal. Appl., 26 (2005),
+pp. 426–440.
+[3] Z. Chen and J. Dongarra, Numerically Stable Real Number Codes Based on Random Ma-
+trices, Technical report ut-cs-04-526, Department of Computer Science, The University of
+Tennessee, Knoxville, 2004.
+[4] Z. Chen, G. E. Fagg, E. Gabriel, J. Langou, T. Angskun, G. Bosilca, and J. Dongarra,
+Fault tolerant high performance computing by a coding approach, in Proceedings of ACM
+SIGPLAN Symposium on Principles and Practice of Parallel Programming, Chicago, IL,
+2005.
+[5] A. Edelman, Eigenvalues and Condition Numbers of Random Matrices, Ph.D. thesis, Depart-
+ment of Mathematics, MIT, Cambridge, MA, 1989.
+[6] A. Edelman, Eigenvalues and condition numbers of random matrices, SIAM J. Matrix Anal.
+Appl., 9 (1988), pp. 543–560.
+[7] A. Edelman and B. D. Sutton, Tails of condition number distributions, SIAM J. Matrix
+Anal. Appl., 27 (2005), pp. 547–560.
+[8] R. L. Graham, D. E. Knuth, and O. Patashnik, Concrete Mathematics: A Foundation for
+Computer Science, 2nd ed., Addison-Wesley, Reading, MA, 1994.
+[9] A. T. James, Distributions of matrix variates and latent roots derived from normal samples,
+Ann. Math. Statist., 35 (1964), pp. 475–501.
+[10] S. Smale, On the eﬃciency of algorithms of analysis, Bull. Amer. Math. Soc., 13 (1985),
+pp. 87–121.
+[11] S. J. Szarek, Condition numbers of random matrices, J. Complexity, 7 (1991), pp. 131–149.

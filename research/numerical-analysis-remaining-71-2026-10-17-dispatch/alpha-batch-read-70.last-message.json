@@ -1,0 +1,279 @@
+{
+  "group": "x",
+  "batches": ["70"],
+  "pages_read": [
+    "semi-lagrangian-characteristic-transport",
+    "semi-lagrangian-characteristic-transport-examples"
+  ],
+  "items_read": [
+    "def-semilagrangian-periodic-grid-and-interpolant",
+    "thm-periodic-c1-velocity-has-global-characteristic-flow",
+    "lem-semilagrangian-transverse-first-hit-error",
+    "alg-semilagrangian-backtracking-on-periodic-grid",
+    "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+    "lem-periodic-characteristic-map-is-orientation-preserving",
+    "lem-periodic-tensor-interpolation-hessian-error",
+    "lem-euler-backward-characteristic-foot-error",
+    "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+    "def-characteristic-cell-overlap-remapping",
+    "thm-periodic-semilagrangian-global-error-from-local-defects",
+    "thm-characteristic-cell-overlap-remapping-conserves-mass-and-positivity",
+    "ex-semilagrangian-constant-speed-crosses-many-cells",
+    "ex-semilagrangian-fixed-grid-time-refinement-keeps-interpolation-error",
+    "ex-semilagrangian-pointwise-interpolation-can-change-grid-mass",
+    "ex-conservative-overlap-transfer-under-smooth-deforming-flow"
+  ],
+  "conventions": [
+    {
+      "convention": "Coordinate periods are positive, N_j ≥ 1, h_j = ℓ_j/N_j, node indices wrap modulo N_j, and interpolation uses floor indices and fractions θ_j ∈ [0,1). Repeated corner indices when N_j = 1 are allowed.",
+      "fixed_by": "def-semilagrangian-periodic-grid-and-interpolant",
+      "matters_for": [
+        "alg-semilagrangian-backtracking-on-periodic-grid",
+        "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+        "lem-periodic-tensor-interpolation-hessian-error",
+        "ex-semilagrangian-constant-speed-crosses-many-cells"
+      ]
+    },
+    {
+      "convention": "The velocity is C1 on an open time interval containing [0,T], and characteristics solve X′(t) = b(t,X(t)) on the periodic Euclidean lift.",
+      "fixed_by": "thm-periodic-c1-velocity-has-global-characteristic-flow",
+      "matters_for": [
+        "lem-periodic-characteristic-map-is-orientation-preserving",
+        "lem-euler-backward-characteristic-foot-error",
+        "thm-periodic-semilagrangian-global-error-from-local-defects"
+      ]
+    },
+    {
+      "convention": "Backtracking uses the explicit foot x_i − Δt b(t_{n+1},x_i). The budget counts complete time updates; B < M returns budget-exhausted before updates.",
+      "fixed_by": "alg-semilagrangian-backtracking-on-periodic-grid",
+      "matters_for": [
+        "lem-euler-backward-characteristic-foot-error",
+        "thm-periodic-semilagrangian-global-error-from-local-defects",
+        "ex-semilagrangian-pointwise-interpolation-can-change-grid-mass"
+      ]
+    },
+    {
+      "convention": "The boundary estimate concerns a matched transverse bracket with fixed signed derivative margin σh′ ≥ ν > 0; it does not certify event ordering, grazing, or simultaneous events.",
+      "fixed_by": "lem-semilagrangian-transverse-first-hit-error",
+      "matters_for": [
+        "lem-semilagrangian-transverse-first-hit-error"
+      ]
+    },
+    {
+      "convention": "The conservative branch assumes Countable Choice, measures periodic sets using the open fundamental box, and uses exact finite measurable partitions up to null sets with positive cell volumes. Departure cells are inverse images under the forward characteristic map.",
+      "fixed_by": "def-characteristic-cell-overlap-remapping",
+      "matters_for": [
+        "thm-characteristic-cell-overlap-remapping-conserves-mass-and-positivity",
+        "ex-conservative-overlap-transfer-under-smooth-deforming-flow"
+      ]
+    },
+    {
+      "convention": "The global error theorem treats nonconservative scalar transport. Stability and defect constants are uniform over refinement; the contractive Euler/multilinear convergence conclusion uses Δt → 0 and h²/Δt → 0.",
+      "fixed_by": "thm-periodic-semilagrangian-global-error-from-local-defects",
+      "matters_for": [
+        "thm-periodic-semilagrangian-global-error-from-local-defects",
+        "ex-semilagrangian-fixed-grid-time-refinement-keeps-interpolation-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-periodic-c1-velocity-has-global-characteristic-flow",
+      "statement": "For the stated spatially periodic C1 velocity on an open time interval containing [0,T], every initial condition at s ∈ [0,T] has a unique characteristic on [0,T]; the lifted flow is periodic-equivariant and satisfies ‖X(t;s,x) − x‖₂ ≤ M_T|t−s|.",
+      "used_by": [
+        "alg-semilagrangian-backtracking-on-periodic-grid",
+        "lem-periodic-characteristic-map-is-orientation-preserving",
+        "lem-euler-backward-characteristic-foot-error",
+        "def-characteristic-cell-overlap-remapping",
+        "thm-periodic-semilagrangian-global-error-from-local-defects",
+        "ex-conservative-overlap-transfer-under-smooth-deforming-flow"
+      ]
+    },
+    {
+      "id": "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+      "statement": "Every value of the periodic tensor interpolant is a convex combination of the 2^d corner data; it preserves nonnegativity, lies between the corner extrema, and satisfies ‖I_hV − I_hW‖∞ ≤ ‖V − W‖∞ without a displacement-to-cell-size restriction.",
+      "used_by": [
+        "lem-periodic-tensor-interpolation-hessian-error",
+        "thm-periodic-semilagrangian-global-error-from-local-defects",
+        "ex-semilagrangian-constant-speed-crosses-many-cells",
+        "lem-na-multilinear-interpolation-positive-and-second-order-accurate"
+      ]
+    },
+    {
+      "id": "lem-periodic-characteristic-map-is-orientation-preserving",
+      "statement": "Under the global-flow theorem's hypotheses, Φ_{t,s}(x) = X(t;s,x) is a C1 diffeomorphism of the periodic lift with inverse Φ_{s,t}, and det D_xΦ_{t,s}(x) > 0.",
+      "used_by": [
+        "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+        "def-characteristic-cell-overlap-remapping",
+        "thm-characteristic-cell-overlap-remapping-conserves-mass-and-positivity",
+        "ex-conservative-overlap-transfer-under-smooth-deforming-flow"
+      ]
+    },
+    {
+      "id": "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+      "statement": "Assuming Countable Choice, the torus inverse image of a Lebesgue-measurable positive-volume arrival cell under the periodic characteristic diffeomorphism is measurable with positive finite volume. Finite arrival partitions up to null sets pull back to departure partitions up to null sets.",
+      "used_by": [
+        "def-characteristic-cell-overlap-remapping",
+        "thm-characteristic-cell-overlap-remapping-conserves-mass-and-positivity",
+        "ex-conservative-overlap-transfer-under-smooth-deforming-flow"
+      ]
+    },
+    {
+      "id": "lem-periodic-tensor-interpolation-hessian-error",
+      "statement": "For u ∈ C2 of the periodic box, ‖I_hu − u‖∞ ≤ (1/8) Σ_j h_j²‖∂_{jj}u‖∞, including grid nodes and periodic cell endpoints.",
+      "used_by": [
+        "thm-periodic-semilagrangian-global-error-from-local-defects"
+      ]
+    },
+    {
+      "id": "lem-euler-backward-characteristic-foot-error",
+      "statement": "The explicit Euler backward foot has local error at most (1/2)(L_xM + L_t)(Δt)² for every positive step within [0,T], without a displacement-to-grid-width restriction.",
+      "used_by": [
+        "thm-periodic-semilagrangian-global-error-from-local-defects"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-linear-transport-equation-and-its-characteristic-flow",
+      "used_for": "Characteristic ODE and distinction between characteristics and a unique flow.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Uniform short-time existence and uniqueness used in the finite-horizon flow construction.",
+      "opened": true
+    },
+    {
+      "id": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+      "used_for": "Oriented characteristic integral equations and trajectory increment bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Norm bounds after backward integrals are rewritten with ordered endpoints.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Global spatial Lipschitz bounds from bounded velocity derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-hybrid-mode-guard-reset-system",
+      "used_for": "Smooth incoming modes and declared guard orientation.",
+      "opened": true
+    },
+    {
+      "id": "lem-hybrid-guard-derivative-along-mode",
+      "used_for": "Identification of the derivative controlling transverse boundary hits.",
+      "opened": true
+    },
+    {
+      "id": "lem-transverse-hybrid-event-time-error",
+      "used_for": "Matched-bracket event-time bound (L_gη + ε)/ν.",
+      "opened": true
+    },
+    {
+      "id": "def-certified-hybrid-event-enclosure",
+      "used_for": "Certified dense-output and matched reference-guard context underlying the event-time supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "used_for": "Checking the boundary lemma's remark distinguishing local one-hit bounds from finite event-list propagation.",
+      "opened": true
+    },
+    {
+      "id": "lem-transport-characteristics-depend-c-one-on-initial-position",
+      "used_for": "C1 spatial flow dependence and time continuity of its derivative.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Inverse-flow derivative identity and constancy of the transported scalar along characteristics.",
+      "opened": true
+    },
+    {
+      "id": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+      "used_for": "Continuity of the characteristic Jacobian determinant.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+      "used_for": "Nonvanishing determinant of the invertible flow derivative.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Preservation of the positive determinant sign from the identity map.",
+      "opened": true
+    },
+    {
+      "id": "thm-lagrange-interpolation-remainder",
+      "used_for": "One-coordinate linear interpolation error, including exactness at endpoints.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit axiom assumption carried through the Lebesgue-volume branch.",
+      "opened": true
+    },
+    {
+      "id": "lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets",
+      "used_for": "Measurability of lifted arrival sets and their inverse-flow images.",
+      "opened": true
+    },
+    {
+      "id": "lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets",
+      "used_for": "Preservation of null partition defects and the positive departure-volume argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Sigma-algebra, completeness, and measure properties under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-and-countable-subadditivity-of-measures",
+      "used_for": "Countable periodic lifts and unions of null tile faces.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Finite fundamental-box volume, positive tensor-cell volumes, and null faces.",
+      "opened": true
+    },
+    {
+      "id": "prop-measure-monotonicity",
+      "used_for": "Bounding departure volumes and contradicting a null image containing a positive-volume arrival cell.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "Meaning of exact measurable overlap volumes.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-product-limit",
+      "used_for": "Positive limiting lower bound e^(−1)/2 in the fixed-grid time-refinement example.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "semi-lagrangian-characteristic-transport",
+      "to": "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "faithful": true,
+      "note": "Opened the overlap-remapping definition and conservation/positivity theorem. The source and departure partitions satisfy their finite measurable positive-volume hypotheses on the open fundamental box; Countable Choice is retained. The arrival-volume factor is applied separately, without importing an unsupported L2 claim for transported densities."
+    },
+    {
+      "from": "monotone-hjb-schemes-and-policy-iteration",
+      "to": "semi-lagrangian-characteristic-transport",
+      "faithful": true,
+      "note": "Opened the downstream grid definition, interpolation lemma, semi-Lagrangian algorithm, and one-step theorem. Unit periods and N_j ≥ 3 specialize the supplied grid; face formulas agree with the floor convention. Convexity and contractivity are used faithfully. HJB foot signs are defined locally, and its consistency statement retains h_max²/τ → 0."
+    }
+  ]
+}

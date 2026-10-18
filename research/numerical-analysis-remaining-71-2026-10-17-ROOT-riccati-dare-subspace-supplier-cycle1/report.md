@@ -1,0 +1,48 @@
+# DARE pencil-subspace prerequisite resolution: research proposal only
+
+The established missing prerequisite has a complete local proof in `proposed-item.md`. Proposed new A-page proposition: `prop-dare-stable-deflating-subspace-perturbation-bound`. No canonical content, page inventory, manifest, readiness, engine state, test, hash, recertification, gate, or acceptance was changed. This is cycle 1; integrate through the root's one native continuation only after the live writer drains.
+
+## Actual inputs inspected
+
+Read full CLAUDE.md, README.md and SCHEMA.md; WORKFLOW.md was requested in full but tool output was truncated, so no full-file reading is claimed. Read the actual complete sensitivity carrier, DARE pencil graph carrier, exact graph-to-solution carrier, candidate-extraction algorithm, dense-work/acceptance carrier, standard Riccati definition, Schur-power lemma, published generalized-Schur definition/existence proof, QZ backward-error theorem, ordinary Sylvester definition/separation lemma, and Jordan-form corollary. Read batch23 pages manifest relevant inventory/dependencies, relevant proof-contract and coverage entries, complete plan LIN-RIC section, linear-audit LIN-RIC design, and final batch23 notes once they appeared. Batch notes were absent at the initial read and appeared during the live writer session. No stale resume file was consulted.
+
+The original sensitivity result proves sound CARE graph perturbation constants, CARE/DARE residual sensitivity, and a chart bound retaining ||U1 inverse||. Preserve those clauses and proof exactly. The missing DARE implication is real: ordinary Sylvester X↦AX+XB is not the generalized two-variable operator, and the QZ backward-error theorem certifies only an unstructured nearby pair. The actual DARE pencil allows singular A and infinity; no inverse of A is used in the proposal.
+
+## Proof and hypotheses
+
+1. Exact ordered complex unitary QZ coordinates are inputs. The paired right/left graph operator is L(Y,Z)=(S22Y−ZS11,T22Y−ZT11), with its own smallest singular value gamma. Descending row/ascending column substitution solves 2×2 coefficient systems with determinant p_j t_i−s_i q_j≠0; this proves gamma>0, including infinite roots.
+2. A nonlinear paired-graph fixed point incorporates both pencil perturbations, the original upper-right couplings, and both left/right graph variables. The radius inequalities in the draft prove existence and local uniqueness, with r=2 delta/gamma under an explicit scalar smallness condition. A backward-error number alone does not supply gamma or these hypotheses.
+3. Separate explicit Neumann and Stein margins identify the graph as the stable space: the leading quotient T11^{-1}S11 remains Schur stable and the trailing reciprocal quotient S22^{-1}T22 remains Schur stable. Thus infinity remains legitimate, the perturbed pencil is regular, and its stable root count is exactly n. This is stronger than requiring an unexplained external stable-root count. All the sufficient margins hold for sufficiently small perturbations at a fixed separated input.
+4. Normalize the right graph with (I+Y*Y)^{-1/2}. For y=||Y||2, the aligned unitary basis distance is exactly beta(y)=sqrt(2(1−1/sqrt(1+y²)))≤y. The physical chart bound retains ||U1^{-1}|| and its strict inverse margin. Arbitrary right unitary basis rotations leave the chart invariant; they cannot be treated as literal basis error before alignment.
+
+## Authoritative source reading
+
+Fetched and read the complete HTML text of LAPACK Users' Guide node102 (error-bound overview) and node104 (generalized Sylvester equations, pair separation and conditioning). Their locally saved HTML includes ALT formulas; the HTML text extraction displayed equations carried as images incompletely, so none of the draft's constants is copied or claimed verified from those displayed formulas. The operator definition is present explicitly as text at node104; importantly, that source states the two separation orientations generally differ. The proposal uses the lower-oriented operator actually needed by the graph equation. The inequalities and constants were derived locally in full.
+
+Also fetched/read node105; it is **Singular Eigenproblems**, not the condition-number page. The draft URL was corrected to node104. Node105 independently confirms that regular-pair error bounds confer no singular-pencil conclusion. No PDF source reading is claimed by this research supplier.
+
+## Exact native integration
+
+Create exactly the proposition in `proposed-item.md` as `items/prop-dare-stable-deflating-subspace-perturbation-bound.md`, retaining draft status. Its complete direct deps are in the frontmatter; no new generalized-Sylvester definition/lemma is needed because the definition and full proof are local to this item. Assign its dependency level after the reordering branch is integrated, using actual run rules. Place it on A immediately after the DARE pencil graph and before sensitivity; the original 20 A items plus this one and the reordering/PBH suppliers remain well under 100.
+
+The new proposition intentionally does not logically depend on the proposed reordering algorithm: it assumes an exact ordered unitary representation, preventing an extraction↔reordering↔sensitivity cycle. A native successful reordering certificate may instantiate that input. Published generalized-Schur existence proves only unordered existence and must never be described as an ordering algorithm. The sibling reordering agent proposes `alg-finite-budget-stable-block-reordering-for-schur-and-qz` and `thm-finite-budget-stable-block-reordering-correctness-and-status` and is supplying adjacent-swap proofs independently.
+
+Add the proposition to the sensitivity carrier's deps, add [F14] naming its exact role, and insert the following paragraph in the Statement after the CARE graph paragraph (before Finally):
+
+> For the DARE pencil, the generalized Sylvester separation, explicit pair-perturbation radius inequalities, separate leading and reciprocal-trailing Stein margins, and normalized-basis/chart estimate of [[prop-dare-stable-deflating-subspace-perturbation-bound]] give its stable deflating-subspace perturbation bound. In its notation, the aligned orthonormal stable basis changes by at most beta(r)≤r, and graph recovery additionally requires ||U1^{-1}||2 beta(r)<1. These hypotheses cannot be replaced by the QZ pencil backward-error bound alone.
+
+Add proof step 2.3:
+
+> 2.3 Apply [F14] to the exact ordered unitary DARE pencil representation and the supplied perturbations. Its paired generalized Sylvester operator and contraction inequalities give the radius-r right/left deflating graph; its separate Stein margins prove the perturbed stable split. Its normalized basis construction gives distance at most beta(r), and its physical chart estimate retains the inverse graph-block norm and strict inverse margin. Thus the DARE implication includes the separation and graph-conditioning factors; none is inferred from pencil backward error. [F5, F14, given]
+
+Here F14 is: `[[prop-dare-stable-deflating-subspace-perturbation-bound]]: generalized Sylvester separation, explicit contraction and Stein margins convert perturbations of both DARE pencil matrices into a normalized stable-deflating-basis bound and the conditioned graph-chart bound.` Keep original step 3.1 and all original residual/CARE constants unchanged. This addition fulfills the commissioned sensitivity clause without weakening another branch.
+
+Mirror the new typed item, deps, statement summary, local proof facts/steps, full source URLs and specific source-locator evidence in batch23 manifest/contracts/coverage/notes through native continuation. Do not label this research proof independently accepted. Refresh notes' stale fourth-gap text only after actual integration and native readiness work.
+
+## Consumer closure owned here
+
+Actual repository-wide literal reference search found no logical consumer of the original sensitivity proposition: the only other occurrence is its A-page inventory. Thus augmenting its Statement has no existing direct or indirect mathematical consumer repair. Update the A-page narrative/inventory and manifest mirrors to mention the newly supplied DARE sensitivity; this is the full original-consumer closure.
+
+The original exact graph-to-ARE carrier and DARE pencil carrier were read and remain sound inputs; their original Statements need no change for this supplier. The extraction algorithm and dense diagnostics were read: they continue to require actual residual, symmetry, DARE positivity and independent closed-loop certificates; the subspace theorem does not replace any of these. Their missing ordering changes and associated Definition consumer closure belong to the reordering agent, to whom these constraints were sent. There is no reason to add a new forced subspace-accuracy computation to the original extraction Definition: sensitivity is a conditional error theorem, and existing inconclusive/status branches must remain.
+
+The QZ backward-error theorem is published prerequisite context and remains unchanged. The new theorem can be applied with its certified exact-unitary factors and pair residual bound only once a certified positive generalized separation, the radius margins, stable split, and graph-chart margin are also supplied. LAPACK condition estimates are not automatically certified lower bounds for gamma. If any required margin is unavailable, report subspace/graph accuracy inconclusive while retaining independently established candidate diagnostics. This is no mathematical open problem or new unresolved supplier.

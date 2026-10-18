@@ -1,0 +1,82 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "kind": "independent-static-continuity-claim-compatibility-review",
+  "reviewer": "/root/gate_url_cwi",
+  "recorded_at": "2026-10-18T02:53:15.572714+00:00",
+  "verdict": "accepted-static-narrow-compatibility-fix",
+  "reviewed_paths": [
+    "tools/step3-owner-source-identical-continuity.mjs",
+    "tools/step3-owner-source-identical-continuity.md"
+  ],
+  "actual_diff_scope": "Only the counterexample claim-heading branch and a nonwhitespace strengthening of the final selected-claim guard changed in code; the associated documentation adds the supported positive Statement plus Proof grammar and retained continuity conditions. No unrelated code changes appear in the final diff.",
+  "implementation_owner": "/root/gate_coverage_harvest",
+  "implementation_report": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step3-battery3-continuity-claim-compatibility-report.json",
+  "shared_schema_read": [
+    {
+      "source": "tools/facts-block.mjs",
+      "locations": [
+        "sectionText",
+        "SOURCE_SECTIONS",
+        "sourceSectionText",
+        "numberedProofSteps"
+      ],
+      "finding": "Exact section parsing distinguishes Statement from Statement refuted. Both are legal citable source sections. Proof is among the numbered argument sections, independently of item kind. Counterexample witness text is not used as the citable claim fallback."
+    },
+    {
+      "source": "tools/proof-contract.mjs",
+      "locations": [
+        "imports and strict item validation",
+        "citation source-section checks"
+      ],
+      "finding": "The strict checker uses that same citable-section and numbered-proof grammar. The continuity helper still calls the actual strict checker on the current contract and exact selected item; no stored pass receipt replaces this call."
+    },
+    {
+      "source": "tools/precheck.mts",
+      "locations": [
+        "BODY_MARKER",
+        "phaseText",
+        "checkableText"
+      ],
+      "finding": "The actual wrapper reads Proof as a proof-like argument section without restricting it to theorem/lemma kinds; kind-specific exclusion concerns open-problem only in the inspected wrapper."
+    },
+    {
+      "source": "SCHEMA.md",
+      "location": "Item bodies",
+      "finding": "Statement refuted plus Counterexample remains the preferred counterexample authoring convention. The schema explicitly distinguishes heading conventions from renderer type checking, so admitting an authenticated existing positive Statement plus Proof form does not introduce a contradictory canonical type rule."
+    }
+  ],
+  "static_branch_analysis": [
+    {
+      "case": "Counterexample has an explicit Statement refuted heading",
+      "result": "That section retains first priority even if whitespace-only. The final norm(sectionText(...)) guard rejects an empty or whitespace-only selected claim rather than falling back to a different Statement."
+    },
+    {
+      "case": "No explicit Statement refuted, nonwhitespace Statement and Proof both present",
+      "result": "Only this new legacy-compatible branch selects Statement. Exact manifest mirror comparison still applies. A nonempty arbitrary prose section cannot substitute for either required section."
+    },
+    {
+      "case": "Statement missing/whitespace or Proof missing/whitespace",
+      "result": "The selector remains Statement refuted; since the explicit refuted section is absent in this branch, the final claim guard fails. Thus the new positive-claim fallback is not open to incomplete source bodies."
+    },
+    {
+      "case": "Other item kinds",
+      "result": "Existing heading selection is unchanged. Replacing the final truthiness guard by its normalized nonwhitespace equivalent only rejects previously truthy whitespace, strengthening rather than widening their accepted set."
+    }
+  ],
+  "actual_source_observation": {
+    "source": "items/cex-pe12-linear-ritz-does-not-commute.md",
+    "finding": "The actual source is kind counterexample with a positive Statement and a nonempty numbered Proof, with no Statement refuted heading. Its Statement supplies a concrete inequality of two nonlinear residual pairings. This source-shape observation matches the new generic branch; this review does not re-audit the mathematics or recompute source hashes. The original reader-post identity remains an independently enforced continuity prerequisite."
+  },
+  "guards_preserved_by_final_diff": [
+    "Exact entry policy/run/item/obligation identity and accepted_repair touched-route restrictions, including rejection of added/stabilized targets.",
+    "Existing authenticated source continuity paths, complete raw source check against current carrier, immutable reader-post snapshot and target/current carrier bindings.",
+    "Hash-bound native successful result, completion/abort checks, exact report/assignment paths and archived accepted decision identity.",
+    "No adoption of independent execution coverage; historical manifest uncertainty flag remains required.",
+    "Unique current manifest row, exact current manifest and contract bindings, dependency equality and selected statement mirror.",
+    "Actual strict proof-contract subprocess with its nonzero/error failure handling and exact one-item successful response requirement.",
+    "No item-ID exception, no current-source mutation, no native acceptance rewrite and no fallback to Remarks or arbitrary prose for counterexamples."
+  ],
+  "documentation_alignment": "The new paragraph accurately describes the implemented priority, nonwhitespace Statement/Proof prerequisites, explicit empty-refuted rejection, shared grammar compatibility and unchanged actual strict validation. It does not assert new native review coverage or a passing battery.",
+  "unresolved_findings": [],
+  "execution_limits": "Static reading of the final diff, full continuity helper, documentation and exact shared parser/schema interfaces only. No tests, syntax checks, imports/evaluation, validators, gates, subprocess execution, hashes, canonical edits, source-item edits or engine control. Root owns final native battery and integration."
+}

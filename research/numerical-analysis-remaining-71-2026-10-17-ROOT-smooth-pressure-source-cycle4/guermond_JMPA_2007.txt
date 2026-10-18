@@ -1,0 +1,2377 @@
+[PDF PAGE 1]
+J. Math. Pures Appl. 88 (2007) 87–106
+www.elsevier.com/locate/matpur
+Faedo–Galerkin weak solutions of the Navier–Stokes equations
+with Dirichlet boundary conditions are suitable
+J.-L. Guermond 1
+Department of Mathematics, Texas A&M University 3368 TAMU, College Station, TX 77843-3368, USA
+Received 12 January 2007
+Available online 3 May 2007
+Abstract
+Faedo–Galerkin weak solutions of the three-dimensional Navier–Stokes equations supplemented with Dirichlet boundary
+conditions in bounded domains are suitable in the sense of Scheffer [V. Scheffer, Hausdorff measure and the Navier–Stokes equa-
+tions, Comm. Math. Phys. 55 (2) (1977) 97–112] provided they are constructed using ﬁnite-dimensional approximation spaces
+having a discrete commutator property and satisfying a proper inf-sup condition. Finite element and wavelet spaces appear to be
+acceptable for this purpose. This result extends that of [J.-L. Guermond, Finite-element-based Faedo–Galerkin weak solutions to
+the Navier–Stokes equations in the three-dimensional torus are suitable, J. Math. Pures Appl. (9) 85 (3) (2006) 451–464] where
+periodic boundary conditions were assumed.
+© 2007 Elsevier Masson SAS. All rights reserved.
+Résumé
+On s’intéresse aux solutions faibles des équations de Navier–Stokes avec conditions aux limites de Dirichlet homogènes en
+dimension trois qui sont construites comme limites d’approximation de Faedo–Galerkin. Ces solutions sont admissibles (suitable)
+au sens de Scheffer [V. Scheffer, Hausdorff measure and the Navier–Stokes equations, Comm. Math. Phys. 55 (2) (1977) 97–112] si
+les espaces d’approximation jouissent d’une propriété de commutateur discret et satisfont une certaine condition de compatibilité.
+Les éléments ﬁnis et les ondelettes satisfont ces hypothèses. Ce résultat étend celui de [J.-L. Guermond, Finite-element-based
+Faedo–Galerkin weak solutions to the Navier–Stokes equations in the three-dimensional torus are suitable, J. Math. Pures Appl.
+(9) 85 (3) (2006) 451–464] qui a été démontré pour des conditions aux limites périodiques.
+© 2007 Elsevier Masson SAS. All rights reserved.
+MSC: 35Q30; 65N30; 76N10
+Keywords: Navier–Stokes equations; Suitable weak solutions; Faedo–Galerkin approximation; Finite element approximation
+E-mail address: guermond@math.tamu.edu.
+1 On leave from LIMSI (CNRS-UPR 3251), BP 133, 91403, Orsay, France.
+0021-7824/$ – see front matter © 2007 Elsevier Masson SAS. All rights reserved.
+doi:10.1016/j.matpur.2007.04.009
+
+[PDF PAGE 2]
+88
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+1. Introduction
+1.1. Position of the problem
+Let Ω be a connected, open, bounded domain in R3. This paper continues the study (initiated in [15]) of the suitable
+weak solutions to the Navier–Stokes equation in Ω:
+∂tu + u · ∇u + ∇p −νu = f
+in QT ,
+∇· u = 0
+in QT ,
+u|t=0 = u0,
+u|Γ = 0,
+(1.1)
+where QT = Ω × (0,T ), Γ is the boundary of Ω. Henceforth we assume f ∈L2((0,T );H−1(Ω)) and u0 ∈V0 =
+{v ∈L2(Ω); ∇· v = 0; v · n|Γ = 0}. Additional regularity requirements on f and u0 will be added in Section 3, see
+(3.14).
+The notion of suitable weak solution has been introduced by Scheffer [25] and boils down to the following:
+Deﬁnition 1.1 (Scheffer). Let (u, p), u ∈L2((0,T );H1(Ω)) ∩L∞((0,T );L2(Ω)), p ∈D′((0,T );L2(Ω)), be a weak
+solution to the Navier–Stokes equation (1.1).
+The pair (u, p) is said to be suitable if the local energy balance,
+∂t
+1
+2u2
+
++ ∇·
+1
+2u2 + p
+
+u
+
+−ν
+1
+2u2
+
++ ν(∇u)2 −f · u ⩽0,
+(1.2)
+is satisﬁed in the distributional sense, i.e., in D′(QT ;R+).
+To the present time, the best partial regularity result for the Navier–Stokes equations, i.e., the so-called Caffarelli–
+Kohn–Nirenberg theorem [8,21], holds for suitable weak solutions. In a nutshell, this result asserts that the one-
+dimensional Hausdorff measure of the set of singularities of a suitable weak solution is zero.
+The questions we want to investigate in this work is the following: Is the class of suitable weak solutions a proper
+subclass of weak solutions? This problem seems to have been open since Scheffer introduced the notion of suitable
+solution. The techniques that are commonly used to construct suitable weak solutions mainly consist of regularizing
+the Navier–Stokes equations by adding hyperviscosity [3] or regularizing the nonlinear term [2,8,10]. It is remarkable
+that the weak solutions constructed by Leray [20] are actually suitable. Until recently it was not known whether
+other ways of constructing suitable solutions existed besides the above explicit regularization tricks. For instance,
+what can be said of a weak solution that is constructed by means of the Faedo–Galerkin method? In other words,
+does discretization introduces enough regularization (numericists would say artiﬁcial dissipation) to select a suitable
+solution? In this context, the purpose of the present paper is to partially answer a question raised by Beirão da Veiga
+[2, p. 321] which asks whether there are “evidence that solutions obtained by the Faedo–Galerkin method verify
+the local energy estimate”. A partial positive answer to this question has been given in [15] when Ω is the three-
+dimensional torus. It is shown in [15] that periodic weak solutions that are limits of Faedo–Galerkin approximations
+are suitable provided the approximation spaces satisfy a discrete commutator property. We go further in this paper and,
+assuming again that the discrete commutator property holds, the same conclusion is shown to hold if homogeneous
+Dirichlet boundary conditions are enforced.
+The two main stumbling blocks for proving the local energy estimate are in the passage to the limit in the nonlinear
+terms ∇·(u2u) and ∇·(pu). Whereas the discrete commutator property together with standard a priori estimates is just
+what it takes to take care of ∇· (u2u), passing to the limit on ∇· (pu) requires non-trivial estimates on the pressure.
+This can be taken care of quite easily in the torus, since the pressure solves a Poisson equation and no boundary
+conditions are required (see [15, Lemma 3.2]). The matter is signiﬁcantly more complex when Dirichlet boundary
+conditions are enforced. The trick consists of reproducing for the discrete pressure a priori estimates that are similar
+to the Lp(Lq) estimates of Sohr and von Wahl [26] or Solonnikov [27] (note that p is the pressure and p ∈[1,+∞]
+is an exponent). But the non-Hilbertian setting being pretty awkward to handle at the discrete level, this program is
+carried out by making use of the fractional exponents of the discrete Stokes operator and deriving estimates in the
+H τ(H−α)-norm.
+The paper is organized as follows. The rest of this section is devoted to introducing notation and recalling the
+deﬁnitions of the Leray projector and the Stokes operator. The discrete ﬁnite-element-like setting and the Galerkin
+
+[PDF PAGE 3]
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+89
+approximation of (1.1) alluded to above is introduced in Section 2. A priori estimates are derived in Section 3. Velocity
+estimates are stated in Theorem 3.1 and key estimates on the pressure are stated in Lemma 3.5. The approximate
+Galerkin solution is shown to converge to a weak solution of (1.1) in Section 4. The main result of this paper is
+reported in Section 5, where we show that the Galerkin solution converges (up to sequences) to a suitable weak
+solution of (1.1), see Theorem 5.1. Besides the pressure estimate, the key to this result is that, contrary to spectral
+bases, ﬁnite element and wavelet spaces have a discrete commutator property, see Deﬁnition 5.1.
+1.2. Notations and conventions
+Spaces of R3-valued functions on Ω are denoted in bold fonts. No notational distinction is made between R-valued
+and R3-valued functions. The Euclidean norm in R3 is denoted by | · |. In the following c is a generic constant which
+may depend on the data f , u0, ν, Ω,T . The value of c may vary at each occurrence. Whenever E is a normed space,
+∥· ∥E denotes a norm in E. The scalar product in L2(Ω) is denoted with parentheses, i.e., (v,w) :=
+
+Ω v(x)w(x)dx;
+the same notation is used for the scalar product in L2(Ω).
+For 0 < s < 1, the space H s(Ω) is deﬁned by the real method of interpolation between H 1(Ω) and L2(Ω), i.e., the
+so-called K-method of Lions and Peetre [24], see also [23] or [1], [6, Appendix A]. To deﬁne H s(Ω), we interpolate
+between H 1(Ω) and H 2(Ω) if 1 < s < 2. We denote H s
+0(Ω) to be the closure of D(Ω) in H s(Ω) for 0 < s < 1 and
+
+H s
+0(Ω) to be the interpolation space [L2(Ω),H 1
+0 (Ω)]s for 0 ⩽s ⩽1 (D(Ω) is the space of C∞functions that are
+compactly supported in Ω). For s ∈(1,2], 
+H s
+0(Ω) is deﬁned to be H s(Ω) ∩H 1
+0 (Ω). Note that the spaces H s(Ω) and
+H s
+0(Ω) coincide for 0 ⩽s ⩽1
+2 with uniformly equivalent norms (see [23, Theorem 11.1]). The spaces H s(Ω) and
+
+H s
+0(Ω) coincide for 0 ⩽s < 1
+2 and their norms are equivalent; i.e., there is c1 > 0 and a non-decreasing function cu
+such that
+c1∥v∥Hs ⩽∥v∥Hs
+0 ⩽cu(s)∥v∥Hs,
+∀v ∈Hs
+0, ∀s ∈
+
+0, 1
+2
+
+,
+(1.3)
+with lims→1
+2 cu(s) = ∞, see [23, Theorem 11.7].
+For negative s, 
+H s
+0(Ω) is the dual of 
+H −s
+0 (Ω). The space H −s(Ω) for s > 0 is deﬁned by duality, i.e.,
+∥v∥H −s =
+sup
+0̸=w∈D(Ω)
+(v,w)
+∥w∥H s .
+For s ∈[0, 1
+2)∪( 1
+2, 3
+2), H −s coincides with 
+H −s
+0 (Ω). Duality pairing is denoted with brackets, e.g., ⟨f,v⟩H −1(Ω),H 1
+0 (Ω)
+denotes f (v) for all f ∈H −1(Ω) and all v ∈H 1
+0 (Ω).
+We deﬁne L2
+=0(Ω) (resp. H s
+=0(Ω)) to be composed of those functions in L2(Ω) (resp. H s(Ω), s ∈[0,1]) that
+are of zero mean.
+We denote by −:D() := H1
+0(Ω) ∩H2(Ω) →L2(Ω) the unbounded vector-valued Laplace operator sup-
+plemented with homogeneous Dirichlet boundary conditions. The boundary of Ω is assumed to be such that the
+H2-regularity property of the Laplace operator holds, i.e., there is c > 0 such that
+∀v ∈D(),
+∥v∥H2 ⩽c∥v∥L2.
+(1.4)
+For instance, Ω convex or Ω of class C1,1 are sufﬁcient conditions for this property to hold, cf. e.g. [14]. The boundary
+of Ω is denoted by Γ .
+To account for solenoidal vector ﬁelds we set as in [29],
+V0 =
+
+v ∈L2(Ω); ∇· v = 0; v · n|Γ = 0
+	
+,
+(1.5)
+V1 =
+
+v ∈H1(Ω); ∇· v = 0; v|Γ = 0
+	
+,
+(1.6)
+V2 = V1 ∩H2(Ω).
+(1.7)
+We denote by P :L2(Ω) →V0 the L2-projection onto V0 (i.e., the so-called Leray projection). We introduce the
+Stokes operator A:D(A) := V2 →V0 by setting A = −P|V2. We assume that the domain Ω is such that there is
+c > 0 so that
+∀v ∈V2,
+∥v∥H2 ⩽c∥Av∥L2.
+(1.8)
+
+[PDF PAGE 4]
+90
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+This property holds in two and three dimensions (d = 2, 3) whenever Ω is convex or of class C1,1, see [9, Theo-
+rem 6.3]. We shall also make use of the discrete counterpart of the following generalization of (1.8),
+∀v ∈Vs,
+c1∥v∥Hs
+0 ⩽
+
+
+A
+s
+2 v
+
+
+L2 ⩽c2∥v∥Hs
+0,
+∀s ∈
+
+−1
+2,2
+
+.
+(1.9)
+The reader is referred to [12, Lemma 4.5, Chapter 3] for a proof.
+2. The Galerkin approximation
+In this section we introduce the discrete setting and we formulate the discrete problem.
+2.1. The discrete setting
+We assume that we have at hand two families of ﬁnite-dimensional spaces, {Xh}h>0, {Mh}h>0 such that
+Xh ⊂H1
+0(Ω) and Mh ⊂L2
+=0(Ω). The velocity is approximated in Xh and the pressure in Mh. To avoid irrelevant
+technicalities we assume Mh ⊂H 1
+=0(Ω).
+To characterize the approximation properties of the spaces {Xh}h>0, {Mh}h>0 we assume that
+∀v ∈H1
+0(Ω),
+inf
+vh∈Xh
+∥v −vh∥H1
+h→0
+−→0,
+(2.1)
+∀q ∈L2(Ω),
+inf
+qh∈Mh
+∥q −qh∥L2
+h→0
+−→0.
+(2.2)
+These hypotheses are standard in the case of ﬁnite elements.
+2.2. The discrete Stokes operator and H s-stability
+We deﬁne the discrete Laplace operator h :Xh →Xh as follows:
+(hxh,yh) = −(∇xh,∇yh),
+∀xh,yh ∈Xh.
+To account for the solenoidality constraint we set:
+Vh =
+
+vh ∈Xh; (vh,∇qh) = 0, ∀qh ∈Mh
+	
+.
+(2.3)
+Vh is composed of the ﬁelds of Xh that are discretely divergence free. This allows us to deﬁne the discrete Stokes
+operator Ah :Vh →Vh as follows: For all uh ∈Vh, Ahuh is the element of Vh such that
+(Ahuh,vh) = (∇uh,∇vh),
+∀vh ∈Vh.
+(2.4)
+Since Ah is self-adjoint and positive deﬁnite, the operator As
+h is well deﬁned for all s ∈R. We equip the vector
+space Vh with the norm:
+∥vh∥Vs
+h =
+
+As
+hvh,vh
+ 1
+2 ,
+(2.5)
+and we denote by Vs
+h the corresponding normed (Hilbert) space. It is clear that {Vs
+h}s∈R is a Hilbert scale in the sense
+of the K-interpolation method.
+We now assume that the discrete setting is such that there is a positive non-increasing function c1 > 0 uniform in h
+so that
+c1(s)∥hvh∥H−s
+0 ⩽∥Ahvh∥V−s
+h ,
+∀vh ∈Vh, s ∈
+
+0, 3
+2
+
+.
+(2.6)
+Observe that for s = 0 this a discrete counterpart of (1.8). This inequality can be proved to hold for a fairly general set
+of ﬁnite element spaces (see e.g. [18, Corollary 4.4] for the case s = 0 or [17] for the general case).
+We also assume that there is a positive function c2 > 0 uniform in h, non-decreasing for negative arguments and
+non-increasing for positive arguments, so that
+c2(s)∥vh∥Hs
+0 ⩽∥vh∥Vs
+h,
+∀vh ∈Vh, ∀s ∈
+
+−1
+2, 3
+2
+
+.
+(2.7)
+
+[PDF PAGE 5]
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+91
+This is the discrete counterpart of (1.9) but it is slightly less trivial to prove than (2.6). It is shown to hold for various
+ﬁnite-element-like settings in [17].
+2.3. The LBB condition in H s
+We ﬁnally assume that the pair (Xh,Mh) is compatible in the sense that it satisﬁes a generalized LBB condition:
+There is c, independent of h, such that for all s ∈[0,1],
+sup
+0̸=vh∈Xh
+(∇qh,vh)
+∥vh∥H1−s
+0
+⩾c∥qh∥H s,
+∀qh ∈Mh.
+(2.8)
+When s = 0, the above inequality is standard and is often referred to in the literature as the Ladyzhenskaya–Babuška–
+Brezzi condition, see e.g. [7,13]. The more general case, s ∈[0,1], is quite new and has been shown to hold in [16,
+Theorem 3.1] for various pairs of ﬁnite element spaces, e.g. the MINI ﬁnite element and the Hood–Taylor ﬁnite
+element.
+2.4. The discrete problem
+Since Vh is not a subspace of V, i.e., Vh is not composed of solenoidal vector-ﬁelds, we modify the nonlinear
+term in the Navier–Stokes equations as follows. We introduce a bilinear operator nlh ∈L([H1
+0(Ω)]2;H−1(Ω)), and
+we deﬁne the trilinear form bh ∈L([H1
+0(Ω)]3;R) such that bh(u,v,w) = ⟨(nlh(u,v),w⟩H−1,H1
+0. We assume that bh
+satisﬁes the following property:
+bh(u,v,v) = 0,
+∀v ∈V+Vh.
+(2.9)
+For instance, an admissible form of the nonlinear term is as follows (see e.g. [28])
+nlh(u,v) = u · ∇v + 1
+2v∇· u.
+(2.10)
+Let Kh :L2(Ω) →Mh ⊕span{1} be a linear L2-stable interpolation operator (i.e., Khz →z for all z ∈L2(Ω)), then
+another admissible form of the nonlinear term is:
+nlh(u,v) = (∇× u)×v + 1
+2∇
+
+Kh(u · v)
+
+.
+(2.11)
+The discrete problem we henceforth consider is as follows: Seek uh ∈C0([0,T ];Xh) with ∂tuh ∈L2((0,T );Xh)
+and ph ∈L2((0,T );Mh) such that for all vh ∈Xh, all qh ∈Mh, a.e. t ∈[0,T ]:
+(∂tuh,vh) + bh(uh,uh,vh) −(ph,∇· vh) + ν(∇uh,∇vh) = ⟨f,vh⟩,
+(∇· uh,q) = 0,
+uh|t=0 = Phu0.
+(2.12)
+Note that for all vh in Xh the approximate momentum equation holds in L2(0,T ).
+3. A priori estimates
+In this section we derive a priori estimates on the velocity and the pressure. The main result of this section are the
+velocity estimates in Theorem 3.1 and the pressure estimates stated in Lemma 3.5.
+3.1. Energy estimates
+Owing to the skew-symmetry property (2.9), the following standard a priori energy estimates on uh are easily
+deduced:
+max
+0⩽t⩽T
+
+
+uh(t)
+
+
+L2 + ∥uh∥L2(H1) ⩽c.
+(3.1)
+The following immediately follows:
+
+[PDF PAGE 6]
+92
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+Lemma 3.1. Under the above assumptions on f and u0, there is c, independent of h, such that
+∥uh∥Lr(H
+2r ) + ∥uh∥Lr(Lk) ⩽c,
+with 3
+k + 2
+r = 3
+2, 2 ⩽r, 2 ⩽k ⩽6.
+(3.2)
+Proof. This result is standard and is a consequence of the interpolation inequality (see e.g. Lions and Peetre [24]),
+∥v∥H
+2r ⩽c∥v∥
+1−2
+r
+L2 ∥v∥
+2
+r
+H1, when 2 ⩽r, and the embedding H
+2
+r (Ω) ⊂Lk(Ω) for 1
+k = 1
+2 −2
+3r .
+2
+3.2. More estimates
+At variance with what has been done for the periodic situation in [15], it is not possible to immediately infer from
+the above velocity estimates a bound on the approximate pressure by solving an approximate Poisson equation, since
+no (easily controllable) boundary condition on the pressure is at hand.
+The alternative path we are going to follow is to take inspiration from Solonnikov [27] and Sohr and von
+Wahl [26]. The idea is to put the nonlinear term in the right-hand side and deduce estimates by using prop-
+erties of the time-dependent Stokes equations. For instance, in the space continuous situation (3.2) implies that
+u · ∇u is in Lp((0,T );Lq(Ω)) where p and q satisfy the equality 2
+p + 3
+q = 4, 1 ⩽p ⩽2, 1 ⩽q ⩽3
+2. Hence,
+provided f ∈Lp((0,T );Lq(Ω)), the right-hand side of the time-dependent Stokes problem, say f −u · ∇u, is in
+Lp((0,T );Lq(Ω)). Then under the additional condition p > 1 and q > 1, Sohr and von Wahl [26] have shown that
+∥∇p∥Lp((0,T );Lq) + ∥∂tu∥Lp((0,T );Lq) + ∥u∥Lp((0,T );Lq) ⩽c∥f∥Lp((0,T );Lq),
+(3.3)
+∥p∥Lp((0,T );Lℓ) ⩽c∥f∥Lp((0,T );Lq),
+(3.4)
+where 1
+ℓ:= 1
+q −1
+3. Then, using ℓ= 2, one infers that p is in L
+4
+3 ((0,T );L2(Ω)). This together with u being in
+L∞((0,T );L2(Ω)) implies that the term ∇· (pu) is meaningful in D′(ΩT ) and if we were able to reproduce (3.4) for
+the discrete pressure ph, we could pass to the limit on ∇· (phuh). Unfortunately, obtaining a discrete version of (3.4)
+requires an Lp(Lq) theory of the resolvent of the discrete Stokes operator which is not available at the present time,
+to the best of the author’s knowledge. To go around this difﬁculty, we are going to work with the Hilbertian setting
+and use the theory that has been developed in [17]. The idea is to use the Fourier transform in time as done in Lions
+[22, p. 77] to evaluate regularity in time.
+Let H be a Hilbert space with norm ∥· ∥H . Let δ ∈[1,∞), and deﬁne Lδ(R;H) = {ψ: R ∋t →ψ(t) ∈H;
+ +∞
+−∞∥ψ(t)∥δ
+H dt < ∞}. For all ψ ∈L1(R;H), denote by ˆψ(k) =
+ +∞
+−∞ψ(t)e−2iπkt dt for all k ∈R the Fourier trans-
+form of ψ with respect to t. The notion of Fourier transform is extended to the space of tempered distributions with
+values in H, say S′(R;H). We shall make use of the following
+Lemma 3.2 (Hausdorff–Young inequality). There is c > 0 such that for all p, δ ∈[1,2], and for all ψ ∈Lδ(R;H) ∩
+L1(R;H),
+
+
+ ˆψ
+
+
+Lδ′(R;H) ⩽c∥ψ∥Lδ(R;H),
+1
+δ + 1
+δ′ = 1.
+(3.5)
+Following [23, p. 21], we now deﬁne:
+H γ (R;H) =
+
+v ∈S′(R;H);
++∞
+
+−∞
+
+1 + |k|
+2γ ∥ˆv∥2
+H dk < +∞
+
+.
+(3.6)
+The space H γ ((0,T );H) is composed of those tempered distributions in S′((0,T );H) that can be extended to
+S′(R;H) and whose extension is in H γ (R;H). The norm in H γ ((0,T );H) is the quotient norm, i.e.,
+∥v∥H γ ((0,T );H) =
+inf
+˜v=u
+a.e. on(0,T )
+∥˜v∥H γ (R;H).
+(3.7)
+
+[PDF PAGE 7]
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+93
+Observing that q ∈[1, 3
+2] and p ∈[1,2], we set, s = d( 1
+q −1
+2), r = 1
+p −1
+2. Then the embedding Hs
+0(Ω) ⊂Hs(Ω) ⊂
+Lq′(Ω), 1
+q + 1
+q′ = 1, and the Hausdorff–Young inequality imply:
+f −u · ∇u ∈Lp
+(0,T );Lq(Ω)
+
+⊂H −r
+(0,T ); H−s
+0 (Ω)
+
+,
+∀r > r.
+(3.8)
+Hence our goal is to derive estimates in spaces like H −r((0,T ); H−s
+0 (Ω)).
+Henceforth p, q, r, and s are real numbers satisfying:
+2
+p + 3
+q = 4,
+p ∈[1,2],
+q ∈
+
+1, 3
+2
+
+,
+s
+3 := 1
+q −1
+2,
+r := 1
+p −1
+2.
+(3.9)
+The condition q ∈[1, 3
+2] implies that
+s ∈
+1
+2, 3
+2
+
+.
+(3.10)
+Note in particular that this implies s ⩾1
+2. This fact will have important consequences in the sequel.
+We now make the following continuity hypothesis on nlh: There is c, independent of h, such that
+
+
+nlh(v,v)
+
+
+H−s
+0 ⩽c∥v∥H1∥v∥Lk,
+1
+k + 1
+2 = 1
+q , ∀v ∈H1(Ω).
+(3.11)
+This is justiﬁed by the following:
+Lemma 3.3. The continuity property (3.11) holds for deﬁnition (2.10) and also for (2.11) provided the operator Kh is
+uniformly stable in H 1−s(Ω).
+Proof. (1) Let us assume that deﬁnition (2.10) holds. Using the embedding Hs
+0(Ω) ⊂Hs(Ω) ⊂Lq′(Ω), 1
+q + 1
+q′ := 1,
+we infer that deﬁnition (2.10) yields
+
+
+nlh(v,v)
+
+
+H−s
+0 ⩽c
+
+
+nlh(v,v)
+
+
+Lq ⩽c∥v∥H1∥v∥Lk,
+1
+k + 1
+2 = 1
+q .
+(2) Let us now assume that deﬁnition (2.11) holds. Using the same argument as above, the fact that Kh is uniformly
+stable in H 1−s(Ω), and the embedding W1,q(Ω) ⊂H1−s(Ω), deﬁnition (2.11) yields:
+
+
+nlh(v,v)
+
+
+H−s
+0 ⩽c∥v∥H1∥v∥Lk + c′
+
+∇Kh(v · v)
+
+
+H−s
+0 ,
+1
+k + 1
+2 = 1
+q
+⩽c∥v∥H1∥v∥Lk + c′
+
+Kh(v · v)
+
+
+H1−s,
+−1
+2 ⩽s −1 ⩽1
+2
+⩽c∥v∥H1∥v∥Lk + c′∥v · v∥H1−s
+⩽c∥v∥H1∥v∥Lk + c′∥v · v∥W1,q ⩽c∥v∥H1∥v∥Lk.
+This completes the proof.
+2
+A simple application of the Lr(Lk) estimate in (3.2) yields the uniform bound,
+
+
+nlh(uh,uh)
+
+
+Lp(H−s
+0 ) ⩽c.
+(3.12)
+As an immediate consequence of (3.11) and (3.12), we have:
+Lemma 3.4. Let uh solve (2.12), then under the hypothesis (3.11), there is c uniform in h such that
+
+
+nlh(uh,uh)
+
+
+H −r(H−s
+0 ) ⩽c,
+∀r > r.
+(3.13)
+Proof. Extend nlh(v,v) by zero outside [0,T ]. Using the Hausdorff–Young inequality, we have:
+
+[PDF PAGE 8]
+94
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+
+
+nlh(uh,uh)
+
+
+2
+H −r(H−s
+0 ) =
++∞
+
+−∞
+
+1 + |k|
+−2r
+
+
+nlh(uh,uh)
+
+
+2
+H−s
+0 dk
+⩽
+
+
+
+1 + |k|
+−2r
+
+Lβ
+
+
+
+nlh(uh,uh)
+
+
+2
+Lp′(H−s
+0 ),
+1
+2β = r
+⩽c
+
+
+nlh(uh,uh)
+
+
+2
+Lp(H−s
+0 ),
+then conclude using (3.12).
+2
+Remark 3.1. The hypothesis Kh being stable in H 1−s(Ω) in Lemma 3.3 is not restrictive. For ﬁnite elements for
+instance, the L2-projection onto Mh is known to be H 1(Ω)-stable under weak assumptions on the mesh, see e.g. [5].
+3.3. Estimate on ∂tuh and Ahuh
+To avoid unnecessary additional technicalities we henceforth assume
+f ∈L2
+(0,T + 1);H−1(Ω)
+
+∩Lp
+(0,T + 1);Lq(Ω)
+
+,
+and
+u0 ∈V2.
+(3.14)
+Obviously, the estimates (3.1), (3.2), and (3.13) uniformly hold on the interval [0,T + 1]. We set uh0 := Phu0.
+The main result of this section is the following:
+Theorem 3.1. For all s ∈[ 1
+2, 3
+2), there is c independent of h so that,
+∥∂tuh∥H τ−1(H−α
+0 ) + ∥uh∥H τ (H−α
+0 ) ⩽c,
+(3.15)
+for all α, 0 ⩽α ⩽s ⩽1 + 2α < 2, and for all τ < τ := 1+α
+1+s ( s
+2 + 1
+4). And
+∥huh∥H −r(H−s
+0 ) ⩽c,
+∀r > r = 3
+4 −s
+2 = 1
+p −1
+2,
+(3.16)
+Proof. (1) Extension. We extend f by zero on (−∞,0] and [T + 1,+∞), and we slightly abuse the notation by still
+denoting this extension by f. We extend uh on [−1,0] by (t + 1)uh0 and we extend uh on [T + 1,+∞] by zero. We
+still denote this extension by uh. Let ϕ ∈C∞(R) be an inﬁnitely smooth function compactly supported on (−1,T +1)
+and equal to 1 on [0,T ]. We now set:
+˜uh = ϕuh,
+and
+˜f =
+
+(1 + t)ϕ′uh0 + ϕuh0 + ν(1 + t)ϕAhuh0,
+t ∈(−1,0),
+ϕ(f −nlh(uh,uh)) + ϕ′uh,
+otherwise.
+It is clear that ˜uh and ˜f are well deﬁned on the time interval (−∞,+∞). Moreover, the estimate (3.13) and the
+hypothesis (3.14) imply that ∥˜f∥H −r((0,T );H−s
+0 ) is uniformly bounded. The approximate problem takes the following
+form in S′(R;Vh):
+∂t ˜uh + νAh ˜uh = Ph˜f.
+Then, denoting by ˆuh and ˆf the Fourier transform of ˜uh and ˜f, respectively, and upon taking the Fourier transform of
+the above equation, we obtain:
+2iπk ˆuh + νAh ˆuh = Phˆf.
+(3.17)
+(2) Bound on uh. Let α ∈R+. Testing the above equation with the complex conjugate of A−α
+h
+ˆuh and taking the
+imaginary part of the result yields:
+2π|k|∥ˆuh∥2
+V−α
+h
+⩽
+
+
+ˆf
+
+
+H−s
+0
+
+
+A−α
+h uh
+
+
+Hs
+0.
+Using the bound in (2.7) for s ∈[0, 3
+2), we obtain:
+|k|∥ˆuh∥2
+V−α
+h
+⩽c
+
+
+ˆf
+
+
+H−s
+0
+
+
+A−α
+h
+ˆuh
+
+
+Hs
+0 ⩽c′
+
+ˆf
+
+
+H−s
+0
+
+
+A−α
+h
+ˆuh
+
+
+Vs
+h ⩽c
+
+
+ˆf
+
+
+H−s
+0 ∥ˆuh∥Vs−2α
+h
+.
+
+[PDF PAGE 9]
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+95
+Assume α ⩽s ⩽1 + 2α, then by interpolation we obtain:
+∥ˆuh∥Vs−2α
+h
+⩽∥ˆuh∥γ
+V−α
+h ∥ˆuh∥1−γ
+V1
+h ,
+where γ = 2α+1−s
+1+α
+. Inserting this inequality in the previous estimate yields:
+|k|∥ˆuh∥2−γ
+V−α
+h
+⩽c′
+
+ˆf
+
+
+H−s
+0 ∥ˆuh∥1−γ
+V1
+h .
+This in turn implies:
+|k|
+2
+2−γ −μ∥ˆuh∥2
+V−α
+h
+⩽c
+
+1 + |k|
+−μ
+
+ˆf
+
+
+2
+2−γ
+H−s
+0 ∥ˆuh∥
+2(1−γ )
+2−γ
+V1
+h
+,
+and we observe that if we take μ =
+2r
+2−γ , by integrating over R with respect to k, we obtain:
++∞
+
+−∞
+|k|
+2
+2−γ −μ∥ˆuh∥2
+V−α
+h dk ⩽c
+
+
+ˆf
+
+
+2
+2−γ
+H −r(H−s
+0 )∥ˆuh∥
+2(1−γ )
+2−γ
+L2(V1
+h).
+Assume now that α ∈[0, 1
+2) so as to be able to use the norm equivalence (2.7). The fact that uh is uniformly bounded
+in L2((0,T );H1(Ω)) then implies:
+∥∂tuh∥H τ−1((0,T );H−α
+0 ) + ∥uh∥H τ ((0,T );H−α
+0 ) ⩽c,
+(3.18)
+where
+τ < τ = 1 + α
+1 + s (1 −r),
+and
+α ⩽s ⩽1 + 2α < 2.
+(3) Bound on Ahuh. Multiply (3.17) by A1−s
+h
+ˆuh and take the real part to obtain:
+ν∥Ah ˆuh∥2
+V−s
+h ⩽
+
+
+ˆf
+
+
+H−s
+0
+
+
+A1−s
+h
+ˆuh
+
+
+Hs
+0 ⩽c
+
+
+ˆf
+
+
+H−s
+0 ∥Ah ˆuh∥V−s
+h .
+Note that we used again the lower bound in (2.7) for s ∈[0, 3
+2). This in turn implies:
+1
+(1 + |k|)2r ∥ˆuh∥2
+V−s
+h ⩽c
+1
+(1 + |k|)2r
+
+
+ˆf
+
+
+2
+H−s
+0 .
+We now use (2.6) to deduce:
+∥huh∥H −r((0,T );H−s
+0 ) ⩽c,
+(3.19)
+for all r > r.
+2
+Corollary 3.1. For all α ∈[ 1
+4, 1
+2), there is c independent of h so that
+∥∂tuh∥H τ−1(H−α
+0 ) + ∥uh∥H τ (H−α
+0 ) ⩽c,
+(3.20)
+and for all τ < τ := 2
+5(1 + α).
+Proof. Observe that s ∈[ 1
+2, 3
+2) is a free parameter in (3.15) and
+1
+1+s ( s
+2 + 1
+4) is maximum at s = 3
+2, the maximum
+being 2
+5. The condition s ⩽1 + 2α then yields α ⩾1
+4.
+2
+Remark 3.2. It is a remarkable fact that the present analysis does not yield estimates on ∂tuh in H τ−1((0,T );H−α(Ω))
+with α ∈[ 1
+2,1]. The fundamental reason being that the inequality (2.7) does not hold for negative exponents in the
+interval [−1,−1
+2]. This is a bit strange, since if we were nevertheless to apply (3.15) with α = s = 1, that would
+give r = 3
+4, i.e., r −1 = −1
+4. In other words, we would obtain an estimate on ∂tuh in H −1
+4 −ε((0,T );H−1(Ω)),
+which would be compatible with the estimate in L
+4
+3 ((0,T );L
+6
+5 (Ω)) which is expected to hold from Sohr and von
+
+[PDF PAGE 10]
+96
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+Wahl [26]. Nevertheless, whether (3.20) might be true for α ∈[ 1
+2,1] is not clear at all. For instance it is shown in [19]
+that the ratio ∥∂tuh∥H−1/∥uh∥H−1 can be arbitrarily large, i.e., ∥∂tuh∥H−1 and ∥uh∥H−1 do not behave similarly.
+This result seems to point in the direction that (3.20) may not hold for −α ∈[−1,−1
+2].
+Remark 3.3. Note that the estimates (3.20) are in some sense slightly stronger than what can be deduced from
+the Sohr and Von Wahl estimates (3.3) using embeddings and the Hausdorff–Young inequality. For instance
+q = 3
+2 and p = 1 in (3.3) gives a bound on ∂tu in H −1
+2 −ε((0,T );H−1
+2 −ε′(Ω)) whereas (3.20) gives a bound in
+H −2
+5 −ε((0,T );H−1
+2 −ε′(Ω)), which is better since 2
+5 < 1
+2. This leads us to conjecture that it may be possible to prove
+an estimate on ∂tu in L
+10
+9 ((0,T );L
+3
+2 (Ω)) (note [H −2
+5 (0,T )]′ = H
+2
+5 (0,T ) ⊂L10(0,T ) = [L
+10
+9 (0,T )]′), which would
+be a slight improvement over the estimate in L1+ε((0,T );L
+3
+2 −ε′(Ω)) given by (3.3).
+3.4. Pressure estimate
+As usual, an estimate on the pressure is obtained by using the equation:
+(∇ph,vh) = −(∂tuh,vh) −
+
+nlh(uh,uh),vh
+
+−ν(∇uh,∇vh) + ⟨f,vh⟩,
+(3.21)
+which holds for all vh ∈Xh.
+Lemma 3.5. There is c independent of h such that for s ∈[ 1
+2, 7
+10],
+∥ph∥H −r(H 1−s) ⩽c,
+(3.22)
+for all r > r = 3
+4 −s
+2.
+Proof. Let s ∈[ 1
+2, 7
+10] and let ε > 0 be a small positive real number. Using (2.8) together with (3.21) we deduce:
+∥ph∥H 1−s ⩽c
+sup
+0̸=vh∈Xh
+(∇ph,vh)
+∥vh∥Hs
+0
+⩽c
+
+∥∂tuh∥H−s
+0 + ∥uh∥H−s
+0 +
+
+
+nlh(uh,uh)
+
+
+H−s
+0 + ∥f∥H−s
+0
+
+⩽c
+
+∥∂tuh∥
+H
+−1
+2 + 5
+4 ε
+0
++ ∥uh∥H−s
+0 +
+
+
+nlh(uh,uh)
+
+
+H−s
+0 + ∥f∥H−s
+0
+
+.
+Let r > r = 3
+4 −s
+2. We can choose ε > 0 such that r ⩾3
+4 −s
+2 + ε. Moreover, since 7
+10 ⩾s, we have r ⩾2
+5 + ε. Then
+using (3.13) and (3.16) we deduce:
+∥ph∥H −r(H 1−s) ⩽c1 + c2∥∂tuh∥
+H −( 2
+5 +ε)(H
+−1
+2 + 5
+4 ε
+0
+)
+.
+Using α = 1
+2 −5
+4ε in (3.20) we obtain that ∥∂tuh∥
+H −( 2
+5 +ε)(H
+−1
+2 + 5
+4 ε
+0
+)
+is bounded since 2
+5 + ε > 2
+5 + ε
+2 (note that we can
+always take ε ⩽1
+5 to guaranty 1
+4 ⩽1
+2 −5
+4ε < 1
+2).
+2
+At this point the end is in sight. The main difﬁculty that remains in the way consists of proving that the pair (uh,ph)
+converges to a suitable weak solution by passing to the limit on the product phuh. With the estimates we have at hand,
+this is now possible. Indeed, set α = 1 −s with s ∈[ 1
+2, 7
+10], then H−α
+0 (Ω) = [H1−s
+0
+(Ω)]′. Moreover, uh is uniformly
+bounded in H τ(H−α
+0 (Ω)), τ < 2
+5(2 −s), and ph is uniformly bounded in H −r(H 1−s(Ω)), r > 3
+4 −s
+2. Observing that
+2
+5(2 −s) > 3
+4 −s
+2, it is now clear that the product uhph is bounded uniformly in L1(L1) and it should be possible to
+pass to the limit modulo a compactness argument on uh.
+4. Convergence to a weak solution
+To simplify notation we henceforth identify the spaces Hγ (Ω) and Hγ
+0 (Ω) whenever γ ∈(−1
+2, 1
+2).
+
+[PDF PAGE 11]
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+97
+4.1. Consistency of the nonlinear term
+Before proving that the sequence of pairs (uh,ph) converges to a weak solution, up to subsequences, we make sure
+that we are solving the right problem, i.e., we now formulate a consistency hypothesis on the nonlinear term.
+In this section x denotes a real number such that x > 1
+2. We assume that the nonlinear term has the following
+consistency property: For all functions w in L2((0,T );V1) and all sequences of functions (wh)h>0 in C0([0,T ];Xh)
+converging weakly to w in L2((0,T );H1
+0(Ω)) and strongly in L2((0,T );L3(Ω)), the following holds true,
+T
+
+0
+
+nlh(wh,wh),vh
+
+→
+T
+
+0
+(w · ∇w,v),
+(4.1)
+for all sequence of functions vh in H x((0,T );Xh) strongly converging to v in H x((0,T );H1
+0(Ω)).
+Lemma 4.1. The consistency property (4.1) holds for deﬁnitions (2.10) and for (2.11).
+Proof. Let v be a function in H x((0,T );H1
+0(Ω)) and (vh)h>0 be a sequence in H x((0,T );Xh) converging to v.
+(1) Assume that nlh is deﬁned as in (2.10). Observe that H x((0,T );H1
+0(Ω)) ⊂C0([0,T ];L6(Ω)) (see Lemma 4.3).
+Then wh →w in L2((0,T );L3(Ω)) and vh →v in C0([0,T ];L6(Ω)) implies vh ⊗wh →v ⊗w and vh · wh →v · w
+in L2((0,T );L2(Ω)) and L2((0,T );L2(Ω)), respectively. As a result
+ T
+0 (vh ⊗wh,∇wh) →
+ T
+0 (v ⊗w,∇w) and
+ T
+0 (vh · wh,∇· wh) →
+ T
+0 (v · w,∇· w). Moreover, since ∇· w = 0, a.e. in QT , we infer
+ T
+0 (v · wh,∇· wh) →0. The
+conclusion follows readily.
+(2) Assume that nlh is deﬁned as in (2.11). The only term that poses a difﬁculty is
+ T
+0 (∇(Kh(|wh|2)),vh). Integrat-
+ing by parts, we rewrite this term as follows −
+ T
+0 (Kh(|wh|2),∇· vh). Then,
+T
+
+0
+
+Kh
+
+|wh|2
+,∇· vh
+
+=
+T
+
+0
+
+Kh
+
+|wh|2
+−Kh
+
+|w|2
+,∇· vh
+
++
+T
+
+0
+
+Kh
+
+|w|2
+,∇· vh
+
+:= R +
+T
+
+0
+
+Kh
+
+|w|2
+,∇· vh
+
+.
+Banach–Steinhaus’ theorem implies that ∥Kh∥is uniformly bounded. Then linearity implies:
+|R| ⩽c
+
+
+|wh|2 −|w|2
+
+L1(L2) max
+0⩽t⩽T ∥vh∥H1
+⩽c
+
+
+(wh −w) · (wh + w)
+
+
+L1(L2)
+⩽c∥wh −w∥L2(L3)
+
+∥wh∥L2(L6) + ∥w∥L2(L6)
+
+.
+Note that ∥wh∥L2(L6) is bounded since wh converges weakly to w in L2((0,T );L6(Ω)). The above inequality implies
+|R| →0. Moreover, Kh(|w|2)∇·vh →|w|2∇·v in L1(Ω) a.e. on (0,T ), and the function ∥Kh(|w|2)∇·vh∥L1 is uni-
+formly bounded by c∥|w|2∥L2 max0⩽t⩽T ∥v(t)∥H1 ∈L1(0,T ); hence, Lebesgue’s Dominated Convergence Theorem
+implies Kh(|w|2)∇· vh →|w|2∇· v in L1(QT ). As a result we obtain −
+ T
+0 (Kh(|wh|2),∇· v) →−
+ T
+0 (|w|2,∇· v).
+Finally,
+T
+
+0
+
+nlh(wh,wh),v
+
+→
+T
+
+0
+
+(∇× w)×w + 1
+2∇
+
+|w|2
+,v
+
+=
+T
+
+0
+(w · ∇w,v).
+Hence (4.1) holds.
+2
+
+[PDF PAGE 12]
+98
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+4.2. Convergence to a weak solution
+Before stating the convergence result, let us state Aubin–Lions-like compactness results
+Lemma 4.2. Let H0 ⊂H ⊂H1 three Hilbert spaces with dense and continuous embedding. Assume that the
+embedding H0 ⊂H is compact and let γ > 0 be a positive real number. Then, the injection L2((0,T );H0) ∩
+H γ ((0,T );H1) →L2((0,T );H) is compact.
+Proof. See Lions [22, p. 61, Theorem 5.2].
+2
+Lemma 4.3. Let X ⊂Y be two Hilbert spaces with compact embedding and let τ > 1
+2. The injection H τ((0,T );X) →
+C0([0,T ];X) is continuous and the injection H τ((0,T );X) →C0([0,T ];Y) is compact.
+Proof. See Appendix A.1.
+2
+Lemma 4.4. Let H0 ⊂H1 be two Hilbert spaces with compact embedding. Let γ > 0 and γ > μ, then the injection
+H γ ((0,T );H0) ⊂H μ((0,T );H1) is compact.
+Proof. See Appendix A.2.
+2
+Theorem 4.1. Under the above hypotheses, the pair (uh,ph) convergences, up to subsequences, to a weak solution to
+(1.1), say (u, p). uh converges to u in L2((0,T );H1
+0(Ω)) weak and in any L2((0,T );Hβ(Ω)) strong, β < 1, and ph
+converges to p in H −r((0,T );H δ(Ω)) weak, δ ∈[ 3
+10, 1
+2], r > 1
+4 + δ
+2.
+Proof. We brieﬂy outline the main steps of the proof for the arguments are quite standard.
+(1) Since uh is uniformly bounded in L2((0,T );H1
+0(Ω)) and in H τ((0,T );H−α(Ω)), α ∈[ 1
+4, 1
+2), 0 < τ < 2
+5(1 + α).
+Lemma 4.2 implies that there exists a subsequence (uhl) converging to some u in L2((0,T );H1
+0(Ω)) weak and
+in L2((0,T );Hβ(Ω)) strong, β < 1. Moreover (∂tuhl) converges weakly to ∂tu in H −μ((0,T );H−α(Ω)), α ∈
+[ 1
+4, 1
+2), μ > 3
+5 −2
+5α. Since (ph) is bounded uniformly in H −r((0,T );H δ(Ω)), δ ∈[ 3
+10, 1
+2], r > 1
+4 + δ
+2, there exists
+a subsequence (phl) converging weakly in H −r((0,T );H δ(Ω)) to some p.
+(2) Let q ∈L2((0,T );L2(Ω)) and let (qhl)hl>0 be a sequence of functions in L2((0,T );Mh) strongly converging
+to q in L2((0,T );L2(Ω)). (Note that the approximability property (2.2) implies that such a sequence can always
+be constructed for every test function q.) Then 0 =
+ T
+0 (∇· uhl,qhl) →
+ T
+0 (∇· u,q) since ∇· uhl ⇀∇· u in
+L2((0,T );L2(Ω)). As a result, ∇· u = 0, a.e. in QT ; that is to say u is in L2((0,T );V1).
+(3) Let x be a real number such that 1
+2 < x < ∞. Let v be any function in H x((0,T );H1
+0(Ω)) and let (vhl)hl>0 be
+a sequence of functions in H x((0,T );Xh) strongly converging to v in H x((0,T );H1
+0(Ω)). (Note again that the
+approximability property (2.1) implies that such a sequence can always be constructed for every test function v.)
+Then
+(4)
+
+QT ∂tuhl · vhl →
+
+QT ∂tu · v, since ∂tuhl ⇀∂tu in H −x((0,T );H−1
+4 (Ω)) and vhl →v in H x((0,T );H1
+0(Ω)).
+Here and after we abuse the notation by using
+
+QT to represent duality parings using L2(QT ) as pivot space.
+(5)
+
+QT ∇uhl:∇vhl →
+
+QT ∇u:∇v, since ∇uhl ⇀∇u in L2((0,T );L2(Ω)) and ∇vhl →∇v in H x((0,T );L2(Ω)).
+(6)
+
+QT phl∇· vhl →
+
+QT p∇· v, since phl ⇀p in H −x((0,T );H
+1
+2 (Ω)) and ∇· vhl →∇· v in H x((0,T );L2(Ω)).
+(7) Since uhl converges weakly to u in L2((0,T );H1
+0(Ω)) and strongly in L2((0,T );L3(Ω)), the consistency hy-
+pothesis (4.1) holds; hence,
+ T
+0 bh(uhl,uhl,vhl) →
+ T
+0 (u · ∇u,v).
+(8) Finally, Lemma 4.3 implies that uhl converges in C0([0,T ];H−α(Ω)), α ∈( 1
+4, 1
+2). In other words u0 ←Ihlu0 =
+uhl(0) →u(0) in H−α(Ω); hence, u(0) = u0.
+(9) That u satisﬁes Leray’s energy inequality is standard, [29]. It is a consequence of the inequality 2∇(uhl −u) ·
+∇u + |∇u|2 ⩽|∇uhl|2. The theorem is proved.
+2
+
+[PDF PAGE 13]
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+99
+5. Convergence to a suitable solution
+The main issue we address in this section is to determine whether the weak solutions (u, p) we have constructed
+using the Galerkin method are suitable in the sense of Deﬁnition 1.1. To answer this question we assume that the
+discrete framework satisﬁes the following property that we henceforth refer to as the discrete commutator property
+(see Bertoluzza [4], [15, Appendix B], or [11, Chapter I.7]).
+Deﬁnition 5.1. We say that Xh (resp. Mh) has the discrete commutator property if there is an operator Ph ∈
+L(H1
+0(Ω);Xh) (resp. Qh ∈L(H 1(Ω);Mh)) such that for all φ in W 2,∞
+0
+(Ω) (resp. all φ in W 2,∞
+0
+(Ω)) and all vh ∈Xh
+(resp. all qh ∈Mh),
+
+
+φvh −Ph(φvh)
+
+
+Hl ⩽ch1+m−l∥vh∥Hm∥φ∥W m+1,∞,
+0 ⩽l ⩽m ⩽1,
+
+
+φqh −Qh(φqh)
+
+
+H l ⩽ch1+m−l∥qh∥H m∥φ∥W m+1,∞.
+Remark 5.1. When Ph (resp. Qh) is a projector, the above deﬁnition is an estimate of the operator norm of the
+commutator [Φ,Ph] := Φ ◦Ph −Ph ◦Φ where Φ ◦v = φv.
+Remark 5.2. The discrete commutator property is known to hold in discrete spaces where there exist projectors
+that have local approximation properties, see Bertoluzza [4]. It is known to hold for ﬁnite elements and wavelets.
+The key property is localization. To understand how the discrete commutator property can be proved let us assume
+that Ph is a linear projector and let x ∈Ω. For every y in a ball of radius h centered at x, we formally have
+Ph(φvh)(y) ≈Ph((φ(x) + O(h))vh)(y) ≈(φ(x) + O(h))Ph(vh)(y) = (φ(x) + O(h))vh(y) + O(h), that is to say
+Ph(φvh)(y) −(φvh)(y) ≈O(h)vh(y), where O(h) depends on the gradient of φ.
+Remark 5.3. Spectral-based approximation spaces do not have the discrete commutator property since spectral
+expansions do not have local interpolation properties. Spectral methods are very accurate but they only have global
+interpolation properties.
+We moreover assume that the following inverse inequality holds: There is c uniform in h such that for all s ∈[0,1]
+∀vh ∈Xh,
+∥vh∥Hs
+0 ⩽c h−s∥vh∥L2,
+∥vh∥L2 ⩽c h−s∥vh∥H−s
+0 .
+(5.1)
+The above hypotheses are usually satisﬁed when Xh and Mh are constructed by using ﬁnite elements [13].
+We also assume that the following consistency property holds for the nonlinear term: For all functions w in
+L2((0,T );V1) ∩L∞((0,T );L2(Ω)) and all sequences of functions (wh)h>0 in C0([0,T ];Vh) uniformly bounded
+in L2((0,T );H1
+0(Ω)) ∩L∞((0,T );L2(Ω)) and strongly converging to w in L2((0,T );L3(Ω)), the following holds
+true,
+bh(wh,wh,φwh) →−
+1
+2w|w|2,∇φ
+
+,
+∀φ ∈D(QT ).
+(5.2)
+Lemma 5.1. The consistency property (4.1) holds for deﬁnitions (2.10) and for (2.11) provided Mh has the discrete
+commutator property.
+Proof. (1) The situation for deﬁnition (2.10) is quite simple, since
+bh(wh,wh,φwh) = (wh · ∇wh,φwh) + 1
+2(wh∇· wh,φwh)
+=
+
+wh · ∇
+1
+2|wh|2
+
++ 1
+2|wh|2∇· wh,φ
+
+=
+
+∇·
+
+wh
+1
+2|wh|2
+
+,φ
+
+= −
+
+wh
+1
+2|wh|2,∇φ
+
+.
+Now observe,
+
+[PDF PAGE 14]
+100
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+
+QT
+
+wh|wh|2 −w|w|2
+=
+
+QT
+
+(wh −w)|wh|2 + w(wh + w) · (wh −w)
+
+⩽c
+T
+
+0
+∥wh −w∥L3
+
+∥wh∥2
+L3 + ∥w∥2
+L3
+
+⩽c∥wh −w∥L2(L3)
+
+∥wh∥2
+L4(L3) + ∥w∥2
+L4(L3)
+
+.
+Then, ∥wh|wh|2 −w|w|2∥L1(QT ) →0 since ∥wh −w∥L2(L3) →0 and ∥wh∥L4(L3), ∥w∥L4(L3) are bounded. This
+immediately implies that bh(wh,wh,φwh) →−( 1
+2w|w|2,∇φ) .
+(2) For deﬁnition (2.11) we proceed as follows:
+bh(wh,wh,φwh) =
+
+(∇× wh)×wh,φwh
+
++ 1
+2
+
+∇(Kh
+
+|wh|2
+,φwh)
+
+= −1
+2
+
+Kh
+
+|wh|2
+,∇· (φwh)
+
+= −1
+2
+
+whKh
+
+|wh|2
+,∇φ
+
+−1
+2
+
+φKh
+
+|wh|2
+,∇· wh
+
+= −1
+2
+
+wh|wh|2∇φ
+
++ R1 + R2,
+where R1 := −1
+2(wh(Kh(|wh|2) −|wh|2),∇φ) and R2 := −1
+2(φKh(|wh|2),∇· wh). To control R1, we further
+decompose the integrand as follows:
+wh
+
+Kh
+
+|wh|2
+−|wh|2
+= (wh −w)
+
+Kh
+
+|wh|2
+−|wh|2
++ w
+
+Kh
+
+|wh|2
+−Kh
+
+|w|2
++ w
+
+Kh
+
+|w|2
+−|w|2
++ w
+
+|w|2 −|wh|2
+:= R11 + R12 + R13 + R14.
+Proceeding as in step (1), we infer:
+∥R11∥L1(QT ) + ∥R12∥L1(QT ) + ∥R14∥L1(QT ) ⩽c∥wh −w∥L2(L3)
+
+∥wh∥2
+L4(L3) + ∥w∥2
+L3(L3)
+
+.
+Furthermore, observe that R13 →0 a.e. in QT and |R13| ⩽c|w|3 ∈L1(QT ). Lebesgue’s Dominated Convergence
+Theorem implies ∥R13∥L1(QT ) →0. In conclusion
+ T
+0 |R1| →0 as h →0. For R2 we use the fact that wh(t) ∈Vh and
+Mh has the discrete commutator property as follows:
+|R2| = 1
+2
+
+φKh
+
+|wh|2
+−Qh
+
+φKh
+
+|wh|2
+,∇· wh
+
+⩽1
+2
+
+
+φKh
+
+|wh|2
+−Qh
+
+φKh
+
+|wh|2
+
+L2∥wh∥H1
+⩽ch
+
+
+Kh
+
+|wh|2
+∥L2∥wh∥H1 ⩽c h
+
+
+|wh|2
+
+L2∥wh∥H1
+⩽ch∥wh∥2
+L4∥wh∥H1 ⩽ch∥wh∥
+1
+2
+L2∥wh∥
+3
+2
+L6∥wh∥H1
+⩽ch∥wh∥
+1
+2
+L2∥wh∥
+1
+2
+H1∥wh∥2
+H1 ⩽c h
+1
+2 ∥wh∥L2∥wh∥2
+H1,
+where we have used (5.1) to derive the last inequality. Hence
+T
+
+0
+|R2| ⩽c h
+1
+2 ∥wh∥2
+L2(H1)∥wh∥L∞(L2).
+Then clearly
+ T
+0 |R2| →0 as h →0. In conclusion bh(wh,wh,φwh) →−( 1
+2w|w|2,∇φ) since wh 1
+2|wh|2 →w 1
+2|w|2
+in L1(QT ) and
+ T
+0 |R1| +
+ T
+0 |R2| →0. That concludes the proof.
+2
+
+[PDF PAGE 15]
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+101
+Before stating the main result of this paper let us now collect the various hypotheses that have been used so far. The
+source term f and the initial data u0 are assumed to satisfy (3.14) where the exponents p and q are deﬁned in (3.9). For
+instance f ∈L2
+loc([0,∞);L2(Ω)) is sufﬁcient for (3.14) to hold. For the two families of approximation spaces {Xh}h>0
+and {Mh}h>0 we assume that the approximation properties (2.1)–(2.2) hold. These are standard evident hypotheses.
+We further assume that Xh and Mh are compatible in the sense that (2.8) holds. This is a generalization of the so-called
+LBB condition and it has been shown in [16] to hold for reasonable pairs of ﬁnite element spaces. We further assume
+the norm equivalences (2.6)–(2.7). These are the discrete counterparts of (1.8)–(1.9) and have been shown to hold for
+various ﬁnite-element-like settings in [17] (the proofs therein invokes a standard quasi-uniformity hypothesis on the
+mesh when ﬁnite elements are considered). The next nontrivial hypotheses are the inverse inequalities (5.1). These
+say in some sense that h is the smallest scale that can be represented in Xh. These hypotheses invoke again a quasi-
+uniformity hypothesis on the mesh when ﬁnite elements or wavelets are considered. Constructing families {Xh}h>0
+satisfying these nonrestrictive hypotheses is a standard exercise. We ﬁnish this list by mentioning the two consistency
+hypotheses (4.1)–(5.2). Since we allow ourselves some freedom on how to compute the nonlinear term to account for
+the fact that the approximate velocity ﬁeld may not be solenoidal (i.e., it is solenoidal in a weak discrete sense only),
+these two hypotheses constrain the way that can be done (i.e., it must be done reasonably). (4.1)–(5.2) have been
+shown to hold in Lemmas 4.1 and 5.1 under the above mentioned structure hypotheses on the discrete spaces families
+{Xh}h>0 and {Mh}h>0 if the nonlinear term is computed using either deﬁnitions (2.10)–(2.11). It is important to note
+that no regularization is performed on the nonlinear term.
+The main result of the paper is now stated in the following theorem.
+Theorem 5.1. Under the above hypotheses, if Xh and Mh have the discrete commutator property, the pair (uh,ph)
+convergences, up to subsequences, to a suitable solution to (1.1), say (u, p).
+Proof. To simplify notation we still denote by (uh) and (ph) the subsequence that converges to u and p, respectively.
+(1) Let φ be a non negative function in D(QT ). Testing the momentum equation in (2.12) by Ph(uhφ), we obtain:
+T
+
+0
+
+∂tuh,Ph(uhφ)
+
++ bh
+
+uh,uh,Ph(uhφ)
+
+−
+
+ph,∇· Ph(uhφ)
+
++ ν
+
+∇uh,∇Ph(uhφ)
+
+−
+
+f,Ph(uhφ)
+
+dt = 0.
+Each of the terms on the left-hand side of the equation are now treated separately in the following steps:
+(2) For the time derivative we have:
+T
+
+0
+
+∂tuh,Ph(uhφ)
+
+=
+T
+
+0
+(∂tuh,uhφ) +
+T
+
+0
+R = −1
+2
+T
+
+0
+
+|uh|2,∂tφ
+
++
+T
+
+0
+R,
+where we have set R = (uh,t,Ph(uhφ) −uhφ). It is clear that −1
+2
+ T
+0 (|uh|2,∂tφ) →−1
+2
+ T
+0 (u2,∂tφ) since |uh|2 →
+|u|2 in Lr(L1) for any 1 ⩽r ⩽2. Let us introduce a small positive number ε > 0 and set x = 1
+2 + ε
+5. To control the
+residual, we use the discrete commutator property as follows:
+T
+
+0
+|R| =
+T
+
+0
+
+uh,t,Ph(uhφ) −uhφ
+
+⩽∥uh,t∥
+H −x(H−1
+4 )
+
+
+Ph(uhφ) −uhφ
+
+
+H x(H
+1
+4 )
+⩽ch∥uh,t∥
+H −x(H−1
+4 )∥uh∥
+H x(H
+1
+4 ).
+Owing to Corollary 3.1, ∥uh,t∥
+H −x(H−1
+4 ) is bounded since x > 1
+2. Moreover,
+2
+5
+
+1 + 1
+4 + ε
+
+= 1
+2 + 2
+5ε > 1
+2 + ε
+5 = x,
+
+[PDF PAGE 16]
+102
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+that is, ∥uh∥
+H x(H−( 1
+4 +ε)) is bounded. Using the inverse inequality (5.1), we infer:
+T
+
+0
+|R| ⩽ch
+1
+2 −ε∥uh,t∥
+H −x(H−1
+4 )∥uh∥
+H x(H−1
+4 −ε).
+Now, it is clear that
+ T
+0 |R| →0 as h →0 provided ε ∈(0, 1
+2).
+(3) For the viscous term, we integrate by parts to obtain:
+
+∇uh,∇Ph(uhφ)
+
+=
+
+∇uh,∇(uhφ)
+
++ R
+=
+
+|∇uh|2,φ
+
+−
+1
+2|uh|2,φ
+
++ R
+where R := (∇uh,∇(Ph(uhφ) −uhφ)). For the ﬁrst term we proceed as follows:
+T
+
+0
+
+|∇uh|2,φ
+
+=
+T
+
+0
+∇(uh −u + u)
+2,φ
+
+=
+T
+
+0
+∇(uh −u)
+2 + 2∇(uh −u) : ∇u + |∇u|2,φ
+
+.
+Since uh ⇀u in L2((0,T );H1) and φ is non negative, we infer liminf
+ T
+0 (|∇uh|2,φ) ⩾
+ T
+0 (|∇u|2,φ). For the second
+term we have
+ T
+0 −( 1
+2|uh|2,φ) →−
+ T
+0 ( 1
+2|u|2,φ) since |uh|2 →|u|2 in Lr(L1) for any 1 ⩽r ⩽2. Now we control
+the residual as follows:
+|R| =
+
+∇uh,∇
+
+Ph(uhφ) −uhφ
+ ⩽ch∥uh∥2
+H1.
+Then it is clear that
+ T
+0 |R| →0 as h →0. In conclusion,
+liminf
+h→0
+T
+
+0
+
+∇uh,∇Ph(uhφ)
+
+⩾
+T
+
+0
+
+|∇u|2,φ
+
+−
+1
+2|u|2,φ
+
+.
+(4) For the pressure term we have:
+
+ph,∇·
+
+Ph(uhφ)
+
+=
+
+ph,∇· (uhφ)
+
++ R1 = (phuh,∇φ) + R1 + R2,
+where R1 := (ph,∇· (Ph(uhφ) −uhφ)) and R2 := (φph∇· uh). Let us take care of R1 ﬁrst. Let ε > 0 be a small
+positive real number and set r = 1
+2 −4
+9ε and s = 1
+2 −16
+9 ε. Then
+r = 1
+2 −4
+9ε > 1
+2 −8
+9ε = 1
+4 + 1
+2s,
+meaning that ∥ph∥H −r(H s) is uniformly bounded according to Lemma 3.5. Using the discrete commutator property,
+we deduce:
+T
+
+0
+|R1| ⩽c∥ph∥H −r(H s)
+
+
+∇·
+
+Ph(uhφ) −uhφ
+
+
+H r(H −s)
+⩽c∥ph∥H −r(H s)
+
+
+Ph(uhφ) −uhφ
+
+
+H r(H1−s)
+⩽ch∥ph∥H −r(H s)∥uh∥H r(H1−s).
+Now let us set α = 1
+4 −5
+9ε. Observe that
+r = 1
+2 −4
+9ε < 1
+2 −2
+9ε = 2
+5
+5
+4 −5
+9ε
+
+= 2
+5
+
+1 + 1
+4 −5
+9ε
+
+= 2
+5(1 + α),
+
+[PDF PAGE 17]
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+103
+meaning that ∥uh∥H r(H−α) is uniformly bounded. Then, using the inverse inequality (5.1), we infer:
+T
+
+0
+|R1| ⩽ch1−(1−s+α)∥ph∥H −r(H s)∥uh∥H r(H−α) ⩽c′ h
+1
+4 −ε.
+Then clearly |
+ T
+0 R1| →0 as h →0, provided ε ∈(0, 1
+4). We proceed similarly for R2 using the fact that uh take its
+values in Vh,
+T
+
+0
+R2 =
+T
+
+0
+
+φph −Qh(φph),∇· uh
+
+⩽
+
+
+φph −Qh(φph)
+
+
+H −r(H s)∥∇· uh∥H r(H −s)
+⩽ch∥ph∥H −r(H s)∥uh∥H r(H1−s) ⩽c′ h
+1
+4 −ε.
+Then again |
+ T
+0 R2| →0 as h →0. Now we have to pass to the limit on
+ T
+0 (phuh,∇φ). We are going to use
+Lemma 4.4. Let ε > 0 be a small positive real number and set r = 2
+5 +ε, s = 3
+10. This choice implies that ∥ph∥H −r(H s)
+is uniformly bounded, i.e., ph ⇀p in H −r((0,T );H s(Ω)). Now let ε′ ∈(0, 1
+20] be an other small positive real num-
+ber and set α = 3
+10 −ε′ ⩾1
+4, τ = 2
+5(1 + α −ε′). This choice implies that ∥uh∥H τ (H−α) is uniformly bounded, i.e.,
+uh ⇀u in H τ((0,T );H−α(Ω)). Using Lemma 4.4, we infer that uh →u in H r((0,T );H−s(Ω)) provided τ > r and
+s > α. Clearly s > α provided ε′ > 0; moreover τ > r if,
+2
+5 + 1
+25(3 −20ε′) > 2
+5 + ε.
+This holds true if we set ε = 1
+50(3 −20ε′), since ε′ ∈(0, 1
+20]. Assuming the above choices are made on ε′ and ε, it
+now becomes evident that
+ T
+0 (phuh,∇φ) →
+ T
+0 (pu,∇φ).
+(5) The source term does not pose any particular difﬁculty,
+
+f,Ph(φuh)
+
+= ⟨f,φuh⟩+ R,
+where R := ⟨f,Ph(φuh) −φuh⟩. Clearly
+ T
+0 ⟨f,φuh⟩→
+ T
+0 ⟨f,φu⟩since uh ⇀u in L2((0,T );H1
+0(Ω)) and f ∈
+L2((0,T );H−1(Ω)). Moreover,
+T
+
+0
+|R| ⩽∥f∥L2(H−1)
+
+
+Ph(φuh) −φuh
+
+
+L2(H1)
+⩽ch∥f∥L2(H−1)∥uh∥L2(H1).
+Then
+ T
+0 |R| →0 as h →0.
+(6) Now we pass to the limit in the nonlinear term:
+bh
+
+uh,uh,Ph(φuh)
+
+= bh(uh,uh,φuh) + R,
+where R = bh(uh,uh,Ph(φuh) −φuh). Then
+|R| ⩽
+
+
+nlh(uh,uh)
+
+
+H−1
+
+
+Ph(φuh) −φuh
+
+
+H1
+⩽ch∥uh∥L3∥uh∥H1∥uh∥H1 ⩽c h∥uh∥
+1
+2
+L2∥uh∥
+1
+2
+H1∥uh∥2
+H1.
+That is to say
+T
+
+0
+|R| ⩽ch
+1
+2 ∥uh∥L∞(L2)∥uh∥2
+L2(H1).
+This in turn implies
+ T
+0 |R| →0 as h →0. Then conclude using hypothesis (5.2).
+2
+
+[PDF PAGE 18]
+104
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+Appendix A. Proof of compactness lemmas
+A.1. Proof of Lemma 4.3
+Lemma 4.3. Let X ⊂Y be two Hilbert spaces with compact embedding. The injection H τ((0,T );X) →C0([0,T ];X)
+is continuous and the injection H τ((0,T );X) →C0([0,T ];Y) is compact, τ > 1
+2.
+Proof. (1) Indeed, let v be in the unit ball in H τ((0,T );X). Then, owing to the fact that τ > 1
+2, we have:
+∞
+
+−∞
+
+
+ˆv(k)
+
+
+X dk ⩽∥v∥H τ (X)
+
+
+(1 + |k|)−τ
+
+L2 ⩽c∥v∥H τ (X).
+This in turns means that the inverse Fourier transform formula holds for a.e. t in [0,T ],
+v(t) =
++∞
+
+−∞
+ˆv(k)e2iπkt dk.
+(2) Let vn be a bounded sequence in H τ((0,T );X). Let t ∈[0,T ], then using the above representation of vn(t),
+
+
+vn(t)
+
+
+X ⩽∥ˆvn∥L1(X) ⩽c ∥vn∥H τ (X) ⩽c′.
+In other words the sequence (∥vn(t)∥X) is bounded uniformly. This means that the sequence (vn(t)) is relatively
+compact in Y.
+(3) Let t,t′ ∈[0,T ]. Then
+
+
+vn(t) −vn(t′)
+
+
+X ⩽
++∞
+
+−∞
+
+
+ˆvn(k)
+
+
+X
+e2iπkt −e2iπkt′dk
+⩽c
++∞
+
+−∞
+
+
+ˆvn(k)
+
+
+X
+|k(t −t′)|
+1 + |k(t −t′)| dk
+⩽c
++∞
+
+−∞
+
+
+ˆvn(k)
+
+
+X
+
+1 + |k|
+τ |k1−τ(t −t′)|
+1 + |k(t −t′)| dk
+⩽c|t −t′|τ−1
+2 ∥vn∥H τ (X)
+
+
+k1−τ
+1 + |k|
+−1
+
+L2
+⩽c′ |t −t′|τ−1
+2 .
+This means that the sequence vn is equi-continuous in C0([0,T ];X). The sequence is also obviously equi-continuous
+in C0([0,T ];Y). Then the Ascoli–Arzelà theorem implies that the sequence vn is relatively compact in C0([0,T ];Y),
+which concludes the proof.
+2
+A.2. Proof of Lemma 4.4
+Lemma 4.4. Let H0 ⊂H1 be two Hilbert spaces with compact embedding. Let γ > 0 and γ > μ, then the injection
+H γ ((0,T );H0) ⊂H μ((0,T );H1) is compact.
+Proof. We adapt the proof of [22, Theorem 5.2]. The result amounts to proving that if vn is a sequence converging
+weakly to 0 in H γ ((0,T );H0), then vn converges strongly to 0 in H μ((0,T );H1). Since [0,T ] is a bounded, vn being
+in H γ ((0,T );H0) means that there is a function wn ∈H γ (R;H0) with support in [−1,T + 1] such that wn = vn a.e.
+on [0,T ], wn converges weakly to 0 in H γ ((0,T );H0), and ∥vn∥H γ (H0) ⩽∥wn∥H γ (H0) ⩽2∥vn∥H γ (H0).
+Let ε > 0 be an arbitrarily small positive real number. Let M > 0 be an other real number yet to be ﬁxed. Then,
+
+[PDF PAGE 19]
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+105
+∥wn∥2
+H μ(H1) =
++∞
+
+−∞
+
+1 + |k|
+2μ∥ˆwn∥2
+H1
+=
+
+|k|⩽M
+
+1 + |k|
+2μ∥ˆwn∥2
+H1 +
+
+|k|>M
+
+1 + |k|
+2γ ∥ˆwn∥2
+H1
+
+1 + |k|
+2(μ−γ )
+=
+
+|k|⩽M
+
+1 + |k|
+2μ∥ˆwn∥2
+H1 + c
+
+1 + |M|
+2(μ−γ ).
+Since μ −γ > 0, it is possible to choose M such that c(1 + |M|)2(μ−γ ) ⩽ε. Let us now evaluate the other term in the
+right-hand side. Let ψ ∈D(R) such that ψ|[−1,T +1] = 1. For all φ ∈H0 we have:
+
+ˆwn(k),φ
+
+H0 =
++∞
+
+−∞
+
+wn(t),
+
+ψ(t)e−2iπkt
+φ
+
+H0 dt.
+Since
+(ψ(t)e−2iπkt)φ ∈H γ ((0,T );H0)
+and
+wn
+converges
+weakly
+to
+0
+in
+H γ ((0,T );H0),
+we
+infer
+limn→∞( ˆwn(k),φ)H0 = 0, i.e., ˆwn(k) converges weakly to zero in H0, which in turns implies that ˆwn(k) converges
+strongly to zero in H1. In other words, for all k ∈[−M,+M],
+lim
+n→+∞
+
+1 + |k|
+2μ
+
+ ˆwn(k)
+
+
+H1 = 0.
+Moreover, owing to γ ⩾0, it is clear that
+
+
+ ˆwn(k)
+
+
+H1 ⩽c∥wn∥L1((0,T );H1) ⩽c′∥wn∥L2((0,T );H1) ⩽c′∥wn∥H γ (H1) ⩽c′′,
+meaning that (1 + |k|)2μ∥ˆwn(k)∥2
+H1 ⩽c (1 + |k|)2μ ∈L1((−M,+M)). We can apply Lebesgue’s Dominated Conver-
+gence Theorem to conclude,
+lim
+n→+∞
+
+|k|⩽M
+
+1 + |k|
+2μ
+
+wn(k)
+
+
+2
+H1 dk = 0.
+Then we have:
+limsup
+n→+∞
+∥wn∥2
+H μ(H1) ⩽ε,
+which means ∥wn∥H μ(H1) →0 since ε is arbitrary. This also means ∥vn∥H μ(H1) →0 since wn is an extension
+of vn.
+2
+References
+[1] R.A. Adams, J.J.F. Fournier, Sobolev Spaces, second ed., Pure and Applied Mathematics, vol. 140, Academic Press, New York, 2003, xiii,
+305 p.
+[2] H. Beirão da Veiga, On the construction of suitable weak solutions to the Navier–Stokes equations via a general approximation theorem,
+J. Math. Pures Appl. (9) 64 (3) (1985) 321–334.
+[3] H. Beirão da Veiga, On the suitable weak solutions to the Navier–Stokes equations in the whole space, J. Math. Pures Appl. (9) 64 (1) (1985)
+77–86.
+[4] S. Bertoluzza, The discrete commutator property of approximation spaces, C. R. Acad. Sci. Paris, Sér. I 329 (12) (1999) 1097–1102.
+[5] J.H. Bramble, J.E. Pasciak, O. Steinbach, On the stability of the L2 projection in H 1(Ω), Math. Comp. 71 (237) (2002) 147–156 (electronic).
+[6] J.H. Bramble, X. Zhang, The analysis of multigrid methods, in: Handbook of Numerical Analysis, vol. VII, North-Holland, Amsterdam, 2000,
+pp. 173–415.
+[7] F. Brezzi, M. Fortin, Mixed and Hybrid Finite Element Methods, Springer-Verlag, New York, 1991.
+[8] L. Caffarelli, R. Kohn, L. Nirenberg, Partial regularity of suitable weak solutions of the Navier–Stokes equations, Comm. Pure Appl.
+Math. 35 (6) (1982) 771–831.
+[9] M. Dauge, Stationary Stokes and Navier–Stokes systems on two- or three-dimensional domains with corners. I. Linearized equations, SIAM
+J. Math. Anal. 20 (1) (1989) 74–97.
+
+[PDF PAGE 20]
+106
+J.-L. Guermond / J. Math. Pures Appl. 88 (2007) 87–106
+[10] J. Duchon, R. Robert, Inertial energy dissipation for weak solutions of incompressible Euler and Navier–Stokes equations, Nonlinearity 13 (1)
+(2000) 249–255.
+[11] A. Ern, J.-L. Guermond, Theory and Practice of Finite Elements, Applied Mathematical Sciences, vol. 159, Springer-Verlag, New York, 2004.
+[12] A.V. Fursikov, Optimal Control of Distributed Systems. Theory and Applications, Translations of Mathematical Monographs, vol. 187, Amer.
+Math. Soc., Providence, RI, 2000.
+[13] V. Girault, P.-A. Raviart, Finite Element Methods for Navier–Stokes Equations. Theory and Algorithms, Springer Series in Computational
+Mathematics, Springer-Verlag, Berlin, 1986.
+[14] P. Grisvard, Elliptic Problems in Nonsmooth Domains, Monographs and Studies in Mathematics, vol. 24, Pitman (Advanced Publishing
+Program), Boston, MA, 1985.
+[15] J.-L. Guermond, Finite-element-based Faedo–Galerkin weak solutions to the Navier–Stokes equations in the three-dimensional torus are
+suitable, J. Math. Pures Appl. (9) 85 (3) (2006) 451–464.
+[16] J.-L. Guermond, The LBB condition in fractional Sobolev spaces and applications, IMA, Numer. Anal. (2006), submitted for publication.
+[17] J.-L. Guermond, J. Pasciak, Stability of ﬁnite-element-based discrete stokes operators in fractional Sobolev spaces, J. Math. Fluid Mech.
+(2007), in press.
+[18] J.G. Heywood, R. Rannacher, Finite element approximation of the nonstationary Navier–Stokes problem. I. Regularity of solutions and
+second-order error estimates for spatial discretization, SIAM J. Numer. Anal. 19 (2) (1982) 275–311.
+[19] J.G. Heywood, O.D. Walsh, A counterexample concerning the pressure in the Navier–Stokes equations, as t →0+, Paciﬁc J. Math. 164 (2)
+(1994) 351–359.
+[20] J. Leray, Essai sur le mouvement d’un ﬂuide visqueux emplissant l’espace, Acta Math. 63 (1934) 193–248.
+[21] F. Lin, A new proof of the Caffarelli–Kohn–Nirenberg theorem, Comm. Pure Appl. Math. 51 (3) (1998) 241–257.
+[22] J.-L. Lions, Quelques méthodes de résolution des problèmes aux limites non linéaires, vol. 1, Dunod, Paris, France, 1969.
+[23] J.-L. Lions, E. Magenes, Problèmes aux limites non homogènes et applications, vol. 1, Dunod, Paris, France, 1968.
+[24] J.-L. Lions, J. Peetre, Sur une classe d’espaces d’interpolation, Inst. Hautes Études Sci. Publ. Math. 19 (1964) 5–68.
+[25] V. Scheffer, Hausdorff measure and the Navier–Stokes equations, Comm. Math. Phys. 55 (2) (1977) 97–112.
+[26] H. Sohr, W. von Wahl, On the regularity of the pressure of weak solutions of Navier–Stokes equations, Arch. Math. (Basel) 46 (5) (1986)
+428–439.
+[27] V.A. Solonnikov, Estimates of the solution of a certain initial-boundary value problem for a linear nonstationary system of Navier–Stokes
+equations, Zap. Nauˇcn. Sem. Leningrad. Otdel Mat. Inst. Steklov. (LOMI) 59 (1976) 178–254, 257.
+[28] R. Temam, Sur l’approximation de la solution des équations de Navier–Stokes par la méthode des pas fractionnaires. II, Arch. Rat. Mech.
+Anal. 33 (1969) 377–385.
+[29] R. Temam, Navier–Stokes Equations, Studies in Mathematics and its Applications, vol. 2, North-Holland, Amsterdam, 1977.

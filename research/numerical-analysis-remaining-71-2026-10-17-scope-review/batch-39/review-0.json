@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "39",
+  "round": 0,
+  "reviewed_items": [
+    "def-pe12-gelfand-triple",
+    "lem-pe12-w1p-compact-l2-embedding",
+    "lem-pe12-bochner-lp-mollification",
+    "lem-pe12-w0p-separable-reflexive",
+    "thm-pe12-bochner-lp-completeness",
+    "lem-pe12-outward-zero-brouwer",
+    "lem-pe12-quasiuniform-mass-inverse-decay",
+    "def-pe12-monotone-diffusion-flux",
+    "def-pe12-stable-conforming-fem-family",
+    "lem-pe12-evolution-energy-chain-rule",
+    "thm-pe12-aubin-lions-compactness",
+    "lem-pe12-space-time-gradient-weak-compactness",
+    "thm-pe12-discrete-aubin-lions-compactness",
+    "lem-pe12-boundary-preserving-quasi-interpolation",
+    "lem-pe12-minty-identification",
+    "thm-pe12-strong-monotone-residual-estimate",
+    "thm-pe12-l2-projector-w1p-stability",
+    "thm-pe12-backward-euler-galerkin-existence-energy",
+    "thm-pe12-monotone-fem-limit",
+    "ex-pe12-p-laplacian",
+    "ex-pe12-porous-medium-barenblatt",
+    "cex-pe12-linear-ritz-does-not-commute",
+    "ex-pe12-time-oscillations-without-derivative-control"
+  ],
+  "reviewed_pages": [
+    "nonlinear-parabolic-compactness-and-monotone-evolution",
+    "nonlinear-parabolic-compactness-and-monotone-evolution-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Escalation is required for a proof gap in the published Stieltjes-regularity supplier, which also has an outside-batch published consumer. The remaining local proof repairs and approved-scope narrowings are recorded below.",
+  "findings": [
+    {
+      "id": "thm-lebesgue-stieltjes-measures-are-regular-on-r",
+      "type": "prerequisite",
+      "reason": "In Step 7.1, the open cover V of E intersect I_m is controlled only inside I_m; unioning it with the tail covers leaves V outside I_m uncontrolled. This does not establish the stated global outer regularity. The assigned Bochner-averaging item uses this in F3 and Step 1.2, and the published outside-batch item prop-lebesgue-stieltjes-and-lch-radon-conventions-agree-on-r uses it in F1 and Step 1.1. The assigned use can be repaired locally with a direct Lebesgue-measure approximation; the supplier proof and outside-batch consumer need owner reconciliation."
+    },
+    {
+      "id": "lem-pe12-bochner-lp-mollification",
+      "type": "local",
+      "reason": "F3 gives Borel regularity, but Step 1.2 uses approximation for arbitrary Lebesgue-measurable level sets without a completion or outer-measure argument. Step 1.2 also asserts contraction of Banach-valued interval averages by Jensen, and Step 3.1 uses Bochner-valued Minkowski, while F4 cites only scalar inequalities. Add the measurable-set approximation argument and justify the vector integral bound and scalar integral Minkowski step, for example using lem-bochner-integral-norm-inequality, Holder, and thm-minkowski-integral-inequality. No statement change is needed."
+    },
+    {
+      "id": "thm-pe12-l2-projector-w1p-stability",
+      "type": "local",
+      "reason": "Proof Step 2.1 uses weighted Jensen for the inverse-matrix row sums without deriving it. Supply the finite weighted Holder inequality for 1<r<infinity and handle r=1 directly; the existing Holder supplier suffices."
+    },
+    {
+      "id": "lem-pe12-w1p-compact-l2-embedding",
+      "type": "local",
+      "reason": "Step 3.1 drops the finite-measure factor from the Lr*-to-L2 Holder estimate. The bound should retain the factor |Omega|^(1/2-1/r*) in addition to the W0 one r-to-one p factor, or state a domain-dependent continuity constant. The claimed continuous embedding remains sound."
+    },
+    {
+      "id": "lem-pe12-w0p-separable-reflexive",
+      "type": "scope",
+      "reason": "The approved statement assumes the ultrafilter lemma, Dependent Choice, and Hahn-Banach; the current statement assumes the strictly stronger Axiom of Choice. The proof can use the approved assumptions directly: DC supplies Countable Choice for the separability step. Request a local statement and assumption repair."
+    },
+    {
+      "id": "lem-pe12-evolution-energy-chain-rule",
+      "type": "scope",
+      "reason": "The approved claim has no prior L-infinity-in-time H hypothesis, but the current statement adds one and the A-page summary says it is needed for p<2. It can be removed locally: on each compact interior interval, use the energy identity for the mollifications and choose a time with H norm bounded by their Lp average; the resulting uniform H bound replaces the current use of the assumed L-infinity bound. Update the A-page summary with the repaired claim."
+    },
+    {
+      "id": "thm-pe12-strong-monotone-residual-estimate",
+      "type": "scope",
+      "reason": "The approved residual estimate does not require an L-infinity-in-time H bound, but the current statement adds one to use the current chain-rule statement. After broadening the chain-rule proof, remove this extra hypothesis and update its Given section."
+    },
+    {
+      "id": "thm-pe12-backward-euler-galerkin-existence-energy",
+      "type": "prerequisite",
+      "reason": "Step 1.1 needs continuity of the finite-dimensional Brouwer map. F1 imports global norm-continuity of A from an additional requirement in the flux item, while the approved flux scope is the pointwise Caratheodory, growth, coercivity, and monotonicity conditions. Prove continuity of each finite-dimensional test-coordinate map from those conditions, using a fixed basis and dominated convergence, so the approved existence scope is established."
+    },
+    {
+      "id": "thm-pe12-monotone-fem-limit",
+      "type": "scope",
+      "reason": "The current statement explicitly adds global norm-continuity of A, narrowing the approved flux-and-projector scope. Once finite-dimensional continuity is proved for the backward Euler step from the approved flux conditions, remove this extra clause."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-pe12-bochner-lp-mollification",
+      "decision": "repair",
+      "reason": "Its use of Stieltjes regularity and Banach-valued averaging is identified for local proof repair; its statement need not change."
+    },
+    {
+      "id": "prop-lebesgue-stieltjes-and-lch-radon-conventions-agree-on-r",
+      "decision": "escalate",
+      "reason": "This published outside-batch consumer relies on the global regularity conclusion whose current supplier proof leaves Step 7.1 excess uncontrolled."
+    },
+    {
+      "id": "def-pe12-monotone-diffusion-flux",
+      "decision": "accept",
+      "reason": "Consumers use the zero-boundary space under the stronger Axiom of Choice assumption; the approved weaker separability/reflexivity result still supplies the needed structure."
+    },
+    {
+      "id": "thm-pe12-l2-projector-w1p-stability",
+      "decision": "accept",
+      "reason": "Its PE12 application uses the separability/reflexivity result under the Axiom of Choice branch, so the proposed widening of that supplier leaves its use valid."
+    },
+    {
+      "id": "lem-pe12-minty-identification",
+      "decision": "accept",
+      "reason": "Its flux use is limited to the stated pointwise monotonicity, growth, and Caratheodory hypotheses."
+    },
+    {
+      "id": "thm-pe12-strong-monotone-residual-estimate",
+      "decision": "repair",
+      "reason": "Remove the redundant L-infinity hypothesis after the chain-rule statement is broadened."
+    },
+    {
+      "id": "thm-pe12-backward-euler-galerkin-existence-energy",
+      "decision": "repair",
+      "reason": "Prove the finite-dimensional continuity used for Brouwer from the approved flux hypotheses."
+    },
+    {
+      "id": "thm-pe12-monotone-fem-limit",
+      "decision": "repair",
+      "reason": "Remove the extra global operator-continuity hypothesis after the backward Euler continuity argument is supplied; its chain-rule use already satisfies the existing L-infinity hypothesis."
+    },
+    {
+      "id": "ex-pe12-p-laplacian",
+      "decision": "accept",
+      "reason": "It separately proves the p-Laplacian operator continuity and uses the other suppliers under the Axiom of Choice."
+    },
+    {
+      "id": "lem-mimetic-fv-parabolic-limit-identification",
+      "decision": "accept",
+      "reason": "Its chain-rule fact explicitly assumes the L-infinity H bound, and its flux use does not require operator norm-continuity."
+    },
+    {
+      "id": "thm-na-ns-weak-solution-uniqueness-2d-and-weak-strong-3d",
+      "decision": "accept",
+      "reason": "Its chain-rule use explicitly supplies the L-infinity H bound."
+    },
+    {
+      "id": "lem-na-two-dimensional-solenoidal-energy-velocity-uniqueness",
+      "decision": "accept",
+      "reason": "Its energy weak-solution assumptions include the L-infinity H bound."
+    },
+    {
+      "id": "cex-na-polyhedral-energy-ns-pressure-endpoint",
+      "decision": "accept",
+      "reason": "Its uniqueness use remains valid under the current stronger energy-solution assumptions."
+    },
+    {
+      "id": "ex-na-conditional-three-dimensional-flow-computation",
+      "decision": "accept",
+      "reason": "Its use of the conditional weak-strong uniqueness statement is unchanged."
+    },
+    {
+      "id": "thm-pe12-aubin-lions-compactness",
+      "decision": "accept",
+      "reason": "Its completeness use is under the Axiom of Choice assumption, which supplies Countable Choice."
+    },
+    {
+      "id": "thm-pe12-discrete-aubin-lions-compactness",
+      "decision": "accept",
+      "reason": "Its completeness use is under the Axiom of Choice assumption, which supplies Countable Choice."
+    },
+    {
+      "id": "lem-pe12-space-time-gradient-weak-compactness",
+      "decision": "accept",
+      "reason": "Its Bochner completeness use is under the Axiom of Choice assumption."
+    },
+    {
+      "id": "lem-na-mini-weak-solenoidal-compactness",
+      "decision": "accept",
+      "reason": "Its Bochner completeness fact is used under an explicit Axiom of Choice assumption."
+    },
+    {
+      "id": "lem-pe12-evolution-energy-chain-rule",
+      "decision": "repair",
+      "reason": "Its mollification input remains applicable after the Bochner averaging proof repair; this item also needs the approved-scope chain-rule repair."
+    },
+    {
+      "id": "thm-na-mini-navier-stokes-be-subsequential-limit",
+      "decision": "accept",
+      "reason": "Its cell-average convergence use is under an explicit Axiom of Choice assumption."
+    },
+    {
+      "id": "lem-na-solenoidal-evolution-integrated-pressure-recovery",
+      "decision": "accept",
+      "reason": "Its cell-average convergence use is under an explicit Axiom of Choice assumption."
+    }
+  ]
+}

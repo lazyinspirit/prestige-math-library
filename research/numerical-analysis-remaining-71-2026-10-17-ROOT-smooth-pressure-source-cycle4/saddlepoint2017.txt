@@ -1,0 +1,805 @@
+[PDF PAGE 1]
+arXiv:1709.00723v1  [math.NA]  3 Sep 2017
+Noname manuscript No.
+(will be inserted by the editor)
+On the ﬁnite element approximation for non-stationary saddle-point problems
+Tomoya Kemmochi
+Received: date / Accepted: date
+Abstract In this paper, we present a numerical analysis of the hydrostatic Stokes equations, which are lin-
+earization of the primitive equations describing the geophysical ﬂows of the ocean and the atmosphere. The
+hydrostatic Stokes equations can be formulated as an abstract non-stationary saddle-point problem, which also
+includes the non-stationary Stokes equations. We ﬁrst consider the ﬁnite element approximation for the abstract
+equations with a pair of spaces under the discrete inf-sup condition. The aim of this paper is to establish error
+estimates for the approximated solutions in various norms, in the framework of analytic semigroup theory. Our
+main contribution is an error estimate for the pressure with a natural singularity term t−1, which is induced
+by the analyticity of the semigroup. We also present applications of the error estimates for the ﬁnite element
+approximations of the non-stationary Stokes and the hydrostatic Stokes equations.
+Keywords hydrostatric Stokes equations · primitive equations · non-stationary Stokes equations · ﬁnite
+element method · analytic semigroup
+Mathematics Subject Classiﬁcation (2000) 65M60 · 76M10 · 76D07
+1 Introduction
+Let Ω= (0,1)2 × (−D, 0) ⊂R3 be a (shallow) box domain with D > 0. We consider the (non-stationary)
+hydrostatic Stokes equations
+
+
+
+
+
+ut −∆u + ∇Hp = 0,
+in Ω× (0, T),
+divH ¯v = 0,
+in Ω× (0, T),
+u(0) = u0,
+in Ω
+(1)
+for an unknown velocity u: Ω→R2 and pressure p: G := (0, 1)2 →R, where ∇Hp = (∂xp, ∂yp)T, divH v =
+∂xv1 + ∂yv2, and ¯v = R 0
+−D v(·, z)dz. We impose the boundary conditions
+
+
+
+
+
+∂zu = 0,
+on Γu := G × {0},
+u = 0,
+on Γb := G × {−D},
+u and p are periodic
+on Γl := ∂G × (−D, 0).
+(2)
+These are the linearized equations of the primitive equations (without the Coriolis force) described as
+
+
+
+
+
+
+
+
+
+∂tu + (U · ∇)u −∆u + ∇Hp = 0,
+in Ω× (0, T),
+∂zp = 0,
+in Ω× (0, T),
+div U = 0,
+in Ω× (0, T),
+u(0) = u0,
+in Ω
+(3)
+T. Kemmochi
+Graduate School of Mathematical Sciences, The University of Tokyo
+3-8-1 Komaba, Meguro-ku, Tokyo, 153-8914, Japan
+Tel.: +81-3-5465-7001
+E-mail: kemmochi@ms.u-tokyo.ac.jp
+
+[PDF PAGE 2]
+2
+Tomoya Kemmochi
+with boundary conditions
+
+
+
+
+
+∂zu = 0, u3 = 0,
+on Γu,
+U = 0,
+on Γb,
+U and p are periodic
+on Γl,
+where U = (u, u3): Ω→R3. The primitive equations are derived from the Navier-Stokes equations under the
+assumption that the vertical motion is much smaller than the horizontal motion, and were ﬁrst introduced by
+Lions, Temam, and Wang [21,22,23]. This model is considered to describe the geophysical ﬂows of the ocean
+and the atmosphere.
+In this paper, we consider the ﬁnite element approximation of the hydrostatic Stokes problem (1) and (2)
+as follows. Find uh : (0, T) →Vh and ph : (0, T) →Qh satisfying the variational equation
+
+
+
+
+
+(uh,t, vh)Ω+ (∇uh, ∇vh)Ω−(divH ¯vh, ph)G = 0,
+∀vh ∈Vh,
+(divH ¯uh, qh)G = 0,
+∀qh ∈Qh,
+(uh(0), vh)Ω= (u0, vh)Ω,
+∀vh ∈Vh,σ,
+where Vh ⊂H1(Ω)2 and Qh ⊂L2
+0(G) are ﬁnite-dimensional subspaces with suitable boundary conditions, the
+bracket (·, ·)X expresses the L2-inner product over a domain X, and Vh,σ = {vh ∈Vh | (divH ¯vh, qh)G = 0, ∀qh ∈
+Qh}. The precise deﬁnitions are given in Section 4. The aim of this paper is to establish error estimates for
+uh and ph in the framework of analytic semigroup theory, as preliminaries for the numerical analysis of the
+primitive equations. Although there are several results available on the ﬁnite element method for the steady
+hydrostatic Stokes equations (e.g., [12,13,14,15]), there are no results for the non-stationary case, to the best
+of our knowledge.
+As with the Navier-Stokes equations, the primitive equations are widely used in numerical computations for
+atmospheric and oceanic phenomena. Finite element approximations and error estimates are presented in [6,
+16,4,3] for the steady primitive equations and in [5,18,17] for non-stationary problems. In [18] and [17], error
+estimates for various fully discretized schemes are provided; these estimates have exponential growth in time
+T (i.e., ecT ), since their arguments are based on the discrete Gronwall inequality. Therefore, these results are
+time-local estimates in a sense.
+We are interested in time-global error estimates for ﬁnite element approximations of the hydrostatic Stokes
+and the primitive equations. In contrast to the three-dimensional Navier-Stokes equations, it is known that the
+three-dimensional primitive equations are globally well-posed in the Lp-settings (see [2] for p = 2, and [19] for
+p ∈(1, ∞)). In their proofs, the analyticity of the hydrostatic Stokes semigroup plays a crucial role. We can
+thus expect that the analytic semigroup approach presents an eﬃcient method for the numerical analysis of the
+primitive equations. Indeed, for the two-dimensional Navier-Stokes equations, time-global error estimates have
+been obtained via the analytic semigroup approach in [24]. Their results are based on the error estimates for
+the non-stationary Stokes equations established in [25].
+In order to derive error estimates for the ﬁnite element approximation, we formulate the hydrostatic Stokes
+equations as an abstract evolution problem. We deﬁne
+V = {v ∈H1(Ω)2 | v|Γb = 0, v is periodic on Γl}.
+(4)
+Additionally, let Q = L2
+0(G) and H = L2(Ω)2. Then, a weak form of the hydrostatic Stokes equations (2) can
+be given as a non-stationary saddle-point problem as follows. Find u: (0, T) →V and p: (0, T) →Q satisfying
+(
+(ut(t), v)H + a(u(t), v) + b(v, p(t)) = 0,
+∀v ∈V,
+b(u(t),q) = 0,
+∀q ∈Q,
+(5)
+where
+a(u, v) =
+ZZZ
+Ω
+∇u : ∇v dxdydz,
+b(v, q) = −
+ZZ
+G
+(divH ¯v)q dxdy
+for u, v ∈V and q ∈Q. Once we write the hydrostatic Stokes equations as above, we can use the same arguments
+for error estimates as is the case for the usual Stokes problem in [25]. Then, we can obtain the following error
+estimates for the velocity:
+∥∇(u(t) −uh(t))∥L2(Ω) ≤Cht−1∥u0∥L2(Ω),
+∥u(t) −uh(t)∥L2(Ω) ≤Ch2t−1∥u0∥L2(Ω),
+
+[PDF PAGE 3]
+FEM for non-stationary saddle-point problems
+3
+under the assumptions stated in Section 2 (Assumptions 1 and 2). In particular, the discrete inf-sup condition
+(11) plays an important role as in the stationary case.
+According to [25], we can also obtain an error estimate for the pressure. The estimate presented in [25] is
+∥p(t) −ph(t)∥L2 ≤Ch(t−1 + t−3/2)∥u0∥L2
+for the two-dimensional Stokes equations
+
+
+
+
+
+ut −∆u + ∇p = 0,
+div u = 0,
+u(0) = u0
+(6)
+with the Dirichlet boundary condition. However, the singularity t−3/2 is unnatural from the viewpoint of analytic
+semigroup theory. Indeed, an optimal order error estimate should be of the form
+∥p(t) −ph(t)∥L2 ≤Ch∥∇p(t)∥L2,
+and (6) yields
+∥∇p(t)∥L2 ≤∥ut(t)∥L2 + ∥∆u(t)∥L2 ≤Ct−1∥u0∥L2.
+In this paper, we ﬁrst address the abstract problem (5) for bilinear forms a: V × V →R and b: V × Q →R
+deﬁned on Hilbert spaces V and Q, and its Galerkin approximation
+(
+(uh,t(t), vh)H + a(uh(t), vh) + b(vh, ph(t)) = 0,
+∀vh ∈Vh,
+b(uh(t), qh) = 0,
+∀qh ∈Qh,
+(7)
+for appropriate ﬁnite-dimensional subspaces Vh ⊂V and Qh ⊂Q. The main contribution of this paper is
+to derive error estimates for the approximation problem (7), both for the velocity u and the pressure p. In
+particular, we remove the term t−3/2 from the error estimate for the pressure. Consequently, our results are a
+generalization and modiﬁcation of the results in [25]. After deriving the error estimates for (7), we apply the
+results to error estimates for the ﬁnite element approximation of the hydrostatic Stokes equations.
+Here, we present the idea of the proof for error estimates in the case of the hydrostatic Stokes equations.
+Our strategy is similar to that of [25]. Namely, we ﬁrst rewrite the error in terms of the contour integral of the
+resolvent and then we reduce the error estimate for the velocity to that of the resolvent problem. The key idea is
+to establish the V ′-error estimate for the resolvent problem as well as the H1- and L2-error estimates, which are
+already addressed in [25]. Here, V ′ denotes the dual space of V deﬁned by (4). This estimate coincides with the
+H−1-error estimate if we impose the Dirichlet boundary condition. Then, we can obtain the V ′-error estimate
+for the time derivative of the velocity of the form
+∥ut(t) −uh,t(t)∥V ′ ≤Cht−1∥u0∥L2(Ω).
+Finally, we can establish an error estimate for the pressure without the term t−3/2, with the aid of the discrete
+inf-sup condition. We shall perform the above procedure in the abstract setting.
+The rest of the paper is organized as follows. In Section 2, we introduce an abstract saddle-point problem and
+its Galerkin approximation, as well as the notation and assumptions in subsection 2.1. After that, we introduce
+the resolvent problems and present some preliminary results in subsection 2.2. Our main results are presented
+in Section 3. As mentioned above, we derive the error estimate in the dual norm for the resolvent problem,
+and then we establish the error estimate for the evolution equation. We apply these results for the Stokes and
+the hydrostatic Stokes equations in Section 4. For the usual Stokes equations (subsection 4.1), error estimates
+for the velocity are already available. However, the estimate for the pressure presented here is strictly sharper
+than that of [25]. The error estimates for the non-stationary hydrostatic Stokes equations will be presented in
+subsection 4.2. Finally, we present our conclusions and areas for future works in Section 5.
+
+[PDF PAGE 4]
+4
+Tomoya Kemmochi
+2 Preliminaries
+2.1 Notation and assumptions
+Throughout this paper, except for in the last section, the symbols H, V , and Q denote Hilbert spaces with dense
+and continuous injections V ֒→H ֒→V ′, where V ′ is the dual space of V , and a: V × V →C and b: V × Q →C
+are their continuous bilinear forms. We assume that a is symmetric for simplicity, and that a is coercive and b
+satisﬁes the inf-sup condition:
+Re a(v, v) ≥α∥v∥V ,
+∀v ∈V,
+(8)
+sup
+v∈V
+|b(v, q)|
+∥v∥V
+≥β1∥q∥Q,
+∀q ∈Q,
+for some positive constants α and β1. We consider the following abstract non-stationary Stokes problem:
+
+
+
+
+
+(ut(t), v)H + a(u(t),v) + b(v, p(t)) = 0,
+∀v ∈V,
+b(u(t), q) = 0,
+∀q ∈Q,
+u(0) = u0,
+(9)
+for t ∈(0, T), where u0 ∈Hσ := Vσ
+∥·∥H and
+Vσ := {v ∈V | b(v, q) = 0, ∀q ∈Q}.
+We deﬁne a linear operator A on Hσ associated with the bilinear form a by
+(
+D(A) = {u ∈Vσ | ∃w ∈Hσ s.t. (w, v)H = a(u, v), ∀v ∈Vσ},
+(Au, v)H = a(u, v),
+∀u ∈D(A),
+∀v ∈Vσ,
+(10)
+which is the abstract version of the Stokes operator. By coercivity (8) and the usual semigroup theory (e.g.,
+see [26]), the operator −A generates an analytic contraction semigroup e−tA on Hσ. Thus, choosing v ∈Vσ as a
+test function in (9), we can construct a mild solution by u(t) = e−tAu0 for t > 0. Moreover, owing to the inf-sup
+condition and the closed range theorem (see, e.g., [9]), we can ﬁnd p(t) ∈Q that satisﬁes
+b(v, p(t)) = −(ut(t), v)H + a(u(t),v),
+∀v ∈V,
+for almost all t ∈(0, T). The uniqueness of these solutions is clear. Finally, we deﬁne a linear operator B : D(B) ⊂
+Q →H associated with b by
+(
+D(B) = {q ∈Q | ∃w ∈H s.t. (w, v)H = b(v, q), ∀v ∈V },
+(Bq, v)H = b(v, q),
+∀q ∈D(B),
+∀v ∈V.
+We next consider the Galerkin approximation for (9). Let Vh ⊂V and Qh ⊂Q be ﬁnite-dimensional
+subspaces. We assume that they have the following properties:
+Assumption 1. (A-1) [discrete inf-sup condition] There exists β2 > 0 such that
+sup
+vh∈Vh
+|b(vh, qh)|
+∥vh∥V
+≥β2∥qh∥Q,
+∀qh ∈Qh,
+(11)
+uniformly in h > 0.
+(A-2) [approximation property (1)] For each v ∈D(A), we can ﬁnd vh ∈Vh satisfying
+∥vh∥V ≤C∥v∥V ,
+∥v −vh∥H ≤Ch∥v∥V ,
+∥v −vh∥V ≤Ch∥Av∥H,
+(12)
+where C is independent of h and v.
+
+[PDF PAGE 5]
+FEM for non-stationary saddle-point problems
+5
+(A-3) [approximation property (2)] For each q ∈D(B), we can ﬁnd qh ∈Qh satisfying
+∥q −qh∥Q ≤Ch∥Bq∥H,
+where C is independent of h and q.
+Remark 1. The assumption (A-2) includes the condition on “elliptic regularity”. For example, let Ω⊂R2 be a
+polygonal domain, H = L2(Ω), V = H1
+0(Ω), and Vh be the conforming P 1-ﬁnite element space with respect to a
+shape-regular triangulation of Ω. Then, for every v ∈H2(Ω), we can construct vh ∈Vh with the error estimate
+∥v −vh∥H1
+0 ≤Ch∥v∥H2.
+However, if A is the Laplace operator deﬁned by
+(Au, v)L2 = (∇u, ∇v)L2,
+u, v ∈H1
+0(Ω),
+then the error estimate (12) does not hold in general. Indeed, (12) requires that the condition D(A) = H2(Ω) ∩
+H1
+0(Ω) is satisﬁed, or equivalently,
+∥v∥H2 ≤C∥Av∥L2
+for all v ∈D(A), which is not true for non-convex polygonal domains (see [11]).
+We also introduce the discrete “solenoidal” space Vh,σ, deﬁned as
+Vh,σ := {vh ∈Vh | b(vh, qh) = 0, ∀qh ∈Qh}.
+(13)
+Note that Vh,σ ̸⊂Vσ in general. We now formulate the Galerkin (semi-discrete) approximation for the problem (9)
+as follows: ﬁnd uh(t) ∈Vh and qh(t) ∈Qh that satisfy
+
+
+
+
+
+(uh,t(t), vh)H + a(uh(t), vh) + b(vh, ph(t)) = 0,
+∀vh ∈Vh,
+b(uh(t), qh) = 0,
+∀qh ∈Qh,
+uh(0) = Ph,σu0,
+(14)
+where Ph,σ : H →Vh,σ is the orthogonal projection. We deﬁne the discrete “Stokes operator” Ah by
+(Ahuh, vh)H = a(uh, vh),
+∀uh, vh ∈Vh,σ.
+Then, as in the continuous case, the operator −Ah generates an analytic contraction semigroup e−tAh on
+Hh,σ := (Vh,σ, ∥· ∥H), and thus we can construct a unique solution (uh, ph) of the equation (14) due to the
+discrete inf-sup condition (11).
+2.2 Finite element method for resolvent problems
+We show error estimates for (14) via the resolvent estimates, as originally shown in [25] for the non-stationary
+Stokes problem. Let Γ = {re±i(π−δ) ∈C | r ∈[0, ∞)} be a path for δ ∈(0, π/2), which is oriented so that the
+imaginary part increases along Γ. Then, since the semigroups e−tA and e−tAh are analytic, we can write
+u(t) −uh(t) =
+1
+2πi
+Z
+Γ
+etλ h
+(λ + A)−1 −(λ + Ah)Ph,σ
+i
+u0dλ.
+(15)
+Therefore, the error estimate for uh is reduced to that of a resolvent problem:
+λ(w, v)H + a(w, v) = (g, v)H,
+∀v ∈Vσ,
+(16)
+and
+λ(wh, vh)H + a(wh, vh) = (g, vh)H,
+∀vh ∈Vh,σ,
+(17)
+for given g ∈H and λ ∈Σδ := {z ∈C \ {0} | | arg z| < π −δ} with an arbitrarily ﬁxed δ ∈(0, π/2). Owing to the
+closed range theorem, the problem (16) is equivalent to the following equation for w and π:
+(
+λ(w, v)H + a(w, v) + b(v, π) = (g, v)H,
+∀v ∈V,
+b(w, q) = 0,
+∀q ∈Q,
+(18)
+
+[PDF PAGE 6]
+6
+Tomoya Kemmochi
+and (17) is also equivalent to the problem
+(
+λ(wh, vh)H + a(wh, vh) + b(vh, πh) = (g, vh)H,
+∀v ∈Vh,
+b(wh, qh) = 0,
+∀qh ∈Qh,
+(19)
+where wh ∈Vh and πh ∈Qh are unknown functions. We assume that equation (18) admits the following estimate.
+Assumption 2. (A-4) For each g ∈H and λ ∈Σδ, equation (18) has a unique solution (w, π) ∈Vσ × Q, which
+admits the regularity w ∈D(A) and π ∈D(B). Moreover, the following resolvent estimate holds:
+|λ|∥w∥H + |λ|1/2∥w∥V + ∥Aw∥H + ∥Bπ∥H ≤C∥g∥H,
+where C is independent of g and λ.
+It is known that assumptions (A-1)–(A-4) allow us to obtain error estimates for the velocity.
+Theorem 2.1. Let δ ∈(0, π/2), and suppose that assumptions (A-1)–(A-4) hold. Then, we have
+
+h
+(λ + A)−1Pσ −(λ + Ah)−1Ph,σ
+i
+g
+
+V ≤Ch∥g∥H,
+(20)
+
+h
+(λ + A)−1Pσ −(λ + Ah)−1Ph,σ
+i
+g
+
+H ≤Ch2∥g∥H,
+(21)
+for any g ∈H and λ ∈Σδ, where Pσ : H →Hσ is the orthogonal projection and C is independent of h, g, and λ.
+An outline of the proof is given below. We refer the reader to [25, Theorems 3.2 and 4.2] for the detailed
+proof.
+Proof. Fix g ∈H, δ ∈(0, π/2), and λ ∈Σδ arbitrarily. Let (w, π) and (wh, πh) be the solutions of (18) and (19),
+respectively. Choose vh ∈Vh and qh ∈Qh arbitrarily and consider wh −vh and πh −qh. Substituting φh ∈Vh
+and ψh ∈Qh into (18) and (19), we have
+aλ(wh −vh, φh) + b(φh, πh −qh) = aλ(w −vh, φh) + b(φh, π −qh)
+=: V ′
+h⟨Fh, φh⟩Vh,
+∀φh ∈Vh,
+(22)
+and
+b(wh −vh, ψh) = b(w −vh, ψh) =: Q′
+h⟨Gh, ψh⟩Qh,
+∀ψh ∈Qh,
+(23)
+where
+aλ(u, v) = λ(u, v)H + a(u, v)
+for u, v ∈V . By the elementary inequality |sλ + t| ≥sin(δ/2)(s|λ| + t) for λ ∈Σπ−δ and s, t ≥0, we can obtain
+|aλ(v, v)| ≥α1∥v∥2
+H1(Ω)
+for all v ∈V , where α1 > 0 is independent of λ. Therefore, equations (22) and (23), the discrete inf-sup condition
+(A-1), and the generalized Lax-Milgram theorem (e.g., see [9, Theorem 2.34]) yield
+|λ|1/2∥wh −vh∥H + ∥wh −vh∥V + ∥πh −qh∥Q ≤C
+
+∥Fh∥V ′
+h + ∥Gh∥Q′
+h
+
+(24)
+for some constant C > 0, which is independent of h due to (A-1). From the deﬁnition of Fh and Gh, we have
+∥Fh∥V ′
+h + ∥Gh∥Q′
+h ≤C
+
+|λ|1/2∥w −vh∥H + ∥w −vh∥V + ∥π −qh∥Q
+
+,
+which implies, together with (24), that
+|λ|1/2∥w −wh∥H + ∥w −wh∥V + ∥π −πh∥Q ≤C
+
+|λ|1/2∥w −vh∥H + ∥w −vh∥V + ∥π −qh∥Q
+
+.
+Therefore, assumptions (A-2)–(A-4) lead to
+|λ|1/2∥w −wh∥H + ∥w −wh∥V + ∥π −πh∥Q ≤Ch∥g∥H,
+(25)
+which implies (20).
+
+[PDF PAGE 7]
+FEM for non-stationary saddle-point problems
+7
+The error estimate (21) is demonstrated by the standard duality argument. Consider the dual problem
+(
+λ(φ, ζ)H + a(φ, ζ) + b(φ, η) = (φ, w −wh)H,
+∀φ ∈V,
+b(ζ, ψ) = 0,
+∀ψ ∈Q.
+(26)
+The solution (ζ, η) ∈V × Q has the estimate
+|λ|∥ζ∥H + |λ|1/2∥ζ∥V + ∥Aζ∥H + ∥Bη∥H ≤C∥v −vh∥H,
+(27)
+from assumption (A-4). Substituting φ = w −wh into (26) and recalling equations (18) and (19), we have
+∥w −wh∥2
+H ≤Ch∥g∥H ×
+
+|λ|1/2∥ζ −ζh∥H + ∥ζ −ζh∥V + ∥η −ηh∥Q
+
+for any ζh ∈Vh and ηh ∈Qh. Hence, together with (A-2), (A-3), and (27), we obtain (21).
+3 Abstract results
+This section is devoted to the error estimates for the abstract Stokes problems.
+Theorem 3.1. Let u0 ∈Hσ and let (u, p) and (uh, ph) be the solutions of (9) and (14), respectively. Assume that
+(A-1)–(A-4) hold. Then, we have the following error estimates:
+∥u(t) −uh(t)∥V ≤Cht−1∥u0∥H,
+(28)
+∥u(t) −uh(t)∥H ≤Ch2t−1∥u0∥H,
+(29)
+∥ut(t) −uh,t(t)∥V ′ ≤Cht−1∥u0∥H,
+(30)
+∥p(t) −ph(t)∥Q ≤Cht−1∥u0∥H,
+(31)
+for all t ∈(0, T), where each constant C depends only on the constants appearing in assumptions (A-1)–(A-4), but is
+independent of h, u0, t, and T .
+Remark 2. The error estimates for the velocity (28) and (29) are given in [25, Theorems 3.1 and 4.1]. Although
+there is an error estimate for the pressure in [25], our result, (31), is strictly sharper. Indeed, it was shown that
+the estimate
+∥p(t) −ph(t)∥Q ≤Ch
+
+t−1 + t−3/2
+∥u0∥H
+holds in [25, Theorem 5.1].
+The estimates (28) and (29) are the consequence of the resolvent estimates (20) and (21), and the estimate
+for the pressure (31) is obtained from the discrete inf-sup condition (11). To show (30), we need another resolvent
+estimate.
+Lemma 3.1. Let δ ∈(0, π/2). Suppose that assumptions (A-1)–(A-4) hold. Then, we have
+
+h
+(λ + A)−1Pσ −(λ + Ah)−1Ph,σ
+i
+g
+
+V ′ ≤Ch|λ|−1∥g∥H,
+for any g ∈H and λ ∈Σδ, where C is independent of h, g, and λ.
+Proof. Fix g ∈H, δ ∈(0, π/2), and λ ∈Σδ arbitrarily, and let (w, π) and (wh, πh) be the solutions of (18) and
+(19), respectively. It is suﬃcient to show that
+(w −wh, v)H ≤Ch|λ|−1∥g∥H∥v∥V
+(32)
+holds for arbitrary v ∈V , since ∥F∥V ′ = supv∈V (F, v)H/∥v∥V for F ∈H ֒→V ′. Fix v ∈V and choose vh ∈Vh
+as in (A-2). Then,
+(w −wh, v)H = (w −wh, v −vh)H + (w −wh, vh)H =: I1 + I2.
+Since a standard energy method yields ∥w∥H + ∥wh∥H ≤C|λ|−1∥g∥H, we have
+|I1| ≤C|λ|−1∥g∥H · h∥v∥V
+
+[PDF PAGE 8]
+8
+Tomoya Kemmochi
+from assumption (A-2). Moreover, equations (18) and (19) imply
+λI2 = −a(w −wh, vh) −b(vh, π −πh).
+Together with (25), we have
+|I2| ≤Ch|λ|−1∥g∥H,
+which gives (32). Hence we can complete the proof.
+Proof of Theorem 3.1. (1) Proof of (28) and (29). The derivation of these estimates was originally presented in
+[25]. Indeed, one can check (28) and (29) directly from equation (15) and Theorem 2.1.
+(2) Proof of (30). From (15) and Lemma 3.1, we have
+∥ut(t) −uh,t(t)∥V ′ ≤
+Z
+Γ
+|λetλ| · Ch|λ|−1∥u0∥H|dλ| ≤Cht−1∥u0∥H,
+where Γ = ∂Σδ for an arbitrary δ ∈(0, π/2).
+(3) Proof of (31). Fix qh ∈Qh arbitrarily. Then, by the discrete inf-sup condition (11), we have
+β2∥ph(t) −qh∥Q ≤sup
+vh∈Vh
+b(vh, ph(t) −qh)
+∥vh∥V
+.
+The equations (9) and (14) yield
+b(vh, ph(t) −qh) = b(vh, p(t) −qh) + (ut(t) −uh,t(t), vh)H + a(u(t) −uh(t), vh),
+which leads to
+∥ph(t) −qh∥Q ≤C
+
+∥p(t) −qh∥Q + ht−1∥u0∥H
+
+∥vh∥V
+from (28) and (30). Therefore, noting p −ph = (p −qh) + (qh −ph), we have
+∥p(t) −ph∥Q ≤C∥p(t) −qh∥Q + Cht−1∥u0∥H.
+Finally, choosing qh ∈Qh as in assumption (A-3), we obtain
+∥p(t) −qh∥Q ≤Ch∥Bp(t)∥H ≤Cht−1∥u0∥H,
+since Bp = −ut −Au and u(t) = e−tAu0. This completes the proof.
+Remark 3. Throughout this section, we have considered the homogeneous problem (9). We now consider the
+inhomogeneous problem
+(
+(ut, v)H + a(u, v) + b(v, p) = ⟨f, v⟩V,V ′,
+∀v ∈V,
+b(u, q) = 0,
+∀q ∈Q,
+with external force f : (0, T) →V ′. If f ∈Cθ([0, T]; H) for some θ ∈(0,1], then we have
+∥u(t) −uh(t)∥H + h∥u(t) −uh(t)∥V ≤Ch
+
+t−1∥u0∥H + tθ|f|Cθ([0,T ];H) + ∥f(t)∥H
+
+by the same argument as in [10, § 5]. However, we cannot extend this result to the V ′-error estimate and the
+pressure estimate at present.
+4 Applications
+In this section, we apply Theorem 3.1 to the non-stationary Stokes and the hydrostatic Stokes problem. Here-
+after, L2(Ω) and Hs(Ω) denote the Lebesgue and Sobolev spaces, respectively.
+
+[PDF PAGE 9]
+FEM for non-stationary saddle-point problems
+9
+4.1 Non-stationary Stokes equation
+Let Ω⊂Rd (d = 2, 3) be a convex polygonal or polyhedral domain. We consider the non-stationary Stokes
+equations in Ωwith the homogeneous Dirichlet boundary condition:
+
+
+
+
+
+(ut(t),v) + (∇u(t), ∇v) −(div v, p(t)) = 0,
+∀v ∈H1
+0(Ω)d,
+(div u(t), q) = 0,
+∀q ∈L2
+0(Ω),
+u(0) = u0,
+(33)
+where u0 ∈L2σ(Ω). Here, we use the usual notation
+H1
+0(Ω) = {v ∈H1(Ω) | v|∂Ω= 0},
+L2
+0(Ω) = {q ∈L2(Ω) | R
+Ωq = 0},
+H1
+0,σ(Ω) = {v ∈H1
+0(Ω)d | div v = 0},
+L2
+σ(Ω) = H1
+0,σ(Ω)
+∥·∥L2 ,
+and let (·, ·) denote the L2-inner product over Ω. Let H = L2(Ω)d, V = H1
+0(Ω)d, Q = L2
+0(Ω), a(u, v) = (∇u, ∇v),
+and b(v, q) = −(div v, q). Then, Hσ = L2σ(Ω) and Vσ = H1
+0,σ(Ω). We also deﬁne the operators A and B as in
+Section 2. The domain of A coincides with H2(Ω) ∩Vσ and the estimate
+∥v∥H2 ≤C∥Av∥L2,
+∀v ∈D(A),
+(34)
+holds since Ωis a convex polygon or polyhedron (see [20] for the 2D case and [8] for the 3D case). Hence,
+assumption (A-4) holds.
+Next, we consider the ﬁnite element approximation of (33). Let Th be a conforming triangulation (or tetrahe-
+dralization) of Ωwith parameter h = maxK∈Th diam K. We deﬁne the pair of approximation spaces (Vh, Qh) as
+the P 1-bubble-P 1 element (MINI element) or P 2-P 1 element (Taylor-Hood) with respect to Th. For the precise
+deﬁnition, see, e.g., [9]. We set Vh,σ as in (13). If Th is shape-regular and quasi-uniform, then we can check that
+assumptions (A-1)–(A-3) hold, together with (34) (see, e.g., [1,9]).
+The approximation scheme is as follows. Find (uh(t), ph(t) ∈Vh × Qh which satisﬁes
+
+
+
+
+
+(uh,t(t), vh) + (∇uh(t),∇vh) −(div vh, ph(t)) = 0,
+∀vh ∈Vh,
+(div uh(t), qh) = 0,
+∀qh ∈Qh,
+uh(0) = Ph,σu0,
+(35)
+where Ph,σ is the L2-projection onto Vh,σ, as in (14). Then, since we have already checked that assumptions
+(A-1)–(A-4) hold, we can state the following error estimates.
+Theorem 4.1. Let Ωbe a convex polygonal or polyhedral domain, Th be a shape-regular and quasi-uniform triangu-
+lation of Ω, and (Vh, Qh) be the pair of ﬁnite elements mentioned above. Let (u, p) and (uh, ph) be the solutions of
+(33) and (35), respectively, for the initial value u0 ∈L2σ(Ω). Then, we have the following error estimates:
+∥u(t) −uh(t)∥H1 ≤Cht−1∥u0∥L2,
+∥u(t) −uh(t)∥L2 ≤Ch2t−1∥u0∥L2,
+∥ut(t) −uh,t(t)∥H−1 ≤Cht−1∥u0∥L2,
+∥p(t) −ph(t)∥L2 ≤Cht−1∥u0∥L2,
+for all t > 0, where each constant C is independent of h, u0, t, and T .
+Remark 4. For the MINI element, the convergence rate is optimal. However, for the Taylor-Hood element, it
+is not. We leave the investigation of the optimal order error estimates for higher order elements as an area for
+future work.
+
+[PDF PAGE 10]
+10
+Tomoya Kemmochi
+4.2 Non-stationary hydrostatic Stokes equation
+The second example is the hydrostatic Stokes problem, which is a linearized form of the primitive equations.
+Let G = (0,1) ⊂R2 and Ω= G × (−D, 0) ⊂R3 with D > 0. The unknown functions of the hydrostatic Stokes
+equations are the horizontal velocity u: Ω× (0, T) →R2 and the surface pressure p: G × (0, T) →R, as follows.
+
+
+
+
+
+ut −∆u + ∇Hp = 0,
+in Ω× (0, T),
+divH ¯u = 0,
+in Ω× (0, T),
+u(·, 0) = u0,
+in Ω,
+(36)
+with boundary conditions
+
+
+
+
+
+∂zu = 0,
+on Γu := G × {0},
+u = 0,
+on Γb := G × {−D},
+u is periodic
+on Γl := ∂G × (−D, 0),
+(37)
+where ∇Hq = (∂xq, ∂yq)T , divH v = ∂xv1 + ∂yv2, and ¯v(x, y) = R 0
+−D v(x, y, z)dz.
+Let H = L2(Ω)2, V = {v ∈H1(Ω)2 | v|Γb = 0 and v|Γl is periodic}, Q = L2
+0(G), a(u, v) = (∇u, ∇v)Ωfor
+u, v ∈V , and b(v, q) = −(divH ¯v, q)G for (v, q) ∈V ×Q, where (·, ·)X denotes the L2-inner product over a domain
+X. Then, the weak formulation of the problem (36) and (37) is described by equation (9), i.e.,
+(
+(ut(t), v)Ω+ (∇u, ∇v)Ω−(divH ¯v, p)G = 0,
+∀v ∈V,
+(divH ¯u, q)G = 0,
+∀q ∈Q.
+Thus, we can construct a ﬁnite element scheme for the hydrostatic Stokes equations. Let Th be a tetrahedral-
+ization (a set of open tetrahedra) of Ωwith h = maxK∈Th diam K, and let ˜Th be the triangulation of G induced
+by Th. Namely,
+˜Th = {T ⊂G | ∃K ∈Th s.t. T = G ∩∂K},
+where T and G are the closures in R2. We suppose that
+• Vh is the space of P 2-ﬁnite elements or P 1-bubble ﬁnite elements with respect to Th, and each vh ∈Vh
+vanishes on Γb and is periodic on Γl,
+• Qh is the space of P 1-ﬁnite elements with respect to ˜Th and R
+G qh = 0 for each qh ∈Qh.
+Then, we can introduce the ﬁnite element approximations for (36) and (37) as follows. Find uh : (0, T) →Vh
+and ph : (0, T) →Qh which satisfy
+
+
+
+
+
+(uh,t(t), vh)Ω+ (∇uh, ∇vh)Ω−(divH ¯vh, ph)G = 0,
+∀vh ∈Vh,
+(divH ¯uh, qh)G = 0,
+∀qh ∈Qh,
+(uh(0),vh)Ω= (u0, vh)Ω,
+∀vh ∈Vh,σ,
+(38)
+where Vh,σ is deﬁned by (13).
+In order to discuss the error estimates in the framework of Theorem 3.1, we should check conditions (A-
+1)–(A-4). Let A be the operator deﬁned by (10), which is called the hydrostatic Stokes operator in the present
+case. Then, it is known that 0 ∈ρ(A), A generates a bounded analytic semigroup on Hσ, and A satisﬁes the
+regularity property
+∥v∥H2(Ω) ≤C∥Av∥L2(Ω),
+∀v ∈D(A).
+We refer to [19, Theorem 3.1] for the proof. Therefore, we can check that conditions (A-2)–(A-4) hold.
+Finally, we conﬁrm (A-1) holds by introducing a prismatic mesh.
+Deﬁnition 1. We say that a tetrahedralization Th of Ωis prismatic if the following condition holds: for each
+K ∈Th, there exists T ∈˜Th such that
+K ⊂PT := {(x, y, z) ∈Ω| (x, y,0) ∈T },
+where ˜Th is the triangulation of G induced by Th.
+We can construct such a mesh by the following procedure.
+1. Triangulate the surface G and denote the triangulation by ˜Th.
+
+[PDF PAGE 11]
+FEM for non-stationary saddle-point problems
+11
+2. Construct a prism PT in Ωfor each T ∈˜Th.
+3. Decompose each prism PT into tetrahedra so that the set of tetrahedra becomes a conforming tetrahedral-
+ization of Ω.
+In [7], it is proved that the pair (Vh, Qh) mentioned above satisﬁes the discrete inf-sup condition (11), provided
+that the mesh is prismatic. Indeed, if the mesh is prismatic, then we can extend a function qh ∈Qh naturally
+to a piecewise linear function over the mesh Th, and thus we can use the usual inf-sup condition for the MINI
+element or Taylor-Hood element. Hence, we can conﬁrm (A-1) holds.
+Therefore, we can apply Theorem 3.1 and obtain the following error estimates.
+Theorem 4.2. Let Ω, Th, and (Vh, Qh) be as described above. Assume that the mesh Th is shape-regular, quasi-
+uniform, and prismatic. Let (u, p) and (uh, ph) be the solutions of (36) and (38), respectively, for the initial value
+u0 ∈L2(Ω)2 satisfying divH ¯
+u0 = 0 in the distributional sense. Then, we have the following error estimates:
+∥u(t) −uh(t)∥H1(Ω) ≤Cht−1∥u0∥L2(Ω),
+∥u(t) −uh(t)∥L2(Ω) ≤Ch2t−1∥u0∥L2(Ω),
+∥ut(t) −uh,t(t)∥V ′ ≤Cht−1∥u0∥L2(Ω),
+∥p(t) −ph(t)∥L2(G) ≤Cht−1∥u0∥L2(Ω),
+for all t > 0, where each constant C is independent of h, u0, t, and T , and V ′ is the dual space of V = {v ∈H1(Ω)2 |
+v|Γb = 0 and v|Γl is periodic}.
+5 Concluding remarks
+In the present paper, we considered the abstract non-stationary saddle-point problem (9) and its ﬁnite element
+approximation (14). Our main contribution (Theorem 3.1) is the derivation of error estimates for the velocity
+and the pressure in various norms. In particular, the error estimate for the pressure with the optimal singularity
+(i.e., the term t−1) is a new result. We then applied this result to establish error estimates for the ﬁnite element
+approximation for the non-stationary Stokes and the hydrostatic Stokes equations. However, as mentioned in
+Remark 3, we have not obtained the error estimates for the pressure for inhomogeneous problems. Moreover,
+the convergence rate is not optimal for ﬁnite elements of higher degree (Remark 4). Furthermore, we should
+consider a numerical analysis for the primitive equations (3) in the framework of analytic semigroup theory, as
+performed in [24] for the two-dimensional Navier-Stokes equations. These problems remain an area for future
+work.
+Acknowledgements The author would like to thank Professor Matthias Hieber for suggesting this topic and encouraging the
+author through valuable discussions during the author’s stay in TU Darmstadt. This work was supported by the Program for
+Leading Graduate Schools, MEXT, Japan, JSPS KAKENHI grant number 15J07471, JSPS-DFG Japanese-German Graduate
+Externship, and IRTG 1529 on Mathematical Fluid Dynamics.
+References
+1. S. C. Brenner and L. R. Scott. The mathematical theory of ﬁnite element methods. Springer, New York, third edition, 2008.
+2. C. Cao and E. S. Titi. Global well-posedness of the three-dimensional viscous primitive equations of large scale ocean and
+atmosphere dynamics. Ann. of Math. (2), 166(1):245–267, 2007.
+3. T. Chac´on-Rebollo, V. Girault, M. G´omez-M´armol, and I. S´anchez-Mu˜noz. A reduced discrete inf-sup condition in Lp for
+incompressible ﬂows and application. ESAIM Math. Model. Numer. Anal., 49(4):1219–1238, 2015.
+4. T. Chac´on-Rebollo, M. G´omez-M´armol, and I. S´anchez-Mu˜noz. Numerical solution of the primitive equations of the ocean
+by the orthogonal sub-scales VMS method. Appl. Numer. Math., 62(4):342–359, 2012.
+5. T. Chac´on-Rebollo and D. Rodr´ıguez-G´omez. A stabilized space-time discretization for the primitive equations in oceanog-
+raphy. Numer. Math., 98(3):427–475, 2004.
+6. T. Chac´on-Rebollo and D. Rodr´ıguez-G´omez. A numerical solver for the primitive equations of the ocean using term-by-term
+stabilization. Appl. Numer. Math., 55(1):1–31, 2005.
+7. T. Chac´on-Rebollo and F. Guill´en-Gonz´alez. An intrinsic analysis of existence of solutions for the hydrostatic approximation
+of Navier-Stokes equations. C. R. Acad. Sci. Paris S´er. I Math., 330(9):841–846, 2000.
+8. M. Dauge. Stationary Stokes and Navier-Stokes systems on two- or three-dimensional domains with corners. I. Linearized
+equations. SIAM J. Math. Anal., 20(1):74–97, 1989.
+9. A. Ern and J.-L. Guermond. Theory and practice of ﬁnite elements, volume 159 of Applied Mathematical Sciences. Springer-
+Verlag, New York, 2004.
+
+[PDF PAGE 12]
+12
+Tomoya Kemmochi
+10. H. Fujita and A. Mizutani. On the ﬁnite element method for parabolic equations. I. Approximation of holomorphic semi-
+groups. J. Math. Soc. Japan, 28(4):749–771, 1976.
+11. P. Grisvard. Elliptic problems in nonsmooth domains, volume 24 of Monographs and Studies in Mathematics. Pitman
+(Advanced Publishing Program), Boston, MA, 1985.
+12. F. Guill´en-Gonz´alez and J. R. Rodr´ıguez-Galv´an. Analysis of the hydrostatic Stokes problem and ﬁnite-element approxi-
+mation in unstructured meshes. Numer. Math., 130(2):225–256, 2015.
+13. F. Guill´en-Gonz´alez and J. R. Rodr´ıguez-Galv´an. Stabilized schemes for the hydrostatic Stokes equations. SIAM J. Numer.
+Anal., 53(4):1876–1896, 2015.
+14. F. Guill´en-Gonz´alez and J. R. Rodr´ıguez-Galv´an. Finite element approximation of hydrostatic Stokes equations: review
+and tests. In Trends in diﬀerential equations and applications, volume 8 of SEMA SIMAI Springer Ser., pages 433–451.
+Springer, [Cham], 2016.
+15. F. Guill´en-Gonz´alez and J. R. Rodr´ıguez-Galv´an. On the stability of approximations for the Stokes problem using diﬀerent
+ﬁnite element spaces for each component of the velocity. Appl. Numer. Math., 99:51–76, 2016.
+16. F. Guill´en-Gonz´alez and D. Rodr´ıguez-G´omez. Bubble ﬁnite elements for the primitive equations of the ocean. Numer.
+Math., 101(4):689–728, 2005.
+17. F. Guill´en-Gonz´alez and M. V. Redondo-Neble. Convergence and error estimates of viscosity-splitting ﬁnite-element schemes
+for the primitive equations. Appl. Numer. Math., 111:219–245, 2017.
+18. Y. He, Y. Zhang, H. Xu, and Z. Chen.
+First-order decoupled ﬁnite element method of the three-dimensional primitive
+equations of the ocean. SIAM J. Sci. Comput., 38(1):A273–A301, 2016.
+19. M. Hieber and T. Kashiwabara. Global strong well-posedness of the three dimensional primitive equations in Lp-spaces.
+Arch. Ration. Mech. Anal., 221(3):1077–1115, 2016.
+20. R. B. Kellogg and J. E. Osborn. A regularity result for the Stokes problem in a convex polygon. J. Functional Analysis,
+21(4):397–431, 1976.
+21. J.-L. Lions, R. Temam, and S. H. Wang.
+New formulations of the primitive equations of atmosphere and applications.
+Nonlinearity, 5(2):237–288, 1992.
+22. J.-L. Lions, R. Temam, and S. H. Wang. On the equations of the large-scale ocean. Nonlinearity, 5(5):1007–1053, 1992.
+23. J.-L. Lions, R. Temam, and S. H. Wang. Mathematical theory for the coupled atmosphere-ocean models. (CAO III). J.
+Math. Pures Appl. (9), 74(2):105–163, 1995.
+24. H. Okamoto. On the semidiscrete ﬁnite element approximation for the nonstationary Navier-Stokes equation. J. Fac. Sci.
+Univ. Tokyo Sect. IA Math., 29(3):613–651, 1982.
+25. H. Okamoto. On the semidiscrete ﬁnite element approximation for the nonstationary Stokes equation. J. Fac. Sci. Univ.
+Tokyo Sect. IA Math., 29(1):241–260, 1982.
+26. A. Pazy. Semigroups of linear operators and applications to partial diﬀerential equations, volume 44 of Applied Mathematical
+Sciences. Springer-Verlag, New York, 1983.

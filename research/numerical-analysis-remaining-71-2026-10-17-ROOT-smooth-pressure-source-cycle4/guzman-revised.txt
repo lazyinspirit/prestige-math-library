@@ -1,0 +1,730 @@
+[PDF PAGE 1]
+DISCRETE EXTENSION OPERATORS FOR MIXED FINITE ELEMENT
+SPACES ON LOCALLY REFINED MESHES
+MARK AINSWORTH, JOHNNY GUZM´AN, AND FRANCISCO-JAVIER SAYAS
+Abstract. The existence of uniformly bounded discrete extension operators is established for
+conforming Raviart-Thomas and N´edelec discretisations of H(div) and H(curl) on locally reﬁned
+partitions of a polyhedral domain into tetrahedra.
+1. Introduction
+Many boundary value problems with non-homogeneous boundary data may be cast in the abstract
+variational form: ﬁnd u ∈X such that γu = g ∈M and
+(1.1)
+B(u, v) = F (v)
+∀v ∈X0
+where X is a Hilbert space over a domain Ω, M is a Hilbert space over the boundary Γ of Ω, and
+γ : X →M is a trace operator with X0 = {v ∈X : γv = 0}. We assume that the bilinear and
+linear forms B : X × X →R and F : X →R satisfy suitable conditions (e.g. inf-sup stability and
+continuity) for the problem to be well-posed; speciﬁc examples will be given later.
+A Galerkin ﬁnite element approximation uh ≈u is obtained by selecting a ﬁnite dimensional
+subspace Xh ⊂X, setting Mh = γXh, constructing a suitable approximation gh ≈g of the non-
+homogeneous boundary data, and seeking uh ∈Xh such that γuh = gh ∈Mh and
+(1.2)
+B(uh, vh) = F (vh)
+∀vh ∈Xh0 = {vh ∈Xh : γvh = 0}.
+The discrete problem (1.2) is well-posed provided that there exists a positive constant β > 0 such
+that
+(1.3)
+sup
+vh∈Xh0,∥vh∥X=1
+B(wh, vh) ≥β∥wh∥X
+for all wh ∈Xh0.
+The issue of the accuracy of the resulting approximation is usually addressed by reference to the
+following classical C´ea type estimate
+(1.4)
+∥u −uh∥X ≤
+
+1 + κ
+β
+
+inf
+wh∈Xh:γwh=gh ∥u −wh∥X,
+where κ is the continuity constant of the bilinear form B. To prove this result one ﬁrst proves an
+estimate for uh−wh and then applies the triangle inequality. To do this, we note that γ(uh−wh) = 0
+then apply (1.3), Galerkin orthogonality (e.g. (1.1) and (1.2)), and use continuity of B. As a side
+note, perhaps one can avoid using the triangle inequality by using the techniques in [23].
+It is clear that the accuracy depends on both the choice of ﬁnite dimensional subspace Xh ⊂X
+and on the choice gh ≈g of the approximate Dirichlet boundary condition.
+Nevertheless, the
+Date: March 2, 2015.
+1991 Mathematics Subject Classiﬁcation. 76M10,65N30,65N12.
+Key words and phrases. ﬁnite elements, Stokes, conforming, divergence-free.
+Partial support for MA under AFOSR contract FA9550-12-1-0399 is gratefully acknowledged. FJS was partially
+funded by the NSF grant DMS 1216356.
+1
+
+[PDF PAGE 2]
+2
+MARK AINSWORTH, JOHNNY GUZM´AN, AND FRANCISCO-JAVIER SAYAS
+bound (1.4) is somewhat unsatisfactory. In particular, whilst Xh ⊂X and gh ≈g can essentially be
+chosen independently of one another, the inﬂuence of each choice on the accuracy of the resulting
+ﬁnite element approximation is obscured through the requirement that the choice of comparator
+wh ∈Xh is constrained to satisfy the boundary condition γwh = gh.
+Under what conditions is it possible to obtain an error estimate of the form
+(1.5)
+∥u −uh∥X ≤C( inf
+vh∈Xh ∥u −vh∥X + ∥g −gh∥M),
+in which the individual contributions to the error corresponding to the choice of Xh ⊂X and
+gh ≈g are isolated? Suppose that there exists a uniformly bounded discrete extension operator
+Lh : Mh →Xh such that
+(1.6)
+(P 1)
+γLhµh = µh
+∀µh ∈Mh;
+(P 2)
+∥Lhµh∥X ≤CL∥µh∥M
+∀µh ∈Mh.
+Let vh ∈Xh be arbitrary, and set wh = vh −Lh(γvh −gh) ∈Xh, so that γwh = gh on Γ and
+uh −wh ∈Xh0. With this choice, estimate (1.4) then gives
+(1.7)
+∥u −uh∥X ≤
+
+1 + κ
+β
+
+∥u −vh + Lh(γvh −gh)∥X.
+With the aid of the triangle inequality and (P 2), the right hand side in the above estimate may be
+bounded by ∥u −vh∥X + CL∥γvh −gh∥M. The second term in this expression can be bounded by
+inserting 0 = γu −g, applying the triangle inequality and using the continuity of the trace operator
+γ : X →M to obtain ∥γvh −gh∥M ≤C∥vh −u∥X + ∥g −gh∥M. Combining the above estimates, we
+conclude that (1.5) holds whenever there exists a discrete extension operator satisfying (P 1)-(P 2).
+Interestingly, the existence of an operator satisfying (P 1) −(P 2) is also necessary for a bound of
+the form (1.5) to hold [13,20].
+The existence of uniformly bounded discrete extension operators satisfying (P 1)-(P 2) is important
+in many areas of numerical analysis including the construction of domain decomposition precondi-
+tioners [24]. The main purpose of the current work is to establish the existence of discrete extension
+operators satisfying (P 1)-(P 2) in the case where the discrete spaces are taken to be conforming
+discretisations of H(div) and H(curl), i.e. Raviart-Thomas and N´ed´elec spaces, on on general shape
+regular mesh partitioning of a polyhedral domain into tetrahedra.
+Various results concerning stable extension operators are interspersed in the literature. There is
+a number of results available in the literature concerning discrete extensions from the boundary to
+the interior on a single isolated element [12], but the fact that the norms on the trace spaces are
+not additive means that one cannot prove the results for collections of elements by simply summing
+contributions from individual elements. The case of Raviart-Thomas elements on a two-dimensional
+domain appears in [4] applied to the analysis of weakly imposed essential boundary conditions for
+the mixed Laplacian for the case of quasi-uniform triangulations, and was subsequently extended [14]
+to cover meshes that are quasi-uniform in a neighborhood of the boundary. Subsequently, the case
+of general non-quasi-uniform meshes was covered in [17] although, unfortunately, the arguments
+used seem to be limited to the two-dimensional setting. Stable discrete extensions for H(curl, Ω)
+conforming spaces have also appeared in the literature and have important applications; see [1,15,16].
+Again, the results in these articles assume some degree of quasi-uniformity.
+The approach employed in the present work for the treatment of Raviart-Thomas elements is
+similar to the idea used in [4, Lemma 3.2] and [14, Lemma 5.1] without, however, requiring quasi-
+uniformity of the mesh. The key to relaxing the conditions on the mesh is to develop local regularity
+estimates along with discrete norm equivalences valid on general shape regular meshes [2], and to
+show that the operator deﬁned in [14] is, in fact, uniformly bounded on general shape regular meshes.
+The proof of a bounded discrete extension operator for N´ed´elec spaces is similar to a proof found
+in [15]. The idea is to ﬁrst split the discrete trace using a discrete Hodge decomposition and to then
+
+[PDF PAGE 3]
+DISCRETE EXTENSION OPERATORS
+3
+use our extension result for Raviart-Thomas elements to handle one component of the splitting, with
+the remaining component treated using an idea adapted from [17]. The resulting extension yields a
+divergence-free ﬁeld which therefore belongs Brezzi-Douglas-Marini space. Consequently, our results
+for the Raviart-Thomas case (i.e. N´ed´elec spaces in the three dimensional case [18]) extend to the
+three dimensional counterpart of the Brezzi-Douglas-Marini ﬁnite element [9,19].
+The plan of the paper is as follows. The main results are stated in Section 2. Proofs are given
+in Sections 3 for the Raviart-Thomas elements, and in Section 4 for the N´ed´elec elements. The
+local regularity estimates needed in Section 3 are given in the Appendix. Basic results on the spaces
+H1(Ω), H(div, Ω), and H(curl, Ω) will be assumed throughout. The symbol ≲will be used as follows:
+for two quantities ah and bh depending on the triangulations (see below), we write ah ≲bh, whenever
+there exists C > 0 independent of h, such that ah ≤Cbh. The quantity C will be allowed to depend
+on: the polynomial degree, the shape-regularity of the triangulation, and the domain.
+2. Main results
+Let Ω⊂R3 be a connected polyhedral Lipschitz domain. The unit outward pointing normal
+vector ﬁeld on Γ := ∂Ωwill be denoted by n. Let now Th be a shape regular simplicial triangulation
+of Ωwhich, however, need not be quasi-uniform. For each K ∈Th we let hK denote the diameter of
+K. We then consider the spaces of Raviart-Thomas and N´ed´elec ﬁnite elements:
+Vh
+:=
+{q ∈H(div, Ω) : q|K ∈[Pk(K)]3 + Pk(K)x, for all K ∈Th},
+Nh
+:=
+{q ∈H(curl, Ω) : q|K ∈[Pk(K)]3 + [Pk(K)]3 × x, for all K ∈Th},
+where Pk(S) is the space of polynomials of degree k or less deﬁned on S. On the boundary Γ, we
+consider the induced triangulation,
+Γh = {∂Ω∩∂K : for all K ∈Th},
+and two spaces
+Mh
+:=
+{q · n : q ∈Vh} = {v : v|F ∈Pk(F ) for all F ∈Γh}
+Rh
+:=
+{q × n : q ∈Nh} = {r ∈H(divΓ, Γ) : r|F ∈[Pk(F )]2 + Pk(F )xt for all F ∈Γh}.
+In the last space xt := x −(x · n)n is the tangential position vector, and divΓ is the tangential
+divergence operator. We also consider M 0
+h to be the subset of Mh consisting of elements whose
+average value vanishes.
+Let S be a d-dimensional domain, then the fractional Sobolev norms on S are deﬁned as follows:
+for non-negative integer k and 0 < s < 1, we deﬁne
+∥v∥2
+Hk+s(S) = ∥v∥2
+Hk(S) + |v|2
+Hk+s(S),
+where
+|v|2
+Hk+s(S) =
+X
+|α|=k
+Z
+S
+Z
+S
+|∂αv(x) −∂αv(y)|2
+|x −y|d+2s
+dxdy
+is the Slobodetskij seminorm and ∥· ∥Hk(S) is the usual Sobolev norm. For negative s, H−s(S) is
+the dual space of Hs
+0(S), the closure in Hs(S) of the set of smooth compactly supported functions.
+In particular, in the case of the closed surface Γ, we can write for functions v ∈L2(Γ):
+∥v∥H−1/2(Γ) =
+sup
+w∈C∞(Γ),∥w∥H1/2(Γ)=1
+Z
+Γ
+vw.
+As noted before, the operator Vh ∋v 7→v ·n ∈Mh is surjective. The next result shows that there
+is a right-inverse of this operator that is bounded as an operator H−1/2(Γ) →H(div; Ω), uniformly
+
+[PDF PAGE 4]
+4
+MARK AINSWORTH, JOHNNY GUZM´AN, AND FRANCISCO-JAVIER SAYAS
+in the mesh size. Using the result [17, Theorem 5.1] it is enough to establish the uniform extension
+for data in M 0
+h.
+Theorem 2.1. There exists a constant C depending only on the shape regularity of Th and on Ω
+such that for any gh ∈M 0
+h there exists σh ∈Vh with the following properties:
+(a) σh · n = gh on Γ,
+(b) ∥σh∥H(div;Ω) ≲∥gh∥H−1/2(∂Ω),
+(c) div σh = 0 in Ω.
+The second result concerns the N´ed´elec space, asserting the existence of a uniformly bounded
+right-inverse of the operator Nh ∋wh 7→wh × n ∈Rh.
+In order to state the result we need to deﬁne the trace space of the curl operator.
+H−1/2
+∥
+(divΓ; Γ) := {r ∈H−1/2
+∥
+(Γ) : divΓr ∈H−1/2(Γ)},
+with norm
+∥r∥2
+H−1/2
+∥
+(divΓ;Γ) = ∥r∥2
+H−1/2
+∥
+(Γ) + ∥divΓr∥2
+H−1/2(Γ).
+The space H−1/2
+∥
+(Γ) along with the norm are deﬁned in [6]; see also [7,8].
+In [6] the following continuity result was proved.
+Proposition 2.2. For w ∈H(curl; Ω), w × n ∈H−1/2
+∥
+(divΓ; Γ) with the bound
+(2.1)
+∥w × n∥H−1/2
+∥
+(divΓ;Γ) ≲∥w∥H(curl;Ω).
+Theorem 2.3. There exists a constant C depending only on the shape regularity of Th and on Ω
+such that for any rh ∈Rh there exists wh ∈Nh with the following properties:
+(a) wh × n = rh on Γ,
+(b) ∥wh∥H(curl;Ω) ≲∥rh∥H−1/2
+∥
+(divΓ;Γ).
+3. Discrete Extension Operators for Raviart-Thomas Finite Element Spaces
+We ﬁrst recall some properties of the Raviart-Thomas projection. Let v ∈H1/2+s(Ω) for some
+s > 0. Then we deﬁne Πv ∈Vh satisfying
+Z
+F
+(Πv · n)w =
+Z
+F
+(v · n)w
+∀w ∈Pk(F )
+∀F ∈Eh,
+Z
+K
+Πv · w =
+Z
+K
+v · w
+∀w ∈[Pk−1(K)]3
+∀K ∈Th
+(see [5, Example 2.5.3]). Here Eh is the set of all faces of the triangulation. The following classical
+result can be found in [5, Propositions 2.5.1, 2.5.2].
+Proposition 3.1. For every v ∈(H1/2+s(Ω))3 one has
+(a) div Πv = P divv,
+(b) ∥Πv −v∥L2(K) ≲h1/2+s
+K
+∥v∥H1/2+s(K) for all K ∈Th,
+where P is the L2(Ω)-orthogonal projection onto the space of piecewise Pk(K) functions.
+The following inverse inequality will play a key role in our analysis.
+Lemma 3.2. For any g ∈Mh we have
+X
+F∈Γh
+hF∥gh∥2
+L2(F) ≲∥gh∥2
+H−1/2(Γ)
+
+[PDF PAGE 5]
+DISCRETE EXTENSION OPERATORS
+5
+Proof. This result is a consequence of basic estimates given in [2]. Let {ϕi,F : i = 1, . . ., dimPk(F )}
+be a basis for Pk(F ) built by pushing forward the Lagrange basis on the reference element. Then
+we decompose gh = P
+F
+P
+i gi,Fϕi,F, and estimate
+X
+F∈Γh
+hF∥gh∥2
+L2(F) ≲
+X
+F
+X
+i
+hF |gi,F|2∥ϕi,F∥2
+L2(F)
+≲
+X
+F
+X
+i
+h3
+F |gi,F|2
+(simple computation)
+≲
+X
+F
+X
+i
+∥gi,Fϕi,F∥2
+H−1/2(Γ)
+(by [2, Theorem 4.8])
+≲∥gh∥2
+H−1/2(Γ),
+(by [2, Lemma 5.4])
+which ﬁnishes the proof.
+□
+We also need elliptic regularity results; see for example [11] for the case g = 0. Consider the
+Poisson problem with Neumann boundary conditions
+−△u =
+f
+on Ω
+(3.1a)
+∇u · n =
+g
+on Γ,
+(3.1b)
+under the assumption that R
+Γ g + R
+Ωf = 0 and R
+Ωu = 0. Then, there exist C > 0 and s ∈(0, 1/2)
+such that
+(3.2)
+∥u∥H3/2+s(Ω) ≤C
+ ∥f∥H−1/2+s(Ω) + ∥g∥Hs(Γ)
+
+.
+We can localize this regularity result to obtain:
+Theorem 3.3. Suppose that f ≡0 in (3.1) and let σ = ∇u. Then for each K ∈Th we have
+∥σ∥H1/2+s(K) ≤C(h−1/2−s
+K
+∥σ∥L2(DK ) + ∥g∥Hs(∂DK∩Γ) + h−s
+K ∥g∥L2(∂DK∩Γ)),
+where
+DK := ∪{K′ ∈Th : K ∩K′ ̸= ∅}
+is the collection of tetrahedra sharing one or more vertices with K.
+The proof of this result is contained in Appendix A.
+Proof of Theorem 2.1. Let u satisfy
+−△u =
+0
+on Ω,
+∇u · n =
+gh
+on Γ,
+and set σ = ∇u ∈(H1/2+s(Ω))3 (see (3.2)). Note that div σ = 0. We deﬁne σh = Πσ and we note
+that Theorem 2.1 (a) holds, and that by Proposition 3.1(a), div σh = 0. Therefore, using elliptic
+regularity, Proposition 3.1(b) and Lemma 3.2,
+∥σh∥H(div;Ω) =∥σh∥L2(Ω) ≤∥σ∥L2(Ω) + ∥σ −σh∥L2(Ω)
+≲∥gh∥H−1/2(Γ) + ∥σ −σh∥L2(Ω)
+≲∥gh∥H−1/2(Γ) + (
+X
+K∈Th
+h2(1/2+s)
+K
+∥σ∥2
+H1/2+s(K))1/2
+≲∥gh∥H−1/2(Γ)
++
+ X
+K∈Th
+∥σ∥2
+L2(DK) + h2(1/2+s)
+K
+∥gh∥2
+Hs(∂DK∩Γ) + hK∥gh∥2
+L2(∂DK∩Γ)
+!1/2
+.
+
+[PDF PAGE 6]
+6
+MARK AINSWORTH, JOHNNY GUZM´AN, AND FRANCISCO-JAVIER SAYAS
+The shape regularity of the elements means that
+X
+K∈Th
+∥σ∥2
+L2(DK ) ≲∥σ∥2
+L2(Ω).
+Also, if we let DF to be the macro-element surrounding F (triangles sharing a vertex with F ), we
+have that
+X
+K∈Th
+h2(1/2+s)
+K
+∥gh∥2
+Hs(∂DK∩Γ) ≲
+X
+F∈Γh
+h2(1/2+s)
+F
+∥gh∥2
+Hs(DF )
+≲
+X
+F∈Γh
+hF∥gh∥2
+L2(DF ) ≲
+X
+F∈Γh
+hF∥gh∥2
+L2(F),
+where we have used a standard local inverse estimate for piecewise polynomial functions. Applying
+Lemma 3.2 completes the proof.
+□
+As an application we can get an error estimate for the Laplacian in mixed form with Neumann
+boundary conditions. In this case X = H(div, Ω) × L2(Ω) and the trace space is M = H−1/2(∂Ω)
+with trace operator γ(σ, u) = σ · n. The bilinear form B and the linear form F are given by
+B((σ, u), (η, w)) :=
+Z
+Ω
+(σ · η −u div η + w div σ)
+F ((η, w)) :=
+Z
+Ω
+fw
+for a given f ∈L2. Of course, the ﬁnite element space will be Xh = Vh × Uh where
+Uh = {w : Ω→R : w|K ∈Pk(K)
+∀K ∈Th}.
+In view of Theorem 2.1 and the introductory discussion, we have the following error estimates for
+Raviart-Thomas elements.
+Corollary 3.4. Let X = H(div, Ω)×L2(Ω) , M = H−1/2(∂Ω) and Xh = Vh×Uh. Let (σ, u) satisfy
+(1.1) and (σh, uh) satisfy (1.2) then the following holds
+∥σ −σh∥H(div;Ω) + ∥u −uh∥L2(Ω) ≲inf
+v∈Vh ∥σ −v∥H(div;Ω) + inf
+w∈Uh ∥u −w∥L2(Ω) + ∥g −gh∥H−1/2(Γ).
+Finally, we note that other applications of the existence of an extension operator like Lh are given
+in the analysis of a variety of discretization methods for the Stokes-Darcy problem [14,17].
+4. Discrete Extension Operators for N´ed´elec Finite Element Spaces
+The proof of Theorem 2.3 relies on a Helmholtz-Hodge type decomposition of Rh, two liftings
+(one for Lagrange ﬁnite elements and the one provided by Theorem 2.1), and local estimates in the
+space of Lagrange ﬁnite elements on the boundary
+Ph := {φh ∈C(Γ) : φh|F ∈Pk+1(F ) for all F ∈Γh}.
+We begin with some technical results:
+Lemma 4.1. If rh ∈Rh satisﬁes divΓrh = 0, then rh = curlΓφh with φh ∈Ph.
+Proof. By deﬁnition of Rh, there exists wh ∈Nh such that wh × n = rh. Note now that
+qh := ∇× wh ∈Vh,
+qh · n = divΓ(wh × n) = 0.
+Therefore, by the exactness of the discrete de-Rham complex with essential boundary conditions
+(see for example [3]), there exists w0
+h ∈Nh such that ∇× w0
+h = qh and w0
+h × n = 0. We then
+
+[PDF PAGE 7]
+DISCRETE EXTENSION OPERATORS
+7
+consider the diﬀerence wh −w0
+h and note, again, by the exactness of the discrete de-Rham complex,
+there exists uh in the ﬁnite element space
+(4.1)
+Wh := {uh ∈C(Ω) : uh|K ∈Pk+1(K) for all K ∈Th},
+satisfying ∇uh = wh −w0
+h.
+Take φh = uh|Γ.
+The result follows since wh × n = ∇uh × n =
+curlΓφh.
+□
+We will also need the following result found for example in [8].
+Lemma 4.2. For all φ ∈H1/2(Γ) we have
+∥φ∥H1/2(Γ)/R ≲∥curlΓφ∥H−1/2
+∥
+(Γ).
+Lemma 4.3. For all vh ∈Vh with div vh = 0, there exists wh ∈Nh such that ∇× wh = vh and
+∥wh∥L2(Ω) ≲∥vh∥L2(Ω).
+Proof. By [10] uniformly bounded projections Πh : H(curl, Ω) →Nh and Qh : H(div, Ω) →Vh
+exist such that ∇×Πhw = Qh(∇×w) for all w ∈H(curl, Ω). On the other hand the curl operator
+is surjective from H(curl, Ω) to {v ∈H(div, Ω) : divv = 0} and has therefore a bounded right-
+inverse. We then apply this right-inverse to vh to obtain w ∈H(curl, Ω) and deﬁne wh = Πhw.
+Then ∇× wh = Qh(∇× w) = Qhvh = vh and the result is proved.
+□
+Proof of Theorem 2.3. Let rh ∈Rh. Then divΓrh ∈M 0
+h and by Theorem 2.1 we can ﬁnd vh ∈Vh
+such that
+div vh = 0,
+vh · n = divΓrh,
+and
+∥vh∥H(div,Ω) ≲∥div rh∥H−1/2(Γ).
+We then use Lemma 4.3 to obtain wh ∈Nh such that ∇× wh = vh, and
+(4.2)
+∥wh∥H(curl,Ω) ≲∥vh∥H(div,Ω) ≲∥divrh∥H−1/2(Γ).
+Consider now the function mh := rh −wh × n ∈Rh and note that
+∥mh∥H∥−1/2(Γ) ≲∥rh∥H∥−1/2(Γ) + ∥divΓrh∥H−1/2(Γ)
+by (4.2) and the continuity of the tangential trace operator from H(curl, Ω) to H−1/2
+∥
+(divΓ; Γ).
+Additionally
+divΓmh = divΓrh −(∇× wh) · n = 0,
+by construction of wh. We then apply Lemma 4.1 to ﬁnd φh ∈Ph such that rh −wh × n = curlΓφh
+and and use Lemma 4.2 to bound
+(4.3)
+∥φh∥H1/2(Γ)/R ≲∥rh −wh × n∥H−1/2
+∥
+(Γ) ≲∥rh∥H−1/2
+∥
+(Γ) + ∥divΓrh∥H−1/2(Γ),
+where used (2.1) and (4.2).
+We then take uh in the ﬁnite element space Wh (see (4.1)) such that uh|Γ = φh and
+(4.4)
+∥uh∥H1(Ω)/R ≲∥φh∥H1/2(Γ)/R.
+This can be accomplished by ﬁrst taking u ∈H1(Ω) whose trace is φh and satisfying ∥u∥H1(Ω)/R ≲
+∥φh∥H1/2(Γ)/R and then applying the Scott-Zhang interpolation operator [22] to u.
+The desired
+lifting of rh is the function wh + ∇uh ∈Nh. The bound
+∥wh + ∇uh∥H(curl,Ω) ≤∥wh∥H(curl,Ω) + ∥∇uh∥L2(Ω) ≲∥rh∥H∥−1/2(Γ) + ∥divΓrh∥H−1/2(Γ)
+
+[PDF PAGE 8]
+8
+MARK AINSWORTH, JOHNNY GUZM´AN, AND FRANCISCO-JAVIER SAYAS
+is a direct consequence of (4.2), (4.3), and (4.4). The fact that it is a lifting follows from
+(wh + ∇uh) × n = wh × n + curlΓφh = wh × n + mh = rh.
+This ﬁnishes the proof.
+□
+As an application to Theorem 2.3 we consider problem (1.1) with
+X = H(curl; Ω),
+M = H−1/2
+∥
+(divΓ; ∂Ω) := {µ ∈H−1/2
+∥
+(∂Ω) : divΓµ ∈H−1/2(∂Ω)}.
+The ﬁnite element space are the N´ed´elec elements Xh = Nh. The bilinear form B and linear form
+F are as follows
+B(u, v) =
+Z
+Ω
+(∇× u) · (∇× v) + u · v,
+F (v) =
+Z
+Ω
+f · v.
+Theorem 2.3 and the Introductory discussion now gives the following error estimates for N´ed´elec
+elements.
+Corollary 4.4. Let X = H(curl; Ω) , M = H−1/2
+∥
+(divΓ; ∂Ω) and Xh = Nh. Let u satisfy (1.1)
+and uh satisfy (1.2) then the following holds
+∥u −uh∥H(curl;Ω) ≲inf
+v∈Nh ∥u −v∥H(curl;Ω) + ∥g −gh||H−1/2
+∥
+(divΓ;Γ).
+The
+Appendix A. Proof of Theorem 3.3
+For each K ∈Th we can ﬁnd a cut-oﬀfunction ω = ωK ∈C∞(DK) with the following properties:
+ω ≡1 in K,
+(A.1a)
+ω ≡0 in Ω\ DK,
+(A.1b)
+∥Dsω∥L∞(DK) ≲h−s
+K for s = 0, 1, 2.
+(A.1c)
+Note that
+(A.2)
+∥u∥H3/2+s(K) ≤∥ωu∥H3/2+s(Ω) ≤C(∥−△(ωu)∥H−1/2+s(Ω) + ∥∇(ωu) · n∥Hs(Γ)),
+by (3.2). Here the constant only depends on Ω.
+Let us ﬁrst deal with elements K such that DK does not contain a face in ∂Ω. In this case
+∇(ωu) · n ≡0 on ∂Ω. To bound the ﬁrst term we let v ∈H1/2−s(Ω), and deﬁne m(v) =
+1
+|DK|
+R
+DK v.
+Then, we have
+−
+Z
+Ω
+△(ωu)v = −
+Z
+Ω
+△(ωu)(v −m(v)) −
+Z
+Ω
+△(ωu)m(v) = −
+Z
+Ω
+(2∇ω · ∇u + u△ω)(v −m(v))
+where we used that △u = 0 and that ∇(ωu) · n ≡0 on ∂Ω. Therefore
+−
+Z
+Ω
+△(ωu)v
+≤
+(∥∇ω · ∇u∥L2(DK) + ∥u△ω∥L2(DT ))∥v −m(v)∥L2(DK)
+≲
+(h−1/2−s
+T
+∥∇u∥L2(DK) + h−3/2−s
+K
+∥u∥L2(DK ))∥v∥H1/2−s(DK ),
+where we have used (A.1c), the Poincar´e inequality and an interpolation argument. Taking the
+supremum over v we have
+∥−△(ωu)∥H−1/2+s(Ω) ≤(h−1/2−s
+K
+∥∇u∥L2(DK) + h−3/2−s
+K
+∥u∥L2(DK)).
+
+[PDF PAGE 9]
+DISCRETE EXTENSION OPERATORS
+9
+Hence, in the case DK does not contain a face in ∂Ωwe have
+∥u∥H3/2+s(K) ≲(h−1/2−s
+K
+∥∇u∥L2(DK) + h−3/2−s
+K
+∥u∥L2(DK))
+If we replace u with m(u), and note that
+∥u −m(u)∥L2(DK ) ≲hK∥∇u∥L2(DK)
+we get
+∥∇u∥H1/2+s(K) ≲h−1/2−s
+K
+∥∇u∥L2(DK).
+Next we consider the case when ∂DK contains one or more faces on Γ. To bound the ﬁrst term
+in the right of (A.2) we get
+
+Z
+Ω
+△(ωu)v
+
+≤
+(2∥∇ω · ∇u∥L2(DK) + ∥u△ω∥L2(DT ))∥v∥L2(DK)
+≲
+(h−1/2−s
+K
+∥∇u∥L2(DK) + h−3/2−s
+K
+∥u∥L2(DK))h1/2−s
+K
+∥v∥H1/2−s(DK),
+where we have used (A.1c) and the fact that v vanishes on at least one face of ∂DK, which allows
+us to use an inequality in the form
+(A.3)
+∥v∥L2(DK) ≲h1/2−s
+K
+∥v∥H1/2−s(DK).
+Therefore, as above we have that
+∥−△(ωu)∥H−1/2+s(Ω) ≲h−1/2−s
+K
+∥∇u∥L2(DK) + h−3/2−s
+K
+∥u∥L2(DK).
+To bound the second term on the right of (A.2) we ﬁrst use the product rule and get
+∥∇(ωu) · n∥Hs(∂Ω)
+≤
+∥u∇ω · n∥Hs(∂Ω) + ∥ωg∥Hs(Γ)
+≲
+h−1/2−s
+K
+∥u∇ω∥L2(DT ) + h1/2−s
+K
+∥∇(u∇ω)∥L2(DT ) + ∥ωg∥Hs(Γ)
+≲
+h−3/2−s
+K
+∥u∥L2(DT ) + h−1/2−s
+K
+∥∇u∥L2(DT ) + ∥ωg∥Hs(Γ),
+after using a localized version of the trace theorem and (A.1c). By a simple interpolation argument
+and (A.1c), we have
+∥ωg∥Hs(Γ) ≲∥g∥Hs(∂DK∩Γ) + h−s
+K ∥g∥L2(∂DK∩Γ).
+Combining the above inequalities we have
+∥u∥H3/2+s(K) ≲
+(h−1/2−s
+K
+∥∇u∥L2(DK ) + h−3/2−s
+K
+∥u∥L2(DK))
++(∥g∥Hs(DK∩Γ) + h−s
+K ∥g∥L2(DK∩Γ)).
+If we apply the above argument to u −m(u), we obtain our result.
+Acknowledgements: The authors would like to thank Norbert Heuer for several useful discus-
+sion. Also, we thank Ralf Hiptmair for bringing the relevant papers [1,15,16] to our attention.
+References
+[1] A. Alonso and A. Valli. An optimal domain decomposition preconditioner for low-frequency time-harmonic
+Maxwell equations. Math. Comp., 226 (68): 607-631, 1999.
+[2] Mark Ainsworth, William McLean, and Thanh Tran. The conditioning of boundary element equations on locally
+reﬁned meshes and preconditioning by diagonal scaling. SIAM J. Numer. Anal., 36(6):1901-1932 (electronic),
+1999.
+[3] Douglas Arnold, Richard Falk and Ragnar Winther. Multigrid in H(div) and H(curl). Numer. Math., 85(2):
+197-217,2000.
+[4] Ivo Babuˇska and Gabriel N. Gatica. On the mixed ﬁnite element method with Lagrange multipliers. Numer.
+Methods Partial Diﬀerential Equations, 19(2):192-210, 2003.
+[5] Daniele Boﬃ, Franco Brezzi, and Michel Fortin. Mixed ﬁnite element methods and applications, volume 44 of
+Springer Series in Computational Mathematics. Springer, Heidelberg, 2013.
+
+[PDF PAGE 10]
+10
+MARK AINSWORTH, JOHNNY GUZM´AN, AND FRANCISCO-JAVIER SAYAS
+[6] A. Buﬀa and P. Jr. Ciarlet. On traces for functional spaces related to Maxwell’s equations. I. An integration by
+parts formula in Lipschitz polyhedra. Math. Methods Appl. Sci. 24 , no. 1, 9-30, 2001.
+[7] A. Buﬀa and P. Jr. Ciarlet, On traces for functional spaces related to Maxwell’s equations. II. Hodge decom-
+positions on the boundary of Lipschitz polyhedra and applications. Math. Methods Appl. Sci. 24, no. 1, 31-48,
+2001.
+[8] A. Buﬀa, M. Costabel, and D. Sheen. On traces for H(curl,Ω) in Lipschitz domains. J. Math. Anal. Appl. 276 ,
+no. 2, 845-867, 2002.
+[9] Franco Brezzi, Jim Douglas, Jr., Ricardo Dur´an, and Michel Fortin. Mixed ﬁnite elements for second order elliptic
+problems in three variables. Numer. Math., 51(2):237-250, 1987.
+[10] Snorre H. Christiansen and Ragnar Winther. Smoothed projections in ﬁnite element exterior calculus. Math.
+Comp., 77(262):813-829, 2008.
+[11] Monique Dauge. Neumann and mixed problems on curvilinear polyhedra, Integral equations operator theory,
+15(2), 227-261, 1992.
+[12] Leszek Demkowicz, Jayadeep Gopalakrishnan, and Joachim Sch¨oberl. Polynomial extension operators. I. SIAM
+J. Numer. Anal., 46(6):3006-3031, 2008.
+[13] V´ıctor Dom´ınguez and Francisco-Javier Sayas. Stability of discrete liftings. C. R. Math. Acad. Sci. Paris,
+337(12):805-808, 2003.
+[14] Gabriel N. Gatica, Ricardo Oyarz´ua, and Francisco-Javier Sayas. Analysis of fully-mixed Finite Element Methods
+for the Stokes-Darcy coupled problem. Math. Comp., 276 (80): 1911-1948, 2011.
+[15] R. Hiptmair and S.-P. Mao. Stable Multilevel Splittings of Boundary Edge Element Spaces. BIT, 52(3): 661-685,
+2012.
+[16] R. Hiptmair, C. Jerez-Hanckes and S.-P. Mao. Extension By Zero In Discrete Trace Spaces: Inverse Estimates.
+Math. Comp., to appear.
+[17] Antonio M´arquez, Salim Meddahi, and Francisco-Javier Sayas. Strong coupling of ﬁnite element methods for the
+stokes-darcy problem. To appear in IMA J. Numer. Anal.
+[18] J.-C. N´ed´elec. Mixed ﬁnite elements in R3. Numer. Math., 35(3):315-341, 1980.
+[19] J.-C. N´ed´elec. A new family of mixed ﬁnite elements in R3. Numer. Math., 50(1):57-81, 1986.
+[20] Francisco Javier Sayas. Inﬁmum-supremum. Bol. Soc. Esp. Mat. Apl. S⃗eMA, (41):19-40, 2007.
+[21] Joachim Sch¨oberl. A posteriori error estimates for Maxwell equations. Math. Comp., 77(262):633-649, 2008.
+[22] L. Ridgway Scott and Shangyou Zhang. Finite element interpolation of nonsmooth functions satisfying boundary
+conditions. Math. Comp., 54(190):483-493, 1990.
+[23] J. Xu and L. Zikatanov. Some observations on Babuska and Brezzi theories. Numer. Math., 94 (1), 195-202, 2003.
+[24] Olof B. Widlund. An Extension Theorem for Finite Element Spaces with Three Applications Proceedings of a
+GAMM Seminar on Numerical Techniques in Continuum Mechanics, held in Kiel, Germany January 17-19,
+1986 (Wolfgang Hackbusch and Kristian Witsch, eds), Friedr. Vieweg and Sohn, Braunschweig/Wiesbaden, 1987,
+110-122.
+E-mail address: mark ainsworth@brown.edu
+Divison of Applied Mathematics, Brown University, Providence, RI
+E-mail address: johnny guzman@brown.edu
+Division of Applied Mathematics, Brown University, Providence, RI
+E-mail address: fjsayas@udel.edu
+Department of Mathematical Sciences, University of Delaware, Newark,DE

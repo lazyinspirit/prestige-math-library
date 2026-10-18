@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "18",
+  "round": 0,
+  "reviewed_items": [
+    "alg-strong-rrqr-interpolative-decomposition",
+    "lem-moore-penrose-products-are-orthogonal-projectors",
+    "def-cur-reconstruction-cores",
+    "def-psd-nystrom-approximation",
+    "thm-strong-rrqr-interpolative-decomposition-error",
+    "thm-skeleton-cur-exactness",
+    "thm-cur-projection-residual-bound",
+    "lem-nystrom-square-root-projector-identity",
+    "thm-psd-nystrom-order-and-exactness",
+    "thm-nystrom-deterministic-spectral-residual-bound",
+    "cex-arbitrary-selected-columns-miss-dominant-direction",
+    "ex-exact-rank-two-skeleton-cur",
+    "ex-psd-nystrom-residual-is-psd"
+  ],
+  "reviewed_pages": [
+    "interpolative-cur-and-nystrom-decompositions",
+    "interpolative-cur-and-nystrom-decompositions-examples"
+  ],
+  "decision": "repair",
+  "reason": "The mathematical arguments are sound within their stated domains. Request one coordinated local repair for the ID algorithm interface and missing dimension hypotheses. The approved design treats the sketch page edge as page context; no claims from it are used.",
+  "findings": [
+    {
+      "id": "alg-strong-rrqr-interpolative-decomposition",
+      "type": "scope",
+      "reason": "Approved LIN-CUR scope calls for rank and conditioning diagnostics. The output contract lists only status, J, and T, and does not specify which score, block, or certificate diagnostics from the called RRQR procedure are returned. Carry those diagnostics through explicitly."
+    },
+    {
+      "id": "alg-strong-rrqr-interpolative-decomposition",
+      "type": "local",
+      "reason": "Steps 1–4 define only the exact-arithmetic call, while the final paragraph refers to a finite-precision branch without specifying its instructions, candidate J/T construction, or status and certificate mapping. Define that branch while preserving the sound exact-arithmetic path."
+    },
+    {
+      "id": "thm-skeleton-cur-exactness",
+      "type": "local",
+      "reason": "The statement allows zero-sized ambient matrices, but def-cur-reconstruction-cores is defined only for m,n≥1. State those hypotheses or extend the definition."
+    },
+    {
+      "id": "thm-cur-projection-residual-bound",
+      "type": "local",
+      "reason": "The statement allows zero-sized ambient matrices, but def-cur-reconstruction-cores is defined only for m,n≥1. State those hypotheses or extend the definition."
+    },
+    {
+      "id": "lem-nystrom-square-root-projector-identity",
+      "type": "local",
+      "reason": "The statement allows n=0, but def-psd-nystrom-approximation is defined only for n≥1. State n≥1 or extend the definition."
+    },
+    {
+      "id": "thm-psd-nystrom-order-and-exactness",
+      "type": "local",
+      "reason": "The statement allows n=0, but def-psd-nystrom-approximation is defined only for n≥1. State n≥1 or extend the definition."
+    },
+    {
+      "id": "thm-nystrom-deterministic-spectral-residual-bound",
+      "type": "local",
+      "reason": "The statement allows n=0, but def-psd-nystrom-approximation is defined only for n≥1. State n≥1 or extend the definition."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-strong-rrqr-interpolative-decomposition-error",
+      "decision": "accept",
+      "reason": "Its proof uses the exact-arithmetic branch and the existing J,T interface; added diagnostic outputs and a clarified finite-precision branch do not affect that argument."
+    },
+    {
+      "id": "interpolative-cur-and-nystrom-decompositions",
+      "decision": "repair",
+      "reason": "Align its CUR and Nyström scope summary with the positive-dimension domains and the repaired algorithm diagnostics."
+    },
+    {
+      "id": "thm-psd-nystrom-order-and-exactness",
+      "decision": "repair",
+      "reason": "Add n≥1 to match its Nyström definition and square-root-projector supplier."
+    },
+    {
+      "id": "thm-nystrom-deterministic-spectral-residual-bound",
+      "decision": "repair",
+      "reason": "Add n≥1 to match its Nyström definition and square-root-projector supplier."
+    },
+    {
+      "id": "ex-exact-rank-two-skeleton-cur",
+      "decision": "accept",
+      "reason": "Its fixed 3×3 example satisfies the CUR domain and the exactness argument."
+    },
+    {
+      "id": "ex-psd-nystrom-residual-is-psd",
+      "decision": "accept",
+      "reason": "Its fixed 2×2 example satisfies the Nyström domain and the order theorem."
+    },
+    {
+      "id": "interpolative-cur-and-nystrom-decompositions-examples",
+      "decision": "accept",
+      "reason": "Its examples use positive-sized matrices and remain within the stated domains."
+    }
+  ]
+}

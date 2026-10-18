@@ -1,0 +1,289 @@
+{
+  "group": "q",
+  "batches": [
+    "49"
+  ],
+  "pages_read": [
+    "projection-and-pressure-correction-for-incompressible-flow",
+    "projection-and-pressure-correction-for-incompressible-flow-examples"
+  ],
+  "items_read": [
+    "def-na-periodic-staggered-grid-stokes-operators",
+    "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+    "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+    "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+    "thm-na-saddle-point-exact-schur-solve",
+    "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+    "alg-na-periodic-incremental-pressure-correction",
+    "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+    "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+    "thm-na-periodic-pressure-correction-solves-well-defined",
+    "thm-na-periodic-discrete-helmholtz-projection",
+    "thm-na-periodic-pressure-correction-modified-energy-identity",
+    "thm-na-periodic-pressure-correction-first-order-velocity-error",
+    "cor-na-mini-element-pressure-mass-schur-bounds",
+    "cor-na-mini-element-pressure-mass-block-spectrum",
+    "ex-na-wall-pressure-correction-tangential-velocity-defect",
+    "cex-na-collocated-central-difference-checkerboard-pressure-mode",
+    "ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum",
+    "ex-na-periodic-single-mode-pressure-correction"
+  ],
+  "conventions": [
+    {
+      "convention": "The grid is the unit periodic torus, d ≥ 1, N ≥ 2, h = 1/N, with cell-centred pressures, right-face-centred velocity components, and indices reduced modulo N. Pressure arrays in Q_h have zero discrete mean; mass pairings have weight h^d.",
+      "fixed_by": "def-na-periodic-staggered-grid-stokes-operators",
+      "matters_for": [
+        "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+        "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+        "thm-na-periodic-discrete-helmholtz-projection",
+        "thm-na-periodic-pressure-correction-first-order-velocity-error",
+        "ex-na-periodic-single-mode-pressure-correction"
+      ]
+    },
+    {
+      "convention": "G_h is the forward cell-to-face difference, D_h the backward face-to-cell divergence, Δ_h = D_hG_h is negative semidefinite, and A_h is the negative componentwise velocity Laplacian. D_h and G_h are negative mass adjoints.",
+      "fixed_by": "def-na-periodic-staggered-grid-stokes-operators",
+      "matters_for": [
+        "alg-na-periodic-incremental-pressure-correction",
+        "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+        "thm-na-periodic-discrete-helmholtz-projection",
+        "thm-na-periodic-pressure-correction-modified-energy-identity",
+        "thm-na-periodic-pressure-correction-first-order-velocity-error"
+      ]
+    },
+    {
+      "convention": "The real saddle matrix is K = [A Bᵀ; B 0], with A SPD and B full row rank. S = BA⁻¹Bᵀ is positive; the trailing block-LU Schur complement is −S. Symmetric preconditioning uses C⁻¹KC⁻ᵀ when Pγ = CCᵀ = diag(A, γM_Q).",
+      "fixed_by": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+      "matters_for": [
+        "thm-na-saddle-point-exact-schur-solve",
+        "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+        "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+        "cor-na-mini-element-pressure-mass-schur-bounds",
+        "cor-na-mini-element-pressure-mass-block-spectrum",
+        "ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum"
+      ]
+    },
+    {
+      "convention": "Backward Euler requires ν,k > 0, divergence-free input velocity, mean-zero pressure, and componentwise discrete mean-zero force. Its increment equation is Δ_hφ = k⁻¹D_hũ, velocity update u = ũ − kG_hφ, and pressure update p_new = p_old + φ.",
+      "fixed_by": "alg-na-periodic-incremental-pressure-correction",
+      "matters_for": [
+        "thm-na-periodic-pressure-correction-solves-well-defined",
+        "thm-na-periodic-discrete-helmholtz-projection",
+        "thm-na-periodic-pressure-correction-modified-energy-identity",
+        "thm-na-periodic-pressure-correction-first-order-velocity-error",
+        "ex-na-periodic-single-mode-pressure-correction"
+      ]
+    },
+    {
+      "convention": "BDF2 starts at n ≥ 1 with caller-supplied u⁰,u¹,p¹. Its correction coefficient is 2k/3; the rotational pressure branch subtracts νD_hũ. No initialization accuracy, stability, or convergence rate is asserted.",
+      "fixed_by": "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+      "matters_for": [
+        "thm-na-periodic-pressure-correction-solves-well-defined"
+      ]
+    },
+    {
+      "convention": "The MINI corollaries assume Countable Choice, dimensions two or three, bounded connected Lipschitz polygonal/polyhedral domains, homogeneous Dirichlet velocity, and finite nonempty conforming shape-regular affine simplicial meshes. The viscosity form is 2ν∫ε(v):ε(w); the spectral scaling is γ = 1/ν and applies to steady stiffness.",
+      "fixed_by": "cor-na-mini-element-pressure-mass-schur-bounds",
+      "matters_for": [
+        "cor-na-mini-element-pressure-mass-block-spectrum"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+      "statement": "Δ_h maps Q_h bijectively to itself, its kernel on all cell arrays consists exactly of constants, D_hv has zero mean for every v ∈ V_h, and every q ∈ Q_h satisfies ‖q‖ ≤ √d ‖G_hq‖.",
+      "used_by": [
+        "alg-na-periodic-incremental-pressure-correction",
+        "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+        "thm-na-periodic-pressure-correction-solves-well-defined",
+        "thm-na-periodic-discrete-helmholtz-projection",
+        "thm-na-periodic-pressure-correction-first-order-velocity-error"
+      ]
+    },
+    {
+      "id": "thm-na-periodic-discrete-helmholtz-projection",
+      "statement": "P_h = I − G_hΔ_h⁻¹D_h is the mass-orthogonal projector onto ker D_h. The backward-Euler correction satisfies uⁿ⁺¹ = P_hũⁿ⁺¹ and D_huⁿ⁺¹ = 0 exactly.",
+      "used_by": [
+        "thm-na-periodic-pressure-correction-modified-energy-identity",
+        "thm-na-periodic-pressure-correction-first-order-velocity-error",
+        "ex-na-periodic-single-mode-pressure-correction"
+      ]
+    },
+    {
+      "id": "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+      "statement": "Under the stated positive energy-equivalence, continuity, and inf-sup constants, (β²/Λ)qᵀM_Qq ≤ qᵀBA⁻¹Bᵀq ≤ (C_b²/α)qᵀM_Qq for every q ∈ Q.",
+      "used_by": [
+        "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+        "cor-na-mini-element-pressure-mass-schur-bounds"
+      ]
+    },
+    {
+      "id": "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+      "statement": "For periodic u ∈ C⁴ and p ∈ C³, staggered divergence, velocity Laplacian, and pressure-gradient sampling errors are uniformly O(h²). Zero-integral C² scalar fields have O(h²) discrete midpoint mean on cell-centred or face-centred samples.",
+      "used_by": [
+        "thm-na-periodic-pressure-correction-first-order-velocity-error"
+      ]
+    },
+    {
+      "id": "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+      "statement": "The normalized Schur eigenvalues μ_j lie in [β²/(Λγ), C_b²/(αγ)]. The symmetric preconditioned saddle eigenvalues are (1 ± √(1+4μ_j))/2, together with 1 of multiplicity n−m.",
+      "used_by": [
+        "cor-na-mini-element-pressure-mass-block-spectrum",
+        "ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum"
+      ]
+    },
+    {
+      "id": "cor-na-mini-element-pressure-mass-schur-bounds",
+      "statement": "Under its Countable Choice, domain, mesh, and MINI hypotheses, ((C_F C_div(D))⁻²/(ν(1+d)))M_Q ⪯ S_h ⪯ (d/ν)M_Q for the steady viscous velocity stiffness.",
+      "used_by": [
+        "cor-na-mini-element-pressure-mass-block-spectrum"
+      ]
+    },
+    {
+      "id": "thm-na-periodic-pressure-correction-solves-well-defined",
+      "statement": "Every admissible backward-Euler or BDF2 step has a unique predictor, unique mean-zero pressure increment, and unique updated pair. Both algorithms preserve the zero-mean pressure gauge and exact discrete incompressibility.",
+      "used_by": [
+        "thm-na-periodic-pressure-correction-first-order-velocity-error",
+        "ex-na-periodic-single-mode-pressure-correction"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Finite grid resolution and indexing.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-field",
+      "used_for": "Real scalar and array arithmetic.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-space",
+      "used_for": "Shapes and coordinate spaces for the saddle blocks.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Block products, identities, and matrix-vector equations.",
+      "opened": true
+    },
+    {
+      "id": "def-transpose-of-a-matrix",
+      "used_for": "The transpose constraint block Bᵀ.",
+      "opened": true
+    },
+    {
+      "id": "def-invertible-matrix-and-general-linear-group",
+      "used_for": "Two-sided inverses in Schur solves and preconditioning.",
+      "opened": true
+    },
+    {
+      "id": "def-block-lu-factorisation",
+      "used_for": "The trailing Schur-complement sign convention.",
+      "opened": true
+    },
+    {
+      "id": "def-left-right-and-symmetric-positive-definite-preconditioning",
+      "used_for": "Cholesky-symmetric preconditioning and change of unknown.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Existence and uniqueness of the positive-diagonal Cholesky factor.",
+      "opened": true
+    },
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "Finite-array mass inner products and coordinate Cauchy–Schwarz.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Grid Poincare, Schur supremum identity, divergence continuity, and projection-error bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Invertibility from trivial finite-dimensional kernels and spectral multiplicities.",
+      "opened": true
+    },
+    {
+      "id": "lem-taylor-lagrange-remainder-from-mean-value",
+      "used_for": "Centred-difference and midpoint-quadrature consistency estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-algebra-and-chain-rules",
+      "used_for": "Line-restriction derivatives in the sampling consistency proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-block-lu-factorisation-via-an-invertible-leading-block",
+      "used_for": "Exact saddle block factorization with trailing block −S.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-space",
+      "used_for": "The SPD velocity form as an inner product in the Schur proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "SPD square roots and orthonormal normalized-Schur eigenvectors.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Time-increment integral representation and backward-Euler local truncation estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Bounding the time truncation residual after weighted Euclidean identification.",
+      "opened": true
+    },
+    {
+      "id": "thm-holder-inequality-for-integrals",
+      "used_for": "L² continuity of the MINI divergence bilinear form.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicitly inherited choice assumption in the MINI, Korn, and Fortin branch.",
+      "opened": true
+    },
+    {
+      "id": "alg-ilu0-fixed-pattern-factorization",
+      "used_for": "Required preconditioner-page context only; no ILU quality claim enters this batch.",
+      "opened": true
+    },
+    {
+      "id": "thm-ilu0-factor-pattern-and-work-counts",
+      "used_for": "Required page context distinguishing setup/application counts from spectral or convergence guarantees.",
+      "opened": true
+    },
+    {
+      "id": "alg-flexible-gmres-variable-right-preconditioning",
+      "used_for": "Required preconditioner-page context only.",
+      "opened": true
+    },
+    {
+      "id": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "used_for": "Required page context distinguishing actual-span residual minimization from fixed-preconditioner spectral guarantees.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "projection-and-pressure-correction-for-incompressible-flow",
+      "to": "energy-stable-incompressible-navier-stokes-discretization",
+      "faithful": true,
+      "note": "Checked both page interfaces. The supplier treats bounded-domain no-slip MINI Navier–Stokes with zero-mean pressure and viscosity form 2ν(ε(u),ε(v)); the consumer preserves those conventions in its steady MINI corollaries. Its periodic staggered-grid Stokes results are proved independently. Neither page transfers periodic projection identities to walls or imports the supplier's refuted instantaneous-pressure claims."
+    }
+  ]
+}

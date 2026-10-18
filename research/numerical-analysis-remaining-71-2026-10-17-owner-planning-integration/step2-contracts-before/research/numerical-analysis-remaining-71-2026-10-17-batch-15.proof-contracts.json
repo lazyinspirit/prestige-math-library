@@ -1,0 +1,2608 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-complete-ordered-field-is-archimedean",
+    "lem-linear-cardinal-interpolant-on-an-edge",
+    "lem-lifted-power-sphere-determinant-identity",
+    "lem-voronoi-vertex-empty-circle",
+    "thm-lexicographic-lift-tie-break-consistent",
+    "lem-euler-count-for-planar-triangulation",
+    "lem-large-delaunay-supertriangle-exists",
+    "lem-lifted-flip-potential-decreases",
+    "lem-lower-lifted-facets-cover-the-convex-hull",
+    "lem-simplicial-four-polytope-facet-count",
+    "thm-barycentric-interpolation-and-nearest-neighbor-query-correct",
+    "thm-planar-triangle-and-edge-count",
+    "thm-incremental-planar-delaunay-correctness-and-termination",
+    "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination",
+    "thm-randomized-history-dag-expected-location-cost",
+    "thm-three-dimensional-delaunay-output-size-quadratic",
+    "ex-cocircular-four-site-lexicographic-tie",
+    "ex-collinear-sites-lower-dimensional-output",
+    "ex-scattered-linear-interpolation-over-delaunay-cell"
+  ],
+  "contracts": {
+    "lem-complete-ordered-field-is-archimedean": {
+      "proof_strategy": "contradiction",
+      "axiom_use": "Assumes the ordered-field laws and least-upper-bound property listed in Facts & Assumptions; the least upper bound is used at step 1.1. No Axiom of Choice is used.",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose the positive canonical integers $N=\\{n\\cdot1_F:n\\ge1\\}$ were bounded above by some $y\\in F$. By [A1], let $s=\\sup N$. Since $1_F>0$, $s-1_F<s$, so $s-1_F$ is not an upper bound; choose $m\\ge1$ with $m\\cdot1_F>s-1_F$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "assume-contra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Adding $1_F$ gives $(m+1)\\cdot1_F>s$, while $(m+1)\\cdot1_F\\in N$ and $s$ is an upper bound of $N$. This contradiction proves that $N$ is unbounded above.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "step 1.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose no canonical integer exceeds $x$. Then every positive canonical integer is at most $x$, making $N$ bounded above, contrary to step 2.1. Thus some canonical integer exceeds $x$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "assume-contra",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input is an ordered field and an element x; no finite site set or tuple is involved."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers x=0: assuming no positive canonical integer exceeds x would make x an upper bound of N, contradicting step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-site input parameter; the theorem concerns every field element x."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or boundary-value limit occurs in the Statement; this is not a limiting argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness m in step 1.1 is one existential element supplied by the least-upper-bound property; no choice from an arbitrary family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "lem-linear-cardinal-interpolant-on-an-edge": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed expression has degree at most one. Substitution gives $P(a)=y_0$ and $P(b)=y_0+(y_1-y_0)=y_1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write any degree-at-most-one interpolant as $Q(X)=\\alpha+\\beta X$. Its two value equations imply $\\beta(b-a)=y_1-y_0$, so $\\beta=(y_1-y_0)/(b-a)$; then $\\alpha=y_0-\\beta a$. These coefficients are uniquely determined and give exactly the polynomial in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses require two distinct nodes a,b and their data, so there is no empty-node case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use the same formula when either datum is zero; substitution still gives the specified endpoint values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When y0=y1 the formula is the constant polynomial; step 2.1 still uniquely fixes its coefficients among degree-at-most-one polynomials."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 substitutes X=a and X=b and obtains P(a)=y0 and P(b)=y1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "lem-lifted-power-sphere-determinant-identity": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-certified-geometric-predicate-determinants",
+          "source_section": "Definition",
+          "quote": "Use [[def-dyadic-floating-point-format-and-directed-rounding]]: each finite\nbinary coordinate is interpreted as its exact dyadic rational $m2^e$. Write\n$\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$. All real signs and squared-distance\ncomparisons use the order of [[def-complete-ordered-real-field]]. For a positive\ninteger $s\\ge1$ and a square matrix $M=(M_{ij})_{0\\le i,j<s}$ over $\\mathbb D$, define\n$$\n\\det M=\\sum_{\\pi\\in S_s}\\operatorname{sgn}(\\pi)\\prod_{i=0}^{s-1}M_{i,\\pi(i)},\n$$\nwhere $S_s$ is the set of permutations of $\\{0,\\ldots,s-1\\}$ and\n$\\operatorname{sgn}(\\pi)=(-1)^{\\operatorname{inv}(\\pi)}$ with\n$\\operatorname{inv}(\\pi)=\\#\\{(i,j):i<j,\\ \\pi(i)>\\pi(j)\\}$.\n\nFor $d\\in\\{2,3\\}$ and ordered points $p_0,\\ldots,p_d\\in\\mathbb D^d$, let\n$H_d$ have row $i$ equal to $(p_i,1)$ and put $O_d=\\det H_d$. The orientation\npredicate returns $\\operatorname{sgn}(O_d)\\in\\{-1,0,+1\\}$, where\n$\\operatorname{sgn}(x)=+1$ for $x>0$, $0$ for $x=0$, and $-1$ for $x<0$. For ordered points\n$p_0,\\ldots,p_{d+1}$, let $K_d$ have row $i$ equal to\n$(p_i,\\sum_{j=1}^d p_{i,j}^2,1)$ and put $L_d=\\det K_d$. The raw incircle\npredicate ($d=2$) or insphere predicate ($d=3$) returns\n$\\operatorname{sgn}(L_d)$; its zero is an exact determinant zero. The row order\nis the point order displayed, and the column order is the coordinate columns,\nthen squared norm, then $1$. If $O_d\\ne0$, define the orientation-normalized\nside sign algebraically to be $\\operatorname{sgn}(O_dL_d)$. Whenever a sphere\nthrough $p_0,\\ldots,p_d$ is specified, positive means inside it, zero means on\nit, and negative means outside. If\n$O_d=0$, the base simplex is degenerate and only the raw lifted determinant\nsign is specified.\n\nAn uncertain coordinate input is a real interval with finite dyadic endpoints,\nas defined in [[def-intervals-rectangles-and-complex-balls]]. Its values remain\nuncertain throughout a certified computation; a midpoint is not substituted.\nFor real $c\\in\\mathbb R^d$ and $r\\ge0$, write\n$S(c,r)=\\{x\\in\\mathbb R^d:\\sum_j(x_j-c_j)^2=r^2\\}$; inside, on, and outside\nmean that this squared distance is less than, equal to, or greater than $r^2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-indexed-geometric-site-set",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $h_i=\\|p_i\\|^2-w_i$. Let $A$ be the $d\\times d$ matrix whose rows are $p_i-p_0$ for $i=1,\\ldots,d$. Subtract row $p_0$ from each other row of the orientation matrix defining $O_d$, then expand along its final column. Since the base points are affinely independent, $\\det A\\ne0$, and the cofactor sign gives $\\det A=(-1)^dO_d$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Expanding the equal power-sphere equations in [A1] gives $h_i-h_0=2c\\cdot(p_i-p_0)$ for $1\\le i\\le d$. For the query row, the same expansion gives $h_q-h_0=2c\\cdot(q-p_0)+\\Delta(q)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the lifted determinant defining $P_d$, subtract row $p_0$ from all other rows and expand along the final column. The cofactor sign is $(-1)^{d+3}$. Subtract $2c_j$ times coordinate column $j$ from the lifted-height column for every $j$; by [step 1.2] the first $d$ height entries become zero and the query height entry becomes $\\Delta(q)$. The remaining determinant is $\\det A\\,\\Delta(q)$, so $P_d=(-1)^{d+3}\\det A\\,\\Delta(q)=-O_d\\Delta(q)$ by [step 1.1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiplying the identity in [step 2.1] by $O_d$ gives $O_dP_d=-O_d^2\\Delta(q)$. Since affine independence gives $O_d\\ne0$, the factor $O_d^2$ is positive; hence the product has the claimed inside/on/outside sign.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input is an ordered tuple of d+2 sites with an affinely independent base; the empty tuple is outside the domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 3.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The base has d+1 affinely independent sites and d is 2 or 3, so a one-point tuple is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or boundary-value limit occurs in the Statement; this is not a limiting argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 3.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 3.1; its finite computation or stated hypothesis is applied there."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "lem-voronoi-vertex-empty-circle": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-indexed-geometric-site-set",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose three distinct sites $p_1,p_2,p_3$ whose cells contain $x$. From $x\\in V(p_i)$, $\\|x-p_i\\|^2\\le\\|x-p_j\\|^2$ for every $j$; reversing $i,j$ gives equality. Thus all sites whose cells contain $x$ have the same squared distance $r^2$ from $x$. For every other site $q$, the defining inequality gives $r^2\\le\\|x-q\\|^2$, so none is strictly inside the circle.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The common radius is positive, since radius zero would force every site whose cell contains $x$ to equal $x$, contradicting distinctness and the existence of three sites. A line intersects the circle $\\|y-x\\|^2=r^2$ in at most two points: parameterizing the line as $y=a+tv$ gives a nonzero quadratic equation in $t$. Hence no three of the sites on the circle are collinear. For any one such site $p$, the tangent line at $p$ supports the disk and meets the circle only at $p$; therefore $p$ cannot be a convex combination of the other circle sites. All nearest sites are extreme points of their convex hull, so that hull is a polygon with these sites as its vertices.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The premise requires a finite nonempty site set and at least three active cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 2.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The premise requires at least three distinct Voronoi cells to meet at x."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves no three active sites are collinear because a line meets the positive-radius circle in at most two points."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or edge-interpolation endpoint; it concerns cells meeting at one point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 1.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "thm-lexicographic-lift-tie-break-consistent": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-indexed-geometric-site-set",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-certified-geometric-predicate-determinants",
+          "source_section": "Definition",
+          "quote": "Use [[def-dyadic-floating-point-format-and-directed-rounding]]: each finite\nbinary coordinate is interpreted as its exact dyadic rational $m2^e$. Write\n$\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$. All real signs and squared-distance\ncomparisons use the order of [[def-complete-ordered-real-field]]. For a positive\ninteger $s\\ge1$ and a square matrix $M=(M_{ij})_{0\\le i,j<s}$ over $\\mathbb D$, define\n$$\n\\det M=\\sum_{\\pi\\in S_s}\\operatorname{sgn}(\\pi)\\prod_{i=0}^{s-1}M_{i,\\pi(i)},\n$$\nwhere $S_s$ is the set of permutations of $\\{0,\\ldots,s-1\\}$ and\n$\\operatorname{sgn}(\\pi)=(-1)^{\\operatorname{inv}(\\pi)}$ with\n$\\operatorname{inv}(\\pi)=\\#\\{(i,j):i<j,\\ \\pi(i)>\\pi(j)\\}$.\n\nFor $d\\in\\{2,3\\}$ and ordered points $p_0,\\ldots,p_d\\in\\mathbb D^d$, let\n$H_d$ have row $i$ equal to $(p_i,1)$ and put $O_d=\\det H_d$. The orientation\npredicate returns $\\operatorname{sgn}(O_d)\\in\\{-1,0,+1\\}$, where\n$\\operatorname{sgn}(x)=+1$ for $x>0$, $0$ for $x=0$, and $-1$ for $x<0$. For ordered points\n$p_0,\\ldots,p_{d+1}$, let $K_d$ have row $i$ equal to\n$(p_i,\\sum_{j=1}^d p_{i,j}^2,1)$ and put $L_d=\\det K_d$. The raw incircle\npredicate ($d=2$) or insphere predicate ($d=3$) returns\n$\\operatorname{sgn}(L_d)$; its zero is an exact determinant zero. The row order\nis the point order displayed, and the column order is the coordinate columns,\nthen squared norm, then $1$. If $O_d\\ne0$, define the orientation-normalized\nside sign algebraically to be $\\operatorname{sgn}(O_dL_d)$. Whenever a sphere\nthrough $p_0,\\ldots,p_d$ is specified, positive means inside it, zero means on\nit, and negative means outside. If\n$O_d=0$, the base simplex is degenerate and only the raw lifted determinant\nsign is specified.\n\nAn uncertain coordinate input is a real interval with finite dyadic endpoints,\nas defined in [[def-intervals-rectangles-and-complex-balls]]. Its values remain\nuncertain throughout a certified computation; a midpoint is not substituted.\nFor real $c\\in\\mathbb R^d$ and $r\\ge0$, write\n$S(c,r)=\\{x\\in\\mathbb R^d:\\sum_j(x_j-c_j)^2=r^2\\}$; inside, on, and outside\nmean that this squared distance is less than, equal to, or greater than $r^2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-lexicographic-lift-tie-break",
+          "source_section": "Definition",
+          "quote": "Take a fixed finite universe $U$ of indexed sites as in [[def-indexed-geometric-site-set]], dimension $d\\in\\{2,3\\}$, and an ordered tuple of $d+2$ sites from $U$ with distinct identifiers. A computation using auxiliary sites, such as a planar supertriangle, includes those sites in $U$ from the start and assigns them distinct deterministic integer identifiers. Require that the first $d+1$ sites are affinely independent. Put $h_i=\\|p_i\\|^2-w_i$, with absent weights interpreted as $0$. Rank all identifiers of $U$ in increasing order, starting at rank $0$, and define\n$$P(\\varepsilon)=\\det\\bigl((p_i,h_i+\\varepsilon^{2^{r_i}},1)\\bigr)_{i=0}^{d+1}.$$\nRegard $\\varepsilon$ as a positive formal infinitesimal in the rational-function field $\\mathbb R(\\varepsilon)$, ordered so a nonzero polynomial has the sign of its coefficient at its least nonzero exponent. Expand this finite polynomial exactly and return the sign of its coefficient at the least exponent with nonzero coefficient. If the base is degenerate, return status degenerate-base. The same universe $U$ and ranks are used for every predicate tuple. The procedure never chooses or evaluates a numerical $\\varepsilon$; its returned sign is the declared stable-id tie convention for the raw lifted determinant in [[def-certified-geometric-predicate-determinants]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expand the determinant polynomial in [F3] along its lifted-height column. It has constant coefficient equal to the original determinant and one perturbation term for each row; the coefficient of the query row's perturbation is its cofactor, which is $O_d$ up to sign. By [A1] this coefficient is nonzero, so the polynomial is not identically zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The exponents $2^{r_i}$ are distinct because the ranks in [F3] are distinct across the fixed universe [F1]. Thus no two perturbation terms have the same exponent and their nonzero coefficients cannot cancel. The sign selected by the procedure is exactly the sign of the first nonzero coefficient in this one polynomial, so it is a well-defined sign of one common lifted tuple, not a separate choice for each predicate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If the original determinant is nonzero, its constant coefficient is the unique term of exponent $0$, while all perturbation exponents are positive; therefore the first nonzero coefficient is the original determinant and its sign is unchanged. If the original determinant is zero, step 1.1 shows a nonzero tie polynomial and step 2.1 gives its unique first coefficient. The finite set $U$ supplies one fixed rank assignment for every tuple, so the signs are coherent and the procedure uses no arbitrary epsilon choice.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim requires a finite universe and an ordered tuple of d+2 distinct sites."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 3.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The predicate tuple has d+2 distinct sites and a nondegenerate d-simplex base."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or boundary-value limit occurs in the Statement; this is not a limiting argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "lem-euler-count-for-planar-triangulation": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $h$ be the number of hull corners, meaning the boundary sites that are not in the relative interior of any hull edge. Their interior angles sum to $(h-2)\\pi$, because a convex $h$-gon is divided into $h-2$ triangles by diagonals from one corner. Each of the other $k-h$ boundary sites has straight angle $\\pi$. Around each interior site the incident triangle angles sum to $2\\pi$, while at each boundary site they sum to its hull angle. Counting all triangle angles gives $\\pi T=2\\pi(n-k)+(h-2)\\pi+(k-h)\\pi=(2n-k-2)\\pi$, hence $T=2n-2-k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Count incidences between triangle sides and edges. Each triangle contributes three. An interior edge has one triangle on each of its two local sides; a hull edge has exactly one incident triangle inside the convex hull. Since the hull boundary has $k$ sites, it has $k$ subdivided boundary edges. Thus $3T=2(E-k)+k=2E-k$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Substituting the value of $T$ from step 1.1 into step 1.2 gives $E=3n-3-k$. Consequently $n-E+T=n-(3n-3-k)+(2n-2-k)=1$, proving both identities.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A finite triangulation of a full-dimensional planar convex hull is assumed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement makes no assertion about a zero-value or zero-determinant case, and its hypotheses exclude that boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A full-dimensional planar triangulation requires at least three noncollinear sites."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 1.1, 1.2; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "lem-large-delaunay-supertriangle-exists": {
+      "proof_strategy": "direct",
+      "axiom_use": "Uses the real-field least-upper-bound property through the local Archimedean supplier at steps 2.1 and 5.1. The remaining selections avoid only finite sets; no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-indexed-geometric-site-set",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-complete-ordered-field-is-archimedean",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a Dedekind-complete ordered field with $1_F>0$. For every $x\\in F$, some canonical integer $n\\cdot1_F$ satisfies $x<n\\cdot1_F$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-indexed-geometric-site-set",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each noncollinear triple $(a,b,c)$ from $P$, its center $o$ is uniquely determined by\n$$2o\\cdot(b-a)=\\|b\\|^2-\\|a\\|^2,\\qquad 2o\\cdot(c-a)=\\|c\\|^2-\\|a\\|^2.$$\nThe coefficient matrix has nonzero determinant because $a,b,c$ are noncollinear, so this system has a unique real solution; put $r^2=\\|o-a\\|^2$. There are finitely many such triples.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $B$ be the maximum of $1$, the absolute values of all input coordinates, the absolute values of all center coordinates from step 1.1, and all corresponding values $r^2$. This is a finite maximum in the total order of $\\mathbb R$. By [F3], choose an integer $M>B$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Take baseline vertices $v_1=(-8M,-4M)$, $v_2=(8M,-4M)$, and $v_3=(0,8M)$. At height $y\\in[-M,M]$, their triangle has horizontal half-width $\\frac23(8M-y)\\ge\\frac{14}3M>M$. Since every input site has $|x|,|y|<M$, all sites lie strictly inside this triangle.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Each baseline vertex $v$ has $\\|v\\|\\ge8M$. For any candidate center $o$, step 2.1 gives $\\|o\\|\\le|o_1|+|o_2|<2M$ and $r^2<M$; since $M>1$, $r^2<M^2$ and its radius satisfies $r<M$. Cauchy--Schwarz follows by substituting $t=(v\\cdot o)/\\|o\\|^2$ in $0\\le\\|v-to\\|^2$ (the case $o=0$ is immediate); expanding $\\|v-o\\|^2$ then gives $\\|v-o\\|^2\\ge(\\|v\\|-\\|o\\|)^2$. Thus $\\|v-o\\|>6M>r$, so the vertex is strictly outside every candidate circle. The input containment and all circle exclusions have positive margins.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The strict site-containment, strict circle-exclusion, and nonzero orientation of the supertriangle persist under sufficiently small changes in its three baseline vertices, because they are finitely many strict inequalities in continuous polynomial or squared-distance expressions. Choose open disks $U_1,U_2,U_3$ about the baseline vertices small enough to preserve these conditions for every choice $v_i\\in U_i$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Dyadic rationals are dense: for $a<b$, use [F3] to choose an integer $N>1/(b-a)$, then choose $k>N$; induction gives $2^k\\ge k+1>N$, hence $2^{-k}<b-a$. The least integer $m>2^ka$ exists by the Archimedean property and the well-ordering of the naturals after translating by an integer lower bound; minimality gives $m\\le2^ka+1<2^kb$, so $m2^{-k}\\in(a,b)$. Hence dyadic points are dense in every open disk: place an open rectangle inside the disk, choose a dyadic first coordinate away from the finitely many vertical lines among the forbidden set, and then choose a dyadic second coordinate away from the finitely many intersections with that vertical line. If [A1] holds, choose $v_1\\in U_1$ outside the finitely many lines through pairs and circles through triples of input sites. Next choose $v_2\\in U_2$ outside all lines through pairs and circles through noncollinear triples of $P\\cup\\{v_1\\}$, and choose $v_3\\in U_3$ outside those determined by pairs and triples of $P\\cup\\{v_1,v_2\\}$. A finite union of such lines and circles cannot contain an open disk by the rectangle argument. These choices make the augmented set have no collinear triple or cocircular quadruple. Without [A1], any dyadic choices in the disks still satisfy the first part.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 4.1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "The selected vertices are dyadic, preserve strict containment and exclusion by [step 4.1], and satisfy the additional general-position properties by [step 5.1]. This proves both claims.",
+          "step": "6.1",
+          "inputs": [
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input P is finite, nonempty and of affine dimension two."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement makes no assertion about a zero-value or zero-determinant case, and its hypotheses exclude that boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The input has affine dimension two, requiring at least three noncollinear sites."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 1.1, 5.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1\u20133.2 give strict containment and circle-exclusion margins; steps 4.1 and 6.1 preserve them under the dyadic perturbation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses an integer bound; step 5.1 selects dyadic vertices outside finitely many lines and circles, with the avoidance argument written there."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "lem-lifted-flip-potential-decreases": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-lifted-power-sphere-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\{2,3\\}$, let $p_0,\\ldots,p_d,q\\in\\mathbb D^d$, and let their dyadic weights be $w_0,\\ldots,w_d,w_q$ (zero when absent). Assume $p_0,\\ldots,p_d$ are affinely independent. If $c\\in\\mathbb R^d$ and $R\\in\\mathbb R$ satisfy\n$$\\|p_i-c\\|^2-w_i=R\\qquad(0\\le i\\le d),$$\ndefine the power difference\n$$\\Delta(q)=\\|q-c\\|^2-w_q-R.$$\nLet $O_d$ be the determinant of the rows $(p_i,1)$ for $i=0,\\ldots,d$, and let $P_d$ be the determinant of the $d+2$ rows $(p_i,\\|p_i\\|^2-w_i,1)$, including the query row $(q,\\|q\\|^2-w_q,1)$. Then\n$$P_d=-O_d\\Delta(q),\\qquad O_dP_d=-O_d^2\\Delta(q).$$\nThus the sign of $O_dP_d$ is positive, zero or negative exactly when $q$ is respectively inside, on or outside the power sphere. When all weights are zero, this is the ordinary circumsphere convention.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-lexicographic-lift-tie-break",
+          "source_section": "Definition",
+          "quote": "Take a fixed finite universe $U$ of indexed sites as in [[def-indexed-geometric-site-set]], dimension $d\\in\\{2,3\\}$, and an ordered tuple of $d+2$ sites from $U$ with distinct identifiers. A computation using auxiliary sites, such as a planar supertriangle, includes those sites in $U$ from the start and assigns them distinct deterministic integer identifiers. Require that the first $d+1$ sites are affinely independent. Put $h_i=\\|p_i\\|^2-w_i$, with absent weights interpreted as $0$. Rank all identifiers of $U$ in increasing order, starting at rank $0$, and define\n$$P(\\varepsilon)=\\det\\bigl((p_i,h_i+\\varepsilon^{2^{r_i}},1)\\bigr)_{i=0}^{d+1}.$$\nRegard $\\varepsilon$ as a positive formal infinitesimal in the rational-function field $\\mathbb R(\\varepsilon)$, ordered so a nonzero polynomial has the sign of its coefficient at its least nonzero exponent. Expand this finite polynomial exactly and return the sign of its coefficient at the least exponent with nonzero coefficient. If the base is degenerate, return status degenerate-base. The same universe $U$ and ranks are used for every predicate tuple. The procedure never chooses or evaluates a numerical $\\varepsilon$; its returned sign is the declared stable-id tie convention for the raw lifted determinant in [[def-certified-geometric-predicate-determinants]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lexicographic-lift-tie-break-consistent",
+          "source_section": "Statement",
+          "quote": "Fix one finite universe $U$ of uniquely indexed dyadic sites and weights and a dimension $d\\in\\{2,3\\}$. For an ordered tuple of $d+2$ distinct sites whose first $d+1$ sites are affinely independent, the lexicographic lift procedure in [[def-lexicographic-lift-tie-break]] is the determinant sign of one common formal lifted configuration. Every exact nonzero power determinant retains its original sign, every exact zero has a nonzero polynomial tie determinant, and all tuples therefore receive mutually coherent signs. No numeric perturbation parameter is selected or assumed.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two interpolants agree at the four boundary vertices. Their common diagonal intersection $O$ lies strictly inside both diagonals. On the four triangles formed by $O$ and the four boundary edges, each interpolant is affine; their difference is zero at the two boundary endpoints and equals $\\delta:=g_{BD}(O)-g_{AC}(O)$ at $O$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $O=(1-t)B+tD$ with $0<t<1$. The plane through $A,B,C$ agrees with $g_{AC}$ at $O$ because $O\\in AC$, and its value at $B$ equals the lifted height of $B$. By [A1] its value at $D$ is strictly larger than the lifted height of $D$. Affinity along $BD$ therefore gives $g_{AC}(O)>g_{BD}(O)$, so $\\delta<0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a triangle, the integral of an affine function is its area times the average of its three vertex values; this follows by mapping to the reference triangle, where each barycentric coordinate has integral one third of its area. Thus each of the four overlay triangles contributes its area times $\\delta/3$ to the integral of $g_{BD}-g_{AC}$. Their areas sum to the quadrilateral area, so the total difference is $\\operatorname{area}(ABCD)\\delta/3<0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The row-subtraction and height-column elimination used in [F2] are polynomial determinant identities in the site heights, so they remain valid coefficientwise after each height is replaced by its formal perturbation. The normalized determinant therefore has the sign of the difference between the query height and the plane through $A,B,C$. By [F3]\u2013[F4], one common formal configuration resolves a zero constant term. Thus the below-plane condition is exactly the illegal incircle sign and its flip strictly decreases the potential.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A strictly convex quadrilateral and its four lifted sites are given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 treats a zero constant-term incircle determinant: the common formal lift resolves it and gives a strict potential decrease."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The object is a four-vertex strictly convex quadrilateral."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 records that the two interpolants agree at all four quadrilateral vertices; their difference is determined by its value at the interior diagonal intersection."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "lem-lower-lifted-facets-cover-the-convex-hull": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-indexed-geometric-site-set",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lexicographic-lift-tie-break",
+          "source_section": "Definition",
+          "quote": "Take a fixed finite universe $U$ of indexed sites as in [[def-indexed-geometric-site-set]], dimension $d\\in\\{2,3\\}$, and an ordered tuple of $d+2$ sites from $U$ with distinct identifiers. A computation using auxiliary sites, such as a planar supertriangle, includes those sites in $U$ from the start and assigns them distinct deterministic integer identifiers. Require that the first $d+1$ sites are affinely independent. Put $h_i=\\|p_i\\|^2-w_i$, with absent weights interpreted as $0$. Rank all identifiers of $U$ in increasing order, starting at rank $0$, and define\n$$P(\\varepsilon)=\\det\\bigl((p_i,h_i+\\varepsilon^{2^{r_i}},1)\\bigr)_{i=0}^{d+1}.$$\nRegard $\\varepsilon$ as a positive formal infinitesimal in the rational-function field $\\mathbb R(\\varepsilon)$, ordered so a nonzero polynomial has the sign of its coefficient at its least nonzero exponent. Expand this finite polynomial exactly and return the sign of its coefficient at the least exponent with nonzero coefficient. If the base is degenerate, return status degenerate-base. The same universe $U$ and ranks are used for every predicate tuple. The procedure never chooses or evaluates a numerical $\\varepsilon$; its returned sign is the declared stable-id tie convention for the raw lifted determinant in [[def-certified-geometric-predicate-determinants]].",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lexicographic-lift-tie-break-consistent",
+          "source_section": "Statement",
+          "quote": "Fix one finite universe $U$ of uniquely indexed dyadic sites and weights and a dimension $d\\in\\{2,3\\}$. For an ordered tuple of $d+2$ distinct sites whose first $d+1$ sites are affinely independent, the lexicographic lift procedure in [[def-lexicographic-lift-tie-break]] is the determinant sign of one common formal lifted configuration. Every exact nonzero power determinant retains its original sign, every exact zero has a nonzero polynomial tie determinant, and all tuples therefore receive mutually coherent signs. No numeric perturbation parameter is selected or assumed.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-lifted-power-sphere-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\{2,3\\}$, let $p_0,\\ldots,p_d,q\\in\\mathbb D^d$, and let their dyadic weights be $w_0,\\ldots,w_d,w_q$ (zero when absent). Assume $p_0,\\ldots,p_d$ are affinely independent. If $c\\in\\mathbb R^d$ and $R\\in\\mathbb R$ satisfy\n$$\\|p_i-c\\|^2-w_i=R\\qquad(0\\le i\\le d),$$\ndefine the power difference\n$$\\Delta(q)=\\|q-c\\|^2-w_q-R.$$\nLet $O_d$ be the determinant of the rows $(p_i,1)$ for $i=0,\\ldots,d$, and let $P_d$ be the determinant of the $d+2$ rows $(p_i,\\|p_i\\|^2-w_i,1)$, including the query row $(q,\\|q\\|^2-w_q,1)$. Then\n$$P_d=-O_d\\Delta(q),\\qquad O_dP_d=-O_d^2\\Delta(q).$$\nThus the sign of $O_dP_d$ is positive, zero or negative exactly when $q$ is respectively inside, on or outside the power sphere. When all weights are zero, this is the ordinary circumsphere convention.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $x\\in\\operatorname{conv}(P)$. A feasible representation is a vector $(\\lambda_i)_{i\\in P}$ with $\\lambda_i\\ge0$, $\\sum_i\\lambda_i=1$, and $\\sum_i\\lambda_i p_i=x$. Its formal height is $H(\\lambda)=\\sum_i\\lambda_i h_i$. If its support has more than $d+1$ sites, the vectors $(p_i,1)\\in\\mathbb R^{d+1}$ are linearly dependent, so there is a nonzero vector $(\\alpha_i)$ on that support with $\\sum_i\\alpha_i=0$ and $\\sum_i\\alpha_i p_i=0$. Such a vector has both positive and negative entries. Choose one of the two directions $\\lambda+t\\alpha$ that does not increase $H$ and increase $|t|$ until a coefficient first becomes zero. This preserves feasibility and reduces support. Repeating finitely gives a feasible representation of support at most $d+1$ with no greater height.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "There are finitely many supports of size at most $d+1$. For any affinely independent support, its coefficients representing $x$ are unique; any dependent support reduces by step 1.1. Therefore the minimum formal height among feasible representations is attained among a finite nonempty set of basic supports.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Exclude temporarily the finite union of convex hulls of subsets of at most $d$ sites. For an $x$ outside this union, choose a minimizing support of smallest cardinality; it has exactly $d+1$ sites, is affinely independent, and has strictly positive coefficients $\\lambda_i$. Indeed, a dependent support reduces by step 1.1 without increasing its minimal height, contradicting minimal cardinality. For any other site $q$, write its unique affine coordinates $q=\\sum_i\\alpha_i p_i$, $\\sum_i\\alpha_i=1$. For sufficiently small positive $t$, replacing $\\lambda_i$ by $\\lambda_i-t\\alpha_i$ and adding coefficient $t$ at $q$ remains feasible. Minimality gives $h_q-\\sum_i\\alpha_i h_i\\ge0$. Hence the hyperplane through the lifted support sites lies below every lifted site and its projected simplex contains $x$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "A1",
+            "algebra",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The set excluded in step 3.1 lies in a finite union of proper affine subspaces. A line segment in any open ball of $\\operatorname{int}\\operatorname{conv}(P)$ can be chosen in a direction not parallel to any of these subspaces; each subspace then removes at most one point of the segment. Thus the complement is dense in the interior. The interior is dense in the whole convex hull: join any hull point to a fixed interior point, and every point of the joining segment other than the hull endpoint is interior by convexity. There are finitely many $d$-tuples of sites, hence finitely many lower simplices; their projected simplices are closed. Step 3.1 puts a dense subset of $\\operatorname{conv}(P)$ in their union, so that finite union covers the entire convex hull.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "algebra",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If a lower hyperplane contained at least $d+2$ lifted sites, its projected face would contain a nondegenerate $d$-tuple and an additional site, contradicting the nonzero determinant from [F3]. Thus every full-dimensional lower cell is a simplex. If two projected lower simplices have support planes $L_1,L_2$, all their vertices lie on or above both supporting planes. For a point $x$ in the intersection of their projections, the two lifted convex combinations at $x$ therefore force $L_1(x)\\ge L_2(x)$ and $L_2(x)\\ge L_1(x)$; hence $L_1(x)=L_2(x)$. On each simplex the corresponding plane difference has one sign at every vertex, so its zero set is a face. If $L_1=L_2$, the nonzero determinant [F3] forces the same $d+1$ vertices. Thus intersections are common faces.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The supporting inequality for a formal lift has nonnegative constant-term difference at each site; otherwise its negative constant coefficient would force a negative formal sign by [F3]. The constant terms therefore give the unperturbed weak support inequalities, and [F4] identifies them with empty power spheres.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a finite nonempty site set of affine dimension d in {2,3}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 6.1 allows a zero constant-term support difference and concludes the original weak power-sphere inequality."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Affine dimension d in {2,3} requires at least d+1 sites."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 uses closed projected simplices and density up to every hull point, so the coverage includes the convex-hull boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 choose a nonincreasing finite-support reduction and a minimum among finitely many basic supports; no arbitrary-family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "lem-simplicial-four-polytope-facet-count": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-euler-count-for-planar-triangulation",
+          "source_section": "Statement",
+          "quote": "For a finite triangulation of the convex hull of $n$ distinct planar sites of affine dimension two, let $k$ be the number of sites on the hull boundary, $E$ the number of edges, and $T$ the number of bounded triangular faces. Then\n$$3T=2E-k,\\qquad n-E+T=1,$$\nand consequently $T=2n-2-k$ and $E=3n-3-k$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a vertex $v$ of $Q$ and let $C$ be the convex hull of its other vertices. Since $v$ is extreme, $v\\notin C$. The finite convex hull $C$ is compact, so choose $q\\in C$ minimizing $\\|v-q\\|$. For every $y\\in C$ and $0<t\\le1$, $q+t(y-q)\\in C$, hence $\\|v-q-t(y-q)\\|^2\\ge\\|v-q\\|^2$. Expanding, dividing by $t$, and letting $t\\downarrow0$ gives $(v-q)\\cdot(y-q)\\le0$. Therefore $\\ell(x)=(v-q)\\cdot x$ satisfies $\\ell(v)-\\ell(y)\\ge\\|v-q\\|^2>0$ for every $y\\in C$. Choose $\\delta>0$ smaller than every positive gap $\\ell(v)-\\ell(u)$ over the other vertices. The section $Q_v=Q\\cap\\{\\ell=\\ell(v)-\\delta\\}$ cuts exactly the edges incident to $v$ and is a three-dimensional convex polytope; its vertices correspond to those edges, and its facets correspond to the facets of $Q$ containing $v$. Write $d_v,t_v$ for the numbers of vertices and facets of $Q_v$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose a facet $F_0$ of $Q_v$ and a viewpoint just outside its relative interior in the open region that gives a Schlegel projection onto the plane of $F_0$. Convexity makes the projected facets cover $F_0$: each ray from the viewpoint through an interior point of $F_0$ enters $Q_v$ there and has a unique last intersection with its boundary. The exit point lies on a non-base facet; uniqueness of that exit makes projected facet interiors disjoint, and shared edges project to shared boundaries. Choose the viewpoint generically within this open region so projected vertices are distinct and no three projected vertices are collinear. For each pair or triple of vertices, the forbidden coincidence or collinearity condition is a nonzero polynomial equation in the viewpoint coordinates: a pair coincidence forces the viewpoint onto their line, and a triple collinearity forces it into the plane through those three noncollinear vertices. A nonzero polynomial cannot vanish on an open set (in one variable it has finitely many roots; induction on the variables applied to its coefficient polynomials proves the claim), so finitely many forbidden sets cannot exhaust the region. Triangulate each projected convex polygonal facet by joining one vertex to its nonadjacent vertices. This yields a triangulation of $F_0$ with $d_v$ sites and $k_v$ hull sites, where $k_v$ is the number of vertices of $F_0$ and $k_v\\ge3$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "There are $t_v-1$ bounded facets in the Schlegel triangulation, and each contributes at least one triangle, so $t_v-1\\le T_v$. By [F1], $T_v=2d_v-2-k_v$. Therefore $t_v\\le2d_v-1-k_v\\le2d_v-4$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Count vertex-facet incidences. Every facet of a four-dimensional polytope has at least four vertices, so $4f_3\\le\\sum_v t_v$. By step 3.1 and the fact that each edge has two endpoints, $\\sum_vt_v\\le2\\sum_vd_v-4m=4f_1-4m$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The graph of $Q$ is simple, so $f_1\\le\\binom m2$. Step 4.1 yields $4f_3\\le4f_1-4m$, hence $f_3\\le f_1-m\\le\\binom m2-m=m(m-3)/2$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A full-dimensional convex 4-polytope with at least five vertices is given."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement makes no assertion about a zero-value or zero-determinant case, and its hypotheses exclude that boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The hypotheses require m>=5 vertices."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or boundary-value limit occurs in the Statement; this is not a limiting argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 1.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "thm-barycentric-interpolation-and-nearest-neighbor-query-correct": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-barycentric-point-location-interpolation-and-voronoi-query",
+          "source_section": "Definition",
+          "quote": "Let $T$ be a nondegenerate triangle with ordered vertices $p_0,p_1,p_2\\in\\mathbb D^2$. For $x\\in\\mathbb R^2$, its **barycentric coordinates** are the unique scalars $\\lambda_0,\\lambda_1,\\lambda_2$ satisfying $\\sum_i\\lambda_i=1$ and $x=\\sum_i\\lambda_i p_i$. They are exact for dyadic $x$: they are obtained by solving the invertible $2\\times2$ system with columns $p_1-p_0,p_2-p_0$. The point is in $T$ exactly when all $\\lambda_i\\ge0$.\n\nGiven vertex data $f_0,f_1,f_2\\in\\mathbb R$, the **barycentric affine interpolant** on $T$ is $I_Tf(x)=\\sum_i\\lambda_i f_i$. A point-location result is a containing triangle of the triangulation, with a shared-edge or shared-vertex result allowed when the point lies on a face; outside the convex hull its status is `outside-hull` and no containing triangle is returned.\n\nFor a finite unweighted site set $P$, the **nearest-site query** returns a site minimizing $\\|x-p\\|^2$, breaking ties by the least stable identifier. Its hull status is `inside-hull` for $x\\in\\operatorname{conv}P$ and `outside-hull` otherwise. The minimizer is returned in either case.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-linear-cardinal-interpolant-on-an-edge",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $a,b\\in F$ with $a\\ne b$, and let $y_0,y_1\\in F$. The unique polynomial $P\\in F[X]$ of degree at most one with $P(a)=y_0$ and $P(b)=y_1$ is\n$$P(X)=y_0+(y_1-y_0)\\frac{X-a}{b-a}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix with columns $p_1-p_0,p_2-p_0$ is invertible by [A1], so the two coordinate equations uniquely determine $\\lambda_1,\\lambda_2$ and then $\\lambda_0=1-\\lambda_1-\\lambda_2$. Thus the coordinates in [F1] are unique, and their nonnegativity is exactly membership in the convex combinations defining the triangle.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Parameterize an edge by $x(t)=(1-t)p_0+tp_1$. Its barycentric interpolant is $(1-t)f_0+tf_1$. Apply [F3] with nodes $0,1$ and data $f_0,f_1$: the unique cardinal polynomial is $f_0+(f_1-f_0)t$, which equals the edge interpolant, including its separate endpoint values.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each $\\lambda_i(x)$ is affine in $x$, so $I_Tf=\\sum_i\\lambda_i f_i$ is affine and has value $f_i$ at vertex $p_i$. An affine function agreeing at three noncollinear vertices is unique because its three coefficients are determined by an invertible $3\\times3$ augmented vertex matrix. On a shared edge, both triangle restrictions are affine in the edge parameter and agree at its two endpoints, so they coincide throughout the edge; the same endpoint argument handles a shared vertex.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A nonempty finite set of real distances $\\{\\|x-p\\|^2:p\\in P\\}$ has a minimum. The finite set of identifiers attaining it has a least element, so the specified query returns exactly one minimizing site. Its inside/outside status is decided by the defining convex-hull membership test, equivalently by triangle barycentric membership when $x$ lies in the triangulated hull; outside the hull no triangle is returned but the same finite minimum still exists.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A nondegenerate triangle and a nonempty finite site set are given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes zero barycentric coordinates: nonnegative coefficients, including boundary zeros, characterize closed-triangle membership."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies to a singleton site set: its finite distance set has one minimum and its sole identifier is least."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 evaluates the edge interpolant at t=0 and t=1; step 2.1 proves adjacent restrictions agree on the whole shared edge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses a minimum and then the least identifier from finite sets, so only finite selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 1.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 1.1; its finite computation or stated hypothesis is applied there."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "thm-planar-triangle-and-edge-count": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-euler-count-for-planar-triangulation",
+          "source_section": "Statement",
+          "quote": "For a finite triangulation of the convex hull of $n$ distinct planar sites of affine dimension two, let $k$ be the number of sites on the hull boundary, $E$ the number of edges, and $T$ the number of bounded triangular faces. Then\n$$3T=2E-k,\\qquad n-E+T=1,$$\nand consequently $T=2n-2-k$ and $E=3n-3-k$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [A1], the triangulation has $k$ hull boundary sites and therefore exactly $k$ subdivided hull edges. Then [F2] gives $T=2n-2-k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $E=3n-3-k$. Since $k\\ge3$, the formulas imply $T<2n$ and $E<3n$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A finite triangulation of a full-dimensional planar convex hull is assumed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement makes no assertion about a zero-value or zero-determinant case, and its hypotheses exclude that boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement requires at least two nodes, three planar sites, or the stated full dimension; the one-element case is outside its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 1.1, 2.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "thm-incremental-planar-delaunay-correctness-and-termination": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-large-delaunay-supertriangle-exists",
+          "source_section": "Statement",
+          "quote": "For every finite full-dimensional dyadic planar site set, a dyadic supertriangle can be chosen to contain every input site strictly and to have all three vertices strictly outside every circumcircle through a noncollinear input triple. If the input has no three collinear and no four cocircular sites, the supertriangle can additionally be chosen so the augmented set has no three collinear sites and no four cocircular sites.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-lifted-power-sphere-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\{2,3\\}$, let $p_0,\\ldots,p_d,q\\in\\mathbb D^d$, and let their dyadic weights be $w_0,\\ldots,w_d,w_q$ (zero when absent). Assume $p_0,\\ldots,p_d$ are affinely independent. If $c\\in\\mathbb R^d$ and $R\\in\\mathbb R$ satisfy\n$$\\|p_i-c\\|^2-w_i=R\\qquad(0\\le i\\le d),$$\ndefine the power difference\n$$\\Delta(q)=\\|q-c\\|^2-w_q-R.$$\nLet $O_d$ be the determinant of the rows $(p_i,1)$ for $i=0,\\ldots,d$, and let $P_d$ be the determinant of the $d+2$ rows $(p_i,\\|p_i\\|^2-w_i,1)$, including the query row $(q,\\|q\\|^2-w_q,1)$. Then\n$$P_d=-O_d\\Delta(q),\\qquad O_dP_d=-O_d^2\\Delta(q).$$\nThus the sign of $O_dP_d$ is positive, zero or negative exactly when $q$ is respectively inside, on or outside the power sphere. When all weights are zero, this is the ordinary circumsphere convention.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lexicographic-lift-tie-break-consistent",
+          "source_section": "Statement",
+          "quote": "Fix one finite universe $U$ of uniquely indexed dyadic sites and weights and a dimension $d\\in\\{2,3\\}$. For an ordered tuple of $d+2$ distinct sites whose first $d+1$ sites are affinely independent, the lexicographic lift procedure in [[def-lexicographic-lift-tie-break]] is the determinant sign of one common formal lifted configuration. Every exact nonzero power determinant retains its original sign, every exact zero has a nonzero polynomial tie determinant, and all tuples therefore receive mutually coherent signs. No numeric perturbation parameter is selected or assumed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-lifted-flip-potential-decreases",
+          "source_section": "Statement",
+          "quote": "Let $ABCD$ be a strictly convex planar quadrilateral in counterclockwise boundary order. Lift its four sites using the common formal heights of [[def-lexicographic-lift-tie-break]]. Let $g_{AC}$ and $g_{BD}$ be the piecewise-affine interpolants on the two diagonal triangulations. Define each interpolant's integral over the quadrilateral as the sum over its two triangles of triangle area times the average of the three vertex heights. If the lifted point $D$ lies strictly below the affine plane through the lifts of $A,B,C$ (the illegal-incircle sign by the coefficientwise determinant identity), then\n$$\\int_{ABCD}g_{BD}<\\int_{ABCD}g_{AC}$$\nin the lexicographic order of the formal lift field.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+          "source_section": "Statement",
+          "quote": "For every finite encoded dyadic point tuple and every orientation or lifted\ndeterminant request in\n[[alg-certified-dyadic-geometric-predicate]], the returned raw sign equals the\nexact determinant sign, including zero, and the procedure terminates. A\nnondegenerate incircle/insphere side result agrees with the orientation-\nnormalized convention in\n[[lem-lifted-determinant-sign-matches-sphere-side]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-lower-lifted-facets-cover-the-convex-hull",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\{2,3\\}$ and let $P$ be a finite indexed weighted site set of affine dimension $d$ in $\\mathbb R^d$. Lift each site to height $h_i=\\|p_i\\|^2-w_i+\\varepsilon^{2^{r_i}}$ in the fixed ordered formal field of [[def-lexicographic-lift-tie-break]]. A **lower simplex** is the projection of $d+1$ affinely independent lifted sites whose graph hyperplane has every lifted site on or above it. Then the lower simplices cover $\\operatorname{conv}(P)$ and intersect in common faces. Each lower simplex has a weakly empty power sphere for the original unperturbed weighted sites.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Consider any triangulation of a convex polygon whose interior edges all have the legal lifted incircle sign. The determinant identity [F2] is polynomial in the height entries, so it remains true coefficientwise for the formal heights [F3]; exact signs are supplied by [F5]. Across a shared edge the affine triangle planes agree on the edge. The legal sign says the opposite vertex of either triangle lies on or above the continuation of the other plane; the two tests are equivalent because the difference of the planes vanishes on the shared edge and changes sign across it. Thus the piecewise-affine height has nondecreasing slope when crossing the edge. For any triangle $\\tau$ and any vertex $q$, choose $x$ in the interior of $\\tau$ so $xq$ crosses edges transversely and avoids every other vertex; finitely many lines are forbidden. Along $xq$ the slope is nondecreasing, so the height at $q$ is at least the value of the plane through $\\tau$ there. Every triangle plane therefore supports all lifted vertices from below; taking constant terms gives weakly empty original circumdisks.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "A1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The initial supertriangle is a triangulation and has no interior edge, so its edges are vacuously legal. Each input site lies strictly inside it by [F1]. Locating a face or edge and splitting it as specified partitions exactly the old face or the two faces incident to an interior edge, preserving a nonoverlapping triangulation. Exact orientation decisions terminate by [F5].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $uvw$ be any current lower triangle with plane $z=2o\\cdot x+b$ over the formal field and set $c=\\|o\\|^2+b$. Its constant plane is the ordinary paraboloid plane through $u,v,w$, because the projected base is nondegenerate. Define the formal power distance $\\pi_q(x)=\\|x-q\\|^2+\\varepsilon^{2^{r_q}}$ using the fixed height perturbation. Then $\\pi_u(o)=\\pi_v(o)=\\pi_w(o)=c$ and every current site $q$ has $\\pi_q(o)\\ge c$ by the supporting-plane inequality. Suppose a new site $p\\ne v$ lies formally below this plane. This holds at a split because a nonvertex point of triangle $uvw$ is strictly inside its unperturbed circumdisk, so the constant term of $\\pi_p(o)-c$ is negative; it also holds for a flip-conflict triangle by the illegal test. At $x=v$, $\\pi_p(v)-\\pi_v(v)=\\|p-v\\|^2+\\varepsilon^{2^{r_p}}-\\varepsilon^{2^{r_v}}$ has positive constant term. The difference $\\pi_p-\\pi_v$ is affine in $x$, so along the segment from $o$ to $v$ it has a zero at some formal parameter $0<t<1$. At that point $x_*$, for every other current site $q$, the affine difference $\\pi_q-\\pi_v$ is nonnegative at $o$ and strictly positive at $v$ (its constant term there is $\\|q-v\\|^2>0$), hence strictly positive at $x_*$. Therefore $p,v$ are strict nearest sites for the finite formal power diagram. The strict inequalities persist on a nontrivial segment of their formal bisector; each center there defines a supporting graph plane through the two lifts, so $pv$ is a lower-hull edge of the common lifted configuration.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Such a formal nearest-site edge is locally legal. After a rigid motion write $p=(0,0)$ and $v=(a,0)$. Centers on their perpendicular bisector are $(a/2,t)$. For opposite triangle vertices $u=(b,c)$ and $w=(d,e)$ with $c>0>e$, the power-distance inequalities for $p,v$ to be no farther than $u,w$ are $t\\le t_u$ and $t\\ge t_w$, where $t_u=(b^2+c^2-ab+\\eta_u-\\eta_p)/(2c)$ and $t_w=(d^2+e^2-ad+\\eta_w-\\eta_p)/(2e)$, with $\\eta_i=\\varepsilon^{2^{r_i}}$. These intervals intersect exactly when $t_w\\le t_u$. The formal incircle determinant says $w$ lies below the plane through $p,v,u$ exactly when $t_w>t_u$, so the empty-bisector segment precludes an illegal sign. Conversely, if an edge opposite $p$ is illegal, [F2] puts $p$ inside or on the original circle through the adjacent triangle. To verify flippability, put the edge line at height $0$ with endpoints $a=(0,0),b=(1,0)$ and opposite vertices $w,p$ at heights $y_w>0>y_p$. If $p$ is inside the circle through $a,b,w$, the second intersection of line $pw$ with the circle lies beyond $p$ on the negative side, so the segment crosses height $0$ inside the disk. If $p$ is on the circle, $p,w$ are the two circle intersections and their segment has the same property. The disk meets height $0$ exactly in the chord $[a,b]$, so the crossing is inside that edge; the quadrilateral is strictly convex and the flip is valid. For a flip, the old non-$p$ triangle was lower before insertion and the illegal test puts $p$ formally below its plane; step 2.1 therefore supplies the new $p$-incident edge. Exact zero tests are resolved coherently by [F3] and evaluated by [F5].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "A1",
+            "step 2.1",
+            "algebra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "After a split, all new edges incident to $p$ are legal by steps 2.1\u20133.1. Any other changed edge is opposite $p$ and is tested by `LEGALIZE`; after a flip the two new opposite edges are tested recursively, while edges outside the changed triangles retain their previous adjacent faces. Each flip strictly lowers the common potential [F4]. There are finitely many triangulations of the fixed augmented vertex set, so no state can recur and every recursive legalization terminates. The final triangulation has all edges legal; step 1.1 then proves it is the lower triangulation for that prefix. This re-establishes the induction invariant after every insertion, including the initial prefix.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After the last insertion, step 4.1 leaves every triangle plane supporting all augmented lifted vertices from below. The coherent perturbation has no four coplanar lifted sites over a nondegenerate projected triangle by [F3], so these current triangles are full lower simplices.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "A1",
+            "step 1.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F6], the lower simplices form a triangulation of the supertriangle. The three synthetic identifiers lie below all input identifiers; hence every input rank in the augmented universe is its input-only rank plus three. All input perturbation exponents are multiplied by $8$, the common substitution $\\varepsilon\\mapsto\\varepsilon^8$, which preserves every first-nonzero-coefficient sign on input-only tuples. Thus the input-only lower triangulation has the same tie choices. Its lower triangles remain lower after adding the supervertices: [F1] places them strictly outside each input circumcircle, so the added support differences have positive constant term and remain positive formally. Conversely, every augmented lower simplex using only input vertices is supported against all input sites. Removing synthetic-vertex triangles therefore leaves exactly the input lower triangulation, which covers the input convex hull by [F6]; constant terms give weakly empty original circumdisks.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "A1",
+            "step 5.1",
+            "algebra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the affine dimension is zero or one, the algorithm directly returns the prescribed single site or sorted chain by [F7], using only a finite sort. If the affine dimension is two, steps 4.1\u20136.1 prove termination and correctness. This proves the theorem in every branch.",
+          "step": "7.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 4.1",
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm input is a nonempty finite indexed site list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 resolves formal zero incircle tests by the common lift; step 6.1 passes to weak emptiness in the original unperturbed sense."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 7.1 records the affine-dimension-zero branch, which returns its single deduplicated site."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 7.1 handles affine dimensions zero and one directly, while steps 1.1\u20136.1 prove the dimension-two branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 treats insertion on an interior edge as a two-face split; step 6.1 retains the input hull boundary after removing synthetic vertices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 5.1 choose finitely many local witnesses in the full-dimensional branch; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+          "source_section": "Definition",
+          "quote": "For a weighted site $(p,w)$, define its power distance from $x\\in\\mathbb R^3$ by\n$$\\pi_{(p,w)}(x)=\\|x-p\\|^2-w.$$\nIts lifted point is $\\widehat p=(p,\\|p\\|^2-w)\\in\\mathbb R^4$. A lower face of the lifted convex hull is a face supported by a nonvertical hyperplane $z=\\ell(x)$ with every lifted site on or above that hyperplane. The projection of the union of lower faces is the **regular subdivision** of the projected sites; a simplex in that subdivision has an empty power sphere, meaning its common power distance is no larger than that of any input site.\n\nThe lex-refined lift is interpreted over the ordered rational-function field of [[def-lexicographic-lift-tie-break]], using one fixed finite universe of all input sites. When every weight is zero, the regular subdivision is the ordinary 3D Delaunay subdivision and power spheres are circumspheres. A weight configuration can hide a site: a weighted site is **hidden** if its lift is not a vertex of any lower face. A nonsimplicial lower face is refined with the same fixed-universe lexicographic lift convention. For projected affine dimension below three, the algorithm reports `lower-dimensional` with that dimension and the exact deduplicated site list, and makes no tetrahedralization claim. A tetrahedral output is claimed only on the full-dimensional branch with nondegenerate projected bases.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-incremental-three-dimensional-regular-cavity-repair",
+          "source_section": "Definition",
+          "quote": "Input is a finite indexed list of dyadic sites in $\\mathbb R^3$, each with an optional dyadic weight. Collapse only exact duplicate coordinate-weight pairs, retaining the least identifier. If the projected set has affine dimension less than three, return `lower-dimensional`, that dimension, and the exact deduplicated list; do not assert tetrahedra.\n\nFor affine dimension three, fix the finite lexicographic universe before insertion. Process sites in stable-id order (any stated permutation is allowed if it is fixed before processing). At each prefix, enumerate every four-site subset. If its projected base is affinely dependent, record that tuple with status `degenerate-base` and omit it from tetrahedral candidates. Otherwise solve the unique affine height plane through its four lifted sites. Retain the tetrahedron exactly when every other lifted site in that prefix lies on or above this plane in the ordered formal field of [[def-lexicographic-lift-tie-break]].\n\nAfter adding a site, delete old tetrahedra whose plane the new lift violates, retain old tetrahedra still supporting, and add every newly supporting tetrahedron containing the inserted site. This finite set difference is the **cavity repair**; no geometric connectivity or running-time bound is asserted. After the final prefix, report the retained lower tetrahedra, the finite `degenerate-base` tuple list, and every weighted site absent from the lower tetrahedra as `hidden`.\n\nFor ordinary orientation use [[alg-certified-dyadic-geometric-predicate]]. For weighted lower tests, form the exact dyadic matrix with lifted column $\\|p\\|^2-w$ and evaluate the finite formal perturbation coefficients using exact integer determinant signs from [[alg-exact-dyadic-determinant-sign]]. The raw exact predicate keeps zero; the formal lift is applied only by this algorithm's declared tie convention.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-lifted-power-sphere-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\{2,3\\}$, let $p_0,\\ldots,p_d,q\\in\\mathbb D^d$, and let their dyadic weights be $w_0,\\ldots,w_d,w_q$ (zero when absent). Assume $p_0,\\ldots,p_d$ are affinely independent. If $c\\in\\mathbb R^d$ and $R\\in\\mathbb R$ satisfy\n$$\\|p_i-c\\|^2-w_i=R\\qquad(0\\le i\\le d),$$\ndefine the power difference\n$$\\Delta(q)=\\|q-c\\|^2-w_q-R.$$\nLet $O_d$ be the determinant of the rows $(p_i,1)$ for $i=0,\\ldots,d$, and let $P_d$ be the determinant of the $d+2$ rows $(p_i,\\|p_i\\|^2-w_i,1)$, including the query row $(q,\\|q\\|^2-w_q,1)$. Then\n$$P_d=-O_d\\Delta(q),\\qquad O_dP_d=-O_d^2\\Delta(q).$$\nThus the sign of $O_dP_d$ is positive, zero or negative exactly when $q$ is respectively inside, on or outside the power sphere. When all weights are zero, this is the ordinary circumsphere convention.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lexicographic-lift-tie-break-consistent",
+          "source_section": "Statement",
+          "quote": "Fix one finite universe $U$ of uniquely indexed dyadic sites and weights and a dimension $d\\in\\{2,3\\}$. For an ordered tuple of $d+2$ distinct sites whose first $d+1$ sites are affinely independent, the lexicographic lift procedure in [[def-lexicographic-lift-tie-break]] is the determinant sign of one common formal lifted configuration. Every exact nonzero power determinant retains its original sign, every exact zero has a nonzero polynomial tie determinant, and all tuples therefore receive mutually coherent signs. No numeric perturbation parameter is selected or assumed.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+          "source_section": "Statement",
+          "quote": "For every finite encoded dyadic point tuple and every orientation or lifted\ndeterminant request in\n[[alg-certified-dyadic-geometric-predicate]], the returned raw sign equals the\nexact determinant sign, including zero, and the procedure terminates. A\nnondegenerate incircle/insphere side result agrees with the orientation-\nnormalized convention in\n[[lem-lifted-determinant-sign-matches-sphere-side]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-exact-dyadic-determinant-sign",
+          "source_section": "Definition",
+          "quote": "Input: a finite $s\\times s$ matrix $M$ of exact dyadic rationals with $s\\ge1$. Output: the\nsign of its exact determinant, including zero.\n\n1. In row $i$, write each nonzero entry in reduced form\n   $M_{ij}=a_{ij}/2^{b_{ij}}$ in reduced form with $b_{ij}\\ge0$ and\n   $a_{ij}$ odd when $b_{ij}>0$; write a zero entry with $b_{ij}=0$. Set\n   $k_i=\\max_j b_{ij}$ and form\n   $N_{ij}=2^{k_i}M_{ij}$, an integer matrix.\n2. Compute $\\sum_{\\pi\\in S_s}\\operatorname{sgn}(\\pi)\\prod_iN_{i,\\pi(i)}$\n   using arbitrary-precision integer arithmetic.\n3. Return the sign of this integer sum.\n\nThe row scalings are positive, so [[lem-dyadic-determinant-integer-clearance-preserves-sign]]\nshows that step 3 returns the sign of $\\det M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-lower-lifted-facets-cover-the-convex-hull",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\{2,3\\}$ and let $P$ be a finite indexed weighted site set of affine dimension $d$ in $\\mathbb R^d$. Lift each site to height $h_i=\\|p_i\\|^2-w_i+\\varepsilon^{2^{r_i}}$ in the fixed ordered formal field of [[def-lexicographic-lift-tie-break]]. A **lower simplex** is the projection of $d+1$ affinely independent lifted sites whose graph hyperplane has every lifted site on or above it. Then the lower simplices cover $\\operatorname{conv}(P)$ and intersect in common faces. Each lower simplex has a weakly empty power sphere for the original unperturbed weighted sites.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "There are finitely many insertion prefixes, finitely many four-site subsets at each prefix, and finitely many sites to test against each subset. Projected base ranks are decided by [F5]; each weighted determinant coefficient is a finite dyadic sum of products and its sign is computed exactly by [F6]. Hence every enumeration terminates.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If a previously supporting tetrahedron remains supporting after insertion, its old four vertices still define the same plane and all old sites remain above it; it is retained exactly when the new site is also above it. Any newly supporting four-site subset not present in the preceding prefix contains the inserted site. Thus the set difference described in [F2] is precisely the new finite lower-facet list, and there is no unprocessed repair loop.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At the final prefix, every retained tetrahedron has an affinely independent projected base and satisfies all formal supporting inequalities by the exhaustive test [F2]. Conversely, every full-dimensional lower simplex in [F7] is one of the enumerated four-site subsets and passes every test, so it is retained. The two lists are therefore identical; [F7] gives coverage, common-face intersections, and weak empty-power-sphere correctness. In zero-weight mode the power distance is ordinary squared distance, so these are Delaunay tetrahedra.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "A site that is a vertex of a lower face lies on the lower boundary over its projected point. By [F7], that point lies in a full lower tetrahedron; if the site were not one of its four vertices, its lift would lie on the tetrahedron's support plane, giving a zero formal determinant on an independent projected base, contrary to [F4]. Hence every lower-hull vertex appears in a retained tetrahedron. Conversely every retained tetrahedron is a lower face by step 3.1, so each of its four sites is a lower-hull vertex. Thus absence from all retained tetrahedra is equivalent to being hidden by [F1]. Every degenerate projected four-tuple is separately recorded by [F2], while affine dimension below three takes the explicit status branch in [F1].",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The finite enumerations and finite prefix list in step 1.1 terminate in every case and use no arbitrary choice; ties use the fixed formal order [F4]. This proves the theorem.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a finite nonempty weighted set of projected affine dimension three."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 3.1, 4.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Projected affine dimension three requires at least four sites."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 1.1, 4.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 3.1, 4.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 1.1, 5.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 4.1; its finite computation or stated hypothesis is applied there."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The boundary is addressed in step 4.1; its finite computation or stated hypothesis is applied there."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "thm-randomized-history-dag-expected-location-cost": {
+      "proof_strategy": "direct",
+      "axiom_use": "The uniform random permutation is a finite probability space; no Axiom of Choice is used. The exact-predicate-call unit-cost model is an explicit hypothesis.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-randomized-history-dag-point-location",
+          "source_section": "Definition",
+          "quote": "Assume a finite full-dimensional planar site set in general position: no three input sites are collinear and no four are cocircular. Choose the augmented dyadic supertriangle using the general-position clause of [[lem-large-delaunay-supertriangle-exists]], so the full augmented set has no three collinear sites and no four cocircular sites. Fix the common tie ranks before processing.\n\nDraw one permutation uniformly from all $n!$ permutations of the distinct input sites and insert in that order using [[alg-incremental-planar-delaunay-edge-flips]]. Maintain a directed acyclic graph (DAG) whose leaves correspond one-to-one with current triangulation triangles. Initially it has one leaf for the supertriangle. When a face is split into three triangles, turn its leaf into an internal node with pointers to the three new leaves. When an edge split replaces two triangles by four, each old leaf points to the new leaves whose interiors meet its old triangle. When a flip replaces two triangles by two, each old leaf points to both new leaves. A leaf that is later replaced is treated in the same way; cross-pointers keep each current leaf linked to its triangle.\n\nTo locate the next site, start at the root and test the query against the children of the current node using exact orientation predicates. Descend to the child triangle containing the query and continue until reaching a current leaf. Under the augmented general-position condition the query lies in a unique triangle at every stage. Each internal node has at most three children. After construction, remove synthetic-vertex triangles for the returned Delaunay triangulation; the history DAG is the insertion-time point-location structure.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-incremental-planar-delaunay-correctness-and-termination",
+          "source_section": "Statement",
+          "quote": "For every nonempty finite indexed dyadic planar site set, after duplicate collapse the algorithm of [[alg-incremental-planar-delaunay-edge-flips]] terminates. In the affine-dimension-two branch, after each insertion the augmented triangles are exactly the $d=2$ lower simplices of the common fixed-universe formal lift, as defined in [[lem-lower-lifted-facets-cover-the-convex-hull]]. After removing synthetic vertices, the output triangulates the input convex hull with weakly empty original circumdisks and coherent lexicographic ties. In dimensions zero and one, the algorithm returns the defined single site or consecutive chain.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-planar-triangle-and-edge-count",
+          "source_section": "Statement",
+          "quote": "For a triangulation of the convex hull of $n$ distinct planar sites with affine dimension two, let $k$ be the number of sites on the hull boundary, $T$ the number of triangles, and $E$ the number of edges. Then\n$$T=2n-2-k,\\qquad E=3n-3-k.$$\nIn particular $T<2n$ and $E<3n$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-lifted-power-sphere-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\{2,3\\}$, let $p_0,\\ldots,p_d,q\\in\\mathbb D^d$, and let their dyadic weights be $w_0,\\ldots,w_d,w_q$ (zero when absent). Assume $p_0,\\ldots,p_d$ are affinely independent. If $c\\in\\mathbb R^d$ and $R\\in\\mathbb R$ satisfy\n$$\\|p_i-c\\|^2-w_i=R\\qquad(0\\le i\\le d),$$\ndefine the power difference\n$$\\Delta(q)=\\|q-c\\|^2-w_q-R.$$\nLet $O_d$ be the determinant of the rows $(p_i,1)$ for $i=0,\\ldots,d$, and let $P_d$ be the determinant of the $d+2$ rows $(p_i,\\|p_i\\|^2-w_i,1)$, including the query row $(q,\\|q\\|^2-w_q,1)$. Then\n$$P_d=-O_d\\Delta(q),\\qquad O_dP_d=-O_d^2\\Delta(q).$$\nThus the sign of $O_dP_d$ is positive, zero or negative exactly when $q$ is respectively inside, on or outside the power sphere. When all weights are zero, this is the ordinary circumsphere convention.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S_r$ be the unordered set of the first $r$ input sites, and let $p_r$ be the last site among them. Conditional on $S_r$, $p_r$ is uniform on $S_r$. The augmented triangulation has $m=r+3$ vertices and its fixed hull has $k=3$ sites, so [F3] gives $T_r=2r+1$ and $E_r=3r+3$. The degree of uniform $p_r$ is at most the average input-site degree, hence at most $(2E_r)/r=6+6/r\\le12$. The number of final triangles incident to $p_r$ is its degree. During local legalization, the initial face split creates three triangles and each flip adds two triangles while increasing that degree by one; if the final degree is $d_r$, at most $2d_r-3$ triangle nodes are created in that stage. Thus expected DAG nodes per stage are at most $21$, and the DAG has expected $O(n)$ nodes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a stage $r$ and condition on $S_r$. Let $k_r(q)$ count the triangles of its Delaunay triangulation whose circumdisks contain a future site $q$, and let $k_r(q,p_r)$ count those also incident to $p_r$. Since the triangulation $T_r$ is determined by the unordered set $S_r$, it is fixed under this conditioning. Each triangle has at most three input vertices, so uniformity of $p_r$ gives $\\mathbb E[k_r(q,p_r)\\mid S_r]\\le3k_r(q)/r$. The new final triangles are exactly those of $T_r$ incident to $p_r$, and therefore $\\mathbb E\\!\\left[\\sum_{\\Delta\\text{ created at }r}|K(\\Delta)|\\,\\middle|\\,S_r\\right]=\\sum_{q\\notin S_r}\\mathbb E[k_r(q,p_r)\\mid S_r]\\le\\frac3r\\sum_{q\\notin S_r}k_r(q)$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Count first the triangles in the final Delaunay triangulations $T_r$ that are created at a stage; for such a triangle $\\Gamma$, let $K(\\Gamma)$ be the set of later input sites strictly inside its circumdisk. A DAG walk visits only triangle nodes containing its query: a split's children partition the replaced triangle, and a flip's two linked children together cover each of the two replaced triangles. If a visited node is destroyed by a face split, it is the old Delaunay triangle $\\Gamma$ being split; the query lies inside it and hence in $K(\\Gamma)$. If it is destroyed by a flip, the flip removes an old Delaunay triangle $\\Gamma$ whose circumdisk contains the inserted site, together with one triangle incident to that site. The latter triangle lies in the same disk because its vertices are in the disk and the disk is convex. Charge either visited node to $\\Gamma$. Each old $\\Gamma$ is deleted once and is paired with at most one inserted-site triangle, so it receives at most two charges per query. Consequently the total number of visits is $O(n+\\sum_{\\Gamma}|K(\\Gamma)|)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conditional on $S_r$, the next site $q=p_{r+1}$ is uniform among the $n-r$ remaining sites, so $\\sum_{q\\notin S_r}k_r(q)=(n-r)\\mathbb E[k_r(p_{r+1})\\mid S_r]$. Every old triangle's plane supports all sites in $S_r$ by [F2]. By [F4], a future site is strictly inside its circumcircle exactly when its lifted point is formally below this plane; augmented general position excludes equality. Thus precisely the triangles counted by $k_r(p_{r+1})$ cease to support after the insertion, and [F2] returns the new lower triangulation, so this count is exactly the number of old triangles destroyed. The hull remains the same supertriangle, so [F3] gives $T_{r+1}-T_r=2$; the number destroyed is the number of final triangles created minus $2$, hence at most that number. After averaging over $S_r$, the set $S_{r+1}$ is a uniform $(r+1)$-subset and $p_{r+1}$ is uniform within it; step 1.1 bounds the expected number of final triangles created by $12$. Thus $\\mathbb E[k_r(p_{r+1})]\\le12$, and averaging step 1.2 gives a stage-$r$ expected conflict sum at most $36(n-r)/r$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Summing the bound of step 2.2 over $r=1,\\ldots,n-1$ gives at most $36n\\sum_{r=1}^{n-1}1/r=O(n\\log n)$. Step 2.1 then bounds expected total history-DAG location work by $O(n\\log n)$; triangle updates and storage are expected $O(n)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At stage $r$ the augmented triangulation has $r+3$ vertices, so the inserted site's degree is at most $r+2$. By step 1.1, which counts at most $2d_r-3$ new triangle nodes when the final degree is $d_r$, each stage creates $O(r)$ nodes and the whole DAG has $O(n^2)$ nodes. Each of $n$ queries visits at most all those nodes, with at most three child tests per node by [F1]. Thus worst-case total location work is $O(n^3)$. The count is in exact predicate calls; arbitrary-precision bit cost is not included.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A full-dimensional planar input is assumed; such an input has at least three distinct sites."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement makes no assertion about a zero-value or zero-determinant case, and its hypotheses exclude that boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Full-dimensional planar general position requires at least three input sites."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes full-dimensional general-position input and an augmented set with no three collinear or four cocircular sites."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result counts insertion-time point-location work; no interval endpoint or limiting query is part of its domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 conditions on a finite uniform permutation and a finite prefix; all expectations are on a finite probability space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "thm-three-dimensional-delaunay-output-size-quadratic": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+          "source_section": "Definition",
+          "quote": "For a weighted site $(p,w)$, define its power distance from $x\\in\\mathbb R^3$ by\n$$\\pi_{(p,w)}(x)=\\|x-p\\|^2-w.$$\nIts lifted point is $\\widehat p=(p,\\|p\\|^2-w)\\in\\mathbb R^4$. A lower face of the lifted convex hull is a face supported by a nonvertical hyperplane $z=\\ell(x)$ with every lifted site on or above that hyperplane. The projection of the union of lower faces is the **regular subdivision** of the projected sites; a simplex in that subdivision has an empty power sphere, meaning its common power distance is no larger than that of any input site.\n\nThe lex-refined lift is interpreted over the ordered rational-function field of [[def-lexicographic-lift-tie-break]], using one fixed finite universe of all input sites. When every weight is zero, the regular subdivision is the ordinary 3D Delaunay subdivision and power spheres are circumspheres. A weight configuration can hide a site: a weighted site is **hidden** if its lift is not a vertex of any lower face. A nonsimplicial lower face is refined with the same fixed-universe lexicographic lift convention. For projected affine dimension below three, the algorithm reports `lower-dimensional` with that dimension and the exact deduplicated site list, and makes no tetrahedralization claim. A tetrahedral output is claimed only on the full-dimensional branch with nondegenerate projected bases.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lexicographic-lift-tie-break-consistent",
+          "source_section": "Statement",
+          "quote": "Fix one finite universe $U$ of uniquely indexed dyadic sites and weights and a dimension $d\\in\\{2,3\\}$. For an ordered tuple of $d+2$ distinct sites whose first $d+1$ sites are affinely independent, the lexicographic lift procedure in [[def-lexicographic-lift-tie-break]] is the determinant sign of one common formal lifted configuration. Every exact nonzero power determinant retains its original sign, every exact zero has a nonzero polynomial tie determinant, and all tuples therefore receive mutually coherent signs. No numeric perturbation parameter is selected or assumed.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-simplicial-four-polytope-facet-count",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a full-dimensional convex polytope in $\\mathbb R^4$ with $m\\ge5$ vertices. A facet is a three-dimensional face, and a vertex is an extreme point. Then the number $f_3$ of facets satisfies\n$$f_3\\le \\frac{m(m-3)}2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination",
+          "source_section": "Statement",
+          "quote": "For a finite dyadic weighted site set of projected affine dimension three, the algorithm of [[alg-incremental-three-dimensional-regular-cavity-repair]] terminates. Its output tetrahedra cover the convex hull, meet in common faces, and have empty power spheres in the original weak sense. In the zero-weight case they are ordinary Delaunay tetrahedra. A site is hidden in the fixed formal lower hull if and only if it is omitted from every output tetrahedron. The algorithm reports every coplanar four-site base as `degenerate-base` and makes no tetrahedralization claim on the lower-dimensional branch.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], each output tetrahedron is a lower facet of the lifted convex hull of the weighted sites in [F1]. The formal lift is one common configuration by [F2], and a five-site lower facet with a nondegenerate projected four-site base would make its determinant zero, contrary to [F2]. Thus every lower facet contributing an output cell has exactly four vertices, and distinct output tetrahedra correspond to distinct facets.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $n=4$, at most one four-site candidate is output, and $1\\le4(4-3)/2$. If $n\\ge5$, choose four affinely independent projected sites and a fifth distinct site. Their nonzero formal determinant by [F2] shows that the lifted hull is full-dimensional in $\\mathbb R^4$. Let $m\\le n$ be its number of extreme vertices; full dimension forces $m\\ge5$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F3] to this full-dimensional convex 4-polytope. Its total number of facets, hence also its number of lower facets, is at most $m(m-3)/2$. The function $s(s-3)/2$ is increasing for integers $s\\ge5$, so the output count is at most $n(n-3)/2$. This is quadratic; the argument establishes no angle or tetrahedral-quality bound.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=4 weighted sites of projected affine dimension three."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement makes no assertion about a zero-value or zero-determinant case, and its hypotheses exclude that boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 separately treats n=4, where the lifted hull is only three-dimensional; step 2.1 handles n>=5 and establishes full dimension in R4."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or boundary-value limit occurs in the Statement; this is not a limiting argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "No separate registered finite_smoke check applies; finite cases and boundary conditions are handled in the written proof."
+    },
+    "ex-cocircular-four-site-lexicographic-tie": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-indexed-geometric-site-set",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lexicographic-lift-tie-break",
+          "source_section": "Definition",
+          "quote": "Take a fixed finite universe $U$ of indexed sites as in [[def-indexed-geometric-site-set]], dimension $d\\in\\{2,3\\}$, and an ordered tuple of $d+2$ sites from $U$ with distinct identifiers. A computation using auxiliary sites, such as a planar supertriangle, includes those sites in $U$ from the start and assigns them distinct deterministic integer identifiers. Require that the first $d+1$ sites are affinely independent. Put $h_i=\\|p_i\\|^2-w_i$, with absent weights interpreted as $0$. Rank all identifiers of $U$ in increasing order, starting at rank $0$, and define\n$$P(\\varepsilon)=\\det\\bigl((p_i,h_i+\\varepsilon^{2^{r_i}},1)\\bigr)_{i=0}^{d+1}.$$\nRegard $\\varepsilon$ as a positive formal infinitesimal in the rational-function field $\\mathbb R(\\varepsilon)$, ordered so a nonzero polynomial has the sign of its coefficient at its least nonzero exponent. Expand this finite polynomial exactly and return the sign of its coefficient at the least exponent with nonzero coefficient. If the base is degenerate, return status degenerate-base. The same universe $U$ and ranks are used for every predicate tuple. The procedure never chooses or evaluates a numerical $\\varepsilon$; its returned sign is the declared stable-id tie convention for the raw lifted determinant in [[def-certified-geometric-predicate-determinants]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lexicographic-lift-tie-break-consistent",
+          "source_section": "Statement",
+          "quote": "Fix one finite universe $U$ of uniquely indexed dyadic sites and weights and a dimension $d\\in\\{2,3\\}$. For an ordered tuple of $d+2$ distinct sites whose first $d+1$ sites are affinely independent, the lexicographic lift procedure in [[def-lexicographic-lift-tie-break]] is the determinant sign of one common formal lifted configuration. Every exact nonzero power determinant retains its original sign, every exact zero has a nonzero polynomial tie determinant, and all tuples therefore receive mutually coherent signs. No numeric perturbation parameter is selected or assumed.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-incremental-planar-delaunay-correctness-and-termination",
+          "source_section": "Statement",
+          "quote": "For every nonempty finite indexed dyadic planar site set, after duplicate collapse the algorithm of [[alg-incremental-planar-delaunay-edge-flips]] terminates. In the affine-dimension-two branch, after each insertion the augmented triangles are exactly the $d=2$ lower simplices of the common fixed-universe formal lift, as defined in [[lem-lower-lifted-facets-cover-the-convex-hull]]. After removing synthetic vertices, the output triangulates the input convex hull with weakly empty original circumdisks and coherent lexicographic ties. In dimensions zero and one, the algorithm returns the defined single site or consecutive chain.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The unperturbed heights are $0,1,2,1$. Each is $x+y$ at its site, so the four lifted points lie in the plane $z=x+y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "All four original sites lie on the circle centered at $(1/2,1/2)$ with radius squared $1/2$. No other sites are present, so neither selected triangle has a site strictly inside its circumdisk. They are weakly empty by [F4].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With the perturbation from [F2], the plane through $A,B,C$ has value $1+\\varepsilon-\\varepsilon^2+\\varepsilon^4$ at $D$, while $D$'s lifted height is $1+\\varepsilon^8$. Their difference is $\\varepsilon^8-\\varepsilon+\\varepsilon^2-\\varepsilon^4$, whose least nonzero exponent is $1$ with coefficient $-1$. Thus $D$ lies formally below the plane through $A,B,C$, and diagonal $AC$ is illegal. The flip selects $BD$ by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The plane through $A,B,D$ has value $2+\\varepsilon^2+\\varepsilon^8-\\varepsilon$ at $C$; subtracting from $C$'s height $2+\\varepsilon^4$ gives $\\varepsilon-\\varepsilon^2+\\varepsilon^4-\\varepsilon^8$, which is formally positive. The plane through $B,C,D$ has value $\\varepsilon^8-\\varepsilon^4+\\varepsilon^2$ at $A$; subtracting from $A$'s height $\\varepsilon$ gives $\\varepsilon-\\varepsilon^2+\\varepsilon^4-\\varepsilon^8$, also formally positive. Hence both $ABD$ and $BCD$ are lower triangles for the common lift.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "When three synthetic identifiers are inserted below $1,2,3,4$, each input rank increases by three and each exponent $2^{r_i}$ is multiplied by $8$. Thus every input-only determinant polynomial becomes the four-site polynomial with $\\varepsilon$ replaced by $\\varepsilon^8$, which preserves the first nonzero coefficient sign. The augmented run therefore retains diagonal $BD$, and [F5] returns the stated weakly empty triangulation.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes exactly four indexed square sites."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 compute the exact-zero cocircular determinant and its nonzero first perturbation coefficient."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The configuration contains four distinct sites."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is a finite square configuration and makes no endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "This exact finite example is fully computed in its proof; no registered finite_smoke selector applies."
+    },
+    "ex-collinear-sites-lower-dimensional-output": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-indexed-geometric-site-set",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-incremental-planar-delaunay-correctness-and-termination",
+          "source_section": "Statement",
+          "quote": "For every nonempty finite indexed dyadic planar site set, after duplicate collapse the algorithm of [[alg-incremental-planar-delaunay-edge-flips]] terminates. In the affine-dimension-two branch, after each insertion the augmented triangles are exactly the $d=2$ lower simplices of the common fixed-universe formal lift, as defined in [[lem-lower-lifted-facets-cover-the-convex-hull]]. After removing synthetic vertices, the output triangulates the input convex hull with weakly empty original circumdisks and coherent lexicographic ties. In dimensions zero and one, the algorithm returns the defined single site or consecutive chain.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-planar-triangle-and-edge-count",
+          "source_section": "Statement",
+          "quote": "For a triangulation of the convex hull of $n$ distinct planar sites with affine dimension two, let $k$ be the number of sites on the hull boundary, $T$ the number of triangles, and $E$ the number of edges. Then\n$$T=2n-2-k,\\qquad E=3n-3-k.$$\nIn particular $T<2n$ and $E<3n$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two entries at $(1,0)$ form one unweighted duplicate class by [F1]. Their identifiers are $2$ and $3$, so the retained representative has id $2$ and id $3$ is recorded as discarded. The deduplicated coordinates are $(0,0),(1,0),(2,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "These three distinct points lie on the horizontal line $y=0$ and are not all equal, so their affine dimension is exactly one. Sorting by $x$ gives the displayed order, and [F2] joins consecutive points, yielding edges $(0,0)(1,0)$ and $(1,0)(2,0)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The output has no triangles because the affine dimension is one; the algorithm therefore uses the branch of [F3], while the affine-dimension-two premise of [F4] does not apply.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty four-entry coordinate list."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement makes no assertion about a zero-value or zero-determinant case, and its hypotheses exclude that boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The raw input has four entries and three distinct points after duplicate collapse."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 collapse the duplicate and verify that the three remaining sites have affine dimension one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 sorts all three sites and returns both consecutive chain edges, including the two outer endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "This exact finite example is fully computed in its proof; no registered finite_smoke selector applies."
+    },
+    "ex-scattered-linear-interpolation-over-delaunay-cell": {
+      "proof_strategy": "direct",
+      "axiom_use": "No additional axiom is used; all sets and calculations are finite, so no Axiom of Choice is used.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-indexed-geometric-site-set",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $\\mathbb R$ is a commutative field with $1>0$, a total order compatible with addition and multiplication, and the least-upper-bound property. Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield. For $d\\in\\{2,3\\}$, a nonempty finite indexed site list is a finite list\n$$S=((\\iota_1,p_1,w_1),\\ldots,(\\iota_N,p_N,w_N)),$$\nwhere every $\\iota_i\\in\\mathbb Z$ is a distinct stable identifier, every $p_i\\in\\mathbb D^d$, and each optional weight $w_i$ is either absent (meaning $0$) or belongs to $\\mathbb D$. In unweighted mode, a duplicate means equal coordinates; collapse each such class to its least identifier. In weighted mode, a duplicate means an equal coordinate-weight pair; collapse only equal pairs to the least identifier. Equal coordinates with unequal weights remain distinct weighted sites.\n\nThe unweighted deduplicated set keeps, for each coordinate value $p$, the entry with least identifier among entries at $p$, and records each discarded identifier in a duplicate map. The weighted deduplicated set keeps the least identifier for each exact pair $(p,w)$ and records only repeated pairs in its duplicate map. A weighted computation retains different weights at the same coordinate; their power values are compared by the ordinary power-distance rule, so a dominated weight may be hidden.\n\nFor a finite point set $P\\subseteq\\mathbb R^d$, its convex hull is the set of all finite convex combinations of points of $P$. Its affine dimension is the dimension of its affine hull. A tuple $p_0,\\ldots,p_d$ is affinely independent when the vectors $p_1-p_0,\\ldots,p_d-p_0$ form a basis of $\\mathbb R^d$; here a basis means every vector has a unique linear expansion in those vectors. This convention makes nondegenerate simplex coordinates unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-planar-delaunay-voronoi-structures",
+          "source_section": "Definition",
+          "quote": "Use the unweighted deduplicated coordinate set of [[def-indexed-geometric-site-set]]. If its affine dimension is zero, its output is its single site. If its affine dimension is one, sort by the first varying coordinate (use $x$ if it varies, otherwise $y$) and take the chain joining consecutive sites; this is the lower-dimensional output and contains no triangles.\n\nFor affine dimension two, a **triangulation of the sites** is a finite family of nondegenerate closed triangles whose vertices are sites, whose union is the convex hull, and whose pairwise intersections are common faces. Its 1-skeleton is the graph with these sites as vertices and all triangle sides as edges; it is connected. The bounded faces of this plane graph are exactly the chosen triangles, and its one unbounded face is the exterior of the convex hull. The boundary edges of the convex hull are subdivided at every site on that boundary. A triangle is **weakly empty-circle** when no site lies strictly inside its circumdisk; other sites may lie on its boundary.\n\nFor each site $p$, its closed **Voronoi cell** is\n$$V(p)=\\{x\\in\\mathbb R^2:\\|x-p\\|^2\\le\\|x-q\\|^2\\text{ for every site }q\\}.$$\nA tie belongs to every minimizing cell. The **Delaunay graph** has one vertex for each site and an edge $pq$ exactly when $V(p)\\cap V(q)$ contains a nontrivial line segment. A **Voronoi vertex** is a point belonging to at least three distinct cells. It is dual to the convex polygon of the nearest sites; [[lem-voronoi-vertex-empty-circle]] proves that those sites are vertices on one empty circle centered at that point. A **Delaunay triangulation** is a triangulation refining these polygonal Delaunay faces and having weakly empty circumdisks. In a cocircular face the triangulation need not be unique; the chosen algorithmic refinement is the fixed-universe convention of [[def-lexicographic-lift-tie-break]].\n\nThe convex-hull boundary is the boundary of the union of the triangles. An unbounded Voronoi cell corresponds to a site on that boundary. No minimum-angle or other mesh-quality condition is part of these definitions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-barycentric-point-location-interpolation-and-voronoi-query",
+          "source_section": "Definition",
+          "quote": "Let $T$ be a nondegenerate triangle with ordered vertices $p_0,p_1,p_2\\in\\mathbb D^2$. For $x\\in\\mathbb R^2$, its **barycentric coordinates** are the unique scalars $\\lambda_0,\\lambda_1,\\lambda_2$ satisfying $\\sum_i\\lambda_i=1$ and $x=\\sum_i\\lambda_i p_i$. They are exact for dyadic $x$: they are obtained by solving the invertible $2\\times2$ system with columns $p_1-p_0,p_2-p_0$. The point is in $T$ exactly when all $\\lambda_i\\ge0$.\n\nGiven vertex data $f_0,f_1,f_2\\in\\mathbb R$, the **barycentric affine interpolant** on $T$ is $I_Tf(x)=\\sum_i\\lambda_i f_i$. A point-location result is a containing triangle of the triangulation, with a shared-edge or shared-vertex result allowed when the point lies on a face; outside the convex hull its status is `outside-hull` and no containing triangle is returned.\n\nFor a finite unweighted site set $P$, the **nearest-site query** returns a site minimizing $\\|x-p\\|^2$, breaking ties by the least stable identifier. Its hull status is `inside-hull` for $x\\in\\operatorname{conv}P$ and `outside-hull` otherwise. The minimizer is returned in either case.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-barycentric-interpolation-and-nearest-neighbor-query-correct",
+          "source_section": "Statement",
+          "quote": "On every nondegenerate triangle, a point lies in the triangle if and only if its unique barycentric coordinates are all nonnegative; these coordinates also give the unique affine interpolant matching the three vertex data. Interpolants on adjacent triangles with common vertex data agree on their shared face. On an edge, the interpolant is the degree-one cardinal polynomial interpolant. For every nonempty finite site set, the nearest-site query returns a minimizer, breaks ties by least identifier, and reports correctly whether the query is inside or outside the convex hull.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-incremental-planar-delaunay-correctness-and-termination",
+          "source_section": "Statement",
+          "quote": "For every nonempty finite indexed dyadic planar site set, after duplicate collapse the algorithm of [[alg-incremental-planar-delaunay-edge-flips]] terminates. In the affine-dimension-two branch, after each insertion the augmented triangles are exactly the $d=2$ lower simplices of the common fixed-universe formal lift, as defined in [[lem-lower-lifted-facets-cover-the-convex-hull]]. After removing synthetic vertices, the output triangulates the input convex hull with weakly empty original circumdisks and coherent lexicographic ties. In dimensions zero and one, the algorithm returns the defined single site or consecutive chain.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\lambda_0,\\lambda_1,\\lambda_2$ correspond to $(0,0),(2,0),(0,2)$. The coordinate equations give $2\\lambda_1=1/2$ and $2\\lambda_2=1/2$, hence $\\lambda_1=\\lambda_2=1/4$; their sum constraint gives $\\lambda_0=1/2$. All three are nonnegative, so the query lies in the triangle by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The interpolated value is $0\\cdot\\lambda_0+2\\cdot\\lambda_1+2\\cdot\\lambda_2=2(1/4)+2(1/4)=1$. Uniqueness follows from [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The three sites are noncollinear, so by [F2] their convex hull is their single triangle. Its circumcircle has center $(1,1)$ and radius squared $2$; there are no other sites by [A1], so it is weakly empty, and [F5] returns this cell.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes exactly three distinct triangle vertices and a query point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the interpolant using the zero datum at the first vertex and obtains the exact value 1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses three distinct noncollinear vertices."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the required affine independence or full dimension and makes no claim on the excluded degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The fixed query (1/2,1/2) is strictly inside the triangle; no boundary-query value is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an arbitrary family is made; all operations are finite or follow by direct field algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and does not assert an if-and-only-if."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-author",
+        "notes": "Author self-check of the local argument and stated boundary cases; this is not independent review or acceptance."
+      },
+      "finite_check_disposition": "This exact finite example is fully computed in its proof; no registered finite_smoke selector applies."
+    }
+  }
+}

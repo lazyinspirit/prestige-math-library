@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "71",
+  "round": 0,
+  "reviewed_items": [
+    "def-na-finite-state-discounted-bellman-system",
+    "def-na-second-order-elliptic-semijets-and-closure",
+    "lem-na-convex-support-localization-and-lipschitz-dual-gradient",
+    "lem-na-jensen-maximum-principle-semiconvex",
+    "lem-na-lipschitz-critical-image-null",
+    "thm-na-rademacher-euclidean",
+    "def-na-periodic-grid-and-tensor-multilinear-interpolation",
+    "lem-na-discounted-bellman-policy-matrix-inverse-positive",
+    "lem-na-sup-convolution-semiconvexity-and-jet-transfer",
+    "thm-na-semiconvex-alexandrov-second-order-differentiability",
+    "alg-na-finite-control-howard-policy-iteration",
+    "def-na-first-order-hjb-cauchy-problem",
+    "def-na-periodic-diagonal-controlled-diffusion-hjb-problem",
+    "lem-na-multilinear-interpolation-positive-and-second-order-accurate",
+    "thm-na-elliptic-theorem-of-sums",
+    "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+    "alg-na-positive-interpolation-semilagrangian-hjb-step",
+    "alg-na-upwind-hjb-grid-step",
+    "def-na-second-order-parabolic-viscosity-solution",
+    "lem-na-grid-contact-localization-for-half-relaxed-limits",
+    "thm-na-howard-policy-iteration-monotone-improvement-termination",
+    "lem-na-diagonal-diffusion-discrete-initial-trace",
+    "lem-na-diagonal-diffusion-stencil-is-monotone",
+    "lem-na-elliptic-spacetime-jets-imply-parabolic-hjb-inequalities",
+    "lem-na-first-order-hjb-discrete-initial-trace",
+    "lem-na-smooth-tests-suffice-for-first-and-second-order-hjb-viscosity",
+    "thm-na-diagonal-diffusion-stencil-consistency",
+    "thm-na-positive-interpolation-hjb-step-monotone-stable-consistent",
+    "thm-na-upwind-hjb-grid-step-monotone-stable-consistent",
+    "thm-na-diagonal-diffusion-scheme-half-relaxed-limits",
+    "thm-na-first-order-hjb-scheme-convergence",
+    "thm-na-periodic-diagonal-hjb-second-order-comparison",
+    "cor-na-diagonal-diffusion-scheme-converges-under-comparison",
+    "thm-na-diagonal-diffusion-hjb-scheme-convergence",
+    "cex-na-centered-hjb-update-is-not-monotone",
+    "ex-na-discounted-control-switching-policy-iteration",
+    "ex-na-diagonal-diffusion-manufactured-solution",
+    "ex-na-compact-control-quantization-hamiltonian-error",
+    "ex-na-eikonal-kink-monotone-hjb-updates"
+  ],
+  "reviewed_pages": [
+    "monotone-hjb-schemes-and-policy-iteration",
+    "monotone-hjb-schemes-and-policy-iteration-examples"
+  ],
+  "decision": "escalate",
+  "reason": "A direct out-of-batch prerequisite used by the Rademacher proof has an invalid higher-dimensional null-set argument. The second-order foundation, theorem of sums, comparison, and unconditional convergence therefore cannot be accepted yet. The first-order, finite-state policy iteration, stencil, and example arguments otherwise check.",
+  "findings": [
+    {
+      "id": "thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n",
+      "type": "prerequisite",
+      "reason": "In steps 2.1–3.1, the sets E_{m,j} have small but generally nonzero measure, yet step 3.1 needs countable subadditivity of n-dimensional Lebesgue measure. Its cited thm-countable-union-of-null-is-null applies only to measure-zero subsets of R. Step 5.1 also applies that one-dimensional result to N_m in R^n. The smallest missing supplier is n-dimensional countable subadditivity for measurable sets, available from thm-finite-and-countable-subadditivity-of-measures once λ_n is established as a measure. This published supplier needs owner repair outside batch 71."
+    },
+    {
+      "id": "thm-na-rademacher-euclidean",
+      "type": "prerequisite",
+      "reason": "The theorem claims a null exceptional set in the closed-cube-cover sense of def-null-and-content-zero-in-rn, while its Lebesgue differentiation supplier gives only Lebesgue-almost-everywhere convergence. The proof does not convert those measure-zero exceptional sets to cube-cover null sets. Cite and use the existing outer-measure/cube-cover equivalence and the λ_n measure interface; preserve the approved null-set conclusion."
+    },
+    {
+      "id": "ftc-dependent-choice-use",
+      "type": "prerequisite",
+      "reason": "Rademacher and semiconvex-Alexandrov invoke thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, whose statement requires both Countable Choice and Dependent Choice. Alexandrov records only the Countable Choice consequence of AC; Rademacher asserts AC supplies DC without citing its supplier. Make the AC→DC use explicit through thm-choice-implies-dependent-implies-countable-choice in both items."
+    },
+    {
+      "id": "thm-na-periodic-diagonal-hjb-second-order-comparison",
+      "type": "local",
+      "reason": "Fact F5 supplies the flat-torus distance and asserts uniqueness and local smoothness of its minimizing lift when D<1/2, which is needed for the doubled-variable C2 penalty. Add a short lattice argument: for |r|<1/2 and nonzero k∈Z^d, |r+k|²−|r|²≥|k|(|k|−2|r|)>0, giving a unique minimizing lift and a smooth local squared distance."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-na-rademacher-euclidean",
+      "decision": "escalate",
+      "reason": "Its Lebesgue differentiation prerequisite proof is defective for R^n, and its measure-null to cube-cover-null bridge is unstated."
+    },
+    {
+      "id": "thm-na-semiconvex-alexandrov-second-order-differentiability",
+      "decision": "escalate",
+      "reason": "It consumes the unresolved Rademacher result and also invokes the AC theorem requiring Dependent Choice."
+    },
+    {
+      "id": "thm-na-elliptic-theorem-of-sums",
+      "decision": "escalate",
+      "reason": "Its Alexandrov prerequisite remains unresolved."
+    },
+    {
+      "id": "thm-na-periodic-diagonal-hjb-second-order-comparison",
+      "decision": "escalate",
+      "reason": "It consumes the unresolved theorem of sums; its local torus-distance smoothness fact also needs a proof."
+    },
+    {
+      "id": "thm-na-diagonal-diffusion-hjb-scheme-convergence",
+      "decision": "escalate",
+      "reason": "Its comparison prerequisite remains unresolved."
+    }
+  ]
+}

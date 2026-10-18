@@ -1,0 +1,2226 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "49",
+  "level": 2,
+  "scheduling_input_sha256": "71c289d3f8e641afe59da9edfd29a1071647d90fd8ad8b4d14108161c64b04df",
+  "scope": [
+    "def-na-periodic-staggered-grid-stokes-operators",
+    "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+    "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+    "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+    "thm-na-saddle-point-exact-schur-solve",
+    "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+    "alg-na-periodic-incremental-pressure-correction",
+    "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+    "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+    "thm-na-periodic-pressure-correction-solves-well-defined",
+    "thm-na-periodic-discrete-helmholtz-projection",
+    "thm-na-periodic-pressure-correction-modified-energy-identity",
+    "thm-na-periodic-pressure-correction-first-order-velocity-error",
+    "cor-na-mini-element-pressure-mass-schur-bounds",
+    "cor-na-mini-element-pressure-mass-block-spectrum",
+    "ex-na-wall-pressure-correction-tangential-velocity-defect",
+    "cex-na-collocated-central-difference-checkerboard-pressure-mode",
+    "ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum",
+    "ex-na-periodic-single-mode-pressure-correction"
+  ],
+  "contracts": {
+    "def-na-periodic-staggered-grid-stokes-operators": {
+      "kind": "definition",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: displayed positivity, full-rank, and N≥2 hypotheses exclude degenerate blocks and grids."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-na-symmetric-saddle-point-system-and-block-preconditioners": {
+      "kind": "definition",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: displayed positivity, full-rank, and N≥2 hypotheses exclude degenerate blocks and grids."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-periodic-staggered-grid-stokes-operators",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$ and an integer resolution $N\\ge2$, where\n$N\\in\\mathbb N$ ([[def-natural-numbers]]), and put $h=1/N$. Real scalar and\narray operations use the field $\\mathbb R$ ([[thm-reals-field]]). Let\n$J_N=\\{0,\\ldots,N-1\\}^d$; each coordinate index addition below is reduced\nto the unique element of $\\{0,\\ldots,N-1\\}$ congruent modulo $N$. The unit\ntorus $\\mathbb T^d$ means the unit cube with opposite faces identified, so\nfields and arrays are periodic across those faces. Write\n$\\mathbf 1=(1,\\ldots,1)$ and let $e_i$ be the $i$th standard coordinate vector.\nCell $j$ has centre $x_j=h(j+\\tfrac12\\mathbf 1)$. The pressure value $q_j$ is\nstored at that centre. Velocity component $i$ is stored at the right face of\ncell $j$, with centre $x_j+\\tfrac h2e_i$.\n\nLet $\\widetilde Q_h$ be all real scalar cell arrays and let\n$Q_h=\\{q\\in\\widetilde Q_h:h^d\\sum_jq_j=0\\}$. Let $V_h$ be the real vector\nface arrays $v=(v_{i,j})_{1\\le i\\le d,\\,j\\in J_N}$. Give them the mass inner products\n$$ (q,r)_{Q_h}=h^d\\sum_{j\\in J_N}q_jr_j,\\qquad (v,w)_{M_h}=h^d\\sum_{i=1}^d\\sum_{j\\in J_N}v_{i,j}w_{i,j}. $$\nDefine the pressure gradient $G_h:\\widetilde Q_h\\to V_h$ and velocity\ndivergence $D_h:V_h\\to Q_h$ by\n$$ (G_hq)_{i,j}=\\frac{q_{j+e_i}-q_j}{h},\\qquad (D_hv)_j=\\sum_{i=1}^d\\frac{v_{i,j}-v_{i,j-e_i}}{h}. $$\nThe compatible pressure Laplacian is $\\Delta_h=D_hG_h$; its restriction to\n$Q_h$ is negative semidefinite, and $G_h$ annihilates constants. Define the\ncomponentwise vector Laplacian by\n$$ (\\Delta_h^Vv)_{i,j}=h^{-2}\\sum_{\\ell=1}^d (v_{i,j+e_\\ell}-2v_{i,j}+v_{i,j-e_\\ell}),\\qquad A_h=-\\Delta_h^V, $$\nand the discrete velocity-gradient seminorm by\n$$ \\|\\mathcal G_hv\\|_{M_h}^2=h^{d-2}\\sum_{i=1}^d\\sum_{\\ell=1}^d\\sum_{j\\in J_N} |v_{i,j+e_\\ell}-v_{i,j}|^2. $$\nThe fixed cell/face placement is part of the definition; collocated central\ndifferences are a different discretization.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Reindexing the finite periodic sums gives, for every cell array $q$ and face array $v$, $$ (G_hq,v)_{M_h} =h^d\\sum_{i,j}\\frac{(q_{j+e_i}-q_j)v_{i,j}}h =-h^d\\sum_jq_j\\sum_i\\frac{v_{i,j}-v_{i,j-e_i}}h =-(q,D_hv)_{Q_h}. $$ Thus $G_h$ and $D_h$ are negative adjoints in the stated mass pairings.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $q\\in Q_h$. Since $q$ has mean zero, $$ q_x=N^{-d}\\sum_{y\\in J_N}(q_x-q_y), $$ and [F3]–[F4] give the finite-sum Cauchy--Schwarz inequality $$ \\|q\\|_{Q_h}^2\\le N^{-2d}\\sum_{x,y\\in J_N}|q_x-q_y|^2. $$ For each ordered pair $(x,y)$ choose the path that changes coordinates in the order $1,\\ldots,d$, moving forward modulo $N$ in each coordinate. It has at most $dN$ directed edges. Cauchy--Schwarz along the path bounds $|q_x-q_y|^2$ by $dN$ times the sum of squared edge differences on it.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Taking $q$ in place of $v$ through the composition gives $(q,\\Delta_hq)_{Q_h}=-(G_hq,G_hq)_{M_h}\\le0$. If $\\Delta_hq=0$, then $G_hq=0$, so $q_{j+e_i}=q_j$ for every $i,j$. Coordinate steps connect all cells of the periodic grid, hence $q$ is constant. Every constant has zero gradient, so the kernel is exactly the constants.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $v$, summing $D_hv$ over cells cancels each face value once with its opposite occurrence, so $D_hv$ has zero mean. The same is true of $\\Delta_hq=D_h(G_hq)$. Therefore $\\Delta_h$ restricts to a linear map $Q_h\\to Q_h$. Its kernel there is zero by step 2.1, and its domain and codomain are the same finite-dimensional space.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Rank-nullity [F2] now gives $\\dim\\operatorname{im}\\Delta_h=\\dim Q_h$; since the image is a subspace of $Q_h$, the restriction is onto as well as one-to-one. Thus each mean-zero right-hand side has a unique mean-zero pressure solution.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Fix one directed edge in coordinate $i$. For each coordinate $r<i$, its value along the path is $y_r$; to use the fixed edge, $y_r$ is fixed and $x_r$ has at most $N$ choices. For each $r>i$, the path still has value $x_r$; then $x_r$ is fixed and $y_r$ has at most $N$ choices. In coordinate $i$ there are at most $N^2$ ordered start/end pairs. Hence this edge occurs in at most $N^{d+1}$ paths. Summing the path bounds and dividing by $N^{2d}$ yields $$ \\|q\\|_{Q_h}^2\\le dN^{2-d}\\sum_{i,j}|q_{j+e_i}-q_j|^2 =d\\|G_hq\\|_{M_h}^2. $$ Taking nonnegative square roots proves the stated inequality.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero gradient and identifies the full constant kernel; the mean-zero gauge removes its nonzero constants."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that Δ_h q=0 implies q is constant."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves every constant pressure has zero gradient and hence lies in ker Δ_h."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-periodic-staggered-grid-smooth-sampling-consistency": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-periodic-staggered-grid-stokes-operators",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$ and an integer resolution $N\\ge2$, where\n$N\\in\\mathbb N$ ([[def-natural-numbers]]), and put $h=1/N$. Real scalar and\narray operations use the field $\\mathbb R$ ([[thm-reals-field]]). Let\n$J_N=\\{0,\\ldots,N-1\\}^d$; each coordinate index addition below is reduced\nto the unique element of $\\{0,\\ldots,N-1\\}$ congruent modulo $N$. The unit\ntorus $\\mathbb T^d$ means the unit cube with opposite faces identified, so\nfields and arrays are periodic across those faces. Write\n$\\mathbf 1=(1,\\ldots,1)$ and let $e_i$ be the $i$th standard coordinate vector.\nCell $j$ has centre $x_j=h(j+\\tfrac12\\mathbf 1)$. The pressure value $q_j$ is\nstored at that centre. Velocity component $i$ is stored at the right face of\ncell $j$, with centre $x_j+\\tfrac h2e_i$.\n\nLet $\\widetilde Q_h$ be all real scalar cell arrays and let\n$Q_h=\\{q\\in\\widetilde Q_h:h^d\\sum_jq_j=0\\}$. Let $V_h$ be the real vector\nface arrays $v=(v_{i,j})_{1\\le i\\le d,\\,j\\in J_N}$. Give them the mass inner products\n$$ (q,r)_{Q_h}=h^d\\sum_{j\\in J_N}q_jr_j,\\qquad (v,w)_{M_h}=h^d\\sum_{i=1}^d\\sum_{j\\in J_N}v_{i,j}w_{i,j}. $$\nDefine the pressure gradient $G_h:\\widetilde Q_h\\to V_h$ and velocity\ndivergence $D_h:V_h\\to Q_h$ by\n$$ (G_hq)_{i,j}=\\frac{q_{j+e_i}-q_j}{h},\\qquad (D_hv)_j=\\sum_{i=1}^d\\frac{v_{i,j}-v_{i,j-e_i}}{h}. $$\nThe compatible pressure Laplacian is $\\Delta_h=D_hG_h$; its restriction to\n$Q_h$ is negative semidefinite, and $G_h$ annihilates constants. Define the\ncomponentwise vector Laplacian by\n$$ (\\Delta_h^Vv)_{i,j}=h^{-2}\\sum_{\\ell=1}^d (v_{i,j+e_\\ell}-2v_{i,j}+v_{i,j-e_\\ell}),\\qquad A_h=-\\Delta_h^V, $$\nand the discrete velocity-gradient seminorm by\n$$ \\|\\mathcal G_hv\\|_{M_h}^2=h^{d-2}\\sum_{i=1}^d\\sum_{\\ell=1}^d\\sum_{j\\in J_N} |v_{i,j+e_\\ell}-v_{i,j}|^2. $$\nThe fixed cell/face placement is part of the definition; collocated central\ndifferences are a different discretization.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-taylor-lagrange-remainder-from-mean-value",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $f$ have continuous derivatives through order $n+1$ on an\nopen interval containing the closed interval between $c$ and $x$, and define\n$P_n(t)=\\sum_{j=0}^n f^{(j)}(c)(t-c)^j/j!$. If $x\\ne c$, there is a point\n$\\xi$ strictly between $c$ and $x$ such that\n$$\nf(x)-P_n(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-c)^{n+1}.\n$$\nFor $x=c$, the remainder is zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $g\\in C^3(\\mathbb T^d)$, Taylor's formula with Lagrange remainder at the midpoint and [F3] with $m=2$ give $$ g(x+h e_i/2)-g(x-h e_i/2)=h\\,\\partial_i g(x)+r, \\qquad |r|\\le h^3\\|\\partial_i^3g\\|_\\infty/24. $$ The same midpoint formula, with the two cell centres surrounding face $x_j+he_i/2$, gives $$ (G_hR_hp)_{i,j}=\\partial_i p(x_j+he_i/2)+O(h^2), $$ with the pointwise error bounded by $h^2\\|\\partial_i^3p\\|_\\infty/24$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $g\\in C^4(\\mathbb T^d)$, [F3] with $m=3$ at $x$ gives $$ g(x+h e_i)-2g(x)+g(x-h e_i)=h^2\\partial_i^2g(x)+r, $$ where the two fourth-order Lagrange remainders have total absolute value at most $h^4\\|\\partial_i^4g\\|_\\infty/12$. Apply this in every coordinate to $u_i$ at its face centre. It follows that $(A_hR_hu)_{i,j}=-(\\Delta u_i)(x_j+he_i/2)+O(h^2)$, with the error bounded by $h^2\\sum_\\ell\\|\\partial_\\ell^4u_i\\|_\\infty/12$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the midpoint formula to component $u_i$ at cell centre $x_j$ shows, by [F3] with $m=2$, $$ (D_hR_hu)_j=\\sum_i\\partial_i u_i(x_j)+r_j, \\qquad |r_j|\\le\\frac{h^2}{24}\\sum_i\\|\\partial_i^3u_i\\|_\\infty. $$ Thus the discrete divergence differs pointwise from the sampled continuous divergence by $O(h^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each pointwise error bound in steps 1.1–1.2 is uniform. The weighted mass of the grid contains $h^dN^d=1$ total cell volume and there are $d$ velocity components. Therefore the corresponding mass norms are bounded by the same constants (or their finite $d$-component sum) times $h^2$. Combining the divergence, vector Laplacian and pressure gradient bounds proves the first claim.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On each cell centred at $x_j$, fix $x$ and put $z=x-x_j$ and $\\psi(t)=g(x_j+tz)$ for $0\\le t\\le1$. By [F3] with $m=1$ and [F4], $g(x)=g(x_j)+\\nabla g(x_j)\\cdot z+r_j(x)$ with $|r_j(x)|\\le C_d\\|D^2g\\|_\\infty|z|^2$. The linear term integrates to zero on the centred cell, so the difference between $h^dg(x_j)$ and $\\int_{C_j}g$ is at most $C_dh^{d+2}\\|D^2g\\|_\\infty$. Summing the $N^d$ cells yields $$ \\left|h^d\\sum_jg(x_j)-\\int_{\\mathbb T^d}g(x)\\,dx\\right| \\le C_dh^2\\|D^2g\\|_\\infty. $$ The face centres for any fixed component likewise centre a translated partition into cells of side $h$, so the same estimate holds for their samples. If the integral vanishes, this gives the stated discrete-mean bound.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-saddle-point-exact-schur-solve": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge1$, $V=M_{n\\times1}(\\mathbb R)$, and\n$Q=M_{m\\times1}(\\mathbb R)$. Let $A\\in M_n(\\mathbb R)$ be symmetric\npositive definite, let $B\\in M_{m\\times n}(\\mathbb R)$ have full row rank\n(meaning $B^Tq=0$ implies $q=0$), and let\n$M_Q\\in M_m(\\mathbb R)$ be symmetric positive definite. The saddle system\nand its matrix are\n$$ K=\\begin{pmatrix}A&B^T\\\\B&0\\end{pmatrix},\\qquad Au+B^Tp=f,\\quad Bu=g. $$\nDefine the positive pressure Schur matrix\n$$ S:=BA^{-1}B^T. $$\nIn the block-LU convention of [[def-block-lu-factorisation]], the trailing\nSchur complement of $A$ in $K$ is $-S$. The exact block solve first solves\n$Au_0=f$, then $Sp=Bu_0-g$, and finally $Au=f-B^Tp$; the theorem\n[[thm-na-saddle-point-exact-schur-solve]] verifies this procedure and\nwell-definedness.\n\nFor a scaling $\\gamma>0$, the pressure-mass block-diagonal preconditioner is\n$$ P_\\gamma=\\operatorname{diag}(A,\\gamma M_Q). $$\nIt is symmetric positive definite. If $P_\\gamma=CC^T$ is its Cholesky\nfactorization with $C$ lower triangular and positive on the diagonal, the\nsymmetric preconditioned system is $C^{-1}KC^{-T}y=C^{-1}r$, with the usual\nchange of unknown. This is the symmetric-preconditioning convention of\n[[def-left-right-and-symmetric-positive-definite-preconditioning]]. No\nspectral bound, Krylov iteration count, complexity estimate, or generic speed\nimprovement is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-block-lu-factorisation-via-an-invertible-leading-block",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$A=\\begin{pmatrix}A_{11}&A_{12}\\\\A_{21}&A_{22}\\end{pmatrix}$$\n\nbe a square block matrix over a field, with $A_{11}$ square and invertible, and\nlet $S:=A_{22}-A_{21}A_{11}^{-1}A_{12}$.\n\n1. One has the exact block factorisation\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&I\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&S\\end{pmatrix}.$$\n2. If $S=\\widetilde L\\widetilde U$ is any normalised LU factorisation, then\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&\\widetilde L\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&\\widetilde U\\end{pmatrix}$$\n   is a block LU factorisation across the same partition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Positive definiteness of $A$ makes its kernel zero: if $Ax=0$, then $x^TAx=0$, so the positivity hypothesis forces $x=0$. Since $A$ is a square matrix on a finite-dimensional space, [F3] makes its image full-dimensional; thus $A$ is invertible. For nonzero $q\\in\\mathbb R^m$, full row rank gives $B^Tq\\ne0$. Put $y=A^{-1}B^Tq$, which is nonzero. Then $$ q^TSq=(B^Tq)^TA^{-1}(B^Tq)=(Ay)^Ty=y^TAy>0. $$ Therefore $S$ is symmetric positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to $K$ with leading block $A$, upper-right block $B^T$, lower-left block $B$, and lower-right block $0$. Its trailing Schur complement is $0-BA^{-1}B^T=-S$. Hence $$ K=\\begin{pmatrix}I&0\\\\BA^{-1}&I\\end{pmatrix} \\begin{pmatrix}A&B^T\\\\0&-S\\end{pmatrix}, $$ and both diagonal blocks of the upper factor are invertible by the hypotheses and step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Solve the lower-triangular factor against $(f,g)$ first. It gives the intermediate vector $(f,g-BA^{-1}f)$. The second block row of the upper solve is $-Sp=g-BA^{-1}f$, so $p=S^{-1}(BA^{-1}f-g)$. The first row gives $u=A^{-1}(f-B^Tp)$. Substitution verifies $Au+B^Tp=f$ and $Bu=BA^{-1}f-Sp=g$. Invertibility of the diagonal blocks in step 2.1 makes both triangular solves unique, so this is the unique solution.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated domain, dimension, or matrix family excludes a one-dimensional or scalar boundary instance, and no claim is made for it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-pressure-schur-spectral-equivalence-from-infsup": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge1$, $V=M_{n\\times1}(\\mathbb R)$, and\n$Q=M_{m\\times1}(\\mathbb R)$. Let $A\\in M_n(\\mathbb R)$ be symmetric\npositive definite, let $B\\in M_{m\\times n}(\\mathbb R)$ have full row rank\n(meaning $B^Tq=0$ implies $q=0$), and let\n$M_Q\\in M_m(\\mathbb R)$ be symmetric positive definite. The saddle system\nand its matrix are\n$$ K=\\begin{pmatrix}A&B^T\\\\B&0\\end{pmatrix},\\qquad Au+B^Tp=f,\\quad Bu=g. $$\nDefine the positive pressure Schur matrix\n$$ S:=BA^{-1}B^T. $$\nIn the block-LU convention of [[def-block-lu-factorisation]], the trailing\nSchur complement of $A$ in $K$ is $-S$. The exact block solve first solves\n$Au_0=f$, then $Sp=Bu_0-g$, and finally $Au=f-B^Tp$; the theorem\n[[thm-na-saddle-point-exact-schur-solve]] verifies this procedure and\nwell-definedness.\n\nFor a scaling $\\gamma>0$, the pressure-mass block-diagonal preconditioner is\n$$ P_\\gamma=\\operatorname{diag}(A,\\gamma M_Q). $$\nIt is symmetric positive definite. If $P_\\gamma=CC^T$ is its Cholesky\nfactorization with $C$ lower triangular and positive on the diagonal, the\nsymmetric preconditioned system is $C^{-1}KC^{-T}y=C^{-1}r$, with the usual\nchange of unknown. This is the symmetric-preconditioning convention of\n[[def-left-right-and-symmetric-positive-definite-preconditioning]]. No\nspectral bound, Krylov iteration count, complexity estimate, or generic speed\nimprovement is part of this definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $q\\in Q$ and put $w=A^{-1}B^Tq$. By [F1] and symmetry of $A$, $$ b(v,q)=q^TBv=v^TB^Tq=v^TAw=a(v,w) $$ for every $v\\in V$. By [F3], $|a(v,w)|\\le\\|v\\|_A\\|w\\|_A$. If $w\\ne0$, equality is attained at $v=w$; if $w=0$, both sides are zero. Hence $$ \\sup_{v\\ne0}\\frac{|b(v,q)|}{\\sqrt{a(v,v)}} =\\sqrt{a(w,w)}=\\sqrt{q^TBA^{-1}B^Tq}. $$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The upper energy inequality in the statement implies $\\sqrt{a(v,v)}\\le\\sqrt\\Lambda\\|v\\|_V$, so the supremum in step 1.1 is at least $\\beta\\|q\\|_Q/\\sqrt\\Lambda$. The lower energy inequality implies $\\sqrt{a(v,v)}\\ge\\sqrt\\alpha\\|v\\|_V$; continuity of $b$ therefore makes that supremum at most $C_b\\|q\\|_Q/\\sqrt\\alpha$. Squaring these inequalities and using step 1.1 proves both displayed Schur bounds.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For nonzero $q$, the lower bound in step 2.1 is positive because $\\beta>0$ and $M_Q$ is positive definite. Thus $S$ is positive definite, and the two quadratic-form inequalities are the stated pressure-mass spectral equivalence.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated domain, dimension, or matrix family excludes a one-dimensional or scalar boundary instance, and no claim is made for it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-na-periodic-incremental-pressure-correction": {
+      "kind": "algorithm",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: displayed positivity, full-rank, and N≥2 hypotheses exclude degenerate blocks and grids."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-na-bdf2-incremental-and-rotational-pressure-correction": {
+      "kind": "algorithm",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: displayed positivity, full-rank, and N≥2 hypotheses exclude degenerate blocks and grids."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-symmetrically-preconditioned-saddle-point-spectrum": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge1$, $V=M_{n\\times1}(\\mathbb R)$, and\n$Q=M_{m\\times1}(\\mathbb R)$. Let $A\\in M_n(\\mathbb R)$ be symmetric\npositive definite, let $B\\in M_{m\\times n}(\\mathbb R)$ have full row rank\n(meaning $B^Tq=0$ implies $q=0$), and let\n$M_Q\\in M_m(\\mathbb R)$ be symmetric positive definite. The saddle system\nand its matrix are\n$$ K=\\begin{pmatrix}A&B^T\\\\B&0\\end{pmatrix},\\qquad Au+B^Tp=f,\\quad Bu=g. $$\nDefine the positive pressure Schur matrix\n$$ S:=BA^{-1}B^T. $$\nIn the block-LU convention of [[def-block-lu-factorisation]], the trailing\nSchur complement of $A$ in $K$ is $-S$. The exact block solve first solves\n$Au_0=f$, then $Sp=Bu_0-g$, and finally $Au=f-B^Tp$; the theorem\n[[thm-na-saddle-point-exact-schur-solve]] verifies this procedure and\nwell-definedness.\n\nFor a scaling $\\gamma>0$, the pressure-mass block-diagonal preconditioner is\n$$ P_\\gamma=\\operatorname{diag}(A,\\gamma M_Q). $$\nIt is symmetric positive definite. If $P_\\gamma=CC^T$ is its Cholesky\nfactorization with $C$ lower triangular and positive on the diagonal, the\nsymmetric preconditioned system is $C^{-1}KC^{-T}y=C^{-1}r$, with the usual\nchange of unknown. This is the symmetric-preconditioning convention of\n[[def-left-right-and-symmetric-positive-definite-preconditioning]]. No\nspectral bound, Krylov iteration count, complexity estimate, or generic speed\nimprovement is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+          "source_section": "Statement",
+          "quote": "Let $V,Q$ be finite-dimensional real inner-product spaces with norms\n$\\|\\cdot\\|_V,\\|\\cdot\\|_Q$. Let $a(v,w)=v^TAw$ be symmetric positive\ndefinite, and let $b(v,q)=q^TBv$ be a bilinear constraint form, represented\nby the matrices in\n[[def-na-symmetric-saddle-point-system-and-block-preconditioners]]. Suppose\nthat, for constants $\\alpha,\\Lambda,C_b,\\beta>0$,\n$$ \\alpha\\|v\\|_V^2\\le a(v,v)\\le\\Lambda\\|v\\|_V^2, \\quad |b(v,q)|\\le C_b\\|v\\|_V\\|q\\|_Q, \\quad \\sup_{v\\ne0}\\frac{|b(v,q)|}{\\|v\\|_V}\\ge\\beta\\|q\\|_Q. $$\nIf $M_Q$ is the pressure mass matrix for $\\|\\cdot\\|_Q$, then the positive\nSchur matrix $S=BA^{-1}B^T$ satisfies, for every $q\\in Q$,\n$$ \\frac{\\beta^2}{\\Lambda}q^TM_Qq \\le q^TSq \\le\\frac{C_b^2}{\\alpha}q^TM_Qq. $$\nThus pressure-mass Schur equivalence is conditional on the actual inf-sup,\ncontinuity, and velocity stiffness scalings shown here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], the SPD matrices $A$ and $\\gamma M_Q$ have symmetric positive square roots and inverse square roots. Put $$ T=(\\gamma M_Q)^{-1/2}BA^{-1/2},\\qquad X=P_\\gamma^{-1/2}KP_\\gamma^{-1/2} =\\begin{pmatrix}I&T^T\\\\T&0\\end{pmatrix}. $$ Then $TT^T=(\\gamma M_Q)^{-1/2}S(\\gamma M_Q)^{-1/2}$. Congruencing [F2] by $(\\gamma M_Q)^{-1/2}$ shows $a_\\gamma I\\le TT^T\\le b_\\gamma I$. Hence $TT^T$ is positive definite and all its eigenvalues $\\mu_j$ lie in $[a_\\gamma,b_\\gamma]$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], choose an orthonormal eigenbasis $y_1,\\ldots,y_m$ of $TT^T$, with eigenvalues $\\mu_j>0$. Set $x_j=T^Ty_j/\\sqrt{\\mu_j}$. Then $Tx_j=\\sqrt{\\mu_j}y_j$ and $$ x_i^Tx_j=\\frac{y_i^TTT^Ty_j}{\\sqrt{\\mu_i\\mu_j}}=\\delta_{ij}, $$ so the $x_j$ are orthonormal. On the two-dimensional space spanned by $(x_j,0)$ and $(0,y_j)$, $X$ has matrix $$ \\begin{pmatrix}1&\\sqrt{\\mu_j}\\\\\\sqrt{\\mu_j}&0\\end{pmatrix}, $$ whose characteristic polynomial is $\\lambda^2-\\lambda-\\mu_j$. Its two roots are $\\lambda_-(\\mu_j)$ and $\\lambda_+(\\mu_j)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The matrix $TT^T$ is positive definite by step 1.1, so for every $y\\in\\mathbb R^m$, $x=T^T(TT^T)^{-1}y$ satisfies $Tx=y$. Thus $T:\\mathbb R^n\\to\\mathbb R^m$ is onto, and [F4] gives $\\dim\\ker T=n-m$. For $x\\in\\ker T$, $X(x,0)=(x,0)$, giving eigenvalue $1$ on this kernel. The $m$ orthonormal pairs from step 2.1 and this $n-m$ dimensional kernel account for all $n+m$ dimensions and hence for the full spectrum of $X$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $C$ is the Cholesky factor in the symmetric-preconditioning definition, then $P_\\gamma=CC^T$. Let $O=P_\\gamma^{-1/2}C$; step 1.1 gives $OO^T=I$, so $O$ is orthogonal and $$ C^{-1}KC^{-T}=O^T(P_\\gamma^{-1/2}KP_\\gamma^{-1/2})O. $$ Therefore the published Cholesky-symmetric preconditioning has the same spectrum as $X$. Since $\\lambda_-$ decreases and $\\lambda_+$ increases on $s>0$, the eigenvalue intervals follow from step 1.1.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated domain, dimension, or matrix family excludes a one-dimensional or scalar boundary instance, and no claim is made for it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-periodic-pressure-correction-solves-well-defined": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-na-periodic-incremental-pressure-correction",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, $N\\ge2$, $h=1/N$, viscosity $\\nu>0$, and time step $k>0$.\nGiven $u^n\\in V_h$ with $D_hu^n=0$, a mean-zero\npressure $p^n\\in Q_h$, and a force $f^{n+1}\\in V_h$ whose components each\nhave zero discrete mean,\n$$h^d\\sum_{j\\in J_N}f_{i,j}^{n+1}=0\\qquad(1\\le i\\le d),$$\ndefine the next step by the following two solves and update:\n\n1. Find $\\widetilde u^{n+1}\\in V_h$ satisfying\n$$ \\frac{\\widetilde u^{n+1}-u^n}{k}+\\nu A_h\\widetilde u^{n+1}+G_hp^n=f^{n+1}. $$\n\n2. Find the unique $\\phi^{n+1}\\in Q_h$ satisfying\n$$ \\Delta_h\\phi^{n+1}=k^{-1}D_h\\widetilde u^{n+1}. $$\n\n3. Set\n$$ u^{n+1}=\\widetilde u^{n+1}-kG_h\\phi^{n+1},\\qquad p^{n+1}=p^n+\\phi^{n+1}. $$\n\nThe pressure is kept in $Q_h$ after every solve; the constant pressure mode\nis set to zero. The procedure is only asserted for the periodic staggered\ngrid and the admissible data stated here. The separate well-definedness\ntheorem [[thm-na-periodic-pressure-correction-solves-well-defined]] verifies\nboth solves and the preserved constraints.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, $N\\ge2$, $h=1/N$, $\\nu>0$, $k>0$, and a step $n\\ge1$. Supply\n$u^{n-1},u^n\\in V_h$ with zero discrete divergence, a mean-zero\n$p^n\\in Q_h$, and $f^{n+1}\\in V_h$ whose components each have zero discrete\nmean,\n$$h^d\\sum_{j\\in J_N}f_{i,j}^{n+1}=0\\qquad(1\\le i\\le d).$$\nCompute a predictor\n$\\widetilde u^{n+1}\\in V_h$ from\n$$ \\frac{3\\widetilde u^{n+1}-4u^n+u^{n-1}}{2k} +\\nu A_h\\widetilde u^{n+1}+G_hp^n=f^{n+1}, $$\nthen solve for the unique mean-zero $\\phi^{n+1}\\in Q_h$ from\n$$ \\Delta_h\\phi^{n+1}=\\frac{3}{2k}D_h\\widetilde u^{n+1}. $$\nSet $u^{n+1}=\\widetilde u^{n+1}-(2k/3)G_h\\phi^{n+1}$. Choose exactly one\npressure update:\n\n- **Standard incremental:** $p^{n+1}=p^n+\\phi^{n+1}$.\n- **Rotational incremental:** $p^{n+1}=p^n+\\phi^{n+1}-\\nu D_h\\widetilde u^{n+1}$.\n\nIn both branches the pressure is gauged in $Q_h$. Initial values $u^0,u^1,p^1$\nare supplied by the caller; no initialization accuracy, stability, or\nconvergence rate is asserted here. The separate well-definedness theorem\n[[thm-na-periodic-pressure-correction-solves-well-defined]] verifies the\npredictor and pressure solves for either branch.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-periodic-staggered-grid-stokes-operators",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$ and an integer resolution $N\\ge2$, where\n$N\\in\\mathbb N$ ([[def-natural-numbers]]), and put $h=1/N$. Real scalar and\narray operations use the field $\\mathbb R$ ([[thm-reals-field]]). Let\n$J_N=\\{0,\\ldots,N-1\\}^d$; each coordinate index addition below is reduced\nto the unique element of $\\{0,\\ldots,N-1\\}$ congruent modulo $N$. The unit\ntorus $\\mathbb T^d$ means the unit cube with opposite faces identified, so\nfields and arrays are periodic across those faces. Write\n$\\mathbf 1=(1,\\ldots,1)$ and let $e_i$ be the $i$th standard coordinate vector.\nCell $j$ has centre $x_j=h(j+\\tfrac12\\mathbf 1)$. The pressure value $q_j$ is\nstored at that centre. Velocity component $i$ is stored at the right face of\ncell $j$, with centre $x_j+\\tfrac h2e_i$.\n\nLet $\\widetilde Q_h$ be all real scalar cell arrays and let\n$Q_h=\\{q\\in\\widetilde Q_h:h^d\\sum_jq_j=0\\}$. Let $V_h$ be the real vector\nface arrays $v=(v_{i,j})_{1\\le i\\le d,\\,j\\in J_N}$. Give them the mass inner products\n$$ (q,r)_{Q_h}=h^d\\sum_{j\\in J_N}q_jr_j,\\qquad (v,w)_{M_h}=h^d\\sum_{i=1}^d\\sum_{j\\in J_N}v_{i,j}w_{i,j}. $$\nDefine the pressure gradient $G_h:\\widetilde Q_h\\to V_h$ and velocity\ndivergence $D_h:V_h\\to Q_h$ by\n$$ (G_hq)_{i,j}=\\frac{q_{j+e_i}-q_j}{h},\\qquad (D_hv)_j=\\sum_{i=1}^d\\frac{v_{i,j}-v_{i,j-e_i}}{h}. $$\nThe compatible pressure Laplacian is $\\Delta_h=D_hG_h$; its restriction to\n$Q_h$ is negative semidefinite, and $G_h$ annihilates constants. Define the\ncomponentwise vector Laplacian by\n$$ (\\Delta_h^Vv)_{i,j}=h^{-2}\\sum_{\\ell=1}^d (v_{i,j+e_\\ell}-2v_{i,j}+v_{i,j-e_\\ell}),\\qquad A_h=-\\Delta_h^V, $$\nand the discrete velocity-gradient seminorm by\n$$ \\|\\mathcal G_hv\\|_{M_h}^2=h^{d-2}\\sum_{i=1}^d\\sum_{\\ell=1}^d\\sum_{j\\in J_N} |v_{i,j+e_\\ell}-v_{i,j}|^2. $$\nThe fixed cell/face placement is part of the definition; collocated central\ndifferences are a different discretization.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+          "source_section": "Statement",
+          "quote": "Use the spaces and operators of\n[[def-na-periodic-staggered-grid-stokes-operators]] with $d\\ge1$, $N\\ge2$,\nand $h=1/N$. Then $\\Delta_h=D_hG_h$ maps $Q_h$ bijectively to itself, the\nkernel of $\\Delta_h$ on all cell arrays consists exactly of the constants,\nand $D_hv$ has zero mean for every $v\\in V_h$. In addition, every $q\\in Q_h$\nsatisfies the resolution-independent bound\n$$ \\|q\\|_{Q_h}\\le\\sqrt d\\,\\|G_hq\\|_{M_h}. $$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any nonzero $v\\in V_h$, the componentwise Laplacian definition and finite periodic reindexing give $$ (A_hv,v)_{M_h}=h^{d-2}\\sum_{i,\\ell,j}|v_{i,j+e_\\ell}-v_{i,j}|^2\\ge0. $$ Therefore $( (I+k\\nu A_h)v,v)_{M_h}=\\|v\\|_{M_h}^2+k\\nu(A_hv,v)_{M_h}>0$. The predictor matrix has zero kernel and is invertible by [F4], so the backward-Euler predictor has a unique solution.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Similarly, $( ((3/(2k))I+\\nu A_h)v,v)_{M_h} =(3/(2k))\\|v\\|_{M_h}^2+\\nu(A_hv,v)_{M_h}>0$. The BDF2 predictor matrix has zero kernel and is invertible by [F4], so its predictor is unique for either pressure-update branch.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For either predictor, summing $D_h\\widetilde u$ over all cells cancels the two occurrences of each periodic face value. Hence the right-hand side of the corresponding pressure-increment equation has zero mean. By [F3], there is exactly one mean-zero $\\phi^{n+1}$ solving that equation.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The velocity and pressure updates are explicit after the unique predictor and pressure increment. Since $D_hG_h=\\Delta_h$, the corrected divergence is $D_h\\widetilde u-k\\Delta_h\\phi=0$ in backward Euler and $D_h\\widetilde u-(2k/3)\\Delta_h\\phi=0$ in BDF2. The BDF2 rotational pressure correction subtracts $\\nu D_h\\widetilde u$, which has zero mean by compatibility; thus both pressure updates stay in $Q_h$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-periodic-discrete-helmholtz-projection": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+          "source_section": "Statement",
+          "quote": "Use the spaces and operators of\n[[def-na-periodic-staggered-grid-stokes-operators]] with $d\\ge1$, $N\\ge2$,\nand $h=1/N$. Then $\\Delta_h=D_hG_h$ maps $Q_h$ bijectively to itself, the\nkernel of $\\Delta_h$ on all cell arrays consists exactly of the constants,\nand $D_hv$ has zero mean for every $v\\in V_h$. In addition, every $q\\in Q_h$\nsatisfies the resolution-independent bound\n$$ \\|q\\|_{Q_h}\\le\\sqrt d\\,\\|G_hq\\|_{M_h}. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-na-periodic-incremental-pressure-correction",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, $N\\ge2$, $h=1/N$, viscosity $\\nu>0$, and time step $k>0$.\nGiven $u^n\\in V_h$ with $D_hu^n=0$, a mean-zero\npressure $p^n\\in Q_h$, and a force $f^{n+1}\\in V_h$ whose components each\nhave zero discrete mean,\n$$h^d\\sum_{j\\in J_N}f_{i,j}^{n+1}=0\\qquad(1\\le i\\le d),$$\ndefine the next step by the following two solves and update:\n\n1. Find $\\widetilde u^{n+1}\\in V_h$ satisfying\n$$ \\frac{\\widetilde u^{n+1}-u^n}{k}+\\nu A_h\\widetilde u^{n+1}+G_hp^n=f^{n+1}. $$\n\n2. Find the unique $\\phi^{n+1}\\in Q_h$ satisfying\n$$ \\Delta_h\\phi^{n+1}=k^{-1}D_h\\widetilde u^{n+1}. $$\n\n3. Set\n$$ u^{n+1}=\\widetilde u^{n+1}-kG_h\\phi^{n+1},\\qquad p^{n+1}=p^n+\\phi^{n+1}. $$\n\nThe pressure is kept in $Q_h$ after every solve; the constant pressure mode\nis set to zero. The procedure is only asserted for the periodic staggered\ngrid and the admissible data stated here. The separate well-definedness\ntheorem [[thm-na-periodic-pressure-correction-solves-well-defined]] verifies\nboth solves and the preserved constraints.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any $v\\in V_h$, let $q=\\Delta_h^{-1}D_hv\\in Q_h$, which is defined by [F1]. Then $$ D_hP_hv=D_hv-D_hG_hq=D_hv-\\Delta_hq=0. $$ Thus $P_hv\\in Z_h$. If $v\\in Z_h$, then $D_hv=0$, so uniqueness of the mean-zero inverse gives $q=0$ and $P_hv=v$. Therefore $P_h$ is a projection with range exactly $Z_h$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $v\\in V_h$ and $z\\in Z_h$, the difference is $v-P_hv=G_h\\Delta_h^{-1}D_hv$. By [F1], $$ (z,v-P_hv)_{M_h} =(z,G_h\\Delta_h^{-1}D_hv)_{M_h} =-(D_hz,\\Delta_h^{-1}D_hv)_{Q_h}=0. $$ Hence the residual $v-P_hv$ is mass-orthogonal to the divergence-free subspace. Together with step 1.1 this makes $P_h$ the mass-orthogonal projector onto $Z_h$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the algorithm, [F2] and uniqueness of the pressure solve give $\\phi^{n+1}=k^{-1}\\Delta_h^{-1}D_h\\widetilde u^{n+1}$. Substitution into the velocity correction yields $$ u^{n+1}=\\widetilde u^{n+1}-G_h\\Delta_h^{-1}D_h\\widetilde u^{n+1} =P_h\\widetilde u^{n+1}. $$ Step 1.1 then gives $D_hu^{n+1}=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated domain, dimension, or matrix family excludes a one-dimensional or scalar boundary instance, and no claim is made for it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-periodic-pressure-correction-modified-energy-identity": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-na-periodic-incremental-pressure-correction",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, $N\\ge2$, $h=1/N$, viscosity $\\nu>0$, and time step $k>0$.\nGiven $u^n\\in V_h$ with $D_hu^n=0$, a mean-zero\npressure $p^n\\in Q_h$, and a force $f^{n+1}\\in V_h$ whose components each\nhave zero discrete mean,\n$$h^d\\sum_{j\\in J_N}f_{i,j}^{n+1}=0\\qquad(1\\le i\\le d),$$\ndefine the next step by the following two solves and update:\n\n1. Find $\\widetilde u^{n+1}\\in V_h$ satisfying\n$$ \\frac{\\widetilde u^{n+1}-u^n}{k}+\\nu A_h\\widetilde u^{n+1}+G_hp^n=f^{n+1}. $$\n\n2. Find the unique $\\phi^{n+1}\\in Q_h$ satisfying\n$$ \\Delta_h\\phi^{n+1}=k^{-1}D_h\\widetilde u^{n+1}. $$\n\n3. Set\n$$ u^{n+1}=\\widetilde u^{n+1}-kG_h\\phi^{n+1},\\qquad p^{n+1}=p^n+\\phi^{n+1}. $$\n\nThe pressure is kept in $Q_h$ after every solve; the constant pressure mode\nis set to zero. The procedure is only asserted for the periodic staggered\ngrid and the admissible data stated here. The separate well-definedness\ntheorem [[thm-na-periodic-pressure-correction-solves-well-defined]] verifies\nboth solves and the preserved constraints.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-periodic-discrete-helmholtz-projection",
+          "source_section": "Statement",
+          "quote": "On the grid of [[def-na-periodic-staggered-grid-stokes-operators]], let\n$\\Delta_h^{-1}:Q_h\\to Q_h$ be the inverse from\n[[lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare]]. Define\n$$ P_h:=I-G_h\\Delta_h^{-1}D_h:V_h\\to V_h. $$\nThen $P_h$ is the mass-orthogonal projector onto\n$Z_h=\\ker D_h$. In the backward-Euler algorithm\n[[alg-na-periodic-incremental-pressure-correction]], the velocity correction\nsatisfies $u^{n+1}=P_h\\widetilde u^{n+1}$ and\n$D_hu^{n+1}=0$ exactly.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-periodic-discrete-helmholtz-projection",
+          "source_section": "Statement",
+          "quote": "On the grid of [[def-na-periodic-staggered-grid-stokes-operators]], let\n$\\Delta_h^{-1}:Q_h\\to Q_h$ be the inverse from\n[[lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare]]. Define\n$$ P_h:=I-G_h\\Delta_h^{-1}D_h:V_h\\to V_h. $$\nThen $P_h$ is the mass-orthogonal projector onto\n$Z_h=\\ker D_h$. In the backward-Euler algorithm\n[[alg-na-periodic-incremental-pressure-correction]], the velocity correction\nsatisfies $u^{n+1}=P_h\\widetilde u^{n+1}$ and\n$D_hu^{n+1}=0$ exactly.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-na-periodic-staggered-grid-stokes-operators",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$ and an integer resolution $N\\ge2$, where\n$N\\in\\mathbb N$ ([[def-natural-numbers]]), and put $h=1/N$. Real scalar and\narray operations use the field $\\mathbb R$ ([[thm-reals-field]]). Let\n$J_N=\\{0,\\ldots,N-1\\}^d$; each coordinate index addition below is reduced\nto the unique element of $\\{0,\\ldots,N-1\\}$ congruent modulo $N$. The unit\ntorus $\\mathbb T^d$ means the unit cube with opposite faces identified, so\nfields and arrays are periodic across those faces. Write\n$\\mathbf 1=(1,\\ldots,1)$ and let $e_i$ be the $i$th standard coordinate vector.\nCell $j$ has centre $x_j=h(j+\\tfrac12\\mathbf 1)$. The pressure value $q_j$ is\nstored at that centre. Velocity component $i$ is stored at the right face of\ncell $j$, with centre $x_j+\\tfrac h2e_i$.\n\nLet $\\widetilde Q_h$ be all real scalar cell arrays and let\n$Q_h=\\{q\\in\\widetilde Q_h:h^d\\sum_jq_j=0\\}$. Let $V_h$ be the real vector\nface arrays $v=(v_{i,j})_{1\\le i\\le d,\\,j\\in J_N}$. Give them the mass inner products\n$$ (q,r)_{Q_h}=h^d\\sum_{j\\in J_N}q_jr_j,\\qquad (v,w)_{M_h}=h^d\\sum_{i=1}^d\\sum_{j\\in J_N}v_{i,j}w_{i,j}. $$\nDefine the pressure gradient $G_h:\\widetilde Q_h\\to V_h$ and velocity\ndivergence $D_h:V_h\\to Q_h$ by\n$$ (G_hq)_{i,j}=\\frac{q_{j+e_i}-q_j}{h},\\qquad (D_hv)_j=\\sum_{i=1}^d\\frac{v_{i,j}-v_{i,j-e_i}}{h}. $$\nThe compatible pressure Laplacian is $\\Delta_h=D_hG_h$; its restriction to\n$Q_h$ is negative semidefinite, and $G_h$ annihilates constants. Define the\ncomponentwise vector Laplacian by\n$$ (\\Delta_h^Vv)_{i,j}=h^{-2}\\sum_{\\ell=1}^d (v_{i,j+e_\\ell}-2v_{i,j}+v_{i,j-e_\\ell}),\\qquad A_h=-\\Delta_h^V, $$\nand the discrete velocity-gradient seminorm by\n$$ \\|\\mathcal G_hv\\|_{M_h}^2=h^{d-2}\\sum_{i=1}^d\\sum_{\\ell=1}^d\\sum_{j\\in J_N} |v_{i,j+e_\\ell}-v_{i,j}|^2. $$\nThe fixed cell/face placement is part of the definition; collocated central\ndifferences are a different discretization.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By finite periodic reindexing in each component and coordinate, $(A_hv,v)_{M_h}=h^{d-2}\\sum_{i,\\ell,j}|v_{i,j+e_\\ell}-v_{i,j}|^2 =\\|\\mathcal G_hv\\|_{M_h}^2$. Take the $M_h$ inner product of the predictor equation [F1] with $2k\\widetilde u^{n+1}$. The identity $$ 2(\\widetilde u^{n+1}-u^n,\\widetilde u^{n+1})_{M_h} =\\|\\widetilde u^{n+1}\\|_{M_h}^2-\\|u^n\\|_{M_h}^2 +\\|\\widetilde u^{n+1}-u^n\\|_{M_h}^2 $$ and [F4] give $$ \\|\\widetilde u^{n+1}\\|_{M_h}^2-\\|u^n\\|_{M_h}^2 +\\|\\widetilde u^{n+1}-u^n\\|_{M_h}^2 +2\\nu k\\|\\mathcal G_h\\widetilde u^{n+1}\\|_{M_h}^2 +2k(G_hp^n,\\widetilde u^{n+1})_{M_h} =2k(f^{n+1},\\widetilde u^{n+1})_{M_h}. $$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] and the pressure equation in [F1], $$ 2k(G_hp^n,\\widetilde u^{n+1})_{M_h} =-2k(p^n,D_h\\widetilde u^{n+1})_{Q_h} =-2k^2(p^n,\\Delta_h\\phi^{n+1})_{Q_h} =2k^2(G_hp^n,G_h\\phi^{n+1})_{M_h}. $$ The last equality follows from the second identity in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $P_h$ is orthogonal and $u^{n+1}=P_h\\widetilde u^{n+1}$ by [F3], the projection residual $\\widetilde u^{n+1}-u^{n+1}=kG_h\\phi^{n+1}$ is orthogonal to $u^{n+1}$. Pythagoras gives $$ \\|\\widetilde u^{n+1}\\|_{M_h}^2 =\\|u^{n+1}\\|_{M_h}^2+k^2\\|G_h\\phi^{n+1}\\|_{M_h}^2. $$ The pressure update $p^{n+1}=p^n+\\phi^{n+1}$ then gives $$ k^2\\bigl(\\|G_hp^{n+1}\\|_{M_h}^2-\\|G_hp^n\\|_{M_h}^2\\bigr) =k^2\\|G_h\\phi^{n+1}\\|_{M_h}^2 +2k^2(G_hp^n,G_h\\phi^{n+1})_{M_h}. $$",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Substitute the two identities from step 3.1 into step 1.1, replacing $\\|\\widetilde u^{n+1}\\|_{M_h}^2$ and the pressure cross term. The result is exactly the displayed modified energy identity.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated domain, dimension, or matrix family excludes a one-dimensional or scalar boundary instance, and no claim is made for it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-periodic-pressure-correction-first-order-velocity-error": {
+      "kind": "theorem",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-na-periodic-discrete-helmholtz-projection",
+          "source_section": "Statement",
+          "quote": "On the grid of [[def-na-periodic-staggered-grid-stokes-operators]], let\n$\\Delta_h^{-1}:Q_h\\to Q_h$ be the inverse from\n[[lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare]]. Define\n$$ P_h:=I-G_h\\Delta_h^{-1}D_h:V_h\\to V_h. $$\nThen $P_h$ is the mass-orthogonal projector onto\n$Z_h=\\ker D_h$. In the backward-Euler algorithm\n[[alg-na-periodic-incremental-pressure-correction]], the velocity correction\nsatisfies $u^{n+1}=P_h\\widetilde u^{n+1}$ and\n$D_hu^{n+1}=0$ exactly.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-periodic-pressure-correction-solves-well-defined",
+          "source_section": "Statement",
+          "quote": "On the periodic staggered grid of\n[[def-na-periodic-staggered-grid-stokes-operators]], every admissible backward-\nEuler step of [[alg-na-periodic-incremental-pressure-correction]] and every\nadmissible BDF2 step of\n[[alg-na-bdf2-incremental-and-rotational-pressure-correction]] has a unique\npredictor, a unique mean-zero pressure increment, and a unique updated pair.\nBoth algorithms preserve the zero-mean pressure gauge and exact discrete\nincompressibility.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+          "source_section": "Statement",
+          "quote": "Use [[def-na-periodic-staggered-grid-stokes-operators]] with $h=1/N$. For a\nsmooth periodic vector field $u\\in C^4(\\mathbb T^d;\\mathbb R^d)$, define\n$R_hu$ by sampling component $i$ at each face centre $x_j+he_i/2$. For a\nsmooth periodic scalar $p\\in C^3(\\mathbb T^d)$, define $R_hp$ by sampling at\ncell centres $x_j$. Then uniformly for $N\\ge2$,\n$$ \\|D_hR_hu-R_h(\\nabla\\cdot u)\\|_{Q_h} +\\|A_hR_hu-R_h(-\\Delta u)\\|_{M_h} +\\|G_hR_hp-R_h(\\nabla p)\\|_{M_h} \\le C h^2, $$\nwhere $C$ depends only on $d$ and the suprema of the displayed fields'\nderivatives through orders $4$ for $u$ and $3$ for $p$. Here the sampling of a\nvector field is facewise componentwise. For any $g\\in C^2(\\mathbb T^d)$ with\nzero integral, the cell-centred or face-centred midpoint samples have discrete\nmean of absolute value at most $C_dh^2\\|D^2g\\|_\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+          "source_section": "Statement",
+          "quote": "Use the spaces and operators of\n[[def-na-periodic-staggered-grid-stokes-operators]] with $d\\ge1$, $N\\ge2$,\nand $h=1/N$. Then $\\Delta_h=D_hG_h$ maps $Q_h$ bijectively to itself, the\nkernel of $\\Delta_h$ on all cell arrays consists exactly of the constants,\nand $D_hv$ has zero mean for every $v\\in V_h$. In addition, every $q\\in Q_h$\nsatisfies the resolution-independent bound\n$$ \\|q\\|_{Q_h}\\le\\sqrt d\\,\\|G_hq\\|_{M_h}. $$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-na-periodic-staggered-grid-stokes-operators",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$ and an integer resolution $N\\ge2$, where\n$N\\in\\mathbb N$ ([[def-natural-numbers]]), and put $h=1/N$. Real scalar and\narray operations use the field $\\mathbb R$ ([[thm-reals-field]]). Let\n$J_N=\\{0,\\ldots,N-1\\}^d$; each coordinate index addition below is reduced\nto the unique element of $\\{0,\\ldots,N-1\\}$ congruent modulo $N$. The unit\ntorus $\\mathbb T^d$ means the unit cube with opposite faces identified, so\nfields and arrays are periodic across those faces. Write\n$\\mathbf 1=(1,\\ldots,1)$ and let $e_i$ be the $i$th standard coordinate vector.\nCell $j$ has centre $x_j=h(j+\\tfrac12\\mathbf 1)$. The pressure value $q_j$ is\nstored at that centre. Velocity component $i$ is stored at the right face of\ncell $j$, with centre $x_j+\\tfrac h2e_i$.\n\nLet $\\widetilde Q_h$ be all real scalar cell arrays and let\n$Q_h=\\{q\\in\\widetilde Q_h:h^d\\sum_jq_j=0\\}$. Let $V_h$ be the real vector\nface arrays $v=(v_{i,j})_{1\\le i\\le d,\\,j\\in J_N}$. Give them the mass inner products\n$$ (q,r)_{Q_h}=h^d\\sum_{j\\in J_N}q_jr_j,\\qquad (v,w)_{M_h}=h^d\\sum_{i=1}^d\\sum_{j\\in J_N}v_{i,j}w_{i,j}. $$\nDefine the pressure gradient $G_h:\\widetilde Q_h\\to V_h$ and velocity\ndivergence $D_h:V_h\\to Q_h$ by\n$$ (G_hq)_{i,j}=\\frac{q_{j+e_i}-q_j}{h},\\qquad (D_hv)_j=\\sum_{i=1}^d\\frac{v_{i,j}-v_{i,j-e_i}}{h}. $$\nThe compatible pressure Laplacian is $\\Delta_h=D_hG_h$; its restriction to\n$Q_h$ is negative semidefinite, and $G_h$ annihilates constants. Define the\ncomponentwise vector Laplacian by\n$$ (\\Delta_h^Vv)_{i,j}=h^{-2}\\sum_{\\ell=1}^d (v_{i,j+e_\\ell}-2v_{i,j}+v_{i,j-e_\\ell}),\\qquad A_h=-\\Delta_h^V, $$\nand the discrete velocity-gradient seminorm by\n$$ \\|\\mathcal G_hv\\|_{M_h}^2=h^{d-2}\\sum_{i=1}^d\\sum_{\\ell=1}^d\\sum_{j\\in J_N} |v_{i,j+e_\\ell}-v_{i,j}|^2. $$\nThe fixed cell/face placement is part of the definition; collocated central\ndifferences are a different discretization.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$.\n\n1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $R_hu(t)$ denote the face samples and $R_hp(t),R_hf(t)$ the cell and face samples, respectively. For a face array $z$, write $\\bar z_i$ for the discrete mean of component $i$ repeated on every $i$-face. The input force is $f_h(t)=R_hf(t)-\\bar{R_hf(t)}$, so [F3] gives $\\|f_h(t)-R_hf(t)\\|_{M_h}\\le C h^2$. Define the sampling residual $$ r_h(t)=R_hu_t(t)+\\nu A_hR_hu(t)+G_hR_hp(t)-R_hf(t). $$ The continuous Stokes equation and [F3] imply $\\|r_h(t)\\|_{M_h}\\le C h^2$, uniformly in $t$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $v_h(t)=P_hR_hu(t)$ and let $L_h=-\\Delta_h$ on mean-zero cell arrays. All coordinate shifts commute, so $A_hG_h=G_hL_h$ and $D_hA_h=L_hD_h$. Since $L_h=-\\Delta_h$, it commutes with $\\Delta_h^{-1}$ on $Q_h$. Substitution in $P_h=I-G_h\\Delta_h^{-1}D_h$ gives $P_hA_h=A_hP_h$. Also $P_hG_hq=0$ for every mean-zero $q$, because $G_hq$ is orthogonal to $\\ker D_h$ by the adjoint relation in [F1]. Applying $P_h$ to the residual equation in step 1.1 therefore yields $$ v_h'(t)+\\nu A_hv_h(t)=P_hf_h(t)+\\rho_h(t), $$ where $\\rho_h=P_hr_h+P_h(R_hf-f_h)$. By [F1], $\\|P_h\\|\\le1$, and hence $\\|\\rho_h(t)\\|_{M_h}\\le C h^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying $P_h$ to the predictor equation and using $P_hA_h=A_hP_h$ and $P_hG_hp_h^n=0$ shows that the actual corrected velocity is exactly the backward-Euler step on $Z_h=\\ker D_h$: $$ (I+k\\nu A_h)u_h^{n+1}=u_h^n+kP_hf_h(t_{n+1}). $$ The projected reference $v_h$ obeys the differential equation in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $e_h^n=u_h^n-v_h(t_n)$. Integrating $v_h'$ over $[t_n,t_{n+1}]$ and using the equation in step 2.1 gives $$ (I+k\\nu A_h)v_h(t_{n+1}) =v_h(t_n)+kP_hf_h(t_{n+1})+k\\rho_h(t_{n+1})+\\tau_h^{n+1}, $$ where $\\tau_h^{n+1}=v_h(t_{n+1})-v_h(t_n)-kv_h'(t_{n+1})$. By [F7], $$\\tau_h^{n+1}=\\int_{t_n}^{t_{n+1}}\\bigl(v_h'(s)-v_h'(t_{n+1})\\bigr)\\,ds.$$ The bounded-derivative clause of [F7] gives $\\|v_h'(s)-v_h'(t_{n+1})\\|_{M_h}\\le (t_{n+1}-s)\\sup_t\\|v_h''(t)\\|_{M_h}$ after the isometric identification $v\\mapsto h^{d/2}v$ with Euclidean coordinates. Applying [F8] yields $$\\|\\tau_h^{n+1}\\|_{M_h}\\le\\int_{t_n}^{t_{n+1}}(t_{n+1}-s)\\sup_t\\|v_h''(t)\\|_{M_h}\\,ds=\\frac{k^2}{2}\\sup_t\\|v_h''(t)\\|_{M_h}\\le Ck^2,$$ because $P_h$ is a contraction and $h^dN^d=1$ bounds the weighted sample norm by the continuous supremum norm up to the fixed component factor.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For any face vector $z$, periodic summation by parts gives $(A_hz,z)_{M_h}\\ge0$. Hence $$ \\|(I+k\\nu A_h)z\\|_{M_h}^2 =\\|z\\|_{M_h}^2+2k\\nu(A_hz,z)_{M_h}+k^2\\nu^2\\|A_hz\\|_{M_h}^2 \\ge\\|z\\|_{M_h}^2. $$ Thus $(I+k\\nu A_h)^{-1}$ is a contraction. Subtracting the equations in steps 3.1–4.1 and applying this contraction gives $$ \\|e_h^{n+1}\\|_{M_h} \\le\\|e_h^n\\|_{M_h}+Ckh^2+Ck^2. $$ Since $e_h^0=0$ and $M=T/k$, summing yields $\\max_n\\|e_h^n\\|_{M_h}\\le C_T(h^2+k)$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Finally, $u_h^n-R_hu(t_n)=e_h^n+(P_hR_hu(t_n)-R_hu(t_n))$. The second term equals $-G_h\\phi$ with $\\phi=\\Delta_h^{-1}D_hR_hu(t_n)$. By [F4] and [F5], $$ \\|G_h\\phi\\|_{M_h}^2 =-(\\phi,\\Delta_h\\phi)_{Q_h} =-(\\phi,D_hR_hu)_{Q_h} \\le\\sqrt d\\|G_h\\phi\\|_{M_h}\\|D_hR_hu\\|_{Q_h}. $$ If $G_h\\phi=0$ the bound is immediate; otherwise divide by its norm. Since $\\nabla\\cdot u=0$, [F3] gives $\\|D_hR_hu\\|_{Q_h}\\le Ch^2$, so the projection-sampling discrepancy is $O(h^2)$. Combining this with step 5.1 proves the stated estimate.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 5.1 and 6.1 sum the recurrence through M and include the initial endpoint n=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-na-mini-element-pressure-mass-schur-bounds": {
+      "kind": "corollary",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "Axiom of Countable Choice (ACω) is explicitly assumed and carried through the named MINI, Korn, or Fortin suppliers. No full Axiom of Choice branch is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a nonempty bounded connected Lipschitz open set, where Lipschitz means that $\\partial D$ has a finite rigidly moved graph-chart atlas. Here $H^1_0(D)$ is the $H^1$-closure of $C_c^\\infty(D)$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]). Since $D$ has finite measure, Holder makes every $L^2$ class integrable, so the zero-mean condition is well-defined ([[thm-holder-inequality-for-integrals]]). Define\n$$V:=H^1_0(D;\\mathbb R^d),\\qquad Q:=L^2_0(D):=\\{q\\in L^2(D;\\mathbb R):\\int_Dq=0\\}.$$\nEquip $V$ with $\\|v\\|_V:=\\|\\nabla v\\|_{L^2(D)}$ and $Q$ with $\\|q\\|_Q:=\\|q\\|_{L^2(D)}$. The local Poincare inequality [[lem-na-homogeneous-dirichlet-poincare]] makes the first a norm equivalent to the usual $H^1$ norm. For $v\\in V$, define $\\varepsilon(v):=(\\nabla v+\\nabla v^T)/2$ and $b(v,q):=-\\int_Dq\\,\\operatorname{div}v$. For viscosity $\\nu>0$, set $a_\\nu(u,v):=2\\nu\\int_D\\varepsilon(u):\\varepsilon(v)$, where $X:Y=\\sum_{i,j}X_{ij}Y_{ij}$. The continuous domain class is all bounded connected Lipschitz $D$; the exact mini-element mesh class is the narrower polygonal/polyhedral conforming affine simplicial class.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-mini-element-p1-bubble-p1-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$, $d=2$ or $3$, be a bounded connected Lipschitz polygonal/polyhedral domain with a conforming shape-regular affine simplicial mesh $\\mathcal T_h$. On a simplex $K$ with barycentric coordinates $\\lambda_0,\\ldots,\\lambda_d$, define the scalar interior bubble $b_K=(d+1)^{d+1}\\prod_{i=0}^d\\lambda_i$. Let\n$$S^1_h=\\{w\\in C^0(\\overline D):w|_K\\in P_1(K)\\},\\quad S^1_{h,0}=S^1_h\\cap H^1_0(D).$$\nThe **mini-element spaces** are\n$$V_h=[S^1_{h,0}]^d\\oplus\\bigoplus_{K\\in\\mathcal T_h}b_K\\mathbb R^d\\subset H^1_0(D;\\mathbb R^d),\\qquad Q_h=S^1_h\\cap L^2_0(D).$$\nEach bubble is extended by zero off its cell. The zero-boundary conformity of the piecewise affine part is supplied by [[thm-zero-boundary-piecewise-polynomials-in-w10p]]. The local/global dimensions are proved in the next dimension lemma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-mini-element-local-and-global-dimensions",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For a connected conforming simplicial mesh in dimension $d=2$ or $3$, the local scalar velocity polynomial space $P_1(K)\\oplus\\operatorname{span}\\{b_K\\}$ has dimension $d+2$, the vector velocity dimension is $d(d+2)$, and the local pressure space $P_1(K)$ has dimension $d+1$. If the mesh has $N_v$ vertices, $N_{v,0}$ interior vertices and $N_K$ cells, then\n$$\\dim V_h=dN_{v,0}+dN_K,\\qquad \\dim Q_h=N_v-1.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-homogeneous-dirichlet-korn-identity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For bounded open $D\\subset\\mathbb R^d$ and $v\\in H^1_0(D;\\mathbb R^d)$, put $\\varepsilon(v)=(\\nabla v+\\nabla v^T)/2$. Then\n$$2\\|\\varepsilon(v)\\|_2^2=\\|\\nabla v\\|_2^2+\\|\\operatorname{div}v\\|_2^2,$$\nso $\\|\\nabla v\\|_2\\le\\sqrt2\\|\\varepsilon(v)\\|_2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-na-mini-element-fortin-stability",
+          "source_section": "Statement",
+          "quote": "On the mini-element spaces of [[def-na-mini-element-p1-bubble-p1-spaces]], there is a Fortin operator $\\Pi_h:V\\to V_h$ preserving $b(v,q_h)$ for every $q_h\\in Q_h$, with $\\|\\Pi_hv\\|_V\\le C_F\\|v\\|_V$. The constant depends only on $d$ and the mesh shape-regularity bound, not on $h$. Consequently\n$$\\beta_h\\ge (C_FC_{\\rm div}(D))^{-1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+          "source_section": "Statement",
+          "quote": "Let $V,Q$ be finite-dimensional real inner-product spaces with norms\n$\\|\\cdot\\|_V,\\|\\cdot\\|_Q$. Let $a(v,w)=v^TAw$ be symmetric positive\ndefinite, and let $b(v,q)=q^TBv$ be a bilinear constraint form, represented\nby the matrices in\n[[def-na-symmetric-saddle-point-system-and-block-preconditioners]]. Suppose\nthat, for constants $\\alpha,\\Lambda,C_b,\\beta>0$,\n$$ \\alpha\\|v\\|_V^2\\le a(v,v)\\le\\Lambda\\|v\\|_V^2, \\quad |b(v,q)|\\le C_b\\|v\\|_V\\|q\\|_Q, \\quad \\sup_{v\\ne0}\\frac{|b(v,q)|}{\\|v\\|_V}\\ge\\beta\\|q\\|_Q. $$\nIf $M_Q$ is the pressure mass matrix for $\\|\\cdot\\|_Q$, then the positive\nSchur matrix $S=BA^{-1}B^T$ satisfies, for every $q\\in Q$,\n$$ \\frac{\\beta^2}{\\Lambda}q^TM_Qq \\le q^TSq \\le\\frac{C_b^2}{\\alpha}q^TM_Qq. $$\nThus pressure-mass Schur equivalence is conditional on the actual inf-sup,\ncontinuity, and velocity stiffness scalings shown here.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge1$, $V=M_{n\\times1}(\\mathbb R)$, and\n$Q=M_{m\\times1}(\\mathbb R)$. Let $A\\in M_n(\\mathbb R)$ be symmetric\npositive definite, let $B\\in M_{m\\times n}(\\mathbb R)$ have full row rank\n(meaning $B^Tq=0$ implies $q=0$), and let\n$M_Q\\in M_m(\\mathbb R)$ be symmetric positive definite. The saddle system\nand its matrix are\n$$ K=\\begin{pmatrix}A&B^T\\\\B&0\\end{pmatrix},\\qquad Au+B^Tp=f,\\quad Bu=g. $$\nDefine the positive pressure Schur matrix\n$$ S:=BA^{-1}B^T. $$\nIn the block-LU convention of [[def-block-lu-factorisation]], the trailing\nSchur complement of $A$ in $K$ is $-S$. The exact block solve first solves\n$Au_0=f$, then $Sp=Bu_0-g$, and finally $Au=f-B^Tp$; the theorem\n[[thm-na-saddle-point-exact-schur-solve]] verifies this procedure and\nwell-definedness.\n\nFor a scaling $\\gamma>0$, the pressure-mass block-diagonal preconditioner is\n$$ P_\\gamma=\\operatorname{diag}(A,\\gamma M_Q). $$\nIt is symmetric positive definite. If $P_\\gamma=CC^T$ is its Cholesky\nfactorization with $C$ lower triangular and positive on the diagonal, the\nsymmetric preconditioned system is $C^{-1}KC^{-T}y=C^{-1}r$, with the usual\nchange of unknown. This is the symmetric-preconditioning convention of\n[[def-left-right-and-symmetric-positive-definite-preconditioning]]. No\nspectral bound, Krylov iteration count, complexity estimate, or generic speed\nimprovement is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-na-fortin-transfers-discrete-infsup",
+          "source_section": "Statement",
+          "quote": "Let $V_h\\subset V$ and $Q_h\\subset Q$, and suppose the continuous inf-sup constant of $b$ is $\\beta>0$. If $Q_h=\\{0\\}$ the constraint assertion is vacuous. Otherwise, for a Fortin operator as in [[def-na-fortin-operator]] with bound $C_F$, define $\\beta_h:=\\inf_{q_h\\ne0}\\sup_{v_h\\ne0}b(v_h,q_h)/(\\|v_h\\|_V\\|q_h\\|_Q)$. Then $\\beta_h\\ge\\beta/C_F$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The given finite nonempty mesh contains at least one $d$-simplex, so $N_K\\ge1$ and $N_v\\ge d+1$. The dimension formulas [F3] give $\\dim V_h\\ge d>0$ and $\\dim Q_h\\ge d>0$, verifying the dimension hypotheses in [F9]. For every nonzero pressure coefficient vector $q$, $q^TM_Qq=\\|q_h\\|_2^2>0$ by the pressure norm in [F1], so $M_Q$ is SPD. For every $v\\in V_h$, [F4] and coordinate Cauchy--Schwarz [F7] give $|\\operatorname{div}v|^2\\le d|\\nabla v|^2$ pointwise. Integrating this inequality and using [F4] yields $$ \\nu\\|\\nabla v\\|_2^2\\le a_\\nu(v,v) \\le \\nu(1+d)\\|\\nabla v\\|_2^2. $$ The first inequality drops the nonnegative divergence term in [F4]; the second integrates the pointwise estimate. Thus $\\alpha=\\nu$ and $\\Lambda=\\nu(1+d)$ in [F6].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $v\\in V_h$ and $q\\in Q_h$, Holder's inequality [F8] and the same pointwise divergence bound give $$ |b(v,q)|\\le\\|q\\|_2\\|\\operatorname{div}v\\|_2 \\le\\sqrt d\\|q\\|_2\\|\\nabla v\\|_2. $$ Hence the continuity constant in [F6] is $C_b=\\sqrt d$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5] and the definition [F10], the inf-sup constant in [F6] is at least $\\beta=(C_FC_{\\rm div}(D))^{-1}>0$. If $B_h^Tq=0$ for a nonzero pressure vector, then $b(v,q)=q^TB_hv=0$ for every $v$, making the supremum in [F10] zero and contradicting this positive lower bound. Thus $B_h$ has full row rank as required by [F9]. The lower bound in step 1.1 makes $A_h$ positive definite. Apply [F6] with the constants established in steps 1.1–1.2. Its lower coefficient is $(C_FC_{\\rm div}(D))^{-2}/(\\nu(1+d))$ and its upper coefficient is $d/\\nu$. This is the asserted steady pressure-mass Schur bound.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated domain, dimension, or matrix family excludes a one-dimensional or scalar boundary instance, and no claim is made for it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Fact A1 declare Countable Choice; the MINI/Fortin supplier chain is the only non-finite construction used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-na-mini-element-pressure-mass-block-spectrum": {
+      "kind": "corollary",
+      "risk": "high",
+      "proof_strategy": "direct",
+      "axiom_use": "Axiom of Countable Choice (ACω) is explicitly assumed and carried through the named MINI, Korn, or Fortin suppliers. No full Axiom of Choice branch is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses and Schur bounds of\n[[thm-na-pressure-schur-spectral-equivalence-from-infsup]], with constants\n$\\alpha,\\Lambda,C_b,\\beta>0$. For $\\gamma>0$, use\n$P_\\gamma=\\operatorname{diag}(A,\\gamma M_Q)$ from\n[[def-na-symmetric-saddle-point-system-and-block-preconditioners]], and set\n$$ a_\\gamma=\\frac{\\beta^2}{\\Lambda\\gamma},\\qquad b_\\gamma=\\frac{C_b^2}{\\alpha\\gamma},\\qquad \\lambda_\\pm(s)=\\frac{1\\pm\\sqrt{1+4s}}2. $$\nLet $\\mu_1,\\ldots,\\mu_m$ be the eigenvalues, with multiplicity, of\n$(\\gamma M_Q)^{-1/2}S(\\gamma M_Q)^{-1/2}$. Then\n$a_\\gamma\\le\\mu_j\\le b_\\gamma$, and the symmetric square-root-preconditioned\nsaddle matrix has eigenvalues\n$$ \\{\\lambda_-(\\mu_j),\\lambda_+(\\mu_j):1\\le j\\le m\\} \\quad\\text{and }1\\text{ with multiplicity }n-m. $$\nConsequently its spectrum is contained in\n$$ [\\lambda_-(b_\\gamma),\\lambda_-(a_\\gamma)]\\;\\cup\\; \\{1\\}\\;\\cup\\; [\\lambda_+(a_\\gamma),\\lambda_+(b_\\gamma)], $$\nwhere the eigenvalue $1$ has multiplicity zero if $n=m$. This is a spectral\nestimate for the stated scaled block preconditioner, not an iteration-count\nor generic solver-speed claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-na-mini-element-pressure-mass-schur-bounds",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, be a\nbounded connected Lipschitz polygonal or polyhedral domain with a finite,\nnonempty conforming shape-regular affine simplicial mesh. Use the MINI spaces\n$(V_h,Q_h)$ of\n[[def-na-mini-element-p1-bubble-p1-spaces]], the Stokes norms and bilinear\nforms of [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]], and the\nviscous velocity form\n$$ a_\\nu(v,w)=2\\nu\\int_D\\varepsilon(v):\\varepsilon(w),\\qquad \\nu>0. $$\nLet $A_h,B_h$ be the matrices of $a_\\nu$ and\n$b(v,q)=-\\int_Dq\\,\\operatorname{div}v$ in any bases, and let $M_Q$ be the\n$L^2(D)$ pressure mass matrix. Use the symmetric saddle convention of\n[[def-na-symmetric-saddle-point-system-and-block-preconditioners]]. With\n$S_h=B_hA_h^{-1}B_h^T$, the steady Stokes\npressure Schur complement satisfies\n$$ \\frac{(C_FC_{\\rm div}(D))^{-2}}{\\nu(1+d)}M_Q \\preceq S_h\\preceq \\frac d\\nu M_Q. $$\nHere $C_F$ is the shape-regularity-uniform Fortin norm bound and\n$C_{\\rm div}(D)$ is the continuous divergence right-inverse bound in\n[[thm-na-mini-element-fortin-stability]]. The result is for the steady\nvelocity stiffness; it asserts no corresponding bound for an unsteady shifted\nSchur complement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-mini-element-local-and-global-dimensions",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For a connected conforming simplicial mesh in dimension $d=2$ or $3$, the local scalar velocity polynomial space $P_1(K)\\oplus\\operatorname{span}\\{b_K\\}$ has dimension $d+2$, the vector velocity dimension is $d(d+2)$, and the local pressure space $P_1(K)$ has dimension $d+1$. If the mesh has $N_v$ vertices, $N_{v,0}$ interior vertices and $N_K$ cells, then\n$$\\dim V_h=dN_{v,0}+dN_K,\\qquad \\dim Q_h=N_v-1.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite mesh contains a simplex, so [F3] gives $N_K\\ge1$ and $N_v\\ge d+1$; therefore both $V_h$ and $Q_h$ have positive dimensions as required by [F1]. Congruence of [F2] by $(\\nu^{-1}M_Q)^{-1/2}$ shows that the normalized Schur eigenvalues $\\mu_j$ lie in $$ \\left[(C_FC_{\\rm div}(D))^{-2}/(1+d),\\ d\\right]=[c_-,c_+]. $$ Since $Q_h$ is nonzero and $M_Q$ is positive definite, [F2] also forces $c_-\\le c_+$; both endpoints are positive.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The derivative formulas $\\lambda_-'(s)=-(1+4s)^{-1/2}<0$ and $\\lambda_+'(s)=(1+4s)^{-1/2}>0$ for $s>0$ show that the two eigenvalue branches map $[c_-,c_+]$ onto the two stated intervals. Applying [F1] therefore yields the displayed spectral enclosure and multiplicity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated domain, dimension, or matrix family excludes a one-dimensional or scalar boundary instance, and no claim is made for it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Fact A1 declare Countable Choice; the MINI/Fortin supplier chain is the only non-finite construction used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-na-wall-pressure-correction-tangential-velocity-defect": {
+      "kind": "example",
+      "risk": "low",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $a=c=2\\pi$. Direct differentiation gives $\\nabla\\cdot\\widetilde u=-c\\sin(ax)y(1-y)$. Define $$ g(y)=-\\frac c{a^2}y^2+\\frac c{a^2}y-\\frac{2c}{a^4} +\\frac{c}{a^3\\sinh(a/2)}\\cosh(a(y-1/2)),\\qquad \\phi(x,y)=\\sin(ax)g(y). $$ Differentiating the polynomial and hyperbolic terms gives $g''-a^2g=-c y(1-y)$ and $g'(0)=g'(1)=0$. By [F2], this $\\phi$ solves the stated Poisson problem and satisfies both Neumann conditions. Since $\\widetilde u_y=0$ and $\\partial_y\\phi=0$ at the walls, the corrected normal velocity remains zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For uniqueness of its gradient, if two classical periodic Neumann solutions are given, their difference $w$ is harmonic with $\\partial_yw=0$ on both walls. For each fixed $y$, one-dimensional integration by parts in $x$ gives $\\int_{\\mathbb T}w w_{xx}=-\\int_{\\mathbb T}w_x^2$ because the periodic endpoint terms cancel; integration by parts in $y$ gives $\\int_0^1 w w_{yy}=[w w_y]_0^1-\\int_0^1w_y^2=-\\int_0^1w_y^2$ by the Neumann data. Integrating the latter equality in $x$ and using $\\Delta w=0$ yields $\\int_\\Omega|\\nabla w|^2=0$. Hence $\\nabla w=0$, so the correction is independent of the pressure constant.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\widetilde u_x(x,0)=0$, the corrected tangential trace at the lower wall is $$ u_x(x,0)=-\\partial_x\\phi(x,0)=-a\\cos(ax)g(0). $$ At $x=0$, $$ g(0)=\\frac c{a^4}\\bigl(a\\coth(a/2)-2\\bigr)>0, $$ because $\\coth(a/2)>1$ and $a=2\\pi>2$. Therefore $u_x(0,0)=-a g(0)\\ne0$, which proves the tangential no-slip defect.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated domain, dimension, or matrix family excludes a one-dimensional or scalar boundary instance, and no claim is made for it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check both walls and evaluate the lower-wall tangential trace."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-na-collocated-central-difference-checkerboard-pressure-mode": {
+      "kind": "counterexample",
+      "risk": "low",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-periodic-staggered-grid-stokes-operators",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$ and an integer resolution $N\\ge2$, where\n$N\\in\\mathbb N$ ([[def-natural-numbers]]), and put $h=1/N$. Real scalar and\narray operations use the field $\\mathbb R$ ([[thm-reals-field]]). Let\n$J_N=\\{0,\\ldots,N-1\\}^d$; each coordinate index addition below is reduced\nto the unique element of $\\{0,\\ldots,N-1\\}$ congruent modulo $N$. The unit\ntorus $\\mathbb T^d$ means the unit cube with opposite faces identified, so\nfields and arrays are periodic across those faces. Write\n$\\mathbf 1=(1,\\ldots,1)$ and let $e_i$ be the $i$th standard coordinate vector.\nCell $j$ has centre $x_j=h(j+\\tfrac12\\mathbf 1)$. The pressure value $q_j$ is\nstored at that centre. Velocity component $i$ is stored at the right face of\ncell $j$, with centre $x_j+\\tfrac h2e_i$.\n\nLet $\\widetilde Q_h$ be all real scalar cell arrays and let\n$Q_h=\\{q\\in\\widetilde Q_h:h^d\\sum_jq_j=0\\}$. Let $V_h$ be the real vector\nface arrays $v=(v_{i,j})_{1\\le i\\le d,\\,j\\in J_N}$. Give them the mass inner products\n$$ (q,r)_{Q_h}=h^d\\sum_{j\\in J_N}q_jr_j,\\qquad (v,w)_{M_h}=h^d\\sum_{i=1}^d\\sum_{j\\in J_N}v_{i,j}w_{i,j}. $$\nDefine the pressure gradient $G_h:\\widetilde Q_h\\to V_h$ and velocity\ndivergence $D_h:V_h\\to Q_h$ by\n$$ (G_hq)_{i,j}=\\frac{q_{j+e_i}-q_j}{h},\\qquad (D_hv)_j=\\sum_{i=1}^d\\frac{v_{i,j}-v_{i,j-e_i}}{h}. $$\nThe compatible pressure Laplacian is $\\Delta_h=D_hG_h$; its restriction to\n$Q_h$ is negative semidefinite, and $G_h$ annihilates constants. Define the\ncomponentwise vector Laplacian by\n$$ (\\Delta_h^Vv)_{i,j}=h^{-2}\\sum_{\\ell=1}^d (v_{i,j+e_\\ell}-2v_{i,j}+v_{i,j-e_\\ell}),\\qquad A_h=-\\Delta_h^V, $$\nand the discrete velocity-gradient seminorm by\n$$ \\|\\mathcal G_hv\\|_{M_h}^2=h^{d-2}\\sum_{i=1}^d\\sum_{\\ell=1}^d\\sum_{j\\in J_N} |v_{i,j+e_\\ell}-v_{i,j}|^2. $$\nThe fixed cell/face placement is part of the definition; collocated central\ndifferences are a different discretization.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $N$ is even, summing $(-1)^{j_1}$ over its $N$ values gives zero; the other coordinates simply repeat this sum. Hence $q$ has zero discrete mean. It is nonconstant because its values at $j_1=0$ and $j_1=1$ differ.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $i=1$, [F2] gives $q_{j+e_1}=q_{j-e_1}$, so the first component of $G_cq$ is zero. For every $i>1$, the array is independent of coordinate $i$, hence again $q_{j+e_i}=q_{j-e_i}$. The defining centred difference therefore gives $G_cq=0$ in every component, proving the nonconstant zero-mean pressure mode is invisible.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum": {
+      "kind": "example",
+      "risk": "low",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge1$, $V=M_{n\\times1}(\\mathbb R)$, and\n$Q=M_{m\\times1}(\\mathbb R)$. Let $A\\in M_n(\\mathbb R)$ be symmetric\npositive definite, let $B\\in M_{m\\times n}(\\mathbb R)$ have full row rank\n(meaning $B^Tq=0$ implies $q=0$), and let\n$M_Q\\in M_m(\\mathbb R)$ be symmetric positive definite. The saddle system\nand its matrix are\n$$ K=\\begin{pmatrix}A&B^T\\\\B&0\\end{pmatrix},\\qquad Au+B^Tp=f,\\quad Bu=g. $$\nDefine the positive pressure Schur matrix\n$$ S:=BA^{-1}B^T. $$\nIn the block-LU convention of [[def-block-lu-factorisation]], the trailing\nSchur complement of $A$ in $K$ is $-S$. The exact block solve first solves\n$Au_0=f$, then $Sp=Bu_0-g$, and finally $Au=f-B^Tp$; the theorem\n[[thm-na-saddle-point-exact-schur-solve]] verifies this procedure and\nwell-definedness.\n\nFor a scaling $\\gamma>0$, the pressure-mass block-diagonal preconditioner is\n$$ P_\\gamma=\\operatorname{diag}(A,\\gamma M_Q). $$\nIt is symmetric positive definite. If $P_\\gamma=CC^T$ is its Cholesky\nfactorization with $C$ lower triangular and positive on the diagonal, the\nsymmetric preconditioned system is $C^{-1}KC^{-T}y=C^{-1}r$, with the usual\nchange of unknown. This is the symmetric-preconditioning convention of\n[[def-left-right-and-symmetric-positive-definite-preconditioning]]. No\nspectral bound, Krylov iteration count, complexity estimate, or generic speed\nimprovement is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses and Schur bounds of\n[[thm-na-pressure-schur-spectral-equivalence-from-infsup]], with constants\n$\\alpha,\\Lambda,C_b,\\beta>0$. For $\\gamma>0$, use\n$P_\\gamma=\\operatorname{diag}(A,\\gamma M_Q)$ from\n[[def-na-symmetric-saddle-point-system-and-block-preconditioners]], and set\n$$ a_\\gamma=\\frac{\\beta^2}{\\Lambda\\gamma},\\qquad b_\\gamma=\\frac{C_b^2}{\\alpha\\gamma},\\qquad \\lambda_\\pm(s)=\\frac{1\\pm\\sqrt{1+4s}}2. $$\nLet $\\mu_1,\\ldots,\\mu_m$ be the eigenvalues, with multiplicity, of\n$(\\gamma M_Q)^{-1/2}S(\\gamma M_Q)^{-1/2}$. Then\n$a_\\gamma\\le\\mu_j\\le b_\\gamma$, and the symmetric square-root-preconditioned\nsaddle matrix has eigenvalues\n$$ \\{\\lambda_-(\\mu_j),\\lambda_+(\\mu_j):1\\le j\\le m\\} \\quad\\text{and }1\\text{ with multiplicity }n-m. $$\nConsequently its spectrum is contained in\n$$ [\\lambda_-(b_\\gamma),\\lambda_-(a_\\gamma)]\\;\\cup\\; \\{1\\}\\;\\cup\\; [\\lambda_+(a_\\gamma),\\lambda_+(b_\\gamma)], $$\nwhere the eigenvalue $1$ has multiplicity zero if $n=m$. This is a spectral\nestimate for the stated scaled block preconditioner, not an iteration-count\nor generic solver-speed claim.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The scalar matrix $A=[1]$ is SPD, $B^Tq=0$ implies $q=0$, and the Schur matrix is $S=BA^{-1}B^T=[1]$. Thus the normalized Schur eigenvalue is $\\mu=1$ and $P_1=\\operatorname{diag}(1,1)=I$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F2] at $\\mu=1$ gives the characteristic polynomial $\\lambda^2-\\lambda-1$ and roots $(1\\pm\\sqrt5)/2$. Direct substitution in $u+p=1$ and $u=0$ yields $(u,p)=(0,1)$; the coefficient matrix is invertible because its determinant is $-1$, so this solution is unique.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero arrays or matrices lie in the declared linear spaces; substitution in the displayed linear identities preserves the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-na-periodic-single-mode-pressure-correction": {
+      "kind": "example",
+      "risk": "low",
+      "proof_strategy": "direct",
+      "axiom_use": "No additional choice principle is used. Finite arrays, finite sums, and finite-dimensional linear algebra are treated explicitly; no axiom is used to select an infinite family.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-periodic-staggered-grid-stokes-operators",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$ and an integer resolution $N\\ge2$, where\n$N\\in\\mathbb N$ ([[def-natural-numbers]]), and put $h=1/N$. Real scalar and\narray operations use the field $\\mathbb R$ ([[thm-reals-field]]). Let\n$J_N=\\{0,\\ldots,N-1\\}^d$; each coordinate index addition below is reduced\nto the unique element of $\\{0,\\ldots,N-1\\}$ congruent modulo $N$. The unit\ntorus $\\mathbb T^d$ means the unit cube with opposite faces identified, so\nfields and arrays are periodic across those faces. Write\n$\\mathbf 1=(1,\\ldots,1)$ and let $e_i$ be the $i$th standard coordinate vector.\nCell $j$ has centre $x_j=h(j+\\tfrac12\\mathbf 1)$. The pressure value $q_j$ is\nstored at that centre. Velocity component $i$ is stored at the right face of\ncell $j$, with centre $x_j+\\tfrac h2e_i$.\n\nLet $\\widetilde Q_h$ be all real scalar cell arrays and let\n$Q_h=\\{q\\in\\widetilde Q_h:h^d\\sum_jq_j=0\\}$. Let $V_h$ be the real vector\nface arrays $v=(v_{i,j})_{1\\le i\\le d,\\,j\\in J_N}$. Give them the mass inner products\n$$ (q,r)_{Q_h}=h^d\\sum_{j\\in J_N}q_jr_j,\\qquad (v,w)_{M_h}=h^d\\sum_{i=1}^d\\sum_{j\\in J_N}v_{i,j}w_{i,j}. $$\nDefine the pressure gradient $G_h:\\widetilde Q_h\\to V_h$ and velocity\ndivergence $D_h:V_h\\to Q_h$ by\n$$ (G_hq)_{i,j}=\\frac{q_{j+e_i}-q_j}{h},\\qquad (D_hv)_j=\\sum_{i=1}^d\\frac{v_{i,j}-v_{i,j-e_i}}{h}. $$\nThe compatible pressure Laplacian is $\\Delta_h=D_hG_h$; its restriction to\n$Q_h$ is negative semidefinite, and $G_h$ annihilates constants. Define the\ncomponentwise vector Laplacian by\n$$ (\\Delta_h^Vv)_{i,j}=h^{-2}\\sum_{\\ell=1}^d (v_{i,j+e_\\ell}-2v_{i,j}+v_{i,j-e_\\ell}),\\qquad A_h=-\\Delta_h^V, $$\nand the discrete velocity-gradient seminorm by\n$$ \\|\\mathcal G_hv\\|_{M_h}^2=h^{d-2}\\sum_{i=1}^d\\sum_{\\ell=1}^d\\sum_{j\\in J_N} |v_{i,j+e_\\ell}-v_{i,j}|^2. $$\nThe fixed cell/face placement is part of the definition; collocated central\ndifferences are a different discretization.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-na-periodic-incremental-pressure-correction",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, $N\\ge2$, $h=1/N$, viscosity $\\nu>0$, and time step $k>0$.\nGiven $u^n\\in V_h$ with $D_hu^n=0$, a mean-zero\npressure $p^n\\in Q_h$, and a force $f^{n+1}\\in V_h$ whose components each\nhave zero discrete mean,\n$$h^d\\sum_{j\\in J_N}f_{i,j}^{n+1}=0\\qquad(1\\le i\\le d),$$\ndefine the next step by the following two solves and update:\n\n1. Find $\\widetilde u^{n+1}\\in V_h$ satisfying\n$$ \\frac{\\widetilde u^{n+1}-u^n}{k}+\\nu A_h\\widetilde u^{n+1}+G_hp^n=f^{n+1}. $$\n\n2. Find the unique $\\phi^{n+1}\\in Q_h$ satisfying\n$$ \\Delta_h\\phi^{n+1}=k^{-1}D_h\\widetilde u^{n+1}. $$\n\n3. Set\n$$ u^{n+1}=\\widetilde u^{n+1}-kG_h\\phi^{n+1},\\qquad p^{n+1}=p^n+\\phi^{n+1}. $$\n\nThe pressure is kept in $Q_h$ after every solve; the constant pressure mode\nis set to zero. The procedure is only asserted for the periodic staggered\ngrid and the admissible data stated here. The separate well-definedness\ntheorem [[thm-na-periodic-pressure-correction-solves-well-defined]] verifies\nboth solves and the preserved constraints.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-periodic-pressure-correction-solves-well-defined",
+          "source_section": "Statement",
+          "quote": "On the periodic staggered grid of\n[[def-na-periodic-staggered-grid-stokes-operators]], every admissible backward-\nEuler step of [[alg-na-periodic-incremental-pressure-correction]] and every\nadmissible BDF2 step of\n[[alg-na-bdf2-incremental-and-rotational-pressure-correction]] has a unique\npredictor, a unique mean-zero pressure increment, and a unique updated pair.\nBoth algorithms preserve the zero-mean pressure gauge and exact discrete\nincompressibility.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-periodic-discrete-helmholtz-projection",
+          "source_section": "Statement",
+          "quote": "On the grid of [[def-na-periodic-staggered-grid-stokes-operators]], let\n$\\Delta_h^{-1}:Q_h\\to Q_h$ be the inverse from\n[[lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare]]. Define\n$$ P_h:=I-G_h\\Delta_h^{-1}D_h:V_h\\to V_h. $$\nThen $P_h$ is the mass-orthogonal projector onto\n$Z_h=\\ker D_h$. In the backward-Euler algorithm\n[[alg-na-periodic-incremental-pressure-correction]], the velocity correction\nsatisfies $u^{n+1}=P_h\\widetilde u^{n+1}$ and\n$D_hu^{n+1}=0$ exactly.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $N$ is even, $q$ has zero mean. The staggered gradient is not zero: $(G_hq)_{1,j}=-2q_j/h$. Also $\\Delta_hq=-4q/h^2$, so [F1] gives $D_hG_hq=\\Delta_hq$. Periodic summation shows both $G_hq$ and $A_hG_hq$ have zero component means, hence the force is admissible.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $\\widetilde u^{n+1}=G_hq$ and $u^n=p^n=0$ into the predictor equation [F2] gives $k^{-1}G_hq+\\nu A_hG_hq=f^{n+1}$, so uniqueness [F3] identifies it as the predictor. For the pressure equation, $$ \\Delta_h(k^{-1}q)=k^{-1}D_hG_hq=k^{-1}D_h\\widetilde u^{n+1}; $$ both sides have mean zero and [F3] gives $\\phi^{n+1}=k^{-1}q$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The velocity update [F2] now gives $u^{n+1}=G_hq-kG_h(k^{-1}q)=0$, while the pressure update gives $p^{n+1}=k^{-1}q$. This is exact one-step removal of the selected mode.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty grid, channel, or positive-dimensional matrix spaces; no empty-space instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1 include zero initial velocity and pressure and verify the exact corrected zero velocity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest declared dimension, grid resolution, or scalar block size is included by the displayed hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: positive parameters, nondegenerate grid assumptions, or SPD/full-rank hypotheses exclude the singular case relevant to this result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is on a periodic grid or finite algebraic system and has no physical boundary or time-endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects are finite arrays, finite-dimensional vectors, or explicit smooth functions; the proof makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no forward equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim; there is no reverse equivalence branch."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

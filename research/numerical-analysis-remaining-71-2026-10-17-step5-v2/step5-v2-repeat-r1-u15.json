@@ -1,0 +1,133 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "15",
+  "input_sha256": "e9e862a5d9fc0f5beca3860e9017960e4487dcd5836978457e73185a3b4d2016",
+  "decisions": [
+    {
+      "id": "alg-incremental-planar-delaunay-edge-flips",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "0e3068aefa6f50802ac1ee4a50c58347ce99380a1269335ef59fade44d28e249",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For the four unit-square sites the raw lifted determinant is zero because the squared-norm column equals x+y. This input-only quadruple is part of every augmented set, so the formerly unconditional augmented zero test rejected every candidate even in ordinary g=0 mode. This is nontermination on an admitted full-dimensional input. Scoped the augmented zero tests to g=1; strict containment and exclusion of every noncollinear input circumcircle remain mandatory in both modes.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-incremental-planar-delaunay-edge-flips",
+      "disposition": "repaired",
+      "post_sha256": "9299b0a71d53f974e7fd851bce17d9b0ea9bfed3f5f32b17091940a9f076f611",
+      "review_context_sha256": "35535b3f4b63e9e94a7de8e06d0eeda46e3d604b8cb8d969c3128aecd1059be9",
+      "reason": "The only procedure change guards the augmented collinearity and cocircularity rejection by g=1. In g=0 every candidate satisfying the first clause of lem-large-delaunay-supertriangle-exists is now accepted; its finite dyadic enumeration reaches such a candidate. In g=1 both input and augmented general-position checks remain intact, and the lemma supplies an accepted candidate for valid requests. Duplicate collapse, low-dimensional outputs, exact predicate arities, fixed ranks, edge-hit insertion, formal tie resolution, flips, event records and final deletion are unchanged. Updated the exact Definition mirror in the owning batch-15 manifest. This is local repair verification, not an independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ics-websites.science.uu.nl/geobook/interpolation.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-randomized-history-dag-point-location",
+    "thm-incremental-planar-delaunay-correctness-and-termination",
+    "alg-delaunay-seeded-curved-uniform-nvb-refinement"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-incremental-planar-delaunay-edge-flips",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "location": "definition",
+      "summary": "Unconditional augmented general-position zero tests prevent ordinary-mode supertriangle search from terminating on a cocircular square, or on a full-dimensional input containing a collinear triple.",
+      "correction": "Guarded the augmented zero tests with g=1, preserving the full ordinary input domain and both strict geometric constraints.",
+      "evidence": {
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-repeat-r1-u15.json",
+        "anchor": "decisions/0"
+      },
+      "independent_review": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "alg-incremental-planar-delaunay-edge-flips",
+      "status": "repair and focused checks complete",
+      "before_clause": "For each remaining candidate, also test every augmented triple",
+      "after_clause": "If $g=1$, for each remaining candidate also test every augmented triple",
+      "contract": "No standalone algorithm contract exists in batch-15.proof-contracts.json; the algorithm has no proof section. The owning pages.json Definition mirror was updated under the shared-write lock. No dependencies, choice requirements, provenance, status, or proof contract were changed.",
+      "source_reading": "Consulted de Berg et al., Chapter 9, Section 9.3, pp. 199–202, initialization, edge-hit split, legalization and Lemma 9.10. The three-synthetic-vertex dyadic existence and optional augmented-general-position claims were checked directly in the complete local lem-large-delaunay-supertriangle-exists proof; the book uses a different auxiliary-vertex construction.",
+      "remaining": "No unresolved mathematics or necessary consumer repair identified for this change. Native consumer routing, independent rejudgment and certification remain controller duties; none was launched or claimed."
+    },
+    {
+      "consumer": "alg-randomized-history-dag-point-location",
+      "path": "items/alg-randomized-history-dag-point-location.md",
+      "affected_use": "Definition paragraph 1 calls CHOOSE-SUPERTRIANGLE(P,1) and requires no three augmented sites collinear and no four cocircular. Later paragraphs invoke the unchanged INSERT face-certificate and event interface.",
+      "disposition": "unchanged and sound for this interface change",
+      "reason": "Both g=1 zero-test families remain mandatory, so the augmented general-position guarantee and all insertion instructions used here are unchanged. No consumer defining clause needs repair.",
+      "route": "frontier owner"
+    },
+    {
+      "consumer": "thm-incremental-planar-delaunay-correctness-and-termination",
+      "path": "items/thm-incremental-planar-delaunay-correctness-and-termination.md",
+      "affected_use": "Proof step 1.2 invokes CHOOSE-SUPERTRIANGLE(P,0), finiteness of each enumeration height, and F1 to obtain termination; steps 2.1–6.1 use containment, strict circle exclusions and the unchanged formal insertion procedure.",
+      "disposition": "unchanged and sound for this interface change",
+      "reason": "The corrected g=0 acceptance criterion is exactly the unconditional existence clause of F1. No proof step requires augmented general position, and edge splits already cover collinear incidences. Its Statement and Proof need no repair.",
+      "route": "frontier owner"
+    },
+    {
+      "consumer": "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+      "path": "items/alg-delaunay-seeded-curved-uniform-nvb-refinement.md",
+      "affected_use": "Definition paragraph 1 supplies the four square corners (-1,-1),(1,-1),(1,1),(-1,1), calls ordinary g=0 without a prescribed permutation, then verifies a two-triangle square seed. Procedure notes repeat that seed interface.",
+      "disposition": "unchanged and sound for this interface change",
+      "reason": "These cocircular corners are admitted in ordinary mode and no longer cause unconditional rejection. Their two weakly empty triangles and coherent tie choice remain the existing correctness theorem output; all NVB instructions are unchanged.",
+      "route": "frontier owner"
+    },
+    {
+      "page": "library/numerical-linear-algebra-and-approximation/delaunay-triangulations-and-voronoi-computation.md",
+      "affected_use": "The item inventory includes the algorithm and the summary describes containing-supertriangle insertion, exact flips and a stable-id tie rule.",
+      "disposition": "unchanged",
+      "reason": "The repaired initialization implements those same promises and adds no page-level general-position restriction."
+    },
+    {
+      "published_ledger": "No direct published consumer or outside-frontier consumer was found by the direct item-reference/dependency inventory; no published-ledger mutation or separate maintenance repair is proposed. All three direct item consumers are draft frozen-frontier items. Propagation ends at their unchanged Statements/Definitions."
+    },
+    {
+      "validation": [
+        {
+          "command": "python3 inline exact-rational determinant and acceptance checks",
+          "exit_code": 0,
+          "result": "Candidate [(-16,-8),(17,-9),(1,19)] has orientation 908 and satisfies strict containment/circle exclusions for the unit square, [(0,0),(1,0),(2,0),(0,1)], and [(0,0),(2,0),(0,1)]. All pass g=0; the first two fail input general position in g=1, and the last passes augmented general position. These are finite checks, not a proof of the general termination theorem."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/alg-incremental-planar-delaunay-edge-flips.md --json",
+          "exit_code": 0,
+          "result": {
+            "errors": [],
+            "warnings": [],
+            "checked": 1
+          }
+        },
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-incremental-planar-delaunay-edge-flips.md --json",
+          "exit_code": 0,
+          "result": "1 file, 0 checked proofs, 0 failures; not-applicable for this algorithm without a proof section."
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/alg-incremental-planar-delaunay-edge-flips.md",
+          "exit_code": 0,
+          "result": "proof-layout: 1 items, 0 steps, 0 defects"
+        }
+      ],
+      "inventory": "Exact supplier-ID search in items/ and library/ found the three listed item consumers plus the owning page; the frozen input has no alias for this supplier. All consumers belong to the frozen frontier. No downstream consumer Statement/Definition changed, so no further hop was expanded."
+    }
+  ]
+}

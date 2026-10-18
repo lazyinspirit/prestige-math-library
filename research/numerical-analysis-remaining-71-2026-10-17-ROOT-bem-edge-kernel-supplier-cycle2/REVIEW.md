@@ -1,0 +1,74 @@
+# SECOND/final edge-kernel and consumer review
+
+Reviewed the actual completed native batch-57 carriers after the refresh reported by root as genuine success at 15:19:27Z, not merely the first-cycle proposals. The actual PE16 A/B pages now exist and were read fully. This is the second/final owner review/repair cycle for this lane; no third cycle is requested. This report does not claim native execution, independent judge acceptance, or gate coverage.
+
+## Outcome and exact changed files
+
+The new edge-kernel lemma proves the full global H1/2 off-surface representation, including compatible facewise smooth densities reaching all polyhedral edges. Its distributional source sign, kernel normalization, L1 ball estimate, mollification, entire harmonic uniqueness, and smooth-face half-jump calculation check out. No face-interior-core density approximation is used. No edge/vertex pointwise half-jump is claimed. The minimizer, common weak conormal, trace mappings, energy bound, hypersingular constant kernel, quotient coercivity and stabilized solvability are retained.
+
+Five canonical files received focused edits, with their exact original preimages under `preimages/items/` in this directory:
+
+1. `items/lem-bem-lipschitz-trace-and-lifting.md`: precise exterior trace domain, explicit H1 normal-slice/pointwise trace identification, and corrected nonexistent step reference `1.1–1.2` to `1.1 and 2.1`.
+2. `items/def-bem-laplace-layer-potentials-and-energy-spaces.md`: finite-H1 interior conormal domain, explicit exterior energy Green identity for all E+ tests by cutoff approximation, and grammatical repair of the weak equation introduction.
+3. `items/lem-bem-polyhedral-edge-kernel-representation.md`: proof only; explicit normal-slice estimate identifies the computed smooth-face boundary limits with the Sobolev traces.
+4. `items/thm-bem-calderon-mapping-and-jump-identities.md`: explicit inherited Axiom of Choice and Countable Choice in Statement and Given. No operator/mapping/jump conclusion changed.
+5. `items/thm-bem-hypersingular-ellipticity-and-stabilized-formulation.md`: proof explicitly invokes the exterior finite-energy Green identity, and the Sayas energy locator is corrected to Chapter 3 §§3.1–3.3, printed pp. 40–46. Statement unchanged.
+
+No canonical metadata fields, deps, levels, manifests, contracts, hashes, readiness files or runtime state were modified. The required proof-layout command on exactly these five paths reported `5 items, 17 steps, 0 defects`. No tests or gates were run.
+
+## Original and repaired defining/statement interfaces
+
+**Trace/lifting Statement.** Original exterior map was displayed as `gamma-plus : H1_loc(Omega-plus) -> H1/2_loc(Gamma)`, followed by a bounded-boundary-neighborhood qualifier. Mere H1 regularity locally in the open exterior does not imply any boundary trace: a function blowing up toward a face can satisfy that open-set-local condition. The repaired Statement gives the bounded map from H1 on a bounded exterior Lipschitz boundary collar to H1/2(Gamma), with the localized chart version. Every intended finite-energy use is retained, because L6 plus L2 gradient implies H1 on each bounded collar by Holder. Interior trace, right inverse, extension, homogeneous completion, and compact-support lift conclusions are unchanged. This repairs the mathematical domain instead of discarding any approved finite-energy or edge claim.
+
+**Weak layer Definition.** Original interior conormal introduction said “a harmonic function in Omega-minus with trace in H1/2(Gamma)” before using a volume integral of its gradient. It now says explicitly “a weakly harmonic function u-minus in H1(Omega-minus)”, which is the finite-energy class used by all actual consumers and the class on which that integral is defined. The S equation, dot-H1 normalization, E+ definition, exterior sign, and all kernel conventions are unchanged. A new justification establishes the exterior energy Green identity for every E+ test, rather than assuming the test is compactly supported: subtract a compactly supported trace lift, cut off the zero-trace remainder at large radius, estimate the cutoff-gradient term by the L6 tail, and approximate zero-trace cutoffs by interior smooth functions. Thus no unproved vanishing boundary flux at infinity is imported.
+
+**Calderon Statement.** Original began directly “For lambda in H-1/2 and phi in H1/2 ...” while its Given imported the two AC/CC-dependent transmission theorems. Repaired Statement and Given explicitly assume AC and CC, exactly as those actual suppliers do. All four bounded maps and every displayed signed identity are unchanged. The actual direct hypersingular consumer already explicitly assumes both; the P0 panel weak-pairing consumer also already assumes both.
+
+**New edge lemma and hypersingular theorem.** Neither Statement changed in this review. The new lemma's full-H1/2 representation, optional facewise C1 K-kernel realization and compatible edge-reaching subclass remain byte-for-byte the same defining claims. The hypersingular theorem retains symmetry, nonnegativity, constants as exact kernel, quotient ellipticity, rank-one stabilization and unique solution for every H-1/2 load.
+
+**Four originally changed edge/layer/Calderon carriers from the first/native cycle.** The full-H1/2 kernel clause in the double-layer transmission theorem and its defining transmission-space kernel convention are confirmed against the actual new lemma. The single-layer theorem's extension from smooth face-interior data to all bounded densities is justified by its actual local surface-area, logarithmic-gradient, collar-volume and far-field estimates; its global weak derivative justification handles edge-reaching and discontinuous P0 data. The Calderon kernel-gap remark now correctly follows those actual theorems; its weak operator identities remain the sum-and-difference algebra of the unchanged jumps.
+
+## All old/current direct and indirect consumers
+
+Actual item-body reading and textual reference search, together with the original first-cycle consumer inventory, give the following bounded closure. No outside published mathematical consumer of these changed interfaces was found. Entries below were read as actual current carriers; this is not manifest-only acceptance.
+
+| Carrier | Actual use and final disposition |
+| --- | --- |
+| `lem-bem-lipschitz-trace-and-lifting` | Reviewed full trace/extension proof. Exterior domain corrected; homogeneous trace and compact right inverse retained. |
+| `lem-bem-exterior-energy-trace-bound` | E+ gives H1 in the bounded annular collar, so the precise trace domain applies. Radial tail estimate, collar Poincare/mean control, connectedness and resulting gradient-only trace bound are unchanged. No repair needed. |
+| `def-bem-laplace-layer-potentials-and-energy-spaces` | Uses collar/homogeneous trace; its single-layer theorem is also its well-definedness supplier. H1 conormal domain and noncompact energy Green identity repaired as above. |
+| `def-bem-double-layer-transmission-space` | Both affine components are genuinely finite energy and have collar traces; full-H1/2 kernel convention is justified by the actual theorem. Definition retained. |
+| `lem-bem-polyhedral-edge-kernel-representation` | Interior H1 and exterior E+ satisfy the collar requirement. Global first derivative has interface term `(u-plus - u-minus)n`, giving the correct dipole source. Kernel equality and boundary trace interpretation independently checked; only trace-limit proof detail added. |
+| `thm-bem-single-layer-transmission-mapping-and-coercivity` | Dot-H1 provides L6 and local H1 through Gamma, so the common trace and both weak conormals meet the repaired interfaces. Bounded-density kernel agreement genuinely includes discontinuous panel indicators. All existence, uniqueness, jump and coercivity conclusions retained. |
+| `thm-bem-double-layer-transmission-jumps-and-bounds` | Matching trace pairs glue into dot-H1; radial cutoffs give completeness in gradient norm, the lift supplies the affine competitor, stationarity gives common fixed-normal conormal, exterior trace plus jump bounds the average. The new lemma then applies without any density/core argument. No repair needed. |
+| `def-bem-calderon-boundary-operators` | V and K are weak traces, K-prime the conormal average, W minus the common conormal. All arguments belong to the exact finite-energy classes and every definition remains meaningful. Definition retained. |
+| `thm-bem-calderon-mapping-and-jump-identities` | Bounded lifts bound K-prime, transmission theorems bound V/K/W, and sum/difference gives every sign. Only inherited AC/CC made explicit. |
+| `thm-bem-single-layer-galerkin-wellposed-and-quasioptimal` | Already assumes AC/CC. The exact symmetric coercive form on H-1/2 and conforming P0 space is unchanged; full-layer global weak tests justify symmetry. No repair needed. |
+| `cor-bem-p0-galerkin-rate-for-h1-density` | Inherits mesh/coercivity hypotheses of its Galerkin supplier. Uses only unchanged quasioptimality and actual element-average approximation estimate. No repair needed. |
+| `thm-bem-hypersingular-ellipticity-and-stabilized-formulation` | Already assumes AC/CC. New explicit exterior energy Green identity now literally justifies testing by a possibly noncompact double-layer energy function. Common conormal and jump give the positive energy identity; interior mean and exterior gradient bound give quotient coercivity. Statement retained. |
+| `lem-bem-panel-pair-duffy-certificates` | New current direct trace/single-layer consumer; absent from the original first-cycle graph. It already assumes AC/CC. Its bounded cutoff potentials are H1 on collars, and the continuity modulus plus precise trace restriction identifies the weak pairing with the panel double integral. Thus these edge/trace changes preserve its weak-pairing interface. Its separate quadrature proof is owned by the following panel review, with the inherited-axiom alert below. |
+| `alg-bem-certified-inexact-matrix-assembly` | Old and current indirect consumer through the Calderon definition; now also directly consumes the new panel-pair certificate. Its weak single-layer entries have the same normalization and bounded P0 realization. The separately owned panel/assembly review must correct the inherited-AC omission noted below; no panel Definition was rewritten here. |
+| `thm-bem-matrix-perturbation-transfer` | Already assumes AC/CC. Uses unchanged exact single-layer coercivity, per-entry assembly bilinear defect and delta<c. Its exact Galerkin and finite-dimensional perturbation proof is unaffected. No repair needed. |
+| `ex-bem-inexact-assembly-error-ledger` | Finite Euclidean two-by-two specialization; its coercivity/eigenvalues, rational inverse and 1/49 error use no geometric boundary trace. No repair needed. |
+
+Both actual PE16 pages were read fully. The A-page polyhedral orientation, global trace-space, off-surface edge representation, weak hypersingular interpretation and separate C2 Helmholtz branch agree with the repaired interfaces; its axiom paragraph already says homogeneous/variational branches have additional explicit AC uses. The B page's sphere, wedge, logarithmic scaling and finite-ledger descriptions do not use an invalid edge pointwise half-jump. No page repair was necessary.
+
+The sphere constant-density and sphere orientation examples are independent smooth-sphere calculations; the reentrant-edge example is an explicit wedge harmonic singularity. They have no logical dependency on a changed transmission/Calderon Statement. No false assertion that a sphere is a polyhedron was introduced. The separate smooth Helmholtz carriers use their own C2 supplier and do not consume the altered polyhedral trace/layer definitions. Their full review remains with the sequential Helmholtz reviewer.
+
+## Signs, normalization, choice and proof limits
+
+Independently rechecked `G3=1/(4*pi*r)`, `-Delta G3=delta`, the kernel derivative with respect to the source normal, and the prescribed interior-minus-exterior trace jump `-phi`. The single layer's fixed-normal conormal jump is `+lambda`; exterior weak conormal pairs with minus exterior energy, so W is minus the double-layer common conormal and its energy is nonnegative. No source-normal derivative is confused with a target-normal derivative. The dipole-source comparison in the edge lemma is consistent with all these signs.
+
+AC covers the homogeneous Sobolev representative and inherited Poincare results; CC covers the variational/Fourier/integration interfaces. The actual full Lax–Milgram and Gagliardo–Nirenberg–Sobolev carriers were read again for their precise real-space/choice interfaces. No C1-boundary divergence result was silently widened to a polyhedron: the edge proof derives its first-derivative graph formula locally; smooth-ball divergence is used only for its entire harmonic uniqueness argument. No citation-only theorem is substituted for that uniqueness proof.
+
+The authoritative source reading recorded in the first-cycle report remains the exact source consultation for these local arguments: Costabel actual scans printed pp. 614–623, including full weak Green representation and distributional jump proof; Sayas extracted-text ranges 1640–2255, 2529–2839 and 3300–3995, with their declared section boundaries and caveats. This cycle reread actual completed local proofs and actual mathematical suppliers; no additional whole-book/source reading claim is made.
+
+## Residual gaps and sequential handoff
+
+No unresolved mathematical gap remains in this edge-kernel/trace/weak-layer/hypersingular lane after these focused repairs. Root still owns current-source bookkeeping, recertification and any later gates.
+
+One definite issue discovered while checking the new panel consumer has already been sent to root for the separately assigned panel/assembly review: actual assembly Definition/Facts and `axiom_use` still declare CC only, although the newly imported panel-pair weak-pairing theorem explicitly assumes AC+CC. The panel/assembly reviewer must propagate those already necessary axioms into the assembly interface and check its matrix-transfer and finite-ledger consumers; both were checked here and remain compatible. This is an existing new-panel inheritance issue, not a new edge-kernel assumption.
+
+An earlier message questioned the panel proof's second-derivative estimate. On rereading its exact **pure-coordinate** Gaussian remainder, that alert was withdrawn: `(r,rs)` is affine in each coordinate separately, so the first-derivative chain term occurs only for mixed derivatives, and does not invalidate the stated pure second-derivative estimate. No defect is claimed there.
+
+No repair to panel geometry/quadrature, Helmholtz claims, unrelated live batches, or root bookkeeping was performed here. There is no requested third edge cycle.

@@ -1,0 +1,81 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "3",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "lem-natural-cubic-spline-second-derivative-perturbation",
+      "model": "gpt-6-luna",
+      "context_sha256": "a63bd44b6bab712eb06cc65aab5dbe3d8ff8ccc7481efdbc13517865d5dc0912",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly locates the cubic piece formula in the supplier Statement; it actually occurs in that theorem’s Proof, step 2.1. This is a nonfatal locator/derivation defect: the Statement supplies the four endpoint data, and direct integration of the affine second derivative establishes the exact formula used. Corrected F1 and supplied this short derivation in step 1.1; the claimed H^2 E/8 bound remains valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-natural-cubic-spline-second-derivative-perturbation",
+      "disposition": "repaired",
+      "post_sha256": "d25588c9422277e354663933acaac62a95b094e19c9591595f60492ee8734f71",
+      "review_context_sha256": "796f6c004b2d4831737c2934988cef624a52088e0315fc377311fe75144ccc0e",
+      "reason": "Checked the complete local proof, natural-spline definition, supplier theorem Statement and Proof, owning contract and both page interfaces. On each interval q has zero endpoint values and q′′=(1-t)Delta_i+t Delta_{i+1}; twice integrating yields the displayed error formula. The absolute coefficient sum is 3t(1-t)<=3/4, giving h_i^2 E/8 and then H^2 E/8. This includes interval endpoints, E=0 and r=2, and requires no C1 matching of the reconstructed pieces. Only F1 and proof step 1.1 changed; the Statement and dependencies are unchanged. This is repair self-checking, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-natural-cubic-spline-second-derivative-perturbation",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "status": "fixed",
+      "reason": "F1 incorrectly asserted that the explicit cubic formula occurs in the supplier Statement. The corrected F1 states exactly its endpoint-data interface; proof step 1.1 now derives the difference formula directly from those data. No Statement/Definition changed and no published defect was found.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "mathematical_evidence": "For q=widehat s-s on each knot interval, equal endpoint data give q=0 at both ends, while its affine second derivative interpolates Delta_i and Delta_{i+1}. Twice integrating yields step 1.1. The absolute coefficient sum is 3t(1-t)<=3/4. The bound covers endpoints, E=0 and r=2; arbitrary reconstructed pieces need not join C1.",
+    "source_evidence": "Read items/def-natural-cubic-spline.md and items/thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots.md completely. The formula occurs in the latter Proof, step 2.1, and its Statement supplies the endpoint characterization. No external sources were consulted.",
+    "metadata_repair": "Under tools/step5-shared-write-lock.mjs, reread the owning batch-3 proof contract, mirrored the new step-1-1 claim only, checked it and released the lock. The existing supplier Statement quote remains exact. Examined both owning spline-evaluation-and-interpolation-algorithms pages; no page edit was needed.",
+    "interface_comparison": "Statement hash remains 4ea3ed199f405f87ebe43c7c2d57374665627cb92f63418d297372d183bf9fa5, equal to the frozen input. Dependencies remain def-natural-cubic-spline and thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots. No interface change or downstream work is triggered.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-natural-cubic-spline-second-derivative-perturbation.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-natural-cubic-spline-second-derivative-perturbation.md",
+        "exit_code": 0,
+        "result": "1 file OK; KaTeX and renderer YAML parsing passed."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-natural-cubic-spline-second-derivative-perturbation.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects; after the final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-3.proof-contracts.json --strict --items lem-natural-cubic-spline-second-derivative-perturbation",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings; 1/1 items checked."
+      }
+    ],
+    "published_ledger_updates": "None: no published mathematical defect was found.",
+    "unresolved_obligations": [],
+    "next_action": "Engine collection and ordinary subsequent review. No independent acceptance of this repair is claimed; no judges, stamps, certificates or round transitions were run."
+  }
+}

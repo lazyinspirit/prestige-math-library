@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "67",
+  "round": 0,
+  "reviewed_items": [
+    "cor-ale-exact-splitting-residual-orders",
+    "def-ale-linear-diffusion-transmission-model",
+    "def-ale-moving-domain-map",
+    "def-ale-periodic-moving-grid",
+    "def-ale-toy-added-mass-recurrence",
+    "alg-ale-upwind-finite-volume-step",
+    "lem-ale-jacobi-geometric-conservation-identity",
+    "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+    "lem-ale-schur-complement-positive-and-minimizes-energy",
+    "thm-ale-monolithic-backward-euler-energy-identity",
+    "alg-ale-robin-robin-partitioned-iteration",
+    "lem-ale-schur-residual-controls-interface-energy-error",
+    "thm-ale-one-dimensional-reynolds-transport-identity",
+    "thm-ale-reynolds-transport-identity",
+    "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+    "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+    "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+    "ex-ale-added-mass-toy-recurrence-instability",
+    "ex-ale-expanding-mesh-free-stream",
+    "ex-ale-two-domain-heat-interface-flux-balance"
+  ],
+  "reviewed_pages": [
+    "ale-interface-and-partitioned-multiphysics-discretization",
+    "ale-interface-and-partitioned-multiphysics-discretization-examples"
+  ],
+  "decision": "repair",
+  "reason": "The approved scope and other supplier uses check out. Request one local repair for the Reynolds change-of-variables justifications and separate termination results for both algorithms.",
+  "findings": [
+    {
+      "id": "thm-ale-one-dimensional-reynolds-transport-identity",
+      "type": "prerequisite",
+      "reason": "The published change-of-variables supplier requires Riemann integrability on compact Jordan sets. The proof does not explicitly establish that its continuous inputs are integrable or justify replacing open-domain integrals by integrals over compact closures; the endpoint-null assertion alone does not cover every application. Add those steps using the existing continuous-integrability supplier."
+    },
+    {
+      "id": "thm-ale-reynolds-transport-identity",
+      "type": "prerequisite",
+      "reason": "The proof applies change of variables to continuous integrands without establishing the supplier's integrability condition and does not justify equality of open-domain and compact-closure integrals via the zero-content boundary. Add the integrability and finite piecewise-C1 boundary-null arguments; declare the continuous-integrability prerequisite if used directly."
+    },
+    {
+      "id": "alg-ale-upwind-finite-volume-step",
+      "type": "local",
+      "reason": "The assigned algorithm rules require a separate proved termination/well-definedness result; the current theorems assume a successful return. Add a result establishing finite completion and the failure/success outputs, with the well-definedness relation recorded as justified_by."
+    },
+    {
+      "id": "alg-ale-robin-robin-partitioned-iteration",
+      "type": "local",
+      "reason": "The algorithm has a finite pass loop, but no separate result states and proves termination within M passes (at most 2M solves). Add this result, including existence of the Robin solves, and record its well-definedness relation as justified_by."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+      "decision": "accept",
+      "reason": "Its successful-step mass and free-stream premises remain unchanged by the requested total-termination result."
+    },
+    {
+      "id": "ex-ale-expanding-mesh-free-stream",
+      "decision": "accept",
+      "reason": "The example's successful update and mass calculation remain unchanged."
+    },
+    {
+      "id": "ex-ale-two-domain-heat-interface-flux-balance",
+      "decision": "accept",
+      "reason": "The trace and stop-certificate calculations remain unchanged by adding the finite-termination result."
+    },
+    {
+      "id": "ale-interface-and-partitioned-multiphysics-discretization",
+      "decision": "accept",
+      "reason": "Its summary refers to the same Reynolds identities and algorithm claims; the requested proof additions do not require page edits."
+    },
+    {
+      "id": "ale-interface-and-partitioned-multiphysics-discretization-examples",
+      "decision": "accept",
+      "reason": "Its example summaries and linked calculations remain unchanged."
+    }
+  ]
+}

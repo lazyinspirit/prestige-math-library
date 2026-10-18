@@ -1,0 +1,158 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "61",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "alg-periodic-pic-classical-rk4-step",
+      "model": "gpt-6-luna",
+      "context_sha256": "d66733f53033ad99b77361f8335dd1243a95b66a067aef845f73b3c52af8bd62",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The explicit stage recipe gathered the electric field without multiplying by c=Q/M. Linearity of deposition, the gauged Poisson solve, centered differentiation and gathering gives (Q/P) sum_r E_{epsilon,h}(X_p,X_r); the declared phase kernel requires c times that quantity. For general Q/M the procedure therefore contradicted its defining F. The repair explicitly returns (V_p,c(G_X E_h)_p) at each stage, with stage velocities and E_h=-D^0 phi_h.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-periodic-pic-staged-fixed-regularization-error-budget",
+      "model": "gpt-6-luna",
+      "context_sha256": "3846ae621b732f350ffc5e04a020bbbe20f195b00f20c5d454936eb92b2b5f48",
+      "outcome": "false_positive",
+      "reason": "F2 explicitly cites the supplier proof, rather than asserting that the supplier Statement contains the stronger coupling estimate. In thm-periodic-pic-mean-field-error-with-force-defect, step 1.1 proves duplicate initial atoms share one path, step 2.1 expresses the grid path as a continuum-kernel characteristic flow with residual at most delta_{epsilon,h}, and step 3.1 explicitly proves the transported cost bound for every prescribed pi_0 of cost D_0. The published Dobrushin supplier Statement and proof steps 1.1-2.1 provide exactly that bound under the assumed integrable path suprema. Splitting the finite atomic slices into label measures of mass 1/P, replacing their exact states by RK4 states, applying finite Cauchy-Schwarz, and taking the initial-cost infimum are valid. The contract quotes the weaker supplier Statement accurately; the explicitly cited intermediate proof supplies the stronger fact. No mathematical repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-periodic-pic-classical-rk4-step",
+      "disposition": "repaired",
+      "post_sha256": "e82e60f9bfdea37b411acf6d154150e1b69653b66e67d3524a06a13d239eccb7",
+      "review_context_sha256": "873d2ca2587bddf0e3ef68be5fc98310664613ee467158ab5eb25f0920481c0a",
+      "reason": "Reviewed the admissible smooth fixed-epsilon grid, equal charges Q/P and masses M/P, compatible deposition, exact gauged Fourier solve, centered field and shared gather weights. With the added c=Q/M multiplication and stage velocity V_p the stage recipe computes the displayed pair-kernel field exactly; the four coefficients match the classical RK4 tableau. Zero charge gives free streaming without a division by Q. This is a repair-time review by the repair author, not an independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-periodic-pic-staged-fixed-regularization-error-budget",
+      "disposition": "unaffected",
+      "post_sha256": "1b2ea1763e1dcaaaad16ea1c01f2a6db9ad59c199c423053a68afa60943aa2a5",
+      "review_context_sha256": "497d54edaf0e13bf852524023d3820de6a9496f1bf2fe4a015e2296567e4b08f",
+      "reason": "The supplier proof establishes the prescribed-coupling estimate used by F2 and step 1.2, including coincident initial atoms. Every label slice has mass 1/P and the slice sum reconstructs the transported coupling; substituting numerical states adds at most the stacked Euclidean error divided by sqrt(P). Infimizing D_0 yields delta_0 without choosing an optimal plan. Unit-source translation preserves derivative suprema and the joint shifted-product quadrature constant; multiplying the uniform field bound by |cQ| bounds the phase-kernel defect. The RK4 tube, exact initialization and retained partial-grid hypotheses match F3, including n=0 and P=1. No Statement, proof or contract change is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+    "ex-cold-two-stream-stipulated-pic-experiment"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-periodic-pic-classical-rk4-step",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Definition stage recipe",
+      "finding": "The electric-field gather was returned as acceleration without the required charge-to-mass factor Q/M.",
+      "resolution": "At every stage compute E_h=-D^0 phi_h, gather and return (V_p,(Q/M)(G_X E_h)_p).",
+      "status": "fixed",
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-periodic-pic-staged-fixed-regularization-error-budget",
+      "finding": "Rejected on the premise that its supplier lacks the prescribed-coupling estimate.",
+      "resolution": "The fact explicitly cites the supplier proof; its step 3.1 proves exactly the transported-cost bound, after steps 1.1-2.1 construct its single-valued defective characteristic flow. No source edit.",
+      "uncertain": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_interface": {
+      "id": "alg-periodic-pic-classical-rk4-step",
+      "section": "Definition",
+      "old_clause": "compute centered fields, gather, and return the position and acceleration components",
+      "new_clause": "compute E_h=-D^0 phi_h, gather, multiply by c=Q/M and return F_p=(V_p,c(G_X E_h)_p)"
+    },
+    "consumer_examinations": [
+      {
+        "id": "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+        "path": "items/thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube.md",
+        "affected_use": "Statement: Apply classical RK4 from [[alg-periodic-pic-classical-rk4-step]] to the autonomous finite-dimensional PIC system, with F_p=P^{-1} sum_r K_{epsilon,h}(z_p,z_r).",
+        "disposition": "sound_unchanged",
+        "reason": "The repaired stage procedure now computes exactly the F used in the Statement and in the Lipschitz, local-defect and recurrence arguments. No consumer Statement or proof change is necessary."
+      },
+      {
+        "id": "ex-cold-two-stream-stipulated-pic-experiment",
+        "path": "items/ex-cold-two-stream-stipulated-pic-experiment.md",
+        "affected_use": "Statement invokes the exact-arithmetic update; F3 and proof step 2.1 invoke its returned updated state and compatible finite stage solves.",
+        "disposition": "sound_unchanged",
+        "reason": "The stipulated Q=M=1 makes c=1, so trajectories and solvability are unchanged. Only its contract quotation of the changed supplier Definition needs synchronization."
+      }
+    ],
+    "page_examination": {
+      "path": "library/numerical-pdes-and-spatial-discretization/particle-in-cell-and-particle-mesh-kinetic-methods.md",
+      "affected_use": "The items list places the RK4 algorithm; page prose describes its conditional fourth-order time error contribution.",
+      "disposition": "sound_unchanged",
+      "reason": "The repair restores the declared phase field and preserves the conditional error interface and page inventory."
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-periodic-pic-classical-rk4-step.md items/thm-periodic-pic-staged-fixed-regularization-error-budget.md --json",
+        "exit_code": 0,
+        "result": "Algorithm not-applicable; theorem pass; 1 checked proof, 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-periodic-pic-classical-rk4-step.md items/thm-periodic-pic-staged-fixed-regularization-error-budget.md --json",
+        "exit_code": 0,
+        "result": "2 files checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-periodic-pic-classical-rk4-step.md",
+        "exit_code": 0,
+        "result": "1 item, 0 proof steps, 0 defects; run once after the final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-61.proof-contracts.json --items thm-periodic-pic-staged-fixed-regularization-error-budget,ex-cold-two-stream-stipulated-pic-experiment --strict --json",
+        "exit_code": 0,
+        "result": "Both scoped contracts checked; no errors or warnings. This followed synchronization of the experiment F3 quotation, which initially produced citation-quote-mismatch after the algorithm edit."
+      }
+    ],
+    "pending": [],
+    "source_reading": "Local item definitions, relevant full proofs, owning page and assigned contract were read. No external source was consulted; the finite algebra, RK4 stage construction, Lipschitz coupling and finite-label measure argument are familiar. No independent review of this repair is claimed.",
+    "outside_scope_digest_concern": "The Step-4 digest concern about raw TikZ in ex-periodic-one-dimensional-pic-cic-charge-deposition is outside this assignment. It was not re-adjudicated or edited here.",
+    "metadata_changes": [
+      {
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-61.pages.json",
+        "field": "alg-periodic-pic-classical-rk4-step statement/Definition mirror",
+        "before_sha256": "69a88516cf6820f2ae4c2c40ab927c53e0403bcccf3f705db4e04a9debe3ee2f",
+        "after_sha256": "1245b3334ab66277f54cf1dfa1e4538978e2da7485e7148ff0567f73b83e03cd"
+      },
+      {
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-61.proof-contracts.json",
+        "field": "ex-cold-two-stream-stipulated-pic-experiment F3 supplier Definition excerpt",
+        "before_sha256": "be6eb0d1d602c9931ebdaec6c8b06d5d7540dbaf4ab65e5f279f922be893f2e5",
+        "after_sha256": "a45f2007fdf0527836347c51d7dfe45d6243d43790e6c6bde843f06a7fdd3ffc"
+      }
+    ],
+    "metadata_integration": "Acquired step5-shared-write-lock as step5-v2-initial-r1-u61; reread both carriers, changed only the two parsed fields, checked exact mirror/quotation and preserved all other parsed rows, then released. An initial guard assumed the quotation was the full Definition; it correctly stopped before any write. The actual contract uses a stage-recipe excerpt, which was then updated under a new lock.",
+    "published_consumer_ledger": "No direct published or outside-frontier item consumer of the changed algorithm Definition was found; both direct item consumers are draft frontier items. No published-consumer ledger update is proposed.",
+    "propagation": "The algorithm Definition changed. Its complete direct item consumer inventory is downstream; neither examined consumer requires a Statement or Definition change, so propagation stops after that hop. The staged theorem Statement and all item dependencies are unchanged."
+  },
+  "supporting_evidence": {
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-61.pages.json": "1245b3334ab66277f54cf1dfa1e4538978e2da7485e7148ff0567f73b83e03cd",
+    "research/numerical-analysis-remaining-71-2026-10-17-batch-61.proof-contracts.json": "a45f2007fdf0527836347c51d7dfe45d6243d43790e6c6bde843f06a7fdd3ffc"
+  }
+}

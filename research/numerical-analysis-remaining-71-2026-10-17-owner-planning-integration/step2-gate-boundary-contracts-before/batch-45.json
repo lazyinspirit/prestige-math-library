@@ -1,0 +1,1683 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-schwarz-p1-product-cutoff-interpolation-energy-estimate",
+    "def-overlapping-schwarz-subspace-correction-data",
+    "lem-schwarz-local-matrices-are-well-defined",
+    "thm-two-level-p1-poisson-stable-decomposition",
+    "lem-schwarz-local-corrections-are-energy-orthogonal-projections",
+    "lem-schwarz-additive-inverse-is-local-energy-minimum",
+    "thm-additive-schwarz-stable-decomposition-condition-number",
+    "thm-multiplicative-schwarz-exact-sweep-contraction",
+    "thm-two-level-p1-poisson-additive-and-multiplicative-bounds",
+    "ex-schwarz-overlap-shrinking-decomposition-bound",
+    "ex-one-level-overlapping-schwarz-condition-number-growth",
+    "cex-schwarz-naive-coarse-space-misses-conductive-mode",
+    "ex-schwarz-two-level-1d-poisson-coarse-plus-odd-corrections",
+    "ex-schwarz-inexact-local-solves-spectral-equivalence-bound"
+  ],
+  "contracts": {
+    "lem-schwarz-p1-product-cutoff-interpolation-energy-estimate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.\n\nA **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set $\\mathcal T$ of closed,\nnondegenerate $d$-simplices such that their union is $\\overline\\Omega$,\ntheir interiors are pairwise disjoint, $\\Omega$ is the interior of their\nunion, and the intersection of two distinct cells is either empty or a\nwhole face of each. Thus no lower-dimensional crack is omitted from\n$\\Omega$ while its surrounding cells are retained. Every interior facet is\nincident to exactly two cells and every boundary facet to one. The faces of\na cell are the convex hulls of its vertex subsets. A facet means a face of\ndimension $d-1$.\n\nFor each cell $K\\in\\mathcal T$, an affine bijection\n$$F_K:\\overline{\\widehat S_d}\\to K,\\qquad F_K(\\widehat x)=b_K+A_K\\widehat x,$$\nwith invertible $A_K\\in\\mathbb R^{d\\times d}$ is a **reference map**.\nChoose the vertex order so $\\det A_K>0$; this is the orientation convention\nused for Piola formulas. Write $h_K:=\\operatorname{diam}(K)$ and let\n$\\rho_K$ be the radius of the largest Euclidean ball contained in $K$.\nA family $\\{\\mathcal T_h\\}_{h\\in H}$ is **shape regular** if there is a\nfinite $\\sigma$ such that $h_K/\\rho_K\\le\\sigma$ for every\n$h\\in H$ and $K\\in\\mathcal T_h$. This universal condition is vacuous for\nan empty family.\nThis definition uses radius; references using the diameter of the inscribed\nball differ by a factor of two.\n\nAn affine image of the reference square is a parallelogram. A general\nquadrilateral requires a nonaffine map and is outside this affine definition;\ncurved-cell approximation is not included here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-shape-regular-affine-simplex-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F_K(\\widehat x)=b_K+A_K\\widehat x$ map the fixed reference simplex\n$\\widehat S_d$ bijectively to a cell $K$ of a shape-regular family, and let\n$h_K$ be its diameter and $\\rho_K$ its inradius. There are constants\n$c,C>0$, depending only on $d$, the reference simplex, and the shape\nregularity bound, such that\n$$c h_K\\le s_{\\min}(A_K)\\le \\|A_K\\|\\le C h_K, \\qquad c h_K^d\\le\\det A_K\\le C h_K^d.$$\nFor each facet $F$, its affine surface Jacobian is comparable to\n$h_K^{d-1}$, and its altitude from the opposite vertex is comparable to\n$h_K$. Thus Sobolev scaling constants can be expressed using $h_K$ alone,\nwith constants uniform over the family.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field",
+          "source_section": "Statement",
+          "quote": "Let F be complete for a multiplicative absolute value and V a finite-dimensional normed F-vector space. For any basis $v_1,\\ldots,v_n$, its coordinate sup norm $\\|\\sum a_iv_i\\|_\\infty=\\max_i|a_i|$ is bounded above and below by positive multiples of the given norm. For $n=0$ both norms are zero. Consequently V is complete and every linear subspace is closed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write the vertices as $x_0,\\ldots,x_d$, their barycentric coordinates as $\\lambda_0,\\ldots,\\lambda_d$, and set $\\theta_i=\\theta(x_i)$ and $w_i=w(x_i)$. Since $\\sum_i\\nabla\\lambda_i=0$, $\\nabla I_K(\\theta w) =\\sum_{i=1}^d(\\theta_iw_i-\\theta_0w_0)\\nabla\\lambda_i.$ For each $i\\ge1$, $\\theta_iw_i-\\theta_0w_0 =\\theta_i(w_i-w_0)+w_0(\\theta_i-\\theta_0)$. Affineness gives $|w_i-w_0|\\le h_K|\\nabla w|$ and $|\\theta_i-\\theta_0|\\le h_K|\\nabla\\theta|$. Applying [F2] to the barycentric gradients therefore gives pointwise $|\\nabla I_K(\\theta w)| \\le C\\left(\\max_i|\\theta_i|\\,|\\nabla w| +\\max_i|w_i|\\,|\\nabla\\theta|\\right).$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], the two vertex maxima in step 1.1 are at most $C h_K^{-d/2}\\|\\theta\\|_{L^2(K)}$ and $C h_K^{-d/2}\\|w\\|_{L^2(K)}$, respectively. The gradients of affine functions are constant on $K$, so multiplying the pointwise estimate by $|K|^{1/2}\\asymp h_K^{d/2}$ yields $\\|\\nabla I_K(\\theta w)\\|_{L^2(K)} \\le C\\left(|\\nabla w|\\|\\theta\\|_{L^2(K)} +|\\nabla\\theta|\\|w\\|_{L^2(K)}\\right),$ which is the asserted estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If theta or w is zero, step 1.1 gives zero nodal products and the right side in step 2.1 is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no single-count or unit-parameter endpoint; its hypotheses fix a general affine cell and functions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued scalar parameter or limiting endpoint occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "def-overlapping-schwarz-subspace-correction-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition maps a zero residual to zero correction and defines all operators by linear matrix formulas."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows a one-level singleton index set and its local formula remains well-defined by the cited local-matrix supplier."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes the allowed endpoint alpha=beta; the two Loewner inequalities then coincide, and both one-level and coarse-index branches are stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "definition"
+    },
+    "lem-schwarz-local-matrices-are-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-overlapping-schwarz-subspace-correction-data",
+          "source_section": "Definition",
+          "quote": "Work in exact real arithmetic. Let $n\\ge1$ and $V=\\mathbb R^n$, and let\n$A=A^{\\mathsf T}$ satisfy $x^{\\mathsf T}Ax>0$ for every nonzero $x$.\nGive $V$ the energy inner product $a(x,y)=x^{\\mathsf T}Ay$ and norm\n$\\|x\\|_A^2=a(x,x)$ of\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].\nAn operator $S$ is $A$-self-adjoint when $a(Sx,y)=a(x,Sy)$ for all $x,y$;\nit is positive when $a(Sx,x)>0$ for every nonzero $x$. An $A$-orthogonal\nprojection is an idempotent $A$-self-adjoint operator.\nLet $\\mathcal I$ be a finite ordered nonempty set and, for each\n$i\\in\\mathcal I$, choose a full-column-rank prolongation\n$R_i\\in\\mathbb R^{n\\times n_i}$ with $1\\le n_i\\le n$, and put\n$V_i=\\operatorname{Ran}(R_i)$.\nA one-level method has $\\mathcal I=\\{1,\\ldots,m\\}$. A two-level method has\n$\\mathcal I=\\{0,1,\\ldots,m\\}$, where $R_0=P$ and $V_0$ is the designated\ncoarse space. Restriction of a global residual is $R_i^{\\mathsf T}$ and\nprolongation of a local coefficient vector is $R_i$. Define the local energy\nmatrix\n$$A_i=R_i^{\\mathsf T}AR_i.$$\nWhen the coarse index $0$ is present, $A_0=P^{\\mathsf T}AP$ is the Galerkin\ncoarse matrix of [[def-galerkin-coarse-grid-correction]]. By\n[[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], it is SPD\nand the exact coarse solve is well-defined.\n\nFor each $i\\in\\mathcal I$, the exact local correction and additive\npreconditioner are\n$$ \\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A, \\qquad B=\\sum_{i\\in\\mathcal I}R_iA_i^{-1}R_i^{\\mathsf T}. $$\nWhen the spaces span $V$, the exact additive Schwarz preconditioned operator\nis $BA=\\sum_{i\\in\\mathcal I}\\Pi_i$. For a fixed ordering of $\\mathcal I$, a\nmultiplicative sweep applies its corrections in that order; if $0$ is present,\nit is first. For an inexact additive method, replace each exact $A_i^{-1}$ by\nthe inverse of an SPD matrix $\\widetilde A_i$ satisfying, for fixed\n$0<\\alpha\\le\\beta$,\n$$ \\alpha A_i\\preceq \\widetilde A_i\\preceq\\beta A_i, \\qquad \\widetilde B=\\sum_{i\\in\\mathcal I}R_i\\widetilde A_i^{-1}R_i^{\\mathsf T}. $$\nFor symmetric matrices, $X\\preceq Y$ means\n$z^{\\mathsf T}Xz\\le z^{\\mathsf T}Yz$ for every vector $z$. The order\ninequalities define uniform local spectral equivalence in this pair. The\nlemma [[lem-schwarz-local-matrices-are-well-defined]] proves the remaining\nlocal inverse and well-definedness claims.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "source_section": "Statement",
+          "quote": "Let $A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite and let\n$P\\in\\mathbb R^{n\\times m}$ have full column rank. Put\n$A_H=P^{\\mathsf T}A_hP$. Then $A_H$ is symmetric positive definite, hence\ninvertible, and the map $C=I_n-PA_H^{-1}P^{\\mathsf T}A_h$ of\n[[def-galerkin-coarse-grid-correction]] satisfies\n\n$$C^2=C,\\qquad CP=0,\\qquad P^{\\mathsf T}A_hC=0,\\qquad C^{\\mathsf T}A_h=A_hC.$$\n\nConsequently $\\operatorname{Ran}(C)=\\operatorname{Ran}(P)^{\\perp_{A_h}}$;\n$C$ is the orthogonal projector onto that complement in the energy inner\nproduct $\\langle x,y\\rangle_{A_h}:=x^{\\mathsf T}A_hy$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, let $b\\in\\mathbb C^n$,\nand let $\\phi$ be the quadratic energy from\n[[def-quadratic-energy-of-a-hermitian-positive-definite-linear-system]]. Then\nthe system $Ax=b$ has a unique solution $x_*$, and for every $x\\in\\mathbb C^n$\none has\n\n$$\\phi(x)-\\phi(x_*)=\\tfrac12\\|x-x_*\\|_A^2.$$\n\nIn particular, $x_*$ is the unique minimizer of $\\phi$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-transpose-laws",
+          "source_section": "Statement",
+          "quote": "For matrices of the appropriate shapes and a scalar $\\lambda$,\n\n$$(A+B)^{\\mathsf T}=A^{\\mathsf T}+B^{\\mathsf T},\\qquad (\\lambda A)^{\\mathsf T}=\\lambda A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A,$$\n\nand\n\n$$(AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T}.$$\n\nThus transpose is linear and involutive and reverses products.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix any $i\\in\\mathcal I$ with $i\\ne0$ and any nonzero $z\\in\\mathbb R^{n_i}$. Full column rank in [F1] gives $R_i z\\ne0$, so $z^{\\mathsf T}A_i z=(R_i z)^{\\mathsf T}A(R_i z)>0.$ Also [F4] gives $A_i^{\\mathsf T}=R_i^{\\mathsf T}A^{\\mathsf T}R_i=A_i$. Thus every such $A_i$ is SPD.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $0\\in\\mathcal I$, then $R_0=P$ and [F2] gives that $A_0=P^{\\mathsf T}AP$ is SPD and the exact coarse solve is defined. If $0\\notin\\mathcal I$, no separate coarse matrix is part of the one-level definition.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], every SPD $A_i$ in step 1.1 or 1.2 has a unique solution for each local right-hand side. Therefore all exact local solves in [[def-overlapping-schwarz-subspace-correction-data]] are well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 notes strict positivity only for nonzero z; at z=0 the quadratic form is exactly zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 apply to a single local block as well as to a longer list."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 handle both branches: a local index i≠0 and the optional coarse index i=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "thm-two-level-p1-poisson-stable-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D$ be a bounded connected Lipschitz polygonal/polyhedral domain with a conforming shape-regular simplicial mesh, $d=2$ or $3$, mesh size $h=\\max_Kh_K$. For each interior mesh vertex $z$, choose any incident facet $F_z$; for each boundary vertex choose an incident boundary facet. Let $\\psi_{z,F_z}\\in P_1(F_z)$ be the unique dual affine function satisfying $\\int_{F_z}\\psi_{z,F_z}\\varphi_y=\\delta_{zy}$ for the facet's P1 nodal basis. Define\n$$I_hv=\\sum_z\\left(\\int_{F_z}\\psi_{z,F_z}\\operatorname{tr}v\\right)\\varphi_z.$$\nThis is a linear face-average interpolant $H^1(D)\\to S_h$, where $S_h$ is the continuous piecewise P1 space. It maps $H^1_0(D)$ into $S_h\\cap H^1_0(D)$, is uniformly $H^1$-seminorm stable, and for each element patch $\\omega_K$ has\n$$\\|v-I_hv\\|_{L^2(K)}\\le Ch_K\\|\\nabla v\\|_{L^2(\\omega_K)}.$$\nIf $v\\in H^2(D)$, then $\\|\\nabla(v-I_hv)\\|_{L^2(K)}\\le Ch_K\\|D^2v\\|_{L^2(\\omega_K)}$. Constants depend only on dimension, the fixed domain, and the mesh shape-regularity bound. No point evaluation is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-schwarz-p1-product-cutoff-interpolation-energy-estimate",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$ and let $K$ be a nondegenerate affine\n$d$-simplex in a shape-regular mesh with $h_K/\\rho_K\\le\\sigma$. Let\n$\\theta,w\\in\\mathbb P_1(K)$. Let $I_K(\\theta w)\\in\\mathbb P_1(K)$ be the affine\nfunction whose values at the vertices of $K$ are the nodal values of\n$\\theta w$. There is a constant $C$ depending only on $d$ and the shape\nregularity bound $\\sigma$ such that\n$$ \\|\\nabla I_K(\\theta w)\\|_{L^2(K)} \\le C\\bigl(\\|\\theta\\nabla w\\|_{L^2(K)} +\\|w\\nabla\\theta\\|_{L^2(K)}\\bigr). $$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.\n\nA **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set $\\mathcal T$ of closed,\nnondegenerate $d$-simplices such that their union is $\\overline\\Omega$,\ntheir interiors are pairwise disjoint, $\\Omega$ is the interior of their\nunion, and the intersection of two distinct cells is either empty or a\nwhole face of each. Thus no lower-dimensional crack is omitted from\n$\\Omega$ while its surrounding cells are retained. Every interior facet is\nincident to exactly two cells and every boundary facet to one. The faces of\na cell are the convex hulls of its vertex subsets. A facet means a face of\ndimension $d-1$.\n\nFor each cell $K\\in\\mathcal T$, an affine bijection\n$$F_K:\\overline{\\widehat S_d}\\to K,\\qquad F_K(\\widehat x)=b_K+A_K\\widehat x,$$\nwith invertible $A_K\\in\\mathbb R^{d\\times d}$ is a **reference map**.\nChoose the vertex order so $\\det A_K>0$; this is the orientation convention\nused for Piola formulas. Write $h_K:=\\operatorname{diam}(K)$ and let\n$\\rho_K$ be the radius of the largest Euclidean ball contained in $K$.\nA family $\\{\\mathcal T_h\\}_{h\\in H}$ is **shape regular** if there is a\nfinite $\\sigma$ such that $h_K/\\rho_K\\le\\sigma$ for every\n$h\\in H$ and $K\\in\\mathcal T_h$. This universal condition is vacuous for\nan empty family.\nThis definition uses radius; references using the diameter of the inscribed\nball differ by a factor of two.\n\nAn affine image of the reference square is a parallelogram. A general\nquadrilateral requires a nonaffine map and is outside this affine definition;\ncurved-cell approximation is not included here.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-broken-and-conforming-polynomial-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal T$ be a matching affine simplicial mesh of $\\Omega$ as defined\nin [[def-matching-affine-simplicial-meshes]]. Fix $k\\in\\mathbb N_0$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and an integer $q\\ge1$. On each\ncell let $\\mathbb P_k(K;\\mathbb K^q)$ denote the\nrestrictions to $K$ of $\\mathbb K^q$-valued polynomials of total degree at\nmost $k$. The **broken polynomial space** is the finite product\n$$V_h^{\\mathrm{br}}:=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb K^q),$$\nviewed as functions defined almost everywhere cell by cell. For an interior\nfacet $F=K\\cap K'$, the **jump** is the difference of the two polynomial\ntraces, with either fixed ordering of $K,K'$; its vanishing is independent of\nthat ordering. The **conforming polynomial space** is\n$$V_h^{\\mathrm{conf}}:=\\{v\\in V_h^{\\mathrm{br}}:v|_{F,K}=v|_{F,K'}\\text{ on every interior facet }F\\}.$$\nThe **zero-boundary subspace** consists of those $v\\in V_h^{\\mathrm{conf}}$\nwhose polynomial trace is zero on every boundary facet. These are algebraic\ndefinitions. The Sobolev inclusions and the zero-boundary closure conclusion\nare proved separately in the corresponding local theorems on matching\npiecewise polynomials and zero-boundary values. If $\\mathcal T=\\varnothing$,\nthen $\\Omega=\\varnothing$ by the mesh definition; the empty product is the\nzero vector space consisting of the unique empty function, and the trace\nconditions are vacuous.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega$ be a bounded polyhedral open set with a finite matching\naffine simplicial mesh, let $1\\le p<\\infty$, and let $v$ be a real-valued\nconforming piecewise polynomial whose polynomial trace vanishes on every boundary\nfacet. Then\n$$v\\in W^{1,p}_0(\\Omega),\\qquad \\|v\\|_{L^p(\\Omega)}\\le C_\\Omega\\|\\nabla v\\|_{L^p(\\Omega)}.$$\nHere $W^{1,p}_0$ is the norm closure of $C_c^\\infty(\\Omega)$; no C1\ntrace characterization is used.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-shape-regular-affine-simplex-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F_K(\\widehat x)=b_K+A_K\\widehat x$ map the fixed reference simplex\n$\\widehat S_d$ bijectively to a cell $K$ of a shape-regular family, and let\n$h_K$ be its diameter and $\\rho_K$ its inradius. There are constants\n$c,C>0$, depending only on $d$, the reference simplex, and the shape\nregularity bound, such that\n$$c h_K\\le s_{\\min}(A_K)\\le \\|A_K\\|\\le C h_K, \\qquad c h_K^d\\le\\det A_K\\le C h_K^d.$$\nFor each facet $F$, its affine surface Jacobian is comparable to\n$h_K^{d-1}$, and its altitude from the opposite vertex is comparable to\n$h_K$. Thus Sobolev scaling constants can be expressed using $h_K$ alone,\nwith constants uniform over the family.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In a coordinate cube, the stated simplices are the regions where the normalized coordinates have one fixed weak ordering. For each coordinate pair, a coarse ordering hyperplane can meet the interior of a fine cube only when the two fine-cell indices agree; there it is the local equality hyperplane used by the fine Freudenthal triangulation. Thus every fine simplex lies in one coarse simplex. The induced order triangulation on a coordinate face is the same from either incident cube, so the meshes match. The reference simplices come from finitely many coordinate permutations, so their shape-regularity constants are bounded by a number depending only on $d$. By [F3], the continuous P1 spaces are nested. Their boundary nodal values vanish; [F4] places both spaces in $H_0^1(\\Omega)$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $J_H$ be the face-average Scott–Zhang map of [F1], set $u_0=J_Hu_h$, and $w=u_h-u_0\\in V_h$. Each coarse element patch $\\omega_K$ meets only coarse cubes whose coordinate indices differ from that of $K$ by at most one. Thus at most $M_d=3^d d!$ coarse simplex patches contain a fixed point. Squaring and summing [F1] over the coarse mesh gives $\\|w\\|_{L^2(\\Omega)}\\le C_S H\\|\\nabla u_h\\|_{L^2(\\Omega)}, \\qquad \\|\\nabla u_0\\|_{L^2(\\Omega)} \\le C_S\\|\\nabla u_h\\|_{L^2(\\Omega)}$ for a constant $C_S$ depending only on $d$ and shape regularity. The second inequality is the global stability part of [F1]. The stated Countable Choice assumption supplies the choice principle required by the Scott–Zhang and Sobolev-trace suppliers in [F1].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For each coarse cube define $\\psi_j(x)=\\max\\left(0,1-\\frac{\\operatorname{dist}_\\infty(x,Q_j)}{\\delta}\\right), \\qquad \\eta_j(x)=\\frac{\\psi_j(x)}{\\sum_k\\psi_k(x)}.$ At every $x\\in\\Omega$, at least one coarse cube contains $x$, so the denominator is at least $1$. Since $\\delta\\le a$, at most $4^d$ functions $\\psi_k$ are nonzero at a point; each is $1/\\delta$-Lipschitz. The quotient rule for Lipschitz functions with denominator at least $1$ gives $0\\le\\eta_j\\le1$, $\\sum_j\\eta_j=1$, and $\\|\\nabla\\eta_j\\|_{L^\\infty}\\le(1+4^d)/\\delta$ almost everywhere. Let $\\theta_j=I_h\\eta_j$ be its fine-grid nodal P1 interpolant. The nodal values sum to one, hence $\\sum_j\\theta_j=1$ on every fine simplex; barycentric coordinates give $0\\le\\theta_j\\le1$. On a fine simplex with vertices $x_0,\\ldots,x_d$ and barycentric coordinates $\\lambda_i$, $\\nabla\\theta_j =\\sum_{i=1}^d(\\eta_j(x_i)-\\eta_j(x_0))\\nabla\\lambda_i.$ The Lipschitz bound and [F6] imply $\\|\\nabla\\theta_j\\|_{L^\\infty(K)}\\le C_\\theta/\\delta$ for a constant $C_\\theta$ depending only on dimension and shape regularity. If $\\theta_j$ is nonzero on a fine simplex, one of its vertices lies within $\\ell^\\infty$ distance $\\delta$ of $Q_j$, so the whole simplex lies in $\\Omega_j$ by the added radius $h$. At most $N=7^d$ expanded coarse cubes contain any point: in each coordinate their side length is at most $a+2(\\delta+h)\\le5a$, so at most seven grid intervals can contain that coordinate. Every clipped expanded cube has side lengths between $a$ and $5a$, so its aspect ratio is at most $5$; hence these subdomains are uniformly shape-regular and have diameter at most $5H$.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At every fine-grid vertex, $\\sum_j\\theta_jw=w$. The nodal interpolant is linear on each fine simplex, so the local functions $u_j=I_h(\\theta_jw)$ satisfy $\\sum_j u_j=w$. Each $u_j$ is supported in $\\Omega_j$. At a boundary vertex $w=0$, since $u_h,u_0\\in V_h$; hence every $u_j$ has zero boundary nodal values and belongs to $H_0^1(\\Omega)$ by [F4]. Thus $u_h=u_0+\\sum_j u_j$ is a decomposition in the stated spaces.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 1.3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Apply [F2] elementwise and $(s+t)^2\\le2s^2+2t^2$: $\\sum_j\\|\\nabla u_j\\|_{L^2(\\Omega)}^2 \\le 2C_P^2 N\\left( \\|\\nabla w\\|_{L^2(\\Omega)}^2+ \\frac{C_\\theta^2}{\\delta^2}\\|w\\|_{L^2(\\Omega)}^2 \\right).$ Indeed, each point belongs to at most $N$ supports, $0\\le\\theta_j\\le1$, and $|\\nabla\\theta_j|\\le C_\\theta/\\delta$. Also $\\|\\nabla w\\|_2\\le(1+C_S)\\|\\nabla u_h\\|_2$ by step 1.2.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute the two estimates of step 1.2 into step 2.2 and add $\\|\\nabla u_0\\|_2^2\\le C_S^2\\|\\nabla u_h\\|_2^2$. With $C_{\\rm FE}=1+C_S^2+ 2C_P^2N\\bigl((1+C_S)^2+C_\\theta^2C_S^2\\bigr),$ the result is $\\|\\nabla u_0\\|_2^2+\\sum_j\\|\\nabla u_j\\|_2^2 \\le C_{\\rm FE}\\left(1+(H/\\delta)^2\\right)\\|\\nabla u_h\\|_2^2.$ This is the asserted stable-decomposition bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u_h=0, step 2.1 constructs every component as zero and step 3.1 gives 0<=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The minimal case d=2, M=n=q=2 satisfies every mesh and overlap hypothesis; steps 1.1–3.1 use positive cell sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The overlap endpoints q=ceil(sqrt(d)) and q=n are allowed; for each, steps 1.2–3.1 use h<=delta<=a."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the statement and Given; step 1.2 tags [F5] when applying the Scott–Zhang supplier, whose trace/closure inputs require it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "lem-schwarz-local-corrections-are-energy-orthogonal-projections": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-overlapping-schwarz-subspace-correction-data",
+          "source_section": "Definition",
+          "quote": "Work in exact real arithmetic. Let $n\\ge1$ and $V=\\mathbb R^n$, and let\n$A=A^{\\mathsf T}$ satisfy $x^{\\mathsf T}Ax>0$ for every nonzero $x$.\nGive $V$ the energy inner product $a(x,y)=x^{\\mathsf T}Ay$ and norm\n$\\|x\\|_A^2=a(x,x)$ of\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].\nAn operator $S$ is $A$-self-adjoint when $a(Sx,y)=a(x,Sy)$ for all $x,y$;\nit is positive when $a(Sx,x)>0$ for every nonzero $x$. An $A$-orthogonal\nprojection is an idempotent $A$-self-adjoint operator.\nLet $\\mathcal I$ be a finite ordered nonempty set and, for each\n$i\\in\\mathcal I$, choose a full-column-rank prolongation\n$R_i\\in\\mathbb R^{n\\times n_i}$ with $1\\le n_i\\le n$, and put\n$V_i=\\operatorname{Ran}(R_i)$.\nA one-level method has $\\mathcal I=\\{1,\\ldots,m\\}$. A two-level method has\n$\\mathcal I=\\{0,1,\\ldots,m\\}$, where $R_0=P$ and $V_0$ is the designated\ncoarse space. Restriction of a global residual is $R_i^{\\mathsf T}$ and\nprolongation of a local coefficient vector is $R_i$. Define the local energy\nmatrix\n$$A_i=R_i^{\\mathsf T}AR_i.$$\nWhen the coarse index $0$ is present, $A_0=P^{\\mathsf T}AP$ is the Galerkin\ncoarse matrix of [[def-galerkin-coarse-grid-correction]]. By\n[[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], it is SPD\nand the exact coarse solve is well-defined.\n\nFor each $i\\in\\mathcal I$, the exact local correction and additive\npreconditioner are\n$$ \\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A, \\qquad B=\\sum_{i\\in\\mathcal I}R_iA_i^{-1}R_i^{\\mathsf T}. $$\nWhen the spaces span $V$, the exact additive Schwarz preconditioned operator\nis $BA=\\sum_{i\\in\\mathcal I}\\Pi_i$. For a fixed ordering of $\\mathcal I$, a\nmultiplicative sweep applies its corrections in that order; if $0$ is present,\nit is first. For an inexact additive method, replace each exact $A_i^{-1}$ by\nthe inverse of an SPD matrix $\\widetilde A_i$ satisfying, for fixed\n$0<\\alpha\\le\\beta$,\n$$ \\alpha A_i\\preceq \\widetilde A_i\\preceq\\beta A_i, \\qquad \\widetilde B=\\sum_{i\\in\\mathcal I}R_i\\widetilde A_i^{-1}R_i^{\\mathsf T}. $$\nFor symmetric matrices, $X\\preceq Y$ means\n$z^{\\mathsf T}Xz\\le z^{\\mathsf T}Yz$ for every vector $z$. The order\ninequalities define uniform local spectral equivalence in this pair. The\nlemma [[lem-schwarz-local-matrices-are-well-defined]] proves the remaining\nlocal inverse and well-definedness claims.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-schwarz-local-matrices-are-well-defined",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-overlapping-schwarz-subspace-correction-data]], every\nlocal matrix $A_i=R_i^{\\mathsf T}AR_i$ with $i\\in\\mathcal I$ is symmetric\npositive definite and therefore invertible. If the coarse index $0$ is\npresent, then $A_0=P^{\\mathsf T}AP$ is the SPD Galerkin coarse matrix. Hence\nevery exact local solve in the definition exists uniquely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "source_section": "Statement",
+          "quote": "Let $A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite and let\n$P\\in\\mathbb R^{n\\times m}$ have full column rank. Put\n$A_H=P^{\\mathsf T}A_hP$. Then $A_H$ is symmetric positive definite, hence\ninvertible, and the map $C=I_n-PA_H^{-1}P^{\\mathsf T}A_h$ of\n[[def-galerkin-coarse-grid-correction]] satisfies\n\n$$C^2=C,\\qquad CP=0,\\qquad P^{\\mathsf T}A_hC=0,\\qquad C^{\\mathsf T}A_h=A_hC.$$\n\nConsequently $\\operatorname{Ran}(C)=\\operatorname{Ran}(P)^{\\perp_{A_h}}$;\n$C$ is the orthogonal projector onto that complement in the energy inner\nproduct $\\langle x,y\\rangle_{A_h}:=x^{\\mathsf T}A_hy$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-transpose-laws",
+          "source_section": "Statement",
+          "quote": "For matrices of the appropriate shapes and a scalar $\\lambda$,\n\n$$(A+B)^{\\mathsf T}=A^{\\mathsf T}+B^{\\mathsf T},\\qquad (\\lambda A)^{\\mathsf T}=\\lambda A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A,$$\n\nand\n\n$$(AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T}.$$\n\nThus transpose is linear and involutive and reverses products.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $i\\in\\mathcal I$ with $i\\ne0$. Multiplication using [F1] gives $\\Pi_i^2 =R_iA_i^{-1}(R_i^{\\mathsf T}AR_i)A_i^{-1}R_i^{\\mathsf T}A =\\Pi_i.$ By [F2], $A_i^{-1}$ is symmetric; [F4] therefore gives $\\Pi_i^{\\mathsf T}A=A\\Pi_i$. Its range is contained in $\\operatorname{Ran}(R_i)$, and $\\Pi_iR_i=R_i$, so its range is exactly $V_i$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $0\\in\\mathcal I$, write $\\Pi_0=I-C$ with $C$ from [F3]. Since $C^2=C$ and $C$ is $A$-self-adjoint, $I-C$ is also idempotent and $A$-self-adjoint. Moreover, $\\operatorname{Ran}(I-C)=\\ker C=\\operatorname{Ran}(P)$ because $C$ projects onto $\\operatorname{Ran}(P)^{\\perp_A}$. Thus $\\Pi_0$ is the $A$-orthogonal projection onto $V_0$. If $0\\notin\\mathcal I$, there is no coarse projection to check.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every present index $i$, idempotence and $A$-self-adjointness give $a(\\Pi_i x,(I-\\Pi_i)x)=a(x,\\Pi_i(I-\\Pi_i)x)=0$. Expanding the squared norm of $x=\\Pi_i x+(I-\\Pi_i)x$ proves the Pythagorean identity. Also $a(\\Pi_i x,x)=a(\\Pi_i x,\\Pi_i x)$ by the same orthogonality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At x=0, the identity in step 2.1 reads 0=0+0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 prove the same projection identities for one present index."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 separately verify local and optional coarse projections."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "lem-schwarz-additive-inverse-is-local-energy-minimum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-overlapping-schwarz-subspace-correction-data",
+          "source_section": "Definition",
+          "quote": "Work in exact real arithmetic. Let $n\\ge1$ and $V=\\mathbb R^n$, and let\n$A=A^{\\mathsf T}$ satisfy $x^{\\mathsf T}Ax>0$ for every nonzero $x$.\nGive $V$ the energy inner product $a(x,y)=x^{\\mathsf T}Ay$ and norm\n$\\|x\\|_A^2=a(x,x)$ of\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].\nAn operator $S$ is $A$-self-adjoint when $a(Sx,y)=a(x,Sy)$ for all $x,y$;\nit is positive when $a(Sx,x)>0$ for every nonzero $x$. An $A$-orthogonal\nprojection is an idempotent $A$-self-adjoint operator.\nLet $\\mathcal I$ be a finite ordered nonempty set and, for each\n$i\\in\\mathcal I$, choose a full-column-rank prolongation\n$R_i\\in\\mathbb R^{n\\times n_i}$ with $1\\le n_i\\le n$, and put\n$V_i=\\operatorname{Ran}(R_i)$.\nA one-level method has $\\mathcal I=\\{1,\\ldots,m\\}$. A two-level method has\n$\\mathcal I=\\{0,1,\\ldots,m\\}$, where $R_0=P$ and $V_0$ is the designated\ncoarse space. Restriction of a global residual is $R_i^{\\mathsf T}$ and\nprolongation of a local coefficient vector is $R_i$. Define the local energy\nmatrix\n$$A_i=R_i^{\\mathsf T}AR_i.$$\nWhen the coarse index $0$ is present, $A_0=P^{\\mathsf T}AP$ is the Galerkin\ncoarse matrix of [[def-galerkin-coarse-grid-correction]]. By\n[[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], it is SPD\nand the exact coarse solve is well-defined.\n\nFor each $i\\in\\mathcal I$, the exact local correction and additive\npreconditioner are\n$$ \\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A, \\qquad B=\\sum_{i\\in\\mathcal I}R_iA_i^{-1}R_i^{\\mathsf T}. $$\nWhen the spaces span $V$, the exact additive Schwarz preconditioned operator\nis $BA=\\sum_{i\\in\\mathcal I}\\Pi_i$. For a fixed ordering of $\\mathcal I$, a\nmultiplicative sweep applies its corrections in that order; if $0$ is present,\nit is first. For an inexact additive method, replace each exact $A_i^{-1}$ by\nthe inverse of an SPD matrix $\\widetilde A_i$ satisfying, for fixed\n$0<\\alpha\\le\\beta$,\n$$ \\alpha A_i\\preceq \\widetilde A_i\\preceq\\beta A_i, \\qquad \\widetilde B=\\sum_{i\\in\\mathcal I}R_i\\widetilde A_i^{-1}R_i^{\\mathsf T}. $$\nFor symmetric matrices, $X\\preceq Y$ means\n$z^{\\mathsf T}Xz\\le z^{\\mathsf T}Yz$ for every vector $z$. The order\ninequalities define uniform local spectral equivalence in this pair. The\nlemma [[lem-schwarz-local-matrices-are-well-defined]] proves the remaining\nlocal inverse and well-definedness claims.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-schwarz-local-matrices-are-well-defined",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-overlapping-schwarz-subspace-correction-data]], every\nlocal matrix $A_i=R_i^{\\mathsf T}AR_i$ with $i\\in\\mathcal I$ is symmetric\npositive definite and therefore invertible. If the coarse index $0$ is\npresent, then $A_0=P^{\\mathsf T}AP$ is the SPD Galerkin coarse matrix. Hence\nevery exact local solve in the definition exists uniquely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The block matrix $\\mathcal D$ is SPD by [F2]. The spanning assumption makes the concatenated map $R$ surjective. If $x^{\\mathsf T}Bx=0$, then $0=(R^{\\mathsf T}x)^{\\mathsf T}\\mathcal D^{-1}(R^{\\mathsf T}x),$ so $R^{\\mathsf T}x=0$ because $\\mathcal D^{-1}$ is SPD. Surjectivity of $R$ then gives $x=0$. Thus $B$ is SPD and has an inverse.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $x$, define $z_*=\\mathcal D^{-1}R^{\\mathsf T}B^{-1}x$. Then $Rz_*=BB^{-1}x=x$, so it is feasible. For any other feasible $z$, write $w=z-z_*$. Then $Rw=0$ and $z_*^{\\mathsf T}\\mathcal Dw=x^{\\mathsf T}B^{-1}Rw=0$. Therefore $z^{\\mathsf T}\\mathcal Dz=z_*^{\\mathsf T}\\mathcal Dz_*+w^{\\mathsf T}\\mathcal Dw\\ge z_*^{\\mathsf T}\\mathcal Dz_*$. Direct multiplication gives $z_*^{\\mathsf T}\\mathcal Dz_*=x^{\\mathsf T}B^{-1}x$. This proves the minimum identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For x=0, z=0 is feasible and step 2.1 gives minimum energy zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With one surjective prolongation, steps 1.1–2.1 reduce to the local quadratic minimum."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued scalar parameter or limiting endpoint occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "thm-additive-schwarz-stable-decomposition-condition-number": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-overlapping-schwarz-subspace-correction-data",
+          "source_section": "Definition",
+          "quote": "Work in exact real arithmetic. Let $n\\ge1$ and $V=\\mathbb R^n$, and let\n$A=A^{\\mathsf T}$ satisfy $x^{\\mathsf T}Ax>0$ for every nonzero $x$.\nGive $V$ the energy inner product $a(x,y)=x^{\\mathsf T}Ay$ and norm\n$\\|x\\|_A^2=a(x,x)$ of\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].\nAn operator $S$ is $A$-self-adjoint when $a(Sx,y)=a(x,Sy)$ for all $x,y$;\nit is positive when $a(Sx,x)>0$ for every nonzero $x$. An $A$-orthogonal\nprojection is an idempotent $A$-self-adjoint operator.\nLet $\\mathcal I$ be a finite ordered nonempty set and, for each\n$i\\in\\mathcal I$, choose a full-column-rank prolongation\n$R_i\\in\\mathbb R^{n\\times n_i}$ with $1\\le n_i\\le n$, and put\n$V_i=\\operatorname{Ran}(R_i)$.\nA one-level method has $\\mathcal I=\\{1,\\ldots,m\\}$. A two-level method has\n$\\mathcal I=\\{0,1,\\ldots,m\\}$, where $R_0=P$ and $V_0$ is the designated\ncoarse space. Restriction of a global residual is $R_i^{\\mathsf T}$ and\nprolongation of a local coefficient vector is $R_i$. Define the local energy\nmatrix\n$$A_i=R_i^{\\mathsf T}AR_i.$$\nWhen the coarse index $0$ is present, $A_0=P^{\\mathsf T}AP$ is the Galerkin\ncoarse matrix of [[def-galerkin-coarse-grid-correction]]. By\n[[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], it is SPD\nand the exact coarse solve is well-defined.\n\nFor each $i\\in\\mathcal I$, the exact local correction and additive\npreconditioner are\n$$ \\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A, \\qquad B=\\sum_{i\\in\\mathcal I}R_iA_i^{-1}R_i^{\\mathsf T}. $$\nWhen the spaces span $V$, the exact additive Schwarz preconditioned operator\nis $BA=\\sum_{i\\in\\mathcal I}\\Pi_i$. For a fixed ordering of $\\mathcal I$, a\nmultiplicative sweep applies its corrections in that order; if $0$ is present,\nit is first. For an inexact additive method, replace each exact $A_i^{-1}$ by\nthe inverse of an SPD matrix $\\widetilde A_i$ satisfying, for fixed\n$0<\\alpha\\le\\beta$,\n$$ \\alpha A_i\\preceq \\widetilde A_i\\preceq\\beta A_i, \\qquad \\widetilde B=\\sum_{i\\in\\mathcal I}R_i\\widetilde A_i^{-1}R_i^{\\mathsf T}. $$\nFor symmetric matrices, $X\\preceq Y$ means\n$z^{\\mathsf T}Xz\\le z^{\\mathsf T}Yz$ for every vector $z$. The order\ninequalities define uniform local spectral equivalence in this pair. The\nlemma [[lem-schwarz-local-matrices-are-well-defined]] proves the remaining\nlocal inverse and well-definedness claims.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-schwarz-local-corrections-are-energy-orthogonal-projections",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-overlapping-schwarz-subspace-correction-data]], every\n$\\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A$ is an $A$-orthogonal projection, meaning\nan idempotent $A$-self-adjoint operator, with range $V_i$. Consequently, for every\n$x\\in V$,\n$$ \\|x\\|_A^2=\\|\\Pi_i x\\|_A^2+\\|(I-\\Pi_i)x\\|_A^2, \\qquad a(\\Pi_i x,x)=\\|\\Pi_i x\\|_A^2. $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-schwarz-additive-inverse-is-local-energy-minimum",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-overlapping-schwarz-subspace-correction-data]], assume\n$\\sum_{i\\in\\mathcal I}V_i=V$. Let\n$R=[R_i]_{i\\in\\mathcal I}$ and\n$\\mathcal D=\\operatorname{diag}(A_i)_{i\\in\\mathcal I}$, so\n$B=R\\mathcal D^{-1}R^{\\mathsf T}$. Then $B$ is SPD and, for every $x\\in V$,\n$$ x^{\\mathsf T}B^{-1}x = \\min_{\\substack{z=(z_i)_{i\\in\\mathcal I}\\\\Rz=x}} \\sum_{i\\in\\mathcal I}z_i^{\\mathsf T}A_i z_i. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-schwarz-local-matrices-are-well-defined",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-overlapping-schwarz-subspace-correction-data]], every\nlocal matrix $A_i=R_i^{\\mathsf T}AR_i$ with $i\\in\\mathcal I$ is symmetric\npositive definite and therefore invertible. If the coarse index $0$ is\npresent, then $A_0=P^{\\mathsf T}AP$ is the SPD Galerkin coarse matrix. Hence\nevery exact local solve in the definition exists uniquely.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The stable-decomposition hypothesis implies that the local spaces span $V$, so [F3] makes $B$ SPD. Each $\\Pi_i$ is $A$-self-adjoint by [F2], hence $T=BA=\\sum_i\\Pi_i$ is $A$-self-adjoint. Moreover $a(Tx,x)=\\sum_i\\|\\Pi_i x\\|_A^2\\ge0$; if this is zero, then every $\\Pi_i x=0$. For any $v_i\\in V_i$, [F2] gives $\\Pi_i v_i=v_i$, so $a(x,v_i)=a(\\Pi_i x,v_i)=0$. The spaces span $V$, hence $x=0$ and $T$ is positive.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $x\\ne0$ and choose the decomposition $x=\\sum_iR_i z_i$ from the stable-decomposition hypothesis. Orthogonal projection gives $\\|x\\|_A^2 =\\sum_i a(x,R_i z_i) =\\sum_i a(\\Pi_i x,R_i z_i) \\le \\left(\\sum_i\\|\\Pi_i x\\|_A^2\\right)^{1/2} \\left(\\sum_i z_i^{\\mathsf T}A_i z_i\\right)^{1/2}.$ The last inequality is [F5] in the product inner product on the finite tuple space. The assumed bound on the second factor yields $a(Tx,x)=\\sum_i\\|\\Pi_i x\\|_A^2\\ge C_0^{-1}\\|x\\|_A^2$, proving the lower Rayleigh bound.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For each $x$, write $\\Pi_i x=R_i y_i$ with $y_i=A_i^{-1}R_i^{\\mathsf T}Ax$. The synthesis hypothesis and [F2] give $\\|Tx\\|_A^2 =\\left\\|\\sum_iR_i y_i\\right\\|_A^2 \\le C_1\\sum_i\\|\\Pi_i x\\|_A^2 =C_1a(Tx,x).$ Set $q=a(Tx,x)/\\|x\\|_A^2$. [F5] gives $q\\|x\\|_A\\le\\|Tx\\|_A$, while the displayed inequality gives $\\|Tx\\|_A^2\\le C_1q\\|x\\|_A^2$. If $q>0$, these imply $q\\le C_1$; if $q=0$, the same upper bound is immediate.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "By [F4] and the assumed lower order bound, every $\\widetilde A_i$ is SPD. For every SPD matrix $M$ and vector $y$, $y^{\\mathsf T}M^{-1}y =\\max_z\\bigl(2y^{\\mathsf T}z-z^{\\mathsf T}Mz\\bigr),$ because completing the square subtracts $(z-M^{-1}y)^{\\mathsf T}M(z-M^{-1}y)$. Since $\\widetilde A_i\\preceq\\beta A_i$, this maximum for $\\widetilde A_i$ is at least the maximum for $\\beta A_i$, namely $\\beta^{-1}y^{\\mathsf T}A_i^{-1}y$; since $\\alpha A_i\\preceq\\widetilde A_i$, it is at most the maximum for $\\alpha A_i$, namely $\\alpha^{-1}y^{\\mathsf T}A_i^{-1}y$. Thus $\\beta^{-1}A_i^{-1}\\preceq\\widetilde A_i^{-1}\\preceq\\alpha^{-1}A_i^{-1}$. Summing after congruence by $R_i$ yields $\\beta^{-1}B\\preceq\\widetilde B\\preceq\\alpha^{-1}B$.",
+          "step": "1.4",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.4 establishes that each inverse in $\\widetilde B$ is SPD. By the stable-decomposition hypothesis, the local spaces span $V$; hence if $x\\ne0$ then $R_i^{\\mathsf T}x\\ne0$ for some $i$, since otherwise $x$ would be Euclidean-orthogonal to their span $V$. Therefore $x^{\\mathsf T}\\widetilde Bx=\\sum_i(R_i^{\\mathsf T}x)^{\\mathsf T}\\widetilde A_i^{-1}(R_i^{\\mathsf T}x)>0$, so $\\widetilde B$ is symmetric positive definite. It follows that $\\widetilde BA$ is $A$-self-adjoint and positive, because $A\\widetilde BA$ is symmetric positive definite; the inexact Rayleigh quotient and condition number are therefore defined. The matrix comparison in step 1.4 bounds $a(\\widetilde BAx,x)=x^{\\mathsf T}A\\widetilde BAx$ below by $\\beta^{-1}x^{\\mathsf T}ABAx$ and above by $\\alpha^{-1}x^{\\mathsf T}ABAx$. The exact bounds in steps 1.2 and 1.3 therefore give the stated inexact minimum, maximum, and condition-ratio bounds.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Rayleigh quotient and condition-number definitions explicitly range over x ne 0, so zero is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.3 allow one subspace; for V1=V the exact preconditioned operator is the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint alpha=beta is permitted; step 1.4 gives equal inverse comparison bounds in that case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-multiplicative-schwarz-exact-sweep-contraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-overlapping-schwarz-subspace-correction-data",
+          "source_section": "Definition",
+          "quote": "Work in exact real arithmetic. Let $n\\ge1$ and $V=\\mathbb R^n$, and let\n$A=A^{\\mathsf T}$ satisfy $x^{\\mathsf T}Ax>0$ for every nonzero $x$.\nGive $V$ the energy inner product $a(x,y)=x^{\\mathsf T}Ay$ and norm\n$\\|x\\|_A^2=a(x,x)$ of\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].\nAn operator $S$ is $A$-self-adjoint when $a(Sx,y)=a(x,Sy)$ for all $x,y$;\nit is positive when $a(Sx,x)>0$ for every nonzero $x$. An $A$-orthogonal\nprojection is an idempotent $A$-self-adjoint operator.\nLet $\\mathcal I$ be a finite ordered nonempty set and, for each\n$i\\in\\mathcal I$, choose a full-column-rank prolongation\n$R_i\\in\\mathbb R^{n\\times n_i}$ with $1\\le n_i\\le n$, and put\n$V_i=\\operatorname{Ran}(R_i)$.\nA one-level method has $\\mathcal I=\\{1,\\ldots,m\\}$. A two-level method has\n$\\mathcal I=\\{0,1,\\ldots,m\\}$, where $R_0=P$ and $V_0$ is the designated\ncoarse space. Restriction of a global residual is $R_i^{\\mathsf T}$ and\nprolongation of a local coefficient vector is $R_i$. Define the local energy\nmatrix\n$$A_i=R_i^{\\mathsf T}AR_i.$$\nWhen the coarse index $0$ is present, $A_0=P^{\\mathsf T}AP$ is the Galerkin\ncoarse matrix of [[def-galerkin-coarse-grid-correction]]. By\n[[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], it is SPD\nand the exact coarse solve is well-defined.\n\nFor each $i\\in\\mathcal I$, the exact local correction and additive\npreconditioner are\n$$ \\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A, \\qquad B=\\sum_{i\\in\\mathcal I}R_iA_i^{-1}R_i^{\\mathsf T}. $$\nWhen the spaces span $V$, the exact additive Schwarz preconditioned operator\nis $BA=\\sum_{i\\in\\mathcal I}\\Pi_i$. For a fixed ordering of $\\mathcal I$, a\nmultiplicative sweep applies its corrections in that order; if $0$ is present,\nit is first. For an inexact additive method, replace each exact $A_i^{-1}$ by\nthe inverse of an SPD matrix $\\widetilde A_i$ satisfying, for fixed\n$0<\\alpha\\le\\beta$,\n$$ \\alpha A_i\\preceq \\widetilde A_i\\preceq\\beta A_i, \\qquad \\widetilde B=\\sum_{i\\in\\mathcal I}R_i\\widetilde A_i^{-1}R_i^{\\mathsf T}. $$\nFor symmetric matrices, $X\\preceq Y$ means\n$z^{\\mathsf T}Xz\\le z^{\\mathsf T}Yz$ for every vector $z$. The order\ninequalities define uniform local spectral equivalence in this pair. The\nlemma [[lem-schwarz-local-matrices-are-well-defined]] proves the remaining\nlocal inverse and well-definedness claims.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-schwarz-local-corrections-are-energy-orthogonal-projections",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-overlapping-schwarz-subspace-correction-data]], every\n$\\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A$ is an $A$-orthogonal projection, meaning\nan idempotent $A$-self-adjoint operator, with range $V_i$. Consequently, for every\n$x\\in V$,\n$$ \\|x\\|_A^2=\\|\\Pi_i x\\|_A^2+\\|(I-\\Pi_i)x\\|_A^2, \\qquad a(\\Pi_i x,x)=\\|\\Pi_i x\\|_A^2. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-additive-schwarz-stable-decomposition-condition-number",
+          "source_section": "Statement",
+          "quote": "Use the data of [[def-overlapping-schwarz-subspace-correction-data]] and\nassume the local spaces span $V$. Suppose $0<C_0,C_1<\\infty$ satisfy:\n\n- for every $x\\in V$, there are local vectors $z_i$ such that\n  $x=\\sum_iR_i z_i$ and $\\sum_i z_i^{\\mathsf T}A_i z_i\\le C_0\\|x\\|_A^2$;\n- for every tuple $(z_i)$,\n  $\\|\\sum_iR_i z_i\\|_A^2\\le C_1\\sum_i z_i^{\\mathsf T}A_i z_i$.\n\nFor an $A$-self-adjoint positive operator $T$, define\n$$ \\lambda_{\\min}^A(T)=\\inf_{x\\ne0}\\frac{a(Tx,x)}{a(x,x)},\\qquad \\lambda_{\\max}^A(T)=\\sup_{x\\ne0}\\frac{a(Tx,x)}{a(x,x)},\\qquad \\kappa_A(T)=\\frac{\\lambda_{\\max}^A(T)}{\\lambda_{\\min}^A(T)}. $$\nThen the exact additive Schwarz operator $T=BA$ is $A$-self-adjoint positive and\n$$ \\lambda_{\\min}^A(BA)\\ge C_0^{-1},\\qquad \\lambda_{\\max}^A(BA)\\le C_1,\\qquad \\kappa_A(BA)\\le C_0C_1. $$\nIf the inexact local matrices satisfy\n$\\alpha A_i\\preceq\\widetilde A_i\\preceq\\beta A_i$ for\n$0<\\alpha\\le\\beta$, then\n$$ \\lambda_{\\min}^A(\\widetilde BA)\\ge(\\beta C_0)^{-1},\\qquad \\lambda_{\\max}^A(\\widetilde BA)\\le C_1/\\alpha,\\qquad \\kappa_A(\\widetilde BA)\\le(\\beta/\\alpha)C_0C_1. $$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For an arbitrary initial error $x$, set $e_{-1}=x$, $d_0=\\Pi_0x$, and $e_0=x-d_0$. For $i=1,\\ldots,m$, set $d_i=\\Pi_i e_{i-1}$ and $e_i=e_{i-1}-d_i$. By [F2], each correction is orthogonal to its updated error, so telescoping gives $D:=\\sum_{i=0}^m\\|d_i\\|_A^2 =\\|x\\|_A^2-\\|e_m\\|_A^2.$ Also $e_{i-1}=x-d_0-\\sum_{j=1}^{i-1}d_j$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a local index $i\\ge1$ and set $b_i=\\|\\Pi_i x\\|_A$, $c_i=\\|d_i\\|_A$, and $q_i=\\|\\Pi_i d_0\\|_A$. Since $x=e_{i-1}+d_0+\\sum_{j<i}d_j$ and $\\Pi_i$ is an orthogonal projection, $a(\\Pi_i x,e_{i-1})=a(\\Pi_i x,\\Pi_i e_{i-1})=a(\\Pi_i x,d_i)$ and $a(\\Pi_i x,d_0)=a(\\Pi_i x,\\Pi_i d_0)$. Thus $b_i^2=a(\\Pi_i x,d_i)+a(\\Pi_i x,\\Pi_i d_0)+\\sum_{j<i}a(\\Pi_i x,d_j)$. The first term has absolute value at most $b_i c_i$ and the second at most $b_i q_i$ by [F4]; the remaining terms are at most $b_i\\sum_{j<i}\\epsilon_{ij}c_j$ by [A2]. If $b_i=0$ the resulting bound is immediate; otherwise divide by $b_i$ to obtain $b_i\\le c_i+q_i+\\sum_{j<i}\\epsilon_{ij}c_j.$",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $L$ be the strict lower-triangular part of $G$, and let $b,c,q\\in\\mathbb R^m$ have entries $b_i,c_i,q_i$. They are nonnegative and $0\\le Lc\\le Gc$ entrywise. Hence $\\|Lc\\|_2\\le\\|Gc\\|_2\\le\\rho\\|c\\|_2$, and step 2.1 yields $\\|b\\|_2\\le(1+\\rho)\\|c\\|_2+\\|q\\|_2.$ Furthermore, by [F2], $\\|q\\|_2^2 =\\sum_{i=1}^m a(\\Pi_i d_0,d_0) =a\\left(\\sum_{i=1}^m\\Pi_i d_0,d_0\\right) \\le a(Td_0,d_0) \\le C_1\\|d_0\\|_A^2.$ The first inequality uses that $\\Pi_0$ is positive semidefinite; the last is [F3].",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By $(r+s)^2\\le2r^2+2s^2$, steps 1.1 and 3.1 give $\\sum_{i=0}^m\\|\\Pi_i x\\|_A^2 =\\|d_0\\|_A^2+\\|b\\|_2^2 \\le(1+2C_1)\\|d_0\\|_A^2 +2(1+\\rho)^2\\sum_{i=1}^m\\|d_i\\|_A^2 \\le K D.$ The left side is $a(Tx,x)$, which [F3] bounds below by $C_0^{-1}\\|x\\|_A^2$. Thus $D\\ge(C_0K)^{-1}\\|x\\|_A^2$. Since $D\\le\\|x\\|_A^2$ by step 1.1, $C_0K\\ge1$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Step 1.1 now gives $\\|E_{\\mathrm{mult}}x\\|_A^2 =\\|e_m\\|_A^2 =\\|x\\|_A^2-D \\le\\left(1-\\frac1{C_0K}\\right)\\|x\\|_A^2.$ Taking the supremum over nonzero $x$ proves the operator-norm bound; finiteness of $C_0,K$ makes the contraction factor strictly less than one.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At x=0 every correction d_i and updated error e_i in step 1.1 is zero, so the contraction inequality is equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement permits m=1; steps 1.1–5.1 retain the same finite correction sequence."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proof permits rho=0; K remains positive and steps 4.1–5.1 give the stated contraction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-two-level-p1-poisson-additive-and-multiplicative-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-two-level-p1-poisson-stable-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$, $\\Omega=(0,1)^d$, and let\n$M\\ge2$ and $n\\ge2$ be integers. Write $e_1,\\ldots,e_d$ for the standard\ncoordinate vectors in $\\mathbb R^d$. In every cube of side $a=1/M$, for each\ncoordinate permutation $\\pi$ use the simplex whose successive vertices,\nwith $x$ the cube's lower corner, are\n$x$, $x+a e_{\\pi(1)}$, $x+a(e_{\\pi(1)}+e_{\\pi(2)})$, through\n$x+a\\sum_{r=1}^d e_{\\pi(r)}$. Subdivide each cube into $n^d$ uniform fine\ncubes and apply the same permutation rule at fine scale; this gives nested,\nmatching, shape-regular affine simplicial meshes\n$\\mathcal T_H\\subset\\mathcal T_h$. Write $H=\\sqrt d\\,a$ and\n$h=\\sqrt d\\,a/n$. Assume an overlap radius $\\delta=q a/n$ with integer\n$\\lceil\\sqrt d\\rceil\\le q\\le n$, so $h\\le\\delta\\le a$. For each\ncoarse cube $Q_j$, let $\\Omega_j$ be its closed $\\ell^\\infty$-neighborhood of\nradius $\\delta+h$, intersected with $\\overline\\Omega$. Let $V_H\\subset V_h\n\\subset H_0^1(\\Omega)$ be the continuous zero-boundary P1 spaces on the\ncoarse and fine meshes, and let\n$$ V_j=\\{v_h\\in V_h:\\operatorname{supp}v_h\\subseteq\\Omega_j\\}. $$\nHere $\\|x\\|_\\infty=\\max_r|x_r|$,\n$\\operatorname{dist}_\\infty(x,Q)=\\inf_{y\\in Q}\\|x-y\\|_\\infty$, an\n$\\ell^\\infty$-neighborhood of radius $r$ is\n$\\{x:\\operatorname{dist}_\\infty(x,Q)\\le r\\}$, and $\\operatorname{supp}v$ is\nthe closure in $\\overline\\Omega$ of $\\{x:v(x)\\ne0\\}$.\nFor the Poisson energy $a(u,v)=\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx$, every\n$u_h\\in V_h$ has a decomposition $u_h=u_0+\\sum_j u_j$ with\n$u_0\\in V_H$ and $u_j\\in V_j$ satisfying\n$$ a(u_0,u_0)+\\sum_j a(u_j,u_j) \\le C_{\\rm FE}\\left(1+\\left(\\frac H\\delta\\right)^2\\right)a(u_h,u_h). $$\nThe constant $C_{\\rm FE}$ depends only on $d$, the fixed uniform\nshape-regularity bound, the Scott–Zhang constant, and the reference P1 product\ninterpolation constants; it is independent of $M,n,\\delta$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-additive-schwarz-stable-decomposition-condition-number",
+          "source_section": "Statement",
+          "quote": "Use the data of [[def-overlapping-schwarz-subspace-correction-data]] and\nassume the local spaces span $V$. Suppose $0<C_0,C_1<\\infty$ satisfy:\n\n- for every $x\\in V$, there are local vectors $z_i$ such that\n  $x=\\sum_iR_i z_i$ and $\\sum_i z_i^{\\mathsf T}A_i z_i\\le C_0\\|x\\|_A^2$;\n- for every tuple $(z_i)$,\n  $\\|\\sum_iR_i z_i\\|_A^2\\le C_1\\sum_i z_i^{\\mathsf T}A_i z_i$.\n\nFor an $A$-self-adjoint positive operator $T$, define\n$$ \\lambda_{\\min}^A(T)=\\inf_{x\\ne0}\\frac{a(Tx,x)}{a(x,x)},\\qquad \\lambda_{\\max}^A(T)=\\sup_{x\\ne0}\\frac{a(Tx,x)}{a(x,x)},\\qquad \\kappa_A(T)=\\frac{\\lambda_{\\max}^A(T)}{\\lambda_{\\min}^A(T)}. $$\nThen the exact additive Schwarz operator $T=BA$ is $A$-self-adjoint positive and\n$$ \\lambda_{\\min}^A(BA)\\ge C_0^{-1},\\qquad \\lambda_{\\max}^A(BA)\\le C_1,\\qquad \\kappa_A(BA)\\le C_0C_1. $$\nIf the inexact local matrices satisfy\n$\\alpha A_i\\preceq\\widetilde A_i\\preceq\\beta A_i$ for\n$0<\\alpha\\le\\beta$, then\n$$ \\lambda_{\\min}^A(\\widetilde BA)\\ge(\\beta C_0)^{-1},\\qquad \\lambda_{\\max}^A(\\widetilde BA)\\le C_1/\\alpha,\\qquad \\kappa_A(\\widetilde BA)\\le(\\beta/\\alpha)C_0C_1. $$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multiplicative-schwarz-exact-sweep-contraction",
+          "source_section": "Statement",
+          "quote": "Use the exact data of\n[[def-overlapping-schwarz-subspace-correction-data]], with one coarse space\n$V_0$ and $m\\ge1$ local spaces $V_1,\\ldots,V_m$. Assume the stable-decomposition\nand synthesis hypotheses of\n[[thm-additive-schwarz-stable-decomposition-condition-number]] hold with\nconstants $C_0,C_1$. Suppose a symmetric matrix\n$G=(\\epsilon_{ij})_{i,j=1}^m$ has nonnegative entries and\n$$ |a(v_i,v_j)|\\le\\epsilon_{ij}\\|v_i\\|_A\\|v_j\\|_A \\quad(v_i\\in V_i,\\ v_j\\in V_j). $$\nFor a real matrix $M$, write $\\|M\\|_2=\\sup_{y\\ne0}\\|My\\|_2/\\|y\\|_2$ for its\ninduced Euclidean operator norm. Set $\\rho=\\|G\\|_2$ and\n$K=1+2C_1+2(1+\\rho)^2$. For the coarse-first exact multiplicative sweep\n$E_{\\mathrm{mult}}=(I-\\Pi_m)\\cdots(I-\\Pi_1)(I-\\Pi_0)$,\n$$ \\|E_{\\mathrm{mult}}\\|_A^2 \\le 1-\\frac{1}{C_0K}<1. $$\nThe ordered factors need not commute. Here\n$\\|S\\|_A=\\sup_{x\\ne0}\\|Sx\\|_A/\\|x\\|_A$ is the induced operator norm.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-two-level-p1-poisson-stable-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$, $\\Omega=(0,1)^d$, and let\n$M\\ge2$ and $n\\ge2$ be integers. Write $e_1,\\ldots,e_d$ for the standard\ncoordinate vectors in $\\mathbb R^d$. In every cube of side $a=1/M$, for each\ncoordinate permutation $\\pi$ use the simplex whose successive vertices,\nwith $x$ the cube's lower corner, are\n$x$, $x+a e_{\\pi(1)}$, $x+a(e_{\\pi(1)}+e_{\\pi(2)})$, through\n$x+a\\sum_{r=1}^d e_{\\pi(r)}$. Subdivide each cube into $n^d$ uniform fine\ncubes and apply the same permutation rule at fine scale; this gives nested,\nmatching, shape-regular affine simplicial meshes\n$\\mathcal T_H\\subset\\mathcal T_h$. Write $H=\\sqrt d\\,a$ and\n$h=\\sqrt d\\,a/n$. Assume an overlap radius $\\delta=q a/n$ with integer\n$\\lceil\\sqrt d\\rceil\\le q\\le n$, so $h\\le\\delta\\le a$. For each\ncoarse cube $Q_j$, let $\\Omega_j$ be its closed $\\ell^\\infty$-neighborhood of\nradius $\\delta+h$, intersected with $\\overline\\Omega$. Let $V_H\\subset V_h\n\\subset H_0^1(\\Omega)$ be the continuous zero-boundary P1 spaces on the\ncoarse and fine meshes, and let\n$$ V_j=\\{v_h\\in V_h:\\operatorname{supp}v_h\\subseteq\\Omega_j\\}. $$\nHere $\\|x\\|_\\infty=\\max_r|x_r|$,\n$\\operatorname{dist}_\\infty(x,Q)=\\inf_{y\\in Q}\\|x-y\\|_\\infty$, an\n$\\ell^\\infty$-neighborhood of radius $r$ is\n$\\{x:\\operatorname{dist}_\\infty(x,Q)\\le r\\}$, and $\\operatorname{supp}v$ is\nthe closure in $\\overline\\Omega$ of $\\{x:v(x)\\ne0\\}$.\nFor the Poisson energy $a(u,v)=\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx$, every\n$u_h\\in V_h$ has a decomposition $u_h=u_0+\\sum_j u_j$ with\n$u_0\\in V_H$ and $u_j\\in V_j$ satisfying\n$$ a(u_0,u_0)+\\sum_j a(u_j,u_j) \\le C_{\\rm FE}\\left(1+\\left(\\frac H\\delta\\right)^2\\right)a(u_h,u_h). $$\nThe constant $C_{\\rm FE}$ depends only on $d$, the fixed uniform\nshape-regularity bound, the Scott–Zhang constant, and the reference P1 product\ninterpolation constants; it is independent of $M,n,\\delta$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At almost every point of $\\Omega$, at most $N_0=7^d$ local subdomains are present by [F3] and the coordinate count in [[thm-two-level-p1-poisson-stable-decomposition]]. For any coarse component $v_0$ and local components $v_j$, at most $N_0+1$ gradients can be nonzero there. [F4] in the finite-dimensional Euclidean inner product gives the pointwise inequality $\\left|\\nabla v_0+\\sum_j\\nabla v_j\\right|^2 \\le (1+N_0)\\left( |\\nabla v_0|^2+\\sum_j|\\nabla v_j|^2 \\right)$. Integrating gives $\\left\\|\\nabla\\left(v_0+\\sum_jv_j\\right)\\right\\|_{L^2(\\Omega)}^2 \\le (1+N_0)\\left( \\|\\nabla v_0\\|_2^2+\\sum_j\\|\\nabla v_j\\|_2^2 \\right).$ Thus $C_1=1+N_0$ is a valid synthesis constant.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $\\epsilon_{ij}=1$ when the interiors of $\\Omega_i$ and $\\Omega_j$ overlap in positive measure and $0$ otherwise, with $\\epsilon_{ii}=1$. If the interiors are disjoint, local gradients have disjoint supports almost everywhere, so $a(v_i,v_j)=0$. If they overlap, [F4] gives $|a(v_i,v_j)|\\le\\|v_i\\|_A\\|v_j\\|_A$. Thus this symmetric nonnegative matrix satisfies the pairwise overlap hypothesis. Since each padded cube has side at most $5a$, two cubes can intersect only when their coarse indices differ by at most five in each coordinate. Thus every row of the overlap matrix has at most $N_1=11^d$ nonzero entries. For any vector $x$, applying [F4] to the vectors $(\\sqrt{\\epsilon_{ij}})_j$ and $(\\sqrt{\\epsilon_{ij}}x_j)_j$ gives $|(\\epsilon x)_i|^2\\le(\\sum_j\\epsilon_{ij})(\\sum_j\\epsilon_{ij}|x_j|^2)\\le N_1\\sum_j\\epsilon_{ij}|x_j|^2$. Summing over $i$ and using the column sums, also at most $N_1$, yields $\\|\\epsilon x\\|_2^2\\le N_1^2\\|x\\|_2^2$. Hence $\\rho=\\|\\epsilon\\|_2\\le N_1$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting the stable constant [F1] and $C_1=1+7^d$ from step 1.1 into the additive estimate [F2] proves $\\kappa_A(BA)\\le C_{\\rm FE}(1+(H/\\delta)^2)(1+7^d)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting [F1], step 1.1, and $\\rho\\le11^d$ from step 1.2 into the multiplicative estimate [F2] gives the displayed contraction factor. Its denominator is finite and positive, and the multiplicative theorem proves the factor is nonnegative and strictly below one. The bound is uniform as $h\\to0$ and the subdomain count grows whenever $H/\\delta$ stays bounded.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Rayleigh quotient and condition-number definitions explicitly range over x ne 0, so zero is excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no single-count or unit-parameter endpoint; its hypotheses fix a general affine cell and functions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At delta=a the estimates are finite with H/delta=sqrt(d), and steps 1.1–3.1 retain the same constants."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement inherits the explicit Countable Choice branch of the stable-decomposition theorem cited in the Given and [F1]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "ex-one-level-overlapping-schwarz-condition-number-growth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-overlapping-schwarz-subspace-correction-data",
+          "source_section": "Definition",
+          "quote": "Work in exact real arithmetic. Let $n\\ge1$ and $V=\\mathbb R^n$, and let\n$A=A^{\\mathsf T}$ satisfy $x^{\\mathsf T}Ax>0$ for every nonzero $x$.\nGive $V$ the energy inner product $a(x,y)=x^{\\mathsf T}Ay$ and norm\n$\\|x\\|_A^2=a(x,x)$ of\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].\nAn operator $S$ is $A$-self-adjoint when $a(Sx,y)=a(x,Sy)$ for all $x,y$;\nit is positive when $a(Sx,x)>0$ for every nonzero $x$. An $A$-orthogonal\nprojection is an idempotent $A$-self-adjoint operator.\nLet $\\mathcal I$ be a finite ordered nonempty set and, for each\n$i\\in\\mathcal I$, choose a full-column-rank prolongation\n$R_i\\in\\mathbb R^{n\\times n_i}$ with $1\\le n_i\\le n$, and put\n$V_i=\\operatorname{Ran}(R_i)$.\nA one-level method has $\\mathcal I=\\{1,\\ldots,m\\}$. A two-level method has\n$\\mathcal I=\\{0,1,\\ldots,m\\}$, where $R_0=P$ and $V_0$ is the designated\ncoarse space. Restriction of a global residual is $R_i^{\\mathsf T}$ and\nprolongation of a local coefficient vector is $R_i$. Define the local energy\nmatrix\n$$A_i=R_i^{\\mathsf T}AR_i.$$\nWhen the coarse index $0$ is present, $A_0=P^{\\mathsf T}AP$ is the Galerkin\ncoarse matrix of [[def-galerkin-coarse-grid-correction]]. By\n[[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], it is SPD\nand the exact coarse solve is well-defined.\n\nFor each $i\\in\\mathcal I$, the exact local correction and additive\npreconditioner are\n$$ \\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A, \\qquad B=\\sum_{i\\in\\mathcal I}R_iA_i^{-1}R_i^{\\mathsf T}. $$\nWhen the spaces span $V$, the exact additive Schwarz preconditioned operator\nis $BA=\\sum_{i\\in\\mathcal I}\\Pi_i$. For a fixed ordering of $\\mathcal I$, a\nmultiplicative sweep applies its corrections in that order; if $0$ is present,\nit is first. For an inexact additive method, replace each exact $A_i^{-1}$ by\nthe inverse of an SPD matrix $\\widetilde A_i$ satisfying, for fixed\n$0<\\alpha\\le\\beta$,\n$$ \\alpha A_i\\preceq \\widetilde A_i\\preceq\\beta A_i, \\qquad \\widetilde B=\\sum_{i\\in\\mathcal I}R_i\\widetilde A_i^{-1}R_i^{\\mathsf T}. $$\nFor symmetric matrices, $X\\preceq Y$ means\n$z^{\\mathsf T}Xz\\le z^{\\mathsf T}Yz$ for every vector $z$. The order\ninequalities define uniform local spectral equivalence in this pair. The\nlemma [[lem-schwarz-local-matrices-are-well-defined]] proves the remaining\nlocal inverse and well-definedness claims.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct expansion gives $x^{\\mathsf T}A_Nx=h^{-1}\\sum_{j=1}^N(x_j-x_{j-1})^2$ with $x_0=x_N=0$. It is positive for every nonzero vector because vanishing of all successive differences and $x_0=0$ forces every $x_j=0$. For the point-patch injection $R_i=e_i$, the local matrix is $A_i=e_i^{\\mathsf T}A_Ne_i=2/h$. Thus [F1] gives $B_N=\\sum_i e_i(h/2)e_i^{\\mathsf T}=(h/2)I$. Each corresponding nodal hat is supported on two adjacent mesh intervals, so neighboring local supports overlap and at most three closed supports meet at a point.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $k=1,\\ldots,N-1$, set $v_j^{(k)}=\\sin(jk\\pi/N)$ for $j=0,\\ldots,N$. The endpoints vanish. With $\\theta=k\\pi/N$, the identity $v_{j-1}^{(k)}+v_{j+1}^{(k)}=2\\cos(\\theta)v_j^{(k)}$ gives $A_Nv^{(k)}=\\frac{2}{h}(1-\\cos\\theta)v^{(k)}.$ These eigenvalues are distinct because cosine is strictly decreasing on $(0,\\pi)$. Since $A_N$ is symmetric, eigenvectors for distinct eigenvalues are orthogonal: for $k\\ne l$, $(\\lambda_k-\\lambda_l)(v^{(k)})^{\\mathsf T}v^{(l)}=(A_Nv^{(k)})^{\\mathsf T}v^{(l)}-(v^{(k)})^{\\mathsf T}A_Nv^{(l)}=0$. The vectors are nonzero, so the $N-1$ orthogonal vectors form a basis of $\\mathbb R^{N-1}$. Multiplication by $B_N=(h/2)I$ gives eigenvalues $1-\\cos(k\\pi/N)$ for $B_NA_N$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The smallest and largest values occur at $k=1$ and $k=N-1$, respectively. Therefore $\\kappa_A(B_NA_N) =\\frac{1-\\cos((N-1)\\pi/N)}{1-\\cos(\\pi/N)} =\\frac{1+\\cos(\\pi/N)}{1-\\cos(\\pi/N)}.$ As $N\\to\\infty$ the numerator tends to $2$ and the positive denominator tends to $0$, so the condition numbers diverge.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is excluded from eigenvalue and Rayleigh quotients; the nonzero sine vectors in step 2.1 are the relevant inputs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At N=2 there is one interior node and the displayed condition number equals 1 by step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At N=2 the smallest denominator 1-cos(pi/N) is positive and step 3.1 gives condition number 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "small Dirichlet meshes",
+          "method": "exact hand calculation from the displayed cosine formula",
+          "input": {
+            "N": [
+              2,
+              3,
+              4
+            ]
+          },
+          "calculation": "The condition numbers are 1, 3, and 3+2sqrt(2), respectively; each equals (1+cos(pi/N))/(1-cos(pi/N)).",
+          "expected": "The N=2 case is finite and the values increase with this sample mesh sequence."
+        }
+      ],
+      "kind": "example"
+    },
+    "cex-schwarz-naive-coarse-space-misses-conductive-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-overlapping-schwarz-subspace-correction-data",
+          "source_section": "Definition",
+          "quote": "Work in exact real arithmetic. Let $n\\ge1$ and $V=\\mathbb R^n$, and let\n$A=A^{\\mathsf T}$ satisfy $x^{\\mathsf T}Ax>0$ for every nonzero $x$.\nGive $V$ the energy inner product $a(x,y)=x^{\\mathsf T}Ay$ and norm\n$\\|x\\|_A^2=a(x,x)$ of\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].\nAn operator $S$ is $A$-self-adjoint when $a(Sx,y)=a(x,Sy)$ for all $x,y$;\nit is positive when $a(Sx,x)>0$ for every nonzero $x$. An $A$-orthogonal\nprojection is an idempotent $A$-self-adjoint operator.\nLet $\\mathcal I$ be a finite ordered nonempty set and, for each\n$i\\in\\mathcal I$, choose a full-column-rank prolongation\n$R_i\\in\\mathbb R^{n\\times n_i}$ with $1\\le n_i\\le n$, and put\n$V_i=\\operatorname{Ran}(R_i)$.\nA one-level method has $\\mathcal I=\\{1,\\ldots,m\\}$. A two-level method has\n$\\mathcal I=\\{0,1,\\ldots,m\\}$, where $R_0=P$ and $V_0$ is the designated\ncoarse space. Restriction of a global residual is $R_i^{\\mathsf T}$ and\nprolongation of a local coefficient vector is $R_i$. Define the local energy\nmatrix\n$$A_i=R_i^{\\mathsf T}AR_i.$$\nWhen the coarse index $0$ is present, $A_0=P^{\\mathsf T}AP$ is the Galerkin\ncoarse matrix of [[def-galerkin-coarse-grid-correction]]. By\n[[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], it is SPD\nand the exact coarse solve is well-defined.\n\nFor each $i\\in\\mathcal I$, the exact local correction and additive\npreconditioner are\n$$ \\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A, \\qquad B=\\sum_{i\\in\\mathcal I}R_iA_i^{-1}R_i^{\\mathsf T}. $$\nWhen the spaces span $V$, the exact additive Schwarz preconditioned operator\nis $BA=\\sum_{i\\in\\mathcal I}\\Pi_i$. For a fixed ordering of $\\mathcal I$, a\nmultiplicative sweep applies its corrections in that order; if $0$ is present,\nit is first. For an inexact additive method, replace each exact $A_i^{-1}$ by\nthe inverse of an SPD matrix $\\widetilde A_i$ satisfying, for fixed\n$0<\\alpha\\le\\beta$,\n$$ \\alpha A_i\\preceq \\widetilde A_i\\preceq\\beta A_i, \\qquad \\widetilde B=\\sum_{i\\in\\mathcal I}R_i\\widetilde A_i^{-1}R_i^{\\mathsf T}. $$\nFor symmetric matrices, $X\\preceq Y$ means\n$z^{\\mathsf T}Xz\\le z^{\\mathsf T}Yz$ for every vector $z$. The order\ninequalities define uniform local spectral equivalence in this pair. The\nlemma [[lem-schwarz-local-matrices-are-well-defined]] proves the remaining\nlocal inverse and well-definedness claims.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The grounded two-node graph with unit conductance from each node to ground and conductance $\\alpha$ between the nodes has matrix $A_\\alpha=I_2+\\alpha \\begin{pmatrix}1&-1\\\\-1&1\\end{pmatrix}.$ For $x=(x_1,x_2)$, $x^{\\mathsf T}A_\\alpha x=x_1^2+x_2^2+\\alpha(x_1-x_2)^2$, so $A_\\alpha$ is SPD. The coarse and local injections are $R_0=e_1$ and $R_1=e_2$, hence $A_0=A_1=1+\\alpha$. The additive preconditioner from [F1] is therefore $B_\\alpha=(1+\\alpha)^{-1}I_2$. There is one local subspace, so its pairwise overlap matrix is the fixed $1\\times1$ matrix $[1]$, independent of $\\alpha$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The vectors $(1,1)$ and $(1,-1)$ are eigenvectors of $A_\\alpha$ with eigenvalues $1$ and $1+2\\alpha$. Thus $B_\\alpha A_\\alpha$ has eigenvalues $(1+\\alpha)^{-1}$ and $(1+2\\alpha)/(1+\\alpha)$, so $\\kappa_A(B_\\alpha A_\\alpha)=1+2\\alpha\\to\\infty$. The low-energy channel vector $(1,1)$ is not in the one-node coarse space $V_0$, and the growing condition number disproves the claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The counterexample uses nonzero eigenvectors; the zero vector would satisfy the SPD quadratic identity trivially in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At alpha=1 the two computed eigenvalues are 1/2 and 3/2, so the example is already nontrivial with its smallest positive contrast."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At alpha=1 the SPD matrix and fixed overlap matrix are valid; step 2.1 gives condition number 3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unit and triple edge contrast",
+          "method": "exact 2 by 2 eigencalculation",
+          "input": {
+            "alpha": [
+              1,
+              3
+            ]
+          },
+          "calculation": "The condition number 1+2alpha is 3 at alpha=1 and 7 at alpha=3, while the local overlap matrix remains [1].",
+          "expected": "The computed ratio grows although the overlap graph is fixed."
+        }
+      ],
+      "kind": "counterexample"
+    },
+    "ex-schwarz-overlap-shrinking-decomposition-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-two-level-p1-poisson-stable-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$, $\\Omega=(0,1)^d$, and let\n$M\\ge2$ and $n\\ge2$ be integers. Write $e_1,\\ldots,e_d$ for the standard\ncoordinate vectors in $\\mathbb R^d$. In every cube of side $a=1/M$, for each\ncoordinate permutation $\\pi$ use the simplex whose successive vertices,\nwith $x$ the cube's lower corner, are\n$x$, $x+a e_{\\pi(1)}$, $x+a(e_{\\pi(1)}+e_{\\pi(2)})$, through\n$x+a\\sum_{r=1}^d e_{\\pi(r)}$. Subdivide each cube into $n^d$ uniform fine\ncubes and apply the same permutation rule at fine scale; this gives nested,\nmatching, shape-regular affine simplicial meshes\n$\\mathcal T_H\\subset\\mathcal T_h$. Write $H=\\sqrt d\\,a$ and\n$h=\\sqrt d\\,a/n$. Assume an overlap radius $\\delta=q a/n$ with integer\n$\\lceil\\sqrt d\\rceil\\le q\\le n$, so $h\\le\\delta\\le a$. For each\ncoarse cube $Q_j$, let $\\Omega_j$ be its closed $\\ell^\\infty$-neighborhood of\nradius $\\delta+h$, intersected with $\\overline\\Omega$. Let $V_H\\subset V_h\n\\subset H_0^1(\\Omega)$ be the continuous zero-boundary P1 spaces on the\ncoarse and fine meshes, and let\n$$ V_j=\\{v_h\\in V_h:\\operatorname{supp}v_h\\subseteq\\Omega_j\\}. $$\nHere $\\|x\\|_\\infty=\\max_r|x_r|$,\n$\\operatorname{dist}_\\infty(x,Q)=\\inf_{y\\in Q}\\|x-y\\|_\\infty$, an\n$\\ell^\\infty$-neighborhood of radius $r$ is\n$\\{x:\\operatorname{dist}_\\infty(x,Q)\\le r\\}$, and $\\operatorname{supp}v$ is\nthe closure in $\\overline\\Omega$ of $\\{x:v(x)\\ne0\\}$.\nFor the Poisson energy $a(u,v)=\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx$, every\n$u_h\\in V_h$ has a decomposition $u_h=u_0+\\sum_j u_j$ with\n$u_0\\in V_H$ and $u_j\\in V_j$ satisfying\n$$ a(u_0,u_0)+\\sum_j a(u_j,u_j) \\le C_{\\rm FE}\\left(1+\\left(\\frac H\\delta\\right)^2\\right)a(u_h,u_h). $$\nThe constant $C_{\\rm FE}$ depends only on $d$, the fixed uniform\nshape-regularity bound, the Scott–Zhang constant, and the reference P1 product\ninterpolation constants; it is independent of $M,n,\\delta$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $r=H/\\delta$. Substituting into [F1] gives $C_0\\le C_{\\rm FE}(1+r^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "To exhibit admissible radii with $\\delta/H\\to0$, fix $M,d$, put $a=1/M$, choose $q_0=\\lceil\\sqrt d\\rceil$, and take $\\delta=q_0a/n$ as $n\\to\\infty$ with $n\\ge q_0$. Then $h=\\sqrt d\\,a/n\\le\\delta\\le a$, and $r=H/\\delta=\\sqrt d\\,n/q_0\\to\\infty$. The right side of the one-sided upper-bound formula grows; it supplies no lower estimate on the actual stable constant or condition number.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The assertion is about a nonzero cell, parameter, or eigenmode; the zero object is not a boundary input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=q0 the chosen overlap is delta=a, the largest allowed radius; step 2.1 still gives a finite bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The admissible endpoint n=q0 gives delta=a; step 2.1 verifies h<=delta<=a directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two admissible overlap radii",
+          "method": "exact parameter substitution",
+          "input": {
+            "d": 2,
+            "M": 2,
+            "n": [
+              4,
+              8
+            ],
+            "q0": 2
+          },
+          "calculation": "With a=1/2 and H=sqrt(2)a, delta=2a/n is admissible. The ratios H/delta are 2sqrt(2) and 4sqrt(2), giving upper-bound factors 9 and 33.",
+          "expected": "The sufficient upper-bound formula grows as delta/H shrinks; no lower bound on the actual condition number follows."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-schwarz-two-level-1d-poisson-coarse-plus-odd-corrections": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-additive-schwarz-stable-decomposition-condition-number",
+          "source_section": "Statement",
+          "quote": "Use the data of [[def-overlapping-schwarz-subspace-correction-data]] and\nassume the local spaces span $V$. Suppose $0<C_0,C_1<\\infty$ satisfy:\n\n- for every $x\\in V$, there are local vectors $z_i$ such that\n  $x=\\sum_iR_i z_i$ and $\\sum_i z_i^{\\mathsf T}A_i z_i\\le C_0\\|x\\|_A^2$;\n- for every tuple $(z_i)$,\n  $\\|\\sum_iR_i z_i\\|_A^2\\le C_1\\sum_i z_i^{\\mathsf T}A_i z_i$.\n\nFor an $A$-self-adjoint positive operator $T$, define\n$$ \\lambda_{\\min}^A(T)=\\inf_{x\\ne0}\\frac{a(Tx,x)}{a(x,x)},\\qquad \\lambda_{\\max}^A(T)=\\sup_{x\\ne0}\\frac{a(Tx,x)}{a(x,x)},\\qquad \\kappa_A(T)=\\frac{\\lambda_{\\max}^A(T)}{\\lambda_{\\min}^A(T)}. $$\nThen the exact additive Schwarz operator $T=BA$ is $A$-self-adjoint positive and\n$$ \\lambda_{\\min}^A(BA)\\ge C_0^{-1},\\qquad \\lambda_{\\max}^A(BA)\\le C_1,\\qquad \\kappa_A(BA)\\le C_0C_1. $$\nIf the inexact local matrices satisfy\n$\\alpha A_i\\preceq\\widetilde A_i\\preceq\\beta A_i$ for\n$0<\\alpha\\le\\beta$, then\n$$ \\lambda_{\\min}^A(\\widetilde BA)\\ge(\\beta C_0)^{-1},\\qquad \\lambda_{\\max}^A(\\widetilde BA)\\le C_1/\\alpha,\\qquad \\kappa_A(\\widetilde BA)\\le(\\beta/\\alpha)C_0C_1. $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-overlapping-schwarz-subspace-correction-data",
+          "source_section": "Definition",
+          "quote": "Work in exact real arithmetic. Let $n\\ge1$ and $V=\\mathbb R^n$, and let\n$A=A^{\\mathsf T}$ satisfy $x^{\\mathsf T}Ax>0$ for every nonzero $x$.\nGive $V$ the energy inner product $a(x,y)=x^{\\mathsf T}Ay$ and norm\n$\\|x\\|_A^2=a(x,x)$ of\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].\nAn operator $S$ is $A$-self-adjoint when $a(Sx,y)=a(x,Sy)$ for all $x,y$;\nit is positive when $a(Sx,x)>0$ for every nonzero $x$. An $A$-orthogonal\nprojection is an idempotent $A$-self-adjoint operator.\nLet $\\mathcal I$ be a finite ordered nonempty set and, for each\n$i\\in\\mathcal I$, choose a full-column-rank prolongation\n$R_i\\in\\mathbb R^{n\\times n_i}$ with $1\\le n_i\\le n$, and put\n$V_i=\\operatorname{Ran}(R_i)$.\nA one-level method has $\\mathcal I=\\{1,\\ldots,m\\}$. A two-level method has\n$\\mathcal I=\\{0,1,\\ldots,m\\}$, where $R_0=P$ and $V_0$ is the designated\ncoarse space. Restriction of a global residual is $R_i^{\\mathsf T}$ and\nprolongation of a local coefficient vector is $R_i$. Define the local energy\nmatrix\n$$A_i=R_i^{\\mathsf T}AR_i.$$\nWhen the coarse index $0$ is present, $A_0=P^{\\mathsf T}AP$ is the Galerkin\ncoarse matrix of [[def-galerkin-coarse-grid-correction]]. By\n[[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], it is SPD\nand the exact coarse solve is well-defined.\n\nFor each $i\\in\\mathcal I$, the exact local correction and additive\npreconditioner are\n$$ \\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A, \\qquad B=\\sum_{i\\in\\mathcal I}R_iA_i^{-1}R_i^{\\mathsf T}. $$\nWhen the spaces span $V$, the exact additive Schwarz preconditioned operator\nis $BA=\\sum_{i\\in\\mathcal I}\\Pi_i$. For a fixed ordering of $\\mathcal I$, a\nmultiplicative sweep applies its corrections in that order; if $0$ is present,\nit is first. For an inexact additive method, replace each exact $A_i^{-1}$ by\nthe inverse of an SPD matrix $\\widetilde A_i$ satisfying, for fixed\n$0<\\alpha\\le\\beta$,\n$$ \\alpha A_i\\preceq \\widetilde A_i\\preceq\\beta A_i, \\qquad \\widetilde B=\\sum_{i\\in\\mathcal I}R_i\\widetilde A_i^{-1}R_i^{\\mathsf T}. $$\nFor symmetric matrices, $X\\preceq Y$ means\n$z^{\\mathsf T}Xz\\le z^{\\mathsf T}Yz$ for every vector $z$. The order\ninequalities define uniform local spectral equivalence in this pair. The\nlemma [[lem-schwarz-local-matrices-are-well-defined]] proves the remaining\nlocal inverse and well-definedness claims.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Given a fine vector $u$, let $u_H$ be its coarse nodal interpolant: $(u_H)_{2k}=u_{2k}$ and $(u_H)_{2k-1}=(u_{2k-2}+u_{2k})/2$. Define $\\eta_k=u_{2k-1}-(u_{2k-2}+u_{2k})/2$ and $u_k=\\eta_k\\phi_{2k-1}$. Nodal values give $u=u_H+\\sum_{k=1}^M u_k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On each fine interval, at most one odd nodal hat has nonzero derivative. Thus only the coarse derivative and at most one local derivative can be nonzero there. The elementary inequality $(s+t)^2\\le2(s^2+t^2)$, which follows from $(s-t)^2\\ge0$, and integration give $\\left\\|v_0+\\sum_kv_k\\right\\|_A^2 \\le2\\left(\\|v_0\\|_A^2+\\sum_k\\|v_k\\|_A^2\\right).$ Hence $C_1\\le2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On each pair of fine intervals set $a_k=u_{2k-1}-u_{2k-2}$ and $b_k=u_{2k}-u_{2k-1}$. The coarse energy on that coarse interval is $(a_k+b_k)^2/(2h)\\le(a_k^2+b_k^2)/h$, exactly its fine energy contribution. Summing over $k$ gives $\\|u_H\\|_A^2\\le\\|u\\|_A^2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $\\eta_k=(a_k-b_k)/2$ and $(a_k-b_k)^2\\le2(a_k^2+b_k^2)$, the local energy is $\\|u_k\\|_A^2=2\\eta_k^2/h\\le(a_k^2+b_k^2)/h$. Summing gives $\\sum_k\\|u_k\\|_A^2\\le\\|u\\|_A^2$. The decomposition in step 1.1 therefore has total energy at most $2\\|u\\|_A^2$, so $C_0\\le2$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F1] to the exact Schwarz data [F2] with $C_0\\le2$ and $C_1\\le2$ to obtain $\\kappa_A(BA)\\le4$. This finite one-dimensional split has a global coarse space; higher-dimensional overlap estimates are handled separately on the A page.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u=0, steps 1.1 and 2.2 choose zero coarse and local components and all energies vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At M=2 the mesh has four fine intervals and all even/odd subspaces in steps 1.1–3.1 are defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At M=2 the coarsening and odd-node partition remain valid, as used in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "four-interval decomposition",
+          "method": "exact hand calculation",
+          "input": {
+            "N": 4,
+            "M": 2,
+            "h": "1/4",
+            "interior_values": [
+              1,
+              0,
+              0
+            ]
+          },
+          "calculation": "The fine energy is 8. The even-node coarse interpolant is zero, and the single nonzero odd hat has energy 8, so the decomposition energy equals the fine energy.",
+          "expected": "The example decomposition satisfies the claimed C0<=2 bound in this case."
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-schwarz-inexact-local-solves-spectral-equivalence-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-additive-schwarz-stable-decomposition-condition-number",
+          "source_section": "Statement",
+          "quote": "Use the data of [[def-overlapping-schwarz-subspace-correction-data]] and\nassume the local spaces span $V$. Suppose $0<C_0,C_1<\\infty$ satisfy:\n\n- for every $x\\in V$, there are local vectors $z_i$ such that\n  $x=\\sum_iR_i z_i$ and $\\sum_i z_i^{\\mathsf T}A_i z_i\\le C_0\\|x\\|_A^2$;\n- for every tuple $(z_i)$,\n  $\\|\\sum_iR_i z_i\\|_A^2\\le C_1\\sum_i z_i^{\\mathsf T}A_i z_i$.\n\nFor an $A$-self-adjoint positive operator $T$, define\n$$ \\lambda_{\\min}^A(T)=\\inf_{x\\ne0}\\frac{a(Tx,x)}{a(x,x)},\\qquad \\lambda_{\\max}^A(T)=\\sup_{x\\ne0}\\frac{a(Tx,x)}{a(x,x)},\\qquad \\kappa_A(T)=\\frac{\\lambda_{\\max}^A(T)}{\\lambda_{\\min}^A(T)}. $$\nThen the exact additive Schwarz operator $T=BA$ is $A$-self-adjoint positive and\n$$ \\lambda_{\\min}^A(BA)\\ge C_0^{-1},\\qquad \\lambda_{\\max}^A(BA)\\le C_1,\\qquad \\kappa_A(BA)\\le C_0C_1. $$\nIf the inexact local matrices satisfy\n$\\alpha A_i\\preceq\\widetilde A_i\\preceq\\beta A_i$ for\n$0<\\alpha\\le\\beta$, then\n$$ \\lambda_{\\min}^A(\\widetilde BA)\\ge(\\beta C_0)^{-1},\\qquad \\lambda_{\\max}^A(\\widetilde BA)\\le C_1/\\alpha,\\qquad \\kappa_A(\\widetilde BA)\\le(\\beta/\\alpha)C_0C_1. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-overlapping-schwarz-subspace-correction-data",
+          "source_section": "Definition",
+          "quote": "Work in exact real arithmetic. Let $n\\ge1$ and $V=\\mathbb R^n$, and let\n$A=A^{\\mathsf T}$ satisfy $x^{\\mathsf T}Ax>0$ for every nonzero $x$.\nGive $V$ the energy inner product $a(x,y)=x^{\\mathsf T}Ay$ and norm\n$\\|x\\|_A^2=a(x,x)$ of\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].\nAn operator $S$ is $A$-self-adjoint when $a(Sx,y)=a(x,Sy)$ for all $x,y$;\nit is positive when $a(Sx,x)>0$ for every nonzero $x$. An $A$-orthogonal\nprojection is an idempotent $A$-self-adjoint operator.\nLet $\\mathcal I$ be a finite ordered nonempty set and, for each\n$i\\in\\mathcal I$, choose a full-column-rank prolongation\n$R_i\\in\\mathbb R^{n\\times n_i}$ with $1\\le n_i\\le n$, and put\n$V_i=\\operatorname{Ran}(R_i)$.\nA one-level method has $\\mathcal I=\\{1,\\ldots,m\\}$. A two-level method has\n$\\mathcal I=\\{0,1,\\ldots,m\\}$, where $R_0=P$ and $V_0$ is the designated\ncoarse space. Restriction of a global residual is $R_i^{\\mathsf T}$ and\nprolongation of a local coefficient vector is $R_i$. Define the local energy\nmatrix\n$$A_i=R_i^{\\mathsf T}AR_i.$$\nWhen the coarse index $0$ is present, $A_0=P^{\\mathsf T}AP$ is the Galerkin\ncoarse matrix of [[def-galerkin-coarse-grid-correction]]. By\n[[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], it is SPD\nand the exact coarse solve is well-defined.\n\nFor each $i\\in\\mathcal I$, the exact local correction and additive\npreconditioner are\n$$ \\Pi_i=R_iA_i^{-1}R_i^{\\mathsf T}A, \\qquad B=\\sum_{i\\in\\mathcal I}R_iA_i^{-1}R_i^{\\mathsf T}. $$\nWhen the spaces span $V$, the exact additive Schwarz preconditioned operator\nis $BA=\\sum_{i\\in\\mathcal I}\\Pi_i$. For a fixed ordering of $\\mathcal I$, a\nmultiplicative sweep applies its corrections in that order; if $0$ is present,\nit is first. For an inexact additive method, replace each exact $A_i^{-1}$ by\nthe inverse of an SPD matrix $\\widetilde A_i$ satisfying, for fixed\n$0<\\alpha\\le\\beta$,\n$$ \\alpha A_i\\preceq \\widetilde A_i\\preceq\\beta A_i, \\qquad \\widetilde B=\\sum_{i\\in\\mathcal I}R_i\\widetilde A_i^{-1}R_i^{\\mathsf T}. $$\nFor symmetric matrices, $X\\preceq Y$ means\n$z^{\\mathsf T}Xz\\le z^{\\mathsf T}Yz$ for every vector $z$. The order\ninequalities define uniform local spectral equivalence in this pair. The\nlemma [[lem-schwarz-local-matrices-are-well-defined]] proves the remaining\nlocal inverse and well-definedness claims.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The coordinate decomposition is stable with $C_0=1$, and its synthesis bound is $C_1=1$ because $\\|z_1e_1+z_2e_2\\|_2^2=z_1^2+z_2^2$. Exact local matrices equal $1$, so [F2] gives $B=I_2$ and condition number $1$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The inexact local inverses are $1/4$ and $2$, so [F2] gives $\\widetilde B=\\operatorname{diag}(1/4,2)$. Its eigenvalues are $1/4$ and $2$, hence $\\kappa_A(\\widetilde BA)=8$. The choices $\\alpha=1/4$ and $\\beta=4$ satisfy the local order bounds.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution of $C_0=C_1=1$, $\\alpha=1/4$, and $\\beta=4$ into [F1] gives the rigorous upper bound $16$, which contains the directly computed value $8$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires its stated nonempty finite index set, positive-dimensional domain, or nonempty mesh family; the empty case is excluded by its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero input maps to zero under both diagonal preconditioners; the eigenvalue calculations in steps 1.1–2.1 concern nonzero modes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-coordinate example is the smallest nontrivial block count and is computed in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses explicitly require positive-definite matrices, full-rank maps, nondegenerate cells, or strictly positive parameters, excluding degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite endpoint constants alpha=1/4 and beta=4 satisfy the stated local order interval in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix and mesh computations here use explicit finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves or defines a one-way assertion and states no equivalence, so neither implication boundary applies."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two coordinate solves",
+          "method": "exact diagonal matrix calculation",
+          "input": {
+            "A": "I_2",
+            "alpha": "1/4",
+            "beta": "4",
+            "tildeA": [
+              "4",
+              "1/2"
+            ]
+          },
+          "calculation": "The exact condition number is 1; the inexact additive matrix is diag(1/4,2), with condition number 8; the theorem bound is 16.",
+          "expected": "The computed value 8 is below the spectral-equivalence bound 16."
+        }
+      ],
+      "kind": "example"
+    }
+  }
+}

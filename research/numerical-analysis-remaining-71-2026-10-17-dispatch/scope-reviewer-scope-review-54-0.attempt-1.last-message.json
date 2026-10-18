@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "54",
+  "round": 0,
+  "reviewed_items": [
+    "cor-afem-constant-convection-weak-wellposedness",
+    "def-afem-local-moment-interpolant",
+    "def-afem-nvb-labelled-triangulation-family",
+    "def-afem-p1-residual-estimator-and-data-oscillation",
+    "lem-afem-vertex-patch-poincare",
+    "alg-dorfler-marking-and-conforming-nvb-refinement",
+    "def-afem-p1-approximation-class",
+    "lem-afem-convection-quasi-orthogonality-under-fine-mesh",
+    "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+    "lem-afem-p1-residual-representation",
+    "thm-afem-local-moment-interpolation-estimates",
+    "lem-afem-common-refinement-overlay-and-cardinality",
+    "lem-afem-data-oscillation-reduction-under-marked-refinement",
+    "lem-afem-localized-galerkin-refinement-estimate",
+    "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+    "thm-afem-p1-residual-reliability-and-local-efficiency",
+    "lem-afem-dorfler-marking-cardinality",
+    "lem-afem-residual-estimator-reduction",
+    "thm-afem-error-and-oscillation-contraction",
+    "thm-afem-p1-poisson-optimal-complexity",
+    "ex-afem-coefficient-jump-adds-flux-oscillation",
+    "ex-afem-coarse-convection-mesh-misses-smallness-condition",
+    "ex-afem-dorfler-marking-three-cells",
+    "ex-afem-data-oscillation-reduction-under-refinement"
+  ],
+  "reviewed_pages": [
+    "adaptive-finite-element-methods",
+    "adaptive-finite-element-methods-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch and both assigned pages were reviewed, including direct supplier claims and proofs. One local prerequisite gap remains in the contraction theorem’s convection branch.",
+  "findings": [
+    {
+      "id": "thm-afem-error-and-oscillation-contraction",
+      "type": "prerequisite",
+      "reason": "The statement requires only ν=μ/(1−μ)<κ. For μ>1 this is defined and negative, so it can satisfy that inequality even though lem-afem-convection-quasi-orthogonality-under-fine-mesh requires μ<1 and the proof uses its estimate at step 1.1. Add μ<1 explicitly to the convection branch; this is repairable on the same page."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-afem-p1-poisson-optimal-complexity",
+      "decision": "accept",
+      "reason": "Its use of the contraction theorem is on the symmetric b=0 branch, where μ=ν=0; the added convection prerequisite does not narrow that use."
+    },
+    {
+      "id": "adaptive-finite-element-methods",
+      "decision": "accept",
+      "reason": "The page already describes the convection branch as requiring an explicit dual-pickup and fine-mesh condition; adding μ<1 is consistent with that scope."
+    }
+  ]
+}

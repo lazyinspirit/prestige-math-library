@@ -1,0 +1,1110 @@
+
+===== PDF PAGE 123 =====
+CHAPTER 6. MULTIGRID METHODS
+121
+of vertices we always consider subsets of t1, . . . , Nu. An edge in E is an unordered pair pj, kq
+with j, k P V. A graph G0 “ pV0, E0q is called a subgraph of G “ pV, Eq, if V0 Ă V and E0 Ă E.
+If pj, kq P E is an edge in an undirected graph G “ pV, Eq, vertices j and k are said to be
+adjacent. The set of neighboring vertices of i is the set of all vertices that are adjacent to i;
+and it is denoted as Ni Ď V.
+A path from a vertex i to another vertex j is a sequence of
+edges
+␣
+pi, j1q, pj1, j2q, . . . , pjl´2, jl´1q, pjl´1, jq
+(
+Ď E and the number of edges l is called the
+length of this path. A vertex j is connected to a vertex k if there is a path from j to k. The
+distance between j and k is deﬁned as the length of the shortest path between these two vertices.
+Apparently, the distance between two vertices is equal to 1 if they are adjacent and is set to 8
+if they are not connected.
+An undirected graph G “ pV, Eq is connected if any pair of vertices are connected by a path,
+otherwise G is said to be disconnected. An independent set of V is a set of vertices of G, no two
+of which are adjacent. A maximal independent set (MIS) is an independent set such that adding
+any other vertex to the set will introduce at least one adjacent pair.
+Let A P RNˆN be a sparse matrix. The adjacency graph of A, denoted by GpAq, is a graph
+G “ pV, Eq with V :“ t1, 2, . . . , Nu and
+E :“
+␣
+pj, kq : aj,k ‰ 0
+(
+.
+As a general rule, sparse matrices do not provide any geometric information for the underlying
+graph and only the combinatorial/topological properties of GpAq or its subgraphs; see Figure 6.4.
+We note that two diﬀerent discretizations on diﬀerent meshes could lead to same sparse coeﬃcient
+matrix A and, in turn, same graph GpAq.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+1
+2
+3
+4
+5
+6
+7
+8
+9
+7
+8
+9
+4
+5
+6
+1
+2
+3
+Figure 6.4: Finite element grid (left), diﬀerence grid (middle), and graph of their corresponding
+stiﬀness matrices (right).
+fig:graph
+Let A be the coeﬃcient matrix corresponding to the ﬁnite element discretization of the
+second-order elliptic equation with Neumann boundary condition. Apparently A has zero row
+
+
+===== PDF PAGE 124 =====
+CHAPTER 6. MULTIGRID METHODS
+122
+sum. Hence we can write
+pAu, vq “
+ÿ
+pi,jqPE
+iăj
+´ai,jpui ´ ujqpvi ´ vjq.
+(6.5)
+eqn:Auv-Neuman
+On the other hand, we can easily derive the corresponding equality for the Dirichlet boundary
+condition or the mixed boundary condition:
+pAu, vq “
+ÿ
+pi,jqPE
+iăj
+´ai,jpui ´ ujqpvi ´ vjq
+and
+uj “ vj “ 0, @ xj P ΓD.
+(6.6)
+eqn:Auv-Dirich
+M-matrix and Delaunay triangulation ‹
+We ﬁrst introduce the concept of M-matrix. We call A an M-matrix if it is irreducible (i.e., the
+graph GpAq is connected) and
+ai,i ą 0,
+ai,j ď 0 pi ‰ jq,
+aj,j ě
+ÿ
+i‰j
+ˇˇai,j
+ˇˇ,
+aj,j ą
+ÿ
+i‰j
+ˇˇai,j
+ˇˇ for at least one j.
+Apparently, the stiﬀness matrix in (1.28) is an M-matrix. It is in general not the case for the
+stiﬀness matrices from ﬁnite element discretizations. In fact, whether a stiﬀness matrix is an
+M-matrix depends on the underlying mesh M.
+First we introduce a few notations using Figure 6.5. In any give simplicial element τ in R3;
+similar deﬁnitions can be introduced in Rd for d ě 2. An edge pi, jq has two vertices xi and xj
+and denote this edge as E. Let κEpτq :“ Fi
+Ş Fj and θEpτq be the angle between faces Fi and
+Fj. Deﬁne a quantity
+ωEpτq :“
+1
+dpd ´ 1q
+ˇˇκEpτq
+ˇˇ cot θEpτq.
+(6.7)
+eqn:OET
+We then have the following result; see [57] for details.
+prop:M-matrix
+Proposition 6.1 (Condition for M-matrix). The stiﬀness matrix for the Poisson’s equation is
+an M-matrix if and only if, for any edge E, ř
+τĄE ωEpτq ě 0 with ωEpτq deﬁned in (6.7).
+Remark 6.2 (Delaunay triangulation and M-matrix). In R2, the above proposition simply
+means the sum of the angle opposite to any edge is less than or equal to π, which means the
+underlying triangulation must be Delaunay. Hence the stiﬀness matrix for the Poisson’s equation
+is an M-matrix if the triangulation is Delaunay. And the condition is almost sharp2.
+For a given mesh Mh, the stiﬀness matrix of P1-ﬁnite element method for the Poisson’s
+equation is not necessarily an M-matrix. However, it can be estimated by an M-matrix. More
+2The opposite direction is true with a few possible exceptions near the boundary
+
+
+===== PDF PAGE 125 =====
+CHAPTER 6. MULTIGRID METHODS
+123
+xi
+xj
+E
+Fi
+Fj
+θE
+κE
+Figure 6.5: Deﬁnition of θE and κE in a simplex in 3D.
+fig:simplex
+speciﬁcally, if we keep all the vertices of Mh and swap internal edges, we can obtain a Delaunay
+triangulation MD
+h . We have
+`
+AMD
+h v, v
+˘
+ď
+`
+AMhv, v
+˘
+,
+@ v P RN;
+moreover, the equality in the above inequality holds if and only if Mh is Delaunay. We refer
+the interested readers to [50] for details.
+Let φMh P Vh is a piecewise linear function and
+φMhpxq “ řN
+i“1 viφi,Mhpxq. Then we have
+ˇˇφMD
+h
+ˇˇ2
+1 ď
+ˇˇφMh
+ˇˇ2
+1,
+@ v P RN.
+This means the Delaunay triangulation results in lower roughness of ﬁnite element functions
+among all possible triangulations on a ﬁxed set of vertices.
+Algebraic smooth error
+Based on the two-level convergence theory discussed in §3.4 (Theorem 3.5, in particular), we
+have the following result: For a given smoother S, the best coarse space V opt
+c
+of dimension Nc
+is given by
+V opt
+c
+“ spantφkuNc
+k“1,
+(6.8)
+eqn:optVH
+where tφkuNc
+k“1 are the eigenfunctions corresponding to the smallest eigenvalues λkpSAq. How-
+ever, it is diﬃcult to ﬁnd small eigenvalues of SA in practice.
+Hence it is important to give a practical characterization of the smooth error.
+A good
+interpretation of smooth error in algebraic sense could lead to an eﬃcient AMG method. In
+view of (3.24), we know that the standard point-wise relaxation methods, like the Richardson,
+weighted Jacobi, and Gauss–Seidel methods, satisfy that
+ρ´1
+A
+`
+v, v
+˘
+A À
+`
+SAv, v
+˘
+A ď ω1
+`
+v, v
+˘
+A.
+
+
+===== PDF PAGE 126 =====
+CHAPTER 6. MULTIGRID METHODS
+124
+And Theorem 3.5 indicates the lower end of the spectrum of SA are low frequencies.
+This
+motives the following deﬁnition of the algebraic smooth vector:
+Deﬁnition 6.1 (Algebraic smoothness). Let ε P p0, 1q be a small parameter. If v P V satisﬁes
+`
+SAv, v
+˘
+A ď ε2`
+v, v
+˘
+A,
+then v is called algebraically ε-smooth.
+Since S is SPD, the algebraically smooth vectors satisfy
+››v
+››2
+A “
+`
+SAv, S
+´1v
+˘
+ď
+`
+SAv, Av
+˘1{2 `
+S
+´1v, v
+˘1{2 ď ε
+`
+S
+´1v, v
+˘1{2››v
+››
+A.
+Then we can derive an estimate
+››v
+››
+A ď ε
+››v
+››
+S´1,
+(6.9)
+eqn:algsmooth
+which can be also viewed as an alternative characterisation of algebraically smooth vectors. By
+adding and subtraction and (2.10), we have
+´`
+I ´ SA
+˘
+v, v
+¯
+A ě p1 ´ ε2q
+`
+v, v
+˘
+A
+ùñ
+››pI ´ SAqv
+››2
+A
+››v
+››2
+A
+ě 1 ´ ε2.
+Apparently, the contraction factor for this vector v is close 1 if ε is small. Basically, this means
+the algebraically smooth error components are those which the smoother cannot damp eﬃciently;
+that is to say, an error not eliminated by the smoother is a smooth error; see Remark 1.8 for
+geometric smooth error.
+Remark 6.3 (Local adaptation of AMG). In AMG methods, it is not important whether S
+smooths the error in any geometric sense or not. On the contrary, the key point is that the error
+after smoothing sweeps can be characterized algebraically to a degree which makes it possible
+to construct coarse levels and deﬁne interpolations which are locally adapted to the properties
+of the given smoother.
+Remark 6.4 (Smooth error and the Classical AMG). A simple characterization of smooth error
+is used in methods like the Classical AMG. If e corresponds to the low-end of eigenvalues, then
+we have Ae ! 1. According to (6.5), this is equivalent to say that
+pAe, eq “
+ÿ
+iăj
+´ai,jpei ´ ejq2 ! 1.
+(6.10)
+eqn:CAMG-smoot
+This inequality provides an important motivation for the Classical AMG: Smooth error varies
+slowly in the direction of relatively large (negative) coeﬃcients of the matrix.
+
+
+===== PDF PAGE 127 =====
+CHAPTER 6. MULTIGRID METHODS
+125
+Construction of coarse spaces
+From Theorem 3.3, the convergence rate of the two-grid method depends on eﬀectiveness of the
+smoother S and approximability of the coarse space rangepPq. Now we discuss a few guidelines
+on how to construct coarse spaces and prolongation matrices.
+In §6.1, we discussed a general procedure of multigrid setup phase. The coarsening algorithms
+are methods for determining the coarse level variables. Such algorithms are usually based on
+selecting or combining vertices in the adjacency graph corresponding to the (ﬁltered) coeﬃcient
+matrix A. We shall discuss concrete examples of coarsening algorithms in the following sections.
+Now we present two assumptions on the coarse space Vc and prolongation P.
+A natural choice of the coarse DOFs is to use a subset of ﬁne-grid DOFs. Under proper
+re-ordering (coarse variables ﬁrst and then ﬁne variables) R “ pI, 0q P RNcˆN. According to
+Theorem 3.4, we can use the diagonal matrix D P RNˆN of A (i.e., the Jacobi method) to analyze
+the smoother S deﬁned by the point-wise Gauss–Seidel method. Motivated by Lemma 3.4, we
+can further simplify it and just choose D :“ }A}0I, for example. This result motivates that we
+should construct a coarse space, such that
+››v ´ QDv
+››2
+D “ inf
+vcPVc
+››v ´ vc
+››2
+D ď C
+››v
+››2
+A,
+@ v P V,
+where the constant C should be small and uniform with respect to interested parameters like h.
+This condition is a suﬃcient condition for the convergence of the two-grid method.
+asmp2
+Assumption 6.1 (Weak approximability).
+››pI ´ PRqv
+››
+D ď α}v}A, @ v P V.
+The matrix PR can be viewed as an approximation of QD “ PpP T DPq´1P T D “: PR˚.
+Heuristically, the numerical error becomes quite smooth after a few relaxation steps and we
+can expect the coarse-grid space can approximate v rather accurately if the coarse-grid space is
+appropriately chosen. Motivated by Theorem 3.3, we have Assumption 6.1, which is equivalent
+to that Vc reproduces local constant. This condition is equivalent to that Vc has locally supported
+basis and Assumption 6.2. If v is smooth, i.e., }∇v} is small, then v can be approximated well
+in the coarse space Vc.
+In view of Remark 3.16, we assume that the prolongation operator preserves the constant
+(Assumption 6.2). In fact, from the weak approximation property (Assumption 6.1) and let
+D :“ }A}I, we have
+}A}1{2››v ´ PR v
+›› ď α}v}A.
+If v is in the near-null space of A, i.e., }v}A « 0, then PR v « v. Hence we get the following
+simpliﬁed assumption:
+asmp1
+Assumption 6.2 (Constant preserving). P1Nc “ 1N.
+
+
+===== PDF PAGE 128 =====
+CHAPTER 6. MULTIGRID METHODS
+126
+m:OpComplexity
+Remark 6.5 (Operator complexity). When constructing the prolongation P, we must control
+the sparsity of the coarse level matrices. For eﬃcient overall performance, convergence speed
+is only one aspect.
+An equally important aspect is the complexity (sparsity) of the coarser
+level matrices produced by AMG. We now deﬁne a measurement of sparsity, i.e., the operator
+complexity
+CA :“
+řL
+l“0 nnzpAlq
+nnzpAq
+,
+where nnzp¨q is the number of nonzeros of a matrix. Apparently, CA ě 1 is always true and
+CA “ 1 corresponds to the one-level methods. During constructing the interpolation operator,
+we would like to make CA as close to 1 as possible while keeping good convergence performance.
+6.4
+Classical algebraic multigrid methods
+The original AMG [19] idea (the classical AMG) was developed under the assumption that such
+a problem with A being an M-matrix was solved. The multilevel hierarchy is constructed based
+on the coeﬃcient matrix only. Later, the AMG algorithm was further generalized using many
+heuristics that served to extend its applicability to more general problems. For simplicity, we
+suppose A “ pai,jq P RNˆN be a SPD M-matrix and G “ pV, Eq be its corresponding graph.
+Strength of connections
+In coarsening, we need to ﬁnd coarse level variables. This is usually done based on heuristics
+from properties of M-matrices in AMG methods. Let θstr P p0, 1q be a given real number, usually
+called relative strength parameter. If a pair of indices pi, jq satisﬁes that
+´ai,j ě θstr
+ˇˇ min
+k
+ai,k
+ˇˇ,
+then this pair is called strongly negatively-coupled. Note that, by this deﬁnition, pi, jq and pj, iq
+are two diﬀerent pairs by this deﬁnition. Of course, there are many diﬀerent ways to deﬁne
+strongly coupled pairs. For example, we can call i and j strongly negatively- coupled,
+if ai,j ă 0 and |ai,j| ą θstr?ai,iaj,j.
+We can easily generalize the concept by considering the positive coupling by removing “nega-
+tively”.
+Denote further
+Si :“
+␣
+j P Ni : j strongly coupled to i
+(
+and
+ST
+i :“
+␣
+j P V : i P Sj
+(
+.
+
+
+===== PDF PAGE 129 =====
+CHAPTER 6. MULTIGRID METHODS
+127
+So Si is the set of indices which aﬀects i and ST
+i is the ones which are aﬀected by i. After ﬁnding
+the strongly coupled variables, we can ﬁlter the coeﬃcient matrix and obtain AS by removing
+non-strongly coupled connections.
+The above deﬁnition strongly coupled variables applies to the direct connections. Sometimes
+we also need to consider long-range connections; for example, in aggressive coarsening. A variable
+i is said strongly connected to another variable j along a path of length l if there exists a sequence
+of edges
+␣
+pi, j1q, pj1, j2q, . . . , pjl´2, jl´1q, pjl´1, jq
+(
+Ď E such that jk`1 P Sjk. If there exist at
+least one path of length less than or equal to l such that i strongly connects to j, then we say
+that i is l-strongly connects to j and denoted by j P Sl
+i.
+We note that, based on the nonzero pattern of the original matrix Al or a ﬁltered ma-
+trix Al
+S, one can tell whether there are paths between i and j of length l or not.
+For ex-
+ample, if we consider ﬁve-point stencil ﬁnite diﬀerence scheme on the mesh given in Fig-
+ure 6.6 (left). Consider the vertex at the center, the point 13. Then S13 “ t12, 8, 14, 18u and
+S2
+13 “ t12, 8, 14, 18, 11, 3, 15, 23, 7, 17, 9, 19u. And we give the weights of A and A2 in Figure 6.6.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+4
+-1
+-1
+-1
+-1
+20
+-8
+-8
+-8
+-8
+2
+2
+2
+2
+1
+1
+1
+1
+Figure 6.6: Finite diﬀerence grid (left), strong connections and weights in A of vertex 13 (middle),
+and 2-strong connections and weights in A2 of 13 (right).
+ongconnections
+C/F splitting
+The classical Ruge-St¨uben method is to split the set of vertices V to a sum of two non-intersecting
+sets, the ﬁne variables F and the coarse variables C, such that all the indices in F will be aﬀected
+by some index in C, while C is expected to contain as few entries as possible. Then F will be
+chosen as the set of indices of ﬁner grid nodes, and C will be chosen as the set of indices of coarse
+grid nodes. The indices of nodes are assigned to be coarse or ﬁne successively. Denote by U the
+
+
+===== PDF PAGE 130 =====
+CHAPTER 6. MULTIGRID METHODS
+128
+set of indices of nodes that have not been assigned yet, and we summarize the algorithm in the
+following subroutine:
+Listing 6.2: Classical C/F splitting method
+1
+U Ð V, C Ð Ø, F Ð Ø;
+2
+while U ‰ Ø
+3
+λi Ð 2|ST
+i
+Ş F| ` |ST
+i
+Ş U|, i P U;
+4
+k Ð arg maxtλi, i P Uu;
+5
+C Ð C Ťtku, U Ð Uztku;
+6
+F Ð F Ť ST
+k , U Ð UzST
+k ;
+7
+end
+Note that λi is a measure of importance—It is a measurement about how many points are
+aﬀected by i. If λi is big, we would like to include this point in C; in this way, we can make C
+contains less points to get bigger coarsening ratio. We weight more on |ST
+i
+Ş F| than |ST
+i
+Ş U|
+due to the ﬁrst part is already determined to be on the ﬁne-grid. In the early stage of coarsening
+procedure, F does not contain many points, the above algorithm selects a coarse point with as
+many as neighbors that strongly coupled to it. In the later stage, vertices that strongly coupled
+to many F-variables are preferred to be selected.
+We need to add them as F-variables and
+interpolate indirectly through the F-variables that they are strongly coupled to.
+There are a few special cases which require careful treatment during the C/F splitting pro-
+cedure. We now summarize them in the following remarks:
+Remark 6.6 (Isolated points). Before we start the above algorithm, we need to ﬁlter out those
+isolated points (like the Dirichlet boundary points) and deﬁne them as F-variables. Similarly,
+if a point has very strong diagonal dominance, we should also move them to F. These are the
+trivial cases.
+Remark 6.7 (Termination of C/F splitting). If successfully terminated, the set C is an inde-
+pendent set of vertices of the underlying graph G. All F-variables have at least one strongly
+negatively coupled C-variable, except the trivial ones in the previous remark. However, there
+might be some U-variables left (with measure λi “ 0). They are not strongly negatively coupled
+to any C-variables or themselves. Furthermore, there are no F-variables are strongly negatively
+coupled to these points.
+Remark 6.8 (Aggressive coarsening). In practice, the standard C/F splitting scheme given
+above usually results in high operator complexity (refer to Remark 6.5), which leads high com-
+putational and storage demands; see Table 6.1.
+In such cases, we can apply the so-called
+aggressive coarsening by considering strong connections of length l. Oftentimes l “ 2 is used.
+However, A2
+S is expensive to compute and we can apply the regular C/F splitting twice. At
+
+
+===== PDF PAGE 131 =====
+CHAPTER 6. MULTIGRID METHODS
+129
+the ﬁrst pass, ﬁnd C-variables among all variables using AS; at the second pass, apply the C/F
+splitting on C-variables using A2
+S but on C only.
+Coarsening method
+Standard
+Aggressive
+Operator complexity
+2.889
+1.606
+Setup time (sec)
+1.536
+1.036
+Number of iterations
+6
+38
+Solve time (sec)
+0.791
+3.293
+Table 6.1: Solving 2D ﬁve-point stencil ﬁnite diﬀerence of the Poisson’s equation with 1 million
+DOF using diﬀerent coarsening methods (stopping criteria for PCG is the relative residual
+smaller than 10´6).
+tab:coarsening
+Example 6.2 (Anisotropic elliptic PDE). To illustrate the eﬀect of the above C/F splitting
+algorithm, we consider an anisotropic diﬀusion example in §6.1. The computational domain
+is a unit square. Let us consider the anisotropic diﬀusion equation ´ϵuxx ´ uyy “ 0 pϵ ą 0q.
+Roughly speaking, we have ϵ}uxx} « }uyy}. This means the solution is smooth in y-direction
+(low-frequencies); but rough in x direction (high-frequencies). We consider the ﬁve-point stencil.
+The diﬀerence equation at the node pxi, yjq is
+´ϵ2ui,j ´ ui`1,j ´ ui´1,j
+h2x
+´ 2ui,j ´ ui,j´1 ´ ui,j`1
+h2y
+“ 0.
+If
+ϵ
+h2x !
+1
+h2y , then ui,j depends on ui,j`1 and ui,j´1 only. Thus if we process the C/F procedure,
+Figure 6.7: C/F splitting for the 2D elliptic problem with ϵ “ 1 (left) and ϵ ! 1 (right), where
+the red points are C-variables and the black points are F-variables.
+ig:coarsening
+the coarsening will take place indeed in one direction only (semi-coarsening); see Figure 6.7.
+Construction of prolongation
+After obtaining a C/F splitting, upon a reordering or indices, we can always assume the indices
+of the nodes in C is from 1 to Nc, and those in F are from Nc `1 to N. We can write the stiﬀness
+
+
+===== PDF PAGE 132 =====
+CHAPTER 6. MULTIGRID METHODS
+130
+matrix in the following block structure
+˜
+AC,C
+AC,F
+AF,C
+AF,F
+¸ ˜
+uC
+uF
+¸
+“
+˜
+fC
+fF
+¸
+Let eH P RNc correspond to the variable on coarse grid. We now consider how to prolongate
+it to eh P RN corresponding to a variable on ﬁne grid. We use geometric multigrid method for
+linear ﬁnite element method on uniform grids for the 1D Poisson’s equation as an example. Let
+tφh
+i uN
+i“1 be the basis of the ﬁne space V and tφH
+j uNc
+j“1 be the basis of the coarse space Vc. From
+the geometrical multigrid point of view, it is natural to expect
+apφH
+j , φh
+i q “ 0,
+j P C, i P F.
+(6.11)
+eqn:CFconditio
+In fact, the main idea is that the ﬁne-grid (high-frequency) part should be captured by ﬁne
+grid, i.e., apuh ´ ΠHuh, φhq “ apuh, φhq, if φh is a basis function corresponding to the diﬀerence
+between ﬁne and coarse grid functions.
+It is trivial to see that pPeHqj “ eH
+j , if j P C. Deﬁne
+P :“
+˜
+I
+Q
+¸
+,
+where I P RNcˆNc is the identity matrix and Q P RpN´NcqˆNc. In matrix form, (6.11) can be
+written as
+˜
+0
+0
+0
+IF,F
+¸ ˜
+AC,C
+AC,F
+AF,C
+AF,F
+¸ ˜
+IC,C
+Q
+¸
+“ 0.
+That is to say, AF,C ` AF,FQ “ 0 or Q “ ´A´1
+F,FAF,C. It is easy to check that this prolongation
+P “ pI, QqT satisﬁes Assumption 6.2 if the row-sum of A is zero. However this prolongation is
+too expensive to compute in practice and there are many diﬀerent ways to approximate Q by a
+simpler matrix W.
+1) Direct interpolation scheme
+For the error eh P RN, we have
+AF,Feh
+F ` AF,Ceh
+C ! 1
+ùñ
+N
+ÿ
+j“1
+ai,jeh
+j « 0,
+i P F.
+Motived by the above observation, we can assume
+ai,ieh
+i `
+ÿ
+jPNi
+ai,jeh
+j “ 0,
+i P F.
+(6.12)
+eqn:GInterp
+
+
+===== PDF PAGE 133 =====
+CHAPTER 6. MULTIGRID METHODS
+131
+This would be an interpolation scheme itself if all points in Ni are C-variables. Of course, it is
+not always the case. Alternatively, we can throw out the ones that are not strongly negatively
+coupled and obtain
+ai,ieh
+i `
+ÿ
+jPSi
+ai,jeh
+j “ 0,
+i P F.
+(6.13)
+eqn:SInterp
+We approximate the above equation
+ai,ieh
+i ` αi
+ÿ
+jPNi
+Ş C
+ai,jeh
+j “ 0,
+αi “
+ř
+kPNi ai,k
+ř
+kPNi
+Ş C ai,k
+,
+i P F.
+If row-sum of the i-th row is zero, then αi “ ´
+ai,i
+ř
+kPPi ai,k and we get an interpolation method
+eh
+i “
+ÿ
+jPNi
+Ş C
+wi,jeH
+j
+and
+wi,j “
+ai,j
+ř
+kPNi
+Ş C ai,k
+.
+(6.14)
+eqn:direct-int
+In this case, the matrix form is just W “
+`
+diagpAF,C1q
+˘´1AF,C. It is straightforward to show
+that Assumption 6.2 holds in this case.
+We can also make W more sparse by shrinking the support slightly. Deﬁne an interpolation
+set Pi :“ Si
+Ş C for i P F. After further sparsifying the interpolation (by keeping the strongly
+negatively coupled C-variables only), we get
+ai,ieh
+i ` αi
+ÿ
+jPPi
+ai,jeh
+j “ 0,
+αi “
+ř
+kPNi ai,k
+ř
+kPPi ai,k
+,
+@ i P F.
+If row-sum of the i-th row is zero, then this gives the well-known direct interpolation
+eh
+i “
+ÿ
+jPPi
+wi,jeH
+j
+and
+wi,j “
+ai,j
+ř
+kPPi ai,k
+.
+(6.15)
+eqn:direct-int
+2) Standard interpolation scheme
+We ﬁrst eliminate all eh
+j for j P Si
+Ş F by
+eh
+j :“ ´
+ÿ
+kPNj
+aj,keh
+k{aj,j.
+This results in
+ˆai,ieh
+i `
+ÿ
+jPˆNi
+ˆai,jeh
+j “ 0,
+@ i P F,
+with ˆNi “ tj ‰ i : ˆai,j ‰ 0u and deﬁne a new interpolation set ˆPi “ pŤ
+jPSi
+Ş F Sjq Ť Si
+Ş C.
+Then we apply the above direct interpolation for this new equation and arrive at the so-called
+standard interpolation scheme.
+
+
+===== PDF PAGE 134 =====
+CHAPTER 6. MULTIGRID METHODS
+132
+3) Jacobi interpolation scheme
+We can rewrite the equation (6.13) as
+ai,ieh
+i `
+ÿ
+jPPi
+ai,jeH
+j `
+ÿ
+jPSizPi
+ai,jeh
+j “ 0,
+i P F.
+Therefore, in order to obtain an interpolation matrix Q, we just need to approximately solve
+the above equations for eh
+i pi P Fq. For example, we can just apply one Jacobi iteration using
+eh
+j «
+ř
+kPPi ai,keh
+k
+ř
+kPPi ai,k
+as the initial guess of, j ě Nc ` 1, j ‰ i. Then the prolongation can be deﬁned
+as
+$
+’
+&
+’
+%
+eh
+i “ eH
+i ,
+i P C
+ai,ieh
+i ` ř
+jPPi ai,jeh
+j ` ř
+jPSizPi ai,j
+ř
+kPPi ai,keh
+k
+ř
+kPPi ai,k
+“ 0,
+i P F.
+(6.16)
+intprol
+This is the so-called Jacobi interpolation method.
+Remark 6.9 (Some simple alternatives). The biggest advantage of the above approach is that
+it is simple and local: For the i-th entry, we only need the information on the i-th row of the
+matrix. We can improve this prolongation matrix P using some straightforward modiﬁcations.
+A few more steps of Jacobi iteration might improve the accuracy. Moreover, the initial guess
+for the same entry is not the same at the relaxations for diﬀerent entries. For example, an
+alternative initial guess could be
+eh
+j «
+ř
+kPPj aj,keh
+k
+ř
+kPPj aj,k
+,
+j P F.
+Remark 6.10 (Initial guess of W). If the initial guess W p0q preserves constants, then we get
+Q ´ W pkq “
+´
+I ´ D´1
+F,FAF,F
+¯k`
+Q ´ W p0q˘
+.
+Since both Q and W p0q preserves constants, all improved weights W pkq also preserve constants.
+6.5
+Aggregation-based algebraic multigrid methods
+In this section, we consider the aggregation-base AMG methods whose easy-to-implement feature
+has drawn quite some attention recently. The idea is to sub-divide the set of vertices into non-
+intersecting sets (aggregates), i.e., V “ Ť
+j“1,...,Nc Cj. Each aggregate Cj corresponds to a coarser
+variable.
+
+
+===== PDF PAGE 135 =====
+CHAPTER 6. MULTIGRID METHODS
+133
+Unsmoothed aggregation AMG
+There are several diﬀerent sophisticated ways to form aggregates. In principle, any combinatorial
+graph partitioning algorithms can be applied to form aggregation. We now give a simple greedy
+algorithm to form such an aggregation.
+Listing 6.3: A greedy aggregation method
+1
+Nc Ð 0, U Ð V;
+2
+for i P U
+3
+if Ni Ď U
+4
+Nc Ð Nc ` 1;
+5
+CNc Ð tiu Ť Ni, U Ð UzCNc;
+6
+end
+7
+end
+It is possible to have some “left-over” vertices which do not belong to any aggregate after the
+above procedure. We can, for example, add them to their neighboring aggregates with least
+points.
+C1
+C2
+C3
+C4
+1
+2
+3
+4
+5
+6
+7
+Figure 6.8: Aggregates and prolongation corresponding to (6.17).
+ig:aggregates
+Whence an aggregation is given, it is easy to deﬁne the prolongation matrix, for 1 ď i ď N
+and 1 ď j ď Nc, by
+`
+P
+˘
+i,j “
+#
+1,
+if i P Cj;
+0,
+if i R Cj.
+With this interpolation, it is straight-forward to see that P1Nc “ 1N. We now give an example
+
+
+===== PDF PAGE 136 =====
+CHAPTER 6. MULTIGRID METHODS
+134
+to explain P in one dimension. Let
+P “
+¨
+˚
+˚
+˚
+˚
+˚
+˚
+˚
+˚
+˚
+˚
+˚
+˚
+˚
+˝
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+1
+0
+0
+0
+1
+0
+0
+0
+1
+0
+0
+0
+0
+1
+0
+0
+0
+1
+˛
+‹‹‹‹‹‹‹‹‹‹‹‹‹‚
+P RNˆNc.
+(6.17)
+eqP
+Figure 6.8 shows the aggregation deﬁned by prolongation P in (6.17).
+Of course, there are diﬀerent ways to form aggregates and we now give another approach.
+The algorithm to construct coarse grid and prolongation is
+Listing 6.4: Another aggregation method
+1
+U Ð V;
+2
+for i P U
+3
+Si Ð tj P U : j is strongly coupled with iu;
+4
+construct a column of prolongation P
+based on Si;
+5
+U Ð Uz
+`
+tiu Ť Si
+˘
+;
+6
+end
+Smoothed aggregation AMG
+The unsmoothed aggregation methods are very simple but usually converge slowly. There are
+two ways to improve their convergence behavior. One way is to employ a more complicated
+nested iteration, like the K-cycle multigrid method discussed in §6.2. And the other way is
+to enlarge the aggregates and smooth out the basis functions. The latter approach gives the
+smoothed aggregation AMG methods.
+Assume that all variables are partitioned into non-overlapping subsets
+␣
+Ci
+(Nc
+i“1. We further
+assume that each Ci has at least one interior point, i.e., there exists an index ki P Ci such that
+`
+A
+˘
+ki,j “ 0 for any j R Ci. Suppose that 1 is in the null space of A, namely, A1 “ 0. Deﬁne
+1ipxjq :“
+#
+1pxjq,
+if j P Ci;
+0,
+otherwise.
+Apparently, ř
+i 1i “ 1 and
+`
+A1i
+˘
+ki “ 0. We now smooth out these piecewise basis functions by,
+for example, one step of weighted Jacobi iteration
+ψi “ pI ´ ωD´1Aq 1i.
+
+
+===== PDF PAGE 137 =====
+CHAPTER 6. MULTIGRID METHODS
+135
+Hence we have the partition of unity
+ÿ
+i
+ψi “ pI ´ ωD´1Aq
+ÿ
+i
+1i “ pI ´ ωD´1Aq 1 “ 1.
+Thus we can obtain
+1pxkiq “
+ÿ
+j
+ψjpxkiq “
+ÿ
+j
+pI ´ ωD´1Aq 1ipxkiq “ 1ipxkiq ´ ωD´1A 1ipxkiq,
+which implies that D´1A 1ipxkiq “ 0 and ψipxkiq “ 1. We can deﬁne the prolongation
+PSA :“
+`
+ψ1, ψ2, . . . , ψNc
+˘
+.
+Deﬁne 1c :“ p1, . . . , 1qT P RNc. Hence we have PSA1c “ 1. Furthermore, the coarse level matrix
+Ac “ P T
+SAAPSA satisﬁes that
+Ac1c “ P T
+SAA
+ÿ
+i
+ψi “ P T
+SAA1 “ 0.
+By applying this deﬁnition recursively, we can ﬁnish the AMG setup for the smoothed aggrega-
+tion method.
+Listing 6.5: Smoothed aggregation method
+1
+U Ð V;
+2
+for i P U
+3
+Si Ð tj P U : j is strongly coupled with iu;
+4
+construct a column of prolongation P
+based on Si;
+5
+U Ð Uz
+`
+tiu Ť Si
+˘
+;
+6
+end
+7
+Smooth the basis functions using the weighted Jacobi method PSA “ pI ´ ωD´1AqP;
+We have mentioned in the previous subsection that there are diﬀerent ways to form aggre-
+gates. After forming aggregates one can apply UA or SA to give prolongation. Now we do
+preliminary tests on aggregation methods for solving the 2D Poisson’s equation using the ﬁve-
+point stencil; see Table 6.2. The AMG methods are applied as preconditioners of PCG. Note
+that, for the SA method, we use the standard V-cycle multigrid in the solve phase; on the other
+hand, for the UA methods, we use the K-cycle multigrid.
+6.6
+Homework problems
+prob:GMGconv
+HW 6.1. Show the geometric multigrid V-cycle (Algorithm 6.1) is uniformly convergent in Rd.
+ob:interp-proj
+HW 6.2. If A “ ´∆, show that the interpolant Jl : V ÞÑ Vl is equal to the p¨, ¨qA-projection
+Πl : V ÞÑ Vl.

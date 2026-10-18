@@ -11,7 +11,14 @@ import { numericalInverseChecks } from './finite-smoke-numerical-inverse.mjs';
 import { numericalControlChecks, numericalMultirateChecks, numericalSensitivityChecks } from './finite-smoke-numerical-control-multirate-sensitivity.mjs';
 import { numericalParticlesChecks } from './finite-smoke-numerical-particles.mjs';
 
+import { numericalFrontierSpecialChecks } from './finite-smoke-numerical-frontier71-special.mjs';
+import { numericalFrontierGeometryChecks } from './finite-smoke-numerical-frontier71-geometry.mjs';
+import { numericalFrontierParticleChecks } from './finite-smoke-numerical-frontier71-particle.mjs';
+
 const families = [
+  ['numericalFrontierSpecialChecks', numericalFrontierSpecialChecks],
+  ['numericalFrontierGeometryChecks', numericalFrontierGeometryChecks],
+  ['numericalFrontierParticleChecks', numericalFrontierParticleChecks],
   ['numericalRosenbrockChecks', numericalRosenbrockChecks],
   ['numericalPolynomialQuadratureChecks', numericalPolynomialQuadratureChecks],
   ['numericalQuasiNewtonChecks', numericalQuasiNewtonChecks],

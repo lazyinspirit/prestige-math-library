@@ -1,0 +1,522 @@
+[
+  {
+    "order": 2686,
+    "id": "phase-field-and-energy-dissipative-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Phase-field and dissipative gradient-flow computation",
+    "companion": "phase-field-and-energy-dissipative-discretization-examples",
+    "requires": [
+      "finite-volume-diffusion-and-mimetic-fluxes",
+      "imex-and-operator-splitting-methods",
+      "nonlinear-parabolic-compactness-and-monotone-evolution"
+    ],
+    "items": [
+      {
+        "id": "def-phase-field-gradient-flow-and-double-well",
+        "kind": "definition",
+        "title": "Allen–Cahn and Cahn–Hilliard double-well gradient flows",
+        "statement": "Allen–Cahn and Cahn–Hilliard gradient flows with quartic double-well energy, no-flux boundary conditions, finite-energy initial data, and explicit dimension caveats.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-sobolev-extension-domain-and-extension-operator",
+          "thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n",
+          "thm-critical-sobolev-embedding-into-every-finite-lq",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen and Xiaofeng Yang, Numerical approximations of Allen-Cahn and Cahn-Hilliard equations, Discrete and Continuous Dynamical Systems A 28 (2010), 1669–1691",
+              "url": "https://www.math.purdue.edu/~shen7/pub/ac_ch.pdf",
+              "locator": "§1, equations (1.1)–(1.5), PDF pp. 1–2: the two no-flux models, their common energy, and their L2 and H−1 gradient-flow identities."
+            },
+            {
+              "title": "Jie Shen, Jie Xu, and Jiang Yang, The scalar auxiliary variable (SAV) approach for gradient flows, Journal of Computational Physics 353 (2018), 407–416",
+              "url": "https://www.math.purdue.edu/~shen7/pub/SXY17.pdf",
+              "locator": "§1, equations (1.1)–(1.3), PDF pp. 1–2: the H−1 Cahn–Hilliard gradient flow and energy dissipation identity."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_base": "The core definitions do not use a choice axiom. Assume the Axiom of Choice only when invoking the cited d=2 or d=3 Sobolev embedding consequences, whose suppliers declare that hypothesis."
+      },
+      {
+        "id": "def-phase-field-discrete-realizations",
+        "kind": "definition",
+        "title": "No-flux finite-volume and conforming realizations for phase fields",
+        "statement": "The **no-flux finite-volume realization** starts from a finite connected cell-face mesh as in [[def-fv-admissible-cell-face-mesh]] and uses the interior-face orthogonality and positive transmissibilities of [[def-tpfa-harmonic-face-scheme]]. For unit diffusivity, let $X_h=\\mathbb R^{\\mathcal K}$, $m_h(u,v)=\\sum_{K\\in\\mathcal K}|K|u_Kv_K$, and\n$$a_h(u,v)=\\sum_{F=K|L\\in\\mathcal F_{\\rm int}}T_F(u_K-u_L)(v_K-v_L).$$\nThere is no boundary-face term: the flux through each physical boundary face is prescribed to be zero. Define $A_h:X_h\\to X_h$ by $m_h(A_hu,v)=a_h(u,v)$ for all $v\\in X_h$. Split the double-well density as\n$$F_\\varepsilon=F_c-F_e,\\qquad F_c(s)=\\frac{s^4}{4\\varepsilon^2}+\\frac{s^2}{2\\varepsilon^2},\\qquad F_e(s)=\\frac{s^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}.$$\nThe associated finite-volume energy components are\n$$E_{c,h}(u)=\\sum_K|K|\\left(\\frac{u_K^4}{4\\varepsilon^2}+\\frac{u_K^2}{2\\varepsilon^2}\\right),\\qquad E_{e,h}(u)=\\sum_K|K|\\left(\\frac{u_K^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}\\right).$$\n\nFor convergence on $\\Omega=(0,L)$, a second realization uses the same orthogonal dual mesh with centers $x_i=(i-\\tfrac12)h$, $h=L/N$. Its conforming space $V_h$ consists of functions affine between consecutive centers and constant on the two half-cells between a boundary and the nearest center. Its inner product is the exact $L^2(0,L)$ inner product, its stiffness is $a_h(v,w)=\\int_0^L v'w'\\,dx$, and its energy components are $E_{c,h}(v)=\\int_0^L F_c(v)\\,dx$ and $E_{e,h}(v)=\\int_0^L F_e(v)\\,dx$. Define $A_h:V_h\\to V_h$ by $(A_hv,w)_{L^2}=a_h(v,w)$. For degrees of freedom $v_i=v(x_i)$, this stiffness is exactly the interior two-point flux form $\\sum_{i=1}^{N-1}(v_{i+1}-v_i)(w_{i+1}-w_i)/h$; the exact mass and potential integrals are the conforming reconstruction used in the convergence theorem.\n\nBoth realizations have a constant function $\\mathbf1$, a real finite-dimensional inner-product space, and a self-adjoint nonnegative operator $A_h$. They share the physical energy $E_h(u)=\\frac\\kappa2m_h(A_hu,u)+E_{c,h}(u)-E_{e,h}(u)$, with the appropriate inner product and energy components for the realization. The sign convention is $A_h\\approx-\\Delta$.\n\n```tikz\n\\begin{tikzpicture}[x=1.2cm,y=1cm]\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0.5,1.5,2.5,3.5} {\n    \\fill (\\x,0) circle (2pt);\n  }\n  \\node[above] at (0.5,0.05) {$K_1$};\n  \\node[above] at (1.5,0.05) {$K_2$};\n  \\node[above] at (2.5,0.05) {$K_3$};\n  \\node[above] at (3.5,0.05) {$K_4$};\n  \\foreach \\x in {1,2,3} {\n    \\draw[dashed] (\\x,-0.2) -- (\\x,0.2);\n    \\draw[->,blue] (\\x-0.28,-0.42) -- (\\x+0.28,-0.42);\n    \\node[below] at (\\x,-0.42) {$Q_F$};\n  }\n  \\draw[red] (0,-0.23) -- (0,0.23);\n  \\draw[red] (4,-0.23) -- (4,0.23);\n  \\node[below] at (0,-0.23) {$Q=0$};\n  \\node[below] at (4,-0.23) {$Q=0$};\n\\end{tikzpicture}\n```\n\nThe diagram labels four adjacent cell values, three shared interior fluxes, and the prescribed zero boundary fluxes. Each interior flux appears with opposite signs in its two cell balances. The diagram records the convention only; it is not used as a proof.",
+        "deps": [
+          "def-phase-field-gradient-flow-and-double-well",
+          "def-fv-admissible-cell-face-mesh",
+          "def-tpfa-harmonic-face-scheme"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, Definition 9.1 and equations (9.17)–(9.23), printed pp. 35–42, for orthogonal cell-centred transmissibilities and conservative face fluxes; Chapter 10 §§10.1–10.2, printed pp. 63–68, for the pure-diffusion Neumann scheme, mean-zero gauge, and connected-cell kernel."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§2, equations (2.1)–(2.7), PDF pp. 8–10, for orthogonality, the two-point flux, the discrete energy, and the fact that the Dirichlet boundary term belongs only to the Dirichlet branch."
+            },
+            {
+              "title": "Jie Shen and Xiaofeng Yang, Numerical approximations of Allen-Cahn and Cahn-Hilliard equations, Discrete and Continuous Dynamical Systems A 28 (2010), 1669–1691",
+              "url": "https://www.math.purdue.edu/~shen7/pub/ac_ch.pdf",
+              "locator": "§3.1, mixed Cahn–Hilliard formulation (3.1), printed p. 1681 / PDF p. 12: the two second-order weak equations and homogeneous Neumann conventions."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-phase-field-neumann-laplacian-kernel-and-gauge",
+        "kind": "lemma",
+        "title": "Kernel, range, and mean-zero inverse for the no-flux Laplacian",
+        "statement": "Self-adjointness, nonnegativity, constant kernel, mean-zero range and inverse, and a fixed-mesh Poincare bound for both connected no-flux realizations.",
+        "deps": [
+          "def-phase-field-discrete-realizations",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Use the symmetric energy form and connectedness to identify the kernel; use rank-nullity for the range and inverse; minimize the positive Rayleigh quotient on the mean-zero sphere for the mesh-dependent bound.",
+        "axiom_base": "No choice axiom is used; all spaces are finite-dimensional.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 10, §§10.1–10.2, printed pp. 63–68: the Neumann finite-volume scheme, compatibility, constant kernel, and mean-zero gauge."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§2.1, equations (2.6)–(2.7), PDF pp. 9–10, for the symmetric graph energy and the distinction between interior and boundary terms."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-phase-field-interval-p1-projector-stability",
+        "kind": "lemma",
+        "title": "Uniform interval stability of the phase-field L2 projector",
+        "statement": "Uniform H1 stability, L2 approximation, strong H1 convergence for every H1 input, and strong L2 convergence for every L2 input of the interval L2 projector.",
+        "deps": [
+          "def-phase-field-discrete-realizations",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "lem-classical-derivatives-are-weak-derivatives"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Derive interpolation error and an inverse estimate, combine them with L2 contraction for uniform H1 stability, prove smooth H1 approximation, and extend by density to every H1 function.",
+        "axiom_base": "Assume the Axiom of Choice through the supplier providing the unique absolutely-continuous representative of each one-dimensional H1 class, so nodal interpolation is well-defined; its Countable Choice consequence also supplies smooth L2 approximants for the density argument.",
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, complete lecture notes, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 12 §§12.1–12.2, PDF pp. 102–105: conforming spatial subspaces, the L2 projector, and projector stability hypotheses in parabolic discretization."
+            },
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, printed pp. 35–42: the one-dimensional orthogonal dual mesh and its center-to-center transmissibilities."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-phase-field-stabilized-semi-implicit-variant",
+        "kind": "definition",
+        "title": "Stabilized semi-implicit phase-field step",
+        "statement": "Alternative stabilized semi-implicit AC and CH updates with no stability, physical energy, maximum-principle, or error claim.",
+        "deps": [
+          "def-phase-field-gradient-flow-and-double-well",
+          "def-phase-field-discrete-realizations"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen and Xiaofeng Yang, Numerical approximations of Allen-Cahn and Cahn-Hilliard equations, Discrete and Continuous Dynamical Systems A 28 (2010), 1669–1691",
+              "url": "https://www.math.purdue.edu/~shen7/pub/ac_ch.pdf",
+              "locator": "§2.1.1, equation (2.6), PDF pp. 3–4, for stabilized Allen–Cahn; §3.1.1, equation (3.7), PDF pp. 12–13, for stabilized Cahn–Hilliard. Their stability statements require the hypotheses stated there and are not imported here."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-phase-field-sav-cahn-hilliard-step",
+        "kind": "algorithm",
+        "title": "First-order scalar-auxiliary-variable Cahn–Hilliard step",
+        "statement": "First-order Cahn–Hilliard SAV linear system with an independently evolving auxiliary scalar.",
+        "deps": [
+          "def-phase-field-gradient-flow-and-double-well",
+          "def-phase-field-discrete-realizations"
+        ],
+        "justified_by": [
+          "thm-phase-field-sav-modified-energy-law"
+        ],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen, Jie Xu, and Jiang Yang, The scalar auxiliary variable (SAV) approach for gradient flows, Journal of Computational Physics 353 (2018), 407–416",
+              "url": "https://www.math.purdue.edu/~shen7/pub/SXY17.pdf",
+              "locator": "§3, equations (3.1)–(3.2), PDF pp. 5–6, for the SAV reformulation and modified energy; §4, equations (4.2)–(4.5), PDF pp. 8–10, for the Cahn–Hilliard SAV system and its discrete energy law."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-phase-field-convex-splitting-backward-euler",
+        "kind": "algorithm",
+        "title": "Backward-Euler convex splitting for Allen–Cahn and Cahn–Hilliard",
+        "statement": "Finite-dimensional backward-Euler convex-splitting minimization steps for AC and CH.",
+        "deps": [
+          "def-phase-field-gradient-flow-and-double-well",
+          "def-phase-field-discrete-realizations",
+          "lem-phase-field-neumann-laplacian-kernel-and-gauge"
+        ],
+        "justified_by": [
+          "thm-phase-field-convex-splitting-step-existence-and-energy"
+        ],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen, Jie Xu, and Jiang Yang, The scalar auxiliary variable (SAV) approach for gradient flows, Journal of Computational Physics 353 (2018), 407–416",
+              "url": "https://www.math.purdue.edu/~shen7/pub/SXY17.pdf",
+              "locator": "§2.1, equations (2.1)–(2.2), PDF pp. 2–3: the first-order convex-splitting recurrence and its discrete energy inequality."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-phase-field-sav-modified-energy-law",
+        "kind": "theorem",
+        "title": "The SAV step is uniquely solvable and dissipates a modified energy",
+        "statement": "Unique solvability and exact modified-energy dissipation identity for the backward-Euler SAV CH step.",
+        "deps": [
+          "alg-phase-field-sav-cahn-hilliard-step",
+          "lem-phase-field-neumann-laplacian-kernel-and-gauge"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Show the homogeneous linear SAV system has trivial kernel, then pair the three update equations to derive conservation and the exact modified-energy identity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen, Jie Xu, and Jiang Yang, The scalar auxiliary variable (SAV) approach for gradient flows, Journal of Computational Physics 353 (2018), 407–416",
+              "url": "https://www.math.purdue.edu/~shen7/pub/SXY17.pdf",
+              "locator": "§3, equation (3.2) and Theorem 3.1, PDF pp. 5–6, for SAV modified-energy dissipation; §4, PDF pp. 8–10, for the Cahn–Hilliard specialization. The local proof below supplies the backward-Euler identity."
+            },
+            {
+              "title": "Jie Shen and Xiaofeng Yang, Numerical approximations of Allen-Cahn and Cahn-Hilliard equations, Discrete and Continuous Dynamical Systems A 28 (2010), 1669–1691",
+              "url": "https://www.math.purdue.edu/~shen7/pub/ac_ch.pdf",
+              "locator": "§3.1, equation (3.1), PDF pp. 12–13: mixed no-flux Cahn–Hilliard formulation and the gradient-energy pairing."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-phase-field-convex-splitting-step-existence-and-energy",
+        "kind": "theorem",
+        "title": "Existence, uniqueness, mass conservation, and energy decay of a convex-splitting step",
+        "statement": "Unique finite-dimensional convex-splitting minimizers, Euler equations, CH mass conservation, and physical discrete-energy decay.",
+        "deps": [
+          "alg-phase-field-convex-splitting-backward-euler",
+          "def-phase-field-discrete-realizations",
+          "lem-phase-field-neumann-laplacian-kernel-and-gauge",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Establish quartic coercivity and convexity, minimize on the full or fixed-mean finite-dimensional domain, derive Euler equations, and apply convexity plus the update identity to obtain energy decay.",
+        "axiom_base": "No choice axiom is used; minimizers are attained in finite-dimensional spaces by coercivity and finite-dimensional compactness.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen, Jie Xu, and Jiang Yang, The scalar auxiliary variable (SAV) approach for gradient flows, Journal of Computational Physics 353 (2018), 407–416",
+              "url": "https://www.math.purdue.edu/~shen7/pub/SXY17.pdf",
+              "locator": "§2.1, equations (2.1)–(2.2), PDF pp. 2–3: the convex-splitting energy inequality and minimization interpretation. The proof below supplies the full argument for the selected discrete realizations."
+            },
+            {
+              "title": "Jing Guo, Cheng Wang, Steven M. Wise, and Xingye Yue, An H2 convergence of a second-order convex-splitting finite difference scheme for the three-dimensional Cahn–Hilliard equation, Communications in Mathematical Sciences 14 (2016), 489–515",
+              "url": "https://www.intlpress.com/site/pub/files/_fulltext/journals/cms/2016/0014/0002/CMS-2016-0014-0002-a008.pdf",
+              "locator": "§1, equation (1.4), PDF pp. 489–490, for the first-order Cahn–Hilliard convex-splitting recurrence; §2.2, Theorems 2.2–2.3, PDF pp. 493–494, for the related strict-convexity and modified-energy route."
+            },
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 10 §§10.1–10.2, printed pp. 63–68, for the Neumann finite-volume mean-zero compatibility and constant-kernel argument."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-phase-field-convex-splitting-ac-ch-time-error",
+        "kind": "theorem",
+        "title": "First-order time error under smooth fixed-mesh solutions",
+        "statement": "First-order fixed-mesh temporal error in L2 for AC and H-1 for CH under smooth semidiscrete trajectories.",
+        "deps": [
+          "def-phase-field-gradient-flow-and-double-well",
+          "def-phase-field-discrete-realizations",
+          "alg-phase-field-convex-splitting-backward-euler",
+          "thm-phase-field-convex-splitting-step-existence-and-energy",
+          "lem-phase-field-neumann-laplacian-kernel-and-gauge"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "strategy": "Bound the backward-Euler residual and use monotonicity and discrete Gronwall in L2 for AC and the mean-zero H-1 inner product for CH.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen and Xiaofeng Yang, Numerical approximations of Allen-Cahn and Cahn-Hilliard equations, Discrete and Continuous Dynamical Systems A 28 (2010), 1669–1691",
+              "url": "https://www.math.purdue.edu/~shen7/pub/ac_ch.pdf",
+              "locator": "§§2.1–2.2 and 3.1–3.2, printed pp. 1672–1688 / PDF pp. 3–19: stability arguments and error estimates under explicit smoothness, truncation, and epsilon-dependent constants. The local theorem below proves the selected backward-Euler split in a fixed finite-dimensional space."
+            },
+            {
+              "title": "Jie Shen, Jie Xu, and Jiang Yang, The scalar auxiliary variable (SAV) approach for gradient flows, Journal of Computational Physics 353 (2018), 407–416",
+              "url": "https://www.math.purdue.edu/~shen7/pub/SXY17.pdf",
+              "locator": "§2.1, equations (2.1)–(2.2), PDF pp. 2–3: first-order convex splitting, used only as a comparison of the same implicit/explicit split."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-phase-field-convex-splitting-mesh-time-convergence",
+        "kind": "theorem",
+        "title": "One-dimensional mesh and time convergence of convex-splitting phase flows",
+        "statement": "One-dimensional subsequential mesh/time convergence to the no-flux weak AC and CH equations at fixed epsilon.",
+        "deps": [
+          "def-phase-field-gradient-flow-and-double-well",
+          "def-phase-field-discrete-realizations",
+          "lem-phase-field-interval-p1-projector-stability",
+          "alg-phase-field-convex-splitting-backward-euler",
+          "thm-phase-field-convex-splitting-step-existence-and-energy",
+          "def-pe12-gelfand-triple",
+          "thm-pe12-discrete-aubin-lions-compactness",
+          "lem-parabolic-weak-compactness-separable-bochner-hilbert",
+          "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-holder-inequality-for-integrals",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "strategy": "Derive uniform energy, chemical-potential, and time-derivative bounds; apply discrete Aubin–Lions and weak compactness; pass projected tests and the quartic nonlinearities to the limit.",
+        "axiom_base": "Assume the Axiom of Choice. It is used by the PE12 discrete Aubin–Lions compactness theorem and by the weak subsequence extraction in the separable Bochner Hilbert supplier; the finite-dimensional step theorem is choice-free.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen and Xiaofeng Yang, Numerical approximations of Allen-Cahn and Cahn-Hilliard equations, Discrete and Continuous Dynamical Systems A 28 (2010), 1669–1691",
+              "url": "https://www.math.purdue.edu/~shen7/pub/ac_ch.pdf",
+              "locator": "§§2.2 and 3.2, printed pp. 1676–1688 / PDF pp. 7–19: conditional smooth-solution error bounds, explicit epsilon dependence, and the role of spatial approximation."
+            },
+            {
+              "title": "Jing Guo, Cheng Wang, Steven M. Wise, and Xingye Yue, An H2 convergence of a second-order convex-splitting finite difference scheme for the three-dimensional Cahn–Hilliard equation, Communications in Mathematical Sciences 14 (2016), 489–515",
+              "url": "https://www.intlpress.com/site/pub/files/_fulltext/journals/cms/2016/0014/0002/CMS-2016-0014-0002-a008.pdf",
+              "locator": "§4, Theorem 4.1 and proof, PDF pp. 22–25 / printed pp. 503–507: convergence only under explicit periodicity, smoothness, and time-step restrictions for that distinct second-order scheme."
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, complete lecture notes, arXiv:1709.08618v2",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 12 §§12.1–12.2, PDF pp. 102–105: conforming spatial subspaces, time-discrete compactness, and the assumptions used in a parabolic finite-element limit."
+            },
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, equations (9.17)–(9.23), printed pp. 40–42: the center-to-center two-point stiffness on the one-dimensional orthogonal dual grid."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2687,
+    "id": "phase-field-and-energy-dissipative-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Phase-field and dissipative gradient-flow computation — Examples",
+    "companion": "phase-field-and-energy-dissipative-discretization",
+    "requires": [
+      "phase-field-and-energy-dissipative-discretization"
+    ],
+    "items": [
+      {
+        "id": "ex-phase-field-allen-cahn-stationary-front",
+        "kind": "example",
+        "title": "The one-dimensional Allen–Cahn double-well front",
+        "statement": "Exact finite-energy tanh heteroclinic solving the one-dimensional stationary AC Euler–Lagrange equation on R.",
+        "deps": [
+          "def-phase-field-gradient-flow-and-double-well"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Differentiate the tanh profile, verify the ODE exactly, and integrate its exponentially decaying energy density.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen and Xiaofeng Yang, Numerical approximations of Allen-Cahn and Cahn-Hilliard equations, Discrete and Continuous Dynamical Systems A 28 (2010), 1669–1691",
+              "url": "https://www.math.purdue.edu/~shen7/pub/ac_ch.pdf",
+              "locator": "§1, equations (1.1)–(1.5), PDF pp. 1–2: the Allen–Cahn Euler–Lagrange equation and double-well model. The heteroclinic profile is verified directly here."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-phase-field-interface-width-and-grid-resolution",
+        "kind": "example",
+        "title": "Interface width and a grid that misses the transition",
+        "statement": "Exact quartic-front transition width and a shifted grid with no samples in that transition.",
+        "deps": [
+          "ex-phase-field-allen-cahn-stationary-front",
+          "def-phase-field-gradient-flow-and-double-well"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Invert the monotone tanh profile at levels ±1/2 and place a uniform grid halfway between sample points.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen and Xiaofeng Yang, Numerical approximations of Allen-Cahn and Cahn-Hilliard equations, Discrete and Continuous Dynamical Systems A 28 (2010), 1669–1691",
+              "url": "https://www.math.purdue.edu/~shen7/pub/ac_ch.pdf",
+              "locator": "§1, printed pp. 1669–1671 / PDF pp. 1–2: the parameter ε represents the interfacial width; the exact profile and sampling calculation are derived here."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-phase-field-sav-modified-energy-not-physical-energy",
+        "kind": "counterexample",
+        "title": "Modified-energy decay alone does not imply physical-energy decay",
+        "statement": "Scalar pairs showing that a decrease in modified energy alone does not logically imply physical-energy decrease.",
+        "deps": [
+          "alg-phase-field-sav-cahn-hilliard-step",
+          "thm-phase-field-sav-modified-energy-law",
+          "def-phase-field-gradient-flow-and-double-well",
+          "def-phase-field-discrete-realizations"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Evaluate both energies on explicitly specified one-cell scalar pairs and compare the signs of their changes.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jie Shen, Jie Xu, and Jiang Yang, The scalar auxiliary variable (SAV) approach for gradient flows, Journal of Computational Physics 353 (2018), 407–416",
+              "url": "https://www.math.purdue.edu/~shen7/pub/SXY17.pdf",
+              "locator": "§3, equation (3.2) and Remark 3.2(iv), PDF pp. 5–6: SAV dissipates a modified energy, while convergence of that modified energy to the exact physical energy needs additional assumptions."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-phase-field-ch-two-cell-energy-ledger",
+        "kind": "example",
+        "title": "A two-cell Cahn–Hilliard mass and energy ledger",
+        "statement": "Exact two-cell no-flux CH step, unique cubic state, conserved mass, and strictly decreasing physical energy.",
+        "deps": [
+          "def-phase-field-discrete-realizations",
+          "thm-phase-field-convex-splitting-step-existence-and-energy"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "strategy": "Reduce the mean-zero two-cell update to one scalar cubic, locate its unique root, and compute both discrete energies exactly.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, Handbook of Numerical Analysis, Vol. VII, 2000; complete updated author text",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 10 §§10.1–10.2, printed pp. 63–68, for the Neumann cell graph, conserved mean, and the mean-zero gauge; the two-cell ledger is computed exactly here."
+            },
+            {
+              "title": "Jing Guo, Cheng Wang, Steven M. Wise, and Xingye Yue, An H2 convergence of a second-order convex-splitting finite difference scheme for the three-dimensional Cahn–Hilliard equation, Communications in Mathematical Sciences 14 (2016), 489–515",
+              "url": "https://www.intlpress.com/site/pub/files/_fulltext/journals/cms/2016/0014/0002/CMS-2016-0014-0002-a008.pdf",
+              "locator": "§1, equation (1.4), PDF pp. 1–2 / printed pp. 489–490: the standard first-order convex-splitting Cahn–Hilliard update."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

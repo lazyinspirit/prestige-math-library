@@ -1,0 +1,1445 @@
+[PDF PAGE 1]
+arXiv:2304.13839v1  [math.NA]  26 Apr 2023
+L2(I; H1(Ω)) AND L2(I; L2(Ω)) BEST APPROXIMATION TYPE ERROR
+ESTIMATES FOR GALERKIN SOLUTIONS OF TRANSIENT
+STOKES PROBLEMS
+DMITRIY LEYKEKHMAN† AND BORIS VEXLER‡
+Abstract. In this paper we establish best approximation type estimates for the fully discrete
+Galerkin solutions of transient Stokes problem in L2(I; L2(Ω)d) and L2(I; H1(Ω)d) norms. These
+estimates ﬁll the gap in the error analysis of the transient Stokes problems and have a number of
+applications. The analysis naturally extends to inhomogeneous parabolic problems. The best type
+L2(I; H1(Ω)) error estimates seems to be new even for scalar parabolic problems.
+Key words. Stokes problem, transient Stokes, parabolic problems, ﬁnite elements, discontinuous
+Galerkin, error estimates, best approximation, fully discrete
+AMS subject classiﬁcations. 65N30,65N15
+1. Introduction. In this paper we consider the following transient Stokes prob-
+lem with no-slip boundary conditions,
+∂t⃗u −∆⃗u + ∇p = ⃗f
+in I × Ω,
+∇· ⃗u = 0
+in I × Ω,
+⃗u = ⃗0
+on I × ∂Ω,
+⃗u(0) = ⃗u0
+in Ω.
+(1.1)
+We assume that Ω⊂Rd, d ∈{2, 3}, is a bounded polygonal/polyhedral Lipschitz
+domain, T > 0 and I = (0, T ]. In the next section we make precise assumptions on
+the data, which allow for a weak formulation of the problem and provide regularity
+for the velocity ⃗u ∈L2(I; H1(Ω)d).
+We consider fully discrete approximations of
+problem (1.1), where we use compatible ﬁnite elements (i.e. satisfying a uniform inf-
+sup condition) for the space discretization and the discontinuous Galerkin method for
+the temporal discretization. In our previous work [2], we have established the best
+type error estimate in L∞(I; L2(Ω)) norm,
+∥⃗u −⃗uτh∥L∞(I;L2(Ω)) ≤Cℓτ
+
+∥⃗u −⃗χ∥L∞(I;L2(Ω)) + ∥⃗u −RS
+h(⃗u, p)∥L∞(I;L2(Ω))
+
+, (1.2)
+where ⃗uτh is the fully discrete ﬁnite element approximation of the velocity ⃗u, RS
+h is the
+Ritz projection for the stationary Stokes problem, ⃗χ is an arbitrary function from the
+ﬁnite element approximation of the velocity spaces Xw
+τ (⃗Vh), and ℓτ is a logarithmic
+term. Such results are desirable for example in the analysis of PDE constrained opti-
+mal control problems since they do not require any additional regularity assumptions
+on the solution beyond the regularity which follows directly from the problem data.
+The estimate (1.2) was an improvement of the main results in [4, Thm. 4.9], where the
+error was estimated simultaneously in L∞(I; L2(Ω)) and L2(I; H1(Ω)) norms, and the
+bounds there required the presence of the ”mixed terms”. A natural question, which
+actually was raised by one of the referee for [2], is it possible to obtain a best type
+†Department
+of
+Mathematics,
+University
+of
+Connecticut,
+Storrs,
+CT
+06269,
+USA
+(dmitriy.leykekhman@uconn.edu). The author was partially supported by NSF grant DMS-1115288.
+‡Technical University of Munich, Chair of Optimal Control, Center for Mathematical Sciences,
+Boltzmannstraße 3, 85748 Garching by Munich, Germany, (vexler@ma.tum.de).
+1
+
+[PDF PAGE 2]
+2
+DMITRIY LEYKEKHMAN AND BORIS VEXLER
+approximation result just w.r.t. L2(I; H1(Ω)) norm? Surprisingly, such results are
+not available even for scalar parabolic problems. In this note, we give positive answer
+to this question. In this paper we establish the following best type error estimates
+∥⃗u −⃗uτh∥L2(I×Ω) ≤C
+
+∥⃗u −⃗χ∥L2(I×Ω) + ∥⃗u −πτ⃗u∥L2(I×Ω) + ∥⃗u −RS
+h(⃗u, p)∥L2(I×Ω)
+
+(1.3)
+and
+∥∇(⃗u −⃗uτh)∥L2(I×Ω) ≤C
+
+∥∇(⃗u −⃗χ)∥L2(I×Ω) + ∥∇(⃗u −πτ⃗u)∥L2(I×Ω)
++ ∥∇(⃗u −RS
+h(⃗u, p))∥L2(I×Ω)
+
+,
+(1.4)
+where as above ⃗uτh is the fully discrete ﬁnite element approximation of the velocity
+⃗u, ⃗χ is an arbitrary function from the ﬁnite element approximation of the velocity
+spaces Xw
+τ (⃗Vh), πτ⃗uτh is a certain time projection of the ⃗u on the time discrete space
+Xw
+τ , and RS
+h is the Ritz projection for the stationary Stokes problem. The results
+(1.3) and (1.4) link the approximation error for the fully discrete transient Stokes
+problem to the best possible approximation of a continuous solution ⃗u in the discrete
+space Xw
+τ (⃗Vh) as well as the approximation of the stationary Stokes problem in ⃗Vh
+and a time projection. Such results go in hand with only natural assumptions on
+the problem data and thus are desirable in number of applications. The estimate
+(1.3) does not require any additional regularity of the domain, thus allowing, e.g., for
+reentrant corners and edges. Moreover, (1.3) does not require the mesh to be quasi-
+uniform nor shape regular. Therefore, the result is also true for graded and even
+anisotropic meshes (provided the discrete inf-sup condition holds uniformly on such
+meshes). However, the second estimate (1.4), does require the stability of the discrete
+Leray projection in H1 norm, which so far is established for the quasi-uniform meshes
+on convex domains. These results also naturally hold for the inhomogeneous heat
+equation, where the proofs can be simpliﬁed and extended to more general meshes,
+(see Section 7).
+Under the additional assumption of convexity of Ωand some approximation prop-
+erties of the discrete spaces, from (1.3) and (1.4) we easily derive optimal error esti-
+mates of the form
+∥⃗u −⃗uτh∥L2(I;Hs(Ω)) ≤C
+
+τ 1−s/2 + h2−s 
+∥⃗f∥L2(I;L2(Ω)) + ∥⃗u0∥⃗V 1
+
+,
+s = 0, 1,
+(1.5)
+where ⃗V 1 is an appropriate space introduced in the next section. This estimate is
+optimal with respect to both the assumed regularity of the data and the order of
+convergence.
+The above results naturally hold for simpler case of inhomogeneous heat equation
+with straightforward change of operators and function spaces. The L2(I; L2(Ω)) best
+approximation result is essentially shown in [16], instead of the best approximation
+the optimal error estimate in terms of data of the form (1.5) is given, however, the
+L2(I; H1(Ω)) best approximation result seems to be new.
+The rest of the paper is structured as follows. In Section 2, we introduce the
+function spaces, key operators and weak formulations of the problem with regularity
+results. In Section 3, we introduce fully discrete Galerkin approximation of the prob-
+lem. Section 4 is devoted to stability results of the fully discrete velocity solutions.
+In Section 4 we review some stability and approximation results for the stationery
+Stokes problem, which we requite for our main results Theorem 6.1 and Theorem 6.3
+
+[PDF PAGE 3]
+Discrete maximal parabolic regularity
+3
+in the next Section 6. Finally, in Section 7, we brieﬂy discuss the extension of the
+main results to scalar parabolic problems.
+2. Continuous problem. In this section, we introduce function spaces we re-
+quire for the analysis of (1.1) and state some of the main properties of these spaces.
+In our presentation we follow the notation and presentation of [13, Section 1 and
+Section 2].
+2.1. Function spaces and Stokes operator. In the following, we will use the
+usual notation to denote the Lebesgue spaces Lp and Sobolev spaces Hk and W k,p.
+The space L2
+0(Ω) will denote a subspace of L2(Ω) with mean-zero functions. The inner
+product on L2(Ω) as well as on L2(Ω)d is denoted by (·, ·). To improve readability,
+we omit the superscript d when having for example L2(Ω)d appear as subscript to
+norms. We also introduce the following function spaces
+V =
+
+⃗v ∈C∞
+0 (Ω)d  ∇· ⃗v = 0
+	
+,
+⃗V 0 = V
+L2
+,
+⃗V 1 = V
+H1
+,
+(2.1)
+where the notation in the last line denotes the completion of the space V with respect
+to the L2(Ω)d and H1(Ω)d topology, respectively. Notice that functions in ⃗V 1 have
+zero boundary conditions in the trace sense. Alternatively we have
+⃗V 1 = {⃗v ∈H1
+0(Ω)d | ∇· ⃗v = 0 }
+by [7, Theorem III.4.1].
+We deﬁne the vector-valued Laplace operator
+−∆: D(∆) →L2(Ω)d,
+where the domain D(∆) is understood with respect to L2(Ω)d and is given as
+D(∆) = {⃗v ∈H1
+0(Ω)d | ∆⃗v ∈L2(Ω) } .
+If the domain Ωis convex, then the standard H2(Ω) regularity implies D(∆) =
+H1
+0(Ω)d ∩H2(Ω)d. In addition, we introduce the space ⃗V 2 as
+⃗V 2 = ⃗V 1 ∩D(∆).
+We will also use the following Helmholtz decomposition (cf. [17, Chapter I, Theorem
+1.4] and [7, Theorem III.1.1])
+L2(Ω)d = ⃗V 0 ⊕∇
+ H1(Ω) ∩L2
+0(Ω)
+
+.
+(2.2)
+As usual we deﬁne the Helmholtz projection P: L2(Ω)d →⃗V 0 (often also called the
+Leray projection) as the L2-projection from L2(Ω)d onto ⃗V 0. Using P and −∆, we
+deﬁne the Stokes operator A: ⃗V 2 →⃗V 0 as
+A = −P∆|⃗V 2.
+(2.3)
+The operator A is a self adjoint, densely deﬁned and positive deﬁnite operator on ⃗V 0.
+We note that D(A) = ⃗V 2. Similar to the Laplace operator, for convex polyhedral
+domains Ωwe have the following H2 regularity bound due to [5, 14]
+∥⃗v∥H2(Ω) ≤C∥A⃗v∥L2(Ω),
+∀⃗v ∈⃗V 2.
+(2.4)
+
+[PDF PAGE 4]
+4
+DMITRIY LEYKEKHMAN AND BORIS VEXLER
+2.2. Weak formulation and regularity. In this section we discuss the weak
+formulation and the regularity of the transient Stokes problem (1.1). We will use
+the notation Ls(I; X) for the corresponding Bochner space with a Banach space X.
+Moreover, we will use also the standard notation H1(I; X). The inner product in
+L2(I; L2(Ω)d) is denoted by (·, ·)I×Ω. We will also use the notation (f, g)I×Ωfor the
+corresponding integral for f ∈L2(I; L2(Ω)d) and g ∈L2(I; L2(Ω)d).
+Proposition 2.1. Let ⃗f ∈L2(I; (⃗V 1)′) and ⃗u0 ∈⃗V 0. Then there exists a unique
+solution ⃗u ∈L2(I; ⃗V 1) ∩C(¯I, ⃗V 0) with ∂t⃗u ∈L2(I; (⃗V 1)′) fulﬁlling ⃗u(0) = ⃗u0 and
+⟨∂t⃗u,⃗v⟩+ (∇⃗u, ∇⃗v)I×Ω= (⃗f,⃗v)I×Ω
+for all ⃗v ∈L2(I; ⃗V 1).
+(2.5)
+There holds
+∥∇⃗u∥L2(I;L2(Ω)) + ∥⃗u′∥L2(¯I;(⃗V 1)′) + ∥⃗u∥C(¯I;L2(Ω)) ≤C
+
+∥⃗f∥L2(I;(⃗V 1)′) + ∥⃗u0∥⃗V 0
+
+.
+Proof. For the proof of the above result we refer to [17, Chapter III, Theorem
+1.1].
+It is well known, cf. again [17], that the equation (2.5) can be understood as
+an abstract parabolic problem
+∂t⃗u + A⃗u = P⃗f
+for a.a. t ∈I,
+⃗u(0) = ⃗u0,
+(2.6)
+with the Stokes operator A deﬁned in (2.3).
+The next theorem provides the space-time weak formulation in both variables,
+velocity and pressure. Please note, that no additional regularity of the domain is
+required.
+Theorem 2.2. Let ⃗f ∈L2(I; L2(Ω)d) and ⃗u0 ∈⃗V 1. Then there exists a unique
+solution (⃗u, p) with
+⃗u ∈L2(I; ⃗V 1), ∂t⃗u, A⃗u ∈L2(I; L2(Ω)d)
+and
+p ∈L2(I; L2
+0(Ω))
+fulﬁlling ⃗u(0) = ⃗u0 and
+(∂t⃗u,⃗v)I×Ω+ (∇⃗u, ∇⃗v)I×Ω−(p, ∇· ⃗v)I×Ω+ (∇· ⃗u, ξ)I×Ω= (⃗f,⃗v)I×Ω
+(2.7)
+for all
+⃗v ∈L2(I; H1
+0(Ω)d)
+and
+ξ ∈L2(I; L2
+0(Ω)).
+There holds the estimate
+∥∂t⃗u∥L2(I;L2(Ω)) + ∥A⃗u∥L2(I;L2(Ω)) + ∥p∥L2(I;L2(Ω)) ≤C
+
+∥⃗f∥L2(I;L2(Ω)) + ∥⃗u0∥⃗V 1
+
+.
+Proof. The proof is given in [2], Theorem 2.4.
+Corollary 2.3. Let the assumptions of Theorem 2.2 hold and let in addition
+the domain Ωbe convex. Then we have ⃗u ∈L2(I; H2(Ω)d) and p ∈L2(I, H1(Ω)) with
+the corresponding estimates
+∥⃗u∥L2(I;H2(Ω)) + ∥p∥L2(I;H1(Ω)) ≤C
+
+∥⃗f∥L2(I;L2(Ω)) + ∥⃗u0∥⃗V 1
+
+.
+Proof. This result is shown in [17], Proposition 1.2 in Chapter 3, for C2 domains,
+but the proof is valid for convex domains as well. See also Corollary 2.1 in [2].
+
+[PDF PAGE 5]
+Discrete maximal parabolic regularity
+5
+3. Fully discrete discretization. In this section we consider the discrete ver-
+sion of the operators presented in the previous section and introduce fully discrete
+solution Galerkin solution.
+3.1. Spatial discretization. Let {Th} be a family of triangulations of ¯Ω, con-
+sisting of closed simplices, where we denote by h the maximum mesh-size.
+Let
+⃗Xh ⊂H1
+0(Ω)d and Mh ⊂L2
+0(Ω) be a pair of compatible ﬁnite element spaces, i.e.,
+them satisfying a uniform discrete inf-sup condition,
+sup
+⃗vh∈⃗
+Xh
+(qh, ∇· ⃗vh)
+∥∇⃗vh∥L2(Ω)
+≥β∥qh∥L2(Ω)
+∀qh ∈Mh,
+(3.1)
+with a constant β > 0 independent of h.
+We introduce the usual discrete Laplace operator −∆h : ⃗Xh →⃗Xh by
+(−∆h⃗zh,⃗vh) = (∇⃗zh, ∇⃗vh),
+∀⃗zh,⃗vh ∈⃗Xh.
+(3.2)
+To deﬁne a discrete version of the Stokes operator A, we ﬁrst deﬁne the space of
+discretely divergence-free vectors ⃗Vh as
+⃗Vh =
+n
+⃗vh ∈⃗Xh
+ (∇· ⃗vh, qh) = 0
+∀qh ∈Mh
+o
+.
+(3.3)
+Using this space we can deﬁne the discrete Leray projection Ph : L1(Ω)d →⃗Vh to be
+the L2-projection onto ⃗Vh, i.e.,
+(Ph⃗u,⃗vh) = (⃗u,⃗vh)
+∀⃗vh ∈⃗Vh.
+(3.4)
+Using Ph, we deﬁne the discrete Stokes operator Ah : ⃗Vh →⃗Vh as Ah = −Ph∆h|⃗Vh.
+By this deﬁnition we have that for ⃗uh ∈⃗Vh, Ah⃗uh ∈⃗Vh fulﬁlls
+(Ah⃗uh,⃗vh) = (∇⃗uh, ∇⃗vh),
+∀⃗vh ∈⃗Vh.
+(3.5)
+Notice, since ⃗Vh ⊂⃗Xh, for ⃗vh ∈⃗Vh we obtain
+(Ah⃗vh,⃗vh) = (∇⃗vh, ∇⃗vh) ≥λ0∥⃗vh∥2
+L2(Ω),
+(3.6)
+where λ0 is the smallest eigenvalue of −∆. This implies that the eigenvalues of Ah
+are also positive and bounded from below by λ0.
+Moreover we deﬁne the orthogonal space ⃗V ⊥
+h ⊂⃗Xh as
+⃗V ⊥
+h =
+n
+⃗wh ∈Xh
+ (⃗wh,⃗vh) = 0
+∀⃗vh ∈⃗Vh
+o
+.
+The following classical result, cf., e.g., [12, Chapter II, Theorem 1.1] will be used to
+provide existence and uniqueness of the fully discrete pressure in the sequel.
+Lemma 3.1. For every ⃗wh ∈⃗V ⊥
+h there exists a unique ph ∈Mh such that
+(⃗wh,⃗vh) = (ph, ∇· ⃗vh)
+∀⃗vh ∈⃗Xh.
+There holds
+∥ph∥L2(Ω) ≤1
+β ∥∇(−∆h)−1 ⃗wh∥L2(Ω).
+
+[PDF PAGE 6]
+6
+DMITRIY LEYKEKHMAN AND BORIS VEXLER
+3.2. Temporal discretization: the discontinuous Galerkin method.
+In this section we introduce the discontinuous Galerkin method for the time discretiza-
+tion of the transient Stokes equations, a similar method was considered, e.g., in [4]
+and [2]. For that, we partition I = (0, T ] into subintervals Im = (tm−1, tm] of length
+τm = tm −tm−1, where 0 = t0 < t1 < · · · < tM−1 < tM = T . The maximal and
+minimal time steps are denoted by τ = maxm τm and τmin = minm τm, respectively.
+The time partition fulﬁlls the following assumptions:
+1. There are constants C, β > 0 independent of τ such that
+τmin ≥Cτ β.
+(3.7)
+2. There is a constant κ > 0 independent of τ such that for all
+m = 1, 2, . . ., M −1
+κ−1 ≤
+τm
+τm+1
+≤κ.
+(3.8)
+3. It holds τ ≤T
+4 .
+For a given Banach space B and the order w ∈N we deﬁne the semi-discrete space
+Xw
+τ (B) of piecewise polynomial functions in time as
+Xw
+τ (B) =
+
+⃗vτ ∈L2(I; B)
+ ⃗vτ|Im ∈Pw,Im(B), m = 1, 2, . . . , M
+	
+,
+(3.9)
+where Pw,Im(B) is the space of polynomial functions of degree less or equal w in time
+with values in B, i.e.,
+Pw,Im(B) =
+
+
+⃗vτ : Im →B
+
+⃗vτ(t) =
+w
+X
+j=0
+⃗vjφj(t), ⃗vj ∈B, j = 0, . . . , w
+
+
+.
+(3.10)
+Here, {φj(t)} is a polynomial basis in t of the space Pw(Im) of polynomials with
+degree less or equal w over the interval Im. We use the following standard notation
+for a function ⃗u ∈Xw
+τ (L2(Ω)d)
+⃗u+
+m = lim
+ε→0+ ⃗u(tm + ε),
+⃗u−
+m = lim
+ε→0+ ⃗u(tm −ε),
+[⃗u]m = ⃗u+
+m −⃗u−
+m.
+(3.11)
+We deﬁne the bilinear form B by
+B(⃗u,⃗v) =
+M
+X
+m=1
+(∂t⃗u,⃗v)Im×Ω+ (∇⃗u, ∇⃗v)I×Ω+
+M
+X
+m=2
+([⃗u]m−1,⃗v+
+m−1)Ω+ (⃗u+
+0 ,⃗v+
+0 )Ω.
+With this bilinear form we deﬁne the fully discrete approximation for the transient
+Stokes problem on the discrete divergence free space Xw
+τ (⃗Vh):
+⃗uτh ∈Xw
+τ (⃗Vh) : B(⃗uτh,⃗vτh) = (⃗f,⃗vτh)I×Ω+ (⃗u0,⃗v+
+τh,0)Ω
+∀⃗vτh ∈Xw
+τ (⃗Vh). (3.12)
+By a standard argument one can see that this formulation possesses a unique solution
+(existence follows from uniqueness by the fact that (3.12) is equivalent to a quadratic
+system of linear equations).
+Remark 3.2. Note, that the data ⃗f and ⃗u0 in (3.12) can be replaced by Ph ⃗f and
+Ph⃗u0 respectively (with Ph being the discrete Leray projection (3.4)) without changing
+the solution.
+
+[PDF PAGE 7]
+Discrete maximal parabolic regularity
+7
+The above formulation is not a conforming discretization of the divergence free
+formulation (2.5) due to the fact that Xw
+τ (⃗Vh) is not a subspace of L2(I; ⃗V 1). In order
+to introduce a velocity-pressure discrete formulation (as a discretization of (2.7)) we
+consider the following bilinear form
+B((⃗u, p), (⃗v, q)) =
+M
+X
+m=1
+(∂t⃗u,⃗v)Im×Ω+ (∇⃗u, ∇⃗v)I×Ω−(p, ∇· ⃗v)I×Ω+ (∇· ⃗u, q)I×Ω
++
+M
+X
+m=2
+([⃗u]m−1,⃗v+
+m−1)Ω+ (⃗u+
+0 ,⃗v+
+0 )Ω.
+(3.13)
+The corresponding fully discrete formulation reads: ﬁnd (⃗uτh, pτh) ∈Xw
+τ ( ⃗Xh × Mh)
+such that
+B((⃗uτh, pτh), (⃗vτh, qτh)) = (⃗f,⃗vτh)I×Ω+ (⃗u0,⃗v+
+τh,0)Ω
+∀(⃗vτh, qτh) ∈Xw
+τ ( ⃗Xh × Mh).
+(3.14)
+We note, that for the temporal discretization we use polynomials of the same order
+for the velocity and pressure.
+The next proposition states the equivalence of the
+formulation (3.12) and (3.14).
+Proposition 3.3. For a solution (⃗uτh, pτh) of (3.14) the discrete velocity ⃗uτh
+fulﬁlls (3.12). Moreover, for a solution ⃗uτh of (3.12) there exists a unique pτh ∈
+Xw
+τ (Mh) such that the pair (⃗uτh, pτh) fulﬁlls (3.14).
+In particular the solution of
+(3.14) is unique.
+Proof. The proof is given in [2], Proposition 4.1.
+The next proposition provides the Galerkin orthogonality relation for the velocity
+pressure discretization (3.14), which is essential for our analysis. Please note, that for
+the velocity formulation (3.12) the Galerkin orthogonality does not hold due to the
+fact that Xw
+τ (⃗Vh) is not a subspace of L2(I, ⃗V 1).
+Proposition 3.4. Let the assumptions of (2.2) be fulﬁlled, i.e., ⃗f ∈L2(I; L2(Ω)d)
+and ⃗u0 ∈⃗V 0. Then there holds for the solution (⃗u, p) of (2.7)
+B((⃗u, p), (⃗vτh, qτh)) = (⃗f,⃗vτh)I×Ω+ (⃗u0,⃗v+
+τh,0)Ω
+∀(⃗vτh, qτh) ∈Xw
+τ ( ⃗Xh × Mh)
+and consequently
+B((⃗u −⃗uτh, p −pτh), (⃗vτh, qτh)) = 0
+∀(⃗vτh, qτh) ∈Xw
+τ ( ⃗Xh × Mh).
+(3.15)
+Proof. The proof is given in [2], Proposition 4.2.
+In the following, we also consider a dual problem, where we use a dual represen-
+tation of the bilinear form B
+B((⃗u, p), (⃗v, q)) = −
+M
+X
+m=1
+⟨⃗u, ∂t⃗v⟩Im×Ω+ (∇⃗u, ∇⃗v)I×Ω−(p, ∇· ⃗v)I×Ω
++ (∇· ⃗u, q)I×Ω−
+M−1
+X
+m=1
+(⃗u−
+m, [⃗v]m)Ω+ (⃗u−
+M,⃗v−
+M)Ω,
+(3.16)
+which is obtained by integration by parts and rearranging the terms in the sum.
+
+[PDF PAGE 8]
+8
+DMITRIY LEYKEKHMAN AND BORIS VEXLER
+We will also need the following projection πτ for v ∈C(I, L2(Ω)) with πτv|Im ∈
+Pq(L2(Ω)) for m = 1, 2, . . . , M on each subinterval Im by
+(πτv −v, φ)Im×Ω= 0,
+∀φ ∈Pq−1(Im, L2(Ω)),
+q > 0,
+πτv(t−
+m) = v(t−
+m).
+(3.17)
+In the case q = 0, πτv is deﬁned solely by the second condition.
+The following
+approximation property also hold
+∥πτu −u∥L2(Im) ≤Cτ∥∂tu∥L2(Im)
+∀u ∈H1(Im).
+(3.18)
+4. Fully discrete stability results. In this section, we establish stability re-
+sult, which are essential for our main result.
+Theorem 4.1. For ⃗f ∈L2(I, L2(Ω)d) and ⃗u0 ∈⃗V 1. Let ⃗uτh ∈Xw
+τ (⃗Vh) be the
+solution to (3.12). Then there holds
+ 
+M
+X
+m=1
+∥∂t⃗uτh∥2
+L2(Im×Ω)
+!1/2
++ ∥Ah⃗uτh∥L2(I;L2(Ω))
++
+ 
+M
+X
+m=1
+τm∥τ −1
+m [⃗uτh]m−1∥2
+L2(Ω)
+!1/2
+≤C
+
+∥Ph ⃗f∥L2(I;L2(Ω)) + ∥∇Ph⃗u0∥L2(Ω)
+
+.
+(4.1)
+Proof. The proof follows the lines of the corresponding proof in [16] replacing
+−∆h by Ah.
+For the L2(I; H1(Ω)d) norm estimates we also need the following result.
+Theorem 4.2. For ⃗f ∈L2(I, L2(Ω)d) and ⃗u0 ∈⃗V 0. Let ⃗uτh ∈Xw
+τ (⃗Vh) be the
+solution to (3.12). Then there holds
+ 
+M
+X
+m=1
+∥∂t∇A−1
+h ⃗uτh∥2
+L2(Im;L2(Ω))
+!1/2
++ ∥∇⃗uτh∥L2(I;L2(Ω))
++
+ 
+M
+X
+m=1
+τm∥τ −1
+m [∇A−1
+h ⃗uτh]m−1∥2
+L2(Ω)
+!1/2
+≤C
+
+∥∇A−1
+h Ph ⃗f∥L2(I;L2(Ω)) + ∥Ph⃗u0∥L2(Ω)
+
+.
+(4.2)
+Proof. The proof goes along the lines of the proof of Theorem 4.1 [16]. We will
+provide the proof for completeness.
+Testing (3.12) with ⃗vτh = ⃗uτh we obtain on each time interval Im
+(∂t⃗uτh, ⃗uτh)Im×Ω+ ∥∇⃗uτh∥2
+L2(Im×Ω) + ([⃗uτh]m−1, ⃗u+
+τh,m−1)Ω= (⃗f, ⃗uτh)Im×Ω.
+Using the identities
+(∂t⃗uτh, ⃗uτh)Im×Ω= 1
+2∥⃗u−
+τh,m∥2
+L2(Ω) −1
+2∥⃗u+
+τh,m−1∥2
+L2(Ω)
+and
+([⃗uτh]m−1, ⃗u+
+τh,m−1)Ω= 1
+2∥⃗u+
+τh,m−1∥2
+L2(Ω) + 1
+2∥[⃗uτh]m−1∥2
+L2(Ω) −1
+2∥⃗u−
+τh,m−1∥2
+L2(Ω)
+
+[PDF PAGE 9]
+Discrete maximal parabolic regularity
+9
+gives us
+1
+2∥⃗u−
+τh,m∥2
+L2(Ω)−1
+2∥⃗u−
+τh,m−1∥2
+L2(Ω)+1
+2∥[⃗uτh]m−1∥2
+L2(Ω)+∥∇⃗uτh∥2
+L2(Im×Ω) = (⃗f, ⃗uτh)Im×Ω.
+Summing over m, we obtain
+1
+2∥⃗u−
+τh,M∥2
+L2(Ω)+1
+2
+M
+X
+m=1
+∥[⃗uτh]m−1∥2
+L2(Ω)+∥∇⃗uτh∥2
+L2(I×Ω) = (⃗f, ⃗uτh)I×Ω+1
+2∥Ph⃗u0∥2
+L2(Ω).
+To treat the term involving ⃗f, we write it as
+(⃗f, ⃗uτh)I×Ω= (Ph ⃗f, ⃗uτh)I×Ω= (AhA−1
+h Ph ⃗f, ⃗uτh)I×Ω= (∇A−1
+h Ph ⃗f, ∇⃗uτh)I×Ω,
+where in the last step we used that ⃗uτh is discrete divergence free. Using the Cauchy-
+Schwarz and geometric-arithmetic mean inequalities
+(⃗f, ⃗uτh)I×Ω≤1
+2∥∇⃗uτh∥2
+L2(I×Ω) + 1
+2∥∇A−1
+h Ph ⃗f∥2
+L2(I×Ω).
+Thus, we obtain
+∥∇⃗uτh∥2
+L2(I×Ω) ≤∥∇A−1
+h Ph ⃗f∥2
+L2(I×Ω) + ∥Ph⃗u0∥2
+L2(Ω).
+(4.3)
+Next, we test (3.12) with ⃗vτh |Im= (t−tm−1)A−1
+h ∂t⃗uτh. Noticing that the jump terms
+disappear and using the identity,
+(∂t⃗uτh, A−1
+h ∂tukh)Ω= (AhA−1
+h ∂t⃗uτh, A−1
+h ∂t⃗uτh)Ω= ∥∇A−1
+h ∂t⃗uτh∥2
+L2(Ω),
+on each time interval Im, which follows from ∂t⃗uτh being discretely divergence free
+for each t ∈Im, we obtain
+Z
+Im
+(t −tm−1)∥∇A−1
+h ∂t⃗uτh∥2
+L2(Ω)dt =
+Z
+Im
+(t −tm−1)(∇⃗uτh, ∇A−1
+h ∂t⃗uτh)Ωdt
++
+Z
+Im
+(t −tm−1)(⃗f, A−1
+h ∂t⃗uτh)Ωdt
+=
+Z
+Im
+(t −tm−1)(∇⃗uτh + ∇A−1
+h Ph ⃗f, ∇A−1
+h ∂t⃗uτh)Ωdt.
+Using the Cauchy-Schwarz inequality
+Z
+Im
+(t −tm−1)(∇⃗uτh + ∇A−1
+h Ph ⃗f, ∇A−1
+h ∂t⃗uτh)Ωdt ≤
+Z
+Im
+(t −tm−1)∥∇A−1
+h ∂t⃗uτh∥2
+L2(Ω)dt
+1/2
+Z
+Im
+(t −tm−1)∥∇⃗uτh + ∇A−1
+h Ph ⃗f∥2
+L2(Ω)dt
+1/2
+.
+Hence, canceling we have
+Z
+Im
+(t −tm−1)∥∇A−1
+h ∂t⃗uτh∥2
+L2(Ω)dt ≤
+Z
+Im
+(t −tm−1)∥∇⃗uτh + ∇A−1
+h Ph ⃗f∥2
+L2(Ω)dt.
+Using the following inequality
+Z
+Im
+∥vk∥2dt ≤Cτ−1
+m
+Z
+Im
+(t −tm−1)∥vk∥2dt
+∀vk ∈Pq(Im; ⃗Vh),
+(4.4)
+
+[PDF PAGE 10]
+10
+DMITRIY LEYKEKHMAN AND BORIS VEXLER
+which can be easily veriﬁed by a usual scaling argument, we obtain
+Z
+Im
+∥∇A−1
+h ∂t⃗uτh∥2
+L2(Ω)dt ≤Cτ −1
+m
+Z
+Im
+(t −tm−1)∥∇A−1
+h ∂t⃗uτh∥2
+L2(Ω)dt
+≤Cτ −1
+m
+Z
+Im
+(t −tm−1)∥∇⃗uτh + ∇A−1
+h Ph ⃗f∥2
+L2(Ω)dt
+≤C
+Z
+Im
+∥∇⃗uτh + ∇A−1
+h Ph ⃗f∥2
+L2(Ω)dt.
+Summing over m and using the estimate for the gradient (4.3), we obtain
+M
+X
+m=1
+∥∇A−1
+h ∂t⃗uτh∥2
+L2(Im×Ω) ≤C
+
+∥∇A−1
+h Ph ⃗f∥2
+L2(I×Ω) + ∥Ph⃗u0∥2
+L2(Ω)
+
+.
+(4.5)
+It remains to estimate the jump terms. We test (3.12) with ⃗vτh |Im= [A−1
+h ⃗ukh]m−1.
+On each time interval Im this time we obtain,
+∥∇[A−1
+h ⃗uτh]m−1∥2
+L2(Ω) = (⃗f + Ah⃗uτh + ∂t⃗uτh, [A−1
+h ⃗uτh]m−1)Im×Ω.
+Integrating by parts and using the Cauchy-Schwarz and geometric-arithmetic mean
+inequalities
+(⃗f + Ah⃗uτh + ∂t⃗uτh, [A−1
+h ⃗uτh]m−1)Im×Ω
+= (∇A−1
+h Ph ⃗f + ∇⃗uτh + ∇A−1
+h ∂t⃗uτh, [∇A−1
+h ⃗uτh]m−1)Im×Ω
+≤∥∇A−1
+h Phf + ∇⃗uτh + ∇A−1
+h ∂t⃗uτh∥L2(Im×Ω)∥[∇A−1
+h ⃗uτh]m−1∥L2(Im×Ω)
+≤τm
+2 ∥∇A−1
+h Ph ⃗f + ∇⃗uτh + ∇A−1
+h ∂t⃗uτh∥2
+L2(Im×Ω) +
+1
+2τm
+∥[∇A−1
+h ⃗uτh]m−1∥2
+L2(Im×Ω)
+= τm
+2 ∥∇A−1
+h Phf + ∇⃗uτh + ∇A−1
+h ∂t⃗uτh∥2
+L2(Im×Ω) + 1
+2∥[∇A−1
+h ⃗uτh]m−1∥2
+L2(Ω),
+where we used that [∇A−1
+h ⃗uτh]m−1 is constant in time on Im. Thus, we obtain
+τ −1
+m ∥[∇A−1
+h ⃗uτh]m−1∥2
+L2(Ω) ≤∥∇A−1
+h Ph ⃗f + ∇⃗uτh + ∇A−1
+h ∂t⃗uτh∥2
+L2(Im×Ω).
+Summing over m and using (4.3) and (4.5)
+M
+X
+m=1
+τ −1
+m ∥[∇A−1
+h ⃗uτh]m−1∥2
+L2(Ω) ≤C
+
+∥∇A−1
+h Ph ⃗f∥2
+L2(I×Ω) + ∥Ph⃗u0∥2
+L2(Ω)
+
+.
+(4.6)
+Combining (4.3), (4.5), and (4.6), we obtain the result.
+5. Stationary Stokes results . For the best approximation type error esti-
+mates in the next section , we need to review basic results on stationery Stokes
+projection and on discrete Leray projection.
+5.1. Discrete Stokes projection. In addition, we need to introduce an ana-
+logue of the Ritz projection for the stationary Stokes problem (RS
+h(⃗w, ϕ), RS,p
+h (⃗w, ϕ)) ∈
+⃗Xh × Mh of (⃗w, ϕ) ∈H1
+0(Ω)d × L2(Ω) given by the relation
+(∇(⃗w −RS
+h(⃗w, ϕ)), ∇⃗vh) −(ϕ −RS,p
+h (⃗w, ϕ), ∇· ⃗vh) = 0,
+∀⃗vh ∈⃗Xh,
+(∇· (⃗w −RS
+h(⃗w, ϕ)), qh) = 0,
+∀qh ∈Mh.
+(5.1)
+
+[PDF PAGE 11]
+Discrete maximal parabolic regularity
+11
+Remark 5.1. If ⃗w is discrete divergence free, i.e., (∇· ⃗w, qh) = 0 for all qh ∈Mh,
+then we have RS
+h(⃗w, ϕ) ∈⃗Vh. We will use this projection operator only for such ⃗w.
+In this case the same projection operator is deﬁned, e.g., in [11].
+Proposition 5.2. The Stokes projection is stable in H1 norm, i.e.
+∥∇RS
+h(⃗w, ϕ)∥L2(Ω) ≤C
+ ∥∇⃗w∥L2(Ω) + ∥ϕ∥L2(Ω)
+
+.
+and if ⃗u ∈H2(Ω)d and p ∈H1(Ω), the following error estimate holds
+∥∇(⃗u −RS
+h(⃗u, p))∥L2(Ω) ≤Ch
+
+∥∇2⃗u∥L2(Ω) + ∥∇p∥L2(Ω)
+
+.
+Proposition 5.3. If Ωis convex, then
+∥⃗u −RS
+h(⃗u, p)∥L2(Ω) ≤Ch
+
+∥∇⃗u∥L2(Ω) + ∥p∥L2(Ω)
+
+and
+∥⃗u −RS
+h(⃗u, p)∥L2(Ω) ≤Ch2 
+∥∇2⃗u∥L2(Ω) + ∥∇p∥L2(Ω)
+
+.
+For the proofs of the above results we refer to [6], Propositions 4.14 and 4.18.
+5.2. Discrete Leray projection. We need the restriction on the mesh and H2
+regularity such that the Leray projection P is stable in H1(Ω) norm. Such result is
+shown for quasi-uniform meshes in [4].
+Lemma 5.4 (Stability of the Leray projection in H1 norm). Let Ωbe convex and
+the triangulations {Th} be quasi-uniform. Then, there exist a constant C such that
+∥∇Ph⃗v∥L2(Ω) ≤C∥∇⃗v∥L2(Ω)
+∀⃗v ∈⃗V 1.
+Proof. The proof of this results is given in the Appendix of [4]. For the complete-
+ness, we repeat the argument here. Let ⃗v ∈⃗V 1 and consider ⃗vh = RS
+h(⃗v, 0) ∈⃗Vh.
+Then by Proposition 5.2
+∥∇⃗vh∥L2(Ω) ≤C∥∇⃗v∥L2(Ω) + ∥0∥L2(Ω) = C∥∇⃗v∥L2(Ω).
+On the other hand by Proposition 5.3,
+∥⃗v −⃗vh∥L2(Ω) ≤Ch∥∇⃗v∥L2(Ω).
+As a result, using the inverse and the above two estimates, we obtain
+∥∇Ph⃗v∥L2(Ω) ≤∥∇(Ph⃗v −⃗vh)∥L2(Ω) + ∥∇⃗vh∥L2(Ω)
+≤Ch−1∥Ph⃗v −⃗vh∥L2(Ω) + C∥∇⃗v∥L2(Ω)
+≤Ch−1∥Ph(⃗v −⃗vh)∥L2(Ω) + C∥∇⃗v∥L2(Ω)
+≤Ch−1∥⃗v −⃗vh∥L2(Ω) + C∥∇⃗v∥L2(Ω)
+≤C∥∇⃗v∥L2(Ω).
+
+[PDF PAGE 12]
+12
+DMITRIY LEYKEKHMAN AND BORIS VEXLER
+Remark 5.5. The stability of the discrete Leray projection is a delicate matter.
+As operator, Ph is well-deﬁned for L2(Ω)d and even L1(Ω)d functions. In such a case,
+the best stability result can be obtained in fractional norms (cf. [13, Lemma 3.1]
+∥Ph⃗v∥Hs(Ω) ≤C∥⃗v∥Hs(Ω)
+∀s ∈[0, 1
+2),
+∀⃗v ∈Hs(Ω)d,
+(5.2)
+and can not be extended to any s ≥1/2 (cf. [13, Remark 3.1].
+Remark 5.6. The stability of the Leray projection (5.2) is the only result that
+requires restriction on a mesh.
+6. Main results. Now we state our main best approximation results.
+6.1. L2 error estimates. The ﬁrst result establishes the optimal error estimates
+L2(I × Ω) norm.
+Theorem 6.1. Let ⃗f ∈L2(I; L2(Ω)d) and ⃗u0 ∈⃗V 1. Let (⃗u, p) be the solution of
+(2.7) and (⃗uτh, pτh) solve the respective ﬁnite element problem (3.14). Then, for any
+⃗χ ∈Xw
+τ (⃗Vh), there holds
+∥⃗u−⃗uτh∥L2(I×Ω) ≤C
+
+∥⃗u−⃗χ∥L2(I×Ω)+∥⃗u−πτ⃗u∥L2(I×Ω)+∥⃗u−RS
+h⃗u∥L2(I×Ω)
+
+. (6.1)
+Proof. The proof essentially follows by a duality argument and Theorem 4.1.
+Consider the following dual problem
+−∂t⃗g(t, ⃗x) −∆⃗g(t, ⃗x) + ∇λ(t, ⃗x) = ⃗uτh,
+(t, ⃗x) ∈I × Ω,
+∇· ⃗g(t, ⃗x) = 0,
+(t, ⃗x) ∈I × Ω,
+⃗g(t, ⃗x) = 0,
+(t, ⃗x) ∈I × ∂Ω,
+⃗g(T, x) = 0,
+⃗x ∈Ω.
+(6.2)
+The corresponding ﬁnite element approximation (⃗gτh, λτh) ∈Xw
+τ ( ⃗Xh × Mh) is given
+by
+B((⃗vτh, qτh), (⃗gτh, λτh)) = (⃗uτh,⃗vτh)I×Ω
+∀(⃗vτh, qτh) ∈Xw
+τ ( ⃗Xh × Mh).
+(6.3)
+By the Galerkin orthogonality from (3.4) we have
+∥⃗uτh∥2
+L2(I×Ω) = (⃗uτh, ⃗uτh)I×Ω= B((⃗uτh, pτh), (⃗gτh, λτh)) = B((⃗u, p), (⃗gτh, λτh))
+= −
+M
+X
+m=1
+(⃗u, ∂t⃗gτh)Im×Ω+ (∇⃗u, ∇⃗gτh)I×Ω−(p, ∇· ⃗gτh) −
+M
+X
+m=1
+(⃗u−
+m, [⃗gτh]m)Ω
+= J1 + J2 + J3 + J4,
+where we have used the dual representation of the bilinear form B from (3.16). In the
+last sum we set ⃗gτh,M+1 = 0 so that [⃗gτh]M = −⃗gτh,M. Applying the Cauchy-Schwarz
+inequality and Theorem 4.1, we obtain
+J1 ≤
+M
+X
+m=1
+∥⃗u∥L2(Im×Ω)∥∂t⃗gτh∥L2(Im×Ω)
+≤
+ M
+X
+m=1
+∥⃗u∥2
+L2(Im×Ω)
+!1/2  M
+X
+m=1
+∥∂t⃗gτh∥2
+L2(Im×Ω)
+!1/2
+≤C∥⃗u∥L2(I×Ω)∥⃗uτh∥L2(I×Ω).
+
+[PDF PAGE 13]
+Discrete maximal parabolic regularity
+13
+To treat J4, we use the projection deﬁned in (3.17), the Cauchy-Schwarz inequality
+and the inverse inequality for time discrete function and to obtain
+J4 = −
+M
+X
+m=1
+(⃗u−
+m, [⃗gτh]m)Ω= −
+M
+X
+m=1
+((πτ⃗u)m, [⃗gτh]m)Ω
+≤
+ M
+X
+m=1
+τm∥(πτ⃗u)m∥2
+L2(Ω)
+!1/2  M
+X
+m=1
+τ −1
+m ∥[⃗gτh]m−1∥2
+L2(Ω)
+!1/2
+≤
+ M
+X
+m=1
+τm∥πτ⃗u∥2
+L∞(Im;L2(Ω))
+!1/2  M
+X
+m=1
+τm∥τ −1
+m [⃗gτh]m−1∥2
+L2(Ω)
+!1/2
+≤C
+ M
+X
+m=1
+∥πτ⃗u∥2
+L2(Im×Ω)
+!1/2  M
+X
+m=1
+τm∥τ −1
+m [⃗gτh]m−1∥2
+L2(Ω)
+!1/2
+≤C∥πτ⃗u∥L2(I×Ω)∥⃗uτh∥L2(I×Ω).
+For J2 + J3 we can argue by using the projection RS
+h deﬁned in (5.1). Then, we have
+J2 + J3 = (∇⃗u, ∇⃗gτh)I×Ω−(p, ∇· ⃗gτh)I×Ω
+= (∇RS
+h(⃗u, p), ∇⃗gτh)I×Ω−(RS,p
+h (⃗u, p), ∇· ⃗gτh)I×Ω
+= (∇RS
+h(⃗u, p), ∇⃗gτh)I×Ω,
+where the last term vanishes, since ⃗gτh is discretely divergence-free.
+Here and in
+what follows, the projection (RS
+h, RS,p
+h ) is applied to time dependent functions (⃗u, p)
+pointwise in time. Since ∇· ⃗u(t) = 0 for almost all t ∈I we have RS
+h(⃗u(t), p(t)) ∈⃗Vh,
+cf. (5.1). With this we can use the deﬁnition of the discrete Stokes operator Ah
+resulting in
+(∇RS
+h(⃗u, p), ∇⃗gτh)I×Ω= (RS
+h(⃗u, p), Ah⃗gτh)I×Ω
+≤∥RS
+h(⃗u, p)∥L2(I×Ω)∥Ah⃗gτh∥L2(I×Ω)
+≤
+
+∥⃗u∥L2(I×Ω)) + ∥⃗u −RS
+h(⃗u, p)∥L2(I×Ω)
+
+∥⃗uτh∥L2(I×Ω).
+(6.4)
+Combining the estimates for J1, J2, J3 and J4, we conclude
+∥⃗uτh∥L2(I×Ω) ≤C
+
+∥⃗u∥L2(I×Ω)) + ∥πτ⃗u∥L2(I×Ω)) + ∥⃗u −RS
+h(⃗u, p)∥L2(I×Ω)
+
+.
+Using that the Galerkin method is invariant on Xw
+τ (⃗Vh × Mh), by replacing ⃗u and
+⃗uτh with ⃗u −⃗χ and ⃗uτh −⃗χ for any ⃗χ ∈Xw
+τ (⃗Vh), and using the triangle inequality we
+complete the proof of the theorem.
+If the exact solution is suﬃciently smooth then the above result easily leads to
+optimal convergence rates.
+Corollary 6.2.
+Let Ωbe convex, ⃗f ∈L2(I, L2(Ω)d) and ⃗u0 ∈⃗V 1. Let (⃗u, p) be
+the solution of (2.7) and (⃗uτh, pτh) solve the respective ﬁnite element problem (3.14).
+Then, there holds
+∥⃗u −⃗uτh∥L2(I;L2(Ω)) ≤C
+ τ + h2 
+∥⃗f∥L2(I;L2(Ω)) + ∥⃗u0∥⃗V 1
+
+.
+(6.5)
+
+[PDF PAGE 14]
+14
+DMITRIY LEYKEKHMAN AND BORIS VEXLER
+Proof. From Theorem 6.1, we need to estimate three terms. The temporal error
+is estimated by (3.18) resulting in
+∥⃗u −πτ⃗u∥L2(I;L2(Ω)) ≤Cτ∥∂t⃗u∥L2(I;L2(Ω)).
+The spatial error using Proposition 5.3 is estimated by
+∥⃗u −RS
+h(⃗u, p)∥L2(I;L2(Ω)) ≤Ch2 
+∥∇2⃗u∥L2(I;L2(Ω)) + ∥∇p∥L2(I;L2(Ω))
+
+.
+Similarly, choosing ⃗χ = PτRS
+h(⃗u, p), where Pτ is the orthogonal L2 projection onto
+Xw
+τ , by the triangle inequality we obtain
+∥⃗u −⃗χ∥L2(I×Ω) ≤∥⃗u −Pτ⃗u∥L2(I×Ω) + ∥Pτ(⃗u −RS
+h(⃗u, p)∥L2(I×Ω)
+≤Cτ∥∂t⃗u∥L2(I;L2(Ω)) + Ch2∥∇2⃗u∥L2(I;L2(Ω)).
+Using Corollary 2.3, we obtain the result.
+6.2. H1 error estimates. The second result establishes the optimal error esti-
+mates L2(I; H1(Ω)d) norm on quasi-uniform meshes.
+Theorem 6.3. Let ⃗f ∈L2(I; L2(Ω)d) and ⃗u0 ∈⃗V 1. Let (⃗u, p) be the solution of
+(2.7) and (⃗uτh, pτh) solve the respective ﬁnite element problem (3.14) on a family of
+quasi-uniform triangulations {Th}. Then, for any ⃗χ ∈Xw
+τ (⃗Vh), there holds
+∥∇(⃗u−⃗uτh)∥L2(I×Ω) ≤C
+
+∥∇(⃗u−⃗χ)∥L2(I×Ω)+∥∇(⃗u−πτ⃗u)∥L2(I×Ω)+∥∇(⃗u−RS
+h⃗u)∥L2(I×Ω)
+
+.
+(6.6)
+Proof. The proof is similar to the proof for the L2(I; L2(Ω)d) norm. This time,
+we consider the following dual problem
+−∂t⃗g(t, ⃗x) −∆⃗g(t, ⃗x) + ∇λ(t, ⃗x) = Ah⃗uτh,
+(t, ⃗x) ∈I × Ω,
+∇· ⃗g(t, ⃗x) = 0,
+(t, ⃗x) ∈I × Ω,
+⃗g(t, ⃗x) = 0,
+(t, ⃗x) ∈I × ∂Ω,
+⃗g(T, x) = 0,
+⃗x ∈Ω.
+(6.7)
+The corresponding ﬁnite element approximation (⃗gτh, λτh) ∈Xw
+τ ( ⃗Xh × Mh) is given
+by
+B((⃗vτh, qτh), (⃗gτh, λτh)) = (Ah⃗uτh ⃗vτh)I×Ω
+∀(⃗vτh, qτh) ∈Xw
+τ ( ⃗Xh × Mh).
+(6.8)
+By the Galerkin orthogonality from (3.4) we have
+∥∇⃗uτh∥2
+L2(I×Ω) = (Ah⃗uτh, ⃗uτh)I×Ω= B((⃗uτh, pτh), (⃗gτh, λτh)) = B((⃗u, p), (⃗gτh, λτh))
+= −
+M
+X
+m=1
+(⃗u, ∂t⃗gτh)Im×Ω+ (∇⃗u, ∇⃗gτh)I×Ω−(p, ∇· ⃗gτh) −
+M
+X
+m=1
+(⃗u−
+m, [⃗gτh]m)Ω
+= J1 + J2 + J3 + J4,
+where we have used the dual representation of the bilinear form B from (3.16). In the
+last sum we set ⃗gτh,M+1 = 0 so that [⃗gτh]M = −⃗gτh,M. Applying the Cauchy-Schwarz
+
+[PDF PAGE 15]
+Discrete maximal parabolic regularity
+15
+inequality and Theorem 4.2, we obtain
+J1 = −
+M
+X
+m=1
+(Ph⃗u, ∂t⃗gτh)Im×Ω
+= −
+M
+X
+m=1
+(∇Ph⃗u, ∇A−1
+h ∂t⃗gτh)Im×Ω=
+≤
+M
+X
+m=1
+∥∇Ph⃗u∥L2(Im×Ω)∥∇A−1
+h ∂t⃗gτh∥L2(Im×Ω)
+≤
+ M
+X
+m=1
+∥∇Ph⃗u∥2
+L2(Im×Ω)
+!1/2  M
+X
+m=1
+∥∇A−1
+h ∂t⃗gτh∥2
+L2(Im×Ω)
+!1/2
+≤C∥∇⃗u∥L2(I×Ω)∥∇⃗uτh∥L2(I×Ω),
+where in the last step we used the stability of Ph in H1(Ω)d for divergence free
+functions from H1
+0(Ω)d.
+To treat J4, we use the projection deﬁned in (3.17), the Cauchy-Schwarz inequality
+and the inverse inequality for time discrete function and to obtain
+J4 = −
+M
+X
+m=1
+(⃗u−
+m, [⃗gτh]m)Ω= −
+M
+X
+m=1
+(πτPh⃗um, [⃗gτh]m)Ω
+= −
+M
+X
+m=1
+(πτ∇Ph⃗um, [∇A−1
+h ⃗gτh]m)Ω
+≤
+ M
+X
+m=1
+τm∥πτ∇Ph⃗um∥2
+L2(Ω)
+!1/2  M
+X
+m=1
+τ −1
+m ∥[∇A−1
+h ⃗gτh]m−1∥2
+L2(Ω)
+!1/2
+≤
+ M
+X
+m=1
+τm∥πτ∇Ph⃗u∥2
+L∞(Im;L2(Ω))
+!1/2  M
+X
+m=1
+τm∥τ −1
+m [∇A−1
+h ⃗gτh]m−1∥2
+L2(Ω)
+!1/2
+≤C
+ M
+X
+m=1
+∥πτ∇Ph⃗u∥2
+L2(Im×Ω)
+!1/2  M
+X
+m=1
+τm∥τ −1
+m [∇A−1
+h ⃗gτh]m−1∥2
+L2(Ω)
+!1/2
+≤C∥πτ∇Ph⃗u∥L2(I×Ω)∥∇⃗uτh∥L2(I×Ω)
+≤C∥πτ∇⃗u∥L2(I×Ω)∥∇⃗uτh∥L2(I×Ω),
+where again in the last step we used the stability of Ph in H1(Ω)d for divergence free
+functions from H1
+0(Ω)d.
+For J2 + J3 we can argue by using the projection RS
+h deﬁned in (5.1). Then since
+⃗gτh is discretely divergence-free, we have
+J2 + J3 = (∇⃗u, ∇⃗gτh)I×Ω−(p, ∇· ⃗gτh)I×Ω
+= (∇RS
+h(⃗u, p), ∇⃗gτh)I×Ω−(RS,p
+h (⃗u, p), ∇· ⃗gτh)I×Ω= (∇RS
+h(⃗u, p), ∇⃗gτh)I×Ω
+≤∥∇RS
+h(⃗u, p)∥L2(I×Ω)∥∇⃗gτh∥L2(I×Ω)
+≤C
+
+∥∇⃗u∥L2(I×Ω)) + ∥∇(⃗u −RS
+h(⃗u, p))∥L2(I×Ω)
+
+∥∇⃗uτh∥L2(I×Ω).
+
+[PDF PAGE 16]
+16
+DMITRIY LEYKEKHMAN AND BORIS VEXLER
+Combining the estimates for J1, J2, J3 and J4, we conclude
+∥∇⃗uτh∥L2(I×Ω) ≤C
+
+∥∇⃗u∥L2(I×Ω)) + ∥πτ∇⃗u∥L2(I×Ω)) + ∥∇(⃗u −RS
+h(⃗u, p))∥L2(I×Ω)
+
+.
+Using that the Galerkin method is invariant on Xw
+τ (⃗Vh × Mh), by replacing ⃗u and
+⃗uτh with ⃗u −⃗χ and ⃗uτh −⃗χ for any ⃗χ ∈Xw
+τ (⃗Vh), and using the triangle inequality we
+complete the proof of the theorem.
+Corollary 6.4. Let Ωbe convex, ⃗f ∈L2(I, L2(Ω)d) and ⃗u0 ∈⃗V 1. Let (⃗u, p) be
+the solution of (2.7) and (⃗uτh, pτh) solve the respective ﬁnite element problem (3.14).
+Then, there holds
+∥∇(⃗u −⃗uτh)∥L2(I;L2(Ω)) ≤C
+
+τ 1/2 + h
+ 
+∥⃗f∥L2(I;L2(Ω)) + ∥⃗u0∥⃗V 1
+
+.
+(6.9)
+Proof. The proof is analogous to the proof of Corollary 6.2. The main diﬀerence
+is to use the estimate
+∥∇(⃗u −πτ⃗u)∥L2(I×Ω) ≤Cτ1/2 
+∥⃗f∥L2(I;L2(Ω)) + ∥⃗u0∥⃗V 1
+
+.
+from Lemma 3.13 from [15]
+7. Inhomogeneous heat equation. The above results naturally hold for the
+scalar parabolic equation
+ut(t, x) −∆u(t, x) = f(t, x),
+(t, x) ∈I × Ω,
+u(t, x) = 0,
+(t, x) ∈I × ∂Ω,
+u(0, x) = u0(x),
+x ∈Ω.
+(7.1)
+All arguments stay almost unchanged. We only need to replace A and Ah with −∆
+and −∆h, the discrete Leray projection Ph with the L2-projection Ph, and the Stokes
+projection RS
+h(⃗u, p) with the Ritz (elliptic) projection Rh. The mesh restrictions in
+the case of H1 norm estimates can be relaxed. The only technical requirement is the
+stability of the L2-projection in H1 norm, i.e.
+∥∇Phu∥L2(Ω) ≤C∥∇u∥L2(Ω).
+Such result is shown for locally quasi-uniform meshes [3], on adaptive meshes obtained
+by bisection method in 2D [1, 8].
+In this situation the best approximation result take the form
+∥u −ukh∥L2(I×Ω) ≤C
+ ∥u −χ∥L2(I×Ω) + ∥Rhu −u∥L2(I×Ω) + ∥πku −u∥L2(I×Ω)
+
+,
+(7.2)
+and since the Ritz projection Rh is stable in H1 norm,
+∥∇(u −ukh)∥L2(I×Ω) ≤C
+ ∥∇(u −χ)∥L2(I×Ω) + ∥∇(πku −u)∥L2(I×Ω)
+
+,
+(7.3)
+for any space-time fully discrete function χ. Similarly, to the Stokes problem, under
+the additional assumption of convexity of Ωand some approximation properties of
+the discrete spaces, we easily derive optimal error estimates of the form
+∥u −uτh∥L2(I;Hs(Ω)) ≤C
+
+τ 1−s/2 + h2−s 
+∥f∥L2(I;L2(Ω)) + ∥u0∥H1(Ω)
+
+,
+s = 0, 1.
+(7.4)
+
+[PDF PAGE 17]
+Discrete maximal parabolic regularity
+17
+REFERENCES
+[1] Bank, R. & Yserentant, H., On the H1-stability of the L2-projection onto ﬁnite element
+spaces, Numer. Math. 126, 361-381 (2014), https://doi.org/10.1007/s00211-013-0562-4
+[2] Behringer, N., Vexler, B. & Leykekhman, D., Fully discrete best-approximation-type esti-
+mates in L∞(I; L2(Ω)d) for ﬁnite element discretizations of the transient Stokes equations,
+IMA Journal Of Numerical Analysis, (2022), https://doi.org/10.1093/imanum/drac009,
+drac009
+[3] Bramble, J., Pasciak, J. & Steinbach, O., On the stability of the L2 projection in H1(Ω),
+Math. Comp. 71, 147-156 (electronic) (2002), http://dx.doi.org/10.1090/S0025-5718-01-
+01314-X
+[4] Chrysafinos, K. & Walkington, N., Discontinuous Galerkin approximations of the Stokes
+and Navier-Stokes equations, Math. Comp. 79, 2135-2167 (2010)
+[5] Dauge, M., Stationary Stokes and Navier-Stokes systems on two- or three-dimensional do-
+mains with corners. I. Linearized equations., SIAM J. Math. Anal. 20, 74-97 (1989)
+[6] Ern, A. & Guermond, J., Theory and practice of ﬁnite elements., Springer-Verlag, New York,
+2004, https://doi-org.eaccess.ub.tum.de/10.1007/978-1-4757-4355-5
+[7] Galdi, G., An introduction to the mathematical theory of the Navier-Stokes equations,
+Springer, 2011, Steady-state problems
+[8] Gaspoz, F., Heine, C. & Siebert, K., Optimal grading of the newest vertex bisection
+and H1-stability of the L2-projection, IMA J. Numer. Anal. 36, 1217-1241 (2016),
+https://doi.org/10.1093/imanum/drv044
+[9] Girault, V., Nochetto, R. & Scott, L., Maximum-norm stability of the ﬁnite ele-
+ment Stokes projection, J. Math. Pures Appl. (9), 84, 279-330 (2005), https://doi-
+org.eaccess.ub.tum.de/10.1016/j.matpur.2004.09.017
+[10] Girault, V. & Scott, L., A quasi-local interpolation operator preserving the discrete diver-
+gence, Calcolo, 40, 1-19 (2003)
+[11] Girault, V., Nochetto, R. & Scott, L., Max-norm estimates for Stokes and Navier-Stokes
+approximations in convex polyhedra, Numer. Math. 131, 771-822 (2015)
+[12] Girault, V. & Raviart, P., Finite element methods for Navier-Stokes equations,, Springer-
+Verlag, (1986)
+[13] Guermond, J. & Pasciak, J., Stability of discrete Stokes operators in fractional Sobolev spaces,
+J. Math. Fluid Mech. 10, 588-610 (2008)
+[14] Kellogg, R. & Osborn, J., A regularity result for the Stokes problem in a convex polygon, J.
+Functional Analysis, 21, 397-431 (1976)
+[15] Kunisch,
+K.,
+Pieper,
+K.
+&
+Vexler,
+B.,
+Measure
+valued
+directional
+sparsity
+for
+parabolic optimal control problems, SIAM J. Control Optim. 52, 3078-3108 (2014),
+https://doi.org/10.1137/140959055
+[16] Meidner,
+D.
+&
+Vexler,
+B.,
+A
+priori
+error
+estimates
+for
+space-time
+ﬁnite
+el-
+ement
+discretization
+of
+parabolic
+optimal
+control
+problems.
+I.
+Problems
+without
+control
+constraints,
+SIAM
+J.
+Control
+Optim.
+47,
+1150-1177
+(2008),
+https://doi-
+org.eaccess.ub.tum.de/10.1137/070694016
+[17] Temam, R., Navier-Stokes equations. Theory and numerical analysis, North-Holland Publish-
+ing Co., 1977, Studies in Mathematics and its Applications, Vol. 2

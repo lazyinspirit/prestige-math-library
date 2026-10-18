@@ -799,6 +799,28 @@ refutation and no logical consumers in current frontier manifests or authored
 sources. This narrow exception retains ordinary independent review and every
 gate; historical scopes, baselines and worker receipts remain unchanged.
 
+For a genuinely native-created Step-3 helper repaired before its first
+certificate, `auditor-created-items.mjs native-origin --run RUN --step 3 --id
+ITEM --evidence research/JSON` records only immutable birth evidence. It retains
+the actual successful immutable native result/prompt/log and original archived
+source/manifest/contract projections. Restricted static replay of the logged
+successful literal source writes must reproduce the original full item exactly;
+actual captured metadata mtimes remain checked, and no missing item timestamp is
+invented. The existing `owner-recertify` then binds the actual outside repair
+authors, complete source-change chain and all six current hashes, preserving
+native authorship separately. Both are metadata operations, not certification
+attempts or independent review. Use the ordinary certification gate only after
+all escalations resolve. Full schemas and the bounded supported writer grammar
+are in [tools/auditor-created-items.md](tools/auditor-created-items.md). Baseline
+exclusion, unchanged home/batch, immutable native evidence, current carrier
+currency and every review/judge/gate requirement remain mandatory.
+First Step-3 closure replays each origin with the actual native log, then pins
+the immutable receipt and all original source/metadata/result/prompt/baseline
+markers under `native-created-step3-origin-freeze-v1`; transcripts stay outside
+the scoped commit. A later missing-log load requires those exact frozen pins
+and the successful native `tool-step3-close` result. Present logs always retain
+ordinary hash/replay validation; there is no unsealed fallback.
+
 
 An explicitly owner-authorized restored frontier may retain its original
 `pipeline_run` markers. Step-3 dependency routing recognizes those draft IDs

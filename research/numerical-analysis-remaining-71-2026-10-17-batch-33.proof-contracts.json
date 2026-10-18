@@ -1,0 +1,2393 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-pe03-euler-llf-split-state-positive",
+    "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+    "lem-pe03-hll-half-cell-riemann-averages",
+    "thm-pe03-hll-update-preserves-convex-invariant-domain",
+    "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+    "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+    "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+    "ex-pe03-burgers-entropy-residual",
+    "ex-pe03-conservative-positivity-rescaling",
+    "ex-pe03-entropy-stable-underresolved-shock",
+    "ex-pe03-near-vacuum-euler-hll-update"
+  ],
+  "contracts": {
+    "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-euler-positive-margin-domain",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$, and use the state variables and internal\nenergy density from [[def-ideal-gas-euler-state-and-pressure]]. Define the\n**positive-margin set**\n$$K_{\\gamma,\\varepsilon}:=\\left\\{(\\rho,m,E):\\rho\\ge\\varepsilon,\\quad E-\\frac{m^2}{2\\rho}\\ge\\varepsilon\\right\\}.$$\nEvery member has positive density and positive pressure. Closedness and\nconvexity are proved in\n[[prop-pe03-euler-state-and-margin-domains-are-convex-and-closed]]; those properties are not\nbeing inferred from this definition alone.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $U_k=(\\rho_k,m_k,E_k)\\in\\mathcal G_\\gamma$ for $k=1,2$ and $0\\le\\theta\\le1$. Put $\\rho_\\theta=\\theta\\rho_1+(1-\\theta)\\rho_2$ and similarly define $m_\\theta,E_\\theta$. Weighted Cauchy–Schwarz applied to $m_\\theta=\\sqrt{\\theta\\rho_1}(\\sqrt\\theta m_1/\\sqrt{\\rho_1})+\\sqrt{(1-\\theta)\\rho_2}(\\sqrt{1-\\theta}m_2/\\sqrt{\\rho_2})$ gives $m_\\theta^2\\le\\rho_\\theta\\bigl(\\theta m_1^2/\\rho_1+(1-\\theta)m_2^2/\\rho_2\\bigr)$. Thus $\\rho_\\theta>0$ and $E_\\theta-m_\\theta^2/(2\\rho_\\theta)\\ge\\theta(E_1-m_1^2/(2\\rho_1))+(1-\\theta)(E_2-m_2^2/(2\\rho_2))>0$. Therefore $\\mathcal G_\\gamma$ is convex.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $U_1,U_2\\in K_{\\gamma,\\varepsilon}$, the weighted Cauchy–Schwarz inequality in step 1.1 gives $\\rho_\\theta\\ge\\varepsilon$ and $E_\\theta-m_\\theta^2/(2\\rho_\\theta)\\ge\\theta\\varepsilon+(1-\\theta)\\varepsilon=\\varepsilon$. Hence $K_{\\gamma,\\varepsilon}$ is convex.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $U_n=(\\rho_n,m_n,E_n)\\in K_{\\gamma,\\varepsilon}$ converges to $U=(\\rho,m,E)$, then $\\rho\\ge\\varepsilon>0$ and continuity of $(\\rho,m,E)\\mapsto E-m^2/(2\\rho)$ on $\\rho\\ge\\varepsilon$ gives $E-m^2/(2\\rho)\\ge\\varepsilon$. Thus $U\\in K_{\\gamma,\\varepsilon}$, proving closedness.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The margin set is nonempty, for example zero momentum and sufficiently large positive density and energy.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The margin set is nonempty, for example zero momentum and sufficiently large positive density and energy.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "9f81e262ce3ba1cee97d2042fce192e2cc1d5ce3220237e5984c674f29537504",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The margin set is nonempty, for example zero momentum and sufficiently large positive density and energy.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "9f81e262ce3ba1cee97d2042fce192e2cc1d5ce3220237e5984c674f29537504",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the endpoint theta=0 in the weighted inequality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes theta=1 and uses the positive internal energy of that endpoint state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The positive density margin prevents vacuum and makes the kinetic energy quotient continuous at every limiting state.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The positive density margin prevents vacuum and makes the kinetic energy quotient continuous at every limiting state.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "5af02cfd6c4ad011a95cc8c5c5a1dda7f86f35e83731e8af464588221dfaf0c3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The positive density margin prevents vacuum and makes the kinetic energy quotient continuous at every limiting state.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "5af02cfd6c4ad011a95cc8c5c5a1dda7f86f35e83731e8af464588221dfaf0c3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 retain theta=0 and theta=1, including the epsilon boundary of the margin set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Convex weights and endpoint states are arbitrary supplied inputs; the proof needs no selections.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Convex weights and endpoint states are arbitrary supplied inputs; the proof needs no selections.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "2ea6f264942d949881a2c7cbdeff16d2254154b4005a98042edc41a3ae94eef9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Convex weights and endpoint states are arbitrary supplied inputs; the proof needs no selections.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "2ea6f264942d949881a2c7cbdeff16d2254154b4005a98042edc41a3ae94eef9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Weighted Cauchy–Schwarz proves both convexities, and continuity on the positive-density margin proves closedness.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Weighted Cauchy–Schwarz proves both convexities, and continuity on the positive-density margin proves closedness.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "d788250c094a6ac6b67f868a4541f480ee01a0cbed8a0bad38fa6a623dd7cbc3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Weighted Cauchy–Schwarz proves both convexities, and continuity on the positive-density margin proves closedness.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "d788250c094a6ac6b67f868a4541f480ee01a0cbed8a0bad38fa6a623dd7cbc3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Convexity and closedness are not claimed to characterize all physically admissible ideal-gas state subsets.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Convexity and closedness are not claimed to characterize all physically admissible ideal-gas state subsets.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "b2a4de39bbead8b60b6097438235164dec5aca0fda14519f56fa28bbe1473fbe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Convexity and closedness are not claimed to characterize all physically admissible ideal-gas state subsets.",
+            "item_sha256": "62c43af8e80c98864b1a43b6d54d34f5e3f6a0c273cd90b1dd034f7ec8789d8b",
+            "row_sha256": "b2a4de39bbead8b60b6097438235164dec5aca0fda14519f56fa28bbe1473fbe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "proposition"
+    },
+    "lem-pe03-euler-llf-split-state-positive": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\delta\\in\\{-1/a,1/a\\}$. From [F1], direct substitution in $U+\\delta F(U)$ gives $\\rho_\\delta=\\rho(1+\\delta u)=\\rho x$, $m_\\delta=\\rho u(1+\\delta u)+\\delta p$, and $E_\\delta=E+\\delta u(E+p)$. Expanding $E_\\delta-m_\\delta^2/(2\\rho_\\delta)$ and using $E=e+\\rho u^2/2$ yields $e_\\delta=e x-\\delta^2p^2/(2\\rho x)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $a\\ge|u|+c$ and $c>0$, $x\\ge1-|u|/a\\ge c/a>0$, so $\\rho_\\delta>0$. Also $|\\delta|/x\\le1/c$, hence $\\frac{\\delta^2p^2}{2\\rho e x^2}\\le\\frac{p^2}{2\\rho e c^2}=\\frac{\\gamma-1}{2\\gamma}<1$. Therefore $e_\\delta=e x\\left(1-\\frac{\\delta^2p^2}{2\\rho e x^2}\\right)>0$, so $U_\\delta\\in\\mathcal G_\\gamma$. The argument covers both signs of $\\delta$ and the equality case $a=|u|+c$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The split-state calculation acts on one admissible Euler state with three components and has no optional empty state family.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The split-state calculation acts on one admissible Euler state with three components and has no optional empty state family.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "5a5aa213b815908f6ee5a852d96d2b023ab6b41d5aa63c0412a1b44b1384abd6",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The split-state calculation acts on one admissible Euler state with three components and has no optional empty state family.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "5a5aa213b815908f6ee5a852d96d2b023ab6b41d5aa63c0412a1b44b1384abd6",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid at u=0, where x=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The heat-capacity ratio must be strictly greater than one; setting it to one would remove the required positive-pressure relation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The heat-capacity ratio must be strictly greater than one; setting it to one would remove the required positive-pressure relation.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "4dcf21613d58ba16d768f9c512766812a3ebe8fb51fb4bca6906df16e9b52c40",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The heat-capacity ratio must be strictly greater than one; setting it to one would remove the required positive-pressure relation.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "4dcf21613d58ba16d768f9c512766812a3ebe8fb51fb4bca6906df16e9b52c40",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves c>0 and x>0, so the denominator cannot degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly includes the equality case a=|u|+c."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The two signed split states are determined by the given signal bound, whose existence is not sought by an unbounded choice procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The two signed split states are determined by the given signal bound, whose existence is not sought by an unbounded choice procedure.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "41f138fa829bad74d12fd1d74ebb0bcc933d34b14e3b69ad49b3097f8346b498",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The two signed split states are determined by the given signal bound, whose existence is not sought by an unbounded choice procedure.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "41f138fa829bad74d12fd1d74ebb0bcc933d34b14e3b69ad49b3097f8346b498",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "An admissible gas state and an enclosing acoustic speed produce two states of strictly positive density and internal energy.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "An admissible gas state and an enclosing acoustic speed produce two states of strictly positive density and internal energy.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "14f5a0a2b620202149333651f61ba19a9f770e1145b28f31b75298879299b247",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "An admissible gas state and an enclosing acoustic speed produce two states of strictly positive density and internal energy.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "14f5a0a2b620202149333651f61ba19a9f770e1145b28f31b75298879299b247",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Positivity of a particular pair of split states does not imply the given sufficient acoustic speed bound and is not claimed to do so.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "Positivity of a particular pair of split states does not imply the given sufficient acoustic speed bound and is not claimed to do so.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "5795fe6bed1a8d05088dde413c51b71df69c2e8d532fe925f84c9c7fd310fce3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "Positivity of a particular pair of split states does not imply the given sufficient acoustic speed bound and is not claimed to do so.",
+            "item_sha256": "701d1fd1d77a4b49f5ef262de2d628feb09f2d4cb2581eacc81a03453a1d8bf3",
+            "row_sha256": "5795fe6bed1a8d05088dde413c51b71df69c2e8d532fe925f84c9c7fd310fce3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "lem-pe03-hll-half-cell-riemann-averages": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hll-two-wave-flux",
+          "source_section": "Definition",
+          "quote": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hll-flux-is-consistent-and-conservative",
+          "source_section": "Statement",
+          "quote": "When $S_L<0<S_R$, the HLL intermediate state\n$$u_* =\\frac{S_Ru_R-S_Lu_L-(f_R-f_L)}{S_R-S_L}$$\ntogether with the assigned model flux\n$$f_* = f_L+S_L(u_*-u_L)$$\nsatisfies the two model balances\n$$f_*-f_L=S_L(u_*-u_L),\\qquad f_R-f_*=S_R(u_R-u_*).$$\nThis $f_*$ is the middle formula in [[def-hll-two-wave-flux]]. In general\n$f_*\\ne f(u_*)$, even when $u_*\\in G$; the model is not asserted to be a\nweak solution of the original conservation law. For equal states\nthe HLL flux is consistent. A finite-volume update using the same HLL flux at\neach periodic interface is conservative: for any finite periodic array with\nadjacent pairs in the flux domain, define\n$$U_j^{new}=U_j-\\nu\\bigl(\\widehat f_{\\rm HLL}(U_j,U_{j+1})-\\widehat f_{\\rm HLL}(U_{j-1},U_j)\\bigr).$$\nHere $n\\ge1$. The result holds for any scalar $\\nu$ and assumes the supplied speeds; it does\nnot prove that they enclose a nonlinear Riemann fan.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hll-two-wave-flux",
+          "source_section": "Definition",
+          "quote": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-pe03-first-order-hll-finite-volume-update",
+          "source_section": "Definition",
+          "quote": "Let $F:\\mathcal A\\to\\mathbb R^m$ be the flux of the one-dimensional system in\n[[def-hyperbolic-system-and-characteristic-families]]. On a periodic uniform\nmesh of $N\\ge2$ cells of width $h>0$, let $U_i\\in\\mathcal A$ be the cell means\nand put $\\nu=\\Delta t/h\\ge0$. At each face $(i+1/2)$ choose explicit speeds\n$S_{L,i+1/2}<0<S_{R,i+1/2}$ and evaluate the middle branch of the HLL flux\n[[def-hll-two-wave-flux]] on $(U_i,U_{i+1})$. The **first-order HLL update** is\n$$U_i^+=U_i-\\nu\\bigl(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\bigr),\\qquad i\\pmod N.$$\nThe speeds are supplied data. Neither this definition nor later algebraic\nresults assert that they enclose the wave speeds of an exact nonlinear Riemann\nsolution.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the displayed $U_*$ is the intermediate state of the conservative HLL fan. Write $D=S_R-S_L>0$. Substitution gives $U_*-U_L=(S_R(U_R-U_L)-(F_R-F_L))/D$ and $U_*-U_R=(S_L(U_R-U_L)-(F_R-F_L))/D$. Therefore $F_L+S_L(U_*-U_L)=F_R+S_R(U_*-U_R)$, and expanding either side yields exactly [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3] and [F2], in coordinates with the face at $x=0$ the HLL profile is $U_L$ for $x/t<S_L$, $U_*$ for $S_L<x/t<S_R$, and $U_R$ for $x/t>S_R$. On $[-h/2,0]$ at time $\\Delta t$, the two portions have lengths $h/2+S_L\\Delta t$ and $-S_L\\Delta t$; dividing by $h/2$ gives $A^-$. The CFL condition makes both lengths nonnegative. On $[0,h/2]$, the portions have lengths $S_R\\Delta t$ and $h/2-S_R\\Delta t$; dividing by $h/2$ gives $A^+$, again with nonnegative lengths.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the right face of cell $i$, step 1.1 gives $\\widehat F_{i+1/2}=F(U_i)+S_{L,i+1/2}(U_{*,i+1/2}-U_i)$; at its left face it gives $\\widehat F_{i-1/2}=F(U_i)+S_{R,i-1/2}(U_{*,i-1/2}-U_i)$. Substitution in [F4] yields $U_i^+=(1-\\nu a_R-\\nu a_L)U_i+\\nu a_RU_{*,i+1/2}+\\nu a_LU_{*,i-1/2}$, where $a_R=-S_{L,i+1/2}$ and $a_L=S_{R,i-1/2}$. The half-sum $\\tfrac12(A^+_{i-1/2}+A^-_{i+1/2})$ has those same three coefficients, proving the identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each face has two supplied states and a nonempty left and right half-cell; there is no empty fan average.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "Each face has two supplied states and a nonempty left and right half-cell; there is no empty fan average.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "af4de479bce80464b5399ce9ad757d97757c0e2d2f982d01a54f6eb452271d1c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "Each face has two supplied states and a nonempty left and right half-cell; there is no empty fan average.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "af4de479bce80464b5399ce9ad757d97757c0e2d2f982d01a54f6eb452271d1c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives A-minus=U_L and A-plus=U_R when nu=0; step 3.1 then leaves the cell mean unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: At equality in either one-sided CFL restriction its convex coefficient on the original state vanishes and the half-cell average is the intermediate state.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "At equality in either one-sided CFL restriction its convex coefficient on the original state vanishes and the half-cell average is the intermediate state.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "1f57c3fe6c7ea52e37d5464ed7a29d7fd55d791a67f4a8a091444859e8e069bb",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "At equality in either one-sided CFL restriction its convex coefficient on the original state vanishes and the half-cell average is the intermediate state.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "1f57c3fe6c7ea52e37d5464ed7a29d7fd55d791a67f4a8a091444859e8e069bb",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The supplied speeds strictly straddle zero, so the intermediate-state denominator is positive and collapsed-speed fans are excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The supplied speeds strictly straddle zero, so the intermediate-state denominator is positive and collapsed-speed fans are excluded.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "56c2131e50000cd52330aee696fd01350cf0e242773484640a656e1273198c55",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The supplied speeds strictly straddle zero, so the intermediate-state denominator is positive and collapsed-speed fans are excluded.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "56c2131e50000cd52330aee696fd01350cf0e242773484640a656e1273198c55",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 permits equality in either CFL bound, where one wave portion has zero length."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Given speeds and states determine the intermediate state and both half-cell weights algebraically; no Riemann solution is chosen from a family.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "Given speeds and states determine the intermediate state and both half-cell weights algebraically; no Riemann solution is chosen from a family.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "e46fa1377ee971445c8a63d86e29028e9ace358b4b8324f0821d5616536a9ecc",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "Given speeds and states determine the intermediate state and both half-cell weights algebraically; no Riemann solution is chosen from a family.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "e46fa1377ee971445c8a63d86e29028e9ace358b4b8324f0821d5616536a9ecc",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite fan geometry gives the two convex half-cell formulas and recovers the conservative update by averaging adjacent halves.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The finite fan geometry gives the two convex half-cell formulas and recovers the conservative update by averaging adjacent halves.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "a322db3ea22ac7a48b49a233e525c5b09207faa815f19f9b0f8bc4ba911c7086",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The finite fan geometry gives the two convex half-cell formulas and recovers the conservative update by averaging adjacent halves.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "a322db3ea22ac7a48b49a233e525c5b09207faa815f19f9b0f8bc4ba911c7086",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A conservative update written as an average need not imply the supplied wave speeds enclose a physical fan; no such converse is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "A conservative update written as an average need not imply the supplied wave speeds enclose a physical fan; no such converse is asserted.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "338625cff5c8c1a63fd9c1d2dca43c25ad14cc628324f46f95e33bd6ee9e7cf8",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "A conservative update written as an average need not imply the supplied wave speeds enclose a physical fan; no such converse is asserted.",
+            "item_sha256": "b740d0c07edaa520e96f7eeda1330072623f806b28f18ac9a0f03e7358061654",
+            "row_sha256": "338625cff5c8c1a63fd9c1d2dca43c25ad14cc628324f46f95e33bd6ee9e7cf8",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "thm-pe03-hll-update-preserves-convex-invariant-domain": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe03-convex-invariant-domain",
+          "source_section": "Definition",
+          "quote": "Let $m,N\\ge1$, let $\\mathcal A\\subseteq\\mathbb R^m$ be a state domain, and let\n$\\Phi:\\mathcal A^N\\to\\mathcal A^N$ be a one-step update on $N$ cell states.\nA set $K\\subseteq\\mathcal A$ is **convex** if\n$\\theta U+(1-\\theta)V\\in K$ for every $U,V\\in K$ and $\\theta\\in[0,1]$.\nIt is a **convex invariant domain for $\\Phi$** if it is convex and\n$\\Phi(K^N)\\subseteq K^N$. The word invariant refers only to this stated\none-step map and its stated admissible inputs; it asserts no invariance for a\ndifferent flux, time integrator, or exact Riemann evolution.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pe03-hll-half-cell-riemann-averages",
+          "source_section": "Statement",
+          "quote": "Use the first-order HLL update of\n[[def-pe03-first-order-hll-finite-volume-update]]. At a face with left and right\nstates $U_L,U_R$, supplied speeds $S_L<0<S_R$, and physical flux values\n$F_L=F(U_L),F_R=F(U_R)$, define\n$$U_*:=\\frac{S_RU_R-S_LU_L-(F_R-F_L)}{S_R-S_L}.$$\nIf the one-sided CFL bounds $2\\nu(-S_L)\\le1$ and $2\\nu S_R\\le1$ hold, the\naverages of the HLL fan over the adjacent left and right half-cells are,\nrespectively,\n$$A^-=(1-2\\nu(-S_L))U_L+2\\nu(-S_L)U_*,\\qquad A^+=(1-2\\nu S_R)U_R+2\\nu S_RU_*.$$\nFor every cell $i$, the updated mean satisfies\n$$U_i^+=\\frac12\\left(A^+_{i-1/2}+A^-_{i+1/2}\\right),$$\nwhere each face uses its own supplied speeds and intermediate state.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At each face, the stated HLL fan-average hypothesis gives $A^-,A^+\\in K$. In the sufficient intermediate-state case, the CFL bounds make the coefficients in each formula of [F2] nonnegative and sum to one, so convexity and $U_L,U_R,U_*\\in K$ give the same conclusion.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $U_i^+=\\tfrac12(A^+_{i-1/2}+A^-_{i+1/2})$. This is a convex combination of two members of $K$, so $U_i^+\\in K$ for every cell. The argument is one-step and uses only the supplied HLL speeds and the explicit CFL bounds.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplied cell means belong to the convex set, so that set cannot be empty on the actual mesh.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "The supplied cell means belong to the convex set, so that set cannot be empty on the actual mesh.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "dd4630635bfc6c61f373b399954429465e0fb2874e26eb7ece7bff5dcc3c74be",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "The supplied cell means belong to the convex set, so that set cannot be empty on the actual mesh.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "dd4630635bfc6c61f373b399954429465e0fb2874e26eb7ece7bff5dcc3c74be",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No independent zero-valued parameter boundary is asserted beyond the explicit cases listed as checked."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A one-cell periodic mesh, when admitted, still updates by the same average of two half-cell means.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "A one-cell periodic mesh, when admitted, still updates by the same average of two half-cell means.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "b681465f6dded8b44ea9444be12165678345cd6b8693f1daae7a63c4295f4b6b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "A one-cell periodic mesh, when admitted, still updates by the same average of two half-cell means.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "b681465f6dded8b44ea9444be12165678345cd6b8693f1daae7a63c4295f4b6b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At a CFL equality some convex weights can vanish, and nonnegativity with total weight one remains sufficient.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "At a CFL equality some convex weights can vanish, and nonnegativity with total weight one remains sufficient.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "6860c3b6b0081cc258e39f0446c08b6f8bdb29ae223fd6357ca23f586deff6f9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "At a CFL equality some convex weights can vanish, and nonnegativity with total weight one remains sufficient.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "6860c3b6b0081cc258e39f0446c08b6f8bdb29ae223fd6357ca23f586deff6f9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 allows a CFL coefficient to equal zero while all convex weights remain nonnegative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Half-cell means are supplied by explicit face formulas, rather than selected from an arbitrary invariant set.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Half-cell means are supplied by explicit face formulas, rather than selected from an arbitrary invariant set.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "64f0870d8b85bf3368337ab27310746f50855fdc0101ad0b176d40bd78d48c2b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Half-cell means are supplied by explicit face formulas, rather than selected from an arbitrary invariant set.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "64f0870d8b85bf3368337ab27310746f50855fdc0101ad0b176d40bd78d48c2b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fan-average condition suffices for invariance, without being asserted necessary for every preserving update.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "The fan-average condition suffices for invariance, without being asserted necessary for every preserving update.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "fcb31bf22700fb27a0bee3cbe21e0eaba13a163694e09fedb2b2287c7cdc4ef1",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "The fan-average condition suffices for invariance, without being asserted necessary for every preserving update.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "fcb31bf22700fb27a0bee3cbe21e0eaba13a163694e09fedb2b2287c7cdc4ef1",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Membership of the updated mean does not imply membership of both fan half-averages, and no converse is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Membership of the updated mean does not imply membership of both fan half-averages, and no converse is claimed.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "5ffb774359b2e7dc75d04e70640c84f2ee224cf7161af7523a53826b3e51e7fe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Membership of the updated mean does not imply membership of both fan half-averages, and no converse is claimed.",
+            "item_sha256": "8e30d7ea8ba2836be4ca10aa8c6c96e6a83546b1eee216d5aef52f1a4808defa",
+            "row_sha256": "5ffb774359b2e7dc75d04e70640c84f2ee224cf7161af7523a53826b3e51e7fe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem"
+    },
+    "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe03-system-entropy-pair-and-potential",
+          "source_section": "Definition",
+          "quote": "Use the conservation-system convention of\n[[def-hyperbolic-system-and-characteristic-families]]: on an open convex state\ndomain $\\mathcal A\\subseteq\\mathbb R^m$, the flux is $F:\\mathcal A\\to\\mathbb R^m$.\nA **convex entropy pair** is a pair $(\\eta,q)$ with $\\eta\\in C^2(\\mathcal A)$,\n$q\\in C^1(\\mathcal A)$, positive-semidefinite Hessian $D^2\\eta$, and\n$$Dq(U)=D\\eta(U)\\,DF(U)\\qquad(U\\in\\mathcal A).$$\nThe **entropy variable** is the column vector $v(U)=\\nabla\\eta(U)$; gradients\nare represented as columns, so the compatibility equation above means\n$\\nabla q(U)=DF(U)^T v(U)$. The **entropy potential** is\n$\\psi(U)=v(U)^T F(U)-q(U)$. This definition does not assert that every convex\n$\\eta$ admits a flux $q$; the compatibility equation is part of the hypothesis.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-tadmor-entropy-conservative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be a convex entropy pair on an open domain $\\mathcal A$, with\nentropy variable $v$ and potential $\\psi$ as in\n[[def-pe03-system-entropy-pair-and-potential]]. A continuous two-point flux\n$F^{ec}:\\mathcal A\\times\\mathcal A\\to\\mathbb R^m$ is **entropy-conservative\nin Tadmor's sense** if it is consistent and symmetric,\n$F^{ec}(U,U)=F(U)$, and satisfies the exact jump identity\n$$\\bigl(v(U_R)-v(U_L)\\bigr)^T F^{ec}(U_L,U_R)=\\psi(U_R)-\\psi(U_L)$$\nfor every pair $U_L,U_R\\in\\mathcal A$. This definition asserts no existence\nfor a prescribed entropy pair.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe03-entropy-stable-dissipative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be an entropy pair with entropy variable $v$ and potential\n$\\psi$, and let $F^{ec}$ be a consistent entropy-conservative flux as in\n[[def-pe03-tadmor-entropy-conservative-flux]]. For each pair\n$(U_L,U_R)\\in\\mathcal A^2$, choose a symmetric positive-semidefinite matrix\n$D(U_L,U_R)\\in\\mathbb R^{m\\times m}$. The associated **entropy-stable\ndissipative flux** is\n$$F^{es}(U_L,U_R):=F^{ec}(U_L,U_R)-\\frac12D(U_L,U_R)(v(U_R)-v(U_L)).$$\nPositive semidefinite means $z^TD(U_L,U_R)z\\ge0$ for every $z\\in\\mathbb R^m$.\nNo fully discrete time-step property is included.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At a face, [F2]–[F3] give $[v]^TF^{es}=[\\psi]-\\tfrac12[v]^TD[v]\\le[\\psi]$, since $[v]^TD[v]\\ge0$. This uses only positive semidefiniteness, including the case where the jump or dissipation vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $[v]_{i+1/2}=v_{i+1}-v_i$ and $[\\psi]_{i+1/2}=\\psi_{i+1}-\\psi_i$, and use the arithmetic means in the definition of $\\widehat q$. Then $-v_i^TF^{es}_{i+1/2}+\\widehat q_{i+1/2}=\\tfrac12[v]_{i+1/2}^TF^{es}_{i+1/2}-\\tfrac12(\\psi_i+\\psi_{i+1})$ and $v_i^TF^{es}_{i-1/2}-\\widehat q_{i-1/2}=\\tfrac12[v]_{i-1/2}^TF^{es}_{i-1/2}+\\tfrac12(\\psi_{i-1}+\\psi_i)$. At equal states the same formula gives $\\widehat q=q$ by [F1] and the consistency in [F2], so this is a consistent numerical entropy flux. The right and left interface terms now combine with the entropy-jump defects from step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the chain rule and the semidiscrete update, $\\Delta x\\dot\\eta(U_i)=-v_i^TF^{es}_{i+1/2}+v_i^TF^{es}_{i-1/2}$. Add $\\widehat q_{i+1/2}-\\widehat q_{i-1/2}$ and use step 2.1. The potential terms combine as $-\\tfrac12(\\psi_i+\\psi_{i+1})+\\tfrac12(\\psi_{i-1}+\\psi_i)=-\\tfrac12([\\psi]_{i+1/2}+[\\psi]_{i-1/2})$. Hence $\\Delta x$ times the cell residual equals $\\tfrac12([v]_{i+1/2}^TF^{es}_{i+1/2}-[\\psi]_{i+1/2})+\\tfrac12([v]_{i-1/2}^TF^{es}_{i-1/2}-[\\psi]_{i-1/2})$, which is nonpositive by step 1.1. This proves the local cell inequality; summing it on the periodic mesh cancels all numerical entropy fluxes. No time discretization was used.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A periodic mesh with at least two positive-width cells gives a nonempty entropy sum and paired faces.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A periodic mesh with at least two positive-width cells gives a nonempty entropy sum and paired faces.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "ab4dac09ef6dad052f10f26c0af339d02c2d4ed3bf4d3cfee8e30f5ee015ee8d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A periodic mesh with at least two positive-width cells gives a nonempty entropy sum and paired faces.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "ab4dac09ef6dad052f10f26c0af339d02c2d4ed3bf4d3cfee8e30f5ee015ee8d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers vanishing entropy-variable jump, for which the face defect is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The single-cell case is excluded by the explicit cell-count lower bound, even though a separate constant-state calculation could be trivial.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The single-cell case is excluded by the explicit cell-count lower bound, even though a separate constant-state calculation could be trivial.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "f9cd2f38c62ab2a3edd385f0c4010f412b2f01a18c69dc5e1a1ea15b22b83cfe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The single-cell case is excluded by the explicit cell-count lower bound, even though a separate constant-state calculation could be trivial.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "f9cd2f38c62ab2a3edd385f0c4010f412b2f01a18c69dc5e1a1ea15b22b83cfe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only positive semidefiniteness, so singular dissipation matrices are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Periodic endpoint fluxes cancel in the total entropy sum, and zero entropy jump or zero dissipation gives equality in the face inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Periodic endpoint fluxes cancel in the total entropy sum, and zero entropy jump or zero dissipation gives equality in the face inequality.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "a517269d3f0d1f90c98e91930ed46a72baebcf7ddd09bc5505cb7e30cdddca65",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Periodic endpoint fluxes cancel in the total entropy sum, and zero entropy jump or zero dissipation gives equality in the face inequality.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "a517269d3f0d1f90c98e91930ed46a72baebcf7ddd09bc5505cb7e30cdddca65",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All states and face fluxes are supplied; arithmetic means and a finite telescoping sum introduce no new axiom-dependent selections.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "All states and face fluxes are supplied; arithmetic means and a finite telescoping sum introduce no new axiom-dependent selections.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "690de17c82076760d0b7fcfaadb6185117665f934ceb2d99c29fc45630a1e7c9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "All states and face fluxes are supplied; arithmetic means and a finite telescoping sum introduce no new axiom-dependent selections.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "690de17c82076760d0b7fcfaadb6185117665f934ceb2d99c29fc45630a1e7c9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Positive semidefinite dissipative fluxes imply the local semidiscrete entropy inequality, without asserting its necessity for every stable flux.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Positive semidefinite dissipative fluxes imply the local semidiscrete entropy inequality, without asserting its necessity for every stable flux.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "b93cd8ebb74310bdb03fe961e0bc6fe9b38b349d907c75accbe94ad14281023d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Positive semidefinite dissipative fluxes imply the local semidiscrete entropy inequality, without asserting its necessity for every stable flux.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "b93cd8ebb74310bdb03fe961e0bc6fe9b38b349d907c75accbe94ad14281023d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A total entropy decrease alone does not recover the local Tadmor dissipation form or certify a chosen fully discrete integrator.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A total entropy decrease alone does not recover the local Tadmor dissipation form or certify a chosen fully discrete integrator.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "20ea8da252d9f950d05906a57dc08fdd918efda44bfaa8cd31fba0f6cd58d872",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A total entropy decrease alone does not recover the local Tadmor dissipation form or certify a chosen fully discrete integrator.",
+            "item_sha256": "dd7885db7d31e0d59eb08b4827a87108ce9e22e85f9f4d93d9c25a5fdd4f27f6",
+            "row_sha256": "20ea8da252d9f950d05906a57dc08fdd918efda44bfaa8cd31fba0f6cd58d872",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem"
+    },
+    "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pe03-convex-scaling-positivity-limiter",
+          "source_section": "Definition",
+          "quote": "Let $K\\subseteq\\mathbb R^m$ be closed and convex (convex in the sense of\n[[def-pe03-convex-invariant-domain]]), let $J$ be a finite nonempty\nindex set, let $w_j>0$ with $\\sum_{j\\in J}w_j=1$, and let input states\n$V_j\\in\\mathbb R^m$ have mean $\\bar V=\\sum_jw_jV_j\\in K$. The **maximal\nconvex scaling limiter** returns the largest $\\theta\\in[0,1]$ for which every\n$$V_j^\\theta=\\bar V+\\theta(V_j-\\bar V)$$\nbelongs to $K$, together with all the states $V_j^\\theta$. Equivalently, form\n$$S=\\{\\theta\\in[0,1]:V_j^\\theta\\in K\\text{ for every }j\\in J\\},$$\nand return $\\theta_*:=\\max S$ and $(V_j^{\\theta_*})_{j\\in J}$. The mean is\nassumed admissible; implementation, cost, and any pointwise-in-cell property\nare not part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-euler-positive-margin-domain",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$, and use the state variables and internal\nenergy density from [[def-ideal-gas-euler-state-and-pressure]]. Define the\n**positive-margin set**\n$$K_{\\gamma,\\varepsilon}:=\\left\\{(\\rho,m,E):\\rho\\ge\\varepsilon,\\quad E-\\frac{m^2}{2\\rho}\\ge\\varepsilon\\right\\}.$$\nEvery member has positive density and positive pressure. Closedness and\nconvexity are proved in\n[[prop-pe03-euler-state-and-margin-domains-are-convex-and-closed]]; those properties are not\nbeing inferred from this definition alone.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$. The ideal-gas admissible set\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\ E-\\frac{m^2}{2\\rho}>0\\right\\}$$\nand the positive-margin set $K_{\\gamma,\\varepsilon}$ from\n[[def-pe03-euler-positive-margin-domain]] are convex, and\n$K_{\\gamma,\\varepsilon}$ is closed in $\\mathbb R^3$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The feasible parameter set $S=\\{\\theta\\in[0,1]:\\bar V+\\theta(V_j-\\bar V)\\in K_{\\gamma,\\varepsilon}\\text{ for every }j\\}$ contains $0$. Each node map is continuous and $K_{\\gamma,\\varepsilon}$ is closed by [F3], so each inverse image is closed; the finite intersection $S$ is closed in compact $[0,1]$. Thus $S$ is nonempty compact and has a maximum $\\theta_*$. By its definition, every limited node lies in $K_{\\gamma,\\varepsilon}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using $\\sum_jw_j=1$ and $\\sum_jw_jV_j=\\bar V$, the limited weighted mean is $\\sum_jw_j(\\bar V+\\theta_*(V_j-\\bar V))=\\bar V+\\theta_*(\\bar V-\\bar V)=\\bar V$. By [F2], each limited node has density at least $\\varepsilon>0$ and pressure at least $(\\gamma-1)\\varepsilon>0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If every original $V_j\\in K_{\\gamma,\\varepsilon}$, then $1\\in S$, so $\\theta_*=1$. If a target state has distance at least $\\delta$ from the complement and the candidate differs from it by less than $\\delta$, the candidate belongs to $K_{\\gamma,\\varepsilon}$; applying this at every node makes $1$ feasible. Thus the limiter leaves all candidates unchanged under the stated strict margin, and their reconstruction error is unchanged. The conclusion concerns only the supplied nodes.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The nodal set is explicitly nonempty and its positive weights sum to one, so a convex mean cannot be formed from an empty collection.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The nodal set is explicitly nonempty and its positive weights sum to one, so a convex mean cannot be formed from an empty collection.",
+            "item_sha256": "37a69ca11bedbbe86aecbe45dc7d0a89b4f40f7bd9845dc1990fe173904e92ed",
+            "row_sha256": "03db98ad93d92b28a43b06e94ebeb1042b38456847a40339caa58a90907aa17c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The nodal set is explicitly nonempty and its positive weights sum to one, so a convex mean cannot be formed from an empty collection.",
+            "item_sha256": "37a69ca11bedbbe86aecbe45dc7d0a89b4f40f7bd9845dc1990fe173904e92ed",
+            "row_sha256": "03db98ad93d92b28a43b06e94ebeb1042b38456847a40339caa58a90907aa17c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves theta=0 is feasible because the mean lies in K."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves theta=1 is feasible when every original node is already in K."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 still attains a maximum when the feasible set is the singleton {0}."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 check both theta=0 and theta=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The feasible scaling set contains zero and is a closed subset of the compact unit interval; its uniquely determined maximum defines the limiter without an arbitrary choice function.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The feasible scaling set contains zero and is a closed subset of the compact unit interval; its uniquely determined maximum defines the limiter without an arbitrary choice function.",
+            "item_sha256": "37a69ca11bedbbe86aecbe45dc7d0a89b4f40f7bd9845dc1990fe173904e92ed",
+            "row_sha256": "4ebfb9d001d62d6fcc752f6636577c06bb0978291580f3b71a66b7fc14480171",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The feasible scaling set contains zero and is a closed subset of the compact unit interval; its uniquely determined maximum defines the limiter without an arbitrary choice function.",
+            "item_sha256": "37a69ca11bedbbe86aecbe45dc7d0a89b4f40f7bd9845dc1990fe173904e92ed",
+            "row_sha256": "4ebfb9d001d62d6fcc752f6636577c06bb0978291580f3b71a66b7fc14480171",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite convex scaling construction preserves the mean and makes every specified node admissible.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The finite convex scaling construction preserves the mean and makes every specified node admissible.",
+            "item_sha256": "37a69ca11bedbbe86aecbe45dc7d0a89b4f40f7bd9845dc1990fe173904e92ed",
+            "row_sha256": "eb609b5510bb7172b441ccc68cf03d25628d994ecd2a7371f042f4c241ba323b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The finite convex scaling construction preserves the mean and makes every specified node admissible.",
+            "item_sha256": "37a69ca11bedbbe86aecbe45dc7d0a89b4f40f7bd9845dc1990fe173904e92ed",
+            "row_sha256": "eb609b5510bb7172b441ccc68cf03d25628d994ecd2a7371f042f4c241ba323b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The limiter's sufficient conditions are not asserted as a characterization of every mean-preserving positivity mechanism.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The limiter's sufficient conditions are not asserted as a characterization of every mean-preserving positivity mechanism.",
+            "item_sha256": "37a69ca11bedbbe86aecbe45dc7d0a89b4f40f7bd9845dc1990fe173904e92ed",
+            "row_sha256": "a6bd71068c7140f664a7fdea74b14496f0476a93f2b4b1ffa33dc8cb5e4c79af",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The limiter's sufficient conditions are not asserted as a characterization of every mean-preserving positivity mechanism.",
+            "item_sha256": "37a69ca11bedbbe86aecbe45dc7d0a89b4f40f7bd9845dc1990fe173904e92ed",
+            "row_sha256": "a6bd71068c7140f664a7fdea74b14496f0476a93f2b4b1ffa33dc8cb5e4c79af",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read all three proof steps and the actual algorithm, margin-domain definition, convexity/closedness proposition and ideal-gas definition. The finite nonempty node set and admissible mean make 0 feasible; continuous node maps into closed K make the feasible set compact in [0,1], so its maximum is attained, including a boundary mean and theta=0. A common scalar theta preserves the weighted mean exactly; gamma>1 and epsilon>0 give positive density and pressure. Singleton nodes, identical candidates, theta=1 and already admissible nodes are sound. Strict error <delta excludes the complement whenever the target distance is >=delta; this proves inactivity only, without importing a general accuracy theorem or between-node positivity. No AC or iff claim. Reader/refuter have no finding. Zhang–Shu §2.2, (2.4)–(2.11), Lemma 2.5, printed pp.9–10 supplies scaling/convexity context; their pressure floor differs from this internal-energy floor by gamma-1, already reflected locally. No defect or unmet prerequisite."
+      }
+    },
+    "thm-pe03-ideal-gas-llf-branch-preserves-positivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hll-two-wave-flux",
+          "source_section": "Definition",
+          "quote": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-pe03-euler-llf-split-state-positive",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$. For $U=(\\rho,m,E)\\in\\mathcal G_\\gamma$, let\n$e=E-m^2/(2\\rho)$, $p=(\\gamma-1)e$, $u=m/\\rho$, and\n$c=\\sqrt{\\gamma p/\\rho}$. If $a\\ge |u|+c$, then both split states\n$$U_\\delta=U+\\delta F(U),\\qquad \\delta\\in\\{-1/a,1/a\\},$$\nbelong to $\\mathcal G_\\gamma$, where $F(U)=(m,m^2/\\rho+p,u(E+p))$.\nMore precisely, with $x=1+\\delta u$ their density and internal-energy density are\n$$\\rho_\\delta=\\rho x,\\qquad e_\\delta=e x-\\frac{\\delta^2p^2}{2\\rho x}>0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$. The ideal-gas admissible set\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\ E-\\frac{m^2}{2\\rho}>0\\right\\}$$\nand the positive-margin set $K_{\\gamma,\\varepsilon}$ from\n[[def-pe03-euler-positive-margin-domain]] are convex, and\n$K_{\\gamma,\\varepsilon}$ is closed in $\\mathbb R^3$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-pe03-hll-half-cell-riemann-averages",
+          "source_section": "Statement",
+          "quote": "Use the first-order HLL update of\n[[def-pe03-first-order-hll-finite-volume-update]]. At a face with left and right\nstates $U_L,U_R$, supplied speeds $S_L<0<S_R$, and physical flux values\n$F_L=F(U_L),F_R=F(U_R)$, define\n$$U_*:=\\frac{S_RU_R-S_LU_L-(F_R-F_L)}{S_R-S_L}.$$\nIf the one-sided CFL bounds $2\\nu(-S_L)\\le1$ and $2\\nu S_R\\le1$ hold, the\naverages of the HLL fan over the adjacent left and right half-cells are,\nrespectively,\n$$A^-=(1-2\\nu(-S_L))U_L+2\\nu(-S_L)U_*,\\qquad A^+=(1-2\\nu S_R)U_R+2\\nu S_RU_*.$$\nFor every cell $i$, the updated mean satisfies\n$$U_i^+=\\frac12\\left(A^+_{i-1/2}+A^-_{i+1/2}\\right),$$\nwhere each face uses its own supplied speeds and intermediate state.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-pe03-hll-update-preserves-convex-invariant-domain",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a convex set in the state domain, and consider a periodic uniform\nmesh and one first-order HLL update as defined in\n[[def-pe03-first-order-hll-finite-volume-update]]. Assume every cell mean\n$U_i\\in K$. At every face impose the **HLL fan-average hypothesis** that the\ntwo adjacent half-cell averages $A^-,A^+$ from\n[[lem-pe03-hll-half-cell-riemann-averages]] lie in $K$, with that lemma's local\nCFL bounds. Then every updated mean $U_i^+$ belongs to $K$. A sufficient\ncondition for the fan-average hypothesis is that every HLL intermediate state\n$U_*\\in K$, because the stated CFL makes each half-cell average a convex\ncombination of a cell state and $U_*$. The result does not assert a bound on\nexact nonlinear wave speeds.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a face with states $U_L,U_R$ and speed $a$. By [F3] applied to $U_L$ and $U_R$, both $U_L+F_L/a$ and $U_R-F_R/a$ lie in $\\mathcal G_\\gamma$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $S_L=-a$, $S_R=a$ into [F2] and using the intermediate-state formula in [F5] gives $U_* = \\tfrac12(U_L+F_L/a)+\\tfrac12(U_R-F_R/a)$. The two weights are nonnegative and sum to one, so [F4] implies $U_*\\in\\mathcal G_\\gamma$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The assumed speed bound gives $a>0$ and the displayed CFL gives $2\\nu a\\le1$, so both HLL half-cell averages have nonnegative convex-combination coefficients. Thus every HLL intermediate state and cell state lies in $\\mathcal G_\\gamma$, and [F6] yields $U_i^+\\in\\mathcal G_\\gamma$ for each cell. By [F1], this means positive density and pressure. The proof makes no claim for the other HLL branches or for fully discrete entropy.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The periodic uniform mesh has cell states and face speeds; an empty cell family is outside the HLL update being applied.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The periodic uniform mesh has cell states and face speeds; an empty cell family is outside the HLL update being applied.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "f961663b1fcd844e831aebbbd30614f2a46b43404c1634a87022a6980accc199",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The periodic uniform mesh has cell states and face speeds; an empty cell family is outside the HLL update being applied.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "f961663b1fcd844e831aebbbd30614f2a46b43404c1634a87022a6980accc199",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows c>0 and therefore the admitted speed a is strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The conclusion concerns one first-order update, and the half-cell CFL inequality includes equality; the convex average in step 3.1 remains inside the positive state domain.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The conclusion concerns one first-order update, and the half-cell CFL inequality includes equality; the convex average in step 3.1 remains inside the positive state domain.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "c38a8c8999dd7a94a1ff25031b8b78b51d95032f4059b8b70f8d8012c16867da",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The conclusion concerns one first-order update, and the half-cell CFL inequality includes equality; the convex average in step 3.1 remains inside the positive state domain.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "c38a8c8999dd7a94a1ff25031b8b78b51d95032f4059b8b70f8d8012c16867da",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include equality in the speed and CFL bounds; zero convex weights are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 permits 2 nu a=1, when a half-cell coefficient may vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The face speeds are supplied finite inputs satisfying explicit lower bounds; the proof forms their stated symmetric branches without choosing arbitrary Riemann solutions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The face speeds are supplied finite inputs satisfying explicit lower bounds; the proof forms their stated symmetric branches without choosing arbitrary Riemann solutions.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "efc5744fe9089dc607f0c830c9165b48d63e4f6e3e94037ed8b5adb9fe8ba627",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The face speeds are supplied finite inputs satisfying explicit lower bounds; the proof forms their stated symmetric branches without choosing arbitrary Riemann solutions.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "efc5744fe9089dc607f0c830c9165b48d63e4f6e3e94037ed8b5adb9fe8ba627",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The symmetric LLF speed and CFL conditions suffice for strict ideal-gas positivity and are expressly not claimed necessary.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The symmetric LLF speed and CFL conditions suffice for strict ideal-gas positivity and are expressly not claimed necessary.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "63f540634313149b8f68584f1f31579484a65edefb361aa5ddc3f1014908997a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The symmetric LLF speed and CFL conditions suffice for strict ideal-gas positivity and are expressly not claimed necessary.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "63f540634313149b8f68584f1f31579484a65edefb361aa5ddc3f1014908997a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The symmetric LLF speed and CFL conditions suffice for strict ideal-gas positivity and are expressly not claimed necessary.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The symmetric LLF speed and CFL conditions suffice for strict ideal-gas positivity and are expressly not claimed necessary.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "d060469b95694c5bdaab1e707dd8388450a17b09bf68471ed29a4b0a3ce4fc9f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "The symmetric LLF speed and CFL conditions suffice for strict ideal-gas positivity and are expressly not claimed necessary.",
+            "item_sha256": "d0d9259962874e8f80772ece2911792c2a6377cf068bcd0c59360b1f0252f9d6",
+            "row_sha256": "d060469b95694c5bdaab1e707dd8388450a17b09bf68471ed29a4b0a3ce4fc9f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read all three steps and all six cited interfaces, including the complete LLF split-state and convexity proofs and the amended half-cell proof. For gamma>1 and positive initial internal energy, c>0 implies a>|u| and positive denominators. Independently expanded e_delta=e*x-delta^2*p^2/(2*rho*x); x>=c/a gives the relative subtractive term <=(gamma-1)/(2*gamma)<1, proving strict positivity for both signs even when a=|u|+c. The symmetric HLL middle state is exactly the average of U_L+F_L/a and U_R-F_R/a; convexity then the half-cell theorem prove the update. Local face-dependent speeds suffice; 2*nu*a<=1 includes equality and nu=0. Equal neighboring states and zero convex weights remain admissible. No exact nonlinear speed enclosure, arbitrary asymmetric HLL branch, necessary CFL, fixed positive floor, or entropy claim is inferred. No AC or iff claim; reader/refuter have no findings. Zhang–Shu Remark 2.4, printed pp.7–8, independently supplies the same splitting mechanism; the local proof fixes its own pressure convention and establishes the full variable-speed claim. No defect or unmet prerequisite."
+      }
+    },
+    "ex-pe03-near-vacuum-euler-hll-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pe03-euler-llf-split-state-positive",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$. For $U=(\\rho,m,E)\\in\\mathcal G_\\gamma$, let\n$e=E-m^2/(2\\rho)$, $p=(\\gamma-1)e$, $u=m/\\rho$, and\n$c=\\sqrt{\\gamma p/\\rho}$. If $a\\ge |u|+c$, then both split states\n$$U_\\delta=U+\\delta F(U),\\qquad \\delta\\in\\{-1/a,1/a\\},$$\nbelong to $\\mathcal G_\\gamma$, where $F(U)=(m,m^2/\\rho+p,u(E+p))$.\nMore precisely, with $x=1+\\delta u$ their density and internal-energy density are\n$$\\rho_\\delta=\\rho x,\\qquad e_\\delta=e x-\\frac{\\delta^2p^2}{2\\rho x}>0.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$. The ideal-gas admissible set\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\ E-\\frac{m^2}{2\\rho}>0\\right\\}$$\nand the positive-margin set $K_{\\gamma,\\varepsilon}$ from\n[[def-pe03-euler-positive-margin-domain]] are convex, and\n$K_{\\gamma,\\varepsilon}$ is closed in $\\mathbb R^3$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pe03-hll-half-cell-riemann-averages",
+          "source_section": "Statement",
+          "quote": "Use the first-order HLL update of\n[[def-pe03-first-order-hll-finite-volume-update]]. At a face with left and right\nstates $U_L,U_R$, supplied speeds $S_L<0<S_R$, and physical flux values\n$F_L=F(U_L),F_R=F(U_R)$, define\n$$U_*:=\\frac{S_RU_R-S_LU_L-(F_R-F_L)}{S_R-S_L}.$$\nIf the one-sided CFL bounds $2\\nu(-S_L)\\le1$ and $2\\nu S_R\\le1$ hold, the\naverages of the HLL fan over the adjacent left and right half-cells are,\nrespectively,\n$$A^-=(1-2\\nu(-S_L))U_L+2\\nu(-S_L)U_*,\\qquad A^+=(1-2\\nu S_R)U_R+2\\nu S_RU_*.$$\nFor every cell $i$, the updated mean satisfies\n$$U_i^+=\\frac12\\left(A^+_{i-1/2}+A^-_{i+1/2}\\right),$$\nwhere each face uses its own supplied speeds and intermediate state.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$ and a periodic uniform mesh. Suppose every cell state\n$U_i\\in\\mathcal G_\\gamma$. Apply the first-order HLL update of\n[[def-pe03-first-order-hll-finite-volume-update]]. At each face $(i+1/2)$ choose a symmetric HLL\nbranch $S_L=-a_{i+1/2}$, $S_R=a_{i+1/2}$ with\n$$a_{i+1/2}\\ge\\max\\bigl(|u_i|+c_i,|u_{i+1}|+c_{i+1}\\bigr),\\qquad 2\\nu a_{i+1/2}\\le1.$$\nThen one first-order HLL update preserves $\\mathcal G_\\gamma$; in particular,\nevery updated density and pressure is strictly positive. This is the symmetric\nlocal Lax–Friedrichs branch with a stated speed bound, not a claim that arbitrary\nHLL speed estimates are valid or that the bound is necessary.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-pe03-first-order-hll-finite-volume-update",
+          "source_section": "Definition",
+          "quote": "Let $F:\\mathcal A\\to\\mathbb R^m$ be the flux of the one-dimensional system in\n[[def-hyperbolic-system-and-characteristic-families]]. On a periodic uniform\nmesh of $N\\ge2$ cells of width $h>0$, let $U_i\\in\\mathcal A$ be the cell means\nand put $\\nu=\\Delta t/h\\ge0$. At each face $(i+1/2)$ choose explicit speeds\n$S_{L,i+1/2}<0<S_{R,i+1/2}$ and evaluate the middle branch of the HLL flux\n[[def-hll-two-wave-flux]] on $(U_i,U_{i+1})$. The **first-order HLL update** is\n$$U_i^+=U_i-\\nu\\bigl(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\bigr),\\qquad i\\pmod N.$$\nThe speeds are supplied data. Neither this definition nor later algebraic\nresults assert that they enclose the wave speeds of an exact nonlinear Riemann\nsolution.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-hll-two-wave-flux",
+          "source_section": "Definition",
+          "quote": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The kinetic energy density is $\\rho u^2/2=5\\times10^{-13}$ and $p/(\\gamma-1)=5/2\\times10^{-12}$, so $E=3\\times10^{-12}$. Hence [F1] gives the specified pressure and positive internal energy, so both states lie in $\\mathcal G_\\gamma$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Their sound speed satisfies $c^2=7/50000<(3/250)^2$, hence $|u|+c<1/100+3/250=11/500=a$. Also $\\nu a=1/4$, so $2\\nu a=1/2\\le1$. The symmetric-speed hypotheses in [F2]–[F5] hold, with the positive admissibility verified in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the discontinuity, substitution of $S_L=-a,S_R=a$ into [F7] and the HLL intermediate-state formula of [F4] gives $U_*=(U_L+F_L/a+U_R-F_R/a)/2$. Both split states are in $\\mathcal G_\\gamma$ by [F2], so $U_*\\in\\mathcal G_\\gamma$ by [F3]. At equal-state faces, the same middle-state formula gives $U_*=U_L$ or $U_R$. Substituting the shared face fluxes in [F6], or equivalently using [F4], yields $U_i^+=(3/4)U_L+(1/4)U_*$ and $U_{i+1}^+=(3/4)U_R+(1/4)U_*$. Convexity keeps both states in $\\mathcal G_\\gamma$, and [F1] gives positive density and pressure, using the CFL verification in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The given four-cell periodic array and its positive near-vacuum states are concrete nonempty data.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The given four-cell periodic array and its positive near-vacuum states are concrete nonempty data.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "8a9c245fb05f3cf334f4898494dacedfa6293c21498b048dc1ed913f8bb603c1",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The given four-cell periodic array and its positive near-vacuum states are concrete nonempty data.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "8a9c245fb05f3cf334f4898494dacedfa6293c21498b048dc1ed913f8bb603c1",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the small but strictly positive initial density and pressure; zero states are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: Exactly one forward-Euler step is claimed; it does not establish accuracy or a time-uniform error bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Exactly one forward-Euler step is claimed; it does not establish accuracy or a time-uniform error bound.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "9d161819b4e4383d86443914083cb34b09d9e069350e88596cfdac9fe0fc5343",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Exactly one forward-Euler step is claimed; it does not establish accuracy or a time-uniform error bound.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "9d161819b4e4383d86443914083cb34b09d9e069350e88596cfdac9fe0fc5343",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves a strict sound-speed margin and step 3.1 keeps the HLL convex weights nonnegative."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Positive but tiny density and pressure remain above vacuum, and both periodic transitions satisfy the same speed bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Positive but tiny density and pressure remain above vacuum, and both periodic transitions satisfy the same speed bound.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "69a186ed55a199219fe0800361086d859c024f93cf560c49ede5d633c7526fe1",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Positive but tiny density and pressure remain above vacuum, and both periodic transitions satisfy the same speed bound.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "69a186ed55a199219fe0800361086d859c024f93cf560c49ede5d633c7526fe1",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The fixed states, speed and Courant ratio are explicit rationals, so no wave-speed family must be selected.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The fixed states, speed and Courant ratio are explicit rationals, so no wave-speed family must be selected.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "15584c9c4ecebc315cfdd517a9ad097d8575c72c22afa570aa81bce1fc5466fe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The fixed states, speed and Courant ratio are explicit rationals, so no wave-speed family must be selected.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "15584c9c4ecebc315cfdd517a9ad097d8575c72c22afa570aa81bce1fc5466fe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The verified symmetric-speed CFL branch preserves positivity after the single update.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The verified symmetric-speed CFL branch preserves positivity after the single update.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "288ea6eb6bc0dbcd82be8a73f6bea4da99a423edba7fcbb49c8f758858f7cb51",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The verified symmetric-speed CFL branch preserves positivity after the single update.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "288ea6eb6bc0dbcd82be8a73f6bea4da99a423edba7fcbb49c8f758858f7cb51",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A positive output in this example does not characterize every speed choice or imply shock-profile accuracy.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "A positive output in this example does not characterize every speed choice or imply shock-profile accuracy.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "5b7d06959bb3c17a8d38647c0332be6c0e0beb4a59ed35e9f8620fbf614075a7",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "A positive output in this example does not characterize every speed choice or imply shock-profile accuracy.",
+            "item_sha256": "4f4214aa24ff6b2d9628d0d6344089d76ae087f6d1cd1132ce33d2ecaa2a07d0",
+            "row_sha256": "5b7d06959bb3c17a8d38647c0332be6c0e0beb4a59ed35e9f8620fbf614075a7",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Near-vacuum symmetric HLL parameter check",
+          "method": "exact rational arithmetic",
+          "input": {
+            "gamma": "7/5",
+            "density": "1e-8",
+            "pressure": "1e-12",
+            "velocity": [
+              "-1/100",
+              "1/100"
+            ],
+            "speed": "11/500",
+            "nu": "125/11"
+          },
+          "calculation": "c^2=7/50000<(3/250)^2, |u|+c<11/500, nu*a=1/4, and 2*nu*a=1/2. With delta=±500/11, x is 6/11 or 16/11; delta^2*p^2/(2*rho*e)=5/121 and the minimum e_delta/e is 31/66.",
+          "expected": {
+            "sound_speed_upper": "3/250",
+            "courant": "1/4",
+            "cfl": "1/2",
+            "minimum_split_internal_energy_ratio": "31/66",
+            "update_weights": [
+              "3/4",
+              "1/4"
+            ]
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read all three verification steps and all seven actual suppliers; the split, convexity, HLL half-cell and positivity theorem proofs were checked at lower levels. Independently recomputed m=+/-10^-10, kinetic energy 5*10^-13, internal energy (5/2)*10^-12 and total E=3*10^-12 at gamma=7/5. Sound speed squared is 7/50000<(3/250)^2, so |u|+c<11/500 and a>0; nu*a=1/4 and 2*nu*a=1/2. The two states adjacent to the displayed U_L->U_R interface are 3/4 of their original state plus 1/4 of that interface middle state. The other periodic U_R->U_L face has its own middle state; the same theorem applies there since all four inputs obey the identical bound. Exact rational recomputation of all four updates confirms positive density and pressure. Equal-state faces give the original middle state. This finite example does not assert a uniform floor as inputs tend to vacuum, admission of exact vacuum, a nonlinear exact-fan bound, shock accuracy or entropy stability. No AC or iff claim, reader/refuter finding, defect or unmet prerequisite."
+      }
+    },
+    "ex-pe03-burgers-entropy-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe03-system-entropy-pair-and-potential",
+          "source_section": "Definition",
+          "quote": "Use the conservation-system convention of\n[[def-hyperbolic-system-and-characteristic-families]]: on an open convex state\ndomain $\\mathcal A\\subseteq\\mathbb R^m$, the flux is $F:\\mathcal A\\to\\mathbb R^m$.\nA **convex entropy pair** is a pair $(\\eta,q)$ with $\\eta\\in C^2(\\mathcal A)$,\n$q\\in C^1(\\mathcal A)$, positive-semidefinite Hessian $D^2\\eta$, and\n$$Dq(U)=D\\eta(U)\\,DF(U)\\qquad(U\\in\\mathcal A).$$\nThe **entropy variable** is the column vector $v(U)=\\nabla\\eta(U)$; gradients\nare represented as columns, so the compatibility equation above means\n$\\nabla q(U)=DF(U)^T v(U)$. The **entropy potential** is\n$\\psi(U)=v(U)^T F(U)-q(U)$. This definition does not assert that every convex\n$\\eta$ admits a flux $q$; the compatibility equation is part of the hypothesis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-tadmor-entropy-conservative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be a convex entropy pair on an open domain $\\mathcal A$, with\nentropy variable $v$ and potential $\\psi$ as in\n[[def-pe03-system-entropy-pair-and-potential]]. A continuous two-point flux\n$F^{ec}:\\mathcal A\\times\\mathcal A\\to\\mathbb R^m$ is **entropy-conservative\nin Tadmor's sense** if it is consistent and symmetric,\n$F^{ec}(U,U)=F(U)$, and satisfies the exact jump identity\n$$\\bigl(v(U_R)-v(U_L)\\bigr)^T F^{ec}(U_L,U_R)=\\psi(U_R)-\\psi(U_L)$$\nfor every pair $U_L,U_R\\in\\mathcal A$. This definition asserts no existence\nfor a prescribed entropy pair.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe03-entropy-stable-dissipative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be an entropy pair with entropy variable $v$ and potential\n$\\psi$, and let $F^{ec}$ be a consistent entropy-conservative flux as in\n[[def-pe03-tadmor-entropy-conservative-flux]]. For each pair\n$(U_L,U_R)\\in\\mathcal A^2$, choose a symmetric positive-semidefinite matrix\n$D(U_L,U_R)\\in\\mathbb R^{m\\times m}$. The associated **entropy-stable\ndissipative flux** is\n$$F^{es}(U_L,U_R):=F^{ec}(U_L,U_R)-\\frac12D(U_L,U_R)(v(U_R)-v(U_L)).$$\nPositive semidefinite means $z^TD(U_L,U_R)z\\ge0$ for every $z\\in\\mathbb R^m$.\nNo fully discrete time-step property is included.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $\\eta''(u)=1$, $\\eta'(u)=u$, and $q'(u)=u^2=\\eta'(u)f'(u)$, so this is a convex entropy pair. Thus $v=u$ and $\\psi=uf-q=u^3/6$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The displayed $f^{ec}$ is polynomial, hence continuous, is symmetric, and satisfies $f^{ec}(u,u)=u^2/2=f(u)$. Moreover, $(u_R-u_L)f^{ec}(u_L,u_R)=\\frac{u_R^3-u_L^3}{6}=\\psi(u_R)-\\psi(u_L)$, so [F2] applies using $\\psi=u^3/6$ from step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking $D=1$ in [F3], at $(1,0)$ we have $f^{ec}=1/6$, $[v]=-1$, and $[\\psi]=-1/6$. Therefore $[v]f^{es}-[\\psi]=(-1)(1/6+1/2)-(-1/6)=-1/2$. In general the same substitution gives residual $-\\tfrac12(u_R-u_L)^2\\le0$, using the formula in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The flux always takes two real scalar states, and the worked dissipative jump fixes them to one and zero rather than an empty state family.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The flux always takes two real scalar states, and the worked dissipative jump fixes them to one and zero rather than an empty state family.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "7481b88f75c12e4e83cc9fa533559cd06b8cd3f714b8ef7bd65bc1c02539a46b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The flux always takes two real scalar states, and the worked dissipative jump fixes them to one and zero rather than an empty state family.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "7481b88f75c12e4e83cc9fa533559cd06b8cd3f714b8ef7bd65bc1c02539a46b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives the general residual -1/2 times the squared jump, which is zero for equal states."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: Unit dissipation is explicitly substituted in the entropy-variable penalty, and the left state one gives the computed residual minus one half.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "Unit dissipation is explicitly substituted in the entropy-variable penalty, and the left state one gives the computed residual minus one half.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "35c90be5f8ca1b2e3f2c759d0459fe413b9db14cdb92fd32547be68a25f1f038",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "Unit dissipation is explicitly substituted in the entropy-variable penalty, and the left state one gives the computed residual minus one half.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "35c90be5f8ca1b2e3f2c759d0459fe413b9db14cdb92fd32547be68a25f1f038",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero entropy-variable jump as equality in the residual formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The calculation concerns a two-state flux and a jump, not spatial boundary traces or endpoint limits of a continuum solution.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The calculation concerns a two-state flux and a jump, not spatial boundary traces or endpoint limits of a continuum solution.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "561d1e41d12f89ffa14e8b767c5865527475de9f5848a96c9a16a9e4f3933374",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The calculation concerns a two-state flux and a jump, not spatial boundary traces or endpoint limits of a continuum solution.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "561d1e41d12f89ffa14e8b767c5865527475de9f5848a96c9a16a9e4f3933374",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The entropy, entropy potential, symmetric flux and dissipation coefficient are explicit polynomials and scalars; all residual values follow by substitution.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The entropy, entropy potential, symmetric flux and dissipation coefficient are explicit polynomials and scalars; all residual values follow by substitution.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "13a38b00b9b78c0793e4914216f5e160ac048018984e121ed93cac368bedc613",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The entropy, entropy potential, symmetric flux and dissipation coefficient are explicit polynomials and scalars; all residual values follow by substitution.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "13a38b00b9b78c0793e4914216f5e160ac048018984e121ed93cac368bedc613",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The polynomial example verifies entropy conservation and computes one dissipative residual; it does not characterize all entropy-stable numerical fluxes.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The polynomial example verifies entropy conservation and computes one dissipative residual; it does not characterize all entropy-stable numerical fluxes.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "feccfd4a6f3ef39b8af6b2ee0c073db70b895bad7cc75751afcfc7f72f943435",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The polynomial example verifies entropy conservation and computes one dissipative residual; it does not characterize all entropy-stable numerical fluxes.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "feccfd4a6f3ef39b8af6b2ee0c073db70b895bad7cc75751afcfc7f72f943435",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The polynomial example verifies entropy conservation and computes one dissipative residual; it does not characterize all entropy-stable numerical fluxes.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The polynomial example verifies entropy conservation and computes one dissipative residual; it does not characterize all entropy-stable numerical fluxes.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "1bc9a38a9060d364a3a4c8dad232d63c5657bcc221eb0afe31f0a246c3b2fe9c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The polynomial example verifies entropy conservation and computes one dissipative residual; it does not characterize all entropy-stable numerical fluxes.",
+            "item_sha256": "01b7ca5c5bd1e4e357a7cd43ce46ae1ab91d814eb91da2cc5d9a79224d00c8f8",
+            "row_sha256": "1bc9a38a9060d364a3a4c8dad232d63c5657bcc221eb0afe31f0a246c3b2fe9c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Quadratic Burgers entropy residual",
+          "method": "exact polynomial factorization",
+          "input": {
+            "u_left": 1,
+            "u_right": 0,
+            "entropy_dissipation": 1
+          },
+          "calculation": "f_ec=(uL^2+uL*uR+uR^2)/6=1/6; f_es=1/6+1/2=2/3; [v]=-1 and [psi]=-1/6, so [v]*f_es-[psi]=-1/2.",
+          "expected": {
+            "entropy_residual": "-1/2",
+            "general_residual": "-(uR-uL)^2/2"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example"
+    },
+    "ex-pe03-conservative-positivity-rescaling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pe03-convex-scaling-positivity-limiter",
+          "source_section": "Definition",
+          "quote": "Let $K\\subseteq\\mathbb R^m$ be closed and convex (convex in the sense of\n[[def-pe03-convex-invariant-domain]]), let $J$ be a finite nonempty\nindex set, let $w_j>0$ with $\\sum_{j\\in J}w_j=1$, and let input states\n$V_j\\in\\mathbb R^m$ have mean $\\bar V=\\sum_jw_jV_j\\in K$. The **maximal\nconvex scaling limiter** returns the largest $\\theta\\in[0,1]$ for which every\n$$V_j^\\theta=\\bar V+\\theta(V_j-\\bar V)$$\nbelongs to $K$, together with all the states $V_j^\\theta$. Equivalently, form\n$$S=\\{\\theta\\in[0,1]:V_j^\\theta\\in K\\text{ for every }j\\in J\\},$$\nand return $\\theta_*:=\\max S$ and $(V_j^{\\theta_*})_{j\\in J}$. The mean is\nassumed admissible; implementation, cost, and any pointwise-in-cell property\nare not part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-euler-positive-margin-domain",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$, and use the state variables and internal\nenergy density from [[def-ideal-gas-euler-state-and-pressure]]. Define the\n**positive-margin set**\n$$K_{\\gamma,\\varepsilon}:=\\left\\{(\\rho,m,E):\\rho\\ge\\varepsilon,\\quad E-\\frac{m^2}{2\\rho}\\ge\\varepsilon\\right\\}.$$\nEvery member has positive density and positive pressure. Closedness and\nconvexity are proved in\n[[prop-pe03-euler-state-and-margin-domains-are-convex-and-closed]]; those properties are not\nbeing inferred from this definition alone.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$, $\\varepsilon>0$, a finite nonempty node set $J$, positive\nweights $w_j$ summing to one, and candidate states $V_j\\in\\mathbb R^3$ with\nmean $\\bar V=\\sum_jw_jV_j\\in K_{\\gamma,\\varepsilon}$. Apply the maximal\nconvex scaling limiter of\n[[alg-pe03-convex-scaling-positivity-limiter]] with $K=K_{\\gamma,\\varepsilon}$.\nIts output is well-defined, every limited node lies in $K_{\\gamma,\\varepsilon}$,\nand the weighted cell mean remains $\\bar V$. Hence every limited node has\npositive density and positive pressure. If the unscaled nodes already lie in\n$K_{\\gamma,\\varepsilon}$, the maximal parameter is $\\theta_*=1$. In\nparticular, if smooth target states stay a distance at least $\\delta>0$ from\n$\\mathbb R^3\\setminus K_{\\gamma,\\varepsilon}$ and each reconstruction node\nhas error less than $\\delta$, the limiter is inactive and preserves that\nreconstruction's accuracy. No positivity between finitely many nodes is\nclaimed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The weighted mean is $(V_1+V_2)/2=(1,0,1)$. Its density is $1$ and its internal-energy density is $1$, so it belongs to $K_{7/5,1/2}$ by [F2]. The scaled states are $(1,4\\theta,1)$ and $(1,-4\\theta,1)$, each with internal energy $1-8\\theta^2$. Hence they lie in $K_{7/5,1/2}$ exactly when $1-8\\theta^2\\ge1/2$, or $0\\le\\theta\\le1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The largest feasible parameter is $\\theta_*=1/4$ by [F1]. The outputs are $(1,1,1)$ and $(1,-1,1)$; each has internal-energy density $1/2$ and pressure $(2/5)(1/2)=1/5>0$ by [F3]. Their weighted mean is $(1,0,1)$, also as guaranteed by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two half-weighted nodes have an explicitly supplied mean, and theta=0 is feasible because that mean has positive margin.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The two half-weighted nodes have an explicitly supplied mean, and theta=0 is feasible because that mean has positive margin.",
+            "item_sha256": "f60e316760cd0c4542e5ce6f9e0605c7e446727165c08cb69f2306daae8ba607",
+            "row_sha256": "8639db829746c40c6bbf20e4d4f2267eef693f33289a895fa7b3e8f40ed22693",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The two half-weighted nodes have an explicitly supplied mean, and theta=0 is feasible because that mean has positive margin.",
+            "item_sha256": "f60e316760cd0c4542e5ce6f9e0605c7e446727165c08cb69f2306daae8ba607",
+            "row_sha256": "8639db829746c40c6bbf20e4d4f2267eef693f33289a895fa7b3e8f40ed22693",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 shows theta=0 is feasible and has the admissible mean as every node."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves theta=1 violates the positive-margin condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 reaches the positive-margin boundary exactly at theta=1/4."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compute the feasible interval endpoints theta=0 and theta=1/4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The maximal feasible scaling is the explicit root one quarter of a scalar quadratic inequality, so no arbitrary set selection occurs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The maximal feasible scaling is the explicit root one quarter of a scalar quadratic inequality, so no arbitrary set selection occurs.",
+            "item_sha256": "f60e316760cd0c4542e5ce6f9e0605c7e446727165c08cb69f2306daae8ba607",
+            "row_sha256": "e5a6fd108949f6b01a27b244e2d7692e1dba34b2552bf92b5cb52efbd931aaf0",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The maximal feasible scaling is the explicit root one quarter of a scalar quadratic inequality, so no arbitrary set selection occurs.",
+            "item_sha256": "f60e316760cd0c4542e5ce6f9e0605c7e446727165c08cb69f2306daae8ba607",
+            "row_sha256": "e5a6fd108949f6b01a27b244e2d7692e1dba34b2552bf92b5cb52efbd931aaf0",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Example: Within [0,1], feasible scaled nodes must satisfy 1-8 theta squared>=one half, forcing theta<=one quarter.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Within [0,1], feasible scaled nodes must satisfy 1-8 theta squared>=one half, forcing theta<=one quarter.",
+            "item_sha256": "f60e316760cd0c4542e5ce6f9e0605c7e446727165c08cb69f2306daae8ba607",
+            "row_sha256": "8fe0b2193ac730e644827174a68f979d5f8b708654e8c52bdc90cd8031a57f3f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Within [0,1], feasible scaled nodes must satisfy 1-8 theta squared>=one half, forcing theta<=one quarter.",
+            "item_sha256": "f60e316760cd0c4542e5ce6f9e0605c7e446727165c08cb69f2306daae8ba607",
+            "row_sha256": "8fe0b2193ac730e644827174a68f979d5f8b708654e8c52bdc90cd8031a57f3f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Example: Every theta between zero and one quarter satisfies both the density and internal-energy margins, proving the stated feasible-interval converse.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Every theta between zero and one quarter satisfies both the density and internal-energy margins, proving the stated feasible-interval converse.",
+            "item_sha256": "f60e316760cd0c4542e5ce6f9e0605c7e446727165c08cb69f2306daae8ba607",
+            "row_sha256": "fe63718881ae8d4c124b53c6baba759197426c6fc9ca430e966df5dfdce61d1a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Every theta between zero and one quarter satisfies both the density and internal-energy margins, proving the stated feasible-interval converse.",
+            "item_sha256": "f60e316760cd0c4542e5ce6f9e0605c7e446727165c08cb69f2306daae8ba607",
+            "row_sha256": "fe63718881ae8d4c124b53c6baba759197426c6fc9ca430e966df5dfdce61d1a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Two-node Euler convex scaling",
+          "method": "exact rational arithmetic",
+          "input": {
+            "weights": [
+              "1/2",
+              "1/2"
+            ],
+            "mean": [
+              "1",
+              "0",
+              "1"
+            ],
+            "nodes": [
+              [
+                "1",
+                "4",
+                "1"
+              ],
+              [
+                "1",
+                "-4",
+                "1"
+              ]
+            ],
+            "gamma": "7/5",
+            "epsilon": "1/2"
+          },
+          "calculation": "At scale theta, internal energy is 1-8*theta^2. The constraint 1-8*theta^2>=1/2 is equivalent to 0<=theta<=1/4; at theta=1/4 the limited nodes are (1,±1,1), each with internal energy 1/2 and pressure 1/5.",
+          "expected": {
+            "theta": "1/4",
+            "limited_nodes": [
+              [
+                "1",
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "-1",
+                "1"
+              ]
+            ],
+            "mean": [
+              "1",
+              "0",
+              "1"
+            ],
+            "pressure_each": "1/5"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read both verification steps and all four suppliers, already independently checked in the limiter review. The two equally weighted candidate vectors have mean (1,0,1) in K_(7/5,1/2), although the original node internal energies are -7; the algorithm permits arbitrary candidate vectors. At theta in [0,1], scaled internal energy is 1-8*theta^2 and density is 1, giving exactly [0,1/4] as the feasible set. Theta=0, theta=1/4 and theta=1 checked: the maximum outputs (1,+/-1,1), internal energy 1/2, pressure 1/5, and unchanged mean. The iff calculation is on the declared parameter interval. No claim evaluates physical pressure on the original inadmissible states, no positivity between nodes and no AC. Reader/refuter have no finding; no defect or unmet prerequisite."
+      }
+    },
+    "ex-pe03-entropy-stable-underresolved-shock": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe03-system-entropy-pair-and-potential",
+          "source_section": "Definition",
+          "quote": "Use the conservation-system convention of\n[[def-hyperbolic-system-and-characteristic-families]]: on an open convex state\ndomain $\\mathcal A\\subseteq\\mathbb R^m$, the flux is $F:\\mathcal A\\to\\mathbb R^m$.\nA **convex entropy pair** is a pair $(\\eta,q)$ with $\\eta\\in C^2(\\mathcal A)$,\n$q\\in C^1(\\mathcal A)$, positive-semidefinite Hessian $D^2\\eta$, and\n$$Dq(U)=D\\eta(U)\\,DF(U)\\qquad(U\\in\\mathcal A).$$\nThe **entropy variable** is the column vector $v(U)=\\nabla\\eta(U)$; gradients\nare represented as columns, so the compatibility equation above means\n$\\nabla q(U)=DF(U)^T v(U)$. The **entropy potential** is\n$\\psi(U)=v(U)^T F(U)-q(U)$. This definition does not assert that every convex\n$\\eta$ admits a flux $q$; the compatibility equation is part of the hypothesis.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-tadmor-entropy-conservative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be a convex entropy pair on an open domain $\\mathcal A$, with\nentropy variable $v$ and potential $\\psi$ as in\n[[def-pe03-system-entropy-pair-and-potential]]. A continuous two-point flux\n$F^{ec}:\\mathcal A\\times\\mathcal A\\to\\mathbb R^m$ is **entropy-conservative\nin Tadmor's sense** if it is consistent and symmetric,\n$F^{ec}(U,U)=F(U)$, and satisfies the exact jump identity\n$$\\bigl(v(U_R)-v(U_L)\\bigr)^T F^{ec}(U_L,U_R)=\\psi(U_R)-\\psi(U_L)$$\nfor every pair $U_L,U_R\\in\\mathcal A$. This definition asserts no existence\nfor a prescribed entropy pair.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe03-entropy-stable-dissipative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be an entropy pair with entropy variable $v$ and potential\n$\\psi$, and let $F^{ec}$ be a consistent entropy-conservative flux as in\n[[def-pe03-tadmor-entropy-conservative-flux]]. For each pair\n$(U_L,U_R)\\in\\mathcal A^2$, choose a symmetric positive-semidefinite matrix\n$D(U_L,U_R)\\in\\mathbb R^{m\\times m}$. The associated **entropy-stable\ndissipative flux** is\n$$F^{es}(U_L,U_R):=F^{ec}(U_L,U_R)-\\frac12D(U_L,U_R)(v(U_R)-v(U_L)).$$\nPositive semidefinite means $z^TD(U_L,U_R)z\\ge0$ for every $z\\in\\mathbb R^m$.\nNo fully discrete time-step property is included.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+          "source_section": "Statement",
+          "quote": "Let $(\\eta,q)$ be a convex entropy pair on an open set $\\mathcal A$, with\nentropy variable $v$ and potential $\\psi$ as in\n[[def-pe03-system-entropy-pair-and-potential]]. On a periodic mesh of $N\\ge2$\ncells of width $\\Delta x>0$, let differentiable states $U_i(t)\\in\\mathcal A$\nsatisfy\n$$\\dot U_i=-\\frac{F^{es}_{i+1/2}-F^{es}_{i-1/2}}{\\Delta x},$$\nwhere every face flux is the entropy-stable dissipative flux of\n[[def-pe03-entropy-stable-dissipative-flux]]. Define\n$$\\widehat q_{i+1/2}:=\\left(\\frac{v_i+v_{i+1}}2\\right)^T F^{es}_{i+1/2}-\\frac{\\psi_i+\\psi_{i+1}}2.$$\nThen each cell satisfies\n$$\\frac{d}{dt}\\eta(U_i)+\\frac{\\widehat q_{i+1/2}-\\widehat q_{i-1/2}}{\\Delta x}\\le0.$$\nSumming over the periodic mesh gives nonincrease of total discrete entropy.\nThis is a semidiscrete result; it asserts no entropy inequality for a chosen\nfully discrete time integrator.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Rankine–Hugoniot speed from states $u_L=1,u_R=0$ is $(f(0)-f(1))/(0-1)=1/2$. Since $f'(0)=0<1/2<1=f'(1)$, it is a compressive shock. Its entropy production is $q(0)-q(1)-\\tfrac12(\\eta(0)-\\eta(1))=-1/3+1/4=-1/12<0$, so it satisfies the quadratic entropy inequality.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The entropy-conservative Burgers flux is $f^{ec}=(u_L^2+u_Lu_R+u_R^2)/6$: it is symmetric and diagonal-consistent, and $(u_R-u_L)f^{ec}=(u_R^3-u_L^3)/6=[\\psi]$, so [F2] applies. Hence $f^{ec}(1,0)=1/6$ and [F3] gives $f^{es}(1,0)=2/3$. With $[u]=-1$ and $[\\psi]=-1/6$ from step 1.1, the Tadmor residual is $[u]f^{es}-[\\psi]=-2/3+1/6=-1/2<0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Equal-state faces have flux $f^{es}(1,1)=1/2$ and $f^{es}(0,0)=0$ by [F2]–[F3]. Thus the left state adjacent to the jump updates to $1-\\tfrac12(2/3-1/2)=11/12$, and the right state updates to $0-\\tfrac12(0-2/3)=1/3$. The jump is spread over two intermediate values. This is a finite computation only; [F4] does not certify the forward-Euler step's entropy inequality. The interface flux value was obtained in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite witness has four periodic cells and a specified descending unit jump, so its face computations are nonempty.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The finite witness has four periodic cells and a specified descending unit jump, so its face computations are nonempty.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "37865f7b2fbe767c9e2659ba651e7d62f00dbc19fda48e6d001dae7ad9356328",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The finite witness has four periodic cells and a specified descending unit jump, so its face computations are nonempty.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "37865f7b2fbe767c9e2659ba651e7d62f00dbc19fda48e6d001dae7ad9356328",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the residual -1/2 times the squared jump, which vanishes at equal states."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: Unit dissipation is the exact chosen value and produces the negative half Tadmor residual at the unit shock.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Unit dissipation is the exact chosen value and produces the negative half Tadmor residual at the unit shock.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "294aa41645a5edaf553d8ec09a864efacc88fc31b431d211692474b93e04449d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Unit dissipation is the exact chosen value and produces the negative half Tadmor residual at the unit shock.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "294aa41645a5edaf553d8ec09a864efacc88fc31b431d211692474b93e04449d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks strict Lax inequalities, so no sonic endpoint is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies 0<1/2<1; the shock speed is strictly between the characteristic speeds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Burgers flux, four cell values and one forward-Euler step are completely prescribed finite data.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The Burgers flux, four cell values and one forward-Euler step are completely prescribed finite data.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "66d2bb7a2b1edc217b019bbcb7e4201a5e491347b9f4beef167ea78bf57e9810",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The Burgers flux, four cell values and one forward-Euler step are completely prescribed finite data.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "66d2bb7a2b1edc217b019bbcb7e4201a5e491347b9f4beef167ea78bf57e9810",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The explicit calculation shows semidiscrete entropy stability can coexist with coarse-grid shock smearing.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The explicit calculation shows semidiscrete entropy stability can coexist with coarse-grid shock smearing.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "1cd571a16a4c16728558cba3cd3f6a9e6568a3ecedbfc1006bcf52a7af4991a4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The explicit calculation shows semidiscrete entropy stability can coexist with coarse-grid shock smearing.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "1cd571a16a4c16728558cba3cd3f6a9e6568a3ecedbfc1006bcf52a7af4991a4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Visible smearing does not prove a fully discrete entropy inequality, and the example expressly withholds that inference.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Visible smearing does not prove a fully discrete entropy inequality, and the example expressly withholds that inference.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "ec306e1e43d53d71d38ecd8f16289f6ed873fc31464dc4bbcf6834d3024c1e74",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Visible smearing does not prove a fully discrete entropy inequality, and the example expressly withholds that inference.",
+            "item_sha256": "a8d74ee1abc495b1cd1311b18f837f7d2a8251c8db2f9eeaadeef5fe2215fe6d",
+            "row_sha256": "ec306e1e43d53d71d38ecd8f16289f6ed873fc31464dc4bbcf6834d3024c1e74",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Four-cell coarse Burgers shock update",
+          "method": "exact rational arithmetic",
+          "input": {
+            "states": [
+              "1",
+              "1",
+              "0",
+              "0"
+            ],
+            "nu": "1/2",
+            "dissipation": "1"
+          },
+          "calculation": "At equal faces the fluxes are 1/2 and 0; at the 1-to-0 face f_ec=1/6 and f_es=2/3. The two adjacent forward-Euler states are 1-(1/2)(2/3-1/2)=11/12 and 0-(1/2)(0-2/3)=1/3.",
+          "expected": {
+            "left_updated": "11/12",
+            "right_updated": "1/3",
+            "semidiscrete_interface_residual": "-1/2",
+            "fully_discrete_entropy_claim": false
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read all three verification steps and all four cited suppliers, including the full semidiscrete proof. Quadratic entropy satisfies q_prime=eta_prime*f_prime and gives v=u, psi=u^3/6. The symmetric polynomial EC flux is continuous and diagonal-consistent even at equal/zero states; its jump identity factors the difference of cubes. D=1 is positive definite and the general residual is -(u_R-u_L)^2/2. At 1->0, RH speed 1/2 lies between 0 and 1 and the entropy production is -1/12; the numerical face flux is 2/3 and residual -1/2. On the declared four periodic cells, the two adjacent updates are 11/12 and 1/3; the other periodic interface does not enter these two updates. The supplier cell residual is the half-sum of adjacent face defects divided by mesh width, so semidiscrete stability follows including zero jumps/dissipation. No forward-Euler entropy theorem or convergence/shock-resolution rate is claimed. Tadmor §§4.1–4.3, (24)–(28), printed pp.477–479 independently checked; its stated positive-definite assumption can be weakened to semidefinite by the local quadratic-form argument. No AC, iff obligation, reader/refuter finding, defect or unmet prerequisite."
+      }
+    }
+  }
+}

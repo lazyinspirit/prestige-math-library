@@ -1,0 +1,418 @@
+{
+  "group": "d",
+  "batches": [
+    "12"
+  ],
+  "pages_read": [
+    "ewald-periodic-potentials-and-particle-mesh-error",
+    "ewald-periodic-potentials-and-particle-mesh-error-examples"
+  ],
+  "items_read": [
+    "def-ewald-causal-cardinal-spline-window",
+    "def-ewald-three-dimensional-periodic-source-data",
+    "lem-ewald-screened-coulomb-kernel-and-self-limit",
+    "def-ewald-pme-cardinal-assignment-model",
+    "lem-ewald-gaussian-poisson-periodization",
+    "lem-ewald-lattice-shell-gaussian-tail-controllers",
+    "lem-ewald-smooth-torus-fourier-pairing",
+    "lem-ewald-pme-spline-alias-and-dft-normalization",
+    "thm-ewald-neutral-periodic-poisson-green-function",
+    "lem-ewald-pme-derivative-window-alias-bound",
+    "thm-ewald-alpha-independent-energy-and-potential",
+    "thm-ewald-pme-reciprocal-energy-force-error-bound",
+    "thm-ewald-real-reciprocal-cutoff-error-bounds",
+    "thm-ewald-total-pme-error-certificate",
+    "alg-ewald-certified-particle-mesh-evaluator",
+    "lem-ewald-certified-particle-mesh-evaluator-terminates",
+    "ex-ewald-nonneutral-zero-mode-obstruction",
+    "ex-ewald-neutral-dipole-cell",
+    "ex-ewald-source-collision-field-singularity",
+    "ex-ewald-alpha-cutoff-tradeoff",
+    "ex-ewald-mesh-energy-force-consistency"
+  ],
+  "conventions": [
+    {
+      "convention": "The cell is Λ=Aℤ³ with A invertible, V=|det A|, dual lattice A⁻ᵀℤ³, and angular frequencies κ_k=2πA⁻ᵀk. Fourier coefficients use the negative exponential and the factor 1/V.",
+      "fixed_by": "def-ewald-three-dimensional-periodic-source-data",
+      "matters_for": [
+        "lem-ewald-gaussian-poisson-periodization",
+        "lem-ewald-smooth-torus-fourier-pairing",
+        "thm-ewald-neutral-periodic-poisson-green-function",
+        "thm-ewald-alpha-independent-energy-and-potential",
+        "thm-ewald-real-reciprocal-cutoff-error-bounds"
+      ]
+    },
+    {
+      "convention": "Source counts may be zero; charges are real, positions are pairwise distinct on the torus, and neutrality means their sum is zero. The Poisson normalization is −Δu=4πρ with zero Fourier mode fixed to zero.",
+      "fixed_by": "def-ewald-three-dimensional-periodic-source-data",
+      "matters_for": [
+        "thm-ewald-neutral-periodic-poisson-green-function",
+        "thm-ewald-alpha-independent-energy-and-potential",
+        "ex-ewald-nonneutral-zero-mode-obstruction",
+        "alg-ewald-certified-particle-mesh-evaluator"
+      ]
+    },
+    {
+      "convention": "Energy is one half the charge-weighted regular potential after subtracting each particle's own q_i/r singularity. Ewald real sums omit only the own zero-image term; the energy self constant is −αΣq_i²/√π.",
+      "fixed_by": "def-ewald-three-dimensional-periodic-source-data",
+      "matters_for": [
+        "thm-ewald-alpha-independent-energy-and-potential",
+        "thm-ewald-real-reciprocal-cutoff-error-bounds",
+        "thm-ewald-total-pme-error-certificate",
+        "alg-ewald-certified-particle-mesh-evaluator"
+      ]
+    },
+    {
+      "convention": "W₁ includes both endpoints of [0,1]; for P≥2 the window is the stated causal truncated-power spline supported on [0,P]. Assignment includes all predecessor support indices and accumulates duplicate wrapped residues.",
+      "fixed_by": "def-ewald-causal-cardinal-spline-window",
+      "matters_for": [
+        "def-ewald-pme-cardinal-assignment-model",
+        "lem-ewald-pme-spline-alias-and-dft-normalization",
+        "lem-ewald-pme-derivative-window-alias-bound",
+        "alg-ewald-certified-particle-mesh-evaluator"
+      ]
+    },
+    {
+      "convention": "The mesh transform has negative exponent and normalization N_g⁻¹ᐟ². Causal assignment is deconvolved by conjugate D(k), and z_k=√N_g ĝ_M(k)/conjugate D(k), with no additional volume factor.",
+      "fixed_by": "def-ewald-pme-cardinal-assignment-model",
+      "matters_for": [
+        "lem-ewald-pme-spline-alias-and-dft-normalization",
+        "thm-ewald-pme-reciprocal-energy-force-error-bound",
+        "alg-ewald-certified-particle-mesh-evaluator",
+        "ex-ewald-mesh-energy-force-consistency"
+      ]
+    },
+    {
+      "convention": "Retained modes form a finite symmetric nonzero set, are injective modulo the mesh, and satisfy |k_r|<M_r/2. Even-grid Nyquist modes are excluded, and division requires a certified positive lower bound for |D(k)|.",
+      "fixed_by": "def-ewald-pme-cardinal-assignment-model",
+      "matters_for": [
+        "lem-ewald-pme-spline-alias-and-dft-normalization",
+        "thm-ewald-pme-reciprocal-energy-force-error-bound",
+        "thm-ewald-total-pme-error-certificate",
+        "alg-ewald-certified-particle-mesh-evaluator"
+      ]
+    },
+    {
+      "convention": "Physical gradients are A⁻ᵀ times fractional-coordinate gradients. At P=2 knots, the declared derivative is a selected adjacent one-sided vector limit or the average of all such limits, without a classical differentiability claim.",
+      "fixed_by": "def-ewald-pme-cardinal-assignment-model",
+      "matters_for": [
+        "lem-ewald-pme-derivative-window-alias-bound",
+        "thm-ewald-pme-reciprocal-energy-force-error-bound",
+        "thm-ewald-total-pme-error-certificate",
+        "ex-ewald-mesh-energy-force-consistency"
+      ]
+    },
+    {
+      "convention": "Real and reciprocal radial cutoffs retain distances at most their cutoff. Tail estimates start at the floor of the cutoff; finite force sums hold their cutoff index sets fixed rather than differentiating membership indicators.",
+      "fixed_by": "thm-ewald-total-pme-error-certificate",
+      "matters_for": [
+        "alg-ewald-certified-particle-mesh-evaluator",
+        "lem-ewald-certified-particle-mesh-evaluator-terminates"
+      ]
+    },
+    {
+      "convention": "Countable Choice is assumed for the screened-kernel and periodic Ewald analysis, including the published divergence, Gaussian-transform, lattice-Poisson, and Fourier-uniqueness interfaces.",
+      "fixed_by": "lem-ewald-screened-coulomb-kernel-and-self-limit",
+      "matters_for": [
+        "lem-ewald-gaussian-poisson-periodization",
+        "lem-ewald-smooth-torus-fourier-pairing",
+        "thm-ewald-alpha-independent-energy-and-potential",
+        "thm-ewald-total-pme-error-certificate"
+      ]
+    },
+    {
+      "convention": "Non-transform certificate requests have a finite instruction cap, defaulting to one, and are not retried with larger budgets inside an execution. The evaluator selects the right-hand adjacent box at P=2 knots and returns an explicit status when required comparisons, branches, divisors, or enclosures remain unresolved.",
+      "fixed_by": "alg-ewald-certified-particle-mesh-evaluator",
+      "matters_for": [
+        "lem-ewald-certified-particle-mesh-evaluator-terminates"
+      ]
+    },
+    {
+      "convention": "Arithmetic error radii must bound the actual computed finite outputs relative to their exact-real truncated expressions. Formal exact-constant transform work counts exclude interval precision and phase evaluation and supply no numerical accuracy guarantee.",
+      "fixed_by": "thm-ewald-total-pme-error-certificate",
+      "matters_for": [
+        "alg-ewald-certified-particle-mesh-evaluator",
+        "lem-ewald-certified-particle-mesh-evaluator-terminates"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-ewald-pme-spline-alias-and-dft-normalization",
+      "statement": "For the periodic cardinal-assignment model with P≥2, signed retained modes |k_r|<M_r/2 and D(k)≠0, b_k(t)=Σ_n r_{k,n}a_{k+n⊙M}(t) and z_k=Σ_n r_{k,n}ρ_{k+n⊙M}, absolutely convergently. Also z_k=Σ_i q_i b_k(t_i), |b_k−a_k|≤A_k, |b_k|≤1+A_k, |z_k−ρ_k|≤QA_k, and the periodic assignment weights sum to one.",
+      "used_by": [
+        "lem-ewald-pme-derivative-window-alias-bound",
+        "thm-ewald-pme-reciprocal-energy-force-error-bound",
+        "lem-ewald-certified-particle-mesh-evaluator-terminates",
+        "ex-ewald-mesh-energy-force-consistency"
+      ]
+    },
+    {
+      "id": "lem-ewald-lattice-shell-gaussian-tail-controllers",
+      "statement": "Assume Countable Choice. For invertible B, every translate of Bℤ³ has at most C_B(m+1)³ points in shell m≤|z|<m+1. For β>0 and integers p,M≥0, T_p(β,M)≤U_p(β,M,J) whenever J≥M and 2βJ(J+1)≥p; such a J exists.",
+      "used_by": [
+        "thm-ewald-alpha-independent-energy-and-potential",
+        "thm-ewald-real-reciprocal-cutoff-error-bounds",
+        "thm-ewald-total-pme-error-certificate",
+        "lem-ewald-certified-particle-mesh-evaluator-terminates",
+        "ex-ewald-source-collision-field-singularity",
+        "ex-ewald-alpha-cutoff-tradeoff"
+      ]
+    },
+    {
+      "id": "thm-ewald-alpha-independent-energy-and-potential",
+      "statement": "Assume Countable Choice and neutral finite point-source data with pairwise distinct torus positions. For every α>0, the displayed absolutely convergent off-source Ewald potential represents the unique mean-zero periodic solution of −Δu=4πρ and is independent of α. Its source finite parts exist and are α-independent; their charge-weighted half-sum equals the displayed real-space, reciprocal-space, and self-correction energy formula.",
+      "used_by": [
+        "thm-ewald-pme-reciprocal-energy-force-error-bound",
+        "thm-ewald-real-reciprocal-cutoff-error-bounds",
+        "thm-ewald-total-pme-error-certificate",
+        "ex-ewald-neutral-dipole-cell",
+        "ex-ewald-source-collision-field-singularity"
+      ]
+    },
+    {
+      "id": "lem-ewald-pme-derivative-window-alias-bound",
+      "statement": "For P≥3, the stated absolutely convergent derivative-alias series and finite p-series controllers give ||∇_x b_k−∇_x a_k||₂≤B_k. For P=2, the finite piecewise-window controller bounds the same error on open mesh boxes and for every declared one-sided knot branch or its allowed average, without asserting classical differentiability at knots.",
+      "used_by": [
+        "thm-ewald-pme-reciprocal-energy-force-error-bound",
+        "lem-ewald-certified-particle-mesh-evaluator-terminates"
+      ]
+    },
+    {
+      "id": "thm-ewald-pme-reciprocal-energy-force-error-bound",
+      "statement": "Under its neutral-data, retained-mode, nonzero-window and derivative-residual hypotheses, the retained mesh potential error is at most QΣ_k c_k A_k(2+A_k), the uncorrected energy error at most Q²Σ_k c_k A_k(2+A_k)/2, and the force error at most |q_i|QΣ_k c_k[|κ_k|A_k+(1+A_k)B_k+(1+A_k)H_k]. It also proves the finite transform-gather and cyclic self-correction identities, energy-gradient qualifications, and the stated improved corrected energy and force bounds.",
+      "used_by": [
+        "thm-ewald-total-pme-error-certificate",
+        "alg-ewald-certified-particle-mesh-evaluator",
+        "ex-ewald-mesh-energy-force-consistency"
+      ]
+    },
+    {
+      "id": "lem-ewald-screened-coulomb-kernel-and-self-limit",
+      "statement": "Assume Countable Choice and α>0. The long-range kernel erf(αr)/r extends continuously at zero and has distributional negative Laplacian 4πg_α; erfc(αr)/r has negative Laplacian 4πδ₀−4πg_α, expansion 1/r−2α/√π+O(r²), and the displayed Gaussian bounds for its value and first radial derivative.",
+      "used_by": [
+        "lem-ewald-lattice-shell-gaussian-tail-controllers",
+        "thm-ewald-alpha-independent-energy-and-potential",
+        "thm-ewald-real-reciprocal-cutoff-error-bounds",
+        "ex-ewald-source-collision-field-singularity"
+      ]
+    },
+    {
+      "id": "lem-ewald-smooth-torus-fourier-pairing",
+      "statement": "Assume Countable Choice. Smooth periodic test functions have absolutely summable Fourier coefficients after multiplication by every derivative-order frequency weight, with Fourier partial sums converging in every smooth seminorm. Every polynomially bounded coefficient sequence defines a continuous periodic distribution by the stated Fourier pairing, and periodic distributions are determined by their Fourier coefficients.",
+      "used_by": [
+        "thm-ewald-neutral-periodic-poisson-green-function"
+      ]
+    },
+    {
+      "id": "thm-ewald-neutral-periodic-poisson-green-function",
+      "statement": "Assume Countable Choice and neutral finite point-source data. The sequence û(0)=0 and û(k)=4πΣ_i q_i exp(−iκ_k·x_i)/(V|κ_k|²) for k≠0 defines the unique mean-zero periodic distribution satisfying −Δu=4πρ.",
+      "used_by": [
+        "thm-ewald-alpha-independent-energy-and-potential"
+      ]
+    },
+    {
+      "id": "lem-ewald-gaussian-poisson-periodization",
+      "statement": "Assume Countable Choice. For α>0 and every x∈ℝ³, Σ_λ g_α(x+λ)=V⁻¹Σ_k exp(−|κ_k|²/(4α²))exp(iκ_k·x), with absolute and locally uniform convergence of both series.",
+      "used_by": [
+        "thm-ewald-alpha-independent-energy-and-potential"
+      ]
+    },
+    {
+      "id": "thm-ewald-real-reciprocal-cutoff-error-bounds",
+      "statement": "Assume Countable Choice and neutral finite source data. For radial cutoffs R,K≥1, the displayed B_R and B_K formulas bound omitted potential, energy, and particle-force tails; replacing T₃ by its finite upper controller preserves the bounds. The exact force is the negative gradient of the renormalized energy and equals the displayed real and reciprocal force sums.",
+      "used_by": [
+        "thm-ewald-total-pme-error-certificate",
+        "ex-ewald-alpha-cutoff-tradeoff"
+      ]
+    },
+    {
+      "id": "thm-ewald-total-pme-error-certificate",
+      "statement": "Under the stated neutral-data, cutoff, mesh, retained-mode, finite-controller and actual arithmetic-radius hypotheses, |Û(x)−U_α(x)|≤η_U for every off-source x, |Ê^χ−E|≤η_E^χ, and ||F̂_i^χ−F_i||₂≤η_F,i^χ for each particle and either declared correction branch. The displayed radii include real and reciprocal tails, every in-ball omitted mode, retained mesh errors, and arithmetic errors.",
+      "used_by": [
+        "alg-ewald-certified-particle-mesh-evaluator",
+        "lem-ewald-certified-particle-mesh-evaluator-terminates"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-convolution-of-two-functions-on-rn",
+      "used_for": "Integral definition of convolution and the local cardinal-window recursion.",
+      "opened": true
+    },
+    {
+      "id": "def-full-rank-lattice-covolume-and-dual-lattice",
+      "used_for": "Cell, covolume, reciprocal-lattice and character conventions; bounded-ball lattice finiteness.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Exact choice assumption propagated through the analytic suppliers.",
+      "opened": true
+    },
+    {
+      "id": "cor-c-one-change-of-variables-for-l-one-functions",
+      "used_for": "Gaussian scaling and conversion between physical cells and coordinate cubes under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Screened-kernel, character and finite energy derivatives on their stated domains.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+      "used_for": "Punctured-ball flux arguments proving the Coulomb delta and screened-kernel distribution identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-first-part",
+      "used_for": "Differentiation of the error-function integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Absolutely integrable Gaussian products, convolution transforms and coordinatewise cell integrations.",
+      "opened": true
+    },
+    {
+      "id": "thm-gaussian-integral",
+      "used_for": "Gaussian normalization, complementary-error-function tails and the real-space mean calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-unitary-discrete-fourier-transform-on-z-mod-n",
+      "used_for": "Negative-sign unitary finite-transform normalization.",
+      "opened": true
+    },
+    {
+      "id": "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+      "used_for": "Exact Fourier transform of the normalized screening Gaussian.",
+      "opened": true
+    },
+    {
+      "id": "thm-poisson-summation-for-a-full-rank-lattice",
+      "used_for": "Schwartz Gaussian periodization on an arbitrary full-rank lattice.",
+      "opened": true
+    },
+    {
+      "id": "lem-lattice-fundamental-parallelotope-partitions-euclidean-space",
+      "used_for": "Translate representatives, cell tiling and volume in shell counts and mean calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-by-parts",
+      "used_for": "Gaussian integral recurrences, real-space mean and periodic Fourier coefficient decay.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Existence of finite Gaussian-controller truncation indices.",
+      "opened": true
+    },
+    {
+      "id": "lem-character-orthogonality-on-a-lattice-fundamental-domain",
+      "used_for": "Fourier coefficient identification and zero means of nonconstant reciprocal characters.",
+      "opened": true
+    },
+    {
+      "id": "lem-lattice-periodic-continuous-functions-are-determined-by-their-lattice-fourier-coefficients",
+      "used_for": "Identification of smooth test functions with their uniformly convergent Fourier series.",
+      "opened": true
+    },
+    {
+      "id": "thm-p-series-real-exponents",
+      "used_for": "Convergence of smooth Fourier pairings and spline value and derivative alias majorants.",
+      "opened": true
+    },
+    {
+      "id": "thm-uniform-derivative-limit-on-a-closed-interval",
+      "used_for": "Termwise differentiation of smooth Fourier, P≥3 alias and collision-free Ewald series.",
+      "opened": true
+    },
+    {
+      "id": "thm-weierstrass-m-test-for-complex-function-series",
+      "used_for": "Uniform convergence from absolute Fourier and alias majorants.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "Finite character integrals and reciprocal mode derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Nonnegative spline partition calculations and screened-kernel integrals.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-bump-between-concentric-euclidean-balls",
+      "used_for": "Identification of equal continuous off-source representatives from distributional equality.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "used_for": "Total differentiability of collision-free Ewald energy after uniform derivative convergence.",
+      "opened": true
+    },
+    {
+      "id": "thm-uniform-limit-continuous-real-functions",
+      "used_for": "Continuity of the limiting Ewald energy partial derivatives.",
+      "opened": true
+    },
+    {
+      "id": "alg-na-computed-fast-transforms-and-convolution",
+      "used_for": "Actual capped arbitrary-length transform procedure invoked along mesh fibers.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-arbitrary-length-fft-correctness-and-cost",
+      "used_for": "Formal exact-constant transform identity and arithmetic work count, without inferring computed accuracy.",
+      "opened": true
+    },
+    {
+      "id": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "used_for": "Representability, rounded arithmetic and explicit range-failure interface.",
+      "opened": true
+    },
+    {
+      "id": "alg-na-certified-unit-circle-phase",
+      "used_for": "Finite precision-attempt and elementary-series controls in transform termination.",
+      "opened": true
+    },
+    {
+      "id": "alg-na-computed-unitary-radix-two-fft",
+      "used_for": "Depth-capped radix-two recursion and failure propagation.",
+      "opened": true
+    },
+    {
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "used_for": "Finite cyclic-convolution subcalls in the prime-length transform branch.",
+      "opened": true
+    },
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "used_for": "Finite expression-DAG evaluation, fixed series truncations and finite range-reduction branches.",
+      "opened": true
+    },
+    {
+      "id": "alg-dyadic-square-root-bisection",
+      "used_for": "Finite integer-gap bisection for square-root enclosure endpoints.",
+      "opened": true
+    },
+    {
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "used_for": "Sound finite arithmetic enclosures, divisor checks and explicit nonfinite statuses.",
+      "opened": true
+    },
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "used_for": "Finite representable endpoint sets and terminating directed rational conversions.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": []
+}

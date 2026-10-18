@@ -1,0 +1,167 @@
+[
+  {
+    "order": 2598,
+    "id": "polynomial-eigenproblems-and-linearization",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Polynomial eigenproblems and linearization",
+    "companion": "polynomial-eigenproblems-and-linearization-examples",
+    "requires": [
+      "restarted-and-block-eigensolvers"
+    ],
+    "items": [
+      {
+        "id": "def-matrix-polynomial-and-homogeneous-eigenpairs",
+        "kind": "definition",
+        "title": "Regular matrix polynomials and homogeneous eigenpairs",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Fix integers $n,m\\ge1$ and coefficient matrices $A_0,\\ldots,A_m\\in\\mathbb C^{n\\times n}$. The **grade-$m$ matrix polynomial** is\n$$P(\\lambda):=\\sum_{j=0}^{m}A_j\\lambda^j.$$\nWhen $P$ is not identically zero, its actual degree is the degree of its largest nonzero scalar entry and can be smaller than the declared grade $m$; the zero polynomial has no actual degree. It is **regular** when the scalar polynomial $\\det P(\\lambda)$ is not identically zero. Write $x^*$ for conjugate transpose, $\\langle u,v\\rangle:=v^*u$ for the Euclidean inner product, $\\|x\\|_2:=(x^*x)^{1/2}$ for the Euclidean vector norm, and $\\|M\\|_F:=(\\sum_{r,s}|M_{rs}|^2)^{1/2}$ for the Frobenius matrix norm.\n\nThe **grade-$m$ homogeneous polynomial** is\n$$P_h(\\alpha,\\beta):=\\sum_{j=0}^{m}A_j\\alpha^j\\beta^{m-j}.$$\nA projective parameter $[\\alpha:\\beta]$ is a nonzero pair $(\\alpha,\\beta)\\in\\mathbb C^2$ modulo common multiplication by a nonzero scalar. A **homogeneous eigenpair** is $([\\alpha:\\beta],x)$ with $x\\in\\mathbb C^n\\setminus\\{0\\}$ and $P_h(\\alpha,\\beta)x=0$. This condition is independent of the representative because $P_h(c\\alpha,c\\beta)=c^mP_h(\\alpha,\\beta)$. If $\\beta\\ne0$, the associated finite parameter is $\\lambda=\\alpha/\\beta$ and $P_h(\\alpha,\\beta)=\\beta^mP(\\lambda)$. The point $[1:0]$ is the parameter at infinity; there $P_h(1,0)=A_m$, so it is an eigenvalue exactly when $A_m$ is singular. For regular $P$, the algebraic multiplicity at a finite $\\lambda_0$ is the order of the zero of $\\det P$ at $\\lambda_0$. The **reversal** is $P^{\\rm rev}_m(\\mu):=\\sum_{j=0}^{m}A_{m-j}\\mu^j=\\mu^mP(1/\\mu)$; the algebraic multiplicity at infinity is the order of the zero of $\\det P^{\\rm rev}_m$ at $\\mu=0$. The order of a zero at $0$ is the largest integer $r$ for which $\\mu^r$ divides the scalar polynomial.",
+        "source_path": "items/def-matrix-polynomial-and-homogeneous-eigenpairs.md"
+      },
+      {
+        "id": "def-first-frobenius-companion-pencil",
+        "kind": "definition",
+        "title": "First Frobenius companion pencil of a matrix polynomial",
+        "deps": [
+          "def-matrix-polynomial-and-homogeneous-eigenpairs"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $P(\\lambda)=\\sum_{j=0}^{m}A_j\\lambda^j$ be as in [[def-matrix-polynomial-and-homogeneous-eigenpairs]]. For $m\\ge1$, define $mn\\times mn$ block matrices $A_c,B_c$ by\n$$A_c:=\\begin{bmatrix}A_{m-1}&A_{m-2}&\\cdots&A_0\\\\-I_n&0&\\cdots&0\\\\0&-I_n&\\ddots&\\vdots\\\\\\vdots&\\ddots&\\ddots&0\\\\0&\\cdots&-I_n&0\\end{bmatrix},\\qquad B_c:=\\begin{bmatrix}-A_m&0&\\cdots&0\\\\0&-I_n&\\cdots&0\\\\\\vdots&\\ddots&\\ddots&\\vdots\\\\0&\\cdots&0&-I_n\\end{bmatrix}.$$\nThe **first Frobenius companion pencil** with the sign convention used here is\n$$L(\\lambda):=A_c-\\lambda B_c=\\begin{bmatrix}\\lambda A_m+A_{m-1}&A_{m-2}&\\cdots&A_0\\\\-I_n&\\lambda I_n&\\cdots&0\\\\0&-I_n&\\ddots&\\vdots\\\\\\vdots&\\ddots&\\ddots&\\lambda I_n\\end{bmatrix}.$$\nFor a vector $x\\in\\mathbb C^n$ and finite $\\lambda$, its **companion lift** is $z(\\lambda,x):=(\\lambda^{m-1}x,\\lambda^{m-2}x,\\ldots,\\lambda x,x)^T\\in\\mathbb C^{mn}$; when $m=1$, this is simply $x$.",
+        "source_path": "items/def-first-frobenius-companion-pencil.md"
+      },
+      {
+        "id": "thm-first-companion-pencil-is-strong-linearization",
+        "kind": "theorem",
+        "title": "The first Frobenius companion pencil preserves the finite and infinite polynomial spectrum",
+        "deps": [
+          "def-first-frobenius-companion-pencil",
+          "def-matrix-polynomial-and-homogeneous-eigenpairs"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $P$ be a regular $n\\times n$ grade-$m$ matrix polynomial with $m\\ge1$, and let $L(\\lambda)=A_c-\\lambda B_c$ be the pencil of [[def-first-frobenius-companion-pencil]]. A square matrix polynomial is **unimodular** when its determinant is a nonzero constant. The pencil $L$ is a **strong linearization** of $P$ if there are unimodular polynomial matrices $U,V$ with $ULV=\\operatorname{diag}(P,I_{(m-1)n})$ and unimodular polynomial matrices $\\widetilde U,\\widetilde V$ with $\\widetilde U(\\mu)(\\mu A_c-B_c)\\widetilde V(\\mu)=\\operatorname{diag}(P^{\\rm rev}_m,I_{(m-1)n})$. Such matrices exist. In particular, $\\det(A_c-\\lambda B_c)=\\det P(\\lambda)$; finite eigenvectors correspond by $x\\mapsto z(\\lambda,x)$; and the infinite eigenspaces correspond by $x\\mapsto(x,0,\\ldots,0)^T$ from $\\ker A_m$ to $\\ker(-B_c)$. The algebraic multiplicity of infinity in both problems is $mn-\\deg\\det P$. Thus if $A_m$ is invertible there are no infinite eigenvalues; if $A_m$ is singular there is at least one, with geometric multiplicity $\\dim\\ker A_m$, which need not equal its algebraic multiplicity.",
+        "source_path": "items/thm-first-companion-pencil-is-strong-linearization.md"
+      },
+      {
+        "id": "lem-first-companion-pencil-residual-transfer",
+        "kind": "lemma",
+        "title": "A companion-pencil residual transfers to the polynomial residual through explicit block factors",
+        "deps": [
+          "def-first-frobenius-companion-pencil",
+          "def-matrix-polynomial-and-homogeneous-eigenpairs",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $P(\\lambda)=\\sum_{j=0}^{m}A_j\\lambda^j$ have grade $m\\ge1$, and let $L(\\lambda)$ be its first companion pencil. For any block vector $z=(z_1,\\ldots,z_m)^T$, write its pencil residual as $e=L(\\lambda)z=(e_1,\\ldots,e_m)^T$ and put $x=z_m$. For $2\\le k\\le m$, set\n$$Q_k(\\lambda):=\\sum_{j=m-k+1}^{m}A_j\\lambda^{j-m+k-1}.$$\nThen the exact identity and norm bound are\n$$P(\\lambda)x=e_1+\\sum_{k=2}^{m}Q_k(\\lambda)e_k,\\qquad \\|P(\\lambda)x\\|_2\\le\\|e_1\\|_2+\\sum_{k=2}^{m}\\|Q_k(\\lambda)\\|_F\\|e_k\\|_2.$$\nEmpty sums are zero when $m=1$. In particular, the companion lift has $e_2=\\cdots=e_m=0$ and $e_1=P(\\lambda)x$. The displayed factors depend on $\\lambda$ and the coefficients, so an unscaled pencil residual by itself supplies no uniform polynomial-residual bound and no polynomial conditioning claim.",
+        "source_path": "items/lem-first-companion-pencil-residual-transfer.md"
+      },
+      {
+        "id": "def-coefficientwise-weighted-backward-error-for-matrix-polynomial",
+        "kind": "definition",
+        "title": "Coefficientwise weighted Frobenius backward error for a polynomial eigenpair",
+        "deps": [
+          "def-matrix-polynomial-and-homogeneous-eigenpairs"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $P(\\lambda)=\\sum_{j=0}^{m}A_j\\lambda^j$ be regular of grade $m$, let $[\\alpha:\\beta]$ be a projective parameter, let $x\\in\\mathbb C^n\\setminus\\{0\\}$, and choose positive weights $\\omega_0,\\ldots,\\omega_m$. Write $r:=P_h(\\alpha,\\beta)x$. The **coefficientwise weighted Frobenius backward error** is the infimum\n$$\\eta_F(P,[\\alpha:\\beta],x;\\omega):=\\inf\\left\\{\\left(\\sum_{j=0}^{m}\\frac{\\|\\Delta A_j\\|_F^2}{\\omega_j^2}\\right)^{1/2}:\\ \\sum_{j=0}^{m}(A_j+\\Delta A_j)\\alpha^j\\beta^{m-j}x=0,\\quad \\Delta A_j\\in\\mathbb C^{n\\times n}\\right\\}.$$\nThe perturbations of distinct coefficients are unrestricted and measured in the displayed weighted product norm; no symmetry or other coefficient structure is imposed. Replacing $(\\alpha,\\beta)$ by $(c\\alpha,c\\beta)$ for $c\\ne0$ multiplies the constraint by $c^m$ and leaves its zero set unchanged, so the infimum depends only on $[\\alpha:\\beta]$. The infimum is defined for finite and infinite projective parameters. The next theorem proves that it is attained and gives its exact value.",
+        "source_path": "items/def-coefficientwise-weighted-backward-error-for-matrix-polynomial.md"
+      },
+      {
+        "id": "thm-exact-coefficientwise-weighted-backward-error",
+        "kind": "theorem",
+        "title": "Exact minimum formula for a fixed polynomial eigenpair's weighted backward error",
+        "deps": [
+          "def-coefficientwise-weighted-backward-error-for-matrix-polynomial",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Under the hypotheses of [[def-coefficientwise-weighted-backward-error-for-matrix-polynomial]], put\n$$S:=\\sum_{j=0}^{m}\\omega_j^2|\\alpha|^{2j}|\\beta|^{2(m-j)}.$$\nThen $S>0$, the infimum is attained, and\n$$\\eta_F(P,[\\alpha:\\beta],x;\\omega)=\\frac{\\|P_h(\\alpha,\\beta)x\\|_2}{\\|x\\|_2\\sqrt{S}}.$$\nAt a finite parameter $[\\lambda:1]$ this is $\\|P(\\lambda)x\\|_2/(\\|x\\|_2\\sqrt{\\sum_j\\omega_j^2|\\lambda|^{2j}})$; at infinity $[1:0]$ it is $\\|A_mx\\|_2/(\\omega_m\\|x\\|_2)$. When $\\alpha\\ne0$, setting $\\mu=\\beta/\\alpha$ rewrites the same formula for $P^{\\rm rev}_m(\\mu)$ with reversed coefficient weights $\\widetilde\\omega_k:=\\omega_{m-k}$.",
+        "source_path": "items/thm-exact-coefficientwise-weighted-backward-error.md"
+      },
+      {
+        "id": "def-rational-matrix-eigenproblem-and-pole-domain",
+        "kind": "definition",
+        "title": "Rational matrix eigenproblem on its pole-free domain",
+        "deps": [
+          "def-matrix-polynomial-and-homogeneous-eigenpairs"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $\\mathbb C(\\lambda)$ denote the field of quotients of complex scalar polynomials. Let $R(\\lambda)\\in\\mathbb C(\\lambda)^{n\\times n}$ with $n\\ge1$ be a square matrix whose entries are rational functions of $\\lambda$. Write each entry as a reduced scalar fraction (common polynomial factors have been cancelled), and let $q(\\lambda)$ be the monic least common multiple of their denominators. Thus the zero set $\\mathcal P:=\\{\\lambda:q(\\lambda)=0\\}$ is exactly the set of poles of at least one entry. Define the pole-free domain $\\Omega:=\\mathbb C\\setminus\\mathcal P$ and the polynomial matrix $N(\\lambda):=q(\\lambda)R(\\lambda)$, whose entries are polynomials as in [[def-matrix-polynomial-and-homogeneous-eigenpairs]]. A **rational eigenpair** is a pair $(\\lambda,x)$ with $\\lambda\\in\\Omega$, $x\\in\\mathbb C^n\\setminus\\{0\\}$, and $R(\\lambda)x=0$; its $\\lambda$ is a rational eigenvalue. The **cleared-denominator polynomial equation** is $N(\\lambda)x=0$, but it represents the rational eigenproblem only on $\\Omega$. Any solution at a pole is an inadmissible candidate, even when the cleared polynomial matrix is singular there.",
+        "source_path": "items/def-rational-matrix-eigenproblem-and-pole-domain.md"
+      },
+      {
+        "id": "prop-clearing-a-common-denominator-away-from-poles",
+        "kind": "proposition",
+        "title": "Clearing a common denominator preserves rational eigenpairs only away from poles",
+        "deps": [
+          "def-rational-matrix-eigenproblem-and-pole-domain"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $R=q^{-1}N$ and $\\Omega$ be as in [[def-rational-matrix-eigenproblem-and-pole-domain]]. For every $\\lambda\\in\\Omega$ and every nonzero $x$, $R(\\lambda)x=0$ if and only if $N(\\lambda)x=0$. No point of $\\mathcal P=\\mathbb C\\setminus\\Omega$ is a rational eigenvalue, regardless of whether $N(\\lambda)$ is singular there.",
+        "source_path": "items/prop-clearing-a-common-denominator-away-from-poles.md"
+      }
+    ]
+  },
+  {
+    "order": 2599,
+    "id": "polynomial-eigenproblems-and-linearization-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Polynomial eigenproblems and linearization — Examples",
+    "companion": "polynomial-eigenproblems-and-linearization",
+    "requires": [
+      "polynomial-eigenproblems-and-linearization"
+    ],
+    "items": [
+      {
+        "id": "ex-quadratic-damped-vibration-first-companion-pencil",
+        "kind": "example",
+        "title": "A damped oscillator and its first companion pencil",
+        "deps": [
+          "def-first-frobenius-companion-pencil",
+          "def-matrix-polynomial-and-homogeneous-eigenpairs",
+          "thm-first-companion-pencil-is-strong-linearization"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Consider the scalar damped oscillator with mass $M=1$, damping coefficient $C=1/2$, and stiffness $K=2$. Its quadratic polynomial is $P(\\lambda)=\\lambda^2+(1/2)\\lambda+2$. The first companion pencil is\n$$L(\\lambda)=\\begin{bmatrix}\\lambda+1/2&2\\\\-1&\\lambda\\end{bmatrix}.$$\nThis example checks its finite roots and the companion eigenvector lift.",
+        "source_path": "items/ex-quadratic-damped-vibration-first-companion-pencil.md"
+      },
+      {
+        "id": "ex-infinite-polynomial-eigenvalue-from-singular-leading-coefficient",
+        "kind": "example",
+        "title": "A singular leading coefficient gives an infinite polynomial eigenvalue",
+        "deps": [
+          "def-first-frobenius-companion-pencil",
+          "def-matrix-polynomial-and-homogeneous-eigenpairs",
+          "thm-first-companion-pencil-is-strong-linearization"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Take the grade-two matrix polynomial $P(\\lambda)=\\operatorname{diag}(1,\\lambda^2)$, so $n=m=2$, $\\det P(\\lambda)=\\lambda^2$, and $A_2=\\operatorname{diag}(0,1)$ is singular. The finite root $\\lambda=0$ and the infinite root are different projective eigenvalues. Their algebraic and geometric multiplicities are computed directly below.",
+        "source_path": "items/ex-infinite-polynomial-eigenvalue-from-singular-leading-coefficient.md"
+      },
+      {
+        "id": "ex-rational-transfer-function-pole-is-a-spurious-cleared-root",
+        "kind": "example",
+        "title": "A transfer-function pole becomes a spurious root after denominator clearing",
+        "deps": [
+          "def-rational-matrix-eigenproblem-and-pole-domain",
+          "prop-clearing-a-common-denominator-away-from-poles"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "The rational transfer matrix\n$$R(\\lambda)=\\begin{bmatrix}(\\lambda-1)^{-1}&0\\\\0&1\\end{bmatrix}$$\nhas a pole at $\\lambda=1$. Here a finite-dimensional state-space transfer matrix means a rational matrix of the form $C(\\lambda I-A)^{-1}B+D$; the displayed $R$ has such a realization with $A=[1]$, $B=[1\\ 0]$, $C=[1\\ 0]^T$, and $D=\\operatorname{diag}(0,1)$. It has no rational eigenpair on its domain, but clearing the common denominator yields a polynomial matrix singular at the excluded pole.",
+        "source_path": "items/ex-rational-transfer-function-pole-is-a-spurious-cleared-root.md"
+      }
+    ]
+  }
+]

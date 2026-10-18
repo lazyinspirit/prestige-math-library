@@ -1,0 +1,264 @@
+[
+  {
+    "order": 2626,
+    "id": "hyperbolic-dg-and-summation-by-parts-discretizations",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Hyperbolic DG and summation-by-parts methods",
+    "companion": "hyperbolic-dg-and-summation-by-parts-discretizations-examples",
+    "requires": [
+      "finite-element-meshes-and-interpolation",
+      "invariant-domain-and-entropy-stable-conservative-schemes",
+      "runge-kutta-methods-and-order"
+    ],
+    "items": [
+      {
+        "id": "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+        "kind": "definition",
+        "title": "Oriented interval meshes and broken polynomial spaces",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Define a finite increasing partition of a bounded interval and its cellwise polynomial space, traces, and jumps.",
+        "strategy": "The published simplicial-mesh definition is explicitly for dimension at least two; supply the separate one-dimensional convention needed by the transport and SBP cases."
+      },
+      {
+        "id": "def-pe04-diagonal-norm-sbp-element-data",
+        "kind": "definition",
+        "title": "Diagonal-norm summation-by-parts element data",
+        "deps": [
+          "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "dependency_level": 1,
+        "statement": "Define positive diagonal volume norms, derivative matrices, face trace maps and positive face quadrature matrices satisfying the exact multidirectional SBP and constant-preservation identities, with paired interface nodes.",
+        "strategy": "Make all matrix sizes, orientations, positivity requirements and exact identities part of the data; assert no existence for arbitrary meshes."
+      },
+      {
+        "id": "def-pe04-upwind-dg-transport-discretization",
+        "kind": "definition",
+        "title": "Upwind discontinuous Galerkin discretization of constant transport",
+        "deps": [
+          "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "dependency_level": 1,
+        "statement": "Define the elementwise weak upwind DG method for scalar constant-coefficient transport, with inflow data and matching interior numerical fluxes, in dimensions one and at least two.",
+        "strategy": "State both mesh branches, every trace convention, the weak form, and the boundary and interior fluxes."
+      },
+      {
+        "id": "alg-pe04-first-order-upwind-forward-euler",
+        "kind": "algorithm",
+        "title": "Forward-Euler step for degree-zero upwind DG transport",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "dependency_level": 2,
+        "statement": "Define the periodic degree-zero upwind DG update on a matching affine simplicial mesh, with its cellwise face-CFL admissibility condition.",
+        "strategy": "Give the exact volume-weighted coefficient form of the one-step cell update; make periodic indexing explicit."
+      },
+      {
+        "id": "def-pe04-cellwise-l2-projection",
+        "kind": "definition",
+        "title": "Cellwise L2 projection relation onto broken polynomials",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-measure-space",
+          "def-calligraphic-l-p-on-a-measure-space"
+        ],
+        "dependency_level": 2,
+        "statement": "Define the cellwise orthogonality relation that specifies an L2 projection onto the stated broken polynomial trial space.",
+        "strategy": "State the inner-product equations without assuming existence or uniqueness; prove both before using the projection operator."
+      },
+      {
+        "id": "def-pe04-upwind-sbp-sat-transport-discretization",
+        "kind": "definition",
+        "title": "Upwind SBP-SAT discretization of constant transport",
+        "deps": [
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "dependency_level": 2,
+        "statement": "Define the strong-form diagonal-norm SBP transport operator with an upwind SAT at every face and inflow boundary data.",
+        "strategy": "State the exact SAT sign and use the same oriented upwind flux as the DG definition."
+      },
+      {
+        "id": "thm-pe04-upwind-dg-l2-energy-stability",
+        "kind": "theorem",
+        "title": "Upwind DG transport satisfies the semidiscrete L2 energy identity",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-matching-affine-simplicial-meshes",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Prove the exact cell-summed L2 balance, including upwind jump dissipation, outflow energy and the inflow-data contribution, for the DG method.",
+        "strategy": "Use the actual simplex Green identity and opposite interior normals, then calculate each signed upwind face contribution."
+      },
+      {
+        "id": "def-pe04-flux-differencing-sbp-systems",
+        "kind": "definition",
+        "title": "Conservative flux-differencing SBP method for nonlinear systems",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe03-system-entropy-pair-and-potential",
+          "def-pe03-tadmor-entropy-conservative-flux",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "dependency_level": 3,
+        "statement": "Define the affine-element flux-differencing volume residual from symmetric consistent directional entropy-conservative two-point fluxes, paired face quadrature and a conservative normal numerical flux satisfying Tadmor's interface inequality.",
+        "strategy": "State the entropy-pair and flux assumptions direction by direction, the exact SBP/metric identities, paired nodes, face SAT and boundary entropy condition; exclude curved meshes."
+      },
+      {
+        "id": "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+        "kind": "lemma",
+        "title": "The cellwise L2 projection exists uniquely and is best approximation",
+        "deps": [
+          "def-pe04-cellwise-l2-projection",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 3,
+        "statement": "Prove existence, uniqueness, orthogonality and the L2 best-approximation inequality for the cellwise projection.",
+        "strategy": "Use positive definiteness of the finite-dimensional Gram matrix and the Pythagorean identity."
+      },
+      {
+        "id": "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy",
+        "kind": "theorem",
+        "title": "The degree-zero upwind forward-Euler step preserves mass and convex entropy",
+        "deps": [
+          "alg-pe04-first-order-upwind-forward-euler",
+          "def-pe04-upwind-dg-transport-discretization",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Under the stated face CFL, prove conservation of the cell-volume-weighted mean and nonincrease of the weighted sum of every convex scalar entropy.",
+        "strategy": "Rewrite each cell update as a convex combination using the zero total normal flux identity, apply Jensen, and reindex paired face contributions."
+      },
+      {
+        "id": "thm-pe04-upwind-sbp-sat-l2-energy-stability",
+        "kind": "theorem",
+        "title": "Upwind SBP-SAT transport satisfies the semidiscrete L2 energy identity",
+        "deps": [
+          "def-pe04-upwind-sbp-sat-transport-discretization",
+          "def-pe04-diagonal-norm-sbp-element-data"
+        ],
+        "dependency_level": 3,
+        "statement": "Prove the discrete-norm energy balance for the upwind SBP-SAT transport operator, including interelement jump dissipation and the exact inflow/outflow terms.",
+        "strategy": "Contract the matrix ODE with the state, apply the stated SBP identity, and pair the two traces at each interface."
+      },
+      {
+        "id": "thm-pe04-dg-smooth-solution-l2-error-bound",
+        "kind": "theorem",
+        "title": "Smooth-solution L2 error bound for upwind DG transport",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-pe04-cellwise-l2-projection",
+          "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+          "def-matching-affine-simplicial-meshes",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "statement": "Prove a projection-residual L2 error bound with the exact upwind-trace consistency term for a smooth solution on a fixed affine mesh.",
+        "strategy": "Subtract the exact weak equation, use cellwise projection orthogonality to cancel volume residuals, and absorb face residuals with upwind dissipation."
+      },
+      {
+        "id": "thm-pe04-flux-differencing-sbp-conservation-and-entropy-stability",
+        "kind": "theorem",
+        "title": "Flux-differencing SBP is conservative and semidiscretely entropy stable",
+        "deps": [
+          "def-pe04-flux-differencing-sbp-systems",
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe03-system-entropy-pair-and-potential",
+          "def-pe03-tadmor-entropy-conservative-flux",
+          "lem-oriented-facet-cancellation-on-matching-meshes"
+        ],
+        "dependency_level": 4,
+        "statement": "Prove conservation of the nodal weighted mean and the global semidiscrete entropy inequality under the exact paired-node SBP identities, entropy-stable interface flux condition and stated boundary entropy condition.",
+        "strategy": "Use symmetry and the Tadmor jump identity in the volume pair sum, convert it to face terms with SBP, then cancel conservative fluxes and apply the interface and boundary inequalities."
+      },
+      {
+        "id": "thm-pe04-ssprk33-first-order-upwind-entropy-preservation",
+        "kind": "theorem",
+        "title": "SSPRK(3,3) preserves the degree-zero upwind entropy bound",
+        "deps": [
+          "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy",
+          "alg-pe04-first-order-upwind-forward-euler",
+          "alg-ssprk33",
+          "prop-ssprk33-third-order-and-convex-preservation",
+          "def-convex-subset-of-euclidean-space",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "statement": "For the exact SSPRK(3,3) three-stage recurrence and the same step bound, prove preservation of the degree-zero periodic upwind method's convex entropy bound by the proved forward-Euler transfer result.",
+        "strategy": "Instantiate NA15's coefficient-one convex transfer with the weighted scalar entropy; assert no transfer to the high-order nonlinear DG/SBP semidiscretization."
+      }
+    ]
+  },
+  {
+    "order": 2627,
+    "id": "hyperbolic-dg-and-summation-by-parts-discretizations-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Hyperbolic DG and summation-by-parts methods — Examples",
+    "companion": "hyperbolic-dg-and-summation-by-parts-discretizations",
+    "requires": [
+      "hyperbolic-dg-and-summation-by-parts-discretizations"
+    ],
+    "items": [
+      {
+        "id": "cex-pe04-underintegrated-burgers-collocation-entropy-growth",
+        "kind": "counterexample",
+        "title": "Underintegrated Burgers collocation can increase discrete entropy",
+        "deps": [
+          "def-pe04-diagonal-norm-sbp-element-data"
+        ],
+        "dependency_level": 2,
+        "statement": "Give exact three-node Gauss-Lobatto SBP data and a periodic Burgers state for which the naively collocated strong form has positive quadratic-entropy production.",
+        "strategy": "Verify the SBP matrix identity and compute the exact nodal residual and weighted entropy derivative."
+      },
+      {
+        "id": "ex-pe04-central-versus-upwind-periodic-transport",
+        "kind": "example",
+        "title": "Central and upwind fluxes have different periodic dissipation",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "dependency_level": 2,
+        "statement": "Compare the degree-zero central and upwind two-cell periodic scalar transport schemes and calculate their discrete L2 energy rates.",
+        "strategy": "Substitute the fixed cell values into both shared face-flux updates and sum the weighted energy derivative."
+      },
+      {
+        "id": "ex-pe04-upwind-transport-with-inflow",
+        "kind": "example",
+        "title": "A constant upwind DG state with inflow data on a triangle",
+        "deps": [
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "dependency_level": 2,
+        "statement": "Compute the exact degree-zero DG ODE and its energy balance on one right triangle for constant horizontal transport with prescribed inflow.",
+        "strategy": "Evaluate the three oriented face fluxes and simplify the scalar energy identity."
+      },
+      {
+        "id": "ex-pe04-sbp-inflow-sat-energy-identity",
+        "kind": "example",
+        "title": "The SBP inflow SAT produces the boundary energy term",
+        "deps": [
+          "def-pe04-upwind-sbp-sat-transport-discretization",
+          "thm-pe04-upwind-sbp-sat-l2-energy-stability"
+        ],
+        "dependency_level": 4,
+        "statement": "Verify the inflow SAT energy identity for the two-node diagonal-norm SBP derivative on one interval.",
+        "strategy": "Insert the explicit H, D and boundary vectors, then contract the exact SAT equation with the nodal state."
+      }
+    ]
+  }
+]

@@ -1,0 +1,2812 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-61",
+  "scope": [
+    "lem-periodic-composite-trapezoid-error",
+    "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+    "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+    "thm-periodic-pic-charge-conservation-and-neutralized-source",
+    "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+    "lem-periodic-pic-smooth-assignment-weights",
+    "thm-periodic-pic-deposition-potential-gather-adjointness",
+    "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+    "lem-periodic-pic-shape-partition-and-quadrature-bound",
+    "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution",
+    "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+    "thm-periodic-pic-smooth-density-grid-force-consistency",
+    "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+    "thm-periodic-pic-mean-field-error-with-force-defect",
+    "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+    "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error",
+    "thm-periodic-pic-staged-fixed-regularization-error-budget",
+    "ex-periodic-high-frequency-pic-sampling-alias",
+    "cex-periodic-nonneutral-source-has-no-poisson-solution",
+    "ex-cold-two-stream-stipulated-pic-experiment",
+    "ex-periodic-one-dimensional-pic-cic-charge-deposition",
+    "ex-periodic-smooth-density-poisson-grid-force-error",
+    "ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode"
+  ],
+  "contracts": {
+    "lem-periodic-composite-trapezoid-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-grid-and-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a spatial dimension $d\\in\\{1,2,3\\}$, side length $L>0$, and odd integer $N\\ge3$. Put $h=L/N$ and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$. The periodic grid has index set $J_N=(\\mathbb Z/N\\mathbb Z)^d$ and nodes $x_j=hj$ modulo $L$. A grid scalar is a real array $u=(u_j)_{j\\in J_N}$; a grid vector has $d$ real components at each node. Define\n$$ \\langle u,v\\rangle_h=h^d\\sum_{j\\in J_N}u_jv_j,\\qquad \\|u\\|_h=\\langle u,u\\rangle_h^{1/2},\\qquad \\bar u=L^{-d}h^d\\sum_{j\\in J_N}u_j . $$ The same pairing is componentwise for grid vectors. For the coordinate vector $e_a$, define the centered field difference and positive periodic Poisson stencil by $$ (D_a^0u)_j=\\frac{u_{j+e_a}-u_{j-e_a}}{2h},\\qquad (A_hu)_j=\\sum_{a=1}^d\\frac{2u_j-u_{j+e_a}-u_{j-e_a}}{h^2}. $$\nAll indices wrap modulo $N$. The discrete Fourier index set is $\\mathcal K_N=\\{-\\frac{N-1}{2},\\ldots,\\frac{N-1}{2}\\}^d$; the character at $k\\in\\mathcal K_N$ is $j\\mapsto e^{2\\pi i k\\cdot j/N}$. This odd-grid convention has no Nyquist mode.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "In one coordinate, on a cell $[a,a+h]$, put $K(x)=(x-a)(a+h-x)/2$. Two integrations by parts give $\\frac h2(f(a)+f(a+h))-\\int_a^{a+h}f(x)\\,dx=\\int_a^{a+h}K(x)f''(x)\\,dx .$ Since $K\\ge0$ and $\\int_a^{a+h}K(x)\\,dx=h^3/12$, the absolute cell error is at most $h^3\\|f''\\|_\\infty/12$. Sum over the $N$ periodic cells, whose endpoint contributions assemble into the periodic trapezoid sum $h\\sum_j f(jh)$. This gives the one-dimensional error bound $Lh^2\\|f''\\|_\\infty/12$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "For each coordinate $a$, let $Q_a$ denote the periodic trapezoid operator in that coordinate and $I_a$ integration over that coordinate. Both have sup-norm operator bound at most $L$, since their weights are nonnegative and sum to $L$. The telescoping identity $Q_1\\cdots Q_d-I_1\\cdots I_d =\\sum_{a=1}^d Q_1\\cdots Q_{a-1}(Q_a-I_a)I_{a+1}\\cdots I_d$ holds by cancellation. In the $a$th summand, the one-dimensional bound from step 1.1 applies after the later-coordinate integrations; differentiation in coordinate $a$ commutes with those integrations. The other $d-1$ operators contribute at most $L^{d-1}$ in sup norm. Thus that summand is bounded by $L^dh^2\\|\\partial_{aa}f\\|_\\infty/12$. Summing these bounds gives the displayed estimate, because $Q_1\\cdots Q_d f=h^d\\sum_jf(x_j)$ and $I_1\\cdots I_df=\\int_{[0,L]^d}f$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "periodic-trapezoid-cosine-N3",
+          "asserts": "For f(x)=cos(2πx/L) on N=3 nodes, both the integral and hΣf(x_j) equal 0.",
+          "claim": "The finite periodic sum respects the zero-mean Fourier mode and the quadrature formula.",
+          "checked_in": "Statement and steps 1.1–2.1",
+          "N": 3,
+          "dimension": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for lem-periodic-composite-trapezoid-error. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-centered-difference-poisson-zero-mode-and-gauge": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-grid-and-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a spatial dimension $d\\in\\{1,2,3\\}$, side length $L>0$, and odd integer $N\\ge3$. Put $h=L/N$ and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$. The periodic grid has index set $J_N=(\\mathbb Z/N\\mathbb Z)^d$ and nodes $x_j=hj$ modulo $L$. A grid scalar is a real array $u=(u_j)_{j\\in J_N}$; a grid vector has $d$ real components at each node. Define\n$$ \\langle u,v\\rangle_h=h^d\\sum_{j\\in J_N}u_jv_j,\\qquad \\|u\\|_h=\\langle u,u\\rangle_h^{1/2},\\qquad \\bar u=L^{-d}h^d\\sum_{j\\in J_N}u_j . $$ The same pairing is componentwise for grid vectors. For the coordinate vector $e_a$, define the centered field difference and positive periodic Poisson stencil by $$ (D_a^0u)_j=\\frac{u_{j+e_a}-u_{j-e_a}}{2h},\\qquad (A_hu)_j=\\sum_{a=1}^d\\frac{2u_j-u_{j+e_a}-u_{j-e_a}}{h^2}. $$\nAll indices wrap modulo $N$. The discrete Fourier index set is $\\mathcal K_N=\\{-\\frac{N-1}{2},\\ldots,\\frac{N-1}{2}\\}^d$; the character at $k\\in\\mathcal K_N$ is $j\\mapsto e^{2\\pi i k\\cdot j/N}$. This odd-grid convention has no Nyquist mode.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Reindex the finite periodic sums in each coordinate. For any real arrays $u,v$, $\\langle u,A_hv\\rangle_h =h^d\\sum_{a=1}^d\\sum_j \\frac{(u_{j+e_a}-u_j)(v_{j+e_a}-v_j)}{h^2}.$ The right side is symmetric in $u,v$ and is nonnegative when $u=v$. Thus $A_h$ is self-adjoint and nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "If $\\langle u,A_hu\\rangle_h=0$, every nonnegative squared difference in step 1.1 is zero, so $u_{j+e_a}=u_j$ for every $j,a$. Coordinate steps connect every pair of indices in $J_N$, hence $u$ is constant. Conversely a constant is annihilated by $A_h$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "For a symmetric finite-dimensional linear map, $\\operatorname{ran}A_h=(\\ker A_h)^\\perp$: symmetry gives $\\operatorname{ran}A_h\\subseteq(\\ker A_h)^\\perp$, and rank-nullity makes the dimensions equal. By step 2.1, $(\\ker A_h)^\\perp$ is precisely the zero-mean subspace. Therefore each zero-mean $s$ is in the range, and any two solutions differ by a constant; imposing $\\bar\\phi=0$ selects exactly one.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-4-1",
+          "claim": "For $e_k(j)=e^{2\\pi i k\\cdot j/N}$, substitution in the stencil from [F1] gives $(A_he_k)_j =\\frac1{h^2}\\sum_a\\left(2-e^{2\\pi i k_a/N}-e^{-2\\pi i k_a/N}\\right)e_k(j) =\\lambda_h(k)e_k(j).$ The characters form a basis because their finite geometric sums are orthogonal: in one coordinate $\\sum_{j=0}^{N-1}e^{2\\pi i(k-\\ell)j/N}$ is $N$ if $k=\\ell$ modulo $N$ and $0$ otherwise; taking products gives $N^d$ independent characters. Since every $k_a\\in\\{-(N-1)/2,\\ldots,(N-1)/2\\}$, $\\lambda_h(k)=0$ exactly when every $k_a=0$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 2.1 and 4.1 show the constant mode is the only zero eigenmode and the gauge removes it."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 handles the kernel consisting of constants."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1 proves every operator output has zero mean."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1 proves each zero-mean source lies in the range by rank-nullity."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "centered-poisson-symbol-N3",
+          "asserts": "For d=1,L=1,N=3,h=1/3, the constant mode has eigenvalue 0 and k=±1 has λ=3/h²=27.",
+          "claim": "The finite symbol agrees with the range/kernel calculation for the smallest allowed grid.",
+          "checked_in": "Statement and steps 2.1, 3.1, 4.1",
+          "N": 3,
+          "dimension": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-centered-difference-poisson-zero-mode-and-gauge. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-grid-and-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a spatial dimension $d\\in\\{1,2,3\\}$, side length $L>0$, and odd integer $N\\ge3$. Put $h=L/N$ and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$. The periodic grid has index set $J_N=(\\mathbb Z/N\\mathbb Z)^d$ and nodes $x_j=hj$ modulo $L$. A grid scalar is a real array $u=(u_j)_{j\\in J_N}$; a grid vector has $d$ real components at each node. Define\n$$ \\langle u,v\\rangle_h=h^d\\sum_{j\\in J_N}u_jv_j,\\qquad \\|u\\|_h=\\langle u,u\\rangle_h^{1/2},\\qquad \\bar u=L^{-d}h^d\\sum_{j\\in J_N}u_j . $$ The same pairing is componentwise for grid vectors. For the coordinate vector $e_a$, define the centered field difference and positive periodic Poisson stencil by $$ (D_a^0u)_j=\\frac{u_{j+e_a}-u_{j-e_a}}{2h},\\qquad (A_hu)_j=\\sum_{a=1}^d\\frac{2u_j-u_{j+e_a}-u_{j-e_a}}{h^2}. $$\nAll indices wrap modulo $N$. The discrete Fourier index set is $\\mathcal K_N=\\{-\\frac{N-1}{2},\\ldots,\\frac{N-1}{2}\\}^d$; the character at $k\\in\\mathcal K_N$ is $j\\mapsto e^{2\\pi i k\\cdot j/N}$. This odd-grid convention has no Nyquist mode.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "source_section": "Statement",
+          "quote": "Use the grid, inner product, and operator $A_h$ of [[def-periodic-pic-grid-and-inner-product]]. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h$ consists exactly of constant arrays, and $\\operatorname{ran}A_h=\\{s:\\bar s=0\\}$. Consequently, for every compatible source $\\bar s=0$, there is a unique solution $\\phi$ of $A_h\\phi=s$ with the gauge $\\bar\\phi=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "For any $s$, the source $s-\\bar s\\mathbf1$ has mean zero by [F1]. By [F2] it has a unique mean-zero solution; this defines $A_h^\\dagger s$, proves $A_hA_h^\\dagger s=s-\\bar s\\mathbf1$, and gives $A_h^\\dagger\\mathbf1=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Let $a,b\\in\\mathbb R$ and grid arrays $s,t$. The array $aA_h^\\dagger s+bA_h^\\dagger t$ has mean zero, and applying $A_h$ gives $as+bt-(a\\bar s+b\\bar t)\\mathbf1=as+bt-\\overline{as+bt}\\mathbf1$. Uniqueness in [F2] therefore yields $A_h^\\dagger(as+bt)=aA_h^\\dagger s+bA_h^\\dagger t$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "Both $A_h^\\dagger s$ and $A_h^\\dagger t$ have mean zero. Hence, using [F2] and step 1.1, $\\langle A_h^\\dagger s,t\\rangle_h =\\langle A_h^\\dagger s,t-\\bar t\\mathbf1\\rangle_h =\\langle A_h^\\dagger s,A_hA_h^\\dagger t\\rangle_h =\\langle A_hA_h^\\dagger s,A_h^\\dagger t\\rangle_h =\\langle s-\\bar s\\mathbf1,A_h^\\dagger t\\rangle_h =\\langle s,A_h^\\dagger t\\rangle_h.$ The middle equality uses self-adjointness of $A_h$. This proves that the full-space linear map $A_h^\\dagger$ is self-adjoint.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 shows the constant input maps to zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 handles the full constant-mode subspace removed by mean projection."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "pseudoinverse-cosine-N3",
+          "asserts": "For d=1,L=1,N=3, s=(1,-1/2,-1/2) is an eigenmode with eigenvalue 27, so A†s=s/27 and its mean is zero.",
+          "claim": "The finite pseudoinverse returns the unique gauged solution on a nonzero mode.",
+          "checked_in": "Statement and steps 1.1–3.1",
+          "N": 3,
+          "dimension": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-charge-conservation-and-neutralized-source": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "source_section": "Statement",
+          "quote": "Use the grid, inner product, and operator $A_h$ of [[def-periodic-pic-grid-and-inner-product]]. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h$ consists exactly of constant arrays, and $\\operatorname{ran}A_h=\\{s:\\bar s=0\\}$. Consequently, for every compatible source $\\bar s=0$, there is a unique solution $\\phi$ of $A_h\\phi=s$ with the gauge $\\bar\\phi=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Before subtracting the background, sum the assigned density with cell volume. Since the sum is finite, interchange its particle and grid sums; [F2] gives $h^d\\sum_j h^{-d}\\sum_pq_pw_j(X_p)=\\sum_pq_p\\sum_jw_j(X_p)=\\sum_pq_p=Q .$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "The background has total grid charge $h^d|J_N|Q/L^d=L^dQ/L^d=Q$ because $h^d|J_N|=L^d$. Hence $\\langle\\rho,1\\rangle_h=0$, equivalently $\\bar\\rho=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "By [F3], this zero-mean source has a solution and fixing its mean to zero selects exactly one potential.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 remain valid when total charge Q=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 is valid for one particle because the finite sums reduce to one term."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "one-particle-charge-two",
+          "asserts": "For h=1/5 and weights (2/3,1/3), a charge q=2 deposits density (20/3,10/3,0,0,0) before background and has total cell charge 2.",
+          "claim": "The finite computation agrees with charge conservation and zero-mean neutralization.",
+          "checked_in": "Steps 1.1–3.1",
+          "N": 5,
+          "particles": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-charge-conservation-and-neutralized-source. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "For $0<\\alpha<1$, the two geometric series $\\sum_{n\\ge0}\\alpha^ne^{in\\theta}$ and $\\sum_{n\\ge1}\\alpha^ne^{-in\\theta}$ converge absolutely and uniformly. Adding them and simplifying the denominator gives $\\sum_{n\\in\\mathbb Z}\\alpha^{|n|}e^{in\\theta} =1+\\frac{\\alpha e^{i\\theta}}{1-\\alpha e^{i\\theta}} +\\frac{\\alpha e^{-i\\theta}}{1-\\alpha e^{-i\\theta}} =\\frac{1-\\alpha^2}{1-2\\alpha\\cos\\theta+\\alpha^2}.$ The denominator is $(1-\\alpha)^2+2\\alpha(1-\\cos\\theta)>0$. The constant Fourier coefficient is $1$, so integrating the absolutely convergent series over one period gives mean one. Applying this in every coordinate proves the positivity, evenness, smoothness, and unit integral of $\\eta_\\varepsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Multiplying the coordinate Fourier series from step 1.1 gives $\\eta_\\varepsilon(x)=L^{-d}\\sum_{k\\in\\mathbb Z^d} \\left(\\prod_a\\alpha_\\varepsilon^{|k_a|}\\right)e^{i\\kappa_k\\cdot x}.$ The product coefficients are absolutely summable, so uniform convergence permits termwise integration against the finite measure $\\mu$. The $k=0$ term is $Q/L^d$ and is removed by neutralization. For each $k\\ne0$, $|\\widehat\\mu(k)|\\le\\|\\mu\\|_{\\rm TV}$. For every integer $m\\ge0$, $\\sum_{n\\in\\mathbb Z}(1+|n|)^m\\alpha_\\varepsilon^{|n|}<\\infty$ by the ratio test; taking products bounds the corresponding $d$-dimensional weighted sums. Hence the source and every formally differentiated Fourier series converge absolutely and uniformly, proving that $\\rho_\\varepsilon^\\mu\\in C^\\infty$ and has zero mean.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "For $k\\ne0$, $-\\Delta e^{i\\kappa_k\\cdot x}=|\\kappa_k|^2e^{i\\kappa_k\\cdot x}$. Dividing the nonzero source coefficients in step 2.1 by this positive eigenvalue gives the displayed $\\phi_\\varepsilon^\\mu$; the weighted geometric summability in step 2.1 justifies termwise differentiation and the equation. Its zero Fourier coefficient is set to zero, so it has mean zero. If two mean-zero $C^2$ potentials solve the equation, their difference $u$ satisfies $\\Delta u=0$. Periodic integration by parts gives $\\int_{\\mathbb T_L^d}|\\nabla u|^2=-\\int u\\Delta u=0$, so $\\nabla u=0$, $u$ is constant, and its zero mean forces $u=0$. This proves uniqueness.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth. This is authoring evidence, not independent approval."
+      }
+    },
+    "lem-periodic-pic-smooth-assignment-weights": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "source_section": "Statement",
+          "quote": "Let $\\eta_\\varepsilon$ be the explicit product kernel in [[def-periodic-pic-shape-assignment-and-gather]], with $\\alpha_\\varepsilon=e^{-\\varepsilon/L}\\in(0,1)$. Let $\\mu$ be a finite signed Borel measure on $\\mathbb T_L^d$ with mass $Q$ and total variation $\\|\\mu\\|_{\\rm TV}$. Put\n$$ \\widehat\\mu(k)=\\int_{\\mathbb T_L^d}e^{-2\\pi i k\\cdot y/L}\\,d\\mu(y),\\qquad \\kappa_k=2\\pi k/L . $$ Then $\\eta_\\varepsilon$ is strictly positive, even, smooth, and has integral one. The regularized neutralized source $$ \\rho_\\varepsilon^\\mu(x)=\\int_{\\mathbb T_L^d}\\eta_\\varepsilon(x-y)\\,d\\mu(y)-Q/L^d $$ is $C^\\infty$ with zero mean. Its unique zero-mean periodic solution of $-\\Delta\\phi_\\varepsilon^\\mu=\\rho_\\varepsilon^\\mu$ is the absolutely and uniformly differentiable Fourier series $$ \\phi_\\varepsilon^\\mu(x)=L^{-d}\\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}} \\frac{\\left(\\prod_{a=1}^d\\alpha_\\varepsilon^{|k_a|}\\right)\\widehat\\mu(k)} {|\\kappa_k|^2}e^{i\\kappa_k\\cdot x}. $$\nFor every integer $r\\ge0$, all spatial derivative series of order at most $r$ converge absolutely and uniformly; their bounds may depend on $r,\\varepsilon,L,\\|\\mu\\|_{\\rm TV}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "By [F2], each numerator in [F1] is a smooth periodic function. The finite sum defining $Z_{\\varepsilon,h}$ is smooth and strictly positive; compactness gives a positive minimum. The reciprocal of a positive smooth function is smooth, so every ratio $w_j^{\\varepsilon,h}$ is $C^\\infty$. Each derivative is continuous on the compact torus and hence bounded; there are finitely many indices $j$, so their maximum is finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Each weight is nonnegative by [F1] and positivity of $\\eta_\\varepsilon$. Summing [F1] over $j$ gives $\\sum_jw_j^{\\varepsilon,h}(x)=Z_{\\varepsilon,h}(x)/Z_{\\varepsilon,h}(x)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for lem-periodic-pic-smooth-assignment-weights. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-deposition-potential-gather-adjointness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-grid-and-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a spatial dimension $d\\in\\{1,2,3\\}$, side length $L>0$, and odd integer $N\\ge3$. Put $h=L/N$ and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$. The periodic grid has index set $J_N=(\\mathbb Z/N\\mathbb Z)^d$ and nodes $x_j=hj$ modulo $L$. A grid scalar is a real array $u=(u_j)_{j\\in J_N}$; a grid vector has $d$ real components at each node. Define\n$$ \\langle u,v\\rangle_h=h^d\\sum_{j\\in J_N}u_jv_j,\\qquad \\|u\\|_h=\\langle u,u\\rangle_h^{1/2},\\qquad \\bar u=L^{-d}h^d\\sum_{j\\in J_N}u_j . $$ The same pairing is componentwise for grid vectors. For the coordinate vector $e_a$, define the centered field difference and positive periodic Poisson stencil by $$ (D_a^0u)_j=\\frac{u_{j+e_a}-u_{j-e_a}}{2h},\\qquad (A_hu)_j=\\sum_{a=1}^d\\frac{2u_j-u_{j+e_a}-u_{j-e_a}}{h^2}. $$\nAll indices wrap modulo $N$. The discrete Fourier index set is $\\mathcal K_N=\\{-\\frac{N-1}{2},\\ldots,\\frac{N-1}{2}\\}^d$; the character at $k\\in\\mathcal K_N$ is $j\\mapsto e^{2\\pi i k\\cdot j/N}$. This odd-grid convention has no Nyquist mode.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Substitute [F2] into the left pairing and cancel $h^d h^{-d}$: $\\langle\\rho^+,\\phi\\rangle_h =h^d\\sum_jh^{-d}\\sum_pq_pw_j(X_p)\\phi_j =\\sum_pq_p\\sum_jw_j(X_p)\\phi_j .$ The finite inner sum is $(G_X\\phi)_p$ by [F2], proving the first identity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "The background contributes $\\left\\langle Q/L^d,\\phi\\right\\rangle_h =Q L^{-d}h^d\\sum_j\\phi_j=Q\\bar\\phi$ by [F1]. Subtract this term from step 1.1 to obtain the second identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 is a finite sum identity and includes P=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-deposition-potential-gather-adjointness. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-poisson-residual-to-gathered-force-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-grid-and-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a spatial dimension $d\\in\\{1,2,3\\}$, side length $L>0$, and odd integer $N\\ge3$. Put $h=L/N$ and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$. The periodic grid has index set $J_N=(\\mathbb Z/N\\mathbb Z)^d$ and nodes $x_j=hj$ modulo $L$. A grid scalar is a real array $u=(u_j)_{j\\in J_N}$; a grid vector has $d$ real components at each node. Define\n$$ \\langle u,v\\rangle_h=h^d\\sum_{j\\in J_N}u_jv_j,\\qquad \\|u\\|_h=\\langle u,u\\rangle_h^{1/2},\\qquad \\bar u=L^{-d}h^d\\sum_{j\\in J_N}u_j . $$ The same pairing is componentwise for grid vectors. For the coordinate vector $e_a$, define the centered field difference and positive periodic Poisson stencil by $$ (D_a^0u)_j=\\frac{u_{j+e_a}-u_{j-e_a}}{2h},\\qquad (A_hu)_j=\\sum_{a=1}^d\\frac{2u_j-u_{j+e_a}-u_{j-e_a}}{h^2}. $$\nAll indices wrap modulo $N$. The discrete Fourier index set is $\\mathcal K_N=\\{-\\frac{N-1}{2},\\ldots,\\frac{N-1}{2}\\}^d$; the character at $k\\in\\mathcal K_N$ is $j\\mapsto e^{2\\pi i k\\cdot j/N}$. This odd-grid convention has no Nyquist mode.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "source_section": "Statement",
+          "quote": "Use the grid, inner product, and operator $A_h$ of [[def-periodic-pic-grid-and-inner-product]]. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h$ consists exactly of constant arrays, and $\\operatorname{ran}A_h=\\{s:\\bar s=0\\}$. Consequently, for every compatible source $\\bar s=0$, there is a unique solution $\\phi$ of $A_h\\phi=s$ with the gauge $\\bar\\phi=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+          "source_section": "Statement",
+          "quote": "For any real grid array $s$, define its mean-zero periodic Poisson pseudoinverse by\n$$ A_h^\\dagger s:=\\text{the unique mean-zero grid array }u\\text{ such that }A_hu=s-\\bar s\\,\\mathbf1, $$\nwhere $\\bar s=L^{-d}\\langle s,\\mathbf1\\rangle_h$. This definition is well-defined by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]]. It gives $A_hA_h^\\dagger s=s-\\bar s\\mathbf1$, $A_h^\\dagger\\mathbf1=0$, and a linear self-adjoint map on the full finite grid space.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Let $\\delta\\phi=\\phi-\\widetilde\\phi$. Since $A_h\\phi=s$, $A_h\\delta\\phi=r$. The range statement in [F2] gives $\\overline{A_h\\widetilde\\phi}=0$, so $\\bar r=\\bar s-\\overline{A_h\\widetilde\\phi}=0$. By [F4], $A_h^\\dagger r$ is the mean-zero solution of $A_hu=r$; hence $\\delta\\phi-A_h^\\dagger r$ lies in $\\ker A_h$ and is constant by [F2]. Expand $r$ in the finite orthogonal Fourier-character basis from [F1]. On each nonzero mode, $A_h^\\dagger r$ has coefficient $\\widehat r_k/\\lambda_h(k)$ by [F2], while the possible constant difference is annihilated by $D^0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "On mode $k\\ne0$, the vector multiplier of $D^0A_h^\\dagger$ has Euclidean modulus $\\left(\\sum_a h^{-2}\\sin^2(2\\pi k_a/N)\\right)^{1/2}/\\lambda_h(k)$ by [F2, F4]. Parseval's identity for this finite orthogonal basis therefore gives the first bound with the displayed maximum $\\gamma_{N,L}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "Put $S=\\sum_a\\sin^2(\\pi k_a/N)>0$. Since $|\\sin(2\\theta)|\\le2|\\sin\\theta|$, the numerator in the definition of $\\gamma$ is at most $2h^{-1}\\sqrt S$, while its denominator is $4h^{-2}S$. Their ratio is at most $h/(2\\sqrt S)\\le h/(2\\sin(\\pi/N))$. For $N\\ge3$, $\\pi/N\\le\\pi/2$ and concavity of sine gives $\\sin(\\pi/N)\\ge2/N$, so this is at most $hN/4=L/4$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-4-1",
+          "claim": "Cauchy–Schwarz gives $|G_{x_p}E|\\le(\\sum_jw_j(x_p)^2)^{1/2}(\\sum_j|E_j|^2)^{1/2}$. Nonnegativity and $\\sum_jw_j=1$ imply $\\sum_jw_j^2\\le1$, while $\\sum_j|E_j|^2=h^{-d}\\|E\\|_h^2$. Apply this to $E=D^0(\\phi-\\widetilde\\phi)$ and use steps 2.1–3.1. Multiplying by $|q_p|/m_p$ gives the gathered-force estimate.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 removes the constant Fourier mode, which D^0 annihilates."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 covers the smallest allowed odd grid N=3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "gamma-N3",
+          "asserts": "For d=1,L=1,N=3, γ=√3/18<1/4=L/4.",
+          "claim": "The exact finite inverse/derivative multiplier obeys the stated mesh-independent upper bound.",
+          "checked_in": "Statement and step 3.1",
+          "N": 3,
+          "dimension": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-poisson-residual-to-gathered-force-bound. This is authoring evidence, not independent approval."
+      }
+    },
+    "lem-periodic-pic-shape-partition-and-quadrature-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-grid-and-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a spatial dimension $d\\in\\{1,2,3\\}$, side length $L>0$, and odd integer $N\\ge3$. Put $h=L/N$ and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$. The periodic grid has index set $J_N=(\\mathbb Z/N\\mathbb Z)^d$ and nodes $x_j=hj$ modulo $L$. A grid scalar is a real array $u=(u_j)_{j\\in J_N}$; a grid vector has $d$ real components at each node. Define\n$$ \\langle u,v\\rangle_h=h^d\\sum_{j\\in J_N}u_jv_j,\\qquad \\|u\\|_h=\\langle u,u\\rangle_h^{1/2},\\qquad \\bar u=L^{-d}h^d\\sum_{j\\in J_N}u_j . $$ The same pairing is componentwise for grid vectors. For the coordinate vector $e_a$, define the centered field difference and positive periodic Poisson stencil by $$ (D_a^0u)_j=\\frac{u_{j+e_a}-u_{j-e_a}}{2h},\\qquad (A_hu)_j=\\sum_{a=1}^d\\frac{2u_j-u_{j+e_a}-u_{j-e_a}}{h^2}. $$\nAll indices wrap modulo $N$. The discrete Fourier index set is $\\mathcal K_N=\\{-\\frac{N-1}{2},\\ldots,\\frac{N-1}{2}\\}^d$; the character at $k\\in\\mathcal K_N$ is $j\\mapsto e^{2\\pi i k\\cdot j/N}$. This odd-grid convention has no Nyquist mode.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-composite-trapezoid-error",
+          "source_section": "Statement",
+          "quote": "Let $L>0$, odd $N\\ge3$, $h=L/N$, and $f\\in C^2(\\mathbb T_L^d)$ for $d\\in\\{1,2,3\\}$. With the uniform tensor grid $x_j=hj$ and indices taken modulo $N$,\n$$ \\left|h^d\\sum_{j\\in(\\mathbb Z/N\\mathbb Z)^d}f(x_j)-\\int_{[0,L]^d}f(x)\\,dx\\right| \\le \\frac{L^dh^2}{12}\\sum_{a=1}^d\\|\\partial_{aa}f\\|_\\infty . $$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "source_section": "Statement",
+          "quote": "Let $\\eta_\\varepsilon$ be the explicit product kernel in [[def-periodic-pic-shape-assignment-and-gather]], with $\\alpha_\\varepsilon=e^{-\\varepsilon/L}\\in(0,1)$. Let $\\mu$ be a finite signed Borel measure on $\\mathbb T_L^d$ with mass $Q$ and total variation $\\|\\mu\\|_{\\rm TV}$. Put\n$$ \\widehat\\mu(k)=\\int_{\\mathbb T_L^d}e^{-2\\pi i k\\cdot y/L}\\,d\\mu(y),\\qquad \\kappa_k=2\\pi k/L . $$ Then $\\eta_\\varepsilon$ is strictly positive, even, smooth, and has integral one. The regularized neutralized source $$ \\rho_\\varepsilon^\\mu(x)=\\int_{\\mathbb T_L^d}\\eta_\\varepsilon(x-y)\\,d\\mu(y)-Q/L^d $$ is $C^\\infty$ with zero mean. Its unique zero-mean periodic solution of $-\\Delta\\phi_\\varepsilon^\\mu=\\rho_\\varepsilon^\\mu$ is the absolutely and uniformly differentiable Fourier series $$ \\phi_\\varepsilon^\\mu(x)=L^{-d}\\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}} \\frac{\\left(\\prod_{a=1}^d\\alpha_\\varepsilon^{|k_a|}\\right)\\widehat\\mu(k)} {|\\kappa_k|^2}e^{i\\kappa_k\\cdot x}. $$\nFor every integer $r\\ge0$, all spatial derivative series of order at most $r$ converge absolutely and uniformly; their bounds may depend on $r,\\varepsilon,L,\\|\\mu\\|_{\\rm TV}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Strict positivity of $\\eta_\\varepsilon$ implies $Z_{\\varepsilon,h}(x)>0$. Summing the weights in [F2] gives $\\sum_jw_j^{\\varepsilon,h}(x)=Z_{\\varepsilon,h}(x)/Z_{\\varepsilon,h}(x)=1$, and each weight is nonnegative. Since every summand in $Z$ is at least $h^d\\min\\eta_\\varepsilon$, and $h^d|J_N|=L^d$, $Z_{\\varepsilon,h}(x)\\ge Z_{\\min}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "For fixed $x$, apply [F3] to $f_x(y)=\\eta_\\varepsilon(y-x)g(y)$. The trapezoidal sum is $h^d\\sum_j f_x(x_j)$ and its integral is $(\\eta_\\varepsilon*g)(x)$ because $\\eta_\\varepsilon$ is even. Its quadrature error is at most $C_{\\eta,g}h^2$. Also $|(\\eta_\\varepsilon*g)(x)|\\le\\|g\\|_\\infty$ because $\\eta_\\varepsilon\\ge0$ and [F4] gives unit integral.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Apply [F3] to $y\\mapsto\\eta_\\varepsilon(y-x)$; translation does not change its second-derivative suprema and its integral is $1$ by [F4]. Thus $|Z_{\\varepsilon,h}(x)-1|\\le C_\\eta h^2$. By [F2], $(P_h^\\varepsilon\\mu)_j=\\int_{\\mathbb T_L^d}\\frac{\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}\\,d\\mu(x) .$ Subtract $(\\eta_\\varepsilon*\\mu)(x_j)$, factor $\\eta_\\varepsilon(x_j-x)$, and use $|Z^{-1}-1|=|Z-1|/Z\\le C_\\eta h^2/Z_{\\min}$. Integrating against the total variation measure gives the first bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "The gathered sum in the Statement is $h^d\\sum_j f_x(x_j)/Z_{\\varepsilon,h}(x)$ by [F2]. Subtract the integral, use the quadrature error from step 1.2 divided by $Z\\ge Z_{\\min}$, and bound the normalization correction by $|Z^{-1}-1|\\|g\\|_\\infty\\le C_\\eta h^2\\|g\\|_\\infty/Z_{\\min}$. This is the second bound.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 establish normalization for every fixed ε>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 uses periodic endpoint identification in the tensor-grid trapezoid sum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for lem-periodic-pic-shape-partition-and-quadrature-bound. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "source_section": "Statement",
+          "quote": "Use the grid, inner product, and operator $A_h$ of [[def-periodic-pic-grid-and-inner-product]]. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h$ consists exactly of constant arrays, and $\\operatorname{ran}A_h=\\{s:\\bar s=0\\}$. Consequently, for every compatible source $\\bar s=0$, there is a unique solution $\\phi$ of $A_h\\phi=s$ with the gauge $\\bar\\phi=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-periodic-pic-zero-mean-poisson-solver",
+          "source_section": "Definition",
+          "quote": "Input an odd $N\\ge3$ periodic grid as in [[def-periodic-pic-grid-and-inner-product]] and a real grid source $s$. If $\\bar s\\ne0$, return the status incompatible-source. Otherwise compute the finite discrete Fourier coefficients $\\widehat s_k=N^{-d}\\sum_js_je^{-2\\pi i k\\cdot j/N}$. Set $\\widehat\\phi_0=0$ and, for each $k\\ne0$, set $\\widehat\\phi_k=\\widehat s_k/\\lambda_h(k)$ with $\\lambda_h(k)$ from [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]]. Return the inverse finite Fourier transform $\\phi_j=\\sum_{k\\in\\mathcal K_N}\\widehat\\phi_ke^{2\\pi i k\\cdot j/N}$ and status success. All arithmetic here is exact real or complex arithmetic; an implementation using floating-point FFTs requires a separate perturbation analysis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "The source and grid contain finitely many real numbers, so computing its mean and finite Fourier transform terminates. If $\\bar s\\ne0$, then the constant Fourier coefficient of $s$ is nonzero while $A_h$ annihilates constants and has zero constant coefficient on every output, so $A_h\\phi=s$ is impossible.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "If $\\bar s=0$, its zero Fourier coefficient is zero. By [F1], every other eigenvalue is positive, so all divisions in [F2] are defined. For real input, $\\widehat s_{-k}=\\overline{\\widehat s_k}$ and $\\lambda_h(-k)=\\lambda_h(k)$; therefore the returned coefficients have the same conjugate symmetry, and pairing the $k$ and $-k$ terms in the inverse transform shows every $\\phi_j$ is real. For every nonzero mode, the returned coefficient satisfies $\\lambda_h(k)\\widehat\\phi_k=\\widehat s_k$, and the zero mode satisfies $0=\\widehat s_0$. Inverse Fourier transformation therefore gives $A_h\\phi=s$ and $\\widehat\\phi_0=0$ gives $\\bar\\phi=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "The coefficient list is finite, hence inverse transformation terminates. Uniqueness of the returned gauged solution follows from [F1].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 sets the zero Fourier coefficient to zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves a nonzero-mean input has no Poisson solution."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 proves every zero-mean input returns a solution."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "fourier-solver-N3",
+          "asserts": "For d=1,L=1,N=3 and s=(1,-1/2,-1/2), φ=s/27 is the mean-zero solution because A_h cos(2πj/3)=27 cos(2πj/3).",
+          "claim": "The algorithm divides the two nonzero modes by 27 and returns the stated gauged solution.",
+          "checked_in": "Steps 1.1–3.1",
+          "N": 3,
+          "dimension": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-regularized-grid-interaction-kernel",
+          "source_section": "Definition",
+          "quote": "Fix $\\varepsilon>0$, $d\\in\\{1,2,3\\}$, $L>0$, and a regularized one-species model with total charge $Q$ and total mass $M>0$. Let $c=Q/M$. For each position $y\\in\\mathbb T_L^d$, define the continuous unit-source field by taking the zero-mean solution $\\phi_\\varepsilon^y$ from [[thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth]] for $\\mu=\\delta_y$, and setting\n$$ \\mathcal E_\\varepsilon(x,y)=\\int_{\\mathbb T_L^d}\\eta_\\varepsilon(z-x)(-\\nabla\\phi_\\varepsilon^y(z))\\,dz =\\frac1{L^d}\\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}} \\frac{-i\\kappa_k}{|\\kappa_k|^2} \\left(\\prod_{a=1}^d\\alpha_\\varepsilon^{2|k_a|}\\right)e^{i\\kappa_k\\cdot(x-y)} . $$ The series converges absolutely with all derivatives by geometric summability. For the grid branch, let $\\phi_h^y$ be the mean-zero solution of $$ A_h\\phi_h^y=h^{-d}w^{\\varepsilon,h}(y)-L^{-d}\\mathbf1 $$ whose compatibility follows from [[thm-periodic-pic-charge-conservation-and-neutralized-source]], and put $$ \\mathcal E_{\\varepsilon,h}(x,y)=\\sum_{j\\in J_N}w_j^{\\varepsilon,h}(x)(-D^0\\phi_h^y)_j . $$ If $z=(x,v)$ and $z'=(y,w)$ are lifted phase-space states in $\\mathbb R^{2d}$, the continuum and grid mean-field kernels are $$ \\mathbb K_\\varepsilon(z,z')=(v,cQ\\,\\mathcal E_\\varepsilon(x,y)),\\qquad \\mathbb K_{\\varepsilon,h}(z,z')=(v,cQ\\,\\mathcal E_{\\varepsilon,h}(x,y)). $$\nThe spatial components are periodic in their position variables. A finite equal-weight system $\\dot z_p=P^{-1}\\sum_{r=1}^P\\mathbb K_{\\varepsilon,h}(z_p,z_r)$ uses particle charge $Q/P$ and mass $M/P$. No claim about the limit $\\varepsilon\\to0$ is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-pic-smooth-assignment-weights",
+          "source_section": "Statement",
+          "quote": "For fixed $\\varepsilon>0$ and periodic grid, the smooth-branch weights $w_j^{\\varepsilon,h}$ of [[def-periodic-pic-shape-assignment-and-gather]] are $C^\\infty$ on $\\mathbb T_L^d$. For every multi-index $\\beta$, $\\max_j\\|\\partial^\\beta w_j^{\\varepsilon,h}\\|_\\infty<\\infty$. They are nonnegative and sum to one at every point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+          "source_section": "Statement",
+          "quote": "For any real grid array $s$, define its mean-zero periodic Poisson pseudoinverse by\n$$ A_h^\\dagger s:=\\text{the unique mean-zero grid array }u\\text{ such that }A_hu=s-\\bar s\\,\\mathbf1, $$\nwhere $\\bar s=L^{-d}\\langle s,\\mathbf1\\rangle_h$. This definition is well-defined by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]]. It gives $A_hA_h^\\dagger s=s-\\bar s\\mathbf1$, $A_h^\\dagger\\mathbf1=0$, and a linear self-adjoint map on the full finite grid space.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "By [F2], each grid weight is smooth and has bounded derivatives of every finite order. By [F1], $\\mathcal E_{\\varepsilon,h}$ is a finite sum of products of such weights and fixed matrix entries, so it is $C^\\infty$ and all its derivatives are bounded. In particular, both derivative suprema $M_x^{\\varepsilon,h},M_y^{\\varepsilon,h}$ are finite. More explicitly, if $B_{jk}$ are the vector entries of $-D^0A_h^\\dagger$ and $C_w=\\max_j\\|\\nabla w_j\\|_\\infty$, then $M_x^{\\varepsilon,h}\\le |cQ|h^{-d}C_w \\sum_{j,k}|B_{jk}|\\|w_k\\|_\\infty,\\qquad M_y^{\\varepsilon,h}\\le |cQ|h^{-d}C_w \\sum_{j,k}|B_{jk}|\\|w_j\\|_\\infty ,$ which are finite explicit bounds for the defining suprema.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "Any finite-order derivative of the continuum series multiplies each coefficient by finitely many components of $\\kappa_k$. The coefficient already has one factor $|\\kappa_k|^{-1}$; after $r$ additional derivatives, its magnitude is bounded by a constant times $(1+|k|)^r\\prod_a\\alpha_\\varepsilon^{2|k_a|}$. These bounds are summable because each one-dimensional geometric series with a polynomial factor converges. Thus every differentiated series converges uniformly, and all derivatives are bounded. In particular, for a first derivative the factor $|\\kappa_k|$ cancels the denominator $|\\kappa_k|^2$, so its norm is bounded by the displayed sum times $|cQ|/L^d$. Periodicity permits the same bounds on Euclidean lifts.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "First change $z=(x,v)$ while holding $z'=(y,w)$ fixed. The output difference has components $(v-\\widetilde v,cQ(\\mathcal E_{\\varepsilon,h}(x,y)-\\mathcal E_{\\varepsilon,h}(\\widetilde x,y)))$. Its squared Euclidean norm is at most $|v-\\widetilde v|^2+(M_x^{\\varepsilon,h})^2|x-\\widetilde x|^2$, hence its norm is at most $\\max\\{1,M_x^{\\varepsilon,h}\\}|z-\\widetilde z|$. Next change $z'$ while holding $\\widetilde z$ fixed; this changes only the field component, by at most $M_y^{\\varepsilon,h}|z'-\\widetilde z'|$. Adding these bounds gives the stated two-variable estimate with $L_{\\varepsilon,h}$. The same block-norm calculation using the continuum derivative bounds from step 1.2 gives the estimate with $L_\\varepsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-smooth-density-grid-force-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-periodic-pic-shape-partition-and-quadrature-bound",
+          "source_section": "Statement",
+          "quote": "Let $d,L,N,h,\\eta_\\varepsilon,Z_{\\varepsilon,h}$, and $w_j^{\\varepsilon,h}$ have the meanings in [[def-periodic-pic-grid-and-inner-product]] and [[def-periodic-pic-shape-assignment-and-gather]]. For a finite signed Borel measure $\\mu$ on the torus, write $\\|\\mu\\|_{\\rm TV}=|\\mu|(\\mathbb T_L^d)$ and define\n$$ (P_h^\\varepsilon\\mu)_j=h^{-d}\\int_{\\mathbb T_L^d}w_j^{\\varepsilon,h}(x)\\,d\\mu(x). $$ Put $$ C_\\eta=\\frac{L^d}{12}\\sum_{a=1}^d\\|\\partial_{aa}\\eta_\\varepsilon\\|_\\infty,\\qquad Z_{\\min}=L^d\\min_{x\\in\\mathbb T_L^d}\\eta_\\varepsilon(x)>0 . $$ Then $\\sum_jw_j^{\\varepsilon,h}(x)=1$ for every $x$, and $Z_{\\varepsilon,h}(x)\\ge Z_{\\min}$. The measure assignment satisfies $$ \\left|(P_h^\\varepsilon\\mu)_j-(\\eta_\\varepsilon*\\mu)(x_j)\\right| \\le \\frac{C_\\eta\\|\\eta_\\varepsilon\\|_\\infty}{Z_{\\min}}\\|\\mu\\|_{\\rm TV}h^2 . $$ For $g\\in C^2(\\mathbb T_L^d)$ define $$ C_{\\eta,g}=\\frac{L^d}{12}\\sum_{a=1}^d \\|\\partial_{aa}(\\eta_\\varepsilon g)\\|_\\infty . $$ The gathered nodal samples satisfy the explicit bound $$ \\left|\\sum_jw_j^{\\varepsilon,h}(x)g(x_j)-(\\eta_\\varepsilon*g)(x)\\right| \\le \\frac{C_{\\eta,g}+C_\\eta\\|g\\|_\\infty}{Z_{\\min}}h^2 \\qquad(x\\in\\mathbb T_L^d). $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "source_section": "Statement",
+          "quote": "Use the grid, inner product, and operator $A_h$ of [[def-periodic-pic-grid-and-inner-product]]. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h$ consists exactly of constant arrays, and $\\operatorname{ran}A_h=\\{s:\\bar s=0\\}$. Consequently, for every compatible source $\\bar s=0$, there is a unique solution $\\phi$ of $A_h\\phi=s$ with the gauge $\\bar\\phi=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+          "source_section": "Statement",
+          "quote": "Let $s$ be a zero-mean grid source and let $\\phi$ be the zero-mean solution of $A_h\\phi=s$. Let $\\widetilde\\phi$ be any approximate grid potential, and set $r=s-A_h\\widetilde\\phi$; then $\\bar r=0$. Define\n$$ \\gamma_{N,L}= \\max_{\\substack{k\\in\\mathcal K_N\\\\k\\ne0}} \\frac{\\left(\\sum_{a=1}^d h^{-2}\\sin^2(2\\pi k_a/N)\\right)^{1/2}} {4h^{-2}\\sum_{a=1}^d\\sin^2(\\pi k_a/N)} . $$ For the centered field operator $D^0=(D_a^0)_{a=1}^d$, $$ \\|D^0(\\phi-\\widetilde\\phi)\\|_h\\le\\gamma_{N,L}\\|r\\|_h,\\qquad \\gamma_{N,L}\\le\\frac{h}{2\\sin(\\pi/N)}\\le\\frac L4 . $$ For any particle location $x_p$ and charge-to-mass ratio $q_p/m_p$ with $m_p>0$, the force gather using the weights of [[def-periodic-pic-shape-assignment-and-gather]] obeys $$ \\left|\\frac{q_p}{m_p}G_{x_p}\\!\\left(-D^0\\phi+D^0\\widetilde\\phi\\right)\\right| \\le\\frac{|q_p|}{m_p}h^{-d/2}\\gamma_{N,L}\\|r\\|_h . $$\nThus the norm in the force certificate is the actual finite-grid inverse/derivative norm; the explicit $h^{-d/2}$ conversion is retained when passing from grid $L^2$ to a particle gather.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "source_section": "Statement",
+          "quote": "Let $\\eta_\\varepsilon$ be the explicit product kernel in [[def-periodic-pic-shape-assignment-and-gather]], with $\\alpha_\\varepsilon=e^{-\\varepsilon/L}\\in(0,1)$. Let $\\mu$ be a finite signed Borel measure on $\\mathbb T_L^d$ with mass $Q$ and total variation $\\|\\mu\\|_{\\rm TV}$. Put\n$$ \\widehat\\mu(k)=\\int_{\\mathbb T_L^d}e^{-2\\pi i k\\cdot y/L}\\,d\\mu(y),\\qquad \\kappa_k=2\\pi k/L . $$ Then $\\eta_\\varepsilon$ is strictly positive, even, smooth, and has integral one. The regularized neutralized source $$ \\rho_\\varepsilon^\\mu(x)=\\int_{\\mathbb T_L^d}\\eta_\\varepsilon(x-y)\\,d\\mu(y)-Q/L^d $$ is $C^\\infty$ with zero mean. Its unique zero-mean periodic solution of $-\\Delta\\phi_\\varepsilon^\\mu=\\rho_\\varepsilon^\\mu$ is the absolutely and uniformly differentiable Fourier series $$ \\phi_\\varepsilon^\\mu(x)=L^{-d}\\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}} \\frac{\\left(\\prod_{a=1}^d\\alpha_\\varepsilon^{|k_a|}\\right)\\widehat\\mu(k)} {|\\kappa_k|^2}e^{i\\kappa_k\\cdot x}. $$\nFor every integer $r\\ge0$, all spatial derivative series of order at most $r$ converge absolutely and uniformly; their bounds may depend on $r,\\varepsilon,L,\\|\\mu\\|_{\\rm TV}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "The assigned source has mean zero: by the partition identity in [F1], $h^d\\sum_j(P_h^\\varepsilon\\mu)_j=\\int\\sum_jw_j(x)\\,d\\mu(x)=Q$, so subtracting the background gives zero mean. By [F4], the continuum potential and field are smooth; [F2] gives the unique grid potential. The assignment and centered-stencil Taylor bounds give the residual $r_h=s_h-A_h(\\phi_\\varepsilon|_h),\\qquad \\|r_h\\|_\\infty\\le C_{\\rm src}h^2 .$ Here [F1] bounds the measure-assignment error by $C_{\\rm dep}h^2$, and for each coordinate the centered second difference has remainder at most $h^2\\|\\partial_a^4\\phi_\\varepsilon\\|_\\infty/12$, whose sum is $C_{\\rm FD}h^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "The weighted grid norm satisfies $\\|r_h\\|_h\\le L^{d/2}\\|r_h\\|_\\infty$ because the grid has $N^d$ points and $h^dN^d=L^d$. In [F3], take $s=s_h$, $\\phi=\\phi_h$, and $\\widetilde\\phi=\\phi_\\varepsilon|_h$; its residual is exactly $r_h$ from step 1.1, so $\\|D^0(\\phi_h-\\phi_\\varepsilon|_h)\\|_h \\le \\gamma_{N,L}L^{d/2}C_{\\rm src}h^2$. Taylor's theorem for the centered first difference gives $\\|D^0(\\phi_\\varepsilon|_h)-(\\nabla\\phi_\\varepsilon)|_h\\|_\\infty\\le C_3h^2$, hence its grid $L^2$ norm is at most $L^{d/2}C_3h^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "For any nonnegative normalized weights, $\\sum_jw_j(x)^2\\le1$, so Cauchy–Schwarz gives $|G_xV|\\le h^{-d/2}\\|V\\|_h$. Apply this to the two grid-field errors in step 2.1. Their gathered contribution is at most $L^{d/2}h^{2-d/2}(\\gamma_{N,L}C_{\\rm src}+C_3)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-4-1",
+          "claim": "The remaining difference is gathering the exact nodal samples $E_\\varepsilon(x_j)$ instead of the continuous field. The second bound of [F1], with $g=E_\\varepsilon$, is $C_{\\rm int}h^2$. Add this to step 3.1 to get the displayed estimate. Since $\\gamma_{N,L}\\le L/4$ and $2-d/2>0$ for $d\\le3$, both terms tend to zero.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-smooth-density-grid-force-consistency. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-separable-hamiltonian-grid-model",
+          "source_section": "Definition",
+          "quote": "Use the smooth assignment branch of [[def-periodic-pic-shape-assignment-and-gather]], real particle charges $q_p$, positive masses $m_p$, and its neutralized grid density $\\rho(X)$. Let $\\phi(X)=A_h^\\dagger\\rho(X)$ denote the unique mean-zero solution from [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]]. Define the grid potential energy\n$$ U_h(X)=\\frac12\\langle \\rho(X),A_h^\\dagger\\rho(X)\\rangle_h =\\frac12\\langle\\rho(X),\\phi(X)\\rangle_h $$ and the finite-dimensional separable Hamiltonian $$ H_h(X,p)=\\frac12p^TM^{-1}p+U_h(X),\\qquad M=\\operatorname{diag}(m_1I_d,\\ldots,m_PI_d). $$\nThe corresponding canonical ODE is $\\dot X=M^{-1}p$, $\\dot p=-\\nabla_XU_h(X)$. Its force is the variational force obtained by differentiating the deposited shape in $U_h$; this definition does not identify that force with ordinary field interpolation $G_XE$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+          "source_section": "Statement",
+          "quote": "For any real grid array $s$, define its mean-zero periodic Poisson pseudoinverse by\n$$ A_h^\\dagger s:=\\text{the unique mean-zero grid array }u\\text{ such that }A_hu=s-\\bar s\\,\\mathbf1, $$\nwhere $\\bar s=L^{-d}\\langle s,\\mathbf1\\rangle_h$. This definition is well-defined by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]]. It gives $A_hA_h^\\dagger s=s-\\bar s\\mathbf1$, $A_h^\\dagger\\mathbf1=0$, and a linear self-adjoint map on the full finite grid space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "source_section": "Statement",
+          "quote": "For positions $X_1,\\ldots,X_P\\in\\mathbb T_L^d$ and real charges $q_1,\\ldots,q_P$, define $Q=\\sum_pq_p$ and an admissible algebraic assignment shape $w_j$ as in [[def-periodic-pic-shape-assignment-and-gather]]. Then\n$$ h^d\\sum_{j\\in J_N}h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)=Q . $$\nConsequently the neutralized source $\\rho_j(X)=h^{-d}\\sum_pq_pw_j(X_p)-Q/L^d$ has mean zero and is in the range of the periodic Poisson operator; it therefore has a unique mean-zero potential for the gauge $\\bar\\phi=0$ by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-periodic-pic-smooth-assignment-weights",
+          "source_section": "Statement",
+          "quote": "For fixed $\\varepsilon>0$ and periodic grid, the smooth-branch weights $w_j^{\\varepsilon,h}$ of [[def-periodic-pic-shape-assignment-and-gather]] are $C^\\infty$ on $\\mathbb T_L^d$. For every multi-index $\\beta$, $\\max_j\\|\\partial^\\beta w_j^{\\varepsilon,h}\\|_\\infty<\\infty$. They are nonnegative and sum to one at every point.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "For a variation $\\delta X$, differentiating the partition identity in [F4] gives $\\sum_j\\nabla w_j^{\\varepsilon,h}(X_p)=0$ for each $p$. Thus the finite variation $(D\\rho(X)[\\delta X])_j=h^{-d}\\sum_pq_p\\nabla w_j^{\\varepsilon,h}(X_p)\\cdot\\delta X_p$ has zero mean; $\\rho(X)$ itself has zero mean by [F3]. Since $A_h^\\dagger$ is self-adjoint on the zero-mean subspace by [F2], differentiating $U_h$ gives $DU_h(X)[\\delta X] =\\tfrac12\\langle D\\rho,A_h^\\dagger\\rho\\rangle_h +\\tfrac12\\langle \\rho,A_h^\\dagger D\\rho\\rangle_h =\\langle D\\rho,\\phi\\rangle_h =\\sum_pq_p\\left(\\sum_j\\nabla w_j(X_p)\\phi_j\\right)\\cdot\\delta X_p .$ Identifying coefficients of arbitrary $\\delta X_p$ yields the displayed gradient.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Differentiate $H_h$ along a solution. Symmetry of $M^{-1}$ gives $\\frac{d}{dt}H_h =(\\nabla U_h)\\cdot\\dot X+(M^{-1}p)\\cdot\\dot p =(\\nabla U_h)\\cdot M^{-1}p-(M^{-1}p)\\cdot\\nabla U_h=0.$ Therefore $H_h$ is constant in time on the solution interval.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-mean-field-error-with-force-defect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-regularized-grid-interaction-kernel",
+          "source_section": "Definition",
+          "quote": "Fix $\\varepsilon>0$, $d\\in\\{1,2,3\\}$, $L>0$, and a regularized one-species model with total charge $Q$ and total mass $M>0$. Let $c=Q/M$. For each position $y\\in\\mathbb T_L^d$, define the continuous unit-source field by taking the zero-mean solution $\\phi_\\varepsilon^y$ from [[thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth]] for $\\mu=\\delta_y$, and setting\n$$ \\mathcal E_\\varepsilon(x,y)=\\int_{\\mathbb T_L^d}\\eta_\\varepsilon(z-x)(-\\nabla\\phi_\\varepsilon^y(z))\\,dz =\\frac1{L^d}\\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}} \\frac{-i\\kappa_k}{|\\kappa_k|^2} \\left(\\prod_{a=1}^d\\alpha_\\varepsilon^{2|k_a|}\\right)e^{i\\kappa_k\\cdot(x-y)} . $$ The series converges absolutely with all derivatives by geometric summability. For the grid branch, let $\\phi_h^y$ be the mean-zero solution of $$ A_h\\phi_h^y=h^{-d}w^{\\varepsilon,h}(y)-L^{-d}\\mathbf1 $$ whose compatibility follows from [[thm-periodic-pic-charge-conservation-and-neutralized-source]], and put $$ \\mathcal E_{\\varepsilon,h}(x,y)=\\sum_{j\\in J_N}w_j^{\\varepsilon,h}(x)(-D^0\\phi_h^y)_j . $$ If $z=(x,v)$ and $z'=(y,w)$ are lifted phase-space states in $\\mathbb R^{2d}$, the continuum and grid mean-field kernels are $$ \\mathbb K_\\varepsilon(z,z')=(v,cQ\\,\\mathcal E_\\varepsilon(x,y)),\\qquad \\mathbb K_{\\varepsilon,h}(z,z')=(v,cQ\\,\\mathcal E_{\\varepsilon,h}(x,y)). $$\nThe spatial components are periodic in their position variables. A finite equal-weight system $\\dot z_p=P^{-1}\\sum_{r=1}^P\\mathbb K_{\\varepsilon,h}(z_p,z_r)$ uses particle charge $Q/P$ and mass $M/P$. No claim about the limit $\\varepsilon\\to0$ is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+          "source_section": "Statement",
+          "quote": "For fixed $\\varepsilon>0$, odd grid size $N$, and $Q,M$ as in [[def-periodic-pic-regularized-grid-interaction-kernel]], define\n$$ M_x^{\\varepsilon,h}=\\sup_{x,y\\in\\mathbb T_L^d}\\|D_x(cQ\\mathcal E_{\\varepsilon,h})(x,y)\\|_{\\rm op},\\qquad M_y^{\\varepsilon,h}=\\sup_{x,y\\in\\mathbb T_L^d}\\|D_y(cQ\\mathcal E_{\\varepsilon,h})(x,y)\\|_{\\rm op} $$ and $L_{\\varepsilon,h}=\\max\\{1,M_x^{\\varepsilon,h},M_y^{\\varepsilon,h}\\}$. These are finite mesh- and regularization-dependent constants. The phase kernel $\\mathbb K_{\\varepsilon,h}$ is globally Lipschitz in the two-variable convention $$ |\\mathbb K_{\\varepsilon,h}(z,z')-\\mathbb K_{\\varepsilon,h}(\\widetilde z,\\widetilde z')| \\le L_{\\varepsilon,h}\\bigl(|z-\\widetilde z|+|z'-\\widetilde z'|\\bigr). $$ The continuum kernel $\\mathbb K_\\varepsilon$ is also globally Lipschitz with the explicit admissible constant $$ L_\\varepsilon=\\max\\left\\{1,\\frac{|cQ|}{L^d} \\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}}\\prod_{a=1}^d\\alpha_\\varepsilon^{2|k_a|}\\right\\}. $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-p-one-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$. For Borel probability measures $\\mu,\\nu$ on $\\mathbb R^d$ with finite first moments $\\int |x|\\,d\\mu(x)<\\infty$ and $\\int |y|\\,d\\nu(y)<\\infty$, let $\\Pi(\\mu,\\nu)$ be the set of Borel probability measures on $\\mathbb R^d\\times\\mathbb R^d$ whose first and second marginals are $\\mu$ and $\\nu$. Define\n$$W_1(\\mu,\\nu):=\\inf_{\\pi\\in\\Pi(\\mu,\\nu)}\\int_{\\mathbb R^d\\times\\mathbb R^d}|x-y|\\,d\\pi(x,y).$$\nThis definition makes no assertion that the infimum is attained. It applies only to probability measures with finite first moment; it is not a distance assigned here to a general signed measure.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-characteristic-mean-field-solution",
+          "source_section": "Definition",
+          "quote": "Fix $T>0$, a globally Lipschitz kernel $K$ as in [[def-globally-lipschitz-mean-field-kernel]], and a Borel probability measure $\\mu_0$ on $\\mathbb R^d$ with finite first moment as in [[def-p-one-wasserstein-one]]. A characteristic solution on $[0,T]$ consists of a jointly Borel map $X:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d$, defined up to a $\\mu_0$-null set of labels, such that $t\\mapsto X_t(x)$ is absolutely continuous for $\\mu_0$-almost every $x$, $X_0(x)=x$, and\n$$X_t(x)=x+\\int_0^t\\int_{\\mathbb R^d}K(X_s(x),X_s(y))\\,d\\mu_0(y)\\,ds$$\nfor $\\mu_0$-almost every $x$. It transports $\\mu_0$ to $\\mu_t=(X_t)_\\#\\mu_0$, where $(X_t)_\\#\\mu_0(A):=\\mu_0(X_t^{-1}(A))$. The weighted path integrability convention is $\\int_{\\mathbb R^d}\\sup_{0\\le t\\le T}|X_t(x)|d\\mu_0(x)<\\infty$; in particular every time slice has finite first moment.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-w1-dobrushin-stability-with-force-defect",
+          "source_section": "Statement",
+          "quote": "Let $K$ have two-variable global Lipschitz constant $L$ as in [[def-globally-lipschitz-mean-field-kernel]]. Let $\\mu_t=(X_t)_\\#\\mu_0$ and $\\nu_t=(Y_t)_\\#\\nu_0$ be probability curves from finite-first-moment initial laws, with absolutely continuous characteristic paths satisfying\n$$\\dot X_t(x)=\\int K(X_t(x),X_t(z))d\\mu_0(z)+r_\\mu(t,x),\\qquad \\dot Y_t(y)=\\int K(Y_t(y),Y_t(w))d\\nu_0(w)+r_\\nu(t,y)$$\nfor almost every time and almost every label, with $X_0(x)=x$ and $Y_0(y)=y$. Assume additionally the weighted path integrability conditions $\\int\\sup_{s\\le T}|X_s|d\\mu_0<\\infty$ and $\\int\\sup_{s\\le T}|Y_s|d\\nu_0<\\infty$. Assume the measurable label defects satisfy $|r_\\mu|\\le\\eta_\\mu$ and $|r_\\nu|\\le\\eta_\\nu$ on $[0,T]$. For every prescribed initial coupling $\\pi_0$ of cost $D_0$, its transport by the two characteristic paths has cost at time $t$ at most\n$$e^{2Lt}\\bigl(D_0+(\\eta_\\mu+\\eta_\\nu)t\\bigr).$$\nConsequently $W_1(\\mu_t,\\nu_t)\\le e^{2Lt}\\bigl(W_1(\\mu_0,\\nu_0)+(\\eta_\\mu+\\eta_\\nu)t\\bigr)$. The estimate is first proved for each coupling; no optimal plan is assumed.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "If particles $i$ and $j$ start at the same phase state, subtract their grid equations. The terms with common second argument satisfy $|z_i(t)-z_j(t)|\\le L_{\\varepsilon,h}\\int_0^t|z_i(s)-z_j(s)|\\,ds,$ because the two-variable Lipschitz bound in [F2] applies with only the first argument changed. By [F5], the two paths agree. Thus the finite particle flow defines a single path $X_t(a)$ for each distinct atom $a$ of $\\nu_0^h$, independent of the label representing $a$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Extend $X_t$ by the identity off the finite support of $\\nu_0^h$. This is a jointly Borel map, its paths are absolutely continuous on that support, and their path suprema are integrable because the support is finite and each path is continuous on $[0,T]$. Also $\\nu_t^h=(X_t)_\\#\\nu_0^h$. For a support point $a$, the finite system equation can be written as $r_h(t,a)=\\int\\left(\\mathbb K_{\\varepsilon,h}(X_t(a),X_t(b))-\\mathbb K_\\varepsilon(X_t(a),X_t(b))\\right)d\\nu_0^h(b).$ Thus $\\dot X_t(a)=\\int\\mathbb K_\\varepsilon(X_t(a),X_t(b))d\\nu_0^h(b)+r_h(t,a)$. This measurable residual has norm at most $\\delta_{\\varepsilon,h}$ by the uniform defect hypothesis. The continuum characteristic flow has residual zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "Fix any prescribed initial coupling $\\pi_0$ of $\\nu_0^h$ and $\\mu_0$ with cost $D_0$. Apply [F6] to the two characteristic flows in steps 1.1–1.2, with $\\eta_\\mu=0$ and $\\eta_\\nu=\\delta_{\\varepsilon,h}$. The transported coupling has cost at most $e^{2L_\\varepsilon t}(D_0+t\\delta_{\\varepsilon,h})$, so by [F3] the same expression bounds $W_1(\\nu_t^h,\\mu_t)$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "proof-step-4-1",
+          "claim": "Step 3.1 holds for every initial coupling. Taking the infimum over its initial cost $D_0$ gives $\\delta_0$ by [F3], yielding the claimed inequality. No coupling attaining the infimum is selected.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 covers duplicate labels, including a one-particle system."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 applies at t=0 and every t≤T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 2.1–3.1 use a prescribed coupling and then take its infimum without selecting a minimizer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-mean-field-error-with-force-defect. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+          "source_section": "Statement",
+          "quote": "For fixed $\\varepsilon>0$, odd grid size $N$, and $Q,M$ as in [[def-periodic-pic-regularized-grid-interaction-kernel]], define\n$$ M_x^{\\varepsilon,h}=\\sup_{x,y\\in\\mathbb T_L^d}\\|D_x(cQ\\mathcal E_{\\varepsilon,h})(x,y)\\|_{\\rm op},\\qquad M_y^{\\varepsilon,h}=\\sup_{x,y\\in\\mathbb T_L^d}\\|D_y(cQ\\mathcal E_{\\varepsilon,h})(x,y)\\|_{\\rm op} $$ and $L_{\\varepsilon,h}=\\max\\{1,M_x^{\\varepsilon,h},M_y^{\\varepsilon,h}\\}$. These are finite mesh- and regularization-dependent constants. The phase kernel $\\mathbb K_{\\varepsilon,h}$ is globally Lipschitz in the two-variable convention $$ |\\mathbb K_{\\varepsilon,h}(z,z')-\\mathbb K_{\\varepsilon,h}(\\widetilde z,\\widetilde z')| \\le L_{\\varepsilon,h}\\bigl(|z-\\widetilde z|+|z'-\\widetilde z'|\\bigr). $$ The continuum kernel $\\mathbb K_\\varepsilon$ is also globally Lipschitz with the explicit admissible constant $$ L_\\varepsilon=\\max\\left\\{1,\\frac{|cQ|}{L^d} \\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}}\\prod_{a=1}^d\\alpha_\\varepsilon^{2|k_a|}\\right\\}. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-euler-midpoint-rk4-orders-and-stability-functions",
+          "source_section": "Statement",
+          "quote": "Under the smoothness and compact-tube hypotheses of [[prop-explicit-rk-order-conditions-through-four]], the forward Euler, explicit midpoint, and classical four-stage tableaus of [[def-euler-midpoint-rk4-tableaus]] have uniform local orders at least one, two, and four, respectively.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube",
+          "source_section": "Statement",
+          "quote": "Let $f:[0,T]\\times U\\to\\mathbb R^m$ be uniformly $L$-Lipschitz in its state variable on a set containing every stage generated by the classical RK4 step of [[def-euler-midpoint-rk4-tableaus]] from any two admitted starting states $u,v$ at the same base time $t$. Assume all these stage evaluations are defined, and let $\\Psi_h(t,\\cdot)$ be the resulting one-step map for $0<h\\le h_0$. Then\n$$|\\Psi_h(t,u)-\\Psi_h(t,v)|\\le(1+L_*h)|u-v|,\\qquad L_*=Le^{Lh_0}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-discrete-one-step-error-recurrence-bound",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "The state field is a mean over $P$ pair interactions. For two stacked states $Z,\\widetilde Z$, [F1] gives $|(F_{\\varepsilon,h}(Z))_p-(F_{\\varepsilon,h}(\\widetilde Z))_p| \\le L_{\\varepsilon,h}|z_p-\\widetilde z_p| +\\frac{L_{\\varepsilon,h}}P\\sum_r|z_r-\\widetilde z_r|.$ Taking the stacked Euclidean norm and applying finite Cauchy–Schwarz to the average term shows $\\|F_{\\varepsilon,h}(Z)-F_{\\varepsilon,h}(\\widetilde Z)\\|_2\\le2L_{\\varepsilon,h}\\|Z-\\widetilde Z\\|_2=L_F\\|Z-\\widetilde Z\\|_2$. The $C^4$ tube hypotheses therefore permit [F2], which gives a uniform exact-start local defect at most $C_4h_t^5$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Let $E_k=\\|Z_k-Z(t_k)\\|_2$. The RK4 stages from the paired exact and numerical starts are admitted by assumption, so [F3] bounds the difference of their one-step outputs by $(1+L_*h_t)E_k$. Adding the exact-start defect from step 1.1 by the triangle inequality gives $E_{k+1}\\le(1+L_*h_t)E_k+C_4h_t^5$, with $E_0=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "Apply [F4] to the recurrence in step 2.1 with $p=4$, $C_0=0$, $C=C_4$, and step width $h_t=T/n$. Its two cases are exactly the displayed estimate.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 gives the separate L_*=0 recurrence branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 includes P=1 in the stacked Euclidean estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 covers the initial time and every grid time through T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-leapfrog-step-map",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and let $M$ be a real symmetric positive-definite $d\\times d$ matrix. Write $\\nabla U$ for its Euclidean gradient, and let $\\epsilon>0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+          "source_section": "Statement",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, $V\\in C^2(Q)$, and $M$ be symmetric positive definite. Put $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$. At every point of their open domains, the local kick and drift from [[def-local-leapfrog-domain-on-an-open-configuration-set]] are $C^1$ and their Jacobians $A$ satisfy $A^TJA=J$. Here this matrix identity is the finite-regularity meaning of symplecticity; no smooth-manifold definition is being applied to a map of insufficient regularity.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[lem-canonical-kick-and-drift-shears-have-symplectic-jacobians]], every admitted local leapfrog step and every admitted kick-then-drift symplectic Euler step is a $C^1$ map with continuous Jacobian satisfying $D\\Phi^TJD\\Phi=J$ on its open admitted domain. The result concerns symplecticity, not energy conservation.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $Q\\subseteq\\mathbb R^d$ be open, $V\\in C^3(Q)$, and $M$ symmetric positive definite. Set $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ and $F(q,p)=(M^{-1}p,-\\nabla V(q))$. Fix $T>0$ and $h=T/N$ with $N\\ge1$. Suppose the exact solution, numerical states, all kick/drift intermediate states, and every line segment used below lie in one compact convex tube $K\\Subset Q\\times\\mathbb R^d$, with the derivatives of $F$ through order two bounded there. For $z_0$ in that tube, write $e_n^E$ for the error of iterated kick-then-drift symplectic Euler and $e_n^V$ for the error of iterated local leapfrog relative to the exact solution at $t_n=nh$. Write $\\Psi_h^E$ and $\\Psi_h^V$ for their admitted one-step maps and $\\varphi_h$ for the exact flow. For sufficiently small $h$, constants $C_E,C_V,L$ independent of $h,N,n$ satisfy\n$$\\|\\Psi_h^E(z)-\\varphi_h(z)\\|\\le C_Eh^2,\\qquad \\|\\Psi_h^V(z)-\\varphi_h(z)\\|\\le C_Vh^3$$\nfor admitted $z\\in K$, and whenever $nh\\le T$,\n$$e_n^E\\le e^{LT}e_0+C_ETe^{LT}h,\\qquad e_n^V\\le e^{LT}e_0+C_VTe^{LT}h^2.$$\nThus symplectic Euler has global order one and leapfrog has global order two on the stated controlled tube. No unconditional domain-admissibility claim is made.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+          "source_section": "Statement",
+          "quote": "For the Hamiltonian grid model of [[def-periodic-pic-separable-hamiltonian-grid-model]], let $\\phi=A_h^\\dagger\\rho(X)$. Its position gradient is\n$$ \\nabla_{X_p}U_h(X)=q_p\\sum_{j\\in J_N}\\nabla w_j^{\\varepsilon,h}(X_p)\\phi_j . $$\nAlong every differentiable solution of $\\dot X=M^{-1}p$, $\\dot p=-\\nabla_XU_h(X)$, the continuous semidiscrete energy $H_h(X(t),p(t))$ is constant. This is an invariant of the exact finite-grid ODE; no time-discrete energy conservation is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "The kicks and drifts in [F1] have inverses $K_{-a}$ and $D_{-b}$. Reversing the composition gives $\\Phi_{\\Delta t}^{-1}=K_{-\\Delta t/2}\\circ D_{-\\Delta t}\\circ K_{-\\Delta t/2}=\\Phi_{-\\Delta t}$. All maps are global on the periodic lift, so no intermediate-domain restriction is lost.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "The potential is smooth, hence $C^2$, and $M$ is symmetric positive definite. Each admitted kick and drift satisfies the symplectic Jacobian identity [F2]; composing the three maps preserves that identity by the chain rule, as stated in [F3].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "proof-step-1-3",
+          "claim": "The Jacobian of a kick is $\\begin{pmatrix}I&0\\\\-\\frac{\\Delta t}{2}\\nabla^2U_h&I\\end{pmatrix}$ and the Jacobian of a drift is $\\begin{pmatrix}I&\\Delta t M^{-1}\\\\0&I\\end{pmatrix}$. Each is block triangular with identity diagonal blocks, so its determinant is $1$; multiplicativity gives $\\det D\\Phi_{\\Delta t}=1$. The global kick/drift maps are $C^1$ diffeomorphisms, so [A1] permits applying [F5] to the map and its inverse, proving preservation of Lebesgue volume.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Under the tube and smoothness hypotheses, [F4] gives the stated global order-two error bound. The continuous invariant is the separate identity [F6]; it is not an assertion about the discrete map.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 cover signed steps and the stated finite interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.3 invokes Countable Choice only in the change-of-variables claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error. This is authoring evidence, not independent approval."
+      }
+    },
+    "thm-periodic-pic-staged-fixed-regularization-error-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-periodic-pic-smooth-density-grid-force-consistency",
+          "source_section": "Statement",
+          "quote": "Fix $\\varepsilon>0$ and a finite signed Borel measure $\\mu$ on $\\mathbb T_L^d$ with total mass $Q$. Let $\\rho_\\varepsilon=\\eta_\\varepsilon*\\mu-Q/L^d$ and let $\\phi_\\varepsilon$ be its unique zero-mean periodic Poisson potential from [[thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth]]. Put $E_\\varepsilon=-\\nabla\\phi_\\varepsilon$. Use the shape and periodic centered-difference Poisson operator of [[def-periodic-pic-shape-assignment-and-gather]] and [[def-periodic-pic-grid-and-inner-product]]. Let $s_h=P_h^\\varepsilon\\mu-Q/L^d$, let $A_h\\phi_h=s_h$ with $\\bar\\phi_h=0$, set $E_{h,j}=-D^0\\phi_h$, and gather $G_hE_h$ using the same shape. Define\n$$ C_{\\rm dep}=\\frac{C_\\eta\\|\\eta_\\varepsilon\\|_\\infty}{Z_{\\min}}\\|\\mu\\|_{\\rm TV},\\quad C_{\\rm FD}=\\frac1{12}\\sum_{a=1}^d\\|\\partial_a^4\\phi_\\varepsilon\\|_\\infty,\\quad C_{\\rm src}=C_{\\rm dep}+C_{\\rm FD}, $$ where $C_\\eta,Z_{\\min}$ are from [[lem-periodic-pic-shape-partition-and-quadrature-bound]]. Put $$ C_3=\\frac16\\left(\\sum_{a=1}^d\\|\\partial_a^3\\phi_\\varepsilon\\|_\\infty^2\\right)^{1/2},\\qquad C_{\\rm int}=\\frac{C_{\\eta,E}+\\|E_\\varepsilon\\|_\\infty C_\\eta}{Z_{\\min}}, \\quad C_{\\eta,E}=\\frac{L^d}{12}\\sum_{a=1}^d \\|\\partial_{aa}(\\eta_\\varepsilon E_\\varepsilon)\\|_\\infty . $$ Then the source $s_h$ is compatible and $$ \\|G_hE_h-\\eta_\\varepsilon*E_\\varepsilon\\|_\\infty \\le L^{d/2}h^{2-d/2}\\left(\\gamma_{N,L}C_{\\rm src}+C_3\\right) +C_{\\rm int}h^2. $$\nThe displayed $\\gamma_{N,L}$ is the actual finite-grid inverse/derivative norm of [[thm-periodic-pic-poisson-residual-to-gathered-force-bound]] and satisfies $\\gamma_{N,L}\\le L/4$. Thus for $d\\in\\{1,2,3\\}$ this fixed-$\\varepsilon$ force error tends to zero as $h\\to0$. Every constant depends on the stated smooth regularized solution and kernel; this is not an $\\varepsilon\\to0$ estimate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-pic-mean-field-error-with-force-defect",
+          "source_section": "Statement",
+          "quote": "Fix $\\varepsilon>0$ and grid width $h$. Let $\\mathbb K_\\varepsilon$ and $\\mathbb K_{\\varepsilon,h}$ be the phase kernels of [[def-periodic-pic-regularized-grid-interaction-kernel]], and let $L_\\varepsilon$ be the two-variable global Lipschitz constant of [[thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz]]. Suppose a probability characteristic solution $\\mu_t$ for $\\mathbb K_\\varepsilon$ and an equal-weight finite-particle grid solution with empirical law $\\nu_t^h$ are defined on $[0,T]$, with finite first moments and integrable path suprema. Assume the uniform grid-force defect\n$$ \\delta_{\\varepsilon,h}=\\sup_{z,z'\\in\\mathbb R^{2d}} |\\mathbb K_{\\varepsilon,h}(z,z')-\\mathbb K_\\varepsilon(z,z')|<\\infty . $$ If $\\delta_0=W_1(\\nu_0^h,\\mu_0)$ is the actual initial empirical-measure error, then for every $0\\le t\\le T$, $$ W_1(\\nu_t^h,\\mu_t)\\le e^{2L_\\varepsilon t} \\left(\\delta_0+t\\delta_{\\varepsilon,h}\\right). $$\nNo rate for $\\delta_0$ is implied: in particular, no dimension-free $P^{-1/2}$ Wasserstein rate is assumed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+          "source_section": "Statement",
+          "quote": "Fix $\\varepsilon>0$, grid width $h$, particle count $P\\ge1$, and final time $T>0$. Apply classical RK4 from [[alg-periodic-pic-classical-rk4-step]] to the autonomous finite-dimensional PIC system\n$$ \\dot Z=F_{\\varepsilon,h}(Z),\\qquad (F_{\\varepsilon,h}(Z))_p=\\frac1P\\sum_{r=1}^P \\mathbb K_{\\varepsilon,h}(z_p,z_r),\\qquad z_p=(X_p,V_p). $$ Let $Z(t)$ be an exact solution on $[0,T]$. Assume $F_{\\varepsilon,h}$ is $C^4$ on an open set containing a common compact convex tube $\\mathcal T$; the exact path, all numerical states, and every RK4 stage generated from both the exact and numerical starting states lie in $\\mathcal T$; and all derivatives of $F_{\\varepsilon,h}$ through order four are bounded there. Let $h_t=T/n$ for an integer $n\\ge1$, $h_t\\le h_0$, and initialize exactly. Put $$ L_F=2L_{\\varepsilon,h},\\qquad L_*=L_Fe^{L_Fh_0}, $$ and let $C_4$ be a uniform RK4 exact-start defect constant on this tube. Then, for every grid time $t_k=kh_t\\le T$, $$ \\|Z_k-Z(t_k)\\|_2\\le \\begin{cases} C_4\\dfrac{e^{L_*T}-1}{L_*}h_t^4,&L_*>0,\\\\[4pt] C_4Th_t^4,&L_*=0. \\end{cases} $$\nThe tube, exact-solution, and stage-admissibility hypotheses are conditional; this is a fixed-$\\varepsilon$, fixed-grid finite-particle time error, not a continuum or singular-force estimate.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-p-one-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$. For Borel probability measures $\\mu,\\nu$ on $\\mathbb R^d$ with finite first moments $\\int |x|\\,d\\mu(x)<\\infty$ and $\\int |y|\\,d\\nu(y)<\\infty$, let $\\Pi(\\mu,\\nu)$ be the set of Borel probability measures on $\\mathbb R^d\\times\\mathbb R^d$ whose first and second marginals are $\\mu$ and $\\nu$. Define\n$$W_1(\\mu,\\nu):=\\inf_{\\pi\\in\\Pi(\\mu,\\nu)}\\int_{\\mathbb R^d\\times\\mathbb R^d}|x-y|\\,d\\pi(x,y).$$\nThis definition makes no assertion that the infimum is attained. It applies only to probability measures with finite first moment; it is not a distance assigned here to a general signed measure.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Apply [F1] to each unit source $\\mu=\\delta_y$. The explicit constants in [F1] depend on the source through $\\|\\mu\\|_{\\rm TV}$ and suprema of derivatives of its continuum potential and field. Here $\\|\\delta_y\\|_{\\rm TV}=1$, and those continuum functions for $\\delta_y$ are translates of the functions for $\\delta_0$; their derivative suprema are therefore independent of $y$. The shape quadrature constants also do not depend on the translate. Thus one set of constants $C_{\\rm src}^{(1)},C_3^{(1)},C_{\\rm int}^{(1)}$ gives the stated uniform phase-kernel defect bound, without asserting translation invariance of the finite grid kernel.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "Let $A$ be the finite support of $\\nu_0^h$ and $I_a=\\{p:z_p^h(0)=a\\}$, $m_a=|I_a|$ for $a\\in A$. For any prescribed coupling $\\pi_0$ of $\\nu_0^h$ and $\\mu_0$, define a measure on the second coordinate for each label $p\\in I_a$ by $\\lambda_p(B)=\\pi_0(\\{a\\}\\times B)/m_a$. Since $\\nu_0^h(\\{a\\})=m_a/P$, each $\\lambda_p$ has mass $1/P$, and for each $a$ the sum over $p\\in I_a$ is $\\pi_0(\\{a\\}\\times\\cdot)$. By the duplicate-path argument in [[thm-periodic-pic-mean-field-error-with-force-defect]], all labels in $I_a$ share the same exact path $X_t(a)$. Thus summing these label measures gives exactly the pushforward $\\Pi_t=(X_t,Y_t)_\\#\\pi_0$, the Dobrushin-transported coupling, where $Y_t$ is the continuum characteristic flow. In particular, $\\Pi_t$ has the exact grid and continuum marginals. Its cost is at most $e^{2L_\\varepsilon T}(D_0+T\\delta_{\\varepsilon,h})$ by [F2]. Replace $z_p^h(t)$ in each summand by the RK4 state $z_p^{\\Delta t}(t)$. The resulting measure is a coupling of $\\nu_{P,h}^{\\Delta t}(t)$ and $\\mu_\\varepsilon(t)$, and pointwise triangle inequality increases its cost by at most $P^{-1}\\sum_p|z_p^{\\Delta t}-z_p^h|$. By Cauchy–Schwarz this is at most $P^{-1/2}\\|Z^{\\Delta t}-Z^h\\|_2\\le P^{-1/2}C_{\\rm RK}\\Delta t^4$ using [F3]. This gives the claimed bound with $D_0$ in place of $\\delta_0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "The bound of step 1.2 holds for every prescribed initial coupling. Taking the infimum of $D_0$ gives $\\delta_0$ by [F4], without selecting a minimizing plan. This proves the stated staged error budget.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 show the mesh-force term vanishes when cQ=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 and Cauchy–Schwarz remain valid for P=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and step 2.1 cover each t_n≤T, including the initial endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 takes the infimum over prescribed couplings without choosing an optimizer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for thm-periodic-pic-staged-fixed-regularization-error-budget. This is authoring evidence, not independent approval."
+      }
+    },
+    "ex-periodic-high-frequency-pic-sampling-alias": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-fourier-collocation-grid",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge2$ be an integer, let $x_j=2\\pi j/N$ for $j=0,\\ldots,N-1$, and identify $x_N$ with $x_0$ periodically. The real trigonometric interpolation space is\n$$\\mathcal T_N= \\begin{cases} \\operatorname{span}_{\\mathbb R}\\{1,\\cos(kx),\\sin(kx):1\\le k\\le (N-1)/2\\},&N\\text{ odd},\\\\ \\operatorname{span}_{\\mathbb R}\\{1,\\cos(kx),\\sin(kx):1\\le k<N/2\\}\\oplus\\operatorname{span}_{\\mathbb R}\\{\\cos(Nx/2)\\},&N\\text{ even}. \\end{cases}$$\nFor real nodal data $U=(U_0,\\ldots,U_{N-1})$, define its periodic Fourier interpolant by\n$$\nI_NU(x)=\\sum_{j=0}^{N-1}U_jL_j(x),\n$$\nwhere, for $N=2K+1$,\n$$\nL_j(x)=\\frac1N\\left(1+2\\sum_{k=1}^{K}\\cos(k(x-x_j))\\right),\n$$\nand, for $N=2K$,\n$$\nL_j(x)=\\frac1N\\left(1+2\\sum_{k=1}^{K-1}\\cos(k(x-x_j))+\\cos(K(x-x_j))\\right).\n$$\nThus the even-grid Nyquist component is the real cosine $\\cos(Nx/2)$ only. Its sampled derivative is defined by differentiating this interpolant; the resulting Nyquist derivative values are zero at every grid point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-fourier-mode-aliasing-under-sampling",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge2$ and $x_j=2\\pi j/N$. If integers $k,r$ satisfy $k\\equiv r\\pmod N$, then\n$$\ne^{ikx_j}=e^{irx_j}\\qquad(0\\le j<N).\n$$\nConsequently, sampling a product of Fourier modes with frequencies $k_1,\\ldots,k_s$ gives the same nodal data as the single mode whose frequency is the sum $\\sum_{\\ell=1}^s k_\\ell$ reduced modulo $N$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-periodic-fourier-collocation-differentiation-matrix",
+          "source_section": "Definition",
+          "quote": "Input an integer $N\\ge2$ and real data $U_0,\\ldots,U_{N-1}$ on the grid of [[def-periodic-fourier-collocation-grid]]. Set $K=(N-1)/2$ when $N$ is odd and $K=N/2$ when $N$ is even. Form the $(N\\times N)$ matrix\n$$(D_N)_{ij}= \\begin{cases} -\\dfrac2N\\displaystyle\\sum_{k=1}^{K}k\\sin(k(x_i-x_j)),&N\\text{ odd},\\\\[1.2ex] -\\dfrac2N\\displaystyle\\sum_{k=1}^{K-1}k\\sin(k(x_i-x_j)),&N\\text{ even}, \\end{cases} \\qquad 0\\le i,j<N.$$\nThe algorithm returns $D_N$ and the derivative vector $D_NU$. In the even case it omits the derivative of the Nyquist cosine because $\\sin((N/2)(x_i-x_j))=0$ for grid indices $i,j$. All operations are in exact real arithmetic; no floating-point stability or error guarantee is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-fourier-collocation-differentiation-is-exact",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge2$, let $U=(U_j)_{j=0}^{N-1}\\in\\mathbb R^N$, and let $p=I_NU\\in\\mathcal T_N$ be the interpolant defined in [[def-periodic-fourier-collocation-grid]]. The matrix [[alg-periodic-fourier-collocation-differentiation-matrix]] satisfies\n$$\n(D_NU)_i=p'(x_i),\\qquad 0\\le i<N.\n$$\nFor even $N$, this statement includes the Nyquist cosine mode, whose derivative vanishes at the grid nodes.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Since $6\\equiv1\\pmod5$, [F2] gives $e^{i6x_j}=e^{ix_j}$ for each $j$. Taking real parts yields $\\rho(x_j)=\\cos(x_j)$, whose unique odd-grid interpolant is $\\cos x$ by [F1]. On the five-mode space $|k|\\le2$, the collocation operator $-\\partial_x^2$ multiplies mode $k$ by $k^2$, so its only zero mode is the constant. Therefore $\\phi_N=\\cos x$ is the unique zero-mean collocation solution to these sampled data.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Direct differentiation gives $-\\frac{d^2}{dx^2}\\bigl(\\cos(6x)/36\\bigr)=\\cos(6x)$ and $-\\frac{d}{dx}\\bigl(\\cos(6x)/36\\bigr)=\\sin(6x)/6$. Since $\\phi_N=\\cos x$, exact collocation differentiation [F3], applied twice to its interpolant, gives computed field $E_N=\\sin x$. At each node, $\\sin(6x_j)=\\sin(x_j+2\\pi j)=\\sin x_j$, so $E_N(x_j)=6E(x_j)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 verifies the five grid nodes directly through 6≡1 mod 5."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 uses an odd grid and has no Nyquist mode."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "mode-6-aliases-mode-1-N5",
+          "asserts": "At x_j=2πj/5, e^{i6x_j}=e^{ix_j}, so the sampled forcing is cos(x_j).",
+          "claim": "The nodal alias and force discrepancy are exact.",
+          "checked_in": "Steps 1.1–2.1",
+          "N": 5,
+          "frequency": 6
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for ex-periodic-high-frequency-pic-sampling-alias. This is authoring evidence, not independent approval."
+      }
+    },
+    "cex-periodic-nonneutral-source-has-no-poisson-solution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-grid-and-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a spatial dimension $d\\in\\{1,2,3\\}$, side length $L>0$, and odd integer $N\\ge3$. Put $h=L/N$ and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$. The periodic grid has index set $J_N=(\\mathbb Z/N\\mathbb Z)^d$ and nodes $x_j=hj$ modulo $L$. A grid scalar is a real array $u=(u_j)_{j\\in J_N}$; a grid vector has $d$ real components at each node. Define\n$$ \\langle u,v\\rangle_h=h^d\\sum_{j\\in J_N}u_jv_j,\\qquad \\|u\\|_h=\\langle u,u\\rangle_h^{1/2},\\qquad \\bar u=L^{-d}h^d\\sum_{j\\in J_N}u_j . $$ The same pairing is componentwise for grid vectors. For the coordinate vector $e_a$, define the centered field difference and positive periodic Poisson stencil by $$ (D_a^0u)_j=\\frac{u_{j+e_a}-u_{j-e_a}}{2h},\\qquad (A_hu)_j=\\sum_{a=1}^d\\frac{2u_j-u_{j+e_a}-u_{j-e_a}}{h^2}. $$\nAll indices wrap modulo $N$. The discrete Fourier index set is $\\mathcal K_N=\\{-\\frac{N-1}{2},\\ldots,\\frac{N-1}{2}\\}^d$; the character at $k\\in\\mathcal K_N$ is $j\\mapsto e^{2\\pi i k\\cdot j/N}$. This odd-grid convention has no Nyquist mode.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+          "source_section": "Statement",
+          "quote": "Use the grid, inner product, and operator $A_h$ of [[def-periodic-pic-grid-and-inner-product]]. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h$ consists exactly of constant arrays, and $\\operatorname{ran}A_h=\\{s:\\bar s=0\\}$. Consequently, for every compatible source $\\bar s=0$, there is a unique solution $\\phi$ of $A_h\\phi=s$ with the gauge $\\bar\\phi=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "The deposited source has total grid charge $h\\sum_js_j=\\sum_jw_j(X)=1$ by [F3]. Since $L=1$, its grid mean is $\\bar s=L^{-1}h\\sum_js_j=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "By [F2], every solvable source for $A_h\\phi=s$ must have zero mean. Step 1.1 gives $\\bar s=1$, so this unneutralized Poisson equation is incompatible. Subtracting the uniform background $1/L=1$ would instead make the source mean zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 computes the specified one-particle source."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "nonneutral-one-particle",
+          "asserts": "For L=1 and charge 1, the unneutralized source has mean 1, while every A_h output has mean 0.",
+          "claim": "The incompatibility obstruction is visible on the smallest admissible odd grid.",
+          "checked_in": "Steps 1.1–2.1",
+          "N": 3,
+          "particles": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for cex-periodic-nonneutral-source-has-no-poisson-solution. This is authoring evidence, not independent approval."
+      }
+    },
+    "ex-cold-two-stream-stipulated-pic-experiment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-regularized-grid-interaction-kernel",
+          "source_section": "Definition",
+          "quote": "Fix $\\varepsilon>0$, $d\\in\\{1,2,3\\}$, $L>0$, and a regularized one-species model with total charge $Q$ and total mass $M>0$. Let $c=Q/M$. For each position $y\\in\\mathbb T_L^d$, define the continuous unit-source field by taking the zero-mean solution $\\phi_\\varepsilon^y$ from [[thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth]] for $\\mu=\\delta_y$, and setting\n$$ \\mathcal E_\\varepsilon(x,y)=\\int_{\\mathbb T_L^d}\\eta_\\varepsilon(z-x)(-\\nabla\\phi_\\varepsilon^y(z))\\,dz =\\frac1{L^d}\\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}} \\frac{-i\\kappa_k}{|\\kappa_k|^2} \\left(\\prod_{a=1}^d\\alpha_\\varepsilon^{2|k_a|}\\right)e^{i\\kappa_k\\cdot(x-y)} . $$ The series converges absolutely with all derivatives by geometric summability. For the grid branch, let $\\phi_h^y$ be the mean-zero solution of $$ A_h\\phi_h^y=h^{-d}w^{\\varepsilon,h}(y)-L^{-d}\\mathbf1 $$ whose compatibility follows from [[thm-periodic-pic-charge-conservation-and-neutralized-source]], and put $$ \\mathcal E_{\\varepsilon,h}(x,y)=\\sum_{j\\in J_N}w_j^{\\varepsilon,h}(x)(-D^0\\phi_h^y)_j . $$ If $z=(x,v)$ and $z'=(y,w)$ are lifted phase-space states in $\\mathbb R^{2d}$, the continuum and grid mean-field kernels are $$ \\mathbb K_\\varepsilon(z,z')=(v,cQ\\,\\mathcal E_\\varepsilon(x,y)),\\qquad \\mathbb K_{\\varepsilon,h}(z,z')=(v,cQ\\,\\mathcal E_{\\varepsilon,h}(x,y)). $$\nThe spatial components are periodic in their position variables. A finite equal-weight system $\\dot z_p=P^{-1}\\sum_{r=1}^P\\mathbb K_{\\varepsilon,h}(z_p,z_r)$ uses particle charge $Q/P$ and mass $M/P$. No claim about the limit $\\varepsilon\\to0$ is part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "source_section": "Statement",
+          "quote": "For positions $X_1,\\ldots,X_P\\in\\mathbb T_L^d$ and real charges $q_1,\\ldots,q_P$, define $Q=\\sum_pq_p$ and an admissible algebraic assignment shape $w_j$ as in [[def-periodic-pic-shape-assignment-and-gather]]. Then\n$$ h^d\\sum_{j\\in J_N}h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)=Q . $$\nConsequently the neutralized source $\\rho_j(X)=h^{-d}\\sum_pq_pw_j(X_p)-Q/L^d$ has mean zero and is in the range of the periodic Poisson operator; it therefore has a unique mean-zero potential for the gauge $\\bar\\phi=0$ by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "There are $2\\cdot63=126$ labels. Their positive charges sum to $126/126=1=Q$ and their positive masses sum to $126/126=1=M$. Within each fixed $\\sigma$, every velocity equals $\\sigma/2$, so the two populations are cold counter-streaming beams.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "The stated positions are points of $\\mathbb T_{2\\pi}$ after reduction modulo $2\\pi$, and $N=63$ is odd as required by the grid convention. At each of the finitely many RK4 stages, the smooth-shape deposition conserves charge $Q=1$; subtracting the uniform background $Q/L=1/(2\\pi)$ makes the source compatible by [F2]. The finite Fourier Poisson solve therefore returns a potential at every stage, so this exact-arithmetic experiment is defined. No physical conclusion follows from this specification.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter changes the proof branch beyond any explicitly stated zero-mode case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 checks the two finite beam populations."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 verifies positions modulo the periodic side length."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "cold-two-stream-inventory",
+          "asserts": "Two beams of 63 particles each give P=126, Q=M=1 and velocities +1/2 and -1/2.",
+          "claim": "The stipulated initial state has the declared particle, charge, mass and cold-beam values.",
+          "checked_in": "Steps 1.1–2.1",
+          "N": 63,
+          "particles": 126
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for ex-cold-two-stream-stipulated-pic-experiment. This is authoring evidence, not independent approval."
+      }
+    },
+    "ex-periodic-one-dimensional-pic-cic-charge-deposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-pic-grid-and-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a spatial dimension $d\\in\\{1,2,3\\}$, side length $L>0$, and odd integer $N\\ge3$. Put $h=L/N$ and $\\mathbb T_L^d=(\\mathbb R/L\\mathbb Z)^d$. The periodic grid has index set $J_N=(\\mathbb Z/N\\mathbb Z)^d$ and nodes $x_j=hj$ modulo $L$. A grid scalar is a real array $u=(u_j)_{j\\in J_N}$; a grid vector has $d$ real components at each node. Define\n$$ \\langle u,v\\rangle_h=h^d\\sum_{j\\in J_N}u_jv_j,\\qquad \\|u\\|_h=\\langle u,u\\rangle_h^{1/2},\\qquad \\bar u=L^{-d}h^d\\sum_{j\\in J_N}u_j . $$ The same pairing is componentwise for grid vectors. For the coordinate vector $e_a$, define the centered field difference and positive periodic Poisson stencil by $$ (D_a^0u)_j=\\frac{u_{j+e_a}-u_{j-e_a}}{2h},\\qquad (A_hu)_j=\\sum_{a=1}^d\\frac{2u_j-u_{j+e_a}-u_{j-e_a}}{h^2}. $$\nAll indices wrap modulo $N$. The discrete Fourier index set is $\\mathcal K_N=\\{-\\frac{N-1}{2},\\ldots,\\frac{N-1}{2}\\}^d$; the character at $k\\in\\mathcal K_N$ is $j\\mapsto e^{2\\pi i k\\cdot j/N}$. This odd-grid convention has no Nyquist mode.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-pic-charge-conservation-and-neutralized-source",
+          "source_section": "Statement",
+          "quote": "For positions $X_1,\\ldots,X_P\\in\\mathbb T_L^d$ and real charges $q_1,\\ldots,q_P$, define $Q=\\sum_pq_p$ and an admissible algebraic assignment shape $w_j$ as in [[def-periodic-pic-shape-assignment-and-gather]]. Then\n$$ h^d\\sum_{j\\in J_N}h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)=Q . $$\nConsequently the neutralized source $\\rho_j(X)=h^{-d}\\sum_pq_pw_j(X_p)-Q/L^d$ has mean zero and is in the range of the periodic Poisson operator; it therefore has a unique mean-zero potential for the gauge $\\bar\\phi=0$ by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-periodic-pic-deposition-potential-gather-adjointness",
+          "source_section": "Statement",
+          "quote": "Let $\\rho^+_j=h^{-d}\\sum_pq_pw_j(X_p)$ be the deposited density before background subtraction for an admissible algebraic shape $w_j$ of [[def-periodic-pic-shape-assignment-and-gather]], and let $G_X$ be its scalar potential gather. For every grid scalar $\\phi$,\n$$ \\langle\\rho^+,\\phi\\rangle_h=\\sum_{p=1}^P q_p(G_X\\phi)_p . $$ For the neutralized density $\\rho=\\rho^+-Q/L^d$ the corresponding identity is $$ \\langle\\rho,\\phi\\rangle_h=\\sum_pq_p(G_X\\phi)_p-Q\\bar\\phi . $$\nThus the background term vanishes in the zero-mean potential gauge.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-periodic-pic-shape-assignment-and-gather",
+          "source_section": "Definition",
+          "quote": "On the torus and grid of [[def-periodic-pic-grid-and-inner-product]], an algebraic assignment shape is any family of functions $w_j:\\mathbb T_L^d\\to[0,\\infty)$ such that $\\sum_{j\\in J_N}w_j(x)=1$ for every $x$. For the smooth fixed-$\\varepsilon$ branch used in the force-error and ODE results, put $\\alpha_\\varepsilon=e^{-\\varepsilon/L}$ and choose the explicit even periodic kernel\n$$ \\eta_\\varepsilon(x)=L^{-d}\\prod_{a=1}^d \\frac{1-\\alpha_\\varepsilon^2}{1-2\\alpha_\\varepsilon\\cos(2\\pi x_a/L)+\\alpha_\\varepsilon^2}. $$ For this smooth branch and each $x\\in\\mathbb T_L^d$, set $$ Z_{\\varepsilon,h}(x)=h^d\\sum_{j\\in J_N}\\eta_\\varepsilon(x_j-x),\\qquad w_j^{\\varepsilon,h}(x)=\\frac{h^d\\eta_\\varepsilon(x_j-x)}{Z_{\\varepsilon,h}(x)}. $$ Each factor in the kernel denominator is positive, so $Z_{\\varepsilon,h}(x)>0$ and the smooth-branch weights are well-defined. For any algebraic shape family above and finitely many particle positions $X=(X_1,\\ldots,X_P)$ with charges $q_1,\\ldots,q_P\\in\\mathbb R$, write $Q=\\sum_{p=1}^Pq_p$ and define deposited charge density $$ \\rho_j(X)=h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)-Q/L^d . $$\nFor any grid scalar $g$, its potential gather is $(G_Xg)_p=\\sum_jw_j(X_p)g_j$. For any grid vector $E$, its field gather is defined componentwise by the same weights, $(G_XE)_p=\\sum_jw_j(X_p)E_j$. On the smooth fixed-$\\varepsilon$ branch, $w_j$ means the explicit family $w_j^{\\varepsilon,h}$ above.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Since $h^{-1}=5$, the two nonzero assigned densities are $5\\cdot2\\cdot(2/3)=20/3$ and $5\\cdot2\\cdot(1/3)=10/3$. The background is $Q/L=2$, so the neutralized values are $14/3,4/3,-2,-2,-2$; their sum is $6-6=0$, hence their cell-weighted sum is zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "For any point in a periodic cell $[x_j,x_{j+1}]$, with its right endpoint interpreted modulo $L$, the CIC formula gives $w_j=(x_{j+1}-x)/h$ and $w_{j+1}=(x-x_j)/h$; all other weights vanish. Both are nonnegative and sum to one. At a grid node this reduces to the single weight one. Hence the stated CIC family is a nonnegative normalized assignment shape.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "The pre-neutralized cell-weighted sum is $h(20/3+10/3)=2$, verifying charge conservation directly; [F3] also applies because step 1.2 proves the shape partition. By [F4], the potential pairing equals $2(\\frac23\\phi_0+\\frac13\\phi_1)-2\\bar\\phi$. Since $\\bar\\phi=\\frac15\\sum_{j=0}^4\\phi_j$, the formula includes exactly the contribution of the uniform background.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "Near node $x_0=0$, the periodic distance formula gives $w_0(x)=1+x/h$ for $-h<x<0$ and $w_0(x)=1-x/h$ for $0<x<h$. The one-sided derivatives at the node are $1/h$ and $-1/h$, so the CIC weight is continuous but not differentiable at this grid crossing. Therefore CIC regularity alone does not supply the $C^4$ vector-field hypothesis of the RK4 error theorem; the page's time-error claim uses the separate smooth fixed-$\\varepsilon$ branch.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 computes the zero mean after neutralization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 evaluates the one-particle case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 covers grid nodes and periodic endpoint identification."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "CIC-deposit-N5",
+          "asserts": "For q=2 at x=h/3, ρ=(14/3,4/3,-2,-2,-2) and hΣρ=0.",
+          "claim": "The deposit, neutralization and adjoint pairing are consistent on the displayed finite grid.",
+          "checked_in": "Steps 1.1–3.1",
+          "N": 5,
+          "particles": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for ex-periodic-one-dimensional-pic-cic-charge-deposition. This is authoring evidence, not independent approval."
+      }
+    },
+    "ex-periodic-smooth-density-poisson-grid-force-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+          "source_section": "Statement",
+          "quote": "Let $\\eta_\\varepsilon$ be the explicit product kernel in [[def-periodic-pic-shape-assignment-and-gather]], with $\\alpha_\\varepsilon=e^{-\\varepsilon/L}\\in(0,1)$. Let $\\mu$ be a finite signed Borel measure on $\\mathbb T_L^d$ with mass $Q$ and total variation $\\|\\mu\\|_{\\rm TV}$. Put\n$$ \\widehat\\mu(k)=\\int_{\\mathbb T_L^d}e^{-2\\pi i k\\cdot y/L}\\,d\\mu(y),\\qquad \\kappa_k=2\\pi k/L . $$ Then $\\eta_\\varepsilon$ is strictly positive, even, smooth, and has integral one. The regularized neutralized source $$ \\rho_\\varepsilon^\\mu(x)=\\int_{\\mathbb T_L^d}\\eta_\\varepsilon(x-y)\\,d\\mu(y)-Q/L^d $$ is $C^\\infty$ with zero mean. Its unique zero-mean periodic solution of $-\\Delta\\phi_\\varepsilon^\\mu=\\rho_\\varepsilon^\\mu$ is the absolutely and uniformly differentiable Fourier series $$ \\phi_\\varepsilon^\\mu(x)=L^{-d}\\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}} \\frac{\\left(\\prod_{a=1}^d\\alpha_\\varepsilon^{|k_a|}\\right)\\widehat\\mu(k)} {|\\kappa_k|^2}e^{i\\kappa_k\\cdot x}. $$\nFor every integer $r\\ge0$, all spatial derivative series of order at most $r$ converge absolutely and uniformly; their bounds may depend on $r,\\varepsilon,L,\\|\\mu\\|_{\\rm TV}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-pic-smooth-density-grid-force-consistency",
+          "source_section": "Statement",
+          "quote": "Fix $\\varepsilon>0$ and a finite signed Borel measure $\\mu$ on $\\mathbb T_L^d$ with total mass $Q$. Let $\\rho_\\varepsilon=\\eta_\\varepsilon*\\mu-Q/L^d$ and let $\\phi_\\varepsilon$ be its unique zero-mean periodic Poisson potential from [[thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth]]. Put $E_\\varepsilon=-\\nabla\\phi_\\varepsilon$. Use the shape and periodic centered-difference Poisson operator of [[def-periodic-pic-shape-assignment-and-gather]] and [[def-periodic-pic-grid-and-inner-product]]. Let $s_h=P_h^\\varepsilon\\mu-Q/L^d$, let $A_h\\phi_h=s_h$ with $\\bar\\phi_h=0$, set $E_{h,j}=-D^0\\phi_h$, and gather $G_hE_h$ using the same shape. Define\n$$ C_{\\rm dep}=\\frac{C_\\eta\\|\\eta_\\varepsilon\\|_\\infty}{Z_{\\min}}\\|\\mu\\|_{\\rm TV},\\quad C_{\\rm FD}=\\frac1{12}\\sum_{a=1}^d\\|\\partial_a^4\\phi_\\varepsilon\\|_\\infty,\\quad C_{\\rm src}=C_{\\rm dep}+C_{\\rm FD}, $$ where $C_\\eta,Z_{\\min}$ are from [[lem-periodic-pic-shape-partition-and-quadrature-bound]]. Put $$ C_3=\\frac16\\left(\\sum_{a=1}^d\\|\\partial_a^3\\phi_\\varepsilon\\|_\\infty^2\\right)^{1/2},\\qquad C_{\\rm int}=\\frac{C_{\\eta,E}+\\|E_\\varepsilon\\|_\\infty C_\\eta}{Z_{\\min}}, \\quad C_{\\eta,E}=\\frac{L^d}{12}\\sum_{a=1}^d \\|\\partial_{aa}(\\eta_\\varepsilon E_\\varepsilon)\\|_\\infty . $$ Then the source $s_h$ is compatible and $$ \\|G_hE_h-\\eta_\\varepsilon*E_\\varepsilon\\|_\\infty \\le L^{d/2}h^{2-d/2}\\left(\\gamma_{N,L}C_{\\rm src}+C_3\\right) +C_{\\rm int}h^2. $$\nThe displayed $\\gamma_{N,L}$ is the actual finite-grid inverse/derivative norm of [[thm-periodic-pic-poisson-residual-to-gathered-force-bound]] and satisfies $\\gamma_{N,L}\\le L/4$. Thus for $d\\in\\{1,2,3\\}$ this fixed-$\\varepsilon$ force error tends to zero as $h\\to0$. Every constant depends on the stated smooth regularized solution and kernel; this is not an $\\varepsilon\\to0$ estimate.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Since $0<a<1$, the density $(1+a\\cos y)/(2\\pi)$ is nonnegative and integrates to one. Convolving its constant and first Fourier modes with [F1] leaves the constant coefficient $1/(2\\pi)$ and multiplies the cosine coefficient by $\\alpha_\\varepsilon$. Subtracting the neutralizing background gives the displayed source. Since $-\\frac{d^2}{dx^2}\\cos x=\\cos x$, the unique zero-mean potential is $\\phi_\\varepsilon=(a\\alpha_\\varepsilon/(2\\pi))\\cos x$, and differentiation yields the displayed $E_\\varepsilon$. A second convolution multiplies its sine mode by $\\alpha_\\varepsilon$, giving $\\eta_\\varepsilon*E_\\varepsilon=a\\alpha_\\varepsilon^2(2\\pi)^{-1}\\sin x$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Apply [F2] to this smooth source on an odd $N$ grid. Since $d=1$, the power $h^{2-d/2}$ equals $h^{3/2}$, and $L^{d/2}=(2\\pi)^{1/2}$, giving the displayed estimate. The upper bound $\\gamma_{N,2\\pi}\\le\\pi/2$ is uniform in $N$, and all fixed-$\\varepsilon$ derivative constants are finite by [F1]; both powers $h^{3/2}$ and $h^2$ tend to zero. No limit as $\\varepsilon\\to0$ is taken.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 removes the constant Fourier mode by neutralization."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton parameter changes the argument beyond its stated positivity and finite-sum hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 takes odd N→∞ at fixed L and ε."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "regularized-first-fourier-mode",
+          "asserts": "The first cosine mode is multiplied by α_ε under η_ε convolution and once more under gathered convolution.",
+          "claim": "The exact continuum field and target used by the mesh-error estimate have the stated Fourier coefficients.",
+          "checked_in": "Steps 1.1–2.1",
+          "frequency": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for ex-periodic-smooth-density-poisson-grid-force-error. This is authoring evidence, not independent approval."
+      }
+    },
+    "ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-leapfrog-step-map",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and let $M$ be a real symmetric positive-definite $d\\times d$ matrix. Write $\\nabla U$ for its Euclidean gradient, and let $\\epsilon>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+          "source_section": "Statement",
+          "quote": "For the Hamiltonian grid model of [[def-periodic-pic-separable-hamiltonian-grid-model]], let $\\phi=A_h^\\dagger\\rho(X)$. Its position gradient is\n$$ \\nabla_{X_p}U_h(X)=q_p\\sum_{j\\in J_N}\\nabla w_j^{\\varepsilon,h}(X_p)\\phi_j . $$\nAlong every differentiable solution of $\\dot X=M^{-1}p$, $\\dot p=-\\nabla_XU_h(X)$, the continuous semidiscrete energy $H_h(X(t),p(t))$ is constant. This is an invariant of the exact finite-grid ODE; no time-discrete energy conservation is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error",
+          "source_section": "Statement",
+          "quote": "Let $H_h(X,p)=\\frac12p^TM^{-1}p+U_h(X)$ be [[def-periodic-pic-separable-hamiltonian-grid-model]], with $M$ symmetric positive definite and $U_h\\in C^3(\\mathbb R^{dP})$ periodic. Let $\\Phi_{\\Delta t}=K_{\\Delta t/2}\\circ D_{\\Delta t}\\circ K_{\\Delta t/2}$ be the leapfrog map with the kick and drift conventions of [[def-leapfrog-step-map]]. Then:",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "The half kick gives $p_{1/2}=p_0-(\\Delta t/2)q_0=-1/4$. The drift gives $q_1=q_0+\\Delta t p_{1/2}=1-(1/2)(1/4)=7/8$. The final half kick gives $p_1=p_{1/2}-(\\Delta t/2)q_1=-1/4-7/32=-15/32$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "For the oscillator, $\\dot q=p$ and $\\dot p=-q$, so $\\frac{d}{dt}H=qp-pq=0$. The kick and drift matrices for the test are $K_{1/4}=\\begin{pmatrix}1&0\\\\-1/4&1\\end{pmatrix},\\qquad D_{1/2}=\\begin{pmatrix}1&1/2\\\\0&1\\end{pmatrix}.$ Each has determinant one. Direct multiplication gives $A^TJA=(\\det A)J=J$ for every real $2\\times2$ matrix $A$, where $J=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$, so their composition is symplectic. The shears have inverses $K_{-1/4}$ and $D_{-1/2}$; reversing the palindromic composition with these inverses proves the step reversible. The exact Hamiltonian at the updated point is $H(q_1,p_1)=\\frac12\\left(\\frac{49}{64}+\\frac{225}{1024}\\right)=\\frac12\\frac{1009}{1024}=\\frac{1009}{2048},$ while $H(q_0,p_0)=1/2=1024/2048$. Their difference is $-15/2048$. Therefore this reversible symplectic step does not preserve its Hamiltonian exactly. The separate PIC results [F2] and [F3] concern their own variational force and tube hypotheses and are not transferred to this scalar test.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty indexed object or empty-domain branch; its hypotheses specify the finite objects used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 sets p₀=0 explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 evaluates one complete kick-drift-kick step."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate configuration occurs beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item has no separate interval-endpoint branch beyond its stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite constructions and does not choose from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional requiring a reverse implication worksheet."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "harmonic-leapfrog-dt-half",
+          "asserts": "Starting at (1,0), one Δt=1/2 step gives (7/8,-15/32) and H_1=1009/2048≠1/2.",
+          "claim": "Exact rational arithmetic verifies reversible symplectic leapfrog need not preserve H exactly.",
+          "checked_in": "Steps 1.1–2.1",
+          "dt": "1/2"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-61 author self-check",
+        "notes": "Final proof steps, exact supplier excerpts, declared inputs, boundary cases and applicable finite checks were reviewed for ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode. This is authoring evidence, not independent approval."
+      }
+    }
+  }
+}

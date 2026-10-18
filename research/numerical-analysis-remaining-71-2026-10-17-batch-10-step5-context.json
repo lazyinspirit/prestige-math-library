@@ -1,0 +1,202 @@
+{
+  "group": "d",
+  "batches": [
+    "10"
+  ],
+  "pages_read": [
+    "tensor-train-compression-and-truncation-error",
+    "tensor-train-compression-and-truncation-error-examples"
+  ],
+  "items_read": [
+    "def-finite-tensor-arrays-and-frobenius-inner-product",
+    "lem-tensor-unfoldings-are-frobenius-isometries",
+    "def-tucker-multilinear-rank-and-mode-products",
+    "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+    "def-canonical-polyadic-rank",
+    "thm-best-rank-k-frobenius-matrix-approximation",
+    "lem-full-column-rank-matrix-least-squares-solution",
+    "alg-sequential-tensor-train-svd",
+    "alg-tensor-train-rounding",
+    "thm-tensor-train-storage-and-inner-product-cost",
+    "alg-hosvd-truncation",
+    "alg-budgeted-cp-alternating-least-squares",
+    "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+    "thm-hosvd-quasioptimal-multilinear-rank-error",
+    "thm-exact-cp-als-block-updates-are-monotone",
+    "cex-best-rank-two-cp-approximation-may-not-exist",
+    "ex-separable-grid-tensor-has-tt-rank-one",
+    "ex-two-tt-truncations-realise-root-sum-squares-bound",
+    "ex-diagonal-tensor-has-large-minimal-tt-ranks"
+  ],
+  "conventions": [
+    {
+      "convention": "The field is real or complex, tensor order is at least two, and physical mode sizes are positive. The Frobenius pairing conjugates its first argument. Mode and cut unfoldings use the specified lexicographic tuple order.",
+      "fixed_by": "def-finite-tensor-arrays-and-frobenius-inner-product",
+      "matters_for": [
+        "lem-tensor-unfoldings-are-frobenius-isometries",
+        "alg-sequential-tensor-train-svd",
+        "alg-tensor-train-rounding",
+        "alg-hosvd-truncation",
+        "alg-budgeted-cp-alternating-least-squares",
+        "thm-tensor-train-storage-and-inner-product-cost",
+        "ex-two-tt-truncations-realise-root-sum-squares-bound"
+      ]
+    },
+    {
+      "convention": "Mode products contract entries bilinearly without conjugation; multilinear-rank approximation uses bounds on every mode-unfolding matrix rank.",
+      "fixed_by": "def-tucker-multilinear-rank-and-mode-products",
+      "matters_for": [
+        "alg-hosvd-truncation",
+        "thm-hosvd-quasioptimal-multilinear-rank-error"
+      ]
+    },
+    {
+      "convention": "TT boundary bond sizes equal one; internal bond sizes may be zero. Empty bond sums represent zero. Left-isometry means L*L=I, and right-isometry means RR*=I.",
+      "fixed_by": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+      "matters_for": [
+        "alg-sequential-tensor-train-svd",
+        "alg-tensor-train-rounding",
+        "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+        "thm-tensor-train-storage-and-inner-product-cost",
+        "ex-separable-grid-tensor-has-tt-rank-one",
+        "ex-diagonal-tensor-has-large-minimal-tt-ranks"
+      ]
+    },
+    {
+      "convention": "CP rank is the least nonnegative number of elementary tensor summands; the empty sum represents zero and gives CP rank zero.",
+      "fixed_by": "def-canonical-polyadic-rank",
+      "matters_for": [
+        "alg-budgeted-cp-alternating-least-squares",
+        "cex-best-rank-two-cp-approximation-may-not-exist"
+      ]
+    },
+    {
+      "convention": "Sequential TT-SVD uses exact arithmetic and exactly one of nonnegative rank caps or absolute tail tolerances. Each tail is measured on the current remainder. Tolerance selection chooses the least admissible retained rank; zero retained rank terminates subsequent truncations with zero unperformed tails.",
+      "fixed_by": "alg-sequential-tensor-train-svd",
+      "matters_for": [
+        "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+        "ex-two-tt-truncations-realise-root-sum-squares-bound"
+      ]
+    },
+    {
+      "convention": "Rounding first left-orthogonalizes exactly, then truncates right to left. Its recorded tails belong to those local truncations; no finite-precision guarantee is asserted.",
+      "fixed_by": "alg-tensor-train-rounding",
+      "matters_for": [
+        "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error"
+      ]
+    },
+    {
+      "convention": "CP-ALS uses a finite sweep budget, halts before changing a rank-deficient block, and handles complex factors through the adjoint least-squares design conjugate(Z). It guarantees neither convergence nor global optimality.",
+      "fixed_by": "alg-budgeted-cp-alternating-least-squares",
+      "matters_for": [
+        "thm-exact-cp-als-block-updates-are-monotone"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-best-rank-k-frobenius-matrix-approximation",
+      "statement": "For a real or complex m-by-n matrix with m,n≥1 and an integer k≥0, the truncated SVD A_k has rank at most k and Frobenius error equal to the square root of the sum of squared singular values beyond k. Every matrix B of rank at most k has at least that error.",
+      "used_by": [
+        "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+        "thm-hosvd-quasioptimal-multilinear-rank-error",
+        "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+        "thm-hlr-approximate-factorization-residual-and-inverse-error"
+      ]
+    },
+    {
+      "id": "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+      "statement": "Both exact sequential TT-SVD and exact TT rounding satisfy ||A−Â||_F²≤Σ_k δ_k² for their recorded discarded tails. If no positive singular value is discarded, the output equals A. Full-rank TT-SVD retains rank(A at cut k) at every cut, and these are the minimal bond sizes among exact TT representations.",
+      "used_by": [
+        "ex-separable-grid-tensor-has-tt-rank-one",
+        "ex-two-tt-truncations-realise-root-sum-squares-bound",
+        "ex-diagonal-tensor-has-large-minimal-tt-ranks",
+        "thm-na-dmrg-sweep-truncation-energy-increase-bound"
+      ]
+    },
+    {
+      "id": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+      "statement": "A TT represents each tensor entry by contracting adjacent core bond indices, with boundary ranks one and nonnegative internal bond sizes. Its left and right matricizations define left-isometric, right-isometric, and mixed canonical gauges.",
+      "used_by": [
+        "alg-sequential-tensor-train-svd",
+        "alg-tensor-train-rounding",
+        "thm-tensor-train-storage-and-inner-product-cost",
+        "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+        "def-na-finite-mps-state-and-hermitian-hamiltonian",
+        "lem-na-periodic-mps-to-open-tt",
+        "lem-na-mixed-canonical-qr-gauge-preserves-state",
+        "lem-na-mps-environment-isometry-and-effective-hamiltonian"
+      ]
+    },
+    {
+      "id": "lem-full-column-rank-matrix-least-squares-solution",
+      "statement": "For p,r,s≥1, full-column-rank M in F^(p×r), and Y in F^(p×s), the function W↦||Y−MW||_F has the unique minimizer W*=(M*M)^−1M*Y.",
+      "used_by": [
+        "alg-budgeted-cp-alternating-least-squares",
+        "thm-exact-cp-als-block-updates-are-monotone"
+      ]
+    },
+    {
+      "id": "lem-tensor-unfoldings-are-frobenius-isometries",
+      "statement": "For tensors A,B of the same finite shape, every mode unfolding and every cut unfolding preserves the Frobenius inner product and norm.",
+      "used_by": [
+        "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+        "thm-hosvd-quasioptimal-multilinear-rank-error"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Exact real and complex rectangular SVDs, orthonormal singular-vector bases, and compact decompositions used by matrix approximation, TT-SVD, rounding, and HOSVD.",
+      "opened": true
+    },
+    {
+      "id": "def-singular-values-of-an-endomorphism",
+      "used_for": "Checking the SVD supplier's definition of singular values for maps between different finite-dimensional spaces as eigenvalues of the nonnegative square root of T*T.",
+      "opened": true
+    },
+    {
+      "id": "prop-singular-values-are-well-defined",
+      "used_for": "Checking the SVD supplier's assertion that the singular-value multiset is determined by the linear map.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Checking the SVD supplier's orthonormal eigenbasis for the nonnegative operator |T| over both fields.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Checking completion of output singular vectors to an orthonormal basis, including dimension zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-orthogonal-decomposition",
+      "used_for": "Checking the SVD supplier's decomposition of the output space into the span of positive singular vectors and its orthogonal complement.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "tensor-train-compression-and-truncation-error-examples",
+      "concern": "The page prose says “The final counterexample expands a convergent rank-two CP sequence”, but its examples inventory places cex-best-rank-two-cp-approximation-may-not-exist first. This is an ordering-description mismatch only; the counterexample itself is sound.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "hierarchical-low-rank-matrices-and-error-propagation",
+      "to": "tensor-train-compression-and-truncation-error",
+      "faithful": true,
+      "note": "Core-SVD recompression lifts the core SVD through orthonormal column factors and applies the matrix Frobenius best-rank theorem with the same rank budget and tail norm. The inverse-certificate theorem correctly uses its rank-zero case to identify the Frobenius norm with the squared-singular-value sum. Other inspected uses preserve the entrywise norm and conjugate-transpose conventions. The supplier page asserts no converse hierarchical result."
+    },
+    {
+      "from": "alternating-tensor-optimization-and-effective-eigenproblems",
+      "to": "tensor-train-compression-and-truncation-error",
+      "faithful": true,
+      "note": "MPS definitions and canonical-environment arguments preserve the TT contraction and isometry conventions. The sweep algorithm invokes exact TT rounding after a completed sweep. The energy theorem faithfully applies the recorded-tail bound to the unnormalized rounded state, requires τ<1 before normalization, and derives the additional normalization error explicitly. It claims neither floating-point stability nor convergence from the TT supplier."
+    }
+  ]
+}

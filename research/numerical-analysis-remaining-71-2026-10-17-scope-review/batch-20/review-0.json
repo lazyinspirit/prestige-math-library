@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "20",
+  "round": 0,
+  "reviewed_items": [
+    "def-galerkin-coarse-grid-correction",
+    "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+    "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+    "def-symmetric-two-grid-error-operator",
+    "alg-aggregation-based-algebraic-multigrid-hierarchy",
+    "lem-one-dimensional-poisson-smoothing-and-approximation",
+    "alg-finite-galerkin-v-cycle",
+    "thm-two-grid-energy-contraction-under-joint-estimate",
+    "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+    "thm-galerkin-v-cycle-work-recurrence-master-regimes",
+    "thm-one-dimensional-poisson-two-grid-energy-contraction",
+    "ex-one-dimensional-poisson-coarse-correction-removes-linear-error",
+    "ex-v-and-w-cycle-costs-in-two-dimensions",
+    "ex-one-dimensional-poisson-two-grid-uniform-contraction"
+  ],
+  "reviewed_pages": [
+    "multigrid-methods-and-complexity",
+    "multigrid-methods-and-complexity-examples"
+  ],
+  "decision": "repair",
+  "reason": "The assigned pages and items, approved designs, published supplier claims and proofs, and declared page interfaces were reviewed. One locally repairable level-cap gap affects the AMG algorithm and its termination theorem; other reviewed claims and consumer uses are sound.",
+  "findings": [
+    {
+      "id": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+      "type": "local",
+      "reason": "The input only states L≥0, while step 2 tests ℓ=L before each attempt. For noninteger L this test may never fire, so the procedure can exceed the theorem's bound of at most L attempts. Preserve the stated range by making L∈ℝ≥0 explicit and testing ℓ+1>L before an attempt; update the termination proof accordingly."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+      "decision": "repair",
+      "reason": "Its step 2.2 repeats the equality test and uses it to prove the at-most-L bound. Update that argument to use the corrected before-attempt cap guard."
+    },
+    {
+      "id": "multigrid-methods-and-complexity",
+      "decision": "accept",
+      "reason": "Its AMG summary reports the algorithm's statuses without making a conflicting attempt-count claim; it remains valid with the corrected cap guard."
+    }
+  ]
+}

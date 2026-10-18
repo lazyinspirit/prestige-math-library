@@ -1,0 +1,270 @@
+{
+  "group": "h",
+  "batches": ["24"],
+  "pages_read": [
+    "square-root-covariance-update-error-and-stability",
+    "square-root-covariance-update-error-and-stability-examples"
+  ],
+  "items_read": [
+    "lem-square-root-kalman-householder-error-rational-envelope",
+    "lem-square-root-kalman-gram-perturbation-bound",
+    "lem-square-root-kalman-measurement-block-factor-identity",
+    "lem-square-root-kalman-prediction-factor-identity",
+    "lem-square-root-kalman-schur-perturbation-bound",
+    "lem-square-root-kalman-triangular-solve-forward-bound",
+    "alg-finite-budget-square-root-kalman-filter",
+    "lem-square-root-kalman-prearray-qr-error-bound",
+    "thm-square-root-kalman-finite-procedure-status",
+    "thm-square-root-kalman-finite-horizon-perturbation-bound",
+    "ex-square-root-kalman-perturbed-prearray-psd-factor",
+    "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+    "ex-square-root-kalman-singular-prior-positive-innovation",
+    "ex-square-root-kalman-nearly-noiseless-solve-sensitivity"
+  ],
+  "conventions": [
+    {
+      "convention": "All filter arrays are real. Covariances are exact products LLᵀ of supplied rectangular factors; zero columns and rank-deficient factors are allowed. State and observation dimensions are positive, and the horizon may be zero.",
+      "fixed_by": "alg-finite-budget-square-root-kalman-filter",
+      "matters_for": [
+        "thm-square-root-kalman-finite-procedure-status",
+        "thm-square-root-kalman-finite-horizon-perturbation-bound",
+        "ex-square-root-kalman-singular-prior-positive-innovation"
+      ]
+    },
+    {
+      "convention": "Prediction pads the concatenated factor to at least the state dimension. Measurement places observations first, pads the measurement-noise factor to at least the observation dimension, and flips entire leading factor columns to make the innovation-factor diagonal positive.",
+      "fixed_by": "lem-square-root-kalman-measurement-block-factor-identity",
+      "matters_for": [
+        "alg-finite-budget-square-root-kalman-filter",
+        "thm-square-root-kalman-finite-horizon-perturbation-bound",
+        "ex-square-root-kalman-perturbed-prearray-psd-factor",
+        "ex-square-root-kalman-singular-prior-positive-innovation"
+      ]
+    },
+    {
+      "convention": "Arithmetic uses the operationwise no-underflow model, left-to-right dot products, and stored exact orthogonal reflector representatives. Arithmetic failure returns a status; a rounded dense Q is not formed.",
+      "fixed_by": "alg-finite-budget-square-root-kalman-filter",
+      "matters_for": [
+        "lem-square-root-kalman-prearray-qr-error-bound",
+        "thm-square-root-kalman-finite-procedure-status",
+        "thm-square-root-kalman-finite-horizon-perturbation-bound"
+      ]
+    },
+    {
+      "convention": "The local prearray bound uses Frobenius norms, requires qu<1 and ru<1 for each nonempty product, and permits the rational QR envelope only when 200qnu<1. Empty inner products contribute zero formation error.",
+      "fixed_by": "lem-square-root-kalman-prearray-qr-error-bound",
+      "matters_for": [
+        "thm-square-root-kalman-finite-horizon-perturbation-bound"
+      ]
+    },
+    {
+      "convention": "The horizon recurrence uses operator norms and assumes ε_k≤μ_k/2 at every step, where μ_k>0 is a lower bound for the exact innovation covariance. Its conclusion is finite-horizon, with no uniform-in-time guarantee.",
+      "fixed_by": "thm-square-root-kalman-finite-horizon-perturbation-bound",
+      "matters_for": [
+        "ex-square-root-kalman-nearly-noiseless-solve-sensitivity"
+      ]
+    },
+    {
+      "convention": "Positive semidefiniteness concerns the exact product of returned factor entries, not a separately rounded covariance materialization. Unstructured QR perturbations need not preserve independent-noise block structure. AC is inherited only for the statistical interpretation.",
+      "fixed_by": "alg-finite-budget-square-root-kalman-filter",
+      "matters_for": [
+        "thm-square-root-kalman-finite-horizon-perturbation-bound",
+        "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+        "ex-square-root-kalman-perturbed-prearray-psd-factor"
+      ]
+    },
+    {
+      "convention": "The subtractive-update witness uses binary precision p=24, round-to-nearest ties-to-even, and rounds the explicitly ordered expression P⁻−(KS)Kᵀ operation by operation.",
+      "fixed_by": "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+      "matters_for": [
+        "ex-subtractive-kalman-update-loses-positive-semidefiniteness"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-finite-budget-square-root-kalman-filter",
+      "statement": "The finite procedure predicts by QR of a padded transposed factor array, updates by QR of the observation-first measurement prearray, solves the leading lower-triangular innovation system, and returns the trailing factor without a covariance downdate. Failure returns the first declared status; success records arithmetic and factorization completion only.",
+      "used_by": [
+        "thm-square-root-kalman-finite-procedure-status",
+        "thm-square-root-kalman-finite-horizon-perturbation-bound",
+        "ex-square-root-kalman-singular-prior-positive-innovation",
+        "ex-square-root-kalman-nearly-noiseless-solve-sensitivity"
+      ]
+    },
+    {
+      "id": "lem-square-root-kalman-measurement-block-factor-identity",
+      "statement": "For real covariance factors of arbitrary rank and S=HP⁻Hᵀ+R≻0, exact reduced QR of the padded transposed measurement prearray gives L₁₁L₁₁ᵀ=S, L₂₁L₁₁ᵀ=P⁻Hᵀ, and L₂₂L₂₂ᵀ=P⁻−P⁻HᵀS⁻¹HP⁻. Solving L₁₁z=v gives L₂₁z=P⁻HᵀS⁻¹v.",
+      "used_by": [
+        "alg-finite-budget-square-root-kalman-filter",
+        "thm-square-root-kalman-finite-horizon-perturbation-bound",
+        "ex-square-root-kalman-perturbed-prearray-psd-factor",
+        "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+        "ex-square-root-kalman-singular-prior-positive-innovation",
+        "ex-square-root-kalman-nearly-noiseless-solve-sensitivity"
+      ]
+    },
+    {
+      "id": "lem-square-root-kalman-prearray-qr-error-bound",
+      "statement": "For G∈R^{n×q}, q≥n≥1, successful scaled-Householder QR of the computed transposed array gives ‖LLᵀ−GGᵀ‖_F≤2‖G‖_F ε+ε², where ε=e_form+e_in+β_{q,n}‖Ĝ‖_F and β_{q,n}=(1+κ_q)^n−1. Under 200qnu<1, β may be replaced by 200qnu/(1−200qnu).",
+      "used_by": [
+        "thm-square-root-kalman-finite-horizon-perturbation-bound"
+      ]
+    },
+    {
+      "id": "lem-square-root-kalman-gram-perturbation-bound",
+      "statement": "Let G,E∈R^{m×n} and set Ĝ=G+E. Then ‖ĜĜᵀ−GGᵀ‖_F≤2‖G‖_F‖E‖_F+‖E‖_F². The estimate is valid for all ranks.",
+      "used_by": [
+        "lem-square-root-kalman-prearray-qr-error-bound",
+        "ex-square-root-kalman-perturbed-prearray-psd-factor"
+      ]
+    },
+    {
+      "id": "lem-square-root-kalman-householder-error-rational-envelope",
+      "statement": "Let q≥n≥1 and u>0. For β_{q,n}=(1+κ_q)^n−1 and C_{q,n}=200qn, if C_{q,n}u<1, then β_{q,n}≤C_{q,n}u/(1−C_{q,n}u).",
+      "used_by": [
+        "lem-square-root-kalman-prearray-qr-error-bound"
+      ]
+    },
+    {
+      "id": "lem-square-root-kalman-prediction-factor-identity",
+      "statement": "If P=LLᵀ, Q=L_Q L_Qᵀ, and G=[FL L_Q] is padded to permit reduced QR Gᵀ=UR with UᵀU=I, then L⁻=Rᵀ satisfies L⁻(L⁻)ᵀ=FPFᵀ+Q, including zero and rank-deficient factors.",
+      "used_by": [
+        "alg-finite-budget-square-root-kalman-filter",
+        "thm-square-root-kalman-finite-horizon-perturbation-bound"
+      ]
+    },
+    {
+      "id": "lem-square-root-kalman-schur-perturbation-bound",
+      "statement": "For S≽μI with μ>0, Frobenius block-error bounds e_S<μ, e_B, e_D, b≥‖B‖₂ and β=(μ−e_S)⁻¹, the perturbed innovation is positive definite, the gain error is at most e_Bβ+bμ⁻¹βe_S, and the Schur-complement error is at most e_D+2be_Bβ+b²μ⁻¹βe_S+e_B²β.",
+      "used_by": [
+        "thm-square-root-kalman-finite-horizon-perturbation-bound"
+      ]
+    },
+    {
+      "id": "lem-square-root-kalman-triangular-solve-forward-bound",
+      "statement": "For nonsingular T∈R^{p×p}, p≥1, and residual r=Tẑ−y, ‖ẑ−T⁻¹y‖₂≤‖r‖₂/σ_min(T). If TTᵀ≽νI with ν>0, then σ_min(T)≥√ν.",
+      "used_by": [
+        "thm-square-root-kalman-finite-horizon-perturbation-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Inherited choice assumption for Gaussian conditional-law interpretation; deterministic matrix calculations use no additional choice.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Entrywise norm, transpose invariance, disjoint-block sums, and zero-sized factors.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Maximum-stretch definition and zero-domain convention in perturbation and solve estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "Operator product estimates and the inverse-factor singular-value bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Frobenius-to-operator comparison and orthogonal invariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Euclidean inequalities in the innovation-solve forward bound.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-gaussian-state-space-model-with-independent-noises",
+      "used_for": "Statistical input domain, singular covariance allowance, finite horizon, and independence assumptions.",
+      "opened": true
+    },
+    {
+      "id": "alg-kalman-filter",
+      "used_for": "Canonical exact prediction, innovation, gain, mean and covariance recursions.",
+      "opened": true
+    },
+    {
+      "id": "lem-one-step-kalman-gaussian-conditioning",
+      "used_for": "Identification of the block-factor identities with the conditional Gaussian update and Joseph covariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-kalman-filter-is-exact-posterior",
+      "used_for": "Everywhere-defined finite-horizon posterior interpretation under positive innovations and AC.",
+      "opened": true
+    },
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "used_for": "Reduced QR shapes and orthogonal-factor conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "Finite lower-triangular innovation solve schedule.",
+      "opened": true
+    },
+    {
+      "id": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "used_for": "Binary rounding, exact-zero operations, no-underflow success conditions, and range-failure semantics.",
+      "opened": true
+    },
+    {
+      "id": "alg-scaled-householder-reflector-formation-and-application",
+      "used_for": "Actual reflector formation, trailing updates, zero-column branch, and stored orthogonal representatives.",
+      "opened": true
+    },
+    {
+      "id": "lem-scaled-householder-step-meets-local-backward-error-premise",
+      "used_for": "Explicit κ_q coefficient and successful real local backward-error premise.",
+      "opened": true
+    },
+    {
+      "id": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+      "used_for": "Rounded product formation bounds; the consuming proof explicitly extends the factor expansion to exact-zero operations.",
+      "opened": true
+    },
+    {
+      "id": "thm-scaled-householder-qr-backward-stability",
+      "used_for": "Successful QR factor perturbation with coefficient (1+κ_q)^n−1.",
+      "opened": true
+    },
+    {
+      "id": "lem-scaled-real-householder-step-termination-and-status",
+      "used_for": "Finite component-call termination and declared identity, reflector, or first-failure returns.",
+      "opened": true
+    },
+    {
+      "id": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+      "used_for": "Exact reduced QR existence including rank-deficient and empty-column cases.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-square-root-kalman-schur-perturbation-bound",
+      "concern": "Proof steps 3.1 and 4.1 refer in prose to the inverse estimates of “steps 1.1–1.2”, but there is no step 1.2. The inverse-difference estimate is step 2.1, which both trailing tag groups correctly cite. The bounds themselves follow from steps 1.1 and 2.1.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-square-root-kalman-finite-procedure-status",
+      "concern": "Proof step 1.2 says “The upper-triangular innovation solve has finitely many rows”. The defined algorithm instead solves the lower-triangular system L̂₁₁ẑ=v̂ by forward substitution. This does not affect termination or the operation count.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "square-root-covariance-update-error-and-stability",
+      "to": "numerical-algebraic-riccati-equations-and-stabilizing-branches",
+      "faithful": true,
+      "note": "Checked both page interfaces. This is a reading prerequisite: the square-root page imports no Riccati theorem or stabilizing-branch conclusion, and the Riccati page makes no reverse claim about this filter. Both distinguish unstructured numerical perturbations from preservation of model structure and require separate conditioning or stability evidence."
+    }
+  ]
+}

@@ -1,0 +1,1799 @@
+
+--- PDF PAGE 1 ---
+Regular Decompositions of Vector Fields -
+Continuous, Discrete, and
+Structure-Preserving
+R. Hiptmair and C. Pechstein
+Research Report No. 2019-18
+April 2019
+Seminar für Angewandte Mathematik
+Eidgenössische Technische Hochschule
+CH-8092 Zürich
+Switzerland
+____________________________________________________________________________________________________
+Abridged version to appear in the Proceedings of the 2018 ICOSAHOM Conference
+
+
+--- PDF PAGE 2 ---
+Regular Decompositions of Vector Fields –
+Continuous, Discrete, and Structure-Preserving
+Ralf Hiptmair and Clemens Pechstein
+Abstract We elaborate so-called regular decompositions of vector ﬁelds on a three-
+dimensional Lipschitz domain where the ﬁeld and its rotation/divergence belong to
+L2 and where the tangential/normal component of the ﬁeld vanishes on a sufﬁciently
+smooth “Dirichlet” part of the boundary. We impose no restrictions on the topology
+of the domain, its boundary, or the Dirichlet boundary parts.
+The ﬁeld is split into a regular vector ﬁeld, whose Cartesian components lie in
+H1 and vanish on the Dirichlet boundary, and a remainder contained in the kernel of
+the rotation/divergence operator. The decomposition is proved to be stable not only
+in the natural norms, but also with respect to the L2 norm. Besides, for special cases
+of mixed boundary conditions, we show the existence of H1-regular potentials that
+characterize the range of the rotation and divergence operator.
+We conclude with results on discrete counterparts of regular decompositions for
+spaces of low-order discrete differential forms on simplicial meshes. Essentially, all
+results for function spaces carry over, though local correction terms may be neces-
+sary. These discrete regular decompositions have become an important tool in ﬁnite
+element exterior calculus (FEEC) and for the construction of preconditioners.
+1 Introduction
+For a bounded Lipschitz domain Ω⊂R3 recall the classical L2-orthogonal
+Helmholtz decompositions
+L2(Ω) = ∇H1
+0(Ω) ⊕H(div 0, Ω) = ∇H1(Ω) ⊕H0(div 0, Ω) ,
+Ralf Hiptmair
+Seminar for Applied Mathematics, ETH Z¨urich, R¨amistrasse 101, CH-8092 Z¨urich, Switzerland,
+e-mail: hiptmair@sam.math.ethz.ch
+Clemens Pechstein
+Dassault Syst`emes, e-mail: clemens.pechstein@3ds.com
+1
+
+
+--- PDF PAGE 3 ---
+2
+Ralf Hiptmair and Clemens Pechstein
+see, e.g., [11, Ch. XI, Sect. I]. They can be used to derive decompositions of (sub-
+spaces of) H(curl, Ω):
+H0(curl, Ω) = ∇H1
+0(Ω) ⊕XN(Ω),
+XN(Ω) := H0(curl, Ω) ∩H(div 0, Ω),
+H(curl, Ω) = ∇H1(Ω) ⊕XT (Ω),
+XT (Ω) := H(curl, Ω) ∩H0(div 0, Ω) .
+If the domain Ωis convex then the respective complementary space, XN(Ω)
+or XT (Ω), is continuously embedded in the space H1(Ω) of vector ﬁelds with
+Cartesian components in H1(Ω), cf. [1]. Then one can, for instance, write any
+u ∈H(curl, Ω) as
+u = ∇p + z,
+(1)
+with p ∈H1(Ω) and z ∈H1(Ω). Since ∥∇p∥L2(Ω) ≤∥u∥L2(Ω) one obtains
+(using the continuous embedding) the stability property1
+∥∇p∥L2(Ω) + ∥z∥H1(Ω) ≤C∥z∥H(curl,Ω) .
+(2)
+A similar decomposition can be found for u ∈H0(curl, Ω).
+Generally, a decomposition of form (1) with the stability property (2) is called
+regular decomposition, even if L2-orthogonality does not hold. Actually, it turns out
+that (1)–(2) can be achieved even in cases where Ωis non-convex, in particular on
+non-smooth domains, or in cases where Ωor its boundary have non-trivial topology;
+only the L2-orthogonality has to be sacriﬁced, cf. [23].
+Noting that ∇H1(Ω) is contained in the kernel of the curl operator and that—
+under mild smoothness assumptions on the domain—the whole kernel is spanned by
+∇H1(Ω) plus a ﬁnite-dimensional co-homology space [17, Sect. 4] one can achieve
+a second decomposition,
+u = h + z ,
+(3)
+with h ∈ker(curl|H(curl,Ω)) and z ∈H1(Ω), where
+∥h∥L2(Ω) ≤C ∥u∥L2(Ω),
+∥z∥H1(Ω) ≤C ∥curl u∥L2(Ω) .
+(4)
+The second stability estimate states that if u is already in the kernel of the curl
+operator, then z is zero. Hence, (i) the operator mapping u to h is a projection onto
+the kernel space and (ii) the complement operator projects u to the function z of
+higher regularity H1(Ω). For trivial topology of Ωand ∂Ω, the two decompositions
+(1)–(2) and (3)–(4) coincide.
+As a few among many more [20, Sect. 1.5], we would like to highlight two im-
+portant applications of these regular decompositions.
+(i) The second form (3)–(4), in the sequel called rotation-bounded decomposition,
+can be used to show that the operator underlying a certain boundary value prob-
+1 Here and below C stands for a positive “generic constant” that may depend only on Ω, unless
+speciﬁed otherwise.
+
+
+--- PDF PAGE 4 ---
+Regular Decompositions
+3
+lem for Maxwell’s equations is a Fredholm operator. The key point is that the
+complement space of the kernel (from the view of the mentioned projections)
+is H1(Ω) which is compactly embedded in L2(Ω), see e.g., [16, 18] and refer-
+ences therein.
+(ii) The ﬁrst form (1)–(2), in the sequel called gradient-based decomposition, has
+been used to generate stable three-term splittings of a ﬁnite element subspace of
+H(curl, Ω), cf. [21, 22, 25, 23], which allows the construction of so-called ﬁc-
+titious or auxiliary space preconditioners for the ill-conditioned system matrix
+underlying the discretized Maxwell equations.
+In both applications, it is desirable to obtain the decompositions for minimal
+smoothness of the domain, e.g., Lipschitz domains, which are not necessarily con-
+vex. Moreover, it is also desirable to go beyond decompositions of the entire space
+H(curl, Ω) and extend them to subspaces for which the appropriate trace vanishes
+on a “Dirichlet part” ΓD of the boundary. In this case traces of the two summands
+should also vanish on ΓD.
+In the present paper, we provide regular decompositions of both types for sub-
+spaces of H(curl, Ω) (in Section 3) and H(div, Ω) (in Section 4) comprising func-
+tions with vanishing trace on a part ΓD of the boundary ∂Ωfor Lipschitz domains
+Ωof arbitrary topology. In particular, Ωis allowed to have handles, and ∂Ωand ΓD
+may have several connected components. The Dirichlet boundary ΓD must satisfy
+a certain smoothness assumption that we shall introduce in Section 2.1. In addition
+to the stability estimtes (2), (4), we show that the decompositions are stable even in
+L2(Ω).
+In the ﬁnal part of the manuscript, in Section 5, we establish regular decomposi-
+tions of spaces of Whitney forms, which are lowest-order conforming ﬁnite element
+subspaces of H(curl, Ω) and H(div, Ω), respectively, built upon simplicial trian-
+gulations of Ω.
+We point out that parts of this work are based on [20] and some results have
+already been obtained there and will be referenced precisely throughout the text.
+2 Preliminaries
+2.1 Geometric Setting
+Since subtle geometric arguments will play a major role for parts of the theory, we
+start with a precise characterization of the geometric setting: Let Ω⊂R3 be an
+open, bounded, connected Lipschitz domain2. We write d(Ω) for its diameter. Its
+boundary Γ := ∂Ωis partitioned according to Γ = ΓD ∪Σ ∪ΓN, with relatively
+open sets ΓD and ΓN. We assume that this provides a piecewise C1 dissection of
+2 Strongly Lipschitz, in the sense that the boundary is locally the graph of a Lipschitz continuous
+function.
+
+
+--- PDF PAGE 5 ---
+4
+Ralf Hiptmair and Clemens Pechstein
+∂Ωin the sense of [14, Deﬁnition 2.2]. Sloppily speaking, this means that Σ is the
+union of closed curves that are piecewise C1.
+Under the above assumptions on Ωand ΓD, [14, Lemma 4.4] guarantees the
+existence of an open Lipschitz neighborhood ΩΓ (“Lipschitz collar”) of Γ and of a
+continuous vector ﬁeld en on ΩΓ with ∥en(x)∥= 1 that is transversal to Γ:
+∃κ > 0 :
+en(x) · n(x) ≥κ
+for almost all x ∈Γ,
+(5)
+where n is the outward unit normal on Γ. Extrusion of ΓD by the local ﬂow induced
+by en spawns the “bulge” ΥD ⊂ΩΓ \ Ω, see Section 2.1. We recall the properties of
+bulge domains from [14, Sect. 2, Thm. 2.3], also stated in [20, Thm. 2.2]:
+Theorem 1 (Bulge-augmented domain)
+There exists a Lipschitz domain ΥD ⊂R3 \ Ω, such that Υ D ∩Ω= ΓD, Ωe :=
+ΥD ∪ΓD ∪Ωis Lipschitz, d(Ωe) ≤2 d(Ω), and Υ D ⊂ΩΓ . Moreover, each
+connected component ΓD,k of ΓD corresponds to a connected component ΥD,k of
+ΥD, and these have positive distance from each other.
+Ω
+ΩΓ
+ΓD
+ΥD
+Fig. 1 Collar domain ΩΓ (pink) and bulge domain ΥD (gold)
+2.2 De Rham Complex with Boundary Conditions
+Let
+H1
+ΓD(Ω) := {u ∈H1(Ω): (γu)|ΓD = 0},
+HΓD(curl, Ω) := {u ∈H(curl, Ω): (γτu)|ΓD = 0},
+HΓD(div, Ω) := {u ∈H(div, Ω): (γnu)|ΓD = 0} ,
+
+
+--- PDF PAGE 6 ---
+Regular Decompositions
+5
+denote the standard Sobolev spaces where the distributional gradient, curl, or di-
+vergence is in L2 and where the pointwise trace γu, the tangential trace γτu, or
+the normal trace γnu, respectively, vanishes on the Dirichlet boundary ΓD, see e.g.
+[7, 29, 3]. These space are linked via the de Rham complex,
+KΓD(Ω)
+id
+−→H1
+ΓD(Ω)
+∇
+−→HΓD(curl, Ω)
+curl
+−→HΓD(div, Ω)
+div
+−→L2(Ω),
+(6)
+where
+KΓD(Ω) := {v ∈H1
+ΓD(Ω): v = const} =
+(
+span{1},
+if ΓD = ∅,
+{0},
+otherwise.
+The range of each operator in (6) lies in the kernel space of the succeeding one, cf.
+[3, Lemma 2.2]. We deﬁne
+HΓD(curl 0, Ω) := {v ∈HΓD(curl, Ω): curl v = 0},
+HΓD(div 0, Ω) := {v ∈HΓD(div, Ω): div v = 0}.
+(7)
+Barring topological obstructions these kernels can be represented through poten-
+tials: Let β1(Ω) denote the ﬁrst Betti number of Ω(the number of “handles”) and
+β2(Ω) the second Betti number (the number of connected components of ∂Ωminus
+one). By the very deﬁnition of the Betti numbers as dimensions of co-homology
+spaces we have
+β1(Ω) = 0
+=⇒
+H(curl 0, Ω) = ∇H1(Ω),
+(8)
+β2(Ω) = 0
+=⇒
+H(div 0, Ω) = curl H(curl, Ω),
+(9)
+cf. [29]. We call Ωtopologically trivial if β1(Ω) = β2(Ω) = 0.
+3 Regular Decompositions and Potentials related to H(curl)
+Throughout we rely on the properties of Ωand ΓD as introduced in Section 2.1 and
+use the notations from Theorem 1. We write C for positive “generic constants” and
+say that a constant “depends only on the shape of Ωand ΓD”, if it depends on the
+geometric setting alone, but is invariant with respect to similarity transformations.
+To achieve this the diameter of Ωwill have to enter the estimates; we denote it by
+d(Ω).
+3.1 Gradient-Based Regular Decomposition of H(curl)
+The following theorem is essentially [20, Thm. 2.1].
+
+
+--- PDF PAGE 7 ---
+6
+Ralf Hiptmair and Clemens Pechstein
+Theorem 2 (Gradient-Based Regular Decomposition of H(curl))
+Let (Ω, ΓD) satisfy the assumptions of Section 2.1. Then for each u
+∈
+HΓD(curl, Ω) there exist z ∈H1
+ΓD(Ω) and p ∈H1
+ΓD(Ω) depending linearly
+on u such that
+(i)
+u = z + ∇p,
+(ii)
+∥z∥0,Ω+ ∥∇p∥0,Ω≤C ∥u∥0,Ω,
+(iii)
+∥∇z∥0,Ω+
+1
+d(Ω)∥z∥0,Ω≤C∥curl u∥0,Ω+
+1
+d(Ω)∥u∥0,Ω,
+with constants depending only on the shape of Ωand ΓD, but not on d(Ω).
+For completeness, we give the proof, which makes use of three auxiliary results
+that we quote without proof:
+Lemma 1 (Stein extension operator for Hk, [32])
+Let D be a bounded Lipschitz domain with d(D) = 1. Then there exists a
+bounded linear extension operator E∇,Stein
+D
+: H1(D) →H1(R3) such that, for all
+integers k ≥1, with constants depending only on D and k,
+∥E∇,Stein
+D
+u∥Hk(R3) ≤C ∥u∥Hk(D)
+∀u ∈Hk(D).
+(10)
+Lemma 2 (Extension operator for H(curl), [20, Lemma 2.6])
+Let D be a bounded Lipschitz domain with d(D) = 1. Then there exists a
+bounded linear extension operator Ecurl
+D
+: L2(D) →L2(R3) such that, with con-
+stants depending only on D,
+∥Ecurl
+D
+v∥0,R3 ≤C∥v∥0,D
+∀v ∈L2(D),
+∥Ecurl
+D
+v∥H(curl,R3) ≤C∥v∥H(curl,D)
+∀v ∈H(curl, D),
+and Ecurl
+D
+u has compact support.
+Lemma 3 (Rotation-Preserving Projection onto H1(R3), [20, Lemma 2.7])
+There exists a bounded linear operator Lcurl: H(curl, R3) →H1(R3) such that
+for all v ∈H(curl, R3)
+(LC1)
+curl Lcurlv = curl v,
+(LC2)
+div Lcurlv = 0,
+(LC3)
+∥Lcurlv∥0,R3 ≤∥v∥0,R3
+and
+∥(id −Lcurl)v∥0,R3 ≤∥v∥0,R3,
+(LC4)
+∥∇Lcurlv∥0,R3 ≤∥curl v∥0,R3,
+(LC5)
+(Lcurl)2v = Lcurlv,
+i.e., Lcurl is a projection.
+Proof (Theorem 2) Without loss of generality, we may assume that d(Ω) = 1.
+We follow the proof as in [23, Thm. 5.9], which is based on the ideas in [6,
+
+
+--- PDF PAGE 8 ---
+Regular Decompositions
+7
+Prop. 5.1], and establish the L2-stability using the ideas from [31, Lemma 2.2].
+Let u ∈HΓD(curl, Ω) be arbitrary but ﬁxed.
+Step 1: We extend u by zero to a function in H(curl, Ωe), where Ωe is the
+extended domain from Theorem 1, and then to eu ∈H(curl, R3) using the operator
+Ecurl
+Ωe from Lemma 2. We observe eu|ΥD = 0 and that Lemma 2 implies
+∥eu∥0,R3 ≤C ∥u∥0,Ω
+,
+∥curl eu∥0,R3 ≤C∥u∥H(curl,Ω) .
+(11)
+Step 2: Let B ⊇Ωe be a ball such that 1 ≤d(B) ≤2 and deﬁne
+w := (Lcurleu)|B.
+Due to Lemma 3, (LC1), curl w = curl eu in B. Since B has trivial topology, there
+exists a scalar potential ψ ∈H1(B) with zero average
+R
+B ψ dx = 0 such that
+eu = w + ∇ψ.
+Lemma 3 together with (11) implies
+∥w∥0,B = ∥Lcurleu∥0,B
+(LC3)
+≤
+∥eu∥0,R3 ≤C ∥u∥0,Ω,
+∥∇ψ∥0,B = ∥(I −Lcurl)eu∥0,B
+(LC3)
+≤
+∥eu∥0,R3 ≤C ∥u∥0,Ω,
+∥∇w∥0,B
+(LC4)
+≤
+∥curl eu∥0,R3 ≤C ∥u∥H(curl,Ω) ,
+∥ψ∥0,B ≤C ∥∇ψ∥0,B ≤C ∥u∥0,Ω,
+(12)
+where the last estimate is due to Poincar´e’s inequality on the convex ball B [4].
+Step 3: Since
+0 = w + ∇ψ
+in ΥD ,
+we conclude that ψ|ΥD ∈H2(ΥD). We deﬁne the extension eψ := (E∇,Stein
+ΥD
+ψ)|B ∈
+H2(B). Note that if the bulge domain ΥD has multiple connected components, we
+have to deﬁne E∇,Stein
+ΥD
+by putting together individual extension operators using a
+partition of unity. From Lemma 1, we obtain
+∥eψ∥0,B ≤C ∥ψ∥0,ΥD ≤C ∥u∥0,Ω,
+∥∇eψ∥0,B ≤C ∥ψ∥1,ΥD ≤C ∥∇ψ∥0,B ≤C ∥u∥0,Ω,
+∥∇∇eψ∥0,B ≤C
+ ∥∇∇ψ
+| {z }
+=−∇w
+∥2
+0,ΥD + ∥ψ∥2
+1,ΥD
+1/2 ≤C ∥u∥H(curl,Ω) ,
+(13)
+where ∇∇designates the Hessian.
+Step 4: In B, it holds that
+eu = w + ∇ψ = w + ∇eψ
+|
+{z
+}
+=:z∈H1
++ ∇(ψ −eψ
+| {z }
+=:p∈H1
+).
+
+
+--- PDF PAGE 9 ---
+8
+Ralf Hiptmair and Clemens Pechstein
+It is easy to see that p = 0 in ΥD and so p ∈H1
+ΓD(Ω). Correspondingly, ∇p = 0
+and eu = 0 in ΥD, and so z ∈H1
+ΓD(Ω). Combining (12) and (13) yields the desired
+estimates for z and p.
+□
+Remark 1 An early decomposition of a subspace of H(curl, Ω) ∩H(div, Ω) into
+a regular part in H1(Ω) and a singular part in ∇H1(Ω) can be found in [5] and
+in [6, Proposition 5.1], see also [9, Sect. 3] and references therein. Theorem 2 was
+proved in [16, Lemma 2.4] for the case of ΓD = ∂Ωand without the L2-stability es-
+timate, following [6, Proposition 5.1]. Pasciak and Zhao [31, Lemma 2.2] provided
+a version for simply connected Ωand the case ΓD = ∂Ωwith pure L2-stability, but
+p is only constant on each connected component of ∂Ω(see also Theorem 5 and
+Remark 3). This result was reﬁned in [26, Thm. 3.1]. For the case ΓD = ∅, [16,
+Lemma 2.4] gives a similar decomposition but ∇p must be replaced by an element
+from H(curl 0, Ω) in general. Finally, Theorem 2 without the pure L2-stability was
+proved in [23, Thm. 5.2]3.
+Remark 2 The constant C in Theorem 2 depends mainly on the stability constants of
+the extension operators Ecurl
+Ωe and E∇,Stein
+ΥD
+. If the bulge ΥD has multiple components
+ΥD,k, the ﬁnal estimate will depend on the relative distances between ΥD,k, ΥD,ℓ,
+k ̸= ℓand the ratios d(ΥD,k)/ d(Ω) due to the construction of E∇,Stein
+ΥD
+using the
+partition of unity.
+Remark 3 If ΓD = ∂Ω, we can use the trivial extension by zero instead of Ecurl
+Ωe .
+In that case, one may modify the construction of the scalar potentials ψ to ψk ∈
+H2(ΥD,k) with ψk
+ΥD,k = 0. Then, one obtains only p ∈H1(Ω) being constant on
+each connected component of ΓD but the improved bound
+∥∇z∥0,Ω+ d(Ω)−1∥z∥0,Ω≤C ∥curl u∥0,Ω.
+Results on regular decompositions in this special case can be found in [31, 26].
+3.2 Regular Potentials for Some Divergence-Free Functions
+Let the domain Ωand the Dirichlet boundary part ΓD be as introduced in Sec-
+tion 2.1 and let Γi, i = 0, . . . , β2(Ω), denote the connected components of ∂Ω,
+where β2(Ω) is the second Betti number of Ω.
+We deﬁne the space4
+HΓD(div 00, Ω) :=
+n
+q ∈HΓD(div 0, Ω): ⟨γnq, 1⟩Γi = 0, i = 0, . . . , β2(Ω)
+o
+.
+(14)
+3 This reference contains a typo which is easily identiﬁed when inspecting the proof: In general, z
+cannot be estimated in terms of ∥curl u∥0,Ωbut one must use the full H(curl) norm.
+4 Alternatively we can deﬁne HΓD (div 00, Ω) as the functions in HΓD (div 0, Ω) orthogonal to
+the harmonic Dirichlet ﬁelds H(div 0, Ω) ∩H0(curl 0, Ω).
+
+
+--- PDF PAGE 10 ---
+Regular Decompositions
+9
+Above γn denotes the normal trace operator, and the duality pairing is that between
+H−1/2(Γi) and H1/2(Γi). If ΓD = ∅we simply drop the subscript ΓD. Obviously,
+HΓD(div 00, Ω) ⊂H(div 00, Ω) .
+The next result identiﬁes the above space as the range of the curl operator.
+Theorem 3 (Regular potential of range(curl))
+Let (Ω, ΓD) be as in Section 2.1 and assume in addition that each connected
+component ΥD,k of the bulge has vanishing ﬁrst Betti number, β1(ΥD,k) = 0. Then
+HΓD(div 00, Ω) = curl HΓD(curl, Ω) = curl H1
+ΓD(Ω) ,
+and for each q ∈HΓD(div 00, Ω) there exists ψ ∈H1
+ΓD(Ω) depending linearly
+on q such that
+curl ψ = q
+and
+∥∇ψ∥0,Ω+
+1
+d(Ω) ∥ψ∥0,Ω≤C ∥q∥0,Ω,
+where C depends only on the shape of Ωand ΓD, but not on d(Ω)
+The proof is along the lines of [13, Lemma 3.4] and [16, Lemma 2.4] (which
+follows [6, Proposition 5.1]) and splits into two parts.
+Proof (Theorem 3, part 1) Let u ∈HΓD(curl, Ω) be arbitrary but ﬁxed, and ob-
+serve that curl u ∈HΓD(div, Ω). For ﬁxed i = 0, . . . , β2(Ω), let µi ∈C∞(Ω) be
+a smooth cut-off function that is one in a neighborhood of Γi and zero on the other
+components, cf. [13, p. 45]. Then µiu ∈H(curl, Ω) and by Gauss’ theorem
+⟨γn curl u, 1⟩Γi = ⟨γn curl(µiu), 1⟩∂Ω=
+Z
+Ω
+div curl(µiu) dx = 0.
+This proves that
+curl H1
+ΓD(Ω) ⊂curl HΓD(curl, Ω) ⊂HΓD(div 00, Ω).
+In the second part, we show that HΓD(div 00, Ω) ⊂curl H1
+ΓD(Ω), for which
+we need two auxiliary results about the divergence-free extension of vector ﬁelds
+and H1-regular vector potentials.
+Lemma 4 (Divergence-free extension)
+Let D be a bounded Lipschitz domain. There exists a bounded extension operator
+Ediv,0
+D
+: H(div 00, D) →H(div 0, R3) such that, with a constant C depending only
+on the shape of D, but not on d(Ω),
+∥Ediv,0
+D
+q∥0,R3 ≤C∥q∥0,D
+∀q ∈H(div 00, D),
+and Ediv,0
+D
+q has compact support.
+
+
+--- PDF PAGE 11 ---
+10
+Ralf Hiptmair and Clemens Pechstein
+Proof This result is a by-product of the proof of [13, Thm. 3.1]. For each connected
+component of ∂D, one solves a Neumann problem for the Laplace equation with
+Neumann data γnq and uses the gradient of the solution as the extension.
+□
+Lemma 5 (H1-regular vector potential on R3)
+For every eq ∈H(div 0, R3) with compact support, there is w ∈H1(R3), lin-
+early depending on eq, such that curl w = eq and div w = 0, and ∥∇w∥0,R3 ≤
+∥eq∥0,R3.
+Proof On R3 it is natural to use Fourier techniques, cf. the proof of [20, Lemma 2.7].
+Let bq = Fq be the Fourier transform of eq and set
+bw(ξ) := −(2πi)−1|ξ|−2(ξ × bq(ξ)).
+It turns out that bw is the Fourier transform of a function w ∈H1(R3), cf. [13,
+p. 46], and it is easily seen that curl w = eq and div w = 0. By construction, w
+depends linearly on eq. Plancherel’s theorem allows for the estimate
+∥∇w∥2
+0,R3 =
+3
+X
+k=1
+∥2πiξk bw(ξ)∥2
+0,R3 ≤∥bq∥2
+0,R3 = ∥eq∥2
+0,R3 ,
+which ﬁnishes the proof.
+□
+Proof (Theorem 3, part 2) Let q ∈HΓD(div 00, Ω) be arbitrary but ﬁxed.
+Step 1: Using Lemma 4 we extend q by zero from Ωto Ωe, resulting in qe ∈
+H(div 00, Ωe). We deﬁne eq := Ediv,0
+Ωe
+qe and the estimate of Lemma 4 shows that
+eq ∈H(div 0, R3) with eq|Ω= q and ∥eq∥0,R3 ≤C∥q∥0,Ω.
+Step 2: Appealing to Lemma 5 we ﬁnd w ∈H1(R3), depending linearly on eq,
+such that curl w = eq and ∥∇w∥0,R3 ≤C∥eq∥0,Ω.
+Step 3: Let B be the smallest ball containing Ωe such that d(B) = 2 d(Ω), see
+Sect. 2.1. We deﬁne w1 ∈H1(B) by
+w1 := w|B −wB ,
+where wB is the constant vector ﬁeld that agrees with the average of w over B.
+Thus, w1B = 0 and still curl w1 = eq in B.
+Step 4: Recall that eq|ΥD = 0. Hence,
+curl w1 = 0
+in ΥD.
+Since we have assumed that each connected component ΥD,k of ΥD has vanishing
+ﬁrst Betti number, due to (8), there exist scalar potentials ϕk ∈H1(ΥD,k) with
+ϕkΥD,k = 0 such that
+w1 = ∇ϕk
+in ΥD,k
+∀k = 1, . . . , N ,
+where N is the number of connected components of ΥD. This shows that ϕk ∈
+H2(ΥD,k). Using an adaptation E∇,Stein
+ΥD
+of the Stein extension operator from
+
+
+--- PDF PAGE 12 ---
+Regular Decompositions
+11
+Lemma 1, we obtain a function eϕ ∈H2(R3) such that eϕ|ΥD,k = ϕk. Moreover,
+thanks to the stability of the extension,
+∥∇eϕ∥2
+0,R3 ≤C
+N
+X
+k=1
+∥∇ϕk
+| {z }
+=w1
+∥2
+0,ΥD,k ,
+(15)
+∥∇∇eϕ∥2
+0,R3 ≤C
+N
+X
+k=1
+d(ΥD,k)2∥∇ϕk
+| {z }
+=w1
+∥2
+0,ΥD,k + ∥∇∇ϕk
+| {z }
+=∇w1
+∥2
+0,ΥD,k .
+(16)
+Note that the L2 norm of ϕk on ΥD,k has been estimated in terms of its gradient by
+Poincar´e’s inequality, making use of ϕkΥD,k = 0.
+Step 5: We obtain
+curl(w1 −∇eϕ) = eq
+in B
+and we deﬁne ψ := (w1 −∇eϕ)|Ω∈H1(Ω). Since w1 −∇eϕ = 0 on ΥD, it
+follows that ψ ∈H1
+ΓD(Ω). Moreover, (15) yields
+∥ψ∥0,Ω≤∥w1∥0,Ω+ ∥∇eϕ∥0,Ω≤C ∥w1∥0,B
+≤C d(B) ∥∇w1∥0,B ≤C d(Ω)∥q∥0,Ω,
+where we have used Poincar´e’s inequality and the fact that w1B = 0. Finally, (16)
+and the same arguments yield
+∥∇ψ∥0,Ω≤∥∇w1∥0,Ω+ ∥∇∇eϕ∥0,Ω≤C
+
+d(Ω) ∥w1∥0,B + ∥∇w1∥0,B
+
+≤C ∥∇w1∥0,B ≤C d(Ω)∥q∥0,Ω.
+This concludes the proof of Theorem 3.
+□
+Remark 4 For the case that ΓD = ∅, we reproduce the classical result
+H(div 00, Ω) = curl H(curl, Ω) = curl H1(Ω),
+see [13, Thm. 3.4]. In that case, Step 4 of the proof can be left out and ψ = w1
+which is why div ψ = 0 in Ω. This property, however, is lost in the general case.
+Remark 5 The constant C in Theorem 4 depends essentially on the stability con-
+stants of the divergence-free extension operator Ediv,0
+Ωe
+and the (adapted) Stein ex-
+tension operator E∇,Stein
+ΥD
+. For ΓD = ∂Ω, one can replace Ediv,0
+Ωe
+by the trivial ex-
+tension by zero.
+3.3 Rotation-Bounded Regular Decomposition of H(curl)
+We can now formulate another new variety of regular decompositions, for which the
+H1-component will vanish for curl-free ﬁelds.
+
+
+--- PDF PAGE 13 ---
+12
+Ralf Hiptmair and Clemens Pechstein
+Theorem 4 (Rotation-Bounded Regular Decomposition of H(curl) (I))
+Let (Ω, ΓD) be as in Section 2.1 and assume, in addition, that each connected
+component ΥD,k of the bulge has vanishing ﬁrst Betti number, β1(ΥD,k) = 0.
+Then, for each u ∈HΓD(curl, Ω) there exist z ∈H1
+ΓD(Ω) and a curl-free
+vector ﬁeld h ∈HΓD(curl 0, Ω), depending linearly on u such that
+u = z + h,
+∥h∥0,Ω≤∥u∥0,Ω+ C d(Ω) ∥curl u∥0,Ω,
+∥∇z∥0,Ω+
+1
+d(Ω)∥z∥0,Ω≤C ∥curl u∥0,Ω,
+where C depends only on the shape of Ωand ΓD, but not on d(Ω).
+Proof Let u ∈HΓD(curl, Ω) be arbitrary but ﬁxed. Due to Theorem 3, curl u ∈
+HΓD(div 00, Ω) and there exists a regular potential z ∈H1
+ΓD(Ω) depending lin-
+early on curl u such that
+curl z = curl u,
+∥∇z∥0,Ω+ d(Ω)−1∥z∥0,Ω≤C ∥curl u∥0,Ω.
+Since z ∈H1
+ΓD(Ω) ⊂HΓD(curl, Ω) we conclude that h := u−z ∈HΓD(curl 0, Ω)
+and that u = z + h with
+∥h∥0,Ω≤∥u −z∥0,Ω≤∥u∥0,Ω+ C d(Ω) ∥curl u∥0,Ω.
+Remark 6 The constant C in Theorem 4 depends essentially on the stability con-
+stants of the divergence-free extension operator Ediv,0
+Ωe
+and the (adapted) Stein ex-
+tension operator E∇,Stein
+ΥD
+.
+Another stronger version of the rotation-bounded regular decomposition of
+H(curl) gets rid of the assumptions on the topology of the Dirichlet boundary and
+has improved stability properties (though with less explicit constants).
+Theorem 5 (Rotation-Bounded Regular Decomposition of H(curl) (II))
+Let (Ω, ΓD) be as in Sect. 2.1. Then for each u ∈HΓD(curl, Ω) there exist
+z ∈H1
+ΓD(Ω) and a curl-free h ∈HΓD(curl 0, Ω) depending linearly on u such
+that
+u = z + h ,
+∥z∥0,Ω+ ∥h∥0,Ω≤C ∥u∥0,Ω,
+∥∇z∥0,Ω+ d(Ω)−1∥z∥0,Ω≤C ∥curl u∥0,Ω,
+where C depends only on the shape of Ωand ΓD, but not on d(Ω).
+Remark 7 For the case ΓD = ∂Ωthe result of the theorem is already proved by
+Remark 3 since we obtain u = z + ∇p with ∇p ∈∇H1
+0,const(Ω) = H0(curl, Ω).
+
+
+--- PDF PAGE 14 ---
+Regular Decompositions
+13
+For the proof of Theorem 5 we need a Friedrichs type inequality.
+Lemma 6 (Friedrichs-Type inequality in H(curl))
+Let (Ω, ΓD) be as introduced in Section 2.1 and write Πcurl 0,ΓD for the L2-
+orthogonal projector from HΓD(curl, Ω) onto HΓD(curl 0, Ω). Then
+∥u −Πcurl 0,ΓDu∥0,Ω≤C d(Ω) ∥curl u∥0,Ω
+∀u ∈HΓD(curl, Ω),
+with a constant C depending only on the shape of Ωand ΓD, but not on d(Ω).
+Note that if each connected component of the bulge ΥD has vanishing ﬁrst
+Betti number, then Lemma 6 can be derived directly from Theorem 4 using that
+Πcurl 0,ΓD is L2-orthogonal:
+∥u −Πcurl 0,ΓDu∥0,Ω≤∥u −h∥0,Ω= ∥z∥0,Ω≤C d(Ω) ∥curl u∥0,Ω.
+In general, one obtains Lemma 6 from the more general Gaffney inequality
+∥u∥0,Ω≤C d(Ω)
+ Z
+Ω
+| curl u|2 + | div u|2 dx
+1/2
+,
+(17)
+for all u ∈HΓD(curl, Ω) ∩HΓN(div, Ω) that are L2-orthogonal to the relative
+co-homology space HΓD(Ω) := HΓD(curl 0, Ω) ∩HΓN (div 0, Ω). The Gaffney
+inequality, in turn, is a consequence of the compact embedding of HΓD(curl, Ω) ∩
+HΓN (div, Ω) in L2(Ω), which holds for our assumptions on (Ω, ΓD) from Sec-
+tion 2.1, see [3] and references therein.
+Proof (Theorem 5) Let u ∈HΓD(curl, Ω) be arbitrary but ﬁxed and set
+u0 := Πcurl 0,ΓDu
+,
+u1 := u −u0 ,
+such that
+∥u0∥0,Ω≤∥u∥0,Ω,
+∥u1∥0,Ω≤∥u∥0,Ω,
+(18)
+and by Lemma 6,
+∥u1∥0,Ω≤C d(Ω) ∥curl u∥0,Ω.
+(19)
+As a next step, we apply Theorem 2 to u1 to obtain
+u1 = z + ∇p
+,
+u = z + ∇p + u0
+|
+{z
+}
+=:h
+,
+(20)
+with z ∈H1
+ΓD(Ω) and p ∈H1
+ΓD(Ω) and
+∥z∥0,Ω+ ∥∇p∥0,Ω≤C ∥u1∥0,Ω,
+(21)
+∥∇z∥0,Ω≤C
+ ∥curl u1∥0,Ω+ d(Ω)−1∥u1∥0,Ω
+
+.
+(22)
+
+
+--- PDF PAGE 15 ---
+14
+Ralf Hiptmair and Clemens Pechstein
+Using that curl u1 = curl u and combining (21)–(22) with (18)–(19) yields the
+desired result.
+□
+Remark 8 We would like to emphasize that both in Theorem 2 and Theorem 5, the
+domain Ωmay be non-convex, non-smooth, and may have non-trivial topology:
+It may have handles and its boundary may have multiple components. Also the
+Dirichlet boundary ΓD may have multiple components, each of which with non-
+trivial topology. Moreover, we have the pure L2(Ω)-stability in both theorems. In
+this sense, the results of Theorem 2 and Theorem 5 are superior to those found, e.g.,
+in [9, Thm 3.4], [22] or the more recent ones in [10, Thm. 2.3], [24].
+Remark 9 If either ΓD = ∂Ωor if each component of ΥD has vanishing ﬁrst Betti
+number, the constant C in Theorem 5 can be tracked back to extension constants.
+In the general case, we are not aware of any explicit estimates of the Friedrichs
+constant.
+Remark 10 If Ωhas vanishing ﬁrst Betti number, β1(Ω) = 0, then HΓD(curl 0, Ω) =
+∇H1
+ΓD,const(Ω). Hence, we can split each u ∈HΓD(curl, Ω) into z ∈H1
+ΓD(Ω)
+and ∇p with p ∈H1(Ω) being constant on each connected component of ΓD. If
+ΓD is connected, then p ∈H1
+ΓD(Ω). Summarizing, if Ωhas no handles and if ΓD
+is connected, then we have the combined features of Theorem 2 and Theorem 5.
+Finally, we mention that the regular decomposition theorems spawn projection
+operators that play a fundamental role in the analysis of weak formulations of
+Maxwell’s equations in frequency domain [16, Sect. 5].
+Corollary 1 Let (Ω, ΓD) be as in Sect. 2.1. Then there exist continuous projection
+operators R: HΓD(curl, Ω) →H1
+ΓD(Ω) and N: HΓD(curl, Ω) →HΓD(curl 0, Ω)
+such that R + N = id and
+∥Rv∥H1(Ω) + ∥Nv∥L2(Ω) ≤C ∥v∥H(curl,Ω)
+∀v ∈H(curl, Ω),
+where C is a constant independent of v. Moreover, F: HΓD(curl, Ω) →HΓD(curl, Ω)
+deﬁned by Fv := Rv −Nv is an isomorphism.
+Proof We deﬁne Ru := z and Nu := h with z and h from Theorem 5. Thanks to
+the estimates R and N are bounded linear operators. As a consequence of the last
+estimate from Theorem 5,
+curl u = 0 =⇒z = 0,
+which is why
+Nv = v
+∀v ∈HΓD(curl 0, Ω).
+This in turn implies that range(N) = HΓD(curl 0, Ω), which is a closed subspace
+of HΓD(curl, Ω). It also implies that N2 = N and so N is a projection (but different
+from the L2-orthogonal projection onto HΓD(curl 0, Ω)). Hence, the operator R =
+id −N is a projection too and range(R) = ker(N) is closed in HΓD(curl, Ω).
+Finally, F = R −N = id −2N. Since N is a projection, one can easily see that
+F2 = id, so F is an isomorphism.
+□
+
+
+--- PDF PAGE 16 ---
+Regular Decompositions
+15
+Remark 11 The L2-estimates from Theorem 4 then show that the corresponding
+operator R can be extended to a continuous operator mapping from L2(Ω) to L2(Ω).
+4 Regular Decompositions and Potentials Related to H(div)
+The developments of this section are largely parallel to those of Section 3 with some
+new aspects concerning extensions and topological considerations.
+4.1 Rotation-Based Regular Decomposition of H(div)
+The following theorem is the H(div)-counterpart of Theorem 2.
+Theorem 6 (Rotation-Based Regular Decomposition of H(div))
+Let (Ω, ΓD) satisfy the assumptions made in Section 2.1. Then for each v ∈
+HΓD(div, Ω) there exist z ∈H1
+ΓD(Ω) and q ∈H1
+ΓD(Ω) depending linearly on
+v such that
+v = z + curl q,
+∥z∥0,Ω+ ∥curl q∥0,Ω+
+1
+d(Ω)∥q∥0,Ω≤C ∥v∥0,Ω,
+∥∇z∥0,Ω+
+1
+d(Ω)∥z∥0,Ω+
+1
+d(Ω)∥∇q∥0,Ω≤C
+ ∥curl v∥0,Ω+
+1
+d(Ω)∥v∥0,Ω
+
+,
+with constant C depending only on the shape of Ωand ΓD, but not on d(Ω).
+For the proof we need a counterpart of the Stein extension Lemma 1 in H(curl),
+which was shown in [19]: Let Hk(curl, D) := {v ∈Hk(D): curl v ∈Hk(D)},
+be equipped with norm ∥v∥Hk(curl,D) := (∥v∥2
+Hk(D) + ∥curl v∥2
+Hk(D))1/2.
+Lemma 7 Let D be a bounded Lipschitz domain with d(D) = 1. Then there
+exists a bounded linear operator extension operator Ecurl,Stein
+D
+: H(curl, D) →
+H(curl, R3) such that, for all integers k ≥1, with constants depending only on
+D and k,
+∥Ecurl,Stein
+D
+v∥Hk(curl,R) ≤C∥v∥Hk(curl,D)
+∀v ∈Hk(curl, D).
+(23)
+We also need a counterpart to Lemma 2: an extension operator in H(div) that is
+continuous in L2 and H(div). The proof essentially follows that of [20, Lemma 2.6]
+and is left to the reader.
+Lemma 8 (Extension Operator for H(div))
+
+
+--- PDF PAGE 17 ---
+16
+Ralf Hiptmair and Clemens Pechstein
+Let D be a bounded Lipschitz domain with d(D) = 1. Then there exists a
+bounded linear extension operator Ediv
+D : L2(D) →L2(R3) such that, with con-
+stants depending only on D,
+∥Ediv
+D v∥0,R3 ≤C∥v∥0,D
+∀v ∈L2(D) ,
+∥Ediv
+D v∥H(div,R3) ≤C∥v∥H(div,D)
+∀v ∈H(div, D) ,
+and Ediv
+D v has compact support.
+Finally, we need a counterpart to the projection introduced in Lemma 3. The
+proof of the following lemma is very close to that of [20, Lemma 2.7] and we skip
+it.
+Lemma 9 (Fourier-based Projection for H(div))
+There exists a bounded linear operator Ldiv : H(div, R3) →H1(R3) such that
+for all v ∈H(div, R3)
+(LD1)
+div Ldivv = div v,
+(LD2)
+curl Ldivv = 0,
+(LD3)
+∥Ldivv∥0,R3 ≤∥v∥0,R3
+and
+∥(id −Ldiv)v∥0,R3 ≤∥v∥0,R3,
+(LD4)
+∥∇Ldivv∥0,R3 ≤∥div v∥0,R3,
+(LD5)
+(Ldiv)2v = Ldivv,
+i.e., Ldiv is a projection.
+Proof (Theorem 6) Without loss of generality, we may assume that d(Ω) = 1. Let
+v ∈HΓD(div, Ω) be arbitrary but ﬁxed.
+Step 1: We extend v by zero to a function in H(div, Ωe), where Ωe is the ex-
+tended domain as deﬁned in Section 2.1, and then to ev ∈H(div, R3) using Ediv
+Ωe .
+We observe that ev|ΥD = 0 and that Lemma 8 implies
+∥ev∥0,R3 ≤C∥v∥0,Ω
+,
+∥div ev∥0,R3 ≤C∥v∥H(div,Ω) .
+(24)
+Step 2: Let B ⊃Ωe be a ball such that 1 ≤d(B) ≤2 and deﬁne
+w := (Ldivev)|B .
+Due to Lemma 9, div w = div ev in B. Since B has trivial topology, we ﬁnd from
+(9) that ev|B −w ∈H(div 0, B) = H(div 00, B), and conclude from Theorem 3
+that there exists a vector potential ψ ∈H1(B) such that
+ev = w + curl ψ
+in B,
+(25)
+and (using Lemma 9)
+∥w∥0,B ≤C∥ev∥0,B ≤C∥v∥0,Ω,
+∥∇w∥0,B ≤C∥div ev∥0,B ≤C∥v∥H(div,Ω) ,
+∥ψ∥H1(B) ≤C∥ev −w∥0,B ≤C∥ev∥0,B ≤C∥v∥0,Ω.
+(26)
+
+
+--- PDF PAGE 18 ---
+Regular Decompositions
+17
+Step 3: Since
+0 = w + curl ψ
+in ΥD ,
+we conclude that ψ ∈H1(curl, ΥD). We deﬁne eψ := (Ecurl,Stein
+ΥD
+ψ)|B
+∈
+H1(curl, B). Note that if the bulge domain ΥD has multiple components, we have
+to deﬁne Ecurl,Stein
+ΥD
+by blending individual extension operators using a partition of
+unity. From Lemma 7, we obtain
+∥eψ∥H(curl,B) ≤C∥ψ∥H(curl,ΥD) ≤C∥ψ∥H1(ΥD) ≤C∥v∥0,Ω,
+∥eψ∥H1(curl,B) ≤C∥ψ∥H1(curl,ΥD)
+≤C(∥∇curl ψ
+|
+{z
+}
+=−∇w
+∥0,ΥD + ∥ψ∥H1(ΥD)) ≤C∥v∥H(div,Ω) .
+(27)
+Step 4: In the ball B,
+ev = w + curl ψ = w + curl eψ
+|
+{z
+}
+=:z∈H1(B)
++ curl( ψ −eψ
+| {z }
+=:q∈H1(B)
+) .
+It is easy to see that q = 0 in ΥD and so q|Ω∈H1
+ΓD(Ω). By the same argument,
+curl q = 0 and ev = 0 in ΥD and so z ∈H1
+ΓD(Ω). Combining (26) and (27) yields
+the desired estimates for z and q.
+□
+4.2 Regular Potential with Prescribed Divergence
+The next result carries Theorem 3 over to H(div).
+Theorem 7 (Regular Potentials for the Image Space of div)
+Let (Ω, ΓD) be as in Section 2.1 and, in addition, assume that each connected
+component ΥD,k of the bulge has a connected boundary, i.e., β2(ΥD,k) = 0. Then
+L2(Ω) = div HΓD(div, Ω) = div H1
+ΓD(Ω).
+Moreover, for each v ∈L2(Ω) there exists q ∈H1
+ΓD(Ω) depending linearly on v
+such that, with a constant C depending on Ωand ΓD but not on d(Ω),
+div q = v
+and
+∥∇q∥0,Ω+
+1
+d(Ω)∥q∥0,Ω≤C ∥v∥0,Ω.
+Note that the assumption on ΥD rules out the case ΓD = ∂Ωeven for a domain
+with trivial topology, since at least one component of the bulge would have a bound-
+ary with multiple components. Necessarily so, because div H∂Ω(div, Ω) contains
+only functions with vanishing mean.
+Proof From Gauss’ theorem, one can easily deduce
+
+
+--- PDF PAGE 19 ---
+18
+Ralf Hiptmair and Clemens Pechstein
+div H1
+ΓD(Ω) ⊆div HΓD(div, Ω) ⊂L2(Ω),
+(28)
+such that it remains to show L2(Ω) ⊆div H1
+ΓD(Ω) and the stability estimate for
+the potential. Let v ∈L2(Ω) be arbitrary but ﬁxed and assume without loss of
+generality that d(Ω) = 1.
+Step 1: We extend v by zero to a function ev ∈L2(R3).
+Step 2: We denote by bv := Fev the Fourier transform of ev and deﬁne
+bw(ξ) := (2πi)−1|ξ|−2ξbv(ξ).
+(29)
+One can show that w := F−1 bw ∈H1(R3) and that curl w = 0 and div w = ev.5
+By construction w depends linearly on ev. Due to Plancherel’s theorem,
+∥∇w∥2
+0,R3 =
+3
+X
+k=1
+Z
+R3 |2πiξk bw(ξ)|2 dξ ≤∥bv∥2
+0,R3 = ∥v∥2
+0,Ω.
+(30)
+Step 3: Let B ⊃Ωe a ball with 1 ≤d(B) ≤2. We deﬁne w1 ∈H1(B) by
+w1 := w|B −wB,
+(31)
+where wB is the component-wise mean value over B, such that
+div w1 = ev
+in B .
+(32)
+Step 4: Recall that ev is zero outside of Ω. In particular,
+div w1 = 0
+in ΥD,k
+∀k = 1, . . . , N.
+(33)
+Since each connected component ΥD,k of ΥD is assumed to have a connected bound-
+ary, we obtain H(div 0, ΥD,k) = H(div 00, ΥD,k) and so Theorem 3 guarantees the
+existence of a vector potential ψk ∈H1(ΥD,k) depending linearly on w1 such that
+curl ψk = w1
+in ΥD,k,
+(∥∇ψk∥2
+0,ΥD,k + ∥ψk∥2
+0,ΥD,k)1/2 ≤C ∥w1∥0,ΥD,k .
+(34)
+This shows that ψk ∈H1(curl, ΥD,k). We extend {ψk}N
+k=1 to a function eψ ∈
+H1(curl, R3) by patching together the extensions Ecurl,Stein
+ΥD,k
+ψk by a partition of
+unity such that (using Lemma 7, (34), (31), and the Poincar´e inequality)
+5 Alternatively, one can set w := ∇∆−1ev, where ∆−1 corresponds to solving the variational
+Laplace problem with right-hand side in L2(R3) and the energy space L2
+loc(Ω) with gradient in
+L2(R3). By a standard regularity argument [28], the gradient of the solution is even in H1(R3).
+
+
+--- PDF PAGE 20 ---
+Regular Decompositions
+19
+∥eψ∥2
+H(curl,R3) ≤C
+N
+X
+k=1
+ ∥curl ψk∥2
+0,ΥD,k + ∥ψk∥2
+0,ΥD,k
+
+≤C
+N
+X
+k=1
+∥w1∥2
+0,ΥD,k ≤C ∥w1∥2
+0,B ≤C ∥∇w1∥2
+0,B ,
+∥∇curl eψ∥2
+0,R2 ≤C
+N
+X
+k=1
+ ∥∇curl ψk
+|
+{z
+}
+=w1
+∥2
+0,ΥD,k + ∥∇ψk∥2
+0,ΥD,k + ∥ψk∥2
+0,ΥD,k
+
+≤C ∥∇w1∥2
+0,B + ∥w1∥0,B ≤C ∥∇w1∥2
+0,B .
+(35)
+Step 5: We obtain
+div(w1 −curl eψ) = ev
+in
+B ,
+(36)
+and deﬁne q := (w1 −curl eψ)|Ω∈H1(Ω). Since w1 −curl eψ = 0 in ΥD, it
+follows that q ∈H1
+ΓD(Ω). Moreover, due to (35) and (30),
+∥q∥0,Ω≤∥w1∥0,Ω+ ∥curl eψ∥0,Ω≤C ∥w1∥0,B ≤C ∥∇w1∥0,B ≤C ∥v∥0,Ω,
+∥∇q∥0,Ω≤∥∇w1∥0,Ω+ ∥∇curl eψ∥0,Ω≤C ∥∇w1∥0,B ≤C ∥v∥0,Ω,
+which concludes the proof.
+□
+Remark 12 The constant C in Theorem 7 depends essentially on the stability con-
+stants of the Hk(curl)-extension operator from Lemma 7 and the partition of unity.
+It therefore involves the relative diameters d(ΥD,k)/ d(Ω) and the relative distances
+between ΥD,k and ΥD,ℓfor k ̸= ℓ.
+4.3 Divergence-Bounded Regular Decompositions of H(div)
+We can now formulate other variants of regular decompositions of H(div) in anal-
+ogy to what we did in Section 3.3.
+
+
+--- PDF PAGE 21 ---
+20
+Ralf Hiptmair and Clemens Pechstein
+Theorem 8 (Divergence-Bounded Regular Decomposition of H(div) (I))
+Let (Ω, ΓD) be as in Section 2.1. In addition, assume that each connected com-
+ponent ΥD,k of the bulge has a connected boundary, i.e., β2(ΥD,k) = 0. Then, for
+each v ∈HΓD(div, Ω) there exists z ∈H1
+ΓD(Ω) and a divergence-free vector
+ﬁeld h ∈HΓD(div 0, Ω) depending linearly on v such that
+v = z + h,
+(37)
+∥h∥0,Ω≤∥v∥0,Ω+ C d(Ω)∥div v∥0,Ω,
+(38)
+∥∇z∥0,Ω+
+1
+d(Ω)∥z∥0,Ω≤C ∥div v∥0,Ω,
+(39)
+where C depends only on the shape of Ωand ΓD, but not on d(Ω).
+Proof Let v ∈HΓD(div, Ω) be arbitrary but ﬁxed. Then div v ∈L2
+ΓD(Ω) and, due
+to Theorem 7, there exists a regular potential z ∈H1
+ΓD(Ω) depending linearly on
+div v such that
+div z = div v,
+∥∇z∥0,Ω+ d(Ω)−1∥z∥0,Ω≤C ∥div v∥0,Ω.
+Since z ∈H1
+ΓD(Ω) we conclude that h := v −z ∈HΓD(div 0, Ω) and that
+v = z + h with
+∥h∥0,Ω≤∥v −z∥0,Ω≤∥v∥0,Ω+ C d(Ω)∥div v∥0,Ω.
+Remark 13 The constant C is the same as in Theorem 7.
+The last variant of H(div) regular decomposition of H(div) dispenses with the
+assumptions on the topology of the Dirichlet boundary and has better stability prop-
+erties than the splitting from Theorem 8 (though with less explicit constants).
+Theorem 9 (Divergence-Bounded Regular Decomposition of H(div) (II))
+Let (Ω, ΓD) be as in Section 2.1. Then, for each v ∈HΓD(div, Ω) there exists
+z ∈H1
+ΓD(Ω) and a divergence-free vector ﬁeld h ∈HΓD(div 0, Ω) depending
+linearly on v such that
+v = z + h,
+(40)
+∥z∥0,Ω+ ∥h∥0,Ω≤∥v∥0,Ω,
+(41)
+∥∇z∥0,Ω+
+1
+d(Ω)∥z∥0,Ω≤C ∥div v∥0,Ω,
+(42)
+where C depends only on the shape of Ωand ΓD, but not on d(Ω).
+For the proof of Theorem 9 we need a Friedrichs type inequality. Let Πdiv 0,ΓD
+be the L2-orthogonal projector from HΓD(div, Ω) to HΓD(div 0, Ω).
+
+
+--- PDF PAGE 22 ---
+Regular Decompositions
+21
+Lemma 10 (Friedrichs-Type Inequality for H(div))
+Let (Ω, ΓD) be as introduced in Section 2.1. Then
+∥v −Πdiv 0,ΓDv∥0,Ω≤C d(Ω) ∥div v∥0,Ω
+∀v ∈HΓD(div, Ω),
+with a constant C depending only on the shape of Ωand ΓD, but not on d(Ω).
+Note that, if each connected component of the bulge ΥD has connected boundary,
+then Lemma 10 can be derived directly from Theorem 7 using that Πdiv 0,ΓD is L2-
+orthogonal:
+∥v −Πdiv 0,ΓDv∥0,Ω≤∥v −h∥0,Ω= ∥z∥0,Ω≤C d(Ω) ∥div v∥0,Ω.
+In general, one obtains Lemma 10 from the Gaffney inequality
+∥v∥0,Ω≤C d(Ω)
+ Z
+Ω
+| curl v|2 + | div v|2 dx
+1/2
+,
+(43)
+for all v ∈HΓD(div, Ω) ∩HΓN (curl, Ω) that are L2-orthogonal to the relative
+co-homology space HΓN (Ω) := HΓN (curl 0, Ω) ∩HΓD(div 0, Ω), see (17). As
+mentioned earlier, the inequality (43), is an immediate consequence of the com-
+pact embedding of HΓD(div, Ω)∩HΓN (curl, Ω) in L2(Ω), which holds under the
+assumptions on (Ω, ΓD) made in Section 2.1, see [3, Thm. 5.1].
+Proof (Theorem 9) Let v ∈HΓD(div, Ω) be arbitrary but ﬁxed and set
+v0 := Πdiv 0,ΓDv,
+v1 := v −v0 ,
+such that
+∥v0∥0,Ω≤∥v∥0,Ω,
+∥v1∥0,Ω≤∥v∥0,Ω,
+(44)
+and by Lemma 10,
+∥v1∥0,Ω≤C d(Ω) ∥div v∥0,Ω.
+(45)
+As a next step, we apply Theorem 6 to v1 to obtain
+v1 = z + curl q,
+v = z + curl q + v0
+|
+{z
+}
+=:h
+,
+(46)
+with z ∈H1
+ΓD(Ω) and q ∈H1
+ΓD(Ω) and
+∥z∥0,Ω+ ∥h∥0,Ω≤C ∥v∥0,Ω,
+(47)
+∥∇z∥0,Ω≤C∥div v1∥0,Ω+ d(Ω)−1∥v1∥0,Ω.
+(48)
+Using that div v1 = div v and combining all the stability estimates obtained so far
+yields the desired result.
+□
+
+
+--- PDF PAGE 23 ---
+22
+Ralf Hiptmair and Clemens Pechstein
+5 Discrete Counterparts of the Regular Decompositions
+The discrete setting to which we want to extend the concept of regular decomposi-
+tions is provided by ﬁnite element exterior calculus (FEEC, [2]) which introduces
+ﬁnite element subspaces of H(curl) and H(div) as special instances of spaces of
+discrete differential forms. In this section we conﬁne ourselves to the lowest-order
+case of piecewise linear ﬁnite element functions.
+Throughout, we assume that (Ω, ΓD) is as in Section 2.1, and, additionally, that
+Ωis a polyhedron and that ∂ΓD consists of straight line segments. All considera-
+tions take for granted a shape-regular family of meshes {T h}h of Ω, consisting of
+tetrahedral elements, and resolving ΓD in the sense that ΓD is a union of faces of
+some of the tetrahedra.
+The following ﬁnite element spaces will be relevant:
+• the space W0
+h,ΓD(Ω) of H1
+ΓD(Ω)-conforming piecewise linear Lagrangian ﬁ-
+nite element functions,
+• the space W1
+h,ΓD(Ω) of HΓD(curl, Ω)-conforming lowest order N´ed´elec ele-
+ments, also known as edge elements,
+• the space W2
+h,ΓD(Ω) of HΓD(div, Ω)-conforming lowest order tetrahedral
+Raviart-Thomas ﬁnite elements, aka, face elements,
+• the space W0
+h,ΓD(Ω) := [W0
+h,ΓD(Ω)]3 of piecewise linear globally continuous
+vector ﬁelds vanishing on ΓD.
+Functions in Wℓ
+h,ΓD(Ω), ℓ= 1, 2, 3, are so-called Whitney forms, lowest-order
+discrete differential forms of the ﬁrst family as introduced in [15] and [2, Sect. 5].
+5.1 Discrete Regular Decompositions for Edge Elements
+Commuting projectors, also known as co-chain projectors, are the linchpin of FEEC
+theory [2, Sect. 7], and it is not different with our developments. Thus, let
+R0
+h,ΓD : H1
+ΓD(Ω) →W0
+h,ΓD(Ω)
+and
+R1
+h,ΓD : HΓD(curl, Ω) →W1
+h,ΓD(Ω)
+denote the continous, boundary-aware cochain projectors from [20, Sect. 3.2.6],
+which extend the pioneering work [12] by Falk and Winther. These two linear oper-
+ators are projectors onto their ranges, they fulﬁll the commuting property
+∇(R0
+h,ΓDϕ) = R1
+h,ΓD(∇ϕ)
+∀ϕ ∈H1
+ΓD(Ω) ,
+(49)
+and the local stability estimates
+∥R0
+h,ΓDu∥0,T ≤C
+ ∥u∥0,ωT + hT ∥∇u∥0,ωT
+
+∀u ∈H1
+ΓD(Ω),
+(50)
+∥R0
+h,ΓDv∥0,T ≤C
+ ∥v∥0,ωT + hT ∥curl v∥0,ωT
+
+∀v ∈HΓD(curl, Ω),
+(51)
+
+
+--- PDF PAGE 24 ---
+Regular Decompositions
+23
+for all mesh elements T , where ωT is the element patch of T , the union of neigh-
+boring elements, and hT the element diameter. The constant C is uniform in T and
+depends only on the shape regularity of the mesh T h(Ω).
+Theorem 10 ([20, Thm. 1.2])
+For each vh ∈W1
+0,ΓD(Ω) there exists a continuous and piecewise linear vector
+ﬁeld zh ∈W0
+h,ΓD(Ω), a continuous and piecewise linear scalar function ph ∈
+W0
+h,ΓD(Ω), and a remainder evh ∈W1
+0,ΓD(Ω), all depending linearly on vh,
+providing the discrete regular decomposition
+vh = R1
+h,ΓDzh + evh + ∇ph
+and satisfying the stability estimates
+∥zh∥0,Ω+ ∥∇ph∥0,Ω+ ∥evh∥0,Ω≤C ∥vh∥0,Ω,
+(52)
+∥∇zh∥0,Ω+ ∥h−1evh∥0,Ω≤C
+ ∥curl vh∥0,Ω+
+1
+d(Ω)∥vh∥0,Ω
+
+, (53)
+where C is a generic constant that depends only on the shape of (Ω, ΓD), but
+not on d(Ω), and on the shape regularity constant of T h(Ω). Above, h−1 is the
+piecewise constant function that is equal to h−1
+T
+on every element T .
+Obviously, this is a discrete counterpart of the regular decomposition of H(curl)
+from Theorem 2. The following theorem appears to be new and it corresponds to
+the rotation-bounded regular decomposition of Theorem 5. For the sake of brevity
+deﬁne the discrete nullspace of the curl operator
+N 1
+h := {vh ∈W1
+h,ΓD(Ω): curl vh = 0} .
+(54)
+If Ωand ΓD have simple topology, Xh = ∇W0
+h,ΓD(Ω), but if the ﬁrst Betti number
+of Ωis non-zero, or if ΓD has multiple components, then a ﬁnite-dimensional co-
+homology space has to be added [2, Sect. 5.6].
+
+
+--- PDF PAGE 25 ---
+24
+Ralf Hiptmair and Clemens Pechstein
+Theorem 11 (Rotation-bounded discrete regular decomposition for edge ele-
+ments)
+For each vh ∈W1
+0,ΓD(Ω) there exists a continuous and piecewise linear vector
+ﬁeld zh ∈W0
+h,ΓD(Ω), an curl-free edge element function hh ∈N 1
+h, and a re-
+mainder evh ∈W1
+0,ΓD(Ω), all depending linearly on vh, providing the discrete
+regular decomposition
+vh = R1
+h,ΓDzh + evh + hh
+and satisfying the stability bounds
+∥zh∥0,Ω
+∥hh∥0,Ω
+∥evh∥0,Ω
+
+
+≤C ∥vh∥0,Ω,
+∥∇zh∥0,Ω
+∥h−1evh∥0,Ω
+
+≤C ∥curl vh∥0,Ω,
+where C is a uniform constant that depends only on the shape of (Ω, ΓD), but not
+on d(Ω), and on the shape regularity constant of T h(Ω).
+For the proof of Theorem 11 we need a discrete Friedrichs inequality, otherwise
+it runs parallel to the proof of Theorem 5. The discrete Friedrichs inequality can
+elegantly be derived using the co-chain projector R1
+h,ΓD.
+Lemma 11 (discrete Friedrichs inequality for W1
+h,ΓD)
+Let Π1
+h,ΓD : W1
+h,ΓD(Ω) →N 1
+h denote the L2-orthogonal projection onto the
+discrete curl-free subspace N 1
+h ⊂W1
+h,ΓD(Ω). Then
+∥vh −Π1
+h,ΓDvh∥0,Ω≤C d(Ω)∥curl vh∥0,Ω
+∀vh ∈W1
+h,ΓD(Ω),
+with a uniform constant C that depends on the constant in the continuous Friedrichs
+inequality (Lemma 6) and on the shape-regularity constant of T h(Ω).
+Proof Recall the L2-orthogonal projector Πcurl 0,ΓD mapping from HΓD(curl, Ω)
+to HΓD(curl 0, Ω). Due to the L2-minimization property of Π1
+h,ΓD,
+∥vh −Π1
+h,ΓDvh∥0,Ω=
+min
+wh∈N 1
+h
+∥vh −wh∥0,Ω
+≤∥vh −R1
+h,ΓDΠcurl,ΓDvh∥0,Ω
+= ∥R1
+h,ΓDvh −R1
+h,ΓDΠcurl,ΓDvh∥0,Ω
+≤C
+ ∥vh −Πcurl,ΓDvh∥0,Ω+ hmax∥curl(vh −Πcurl,ΓDvh)∥0,Ω
+
+,
+where we have used the projection property R1
+h,ΓD and the stability estimate (51),
+and hmax is the maximal element diameter. The proof is concluded by observing that
+curl Πcurl,ΓD = 0 and hmax ≤d(Ω), and by the continuous Friedrichs inequality
+Lemma 6.
+□
+Proof (Theorem 11) Let vh ∈W1
+0,ΓD(Ω) be arbitrary but ﬁxed and set
+
+
+--- PDF PAGE 26 ---
+Regular Decompositions
+25
+vh,0 := Π1
+h,ΓDvh ,
+vh,1 := vh −vh,0
+such that
+∥vh,0∥0,Ω≤∥vh∥0,Ω,
+∥vh,1∥0,Ω≤∥vh∥0,Ω,
+(55)
+and by Lemma 11,
+∥vh,1∥0,Ω≤C d(Ω) ∥curl vh∥0,Ω.
+(56)
+We now apply Theorem 10 to vh,1 and obtain
+vh,1 = R1
+h,ΓDzh + ev + ∇ph
+Setting hh := ∇ph + vh,0 and combining the stability estimates from Theorem 10
+with (55)–(56) concludes the proof.
+□
+We stress that the statements of Theorem 10 and Theorem 11 do not hinge on
+any assumptions on the topological properties of Ωand ΓD.
+5.2 Discrete Regular Decompositions for Face Elements
+For face elements, the construction of a boundary-aware co-chain projection opera-
+tor
+R2
+h,ΓD : HΓD(div, Ω) →W2
+h,ΓD(Ω)
+that commutes with R1
+h,ΓD and the curl-operator has not yet been accomplished.
+Fortunately, in the case ΓD = ∅, this operator is available from [12]. Thus, in the
+following, we treat only the case ΓD = ∅and just omit the subscript ΓD. Then,
+from [12] we can borrow a linear operator R2
+h : H(div, Ω) →W2
+h(Ω) such that
+curl R1
+hu = R2
+h curl u
+∀u ∈H(curl, Ω) ,
+(57)
+and
+∥R2
+hv∥0,T ≤C(∥v∥0,T + hT ∥div v∥0,T )
+∀v ∈H(div, Ω) .
+(58)
+The next result takes Theorem 6 to the discrete setting.
+
+
+--- PDF PAGE 27 ---
+26
+Ralf Hiptmair and Clemens Pechstein
+Theorem 12 (Discrete Regular Decomposition of W2
+h(Ω))
+For each vector ﬁeld vh in the lowest-order Raviart-Thomas space W2
+h(Ω), there
+exists a continuous and piecewise linear vector ﬁeld zh ∈W0
+h(Ω), a vector ﬁeld
+qh in the lowest-order N´ed´elec space W1
+h(Ω), and a remainder evh ∈W2
+h(Ω),
+all depending linearly on vh, providing the discrete regular decomposition
+vh = R2
+hzh + evh + curl qh ,
+and the stability estimates
+∥zh∥0,Ω
+∥curl qh∥0,Ω+
+1
+d(Ω)∥qh∥0,Ω
+∥evh∥0,Ω
+
+
+≤C ∥vh∥0,Ω,
+∥∇zh∥0,Ω
+∥h−1evh∥0,Ω
+
+≤C∥div vh∥0,Ω+
+1
+d(Ω)∥vh∥0,Ω.
+The constant C depends only on the shape of Ω, but not on d(Ω), and the shape-
+regularity of T h(Ω).
+Proof Let vh ∈W2
+h(Ω) ⊂H(div, Ω) be arbitrary but ﬁxed. Due to Theorem 6,
+there exist z and q ∈H1(Ω) (depending linearly on vh) such that
+vh = z + curl q,
+(59)
+∥z∥0,Ω+ ∥curl q∥0,Ω+ d(Ω)−1∥q∥0,Ω≤C ∥vh∥0,Ω,
+(60)
+∥∇z∥0,Ω+
+1
+d(Ω)∥∇q∥0,Ω≤C ∥curl vh∥0,Ω+
+1
+d(Ω)∥vh∥2
+0,Ω.
+(61)
+Let Mh : L2(Ω) →W0(Ω) denote the (vectorized) Cl´ement quasi-interpolation
+operator. The projection property of R2
+h implies R2
+hvh = vh, and so
+vh = R2
+hz + R2
+h curl q
+|
+{z
+}
+=curl R1
+hq
+= R2
+h Mhz
+| {z }
+=:zh
++ R2
+h(I −Mh)z
+|
+{z
+}
+=:evh
++ curl R1
+hq
+|{z}
+=:qh
+,
+(62)
+where in the last step, we have used the commuting property (57). Due to the prop-
+erties of the Cl´ement operator (see [8] and [20, Sect. 3.2.3]),
+∥Mhz∥0,T ≤C ∥z∥0,ωT ,
+(63)
+∥∇Mhz∥0,T ≤C ∥∇z∥0,ωT ,
+(64)
+∥z −Mhz∥0,T ≤C hT ∥∇z∥0,ωT .
+(65)
+Using these estimates, the properties of R2
+h, and a standard inverse inequality, one
+obtains
+
+
+--- PDF PAGE 28 ---
+Regular Decompositions
+27
+∥zh∥0,Ω≤C ∥vh∥0,Ω,
+∥∇zh∥0,Ω≤C∥curl vh∥0,Ω+ d(Ω)∥vh∥0,Ω,
+∥R2
+hzh∥0,Ω≤C∥Mhz∥0,Ω+
+ X
+T ∈T h(Ω)
+h2
+T ∥div Mhz∥2
+0,ωT
+|
+{z
+}
+≤C∥Mhz∥2
+0,ωT
+1/2 ≤∥vh∥0,Ω.
+From the properties of R1
+h and R2
+h we derive
+∥qh∥0,Ω≤C
+ ∥q∥0,Ω+ hmax
+|{z}
+≤d(Ω)
+∥curl q∥0,Ω
+
+≤C d(Ω) ∥vh∥0,Ω,
+∥curl qh∥0,Ω≤C∥curl q∥0,Ω≤C∥vh∥0,Ω.
+Finally,
+∥evh∥0,Ω= ∥vh −R2
+hzh −curl qh∥0,Ω≤C∥vh∥0,Ω,
+∥h−1evh∥2
+0,Ω=
+X
+T ∈T h(Ω)
+h−2
+T ∥R2
+h(I −Mh)z∥2
+0,T
+≤C
+ X
+T ∈T h(Ω)
+h−2
+T ∥(I −Mh)z∥2
+0,ωT + ∥div(I −Mh)z∥2
+0,ωT
+
+≤C ∥∇z∥2
+0,Ω≤C∥div vh∥2
+0,Ω+ d(Ω)−1∥vh∥2
+0,Ω,
+which concludes the proof.
+□
+Finally, we present a counterpart to the divergence-bounded regular decomposi-
+tion of Theorem 9. For convenience we introduce the space of divergence-free face
+element functions
+N 2
+h := {qh ∈W2
+h(Ω): div qh = 0} .
+(66)
+
+
+--- PDF PAGE 29 ---
+28
+Ralf Hiptmair and Clemens Pechstein
+Theorem 13 (Divergence-Bounded
+Discrete
+Regular
+Decomposition
+of
+W2
+h(Ω))
+For each vector ﬁeld vh in the lowest-oreder Raviart-Thomas space W2
+h(Ω),
+there exists a continuous and piecewise linear vector ﬁeld zh ∈W0
+h(Ω), an el-
+ement hh in the discrete divergence-free subspace N 2
+h, and a remainder evh ∈
+W2
+h(Ω), all depending linearly on vh, providing the discrete regular decomposi-
+tion
+vh = R2
+hzh + evh + hh
+and the stability estimates
+∥zh∥0,Ω
+∥evh∥0,Ω
+∥hh∥0,Ω
+
+
+≤C ∥vh∥0,Ω,
+∥∇zh∥0,Ω
+∥h−1evh∥0,Ω
+
+≤C ∥div vh∥0,Ω.
+The constants C depend only on the shape of Ω, but not on d(Ω), and the shape
+regularity of T h(Ω).
+For the proof, we need a discrete Friedrichs type inequality:
+Lemma 12 (discrete Friedrichs inequality for W2
+h(Ω))
+Let Π2
+h : W2
+h(Ω) →N 2
+h denote the L2-orthogonal projection onto the discrete
+divergence-free subspace N 2
+h. Then
+∥vh −Π2
+hvh∥0,Ω≤C d(Ω) ∥div vh∥0,Ω
+∀vh ∈W 2
+h(Ω),
+with a uniform constant C that depends on the constant in the continuous Friedrichs
+inequality (Lemma 10) and on the shape-regularity constant of T h(Ω).
+Proof Recall the L2-orthogonalprojector Πdiv 0 mapping H(div, Ω) to H(div 0, Ω).
+Due to the L2-minimization property of Π2
+h,
+∥vh −Π2
+hvh∥0,Ω= min
+h∈N 2
+h
+∥vh −hh∥0,Ω
+≤∥vh −R2
+hΠdiv 0vh∥0,Ω
+= ∥R2
+hvh −R2
+hΠdiv 0vh∥0,Ω
+≤C
+ ∥vh −Πdiv 0vh∥0,Ω+ hmax∥div(vh −Πdiv 0vh∥0,Ω
+
+,
+where we have used the projection property of R2
+h and the stability estimate (58).
+The proof is concluded by observing that div Πdiv 0 = 0 and hmax ≤d(Ω), and
+using the continuous Friedrichs inequality Lemma 10.
+□
+Proof (Theorem 13) Let vh ∈W2
+h(Ω) be arbitrary but ﬁxed and let
+vh,0 := Π2
+hvh ,
+vh,1 := vh −vh,0 ,
+such that with Lemma 12,
+
+
+--- PDF PAGE 30 ---
+Regular Decompositions
+29
+∥vh,0∥0,Ω≤∥vh∥,
+∥vh,1∥0,Ω≤∥vh∥0,Ω,
+(67)
+∥vh,1∥0,Ω≤C d(Ω) ∥div vh∥0,Ω.
+(68)
+We apply Theorem 12 to vh,1 such that
+vh = R2
+hzh + evh + curl qh + vh,0
+|
+{z
+}
+=:hh
+(69)
+with
+∥zh∥0,Ω
+∥curl qh∥0,Ω
+∥evh∥0,Ω
+
+
+≤C ∥vh,1∥0,Ω≤C∥vh∥0,Ω,
+∥∇zh∥0,Ω
+∥h−1evh∥0,Ω
+
+≤C
+ ∥div vh,1
+| {z }
+=div vh
+∥0,Ω+ d(Ω)−1∥vh,1∥0,Ω
+|
+{z
+}
+≤C∥div vh∥2
+0,Ω
+
+,
+which concludes the proof.
+□
+Remark 14 The result of Theorem 13 can be viewed as an improvement of the de-
+compositions in [27] which are elaborated for the case of essential boundary condi-
+tions on ∂Ω.
+Corollary 2 If the second Betti number of Ωvanishes, that is, if ∂Ωis connected,
+then hh in Theorem 13 can be chosen as hh = curl qh with qh ∈W1
+h(Ω) such
+that
+vh = R2
+hz + evh + curl qh ,
+with the bounds
+∥zh∥0,Ω
+∥evh∥0,Ω
+∥curl qh∥0,Ω
+d(Ω)−1∥qh∥0,Ω
+
+
+
+
+
+
+
+≤C ∥vh∥0,Ω,
+∥∇zh∥0,Ω
+∥h−1evh∥0,Ω
+
+≤C ∥div vh∥0,Ω.
+Proof If the second Betti number of Ωvanishes, then N 2
+h = curl W1
+h(Ω). So
+hh = curl eqh for some eqh ∈W1
+h(Ω). Setting qh := eqh −Π1
+heqh and using
+Lemma 11 concludes the proof.
+□
+Remark 15 The result of Corollary 2 is an improvement of [22, Lemma 5.2] which
+assumes a domain Ωthat is smooth enough to allow H2-regularity of the Laplace
+problem (2-regular case, for details see [22, Sect. 3]). This lemma is used in [30] in
+a domain decomposition framework, where convex subdomains are assumed. With
+our improved version, this assumption can be weakened considerably.
+Acknowledgements The second author would like to thank Dirk Pauly (Essen) for enlightening
+discussions.
+
+
+--- PDF PAGE 31 ---
+30
+Ralf Hiptmair and Clemens Pechstein
+References
+1. Amrouche, C., Bernardi, C., Dauge, M., Girault, V.: Vector potentials in three-dimensional
+non-smooth domains. Math. Meth. Appl. Sci. 21(9), 823–864 (1998)
+2. Arnold, D., Falk, R., Winther, R.: Finite element exterior calculus, homological techniques,
+and applications. Acta Numerica 15, 1–155 (2006)
+3. Bauer, S., Pauly, D., Schomburg, M.: The Maxwell compactness property in bounded weak
+Lipschitz domains with mixed boundary conditions. SIAM J. Math. Anal. 48(4), 2912–2943
+(2016)
+4. Bebendorf, M.: A note on the Poincar´e inequality for convex domains. Z. Anal. Anwendungen
+22(4), 751–756 (2003)
+5. Birman, M.S., Solomyak, M.Z.: L2-theory of the Maxwell operator in arbitrary domains. Us-
+pekhi Mat. Nauk. 42(6), 61–76 (1987). English transl., Russion Math. Surveys 42 (1987), no.
+6, 75–96
+6. Bonnet-Ben Dhia, A., Hazard, C., Lohrengel, S.: A singular ﬁeld method for the solution of
+Maxwell’s equations in polyhedral domains. SIAM J. Appl. Math. 59(6), 2028–2044 (1999)
+7. Buffa, A., Costabel, M., Sheen, D.: On traces for H(curl, Ω) in Lipschitz domains. J. Math.
+Anal. Appl 276, 845–867 (2002)
+8. Cl´ement, P.: Approximation by ﬁnite element functions using local regularization.
+Rev.
+Franc¸aise Automat. Informat. Recherche Op´erationelle S´er. RAIRO Analyse Num´erique 9(R-
+2), 77–84 (1975)
+9. Costabel, M., Dauge, M., Nicaise, S.: Singularities of Maxwell interface problems. Model.
+Math. Anal. Numer. 33(2), 627–649 (1999)
+10. Creus´e, E., Nicaise, S., Tang, Z.: Helmholtz decomposition of vector ﬁelds with mixed bound-
+ary conditions and an application to a posteriori ﬁnite element analysis of the Maxwell system.
+Math. Methods Appl. Sci. 38(4), 738–750 (2015)
+11. Dautray, R., Lions, J.: Mathematical Analysis and Numerical Methods for Science and Tech-
+nology. Springer, Berlin Heidelberg (2000). Original French edition published by Masson,
+S.A., Paris, 1984
+12. Falk, R.S., Winther, R.: Local bounded cochain projections. Math. Comp. 83(290), 2631–2656
+(2014)
+13. Girault, V., Raviart, P.A.: Finite Element Methods for Navier-Stokes Equations. Springer, New
+York (1986)
+14. Gopalakrishnan, J., Qiu, W.: Partial expansion of a Lipschitz domain and some applications.
+Frontiers of Mathematics in China 7(2), 249–272 (2012)
+15. Hiptmair, R.: Canonical construction of ﬁnite elements. Math. Comp. 68, 1325–1346 (1999)
+16. Hiptmair, R.: Finite elements in computational electromagnetism. Acta Numerica 11, 237–
+339 (2002)
+17. Hiptmair, R.: Boundary element methods for eddy current computation.
+In: M. Schanz,
+O. Steinbach (eds.) Boundary Element Analysis: Mathematical Aspects and Applications,
+Lecture Notes in Applied and Computational Mechanics, vol. 29, pp. 213–248. Springer, Hei-
+delberg (2007)
+18. Hiptmair, R.: Maxwells equations: Continuous and discrete.
+In: A. Berm´udez de Castro,
+A. Valli (eds.) Computational Electromagnetism, Lecture Notes in Mathematics, vol. 2148.
+Springer, Cham (2015)
+19. Hiptmair, R., Li, J., Zou, J.: Universal extension for Sobolev spaces of differential forms and
+applications. Journal of Functional Analysis 263(2), 364–382 (2012)
+20. Hiptmair, R., Pechstein, C.: Discrete regular decompositions of tetrahedral discrete 1-forms.
+In: U. Langer, D. Pauly, S. Repin (eds.) Maxwell’s Equations, Radon Series on Computational
+and Applied Mathematics, vol. 24. De Gruyter, Stuttgart, Germany (2019). To appear in July
+2019, see also SAM Report 2017-47, ETH Zurich
+21. Hiptmair, R., Widmer, G., Zou, J.: Auxiliary space preconditioning in H0(curl; Ω). Numer.
+Math. 103, 435–459 (2006)
+
+
+--- PDF PAGE 32 ---
+Regular Decompositions
+31
+22. Hiptmair, R., Xu, J.: Nodal auxiliary space preconditioning in H(curl) and H(div) spaces.
+SIAM J. Numer. Anal. 45, 2483–2509 (2007)
+23. Hiptmair, R., Zheng, W.: Local multigrid in H(curl). J. Comput. Math. 27(5), 573–603 (2009)
+24. Hu, Q.: Convergence of HX preconditioner for Maxwell’s equations with jump coefﬁcients (i):
+various extensions of the regular Helmholtz decomposition. Tech. Rep. arXiv:1708.05850v2
+[math.AP] (2018). Submitted
+25. Kolev, T.V., Pasciak, J.E., Vassilevski, P.S.: H(curl) auxiliary mesh preconditioning. Numer.
+Linear Algebr. Appl. 15(5), 455–471 (2008)
+26. Kolev, T.V., Vassilevski, P.S.: Parallel auxiliary space AMG for H(curl) problems. J. Comput.
+Math. 27(5), 604–623 (2009)
+27. Kolev, T.V., Vassilevski, P.S.: Parallel auxiliary space AMG for H(div) problems. SIAM J.
+Sci. Comput. 34(6), A3079–A3098 (2012)
+28. McLean, W.: Strongly Elliptic Systems and Boundary Integral Equations. Cambridge Univer-
+sity Press, Cambridge, UK (2000)
+29. Monk, P.: Finite Element Methods for Maxwell’s Equations. Numerical Mathematics and
+Scientiﬁc Computation. Oxford University Press, Oxford (2003)
+30. Oh, D., Widlund, O.B., Zampini, S., Dohrmann, C.R.: BDDC algorithms with deluxe scaling
+and adaptive selection of primal constraints for Raviart–Thomas vector ﬁelds. Math. Comp.
+87, 659–692 (2018)
+31. Pasciak, J.E., Zhao, J.: Overlapping Schwarz methods in H(curl) on polyheral domains. Nu-
+mer. Math. 10(3), 211–234 (2002)
+32. Stein, E.M.: Singular Integrals and Differentiability Properties of Functions, Princeton Math
+Series, vol. 30. Princeton University Press, Princeton, New Jersey (1970)

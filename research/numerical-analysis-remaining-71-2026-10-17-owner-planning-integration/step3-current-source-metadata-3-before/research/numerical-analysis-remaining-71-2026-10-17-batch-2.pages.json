@@ -1,0 +1,724 @@
+[
+  {
+    "order": 2558,
+    "id": "radial-basis-and-kernel-interpolation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Radial basis and kernel interpolation",
+    "companion": "radial-basis-and-kernel-interpolation-examples",
+    "requires": [
+      "finite-precision-direct-factorizations",
+      "polynomial-interpolation-and-remainder",
+      "fredholm-elliptic-problems-and-the-elliptic-spectrum",
+      "sparse-high-dimensional-estimation-and-covariance"
+    ],
+    "items": [
+      {
+        "id": "def-rbf-kernels-sites-and-augmented-interpolation",
+        "kind": "definition",
+        "title": "Radial kernels, polynomial augmentation, and site geometry",
+        "deps": [],
+        "justified_by": [
+          "lem-rbf-augmented-system-is-invertible"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §§1 and 3.1",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            },
+            {
+              "title": "Rasmussen and Williams, Gaussian Processes for Machine Learning, Chapter 4",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf"
+            }
+          ]
+        },
+        "statement": "Fix an integer $d\\ge1$. An admitted domain $\\Omega\\subset\\mathbb R^d$ is a nonempty bounded Lipschitz domain (its boundary is locally the graph of a Lipschitz function, with $\\Omega$ on one side) with fixed $r_0>0$ and $0<\\theta<\\pi/2$ such that for every $x\\in\\overline\\Omega$ there is an orthogonal map $Q_x$ for which\n$$x+Q_x\\{z\\in\\mathbb R^d:0<|z|<r_0,\\ z_1>|z|\\cos\\theta\\}\\subset\\Omega.$$\nAn orthogonal map is a real linear map with $Q_x^{\\mathsf T}Q_x=I$, equivalently one preserving the Euclidean inner product. The map $Q_x$ may depend on $x$; no simultaneous selection of the maps is part of this definition.\n\nA real radial kernel on $\\mathbb R^d$ has the form $K(x,y)=\\phi(|x-y|)$ for a function $\\phi:[0,\\infty)\\to\\mathbb R$. For a finite ordered list of distinct sites $X=(x_1,\\ldots,x_N)$, its Gram matrix is $K_X=(K(x_i,x_j))_{i,j=1}^N$. The kernel is **strictly positive definite** if $c^{\\mathsf T}K_Xc>0$ for every such $X$ and every nonzero $c\\in\\mathbb R^N$; the nonstrict positive-semidefinite condition replaces $>$ by $\\ge$. Only strict positivity is used for the ordinary interpolation solve below.\n\nFor an integer $m\\ge1$, let $\\Pi_{m-1}(\\mathbb R^d)$ be the real polynomials of total degree at most $m-1$, with an ordered basis $p_1,\\ldots,p_J$, where $J=\\dim\\Pi_{m-1}(\\mathbb R^d)$. The evaluation matrix on $X$ is $P_X=(p_j(x_i))_{i,j}$. The sites are **$m$-unisolvent** for this polynomial space when $P_X$ has linearly independent columns. A kernel is **strictly conditionally positive definite of order $m$** when, for every finite distinct $X$ and this evaluation matrix, $c^{\\mathsf T}K_Xc>0$ for every nonzero $c\\in\\mathbb R^N$ satisfying $P_X^{\\mathsf T}c=0$. Thus strict conditional positivity is a strict inequality on the moment-null subspace; it is stronger than the corresponding nonstrict inequality.\n\nFor data $y\\in\\mathbb R^N$, the strictly positive definite interpolation system is $K_Xa=y$. For an order-$m$ strictly conditionally positive definite kernel and $m$-unisolvent sites, the polynomially augmented interpolation system is\n$$\\begin{bmatrix}K_X&P_X\\\\P_X^{\\mathsf T}&0\\end{bmatrix}\\begin{bmatrix}a\\\\b\\end{bmatrix}=\\begin{bmatrix}y\\\\0\\end{bmatrix}.$$\nWhenever the relevant system has a unique solution, its kernel-plus-polynomial function $x\\mapsto\\sum_i a_iK(x,x_i)+\\sum_j b_jp_j(x)$ is called the interpolant. Invertibility for the stated strict hypotheses is supplied by [[lem-rbf-augmented-system-is-invertible]].\n\nFor a finite nonempty site set $X\\subset\\Omega$, the **fill distance** is $h_X=\\sup_{x\\in\\Omega}\\min_{x_i\\in X}|x-x_i|$. If $N\\ge2$, the **separation radius** and **mesh ratio** are $q_X=\\tfrac12\\min_{i\\ne j}|x_i-x_j|$ and $\\rho_X=h_X/q_X$, respectively. These are exact geometric quantities, independent of any floating-point solver."
+      },
+      {
+        "id": "lem-rbf-augmented-system-is-invertible",
+        "kind": "lemma",
+        "title": "Strict positive and conditionally positive augmented interpolation systems are invertible",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "thm-rank-nullity",
+          "thm-reals-field",
+          "def-invertible-matrix-and-general-linear-group"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §3.1",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 18–25",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Let $X=(x_1,\\ldots,x_N)$ be a finite ordered list of distinct sites in $\\mathbb R^d$. If $K$ is strictly positive definite, then $K_X$ is invertible and $K_Xa=y$ has a unique solution for every $y\\in\\mathbb R^N$. If $K$ is strictly conditionally positive definite of order $m$ and $X$ is $m$-unisolvent for $\\Pi_{m-1}(\\mathbb R^d)$, then the augmented matrix in [[def-rbf-kernels-sites-and-augmented-interpolation]] is invertible and its system has a unique solution for every right-hand side."
+      },
+      {
+        "id": "def-normalized-matern-spectral-kernel",
+        "kind": "definition",
+        "title": "The normalized Matérn kernel in the 2π Fourier convention",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-real-gamma-function-by-the-euler-integral",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-countable-choice"
+        ],
+        "justified_by": [
+          "lem-matern-spectral-integral-and-normalization"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rasmussen and Williams, Gaussian Processes for Machine Learning, Chapter 4, equations (4.14)–(4.15)",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 34–36",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Fix the dimension $d\\ge1$ of an admitted domain, a smoothness parameter $\\nu>0$, and an inverse length $a>0$. Assume Countable Choice for the Lebesgue-integration suppliers used to justify this formula; this definition does not assume full Choice. Put $s=\\nu+d/2$ and\n$$A=\\frac{\\Gamma(s)(4\\pi)^{d/2}a^{2\\nu}}{\\Gamma(\\nu)},\\qquad w(\\xi)=A(a^2+4\\pi^2|\\xi|^2)^{-s}.$$\nAll integrals are Lebesgue integrals with respect to $\\lambda_d$ ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]), and $\\Gamma$ is the Euler integral of [[def-real-gamma-function-by-the-euler-integral]]. With the negative-sign Fourier transform convention $\\widehat U(\\xi)=\\int U(x)e^{-2\\pi i x\\cdot\\xi}\\,dx$, define the normalized stationary kernel by\n$$k(z)=\\int_{\\mathbb R^d}w(\\xi)e^{2\\pi i z\\cdot\\xi}\\,d\\xi,\\qquad K(x,y)=k(x-y).$$\nThe corresponding length parameter in the usual Matérn notation is $\\ell=\\sqrt{2\\nu}/a$. For $b>0$, define the modified Bessel function in its integral normalization by\n$$K_\\nu(b)=\\frac12\\left(\\frac b2\\right)^\\nu\\int_0^\\infty u^{-\\nu-1}e^{-u-b^2/(4u)}\\,du.$$\nThe classical Bessel expression for $k(z)$ when $z\\ne0$, its value $k(0)=1$, absolute convergence, continuity, and radial symmetry are established by [[lem-matern-spectral-integral-and-normalization]]. This definition makes no finite-precision stability claim."
+      },
+      {
+        "id": "def-bessel-potential-space-and-restriction-quotient",
+        "kind": "definition",
+        "title": "Fourier Bessel-potential and restriction-quotient Sobolev spaces",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-real-and-complex-inner-product-space",
+          "def-real-power",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [
+          "lem-matern-weighted-fourier-space-is-hilbert-and-injective",
+          "lem-schwartz-dense-in-fourier-bessel-potential-space"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 23–36",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            },
+            {
+              "title": "Rasmussen and Williams, Gaussian Processes for Machine Learning, Chapter 4, equations (4.5)–(4.6)",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice when using the well-definedness results below; it is inherited conservatively from the published $L^2$ completeness supplier. Let $d\\ge1$ and $s>d/2$. Write $L^2_s(\\mathbb R^d)$ for the equivalence classes modulo Lebesgue-almost-everywhere equality of measurable complex functions $g$ satisfying\n$$\\|g\\|_{L^2_s}^2=\\int_{\\mathbb R^d}(1+|\\xi|^2)^s|g(\\xi)|^2\\,d\\xi<\\infty.$$\nFor such $g$, the **inverse Fourier representative** is the function\n$$U_g(x)=\\int_{\\mathbb R^d}g(\\xi)e^{2\\pi i x\\cdot\\xi}\\,d\\xi.$$\nThe whole-space Bessel-potential space $H^s(\\mathbb R^d)$ consists of these representatives, with norm $\\|U_g\\|_{H^s(\\mathbb R^d)}=\\|g\\|_{L^2_s}$. For the admitted domain $\\Omega$ of [[def-rbf-kernels-sites-and-augmented-interpolation]], define $H^s(\\Omega)$ to be the restrictions $U|_\\Omega$ of whole-space members, with the quotient norm\n$$\\|u\\|_{H^s(\\Omega)}=\\inf\\{\\|U\\|_{H^s(\\mathbb R^d)}:U|_\\Omega=u\\}.$$\nThe whole-space inner product is $\\langle U_g,U_h\\rangle_{H^s}=\\int (1+|\\xi|^2)^s g(\\xi)\\overline{h(\\xi)}\\,d\\xi$, linear in the first variable as in [[def-real-and-complex-inner-product-space]].\nThe inverse Fourier map is injective, whole-space representatives are continuous, the whole-space model is Hilbert, and Schwartz functions are dense in that norm; these facts are supplied by [[lem-matern-weighted-fourier-space-is-hilbert-and-injective]] and [[lem-schwartz-dense-in-fourier-bessel-potential-space]]. The restriction quotient is a norm by bounded point evaluation; its Hilbert realization as the restricted native space is proved in [[lem-restricted-matern-native-space-is-sobolev]]. No extension operator or identification with an intrinsic fractional Sobolev norm on $\\Omega$ is part of this definition."
+      },
+      {
+        "id": "lem-cone-sites-admit-stable-polynomial-norming-stencils",
+        "kind": "lemma",
+        "title": "Uniform cone domains admit stable polynomial norming stencils",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "thm-rank-nullity",
+          "thm-reals-field",
+          "thm-reals-ordered-field",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §§2.1–2.2",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            }
+          ]
+        },
+        "statement": "Let $\\Omega\\subset\\mathbb R^d$ be an admitted domain of [[def-rbf-kernels-sites-and-augmented-interpolation]], let $X\\subset\\Omega$ be finite and nonempty, and put $h=h_X$. Fix an integer $m\\ge1$ and let $J=\\dim\\Pi_{m-1}(\\mathbb R^d)$. There are constants $R,B,h_0>0$, depending only on $d,m,r_0,\\theta$, such that if $0<h\\le h_0$, then for every $x\\in\\overline\\Omega$ there are distinct nodes $y_1,\\ldots,y_J\\in X$ and real weights $\\lambda_1,\\ldots,\\lambda_J$ with\n$$|y_j-x|\\le Rh,\\qquad \\sum_{j=1}^J|\\lambda_j|\\le B,\\qquad p(x)=\\sum_{j=1}^J\\lambda_jp(y_j)\\quad(p\\in\\Pi_{m-1}(\\mathbb R^d)).$$\nNo lower bound on site separation is assumed."
+      },
+      {
+        "id": "lem-matern-spectral-integral-and-normalization",
+        "kind": "lemma",
+        "title": "The Matérn spectral integral, normalization, and radial formula",
+        "deps": [
+          "def-normalized-matern-spectral-kernel",
+          "def-real-gamma-function-by-the-euler-integral",
+          "thm-real-gamma-euler-integral-convergence",
+          "thm-gaussian-integral",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-mean-value-theorem",
+          "thm-dominated-convergence",
+          "lem-complex-integration-by-parts-on-intervals-and-decaying-lines",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rasmussen and Williams, Gaussian Processes for Machine Learning, Chapter 4, equations (4.5)–(4.15)",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 24–36",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice, and fix $d\\ge1$, $\\nu>0$, $a>0$, $s=\\nu+d/2$, and $A,w,k$ as in [[def-normalized-matern-spectral-kernel]]. Then $w>0$, $w\\in L^1(\\mathbb R^d)$, and\n$$\\int_{\\mathbb R^d}w(\\xi)\\,d\\xi=1.$$\nThe integral defining $k(z)$ is absolutely convergent for every $z$; $k$ is real, even, radial, and continuous, and $k(0)=1$. For every $z\\in\\mathbb R^d$,\n$$k(z)=\\frac{a^{2\\nu}}{\\Gamma(\\nu)}\\int_0^\\infty t^{\\nu-1}\\exp\\!\\left(-a^2t-\\frac{|z|^2}{4t}\\right)dt.$$\nFor $z\\ne0$ this is equivalently\n$$k(z)=\\frac{2^{1-\\nu}}{\\Gamma(\\nu)}(a|z|)^\\nu K_\\nu(a|z|),$$\nwhere $K_\\nu$ has the integral normalization in [[def-normalized-matern-spectral-kernel]]. Under the stated Fourier convention, the $d$-dimensional Gaussian identity is, for $t>0$,\n$$\\int_{\\mathbb R^d}e^{-4\\pi^2t|\\xi|^2}e^{2\\pi i z\\cdot\\xi}\\,d\\xi=(4\\pi t)^{-d/2}e^{-|z|^2/(4t)}.$$"
+      },
+      {
+        "id": "alg-augmented-rbf-finite-difference-weights",
+        "kind": "algorithm",
+        "title": "Exact augmented RBF-FD weights for a local differential functional",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "lem-rbf-augmented-system-is-invertible",
+          "thm-reals-field"
+        ],
+        "justified_by": [
+          "thm-rbf-fd-polynomial-reproduction-and-local-truncation"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Accelerated Training of Physics-Informed Neural Networks (PINNs) using Meshless Discretizations",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2022/file/0764db1151b936aca59249e2c1386101-Paper-Conference.pdf",
+              "locator": "Section 2.2, equations (8)–(11)"
+            },
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §3.1",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            }
+          ]
+        },
+        "statement": "The **exact augmented RBF finite-difference weight procedure** has the following inputs: a dimension $d\\ge1$; an integer polynomial degree $r\\ge0$; a finite ordered stencil $Y=(y_1,\\ldots,y_N)\\subset\\mathbb R^d$ of distinct sites that is $(r+1)$-unisolvent for $\\Pi_r(\\mathbb R^d)$; a real kernel $K$ strictly conditionally positive definite of order $r+1$; an ordered basis $p_1,\\ldots,p_J$ of $\\Pi_r(\\mathbb R^d)$; a center $x\\in\\mathbb R^d$; a homogeneous constant-coefficient differential functional $L=\\sum_{|\\alpha|=t}c_\\alpha D^\\alpha$ with $0\\le t\\le r$; and a neighborhood of $x$ on which every section $z\\mapsto K(z,y_i)$ has continuous derivatives through order $t$. Here $\\alpha\\in\\mathbb N_0^d$, $|\\alpha|=\\sum_j\\alpha_j$, and $D^\\alpha$ is the corresponding partial derivative. All arithmetic in this procedure is exact real arithmetic.\n\nIf dimensions, distinctness, unisolvence, the kernel condition, or derivative availability fail, return `inadmissible-input`. Otherwise form $P_{ij}=p_j(y_i)$, $b_i=(L_zK(z,y_i))|_{z=x}$, $\\ell_j=(Lp_j)(x)$, and\n$$M=\\begin{bmatrix}K_Y&P\\\\P^{\\mathsf T}&0\\end{bmatrix},\\qquad g=\\begin{bmatrix}b\\\\ell\\end{bmatrix}.$$\nSolve $Mz=g$ by exact Gaussian elimination with deterministic nonzero-pivot row selection: set $A=M$, $c=g$, and $n=N+J$. For $k=1,\\ldots,n$, choose the least $i\\ge k$ with $A_{ik}\\ne0$; if none exists, return `singular-system`. Swap rows $i$ and $k$ in both $A$ and $c$. For each $j=k+1,\\ldots,n$ in increasing order, set $\\mu=A_{jk}/A_{kk}$, replace row $j$ by row $j-\\mu\\,\\mathrm{row}_k$ in $A$ and $c$, and set $A_{jk}=0$. After all pivots, set $z_n=c_n/A_{nn}$; then, for $k=n-1,n-2,\\ldots,1$ in decreasing order, set $z_k=(c_k-\\sum_{j=k+1}^n A_{kj}z_j)/A_{kk}$. Return `success` with the first $N$ coordinates $w$ of $z$ and the remaining $J$ polynomial multipliers. The stated strict hypotheses imply that `singular-system` is unreachable, as proved by [[lem-rbf-augmented-system-is-invertible]].\n\nThe returned $w$ is an exact mathematical weight vector. The nonsingularity lemma [[lem-rbf-augmented-system-is-invertible]] makes `singular-system` unreachable for every input that passes the stated strict hypotheses. This definition makes no floating-point stability or solver-error claim."
+      },
+      {
+        "id": "lem-matern-weighted-fourier-space-is-hilbert-and-injective",
+        "kind": "lemma",
+        "title": "The weighted Fourier model is an injective Hilbert representation",
+        "deps": [
+          "def-bessel-potential-space-and-restriction-quotient",
+          "lem-matern-spectral-integral-and-normalization",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-gaussian-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 19–25",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            },
+            {
+              "title": "Rasmussen and Williams, Gaussian Processes for Machine Learning, Chapter 4, equations (4.5)–(4.6)",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice as a conservative cover of the published $L^2$ completeness dependency, which declares it in its transitive dependencies although its statement requires only Countable Choice. For every $s>d/2$, each $g\\in L^2_s(\\mathbb R^d)$ lies in $L^1(\\mathbb R^d)$, its inverse Fourier representative $U_g$ is bounded and continuous, the map $g\\mapsto U_g$ is injective, and the whole-space Fourier Bessel-potential space of [[def-bessel-potential-space-and-restriction-quotient]] is a complex Hilbert space. In particular, for a constant $C_{d,s}<\\infty$,\n$$|U_g(x)|\\le C_{d,s}\\|g\\|_{L^2_s}\\qquad(x\\in\\mathbb R^d).$$"
+      },
+      {
+        "id": "lem-separated-sites-matern-gram-bound",
+        "kind": "lemma",
+        "title": "Separated Matérn sites have an explicit positive Gram lower bound",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-normalized-matern-spectral-kernel",
+          "lem-matern-spectral-integral-and-normalization",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "cor-rayleigh-quotient-extreme-eigenvalue-characterisation",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "lem-symmetric-matrix-operator-norm-rayleigh",
+          "def-induced-matrix-p-norm",
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "def-countable-choice",
+          "thm-integral-triangle-inequality",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-real-power-continuity-and-derivatives",
+          "cor-mean-value-theorem",
+          "thm-real-power-laws",
+          "thm-p-series-real-exponents"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §3.1",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 34–36",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Fix $d\\ge1$, $\\nu>0$, $a>0$, $s=\\nu+d/2$, and the normalized Matérn kernel with spectral density $w(\\xi)=A(a^2+4\\pi^2|\\xi|^2)^{-s}$ from [[def-normalized-matern-spectral-kernel]]. For a list of $N\\ge2$ distinct sites $X=(x_1,\\ldots,x_N)\\subset\\mathbb R^d$, put $q=\\tfrac12\\min_{i\\ne j}|x_i-x_j|$. There is $c=c(d,\\nu,a)>0$ such that if $0<q\\le1$, then\n$$\\lambda_{\\min}(K_X)\\ge c q^{2\\nu},\\qquad \\lambda_{\\max}(K_X)\\le N,\\qquad \\kappa_2(K_X)\\le c^{-1}Nq^{-2\\nu}.$$\nThe eigenvalues and condition number are those of the exact real symmetric positive-definite matrix. For $N=1$, $K_X=[1]$ and $\\kappa_2(K_X)=1$."
+      },
+      {
+        "id": "thm-rbf-fd-polynomial-reproduction-and-local-truncation",
+        "kind": "theorem",
+        "title": "Augmented RBF-FD weights reproduce polynomials and obey a local Taylor bound",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "lem-rbf-augmented-system-is-invertible",
+          "alg-augmented-rbf-finite-difference-weights",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Accelerated Training of Physics-Informed Neural Networks (PINNs) using Meshless Discretizations",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2022/file/0764db1151b936aca59249e2c1386101-Paper-Conference.pdf",
+              "locator": "Section 2.2, equations (8)–(11)"
+            },
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §3.1",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            }
+          ]
+        },
+        "statement": "Let $p\\ge0$ be an integer, let $Y=(y_1,\\ldots,y_N)$ be distinct and $(p+1)$-unisolvent for $\\Pi_p(\\mathbb R^d)$, and let $K$ be a real strictly conditionally positive-definite kernel of order $p+1$. Fix a center $x$, an ordered basis $p_1,\\ldots,p_J$ of $\\Pi_p$, and a homogeneous constant-coefficient differential functional $L$ of order $t\\le p$ for which all section derivatives in [[alg-augmented-rbf-finite-difference-weights]] exist. Let $(w,v)$ be the exact output of that procedure and put $r_Y=\\max_i|y_i-x|$. Then the procedure returns success, and for every $q\\in\\Pi_p$,\n$$\\sum_{i=1}^Nw_iq(y_i)=Lq(x).$$\nIf $f\\in C^{p+1}(U)$ on an open convex set $U$ containing the compact convex hull $H=\\operatorname{conv}\\{x,y_1,\\ldots,y_N\\}$, then\n$$\\left|\\sum_iw_if(y_i)-Lf(x)\\right|\\le C_{d,p}\\left(\\sum_i|w_i|\\right)r_Y^{p+1}\\max_{|\\alpha|=p+1}\\sup_{z\\in H}|D^\\alpha f(z)|.$$\nConsequently, when $r_Y>0$, a separately proved bound $\\sum_i|w_i|\\le C_wr_Y^{-t}$ yields the order $C_{d,p}C_wr_Y^{p+1-t}$ truncation bound. Unisolvence alone is not asserted to provide this weight-norm bound."
+      },
+      {
+        "id": "lem-schwartz-dense-in-fourier-bessel-potential-space",
+        "kind": "lemma",
+        "title": "Schwartz functions are dense in the Fourier Bessel-potential norm",
+        "deps": [
+          "def-bessel-potential-space-and-restriction-quotient",
+          "lem-matern-weighted-fourier-space-is-hilbert-and-injective",
+          "lem-matern-spectral-integral-and-normalization",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "lem-complex-integration-by-parts-on-intervals-and-decaying-lines",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 23–36",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice inherited from the declared $L^2$ dependency. For every $s>d/2$, every Schwartz function $f$ belongs to $H^s(\\mathbb R^d)$, and the inverse Fourier transforms of $C_c^\\infty(\\mathbb R^d)$ are Schwartz functions and are dense in $H^s(\\mathbb R^d)$ of [[def-bessel-potential-space-and-restriction-quotient]]. The Fourier transform uses the negative-sign $2\\pi$ convention."
+      },
+      {
+        "id": "lem-sobolev-zeros-bound-on-a-cone-domain",
+        "kind": "lemma",
+        "title": "A Sobolev function vanishing on scattered sites has an h^ν bound",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-bessel-potential-space-and-restriction-quotient",
+          "lem-matern-weighted-fourier-space-is-hilbert-and-injective",
+          "lem-cone-sites-admit-stable-polynomial-norming-stencils",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-reals-ordered-field",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-dominated-convergence",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §§2.1–2.2",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 23–25",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Assume full AC conservatively for the declared weighted-$L^2$ Hilbert dependency. Let $\\Omega$ be an admitted domain with its uniform cone constants, fix $d\\ge1$, $\\nu>0$, $s=\\nu+d/2$, and choose an integer $m>\\nu$. There exist $C,h_0>0$, depending only on $d,s,m$ and the cone constants, such that for every finite nonempty $X\\subset\\Omega$ of fill distance $h=h_X\\le h_0$ and every $u\\in H^s(\\Omega)$ with $u|_X=0$,\n$$\\|u\\|_{L^\\infty(\\Omega)}\\le C h^\\nu\\|u\\|_{H^s(\\Omega)}.$$\nThe estimate has no separation or mesh-ratio hypothesis."
+      },
+      {
+        "id": "cor-matern-mesh-ratio-conditioning-bound",
+        "kind": "corollary",
+        "title": "Bounded mesh ratio gives an h^{-2s} exact condition-number bound",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "lem-separated-sites-matern-gram-bound",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §3.1",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 34–36",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Fix Matérn parameters $d\\ge1$, $\\nu>0$, $a>0$, $s=\\nu+d/2$, an admitted bounded domain $\\Omega$, and a mesh-ratio bound $\\rho_0>0$. There is $C=C(\\Omega,d,\\nu,a,\\rho_0)$ such that every finite nonempty distinct site set $X\\subset\\Omega$ with $N\\ge2$, $0<q_X\\le1$, $0<h_X\\le1$, and $\\rho_X=h_X/q_X\\le\\rho_0$ satisfies\n$$\\kappa_2(K_X)\\le C h_X^{-2s}.$$\nThe one-site case has condition number $1$. This is an exact-arithmetic condition-number estimate for the Gram matrix; it does not bound the error of a floating-point solver."
+      },
+      {
+        "id": "lem-matern-native-space-fourier-identity-and-positive-definiteness",
+        "kind": "lemma",
+        "title": "The Matérn native space has its weighted Fourier norm and strict Gram positivity",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-normalized-matern-spectral-kernel",
+          "def-bessel-potential-space-and-restriction-quotient",
+          "lem-matern-spectral-integral-and-normalization",
+          "lem-matern-weighted-fourier-space-is-hilbert-and-injective",
+          "lem-schwartz-dense-in-fourier-bessel-potential-space",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-root-bound-for-polynomials-over-a-domain",
+          "thm-reals-ordered-field",
+          "thm-reals-field",
+          "thm-real-power-continuity-and-derivatives",
+          "cor-mean-value-theorem",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rasmussen and Williams, Gaussian Processes for Machine Learning, Chapter 4, equations (4.5)–(4.8)",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 18–25",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice conservatively for the declared $L^2$ Hilbert-space dependency. Fix $d\\ge1$, $\\nu>0$, $a>0$, and $s=\\nu+d/2$, and let $k,w$ be the normalized Matérn kernel and positive spectral density of [[def-normalized-matern-spectral-kernel]]. Let $\\mathcal H_k(\\mathbb R^d)$ consist of the inverse Fourier representatives $U_g$ with $\\int |g(\\xi)|^2/w(\\xi)\\,d\\xi<\\infty$, with inner product\n$$\\langle U_g,U_h\\rangle_k=\\int_{\\mathbb R^d}\\frac{g(\\xi)\\overline{h(\\xi)}}{w(\\xi)}d\\xi.$$\nThen this is a Hilbert space, each kernel section $k(\\cdot-y)$ reproduces evaluation at $y$, and its span is dense. There are constants $0<c\\le C<\\infty$, depending only on $d,\\nu,a$, such that\n$$c\\|U\\|_{H^s(\\mathbb R^d)}\\le\\|U\\|_k\\le C\\|U\\|_{H^s(\\mathbb R^d)}.$$\nFor every finite list of distinct sites $X=(x_1,\\ldots,x_N)$, the Matérn Gram matrix $K_X=(k(x_i-x_j))$ is strictly positive definite."
+      },
+      {
+        "id": "lem-restricted-matern-native-space-is-sobolev",
+        "kind": "lemma",
+        "title": "The restricted Matérn native space is the Sobolev quotient space",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-normalized-matern-spectral-kernel",
+          "def-bessel-potential-space-and-restriction-quotient",
+          "lem-matern-native-space-fourier-identity-and-positive-definiteness",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 18–25 and 34–36",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            },
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §§2.1–2.2",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            }
+          ]
+        },
+        "statement": "Assume full AC conservatively for the declared Hilbert projection dependency. Fix the Matérn kernel of [[def-normalized-matern-spectral-kernel]] on a nonempty domain $\\Omega$ of [[def-rbf-kernels-sites-and-augmented-interpolation]]. Let $\\mathcal N_\\Omega=\\{U\\in\\mathcal H_k(\\mathbb R^d):U|_\\Omega=0\\}$. The restricted native space is the quotient $\\mathcal H_k(\\mathbb R^d)/\\mathcal N_\\Omega$ with infimal extension norm, and it is the reproducing-kernel Hilbert space of $k|_{\\Omega\\times\\Omega}$. Its norm is equivalent to the restriction-quotient norm of $H^s(\\Omega)$: for constants $c,C>0$ depending only on $d,\\nu,a$,\n$$c\\|u\\|_{H^s(\\Omega)}\\le\\|u\\|_{\\mathcal H_k(\\Omega)}\\le C\\|u\\|_{H^s(\\Omega)}.$$\nNo extension theorem or intrinsic fractional-domain norm is asserted."
+      },
+      {
+        "id": "thm-native-interpolation-projection-and-power-function",
+        "kind": "theorem",
+        "title": "Native Matérn interpolation is an orthogonal projection with power function",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-normalized-matern-spectral-kernel",
+          "def-bessel-potential-space-and-restriction-quotient",
+          "lem-rbf-augmented-system-is-invertible",
+          "lem-matern-spectral-integral-and-normalization",
+          "lem-matern-native-space-fourier-identity-and-positive-definiteness",
+          "lem-restricted-matern-native-space-is-sobolev",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rasmussen and Williams, Gaussian Processes for Machine Learning, Chapter 4, equations (4.5)–(4.8)",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 18–25",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Assume full AC conservatively for the declared Hilbert projection dependencies. Let $X=(x_1,\\ldots,x_N)\\subset\\Omega$ be distinct and nonempty, and let $\\mathcal H_k(\\Omega)$ be the restricted Matérn native RKHS. For every $f\\in\\mathcal H_k(\\Omega)$, the unique kernel interpolant $s_Xf=\\sum_jc_jk(\\cdot-x_j)$ is the orthogonal projection of $f$ onto $V_X=\\operatorname{span}\\{k(\\cdot-x_j):1\\le j\\le N\\}$. Define\n$$P_X(x)=\\|(I-\\Pi_X)k(\\cdot-x)\\|_{\\mathcal H_k(\\Omega)},$$\nwhere $\\Pi_X$ is that projection. Then for every $x\\in\\Omega$,\n$$|f(x)-s_Xf(x)|\\le P_X(x)\\|f\\|_{\\mathcal H_k(\\Omega)},\\qquad P_X(x)^2=k(0)-k_X(x)^*K_X^{-1}k_X(x)\\ge0.$$\nwhere $K_X=(k(x_i-x_j))$ and $k_X(x)=(k(x_i-x))_{i=1}^N$."
+      },
+      {
+        "id": "thm-matern-interpolation-fill-distance-error",
+        "kind": "theorem",
+        "title": "Matérn interpolation and its power function converge at rate h^ν",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-normalized-matern-spectral-kernel",
+          "def-bessel-potential-space-and-restriction-quotient",
+          "lem-restricted-matern-native-space-is-sobolev",
+          "lem-sobolev-zeros-bound-on-a-cone-domain",
+          "thm-native-interpolation-projection-and-power-function",
+          "cor-cauchy-reals-lub-complete",
+          "thm-of-archimedean",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), Theorem 1.1 and §§2.1–2.2",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 34–36",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "statement": "Assume full AC conservatively for the Hilbert projection and weighted-$L^2$ suppliers. Fix arbitrary $d\\ge1$, $\\nu>0$, $a>0$, $s=\\nu+d/2$, the normalized Matérn kernel $k$ of [[def-normalized-matern-spectral-kernel]], and an admitted uniform-cone domain $\\Omega$. There are constants $C,h_0>0$, depending only on $d,\\nu,a$ and the domain's cone constants, such that for every finite nonempty distinct site set $X\\subset\\Omega$ with fill distance $h_X\\le h_0$ and every $f\\in H^s(\\Omega)$,\n$$\\|f-s_Xf\\|_{L^\\infty(\\Omega)}\\le C h_X^\\nu\\|f\\|_{H^s(\\Omega)},\\qquad \\sup_{x\\in\\Omega}P_X(x)\\le C h_X^\\nu.$$\nHere $s_Xf$ and $P_X$ are the native interpolant and power function of [[thm-native-interpolation-projection-and-power-function]]. The rate requires no mesh-ratio bound. The constants are uniform over site sets satisfying the fill-distance condition."
+      }
+    ]
+  },
+  {
+    "order": 2559,
+    "id": "radial-basis-and-kernel-interpolation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Radial basis and kernel interpolation — Examples",
+    "companion": "radial-basis-and-kernel-interpolation",
+    "requires": [
+      "radial-basis-and-kernel-interpolation"
+    ],
+    "items": [
+      {
+        "id": "ex-duplicate-rbf-sites-singular-gram-matrix",
+        "kind": "example",
+        "title": "Duplicate sites make the kernel Gram matrix singular",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §1",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $K(x,y)=\\phi(|x-y|)$ be any radial kernel, and let a site list contain $x_1=x_2$."
+      },
+      {
+        "id": "ex-small-fill-distance-can-have-poor-rbf-conditioning",
+        "kind": "example",
+        "title": "A small fill distance can coexist with poor separation and conditioning",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-normalized-matern-spectral-kernel",
+          "lem-matern-spectral-integral-and-normalization",
+          "lem-separated-sites-matern-gram-bound",
+          "cor-rayleigh-quotient-extreme-eigenvalue-characterisation",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "def-induced-matrix-p-norm",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), §3.1",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            },
+            {
+              "title": "Rasmussen and Williams, Gaussian Processes for Machine Learning, Chapter 4, equations (4.5)–(4.8)",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW4.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Assume Countable Choice. For fixed $d\\ge1$, $\\nu>0$, and $a>0$, let $X_m$ be the midpoint grid in $\\Omega=(0,1)^d$ for each odd $m\\ge3$. There are $0<\\delta_m<1/(4m^2)$ such that the augmented sets $Z_m=X_m\\cup\\{x_0+\\delta_me_1\\}$, with $x_0=(1/2,\\ldots,1/2)$, satisfy $h_{Z_m}\\to0$, $\\rho_{Z_m}\\to\\infty$, and $\\kappa_2(K_{Z_m})\\to\\infty$ for the normalized Matérn kernel."
+      },
+      {
+        "id": "ex-smooth-scattered-surface-matern-rate",
+        "kind": "example",
+        "title": "A smooth scattered surface inherits the Matérn fill-distance rate",
+        "deps": [
+          "def-rbf-kernels-sites-and-augmented-interpolation",
+          "def-normalized-matern-spectral-kernel",
+          "def-bessel-potential-space-and-restriction-quotient",
+          "lem-matern-spectral-integral-and-normalization",
+          "lem-schwartz-dense-in-fourier-bessel-potential-space",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-exponential-beats-every-polynomial",
+          "thm-matern-interpolation-fill-distance-error",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Narcowich, Ward, and Wendland, Sobolev bounds on functions with scattered zeros, Math. Comp. 74 (2005), Theorem 1.1",
+              "url": "https://www.researchgate.net/publication/220577178_Sobolev_bounds_on_functions_with_scattered_zeros_with_applications_to_radial_basis_function_surface_fitting"
+            },
+            {
+              "title": "Gregory E. Fasshauer, MATH 590: Meshfree Methods, Chapter 13, pp. 34–36",
+              "url": "https://math.iit.edu/~fass/Notes590_Ch13Print.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Assume the Axiom of Choice and Countable Choice as required by the Fourier-space and interpolation suppliers. Fix $d\\ge1$, $\\nu>0$, $a>0$, and let $\\Omega=(0,1)^d$. The smooth graph $\\{(x,f(x)):x\\in\\overline\\Omega\\}$ with $f(x)=e^{-\\pi|x|^2}$ is interpolated from midpoint-grid samples by the normalized Matérn kernel of smoothness $\\nu$."
+      }
+    ]
+  }
+]

@@ -1,0 +1,121 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "57",
+  "input_sha256": "e9e862a5d9fc0f5beca3860e9017960e4487dcd5836978457e73185a3b4d2016",
+  "decisions": [
+    {
+      "id": "lem-bem-p0-negative-half-order-approximation",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "e14ec08386fc4f47642e912bdc796145c48a8f4e48edbe40312391e93fdd759a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "A cube top face may be subdivided at x=1/2 into two coplanar faces while its mesh triangles cross that line. Set lambda=1 on the left subface and zero on all other faces. Every facewise gradient vanishes, but a crossing triangle has a nonconstant restriction, hence nonzero mean-projection error. A smooth bump inside one side of that triangle detects the error in the H^(-1/2) dual. The claimed gradient-only bound and step 1.2 therefore fail: this is a logic defect, not a missing citation.",
+      "uncertain": false,
+      "source_urls": [
+        "https://team-pancho.github.io/teaching/math838/BEM.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-bem-p0-negative-half-order-approximation",
+      "disposition": "repaired",
+      "post_sha256": "4a772ce0f8d49082ae400a25f624073f53ffe6229bda0acadd394084d5e36182",
+      "review_context_sha256": "95e49bce5ce2bef7d3a9ae3fc99521beb2a9cf31c0cea312afcbd90d2727c481",
+      "reason": "Checked the chart/Fourier conventions, convex Poincare supplier and zero-mean duality. Retained the family-independent H^(1/2)-to-L2 estimate and clarified H1 regularity of its smoothed restrictions across coplanar seams. Added the general h^(1/2) negative-norm residual bound for every L2 density. The h^(3/2) gradient bound now covers every elementwise H1 density, including facewise C1 densities on face-fitted meshes, with no continuity required across mesh edges. No new supplier or choice assumption is needed. This is the repairer’s verification, not independent review.",
+      "uncertain": false,
+      "source_urls": [
+        "https://team-pancho.github.io/teaching/math838/BEM.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cor-bem-p0-galerkin-rate-for-h1-density"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-bem-p0-negative-half-order-approximation",
+      "defect_type": "logic",
+      "severity": "fatal",
+      "status": "fixed",
+      "reason": "A cube top face may be subdivided at x=1/2 into two coplanar faces while its mesh triangles cross that line. Set lambda=1 on the left subface and zero on all other faces. Every facewise gradient vanishes, but a crossing triangle has a nonconstant restriction, hence nonzero mean-projection error. A smooth bump inside one side of that triangle detects the error in the H^(-1/2) dual. The claimed gradient-only bound and step 1.2 therefore fail: this is a logic defect, not a missing citation.",
+      "correction": "Checked the chart/Fourier conventions, convex Poincare supplier and zero-mean duality. Retained the family-independent H^(1/2)-to-L2 estimate and clarified H1 regularity of its smoothed restrictions across coplanar seams. Added the general h^(1/2) negative-norm residual bound for every L2 density. The h^(3/2) gradient bound now covers every elementwise H1 density, including facewise C1 densities on face-fitted meshes, with no continuity required across mesh edges. No new supplier or choice assumption is needed. This is the repairer’s verification, not independent review.",
+      "uncertain": false,
+      "source_urls": [
+        "https://team-pancho.github.io/teaching/math838/BEM.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "cor-bem-p0-galerkin-rate-for-h1-density",
+      "supplier": "lem-bem-p0-negative-half-order-approximation",
+      "route": "frontier-owner",
+      "affected_use": "F2 asserts the h^(3/2) gradient-only projection estimate for all piecewise C1 data; proof step 2.1 applies it without checking that lambda restricts to H1 on every triangle.",
+      "invalidated_claim": "The corollary Statement promises zero Galerkin error for the same zero-gradient density. Taking f=V lambda makes this the exact density, but lambda is not in X_h on a crossing triangle, so no Galerkin density can equal it.",
+      "minimality": "Add the face-fitted mesh hypothesis to the facewise C1 version, preserving the same rate and allowing density jumps across face edges; preferably also retain the general elementwise H1 version. Update F2, Given and the owning contract/manifest. This is a necessary Statement change and must trigger its own direct-consumer examination by its owner.",
+      "status": "open",
+      "uncertain": false,
+      "source_urls": [
+        "https://team-pancho.github.io/teaching/math838/BEM.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_comparison": "The first estimate is unchanged. The second estimate now explicitly requires elementwise H1 regularity; facewise C1 data suffice when each triangle lies in one given face. The unrestricted L2 residual estimate remains valid on all originally admitted meshes. This qualification is forced by an explicit counterexample, not a discretionary narrowing to avoid proof work.",
+    "downstream_examination": [
+      {
+        "id": "cor-bem-p0-galerkin-rate-for-h1-density",
+        "path": "items/cor-bem-p0-galerkin-rate-for-h1-density.md",
+        "affected_use": "F2 asserts the h^(3/2) gradient-only projection estimate for all piecewise C1 data; proof step 2.1 applies it without checking that lambda restricts to H1 on every triangle.",
+        "disposition": "necessary repair routed to ordinary frontier owner; item not edited outside assignment",
+        "exact_excerpt": "[F2] Element averages satisfy $\\|\\lambda-\\Pi_h\\lambda\\|_{H^{-1/2}}\\le Ch^{3/2}\\|\\nabla_\\Gamma\\lambda\\|_{L^2}$ for piecewise $C^1$ data ([[lem-bem-p0-negative-half-order-approximation]])."
+      }
+    ],
+    "page_examination": {
+      "path": "library/numerical-pdes-and-spatial-discretization/boundary-integral-equations-and-galerkin-bem.md",
+      "affected_use": "The Conforming P0 Galerkin method paragraph links this lemma for its negative-half-order approximation estimate.",
+      "disposition": "The generic lemma reference remains sound: both corrected negative-norm estimates are proved. The same paragraph links the rate corollary whose missing qualification is separately routed above. No page edit is necessary before that owner review."
+    },
+    "published_consumers": "No direct published item dependency/reference consumers found; no published-ledger update or outside maintenance subject is proposed.",
+    "source_reading": "Consulted Sayas, First Steps in the Boundary Element Method, complete section 1.3 (PDF pages 7–10, printed pages 6–9), for the partition/P0/Galerkin interface. This section does not prove the disputed approximation rate. The repair is verified directly using the local convex Poincare statement, Fourier suppliers and zero-mean duality; no claim of reading Costabel is made.",
+    "metadata": "Updated only the assigned item statement mirror in batch-57.pages.json and its proof-contract derivations, zero boundary evidence and risk review. Shared writes used acquire/reread/edit/check/release. Prior risk reviews remain preserved. No judge stamp or round state was written.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-bem-p0-negative-half-order-approximation.md --json",
+        "exit_code": 0,
+        "result": "1 checked proof, 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-bem-p0-negative-half-order-approximation.md --json",
+        "exit_code": 0,
+        "result": "1 checked item, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-57.proof-contracts.json --strict --items lem-bem-p0-negative-half-order-approximation",
+        "exit_code": 0,
+        "result": "1/1 item checked, 0 errors and 0 warnings after adding the required step locator to zero boundary evidence"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-bem-p0-negative-half-order-approximation.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects; run after the final item edit"
+      }
+    ],
+    "operational_note": "An initial direct node tools/precheck.mts invocation failed because Node requires tools/tsx-run.mjs for .mts files; the correctly scoped invocation above passed. An unintended unscoped rendercheck help invocation was interrupted and supplies no validation evidence.",
+    "unresolved_obligations": [
+      "The unassigned draft Galerkin rate corollary requires the routed owner repair and ordinary propagation. No uncertainty remains in the assigned lemma repair."
+    ],
+    "next_action": "Engine collects this report and routes the necessary direct frontier consumer repair; independent rejudgment and certification remain engine-owned."
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "67",
+  "round": 1,
+  "reviewed_items": [
+    "cor-ale-exact-splitting-residual-orders",
+    "def-ale-linear-diffusion-transmission-model",
+    "def-ale-moving-domain-map",
+    "def-ale-periodic-moving-grid",
+    "def-ale-toy-added-mass-recurrence",
+    "alg-ale-upwind-finite-volume-step",
+    "lem-ale-jacobi-geometric-conservation-identity",
+    "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+    "lem-ale-schur-complement-positive-and-minimizes-energy",
+    "thm-ale-monolithic-backward-euler-energy-identity",
+    "alg-ale-robin-robin-partitioned-iteration",
+    "lem-ale-schur-residual-controls-interface-energy-error",
+    "thm-ale-one-dimensional-reynolds-transport-identity",
+    "thm-ale-reynolds-transport-identity",
+    "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+    "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+    "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+    "ex-ale-added-mass-toy-recurrence-instability",
+    "ex-ale-expanding-mesh-free-stream",
+    "ex-ale-two-domain-heat-interface-flux-balance"
+  ],
+  "reviewed_pages": [
+    "ale-interface-and-partitioned-multiphysics-discretization",
+    "ale-interface-and-partitioned-multiphysics-discretization-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The Reynolds change-of-variables repairs and algorithm termination results check out, as do the listed consumers of the amended claims. One prerequisite convention gap remains after the single repair, so this second review must escalate.",
+  "findings": [
+    {
+      "id": "thm-ale-reynolds-transport-identity",
+      "type": "prerequisite",
+      "reason": "In step 4.1, the proof passes from the Riemann/Jordan volume integrals in steps 1–3 to the divergence-theorem supplier, whose proof uses Lebesgue volume integrals via Fubini and dominated convergence. No convention or conversion bridges them. The smallest missing supplier is lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals, under the theorem's existing Countable Choice assumption, applied to the bounded Borel zero extension of div(g w_m). The A-page summary is affected."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-ale-robin-robin-partitioned-iteration",
+      "decision": "accept",
+      "reason": "The theorem now proves unique solvability of each Robin solve and termination within the finite pass budget; its justified_by link is supported."
+    },
+    {
+      "id": "alg-ale-upwind-finite-volume-step",
+      "decision": "accept",
+      "reason": "The mass/free-stream theorem now proves finite completion, both status branches, and uniqueness of the successful update; its justified_by link is supported."
+    },
+    {
+      "id": "ex-ale-expanding-mesh-free-stream",
+      "decision": "accept",
+      "reason": "The two-cell update succeeds and the mass and constant-state calculations remain valid under the amended theorem."
+    },
+    {
+      "id": "ex-ale-two-domain-heat-interface-flux-balance",
+      "decision": "accept",
+      "reason": "The two-pass trace calculation and stop certificate remain valid under the amended Robin theorem."
+    },
+    {
+      "id": "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+      "decision": "accept",
+      "reason": "Its successful-step mass and free-stream premises remain intact and are proved by the amended supplier."
+    },
+    {
+      "id": "ale-interface-and-partitioned-multiphysics-discretization",
+      "decision": "escalate",
+      "reason": "Its general Reynolds identity summary depends on the unresolved Riemann/Lebesgue integral compatibility at step 4.1 of thm-ale-reynolds-transport-identity."
+    },
+    {
+      "id": "ale-interface-and-partitioned-multiphysics-discretization-examples",
+      "decision": "accept",
+      "reason": "Its three example summaries and calculations are unaffected by the remaining general Reynolds prerequisite."
+    }
+  ]
+}

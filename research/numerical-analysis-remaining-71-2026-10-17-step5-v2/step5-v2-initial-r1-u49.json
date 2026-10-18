@@ -1,0 +1,226 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "49",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-na-periodic-staggered-grid-stokes-operators",
+      "model": "gpt-6-luna",
+      "context_sha256": "246d14eb5fd9a5b8b6ed773e71ff6ea82cf589406d2407bc782752748630e662",
+      "outcome": "false_positive",
+      "reason": "SCHEMA.md explicitly requires a justified_by target to depend on the definition, without the reverse deps edge. The grid lemma proof 3.1 proves zero mean by cancellation of the explicit finite differences, without assuming the asserted codomain; proof 1.1 reindexes raw weighted sums and 2.1 proves negativity. Thus the well-definedness discharge is not circular.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+      "model": "gpt-6-luna",
+      "context_sha256": "6528469b589c5559a45f85a8c45cbef7a7172ac0fc89222a16d06931f088b5a1",
+      "outcome": "false_positive",
+      "reason": "The exact-solve theorem occurs only in justified_by, not deps. Its proof 1.1 derives invertibility of A from positive definiteness and rank-nullity, then proves q^T S q=y^T A y>0 using injectivity of B^T. Steps 2.1–3.1 derive the solve and uniqueness independently of any assumed solvability. This is the definition-discharge pattern required by SCHEMA.md, not a logical cycle.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+      "model": "gpt-6-luna",
+      "context_sha256": "29af717733fd45befccdadae703fcbf0ff4aa4c9b22de545f831a34a3eaf08ff",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The final Statement clause wrongly bounds the mean of |g|. In d=1, g(x)=sin(2*pi*x) has zero integral but its sampled absolute means tend to 2/pi, contradicting any O(h^2) bound. Proof 4.1 instead proves |h^d sum_j g(x_j)| <= C_d h^2 ||D^2 g||_infty for zero integral, including translated face partitions. Replaced only the transposed absolute-value wording; all derivative consistency estimates and hypotheses remain intact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+      "model": "gpt-6-luna",
+      "context_sha256": "d6312712e623663962f8851273723bb992ae55fcba0d0d21931a1a5dd3b7df62",
+      "outcome": "false_positive",
+      "reason": "The alleged false similarity is a valid identity. From O=P_gamma^(-1/2) C and CC^T=P_gamma one gets OO^T=I, C=P_gamma^(1/2) O, and C^(-1)=O^T P_gamma^(-1/2). Substitution gives C^(-1) K C^(-T)=O^T X O exactly. Congruence of the Schur bounds, the m orthogonal singular-vector planes, and ker(T) orthogonal to range(T^T) supply the complete n+m dimensional spectrum, including n=m and repeated mu_j.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-periodic-discrete-helmholtz-projection",
+      "model": "gpt-6-luna",
+      "context_sha256": "38712fa34248b86c1d679e63ddbfb74e6fac5578b2d17bccd0602a0ec76f1236",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 and its contract import the negative-adjoint identity from the grid lemma Statement, which only states zero mean, invertibility, kernel and Poincare. The identity is actually proved in that lemma proof 1.1, so the conclusion and mathematical argument are sound; the interface-only citation worksheet is incomplete, a nonfatal citation defect. Restricted F1 to its stated supplier interface, added F3 citing the explicit grid definition, and derived the required summation-by-parts identity directly in projection proof 2.1; synchronized its contract.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-na-periodic-staggered-grid-stokes-operators",
+      "disposition": "unaffected",
+      "post_sha256": "9c3d45272e919980f2a275b4078c06695f693fdb8d56a040d6fbfbd518a9c2fe",
+      "review_context_sha256": "d1dba3c4947bcc498f0386fd288bfed6c1a85bb6abe635d6c1b9b13e7be2004a",
+      "reason": "SCHEMA.md explicitly requires a justified_by target to depend on the definition, without the reverse deps edge. The grid lemma proof 3.1 proves zero mean by cancellation of the explicit finite differences, without assuming the asserted codomain; proof 1.1 reindexes raw weighted sums and 2.1 proves negativity. Thus the well-definedness discharge is not circular.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+      "disposition": "unaffected",
+      "post_sha256": "6dc7e3f61509da01a4aa67d398f04999b773266119155a99e914ec40744f3ff6",
+      "review_context_sha256": "4609487890814073532572da6c3b7ff9027863a4b940533602baa1c65ece5b7d",
+      "reason": "The exact-solve theorem occurs only in justified_by, not deps. Its proof 1.1 derives invertibility of A from positive definiteness and rank-nullity, then proves q^T S q=y^T A y>0 using injectivity of B^T. Steps 2.1–3.1 derive the solve and uniqueness independently of any assumed solvability. This is the definition-discharge pattern required by SCHEMA.md, not a logical cycle.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+      "disposition": "repaired",
+      "post_sha256": "39f605ab686ac2dc0da7e2d08fc5db51728f0f8180c61770478a01f3dfb76f71",
+      "review_context_sha256": "bf10e8dba8e29dd38b08787467c492c0e5dc67c5fd057fe448c9f28b8767b3b1",
+      "reason": "The final Statement clause wrongly bounds the mean of |g|. In d=1, g(x)=sin(2*pi*x) has zero integral but its sampled absolute means tend to 2/pi, contradicting any O(h^2) bound. Proof 4.1 instead proves |h^d sum_j g(x_j)| <= C_d h^2 ||D^2 g||_infty for zero integral, including translated face partitions. Replaced only the transposed absolute-value wording; all derivative consistency estimates and hypotheses remain intact. Taylor bounds h^3/24 and h^4/12, unit total grid mass, and midpoint cancellation establish the complete repaired claim. This is the repair author review, not an independent rejudgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+      "disposition": "unaffected",
+      "post_sha256": "e92944f79fe31bd83ba57bcd8f3779f914050d923b45fe62b5426baf1215acc1",
+      "review_context_sha256": "d6861e53d019ee4d8bb999414594bbbc806870252b2ecd68b8ae625640a0f9c1",
+      "reason": "The alleged false similarity is a valid identity. From O=P_gamma^(-1/2) C and CC^T=P_gamma one gets OO^T=I, C=P_gamma^(1/2) O, and C^(-1)=O^T P_gamma^(-1/2). Substitution gives C^(-1) K C^(-T)=O^T X O exactly. Congruence of the Schur bounds, the m orthogonal singular-vector planes, and ker(T) orthogonal to range(T^T) supply the complete n+m dimensional spectrum, including n=m and repeated mu_j.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-periodic-discrete-helmholtz-projection",
+      "disposition": "repaired",
+      "post_sha256": "cd486cdafa221c48d8b7aa91c433fd895e9a5052bfc5214973d91ab7701ea4f2",
+      "review_context_sha256": "df5ce4a8d81afb8619bf86438b32d448c2d2f2da6fb190a3c7ad039a6be978f0",
+      "reason": "F1 and its contract import the negative-adjoint identity from the grid lemma Statement, which only states zero mean, invertibility, kernel and Poincare. The identity is actually proved in that lemma proof 1.1, so the conclusion and mathematical argument are sound; the interface-only citation worksheet is incomplete, a nonfatal citation defect. Restricted F1 to its stated supplier interface, added F3 citing the explicit grid definition, and derived the required summation-by-parts identity directly in projection proof 2.1; synchronized its contract. The inverse maps mean-zero divergence into Q_h; D_hG_h=Delta_h yields the range and fixed subspace, periodic reindexing gives residual orthogonality, and the algorithm update equals P_h times its predictor. Statement unchanged; no downstream propagation. This is the repair author review, not an independent rejudgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-na-periodic-pressure-correction-first-order-velocity-error"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+      "severity": "fatal",
+      "status": "fixed",
+      "defect_type": "logic",
+      "reason": "The final Statement clause wrongly bounds the mean of |g|. In d=1, g(x)=sin(2*pi*x) has zero integral but its sampled absolute means tend to 2/pi, contradicting any O(h^2) bound. Proof 4.1 instead proves |h^d sum_j g(x_j)| <= C_d h^2 ||D^2 g||_infty for zero integral, including translated face partitions. Replaced only the transposed absolute-value wording; all derivative consistency estimates and hypotheses remain intact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "thm-na-periodic-discrete-helmholtz-projection",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "defect_type": "dependency_citation",
+      "reason": "F1 and its contract import the negative-adjoint identity from the grid lemma Statement, which only states zero mean, invertibility, kernel and Poincare. The identity is actually proved in that lemma proof 1.1, so the conclusion and mathematical argument are sound; the interface-only citation worksheet is incomplete, a nonfatal citation defect. Restricted F1 to its stated supplier interface, added F3 citing the explicit grid definition, and derived the required summation-by-parts identity directly in projection proof 2.1; synchronized its contract.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update",
+      "reason": "No proposed changes to research/published-consumer-supplier-ledger.md: neither changed item is published, and the sampling interface has one draft frontier item consumer plus its draft home-page reference. No potentially defective published consumer was discovered.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_items": [
+      "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+      "thm-na-periodic-discrete-helmholtz-projection"
+    ],
+    "changed_metadata": [
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-49.pages.json",
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-49.proof-contracts.json"
+    ],
+    "metadata_changes": "Updated only the sampling Statement mirror, its direct consumer F3 quote mirror, and the Helmholtz F3 citation and proof 2.1 derivation/inputs. Used the shared-write lock with reread/edit/check/release. No verification or independent-review stamps were written.",
+    "statement_changes": [
+      {
+        "id": "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+        "section": "Statement",
+        "old_clause": "mean of absolute value at most",
+        "new_clause": "mean whose absolute value is at most",
+        "reason": "Corrects the transposed absolute-value wording to the absolute discrete mean actually established by midpoint cancellation; no derivative estimate or hypothesis changes."
+      }
+    ],
+    "consumer_examination": [
+      {
+        "id": "thm-na-periodic-pressure-correction-first-order-velocity-error",
+        "path": "items/thm-na-periodic-pressure-correction-first-order-velocity-error.md",
+        "affected_use": "F3 imports O(h^2) discrete mean for zero-integral data; proof 1.1 subtracts each force component mean and uses its absolute value to bound the mass norm of the resulting constant array. Proof 6.1 uses the unchanged divergence consistency estimate.",
+        "disposition": "sound_unchanged",
+        "reason": "Each force component has zero integral and bounded C^2 derivatives. The corrected absolute-mean estimate is exactly what proof 1.1 needs; no estimate of the sample mean of |f_i| is used. The Statement stays unchanged, so propagation stops.",
+        "metadata_note": "Synchronized only its F3 exact quotation in the shared owning batch contract; no consumer item edit. The consumer contract focused check passes."
+      },
+      {
+        "page": "projection-and-pressure-correction-for-incompressible-flow",
+        "path": "library/numerical-pdes-and-spatial-discretization/projection-and-pressure-correction-for-incompressible-flow.md",
+        "affected_use": "Smooth periodic velocity accuracy cites the sampling lemma solely for second-order spatial consistency of staggered differences.",
+        "disposition": "sound_unchanged",
+        "reason": "The derivative estimates and all spatial consistency clauses are unchanged."
+      }
+    ],
+    "proof_only_repair": "Helmholtz F1 now states only the grid lemma interface. F3 cites the explicit forward/backward differences; proof 2.1 reindexes finite periodic sums to derive orthogonality. Statement unchanged, so no propagation from this item.",
+    "review_binding": "Each review-contexts command followed its completed review before another supplier edit. Re-examined the sampling manifest and consumer quotation after shared metadata synchronization and reran its review-contexts command; both hashes remained identical. The final metadata mirrors exactly match the repaired sampling Statement.",
+    "source_evidence": "Familiar finite-dimensional linear algebra, Taylor estimates and finite periodic summation were checked directly. Local sources consulted: SCHEMA.md definition-discharge rule; grid-Laplacian lemma proof 1.1–5.1; exact-Schur theorem proof 1.1–3.1; Schur-bounds theorem proof 1.1–3.1; Taylor-remainder and derivative-rules complete arguments; spectral theorem, rank-nullity, coordinate inner-product and Cauchy–Schwarz statements. External source reading is not claimed.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-na-periodic-staggered-grid-smooth-sampling-consistency.md items/thm-na-periodic-discrete-helmholtz-projection.md --json",
+        "exit_code": 0,
+        "result": "2 checked, 0 failures; both direct proofs pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-na-periodic-staggered-grid-smooth-sampling-consistency.md items/thm-na-periodic-discrete-helmholtz-projection.md --json",
+        "exit_code": 0,
+        "result": "2 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-na-periodic-staggered-grid-smooth-sampling-consistency.md items/thm-na-periodic-discrete-helmholtz-projection.md",
+        "exit_code": 0,
+        "result": "2 items, 8 steps, 0 defects; run once in one batch after all final item edits."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-49.proof-contracts.json --strict --items def-na-periodic-staggered-grid-stokes-operators,def-na-symmetric-saddle-point-system-and-block-preconditioners,lem-na-periodic-staggered-grid-smooth-sampling-consistency,thm-na-symmetrically-preconditioned-saddle-point-spectrum,thm-na-periodic-discrete-helmholtz-projection --json",
+        "exit_code": 0,
+        "result": "All 5 assigned contracts checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-49.proof-contracts.json --strict --items lem-na-periodic-staggered-grid-smooth-sampling-consistency,thm-na-periodic-discrete-helmholtz-projection,thm-na-periodic-pressure-correction-first-order-velocity-error --json",
+        "exit_code": 0,
+        "result": "All 3 contracts checked under the shared-write lock; no errors or warnings."
+      }
+    ],
+    "unresolved_obligations": [],
+    "published_ledger": "No proposed changes to research/published-consumer-supplier-ledger.md: neither changed item is published, and the sampling interface has one draft frontier item consumer plus its draft home-page reference. No potentially defective published consumer was discovered.",
+    "certification": "Repairs are complete for this assignment. Independent rejudgment, round convergence and certification remain engine-owned; no independent review of these repairs is claimed."
+  },
+  "gate_resolutions": []
+}

@@ -1,0 +1,1586 @@
+JOURNAL 
+OF COMPUTATIONAL 
+PHYSICS 
+73, 315-348 (1987) 
+
+A Fast Algorithm 
+for Particle 
+Simulations* 
+
+L. GREENCARD 
+AND 
+V. ROKHLIN 
+
+Department of Computer Science, Yale L’nipersiry, 
+New Haven, Connecticut 06520 
+
+Received June 10. 1986; revised February 
+5. 1987 
+
+An algorithm 
+is presented for the rapid evaluation 
+of the potential 
+and force fields in 
+systems 
+involving 
+large 
+numbers 
+of 
+particles 
+whose 
+interactions 
+are 
+Coulombic 
+or 
+gravitationai 
+in nature. For a system of N particles, an amount of work of the order O(N’) 
+has 
+traditionally 
+been 
+required 
+to 
+evaluate 
+all 
+pairwise 
+interactions. 
+unless 
+some 
+approximation 
+or truncation 
+method is used. The algorithm 
+of the present paper requires an 
+amount 
+of work 
+proportional 
+to N to evaluate 
+all interactions 
+to within 
+roundoff 
+error. 
+making it considerably 
+more practical for large-scale problems encountered in plasma physics, 
+fluid dynamics, molecular dynamics, and celestial mechanics. 
+c 
+1987 Academic 
+Press, Inc. 
+
+1. INTRODUCTION 
+
+The study of physical systems by means of particle simulations is well established 
+in a number of fields and is becoming increasingly important in others. The most 
+classical example is probably celestial mechanics, but much recent work has been 
+done in formulating and studying particle models in plasma physics, fluid dynamics, 
+and molecular dynamics [S]. 
+Thee are two major classes of simulation methods. Dynamical simulations follow 
+the trajectories of N particles over some time interval of interest. Given initial 
+positions (xl) and velocities, the trajectory of each particle is governed by New- 
+ton’s second law of motion: 
+
+n~.dzxi= -V,@ 
+{tit2 
+r 
+for 
+i= 1, ..,) N, 
+
+where mi is the mass of ith particle and the force is obtained from the gradient of a 
+potential function @. When one is interested in an equilibrium configuration of a set 
+of particles rather than their time-dependent properties, an alternative approach is 
+the Monte Carlo method. In this case, the potential function @ has to be evaluated 
+for a large number of configurations in an attempt to determine the potential 
+minimum. 
+
+* The authors were supported 
+in part by the Office of Naval 
+Research under Grant NO001482-K- 
+0184. 
+
+
+326 
+GREENGARD 
+AND 
+ROKHLIN 
+
+We restrict our attention in this paper to the case where the potential (or force) 
+at a point is a sum of pairwise interactions. More specifically, we consider poten- 
+tials of the form 
+
+where Qnsa, (when present) is a rapidly decaying potential (e.g., Van der Waais), 
+co eXtzma, 
+(when present j is independent of the number of particles, and Afar, the 
+far-field potential, is Coulombic or gravitational. Such models describe classical 
+celestial mechanics and many problems in plasma physics and molecular dynamics. 
+In the vortex method for incompressible fluid flow calculations [4], an important 
+and expensive portion of the computation has the same formal structure (the 
+stream function and the vorticity are related by Poisson’s equationj. 
+In a system of N particles, the calculation of Q5,,,, requires an amount of work 
+proportional to N, as does the calculation of Qexterna,. The decay of the Coulombic 
+or gravitational potential, however, is sufliciently slow that all interactions must be 
+accounted for, resulting in CPU time requirements of the order Q(N’). In this 
+paper a method is presented for the rapid (order O(N)) evaluation of these interac- 
+tions for all particles. 
+There have been a number of previous efforts aimed at reducing the com- 
+putational complexity of the N-body problem. Particle-in-cell methods [S] have 
+received careful study and are used with much success, most notably in plasma 
+physics. Assuming the potential satisfies Poisson’s equation, a regular mesh is layed 
+out over the computational domain and the method proceeds by: 
+
+(1) interpolating the source density at mesh points, 
+(2) 
+using a “fast Poisson solver” to obtain potential values on the mesh, 
+(3) computing the force from the potential and interpolating to the particle 
+positions. 
+
+The complexity of these methods is of the order O(N + Mlog M), where M is the 
+number of mesh points. The number of mesh points is usually chosen to be propor- 
+tional to the number of particles, but with a small constant of proportionality 
+so 
+that M< N. Therefore, although the asymptotic complexity for the method is 
+O(N log N), the computational cost in practical calculations is usually observed to 
+be proportional to N. Unfortunately, the mesh provides limited resolution, and 
+highly nonuniform source distributions cause a significant degradation of perfor- 
+mance. Further errors are introduced in step (3) by the necessity for numerical 
+differentiation to obtain the force. 
+To improve the accuracy of particle-in-cell calculations, short-range interactions 
+can be handled by direct computation, while far-field interactions are obtained from 
+the mesh, giving rise to so-called particle-particle/particle-mesh 
+(P3jt4) methods 
+[S]. For an implementation of these ideas in the context of vortex calculations, see 
+[ 11. While these algorithms still depend for their efficient performance on a 
+
+
+ALGORITHM FOR PARTICLE SIMULATION 
+32.7 
+
+reasonably uniform distribution of particles, in theory they do permit arbitrarily 
+high accuracy to be obtained. As a rule, when the required precision is relatively 
+low, and the particles are distributed more or less uniformly in a rectangular region, 
+P3M methods perform satisfactorily. However, when the required precision is high 
+(as, for example, in the modeling of highly correlated systems), the CPU time 
+requirements of such algorithms tend to become excessive. 
+Appel [2] introduced a “gridless” method for many-body simulation with a com- 
+putational complexity estimated to be of the order O(N log N). It relies on using a 
+monopole (center-of-mass) approximation for computing forces over large distances 
+and sophisticated data structures to keep track of which particles are sufficiently 
+clustered to make the approximation valid. For certain types of problems, the 
+method achieves a dramatic speed-up compared to the naive O(W’) approach. It IS 
+less efficient when the distribution of particles is relatively uniform and the required 
+precision is high. 
+The algorithm we present uses multipole expansions to compute potentials or 
+forces to whatever precision is required, and the CPU time expended is propor- 
+tional to Iv! The approach we use is similar to the one introduced in [7] for the 
+solution of boundary value problems for the Laplace equation In the following 
+section, we describe the necessary analytical tools, while Section 3 is devoted. to a 
+detailed description of the method. 
+
+2. PHYSICAL .~ND MATHEMATICAL 
+PRELIMINARIES 
+
+In this paper, we consider a two-dimensional physical model which consists of a 
+set of N charged particles with the potential and force obtained as the sum of 
+pairwise interactions from Coulomb’s law. Suppose that a point charge of unit 
+strength is located at the point (x,, yO) = x0 E 1w”. Then, for any x = (x, 4’) E 1w’ with 
+x #x0, the potential and electrostatic field due to this charge are described by the 
+expressions 
+
+and 
+
+c&&f, yi = -bid I/x - X”// 1 
+
+E,,(x. y) = (x--cl) 
+jlx-xxoJjZ’ 
+
+respectively. 
+It is well known that dX, is harmonic in any region not containing the point x0. 
+Moreover, for every harmonic function u, there exists an analytic function 14’: @ 3 C 
+such that u(s, ?I) = Re(w(x, ~2)) and IV is unique except for an additive constant. In 
+the remainder of the paper we will work with analytic functions, making no 
+distinction between a point (x, ~1) E R’ and a point x + iy = z E @. We note that 
+
+qS,,(x) = Re( -log(z - zO)), 
+
+
+328 
+GREENGARDANDROKHLIN 
+
+and, following standard practice, we will refer to the analytic function log(z) as the 
+potential due to a charge. As we develop expressions for the potential due to more 
+complicated charge distributions, we will continue to use complex notation and will 
+refer to the corresponding analytic functions themselves as the potentials. The 
+following lemma is an immediate consequence of the Cauchy-Riemann equations. 
+
+LEMMA 2.1. If u(x, 1’) = Re(u(x, y)) describes the potenrial JieZd at (x, y), then 
+the corresponding force field is given by 
+
+vu = (u,, u,) = (Re(w’), -Im(iv’)), 
+
+where IV’ is the derivative of w. 
+
+The following lemma is used in obtaining the multipole expansion for the field 
+due to nz charges. 
+
+LEMMA 2.2. 
+Let a point charge of ktensity q be located at z,,. Then for any z such 
+that IzI > /zJ, 
+
+ProoJ 
+Note first that log(z - zO) - log(r) = log( 1 - z,,/zj and that lzO/zI < 1. The 
+lemma now follows from the expansion 
+
+log(l-w)=(-1) 
+f 
+;, 
+
+k=l 
+
+which is valid for any w such that 1~ < 1. m 
+
+THEOREM 2.1 (multipole 
+expansion). 
+Suppose that 
+m charges of strengths 
+(qi, i= 1, . . . . m) are located at points {zi, i= 1, . . . . m}, with Izi( cr. 
+Then for any 
+7 E @ with IzI > r, the potential d(z) is given by 
+L 
+
+(2.2) 
+
+Furthermore, for any p 3 1, 
+
+(2.3) 
+
+(2.4) 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SIMULATION 
+329 
+
+z 
+cz 
+-, 
+
+I 
+I 
+I 
+
+A= 
+f, 
+kil, 
+and 
+
+‘4 
+
+i=l 
+a=c-jqq. 
+(2.5) 
+
+Proof. 
+The form of the multipole 
+expansion (2.2) is an immediate consequence 
+of the preceding lemma and the fact that d(z) = Cy? 1 d-!(z). To obtain the error 
+bound (2.4), observe that 
+
+Substituting 
+for ak the expression in (2.3): we have 
+
+In particular, 
+if c >, 2, then 
+
+Finally, 
+we demonstrate, with a simple example, how multipole 
+expansions can 
+be used to speed up calculations 
+with potential 
+fields. Suppose that charges of 
+strengths ql, q2, . . . . qm are located 
+at the points 
+x,, 
+x?, . . . . .Y,~, E C and that 
+I . 
+(I I, ?:2, I..> J,~) is another set of points in @ (Fig. 1). We say that the sets {*vi> and 
+( y[> are ~41 separated 
+if there exist points sO, y0 E @ and a real r > 0 such that 
+
+IXilX,l 
+<r 
+for all 
+i = 1, . . . . m, 
+
+ll;- 
+Yol <r 
+for all 
+j= I, . . . . n, 
+
+Ix0 - Jo/ > 3r. 
+
+R 
+
+FIG. 
+1. Well-separated 
+sets in the plane. 
+
+
+330 
+GREENGARD 
+AND 
+ROKHLIN 
+
+In order to obtain the potential (or force) at the points (J)} due to the charges at 
+the points {-xi> directly, we could compute 
+
+for all j= 1, . . . . n. 
+(2.7) 
+
+i=l 
+
+This clearly requires order nrn work (evaluating rn fields at n points). Now 
+suppose that we first compute the coefftcients of a p-term multipole expansion of 
+the potential due to the charges qr, q2, . . . . qm about x,,, using Theorem 2.1. This 
+requires a number of operations proportional 
+to nzp. Evaluating the resulting 
+multipole expansion at all points yj requires order np work, and the total amount of 
+computation is of the order O(fnp + np). Moreover, by (2.6) 
+
+and in order to obtain a relative precision E (with respect to the total charge), p 
+must be of the order -log,(s). 
+Once the precision is specified, the amount of 
+computation has been reduced to 
+
+which is significantly smaller than rzm for large n and ~7. 
+
+2.1. Translation Operators and Error Bounds 
+
+The following three lemmas constitute the principal analytical tool of this paper, 
+allowing us to manipulate multipole expansions in the manner required by the fast 
+algorithm. Lemma 2.3 provides a formula for shifting the center of a multipole 
+expansion, Lemma 2.4 describes how to convert such an expansion into a local 
+(Taylor) expansion in a circular region of anaiyticity, and Lemma 2.5 furnishes a 
+mechanism for shifting the center of a Taylor expansion within a region of 
+analyticity. We also derive error bounds associated with these translation operators 
+which allow us to carry out numerical computations to any specified accuracy. 
+
+LEMMA 
+2.3. 
+Suppose that 
+
+(2.8) 
+
+is a multipole expansion of the potential due to a set of m charges of strengths ql, 
+
+q2> ‘..Y 4 ,,I? all of which are located inside the circle D of radius R with center at zO. 
+Then for I outside the circle D, of radius (R + /zO/ ) and center at the origin, 
+
+&) = a, log(z) + t ; > 
+
+I=1 
+L 
+(2.9) 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SIMULATION 
+
+where 
+
+33: 
+
+(2.10) 
+
+with (:) the binomial coeJficients. Furthermore, for an), p 3 1, 
+
+lzlirh A defined in (2.5 ). 
+
+Proof 
+The coefficients of the shifted expansion (2.9) are obtained by expanding 
+the expression (2.8) into a Taylor series with respect to zO. For the error bound 
+(2.1 l), observe that the terms {b,} are the coefficients of the (unique) muitipoie 
+expansion about the origin of those charges contained in the circle D, and 
+Theorem 2.1 applies immediately with r replaced by lzO/ + R. 
+
+Remark. 
+Once the values { aO, a,, ._., a,,) in the expansion (2.8) about r0 are 
+computed, we can obtain {b,, ,.., b,) exactly by (2.10). In other words, we may shift 
+the center of a truncated multipole expansion without any loss of precision. 
+
+LEMMA 
+2.4. 
+Suppose that rn charges of strengths ql, q17 . . . . q,,, are located imlde 
+the circle D, with radius R and center at zo, and that /zO1 > (c+ 1)R \\,ith c > 1 
+(,Fig. 2 j. Then the corresponding multipole expansion (2.8) converges inside the circie 
+Dz of radius R centered about the origin. Inside D,, the potentiui due to the charger is 
+described 6.1s a power series; 
+
+b(z)= 
+f 
+b,.z’, 
+
+I=0 
+
+i2.12) 
+
+k=lLO 
+12.13) 
+
+and 
+
+Furthermore, for anJ1 p 3 max(2, 2c/(c - 1 )), an error boundfor 
+the truncated series is 
+giveu b?p 
+
+d(z)- 
+fI: 6t.z’ 
+< 
+
+A(4e(p+c)(c+1)+c2) 
+
+/=O 
+c(c 
+- 
+1) 
+i2.n5j 
+
+where A is defined in (2.5) and e is the base of natural logarithms. 
+
+
+332 
+GREENGARD 
+AND ROKHLIN 
+
+FIG. 2. 
+Source charges q,, yz, . . . . q, are contained 
+in the circle D,. The corresponding 
+multipole 
+expansion about z0 converges inside D2. C is a circle of radius s, with s> R. 
+
+ProoJ: We obtain the coefficients of the local expansion (2.12) from Maclaurin’s 
+theorem applied to the multipole expansion (2.8). To derive the error bound (2.15), 
+we let y,, = a, log( -z,), yI = -(a,//. zk) for I> 1, and p, = bl - yI for 1 B 0. Then 
+
+with 
+
+A bound for S1 is easily found by observing that 
+
+(2.16) 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SIMULATION 
+333 
+
+To obtain a bound for S,, let C be a circle of radius s, where s = cR((i; - ‘i )/cpj 
+(Fig. 2). Note first that for any p > 2c/(c - 1 ), 
+
+cR+R 
+R<----- 2 
+
+<S<CR. 
+
+Defining the function dl: @\D, + @ by the expression 
+
+~l(Z)=~(Z)-ua,.log(z-z,j, 
+
+and using Taylor’s theorem for complex analytic functions (see [6, p. 190]), we 
+obtain 
+
+where 
+
+Obviously, for any I lying on C, 
+
+and it is easy to see that 
+
+jukl <AR” 
+and 
+It-z,\ 
+>R+cR-s=R+cR,!p. 
+
+After some algebraic manipulation, we have 
+
+M<A 
+and 
+l-)=I>~R-R 
+
+s ‘rR. 
+
+Observing that for any positive integer n and any integer p 3 2, 
+
+1 
+‘lf- 
+I 
+2 
+and 
+‘\ 
+P- 11 
+< 4, 
+
+we obtain 
+
+Adding the last expression to the error bound for S, completes the proof. 
+
+
+334 
+GREENGARD 
+AND ROKHLIN 
+
+The following lemma is an immediate consequence o? Maclaurin’s theorem. It 
+describes an exact translation operation with a finite number of terms, and no error 
+bound is needed. 
+
+LEMMA 2.5. For any complex zO, z, and { ak }, k = 0, 1, 2, . . . . n, 
+
+kIfoakiz-z,)k= 
+1 C 
+,_“, (,:,Qk (7) (M-q zf. 
+(2.17) 
+
+3. THE FAST MULTIPOLE ALGORITHMS 
+
+In this section, we present an algorithm for the rapid evaluation of the potentials 
+and/or electrostatic fields due to distributions of charges. The central strategy used 
+is that of clustering particles at various spatial lengths and computing interactions 
+with other clusters which are sufficiently far away by means of multipole expan- 
+sions. Interactions with particles which are nearby are handled directly. 
+To be more specific, let us consider the geometry of the computational box, 
+depicted in Fig. 3. It is a square with sides of length one, centered about the origin 
+of the coordinate system, and is assumed to contain all N particles of the system 
+under consideration. The eight nearest neighbor boxes are also shown and will be 
+needed in the next section when considering various boundary conditions. First, we 
+will describe the method for free-space problems, where the boundary can be 
+ignored and the only interactions to be accounted for involve particles within the 
+computational box itself. 
+Fixing a precision F, we choose p zlogJe) 
+and specify that no interactions be 
+computed for clusters of particles which are not well separated. This is precisely the 
+condition needed for the error bounds (2.4), (2.11), and (2.15) to apply with c = 2, 
+
+FIG. 3. The computational 
+box (shaded) and its nearest periodic images. The box is centered at the 
+origin “0” and has area one. 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SIMULATION 
+335 
+
+the truncation error to be bounded by 2 Pp, and the desired precision to be 
+achieved. In order to impose such a condition, we introduce a hierarchy of meshes 
+which reline the computational box into smaller and smaller regions (Fig. 4). Mesh 
+level 0 is equivalent to the entire box, while mesh level I+ 1 is obtained from level i 
+by subdivision of each region into four equal parts. The number of distinct boxes at 
+mesh level I is equal to 4’. A tree structure is imposed on this mesh hierarchy, so 
+that if ibox is a fixed box at level I, the four boxes at level I + 1 obtained by 
+subdivision of ibox are considered its children. 
+Other notation used in the description of the algorithm includes 
+
+the p-term multipole expansion (about the box center) of the 
+potential field created by the particles contained inside box .r 
+at level I, 
+
+the p-term local expansion about the center of box i at level i, 
+describing the potential field due to all particles outside the 
+box and its nearest neighbors, 
+
+the p-term local expansion about the center of box i at level i, 
+describing the potential field due to all particles outside I’s 
+parent box and the parent box’s nearest neighbors. 
+
+Leo21 0 
+Level 1 
+
+Level 2 
+Level 3 
+
+FIG. 4. 
+The computational 
+box and three levels of refinement. 
+
+
+336 
+GREENGARDANDROKHLIN 
+
+FIG. 5. 
+Interaction 
+list for box i. Thick lines correspond 
+to mesh level 2 and thin lines to level 3. 
+Boxes marked with an “x” are tile// separnted from box i and contained 
+within the nearest neighbors of 
+box i’s parent. 
+
+Interaction list 
+for box i at level 1, it is the set of boxes which are children of 
+the nearest neighbors of i’s parent and which are well 
+separated from box i (Fig. 5). 
+
+Suppose now that at level I- 1, the local expansion Y,- I,i has been obtained for 
+all boxes. Then, by using Lemma 2.5 to shift (for all i) the expansion !P- I,i to each 
+of box i’s children, we have, for each box j at level Z, a local representation of the 
+potential due to all particles outside of j’s parent’s neighbors, namely pl,j. The 
+interaction list is, therefore, precisely that set of boxes whose contribution to the 
+potential must be added to pj,j in order to create !PIVj. This is done by using 
+Lemma 2.4 to convert the multipole expansions of these interaction boxes to local 
+expansions about the current box center and adding them to the expansion 
+obtained from the parent. Note also that with free-space boundary conditions, Y’O,j 
+and !PI,i are equal to zero since there are no well-separated boxes to consider, and 
+we can begin forming local expansions at level 2. 
+The following is a formal description of the algorithm. 
+
+ALGORITHM. 
+
+Initialization 
+
+Choose a level of refinement n z log, N, a precision E, and set p z log,(a). 
+
+Upward Pass 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SIMULATION 
+334 
+
+Step 1 
+
+Comment [Form multipole 
+expansions of potential field due to particles in each 
+box about the box center at the finest mesh level.] 
+0 ibox = 1, . . . . 4” 
+Form a p-term multipole 
+expansion @,z,ibor? by using Theorem 2.1. 
+enddo 
+
+Step 2 
+
+Comment [Form 
+multipole 
+expansions 
+about the centers of all boxes at all 
+coarser mesh levels, each expansion 
+representing 
+the potemial 
+field 
+due to all particles contained in one box.] 
+do I= n - 1. . ..) 0 
+do ihox = 1, . . . . 4’ 
+Form a p-term multipole 
+expansion @l,ibo.Y, by using Lemma 2.3 to shift 
+the center of each child box’s expansion 
+to the current box center and 
+adding them together. 
+endds 
+enddo 
+
+Downward Pass 
+Comment [In the downward 
+pass, interactions 
+are consistently 
+computed at the 
+coarsest possible level. For a given box, this is accomplished 
+by 
+including 
+interactions 
+with those boxes which are well separated and 
+whose interactions 
+have not been accounted for at the parent’s level.] 
+
+Step 3 
+
+Comment [Form 
+a local expansion about the center of each box at each mesh 
+level I < n - 1. This local expansion describes the field due to all par- 
+ticles in the system that are not contained in the current box or its 
+nearest neighbors. Once the local expansion is obtained for a given 
+box, it is shifted, in the second inner loop to the centers of the box’s 
+children, 
+forming 
+the initial 
+expansion 
+for the boxes at the next 
+level. 1 
+Set !P,,l = Pl,2 = P,,, = Pl.4 = (0, 0, . . . . 0) 
+do I = 1, . . . . n - I 
+do ibox = I, . . . . 4’ 
+
+Form K,ibo.r by using Lemma 2.4 to convert the multipole 
+expansion ~0,~ 
+
+of each box j in interaction list of box ibox to a local expansion about the 
+center of box ibox, adding these local expansions together, and adding 
+the 
+result to !Pl,ibox. 
+enddo 
+ibox = 1, . . . . 4’ 
+
+
+338 
+GREENGARD 
+AND 
+ROKHLIN 
+
+Form the expansion PI+ r j for ibox’s children by using Lemma 2.5 to 
+expand yll.iimx about the children’s box centers. 
+enddo 
+enddo 
+
+Step 4 
+
+Comment [Compute interactions at finest mesh level.] 
+
+do ibox = 1, . . . . 4” 
+Form yll,ibOl by using Lemma 2.4 to convert the multipole expansion @r.j of 
+each box j in interaction 
+list of box ibox to a local expansion about the 
+center of box ibox, adding these local expansions together, and adding the 
+result to !P,,ibO,Y. 
+enddo 
+Comment [Local expansions at finest mesh level are now available. They can be 
+used to generate the potential or force due to all particles outside the 
+nearest neighbor boxes at finest mesh level.] 
+
+Step 5 
+
+Comment [E,valuate local expansions at particle positions.] 
+
+do ibox = 1, . . . . 4” 
+For every particle p.i located at the point zj in box ibo.v, evaluate @n,ibox(zjj. 
+enddo 
+
+Step 6 
+
+Comment [Compute potential (or force) due to nearest neighbors directly.] 
+
+do ibox = 1, . . . . 4” 
+For every particle pi in box ibox, compute interactions with all other par- 
+ticles within the box and its nearest neighbors. 
+enddo 
+
+do ibox = 1, . . . . 4” 
+
+Step 7 
+
+For every particle in box ibox, add direct and far-field terms together. 
+enddo 
+
+Remark. 
+Each local expansion is described by the coefficients of a p-term 
+polynomial. Direct evaluation of this polynomial at a point yields the potential. 
+But, by Lemma 2.1, the force is immediately obtained from the derivative which is 
+available analytically. There is no need for numerical differentiation. Furthermore, 
+due to the analyticity of @‘, there exist error bounds for the force of exactly the 
+same form as (2.4), (2.11), and (2.15). 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SIMULATION 
+339 
+
+A brief analysis of the algorithmic complexity is given below. 
+
+Step 
+Operation count 
+Explanation 
+
+1 
+order Np 
+
+2 
+order Np’ 
+
+3 
+order d 28Np” 
+
+4 
+order 6 2lNp’ 
+
+5 
+order < 27Np’ 
+
+6 
+order PNk, 
+
+7 
+order N 
+
+Each particle contributes to one expansion at rhc 
+finest level. 
+
+At the Ith level, 4’ shifts involving order pz work 
+per shift must be performed.. 
+
+There are at most 27 entries in the interaction hst 
+for each box at each level. An extra order *VP’ 
+work is required for the second loop. 
+
+Again, there are at most 27 entries in the Interac- 
+tion list for each box and zz N boxes. 
+
+One p-term expansion is evaluated for each par- 
+ticle. 
+
+Let k, be a bound on the number of particles per 
+box at the finest mesh level. Interactions must be 
+computed within the box and its eight nearest 
+neighbors, but using Newton’s third law, we need 
+only compute half of the pairwise interactions. 
+
+Adding two terms for each particle. 
+
+The estimate for the running time is therefore 
+
+N( -2a 1ogJe) + %h(log,(e))’ + 4Sdk,, + e), 
+
+with the constants a, b, c, d. and e determined by the computer system, language, 
+implementation, etc. 
+In addition to the asymptotic time complexity, asymptotic storage requirements 
+are an important characteristic of a numerical procedure. The algorithm requires 
+that @r,i and Yl,i be stored, as well as the locations of the particles, their charges, 
+and the results of the calculations (the potentials and/or electric fields). Since every 
+box at every level has a pair of p-term expansions, @ and Y, associated with it, and 
+the lengths of ail other storage arrays are proportional to IV, it is easy to see that 
+the asymptotic storage requirements of the algorithm are of the form 
+
+or 
+
+(@+PP).N 
+
+(ct - /I log,(&)). ‘V, 
+
+
+340 
+GREENGARDANDROKHLIN 
+
+with the coefficients c( and /? determined, as above, by the computer system, 
+language, implementation, etc. In our numerical experiments, the actual storage 
+requirements were of the order 
+
+(25 -log,(c)) 
+. N 
+
+single precision words. 
+
+Remark. It is clear that the operation count for Step 6 assumes a reasonably 
+homogeneous distribution 
+of particles. If the distribution 
+were highly non- 
+homogeneous, then we would need to reline only those portions of space where the 
+number of particles is large. Although its description is more involved, an adaptive 
+version retains both the accuracy and the computational speed of the algorithm 
+(see [3]). 
+
+4. BOUNDARY CONDITIONS 
+
+A variety of boundary conditions are used in particle simulations, including 
+periodic boundary conditions, homogeneous Dirichlet or Neumann conditions, and 
+several types of mixed conditions. The periodic case will be treated first in some 
+detail. We then turn to the imposition of Dirichlet conditions and end with a brief 
+discussion of the other cases. 
+
+4.1. Periodic Boundary Conditions 
+
+We begin by reconsidering the computational domain depicted in Fig. 5. At the 
+end of the upward pass of the algorithm, we have a net multipole expansion 
+
+@0,1(z)= 
+i 5 
+
+k=l 
+(4.1) 
+
+for the entire computational box. This is then the expansion for each of the periodic 
+images of the box with respect to its own center. All of these images except for the 
+ones depicted in Fig. 3 are l&Z separated from the computational box itself, and 
+their induced fields are accurately representable by a p-term local expansion where, 
+as before, p z -log,(s) is the number of terms needed to achieve a relative precision 
+E. We assume that the periodic particle model has no net charge and, therefore, that 
+the local representation given by Lemma 2.4 can be written as 
+
+with 
+
+Y,,, = i 
+6, . z”’ 
+
+f??=l 
+(4.2) 
+
+b~=~~~~(m~~~l)(-l)*, 
+with 
+m=O,l,...,p, 
+(4.3) 
+
+with z,, the center of the image box under consideration. 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SIMULATION 
+341 
+
+Remark. 
+In 
+certain 
+problems 
+(e.g., cosmology), 
+the 
+computational 
+box 
+obviously 
+cannot satisfy the condition 
+of no net charge (mass). This condition 
+is 
+necessary for the potential 
+to be well defined, since the logarithmic 
+term becomes 
+unbounded 
+as zO + SJ. Force calculations, 
+however, 
+may still be carried 
+out. 
+Indeed, using the notation of the algorithm, 
+@,i, Y,,;, pI,i are expansions of analytic 
+functions 
+representing 
+the potential, 
+so that their derivatives 
+are also analytic 
+functions 
+(with 
+the same regions 
+of analyticity). 
+Moreover, 
+it is clear from 
+Theorem 2.1 that the derivatives 
+@& are described by pure inverse power series. 
+Therefore, the identical formal structure of the algorithm can, due to Lemma 2.1, be 
+used to evaluate force fields everywhere, bypassing the difficulty 
+introduced 
+by the 
+logarithmic 
+term. The only change required is that the initial expansions computed 
+be the derivatives 
+of the multipole 
+expansions and not the multipole 
+expansions 
+themselves. 
+
+Note now that well-separated images of the computational 
+cell are boxes whose 
+centers zO have integer real and imaginary parts, with Rejz,) > 2 or Im(z,) >, 2. Let 
+S be the set of such centers. To account for the field due to all well-separated 
+images, we form the coefficients for the local representation 
+by adding the local 
+shifted expansions of the form (4.3) for all rO E S to obtain 
+
+nz+k-1 
+
+k-l 
+14.4 ) 
+
+The summation 
+over S for each inverse power of zO can be precomputed 
+and 
+stored. 
+For 
+(PH + k) > 2, the 
+series is absolutely 
+convergent. 
+However, 
+for 
+
+(tn + k) 6 2, the series is not absolutely 
+convergent, 
+and the computed 
+value 
+depends on the order of addition. 
+Choosing a reasonable value for the sum of the 
+series requires careful consideration 
+of the physical model. 
+Suppose first that the only particle in the simulation 
+is a charge of unit strength 
+located at the origin. Then the periodic model corresponds to a uniform lattice of 
+charges, and Newton’s third law requires that the net force on each particle be zero. 
+But the net force on the particle at the origin corresponds to the summation over S 
+of l/z,, 
+so that we set 
+
+To determine a value for the second term, 
+
+suppose that the only particle in the simulation 
+is a dipole of strength one, oriented 
+along the -u-axis and located at the origin. Then the periodic model is again a 
+
+
+342 
+GREENGARD 
+AND ROKHLIN 
+
+uniform lattice and the difference in potential 
+between the equivalent 
+sites (-I, 
+0) 
+and (t, 0) must be zero; i.e., 
+
+(D (l/%0) -@ (- lQ0) = m = 0. 
+(4.5) 
+
+The contribution 
+to the potential difference, &D, of a single dipole located at z. is 
+
+1 
+1 
+1 
+-----=--- 
+zo - l/2 
+to + l/2 
+Z; - 114. 
+
+Thus, we find that the potential difference due to the original dipole located at the 
+origin is -4. For an image dipole located at zo, with 1~~1 3 1, we can expand the 
+contribution 
+to 6@ as follows: 
+
+1 
+1 
+1 
+--=z+4i;:-Z;. 
+z; - 114 
+
+Now let S’ be the set of the centers of all image boxes. That is, S’ is the set of all 
+points z. with integer real and imaginary 
+parts, excluding the origin. Then 
+
+A somewhat involved calculation 
+shows that 
+c l 
+-=4-71. 
+s. 4Z; -z; 
+
+Therefore, to satisfy (4.5). we set 
+
+Now 
+
+;i=&+ 
+c 4 
+s’\.s 
+zo 
+
+and the sum Css,,s (l/z:) 
+is easily evaluated 
+and found to be equal to zero. 
+Therefore. we have 
+
+and the summation over S for every inverse power of z. is defined. 
+The procedure of converting the multipole expansion of the whole computational 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SIMULATION 
+343 
+
+cd %,l into a local expansion 
+YO,l which describes the potential 
+field due to all 
+well-separated images can be written, in the notation 
+of the algorithm, 
+as 
+
+where T is a constant p by p matrix whose entries are defined by the formula 
+
+This can be viewed as the first step in the downward 
+pass of the algorithm 
+for 
+periodic boundary conditions. 
+At this point, we have accounted for all interactions 
+excluding 
+the ones within 
+the immediate neighbors of the computational 
+box as 
+depicted in Fig. 3. But the expansions cP,,~ for boxes inside the computational 
+cell 
+are also the expansions of the corresponding 
+boxes inside the nearest neighbor 
+images of the computational 
+cell. By adding to the interaction 
+list the appropriate 
+boxes, we maintain 
+the formal 
+structure 
+of the algorithm 
+and the associated 
+computational 
+complexity. 
+
+4.2. Dirichlet 
+Bowdavy 
+Conditions 
+
+We turn now to the imposition 
+of homogeneous Dirichlet 
+boundary conditions, 
+namely 
+
+@(x, y) = 0 
+for 
+(x, .I>) E 2D. 
+
+where dD is the boundary of the computational 
+domain. Analytically 
+speaking, this 
+can be accomplished by the method of images, described in detail below. In general 
+terms, we consider the potential 
+field to be composed of two parts; that is, 
+
+where 
+@souTccj 
+is the field due to the particles inside the computational 
+cell and 
+
+@images 
+is the field due to selected image charges located outside the computational 
+cell. The image charge positions and strengths are chosen so that 
+
+CD 
+sources(-& 
+d 
+= 
+m-@images(X, 
+1,) 
+for 
+(s, J,) E 8D. 
+
+For the computational 
+domain we are considering, appropriate 
+locations for the 
+image charges can be determined by an iterative process, illustrated 
+in Fig. 6. We 
+first reflect each particle pi of charge strength 6, in the computational 
+cell across the 
+top boundary 
+line and place an image charge of strength 
+-CJ~ at that locationl 
+generating an image box which we denote c (Fig. 6(b)). The set of image charges is 
+denoted by V,, and the field they induce is called @[.,,. Adding 
+QcC, to @SOUTCrS 
+clearly enforces the desired condition 
+along the top boundary. To impose the boun- 
+dary condition 
+along the bottom 
+of the computational 
+cell, we must reflect all 
+charges (source and image) currently 
+in the model across the bottom boundary, 
+
+
+344 
+GREENGARD 
+AND ROKHLIN 
+
+c 
+- 
+c 
+
+zl$l 
+c 
+
+C 
+
+: 
+i 
+: 
+
+c c c e c 
+.., c c c 
+k c 
+c c c E c 
+
+%F 
+
+._. c 6 c & c 
+c 
+6 c c c 
+
+I 
+: 
+: 
+
+FIG. 6. 
+The computational 
+cell centered at the origin is represented by C. The cell c is the image of 
+cell C reflected across the top boundary, 
+with corresponding 
+particles assigned charges of opposite sign. 
+The cell i; is the image of cell C reflected across the left boundary, 
+again with corresponding 
+particles 
+assigned charges of opposite sign. The cell c is the image of cell C reflected through 
+the origin, with 
+corresponding 
+particles assigned charges of the same sign. Successive reflections 
+across the four boun- 
+daries of the computational 
+cell yield an infinite expansion of image boxes as indicated in (d). 
+
+generating two more image boxes (which are copies of C and C). The set of all 
+image charges after this second reflection 
+step is denoted by V,. Now, 
+while 
+CD *o”rccs + @ 6’2 is equal to zero along the bottom 
+boundary, 
+the resulting 
+field 
+violates the top boundary 
+condition. 
+We therefore reflect again across the top 
+boundary, creating two new image boxes and a new set of image charges V,, such 
+
+that @sources 
++ QrX3 satisfies the top condition 
+but violates 
+the bottom 
+one. By 
+iterating in this manner, we generate a sequence of sets of image charges ( Vi} with 
+
+where V= u,?= I V, is the set of charges contained 
+in the infinite 
+array of image 
+boxes depicted in Fig. 6(c). It is easy to see that the corresponding 
+sequence of 
+image fields {QV,} converges inside the computational 
+cell and that the potential 
+field @sources 
++ aF., does satisfy both the top and bottom boundary conditions. 
+In order to enforce the Dirichlet 
+condition 
+on the remaining 
+two sides, we 
+proceed analogously. 
+First, we reflect all the charges currently 
+in the model (the 
+original sources plus the images in V) across the left boundary. This obviously does 
+not affect the top and bottom conditions 
+and enforces the homogeneous boundary 
+condition 
+along the left side of the computational 
+cell. The current set of (all) image 
+charges is now denoted H,. Reflecting across the right boundary creates a new set 
+Hz, with the field QSOLIccIS 
++ QH2 satisfying the Dirichlet 
+condition 
+along the right 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SIMULATION 
+345 
+
+(but not the left) boundary. Repeated reflection across the left and right boundaries 
+of the computational 
+cell yields a sequence (Hi} 
+of infinite sets of image charges, 
+
+H,cH2cH3c 
+... cH, 
+
+where H = U,?= I Hi is the set of charges contained in the two-dimensional 
+family of 
+image boxes depicted in Fig. 6(d). It is easy to see that the sequence (G19,) 
+converges inside the computational 
+cell, and we denote its limit by QH. Finally, we 
+observe that QSourceS 
++ GH = 0 on the entire boundary SD. 
+From a computational 
+point of view, the rate of convergence of the method of 
+images is quite unsatisfactory. 
+In conjunction 
+with our algorithm, 
+however, this 
+method can be turned into an extremely efficient numerical tool. In the terminology 
+previously 
+introduced, 
+all of the image boxes except the nearest neighbors of the 
+computational. 
+cell are well separated and their induced fields can be represented by 
+a single local expansion, denoted Yv,,,. Once the coefficients of this local expansion 
+have been computed, 
+we need only account for interactions 
+within 
+the nearest 
+neighbors of the computational 
+cell itself. To do this, as in the periodic case, we 
+simply add the appropriate 
+image boxes to the interaction 
+lists of the boxes insrde 
+the computational 
+cell. 
+Thus, it remains only to calculate !PO,l. We first observe that the plane of images 
+has a periodic structure with unit “supercell” 
+centered at (f, i). indicated by thick 
+lines rn Fig. 6(d). But then, by the method developed above for periodic problems, 
+we can obtain an expansion about the point (i, 4) which accounts for all interac- 
+tions beyond the nearest neighbors of the supercell. This expansion can be conver- 
+ted, by using Lemma 2.5, into an expansion 
+about the origin 
+(the center of the 
+computational 
+cell), which we call p,, 
+It remains to account for the well-separated 
+boxes which 
+are contained 
+inside the supercell’s nearest neighbors. 
+There are 
+exactly 27 of these boxes, and their multipole 
+expansions can be shifted (by using 
+Lemma 2.4) to local expansions about the origin which are then added to PO.! to 
+finally form @P”o.i 
+
+4.3. Other Boundary Conditions 
+
+While 
+in certain applications, 
+periodic 
+or Dirichlet 
+boundary 
+conditions 
+are 
+called for, in others, Neumann 
+or mixed conditions 
+have to be imposed on the 
+boundary of the computational 
+domain. A typical example of a problem with mixed 
+conditions 
+is the computational 
+cell with Neumann 
+conditions 
+on two opposing 
+sides and Dirichlet 
+conditions 
+on the two others. Other models require periodic 
+boundary 
+conditions 
+on the left and right sides of the computational 
+cell and 
+Dirichlet 
+or Neumann conditions 
+on the top and bottom. The imposition 
+of these 
+conditions 
+is achieved by a procedure essentially identical 
+to the one described 
+above. By reflection and/or periodic extension, one first generates an entire plane of 
+images. The local expansion 
+ul,,, is then computed by an appropriate 
+summation 
+over ail1 well-separated 
+image boxes, and the remaining 
+image interactions 
+are 
+handled 
+as above. 
+
+
+346 
+GREENGARDANDROKHLIN 
+
+5. NUMERICAL RESULTS 
+
+A computer program has been implemented utilizing the algorithm of this paper 
+and capable of handling free-space problems and problems with periodic, 
+homogeneous Dirichlet or homogeneous Neumann boundary conditions. 
+For testing purposes, we randomly assigned charged particles to positions in the 
+computational cell (Fig. 7), with charge strengths between 0 and 1, and with the 
+numbers of particles varying from 100 to 12,800. The calculations were performed 
+on a VAX-8600, and the number of terms in the expansions !YL;i, s’li, @‘r,i was set to 
+20, guaranteeing roughly 5-digit accuracy of the result. In each case, we performed 
+the calculation in three ways: (1) via the algorithm of the present paper in single 
+precision arithmetic; (2) directly (via formula (2.7)) in single precision arithmetic; 
+and (3) via formula (2.7) in double precision arithmetic. The First two calculations 
+were used to compare the speed and accuracy of our algorithm to those of the 
+direct method. The direct evaluation of the field in double precision was used as a 
+standard for comparing the relative accuracies of the first two computations. In all 
+cases, the calculation was performed for a periodic model, the periodic boundary 
+condition being imposed by means of the algorithm described in Section 4 of this 
+paper. 
+The results of these numerical experiments are summarized in Table I. The first 
+column of the table contains the numbers N of particles for which calculations have 
+been performed. The second and third columns contain the CPU times T,,, that 
+were required by the algorithm of the present paper to obtain the fields at all N 
+particles, and the greatest relative error dalg obtained at any of the particles, respec- 
+tively. Columns 4 and 5 contain the CPU times Tdir that were required by the direct 
+algorithm (2.7) to obtain the fields at all N particles, and the greatest relative error 
+Sdir obtained at any one particle, respectively. 
+
+FIG. 7. 
+1600 randomly 
+located charges in the computational 
+cell. 
+
+
+ALGORITHM 
+FOR PARTICLE 
+SI?dULATION 
+347 
+
+TABLE 
+I 
+
+Computational 
+Results 
+
+too 
+0.6 
+1.1 x 1o-5 
+1.1 
+1.9 x IO-’ 
+200 
+1.3 
+4.1 x 10-j 
+4.5 
+_.- 
+? 1 x 10-j 
+
+400 
+2.0 
+3.6 x lo-’ 
+18 
+4.6 x 10-j 
+800 
+3.8 
+4.6 x 10-j 
+69 
+7.3 x lo-’ 
+1.600 
+6.6 
+1.4x lo-’ 
+-,- 
+171 
+7.0 x 10-j 
+3.100 
+16.5 
+0.9 x 10-j 
+1088 
+3.1 x LO-’ 
+6.400 
+31.7 
+7.3 x 10-j 
+4480 
+6.8 X i0 -’ 
+17.800 
+60.9 
+3.0x 10-s 
+17910 (est. I 
+1.8 x IO--’ 
+
+Remark. 
+For the esample involving 
+12.800 particles, 
+the algorithm 
+of the 
+present paper required about one minute of CPU time (see Table I). However, it 
+was not considered practical to use the direct algorithm 
+to evaluate the field at all 
+12,500 points, since it would take about 5 h of CPU time, without 
+producing much 
+useful information. 
+Therefore, we used the direct algorithm 
+to evaluate the field at 
+only 100 of the 12,800 particles, both in single and double precision, and used the 
+resulting data to estimate a,,, and hdlr. The value for rdi, in this case was .estimatsd 
+by scaling. 
+
+The following 
+observations can be made from Table I: 
+
+1. The accuracy of the results produced by the algorithm is about the same as 
+that predicted by the estimates (2.4) (2.1 l), and (2.15) for the number of terms we 
+are using in the expansions 
+@,.i, ‘?/,,. Y,.i. There is no evidence of accuracy 
+problems due to truncation 
+errors. 
+
+FIG. 8. The equipotential 
+lines for the electrostatic 
+field due !o 13 randomly 
+located charges in the 
+computational 
+cell. blith homogeneous Dirichlet 
+boundary 
+conditions. 
+
+
+348 
+GREENGARD AND ROKHLN 
+
+2. The calculation time grows linearly with the number of charges in the 
+model, even though its behavior is somewhat erratic. 
+3. For as few as 1600 particles in the model, the computational effort 
+required by the direct algorithm is roughly 40 times greater than that required by 
+the algorithm of the present paper. For 12,800 particles, the effort is nearly 300 
+times greater. 
+
+Similar calculations have been performed for homogeneous Dirichlet 
+and 
+Neumann boundary conditions, and the observations made above for the periodic 
+model are equally applicable in these cases. 
+For illustration, the equipotential lines for a box with 10 randomly distributed 
+particles and Dirichlet 
+boundary conditions are shown in Fig. 8. The entire 
+calculation required 15 s of CPU time; about half the time was spent evaluating the 
+field at more than 10,000 points, while the rest was used up by the plotting routine. 
+
+6. CONCLUSIONS 
+
+An algorithm has been constructed for the rapid evaluation of potential lields 
+generated by ensembles of particles of the type encountered in plasma physics, 
+molecular dynamics, fluid dynamics (the vortex method), and celestial mechanics. 
+The algorithm is applicable both in the context of dynamical simulations and 
+Monte Carlo simulations, provided that the fields to be evaluated are Coulombic in 
+nature. The asymptotic CPU time estimate for the algorithm of the present paper is 
+of the order O(N), where N is the number of particles in the simulation, and the 
+numerical examples presented in Section 5 indicate that even very large-scale 
+problems result in acceptable CPU time requirements. In the present paper, a two- 
+dimensional version of the algorithm is described. Generalizing this result to three 
+dimensions is fairly straightforward and will be reported at a later date. 
+
+ACKNOWLEDGMENTS 
+
+It is the authors’ pleasure to thank Professor M. H. Schultz for drawing their attention to the subject 
+of this paper, and for his continuing interest and support. 
+
+REFERENCES 
+
+1. C. R. ANDERSON, 
+J. Cotnpu~. Phys. 62, 111 (1986). 
+2. A. W. APPEL, SIAM J. Sci. Stat. Compu~. 6, 85 (1985). 
+
+3. J. CARRIER, 
+L. GREENGARD, 
+AND V. ROKHLIN, 
+“A Fast Adaptive Multipole Algorithm for Particle 
+Simulations,” Technical Report 496, Yale Computer Science Department, 1986 (unpublished). 
+4. A. J. CHORIN, 
+J. Fluid. Mech. 57, 785 (1973). 
+
+5. R. 
+W. 
+HOCKNEY 
+AND 
+J. W. 
+EASTWOOD, 
+Cotnputer 
+Simularion 
+Using Particles 
+(McGraw-Hill, 
+New York, 198 1). 
+
+6. G. POLKA AND G. LAITA, 
+Complex Variables (Wiley, New York, 1974). 
+
+7. V. ROKHLIN, 
+J. Cotnput. Phys. 60, 187 (1985). 
+
+

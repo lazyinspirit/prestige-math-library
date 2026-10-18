@@ -1,0 +1,1699 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-5",
+  "scope": [
+    "def-piecewise-cubic-hermite-interpolant",
+    "def-piecewise-bernstein-representation",
+    "thm-piecewise-cubic-hermite-interpolant-properties",
+    "thm-hermite-monotonicity-for-normalized-slopes-in-square",
+    "alg-pchip-slope-selection",
+    "thm-bernstein-convex-hull-and-positivity",
+    "lem-pchip-slope-selection-well-defined",
+    "thm-pchip-normalized-slopes-in-square",
+    "lem-pchip-slopes-second-order-uniform-grid",
+    "thm-pchip-shape-preserving-no-overshoot",
+    "thm-pchip-third-order-away-from-extrema",
+    "ex-positive-endpoint-samples-negative-between",
+    "ex-natural-cubic-spline-undershoots-nonnegative-table",
+    "ex-pchip-flat-monotone-data",
+    "ex-pchip-limiter-second-order-at-smooth-extremum"
+  ],
+  "contracts": {
+    "def-piecewise-cubic-hermite-interpolant": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires N≥1 and strictly increasing nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero values and slopes; no division uses them."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition with N=1 is one positive-width cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Repeated nodes are excluded, while repeated ordinates and zero slopes are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition evaluates both cell endpoints through t=0 and t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition is an explicit deterministic formula and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition asserts no equivalence."
+        }
+      ]
+    },
+    "def-piecewise-bernstein-representation": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires s≥1 and contains at least one cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Zero controls and degree zero are permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n_i=0 gives one constant control on a cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Repeated controls are allowed, but partition nodes are strictly increasing."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The local coordinate t=0 or t=1 gives the two cell endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition is finite and deterministic and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition asserts no equivalence."
+        }
+      ]
+    },
+    "alg-pchip-slope-selection": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Algorithm requires n≥2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Algorithm states the zero-secant and flat-data branches."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Algorithm specifies the n=2 single-secant branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Algorithm includes repeated ordinates through zero secants."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Algorithm gives explicit one-sided endpoint formulas and clip/cap rules."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: All branches are deterministic finite formulas; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Algorithm is a procedure definition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Algorithm is a procedure definition, not an equivalence."
+        }
+      ]
+    },
+    "thm-piecewise-cubic-hermite-interpolant-properties": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-piecewise-cubic-hermite-interpolant",
+          "source_section": "Definition",
+          "quote": "The cubic Hermite piece on $[x_i,x_{i+1}]$ is\n$$P_i(x)=y_iH_{00}(t)+y_{i+1}H_{01}(t)+h_im_iH_{10}(t)+h_im_{i+1}H_{11}(t).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$, $(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "endpoint-values",
+          "claim": "The endpoint basis values give the prescribed cell values.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "endpoint-slopes",
+          "claim": "The power rule and chain rule give the prescribed endpoint derivatives.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "c1-matching",
+          "claim": "Adjacent pieces share each value and first derivative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "cubic-reproduction",
+          "claim": "Direct basis substitutions reproduce each monomial through degree three.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires a cell of positive width."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1–1.2 allow zero endpoint values and slopes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement applies to the single-cell case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated nodes are excluded while zero slopes and repeated ordinates are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1–1.2 evaluate both cell endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses explicit finite formulas and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no equivalence."
+        }
+      ]
+    },
+    "thm-hermite-monotonicity-for-normalized-slopes-in-square": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-piecewise-cubic-hermite-interpolant",
+          "source_section": "Definition",
+          "quote": "The cubic Hermite piece on $[x_i,x_{i+1}]$ is\n$$P_i(x)=y_iH_{00}(t)+y_{i+1}H_{01}(t)+h_im_iH_{10}(t)+h_im_{i+1}H_{11}(t).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with $$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$, $(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "normalized-derivative",
+          "claim": "Differentiation gives the normalized derivative quadratic.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "corner-mixture",
+          "claim": "The derivative is a convex combination of the four corner quadratics.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "monotonicity",
+          "claim": "Nonnegative normalized derivative gives monotonicity by the mean value theorem; the flat branch is constant.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires one positive-width cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 proves the zero-secant constant case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement applies to one cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Equal endpoint values are handled in the flat case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1–3.1 use the cell endpoint values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: For each fixed u<v the mean value theorem supplies a point; no simultaneous choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is a sufficient implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is a sufficient implication, not an equivalence."
+        }
+      ]
+    },
+    "lem-pchip-slope-selection-well-defined": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For the left endpoint, compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-widths",
+          "claim": "Strict node ordering makes the widths and endpoint denominators positive.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "harmonic-denominator",
+          "claim": "Same-sign nonzero secants give same-sign weighted reciprocals.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires at least two nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero secants take a branch that avoids division by that secant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 covers the two-node branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Flat inputs are allowed and have defined slopes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 checks the one-sided width denominators."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Every branch is a deterministic formula and no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no equivalence."
+        }
+      ]
+    },
+    "thm-pchip-normalized-slopes-in-square": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For the left endpoint, compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pchip-slope-selection-well-defined",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-pchip-slope-selection]], each branch is defined over $\\mathbb R$ and every selected slope is finite; in particular, the algorithm never divides by zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "interior-slope-bounds",
+          "claim": "The weighted harmonic mean divided by either adjacent secant lies in [0,3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "endpoint-slope-bounds",
+          "claim": "The endpoint ratio is clipped or capped into [0,3].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cell-cases",
+          "claim": "The interior, endpoint, flat, and two-node cases give both asserted alternatives.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires at least two strictly increasing nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 proves the zero-secant endpoint-slope case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 covers n=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Flat data and zero secants are explicit branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 proves the endpoint cap and clipping bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite slope formulas use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is a direct implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is a direct implication, not an equivalence."
+        }
+      ]
+    },
+    "lem-pchip-slopes-second-order-uniform-grid": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For the left endpoint, compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pchip-slope-selection-well-defined",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-pchip-slope-selection]], each branch is defined over $\\mathbb R$ and every selected slope is finite; in particular, the algorithm never divides by zero.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-continuity-and-derivative-on-real-interval",
+          "source_section": "Definition",
+          "quote": "The class $C^{n+1}$ on an open interval means that these derivatives through order $n+1$ exist and are continuous there.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with $$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in [a,b]$ with $f(c) = y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-taylor-integral-remainder",
+          "source_section": "Statement",
+          "quote": "|f(x)-P_n(x)|\\le\\frac{M|x-c|^{n+1}}{(n+1)!}",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-boundedness-theorem-r",
+          "source_section": "Statement",
+          "quote": "Then $f$ is **bounded on $K$**: there is a real\n$M \\ge 0$ with\n$$|f(x)| \\le M \\qquad \\text{for every } x \\in K .$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "secant-sign",
+          "claim": "Continuity and the intermediate value theorem fix one sign of f'; the mean value theorem transfers it to all secants.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "interior-expansions",
+          "claim": "Taylor bounds and reciprocal expansion give the two secant and reciprocal estimates.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "harmonic-cancellation",
+          "claim": "Equal uniform-grid weights cancel the first-order reciprocal terms.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "endpoint-cancellation",
+          "claim": "The endpoint formula cancels the first-order term, and its limiter branches are inactive for sufficiently small h.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-constant",
+          "claim": "Uniform bounds provide one slope-error constant for all nodes.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires N≥2 and a nonempty uniform grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement assumes |f'|≥c>0, so zero derivative is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement requires N≥2 and includes all interior nodes."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Nonstationarity excludes flat or stationary data on the interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.2 verifies the one-sided endpoint branches."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The estimates use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is an error bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is an error bound, not an equivalence."
+        }
+      ]
+    },
+    "thm-pchip-shape-preserving-no-overshoot": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pchip-slope-selection-well-defined",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-pchip-slope-selection]], each branch is defined over $\\mathbb R$ and every selected slope is finite; in particular, the algorithm never divides by zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-piecewise-cubic-hermite-interpolant-properties",
+          "source_section": "Statement",
+          "quote": "The resulting interpolant is $C^1$ on $[x_0,x_N]$ (with the corresponding one-sided derivatives at the endpoints).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-hermite-monotonicity-for-normalized-slopes-in-square",
+          "source_section": "Statement",
+          "quote": "If $d\\ne0$ and $\\alpha=m_0/d$, $\\beta=m_1/d$ both lie in $[0,3]$, then $p$ is monotone from $y_0$ to $y_1$ and stays between those values. If $d=0$ and $m_0=m_1=0$, then $p$ is constant.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pchip-normalized-slopes-in-square",
+          "source_section": "Statement",
+          "quote": "If $d_i\\ne0$, then $m_i/d_i$ and $m_{i+1}/d_i$ both belong to $[0,3]$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "hermite-matching",
+          "claim": "The algorithm's finite nodal slopes produce Hermite pieces that interpolate and match C¹.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "nonflat-cell",
+          "claim": "Every nonflat cell has normalized slopes in the Hermite sufficient square.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "flat-and-global",
+          "claim": "Flat cells are constant, and monotone cell pieces concatenate for monotone data.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires at least two strictly increasing nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 handles zero secants explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the two-node case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 handles repeated ordinates and flat cells."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1 establishes interpolation at endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Each step treats fixed finite data; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives direct implications, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives direct implications, not an equivalence."
+        }
+      ]
+    },
+    "thm-pchip-third-order-away-from-extrema": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pchip-slope-selection-well-defined",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-pchip-slope-selection]], each branch is defined over $\\mathbb R$ and every selected slope is finite; in particular, the algorithm never divides by zero.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-piecewise-cubic-hermite-interpolant",
+          "source_section": "Definition",
+          "quote": "The cubic Hermite piece on $[x_i,x_{i+1}]$ is\n$$P_i(x)=y_iH_{00}(t)+y_{i+1}H_{01}(t)+h_im_iH_{10}(t)+h_im_{i+1}H_{11}(t).$$",
+          "uses": [
+            "2.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-piecewise-cubic-hermite-interpolant-properties",
+          "source_section": "Statement",
+          "quote": "On a single interval, if the four prescribed endpoint data are the values and derivatives of a polynomial $q$ of degree at most three, then $P_i=q$ on that interval.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-pchip-slopes-second-order-uniform-grid",
+          "source_section": "Statement",
+          "quote": "There are constants $C,h_0>0$, depending on $f$, $c$, and $[a,b]$, such that for every such grid with $h<h_0$,\n$$\\max_{0\\le j\\le N}|m_j-f'(x_j)|\\le Ch^2.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-taylor-integral-remainder",
+          "source_section": "Statement",
+          "quote": "|f(x)-P_n(x)|\\le\\frac{M|x-c|^{n+1}}{(n+1)!}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-continuity-and-derivative-on-real-interval",
+          "source_section": "Definition",
+          "quote": "The class $C^{n+1}$ on an open interval means that these derivatives through order $n+1$ exist and are continuous there.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-boundedness-theorem-r",
+          "source_section": "Statement",
+          "quote": "Then $f$ is **bounded on $K$**: there is a real\n$M \\ge 0$ with\n$$|f(x)| \\le M \\qquad \\text{for every } x \\in K .$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "taylor-residual",
+          "claim": "Taylor's integral remainder bounds the function and derivative residuals at the cell endpoint.",
+          "step": "1.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "exact-hermite-error",
+          "claim": "Cubic reproduction and the Hermite basis bound the exact-slope piece error by 5Mh³/6.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "slope-perturbation",
+          "claim": "The two nodal slope errors contribute at most 2C_s h³ through the h-scaled basis.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "global-bound",
+          "claim": "The uniform constants combine to give the claimed maximum error over all cells.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires N≥2 and a nonempty uniform grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement assumes |f'|≥c>0 and excludes zero derivatives."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Proof gives a bound on every cell of the uniform partition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The stated derivative lower bound excludes stationary and flat data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 2.1–3.1 include the first and last cells."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses deterministic Taylor bounds and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is a one-way error estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is a one-way error estimate, not an equivalence."
+        }
+      ]
+    },
+    "thm-bernstein-convex-hull-and-positivity": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-piecewise-bernstein-representation",
+          "source_section": "Definition",
+          "quote": "$$B_{k,n_i}(t)=\\iota\\binom{n_i}{k}t^k(1-t)^{n_i-k},\\qquad 0\\le k\\le n_i,$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-binomial-theorem",
+          "source_section": "Statement",
+          "quote": "$$(x+y)^{n} \\;=\\; \\sum_{k<n+1} \\iota\\binom{n}{k}\\, x^{k}\\, y^{\\,n-k},$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "$$\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N},$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-nat-trichotomy",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{N}$ exactly one of $m < n$, $m = n$, $m > n$ holds. In particular the order ([[def-nat-order]]) is total.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Then for every $n \\ge 1$: - $n \\cdot 1_F > 0$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$. 5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$. 6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the set $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$ for every $s \\in S$. - $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$ for every $s \\in S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).",
+          "uses": [
+        "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonnegative-basis",
+          "claim": "The binomial coefficient is a natural that is zero or positive; its canonical real image is therefore nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+        "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "partition-of-unity",
+          "claim": "The binomial theorem and integer-power recursion give a basis sum of one.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F10",
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "control-hull",
+          "claim": "Finite-list extrema exist; nonnegative products and finite-sum monotonicity bound the weighted sum.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement concerns a nonempty cell with a finite control list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement includes zero controls and yields nonnegativity when all are nonnegative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Degree n=0 is allowed and gives a constant cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated controls are allowed and the least and greatest values still exist."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 notes the Bernstein endpoint basis values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite weighted-sum proof uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts a sufficient condition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts a sufficient condition, not an equivalence."
+        }
+      ]
+    },
+    "ex-positive-endpoint-samples-negative-between": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-piecewise-bernstein-representation",
+          "source_section": "Definition",
+          "quote": "For degree two, the cell polynomial is $c_{i,0}(1-t)^2+\\iota\\binom21\\,c_{i,1}t(1-t)+c_{i,2}t^2$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bernstein-convex-hull-and-positivity",
+          "source_section": "Statement",
+          "quote": "In particular, nonnegative controls imply a nonnegative polynomial throughout the cell.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "$\\binom{n}{1} = n$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "\\iota(0) \\;:=\\; 0_F,",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "controls",
+          "claim": "The degree-two Bernstein controls expand to the specified polynomial.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sample-values",
+          "claim": "The endpoint samples are positive but the midpoint value is negative.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sufficient-hypothesis",
+          "claim": "The negative middle control means the all-controls-nonnegative hypothesis does not apply.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes one polynomial, so an empty data list is not in scope."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example has no zero samples; the failure occurs at a negative interior value."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns two sample endpoints and one interior point, not a one-sample case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Two endpoint samples are equal and positive while the polynomial is not constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Verification 1.2 explicitly checks both endpoints and the midpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The exact polynomial expansion uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        }
+      ]
+    },
+    "ex-natural-cubic-spline-undershoots-nonnegative-table": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-cubic-spline",
+          "source_section": "Definition",
+          "quote": "has second derivative zero at $t_1$ and $t_r$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "set $m_k=0$ when $d_{k-1}d_k\\le0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pchip-shape-preserving-no-overshoot",
+          "source_section": "Statement",
+          "quote": "On each cell with nonzero secant $d_i$, the interpolant is monotone from $y_i$ to $y_{i+1}$ and stays between those endpoint values; on a cell with $d_i=0$ it is constant.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$, $(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "natural-spline-check",
+          "claim": "The explicit pieces interpolate and match through second derivatives, with natural endpoint conditions.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "undershoot",
+          "claim": "The middle piece is strictly negative in its interior although its endpoint data are zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pchip-comparison",
+          "claim": "PCHIP sets the plateau slopes to zero and the shape theorem keeps the other pieces within their endpoints.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes a four-node table."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The table includes zero data values and the zero middle secant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example contains three explicit cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The middle interval has equal zero endpoint data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Verification 1.1 checks endpoint values and endpoint second derivatives."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Each function and slope is explicitly defined without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        }
+      ]
+    },
+    "ex-pchip-flat-monotone-data": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For the left endpoint, compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pchip-shape-preserving-no-overshoot",
+          "source_section": "Statement",
+          "quote": "if the input values are nondecreasing (respectively nonincreasing), the complete interpolant is nondecreasing (respectively nonincreasing).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "secants-and-slopes",
+          "claim": "The secants, interior zero slopes, and endpoint estimates give the four stated PCHIP slopes.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pieces",
+          "claim": "Substitution into the Hermite formula gives the first, flat, and last cell polynomials.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "monotonicity",
+          "claim": "The shape theorem proves global monotonicity and exact preservation of the plateau.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes its four-node input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example includes the zero secant and constant cell."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example has four nodes and three cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The adjacent equal values make the middle cell degenerate to a constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Verification 1.1 covers both endpoint slope rules."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The algorithm is deterministic and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        }
+      ]
+    },
+    "ex-pchip-limiter-second-order-at-smooth-extremum": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For the left endpoint, compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-piecewise-cubic-hermite-interpolant",
+          "source_section": "Definition",
+          "quote": "The cubic Hermite piece on $[x_i,x_{i+1}]$ is\n$$P_i(x)=y_iH_{00}(t)+y_{i+1}H_{01}(t)+h_im_iH_{10}(t)+h_im_{i+1}H_{11}(t).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pchip-third-order-away-from-extrema",
+          "source_section": "Statement",
+          "quote": "The assertion is limited to uniform grids and intervals on which the derivative stays bounded away from zero; it makes no third-order claim at an extremum.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "For every integer $m\\ge1$, $(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "limiter-slopes",
+          "claim": "The secants and PCHIP branches give slope -3h/2 at -h and slope zero at the extremum.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cell-error",
+          "claim": "The Hermite formula gives a normalized error of t(1−t)²/2.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-order-lower-bound",
+          "claim": "Evaluation at t=1/3 rules out a uniform O(h³) extension at the extremum.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes h>0 and five nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The two secants at the extremum have opposite nonzero signs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The five-node grid includes the adjacent interior cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The witness is a strict stationary point at zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Verification 1.2 evaluates the exact error at an interior point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The calculation is explicit and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example refutes an extension rather than asserting an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example refutes an extension rather than asserting an equivalence."
+        }
+      ]
+    }
+  }
+}

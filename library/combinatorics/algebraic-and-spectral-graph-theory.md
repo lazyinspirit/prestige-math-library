@@ -29,7 +29,7 @@ items: [def-adjacency-matrix-of-a-finite-simple-graph,
 examples: []
 ---
 
-This draft page builds the standard algebraic dictionaries that turn finite
+This page builds the standard algebraic dictionaries that turn finite
 graphs into matrices: adjacency matrices count walks, Laplacians detect
 components, and Kirchhoff's theorem turns spanning-tree counts into
 determinants and eigenvalue products. The route stays on the ordinary

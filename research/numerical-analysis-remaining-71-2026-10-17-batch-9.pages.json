@@ -1,0 +1,395 @@
+[
+  {
+    "order": 2572,
+    "id": "toeplitz-circulant-and-displacement-structured-solvers",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Toeplitz circulant and displacement structured solvers",
+    "companion": "toeplitz-circulant-and-displacement-structured-solvers-examples",
+    "requires": [
+      "computed-fast-transforms-and-convolution",
+      "sparse-direct-elimination-and-ordering",
+      "linear-prediction-for-dependent-data"
+    ],
+    "items": [
+      {
+        "id": "def-toeplitz-circulant-and-displacement-notation",
+        "kind": "definition",
+        "title": "Toeplitz, circulant, and finite-index conventions for structured solvers",
+        "statement": "All vector and matrix indices below start at $0$. A rectangular Toeplitz matrix $T\\in\\mathbb C^{m\\times n}$, where $m,n\\ge1$, is specified by lags $t_r\\in\\mathbb C$ for $-(n-1)\\le r\\le m-1$ and has entries\n$$T_{ij}:=t_{i-j}\\qquad(0\\le i<m,\\ 0\\le j<n).$$\nFor a square matrix $T\\in\\mathbb C^{n\\times n}$, Hermitian Toeplitz means $t_{-r}=\\overline{t_r}$ for $0\\le r<n$. It is positive definite when $x^*Tx>0$ for every nonzero $x\\in\\mathbb C^n$, where $x^*:=\\overline{x}^{\\,T}$ and the product is the matrix product of [[def-matrix-product-and-identity-matrix]].\n\nFor $N\\ge1$, a vector $c=(c_0,\\ldots,c_{N-1})^T\\in\\mathbb C^N$ generates the circulant matrix\n$$C(c)_{ij}:=c_{(i-j)\\bmod N}\\qquad(0\\le i,j<N).$$\nFor $n\\ge1$ and $0\\le j<n$, let $e_j\\in\\mathbb C^n$ be the coordinate vector with $(e_j)_i=1$ when $i=j$ and $0$ otherwise. For $a\\in\\mathbb C^n$, $J_na$ is the reversed vector, $(J_na)_i=a_{n-1-i}$; $J_0$ is the unique map on the empty vector. The lower-triangular Toeplitz matrix of $a$ is $L(a)\\in\\mathbb C^{n\\times n}$ with $L(a)_{ij}=a_{i-j}$ when $i\\ge j$, and $0$ otherwise. The canonical unitary DFT is the map $\\mathcal F_N$ of [[def-unitary-discrete-fourier-transform-on-z-mod-n]]; the unnormalised DFT used for operation counts is $D_N:=\\sqrt N\\,\\mathcal F_N$.\n\nThese conventions specify matrix orientation, conjugation, normalization, and boundary indexing; in particular, circulant eigenvalues below use the negative-sign canonical DFT.",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-matrix-product-and-identity-matrix",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n"
+        ],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Numerical Methods for Computational Science and Engineering, Lecture Document, §§4.2.1 and 4.5.1",
+              "url": "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
+            },
+            {
+              "title": "Daniel Kressner and Robert Luce, Fast computation of the matrix exponential for a Toeplitz matrix, §2",
+              "url": "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-realified-dense-residual-certificate",
+        "kind": "theorem",
+        "title": "A specified realified dense residual check bounds the exact residual",
+        "statement": "Let $s\\ge1$, $A\\in\\mathbb R^{s\\times s}$, $x,b\\in\\mathbb R^s$, and let each row dot product be evaluated left to right: round each product, then accumulate the rounded products from the first term onward. After computing $\\widehat p=\\operatorname{fl}(Ax)$, compute $\\widehat r=\\operatorname{fl}(b-\\widehat p)$ componentwise. Assume the standard relative model with unit roundoff $u$, all products, intermediate sums and subtractions are zero or in the normal range, and $(s+1)u<1$. Put $\\gamma_q:=qu/(1-qu)$.\n\nFor the exact residual $r=b-Ax$, the specified operation DAG satisfies\n$$|r-\\widehat r|\\le\\gamma_{s+1}\\bigl(|b|+|A||x|\\bigr)$$\ncomponentwise, and therefore\n$$\\|r\\|_\\infty\\le\\|\\widehat r\\|_\\infty+ \\gamma_{s+1}\\bigl(\\|b\\|_\\infty+\\|A\\|_\\infty\\|x\\|_\\infty\\bigr),$$\nwhere $\\|A\\|_\\infty:=\\max_i\\sum_j|A_{ij}|$ and $\\|x\\|_\\infty:=\\max_i|x_i|$. If $d:=\\|A\\|_\\infty\\|x\\|_\\infty+\\|b\\|_\\infty>0$, the normwise backward-error ratio $\\eta_\\infty:=\\|r\\|_\\infty/d$ is at most $\\gamma_{s+1}+\\|\\widehat r\\|_\\infty/d$; if $d=0$, then $r=0$.\n\nFor $n\\ge1$, complex $A\\in\\mathbb C^{n\\times n}$ and $x,b\\in\\mathbb C^n$, define $R_nz:=(\\operatorname{Re}z,\\operatorname{Im}z)^T\\in\\mathbb R^{2n}$ and $\\mathcal R(A)=\\begin{pmatrix}\\operatorname{Re}A&-\\operatorname{Im}A\\\\\\operatorname{Im}A&\\operatorname{Re}A\\end{pmatrix}$; put $\\widetilde x=R_nx$ and $\\widetilde b=R_nb$. The following square expresses the realification identity proved by direct multiplication in step 1.1.\n\n```tikzcd\n\\begin{tikzcd}\n\\mathbb C^n \\arrow[r,\"A\"] \\arrow[d,\"R_n\"'] & \\mathbb C^n \\arrow[d,\"R_n\"] \\\\\n\\mathbb R^{2n} \\arrow[r,\"\\mathcal R(A)\"] & \\mathbb R^{2n}\n\\end{tikzcd}\n```\n\nApplying the same real DAG to $\\mathcal R(A),\\widetilde x,\\widetilde b$ gives the same componentwise bound with $s=2n$ and the realified residual. This is a certificate for that explicit realified residual check; it is not a bound for an unspecified native complex-operation DAG or a solver-stability theorem.",
+        "deps": [
+          "def-abs-value",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-matrix-product-and-identity-matrix",
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds"
+        ],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "David Bindel, CS 6210: Matrix Computations, Sums, Dots, and Error in Linear Systems",
+              "url": "https://www.cs.cornell.edu/courses/cs6210/2025fa/lec/2025-09-10.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft",
+        "kind": "proposition",
+        "title": "The canonical finite DFT diagonalizes every circulant",
+        "statement": "Let $N\\ge1$, $c\\in\\mathbb C^N$, and let $C(c)$ be the circulant of [[def-toeplitz-circulant-and-displacement-notation]]. Put\n$$\\lambda_k:=\\sum_{j=0}^{N-1}c_j e^{-2\\pi i k j/N}=\\sqrt N\\,(\\mathcal F_Nc)(k),\\qquad 0\\le k<N.$$\nThen\n$$C(c)=\\mathcal F_N^{-1}\\,\\operatorname{diag}(\\lambda_0,\\ldots,\\lambda_{N-1})\\,\\mathcal F_N.$$\nConsequently, $C(c)$ is invertible exactly when every $\\lambda_k\\ne0$. For $b\\in\\mathbb C^N$, $C(c)x=b$ is solvable exactly when $(\\mathcal F_Nb)(k)=0$ for every zero mode $\\lambda_k=0$; on nonzero modes every solution has $(\\mathcal F_Nx)(k)=(\\mathcal F_Nb)(k)/\\lambda_k$, while its zero-mode coordinates are free.\n\nThe square records the identity $\\mathcal F_NC(c)=\\operatorname{diag}(\\lambda)\\mathcal F_N$; the two paths send each input vector to the same Fourier-coordinate vector. The proof below establishes this identity from the finite convolution sums.\n\n```tikzcd\n\\begin{tikzcd}\n\\mathbb C^N \\arrow[r,\"C(c)\"] \\arrow[d,\"\\mathcal F_N\"'] & \\mathbb C^N \\arrow[d,\"\\mathcal F_N\"] \\\\\n\\mathbb C^N \\arrow[r,\"\\operatorname{diag}(\\lambda)\"] & \\mathbb C^N\n\\end{tikzcd}\n```",
+        "deps": [
+          "def-cyclic-convolution-on-z-mod-n",
+          "def-toeplitz-circulant-and-displacement-notation",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product",
+          "thm-finite-fourier-inversion"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Numerical Methods for Computational Science and Engineering, Lecture Document, §4.2.1.6–4.2.1.14",
+              "url": "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-zero-padded-fft-toeplitz-matvec-is-exact-and-costs-nlogn",
+        "kind": "theorem",
+        "title": "A zero-padded circulant embedding computes a Toeplitz product in O(N log N)",
+        "statement": "Let $m,n\\ge1$, let $T\\in\\mathbb C^{m\\times n}$ be Toeplitz with $T_{ij}=t_{i-j}$ for $0\\le i<m$, $0\\le j<n$, and let $x\\in\\mathbb C^n$. Set $L=m+n-1$ and let $N$ be the least power of two with $N\\ge L$. Define $c\\in\\mathbb C^N$ by\n$$c_\\ell=t_\\ell\\ (0\\le\\ell<m),\\qquad c_{N-d}=t_{-d}\\ (1\\le d<n),$$\nand set every other coordinate to zero. Let $\\widetilde x=(x_0,\\ldots,x_{n-1},0,\\ldots,0)^T\\in\\mathbb C^N$. In exact arithmetic, the first $m$ coordinates of the cyclic convolution $c*_N\\widetilde x$ equal $Tx$.\n\nThe convolution can be computed with three exact length-$N$ DFT calls, pointwise products, and scalar scaling. Its arithmetic count is $O(N\\log_2N)$ for $N\\ge2$ and constant when $N=1$. This is an exact-arithmetic count for the formal exact-constant FFT model; a finite-precision execution is not claimed to be exact.",
+        "deps": [
+          "def-cyclic-convolution-on-z-mod-n",
+          "def-toeplitz-circulant-and-displacement-notation",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product",
+          "thm-finite-fourier-inversion",
+          "thm-na-arbitrary-length-fft-correctness-and-cost",
+          "thm-na-computed-fft-convolution-error-bound"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Numerical Methods for Computational Science and Engineering, Lecture Document, §4.5.2",
+              "url": "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
+            },
+            {
+              "title": "Daniel Kressner and Robert Luce, Fast computation of the matrix exponential for a Toeplitz matrix, §1",
+              "url": "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-complex-hermitian-toeplitz-reflection-recursion",
+        "kind": "lemma",
+        "title": "Complex Hermitian Toeplitz bordering yields reflection coefficients and positive pivots",
+        "statement": "Let $n\\ge1$ and let $T_n=(t_{i-j})_{0\\le i,j<n}$ be Hermitian positive definite, so $t_{-r}=\\overline{t_r}$. For $0\\le k\\le n$, set $T_k=(t_{i-j})_{0\\le i,j<k}$, with $T_0$ empty, and for $0\\le k<n$ set $g_k=(t_1,\\ldots,t_k)^T$, with $g_0$ empty. Define $\\phi_0$ empty and $\\nu_0=t_0$. For each $0\\le k\\le n-2$, let $J_k$ reverse $k$ coordinates, put $c_k=J_k\\overline{g_k}$, and set\n$$\\alpha_{k+1}:=\\frac{t_{k+1}-c_k^*\\phi_k}{\\nu_k},\\qquad \\phi_{k+1}:=\\begin{pmatrix}\\phi_k-J_k\\overline{\\phi_k}\\,\\alpha_{k+1}\\\\ \\alpha_{k+1}\\end{pmatrix},\\qquad \\nu_{k+1}:=\\nu_k(1-|\\alpha_{k+1}|^2).$$\nEvery denominator used is strictly positive; $T_k\\phi_k=g_k$ and $\\nu_k=t_0-g_k^*\\phi_k>0$ for $0\\le k<n$. Computing through order $n-1$ takes $O(n^2)$ complex arithmetic operations and $O(n)$ working storage. This is the complex matrix-bordering extension; the real ACVF forecast procedure remains [[alg-durbin-levinson-forecast-recursion]].",
+        "deps": [
+          "alg-durbin-levinson-forecast-recursion",
+          "def-matrix-product-and-identity-matrix",
+          "def-toeplitz-circulant-and-displacement-notation",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 6.341, Discrete-Time Signal Processing, Lecture 13: The Levinson-Durbin Recursion",
+              "url": "https://users.utcluj.ro/~cmuresan/PSM/6-341-fall-2005/contents/lecture-notes/lec13.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, Numerical Methods for Computational Science and Engineering, Lecture Document, §4.5.3",
+              "url": "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-displacement-rank-generators-and-lower-shift",
+        "kind": "definition",
+        "title": "Lower-shift displacement rank and generator pairs",
+        "statement": "For $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, let $Z=Z_n$ be the lower shift with $Z_{i+1,i}=1$ for $0\\le i<n-1$ and all other entries zero. Its lower-shift (Stein) displacement is\n$$\\nabla_Z(A):=A-ZAZ^*.$$\nThe **displacement rank** of $A$ with respect to this fixed shift is $\\operatorname{rank}(\\nabla_Z(A))$. A pair of matrices $G,H\\in\\mathbb C^{n\\times r}$ is a **generator of width $r$** when\n$$\\nabla_Z(A)=GH^*.$$\nSuch a factorization is a representation of the displacement, not a factorization of $A$ itself. The term **Toeplitz-like** refers to matrices whose displacement rank is small relative to $n$; the rank bound $r$ must be specified rather than unrestricted. For a family of growing dimensions, a uniform bound means that $r$ is independent of $n$. This definition makes no conditioning, pivot-growth, or numerical-stability assertion.",
+        "deps": [
+          "def-matrix-product-and-identity-matrix",
+          "def-toeplitz-circulant-and-displacement-notation"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Kressner and Robert Luce, Fast computation of the matrix exponential for a Toeplitz matrix, §2.1",
+              "url": "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+        "kind": "algorithm",
+        "title": "General-RHS Hermitian Toeplitz solve by reflection recursion and Gohberg–Semencul",
+        "statement": "**Input:** An integer $n\\ge1$, a Hermitian Toeplitz lag list $(t_{-(n-1)},\\ldots,t_{n-1})$ satisfying $t_{-r}=\\overline{t_r}$, and a right-hand side $b\\in\\mathbb C^n$. All arithmetic in this definition is exact. The real covariance forecast procedure remains [[alg-durbin-levinson-forecast-recursion]]; this procedure solves a general Hermitian matrix equation with arbitrary $b$.\n\n**Output:** Either a vector $x\\in\\mathbb C^n$ or one of the statuses invalid-input, nonpositive-pivot(k), or zero-gohberg-semencul-denominator.\n\n1. Reject invalid-input if the lag list or right-hand side has the wrong length, or if the Hermitian lag equalities fail. Set $T_{ij}=t_{i-j}$.\n2. If $t_0\\le0$, return nonpositive-pivot(0). Initialize $\\phi_0$ empty and $\\nu_0=t_0$. For $k=0,\\ldots,n-2$, form $g_k=(t_1,\\ldots,t_k)^T$, $c_k=J_k\\overline{g_k}$, and\n   $$\\alpha_{k+1}=(t_{k+1}-c_k^*\\phi_k)/\\nu_k,\\qquad \\phi_{k+1}=(\\phi_k-J_k\\overline{\\phi_k}\\,\\alpha_{k+1},\\,\\alpha_{k+1})^T,\\qquad \\nu_{k+1}=\\nu_k(1-|\\alpha_{k+1}|^2).$$\n   If a required $\\nu_k$ is not positive, return nonpositive-pivot(k) before dividing; if a newly computed $\\nu_{k+1}\\le0$, return nonpositive-pivot(k+1).\n3. With $\\phi=\\phi_{n-1}$ and $\\nu=\\nu_{n-1}$, form\n   $$v=(-J_{n-1}\\overline{\\phi}/\\nu,\\ 1/\\nu)^T,\\qquad u=J_n\\overline v.$$\n   If $u_0=0$, return zero-gohberg-semencul-denominator.\n4. Do not form dense triangular matrices. For any $a,y\\in\\mathbb C^n$, compute\n   $$(L(a)y)_i=\\sum_{j=0}^{i}a_{i-j}y_j,\\qquad (L(a)^*y)_i=\\sum_{j=i}^{n-1}\\overline{a_{j-i}}y_j.$$\n   Return\n   $$x=\\bigl(L(u)L(u)^*b-L(Z_nv)L(Z_nv)^*b\\bigr)/u_0,$$\n   evaluating the four triangular products successively with vector workspace.\n\nFor a Hermitian positive-definite input, [[lem-complex-hermitian-toeplitz-reflection-recursion]] gives positive reflection pivots, so $u_0=1/\\nu_{n-1}>0$. The formula is the complex Hermitian extension; it makes no finite-precision stability claim.",
+        "deps": [
+          "alg-durbin-levinson-forecast-recursion",
+          "def-displacement-rank-generators-and-lower-shift",
+          "def-matrix-product-and-identity-matrix",
+          "def-toeplitz-circulant-and-displacement-notation",
+          "lem-complex-hermitian-toeplitz-reflection-recursion"
+        ],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "George Labahn and Tamir Shalom, Inversion of Toeplitz Matrices with Only Two Standard Equations, Theorem 1.1",
+              "url": "https://cs.uwaterloo.ca/~glabahn/Papers/tamir-george-1.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, Numerical Methods for Computational Science and Engineering, Lecture Document, §4.5.3",
+              "url": "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-toeplitz-matrix-has-displacement-rank-at-most-two",
+        "kind": "lemma",
+        "title": "A Toeplitz matrix has lower-shift displacement rank at most two",
+        "statement": "Let $T=(t_{i-j})_{0\\le i,j<n}$ be any square Toeplitz matrix, and let $Z=Z_n$ be the lower shift of [[def-displacement-rank-generators-and-lower-shift]]. With $e_0=(1,0,\\ldots,0)^T$ and $t_0=T_{00}$,\n$$T-ZTZ^*=e_0(e_0^*T-t_0e_0^*)+(Te_0)e_0^*.$$\nConsequently, its displacement rank is at most two. A width-two generator is\n$$G=[\\,e_0\\ \\ Te_0\\,],\\qquad H^*=\\begin{bmatrix}e_0^*T-t_0e_0^*\\\\ e_0^*\\end{bmatrix}.$$",
+        "deps": [
+          "def-displacement-rank-generators-and-lower-shift",
+          "def-matrix-product-and-identity-matrix",
+          "def-toeplitz-circulant-and-displacement-notation"
+        ],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Kressner and Robert Luce, Fast computation of the matrix exponential for a Toeplitz matrix, §2.1",
+              "url": "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, Numerical Methods for Computational Science and Engineering, Lecture Document, §4.5.1",
+              "url": "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-displacement-generator-update-under-scalar-schur-elimination",
+        "kind": "lemma",
+        "title": "One exact scalar elimination step updates a displacement generator",
+        "statement": "Let $n\\ge2$, let $A=\\begin{pmatrix}d&r^*\\\\ \\ell&M\\end{pmatrix}\\in\\mathbb C^{n\\times n}$ with $d\\ne0$, and let $s\\ge1$ be an integer. Let $Z_n=\\begin{pmatrix}0&0\\\\ e_0&Z_{n-1}\\end{pmatrix}$ be the lower shift partitioned after its first row and column. Suppose\n$$A-Z_nAZ_n^*=GH^*,\\qquad G=\\begin{pmatrix}\\widehat G\\\\G_b\\end{pmatrix},\\quad H=\\begin{pmatrix}\\widehat H\\\\H_b\\end{pmatrix},$$\nwhere $G,H\\in\\mathbb C^{n\\times s}$, $\\widehat G,\\widehat H\\in\\mathbb C^{1\\times s}$, and $G_b,H_b\\in\\mathbb C^{(n-1)\\times s}$. Let\n$$S:=M-\\ell d^{-1}r^*$$\nbe the scalar-pivot Schur complement. Define\n$$p:=e_0+(Z_{n-1}\\ell-\\ell)/d,\\qquad q:=e_0+(Z_{n-1}r-r)/\\overline d,\\qquad G':=G_b+p\\widehat G,\\quad H':=H_b+q\\widehat H.$$\nThen\n$$S-Z_{n-1}SZ_{n-1}^*=G'H'^*.$$\nThus the updated displacement rank is at most $s$, although it can decrease. This is an exact identity conditional on the nonzero pivot $d$; it makes no conditioning or growth claim.",
+        "deps": [
+          "def-block-lu-factorisation",
+          "def-displacement-rank-generators-and-lower-shift",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Kressner and Robert Luce, Fast computation of the matrix exponential for a Toeplitz matrix, Lemma 3.1",
+              "url": "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-gohberg-semencul-inverse-identity-and-cost",
+        "kind": "theorem",
+        "title": "The Hermitian positive-definite Gohberg–Semencul formula is exact and quadratic",
+        "statement": "Let $T_n=(t_{i-j})_{0\\le i,j<n}$ be Hermitian positive definite, and let $b\\in\\mathbb C^n$. Run [[alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve]] in exact arithmetic. It returns $x=T_n^{-1}b$. If $u=T_n^{-1}e_0$ and $v=T_n^{-1}e_{n-1}$ are the first and last inverse columns, then\n$$T_n^{-1}=\\frac1{u_0}\\left(L(u)L(u)^*-L(Z_nv)L(Z_nv)^*\\right),\\qquad u_0>0.$$\nThe recursion and four triangular Toeplitz products use $O(n^2)$ complex arithmetic operations and $O(n)$ storage beyond the input, output, and lag vector. This is an exact-arithmetic cost statement and makes no finite-precision stability claim.",
+        "deps": [
+          "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+          "def-displacement-rank-generators-and-lower-shift",
+          "def-matrix-product-and-identity-matrix",
+          "def-toeplitz-circulant-and-displacement-notation",
+          "lem-complex-hermitian-toeplitz-reflection-recursion",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "George Labahn and Tamir Shalom, Inversion of Toeplitz Matrices with Only Two Standard Equations, Theorem 1.1",
+              "url": "https://cs.uwaterloo.ca/~glabahn/Papers/tamir-george-1.pdf"
+            },
+            {
+              "title": "Daniel Kressner and Robert Luce, Fast computation of the matrix exponential for a Toeplitz matrix, §§2–3.1",
+              "url": "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2573,
+    "id": "toeplitz-circulant-and-displacement-structured-solvers-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Toeplitz circulant and displacement structured solvers — Examples",
+    "companion": "toeplitz-circulant-and-displacement-structured-solvers",
+    "requires": [
+      "toeplitz-circulant-and-displacement-structured-solvers"
+    ],
+    "items": [
+      {
+        "id": "ex-circulant-periodic-poisson-zero-mode",
+        "kind": "example",
+        "title": "The periodic Poisson circulant has one compatible zero mode",
+        "statement": "For each $N\\ge3$, let $C_N=C(c)$ be the periodic cycle Laplacian circulant generated by $c_0=2$, $c_1=-1$, $c_{N-1}=-1$, and $c_j=0$ otherwise. With $\\omega=e^{-2\\pi i/N}$, its Fourier eigenvalues are $\\lambda_k=2-\\omega^k-\\omega^{-k}$. Exactly $\\lambda_0$ vanishes, so $C_Nx=f$ is solvable exactly when $\\sum_{j=0}^{N-1}f_j=0$; on the zero-mean subspace the solution is unique. For $N=4$ and $f=(1,-1,1,-1)^T$, the solution is $x=f/4$.",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-toeplitz-circulant-and-displacement-notation",
+          "def-unitary-discrete-fourier-transform-on-z-mod-n",
+          "prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft",
+          "thm-complex-numbers-form-a-field",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Numerical Methods for Computational Science and Engineering, Lecture Document, §§4.2.1 and 4.5.1",
+              "url": "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-hermitian-toeplitz-nonpositive-pivot-failure",
+        "kind": "example",
+        "title": "An invertible indefinite Toeplitz matrix triggers the pivot-failure branch",
+        "statement": "For the Hermitian Toeplitz matrix\n$$T=\\begin{pmatrix}1&2\\\\2&1\\end{pmatrix},$$\nthe general-RHS solver reports a nonpositive second pivot, even though $T$ is invertible. The status records that the solver's HPD domain condition failed; it does not claim that the indefinite system has no solution.",
+        "deps": [
+          "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+          "def-toeplitz-circulant-and-displacement-notation"
+        ],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Numerical Methods for Computational Science and Engineering, Lecture Document, §4.5.3",
+              "url": "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.341, Discrete-Time Signal Processing, Lecture 13: The Levinson-Durbin Recursion",
+              "url": "https://users.utcluj.ro/~cmuresan/PSM/6-341-fall-2005/contents/lecture-notes/lec13.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-ar-covariance-toeplitz-forecast-solve",
+        "kind": "example",
+        "title": "An AR(1) covariance forecast and general-RHS Toeplitz solve",
+        "statement": "Assume a real, mean-zero, weakly stationary process $X_t$ satisfies the causal AR(1) model\n$$X_t=\\tfrac12X_{t-1}+\\varepsilon_t$$\nin $L^2$, where $\\varepsilon_t$ is centered with variance $3/4$, is uncorrelated with $X_s$ for every $s<t$, and the process is weakly stationary. Here “AR(1)” means precisely this first-order autoregression; the stated uncorrelatedness is the innovation orthogonality used below. Then its autocovariance function (ACVF) is $\\gamma(h)=2^{-|h|}$. The order-two Durbin–Levinson output is $\\phi_2=(1/2,0)^T$ and $\\nu_2=3/4$. Separately, for $T=\\begin{pmatrix}1&1/2\\\\1/2&1\\end{pmatrix}$ and $b=(1,1)^T$, the general-RHS Hermitian Toeplitz solver returns $T^{-1}b=(2/3,2/3)^T$ by the Gohberg–Semencul formula.",
+        "deps": [
+          "alg-durbin-levinson-forecast-recursion",
+          "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+          "def-autocovariance-and-sample-autocovariance",
+          "def-moments-variance-and-covariance",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-durbin-levinson-solves-the-prediction-equations",
+          "thm-gohberg-semencul-inverse-identity-and-cost"
+        ],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Numerical Methods for Computational Science and Engineering, Lecture Document, §4.5.3",
+              "url": "https://www.sam.math.ethz.ch/~grsam/NumMeth/NumCSE_Lecture_Document.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.341, Discrete-Time Signal Processing, Lecture 13: The Levinson-Durbin Recursion",
+              "url": "https://users.utcluj.ro/~cmuresan/PSM/6-341-fall-2005/contents/lecture-notes/lec13.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

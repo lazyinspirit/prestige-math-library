@@ -1,0 +1,255 @@
+{
+  "group": "j",
+  "batches": ["30"],
+  "pages_read": [
+    "riemann-solvers-for-hyperbolic-systems",
+    "riemann-solvers-for-hyperbolic-systems-examples"
+  ],
+  "items_read": [
+    "def-hyperbolic-system-and-characteristic-families",
+    "def-rankine-hugoniot-and-lax-shocks",
+    "lem-smooth-simple-characteristic-eigenpairs",
+    "def-ideal-gas-euler-state-and-pressure",
+    "def-roe-linearization-and-flux",
+    "def-hll-two-wave-flux",
+    "def-scalar-convex-entropy-admissibility",
+    "def-local-rarefaction-curve",
+    "lem-rankine-hugoniot-jump-is-a-weak-solution",
+    "lem-local-characteristic-shock-curve",
+    "thm-one-dimensional-ideal-gas-euler-eigenstructure",
+    "def-euler-star-pressure-response",
+    "thm-roe-flux-is-consistent-and-conservative",
+    "thm-hll-flux-is-consistent-and-conservative",
+    "lem-euler-acoustic-wave-pressure-response",
+    "lem-local-rarefaction-fan",
+    "lem-linearly-degenerate-characteristic-contact",
+    "thm-euler-star-pressure-root-and-vacuum-criterion",
+    "def-mixed-characteristic-wave-curve",
+    "alg-safeguarded-euler-star-pressure-solver",
+    "lem-mixed-wave-curves-are-c1",
+    "lem-euler-pressure-solver-bracket-and-termination",
+    "thm-local-small-data-riemann-solver",
+    "def-godunov-flux-from-a-local-riemann-solver",
+    "thm-godunov-flux-is-consistent-and-conservative",
+    "cex-roe-jump-property-does-not-imply-entropy-admissibility",
+    "ex-ideal-gas-contact-discontinuity",
+    "ex-euler-vacuum-threshold-boundary",
+    "ex-sod-tube-pressure-root",
+    "ex-acoustic-system-local-riemann-solution"
+  ],
+  "conventions": [
+    {
+      "convention": "The conserved state lies in an open G ⊆ R^m, the flux is C³, and characteristic eigenvalues are ordered increasingly. Characteristic right-eigenvector fields are C².",
+      "fixed_by": "def-hyperbolic-system-and-characteristic-families",
+      "matters_for": [
+        "lem-smooth-simple-characteristic-eigenpairs",
+        "lem-local-characteristic-shock-curve",
+        "lem-mixed-wave-curves-are-c1",
+        "thm-local-small-data-riemann-solver"
+      ]
+    },
+    {
+      "convention": "Weak solutions are measurable and locally bounded, have locally integrable physical flux, satisfy the distributional PDE for t > 0, and approach the initial datum in local L¹ as t decreases to zero.",
+      "fixed_by": "def-hyperbolic-system-and-characteristic-families",
+      "matters_for": [
+        "lem-rankine-hugoniot-jump-is-a-weak-solution",
+        "lem-local-rarefaction-fan",
+        "lem-linearly-degenerate-characteristic-contact",
+        "thm-local-small-data-riemann-solver"
+      ]
+    },
+    {
+      "convention": "Jumps use right minus left: f(u_R) − f(u_L) = s(u_R − u_L). Strict Lax i-shocks require λ_i(u_R) < s < λ_i(u_L), together with the stated other-family inequalities. Contacts are excluded from strict Lax shocks.",
+      "fixed_by": "def-rankine-hugoniot-and-lax-shocks",
+      "matters_for": [
+        "lem-local-characteristic-shock-curve",
+        "lem-linearly-degenerate-characteristic-contact",
+        "lem-euler-acoustic-wave-pressure-response",
+        "ex-ideal-gas-contact-discontinuity"
+      ]
+    },
+    {
+      "convention": "Wave strength follows the chosen eigenvector normalization. For genuinely nonlinear fields, σDλ_i r_i > 0 selects rarefaction and σDλ_i r_i < 0 selects shock; linearly degenerate fields use the integral curve for both signs.",
+      "fixed_by": "def-mixed-characteristic-wave-curve",
+      "matters_for": [
+        "lem-mixed-wave-curves-are-c1",
+        "thm-local-small-data-riemann-solver",
+        "ex-acoustic-system-local-riemann-solution"
+      ]
+    },
+    {
+      "convention": "Ideal-gas Euler uses conserved coordinates (ρ,m,E), γ > 1, ρ > 0, and E > m²/(2ρ); velocity is m/ρ and pressure is (γ−1)(E−m²/(2ρ)).",
+      "fixed_by": "def-ideal-gas-euler-state-and-pressure",
+      "matters_for": [
+        "thm-one-dimensional-ideal-gas-euler-eigenstructure",
+        "def-euler-star-pressure-response",
+        "lem-euler-acoustic-wave-pressure-response",
+        "thm-euler-star-pressure-root-and-vacuum-criterion"
+      ]
+    },
+    {
+      "convention": "The pressure residual is Φ(p) = f_L(p) + f_R(p) + u_R − u_L for p > 0. Left star velocity is u_L − f_L(p), and right star velocity is u_R + f_R(p).",
+      "fixed_by": "def-euler-star-pressure-response",
+      "matters_for": [
+        "lem-euler-acoustic-wave-pressure-response",
+        "thm-euler-star-pressure-root-and-vacuum-criterion",
+        "ex-sod-tube-pressure-root"
+      ]
+    },
+    {
+      "convention": "A positive matching pressure exists exactly when Φ(0+) < 0. Equality belongs to the no-positive-root threshold, where the limiting rarefaction-tail velocities coincide.",
+      "fixed_by": "thm-euler-star-pressure-root-and-vacuum-criterion",
+      "matters_for": [
+        "alg-safeguarded-euler-star-pressure-solver",
+        "lem-euler-pressure-solver-bracket-and-termination",
+        "ex-euler-vacuum-threshold-boundary"
+      ]
+    },
+    {
+      "convention": "The pressure algorithm assumes terminating exact-real primitives, τ > 0, and N ≥ 0. Its zero lower endpoint is a limiting endpoint, and Newton uses residual tolerance zero and update budget one. Accepted nonroot Newton queries lie between the quarter-width endpoints.",
+      "fixed_by": "alg-safeguarded-euler-star-pressure-solver",
+      "matters_for": [
+        "lem-euler-pressure-solver-bracket-and-termination",
+        "ex-sod-tube-pressure-root"
+      ]
+    },
+    {
+      "convention": "HLL speeds S_L < S_R are supplied inputs. Enclosure of a physical fan is a separate hypothesis; the intermediate assigned model flux need not equal the physical flux of its intermediate state.",
+      "fixed_by": "def-hll-two-wave-flux",
+      "matters_for": [
+        "thm-hll-flux-is-consistent-and-conservative"
+      ]
+    },
+    {
+      "convention": "At a stationary discontinuity, the Godunov flux uses the common one-sided physical flux, independent of the arbitrary state value assigned at the jump.",
+      "fixed_by": "def-godunov-flux-from-a-local-riemann-solver",
+      "matters_for": [
+        "thm-godunov-flux-is-consistent-and-conservative"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-local-small-data-riemann-solver",
+      "statement": "For a C³ flux near a strictly hyperbolic state where every characteristic field is genuinely nonlinear or linearly degenerate, there exist δ,η > 0 such that every pair of states within δ has a unique strength vector in (−η,η)^m solving the ordered wave-composition equation. The corresponding ordered waves form a self-similar weak solution. No uniqueness among all weak solutions is asserted.",
+      "used_by": [
+        "def-godunov-flux-from-a-local-riemann-solver",
+        "thm-godunov-flux-is-consistent-and-conservative",
+        "ex-acoustic-system-local-riemann-solution"
+      ]
+    },
+    {
+      "id": "lem-local-characteristic-shock-curve",
+      "statement": "Near a state with distinct real characteristic eigenvalues, there are jointly C¹ functions v_i(σ,u_0),s_i(σ,u_0) with normalized v_i and S_i(σ;u_0)=u_0+σv_i(σ,u_0), satisfying Rankine–Hugoniot for σ ≠ 0 and having tangent r_i(u_0) at zero. For a genuinely nonlinear field, sufficiently small strengths with σDλ_i(u_0)r_i(u_0) < 0 give strict Lax i-shocks.",
+      "used_by": [
+        "def-mixed-characteristic-wave-curve",
+        "lem-mixed-wave-curves-are-c1",
+        "thm-local-small-data-riemann-solver"
+      ]
+    },
+    {
+      "id": "lem-mixed-wave-curves-are-c1",
+      "statement": "Under the hypotheses of def-mixed-characteristic-wave-curve, the map (σ,u) ↦ Ψ_i(σ;u) is C¹ near (0,ū), with Ψ_i(0;u)=u and ∂_σΨ_i(0;u)=r_i(u).",
+      "used_by": [
+        "thm-local-small-data-riemann-solver"
+      ]
+    },
+    {
+      "id": "lem-euler-acoustic-wave-pressure-response",
+      "statement": "For positive side states and trial pressure p > 0, the defined response functions give star velocities u_L−f_L(p) and u_R+f_R(p), with the stated rarefaction and compressive-shock density formulas. The shock branches satisfy strict acoustic Lax inequalities, and matching star velocities at positive pressure produces a contact.",
+      "used_by": [
+        "thm-euler-star-pressure-root-and-vacuum-criterion"
+      ]
+    },
+    {
+      "id": "thm-euler-star-pressure-root-and-vacuum-criterion",
+      "statement": "Φ is C¹ and strictly increasing on (0,∞). If Φ(0+) < 0, it has exactly one positive zero, with 0 < p_* < P for P=2max{p_L,p_R}+6D²/K²+p_L, D=max{0,u_L−u_R}, K=√A_L+√A_R. If Φ(0+) ≥ 0, there is no positive matching pressure.",
+      "used_by": [
+        "alg-safeguarded-euler-star-pressure-solver",
+        "lem-euler-pressure-solver-bracket-and-termination",
+        "ex-euler-vacuum-threshold-boundary",
+        "ex-sod-tube-pressure-root"
+      ]
+    },
+    {
+      "id": "lem-euler-pressure-solver-bracket-and-termination",
+      "statement": "For admissible non-vacuum data, the specified algorithm terminates after at most N outer iterations while retaining the unique root in its returned bracket. After k completed non-exact iterations its width is at most (3/4)^kP; any budget satisfying (3/4)^NP ≤ τ returns a pressure-bracket status.",
+      "used_by": [
+        "ex-sod-tube-pressure-root"
+      ]
+    },
+    {
+      "id": "lem-smooth-simple-characteristic-eigenpairs",
+      "statement": "A C³ flux whose Jacobian has distinct real eigenvalues at a base state admits local C² eigenvalues and normalized eigenvectors. On a common neighborhood the eigenvalues remain real, simple, and ordered, and the eigenvectors form a basis.",
+      "used_by": [
+        "def-local-rarefaction-curve",
+        "lem-local-characteristic-shock-curve",
+        "lem-local-rarefaction-fan",
+        "lem-mixed-wave-curves-are-c1"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "The C¹ convention for fluxes and finite-budget Newton residuals.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-euclidean-maps-and-diffeomorphisms",
+      "used_for": "The C³ flux and C² characteristic-field regularity conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-implicit-function-theorem",
+      "used_for": "Local eigenpair construction, augmented shock equations, and inversion of the ordered wave-composition equation. Its derivative formula also supports the elementary C² bootstrap for eigenpairs.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Uniform continuity of strength derivatives on compact parameter products in the uniform small-shock Lax argument.",
+      "opened": true
+    },
+    {
+      "id": "cor-uniform-picard-lindelof-for-nearby-initial-values",
+      "used_for": "A common local existence interval and compact cylinder for rarefaction integral curves from nearby initial states.",
+      "opened": true
+    },
+    {
+      "id": "thm-c2-ode-flow-on-common-tube",
+      "used_for": "Joint C² dependence of local rarefaction curves on strength and base state on a common compact tube.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Existence of a pressure root between a positive lower pressure with negative residual and the explicit upper bracket.",
+      "opened": true
+    },
+    {
+      "id": "alg-newton-correction-for-vector-residuals",
+      "used_for": "The scalar Newton correction and finite exact-arithmetic work underlying the one-update Newton call.",
+      "opened": true
+    },
+    {
+      "id": "alg-finite-budget-newton-for-vector-residuals",
+      "used_for": "The exact one-update Newton interface, including root, invalid-trial, singular-Jacobian, and exhausted-budget statuses.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "thm-c2-ode-flow-on-common-tube",
+      "finding": "In thm-c2-ode-flow-on-common-tube, proof step 2.2 says “uniformly on $J$” and step 4.1 says “on $J$”, but neither the Statement nor the preceding proof defines J. The Statement specifies the time interval [0,T_+], so the intended interval is recoverable; this is an undefined-symbol presentation defect.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "high-resolution-tvd-eno-and-weno-methods",
+      "to": "riemann-solvers-for-hyperbolic-systems",
+      "faithful": true,
+      "note": "Checked the consumer page, its item dependency/citation interfaces, the characteristic-wise reconstruction definition, and the companion Burgers example's actual Rankine–Hugoniot use. The A-page results do not import nonlinear Riemann existence, entropy admissibility, or system TVD from this supplier. The Burgers example uses the supplied jump convention correctly to obtain speed 1/2. The supplier retains local existence and separate entropy qualifications; the consumer does not strengthen them."
+    }
+  ]
+}

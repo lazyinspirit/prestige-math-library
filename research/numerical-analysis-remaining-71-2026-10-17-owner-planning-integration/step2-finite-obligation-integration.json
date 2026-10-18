@@ -1,0 +1,2144 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "at": "2026-10-17T23:58:05.554Z",
+  "archive": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-contracts-before",
+  "original_obligations": 93,
+  "installed_obligations": 93,
+  "native_gate_credit": false,
+  "software_tests_run": false,
+  "registry_modules": [
+    "tools/finite-smoke-numerical-frontier71-special.mjs",
+    "tools/finite-smoke-numerical-frontier71-geometry.mjs",
+    "tools/finite-smoke-numerical-frontier71-particle.mjs"
+  ],
+  "documentation": "tools/NUMERICAL-FRONTIER71-FINITE-SMOKE.md",
+  "rows": [
+    {
+      "batch": 12,
+      "id": "ex-ewald-nonneutral-zero-mode-obstruction",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "unit charge against constant test",
+        "inputs": {
+          "q1": 1
+        },
+        "calculation": "<rho,1>=1 while <-Delta u,1>=<u,-Delta 1>=0",
+        "expected": "contradiction 0=4pi",
+        "evidence": "steps 1.1-1.2"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 The right side would be $4\\pi\\langle\\rho,1\\rangle=4\\pi q_1=4\\pi$ by [F1], contradicting step 1.1. Therefore no periodic distribution solution exists for this nonneutral source. [given, F1, step 1.1, algebra] ∎",
+        "parameters": {
+          "fixture": "ewald-unit-nonneutral"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 12,
+      "id": "ex-ewald-neutral-dipole-cell",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "unit-cell dipole structure factor",
+        "inputs": {
+          "q": [
+            1,
+            -1
+          ],
+          "x1": [
+            0,
+            0,
+            0
+          ],
+          "x2": [
+            0.5,
+            0,
+            0
+          ]
+        },
+        "calculation": "rho_k=1-exp(-pi*i*k1)=1-(-1)^k1",
+        "expected": "0 for even k1; 2 for odd k1",
+        "evidence": "steps 1.1-1.2"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.1 The two positions are distinct in $\\mathbb R^3/\\mathbb Z^3$ and $q_1+q_2=0$. For $k\\in\\mathbb Z^3$, [F1] gives $\\rho_k=1-e^{-2\\pi i k_1/2}=1-(-1)^{k_1}$; hence $\\rho_0=0$, $\\rho_k=0$ when $k_1$ is even, and $\\rho_k=2$ when $k_1$ is odd. [given, F1, algebra]",
+        "parameters": {
+          "fixture": "ewald-dipole-modes"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 12,
+      "id": "ex-ewald-source-collision-field-singularity",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "source limit",
+        "inputs": {
+          "q1": 1,
+          "r": "r -> 0+"
+        },
+        "calculation": "U_alpha(r)=1/r+O(1)",
+        "expected": "U_alpha is unbounded at the source",
+        "evidence": "steps 1.1-1.2"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 Writing $r=|x-x_1|$, [F2] gives the self-potential expansion $\\phi_s(r)=1/r-2\\alpha/\\sqrt\\pi+O(r^2)$. Substituting the stated error-function expansion into the derivative formula in [F2] cancels the $r^{-1}$ terms and gives $\\phi_s'(r)=-1/r^2+O(r)$. Since $q_1=1$, its gradient is $\\phi_s'(r)(x-x_1)/r=-(x-x_1)/r^3+O(r)$. Adding the bounded nonself potential and gradient from step 1.1 proves both expansions in the Example. [F2, step 1.1, algebra]",
+        "parameters": {
+          "fixture": "ewald-collision-self-kernel"
+        }
+      },
+      "limits": "Only the independently integrated screened self-kernel is sampled. A finite list cannot prove unboundedness, the O(1) periodic remainder, or any infinite Ewald formula; those authored asymptotic claims remain proof obligations.",
+      "rationale": "Preserves the source-collision obligation as a finite sanity consequence of its actual screened self-term: two positive alphas and five shrinking nonzero dyadic radii compare both potential and radial derivative against their Coulomb leading terms. The source proves the remaining periodic contribution bounded; the smoke does not replace that proof."
+    },
+    {
+      "batch": 12,
+      "id": "ex-ewald-alpha-cutoff-tradeoff",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "strict monotonicity at fixed cutoffs",
+        "inputs": {
+          "alpha1": 1,
+          "alpha2": 2,
+          "m": "m >= floor(R) >= 1"
+        },
+        "calculation": "exp(-4m^2)/2 < exp(-m^2); exp(-m^2/16) > exp(-m^2/4)",
+        "expected": "real tail decreases and reciprocal tail increases",
+        "evidence": "steps 1.1-2.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.2 If $0<\\alpha_1<\\alpha_2$, then for every $m\\ge M_R\\ge1$, $e^{-\\alpha_2^2m^2}/\\alpha_2<e^{-\\alpha_1^2m^2}/\\alpha_1$ because both positive factors strictly decrease. The positive convergent sum therefore gives $\\mathcal R(\\alpha_2)<\\mathcal R(\\alpha_1)$. [F1, F2, algebra]",
+        "parameters": {
+          "fixture": "ewald-cutoff-tradeoff"
+        }
+      },
+      "limits": "Finite shell and sum consequences only; no infinite-tail monotonicity, tail estimate, cutoff optimization or alpha-limit proof.",
+      "rationale": "Preserves the alpha1=1,alpha2=2 comparison at all eight supported shells m=1..8, checking each strict inequality and the positive weighted partial sums."
+    },
+    {
+      "batch": 12,
+      "id": "ex-ewald-mesh-energy-force-consistency",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "4x4x4 order-3 dipole grid",
+        "inputs": {
+          "M": [
+            4,
+            4,
+            4
+          ],
+          "P": 3,
+          "x1": [
+            0.125,
+            0.125,
+            0.125
+          ],
+          "x2": [
+            0.625,
+            0.125,
+            0.125
+          ],
+          "K": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              -1,
+              0,
+              0
+            ]
+          ]
+        },
+        "calculation": "4x_i coordinates are (0.5,0.5,0.5) and (2.5,0.5,0.5); sinc(pi/4) is nonzero; the modes are symmetric and satisfy |k_r|<2",
+        "expected": "no knots or denominator zero; the classical mesh energy-gradient identity applies",
+        "evidence": "steps 1.1-2.2"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.2 By [F1], $z_k=q_1b_k(t_1)+q_2b_k(t_2)$. With $P=3$, the factors $b_k$ are differentiable. The chain rule gives $\\nabla_{x_i}z_k=q_i\\nabla_xb_k(t_i)$. Therefore $\\nabla_{x_i}(\\frac12c_k|z_k|^2)=q_ic_k\\operatorname{Re}(\\overline{z_k}\\nabla_xb_k(t_i))$. Summing over $k\\in\\mathcal K$ and negating yields exactly the stated energy-gradient force. [F1, F2, algebra]",
+        "parameters": {
+          "fixture": "ewald-mesh-gradient"
+        }
+      },
+      "limits": "Fixed floating mesh arithmetic and centered finite differences only; not certified FFT computation, infinite reciprocal sums or deterministic error-theorem validation.",
+      "rationale": "Preserves every original 4x4x4/P3/dipole/signed-mode datum. Computes finite cardinal spread, negative-sign unitary DFT and conjugate-window deconvolution, then compares corrected and uncorrected gathers against perturbed energies. An additional nearby off-knot offset prevents a vacuous all-stationary force check."
+    },
+    {
+      "batch": 25,
+      "id": "def-airy-initial-value-series",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "The series reduces to the declared c0 and c1 initial values; c2=0."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For $y(z)=\\sum_{k\\ge0}c_kz^k$, set $c_2=0$ and\n$c_{k+3}=c_k/((k+3)(k+2))$ for $k\\ge0$. Define $\\operatorname{Ai}$ by this\nseries with\n\n$$c_0=\\frac{1}{3^{2/3}\\Gamma(2/3)},\\qquad c_1=-\\frac{1}{3^{1/3}\\Gamma(1/3)},$$\n\nand define $\\operatorname{Bi}$ by the same recurrence with\n\n$$c_0=\\frac{1}{3^{1/6}\\Gamma(2/3)},\\qquad c_1=\\frac{3^{1/6}}{\\Gamma(1/3)}.$$\n\nHere $\\Gamma$ is Euler's integral on the right half-plane from\n[[def-euler-gamma-function]]. The standard Airy initial values are those in\nDLMF §9.2(ii); in particular, the power of $3$ in $\\operatorname{Bi}(0)$ is\nin the denominator.",
+        "parameters": {
+          "fixture": "airy-origin-coefficients"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves c0/c1/c2 and the k=0,1 recurrence cases by two exact free-initial-coefficient polynomials. Independent transformed Gamma quadratures also check all four Ai/Bi normalizations at z=0; this does not invoke or purport to execute the source Gamma/Airy procedures."
+    },
+    {
+      "batch": 25,
+      "id": "def-fresnel-erf-and-hypergeometric-series",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "C(0)=S(0)=erf(0)=0, erfc(0)=1, and the Gauss series at z=0 is 1."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For $z\\in\\mathbb C$, define the Fresnel functions and error function by\n\n$$C(z)=\\sum_{k=0}^{\\infty}\\frac{(-1)^k(\\pi/2)^{2k}z^{4k+1}}{(2k)!(4k+1)}, \\qquad S(z)=\\sum_{k=0}^{\\infty}\\frac{(-1)^k(\\pi/2)^{2k+1}z^{4k+3}}{(2k+1)!(4k+3)}, \\qquad \\operatorname{erf}(z)=\\frac{2}{\\sqrt\\pi}\\sum_{k=0}^{\\infty}\\frac{(-1)^kz^{2k+1}}{k!(2k+1)}, \\qquad \\operatorname{erfc}(z)=1-\\operatorname{erf}(z).$$\n\nThe following local lemmas prove convergence and show that $C,S,\\operatorname{erf}$\nequal the standard entire integral functions with their usual normalizations.\n\nFor $a,b,c,z\\in\\mathbb C$ with $c\\notin\\{0,-1,-2,\\ldots\\}$ and $|z|<1$,\ndefine\n\n$$(a)_0=1,\\qquad (a)_k=\\prod_{j=0}^{k-1}(a+j),\\qquad {}_2F_1(a,b;c;z)=\\sum_{k=0}^{\\infty}\\frac{(a)_k(b)_k}{(c)_k k!}z^k.$$\n\nOnly this Gauss-series branch of ${}_2F_1$ is defined on this page; no value\noutside $|z|<1$ or across a continuation cut is implicit.",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "def-integer-order-bessel-series",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "J0(0)=I0(0)=1, and Jn(0)=In(0)=0 for n>=1."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$J_n(z)=\\sum_{k=0}^{\\infty}\\frac{(-1)^k(z/2)^{2k+n}}{k!(k+n)!}, \\qquad I_n(z)=\\sum_{k=0}^{\\infty}\\frac{(z/2)^{2k+n}}{k!(k+n)!}.$$",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth."
+    },
+    {
+      "batch": 25,
+      "id": "lem-explicit-euler-constant-enclosure",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "M=1",
+        "calculation": "H1=1 and log(1)=0, so the theorem specializes to 0<=1-gamma<=1."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For each integer $M\\ge1$, put $H_M=\\sum_{k=1}^M1/k$. Euler's constant\n$\\gamma$ satisfies\n$$0\\le H_M-\\log M-\\gamma\\le\\frac1M.$$\nThus $[H_M-\\log M-1/M,\\ H_M-\\log M]$ is a finite enclosure for $\\gamma$.",
+        "parameters": {
+          "fixture": "euler-constant-m1"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-gamma-functional-equation-meromorphic-extension",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=1",
+        "calculation": "Gamma(2)=1*Gamma(1)=1, using Gamma(1)=1 from the integral definition."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For every $z\\in\\mathbb C\\setminus\\{0,-1,-2,\\ldots\\}$,\n$$\\Gamma(z+1)=z\\Gamma(z),$$\nwhere $\\Gamma$ is the meromorphic continuation of Euler's Gamma function.",
+        "parameters": {
+          "fixture": "gamma-recurrence-one"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-airy-series-coefficient-recurrence-and-tail",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "k=0,1",
+        "calculation": "c3=c0/6 and c4=c1/12; c2=0 supplies the missing residue class."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "## Proof\n1.1 Multiplying the coefficient relation in [F1] by $z^{k+3}$ shows that the coefficient of $z^{k+1}$ in $y''$ is $c_k$, which is the coefficient of $z^{k+1}$ in $zy$. At degree $0$, the coefficients agree because $c_2=0$; at degree $1$, they agree by the recurrence at $k=0$. Thus the formal series satisfy $y''=zy$. [F1, algebra]",
+        "parameters": {
+          "fixture": "airy-origin-coefficients"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves c0/c1/c2 and the k=0,1 recurrence cases by two exact free-initial-coefficient polynomials. Independent transformed Gamma quadratures also check all four Ai/Bi normalizations at z=0; this does not invoke or purport to execute the source Gamma/Airy procedures."
+    },
+    {
+      "batch": 25,
+      "id": "lem-erf-series-geometric-tail",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "Every erf term is zero, so the tail is exactly zero; the ratio formula is not used as a 0/0 quotient."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "[F1] [[def-fresnel-erf-and-hypergeometric-series]]:\n$e_k=(2/\\sqrt\\pi)(-1)^kz^{2k+1}/(k!(2k+1))$.",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-fresnel-series-geometric-tail",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "Every C and S term is zero; both tails are exactly zero."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "[F1] [[def-fresnel-erf-and-hypergeometric-series]]: $c_k=(-1)^k(\\pi/2)^{2k}\nz^{4k+1}/((2k)!(4k+1))$ and\n$s_k=(-1)^k(\\pi/2)^{2k+1}z^{4k+3}/((2k+1)!(4k+3))$.",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-gauss-hypergeometric-series-geometric-tail",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "The k=0 term is 1 and every higher term is zero; the value is 1."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "[F1] [[def-fresnel-erf-and-hypergeometric-series]]:\n$h_k=(a)_k(b)_kz^k/((c)_kk!)$ and\n$(a)_{k+1}=(a+k)(a)_k$ (and likewise for $b,c$).",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-integer-order-bessel-series-tail",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "For n=0 the only nonzero term is the k=0 term 1; for n>=1 all terms vanish."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "## Proof\n1.1 For either term sequence, cancellation of the factorials gives $|a_{k+1}|/|a_k|=|z|^2/[4(k+1)(k+n+1)]$ whenever $a_k\\ne0$; at $z=0$ the series are finite-valued directly. This ratio decreases to $0$. [given, F1, algebra]",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-fresnel-erf-hypergeometric-series",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "The exact partial sums return C=S=erf=0 and the Gauss value 1, with zero mathematical tail."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "- For $C$, sum its defining terms $c_0,\\ldots,c_{q-1}$ from\n  [[def-fresnel-erf-and-hypergeometric-series]] by interval arithmetic,\n  using $P_q/2$ for $\\pi/2$. Let $c_q$ be the first omitted term and set\n  $$r_C=\\frac{(\\sup P_q)^2 M(z)^4}{4(2q+1)(2q+2)}.$$\n  If $r_C<1$, enlarge the partial-sum rectangle in both coordinates by\n  $M(c_q)/(1-r_C)$; otherwise skip this stage.\n- For $S$, sum its first $q$ defining terms using $P_q/2$, let $s_q$\n  be the first omitted term, and set\n  $$r_S=\\frac{(\\sup P_q)^2 M(z)^4}{4(2q+2)(2q+3)}.$$\n  If $r_S<1$, enlarge the partial-sum rectangle in both coordinates by\n  $M(s_q)/(1-r_S)$; otherwise skip this stage.\n- For erf, use the interval $2/R_q$ from the single square-root call above\n  for $2/\\sqrt\\pi$,\n  sum the first $q$ defining terms, and let $e_q$ be the first omitted\n  term. Set $r_E=M(z)^2/(q+1)$. If $r_E<1$, enlarge the partial-sum\n  rectangle in both coordinates by $M(e_q)/(1-r_E)$; otherwise skip this\n  stage.\n- For the Gauss series, compute its terms by $h_0=1$ and\n  $$h_{k+1}=h_k\\,z\\,\\frac{(a+k)(b+k)}{(c+k)(k+1)}$$\n  using exact interval operations. No denominator $c+k$ vanishes by the\n  domain check. If $a$ or $b$ is a nonpositive integer, let $L$ be one\n  more than the smaller absolute value of those nonpositive integer\n  parameters. If $L\\le q$, sum exactly through $h_{L-1}$ and use zero\n  tail. Otherwise put\n  $$A=|\\Re a|+|\\Im a|,\\quad B=|\\Re b|+|\\Im b|,\\quad C_0=|\\Re c|+|\\Im c|,\\quad Z_0=|\\Re z|+|\\Im z|,$$\n  and\n  $$r_H=Z_0\\frac{(1+A/q)(1+B/q)}{1-C_0/q}.$$\n  If $q>C_0$ and $r_H<1$, sum $h_0,\\ldots,h_{q-1}$, let $h_q$\n  be the first omitted term, and enlarge the partial-sum rectangle in both\n  coordinates by $M(h_q)/(1-r_H)$; otherwise skip this stage. The geometric\n  bound in [[lem-gauss-hypergeometric-series-geometric-tail]] applies because\n  $A,B,C_0,Z_0$ dominate the corresponding complex moduli.",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-bessel-integral-representations-and-scaled-range",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "x=0,n=0",
+        "calculation": "Both integral representations equal 1; e^{-x}I0(x)=1."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$J_n(x)=\\frac1\\pi\\int_0^\\pi\\cos(n\\theta-x\\sin\\theta)\\,d\\theta, \\qquad I_n(x)=\\frac1\\pi\\int_0^\\pi e^{x\\cos\\theta}\\cos(n\\theta)\\,d\\theta.$$",
+        "parameters": {
+          "fixture": "bessel-integrals-origin"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-binet-loggamma-right-halfplane-identity",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "u=1/2",
+        "calculation": "On the first unit interval Phi(u)=u(1-u)/2, so Phi(1/2)=1/8, the asserted sharp panel maximum."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For $\\operatorname{Re}z>0$, let $\\ell_+(z)$ be the branch in\n[[def-loggamma-right-halfplane-branch]]. Define\n$$\\Phi(u)=\\int_0^u\\bigl(\\lfloor v\\rfloor-v+1/2\\bigr)\\,dv.$$\nThen the absolutely convergent integral satisfies\n$$\\ell_+(z)=\\left(z-\\frac12\\right)\\operatorname{Log}z-z+ \\frac12\\log(2\\pi)+\\int_0^\\infty\\frac{\\Phi(u)}{(u+z)^2}\\,du.$$\nOn each unit interval, $\\Phi(n+t)=t(1-t)/2$ for $0\\le t\\le1$; hence\n$0\\le\\Phi(u)\\le1/8$.",
+        "parameters": {
+          "fixture": "binet-half-panel"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-erfcx-moment-recurrence",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "k=0",
+        "calculation": "The recurrence is 2xM0+2M1=1 and r0=1/(2(x+r1)); division uses M1>0."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$2xM_0+2M_1=1, \\qquad kM_{k-1}=2xM_k+2M_{k+1}\\quad(k\\ge1).$$",
+        "parameters": {
+          "fixture": "erfcx-moments-k0"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-integer-order-bessel-recurrences-and-ode",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "n=0,z=0",
+        "calculation": "The series limits give J0(0)=I0(0)=1; for n>=1 both limits are zero."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "At $z=0$, the series limits are $J_0(0)=I_0(0)=1$ and\n$J_n(0)=I_n(0)=0$ for $n\\ge1$.",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth."
+    },
+    {
+      "batch": 25,
+      "id": "lem-bessel-integral-midpoint-error",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "n=0,x=0",
+        "calculation": "The integrand is the constant 1, Qm/pi=1, and the stated error bound is zero."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$\\left|J_n(x)-\\frac{Q_m}{\\pi}\\right| \\le \\frac{h^2}{24}\\left((n+|x|)^2+|x|\\right).$$",
+        "parameters": {
+          "fixture": "bessel-midpoint-origin"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-erfcx-asymptotic-remainder",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "N=1",
+        "calculation": "erfcx(x)-1/(x sqrt(pi))=-R1 with 0<=R1<=1/(2 x^3 sqrt(pi))."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$\\operatorname{erfcx}(x)-S_N(x)=(-1)^N R_N(x),\\qquad 0\\le R_N(x)\\le \\frac1{x\\sqrt\\pi}\\frac{(2N)!}{4^N N!x^{2N}}.$$",
+        "parameters": {
+          "fixture": "erfcx-asymptotic-one"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-erfcx-continued-fraction-enclosure",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "N=0",
+        "calculation": "r0 lies in [0,1/(2x)], yielding the first finite enclosure without any backward step."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$\\operatorname{erfcx}(x)\\in \\left[\\frac1{\\sqrt\\pi(x+\\sup I_0)}, \\frac1{\\sqrt\\pi(x+\\inf I_0)}\\right].$$",
+        "parameters": {
+          "fixture": "erfcx-cf-zero"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-scaled-modified-bessel-midpoint-error",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "n=0,x=0",
+        "calculation": "The scaled integrand is the constant 1, Qm/pi=1, and the error bound is zero."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Let $n\\ge0$ be an integer, $x\\ge0$, $m\\ge1$, $h=\\pi/m$, and\n$$f(\\theta)=e^{-x(1-\\cos\\theta)}\\cos(n\\theta),\\qquad Q_m=h\\sum_{j=0}^{m-1}f((j+1/2)h).$$\nThen\n$$\\left|e^{-x}I_n(x)-\\frac{Q_m}{\\pi}\\right| \\le \\frac{h^2}{24}\\bigl((x+n)^2+x\\bigr).$$\nThe bound certifies the exact midpoint integral. Floating-point summation is\ncertified only if its operations are enclosed separately.",
+        "parameters": {
+          "fixture": "bessel-midpoint-origin"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-sectorial-stirling-explicit-remainder-bound",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "delta=pi/2",
+        "calculation": "The constant becomes 1/(8 sin^2(pi/4)|z|)=1/(4|z|)."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Fix $0<\\delta\\le\\pi/2$ and $z\\in\\mathbb C$ with $\\operatorname{Re}z>0$.\nFor the branch $\\ell_+$ from [[def-loggamma-right-halfplane-branch]],\n[[lem-binet-loggamma-right-halfplane-identity]] gives\n$$\\ell_+(z)=\\left(z-\\frac12\\right)\\operatorname{Log}z-z+ \\frac12\\log(2\\pi)+R(z), \\qquad R(z)=\\int_0^\\infty\\frac{\\Phi(u)}{(u+z)^2}\\,du,$$\nwhere $\\Phi(u)=\\int_0^u(\\lfloor v\\rfloor-v+1/2)\\,dv$. Then\n$$|R(z)|\\le \\frac{1}{8\\sin^2(\\delta/2)|z|}.$$\nFor $\\delta=\\pi/2$, the bound is $1/(4|z|)$. The relative error after\nexponentiating the three main terms is at most $\\exp(|R(z)|)-1$.",
+        "parameters": {
+          "fixture": "stirling-half-pi-sector"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-erfcx-evaluation",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "x=1,N=0",
+        "calculation": "The initial ratio interval [0,1/2] yields erfcx(1) in [2/(3 sqrt(pi)),1/sqrt(pi)] before any refinement."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Form the continued-fraction candidate as follows. Set\n$I_D=[0,(D+1)/(2x)]$. For $k=D-1,\\ldots,0$, set\n$$I_k=\\left[\\frac{k+1}{2(x+\\sup I_{k+1})}, \\frac{k+1}{2(x+\\inf I_{k+1})}\\right]$$\nby outward interval operations. Apply the decreasing map\n$r\\mapsto1/(\\sqrt\\pi(x+r))$ to $I_0$, evaluating $\\sqrt\\pi$ with\n$R_q$, to obtain a candidate interval $C_q$. The finite-depth\ncontainment lemma [[lem-erfcx-continued-fraction-enclosure]] makes $C_q$\na valid enclosure for every $D\\ge0$.",
+        "parameters": {
+          "fixture": "erfcx-cf-zero"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored x=1 depth-zero initial ratio enclosure, with its exact printed endpoints, and compares it against an independently integrated positive erfcx representation. The current source states the underlying continued-fraction enclosure is valid for every D>=0; the fixture does not falsely claim its positive-cap stage schedule actually executes D=0."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-gamma-loggamma-evaluation",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "Z={1}",
+        "calculation": "The exact targets are Gamma(1)=1 and ell(1)=0; interval success remains conditional on the finite tolerance tests."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "If both log candidates are available, intersect them when the intersection is\nnonempty; if empty, discard the stage. If only one is available, select it.\nFor target $\\ell$, use this rectangle as the output candidate. For target\n$\\Gamma$, call the complex exponential node on the selected rectangle and\nuse its finite output rectangle. Return success at the first stage whose\ncandidate radius is at most $\\varepsilon_a$. Set relative_certified to true\nexactly when relative tolerance was requested, zero is excluded, and the\ncontract's relative-radius test passes; a failed relative test does not\nprevent absolute success. If no stage succeeds before its caps, return\ninconclusive.",
+        "parameters": {
+          "fixture": "gamma-targets-one"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves Gamma(1)=1 and ell(1)=0 via a finite product/Euler interval and an independent Euler-integrand quadrature. Explicit loose/tight tolerance comparisons preserve the conditional-success qualification."
+    },
+    {
+      "batch": 25,
+      "id": "lem-bessel-casoratian-invariant-positive",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "j=0,x=1",
+        "calculation": "W0=J0(1)^2+J1(1)^2>0; the x=1 alternating-series lower bounds give W0>=193/256."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 By [F2], $W_0=J_0D_1-J_1D_0=J_0^2+J_1^2$, which is strictly positive by [F3]. A linear dependence of $J,D$ would make every $2\\times2$ determinant $W_j$ zero, so they are independent. [F2, F3, step 1.1, algebra] ∎",
+        "parameters": {
+          "fixture": "bessel-casoratian"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "lem-finite-miller-terminal-error-identity",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "fixed finite N",
+        "calculation": "Substituting n=s into the displayed identity gives zero error, as normalization requires."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$\\widehat J_n-J_n= \\frac{q\\bigl(J_sD_n-J_nD_s\\bigr)}{J_s+qD_s}.$$",
+        "parameters": {
+          "fixture": "miller-normalization"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves both required n=s normalization zeros for s=0,1 at fixed N=4,x=1, and additionally computes non-normalization slots so the test does not merely simplify an identically zero numerator."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-airy-evaluation",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "The power-series branches reduce to Ai(0) and Bi(0); the constants are enclosed through the Gamma evaluator."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For $s\\in\\{1/6,1/3,2/3\\}$, outward-round the exact rational $s$ to a\ndyadic interval $S_{s,p}$, then call\n[[alg-certified-elementary-range-evaluation]] on the real expression DAG\n$\\exp(S_{s,p}\\log 3)$, with the same exponent range, precision $p$, and\ntruncation $q$. These calls enclose $3^s$ by\n[[thm-real-elementary-range-enclosures]]. If a required call is not finite,\nskip this stage. Embed each real power interval $X$ as the complex rectangle $X+i[0,0]$, then combine it with the Gamma rectangles by outward complex arithmetic\nto enclose the two initial coefficients\n$$(a_0,a_1)=\\left(\\frac{1}{3^{2/3}\\Gamma(2/3)}, -\\frac{1}{3^{1/3}\\Gamma(1/3)}\\right)$$\nfor Ai, or\n$$(b_0,b_1)=\\left(\\frac{1}{3^{1/6}\\Gamma(2/3)}, \\frac{3^{1/6}}{\\Gamma(1/3)}\\right)$$\nfor Bi. If any divisor rectangle contains zero or an arithmetic operation is non-finite, skip this stage.",
+        "parameters": {
+          "fixture": "airy-origin-coefficients"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves c0/c1/c2 and the k=0,1 recurrence cases by two exact free-initial-coefficient polynomials. Independent transformed Gamma quadratures also check all four Ai/Bi normalizations at z=0; this does not invoke or purport to execute the source Gamma/Airy procedures."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-integer-order-bessel-evaluation",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "n=0,x=0",
+        "calculation": "Both J0(0) and e^0 I0(0) equal 1; the integral branches have constant integrand and zero midpoint remainder."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Before forming any stage constant, if the target is scaled $I$ and $x=0$,\nuse precision $p=p_{\\max}$, form $[1,1]$ when $n=0$ and $[0,0]$ when $n\\ge1$, and round its\nendpoints outward to that format. If either conversion overflows,\nreturn range. Otherwise apply the ordinary absolute-radius test to the rounded candidate and return `success` only when it passes; return `inconclusive` if it fails. The internal exact candidate has radius zero, but outward underflow may widen its stored enclosure. Set a successful output's relative flag by the usual contract test, so a zero value\nreceives no relative certificate. This branch does not call the\nelementary-range procedure.",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth."
+    },
+    {
+      "batch": 25,
+      "id": "ex-hypergeometric-branch-cut-domain",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "z=0,-2",
+        "calculation": "At z=0 the value is 1 by the removable limit; z=-2 lies outside the unit disk but in the principal-log continuation domain."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "3.1 Since $|-2|>1$, the defined Gauss-series branch fails its domain check and [F5] returns `domain`; this does not contradict the continued formula in step 2.1, which is a separately declared branch. [F1, F5, step 2.1] ∎",
+        "parameters": {
+          "fixture": "hypergeometric-domain"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "ex-erfc-subtraction-cancellation",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "delta1=eta,delta2=-eta",
+        "calculation": "For |delta1|,|delta2|<=eta the output error is 2eta, so the bound is attained."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 The same tail integral tends to zero as $x\\to\\infty$, because the nonnegative Gaussian is integrable by [F3]. If $|\\delta_1|,|\\delta_2|\\le\\eta$ with fixed $\\eta>0$, the choice $\\delta_1=\\eta$, $\\delta_2=-\\eta$ attains error $2\\eta$, so the relative error is $2\\eta/\\operatorname{erfc}(x)$ and is unbounded. By [F1], multiplying an enclosure of $\\operatorname{erfcx}(x)$ by an outward enclosure of $e^{-x^2}$ gives an enclosure of $\\operatorname{erfc}(x)$; [F4] supplies the first factor whenever its finite evaluator succeeds, while [F5] gives the second factor and an absolute erf enclosure. [F1, F3, F4, F5, step 1.1] ∎",
+        "parameters": {
+          "fixture": "erf-subtraction"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "ex-erfcx-asymptotic-optimal-truncation",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "x=3,N=9",
+        "calculation": "a_{k+1}/a_k=(k+1/2)/9; the ratios at k=8 and k=9 are 17/18<1 and 19/18>1."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "## Proof\n1.1 The positive term ratio is $$\\frac{a_{k+1}(x)}{a_k(x)}=\\frac{k+1/2}{x^2}.$$ For $0\\le k<N$, this ratio is at most $(N-1/2)/x^2\\le1$, so the terms do not increase up to $a_N$. For $k\\ge N$, the ratio is at least $(N+1/2)/x^2\\ge1$, so terms do not decrease after $a_N$. Hence $a_N$ is a least term. [given, algebra]",
+        "parameters": {
+          "fixture": "erfcx-least-term"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "ex-forward-bessel-recurrence-loses-sign",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "x=1,n=0,1,2",
+        "calculation": "J0>=3/4, J1>=7/16, and D2=2J0+J1>=31/16>D1; later Dn grows by at least a factor 3."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 By [F4], $D_0(1)=-J_1(1)<0$ and $D_1(1)=J_0(1)>0$; hence $D_2=2D_1-D_0>D_1>0$. If $n\\ge2$ and $D_n\\ge D_{n-1}>0$, then $D_{n+1}=2nD_n-D_{n-1}\\ge(2n-1)D_n\\ge3D_n$. Induction gives $D_n\\ge3^{n-2}D_2$ for $n\\ge2$, so $D_n\\to\\infty$. [F1, F3, F4, step 1.1, induction]",
+        "parameters": {
+          "fixture": "bessel-forward-sign"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "ex-relative-error-near-an-airy-zero",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "Ai(xi)=0",
+        "calculation": "An enclosure containing zero fails the positive distance-to-zero test, so only absolute certification is available."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "## Proof\n1.1 At $x=\\xi$, every enclosure containing the exact value also contains $0$. Therefore the zero-exclusion condition in [F3] fails, while [F4] still permits an absolute-radius success enclosure. [F1, F3, F4]",
+        "parameters": {
+          "fixture": "relative-zero-box"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the exact-zero enclosure distance obstruction with three distinct zero-containing intervals and a positive-distance control. The exact Airy zero is the mathematical hypothesis; the finite geometry check neither searches for nor claims to certify its existence."
+    },
+    {
+      "batch": 25,
+      "id": "ex-scaled-modified-bessel-overflow-avoidance",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "n=0,x=0",
+        "calculation": "e^0 I0(0)=1 lies in [0,1]; the unscaled value grows without bound as x increases."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "3.1 The scaled range in [F1] holds for every $x\\ge0$, while step 2.1 shows the unscaled value exceeds any fixed finite range for sufficiently large $x$. The scaled integral method of [[lem-scaled-modified-bessel-midpoint-error]] evaluates the bounded scaled quantity directly. [F1, step 2.1] ∎",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth."
+    },
+    {
+      "batch": 25,
+      "id": "lem-spherical-bessel-and-hankel-radial-solutions",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "ell=0",
+        "calculation": "The recurrence starts from j_0=sin(z)/z and h_0^(1)=-i exp(iz); step 1.1 verifies L_0=0."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.1 Write $f_0(z)=\\sin z/z$ and $g_0(z)=-ie^{iz}/z$. By [F2]–[F3], $f_0'=\\cos z/z-\\sin z/z^2$ and $f_0''=-\\sin z/z-2\\cos z/z^2+2\\sin z/z^3$, so $L_0f_0=0$. Also $g_0'=e^{iz}(1/z+i/z^2)$ and $g_0''=e^{iz}(i/z-2/z^2-2i/z^3)$, so $L_0g_0=0$. For any function with the required finite derivatives on $(0,\\infty)$, put $y_\\ell=(-z)^\\ell D^\\ell f$ with $D=z^{-1}d/dz$. Since $(D^\\ell f)'=zD^{\\ell+1}f$, differentiating the product gives $y_\\ell'=\\ell y_\\ell/z-y_{\\ell+1}$, hence $y_{\\ell+1}=\\ell y_\\ell/z-y_\\ell'$. This recurrence applies to both functions in [F1]. [F1, F2, F3, algebra]",
+        "parameters": {
+          "fixture": "spherical-ode-l0"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the ell=0 radial residual check using the actual source h0=-i exp(iz)/z. The old prose obligation omitted /z once; its current source and the paired Wronskian obligation contain the correct denominator. No source assertion was changed."
+    },
+    {
+      "batch": 25,
+      "id": "lem-spherical-bessel-and-hankel-radial-solutions",
+      "index": 1,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "Wronskian at ell=0",
+        "calculation": "Substitution of j_0=sin(z)/z, j_0′=cos(z)/z-sin(z)/z^2, h_0=-i exp(iz)/z, and h_0′=exp(iz)/z+i exp(iz)/z^2 gives z^2 W=i."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For the functions of [[def-spherical-bessel-and-hankel-functions]], define\n$$L_\\ell y:=y''+\\frac2z y'+\\left(1-\\frac{\\ell(\\ell+1)}{z^2}\\right)y\\qquad(z>0).$$\nThen $L_\\ell j_\\ell=L_\\ell h_\\ell^{(1)}=0$, and for $y=j,h^{(1)}$,\n$$y_{\\ell+1}(z)=\\frac{\\ell}{z}y_\\ell(z)-y_\\ell'(z),\\qquad y_\\ell'(z)=y_{\\ell-1}(z)-\\frac{\\ell+1}{z}y_\\ell(z)\\quad(\\ell\\ge1).$$\nThe regular-origin and outgoing-infinity normalizations are\n$$j_\\ell(z)=\\frac{z^\\ell}{(2\\ell+1)!!}+O(z^{\\ell+2}),\\quad h_\\ell^{(1)}(z)=-i(2\\ell-1)!!z^{-\\ell-1}(1+O(z))\\quad(z\\downarrow0),$$\n$$j_\\ell(z)=\\frac{\\sin(z-\\ell\\pi/2)}z+O(z^{-2}),\\quad h_\\ell^{(1)}(z)=(-i)^{\\ell+1}\\frac{e^{iz}}z+O(z^{-2})\\quad(z\\to\\infty),$$\nwhere $(-1)!!:=1$. Their Wronskian is\n$$j_\\ell(z)(h_\\ell^{(1)})'(z)-j_\\ell'(z)h_\\ell^{(1)}(z)=\\frac{i}{z^2}.$$",
+        "parameters": {
+          "fixture": "spherical-wronskian-l0"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "def-spherical-bessel-evaluation-contract",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "ell=0 scaling",
+        "calculation": "c_0=d_0=1, J_0^sc=j_0, H_0^sc=-i, and the scaled derivative is the scaled derivative of the original function."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Let $\\ell\\ge0$ be an integer and $z>0$ real. Put\n$$c_\\ell=(2\\ell+1)!!=\\prod_{r=0}^{\\ell}(2r+1),\\qquad d_\\ell=(2\\ell-1)!!=\\prod_{r=1}^{\\ell}(2r-1),$$\nwhere the second product is empty and equals $1$ when $\\ell=0$. Using the outgoing convention of [[def-spherical-bessel-and-hankel-functions]], define\n$$J_\\ell^{\\rm sc}(z)=c_\\ell z^{-\\ell}j_\\ell(z),\\qquad D J_\\ell^{\\rm sc}(z)=c_\\ell z^{-\\ell}j_\\ell'(z),$$\n$$H_\\ell^{\\rm sc}(z)=d_\\ell^{-1}z^{\\ell+1}e^{-iz}h_\\ell^{(1)}(z),\\qquad D H_\\ell^{\\rm sc}(z)=d_\\ell^{-1}z^{\\ell+1}e^{-iz}(h_\\ell^{(1)})'(z).$$\nThe symbols $D J_\\ell^{\\rm sc}$ and $D H_\\ell^{\\rm sc}$ mean the scaled derivatives of the original functions, not derivatives of the scaled functions. The available targets are $j_\\ell$, $j_\\ell'$, $h_\\ell^{(1)}$, $(h_\\ell^{(1)})'$, and these four scaled quantities; every derivative is with respect to $z$.",
+        "parameters": {
+          "fixture": "spherical-scaled-graph-l0"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-scaled-spherical-bessel-evaluation",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "ell=0 graph",
+        "calculation": "The graph gives j_0=sin(z)/z, j_0′=cos(z)/z-sin(z)/z^2, h_0^(1)=-i exp(iz)/z, and (h_0^(1))′=exp(iz)/z+i exp(iz)/z^2."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Construct Laurent polynomials by\n$$A_0=0,\\quad B_0=z^{-1},\\quad C_0=-iz^{-1},$$\n$$A_{r+1}=rz^{-1}A_r-A_r'-B_r,\\quad B_{r+1}=rz^{-1}B_r-B_r'+A_r,\\quad C_{r+1}=rz^{-1}C_r-C_r'-iC_r$$\nfor $r=0,\\ldots,\\ell-1$. With $s$ and $c$ denoting the sine and cosine input enclosures, form the unscaled outputs\n$$u=A_\\ell c+B_\\ell s,\\quad v=(A_\\ell'+B_\\ell)c+(B_\\ell'-A_\\ell)s,\\quad w=C_\\ell(c+is),\\quad t=(C_\\ell'+iC_\\ell)(c+is).$$\nForm the scaled outputs\n$$c_\\ell z^{-\\ell}u,\\quad c_\\ell z^{-\\ell}v,\\quad d_\\ell^{-1}z^{\\ell+1}C_\\ell,\\quad d_\\ell^{-1}z^{\\ell+1}(C_\\ell'+iC_\\ell).$$\nCollect like Laurent powers exactly; in particular cancel negative powers in the scaled $h_\\ell^{(1)}$ value when they cancel algebraically. A remaining $z^{-1}$ in the scaled derivative is evaluated only on positive input intervals.",
+        "parameters": {
+          "fixture": "spherical-scaled-graph-l0"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "thm-certified-scaled-spherical-bessel-enclosures",
+      "index": 0,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "Cauchy coefficients n=0,1,2",
+        "calculation": "S_0=1, S_1=i/1!+(-i)/1!=0, and S_2=i^2/2!+(-i)i/(1!1!)+(-i)^2/2!=-1/2+1-1/2=0."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.2 The two series for $e^{-iz}$ and $e^{iz}$ are absolutely convergent by [F2], so [F7] identifies their product with the sum of the Cauchy-product coefficients. For total degree $n$, its coefficient is $z^n S_n$, where $S_n=\\sum_{r=0}^{n}(-i)^r i^{n-r}/(r!(n-r)!)$. For $1\\le r\\le n$, combining over the denominator $r!(n+1-r)!$ and using $(n+1-r)!=(n+1-r)(n-r)!$ and $r!=r(r-1)!$ gives $1/(r!(n+1-r)!)=(1/(n+1))(1/(r!(n-r)!)+1/((r-1)!(n+1-r)!))$. For $r=0$ or $r=n+1$, omit the summand whose index is outside $0,\\ldots,n$; the remaining summand equals the left side by $0!=1$. Splitting the finite sum for $S_{n+1}$ with this identity and reindexing its second part gives $S_{n+1}=(iS_n-iS_n)/(n+1)=0$ for every $n\\ge0$, while $S_0=1$. The factorials and $n+1$ are nonzero by [F2], so these divisions are defined. Hence the product series has constant coefficient $1$ and every positive-degree coefficient $0$, so $e^{-iz}e^{iz}=1$. [F2, F7, algebra]",
+        "parameters": {
+          "fixture": "complex-cauchy-coefficients"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "thm-certified-scaled-spherical-bessel-enclosures",
+      "index": 1,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "ell=0 scaled outputs",
+        "calculation": "At ell=0, J_0^sc=sin(z)/z, D J_0^sc=cos(z)/z-sin(z)/z^2, H_0^sc=-i, and D H_0^sc=1+i/z."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 Multiplying the unscaled expressions of step 1.1 by the scales in [[def-spherical-bessel-evaluation-contract]] gives the four scaled identities. For $H_\\ell^{\\rm sc}$ and $D H_\\ell^{\\rm sc}$, cancel $e^{-iz}e^{iz}$ by step 1.2; the derivative scale acts on the original $h_\\ell^{(1)}$ derivative as defined, not on $H_\\ell^{\\rm sc}$. Starting with $C_0=-iz^{-1}$, if $C_\\ell$ has exponents $-1,\\ldots,-\\ell-1$, then $\\ell z^{-1}C_\\ell$ and $C_\\ell'$ have exponents at least $-\\ell-2$, while $-iC_\\ell$ has exponents at least $-\\ell-1$; induction gives only exponents $-1,\\ldots,-\\ell-1$ in $C_\\ell$. Thus $z^{\\ell+1}C_\\ell$ is a polynomial and $z^{\\ell+1}(C_\\ell'+iC_\\ell)$ has at worst exponent $-1$, which is well-defined on the positive input domain. [F1, F3, F4, step 1.1, step 1.2, algebra, induction]",
+        "parameters": {
+          "fixture": "spherical-scaled-graph-l0"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 25,
+      "id": "thm-certified-scaled-spherical-bessel-enclosures",
+      "index": 2,
+      "family": "special",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-special-proposal.json",
+      "original_obligation": {
+        "case": "Taylor tail M=1,b=1",
+        "calculation": "E_1=2*1^2/2!=1 and M+2=3>=2b=2."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.3 Fix a positive input box $I=[a,b]$ and choose $M$ with $M+2\\ge2b$. For every $z\\in I$, the first omitted absolute exponential-series term is at most $b^{M+1}/(M+1)!$. Each subsequent ratio is at most $b/(M+2)\\le1/2$, so the sum of the omitted terms is at most $2b^{M+1}/(M+1)!=E_M$. Thus the real and imaginary parts of $T_M(z)$, enlarged by $[-E_M,E_M]$, contain $\\cos z$ and $\\sin z$. Exact rational interval addition and multiplication enclose pointwise addition and multiplication by their endpoint-hull formulas; inversion of a positive interval $[a,b]$ is $[1/b,1/a]$. Evaluation over the finite graph and outward rounding therefore preserve containment of every graph value on $I$. [F2, F4, F6, algebra]",
+        "parameters": {
+          "fixture": "spherical-taylor-m1"
+        }
+      },
+      "limits": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred.",
+      "rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value."
+    },
+    {
+      "batch": 63,
+      "id": "ex-inverted-isoparametric-map-detection",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "orientation-reversing affine map",
+        "input": "DF=[[0,1],[1,0]]",
+        "expected": "det(DF)=-1; reject"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "1.1 The derivative matrix is $DF=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, whose determinant is $-1$. [given, algebra]",
+        "fixture": "orientation-reversing-affine-map",
+        "parameters": {
+          "matrix": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      },
+      "limits": "Only the fixed affine Jacobian; no global nonlinear certificate.",
+      "rationale": "Compute determinant and positive-orientation rejection for the actual matrix."
+    },
+    {
+      "batch": 63,
+      "id": "ex-isoparametric-unit-disk-mesh",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "sector area and total area",
+        "input": "a=1/2; four sectors with theta in [pi/4,3pi/4]",
+        "expected": "each sector=(pi-1)/4; total area=1+(pi-1)=pi"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "4.1 The central area is $4a^2=1$. By [F3], the sector area is the polar integral $\\frac12\\int_{\\pi/4}^{3\\pi/4}(1-a^2\\csc^2\\theta)d\\theta$. Since $[-\\cot\\theta]_{\\pi/4}^{3\\pi/4}=2$, this equals $\\pi/4-a^2=(\\pi-1)/4$. Four rotated sectors have total area $\\pi-1$, so the union area is $\\pi$, consistent with the unit disk. [F3, A1, step 3.1, algebra] ∎",
+        "fixture": "sector-area-and-total-area",
+        "parameters": {
+          "a": 0.5,
+          "panels": 4096
+        }
+      },
+      "limits": "Fixed Simpson calculation with relative tolerance 1e-10; no coverage or diffeomorphism proof.",
+      "rationale": "Numerically integrate the actual polar area density and compare both sector and total areas."
+    },
+    {
+      "batch": 63,
+      "id": "ex-conservative-transfer-between-moving-curved-meshes",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "opposite diagonal remap",
+        "input": "square area 4; four overlap areas 1; source values 2,0",
+        "expected": "target values 1,1; source and target mass 4"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 Each target triangle has area $2$ and receives source mass $2(1)+0(1)=2$, so its target average is $1$. The source mass is $2\\cdot2+0\\cdot2=4$, and target mass is $2(1)+2(1)=4$. [F2, F3, step 1.1, algebra]",
+        "fixture": "opposite-diagonal-remap",
+        "parameters": {
+          "source": [
+            2,
+            0
+          ]
+        }
+      },
+      "limits": "Two finite meshes and the determinant-one shear only.",
+      "rationale": "Construct and rationally clip both opposite-diagonal triangulations; compute all four overlaps, target averages and mass."
+    },
+    {
+      "batch": 63,
+      "id": "ex-parabolic-curved-domain-linear-geometry-approximation",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "parabolic geometry order",
+        "input": "Phi=(x,y+x^2/4), affine mesh size h",
+        "expected": "e0=O(h^2), e1=O(h), tensor defect O(h)"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "1.2 Apply [F2] on the shape-regular mesh to get the stated value error, derivative error, and positive-Jacobian certificate. [F1, F2, A1, given]",
+        "fixture": "parabolic-geometry-order",
+        "parameters": {
+          "intervals": [
+            4,
+            8,
+            16
+          ]
+        }
+      },
+      "limits": "Fixed regular grids and sampled x positions, no uniform theorem for arbitrary shape-regular families.",
+      "rationale": "Compute P1 interpolation of x^2/4, derivative and pulled-back tensor defects on three regular triangulated grids; compare error scaling ratios."
+    },
+    {
+      "batch": 63,
+      "id": "cex-delaunay-tetrahedral-sliver",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "flat tetrahedron",
+        "input": "epsilon in (0,1), base area 1/2, height epsilon",
+        "expected": "V=epsilon/6, diameter>=1, inradius<=epsilon"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 The total face area $S_n$ is at least the base area $1/2$ and is bounded above uniformly in $n$, since every edge length is at most $2$ and each of the four face areas is at most half the product of two such edge lengths; in particular $S_n\\le8$. The inradius is $r_n=3V_n/S_n=\\varepsilon_n/(2S_n)$, so $\\varepsilon_n/16\\le r_n\\le\\varepsilon_n$ and $r_n\\to0$. The diameter is at least $|p_1-p_2|=1$. Thus empty-sphere Delaunay membership imposes no positive uniform inradius-to-diameter bound in three dimensions. [F1, step 1.1, algebra] ∎",
+        "fixture": "flat-tetrahedron",
+        "parameters": {
+          "exponents": [
+            1,
+            2,
+            4,
+            8
+          ]
+        }
+      },
+      "limits": "Finite sliver family; no limiting or general Delaunay proof.",
+      "rationale": "Compute cross-product volume, four face areas, inradius and diameter at four dyadic heights."
+    },
+    {
+      "batch": 63,
+      "id": "alg-certified-convex-polygon-overlap",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "identical unit squares",
+        "input": "P=Q=[(0,0),(1,0),(1,1),(0,1)] in counterclockwise order",
+        "expected": "Each closed clip retains the square; output vertices are the same four corners and shoelace area is 1."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "For each directed edge of $Q$, clip the current cyclic list of $P$ to that edge's closed left half-plane, treating a point $X$ as inside exactly when $s(X)\\ge0$, where $s(X)$ is its signed edge determinant.",
+        "fixture": "identical-unit-squares",
+        "parameters": {
+          "shift": 0
+        }
+      },
+      "limits": "Specified convex square inputs only, not a general input certification algorithm.",
+      "rationale": "Perform every exact rational half-plane clipping pass and shoelace area; require four retained vertices."
+    },
+    {
+      "batch": 63,
+      "id": "alg-certified-convex-polygon-overlap",
+      "index": 1,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "edge-touching unit squares",
+        "input": "P=[0,1]x[0,1], Q=[1,2]x[0,1]",
+        "expected": "The intersection is the common vertical segment; exact zero signs retain its boundary and the fewer-than-three-noncollinear branch returns area 0."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "Return the final rational cyclic list and area zero when it has fewer than three noncollinear vertices; otherwise return its exact shoelace area.",
+        "fixture": "edge-touching-unit-squares",
+        "parameters": {
+          "shift": 1
+        }
+      },
+      "limits": "Specified edge-touching squares only.",
+      "rationale": "Use closed exact-sign clipping; require the two-vertex boundary segment and zero area."
+    },
+    {
+      "batch": 63,
+      "id": "alg-certified-convex-polygon-overlap",
+      "index": 2,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "disjoint unit squares",
+        "input": "P=[0,1]x[0,1], Q=[2,3]x[0,1]",
+        "expected": "A clip pass empties the cyclic vertex list; output is empty with area 0."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "If the current list is empty, it remains empty.",
+        "fixture": "disjoint-unit-squares",
+        "parameters": {
+          "shift": 2
+        }
+      },
+      "limits": "Specified separated squares only.",
+      "rationale": "Run clipping and require the empty list and zero area."
+    },
+    {
+      "batch": 63,
+      "id": "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "four-corner square seed",
+        "input": "Sites (-1,-1), (1,-1), (1,1), (-1,1) with distinct stable identifiers",
+        "expected": "The convex hull is the square; either cocircular tie resolution gives two triangles sharing one diagonal, all angles are 45 or 90 degrees, and the boundary certificates are alpha=pi/2 and sigma=1."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "Verify that the output consists of two triangles covering the square and sharing one diagonal; otherwise return unresolved.",
+        "fixture": "four-corner-square-seed",
+        "parameters": {
+          "diagonals": [
+            0,
+            1
+          ]
+        }
+      },
+      "limits": "No actual insertion/NVB implementation; only the original four-site seed obligation.",
+      "rationale": "Enumerate both diagonal triangulations; compute areas, angles, common circumradius and nonincident boundary-feature separation."
+    },
+    {
+      "batch": 63,
+      "id": "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+      "index": 1,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "name": "tolerance endpoint",
+        "input": "tau=1/4; loop bound is (3/2)*2^(-k)*(2*sqrt(2))=3*sqrt(2)*2^(-k)",
+        "expected": "At k=4 the bound is 3*sqrt(2)/16>1/4; at k=5 it is 3*sqrt(2)/32<1/4, so exactly five complete cycles are requested if each closure call completes."
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "While $(3/2)2^{-k}(2\\sqrt2)>\\tau$, set $\\eta_K^2=1$, $o_K^2=0$ on every current cell and call [[alg-dorfler-marking-and-conforming-nvb-refinement]] with $\\theta_E=1$, $\\theta_O=1$.",
+        "fixture": "tolerance-endpoint",
+        "parameters": {
+          "tau": 0.25
+        }
+      },
+      "limits": "Assumes complete closure calls, matching the original conditional obligation.",
+      "rationale": "Execute the finite diameter-bound stopping loop and check the k=4 and k=5 endpoints."
+    },
+    {
+      "batch": 68,
+      "id": "lem-legendre-gauss-lobatto-nodes-are-distinct",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "p1-lobatto-endpoints",
+        "asserts": "For p=1, P1 has one simple interior root and P1 prime is nonzero; there are no interior critical nodes.",
+        "claim": "The root and Rolle argument has the expected endpoint-only GLL node boundary at p=1.",
+        "checked_in": "Statement and steps 1.1–2.1",
+        "degree": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 A degree-$p$ polynomial cannot have more than $p$ distinct roots. The $p$ roots obtained in step 1.1 therefore exhaust its degree; each has multiplicity one and there are no other roots. Rolle's theorem [F3] between consecutive roots gives $p-1$ distinct roots of $P_p'$ in $(-1,1)$. Since $P_p'$ has degree $p-1$, these are all its roots and each is simple. None equals an endpoint, so adjoining $-1$ and $1$ gives $p+1$ distinct nodes, including the case $p=1$ where there are no interior critical points. [F1, F3, step 1.1, given, algebra] ∎",
+        "fixture": "p1-lobatto-endpoints",
+        "parameters": {
+          "degree": 1
+        }
+      },
+      "limits": "Degree one only.",
+      "rationale": "Generate P1 by the recurrence and differentiate; check simple zero and no critical polynomial roots."
+    },
+    {
+      "batch": 68,
+      "id": "thm-hp-simplex-weighted-spectral-projection",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "degree-zero-truncation",
+        "asserts": "For p=0 the direct tail begins at n=1, and the inverse bound on constants uses mu_0=0.",
+        "claim": "The lower-degree boundary in both coefficient estimates matches the displayed indices.",
+        "checked_in": "Statement and steps 1.1–3.1",
+        "degree": 0
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 For a finite sum $u=\\sum u_n$, orthogonality gives $\\|u-P_pu\\|_{\\mathcal H_\\alpha^\\ell}^2=\\sum_{n>p}(1+\\mu_n)^\\ell\\|u_n\\|_\\alpha^2\\le(1+\\mu_{p+1})^{\\ell-m}\\sum_{n>p}(1+\\mu_n)^m\\|u_n\\|_\\alpha^2$, because $\\mu_n=n(n+d+|\\alpha|)$ is increasing for $n\\ge0$. Taking square roots proves the tail estimate for finite sums. [given, step 1.1, algebra]",
+        "fixture": "degree-zero-truncation",
+        "parameters": {
+          "degree": 0,
+          "dimension": 2,
+          "layers": 5
+        }
+      },
+      "limits": "Five coefficient layers, d=2, alpha=0, m=2, ell=0; not ordinary Sobolev norms.",
+      "rationale": "Compute direct finite coefficient energies for p=0 and the n=1 tail; check mu0=0 constant inverse factor separately."
+    },
+    {
+      "batch": 68,
+      "id": "lem-hp-corner-uniform-degree-dof-count",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "k2-degree2-count-bound",
+        "asserts": "With at most 2C cells and degree at most 2C2, the local bound gives dim V2<=2C(2C2+1)(2C2+2)/2.",
+        "claim": "The simplex dimension estimate has cubic growth in the grading index.",
+        "checked_in": "Statement and steps 1.1–2.1",
+        "k": 2
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 The broken product over $\\mathcal T_k$ therefore has dimension $\\#\\mathcal T_k(p_k+1)(p_k+2)/2$. By [F1], trace matching and any zero-boundary conditions define a linear subspace, whose dimension cannot exceed the broken dimension. Using $\\#\\mathcal T_k\\le C_0k$ and $p_k\\le C_1k$, and $k\\ge1$, gives $N_k\\le C_0k(C_1k+1)(C_1k+2)/2\\le C_2k^3$ for an explicit finite $C_2$ depending only on $C_0,C_1$. [F1, step 1.1, given, algebra] ∎",
+        "fixture": "k2-degree2-count-bound",
+        "parameters": {
+          "k": 2,
+          "C0": 3,
+          "C1": 2
+        }
+      },
+      "limits": "One explicit C0=3,C1=2,k=2 case; no assertion of global dimension equality.",
+      "rationale": "Enumerate triangular monomials at p=C1*k and compare broken count with exact and cubic bounds."
+    },
+    {
+      "batch": 68,
+      "id": "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "two-cell-variable-degree-trace",
+        "asserts": "For p1=3 and p2=5, a common polynomial trace of degree at most 3 lies in both face spaces.",
+        "claim": "The minimum face degree in the definition is the shared trace degree.",
+        "checked_in": "Definition and the simplex/box branches of step 1.1 and step 1.2",
+        "cells": 2
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "1.1 If the mesh is empty, its domain is empty by the mesh convention and the assertion is immediate. Otherwise, because the mesh and every local degree are finite, $v$ and each cellwise first derivative $g_i:=\\partial_i(v|_K)$ are bounded on each closed cell; a finite union then puts $v,g_i$ in $L^2(\\Omega)$. If the mesh is simplicial, set $p_*=\\max_{K\\in\\mathcal T}p_K$. Every restriction lies in $\\mathbb P_{p_*}(K)$, and the trace-matching condition is unchanged. Applying [F2] at the single degree $p_*$ proves the claim on this branch. [F1, F2, given, choose]",
+        "fixture": "two-cell-variable-degree-trace",
+        "parameters": {
+          "degrees": [
+            3,
+            5
+          ]
+        }
+      },
+      "limits": "Finite shared polynomial trace only; not proof of weak H1 conformity.",
+      "rationale": "Represent the same nonzero cubic trace in degree-3 and padded degree-5 spaces and evaluate both."
+    },
+    {
+      "batch": 68,
+      "id": "thm-hp-simplex-p-dependent-face-trace-inverse",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "constant-polynomial-trace",
+        "asserts": "For p=0, the exact factor is d|K|/|F| times the trace integral identity, and the normal derivative is zero.",
+        "claim": "The p=0 trace and derivative boundary branches agree with the stated formula.",
+        "checked_in": "Statement and step 2.1",
+        "degree": 0
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "1.1 Fix $y\\in F$ and let $q_y(t)=v((1-t)y+ta)$. This is a polynomial of degree at most $p$ in $t$, and $q_y(0)=v(y)$. Apply [F1] with $m=p$, then integrate the resulting inequality over $F$. In the map $(y,t)\\mapsto(1-t)y+ta$, each tangent direction in $F$ is scaled by $1-t$, while the remaining component is the altitude $H_F$; hence the absolute volume Jacobian is $H_F(1-t)^{d-1}$, as stated in [F2]. By Fubini [F4], $\\|v\\|_{L^2(F)}^2\\le(p+1)(p+d)\\int_F\\int_0^1(1-t)^{d-1}|v((1-t)y+ta)|^2\\,dt\\,dS_y=\\frac{(p+1)(p+d)|F|}{d|K|}\\|v\\|_{L^2(K)}^2$. This proves the exact reference-geometric inequality. [F1, F2, F4, given, algebra]",
+        "fixture": "constant-polynomial-trace",
+        "parameters": {
+          "degree": 0,
+          "dimension": 2
+        }
+      },
+      "limits": "Unit reference triangle, horizontal edge, constant 3.",
+      "rationale": "Compute cell/face constant-polynomial square integrals, altitude and exact trace factor, and differentiate the constant."
+    },
+    {
+      "batch": 68,
+      "id": "thm-hp-gll-top-mode-and-puniform-energy-equivalence",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "gll-p1-rule",
+        "asserts": "For p=1, interpolatory quadrature is exact through degree 1=2p-1.",
+        "claim": "The lowest-degree exactness branch is covered.",
+        "checked_in": "Statement and step 1.1",
+        "degree": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "1.1 Define $g(x)=(x^2-1)P_p'(x)$; it vanishes at all GLL nodes and has degree $p+1$. For $p\\ge2$, divide any polynomial $f$ of degree at most $2p-1$ as $f=gr+s$ with $\\deg r\\le p-2$ and $\\deg s\\le p$. Integration by parts gives $\\int_{-1}^1gr=-\\int_{-1}^1P_p(2xr+(x^2-1)r')=0$, since the boundary term vanishes and the bracket has degree at most $p-1$. The quadrature of $gr$ is also zero because $g$ vanishes at every node, while the interpolatory definition integrates $s$ exactly. Thus $Q_p(f)=\\int f$. For $p=1$, interpolatory exactness through degree $p=1$ is the required degree $2p-1=1$. [F1, F2, given, algebra]",
+        "fixture": "gll-p1-rule",
+        "parameters": {
+          "degree": 1
+        }
+      },
+      "limits": "p=1 only.",
+      "rationale": "Integrate the cardinal polynomials for the two endpoints, then compare quadrature and exact monomial moments through degree one."
+    },
+    {
+      "batch": 68,
+      "id": "thm-hp-gll-top-mode-and-puniform-energy-equivalence",
+      "index": 1,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "gll-p2-top-correction",
+        "asserts": "For p=2, delta_p=2(3)/(2(5))=3/5.",
+        "claim": "The exact top-mode mass defect has the stated normalization.",
+        "checked_in": "Statement and step 2.1",
+        "degree": 2
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 Divide $P_p^2=gr+s$ with $\\deg r=p-1$ and $\\deg s\\le p$. Since the leading coefficient of $g$ is $p\\kappa_p$, the leading coefficient of $r$ is $\\kappa_p/p$. Integration by parts as in step 1.1 gives $\\int gr=-\\int P_p(2xr+(x^2-1)r')$. The bracket has degree at most $p$ and leading coefficient $(p+1)\\kappa_p/p$, so it equals $(p+1)P_p/p$ plus a polynomial of degree below $p$; orthogonality [F2] therefore gives $\\int gr=-(p+1)\\|P_p\\|_2^2/p$. Since $Q_p(gr)=0$ and $Q_p(s)=\\int s$, it follows that $Q_p(P_p^2)-\\int P_p^2=-\\int gr=(p+1)\\|P_p\\|_2^2/p=2(p+1)/(p(2p+1))$. [F1, F2, step 1.1, algebra]",
+        "fixture": "gll-p2-top-correction",
+        "parameters": {
+          "degree": 2
+        }
+      },
+      "limits": "p=2 only; no p-uniform conclusion.",
+      "rationale": "Integrate cardinal polynomials to get weights; independently compute all nine exact and discrete Legendre mass entries and their difference."
+    },
+    {
+      "batch": 68,
+      "id": "cex-hp-degree-independent-sipdg-penalty-loses-coercivity",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "fixed-penalty-p3-witness",
+        "asserts": "At eta=1 and p=3, a_h(v_p,v_p)=1-(9-1)/4=-1.",
+        "claim": "One concrete p above the threshold has strictly negative SIPDG energy.",
+        "checked_in": "Counterexample step 2.1",
+        "degree": 3,
+        "eta": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 Put $q_p=(K_{p-1}-1)/2$. Then $\\deg q_p\\le p-1$, $\\int_0^1q_p=0$, $q_p(1)=(p^2-1)/2$, and $\\int_0^1q_p^2=(p^2-1)/4$. Define $v_p(x)=1+\\int_0^{x+1}q_p(t)\\,dt$ on $(-1,0)$ and $v_p(x)=0$ on $(0,1)$. Its cell restrictions have degree at most $p$, its jump is $1$, its left derivative at the interface is $q_p(1)$, and its right derivative is $0$. Therefore the broken derivative energy is $(p^2-1)/4$ and the interface flux term is $-2(q_p(1)/2)(1)=-(p^2-1)/2$. Substituting into the stated form yields $a_h(v_p,v_p)=\\eta-(p^2-1)/4$, which is negative whenever $p^2>4\\eta+1$. Meanwhile $\\sum_K\\|v_p'\\|_2^2+[v_p]^2=(p^2-1)/4+1>0$. This disproves coercivity for every fixed $\\eta$ once $p$ is sufficiently large. [F1, step 1.1, given, algebra] ∎",
+        "fixture": "fixed-penalty-p3-witness",
+        "parameters": {
+          "degree": 3,
+          "eta": 1
+        }
+      },
+      "limits": "Explicit p=3,eta=1 witness only.",
+      "rationale": "Construct shifted-Legendre kernel polynomial and q_p, then integrate derivative energy and compute interface flux/jump terms."
+    },
+    {
+      "batch": 68,
+      "id": "ex-hp-gll-mass-top-mode-correction",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "degree-two-top-mode-mass",
+        "asserts": "At p=2, the Legendre P2 norm is 2/5 and the quadrature excess is 3/5 times the squared P2 coefficient.",
+        "claim": "The degree-two worked value agrees with the exact top-mode formula.",
+        "checked_in": "Example verification steps 1.1–2.1",
+        "degree": 2
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 Legendre orthogonality [F3] gives the exact diagonal entries $\\int P_0^2=2$, $\\int P_1^2=2/3$, and $\\int P_2^2=2/5$. The nodes and weights in step 1.1 give $Q_2(P_0^2)=2$, $Q_2(P_1^2)=2/3$, and $Q_2(P_2^2)=1$. Every cross product has degree at most three, so exactness through degree $2p-1=3$ makes the off-diagonal entries zero. The top correction is $1-2/5=3/5$, which agrees with [F2] at $p=2$ and top coefficient $1$. [F2, F3, step 1.1, given, algebra] ∎",
+        "fixture": "degree-two-top-mode-mass",
+        "parameters": {
+          "degree": 2
+        }
+      },
+      "limits": "Same genuine matching p=2 model reused for the example; distinct original row retained.",
+      "rationale": "Compute full p=2 mass matrices from polynomial coefficients and integrated cardinal weights."
+    },
+    {
+      "batch": 68,
+      "id": "ex-hp-reentrant-corner-h-versus-hp",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "corner-mode-radial-integrability",
+        "lambda": 0.6666666666666666,
+        "beta": 0.5,
+        "claim": "For lambda=2/3, |grad u|^2 contributes radial exponent 2lambda-1=1/3 and is integrable, while the weighted second derivative has exponent -5/3 before the area factor and gives an integrable r^-2/3 after it.",
+        "asserts": "The mode is H1, outside H2, and satisfies the stated beta0=1/2 weighted-integrability branch.",
+        "checked_in": "Verification steps 1.1–2.1 and 4.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.2 On the sector, $u=\\operatorname{Im}z^{2/3}$ for the branch $0<\\arg z<3\\pi/2$. Repeated differentiation gives $\\sum_{|\\alpha|=j}|D^\\alpha u|\\le C^jj!r^{2/3-j}$. Set $\\beta_0=1/2$ at the origin and $\\beta_i=0$ at every other polygon corner. The other-corner factors in $\\Phi_{\\beta+j-2}$ are bounded above by $C^j$ on the bounded polygon; the origin factor changes the radial power to $r^{1/2+j-2+2/3-j}=r^{-5/6}$. Hence the squared weighted integral near the origin is bounded by $C^{2j}(j!)^2\\int_0^Rr^{-5/3}r\\,dr$, which is finite. Away from the origin the mode has a local analytic branch at every point of the closure, so all remaining weighted integrals are bounded by another $C^{2j}(j!)^2$ factor. Since $j!/(j-2)!=j(j-1)\\le2^j$, the bound is at most $(2C)^j(j-2)!$; taking $d_u=\\max(1,2C)$ and $C_u=d_u^2$ proves the exact $B^2_\\beta$ factorial bound in [F3]. The pointwise supplier [F4] then gives the continuous representative. [F3, F4, step 1.1, given, algebra]",
+        "fixture": "corner-mode-radial-integrability",
+        "parameters": {
+          "lambda": 0.6666666666666666,
+          "beta": 0.5
+        }
+      },
+      "limits": "Finite truncated integrals/exponent calculation; not numerical proof of membership, divergence or factorial analyticity.",
+      "rationale": "Calculate H1, H2 and weighted radial exponents and three truncated integrals, preserving the original weighted branch."
+    },
+    {
+      "batch": 68,
+      "id": "ex-hp-reentrant-corner-h-versus-hp",
+      "index": 1,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "homogeneous-h-lower-bound",
+        "lambda": 0.6666666666666666,
+        "claim": "Under x=hy, the gradient L2 error scales by h^(lambda-1+1)=h^(2/3).",
+        "asserts": "The local fixed-degree lower-bound exponent is 2/3.",
+        "checked_in": "Verification step 3.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "4.1 For any $q_h\\in\\mathbb P_p(T_h)$ set $\\widehat q(y)=h^{-2/3}q_h(hy)\\in\\mathbb P_p(\\widehat T)$. Homogeneity $u(hy)=h^{2/3}u(y)$ and the change of variables $x=hy$ give $\\|\\nabla_x(u-q_h)\\|_{L^2(T_h)}=h^{2/3}\\|\\nabla_y(u-\\widehat q)\\|_{L^2(\\widehat T)}\\ge c_ph^{2/3}$. Taking the infimum proves the asserted local lower bound. If $T_h$ is one mesh cell of degree $p$, restricting any global finite-element error to that cell gives the same lower bound. [F1, step 3.1, given, algebra]",
+        "fixture": "homogeneous-h-lower-bound",
+        "parameters": {
+          "lambda": 0.6666666666666666,
+          "scales": [
+            1,
+            0.5,
+            0.25
+          ]
+        }
+      },
+      "limits": "q=0 discrete-quadrature scaling checks the original exponent; positivity of the best fixed-degree distance remains a proof obligation.",
+      "rationale": "Compute actual homogeneous gradient samples on three rescaled point sets including the area factor; check norm ratios h^(2/3)."
+    },
+    {
+      "batch": 68,
+      "id": "lem-hp-triangle-degree-uniform-strong-edge-lift",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "quadratic-edge-lift-traces",
+        "degree": 2,
+        "claim": "For q(t)=t(1-t), R(t)=1-t and Lq=x(1-x-y), which has the prescribed trace on y=0 and vanishes on x=0 and x+y=1.",
+        "asserts": "Direct substitution verifies all three reference-edge traces for a nonzero polynomial.",
+        "checked_in": "Statement and steps 1.1–2.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "1.1 Since $q(0)=0$, polynomial division gives a polynomial $R$ of degree at most $p-1$ when $p\\ge1$; for $p=0$ or $p=1$ the endpoint conditions force $q=0$. Thus $Lq$ has total degree at most $p$. At $y=0$, $R(1)=q(1)=0$, so $Lq=q(x)$; at $x=0$ it is zero; and on $x+y=1$ one has $1-y=x$, so $xR(1-y)=xR(x)=q(x)$. [given, construct, algebra]",
+        "fixture": "quadratic-edge-lift-traces",
+        "parameters": {
+          "degree": 2
+        }
+      },
+      "limits": "One quadratic polynomial; no general lift norm proof.",
+      "rationale": "Evaluate q(x)-xR(1-y) on all three edges at six points and a nonzero interior value."
+    },
+    {
+      "batch": 68,
+      "id": "lem-hp-unweighted-legendre-derivative-tail",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "first-derivative-orthogonality",
+        "degree": 1,
+        "k": 1,
+        "n": 1,
+        "claim": "For P1(x)=x, the weighted derivative norm is integral(1-x^2)=4/3, equal to (2/3)(2!)/(0!).",
+        "asserts": "The n=m=1 derivative-orthogonality normalization is exact.",
+        "checked_in": "Statement and steps 1.1–2.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 For $n,m\\ge k$, integrate by parts $k$ times and use step 1.1 to obtain $\\int_{-1}^1w_kP_n^{(k)}P_m^{(k)}=(-1)^k\\int_{-1}^1P_nD^k(w_kP_m^{(k)})=\\lambda_{m,k}\\int_{-1}^1P_nP_m.$ The first identity in [F1] makes this zero for $n\\ne m$ and equal to $\\lambda_{n,k}2/(2n+1)$ for $n=m$, proving the repeated derivative orthogonality formula. [F1, step 1.1, algebra]",
+        "fixture": "first-derivative-orthogonality",
+        "parameters": {
+          "degree": 1,
+          "k": 1,
+          "n": 1
+        }
+      },
+      "limits": "Single diagonal n=m=k=1 normalization.",
+      "rationale": "Differentiate recurrence-generated P1, multiply by 1-x^2 and integrate polynomial coefficients independently of factorial RHS."
+    },
+    {
+      "batch": 68,
+      "id": "lem-hp-unweighted-legendre-derivative-tail",
+      "index": 1,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "lowest-tail-degree",
+        "degree": 0,
+        "k": 1,
+        "claim": "For f(x)=x, Pi_0 f=0 and ||f||2=sqrt(2/3) <= 1/sqrt(2)||f prime||2=1.",
+        "asserts": "The first allowed projection degree N=k-1 satisfies the displayed tail estimate.",
+        "checked_in": "Statement and steps 3.1–4.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "4.1 Density [F2] and the best-approximation property of finite orthogonal projections imply $\\Pi_Mf\\to f$ in $L^2$: first approximate $f$ by a polynomial and then take $M$ at least its degree. Orthogonality [F1] and Pythagoras give $\\|f-\\Pi_Nf\\|_2^2=\\sum_{n>N}|c_n|^2\\|P_n\\|_2^2$. Since $\\lambda_{n,k}$ increases for $n\\ge k$, step 3.1 bounds this tail by $\\lambda_{N+1,k}^{-1}\\|f^{(k)}\\|_2^2$, which is the stated factorial estimate. When $k=0$, the same finite Pythagoras identity directly gives contraction. [F1, F2, step 3.1, algebra] ∎",
+        "fixture": "lowest-tail-degree",
+        "parameters": {
+          "degree": 0,
+          "k": 1
+        }
+      },
+      "limits": "f=x,N=0,k=1 only.",
+      "rationale": "Compute Pi0 x from its integral and exact error/derivative squared norms; compare the factorial bound."
+    },
+    {
+      "batch": 68,
+      "id": "lem-hp-analytic-polynomial-approximation-on-a-triangle",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "affine-interval-endpoint-projector",
+        "degree": 1,
+        "claim": "For f(t)=t, the degree-one endpoint-preserving projector has derivative 1 and reproduces f exactly.",
+        "asserts": "The interval branch preserves both endpoint values and has zero error on an affine polynomial.",
+        "checked_in": "Statement and step 5.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "5.1 On the interval let $P$ be the $L^2$ orthogonal projection of $f'$ onto $\\mathbb P_{p-1}$ and put $J_pf(t)=f(0)+\\int_0^tP(s)ds$. The positive-definite finite polynomial Gram matrix gives a unique projection; Pythagoras gives $\\|P\\|_2\\le\\|f'\\|_2$ and $\\|f'-P\\|_2\\le\\|f'-r\\|_2$ for every $r\\in\\mathbb P_{p-1}$. Orthogonality to constants gives $\\int_0^1P=\\int_0^1f'$, and [F4] evaluates the latter as $f(1)-f(0)$. Thus $J_pf(1)=f(0)+\\int_0^1P=f(1)$, while $J_pf(0)=f(0)$ by construction. The derivatives of $f'$ satisfy a factorial bound with fixed constants $M'=MA$ and $A'=2A$, since $(j+1)!\\le2^j j!$ for $j\\ge1$. For $p\\ge2$, apply step 4.1 to $f'$ with degree $p-1$; best approximation of the $L^2$ projection then gives $\\|f'-P\\|_2\\le CMe^{-b(p-1)}$, which is at most $C'Me^{-b'p}$ after changing constants. For $p=1$, the derivative contraction and the bound $\\|f'\\|_2\\le MA$ give the same asserted estimate after enlarging $C'$. Finally $f-J_pf=\\int_0^t(f'-P)$ and [F2] bounds its $L^2$ norm by $\\|f'-P\\|_2$. The derivative and value bounds prove the stated interval estimate. [F2, F4, step 4.1, given, algebra] ∎",
+        "fixture": "affine-interval-endpoint-projector",
+        "parameters": {
+          "degree": 1
+        }
+      },
+      "limits": "f(t)=t,p=1 only.",
+      "rationale": "Project f prime onto constants by integration and integrate that projection from f(0); check endpoint and affine reproduction."
+    },
+    {
+      "batch": 68,
+      "id": "thm-hp-triangle-unweighted-smooth-approximation",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "r5-p12-factorial-ratio",
+        "degree": 12,
+        "r": 5,
+        "n": 6,
+        "claim": "At r=5 and p=12, n=6 and eta^2=4!/6!=1/30, hence eta=1/sqrt(30)<=1/3=(4/p).",
+        "asserts": "The simplified p-rate agrees with the exact factorial ratio at its first applicable degree.",
+        "checked_in": "Statement and step 4.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "4.1 Transport step 3.1 to a shape-regular affine triangle $K$. For $e=u-A_{K,p,r}u$ and $\\widehat e=e\\circ F_K$, two-dimensional affine pullback gives $|\\widehat e|_{H^j(T)}\\asymp_{j,\\gamma}h_K^{j-1}|e|_{H^j(K)}$ for $j=0,1,2$, and $|\\widehat u|_{H^r(T)}\\le C_{r,\\gamma}h_K^{r-1}|u|_{H^r(K)}$ by [F6]. This proves the displayed full scaled estimate. Finally, $\\eta_{n,r}^{-2}$ is a product of $2(r-4)$ consecutive integers beginning with $n-r+4$. If $p\\ge4(r-2)$ and $n=\\lfloor p/2\\rfloor$, then $n-r+4\\ge p/4$; taking square roots yields $\\eta_{n,r}\\le(4/p)^{r-4}$. [F6, step 3.1, given, algebra] ∎",
+        "fixture": "r5-p12-factorial-ratio",
+        "parameters": {
+          "degree": 12,
+          "r": 5,
+          "n": 6
+        }
+      },
+      "limits": "Single first-applicable simplified-rate case.",
+      "rationale": "Compute the ratio from factorials and independently from its product, then compare with the simplified p-rate."
+    },
+    {
+      "batch": 68,
+      "id": "lem-hp-simplex-p-explicit-conforming-interpolant",
+      "index": 0,
+      "family": "geometry",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-geometry-proposal.json",
+      "original_obligation": {
+        "check": "unequal-neighbor-edge-degree",
+        "cells": 2,
+        "degrees": [
+          1,
+          3
+        ],
+        "claim": "For neighboring degrees 1 and 3, pE=min(1,3)=1 and the single globally oriented edge projector has the same affine trace on both cells.",
+        "asserts": "The lowest shared-edge degree gives matching traces without a degree-ratio restriction.",
+        "checked_in": "Statement and steps 1.1–2.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier-geometry-fixture",
+        "asserts": "2.1 Both cells incident to an edge use the same oriented edge polynomial $g_E$, so their traces agree and have degree at most $p_E$. By [F5], the assembled interpolant is in the trace-matching $H^1$ space. If $E$ is a boundary edge on which $u=0$, then $g_E=I_{p_E}0=0$, so the interpolant also vanishes there. [F1, F5, step 1.2, given, algebra]",
+        "fixture": "unequal-neighbor-edge-degree",
+        "parameters": {
+          "degrees": [
+            1,
+            3
+          ]
+        }
+      },
+      "limits": "Two neighboring degrees and an affine trace only; no general assembly/energy solve.",
+      "rationale": "Use the computed degree-one endpoint projector and identical oriented trace coefficient arrays embedded in degrees 1 and 3."
+    },
+    {
+      "batch": 9,
+      "id": "ex-ar-covariance-toeplitz-forecast-solve",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "claim": "Order-two real covariance forecast",
+        "input": "γ(0)=1, γ(1)=1/2, γ(2)=1/4",
+        "result": "κ1=1/2, ν1=3/4, κ2=0, φ2=(1/2,0), ν2=3/4",
+        "evidence": "Proof steps 2.1 and 3.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "3.1 The order-one recursion gives $\\kappa_1=\\gamma(1)/\\gamma(0)=1/2$, $\\phi_1=(1/2)$ and $\\nu_1=1(1-1/4)=3/4$. At order two, $$\\kappa_2=\\frac{\\gamma(2)-\\phi_{1,1}\\gamma(1)}{\\nu_1}=\\frac{1/4-(1/2)(1/2)}{3/4}=0,$$ so $\\phi_2=(\\phi_{1,1}-\\kappa_2\\phi_{1,1},\\kappa_2)^T=(1/2,0)^T$ and $\\nu_2=\\nu_1(1-\\kappa_2^2)=3/4$. By steps 1.1 and 2.1, $\\Gamma_1=[1]$ and $\\Gamma_2=T$. Step 1.2 proves $T$ Hermitian positive definite, so the real leading covariance blocks are positive definite; [F3] applies and [F4] identifies this vector as the unique prediction solution. [given, F3, F4, step 1.1, step 1.2, step 2.1, algebra]",
+        "fixture": "toeplitz-forecast-order-two",
+        "parameters": {}
+      },
+      "limits": "Two orders of this real covariance fixture only; no stochastic-process existence or general recursion proof.",
+      "rationale": "Exact rational covariance recursion for gamma=(1,1/2,1/4), with independent raw prediction-equation and variance residuals."
+    },
+    {
+      "batch": 9,
+      "id": "ex-ar-covariance-toeplitz-forecast-solve",
+      "index": 1,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "claim": "General-RHS Hermitian Toeplitz solve",
+        "input": "T=[[1,1/2],[1/2,1]], b=(1,1)",
+        "result": "T^{-1}=[[4/3,-2/3],[-2/3,4/3]], x=(2/3,2/3)",
+        "evidence": "Proof step 1.2; direct multiplication verifies Tx=b"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "1.2 For the separate general-RHS solve, set $T=\\begin{pmatrix}1&1/2\\\\1/2&1\\end{pmatrix}$ as in the Statement. For each nonzero $z\\in\\mathbb C^2$, $z^*Tz=|z_1+z_2/2|^2+3|z_2|^2/4>0$, so $T$ is Hermitian positive definite. Its first lag data are $t_0=1,t_1=1/2$, hence $\\alpha_1=t_1/t_0=1/2$, $\\phi_1=\\alpha_1=1/2$, and $\\nu_1=t_0(1-|\\alpha_1|^2)=3/4$. The endpoint columns from [F5] are $$v=(-2/3,4/3)^T,\\qquad u=J_2v=(4/3,-2/3)^T,\\qquad u_0=4/3>0.$$ The lower triangular Toeplitz products are $$L(u)L(u)^*=\\begin{pmatrix}16/9&-8/9\\\\-8/9&20/9\\end{pmatrix},\\qquad L(Z_2v)L(Z_2v)^*=\\begin{pmatrix}0&0\\\\0&4/9\\end{pmatrix}.$$ Therefore the formula in [F5] gives $$T^{-1}=\\begin{pmatrix}4/3&-2/3\\\\-2/3&4/3\\end{pmatrix},\\qquad T^{-1}b=(2/3,2/3)^T.$$ Direct multiplication also verifies $T(2/3,2/3)^T=(1,1)^T$. [given, F5, algebra]",
+        "fixture": "toeplitz-general-rhs-two",
+        "parameters": {}
+      },
+      "limits": "This inverse and RHS only; does not establish the general Gohberg–Semencul formula or complexity.",
+      "rationale": "Exact 2x2 inverse constructed by determinant/cofactor arithmetic; both inverse columns and RHS=(1,1) multiplied against the raw Toeplitz matrix."
+    },
+    {
+      "batch": 9,
+      "id": "ex-circulant-periodic-poisson-zero-mode",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "claim": "N=4 cycle Laplacian symbol and alternating forcing",
+        "input": "c=(2,-1,0,-1), f=(1,-1,1,-1)",
+        "result": "λ=(0,2,4,2); C4(f/4)=f; sum(f)=0",
+        "evidence": "Proof steps 3.1 and 3.2"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "3.2 When $N=4$, $\\omega=e^{-i\\pi/2}=-i$ by Euler's formula, so $(\\lambda_0,\\lambda_1,\\lambda_2,\\lambda_3)=(0,2,4,2)$. The vector $f=(1,-1,1,-1)^T$ has sum zero. Directly, each cyclic neighbor of $f_j$ is $-f_j$, so $(C_4f)_j=2f_j-(-f_j)-(-f_j)=4f_j$. Therefore $x=f/4$ solves $C_4x=f$, and its zero mean gives the unique zero-mean solution. [given, F1, F3, step 1.1, step 2.1, algebra]",
+        "fixture": "circulant-poisson-four",
+        "parameters": {}
+      },
+      "limits": "N=4 only; trigonometric comparisons use tolerance 2e-11, while the cyclic residual and mean are exact rationals.",
+      "rationale": "DFT of column (2,-1,0,-1), exact rational cyclic product on f/4, and forcing mean."
+    },
+    {
+      "batch": 9,
+      "id": "ex-hermitian-toeplitz-nonpositive-pivot-failure",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "claim": "Invertible indefinite Toeplitz pivot failure",
+        "input": "T=[[1,2],[2,1]]",
+        "result": "det(T)=-3; ν0=1, α1=2, ν1=-3; status nonpositive-pivot(1)",
+        "evidence": "Proof steps 1.1 and 2.1"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "2.1 The solver starts with $\\nu_0=1$, computes $\\alpha_1=t_1/\\nu_0=2$ and then $\\nu_1=\\nu_0(1-|\\alpha_1|^2)=-3$. Since this pivot is nonpositive, [F2] returns nonpositive-pivot$(1)$ before constructing an inverse-column denominator. [given, F2, step 1.1, algebra] ∎",
+        "fixture": "toeplitz-nonpositive-pivot",
+        "parameters": {}
+      },
+      "limits": "One invertible indefinite 2x2 input; no general failure-classification proof.",
+      "rationale": "Exact determinant, initialized innovation, reflection coefficient, computed second innovation and resulting failure status."
+    },
+    {
+      "batch": 19,
+      "id": "ex-fmm-two-separated-charge-clusters",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "planar-fmm-two-separated-clusters-order-one",
+        "asserts": "The cell path is (P,Q) -> (C,Q) -> (C,D); R_parent=2<2sqrt(2), R_(C,Q)^2=5/2<(3sqrt(2)/2)^2, and R_(C,D)=2>sqrt(2). The source moments are M0=2, M1=0, the far derivative is 1, the exact derivative is 64/63, and the potential remainder is log(64/63)<1/63.",
+        "claim": "Exact finite geometry and rational arithmetic agree with the stated far split and order-one calculation.",
+        "checked_in": "Example and steps 1.1–3.1",
+        "max_labels": 6,
+        "expansion_order": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "1.1 The root has six labels, and its nonempty children $P,Q$ each have three, so threshold $s=2$ makes $H,P,Q$ internal while all named grandchildren are leaves. The centers of $P,Q$ are $1+i,3+i$, their radii are $\\sqrt2$, and their center distance is $2<2\\sqrt2$, so $(P,Q)$ is not separated. Its equal side lengths make the rule split the source $P$; child $C$ has center $c=3/2+i/2$ and radius $\\sqrt2/2$. The pair $(C,Q)$ is not separated because its center distance is $\\sqrt{5/2}<3\\sqrt2/2$. Splitting the larger cell $Q$ exposes $D$ centered at $d=7/2+i/2$; now $|d-c|=2>\\sqrt2/2+\\sqrt2/2$. Thus the list recursion records $(C,D)$ as a far pair, and the zero-charge label at $d$ is the target at the target-cell center. [given, F1, algebra]\n\n1.2 The two unit source offsets give $M_0=2$ and $M_1=0$. With $d-c=2$, [F2] gives the $(C,D)$ local coefficients $L_0=2\\log2$ and $L_1=1$. At the target center this interaction returns potential $2\\log2$ and derivative $1$. Other source labels have zero charge, so they add no contribution to this target. [given, F2, algebra]\n\n2.1 The two nonzero source-target differences are $9/4$ and $7/4$, so the exact potential is $\\log(9/4)+\\log(7/4)=2\\log2+\\log(63/64)$ and the exact derivative is $4/9+4/7=64/63$. Comparing with step 1.2, the absolute errors are $\\log(64/63)<1/63$ and $|64/63-1|=1/63$; the logarithmic inequality follows from $\\log(1+x)=\\int_0^x(1+t)^{-1}\\,dt<x$ for $x>0$. Zero-charge labels add no contribution. [given, step 1.2, algebra]\n\n3.1 For the only far interaction with nonzero source charge, $Q_C=2$, $R=2$, and $\\rho=\\sqrt2/2\\in(1/2,1)$. The [F3] bounds are $\\rho^2/(1-\\rho)>1/4$ and $\\rho/(1-\\rho)>1/2$; all other far source cells have $Q_C=0$. Any direct near pairs from the zero-charge labels contribute exactly zero, so the errors in step 2.1 satisfy the theorem's global sums. [given, F3, step 2.1, algebra] ∎",
+        "fixture": "fmm-separated-order-one",
+        "parameters": {}
+      },
+      "limits": "Fixed six-label tree/path and order one only. Log comparisons use 2e-11 floating tolerance; no general analytic-log, FMM correctness or complexity claim.",
+      "rationale": "All six actual labels assembled; box occupancies, squared center distances and source/target split decisions recomputed. Source moments and exact derivative use rationals; log potentials computed directly from the actual distances and compared with the order-one local result and displayed bounds."
+    },
+    {
+      "batch": 19,
+      "id": "ex-fmm-near-far-potential-and-force-error",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "planar-fmm-near-far-order-one",
+        "asserts": "The cell path is (P,Q) -> (C,Q) -> (C,D); R_parent=2<2sqrt(2), R_(C,Q)^2=5/2<(3sqrt(2)/2)^2, and R_(C,D)=2>sqrt(2). The far source moments are M0=2, M1=0; the near source-target difference is 1/10, so its exact potential and derivative are 3 log(1/10) and 30. The far derivative is 1, the exact far derivative is 64/63, and the potential remainder is log(64/63)<1/63.",
+        "claim": "Exact finite geometry and rational arithmetic confirm that the near term is direct and the far truncation error is unchanged.",
+        "checked_in": "Example and steps 1.1–3.1",
+        "max_labels": 7,
+        "expansion_order": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "1.1 The root has seven labels, and its nonempty children $P,Q$ have three and four labels, respectively; threshold $s=2$ therefore splits all three, while the named grandchildren are leaves. The centers of $P,Q$ are $1+i,3+i$, their radii are $\\sqrt2$, and their center distance is $2<2\\sqrt2$, so $(P,Q)$ is not separated. The tie rule splits source $P$, exposing $C$ with center $c=3/2+i/2$ and radius $\\sqrt2/2$. The pair $(C,Q)$ is not separated since its center distance is $\\sqrt{5/2}<3\\sqrt2/2$, so the larger target cell $Q$ is split. The child $D$ has center $d=7/2+i/2$ and radius $\\sqrt2/2$, and $|d-c|=2>\\sqrt2$; hence $(C,D)$ is far. The distinct charge-$3$ source and zero-charge target at $d$ lie in the same leaf $D$, so their ordered pair is direct near. [given, F1, algebra]\n\n1.2 The far source moments are $M_0=2$ and $M_1=0$, so M2L for $(C,D)$ gives $L_0=2\\log2$ and $L_1=1$; at $d$ the far approximation is $(2\\log2,1)$. The direct near contribution of the charge-$3$ source is exactly $(3\\log(0.1),30)$, because $d-(d-0.1)=0.1$; direct contributions from zero-charge labels vanish. [given, F2, algebra]\n\n2.1 The exact far terms are $\\log(9/4)+\\log(7/4)=2\\log2+\\log(63/64)$ and $4/9+4/7=64/63$. Adding the exact direct near values gives total $(2\\log2+\\log(63/64)+3\\log(0.1),\\ 64/63+30)$. The algorithm returns $(2\\log2+3\\log(0.1),\\ 1+30)$, so the errors are $\\log(64/63)<1/63$ and $1/63$; the strict logarithmic bound follows from $\\log(1+x)=\\int_0^x(1+t)^{-1}\\,dt<x$ for $x>0$. [given, step 1.2, algebra]\n\n3.1 For the only far interaction with nonzero source charge, $Q_C=2$, $R=2$, and $\\rho=\\sqrt2/2\\in(1/2,1)$, so [F3] gives bounds $\\rho^2/(1-\\rho)>1/4$ and $\\rho/(1-\\rho)>1/2$. All other far source cells have zero charge, and every near pair was evaluated exactly, so the errors from step 2.1 satisfy the theorem's global sums. [given, F3, step 2.1, algebra] ∎",
+        "fixture": "fmm-near-far-order-one",
+        "parameters": {}
+      },
+      "limits": "Fixed seven-label tree/path and order one only; floating logarithms are numerical comparisons, not certified interval bounds or a general FMM proof.",
+      "rationale": "All seven labels assembled; split decisions and same-leaf near decision recomputed. Far moments and derivative use rationals; distinct charge-three direct term has exact separation 1/10 and derivative 30. Total log and derivative errors checked against the separated fixture values and displayed bounds."
+    },
+    {
+      "batch": 61,
+      "id": "lem-periodic-composite-trapezoid-error",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "periodic-trapezoid-cosine-N3",
+        "asserts": "For f(x)=cos(2πx/L) on N=3 nodes, both the integral and hΣf(x_j) equal 0.",
+        "claim": "The finite periodic sum respects the zero-mean Fourier mode and the quadrature formula.",
+        "checked_in": "Statement and steps 1.1–2.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Let $L>0$, odd $N\\ge3$, $h=L/N$, and $f\\in C^2(\\mathbb T_L^d)$ for $d\\in\\{1,2,3\\}$. With the uniform tensor grid $x_j=hj$ and indices taken modulo $N$,\n$$ \\left|h^d\\sum_{j\\in(\\mathbb Z/N\\mathbb Z)^d}f(x_j)-\\int_{[0,L]^d}f(x)\\,dx\\right| \\le \\frac{L^dh^2}{12}\\sum_{a=1}^d\\|\\partial_{aa}f\\|_\\infty . $$",
+        "fixture": "periodic-trapezoid-cosine-three",
+        "parameters": {}
+      },
+      "limits": "One frequency, dimension one, N=3; tolerance 2e-11, no general quadrature error constant or multidimensional proof.",
+      "rationale": "Compute three cosine samples and the sine-antiderivative endpoint value on L=1; compare both with zero."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "centered-poisson-symbol-N3",
+        "asserts": "For d=1,L=1,N=3,h=1/3, the constant mode has eigenvalue 0 and k=±1 has λ=3/h²=27.",
+        "claim": "The finite symbol agrees with the range/kernel calculation for the smallest allowed grid.",
+        "checked_in": "Statement and steps 2.1, 3.1, 4.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Use the grid, inner product, and operator $A_h$ of [[def-periodic-pic-grid-and-inner-product]]. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h$ consists exactly of constant arrays, and $\\operatorname{ran}A_h=\\{s:\\bar s=0\\}$. Consequently, for every compatible source $\\bar s=0$, there is a unique solution $\\phi$ of $A_h\\phi=s$ with the gauge $\\bar\\phi=0$.\n\nFor $k\\in\\mathcal K_N$, the Fourier character $e_k(j)=e^{2\\pi i k\\cdot j/N}$ is an eigenvector with\n$$ \\lambda_h(k)=\\frac4{h^2}\\sum_{a=1}^d\\sin^2\\!\\left(\\frac{\\pi k_a}{N}\\right). $$\nOnly $k=0$ has eigenvalue zero.",
+        "fixture": "centered-poisson-symbol-three",
+        "parameters": {}
+      },
+      "limits": "Only this smallest odd grid in dimension one; tolerance 2e-11, no general kernel/range proof.",
+      "rationale": "Assemble raw centered stencil N=3,L=1 and apply it to real and imaginary parts of every discrete Fourier mode; infer and check eigenvalues 0,27,27."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "pseudoinverse-cosine-N3",
+        "asserts": "For d=1,L=1,N=3, s=(1,-1/2,-1/2) is an eigenmode with eigenvalue 27, so A†s=s/27 and its mean is zero.",
+        "claim": "The finite pseudoinverse returns the unique gauged solution on a nonzero mode.",
+        "checked_in": "Statement and steps 1.1–3.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "For any real grid array $s$, define its mean-zero periodic Poisson pseudoinverse by\n$$ A_h^\\dagger s:=\\text{the unique mean-zero grid array }u\\text{ such that }A_hu=s-\\bar s\\,\\mathbf1, $$\nwhere $\\bar s=L^{-d}\\langle s,\\mathbf1\\rangle_h$. This definition is well-defined by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]]. It gives $A_hA_h^\\dagger s=s-\\bar s\\mathbf1$, $A_h^\\dagger\\mathbf1=0$, and a linear self-adjoint map on the full finite grid space.",
+        "fixture": "pseudoinverse-cosine-three",
+        "parameters": {}
+      },
+      "limits": "Two RHS on N=3,L=1 only; tolerance 2e-11. This finite calculation does not prove general self-adjointness.",
+      "rationale": "Solve raw gauged stencil by elimination for s=(1,-1/2,-1/2) and an independent vector; check s/27, raw residual, zero mean, a self-adjoint pairing and zero-source solution."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-pic-charge-conservation-and-neutralized-source",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "one-particle-charge-two",
+        "asserts": "For h=1/5 and weights (2/3,1/3), a charge q=2 deposits density (20/3,10/3,0,0,0) before background and has total cell charge 2.",
+        "claim": "The finite computation agrees with charge conservation and zero-mean neutralization.",
+        "checked_in": "Steps 1.1–3.1",
+        "N": 5,
+        "particles": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "For positions $X_1,\\ldots,X_P\\in\\mathbb T_L^d$ and real charges $q_1,\\ldots,q_P$, define $Q=\\sum_pq_p$ and an admissible algebraic assignment shape $w_j$ as in [[def-periodic-pic-shape-assignment-and-gather]]. Then\n$$ h^d\\sum_{j\\in J_N}h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)=Q . $$\nConsequently the neutralized source $\\rho_j(X)=h^{-d}\\sum_pq_pw_j(X_p)-Q/L^d$ has mean zero and is in the range of the periodic Poisson operator; it therefore has a unique mean-zero potential for the gauge $\\bar\\phi=0$ by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]].",
+        "fixture": "charge-two-deposition-five",
+        "parameters": {}
+      },
+      "limits": "One particle, charge two, one-dimensional five-cell fixture; no arbitrary-shape charge conservation proof.",
+      "rationale": "Compute exact CIC weights from h=1/5,X=h/3, raw density q*w/h, exact total cell charge two and uniform-background mean zero."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "gamma-N3",
+        "asserts": "For d=1,L=1,N=3, γ=√3/18<1/4=L/4.",
+        "claim": "The exact finite inverse/derivative multiplier obeys the stated mesh-independent upper bound.",
+        "checked_in": "Statement and step 3.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Let $s$ be a zero-mean grid source and let $\\phi$ be the zero-mean solution of $A_h\\phi=s$. Let $\\widetilde\\phi$ be any approximate grid potential, and set $r=s-A_h\\widetilde\\phi$; then $\\bar r=0$. Define\n$$\\gamma_{N,L}= \\max_{\\substack{k\\in\\mathcal K_N\\\\k\\ne0}} \\frac{\\left(\\sum_{a=1}^d h^{-2}\\sin^2(2\\pi k_a/N)\\right)^{1/2}} {4h^{-2}\\sum_{a=1}^d\\sin^2(\\pi k_a/N)} .$$ For the centered field operator $D^0=(D_a^0)_{a=1}^d$, $$\\|D^0(\\phi-\\widetilde\\phi)\\|_h\\le\\gamma_{N,L}\\|r\\|_h,\\qquad \\gamma_{N,L}\\le\\frac{h}{2\\sin(\\pi/N)}\\le\\frac L4 .$$ For any particle location $x_p$ and charge-to-mass ratio $q_p/m_p$ with $m_p>0$, the force gather using the weights of [[def-periodic-pic-shape-assignment-and-gather]] obeys $$\\left|\\frac{q_p}{m_p}G_{x_p}\\!\\left(-D^0\\phi+D^0\\widetilde\\phi\\right)\\right| \\le\\frac{|q_p|}{m_p}h^{-d/2}\\gamma_{N,L}\\|r\\|_h .$$\nThus the norm in the force certificate is the actual finite-grid inverse/derivative norm; the explicit $h^{-d/2}$ conversion is retained when passing from grid $L^2$ to a particle gather.",
+        "fixture": "gamma-three",
+        "parameters": {}
+      },
+      "limits": "N=3,L=1,d=1 only; tolerance 2e-11. No general mesh-independent force or gather estimate is proved.",
+      "rationale": "Apply raw centered derivative and centered Laplacian to both nonzero complex modes; maximize computed Euclidean norm ratios and compare with sqrt(3)/18 and 1/4."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "fourier-solver-N3",
+        "asserts": "For d=1,L=1,N=3 and s=(1,-1/2,-1/2), φ=s/27 is the mean-zero solution because A_h cos(2πj/3)=27 cos(2πj/3).",
+        "claim": "The algorithm divides the two nonzero modes by 27 and returns the stated gauged solution.",
+        "checked_in": "Steps 1.1–3.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "For every real zero-mean source $s$ on the grid of [[def-periodic-pic-grid-and-inner-product]], [[alg-periodic-pic-zero-mean-poisson-solver]] terminates and returns the unique $\\phi$ satisfying $A_h\\phi=s$ and $\\bar\\phi=0$. Its incompatible-source branch is taken exactly when the equation has no solution.",
+        "fixture": "fourier-solver-three",
+        "parameters": {}
+      },
+      "limits": "This N=3,L=1 RHS only; tolerance 2e-11, not an arbitrary-grid solver proof.",
+      "rationale": "Forward DFT of s=(1,-1/2,-1/2), DFT of raw stencil row, zero-mode reset, divide nonzero modes, inverse DFT, then check physical-space residual and mean."
+    },
+    {
+      "batch": 61,
+      "id": "ex-periodic-high-frequency-pic-sampling-alias",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "mode-6-aliases-mode-1-N5",
+        "asserts": "At x_j=2πj/5, e^{i6x_j}=e^{ix_j}, so the sampled forcing is cos(x_j).",
+        "claim": "The nodal alias and force discrepancy are exact.",
+        "checked_in": "Steps 1.1–2.1",
+        "N": 5,
+        "frequency": 6
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "On $\\mathbb T_{2\\pi}$, take the smooth source $\\rho(x)=\\cos(6x)$ and solve $-\\phi''=\\rho$ with zero mean. Its exact electric field $E=-\\phi'$ is $E(x)=\\frac16\\sin(6x)$. On the five-node Fourier-collocation grid $x_j=2\\pi j/5$, the sampled source is exactly $\\cos(x_j)$. The mean-zero collocation solution is $\\phi_N(x)=\\cos x$, and the computed field is $E_N(x)=\\sin x$. At every grid node, $E_N(x_j)=6E(x_j)$. This is a spectral-sampling aliasing example; it is not the centered finite-difference operator defined on the main PIC page.",
+        "fixture": "alias-six-to-one-five",
+        "parameters": {}
+      },
+      "limits": "Five-node spectral collocation only, explicitly not the centered finite-difference field; tolerance 2e-11. No general aliasing theorem.",
+      "rationale": "Compute all five complex nodal aliases, DFT the sampled source, solve the finite Fourier-collocation Poisson problem by signed k^2 division, and differentiate/inverse-DFT the field; compare with sin(6x)/6 and require a nonzero sixfold discrepancy."
+    },
+    {
+      "batch": 61,
+      "id": "cex-periodic-nonneutral-source-has-no-poisson-solution",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "nonneutral-one-particle",
+        "asserts": "For L=1 and charge 1, the unneutralized source has mean 1, while every A_h output has mean 0.",
+        "claim": "The incompatibility obstruction is visible on the smallest admissible odd grid.",
+        "checked_in": "Steps 1.1–2.1",
+        "N": 3,
+        "particles": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Take the one-dimensional periodic grid with $L=1$ and odd $N\\ge3$, one particle of charge $q=1$, and any nonnegative normalized assignment shape. If the deposited density $s_j=h^{-1}w_j(X)$ is sent directly to $A_h\\phi=s$ without subtracting the neutralizing background $1/L$, then the equation has no solution.",
+        "fixture": "nonneutral-one-particle-three",
+        "parameters": {}
+      },
+      "limits": "One source and one N=3,L=1 stencil; the column-sum calculation is finite linear algebra, not a general no-solution proof.",
+      "rationale": "Assemble charge-one nodal source on h=1/3, exact source mean one; check every raw stencil column sum and a nontrivial matrix output sum are zero."
+    },
+    {
+      "batch": 61,
+      "id": "ex-cold-two-stream-stipulated-pic-experiment",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "cold-two-stream-inventory",
+        "asserts": "Two beams of 63 particles each give P=126, Q=M=1 and velocities +1/2 and -1/2.",
+        "claim": "The stipulated initial state has the declared particle, charge, mass and cold-beam values.",
+        "checked_in": "Steps 1.1–2.1",
+        "N": 63,
+        "particles": 126
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Here is a fully specified cold two-stream input for the fixed-$\\varepsilon$ periodic grid model. Let $d=1$, $L=2\\pi$, $N=63$, $P=126$, $Q=M=1$, $\\varepsilon=1/5$, and $\\Delta t=10^{-3}$ with $4000$ steps to $T=4$. For $\\sigma\\in\\{-1,+1\\}$ and $j\\in\\mathbb Z/63\\mathbb Z$, assign charge and mass $1/126$ and set\n$$ X_{\\sigma,j}(0)=\\left(\\frac{2\\pi j}{63}+\\sigma\\,\\frac1{100}\\cos\\frac{2\\pi j}{63}\\right)\\pmod{2\\pi},\\qquad V_{\\sigma,j}(0)=\\frac{\\sigma}{2}. $$\nUse the smooth assignment shape, neutralizing background, centered periodic Poisson solve, and exact-arithmetic RK4 update from the A page. The two beams are cold because each beam has one velocity value. This is a stipulated numerical experiment only: it asserts no growth rate, nonlinear saturation, or physical validation.",
+        "fixture": "cold-two-stream-inventory",
+        "parameters": {}
+      },
+      "limits": "Initial-data inventory only; no time integration, trajectory, growth rate, saturation, or physical validation is claimed.",
+      "rationale": "Construct every sigma,j label, wrapped perturbed position, velocity, rational charge and mass; count both beams, sum exact totals, and check dt times 4000 equals four."
+    },
+    {
+      "batch": 61,
+      "id": "ex-periodic-one-dimensional-pic-cic-charge-deposition",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "CIC-deposit-N5",
+        "asserts": "For q=2 at x=h/3, ρ=(14/3,4/3,-2,-2,-2) and hΣρ=0.",
+        "claim": "The deposit, neutralization and adjoint pairing are consistent on the displayed finite grid.",
+        "checked_in": "Steps 1.1–3.1",
+        "N": 5,
+        "particles": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Take $L=1$, $N=5$, $h=1/5$, and one particle of charge $q=2$ at $X=h/3$. Define the one-dimensional cloud-in-cell (CIC) weights by $w_j(x)=\\max\\{1-d_L(x,x_j)/h,0\\}$, where $d_L(x,x_j)=\\min_{k\\in\\mathbb Z}|x-x_j+kL|$ is the periodic distance. The only nonzero weights at $X$ are $w_0(X)=2/3$ and $w_1(X)=1/3$. The deposited density before neutralization is $(20/3,10/3,0,0,0)$, and subtracting the uniform background $Q/L=2$ gives\n$$ \\rho=(14/3,4/3,-2,-2,-2),\\qquad h\\sum_{j=0}^4\\rho_j=0. $$ For every grid potential $\\phi$, the adjoint identity is $$ \\langle\\rho,\\phi\\rangle_h =2\\left(\\frac23\\phi_0+\\frac13\\phi_1\\right)-2\\bar\\phi. $$\n\nThe diagram shows the local CIC stencil between nodes $0$ and $1$; indices on the full grid are understood modulo $5$.\n\n\\begin{tikzpicture}[x=2cm,y=1cm,>=stealth,every node/.style={font=\\small}]\n  \\draw[->] (-0.35,0) -- (2.35,0) node[right] {$x$};\n  \\foreach \\j in {0,1,2} {\n    \\draw (\\j,0.07) -- (\\j,-0.07);\n    \\fill (\\j,0) circle (1.4pt);\n    \\node[below=3pt] at (\\j,-0.07) {node \\j};\n  }\n  \\fill[red] (0.333,0.55) circle (1.6pt);\n  \\node[above] at (0.333,0.55) {$X=h/3$};\n  \\draw[dashed,red] (0.333,0.52) -- (0,0.04);\n  \\draw[dashed,red] (0.333,0.52) -- (1,0.04);\n  \\node[red,left] at (-0.05,0.45) {$w_0=2/3$};\n  \\node[red,right] at (0.95,0.45) {$w_1=1/3$};\n  \\draw[<->] (0,0.26) -- node[above] {$h$} (1,0.26);\n\\end{tikzpicture}",
+        "fixture": "cic-deposit-and-adjoint-five",
+        "parameters": {}
+      },
+      "limits": "One charge-two particle at h/3 on N=5,L=1, plus a fixed adjoint vector and kink offsets; no smoothness/general gather theorem.",
+      "rationale": "Exact CIC weights, raw and neutralized densities, weighted mean, raw/background adjoint pairings on a nonconstant grid vector, and exact one-sided hat slopes +5/-5."
+    },
+    {
+      "batch": 61,
+      "id": "ex-periodic-smooth-density-poisson-grid-force-error",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "regularized-first-fourier-mode",
+        "asserts": "The first cosine mode is multiplied by α_ε under η_ε convolution and once more under gathered convolution.",
+        "claim": "The exact continuum field and target used by the mesh-error estimate have the stated Fourier coefficients.",
+        "checked_in": "Steps 1.1–2.1",
+        "frequency": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Let $d=1$, $L=2\\pi$, $a=1/2$, and let the probability measure $\\mu$ have density\n$$ d\\mu(y)=\\frac{1+a\\cos y}{2\\pi}\\,dy. $$ For $\\alpha_\\varepsilon=e^{-\\varepsilon/(2\\pi)}$, the regularized neutralized source and zero-mean field are $$ \\rho_\\varepsilon(x)=\\frac{a\\alpha_\\varepsilon}{2\\pi}\\cos x, \\qquad E_\\varepsilon(x)=-\\phi_\\varepsilon'(x)=\\frac{a\\alpha_\\varepsilon}{2\\pi}\\sin x. $$ The gathered continuum target is $(\\eta_\\varepsilon*E_\\varepsilon)(x)=\\frac{a\\alpha_\\varepsilon^2}{2\\pi}\\sin x$. On any odd grid with spacing $h=2\\pi/N$, the fixed-$\\varepsilon$ theorem gives $$ \\|G_hE_h-\\eta_\\varepsilon*E_\\varepsilon\\|_\\infty \\le (2\\pi)^{1/2}h^{3/2}(\\gamma_{N,2\\pi}C_{\\rm src}+C_3)+C_{\\rm int}h^2, $$\nwhere the constants are explicitly defined in [[thm-periodic-pic-smooth-density-grid-force-consistency]]. This tends to zero along odd $N\\to\\infty$ at fixed $\\varepsilon$.",
+        "fixture": "regularized-first-mode",
+        "parameters": {}
+      },
+      "limits": "Fixed finite floating quadrature with tolerance 2e-11, not a certified continuum integral, exact Fourier identity, h-rate or asymptotic claim. Preserves the authored first-mode obligation as a bounded falsification model.",
+      "rationale": "At alpha=1/2 (epsilon=2*pi*log(2)), evaluate the closed Poisson kernel on 4096 uniform nodes; quadrature checks normalization/first cosine coefficient and source/gather convolutions at four positions, comparing coefficients alpha and alpha^2."
+    },
+    {
+      "batch": 61,
+      "id": "ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "harmonic-leapfrog-dt-half",
+        "asserts": "Starting at (1,0), one Δt=1/2 step gives (7/8,-15/32) and H_1=1009/2048≠1/2.",
+        "claim": "Exact rational arithmetic verifies reversible symplectic leapfrog need not preserve H exactly.",
+        "checked_in": "Steps 1.1–2.1",
+        "dt": "1/2"
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "As a scalar diagnostic, consider the separable harmonic Hamiltonian $H(q,p)=\\frac12(p^2+q^2)$ and one kick-drift-kick step with $\\Delta t=1/2$ from $(q_0,p_0)=(1,0)$. It returns\n$$ (q_1,p_1)=\\left(\\frac78,-\\frac{15}{32}\\right),\\qquad H(q_1,p_1)=\\frac{1009}{2048}\\ne\\frac12=H(q_0,p_0). $$\nThe exact oscillator conserves $H$. This abstract quadratic test is not claimed to be a trajectory of the periodic electrostatic potential $U_h$ from [[def-periodic-pic-separable-hamiltonian-grid-model]]; it shows why symplecticity or reversibility alone cannot imply exact preservation of an arbitrary Hamiltonian. On the separate PIC branch, [[thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error]] proves its own reversible/symplectic and conditional order-two properties. The exact semidiscrete energy result there is [[thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy]].",
+        "fixture": "harmonic-leapfrog-half",
+        "parameters": {}
+      },
+      "limits": "One oscillator step; determinant one is the two-dimensional finite symplectic check, not a general integrator theorem.",
+      "rationale": "Exact rational kick-drift-kick from (1,0) with dt=1/2, physical energy 1009/2048, reverse step and determinant of the independently formed linear map."
+    },
+    {
+      "batch": 66,
+      "id": "lem-phase-field-neumann-laplacian-kernel-and-gauge",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "one-cell-neumann-kernel",
+        "asserts": "For one cell, A_h=0, X_{h,0}={0}, and the stated Poincare inequality is vacuous.",
+        "claim": "The zero-dimensional mean-zero branch and constant kernel agree.",
+        "checked_in": "Statement and steps 1.1–3.1",
+        "cells": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Use either connected no-flux realization in [[def-phase-field-discrete-realizations]]. In its finite-volume branch, assume the interior cell graph is connected; in its interval conforming branch, assume $N\\ge1$. Write $\\bar u_h=\\langle u_h,\\mathbf1\\rangle_h/\\langle\\mathbf1,\\mathbf1\\rangle_h$ and $X_{h,0}=\\{u_h:\\bar u_h=0\\}$. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h=\\operatorname{span}\\{\\mathbf1\\}$, and $\\operatorname{ran}A_h=X_{h,0}$. The restriction $A_h:X_{h,0}\\to X_{h,0}$ is positive definite and invertible. Define $A_h^\\dagger u_h$ by first projecting $u_h$ onto $X_{h,0}$ and then applying this self-adjoint positive inverse. For each fixed finite mesh there is $C_h<\\infty$ such that\n$$\\|u_h-\\bar u_h\\mathbf1\\|_h^2\\le C_h\\langle A_hu_h,u_h\\rangle_h.$$\nFor a one-cell mesh, $X_{h,0}=\\{0\\}$ and the inequality is vacuous.",
+        "fixture": "one-cell-neumann-kernel",
+        "parameters": {}
+      },
+      "limits": "One-cell branch only. The zero-dimensional Poincare inequality is explicitly retained as such, backed by actual operator/projection calculations rather than an unconditional pass.",
+      "rationale": "Assemble the one-cell graph Laplacian from its empty face list, act on a constant and three nontrivial scalar states, project onto mean zero and solve the identity gauge for the zero inverse."
+    },
+    {
+      "batch": 66,
+      "id": "thm-phase-field-sav-modified-energy-law",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "one-cell-sav-step",
+        "asserts": "When A_h=0, the first SAV equation gives u^{n+1}=u^n, the third gives r^{n+1}=r^n, and the second uniquely determines the constant chemical potential.",
+        "claim": "The degenerate one-cell system is uniquely solvable and the modified-energy identity has zero dissipation.",
+        "checked_in": "Steps 1.1 and 2.1",
+        "cells": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Under the finite-dimensional hypotheses of [[alg-phase-field-sav-cahn-hilliard-step]], the displayed SAV linear system has a unique solution at every step. Every solution conserves the discrete mean and obeys\n$$\\widetilde E_h(u^{n+1},r^{n+1})+\\frac\\kappa2\\langle A_h\\delta u,\\delta u\\rangle_h+(\\delta r)^2+M\\tau\\langle A_h\\mu^{n+1},\\mu^{n+1}\\rangle_h=\\widetilde E_h(u^n,r^n),$$\nwhere $\\delta u=u^{n+1}-u^n$, $\\delta r=r^{n+1}-r^n$, and\n$$\\widetilde E_h(u,r)=\\frac\\kappa2\\langle A_hu,u\\rangle_h+r^2.$$\nThus $\\widetilde E_h$ is nonincreasing. This conclusion is about the modified energy; it does not assert monotonicity of the original physical energy $\\mathcal E_h(u)=\\frac\\kappa2\\langle A_hu,u\\rangle_h+E_{1,h}(u)$.",
+        "fixture": "one-cell-sav-step",
+        "parameters": {}
+      },
+      "limits": "One-cell fixed state only; floating alpha and solve use tolerance 2e-11. No arbitrary-mesh solvability or dissipation theorem.",
+      "rationale": "For nonzero old state u=2,r=3/2 and epsilon=kappa=M=tau=C0=1, assemble and solve all three SAV equations in (u_new,r_new,mu_new), independently check determinant -1, residuals, mean, chemical potential and zero-dissipation energy identity."
+    },
+    {
+      "batch": 66,
+      "id": "cex-phase-field-sav-modified-energy-not-physical-energy",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "one-cell-energy-implication",
+        "asserts": "For epsilon=C0=1 and pairs (u0,r0)=(1,1), (u1,r1)=(0,1/2), modified energies are 1 and 1/4 while physical potentials are 0 and 1/4.",
+        "claim": "The scalar inequality alone does not imply physical-energy decrease.",
+        "checked_in": "Steps 1.1–1.2",
+        "cells": 1
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Take a one-cell no-flux mesh with cell volume $|K|=1$, so the gradient term is zero and the cell-volume mass is one, and set $\\varepsilon=C_0=1$. Let $u^0=1$, $u^1=0$, $r^0=1$, and $r^1=1/2$. Then the modified scalar energy $r^2$ decreases from $1$ to $1/4$, while the original double-well energy increases from $F_1(1)=0$ to $F_1(0)=1/4$. These scalar pairs are a counterexample to the stated implication from an energy inequality alone; they are not asserted to be a trajectory of the SAV update equations.",
+        "fixture": "one-cell-energy-implication",
+        "parameters": {}
+      },
+      "limits": "Algebraic implication counterexample only, explicitly not a trajectory of SAV equations.",
+      "rationale": "Exact double-well and auxiliary-square energies for pairs (1,1) and (0,1/2), checking opposite strict inequalities."
+    },
+    {
+      "batch": 66,
+      "id": "ex-phase-field-ch-two-cell-energy-ledger",
+      "index": 0,
+      "family": "particle",
+      "proposal": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-finite-particle-proposal.json",
+      "original_obligation": {
+        "check": "two-cell-cubic-ledger",
+        "asserts": "The state equation reduces to 2a^3+7a-5=0; the polynomial is strictly increasing and changes sign from -5 to 4 on [0,1].",
+        "claim": "There is exactly one a in (0,1), and the stated initial/new energy formulas satisfy E1<2.",
+        "checked_in": "Steps 1.1 and 2.1",
+        "cells": 2
+      },
+      "current_obligation": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Take two unit cells on $(0,2)$, one interior face with transmissibility $T=1$, no-flux boundary faces, $\\varepsilon=\\kappa=M=\\tau=1$, and $u^0=(1,-1)$. The discrete mean is zero, and the one-step convex-splitting state is $u^1=(a,-a)$ where $a$ is the unique root in $(0,1)$ of $2a^3+7a-5=0$. The initial energy is $2$ and the new energy is $2a^2+\\frac12(1-a^2)^2<2$.",
+        "fixture": "two-cell-cubic-ledger",
+        "parameters": {}
+      },
+      "limits": "Fixed two-cell step; bisection residual tolerance 2e-14, other comparisons 2e-11. Numerical bracket calculation does not replace the source proof of existence/uniqueness or general energy law.",
+      "rationale": "Bracket polynomial 2a^3+7a-5 on [0,1], run exactly 64 bisections, then recompute both raw two-cell chemical/state equations, zero mass and gradient-plus-potential energy from the matrix. Check derivative lower bound on the computed bracket and energy below two."
+    }
+  ]
+}

@@ -1,0 +1,842 @@
+FINITE ELEMENT METHODS FOR MAXWELL EQUATIONS
+
+LONG CHEN
+
+First, we present two finite element spaces for Maxwell’s equations, discuss the inter-
+polation error. We then provide a convergence analysis for finite element methods using
+these spaces. We also give an introductory overview of finite element exterior calculus.
+
+1. FINITE ELEMENT SPACES
+
+1.1. Edge Elements. We describe two types of edge elements developed by N´ed´elec [5, 6]
+in the 1980s. We recommend the readers to do the project Project: Edge Finite Element
+Method for Maxwell-type Equations.
+
+1.1.1. First family: the lowest order. For the k-th edge ek with vertices (i, j) and the
+direction from i to j, the basis φk and corresponding degree of freedom lk(·) are
+
+φk = λi∇λj −λj∇λi,
+
+lk(v) =
+�
+
+ek
+v · t ds ≈1
+
+2[v(i) + v(j)] · ek,
+
+where t is the unit tangent vector and the quadrature will be exact when v · t is linear.
+We verify the duality lk(φk) = 1 as follows
+
+φk(i) · ek = ∇λj · ek =
+�
+
+ek
+∇λj · t ds = λj(j) −λj(i) = 1
+
+φk(j) · ek = ∇λi · ek =
+�
+
+ek
+∇λi · t ds = λi(j) −λi(i) = −1,
+
+and consequently lk(φk) = 1. Consider the integral along another edge (m, n). If (m, n)∩
+(i, j) = ∅, then λi |emn= λj |emn= 0. Without loss of generality, consider m = i and
+n /∈{i, j}. Then in the basis φk either ∇λj · tmn = 0 or λj|emn = 0 and therefore
+φk · tmn = 0. This verifies lℓ(φk) = 0 for ℓ̸= k.
+In a tetrahedron T, the lowest order edge element is given by
+
+NE0(T) = span{φk, k = 1, 2, . . . , 6}
+
+which is a linear polynomial. We illustrate three basis functions associated with three
+edges on one face of the tetrahedron in Figure 2. Note that the vector field φk for edge k is
+orthogonal to the other edges. For a 2D triangle, the formula for the basis is identical, and
+the three basis functions on a triangle are depicted in Figure 1.
+The lowest order element NE0(T) is merely a subspace of P3
+1, which has a dimension
+of 4 × 3 = 12. In other words, the lowest order edge element represents an incomplete
+linear polynomial space and is capable of only reproducing a constant vector field. From an
+approximation standpoint, the L2 error can only achieve a first-order accuracy. However,
+the H(curl) norm of the error is also of the first order.
+
+Date: Created: Spring 2014. Last update: May 17, 2024.
+
+1
+
+
+2
+LONG CHEN
+
+FIGURE 1. Three basis functions of NE0 in a triangle.
+
+FIGURE 2. Three basis functions of NE0 associated to three edges in a tetrahedron.
+
+1.1.2. Second family: the linear polynomial. In addition to φk, for each edge, we intro-
+duce one more basis:
+
+ψk = λi∇λj + λj∇λi,
+
+l1
+k(v) = 3
+�
+
+ek
+v · t(λi −λj) ds ≈1
+
+2[v(i) −v(j)] · ek.
+
+The quadrature is derived using Simpson’s rule, taking into account the fact that λi−λj = 0
+at the midpoint, which ensures exactness when v·t is linear. It is clear that {lk(·), l1
+k(·), k =
+1, 2, . . . , 6} are linearly independent. We then demonstrate that this set is dual to {φk, ψk}.
+The Simpson’s rule is exact for l1
+k(ψk) and thus
+
+l1
+k(ψk) = 1
+
+2 [ψk · eij(i) −ψk · eij(j)] = 1
+
+2 [(λi −λj)(i) −(λi −λj)(j)] = 1.
+
+The verification of ψk · el = 0, for l ̸= k, is similar as before. Therefore {l1
+k} is a dual
+basis of {ψk}.
+We also need to verify the duality conditions:
+
+lk(ψl) = 0,
+l1
+k(φl) = 0,
+∀l = 1, 2, . . . , 6.
+
+We only need to consider the case where l = k since ψk · tl = φk · tl = 0 for l ̸= k. Note
+that ψk · tk is an odd function (with respect to the midpoint), and thus its integral over the
+edge is zero. Similarly, φk · tk = 1, which implies l1
+k(φk) = 0.
+The lowest order second family of edge elements is defined as
+
+NE1(T) = span{φk, ψk, k = 1, 2, . . . , 6},
+
+which forms a complete linear polynomial space capable of reproducing linear polynomi-
+als. As a result, the L2-norm of the error is second-order. However, the H(curl) norm
+
+
+FINITE ELEMENT METHODS FOR MAXWELL EQUATIONS
+3
+
+remains first-order, since ψk = ∇(λiλj) and ∇× ψk = 0 does not contribute to the
+approximation of the curl. The plot of ψk within a triangle is depicted in Figure 3.
+
+FIGURE 3. Basis vectors ψk of NE1 in a triangle.
+
+The global finite element space is obtained by gluing piecewise one. Using the barycen-
+tric coordinate in each tetrahedron, for an edge, the basis φk, ψk can be extend to all
+tetrahedron surrounding this edge. Given a triangulation Th, let Eh be the edge set of Th.
+Define
+
+NE0(Th) = span{φe, e ∈Eh}
+
+= {v ∈L2(Ω), v |T ∈NE0(T), ∀T ∈Th, ℓe(v) is single valued ∀e ∈Eh},
+
+NE1(Th) = span{φe, ψe, e ∈Eh}
+
+= {v ∈L2(Ω), v |T ∈NE1(T), ∀T ∈Th, ℓe(v), ℓ1
+e(v) is single valued ∀e ∈Eh}.
+
+To demonstrate that the obtained spaces indeed belong to H(curl; Ω), it is sufficient
+to verify the tangential continuity of the piecewise polynomials. Given a triangular face
+f, within a tetrahedron, we label the vertex opposite to f as xf, and the corresponding
+barycentric coordinate will be denoted by λf. For an edge e that uses xf as a vertex,
+the corresponding basis φe or ψe is a linear combination of λi∇λf and λf∇λi. When
+restricted to f, λf |f= 0 and ∇λf ×nf = 0 since ∇λf is a normal vector to f. Therefore,
+we have shown that φe|f ×nf = ψe|f ×nf = 0 for edges e containing nf. Consequently,
+for v ∈NE0(Th) or NE1(Th), the trace v|f × nf depends solely on the basis functions of
+the edges of f, which is the desired tangential continuity for an H(curl; Ω) function.
+We introduce the canonical interpolation into the edge element space. Define Icurl
+h
+:
+V ∩dom(Icurl
+h ) →NE0(Th) as follows: for a given function u ∈V , define uI = Icurl
+h u ∈
+NE0(Th) by matching the degrees of freedom (d.o.f.):
+
+le(Icurl
+h u) = le(u)
+∀e ∈Eh(Th).
+
+That is,
+
+uI =
+�
+
+e∈Eh
+
+��
+
+e
+u · t ds
+�
+φe.
+
+For the second family edge element space, include l1
+e(·) and ψe in the interpolation process.
+
+Exercise 1.1. In one tetrahedron τ, verify Icurl
+h
+to NE0(τ) will preserve constant vector
+and linear vectors for space NE1(τ).
+
+To analyze the error ∇× (u −uI), employing the Bramble-Hilbert lemma would typ-
+ically require the introduction of the Piola transformation to relate the curl operators ∇×
+
+
+4
+LONG CHEN
+
+and ˆ∇× within the reference element. However, instead of utilizing the Piola transforma-
+tion, we introduce the lowest order face element for H(div; Ω) and leverage a commuting
+diagram to transition to the estimation of the L2-error associated with the face element.
+
+1.2. Face Element. Given a face f formed by vertices [i, j, k], we introduce a basis vector:
+
+(1)
+φf = 2(λi∇λj × ∇λk + λj∇λk × ∇λi + λk∇λi × ∇λj),
+
+and the corresponding degree of freedom:
+
+(2)
+lf(v) =
+�
+
+f
+v · n dS ≈v(c) · nf|f|,
+
+where n is a unit normal vector of f and the quadrature is exact for linear polynomials v.
+
+Exercise 1.2. [Face element]
+
+(1) Verify that {lfi, i = 1, 2, 3, 4} is a dual basis to {φfj, j = 1, 2, 3, 4}.
+(2) For a triangle in 2D, the degree of freedom remains unchanged. Write out the
+basis functions. A plot of basis for 2D RT element can be found in Fig. 4.
+
+FIGURE 4. Basis vectors φk of RT0 in a triangle.
+
+We define the lowest order face element space, known as Raviart-Thomas element [7]
+
+RT0(T) = span{φfj, j = 1, 2, 3, 4}
+
+and the global version
+
+RT0(Th) = span{φf, f ∈Fh}
+
+= {v ∈L2(Ω), v |T ∈RT0(T), ∀T ∈Th, lf(v) is single valued ∀f ∈Fh},
+
+where Fh is the set of all faces of a triangulation Th.
+Given a triangulation Th with mesh size h, define Idiv
+h
+: V →RT0(Th) as follows: for a
+given function u ∈V , define uI = Idiv
+h u ∈RT0(Th) by matching the degrees of freedom:
+
+lf(Idiv
+h u) = lf(u)
+∀f ∈Fh(Th).
+
+That is,
+
+uI =
+�
+
+f∈Fh
+
+��
+
+f
+u · n dS
+�
+φf.
+
+We verify the crucial commuting property.
+
+Lemma 1.3. For a function u ∈C1(¯Ω), we have
+
+∇× Icurl
+h u = Idiv
+h ∇× u.
+
+
+FINITE ELEMENT METHODS FOR MAXWELL EQUATIONS
+5
+
+Proof. By Stokes’ theorem and the definition of interpolation operators:
+�
+
+f
+Idiv
+h (∇× u) · nf dS =
+�
+
+f
+(∇× u) · nf dS
+
+=
+�
+
+∂f
+u · t ds
+
+=
+�
+
+∂f
+Icurl
+h u · t ds
+
+=
+�
+
+f
+(∇× Icurl
+h u) · nf dS.
+
+□
+
+Remark 1.4. The domain of the canonical interpolation Icurl
+h , Idiv
+h are smooth subspaces of
+H(curl; Ω) or H(div; Ω), respectively. For instance, even u ∈H1, the trace u restricted
+to an edge may not be well defined. The arguments above necessitate the function to be
+sufficiently smooth. Quasi-interpolation operators [1, page 65-67], which allow for less
+stringent smoothness requirements for the function and maintain the desirable commuting
+diagram, have been developed.
+
+1.3. Interpolation Error Estimate. We first prove a stability result for the Idiv
+h operator.
+
+Lemma 1.5. For v ∈H1(Ω), we have
+
+∥Idiv
+h v∥≲∥v∥+ h∥∇v∥.
+
+Proof. It suffices to prove the inequality restricted to a single element T. By definition and
+the Minkowski inequality,
+
+∥Idiv
+h v∥0,T = ∥
+�
+
+f∈Fh(T )
+lf(v)φf∥≤
+�
+
+f∈Fh(T )
+|lf(v)|∥φf∥0,T .
+
+We apply the scaled trace inequality for w ∈H1(T),
+
+∥w∥0,f ≲h−1/2∥w∥0,T + h1/2∥∇w∥0,T ,
+
+and consider the scaling of φf to obtain the desired result.
+□
+
+We then utilize the commuting diagram to establish the energy error estimate for the
+Icurl
+h
+operator.
+
+Lemma 1.6. Assume curl u ∈H1(Ω) and u ∈Dom(Icurl
+h ). Let uI = Icurl
+h u. Then, we
+have the first-order interpolation error estimate
+
+∥∇× (u −uI)∥≲h∥curl u∥1.
+
+Proof. We exploit the commutative property and the fact that Idiv
+h
+preserves constant vec-
+tors to obtain
+
+∥∇× (u −uI)∥= ∥(I −Idiv
+h )∇× u∥= ∥(I −Idiv
+h )(∇× u −c)∥.
+
+Subsequently, by the stability of the Idiv
+h operator, we deduce that
+
+∥(I −Idiv
+h )(∇× u −c)∥≲∥curl u −c∥+ h∥curl u∥1.
+
+As this holds for any arbitrary constant vector c, by selecting c as the average of curl u
+and applying the Poincar´e inequality, we arrive at the desired error estimate.
+□
+
+
+6
+LONG CHEN
+
+Note that obtaining an L2-error estimate for the interpolation error of Icurl
+h
+is nontrivial
+and can be accomplished using an inequality for le(v) on the reference element; see [3,
+Theorem 3.14].
+
+2. FINITE ELEMENT APPROXIMATION
+
+Let V = H0(curl; Ω) and S = H1
+0(Ω). We consider the saddle-point formulation of
+Maxwell’s equations:
+
+(α∇× u, ∇× v) + (βv, ∇p) = (f, v)
+∀v ∈V,
+(3a)
+
+(βu, ∇q) = 0
+∀q ∈S.
+(3b)
+
+Recall that
+−⟨divw(βu), q⟩:= (βu, ∇q)
+∀q ∈H1
+0(Ω),
+and
+X = H0(curl; Ω) ∩ker(divw).
+For the inf-sup condition of (3) using the divergence free subspace X, we refer to Varia-
+tional Formulation of Maxwell’s Equations.
+For finite element approximation, we choose an edge element space Vh ⊂H0(curl; Ω)
+and define the subspace
+Xh = Vh ∩ker(divh),
+where divh : Vh →Sh ⊂H1
+0(Ω) is the discrete weak divergence operator, defined as the
+adjoint of ∇, that is,
+
+(divh vh, ph) = (vh, ∇ph)
+∀ph ∈Sh.
+
+Functions in Xh are referred to as discrete divergence-free, which is not divergence-free.
+Specifically, Xh is not a subspace of X because the test function space is reduced from S
+to a subspace Sh.
+We can elevate vh ∈Xh to X by using the L2-projection QX. That is, v = QXvh ∈X
+satisfies
+(v, ξ) = (vh, ξ)
+∀ξ ∈X.
+Since X is a subspace of L2(Ω), such an L2-projection exists and is unique. The sub-
+sequent result demonstrates that we can elevate a discrete divergence-free function to
+a divergence-free one with a controllable difference.
+In the proof, we require quasi-
+interpolation operators I d
+h satisfying properties outlined in Section 3.
+
+Lemma 2.1. Given vh ∈Xh, let v = QXvh be its L2-projection to X. Then
+
+(1) curl v = curl vh;
+(2) ∥v∥≂∥vh∥;
+(3) ∥v −vh∥≲hs∥curl vh∥.
+
+Proof. We solve a Poisson equation to find p ∈H1
+0(Ω) such that
+
+(∇p, ∇φ) = −(vh, ∇φ)
+∀φ ∈H1
+0(Ω).
+
+Let us define v as
+v = vh + ∇p.
+It is straightforward to demonstrate that v = QXvh by verifying the orthogonality to
+∇H1
+0(Ω):
+
+(4)
+(v −vh, ∇φh) = (∇p, ∇φh) = −(vh, ∇φh) = 0
+∀φh ∈Sh.
+
+The result (1) is trivial since curl (∇p) = 0.
+
+
+FINITE ELEMENT METHODS FOR MAXWELL EQUATIONS
+7
+
+(2) By the definition of L2-projection, ∥v∥≤∥vh∥. We need to control ∥v −vh∥.
+Initially, we assert that ∇× (Icurl
+h v −vh) = 0 as
+
+∇× Icurl
+h v = Idiv
+h (∇× v) = Idiv
+h (∇× vh) = ∇× vh.
+
+Then, by the exactness of the finite element de Rham complex, there exists φh ∈Sh such
+that Icurl
+h v −vh = ∇φh.
+Utilizing the orthogonality from equation (4),
+
+(v −vh, v −vh) = (v −vh, v −Icurl
+h v) + (v −vh, Icurl
+h v −vh) = (v −vh, v −Icurl
+h v),
+
+which implies
+∥v −vh∥≤∥v −Icurl
+h v∥≲∥v∥.
+
+(3) We use the embedding result ∥v∥s ≲∥curl v∥, v ∈X, for some s ∈(1/2, 1] and
+the interpolation error estimate of Icurl
+h
+
+∥v −vh∥≤∥v −Icurl
+h
+v∥≲hs∥v∥s ≲hs∥curl v∥= hs∥curl vh∥.
+
+□
+
+Recall that we have the following Poincar´e inequality (Lemma 4.3) Variational Formu-
+lation of Maxwell’s Equations:
+
+(5)
+∥v∥≲∥curl v∥
+for v ∈X.
+
+We will establish the following discrete Poincar´e inequality on Xh. It is not a simple
+consequence of the Poincar´e inequality (5) as Xh ̸⊂X.
+
+Lemma 2.2 (Discrete Poincar´e Inequality). When Ωis topologically trivial and Th is shape
+regular, then
+∥vh∥≲∥curl vh∥
+for vh ∈Xh.
+
+Proof. We elevate vh to X, that is, v = QXvh, and apply the Poincar´e inequality to v. The
+desired discrete version is derived from the properties of v in Lemma 2.1:
+
+∥vh∥≲∥v∥≲∥curl v∥= ∥curl vh∥.
+
+□
+
+Now, let us consider the finite element discretization of the saddle point formulation:
+find uh ∈Vh, ph ∈Sh such that
+
+(α∇× uh, ∇× vh) + (βvh, ∇ph) = (f, vh)
+∀vh ∈Vh,
+(6)
+
+(βuh, ∇qh) = 0
+∀qh ∈Sh.
+(7)
+
+The discrete inf-sup condition for divh is straightforward because its adjoint ∇: Sh →Vh
+is injective. The coercivity in ker(divh) is guaranteed by the discrete Poincar´e inequality.
+Consequently, the well-posedness of equations (6)-(7) is derived from Brezzi’s theory, and
+we obtain the first-order error estimate. We summarize this in the following theorem.
+
+Theorem 2.3. There exists a unique solution (uh, ph) to (6)-(7). When curl u ∈H1(Ω)
+and p ∈H2(Ω), we have
+
+∥α1/2∇× (u −uh)∥+ ∥β1/2∇(p −ph)∥≲h (∥∇× u∥1 + ∥p∥2) .
+
+When div f = 0, we have both p = ph = 0 and
+
+∥α1/2∇× (u −uh)∥≲h∥∇× u∥1.
+
+
+8
+LONG CHEN
+
+Proof. By Brezzi theory and interpolation error estimate, we have
+
+∥α1/2∇× (u −uh)∥+ ∥β1/2∇(p −ph)∥≲∥∇× (u −uI)∥+ ∥∇(p −pI)∥
+
+≲h (∥∇× u∥1 + ∥p∥2) .
+
+When div f = 0, we have both p = ph = 0.
+□
+
+The symmetric formulation
+
+(8)
+∇× (α∇× u) + βu = f
+in Ω,
+u × n = 0
+on ∂Ω
+
+is simpler and leave as an exercise.
+
+3. DE RHAM COMPLEX AND FINITE ELEMENT DE RHAM COMPLEX
+
+We compile the sequence and the interpolation operators to form the following diagram:
+
+(9)
+
+R
+⊂
+�H1(Ω)
+
+Igrad
+h
+�
+
+grad �H(curl ; Ω)
+
+Icurl
+h
+�
+
+curl �H(div; Ω)
+
+Idiv
+h
+�
+
+div
+�L2(Ω)
+
+IL2
+h
+�
+
+�0
+
+R
+⊂
+�Sh
+grad
+�Vh
+curl
+�Uh
+div
+�Qh
+�0
+
+,
+
+where Sh is the standard linear finite element space, Vh is the lowest-order edge element
+space, Uh is the lowest-order face element space, and Qh is the piecewise constant space.
+In the diagram, the interpolation operators are not the canonical interpolation opera-
+tors, which are not well-defined for H( d; Ω) spaces. We assume the existence of quasi-
+interpolation operators I d
+h with the following properties:
+• dom(I d
+h ) ⊆H( d; Ω);
+• L2-stable: ∥I d
+h v∥≲∥v∥;
+• projection: I d
+h v = v if v is in finite element space;
+• commutative with differential operators d I d−
+h
+= I d
+h d.
+Such operators can be found in [1, page 65-67] and [2].
+
+Exercise 3.1. Prove the commuting diagram
+
+d I d−
+h
+= I d
+h d
+
+when the quasi-interpolation operators I d
+h are replaced by the following cannoical inter-
+polation operators I d
+h :
+
+Igrad
+h
+v(xi) = v(xi),
+�
+
+e
+Icurl
+h
+u · t ds =
+�
+
+e
+u · t ds
+�
+
+f
+Idiv
+h u · n dS =
+�
+
+f
+u · n dS,
+�
+
+T
+IL2
+h v dx =
+�
+
+T
+v dx.
+□
+
+The top sequence in diagram (9) is known as the de Rham complex. This complex
+satisfies the properties: curl grad = 0, div curl = 0, and each operator within the se-
+quence has a closed range. The closed range of each operator implies the existence of a
+corresponding Poincar´e inequality. The sequence is deemed exact if it fulfills the condition
+ker( d) = img( d−), where d−denotes the operator preceding d in the sequence. When
+the domain Ωexhibits trivial topology, meaning it is simply connected and its boundary is
+also connected, one can confirm that the top sequence is indeed exact.
+In a more general context, the quotient space ker( dk+1)/img( dk) is defined as the
+k-th cohomology space of Ω. These cohomology spaces are finite-dimensional vector
+
+
+FINITE ELEMENT METHODS FOR MAXWELL EQUATIONS
+9
+
+spaces, and their dimensions are identified by the Betti numbers βk of the manifold Ω.
+For a bounded connected region in R3, the Betti numbers are characterized as follows:
+β0 = 1 corresponds to the number of connected components, β1 represents the genus (or
+the number of handles), β2 denotes the number of connected components of the boundary
+(or the number of holes), and β3 = 0 for a three-dimensional region.
+We provide further clarification on the concept of exactness. Consider a vector field
+u such that curl u = 0 within a connected domain Ω. Our goal is to identify a scalar
+potential function p satisfying u = grad p. The approach involves utilizing the line integral
+along a curve C that connects a fixed point x0 to a variable point x, expressed as p(x) =
+�
+
+C[x0,x] u(s) · ds. Subsequently, it can be readily confirmed that u = grad p. A classic
+illustration of this is the gravitational field.
+For p to be well-defined, the line integral must be invariant with respect to the path
+chosen. If two curves C1 and C2 share the same endpoints, they delineate the boundary of
+a two-dimensional surface S. Given curl u = 0, Stokes’ theorem can be invoked to deduce
+that
+�
+
+S
+curl u · dS =
+�
+
+∂S
+u · ds =
+�
+
+C1
+u · ds −
+�
+
+C2
+u · ds = 0.
+
+The negative sign arises from the consideration of orientation. A topological restriction
+arises from the fact that not every closed curve is the boundary of a closed surface, such as
+a curve that encircles a hole.
+For a divergence-free vector field u, determining its vector potential φ is a more complex
+task. Specifically, given div u = 0, we seek a vector field φ such that u = curl φ. We will
+omit the detailed process here but note that the existence of such a potential is contingent
+upon the topology of the domain. A relevant physical example is the electric field created
+by a charge located at the origin, given by
+
+u(x, y, z) =
+(x, y, z)
+(x2 + y2 + z2)3/2 .
+
+In this case, div u = 0 everywhere except at the origin. However, u cannot be expressed
+as curl φ because
+�
+
+S u · n dS = 4π for any closed and positively oriented surface S that
+encloses the origin.
+Utilizing the commuting property, we can confirm that the bottom sequence in the di-
+agram will preserve the cohomology, a property that characterizes the finite element de
+Rham complex. In particular, when the domain Ωhas the trivial topology, the finite ele-
+ment de Rham complex is also exact. Given a function vh ∈Vh with curl vh = 0, and
+since Vh ⊂H(curl ; Ω), we can identify a potential p ∈H1(Ω) such that vh = grad p.
+The scalar function p may not be within the finite element space. We define ph = Igrad
+h
+p
+and apply the commuting diagram to deduce that
+
+grad Igrad
+h
+p = Icurl
+h
+grad p = Icurl
+h
+vh = vh.
+
+The verification of the other blocks in the diagram can be carried out in a similar manner.
+Adapting the space to include functions with zero trace is also a straightforward process.
+One more connection is the duality of chain and co-chain complex. We will skip the
+rigorous definition here but point out the boundary operator of the simplex is the adjoint of
+the differential operator in the duality pair, which is known as the Stokes theorem:
+
+⟨dω, f⟩= ⟨ω, ∂f⟩
+
+
+10
+LONG CHEN
+
+grad
+
+grad
+
+curl
+
+curl
+
+div
+
+div
+
+P1
+NE0
+RT0
+P0
+
+H1
+H(curl)
+H(div)
+L2
+
+Igrad
+h
+Icurl
+h
+Idiv
+h
+I0
+h
+
+∂
+∂
+∂
+
+vertices
+edges
+faces
+tetrahedron
+
+FIGURE 5. Commuting diagrams of de Rham complex, finite element
+de Rham complex, and a chain complex.
+
+for differential forms. In computational geometry, the boundary operator is realized by
+the incidence matrix. Fig. 5 shows the beautiful integration of algebraic topology, finite
+element methods, and computational graphics from an interdisciplinary perspective.
+A systematic approach to studying finite element methods through the lens of differ-
+ential forms is recognized as FEEC (finite element exterior calculus). In this context, we
+provide only an introductory overview and direct the reader to the comprehensive survey
+by Arnold, Falk, and Winther [1] for a detailed understanding of the general framework.
+For insights into the more specific application of these methods to the field of electromag-
+netism, we refer to the work of Hiptmair [3].
+
+ACKNOWLEDGMENTS
+
+We express our gratitude to Dr. Shuhao Cao for his enlightening discussions and for his
+assistance in creating the illustrative figures of basis functions. We also extend our thanks
+to Dr. Yongke Wu for his contributions to the proof of the discrete Poincar´e inequality.
+
+REFERENCES
+
+[1] D. N. Arnold, R. S. Falk, and R. Winther. Finite element exterior calculus, homological techniques, and
+applications. Acta Numer., pages 1–155, 2006. 5, 8, 10
+[2] S. H. Christiansen and R. Winther. Smoothed projections in finite element exterior calculus. Math. Comp.,
+77(262):813, 2008. 8
+[3] R. Hiptmair. Finite elements in computational electromagnetism. Acta Numer., pages 237–339, 2002. 6, 10
+[4] P. Monk. Finite Element Methods for Maxwell’s Equations. Oxford University Press, 2003.
+[5] J. N´ed´elec. Mixed finite elements in R3. Numer. Math., 35:315–341, 1980. 1
+[6] J. N´ed´elec. A new family of mixed finite elements in R3. Numer. Math., 50:57–81, 1986. 1
+[7] P. A. Raviart and J. Thomas. A mixed finite element method fo 2-nd order elliptic problems. In I. Galligani
+and E. Magenes, editors, Mathematical aspects of the Finite Elements Method, Lectures Notes in Math. 606,
+pages 292–315. Springer, Berlin, 1977. 4
+
+

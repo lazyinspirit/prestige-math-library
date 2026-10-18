@@ -1,0 +1,1257 @@
+6. Nonlinear problems
+• How should we approach the nonlinear system
+         
+              A(u) = f
+   & can we use MG to solve it?
+• A fundamental relation we’ve relied on is the linear 
+residual equation:
+Au - Av = f - Av   ⇒   Ae = r.
+• We can’t rely on this now  since a nonlinear A(u)  
+generally means
+A(u) - A(v) ≠ A(e).
+HANG ON !!!
+235
+CU-Boulder
+of 396
+The nonlinear residual equation
+   We still base our development around the residual 
+equation, now the nonlinear residual equation:
+A(u) = f
+⇒    A(u) - A(v) = f - A(v) 
+ ⇒    A(u) - A(v) = r
+How can we use this equation as the 
+basis for a solution method?
+236
+
+
+=== PDF PAGE 60 ===
+CU-Boulder
+of 396
+Newton’s method for scalar F: ℜ→ℜ
+Best known & most important nonlinear solver!
+• Expand F  in a Taylor series about x :
+F(x + s) = F(x) + sF’ (x) + s 2F” (ξ). 
+Ex:     (x + s)e (x + s) - 1 = x e x - 1 + s (1 + x) e x + h.o.t.
+• Dropping higher-order terms (h.o.t.), if x + s is a solution,
+0 = F(x) + sF’ (x) ⇒ s = -F(x)/F’ (x). 
+• We thus arrive at Newton’s method:
+x ← x - F(x)/F’ (x)
+•We wish to solve F(x) = 0. 
+Ex:                 F(x) = x e x - 1,         F’ (x) = (1 + x) e x.
+exponent, not error
+237
+CU-Boulder
+of 396
+Newton’s method for systems
+•   Taylor series about v :    A(v + e) = A(v) + J(v)e + h.o.t.
+• Ex:  - u ”(x) + u(x) e u(x) = f may be discretized  as
+error, not exponent
+Jacobian
+238
+A(u) ≡
+
+
+
+
+
+a1(u)
+a2(u)
+...
+an−1(u)
+
+
+
+
+≡
+
+
+
+
+
+
+
+
+2u1−u2
+h2
++ u1eu1
+...
+−ui−1+2ui−ui+1
+h2
++ uieui
+...
+−un−2+2un−1
+h2
++ un−1eun−1
+
+
+
+
+
+
+
+
+=
+
+
+
+
+
+
+
+
+f(x1)
+...
+f(xi)
+...
+f(xn−1)
+
+
+
+
+
+
+
+
+≡f.
+J(v) ≡
+!∂ai(u)
+∂uj
+"
+u=v
+=
+
+
+
+
+
+
+
+
+2
+h2 + (1 + v1)ev1
+−1
+h2
+...
+−1
+h2
+2
+h2 + (1 + vi)evi
+−1
+h2
+...
+−1
+h2
+2
+h2 + (1 + vn−1)evn−1
+
+
+
+
+
+
+
+
+.
+
+
+
+
+
+a1(u1, u2, ..., un−1)
+a2(u1, u2, ..., un−1)
+...
+aN(u1, u2, ..., un−1)
+
+
+
+
+=
+
+
+
+
+
+f1
+f2
+...
+fn−1
+
+
+
+
+.
+J(v) =
+! ∂ai
+∂uj
+(v)
+"
+.
+CU-Boulder
+of 396
+Newton for systems
+• The system A(u) = f in vector form is
+•   Expanding A(v + e) in a Taylor series about v :
+A(v + e) = A(v) + J(v)e + h.o.t.
+239
+CU-Boulder
+of 396
+Newton for systems (cont’d)
+• J(v) is the Jacobian
+• If  u = v + e is a solution, f = A(v) + J(v)e + h.o.t., so  
+                           e ≈ [J(v)]-1(f - A(v)).
+• This leads to the iteration
+v  ←  v + [J(v)]-1(f - A(v))
+240
+J(v) =
+
+
+
+
+
+
+∂a1
+∂u1
+∂a1
+∂u2
+· · ·
+∂a1
+∂un−1
+∂a2
+∂u1
+∂a2
+∂u2
+· · ·
+∂a2
+∂un−1
+...
+...
+...
+...
+∂an−1
+∂u1
+∂an−1
+∂u2
+· · ·
+∂an−1
+∂un−1
+
+
+
+
+
+
+u=v
+.
+
+
+=== PDF PAGE 61 ===
+CU-Boulder
+of 396
+Newton’s via the residual equation
+• The nonlinear residual equation is
+A(v + e) - A(v) = r.
+• Expanding A(v + e) in a two-term Taylor series about v  
+& ignoring h.o.t.:
+A(v) + J(v) ê - A(v) = r
+    or
+J(v) ê = r.
+• Newton’s method is thus:
+v  ←  v + [J(v)]-1 r,     r = f - A(v)
+ê ≈ e
+241
+CU-Boulder
+of 396
+How does multigrid fit in?
+• One obvious method is to use multigrid to solve    
+J(v) ê = r at each iteration step. This method is 
+called Newton-MG & can be very effective.
+• However, we might want to use multigrid ideas to 
+treat the nonlinearity directly.
+• To do that, we need to specialize multigrid 
+components (relaxation & coarsening) for the 
+nonlinear case.
+242
+CU-Boulder
+of 396
+What is nonlinear relaxation?
+• Nonlinear Gauss-Seidel:
+   For each i = 1, 2, …, n-1 :
+      Change the value of vi so that the ith equation 
+      is satisfied:   (A(v))i = fi .
+• Equivalently:
+   For each i = 1, 2, …, n-1 :
+      Find s ∈  such that (A(v + s εi))i = fi,
+ where  εi is the ith canonical unit basis vector. 
+A(u) = f
+243
+CU-Boulder
+of 396
+How is nonlinear Gauss-Seidel done?
+• Each (A(v))i = fi is a nonlinear scalar equation for vi. 
+We can use the scalar Newton’s method to solve! 
+• Example:  - u”(x) + u(x) eu(x) = f may be discretized  
+so that (A(v))i = fi is given by
+•  Newton iteration for vi is given by
+f
+e
+v
+v
+v
+h
+i
+v
+i
+h
+v
+v
+v
+i
+i
++
+−
++
+−
+←
+−
++
+−
+i
+i
+i
+i
++
+−
+2
+2
+1
+1
+2
+2
+vi)
++
+( 1
+iv
+e
+=
++
+−
++
+−
+f
+v
+h
+v
+v
+v
+i
+v
+i
+i
+i
+i
++
+−
+2
+1
+1
+2
+i
+e
+1 ≤i ≤n −1
+244
+
+
+=== PDF PAGE 62 ===
+CU-Boulder
+of 396
+How do we coarsen
+for nonlinear multigrid?
+• Recall the nonlinear residual equation
+A(v + e) - A(v) = r.
+• In multigrid, we obtain an approximate 
+solution vh on the fine grid, then solve the 
+residual equation on the coarse grid.
+• The residual equation on Ω2h appears as 
+A2h (v2h + e2h) - A2h(v2h) = r2h.
+245
+A2h ?  
+r2h ?
+v2h ?!
+h
+  I2hrh !
+We should have a routine for that.
+h
+  I2hvh !
+CU-Boulder
+of 396
+Look at the coarse residual equation
+• We must evaluate the quantities on Ω2h in
+A2h (v2h + e2h) - A2h (v2h) = r2h.
+• Given vh, a fine-grid approximation, we restrict 
+the residual to the coarse grid:  
+                                                           .
+• For v2h, we restrict vh  by                    .
+v
+A
+f
+I
+v
+I
+A
+e
+v
+I
+A
+2
+2
+2
+2
+2
+2
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+)
+)
+(
+−
+(
++
+)
+(
+=
+)
++
+(
+Thus,
+246
+v
+A
+f
+I
+v
+I
+A
+e
+v
+I
+A
+2
+2
+2
+2
+2
+2
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+−
+(
+)
+)
+(
+(
+(
+)
+)
++
+=
+−
+CU-Boulder
+of 396
+We’ve obtained a coarse-grid 
+equation of the form A2h(u2h) = f2h
+• Consider the coarse-grid equation:
+• We solve                      for                            &  
+obtain
+• We then apply the correction:      
+f 2h
+all quantities are known
+coarse-grid unknown
+e
+I
+v
+v
+h
+h
+h
+h
+h
++
+←
+2
+2
+247
+CU-Boulder
+of 396
+Full approximation scheme (FAS)
+2-grid form
+• Perform nonlinear relaxation  on                     to 
+obtain an approximation     .
+• Restrict the approximation & its residual:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+.
+• Solve the coarse-grid equation:
+• Extract 2h approximation to h error:
+     .
+• Interpolate & correct:
+ 
+ 
+ 
+ 
+ 
+ 
+  .
+e
+I
+v
+v
+h
+h
+h
+h
+h
++
+←
+2
+2
+A2h(u2h) = A2h(v2h)+ r2h= Ih
+2h f h + A2h(Ih
+2hvh)−Ih
+2hAh(vh).
+v
+A
+f
+I
+r
+2
+2
+h
+h
+h
+h
+h
+)
+)
+(
+−
+(
+=
+h
+248
+
+
+=== PDF PAGE 63 ===
+CU-Boulder
+of 396
+A few observations about FAS
+• If A is a linear operator, then FAS reduces directly to 
+the linear two-grid correction scheme:
+• An exact solution to the fine-grid problem is a fixed 
+point of the FAS iteration:
+0
+0
+249
+CU-Boulder
+of 396
+A few more observations about FAS
+• The FAS coarse-grid equation can be written as
+    where                                      is the so-called tau 
+correction term &       is the original 2h source term, 
+provided  you choose it that way: 
+ 
+ . 
+• In general, since             , the solution       to the FAS 
+coarse-grid equation is not the same as the solution 
+to the original coarse-grid problem        
+                                                       
+• The tau correction is as a way to alter the coarse-
+grid equation to enhance its approximation properties. 
+τh2h
+A(Pvh)-PA(vh)
+250
+f
+=I 2
+h
+h
+h
+f 2h
+f 2h
+τ h
+2h = A2h(Ih
+2hvh) −Ih
+2hA2h(vh)
+.
+CU-Boulder
+of 396
+Still more observations about FAS
+• A true multilevel FAS process is recursive, using 
+FAS to solve the nonlinear Ω2h problem using Ω4h. 
+• Hence, FAS is generally employed in a V- or W-
+cycling scheme.
+251
+CU-Boulder
+of 396
+Even more observations about FAS
+• For linear problems, we use FMG to obtain a good 
+initial guess on the fine grid.  Convergence of 
+nonlinear iterations depends critically on having a 
+good initial guess.
+• When FMG is used for nonlinear problems, the 
+interpolant              is generally accurate enough 
+to be in the basin of attraction of the fine-grid 
+solver.
+• Thus, whether FAS, Newton, or Newton-multigrid 
+is used on each level, one FMG cycle should provide 
+a solution accurate to the level of discretization, 
+unless the nonlinearity is extremely strong. 
+252
+
+
+=== PDF PAGE 64 ===
+CU-Boulder
+of 396
+Intergrid transfers for FAS
+• Generally speaking, the standard operators (linear 
+interpolation, full weighting) work effectively in 
+FAS schemes.
+• For strongly nonlinear problems or for the coarse-
+grid approximation that is to become a fine-grid 
+initial guess, higher-order interpolation (e.g., cubic 
+interpolation) may be beneficial.
+253
+CU-Boulder
+of 396
+What is A2h(u2h) in FAS?
+As in the linear case, there are two basic possibilities:
+1.  A2h(u2h) is determined by discretizing the nonlinear 
+operator, A(u), in the same fashion as was employed 
+to obtain Ah(uh),  except that the coarser mesh 
+spacing is used.
+2.  A2h(u2h) is determined from the Galerkin condition
+A2h(u2h)= I 2hA2h(I2hu2h) 
+ 
+where the action of the Galerkin product can be 
+captured in an implementable formula.  
+h
+h
+254
+The first method is usually easier & more common.
+CU-Boulder
+of 396
+Example: Newton-MG vs. FAS
+• PDE
+- u”(x) + u(x) eu(x) = f(x).
+• Discretization:
+                                                              .
+=
++
+−
++
+−
+f
+e
+v
+h
+v
+v
+v
+j
+v
+j
+j
+j
+j
++
+−
+2
+1
+1
+2
+j
+(er, ODE):
+255
+CU-Boulder
+of 396
+One Newton-MG step
+• Step 0. Given v, form the grid h linear correction equation:
+ Initialize the Newton correction approximation: e = 0. 
+• Step 1: Relax on the grid h linear equation. 
+• Step 2: Solve the grid 2h error correction equation:
+• Step 3: Correct the grid h Newton correction:
+• Step 4: Stop if you’ve “solved” the linear equation well 
+enough for Newton correction e & set v ← v + e.   Else,   
+leave v alone & return to Step 1.
+−ej−1 + 2ej −ej +1
+h
+2
++ (1+ vj )e
+vj ej = rj ≡f j −
+−vj−1 + 2vj −vj +1
+h
+2
++ vje
+vj
+( 
+) 
+−ej−1
+2h + 2ej
+2h −ej +1
+2h
+(2h)
+2
++ (1+ v2j)e
+v 2jej
+2h = r2 j −(
+−e2 j−1 + 2e2 j −e2 j +1
+h
+2
++ (1+ v2 j )e
+v2j e2 j)
+e ←e + I2h
+ h e
+2 h
+256
+unknowns
+unknowns
+
+
+=== PDF PAGE 65 ===
+CU-Boulder
+of 396
+One FAS step
+• Step 0. Given v, form the grid h nonlinear equation:
+• Step 1: Relax on the grid h nonlinear equation to improve v.
+•  
+• Step 2: Solve the grid 2h FAS correction equation:
+• Step 3: Correct the grid h approximation v :
+257
+unknowns
+v ←v + I2h
+ h e
+2 h
+=
++
+−
++
+−
+f
+e
+v
+h
+v
+v
+v
+j
+v
+j
+j
+j
+j
++
+−
+2
+1
+1
+2
+j
+−ej−1
+2h + 2ej
+2h −ej +1
+2h
+(2h)
+2
++ v2 j
+h + ej
+2h
+(
+)e
+v2 j
+h +e j
+2h
+−v2 j
+h e
+v2 j
+h
+= Ih
+2h r
+h
+(
+)j
+f
+e
+v
+v
+v
+h
+j
+v
+j
+h
+v
+v
+v
+j
+j
++
+−
++
+−
+←
+−
++
+−
+j
+j
+j
+j
++
+−
+2
+2
+1
+1
+2
+2
+vj)
++
+(1
+jv
+e
+CU-Boulder
+of 396
+Nonlinear problems: 2d example
+• Consider 
+    on the unit square, [0,1] x [0,1], with homogeneous 
+Dirichlet boundary conditions & a regular h = 1/128 
+Cartesian grid.
+• Suppose the exact solution is
+        
+ 
+ 
+ 
+ 
+  .
+−Δu(x,y) + γu(x,y) eu(x,y) = f (x,y)
+258
+CU-Boulder
+of 396
+Discretization of the nonlinear example
+• The operator can be written (sloppily) as
+• Relaxation (nonlinear Gauss-Seidel) is given by
+v
+v
+v
+v
+h j
+i
+h
+h j
+i
+h j
+i
+,
+j
+i,
+,
+,
+)
++
+(
+γ
++
+f
+j
+i,
+−
+v
+A
+h
+h
+)
+)
+(
+(
+−
+←
+4
+2
+1
+j
+i,h
+e
+e
+j
+i,
+v
+A
+h
+h
+)
+)
+(
+(
+259
+ |
+CU-Boulder
+of 396
+FAS & Newton’s method on 
+• FAS V(2,1)-cycles until ||r|| < 10-10.
+• Newton’s Method with exact inner solves until ||r|| < 10-10.
+n = 128
+convergence factor is for the last cycle
+−Δu(x,y) + γu(x,y) eu(x,y) = f (x,y)
+1
+10
+100
+1000
+convergence factor
+0.135
+0.124
+0.098
+0.072
+number of FAS cycles
+12
+11
+11
+10
+1
+10
+100
+1000
+convergence factor 4.00E-05 7.00E-05 3.00E-04 2.00E-04
+number of Newton iterations
+3
+3
+3
+4
+260
+
+
+=== PDF PAGE 66 ===
+CU-Boulder
+of 396
+Newton, Newton-MG, & FAS on
+•
+Newton uses exact solves, Newton-MG is with a fixed 
+number of inner V(2,1)-cycles for  the Jacobian problem, 
+overall stopping criterion ||r|| < 10-10.  
+n = 128,  γ  = 10
+261
+−Δu(x,y) + γu(x,y) eu(x,y) = f (x,y)
+CU-Boulder
+of 396
+Compare FMG-FAS & FMG-Newton-MG
+ 
+• We do one FMG cycle using one FAS V(2,1) -cycle 
+as the “solver” at each new level.  We then follow 
+that with as many FAS V(2,1)-cycles as is needed to 
+obtain ||r|| < 10-10.
+• Next, we do one FMG cycle using a Newton-MG 
+step at each new level (with one linear V(2,1)-cycle 
+as the Jacobian  “solver.”)  We then follow that with 
+as many Newton-multigrid steps as is needed to 
+obtain ||r|| < 10-10.
+262
+Don’t try this at home !!!
+−Δu(x,y) + γu(x,y) eu(x,y) = f (x,y)
+CU-Boulder
+of 396
+Compare FMG-FAS & FMG-Newton-MG
+ 
+n = 128,  γ  = 10
+u(h) −vh
+h
+u(h) −vh
+h
+rh
+h
+rh
+h
+263
+Done !!!
+−Δu(x,y) + γu(x,y) eu(x,y) = f (x,y)
+CU-Boulder
+of 396
+Remembering coarse-grid correction
+• Relax (damped Jacobi) to smooth e = u - v :
+v ← v - ωD-1(Av - f).
+• Form the residual equation Ae = r :
+Ae = A(u - v) = f - Av = r.
+• Use premise that smooth error ⇒ e = I2he2h :
+AI2he2h = r. 
+• Use transpose I 2h = (I2h)T to reduce equations:
+I2hAI2h e2h = I2hr.
+h
+h
+h
+h
+h
+h
+h
+I2h ↑
+fewer unknowns
+fewer equations
+h
+A2h
+264
+
+
+=== PDF PAGE 67 ===
+CU-Boulder
+of 396
+Motivating FAS for nonlinear A
+ A(v + e) = f  →  A2h(v2h + e2h) = “f2h ”
+• What overriding principle can we find to get from h to 2h ?
+• With known v, how do we discretize a PDE of the form 
+ 
+ 
+ 
+ 
+      A(v + e) = f ?
+• Example:  
+γuu’ - u’’ = f   →  γ (v + e) (v + e)’ - (v + e)’’ = f.
+• Expand to get an equation in e of form g + ae + be’ + …:
+γvv’ - v’’ + γ (v’e + ve’ + ee’ ) - e’’ = f.
+A(v)
+?
+?
+265
+CU-Boulder
+of 396
+Differential residual equation
+ γ (v’e + ve’ + ee’ ) - e’’ = f - A(v) ≡ r(v) 
+• Right side (analogous to injection):  
+r(v) → rj
+h = r(xj).
+• Coefficients:  
+v → vj
+h = v(xj),      v’ → (v’)j
+h = (v(xj+1) - v(xj-1))/(2h).
+• Unknowns:  
+e → ej
+h,       e’ → (e’)j
+h = (ej+1 - ej-1)/(2h),
+e’’ → (e’’)j
+h = (ej+1 - 2ej + ej-1)/h2.
+h
+h
+h
+h
+h
+266
+CU-Boulder
+of 396
+Leading to FAS…
+γuu’-u’’ = f → A(v+e) = f → γ (v’e+ve’+ee’ )-e’’ = f-A(v)
+• Fine-grid residual equation (at h point 2j):
+• Coarse-grid residual equation (at 2h point j):
+• FAS
++γv2 j
+h e2 j +1
+h
+−e2 j−1
+h
+2h
+−e2 j +1
+h
++ 2e2 j
+h −e2 j−1
+h
+h
+2
++
+γ
+e2 j
+h
+v2 j +1
+h
+−v2 j−1
+h
+2h
++γe2 j
+h e2 j +1
+h
+−e2 j−1
+h
+2h
+= r2 j
+h
+−ej +1
+2h + 2ej
+2h −ej−1
+2h
+(2h)
+2
++γv2j
+h ej +1
+2h −ej−1
+2h
+4h
++
+γ
+ej
+2h
+v2j+2
+h −v2j −2
+h
+4h
++
+γej
+2h ej +1
+2h −ej−1
+2h
+4h
+= Ih
+2h r
+h
+(
+)j
+v
+A
+f
+I
+v
+I
+A
+e
+v
+I
+A
+2
+2
+2
+2
+2
+2
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+)
+)
+(
+−
+(
+=
+)
+(
+−
+)
++
+(
+267
+CU-Boulder
+of 396
+Outline
+√
+•
+Model Problems
+•
+Basic Iterative Methods
+–
+Convergence tests
+–
+Analysis
+•
+Elements of Multigrid
+–
+Relaxation
+–
+Coarsening
+•
+Implementation
+–
+Complexity
+–
+Diagnostics
+•
+Some Theory
+–
+Spectral vs. algebraic
+•
+Nonlinear Problems
+–
+Full approximation scheme
+•
+Selected Applications
+–
+Neumann boundaries
+–
+Anisotropic problems
+–
+Variable meshes
+–
+Variable coefficients 
+•
+Algebraic Multigrid (AMG)
+–
+Matrix coarsening
+•
+Multilevel Adaptive Methods
+–
+FAC
+•
+Finite Elements
+–
+Variational methodology
+√
+√
+√
+√
+√
+268
+Homework Due !
+Chapters 1-5:                               Chapters 6-10:
+
+
+=== PDF PAGE 68 ===
+CU-Boulder
+of 396
+7a. Neumann boundary conditions
+• Consider the 1-D problem
+- u”(x) = f(x),   0 < x < 1,
+u’(0) = u’(1) = 0.
+• We discretize on the interval [0,1] with h = 1/n         
+grid spacing & nodes xj = jh,  j = 0,1,2, …, n. 
+• We extend the interval with two ghost points: 
+7. Selected applications

@@ -1,0 +1,253 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "24",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "lem-square-root-kalman-measurement-block-factor-identity",
+      "model": "gpt-6-luna",
+      "context_sha256": "573a4875815dbf9f70c1588d43f80c1a3976673d77c093b15ad0f2a259292582",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 omitted the supplier's Gaussian prior, mutual independence of U,q,r, and equations X=FU+q,Y=HX+r. Independent noises alone are insufficient: U=r~N(0,1),q=0,F=H=1 gives actual conditional variance 0 rather than the claimed 1/2. Restored the full hypotheses. This is nonfatal because the Statement is the deterministic block-factor identity, proved correctly without the optional Gaussian interpretation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-finite-budget-square-root-kalman-filter",
+      "model": "gpt-6-luna",
+      "context_sha256": "a56dbe15feca750c7b543562654b435cae332cd3f86ec32aa05018d5ecf35d9b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The called Householder procedure requires floating-point entries, but raw real L_Q and L_R were copied into its input. Scalar L_Q=sqrt(2),F=0,L0=0,H=LR=1 is admissible yet outside that supplier domain. Added checked conversion at every supplied-scalar read, including prearray copies, with deterministic ordering and first range-failure. This repairs the dependency-domain violation without narrowing the finite-real input domain; T=0 remains an immediate untouched return.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-square-root-kalman-finite-procedure-status",
+      "model": "gpt-6-luna",
+      "context_sha256": "ee79e7985bfed9ba6d8e6861e8f7ed91eaeda57b67dd33ba0af2a754e2b1d1cb",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Algorithm step 3 solves lower-triangular L11 z=v by forward substitution, exactly as F3 specifies. Step 1.2's upper-triangular wording was a nonfatal descriptive typo. Corrected it and checked the prior zero-diagonal failure branch. Steps 1.1 and 3.1 now explicitly cover input conversions: one rounding per supplied read/copy preserves termination and all stated operation orders, with no conversions at T=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-square-root-kalman-measurement-block-factor-identity",
+      "disposition": "repaired",
+      "post_sha256": "45805ee8eadb2f3548b766157db276c1993ed82e5dfd585a0db9eba270788555",
+      "review_context_sha256": "f646f8016995ffe82cf74e7bead10ba2d7aa2a90ba8973637c0eaa49ac6e677a",
+      "reason": "Checked the padded prearray Gram blocks, whole-column sign flips, invertibility from S>0, Schur covariance and mean solve, including arbitrary rank and empty blocks. Repaired only F2 to state the complete local Gaussian-conditioning hypotheses; step 4.1 now cites them accurately. Statement unchanged; no propagation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-finite-budget-square-root-kalman-filter",
+      "disposition": "repaired",
+      "post_sha256": "d1ef3d0862dcfef02a2e39a4452a6cda654ef2ca1f4ed28cd5a3c4e75edf69ac",
+      "review_context_sha256": "69d354d658b14d5d8f3b8e44791324ee53e77376e5be95d0861a3e013b9751cc",
+      "reason": "Checked the complete procedure against its model, exact Kalman, QR, floating arithmetic, reflector and triangular-solve suppliers. Checked read conversions ensure every Householder operand is representable or execution returns range-failure. Padding, zero-column branches, whole-column signs and lower-triangular solves remain valid; exact arithmetic retains the original mean/covariance map and inherited AC boundary. Conversion errors belong in certified local defects. Definition changed; four direct item consumers and both owning pages were examined.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-square-root-kalman-finite-procedure-status",
+      "disposition": "repaired",
+      "post_sha256": "924066998261429e1cdc453ac5b3f10e6664c2600dab11e68d6342c9899e46b4",
+      "review_context_sha256": "4bb7a672c34004cb86b16ea933159834c3ce0af052009baa18700d9aa12bc4aa",
+      "reason": "Checked finite product/QR/forward-solve loops and first-status returns. QR costs O(MN^2); the stated prediction and measurement terms dominate products, padding, signs and solves. Added read conversions cost at most a constant per operand/copy and leave T=0 at O(1). Repaired the triangular orientation and proof accounting, with Statement unchanged. This is the repairer's review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-square-root-kalman-finite-procedure-status",
+    "thm-square-root-kalman-finite-horizon-perturbation-bound",
+    "ex-square-root-kalman-singular-prior-positive-innovation",
+    "ex-square-root-kalman-nearly-noiseless-solve-sensitivity"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-square-root-kalman-measurement-block-factor-identity",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "F2 omitted the supplier's Gaussian prior, mutual independence of U,q,r, and equations X=FU+q,Y=HX+r. Independent noises alone are insufficient: U=r~N(0,1),q=0,F=H=1 gives actual conditional variance 0 rather than the claimed 1/2. Restored the full hypotheses. This is nonfatal because the Statement is the deterministic block-factor identity, proved correctly without the optional Gaussian interpretation.",
+      "location": "facts-block",
+      "class": "accuracy",
+      "subclass": "citation-truncated",
+      "item": "lem-square-root-kalman-measurement-block-factor-identity",
+      "disposition": "fixed",
+      "before_guard_sha256": "8a33bd91c596ba23d5fccb47d544bde5590c1c7130c2678319f27c0e25f1befe",
+      "post_sha256": "45805ee8eadb2f3548b766157db276c1993ed82e5dfd585a0db9eba270788555",
+      "adjudication_ref": {
+        "id": "lem-square-root-kalman-measurement-block-factor-identity",
+        "model": "gpt-6-luna",
+        "context_sha256": "573a4875815dbf9f70c1588d43f80c1a3976673d77c093b15ad0f2a259292582",
+        "outcome": "confirmed_nonfatal"
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-finite-budget-square-root-kalman-filter",
+      "severity": "fatal",
+      "status": "fixed",
+      "defect_type": "dependency_citation",
+      "reason": "The called Householder procedure requires floating-point entries, but raw real L_Q and L_R were copied into its input. Scalar L_Q=sqrt(2),F=0,L0=0,H=LR=1 is admissible yet outside that supplier domain. Added checked conversion at every supplied-scalar read, including prearray copies, with deterministic ordering and first range-failure. This repairs the dependency-domain violation without narrowing the finite-real input domain; T=0 remains an immediate untouched return.",
+      "location": "definition",
+      "class": "accuracy",
+      "subclass": "ill-typed-construction",
+      "item": "alg-finite-budget-square-root-kalman-filter",
+      "disposition": "fixed",
+      "before_guard_sha256": "7d9f1b689582b870ed1edaf77dd9d3e5c4715f1fe845696962d18a185dde9c2b",
+      "post_sha256": "d1ef3d0862dcfef02a2e39a4452a6cda654ef2ca1f4ed28cd5a3c4e75edf69ac",
+      "adjudication_ref": {
+        "id": "alg-finite-budget-square-root-kalman-filter",
+        "model": "gpt-6-luna",
+        "context_sha256": "a56dbe15feca750c7b543562654b435cae332cd3f86ec32aa05018d5ecf35d9b",
+        "outcome": "confirmed_fatal"
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-square-root-kalman-finite-procedure-status",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "step": "1.2",
+      "reason": "Algorithm step 3 solves lower-triangular L11 z=v by forward substitution, exactly as F3 specifies. Step 1.2's upper-triangular wording was a nonfatal descriptive typo. Corrected it and checked the prior zero-diagonal failure branch. Steps 1.1 and 3.1 now explicitly cover input conversions: one rounding per supplied read/copy preserves termination and all stated operation orders, with no conversions at T=0.",
+      "location": "proof-step",
+      "class": "accuracy",
+      "subclass": "other",
+      "item": "thm-square-root-kalman-finite-procedure-status",
+      "disposition": "fixed",
+      "before_guard_sha256": "37fc3962b24adb48bd8866aba7c28af320bc943151526b65c60c946c557961bd",
+      "post_sha256": "924066998261429e1cdc453ac5b3f10e6664c2600dab11e68d6342c9899e46b4",
+      "adjudication_ref": {
+        "id": "thm-square-root-kalman-finite-procedure-status",
+        "model": "gpt-6-luna",
+        "context_sha256": "ee79e7985bfed9ba6d8e6861e8f7ed91eaeda57b67dd33ba0af2a754e2b1d1cb",
+        "outcome": "confirmed_nonfatal"
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "validation": [
+      "Each review-contexts call ran immediately after its mathematical review and before the next item edit; all exited 0. Captured hashes are preserved in reviews.",
+      "node tools/tsx-run.mjs tools/precheck.mts items/lem-square-root-kalman-measurement-block-factor-identity.md items/alg-finite-budget-square-root-kalman-filter.md items/thm-square-root-kalman-finite-procedure-status.md --json: exit 0; 2 proofs pass, algorithm not-applicable, 0 failures.",
+      "node tools/rendercheck.mjs items/lem-square-root-kalman-measurement-block-factor-identity.md items/alg-finite-budget-square-root-kalman-filter.md items/thm-square-root-kalman-finite-procedure-status.md --json: exit 0; checked 3, no errors or warnings.",
+      "node tools/proof-layout.mjs items/lem-square-root-kalman-measurement-block-factor-identity.md items/alg-finite-budget-square-root-kalman-filter.md items/thm-square-root-kalman-finite-procedure-status.md: exit 0; 3 items, 9 steps, 0 defects. Ran once after all final item edits.",
+      "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-24.proof-contracts.json --strict --items lem-square-root-kalman-measurement-block-factor-identity,alg-finite-budget-square-root-kalman-filter,thm-square-root-kalman-finite-procedure-status,ex-square-root-kalman-singular-prior-positive-innovation --json: exit 0; checked 4, no errors or warnings.",
+      "Shared metadata lock acquired as step5-v2-initial-r1-u24; current files reread, owning mirrors updated and checked, lock released. No research or waiting while holding it.",
+      "Report check: JSON.stringify(frozen initial-1 pack) SHA-256 equals input_sha256; exactly all 3 rejected tuples present; all 3 review post hashes equal current itemHashGuard."
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary downstream owner routing/certification/rejudgment remain engine-owned. The unrelated Schur-lemma presentation finding is routed separately to its frontier owner.",
+    "downstream_examinations": [
+      {
+        "supplier": "alg-finite-budget-square-root-kalman-filter",
+        "id": "thm-square-root-kalman-finite-procedure-status",
+        "path": "items/thm-square-root-kalman-finite-procedure-status.md",
+        "affected_use": "Statement: For every finite admissible input to [[alg-finite-budget-square-root-kalman-filter]]; proof 1.1–1.3 and 3.1 compose the product, QR and solve schedules and count work.",
+        "invalidated_claim": "No Statement claim is invalidated: the newly declared read conversions require explicit finite-status and cost accounting in the proof.",
+        "minimality": "Amended proof 1.1 and 3.1 to count at most one rounding per input read/copy and retain the immediate T=0 return. Corrected its independently rejected orientation typo in 1.2. Statement unchanged; propagation stops.",
+        "disposition": "assigned-proof-repaired"
+      },
+      {
+        "supplier": "alg-finite-budget-square-root-kalman-filter",
+        "id": "thm-square-root-kalman-finite-horizon-perturbation-bound",
+        "path": "items/thm-square-root-kalman-finite-horizon-perturbation-bound.md",
+        "affected_use": "Statement assumes certified local defects ||P_hat_k^--(F_k P_hat_(k-1) F_k^T+Q_k)||_2 <= e_k^P and ||J_hat_k-J_k(P_hat_k^-)||_2 <= e_k^J, plus mean, innovation, solve and update defects, for the procedure outputs.",
+        "invalidated_claim": "None. The conditional inequalities are against the original exact target arrays and are not claims that conversion costs zero error.",
+        "minimality": "No edit: input rounding must be included when certifying e_k^P,e_k^J,e_k^m,e_k^v and Delta_0; the proof only uses the certified defects and the represented block Gram identities. Its Schur/resolvent and scalar recurrence arguments are independent of how those defects arose. F3 invokes the prearray estimate only with its actual formation/input-error hypotheses. Statement unchanged; propagation stops.",
+        "disposition": "examined-unaffected"
+      },
+      {
+        "supplier": "alg-finite-budget-square-root-kalman-filter",
+        "id": "ex-square-root-kalman-singular-prior-positive-innovation",
+        "path": "items/ex-square-root-kalman-singular-prior-positive-innovation.md",
+        "affected_use": "Given: the exact factor update of [[alg-finite-budget-square-root-kalman-filter]]. F1 uses prediction concatenation and F2 uses the measurement block array with scalar L0=LQ=0, LR=1, m0=2,F=H=1,y=7.",
+        "invalidated_claim": "None. The example explicitly uses the exact map, whose initialization, prediction, measurement and factor extraction are unchanged.",
+        "minimality": "No edit: exact arithmetic removes the added rounding just as it removes the previous rounded products. The scalar Gram calculation and zero posterior factor remain valid. It asserts no unconditional floating-point success. Example unchanged; propagation stops.",
+        "disposition": "examined-unaffected"
+      },
+      {
+        "supplier": "alg-finite-budget-square-root-kalman-filter",
+        "id": "ex-square-root-kalman-nearly-noiseless-solve-sensitivity",
+        "path": "items/ex-square-root-kalman-nearly-noiseless-solve-sensitivity.md",
+        "affected_use": "Given: the exact factor mean update of [[alg-finite-budget-square-root-kalman-filter]]. Proof 2.1 assumes L11^2=S, L21 L11=B, and a prescribed solve residual rho=10^-9 with no other mean-update error.",
+        "invalidated_claim": "None. This is an exact block-factor sensitivity calculation with a stipulated residual, not a claim that the full floating execution has zero conversion defects.",
+        "minimality": "No edit: K=B/S and induced mean error K*rho=1/1000001 remain exact under the stated experiment. The gain-residual term in the perturbation theorem remains conditional on certified defects. Example unchanged; propagation stops.",
+        "disposition": "examined-unaffected"
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/numerical-linear-algebra-and-approximation/square-root-covariance-update-error-and-stability.md",
+        "affected_use": "The page lists the algorithm and describes rectangular factors, positive innovations, local rounding bounds and finite-horizon propagation conditioned on Schur and solve estimates.",
+        "disposition": "unaffected",
+        "reason": "Checked conversions preserve that interface, all ranks, the finite horizon and the stated conditioning caveats. No exact numerical output or conversion-free guarantee occurs in page prose."
+      },
+      {
+        "path": "library/numerical-linear-algebra-and-approximation/square-root-covariance-update-error-and-stability-examples.md",
+        "affected_use": "The examples page describes the four witnesses without specifying a conversion schedule.",
+        "disposition": "unaffected",
+        "reason": "Exact-map examples and the explicitly prescribed binary witness are unchanged."
+      }
+    ],
+    "interface_comparison": {
+      "lem-square-root-kalman-measurement-block-factor-identity": "Direct comparison with the original owning manifest Statement: unchanged; only F2 changes.",
+      "alg-finite-budget-square-root-kalman-filter": "Direct comparison with the original owning manifest Definition: added the checked input-read conversion paragraph and floating-point-entry precondition on the internal QR call; all original clauses retained. Every direct dependency/reference item consumer is listed in downstream.",
+      "thm-square-root-kalman-finite-procedure-status": "Direct comparison with the original owning manifest Statement: unchanged; only proof steps 1.1,1.2,3.1 change."
+    },
+    "outside_lane_findings": [
+      {
+        "id": "lem-square-root-kalman-schur-perturbation-bound",
+        "path": "items/lem-square-root-kalman-schur-perturbation-bound.md",
+        "route": "frontier owner, batch 24",
+        "severity": "nonfatal",
+        "affected_use": "Proof steps 3.1 and 4.1 say steps 1.1–1.2, but the actual inverse-difference estimate is step 2.1; the trailing tags already cite step 2.1.",
+        "invalidated_claim": "No bound is invalidated; the two prose cross-references name a nonexistent step 1.2.",
+        "minimality": "Replace only the two prose references 1.1–1.2 by 1.1 and 2.1. Outside this unit assignment: not edited.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    ],
+    "published_consumer_findings": [],
+    "published_ledger_update": "None proposed: no published item directly consumes the changed algorithm Definition; no potentially defective published consumer was found.",
+    "source_reading": "Familiar finite matrix algebra, Gaussian conditioning and scalar-loop accounting; no external source reading is claimed. Consulted the complete current local Gaussian one-step proof, model definition, exact Kalman procedure and posterior proof, QR definition/construction proof, floating arithmetic model, reflector procedure/termination proof, triangular solve definition, prediction identity, and the actual direct consumers.",
+    "repair_complete": true,
+    "metadata_repairs": [
+      {
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-24.pages.json",
+        "change": "Updated only the algorithm owning manifest statement mirror to the complete current Definition."
+      },
+      {
+        "path": "research/numerical-analysis-remaining-71-2026-10-17-batch-24.proof-contracts.json",
+        "change": "Updated the full algorithm Definition quote in the assigned status theorem and both algorithm quotes in the directly affected singular-prior example. Synchronized the status proof derivations with current steps; all existing risk_review and boundary review evidence retained. The example item carrier is unchanged and no item repair or fresh independent acceptance is claimed for it."
+      }
+    ],
+    "changed_item_paths": [
+      "items/lem-square-root-kalman-measurement-block-factor-identity.md",
+      "items/alg-finite-budget-square-root-kalman-filter.md",
+      "items/thm-square-root-kalman-finite-procedure-status.md"
+    ],
+    "independent_review_claimed": false,
+    "gate_diagnostics_assigned": []
+  }
+}

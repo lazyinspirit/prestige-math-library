@@ -1,0 +1,1589 @@
+{
+  "version": 1,
+  "scope": [
+    "def-galerkin-coarse-grid-correction",
+    "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+    "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+    "def-symmetric-two-grid-error-operator",
+    "alg-aggregation-based-algebraic-multigrid-hierarchy",
+    "lem-one-dimensional-poisson-smoothing-and-approximation",
+    "alg-finite-galerkin-v-cycle",
+    "thm-two-grid-energy-contraction-under-joint-estimate",
+    "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates",
+    "thm-galerkin-v-cycle-work-recurrence-master-regimes",
+    "thm-one-dimensional-poisson-two-grid-energy-contraction",
+    "ex-one-dimensional-poisson-coarse-correction-removes-linear-error",
+    "ex-v-and-w-cycle-costs-in-two-dimensions",
+    "ex-one-dimensional-poisson-two-grid-uniform-contraction"
+  ],
+  "contracts": {
+    "def-galerkin-coarse-grid-correction": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires 1 ≤ m ≤ n, so zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition gives C0=0 directly from the displayed linear map."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows n=m=1, with P a nonzero scalar and A_h>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition assumes A_h is SPD and P has full column rank, excluding singular inputs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition concerns finite matrix maps and has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only given finite matrices and their algebraic products; it makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: dimensions are n×n, n×m, and m×m with 1≤m≤n; invertibility is explicitly conditional here and proved by the next theorem. The exact-arithmetic convention does not identify rediscretization with the Galerkin product. This is not independent approval."
+      }
+    },
+    "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-weak-derivative-of-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, let\n$u,v\\in L^1_{\\mathrm{loc}}(\\Omega)$, and let\n$\\alpha\\in\\mathbb N_0^n$ be the multi-index of\n[[def-ck-and-multi-index-notation-in-several-variables]]. We say that $v$ is\nthe **weak derivative** $D^\\alpha u$ if\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nBoth integrals are finite because the test and all its derivatives are bounded\nand compactly supported. The test identity is choice-free. By\n[[def-locally-integrable-function-as-a-regular-distribution]] and the signed\ntranspose convention in [[def-distributional-derivative]], it is equivalent\nto $\\partial^\\alpha T_u=T_v$ as distributions. For $\\alpha=0$, this identity\nreduces to $T_u=T_v$, hence to $u=v$ almost everywhere by the published\nembedding theorem under [[def-countable-choice]].\n\n**Well-definedness.** Changing either representative on a null set leaves each\ntest integral unchanged. Weak derivatives are therefore statements about\nalmost-everywhere classes; existence and uniqueness of their locally\nintegrable value classes are audited separately.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\n\nEvery $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ belongs to\n$W^{k,p}(\\Omega;\\mathbb K)$. Indeed $\\varphi$ is bounded with compact support,\nhence lies in $L^p(\\Omega;\\mathbb K)$ for every exponent in range, and each of\nits classical partial derivatives is again smooth and compactly supported,\nhence lies in $L^p(\\Omega;\\mathbb K)$ and is the corresponding weak derivative\nby [[lem-classical-derivatives-are-weak-derivatives]].\n\nDefine the **zero-boundary Sobolev space**\n$$W_0^{k,p}(\\Omega;\\mathbb K):=\\overline{C_c^\\infty(\\Omega;\\mathbb K)},$$\nthe closure taken in the normed space\n$(W^{k,p}(\\Omega;\\mathbb K),\\|\\cdot\\|_{W^{k,p}(\\Omega)})$ of\n[[def-sobolev-space-wkp-and-its-norm]]. The norm is a genuine norm on classes\nby [[lem-sobolev-norm-is-well-defined-and-definite]], so this is the usual\nmetric closure of a subset of a normed space: $u\\in W_0^{k,p}(\\Omega;\\mathbb K)$\nif and only if for every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with\n$\\|u-\\varphi\\|_{W^{k,p}(\\Omega)}<\\delta$. Write\n$H_0^k(\\Omega):=W_0^{k,2}(\\Omega;\\mathbb K)$ when the scalar field is fixed by\ncontext.\n\nThree warnings are part of the definition. First, this is a closure of\nalmost-everywhere classes, and all its equalities are equalities of Sobolev\nclasses. Second, no pointwise boundary values and no trace characterization\nare asserted: a description of $W_0^{k,p}$ by vanishing boundary data belongs\nto the later trace theory and is not used here. Third, the closure is defined\nfor every $1\\le p\\le\\infty$, but for $p=\\infty$ it is not claimed that every\ncompactly supported $W^{k,\\infty}(\\Omega)$ function lies in $W_0^{k,\\infty}(\\Omega)$;\nthe definition merely names the closure of the test functions.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-sobolev-norm-is-well-defined-and-definite",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the weak-derivative uniqueness interface. Let\n$\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, $k\\in\\mathbb N_0$, and\n$1\\le p\\le\\infty$. For either real or complex scalars, the displayed\n$W^{k,p}(\\Omega)$ formula from\n[[def-sobolev-space-wkp-and-its-norm]] is independent of the representatives\nof its Sobolev and derivative classes and defines a norm: it is finite,\nabsolutely homogeneous, subadditive, and zero exactly on the zero $L^p$ class.\nThis holds at $p=1$ and $p=\\infty$, and when $k=0$.\n\nIf $\\Omega=\\varnothing$, the only class is zero and the formula is zero.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-compact-support-zero-extension-in-wkp",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$ and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Suppose\n$u\\in W^{k,p}(\\Omega;\\mathbb K)$ vanishes almost everywhere outside a compact\nset $K_0\\subset\\Omega$. Let $E_0u$ denote the extension of a representative of\n$u$ by zero to $\\mathbb R^n$, and for $|\\alpha|\\le k$ let\n$E_0(D^\\alpha u)$ denote the extension by zero of the corresponding\nderivative representative. Then\n$$E_0u\\in W^{k,p}(\\mathbb R^n;\\mathbb K),\\qquad D^\\alpha(E_0u)=E_0(D^\\alpha u)\\quad\\text{almost everywhere, }|\\alpha|\\le k,$$\nand every $L^p$ component norm is preserved:\n$$\\|E_0(D^\\alpha u)\\|_{L^p(\\mathbb R^n)}=\\|D^\\alpha u\\|_{L^p(\\Omega)},\\qquad \\|E_0u\\|_{L^p(\\mathbb R^n)}=\\|u\\|_{L^p(\\Omega)},$$\nso that $\\|E_0u\\|_{W^{k,p}(\\mathbb R^n)}=\\|u\\|_{W^{k,p}(\\Omega)}$. The case\n$k=0$ is included, and complex scalars are handled by the same bilinear\npairing.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi \\in C_c^\\infty(\\mathbb{R}^n)$ satisfy\n\n$$ \\int_{\\mathbb{R}^n} \\varphi(x)\\,dx = 1. $$\n\nFor $\\varepsilon > 0$, define\n\n$$ \\varphi_\\varepsilon(x) := \\varepsilon^{-n}\\varphi(x/\\varepsilon) \\qquad(x \\in \\mathbb{R}^n). $$\n\nThe family $(\\varphi_\\varepsilon)_{\\varepsilon>0}$ is the **mollifier family\ngenerated by $\\varphi$**.\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-mollifier-families-are-l-one-approximate-identities",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $\\varphi \\in C_c^\\infty(\\mathbb{R}^n)$ satisfy\n$\\int \\varphi = 1$, and let\n$\\varphi_\\varepsilon(x) = \\varepsilon^{-n}\\varphi(x/\\varepsilon)$. Then\n$(\\varphi_\\varepsilon)_{\\varepsilon>0}$ is an $L^1$ approximate identity.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-l-one-approximate-identities-converge-in-l-p",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $(K_\\varepsilon)_{\\varepsilon>0}$ be an $L^1$ approximate identity on\n$\\mathbb{R}^n$. If $1 \\le p < \\infty$ and $f \\in L^p(\\mathbb{R}^n)$, then\n\n$$\\|f*K_\\varepsilon - f\\|_p \\longrightarrow 0 \\qquad(\\varepsilon \\to 0^+).$$\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $f : \\mathbb{R}^n \\to \\mathbb{C}$ be locally integrable, let\n$\\varphi \\in C_c^\\infty(\\mathbb{R}^n)$ have mass $1$, and let\n$\\varphi_\\varepsilon$ be the associated mollifier. Then for every\n$\\varepsilon > 0$, the convolution\n\n$$ (f*\\varphi_\\varepsilon)(x) := \\int_{\\mathbb{R}^n} f(y)\\varphi_\\varepsilon(x-y)\\,dy $$\n\nis smooth, and for every multi-index $\\alpha$,\n\n$$ \\partial^\\alpha(f*\\varphi_\\varepsilon) = f*(\\partial^\\alpha \\varphi_\\varepsilon). $$\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Let $g$ equal the slope of $v$ on the interior of each partition interval, with arbitrary values at the finitely many breakpoints. Both $v$ and $g$ are bounded, hence square integrable on $(0,1)$. Integration by parts on each partition interval gives $\\int_0^1 v\\varphi'=-\\int_0^1g\\varphi$ for every $\\varphi\\in C_c^\\infty(0,1)$: the interior endpoint terms cancel because $v$ is continuous, and the outer endpoint terms vanish because $\\varphi$ is compactly supported. Thus [F2] identifies $g$ as the weak derivative, and [F1] gives $v\\in W^{1,2}(0,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Put $L=\\max_i |(v|_{[x_{i-1},x_i]})'|$. For $0<\\delta<1/4$, let $\\chi_\\delta$ be zero on $[0,\\delta]\\cup[1-\\delta,1]$, linear from zero to one on $[\\delta,2\\delta]$, equal to one on $[2\\delta,1-2\\delta]$, and linear from one to zero on $[1-2\\delta,1-\\delta]$. Then $v_\\delta=\\chi_\\delta v$ is continuous and piecewise quadratic, with compact support in $[\\delta,1-\\delta]$. Its piecewise derivative is bounded; integration by parts on its finitely many pieces cancels interior boundary terms by continuity, as in step 1.1, so $v_\\delta\\in W^{1,2}(0,1)$. Since $|v(x)|\\le L\\min(x,1-x)$, its difference from $v$ is supported on strips of total length at most $4\\delta$; there $|v|\\le2L\\delta$, $|v'|\\le L$, and $|\\chi_\\delta'|\\le1/\\delta$. The product rule therefore gives $\\|v-v_\\delta\\|_{L^2}^2\\le16L^2\\delta^3$ and $\\|(v-v_\\delta)'\\|_{L^2}^2\\le36L^2\\delta$. The $W^{1,2}$ formula in [F1] then gives $v_\\delta\\to v$ in $W^{1,2}(0,1)$ as $\\delta\\to0^+$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Extend $v_\\delta$ by zero to $V_\\delta\\in W^{1,2}(\\mathbb R)$ using [F5]. Choose the [F6] bump with $r=1/2$ and $R=1$. Its integral $c$ is finite because it is bounded and supported in $(-1,1)$, and $c\\ge1$ because it equals $1$ on an interval of length $1$. Normalize it by $c$ and take its mollifier family from [F7]. The convolution $V_\\delta*\\rho_\\varepsilon$ is smooth by [F10]. Differentiating under the integral and integrating by parts on the finitely many polynomial pieces of $V_\\delta$ gives $(V_\\delta*\\rho_\\varepsilon)'=V_\\delta'*\\rho_\\varepsilon$: interior boundary terms cancel by continuity and outer terms vanish by compact support. By [F8]–[F9], the function and its derivative converge in $L^2(\\mathbb R)$ to $V_\\delta$ and $V_\\delta'$ as $\\varepsilon\\to0^+$. The normalized bump has support in $[-1,1]$, so $0<\\varepsilon<\\delta$ places the convolution support inside $(0,1)$ and it belongs to $C_c^\\infty(0,1)$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Given $\\eta>0$, choose $\\delta$ so that step 2.1 gives $\\|v-v_\\delta\\|_{W^{1,2}}<\\eta/2$, and then choose sufficiently small $\\varepsilon$ in step 3.1 so that $\\|v_\\delta-(V_\\delta*\\rho_\\varepsilon)|_{(0,1)}\\|_{W^{1,2}}<\\eta/2$. The triangle inequality [F4] gives a $C_c^\\infty(0,1)$ approximation to $v$ within $\\eta$. Since $\\eta$ was arbitrary, [F3] yields $v\\in H^1_0(0,1)$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the fixed nonempty interval (0,1), and the partition has at least one subinterval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 has L=0 when v=0 and its cutoff estimates remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one partition interval, zero endpoint values force v=0; Step 2.1 covers L=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The strict finite partition has positive-length intervals; there is no degenerate interval case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 use the zero values at both endpoints to bound the cutoff error and prove closure membership."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records Countable Choice for the cited Sobolev interfaces; Steps 2.1–4.1 choose only δ and ε for a fixed tolerance."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way membership and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way membership and states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: the weak derivative is established by interval integration by parts; the cutoff derivative term is O(δ) in squared L2 norm using the linear endpoint bound; zero extension and mollification approximate both the function and derivative. Countable Choice is carried for cited interfaces, with no arbitrary-family choice in the local approximation. This is not independent approval."
+      }
+    },
+    "thm-galerkin-coarse-correction-is-energy-orthogonal-projector": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-galerkin-coarse-grid-correction",
+          "source_section": "Definition",
+          "quote": "Work over the real field with standard coordinate inner products. Let\n$A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite (equivalently,\npositive definite in the Cholesky convention of\n[[def-cholesky-factorisation-with-positive-diagonal]]) and let\n$P\\in\\mathbb R^{n\\times m}$ have full column rank, where $1\\le m\\le n$.\nThe map $P$ sends coarse-grid coordinate vectors to fine-grid coordinate\nvectors; its Euclidean adjoint is the transpose $P^{\\mathsf T}$ by\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]]. Define the **Galerkin\ncoarse matrix**\n\n$$A_H:=P^{\\mathsf T}A_hP.$$\n\nWhenever $A_H$ is invertible, define the **exact Galerkin coarse-correction\nerror map**\n\n$$C:=I_n-PA_H^{-1}P^{\\mathsf T}A_h.$$\n\nThis definition is conditional on invertibility of $A_H$. The next theorem\nproves that condition from positive definiteness of $A_h$ and full column rank\nof $P$. The formula is in exact real arithmetic; a rediscretized operator is\nnot identified with $A_H$ unless equality is separately shown.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, let $b\\in\\mathbb C^n$,\nand let $\\phi$ be the quadratic energy from\n[[def-quadratic-energy-of-a-hermitian-positive-definite-linear-system]]. Then\nthe system $Ax=b$ has a unique solution $x_*$, and for every $x\\in\\mathbb C^n$\none has\n\n$$\\phi(x)-\\phi(x_*)=\\tfrac12\\|x-x_*\\|_A^2.$$\n\nIn particular, $x_*$ is the unique minimizer of $\\phi$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**\n\n$$\\langle u,v\\rangle_A:=\\langle Au,v\\rangle,$$\n\nwhere $\\langle \\cdot,\\cdot\\rangle$ is the standard coordinate inner product of\n[[prop-standard-coordinate-inner-products]]. Because $A$ is Hermitian positive\ndefinite, this is an inner product on $\\mathbb C^n$, and its induced norm\n\n$$\\|u\\|_A:=\\sqrt{\\langle u,u\\rangle_A}$$\n\nis the **energy norm** of $u$.\n\nEquivalently, if $A=LL^*$ is the Cholesky factorization from\n[[def-cholesky-factorisation-with-positive-diagonal]], then\n$\\langle u,v\\rangle_A=\\langle L^*u,L^*v\\rangle$ and\n$\\|u\\|_A=\\|L^*u\\|_2$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-transpose-laws",
+          "source_section": "Statement",
+          "quote": "For matrices of the appropriate shapes and a scalar $\\lambda$,\n\n$$(A+B)^{\\mathsf T}=A^{\\mathsf T}+B^{\\mathsf T},\\qquad (\\lambda A)^{\\mathsf T}=\\lambda A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A,$$\n\nand\n\n$$(AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T}.$$\n\nThus transpose is linear and involutive and reverses products.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For every nonzero $q\\in\\mathbb R^m$, full column rank gives $Pq\\ne0$, so $q^{\\mathsf T}A_Hq=(Pq)^{\\mathsf T}A_h(Pq)>0$. Also $A_H^{\\mathsf T}=P^{\\mathsf T}A_h^{\\mathsf T}P=A_H$ by [F4]. Thus $A_H$ is symmetric positive definite and [F2] makes it invertible; [F1] therefore defines $C$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "From $P^{\\mathsf T}A_hP=A_H$, direct multiplication gives $CP=P-PA_H^{-1}A_H=0$ and $P^{\\mathsf T}A_hC=P^{\\mathsf T}A_h-A_HA_H^{-1}P^{\\mathsf T}A_h=0$. Moreover, $$C^2=I_n-2PA_H^{-1}P^{\\mathsf T}A_h+PA_H^{-1}(P^{\\mathsf T}A_hP)A_H^{-1}P^{\\mathsf T}A_h=C.$$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Transposing $A_HA_H^{-1}=I=A_H^{-1}A_H$ and using [F4] shows that $(A_H^{-1})^{\\mathsf T}$ is an inverse of $A_H^{\\mathsf T}=A_H$. If $B$ and $D$ are two-sided inverses of $A_H$, then $B=B(A_HD)=(BA_H)D=D$, so the inverse is unique and $(A_H^{-1})^{\\mathsf T}=A_H^{-1}$. Thus [F4] yields $C^{\\mathsf T}A_h=A_h-A_hPA_H^{-1}P^{\\mathsf T}A_h=A_hC$, so $C$ is self-adjoint in [F3]. Also $P^{\\mathsf T}A_hC=0$ says $\\operatorname{Ran}(C)\\subseteq\\operatorname{Ran}(P)^{\\perp_{A_h}}$. If $w$ is in that complement, then $P^{\\mathsf T}A_hw=0$, so [F1] gives $Cw=w$; therefore every such $w$ is in $\\operatorname{Ran}(C)$ and the ranges are equal.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "The identities in step 2.1 and the range equality in step 3.1 prove all stated projection properties.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes 1 ≤ m ≤ n, excluding empty dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 apply the projector identities to arbitrary vectors, including zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof Step 1.1: the proof works for n=m=1 with the same rank and positivity calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The SPD and full-column-rank hypotheses exclude singular fine and coarse data."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement concerns finite-dimensional matrices and no interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 use finite-dimensional algebra and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a list of identities and a range equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a list of identities and a range equality, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: full column rank proves coarse SPD; symmetry of the inverse is derived from inverse uniqueness; idempotence, orthogonality, and both range inclusions are shown. This is not independent approval."
+      }
+    },
+    "def-symmetric-two-grid-error-operator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition uses a positive-dimensional SPD matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition accepts any linear smoother S, including S=0, which gives E=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the displayed adjoint and composite are well-defined in dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The required SPD matrix excludes a degenerate energy inner product."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition concerns matrices and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition constructs the adjoint and composite from given finite matrices without choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: the energy adjoint formula is verified against the stated inner product, and the post-smoother order is fixed as the adjoint after coarse correction. This is not independent approval."
+      }
+    },
+    "alg-aggregation-based-algebraic-multigrid-hierarchy": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires n0 ≥ 1; empty matrices are outside its input domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero matrix is not SPD and is not an admissible input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n0=1 is handled by the initial coarse-size test."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition 4 makes singleton aggregates when the strength graph has no edges, and the nonreducing count returns coarsening-stalled."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The procedure is indexed by finite matrix levels, not a spatial interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition 4 selects the smallest unassigned index, making the finite aggregation order deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a procedure and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a procedure and no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: the input dimension is positive, graph criterion is symmetric by an explicit either-row condition, aggregation order is deterministic, and the three output statuses are ordered and exhaustive. The procedure makes no convergence claim. This is not independent approval."
+      }
+    },
+    "lem-one-dimensional-poisson-smoothing-and-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-galerkin-coarse-grid-correction",
+          "source_section": "Definition",
+          "quote": "Work over the real field with standard coordinate inner products. Let\n$A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite (equivalently,\npositive definite in the Cholesky convention of\n[[def-cholesky-factorisation-with-positive-diagonal]]) and let\n$P\\in\\mathbb R^{n\\times m}$ have full column rank, where $1\\le m\\le n$.\nThe map $P$ sends coarse-grid coordinate vectors to fine-grid coordinate\nvectors; its Euclidean adjoint is the transpose $P^{\\mathsf T}$ by\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]]. Define the **Galerkin\ncoarse matrix**\n\n$$A_H:=P^{\\mathsf T}A_hP.$$\n\nWhenever $A_H$ is invertible, define the **exact Galerkin coarse-correction\nerror map**\n\n$$C:=I_n-PA_H^{-1}P^{\\mathsf T}A_h.$$\n\nThis definition is conditional on invertibility of $A_H$. The next theorem\nproves that condition from positive definiteness of $A_h$ and full column rank\nof $P$. The formula is in exact real arithmetic; a rediscretized operator is\nnot identified with $A_H$ unless equality is separately shown.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "source_section": "Statement",
+          "quote": "Let $A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite and let\n$P\\in\\mathbb R^{n\\times m}$ have full column rank. Put\n$A_H=P^{\\mathsf T}A_hP$. Then $A_H$ is symmetric positive definite, hence\ninvertible, and the map $C=I_n-PA_H^{-1}P^{\\mathsf T}A_h$ of\n[[def-galerkin-coarse-grid-correction]] satisfies\n\n$$C^2=C,\\qquad CP=0,\\qquad P^{\\mathsf T}A_hC=0,\\qquad C^{\\mathsf T}A_h=A_hC.$$\n\nConsequently $\\operatorname{Ran}(C)=\\operatorname{Ran}(P)^{\\perp_{A_h}}$;\n$C$ is the orthogonal projector onto that complement in the energy inner\nproduct $\\langle x,y\\rangle_{A_h}:=x^{\\mathsf T}A_hy$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**\n\n$$\\langle u,v\\rangle_A:=\\langle Au,v\\rangle,$$\n\nwhere $\\langle \\cdot,\\cdot\\rangle$ is the standard coordinate inner product of\n[[prop-standard-coordinate-inner-products]]. Because $A$ is Hermitian positive\ndefinite, this is an inner product on $\\mathbb C^n$, and its induced norm\n\n$$\\|u\\|_A:=\\sqrt{\\langle u,u\\rangle_A}$$\n\nis the **energy norm** of $u$.\n\nEquivalently, if $A=LL^*$ is the Cholesky factorization from\n[[def-cholesky-factorisation-with-positive-diagonal]], then\n$\\langle u,v\\rangle_A=\\langle L^*u,L^*v\\rangle$ and\n$\\|u\\|_A=\\|L^*u\\|_2$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-transpose-laws",
+          "source_section": "Statement",
+          "quote": "For matrices of the appropriate shapes and a scalar $\\lambda$,\n\n$$(A+B)^{\\mathsf T}=A^{\\mathsf T}+B^{\\mathsf T},\\qquad (\\lambda A)^{\\mathsf T}=\\lambda A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A,$$\n\nand\n\n$$(AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T}.$$\n\nThus transpose is linear and involutive and reverses products.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Extend a fine vector by $x_0=x_N=0$. Direct expansion gives $$x^{\\mathsf T}A_hx=h^{-1}\\sum_{i=1}^{N}(x_i-x_{i-1})^2.$$ This is positive for every nonzero $x$, since a zero sum forces all consecutive entries equal and the boundary entries are zero. The even rows of $P$ form the identity on coarse coordinates, so $P$ has full column rank. Thus [F2] ensures $A_H$ is invertible and $C$ is defined.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "For any $x$, $(x_i-x_{i-1})^2\\le2x_i^2+2x_{i-1}^2$ and the endpoints vanish, so $x^{\\mathsf T}A_hx\\le(4/h)\\|x\\|_2^2$. By [F4], $0<\\lambda\\le\\lambda_{\\max}(A_h)\\le4/h$ for each eigenvalue. In an orthonormal eigenbasis, $S$ has eigenvalues $1-\\lambda/\\lambda_{\\max}\\in[0,1)$. For $\\xi=\\lambda/\\lambda_{\\max}\\in(0,1]$, the finite geometric identity $\\xi\\sum_{k=0}^{2\\nu}(1-\\xi)^k=1-(1-\\xi)^{2\\nu+1}\\le1$ applies. Each summand is at least $(1-\\xi)^{2\\nu}$, so $\\xi(1-\\xi)^{2\\nu}\\le1/(2\\nu+1)$. Expanding $e$ in that eigenbasis yields $$\\|A_hS^\\nu e\\|_2^2\\le\\frac{\\lambda_{\\max}(A_h)}{2\\nu+1}\\|e\\|_{A_h}^2\\le\\frac{4}{h(2\\nu+1)}\\|e\\|_{A_h}^2.$$",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Let $J$ insert a coarse vector into the even fine indices and zero the odd indices. At an odd fine row, $A_hPv=0$ because $2(Pv)_{2j+1}=(Pv)_{2j}+(Pv)_{2j+2}$. At an even row $2j$, $$(A_hPv)_{2j}=(2h)^{-1}(2v_j-v_{j-1}-v_{j+1}),$$ with boundary values $v_0=v_M=0$. Direct multiplication gives $A_H$ diagonal entries $1/h$, adjacent entries $-1/(2h)$, and all other entries zero; hence $A_hP=JA_H$ and, by [F5], $P^{\\mathsf T}A_h=A_HJ^{\\mathsf T}$. Substitution in [F1] yields $C=I-PJ^{\\mathsf T}$. Therefore $y=Cw$ has zero even entries. Also $A_hy=A_hw-JA_HJ^{\\mathsf T}w$, so the odd entries of $A_hy$ equal those of $A_hw$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "For odd $i$, the two neighbours of $y_i$ are even and zero, so $(A_hy)_i=2y_i/h=(A_hw)_i$. Therefore $$\\|Cw\\|_2^2=\\sum_{i\\text{ odd}}y_i^2=\\frac{h^2}{4}\\sum_{i\\text{ odd}}(A_hw)_i^2\\le\\frac{h^2}{4}\\|A_hw\\|_2^2.$$ Since each odd value is adjacent to two zero even values, the energy identity in step 1.1 gives $\\|y\\|_{A_h}^2=(2/h)\\|y\\|_2^2$. Thus $\\|Cw\\|_{A_h}^2\\le(h/2)\\|A_hw\\|_2^2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Apply the approximation estimate of step 3.1 with $w=S^\\nu e$ and then the smoothing estimate of step 1.2: $$\\|CS^\\nu e\\|_{A_h}^2\\le\\frac h2\\|A_hS^\\nu e\\|_2^2\\le\\frac{2}{2\\nu+1}\\|e\\|_{A_h}^2.$$ Because $\\nu\\ge1$, $2/(2\\nu+1)\\le2/3<1$, uniformly in $N$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes N=2M≥4, so the grid and fine space are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof Step 4.1 combines homogeneous estimates, so e=0 also gives both sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The smallest case N=4 has one coarse interior node and is included in Steps 1.1–5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A_h is proved SPD in Step 1.1 and the coarse interpolation has full column rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof Steps 2.1 and 3.1 use the zero endpoint values in the row formulas and approximation estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof Step 4.1: the finite spectral and estimate argument requires no arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives inequalities and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives inequalities and no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: the coarse matrix and complement are derived by even/odd rows; the approximation factor is h/2; the Richardson estimate follows from a finite geometric sum and λmax≤4/h; constants combine to 2/(2ν+1). This is not independent approval."
+      }
+    },
+    "alg-finite-galerkin-v-cycle": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition includes a base matrix A0 and a finite hierarchy; it has no empty-hierarchy case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition accepts b=0 and x=0; each residual and recursive right-hand side is zero, so the returned iterate is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The V-cycle branch γ=1 is explicitly included in the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every hierarchy matrix is SPD and every prolongation has full column rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition is a finite matrix recursion with no spatial interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite recursion decreases j at every call and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: each recursive call lowers the level, the base solve is well-defined by SPD, and W-cycle repetition reuses the fixed restricted residual while starting from the current coarse iterate. No convergence or floating-point claim is included. This is not independent approval."
+      }
+    },
+    "thm-two-grid-energy-contraction-under-joint-estimate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-symmetric-two-grid-error-operator",
+          "source_section": "Definition",
+          "quote": "Let $A_h$ be symmetric positive definite, let $C$ be the Galerkin projector\nof [[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], and let\n$S\\in\\mathbb R^{n\\times n}$ be a linear pre-smoothing error map. For the\nenergy inner product of [[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]],\ndefine the **$A_h$-adjoint** of $S$ by\n\n$$S^{*_{A_h}}:=A_h^{-1}S^{\\mathsf T}A_h.$$\n\nThis is well-defined because $A_h$ is invertible. For all $x,y$,\n$\\langle Sx,y\\rangle_{A_h}=x^{\\mathsf T}S^{\\mathsf T}A_hy\n=\\langle x,S^{*_{A_h}}y\\rangle_{A_h}$, so it is the adjoint with respect to\nthat energy inner product. The **symmetric two-grid error map** is\n\n$$E:=S^{*_{A_h}}CS.$$\n\nIt maps an input error through pre-smoothing $S$, exact coarse correction $C$,\nand the $A_h$-adjoint post-smoother.\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "source_section": "Statement",
+          "quote": "Let $A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite and let\n$P\\in\\mathbb R^{n\\times m}$ have full column rank. Put\n$A_H=P^{\\mathsf T}A_hP$. Then $A_H$ is symmetric positive definite, hence\ninvertible, and the map $C=I_n-PA_H^{-1}P^{\\mathsf T}A_h$ of\n[[def-galerkin-coarse-grid-correction]] satisfies\n\n$$C^2=C,\\qquad CP=0,\\qquad P^{\\mathsf T}A_hC=0,\\qquad C^{\\mathsf T}A_h=A_hC.$$\n\nConsequently $\\operatorname{Ran}(C)=\\operatorname{Ran}(P)^{\\perp_{A_h}}$;\n$C$ is the orthogonal projector onto that complement in the energy inner\nproduct $\\langle x,y\\rangle_{A_h}:=x^{\\mathsf T}A_hy$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**\n\n$$\\langle u,v\\rangle_A:=\\langle Au,v\\rangle,$$\n\nwhere $\\langle \\cdot,\\cdot\\rangle$ is the standard coordinate inner product of\n[[prop-standard-coordinate-inner-products]]. Because $A$ is Hermitian positive\ndefinite, this is an inner product on $\\mathbb C^n$, and its induced norm\n\n$$\\|u\\|_A:=\\sqrt{\\langle u,u\\rangle_A}$$\n\nis the **energy norm** of $u$.\n\nEquivalently, if $A=LL^*$ is the Cholesky factorization from\n[[def-cholesky-factorisation-with-positive-diagonal]], then\n$\\langle u,v\\rangle_A=\\langle L^*u,L^*v\\rangle$ and\n$\\|u\\|_A=\\|L^*u\\|_2$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Put $u=Sx$. Since $C^2=C$ and $C$ is $A_h$-self-adjoint, $C(I-C)=0$ and $\\langle Cu,(I-C)u\\rangle_{A_h}=\\langle u,C(I-C)u\\rangle_{A_h}=0$. Thus [F1] gives $$\\langle Ex,x\\rangle_{A_h}=\\langle CSx,Sx\\rangle_{A_h}=\\langle CSx,CSx\\rangle_{A_h}=\\|CSx\\|_{A_h}^2\\ge0.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "For all $x,y$, the adjoint identity in [F1] and self-adjointness of $C$ in [F2] give $$\\langle Ex,y\\rangle_{A_h}=\\langle CSx,Sy\\rangle_{A_h}=\\langle Sx,CSy\\rangle_{A_h}=\\langle x,Ey\\rangle_{A_h}.$$ Hence $E$ is self-adjoint.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [F5], choose an $A_h$-orthonormal eigenbasis $v_1,\\ldots,v_n$ for the self-adjoint map $E$, with eigenvalues $\\lambda_j$. Step 1.1 gives $\\lambda_j=\\langle Ev_j,v_j\\rangle_{A_h}\\ge0$; the joint hypothesis gives $\\lambda_j=\\|CSv_j\\|_{A_h}^2\\le\\rho$. For $x=\\sum_j c_jv_j$, orthonormality yields $$\\|Ex\\|_{A_h}^2=\\sum_j\\lambda_j^2c_j^2\\le\\rho^2\\sum_jc_j^2=\\rho^2\\|x\\|_{A_h}^2.$$ Taking the maximum over unit $x$ in [F4] proves $\\|E\\|_{A_h}\\le\\rho$. Since $\\rho<1$, the two-grid error map is a strict energy contraction.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a positive-dimensional finite SPD matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 handle zero eigenvalues and the zero vector directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof Step 2.1: the finite-dimensional eigenbasis argument includes dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The SPD hypothesis makes the energy pairing nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement concerns finite-dimensional operators, not an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof Step 2.1: only the finite-dimensional spectral theorem is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: C is self-adjoint idempotent, so E is nonnegative and self-adjoint; the eigenvalue bound follows from the joint estimate and yields the induced norm. No separate smoothing/approximation compatibility is assumed. This is not independent approval."
+      }
+    },
+    "thm-aggregation-amg-hierarchy-preserves-spd-and-terminates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-aggregation-based-algebraic-multigrid-hierarchy",
+          "source_section": "Definition",
+          "quote": "This is a finite aggregation-based algebraic multigrid **setup** procedure; it\nconstructs a hierarchy and does not claim that any cycle converges. All\narithmetic and comparisons below are exact. An admissible input consists of an\ninteger $n_0\\ge1$, a real symmetric positive-definite matrix\n$A_0=(a_{ij})\\in\\mathbb R^{n_0\\times n_0}$ whose off-diagonal\nentries satisfy $a_{ij}\\le0$, a real threshold $0<\\theta<1$, a coarse-size\nthreshold $n_{\\min}\\ge1$, and a level cap $L\\ge0$. A matrix with these sign\nand definiteness conditions is the matrix class used here. The terms\n**strength graph**, **aggregate**, **prolongation**, and **Galerkin hierarchy**\nare defined by the steps below.\n\n1. Set $\\ell=0$, $n_\\ell=\\dim A_\\ell$, and retain $A_\\ell$ in the output. If\n   $n_\\ell\\le n_{\\min}$, return status `coarse-reached`.\n2. If $\\ell=L$ before the stop test in step 1 succeeds, return status\n   `level-cap`.\n3. On vertices $1,\\ldots,n_\\ell$, place an undirected edge $\\{i,j\\}$ for\n   $i\\ne j$ exactly when $a_{ij}^{(\\ell)}<0$ and at least one of\n   $$-a_{ij}^{(\\ell)}\\ge\\theta\\max_{k\\ne i}(-a_{ik}^{(\\ell)}),\\qquad -a_{ij}^{(\\ell)}\\ge\\theta\\max_{k\\ne j}(-a_{jk}^{(\\ell)})$$\n   holds. This finite graph is the strength graph at level $\\ell$.\n4. Let $U=\\{1,\\ldots,n_\\ell\\}$ and start with no aggregates. While $U\\ne\\varnothing$, let $i$ be the smallest element of $U$, create one aggregate\n   $$C_r=\\{i\\}\\cup\\bigl(N(i)\\cap U\\bigr),$$\n   where $N(i)$ is its strength-graph neighbour set, then remove every element of $C_r$ from $U$. This produces an ordered family of aggregates.\n5. Let $n_{\\ell+1}$ be the number of aggregates. If $n_{\\ell+1}\\ge n_\\ell$, return status `coarsening-stalled` with the hierarchy through level $\\ell$. Otherwise form the indicator prolongation\n   $$(P_\\ell)_{ir}=1\\text{ if }i\\in C_r,\\qquad (P_\\ell)_{ir}=0\\text{ otherwise},$$\n   form the Galerkin coarse matrix $A_{\\ell+1}=P_\\ell^{\\mathsf T}A_\\ell P_\\ell$, append $P_\\ell,A_{\\ell+1}$, replace $\\ell$ by $\\ell+1$, and return to step 1.\n\nThe result contains all completed matrices and prolongations and exactly one\nstatus: `coarse-reached`, `level-cap`, or `coarsening-stalled`. Reaching any\nstatus is not a convergence or quality certificate.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "source_section": "Statement",
+          "quote": "Let $A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite and let\n$P\\in\\mathbb R^{n\\times m}$ have full column rank. Put\n$A_H=P^{\\mathsf T}A_hP$. Then $A_H$ is symmetric positive definite, hence\ninvertible, and the map $C=I_n-PA_H^{-1}P^{\\mathsf T}A_h$ of\n[[def-galerkin-coarse-grid-correction]] satisfies\n\n$$C^2=C,\\qquad CP=0,\\qquad P^{\\mathsf T}A_hC=0,\\qquad C^{\\mathsf T}A_h=A_hC.$$\n\nConsequently $\\operatorname{Ran}(C)=\\operatorname{Ran}(P)^{\\perp_{A_h}}$;\n$C$ is the orthogonal projector onto that complement in the energy inner\nproduct $\\langle x,y\\rangle_{A_h}:=x^{\\mathsf T}A_hy$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "At any aggregation pass the unassigned set $U$ is finite and nonempty. The selected smallest vertex $i$ belongs to the new aggregate, so at least one vertex is removed. No previously removed vertex can reappear because every neighbour is intersected with $U$. Thus the aggregates are pairwise disjoint and, when the finite loop ends at $U=\\varnothing$, cover all current indices. Each aggregate is nonempty. If $Pz=0$, choose any row index in aggregate $r$; its row has a single $1$ in column $r$, so that component of $Pz$ is $z_r=0$. This holds for every $r$, hence $P$ has full column rank.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [F2] and step 1.1, $A_{\\ell+1}=P_\\ell^{\\mathsf T}A_\\ell P_\\ell$ is SPD. For distinct aggregate columns $r\\ne s$, disjointness gives $$(A_{\\ell+1})_{rs}=\\sum_{i\\in C_r}\\sum_{j\\in C_s}a_{ij}^{(\\ell)}\\le0,$$ since $i\\ne j$ in every summand and the fine matrix has nonpositive off-diagonal entries. Symmetry follows from symmetry of $A_\\ell$. Induction over successful levels proves the same matrix class at each returned level.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "Each aggregation pass is finite by step 1.1, and the outer procedure makes at most $L$ passes because every continuation increments $\\ell$ by one. At each test either $n_\\ell\\le n_{\\min}$ and `coarse-reached` is returned, $\\ell=L$ and `level-cap` is returned, or a pass is performed and either $n_{\\ell+1}\\ge n_\\ell$ and `coarsening-stalled` is returned, or the procedure advances. These mutually exclusive ordered branches exhaust the procedure, so it terminates with exactly one listed status.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The preceding steps establish the partition, rank, matrix-class and status claims. No step asserts a contraction factor.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm input requires n0≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero matrix violates the SPD input hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the n0=1 input returns coarse-reached at the initial test."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Theorem Step 3.1 covers a no-edge graph through singleton aggregation and coarsening-stalled."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The hierarchy has finite level indices and no spatial endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Theorem Step 1.1 uses the canonical smallest unassigned vertex and finite sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives structural properties and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives structural properties and no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: each greedy pass removes a nonempty disjoint aggregate, indicator columns are independent, Galerkin compression preserves SPD and off-diagonal signs, and the finite cap/status branches terminate. This is not independent approval."
+      }
+    },
+    "thm-galerkin-v-cycle-work-recurrence-master-regimes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-galerkin-v-cycle",
+          "source_section": "Definition",
+          "quote": "Fix a finite Galerkin hierarchy of real SPD matrices\n$A_j\\in\\mathbb R^{n_j\\times n_j}$, $0\\le j\\le J$, with $n_j\\ge1$, and\nfull-column-rank prolongations $P_j\\in\\mathbb R^{n_j\\times n_{j-1}}$\nsatisfying $A_{j-1}=P_j^{\\mathsf T}A_jP_j$ for $1\\le j\\le J$. Choose\nnonnegative integer sweep counts $\\nu_1,\\nu_2$, a positive integer cycle\ncount $\\gamma$, and matrices $K_j^{\\mathrm{pre}},K_j^{\\mathrm{post}}\\in\n\\mathbb R^{n_j\\times n_j}$ for $1\\le j\\le J$; $^{\\mathsf T}$ denotes the\ntranspose of [[def-transpose-of-a-matrix]]. An invocation\n$\\operatorname{Cycle}(j,x,b)$ takes $x,b\\in\\mathbb R^{n_j}$ and returns an\napproximate solution to $A_jz=b$:\n\n1. If $j=0$, return the exact solution $A_0^{-1}b$.\n2. Starting from $x$, perform $\\nu_1$ pre-sweeps\n   $x\\leftarrow x+K_j^{\\mathrm{pre}}(b-A_jx)$ and set $r=b-A_jx$.\n3. Set $e=0$. For $t=1,\\ldots,\\gamma$, replace $e$ by the recursive iterate\n   $$e\\leftarrow\\operatorname{Cycle}(j-1,e,P_j^{\\mathsf T}r).$$\n4. Correct $x\\leftarrow x+P_je$, then perform $\\nu_2$ post-sweeps\n   $x\\leftarrow x+K_j^{\\mathrm{post}}(b-A_jx)$; return $x$.\n\nThe V-cycle is $\\gamma=1$ and the W-cycle is $\\gamma=2$. Each call decreases\n$j$, so the recursion is finite. The definition fixes exact arithmetic; setup\ncost, floating-point error, and convergence of the recursive cycle are separate\nclaims.\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Repeated substitution in the recurrence gives $$T(N)=cN\\sum_{r=0}^{L-1}(\\gamma/q)^r+\\gamma^L T(1).$$ For $L=0$, the sum is empty and this is the base cost; for $L+1$, substituting $T(N/q)$ adds the term $cN(\\gamma/q)^L$ and leaves the base term $\\gamma^{L+1}T(1)$, proving the formula by induction on $L$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "If $\\gamma<q$, the ratio $\\gamma/q<1$, so the finite geometric sum is bounded above and below by positive constants independent of $L$. Also $\\gamma^L=N^{\\log_q\\gamma}=o(N)$, while $cN$ is a lower bound. Hence $T(N)=\\Theta(N)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "If $\\gamma=q$, the sum in step 1.1 is $L$, and $\\gamma^LT(1)=N\\,T(1)=\\Theta(N)$. Since $L=\\log_qN$, this gives $T(N)=\\Theta(N\\log N)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-3",
+          "claim": "If $\\gamma>q$, the geometric sum is $\\Theta((\\gamma/q)^L)$. Thus the first term in step 1.1 is $\\Theta(N(\\gamma/q)^L)=\\Theta(\\gamma^L)=\\Theta(N^{\\log_q\\gamma})$; the base term has the same order. Therefore $T(N)=\\Theta(N^{\\log_q\\gamma})$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The recurrence counts only the per-level cycle work stated in the hypotheses and the recursive calls in [F1]. It contains no setup, floating-point error, or convergence estimate.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement has N=q^L≥1 with q>1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The recurrence assumes c>0 and a positive bounded base cost, so zero work is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats L=0, N=1, as the base solve."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The coarsening factor q is required to exceed one."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The recurrence is indexed by grid sizes and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–5.1 use induction and geometric sums, with no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement lists three asymptotic regimes and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement lists three asymptotic regimes and no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: repeated substitution is proved by induction, then each of γ<q, γ=q, and γ>q is bounded separately; setup and convergence are excluded. This is not independent approval."
+      }
+    },
+    "thm-one-dimensional-poisson-two-grid-energy-contraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-one-dimensional-poisson-smoothing-and-approximation",
+          "source_section": "Statement",
+          "quote": "Let $N=2M\\ge4$, $h=1/N$, and let $A_h\\in\\mathbb R^{(N-1)\\times(N-1)}$ have diagonal $2/h$, adjacent off-diagonal entries $-1/h$, and all other entries zero. This is the Dirichlet stiffness matrix for the uniform one-dimensional Poisson mesh. Let $P\\in\\mathbb R^{(N-1)\\times(M-1)}$ linearly interpolate from the coarse nodes at even fine indices: set coarse endpoint values $v_0=v_M=0$, $(Pv)_{2j}=v_j$, and $(Pv)_{2j+1}=(v_j+v_{j+1})/2$ wherever these are interior fine indices. Put $A_H=P^{\\mathsf T}A_hP$, $C=I-PA_H^{-1}P^{\\mathsf T}A_h$, and $S=I-A_h/\\lambda_{\\max}(A_h)$. Then for every integer $\\nu\\ge1$ and every fine vector $e$,\n\n$$\\|CS^\\nu e\\|_{A_h}^2\\le\\frac{2}{2\\nu+1}\\|e\\|_{A_h}^2.$$\n\nThe separate estimates proved below are the exact approximation bound\n$\\|Cw\\|_{A_h}^2\\le(h/2)\\|A_hw\\|_2^2$ and smoothing bound\n$\\|A_hS^\\nu e\\|_2^2\\le4\\,[h(2\\nu+1)]^{-1}\\|e\\|_{A_h}^2$; their constants are compatible and independent of $N$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-symmetric-two-grid-error-operator",
+          "source_section": "Definition",
+          "quote": "Let $A_h$ be symmetric positive definite, let $C$ be the Galerkin projector\nof [[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], and let\n$S\\in\\mathbb R^{n\\times n}$ be a linear pre-smoothing error map. For the\nenergy inner product of [[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]],\ndefine the **$A_h$-adjoint** of $S$ by\n\n$$S^{*_{A_h}}:=A_h^{-1}S^{\\mathsf T}A_h.$$\n\nThis is well-defined because $A_h$ is invertible. For all $x,y$,\n$\\langle Sx,y\\rangle_{A_h}=x^{\\mathsf T}S^{\\mathsf T}A_hy\n=\\langle x,S^{*_{A_h}}y\\rangle_{A_h}$, so it is the adjoint with respect to\nthat energy inner product. The **symmetric two-grid error map** is\n\n$$E:=S^{*_{A_h}}CS.$$\n\nIt maps an input error through pre-smoothing $S$, exact coarse correction $C$,\nand the $A_h$-adjoint post-smoother.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-two-grid-energy-contraction-under-joint-estimate",
+          "source_section": "Statement",
+          "quote": "Let $A_h$, $C$, $S$, and $E=S^{*_{A_h}}CS$ be as in\n[[def-symmetric-two-grid-error-operator]]. Suppose $0\\le\\rho<1$ and\n\n$$\\|CSx\\|_{A_h}^2\\le\\rho\\|x\\|_{A_h}^2\\qquad\\text{for every }x\\in\\mathbb R^n.$$\n\nThen $E$ is self-adjoint and nonnegative in the $A_h$ inner product, and its\noperator norm induced by $\\|\\cdot\\|_{A_h}$ satisfies $\\|E\\|_{A_h}\\le\\rho$.\nA rate derived from separate smoothing and approximation inequalities requires\na proof that those inequalities imply this joint estimate.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [F1], the pre-smoother $S^\\nu$ satisfies the joint estimate with $\\rho=2/(2\\nu+1)$. For $\\nu\\ge1$, $0<\\rho\\le2/3<1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply [F3] to the symmetric error map [F2] with this value of $\\rho$. It follows that $\\|E\\|_{A_h}\\le2/(2\\nu+1)\\le2/3$, independently of $N$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes N=2M≥4."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The contraction theorem holds for every error vector, including zero, by Steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint case ν=1 is included and yields ρ=2/3 in Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Poisson stiffness matrix is SPD by the cited smoothing/approximation lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the nested Dirichlet grids in the cited lemma include both zero endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 combine finite estimates and use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a contraction claim with no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a contraction claim with no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: the lemma supplies the joint estimate and the generic theorem supplies the operator norm bound for the exact adjoint post-smoother. The rate is uniform in N. This is not independent approval."
+      }
+    },
+    "ex-one-dimensional-poisson-coarse-correction-removes-linear-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]), and let $L$ and its form $a$ be as in [[def-uniformly-elliptic-divergence-form-operator]] on an open set $\\Omega\\subseteq\\mathbb R^n$. **Homogeneous problem.** Given $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]), a **weak solution** of $Lu=F$ with zero boundary values is a class $u\\in H^1_0(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]) with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H^1_0(\\Omega).$$ **Inhomogeneous problem.** Additionally assume the Axiom of Choice ([[def-axiom-of-choice]]) for the trace supplier, and let $n\\ge2$ and $\\Omega$ be a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]), let $g\\in H^{1/2}(\\partial\\Omega):=W^{1/2,2}(\\partial\\Omega)$ in the boundary scale of [[def-fractional-sobolev-space-on-a-compact-c-one-boundary]] and let $T$ be the trace operator of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]]. A weak solution with boundary data $g$ is a class $u\\in H^1(\\Omega)$ with $Tu=g$ and $a(u,v)=F(v)$ for every $v\\in H^1_0(\\Omega)$. The defining identities are identities between functionals on the $H^1_0$ classes, so they are independent of the chosen almost-everywhere representatives of $u$, of the coefficients and of the data ([[lem-weak-derivative-is-independent-of-lp-representatives]], [[def-complex-lp-and-euclidean-test-function-conventions]]); the boundary condition is imposed through the trace of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]], never by pointwise evaluation. The Dirichlet condition is imposed by $u\\in H^1_0(\\Omega)$ in the homogeneous problem and by $Tu=g$ in the inhomogeneous problem; testing against $v\\in H^1_0$ expresses the weak equation and does not by itself impose boundary data; the integrals are the ones proved absolutely convergent in [[lem-elliptic-form-is-well-defined-and-bounded]].\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-uniformly-elliptic-divergence-form-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev interfaces. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Let $a^{ij},b^i,c:\\Omega\\to\\mathbb K$, $i,j=1,\\dots,n$, be measurable ([[def-measurable-function-between-measurable-spaces]]) and essentially bounded ([[def-l-infinity-on-a-measure-space]], [[def-essential-supremum-with-respect-to-a-measure]]), with bounds $$|a^{ij}|\\le M_a,\\quad |b^i|\\le M_b,\\quad |c|\\le M_c\\quad\\text{a.e. on }\\Omega,$$ and suppose the **uniform ellipticity** condition holds: there is $\\theta>0$ with $$\\operatorname{Re}\\Big(\\sum_{i,j=1}^n a^{ij}(x)\\xi_j\\overline{\\xi_i}\\Big)\\ge\\theta|\\xi|^2\\qquad\\text{for a.e. }x\\in\\Omega\\text{ and all }\\xi\\in\\mathbb C^n .$$ The associated **divergence-form expression** is $$Lu:=-D_i(a^{ij}D_ju)+b^iD_iu+cu$$ (Einstein summation over $i,j$), and the associated sesquilinear form on $H^1(\\Omega)$ is $$a(u,v):=\\int_\\Omega\\Big(a^{ij}D_ju\\overline{D_iv}+b^iD_iu\\overline{v}+cu\\overline{v}\\Big)dx .$$ The form is linear in $u$ and conjugate-linear in $v$, in the convention of [[def-bounded-coercive-and-symmetric-sesquilinear-forms]]; the classical Dirichlet problem consists of $Lu=f$ in $\\Omega$ with prescribed boundary values. The operator is determined by the coefficient functions only a.e., and all later statements about $a$ are statements about those classes. Where the domain and boundary data demand it ([[def-weak-dirichlet-solution-for-a-divergence-form-operator]], [[cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting]]) the domain is additionally a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]). The convention is the complex sesquilinear one with conjugation in the second slot, as the plan's convention audit directs; the real case is the same with conjugation read as the identity.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-galerkin-coarse-grid-correction",
+          "source_section": "Definition",
+          "quote": "Work over the real field with standard coordinate inner products. Let\n$A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite (equivalently,\npositive definite in the Cholesky convention of\n[[def-cholesky-factorisation-with-positive-diagonal]]) and let\n$P\\in\\mathbb R^{n\\times m}$ have full column rank, where $1\\le m\\le n$.\nThe map $P$ sends coarse-grid coordinate vectors to fine-grid coordinate\nvectors; its Euclidean adjoint is the transpose $P^{\\mathsf T}$ by\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]]. Define the **Galerkin\ncoarse matrix**\n\n$$A_H:=P^{\\mathsf T}A_hP.$$\n\nWhenever $A_H$ is invertible, define the **exact Galerkin coarse-correction\nerror map**\n\n$$C:=I_n-PA_H^{-1}P^{\\mathsf T}A_h.$$\n\nThis definition is conditional on invertibility of $A_H$. The next theorem\nproves that condition from positive definiteness of $A_h$ and full column rank\nof $P$. The formula is in exact real arithmetic; a rediscretized operator is\nnot identified with $A_H$ unless equality is separately shown.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $v:[0,1]\\to\\mathbb R$ be continuous and affine\non each interval of a finite partition $0=x_0<x_1<\\cdots<x_N=1$, with\n$v(0)=v(1)=0$. Then the Sobolev class of $v$ belongs to\n$H^1_0(0,1)=W^{1,2}_0((0,1);\\mathbb R)$, where $W^{1,2}_0$ is the norm\nclosure of $C_c^\\infty(0,1)$ in $W^{1,2}(0,1)$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Each fine nodal hat is continuous piecewise affine and zero at both endpoints, so [F4] places it in $H^1_0(0,1)$, the test space in [F1] under [A1]. On each interval its derivative is constant. For $i=j$, the integral $\\int\\phi_i'\\phi_i'$ receives $1/h$ from each of its two adjacent intervals, giving $2/h=8$; for adjacent indices, the shared interval contributes $-1/h=-4$; nonadjacent supports have zero derivative-product integral. Thus the matrix of $a(\\cdot,\\cdot)$ is the displayed $A_h$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "With $h=1/4$, direct multiplication gives $A_hP=(0,4,0)^{\\mathsf T}$ and $A_H=P^{\\mathsf T}A_hP=4$. Therefore [F3] gives $C=I-P(0,1,0)$, which maps $(x_1,x_2,x_3)^{\\mathsf T}$ to $(x_1-x_2/2,0,x_3-x_2/2)^{\\mathsf T}$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "For $e=(1,2,1)^{\\mathsf T}$, step 2.1 yields $Ce=(1-1,0,1-1)^{\\mathsf T}=0$. The error is exactly the prolongation of its single coarse value $2$, so the exact coarse correction removes it.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes N=4 and a three-dimensional interior error vector."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Example fixes the nonzero error e=(1,2,1)^T."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example has one coarse interior degree of freedom and computes its prolongation explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The displayed Poisson stiffness and coarse matrix are positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification Step 1.1 uses the zero Dirichlet endpoints in the nodal basis and stiffness integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example Step 1.1: Countable Choice is stated for the homogeneous interface; the finite calculation adds no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example verifies one exact correction and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example verifies one exact correction and states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: the h=1/4 stiffness entries, one-column prolongation, coarse scalar 4, and zero corrected vector are multiplied explicitly; the homogeneous Countable Choice branch is stated. This is not independent approval."
+      }
+    },
+    "ex-v-and-w-cycle-costs-in-two-dimensions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-galerkin-v-cycle-work-recurrence-master-regimes",
+          "source_section": "Statement",
+          "quote": "Suppose each level with $N$ unknowns has $cN$ arithmetic work outside\nrecursion, its next level has $N/q$ unknowns for a fixed $q=2^d>1$, the base\nsolve at $N=1$ has bounded positive cost, and each cycle makes $\\gamma\\ge1$\nrecursive calls as in [[alg-finite-galerkin-v-cycle]]. For $N=q^L$ the work\nrecurrence\n\n$$T(N)=cN+\\gamma T(N/q)$$\n\nhas order $\\Theta(N)$ when $\\gamma<q$, $\\Theta(N\\log N)$ when $\\gamma=q$,\nand $\\Theta(N^{\\log_q\\gamma})$ when $\\gamma>q$. These are arithmetic-work\nbounds conditional on the stated uniform per-level cost and coarsening\nassumptions. They do not imply convergence or include setup cost.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For the V-cycle, $T_V(N)=cN+T_V(N/4)$. Repeated substitution gives $$T_V(N)=cN\\sum_{r=0}^{L-1}4^{-r}+T_V(1).$$ The sum lies between $1$ and $4/3$, and $T_V(1)=\\Theta(1)$, so $T_V(N)=\\Theta(N)$. This is also the $\\gamma=1<4$ case of [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For the W-cycle, $T_W(N)=cN+2T_W(N/4)$, so $$T_W(N)=cN\\sum_{r=0}^{L-1}2^{-r}+2^LT_W(1).$$ The sum lies between $1$ and $2$, while $2^L=\\sqrt N$; consequently both terms are $O(N)$ and the first is a positive $cN$ lower bound. Hence $T_W(N)=\\Theta(N)$, agreeing with [F1] because $\\gamma=2<4$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumes L≥1, so N=4^L≥4 and the mesh is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Example concerns positive arithmetic work with c>0 and no zero-work regime."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The V-cycle case γ=1 is computed explicitly in Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The stated two-dimensional coarsening factor is q=4>1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example uses the recurrence in level sizes and has no spatial endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example expands finite geometric sums and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example gives two work estimates and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example gives two work estimates and no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: q=4 gives ratios 1/4 and 1/2 for V and W calls, respectively, and the recurrence proof keeps work separate from convergence. This is not independent approval."
+      }
+    },
+    "ex-one-dimensional-poisson-two-grid-uniform-contraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]), and let $L$ and its form $a$ be as in [[def-uniformly-elliptic-divergence-form-operator]] on an open set $\\Omega\\subseteq\\mathbb R^n$. **Homogeneous problem.** Given $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]), a **weak solution** of $Lu=F$ with zero boundary values is a class $u\\in H^1_0(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]) with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H^1_0(\\Omega).$$ **Inhomogeneous problem.** Additionally assume the Axiom of Choice ([[def-axiom-of-choice]]) for the trace supplier, and let $n\\ge2$ and $\\Omega$ be a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]), let $g\\in H^{1/2}(\\partial\\Omega):=W^{1/2,2}(\\partial\\Omega)$ in the boundary scale of [[def-fractional-sobolev-space-on-a-compact-c-one-boundary]] and let $T$ be the trace operator of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]]. A weak solution with boundary data $g$ is a class $u\\in H^1(\\Omega)$ with $Tu=g$ and $a(u,v)=F(v)$ for every $v\\in H^1_0(\\Omega)$. The defining identities are identities between functionals on the $H^1_0$ classes, so they are independent of the chosen almost-everywhere representatives of $u$, of the coefficients and of the data ([[lem-weak-derivative-is-independent-of-lp-representatives]], [[def-complex-lp-and-euclidean-test-function-conventions]]); the boundary condition is imposed through the trace of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]], never by pointwise evaluation. The Dirichlet condition is imposed by $u\\in H^1_0(\\Omega)$ in the homogeneous problem and by $Tu=g$ in the inhomogeneous problem; testing against $v\\in H^1_0$ expresses the weak equation and does not by itself impose boundary data; the integrals are the ones proved absolutely convergent in [[lem-elliptic-form-is-well-defined-and-bounded]].\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-uniformly-elliptic-divergence-form-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev interfaces. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Let $a^{ij},b^i,c:\\Omega\\to\\mathbb K$, $i,j=1,\\dots,n$, be measurable ([[def-measurable-function-between-measurable-spaces]]) and essentially bounded ([[def-l-infinity-on-a-measure-space]], [[def-essential-supremum-with-respect-to-a-measure]]), with bounds $$|a^{ij}|\\le M_a,\\quad |b^i|\\le M_b,\\quad |c|\\le M_c\\quad\\text{a.e. on }\\Omega,$$ and suppose the **uniform ellipticity** condition holds: there is $\\theta>0$ with $$\\operatorname{Re}\\Big(\\sum_{i,j=1}^n a^{ij}(x)\\xi_j\\overline{\\xi_i}\\Big)\\ge\\theta|\\xi|^2\\qquad\\text{for a.e. }x\\in\\Omega\\text{ and all }\\xi\\in\\mathbb C^n .$$ The associated **divergence-form expression** is $$Lu:=-D_i(a^{ij}D_ju)+b^iD_iu+cu$$ (Einstein summation over $i,j$), and the associated sesquilinear form on $H^1(\\Omega)$ is $$a(u,v):=\\int_\\Omega\\Big(a^{ij}D_ju\\overline{D_iv}+b^iD_iu\\overline{v}+cu\\overline{v}\\Big)dx .$$ The form is linear in $u$ and conjugate-linear in $v$, in the convention of [[def-bounded-coercive-and-symmetric-sesquilinear-forms]]; the classical Dirichlet problem consists of $Lu=f$ in $\\Omega$ with prescribed boundary values. The operator is determined by the coefficient functions only a.e., and all later statements about $a$ are statements about those classes. Where the domain and boundary data demand it ([[def-weak-dirichlet-solution-for-a-divergence-form-operator]], [[cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting]]) the domain is additionally a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]). The convention is the complex sesquilinear one with conjugation in the second slot, as the plan's convention audit directs; the real case is the same with conjugation read as the identity.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-galerkin-coarse-grid-correction",
+          "source_section": "Definition",
+          "quote": "Work over the real field with standard coordinate inner products. Let\n$A_h\\in\\mathbb R^{n\\times n}$ be symmetric positive definite (equivalently,\npositive definite in the Cholesky convention of\n[[def-cholesky-factorisation-with-positive-diagonal]]) and let\n$P\\in\\mathbb R^{n\\times m}$ have full column rank, where $1\\le m\\le n$.\nThe map $P$ sends coarse-grid coordinate vectors to fine-grid coordinate\nvectors; its Euclidean adjoint is the transpose $P^{\\mathsf T}$ by\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]]. Define the **Galerkin\ncoarse matrix**\n\n$$A_H:=P^{\\mathsf T}A_hP.$$\n\nWhenever $A_H$ is invertible, define the **exact Galerkin coarse-correction\nerror map**\n\n$$C:=I_n-PA_H^{-1}P^{\\mathsf T}A_h.$$\n\nThis definition is conditional on invertibility of $A_H$. The next theorem\nproves that condition from positive definiteness of $A_h$ and full column rank\nof $P$. The formula is in exact real arithmetic; a rediscretized operator is\nnot identified with $A_H$ unless equality is separately shown.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-symmetric-two-grid-error-operator",
+          "source_section": "Definition",
+          "quote": "Let $A_h$ be symmetric positive definite, let $C$ be the Galerkin projector\nof [[thm-galerkin-coarse-correction-is-energy-orthogonal-projector]], and let\n$S\\in\\mathbb R^{n\\times n}$ be a linear pre-smoothing error map. For the\nenergy inner product of [[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]],\ndefine the **$A_h$-adjoint** of $S$ by\n\n$$S^{*_{A_h}}:=A_h^{-1}S^{\\mathsf T}A_h.$$\n\nThis is well-defined because $A_h$ is invertible. For all $x,y$,\n$\\langle Sx,y\\rangle_{A_h}=x^{\\mathsf T}S^{\\mathsf T}A_hy\n=\\langle x,S^{*_{A_h}}y\\rangle_{A_h}$, so it is the adjoint with respect to\nthat energy inner product. The **symmetric two-grid error map** is\n\n$$E:=S^{*_{A_h}}CS.$$\n\nIt maps an input error through pre-smoothing $S$, exact coarse correction $C$,\nand the $A_h$-adjoint post-smoother.\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-one-dimensional-poisson-two-grid-energy-contraction",
+          "source_section": "Statement",
+          "quote": "For the nested one-dimensional Poisson grids and prolongation of\n[[lem-one-dimensional-poisson-smoothing-and-approximation]], take the\npre-smoothing error map to be $S^\\nu$, with $S=I-A_h/\\lambda_{\\max}(A_h)$,\nand take the post-smoother to be its $A_h$-adjoint. The resulting symmetric\ntwo-grid error map satisfies\n\n$$\\|E\\|_{A_h}\\le\\frac{2}{2\\nu+1}\\le\\frac23<1\\qquad(\\nu\\ge1),$$\n\nuniformly for all even $N=2M\\ge4$. This proves one concrete level-uniform\ntwo-grid rate; it does not assert convergence of an arbitrary AMG hierarchy.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $v:[0,1]\\to\\mathbb R$ be continuous and affine\non each interval of a finite partition $0=x_0<x_1<\\cdots<x_N=1$, with\n$v(0)=v(1)=0$. Then the Sobolev class of $v$ belongs to\n$H^1_0(0,1)=W^{1,2}_0((0,1);\\mathbb R)$, where $W^{1,2}_0$ is the norm\nclosure of $C_c^\\infty(0,1)$ in $W^{1,2}(0,1)$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The fine nodal hats are continuous piecewise affine and vanish at both endpoints, so [F6] puts them in the homogeneous test space of [F1] under [A1]; [F2] then gives their form as $\\int_0^1u'v'$. Direct determinant expansion gives $$\\det(tI-T_3)=t^3-6t^2+10t-4=(t-2)(t^2-4t+2),$$ so $\\lambda_{\\max}(A_h)=4(2+\\sqrt2)$, while direct multiplication gives $A_he=8e$. Thus one pre-sweep $S=I-A_h/\\lambda_{\\max}(A_h)$ sends $e$ to $\\bigl(1-8/[4(2+\\sqrt2)]\\bigr)e=(\\sqrt2-1)e$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Direct multiplication gives $A_hP=(0,4,0)^{\\mathsf T}$ and $A_H=P^{\\mathsf T}A_hP=4$. Hence $C=I-P(0,1,0)$ and $Ce=e$, since the middle component of $e$ is zero. Since $S=I-A_h/\\lambda_{\\max}$ is symmetric and commutes with $A_h$, its $A_h$-adjoint $A_h^{-1}S^{\\mathsf T}A_h$ equals $S$. Thus [F4] gives $Ee=(\\sqrt2-1)^2e=(3-2\\sqrt2)e$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Since $3-2\\sqrt2<2/3$ (equivalently $49<72$ after multiplying by positive quantities and squaring), this mode is damped by less than $2/3$. [F5] with $\\nu=1$ bounds the full energy operator norm by $2/3$, including every fine-grid mode.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes the nonempty N=4 grid and a three-dimensional error space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The worked vector e=(1,0,-1)^T is nonzero; the cited theorem separately covers zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coarse grid has one interior node, and the exact correction is computed in Step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The displayed Poisson stiffness matrix is SPD."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification Step 1.1 uses the zero Dirichlet nodal hats at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example Step 1.1: Countable Choice is stated for the homogeneous interface; the finite calculation adds no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example computes one mode and a norm bound, with no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example computes one mode and a norm bound, with no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-20 author self-check",
+        "notes": "Author self-check: T3 eigenvalues, the high-mode Richardson factor, invariance under C, squared two-grid factor, and full norm bound are checked separately. This is not independent approval."
+      }
+    }
+  }
+}

@@ -1,0 +1,786 @@
+[
+  {
+    "order": 2582,
+    "id": "barycentric-rational-and-aaa-approximation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Barycentric rational and aaa approximation",
+    "companion": "barycentric-rational-and-aaa-approximation-examples",
+    "requires": [
+      "computed-singular-values-and-rank-revealing-factorizations",
+      "minimax-approximation-and-remez-algorithms",
+      "outward-rounded-interval-and-ball-arithmetic"
+    ],
+    "items": [
+      {
+        "id": "alg-pade-coefficient-matching",
+        "kind": "algorithm",
+        "title": "Exact Padé coefficient matching with defect statuses",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Input nonnegative integers $m,n$ and coefficients $c_0,\\ldots,c_{m+n}\\in\n\\mathbb C$ of a formal power series or of an analytic function at $0$. Set\n$c_k=0$ for negative $k$. Seek a normalized denominator\n$q(z)=1+\\sum_{j=1}^nq_jz^j$. Form the $n\\times n$ moment system\n$$\\sum_{j=1}^{n}q_jc_{m+\\ell-j}=-c_{m+\\ell}, \\qquad 1\\le\\ell\\le n.$$\nClassify it by exact Gaussian elimination on the augmented matrix. Start with\npivot row $r=1$ and scan columns $j=1,\\ldots,n$ in order. In column $j$, if\nall entries in rows $r$ through $n$ are zero, leave that column free and\ncontinue. Otherwise choose the first row $s\\ge r$ with a nonzero entry in\ncolumn $j$, swap rows $s$ and $r$, divide row $r$ by its column-$j$ entry,\nand subtract the resulting row multiple from every other row to make the\nother entries in column $j$ zero; then increment $r$. After all columns, a\nrow whose coefficient entries are all zero and whose augmented entry is\nnonzero makes the system inconsistent, so return status\n$\\texttt{full-order-inconsistent}$. If the system is consistent but has\nrank less than $n$, return status $\\texttt{defective-nonunique}$ together\nwith the rank and reduced system; do not select a denominator from its\naffine solution set. Here rank is the number of pivot rows; consistency and rank are\nread from the reduced augmented matrix. If the system has rank $n$, return status\n$\\texttt{full-order-solvable}$ and the unique solution\n$(q_1,\\ldots,q_n)$ and set\n$$p_k=\\sum_{j=0}^{\\min(k,n)}q_jc_{k-j}, \\qquad 0\\le k\\le m,\\qquad q_0:=1.$$\nThe output is the coefficient-matching candidate $p/q$ with its full-order\nstatus. If $n=0$, return status $\\texttt{full-order-solvable}$ with the empty\ndenominator system's unique solution $q=1$ and numerator coefficients\n$p_k=c_k$ for $0\\le k\\le m$.\nThis procedure claims no pole-location or analytic-continuation guarantee.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pedro Gonnet, Stefan Güttel, and Lloyd N. Trefethen, Robust Padé Approximation via SVD, Section 2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/gonnet_guettel_trefethen.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-distinct-node-divided-difference",
+        "kind": "definition",
+        "title": "Divided differences on distinct nodes",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Let $q\\ge 0$, let $t_0,\\ldots,t_q$ be distinct real numbers, and let $f$ be\nreal-valued at these nodes. Define the **divided difference** recursively by\n$f[t_0]:=f(t_0)$ and, for $q\\ge1$,\n$$f[t_0,\\ldots,t_q]:= \\frac{f[t_1,\\ldots,t_q]-f[t_0,\\ldots,t_{q-1}]}{t_q-t_0}.$$\nAll sublists in the recursion remain distinct. The denominator is nonzero\nbecause $t_q\\ne t_0$, so this recursion gives a finite real number from the\nnode data.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 5",
+              "url": "https://people.maths.ox.ac.uk/trefethen/ATAP/ATAPfirst6chapters.pdf"
+            },
+            {
+              "title": "Jean-Paul Berrut and Lloyd N. Trefethen, Barycentric Lagrange Interpolation, Sections 2–3",
+              "url": "https://people.maths.ox.ac.uk/trefethen/barycentric.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-barycentric-denominator-polynomial-nonzero",
+        "kind": "lemma",
+        "title": "A barycentric denominator polynomial with nonzero weights is nonzero",
+        "deps": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yuji Nakatsukasa, Olivier Sète, and Lloyd N. Trefethen, The AAA algorithm for rational approximation, Section 2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/AAAfinal.pdf"
+            },
+            {
+              "title": "Jean-Paul Berrut and Lloyd N. Trefethen, Barycentric Lagrange Interpolation, Section 9.2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/barycentric.pdf"
+            }
+          ]
+        },
+        "statement": "Let $k\\ge1$, let $z_1,\\ldots,z_k\\in\\mathbb C$ be distinct, and let\n$w_1,\\ldots,w_k\\in\\mathbb C$ be nonzero. Then the polynomial\n$$\nQ(z)=\\sum_{j=1}^kw_j\\prod_{\\ell\\ne j}(z-z_\\ell)\n$$\nis not identically zero."
+      },
+      {
+        "id": "def-barycentric-rational-quotient",
+        "kind": "definition",
+        "title": "Barycentric rational quotient with support values and reduced poles",
+        "deps": [
+          "lem-barycentric-denominator-polynomial-nonzero"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $k\\ge1$, let $z_1,\\ldots,z_k\\in\\mathbb C$ be distinct support nodes, let\n$f_1,\\ldots,f_k\\in\\mathbb C$ be data, and let each weight $w_j\\in\\mathbb C$ be\nnonzero. Define the cleared polynomials\n$$P(z)=\\sum_{j=1}^{k}w_jf_j\\prod_{\\ell\\ne j}(z-z_\\ell), \\qquad Q(z)=\\sum_{j=1}^{k}w_j\\prod_{\\ell\\ne j}(z-z_\\ell).$$\nThe **barycentric rational quotient** is the rational function $r=P/Q$.\nAway from the support nodes this equals\n$$r(z)= \\frac{\\sum_{j=1}^{k} w_jf_j/(z-z_j)} {\\sum_{j=1}^{k} w_j/(z-z_j)}.$$\nAt a support node its value is given by the cleared quotient $P(z_j)/Q(z_j)$.\nA **pole** means a zero of the denominator after all common polynomial\nfactors of numerator and denominator have been canceled.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yuji Nakatsukasa, Olivier Sète, and Lloyd N. Trefethen, The AAA algorithm for rational approximation, Section 2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/AAAfinal.pdf"
+            },
+            {
+              "title": "Jean-Paul Berrut and Lloyd N. Trefethen, Barycentric Lagrange Interpolation, Section 9.2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/barycentric.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-divided-difference-lagrange-formula-and-symmetry",
+        "kind": "lemma",
+        "title": "Divided differences are symmetric leading coefficients",
+        "deps": [
+          "def-distinct-node-divided-difference",
+          "def-cardinal-polynomial-interpolation",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "def-natural-numbers",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 1,
+        "statement": "For distinct real nodes $t_0,\\ldots,t_q$ and assigned values $f(t_j)$,\n$$f[t_0,\\ldots,t_q] =\\sum_{j=0}^{q}\\frac{f(t_j)}{\\prod_{\\substack{0\\le k\\le q\\\\k\\ne j}}(t_j-t_k)}.$$\nConsequently the divided difference is symmetric in its nodes. It is the\ncoefficient of $t^q$ in the unique polynomial of degree at most $q$ that takes\nthe assigned values at those nodes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 5",
+              "url": "https://people.maths.ox.ac.uk/trefethen/ATAP/ATAPfirst6chapters.pdf"
+            },
+            {
+              "title": "Jean-Paul Berrut and Lloyd N. Trefethen, Barycentric Lagrange Interpolation, Sections 2–3",
+              "url": "https://people.maths.ox.ac.uk/trefethen/barycentric.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pade-solvable-system-gives-local-order",
+        "kind": "theorem",
+        "title": "A solvable Padé moment system gives the stated Taylor order",
+        "deps": [
+          "alg-pade-coefficient-matching"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pedro Gonnet, Stefan Güttel, and Lloyd N. Trefethen, Robust Padé Approximation via SVD, Section 2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/gonnet_guettel_trefethen.pdf"
+            }
+          ]
+        },
+        "statement": "Let $m,n\\ge0$, $R>0$, and\n$f(z)=\\sum_{k=0}^\\infty c_kz^k$ for $|z|<R$, with the series convergent\nthere. Suppose $q_0=1,q_1,\\ldots,q_n$ solve the full normalized\nPadé moment equations of [[alg-pade-coefficient-matching]]. Define\n$p_k=\\sum_{j=0}^{\\min(k,n)}q_jc_{k-j}$ for $0\\le k\\le m$, and\n$p(z)=\\sum_{k=0}^mp_kz^k$, $q(z)=\\sum_{j=0}^nq_jz^j$. Then\n$$\nf(z)-\\frac{p(z)}{q(z)}=O(z^{m+n+1})\\quad\\text{as }z\\to0.\n$$\nThis is a local Taylor-matching statement only; it gives no pole-location\nclaim and no guarantee about analytic continuation beyond the neighborhood\nwhere $f$ is given.\n\nHere $h(z)=O(z^M)$ as $z\\to0$ means there are constants $C,\\delta>0$ such\nthat $|h(z)|\\le C|z|^M$ whenever $0<|z|<\\delta$."
+      },
+      {
+        "id": "def-floater-hormann-interpolant",
+        "kind": "definition",
+        "title": "Floater–Hormann barycentric interpolant",
+        "deps": [
+          "def-barycentric-rational-quotient"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $n\\ge1$, let $x_0<\\cdots<x_n$ be distinct real nodes, let\n$f_0,\\ldots,f_n\\in\\mathbb R$ be data, and let $d$ be an integer with\n$0\\le d<n$. For $j=0,\\ldots,n$, define\n$$w_j=(-1)^{j-d} \\sum_{i=\\max(0,j-d)}^{\\min(j,n-d)} \\prod_{\\substack{i\\le k\\le i+d\\\\k\\ne j}}|x_j-x_k|^{-1}.$$\nThe index range is nonempty and every product is positive, so every $w_j$ is\nnonzero. The **Floater–Hormann interpolant of degree parameter $d$** is the\nbarycentric rational quotient of these nodes, data, and weights from\n[[def-barycentric-rational-quotient]]. Away from the nodes, exact evaluation\nuses the quotient with this denominator;\na zero of the reduced denominator is reported as pole status. The no-real-pole\ntheorem below proves that this status never occurs for admissible exact real\ninputs.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Sections 2 and 4",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-adjacent-window-divided-difference-recurrence",
+        "kind": "lemma",
+        "title": "Adjacent-window divided-difference recurrence",
+        "deps": [
+          "def-distinct-node-divided-difference",
+          "lem-divided-difference-lagrange-formula-and-symmetry",
+          "def-natural-numbers"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $n\\in\\mathbb N$, $n\\ge1$, and $d\\in\\mathbb N$ with $d<n$; let\n$x_0<\\cdots<x_n$, and let $x$ be distinct from these nodes. For every\n$0\\le i<n-d$, put\n$$G_i:=f[x_i,\\ldots,x_{i+d},x].$$\nThen\n$$G_i-G_{i+1} =-(x_{i+d+1}-x_i)f[x_i,\\ldots,x_{i+d+1},x].$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, proof of Theorem 2",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-divided-difference-repeated-rolle-bound",
+        "kind": "lemma",
+        "title": "Rolle bound for a divided difference",
+        "deps": [
+          "def-distinct-node-divided-difference",
+          "lem-divided-difference-lagrange-formula-and-symmetry",
+          "def-higher-derivatives-and-smoothness",
+          "def-natural-numbers",
+          "thm-extreme-value-r",
+          "thm-rolle"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Theorems 2–3",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Approximation Theory and Approximation Practice, Chapter 5",
+              "url": "https://people.maths.ox.ac.uk/trefethen/ATAP/ATAPfirst6chapters.pdf"
+            }
+          ]
+        },
+        "statement": "Let $a\\le b$, $q\\in\\mathbb N$, let $f\\in C^q([a,b])$, and let $t_0,\\ldots,t_q$ be distinct\npoints of $[a,b]$. Then\n$$\n|f[t_0,\\ldots,t_q]|\\le \\frac{\\|f^{(q)}\\|_{\\infty,[a,b]}}{q!},\n$$\nwhere $0!:=1$, $f^{(0)}:=f$, and\n$\\|g\\|_{\\infty,[a,b]}:=\\sup_{x\\in[a,b]}|g(x)|$."
+      },
+      {
+        "id": "lem-hermite-genocchi-simplex-integral",
+        "kind": "lemma",
+        "title": "Hermite–Genocchi simplex formula for divided differences",
+        "deps": [
+          "def-distinct-node-divided-difference",
+          "lem-divided-difference-lagrange-formula-and-symmetry",
+          "def-natural-numbers",
+          "def-higher-derivatives-and-smoothness",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $q\\in\\mathbb N$, let $f\\in C^q([a,b])$, and let\n$t_0,\\ldots,t_q\\in[a,b]$ be distinct real nodes. For $q\\ge1$, define\n$$\\Delta_q=\\{(u_1,\\ldots,u_q)\\in[0,\\infty)^q:\\ u_1+\\cdots+u_q\\le1\\}, \\qquad u_0=1-\\sum_{j=1}^q u_j.$$\nThen\n$$f[t_0,\\ldots,t_q] =\\int_{\\Delta_q}f^{(q)}\\!\\left(\\sum_{j=0}^q u_jt_j\\right) \\,du_1\\cdots du_q, \\qquad \\operatorname{vol}(\\Delta_q)=\\frac1{q!}.$$\nFor $q=0$, the integral is by convention evaluation at $t_0$, and\n$\\operatorname{vol}(\\Delta_0):=1$.\nFor $q\\ge1$, the integral over $\\Delta_q$ is the iterated Riemann integral\nwith $0\\le u_1\\le1$ and, successively,\n$0\\le u_j\\le1-\\sum_{k=1}^{j-1}u_k$ for $2\\le j\\le q$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carl de Boor, Divided Differences, Section 9, Genocchi–Hermite, pages 63–65, formula (52)",
+              "url": "https://ftp.cs.wisc.edu/Approx/dvdsurvey.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-barycentric-rational-quotient-well-defined",
+        "kind": "proposition",
+        "title": "Barycentric rational quotients are defined and interpolate at support nodes",
+        "deps": [
+          "def-barycentric-rational-quotient",
+          "lem-barycentric-denominator-polynomial-nonzero"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yuji Nakatsukasa, Olivier Sète, and Lloyd N. Trefethen, The AAA algorithm for rational approximation, Section 2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/AAAfinal.pdf"
+            },
+            {
+              "title": "Jean-Paul Berrut and Lloyd N. Trefethen, Barycentric Lagrange Interpolation, Section 9.2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/barycentric.pdf"
+            }
+          ]
+        },
+        "statement": "For the data and nonzero weights in [[def-barycentric-rational-quotient]],\n$Q$ is not the zero polynomial, the rational function $P/Q$ is well-defined,\nand $r(z_j)=f_j$ for each support node $z_j$."
+      },
+      {
+        "id": "alg-aaa-finite-sample-rational-approximation",
+        "kind": "algorithm",
+        "title": "Finite-sample AAA rational approximation with exact SVD",
+        "deps": [
+          "def-barycentric-rational-quotient",
+          "prop-barycentric-rational-quotient-well-defined",
+          "thm-singular-value-decomposition",
+          "alg-householder-bidiagonalization",
+          "alg-implicit-shifted-bidiagonal-qr-with-deflation"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yuji Nakatsukasa, Olivier Sète, and Lloyd N. Trefethen, The AAA algorithm for rational approximation, Sections 2–4",
+              "url": "https://people.maths.ox.ac.uk/trefethen/AAAfinal.pdf"
+            }
+          ]
+        },
+        "statement": "Input a nonempty ordered list of distinct sample points\n$Z=(z_1,\\ldots,z_N)\\subset\\mathbb C$, data\n$F=(f_1,\\ldots,f_N)\\in\\mathbb C^N$, an absolute tolerance $\\tau\\ge0$, an\ninteger support budget $B$ with $0\\le B\\le\\lfloor N/2\\rfloor$, and a finite integer\nbidiagonal-QR sweep budget $S\\ge0$. The procedure is evaluated in exact\narithmetic; its finite-precision implementation makes no optimality claim.\nFor $v\\in\\mathbb C^k$, use the standard Hermitian inner product and Euclidean\nnorm $\\|v\\|_2=(\\sum_{j=1}^k|v_j|^2)^{1/2}$.\nInitialize the accepted support-record list $S_{\\rm acc}=\\varnothing$; each\nrecord stores an original index, its sample point, and its data value. Set the\nremaining original-index list $R=(1,\\ldots,N)$. Every return has form\n$(r_{\\rm acc},S_{\\rm acc},\\text{status},\\mathcal R)$, where $\\mathcal R$ is\nthe residual record maintained below.\n\n1. Set the initial rational candidate $r_0$ to the constant mean\n$\\bar f=N^{-1}\\sum_i f_i$. Compute\n$\\eta_0=\\max_i|f_i-\\bar f|$, set the last accepted candidate $r_{\\rm acc}=r_0$,\nand set $\\mathcal R=((0,\\eta_0))$. If $\\eta_0\\le\\tau$, return\n$(r_{\\rm acc},S_{\\rm acc},\\texttt{tolerance-met},\\mathcal R)$.\n\n2. For $m=1,\\ldots,B$, choose from $R$ the least original index $s$ that\nmaximizes the absolute residual from $r_{\\rm acc}$. Let $S_{\\rm prov}$ be\n$S_{\\rm acc}$ with $(s,z_s,f_s)$ appended; remove $s$ from $R$.\n\n3. Form the $(N-m)\\times m$ Loewner matrix\n$L_{ij}=(f_i-f_{s_j})/(z_i-z_{s_j})$, where $i$ ranges over the indices in\n$R$ and $s_j$ are the original indices in $S_{\\rm prov}$. The denominator is\nnonzero because all sample points are distinct.\n\n4. Compute an exact full singular value decomposition (SVD) of $L$ by applying\n[[alg-householder-bidiagonalization]] followed by\n[[alg-implicit-shifted-bidiagonal-qr-with-deflation]] with zero deflation\ntolerance and budget $S$. If either call returns failure or the QR budget is\nexhausted, return $(r_{\\rm acc},S_{\\rm acc},\\texttt{inconclusive},\\mathcal R)$.\n\n5. Let $E$ be the right singular subspace for the smallest singular value of\n$L$, and let $P_E$ be its orthogonal projection. Choose the least coordinate\nindex $j$ for which $P_Ee_j\\ne0$ and set $w=P_Ee_j/\\|P_Ee_j\\|_2$. This rule\napplies at every multiplicity, including dimension one. Multiply by the\nunique unit scalar that makes the first nonzero coordinate of $w$ positive\nreal. If any coordinate of $w$ is zero, reject this provisional support and\nreturn $(r_{\\rm acc},S_{\\rm acc},\\texttt{zero-support-weight},\\mathcal R)$.\n\n6. Form the barycentric rational quotient using the nodes and data in\n$S_{\\rm prov}$ and $w$ as its weights. If this rational function has a\ngenuine pole at any remaining sample point, reject this provisional support\nand return $(r_{\\rm acc},S_{\\rm acc},\\texttt{pole-status},\\mathcal R)$.\nOtherwise accept the candidate by setting $r_{\\rm acc}$ to it and\n$S_{\\rm acc}=S_{\\rm prov}$, and append $(m,\\eta_m,\\sigma_m)$, where $\\eta_m$\nis its maximum sampled residual and $\\sigma_m=\\|Lw\\|_2$, to $\\mathcal R$. If\n$\\eta_m\\le\\tau$, return\n$(r_{\\rm acc},S_{\\rm acc},\\texttt{tolerance-met},\\mathcal R)$.\n\n7. If all $B$ iterations finish without another return, return\n$(r_{\\rm acc},S_{\\rm acc},\\texttt{support-budget-exhausted},\\mathcal R)$. In\nparticular $B=0$ returns the initial constant and empty support list with this\nstatus when step 1 does not return.\n\nThe support tie rule and the projection rule make the exact procedure\ndeterministic, including when the smallest singular value has multiplicity\ngreater than one. Rank deficiency is permitted: if the smallest singular\nvalue is zero and all selected weights are nonzero and the quotient is finite\nat the remaining sample points, the candidate is accepted and its exact\nsample residual is evaluated. The algorithm asserts no uniform off-grid error\nbound and no minimax optimality. The Loewner residual $\\sigma_m$ is a linear\nleast-squares residual, not the nonlinear sampled residual $\\eta_m$."
+      },
+      {
+        "id": "def-floater-hormann-local-mesh-ratio",
+        "kind": "definition",
+        "title": "Local mesh ratio for degree-zero Floater–Hormann interpolation",
+        "deps": [
+          "def-floater-hormann-interpolant"
+        ],
+        "dependency_level": 3,
+        "statement": "For ordered nodes $x_0<\\cdots<x_n$, $n\\ge1$, set $\\beta:=0$ if $n\\le2$. If\n$n\\ge3$, define the **local mesh ratio**\n$$\\beta= \\max_{1\\le\\alpha\\le n-2} \\min\\left\\{ \\frac{x_{\\alpha+1}-x_\\alpha}{x_\\alpha-x_{\\alpha-1}}, \\frac{x_{\\alpha+1}-x_\\alpha}{x_{\\alpha+2}-x_{\\alpha+1}} \\right\\}.$$\nAll denominators are positive. This parameter is used only for the\ndegree-zero error bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Theorem 3",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-floater-hormann-window-polynomial",
+        "kind": "definition",
+        "title": "Local polynomial in a Floater–Hormann window",
+        "deps": [
+          "def-floater-hormann-interpolant"
+        ],
+        "dependency_level": 3,
+        "statement": "For the nodes, data, and degree parameter of\n[[def-floater-hormann-interpolant]], let $0\\le i\\le n-d$. The local\n**window polynomial** is\n$$p_i(t)=\\sum_{k=i}^{i+d}f_k \\prod_{\\substack{i\\le j\\le i+d\\\\j\\ne k}} \\frac{t-x_j}{x_k-x_j}.$$\nAll denominators are nonzero because the nodes are distinct. Empty products\nequal one, in particular when $d=0$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Section 2",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hermite-genocchi-bv-window-variation",
+        "kind": "lemma",
+        "title": "Bounded variation controls adjacent Hermite–Genocchi windows",
+        "deps": [
+          "lem-hermite-genocchi-simplex-integral",
+          "def-bounded-variation-and-total-variation",
+          "def-higher-derivatives-and-smoothness",
+          "def-natural-numbers"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $n\\ge1$, let $0\\le d<n$, let $x_0<\\cdots<x_n$ be real nodes, and fix a real query point\n$x\\in[x_0,x_n]$ distinct from the nodes. Let $f\\in C^{d+1}([x_0,x_n])$, put\n$g=f^{(d+1)}$, and suppose $g$ has finite total variation\n$V=\\operatorname{Var}_{[x_0,x_n]}(g)$ as defined in\n[[def-bounded-variation-and-total-variation]]. For $0\\le i\\le n-d$, put\n$G_i=f[x_i,\\ldots,x_{i+d},x]$. Then\n$$\\sum_{i=0}^{n-d-1}|G_{i+1}-G_i|\\le \\frac{V}{(d+1)!}.$$",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Sections 2–3",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-floater-hormann-local-mesh-ratio-bounded-by-global",
+        "kind": "lemma",
+        "title": "A global mesh ratio bounds the local degree-zero ratio",
+        "deps": [
+          "def-floater-hormann-local-mesh-ratio"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Theorem 3",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        },
+        "statement": "Let $x_0<\\cdots<x_n$, $n\\ge1$, put\n$h=\\max_{0\\le j<n}(x_{j+1}-x_j)$ and\n$h_{\\min}=\\min_{0\\le j<n}(x_{j+1}-x_j)$, and let\n$\\rho=h/h_{\\min}$. The local ratio $\\beta$ in\n[[def-floater-hormann-local-mesh-ratio]] satisfies $0\\le\\beta\\le\\rho$."
+      },
+      {
+        "id": "lem-floater-hormann-window-polynomial-interpolates",
+        "kind": "lemma",
+        "title": "Floater–Hormann window polynomials interpolate their local data",
+        "deps": [
+          "def-floater-hormann-window-polynomial",
+          "def-cardinal-polynomial-interpolation",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "def-natural-numbers"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Section 2",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        },
+        "statement": "For each window $i$, the polynomial $p_i$ in\n[[def-floater-hormann-window-polynomial]] has degree at most $d$ and satisfies\n$p_i(x_k)=f_k$ for every $i\\le k\\le i+d$. It is the unique polynomial of\ndegree at most $d$ with those values. In particular, when all local data\nequal $1$, the local Lagrange basis functions sum to the constant polynomial\n$1$."
+      },
+      {
+        "id": "thm-aaa-loewner-minimum-and-support-interpolation",
+        "kind": "theorem",
+        "title": "AAA weights minimize the Loewner residual and interpolate support data",
+        "deps": [
+          "alg-aaa-finite-sample-rational-approximation",
+          "def-barycentric-rational-quotient",
+          "prop-barycentric-rational-quotient-well-defined",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yuji Nakatsukasa, Olivier Sète, and Lloyd N. Trefethen, The AAA algorithm for rational approximation, Sections 2–4",
+              "url": "https://people.maths.ox.ac.uk/trefethen/AAAfinal.pdf"
+            },
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, fourth edition, singular value decomposition",
+              "url": "https://linear.axler.net/LADR4e.pdf"
+            }
+          ]
+        },
+        "statement": "At an AAA iteration whose exact SVD call completes successfully, with Loewner matrix\n$L\\in\\mathbb C^{(N-m)\\times m}$,\nthe selected unit weight vector $w$ minimizes $\\|Lv\\|_2$ among all\n$v\\in\\mathbb C^m$ with $\\|v\\|_2=1$; its residual is the smallest singular\nvalue of $L$. If every selected weight is nonzero and the iteration does not\nreturn pole status, its barycentric candidate interpolates all selected\nsupport data. The finite support budget makes the procedure terminate after\nat most $B$ iterations. These claims concern finite sampled data and do not\nassert minimax optimality or uniform off-grid convergence."
+      },
+      {
+        "id": "lem-floater-hormann-weight-and-blend-identity",
+        "kind": "lemma",
+        "title": "Floater–Hormann weights equal the local-polynomial blend weights",
+        "deps": [
+          "def-floater-hormann-interpolant",
+          "def-floater-hormann-window-polynomial",
+          "lem-floater-hormann-window-polynomial-interpolates",
+          "def-barycentric-rational-quotient"
+        ],
+        "dependency_level": 5,
+        "statement": "For $n\\ge1$ and $0\\le d<n$, define\n$$\\lambda_i(x)=\\frac{(-1)^i}{\\prod_{k=i}^{i+d}(x-x_k)},\\qquad \\mu_i(x)=\\prod_{j<i}(x-x_j)\\prod_{k>i+d}(x_k-x), \\qquad 0\\le i\\le n-d,$$\nwhere empty products equal $1$. Put $s(x)=\\sum_i\\mu_i(x)$ and let $p_i$ be\nthe window polynomials in [[def-floater-hormann-window-polynomial]]. For\n$x\\notin\\{x_0,\\ldots,x_n\\}$, the Floater–Hormann quotient is\n$$r_d(x)=\\frac{\\sum_i\\lambda_i(x)p_i(x)}{\\sum_i\\lambda_i(x)} =\\frac{\\sum_i\\mu_i(x)p_i(x)}{s(x)}.$$\nMoreover, clearing the node factors in the barycentric denominator gives\n$\\prod_{j=0}^n(x-x_j)\\sum_i\\lambda_i(x)=(-1)^{n-d}s(x)$.\nAfter clearing and canceling the displayed factors, this is a polynomial\nidentity valid at every real $x$, including the nodes.\nExpanding this expression into a support-node barycentric quotient gives\nexactly the weights in [[def-floater-hormann-interpolant]]. Its continuous\nvalues at the nodes are the assigned data.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Sections 2 and 4",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            },
+            {
+              "title": "Jean-Paul Berrut and Lloyd N. Trefethen, Barycentric Lagrange Interpolation, Section 9.2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/barycentric.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-floater-hormann-window-newton-remainder",
+        "kind": "lemma",
+        "title": "Newton remainder for a Floater–Hormann window polynomial",
+        "deps": [
+          "def-floater-hormann-window-polynomial",
+          "lem-floater-hormann-window-polynomial-interpolates",
+          "def-distinct-node-divided-difference",
+          "lem-divided-difference-lagrange-formula-and-symmetry",
+          "def-cardinal-polynomial-interpolation",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "def-natural-numbers"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $x\\notin\\{x_i,\\ldots,x_{i+d}\\}$. For any real data at these nodes and at\n$x$, the local polynomial from\n[[def-floater-hormann-window-polynomial]] satisfies\n$$f(x)-p_i(x)= \\left(\\prod_{k=i}^{i+d}(x-x_k)\\right) f[x_i,\\ldots,x_{i+d},x].$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, proof of Theorem 2",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-floater-hormann-gap-partial-sums-positive",
+        "kind": "lemma",
+        "title": "Floater–Hormann blend partial sums are positive in each node gap",
+        "deps": [
+          "def-floater-hormann-interpolant",
+          "lem-floater-hormann-weight-and-blend-identity"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $x_0<\\cdots<x_n$ and $0\\le d<n$, and use the $\\mu_i$ and\n$s=\\sum_{i=0}^{n-d}\\mu_i$ of\n[[lem-floater-hormann-weight-and-blend-identity]]. For\n$x_\\alpha<x<x_{\\alpha+1}$, partition the indices into\n$$I_1=\\{i\\le\\alpha-d\\},\\quad I_2=\\{\\alpha-d+1\\le i\\le\\alpha\\},\\quad I_3=\\{i\\ge\\alpha+1\\},$$\nintersecting each set with $\\{0,\\ldots,n-d\\}$. Each nonempty partial sum\n$\\sum_{i\\in I_k}\\mu_i(x)$ is positive. More precisely, if $I_3$ is nonempty,\nits terms alternate starting positive with strictly decreasing magnitudes; if\n$I_1$ is nonempty, its terms have the same property when read backward from\n$i=\\alpha-d$. If $d\\ge1$, every term in $I_2$ is positive.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, proof of Theorem 1",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-floater-hormann-denominator-lower-bound",
+        "kind": "lemma",
+        "title": "Floater–Hormann barycentric denominator lower bound",
+        "deps": [
+          "def-floater-hormann-interpolant",
+          "lem-floater-hormann-weight-and-blend-identity",
+          "lem-floater-hormann-gap-partial-sums-positive",
+          "def-floater-hormann-local-mesh-ratio"
+        ],
+        "dependency_level": 7,
+        "statement": "Let $n\\ge1$, $0\\le d<n$, $x_0<\\cdots<x_n$, and\n$h=\\max_j(x_{j+1}-x_j)$. Let $D_d(x)=\\sum_{j=0}^n w_j/(x-x_j)$ be the\nFloater–Hormann denominator from\n[[def-floater-hormann-interpolant]]. For every open gap\n$x_\\alpha<x<x_{\\alpha+1}$,\n$$|D_d(x)|\\ge \\begin{cases} \\dfrac{1}{d!\\,h^{d+1}}, & d\\ge1,\\\\[4pt] \\dfrac{1}{h(1+\\beta)}, & d=0, \\end{cases}$$\nwhere $\\beta$ is the local ratio of\n[[def-floater-hormann-local-mesh-ratio]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, proofs of Theorems 2–3",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-floater-hormann-no-real-poles",
+        "kind": "theorem",
+        "title": "Floater–Hormann interpolants have no real poles",
+        "deps": [
+          "def-floater-hormann-interpolant",
+          "lem-floater-hormann-weight-and-blend-identity",
+          "lem-floater-hormann-gap-partial-sums-positive"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Theorem 1",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        },
+        "statement": "For any $n\\ge1$, any distinct ordered real nodes $x_0<\\cdots<x_n$, any real\ndata $f_0,\\ldots,f_n$, and any integer $0\\le d<n$, the exact\nFloater–Hormann rational function in\n[[def-floater-hormann-interpolant]] has no real poles."
+      },
+      {
+        "id": "cex-floater-hormann-cd1-seminorm-rate-fails",
+        "kind": "counterexample",
+        "title": "Uniform meshes refute the C^(d+1)-seminorm-only Floater–Hormann rate",
+        "deps": [
+          "def-floater-hormann-interpolant",
+          "def-barycentric-rational-quotient",
+          "thm-floater-hormann-no-real-poles",
+          "def-higher-derivatives-and-smoothness",
+          "thm-extreme-value-r"
+        ],
+        "dependency_level": 8,
+        "statement": "The refuted claim is that, for every integer $d\\ge0$ and $\\rho\\ge1$, there\nexists a constant $C(d,\\rho)$ such that for every $n>d$, every ordered\ndistinct real mesh $x_0<\\cdots<x_n$ in a compact interval $[a,b]$, and every\n$f\\in C^{d+1}([a,b])$, the exact Floater–Hormann interpolant $r_d$ satisfies\nthe following bound whenever $h/h_{\\min}\\le\\rho$, where\n$h=\\max_j(x_{j+1}-x_j)$ and $h_{\\min}=\\min_j(x_{j+1}-x_j)$:\n$$\\|f-r_d\\|_\\infty\\le C(d,\\rho)h^{d+1}\\|f^{(d+1)}\\|_\\infty$$\nHere $\\|q\\|_\\infty:=\\sup_{t\\in[a,b]}|q(t)|$ for continuous $q$ on $[a,b]$.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Sections 2 and 4",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "thm-floater-hormann-error-rate-bv",
+        "kind": "theorem",
+        "title": "Floater–Hormann error bounds for a bounded-variation highest derivative",
+        "deps": [
+          "def-floater-hormann-interpolant",
+          "lem-floater-hormann-weight-and-blend-identity",
+          "lem-floater-hormann-window-newton-remainder",
+          "lem-hermite-genocchi-simplex-integral",
+          "lem-hermite-genocchi-bv-window-variation",
+          "lem-floater-hormann-denominator-lower-bound",
+          "thm-floater-hormann-no-real-poles",
+          "def-bounded-variation-and-total-variation",
+          "def-floater-hormann-local-mesh-ratio",
+          "lem-floater-hormann-local-mesh-ratio-bounded-by-global",
+          "def-higher-derivatives-and-smoothness",
+          "def-natural-numbers",
+          "thm-extreme-value-r",
+          "lem-mean-value-theorem-on-closed-interval"
+        ],
+        "dependency_level": 8,
+        "statement": "Let $n\\ge1$, $0\\le d<n$, and $x_0<\\cdots<x_n$ be real nodes in\n$[a,b]=[x_0,x_n]$. Put\n$h=\\max_{0\\le j<n}(x_{j+1}-x_j)$, $m=n-d$, and\n$\\epsilon=1$ if $m$ is even and $\\epsilon=0$ if $m$ is odd. Let\n$f\\in C^{d+1}([a,b])$, set $g=f^{(d+1)}$, and suppose $g$ has finite total\nvariation $V=\\operatorname{Var}_{[a,b]}(g)$ as defined in\n[[def-bounded-variation-and-total-variation]]. For a continuous $q$ on\n$[a,b]$, write $\\|q\\|_\\infty=\\sup_{x\\in[a,b]}|q(x)|$. If $d\\ge1$, then\n$$\\|f-r_d\\|_\\infty \\le \\frac{h^{d+1}}{d+1}\\bigl(V+\\epsilon\\|g\\|_\\infty\\bigr),$$\nIf $d=0$, let $\\beta$ be the local mesh ratio in\n[[def-floater-hormann-local-mesh-ratio]]. Then\n$$\\|f-r_0\\|_\\infty\\le h(1+\\beta)\\bigl(V+\\epsilon\\|f'\\|_\\infty\\bigr).$$\nNo mesh-ratio restriction is needed when $d\\ge1$. For $d=0$, a fixed global\nmesh-ratio bound $\\rho=h/h_{\\min}$ implies $\\beta\\le\\rho$ by\n[[lem-floater-hormann-local-mesh-ratio-bounded-by-global]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Sections 2–3",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-floater-hormann-error-rate-c2",
+        "kind": "theorem",
+        "title": "Floater–Hormann C^(d+2) parity error bounds",
+        "deps": [
+          "def-floater-hormann-interpolant",
+          "lem-floater-hormann-weight-and-blend-identity",
+          "lem-floater-hormann-window-newton-remainder",
+          "lem-divided-difference-repeated-rolle-bound",
+          "lem-adjacent-window-divided-difference-recurrence",
+          "lem-floater-hormann-denominator-lower-bound",
+          "thm-floater-hormann-no-real-poles",
+          "def-floater-hormann-local-mesh-ratio",
+          "lem-floater-hormann-local-mesh-ratio-bounded-by-global",
+          "def-higher-derivatives-and-smoothness",
+          "def-natural-numbers",
+          "thm-extreme-value-r"
+        ],
+        "dependency_level": 8,
+        "statement": "Let $n\\ge1$, $0\\le d<n$, and $x_0<\\cdots<x_n$ be real nodes in\n$[a,b]=[x_0,x_n]$. Put\n$h=\\max_{0\\le j<n}(x_{j+1}-x_j)$, $m=n-d$, and\n$\\epsilon=1$ if $m$ is even and $\\epsilon=0$ if $m$ is odd. Let\n$f\\in C^{d+2}([a,b])$ and let $r_d$ be the exact Floater–Hormann interpolant.\nFor a continuous $q$ on $[a,b]$, write\n$\\|q\\|_\\infty=\\sup_{x\\in[a,b]}|q(x)|$. If $d\\ge1$, then\n$$\\|f-r_d\\|_\\infty \\le h^{d+1}\\left( \\frac{(b-a)\\|f^{(d+2)}\\|_\\infty}{d+2} +\\epsilon\\frac{\\|f^{(d+1)}\\|_\\infty}{d+1} \\right).$$\nIf $d=0$, let $\\beta$ be the local mesh ratio in\n[[def-floater-hormann-local-mesh-ratio]]. Then\n$$\\|f-r_0\\|_\\infty \\le h(1+\\beta)\\left( \\frac{(b-a)\\|f''\\|_\\infty}{2} +\\epsilon\\|f'\\|_\\infty \\right).$$\nNo quasi-uniformity hypothesis is needed when $d\\ge1$. If $d=0$, a bound\n$\\beta\\le\\rho$ follows from a global mesh-ratio bound $\\rho$ by\n[[lem-floater-hormann-local-mesh-ratio-bounded-by-global]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael S. Floater and Kai Hormann, Barycentric rational interpolation with no poles and high rates of approximation, Theorems 2–3",
+              "url": "https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2583,
+    "id": "barycentric-rational-and-aaa-approximation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Barycentric rational and aaa approximation — Examples",
+    "companion": "barycentric-rational-and-aaa-approximation",
+    "requires": [
+      "barycentric-rational-and-aaa-approximation"
+    ],
+    "items": [
+      {
+        "id": "ex-pade-singular-system-and-froissart-cancellation",
+        "kind": "example",
+        "title": "Padé matching can be singular or create a Froissart doublet",
+        "deps": [
+          "alg-pade-coefficient-matching",
+          "thm-pade-solvable-system-gives-local-order"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pedro Gonnet, Stefan Güttel, and Lloyd N. Trefethen, Robust Padé Approximation via SVD, Sections 2 and 5",
+              "url": "https://people.maths.ox.ac.uk/trefethen/gonnet_guettel_trefethen.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "This example exhibits a rank-deficient normalized moment system, an\ninconsistent full-order system, and a Padé pole-zero pair for an entire\npolynomial target. It shows why coefficient matching alone supplies no\npole-location or analytic-continuation guarantee. A close pole-zero pair with\nsmall residue is called a Froissart doublet."
+      },
+      {
+        "id": "ex-aaa-small-sample-error-does-not-control-off-grid",
+        "kind": "example",
+        "title": "Zero AAA sample residual can coexist with arbitrary off-grid error",
+        "deps": [
+          "alg-aaa-finite-sample-rational-approximation"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yuji Nakatsukasa, Olivier Sète, and Lloyd N. Trefethen, The AAA algorithm for rational approximation, Sections 3–4",
+              "url": "https://people.maths.ox.ac.uk/trefethen/AAAfinal.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let the sample set be $Z=(0,1)$ and, for any $M>0$, let\n$f_M(t)=Mt(1-t)$ on $[0,1]$. Exact AAA with support budget $B=1$, sweep\nbudget $S=0$, and tolerance zero starts at the constant mean of the two\nsamples and returns immediately with zero sampled residual, but its uniform\nerror is $M/4$.\nFor a continuous $q$ on $[0,1]$, write\n$\\|q\\|_{\\infty,[0,1]}:=\\sup_{t\\in[0,1]}|q(t)|$."
+      },
+      {
+        "id": "ex-aaa-transfer-function-pole",
+        "kind": "example",
+        "title": "AAA recovers a scalar transfer-function pole from four samples",
+        "deps": [
+          "alg-aaa-finite-sample-rational-approximation",
+          "alg-householder-bidiagonalization",
+          "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+          "def-real-and-complex-givens-transformations",
+          "lem-exact-householder-bidiagonal-reduction",
+          "thm-aaa-loewner-minimum-and-support-interpolation",
+          "def-barycentric-rational-quotient"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yuji Nakatsukasa, Olivier Sète, and Lloyd N. Trefethen, The AAA algorithm for rational approximation, Sections 2–4",
+              "url": "https://people.maths.ox.ac.uk/trefethen/AAAfinal.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "statement": "The scalar transfer function $H(z)=C(zI-A)^{-1}B$ with $A=[2]$ and\n$B=C=[1]$ is $H(z)=1/(z-2)$. On the ordered sample set\n$Z=(0,1,3,4)$, exact AAA with support budget $B_{\\max}=2$, tolerance $0$,\nand bidiagonal-QR sweep budget $S=1$ selects support nodes $1$ and $3$ and\nreturns the exact transfer function. Its reduced denominator has the true\npole $z=2$."
+      }
+    ]
+  }
+]

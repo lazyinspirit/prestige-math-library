@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "27",
+  "round": 0,
+  "reviewed_items": [
+    "def-cartesian-gaussian-primitives-and-contractions",
+    "def-boys-function-and-coulomb-auxiliary-recurrence",
+    "def-finite-gaussian-basis-variational-energy-and-gradient",
+    "thm-gaussian-product-theorem-and-polynomial-shift",
+    "thm-boys-integral-identities-series-and-incomplete-gamma",
+    "lem-boys-positive-midpoint-enclosure",
+    "lem-cartesian-gaussian-moments-and-parameter-derivatives",
+    "thm-gaussian-contraction-error-energy-gradient-bounds",
+    "def-hermite-gaussian-coulomb-auxiliary-functions",
+    "thm-cartesian-pair-hermite-expansion-and-coefficient-recurrence",
+    "thm-cartesian-gaussian-integrals-absolutely-convergent",
+    "lem-boys-small-taylor-remainder",
+    "lem-boys-incomplete-gamma-large-t-tail-bound",
+    "lem-boys-upward-downward-recurrence-error-amplification",
+    "thm-cartesian-gaussian-raising-lowering-and-kinetic-recurrences",
+    "thm-positive-coulomb-bilinear-cauchy-schwarz-screening",
+    "alg-certified-boys-finite-budget-branch-evaluation",
+    "thm-boys-branch-evaluation-enclosures-are-sound",
+    "thm-gaussian-coulomb-hermite-recurrences-and-integral-formulas",
+    "alg-finite-gaussian-basis-integral-recurrence-evaluation",
+    "thm-finite-gaussian-integral-evaluator-soundness-and-screening-error",
+    "ex-same-center-s-orbital-integrals",
+    "ex-small-t-upward-boys-cancellation",
+    "ex-highly-contracted-gaussian-coefficients-amplify-error",
+    "ex-overlap-near-linear-dependence",
+    "ex-screened-coulomb-blocks-accumulate-error"
+  ],
+  "reviewed_pages": [
+    "gaussian-basis-integral-recurrences-and-boys-error",
+    "gaussian-basis-integral-recurrences-and-boys-error-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The assigned evaluators have repairable local definition defects, but the Boys large-argument branch also calls an outside-batch Gamma algorithm whose source has no required ## Definition or complete procedure specification. This prerequisite gap cannot be resolved on the assigned pages.",
+  "findings": [
+    {
+      "id": "alg-certified-gamma-loggamma-evaluation",
+      "type": "prerequisite",
+      "reason": "This outside-batch kind: algorithm supplier has ## Statement rather than ## Definition and gives only a high-level description of its branches. The Boys evaluator calls it for Gamma(m+1/2) in step 2 and relies on finite child calls in the soundness theorem's step 4.1. Supply a complete finite procedure or a defined real-Gamma evaluator."
+    },
+    {
+      "id": "alg-certified-boys-finite-budget-branch-evaluation",
+      "type": "local",
+      "reason": "Step 2 seeds F_0 and F_M but uses an undefined m in the zero-value formula and branch thresholds 2m+1. Specify the branch separately for each seed order m in {0,M}, including the matching Gamma argument and finite child caps."
+    },
+    {
+      "id": "alg-finite-gaussian-basis-integral-recurrence-evaluation",
+      "type": "local",
+      "reason": "Step 4 uses L without defining it from the requested polynomial degrees. Step 5 calls W_ab primitive-basis coefficients while the input functions are contractions and the formula omits their contraction coefficients; if a,b instead index contracted functions, specify that level and use contracted-pair diagonal bounds. Otherwise the primitive-quartet screening bound can understate omitted energy. Make both interfaces explicit."
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "type": "prerequisite",
+      "reason": "The assigned definitions and proofs use smoothness and derivatives of exp(-p||x-P||^2) and exp(-Tt^2), but do not declare this published supplier. It is needed for the Laplacian and Hermite definitions and the derivative arguments in the Boys midpoint, Boys identities, Gaussian moments, pair Hermite expansion, absolute-convergence, raising/lowering, and Coulomb-Hermite items."
+    },
+    {
+      "id": "lem-derivative-algebra-and-chain-rules",
+      "type": "prerequisite",
+      "reason": "Product and chain rules are used implicitly in the same derivative arguments, including the center derivatives of Hermite functions and the Boys auxiliary recurrences. Add this supplier and the exponential smoothness supplier to the affected items' explicit prerequisite uses."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-cartesian-gaussian-primitives-and-contractions",
+      "decision": "repair",
+      "reason": "The kinetic definition uses Δψ; make the smoothness premise for its Gaussian primitives explicit."
+    },
+    {
+      "id": "def-hermite-gaussian-coulomb-auxiliary-functions",
+      "decision": "repair",
+      "reason": "The definition asserts arbitrary-order smooth derivatives of the Gaussian and Boys compositions; state their smoothness prerequisites."
+    },
+    {
+      "id": "lem-boys-positive-midpoint-enclosure",
+      "decision": "repair",
+      "reason": "Proof step 1.1 differentiates t^(2m)exp(-Tt^2) without declaring the exponential derivative and product/chain rules."
+    },
+    {
+      "id": "thm-boys-integral-identities-series-and-incomplete-gamma",
+      "decision": "repair",
+      "reason": "Proof steps 1.1–1.2 differentiate the exponential under the integral and in integration by parts; declare the exponential derivative and chain rule."
+    },
+    {
+      "id": "lem-cartesian-gaussian-moments-and-parameter-derivatives",
+      "decision": "repair",
+      "reason": "Proof steps 1.1 and 3.1 use derivatives of Gaussian exponentials; declare the exponential derivative and chain rule."
+    },
+    {
+      "id": "thm-cartesian-pair-hermite-expansion-and-coefficient-recurrence",
+      "decision": "repair",
+      "reason": "Proof steps 1.1–2.1 use repeated derivatives of the Gaussian and product/chain rules."
+    },
+    {
+      "id": "thm-cartesian-gaussian-integrals-absolutely-convergent",
+      "decision": "repair",
+      "reason": "Proof steps 1.1 and 4.1 use repeated product, center, and exponent derivatives; declare their calculus suppliers."
+    },
+    {
+      "id": "thm-cartesian-gaussian-raising-lowering-and-kinetic-recurrences",
+      "decision": "repair",
+      "reason": "Proof steps 1.1–2.1 differentiate Gaussian products without declaring the exponential derivative and product/chain rules."
+    },
+    {
+      "id": "thm-gaussian-coulomb-hermite-recurrences-and-integral-formulas",
+      "decision": "repair",
+      "reason": "Proof steps 1.2 and 3.1 use chain and repeated product rules for the Boys auxiliary derivatives."
+    },
+    {
+      "id": "ex-same-center-s-orbital-integrals",
+      "decision": "repair",
+      "reason": "Its cited kinetic and Coulomb formulas consume the affected derivative suppliers; recheck after their prerequisite repair."
+    },
+    {
+      "id": "alg-certified-boys-finite-budget-branch-evaluation",
+      "decision": "escalate",
+      "reason": "Needs the local seed-order clarification and the outside-batch Gamma procedure prerequisite."
+    },
+    {
+      "id": "thm-boys-branch-evaluation-enclosures-are-sound",
+      "decision": "escalate",
+      "reason": "Proof steps 1.2 and 4.1 rely on the Gamma evaluator's successful-call soundness and finite termination."
+    },
+    {
+      "id": "alg-finite-gaussian-basis-integral-recurrence-evaluation",
+      "decision": "escalate",
+      "reason": "Needs local recurrence-cutoff and screening-index repairs, and depends on the unresolved Boys evaluator."
+    },
+    {
+      "id": "thm-finite-gaussian-integral-evaluator-soundness-and-screening-error",
+      "decision": "escalate",
+      "reason": "Proof steps 1.1 and 4.1 depend on the Boys and finite integral evaluators."
+    },
+    {
+      "id": "ex-small-t-upward-boys-cancellation",
+      "decision": "escalate",
+      "reason": "Its stated evaluator interface depends on the unresolved Boys algorithm; recheck after that procedure is defined."
+    },
+    {
+      "id": "ex-screened-coulomb-blocks-accumulate-error",
+      "decision": "escalate",
+      "reason": "It consumes the finite evaluator and its screening interface, which require owner reconciliation."
+    },
+    {
+      "id": "gaussian-basis-integral-recurrences-and-boys-error",
+      "decision": "escalate",
+      "reason": "The page includes the unresolved Boys and finite integral evaluator claims."
+    },
+    {
+      "id": "gaussian-basis-integral-recurrences-and-boys-error-examples",
+      "decision": "escalate",
+      "reason": "This page requires the unresolved A page."
+    }
+  ]
+}

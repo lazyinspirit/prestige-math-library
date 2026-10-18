@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "5",
+  "round": 0,
+  "reviewed_items": [
+    "def-piecewise-cubic-hermite-interpolant",
+    "def-piecewise-bernstein-representation",
+    "thm-piecewise-cubic-hermite-interpolant-properties",
+    "thm-hermite-monotonicity-for-normalized-slopes-in-square",
+    "alg-pchip-slope-selection",
+    "thm-bernstein-convex-hull-and-positivity",
+    "lem-pchip-slope-selection-well-defined",
+    "thm-pchip-normalized-slopes-in-square",
+    "lem-pchip-slopes-second-order-uniform-grid",
+    "thm-pchip-shape-preserving-no-overshoot",
+    "thm-pchip-third-order-away-from-extrema",
+    "ex-positive-endpoint-samples-negative-between",
+    "ex-natural-cubic-spline-undershoots-nonnegative-table",
+    "ex-pchip-flat-monotone-data",
+    "ex-pchip-limiter-second-order-at-smooth-extremum"
+  ],
+  "reviewed_pages": [
+    "shape-preserving-piecewise-polynomial-interpolation",
+    "shape-preserving-piecewise-polynomial-interpolation-examples"
+  ],
+  "decision": "repair",
+  "reason": "The assigned claims and supplier uses were reviewed. The third-order theorem and smooth-extremum example both assert maximum-error claims without establishing that the maximum is attained. This is locally resolvable while preserving the claims.",
+  "findings": [
+    {
+      "id": "thm-pchip-third-order-away-from-extrema",
+      "type": "prerequisite",
+      "reason": "Step 3.1 proves a pointwise uniform bound, then concludes a bound for max over [a,b] without proving that the continuous error function attains a maximum. Add and use the published extreme value theorem (thm-extreme-value-r), making continuity of P_h-f and compactness of [a,b] explicit."
+    },
+    {
+      "id": "ex-pchip-limiter-second-order-at-smooth-extremum",
+      "type": "prerequisite",
+      "reason": "The statement claims a local maximum error on [-h,0], but Step 3.1 only exhibits one point with error 2h^2/27. Preserve the maximum claim by establishing continuity on the cell and applying thm-extreme-value-r, or state the witnessed pointwise lower bound directly."
+    }
+  ],
+  "consumer_checks": []
+}

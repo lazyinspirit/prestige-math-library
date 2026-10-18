@@ -1,0 +1,321 @@
+{
+  "group": "a",
+  "batches": ["3"],
+  "pages_read": [
+    "spline-evaluation-and-interpolation-algorithms",
+    "spline-evaluation-and-interpolation-algorithms-examples"
+  ],
+  "items_read": [
+    "alg-de-boor-coefficient-evaluation",
+    "alg-single-new-b-spline-knot-insertion",
+    "def-clamped-cubic-spline-interpolant",
+    "lem-natural-cubic-spline-second-derivative-perturbation",
+    "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+    "lem-b-spline-basis-refinement-under-single-knot-insertion",
+    "thm-de-boor-coefficient-evaluation-equivalence",
+    "thm-de-boor-coefficient-evaluation-work",
+    "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+    "thm-natural-cubic-spline-tridiagonal-residual-transfer",
+    "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+    "thm-de-boor-forward-error-under-operationwise-model",
+    "thm-single-new-knot-insertion-preserves-b-spline-curve",
+    "thm-clamped-cubic-spline-fourth-order-error",
+    "thm-computed-natural-cubic-spline-forward-error-certificate",
+    "ex-repeated-knot-de-boor-evaluation",
+    "ex-natural-cubic-x-squared-endpoint-caveat",
+    "ex-single-new-knot-insertion-preserves-linear-curve"
+  ],
+  "conventions": [
+    {
+      "convention": "The local algorithms use zero-based knots t_i = ξ_{i+1} and coefficients indexed from zero. Nonempty evaluation spans satisfy p ≤ k ≤ n−1.",
+      "fixed_by": "alg-de-boor-coefficient-evaluation",
+      "matters_for": [
+        "thm-de-boor-coefficient-evaluation-equivalence",
+        "thm-de-boor-coefficient-evaluation-work",
+        "thm-de-boor-forward-error-under-operationwise-model",
+        "ex-repeated-knot-de-boor-evaluation"
+      ]
+    },
+    {
+      "convention": "Knot cells are left-closed and right-open; interior-knot values come from the right cell, and the right endpoint b uses the left limit. Zero-denominator Cox–de Boor terms are zero.",
+      "fixed_by": "def-b-spline-space-and-basis",
+      "matters_for": [
+        "alg-de-boor-coefficient-evaluation",
+        "lem-b-spline-basis-refinement-under-single-knot-insertion",
+        "thm-de-boor-coefficient-evaluation-equivalence",
+        "thm-single-new-knot-insertion-preserves-b-spline-curve",
+        "ex-single-new-knot-insertion-preserves-linear-curve"
+      ]
+    },
+    {
+      "convention": "Single-knot insertion accepts only a new knot strictly inside a nonempty span; insertion at an existing knot is outside its contract. Degree zero is allowed and has an empty blend range.",
+      "fixed_by": "alg-single-new-b-spline-knot-insertion",
+      "matters_for": [
+        "lem-b-spline-basis-refinement-under-single-knot-insertion",
+        "thm-single-new-knot-insertion-preserves-b-spline-curve",
+        "ex-single-new-knot-insertion-preserves-linear-curve"
+      ]
+    },
+    {
+      "convention": "Clamped interpolation means C² piecewise cubics with prescribed endpoint slopes, using one-sided endpoint derivatives.",
+      "fixed_by": "def-clamped-cubic-spline-interpolant",
+      "matters_for": [
+        "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+        "thm-clamped-cubic-spline-fourth-order-error",
+        "ex-natural-cubic-x-squared-endpoint-caveat"
+      ]
+    },
+    {
+      "convention": "Floating-point success requires every exact intermediate to be zero or normal; nonzero subnormal results and overflow cause failure. Exact zeros are preserved.",
+      "fixed_by": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "matters_for": [
+        "alg-de-boor-coefficient-evaluation",
+        "thm-de-boor-forward-error-under-operationwise-model",
+        "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+        "thm-natural-tridiagonal-cholesky-solve-residual-certificate"
+      ]
+    },
+    {
+      "convention": "Stored knots and values are the exact interpolation data. Certificate calculations use exact rational arithmetic; assembly discrepancies are included, while input conversion and rounded evaluation of the cubic pieces are excluded.",
+      "fixed_by": "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+      "matters_for": [
+        "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+        "thm-computed-natural-cubic-spline-forward-error-certificate"
+      ]
+    },
+    {
+      "convention": "Arbitrary replacement nodal second derivatives define a piecewise-cubic reconstruction that need not be C¹. Its comparison with the exact natural interpolant is restricted to the knot hull.",
+      "fixed_by": "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+      "matters_for": [
+        "lem-natural-cubic-spline-second-derivative-perturbation",
+        "thm-natural-cubic-spline-tridiagonal-residual-transfer",
+        "thm-computed-natural-cubic-spline-forward-error-certificate"
+      ]
+    },
+    {
+      "convention": "The fourth-order clamped estimate assumes continuous derivatives through order four near the interval and endpoint slopes equal to the exact derivatives of the target function; arbitrary partitions are allowed.",
+      "fixed_by": "thm-clamped-cubic-spline-fourth-order-error",
+      "matters_for": [
+        "ex-natural-cubic-x-squared-endpoint-caveat"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate",
+      "statement": "For stored data, assemble the rounded tridiagonal system, perform failure-aware bidiagonal Cholesky and substitutions, evaluate a rounded residual, and compute exact rational certificates C, α, β and B = H²(C + αQ + β)/(8δ). The r = 2 branch returns the straight-line reconstruction with B = 0.",
+      "used_by": [
+        "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+        "thm-computed-natural-cubic-spline-forward-error-certificate"
+      ]
+    },
+    {
+      "id": "alg-de-boor-coefficient-evaluation",
+      "statement": "On a supplied admissible knot span, initialize the p+1 active coefficients and perform the specified descending-index de Boor blends, using exact arithmetic or the stated failure-aware rounded operation order.",
+      "used_by": [
+        "thm-de-boor-coefficient-evaluation-equivalence",
+        "thm-de-boor-coefficient-evaluation-work",
+        "thm-de-boor-forward-error-under-operationwise-model",
+        "ex-repeated-knot-de-boor-evaluation"
+      ]
+    },
+    {
+      "id": "alg-single-new-b-spline-knot-insertion",
+      "statement": "Insert a new knot u strictly inside a nonempty span, copying controls through k−p, blending Q_i = α_iP_i + (1−α_i)P_{i−1} for k−p+1 ≤ i ≤ k with α_i = (u−t_i)/(t_{i+p}−t_i), and shifting the remaining controls.",
+      "used_by": [
+        "lem-b-spline-basis-refinement-under-single-knot-insertion",
+        "thm-single-new-knot-insertion-preserves-b-spline-curve",
+        "ex-single-new-knot-insertion-preserves-linear-curve",
+        "thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry",
+        "def-isogeometric-galerkin-patch-space-and-refinement"
+      ]
+    },
+    {
+      "id": "lem-natural-cubic-spline-second-derivative-perturbation",
+      "statement": "For the same nodal values and zero endpoint second derivatives, if E is the maximum nodal second-derivative discrepancy, then the reconstructed pieces satisfy ‖ŝ−s‖∞ ≤ H²E/8 on [x₁,x_r].",
+      "used_by": [
+        "thm-natural-cubic-spline-tridiagonal-residual-transfer"
+      ]
+    },
+    {
+      "id": "thm-natural-cubic-spline-tridiagonal-residual-transfer",
+      "statement": "For r ≥ 3, δ = min(h_{i−1}+h_i) and exact residual ρ = A m̂−b, the reconstruction with zero endpoint second derivatives satisfies ‖ŝ−s‖∞ ≤ H²‖ρ‖∞/(8δ) on the knot hull.",
+      "used_by": [
+        "thm-computed-natural-cubic-spline-forward-error-certificate"
+      ]
+    },
+    {
+      "id": "thm-natural-tridiagonal-cholesky-solve-residual-certificate",
+      "statement": "Successful assembly produces an SPD matrix T. Every full successful call certifies ‖T m̂−f‖∞ ≤ C. Stronger, separately stated roundoff conditions give factor and triangular-solve backward bounds. The procedure terminates with O(r) floating-point and exact rational operations and storage, without a rational bit-complexity claim.",
+      "used_by": [
+        "thm-computed-natural-cubic-spline-forward-error-certificate"
+      ]
+    },
+    {
+      "id": "thm-de-boor-coefficient-evaluation-equivalence",
+      "statement": "The exact-arithmetic de Boor procedure returns the degree-p B-spline coefficient expansion on the supplied half-open span, and its left limit at b when the last nonempty span is supplied.",
+      "used_by": [
+        "thm-de-boor-forward-error-under-operationwise-model",
+        "ex-repeated-knot-de-boor-evaluation"
+      ]
+    },
+    {
+      "id": "lem-b-spline-basis-refinement-under-single-knot-insertion",
+      "statement": "For every 0 ≤ q ≤ p, every old basis index and every x ∈ [a,b], B_{i,q,t}(x) = λ_i^(q) B_{i,q,t′}(x) + (1−λ_{i+1}^(q)) B_{i+1,q,t′}(x), with the stated piecewise insertion weights.",
+      "used_by": [
+        "thm-single-new-knot-insertion-preserves-b-spline-curve"
+      ]
+    },
+    {
+      "id": "thm-single-new-knot-insertion-preserves-b-spline-curve",
+      "statement": "For vector controls and one new knot strictly inside a nonempty span, the old and refined B-spline expansions agree at every x ∈ [a,b].",
+      "used_by": [
+        "ex-single-new-knot-insertion-preserves-linear-curve",
+        "thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry",
+        "ex-isogeometric-k-refinement-of-the-identity-patch"
+      ]
+    },
+    {
+      "id": "thm-clamped-cubic-spline-interpolant-exists-uniquely",
+      "statement": "For any strictly increasing partition with m ≥ 1, arbitrary nodal values and prescribed endpoint slopes, there is exactly one clamped cubic interpolant; its nodal second derivatives solve the displayed endpoint-augmented tridiagonal system.",
+      "used_by": [
+        "thm-clamped-cubic-spline-fourth-order-error",
+        "ex-natural-cubic-x-squared-endpoint-caveat"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-b-spline-space-and-basis",
+      "used_for": "Knot admissibility, indexing, half-open values, endpoint limits and the Cox–de Boor recurrence.",
+      "opened": true
+    },
+    {
+      "id": "thm-spline-polynomial-reproduction",
+      "used_for": "Support, active local basis functions, partition of unity and spline basis properties.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-cubic-spline",
+      "used_for": "Natural endpoint conditions and piecewise-cubic regularity conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+      "used_for": "Exact natural interpolation, its SPD interior system, cubic piece formula and two-knot case.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Underlying relative-error model and range exclusions.",
+      "opened": true
+    },
+    {
+      "id": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "used_for": "Binary formats, exact-zero behavior, operation ordering, square roots and failure semantics.",
+      "opened": true
+    },
+    {
+      "id": "alg-rounded-cholesky-with-failure-status",
+      "used_for": "Dense Cholesky recurrence and positive-normal pivot tests specialized by the local sparse algorithm.",
+      "opened": true
+    },
+    {
+      "id": "lem-rounded-triangular-substitution-componentwise-backward-error",
+      "used_for": "Conditional componentwise perturbations for the two successful triangular solves.",
+      "opened": true
+    },
+    {
+      "id": "lem-rounded-linear-and-normal-residual-certificates",
+      "used_for": "Allowance between the rounded residual and exact residual of the stored system.",
+      "opened": true
+    },
+    {
+      "id": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+      "used_for": "Conditional componentwise factor residual and Frobenius bound.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-arithmetic-schedule-termination-and-count",
+      "used_for": "Termination of initialized finite arithmetic schedules with early failure.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Entry-list Euclidean norm and its upper bound by the absolute entry sum.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Euclidean norm convention in the residual transfer between norms.",
+      "opened": true
+    },
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "Coordinate formula for the real Euclidean norm.",
+      "opened": true
+    },
+    {
+      "id": "cor-taylor-remainder-bound",
+      "used_for": "Taylor estimates of f, f′ and f″ in the clamped fourth-order proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-product-of-one-plus-deltas-gives-theta-n",
+      "used_for": "Accumulated rounding factors in the published residual and substitution suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+      "used_for": "Exact triangular recurrences underlying the rounded substitution supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "Positive-definite input and positive-diagonal factor conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Exact factor existence and uniqueness underlying the published Cholesky procedure.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Norm estimates in the published residual-certificate supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Real-coordinate Cauchy–Schwarz estimates in the published Cholesky error proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Spectral norm bounded by Frobenius norm in the published Cholesky error supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-natural-cubic-spline-second-derivative-perturbation",
+      "concern": "F1 describes the natural cubic piece formula as “given by the displayed formula in its Statement.” In the cited thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots, the explicit cubic formula is in Proof step 2.1; the Statement displays the tridiagonal system. The argument uses the correct formula, but the locator is inaccurate.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "shape-preserving-piecewise-polynomial-interpolation",
+      "to": "spline-evaluation-and-interpolation-algorithms",
+      "faithful": true,
+      "note": "This is a page-level prerequisite. The downstream Hermite definition takes independent nodal slopes, and the page claims C¹ matching without importing the clamped C² or fourth-order conclusions. Searching all assigned spline IDs found no item-level citation from the shape-preserving page; the assigned spline items have no reverse dependency on that page."
+    },
+    {
+      "from": "isogeometric-galerkin-methods",
+      "to": "spline-evaluation-and-interpolation-algorithms",
+      "faithful": true,
+      "note": "Read the NURBS patch definition, refinement definition, homogeneous knot-preservation theorem and identity-patch example. The actual uses apply new-knot insertion strictly inside a nonempty span to vector-valued homogeneous control slices. Exact preservation includes endpoint values, and positive weights remain positive under the affine blends. The downstream text does not extend the supplier to insertion at an existing knot or unconditional p/k preservation. The assigned spline suppliers have no reverse dependency on the isogeometric page."
+    }
+  ]
+}

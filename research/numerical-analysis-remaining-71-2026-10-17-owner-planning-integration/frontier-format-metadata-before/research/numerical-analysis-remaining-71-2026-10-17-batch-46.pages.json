@@ -1,0 +1,473 @@
+[
+  {
+    "order": 2646,
+    "id": "nonlinear-full-approximation-multigrid",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nonlinear full-approximation multigrid",
+    "companion": "nonlinear-full-approximation-multigrid-examples",
+    "requires": [
+      "multigrid-methods-and-complexity",
+      "nonlinear-equations-and-newton-methods",
+      "nonlinear-parabolic-compactness-and-monotone-evolution"
+    ],
+    "items": [
+      {
+        "id": "alg-fas-two-grid-cycle",
+        "kind": "algorithm",
+        "title": "Finite budget nonlinear FAS two-grid cycle",
+        "statement": "Given finite fine and coarse nonlinear residual maps, linear iterate/residual restrictions and prolongation, fixed nonlinear damped-Jacobi pre/post updates, and a finite-budget coarse solver with residual-certified exact/inexact and failure statuses, perform the tau-corrected full-approximation coarse solve and prolong the coarse difference. The returned exact/inexact status is based on the final fine residual, while every coarse residual is retained in diagnostics. Branch failures return the last valid fine iterate. No convergence is asserted by the definition.",
+        "deps": [],
+        "dependency_level": 0,
+        "local_order": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fas-second-derivative-of-composed-cycle-map",
+        "kind": "lemma",
+        "title": "Second derivative formula for a composed cycle map",
+        "statement": "For C2 maps S, C, and T between compatible finite-dimensional Euclidean open sets, the second derivative of E=T∘C∘S is the sum of the outer second-derivative term and the derivative of the inner composition’s second derivative.",
+        "deps": [
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
+        ],
+        "dependency_level": 0,
+        "local_order": 2,
+        "strategy": "Differentiate the first-derivative composition identity using the bounded bilinear product rule, then apply the result twice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Zuoqin Wang, Lecture 6: Differential Calculus on Banach Spaces, §§2.1.1–2.1.4",
+              "url": "https://www.math.ntu.edu.tw/~dragon/Lecture%20Notes/Banach%20Calculus%202012.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-fas-vw-cycle",
+        "kind": "algorithm",
+        "title": "Recursive finite budget nonlinear FAS V- and W-cycle",
+        "statement": "On a finite hierarchy, use the two-grid FAS update at every noncoarsest level, recurse on the next level with the current full coarse approximation, and use a finite-budget base solver whose exact/inexact statuses report the base residual and preserve an initial exact root. A recursive cycle reports its own level residual through the coarse-solver interface and retains nested coarse residual diagnostics. The V-cycle has one recursive call and the W-cycle two.",
+        "deps": [
+          "alg-fas-two-grid-cycle"
+        ],
+        "dependency_level": 1,
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-fas-vw-cycle-work-and-status"
+        ]
+      },
+      {
+        "id": "lem-fas-coarse-branch-derivative",
+        "kind": "lemma",
+        "title": "Derivative of the exact-branch FAS two-grid correction",
+        "statement": "For a C1 fine/coarse residual pair and linear transfers, if the selected coarse root at a fine root has invertible coarse Jacobian and the pre/post smoothers are C1, the implicit coarse branch is C1 and the derivative of the actual exact-branch two-grid cycle is the composition of the two smoother derivatives with I - P DF_H(Iu*)^{-1} R DF_h(u*).",
+        "deps": [
+          "alg-fas-two-grid-cycle",
+          "thm-euclidean-implicit-function-theorem",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 1,
+        "local_order": 4,
+        "strategy": "Differentiate the coarse equation by the Euclidean implicit function theorem, then apply the chain rule to the correction and both smoothers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fas-vw-cycle-work-and-status",
+        "kind": "lemma",
+        "title": "A finite FAS V/W-cycle terminates with bounded stated work",
+        "statement": "For a finite hierarchy with finite pre/post sweep counts, finite recursive cycle count, finite base-solver budget, and terminating residual/transfer/update primitives, the recursive FAS V/W procedure returns a residual-certified status after finitely many calls. Its work is bounded by the explicit level recurrence, which includes nonlinear smoothing, coarse solves, and returned diagnostic bookkeeping.",
+        "deps": [
+          "alg-fas-vw-cycle"
+        ],
+        "dependency_level": 2,
+        "local_order": 5,
+        "strategy": "Induct on the level and count each bounded smoother, recursive call, transfer, correction, and base-solver operation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fas-fine-root-fixed-point",
+        "kind": "lemma",
+        "title": "A fine-grid root is fixed by exact-branch FAS",
+        "statement": "If every chosen nonlinear smoother fixes an exact root, each restriction lies in the next-level domain and is selected as the zero-defect coarse root, and the base solver preserves any initial exact root, then the exact-branch FAS V/W cycle leaves every fine root fixed. No algebraic relation among I, R, and P is needed.",
+        "deps": [
+          "alg-fas-vw-cycle"
+        ],
+        "dependency_level": 2,
+        "local_order": 6,
+        "strategy": "Induct over the hierarchy and substitute the exact fine root into each tau-corrected coarse equation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fas-local-contraction-under-derivative-bound",
+        "kind": "theorem",
+        "title": "A smooth FAS cycle converges locally under its actual derivative bounds",
+        "statement": "Let E be the actual exact-branch error map of a fixed FAS cycle with root u*, ||DE(u*)||=q<1, and ||DE(x)-DE(y)||<=L||x-y|| on a convex radius-r ball. If q+Lr/2<1, then E maps that ball into itself and every iterate contracts its distance to u* by the factor q+Lr/2. Mesh-independent constants must be verified uniformly in the mesh parameter.",
+        "deps": [
+          "alg-fas-two-grid-cycle",
+          "lem-fas-fine-root-fixed-point",
+          "lem-fas-coarse-branch-derivative",
+          "lem-vector-newton-correction-error-under-lipschitz-jacobian"
+        ],
+        "dependency_level": 3,
+        "local_order": 7,
+        "strategy": "Apply the mean-value integral formula to E and bound the derivative variation by L times the distance from the root.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fas-linear-vw-cycle-translation",
+        "kind": "lemma",
+        "title": "A linear Galerkin V/W cycle is translation-covariant",
+        "statement": "For a finite SPD Galerkin hierarchy and residual-correction pre/post updates, shifting the initial iterate by a and the right side by A_j a shifts the returned finite V/W-cycle iterate by exactly a.",
+        "deps": [
+          "alg-finite-galerkin-v-cycle"
+        ],
+        "dependency_level": 3,
+        "local_order": 8,
+        "strategy": "Compare the two runs level by level, using invariant residuals and identical deterministic coarse-error inputs.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+        "kind": "theorem",
+        "title": "Linear FAS exactly reduces to a Galerkin correction V/W-cycle",
+        "statement": "On a finite SPD Galerkin hierarchy with R_j=P_j^T and A_{j-1}=P_j^T A_j P_j, linear residual-correction pre/post smoothers, and exact coarse solves, the recursive FAS V/W-cycle produces exactly the iterate returned by the corresponding linear Galerkin correction V/W-cycle with the same sweep counts and cycle count.",
+        "deps": [
+          "alg-fas-vw-cycle",
+          "alg-finite-galerkin-v-cycle",
+          "thm-galerkin-coarse-correction-is-energy-orthogonal-projector",
+          "lem-fas-linear-vw-cycle-translation"
+        ],
+        "dependency_level": 4,
+        "local_order": 9,
+        "strategy": "Induct on levels, subtract A_H Iu from the tau-corrected coarse equation, and identify the resulting coarse residual-correction equation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fas-inexact-coarse-solve-residual-defect",
+        "kind": "lemma",
+        "title": "An inexact FAS coarse solve contributes a bounded correction defect",
+        "statement": "If the selected exact coarse root v(u) satisfies a residual-to-solution bound ||vhat-v(u)||<=M_H eta, where eta=||F_H(vhat)-g_H(u)||, then the prolongated correction differs from the exact-branch correction by at most ||P|| M_H eta. Under an exact-cycle contraction factor kappa, successive inexact cycles satisfy ||e_{k+1}||<=kappa||e_k||+||P||M_H eta_k.",
+        "deps": [
+          "alg-fas-two-grid-cycle",
+          "thm-fas-local-contraction-under-derivative-bound"
+        ],
+        "dependency_level": 4,
+        "local_order": 10,
+        "strategy": "Subtract the exact and inexact coarse corrections and apply the declared residual-to-solution bound and prolongation norm.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-fas-semilinear-reaction-diffusion-local-convergence",
+        "kind": "example",
+        "title": "A two-node semilinear diffusion FAS cycle has an explicit local rate",
+        "statement": "For the h=1 two-node finite-difference discretization of -u''+u^3=0 on (0,3) with zero endpoint values, the exact-branch Galerkin FAS two-grid map with P=(1,1)^T, I=(1/2,1/2), R=P^T, and one pre/post weighted nonlinear-Jacobi sweep fixes the unique root and is a contraction on the radius-1/100 Euclidean ball, with factor at most 27/400.",
+        "deps": [
+          "alg-fas-two-grid-cycle",
+          "lem-fas-fine-root-fixed-point",
+          "lem-fas-coarse-branch-derivative",
+          "lem-fas-second-derivative-of-composed-cycle-map",
+          "thm-fas-local-contraction-under-derivative-bound",
+          "thm-mean-value-inequality-for-total-derivatives"
+        ],
+        "dependency_level": 4,
+        "local_order": 11,
+        "strategy": "Compute the strong monotonicity, exact coarse branch, cycle derivative, and a uniform second-derivative bound on the stated ball.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William L. Briggs, Van Emden Henson, and Steve F. McCormick, A Multigrid Tutorial, 2nd ed., Chapter 6 lecture notes",
+              "url": "https://amath.colorado.edu/~stevem/appm6640/mgtut13notes.pdf"
+            },
+            {
+              "title": "Harald van Brummelen, Basics of Multigrid Methods, SINTEF winter-school lecture notes",
+              "url": "https://www.sintef.no/globalassets/project/evitameeting/2011/lecture1.pdf"
+            },
+            {
+              "title": "Van Emden Henson, Multigrid Methods for Nonlinear Problems: An Overview, UCRL-JC-150259",
+              "url": "https://digital.library.unt.edu/ark%3A/67531/metadc1402426/m2/1/high_res_d/15002749.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2647,
+    "id": "nonlinear-full-approximation-multigrid-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Nonlinear full-approximation multigrid — Examples",
+    "companion": "nonlinear-full-approximation-multigrid",
+    "requires": [
+      "nonlinear-full-approximation-multigrid"
+    ],
+    "items": [
+      {
+        "id": "ex-fas-reaction-poisson-tau-cancellation",
+        "kind": "example",
+        "title": "The tau term recovers the restricted root in reaction Poisson",
+        "statement": "For F(u)=Au+u^{\\circ 3}, A=[[2,-1],[-1,2]], P=(1,1)^T, I=(1/2,1/2), R=P^T, and the manufactured fine root u*=(1,0), the tau-corrected FAS coarse equation selects Iu*=1/2 exactly; its tau value is -3/4.",
+        "deps": [
+          "alg-fas-two-grid-cycle",
+          "lem-fas-fine-root-fixed-point"
+        ],
+        "dependency_level": 3,
+        "local_order": 1,
+        "strategy": "Substitute the manufactured fine root into the fine residual, restricted residual, coarse operator, and tau expression.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-fas-zero-tau-breaks-fine-root",
+        "kind": "counterexample",
+        "title": "Omitting tau can move an exact fine root",
+        "statement": "The assertion that replacing the tau-corrected coarse right side by the restricted fine right side always preserves an exact fine-grid root is false.",
+        "deps": [
+          "alg-fas-two-grid-cycle",
+          "lem-fas-fine-root-fixed-point"
+        ],
+        "dependency_level": 3,
+        "local_order": 2,
+        "strategy": "Use an SPD two-node fine matrix and a rediscretized coarse scalar operator that differs from its Galerkin value, then compute the no-tau coarse correction exactly.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-fas-bifurcation-shrinks-contraction-ball",
+        "kind": "example",
+        "title": "The certified FAS basin shrinks at a pitchfork bifurcation",
+        "statement": "For F_mu(x,y)=(mu x+x^3,y), a coarse solve of the y component and two weighted nonlinear-Jacobi sweeps give an exact FAS cycle whose derivative norm at the root is (1-mu/2)^2 for 0<mu<=1. The local contraction theorem certifies radius r_mu=sqrt(mu/100), which tends to zero at the pitchfork mu=0.",
+        "deps": [
+          "alg-fas-two-grid-cycle",
+          "thm-fas-local-contraction-under-derivative-bound",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "lem-fas-second-derivative-of-composed-cycle-map"
+        ],
+        "dependency_level": 4,
+        "local_order": 3,
+        "strategy": "Compute the coarse correction and the scalar smoother composition, then evaluate its derivative at the root.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-fas-linear-cycle-equivalence",
+        "kind": "example",
+        "title": "A one-level linear FAS correction is the Galerkin correction",
+        "statement": "For A=[[2,-1],[-1,2]], P=(1,1)^T, I=(1/2,1/2), R=P^T, and A_H=P^TAP=2, the FAS coarse difference is exactly A_H^{-1}R(f-Au), so prolongation gives the standard Galerkin coarse correction.",
+        "deps": [
+          "alg-fas-two-grid-cycle",
+          "thm-fas-linear-cycle-reduces-to-galerkin-correction"
+        ],
+        "dependency_level": 5,
+        "local_order": 4,
+        "strategy": "Compute the coarse residual difference and compare it with the linear correction formula.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

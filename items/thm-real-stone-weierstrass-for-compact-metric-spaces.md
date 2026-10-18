@@ -13,7 +13,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
-  audited: 2026-08-02
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-published-stone-weierstrass-local-repairs/thm-real-stone-weierstrass-for-compact-metric-spaces.json
 sources:
   scraped: []
   references:
@@ -39,14 +39,17 @@ Let $K$ be a nonempty compact metric space and let $A\subseteq C(K,\mathbb R)$ b
 
 **Proof technique:** constructive.
 
-1.1 For fixed $x,y\in K$, choose $u_{x,y}\in A$ with $u_{x,y}(x)=f(x)$ and $u_{x,y}(y)=f(y)$, using $f(x)\mathbf1$ when $x=y$ and [L2] otherwise. [L2, algebra]
+1.1 Put $\delta=\varepsilon/3$. For a fixed $x\in K$, let $A_x=\{a\in A:a(x)=f(x)\}$. The open sets $U_a=\{z:a(z)>f(z)-\delta\}$ indexed by all $a\in A_x$ cover $K$: for each $y\ne x$, [L2] gives one $a\in A_x$ with $a(y)=f(y)$, and the constant $f(x)\mathbf1$ handles $y=x$. This asserts existence separately at each point without selecting an interpolant for every pair. [given, L2, algebra]
 
-2.1 For fixed $x$, the open sets $U_{x,y}=\{z:u_{x,y}(z)>f(z)-\varepsilon\}$ cover $K$, since $y\in U_{x,y}$. Select $y_1,\ldots,y_r$ whose sets cover $K$ by [L3]. [step 1.1, L3, construct]
 
-3.1 Put $g_x=\max_j u_{x,y_j}\in\overline A$. Then $g_x(x)=f(x)$ and $g_x>f-\varepsilon$ on $K$. [L1, step 2.1, algebra]
+2.1 By [L3] this cover has a finite subcover. Choose representatives $a_1,\ldots,a_r\in A_x$ for its finitely many members; $r\ge1$ since $K$ is nonempty. Their maximum $g=\max_j a_j$ lies in $\overline A$ by [L1], satisfies $g(x)=f(x)$, and is greater than $f-\delta$ throughout $K$. This proves existence of such a finite maximum for every fixed $x$; it does not select a family $(g_x)_{x\in K}$. [L1, L3, step 1.1, construct]
 
-4.1 The open sets $V_x=\{z:g_x(z)<f(z)+\varepsilon\}$ cover $K$. By [L3], choose $x_1,\ldots,x_s$ whose $V_{x_i}$ cover $K$. [step 3.1, L3, construct]
 
-5.1 The function $h=\min_i g_{x_i}$ belongs to $\overline A$ by [L1], and $f-\varepsilon<h<f+\varepsilon$ pointwise. Thus $\lVert h-f\rVert_\infty<\varepsilon$. [L1, step 3.1, step 4.1, algebra]
+3.1 Let $\mathcal G$ be the set of all finite nonempty maxima of members of $A$ which satisfy $g>f-\delta$ everywhere on $K$. Every member of $\mathcal G$ belongs to $\overline A$ and is continuous by [L1]. The open sets $V_g=\{z:g(z)<f(z)+\delta\}$ indexed by all $g\in\mathcal G$ cover $K$: for each $x$, the existential conclusion of step 2.1 supplies a member with $g(x)=f(x)$. Thus this second cover also requires no choice indexed by $K$. [L1, step 2.1, construct]
 
-6.1 Since $\varepsilon$ was arbitrary and every $h$ of step 5.1 lies in the closed set $\overline A$, the function $f$ lies in $\overline A$. Thus $\overline A=C(K,\mathbb R)$ and $A$ is dense. [step 5.1, discharge-construct] ∎
+
+4.1 By [L3] take a finite subcover and representatives $g_1,\ldots,g_s\in\mathcal G$, where $s\ge1$. Then $h=\min_i g_i\in\overline A$ by [L1]. Every $g_i>f-\delta$ globally, and the subcover supplies at each point an index with $g_i<f+\delta$. Hence $f-\delta<h<f+\delta$ pointwise and $\|h-f\|_\infty\le\delta$. Only finitely many representatives were selected in either compactness step. [L1, L3, step 3.1, algebra]
+
+
+5.1 Since $h\in\overline A$, choose one $a\in A$ with $\|a-h\|_\infty<\delta$. Then $\|a-f\|_\infty<2\delta<\varepsilon$. For every $f$ and positive target error this gives an approximant in $A$ itself, proving density without any countable or arbitrary-index choice assumption. [given, step 4.1, discharge-construct] ∎
+

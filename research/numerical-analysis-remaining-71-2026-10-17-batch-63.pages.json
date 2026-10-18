@@ -1,0 +1,743 @@
+[
+  {
+    "order": 2680,
+    "id": "curved-mesh-geometry-and-conservative-mesh-transfer",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Curved geometry, mesh generation and conservative transfer",
+    "companion": "curved-mesh-geometry-and-conservative-mesh-transfer-examples",
+    "requires": [
+      "adaptive-finite-element-methods",
+      "delaunay-triangulations-and-voronoi-computation"
+    ],
+    "items": [
+      {
+        "id": "def-intersection-volume-conservative-remapping",
+        "kind": "definition",
+        "title": "Intersection-volume conservative remapping",
+        "deps": [
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lebesgue-measurable domain of finite positive measure. Let $\\mathcal S=(S_i)_{i=1}^m$ and $\\mathcal T=(T_j)_{j=1}^n$ be finite measurable partitions of $\\Omega$ up to null sets, with disjoint interiors modulo null sets and positive cell volumes. Define exact overlap weights $w_{ji}=|T_j\\cap S_i|$. For source constants $v_i$, the intersection-volume remap is the target piecewise-constant field $Rv$ whose value on $T_j$ is $ (Rv)_j=|T_j|^{-1}\\sum_i w_{ji}v_i$. All weights are exact measures; an approximate clipping weight is not silently substituted.",
+        "source_path": "items/def-intersection-volume-conservative-remapping.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Devon Powell and Tom Abel, An exact general remeshing scheme applied to physically conservative voxelization",
+              "url": "https://arxiv.org/pdf/1412.4941"
+            },
+            {
+              "title": "Zhengru Zhang, Moving Mesh Method with Conservative Interpolation Based on L2-Projection, Commun. Comput. Phys. 1 (2006), 930–944",
+              "url": "https://www.global-sci.com/cicp/article/view/5434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-isoparametric-curved-cell-map",
+        "kind": "definition",
+        "title": "Admissible isoparametric curved cells",
+        "deps": [
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "dependency_level": 0,
+        "statement": "Fix a reference matching affine simplicial mesh as in [[def-matching-affine-simplicial-meshes]]. An admissible curved cell is the image of a closed reference simplex $\\widehat K$ under a map $F_K\\in C^2(\\widehat K;\\mathbb R^d)$ that extends to a diffeomorphism on a neighborhood, is orientation preserving, and satisfies $0<j_0\\le J_K:=\\det DF_K\\le j_1$ and $\\|DF_K\\|+\\|(DF_K)^{-1}\\|+\\|D^2F_K\\|\\le C_F$. The physical cells have disjoint interiors, cover the domain up to their shared facets, and maps agree on each common reference facet under the prescribed affine facet identification. Define the volume metric $G_K=DF_K^TDF_K$, volume factor $J_K=\\sqrt{\\det G_K}$, and for a reference facet parametrization $\\widehat f$ the surface metric $G_{K,\\widehat f}=D(F_K\\circ\\widehat f)^TD(F_K\\circ\\widehat f)$ and surface factor $\\sqrt{\\det G_{K,\\widehat f}}$. The positive-Jacobian lower bound is the admissibility certificate; it is not inferred from a drawing or from Delaunay quality.",
+        "source_path": "items/def-isoparametric-curved-cell-map.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 8",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-h2-zero-boundary-p1-interpolant-conforming",
+        "kind": "lemma",
+        "title": "The nodal P1 interpolant preserves homogeneous boundary values",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-matching-affine-simplicial-meshes",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "thm-reference-simplex-sobolev-extension",
+          "thm-higher-order-sobolev-embedding",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "lem-zero-extension-from-w-one-p-zero",
+          "thm-trace-estimate-on-the-half-space",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let\n$\\Omega=(-1,1)^2$ have a finite matching affine triangular mesh, and let\n$u\\in H^2(\\Omega;\\mathbb R)\\cap H^1_0(\\Omega;\\mathbb R)$. On each triangle\ntake the unique continuous representative of the restriction of $u$. These\nrepresentatives give one well-defined value at every mesh vertex. The global\nnodal P1 interpolant $I_hu$, affine on each triangle and equal to these values\nat its vertices, is continuous, has zero trace on every boundary edge, and\nbelongs to $H^1_0(\\Omega)$.",
+        "source_path": "items/lem-h2-zero-boundary-p1-interpolant-conforming.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III, Chapter 11",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap11.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, §4.2",
+              "url": "https://jschoeberl.github.io/iFEM/_downloads/900feda304f95ee42fd24abe742d7564/numpde.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-curved-domain-geometry-approximation",
+        "kind": "definition",
+        "title": "Curved-domain geometry approximation errors",
+        "deps": [
+          "def-isoparametric-curved-cell-map"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+        "source_path": "items/def-curved-domain-geometry-approximation.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 8",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-curved-p1-interpolation-scaling",
+        "kind": "lemma",
+        "title": "P1 interpolation scaling on uniformly curved cells",
+        "deps": [
+          "def-isoparametric-curved-cell-map",
+          "thm-local-finite-element-interpolation-estimates",
+          "thm-lagrange-point-evaluation-threshold-on-reference-simplex",
+          "lem-c-k-boundary-flattening-preserves-wkp-locally",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume AC and Countable Choice. In dimension two let $K=\\Psi(\\widetilde K)$, where $\\widetilde K$ is a shape-regular affine triangle of diameter comparable to $h_K$, and $\\Psi$ extends to a $C^2$ diffeomorphism on a neighborhood of $\\overline{\\widetilde K}$. Assume $\\|D\\Psi\\|_\\infty+\\|D\\Psi^{-1}\\|_\\infty+\\|D^2\\Psi\\|_\\infty+\\|J_\\Psi^{-1}\\|_\\infty$ are uniformly bounded. Let $v$ denote its continuous representative and set $I_Kv=(I_{\\widetilde K}(v\\circ\\Psi))\\circ\\Psi^{-1}$, the mapped nodal P1 interpolant. For $v\\in H^2(K)$, $\\|v-I_Kv\\|_{L^2(K)}\\le C h_K^2\\|v\\|_{H^2(K)}$ and $|v-I_Kv|_{H^1(K)}\\le C h_K\\|v\\|_{H^2(K)}$, with $C$ uniform over the family.",
+        "source_path": "items/lem-curved-p1-interpolation-scaling.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part III, Chapter 11",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap11.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, §4.2",
+              "url": "https://jschoeberl.github.io/iFEM/_downloads/900feda304f95ee42fd24abe742d7564/numpde.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-isoparametric-pullback-and-surface-metric",
+        "kind": "lemma",
+        "title": "Pullback gradients and induced surface metrics",
+        "deps": [
+          "def-isoparametric-curved-cell-map",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice. Let $F:\\widehat K\\to K$ be an admissible $C^1$ orientation-preserving cell diffeomorphism and let $u$ be $C^1$ on $K$. With $\\widehat u=u\\circ F$, one has $\\nabla_xu\\circ F=DF^{-T}\\nabla_{\\xi}\\widehat u$ and $\\int_K |\\nabla u|^2dx=\\int_{\\widehat K}J_F\\nabla\\widehat u^T(DF^{-1}DF^{-T})\\nabla\\widehat u\\,d\\xi$. For a regular $k$-dimensional parametrized face $f:U\\subset\\mathbb R^k\\to\\mathbb R^d$ with metric $G_f=Df^TDf$, the induced area factor is $\\sqrt{\\det G_f}$ and the tangential gradient of $u\\circ f$ is $DfG_f^{-1}\\nabla(u\\circ f)$; its squared norm is $\\nabla(u\\circ f)^TG_f^{-1}\\nabla(u\\circ f)$.",
+        "source_path": "items/lem-isoparametric-pullback-and-surface-metric.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 8",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-overlap-remap-l2-projection-conservation-positivity",
+        "kind": "theorem",
+        "title": "Overlap remapping is an L2 projection, conservative and positive",
+        "deps": [
+          "def-intersection-volume-conservative-remapping",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-holder-inequality-for-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice. Under the finite partition hypotheses of [[def-intersection-volume-conservative-remapping]], let $P_0(\\mathcal T)$ be the target cellwise-constant subspace of $L^2(\\Omega)$. For every source piecewise-constant $v$, $Rv$ is the $L^2$ orthogonal projection of $v$ onto $P_0(\\mathcal T)$, hence $\\|Rv\\|_2\\le\\|v\\|_2$. It preserves total mass, $\\int_\\Omega Rv=\\int_\\Omega v$, and if all $v_i\\ge0$ then every target value $(Rv)_j\\ge0$.",
+        "source_path": "items/thm-overlap-remap-l2-projection-conservation-positivity.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Devon Powell and Tom Abel, An exact general remeshing scheme applied to physically conservative voxelization",
+              "url": "https://arxiv.org/pdf/1412.4941"
+            },
+            {
+              "title": "Zhengru Zhang, Moving Mesh Method with Conservative Interpolation Based on L2-Projection, Commun. Comput. Phys. 1 (2006), 930–944",
+              "url": "https://www.global-sci.com/cicp/article/view/5434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-curved-boundary-lift-residual",
+        "kind": "lemma",
+        "title": "Geometry error bounds a pulled-back boundary-lift residual",
+        "deps": [
+          "def-curved-domain-geometry-approximation",
+          "def-matching-affine-simplicial-meshes",
+          "def-elementary-set-in-rn",
+          "def-half-open-box",
+          "def-measure",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-elementary-volume-is-well-defined",
+          "thm-holder-inequality-for-integrals",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice. Let $\\widehat\\Omega=(-1,1)^2$ carry a finite matching affine triangular mesh $\\mathcal T$ as in [[def-matching-affine-simplicial-meshes]]. Let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^2$ be continuous and $C^1$ on each closed triangle, with matching traces on shared edges, and suppose $\\|D\\Phi\\|_\\infty+\\|D\\Phi_h\\|_\\infty\\le M$, $e_0=\\|\\Phi-\\Phi_h\\|_\\infty$, and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty;op}$. Let $G$ be a scalar physical boundary lift on an open convex neighborhood containing both images and every segment joining corresponding image points, with $\\|DG\\|_\\infty\\le L_1$ and $\\|D^2G\\|_\\infty\\le L_2$. Define the piecewise pullback gradients by $\\nabla_{pw}(G\\circ\\Phi)=D\\Phi^T\\nabla G(\\Phi)$ and $\\nabla_{pw}(G\\circ\\Phi_h)=D\\Phi_h^T\\nabla G(\\Phi_h)$, and set\n$$\\ell_{\\partial,h}(w)=\\int_{\\widehat\\Omega}\\big(\\nabla_{pw}(G\\circ\\Phi)-\\nabla_{pw}(G\\circ\\Phi_h)\\big)\\cdot\\nabla w,\\qquad w\\in H^1_0(\\widehat\\Omega).$$\nWith the $H^1$ dual norm, $\\|\\ell_{\\partial,h}\\|_{(H^1_0)^*}\\le 2(L_1e_1+ML_2e_0)$. Thus the geometry-induced boundary-lift contribution to the Strang load defect is $O(e_0+e_1)$.",
+        "source_path": "items/lem-curved-boundary-lift-residual.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-isoparametric-cofactor-normal-perturbation",
+        "kind": "lemma",
+        "title": "Cofactor, surface-Jacobian, and normal perturbation bounds",
+        "deps": [
+          "def-isoparametric-curved-cell-map",
+          "def-curved-domain-geometry-approximation"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $A=D\\Phi$ and $A_h=D\\Phi_h$ be orientation-preserving cell-map derivatives with $\\det A,\\det A_h\\ge j_*>0$, $\\|A\\|_{op},\\|A_h\\|_{op}\\le M$, and $\\|A-A_h\\|_{op}\\le e_1$. For every unit reference-facet normal $\\widehat n$, define the surface Jacobians $J_\\Gamma(A)=\\|\\operatorname{cof}(A)\\widehat n\\|$, $J_\\Gamma(A_h)=\\|\\operatorname{cof}(A_h)\\widehat n\\|$, and mapped unit normals $n_\\Gamma(A)=\\operatorname{cof}(A)\\widehat n/J_\\Gamma(A)$ and $n_\\Gamma(A_h)=\\operatorname{cof}(A_h)\\widehat n/J_\\Gamma(A_h)$. Then\n$$\\|\\operatorname{cof}(A)-\\operatorname{cof}(A_h)\\|_{op}+|J_\\Gamma(A)-J_\\Gamma(A_h)|+|n_\\Gamma(A)-n_\\Gamma(A_h)|\\le C(d,M,j_*)e_1.$$\nFor any regular reference-facet parametrization $\\widehat f$, the chart Gram-metric factor of [[def-isoparametric-curved-cell-map]] is $\\sqrt{\\det(D\\widehat f^T A^T A D\\widehat f)}=J_\\Gamma(A)\\sqrt{\\det(D\\widehat f^T D\\widehat f)}$, pointwise with $A=D\\Phi(\\widehat f)$. Thus $J_\\Gamma(A)$ is the surface-area factor relative to reference-facet area; it equals the chart factor when the reference chart has unit area factor. The same relation holds for $A_h$.",
+        "source_path": "items/lem-isoparametric-cofactor-normal-perturbation.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 8",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-isoparametric-laplace-tensor-defect",
+        "kind": "lemma",
+        "title": "Derivative geometry error controls the Laplace tensor defect",
+        "deps": [
+          "def-curved-domain-geometry-approximation",
+          "lem-isoparametric-pullback-and-surface-metric",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $\\Phi,\\Phi_h$ be the orientation-preserving maps of [[def-curved-domain-geometry-approximation]], with $J,J_h\\ge j_*>0$ and $\\|D\\Phi\\|_\\infty+\\|D\\Phi_h\\|_\\infty\\le M$. Set $B=J D\\Phi^{-1}D\\Phi^{-T}$ and $B_h=J_hD\\Phi_h^{-1}D\\Phi_h^{-T}$. Then $\\|B-B_h\\|_\\infty\\le C e_1$, where $C$ depends only on $d,j_*,M$. Consequently $|\\int_{\\widehat\\Omega}\\nabla v^T(B-B_h)\\nabla w|\\le C e_1\\|\\nabla v\\|_2\\|\\nabla w\\|_2$ for $v,w\\in H^1(\\widehat\\Omega)$.",
+        "source_path": "items/lem-isoparametric-laplace-tensor-defect.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 8",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-parabolic-domain-map-approximation",
+        "kind": "lemma",
+        "title": "P1 approximation of a parabolic shear map",
+        "deps": [
+          "def-curved-domain-geometry-approximation",
+          "def-matching-affine-simplicial-meshes",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice. Let $\\widehat\\Omega=[-1,1]^2$, let $\\mathcal T_h$ be a matching shape-regular affine triangulation, and put $\\Phi(x,y)=(x,y+x^2/4)$. Let $I_h$ be the vertexwise P1 interpolant and $\\Phi_h(x,y)=(x,y+I_h(x^2/4))$. In the notation of [[def-curved-domain-geometry-approximation]], there is a constant $C$ depending only on the shape-regularity bound such that $e_0\\le Ch^2$ and $e_1\\le Ch$. For sufficiently small $h$, $\\det D\\Phi_h\\ge1/2$, and $\\Phi_h$ is globally one-to-one on the square. The exact map has $\\det D\\Phi=1$ and a global inverse $(X,Y)\\mapsto(X,Y-X^2/4)$.",
+        "source_path": "items/lem-parabolic-domain-map-approximation.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 8",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-overlap-remap-error-from-approximation-and-geometry",
+        "kind": "theorem",
+        "title": "Remap error separates source, target and geometry approximation",
+        "deps": [
+          "def-intersection-volume-conservative-remapping",
+          "thm-overlap-remap-l2-projection-conservation-positivity",
+          "def-curved-domain-geometry-approximation",
+          "thm-holder-inequality-for-integrals",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice. Let $\\widehat\\Omega$ be bounded, let $\\Phi,\\Phi_h$ be the geometry maps of [[def-curved-domain-geometry-approximation]] and assume each is a global orientation-preserving $C^1$ diffeomorphism from $\\widehat\\Omega$ onto its image, with $J_h\\le J^*$ and $u$ is $L_u$-Lipschitz on the union of their images. On $\\Omega_h=\\Phi_h(\\widehat\\Omega)$ let $\\mathcal S=(S_i)_{i=1}^m$ and $\\mathcal T=(T_j)_{j=1}^n$ be finite families of Lebesgue-measurable sets of positive measure satisfying\n$$|\\Omega_h\\setminus\\textstyle\\bigcup_i S_i|=|\\Omega_h\\setminus\\textstyle\\bigcup_j T_j|=0,\\qquad |S_i\\cap S_{i'}|=0\\ (i\\ne i'),\\qquad |T_j\\cap T_{j'}|=0\\ (j\\ne j').$$\nThus each family is a finite measurable partition up to null sets as required by [[def-intersection-volume-conservative-remapping]]. Let $v_S$ be source-piecewise-constant data with finite $L^2$ error. Assume the exact target projection error below is finite. Define $P_Tq$ on each target cell by its exact cell average, $\\eta_S=\\|u-v_S\\|_{L^2(\\Omega_h)}$, and $\\eta_T=\\|u-P_Tu\\|_{L^2(\\Omega_h)}$. If $R$ is the exact overlap remap, then\n$$\\|u\\circ\\Phi-(Rv_S)\\circ\\Phi_h\\|_{L^2(\\widehat\\Omega,J_h)}\\le L_u e_0\\sqrt{J^*|\\widehat\\Omega|}+\\eta_S+\\eta_T,$$\nwhere $e_0=\\|\\Phi-\\Phi_h\\|_\\infty$ and $\\|z\\|_{L^2(\\widehat\\Omega,J_h)}^2=\\int_{\\widehat\\Omega}|z|^2J_h$.",
+        "source_path": "items/thm-overlap-remap-error-from-approximation-and-geometry.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Devon Powell and Tom Abel, An exact general remeshing scheme applied to physically conservative voxelization",
+              "url": "https://arxiv.org/pdf/1412.4941"
+            },
+            {
+              "title": "Zhengru Zhang, Moving Mesh Method with Conservative Interpolation Based on L2-Projection, Commun. Comput. Phys. 1 (2006), 930–944",
+              "url": "https://www.global-sci.com/cicp/article/view/5434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-curved-nvb-closure-preserves-matching-traces",
+        "kind": "lemma",
+        "title": "Conforming NVB closure preserves curved shared traces",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+          "def-isoparametric-curved-cell-map"
+        ],
+        "dependency_level": 3,
+        "statement": "Let a compatible labeled reference triangulation be refined by recursive reference-edge closure as in [[alg-dorfler-marking-and-conforming-nvb-refinement]]. The closure terminates in a matching conforming affine descendant. If every cell is mapped through one common injective geometry map whose traces agree on common reference facets, the resulting curved cells also have matching interfaces.",
+        "source_path": "items/lem-curved-nvb-closure-preserves-matching-traces.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Delaunay Refinement Mesh Generation, 1999",
+              "url": "https://people.eecs.berkeley.edu/~jrs/meshpapers/delnotes99.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-curved-isoparametric-strang-error-bound",
+        "kind": "theorem",
+        "title": "Strang error bound for a parabolic isoparametric P1 family",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "def-hk-and-hk-zero-notation",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-matching-affine-simplicial-meshes",
+          "def-curved-domain-geometry-approximation",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-curved-p1-interpolation-scaling",
+          "lem-shape-regular-affine-simplex-scaling",
+          "lem-h2-zero-boundary-p1-interpolant-conforming",
+          "lem-parabolic-domain-map-approximation",
+          "lem-isoparametric-pullback-and-surface-metric",
+          "lem-isoparametric-laplace-tensor-defect",
+          "lem-curved-boundary-lift-residual",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $\\widehat\\Omega=(-1,1)^2$, let $\\Phi(x,y)=(x,y+x^2/4)$, and let $\\Phi_h$ be its continuous piecewise-affine nodal interpolant on a shape-regular matching triangular mesh with maximum diameter $h\\le1$, small enough that $J_h=\\det D\\Phi_h\\ge1/2$ as in [[lem-parabolic-domain-map-approximation]]. Put $J=\\det D\\Phi$ and define the pulled-back Laplace tensors $$B=J D\\Phi^{-1}D\\Phi^{-T},\\qquad B_h=J_hD\\Phi_h^{-1}D\\Phi_h^{-T}.$$ On $V=H^1_0(\\widehat\\Omega)$ set $$a(v,w)=\\int_{\\widehat\\Omega}\\nabla v^TB\\nabla w,\\qquad a_h(v,w)=\\int_{\\widehat\\Omega}\\nabla v^TB_h\\nabla w.$$ Let $V_h$ be the finite-dimensional space of continuous functions on $\\overline{\\widehat\\Omega}$ that are affine on each triangle and vanish on $\\partial\\widehat\\Omega$, viewed as a subspace of $V$. Suppose $a$ and $a_h$ are uniformly bounded and coercive on $V$ and $V_h$, respectively, with constants independent of $h$, $F\\in V^*$ and $F_h\\in V_h^*$ are bounded, $u\\in H^2(\\widehat\\Omega)\\cap V$ is real-valued and satisfies $a(u,w)=F(w)$ for every $w\\in V$, and $u_h\\in V_h$ satisfies $a_h(u_h,w_h)=F_h(w_h)$ for every $w_h\\in V_h$.\n\nIf a common physical boundary lift $G\\in C^2$ with bounded first and second derivatives on a convex neighborhood of the two geometry images is used, let $\\ell_{\\partial,h}$ be its pulled-back residual from [[lem-curved-boundary-lift-residual]] and set $\\epsilon_{\\partial,h}=\\|\\ell_{\\partial,h}\\|_{V^*}$. Assume the load difference on $V_h$ splits as $$ (F-F_h)|_{V_h}=L_{\\mathrm{bulk},h}+\\ell_{\\partial,h}|_{V_h},\\qquad \\|L_{\\mathrm{bulk},h}\\|_{V_h^*}\\le\\epsilon_{F,h}^{\\mathrm{bulk}},\\qquad \\epsilon_{F,h}^{\\mathrm{bulk}}\\ge0.$$ Here the $V^*$ and $V_h^*$ norms are induced by the $H^1$ norm. If no lift is used, set $\\ell_{\\partial,h}=0$ and take the same bound for the full load difference. Then $$\\|u-u_h\\|_{H^1(\\widehat\\Omega)}\\le C\\bigl(h\\|u\\|_{H^2(\\widehat\\Omega)}+\\epsilon_{F,h}^{\\mathrm{bulk}}+\\epsilon_{\\partial,h}\\bigr).$$ where $C$ is independent of $h$. For the parabolic geometry family, $\\epsilon_{\\partial,h}\\le C_G(e_0+e_1)\\le C_Gh$.",
+        "source_path": "items/thm-curved-isoparametric-strang-error-bound.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-certified-convex-polygon-overlap",
+        "kind": "algorithm",
+        "title": "Exact certified clipping of convex rational polygons",
+        "deps": [
+          "def-intersection-volume-conservative-remapping",
+          "alg-certified-dyadic-geometric-predicate"
+        ],
+        "dependency_level": 5,
+        "statement": "Input two cyclic vertex lists for positive-area convex polygons in $\\mathbb R^2$, with rational coordinates. The closing edge is implicit; if the last listed vertex repeats the first, delete that final copy. Delete consecutive duplicate vertices, including across the cyclic endpoint, then return unresolved if a list has fewer than three vertices, any remaining repeated vertex, a zero-length edge, or zero signed shoelace area. Reverse a negatively oriented list so both polygons are counterclockwise. For each list, certify convexity as follows: for every directed edge, evaluate the orientation of that edge with every listed vertex and require every sign to be nonnegative; if three consecutive vertices are collinear, require the middle one to lie between the other two; and for every pair of nonadjacent closed edges, certify that they do not intersect. Test the latter exactly using the four orientation signs: two segments $AB,CD$ intersect if the signs for $C,D$ against $AB$ are strictly opposite and the signs for $A,B$ against $CD$ are strictly opposite, or if one of these signs is zero and its point lies in the closed coordinatewise bounding rectangle of the corresponding segment. Return unresolved if any certificate check fails. These finite checks certify that each normalized list is the simple counterclockwise boundary of its convex hull, allowing redundant collinear vertices.\n\nFor every rational orientation test, clear one common positive denominator from the coordinates of its three points and call [[alg-certified-dyadic-geometric-predicate]] on the resulting integer (hence dyadic) points. Propagate any result other than an exact positive, zero, or negative sign as unresolved. For each directed edge of $Q$, clip the current cyclic list of $P$ to that edge's closed left half-plane, treating a point $X$ as inside exactly when $s(X)\\ge0$, where $s(X)$ is its signed edge determinant. Traverse cyclically by setting $S$ to the last current vertex and then taking each current vertex in list order as $E$. Apply exactly one of these branches:\n\n- If $s(S)\\ge0$ and $s(E)\\ge0$, append $E$.\n- If $s(S)\\ge0>s(E)$, append $S+t(E-S)$.\n- If $s(S)<0\\le s(E)$, append $S+t(E-S)$ and then $E$.\n- If $s(S)<0$ and $s(E)<0$, append nothing.\n\nIn either crossing branch set $t=s(S)/(s(S)-s(E))$. The strict sign inequalities make this denominator nonzero and give $t\\in[0,1]$; when an endpoint sign is zero the intersection is that endpoint. No division is performed in either noncrossing branch. Remove consecutive duplicate output vertices after each pass, including a duplicate across the cyclic endpoint, and continue with the next edge of $Q$. If the current list is empty, it remains empty. Return the final rational cyclic list and area zero when it has fewer than three noncollinear vertices; otherwise return its exact shoelace area. No floating tolerance is used.",
+        "source_path": "items/alg-certified-convex-polygon-overlap.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Devon Powell and Tom Abel, An exact general remeshing scheme applied to physically conservative voxelization",
+              "url": "https://arxiv.org/pdf/1412.4941"
+            },
+            {
+              "title": "Zhengru Zhang, Moving Mesh Method with Conservative Interpolation Based on L2-Projection, Commun. Comput. Phys. 1 (2006), 930–944",
+              "url": "https://www.global-sci.com/cicp/article/view/5434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-certified-polygon-overlap-correctness",
+        "kind": "theorem",
+        "title": "Certified clipping returns the exact convex polygon overlap",
+        "deps": [
+          "alg-certified-convex-polygon-overlap",
+          "alg-certified-dyadic-geometric-predicate",
+          "def-intersection-volume-conservative-remapping",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume Countable Choice. For positive-area convex polygons $P,Q\\subset\\mathbb R^2$ with rational vertices, [[alg-certified-convex-polygon-overlap]] terminates and returns exactly $P\\cap Q$ as a cyclic list of rational vertices, with its exact Lebesgue area. Empty intersections and intersections consisting only of a point or segment return area zero. The result can be used as the exact weight $|P\\cap Q|$ in [[def-intersection-volume-conservative-remapping]].",
+        "source_path": "items/thm-certified-polygon-overlap-correctness.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Devon Powell and Tom Abel, An exact general remeshing scheme applied to physically conservative voxelization",
+              "url": "https://arxiv.org/pdf/1412.4941"
+            },
+            {
+              "title": "Zhengru Zhang, Moving Mesh Method with Conservative Interpolation Based on L2-Projection, Commun. Comput. Phys. 1 (2006), 930–944",
+              "url": "https://www.global-sci.com/cicp/article/view/5434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+        "kind": "algorithm",
+        "title": "Delaunay-seeded curved uniform NVB refinement",
+        "deps": [
+          "def-isoparametric-curved-cell-map",
+          "def-curved-domain-geometry-approximation",
+          "def-indexed-geometric-site-set",
+          "def-planar-delaunay-voronoi-structures",
+          "alg-incremental-planar-delaunay-edge-flips",
+          "thm-incremental-planar-delaunay-correctness-and-termination",
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "lem-curved-nvb-closure-preserves-matching-traces"
+        ],
+        "justified_by": [
+          "thm-curved-uniform-nvb-quality-and-termination"
+        ],
+        "dependency_level": 7,
+        "statement": "Input the exact dyadic square $[-1,1]^2$, a tolerance $0<\\tau\\le1/4$, and the exact shear $\\Phi(x,y)=(x,y+x^2/4)$. Use the unweighted indexed corner list $S=((1,(-1,-1)),(2,(1,-1)),(3,(1,1)),(4,(-1,1)))$ with all weights absent, and call [[alg-incremental-planar-delaunay-edge-flips]] in its ordinary $g=0$ branch with no prescribed insertion permutation, so sites are inserted in increasing identifier order. If the call does not return a triangulation, return unresolved. Verify that the output consists of two triangles covering the square and sharing one diagonal; otherwise return unresolved. The boundary features are the four closed edges and four vertices; features are incident when their sets intersect, and separation is the minimum Euclidean distance between nonincident feature sets. Record the interior boundary-angle certificate $\\alpha=\\pi/2$ and the nonincident-feature separation certificate $\\sigma=1$. Label the shared diagonal reference on both triangles and label the boundary edges nonreference. For each seed triangle, sort its three input site identifiers increasingly and use the resulting triple as its seed key. Sort the two distinct keys lexicographically and assign operational root ranks $1,2$ in that order. Initialize their identifiers $(1,\\varnothing),(2,\\varnothing)$ and stored vertex lists by [[def-afem-nvb-labelled-triangulation-family]], retaining the just-assigned compatible reference-edge labels. All subsequent calls use the resulting persistent root-and-binary-path order, including on generated children; the site-key order is bookkeeping and does not relabel an edge. Set $k=0$. While $(3/2)2^{-k}(2\\sqrt2)>\\tau$, set $\\eta_K^2=1$, $o_K^2=0$ on every current cell and call [[alg-dorfler-marking-and-conforming-nvb-refinement]] with $\\theta_E=1$, $\\theta_O=1$. Start the cycle budget at $B=1$; if the call returns `budget-exhausted`, retry from the unchanged mesh with $B$ doubled until it returns `complete`. A complete call requests three generations on every cell and uses recursive conformity closure; then set $k\\leftarrow k+1$ and test the diameter bound again. Map every output reference triangle by the common shear $\\Phi$ and return the mapped cells, feature certificates, and $k$. If a predicate is unresolved, the Delaunay seed does not have the stated two-triangle form, or closure returns invalid input, return `unresolved`.",
+        "source_path": "items/alg-delaunay-seeded-curved-uniform-nvb-refinement.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Delaunay Refinement Mesh Generation, 1999",
+              "url": "https://people.eecs.berkeley.edu/~jrs/meshpapers/delnotes99.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-curved-uniform-nvb-quality-and-termination",
+        "kind": "theorem",
+        "title": "Quality and finite termination for the curved square NVB family",
+        "deps": [
+          "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+          "lem-curved-nvb-closure-preserves-matching-traces",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "def-isoparametric-curved-cell-map",
+          "def-curved-domain-geometry-approximation",
+          "thm-incremental-planar-delaunay-correctness-and-termination"
+        ],
+        "dependency_level": 8,
+        "statement": "For every tolerance $0<\\tau\\le\\sigma/4=1/4$, the algorithm [[alg-delaunay-seeded-curved-uniform-nvb-refinement]] with square boundary angle $\\alpha=\\pi/2$ and nonincident-feature separation $\\sigma=1$ terminates after finitely many three-generation cycles. Its reference triangles remain right isosceles with minimum angle $\\pi/4$, all interfaces match, and every curved cell map is orientation preserving. Pointwise on each cell, if $a_K$ is an affine parametrization of its reference triangle, then the induced metric $G_{\\Phi,K}=(D(\\Phi\\circ a_K))^TD(\\Phi\\circ a_K)$ has spectral condition number $\\kappa_2(G_{\\Phi,K})\\le(81/16)\\kappa_2(G_{\\mathrm{ref},K})$, where $G_{\\mathrm{ref},K}=(Da_K)^TDa_K$. The returned maximum curved-cell diameter is at most $\\tau$. This is a guarantee for this square/shear family; it asserts no general Delaunay minimum-angle theorem, adaptive complexity bound, or 3D shape bound.",
+        "source_path": "items/thm-curved-uniform-nvb-quality-and-termination.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Delaunay Refinement Mesh Generation, 1999",
+              "url": "https://people.eecs.berkeley.edu/~jrs/meshpapers/delnotes99.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2681,
+    "id": "curved-mesh-geometry-and-conservative-mesh-transfer-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Curved geometry, mesh generation and conservative transfer — Examples",
+    "companion": "curved-mesh-geometry-and-conservative-mesh-transfer",
+    "requires": [
+      "curved-mesh-geometry-and-conservative-mesh-transfer"
+    ],
+    "items": [
+      {
+        "id": "ex-inverted-isoparametric-map-detection",
+        "kind": "example",
+        "title": "An orientation-reversing cell fails the Jacobian certificate",
+        "deps": [
+          "def-isoparametric-curved-cell-map"
+        ],
+        "dependency_level": 1,
+        "statement": "Take the reference triangle with vertices $(0,0),(1,0),(0,1)$ and the affine map $F(x,y)=(y,x)$. Its Jacobian determinant is $-1$, so it cannot satisfy the admissibility condition $J_F\\ge j_0>0$.",
+        "source_path": "items/ex-inverted-isoparametric-map-detection.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 8",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-isoparametric-unit-disk-mesh",
+        "kind": "example",
+        "title": "A ten-cell isoparametric mesh exactly covers the unit disk",
+        "deps": [
+          "def-isoparametric-curved-cell-map",
+          "lem-isoparametric-pullback-and-surface-metric",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice. Let $a=1/2$ and $g(t)=a\\tan(\\pi t/4)$. Map the reference square $[-1,1]^2$ to the central square $[-a,a]^2$ by $H(t,q)=(g(t),g(q))$ and split it into two triangles. For the top annular sector use the parameter rectangle $[-1,1]\\times[0,1]$ with coordinates $(t,s)$, set $\\theta(t)=\\pi/2-\\pi t/4$, $r(s,t)=(1-s)a/\\sin\\theta(t)+s$, and map by $F(t,s)=r(s,t)(\\cos\\theta(t),\\sin\\theta(t))$; split this rectangle into two triangles and rotate it for the other three sides. These ten mapped triangles have positive Jacobians, matching traces, and union equal to the closed unit disk.",
+        "source_path": "items/ex-isoparametric-unit-disk-mesh.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 8",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-conservative-transfer-between-moving-curved-meshes",
+        "kind": "example",
+        "title": "Opposite diagonals conserve mass under a curved shear",
+        "deps": [
+          "def-curved-domain-geometry-approximation",
+          "def-intersection-volume-conservative-remapping",
+          "thm-overlap-remap-l2-projection-conservation-positivity",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice. Map $[-1,1]^2$ by the area-preserving shear $\\Phi(x,y)=(x,y+x^2/4)$. Triangulate the square once along the southwest-to-northeast diagonal and once along the other diagonal; map both meshes by the same $\\Phi$. Every source-target overlap has area $1$. If the source cell values are $2$ and $0$, each target average is $1$, source and target total mass are both $4$, and all target values remain nonnegative.",
+        "source_path": "items/ex-conservative-transfer-between-moving-curved-meshes.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Devon Powell and Tom Abel, An exact general remeshing scheme applied to physically conservative voxelization",
+              "url": "https://arxiv.org/pdf/1412.4941"
+            },
+            {
+              "title": "Zhengru Zhang, Moving Mesh Method with Conservative Interpolation Based on L2-Projection, Commun. Comput. Phys. 1 (2006), 930–944",
+              "url": "https://www.global-sci.com/cicp/article/view/5434"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-parabolic-curved-domain-linear-geometry-approximation",
+        "kind": "example",
+        "title": "A parabolic shear has certified linear geometry approximations",
+        "deps": [
+          "def-curved-domain-geometry-approximation",
+          "lem-parabolic-domain-map-approximation",
+          "lem-isoparametric-laplace-tensor-defect",
+          "def-countable-choice",
+          "thm-continuous-bijection-from-a-compact-space-has-continuous-inverse"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice. On $[-1,1]^2$, the exact shear $\\Phi(x,y)=(x,y+x^2/4)$ maps each straight reference edge to a straight or parabolic arc. Its determinant is $1$. On any shape-regular affine mesh, the nodal P1 geometry map satisfies $e_0\\le Ch^2$, $e_1\\le Ch$, and $J_h\\ge1/2$ for small enough $h$. Consequently its Laplace tensor differs from the exact pulled-back tensor by at most $Ch$ in $L^\\infty$.",
+        "source_path": "items/ex-parabolic-curved-domain-linear-geometry-approximation.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 8",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap08.pdf"
+            },
+            {
+              "title": "Gerald Dziuk and Charles M. Elliott, Finite element methods for surface PDEs, Acta Numerica 22 (2013)",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/53966/1/WRAP_Elliott_DziEll13a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-delaunay-tetrahedral-sliver",
+        "kind": "counterexample",
+        "title": "An empty-sphere tetrahedron can be arbitrarily flat",
+        "deps": [
+          "def-three-dimensional-delaunay-and-weighted-regular-lower-hull"
+        ],
+        "dependency_level": 3,
+        "statement": "For each integer $n\\ge1$, set $\\varepsilon_n=2^{-n}$ and take the four unweighted sites with distinct stable identifiers $1,2,3,4$ at $p_1=(0,0,0)$, $p_2=(1,0,0)$, $p_3=(0,1,0)$, and $p_4=(1/4,1/4,\\varepsilon_n)$. All coordinates are dyadic. They span one tetrahedron. Its circumsphere is empty of other sites because there are no other sites, so it is a Delaunay tetrahedron, while its inradius tends to zero and its diameter is at least $1$ as $n\\to\\infty$.",
+        "source_path": "items/cex-delaunay-tetrahedral-sliver.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan R. Shewchuk, Delaunay Refinement Mesh Generation, 1999",
+              "url": "https://people.eecs.berkeley.edu/~jrs/meshpapers/delnotes99.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,417 @@
+[
+  {
+    "order": 2662,
+    "id": "adaptive-finite-element-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Adaptive finite-element methods",
+    "companion": "adaptive-finite-element-methods-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas"
+    ],
+    "items": [
+      {
+        "id": "cor-afem-constant-convection-weak-wellposedness",
+        "kind": "corollary",
+        "title": "Weak well-posedness for constant divergence-free convection",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-hilbert-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-lax-milgram",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 0,
+        "statement": "On a bounded polygon, the zero-Dirichlet problem -Delta u+b dot grad u=f with constant b and f in L2 has a unique weak solution under the stated choice assumptions.",
+        "strategy": "Bound the form, show the constant-convection term is skew on H01, use Poincare coercivity, and apply Lax-Milgram."
+      },
+      {
+        "id": "def-afem-local-moment-interpolant",
+        "kind": "definition",
+        "title": "A local moment interpolant for conforming P1 meshes",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Define a local P1 quasi-interpolant by reference-triangle dual moments at interior vertices and zero coefficients at boundary vertices.",
+        "strategy": "Specify the reference dual polynomials, cell selection for each vertex, and the induced conforming zero-boundary P1 function."
+      },
+      {
+        "id": "def-afem-nvb-labelled-triangulation-family",
+        "kind": "definition",
+        "title": "Compatible 2D newest-vertex-bisection meshes",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "dependency_level": 0,
+        "statement": "Define a labeled conforming triangular mesh family by the 2D newest-vertex-bisection rule and the compatible initial-label condition.",
+        "strategy": "State edge labels, generations, reference edges, child labeling, and the finite forest convention."
+      },
+      {
+        "id": "def-afem-p1-residual-estimator-and-data-oscillation",
+        "kind": "definition",
+        "title": "Residual indicators and data oscillation for P1 AFEM",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p"
+        ],
+        "dependency_level": 0,
+        "statement": "For a matching triangular mesh and conforming P1 Galerkin function, define cell residuals, conormal flux jumps, residual indicators, and projected data oscillation for the symmetric Poisson and constant-convection models.",
+        "strategy": "Give exact residual, jump, estimator, projection, and oscillation formulas with the PDE and mesh hypotheses."
+      },
+      {
+        "id": "lem-afem-vertex-patch-poincare",
+        "kind": "lemma",
+        "title": "Uniform Poincare inequalities on vertex and cell patches",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "thm-reference-simplex-poincare-wirtinger",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "On a shape-regular matching triangular mesh, interior vertex stars satisfy a uniform mean-zero Poincare inequality, and boundary stars satisfy a uniform zero-trace Poincare inequality.",
+        "strategy": "Scale simplex Poincare and trace bounds, compare neighboring cell means across shared edges, and use the bounded valence of each vertex star."
+      },
+      {
+        "id": "alg-dorfler-marking-and-conforming-nvb-refinement",
+        "kind": "algorithm",
+        "title": "Dorfler marking and conforming newest-vertex refinement",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family"
+        ],
+        "dependency_level": 1,
+        "statement": "Given nonnegative cell indicators and oscillations, choose deterministic minimal Dörfler sets and refine their edge-neighbor stars by three generations of 2D newest-vertex bisection with conformity closure.",
+        "strategy": "Sort by decreasing squared contribution with a fixed tie rule, mark estimator and oscillation bulk sets, then run bounded transactional refinement."
+      },
+      {
+        "id": "def-afem-p1-approximation-class",
+        "kind": "definition",
+        "title": "The P1 AFEM approximation class",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-countable-choice",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-afem-p1-residual-estimator-and-data-oscillation"
+        ],
+        "dependency_level": 1,
+        "statement": "Define the nonlinear approximation class of exact Poisson solutions by best energy error over conforming P1 newest-vertex-bisection refinements of a fixed initial mesh.",
+        "strategy": "Use the mesh budget N and the supremum of (N+1)^s times best energy error."
+      },
+      {
+        "id": "lem-afem-convection-quasi-orthogonality-under-fine-mesh",
+        "kind": "lemma",
+        "title": "Quasi-orthogonality for constant convection on a fine initial mesh",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "def-countable-choice",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm"
+        ],
+        "dependency_level": 1,
+        "statement": "For nested P1 spaces, symmetric Poisson has exact energy orthogonality; constant divergence-free convection has quasi-orthogonality under an explicit dual L2-pickup bound and a sufficiently small initial-mesh condition.",
+        "strategy": "Expand the error across nested Galerkin spaces, integrate the skew convection term by parts, apply the dual L2 bound, and absorb it by Young's inequality."
+      },
+      {
+        "id": "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+        "kind": "lemma",
+        "title": "Shape regularity and local reduction under 2D newest-vertex bisection",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-shape-regular-affine-simplex-scaling"
+        ],
+        "dependency_level": 1,
+        "statement": "Every conforming newest-vertex-bisection descendant remains uniformly shape regular; three uniform generations split every original edge, create an interior vertex, and reduce each child diameter by at least a factor one half.",
+        "strategy": "Classify the four similarity types generated by the midpoint rule, then list the vertices and edge lengths after three generations."
+      },
+      {
+        "id": "lem-afem-p1-residual-representation",
+        "kind": "lemma",
+        "title": "Element and edge residual representation for P1 Galerkin errors",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "dependency_level": 1,
+        "statement": "For the symmetric Poisson and constant-convection P1 models, pair the weak error with any H01 test function to obtain the sum of cell residuals and interior conormal-flux jumps.",
+        "strategy": "Apply weak Gauss-Green on each triangle and cancel the two outward fluxes on each interior edge."
+      },
+      {
+        "id": "thm-afem-local-moment-interpolation-estimates",
+        "kind": "theorem",
+        "title": "Local approximation and reproduction of the P1 moment interpolant",
+        "deps": [
+          "def-afem-local-moment-interpolant",
+          "lem-afem-vertex-patch-poincare",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "lem-reference-polynomial-norm-equivalence",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "The local moment interpolant reproduces conforming P1 functions, preserves zero boundary values, and has local L2, H1-seminorm, and edge-trace error bounds for H01 functions on shape-regular triangular meshes.",
+        "strategy": "Use vertex-patch Poincare, bounded reference dual moments, affine scaling, the scaled trace inequality, and bounded patch overlap."
+      },
+      {
+        "id": "lem-afem-common-refinement-overlay-and-cardinality",
+        "kind": "lemma",
+        "title": "Common NVB refinement and overlay cardinality",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties"
+        ],
+        "dependency_level": 2,
+        "statement": "The union of two compatible bisection forests is their smallest common conforming overlay and its element count is at most the sum of the two counts minus the initial count.",
+        "strategy": "Use the full binary-tree representation, edge-label compatibility, and the leaf/internal-node count for each root tree."
+      },
+      {
+        "id": "lem-afem-data-oscillation-reduction-under-marked-refinement",
+        "kind": "lemma",
+        "title": "Data oscillation reduction under three-generation refinement",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "For P0 cell-data oscillation, three-generation refinement of a Dörfler-marked set reduces the global oscillation by an explicit factor below one.",
+        "strategy": "Use nested L2 projections and the child-diameter reduction on the marked cells; leave unmarked contributions unchanged."
+      },
+      {
+        "id": "lem-afem-localized-galerkin-refinement-estimate",
+        "kind": "lemma",
+        "title": "Localized energy estimate for nested Galerkin solutions",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-afem-p1-residual-representation",
+          "thm-afem-local-moment-interpolation-estimates",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "For nested conforming P1 meshes, the energy difference of the two exact Galerkin solutions is bounded by the coarse residual indicators on the refined-cell neighborhood.",
+        "strategy": "Use a local P1-reproducing moment interpolant that equals the fine solution difference away from refined patches, then apply the residual representation and finite overlap."
+      },
+      {
+        "id": "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+        "kind": "lemma",
+        "title": "Termination and cumulative complexity of NVB conformity closure",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties"
+        ],
+        "dependency_level": 2,
+        "statement": "For a compatible 2D initial labeling, recursive newest-vertex closure terminates, preserves conformity, and the total added-cell count over any AFEM sequence is bounded by a constant times the total number of marked cells.",
+        "strategy": "Use generation-decreasing reference-edge chains for termination and a geometric allocation argument for the cumulative closure bound."
+      },
+      {
+        "id": "thm-afem-p1-residual-reliability-and-local-efficiency",
+        "kind": "theorem",
+        "title": "Residual reliability and local efficiency for P1 AFEM",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "lem-afem-p1-residual-representation",
+          "thm-afem-local-moment-interpolation-estimates",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "def-countable-choice",
+          "lem-shape-regular-affine-simplex-scaling"
+        ],
+        "dependency_level": 2,
+        "statement": "For conforming P1 Galerkin solutions of the Poisson and constant-convection models, the residual estimator is reliable and locally efficient up to projected cell-data oscillation; on uniformly refined marked patches the efficiency bound controls the Galerkin correction.",
+        "strategy": "Test the residual representation against the local moment interpolation error for reliability and against cell and edge bubbles for local lower bounds."
+      },
+      {
+        "id": "lem-afem-dorfler-marking-cardinality",
+        "kind": "lemma",
+        "title": "Dorfler marking is cardinality-optimal up to mesh closure",
+        "deps": [
+          "def-afem-p1-approximation-class",
+          "def-afem-nvb-labelled-triangulation-family",
+          "thm-afem-p1-residual-reliability-and-local-efficiency",
+          "lem-afem-common-refinement-overlay-and-cardinality",
+          "lem-afem-localized-galerkin-refinement-estimate",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "def-countable-choice",
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "lem-afem-convection-quasi-orthogonality-under-fine-mesh"
+        ],
+        "dependency_level": 3,
+        "statement": "For P1 Laplace with piecewise-constant initial data, any comparison mesh that reduces the energy error by a fixed factor supplies a Dörfler set whose size bounds the deterministic minimal marked set.",
+        "strategy": "Use Pythagorean orthogonality, the localized refinement estimate, estimator equivalence with zero oscillation, and the overlay cardinality bound."
+      },
+      {
+        "id": "lem-afem-residual-estimator-reduction",
+        "kind": "lemma",
+        "title": "Reduction of the P1 residual estimator after marked refinement",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+          "def-countable-choice",
+          "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "lem-shape-regular-affine-simplex-scaling"
+        ],
+        "dependency_level": 3,
+        "statement": "After three-generation refinement of Dörfler-marked cells, the new residual estimator is bounded by a strict reduction of marked old contributions plus the Galerkin correction and oscillation.",
+        "strategy": "Split new residuals into old residuals and terms from the discrete correction; use mesh-size reduction, inverse trace estimates, and finite patch overlap."
+      },
+      {
+        "id": "thm-afem-error-and-oscillation-contraction",
+        "kind": "theorem",
+        "title": "Linear contraction of AFEM energy error and oscillation",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "cor-afem-constant-convection-weak-wellposedness",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "lem-afem-convection-quasi-orthogonality-under-fine-mesh",
+          "thm-afem-p1-residual-reliability-and-local-efficiency",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-afem-data-oscillation-reduction-under-marked-refinement",
+          "lem-afem-residual-estimator-reduction",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations"
+        ],
+        "dependency_level": 4,
+        "statement": "The combined squared energy error and a positive multiple of data oscillation contracts geometrically for the symmetric Poisson branch without an initial-mesh restriction and for the constant-convection branch under the stated dual-shift and small-mesh assumptions.",
+        "strategy": "Reduce oscillation by bulk marking, derive a marked correction lower bound from local efficiency, use orthogonality or fine-mesh quasi-orthogonality, and choose a fixed weight to absorb the residual oscillation term."
+      },
+      {
+        "id": "thm-afem-p1-poisson-optimal-complexity",
+        "kind": "theorem",
+        "title": "Optimal P1 AFEM complexity for the Laplacian",
+        "deps": [
+          "def-afem-p1-approximation-class",
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-afem-nvb-labelled-triangulation-family",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+          "lem-afem-dorfler-marking-cardinality",
+          "thm-afem-error-and-oscillation-contraction",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-galerkin-orthogonality-for-conforming-galerkin-approximations"
+        ],
+        "dependency_level": 5,
+        "statement": "For P1 newest-vertex bisection applied to -Delta u=f with f piecewise constant on the initial mesh, membership of u in the declared approximation class implies the matching algebraic energy-error rate, for 0<s<=1/2.",
+        "strategy": "Compare each Dörfler set with an overlay of a near-best mesh, use geometric error contraction to sum marked-cell counts, and apply the cumulative NVB closure bound."
+      }
+    ]
+  },
+  {
+    "order": 2663,
+    "id": "adaptive-finite-element-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Adaptive finite-element methods — Examples",
+    "companion": "adaptive-finite-element-methods",
+    "requires": [
+      "adaptive-finite-element-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-afem-coefficient-jump-adds-flux-oscillation",
+        "kind": "example",
+        "title": "A coefficient jump creates nonzero edge-flux oscillation",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "On two triangles sharing an edge, a piecewise Lipschitz diffusion coefficient with a jump produces a nonconstant conormal-flux jump and a strictly positive projected edge-oscillation term.",
+        "strategy": "Evaluate the two outward conormal fluxes on the common edge and subtract their edge mean."
+      },
+      {
+        "id": "ex-afem-coarse-convection-mesh-misses-smallness-condition",
+        "kind": "example",
+        "title": "A coarse mesh can miss the convection smallness condition",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "lem-afem-convection-quasi-orthogonality-under-fine-mesh",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "For any prescribed initial mesh and positive source constant, choose constant divergence-free convection large enough that the strict dual-shift smallness condition fails.",
+        "strategy": "Substitute the chosen convection norm into the condition and conclude only that the sufficient estimate is unavailable."
+      },
+      {
+        "id": "ex-afem-dorfler-marking-three-cells",
+        "kind": "example",
+        "title": "A deterministic Dörfler mark on three cells",
+        "deps": [
+          "alg-dorfler-marking-and-conforming-nvb-refinement"
+        ],
+        "dependency_level": 2,
+        "statement": "For squared indicators (9,4,1) and marking fraction 3/5, the deterministic minimal Dörfler set contains only the first cell.",
+        "strategy": "Compute the total, threshold, sorted partial sums, and the minimality comparison."
+      },
+      {
+        "id": "ex-afem-data-oscillation-reduction-under-refinement",
+        "kind": "example",
+        "title": "Projected data oscillation on a reference triangle",
+        "deps": [
+          "def-afem-p1-residual-estimator-and-data-oscillation",
+          "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "lem-afem-data-oscillation-reduction-under-marked-refinement",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "For an indicator datum on a reference triangle, compute its cellwise P0 oscillation and verify the strict reduction bound after the Dörfler-marked three-generation refinement.",
+        "strategy": "Integrate the two subregions exactly and apply the projection contraction on each refined child."
+      }
+    ]
+  }
+]

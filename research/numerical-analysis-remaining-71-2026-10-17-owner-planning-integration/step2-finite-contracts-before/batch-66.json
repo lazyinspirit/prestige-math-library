@@ -1,0 +1,1411 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-66",
+  "scope": [
+    "lem-phase-field-neumann-laplacian-kernel-and-gauge",
+    "lem-phase-field-interval-p1-projector-stability",
+    "thm-phase-field-sav-modified-energy-law",
+    "thm-phase-field-convex-splitting-step-existence-and-energy",
+    "thm-phase-field-convex-splitting-ac-ch-time-error",
+    "thm-phase-field-convex-splitting-mesh-time-convergence",
+    "ex-phase-field-allen-cahn-stationary-front",
+    "ex-phase-field-interface-width-and-grid-resolution",
+    "cex-phase-field-sav-modified-energy-not-physical-energy",
+    "ex-phase-field-ch-two-cell-energy-ledger"
+  ],
+  "contracts": {
+    "lem-phase-field-neumann-laplacian-kernel-and-gauge": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-phase-field-discrete-realizations",
+          "source_section": "Definition",
+          "quote": "The **no-flux finite-volume realization** starts from a finite connected cell-face mesh as in [[def-fv-admissible-cell-face-mesh]] and uses the interior-face orthogonality and positive transmissibilities of [[def-tpfa-harmonic-face-scheme]]. For unit diffusivity, let $X_h=\\mathbb R^{\\mathcal K}$, $m_h(u,v)=\\sum_{K\\in\\mathcal K}|K|u_Kv_K$, and\n$$a_h(u,v)=\\sum_{F=K|L\\in\\mathcal F_{\\rm int}}T_F(u_K-u_L)(v_K-v_L).$$\nThere is no boundary-face term: the flux through each physical boundary face is prescribed to be zero. Define $A_h:X_h\\to X_h$ by $m_h(A_hu,v)=a_h(u,v)$ for all $v\\in X_h$. Split the double-well density as\n$$F_\\varepsilon=F_c-F_e,\\qquad F_c(s)=\\frac{s^4}{4\\varepsilon^2}+\\frac{s^2}{2\\varepsilon^2},\\qquad F_e(s)=\\frac{s^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}.$$\nThe associated finite-volume energy components are\n$$E_{c,h}(u)=\\sum_K|K|\\left(\\frac{u_K^4}{4\\varepsilon^2}+\\frac{u_K^2}{2\\varepsilon^2}\\right),\\qquad E_{e,h}(u)=\\sum_K|K|\\left(\\frac{u_K^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}\\right).$$\n\nFor convergence on $\\Omega=(0,L)$, a second realization uses the same orthogonal dual mesh with centers $x_i=(i-\\tfrac12)h$, $h=L/N$. Its conforming space $V_h$ consists of functions affine between consecutive centers and constant on the two half-cells between a boundary and the nearest center. Its inner product is the exact $L^2(0,L)$ inner product, its stiffness is $a_h(v,w)=\\int_0^L v'w'\\,dx$, and its energy components are $E_{c,h}(v)=\\int_0^L F_c(v)\\,dx$ and $E_{e,h}(v)=\\int_0^L F_e(v)\\,dx$. Define $A_h:V_h\\to V_h$ by $(A_hv,w)_{L^2}=a_h(v,w)$. For degrees of freedom $v_i=v(x_i)$, this stiffness is exactly the interior two-point flux form $\\sum_{i=1}^{N-1}(v_{i+1}-v_i)(w_{i+1}-w_i)/h$; the exact mass and potential integrals are the conforming reconstruction used in the convergence theorem.\n\nBoth realizations have a constant function $\\mathbf1$, a real finite-dimensional inner-product space, and a self-adjoint nonnegative operator $A_h$. They share the physical energy $E_h(u)=\\frac\\kappa2m_h(A_hu,u)+E_{c,h}(u)-E_{e,h}(u)$, with the appropriate inner product and energy components for the realization. The sign convention is $A_h\\approx-\\Delta$.\n\n```tikz\n\\begin{tikzpicture}[x=1.2cm,y=1cm]\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0.5,1.5,2.5,3.5} {\n    \\fill (\\x,0) circle (2pt);\n  }\n  \\node[above] at (0.5,0.05) {$K_1$};\n  \\node[above] at (1.5,0.05) {$K_2$};\n  \\node[above] at (2.5,0.05) {$K_3$};\n  \\node[above] at (3.5,0.05) {$K_4$};\n  \\foreach \\x in {1,2,3} {\n    \\draw[dashed] (\\x,-0.2) -- (\\x,0.2);\n    \\draw[->,blue] (\\x-0.28,-0.42) -- (\\x+0.28,-0.42);\n    \\node[below] at (\\x,-0.42) {$Q_F$};\n  }\n  \\draw[red] (0,-0.23) -- (0,0.23);\n  \\draw[red] (4,-0.23) -- (4,0.23);\n  \\node[below] at (0,-0.23) {$Q=0$};\n  \\node[below] at (4,-0.23) {$Q=0$};\n\\end{tikzpicture}\n```\n\nThe diagram labels four adjacent cell values, three shared interior fluxes, and the prescribed zero boundary fluxes. Each interior flux appears with opposite signs in its two cell balances. The diagram records the convention only; it is not used as a proof.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed bilinear form in [F1] is symmetric, so $A_h$ is self-adjoint. Its quadratic form is a sum of positive transmissibility-weighted squared jumps in the cell branch and is $\\int_0^L|u_h'|^2$ in the interval branch, so it is nonnegative. If it is zero, every interior jump vanishes in the cell branch, and connectedness makes all cell values equal; in the interval branch the derivative is zero on every segment, and continuity makes the function constant. Conversely, constants have zero quadratic form. Thus $\\ker A_h=\\operatorname{span}\\{\\mathbf1\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Self-adjointness implies $\\operatorname{ran}A_h\\subseteq(\\ker A_h)^\\perp$: for $z=A_hx$ and $c\\in\\ker A_h$, $\\langle z,c\\rangle_h=\\langle x,A_hc\\rangle_h=0$. Rank-nullity gives $\\dim\\operatorname{ran}A_h=\\dim X_h-\\dim\\ker A_h=\\dim(\\ker A_h)^\\perp$, so equality holds. The orthogonal complement of the constants is exactly $X_{h,0}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The restriction of $A_h$ to $X_{h,0}$ maps into $X_{h,0}$ and has trivial kernel by step 1.1. It is therefore bijective on this finite-dimensional space. Hence each mean-zero source has a unique mean-zero inverse, and projecting an arbitrary source onto $X_{h,0}$ defines $A_h^\\dagger$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On $X_{h,0}$ the restriction of $A_h$ is self-adjoint positive definite by step 1.1. If $x,y\\in X_{h,0}$, write $x=A_hs$ and $y=A_ht$ with $s,t\\in X_{h,0}$; then $\\langle A_h^\\dagger x,y\\rangle_h=\\langle s,A_ht\\rangle_h=\\langle A_hs,t\\rangle_h=\\langle x,A_h^\\dagger y\\rangle_h$, so its inverse is self-adjoint. Also, for nonzero $x=A_hs$, $\\langle A_h^\\dagger x,x\\rangle_h=\\langle s,A_hs\\rangle_h>0$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $X_{h,0}=\\{0\\}$ the claimed inequality is immediate. Otherwise its unit sphere is compact and nonempty. The continuous quadratic form $u_h\\mapsto\\langle A_hu_h,u_h\\rangle_h$ attains a minimum there by [F2]. The minimum is positive, since a zero value would put a unit mean-zero vector in the constant kernel from step 1.1. Calling the minimum $\\lambda_h>0$, homogeneity gives $\\|u_h-\\bar u_h\\mathbf1\\|_h^2\\le\\lambda_h^{-1}\\langle A_hu_h,u_h\\rangle_h$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 4.1 identify the constant kernel and its positive inverse; step 5.1 handles the one-cell zero mean space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 5.1 treats the one-cell mesh explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 5.1 proves the mean-zero inequality is vacuous when the space is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoints branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No separate nonempty-choice branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "one-cell-neumann-kernel",
+          "asserts": "For one cell, A_h=0, X_{h,0}={0}, and the stated Poincare inequality is vacuous.",
+          "claim": "The zero-dimensional mean-zero branch and constant kernel agree.",
+          "checked_in": "Statement and steps 1.1–3.1",
+          "cells": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for lem-phase-field-neumann-laplacian-kernel-and-gauge. This is authoring evidence, not independent approval."
+      },
+      "kind": "lemma"
+    },
+    "lem-phase-field-interval-p1-projector-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-phase-field-discrete-realizations",
+          "source_section": "Definition",
+          "quote": "The **no-flux finite-volume realization** starts from a finite connected cell-face mesh as in [[def-fv-admissible-cell-face-mesh]] and uses the interior-face orthogonality and positive transmissibilities of [[def-tpfa-harmonic-face-scheme]]. For unit diffusivity, let $X_h=\\mathbb R^{\\mathcal K}$, $m_h(u,v)=\\sum_{K\\in\\mathcal K}|K|u_Kv_K$, and\n$$a_h(u,v)=\\sum_{F=K|L\\in\\mathcal F_{\\rm int}}T_F(u_K-u_L)(v_K-v_L).$$\nThere is no boundary-face term: the flux through each physical boundary face is prescribed to be zero. Define $A_h:X_h\\to X_h$ by $m_h(A_hu,v)=a_h(u,v)$ for all $v\\in X_h$. Split the double-well density as\n$$F_\\varepsilon=F_c-F_e,\\qquad F_c(s)=\\frac{s^4}{4\\varepsilon^2}+\\frac{s^2}{2\\varepsilon^2},\\qquad F_e(s)=\\frac{s^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}.$$\nThe associated finite-volume energy components are\n$$E_{c,h}(u)=\\sum_K|K|\\left(\\frac{u_K^4}{4\\varepsilon^2}+\\frac{u_K^2}{2\\varepsilon^2}\\right),\\qquad E_{e,h}(u)=\\sum_K|K|\\left(\\frac{u_K^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}\\right).$$\n\nFor convergence on $\\Omega=(0,L)$, a second realization uses the same orthogonal dual mesh with centers $x_i=(i-\\tfrac12)h$, $h=L/N$. Its conforming space $V_h$ consists of functions affine between consecutive centers and constant on the two half-cells between a boundary and the nearest center. Its inner product is the exact $L^2(0,L)$ inner product, its stiffness is $a_h(v,w)=\\int_0^L v'w'\\,dx$, and its energy components are $E_{c,h}(v)=\\int_0^L F_c(v)\\,dx$ and $E_{e,h}(v)=\\int_0^L F_e(v)\\,dx$. Define $A_h:V_h\\to V_h$ by $(A_hv,w)_{L^2}=a_h(v,w)$. For degrees of freedom $v_i=v(x_i)$, this stiffness is exactly the interior two-point flux form $\\sum_{i=1}^{N-1}(v_{i+1}-v_i)(w_{i+1}-w_i)/h$; the exact mass and potential integrals are the conforming reconstruction used in the convergence theorem.\n\nBoth realizations have a constant function $\\mathbf1$, a real finite-dimensional inner-product space, and a self-adjoint nonnegative operator $A_h$. They share the physical energy $E_h(u)=\\frac\\kappa2m_h(A_hu,u)+E_{c,h}(u)-E_{e,h}(u)$, with the appropriate inner product and energy components for the realization. The sign convention is $A_h\\approx-\\Delta$.\n\n```tikz\n\\begin{tikzpicture}[x=1.2cm,y=1cm]\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0.5,1.5,2.5,3.5} {\n    \\fill (\\x,0) circle (2pt);\n  }\n  \\node[above] at (0.5,0.05) {$K_1$};\n  \\node[above] at (1.5,0.05) {$K_2$};\n  \\node[above] at (2.5,0.05) {$K_3$};\n  \\node[above] at (3.5,0.05) {$K_4$};\n  \\foreach \\x in {1,2,3} {\n    \\draw[dashed] (\\x,-0.2) -- (\\x,0.2);\n    \\draw[->,blue] (\\x-0.28,-0.42) -- (\\x+0.28,-0.42);\n    \\node[below] at (\\x,-0.42) {$Q_F$};\n  }\n  \\draw[red] (0,-0.23) -- (0,0.23);\n  \\draw[red] (4,-0.23) -- (4,0.23);\n  \\node[below] at (0,-0.23) {$Q=0$};\n  \\node[below] at (4,-0.23) {$Q=0$};\n\\end{tikzpicture}\n```\n\nThe diagram labels four adjacent cell values, three shared interior fluxes, and the prescribed zero boundary fluxes. Each interior flux appears with opposite signs in its two cell balances. The diagram records the convention only; it is not used as a proof.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with $n\\ge1$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then $C_c^\\infty(\\Omega;\\mathbb K)$ is dense in $L^2(\\Omega;\\mathbb K)$: for every $f\\in L^2(\\Omega;\\mathbb K)$ and every $\\delta>0$ there is $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with $\\|\\varphi-f\\|_{L^2(\\Omega)}<\\delta$. Consequently $H^1_0(\\Omega)$ is dense in $L^2(\\Omega)$, and if a class $h\\in L^2(\\Omega)$ satisfies $(h,v)_{L^2}=0$ for all $v\\in H^1_0(\\Omega)$, then $h=0$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-classical-derivatives-are-weak-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$n\\ge1$, let $k\\in\\mathbb N_0$, and let $u:\\Omega\\to\\mathbb C$ have real\nand imaginary parts of class $C^k$. For each multi-index\n$\\alpha\\in\\mathbb N_0^n$ with $|\\alpha|\\le k$, the componentwise classical\nderivative $\\partial^\\alpha u$ is locally integrable and is the weak\nderivative $D^\\alpha u$. By the uniqueness lemma, it represents the unique\nlocally integrable weak-derivative class. For $\\alpha=0$, this says\n$D^0u=u$.\n\nIf $\\Omega=\\varnothing$, the assertion is vacuous: there is only the zero\nclass and every displayed test identity is zero.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On every segment between adjacent centers, $I_hv$ has slope $h^{-1}\\int_{x_i}^{x_{i+1}}v'(s)\\,ds$, so Cauchy–Schwarz bounds its squared derivative integral by $\\int_{x_i}^{x_{i+1}}|v'|^2$. It is constant on the boundary half-cells. Summing proves $\\|(I_hv)'\\|_2\\le\\|v'\\|_2$. The fundamental-theorem identity in [F2] gives $|v(x)-I_hv(x)|\\le 2\\sqrt h\\|v'\\|_{L^2(K)}$ on each center interval $K$ and the same bound on each boundary half-cell. Squaring and summing proves $\\|v-I_hv\\|_2\\le Ch\\|v'\\|_2$; then $\\|I_hv\\|_2\\le\\|v\\|_2+Ch\\|v'\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For an affine function $w_h$ on an interval $J$ of length $h$ with endpoint values $a,b$, direct integration gives $\\|w_h'\\|_{L^2(J)}^2=(b-a)^2/h$ and $\\|w_h\\|_{L^2(J)}^2=h(a^2+ab+b^2)/3\\ge h(a^2+b^2)/6$. Hence $\\|w_h'\\|_{L^2(J)}\\le\\sqrt{12}h^{-1}\\|w_h\\|_{L^2(J)}$. Summing this inequality over the affine segments proves the inverse estimate $\\|w_h'\\|_2\\le\\sqrt{12}h^{-1}\\|w_h\\|_2$ on $V_h$; the constant boundary segments add no derivative.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $P_hI_hv=I_hv$ and $P_h$ is an $L^2$ contraction, $\\|P_hv-I_hv\\|_2=\\|P_h(v-I_hv)\\|_2\\le Ch\\|v'\\|_2$ by step 1.1. The triangle inequality with step 1.1 gives $\\|P_hv-v\\|_2\\le Ch\\|v'\\|_2$. Apply step 1.2 to $P_hv-I_hv\\in V_h$, and then step 1.1, to obtain $\\|(P_hv)'\\|_2\\le\\|(I_hv)'\\|_2+Ch^{-1}\\|P_hv-I_hv\\|_2\\le C\\|v'\\|_2$. The $L^2$ contraction gives the full $H^1$ stability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $v\\in C^2([0,L])$, linear interpolation on each interior segment has $H^1$ error tending to zero, while on a boundary half-cell the derivative error is bounded by $\\sqrt h\\|v'\\|_\\infty$. Thus $\\|I_hv-v\\|_{H^1}\\to0$. Step 2.1 applied to $v-I_hv$ gives $\\|P_hv-I_hv\\|_{H^1}\\le C\\|v-I_hv\\|_{H^1}\\to0$, so $P_hv\\to v$ in $H^1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For arbitrary $v\\in H^1(0,L)$, let $v'$ be its $L^2$ weak derivative and use [F3] to choose $q_j\\in C_c^\\infty(0,L)$ with $q_j\\to v'$ in $L^2$. Define $v_j(x)=v(0)+\\int_0^xq_j(s)\\,ds$ using the representative in [F2]. Then $v_j\\in C^\\infty([0,L])$ and $\\|v_j'-v'\\|_2=\\|q_j-v'\\|_2\\to0$, while Cauchy--Schwarz gives $\\|v_j-v\\|_2\\le L\\|q_j-v'\\|_2$. Hence $v_j\\to v$ in $H^1$. Uniform stability from step 2.1 and smooth convergence from step 3.1 yield $$\\|P_hv-v\\|_{H^1}\\le C\\|v-v_j\\|_{H^1}+\\|P_hv_j-v_j\\|_{H^1}+\\|v_j-v\\|_{H^1};$$ first let $h\\to0$ with $j$ fixed and then let $j\\to\\infty$. Thus $P_hv\\to v$ in $H^1$ for every $v\\in H^1(0,L)$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $g\\in L^2(0,L)$ and $\\delta>0$, [F3] gives $q\\in C_c^\\infty(0,L)\\subset H^1(0,L)$ with $\\|g-q\\|_2<\\delta$. The orthogonal projector is an $L^2$ contraction by [F1], and step 2.1 gives $P_hq\\to q$ in $L^2$. Therefore $$\\|P_hg-g\\|_2\\le2\\|g-q\\|_2+\\|P_hq-q\\|_2,$$ so $\\limsup_{h\\to0}\\|P_hg-g\\|_2\\le2\\delta$. Letting $\\delta\\downarrow0$ proves strong $L^2$ convergence for every $g\\in L^2(0,L)$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 includes the first and last center intervals and both boundary half-cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 4.1 use the absolutely-continuous representative on [0,L]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 4.1, and 3.3 use only the declared representative and Countable Choice density selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for lem-phase-field-interval-p1-projector-stability. This is authoring evidence, not independent approval."
+      },
+      "kind": "lemma"
+    },
+    "thm-phase-field-sav-modified-energy-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-phase-field-sav-cahn-hilliard-step",
+          "source_section": "Definition",
+          "quote": "Use either Cahn–Hilliard realization of [[def-phase-field-discrete-realizations]]. Write $X_h=\\mathbb R^{\\mathcal K}$ for the finite-volume state space and $X_h=V_h$ for the conforming interval state space; use the specified inner product $\\langle\\cdot,\\cdot\\rangle_h$ in each case. Set $E_{1,h}=E_{c,h}-E_{e,h}$. Since $F_\\varepsilon(s)=(s^2-1)^2/(4\\varepsilon^2)\\ge0$, this is nonnegative. Explicitly,\n$$E_{1,h}(u)=\\sum_{K\\in\\mathcal K}|K|F_\\varepsilon(u_K)\\quad\\text{in the finite-volume realization},$$\nand\n$$E_{1,h}(u_h)=\\int_0^L F_\\varepsilon(u_h(x))\\,dx\\quad\\text{in the conforming interval realization}.$$\nIts Riesz gradient $g_{1,h}(u)=\\nabla_hE_{1,h}(u)$ is specified in the finite-volume realization by $(g_{1,h}(u))_K=f_\\varepsilon(u_K)$, where $f_\\varepsilon=F_\\varepsilon'$. In the conforming interval realization it is the unique $g_{1,h}(u_h)\\in V_h$ satisfying\n$$\\langle g_{1,h}(u),v_h\\rangle_h=\\int_0^L f_\\varepsilon(u_h(x))v_h(x)\\,dx\\qquad(v_h\\in V_h),$$\nwith the exact $L^2$ inner product from that realization.\n\n**Inputs:** $u^n\\in X_h$, $r^n\\in\\mathbb R$, and parameters $\\varepsilon,\\kappa,M,\\tau,C_0>0$. Set $\\alpha_n=(E_{1,h}(u^n)+C_0)^{-1/2}$. **Output:** the tuple $(u^{n+1},r^{n+1},\\mu^{n+1})$ obtained by solving the linear equations\n$$\\frac{u^{n+1}-u^n}{\\tau}=-M A_h\\mu^{n+1},$$\n$$\\mu^{n+1}=\\kappa A_hu^{n+1}+\\alpha_n r^{n+1}g_{1,h}(u^n),$$\n$$r^{n+1}-r^n=\\frac{\\alpha_n}{2}\\langle g_{1,h}(u^n),u^{n+1}-u^n\\rangle_h.$$\nThe initial scalar may be set to $r^0=\\sqrt{E_{1,h}(u^0)+C_0}$. After a step, $r^{n+1}$ is an independent auxiliary variable determined by the third equation; the scheme does not impose $r^{n+1}=\\sqrt{E_{1,h}(u^{n+1})+C_0}$. The resulting linear system has a unique solution and dissipates the modified energy proved in [[thm-phase-field-sav-modified-energy-law]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-phase-field-neumann-laplacian-kernel-and-gauge",
+          "source_section": "Statement",
+          "quote": "Use either connected no-flux realization in [[def-phase-field-discrete-realizations]]. In its finite-volume branch, assume the interior cell graph is connected; in its interval conforming branch, assume $N\\ge1$. Write $\\bar u_h=\\langle u_h,\\mathbf1\\rangle_h/\\langle\\mathbf1,\\mathbf1\\rangle_h$ and $X_{h,0}=\\{u_h:\\bar u_h=0\\}$. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h=\\operatorname{span}\\{\\mathbf1\\}$, and $\\operatorname{ran}A_h=X_{h,0}$. The restriction $A_h:X_{h,0}\\to X_{h,0}$ is positive definite and invertible. Define $A_h^\\dagger u_h$ by first projecting $u_h$ onto $X_{h,0}$ and then applying this self-adjoint positive inverse. For each fixed finite mesh there is $C_h<\\infty$ such that\n$$\\|u_h-\\bar u_h\\mathbf1\\|_h^2\\le C_h\\langle A_hu_h,u_h\\rangle_h.$$\nFor a one-cell mesh, $X_{h,0}=\\{0\\}$ and the inequality is vacuous.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Subtract two candidate solutions with the same old data. Their difference $(v,s,\\nu)$ satisfies the same linear system with old data zero and the same fixed $\\alpha_n,g_{1,h}(u^n)$. Pair $v=-M\\tau A_h\\nu$ with $\\nu$, pair $\\nu=\\kappa A_hv+\\alpha_ns g_{1,h}(u^n)$ with $v$, and use $s=\\frac{\\alpha_n}{2}\\langle g_{1,h}(u^n),v\\rangle_h$. This gives $\\kappa\\langle A_hv,v\\rangle_h+2s^2+M\\tau\\langle A_h\\nu,\\nu\\rangle_h=0$. All terms are nonnegative by [F2], so $v$ is constant. The first equation makes $v$ mean zero, hence $v=0$; the third then gives $s=0$, and the second gives $\\nu=0$. Thus the square finite-dimensional linear system has trivial kernel and is invertible.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an actual step, pairing the first SAV equation with $\\mathbf1$ and using $A_h\\mathbf1=0$ proves $\\langle u^{n+1},\\mathbf1\\rangle_h=\\langle u^n,\\mathbf1\\rangle_h$. Pairing that equation with $\\mu^{n+1}$ gives $\\langle\\mu^{n+1},\\delta u\\rangle_h=-M\\tau\\langle A_h\\mu^{n+1},\\mu^{n+1}\\rangle_h$. Pairing the second equation with $\\delta u$ and using the third gives $$\\langle\\mu^{n+1},\\delta u\\rangle_h=\\frac\\kappa2\\big(\\langle A_hu^{n+1},u^{n+1}\\rangle_h-\\langle A_hu^n,u^n\\rangle_h+\\langle A_h\\delta u,\\delta u\\rangle_h\\big)+2r^{n+1}\\delta r.$$ Since $2r^{n+1}\\delta r=(r^{n+1})^2-(r^n)^2+(\\delta r)^2$, equating the two expressions proves the stated modified-energy identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 uses the constant kernel and step 2.1 gives the exact nonnegative dissipation terms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 handles the one-cell kernel by forcing the homogeneous state difference to zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 covers the zero-dimensional mean-zero space on a one-cell mesh."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoints branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No separate nonempty-choice branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "one-cell-sav-step",
+          "asserts": "When A_h=0, the first SAV equation gives u^{n+1}=u^n, the third gives r^{n+1}=r^n, and the second uniquely determines the constant chemical potential.",
+          "claim": "The degenerate one-cell system is uniquely solvable and the modified-energy identity has zero dissipation.",
+          "checked_in": "Steps 1.1 and 2.1",
+          "cells": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for thm-phase-field-sav-modified-energy-law. This is authoring evidence, not independent approval."
+      },
+      "kind": "theorem"
+    },
+    "thm-phase-field-convex-splitting-step-existence-and-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-phase-field-convex-splitting-backward-euler",
+          "source_section": "Definition",
+          "quote": "Let $X_h$ be either finite-dimensional realization in [[def-phase-field-discrete-realizations]], with real inner product $\\langle\\cdot,\\cdot\\rangle_h$, constant vector $\\mathbf1$, self-adjoint nonnegative $A_h$ with kernel $\\operatorname{span}\\{\\mathbf1\\}$, and $A_h^\\dagger$ from [[lem-phase-field-neumann-laplacian-kernel-and-gauge]]. Let $P_{c,h},P_{e,h}:X_h\\to\\mathbb R$ be the differentiable convex energy components specified there; $\\nabla_hP$ denotes the Riesz gradient relative to $\\langle\\cdot,\\cdot\\rangle_h$. Put\n$$\\mathcal E_h(u)=\\frac\\kappa2\\langle A_hu,u\\rangle_h+P_{c,h}(u)-P_{e,h}(u),\\qquad \\mu_h(u,v)=\\kappa A_hu+\\nabla_hP_{c,h}(u)-\\nabla_hP_{e,h}(v).$$\nGiven $u^n\\in X_h$, $\\tau>0$, and $M>0$, the backward-Euler convex-splitting step is:\n\n1. **Allen–Cahn branch.** Return the minimizer over $v\\in X_h$ of\n$$J_{AC}(v)=\\frac{1}{2M\\tau}\\|v-u^n\\|_h^2+\\frac\\kappa2\\langle A_hv,v\\rangle_h+P_{c,h}(v)-\\langle\\nabla_hP_{e,h}(u^n),v\\rangle_h,$$\nand set $\\mu^{n+1}=\\mu_h(u^{n+1},u^n)$.\n\n2. **Cahn–Hilliard branch.** Restrict to the affine set $\\langle v,\\mathbf1\\rangle_h=\\langle u^n,\\mathbf1\\rangle_h$ and return the minimizer of\n$$J_{CH}(v)=\\frac{1}{2M\\tau}\\langle A_h^\\dagger(v-u^n),v-u^n\\rangle_h+\\frac\\kappa2\\langle A_hv,v\\rangle_h+P_{c,h}(v)-\\langle\\nabla_hP_{e,h}(u^n),v\\rangle_h,$$\nthen set $\\mu^{n+1}=\\mu_h(u^{n+1},u^n)$.\n\nFor the finite-volume realization, $P_{c,h}(u)=\\sum_K|K|F_c(u_K)$ and $P_{e,h}(u)=\\sum_K|K|F_e(u_K)$. For the conforming interval realization, these are the exact integrals of $F_c$ and $F_e$ over the reconstructed piecewise-affine state. The recurrence, minimizer equivalence, uniqueness, conservation, and energy bounds are proved in [[thm-phase-field-convex-splitting-step-existence-and-energy]]. This is the selected backward-Euler branch; it asserts no ARS(2,2,2), Lie, or Strang property.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-phase-field-neumann-laplacian-kernel-and-gauge",
+          "source_section": "Statement",
+          "quote": "Use either connected no-flux realization in [[def-phase-field-discrete-realizations]]. In its finite-volume branch, assume the interior cell graph is connected; in its interval conforming branch, assume $N\\ge1$. Write $\\bar u_h=\\langle u_h,\\mathbf1\\rangle_h/\\langle\\mathbf1,\\mathbf1\\rangle_h$ and $X_{h,0}=\\{u_h:\\bar u_h=0\\}$. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h=\\operatorname{span}\\{\\mathbf1\\}$, and $\\operatorname{ran}A_h=X_{h,0}$. The restriction $A_h:X_{h,0}\\to X_{h,0}$ is positive definite and invertible. Define $A_h^\\dagger u_h$ by first projecting $u_h$ onto $X_{h,0}$ and then applying this self-adjoint positive inverse. For each fixed finite mesh there is $C_h<\\infty$ such that\n$$\\|u_h-\\bar u_h\\mathbf1\\|_h^2\\le C_h\\langle A_hu_h,u_h\\rangle_h.$$\nFor a one-cell mesh, $X_{h,0}=\\{0\\}$ and the inequality is vacuous.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-phase-field-discrete-realizations",
+          "source_section": "Definition",
+          "quote": "The **no-flux finite-volume realization** starts from a finite connected cell-face mesh as in [[def-fv-admissible-cell-face-mesh]] and uses the interior-face orthogonality and positive transmissibilities of [[def-tpfa-harmonic-face-scheme]]. For unit diffusivity, let $X_h=\\mathbb R^{\\mathcal K}$, $m_h(u,v)=\\sum_{K\\in\\mathcal K}|K|u_Kv_K$, and\n$$a_h(u,v)=\\sum_{F=K|L\\in\\mathcal F_{\\rm int}}T_F(u_K-u_L)(v_K-v_L).$$\nThere is no boundary-face term: the flux through each physical boundary face is prescribed to be zero. Define $A_h:X_h\\to X_h$ by $m_h(A_hu,v)=a_h(u,v)$ for all $v\\in X_h$. Split the double-well density as\n$$F_\\varepsilon=F_c-F_e,\\qquad F_c(s)=\\frac{s^4}{4\\varepsilon^2}+\\frac{s^2}{2\\varepsilon^2},\\qquad F_e(s)=\\frac{s^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}.$$\nThe associated finite-volume energy components are\n$$E_{c,h}(u)=\\sum_K|K|\\left(\\frac{u_K^4}{4\\varepsilon^2}+\\frac{u_K^2}{2\\varepsilon^2}\\right),\\qquad E_{e,h}(u)=\\sum_K|K|\\left(\\frac{u_K^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}\\right).$$\n\nFor convergence on $\\Omega=(0,L)$, a second realization uses the same orthogonal dual mesh with centers $x_i=(i-\\tfrac12)h$, $h=L/N$. Its conforming space $V_h$ consists of functions affine between consecutive centers and constant on the two half-cells between a boundary and the nearest center. Its inner product is the exact $L^2(0,L)$ inner product, its stiffness is $a_h(v,w)=\\int_0^L v'w'\\,dx$, and its energy components are $E_{c,h}(v)=\\int_0^L F_c(v)\\,dx$ and $E_{e,h}(v)=\\int_0^L F_e(v)\\,dx$. Define $A_h:V_h\\to V_h$ by $(A_hv,w)_{L^2}=a_h(v,w)$. For degrees of freedom $v_i=v(x_i)$, this stiffness is exactly the interior two-point flux form $\\sum_{i=1}^{N-1}(v_{i+1}-v_i)(w_{i+1}-w_i)/h$; the exact mass and potential integrals are the conforming reconstruction used in the convergence theorem.\n\nBoth realizations have a constant function $\\mathbf1$, a real finite-dimensional inner-product space, and a self-adjoint nonnegative operator $A_h$. They share the physical energy $E_h(u)=\\frac\\kappa2m_h(A_hu,u)+E_{c,h}(u)-E_{e,h}(u)$, with the appropriate inner product and energy components for the realization. The sign convention is $A_h\\approx-\\Delta$.\n\n```tikz\n\\begin{tikzpicture}[x=1.2cm,y=1cm]\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0.5,1.5,2.5,3.5} {\n    \\fill (\\x,0) circle (2pt);\n  }\n  \\node[above] at (0.5,0.05) {$K_1$};\n  \\node[above] at (1.5,0.05) {$K_2$};\n  \\node[above] at (2.5,0.05) {$K_3$};\n  \\node[above] at (3.5,0.05) {$K_4$};\n  \\foreach \\x in {1,2,3} {\n    \\draw[dashed] (\\x,-0.2) -- (\\x,0.2);\n    \\draw[->,blue] (\\x-0.28,-0.42) -- (\\x+0.28,-0.42);\n    \\node[below] at (\\x,-0.42) {$Q_F$};\n  }\n  \\draw[red] (0,-0.23) -- (0,0.23);\n  \\draw[red] (4,-0.23) -- (4,0.23);\n  \\node[below] at (0,-0.23) {$Q=0$};\n  \\node[below] at (4,-0.23) {$Q=0$};\n\\end{tikzpicture}\n```\n\nThe diagram labels four adjacent cell values, three shared interior fluxes, and the prescribed zero boundary fluxes. Each interior flux appears with opposite signs in its two cell balances. The diagram records the convention only; it is not used as a proof.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In either realization, the quartic leading part $Q_{4,h}$ of $P_{c,h}$ is continuous and strictly positive on the unit sphere of any fixed norm on $X_h$: it is a positive weighted sum of $u_K^4$ in the finite-volume branch and $\\int_0^L v^4$ in the conforming branch, which is positive for every nonzero state. The sphere is compact, so [F3] gives $c_h:=\\min_{\\|u\\|=1}Q_{4,h}(u)>0$. Homogeneity gives $Q_{4,h}(u)\\ge c_h\\|u\\|^4$. The formulas in [F4] show that the remaining quadratic term in $P_{c,h}$ is nonnegative, so $P_{c,h}$ is coercive. The second directional derivatives of the two potential functionals are the corresponding weighted sum or integral of $F_c''(u)w^2$ and $F_e''(u)w^2$; [F4] makes them nonnegative, so both are convex. Thus both quartic realizations satisfy the coercivity and convexity assumptions.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Allen–Cahn objective is continuous and coercive: its positive quadratic term is nonnegative, $P_{c,h}$ is coercive, and the remaining term is linear. For any fixed trial value, a nonempty sublevel set is closed and bounded, hence compact in the finite-dimensional space; [F3] gives a minimizer. The quadratic term $\\frac1{2M\\tau}\\|v-u^n\\|_h^2$ is strictly convex, while the remaining nonlinear and quadratic terms are convex by [F2] and the hypotheses, so the minimizer is unique.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $a=u^{n+1}$, $b=u^n$, and $\\delta=a-b$. Convexity gives $P_{c,h}(a)-P_{c,h}(b)\\le\\langle\\nabla_hP_{c,h}(a),\\delta\\rangle_h$ and $-P_{e,h}(a)+P_{e,h}(b)\\le-\\langle\\nabla_hP_{e,h}(b),\\delta\\rangle_h$. Also $\\frac\\kappa2(\\langle A_ha,a\\rangle_h-\\langle A_hb,b\\rangle_h)=\\kappa\\langle A_ha,\\delta\\rangle_h-\\frac\\kappa2\\langle A_h\\delta,\\delta\\rangle_h\\le\\kappa\\langle A_ha,\\delta\\rangle_h$ by nonnegativity in [F2]. Adding these inequalities gives $\\mathcal E_h(a)-\\mathcal E_h(b)\\le\\langle\\mu^{n+1},\\delta\\rangle_h$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating $J_{AC}$ in an arbitrary direction $w$ gives $\\langle (u^{n+1}-u^n)/(M\\tau)+\\kappa A_hu^{n+1}+\\nabla_hP_{c,h}(u^{n+1})-\\nabla_hP_{e,h}(u^n),w\\rangle_h=0$. Since this holds for every $w$, the vector inside the pairing is zero; multiplying by $-M$ gives the stated Allen–Cahn recurrence.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The Cahn–Hilliard affine set is nonempty because it contains $u^n$. Its objective is continuous and coercive on that affine set by coercivity of $P_{c,h}$ and nonnegativity of the $A_h$ quadratic term. The inverse quadratic term is strictly positive on every nonzero mean-zero direction by [F2], so $J_{CH}$ is strictly convex on the affine set. The compact-sublevel argument of step 1.2 and [F3] therefore gives a unique minimizer.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the Cahn–Hilliard minimizer, the directional derivative vanishes for every mean-zero direction $w$. Thus $\\mu^{n+1}+(M\\tau)^{-1}A_h^\\dagger(u^{n+1}-u^n)$ is orthogonal to the mean-zero subspace and is therefore constant. Applying $A_h$ and using [F2] gives $(u^{n+1}-u^n)/\\tau=-MA_h\\mu^{n+1}$. The affine constraint itself gives $\\langle u^{n+1},\\mathbf1\\rangle_h=\\langle u^n,\\mathbf1\\rangle_h$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In the Allen–Cahn branch, step 1.2 gives $\\delta=-M\\tau\\mu^{n+1}$, so step 1.3 yields $\\mathcal E_h(a)-\\mathcal E_h(b)\\le-M\\tau\\|\\mu^{n+1}\\|_h^2$. In the Cahn–Hilliard branch, step 3.1 gives $\\delta=-M\\tau A_h\\mu^{n+1}$, so $\\langle\\mu^{n+1},\\delta\\rangle_h=-M\\tau\\langle A_h\\mu^{n+1},\\mu^{n+1}\\rangle_h\\le0$. These are the two asserted energy inequalities.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 3.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 proves nonpositive energy change in both branches, with equality allowed at a stationary state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.2 remains valid when the one-cell mean constraint leaves a singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2 uses strict convexity on nonzero mean-zero directions; on a one-cell space the feasible set is a singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoints branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.2 establish attainment from compact finite-dimensional sublevel sets without a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for thm-phase-field-convex-splitting-step-existence-and-energy. This is authoring evidence, not independent approval."
+      },
+      "kind": "theorem"
+    },
+    "thm-phase-field-convex-splitting-ac-ch-time-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-phase-field-convex-splitting-backward-euler",
+          "source_section": "Definition",
+          "quote": "Let $X_h$ be either finite-dimensional realization in [[def-phase-field-discrete-realizations]], with real inner product $\\langle\\cdot,\\cdot\\rangle_h$, constant vector $\\mathbf1$, self-adjoint nonnegative $A_h$ with kernel $\\operatorname{span}\\{\\mathbf1\\}$, and $A_h^\\dagger$ from [[lem-phase-field-neumann-laplacian-kernel-and-gauge]]. Let $P_{c,h},P_{e,h}:X_h\\to\\mathbb R$ be the differentiable convex energy components specified there; $\\nabla_hP$ denotes the Riesz gradient relative to $\\langle\\cdot,\\cdot\\rangle_h$. Put\n$$\\mathcal E_h(u)=\\frac\\kappa2\\langle A_hu,u\\rangle_h+P_{c,h}(u)-P_{e,h}(u),\\qquad \\mu_h(u,v)=\\kappa A_hu+\\nabla_hP_{c,h}(u)-\\nabla_hP_{e,h}(v).$$\nGiven $u^n\\in X_h$, $\\tau>0$, and $M>0$, the backward-Euler convex-splitting step is:\n\n1. **Allen–Cahn branch.** Return the minimizer over $v\\in X_h$ of\n$$J_{AC}(v)=\\frac{1}{2M\\tau}\\|v-u^n\\|_h^2+\\frac\\kappa2\\langle A_hv,v\\rangle_h+P_{c,h}(v)-\\langle\\nabla_hP_{e,h}(u^n),v\\rangle_h,$$\nand set $\\mu^{n+1}=\\mu_h(u^{n+1},u^n)$.\n\n2. **Cahn–Hilliard branch.** Restrict to the affine set $\\langle v,\\mathbf1\\rangle_h=\\langle u^n,\\mathbf1\\rangle_h$ and return the minimizer of\n$$J_{CH}(v)=\\frac{1}{2M\\tau}\\langle A_h^\\dagger(v-u^n),v-u^n\\rangle_h+\\frac\\kappa2\\langle A_hv,v\\rangle_h+P_{c,h}(v)-\\langle\\nabla_hP_{e,h}(u^n),v\\rangle_h,$$\nthen set $\\mu^{n+1}=\\mu_h(u^{n+1},u^n)$.\n\nFor the finite-volume realization, $P_{c,h}(u)=\\sum_K|K|F_c(u_K)$ and $P_{e,h}(u)=\\sum_K|K|F_e(u_K)$. For the conforming interval realization, these are the exact integrals of $F_c$ and $F_e$ over the reconstructed piecewise-affine state. The recurrence, minimizer equivalence, uniqueness, conservation, and energy bounds are proved in [[thm-phase-field-convex-splitting-step-existence-and-energy]]. This is the selected backward-Euler branch; it asserts no ARS(2,2,2), Lie, or Strang property.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-phase-field-convex-splitting-step-existence-and-energy",
+          "source_section": "Statement",
+          "quote": "Use the finite-dimensional realization and the hypotheses of [[alg-phase-field-convex-splitting-backward-euler]]. Assume $P_{c,h}$ is convex and coercive on $X_h$, and $P_{e,h}$ is differentiable and convex. For every $u^n$, $M>0$, and $\\tau>0$, both branches have a unique minimizer. Their first-order conditions are exactly\n$$\\frac{u^{n+1}-u^n}{\\tau}=-M\\mu^{n+1}\\quad\\text{(Allen–Cahn)},$$\n$$\\frac{u^{n+1}-u^n}{\\tau}=-M A_h\\mu^{n+1}\\quad\\text{(Cahn–Hilliard)}.$$\nThe Cahn–Hilliard branch conserves $\\langle u^n,\\mathbf1\\rangle_h$. With $\\mathcal E_h$ as in the algorithm,\n$$\\mathcal E_h(u^{n+1})+M\\tau\\|\\mu^{n+1}\\|_h^2\\le\\mathcal E_h(u^n)\\quad\\text{(Allen–Cahn)},$$\n$$\\mathcal E_h(u^{n+1})+M\\tau\\langle A_h\\mu^{n+1},\\mu^{n+1}\\rangle_h\\le\\mathcal E_h(u^n)\\quad\\text{(Cahn–Hilliard)}.$$\nFor the quartic split in [[def-phase-field-gradient-flow-and-double-well]], the required convexity and coercivity hold for both realizations.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-phase-field-neumann-laplacian-kernel-and-gauge",
+          "source_section": "Statement",
+          "quote": "Use either connected no-flux realization in [[def-phase-field-discrete-realizations]]. In its finite-volume branch, assume the interior cell graph is connected; in its interval conforming branch, assume $N\\ge1$. Write $\\bar u_h=\\langle u_h,\\mathbf1\\rangle_h/\\langle\\mathbf1,\\mathbf1\\rangle_h$ and $X_{h,0}=\\{u_h:\\bar u_h=0\\}$. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h=\\operatorname{span}\\{\\mathbf1\\}$, and $\\operatorname{ran}A_h=X_{h,0}$. The restriction $A_h:X_{h,0}\\to X_{h,0}$ is positive definite and invertible. Define $A_h^\\dagger u_h$ by first projecting $u_h$ onto $X_{h,0}$ and then applying this self-adjoint positive inverse. For each fixed finite mesh there is $C_h<\\infty$ such that\n$$\\|u_h-\\bar u_h\\mathbf1\\|_h^2\\le C_h\\langle A_hu_h,u_h\\rangle_h.$$\nFor a one-cell mesh, $X_{h,0}=\\{0\\}$ and the inequality is vacuous.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-phase-field-gradient-flow-and-double-well",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded connected Lipschitz domain, let $d\\ge1$, and fix constants $\\varepsilon>0$, $M>0$, and $\\kappa>0$. Put\n$$F_\\varepsilon(s)=\\frac{(s^2-1)^2}{4\\varepsilon^2},\\qquad f_\\varepsilon(s)=F_\\varepsilon'(s)=\\frac{s^3-s}{\\varepsilon^2},$$\nand define the free energy on $H^1(\\Omega;\\mathbb R)\\cap L^4(\\Omega;\\mathbb R)$ by\n$$\\mathcal E_\\varepsilon(u)=\\int_\\Omega\\left(\\frac{\\kappa}{2}|\\nabla u|^2+F_\\varepsilon(u)\\right)\\,dx.$$\nHere $H^1=W^{1,2}$ and weak derivatives have the meaning in [[def-sobolev-space-wkp-and-its-norm]]. The finite-energy initial class consists of $u_0\\in H^1(\\Omega)\\cap L^4(\\Omega)$.\n\nThe **Allen–Cahn gradient flow** is\n$$u_t=-M\\mu,\\qquad \\mu=-\\kappa\\Delta u+f_\\varepsilon(u),\\qquad \\partial_nu=0,\\qquad u(0)=u_0.$$\nThe **Cahn–Hilliard gradient flow** is\n$$u_t=M\\Delta\\mu,\\qquad \\mu=-\\kappa\\Delta u+f_\\varepsilon(u),\\qquad \\partial_nu=\\partial_n\\mu=0,\\qquad u(0)=u_0.$$\nFor weak solutions the boundary conditions mean the natural weak formulations with all $H^1(\\Omega)$ test functions. The chemical potential $\\mu$ is the variational derivative of $\\mathcal E_\\varepsilon$, and the mobilities select the $L^2$ metric for Allen–Cahn and the mean-zero $H^{-1}$ metric for Cahn–Hilliard. In the Cahn–Hilliard flow, the no-flux equation conserves $\\int_\\Omega u$; the Allen–Cahn flow has no such conservation law in general. No maximum-principle property is part of these definitions.\n\nThe convergence theorem on this page is restricted to one space dimension. Assuming the Axiom of Choice for the following standard embedding consequences, if $d=2$ and $\\Omega$ is a bounded $W^{1,p}$ extension domain for every $1<p<2$ as defined in [[def-sobolev-extension-domain-and-extension-operator]], then [[thm-critical-sobolev-embedding-into-every-finite-lq]] gives $H^1(\\Omega)\\hookrightarrow L^4(\\Omega)$. If $d=3$ and $\\Omega$ is a bounded $W^{1,2}$ extension domain, then [[thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n]] gives $H^1(\\Omega)\\hookrightarrow L^4(\\Omega)$. These are the exact extra extension hypotheses for the quartic-energy claim. In dimensions $d\\ge4$ no assertion that every $H^1$ state has finite quartic energy is made; the explicit initial class above remains $H^1\\cap L^4$. No sharp-interface limit as $\\varepsilon\\downarrow0$ is part of either definition.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-phase-field-discrete-realizations",
+          "source_section": "Definition",
+          "quote": "The **no-flux finite-volume realization** starts from a finite connected cell-face mesh as in [[def-fv-admissible-cell-face-mesh]] and uses the interior-face orthogonality and positive transmissibilities of [[def-tpfa-harmonic-face-scheme]]. For unit diffusivity, let $X_h=\\mathbb R^{\\mathcal K}$, $m_h(u,v)=\\sum_{K\\in\\mathcal K}|K|u_Kv_K$, and\n$$a_h(u,v)=\\sum_{F=K|L\\in\\mathcal F_{\\rm int}}T_F(u_K-u_L)(v_K-v_L).$$\nThere is no boundary-face term: the flux through each physical boundary face is prescribed to be zero. Define $A_h:X_h\\to X_h$ by $m_h(A_hu,v)=a_h(u,v)$ for all $v\\in X_h$. Split the double-well density as\n$$F_\\varepsilon=F_c-F_e,\\qquad F_c(s)=\\frac{s^4}{4\\varepsilon^2}+\\frac{s^2}{2\\varepsilon^2},\\qquad F_e(s)=\\frac{s^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}.$$\nThe associated finite-volume energy components are\n$$E_{c,h}(u)=\\sum_K|K|\\left(\\frac{u_K^4}{4\\varepsilon^2}+\\frac{u_K^2}{2\\varepsilon^2}\\right),\\qquad E_{e,h}(u)=\\sum_K|K|\\left(\\frac{u_K^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}\\right).$$\n\nFor convergence on $\\Omega=(0,L)$, a second realization uses the same orthogonal dual mesh with centers $x_i=(i-\\tfrac12)h$, $h=L/N$. Its conforming space $V_h$ consists of functions affine between consecutive centers and constant on the two half-cells between a boundary and the nearest center. Its inner product is the exact $L^2(0,L)$ inner product, its stiffness is $a_h(v,w)=\\int_0^L v'w'\\,dx$, and its energy components are $E_{c,h}(v)=\\int_0^L F_c(v)\\,dx$ and $E_{e,h}(v)=\\int_0^L F_e(v)\\,dx$. Define $A_h:V_h\\to V_h$ by $(A_hv,w)_{L^2}=a_h(v,w)$. For degrees of freedom $v_i=v(x_i)$, this stiffness is exactly the interior two-point flux form $\\sum_{i=1}^{N-1}(v_{i+1}-v_i)(w_{i+1}-w_i)/h$; the exact mass and potential integrals are the conforming reconstruction used in the convergence theorem.\n\nBoth realizations have a constant function $\\mathbf1$, a real finite-dimensional inner-product space, and a self-adjoint nonnegative operator $A_h$. They share the physical energy $E_h(u)=\\frac\\kappa2m_h(A_hu,u)+E_{c,h}(u)-E_{e,h}(u)$, with the appropriate inner product and energy components for the realization. The sign convention is $A_h\\approx-\\Delta$.\n\n```tikz\n\\begin{tikzpicture}[x=1.2cm,y=1cm]\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0.5,1.5,2.5,3.5} {\n    \\fill (\\x,0) circle (2pt);\n  }\n  \\node[above] at (0.5,0.05) {$K_1$};\n  \\node[above] at (1.5,0.05) {$K_2$};\n  \\node[above] at (2.5,0.05) {$K_3$};\n  \\node[above] at (3.5,0.05) {$K_4$};\n  \\foreach \\x in {1,2,3} {\n    \\draw[dashed] (\\x,-0.2) -- (\\x,0.2);\n    \\draw[->,blue] (\\x-0.28,-0.42) -- (\\x+0.28,-0.42);\n    \\node[below] at (\\x,-0.42) {$Q_F$};\n  }\n  \\draw[red] (0,-0.23) -- (0,0.23);\n  \\draw[red] (4,-0.23) -- (4,0.23);\n  \\node[below] at (0,-0.23) {$Q=0$};\n  \\node[below] at (4,-0.23) {$Q=0$};\n\\end{tikzpicture}\n```\n\nThe diagram labels four adjacent cell values, three shared interior fluxes, and the prescribed zero boundary fluxes. Each interior flux appears with opposite signs in its two cell balances. The diagram records the convention only; it is not used as a proof.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substitute the exact trajectory into the backward-Euler split. For Allen–Cahn define $R_n^{AC}:=y(t_{n+1})-y(t_n)+M\\tau(G_{c,h}(y(t_{n+1}))-G_{e,h}(y(t_n)))$. For Cahn–Hilliard define $R_n^{CH}:=y(t_{n+1})-y(t_n)+M\\tau A_h(G_{c,h}(y(t_{n+1}))-G_{e,h}(y(t_n)))$. The exact integral equations express these residuals as $M$ times the quadrature difference $\\tau G_{c,h}(y(t_{n+1}))-\\int_{t_n}^{t_{n+1}}G_{c,h}(y(s))ds+\\int_{t_n}^{t_{n+1}}G_{e,h}(y(s))ds-\\tau G_{e,h}(y(t_n))$, with an additional $A_h$ in the Cahn–Hilliard branch. The bounded derivatives on the compact exact trajectory and $\\|y(t)-y(s)\\|\\le C|t-s|$ imply $\\|R_n^{AC}\\|_h\\le C\\tau^2$ and $\\|R_n^{CH}\\|_{-1,h}\\le C\\tau^2$; in the latter case $R_n^{CH}$ lies in the mean-zero range of $A_h$ by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Convexity of $P_{c,h}$ and nonnegativity of $A_h$ make $G_{c,h}$ monotone. By [F4], $G_{e,h}$ is globally Lipschitz with constant $L_e=2/\\varepsilon^2$. In the quartic realizations, the lower bound $F_\\varepsilon(s)\\ge s^4/(8\\varepsilon^2)-1/(4\\varepsilon^2)$ and the energy inequality in [F2] also bound every numerical state on the fixed finite-dimensional space.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the Allen–Cahn branch put $e_n=u^n-y(t_n)$. Subtract the exact residual equation from the numerical recurrence and pair with $e_{n+1}$. The identity $2\\langle e_{n+1}-e_n,e_{n+1}\\rangle_h=\\|e_{n+1}\\|_h^2-\\|e_n\\|_h^2+\\|e_{n+1}-e_n\\|_h^2$ and monotonicity from step 2.1 leave only the explicit term and residual on the right. Cauchy–Schwarz and Young give $M\\tau L_e\\|e_n\\|_h\\|e_{n+1}\\|_h\\le\\frac{M\\tau L_e}{2}(\\|e_n\\|_h^2+\\|e_{n+1}\\|_h^2)$ and $\\|R_n^{AC}\\|_h\\|e_{n+1}\\|_h\\le\\frac\\tau8\\|e_{n+1}\\|_h^2+2\\tau^{-1}\\|R_n^{AC}\\|_h^2$. For $\\tau$ small enough that $M\\tau L_e\\le1/8$ and $\\tau\\le1$, step 1.1 then gives $\\|e_{n+1}\\|_h^2\\le(1+C\\tau)\\|e_n\\|_h^2+C\\tau^3$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "In the Cahn–Hilliard branch both errors have mean zero. Pair the original difference equation with $A_h^\\dagger e_{n+1}$. Self-adjointness and $A_hA_h^\\dagger e_{n+1}=e_{n+1}$ give $2\\langle e_{n+1}-e_n,A_h^\\dagger e_{n+1}\\rangle_h=\\|e_{n+1}\\|_{-1,h}^2-\\|e_n\\|_{-1,h}^2+\\|e_{n+1}-e_n\\|_{-1,h}^2$. The implicit term becomes $M\\tau\\langle G_{c,h}(u^{n+1})-G_{c,h}(y_{n+1}),e_{n+1}\\rangle_h\\ge M\\tau\\kappa\\|e_{n+1}\\|_{1,h}^2$, because $G_{c,h}$ is the sum of $\\kappa A_h$ and the gradient of a convex functional. The explicit term obeys $|\\langle G_{e,h}(u^n)-G_{e,h}(y_n),e_{n+1}\\rangle_h|\\le L_e\\|e_n\\|_{-1,h}\\|e_{n+1}\\|_{1,h}$, where $\\|v\\|_{1,h}^2=\\langle A_hv,v\\rangle_h$; this is Cauchy–Schwarz after $A_h^{-1/2}$ and $A_h^{1/2}$ on the mean-zero space. Young's inequality absorbs half of the positive $M\\tau\\kappa\\|e_{n+1}\\|_{1,h}^2$ term and leaves $C\\tau\\|e_n\\|_{-1,h}^2$. The residual from step 1.1 satisfies $|\\langle R_n^{CH},A_h^\\dagger e_{n+1}\\rangle_h|=|\\langle R_n^{CH},e_{n+1}\\rangle_{-1,h}|\\le C\\tau^2\\|e_{n+1}\\|_{-1,h}\\le\\frac\\tau8\\|e_{n+1}\\|_{-1,h}^2+C'\\tau^3$. Hence, for small $\\tau$, $\\|e_{n+1}\\|_{-1,h}^2\\le(1+C\\tau)\\|e_n\\|_{-1,h}^2+C\\tau^3$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In either recurrence, $e_0=0$. Iterating $z_{n+1}\\le(1+C\\tau)z_n+C\\tau^3$ for $n\\tau\\le T$ gives $z_n\\le C\\tau^3\\sum_{j=0}^{n-1}(1+C\\tau)^j\\le C_T\\tau^2$, since $(1+C\\tau)^n\\le e^{CT}$. Taking square roots gives the two asserted $O(\\tau)$ bounds. The constants include the fixed-mesh operator norms and the potential's $\\varepsilon$-dependent derivatives.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 starts from e_0=0 and includes the exact-coincidence zero-error case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 4.1 cover 0≤t_n≤T and close the finite-time Gronwall estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No separate nonempty-choice branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for thm-phase-field-convex-splitting-ac-ch-time-error. This is authoring evidence, not independent approval."
+      },
+      "kind": "theorem"
+    },
+    "thm-phase-field-convex-splitting-mesh-time-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-phase-field-gradient-flow-and-double-well",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded connected Lipschitz domain, let $d\\ge1$, and fix constants $\\varepsilon>0$, $M>0$, and $\\kappa>0$. Put\n$$F_\\varepsilon(s)=\\frac{(s^2-1)^2}{4\\varepsilon^2},\\qquad f_\\varepsilon(s)=F_\\varepsilon'(s)=\\frac{s^3-s}{\\varepsilon^2},$$\nand define the free energy on $H^1(\\Omega;\\mathbb R)\\cap L^4(\\Omega;\\mathbb R)$ by\n$$\\mathcal E_\\varepsilon(u)=\\int_\\Omega\\left(\\frac{\\kappa}{2}|\\nabla u|^2+F_\\varepsilon(u)\\right)\\,dx.$$\nHere $H^1=W^{1,2}$ and weak derivatives have the meaning in [[def-sobolev-space-wkp-and-its-norm]]. The finite-energy initial class consists of $u_0\\in H^1(\\Omega)\\cap L^4(\\Omega)$.\n\nThe **Allen–Cahn gradient flow** is\n$$u_t=-M\\mu,\\qquad \\mu=-\\kappa\\Delta u+f_\\varepsilon(u),\\qquad \\partial_nu=0,\\qquad u(0)=u_0.$$\nThe **Cahn–Hilliard gradient flow** is\n$$u_t=M\\Delta\\mu,\\qquad \\mu=-\\kappa\\Delta u+f_\\varepsilon(u),\\qquad \\partial_nu=\\partial_n\\mu=0,\\qquad u(0)=u_0.$$\nFor weak solutions the boundary conditions mean the natural weak formulations with all $H^1(\\Omega)$ test functions. The chemical potential $\\mu$ is the variational derivative of $\\mathcal E_\\varepsilon$, and the mobilities select the $L^2$ metric for Allen–Cahn and the mean-zero $H^{-1}$ metric for Cahn–Hilliard. In the Cahn–Hilliard flow, the no-flux equation conserves $\\int_\\Omega u$; the Allen–Cahn flow has no such conservation law in general. No maximum-principle property is part of these definitions.\n\nThe convergence theorem on this page is restricted to one space dimension. Assuming the Axiom of Choice for the following standard embedding consequences, if $d=2$ and $\\Omega$ is a bounded $W^{1,p}$ extension domain for every $1<p<2$ as defined in [[def-sobolev-extension-domain-and-extension-operator]], then [[thm-critical-sobolev-embedding-into-every-finite-lq]] gives $H^1(\\Omega)\\hookrightarrow L^4(\\Omega)$. If $d=3$ and $\\Omega$ is a bounded $W^{1,2}$ extension domain, then [[thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n]] gives $H^1(\\Omega)\\hookrightarrow L^4(\\Omega)$. These are the exact extra extension hypotheses for the quartic-energy claim. In dimensions $d\\ge4$ no assertion that every $H^1$ state has finite quartic energy is made; the explicit initial class above remains $H^1\\cap L^4$. No sharp-interface limit as $\\varepsilon\\downarrow0$ is part of either definition.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-phase-field-discrete-realizations",
+          "source_section": "Definition",
+          "quote": "The **no-flux finite-volume realization** starts from a finite connected cell-face mesh as in [[def-fv-admissible-cell-face-mesh]] and uses the interior-face orthogonality and positive transmissibilities of [[def-tpfa-harmonic-face-scheme]]. For unit diffusivity, let $X_h=\\mathbb R^{\\mathcal K}$, $m_h(u,v)=\\sum_{K\\in\\mathcal K}|K|u_Kv_K$, and\n$$a_h(u,v)=\\sum_{F=K|L\\in\\mathcal F_{\\rm int}}T_F(u_K-u_L)(v_K-v_L).$$\nThere is no boundary-face term: the flux through each physical boundary face is prescribed to be zero. Define $A_h:X_h\\to X_h$ by $m_h(A_hu,v)=a_h(u,v)$ for all $v\\in X_h$. Split the double-well density as\n$$F_\\varepsilon=F_c-F_e,\\qquad F_c(s)=\\frac{s^4}{4\\varepsilon^2}+\\frac{s^2}{2\\varepsilon^2},\\qquad F_e(s)=\\frac{s^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}.$$\nThe associated finite-volume energy components are\n$$E_{c,h}(u)=\\sum_K|K|\\left(\\frac{u_K^4}{4\\varepsilon^2}+\\frac{u_K^2}{2\\varepsilon^2}\\right),\\qquad E_{e,h}(u)=\\sum_K|K|\\left(\\frac{u_K^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}\\right).$$\n\nFor convergence on $\\Omega=(0,L)$, a second realization uses the same orthogonal dual mesh with centers $x_i=(i-\\tfrac12)h$, $h=L/N$. Its conforming space $V_h$ consists of functions affine between consecutive centers and constant on the two half-cells between a boundary and the nearest center. Its inner product is the exact $L^2(0,L)$ inner product, its stiffness is $a_h(v,w)=\\int_0^L v'w'\\,dx$, and its energy components are $E_{c,h}(v)=\\int_0^L F_c(v)\\,dx$ and $E_{e,h}(v)=\\int_0^L F_e(v)\\,dx$. Define $A_h:V_h\\to V_h$ by $(A_hv,w)_{L^2}=a_h(v,w)$. For degrees of freedom $v_i=v(x_i)$, this stiffness is exactly the interior two-point flux form $\\sum_{i=1}^{N-1}(v_{i+1}-v_i)(w_{i+1}-w_i)/h$; the exact mass and potential integrals are the conforming reconstruction used in the convergence theorem.\n\nBoth realizations have a constant function $\\mathbf1$, a real finite-dimensional inner-product space, and a self-adjoint nonnegative operator $A_h$. They share the physical energy $E_h(u)=\\frac\\kappa2m_h(A_hu,u)+E_{c,h}(u)-E_{e,h}(u)$, with the appropriate inner product and energy components for the realization. The sign convention is $A_h\\approx-\\Delta$.\n\n```tikz\n\\begin{tikzpicture}[x=1.2cm,y=1cm]\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0.5,1.5,2.5,3.5} {\n    \\fill (\\x,0) circle (2pt);\n  }\n  \\node[above] at (0.5,0.05) {$K_1$};\n  \\node[above] at (1.5,0.05) {$K_2$};\n  \\node[above] at (2.5,0.05) {$K_3$};\n  \\node[above] at (3.5,0.05) {$K_4$};\n  \\foreach \\x in {1,2,3} {\n    \\draw[dashed] (\\x,-0.2) -- (\\x,0.2);\n    \\draw[->,blue] (\\x-0.28,-0.42) -- (\\x+0.28,-0.42);\n    \\node[below] at (\\x,-0.42) {$Q_F$};\n  }\n  \\draw[red] (0,-0.23) -- (0,0.23);\n  \\draw[red] (4,-0.23) -- (4,0.23);\n  \\node[below] at (0,-0.23) {$Q=0$};\n  \\node[below] at (4,-0.23) {$Q=0$};\n\\end{tikzpicture}\n```\n\nThe diagram labels four adjacent cell values, three shared interior fluxes, and the prescribed zero boundary fluxes. Each interior flux appears with opposite signs in its two cell balances. The diagram records the convention only; it is not used as a proof.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-phase-field-interval-p1-projector-stability",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega=(0,L)$ and let $V_h$ be the conforming interval space in [[def-phase-field-discrete-realizations]], with center spacing $h$. Let $I_hv$ interpolate the absolutely-continuous representative of $v\\in H^1(0,L)$ at the centers and extend it constantly to the two boundary half-cells. Let $P_h$ be the exact $L^2$-orthogonal projection onto $V_h$. There is a constant $C$ independent of $h$ such that\n$$\\|I_hv\\|_{H^1}\\le C\\|v\\|_{H^1},\\qquad \\|v-I_hv\\|_{L^2}\\le Ch\\|v'\\|_{L^2},\\qquad \\|P_hv\\|_{H^1}\\le C\\|v\\|_{H^1}.$$\nIn addition, $\\|P_hv-v\\|_{L^2}\\le Ch\\|v'\\|_{L^2}$ for every $v\\in H^1(0,L)$, $P_hv\\to v$ in $H^1(0,L)$ for every $v\\in H^1(0,L)$, and $P_hg\\to g$ in $L^2(0,L)$ for every $g\\in L^2(0,L)$ as $h\\to0$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-phase-field-convex-splitting-step-existence-and-energy",
+          "source_section": "Statement",
+          "quote": "Use the finite-dimensional realization and the hypotheses of [[alg-phase-field-convex-splitting-backward-euler]]. Assume $P_{c,h}$ is convex and coercive on $X_h$, and $P_{e,h}$ is differentiable and convex. For every $u^n$, $M>0$, and $\\tau>0$, both branches have a unique minimizer. Their first-order conditions are exactly\n$$\\frac{u^{n+1}-u^n}{\\tau}=-M\\mu^{n+1}\\quad\\text{(Allen–Cahn)},$$\n$$\\frac{u^{n+1}-u^n}{\\tau}=-M A_h\\mu^{n+1}\\quad\\text{(Cahn–Hilliard)}.$$\nThe Cahn–Hilliard branch conserves $\\langle u^n,\\mathbf1\\rangle_h$. With $\\mathcal E_h$ as in the algorithm,\n$$\\mathcal E_h(u^{n+1})+M\\tau\\|\\mu^{n+1}\\|_h^2\\le\\mathcal E_h(u^n)\\quad\\text{(Allen–Cahn)},$$\n$$\\mathcal E_h(u^{n+1})+M\\tau\\langle A_h\\mu^{n+1},\\mu^{n+1}\\rangle_h\\le\\mathcal E_h(u^n)\\quad\\text{(Cahn–Hilliard)}.$$\nFor the quartic split in [[def-phase-field-gradient-flow-and-double-well]], the required convexity and coercivity hold for both realizations.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-pe12-gelfand-triple",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a separable reflexive real Banach space, let $H$ be a real Hilbert\nspace, and let $i:V\\to H$ be an injective continuous linear map with dense\nrange. Let $V^*$ be the continuous real dual of $V$ and write\n$\\langle\\cdot,\\cdot\\rangle_{V^*,V}$ for its pairing with $V$. The canonical\nmap $J:H\\to V^*$ is\n$$J h(v)=(h,iv)_H\\qquad(h\\in H,\\ v\\in V).$$\nIt is continuous because $|Jh(v)|\\le \\|h\\|_H\\|i\\|\\|v\\|_V$, and injective\nbecause $i(V)$ is dense in $H$. A triple $(V,H,J)$ with these properties is\na **Banach evolution triple**. If $V$ is Hilbert, this is the real evolution\ntriple of [[def-parabolic-evolution-triple-and-energy-space]].\n\nFor $1<p<\\infty$, $L^p(0,T;V)$ denotes the Bochner space of strongly\nmeasurable $V$-valued functions with finite $p$th power norm, and\n$p'=p/(p-1)$. For $u\\in L^p(0,T;V)$ and $g\\in L^{p'}(0,T;V^*)$, say\n$g=u'$ in the distributional time sense if\n$$\\int_0^T (iu(t),iv)_H\\,\\phi'(t)\\,dt =-\\int_0^T\\langle g(t),v\\rangle_{V^*,V}\\,\\phi(t)\\,dt$$\nfor every $v\\in V$ and $\\phi\\in C_c^\\infty(0,T)$. Define\n$$W_p(0,T;V)=\\{u\\in L^p(0,T;V):u'\\in L^{p'}(0,T;V^*)\\}.$$\nThis definition assigns no endpoint values; a separate chain-rule theorem is\nneeded before evaluating a function in this space at an endpoint.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a\nbounded $W^{1,p}$-extension domain\n([[def-sobolev-extension-domain-and-extension-operator]]) and let\n$1\\le p<\\infty$. Then $W^{1,p}(\\Omega)$ is compactly embedded in\n$L^p(\\Omega)$: every sequence bounded in $W^{1,p}(\\Omega)$ has a subsequence\nconverging in $L^p(\\Omega)$. Every bounded $C^1$ domain is an example.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-pe12-discrete-aubin-lions-compactness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice.\n\nLet $V\\Subset H\\hookrightarrow V^*$ be a Banach evolution triple. For each\n$k$, let $0=t_0^k<\\cdots<t_{N_k}^k=T$ be a partition with maximum step\n$\\delta_k\\to0$, let $U_k^n\\in V$, and define $\\overline U_k(t)=U_k^n$ on\n$I_n^k=(t_{n-1}^k,t_n^k]$ and\n$D_k(t)=(U_k^n-U_k^{n-1})/\\tau_n^k$ there. Suppose, for some\n$1<p<\\infty$ and $1<q\\le\\infty$,\n$$\\sup_k\\|\\overline U_k\\|_{L^p(0,T;V)} +\\sup_k\\|D_k\\|_{L^q(0,T;V^*)}<\\infty.$$\nThen the time translates satisfy, on their common intervals,\n$$\\|\\overline U_k(\\cdot+s)-\\overline U_k\\|_{L^q(V^*)} \\le (s+2\\delta_k)\\|D_k\\|_{L^q(V^*)},$$\nand $(\\overline U_k)$ is relatively compact in $L^p(0,T;H)$. If also\n$\\sup_{k,n}\\|U_k^n\\|_H<\\infty$, every convergent subsequence converges in\nevery $L^r(0,T;H)$ with $1\\le r<\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-parabolic-weak-compactness-separable-bochner-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Every bounded sequence in a separable real Hilbert\nspace $X$ has a weakly convergent subsequence. If $V$ is a separable real\nHilbert space, then $L^2(0,T;V)$ and $L^2(0,T;V^*)$ are separable real Hilbert\nspaces, their product is a separable Hilbert space, and the graph of the weak\ntime-derivative operator is closed there. Consequently $W(0,T;V)$ is a closed\nHilbert subspace of that product and every bounded sequence in $W(0,T;V)$ has\na weakly convergent subsequence.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "alg-phase-field-convex-splitting-backward-euler",
+          "source_section": "Definition",
+          "quote": "Let $X_h$ be either finite-dimensional realization in [[def-phase-field-discrete-realizations]], with real inner product $\\langle\\cdot,\\cdot\\rangle_h$, constant vector $\\mathbf1$, self-adjoint nonnegative $A_h$ with kernel $\\operatorname{span}\\{\\mathbf1\\}$, and $A_h^\\dagger$ from [[lem-phase-field-neumann-laplacian-kernel-and-gauge]]. Let $P_{c,h},P_{e,h}:X_h\\to\\mathbb R$ be the differentiable convex energy components specified there; $\\nabla_hP$ denotes the Riesz gradient relative to $\\langle\\cdot,\\cdot\\rangle_h$. Put\n$$\\mathcal E_h(u)=\\frac\\kappa2\\langle A_hu,u\\rangle_h+P_{c,h}(u)-P_{e,h}(u),\\qquad \\mu_h(u,v)=\\kappa A_hu+\\nabla_hP_{c,h}(u)-\\nabla_hP_{e,h}(v).$$\nGiven $u^n\\in X_h$, $\\tau>0$, and $M>0$, the backward-Euler convex-splitting step is:\n\n1. **Allen–Cahn branch.** Return the minimizer over $v\\in X_h$ of\n$$J_{AC}(v)=\\frac{1}{2M\\tau}\\|v-u^n\\|_h^2+\\frac\\kappa2\\langle A_hv,v\\rangle_h+P_{c,h}(v)-\\langle\\nabla_hP_{e,h}(u^n),v\\rangle_h,$$\nand set $\\mu^{n+1}=\\mu_h(u^{n+1},u^n)$.\n\n2. **Cahn–Hilliard branch.** Restrict to the affine set $\\langle v,\\mathbf1\\rangle_h=\\langle u^n,\\mathbf1\\rangle_h$ and return the minimizer of\n$$J_{CH}(v)=\\frac{1}{2M\\tau}\\langle A_h^\\dagger(v-u^n),v-u^n\\rangle_h+\\frac\\kappa2\\langle A_hv,v\\rangle_h+P_{c,h}(v)-\\langle\\nabla_hP_{e,h}(u^n),v\\rangle_h,$$\nthen set $\\mu^{n+1}=\\mu_h(u^{n+1},u^n)$.\n\nFor the finite-volume realization, $P_{c,h}(u)=\\sum_K|K|F_c(u_K)$ and $P_{e,h}(u)=\\sum_K|K|F_e(u_K)$. For the conforming interval realization, these are the exact integrals of $F_c$ and $F_e$ over the reconstructed piecewise-affine state. The recurrence, minimizer equivalence, uniqueness, conservation, and energy bounds are proved in [[thm-phase-field-convex-splitting-step-existence-and-energy]]. This is the selected backward-Euler branch; it asserts no ARS(2,2,2), Lie, or Strang property.",
+          "uses": [
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $v\\in H^1(0,L)$, choose a point $y$ with $|v(y)|\\le L^{-1/2}\\|v\\|_2$; such a point exists since $v$ has a continuous representative. For every $x$, [F8] and Cauchy–Schwarz give $|v(x)|\\le |v(y)|+\\int_0^L|v'|\\le L^{-1/2}\\|v\\|_2+\\sqrt L\\|v'\\|_2$. Thus $H^1(0,L)$ embeds continuously in $L^\\infty(0,L)$.",
+          "step": "1.1",
+          "inputs": [
+            "F8",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $u_h^0=P_hu_0$ is uniformly bounded in $H^1$; step 1.1 bounds it in $L^\\infty$, so its gradient and quartic terms in [F1] give a uniform initial-energy bound. The energy inequalities in [F3] then give $\\sup_{h,\\tau,n}\\|u_h^n\\|_{H^1}<\\infty$: the gradient term controls $\\|u_h'\\|_2$, and the algebraic identity $$F_\\varepsilon(s)-\\left(\\frac{s^4}{8\\varepsilon^2}-\\frac1{4\\varepsilon^2}\\right)=\\frac{(s^2-2)^2}{8\\varepsilon^2}\\ge0$$ controls $\\|u_h\\|_4$ and, by [F8], $\\|u_h\\|_2$. Step 1.1 gives $\\sup_{h,\\tau,n}\\|u_h^n\\|_\\infty<\\infty$. For Allen–Cahn, the update in [F9] gives $D_\\tau u_h^n=-M\\mu_h^{n+1}$; hence the summed dissipation in [F3] and $\\|w\\|_{V^*}\\le\\|w\\|_2$ give $\\|D_\\tau u_{h,\\tau}\\|_{L^2(0,T;V^*)}\\le C$. For Cahn–Hilliard, summing [F3] bounds $\\partial_x\\mu_{h,\\tau}$ in $L^2$. Its mean is $$\\overline\\mu_h^{n+1}=L^{-1}\\int_0^L\\bigl(F_c'(u_h^{n+1})-F_e'(u_h^n)\\bigr)\\,dx,$$ because $\\int_0^L A_hu_h^{n+1}\\,dx=0$ and the Riesz gradients in [F9] pair with $1$ as derivatives of the integral potentials in [F1]; this mean is uniformly bounded by the $L^\\infty$ bound. For $g=\\mu_h^{n+1}-\\overline\\mu_h^{n+1}$, [F8] and Cauchy--Schwarz give $|g(x)|=|L^{-1}\\int_0^L(g(x)-g(y))\\,dy|\\le\\int_0^L|g'|\\le\\sqrt L\\|g'\\|_2$, so $\\|g\\|_2\\le L\\|\\partial_x\\mu_h^{n+1}\\|_2$. Thus $\\mu_{h,\\tau}$ is bounded in $L^2(0,T;H^1)$. For each $v\\in V$, the CH update in [F9] gives $D_\\tau u_h^n=-MA_h\\mu_h^{n+1}\\in V_h$ and orthogonality gives $(D_\\tau u_h^n,v)_{L^2}=(D_\\tau u_h^n,P_hv)_{L^2}=-M\\int_0^L(\\mu_h^{n+1})_x(P_hv)_x\\,dx$. The uniform H1 stability of $P_h$ in [F2] therefore bounds the discrete derivative in $L^2(0,T;V^*)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The piecewise-constant reconstructions take values in $V=H^1(0,L)$ and have uniformly bounded $L^2(0,T;V)$ norms by step 2.1. The interval embedding in [F5] supplies $V\\Subset H$, and [F4] supplies the evolution triple. The time steps tend to zero and step 2.1 supplies the discrete-derivative bound, so [F6] gives a subsequence converging strongly in $L^2(0,T;L^2)$. Applying [F7] to the same bounded $L^2(0,T;H^1)$ sequence and taking a further subsequence gives weak $L^2(H^1)$ convergence to the same $u$, since the strong $L^2$ limit is unique. The Cahn–Hilliard chemical potentials are bounded in $L^2(H^1)$ by step 2.1, so [F7] also gives a weak limit $\\mu$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $w_{h,\\tau}(t)=u_h^{n+1}-u_h^n$ on $t\\in(t_n,t_{n+1})$. Then $w_{h,\\tau}=\\tau D_\\tau u_{h,\\tau}$, so step 2.1 gives $\\|w_{h,\\tau}\\|_{L^2(0,T;V^*)}\\le C\\tau$; the uniform H1 bound gives $\\|w_{h,\\tau}\\|_{L^2(0,T;V)}\\le C$. For every $w\\in V$, the evolution-triple pairing and Cauchy--Schwarz give $\\|w\\|_H^2=\\langle w,w\\rangle_{V^*,V}\\le\\|w\\|_{V^*}\\|w\\|_V$. Integrating and applying Cauchy--Schwarz in time shows $\\|w_{h,\\tau}\\|_{L^2(0,T;H)}^2\\le C\\tau$, so adjacent time-level reconstructions differ by a term tending to zero in $L^2((0,T)\\times(0,L))$. By step 1.1 both adjacent states are uniformly bounded in $L^\\infty$; the polynomial split derivatives $F_c'$ and $F_e'$ are Lipschitz on this common bounded range. Therefore their values at adjacent levels differ by a term tending to zero in $L^2$, and strong convergence from step 3.1 implies convergence of each split term, and hence $f_\\varepsilon$, strongly in $L^2$ to its value at $u$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $\\phi\\in C^1([0,T]\\times[0,L])$ vanish at $T$. The sets $\\{\\phi(t):0\\le t\\le T\\}$ and $\\{\\partial_t\\phi(t):0\\le t\\le T\\}$ are compact in $H^1$ and $L^2$, respectively, by continuity in those norms. Uniform operator bounds and strong convergence of $P_h$ in [F2] imply uniform projector convergence on each compact set: cover the set by finitely many balls of radius $\\delta$, use convergence at their centers, and bound the errors inside each ball by the uniform operator norm plus $1$. Uniform continuity of $\\partial_t\\phi$ then shows the projected time difference quotients converge in $L^2$ to $\\partial_t\\phi$. Use $P_h\\phi(t_{n+1})$ as the spatial test in the discrete equation [F9] and sum by parts in time. The terminal term vanishes exactly because $\\phi(T)=0$; the initial term is $(P_hu_0,P_h\\phi(t_1))=(u_0,P_h\\phi(t_1))\\to(u_0,\\phi(0))$. Strong convergence of the tests, weak convergence of $u_{h,\\tau}$ in $L^2(H^1)$ from step 3.1, and strong convergence of the nonlinear terms from step 4.1 permit passage in every sum, yielding the Allen–Cahn identity in the Statement.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "In the Cahn–Hilliard branch, apply the same test passage to the first mixed equation [F9]. The weak $L^2(H^1)$ convergence of $\\mu_{h,\\tau}$ from step 3.1 and strong convergence of the tests give $-\\int u\\phi_t+M\\int\\mu_x\\phi_x=\\int u_0\\phi(0)$. For any $\\psi\\in H^1(0,L)$, test the second mixed equation [F9] with $P_h\\psi$. By [F2], $P_h\\psi\\to\\psi$ in $H^1$; weak convergence of $u_h$ in $H^1$ and strong convergence of the split potential from step 4.1 therefore give $\\int\\mu\\psi=\\kappa\\int u_x\\psi_x+\\int f_\\varepsilon(u)\\psi$. Finally, the discrete mean is constant by [F3]. Strong convergence in $L^2((0,T)\\times(0,L))$ makes the mean functions converge in $L^2(0,T)$ by Cauchy–Schwarz in space, so the limit has that mean for almost every time.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 6.1 passes the conserved Cahn–Hilliard mean to the limit at fixed epsilon."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 3.1 and 5.1 use vanishing time steps and include the initial-time term."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 takes the compactness subsequences whose existence is declared under the Axiom of Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for thm-phase-field-convex-splitting-mesh-time-convergence. This is authoring evidence, not independent approval."
+      },
+      "kind": "theorem"
+    },
+    "ex-phase-field-allen-cahn-stationary-front": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-phase-field-gradient-flow-and-double-well",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded connected Lipschitz domain, let $d\\ge1$, and fix constants $\\varepsilon>0$, $M>0$, and $\\kappa>0$. Put\n$$F_\\varepsilon(s)=\\frac{(s^2-1)^2}{4\\varepsilon^2},\\qquad f_\\varepsilon(s)=F_\\varepsilon'(s)=\\frac{s^3-s}{\\varepsilon^2},$$\nand define the free energy on $H^1(\\Omega;\\mathbb R)\\cap L^4(\\Omega;\\mathbb R)$ by\n$$\\mathcal E_\\varepsilon(u)=\\int_\\Omega\\left(\\frac{\\kappa}{2}|\\nabla u|^2+F_\\varepsilon(u)\\right)\\,dx.$$\nHere $H^1=W^{1,2}$ and weak derivatives have the meaning in [[def-sobolev-space-wkp-and-its-norm]]. The finite-energy initial class consists of $u_0\\in H^1(\\Omega)\\cap L^4(\\Omega)$.\n\nThe **Allen–Cahn gradient flow** is\n$$u_t=-M\\mu,\\qquad \\mu=-\\kappa\\Delta u+f_\\varepsilon(u),\\qquad \\partial_nu=0,\\qquad u(0)=u_0.$$\nThe **Cahn–Hilliard gradient flow** is\n$$u_t=M\\Delta\\mu,\\qquad \\mu=-\\kappa\\Delta u+f_\\varepsilon(u),\\qquad \\partial_nu=\\partial_n\\mu=0,\\qquad u(0)=u_0.$$\nFor weak solutions the boundary conditions mean the natural weak formulations with all $H^1(\\Omega)$ test functions. The chemical potential $\\mu$ is the variational derivative of $\\mathcal E_\\varepsilon$, and the mobilities select the $L^2$ metric for Allen–Cahn and the mean-zero $H^{-1}$ metric for Cahn–Hilliard. In the Cahn–Hilliard flow, the no-flux equation conserves $\\int_\\Omega u$; the Allen–Cahn flow has no such conservation law in general. No maximum-principle property is part of these definitions.\n\nThe convergence theorem on this page is restricted to one space dimension. Assuming the Axiom of Choice for the following standard embedding consequences, if $d=2$ and $\\Omega$ is a bounded $W^{1,p}$ extension domain for every $1<p<2$ as defined in [[def-sobolev-extension-domain-and-extension-operator]], then [[thm-critical-sobolev-embedding-into-every-finite-lq]] gives $H^1(\\Omega)\\hookrightarrow L^4(\\Omega)$. If $d=3$ and $\\Omega$ is a bounded $W^{1,2}$ extension domain, then [[thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n]] gives $H^1(\\Omega)\\hookrightarrow L^4(\\Omega)$. These are the exact extra extension hypotheses for the quartic-energy claim. In dimensions $d\\ge4$ no assertion that every $H^1$ state has finite quartic energy is made; the explicit initial class above remains $H^1\\cap L^4$. No sharp-interface limit as $\\varepsilon\\downarrow0$ is part of either definition.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $a=(\\sqrt{2\\kappa}\\,\\varepsilon)^{-1}$. Differentiation gives $u_\\varepsilon'=a(1-u_\\varepsilon^2)$ and $u_\\varepsilon''=-2a^2u_\\varepsilon(1-u_\\varepsilon^2)=2a^2(u_\\varepsilon^3-u_\\varepsilon)$. Since $2\\kappa a^2=\\varepsilon^{-2}$, $-\\kappa u_\\varepsilon''+f_\\varepsilon(u_\\varepsilon)=0$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The limits of $u_\\varepsilon$ at $\\pm\\infty$ are $\\pm1$. Also $1-u_\\varepsilon^2=\\operatorname{sech}^2(ax)$, so the energy density is $\\frac{1}{2\\varepsilon^2}\\operatorname{sech}^4(ax)$, which is integrable because it decays exponentially at both ends. Hence the profile has finite energy and joins the two wells.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 verifies the two limiting wells and finite energy."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 evaluates the limits as x tends to plus and minus infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No separate nonempty-choice branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for ex-phase-field-allen-cahn-stationary-front. This is authoring evidence, not independent approval."
+      },
+      "kind": "example"
+    },
+    "ex-phase-field-interface-width-and-grid-resolution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "ex-phase-field-allen-cahn-stationary-front",
+          "source_section": "Example",
+          "quote": "For $\\kappa,\\varepsilon>0$, on the real line set\n$$u_\\varepsilon(x)=\\tanh\\!\\left(\\frac{x}{\\sqrt{2\\kappa}\\,\\varepsilon}\\right).$$\nThis is a stationary finite-energy heteroclinic profile for the one-dimensional Allen–Cahn Euler–Lagrange equation $-\\kappa u''+f_\\varepsilon(u)=0$. It is a profile example on $\\mathbb R$, not a boundary-value solution on a bounded no-flux interval.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\tanh$ is strictly increasing and $\\tanh(\\operatorname{artanh}(1/2))=1/2$, the endpoints of $|u_\\varepsilon|\\le1/2$ are $x=\\pm\\sqrt{2\\kappa}\\,\\varepsilon\\operatorname{artanh}(1/2)$. Subtracting them gives $W_\\varepsilon$ as stated.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Place sample points at $(j+\\frac12)h$ for $j\\in\\mathbb Z$. Their distance from the front center is at least $h/2>W_\\varepsilon/2$, so every sample point lies outside the transition interval from step 1.1. The grid therefore records no sample with $|u_\\varepsilon|\\le1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 identifies the nearest sample distance h/2 and the strict h>W case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 computes both transition endpoints exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No separate nonempty-choice branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for ex-phase-field-interface-width-and-grid-resolution. This is authoring evidence, not independent approval."
+      },
+      "kind": "example"
+    },
+    "cex-phase-field-sav-modified-energy-not-physical-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-phase-field-gradient-flow-and-double-well",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded connected Lipschitz domain, let $d\\ge1$, and fix constants $\\varepsilon>0$, $M>0$, and $\\kappa>0$. Put\n$$F_\\varepsilon(s)=\\frac{(s^2-1)^2}{4\\varepsilon^2},\\qquad f_\\varepsilon(s)=F_\\varepsilon'(s)=\\frac{s^3-s}{\\varepsilon^2},$$\nand define the free energy on $H^1(\\Omega;\\mathbb R)\\cap L^4(\\Omega;\\mathbb R)$ by\n$$\\mathcal E_\\varepsilon(u)=\\int_\\Omega\\left(\\frac{\\kappa}{2}|\\nabla u|^2+F_\\varepsilon(u)\\right)\\,dx.$$\nHere $H^1=W^{1,2}$ and weak derivatives have the meaning in [[def-sobolev-space-wkp-and-its-norm]]. The finite-energy initial class consists of $u_0\\in H^1(\\Omega)\\cap L^4(\\Omega)$.\n\nThe **Allen–Cahn gradient flow** is\n$$u_t=-M\\mu,\\qquad \\mu=-\\kappa\\Delta u+f_\\varepsilon(u),\\qquad \\partial_nu=0,\\qquad u(0)=u_0.$$\nThe **Cahn–Hilliard gradient flow** is\n$$u_t=M\\Delta\\mu,\\qquad \\mu=-\\kappa\\Delta u+f_\\varepsilon(u),\\qquad \\partial_nu=\\partial_n\\mu=0,\\qquad u(0)=u_0.$$\nFor weak solutions the boundary conditions mean the natural weak formulations with all $H^1(\\Omega)$ test functions. The chemical potential $\\mu$ is the variational derivative of $\\mathcal E_\\varepsilon$, and the mobilities select the $L^2$ metric for Allen–Cahn and the mean-zero $H^{-1}$ metric for Cahn–Hilliard. In the Cahn–Hilliard flow, the no-flux equation conserves $\\int_\\Omega u$; the Allen–Cahn flow has no such conservation law in general. No maximum-principle property is part of these definitions.\n\nThe convergence theorem on this page is restricted to one space dimension. Assuming the Axiom of Choice for the following standard embedding consequences, if $d=2$ and $\\Omega$ is a bounded $W^{1,p}$ extension domain for every $1<p<2$ as defined in [[def-sobolev-extension-domain-and-extension-operator]], then [[thm-critical-sobolev-embedding-into-every-finite-lq]] gives $H^1(\\Omega)\\hookrightarrow L^4(\\Omega)$. If $d=3$ and $\\Omega$ is a bounded $W^{1,2}$ extension domain, then [[thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n]] gives $H^1(\\Omega)\\hookrightarrow L^4(\\Omega)$. These are the exact extra extension hypotheses for the quartic-energy claim. In dimensions $d\\ge4$ no assertion that every $H^1$ state has finite quartic energy is made; the explicit initial class above remains $H^1\\cap L^4$. No sharp-interface limit as $\\varepsilon\\downarrow0$ is part of either definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-phase-field-discrete-realizations",
+          "source_section": "Definition",
+          "quote": "The **no-flux finite-volume realization** starts from a finite connected cell-face mesh as in [[def-fv-admissible-cell-face-mesh]] and uses the interior-face orthogonality and positive transmissibilities of [[def-tpfa-harmonic-face-scheme]]. For unit diffusivity, let $X_h=\\mathbb R^{\\mathcal K}$, $m_h(u,v)=\\sum_{K\\in\\mathcal K}|K|u_Kv_K$, and\n$$a_h(u,v)=\\sum_{F=K|L\\in\\mathcal F_{\\rm int}}T_F(u_K-u_L)(v_K-v_L).$$\nThere is no boundary-face term: the flux through each physical boundary face is prescribed to be zero. Define $A_h:X_h\\to X_h$ by $m_h(A_hu,v)=a_h(u,v)$ for all $v\\in X_h$. Split the double-well density as\n$$F_\\varepsilon=F_c-F_e,\\qquad F_c(s)=\\frac{s^4}{4\\varepsilon^2}+\\frac{s^2}{2\\varepsilon^2},\\qquad F_e(s)=\\frac{s^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}.$$\nThe associated finite-volume energy components are\n$$E_{c,h}(u)=\\sum_K|K|\\left(\\frac{u_K^4}{4\\varepsilon^2}+\\frac{u_K^2}{2\\varepsilon^2}\\right),\\qquad E_{e,h}(u)=\\sum_K|K|\\left(\\frac{u_K^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}\\right).$$\n\nFor convergence on $\\Omega=(0,L)$, a second realization uses the same orthogonal dual mesh with centers $x_i=(i-\\tfrac12)h$, $h=L/N$. Its conforming space $V_h$ consists of functions affine between consecutive centers and constant on the two half-cells between a boundary and the nearest center. Its inner product is the exact $L^2(0,L)$ inner product, its stiffness is $a_h(v,w)=\\int_0^L v'w'\\,dx$, and its energy components are $E_{c,h}(v)=\\int_0^L F_c(v)\\,dx$ and $E_{e,h}(v)=\\int_0^L F_e(v)\\,dx$. Define $A_h:V_h\\to V_h$ by $(A_hv,w)_{L^2}=a_h(v,w)$. For degrees of freedom $v_i=v(x_i)$, this stiffness is exactly the interior two-point flux form $\\sum_{i=1}^{N-1}(v_{i+1}-v_i)(w_{i+1}-w_i)/h$; the exact mass and potential integrals are the conforming reconstruction used in the convergence theorem.\n\nBoth realizations have a constant function $\\mathbf1$, a real finite-dimensional inner-product space, and a self-adjoint nonnegative operator $A_h$. They share the physical energy $E_h(u)=\\frac\\kappa2m_h(A_hu,u)+E_{c,h}(u)-E_{e,h}(u)$, with the appropriate inner product and energy components for the realization. The sign convention is $A_h\\approx-\\Delta$.\n\n```tikz\n\\begin{tikzpicture}[x=1.2cm,y=1cm]\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0.5,1.5,2.5,3.5} {\n    \\fill (\\x,0) circle (2pt);\n  }\n  \\node[above] at (0.5,0.05) {$K_1$};\n  \\node[above] at (1.5,0.05) {$K_2$};\n  \\node[above] at (2.5,0.05) {$K_3$};\n  \\node[above] at (3.5,0.05) {$K_4$};\n  \\foreach \\x in {1,2,3} {\n    \\draw[dashed] (\\x,-0.2) -- (\\x,0.2);\n    \\draw[->,blue] (\\x-0.28,-0.42) -- (\\x+0.28,-0.42);\n    \\node[below] at (\\x,-0.42) {$Q_F$};\n  }\n  \\draw[red] (0,-0.23) -- (0,0.23);\n  \\draw[red] (4,-0.23) -- (4,0.23);\n  \\node[below] at (0,-0.23) {$Q=0$};\n  \\node[below] at (4,-0.23) {$Q=0$};\n\\end{tikzpicture}\n```\n\nThe diagram labels four adjacent cell values, three shared interior fluxes, and the prescribed zero boundary fluxes. Each interior flux appears with opposite signs in its two cell balances. The diagram records the convention only; it is not used as a proof.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-phase-field-sav-modified-energy-law",
+          "source_section": "Statement",
+          "quote": "Under the finite-dimensional hypotheses of [[alg-phase-field-sav-cahn-hilliard-step]], the displayed SAV linear system has a unique solution at every step. Every solution conserves the discrete mean and obeys\n$$\\widetilde E_h(u^{n+1},r^{n+1})+\\frac\\kappa2\\langle A_h\\delta u,\\delta u\\rangle_h+(\\delta r)^2+M\\tau\\langle A_h\\mu^{n+1},\\mu^{n+1}\\rangle_h=\\widetilde E_h(u^n,r^n),$$\nwhere $\\delta u=u^{n+1}-u^n$, $\\delta r=r^{n+1}-r^n$, and\n$$\\widetilde E_h(u,r)=\\frac\\kappa2\\langle A_hu,u\\rangle_h+r^2.$$\nThus $\\widetilde E_h$ is nonincreasing. This conclusion is about the modified energy; it does not assert monotonicity of the original physical energy $\\mathcal E_h(u)=\\frac\\kappa2\\langle A_hu,u\\rangle_h+E_{1,h}(u)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On one cell, [F2] gives $A_h=0$ and $\\mathcal E_{\\rm phys}(u)=F_1(u)$. Direct substitution using [F1] gives $F_1(1)=0$ and $F_1(0)=1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The modified energies of the displayed pairs are $\\widetilde E^0=(r^0)^2=1$ and $\\widetilde E^1=(r^1)^2=1/4$ by [F3], so the modified energy strictly decreases while the physical energy strictly increases by step 1.1. Hence the proposed implication is false. The pairs are not claimed to satisfy the SAV update, so this refutes only the logical implication from modified-energy decay alone.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 uses the zero gradient term on a one-cell no-flux space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1–1.2 evaluate the single one-cell pair."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 treats the one-cell constant mode."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoints branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No separate nonempty-choice branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "one-cell-energy-implication",
+          "asserts": "For epsilon=C0=1 and pairs (u0,r0)=(1,1), (u1,r1)=(0,1/2), modified energies are 1 and 1/4 while physical potentials are 0 and 1/4.",
+          "claim": "The scalar inequality alone does not imply physical-energy decrease.",
+          "checked_in": "Steps 1.1–1.2",
+          "cells": 1
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for cex-phase-field-sav-modified-energy-not-physical-energy. This is authoring evidence, not independent approval."
+      },
+      "kind": "counterexample"
+    },
+    "ex-phase-field-ch-two-cell-energy-ledger": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-phase-field-discrete-realizations",
+          "source_section": "Definition",
+          "quote": "The **no-flux finite-volume realization** starts from a finite connected cell-face mesh as in [[def-fv-admissible-cell-face-mesh]] and uses the interior-face orthogonality and positive transmissibilities of [[def-tpfa-harmonic-face-scheme]]. For unit diffusivity, let $X_h=\\mathbb R^{\\mathcal K}$, $m_h(u,v)=\\sum_{K\\in\\mathcal K}|K|u_Kv_K$, and\n$$a_h(u,v)=\\sum_{F=K|L\\in\\mathcal F_{\\rm int}}T_F(u_K-u_L)(v_K-v_L).$$\nThere is no boundary-face term: the flux through each physical boundary face is prescribed to be zero. Define $A_h:X_h\\to X_h$ by $m_h(A_hu,v)=a_h(u,v)$ for all $v\\in X_h$. Split the double-well density as\n$$F_\\varepsilon=F_c-F_e,\\qquad F_c(s)=\\frac{s^4}{4\\varepsilon^2}+\\frac{s^2}{2\\varepsilon^2},\\qquad F_e(s)=\\frac{s^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}.$$\nThe associated finite-volume energy components are\n$$E_{c,h}(u)=\\sum_K|K|\\left(\\frac{u_K^4}{4\\varepsilon^2}+\\frac{u_K^2}{2\\varepsilon^2}\\right),\\qquad E_{e,h}(u)=\\sum_K|K|\\left(\\frac{u_K^2}{\\varepsilon^2}-\\frac{1}{4\\varepsilon^2}\\right).$$\n\nFor convergence on $\\Omega=(0,L)$, a second realization uses the same orthogonal dual mesh with centers $x_i=(i-\\tfrac12)h$, $h=L/N$. Its conforming space $V_h$ consists of functions affine between consecutive centers and constant on the two half-cells between a boundary and the nearest center. Its inner product is the exact $L^2(0,L)$ inner product, its stiffness is $a_h(v,w)=\\int_0^L v'w'\\,dx$, and its energy components are $E_{c,h}(v)=\\int_0^L F_c(v)\\,dx$ and $E_{e,h}(v)=\\int_0^L F_e(v)\\,dx$. Define $A_h:V_h\\to V_h$ by $(A_hv,w)_{L^2}=a_h(v,w)$. For degrees of freedom $v_i=v(x_i)$, this stiffness is exactly the interior two-point flux form $\\sum_{i=1}^{N-1}(v_{i+1}-v_i)(w_{i+1}-w_i)/h$; the exact mass and potential integrals are the conforming reconstruction used in the convergence theorem.\n\nBoth realizations have a constant function $\\mathbf1$, a real finite-dimensional inner-product space, and a self-adjoint nonnegative operator $A_h$. They share the physical energy $E_h(u)=\\frac\\kappa2m_h(A_hu,u)+E_{c,h}(u)-E_{e,h}(u)$, with the appropriate inner product and energy components for the realization. The sign convention is $A_h\\approx-\\Delta$.\n\n```tikz\n\\begin{tikzpicture}[x=1.2cm,y=1cm]\n  \\draw[thick] (0,0) -- (4,0);\n  \\foreach \\x in {0.5,1.5,2.5,3.5} {\n    \\fill (\\x,0) circle (2pt);\n  }\n  \\node[above] at (0.5,0.05) {$K_1$};\n  \\node[above] at (1.5,0.05) {$K_2$};\n  \\node[above] at (2.5,0.05) {$K_3$};\n  \\node[above] at (3.5,0.05) {$K_4$};\n  \\foreach \\x in {1,2,3} {\n    \\draw[dashed] (\\x,-0.2) -- (\\x,0.2);\n    \\draw[->,blue] (\\x-0.28,-0.42) -- (\\x+0.28,-0.42);\n    \\node[below] at (\\x,-0.42) {$Q_F$};\n  }\n  \\draw[red] (0,-0.23) -- (0,0.23);\n  \\draw[red] (4,-0.23) -- (4,0.23);\n  \\node[below] at (0,-0.23) {$Q=0$};\n  \\node[below] at (4,-0.23) {$Q=0$};\n\\end{tikzpicture}\n```\n\nThe diagram labels four adjacent cell values, three shared interior fluxes, and the prescribed zero boundary fluxes. Each interior flux appears with opposite signs in its two cell balances. The diagram records the convention only; it is not used as a proof.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-phase-field-convex-splitting-step-existence-and-energy",
+          "source_section": "Statement",
+          "quote": "Use the finite-dimensional realization and the hypotheses of [[alg-phase-field-convex-splitting-backward-euler]]. Assume $P_{c,h}$ is convex and coercive on $X_h$, and $P_{e,h}$ is differentiable and convex. For every $u^n$, $M>0$, and $\\tau>0$, both branches have a unique minimizer. Their first-order conditions are exactly\n$$\\frac{u^{n+1}-u^n}{\\tau}=-M\\mu^{n+1}\\quad\\text{(Allen–Cahn)},$$\n$$\\frac{u^{n+1}-u^n}{\\tau}=-M A_h\\mu^{n+1}\\quad\\text{(Cahn–Hilliard)}.$$\nThe Cahn–Hilliard branch conserves $\\langle u^n,\\mathbf1\\rangle_h$. With $\\mathcal E_h$ as in the algorithm,\n$$\\mathcal E_h(u^{n+1})+M\\tau\\|\\mu^{n+1}\\|_h^2\\le\\mathcal E_h(u^n)\\quad\\text{(Allen–Cahn)},$$\n$$\\mathcal E_h(u^{n+1})+M\\tau\\langle A_h\\mu^{n+1},\\mu^{n+1}\\rangle_h\\le\\mathcal E_h(u^n)\\quad\\text{(Cahn–Hilliard)}.$$\nFor the quartic split in [[def-phase-field-gradient-flow-and-double-well]], the required convexity and coercivity hold for both realizations.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The initial mean is zero, so mass conservation [F2] forces $u^1=(a,-a)$. Since $A_h(a,-a)=(2a,-2a)$ and $F_c'(s)=s^3+s$, $F_e'(s)=2s$, the first chemical-potential component is $\\mu_1=2a+(a^3+a)-2=a^3+3a-2$. The first state equation gives $a-1=-2\\mu_1$, hence $2a^3+7a-5=0$. The polynomial is strictly increasing because its derivative is $6a^2+7>0$, and its values at $0$ and $1$ are $-5$ and $4$; therefore it has exactly one root $a\\in(0,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The initial gradient energy is $\\frac12\\langle A_hu^0,u^0\\rangle_h=2$ and both potential terms vanish, so $E_h(u^0)=2$. For $u^1=(a,-a)$ the gradient energy is $2a^2$ and the potential energy is $\\frac12(1-a^2)^2$. Since $0<a<1$, $(1-a^2)^2<1-a^2$, hence $E_h(u^1)<2=E_h(u^0)$. This is the exact finite ledger for the step.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example has zero discrete mean and step 1.1 verifies its preservation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example explicitly fixes two cells and derives its unique scalar state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 reduces the mean-zero two-cell space to the one-dimensional antisymmetric subspace."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoints branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No separate nonempty-choice branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward branch occurs beyond the explicit hypotheses and cases in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse branch occurs beyond the explicit hypotheses and cases in this item."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "two-cell-cubic-ledger",
+          "asserts": "The state equation reduces to 2a^3+7a-5=0; the polynomial is strictly increasing and changes sign from -5 to 4 on [0,1].",
+          "claim": "There is exactly one a in (0,1), and the stated initial/new energy formulas satisfy E1<2.",
+          "checked_in": "Steps 1.1 and 2.1",
+          "cells": 2
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-66 author self-check",
+        "notes": "The complete argument, exact supplier excerpts, cited inputs, boundary dispositions, and applicable finite calculations were reviewed for ex-phase-field-ch-two-cell-energy-ledger. This is authoring evidence, not independent approval."
+      },
+      "kind": "example"
+    }
+  }
+}

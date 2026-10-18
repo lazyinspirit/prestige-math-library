@@ -1,0 +1,718 @@
+[
+  {
+    "order": 2638,
+    "id": "yee-fdtd-and-transient-maxwell-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Yee FDTD and transient Maxwell finite elements",
+    "companion": "yee-fdtd-and-transient-maxwell-discretization-examples",
+    "requires": [
+      "hyperbolic-finite-difference-methods",
+      "parabolic-finite-element-methods",
+      "discrete-de-rham-complexes-and-edge-elements"
+    ],
+    "items": [
+      {
+        "id": "lem-maxwell-rectangular-stokes-identity",
+        "kind": "lemma",
+        "title": "Stokes identity on a rectangular Yee face",
+        "deps": [
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-riemann-fubini-on-product-rectangles"
+        ],
+        "dependency_level": 0,
+        "strategy": "Write the four oriented boundary integrals and use the one-dimensional fundamental theorem in each coordinate to obtain the face curl integral, with cyclic coordinate cases.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 2 §2.7, printed pp. 19–21: Stokes’ theorem and its use for electromagnetic curl equations. The coordinate-rectangle identity is verified locally."
+            }
+          ]
+        },
+        "statement": "Let $F=\\{(x_0,y,z):y_0\\le y\\le y_1,\\ z_0\\le z\\le z_1\\}$ be an oriented rectangle with normal $e_x$, and let $E$ be a $C^1$ vector field near $F$. Orient $\\partial F$ by the outward-normal-first convention. Then\n$$\\int_{\\partial F}E\\cdot t\\,ds=\\int_F(\\operatorname{curl}E)\\cdot e_x\\,dS=\\int_{y_0}^{y_1}\\int_{z_0}^{z_1}(\\partial_yE_z-\\partial_zE_y)(x_0,y,z)\\,dz\\,dy.$$\nThe identities for normals $e_y$ and $e_z$ follow by cyclic permutation of coordinates. Reversing a face orientation reverses both integrals."
+      },
+      {
+        "id": "def-transient-maxwell-system-with-material-interfaces",
+        "kind": "definition",
+        "title": "Transient Maxwell system with piecewise materials and boundary conditions",
+        "deps": [
+          "def-na-zero-tangential-hcurl"
+        ],
+        "dependency_level": 2,
+        "strategy": "State the real-field first-order Maxwell system, weighted energy spaces, charge continuity, PEC and periodic boundaries, and distributional interface convention without differentiating discontinuous coefficients.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 2 §§2.8–2.14, printed pp. 21–26: electric and magnetic boundary conditions, conductivity, PEC, and the time-varying Maxwell equations."
+            }
+          ]
+        },
+        "statement": "Let $\\Omega\\subset\\mathbb R^3$ be a bounded Lipschitz polyhedron, or a periodic rectangular cell. The real electric field is $E(t,x)\\in\\mathbb R^3$ and the magnetic flux density is $B(t,x)\\in\\mathbb R^3$; the magnetic intensity is $H=\\mu^{-1}B$. Let $\\epsilon(x)$ and $\\mu(x)$ be measurable, time-independent, symmetric matrix fields for which there are constants $0<\\epsilon_0\\le\\epsilon_1$ and $0<\\mu_0\\le\\mu_1$ with\n$$\\epsilon_0|v|^2\\le v^T\\epsilon(x)v\\le\\epsilon_1|v|^2,\\qquad \\mu_0|v|^2\\le v^T\\mu(x)v\\le\\mu_1|v|^2$$\nfor almost every $x$ and every $v\\in\\mathbb R^3$. A conductivity tensor $\\sigma(x)$, when present, is measurable, symmetric, and positive semidefinite. The coefficients may jump across finitely many Lipschitz material interfaces. No derivative of a coefficient is part of the model.\n\nIn each material region the constitutive fields satisfy\n$$\\partial_t(\\epsilon E)=\\operatorname{curl}(\\mu^{-1}B)-J_{\\rm src}-\\sigma E,\\qquad \\partial_t B+\\operatorname{curl}E=0.$$\nHere $J_{\\rm src}$ is the impressed free-current density, while $\\sigma E$ is the conductive current. Electric charge $\\rho$ is constrained by $\\operatorname{div}(\\epsilon E)=\\rho$ and the total-current continuity equation $\\partial_t\\rho+\\operatorname{div}(J_{\\rm src}+\\sigma E)=0$; the magnetic constraint is $\\operatorname{div}B=0$. These equalities are distributional. In the lossless branch set $\\sigma=0$.\n\nThe boundary choice is one of the following. A **periodic boundary** identifies opposite traces of the rectangular cell. A **perfect electric conductor (PEC) boundary** imposes zero tangential trace $n\\times E=0$ on $\\partial\\Omega$. At a material interface with no singular surface charge or current, the weak equations are understood with the transmission conditions $[n\\times E]=0$, $[n\\cdot B]=0$, $[n\\times(\\mu^{-1}B)]=0$, and $[n\\cdot(\\epsilon E)]=0$, where $[q]$ is the trace from one side minus the trace from the other. The interface conditions are part of the model convention; no smooth Taylor expansion across a coefficient jump is asserted.\n\nFor PEC, the weak Ampere equation is $(\\epsilon E_t,v)_{L^2}-(\\mu^{-1}B,\\operatorname{curl}v)_{L^2}=-(J_{\\rm src}+\\sigma E,v)_{L^2}$ for every $v\\in H_0(\\operatorname{curl};\\Omega)$ as defined in [[def-na-zero-tangential-hcurl]]; the periodic branch uses periodic $H(\\operatorname{curl})$ test fields. Faraday’s equation remains $B_t+\\operatorname{curl}E=0$ in distributions. These weak forms define the test-space and boundary convention used by the edge finite element method.\n\nThe weighted field norms are $\\|E\\|_\\epsilon^2=\\int_\\Omega E^T\\epsilon E\\,dx$ and $\\|B\\|_{\\mu^{-1}}^2=\\int_\\Omega B^T\\mu^{-1}B\\,dx$. The uniform coefficient bounds make them equivalent to the ordinary $L^2$ norms. All later smooth-error claims require smoothness separately on each mesh-aligned material region."
+      },
+      {
+        "id": "def-maxwell-discrete-cochain-and-yee-grid",
+        "kind": "definition",
+        "title": "Oriented Maxwell cochains, masses, and the Yee grid",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Define vertex, edge, face, and cell arrays, oriented incidence operators, positive material mass matrices, PEC relative and periodic closures, and the lossless and midpoint-conductive Yee leapfrog rows.",
+        "justified_by": [
+          "lem-maxwell-discrete-incidence-identities"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 3 §§3.2–3.3, printed pp. 30–36, and Chapter 9 §9.3, printed pp. 246–249: Yee staggering and three-dimensional update rows."
+            }
+          ]
+        },
+        "forward_refs": [],
+        "statement": "Let $K$ be a finite oriented three-dimensional cell complex with vertex, edge, face, and volume cochains. An edge cochain records oriented electric line integrals, a face cochain records oriented magnetic fluxes, and a vertex cochain records electric charge. Write $N_v,N_e,N_f,N_c$ for the retained vertex, edge, face, and cell counts. On a periodic cell, identify opposite cells with orientation preserved and let $G,C,D$ be the full vertex-to-edge gradient, edge-to-face curl, and face-to-cell divergence incidence matrices, each the transpose of its signed oriented boundary matrix. For a PEC closure, “interior” means not in the boundary subcomplex. Keep only interior electric edges as unknowns and only interior vertices as volume-charge locations, but keep all face fluxes, including boundary-normal magnetic fluxes, and all cells. This closure has no separate boundary surface-charge cochain. Define $G$ and $C$ by restricting the absolute vertex-edge and edge-face incidence matrices to those rows and columns. This mixed closure imposes zero tangential electric edge cochains on the boundary while allowing a fixed normal magnetic flux on boundary faces. In both cases, $G\\in\\mathbb R^{N_e\\times N_v}$, $C\\in\\mathbb R^{N_f\\times N_e}$, and $D\\in\\mathbb R^{N_c\\times N_f}$ satisfy $CG=0$ and $DC=0$.\n\nThe electric, magnetic, and conductive material matrices are real symmetric matrices $M_e\\in\\mathbb R^{N_e\\times N_e}$, $M_b\\in\\mathbb R^{N_f\\times N_f}$, and $S\\in\\mathbb R^{N_e\\times N_e}$, respectively. The first two are positive definite and represent the discrete weighted inner products induced by $\\epsilon$ and $\\mu^{-1}$; $S$ is positive semidefinite and represents conductivity. Write $\\langle e_1,e_2\\rangle_{M_e}=e_1^TM_ee_2$, $\\langle b_1,b_2\\rangle_{M_b}=b_1^TM_bb_2$, and $\\|e\\|_{M_e}^2=\\langle e,e\\rangle_{M_e}$, $\\|b\\|_{M_b}^2=\\langle b,b\\rangle_{M_b}$. In a homogeneous isotropic periodic Cartesian grid with spacings $h_x,h_y,h_z$ and cell volume $V=h_xh_yh_z$, the diagonal entries for an $x$-edge and an $x$-normal face are $\\epsilon V/h_x^2=\\epsilon h_yh_z/h_x$ and $\\mu^{-1}h_x/(h_yh_z)$; the $y$ and $z$ entries are obtained by cyclic permutation. These values are dual-volume Hodge weights for line-integral and face-flux cochains. A compatible PEC closure uses the corresponding truncated dual volumes for free electric edges, while the magnetic mass includes boundary faces; the resulting matrices remain positive definite. The discrete constraints are $-G^TM_ee^n=\\rho^n$ on interior vertices and $Db^{n-1/2}=0$ on all cells.\n\nThe minus sign in the electric constraint is essential: an edge oriented from tail to head has incidence entries $-1,+1$, so $-G^T$ is the outgoing-flux divergence. Thus $\\rho$ represents physical electric charge with the sign of $\\operatorname{div}(\\epsilon E)$ in [[def-transient-maxwell-system-with-material-interfaces]].\n\nFor current cochains $j^{n+1/2}$ and charge rows $\\rho^n$, the discrete continuity condition means\n$$\\rho^{n+1}-\\rho^n-\\Delta t\\,G^T\\left(j^{n+1/2}+S\\frac{e^{n+1}+e^n}{2}\\right)=0.$$\nFor PEC this is the interior-vertex volume-charge relation; this closure has no separate boundary surface-charge/current cochain.\n\nThe cochain identities $CG=0$ and $DC=0$ are not imposed as an extra numerical approximation: they follow from oriented boundary-of-boundary cancellation, including the PEC row and column restrictions, as proved in [[lem-maxwell-discrete-incidence-identities]]. No cell geometry picture is used as a proof."
+      },
+      {
+        "id": "lem-maxwell-discrete-incidence-identities",
+        "kind": "lemma",
+        "title": "Incidence curl has zero discrete divergence and gradient curl",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "lem-the-cellular-boundary-squares-to-zero"
+        ],
+        "dependency_level": 4,
+        "strategy": "Prove the two incidence compositions vanish by expanding oriented simplex/cubical boundaries and cancelling each codimension-two face with opposite signs, including PEC-relative and periodic identifications.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 8",
+              "url": "https://jschoeberl.github.io/iFEM/_downloads/900feda304f95ee42fd24abe742d7564/numpde.pdf",
+              "locator": "§8.3, printed pp. 170–172: oriented simplex degrees of freedom and the discrete de Rham incidence sequence."
+            }
+          ]
+        },
+        "statement": "For the incidence matrices $G,C,D$ of [[def-maxwell-discrete-cochain-and-yee-grid]], one has $CG=0$ and $DC=0$. The conclusion holds for the full periodic complex and for the PEC mixed closure defined there."
+      },
+      {
+        "id": "lem-maxwell-yee-step-matrix-is-positive-definite",
+        "kind": "lemma",
+        "title": "The midpoint-conductivity Yee electric solve is well defined",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid"
+        ],
+        "dependency_level": 4,
+        "strategy": "Show the electric step matrix is symmetric positive definite when the permittivity mass is positive definite and conductivity is positive semidefinite.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 3 §3.12, printed pp. 64–72, and Chapter 9 §9.3, printed pp. 246–249: centered-in-time conductivity terms in staggered field updates."
+            }
+          ]
+        },
+        "statement": "Let $M_e$ be the positive definite electric mass matrix, let $S$ be the positive semidefinite conductivity matrix, and let $\\Delta t>0$. Then $M_e+(\\Delta t/2)S$ is symmetric positive definite, hence invertible. Thus each midpoint-conductivity Yee electric row has a unique solution."
+      },
+      {
+        "id": "def-maxwell-edge-fem-semidiscretization",
+        "kind": "definition",
+        "title": "Edge-face Maxwell finite element semidiscretization",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-zero-tangential-hcurl",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Use lowest-order Nedelec edge and RT0 face spaces, their oriented discrete curl, exact coefficient-weighted mass matrices, the PEC boundary subcomplex, and the corresponding first-order and second-order transient equations.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "§§1.1–1.2, printed pp. 1–5: lowest-order Nedelec edge fields, RT0 face fields, edge and face moments, and the curl commuting identity."
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf",
+              "locator": "§§5.1–5.3, printed pp. 49–53: Whitney finite element subcomplex, degrees of freedom, and lowest-order Nedelec/RT0 spaces."
+            }
+          ]
+        },
+        "statement": "Let $\\Omega$ be a bounded contractible Lipschitz polyhedron with a finite matching affine tetrahedral mesh $\\mathcal T_h$, and use the real lowest-order spaces $W_h^0,N_h^1,N_h^2,N_h^3$ defined in [[def-na-lowest-order-whitney-de-rham-spaces]]. The electric trial field is $E_h(t)\\in N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$; the magnetic flux field is $B_h(t)\\in N_h^2$, with no imposed zero normal trace on $B_h$. PEC means the closure-defined zero tangential subspace from [[def-na-zero-tangential-hcurl]]. Periodic analogues use the periodic cell complex. Countable Choice is inherited from the H(div) and affine Piola space definitions in the suppliers; the finite matrix operations below use no additional choice.\n\nPut $V_h:=N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$. Choose an edge basis $\\{\\phi_i\\}_{i=1}^{N_e}$ of the electric trial space $V_h$ and a face basis $\\{\\psi_a\\}_{a=1}^{N_f}$ of $N_h^2$, so $N_e=\\dim V_h$ and $N_f=\\dim N_h^2$. Define the symmetric mass matrices\n$$ (M_e)_{ij}=\\int_\\Omega \\phi_j^T\\epsilon\\phi_i\\,dx,\\qquad (M_b)_{ab}=\\int_\\Omega \\psi_b^T\\mu^{-1}\\psi_a\\,dx.$$\nThey are positive definite by the coefficient bounds in [[def-transient-maxwell-system-with-material-interfaces]] and linear independence of the finite element bases. Let $C$ and $D$ be the coefficient matrices, in these chosen bases, of the restricted map $\\operatorname{curl}:V_h\\to N_h^2$ and of $\\operatorname{div}:N_h^2\\to N_h^3$. The moment-commuting supplier gives $DC=0$ on the full spaces, hence also after restriction to $V_h$. Set $j_i(t)=\\int_\\Omega J_{\\rm src}(t)\\cdot\\phi_i\\,dx$, with $J_{\\rm src}\\in C([0,T];L^2(\\Omega;\\mathbb R^3))$. The lossless, conductivity-free semidiscretization with this source is\n$$M_e\\dot e-C^TM_b b=-j,\\qquad \\dot b+Ce=0.$$\nThe coefficient ODE is defined for arbitrary initial coefficients. To represent the magnetic constraint of the Maxwell model, require $Db(0)=0$: the Faraday row and $DC=0$ give $D\\dot b=-DCe=0$, so $Db(t)=Db(0)$ and compatible data remain divergence-free. An incompatible initial divergence is preserved, not corrected by this ODE. This is a spatial Galerkin system only; no time integrator is included. The cochain convention and weak material-interface formulation come from the declared spaces and [[def-transient-maxwell-system-with-material-interfaces]]. Smooth interpolation and a uniformly bounded commuting projection are separate prerequisites for the later error estimate and are not asserted by this definition."
+      },
+      {
+        "id": "alg-maxwell-yee-leapfrog-update",
+        "kind": "algorithm",
+        "title": "Lossless or midpoint-conductive Yee leapfrog update",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "lem-maxwell-yee-step-matrix-is-positive-definite"
+        ],
+        "dependency_level": 5,
+        "strategy": "Specify the input cochains, source and conductivity samples, staggered time indices, exact magnetic and electric update rows, and their admissibility conditions.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 3 §§3.2–3.3 and §3.12, printed pp. 30–36 and 64–72; Chapter 9 §9.3, printed pp. 246–249: staggered Yee update and centered conductivity treatment."
+            }
+          ]
+        },
+        "statement": "Choose a finite complex and boundary closure as in [[def-maxwell-discrete-cochain-and-yee-grid]], step size $\\Delta t>0$, initial $e^0\\in\\mathbb R^{N_e}$ and $b^{-1/2}\\in\\mathbb R^{N_f}$, and source rows $j^{n+1/2}\\in\\mathbb R^{N_e}$. The output is a sequence $e^n$ at integer times and $b^{n+1/2}$ at half-integer times. For each $n\\ge0$, perform the ordered instructions\n\n1. Update the face flux by\n   $$b^{n+1/2}=b^{n-1/2}-\\Delta t\\,C e^n.$$\n\n2. Solve the electric row\n   $$\\left(M_e+\\frac{\\Delta t}{2}S\\right)e^{n+1}=\\left(M_e-\\frac{\\Delta t}{2}S\\right)e^n+\\Delta t\\,C^TM_b b^{n+1/2}-\\Delta t\\,j^{n+1/2}.$$\n\nFor $S=0$ this is the lossless Yee leapfrog scheme. For $S\\succeq0$, the midpoint term is the specified trapezoidal treatment of conductivity. The row is well defined for every input because its matrix is invertible by [[lem-maxwell-yee-step-matrix-is-positive-definite]]. This procedure makes no stability claim; the lossless stability condition is proved separately."
+      },
+      {
+        "id": "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+        "kind": "lemma",
+        "title": "Existence and uniqueness for the finite-dimensional Maxwell ODE",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Construct the matrix-exponential Duhamel solution for continuous loads and prove uniqueness by differentiating the inverse homogeneous flow.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "§2, printed pp. 6–8: finite-dimensional edge-element Maxwell systems. The continuous-load ODE construction is reduced to the local matrix-ODE supplier."
+            }
+          ]
+        },
+        "statement": "Assume the Countable Choice branch inherited from [[def-maxwell-edge-fem-semidiscretization]]. Let $T\\ge0$. For any finite matching mesh, initial edge and face coefficients $(e_0,b_0)$, and continuous load vector $j:[0,T]\\to\\mathbb R^{N_e}$, the source-driven semidiscrete Maxwell system\n$$M_e\\dot e-C^TM_bb=-j(t),\\qquad \\dot b+Ce=0,\\qquad (e(0),b(0))=(e_0,b_0)$$\nhas one and only one global $C^1$ solution on $[0,T]$ when $T>0$, with domain-relative one-sided endpoint derivatives. When $T=0$, there is exactly one map with the prescribed initial value; it extends locally to the same coefficient ODE with the load held constant at $j(0)$, and any two such continuations agree on their common interval containing zero. No derivative or IVP solution on the singleton itself is asserted. The construction and uniqueness argument use finite-dimensional linear algebra and the matrix-ODE supplier; no choice axiom stronger than the inherited Countable Choice branch is used."
+      },
+      {
+        "id": "def-maxwell-edge-ritz-projection",
+        "kind": "definition",
+        "title": "Maxwell curl-energy Ritz projection",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Define the unique finite-dimensional projection for the sum of the permittivity L2 form and permeability-weighted curl form.",
+        "justified_by": [
+          "lem-maxwell-edge-ritz-projection-well-defined"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "§2, printed pp. 6–8: curl-energy Maxwell variational forms and conforming edge-element spaces. The time-dependent Ritz projection below is defined locally."
+            },
+            {
+              "title": "Peter Monk, Mathematical and Numerical Analysis of Maxwell’s Equations, complete lecture notes",
+              "url": "https://oa.tib.eu/renate/bitstreams/ef856c7a-d649-4489-ba64-40c925d44bf6/download",
+              "locator": "Chapter 11, ‘Finite Element Methods for Maxwell’s Equations’, printed pp. 151–168: Maxwell energy norms, conforming edge spaces, and error estimates."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice in the inherited edge/face finite-element space branch. Let $V=H_0(\\operatorname{curl};\\Omega)$ with the PEC convention in [[def-maxwell-edge-fem-semidiscretization]], and let $V_h=N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$. Define\n$$m(u,v)=\\int_\\Omega v^T\\epsilon u\\,dx,\\qquad a(u,v)=\\int_\\Omega (\\operatorname{curl}v)^T\\mu^{-1}\\operatorname{curl}u\\,dx,\\qquad a_+(u,v)=m(u,v)+a(u,v).$$\nFor $u\\in V$, the **Maxwell curl-energy Ritz projection** $R_hu\\in V_h$ is the solution of\n$$a_+(R_hu,v_h)=a_+(u,v_h)\\qquad(v_h\\in V_h).$$\nIts finite-dimensional well-definedness, orthogonality, and best-approximation property are supplied by [[lem-maxwell-edge-ritz-projection-well-defined]]."
+      },
+      {
+        "id": "lem-maxwell-nedelec-smooth-interpolation-estimate",
+        "kind": "lemma",
+        "title": "Smooth lowest-order Nedelec and RT0 interpolation estimate",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-matching-affine-simplicial-meshes",
+          "thm-affine-piola-differential-and-trace-moment-identities",
+          "lem-na-nedelec-edge-unisolvence",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "On shape-regular affine tetrahedra, subtract constant local approximants, bound the edge and face moment coefficients, scale the fixed reference bases, and sum the local curl and field estimates.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "§§1.1–1.3, printed pp. 1–6: lowest-order Nedelec and RT0 degrees of freedom, their commuting curl identity, and the first-order curl interpolation estimate."
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf",
+              "locator": "§§5.2–5.4, printed pp. 50–55: lowest-order Whitney spaces, geometric degrees of freedom, and the warning that canonical moments require smooth inputs."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice only in the H(div)/Piola space branch inherited from the suppliers below. Let $\\mathcal T_h$ be a finite matching affine tetrahedral mesh of a bounded polyhedron, with shape-regularity constant $\\sigma$ and $h=\\max_K h_K$. Assume material interfaces are mesh-aligned. Let $u,v$ be piecewise $C^1$ on cell closures, with $\\operatorname{curl}u$, $\\operatorname{div}v$ also piecewise $C^1$, and with matching tangential traces of $u$ and matching normal traces of $v$. The canonical edge and face moment interpolants $I_h^1,I_h^2$ are those in [[lem-na-whitney-moments-commute-with-grad-curl-div]]. Then\n$$\\begin{aligned} &\\|u-I_h^1u\\|_{L^2(\\Omega)}+\\|\\operatorname{curl}(u-I_h^1u)\\|_{L^2(\\Omega)} \\quad+\\|v-I_h^2v\\|_{L^2(\\Omega)}+\\|\\operatorname{div}(v-I_h^2v)\\|_{L^2(\\Omega)} \\le C_\\sigma h |\\Omega|^{1/2}\\max_{K\\in\\mathcal T_h}\\left(\\|\\nabla u\\|_{L^\\infty(K)}+\\|\\nabla\\operatorname{curl}u\\|_{L^\\infty(K)}+\\|\\nabla v\\|_{L^\\infty(K)}+\\|\\nabla\\operatorname{div}v\\|_{L^\\infty(K)}\\right). \\end{aligned}$$\nThe constant depends only on reference-element basis norms and $\\sigma$. This estimate is only for the canonical smooth-input interpolants; it makes no boundedness claim on all of $H(\\operatorname{curl})$ or $H(\\operatorname{div})$."
+      },
+      {
+        "id": "thm-maxwell-yee-gauss-constraints-propagate",
+        "kind": "theorem",
+        "title": "Compatible discrete charge and magnetic divergence propagate",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "lem-maxwell-discrete-incidence-identities",
+          "alg-maxwell-yee-leapfrog-update"
+        ],
+        "dependency_level": 6,
+        "strategy": "Apply the transpose incidence identities to Ampere and the divergence incidence to Faraday, then use the stated discrete charge-continuity equation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 3 §3.2, printed pp. 30–31, and Chapter 9 §9.3, printed pp. 246–249: staggered Maxwell updates and oriented Yee-grid placement. The discrete continuity proof below is local."
+            }
+          ]
+        },
+        "statement": "For the Yee update in [[alg-maxwell-yee-leapfrog-update]], suppose the initial rows satisfy $-G^TM_e e^0=\\rho^0$ and $Db^{-1/2}=0$. If the source and charge rows satisfy\n$$\\rho^{n+1}-\\rho^n-\\Delta t\\,G^T\\left(j^{n+1/2}+S\\frac{e^{n+1}+e^n}{2}\\right)=0$$\nat every step, then $-G^TM_e e^n=\\rho^n$ and $Db^{n-1/2}=0$ for every later step. This is exact constraint propagation; it does not assert stability for a time step violating the CFL condition."
+      },
+      {
+        "id": "thm-maxwell-yee-strict-cfl-modified-energy",
+        "kind": "theorem",
+        "title": "Strict spectral CFL positivity and Yee modified energy",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update"
+        ],
+        "dependency_level": 6,
+        "strategy": "Derive the exact staggered cross-energy identity, rewrite it using midpoint fields, and bound its negative curl term by the largest generalized curl-curl eigenvalue; treat equality separately.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 7 §7.4, printed pp. 164–168, and Chapter 9 §9.3, printed pp. 246–249: FDTD dispersion relation, staggered field placement, and centered updates."
+            }
+          ]
+        },
+        "statement": "Set $K=C^TM_bC$. If the retained electric cochain space is zero-dimensional,\ndefine $\\lambda_{\\max}:=0$; otherwise set\n$$\\lambda_{\\max}:=\\max_{e\\ne0}\\frac{e^TKe}{e^TM_ee}.$$\nFor a lossless, source-free update from [[alg-maxwell-yee-leapfrog-update]], define\n$$\\mathcal E^n:=\\frac12(e^n)^TM_ee^n+\\frac12(b^{n-1/2})^TM_bb^{n+1/2},\\qquad b_c^n:=\\frac{b^{n-1/2}+b^{n+1/2}}2.$$\nThen $\\mathcal E^n$ is independent of $n$, and\n$$\\mathcal E^n\\ge\\frac12\\left(1-\\frac{\\Delta t^2\\lambda_{\\max}}4\\right)\\|e^n\\|_{M_e}^2+\\frac12\\|b_c^n\\|_{M_b}^2.$$\nConsequently, the actual strict spectral condition $\\Delta t^2\\lambda_{\\max}<4$ makes this modified energy positive on admissible staggered states and controls the electric field and the centered magnetic field. When $\\lambda_{\\max}>0$, at equality the energy loses coercivity and a maximal mode has a repeated root $-1$; above equality a mode grows exponentially. If $\\lambda_{\\max}=0$, the strict condition is automatic for every $\\Delta t>0$ and neither endpoint case occurs."
+      },
+      {
+        "id": "lem-maxwell-periodic-yee-consistency",
+        "kind": "lemma",
+        "title": "Second-order consistency of the homogeneous periodic Yee scheme",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces",
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "lem-maxwell-rectangular-stokes-identity"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use exact staggered central-difference formulas and Taylor remainders to bound the spatial curl-curl and centered time residual for smooth constant-coefficient periodic fields.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 9 §9.3, printed pp. 246–249: 3D Yee staggering and update rows; Chapter 7 §7.4, printed pp. 164–168: central-difference dispersion. The truncation bound below is derived locally."
+            }
+          ]
+        },
+        "statement": "Let a periodic rectangular cell be discretized by a uniform Cartesian Yee grid with spacings $h_x,h_y,h_z$, $h=\\max_jh_j$, and constant scalar coefficients $\\epsilon,\\mu>0$. Let $(E,B)$ be a source-free smooth periodic Maxwell solution on $[0,T]$, with the spatial derivatives of $E$ through total order four, $\\partial_t^4E$, and $\\partial_t^3B$ bounded. Sample $E(t_n)$ by exact oriented edge line integrals $e_*^n$ and $B(t_{n+1/2})$ by exact oriented face fluxes $b_*^{n+1/2}$. Define\n$$r_h^n=M_e\\frac{e_*^{n+1}-2e_*^n+e_*^{n-1}}{\\Delta t^2}+C^TM_bCe_*^n,\\qquad s_h^n=b_*^{n+1/2}-b_*^{n-1/2}+\\Delta t\\,Ce_*^n.$$\nWith the homogeneous diagonal Hodge weights of [[def-maxwell-discrete-cochain-and-yee-grid]], there is a constant $C_T$ independent of the cell counts such that, whenever $\\Delta t\\le t_n\\le T-\\Delta t$,\n$$\\|r_h^n\\|_{M_e^{-1}}\\le C_T(h^2+\\Delta t^2),\\qquad \\|s_h^n\\|_{M_b}\\le C_T\\Delta t^3.$$\nHere $\\|r\\|_{M_e^{-1}}^2=r^TM_e^{-1}r$. This is a smooth homogeneous periodic consistency result; it asserts no Taylor estimate across coefficient jumps or a PEC boundary closure."
+      },
+      {
+        "id": "thm-maxwell-edge-fem-energy-conservation",
+        "kind": "theorem",
+        "title": "Semidiscrete edge-face Maxwell energy conservation",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Differentiate the coefficient-weighted electric and magnetic quadratic energies and cancel the transposed discrete-curl pair.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "§2, printed pp. 6–8: the coefficient-weighted Maxwell curl-curl variational pairing and edge-element mass matrices. The semidiscrete first-order energy identity is proved locally."
+            },
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 2 §2.14 and Chapter 9 §9.3, printed pp. 25–26 and 246–249: Maxwell field energy convention and staggered curl exchange."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice only as inherited from the real $H(\\operatorname{div})$/Piola finite-element space interfaces in [[def-maxwell-edge-fem-semidiscretization]]. For the lossless source-free semidiscretization\n$$M_e\\dot e-C^TM_b b=0,\\qquad \\dot b+Ce=0,$$\nthe weighted energy\n$$\\mathcal H_h(t)=\\frac12\\|e(t)\\|_{M_e}^2+\\frac12\\|b(t)\\|_{M_b}^2$$\nis constant in time. The local matrix calculation uses no further choice principle."
+      },
+      {
+        "id": "lem-maxwell-edge-ritz-projection-well-defined",
+        "kind": "lemma",
+        "title": "Well-definedness and best approximation of the Maxwell Ritz map",
+        "deps": [
+          "def-maxwell-edge-ritz-projection",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Prove coercivity, uniqueness and orthogonality of the finite-dimensional variational projection, then derive its best-approximation estimate.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "§2, printed pp. 6–8: the curl-energy Maxwell bilinear form; existence and orthogonality of the finite-dimensional projection are established locally."
+            }
+          ]
+        },
+        "statement": "In the Countable Choice branch of [[def-maxwell-edge-ritz-projection]], the equation defining $R_hu$ has a unique solution for each $u\\in V$. Moreover, with $\\|v\\|_{a_+}^2=a_+(v,v)$,\n$$\\|u-R_hu\\|_{a_+}\\le\\inf_{v_h\\in V_h}\\|u-v_h\\|_{a_+}.$$"
+      },
+      {
+        "id": "thm-maxwell-yee-cartesian-dispersion-and-cfl",
+        "kind": "theorem",
+        "title": "Cartesian Yee symbol, numerical dispersion, and grid CFL bound",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "thm-maxwell-yee-strict-cfl-modified-energy"
+        ],
+        "dependency_level": 7,
+        "strategy": "Compute the staggered Fourier symbol, identify longitudinal and transverse modes, derive the discrete plane-wave dispersion relation, and maximize the symbol for rectangular and cubic grids.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 7 §7.4, printed pp. 164–168, derives the 1D dispersion relation; Chapter 9 §§9.3 and 9.7, printed pp. 246–249 and 281–286, fixes the 3D Yee locations and unequal-step notation. The 3D symbol and maximum are derived locally."
+            }
+          ]
+        },
+        "statement": "Consider a homogeneous isotropic periodic Yee grid with $\\epsilon,\\mu>0$, wave speed $c=(\\epsilon\\mu)^{-1/2}$, spacings $h_x,h_y,h_z$, and $N_x,N_y,N_z$ cells. Its allowed wave angles are $\\theta_j=2\\pi m_j/N_j$. On a mode with wave vector $k_j=\\theta_j/h_j$, the transverse curl-curl eigenvalue is\n$$\\lambda(\\theta)=c^2\\sum_{j\\in\\{x,y,z\\}}\\frac{4}{h_j^2}\\sin^2\\left(\\frac{\\theta_j}{2}\\right),$$\nand the lossless Yee leapfrog dispersion relation is\n$$\\sin^2\\left(\\frac{\\omega\\Delta t}{2}\\right)=c^2\\Delta t^2\\sum_{j\\in\\{x,y,z\\}}\\frac{\\sin^2(\\theta_j/2)}{h_j^2}.$$\nThe exact finite-grid strict condition is $\\Delta t^2\\max_{\\theta}\\lambda(\\theta)<4$, as in [[thm-maxwell-yee-strict-cfl-modified-energy]]. The rectangular sufficient bound is\n$$\\Delta t<\\frac{1}{c\\sqrt{h_x^{-2}+h_y^{-2}+h_z^{-2}}};$$\nit is exact when every $N_j$ is even. For a cubic grid this bound is $\\Delta t<h/(c\\sqrt3)$. Odd cell counts may have a smaller finite-grid maximum, so the finite-grid eigenvalue is the exact criterion."
+      },
+      {
+        "id": "thm-maxwell-periodic-yee-smooth-solution-error",
+        "kind": "theorem",
+        "title": "Finite-time Yee error for smooth homogeneous periodic Maxwell fields",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "thm-maxwell-yee-strict-cfl-modified-energy",
+          "lem-maxwell-periodic-yee-consistency"
+        ],
+        "dependency_level": 7,
+        "strategy": "Apply the forced modified-energy identity to the sampled-solution residual and sum the energy increments under a strict CFL margin, with compatible exact starting rows.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 7 §7.4, printed pp. 164–168, gives the second-order dispersive relation; Chapter 9 §9.3 gives the 3D update. The finite-time residual-to-error estimate is proved locally."
+            }
+          ]
+        },
+        "statement": "Assume the hypotheses and residual bounds of [[lem-maxwell-periodic-yee-consistency]] on $[0,T]$. Write $\\delta_{tt}u^n=(u^{n+1}-2u^n+u^{n-1})/\\Delta t^2$. Let $e_h^n,b_h^{n+1/2}$ be a lossless periodic Yee solution and let $e_*^n,b_*^{n+1/2}$ be the exact samples. Set $w^n=e_h^n-e_*^n$ and $z^{n+1/2}=b_h^{n+1/2}-b_*^{n+1/2}$. Suppose the initial electric rows are compatible with the Yee equations and satisfy\n$$\\|w^0\\|_{M_e}+\\|Cw^0\\|_{M_b}+\\|w^1\\|_{M_e}+\\|Cw^1\\|_{M_b}+\\left\\|\\frac{w^1-w^0}{\\Delta t}\\right\\|_{M_e}+\\|z^{1/2}\\|_{M_b}\\le C_0(h^2+\\Delta t^2).$$\nLet $\\lambda_{\\max}$ be the largest generalized curl-curl eigenvalue in [[thm-maxwell-yee-strict-cfl-modified-energy]]. If the strict spectral margin obeys $\\gamma:=1-\\Delta t^2\\lambda_{\\max}/4\\ge\\gamma_0>0$, then for every integer $n\\ge0$ with $t_{n+1}\\le T$,\n$$\\|e_h^n-e_*^n\\|_{M_e}+\\|b_h^{n+1/2}-b_*^{n+1/2}\\|_{M_b}+\\|C(e_h^n-e_*^n)\\|_{M_b}\\le C(h^2+\\Delta t^2),$$\nwhere $C$ is independent of the grid counts and time step. The statement is for the smooth homogeneous periodic branch and compatible starts; it makes no Taylor error claim across material jumps or an unspecified PEC boundary stencil."
+      },
+      {
+        "id": "thm-maxwell-yee-midpoint-conductivity-energy-balance",
+        "kind": "theorem",
+        "title": "Midpoint conductivity dissipates the Yee discrete energy",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "thm-maxwell-yee-strict-cfl-modified-energy"
+        ],
+        "dependency_level": 7,
+        "strategy": "Take the material inner products of both staggered rows and show the curl exchanges cancel while the midpoint current contributes nonpositive work.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 3 §3.12, printed pp. 64–72, Chapter 5 §5.7, printed pp. 129–133, and Chapter 9 §9.3, printed pp. 246–249: conductivity update using a time-centered loss term."
+            }
+          ]
+        },
+        "statement": "For the midpoint-conductive update of [[alg-maxwell-yee-leapfrog-update]], define the same staggered cross-energy as in [[thm-maxwell-yee-strict-cfl-modified-energy]]. Then for every step\n$$\\mathcal E^{n+1}-\\mathcal E^n=-\\Delta t\\left(\\frac{e^{n+1}+e^n}{2}\\right)^Tj^{n+1/2}-\\Delta t\\left(\\frac{e^{n+1}+e^n}{2}\\right)^TS\\left(\\frac{e^{n+1}+e^n}{2}\\right).$$\nWith zero impressed current, this algebraic energy is nonincreasing because $S\\succeq0$. Under the strict spectral CFL hypothesis of [[thm-maxwell-yee-strict-cfl-modified-energy]] it is also positive on admissible update states. Dissipation is asserted for this specified midpoint treatment, not for an arbitrary conductivity discretization."
+      },
+      {
+        "id": "lem-maxwell-magnetic-compatible-initial-projection",
+        "kind": "lemma",
+        "title": "Compatible magnetic initial projection for the Maxwell edge method",
+        "deps": [
+          "def-maxwell-edge-fem-semidiscretization",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "thm-na-uniformly-bounded-commuting-cochain-projection",
+          "lem-maxwell-nedelec-smooth-interpolation-estimate",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Correct the bounded commuting projection by its magnetic-mass orthogonal projection onto the discrete curl range; prove divergence preservation, curl orthogonality, and the smooth O(h) bound.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "§§1.1–1.3, printed pp. 1–6: RT0 face-flux degrees of freedom, commuting divergence moments, and smooth-input interpolation estimates; the compatible projection below is constructed locally."
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf",
+              "locator": "§§3.3 and 5.2–5.5, printed pp. 22–24 and 50–57: bounded cochain projections, lowest-order Whitney spaces, and the stated limits of the projection outline."
+            }
+          ]
+        },
+        "statement": "Assume the contractible Lipschitz domain and shape-regular mesh-family hypotheses of [[thm-na-uniformly-bounded-commuting-cochain-projection]], with matching affine tetrahedra and the PEC edge space of [[def-maxwell-edge-fem-semidiscretization]]. Assume Countable Choice as in that projection interface. Let $B_0\\in H(\\operatorname{div};\\Omega)$ be piecewise smooth, have matching normal traces, and satisfy $\\operatorname{div}B_0=0$. For the approximation bound below, assume all material and field smoothness interfaces are mesh-aligned, with $B_0$ and $\\operatorname{div}B_0$ piecewise $C^1$ on cell closures and bounded cellwise first derivatives as in [[lem-maxwell-nedelec-smooth-interpolation-estimate]]. Let $\\pi_h^2$ be the degree-two cochain projection in that interface, let $X_h=\\operatorname{range}C\\subset N_h^2$, and let $P_{X_h}$ be orthogonal projection onto $X_h$ for $(u,v)_{\\mu^{-1}}=\\int_\\Omega u^T\\mu^{-1}v\\,dx$. Define\n$$B_h^0=\\pi_h^2B_0+P_{X_h}(B_0-\\pi_h^2B_0).$$\nThen $B_h^0\\in N_h^2$, $D B_h^0=0$, and\n$$(B_h^0-B_0,\\operatorname{curl}v_h)_{\\mu^{-1}}=0\\quad(v_h\\in V_h),\\qquad \\|B_h^0-B_0\\|_{\\mu^{-1}}\\le C h\\,M_B,$$\nwhere $V_h=N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$ and $M_B$ is the maximum of the piecewise first-derivative bounds for $B_0$ and $\\operatorname{div}B_0$ used by the smooth interpolation estimate. The error constant is uniform over the shape-regular family when the commuting projection norms are uniformly bounded."
+      },
+      {
+        "id": "thm-maxwell-edge-fem-smooth-solution-error",
+        "kind": "theorem",
+        "title": "Smooth PEC edge finite element Maxwell error from compatible projections",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces",
+          "def-maxwell-edge-fem-semidiscretization",
+          "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+          "def-maxwell-edge-ritz-projection",
+          "lem-maxwell-edge-ritz-projection-well-defined",
+          "lem-maxwell-nedelec-smooth-interpolation-estimate",
+          "lem-maxwell-magnetic-compatible-initial-projection",
+          "lem-na-whitney-averaged-pullback-moment-bounds",
+          "def-countable-choice",
+          "def-na-zero-tangential-hcurl",
+          "lem-na-whitney-moments-commute-with-grad-curl-div",
+          "thm-dominated-convergence",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "dependency_level": 8,
+        "strategy": "Assume sigma=0 (lossless branch); Use the PE09 cochain projection for compatible initial fields and divergence constraints, a local smooth interpolation estimate for O(h) approximation, and the Maxwell Ritz projection plus the semidiscrete energy identity for finite-time error.",
+        "statement": "Fix $T\\ge0$. Let $\\Omega$ be a bounded contractible Lipschitz polyhedron with a shape-regular family of matching affine tetrahedral meshes, maximum diameter $h\\to0$, and mesh-aligned material interfaces. Let $\\epsilon,\\mu$ be time-independent symmetric uniformly positive definite bounded coefficients. In the lossless branch $\\sigma=0$, let $(E,B)$ be a PEC solution of [[def-transient-maxwell-system-with-material-interfaces]] with $J_{\\rm src}\\in C^1([0,T];L^2(\\Omega)^3)$, satisfying the stated current continuity and magnetic divergence constraints. Assume $E,E_t,E_{tt}$ are piecewise $C^1$ in space, their curls are piecewise $C^1$, and their tangential traces match across interior mesh faces and vanish on the exterior PEC boundary; assume $B(0)$ is piecewise $C^1$ with matching normal traces and $\\operatorname{div}B(0)=0$. These bounds are uniform in time on $[0,T]$.\n\nTake the semidiscrete solution of [[def-maxwell-edge-fem-semidiscretization]] with exact load moments, initialize $E_h(0)=R_hE(0)$ using the Maxwell Ritz map of [[def-maxwell-edge-ritz-projection]], and initialize $B_h(0)=B_h^0$ by [[lem-maxwell-magnetic-compatible-initial-projection]]. Write $\\theta_h(t)=E_h(t)-R_hE(t)$. The Countable Choice assumption required by that projection interface is in force. Then the semidiscrete solution exists uniquely (at $T=0$, as the initialized singleton map with the unique constant-load local continuation, without a derivative assertion on the singleton) and\n$$\\sup_{0\\le t\\le T}\\left(\\|E_h(t)-E(t)\\|_{L^2(\\Omega)}+\\|\\operatorname{curl}(E_h(t)-E(t))\\|_{L^2(\\Omega)}+\\|B_h(t)-B(t)\\|_{L^2(\\Omega)}\\right)\\le C_T h.$$\nThe constant depends on $T$, the coefficient bounds, the shape-regularity and projection bounds, and the stated piecewise smooth norms, but not on $h$. The initial magnetic projection preserves the discrete divergence constraint, and its error $B_h^0-B(0)$ is $\\mu^{-1}$-orthogonal to all discrete curls. The result is a PEC semidiscrete estimate for smooth mesh-aligned data; it does not claim a rate across unresolved jumps or for nonsmooth fields.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete lecture notes",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "§§1.1–1.3, printed pp. 1–6: lowest-order edge and face spaces, commuting moments, and smooth interpolation estimates; the transient Ritz-energy argument is proved locally."
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf",
+              "locator": "§§3.3 and 5.2–5.5, printed pp. 22–24 and 50–57: bounded cochain projections and lowest-order Whitney spaces; §5.5 is only an outline and is not treated as a completed proof."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2639,
+    "id": "yee-fdtd-and-transient-maxwell-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Yee FDTD and transient Maxwell finite elements — Examples",
+    "companion": "yee-fdtd-and-transient-maxwell-discretization",
+    "requires": [
+      "yee-fdtd-and-transient-maxwell-discretization"
+    ],
+    "items": [
+      {
+        "id": "ex-maxwell-pec-rectangular-cavity-mode",
+        "kind": "example",
+        "title": "A smooth Maxwell eigenmode in a rectangular PEC cavity",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Construct an explicit divergence-free trigonometric field, verify all tangential PEC traces vanish, and compute its continuous frequency.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 8 §8.8, printed pp. 225–227: PEC boundary implementation; the rectangular cavity field is checked directly."
+            }
+          ]
+        },
+        "statement": "Let $\\Omega=(0,a)\\times(0,b)\\times(0,d)$, with constant scalar $\\epsilon,\\mu>0$, zero conductivity, zero impressed current $J_{\\rm src}=0$, and zero volume charge, and choose positive integers $m,n$. Put $k_x=m\\pi/a$, $k_y=n\\pi/b$, $\\omega=(\\epsilon\\mu)^{-1/2}\\sqrt{k_x^2+k_y^2}$, and $\\Phi=E_0\\sin(k_xx)\\sin(k_yy)$. Define the real fields\n$$E=(0,0,\\Phi\\cos(\\omega t)),\\qquad B=\\frac{E_0}{\\omega}\\bigl(-k_y\\sin(k_xx)\\cos(k_yy),\\ k_x\\cos(k_xx)\\sin(k_yy),\\ 0\\bigr)\\sin(\\omega t).$$"
+      },
+      {
+        "id": "ex-maxwell-dielectric-jump-reflection",
+        "kind": "example",
+        "title": "Normal-incidence reflection at a planar dielectric interface",
+        "deps": [
+          "def-transient-maxwell-system-with-material-interfaces"
+        ],
+        "dependency_level": 3,
+        "strategy": "Match tangential electric and magnetic traces at a planar interface and solve the resulting two scalar equations for reflection and transmission amplitudes.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 5 §5.8, printed pp. 133–135: plane-wave reflection and transmission at a material interface."
+            }
+          ]
+        },
+        "statement": "Let the planar interface be $x=0$, with constant lossless isotropic media with $\\epsilon_i>0$ and $\\mu_i>0$ on $x<0$ ($i=1$) and $x>0$ ($i=2$). For a nonzero incident amplitude $E_0\\in\\mathbb C\\setminus\\{0\\}$ and angular frequency $\\omega>0$, define impedances $\\eta_i=\\sqrt{\\mu_i/\\epsilon_i}$ and wave numbers $k_i=\\omega\\sqrt{\\epsilon_i\\mu_i}$. Take the real parts of the phasors\n$$E_z^-=E_0\\left(e^{i(k_1x-\\omega t)}+R e^{i(-k_1x-\\omega t)}\\right),\\quad H_y^-=-\\frac{E_0}{\\eta_1}e^{i(k_1x-\\omega t)}+\\frac{R E_0}{\\eta_1}e^{i(-k_1x-\\omega t)},$$\n$$E_z^+=T E_0e^{i(k_2x-\\omega t)},\\qquad H_y^+=-\\frac{T E_0}{\\eta_2}e^{i(k_2x-\\omega t)}.$$\nThe electric field is directed along $z$, and the magnetic intensity is along $y$."
+      },
+      {
+        "id": "ex-maxwell-incompatible-current-gauss-drift",
+        "kind": "example",
+        "title": "A current violating discrete continuity creates Gauss-law drift",
+        "deps": [
+          "def-maxwell-discrete-cochain-and-yee-grid",
+          "alg-maxwell-yee-leapfrog-update",
+          "lem-maxwell-discrete-incidence-identities"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use an oriented periodic edge current with nonzero incidence divergence but a fixed charge row, then compute the first-step Gauss residual exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 3 §3.2, printed pp. 30–31, and Chapter 9 §9.3, printed pp. 246–249: Yee source rows and discrete divergence behavior."
+            }
+          ]
+        },
+        "statement": "On a periodic three-dimensional Yee grid choose one oriented $x$-edge $e_0$ from vertex $v_0$ to a distinct vertex $v_1$ (choose at least two cells in the periodic $x$ direction), set $j^{1/2}=J\\mathbf e_0$ with $J\\ne0$, and set every other current cochain to zero. Let $S=0$, initialize $-G^TM_ee^0=\\rho^0$, and keep the charge row fixed at $\\rho^1=\\rho^0$. This charge choice violates the discrete continuity equation because $G^Tj^{1/2}\\ne0$."
+      },
+      {
+        "id": "ex-maxwell-yee-periodic-plane-wave-dispersion",
+        "kind": "example",
+        "title": "Periodic Yee plane-wave dispersion and the cubic CFL limit",
+        "deps": [
+          "thm-maxwell-yee-cartesian-dispersion-and-cfl"
+        ],
+        "dependency_level": 8,
+        "strategy": "Substitute a single transverse Fourier mode into the exact three-dimensional symbol and evaluate the axis and corner frequency relations.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Schneider, Understanding the Finite-Difference Time-Domain Method",
+              "url": "https://eecs.wsu.edu/~schneidj/ufdtd/ufdtd.pdf",
+              "locator": "Chapter 7 §7.4, printed pp. 164–168: plane-wave Yee dispersion; the cubic three-dimensional corner calculation below is explicit."
+            }
+          ]
+        },
+        "statement": "Take a cubic periodic grid with spacing $h$ and even cell counts in all three directions. Let $c=(\\epsilon\\mu)^{-1/2}$. The allowed corner angle $\\theta=(\\pi,\\pi,\\pi)$ has symbol vector proportional to $(1,1,1)$; choose the transverse polarization $p=(1,-1,0)/\\sqrt2$. The axial mode $\\theta=(\\pi,0,0)$ can use $p=(0,1,0)$. The exact Yee dispersion law is\n$$\\sin^2\\!\\left(\\frac{\\omega\\Delta t}{2}\\right)=c^2\\Delta t^2\\sum_{j=x,y,z}\\frac{\\sin^2(\\theta_j/2)}{h^2}.$$"
+      }
+    ]
+  }
+]

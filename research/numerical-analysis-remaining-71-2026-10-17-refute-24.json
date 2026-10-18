@@ -1,0 +1,38 @@
+{
+  "batch": "24",
+  "opened": [
+    "alg-finite-budget-square-root-kalman-filter",
+    "ex-square-root-kalman-nearly-noiseless-solve-sensitivity",
+    "ex-square-root-kalman-perturbed-prearray-psd-factor",
+    "ex-square-root-kalman-singular-prior-positive-innovation",
+    "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+    "lem-square-root-kalman-gram-perturbation-bound",
+    "lem-square-root-kalman-householder-error-rational-envelope",
+    "lem-square-root-kalman-measurement-block-factor-identity",
+    "lem-square-root-kalman-prearray-qr-error-bound",
+    "lem-square-root-kalman-prediction-factor-identity",
+    "lem-square-root-kalman-triangular-solve-forward-bound",
+    "square-root-covariance-update-error-and-stability",
+    "square-root-covariance-update-error-and-stability-examples",
+    "thm-square-root-kalman-finite-horizon-perturbation-bound",
+    "thm-square-root-kalman-finite-procedure-status"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "lem-square-root-kalman-prearray-qr-error-bound",
+      "location": "Statement",
+      "defect": "missing-hypothesis",
+      "evidence": "The Statement applies the QR bound using κ_q but does not assume qu<1. Its Facts & Assumptions adds “successful scaled-Householder QR with qu<1,” and the opened supplier `thm-scaled-householder-qr-backward-stability` requires successful QR “with mu<1” (here m=q); the local step lemma also requires ru<1. The proof therefore uses a stronger hypothesis than the Statement supplies.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-square-root-kalman-finite-horizon-perturbation-bound",
+      "location": "Proof, step 1.2",
+      "defect": "unlicensed-inference",
+      "evidence": "The theorem assumes an operator-norm bound for the joint defect and step 2.1 derives only operator-norm bounds for its blocks. But the cited `lem-square-root-kalman-schur-perturbation-bound` requires Frobenius bounds: “||E_S||_F≤e_S<μ,” and likewise Frobenius bounds for E_B and E_D. For example, ||εI_p||_2=ε while ||εI_p||_F=√p ε, so these hypotheses do not follow with e_S,e_B,e_D≤ε. Repeating the Schur estimates directly in operator norm gives the needed bounds, so this is a nonfatal proof gap.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Checked all 15 scoped carriers once, the dependencies needed for the QR, product-error, Schur, conditioning, and status arguments, and the cited source passages. The reader’s sole finding is present in the published dot-product supplier outside this scope; unrelated transitive library dependencies were not audited."
+}

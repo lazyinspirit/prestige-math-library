@@ -1,0 +1,449 @@
+{
+  "group": "w",
+  "batches": ["68"],
+  "pages_read": [
+    "hp-finite-elements-and-spectral-element-methods",
+    "hp-finite-elements-and-spectral-element-methods-examples"
+  ],
+  "items_read": [
+    "def-hp-integrated-legendre-projector",
+    "def-hp-variable-degree-spaces-on-matching-meshes",
+    "lem-legendre-gauss-lobatto-nodes-are-distinct",
+    "lem-reference-jacobi-weighted-endpoint-kernel",
+    "thm-hp-simplex-weighted-spectral-projection",
+    "lem-hp-triangle-degree-uniform-strong-edge-lift",
+    "lem-hp-unweighted-legendre-derivative-tail",
+    "lem-hp-analytic-polynomial-approximation-on-a-triangle",
+    "lem-hp-weighted-analytic-corner-pointwise-control",
+    "def-legendre-gauss-lobatto-rule-on-affine-boxes",
+    "lem-hp-corner-uniform-degree-dof-count",
+    "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+    "thm-hp-reference-interval-integrated-legendre-projection",
+    "thm-hp-simplex-p-dependent-face-trace-inverse",
+    "thm-hp-triangle-unweighted-smooth-approximation",
+    "thm-hp-analytic-p-convergence-on-fixed-tensor-mesh",
+    "lem-hp-simplex-p-explicit-conforming-interpolant",
+    "thm-hp-gll-top-mode-and-puniform-energy-equivalence",
+    "thm-hp-corner-exponential-energy-convergence",
+    "thm-hp-galerkin-energy-error-on-fixed-mesh",
+    "thm-hp-galerkin-h-p-regularity-energy-bound",
+    "thm-hp-gll-strang-error-with-aliasing-defect",
+    "cex-hp-degree-independent-sipdg-penalty-loses-coercivity",
+    "ex-hp-gll-mass-top-mode-correction",
+    "ex-hp-reentrant-corner-h-versus-hp",
+    "ex-hp-analytic-p-refinement-on-a-fixed-box"
+  ],
+  "conventions": [
+    {
+      "convention": "Simplex spaces use total degree; affine tensor-box spaces use degree at most p in each reference coordinate. Conformity requires equality of polynomial traces, with shared-face degree equal to the minimum of the incident cell degrees. Curved cells are excluded.",
+      "fixed_by": "def-hp-variable-degree-spaces-on-matching-meshes",
+      "matters_for": [
+        "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+        "lem-hp-simplex-p-explicit-conforming-interpolant",
+        "thm-hp-analytic-p-convergence-on-fixed-tensor-mesh",
+        "thm-hp-galerkin-h-p-regularity-energy-bound"
+      ]
+    },
+    {
+      "convention": "The integrated projector has p ≥ 1, projects the derivative onto degree p−1, and anchors the primitive at the left endpoint.",
+      "fixed_by": "def-hp-integrated-legendre-projector",
+      "matters_for": [
+        "thm-hp-reference-interval-integrated-legendre-projection",
+        "thm-hp-analytic-p-convergence-on-fixed-tensor-mesh",
+        "lem-hp-simplex-p-explicit-conforming-interpolant"
+      ]
+    },
+    {
+      "convention": "The weighted simplex spectral scale is defined by orthogonal degree-layer coefficients; it is not identified with ordinary unweighted Sobolev spaces.",
+      "fixed_by": "thm-hp-simplex-weighted-spectral-projection",
+      "matters_for": [
+        "thm-hp-simplex-weighted-spectral-projection",
+        "thm-hp-triangle-unweighted-smooth-approximation"
+      ]
+    },
+    {
+      "convention": "The varying-degree triangle estimate uses m_K, the minimum of all incident edge degrees, including neighboring restrictions. Its factorial rate requires integer r ≥ 5 and m_K ≥ 2r−4; constants have no asserted useful growth bound in r.",
+      "fixed_by": "lem-hp-simplex-p-explicit-conforming-interpolant",
+      "matters_for": [
+        "thm-hp-galerkin-h-p-regularity-energy-bound"
+      ]
+    },
+    {
+      "convention": "GLL weights are integrals of cardinal polynomials at endpoints and roots of P_p′. Transport uses the absolute affine Jacobian. Sampled coefficients must have specified pointwise values, including boundary nodes.",
+      "fixed_by": "def-legendre-gauss-lobatto-rule-on-affine-boxes",
+      "matters_for": [
+        "thm-hp-gll-top-mode-and-puniform-energy-equivalence",
+        "thm-hp-gll-strang-error-with-aliasing-defect",
+        "ex-hp-gll-mass-top-mode-correction"
+      ]
+    },
+    {
+      "convention": "Corner weights satisfy 0 ≤ β_i < 1, and the pointwise decay exponent satisfies 0 < a < min_i(1−β_i). Derivative weights are the product of corner distances raised to β_i+j−2.",
+      "fixed_by": "lem-hp-weighted-analytic-corner-pointwise-control",
+      "matters_for": [
+        "thm-hp-corner-exponential-energy-convergence",
+        "ex-hp-reentrant-corner-h-versus-hp"
+      ]
+    },
+    {
+      "convention": "The corner theorem assumes O(k) matching shape-regular triangles, geometrically shrinking corner caps, and uniform total degree proportional to k. Zero boundary values are imposed only on the fixed polygon-edge set Γ_D.",
+      "fixed_by": "thm-hp-corner-exponential-energy-convergence",
+      "matters_for": [
+        "ex-hp-reentrant-corner-h-versus-hp"
+      ]
+    },
+    {
+      "convention": "Ordinary Sobolev triangle approximation and interpolation assume full Choice. The weighted corner and fixed-box analytic branches assume Countable Choice.",
+      "fixed_by": "thm-hp-triangle-unweighted-smooth-approximation",
+      "matters_for": [
+        "lem-hp-simplex-p-explicit-conforming-interpolant",
+        "thm-hp-galerkin-h-p-regularity-energy-bound"
+      ]
+    },
+    {
+      "convention": "The SIPDG witness uses jump v(0−)−v(0+), the arithmetic average derivative, natural exterior boundary conditions, and unit cell sizes.",
+      "fixed_by": "cex-hp-degree-independent-sipdg-penalty-loses-coercivity",
+      "matters_for": [
+        "cex-hp-degree-independent-sipdg-penalty-loses-coercivity"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-hp-triangle-degree-uniform-strong-edge-lift",
+      "statement": "For endpoint-zero polynomial q, Lq(x,y)=q(x)−xR(1−y), where R(t)=q(t)/t, preserves degree, has trace q on one edge and zero on the other two, and satisfies ||Lq||_{H1(T)} ≤ 4||q′||_{L2(0,1)} independently of degree.",
+      "used_by": [
+        "lem-hp-simplex-p-explicit-conforming-interpolant",
+        "thm-hp-corner-exponential-energy-convergence"
+      ]
+    },
+    {
+      "id": "lem-hp-weighted-analytic-corner-pointwise-control",
+      "statement": "Under the stated weighted factorial bounds and Countable Choice, u has a unique continuous representative, corner decay |u(x)−u(c_i)| ≤ Cr^a, derivative bounds CA^{|α|}|α|!r^{a−|α|}, uniform scaled analytic bounds on regular triangles, and cap affine-interpolation errors Ch^a in H1 seminorm and Ch^{a+1} in L2.",
+      "used_by": [
+        "thm-hp-corner-exponential-energy-convergence",
+        "ex-hp-reentrant-corner-h-versus-hp"
+      ]
+    },
+    {
+      "id": "lem-hp-simplex-p-explicit-conforming-interpolant",
+      "statement": "Under full Choice, continuous cellwise H2 data on a matching shape-regular triangle mesh admit a linear trace-matching interpolant preserving zero boundary edges, with the stated degree-independent local comparison estimates for every q ∈ P_{m_K}(K), and the stated factorial rate under r ≥ 5 and m_K ≥ 2r−4.",
+      "used_by": [
+        "thm-hp-galerkin-h-p-regularity-energy-bound"
+      ]
+    },
+    {
+      "id": "thm-hp-triangle-unweighted-smooth-approximation",
+      "statement": "Under Choice, for integer r ≥ 5 and p ≥ 2r−4, a bounded linear map A_{p,r}:H^r(T)→P_p(T) satisfies ||u−A_{p,r}u||_{H2(T)} ≤ C_r sqrt((n−r+3)!/(n+r−5)!) |u|_{Hr(T)}, where n=floor(p/2), with the stated affine scaled estimate.",
+      "used_by": [
+        "lem-hp-simplex-p-explicit-conforming-interpolant",
+        "thm-hp-galerkin-h-p-regularity-energy-bound"
+      ]
+    },
+    {
+      "id": "lem-hp-analytic-polynomial-approximation-on-a-triangle",
+      "statement": "Smooth functions on the closed reference triangle or interval satisfying ||D^αf||∞ ≤ MA^{|α|}|α|! admit polynomial W^{1,∞} approximation bounded by CMe^{−bp}. The interval branch also has an endpoint-preserving derivative-projection polynomial with exponential H1 error.",
+      "used_by": [
+        "thm-hp-corner-exponential-energy-convergence"
+      ]
+    },
+    {
+      "id": "thm-hp-gll-top-mode-and-puniform-energy-equivalence",
+      "statement": "For p ≥ 1, GLL quadrature is positive and exact through degree 2p−1; its squared-norm defect is 2(p+1)/(p(2p+1)) times the squared top Legendre coefficient. Tensor mass and gradient squared norms lie between their exact values and 3^d times those values, including affine boxes.",
+      "used_by": [
+        "thm-hp-gll-strang-error-with-aliasing-defect",
+        "ex-hp-gll-mass-top-mode-correction"
+      ]
+    },
+    {
+      "id": "thm-hp-analytic-p-convergence-on-fixed-tensor-mesh",
+      "statement": "Under Countable Choice and the uniform reference derivative bound M|ν|!R^{−|ν|}, R>1, tensorized integrated Legendre projection on a fixed matching affine tensor mesh has matching traces and H1 error at most C M q^p for R^{−1}<q<1.",
+      "used_by": [
+        "thm-hp-galerkin-energy-error-on-fixed-mesh",
+        "ex-hp-analytic-p-refinement-on-a-fixed-box"
+      ]
+    },
+    {
+      "id": "lem-hp-unweighted-legendre-derivative-tail",
+      "statement": "Under Choice, for integer k ≥ 1, N ≥ k−1 and f ∈ H^k(−1,1), ||f−Π_Nf||2 ≤ sqrt((N+1−k)!/(N+1+k)!) ||f^{(k)}||2.",
+      "used_by": [
+        "thm-hp-triangle-unweighted-smooth-approximation"
+      ]
+    },
+    {
+      "id": "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+      "statement": "Under Countable Choice, matching polynomial traces on a finite matching affine simplicial or face-to-face affine tensor-box mesh give an H1 function whose weak gradient is the cellwise polynomial gradient.",
+      "used_by": [
+        "thm-hp-analytic-p-convergence-on-fixed-tensor-mesh",
+        "lem-hp-simplex-p-explicit-conforming-interpolant",
+        "thm-hp-corner-exponential-energy-convergence",
+        "thm-hp-galerkin-energy-error-on-fixed-mesh",
+        "thm-hp-galerkin-h-p-regularity-energy-bound",
+        "thm-hp-gll-strang-error-with-aliasing-defect"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-legendre-polynomial-family-and-l2-pairing",
+      "used_for": "Rodrigues normalization and unweighted Legendre pairing.",
+      "opened": true
+    },
+    {
+      "id": "lem-legendre-weighted-derivative-orthogonality-and-norm",
+      "used_for": "Legendre norms, orthogonality, degrees and polynomial identities.",
+      "opened": true
+    },
+    {
+      "id": "def-matching-affine-simplicial-meshes",
+      "used_for": "Reference simplex, matching meshes and shape regularity.",
+      "opened": true
+    },
+    {
+      "id": "lem-shape-regular-affine-simplex-scaling",
+      "used_for": "Uniform cell, edge, altitude and Sobolev scaling factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-rolle",
+      "used_for": "Interlacing and simplicity of interior Legendre critical points.",
+      "opened": true
+    },
+    {
+      "id": "def-sobolev-space-wkp-and-its-norm",
+      "used_for": "Weak Sobolev classes and derivative norm conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Slice integrals in lifts, traces and tensor estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Primitive, projection, lifting and energy estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit inherited choice assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Full Choice in ordinary Sobolev approximation and interpolation.",
+      "opened": true
+    },
+    {
+      "id": "cor-weierstrass-approximation-on-a-closed-interval",
+      "used_for": "Polynomial density in L2 after smooth approximation.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+      "used_for": "L2 density used to identify Legendre coefficient completions.",
+      "opened": true
+    },
+    {
+      "id": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+      "used_for": "Sobolev endpoint values, integral formulas and repeated integration by parts.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Local Taylor approximation in the analytic polynomial construction.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-and-multi-index-notation-in-several-variables",
+      "used_for": "Multi-index derivatives and Taylor coefficients.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Endpoint increments of smooth sections.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-bump-between-concentric-euclidean-balls",
+      "used_for": "Local cutoffs and normalized mollifier construction.",
+      "opened": true
+    },
+    {
+      "id": "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+      "used_for": "Mollifier definition in the corner pointwise proof.",
+      "opened": true
+    },
+    {
+      "id": "def-l-one-approximate-identity-on-rn",
+      "used_for": "Approximate-identity hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "prop-mollifier-families-are-l-one-approximate-identities",
+      "used_for": "Approximate-identity property of the constructed mollifiers.",
+      "opened": true
+    },
+    {
+      "id": "thm-l-one-approximate-identities-converge-in-l-p",
+      "used_for": "L2 convergence of mollified weak derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+      "used_for": "Smooth local approximants and derivative identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Positive measure of open rectangles in uniqueness arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-matching-continuous-piecewise-polynomials-are-wkp",
+      "used_for": "Simplicial conformity after taking the maximum finite degree.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+      "used_for": "Cellwise integration by parts and cancellation on box faces.",
+      "opened": true
+    },
+    {
+      "id": "def-weak-derivative-of-a-locally-integrable-function",
+      "used_for": "Identification of assembled weak gradients.",
+      "opened": true
+    },
+    {
+      "id": "def-legendre-weighted-sobolev-scale",
+      "used_for": "Coefficient-scale definition for the interval projection theorem.",
+      "opened": true
+    },
+    {
+      "id": "thm-legendre-weighted-projection-error-rate",
+      "used_for": "Coefficient-tail estimate for the integrated interval projector.",
+      "opened": true
+    },
+    {
+      "id": "thm-riesz-fischer-completeness-of-l-p",
+      "used_for": "Identification of the coefficient completion with L2.",
+      "opened": true
+    },
+    {
+      "id": "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+      "used_for": "Absolute continuity of integrated-projector inputs and errors.",
+      "opened": true
+    },
+    {
+      "id": "thm-first-fundamental-theorem-of-calculus-for-l-one",
+      "used_for": "Almost-everywhere derivatives of L1 primitives.",
+      "opened": true
+    },
+    {
+      "id": "thm-reference-simplex-sobolev-extension",
+      "used_for": "Fixed-order bounded extension before tensor polynomial approximation.",
+      "opened": true
+    },
+    {
+      "id": "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+      "used_for": "Extension of tensor estimates from smooth whole-space approximants.",
+      "opened": true
+    },
+    {
+      "id": "thm-bramble-hilbert-on-reference-simplex",
+      "used_for": "Moment-polynomial subtraction and ordinary h-refinement bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-subspaces-are-closed",
+      "used_for": "Closed polynomial images and the reentrant-mode positive-distance argument.",
+      "opened": true
+    },
+    {
+      "id": "lem-taylor-lagrange-remainder-from-mean-value",
+      "used_for": "One-dimensional analytic derivative projection tails.",
+      "opened": true
+    },
+    {
+      "id": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+      "used_for": "Compatibility of smooth FTC integrals with Lebesgue projection pairings.",
+      "opened": true
+    },
+    {
+      "id": "thm-reference-simplex-trace-and-gauss-green",
+      "used_for": "Actual first-order value and gradient traces used to derive H2 edge control.",
+      "opened": true
+    },
+    {
+      "id": "thm-lagrange-point-evaluation-threshold-on-reference-simplex",
+      "used_for": "Continuous representatives and vertex evaluations for H2 triangle inputs.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-density-on-reference-simplex",
+      "used_for": "Tangential differentiation of traces by smooth approximation.",
+      "opened": true
+    },
+    {
+      "id": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+      "used_for": "Galerkin solvability and transfer with the actual M/α factor.",
+      "opened": true
+    },
+    {
+      "id": "thm-sobolev-spaces-are-banach-spaces",
+      "used_for": "Completeness of the energy-space norm branches.",
+      "opened": true
+    },
+    {
+      "id": "thm-poincare-inequality-for-w-one-p-zero",
+      "used_for": "Equivalence of gradient and H1 norms on H1_0.",
+      "opened": true
+    },
+    {
+      "id": "def-wkp-zero-as-a-sobolev-closure",
+      "used_for": "Closed-subspace definition of the zero-boundary Sobolev space.",
+      "opened": true
+    },
+    {
+      "id": "thm-zero-boundary-piecewise-polynomials-in-w10p",
+      "used_for": "Admissibility of the zero-trace polynomial interpolant in H1_0.",
+      "opened": true
+    },
+    {
+      "id": "def-variational-crime-error-framework",
+      "used_for": "Exact form and load defect definitions, including zero-space conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+      "used_for": "GLL error bound retaining the quadrature consistency defect.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-legendre-gauss-lobatto-nodes-are-distinct",
+      "concern": "The source title attributes “Short note on the mass matrix for Gauss-Lobatto grid points” to “Lloyd N. Trefethen”. The linked paper is authored by Saul A. Teukolsky, as confirmed by the [arXiv author record](https://arxiv.org/abs/1412.2276).",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-legendre-gauss-lobatto-rule-on-affine-boxes",
+      "concern": "The source title attributes “Short note on the mass matrix for Gauss-Lobatto grid points” to “Lloyd N. Trefethen”. The linked paper is authored by Saul A. Teukolsky, as confirmed by the [arXiv author record](https://arxiv.org/abs/1412.2276).",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-hp-gll-mass-top-mode-correction",
+      "concern": "The source title attributes “Short note on the mass matrix for Gauss-Lobatto grid points” to “Lloyd N. Trefethen”. The linked paper is authored by Saul A. Teukolsky, as confirmed by the [arXiv author record](https://arxiv.org/abs/1412.2276).",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "hp-finite-elements-and-spectral-element-methods",
+      "to": "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "faithful": true,
+      "note": "Checked both page bodies. The consumer explicitly limits its approximation and quadrature claims to affine cells and describes the curved prerequisite as a separate framework with its own mapping and transfer hypotheses. The supplier page asserts conditional curved-map, geometry-defect and conservative-transfer results; the consumer imports none of those assertions into its local theorems. No reverse claim or citation mismatch was found."
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "14",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "lem-adjacent-window-divided-difference-recurrence",
+      "model": "gpt-6-luna",
+      "context_sha256": "d6ffa2780a5ce13c0f6e7d76f5e3c5d24b2a6189710748f1c07535df89456f72",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Statement never assigns real values to f, contrary to def-distinct-node-divided-difference, and defines G_i only for i<n-d although the final recurrence uses G_{n-d}. Added real nodes, a distinct real query, arbitrary real node/query data, and definitions for all 0<=i<=n-d; the identity remains for i<n-d. Symmetry puts x_i and x_{i+d+1} at the recursive endpoints, giving (G_{i+1}-G_i)/(x_{i+d+1}-x_i); rearrangement proves the sign and coefficient, including d=0,n=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-barycentric-rational-quotient-well-defined",
+      "model": "gpt-6-luna",
+      "context_sha256": "c0357a6a9c72be6e1866644ef30d41ce2c0fa492698b9428424fedc783e5d604",
+      "outcome": "false_positive",
+      "reason": "The supplier Statement asserts nonidentity of Q, but its complete Proof 1.1 explicitly computes Q(z_j)=w_j product_(ell!=j)(z_j-z_ell), and Proof 2.1 proves this is nonzero for each arbitrary j. Thus F2 cites an actually established supplier consequence, not an unsupported strengthening. Moreover this item Proof 2.1 itself evaluates both finite sums; nonzero weights and distinct nodes make the displayed Q value nonzero. Interpolation and the cancellation claim follow, including k=1 and a zero numerator.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-floater-hormann-window-polynomial-interpolates",
+      "model": "gpt-6-luna",
+      "context_sha256": "92a681b17a497987c276e4625f25e0c32e5ab600da89892af058f20e71157a10",
+      "outcome": "false_positive",
+      "reason": "The Statement concerns p_i from def-floater-hormann-window-polynomial, which explicitly imports the nodes, data and degree parameter of def-floater-hormann-interpolant. That Definition assumes x_0<...<x_n real and real data. Thus each window is already strictly increasing, and Given also says as in the Floater-Hormann definition. Reindexing its d+1 nodes by 0,...,d meets the cardinal theorem exactly. The local products give the nodal values, uniqueness gives partition of unity, and d=0 uses the empty product 1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-adjacent-window-divided-difference-recurrence",
+      "disposition": "repaired",
+      "post_sha256": "b1f7edd8af465826844c5e94ebdcaf6c67971ebaab091fbd2ac7721fb51d7b42",
+      "review_context_sha256": "ea5b278338379764c43ff152fe6f43b20531a3eb8c7f86fe110db6af31d19d53",
+      "reason": "Reviewed the complete recurrence proof and its recursive and symmetry suppliers. Specified all real data and the last window; distinctness validates every recursive denominator. Proof and contract derivations remain unchanged, with no choice or smoothness assumption. This is author-side repair verification, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-barycentric-rational-quotient-well-defined",
+      "disposition": "unaffected",
+      "post_sha256": "9e415a59ead8a2e1d0018c05c3e9b00907da389830a8c28ae69a7a6e5bbcc01f",
+      "review_context_sha256": "d0af597e730a3f124a389b8d02db69f76751ed7174d39bfabd72593a0fe4f993",
+      "reason": "The supplier Statement asserts nonidentity of Q, but its complete Proof 1.1 explicitly computes Q(z_j)=w_j product_(ell!=j)(z_j-z_ell), and Proof 2.1 proves this is nonzero for each arbitrary j. Thus F2 cites an actually established supplier consequence, not an unsupported strengthening. Moreover this item Proof 2.1 itself evaluates both finite sums; nonzero weights and distinct nodes make the displayed Q value nonzero. Interpolation and the cancellation claim follow, including k=1 and a zero numerator.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-floater-hormann-window-polynomial-interpolates",
+      "disposition": "unaffected",
+      "post_sha256": "99e05fa3d4b69b43284953373384acafebb6599eed48b9313bac932e8ecd8334",
+      "review_context_sha256": "f4a0ed1cda2dec7bf5b818fdf8c4abd3504019ed1fd80346fcd62c62daa7fb93",
+      "reason": "The Statement concerns p_i from def-floater-hormann-window-polynomial, which explicitly imports the nodes, data and degree parameter of def-floater-hormann-interpolant. That Definition assumes x_0<...<x_n real and real data. Thus each window is already strictly increasing, and Given also says as in the Floater-Hormann definition. Reindexing its d+1 nodes by 0,...,d meets the cardinal theorem exactly. The local products give the nodal values, uniqueness gives partition of unity, and d=0 uses the empty product 1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-floater-hormann-error-rate-c2"
+  ],
+  "repair_notes": [
+    {
+      "id": "lem-adjacent-window-divided-difference-recurrence",
+      "status": "repair_complete",
+      "claim": "For every real assignment on ordered nodes plus a distinct real query, G_i-G_{i+1}=-(x_{i+d+1}-x_i) f[x_i,...,x_{i+d+1},x].",
+      "dependencies": [
+        "def-distinct-node-divided-difference",
+        "lem-divided-difference-lagrange-formula-and-symmetry",
+        "def-natural-numbers"
+      ],
+      "evidence_paths": [
+        "items/def-distinct-node-divided-difference.md#Definition",
+        "items/lem-divided-difference-lagrange-formula-and-symmetry.md#Statement",
+        "items/lem-adjacent-window-divided-difference-recurrence.md#Proof"
+      ],
+      "source_reading": "Familiar elementary divided-difference algebra; local suppliers read, no external source consultation claimed.",
+      "next_action": "Controller collects report and routes the listed frontier consumer through its ordinary owner workflow."
+    },
+    {
+      "id": "prop-barycentric-rational-quotient-well-defined",
+      "status": "review_complete_unchanged",
+      "evidence_paths": [
+        "items/lem-barycentric-denominator-polynomial-nonzero.md#Proof steps 1.1 and 2.1",
+        "items/prop-barycentric-rational-quotient-well-defined.md#Proof step 2.1",
+        "research/numerical-analysis-remaining-71-2026-10-17-batch-14.proof-contracts.json contracts[prop-barycentric-rational-quotient-well-defined]"
+      ],
+      "source_reading": "Familiar finite polynomial algebra; local suppliers read. The source URLs already in item metadata were not externally consulted.",
+      "next_action": "No item or contract repair required."
+    },
+    {
+      "id": "lem-floater-hormann-window-polynomial-interpolates",
+      "status": "review_complete_unchanged",
+      "evidence_paths": [
+        "items/def-floater-hormann-window-polynomial.md#Definition",
+        "items/def-floater-hormann-interpolant.md#Definition",
+        "items/def-cardinal-polynomial-interpolation.md#Definition",
+        "items/thm-cardinal-polynomial-interpolant-exists-uniquely.md#Statement and Proof",
+        "research/numerical-analysis-remaining-71-2026-10-17-batch-14.proof-contracts.json contracts[lem-floater-hormann-window-polynomial-interpolates]"
+      ],
+      "source_reading": "Familiar elementary Lagrange interpolation; the complete local theorem proof and the defining interfaces were read. No external source reading claimed.",
+      "next_action": "No repair required; no unresolved mathematical obligations in this unit."
+    },
+    {
+      "status": "scope_complete",
+      "published_ledger": "No published supplier or consumer defect was found, and no published-ledger update is proposed. The only changed Statement has one direct item consumer, the draft frontier theorem recorded above. The owning page has no affected mathematical prose.",
+      "operational_note": "Direct node execution of the .mts precheck helper failed with ERR_UNKNOWN_FILE_EXTENSION; the repository tsx wrapper then ran the scoped check successfully. A rendercheck --help probe was interrupted because it selected the corpus; no result or coverage is claimed for that probe.",
+      "unresolved_obligations": [],
+      "certification": "No judge, stamp, central certificate, round transition or independent acceptance was written."
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "lem-adjacent-window-divided-difference-recurrence",
+      "id": "thm-floater-hormann-error-rate-c2",
+      "path": "items/thm-floater-hormann-error-rate-c2.md",
+      "affected_use": "Facts F2 and Proof 2.1 pair G_0-G_1, G_2-G_3, etc., using the adjacent-window recurrence; Proof 1.1 defines G_i for 0<=i<=m=n-d.",
+      "invalidated_claim": null,
+      "disposition": "unchanged_sound",
+      "reason": "Its real C^(d+2)([x_0,x_n]) function supplies every real node/query value, the query lies in an open gap and is distinct, and all paired indices satisfy 0<=i<n-d. The last window is now explicitly defined.",
+      "minimality": "Only the supplier statement needed repair; no consumer clause changes are needed.",
+      "route": "frontier-owner",
+      "uncertain": false
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/barycentric-rational-and-aaa-approximation.md",
+      "disposition": "unchanged_sound",
+      "reason": "The page lists the recurrence but makes no additional hypothesis-free recurrence claim; real-data quantification preserves its announced Floater-Hormann error results."
+    }
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-adjacent-window-divided-difference-recurrence",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "reason": "The original Statement never assigns real values to f, contrary to def-distinct-node-divided-difference, and defines G_i only for i<n-d although the final recurrence uses G_{n-d}. Added real nodes, a distinct real query, arbitrary real node/query data, and definitions for all 0<=i<=n-d; the identity remains for i<n-d. Symmetry puts x_i and x_{i+d+1} at the recursive endpoints, giving (G_{i+1}-G_i)/(x_{i+d+1}-x_i); rearrangement proves the sign and coefficient, including d=0,n=1.",
+      "correction": "Assign f real values on all real nodes plus the distinct real query, define G_0 through G_{n-d}, and state the identity for 0<=i<n-d. Given now mirrors these hypotheses.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "prop-barycentric-rational-quotient-well-defined",
+      "model": "gpt-6-luna",
+      "context_sha256": "c0357a6a9c72be6e1866644ef30d41ce2c0fa492698b9428424fedc783e5d604",
+      "reason": "The supplier Statement asserts nonidentity of Q, but its complete Proof 1.1 explicitly computes Q(z_j)=w_j product_(ell!=j)(z_j-z_ell), and Proof 2.1 proves this is nonzero for each arbitrary j. Thus F2 cites an actually established supplier consequence, not an unsupported strengthening. Moreover this item Proof 2.1 itself evaluates both finite sums; nonzero weights and distinct nodes make the displayed Q value nonzero. Interpolation and the cancellation claim follow, including k=1 and a zero numerator.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "lem-floater-hormann-window-polynomial-interpolates",
+      "model": "gpt-6-luna",
+      "context_sha256": "92a681b17a497987c276e4625f25e0c32e5ab600da89892af058f20e71157a10",
+      "reason": "The Statement concerns p_i from def-floater-hormann-window-polynomial, which explicitly imports the nodes, data and degree parameter of def-floater-hormann-interpolant. That Definition assumes x_0<...<x_n real and real data. Thus each window is already strictly increasing, and Given also says as in the Floater-Hormann definition. Reindexing its d+1 nodes by 0,...,d meets the cardinal theorem exactly. The local products give the nodal values, uniqueness gives partition of unity, and d=0 uses the empty product 1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/lem-adjacent-window-divided-difference-recurrence.md items/prop-barycentric-rational-quotient-well-defined.md items/lem-floater-hormann-window-polynomial-interpolates.md",
+      "exit_code": 0,
+      "result": "3 proofs checked; 0 failing."
+    },
+    {
+      "command": "node tools/rendercheck.mjs --json items/lem-adjacent-window-divided-difference-recurrence.md items/prop-barycentric-rational-quotient-well-defined.md items/lem-floater-hormann-window-polynomial-interpolates.md",
+      "exit_code": 0,
+      "result": "3 items checked; no errors or warnings."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-14.proof-contracts.json --strict --items lem-adjacent-window-divided-difference-recurrence,prop-barycentric-rational-quotient-well-defined,lem-floater-hormann-window-polynomial-interpolates --json",
+      "exit_code": 0,
+      "result": "All 3 assigned contracts pass; no errors or warnings. No contract edits were needed because all proof steps and dependency quotations are unchanged."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-adjacent-window-divided-difference-recurrence.md",
+      "exit_code": 0,
+      "result": "1 changed item; 2 steps; 0 defects. Run once after the final item edit."
+    }
+  ]
+}

@@ -19,8 +19,8 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
   precheck: pass
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-published-flow-local-repair/lem-transport-characteristics-depend-c-one-on-initial-position.json
 sources:
   scraped: []
   references:
@@ -72,4 +72,6 @@ $$Y'(t,\xi)=D_xa(X(t,\xi),t)\,Y(t,\xi),\qquad Y(t_0,\xi)=I_n.$$
 
 3.1 Apply [L6] to the integral equation in step 2.1. If $t\ge t_0$, then $\|Z_h(t)\|_2\le 1+M\int_{t_0}^t \|Z_h(s)\|_2\,ds$; if $t\le t_0$, rewrite step 2.1 as $$Z_h(t)=e_j-\int_t^{t_0} A_h(s,\xi)\,Z_h(s)\,ds,$$ so $\|Z_h(t)\|_2\le 1+M\int_t^{t_0}\|Z_h(s)\|_2\,ds$. Gronwall therefore gives $\|Z_h(t)\|_2\le e^{M|t-t_0|}$ for every $t\in I$, uniformly in $h$. The continuity from step 1.1 together with the uniform continuity of $D_xa$ makes $A_h(\cdot,\xi)\to D_xa(X(\cdot;\xi),\cdot)$ uniformly as $h\to0$; comparing the equations for $Z_h$ and $Z_k$ on the forward or backward interval between $t_0$ and $t$ and applying [L5] again shows that $(Z_h)$ is Cauchy in $C(I;\mathbb R^n)$. [L3, L5, L6, step 2.1]
 
-4.1 Let $Y_j(\cdot,\xi)$ be the limit from step 3.1; passing to the limit in step 2.1 gives $Y_j(t,\xi)=e_j+\int_{t_0}^t D_xa(X(s;\xi),s)\,Y_j(s,\xi)\,ds$, which [L4] rewrites as $Y_j'(t,\xi)=D_xa(X(t;\xi),t)Y_j(t,\xi)$ with $Y_j(t_0,\xi)=e_j$, and doing this for every coordinate vector while invoking [L7] identifies the matrix $Y=(Y_1\,\cdots\,Y_n)$ with $D_\xi X$; therefore $\xi\mapsto X(t;\xi)$ is $C^1$ and its Jacobian solves the displayed variational equation. [L4, L7, step 3.1] ∎
+4.1 Let $Y_j(\cdot,\xi)$ be the limit from step 3.1; passing to the limit in step 2.1 gives $Y_j(t,\xi)=e_j+\int_{t_0}^t D_xa(X(s;\xi),s)\,Y_j(s,\xi)\,ds$, which [L4] rewrites as $Y_j'(t,\xi)=D_xa(X(t;\xi),t)Y_j(t,\xi)$ with $Y_j(t_0,\xi)=e_j$, and doing this for every coordinate vector while invoking [L7] identifies the matrix $Y=(Y_1\,\cdots\,Y_n)$ with $D_\xi X$; its columns solve the displayed variational equation. [L4, L7, step 3.1]
+
+5.1 Fix $\xi$ and restrict nearby initial points $\eta$ to a closed ball contained in $U_0$. Put $A(t,\eta)=D_xa(X(t;\eta),t)$ and $H=\max_{t\in I}|t-t_0|$. Continuity from step 1.1 and the $C^1$ hypothesis make $A$ jointly continuous on this compact set, so it has a bound $M$ and $\delta(\eta):=\sup_{t\in I}\|A(t,\eta)-A(t,\xi)\|\to0$ as $\eta\to\xi$. The column equations in step 4.1 and [L5]–[L6] give $\|Y_j(t,\eta)\|_2\le e^{MH}$. Subtract the column equations in step 4.1, splitting $A(t,\eta)Y_j(t,\eta)-A(t,\xi)Y_j(t,\xi)$ as $A(t,\eta)(Y_j(t,\eta)-Y_j(t,\xi))+(A(t,\eta)-A(t,\xi))Y_j(t,\xi)$. Reorient backward integrals over $[t,t_0]$ before applying [L6]; in either time direction [L5] yields $$\sup_{t\in I}\|Y_j(t,\eta)-Y_j(t,\xi)\|_2\le H e^{2MH}\delta(\eta)\longrightarrow0.$$ Thus every derivative column is continuous in $\xi$, uniformly on $I$; its time continuity from step 4.1 also gives joint continuity. Since $\xi$ was arbitrary, the first partial derivatives of $X(t;\cdot)$ are continuous on $U_0$, proving the asserted $C^1$ dependence and completing the variational-equation claim. [L3, L5, L6, L7, step 1.1, step 3.1, step 4.1] ∎

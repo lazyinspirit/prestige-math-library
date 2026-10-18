@@ -1,0 +1,1742 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "32",
+  "scope": [
+    "def-na-high-resolution-reconstruction",
+    "thm-na-linear-monotone-first-order-barrier",
+    "lem-na-eno2-reconstruction-third-order",
+    "lem-na-weno5-optimal-linear-reconstruction",
+    "thm-na-musc-minmod-second-order-on-smooth-data",
+    "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl",
+    "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+    "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+    "ex-na-smooth-linear-advection-reconstruction",
+    "ex-na-minmod-extremum-clipping",
+    "ex-na-burgers-godunov-musc-shock",
+    "ex-na-weno-js-critical-point-epsilon-scaling",
+    "cex-na-unlimited-centered-reconstruction-overshoots"
+  ],
+  "contracts": {
+    "def-na-high-resolution-reconstruction": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods",
+        "examined": [],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: constant cell averages produce zero minmod slopes and positive WENO denominators remain defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item either excludes the degenerate regime or makes no separate degenerate-case claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: left and right traces are assigned to the two faces of each half-open cell."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-na-linear-monotone-first-order-barrier": {
+      "kind": "theorem",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods",
+        "examined": [],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Order preservation applied to zero and a unit impulse forces every coefficient c_l to be nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Exact reproduction of 1, x and x^2 gives the zeroth, first and second coefficient moments 1, -nu and nu^2.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The moments make the weighted sum of (l+nu)^2 equal zero; nonnegative coefficients then force support at a noninteger index, a contradiction.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2: the constant polynomial gives the normalization sum c_l=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: integer Courant numbers are excluded because a pure grid shift is a degenerate exact case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and steps 1.2–2.1 use a fixed noninteger Courant number; the integer-shift exception is recorded in Remarks."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "integer-cfl-shift-boundary",
+          "claim": "The noninteger restriction is necessary.",
+          "method": "exact coefficient moments",
+          "input": {
+            "courant_number": 1,
+            "coefficients": {
+              "offset_1": 1
+            }
+          },
+          "calculation": "The shift U_j^{n+1}=U_{j+1}^n has c_1=1 and all other coefficients zero; it is monotone and exactly translates at nu=-1 under the stated offset convention.",
+          "expected": {
+            "monotone": true,
+            "polynomial_reproduction": "all degrees"
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-na-eno2-reconstruction-third-order": {
+      "kind": "lemma",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods",
+        "examined": [
+          "def-na-high-resolution-reconstruction",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "thm-lagrange-interpolation-remainder"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "For separate **nodal** data $V_j=u(y_j)$ at $y_j=jh$, define the second divided difference by $[y_a,y_b,y_c]V=(((V_c-V_b)/(y_c-y_b))-((V_b-V_a)/(y_b-y_a)))/(y_c-y_a)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lagrange-interpolation-remainder",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $a<b$, let $x_0<\\cdots<x_n$ lie in $[a,b]$, and let $f\\in C^{n+1}([a,b],\\mathbb R)$ with the convention of [[def-higher-derivatives-and-smoothness]]. Put $p=I_n f$ and $\\omega_n(X)=\\prod_{j=0}^n(X-x_j)$ as in [[def-cardinal-polynomial-interpolation]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed Newton quadratic interpolates the three nodal data, and the uniqueness theorem identifies it with their degree-two interpolant.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Lagrange remainder at either candidate triple has product magnitude 3h^3/8 and hence error at most Mh^3/16.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The selector returns one of the two candidates, both of which satisfy the same error bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2: if the nodal data are zero, both interpolants and the error bound are zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition and Statement: h>0 gives three distinct nodes and nonzero divided-difference denominators."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2: the face lies strictly inside the two-node span used by either candidate triple."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-na-weno5-optimal-linear-reconstruction": {
+      "kind": "lemma",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods",
+        "examined": [
+          "def-na-high-resolution-reconstruction",
+          "cor-taylor-remainder-bound"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "For cell averages $U_{i-2},\\ldots,U_{i+2}$, define the left-biased WENO5 candidate face functionals",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-remainder-bound",
+          "source_section": "Statement",
+          "quote": "If $|f^{(n+1)}(t)|\\le M$ throughout that interval, then",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Combining the three candidate coefficient vectors gives the five-cell coefficient vector (2,-13,47,27,-3)/60.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Direct moment products show each three-cell candidate is exact on 1,z,z^2; Taylor remainder bounds then give the stated O(h^3) candidate bounds.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The weighted five-cell averages of the scaled monomials 1,z,z^2,z^3,z^4 are 1,0,0,0,0, so the optimal functional reproduces quartics at the target face.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A degree-four Taylor polynomial is reproduced exactly and its cell-average remainder is bounded uniformly over the stencil, giving the explicit fifth-order bound.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: a zero or constant profile is reproduced exactly by the constant moment."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: h>0 and five consecutive cells exclude a collapsed stencil."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1: the target face is x_{i+1/2}; the stencil cells include it as their common boundary and the remainder bound uses the closed-cell endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-na-musc-minmod-second-order-on-smooth-data": {
+      "kind": "theorem",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods",
+        "examined": [
+          "def-na-high-resolution-reconstruction",
+          "cor-taylor-remainder-bound"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "The **MUSCL/minmod reconstruction** assigns the cell slope $s_i=h^{-1}\\operatorname{minmod}(U_i-U_{i-1},U_{i+1}-U_i)$ and the two face states $U_{i-1/2}^{+,M}=U_i-hs_i/2$ and $U_{i+1/2}^{-,M}=U_i+hs_i/2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-remainder-bound",
+          "source_section": "Statement",
+          "quote": "If $|f^{(n+1)}(t)|\\le M$ throughout that interval, then",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Taylor expansion and symmetry give a second-order cell-average error and first-order neighbor-average increments with O(h^2) remainders.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A derivative bounded away from zero forces both increments to have the same sign; minmod therefore returns one increment equal to h u prime plus O(h^2).",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Adding half the limited increment to the central average matches the first-order Taylor expansion of either exact face value with O(h^2) error.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero profile is excluded by |u prime|>=c>0 in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the nonvanishing derivative condition excludes a critical point where minmod clips the slope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: both left and right faces are checked explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one": {
+      "kind": "counterexample",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods",
+        "examined": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "For scalar linear advection $u_t+a u_x=0$, a **direct reconstructed-upwind forward-Euler update** uses $\\nu=a\\Delta t/h$, the flux $F_{i+1/2}=aU_{i+1/2}^{-,M}$ when $a\\ge0$ and $F_{i+1/2}=aU_{i+1/2}^{+,M}$ when $a<0$, and $U_i^{n+1}=U_i^n-(\\Delta t/h)(F_{i+1/2}-F_{i-1/2})$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite tent has initial variation 2 and minmod slope increments 1/2, 0 and -1/2 at the only nonconstant cells.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The face fluxes yield updated states -1/4, 3/4, 5/4 and 1/4 in the affected cells.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The updated variation is 3, exceeding 2 at an allowed CFL number, so the asserted TVD property fails.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the witness is nonzero; the zero sequence itself would remain zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: the witness uses nonzero finite data and a positive grid width."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1: the finite support is closed by zero exterior cells and the fluxes at its endpoints are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "minmod-cfl-one-tent",
+          "claim": "Direct minmod reconstructed-upwind update increases total variation at CFL one.",
+          "method": "exact finite sequence update",
+          "input": {
+            "a": 1,
+            "h": 1,
+            "delta_t": 1,
+            "states": {
+              "0": 1,
+              "1": "1/2",
+              "2": 0,
+              "3": 0,
+              "-3": 0,
+              "-2": 0,
+              "-1": "1/2"
+            }
+          },
+          "calculation": "Slopes are sigma_-1=1/2, sigma_0=0, sigma_1=-1/2. Fluxes are F_-3/2=0, F_-1/2=3/4, F_1/2=1, F_3/2=1/4, F_5/2=0. The affected new states are -1/4, 3/4, 5/4, 1/4.",
+          "expected": {
+            "initial_total_variation": 2,
+            "updated_total_variation": 3,
+            "refuted": true
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction": {
+      "kind": "theorem",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods",
+        "examined": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "Fix a positive parameter $\\epsilon_0$ with the same units as each $\\beta_k$, independently of $h$, and ideal weights $(d_0,d_1,d_2)=(1/10,6/10,3/10)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-weno5-optimal-linear-reconstruction",
+          "source_section": "Statement",
+          "quote": "Each candidate reproduces every polynomial of degree at most two exactly at $x_{i+1/2}$. The ideal combination $p_{opt}=p_0/10+3p_1/5+3p_2/10$ reproduces every polynomial of degree at most four",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Smoothness differences give indicators O(h^2) and tau_5 O(h^2); constant data make all indicators zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fixed epsilon yields WENO-JS weights d+O(h^2) and WENO-Z weights d+O(h^4) after normalization.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The sum-zero weight perturbation multiplies O(h^3) candidate errors, so both reconstructions retain the O(h^5) optimal linear error.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: constant data have beta_k=tau_5=0 and the normalized weights equal the ideal weights."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: a critical point only reduces the indicator orders and remains covered by beta_k=O(h^2) under fixed positive epsilon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement is local to an interior five-cell stencil; boundary closures are not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-na-smooth-linear-advection-reconstruction": {
+      "kind": "example",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods-examples",
+        "examined": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction",
+          "thm-na-musc-minmod-second-order-on-smooth-data",
+          "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "A **cell average** of a locally integrable scalar function $u$ is $U_i=h^{-1}\\int_{I_i}u(x)\\,dx$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-weno5-optimal-linear-reconstruction",
+          "source_section": "Statement",
+          "quote": "Each candidate reproduces every polynomial of degree at most two exactly at $x_{i+1/2}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-musc-minmod-second-order-on-smooth-data",
+          "source_section": "Statement",
+          "quote": "the MUSCL/minmod face states of [[def-na-high-resolution-reconstruction]] satisfy",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+          "source_section": "Statement",
+          "quote": "For the cell-average WENO-JS and WENO-Z states in [[def-na-high-resolution-reconstruction]], there is a constant $C$ independent of sufficiently small $h$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Affine cell averages equal center values; consecutive increments are h and minmod gives slope one, so the face trace is exact.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each candidate is exact on affine data and normalized weights preserve their common value; the cited accuracy theorems apply to this smooth profile.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact upwind flux difference is a h, so the conservative update advances affine cell averages by -a delta_t exactly.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and step 1.1: a=0 gives a stationary affine profile and zero flux difference."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the profile is affine and has no vanishing derivative or stencil degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: both left and right face traces are checked, including the reflected a<0 case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "affine-face-and-update",
+          "claim": "MUSCL and all normalized WENO candidates reproduce u=x-at and the FV update exactly.",
+          "method": "exact affine moments",
+          "input": {
+            "u": "x-a*t",
+            "cell_width": "h",
+            "courant_number": "nu"
+          },
+          "calculation": "Cell averages equal x_i-a*t; every slope is 1; p0=p1=p2=x_{i+1/2}-a*t; the upwind flux difference is a*h.",
+          "expected": {
+            "face_error": 0,
+            "updated_average": "x_i-a*(t+delta_t)"
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-na-minmod-extremum-clipping": {
+      "kind": "example",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods-examples",
+        "examined": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "The **MUSCL/minmod reconstruction** assigns the cell slope $s_i=h^{-1}\\operatorname{minmod}(U_i-U_{i-1},U_{i+1}-U_i)$ and the two face states $U_{i-1/2}^{+,M}=U_i-hs_i/2$ and $U_{i+1/2}^{-,M}=U_i+hs_i/2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Integrating the quadratic profile over the central and neighboring cells gives averages 1-h^2/12 and 1-13h^2/12.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The opposite-sign increments h^2 and -h^2 make the minmod slope zero and both face states equal the central average.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The exact face value is 1-h^2/4, so the clipped state has error h^2/6 and stays within the local cell-average range.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The central average is nonzero for sufficiently small h; the example is a nonconstant smooth maximum."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The maximum is the critical point where the limiter activates; the resulting O(h^2) error is computed in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 checks both faces by symmetry."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "quadratic-maximum-average",
+          "claim": "Minmod clips the slope at the central cell of 1-(x-h/2)^2.",
+          "method": "exact polynomial cell integrals",
+          "input": {
+            "cell_width": "h",
+            "profile": "1-(x-h/2)^2"
+          },
+          "calculation": "U_0=1-h^2/12, U_-1=U_1=1-13h^2/12, so increments are h^2 and -h^2 and each reconstructed face equals U_0.",
+          "expected": {
+            "slope": 0,
+            "face_error": "h^2/6",
+            "overshoot": false
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-na-burgers-godunov-musc-shock": {
+      "kind": "example",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods-examples",
+        "examined": [
+          "def-na-high-resolution-reconstruction",
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme",
+          "def-kruzhkov-entropy-solution",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "thm-monotone-finite-volume-entropy-convergence",
+          "def-countable-choice"
+        ],
+        "unresolved": [
+          "thm-monotone-finite-volume-entropy-convergence"
+        ]
+      },
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-bounded-bv-data-on-line",
+          "source_section": "Definition",
+          "quote": "The **bounded BV class on the line** $\\mathrm{BV}_b(\\mathbb R)$ consists of those classes for which $\\operatorname{TV}_{\\mathrm{tr}}(u)<\\infty$; we write $\\operatorname{TV}(u):=\\operatorname{TV}_{\\mathrm{tr}}(u)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-monotone-finite-volume-entropy-scheme",
+          "source_section": "Definition",
+          "quote": "The **full invariant-interval CFL bound** is",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-finite-volume-entropy-convergence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Let $T>0$, $f\\in C^1(\\mathbb R)$, and $u_0\\in\\mathrm{BV}_b(\\mathbb R)$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kruzhkov-entropy-solution",
+          "source_section": "Definition",
+          "quote": "For $k\\in\\mathbb R$ define the **Kruzhkov entropy pair**",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-rankine-hugoniot-and-lax-shocks",
+          "source_section": "Definition",
+          "quote": "For a system as in [[def-hyperbolic-system-and-characteristic-families]], a discontinuity with constant states $u_L,u_R\\in G$ and speed $s\\in\\mathbb R$ is a **Rankine–Hugoniot jump** if",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "The **MUSCL/minmod reconstruction** assigns the cell slope $s_i=h^{-1}\\operatorname{minmod}(U_i-U_{i-1},U_{i+1}-U_i)$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The step datum is BV with variation one and not globally integrable, so only the AC_omega branch of the convergence theorem is relevant.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The positive-state Godunov flux reduces to f(a), is coordinatewise monotone, and has bounds L1=1 and L2=0.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The mesh ratio is one half and satisfies both the lower-ratio and invariant-interval CFL hypotheses, so the convergence theorem applies.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The explicit shock satisfies Rankine-Hugoniot, all Kruzhkov jump inequalities, and the strong local initial trace; uniqueness identifies it as the theorem’s limit.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The initial step has zero minmod slopes, the first right cell becomes one quarter, and this matches the exact shock average after it advances h/4.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the chosen Heaviside data are nonzero and select the bounded-BV, non-L1 branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses positive mesh widths, a nonzero shock jump and the nondegenerate interval [0,1]."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: the entropy jump check includes k=0 and k=1, where the defect is zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: AC_omega is carried through the convergence theorem for the nonempty mesh sequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "1.1",
+            "2.1"
+          ],
+          "reason": "The batch-29 monotone entropy-convergence theorem requires AC_omega. The chosen Heaviside datum is not globally L1, so its DC-only L1 branch is not used."
+        }
+      ],
+      "axiom_note": "Assume AC_omega through the cited monotone convergence theorem; DC is not assumed or used because u0 is not in L1(R).",
+      "unresolved_suppliers": [
+        "thm-monotone-finite-volume-entropy-convergence"
+      ],
+      "unresolved_assumptions": [
+        "Batch 29 now supplies current manifest placement and the strict proof contract passes, but its source-coverage checklist fails with 21 errors and no Step-1 readiness record exists for thm-monotone-finite-volume-entropy-convergence; the consumer's convergence-to-entropy-solution claim remains unresolved pending that evidence repair."
+      ]
+    },
+    "ex-na-weno-js-critical-point-epsilon-scaling": {
+      "kind": "example",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods-examples",
+        "examined": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction",
+          "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "Define the Jiang–Shu indicators",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-weno5-optimal-linear-reconstruction",
+          "source_section": "Statement",
+          "quote": "Each candidate reproduces every polynomial of degree at most two exactly at $x_{i+1/2}$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+          "source_section": "Statement",
+          "quote": "let $\\epsilon_0>0$ be fixed independently of $h$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Exact cell averages on the five cells give the vector formula and WENO candidate values proportional to (-3/2,1/2,-1/2)h^3.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution in the indicator quadratics gives common leading term 16h^4/3 and first corrections (-37,-17,15)h^5.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For epsilon=h^4, normalized JS weights differ from ideal weights by -2d_k(c_k-cbar)h/C+O(h^2), producing the nonzero coefficient 54/95 at order h^4.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The Z correction has a common O(h^2) leading term, so its normalized weights differ by O(h^3); exact cubic reproduction gives O(h^6), while the fixed-epsilon theorem is a separate branch.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the function has zero value at the target, while its second derivative is nonzero there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: the first-order critical point is explicitly nondegenerate because u double-prime(0)=2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: the target x=0 is a shared cell face and the full five-cell stencil is specified on both sides."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "critical-js-scaled-epsilon",
+          "claim": "The finite-volume WENO-JS face error for u=x^2+x^3 and epsilon=h^4 has leading term 54h^4/95.",
+          "method": "exact rational cell-average and indicator expansion",
+          "input": {
+            "profile": "x^2+x^3",
+            "target_face": 0,
+            "epsilon": "h^4"
+          },
+          "calculation": "Cell averages are h^2*(19/3,7/3,1/3,1/3,7/3)+h^3*(-65/4,-15/4,-1/4,1/4,15/4); beta coefficients are B=16/3 and c=(-37,-17,15); the ideal weighted cubic contribution is zero and the normalized JS perturbation contributes 54/95 h^4.",
+          "expected": {
+            "face_error": "54h^4/95+O(h^5)",
+            "js_order_at_face": 4
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "cex-na-unlimited-centered-reconstruction-overshoots": {
+      "kind": "counterexample",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods-examples",
+        "examined": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "For scalar linear advection $u_t+a u_x=0$, a **direct reconstructed-upwind forward-Euler update** uses $\\nu=a\\Delta t/h$, the flux $F_{i+1/2}=aU_{i+1/2}^{-,M}$ when $a\\ge0$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Heaviside step has initial total variation one; centered slopes equal -1/2 in the two interface cells and zero elsewhere.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The centered reconstructed face fluxes are 1, 3/4, -1/4 and 0, giving the new states 9/8, 1/2 and -1/8.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The new total variation is 3/2 and the states leave the original [0,1] range.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty uniform grid stencil and a defined target cell or face."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the nonzero step profile is the finite witness; zero input would remain zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or stencil-cardinality one branch is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: the witness uses nonzero finite data and a positive grid width."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1: the exterior zero and one cells are included in the flux and total-variation calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit finite formulas and makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "unlimited-centered-step",
+          "claim": "Unlimited centered slopes increase total variation at CFL one half.",
+          "method": "exact finite sequence update",
+          "input": {
+            "a": 1,
+            "h": 1,
+            "delta_t": 0.5,
+            "states": {
+              "0": 0,
+              "1": 0,
+              "2": 0,
+              "-2": 1,
+              "-1": 1
+            }
+          },
+          "calculation": "Centered increments are sigma_-1=sigma_0=-1/2. The affected updates are U_-1=9/8, U_0=1/2, U_1=-1/8, with exterior states 1 and 0.",
+          "expected": {
+            "initial_total_variation": 1,
+            "updated_total_variation": "3/2",
+            "overshoot": true,
+            "undershoot": true
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or countable-choice principle is used; the construction is explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl": {
+      "kind": "theorem",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "high-resolution-tvd-eno-and-weno-methods",
+        "examined": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "Let $h>0$, let $I_i=[ih,(i+1)h)$, let $x_i=(i+\\tfrac12)h$ be its center, and write $x_{i+1/2}=(i+1)h$ and $x_{i-1/2}=ih$ for its right and left faces. A **cell average** of a locally integrable scalar function $u$ is $U_i=h^{-1}\\int_{I_i}u(x)\\,dx$. The cells are half-open only to form a partition; the choice of endpoint representatives does not change an integral.\n\nHere **MUSCL/minmod** means the piecewise-linear reconstruction with the limiter defined next; **nodal ENO2** means the two-stencil quadratic selector defined below; and **cell-average WENO5-JS/WENO-Z** means the three-candidate reconstructions with the normalized nonlinear weights displayed below. These names specify the constructions and do not, by themselves, assert an accuracy or stability property.\n\nFor real $a,b$, define\n$$\\operatorname{minmod}(a,b)=\\begin{cases}\\operatorname{sgn}(a)\\min(|a|,|b|),&ab>0,\\\\0,&ab\\le0.\\end{cases}$$\nThe **MUSCL/minmod reconstruction** assigns the cell slope $s_i=h^{-1}\\operatorname{minmod}(U_i-U_{i-1},U_{i+1}-U_i)$ and the two face states $U_{i-1/2}^{+,M}=U_i-hs_i/2$ and $U_{i+1/2}^{-,M}=U_i+hs_i/2$. Here $+$ denotes a trace from the right cell and $-$ a trace from the left cell.\n\nFor separate **nodal** data $V_j=u(y_j)$ at $y_j=jh$, define the second divided difference by $[y_a,y_b,y_c]V=(((V_c-V_b)/(y_c-y_b))-((V_b-V_a)/(y_b-y_a)))/(y_c-y_a)$. At the face $y_{i+1/2}=(i+\\tfrac12)h$, set $d_L=|[y_{i-1},y_i,y_{i+1}]V|$ and $d_R=|[y_i,y_{i+1},y_{i+2}]V|$. Choose the left triple when $d_L\\le d_R$ and otherwise choose the right triple. For the selected triple $(y_a,y_b,y_c)$ define its Newton quadratic by\n$$P_{a,b,c}(y)=V_a+\\frac{V_b-V_a}{y_b-y_a}(y-y_a)+[y_a,y_b,y_c]V\\,(y-y_a)(y-y_b).$$\nThe **nodal ENO2 face value** is $P_{a,b,c}(y_{i+1/2})$. This nodal interpolation branch is distinct from the cell-average WENO branch below.\n\nFor cell averages $U_{i-2},\\ldots,U_{i+2}$, define the left-biased WENO5 candidate face functionals\n$$p_0=(2U_{i-2}-7U_{i-1}+11U_i)/6,\\qquad p_1=(-U_{i-1}+5U_i+2U_{i+1})/6,\\qquad p_2=(2U_i+5U_{i+1}-U_{i+2})/6.$$\nDefine the Jiang–Shu indicators\n$$\\beta_0=\\tfrac{13}{12}(U_{i-2}-2U_{i-1}+U_i)^2+\\tfrac14(U_{i-2}-4U_{i-1}+3U_i)^2,$$\n$$\\beta_1=\\tfrac{13}{12}(U_{i-1}-2U_i+U_{i+1})^2+\\tfrac14(U_{i-1}-U_{i+1})^2,\\qquad \\beta_2=\\tfrac{13}{12}(U_i-2U_{i+1}+U_{i+2})^2+\\tfrac14(3U_i-4U_{i+1}+U_{i+2})^2.$$\nFix a positive parameter $\\epsilon_0$ with the same units as each $\\beta_k$, independently of $h$, and ideal weights $(d_0,d_1,d_2)=(1/10,6/10,3/10)$. If $u$ is nondimensionalized, $\\epsilon_0$ is a fixed positive number. The **WENO-JS weights** and left face value are $\\alpha_k^J=d_k/(\\epsilon_0+\\beta_k)^2$, $\\omega_k^J=\\alpha_k^J/\\sum_{l=0}^2\\alpha_l^J$, and $U_{i+1/2}^{-,J}=\\sum_{k=0}^2\\omega_k^Jp_k$. The **WENO-Z comparison weights** use $\\tau_5=|\\beta_0-\\beta_2|$, $\\alpha_k^Z=d_k[1+(\\tau_5/(\\epsilon_0+\\beta_k))^2]$, $\\omega_k^Z=\\alpha_k^Z/\\sum_{l=0}^2\\alpha_l^Z$, and $U_{i+1/2}^{-,Z}=\\sum_{k=0}^2\\omega_k^Zp_k$. All denominators are positive because $\\epsilon_0>0$ and every $\\beta_k$ is a sum of squares. The right face state is obtained by reflection about that face: replace each stencil value $U_k$ in the displayed left formula by $U_{2i+1-k}$.\n\nFor scalar linear advection $u_t+a u_x=0$, a **direct reconstructed-upwind forward-Euler update** uses $\\nu=a\\Delta t/h$, the flux $F_{i+1/2}=aU_{i+1/2}^{-,M}$ when $a\\ge0$ and $F_{i+1/2}=aU_{i+1/2}^{+,M}$ when $a<0$, and $U_i^{n+1}=U_i^n-(\\Delta t/h)(F_{i+1/2}-F_{i-1/2})$. The total variation of a sequence is $\\operatorname{TV}(U)=\\sum_{i\\in\\mathbb Z}|U_{i+1}-U_i|$ when the sum is finite; **TVD** means that this quantity does not increase in one update.\n\nFor a vector system whose flux Jacobian at an interface is diagonalizable as $A=R\\Lambda R^{-1}$ with real diagonal $\\Lambda$, a **characteristic-wise reconstruction** applies a chosen scalar reconstruction to the components of $R^{-1}U$ and maps the reconstructed vector back by $R$. This definition alone gives no TVD or stability result for systems.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-high-resolution-reconstruction",
+          "source_section": "Definition",
+          "quote": "Let $h>0$, let $I_i=[ih,(i+1)h)$, let $x_i=(i+\\tfrac12)h$ be its center, and write $x_{i+1/2}=(i+1)h$ and $x_{i-1/2}=ih$ for its right and left faces. A **cell average** of a locally integrable scalar function $u$ is $U_i=h^{-1}\\int_{I_i}u(x)\\,dx$. The cells are half-open only to form a partition; the choice of endpoint representatives does not change an integral.\n\nHere **MUSCL/minmod** means the piecewise-linear reconstruction with the limiter defined next; **nodal ENO2** means the two-stencil quadratic selector defined below; and **cell-average WENO5-JS/WENO-Z** means the three-candidate reconstructions with the normalized nonlinear weights displayed below. These names specify the constructions and do not, by themselves, assert an accuracy or stability property.\n\nFor real $a,b$, define\n$$\\operatorname{minmod}(a,b)=\\begin{cases}\\operatorname{sgn}(a)\\min(|a|,|b|),&ab>0,\\\\0,&ab\\le0.\\end{cases}$$\nThe **MUSCL/minmod reconstruction** assigns the cell slope $s_i=h^{-1}\\operatorname{minmod}(U_i-U_{i-1},U_{i+1}-U_i)$ and the two face states $U_{i-1/2}^{+,M}=U_i-hs_i/2$ and $U_{i+1/2}^{-,M}=U_i+hs_i/2$. Here $+$ denotes a trace from the right cell and $-$ a trace from the left cell.\n\nFor separate **nodal** data $V_j=u(y_j)$ at $y_j=jh$, define the second divided difference by $[y_a,y_b,y_c]V=(((V_c-V_b)/(y_c-y_b))-((V_b-V_a)/(y_b-y_a)))/(y_c-y_a)$. At the face $y_{i+1/2}=(i+\\tfrac12)h$, set $d_L=|[y_{i-1},y_i,y_{i+1}]V|$ and $d_R=|[y_i,y_{i+1},y_{i+2}]V|$. Choose the left triple when $d_L\\le d_R$ and otherwise choose the right triple. For the selected triple $(y_a,y_b,y_c)$ define its Newton quadratic by\n$$P_{a,b,c}(y)=V_a+\\frac{V_b-V_a}{y_b-y_a}(y-y_a)+[y_a,y_b,y_c]V\\,(y-y_a)(y-y_b).$$\nThe **nodal ENO2 face value** is $P_{a,b,c}(y_{i+1/2})$. This nodal interpolation branch is distinct from the cell-average WENO branch below.\n\nFor cell averages $U_{i-2},\\ldots,U_{i+2}$, define the left-biased WENO5 candidate face functionals\n$$p_0=(2U_{i-2}-7U_{i-1}+11U_i)/6,\\qquad p_1=(-U_{i-1}+5U_i+2U_{i+1})/6,\\qquad p_2=(2U_i+5U_{i+1}-U_{i+2})/6.$$\nDefine the Jiang–Shu indicators\n$$\\beta_0=\\tfrac{13}{12}(U_{i-2}-2U_{i-1}+U_i)^2+\\tfrac14(U_{i-2}-4U_{i-1}+3U_i)^2,$$\n$$\\beta_1=\\tfrac{13}{12}(U_{i-1}-2U_i+U_{i+1})^2+\\tfrac14(U_{i-1}-U_{i+1})^2,\\qquad \\beta_2=\\tfrac{13}{12}(U_i-2U_{i+1}+U_{i+2})^2+\\tfrac14(3U_i-4U_{i+1}+U_{i+2})^2.$$\nFix a positive parameter $\\epsilon_0$ with the same units as each $\\beta_k$, independently of $h$, and ideal weights $(d_0,d_1,d_2)=(1/10,6/10,3/10)$. If $u$ is nondimensionalized, $\\epsilon_0$ is a fixed positive number. The **WENO-JS weights** and left face value are $\\alpha_k^J=d_k/(\\epsilon_0+\\beta_k)^2$, $\\omega_k^J=\\alpha_k^J/\\sum_{l=0}^2\\alpha_l^J$, and $U_{i+1/2}^{-,J}=\\sum_{k=0}^2\\omega_k^Jp_k$. The **WENO-Z comparison weights** use $\\tau_5=|\\beta_0-\\beta_2|$, $\\alpha_k^Z=d_k[1+(\\tau_5/(\\epsilon_0+\\beta_k))^2]$, $\\omega_k^Z=\\alpha_k^Z/\\sum_{l=0}^2\\alpha_l^Z$, and $U_{i+1/2}^{-,Z}=\\sum_{k=0}^2\\omega_k^Zp_k$. All denominators are positive because $\\epsilon_0>0$ and every $\\beta_k$ is a sum of squares. The right face state is obtained by reflection about that face: replace each stencil value $U_k$ in the displayed left formula by $U_{2i+1-k}$.\n\nFor scalar linear advection $u_t+a u_x=0$, a **direct reconstructed-upwind forward-Euler update** uses $\\nu=a\\Delta t/h$, the flux $F_{i+1/2}=aU_{i+1/2}^{-,M}$ when $a\\ge0$ and $F_{i+1/2}=aU_{i+1/2}^{+,M}$ when $a<0$, and $U_i^{n+1}=U_i^n-(\\Delta t/h)(F_{i+1/2}-F_{i-1/2})$. The total variation of a sequence is $\\operatorname{TV}(U)=\\sum_{i\\in\\mathbb Z}|U_{i+1}-U_i|$ when the sum is finite; **TVD** means that this quantity does not increase in one update.\n\nFor a vector system whose flux Jacobian at an interface is diagonalizable as $A=R\\Lambda R^{-1}$ with real diagonal $\\Lambda$, a **characteristic-wise reconstruction** applies a chosen scalar reconstruction to the components of $R^{-1}U$ and maps the reconstructed vector back by $R$. This definition alone gives no TVD or stability result for systems.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First suppose $a>0$. If $d_i\\ne0$, then $m_i/d_i$ and $m_{i-1}/d_i$ lie in $[0,1]$: in each minmod, $d_i$ is one argument, so a nonzero output has the sign of $d_i$ and magnitude at most $|d_i|$. Set\n$$C_i=\\mu\\left[1+\\frac{m_i/d_i-m_{i-1}/d_i}{2}\\right]$$\nin this case. If $d_i=0$, then $m_i=m_{i-1}=0$; set $C_i=\\mu$. In either case $\\mu/2\\le C_i\\le3\\mu/2$, and the exact update satisfies $U_i^+=U_i-C_id_i=(1-C_i)U_i+C_iU_{i-1}$. Thus $0\\le C_i\\le1$ when $\\mu\\le2/3$, including equality.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Subtract the identity for $U_{i-1}^+$ in step 1.1 from that for $U_i^+$ to obtain $d_i^+=(1-C_i)d_i+C_{i-1}d_{i-1}$. The coefficients are nonnegative, so $|d_i^+|\\le(1-C_i)|d_i|+C_{i-1}|d_{i-1}|$. For periodic data, $C_i$ is $N$-periodic because it is defined from shifts of $U$; summing over one period and cyclically reindexing gives $\\operatorname{TV}_N(U^+)\\le\\sum_{i=0}^{N-1}[(1-C_i)+C_i]|d_i|=\\operatorname{TV}_N(U)$. This also covers $N=1$, when every $d_i=0$. For bi-infinite data, both nonnegative series on the right are bounded by $\\sum_i|d_i|<\\infty$. Reindexing the absolutely convergent second series gives $\\operatorname{TV}(U^+)\\le\\sum_i[(1-C_i)+C_i]|d_i|=\\operatorname{TV}(U)$, so the updated sequence still has finite variation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Now suppose $a<0$. At face $i+1/2$, [F2] gives $F_{i+1/2}=a(U_{i+1}-m_{i+1}/2)$ and $F_{i-1/2}=a(U_i-m_i/2)$, hence $U_i^+=U_i+\\mu[(U_{i+1}-U_i)-(m_{i+1}-m_i)/2]$. Reflect the data by $V_j=U_{-j}$. Its minmod increments obey $m_j^V=-m_{-j}$, because reflection reverses each adjacent difference and minmod is odd under simultaneous sign reversal. With $i=-j$, the positive-speed expression for $V_j$ is $V_j-\\mu[(V_j-V_{j-1})+(m_j^V-m_{j-1}^V)/2]=U_i+\\mu[(U_{i+1}-U_i)-(m_{i+1}-m_i)/2]$, exactly the negative-speed update just computed. Also $V_j-V_{j-1}=-(U_{-j+1}-U_{-j})$, so reflection only reindexes the absolute increments and preserves both the bi-infinite and periodic variation sums. Step 2.1 therefore proves the claim for negative velocity. If $a=0$, both fluxes vanish; if $\\Delta t=0$, their difference is multiplied by zero in the update. In either case the update is the identity, covering $\\mu=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $2/3<\\mu\\le1$, any $h>0$ and any $a\\ne0$, and take $\\Delta t=\\mu h/|a|$. For positive velocity choose $U_{-1}=U_1=1/2$, $U_0=1$, and $U_i=0$ otherwise; its initial variation is $|1/2|+|1/2|+|{-1/2}|+|{-1/2}|=2$. The only nonzero differences are $d_{-1}=d_0=1/2$ and $d_1=d_2=-1/2$, so the only nonzero minmod increments are $m_{-1}=1/2$ and $m_1=-1/2$. Substituting these in [F2], the four affected updates are $U_{-1}^+=1/2-\\mu(1/2+1/4)=A$, $U_0^+=1-\\mu(1/2-1/4)=B$, $U_1^+=1/2-\\mu(-1/2-1/4)=C$, and $U_2^+=0-\\mu(-1/2+1/4)=D$, where $A=1/2-3\\mu/4$, $B=1-\\mu/4$, $C=1/2+3\\mu/4$, and $D=\\mu/4$; every other update is zero because its state and all adjacent minmod increments are zero. Here $A<0$, $B\\ge3/4>0$, $C-B=\\mu-1/2>0$, $D>0$, and $C-D=1/2+\\mu/2>0$, so $A<0<B<C$ and $0<D<C$. Hence $\\operatorname{TV}(U^+)= -A+(B-A)+(C-B)+(C-D)+D=2(C-A)=3\\mu>2$. For negative velocity reflect this witness; step 3.1 preserves its updated variation. Periodizing the data with any $N\\ge7$ leaves at least four zero initial cells between successive three-cell supports and at least three zero updated entries between the four affected entries; since a positive-velocity update uses only cells $i-2,\\ldots,i+1$ and a negative-velocity update uses only cells $i-1,\\ldots,i+2$, no stencil meets two distinct support copies, and the periodic variation is the same $3\\mu$. At $\\mu=2/3$, the coefficient argument in steps 1.1–2.1 still proves TVD, and the witness updates to $(0,5/6,1,1/6)$ with variation $2$; every larger CFL number through one fails.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns sequences indexed by Z or an N-periodic sequence with N>=1; no empty index domain occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: zero velocity or zero time step gives the identity update; the zero sequence is also covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly covers period N=1, for which every increment is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles d_i=0 by proving both adjacent minmod increments vanish and defining C_i=mu."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include mu=2/3; step 4.1 includes every 2/3<mu<=1 and period N>=7."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All coefficients and witnesses are given by explicit formulas; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is an implication, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "minmod-sharp-cfl-tent",
+          "claim": "For every 2/3<mu<=1, the finite tent refutes TVD for the direct MUSCL/minmod forward-Euler update.",
+          "method": "exact symbolic finite-stencil update",
+          "input": {
+            "mu": "2/3 < mu <= 1",
+            "parameters": "h>0, a!=0, delta_t=mu*h/|a|",
+            "states": {
+              "0": "1",
+              "1": "1/2",
+              "-1": "1/2",
+              "other": "0"
+            }
+          },
+          "calculation": "Initial variation is 2. The nonzero slopes are m_-1=1/2 and m_1=-1/2. Updated states at -1,0,1,2 are A=1/2-3mu/4, B=1-mu/4, C=1/2+3mu/4, D=mu/4; the ordering A<0<B<C and 0<D<C yields variation 2(C-A)=3mu.",
+          "expected": {
+            "initial_total_variation": 2,
+            "updated_total_variation": "3*mu",
+            "strict_increase": true,
+            "periodic_for_every_N_at_least": 7
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No axiom of choice or dependent-choice principle is used; all arguments and witnesses are explicit and countable summation uses only absolute convergence.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    }
+  }
+}

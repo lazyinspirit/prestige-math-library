@@ -1,0 +1,2768 @@
+
+PDF PAGE 1
+B-Splines and Spline Approximation
+Tom Lyche, Carla Manni, and Hendrik Speleers
+Abstract After presenting a detailed summary of the main analytic properties of B-
+splines, we discuss in details the approximation power of the spline space they span.
+More precisely, we analyze the distance of any sufﬁciently smooth function from
+the considered spline space. Using the properties of the B-spline basis, we explicitly
+construct a (local) quasi-interpolant based on integral averages which achieves the
+optimal accuracy for approximating the function and its derivatives, and we deter-
+mine the corresponding error bounds.
+1 B-splines and piecewise polynomials
+This section introduces one of the most powerful tools in CAGD: B-splines. We
+present the deﬁnition and main properties of the B-spline basis as well as the prop-
+erties of the space they span.
+1.1 B-splines
+We start by deﬁning B-spline functions (in short B-splines) 1 and derive some of
+their most fundamental properties. B-splines are piecewise polynomials with a cer-
+tain global smoothness. The positions where the pieces meet are known as knots.
+Tom Lyche
+Department of Mathematics, University of Oslo, Norway
+e-mail: tom@math.uio.no
+Carla Manni, Hendrik Speleers
+Department of Mathematics, University of Rome “Tor Vergata”, Italy
+e-mail: manni@mat.uniroma2.it, speleers@mat.uniroma2.it
+1 The original meaning of the word “spline” is a ﬂexible ruler used to draw curves, mainly in the
+aircraft and shipbuilding industries. The “B” in B-splines stands for basis or basic.
+1
+
+
+PDF PAGE 2
+2
+Tom Lyche, Carla Manni, and Hendrik Speleers
+1.1.1 Deﬁnition and basic properties
+In order to deﬁne B-splines we need the concept of knot sequences.
+Deﬁnition 1. A knot sequence ξ is a nondecreasing sequence of real numbers,
+ξ := {ξi}m
+i=1 = {ξ1 ≤ξ2 ≤··· ≤ξm},
+m ∈N.
+The elements ξi are called knots.
+Provided that m ≥p + 2 we can deﬁne B-splines of degree p over the knot-
+sequence ξ .
+Deﬁnition 2. Suppose for a nonnegative integer p and some integer j that ξj ≤
+ξj+1 ≤··· ≤ξj+p+1 are p+2 real numbers taken from a knot sequence ξ . The j-th
+B-spline B j,p,ξ : R →R of degree p is identically zero if ξj+p+1 = ξj and otherwise
+deﬁned recursively by 2
+B j,p,ξ (x) :=
+x−ξj
+ξj+p −ξj
+B j,p−1,ξ (x)+
+ξj+p+1 −x
+ξj+p+1 −ξj+1
+B j+1,p−1,ξ (x),
+(1)
+starting with
+Bi,0,ξ (x) :=
+(
+1,
+if x ∈[ξi,ξi+1),
+0,
+otherwise.
+Here we used the convention that fractions with zero denominator have value zero.
+We start with some preliminary remarks.
+• For degree 0 the B-spline B0,p,ξ is simply the characteristic function of the half
+open interval [ξj,ξj+1). This implies that a B-spline is continuous except possi-
+bly at a knot ξ. We have B j,p,ξ (ξ) = B j,p,ξ (ξ+), where
+x+ := lim
+t→x
+t>x
+t,
+x−:= lim
+t→x
+t<x
+t,
+x ∈R.
+Thus a B-spline is right continuous, i.e., the value at a point x is obtained by
+taking limits from the right.
+• We also use the notation
+B[ξj,...,ξj+p+1] := B j,p,ξ ,
+showing explicitly on which knots the B-spline depends.
+2 The recurrence relation is due to Cox, de Boor and Mansﬁeld [6, 2]. However, it appears already
+in works by Popoviciu and Chakalov in the 1930’s; see [5] for an account of the early history of
+splines. For the modern theory of splines we refer to the seminal papers by Schoenberg [16, 17, 18]
+and Curry/Schoenberg [7, 8]. In their works, B-splines were studied using divided differences.
+
+
+PDF PAGE 3
+B-Splines and Spline Approximation
+3
+• We say that a knot has multiplicity µ if it occurs exactly µ times in the knot
+sequence. A knot is called simple, double, triple, ... if its multiplicity is equal
+to 1,2,3,..., and a multiple knot in general.
+Example 3. A B-spline of degree 1 is also called a linear B-spline or a hat function. The recur-
+rence relation (1) takes the form
+B j,1,ξ (x) =
+x−ξ j
+ξ j+1 −ξ j
+B j,0,ξ (x)+
+ξ j+2 −x
+ξ j+2 −ξ j+1
+B j+1,0,ξ (x),
+resulting in
+B j,1,ξ (x) =
+
+
+
+
+
+
+
+
+
+
+
+
+
+x−ξ j
+ξ j+1 −ξ j
+,
+if x ∈[ξ j,ξ j+1),
+ξ j+2 −x
+ξ j+2 −ξ j+1
+,
+if x ∈[ξ j+1,ξ j+2),
+0,
+otherwise.
+(2)
+The linear B-spline is discontinuous at a double knot and continuous at a simple knot.
+Example 4. A B-spline of degree 2 is also called a quadratic B-spline. Using the recurrence
+relation (1), the three pieces of the quadratic B-spline B j,2,ξ are given by
+B j,2,ξ (x) =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(x−ξ j)2
+(ξ j+2 −ξ j)(ξ j+1 −ξ j) ,
+if x ∈[ξ j,ξ j+1),
+(x−ξ j)(ξ j+2 −x)
+(ξ j+2 −ξ j)(ξ j+2 −ξ j+1) +
+(x−ξ j+1)(ξ j+3 −x)
+(ξ j+2 −ξ j+1)(ξ j+3 −ξ j+1),
+if x ∈[ξ j+1,ξ j+2),
+(ξ j+3 −x)2
+(ξ j+3 −ξ j+1)(ξ j+3 −ξ j+2),
+if x ∈[ξ j+2,ξ j+3),
+0,
+otherwise.
+(3)
+The general explicit expression for a B-spline quickly becomes complicated. Ap-
+plying the recurrence relation repeatedly we ﬁnd
+B j,p,ξ (x) =
+j+p
+∑
+i= j
+B{i}
+j,p,ξ (x)Bi,0,ξ (x),
+p ≥0,
+(4)
+where each B{i}
+j,p,ξ is a polynomial of degree p which is zero if ξi = ξi+1. In particu-
+lar, for the nontrivial cases we have
+B{ j}
+j,0,ξ (x) = 1,
+B{ j}
+j,1,ξ (x) =
+x−ξj
+ξj+1 −ξj
+,
+B{ j+1}
+j,1,ξ (x) =
+ξj+2 −x
+ξj+2 −ξj+1
+.
+For p ≥2, in the nontrivial cases, it follows from Deﬁnition 2 that the ﬁrst and last
+polynomial pieces in (4) are given by
+
+
+PDF PAGE 4
+4
+Tom Lyche, Carla Manni, and Hendrik Speleers
+B{ j}
+j,p,ξ (x) = (x−ξj)p. p
+∏
+i=1
+(ξj+i −ξj),
+B{ j+p}
+j,p,ξ (x) = (ξj+p+1 −x)p. p
+∏
+i=1
+(ξj+p+1 −ξj+i).
+(5)
+These expressions are valid for multiple knots. Indeed, if ξk+1 = ξk for some k then
+Bk,0,ξ = 0 and the corresponding polynomial piece is not used.
+Using induction on the recurrence relation (1), we deduce immediately the fol-
+lowing basic properties of a B-spline.
+• Local support. A B-spline is locally supported on the interval given by the ex-
+treme knots used in its deﬁnition, i.e.,
+B j,p,ξ (x) = 0,
+x /∈[ξj,ξj+p+1).
+(6)
+• Piecewise structure. A B-spline has a piecewise polynomial structure, i.e.,
+B{m}
+j,p,ξ ∈Pp,
+m = j,..., j + p.
+(7)
+• Nonnegativity. A B-spline is nonnegative everywhere, and positive inside its
+support, i.e.,
+B j,p,ξ (x) ≥0,
+x ∈R,
+and
+B j,p,ξ (x) > 0,
+x ∈(ξj,ξj+p+1).
+(8)
+• Translation and scaling invariance. A B-spline is invariant under a translation
+and/or scaling transformation of its knot sequence, i.e.,
+B j,p,αξ +β(αx+ β) = B j,p,ξ (x),
+α,β ∈R,
+α ̸= 0,
+(9)
+where αξ + β := (αξj + β,...,αξj+p+1 + β).
+Further properties will be considered in the next sections.
+1.1.2 Dual polynomials
+To each B-spline B j,p,ξ of degree p, there corresponds a polynomial ψj,p,ξ of degree
+p with roots at the interior knots of the B-spline. We deﬁne ψj,0,ξ := 1 and
+ψj,p,ξ (y) := (y−ξj+1)···(y−ξj+p),
+y ∈R,
+p ∈N.
+(10)
+This polynomial is called dual polynomial. Many of the B-spline properties can be
+proved in an elegant way by exploiting a recurrence relation for these dual polyno-
+mials.
+Theorem 5. For p ∈N, x,y ∈R and ξj+p > ξj, we have the dual recurrence
+relation
+
+
+PDF PAGE 5
+B-Splines and Spline Approximation
+5
+(y−x)ψj,p−1,ξ(y) =
+x−ξj
+ξj+p −ξj
+ψj,p,ξ (y)+ ξj+p −x
+ξj+p −ξj
+ψj−1,p,ξ (y),
+(11)
+and the dual difference formula
+ψj,p−1,ξ (y) = ψj−1,p,ξ (y)
+ξj+p −ξj
+−ψj,p,ξ (y)
+ξj+p −ξj
+.
+(12)
+Proof. For ﬁxed y ∈R let us deﬁne the function ℓy : R →R given by ℓy(x) = y−x.
+By linear interpolation, we have
+ℓy(x) =
+x−ξj
+ξj+p −ξj
+ℓy(ξj+p)+ ξj+p −x
+ξj+p −ξj
+ℓy(ξj).
+Multiplying both sides by ψj,p−1,ξ (y) we obtain (11). Moreover, (12) follows by
+differentiating with respect to x in (11).
+⊓⊔
+Proposition 6. The r-th derivative of the dual polynomial ψj,p,ξ for 0 ≤r ≤p can
+be bounded as follows:
+|Drψj,p,ξ (y)| ≤
+p!
+(p −r)!(ξj+p+1 −ξj)p−r,
+ξj ≤y ≤ξj+p+1.
+(13)
+Moreover,
+|Drψj,p,ξ (y)| ≤
+p!
+(p −r)!(ξj+p −ξj+1)p−r,
+ξj+1 ≤y ≤ξj+p.
+(14)
+Here we deﬁne 00 := 1 if r = p and ξj+p = ξj+1.
+Proof. Clearly (13) holds for all p ∈N0 if r = 0. Using induction on r, p and the
+product rule for differentiation, we get
+|Drψj,p,ξ (y)| = |Dr(ψj,p−1,ξ (y)(y−ξj+p))|
+= |(Drψj,p−1,ξ (y))(y−ξj+p)+ rDr−1ψj,p−1,ξ (y)|
+≤
+
+(p −1)!
+(p −1 −r)! + r(p −1)!
+(p −r)!
+
+(ξj+p+1 −ξj)p−r,
+and (13) follows. The proof of (14) is similar.
+⊓⊔
+1.1.3 Local Marsden identity and linear independence
+In this and the following sections (unless speciﬁed otherwise) we will extend the
+knots ξj ≤··· ≤ξj+p+1 of B j,p,ξ by deﬁning p extra knots at each end, and we will
+assume
+ξ := {ξj−p ≤··· ≤ξj−1 < ξj ≤··· ≤ξj+p+1 < ξj+p+2 ≤··· ≤ξj+2p+1}.
+(15)
+
+
+PDF PAGE 6
+6
+Tom Lyche, Carla Manni, and Hendrik Speleers
+These extra knots can be deﬁned in any way we like. One possibility is
+ξj−p = ··· = ξj−1 := ξj −1,
+ξj+p+1 + 1 =: ξj+p+2 = ··· = ξj+2p+1.
+(16)
+On such a knot sequence 2p + 1 B-splines Bi,p,ξ = B[ξi,...,ξi+p+1], i = j −
+p,..., j + p are well deﬁned.
+The following identity was ﬁrst proved by Marsden [13] and simpliﬁes many
+dealings with B-splines.
+Theorem 7 (Local Marsden identity). For j ≤m ≤j+ p and ξm < ξm+1, we have
+(y−x)p =
+m
+∑
+i=m−p
+ψi,p,ξ (y)Bi,p,ξ (x),
+x ∈[ξm,ξm+1),
+y ∈R.
+(17)
+If B{m}
+i,p,ξ is the polynomial which is equal to Bi,p,ξ (x) for x ∈[ξm,ξm+1) then
+(y−x)p =
+m
+∑
+i=m−p
+ψi,p,ξ (y)B{m}
+i,p,ξ (x),
+x,y ∈R.
+(18)
+Proof. Suppose x ∈[ξm,ξm+1). The equality (17) can be proved by induction. It is
+clearly true for p = 0. Let us now assume it holds for degree p−1. Then, by means
+of the dual recurrence (11) and the B-spline recurrence relation we obtain
+(y−x)p = (y−x)(y−x)p−1 = (y−x)
+m
+∑
+i=m−p+1
+ψi,p−1,ξ (y)Bi,p−1,ξ (x)
+=
+m
+∑
+i=m−p+1
+ x−ξi
+ξi+p −ξi
+ψi,p,ξ (y)+ ξi+p −x
+ξi+p −ξi
+ψi−1,p,ξ
+
+Bi,p−1,ξ (x)
+=
+m
+∑
+i=m−p
+ x−ξi
+ξi+p −ξi
+Bi,p−1,ξ (x)+
+ξi+p+1 −x
+ξi+p+1 −ξi+1
+Bi+1,p−1,ξ (x)
+
+ψi,p,ξ (y)
+=
+m
+∑
+i=m−p
+ψi,p,ξ (y)Bi,p,ξ (x).
+Here we used that
+x−ξi
+ξi+p−ξi Bi,p−1,ξ (x) = 0 for i = m−p,m+ 1.
+⊓⊔
+The local Marsden identity immediately leads to the following properties, where
+we suppose ξm < ξm+1 for some j ≤m ≤j + p.
+• Local representation of monomials. We have for p ≥k,
+xk =
+m
+∑
+i=m−p
+
+(−1)k k!
+p!Dp−kψj,p,ξ (0)
+
+Bi,p,ξ (x)
+x ∈[ξm,ξm+1).
+(19)
+Proof. Differentiating p −k times with respect to y in (18) results in
+
+
+PDF PAGE 7
+B-Splines and Spline Approximation
+7
+(y−x)k
+k!
+=
+m
+∑
+i=m−p
+ 1
+p!Dp−kψi,p,ξ (y)
+
+Bi,p,ξ (x),
+x ∈[ξm,ξm+1),
+y ∈R,
+(20)
+for k = 0,1,..., p. Setting y = 0 in (20) results in (19).
+⊓⊔
+• Local partition of unity. Taking k = 0 in (19) gives
+m
+∑
+i=m−p
+Bi,p,ξ (x) = 1,
+x ∈[ξm,ξm+1).
+(21)
+• Local linear independence. The two sets {Bi,p,ξ }m
+i=m−p and {ψi,p,ξ }m
+i=m−p form
+both a basis for the polynomial space Pp on [ξm,ξm+1).
+Proof. From (20) we see that on [ξm,ξm+1) every polynomial of degree at most
+p can be written as a linear combination of the p + 1 polynomials Bi,p,ξ (x), i =
+m −p,...,m. Since the dimension of the space Pp is p + 1, these polynomials
+must be linearly independent and a basis. The result for {ψi,p,ξ }m
+i=m−p follows
+by symmetry.
+⊓⊔
+1.1.4 Smoothness, differentiation and integration
+The derivative of a B-spline can be expressed by means of a simple difference for-
+mula.
+Theorem 8 (Differentiation formula). We have
+D+B j,p,ξ (x) = p
+B j,p−1,ξ (x)
+ξj+p −ξj
+−
+B j+1,p−1,ξ(x)
+ξj+p+1 −ξj+1
+
+,
+p ≥1,
+(22)
+where fractions with zero denominator have value zero.
+Proof. If ξj+p+1 = ξj then both sides of (22) are zero, so we can assume ξj+p+1 >
+ξj. We continue to use the extra knots (15). If x < ξj or x ≥ξj+p+1 then both sides
+of (22) are zero. Otherwise x ∈[ξm,ξm+1) for some m with j ≤m ≤j + p and it
+is enough to prove (22) for such an interval. Differentiating both sides of (17) with
+respect to x gives
+−p(y−x)p−1 =
+m
+∑
+i=m−p
+DBi,p,ξ (x)ψi,p(y),
+x ∈[ξm,ξm+1).
+(23)
+On the other hand, using the local Marsden identity (17) for degree p −1 and the
+difference formula for dual polynomials (12) results in
+
+
+PDF PAGE 8
+8
+Tom Lyche, Carla Manni, and Hendrik Speleers
+−p(y−x)p−1 = −p
+m
+∑
+i=m−p+1
+ψi,p−1(y)Bi,p−1,ξ (x)
+= p
+m
+∑
+i=m−p+1
+ ψi,p(y)
+ξi+p −ξi
+−ψi−1,p(y)
+ξi+p −ξi
+
+Bi,p−1,ξ (x)
+=
+m
+∑
+i=m−p
+p
+Bi,p−1,ξ (x)
+ξi+p −ξi
+−
+Bi+1,p−1,ξ (x)
+ξi+p+1 −ξi+1
+
+ψi,p(y).
+By comparing this with (23) and using the linear independence of the dual poly-
+nomials, it follows that (22) holds for i = m −p,...,m. Since m −p ≤j ≤m, (22)
+holds for i = j.
+⊓⊔
+Example 9. The differentiation formula (22) for p = 2 together with the expression (2) immediately
+gives the piecewise form of the derivative of the quadratic B-spline B j,2,ξ :
+D+B j,2,ξ (x) =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2(x−ξ j)
+(ξ j+2 −ξ j)(ξ j+1 −ξ j),
+if x ∈[ξ j,ξ j+1),
+2(ξ j+2 −x)
+(ξ j+2 −ξ j)(ξ j+2 −ξ j+1) −
+2(x−ξ j+1)
+(ξ j+3 −ξ j+1)(ξ j+2 −ξ j+1),
+if x ∈[ξ j+1,ξ j+2),
+−
+2(ξ j+3 −x)
+(ξ j+3 −ξ j+1)(ξ j+3 −ξ j+2),
+if x ∈[ξ j+2,ξ j+3),
+0,
+otherwise.
+This is in agreement with taking the derivative of the piecewise expression (3) of B j,2,ξ given in
+Example 4.
+Proposition 10. The r-th derivative of the B-spline B j,p,ξ for 0 ≤r ≤p can be
+bounded as follows. For any x ∈[ξm,ξm+1) with j ≤m ≤j + p we have
+|DrB j,p,ξ (x)| ≤2r
+p!
+(p −r)!
+p
+∏
+k=p−r+1
+1
+∆m,k
+,
+(24)
+where
+∆m,k :=
+min
+m−k+1≤i≤mhi,k,
+hi,k := ξi+k −ξi,
+k = 1,..., p.
+(25)
+Proof. This holds for r = 0 because of the nonnegativity of B j,p,ξ and the partition
+of unity property (21). By the differentiation formula (22) and the local support
+property (6) we have
+DrB j,p,ξ (x)
+= p
+
+
+
+
+
+−Dr−1B j+1,p−1,ξ (x)/h j+1,p,
+if m = j + p,
+Dr−1B j,p−1,ξ (x)/h j,p −Dr−1B j+1,p−1,ξ (x)/h j+1,p,
+if j < m < j + p,
+Dr−1B j,p−1,ξ (x)/h j,p,
+if m = j.
+It follows that
+
+
+PDF PAGE 9
+B-Splines and Spline Approximation
+9
+|DrB j,p,ξ (x)| ≤2p
+max
+m−p+1≤i≤m|Dr−1Bi,p−1,ξ (x)|/∆m,p,
+and by induction on r we obtain (24).
+⊓⊔
+Note that the upper bound in (24) is well deﬁned since ∆m,k ≥ξm+1 −ξm > 0.
+Theorem 11 (Smoothness property). If ξ is a knot of B j,p,ξ of multiplicity µ ≤
+p + 1 then
+B j,p,ξ ∈Cp−µ(ξ),
+i.e., its derivatives of order 0,1,..., p −µ are continuous at ξ.
+Proof. Suppose ξ is a knot of B j,p,ξ of multiplicity µ. We ﬁrst consider the smooth-
+ness property when µ = p+1. For x ∈[ξj,ξj+p+1) it follows immediately from the
+ﬁrst and last piece in (4) and (5) that
+B j,p,ξ (x) = (x−ξj)p
+(ξj+p+1 −ξj)p,
+ξj < ξj+1 = ··· = ξj+p+1,
+(26)
+B j,p,ξ (x) = (ξj+p+1 −x)p
+(ξj+p+1 −ξj)p,
+ξj = ··· = ξj+p < ξj+p+1.
+(27)
+These two B-splines are discontinuous with a jump of absolute size one at the mul-
+tiple knot showing the smoothness property for µ = p + 1.
+Let us now consider the case where B j,p,ξ has an interior knot of multiplicity
+equal to µ = p, i.e., ξj < ξj+1 = ··· = ξj+p < ξj+p+1. For x ∈[ξj,ξj+p+1) it follows
+from the ﬁrst and last pieces in (4) and (5) that
+B j,p,ξ (x) =
+(x−ξj)p
+(ξj+p −ξj)p B j,0,ξ (x)+
+(ξj+p+1 −x)p
+(ξj+p+1 −ξj+1)p B j+p,0,ξ (x).
+(28)
+The two nontrivial pieces have both value one at the center knot ξj+1 = ξj+p, and
+B j,p,ξ is continuous on R. Moreover, the ﬁrst derivative has a nonzero jump at the
+center knot.
+For the remaining cases we use induction on p to show that B j,p,ξ ∈Cp−µ(ξ).
+The case p = 1 follows from Example 3. Suppose for some p ≥2 that B j,p−1,ξ ∈
+Cp−1−µ(ξ) at a knot ξ of multiplicity µ. For the multiplicity p case ξ = ξj = ··· =
+ξj+p−1 < ξj+p ≤ξj+p+1 we use the recurrence relation
+B j,p,ξ (x) =
+x−ξj
+ξj+p −ξj
+B j,p−1,ξ (x)+
+ξj+p+1 −x
+ξj+p+1 −ξj+1
+B j+1,p−1,ξ (x).
+The ﬁrst term vanishes at x = ξ = ξj. Since B j+1,p−1,ξ has a knot of multiplicity
+p −1 at ξ, it follows from the induction hypothesis that it is continuous there. We
+conclude that B j,p,ξ is continuous at ξ. The case where the right end knot of B j,p,ξ
+has multiplicity p is handled similarly. Finally, if µ ≤p −1 then both terms in
+the differentiation formula (22) has a knot of multiplicity at most µ at ξ and by the
+induction hypothesis we obtain D+B j,p,ξ ∈Cp−1−µ(ξ). Moreover,by the recurrence
+relation and the induction hypothesis it follows that B j,p,ξ is continuous at ξ, and so
+we also conclude that B j,p,ξ ∈Cp−µ(ξ) if µ ≤p −1.
+⊓⊔
+
+
+PDF PAGE 10
+10
+Tom Lyche, Carla Manni, and Hendrik Speleers
+The B-spline B j,p,ξ is supported on the interval [ξj,ξj+p+1]. Hence, Theorem 11
+implies that B j,p,ξ is continuous on R whenever ξj+p > ξj and ξj+p+1 > ξj+1. Simi-
+larly, B j,p,ξ is Cr-continuous on R whenever ξj+p−r+i > ξj+i for each i = 0,...,r+1
+and −1 ≤r < p.
+Theorem 12 (Integration formula). We have
+γj,p,ξ :=
+Z ξj+p+1
+ξj
+B j,p,ξ (x)dx = ξj+p+1 −ξj
+p + 1
+.
+(29)
+Proof. This time we deﬁne p + 1 extra knots at each end, and we assume
+ξ := {ξj−p−1 = ··· = ξj−1 < ξj ≤··· ≤ξj+p+1 < ξj+p+2 = ··· = ξj+2p+2}.
+On this knot sequence we consider p + 1 B-splines Bi,p+1,ξ , i = j −p −1,..., j −1
+of degree p + 1. From Theorem 11 we know that these B-splines are continuous on
+R. Therefore, we get for i = j −p −1,..., j −1,
+0 = Bi,p+1,ξ (ξi+p+2)−Bi,p+1,ξ(ξi) =
+Z ξi+p+2
+ξi
+D+Bi,p+1,ξ (x)dx = Ei −Ei+1,
+where by the local support and the differentiation formula (22),
+Ei :=
+p + 1
+ξi+p+1 −ξi
+Z ξi+p+1
+ξi
+Bi,p,ξ (x)dx,
+i = j −p −1,..., j.
+This means that E j = E j−1 = ··· = E j−p−1. Moreover, since ξj−p−1 = ··· = ξj−1,
+we obtain from (27) that
+E j−p−1 =
+p + 1
+ξj −ξj−p−1
+Z ξj
+ξj−p−1
+(ξj −x)p
+(ξj −ξj−p−1)p dx = 1,
+and the integration formula (29) follows.
+⊓⊔
+1.2 Linear combinations of B-splines
+We now analyse linear combinations of a given set of consecutive B-splines and
+their properties.
+1.2.1 The spline space Sp,ξ and some properties
+Suppose for integers n > p ≥0 that a knot sequence
+ξ := {ξi}n+p+1
+i=1
+= {ξ1 ≤ξ2 ≤··· ≤ξn+p+1},
+n ∈N,
+p ∈N0,
+
+
+PDF PAGE 11
+B-Splines and Spline Approximation
+11
+is given. This knot sequence allows us to deﬁne a set of n B-splines of degree p,
+namely
+{B1,p,ξ ,...,Bn,p,ξ }.
+(30)
+We consider the space
+Sp,ξ :=
+
+s : [ξp+1,ξn+1] →R : s =
+n
+∑
+j=1
+cjB j,p,ξ , cj ∈R
+
+.
+(31)
+This is the space of splines spanned by the B-splines in (30) over the interval
+[ξp+1,ξn+1], which is called the basic interval.
+We now introduce some terminology to identify certain properties of knot se-
+quences which are crucial in the study of the space (31).
+• A knot sequence ξ is called (p + 1)-regular if ξj < ξj+p+1 for j = 1,...,n. By
+the local support (6) such a knot sequence ensures that all the B-splines in (30)
+are not identically zero.
+• A knot sequence ξ is called (p+1)-basic if it is (p+1)-regularwith ξp+1 < ξp+2
+and ξn < ξn+1. As we will show later, the B-splines in (30) deﬁned on a (p+1)-
+basic knot sequence are linearly independent on the basic interval [ξp+1,ξn+1].
+• A knot sequence ξ is called (p + 1)-open on an interval [a,b] if it is (p + 1)-
+regular and it has end knots of multiplicity p + 1, i.e.,
+a := ξ1 = ··· = ξp+1 < ξp+2 ≤··· ≤ξn < ξn+1 = ··· = ξn+p+1 =: b.
+(32)
+This sequence is often used in practice. In particular, it turns out to be natural to
+construct open curves, clamped at two given points.
+Some further preliminary remarks are in order here.
+• We consider B-splines on a closed basic interval [ξp+1,ξn+1]. In order to avoid
+the asymmetry at the right endpoint we deﬁne the B-splines to be left continuous
+at the right endpoint, i.e., its value at ξn+1 is obtained by taking limits from the
+left:
+B j,p,ξ (ξn+1) :=
+lim
+x→ξn+1
+x<ξn+1
+B j,p,ξ (x),
+j = 1,...,n.
+(33)
+Note that for a (p + 1)-open knot sequence the end condition (33) means that
+Bn,p,ξ (ξn+p+1) = 1 and (6) has to be modiﬁed for this B-spline.
+• We deﬁne a multiplicity function µξ : R →N0 given by µξ (ξi) = µi if ξi ∈ξ
+occurs exactly µi ≥1 times in ξ , and µξ (x) = 0 if x /∈ξ . If ξ and ˇξ are two knot
+sequences we say that ξ ⊆ˇξ if µξ(x) ≤µ ˇξ (x) for all x ∈R.
+• Without loss of generality we can always assume that the end knots have multi-
+plicity p + 1. If this is not the case, then we can add extra knots at the ends and
+assume the extra B-splines to have coefﬁcients zero. This observation simpliﬁes
+many proofs.
+
+
+PDF PAGE 12
+12
+Tom Lyche, Carla Manni, and Hendrik Speleers
+From the properties of B-splines, we immediately conclude the following prop-
+erties of the spline representation in (31).
+• Smoothness. If ξ is a knot of multiplicity µ then s ∈Cr(ξ) for any s ∈Sp,ξ ,
+where r + µ = p. This follows from the smoothness property of the B-splines
+(Theorem 11). The relation between smoothness, multiplicity and degree is as
+follows:
+“smoothness+ multiplicity = degree”.
+(34)
+• Local support. The local support (6) of the B-splines implies
+n
+∑
+j=1
+cjB j,p,ξ (x) =
+m
+∑
+j=m−p
+cjB j,p,ξ (x),
+x ∈[ξm,ξm+1),
+p + 1 ≤m ≤n,
+(35)
+and
+n
+∑
+j=1
+cjB j,p,ξ (ξm) =
+m−1
+∑
+j=m−p
+cjB j,p,ξ (ξm),
+p + 1 ≤m ≤n + 1.
+(36)
+• Minimal support. From the smoothness properties it can be proved that if the
+support of s ∈Sp,ξ is a proper subset of [ξj,ξj+p+1] for some j then s = 0.
+Therefore, the B-splines have minimal support.
+• Coefﬁcient recurrence. For x ∈[ξp+1,ξn+1], by the recurrence relation (1) we
+have
+n
+∑
+j=1
+cjB j,p,ξ (x) =
+n
+∑
+j=2
+c[1]
+j (x)B j,p−1,ξ (x),
+(37)
+where
+c[1]
+j (x) :=
+x−ξj
+ξj+p −ξj
+cj + ξj+p −x
+ξj+p −ξj
+cj−1,
+(38)
+and c[1]
+j (x)B j,p−1,ξ (x) = 0 if ξj+p = ξj.
+• Differentiation formula. By (22) we have
+D+
+ n
+∑
+j=1
+cjB j,p,ξ
+
+=
+n
+∑
+j=2
+c(1)
+j B j,p−1,ξ ,
+p ≥1,
+(39)
+where
+c(1)
+j
+:= p
+ cj −cj−1
+ξj+p −ξj
+
+,
+(40)
+and as usual fractions with zero denominator have value zero.
+• Linear independence. If ξ is (p + 1)-basic, then the B-splines in (30) are lin-
+early independent on the basic interval. Thus, the spline space Sp,ξ is a vector
+space of dimension n.
+Proof. We must show that if s(x) = ∑n
+j=1cjB j,p,ξ (x) = 0 for x ∈[ξp+1,ξn+1]
+then cj = 0 for all j. Let us ﬁx 1 ≤j ≤n. Since ξ is (p + 1)-regular, there is an
+
+
+PDF PAGE 13
+B-Splines and Spline Approximation
+13
+integer mj with j ≤mj ≤j+ p such that ξmj < ξmj+1. Moreover, the assumptions
+ξp+1 < ξp+2 and ξn < ξn+1 guarantee that [ξmj,ξmj+1) can be chosen in the basic
+interval. From the local support property (35) we know
+s(x) =
+mj
+∑
+i=mj−p
+ciBi,p,ξ (x) = 0,
+x ∈[ξmj,ξmj+1).
+The local linear independence property (see Section 1.1.3) implies cmj−p = ··· =
+cmj = 0, and in particular cj = 0.
+⊓⊔
+1.2.2 The piecewise polynomial space Sr
+p(∆)
+In this section we focus on the spline space Sp,ξ . We prove that such a space is
+nothing else than a space of piecewise polynomials of degree p deﬁned by a given
+sequence of break points and by some prescribed smoothness. The set of knots ξ
+must be suitably selected according to the break points and the smoothness condi-
+tions. Therefore, the B-splines are a basis of such a space of piecewise polynomials.
+Let ∆be a sequence of distinct real numbers,
+∆:= {η0 < η1 < ··· < ηℓ+1}.
+The elements in ∆are called break points. Moreover, let r := (r1,...,rℓ) be a vector
+of integers such that −1 ≤ri ≤p for i = 1,...,ℓ. The space Sr
+p(∆) of piecewise
+polynomials of degree p with smoothness r over the partition ∆is deﬁned by
+Sr
+p(∆) :=
+
+s : [η0,ηℓ+1] →R : s ∈Pp([ηi,ηi+1)), i = 0,...,ℓ,
+s ∈Cri(ηi), i = 1,...,ℓ
+	
+.
+(41)
+This space is denoted by Sr
+p(∆) when r = r1 = ··· = rℓ.
+Suppose that s{i} ∈Pp is the polynomial equal to the restriction of a given spline
+s ∈Sr
+p(∆) to the interval [ηi,ηi+1), i = 0,...,ℓ. Since s ∈Cri(ηi), we have
+s{i}(x)−s{i−1}(x) =
+p
+∑
+j=ri+1
+ci,j(x−ηi)j,
+for some coefﬁcients ci,j. It follows that Sr
+p(∆) is spanned by the set of functions
+
+1,x,...,xp,(x−η1)r1+1
++
+,...,(x−η1)p
++,...,(x−ηℓ)rℓ+1
++
+,...,(x−ηℓ)p
++
+	
+,
+(42)
+where the truncated power function (·)p
++ is deﬁned by
+(x)p
++ :=
+(
+xp,
+x > 0,
+0,
+x < 0,
+(43)
+
+
+PDF PAGE 14
+14
+Tom Lyche, Carla Manni, and Hendrik Speleers
+and the value at zero is deﬁned by taking the right limit.
+It is easy to see that the functions in (42) are linearly independent. Indeed, let
+s(x) :=
+p
+∑
+j=0
+c0,j xj +
+ℓ
+∑
+i=1
+p
+∑
+j=ri+1
+ci,j(x−ηi)j
++ = 0,
+x ∈[η0,ηℓ+1].
+On [η0,η1] we have s(x) = ∑p
+j=0 c0,j xj and it follows that c0,0 = ··· = c0,p = 0.
+Suppose for some k ≤ℓthat ci,j = 0 for i < k. Then, on [ηk,ηk+1] we have s(x) =
+∑p
+j=rk+1 ck,j(x−ηk)j = 0 showing that all ck,j = 0.
+This implies that the set of functions in (42) forms a basis for Sr
+p(∆), the so-called
+truncated power basis. As a consequence,
+dim(Sr
+p(∆)) = p + 1 +
+ℓ
+∑
+i=1
+(p −ri).
+The next theorem shows that the set of B-splines in (30) deﬁned over a speciﬁc knot
+sequence ξ forms an alternative basis for Sr
+p(∆). This was ﬁrst proved by Curry and
+Schoenberg in [8].
+Theorem 13 (Curry–Schoenberg). The piecewise polynomial space Sr
+p(∆) is
+characterized in terms of B-splines by
+Sr
+p(∆) = Sp,ξ ,
+where the knot sequence ξ := {ξi}n+p+1
+i=1
+with n := dim(Sr
+p(∆)) is constructed such
+that
+ξ1 ≤··· ≤ξp+1 := η0,
+ηℓ+1 =: ξn+1 ≤··· ≤ξn+p+1,
+and
+ξp+2,...,ξn :=
+p−r1
+z
+}|
+{
+η1,...,η1,...,
+p−rℓ
+z
+}|
+{
+ηℓ,...,ηℓ.
+Proof. From the piecewise polynomial and smoothness properties of B-splines it
+follows that the space Sp,ξ of B-splines restricted to the basic interval [ξp+1,ξn+1]
+is a subspace of Sr
+p(∆). Moreover, dim(Sp,ξ ) = n since ξj+p+1 > ξj for j = 1,...,n
+and ξp+2 > ξp+1, ξn+1 > ξn. Since Sr
+p(∆) is spanned by n functions we obtain
+Sr
+p(∆) = Sp,ξ .
+⊓⊔
+Note that the knot sequence in the above theorem is (p + 1)-basic.
+Example 14. Consider ∆:= {η0 < η1 < η2 < η3} and the space Sr
+3(∆) with r = (r1,r2) = (2,1).
+Then it follows from Theorem 13 that Sr
+3(∆) = S3,ξ , where
+ξ = {ξi}7+3+1
+i=1
+= {η0 = η0 = η0 = η0 < η1 < η2 = η2 < η3 = η3 = η3 = η3}.
+This knot sequence is 4-open.
+We now give a characterization for the space spanned by the r-th derivatives of
+B-splines for 0 ≤r ≤p, i.e.,
+
+
+PDF PAGE 15
+B-Splines and Spline Approximation
+15
+Dr
++Sp,ξ :=
+
+s : [ξp+1,ξn+1] →R : s = Dr
++
+ n
+∑
+j=1
+cjB j,p,ξ
+
+, cj ∈R
+
+.
+Theorem 15. Given a knot sequence ξ := {ξi}n+p+1
+i=1
+, we have for 0 ≤r ≤p,
+Dr
++Sp,ξ = Sp−r,ξ r,
+where ξ r := {ξi}n+p+1−r
+i=r+1
+.
+Proof. The result is obvious for r = 0. Let us now consider the case r = 1, for which
+we note that
+{B1,p−1,ξ 1,...,Bn−1,p−1,ξ 1} = {B2,p−1,ξ ,...,Bn,p−1,ξ }.
+By the differentiation formula (39) it is clear that
+D+
+ n
+∑
+j=1
+cjB j,p,ξ
+
+= p
+n
+∑
+j=2
+ cj −cj−1
+ξj+p −ξj
+
+B j,p−1,ξ ∈Sp−1,ξ 1.
+On the other hand, suppose s ∈Sp−1,ξ 1, represented as s = ∑n
+j=2 d jB j,p−1,ξ . Then,
+by using again the differentiation formula, we can write s = D+
+ ∑n
+j=1cjB j,p,ξ
+
+,
+where c1 can be any real number and
+cj = cj−1 + ξj+p −ξj
+p
+d j,
+j = 2,...,n.
+For r > 1 we use the relation Dr
++ = D+Dr−1
++ .
+⊓⊔
+By combining Theorem 13 and Theorem 15 it follows that for 0 ≤r ≤p,
+Sr−r
+p−r(∆) = Dr
++Sp,ξ ,
+where r −r :=
+ max(r1 −r,−1),...,max(rℓ−r,−1)
+
+and the knot sequence ξ is
+constructed as in Theorem 13.
+1.2.3 B-spline representation of polynomials
+Polynomials can be represented in terms of B-splines of at least the same degree.
+We now derive an explicit expression for their B-spline coefﬁcients by using the
+dual polynomials and the (local) Marsden identity.
+Theorem 16 (Marsden identity). We have
+(y−x)p =
+n
+∑
+j=1
+ψj,p,ξ (y)B j,p,ξ (x),
+x ∈[ξp+1,ξn+1],
+y ∈R,
+(44)
+
+
+PDF PAGE 16
+16
+Tom Lyche, Carla Manni, and Hendrik Speleers
+where ψj,p,ξ (y) := (y−ξj+1)···(y−ξj+p) is the polynomial of degree p that is dual
+to B j,p,ξ .
+Proof. This follows immediately from the local version (17). Indeed, if x ∈[ξp+1,ξn+1)
+then x ∈[ξm,ξm+1) for some p + 1 ≤m ≤n, and by the local support property (35)
+we get
+(y−x)p =
+m
+∑
+j=m−p
+ψj,p,ξ (y)B j,p,ξ (x) =
+n
+∑
+j=1
+ψj,p,ξ (y)B j,p,ξ (x).
+Taking into account the left continuity of B-splines at the endpoint ξn+1, see (33),
+we arrive at the Marsden identity (44).
+⊓⊔
+Differentiating p −k times with respect to y in (44) results in the following for-
+mula.
+Corollary 17. For k = 0,1,..., p we have
+(y−x)k
+k!
+=
+n
+∑
+j=1
+ 1
+p!Dp−kψj,p,ξ (y)
+
+B j,p,ξ (x),
+x ∈[ξp+1,ξn+1],
+y ∈R.
+(45)
+Corollary 17 immediately leads to the following properties.
+• Representation of monomials. For k = 0,1,..., p we have
+xk =
+n
+∑
+j=1
+ξ ∗,k
+j,p,ξ B j,p,ξ (x),
+x ∈[ξp+1,ξn+1],
+(46)
+where
+ξ ∗,k
+j,p,ξ := (−1)k k!
+p!Dp−kψj,p,ξ (0).
+(47)
+This follows from (45) with y = 0.
+• Partition of unity. Taking k = 0 in (46) gives
+n
+∑
+j=1
+B j,p,ξ (x) = 1,
+x ∈[ξp+1,ξn+1].
+(48)
+Since the B-splines are nonnegative it follows that they form a nonnegative par-
+tition of unity on [ξp+1,ξn+1].
+• Greville points. Taking k = 1 in (46) gives for p ≥1,
+x =
+n
+∑
+j=1
+ξ ∗
+j,p,ξ B j,p,ξ (x),
+x ∈[ξp+1,ξn+1],
+(49)
+where
+ξ ∗
+j,p,ξ := ξ ∗,1
+j,p,ξ = ξj+1 + ···+ ξj+p
+p
+.
+(50)
+
+
+PDF PAGE 17
+B-Splines and Spline Approximation
+17
+The number ξ ∗
+j,p,ξ is called a Greville point 3. It is also known as a knot average
+or a node.
+Example 18. For p = 3 the equation (46) gives
+1 =
+n
+∑
+j=1
+B j,3,ξ ,
+x =
+n
+∑
+j=1
+ξ j+1 +ξ j+2 +ξ j+3
+3
+B j,3,ξ ,
+x2 =
+n
+∑
+j=1
+ξ j+1ξ j+2 +ξ j+1ξ j+3 +ξ j+2ξ j+3
+3
+B j,3,ξ ,
+x3 =
+n
+∑
+j=1
+ξ j+1ξ j+2ξ j+3 B j,3,ξ .
+We ﬁnally present an expression for the B-spline coefﬁcients of a general poly-
+nomial.
+Proposition 19 (Representation of polynomials). Any polynomial g of degree p
+can be represented as
+g(x) =
+n
+∑
+j=1
+Λj,p,ξ (g)B j,p,ξ (x),
+x ∈[ξp+1,ξn+1],
+(51)
+where
+Λj,p,ξ (g) := 1
+p!
+p
+∑
+r=0
+(−1)p−r Drψj,p,ξ (τj)Dp−rg(τj),
+τj ∈R.
+(52)
+Proof. The polynomial g can be represented in Taylor form (79) as
+g(x) =
+p
+∑
+r=0
+(x−τj)p−r
+(p −r)! Dp−rg(τj),
+τj ∈R.
+The result follows when we apply (45) with k = p −r.
+⊓⊔
+Note that, if τj is a root of ψj of multiplicity µj then Drψi(τj) = 0, r =
+0,1,...,µj −1 and (52) becomes
+Λj,p,ξ (g) = 1
+p!
+p
+∑
+r=µj
+(−1)p−r Drψj,p,ξ (τj)Dp−rg(τj),
+τj ∈R.
+(53)
+Example 20. The polynomial g(x) = ax2 + bx + c can be represented in terms of quadratic B-
+splines:
+ax2 +bx+c =
+n
+∑
+j=1
+cj B j,2,ξ .
+3 An explicit expression of (50) was given by Greville in [10]. According to Schoenberg [18],
+Greville reviewed the paper [18] introducing some elegant simpliﬁcations.
+
+
+PDF PAGE 18
+18
+Tom Lyche, Carla Manni, and Hendrik Speleers
+From (51)–(52) with ψj,2,ξ (y) := (y−ξ j+1)(y−ξ j+2), we obtain that
+cj = Λj,2,ξ (g) = 1
+2
+
+(τ j −ξ j+1)(τ j −ξ j+2)2a−(2τ j −ξ j+1 −ξ j+2)(2aτ j +b)+2(aτ2
+j +bτ j +c)
+
+= aξ j+1ξ j+2 +b ξ j+1 +ξ j+2
+2
++c.
+1.2.4 B-spline representation of splines
+In the previous section we have derived an explicit expression for the B-spline coef-
+ﬁcients of polynomials; see (51). The next theorem extends this result by providing
+an explicit expression for the B-spline coefﬁcients of any spline in Sp,ξ .
+Theorem 21 (Representation of B-spline coefﬁcients). Any element s in the space
+Sp,ξ can be represented as 4
+s(x) =
+n
+∑
+j=1
+Λj,p,ξ (s)B j,p,ξ (x),
+x ∈[ξp+1,ξn+1],
+(54)
+where
+Λj,p,ξ (s) := 1
+p!
+
+
+
+
+
+
+
+
+
+∑p
+r=µj(−1)p−r Drψj,p,ξ (τj)Dp−r
++ s(τj),
+if τj = ξj,
+∑p
+r=µj(−1)p−r Drψj,p,ξ (τj)Dp−rs(τj),
+if ξj < τj < ξj+p+1,
+∑p
+r=µj(−1)p−r Drψj,p,ξ (τj)Dp−r
+−s(τj),
+if τj = ξj+p+1,
+(55)
+and where µj ≥0 is the number of times τj appears in ξj+1,...,ξj+p.
+Proof. Suppose ξj ≤τj < ξj+p+1 and let Ij := [ξmj,ξmj+1) be the interval contain-
+ing τj. The restriction of s to Ij is a polynomial and so by Proposition 19 we ﬁnd
+s(x) =
+mj
+∑
+i=mj−p
+ 1
+p!
+p
+∑
+r=0
+(−1)p−r Drψi,p,ξ (τj)Dp−r
++ s(τj)
+
+Bi,p,ξ (x),
+x ∈Ij.
+(56)
+Note that since ξj ≤τj < ξj+p+1 we have j ≤mj ≤j + p which implies mj −p ≤
+j ≤mj. By taking i = j in (56) and using the local linear independence of the B-
+splines, we obtain
+Λj,p,ξ (s) := 1
+p!
+p
+∑
+r=0
+(−1)p−r Drψj,p,ξ (τj)Dp−r
++ s(τj).
+Since Drψj,p,ξ (τj) = 0 for r < µj we obtain the top term in (55). In the middle term
+we can replace Dp−r
++ s(τj) by Dp−rs(τj) since s ∈Cp−µj(τj). The proof of the last
+term is similar using D−instead of D+.
+⊓⊔
+4 The number Λj,p,ξ (s) is known as the de Boor–Fix functional [4] applied to s.
+
+
+PDF PAGE 19
+B-Splines and Spline Approximation
+19
+Note that the operator Λj,p,ξ in (53) is identical to Λj,p,ξ in (55). However, in the
+spline case we need the restriction τj ∈[ξj,ξj+p+1].
+Because the set of B-splines {B j,p,ξ }n
+j=1 is a basis for the space Sp,ξ , the co-
+efﬁcients Λj,p,ξ (s) are uniquely determined for any s ∈Sp,ξ . Thus, the right-hand
+side in (55) does not depend on the choice of τj. This is an astonishing property
+considering the complexity of the expression.
+For example, one could take the Greville point ξ ∗
+j,p,ξ deﬁned in (50) as a valid
+choice for the point τj. It is easy to verify that ξ ∗
+j,p,ξ ∈[ξj,ξj+p+1], and moreover,
+ξ ∗
+j,p,ξ ∈(ξj,ξj+p+1) if B j,p,ξ is a continuous function.
+Example 22. We consider the quadratic spline
+s(x) =
+n
+∑
+j=1
+cjB j,2,ξ (x),
+and we illustrate that some derivative terms in the expression (55) can be canceled by speciﬁc
+choices of τ j.
+–
+If τ j is the Greville point ξ ∗
+j,2,ξ := (ξ j+1+ξ j+2)/2, then there is no ﬁrst derivative term. Indeed,
+we have
+cj = Λj,2,ξ (s) = s(ξ ∗
+j,2,ξ )−(ξ j+2 −ξ j+1)2
+8
+D2s(ξ ∗
+j,2,ξ ).
+Moreover, since s ∈P2 on [ξ j+1,ξ j+2], we can replace D2s(ξ ∗
+j,2,ξ ) by a difference quotient
+D2s(ξ ∗
+j,2,ξ ) =
+ s(ξ j+2)−2s(ξ ∗
+j,2,ξ )+s(ξ j+1)
+.ξ j+2 −ξ j+1
+2
+2
+,
+to obtain
+cj = −1
+2s(ξ j+1)+2s(ξ ∗
+j,2,ξ )−1
+2 s(ξ j+2).
+(57)
+–
+If τ j is equal to ξ j+1 or ξ j+2, then there is no second derivative term. Indeed, we have
+cj = Λj,2,ξ (s) = s(τ j)+
+ξ ∗
+j,2,ξ −τ j
+2
+Ds(τ j).
+A similar property holds for any p: if τ j is chosen as one of the interior knots ξ j+1,...,ξ j+p,
+then there is no p-th derivative term in the expression of Λj,p,ξ (s).
+1.3 Cardinal B-splines
+A particularly interesting case of B-spline functions is obtained when the knot se-
+quence is uniformly spaced. Without loss of generality we can assume that the knot
+sequence is given by the set of integers Z. It is natural to index the knots as ξj = j,
+j ∈Z. Due to the translation invariance property (9) we have
+B j,p,Z(x) = B0,p,Z(x−j),
+j ∈Z.
+(58)
+
+
+PDF PAGE 20
+20
+Tom Lyche, Carla Manni, and Hendrik Speleers
+Therefore, all the B-splines on the knot sequence Z are integer translates of a single
+function. This motivates the following deﬁnition.
+Deﬁnition 23. The function Mp := B[0,1,..., p + 1] is the cardinal B-spline of
+degree p.
+Cardinal B-splines possess several nice properties.
+• Recurrence relation. From Deﬁnition 2 we obtain
+M0(x) =
+(
+1,
+if x ∈[0,1),
+0,
+otherwise,
+(59)
+Mp(x) = x
+pMp−1(x)+ p + 1 −x
+p
+Mp−1(x−1),
+p ≥1.
+(60)
+• Differentiation and integration. The formulas (22) and (29) simplify in the
+case of cardinal B-splines to
+DMp(x) = Mp−1(x)−Mp−1(x−1),
+(61)
+and
+Z
+R Mp(x)dx = 1.
+(62)
+• Convolution. The convolution of two functions f and g is given by
+(f ∗g)(x) :=
+Z
+R f(x−y)g(y)dy.
+We have
+Mp(x) = (Mp−1 ∗M0)(x) =
+Z 1
+0 Mp−1(x−y)dy,
+(63)
+and
+Mp(x) =
+ p+1
+z
+}|
+{
+M0 ∗···∗M0
+
+(x).
+(64)
+Proof. From (61) we deduce
+Mp(x) =
+Z x
+0 (Mp−1(y)−Mp−1(y−1))dy =
+Z x
+0 Mp−1(y)dy−
+Z x−1
+−1
+Mp−1(y)dy
+=
+Z x
+x−1 Mp−1(y)dy =
+Z 1
+0 Mp−1(x−y)dy.
+Applying recursively (63) immediately gives (64).
+⊓⊔
+• Symmetry. The cardinal B-spline Mp is symmetric with respect to the midpoint
+of the support, namely (p + 1)/2. More generally,
+DrMp
+ p + 1
+2
++ x
+
+= (−1)r DrMp
+ p + 1
+2
+−x
+
+,
+r = 0,..., p −1,
+(65)
+
+
+PDF PAGE 21
+B-Splines and Spline Approximation
+21
+and
+Dp
+−Mp
+ p + 1
+2
++ x
+
+= (−1)p Dp
++Mp
+ p + 1
+2
+−x
+
+.
+(66)
+Proof. From repeated differentiations, it is sufﬁcient to prove Mp(p + 1 −x) =
+Mp(x). We proceed by induction. It is easy to check that it is true for p = 0. As-
+suming the symmetry property holds for degree p −1 and using the convolution
+property, we get
+Mp(p + 1 −x) =
+Z 1
+0 Mp−1(p + 1 −x−t)dt =
+Z 1
+0 Mp−1(x−1 +t)dt
+= −
+Z 1
+0 Mp−1(x−t)dt =
+Z 1
+0 Mp−1(x−t)dt = Mp(x).
+⊓⊔
+• Fourier transform. The Fourier transform of f ∈L2(R) is given by
+bf (θ) :=
+Z
+R f(x)e−iθx dx,
+where i := √−1 denotes the imaginary unit. From (59), a direct computation
+immediately gives
+c
+M0(θ) = 1 −e−iθ
+iθ
+.
+An interesting property of the Fourier transform of a convolution is
+( d
+f ∗g)(θ) = bf (θ)bg(θ),
+∀f,g ∈L2(R);
+see, e.g., [14]. So, the convolution property (63) gives
+c
+Mp(θ) =
+ c
+M0(θ)
+p+1 =
+1 −e−iθ
+iθ
+p+1
+.
+From (58) it follows that the set of integer translates
+
+Mp(x−i), i ∈Z
+	
+(67)
+consists of locally linearly independent functions. They span the space of piecewise
+polynomials of degree p and smoothness p −1 with integer break points, see (41),
+and they have the following properties.
+• Partition of unity. From (48) and (58) we get
+∑
+i∈Z
+Mp(x−i) = 1,
+x ∈R.
+Due to the local support of cardinal B-splines, the above series reduces to a ﬁnite
+sum for any x. More precisely, referring to (21), we have
+
+
+PDF PAGE 22
+22
+Tom Lyche, Carla Manni, and Hendrik Speleers
+m
+∑
+i=m−p
+Mp(x−i) = 1,
+x ∈[m,m+ 1).
+• Greville points. From (50)–(49) and (58) we have
+x = ∑
+i∈Z
+ζ ∗
+i,pMp(x−i),
+x ∈R,
+with
+ζ ∗
+i,p := (1 + i)+ ···+ (p + i)
+p
+= p + 1
+2
++ i.
+(68)
+We now provide an expression for inner products of the cardinal B-spline and its
+translates.
+Theorem 24 (Inner product). Given p1, p2 ≥0, we have
+Z
+R Mp1(y)Mp2(y+ x)dy = Mp1+p2+1(p1 + 1 + x) = Mp1+p2+1(p2 + 1 −x).
+Proof. From the symmetry property (65) with r = 0 and the convolution relation
+(63) of cardinal B-splines, we get
+Z
+R Mp1(y)Mp2(y+ x)dy =
+Z
+R Mp1(y)Mp2(p2 + 1 −y−x)dy
+=
+ Mp1 ∗Mp2
+
+(p2 + 1 −x)
+=
+ p1+1
+z
+}|
+{
+M0 ∗···∗M0∗
+p2+1
+z
+}|
+{
+M0 ∗···∗M0
+
+(p2 + 1 −x)
+= Mp1+p2+1(p2 + 1 −x).
+Finally, again by symmetry of cardinal B-splines, we have
+Mp1+p2+1(p1 + 1 + x) = Mp1+p2+1(p2 + 1 −x),
+which completes the proof.
+⊓⊔
+A generalization towards inner products of derivatives can be found in [9].
+Theorem 25 (Inner product of derivatives). Given p1 ≥r1 ≥0 and p2 ≥r2 ≥0,
+we have
+Z
+R Dr1Mp1(y)Dr2Mp2(y+ x)dy = (−1)r1 Dr1+r2Mp1+p2+1(p1 + 1 + x)
+= (−1)r2 Dr1+r2Mp1+p2+1(p2 + 1 −x).
+Due to the relevance of the set (67), the results in Theorem 24 and Theorem 25
+are of particular interest when we consider integer shifts, i.e., x ∈Z. In this case, the
+above inner products reduce to evaluations of cardinal B-splines and their deriva-
+tives at either integer or half-integer points. Moreover, there is a relation with the
+Greville points (68). Indeed, if p1 = p2 = p and x = i in Theorem 24, then
+
+
+PDF PAGE 23
+B-Splines and Spline Approximation
+23
+Z
+R Mp(x)Mp(x+ i)dx = M2p+1(p + 1 + i) = M2p+1(ζ ∗
+i,2p+1).
+A similar relation holds for the inner products of derivatives in Theorem 25. Thanks
+to the recurrence relation for derivatives (61), the inner products of derivatives of
+cardinal B-splines and its integer translates reduce to evaluations of cardinal B-
+splines at either integer or half-integer points.
+1.4 Condition number
+A basis {B j} of a normed space is said to be stable with respect to a vector norm if
+there are positive constants KL and KU such that
+K−1
+L ∥c∥≤
+∑
+j
+cjB j
+ ≤KU∥c∥,
+(69)
+for all coefﬁcient vectors c := (cj). For simplicity we use the same symbol ∥·∥for
+the norm in the space and the vector norm. The number
+κ := inf{KLKU : KL and KU satisfy (69)}
+(70)
+is called the condition number of the basis {B j} with respect to ∥·∥.
+Such condition numbers give an upper bound for how much an error in co-
+efﬁcients can be magniﬁed in function values. Indeed, if f = ∑j cjB j ̸= 0 and
+g = ∑j d jB j then it follows immediately from (69) that
+∥f −g∥
+∥f∥
+≤κ ∥c −d∥
+∥c∥
+,
+where c := (cj) and d := (d j). Many other applications are given in [3] and it is
+interesting to have estimates for the size of κ.
+We consider the Lq-norm for functions and the q-norm for vectors with 1 ≤q ≤
+∞. We focus on a scaled version of the B-spline basis deﬁned on [ξ1,ξn+p+1),
+{Nj,p,q,ξ }n
+j=1 := {γ−1/q
+j,p,ξ B j,p,ξ }n
+j=1,
+(71)
+where γj,p,ξ is deﬁned in (29). Note that the knot sequence ξ has to be (p+1)-basic
+in order to have linearly independent B-splines. This also ensures that γj,p,ξ > 0.
+The q-norm condition number of the basis in (71) will be denoted by κp,q,ξ , i.e.,
+κp,q,ξ := sup
+c̸=0
+∑n
+j=1cj Nj,p,q,ξ
+
+Lq([ξ1,ξn+p+1])
+∥c∥q
+sup
+c̸=0
+∥c∥q
+∑n
+j=1 cj Nj,p,q,ξ
+
+Lq([ξ1,ξn+p+1])
+.
+(72)
+
+
+PDF PAGE 24
+24
+Tom Lyche, Carla Manni, and Hendrik Speleers
+The next theorem shows that the scaled B-spline basis above is stable in any Lq-
+norm independently on the knot sequence ξ . It also provides an upper bound for the
+q-norm condition number which does not depend on ξ . To this end, we ﬁrst state
+the H¨older inequality for sums:
+n
+∑
+j=1
+|xj yj| ≤∥x∥q∥y∥q′,
+(73)
+where q,q′ are integers so that
+1
+q + 1
+q′ = 1,
+1 ≤q ≤∞.
+(74)
+In particular, q′ = ∞if q = 1 and q′ = 2 if q = 2.
+Theorem 26. For any p ≥0 there exists a positive constant Kp depending only on
+p, such that for any vector c := (c1,...,cn) and for any 1 ≤q ≤∞we have
+K−1
+p ∥c∥q ≤
+
+n
+∑
+j=1
+cj Nj,p,q,ξ
+
+Lq([ξ1,ξn+p+1])
+≤∥c∥q.
+(75)
+Proof. We ﬁrst prove the upper inequality. Using the nonnegative partition of unity
+property of B-splines the upper bound for q = ∞is straightforward, so we consider
+1 ≤q < ∞in the following. By applying the H¨older inequality (73) and again the
+nonnegative partition of unity property of B-splines, we obtain for x ∈[ξ1,ξn+p+1),
+
+n
+∑
+j=1
+cj Nj,p,q,ξ (x)
+ ≤
+n
+∑
+j=1
+cj γ−1/q
+j,p,ξ B j,p,ξ (x)(x)1/qB j,p,ξ (x)
+1−1/q
+≤
+ n
+∑
+j=1
+|cj|q γ−1
+j,p,ξ B j,p,ξ (x)
+1/q n
+∑
+j=1
+B j,p,ξ (x)
+1−1/q
+≤
+ n
+∑
+j=1
+|cj|q γ−1
+j,p,ξ B j,p,ξ (x)
+1/q
+.
+Raising both sides of this inequality to the q-th power and integrating gives the
+inequality
+Z ξn+p+1
+ξ1
+
+n
+∑
+j=1
+cj Nj,p,q,ξ (x)
+
+q
+dx ≤
+n
+∑
+j=1
+|cj|q γ−1
+j,p,ξ
+Z ξj+p+1
+ξj
+B j,p,ξ (x)dx = ∥c∥q
+q.
+Taking the q-th roots on both sides proves the upper inequality in (75).
+We now focus on the lower inequaltity. We extend ξ to a (p + 1)-open knot se-
+quence ˆξ by possibly increasing the multiplicity of ξ1 and ξn+p+1 to p+1. Clearly,
+the set of B-splines on ξ is a subset of the set of B-splines on ˆξ , and any linear com-
+bination of the B-splines on ξ is a linear combination of the B-splines on ˆξ where
+
+
+PDF PAGE 25
+B-Splines and Spline Approximation
+25
+the extra B-splines have coefﬁcients zero. Therefore, without loss of generality, we
+can assume that the knot sequence is open with the basic interval [ξ1,ξn+p+1]. The
+lower bound then follows from Lemma 45.
+⊓⊔
+We deﬁne a condition number which is independent of the knot sequence as
+follows
+κp,q := sup
+ξ
+κp,q,ξ .
+(76)
+Theorem 26 shows that
+κp,q ≤Kp < ∞.
+It is known that κp,q grows like 2p for all 1 ≤q ≤∞; see [12, 15] where it is proved
+that
+1
+p + 12p−1/2 ≤κp,q ≤(p + 1)2p+1,
+1 ≤q ≤∞.
+(77)
+2 Spline approximation
+In this section we discuss how well a sufﬁciently smooth function can be approxi-
+mated in the spline space spanned by a given set of B-splines. Exploiting the prop-
+erties of the B-spline basis presented in the previous section, we explicitly construct
+a spline which achieves optimal approximation accuracy for the function and its
+derivatives, and we determine the corresponding error estimates. The construction
+method we are going to present is local and linear.
+2.1 Preliminaries
+The H¨older inequality for integrals is given by
+Z b
+a |f(x)g(x)|dx ≤∥f∥Lq(I)∥g∥Lq′(I),
+(78)
+where q,q′ are integers satisfying (74).
+The Taylor polynomial of degree p at the point a to a function f ∈W p+1
+∞
+([a,b])
+is deﬁned by
+Ta,p f(x) :=
+p
+∑
+j=0
+(x−a)j
+j!
+Dj f(a),
+(79)
+and its approximation error can be expressed in integral form for x ∈[a,b] as
+f(x)−Ta,p f(x) = 1
+p!
+Z b
+a (x−y)p
++Dp+1 f(y)dy.
+(80)
+
+
+PDF PAGE 26
+26
+Tom Lyche, Carla Manni, and Hendrik Speleers
+Every polynomial g ∈Pp can be written in Taylor form as g = Ta,pg.
+Theorem 27. Let f ∈W p+1
+∞
+([a,b]) with 1 ≤q ≤∞, and let Ta,p f be the Taylor
+polynomial of degree p to f at the point a. Then, for any x ∈[a,b] and 0 ≤r ≤p,
+|Dr(f −Ta,p f)(x)| ≤(b −a)p+1−r−1/q
+(p −r)!
+∥Dp+1 f∥Lq([a,b]),
+(81)
+and
+∥Dr(f −Ta,p f)∥Lq([a,b]) ≤(b −a)p+1−r
+(p −r)!
+∥Dp+1 f∥Lq([a,b]).
+(82)
+Proof. By differentiating the integral form of the Taylor approximation error (80)
+and using the H¨older inequality (78), we obtain
+|Dr(f −Ta,p f)(x)| =
+1
+(p −r)!
+Z b
+a (x−y)p−r
++ Dp+1 f(y)dy
+≤
+1
+(p −r)!
+Z b
+a (x−y)(p−r)q′
++
+dy
+1/q′
+∥Dp+1 f∥Lq([a,b])
+≤
+(b −a)p−r+1/q′
+(p −r)!((p −r)q′ + 1)1/q′ ∥Dp+1 f∥Lq([a,b]).
+Since 1/q+1/q′ = 1 and (p−r)q′ ≥0, we obtain (81). Finally, taking the Lq-norm
+shows (82).
+⊓⊔
+For the sake of simplicity one can use the following weaker, but simpler upper
+bound
+∥Dr(f −Ta,p f)∥Lq([a,b]) ≤(b −a)p+1−r∥Dp+1 f∥Lq([a,b]).
+(83)
+2.2 Spline quasi-interpolation
+In general, a spline approximating a function f can be written in terms of B-splines
+as
+Q f(x) :=
+n
+∑
+j=1
+λ j fB j,p,ξ (x)
+(84)
+for suitable coefﬁcients λ j f. The spline in (84) will be referred to as a quasi-
+interpolant to f whenever it provides a “reasonable” approximation to f.
+Both interpolation and least squares are examples of quasi-interpolation methods.
+They are global methods since we have to solve an n by n system of linear equations
+to ﬁnd the coefﬁcients λ j f. It follows that the value of the spline (84) at a point
+depends on all the data. In this section we focus on local linear methods, i.e.,
+methods where each λ j is a linear functional only depending on the values of f
+“near” the support of B j,p,ξ . This implies that the value of the spline approximation
+Q f at a point depends only on the data in a local neighborhood of the point.
+
+
+PDF PAGE 27
+B-Splines and Spline Approximation
+27
+In order to deal with point evaluator functionals we assume in this section that
+f ∈C−1([a,b]), where [a,b] is a bounded interval. We consider a spline space Sp,ξ ,
+where the knot sequence ξ is (p + 1)-basic and the basic interval [ξp+1,ξn+1] is
+equal to [a,b].
+2.2.1 Deﬁnition and basic approximation properties
+In view of constructing a spline quasi-interpolant with optimal accuracy, we present
+some basic approximation properties of quasi-interpolants of the form (84). Since
+we are interested in local methods, we start with the following deﬁnition.
+Deﬁnition 28. We say that a linear functional λ : C−1([a,b]) →R is supported on
+a nonempty set S ⊂[a,b] if λ f = 0 for any f ∈C−1([a,b]) which vanishes on S .
+Note that the set S in this deﬁnition is not uniquely deﬁned and is not necessary
+minimal.
+To construct our quasi-interpolant we use linear functionals which are supported
+on intervals consisting of a few knot intervals, where few means independent on
+the dimension n of the spline space, but can depend on the degree p. This will
+ensure that Q f only depends locally on f. To ensure a good approximation power
+we require polynomial reproduction up to a given degree. Moreover, to bound the
+error a boundedness assumption on the linear functionals is needed. This leads to
+the following deﬁnitions.
+Deﬁnition 29. The quasi-interpolant Q given by (84) is called a local quasi-
+interpolant if
+(i) each λ j is supported on the interval Ij, where
+Ij := [ξj−νL,ξj+p+1+νU]∩[a,b],
+(85)
+for some integers νL,νU ≥−p such that Ij has nonempty interior;
+(ii) the λ j are chosen so that (84) reproduces Pl, i.e.,
+Qg(x) = g(x) for all x ∈[a,b] and all g in Pl,
+(86)
+for some l with 0 ≤l ≤p.
+Note that the number of knot intervals in Ij is bounded above by νL +νU + p+1.
+Deﬁnition 30. A local quasi-interpolant Q is called bounded in an Lq-norm, 1 ≤
+q ≤∞, if there is a constant CQ such that for each λ j we have
+|λ j f| ≤CQh−1/q
+j,p,ξ ∥f∥Lq(Ij) for all f ∈C−1(Ij),
+(87)
+where
+h j,p,ξ :=
+max
+max(j,p+1)≤k≤min(n,j+p)ξk+1 −ξk.
+(88)
+
+
+PDF PAGE 28
+28
+Tom Lyche, Carla Manni, and Hendrik Speleers
+Note that h j,p,ξ is the largest length of a knot interval in the intersection of the ba-
+sic interval with the support of B j,p,ξ . The requirement (85) ensures that the spline in
+(84) provides a local approximation to f. The polynomial reproduction as stated in
+(86) coupled with the boundedness of the linear functionals are the main ingredients
+to prove the approximation power of any bounded local quasi-interpolant.
+We now give both a local and a global version of the approximation power of
+bounded local quasi-interpolants. To turn a local bound into a global bound we ﬁrst
+state the following lemma.
+Lemma 31. Suppose that f ∈Lq([ξp+1,ξn+1]) for some q, 1 ≤q < ∞, and that
+mi1,...,mi2 are integers with mi1 < ··· < mi2, ξp+1 ≤ξmi1 and ξmi2+k ≤ξn+1 for
+some positive integer k and integers i1 ≤i2. Then
+ i2
+∑
+j=i1
+∥f∥q
+Lq([ξmj ,ξmj+k])
+1/q
+≤k1/q∥f∥Lq([ξp+1,ξn+1]).
+(89)
+Proof. With the stated assumptions each knot interval in [ξp+1,ξn+1] is counted
+at most k times and moreover all the local intervals [ξmj,ξmj+k] are contained in
+[ξp+1,ξn+1]. The deﬁnition of the Lq-norm gives immediately (89).
+⊓⊔
+Theorem 32. Let Q be a bounded local quasi-interpolantin an Lq-norm, 1 ≤q ≤∞,
+as in Deﬁnitions 29 and 30. Let l, p be integers with 0 ≤l ≤p. Suppose ξm < ξm+1
+for some p + 1 ≤m ≤n and let f ∈W l+1
+q
+(Jm) with
+Jm := [ξm−p−νL,ξm+p+1+νU]∩[a,b].
+Then,
+∥f −Q f∥Lq([ξm,ξm+1]) ≤(2p + νL + νU + 1)l+1
+l!
+(1 +CQ)hl+1
+m,ξ ∥Dl+1 f∥Lq(Jm), (90)
+where hm,ξ is the largest length of a knot interval in Jm. Moreover, if f ∈W l+1
+q
+([a,b])
+then
+∥f −Q f∥Lq([a,b]) ≤(2p + νL + νU + 1)l+1+1/q
+l!
+(1+CQ)hl+1
+ξ
+∥Dl+1 f∥Lq([a,b]), (91)
+where
+hξ :=
+max
+p+1≤j≤nξj+1 −ξj.
+Proof. Note that f is continuous since l ≥0. Suppose x ∈[ξm,ξm+1). By the local
+partition of unity (21) and by (87) we have
+|Q f(x)| ≤
+max
+m−p≤j≤m|λ j f| ≤CQ
+max
+m−p≤j≤mh−1/q
+j,p,ξ ∥f∥Lq(Ij).
+Since ξm+1 −ξm ≤minm−p≤j≤mh j,p,ξ and Jm = ∪m−p≤j≤mIj we ﬁnd
+∥Q f∥Lq([ξm,ξm+1]) ≤CQ∥f∥Lq(Jm).
+(92)
+
+
+PDF PAGE 29
+B-Splines and Spline Approximation
+29
+¿From (86) we know that Q reproduces any polynomial g ∈Pl, and so the triangle
+inequality gives
+∥f −Q f∥Lq([ξm,ξm+1]) ≤∥f −g∥Lq([ξm,ξm+1]) + ∥Q(f −g)∥Lq([ξm,ξm+1]).
+Since νL,νU ≥−p we have [ξm,ξm+1] ⊂Jm. Therefore, by (92) for any g ∈Pl,
+∥f −Q f∥Lq([ξm,ξm+1]) ≤(1 +CQ)∥f −g∥Lq(Jm).
+(93)
+Let us now choose g := Tξm−p−νL,l f, where Tξm−p−νL,l f is the Taylor polynomial of
+degree l deﬁned in (79) with a = ξm−p−νL. Then, by (82) with r = 0 we have
+∥f −g∥Lq(Jm) ≤(2p + νL + νU + 1)l+1
+l!
+hl+1
+m,ξ ∥Dl+1 f∥Lq(Jm).
+(94)
+Combining the inequalities (93) and (94) gives the local bound.
+Since each Jm is contained in the basic interval [a,b] the global bound follows
+immediately from the local one and Lemma 31.
+⊓⊔
+Example 33. Let ξ be a (p+1)-open knot sequence. The Schoenberg operator
+Vp,ξ f (x) :=
+n
+∑
+j=1
+f (ξ ∗
+j,p,ξ)B j,p,ξ (x),
+(95)
+where ξ ∗
+j,p,ξ is the j-th Greville point of degree p, see (50), is a bounded local quasi-interpolant
+in the L∞-norm with l = 1 and CQ = 1. Since ξ ∗
+j,p,ξ belongs to a knot interval [ξmj,ξmj+1) of
+[ξ j+1,ξ j+p] we can choose νL = νU = 0 in (85). Therefore, Theorem 32 implies for any f ∈
+W 2
+∞([a,b]),
+∥f −Vp,ξ f ∥L∞([a,b]) ≤2(2p+1)2h2
+ξ ∥D2 f ∥L∞([a,b]).
+(96)
+The next proposition can be used to ﬁnd the degree l of polynomials reproduced
+by a linear quasi-interpolant. We will formulate another condition in Proposition 38.
+Proposition 34. Let
+{ϕj,0,...,ϕj,l},
+j = 1,...,n,
+0 ≤l ≤p
+(97)
+be n sets of basis functions for Pl and let
+ϕj,r =
+n
+∑
+m=1
+cj,r,mBm,p,ξ
+(98)
+be their B-spline representations. The linear quasi-interpolant (84) reproduces Pl
+provided the corresponding linear functionals satisfy
+λ j(ϕj,r) = cj,r,j,
+j = 1,...,n,
+r = 0,...,l.
+(99)
+Proof. Any g ∈Pl can be written both in terms of the B-splines and the ϕ’s, say
+
+
+PDF PAGE 30
+30
+Tom Lyche, Carla Manni, and Hendrik Speleers
+g =
+n
+∑
+m=1
+bmBm,p,ξ =
+l
+∑
+r=0
+b j,rϕj,r,
+j = 1,...,n.
+(100)
+By (98) and (100) for j = 1,...,n,
+g =
+l
+∑
+r=0
+b j,r
+
+n
+∑
+m=1
+cj,r,mBm,p,ξ
+
+=
+n
+∑
+m=1
+
+l
+∑
+r=0
+b j,rcj,r,m
+
+Bm,p,ξ =
+n
+∑
+m=1
+bmBm,p,ξ .
+By linear independence of the B-splines and choosing i = m we obtain
+bm =
+l
+∑
+r=0
+bm,rcm,r,m.
+(101)
+Similarly, for Qg using (100) with j = m,
+Qg :=
+n
+∑
+m=1
+λm(g)Bm,p,ξ =
+n
+∑
+m=1
+λm
+
+l
+∑
+r=0
+bm,rϕm,r
+
+Bm,p,ξ .
+¿From the linearity of λm and (99), (101) and ﬁnally (100) again we obtain
+Qg =
+n
+∑
+m=1
+l
+∑
+r=0
+bm,rλm(ϕm,r)Bm,p,ξ =
+n
+∑
+m=1
+l
+∑
+r=0
+bm,rcm,r,mBm,p,ξ =
+n
+∑
+m=1
+bmBm,p,ξ = g.
+⊓⊔
+The next proposition gives a sufﬁcient condition for a quasi-interpolant to re-
+produce the whole spline space. We will formulate another sufﬁcient condition in
+Proposition 40.
+Proposition 35. The linear quasi-interpolant (84) reproduces the whole spline
+space, i.e.,
+Qs(x) = s(x),
+s ∈Sp,ξ ,
+x ∈[ξp+1,ξn+1),
+(102)
+if Q reproduces Pp and each linear functional λ j is supported on one knot interval 5
+[ξ +
+mj,ξ −
+mj+1] ⊂[ξj,ξj+p+1], with ξmj < ξmj+1.
+(103)
+In other words, Q is a projector onto the spline space Sp,ξ .
+Proof. Let j with 1 ≤j ≤n be ﬁxed. By the linearity it sufﬁces to prove that
+λ j(Bi,p,ξ ) = δi,j for i = 1,...,n. On the interval [ξ +
+mj,ξ −
+mj+1] the local support prop-
+erty implies that λ j(Bi,p,ξ ) = 0 for i /∈{mj −p,...,mj}. This follows because we
+use the left limit at ξmj+1 if necessary. Since Bi,p,ξ ∈Pp on this interval, we have
+5 This notation means that if λ j f uses the value of f or one its derivatives at ξmj (or ξmj+1) then
+this value is obtained by taking the one sided limit from the right (or left).
+
+
+PDF PAGE 31
+B-Splines and Spline Approximation
+31
+Bi,p,ξ (x) = Q(Bi,p,ξ )(x) =
+mj
+∑
+k=mj−p
+λk(Bi,p,ξ )Bk,p,ξ (x),
+x ∈[ξmj,ξmj+1),
+and by local linear independence of the B-splines we obtain λk(Bi,p,ξ ) = δk,i for
+k = mj −p,...,mj. In particular, it holds for k = i since the condition (103) implies
+that mj −p ≤j ≤mj.
+⊓⊔
+Example 36. Let p = 2 and let ξ be a 3-open knot sequence. We consider the operator in Exam-
+ple 22 in the form
+Q2,ξ f (x) :=
+n
+∑
+j=1
+ α2,0 f (ξ j+1)+α2,1 f (ξ ∗
+j,2,ξ)+α2,2 f (ξ j+2)
+
+B j,2,ξ (x),
+where ξ ∗
+j,2,ξ = (ξ j+2 + ξ j+1)/2 is the j-th Greville point of degree 2. We know that if we choose
+α2,0 = α2,2 = −1/2 and α2,1 = 2 then Q2,ξ reproduces P2, i.e., l = 2. Proposition 35 even implies
+that it is a projector on the spline space S2,ξ . Moreover,
+−1
+2 f (ξ j+1)+2 f (ξ ∗
+j,2,ξ)−1
+2 f (ξ j+2)
+ ≤3∥f ∥L∞([ξj+1,ξj+2]).
+It follows that Q2,ξ is a bounded local quasi-interpolant in the L∞-norm with l = 2 and CQ = 3
+and that νL = νU = 0 in (85). In this case Theorem 32 implies for any f ∈W 3
+∞([a,b]),
+∥f −Q2,ξ f ∥L∞([a,b]) ≤453
+2! h3
+ξ ∥D3 f ∥L∞([a,b]),
+showing that the error is O(h3
+ξ ).
+2.2.2 A general construction
+We now describe a general recipe for constructing a wide class of local quasi-
+interpolants.
+Recipe 37. For ﬁxed k, the value of λk f is determined as follows:
+(i) Choose an interval ˆIk := [ξmL,k,ξmU,k] ⊂[a,b] such that
+(ξmL,k,ξmU,k)∩(ξk,ξk+p+1) ̸= /0,
+and mU,k −mL,k is bounded independently of n.
+(ii) Choose some linear approximation method Qk which can be written in B-
+spline form as
+Qk f(x) =
+mU,k−1
+∑
+j=mL,k−p
+b jB j,p,ξ (x) for x ∈(ξmL,k,ξmU,k),
+and has the following local polynomial reproduction property
+Qkg(x) = g(x) for all g ∈Pl and x ∈(ξmL,k,ξmU,k),
+(104)
+
+
+PDF PAGE 32
+32
+Tom Lyche, Carla Manni, and Hendrik Speleers
+for some ﬁxed l with 0 ≤l ≤p.
+(iii) Set λk f := bk.
+Note that λk f in (iii) is well deﬁned because ˆIk intersects the interior of the sup-
+port of Bk,p,ξ and therefore mL,k −p ≤k ≤mU,k −1. Since the number of knot
+intervals in ˆIk is bounded independently of n, it is always possible to ﬁnd an interval
+Ik that satisﬁes (85) containing ˆIk. We now show that the local polynomial reproduc-
+tion property (104) leads to global reproduction of Pl as required in Deﬁnition 29.
+Proposition 38. The spline approximation operator Q f determined by Recipe 37
+has the property that Qg(x) = g(x) for all g ∈Pl and x ∈[a,b].
+Proof. Given g ∈Pl, suppose that g(x) = ∑n
+j=1 cjB j,p,ξ (x) for certain coefﬁcients
+(cj)n
+j=1 and x ∈[a,b]. We must show that if Qg(x) = ∑n
+j=1 λ jgB j,p,ξ (x) then λ jg =
+cj. We note that g(x) = ∑
+mU,k−1
+j=mL,k−p cjB j,p,ξ (x) for x ∈(ξmL,k,ξmU,k). Therefore, by
+(104) we have
+mU,k−1
+∑
+j=mL,k−p
+b jB j,p,ξ (x) = Qkg(x) = g(x) =
+mU,k−1
+∑
+j=mL,k−p
+cjB j,p,ξ (x),
+x ∈(ξmL,k,ξmU,k),
+so by local linear independence we have b j = cj for j = mL,k −p, ..., mU,k −1, and
+in particular bk = ck. Since λkg = bk we have λkg = ck, as required.
+⊓⊔
+Example 39. The Schoenberg operator in Example 33 can be obtained by Recipe 37 as follows.
+First, choose ˆIk := [ξmk,ξmk+1] such that the interval [ξmk,ξmk+1) contains ξ ∗
+k,p,ξ . Then, choose Qk
+as the linear interpolant to f at the Greville point ξ ∗
+k,p,ξ and an additional point ξ in ˆIk. This gives
+Qk f (x) =
+x−ξ ∗
+k,p,ξ
+ξ −ξ ∗
+k,p,ξ
+f (ξ)+
+ξ −x
+ξ −ξ ∗
+k,p,ξ
+f (ξ ∗
+k,p,ξ) =: g1(x).
+By (48) and (49) we have for x ∈(ξmk,ξmk+1),
+g1(x) =
+mk
+∑
+j=mk−p
+bjB j,p,ξ (x), where bj := g1(ξ ∗
+j,p,ξ ).
+Finally, set λk f := g1(ξ ∗
+k,p,ξ ) = f (ξ ∗
+k,p,ξ ). This is indeed in agreement with (95).
+With a suitable choice of Qk we can even obtain that Q is a projector onto the
+spline space Sp,ξ, i.e.,
+Qs = s for all s ∈Sp,ξ .
+For this it is sufﬁcient to replace the local polynomial reproduction property in (104)
+by the local spline reproduction property
+Qks(x) = s(x) for all s ∈Sp,ξ and x ∈(ξmL,k,ξmU,k).
+(105)
+Indeed, with the same line of arguments as in Proposition 38 it follows that the local
+spline reproduction implies the global spline reproduction as stated in the following
+proposition; see also [11].
+
+
+PDF PAGE 33
+B-Splines and Spline Approximation
+33
+Proposition 40. The spline approximation operator Q f determined by Recipe 37
+is a projector onto the spline space Sp,ξ provided that we replace (104) by (105).
+In view of Proposition 35, a simple way to obtain a local spline projector Qk is
+to consider a local polynomial projector as in (104) with l = p and ˆIk restricted to
+be a single knot interval.
+2.3 Approximation power of splines
+In this section we want to understand how well a function can be approximated
+by a spline. In order words, we want to investigate the distance between a gen-
+eral function f and the piecewise polynomial space Sr
+p(∆) deﬁned in (41). ¿From
+Theorem 13 we know that Sr
+p(∆) = Sp,ξ for a suitable choice of the knot sequence
+ξ := {ξi}n+p+1
+i=1
+. In particular, ξ can be chosen to be (p+1)-open. Therefore, with-
+out loss of generality, we consider the distance between a general function f and the
+spline space Sp,ξ of degree p over the (p + 1)-open knot sequence ξ . For a given
+f ∈Lq([ξp+1,ξn+1]) with 1 ≤q ≤∞, we deﬁne
+distq(f,Sp,ξ ) := inf
+s∈Sp,ξ
+∥f −s∥Lq([ξp+1,ξn+1]).
+(106)
+We are also interested in estimates for the distance between derivatives of f and
+derivative spline spaces. To this end, in this section we use the simpliﬁed notation
+Drs := Dr
++s for the derivatives of a spline s ∈Sp,ξ with the usual convention of left
+continuity at the right endpoint of the basic interval. Note that with such a nota-
+tion we ensure that Drs(x) exists for all x. In the same spirit, we use the notation
+DrSp,ξ := Dr
++Sp,ξ for the r-th derivative spline space. We recall from Section 1.2.2
+that this derivative space is a piecewise polynomial space of degree p −r with a
+certain smoothness, i.e.,
+Sr−r
+p−r(∆) = DrSp,ξ ,
+where the partition ∆consists of the distinct break points in the knot sequence ξ
+and the smoothness r is related to the multiplicity of the knots, according to the rule
+in (34). This leads to the following more general deﬁnition of distance. For a given
+f ∈W r
+q ([ξp+1,ξn+1]) with 1 ≤q ≤∞and 0 ≤r ≤p, we deﬁne
+distq(Dr f,DrSp,ξ ) := inf
+s∈Sp,ξ
+∥Dr(f −s)∥Lq([ξp+1,ξn+1]).
+(107)
+We will derive the following upper bound for distq(Dr f,DrSp,ξ ).
+Theorem 41. For any 0 ≤r ≤l ≤p and f ∈W l+1
+q
+([ξp+1,ξn+1]) with 1 ≤q ≤∞we
+have
+distq(Dr f,DrSp,ξ ) ≤K(hξ )l+1−r∥Dl+1 f∥Lq([ξp+1,ξn+1]),
+where hξ := maxp+1≤j≤n(ξj+1 −ξj) and K is a constant depending only on p.
+
+
+PDF PAGE 34
+34
+Tom Lyche, Carla Manni, and Hendrik Speleers
+This will be shown by explicitly constructing a suitable spline quasi-interpolant
+which achieves this order of approximation; see Theorem 48. For l = p the upper
+bound behaves like (hξ )p+1−r for sufﬁciently smooth f.
+2.3.1 A spline quasi-interpolant
+Given an integer p ≥0 and a (p + 1)-open knot sequence ξ , we deﬁne a speciﬁc
+spline approximant of degree p over ξ to a given function f. Let [ξmj,p,ξmj,p+1] be
+a knot interval of largest length in [ξj,ξj+p+1] for any j = 1,...,n and h j,p,ξ :=
+ξmj,p+1 −ξmj,p > 0. The spline approximant to f is constructed as
+Qp,ξ f(x) :=
+n
+∑
+j=1
+L j,p,ξ fB j,p,ξ (x),
+(108)
+where
+L j,p,ξ f :=
+1
+h j,p,ξ
+Z ξmj,p+1
+ξmj,p
+ p
+∑
+i=0
+αj,i
+x−ξmj,p
+h j,p,ξ
+i
+f(x)dx,
+(109)
+and the coefﬁcients αj,i, i = 0,..., p are such that
+L j,p,ξ
+x−ξmj,p
+h j,p,ξ
+i
+= cj,i,j,
+i = 0,..., p,
+(110)
+where
+x−ξmj,p
+h j,p,ξ
+i
+=
+mj,p
+∑
+k=mj,p−p
+cj,i,kBk,p,ξ (x),
+x ∈[ξmj,p,ξmj,p+1),
+i = 0,..., p. (111)
+In the next lemmas we collect some properties for the spline approximation
+(108).
+Lemma 42. The above spline approximation is well deﬁned and reproduces poly-
+nomials, i.e., for any polynomial g ∈Pp we have
+Qp,ξ g(x) = g(x),
+x ∈[ξp+1,ξn+1].
+(112)
+Moreover, it is a projector onto the spline space Sp,ξ , i.e., for any spline s ∈Sp,ξ we
+have
+Qp,ξ s(x) = s(x),
+x ∈[ξp+1,ξn+1],
+(113)
+and, in particular,
+s(x) =
+n
+∑
+j=1
+(L j,p,ξ s)B j,p,ξ (x),
+x ∈[ξp+1,ξn+1].
+(114)
+
+
+PDF PAGE 35
+B-Splines and Spline Approximation
+35
+Proof. By applying L j,p,ξ to the polynomials
+ x−ξmj,p
+hj,p,ξ
+r
+, r = 0,..., p, the coefﬁ-
+cients αj,i are given by the solution of the linear system
+Hp+1α j = c j,
+(115)
+where α j := (αj,0,...,αj,p)T, c j := (cj,0,j,...,cj,p,j)T, and Hp+1 is a (p+1)×(p+
+1) matrix with elements
+(Hp+1)i+1,r+1 :=
+1
+h j,p,ξ
+Z ξmj,p+1
+ξmj,p
+x−ξmj,p
+h j,p,ξ
+r+i
+dx =
+1
+i+ r + 1,
+i,r = 0,..., p.
+This is the well-known Hilbert matrix which is nonsingular and it follows that the
+spline approximation (108) is well deﬁned. By Proposition 34 we deduce that (112)
+holds.
+Since we only integrate over one subinterval when we deﬁne L j,p,ξ , we conclude
+that it reproduces not only polynomials but also splines, and (113) follows from
+Proposition 35.
+⊓⊔
+Lemma 43. For p ≥0 and 1 ≤q ≤∞we have for any f ∈Lq([ξmj,p,ξmj,p+1]),
+|L j,p,ξ f| ≤Ch−1/q
+j,p,ξ ∥f∥Lq([ξmj,p,ξmj,p+1]),
+j = 1,...,n,
+(116)
+where C is a constant depending only on p.
+Proof. By (20), (10) and (13) we have
+|cj,i,j| = i!
+p!
+
+Dp−iψj,p,ξ (ξmj,p)
+hi
+j,p,ξ
+ ≤
+ξj+p+1 −ξj
+h j,p,ξ
+i
+≤(p + 1)i,
+i = 0,..., p.
+Here we used that [ξmj,p,ξmj,p+1] is a knot interval of largest length in [ξj,ξj+p+1].
+Since 0 ≤
+x−ξmj,p
+hj,p,ξ
+≤1 for x ∈[ξmj,p,ξmj,p+1], we get from (109),
+|L j,p,ξ f| ≤(p + 1)h−1
+j,p,ξ∥α j∥∞∥f∥L1([ξmj,p,ξmj,p+1])
+≤(p + 1)h−1
+j,p,ξ∥H−1
+p+1∥∞∥c j∥∞∥f∥L1([ξmj,p,ξmj,p+1]).
+This gives |L j,p,ξ f| ≤Ch−1
+j,p,ξ ∥f∥L1([ξmj,p,ξmj,p+1]), where C := ∥H−1
+p+1∥∞(p + 1)p+1
+only depends on p. By the H¨older inequality (78) we arrive at (116).
+⊓⊔
+We now give a bound for the derivative of Qp,ξ f. For this we recall from (25)
+that
+∆m,k :=
+min
+m−k+1≤i≤mhi,k,
+hi,k := ξi+k −ξi,
+k = 1,..., p,
+and that ∆m,k > 0 for all k.
+
+
+PDF PAGE 36
+36
+Tom Lyche, Carla Manni, and Hendrik Speleers
+Lemma 44. For 0 ≤r ≤p and 1 ≤q ≤∞we have for any f ∈Lq([ξm−p,ξm+p+1])
+with p + 1 ≤m ≤n,
+∥Dr(Qp,ξ f)∥Lq([ξm,ξm+1]) ≤C
+
+p
+∏
+k=p−r+1
+1
+∆m,k
+
+∥f∥Lq([ξm−p,ξm+p+1]),
+where ∆m,k is deﬁned in (25) and C is a constant depending only on p.
+Proof. ¿From the quasi-interpolant deﬁnition (108), the local support property (35)
+and Lemma 43, we have for x ∈[ξm,ξm+1),
+|Dr(Qp,ξ f)(x)| =
+
+m
+∑
+j=m−p
+L j,p,ξ (f)DrB j,p,ξ (x)
+
+≤
+max
+m−p≤j≤m|DrB j,p,ξ (x)|
+m
+∑
+j=m−p
+|L j,p,ξ (f)|
+≤(p + 1)
+max
+m−p≤j≤m|DrB j,p,ξ (x)|
+max
+m−p≤j≤mh−1/q
+j,p,ξ ∥f∥Lq([ξm−p,ξm+p+1]).
+Since [ξm,ξm+1] ⊂[ξj,ξj+p+1] and h j,p,ξ is the length of the largest knot inter-
+val in [ξj,ξj+p+1] we have ξm+1 −ξm ≤h j,p,ξ for j = m −p,...,m. Replacing
+|DrB j,p,ξ (x)| by the upper bound given in Proposition 10 and taking the Lq-norm
+complete the proof.
+⊓⊔
+The next lemma will complete the proof of Theorem 26 related to the condition
+number. Note that [ξp+1,ξn+1] = [ξ1,ξn+p+1] because the knot sequence ξ is open.
+Lemma 45. For any p ≥0, there exists a positive constant Kp depending only on p
+such that for any vector c := (c1,...,cn) and for any 1 ≤q ≤∞we have
+∥c∥q ≤Kp
+
+n
+∑
+j=1
+cj Nj,p,q,ξ
+
+Lq([ξp+1,ξn+1])
+,
+(117)
+where Nj,p,q,ξ := γ−1/q
+j,p,ξ B j,p,ξ and γj,p,ξ := (ξj+p+1 −ξj)/(p + 1).
+Proof. Let s := ∑n
+j=1 γ−1/q
+j,p,ξ cjB j,p,ξ . Observe that (114) and (116) imply
+|γ−1/q
+j,p,ξ cj| = |L j,p,ξ s| ≤Ch−1/q
+j,p,ξ ∥s∥Lq([ξmj,p,ξmj,p+1]).
+Since γj,p,ξ /h j,p,ξ ≤1 we obtain
+|cj| ≤C∥s∥Lq([ξmj,p,ξmj,p+1]) ≤C∥s∥Lq([ξj,ξj+p+1]).
+Raising both sides to the q-th power and summing over j gives
+n
+∑
+j=1
+|cj|q ≤Cq
+n
+∑
+j=1
+Z ξj+p+1
+ξj
+|s(x)|q dx ≤(p + 1)Cq∥s∥q
+Lq([ξp+1,ξn+1]).
+
+
+PDF PAGE 37
+B-Splines and Spline Approximation
+37
+When taking the q-th roots we arrive at the lower inequality in (75) with Kp =
+(p + 1)C depending only on p.
+⊓⊔
+2.3.2 Distance to a function
+The quasi-interpolant Qp,ξ f described in the previous section can be used to obtain
+an upper bound for the distance between a given function f and the spline space
+Sp,ξ for p ≥0, n > p + 1 and ξ := {ξj}n+p+1
+j=1
+, see Theorem 48. We recall that the
+knot sequence ξ is (p+1)-open. We start by giving a local and global upper bound
+for (the derivatives of) the difference between f and Qp,ξ f.
+Proposition 46. Suppose ξm < ξm+1 for some p+1 ≤m ≤n,and let f ∈W l+1
+q
+([ξm−p,ξm+p+1])
+with 0 ≤l ≤p and 1 ≤q ≤∞. If Qp,ξ f is deﬁned as in (108) then, for any 0 ≤r ≤l,
+∥Dr(f −Qp,ξ f)∥Lq([ξm,ξm+1]) ≤Km(ξm+p+1 −ξm−p)l+1−r∥Dl+1 f∥Lq([ξm−p,ξm+p+1]).
+Here,
+Km := 1 +C
+p
+∏
+k=p−r+1
+ξm+p+1 −ξm−p
+∆m,k
+,
+∆m,k is deﬁned in (25) and C is a constant depending only on p.
+Proof. ¿From Lemma 42 we know that Qp,ξ reproduces any polynomial in Pl, and
+so the triangle inequality gives
+∥Dr(f −Qp,ξ f)∥Lq([ξm,ξm+1])
+≤∥Dr(f −g)∥Lq([ξm,ξm+1]) + ∥DrQp,ξ (f −g)∥Lq([ξm,ξm+1]),
+for any g ∈Pl. Let us now set g := Tξm,l f, where Tξm,l f is the Taylor polynomial
+of degree l deﬁned in (79) with a = ξm, b = ξm+1. Then, Theorem 27 implies
+∥Dr(f −g)∥Lq([ξm,ξm+1]) ≤(ξm+1 −ξm)l+1−r∥Dl+1 f∥Lq([ξm,ξm+1]).
+On the other hand, since f −g ∈C([ξm−p,ξm+p+1]), it follows from Lemma 44 that
+∥DrQp,ξ (f −g)∥Lq([ξm,ξm+1]) ≤C
+
+p
+∏
+k=p−r+1
+1
+∆m,k
+
+∥f −g∥Lq([ξm−p,ξm+p+1]),
+where C is a constant depending only on p. Combining the above three inequalities
+gives the result.
+⊓⊔
+We know that the ratio ξm+p+1−ξm−p
+∆m,k
+is well deﬁned because ∆m,k > 0. For a uni-
+form knot sequence
+ξm+p+1 −ξm−p
+∆m,k
+= 2p + 1
+k
+.
+
+
+PDF PAGE 38
+38
+Tom Lyche, Carla Manni, and Hendrik Speleers
+For a general knot sequence it is related to the “local mesh ratio”, i.e., the ratio
+between the lengths of the largest and smallest knot intervals in a neighborhood of
+ξm.
+The local error bound in Proposition 46 can be turned into a global one as in the
+following proposition.
+Proposition 47. Let f ∈W l+1
+q
+([ξp+1,ξn+1]) with 0 ≤l ≤p and 1 ≤q ≤∞. If Qp,ξ f
+is deﬁned as in (108) then, for any 0 ≤r ≤l,
+∥Dr(f −Qp,ξ f)∥Lq([ξp+1,ξn+1]) ≤Khl+1−r
+ξ
+∥Dl+1 f∥Lq([ξp+1,ξn+1]),
+(118)
+where hξ := maxp+1≤j≤n(ξj+1 −ξj), and
+K := (2p + 1)l+2−r
+
+1 +C
+max
+p+1≤m≤n
+p
+∏
+k=p−r+1
+ξm+p+1 −ξm−p
+∆m,k
+
+,
+where ∆m,k is deﬁned in (25) and C is a constant depending only on p.
+Proof. For q = ∞the result follows immediately from Proposition 46 by taking into
+account that ξ can be assumed to be a (p+1)-open knot sequence. We now assume
+1 ≤q < ∞. Since
+max
+p+1≤m≤n(ξm+p+1 −ξm−p) ≤(2p + 1)hξ ,
+the result follows from Lemma 31 and the local error bound in Proposition 46.
+⊓⊔
+The expression K in the upper bound in Proposition 47 depends on the position
+of the knots for r > 0. However, for any knot sequence ξ , it is possible to construct a
+coarser knot sequence ξ ♯such that the corresponding K only depends on p. This can
+be obtained by a clever thinning process. The idea of thinning out a knot sequence
+to get a quasi-uniform sequence is credited to [19]. Since ξ ♯is a subsequence of ξ ,
+we have that Sp,ξ ♯is a subspace of Sp,ξ . In particular, for any f ∈L∞([ξp+1,ξn+1])
+the spline approximation
+sp := Qp,ξ ♯f
+as deﬁned in (108) belongs to the spline space Sp,ξ . This spline quasi-interpolant
+leads to the following important result.
+Theorem 48. Let f ∈W l+1
+q
+([ξp+1,ξn+1]) with 1 ≤q ≤∞and 0 ≤l ≤p. Then, there
+exists sp ∈Sp,ξ such that
+∥Dr(f −sp)∥Lq([ξp+1,ξn+1]) ≤Khl+1−r
+ξ
+∥Dl+1 f∥Lq([ξp+1,ξn+1]),
+0 ≤r ≤l,
+(119)
+where hξ := maxp+1≤j≤n(ξj+1 −ξj) and K is a constant depending only on p.
+The constant K in Theorem 48 grows exponentially with p. However, this de-
+pendency on p can be removed in some cases, see [1, Theorem 2] for details. Theo-
+rem 48 immediately leads to the distance result in Theorem 41.
+
+
+PDF PAGE 39
+B-Splines and Spline Approximation
+39
+References
+1. Beir˜ao da Veiga, L., Buffa, A., Rivas, J., Sangalli, G.: Some estimates for h-p-k-reﬁnement in
+isogeometric analysis. Numerische Mathematik 118, 271–305 (2011)
+2. de Boor, C.: On calculating with B-splines. Journal of Approximation Theory 6, 50–62 (1972)
+3. de Boor, C.: On local linear functionals which vanish at all B-splines but one.
+In: A.G.
+Law, N.B. Sahney (eds.) Theory of Approximation with Applications, pp. 120–145. Academic
+Press, New York (1976)
+4. de Boor, C., Fix, G.J.: Spline approximation by quasiinterpolants. Journal of Approximation
+Theory 8, 19–45 (1973)
+5. de Boor, C., Pinkus, A.: The B-spline recurrence relations of Chakalov and of Popoviciu.
+Journal of Approximation Theory 124, 115–123 (2003)
+6. Cox, M.G.: The numerical evaluation of B-splines. Journal of the Institute of Mathematics
+and its Applications 10, 134–149 (1972)
+7. Curry, H.B., Schoenberg, I.J.: On spline distributions and their limits: The P´olya distribution
+functions. Bulletin of the AMS 53, 1114, Abstract 380t (1947)
+8. Curry, H.B., Schoenberg, I.J.: On P´olya frequency functions IV: The fundamental spline func-
+tions and their limits. Journal d’Analyse Mathematique 17, 71–107 (1966)
+9. Garoni, C., Manni, C., Pelosi, F., Serra-Capizzano, S., Speleers, H.: On the spectrum of stiff-
+ness matrices arising from isogeometric analysis.
+Numerische Mathematik 127, 751–799
+(2014)
+10. Greville, T.N.E.: On the normalisation of the B-splines and the location of the nodes for the
+case of unequally spaced knots. In: O. Shisha (ed.) Inequalities, pp. 286–290. Academic Press,
+New York (1967)
+11. Lee, B.G., Lyche, T., Mørken, K.: Some examples of quasi-interpolants constructed from local
+spline projectors. In: T. Lyche, L.L. Schumaker (eds.) Mathematical Methods in CAGD: Oslo
+2000, pp. 243–252. Vanderbilt University Press, Nashville (2001)
+12. Lyche, T.: A note on the condition numbers of the B-spline bases. Journal of Approximation
+Theory 22, 202–205 (1978)
+13. Marsden, M.: An identity for spline functions and its application to variation diminishing
+spline approximation. Journal of Approximation Theory 3, 7–49 (1970)
+14. Rudin, W.: Real and Complex Analysis, third edn. McGraw-Hill, Singapore (1987)
+15. Scherer, K., Shadrin, A.Y.: New upper bound for the B-spline basis condition number: II. A
+proof of de Boor’s 2k-conjecture. Journal of Approximation Theory 99, 217–229 (1999)
+16. Schoenberg, I.J.: Contributions to the problem of approximation of equidistant data by ana-
+lytic functions. Part A.–On the problem of smoothing or graduation. A ﬁrst class of analytic
+approximation formulae. Quarterly of Applied Mathematics 4, 45–99 (1946)
+17. Schoenberg, I.J.: Contributions to the problem of approximation of equidistant data by analytic
+functions. Part B.–On the problem of osculatory interpolation. A second class of analytic
+approximation formulae. Quarterly of Applied Mathematics 4, 112–141 (1946)
+18. Schoenberg, I.J.: On spline functions. In: O. Shisha (ed.) Inequalities, pp. 255–286. Academic
+Press, New York (1967)
+19. Sharma, A., Meir, A.: Degree of approximation of spline interpolation. Journal of Mathematics
+and Mechanics 15, 759–768 (1966)

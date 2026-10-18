@@ -1,0 +1,460 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "module": "tools/finite-smoke-numerical-frontier71-particle.mjs",
+  "export": "numericalFrontierParticleChecks",
+  "registry_check": "numerical-frontier71-particle-fixture",
+  "integration_owner": "root",
+  "authored_execution": "Not executed. Software tests, self-tests, individual validators, gates and native controls were prohibited for this owner; root owns fresh native full-battery validation.",
+  "parameter_policy": "Only the fixed fixture selector (top-level fixture or parameters.fixture, agreeing if both supplied) is accepted. No model-size/numerical overrides. Unknown keys/selectors, nonobject parameters, numeric NaN/infinities and literal NaN/Inf/Infinity strings are rejected. Outputs are {ok,summary}; numeric stencil/DFT/solve outputs have explicit finite checks, and close rejects every nonfinite argument.",
+  "model_policy": "Independent bounded arithmetic calculations only; source excerpts bind each current obligation but are never read by callbacks. No parent aggregator import, source-text scans or empty-success fallback. No general proof or asymptotic certification.",
+  "rows": [
+    {
+      "batch": 9,
+      "id": "ex-ar-covariance-toeplitz-forecast-solve",
+      "index": 0,
+      "obligation": {
+        "claim": "Order-two real covariance forecast",
+        "input": "γ(0)=1, γ(1)=1/2, γ(2)=1/4",
+        "result": "κ1=1/2, ν1=3/4, κ2=0, φ2=(1/2,0), ν2=3/4",
+        "evidence": "Proof steps 2.1 and 3.1"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "3.1 The order-one recursion gives $\\kappa_1=\\gamma(1)/\\gamma(0)=1/2$, $\\phi_1=(1/2)$ and $\\nu_1=1(1-1/4)=3/4$. At order two, $$\\kappa_2=\\frac{\\gamma(2)-\\phi_{1,1}\\gamma(1)}{\\nu_1}=\\frac{1/4-(1/2)(1/2)}{3/4}=0,$$ so $\\phi_2=(\\phi_{1,1}-\\kappa_2\\phi_{1,1},\\kappa_2)^T=(1/2,0)^T$ and $\\nu_2=\\nu_1(1-\\kappa_2^2)=3/4$. By steps 1.1 and 2.1, $\\Gamma_1=[1]$ and $\\Gamma_2=T$. Step 1.2 proves $T$ Hermitian positive definite, so the real leading covariance blocks are positive definite; [F3] applies and [F4] identifies this vector as the unique prediction solution. [given, F3, F4, step 1.1, step 1.2, step 2.1, algebra]",
+        "fixture": "toeplitz-forecast-order-two",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Exact rational covariance recursion for gamma=(1,1/2,1/4), with independent raw prediction-equation and variance residuals.",
+      "finite_limitations": "Two orders of this real covariance fixture only; no stochastic-process existence or general recursion proof."
+    },
+    {
+      "batch": 9,
+      "id": "ex-ar-covariance-toeplitz-forecast-solve",
+      "index": 1,
+      "obligation": {
+        "claim": "General-RHS Hermitian Toeplitz solve",
+        "input": "T=[[1,1/2],[1/2,1]], b=(1,1)",
+        "result": "T^{-1}=[[4/3,-2/3],[-2/3,4/3]], x=(2/3,2/3)",
+        "evidence": "Proof step 1.2; direct multiplication verifies Tx=b"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "1.2 For the separate general-RHS solve, set $T=\\begin{pmatrix}1&1/2\\\\1/2&1\\end{pmatrix}$ as in the Statement. For each nonzero $z\\in\\mathbb C^2$, $z^*Tz=|z_1+z_2/2|^2+3|z_2|^2/4>0$, so $T$ is Hermitian positive definite. Its first lag data are $t_0=1,t_1=1/2$, hence $\\alpha_1=t_1/t_0=1/2$, $\\phi_1=\\alpha_1=1/2$, and $\\nu_1=t_0(1-|\\alpha_1|^2)=3/4$. The endpoint columns from [F5] are $$v=(-2/3,4/3)^T,\\qquad u=J_2v=(4/3,-2/3)^T,\\qquad u_0=4/3>0.$$ The lower triangular Toeplitz products are $$L(u)L(u)^*=\\begin{pmatrix}16/9&-8/9\\\\-8/9&20/9\\end{pmatrix},\\qquad L(Z_2v)L(Z_2v)^*=\\begin{pmatrix}0&0\\\\0&4/9\\end{pmatrix}.$$ Therefore the formula in [F5] gives $$T^{-1}=\\begin{pmatrix}4/3&-2/3\\\\-2/3&4/3\\end{pmatrix},\\qquad T^{-1}b=(2/3,2/3)^T.$$ Direct multiplication also verifies $T(2/3,2/3)^T=(1,1)^T$. [given, F5, algebra]",
+        "fixture": "toeplitz-general-rhs-two",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Exact 2x2 inverse constructed by determinant/cofactor arithmetic; both inverse columns and RHS=(1,1) multiplied against the raw Toeplitz matrix.",
+      "finite_limitations": "This inverse and RHS only; does not establish the general Gohberg–Semencul formula or complexity."
+    },
+    {
+      "batch": 9,
+      "id": "ex-circulant-periodic-poisson-zero-mode",
+      "index": 0,
+      "obligation": {
+        "claim": "N=4 cycle Laplacian symbol and alternating forcing",
+        "input": "c=(2,-1,0,-1), f=(1,-1,1,-1)",
+        "result": "λ=(0,2,4,2); C4(f/4)=f; sum(f)=0",
+        "evidence": "Proof steps 3.1 and 3.2"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "3.2 When $N=4$, $\\omega=e^{-i\\pi/2}=-i$ by Euler's formula, so $(\\lambda_0,\\lambda_1,\\lambda_2,\\lambda_3)=(0,2,4,2)$. The vector $f=(1,-1,1,-1)^T$ has sum zero. Directly, each cyclic neighbor of $f_j$ is $-f_j$, so $(C_4f)_j=2f_j-(-f_j)-(-f_j)=4f_j$. Therefore $x=f/4$ solves $C_4x=f$, and its zero mean gives the unique zero-mean solution. [given, F1, F3, step 1.1, step 2.1, algebra]",
+        "fixture": "circulant-poisson-four",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "DFT of column (2,-1,0,-1), exact rational cyclic product on f/4, and forcing mean.",
+      "finite_limitations": "N=4 only; trigonometric comparisons use tolerance 2e-11, while the cyclic residual and mean are exact rationals."
+    },
+    {
+      "batch": 9,
+      "id": "ex-hermitian-toeplitz-nonpositive-pivot-failure",
+      "index": 0,
+      "obligation": {
+        "claim": "Invertible indefinite Toeplitz pivot failure",
+        "input": "T=[[1,2],[2,1]]",
+        "result": "det(T)=-3; ν0=1, α1=2, ν1=-3; status nonpositive-pivot(1)",
+        "evidence": "Proof steps 1.1 and 2.1"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "2.1 The solver starts with $\\nu_0=1$, computes $\\alpha_1=t_1/\\nu_0=2$ and then $\\nu_1=\\nu_0(1-|\\alpha_1|^2)=-3$. Since this pivot is nonpositive, [F2] returns nonpositive-pivot$(1)$ before constructing an inverse-column denominator. [given, F2, step 1.1, algebra] ∎",
+        "fixture": "toeplitz-nonpositive-pivot",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Exact determinant, initialized innovation, reflection coefficient, computed second innovation and resulting failure status.",
+      "finite_limitations": "One invertible indefinite 2x2 input; no general failure-classification proof."
+    },
+    {
+      "batch": 19,
+      "id": "ex-fmm-two-separated-charge-clusters",
+      "index": 0,
+      "obligation": {
+        "check": "planar-fmm-two-separated-clusters-order-one",
+        "asserts": "The cell path is (P,Q) -> (C,Q) -> (C,D); R_parent=2<2sqrt(2), R_(C,Q)^2=5/2<(3sqrt(2)/2)^2, and R_(C,D)=2>sqrt(2). The source moments are M0=2, M1=0, the far derivative is 1, the exact derivative is 64/63, and the potential remainder is log(64/63)<1/63.",
+        "claim": "Exact finite geometry and rational arithmetic agree with the stated far split and order-one calculation.",
+        "checked_in": "Example and steps 1.1–3.1",
+        "max_labels": 6,
+        "expansion_order": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "1.1 The root has six labels, and its nonempty children $P,Q$ each have three, so threshold $s=2$ makes $H,P,Q$ internal while all named grandchildren are leaves. The centers of $P,Q$ are $1+i,3+i$, their radii are $\\sqrt2$, and their center distance is $2<2\\sqrt2$, so $(P,Q)$ is not separated. Its equal side lengths make the rule split the source $P$; child $C$ has center $c=3/2+i/2$ and radius $\\sqrt2/2$. The pair $(C,Q)$ is not separated because its center distance is $\\sqrt{5/2}<3\\sqrt2/2$. Splitting the larger cell $Q$ exposes $D$ centered at $d=7/2+i/2$; now $|d-c|=2>\\sqrt2/2+\\sqrt2/2$. Thus the list recursion records $(C,D)$ as a far pair, and the zero-charge label at $d$ is the target at the target-cell center. [given, F1, algebra]\n\n1.2 The two unit source offsets give $M_0=2$ and $M_1=0$. With $d-c=2$, [F2] gives the $(C,D)$ local coefficients $L_0=2\\log2$ and $L_1=1$. At the target center this interaction returns potential $2\\log2$ and derivative $1$. Other source labels have zero charge, so they add no contribution to this target. [given, F2, algebra]\n\n2.1 The two nonzero source-target differences are $9/4$ and $7/4$, so the exact potential is $\\log(9/4)+\\log(7/4)=2\\log2+\\log(63/64)$ and the exact derivative is $4/9+4/7=64/63$. Comparing with step 1.2, the absolute errors are $\\log(64/63)<1/63$ and $|64/63-1|=1/63$; the logarithmic inequality follows from $\\log(1+x)=\\int_0^x(1+t)^{-1}\\,dt<x$ for $x>0$. Zero-charge labels add no contribution. [given, step 1.2, algebra]\n\n3.1 For the only far interaction with nonzero source charge, $Q_C=2$, $R=2$, and $\\rho=\\sqrt2/2\\in(1/2,1)$. The [F3] bounds are $\\rho^2/(1-\\rho)>1/4$ and $\\rho/(1-\\rho)>1/2$; all other far source cells have $Q_C=0$. Any direct near pairs from the zero-charge labels contribute exactly zero, so the errors in step 2.1 satisfy the theorem's global sums. [given, F3, step 2.1, algebra] ∎",
+        "fixture": "fmm-separated-order-one",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "All six actual labels assembled; box occupancies, squared center distances and source/target split decisions recomputed. Source moments and exact derivative use rationals; log potentials computed directly from the actual distances and compared with the order-one local result and displayed bounds.",
+      "finite_limitations": "Fixed six-label tree/path and order one only. Log comparisons use 2e-11 floating tolerance; no general analytic-log, FMM correctness or complexity claim."
+    },
+    {
+      "batch": 19,
+      "id": "ex-fmm-near-far-potential-and-force-error",
+      "index": 0,
+      "obligation": {
+        "check": "planar-fmm-near-far-order-one",
+        "asserts": "The cell path is (P,Q) -> (C,Q) -> (C,D); R_parent=2<2sqrt(2), R_(C,Q)^2=5/2<(3sqrt(2)/2)^2, and R_(C,D)=2>sqrt(2). The far source moments are M0=2, M1=0; the near source-target difference is 1/10, so its exact potential and derivative are 3 log(1/10) and 30. The far derivative is 1, the exact far derivative is 64/63, and the potential remainder is log(64/63)<1/63.",
+        "claim": "Exact finite geometry and rational arithmetic confirm that the near term is direct and the far truncation error is unchanged.",
+        "checked_in": "Example and steps 1.1–3.1",
+        "max_labels": 7,
+        "expansion_order": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "1.1 The root has seven labels, and its nonempty children $P,Q$ have three and four labels, respectively; threshold $s=2$ therefore splits all three, while the named grandchildren are leaves. The centers of $P,Q$ are $1+i,3+i$, their radii are $\\sqrt2$, and their center distance is $2<2\\sqrt2$, so $(P,Q)$ is not separated. The tie rule splits source $P$, exposing $C$ with center $c=3/2+i/2$ and radius $\\sqrt2/2$. The pair $(C,Q)$ is not separated since its center distance is $\\sqrt{5/2}<3\\sqrt2/2$, so the larger target cell $Q$ is split. The child $D$ has center $d=7/2+i/2$ and radius $\\sqrt2/2$, and $|d-c|=2>\\sqrt2$; hence $(C,D)$ is far. The distinct charge-$3$ source and zero-charge target at $d$ lie in the same leaf $D$, so their ordered pair is direct near. [given, F1, algebra]\n\n1.2 The far source moments are $M_0=2$ and $M_1=0$, so M2L for $(C,D)$ gives $L_0=2\\log2$ and $L_1=1$; at $d$ the far approximation is $(2\\log2,1)$. The direct near contribution of the charge-$3$ source is exactly $(3\\log(0.1),30)$, because $d-(d-0.1)=0.1$; direct contributions from zero-charge labels vanish. [given, F2, algebra]\n\n2.1 The exact far terms are $\\log(9/4)+\\log(7/4)=2\\log2+\\log(63/64)$ and $4/9+4/7=64/63$. Adding the exact direct near values gives total $(2\\log2+\\log(63/64)+3\\log(0.1),\\ 64/63+30)$. The algorithm returns $(2\\log2+3\\log(0.1),\\ 1+30)$, so the errors are $\\log(64/63)<1/63$ and $1/63$; the strict logarithmic bound follows from $\\log(1+x)=\\int_0^x(1+t)^{-1}\\,dt<x$ for $x>0$. [given, step 1.2, algebra]\n\n3.1 For the only far interaction with nonzero source charge, $Q_C=2$, $R=2$, and $\\rho=\\sqrt2/2\\in(1/2,1)$, so [F3] gives bounds $\\rho^2/(1-\\rho)>1/4$ and $\\rho/(1-\\rho)>1/2$. All other far source cells have zero charge, and every near pair was evaluated exactly, so the errors from step 2.1 satisfy the theorem's global sums. [given, F3, step 2.1, algebra] ∎",
+        "fixture": "fmm-near-far-order-one",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "All seven labels assembled; split decisions and same-leaf near decision recomputed. Far moments and derivative use rationals; distinct charge-three direct term has exact separation 1/10 and derivative 30. Total log and derivative errors checked against the separated fixture values and displayed bounds.",
+      "finite_limitations": "Fixed seven-label tree/path and order one only; floating logarithms are numerical comparisons, not certified interval bounds or a general FMM proof."
+    },
+    {
+      "batch": 61,
+      "id": "lem-periodic-composite-trapezoid-error",
+      "index": 0,
+      "obligation": {
+        "check": "periodic-trapezoid-cosine-N3",
+        "asserts": "For f(x)=cos(2πx/L) on N=3 nodes, both the integral and hΣf(x_j) equal 0.",
+        "claim": "The finite periodic sum respects the zero-mean Fourier mode and the quadrature formula.",
+        "checked_in": "Statement and steps 1.1–2.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Let $L>0$, odd $N\\ge3$, $h=L/N$, and $f\\in C^2(\\mathbb T_L^d)$ for $d\\in\\{1,2,3\\}$. With the uniform tensor grid $x_j=hj$ and indices taken modulo $N$,\n$$ \\left|h^d\\sum_{j\\in(\\mathbb Z/N\\mathbb Z)^d}f(x_j)-\\int_{[0,L]^d}f(x)\\,dx\\right| \\le \\frac{L^dh^2}{12}\\sum_{a=1}^d\\|\\partial_{aa}f\\|_\\infty . $$",
+        "fixture": "periodic-trapezoid-cosine-three",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Compute three cosine samples and the sine-antiderivative endpoint value on L=1; compare both with zero.",
+      "finite_limitations": "One frequency, dimension one, N=3; tolerance 2e-11, no general quadrature error constant or multidimensional proof."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+      "index": 0,
+      "obligation": {
+        "check": "centered-poisson-symbol-N3",
+        "asserts": "For d=1,L=1,N=3,h=1/3, the constant mode has eigenvalue 0 and k=±1 has λ=3/h²=27.",
+        "claim": "The finite symbol agrees with the range/kernel calculation for the smallest allowed grid.",
+        "checked_in": "Statement and steps 2.1, 3.1, 4.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Use the grid, inner product, and operator $A_h$ of [[def-periodic-pic-grid-and-inner-product]]. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h$ consists exactly of constant arrays, and $\\operatorname{ran}A_h=\\{s:\\bar s=0\\}$. Consequently, for every compatible source $\\bar s=0$, there is a unique solution $\\phi$ of $A_h\\phi=s$ with the gauge $\\bar\\phi=0$.\n\nFor $k\\in\\mathcal K_N$, the Fourier character $e_k(j)=e^{2\\pi i k\\cdot j/N}$ is an eigenvector with\n$$ \\lambda_h(k)=\\frac4{h^2}\\sum_{a=1}^d\\sin^2\\!\\left(\\frac{\\pi k_a}{N}\\right). $$\nOnly $k=0$ has eigenvalue zero.",
+        "fixture": "centered-poisson-symbol-three",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Assemble raw centered stencil N=3,L=1 and apply it to real and imaginary parts of every discrete Fourier mode; infer and check eigenvalues 0,27,27.",
+      "finite_limitations": "Only this smallest odd grid in dimension one; tolerance 2e-11, no general kernel/range proof."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+      "index": 0,
+      "obligation": {
+        "check": "pseudoinverse-cosine-N3",
+        "asserts": "For d=1,L=1,N=3, s=(1,-1/2,-1/2) is an eigenmode with eigenvalue 27, so A†s=s/27 and its mean is zero.",
+        "claim": "The finite pseudoinverse returns the unique gauged solution on a nonzero mode.",
+        "checked_in": "Statement and steps 1.1–3.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "For any real grid array $s$, define its mean-zero periodic Poisson pseudoinverse by\n$$ A_h^\\dagger s:=\\text{the unique mean-zero grid array }u\\text{ such that }A_hu=s-\\bar s\\,\\mathbf1, $$\nwhere $\\bar s=L^{-d}\\langle s,\\mathbf1\\rangle_h$. This definition is well-defined by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]]. It gives $A_hA_h^\\dagger s=s-\\bar s\\mathbf1$, $A_h^\\dagger\\mathbf1=0$, and a linear self-adjoint map on the full finite grid space.",
+        "fixture": "pseudoinverse-cosine-three",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Solve raw gauged stencil by elimination for s=(1,-1/2,-1/2) and an independent vector; check s/27, raw residual, zero mean, a self-adjoint pairing and zero-source solution.",
+      "finite_limitations": "Two RHS on N=3,L=1 only; tolerance 2e-11. This finite calculation does not prove general self-adjointness."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-pic-charge-conservation-and-neutralized-source",
+      "index": 0,
+      "obligation": {
+        "check": "one-particle-charge-two",
+        "asserts": "For h=1/5 and weights (2/3,1/3), a charge q=2 deposits density (20/3,10/3,0,0,0) before background and has total cell charge 2.",
+        "claim": "The finite computation agrees with charge conservation and zero-mean neutralization.",
+        "checked_in": "Steps 1.1–3.1",
+        "N": 5,
+        "particles": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "For positions $X_1,\\ldots,X_P\\in\\mathbb T_L^d$ and real charges $q_1,\\ldots,q_P$, define $Q=\\sum_pq_p$ and an admissible algebraic assignment shape $w_j$ as in [[def-periodic-pic-shape-assignment-and-gather]]. Then\n$$ h^d\\sum_{j\\in J_N}h^{-d}\\sum_{p=1}^Pq_pw_j(X_p)=Q . $$\nConsequently the neutralized source $\\rho_j(X)=h^{-d}\\sum_pq_pw_j(X_p)-Q/L^d$ has mean zero and is in the range of the periodic Poisson operator; it therefore has a unique mean-zero potential for the gauge $\\bar\\phi=0$ by [[thm-periodic-centered-difference-poisson-zero-mode-and-gauge]].",
+        "fixture": "charge-two-deposition-five",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Compute exact CIC weights from h=1/5,X=h/3, raw density q*w/h, exact total cell charge two and uniform-background mean zero.",
+      "finite_limitations": "One particle, charge two, one-dimensional five-cell fixture; no arbitrary-shape charge conservation proof."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+      "index": 0,
+      "obligation": {
+        "check": "gamma-N3",
+        "asserts": "For d=1,L=1,N=3, γ=√3/18<1/4=L/4.",
+        "claim": "The exact finite inverse/derivative multiplier obeys the stated mesh-independent upper bound.",
+        "checked_in": "Statement and step 3.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Let $s$ be a zero-mean grid source and let $\\phi$ be the zero-mean solution of $A_h\\phi=s$. Let $\\widetilde\\phi$ be any approximate grid potential, and set $r=s-A_h\\widetilde\\phi$; then $\\bar r=0$. Define\n$$\\gamma_{N,L}= \\max_{\\substack{k\\in\\mathcal K_N\\\\k\\ne0}} \\frac{\\left(\\sum_{a=1}^d h^{-2}\\sin^2(2\\pi k_a/N)\\right)^{1/2}} {4h^{-2}\\sum_{a=1}^d\\sin^2(\\pi k_a/N)} .$$ For the centered field operator $D^0=(D_a^0)_{a=1}^d$, $$\\|D^0(\\phi-\\widetilde\\phi)\\|_h\\le\\gamma_{N,L}\\|r\\|_h,\\qquad \\gamma_{N,L}\\le\\frac{h}{2\\sin(\\pi/N)}\\le\\frac L4 .$$ For any particle location $x_p$ and charge-to-mass ratio $q_p/m_p$ with $m_p>0$, the force gather using the weights of [[def-periodic-pic-shape-assignment-and-gather]] obeys $$\\left|\\frac{q_p}{m_p}G_{x_p}\\!\\left(-D^0\\phi+D^0\\widetilde\\phi\\right)\\right| \\le\\frac{|q_p|}{m_p}h^{-d/2}\\gamma_{N,L}\\|r\\|_h .$$\nThus the norm in the force certificate is the actual finite-grid inverse/derivative norm; the explicit $h^{-d/2}$ conversion is retained when passing from grid $L^2$ to a particle gather.",
+        "fixture": "gamma-three",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Apply raw centered derivative and centered Laplacian to both nonzero complex modes; maximize computed Euclidean norm ratios and compare with sqrt(3)/18 and 1/4.",
+      "finite_limitations": "N=3,L=1,d=1 only; tolerance 2e-11. No general mesh-independent force or gather estimate is proved."
+    },
+    {
+      "batch": 61,
+      "id": "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution",
+      "index": 0,
+      "obligation": {
+        "check": "fourier-solver-N3",
+        "asserts": "For d=1,L=1,N=3 and s=(1,-1/2,-1/2), φ=s/27 is the mean-zero solution because A_h cos(2πj/3)=27 cos(2πj/3).",
+        "claim": "The algorithm divides the two nonzero modes by 27 and returns the stated gauged solution.",
+        "checked_in": "Steps 1.1–3.1",
+        "N": 3,
+        "dimension": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "For every real zero-mean source $s$ on the grid of [[def-periodic-pic-grid-and-inner-product]], [[alg-periodic-pic-zero-mean-poisson-solver]] terminates and returns the unique $\\phi$ satisfying $A_h\\phi=s$ and $\\bar\\phi=0$. Its incompatible-source branch is taken exactly when the equation has no solution.",
+        "fixture": "fourier-solver-three",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Forward DFT of s=(1,-1/2,-1/2), DFT of raw stencil row, zero-mode reset, divide nonzero modes, inverse DFT, then check physical-space residual and mean.",
+      "finite_limitations": "This N=3,L=1 RHS only; tolerance 2e-11, not an arbitrary-grid solver proof."
+    },
+    {
+      "batch": 61,
+      "id": "ex-periodic-high-frequency-pic-sampling-alias",
+      "index": 0,
+      "obligation": {
+        "check": "mode-6-aliases-mode-1-N5",
+        "asserts": "At x_j=2πj/5, e^{i6x_j}=e^{ix_j}, so the sampled forcing is cos(x_j).",
+        "claim": "The nodal alias and force discrepancy are exact.",
+        "checked_in": "Steps 1.1–2.1",
+        "N": 5,
+        "frequency": 6
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "On $\\mathbb T_{2\\pi}$, take the smooth source $\\rho(x)=\\cos(6x)$ and solve $-\\phi''=\\rho$ with zero mean. Its exact electric field $E=-\\phi'$ is $E(x)=\\frac16\\sin(6x)$. On the five-node Fourier-collocation grid $x_j=2\\pi j/5$, the sampled source is exactly $\\cos(x_j)$. The mean-zero collocation solution is $\\phi_N(x)=\\cos x$, and the computed field is $E_N(x)=\\sin x$. At every grid node, $E_N(x_j)=6E(x_j)$. This is a spectral-sampling aliasing example; it is not the centered finite-difference operator defined on the main PIC page.",
+        "fixture": "alias-six-to-one-five",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Compute all five complex nodal aliases, DFT the sampled source, solve the finite Fourier-collocation Poisson problem by signed k^2 division, and differentiate/inverse-DFT the field; compare with sin(6x)/6 and require a nonzero sixfold discrepancy.",
+      "finite_limitations": "Five-node spectral collocation only, explicitly not the centered finite-difference field; tolerance 2e-11. No general aliasing theorem."
+    },
+    {
+      "batch": 61,
+      "id": "cex-periodic-nonneutral-source-has-no-poisson-solution",
+      "index": 0,
+      "obligation": {
+        "check": "nonneutral-one-particle",
+        "asserts": "For L=1 and charge 1, the unneutralized source has mean 1, while every A_h output has mean 0.",
+        "claim": "The incompatibility obstruction is visible on the smallest admissible odd grid.",
+        "checked_in": "Steps 1.1–2.1",
+        "N": 3,
+        "particles": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Take the one-dimensional periodic grid with $L=1$ and odd $N\\ge3$, one particle of charge $q=1$, and any nonnegative normalized assignment shape. If the deposited density $s_j=h^{-1}w_j(X)$ is sent directly to $A_h\\phi=s$ without subtracting the neutralizing background $1/L$, then the equation has no solution.",
+        "fixture": "nonneutral-one-particle-three",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Assemble charge-one nodal source on h=1/3, exact source mean one; check every raw stencil column sum and a nontrivial matrix output sum are zero.",
+      "finite_limitations": "One source and one N=3,L=1 stencil; the column-sum calculation is finite linear algebra, not a general no-solution proof."
+    },
+    {
+      "batch": 61,
+      "id": "ex-cold-two-stream-stipulated-pic-experiment",
+      "index": 0,
+      "obligation": {
+        "check": "cold-two-stream-inventory",
+        "asserts": "Two beams of 63 particles each give P=126, Q=M=1 and velocities +1/2 and -1/2.",
+        "claim": "The stipulated initial state has the declared particle, charge, mass and cold-beam values.",
+        "checked_in": "Steps 1.1–2.1",
+        "N": 63,
+        "particles": 126
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Here is a fully specified cold two-stream input for the fixed-$\\varepsilon$ periodic grid model. Let $d=1$, $L=2\\pi$, $N=63$, $P=126$, $Q=M=1$, $\\varepsilon=1/5$, and $\\Delta t=10^{-3}$ with $4000$ steps to $T=4$. For $\\sigma\\in\\{-1,+1\\}$ and $j\\in\\mathbb Z/63\\mathbb Z$, assign charge and mass $1/126$ and set\n$$ X_{\\sigma,j}(0)=\\left(\\frac{2\\pi j}{63}+\\sigma\\,\\frac1{100}\\cos\\frac{2\\pi j}{63}\\right)\\pmod{2\\pi},\\qquad V_{\\sigma,j}(0)=\\frac{\\sigma}{2}. $$\nUse the smooth assignment shape, neutralizing background, centered periodic Poisson solve, and exact-arithmetic RK4 update from the A page. The two beams are cold because each beam has one velocity value. This is a stipulated numerical experiment only: it asserts no growth rate, nonlinear saturation, or physical validation.",
+        "fixture": "cold-two-stream-inventory",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Construct every sigma,j label, wrapped perturbed position, velocity, rational charge and mass; count both beams, sum exact totals, and check dt times 4000 equals four.",
+      "finite_limitations": "Initial-data inventory only; no time integration, trajectory, growth rate, saturation, or physical validation is claimed."
+    },
+    {
+      "batch": 61,
+      "id": "ex-periodic-one-dimensional-pic-cic-charge-deposition",
+      "index": 0,
+      "obligation": {
+        "check": "CIC-deposit-N5",
+        "asserts": "For q=2 at x=h/3, ρ=(14/3,4/3,-2,-2,-2) and hΣρ=0.",
+        "claim": "The deposit, neutralization and adjoint pairing are consistent on the displayed finite grid.",
+        "checked_in": "Steps 1.1–3.1",
+        "N": 5,
+        "particles": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Take $L=1$, $N=5$, $h=1/5$, and one particle of charge $q=2$ at $X=h/3$. Define the one-dimensional cloud-in-cell (CIC) weights by $w_j(x)=\\max\\{1-d_L(x,x_j)/h,0\\}$, where $d_L(x,x_j)=\\min_{k\\in\\mathbb Z}|x-x_j+kL|$ is the periodic distance. The only nonzero weights at $X$ are $w_0(X)=2/3$ and $w_1(X)=1/3$. The deposited density before neutralization is $(20/3,10/3,0,0,0)$, and subtracting the uniform background $Q/L=2$ gives\n$$ \\rho=(14/3,4/3,-2,-2,-2),\\qquad h\\sum_{j=0}^4\\rho_j=0. $$ For every grid potential $\\phi$, the adjoint identity is $$ \\langle\\rho,\\phi\\rangle_h =2\\left(\\frac23\\phi_0+\\frac13\\phi_1\\right)-2\\bar\\phi. $$\n\nThe diagram shows the local CIC stencil between nodes $0$ and $1$; indices on the full grid are understood modulo $5$.\n\n\\begin{tikzpicture}[x=2cm,y=1cm,>=stealth,every node/.style={font=\\small}]\n  \\draw[->] (-0.35,0) -- (2.35,0) node[right] {$x$};\n  \\foreach \\j in {0,1,2} {\n    \\draw (\\j,0.07) -- (\\j,-0.07);\n    \\fill (\\j,0) circle (1.4pt);\n    \\node[below=3pt] at (\\j,-0.07) {node \\j};\n  }\n  \\fill[red] (0.333,0.55) circle (1.6pt);\n  \\node[above] at (0.333,0.55) {$X=h/3$};\n  \\draw[dashed,red] (0.333,0.52) -- (0,0.04);\n  \\draw[dashed,red] (0.333,0.52) -- (1,0.04);\n  \\node[red,left] at (-0.05,0.45) {$w_0=2/3$};\n  \\node[red,right] at (0.95,0.45) {$w_1=1/3$};\n  \\draw[<->] (0,0.26) -- node[above] {$h$} (1,0.26);\n\\end{tikzpicture}",
+        "fixture": "cic-deposit-and-adjoint-five",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Exact CIC weights, raw and neutralized densities, weighted mean, raw/background adjoint pairings on a nonconstant grid vector, and exact one-sided hat slopes +5/-5.",
+      "finite_limitations": "One charge-two particle at h/3 on N=5,L=1, plus a fixed adjoint vector and kink offsets; no smoothness/general gather theorem."
+    },
+    {
+      "batch": 61,
+      "id": "ex-periodic-smooth-density-poisson-grid-force-error",
+      "index": 0,
+      "obligation": {
+        "check": "regularized-first-fourier-mode",
+        "asserts": "The first cosine mode is multiplied by α_ε under η_ε convolution and once more under gathered convolution.",
+        "claim": "The exact continuum field and target used by the mesh-error estimate have the stated Fourier coefficients.",
+        "checked_in": "Steps 1.1–2.1",
+        "frequency": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Let $d=1$, $L=2\\pi$, $a=1/2$, and let the probability measure $\\mu$ have density\n$$ d\\mu(y)=\\frac{1+a\\cos y}{2\\pi}\\,dy. $$ For $\\alpha_\\varepsilon=e^{-\\varepsilon/(2\\pi)}$, the regularized neutralized source and zero-mean field are $$ \\rho_\\varepsilon(x)=\\frac{a\\alpha_\\varepsilon}{2\\pi}\\cos x, \\qquad E_\\varepsilon(x)=-\\phi_\\varepsilon'(x)=\\frac{a\\alpha_\\varepsilon}{2\\pi}\\sin x. $$ The gathered continuum target is $(\\eta_\\varepsilon*E_\\varepsilon)(x)=\\frac{a\\alpha_\\varepsilon^2}{2\\pi}\\sin x$. On any odd grid with spacing $h=2\\pi/N$, the fixed-$\\varepsilon$ theorem gives $$ \\|G_hE_h-\\eta_\\varepsilon*E_\\varepsilon\\|_\\infty \\le (2\\pi)^{1/2}h^{3/2}(\\gamma_{N,2\\pi}C_{\\rm src}+C_3)+C_{\\rm int}h^2, $$\nwhere the constants are explicitly defined in [[thm-periodic-pic-smooth-density-grid-force-consistency]]. This tends to zero along odd $N\\to\\infty$ at fixed $\\varepsilon$.",
+        "fixture": "regularized-first-mode",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "At alpha=1/2 (epsilon=2*pi*log(2)), evaluate the closed Poisson kernel on 4096 uniform nodes; quadrature checks normalization/first cosine coefficient and source/gather convolutions at four positions, comparing coefficients alpha and alpha^2.",
+      "finite_limitations": "Fixed finite floating quadrature with tolerance 2e-11, not a certified continuum integral, exact Fourier identity, h-rate or asymptotic claim. Preserves the authored first-mode obligation as a bounded falsification model."
+    },
+    {
+      "batch": 61,
+      "id": "ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode",
+      "index": 0,
+      "obligation": {
+        "check": "harmonic-leapfrog-dt-half",
+        "asserts": "Starting at (1,0), one Δt=1/2 step gives (7/8,-15/32) and H_1=1009/2048≠1/2.",
+        "claim": "Exact rational arithmetic verifies reversible symplectic leapfrog need not preserve H exactly.",
+        "checked_in": "Steps 1.1–2.1",
+        "dt": "1/2"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "As a scalar diagnostic, consider the separable harmonic Hamiltonian $H(q,p)=\\frac12(p^2+q^2)$ and one kick-drift-kick step with $\\Delta t=1/2$ from $(q_0,p_0)=(1,0)$. It returns\n$$ (q_1,p_1)=\\left(\\frac78,-\\frac{15}{32}\\right),\\qquad H(q_1,p_1)=\\frac{1009}{2048}\\ne\\frac12=H(q_0,p_0). $$\nThe exact oscillator conserves $H$. This abstract quadratic test is not claimed to be a trajectory of the periodic electrostatic potential $U_h$ from [[def-periodic-pic-separable-hamiltonian-grid-model]]; it shows why symplecticity or reversibility alone cannot imply exact preservation of an arbitrary Hamiltonian. On the separate PIC branch, [[thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error]] proves its own reversible/symplectic and conditional order-two properties. The exact semidiscrete energy result there is [[thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy]].",
+        "fixture": "harmonic-leapfrog-half",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Exact rational kick-drift-kick from (1,0) with dt=1/2, physical energy 1009/2048, reverse step and determinant of the independently formed linear map.",
+      "finite_limitations": "One oscillator step; determinant one is the two-dimensional finite symplectic check, not a general integrator theorem."
+    },
+    {
+      "batch": 66,
+      "id": "lem-phase-field-neumann-laplacian-kernel-and-gauge",
+      "index": 0,
+      "obligation": {
+        "check": "one-cell-neumann-kernel",
+        "asserts": "For one cell, A_h=0, X_{h,0}={0}, and the stated Poincare inequality is vacuous.",
+        "claim": "The zero-dimensional mean-zero branch and constant kernel agree.",
+        "checked_in": "Statement and steps 1.1–3.1",
+        "cells": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Use either connected no-flux realization in [[def-phase-field-discrete-realizations]]. In its finite-volume branch, assume the interior cell graph is connected; in its interval conforming branch, assume $N\\ge1$. Write $\\bar u_h=\\langle u_h,\\mathbf1\\rangle_h/\\langle\\mathbf1,\\mathbf1\\rangle_h$ and $X_{h,0}=\\{u_h:\\bar u_h=0\\}$. Then $A_h$ is self-adjoint and nonnegative, $\\ker A_h=\\operatorname{span}\\{\\mathbf1\\}$, and $\\operatorname{ran}A_h=X_{h,0}$. The restriction $A_h:X_{h,0}\\to X_{h,0}$ is positive definite and invertible. Define $A_h^\\dagger u_h$ by first projecting $u_h$ onto $X_{h,0}$ and then applying this self-adjoint positive inverse. For each fixed finite mesh there is $C_h<\\infty$ such that\n$$\\|u_h-\\bar u_h\\mathbf1\\|_h^2\\le C_h\\langle A_hu_h,u_h\\rangle_h.$$\nFor a one-cell mesh, $X_{h,0}=\\{0\\}$ and the inequality is vacuous.",
+        "fixture": "one-cell-neumann-kernel",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Assemble the one-cell graph Laplacian from its empty face list, act on a constant and three nontrivial scalar states, project onto mean zero and solve the identity gauge for the zero inverse.",
+      "finite_limitations": "One-cell branch only. The zero-dimensional Poincare inequality is explicitly retained as such, backed by actual operator/projection calculations rather than an unconditional pass."
+    },
+    {
+      "batch": 66,
+      "id": "thm-phase-field-sav-modified-energy-law",
+      "index": 0,
+      "obligation": {
+        "check": "one-cell-sav-step",
+        "asserts": "When A_h=0, the first SAV equation gives u^{n+1}=u^n, the third gives r^{n+1}=r^n, and the second uniquely determines the constant chemical potential.",
+        "claim": "The degenerate one-cell system is uniquely solvable and the modified-energy identity has zero dissipation.",
+        "checked_in": "Steps 1.1 and 2.1",
+        "cells": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Under the finite-dimensional hypotheses of [[alg-phase-field-sav-cahn-hilliard-step]], the displayed SAV linear system has a unique solution at every step. Every solution conserves the discrete mean and obeys\n$$\\widetilde E_h(u^{n+1},r^{n+1})+\\frac\\kappa2\\langle A_h\\delta u,\\delta u\\rangle_h+(\\delta r)^2+M\\tau\\langle A_h\\mu^{n+1},\\mu^{n+1}\\rangle_h=\\widetilde E_h(u^n,r^n),$$\nwhere $\\delta u=u^{n+1}-u^n$, $\\delta r=r^{n+1}-r^n$, and\n$$\\widetilde E_h(u,r)=\\frac\\kappa2\\langle A_hu,u\\rangle_h+r^2.$$\nThus $\\widetilde E_h$ is nonincreasing. This conclusion is about the modified energy; it does not assert monotonicity of the original physical energy $\\mathcal E_h(u)=\\frac\\kappa2\\langle A_hu,u\\rangle_h+E_{1,h}(u)$.",
+        "fixture": "one-cell-sav-step",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "For nonzero old state u=2,r=3/2 and epsilon=kappa=M=tau=C0=1, assemble and solve all three SAV equations in (u_new,r_new,mu_new), independently check determinant -1, residuals, mean, chemical potential and zero-dissipation energy identity.",
+      "finite_limitations": "One-cell fixed state only; floating alpha and solve use tolerance 2e-11. No arbitrary-mesh solvability or dissipation theorem."
+    },
+    {
+      "batch": 66,
+      "id": "cex-phase-field-sav-modified-energy-not-physical-energy",
+      "index": 0,
+      "obligation": {
+        "check": "one-cell-energy-implication",
+        "asserts": "For epsilon=C0=1 and pairs (u0,r0)=(1,1), (u1,r1)=(0,1/2), modified energies are 1 and 1/4 while physical potentials are 0 and 1/4.",
+        "claim": "The scalar inequality alone does not imply physical-energy decrease.",
+        "checked_in": "Steps 1.1–1.2",
+        "cells": 1
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Take a one-cell no-flux mesh with cell volume $|K|=1$, so the gradient term is zero and the cell-volume mass is one, and set $\\varepsilon=C_0=1$. Let $u^0=1$, $u^1=0$, $r^0=1$, and $r^1=1/2$. Then the modified scalar energy $r^2$ decreases from $1$ to $1/4$, while the original double-well energy increases from $F_1(1)=0$ to $F_1(0)=1/4$. These scalar pairs are a counterexample to the stated implication from an energy inequality alone; they are not asserted to be a trajectory of the SAV update equations.",
+        "fixture": "one-cell-energy-implication",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Exact double-well and auxiliary-square energies for pairs (1,1) and (0,1/2), checking opposite strict inequalities.",
+      "finite_limitations": "Algebraic implication counterexample only, explicitly not a trajectory of SAV equations."
+    },
+    {
+      "batch": 66,
+      "id": "ex-phase-field-ch-two-cell-energy-ledger",
+      "index": 0,
+      "obligation": {
+        "check": "two-cell-cubic-ledger",
+        "asserts": "The state equation reduces to 2a^3+7a-5=0; the polynomial is strictly increasing and changes sign from -5 to 4 on [0,1].",
+        "claim": "There is exactly one a in (0,1), and the stated initial/new energy formulas satisfy E1<2.",
+        "checked_in": "Steps 1.1 and 2.1",
+        "cells": 2
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-particle-fixture",
+        "asserts": "Take two unit cells on $(0,2)$, one interior face with transmissibility $T=1$, no-flux boundary faces, $\\varepsilon=\\kappa=M=\\tau=1$, and $u^0=(1,-1)$. The discrete mean is zero, and the one-step convex-splitting state is $u^1=(a,-a)$ where $a$ is the unique root in $(0,1)$ of $2a^3+7a-5=0$. The initial energy is $2$ and the new energy is $2a^2+\\frac12(1-a^2)^2<2$.",
+        "fixture": "two-cell-cubic-ledger",
+        "parameters": {}
+      },
+      "original_obligation_preservation": "Bracket polynomial 2a^3+7a-5 on [0,1], run exactly 64 bisections, then recompute both raw two-cell chemical/state equations, zero mass and gradient-plus-potential energy from the matrix. Check derivative lower bound on the computed bracket and energy below two.",
+      "finite_limitations": "Fixed two-cell step; bisection residual tolerance 2e-14, other comparisons 2e-11. Numerical bracket calculation does not replace the source proof of existence/uniqueness or general energy law."
+    }
+  ]
+}

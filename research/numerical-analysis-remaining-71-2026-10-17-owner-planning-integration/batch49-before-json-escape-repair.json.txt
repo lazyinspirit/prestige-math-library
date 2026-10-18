@@ -1,0 +1,263 @@
+[
+  {
+    "order": 2652,
+    "id": "projection-and-pressure-correction-for-incompressible-flow",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Projection, pressure correction and saddle-point solvers",
+    "companion": "projection-and-pressure-correction-for-incompressible-flow-examples",
+    "requires": [
+      "preconditioner-algorithms-and-residual-metrics",
+      "energy-stable-incompressible-navier-stokes-discretization"
+    ],
+    "items": [
+      {
+        "id": "def-na-periodic-staggered-grid-stokes-operators",
+        "kind": "definition",
+        "title": "Periodic staggered-grid velocity and pressure spaces",
+        "statement": "On the unit torus and the uniform N^d periodic cell grid, define the real cell-centred mean-zero pressure space, face-centred velocity space, their h^d mass inner products, the forward pressure gradient, backward velocity divergence, and the compatible periodic Laplacian Δ_h=D_hG_h, with a fixed sign and index convention.",
+        "deps": ["def-natural-numbers", "thm-reals-field"],
+        "dependency_level": 0,
+        "strategy": "State cell and face locations, indexing, all operators and inner products; prove claimed well-definedness locally."
+      },
+      {
+        "id": "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+        "kind": "definition",
+        "title": "Symmetric saddle-point system, Schur complement, and block preconditioners",
+        "statement": "For a real finite-dimensional saddle system K=[A B^T; B 0] with SPD A and full-row-rank B, define the positive pressure Schur matrix S=BA^{-1}B^T, its exact block-LU solve, the pressure-mass surrogate γM_Q, and the corresponding block-diagonal symmetric preconditioner, with all hypotheses and pressure gauge stated.",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-block-lu-factorisation",
+          "def-left-right-and-symmetric-positive-definite-preconditioning",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-reals-field"
+        ],
+        "dependency_level": 0,
+        "strategy": "Give the typed matrix inputs and output maps; reuse the published block-LU and symmetric-preconditioning conventions."
+      },
+      {
+        "id": "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+        "kind": "lemma",
+        "title": "Periodic pressure Laplacian gauge, solvability, and uniform Poincare bound",
+        "statement": "For every N≥2 and fixed d≥1, Δ_h maps mean-zero cell arrays bijectively to themselves, its only kernel on all cell arrays is the constants, every periodic discrete divergence has zero mean, and ||q||_{Q_h}≤√d||G_hq||_{M_h} on mean-zero pressures with h=1/N.",
+        "deps": ["def-na-periodic-staggered-grid-stokes-operators"],
+        "dependency_level": 1,
+        "strategy": "Prove the discrete adjoint identity, characterize the kernel by connectedness, and count coordinate paths for the uniform Poincare estimate."
+      },
+      {
+        "id": "lem-na-periodic-staggered-grid-smooth-sampling-consistency",
+        "kind": "lemma",
+        "title": "Second-order consistency of staggered periodic sampling",
+        "statement": "For smooth periodic vector and scalar fields, face/cell sampling R_h on the unit torus satisfies D_hR_hu=R_h(div u)+O(h^2), A_hR_hu=R_h(−Δu)+O(h^2), and G_hR_hp=R_h(∇p)+O(h^2), uniformly in the corresponding mass norms.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "lem-taylor-lagrange-remainder-from-mean-value",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "dependency_level": 1,
+        "strategy": "Give the exact face/cell sample maps and derive each centered-difference remainder from Taylor's formula with bounded derivatives."
+      },
+      {
+        "id": "thm-na-saddle-point-exact-schur-solve",
+        "kind": "theorem",
+        "title": "Exact Schur solve for a full-row-rank symmetric saddle system",
+        "statement": "If A is SPD and B has full row rank, then S=BA^{-1}B^T is SPD, the matrix [A B^T; B 0] has the published block-LU factorization, and the unique solution of [A B^T; B 0][u;p]=[f;g] is p=S^{-1}(BA^{-1}f-g), u=A^{-1}(f-B^Tp).",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "thm-block-lu-factorisation-via-an-invertible-leading-block"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove Schur positivity from full row rank, instantiate the published block-LU result, and verify both equations by substitution."
+      },
+      {
+        "id": "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+        "kind": "theorem",
+        "title": "Pressure Schur equivalence from inf-sup, continuity, and stiffness scaling",
+        "statement": "For finite-dimensional real Hilbert spaces with an SPD velocity form a, continuity constant C_b, inf-sup constant β>0, and α||v||_V^2≤a(v,v)≤Λ||v||_V^2, the positive pressure Schur form satisfies (β^2/Λ)||q||_Q^2≤(BA^{-1}B^Tq,q)_Q≤(C_b^2/α)||q||_Q^2; hence a scaled pressure mass matrix is spectrally equivalent only with these stated constants.",
+        "deps": ["def-na-symmetric-saddle-point-system-and-block-preconditioners"],
+        "dependency_level": 1,
+        "strategy": "Identify the Schur quadratic form with the squared dual norm of b(·,q), then apply the stated inf-sup, continuity, and energy equivalence bounds."
+      },
+      {
+        "id": "alg-na-periodic-incremental-pressure-correction",
+        "kind": "algorithm",
+        "title": "Backward-Euler incremental pressure correction on a periodic staggered grid",
+        "statement": "Given N≥2, d≥1, h=1/N, ν>0, Δt>0, divergence-free u^n, mean-zero p^n, and mean-zero periodic forcing, solve the positive Helmholtz predictor, solve the compatible zero-mean pressure-increment Poisson equation, then correct velocity and update pressure with the stated zero-mode gauge.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare"
+        ],
+        "dependency_level": 2,
+        "strategy": "Specify inputs, outputs, equations, solve order, gauge, and failure/status behavior; a separate theorem proves the solves well-defined."
+      },
+      {
+        "id": "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+        "kind": "algorithm",
+        "title": "BDF2 standard and rotational incremental pressure-correction variants",
+        "statement": "On the same periodic staggered grid, define the BDF2 predictor and pressure-increment Poisson solve, and give both the standard update p^{n+1}=p^n+φ and the rotational update p^{n+1}=p^n+φ−νD_h\tilde u, including the 2Δt/3 velocity correction and admissible starting data; assert no error rate.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define both variants exactly, state starting-data and mean-zero conditions, and make no unproved stability or accuracy claim."
+      },
+      {
+        "id": "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+        "kind": "theorem",
+        "title": "Spectrum of a symmetrically pressure-mass-preconditioned saddle system",
+        "statement": "If the Schur matrix satisfies μ_min M_Q≤S≤μ_max M_Q for positive μ_min,μ_max and the block-diagonal preconditioner is diag(A,γM_Q), then every eigenvalue of its symmetric preconditioning lies in the exact intervals obtained from λ_±(μ)=(1±√(1+4μ))/2 with μ∈[μ_min/γ,μ_max/γ], together with eigenvalue 1 on ker B; this is a spectral bound, not an iteration-count claim.",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use finite-dimensional symmetric spectral decomposition and singular pairs of the pressure-scaled divergence block; derive the two-by-two characteristic polynomial."
+      },
+      {
+        "id": "thm-na-periodic-pressure-correction-solves-well-defined",
+        "kind": "theorem",
+        "title": "Well-definedness of the periodic pressure-correction solves",
+        "statement": "For admissible data in the backward-Euler and BDF2 algorithms, the velocity predictor matrices are SPD, the divergence right-hand side has zero mean, and the pressure Poisson solve has a unique mean-zero solution; thus both variants return a unique next velocity and a uniquely gauged pressure increment.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "alg-na-bdf2-incremental-and-rotational-pressure-correction",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare"
+        ],
+        "dependency_level": 3,
+        "strategy": "Test each predictor against its unknown and use the discrete gradient energy; prove compatibility and uniqueness from the pressure Laplacian lemma."
+      },
+      {
+        "id": "thm-na-periodic-discrete-helmholtz-projection",
+        "kind": "theorem",
+        "title": "Mass-orthogonal periodic discrete Helmholtz projection and exact incompressibility",
+        "statement": "The map P_h=I−G_hΔ_h^{-1}D_h, with Δ_h^{-1} taken on mean-zero cell pressures, is the mass-orthogonal projector onto ker D_h; the corrected velocity in the incremental pressure-correction algorithm is P_h\tilde u and is exactly divergence-free.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare"
+        ],
+        "dependency_level": 3,
+        "strategy": "Verify range, identity on the kernel, and orthogonality using the discrete adjoint relation."
+      },
+      {
+        "id": "thm-na-periodic-pressure-correction-modified-energy-identity",
+        "kind": "theorem",
+        "title": "Modified velocity-pressure energy identity for periodic pressure correction",
+        "statement": "For the backward-Euler incremental pressure-correction step on the periodic staggered grid, the exact identity is ||u^{n+1}||_M^2−||u^n||_M^2+||\tilde u^{n+1}−u^n||_M^2+2νΔt||\mathcal G_h\tilde u^{n+1}||_M^2+Δt^2(||G_hp^{n+1}||_M^2−||G_hp^n||_M^2)=2Δt(f^{n+1},\tilde u^{n+1})_M.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "thm-na-periodic-discrete-helmholtz-projection"
+        ],
+        "dependency_level": 4,
+        "strategy": "Test the predictor by 2Δt\tilde u, use the discrete adjoint relation, and combine the projection square identity with the pressure increment."
+      },
+      {
+        "id": "thm-na-periodic-pressure-correction-first-order-velocity-error",
+        "kind": "theorem",
+        "title": "First-order velocity accuracy for smooth periodic Stokes data",
+        "statement": "For a smooth mean-zero periodic Stokes solution on the unit torus, central staggered-grid spatial differences and the backward-Euler incremental pressure-correction scheme with u_h^0=P_hR_hu(0) satisfy max_{0≤n≤M}||u_h^n−R_hu(t_n)||_{M_h}≤C_T(h^2+Δt), where C_T is independent of h and Δt and depends on the displayed smoothness bounds, ν, and T; no pressure-error rate is claimed.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "thm-na-periodic-pressure-correction-solves-well-defined",
+          "thm-na-periodic-discrete-helmholtz-projection",
+          "lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare",
+          "lem-na-periodic-staggered-grid-smooth-sampling-consistency"
+        ],
+        "dependency_level": 4,
+        "strategy": "Project the sampled Stokes equation, prove second-order spatial consistency by Taylor expansion, and apply the contractive backward-Euler recurrence to the discrete divergence-free velocity."
+      },
+      {
+        "id": "cor-na-mini-element-pressure-mass-schur-bounds",
+        "kind": "corollary",
+        "title": "Pressure-mass Schur scaling for the stable mini element",
+        "statement": "For the P1-bubble/P1 mini element on a bounded connected Lipschitz polygonal/polyhedral domain in d=2,3, the steady Stokes Schur matrix for a_ν(u,v)=2ν(ε(u),ε(v)) obeys (C_FC_div(D))^{-2}/(ν(1+d)) M_Q≤BA_ν^{-1}B^T≤d/ν M_Q, with constants independent of h under the stated shape-regularity assumptions and Countable Choice.",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "thm-na-pressure-schur-spectral-equivalence-from-infsup",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "thm-na-mini-element-fortin-stability",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "Apply the mini-element Fortin inf-sup bound, the homogeneous Dirichlet strain identity, and the local divergence continuity estimate to the generic Schur theorem."
+      },
+      {
+        "id": "cor-na-mini-element-pressure-mass-block-spectrum",
+        "kind": "corollary",
+        "title": "Uniform block-preconditioned spectrum for the steady mini-element Stokes system",
+        "statement": "With the pressure mass preconditioner ν^{-1}M_Q on the same steady mini-element Stokes branch, the symmetric block-preconditioned eigenvalues lie in the exact λ_± intervals corresponding to μ∈[(C_FC_div(D))^{-2}/(1+d),d], with eigenvalue 1 on ker B and no generic iteration-count claim.",
+        "deps": [
+          "thm-na-symmetrically-preconditioned-saddle-point-spectrum",
+          "cor-na-mini-element-pressure-mass-schur-bounds",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "Substitute the proved mini-element Schur bounds into the general block spectrum theorem and state the resulting intervals."
+      }
+    ]
+  },
+  {
+    "order": 2653,
+    "id": "projection-and-pressure-correction-for-incompressible-flow-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Projection, pressure correction and saddle-point solvers — Examples",
+    "companion": "projection-and-pressure-correction-for-incompressible-flow",
+    "requires": ["projection-and-pressure-correction-for-incompressible-flow"],
+    "items": [
+      {
+        "id": "ex-na-wall-pressure-correction-tangential-velocity-defect",
+        "kind": "example",
+        "title": "A wall pressure correction can change tangential no-slip data",
+        "statement": "On the periodic channel (0,1)×T, a smooth provisional velocity with zero trace can have a Neumann pressure correction whose tangential gradient makes the corrected velocity nonzero at the wall; compute an explicit separated solution and the nonzero trace.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Solve the scalar Neumann Poisson equation exactly for a smooth Fourier mode and evaluate the tangential correction at the wall."
+      },
+      {
+        "id": "cex-na-collocated-central-difference-checkerboard-pressure-mode",
+        "kind": "counterexample",
+        "title": "Collocated central differences admit a checkerboard pressure null mode",
+        "statement": "For even N, the mean-zero collocated pressure p_j=(-1)^{j_1} has zero centered-difference gradient and therefore lies in the pressure-Poisson kernel; constants are not the full gauge kernel on this collocated grid.",
+        "deps": ["def-na-periodic-staggered-grid-stokes-operators"],
+        "dependency_level": 1,
+        "strategy": "Evaluate the centered difference at every index and verify the checkerboard has zero discrete mean."
+      },
+      {
+        "id": "ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum",
+        "kind": "example",
+        "title": "A one-by-one saddle point has the golden-ratio preconditioned spectrum",
+        "statement": "For A=[1], B=[1], and M_Q=[1], the saddle matrix and exact pressure-mass block preconditioner give eigenvalues (1±√5)/2; compute the exact block solve and spectrum without inferring a general iteration count.",
+        "deps": [
+          "def-na-symmetric-saddle-point-system-and-block-preconditioners",
+          "thm-na-symmetrically-preconditioned-saddle-point-spectrum"
+        ],
+        "dependency_level": 3,
+        "strategy": "Verify the 2×2 matrix, its determinant polynomial, the block-LU solve, and the two eigenvalues exactly."
+      },
+      {
+        "id": "ex-na-periodic-single-mode-pressure-correction",
+        "kind": "example",
+        "title": "One periodic gradient mode is removed exactly by the pressure correction",
+        "statement": "For a nonconstant mean-zero cell mode q on the periodic staggered grid, a provisional velocity \tilde u=G_hq is corrected to zero by the pressure increment φ=q/Δt, illustrating the exact projection and pressure gauge.",
+        "deps": [
+          "def-na-periodic-staggered-grid-stokes-operators",
+          "alg-na-periodic-incremental-pressure-correction",
+          "thm-na-periodic-discrete-helmholtz-projection",
+          "thm-na-periodic-pressure-correction-solves-well-defined"
+        ],
+        "dependency_level": 4,
+        "strategy": "Use Δ_hq=D_hG_hq and the unique zero-mean pressure solve, then compute the correction exactly."
+      }
+    ]
+  }
+]

@@ -1,0 +1,402 @@
+{
+  "group": "u",
+  "batches": [
+    "63"
+  ],
+  "pages_read": [
+    "curved-mesh-geometry-and-conservative-mesh-transfer",
+    "curved-mesh-geometry-and-conservative-mesh-transfer-examples"
+  ],
+  "items_read": [
+    "def-intersection-volume-conservative-remapping",
+    "def-isoparametric-curved-cell-map",
+    "lem-h2-zero-boundary-p1-interpolant-conforming",
+    "def-curved-domain-geometry-approximation",
+    "lem-curved-p1-interpolation-scaling",
+    "lem-isoparametric-pullback-and-surface-metric",
+    "thm-overlap-remap-l2-projection-conservation-positivity",
+    "lem-curved-boundary-lift-residual",
+    "lem-isoparametric-cofactor-normal-perturbation",
+    "lem-isoparametric-laplace-tensor-defect",
+    "lem-parabolic-domain-map-approximation",
+    "thm-overlap-remap-error-from-approximation-and-geometry",
+    "lem-curved-nvb-closure-preserves-matching-traces",
+    "thm-curved-isoparametric-strang-error-bound",
+    "alg-certified-convex-polygon-overlap",
+    "thm-certified-polygon-overlap-correctness",
+    "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+    "thm-curved-uniform-nvb-quality-and-termination",
+    "ex-inverted-isoparametric-map-detection",
+    "ex-isoparametric-unit-disk-mesh",
+    "ex-conservative-transfer-between-moving-curved-meshes",
+    "ex-parabolic-curved-domain-linear-geometry-approximation",
+    "cex-delaunay-tetrahedral-sliver"
+  ],
+  "conventions": [
+    {
+      "convention": "Remapping uses exact Lebesgue intersection measures between finite measurable partitions up to null sets, with positive cell volumes; approximate clipping weights are separate data.",
+      "fixed_by": "def-intersection-volume-conservative-remapping",
+      "matters_for": [
+        "thm-overlap-remap-l2-projection-conservation-positivity",
+        "thm-overlap-remap-error-from-approximation-and-geometry",
+        "thm-certified-polygon-overlap-correctness",
+        "ex-conservative-transfer-between-moving-curved-meshes"
+      ]
+    },
+    {
+      "convention": "Curved maps preserve orientation, extend to neighborhood diffeomorphisms, have certified positive Jacobians, and agree across shared reference facets under affine facet identification.",
+      "fixed_by": "def-isoparametric-curved-cell-map",
+      "matters_for": [
+        "lem-isoparametric-pullback-and-surface-metric",
+        "lem-isoparametric-cofactor-normal-perturbation",
+        "lem-curved-nvb-closure-preserves-matching-traces",
+        "thm-curved-uniform-nvb-quality-and-termination",
+        "ex-isoparametric-unit-disk-mesh",
+        "ex-inverted-isoparametric-map-detection"
+      ]
+    },
+    {
+      "convention": "Geometry errors e0 and e1 are respectively uniform map-value and operator-norm derivative differences on a common reference domain; the Laplace tensor is J DΦ⁻¹DΦ⁻ᵀ. Boundary lifting and data errors remain separate.",
+      "fixed_by": "def-curved-domain-geometry-approximation",
+      "matters_for": [
+        "lem-curved-boundary-lift-residual",
+        "lem-isoparametric-laplace-tensor-defect",
+        "lem-parabolic-domain-map-approximation",
+        "thm-curved-isoparametric-strang-error-bound",
+        "thm-overlap-remap-error-from-approximation-and-geometry"
+      ]
+    },
+    {
+      "convention": "The nodal conformity result concerns real H2 ∩ H1_0 functions on the square (-1,1)² and explicitly assumes AC and Countable Choice; boundary values are established from the closure-defined Sobolev space.",
+      "fixed_by": "lem-h2-zero-boundary-p1-interpolant-conforming",
+      "matters_for": [
+        "thm-curved-isoparametric-strang-error-bound"
+      ]
+    },
+    {
+      "convention": "Clipping normalizes polygon cycles counterclockwise, retains boundary points using nonnegative orientation signs, clears a common positive denominator for predicate calls, and uses exact rational crossing arithmetic.",
+      "fixed_by": "alg-certified-convex-polygon-overlap",
+      "matters_for": [
+        "thm-certified-polygon-overlap-correctness"
+      ]
+    },
+    {
+      "convention": "The refinement guarantee is restricted to the square and the shear Φ(x,y)=(x,y+x²/4), with compatible diagonal-reference labels, persistent binary-path identifiers, three-generation uniform requests, and transactional budget retries.",
+      "fixed_by": "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+      "matters_for": [
+        "thm-curved-uniform-nvb-quality-and-termination"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-isoparametric-curved-cell-map",
+      "statement": "An admissible curved cell is the image of a closed reference simplex under a C2 map extending to an orientation-preserving neighborhood diffeomorphism, with positive Jacobian and bounded derivative, inverse derivative, and second derivative; neighboring maps have matching facet traces.",
+      "used_by": [
+        "def-curved-domain-geometry-approximation",
+        "lem-curved-p1-interpolation-scaling",
+        "lem-isoparametric-pullback-and-surface-metric",
+        "lem-isoparametric-cofactor-normal-perturbation",
+        "lem-curved-nvb-closure-preserves-matching-traces",
+        "thm-curved-uniform-nvb-quality-and-termination",
+        "ex-isoparametric-unit-disk-mesh"
+      ]
+    },
+    {
+      "id": "thm-overlap-remap-l2-projection-conservation-positivity",
+      "statement": "Assume Countable Choice. Under the finite partition hypotheses of def-intersection-volume-conservative-remapping, exact overlap remapping of source piecewise constants is the L2 orthogonal projection onto target piecewise constants, is L2 contractive, preserves total mass, and preserves nonnegativity.",
+      "used_by": [
+        "thm-overlap-remap-error-from-approximation-and-geometry",
+        "ex-conservative-transfer-between-moving-curved-meshes",
+        "thm-characteristic-cell-overlap-remapping-conserves-mass-and-positivity"
+      ]
+    },
+    {
+      "id": "lem-parabolic-domain-map-approximation",
+      "statement": "Assume Countable Choice. On a matching shape-regular affine triangulation of [-1,1]², the nodal P1 approximation of Φ(x,y)=(x,y+x²/4) satisfies e0 ≤ Ch² and e1 ≤ Ch; for sufficiently small h its Jacobian is at least 1/2 and the approximate map is globally injective.",
+      "used_by": [
+        "thm-curved-isoparametric-strang-error-bound",
+        "ex-parabolic-curved-domain-linear-geometry-approximation"
+      ]
+    },
+    {
+      "id": "lem-isoparametric-laplace-tensor-defect",
+      "statement": "For the orientation-preserving geometry maps with Jacobians at least j* > 0 and uniformly bounded derivatives, the Laplace tensor gap is bounded by Ce1, and the associated bilinear-form defect is bounded by Ce1 times the two L2 gradient norms.",
+      "used_by": [
+        "thm-curved-isoparametric-strang-error-bound",
+        "ex-parabolic-curved-domain-linear-geometry-approximation"
+      ]
+    },
+    {
+      "id": "lem-h2-zero-boundary-p1-interpolant-conforming",
+      "statement": "Assume AC and Countable Choice. For a finite matching triangular mesh of (-1,1)² and real u ∈ H2 ∩ H1_0, the cellwise continuous representatives give consistent vertex values; the global nodal P1 interpolant is continuous, vanishes on boundary edges, and belongs to H1_0.",
+      "used_by": [
+        "thm-curved-isoparametric-strang-error-bound"
+      ]
+    },
+    {
+      "id": "lem-curved-nvb-closure-preserves-matching-traces",
+      "statement": "Recursive reference-edge closure of a compatible labeled reference triangulation terminates in a matching conforming affine descendant; a common injective geometry map with matching facet traces produces matching curved interfaces.",
+      "used_by": [
+        "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+        "thm-curved-uniform-nvb-quality-and-termination"
+      ]
+    },
+    {
+      "id": "lem-curved-boundary-lift-residual",
+      "statement": "Assume Countable Choice. For the stated continuous cellwise-C1 maps on the reference square and common C2 physical lift G, the H1-dual norm of the pullback-gradient residual is at most 2(L1e1 + ML2e0).",
+      "used_by": [
+        "thm-curved-isoparametric-strang-error-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "Meaning of exact measurable overlap volumes.",
+      "opened": true
+    },
+    {
+      "id": "def-matching-affine-simplicial-meshes",
+      "used_for": "Finite face-to-face meshes, orientations, reference cells, and shape regularity.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumption inherited by nodal evaluation, extension, embedding, and trace arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Choice convention inherited by measure, Sobolev, and change-of-variables interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-sobolev-space-wkp-and-its-norm",
+      "used_for": "Sobolev classes, weak derivatives, and derivative-sum norms.",
+      "opened": true
+    },
+    {
+      "id": "def-wkp-zero-as-a-sobolev-closure",
+      "used_for": "Closure definition of homogeneous boundary spaces.",
+      "opened": true
+    },
+    {
+      "id": "lem-affine-pullback-weak-derivatives-and-scaling",
+      "used_for": "Affine transport of H2 restrictions to reference triangles.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-bump-between-concentric-euclidean-balls",
+      "used_for": "Localization near a boundary edge in the nodal conformity proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-weak-leibniz-rule-with-a-smooth-factor",
+      "used_for": "Sobolev cutoff products in the boundary-value argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-reference-simplex-sobolev-extension",
+      "used_for": "Extension-domain hypothesis for continuous H2 representatives on triangles.",
+      "opened": true
+    },
+    {
+      "id": "thm-higher-order-sobolev-embedding",
+      "used_for": "Continuous representatives on closed triangles and interior balls.",
+      "opened": true
+    },
+    {
+      "id": "thm-extension-theorem-for-bounded-smooth-domains",
+      "used_for": "Extension property for interior balls.",
+      "opened": true
+    },
+    {
+      "id": "lem-zero-extension-from-w-one-p-zero",
+      "used_for": "Global H1 zero extension of the homogeneous-boundary input.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-estimate-on-the-half-space",
+      "used_for": "Agreement of opposite traces and vanishing classical boundary values after localization.",
+      "opened": true
+    },
+    {
+      "id": "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+      "used_for": "Smooth approximation of the global zero extension.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-differentials-of-smooth-maps",
+      "used_for": "Coordinate transformations in the nodal conformity argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Pullback energies, weighted remap norms, and example areas.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Positive measure of nonempty open sets in uniqueness arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-zero-boundary-piecewise-polynomials-in-w10p",
+      "used_for": "Membership of the assembled zero-boundary interpolant in H1_0.",
+      "opened": true
+    },
+    {
+      "id": "thm-local-finite-element-interpolation-estimates",
+      "used_for": "Affine P1 L2 and H1 interpolation estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-lagrange-point-evaluation-threshold-on-reference-simplex",
+      "used_for": "Well-defined bounded nodal evaluations in dimension two.",
+      "opened": true
+    },
+    {
+      "id": "lem-c-k-boundary-flattening-preserves-wkp-locally",
+      "used_for": "Weak chain rules and H2 bounds under curved maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Classical pullback gradients and boundary-lift gradient differences.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Partition additivity, null sets, and square-volume bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-holder-inequality-for-integrals",
+      "used_for": "Projection contraction, residual bounds, and bilinear-form estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Finite summation of remap integrals and orthogonality.",
+      "opened": true
+    },
+    {
+      "id": "def-elementary-set-in-rn",
+      "used_for": "Elementary-box presentation in the boundary-residual volume bound.",
+      "opened": true
+    },
+    {
+      "id": "def-half-open-box",
+      "used_for": "The (a,b] box convention and volume of (-1,1]².",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Finite additivity and monotonicity in the square-volume argument.",
+      "opened": true
+    },
+    {
+      "id": "lem-affine-simplex-gauss-green-formula",
+      "used_for": "Identification of piecewise pullback gradients as weak gradients.",
+      "opened": true
+    },
+    {
+      "id": "lem-oriented-facet-cancellation-on-matching-meshes",
+      "used_for": "Cancellation of interior-edge boundary terms.",
+      "opened": true
+    },
+    {
+      "id": "thm-elementary-volume-is-well-defined",
+      "used_for": "Elementary volume of the containing half-open square.",
+      "opened": true
+    },
+    {
+      "id": "lem-shape-regular-affine-simplex-scaling",
+      "used_for": "Uniform barycentric-gradient and interpolation scaling bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-variational-crime-error-framework",
+      "used_for": "Separate conforming form and load defects, including the zero-space convention.",
+      "opened": true
+    },
+    {
+      "id": "def-hk-and-hk-zero-notation",
+      "used_for": "Hk notation in the Strang theorem.",
+      "opened": true
+    },
+    {
+      "id": "lem-w-one-two-is-a-hilbert-space",
+      "used_for": "Hilbert-space hypothesis for H1_0 in the Strang application.",
+      "opened": true
+    },
+    {
+      "id": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+      "used_for": "Conforming error estimate with explicit approximation, form, and load defects.",
+      "opened": true
+    },
+    {
+      "id": "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+      "used_for": "Zero Lebesgue area of degenerate polygon intersections.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-isoparametric-cofactor-normal-perturbation",
+      "concern": "Statement, line 30: “The surface Jacobian agrees with the Gram-metric factor in [[def-isoparametric-curved-cell-map]].” The cited definition allows an arbitrary reference facet parametrization, whereas proof step 1.2 establishes this equality using an orthonormal tangent matrix T. For A=I in dimension two, unit normal (0,1), and reference facet chart f(t)=(2t,0), the defined cofactor surface Jacobian is 1, while the cited chart Gram factor is 2. The unqualified equality therefore fails; the reference-chart area factor must be distinguished from the relative surface Jacobian.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "thm-overlap-remap-error-from-approximation-and-geometry",
+      "concern": "Statement, line 34 contains literal backslash-n text immediately before the displayed estimate and immediately before “where” (the source reads “then\\n$$” and “$$\\nwhere”). These are serialized newline escapes rather than actual layout newlines.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-indexed-geometric-site-set",
+      "finding": "Definition, line 27: “Let $\\mathbb D=\\{m2^e:m,e\\in\\mathbb Z\\}$ be its dyadic subfield.” This set is not a field: it contains 3 but not 1/3, since 3m2^e=1 has no integer m,e. The actual dyadic-coordinate algorithms use this set, so the displayed set and its asserted field classification disagree.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "to": "adaptive-finite-element-methods",
+      "faithful": true,
+      "note": "The consumers use compatible two-dimensional labels, finite conforming closure, persistent operational identifiers, transactional budget exhaustion, and three-generation diameter reduction. Current suppliers state these interfaces; no adaptive-complexity or three-dimensional conclusion is imported."
+    },
+    {
+      "from": "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "to": "delaunay-triangulations-and-voronoi-computation",
+      "faithful": true,
+      "note": "The square seed uses distinct dyadic corners in the ordinary full-dimensional planar branch and its coherent tie convention. The 45-degree angle is established from square geometry, rather than inferred from general Delaunay quality. The tetrahedral example uses only the ordinary empty-sphere convention. The separate dyadic-field terminology defect is recorded in alerts."
+    },
+    {
+      "from": "ale-interface-and-partitioned-multiphysics-discretization",
+      "to": "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "faithful": true,
+      "note": "The ALE page and moving-domain definition independently state their regularity and positive-Jacobian hypotheses. The declared prerequisite is contextual: no batch-63 transfer rate or curved-mesh quality guarantee is asserted."
+    },
+    {
+      "from": "hp-finite-elements-and-spectral-element-methods",
+      "to": "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "faithful": true,
+      "note": "Page prose explicitly separates its affine-cell approximation and quadrature results from the curved geometry framework and does not infer curved-cell consistency."
+    },
+    {
+      "from": "isogeometric-galerkin-methods",
+      "to": "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "faithful": true,
+      "note": "The knot-cell simplicial adapter explicitly supplies neighborhood diffeomorphisms, positive Jacobians, matching traces, and common-reference errors. It separates finite-grid bounds from uniform family bounds and does not reclassify rational analysis functions as affine P1 functions."
+    },
+    {
+      "from": "semi-lagrangian-characteristic-transport",
+      "to": "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "faithful": true,
+      "note": "The characteristic remap definition and theorem retain Countable Choice, finite measurable positive-volume source/departure partitions, exact intersections, and the separate departure-to-arrival volume factor. Conservation and positivity are imported with the supplier's hypotheses intact."
+    }
+  ]
+}

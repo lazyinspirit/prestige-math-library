@@ -100,6 +100,12 @@ function selectSharedOwnership(run, root, { physics, scope, selected, policy, fr
   // approximation or a whole-ledger object hash. A relevant change still
   // requires exact owner policy; the default path grants no shared ownership.
   const shared = ['research/defect-ledger.jsonl', 'research/published-consumer-supplier-ledger.md', 'research/plan-spec.json'];
+  // The policy path has already passed genuine preflight. When every shared
+  // carrier is unselected or explicitly composed, the loop below would skip
+  // all of them; no scientific projection is consumed for ownership here.
+  if (policy && shared.every(path => !selected.has(path)
+    || fragments.some(fragment => fragment.path === path)
+    || planProjections.some(row => row.path === path))) return [...selected].sort();
   const head = new Map(treeEntries(root).map(row => [row.path, row]));
   const index = new Map(indexEntries(root).map(row => [row.path, row]));
   const prefix = textGit(root, ['rev-parse', '--show-prefix']);

@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "reviewer": "Codex /root/gate_url_iga_wiley",
+  "recorded_at": "2026-10-18T00:00:38.905516+00:00",
+  "source": "items/lem-pe26-preconditioned-operator-norm-bound.md",
+  "before_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-pe26-zero-repair-before/lem-pe26-preconditioned-operator-norm-bound.md",
+  "confirmed_defect": "The original finite-dimensional assumptions admitted V={0}; the displayed supremum over nonzero vectors was then empty and had no real operator-norm value specified.",
+  "repair": "Retain the entire domain and all eigenvalue bounds. Define the induced norm as zero on the zero space, state that LT=I forces U={0} there and the spectrum is empty, and discharge that branch at the opening proof step.",
+  "statement_changed": true,
+  "defining_scope_preserved": true,
+  "mathematical_reason": "When V is zero every linear map into V is zero, so LT is zero on U. If LT is its identity, U must also be zero. The unique endomorphism of the zero space has empty spectrum; the asserted universal eigenvalue bound therefore has no instances. In nonzero V the original supremum and every positive-eigenvector calculation remain unchanged.",
+  "consumer_review": [
+    {
+      "id": "thm-pe26-condition-number-2d-polylogarithmic",
+      "relationship": "sole direct consumer",
+      "locations": [
+        "Statement",
+        "Facts F2",
+        "Proof 1.1",
+        "Proof 1.2",
+        "Proof 2.1"
+      ],
+      "finding": "Read the complete current carrier. Both condition-number claims explicitly require nonzero assembled and multiplier spaces and separately call a zero-dimensional solve trivial with no condition number asserted. The direct uses retain the positive spectral lower bound and original nonzero-space energy norm. The added zero-space convention changes neither application nor its constants.",
+      "repair_needed": false
+    },
+    {
+      "id": "ex-pe26-coarse-solve-work-bottleneck",
+      "relationship": "sole indirect consumer, via thm-pe26-condition-number-2d-polylogarithmic",
+      "locations": [
+        "Example",
+        "Facts F1",
+        "Verification 1.1",
+        "Verification 2.1"
+      ],
+      "finding": "Read the complete current carrier. It uses only independence of the fixed-geometry condition bound from subdomain count, comparing dense local and coarse operation counts. It never forms an operator norm or condition number of a zero space; the new convention has no effect on its premise or arithmetic.",
+      "repair_needed": false
+    }
+  ],
+  "consumer_discovery": "Read-only repository reference searches found only the condition-number theorem as a direct item consumer, only the coarse-work example as its consumer, and no further item consumers of that example. Source self-references were excluded.",
+  "checks_performed": "Actual mathematical boundary review and focused complete consumer reading only; no checker, test, validator, gate, metadata or contract mutation. Root owns final checks and hash refresh.",
+  "changes": [
+    {
+      "old": "lies in $[1,\\|TL\\|_A^2]$, where $\\|Q\\|_A:=\\sup_{v\\ne0}\\sqrt{\\langle A Qv,Qv\\rangle/\\langle Av,v\\rangle}$.",
+      "new": "lies in $[1,\\|TL\\|_A^2]$, where $\\|Q\\|_A:=\\sup_{v\\ne0}\\sqrt{\\langle A Qv,Qv\\rangle/\\langle Av,v\\rangle}$. When $V=\\{0\\}$, set $\\|Q\\|_A=0$ for its unique endomorphism. In that case $LT=I_U$ forces $U=\\{0\\}$, the spectrum of $G$ is empty, and the eigenvalue assertion is vacuous."
+    },
+    {
+      "old": "1.1 Put $D=T^TAT$,",
+      "new": "1.1 If $V=\\{0\\}$, the identity $LT=I_U$ forces $U=\\{0\\}$ and $G$ has no eigenvalues, so the assertion holds with the stated zero-space norm convention. Assume henceforth $V\\ne\\{0\\}$. Put $D=T^TAT$,"
+    }
+  ]
+}

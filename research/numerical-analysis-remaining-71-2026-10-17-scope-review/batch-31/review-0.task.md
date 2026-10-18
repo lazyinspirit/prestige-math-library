@@ -1,0 +1,13 @@
+# Batch 31: review 0
+
+Run: numerical-analysis-remaining-71-2026-10-17
+Batch: 31
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: mixed-finite-elements-and-stokes-stability, mixed-finite-elements-and-stokes-stability-examples
+Items: def-na-stokes-zero-mean-pressure-and-velocity-spaces, lem-na-zero-mean-of-zero-boundary-divergence, lem-na-homogeneous-dirichlet-poincare, lem-na-homogeneous-dirichlet-korn-identity, lem-na-lipschitz-domain-finite-star-shaped-cover, lem-na-finite-cover-zero-mean-data-decomposition, def-na-star-shaped-bogovskii-integral, lem-na-bogovskii-kernel-support-and-divergence, lem-na-bogovskii-truncated-derivative-fourier-formula, lem-na-bogovskii-fourier-ray-and-derivative-ltwo-bound, thm-na-star-shaped-bogovskii-bounded-right-inverse, thm-na-bounded-lipschitz-domain-divergence-right-inverse, thm-na-infsup-bounded-right-inverse-hilbert, thm-na-continuous-stokes-divergence-infsup, def-na-fortin-operator, lem-na-fortin-transfers-discrete-infsup, thm-na-babuska-brezzi-kernel-coercivity, thm-na-mixed-galerkin-quasioptimality, lem-na-scott-zhang-boundary-preserving-p1-interpolant, def-na-mini-element-p1-bubble-p1-spaces, lem-na-mini-element-local-and-global-dimensions, thm-na-mini-element-fortin-stability, def-na-discrete-weak-and-exact-divergence-free-spaces, thm-na-mini-element-h1-pressure-error, thm-na-discrete-helmholtz-projection-and-pressure-schur, thm-na-weak-stokes-solvability-lipschitz-domain, ex-na-mini-element-bubble-moment, ex-na-taylor-hood-pressure-mode, cex-na-q1-p0-checkerboard-pressure-mode, ex-na-weakly-versus-exactly-divergence-free-mini-velocity
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

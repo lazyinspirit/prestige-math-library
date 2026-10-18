@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "59",
+  "round": 0,
+  "reviewed_items": [
+    "def-compressible-navier-stokes-fourier-model",
+    "lem-compressible-admissible-state-set-open-convex",
+    "lem-compressible-ideal-gas-entropy-pair-and-variables",
+    "def-ideal-gas-entropy-conservative-pair-flux",
+    "lem-ideal-gas-entropy-conservative-flux-properties",
+    "lem-compressible-viscous-flux-entropy-variable-factorization",
+    "lem-compressible-viscous-smooth-entropy-identity",
+    "def-periodic-sbp-compressible-viscous-scheme",
+    "thm-periodic-sbp-compressible-viscous-conservation-and-entropy",
+    "def-orthogonal-fv-compressible-viscous-scheme",
+    "lem-orthogonal-fv-compressible-viscous-flux-consistency",
+    "thm-orthogonal-fv-compressible-viscous-entropy-dissipation",
+    "alg-positive-tube-forward-euler-for-compressible-sbp",
+    "lem-positive-tube-forward-euler-loop-terminates",
+    "thm-fixed-mesh-forward-euler-error-for-compressible-sbp",
+    "ex-periodic-compressible-viscous-manufactured-state",
+    "ex-compressible-couette-thermal-wall-entropy-balance",
+    "ex-sbp-inviscid-versus-viscous-entropy-budget",
+    "ex-compressible-entropy-variable-blowup-near-vacuum"
+  ],
+  "reviewed_pages": [
+    "compressible-viscous-flow-and-entropy-stable-fluxes",
+    "compressible-viscous-flow-and-entropy-stable-fluxes-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch matches its approved scope, and the declared item and page prerequisite uses were checked. One repairable output-count mismatch remains in the algorithm definition.",
+  "findings": [
+    {
+      "id": "alg-positive-tube-forward-euler-for-compressible-sbp",
+      "type": "local",
+      "reason": "Step 3 declares the third output to be the accepted-step count but returns n+1 on rejection, although only n steps were accepted. Return n there; the rejected stage can be identified separately in the prose."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-positive-tube-forward-euler-loop-terminates",
+      "decision": "accept",
+      "reason": "With step 3 returning the accepted count n, its count bound and returned-state-in-tube proof hold."
+    },
+    {
+      "id": "thm-fixed-mesh-forward-euler-error-for-compressible-sbp",
+      "decision": "accept",
+      "reason": "Its proof uses the candidate update, acceptance test, and completion status; it does not use the third output."
+    },
+    {
+      "id": "compressible-viscous-flow-and-entropy-stable-fluxes",
+      "decision": "accept",
+      "reason": "The page summary only states that the loop records tube exits; it does not depend on the count value."
+    },
+    {
+      "id": "compressible-viscous-flow-and-entropy-stable-fluxes-examples",
+      "decision": "accept",
+      "reason": "The companion page and its examples do not use the algorithm’s count output."
+    }
+  ]
+}

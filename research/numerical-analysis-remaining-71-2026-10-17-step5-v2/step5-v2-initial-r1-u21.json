@@ -1,0 +1,121 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "21",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "ex-na-two-site-tt-truncation-can-increase-energy",
+      "model": "gpt-6-luna",
+      "context_sha256": "a6607b6d841fa84ac23fb4cdde39952e75fe31cb47b64014052cab7202b97c5d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F5 says normalized rounding changes energy by at most 4||H||tau, whereas the cited theorem Statement supplies the signed upper bound E(phi)-E(psi_*) <= 4||H||tau. This is an inaccurate dependency restatement, not a failure of the example: step 3.1 uses only the upper bound on the positive increase 2/9, and the stronger absolute estimate also follows from the supplier proof. Repaired F5 to state only the increase bound. Also repaired the digest concern about unique ground state: the ground eigenspace is a line, but unit vectors have phase freedom; the deterministic rule selects exactly psi.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-na-two-site-tt-truncation-can-increase-energy",
+      "disposition": "repaired",
+      "post_sha256": "8698d75b4386de0a55a0a3f72d1ac73118d45ffcdfc53a7c9d6f43a72c823b96",
+      "review_context_sha256": "3d4ec7cd0ff472cbcfda98fe7389bb43109debdf4f462262b422d6312c18a418",
+      "reason": "Checked the complete example, all five direct suppliers, its owning contract and both page interfaces. The normalized psi defines a Hermitian reflection with spectrum {-1,1,1,1}; the full two-site center is the identity embedding in both passes. The first standard-basis ground projection is (2sqrt(2)/3)psi, so the phase rule selects psi. Its distinct Schmidt coefficients 2sqrt(2)/3 and 1/3 force rank-one rounding to (2sqrt(2)/3)|00>, with tail 1/3<1; normalization returns |00>, whose energy is -7/9. The increase 2/9 is positive and below 4/3. Corrected only F5 and the Example phase wording. Contract derivations and source quotations remain exact; no AC or new prerequisite is needed. This is repair-author verification, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-na-two-site-tt-truncation-can-increase-energy",
+      "severity": "nonfatal",
+      "location": "Facts & Assumptions, F5",
+      "finding": "The cited theorem Statement supplies an upper bound on the signed energy increase; changes energy by at most suggests an absolute bound.",
+      "correction": "F5 now states the energy increase from the unrounded exact-sweep output to the normalized rounded output is at most 4||H||tau.",
+      "reason": "The signed bound is exactly what verification step 3.1 uses to compare 2/9 with 4/3; no proof inference or example value changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-na-two-site-tt-truncation-can-increase-energy",
+      "severity": "nonfatal",
+      "location": "Example, exact-solve sentence",
+      "finding": "Unique ground state is inaccurate for normalized arrays without quotienting by phase; both psi and -psi are unit ground vectors.",
+      "correction": "The Example now calls psi the deterministically selected unit ground vector.",
+      "reason": "Verification step 2.1 already proves that the first basis projection is a positive multiple of psi; the existing deterministic rule therefore gives the displayed vector exactly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "item_ids": [
+      "ex-na-two-site-tt-truncation-can-increase-energy"
+    ],
+    "claim_and_conventions": "Finite real or complex normalized arrays, conjugate-first Frobenius pairing, lexicographic basis; H=I-2psi psi*, psi=(2sqrt(2)/3)|00>+(1/3)|11>; exact width-two forward/backward sweep and rank cap c1=1.",
+    "source_evidence": [
+      "items/ex-na-two-site-tt-truncation-can-increase-energy.md: Example, F1-F5, verification steps 1.1, 2.1, 3.1",
+      "items/def-na-finite-mps-state-and-hermitian-hamiltonian.md: Definition of normalized array and Rayleigh energy",
+      "items/lem-na-finite-hermitian-ground-vector-with-deterministic-tie.md: Statement and proof step 2.1",
+      "items/alg-na-alternating-tensor-optimization-and-effective-eigenproblems.md: Definition, procedure steps 2-6",
+      "items/alg-tensor-train-rounding.md: Definition, left orthogonalization and right-to-left truncated SVD",
+      "items/thm-na-dmrg-sweep-truncation-energy-increase-bound.md: Statement signed upper bound and proof steps 1.2, 2.1, 3.1",
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-21.proof-contracts.json: assigned contract citations, derivations and boundaries",
+      "library/numerical-linear-algebra-and-approximation/alternating-tensor-optimization-and-effective-eigenproblems.md and its -examples.md companion: page summaries and placement"
+    ],
+    "dependency_ids": [
+      "def-na-finite-mps-state-and-hermitian-hamiltonian",
+      "lem-na-finite-hermitian-ground-vector-with-deterministic-tie",
+      "alg-na-alternating-tensor-optimization-and-effective-eigenproblems",
+      "alg-tensor-train-rounding",
+      "thm-na-dmrg-sweep-truncation-energy-increase-bound"
+    ],
+    "source_reading": "No external source consulted or claimed; the finite reflection, basis projection, singular-value and energy computations are familiar and were checked directly against the local arguments.",
+    "propagation": "No original Statement or Definition section exists in this example, and none was added or changed. Only the Example wording and F5 changed; downstream inventory is empty under the assigned propagation rule.",
+    "metadata": "No contract, page, dependency, provenance or verification-stamp edits were necessary. Existing contract derivations and citation quotations remain current.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-na-two-site-tt-truncation-can-increase-energy.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 failed; direct proof passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-na-two-site-tt-truncation-can-increase-energy.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-21.proof-contracts.json --items ex-na-two-site-tt-truncation-can-increase-energy --strict --json",
+        "exit_code": 0,
+        "result": "ok: true; assigned item checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-na-two-site-tt-truncation-can-increase-energy.md",
+        "exit_code": 0,
+        "result": "1 items, 3 steps, 0 defects."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-analysis-remaining-71-2026-10-17 --items ex-na-two-site-tt-truncation-can-increase-energy",
+        "exit_code": 0,
+        "result": "Run immediately after the completed repair review; returned both hashes copied into the review row."
+      }
+    ],
+    "published_ledger_proposed_updates": [],
+    "published_consumer_findings": [],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary current-evidence rejudgment/certification as required; no judges or state transitions launched by this worker."
+  }
+}

@@ -1,0 +1,1607 @@
+arXiv:1307.0917v1  [math.NA]  3 Jul 2013
+L2-ORTHOGONAL PROJECTIONS ONTO LOWEST-ORDER
+FINITE ELEMENTS IN Rd ARE H1-STABLE
+MICHAEL KARKULIK, CARL-MARTIN PFEILER, AND DIRK PRAETORIUS
+Abstract. We prove that the use of newest vertex bisection ensures that the L2-
+orthogonal projection onto the space S1(T ) of lowest-order Courant ﬁnite elements
+is uniformly H1-stable even on adaptively reﬁned meshes in Rd, d ≥2.
+The same
+holds for the respective L2-orthogonal projections onto certain subspaces of S1(T ) which
+incorporate zero Dirichlet boundary conditions resp. an integral mean zero property, and
+these results essentially also transfer to other mesh-reﬁnement strategies.
+1. Introduction & Main Result
+The leading actor of this work is the L2-orthogonal projection Π(T ) onto the ﬁnite element
+space S1(T ) of piecewise aﬃne and globally continuous functions (2), based on a simplicial
+mesh T of a d-dimensional domain (or manifold) Ω. Some of the various theoretical and
+practical applications of Π(T ), cf. [BY13, BPS02, KPP13], require uniform H1-stability,
+i.e.,
+∥Π(T )v∥H1(Ω) ≤C1 ∥v∥H1(Ω)
+for all v ∈H1(Ω)
+(1)
+with a constant C1 > 0 independent of T . While the proof is well-known in the case
+of globally quasi-uniform meshes [BX91], it is rather demanding in the case of locally
+reﬁned meshes. The decay properties of the oﬀ-diagonal part of Π(T )’s inverse mass
+matrix might be eaten up by the growth of T ’s elements. Existing results are therefore
+based on two diﬀerent approaches, where we will follow the second one:
+• Imposing global or local growth-conditions on the mesh. Works based on this
+approach include [BPS02, Car02, CT87, EJ95, Ste02].
+• The use of a level-function to deﬁne an equivalent local mesh-size function with
+good behaviour. This approach was carried out in [BY13, Car04, KPP13].
+Both approaches are substantial: The ﬁrst one can be used for arbitrary sequences of
+meshes, as long as they fulﬁl these growth conditions. The second one does not impose
+growth conditions (they may be violated for a ﬁxed mesh!), but needs a nested sequence
+of meshes in order to deﬁne the level-function. Clearly, the advantage of either approach
+is the drawback of the other. As mentioned before, we focus on the second approach from
+now on and start with a brief discussion of the available works.
+In the recent work [BY13], the authors consider meshes in two and three dimensions
+and assume that the level of elements that share a vertex diﬀers at most by one. Their
+result can be applied to diﬀerent local reﬁnement strategies, as long as they fulﬁl the
+above assumption. For a ﬁxed strategy, this assumption needs to be ensured either by
+the (maybe cumbersome) deﬁnition of a consistent level-function or by additional and
+therefore artiﬁcial local reﬁnements (which is proposed in [BY13]). The work [BY13] is
+Date: July 01, 2013.
+2000 Mathematics Subject Classiﬁcation. 65N30, 65N50.
+Key words and phrases. newest vertex bisection, adaptive mesh-reﬁnement, L2-projection, H1-
+stability.
+1
+
+also the ﬁrst one to consider ﬁnite elements of higher order for d ≥2 (i.e., of order p ≤12
+for d = 2 resp. p ≤7 for d = 3), see [CT87] for d = 1. However, it has to be noted that
+the authors use a computer assisted proof (and the bounds on p arise from this).
+On the other hand, [Car04, KPP13] consider lowest-order elements and the two-dimen-
+sional case d = 2 only and are restricted to a ﬁxed mesh-reﬁnement strategy, namely
+newest vertex bisection (NVB) and/or variants thereof. Up to now, NVB is the only
+local reﬁnement strategy for simplicial meshes which can be used in mathematically
+justiﬁed adaptive ﬁnite element/boundary element methods, see [CKNS08, FKMP13]
+and the references therein for the ﬁne properties of NVB used. The deﬁnition of NVB
+requires the choice of a so-called reﬁnement edge for each element T of the initial mesh
+T0. Unlike [BY13], the works [Car04, KPP13] do not impose any additional assumptions
+on the level function. However, the analysis of [Car04] imposes a restriction on the choice
+of the reﬁnement edges of the initial mesh, which has ﬁnally been proved unnecessary in
+the authors’ previous work [KPP13].
+The current work is the ﬁrst one in this context to consider simplicial meshes in Rd with
+arbitrary d ≥2 and subspaces which account for, e.g., Dirichlet or Neumann boundary
+conditions. We show that the L2-orthogonal projection onto the space S1(T ) of lowest-
+order ﬁnite elements and certain subspaces thereof is H1-stable if T is a reﬁnement of
+an initial mesh T0. As the analysis is technical anyhow, we keep things as simple as
+possible in the ﬁrst place: (i), we focus on NVB in d dimensions, and (ii), we impose
+some well-known restrictions on the choice of the reﬁnement edges which are also required
+for the termination of a recursive implementation of NVB (see Section 2). Under these
+assumptions, we show that the L2-orthogonal projection onto the space of lowest-order
+ﬁnite elements with Dirichlet boundary conditions is H1-stable (Theorem 1) and discuss
+immediate consequences like stability of Π(T ) in positive and negative fractional order
+Sobolev spaces, weighted L2-spaces, and all the spaces that are used in basic ﬁnite element
+theory, e.g., S1-functions with vanishing integral mean (Section 4.2–4.5).
+We note that (i) and (ii) do not enter the proof directly. Instead, only the asser-
+tions (11)–(12) of Lemmas 2–3 below turn out to be crucial, and it is known that (i)
+and (ii) imply these. It is immediately obvious that (i) is not necessary, i.e., other re-
+ﬁnement strategies may be used as long as the assertions of Lemma 2–3 remain valid.
+However, it is not obvious how to generalize (ii) (for d = 2, this was done in [KPP13]).
+We therefore discuss a stronger assumption, namely the possible diﬀerence of the levels
+of elements sharing a (d −1)-dimensional face, depending on the underlying dimension d
+(Section 4.6).
+To state the target of the matter, we brieﬂy ﬁx some notation: For some conforming
+simplicial mesh T , we consider the lowest-order Courant ﬁnite element space
+S1(T ) :=
+
+V ∈C(Ω) : ∀T ∈T
+V |T is aﬃne
+	
+.
+(2)
+Let ΓD ⊂∂Ωbe a relatively open subset of the boundary ∂Ωwhich is resolved by T , i.e.
+ΓD =
+[ 
+T ∩Γ : T ∩ΓD ̸= ∅
+	
+.
+(3)
+We let
+S1
+D(T ) :=
+
+V ∈S1(T ) : V |ΓD = 0
+	
+.
+(4)
+For a subspace S1
++(T ) of S1(T ) (e.g., S1
++(T ) = S1
+D(T ), but further examples are found
+in Section 4 below), we consider the L2-orthogonal projection Π+(T ) : L2(Ω) →S1
++(T )
+2
+
+which is uniquely deﬁned through
+Z
+Ω
+(v −Π+(T )v) V dx = 0
+for all v ∈L2(Ω) and V ∈S1
++(T ).
+(5)
+Since S1
++(T ) is also a discrete subspace of H1(Ω), one may ask for stability of this pro-
+jection with respect to the H1-norm. The following is the main result of this work.
+Theorem 1. Suppose that T is obtained by NVB from some admissible initial mesh T0
+which satisﬁes (3). Then, there is a constant C2 > 0 which depends only on T0 and d
+such that the L2-orthogonal projection onto S1
+D(T ) is H1
+D-stable, i.e.,
+∥∇ΠD(T )v∥L2(Ω) ≤C2 ∥∇v∥L2(Ω)
+for all v ∈H1
+D(Ω).
+(6)
+In particular, it follows ∥ΠD(T )v∥H1(Ω) ≤C1 ∥v∥H1(Ω) with C1 = (1 + C2
+2)1/2, and (1) is
+just the special case of ΓD = ∅.
+The outline of this paper reads as follows: Section 2 gives a short introduction to NVB
+and recalls its speciﬁc properties used for the proof of Theorem 1. Section 3 provides
+a proof of the main Theorem 1, split into 3 steps. The concluding Section 4 discusses
+extensions of the result to diﬀerent spaces as well as possible generalizations for the
+mesh-reﬁnement used.
+Throughout all statements, the constants as well as their dependence is explicitly
+stated.
+In proofs, however, we use the abbreviate notation ≲which means ≤up to
+some multiplicative constant which is clear from the context. Moreover, we write ≃to
+abbreviate that both estimates ≲and ≳hold.
+2. Bisection of simplicial meshes
+A d-simplex T in RD is the convex hull T = conv{x0, . . . , xd} of d+1 vertices x0, . . . , xd ∈
+RD that do not lie on a (d −1)-dimensional hyperplane. A ﬁnite set T of d-simplices in
+RD is said to be a partition of a d-dimensional manifold Ω⊂RD, if Ωis the (relative)
+interior of the union of these d-simplices, and if the intersection of two diﬀerent simplices
+T, T ′ ∈T has d-dimensional measure zero. A partition T is said to be conforming,
+if the intersection of two diﬀerent simplices T, T ′ ∈T is either empty or a hyperface of
+both T and T ′. Throughout this work, a conforming partition T is called a mesh. A
+mesh T of d-simplices is said to be γ-shape regular if
+max
+T∈T
+diam(T)d
+|T|
+≤γ < ∞,
+(7)
+where diam(T) denotes the Euclidean diameter of the d-simplex T.
+The bisection of a simplicial mesh of d-simplices in RD can be done in a lot of diﬀerent
+ways, e.g. [Sew72] for d = 2, [Kos94] for d = 3, and [Mau95, Tra97] for d ≥3. We mainly
+follow the presentation in [Ste08]: Each simplex T ∈T0 of the initial mesh is identiﬁed
+with an ordered sequence of its vertices and associated with the type γ = 0, i.e.,
+T = (x0, . . . , xd)γ.
+(8)
+The edge between x0 and xd is the so-called reﬁnement edge of T, which is denoted by
+e(T) in the following. Bisection of a simplex T = (x0, . . . , xd)γ of type γ ∈{0, . . . , d −1}
+provides the sons
+T ′ =
+x0, x0+xd
+2
+, x1, . . . , xγ, xγ+1, . . . , xd−1
+
+(γ+1) mod d
+(9a)
+3
+
+and
+T ′′ =
+xd, x0+xd
+2
+, x1, . . . , xγ, xd−1, . . . , xγ+1
+
+(γ+1) mod d
+(9b)
+where the sequences (xγ+1, . . . , xd−1) and (x1, . . . , xγ) are void for γ = d −1 resp. γ = 0.
+It holds |T ′| = |T|/2 = |T ′′| with the d-dimensional measure | · |. Overall, the choice of
+the reﬁnement edges for all T ∈T0 determines the reﬁnement strategy.
+Bisection is a binary reﬁnement rule and thus gives rise to some level function:
+For a coarse-mesh simplex T ∈T0, we deﬁne level(T) = 0. If T is bisected into two
+sons T ′, T ′′, we deﬁne level(T ′) = level(T) + 1 = level(T ′′). In this case, it also
+holds |T ′| = |T|/2 = |T ′′| and hence level(T) = log2(| bT|/|T|) if bT ∈T0 is the unique
+coarse-mesh element with T ⊆bT.
+Note that bisection does not lead to conforming meshes in general. By recursive reﬁne-
+ment, called newest vertex bisection (NVB) in the following, it is usually guaranteed
+that the reﬁned partition is in fact conforming and hence a mesh. To ensure that this
+recursion terminates, one requires properties on the initial mesh T0. Following Steven-
+son [Ste08], we call the initial mesh T0 admissible if
+• T0 is conforming,
+• for all T, T ′ ∈T0 which share a (d−1)-dimensional face T ∩T ′, one of the following
+assertions holds:
+(a) e(T) = e(T ′) ⊂T ∩T ′ and T, T ′ are reﬂected neighbours
+(b) there exist son simplices t ⊂T and t′ ⊂T ′ with T ∩T ′ = t ∩t′ which are
+reﬂected neighbors.
+Here, reﬂected neighbors means that the ordered vertices of T ′ coincide with either
+T := (x0, . . . , xd)γ or TR := (xd, x1, . . . , xγ, xd−1, . . . , xγ+1, x0)γ on all but one position,
+and we note that T and TR are equivalent in the sense that bisection leads to the very
+same two sons (9). Due to [Ste08, Theorem 4.3], admissibility of T0 ensures that, for all
+n ∈N, each partition T obtained from bisection of T0 with level(T) = n for all T ∈T
+is already conforming. Moreover, the admissibility condition is not only suﬃcient, but
+also necessary to ensure this. Finally, admissibility of T0 guarantees that the recursive
+implementation of NVB terminates.
+We denote by F(T ) the set of (d −1)-dimensional faces of T and by N (T ) the set of
+its vertices. We note that all faces F ∈F(T ) are (d −1)-dimensional simplices. The set
+TD :=
+
+F ∈F(T ) : F ⊂ΓD
+	
+provides a mesh of ΓD of (d −1)-simplices. Moreover,
+NVB of T implicitly leads to NVB of TD. Such an observation is for instance used for
+adaptive ﬁnite element methods, where the given Dirichlet data are discretized by means
+of the L2(ΓD)-orthogonal projection onto the discrete trace space [AFK+13], and stability
+of the latter is required in H1/2(ΓD).
+We note the following two elementary properties (11) of NVB.
+Lemma 2. Suppose that T is a obtained from bisection of T0. Let T ∈T . With the
+constants
+C3 = min
+bT∈T0
+| bT|
+and
+C4 = 2 max
+bT∈T0
+diam( bT),
+(10)
+it holds
+C32−level(T) ≤|T|
+and
+diam(T) ≤C4 2−level(T)/d.
+(11)
+We note that (10)–(11) readily imply γ- shape regularity (7) with γ = Cd
+4/C3. More-
+over, we shall use the following deeper result (12) which states that the level of two
+4
+
+neighbouring elements which share a face F ∈F(T ), can only diﬀer by one. In partic-
+ular, we note that this result is weaker than the requirements of the analysis of [BY13],
+while suﬃcient for our proof of Theorem 1 below. The following lemma has ﬁrst been
+proved for d = 3 in [Kos94, Lemma 3] and (implicitly) generalized for d ≥2 in [Ste08,
+Corollary 4.6].
+Lemma 3. Let T be a conforming NVB reﬁnement of an admissible initial mesh T0. Let
+T, T ′ ∈T with F := T ∩T ′ ∈F(T ). Then,
+|level(T) −level(T ′)| ≤1.
+(12)
+Moreover, we have the following characterization:
+(i) level(T) = level(T ′) is equivalent to one the following two properties:
+(a) e(T) = e(T ′) ⊂F;
+(b) e(T) ̸⊂F and e(T ′) ̸⊂F.
+(ii) level(T) = level(T ′) + 1 is equivalent to e(T) ⊂F and e(T ′) ̸⊂F.
+Sketch of proof. Stevenson [Ste08, Corollary 4.6] proves that for e(T) ⊂F it holds either
+level(T) = level(T ′) with e(T) = e(T ′) or level(T) = level(T ′) + 1 with e(T) = e(t′)
+for one of the two children t′ of T ′. The claim (12) is the ﬁrst step of his proof. Our
+remaining statements follow with the same type of arguments and are thus left to the
+reader. They all essentially build on the observation that uniform level-n partitions are
+already conforming [Ste08, Theorem 4.3].
+□
+3. Proof of Theorem 1
+Our proof of Theorem 1 is split into three propositions which break down the question
+of H1
+D-stability (6) of ΠD(T ) to certain properties of the level function level(·). We
+stress that these only enter in the ﬁnal step of Proposition 7, while Proposition 4 and
+Proposition 5 hold for general γ-shape regular meshes. Other mesh-reﬁnement strategies
+than NVB are discussed in Section 4.6 below.
+For each node zℓ∈N (T ) = {z1, . . . , zN}, let ϕℓ∈S1(T ) denote the hat function
+associated with zℓ, i.e., it holds ϕℓ(zk) = δℓk with Kronecker’s delta. Since each simplex
+T ∈T is the convex hull of its d + 1 vertices, we introduce the local-to-global mapping
+[·, ·] : T × {1, . . . , d + 1} →{1, . . . , N}
+(13)
+which maps the local numbering of the vertices with respect to the simplex T to the
+global index, i.e., T = conv{z[T,1], . . . , z[T,d+1]}. We stress that the order of the local
+indexing does not matter.
+For each element T ∈T , the local mass matrix is deﬁned by
+M T ∈R(d+1)×(d+1)
+sym
+,
+(M T)jk =
+Z
+Ω
+ϕ[T,j]ϕ[T,k] dx.
+(14)
+For each node zℓ∈N (T ), let hℓ> 0 denote some positive scalar (to be ﬁxed later) which
+behaves like the local element-size, i.e., hℓ≃diam(T) for all T ∈T with zℓ∈T. These
+nodal values give rise to a smoothed mesh-size function h = PN
+ℓ=1 hℓϕℓ∈S1(T ). The
+following diagonal scaling matrix measures how far h|T diﬀers from diam(T). We deﬁne
+ΛT ∈R(d+1)×(d+1)
+diag
+,
+(ΛT)jk = diam(T)
+h[T,k]
+δjk.
+(15)
+With these deﬁnitions at hand, our stability criterion reads as follows:
+5
+
+Proposition 4. Assume that T is a γ-shape regular mesh. Suppose that for all elements
+T ∈T holds
+C−1
+5 x⊤Λ2
+T M TΛ2
+Tx ≤x⊤M Tx ≤C6 x⊤Λ2
+TM Tx
+for all x ∈Rd+1
+(16)
+with constants C5, C6 > 0. Then, the L2-orthogonal projection ΠD(T ) : L2(Ω) →S1
+D(T )
+is H1
+D-stable (6), and the constant C2 > 0 depends only on γ-shape regularity and on
+C5, C6 > 0.
+Proof. Let J (T ) : H1(Ω) →S1
+D(T ) be a Cl´ement-type quasi-interpolation operator, i.e.,
+it holds that
+∥∇J (T )v∥L2(T) ≲∥∇v∥L2(ωT ) as well as ∥v −J (T )v∥L2(T) ≲diam(T) ∥∇v∥L2(ωT )
+(17)
+for all v ∈H1
+D(Ω) and all T ∈T . The hidden constants depend only on γ-shape regularity
+of T , and ωT := S 
+T ′ ∈T : T ∩T ′ ̸= ∅
+	
+denotes the patch of T which is the union of all
+elements which touch T. Let q := Π(T )v −J (T )v = PN
+ℓ=1 qℓϕℓ∈S1
+D(T ). We deﬁne p :=
+PN
+ℓ=1 qℓh−2
+ℓϕℓ∈S1
+D(T ). With the local coeﬃcient vectors x = (q[T,1], . . . , q[T,d+1]) ∈Rd+1
+and y = (q[T,1]h−2
+[T,1], . . . , q[T,d+1]h−2
+[T,d+1]) = diam(T)−2Λ2
+Tx ∈Rd+1, the lower estimate
+in (16) gives
+∥p∥2
+L2(T) = y⊤M Ty = diam(T)−4 x⊤Λ2
+TM T Λ2
+Tx ≤C5 diam(T)−4x⊤M Tx
+= C5 diam(T)−4 ∥q∥2
+L2(T).
+Moreover, the upper estimate in (16) gives
+∥q∥2
+L2(T) = x⊤M Tx ≤C6 x⊤Λ2
+TM Tx = C6 diam(T)2
+Z
+T
+pq dx.
+Summing the last two estimates over all elements T ∈T , we see
+X
+T∈T
+diam(T)−2∥q∥2
+L2(T) ≲
+Z
+Ω
+pq dx =
+Z
+Ω
+p(v −J (T )v) dx
+≤
+ X
+T∈T
+diam(T)2∥p∥2
+L2(T)
+1/2 X
+T∈T
+diam(T)−2∥v −J (T )v∥2
+L2(T)
+1/2
+≲
+ X
+T∈T
+diam(T)−2∥q∥2
+L2(T)
+1/2
+∥∇v∥L2(Ω).
+(18)
+Note that the equality follows from symmetry of orthogonal projections and Π(T )p = p
+due to p ∈S1
+D(T ). A standard local inverse estimate and stability of J (T ) show
+∥∇Π(T )v∥L2(T) ≤∥∇(Π(T )v −J (T )v)∥L2(T) + ∥∇J (T )v∥L2(T)
+≲diam(T)−1 ∥q∥L2(T) + ∥∇v∥L2(ωT )
+(19)
+Summation over all T ∈T thus concludes the proof.
+□
+The next proposition provides a criterion to check the assumptions of Proposition 4.
+For 2D, it is ﬁrst found in [Car04] for red-green-blue reﬁnement and adapted in [KPP13]
+to NVB in 2D. Although our extended proof for d ≥2 is similar, the precise constants in
+the present reﬁned analysis depend on the dimension d and diﬀer from those in [Car04,
+KPP13].
+6
+
+Proposition 5. Assume that T is a γ-shape regular mesh.
+For all T ∈T and all
+zj, zk ∈N (T ) ∩T, we suppose that the chosen scalars hj, hk > 0 satisfy
+h2
+j
+h2
+k
+≤C7 < α +
+√
+α2 −1
+with
+α = 1 + 4
+d + 2
+d(d + 1) > 1
+(20)
+as well as
+C8 diam(T) ≤hj ≤C9 diam(T)
+(21)
+with constants C7, C8, C9 > 0. Then, the assumptions (16) of Proposition 4 are satisﬁed.
+The constant C5 depends only on γ-shape regularity and C−1
+8 , while C6 depends only on
+γ-shape regularity, C9, and ε := α +
+√
+α2 −1 −C7 > 0.
+We strongly build on the following eigenvalue result from [BPS02, Proposition 6.1]
+which has also been used for d = 2 in the preceding works [Car04, KPP13].
+Lemma 6. Let h1, . . . , hd+1 ∈R\{0} and deﬁne
+bB ∈R(d+1)×(d+1)
+sym
+,
+bBjk = (1 + δjk)
+hj
+hk
++ hk
+hj
+
+(22)
+with Kronecker’s delta δjk. Then, the eigenvalues of bB belong to {λ+, λ−, 2} with
+λ± = d + 3 ±
+ d+1
+X
+j,k=1
+h2
+j
+h2
+k
+1/2
+.
+(23)
+Proof of Proposition 5. Let T ∈T and x ∈Rd+1.
+Step 1. We ﬁrst prove the lower estimate in (16): A scaling argument proves equiva-
+lence
+|T| y⊤y ≃y⊤M Ty
+for all y ∈Rd+1,
+where the hidden constants depend only on γ-shape regularity. This and the lower bound
+in (21) yield
+x⊤Λ2
+TM TΛ2
+Tx = (Λ2
+Tx)⊤M T(Λ2
+Tx) ≲|T|(Λ2
+Tx)⊤(Λ2
+Tx) ≲|T|x⊤x ≲x⊤M Tx.
+This proves the lower estimate in (16), and C5 > 0 depends only on γ-shape regularity
+and C−1
+8 .
+Step 2. We next prove the upper estimate in (16) up to some remaining eigenvalue
+estimate: We ﬁx a reference simplex bT ⊂Rd such that the corresponding mass matrix
+satisﬁes c
+M jk = 1 + δjk with Kronecker’s delta.
+The transformation theorem yields
+M T = C10|T|c
+M for some constant C10 > 0. We deﬁne the matrix
+AT := Λ2
+TM T + M TΛ2
+T = C10|T| (Λ2
+T c
+M + c
+MΛ2
+T) =: C10|T| bAT.
+The symmetric matrix bBT := Λ−1
+T bATΛ−1
+T
+satisﬁes
+( bBT)jk =
+
+ΛT c
+MΛ−1
+T + Λ−1
+T c
+MΛT
+
+jk =
+hj
+hk
++ hk
+hj
+
+c
+M jk =
+hj
+hk
++ hk
+hj
+
+(1 + δjk).
+If the minimal eigenvalue λmin of bBT is positive, we consider y = ΛTx and obtain
+x⊤M Tx ≃|T| x⊤x ≲|T| y⊤y ≲|T| y⊤bBTy,
+7
+
+where the hidden constants depend only on γ-shape regularity, C9 > 0, and λmin > 0.
+Symmetry of ΛT and M T results in x⊤ATx = 2x⊤Λ2
+TM Tx and hence
+|T| y⊤bBTy = |T| x⊤bATx ≃x⊤ATx = 2 x⊤Λ2
+TM Tx.
+The combination of the last two estimates proves the upper estimate in (16), and C6 > 0
+depends only on γ-shape regularity, C9 > 0, and λmin > 0.
+Step 3. It remains to prove that the minimal eigenvalue λmin of bBT is positive and
+to study its dependence: Let t = h2
+j/h2
+k. By the ﬁrst estimate in (20), we then have
+C−1
+7
+≤t ≤C7. This gives
+0 ≤(C7t −1)(C7 −t) = C2
+7t −C7t2 −C7 + t = (C7 + C−1
+7 )C7t −(t + t−1)C7t
+and hence t + t−1 ≤C7 + C−1
+7 . Consequently, we are led to
+d+1
+X
+j,k=1
+h2
+j
+h2
+k
+= (d + 1) +
+d
+X
+j=1
+d+1
+X
+k=j+1
+h2
+j
+h2
+k
++ h2
+k
+h2
+j
+
+≤(d + 1) + (C7 + C−1
+7 )
+d
+X
+j=1
+(d −j + 1)
+= (d + 1) + (C7 + C−1
+7 )(d2 −d(d + 1)
+2
++ d)
+= (d + 1) + (C7 + C−1
+7 ) d(d + 1)
+2
+.
+(24)
+From monotonicity of the logarithm and the relation arcosh(t) = ln(t+
+√
+t2 −1) for t > 1,
+we obtain
+ln C7 < ln(α +
+√
+α2 −1) = arcosh(α) = arcosh
+d2 + 5d + 8
+d(d + 1)
+
+.
+By monotonicity of the hyperbolic cosine, this transfers to
+(d + 3)2 −(d + 1)
+d(d + 1)
+= d2 + 5d + 8
+d(d + 1)
+> cosh(ln C7) = exp(ln C7) + exp(−ln C7)
+2
+=
+C7 + C−1
+7
+2
+and hence gives
+(d + 3)2 > (d + 1) + (C7 + C−1
+7 ) d(d + 1)
+2
+.
+(25)
+Combining the estimates (24)–(25) with the representation (23) for the minimal eigen-
+value of bBT, we see
+λmin = d + 3 −
+ d+1
+X
+j,k=1
+h2
+j
+h2
+k
+1/2
+≥(d + 3) −
+
+(d + 1) + (C7 + C−1
+7 ) d(d + 1)
+2
+1/2
+> 0
+This concludes the proof.
+□
+In view of the previous propositions, it only remains to deﬁne the nodal values hj > 0
+for the nodes zj ∈N (T ) of T . The combination of Proposition 4 and Proposition 5 with
+the following proposition will then yield the proof of Theorem 1.
+Proposition 7. Let T be a conforming NVB reﬁnement of an admissible initial mesh
+T0. On the set N (T ) = {z1, . . . , zN} of nodes, we deﬁne the following nodal distance
+8
+
+δ(·, ·) ∈N0
+δ(zj, zk) :=
+
+
+
+
+
+
+
+
+
+0
+for zj = zk,
+1
+if there exists T ∈T with zj, zk ∈T,
+n
+for the minimal number n ∈N of elements T1, . . . , Tn ∈T such
+that zj ∈T1, zk ∈Tn, and Ti ∩Ti+1 ∈F(T ) for all i = 1, . . . , n −1.
+For zj ∈N (T ), we let
+hj := min
+T ′
+j∈T
+min
+z′
+j∈N (T )∩T ′
+j
+2(δ(zj,z′
+j)−level(T ′
+j))/d
+(26)
+Then, (20)–(21) are satisﬁed with C7 = 41/d, C9 = C−1/d
+3
+, and some constant C8 > 0
+which depends only on C4, γ-shape regularity of T , and the dimension d ≥2.
+Proof. Step 1. We validate the ﬁrst estimate in (20) with C7 = 41/d: Let T ∈T and
+zj, zk ∈N (T ) ∩T. Choose T ′
+k ∈T and z′
+k ∈N (T ) ∩T ′
+k which attain the minima in the
+deﬁnition of hk = 2(δ(zk,z′
+k)−level(T ′
+k))/d. Together with |δ(zj, z′
+k) −δ(zk, z′
+k)| ≤1, we obtain
+hj
+hk
+≤2(δ(zj,z′
+k)−level(T ′
+k))/d
+2(δ(zk,z′
+k)−level(T ′
+k))/d = 2(δ(zj,z′
+k)−δ(zk,z′
+k))/d ≤21/d
+Step 2. We validate that 41/d < α +
+√
+α2 −1 for α > 1 deﬁned in (20): To that end,
+we consider the scalar function f(t) := 1 + 4/t −41/t. We prove that f(t) > 0 for t ≥3.
+Since limt→∞f(t) = 0, it remains to show that f(·) is strictly decreasing on the interval
+[3, ∞). This follows from
+f ′(t) = −4
+t2 + ln 4
+t2 41/t = 1
+t2(41/t ln 4 −4) ≤1
+t2(41/3 ln 4 −4) < 0
+for t ≥3.
+With f(2) = 1 > 0, we infer that f(d) > 0 for all dimensions d ∈N with d ≥2. Finally,
+we see
+41/d < 41/d + f(d) = 1 + 4
+d < 1 + 4
+d
+d + 2
+d + 1 +
+
+1 + 4
+d
+d + 2
+d + 1
+2
+−1
+1/2
+= α +
+√
+α2 −1.
+(27)
+Altogether, we have thus veriﬁed (20).
+Step 3. We validate the upper bound in (21) with C9 = C−1/d
+3
+: Let T ∈T and
+zj ∈N (T ) ∩T. By deﬁnition of hj, we see
+hj ≤2−level(T)/d ≤C−1/d
+3
+|T|1/d ≤C−1/d
+3
+diam(T).
+Step 4. It only remains to verify the lower bound in (21): Let T ∈T and zj ∈
+N (T ) ∩T. Choose T ′
+j ∈T and z′
+j ∈N (T ) ∩T ′
+j which attain the minima in the deﬁnition
+of hj = 2(δ(zj,z′
+j)−level(T ′
+j))/d. If level(T ′
+j) < level(T), we saw
+hj ≤2−level(T)/d < 2−level(T ′
+j)/d ≤2(δ(zj,z′
+j)−level(T ′
+j))/d = hj.
+Consequently, it holds level(T) ≤level(T ′
+j). We obtain
+hd
+j = 2δ(zj,z′
+j)−level(T ′
+j) = 2−level(T)2δ(zj,z′
+j)−|level(T ′
+j)−level(T)|
+≥C−d
+4 diam(T)d 2δ(zj,z′
+j)−|level(T ′
+j)−level(T)|.
+For δ(zj, z′
+j) = n, there exists elements T1, . . . , Tn ∈T with zj ∈T1, z′
+j ∈Tn and
+Ti ∩Ti+1 ∈F(T ) for all i = 1, . . . , n −1. Due to γ-shape regularity of T , the number of
+elements in the node patches of zj resp. z′
+j is uniformly bounded by some γ-dependent
+9
+
+constant C11 > 0.
+Hence, there exists a sequence of elements eT1, . . . , eTm ∈T with
+m ≤n + 2 C11 such that eT1 = T, eTm = T ′
+j, and eTi ∩eTi+1 ∈F(T ) for all i = 1, . . . , m −1.
+By Lemma 3, we obtain |level( eTi) −level( eTi+1)| ≤1. The triangle inequality yields
+|level(T ′
+j) −level(T)| ≤
+m−1
+X
+i=1
+|level( eTi) −level( eTi+1)| ≤m −1 ≤(n −1) + 2 C11.
+This yields
+δ(zj, z′
+j) −|level(T ′
+j) −level(T)| = n −|level(T ′
+j) −level(T)| ≥1 −2 C11
+and hence
+hd
+j ≥C−d
+4 21−2 C11 diam(T)d
+Altogether, we thus see the lower bound in (21) with C8 = C−1
+4 2(1−2 C11)/d.
+□
+4. Extensions
+This section brieﬂy collects some additional observations and generalizations of Theo-
+rem 1.
+The Sections 4.2–4.3 generalize works of Steinbach [Ste01, Ste02] on the L2-
+orthogonal projection in fractional-order Sobolev spaces H±s(Ω) and eH±s(Ω) for 0 <
+s ≤1.
+In Section 4.4, we prove that stability in Hs(Ω) and eH−s(Ω) is preserved if
+the L2-orthogonal projection onto S1(T )-functions with integral mean zero is used. Sec-
+tion 4.5 shows that stability of the L2-orthogonal projection is also guaranteed for locally
+weighted L2-norms. The ﬁnal Section 4.6 addresses the validity of Theorem 1 and thus
+the consequences of Section 4.2–4.5, for other mesh-reﬁnement strategies than NVB.
+The main analytical tool in Section 4.2–4.5 is interpolation between Hilbert spaces
+which is brieﬂy recalled in the following subsection.
+4.1. Preliminaries on interpolation spaces. Let X0 and X1 be Hilbert spaces with
+X0 ⊇X1 and continuous inclusion, i.e., there exists some constant C > 0 such that
+∥x∥X0 ≤C ∥x∥X1 for all x ∈X1. Interpolation theory, e.g. [BL76, Tar07], provides a
+means to deﬁne intermediate normed spaces
+X1 ⊆Xs := [X0; X1]s ⊆X0
+for all 0 < s < 1,
+(28)
+where [·; ·]s denotes the interpolation operator of, e.g., the real K-method. The norm
+related to the intermediate interpolation space Xs satisﬁes
+∥x∥Xs ≤∥x∥1−s
+X0 ∥x∥s
+X1
+for all x ∈X1.
+(29)
+We shall use the so-called interpolation estimate: Let X0 ⊇X1 and Y0 ⊇Y1 be Hilbert
+spaces with continuous inclusions. Let Π : X0 →Y0 be a linear operator with Π(X1) ⊆Y1.
+Assume that Π : X0 →Y0 as well as Π : X1 →Y1 are continuous, i.e.,
+∥Πx∥Y0 ≤c0 ∥x∥X0
+for all x ∈X0,
+∥Πx∥Y1 ≤c1 ∥x∥X1
+for all x ∈X1,
+(30)
+with respective operator norms c0, c1 > 0.
+Let 0 < s < 1 and Xs = [X0; X1]s and
+Ys = [Y0; Y1]s. Then, Π : Xs →Ys is a well-deﬁned, linear, and continuous operator with
+∥Πx∥Ys ≤c1−s
+0
+cs
+1 ∥x∥Xs
+for all x ∈Xs.
+(31)
+Note that for other interpolation methods than the real K-method, the previous esti-
+mates (29) and (31) hold only up to some additional generic constant.
+10
+
+4.2. L2-projection on positive-order Sobolev spaces Hs(Ω) and eHs(Ω). For 0 <
+s < 1, the Sobolev spaces of fractional order can be deﬁned by interpolation [McL00]
+Hs(Ω) = [L2(Ω); H1(Ω)]s
+and
+eHs(Ω) = [L2(Ω); H1
+0(Ω)]s.
+(32)
+Here, H1
+0(Ω) =
+
+v ∈H1(Ω) : v|∂Ω= 0
+	
+denotes the space of H1-functions with zero
+trace.
+For ΓD = ∅, Theorem 1 states that the L2-orthogonal projection Π(T ) : L2(Ω) →
+S1(T ) is H1-stable. With c0 = 1 and c1 = C2, the interpolation estimate (31) proves
+Hs-stability
+∥Π(T )v∥Hs(Ω) ≤Cs
+2 ∥v∥Hs(Ω)
+for all v ∈Hs(Ω).
+(33)
+For ΓD = ∂Ω, Theorem 1 states that the L2-orthogonal projection Π0(T ) : L2(Ω) →
+S1
+0(T ) onto S1
+0(T ) := S1(Ω) ∩H1
+0(Ω) is H1
+0-stable.
+With c0 = 1 and c1 = C2, the
+interpolation estimate (31) proves eHs-stability
+∥Π0(T )v∥e
+Hs(Ω) ≤Cs
+2 ∥v∥e
+Hs(Ω)
+for all v ∈eHs(Ω).
+(34)
+4.3. L2-projection on negative-order Sobolev spaces H−s(Ω) and eH−s(Ω). For
+0 < s ≤1, the Sobolev spaces of negative fractional order are deﬁned as dual spaces
+H−s(Ω) = eHs(Ω)∗
+and
+eH−s(Ω) = Hs(Ω)∗,
+(35)
+where duality is understood with respect to the extended L2-scalar product [McL00]. It
+is known that this implies that L2(Ω) is a dense subspace of both H−s(Ω) or eH−s(Ω)
+with respect to the corresponding dual norms
+∥ψ∥H−s(Ω) =
+sup
+v∈e
+Hs(Ω)\{0}
+⟨ψ ; v⟩
+∥v∥e
+Hs(Ω)
+resp.
+∥ψ∥e
+H−s(Ω) =
+sup
+v∈Hs(Ω)\{0}
+⟨ψ ; v⟩
+∥v∥Hs(Ω)
+.
+(36)
+We adopt the notation from the previous subsection and let ψ ∈L2(Ω) ⊂eH−s(Ω) and
+v ∈Hs(Ω). By deﬁnition of duality and the dual norm, we obtain
+⟨Π(T )ψ ; v⟩=
+Z
+Ω
+v Π(T )ψ dx =
+Z
+Ω
+ψ Π(T )v dx ≤∥ψ∥e
+H−s(Ω)∥Π(T )v∥Hs(Ω)
+Together with the Hs-stability (33) of Π(T ), this yields
+∥Π(T )ψ∥e
+H−s(Ω) ≤∥ψ∥e
+H−s(Ω)
+sup
+v∈Hs(Ω)\{0}
+∥Π(T )v∥Hs(Ω)
+∥v∥Hs(Ω)
+≤Cs
+2 ∥ψ∥e
+H−s(Ω) for all ψ ∈L2(Ω),
+i.e., Π(T ) is eH−s-stable for L2-functions. Since L2(Ω) is a dense subspace of eH−s(Ω),
+functional analysis guarantees a unique linear and continuous extension Π(T ) : eH−s(Ω) →
+S1(T ) which even has the same operator norm, i.e.,
+∥Π(T )ψ∥e
+H−s(Ω) ≤Cs
+2 ∥ψ∥e
+H−s(Ω)
+for all ψ ∈eH−s(Ω).
+(37)
+Arguing along the same lines for ΓD = ∂Ω, one sees that the L2-orthogonal projection
+Π0(T ) onto S1
+0(T ) admits a unique extension to a linear operator on H−s(Ω) such that
+∥Π0(T )ψ∥H−s(Ω) ≤Cs
+2 ∥ψ∥H−s(Ω)
+for all ψ ∈H−s(Ω).
+(38)
+11
+
+4.4. L2-projection onto S1(T ) with zero integral mean. Let L2
+⋆(Ω) =
+
+v ∈L2(Ω) :
+R
+Ωv dx = 0
+	
+as well as H1
+⋆(Ω) = H1(Ω) ∩L2
+⋆(Ω) and S1
+⋆(T ) = S1(T ) ∩L2
+⋆(Ω). We aim to
+prove that the L2-orthogonal projection Π⋆(T ) : L2(Ω) →S1
+⋆(T ) is H1-stable, i.e.
+∥∇Π⋆(T )v∥L2(Ω) ≤C2 ∥∇v∥L2(Ω)
+for all v ∈H1(Ω).
+(39)
+To see this, let Π0 : L2(Ω) →R be deﬁned by Π0v =
+1
+|Ω|
+R
+Ωv dx. Identifying R with the
+constant functions on Ω, it is known that (1 −Π0) is the L2-orthogonal projection onto
+L2
+⋆(Ω). Since ∇Π0v = 0, it follows that (1−Π0) is also the H1-orthogonal projection onto
+H1
+⋆(Ω). From nestedness S1
+⋆(T ) ⊂H1
+⋆(Ω) ⊂L2
+⋆(Ω), we obtain Π⋆(T ) = Π⋆(T ) (1 −Π0).
+Note that
+Z
+Ω
+(v −Π⋆(T )v)V dx = 0
+for all v ∈L2(Ω) and V ∈S1
+⋆(T ),
+Z
+Ω
+(v −Π⋆(T )v) dx = 0
+for all v ∈L2
+⋆(Ω).
+Since S1(T ) = span(S1
+⋆(T ) ∪{1}), this implies
+Z
+Ω
+(v −Π⋆(T )v)V dx = 0
+for all v ∈L2
+⋆(Ω) and V ∈S1(T )
+and hence Π⋆(T )v = Π(T )v for all v ∈L2
+⋆(Ω). Consequently, the stability (39) follows
+from (6) and Π⋆(T ) = Π⋆(T ) (1 −Π0) = Π(T ) (1 −Π0). Arguing along the lines of
+Section 4.2–4.3, one also obtains for all 0 ≤s ≤1
+∥Π⋆(T )v∥Hs(Ω) ≤Cs
+2 ∥v∥Hs(Ω)
+for all v ∈Hs(Ω),
+(40)
+∥Π⋆(T )ψ∥e
+H−s(Ω) ≤Cs
+2 ∥ψ∥e
+H−s(Ω)
+for all ψ ∈eH−s(Ω),
+(41)
+for the unique continuous extension of Π⋆(T ) from L2(Ω) to eH−s(Ω).
+4.5. L2-projection on weighted L2-spaces. The stability of the L2-orthogonal projec-
+tion Π(T ) onto S1(T ) can also be established with respect to certain mesh-size weighted
+L2-norms. For some positive weight-function ω ∈L∞(Ω), we consider the weighted L2-
+norm
+∥v∥2
+L2(ω;Ω) =
+Z
+Ω
+ω(x)|v(x)|2 dx,
+and L2(ω; Ω) denotes the space of all measurable functions for which this norm is ﬁnite.
+It is known [BL76, Tar07] that interpolation of weighted L2-spaces with ω0 ≲ω1 leads to
+[L2(ω0; Ω); L2(ω1; Ω)]s = L2(ω1−s
+0
+ωs
+1; Ω)
+for all 0 < s < 1.
+(42)
+We shall use this result for ω0 = 1 and ω1 = h−2 with h ∈L∞(Ω) being the local
+mesh-width function deﬁned by h|T = diam(T) for all T ∈T .
+We start from the observation that the standard Cl´ement operator satisﬁes the prop-
+erties (17) as well as local L2-stability
+∥J (T )v∥L2(T) ≲∥v∥L2(ωT )
+for all T ∈T and v ∈L2(Ω),
+where ωT denotes the element patch and the hidden constant depends only on γ-shape
+regularity of T . By use of this L2-stability, estimate (18) can be modiﬁed to
+X
+T∈T
+diam(T)−2∥q∥2
+L2(T) ≲
+ X
+T∈T
+diam(T)−2∥q∥2
+L2(T)
+1/2 X
+T∈T
+diam(T)−2∥v∥L2(ωT )
+1/2
+,
+12
+
+and (19) becomes
+diam(T)−1∥Π(T )v∥L2(T) ≲diam(T)−1 ∥q∥L2(T) + diam(T)−1 ∥v∥L2(ωT ).
+For the weight-function ω1 = h−2, it holds L2(h−2; Ω) = L2(Ω) and
+∥v∥2
+L2(h−2;Ω) = ∥h−1v∥2
+L2(Ω) =
+X
+T∈T
+diam(T)−2 ∥v∥2
+L2(T).
+We use this and the γ-shape regularity of T and argue along the lines of the proof of
+Proposition 4. The previous estimates result in the stability of Π(T ) in L2(h−2; Ω), i.e.,
+∥Π(T )v∥L2(h−2;Ω) ≤C12 ∥v∥L2(h−2;Ω)
+for all v ∈L2(Ω),
+where C12 > 0 depends only on C5, C6 and γ-shape regularity of T .
+With ω0 = 1 and ω1 = h−2 as well as c0 = 1 and c1 = C12, the interpolation esti-
+mate (31) and (42) yield
+∥Π(T )v∥L2(h−2s;Ω) ≤Cs
+12 ∥v∥L2(h−2s;Ω)
+for all v ∈L2(h−2s; Ω) = L2(Ω) and 0 < s < 1.
+Put explicitly, we obtain the following stability estimate
+∥h−sΠ(T )v∥L2(Ω) ≤Cs
+12 ∥h−sv∥L2(Ω)
+for all v ∈L2(Ω) and 0 ≤s ≤1.
+(43)
+4.6. Other mesh-reﬁnement strategies. The analysis of this work is only weakly
+tailored to NVB in the sense that the proof of Theorem 1 only requires that the used
+mesh-reﬁnement procedure gives rise to some level function level(·) which ensures that
+the estimates (11)–(12) of Lemma 2 and Lemma 3 are valid. Moreover, those lemmas
+only enter the proof of Proposition 7.
+While the assertions (11) of Lemma 2 are easily satisﬁed also for other mesh-reﬁnement
+strategies, the restriction (12) of Lemma 3 might be harder to satisfy in general. As noted
+above, the admissibility assumption on the initial mesh T0 ensures that (12) is satisﬁed
+for NVB in Rd. It has recently been proved in [KPP13] that for 2D NVB, the failure (or
+avoidance) of the admissibility assumption for the initial mesh T0 nevertheless guarantees
+for ℓ= 2 and for all NVB reﬁnements T of the initial mesh T0 that
+|level(T) −level(T ′)| ≤ℓ
+for all T, T ′ ∈T with T ∩T ′ ∈F(T )
+(44)
+and that this is suﬃcient to ensure the validity of Theorem 1. Naturally, the question
+arises to what extent the assertion of Lemma 3 can be relaxed without aﬀecting the
+stability (6) of the L2-orthogonal projections.
+Assume that the estimate (44) holds for some ﬁxed ℓ∈N. We then modify Proposi-
+tion 7 as follows: Instead of (26), we let for all zj ∈N (T )
+hj := min
+T ′
+j∈T
+min
+z′
+j∈N (T )∩T ′
+j
+2(ℓδ(zj,z′
+j)−level(T ′
+j))/d.
+(45)
+Going through the proof of Proposition 7, we obtain in (20) the constant C7 = 4ℓ/d
+(step 1) as well as the upper bound in (21) with C9 = C−1/d
+3
+(step 3). Moreover, the
+lower bound in (21) holds with C8 = C−1
+4 2ℓ(1−2 C11)/d (step 4). It thus only remains to
+check under which assumptions on the maximal level diﬀerence ℓand the dimension d, it
+holds
+F(d, ℓ) := α +
+√
+α2 −1 −4ℓ/d > 0
+with
+α = 1 + 4
+d
+d + 2
+d + 1
+(46)
+so that C7 < α+
+√
+α2 −1 in (20) is satisﬁed. Altogether, we therefore obtain the following
+generalization of Theorem 1 for which also the results of Sections 4.2–4.5 apply.
+13
+
+Theorem 8. Assume that for some ﬁxed dimension d ≥2 and maximum level diﬀerence
+ℓ∈N, the mesh-reﬁnement used induces a level function level(·) which ensures (11)
+as well as (44).
+Let T be obtained from the initial mesh T0 by this mesh-reﬁnement
+procedure. Provided that (46) is satisﬁed, H1
+D-stability (6) of the L2-orthogonal projection
+onto S1
+D(T ) is guaranteed, and C2 > 0 depends only on C3, C4, d, and ℓ.
+□
+For ﬁxed level ℓand ﬁxed dimension d, the inequality (46) can easily be checked,
+and Table 1 provides bounds on the values of F(d, ℓ) for some example values of d =
+2, . . . , 29 and ℓ= 1, . . . , 10. Moreover, we have the following result which states that
+with increasing dimension d, the maximum level diﬀerence ℓmay increase as well.
+Proposition 9. (i) For all ℓ∈N, there exists some d0 ∈N such that (44) implies (46)
+and hence validity of Theorem 8 for all dimensions d ≥d0.
+(ii) For all dimensions d ≥2 and ℓ∈N with 1 ≤ℓ< ℓ0(d) := d ln(α+
+√
+α2 −1)/ ln 4 and
+α > 1 from (46), (44) implies (46) and hence validity of Theorem 8 for all 1 ≤ℓ< ℓ0(d).
+Proof. (i) Let f(d) := F(d, ℓ) and note that f(d) →0 as d →∞. A straight-forward
+calculation for ﬁxed ℓ> 0 reveals
+f ′(d) = ℓ4ℓ/d
+d2
+ln 4 −4
+
+1 +
+1 + 4
+d
+d+2
+d+1
+1 + 4
+d
+d+2
+d+1
+2 −1
+1/2
+ (d + 2)2 −2
+d2(d + 1)2
+= 1
+d2
+
+ℓ4ℓ/d ln 4 −4
+
+1 +
+1 + 4
+d
+d+2
+d+1
+1 + 4
+d
+d+2
+d+1
+2 −1
+1/2
+ (d + 2)2 −2
+(d + 1)2
+
+< 0
+provided that d ≥d0 suﬃciently large. Consequently, f(·) is strictly decreasing for d ≥d0
+and hence F(d, ℓ) = f(d) > 0.
+(ii) Let g(ℓ) := F(d, ℓ) and note that g(·) is strictly monotonously decreasing. More-
+over, g(ℓ0) = 0 is equivalent to (α+
+√
+α2 −1)d = 4ℓ0 and hence ℓ0 = d ln(α+
+√
+α2 −1)/ ln 4.
+From strict monotonicity, we infer F(d, ℓ) = g(ℓ) > g(ℓ0) = 0 for 0 < ℓ< ℓ0.
+□
+Acknowledgement.
+DP acknowledges support through the Austrian Science Fund
+(FWF) under grant P21732 Adaptive Boundary Element Method. MK acknowledges
+support by CONICYT project Anillo ACT1118 (ANANUM).
+References
+[AFK+13] Markus Aurada, Michael Feischl, Josef F. Kemetm¨uller, Marcus Page, and Dirk Praeto-
+rius. Each H1/2-stable projection yields convergence and quasi-optimality of adaptive FEM
+with inhomogeneous Dirichlet data in Rd. Math. Model. Numer. Anal., in print (DOI:
+10.1051/m2an/2013069), 2013.
+[BL76]
+J¨oran Bergh and J¨orgen L¨ofstr¨om. Interpolation spaces. An introduction. Springer-Verlag,
+Berlin, 1976. Grundlehren der Mathematischen Wissenschaften, No. 223.
+[BPS02]
+James H. Bramble, Joseph E. Pasciak, and Olaf Steinbach. On the stability of the L2 pro-
+jection in H1(Ω). Math. Comp., 71(237):147–156, 2002.
+[BX91]
+James H. Bramble and Jinchao Xu. Some estimates for a weighted L2 projection. Math.
+Comp., 56(194):463–476, 1991.
+[BY13]
+Randolph E. Bank and Harry Yserentant. On the H1-stability of the L2-projection onto ﬁnite
+element spaces. Numer. Math., in print (DOI: 10.1007/s00211-013-0562-4), 2013.
+[Car02]
+Carsten Carstensen. Merging the Bramble-Pasciak-Steinbach and the Crouzeix-Thom´ee
+criterion for H1-stability of the L2-projection onto ﬁnite element spaces. Math. Comp.,
+71(237):157–163, 2002.
+[Car04]
+Carsten Carstensen. An adaptive mesh-reﬁning algorithm allowing for an H1 stable L2 pro-
+jection onto Courant ﬁnite element spaces. Constr. Approx., 20(4):549–564, 2004.
+14
+
+ℓ=1
+ℓ= 2
+ℓ= 3
+ℓ= 4
+ℓ= 5
+ℓ= 6
+ℓ= 7
+ℓ= 8
+ℓ= 9
+ℓ= 10
+ℓ0
+d = 2
+5.19
+3.19
+< 0
+< 0
+< 0
+< 0
+< 0
+< 0
+< 0
+< 0
+2.847
+d = 3
+3.55
+2.61
+1.13
+< 0
+< 0
+< 0
+< 0
+< 0
+< 0
+< 0
+3.542
+d = 4
+2.74
+2.16
+1.33
+0.16
+< 0
+< 0
+< 0
+< 0
+< 0
+< 0
+4.113
+d = 5
+2.26
+1.84
+1.29
+0.55
+< 0
+< 0
+< 0
+< 0
+< 0
+< 0
+4.608
+d = 6
+1.95
+1.62
+1.21
+0.69
+0.03
+< 0
+< 0
+< 0
+< 0
+< 0
+5.051
+d = 7
+1.72
+1.46
+1.13
+0.73
+0.25
+< 0
+< 0
+< 0
+< 0
+< 0
+5.456
+d = 8
+1.55
+1.33
+1.06
+0.74
+0.36
+< 0
+< 0
+< 0
+< 0
+< 0
+5.832
+d = 9
+1.42
+1.23
+1.00
+0.74
+0.43
+0.07
+< 0
+< 0
+< 0
+< 0
+6.183
+d = 10
+1.31
+1.14
+0.95
+0.72
+0.46
+0.17
+< 0
+< 0
+< 0
+< 0
+6.515
+d = 11
+1.23
+1.07
+0.90
+0.71
+0.48
+0.23
+< 0
+< 0
+< 0
+< 0
+6.830
+d = 12
+1.15
+1.01
+0.86
+0.69
+0.49
+0.27
+0.03
+< 0
+< 0
+< 0
+7.131
+d = 13
+1.09
+0.96
+0.82
+0.67
+0.50
+0.31
+0.09
+< 0
+< 0
+< 0
+7.419
+d = 14
+1.03
+0.92
+0.79
+0.65
+0.50
+0.33
+0.14
+< 0
+< 0
+< 0
+7.697
+d = 15
+0.99
+0.88
+0.76
+0.64
+0.50
+0.34
+0.17
+< 0
+< 0
+< 0
+7.964
+d = 16
+0.94
+0.85
+0.74
+0.62
+0.49
+0.35
+0.20
+0.03
+< 0
+< 0
+8.223
+d = 17
+0.91
+0.81
+0.71
+0.61
+0.49
+0.36
+0.22
+0.07
+< 0
+< 0
+8.473
+d = 18
+0.87
+0.79
+0.69
+0.59
+0.48
+0.36
+0.24
+0.10
+< 0
+< 0
+8.716
+d = 19
+0.84
+0.76
+0.67
+0.58
+0.48
+0.37
+0.25
+0.12
+< 0
+< 0
+8.953
+d = 20
+0.81
+0.74
+0.65
+0.57
+0.47
+0.37
+0.26
+0.14
+0.02
+< 0
+9.183
+d = 21
+0.79
+0.72
+0.64
+0.55
+0.47
+0.37
+0.27
+0.16
+0.04
+< 0
+9.408
+d = 22
+0.76
+0.70
+0.62
+0.54
+0.46
+0.37
+0.28
+0.17
+0.07
+< 0
+9.627
+d = 23
+0.74
+0.68
+0.61
+0.53
+0.45
+0.37
+0.28
+0.19
+0.09
+< 0
+9.842
+d = 24
+0.72
+0.66
+0.59
+0.52
+0.45
+0.37
+0.28
+0.20
+0.10
+0.00
+10.051
+d = 25
+0.70
+0.64
+0.58
+0.51
+0.44
+0.37
+0.29
+0.20
+0.11
+0.02
+10.257
+d = 26
+0.69
+0.63
+0.57
+0.50
+0.44
+0.37
+0.29
+0.21
+0.13
+0.04
+10.458
+d = 27
+0.67
+0.62
+0.56
+0.50
+0.43
+0.36
+0.29
+0.22
+0.14
+0.05
+10.656
+d = 28
+0.66
+0.60
+0.55
+0.49
+0.43
+0.36
+0.29
+0.22
+0.15
+0.07
+10.850
+d = 29
+0.64
+0.59
+0.54
+0.48
+0.42
+0.36
+0.29
+0.22
+0.15
+0.08
+11.040
+Table 1. The table provides some bounds for F(d, ℓ) from (46) as well as
+the constant ℓ0 = ℓ0(d) from Proposition 9 (ii). For F(d, ℓ) > 0, Theorem 8
+proves H1-stability of the L2-orthogonal projection.
+We note that, for
+ℓ≥3, F(d, ℓ) is, in fact, not monotonously decreasing in d.
+[CKNS08] J. Manuel Cascon, Christian Kreuzer, Ricardo H. Nochetto, and Kunibert G. Siebert. Quasi-
+optimal convergence rate for an adaptive ﬁnite element method. SIAM J. Numer. Anal.,
+46(5):2524–2550, 2008.
+[CT87]
+Michel Crouzeix and Vidar Thom´ee. The stability in Lp and W 1
+p of the L2-projection onto
+ﬁnite element function spaces. Math. Comp., 48(178):521–532, 1987.
+[EJ95]
+Kenneth Eriksson and Claes Johnson. Adaptive ﬁnite element methods for parabolic prob-
+lems. II. Optimal error estimates in L∞L2 and L∞L∞. SIAM J. Numer. Anal., 32(3):706–740,
+1995.
+[FKMP13] M. Feischl, M. Karkulik, J. M. Melenk, and D. Praetorius. Quasi-optimal Convergence Rate
+for an Adaptive Boundary Element Method. SIAM J. Numer. Anal., 51(2):1327–1348, 2013.
+[Kos94]
+Igor Kossaczk´y. A recursive approach to local mesh reﬁnement in two and three dimensions.
+J. Comput. Appl. Math., 55(3):275–288, 1994.
+[KPP13]
+Michael Karkulik, David Pavlicek, and Dirk Praetorius. On 2D newest vertex bisection:
+Optimality of mesh-closure and H1-stability of L2-projection. Constr. Approx., in print (DOI:
+10.1007/s00365-013-9192-4), 2013.
+15
+
+[Mau95]
+Joseph M. Maubach. Local bisection reﬁnement for n-simplicial grids generated by reﬂection.
+SIAM J. Sci. Comput., 16(1):210–227, 1995.
+[McL00]
+William McLean. Strongly elliptic systems and boundary integral equations. Cambridge Uni-
+versity Press, Cambridge, 2000.
+[Sew72]
+Edward Granville Sewell. Automatic generation of triangulations for piecewise polynomial
+approximation. PhD thesis, Purdue University, 1972.
+[Ste01]
+Olaf Steinbach. On the stability of the L2 projection in fractional Sobolev spaces. Numer.
+Math., 88(2):367–379, 2001.
+[Ste02]
+Olaf Steinbach. On a generalized L2 projection and some related stability estimates in Sobolev
+spaces. Numer. Math., 90(4):775–786, 2002.
+[Ste08]
+Rob Stevenson. The completion of locally reﬁned simplicial partitions created by bisection.
+Math. Comp., 77(261):227–241, 2008.
+[Tar07]
+Luc Tartar. An introduction to Sobolev spaces and interpolation spaces, volume 3 of Lecture
+Notes of the Unione Matematica Italiana. Springer, Berlin, 2007.
+[Tra97]
+Christoph T. Traxler. An algorithm for adaptive mesh reﬁnement in n dimensions. Comput-
+ing, 59(2):115–137, 1997.
+Pontificia Universidad Cat´olica de Chile, Facultad de Matem´aticas, Avenida Vicu˜na
+Mackenna 4860, Santiago, Chile
+E-mail address: mkarkulik@mat.puc.cl
+Vienna University of Technology, Institute for Analysis and Scientific Computing,
+Wiedner Hauptstraße 8-10, A-1040 Wien, Austria
+E-mail address: e1027222@student.tuwien.ac.at
+E-mail address: Dirk.Praetorius@tuwien.ac.at
+(corresponding author)
+16

@@ -1,0 +1,1699 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-5",
+  "scope": [
+    "def-piecewise-cubic-hermite-interpolant",
+    "def-piecewise-bernstein-representation",
+    "thm-piecewise-cubic-hermite-interpolant-properties",
+    "thm-hermite-monotonicity-for-normalized-slopes-in-square",
+    "alg-pchip-slope-selection",
+    "thm-bernstein-convex-hull-and-positivity",
+    "lem-pchip-slope-selection-well-defined",
+    "thm-pchip-normalized-slopes-in-square",
+    "lem-pchip-slopes-second-order-uniform-grid",
+    "thm-pchip-shape-preserving-no-overshoot",
+    "thm-pchip-third-order-away-from-extrema",
+    "ex-positive-endpoint-samples-negative-between",
+    "ex-natural-cubic-spline-undershoots-nonnegative-table",
+    "ex-pchip-flat-monotone-data",
+    "ex-pchip-limiter-second-order-at-smooth-extremum"
+  ],
+  "contracts": {
+    "def-piecewise-cubic-hermite-interpolant": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires N≥1 and strictly increasing nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero values and slopes; no division uses them."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition with N=1 is one positive-width cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Repeated nodes are excluded, while repeated ordinates and zero slopes are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition evaluates both cell endpoints through t=0 and t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition is an explicit deterministic formula and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition asserts no equivalence."
+        }
+      ]
+    },
+    "def-piecewise-bernstein-representation": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires s≥1 and contains at least one cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Zero controls and degree zero are permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n_i=0 gives one constant control on a cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Repeated controls are allowed, but partition nodes are strictly increasing."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The local coordinate t=0 or t=1 gives the two cell endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition is finite and deterministic and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition asserts no equivalence."
+        }
+      ]
+    },
+    "alg-pchip-slope-selection": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Algorithm requires n≥2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Algorithm states the zero-secant and flat-data branches."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Algorithm specifies the n=2 single-secant branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Algorithm includes repeated ordinates through zero secants."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Algorithm gives explicit one-sided endpoint formulas and clip/cap rules."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: All branches are deterministic finite formulas; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Algorithm is a procedure definition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Algorithm is a procedure definition, not an equivalence."
+        }
+      ]
+    },
+    "thm-piecewise-cubic-hermite-interpolant-properties": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-piecewise-cubic-hermite-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer, let $x_0<\\cdots<x_N$ be real nodes, let $y_0,\\ldots,y_N\\in\\mathbb R$ be values, and let $m_0,\\ldots,m_N\\in\\mathbb R$ be prescribed slopes. For $0\\le i<N$ put $h_i=x_{i+1}-x_i>0$ and $t=(x-x_i)/h_i$ on $[x_i,x_{i+1}]$. Define\n$$H_{00}(t)=2t^3-3t^2+1,\\quad H_{01}(t)=-2t^3+3t^2,\\quad H_{10}(t)=t^3-2t^2+t,\\quad H_{11}(t)=t^3-t^2.$$\nThe cubic Hermite piece on $[x_i,x_{i+1}]$ is\n$$P_i(x)=y_iH_{00}(t)+y_{i+1}H_{01}(t)+h_im_iH_{10}(t)+h_im_{i+1}H_{11}(t).$$\nThe piecewise cubic Hermite interpolant is the function whose restriction to each such interval is $P_i$; adjacent pieces use their common prescribed value $y_i$ at a shared node. The slopes $m_i$ are input data, not values inferred from neighboring pieces.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The basis values are $H_{00}(0)=1$, $H_{01}(0)=H_{10}(0)=H_{11}(0)=0$, and $H_{01}(1)=1$, $H_{00}(1)=H_{10}(1)=H_{11}(1)=0$. Substitution into [F1] gives $P_i(x_i)=y_i$ and $P_i(x_{i+1})=y_{i+1}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Differentiating the displayed basis using [F2] gives $(H'_{00},H'_{01},H'_{10},H'_{11})(0)=(0,0,1,0)$ and $(H'_{00},H'_{01},H'_{10},H'_{11})(1)=(0,0,0,1)$. Since $dt/dx=1/h_i$, differentiation of [F1] therefore gives $P_i'(x_i)=m_i$ and $P_i'(x_{i+1})=m_{i+1}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At a shared node $x_i$, the left and right pieces both have value $y_i$ by step 1.1 and both have derivative $m_i$ by step 1.2. Thus the piecewise function and its first derivative match there; the one-sided endpoint statements follow from the same step 1.2 calculation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write a degree-at-most-three polynomial in the normalized coordinate as $q(t)=a_0+a_1t+a_2t^2+a_3t^3$. For $q=1$, its endpoint values are $(1,1)$ and scaled slopes are $(0,0)$; for $q=t$, they are $(0,1)$ and $(1,1)$; for $q=t^2$, they are $(0,1)$ and $(0,2)$; and for $q=t^3$, they are $(0,1)$ and $(0,3)$, by [F2] and the chain rule under $t=(x-x_i)/h_i$. Substitution in [F1] gives $H_{00}+H_{01}=1$, $H_{01}+H_{10}+H_{11}=t$, $H_{01}+2H_{11}=t^2$, and $H_{01}+3H_{11}=t^3$. The formula is linear in endpoint values and slopes, so it reproduces their linear combination $q$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires a cell of positive width."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1–1.2 allow zero endpoint values and slopes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement applies to the single-cell case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated nodes are excluded while zero slopes and repeated ordinates are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1–1.2 evaluate both cell endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses explicit finite formulas and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no equivalence."
+        }
+      ]
+    },
+    "thm-hermite-monotonicity-for-normalized-slopes-in-square": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-piecewise-cubic-hermite-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer, let $x_0<\\cdots<x_N$ be real nodes, let $y_0,\\ldots,y_N\\in\\mathbb R$ be values, and let $m_0,\\ldots,m_N\\in\\mathbb R$ be prescribed slopes. For $0\\le i<N$ put $h_i=x_{i+1}-x_i>0$ and $t=(x-x_i)/h_i$ on $[x_i,x_{i+1}]$. Define\n$$H_{00}(t)=2t^3-3t^2+1,\\quad H_{01}(t)=-2t^3+3t^2,\\quad H_{10}(t)=t^3-2t^2+t,\\quad H_{11}(t)=t^3-t^2.$$\nThe cubic Hermite piece on $[x_i,x_{i+1}]$ is\n$$P_i(x)=y_iH_{00}(t)+y_{i+1}H_{01}(t)+h_im_iH_{10}(t)+h_im_{i+1}H_{11}(t).$$\nThe piecewise cubic Hermite interpolant is the function whose restriction to each such interval is $P_i$; adjacent pieces use their common prescribed value $y_i$ at a shared node. The slopes $m_i$ are input data, not values inferred from neighboring pieces.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $d\\ne0$, differentiating [F1] by [F3], using $y_1-y_0=hd$ and $dt/dx=1/h$, gives $p'(x)/d=\\alpha +(6-4\\alpha-2\\beta)t+(3\\alpha+3\\beta-6)t^2$. Indeed, $H'_{01}=6t-6t^2$, $H'_{10}=1-4t+3t^2$, and $H'_{11}=-2t+3t^2$; substitution produces those coefficients. Direct substitution in [F1] also gives $p(x_0)=y_0$ and $p(x_1)=y_1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0\\le t\\le1$ put $\\lambda_{00}=(1-\\alpha/3)(1-\\beta/3)$, $\\lambda_{30}=(\\alpha/3)(1-\\beta/3)$, $\\lambda_{03}=(1-\\alpha/3)(\\beta/3)$, and $\\lambda_{33}=(\\alpha/3)(\\beta/3)$. These are nonnegative and sum to one. The polynomial in step 1.1 is affine in $(\\alpha,\\beta)$, so it equals the convex combination with these weights of its values at $(0,0),(3,0),(0,3),(3,3)$, namely $6t(1-t)$, $3(1-t)^2$, $3t^2$, and $3(1-2t)^2$. Each of these four polynomials is nonnegative on $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "step 2.1 gives $p'(x)/d\\ge0$ throughout the cell. If $d>0$, $p'\\ge0$; if $d<0$, $p'\\le0$. For any two points $u<v$ in the cell, [F2] transfers that derivative sign to $p(v)-p(u)$, so $p$ is monotone; step 1.1 gives its endpoint values $y_0,y_1$, so every value lies between them. If $d=0$, then $y_1=y_0$ and [F1] reduces to $p=y_0(H_{00}+H_{01})=y_0$, since $m_0=m_1=0$ and $H_{00}+H_{01}=1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires one positive-width cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 proves the zero-secant constant case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement applies to one cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Equal endpoint values are handled in the flat case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1–3.1 use the cell endpoint values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: For each fixed u<v the mean value theorem supplies a point; no simultaneous choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is a sufficient implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is a sufficient implication, not an equivalence."
+        }
+      ]
+    },
+    "lem-pchip-slope-selection-well-defined": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "**Inputs:** An integer $n\\ge2$, strictly increasing real nodes $x_0<\\cdots<x_{n-1}$, and real values $y_0,\\ldots,y_{n-1}$. All operations here are over the real numbers.\n\n**Output:** Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].\n\nPut $h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$ for $0\\le i<n-1$. Write $\\operatorname{sgn}(r)\\in\\{-1,0,1\\}$ for the sign of a real number.\n\n- If $n=2$, set $m_0=m_1=d_0$.\n- If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For $n\\ge3$, at the left endpoint compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.\n- For $n\\ge3$, at the right endpoint compute\n  $$\\widehat m_{n-1}=\\frac{(2h_{n-2}+h_{n-3})d_{n-2}-h_{n-2}d_{n-3}}{h_{n-2}+h_{n-3}}.$$\n  Apply the preceding clip and cap rule with $d_0,d_1$ replaced by $d_{n-2},d_{n-3}$ and $m_0,\\widehat m_0$ replaced by $m_{n-1},\\widehat m_{n-1}$.\n\nFor $n\\ge3$, the algorithm returns the Hermite pieces from the stated values and selected slopes. The two-node branch is the line through the two input points.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $h_i=x_{i+1}-x_i$ is positive, so every secant $d_i$ is defined and finite. In the two-node branch both slopes equal the already defined secant, and neither endpoint formula is evaluated. When $n\\ge3$, the endpoint denominators $h_0+h_1$ and $h_{n-2}+h_{n-3}$ exist and are positive.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The interior harmonic-mean branch is entered only when $d_{k-1}d_k>0$. Thus both secants are nonzero and have the same sign; the weights $w_1=2h_k+h_{k-1}$ and $w_2=h_k+2h_{k-1}$ are positive. The two terms $w_1/d_{k-1}$ and $w_2/d_k$ therefore have that same nonzero sign, so their sum is nonzero and finite. The endpoint clip and cap branches only compare finite real quantities and introduce no division. Hence every output slope is defined and finite.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires at least two nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero secants take a branch that avoids division by that secant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 covers the two-node branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Flat inputs are allowed and have defined slopes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 checks the one-sided width denominators."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Every branch is a deterministic formula and no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no equivalence."
+        }
+      ]
+    },
+    "thm-pchip-normalized-slopes-in-square": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "**Inputs:** An integer $n\\ge2$, strictly increasing real nodes $x_0<\\cdots<x_{n-1}$, and real values $y_0,\\ldots,y_{n-1}$. All operations here are over the real numbers.\n\n**Output:** Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].\n\nPut $h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$ for $0\\le i<n-1$. Write $\\operatorname{sgn}(r)\\in\\{-1,0,1\\}$ for the sign of a real number.\n\n- If $n=2$, set $m_0=m_1=d_0$.\n- If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For $n\\ge3$, at the left endpoint compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.\n- For $n\\ge3$, at the right endpoint compute\n  $$\\widehat m_{n-1}=\\frac{(2h_{n-2}+h_{n-3})d_{n-2}-h_{n-2}d_{n-3}}{h_{n-2}+h_{n-3}}.$$\n  Apply the preceding clip and cap rule with $d_0,d_1$ replaced by $d_{n-2},d_{n-3}$ and $m_0,\\widehat m_0$ replaced by $m_{n-1},\\widehat m_{n-1}$.\n\nFor $n\\ge3$, the algorithm returns the Hermite pieces from the stated values and selected slopes. The two-node branch is the line through the two input points.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pchip-slope-selection-well-defined",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-pchip-slope-selection]], each branch is defined over $\\mathbb R$ and every selected slope is finite; in particular, the algorithm never divides by zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At an interior node $k$ whose adjacent secants have nonpositive product, [F1] sets $m_k=0$. If their product is positive, write $r=d_k/d_{k-1}>0$ and $W=w_1+w_2=3(h_{k-1}+h_k)$. Dividing the harmonic formula in [F1] by $d_k$ gives $m_k/d_k=W/(w_1r+w_2)$, which is positive and at most $W/w_2\\le3$, because $w_2=h_k+2h_{k-1}\\ge h_k+h_{k-1}$. Dividing instead by $d_{k-1}$ gives $m_k/d_{k-1}=W/(w_1+w_2/r)\\le W/w_1\\le3$, since $w_1=2h_k+h_{k-1}\\ge h_k+h_{k-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a nonzero first secant, put $q=d_1/d_0$. The raw endpoint ratio is $\\widehat m_0/d_0=1+\\frac{h_0}{h_0+h_1}(1-q)$. If $q\\ge0$, this ratio is at most $1+h_0/(h_0+h_1)<2$; clipping makes it zero if it is nonpositive. If $q<0$, the ratio is greater than $1$, and the cap branch reduces it to $3$ exactly when it exceeds $3$. Thus the final ratio is in $[0,3]$. If $d_0=0$, the raw endpoint value is either zero or has sign different from $d_0$, so the clip sets it to zero. The reflected argument proves the same bound at the right endpoint.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For two nodes both selected slopes equal $d_0$, so they are zero when $d_0=0$ and their ratios to $d_0$ are $1$ otherwise. For $n\\ge3$, if $d_i=0$, its interior endpoint slopes are set to zero by the nonpositive-product branch, and a first or last endpoint slope is zero by the clip rule. If $d_i\\ne0$, each of its endpoint slopes is either an interior slope covered by step 1.1 or an endpoint slope covered by step 1.2. These cases prove both alternatives in the statement.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires at least two strictly increasing nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 proves the zero-secant endpoint-slope case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 covers n=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Flat data and zero secants are explicit branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 proves the endpoint cap and clipping bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite slope formulas use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is a direct implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is a direct implication, not an equivalence."
+        }
+      ]
+    },
+    "lem-pchip-slopes-second-order-uniform-grid": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "**Inputs:** An integer $n\\ge2$, strictly increasing real nodes $x_0<\\cdots<x_{n-1}$, and real values $y_0,\\ldots,y_{n-1}$. All operations here are over the real numbers.\n\n**Output:** Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].\n\nPut $h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$ for $0\\le i<n-1$. Write $\\operatorname{sgn}(r)\\in\\{-1,0,1\\}$ for the sign of a real number.\n\n- If $n=2$, set $m_0=m_1=d_0$.\n- If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For $n\\ge3$, at the left endpoint compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.\n- For $n\\ge3$, at the right endpoint compute\n  $$\\widehat m_{n-1}=\\frac{(2h_{n-2}+h_{n-3})d_{n-2}-h_{n-2}d_{n-3}}{h_{n-2}+h_{n-3}}.$$\n  Apply the preceding clip and cap rule with $d_0,d_1$ replaced by $d_{n-2},d_{n-3}$ and $m_0,\\widehat m_0$ replaced by $m_{n-1},\\widehat m_{n-1}$.\n\nFor $n\\ge3$, the algorithm returns the Hermite pieces from the stated values and selected slopes. The two-node branch is the line through the two input points.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pchip-slope-selection-well-defined",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-pchip-slope-selection]], each branch is defined over $\\mathbb R$ and every selected slope is finite; in particular, the algorithm never divides by zero.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-continuity-and-derivative-on-real-interval",
+          "source_section": "Definition",
+          "quote": "For $f:[a,b]\\to\\mathbb R$, continuity at $x\\in[a,b]$ means that for every\n$\\varepsilon>0$ there is $\\delta>0$ such that\n$|f(t)-f(x)|<\\varepsilon$ whenever $t\\in[a,b]$ and $|t-x|<\\delta$.\nDifferentiability at an interior point $c$ means that the two-sided limit\n$$\nf'(c)=\\lim_{h\\to0}\\frac{f(c+h)-f(c)}{h}\n$$\nexists in the real field; differentiability on $(a,b)$ means this holds at\nevery interior point. For higher derivatives, define recursively\n$f^{(j+1)}=(f^{(j)})'$ on the points where the derivative exists. The class\n$C^{n+1}$ on an open interval means that these derivatives through order\n$n+1$ exist and are continuous there.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-taylor-integral-remainder",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $f$ have continuous derivatives through order $n+1$ on an\nopen interval containing the segment between $c$ and $x$, and put\n$$\nP_n(x)=\\sum_{j=0}^n\\frac{f^{(j)}(c)}{j!}(x-c)^j.\n$$\nThen\n$$\nf(x)-P_n(x)=\\frac1{n!}\\int_c^x f^{(n+1)}(t)(x-t)^n\\,dt.\n$$\nIf $M\\ge0$ and $|f^{(n+1)}(t)|\\le M$ between $c$ and $x$, then\n$$\n|f(x)-P_n(x)|\\le\\frac{M|x-c|^{n+1}}{(n+1)!}.\n$$\nThe formula and bound include $x=c$ and oriented endpoints.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-boundedness-theorem-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be compact\n([[def-open-cover-r]]). Then $f$ is **bounded on $K$**: there is a real\n$M \\ge 0$ with\n\n$$|f(x)| \\le M \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, $f[K]$ is a bounded subset of $\\mathbb{R}$\n([[def-bounded-set]]).\n\n**The hypothesis is compactness of $K$, not of $A$**, and it cannot be relaxed\nto boundedness of $K$ or to closedness of $K$ alone: the identity is unbounded\non the closed set $[0,\\infty)$, and $x \\mapsto 1/x$ is unbounded on the bounded\nset $(0,1)$. The general statement of that is\n[[thm-compactness-is-necessary-for-evt-and-uniform-continuity]], later on this\npage.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], $f'$ is continuous. It cannot take both a positive and a negative value on $[a,b]$, since [F5] would then give a zero of $f'$, contradicting $|f'|\\ge c$. Thus $f'$ has one sign throughout. On each grid cell [F4] gives $d_j=f'(\\xi_j)$ for some interior $\\xi_j$, so all secants have that sign and $|d_j|\\ge c$. Since $f'$, $f''$, and $f'''$ are continuous by [F3], [F7] supplies $M_1,M_2,M_3\\ge0$ with $|f'|\\le M_1$, $|f''|\\le M_2$, and $|f'''|\\le M_3$ on $[a,b]$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix an interior node $x_k$ and set $s=f'(x_k)$ and $q=f''(x_k)$. Applying [F6] with degree two at $x_k$ to $x_k-h$ and $x_k+h$ and dividing the remainders by $h$ gives $d_{k-1}=s-hq/2+e_-$ and $d_k=s+hq/2+e_+$, where $|e_-|,|e_+|\\le M_3h^2/6$. Since $|s|\\ge c$, for sufficiently small $h$ both secants stay bounded away from zero. The identity $1/(s+u)=1/s-u/s^2+u^2/(s^2(s+u))$ then gives, with a uniform constant, $1/d_{k-1}=1/s+hq/(2s^2)+O(h^2)$ and $1/d_k=1/s-hq/(2s^2)+O(h^2)$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a uniform grid the two weights in [F1] are both $3h$, so the interior slope equals $2/(1/d_{k-1}+1/d_k)$. The first-order terms in step 1.2 cancel, giving $1/d_{k-1}+1/d_k=2/s+O(h^2)$. Since $|s|\\le M_1$, the leading term has magnitude at least $2/M_1$; thus the denominator stays bounded away from zero for sufficiently small $h$, and its reciprocal yields $m_k=s+O(h^2)$ with a constant uniform in $k$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "At the left endpoint, [F6] at $a$ gives $d_0=f'(a)+hf''(a)/2+O(M_3h^2)$ and $d_1=f'(a)+3hf''(a)/2+O(M_3h^2)$, by expanding $f(a+h)$ and $f(a+2h)$. Therefore the raw endpoint estimate in [F1] is $\\widehat m_0=(3d_0-d_1)/2=f'(a)+O(M_3h^2)$. For small $h$ it has the sign of $f'(a)$; step 1.1 gives that same sign for $d_0,d_1$, so neither the sign clip nor the opposite-sign cap changes it. Reflecting the expansions at $b$ gives the identical $O(h^2)$ error for $m_N$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The interior and endpoint estimates above use the bounds $M_1,M_2,M_3$ and $c^{-1}$ on the fixed interval; their constants and smallness thresholds are therefore uniform in the node index. Taking a common maximum for the error constants and a common positive minimum for the thresholds gives $C,h_0$ valid at every interior node and both endpoints, proving the asserted bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires N≥2 and a nonempty uniform grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement assumes |f'|≥c>0, so zero derivative is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement requires N≥2 and includes all interior nodes."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Nonstationarity excludes flat or stationary data on the interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.2 verifies the one-sided endpoint branches."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The estimates use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is an error bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is an error bound, not an equivalence."
+        }
+      ]
+    },
+    "thm-pchip-shape-preserving-no-overshoot": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "**Inputs:** An integer $n\\ge2$, strictly increasing real nodes $x_0<\\cdots<x_{n-1}$, and real values $y_0,\\ldots,y_{n-1}$. All operations here are over the real numbers.\n\n**Output:** Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].\n\nPut $h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$ for $0\\le i<n-1$. Write $\\operatorname{sgn}(r)\\in\\{-1,0,1\\}$ for the sign of a real number.\n\n- If $n=2$, set $m_0=m_1=d_0$.\n- If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For $n\\ge3$, at the left endpoint compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.\n- For $n\\ge3$, at the right endpoint compute\n  $$\\widehat m_{n-1}=\\frac{(2h_{n-2}+h_{n-3})d_{n-2}-h_{n-2}d_{n-3}}{h_{n-2}+h_{n-3}}.$$\n  Apply the preceding clip and cap rule with $d_0,d_1$ replaced by $d_{n-2},d_{n-3}$ and $m_0,\\widehat m_0$ replaced by $m_{n-1},\\widehat m_{n-1}$.\n\nFor $n\\ge3$, the algorithm returns the Hermite pieces from the stated values and selected slopes. The two-node branch is the line through the two input points.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pchip-slope-selection-well-defined",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-pchip-slope-selection]], each branch is defined over $\\mathbb R$ and every selected slope is finite; in particular, the algorithm never divides by zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-piecewise-cubic-hermite-interpolant-properties",
+          "source_section": "Statement",
+          "quote": "For the data in [[def-piecewise-cubic-hermite-interpolant]], each piece has the prescribed endpoint values and slopes: $P_i(x_i)=y_i$, $P_i(x_{i+1})=y_{i+1}$, $P_i'(x_i)=m_i$, and $P_i'(x_{i+1})=m_{i+1}$. The resulting interpolant is $C^1$ on $[x_0,x_N]$ (with the corresponding one-sided derivatives at the endpoints). On a single interval, if the four prescribed endpoint data are the values and derivatives of a polynomial $q$ of degree at most three, then $P_i=q$ on that interval.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-hermite-monotonicity-for-normalized-slopes-in-square",
+          "source_section": "Statement",
+          "quote": "Let $p$ be the single Hermite piece from [[def-piecewise-cubic-hermite-interpolant]] on $[x_0,x_1]$, with $h=x_1-x_0>0$, endpoint values $y_0,y_1$, slopes $m_0,m_1$, and secant $d=(y_1-y_0)/h$. If $d\\ne0$ and $\\alpha=m_0/d$, $\\beta=m_1/d$ both lie in $[0,3]$, then $p$ is monotone from $y_0$ to $y_1$ and stays between those values. If $d=0$ and $m_0=m_1=0$, then $p$ is constant.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pchip-normalized-slopes-in-square",
+          "source_section": "Statement",
+          "quote": "For any input to [[alg-pchip-slope-selection]], consider an interval with secant $d_i$. If $d_i=0$, the selected slopes at both endpoints of that interval are zero. If $d_i\\ne0$, then $m_i/d_i$ and $m_{i+1}/d_i$ both belong to $[0,3]$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the algorithm defines one finite slope at each input node. Its output consists of Hermite pieces sharing the same value and selected slope at each common node, so [F3] gives interpolation and $C^1$ matching.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a cell with $d_i\\ne0$. By [F5], both slopes normalized by $d_i$ lie in $[0,3]$; [F4] therefore makes this piece monotone from $y_i$ to $y_{i+1}$ and keeps it between those values.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $d_i=0$, [F5] gives zero slopes at both endpoints, and [F4] makes that Hermite piece constant at its common endpoint value. For nondecreasing input, every $d_i\\ge0$, so each nonflat cell is nondecreasing by step 1.2, the flat cells are constant by the calculation above, and the pieces agree at nodes by step 1.1; concatenating the cells gives a nondecreasing function. The nonincreasing case is identical with all inequalities reversed.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires at least two strictly increasing nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 handles zero secants explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the two-node case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 handles repeated ordinates and flat cells."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1 establishes interpolation at endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Each step treats fixed finite data; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives direct implications, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives direct implications, not an equivalence."
+        }
+      ]
+    },
+    "thm-pchip-third-order-away-from-extrema": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "**Inputs:** An integer $n\\ge2$, strictly increasing real nodes $x_0<\\cdots<x_{n-1}$, and real values $y_0,\\ldots,y_{n-1}$. All operations here are over the real numbers.\n\n**Output:** Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].\n\nPut $h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$ for $0\\le i<n-1$. Write $\\operatorname{sgn}(r)\\in\\{-1,0,1\\}$ for the sign of a real number.\n\n- If $n=2$, set $m_0=m_1=d_0$.\n- If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For $n\\ge3$, at the left endpoint compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.\n- For $n\\ge3$, at the right endpoint compute\n  $$\\widehat m_{n-1}=\\frac{(2h_{n-2}+h_{n-3})d_{n-2}-h_{n-2}d_{n-3}}{h_{n-2}+h_{n-3}}.$$\n  Apply the preceding clip and cap rule with $d_0,d_1$ replaced by $d_{n-2},d_{n-3}$ and $m_0,\\widehat m_0$ replaced by $m_{n-1},\\widehat m_{n-1}$.\n\nFor $n\\ge3$, the algorithm returns the Hermite pieces from the stated values and selected slopes. The two-node branch is the line through the two input points.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pchip-slope-selection-well-defined",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-pchip-slope-selection]], each branch is defined over $\\mathbb R$ and every selected slope is finite; in particular, the algorithm never divides by zero.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-piecewise-cubic-hermite-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer, let $x_0<\\cdots<x_N$ be real nodes, let $y_0,\\ldots,y_N\\in\\mathbb R$ be values, and let $m_0,\\ldots,m_N\\in\\mathbb R$ be prescribed slopes. For $0\\le i<N$ put $h_i=x_{i+1}-x_i>0$ and $t=(x-x_i)/h_i$ on $[x_i,x_{i+1}]$. Define\n$$H_{00}(t)=2t^3-3t^2+1,\\quad H_{01}(t)=-2t^3+3t^2,\\quad H_{10}(t)=t^3-2t^2+t,\\quad H_{11}(t)=t^3-t^2.$$\nThe cubic Hermite piece on $[x_i,x_{i+1}]$ is\n$$P_i(x)=y_iH_{00}(t)+y_{i+1}H_{01}(t)+h_im_iH_{10}(t)+h_im_{i+1}H_{11}(t).$$\nThe piecewise cubic Hermite interpolant is the function whose restriction to each such interval is $P_i$; adjacent pieces use their common prescribed value $y_i$ at a shared node. The slopes $m_i$ are input data, not values inferred from neighboring pieces.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-piecewise-cubic-hermite-interpolant-properties",
+          "source_section": "Statement",
+          "quote": "For the data in [[def-piecewise-cubic-hermite-interpolant]], each piece has the prescribed endpoint values and slopes: $P_i(x_i)=y_i$, $P_i(x_{i+1})=y_{i+1}$, $P_i'(x_i)=m_i$, and $P_i'(x_{i+1})=m_{i+1}$. The resulting interpolant is $C^1$ on $[x_0,x_N]$ (with the corresponding one-sided derivatives at the endpoints). On a single interval, if the four prescribed endpoint data are the values and derivatives of a polynomial $q$ of degree at most three, then $P_i=q$ on that interval.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-pchip-slopes-second-order-uniform-grid",
+          "source_section": "Statement",
+          "quote": "Let $f$ be $C^3$ on an open interval containing $[a,b]$, and suppose $|f'(x)|\\ge c>0$ for every $x\\in[a,b]$. For a uniform grid $x_j=a+jh$, $j=0,\\ldots,N$, with $N\\ge2$ and $h=(b-a)/N$, let $m_j$ be the slopes selected by [[alg-pchip-slope-selection]] from the values $f(x_j)$. There are constants $C,h_0>0$, depending on $f$, $c$, and $[a,b]$, such that for every such grid with $h<h_0$,\n$$\\max_{0\\le j\\le N}|m_j-f'(x_j)|\\le Ch^2.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-taylor-integral-remainder",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $f$ have continuous derivatives through order $n+1$ on an\nopen interval containing the segment between $c$ and $x$, and put\n$$\nP_n(x)=\\sum_{j=0}^n\\frac{f^{(j)}(c)}{j!}(x-c)^j.\n$$\nThen\n$$\nf(x)-P_n(x)=\\frac1{n!}\\int_c^x f^{(n+1)}(t)(x-t)^n\\,dt.\n$$\nIf $M\\ge0$ and $|f^{(n+1)}(t)|\\le M$ between $c$ and $x$, then\n$$\n|f(x)-P_n(x)|\\le\\frac{M|x-c|^{n+1}}{(n+1)!}.\n$$\nThe formula and bound include $x=c$ and oriented endpoints.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-continuity-and-derivative-on-real-interval",
+          "source_section": "Definition",
+          "quote": "For $f:[a,b]\\to\\mathbb R$, continuity at $x\\in[a,b]$ means that for every\n$\\varepsilon>0$ there is $\\delta>0$ such that\n$|f(t)-f(x)|<\\varepsilon$ whenever $t\\in[a,b]$ and $|t-x|<\\delta$.\nDifferentiability at an interior point $c$ means that the two-sided limit\n$$\nf'(c)=\\lim_{h\\to0}\\frac{f(c+h)-f(c)}{h}\n$$\nexists in the real field; differentiability on $(a,b)$ means this holds at\nevery interior point. For higher derivatives, define recursively\n$f^{(j+1)}=(f^{(j)})'$ on the points where the derivative exists. The class\n$C^{n+1}$ on an open interval means that these derivatives through order\n$n+1$ exist and are continuous there.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-boundedness-theorem-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be compact\n([[def-open-cover-r]]). Then $f$ is **bounded on $K$**: there is a real\n$M \\ge 0$ with\n\n$$|f(x)| \\le M \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, $f[K]$ is a bounded subset of $\\mathbb{R}$\n([[def-bounded-set]]).\n\n**The hypothesis is compactness of $K$, not of $A$**, and it cannot be relaxed\nto boundedness of $K$ or to closedness of $K$ alone: the identity is unbounded\non the closed set $[0,\\infty)$, and $x \\mapsto 1/x$ is unbounded on the bounded\nset $(0,1)$. The general statement of that is\n[[thm-compactness-is-necessary-for-evt-and-uniform-continuity]], later on this\npage.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F7] and [F8], choose $M\\ge0$ with $|f'''|\\le M$ on $[a,b]$. Fix a cell $[x_i,x_i+h]$ and let $T_2$ be the degree-two Taylor polynomial of $f$ at $x_i$. By [F6], the residual $r=f-T_2$ satisfies $r(x_i)=r'(x_i)=0$, $|r(x_i+h)|\\le Mh^3/6$, and $|r'(x_i+h)|\\le Mh^2/2$; the derivative bound is [F6] applied to $f'$ with degree one.",
+          "step": "1.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $H$ be the exact-derivative Hermite piece for $f$ on this cell. The PCHIP piece $P_h$ and $H$ have identical endpoint values. By [F3], their difference is $h(m_i-f'(x_i))H_{10}(t)+h(m_{i+1}-f'(x_i+h))H_{11}(t)$. Since [F2] guarantees these PCHIP slopes are defined and $|H_{10}(t)|=t(1-t)^2\\le1$, $|H_{11}(t)|\\le1$, [F5] gives $\\max_{[x_i,x_i+h]}|P_h-H|\\le2C_sh^3$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For this exact-derivative Hermite piece $H$, linearity of the formula [F3] and reproduction [F4] give $H=T_2+H_r$, where $H_r(t)=r(x_i+h)H_{01}(t)+hr'(x_i+h)H_{11}(t)$. On $0\\le t\\le1$, $|H_{01}(t)|=t^2(3-2t)\\le1$ and $|H_{11}(t)|=t^2(1-t)\\le1$, so $|H_r(t)|\\le(1/6+1/2)Mh^3=2Mh^3/3$. Together with $|r(t)|\\le Mh^3/6$ from step 1.1, this yields $\\max_{[x_i,x_i+h]}|H-f|\\le5Mh^3/6$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Combining steps 2.1 and 1.2 gives $|P_h-f|\\le(5M/6+2C_s)h^3$ on every cell. The constants do not depend on $i$ or $N$, so taking the maximum over the finite partition proves the uniform estimate with $C=5M/6+2C_s$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires N≥2 and a nonempty uniform grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement assumes |f'|≥c>0 and excludes zero derivatives."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Proof gives a bound on every cell of the uniform partition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The stated derivative lower bound excludes stationary and flat data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 2.1–3.1 include the first and last cells."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses deterministic Taylor bounds and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is a one-way error estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is a one-way error estimate, not an equivalence."
+        }
+      ]
+    },
+    "thm-bernstein-convex-hull-and-positivity": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-piecewise-bernstein-representation",
+          "source_section": "Definition",
+          "quote": "For degree two, the cell polynomial is $c_{i,0}(1-t)^2+\\iota\\binom21\\,c_{i,1}t(1-t)+c_{i,2}t^2$; this is the displayed Bernstein sum specialized to $n_i=2$.\n\nLet $s\\ge1$ be an integer and let $a=x_0<\\cdots<x_s=b$ be a finite partition, and on each cell $[x_i,x_{i+1}]$ choose an integer degree $n_i\\ge0$ and real controls $c_{i,0},\\ldots,c_{i,n_i}$. For $t=(x-x_i)/(x_{i+1}-x_i)\\in[0,1]$, define the Bernstein basis polynomial\n$$B_{k,n_i}(t)=\\iota\\binom{n_i}{k}t^k(1-t)^{n_i-k},\\qquad 0\\le k\\le n_i,$$\nwhere $\\binom{n_i}{k}$ is the natural binomial coefficient from [[def-binomial-coefficient]], $\\iota$ is the canonical embedding of [[def-canonical-natural]] into $\\mathbb R$, and finite sums use [[def-finite-sum]]. The cell polynomial is $p_i(x)=\\sum_{k=0}^{n_i}c_{i,k}B_{k,n_i}(t)$. These cell polynomials form a piecewise Bernstein representation. To require continuity at a shared node, impose the additional endpoint-control condition $c_{i,n_i}=c_{i+1,0}$; continuity is not part of the representation unless that condition is imposed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-binomial-theorem",
+          "source_section": "Statement",
+          "quote": "For all $x, y \\in \\mathbb{R}$ and every $n \\in \\mathbb{N}$,\n\n$$(x+y)^{n} \\;=\\; \\sum_{k<n+1} \\iota\\binom{n}{k}\\, x^{k}\\, y^{\\,n-k},$$\n\nwhere the powers are the integer powers of [[def-integer-power]], the sum is the\nreal finite sum of [[def-finite-sum]] over $k = 0, 1, \\dots, n$, the difference\n$n-k$ is a genuine one because $k \\le n$ throughout the range, and $\\iota$ is the\ncanonical natural of [[def-canonical-natural]].\n\n**The coefficient is $\\iota\\binom{n}{k}$ and not $\\binom{n}{k}$.** A binomial\ncoefficient is a natural number, that is a von Neumann natural, that is a set; it\nis not an element of $\\mathbb{R}$, and it enters the field through $\\iota$.\n\n**The identity is stated in $\\mathbb{R}$ and only in $\\mathbb{R}$.** The same\nproof uses nothing but commutativity, associativity, distributivity and\nnatural-number multiples of a ring element, so a commutative-ring version is\navailable wherever rings are; rings are not available at this point in the\nreading order, and the ring statement is a separate statement, to be made where\nthey are. See the Remarks below.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "For a finite set $A$ and $k \\in \\mathbb{N}$ put\n\n$$[A]^{k} := \\{\\, S \\subseteq A \\ :\\ \\lvert S\\rvert = k \\,\\},$$\n\nthe set of $k$-element subsets of $A$. Every $S \\subseteq A$ is finite\n([[thm-subset-of-a-finite-set]]), so the condition $\\lvert S\\rvert = k$ makes\nsense for every subset.\n\n**$[A]^{k}$ is finite.** It is a subset of $\\mathcal{P}(A)$, which is finite by\n[[cor-cardinality-of-the-power-set]], so [[thm-subset-of-a-finite-set]] applies.\n\n**$\\lvert [A]^{k}\\rvert$ depends only on $\\lvert A\\rvert$.** Let $h : A \\to A'$ be\na bijection of finite sets. The direct image map $S \\mapsto h[S]$ carries\n$[A]^{k}$ into $[A']^{k}$, because $h$ restricted to $S$ is a bijection of $S$\nonto $h[S]$ and so $\\lvert h[S]\\rvert = \\lvert S\\rvert = k$ by the transport\nclause of [[def-finite-cardinality]]; the map $T \\mapsto h^{-1}[T]$ is its\ntwo-sided inverse, since $h^{-1}[h[S]] = S$ and $h[h^{-1}[T]] = T$ for a\nbijection $h$. So $[A]^{k} \\approx [A']^{k}$ and the two have the same\ncardinality.\n\n**Definition.** For $n, k \\in \\mathbb{N}$ set\n\n$$\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N},$$\n\nthe **binomial coefficient**. By the previous paragraph and $\\lvert n\\rvert = n$,\n\n$$\\big\\lvert [A]^{k}\\big\\rvert = \\binom{\\lvert A\\rvert}{k} \\qquad \\text{for every finite } A .$$\n\n**$\\binom{n}{k}$ is a count, so it is a natural number by construction.** It is\n*not* defined as $n!/(k!\\,(n-k)!)$: that expression involves a division, hence\nlives in $\\mathbb{R}$, and the assertion that its value is a natural number is a\ntheorem, proved in [[thm-binomial-closed-formula]]. Defining the coefficient as a\ncount makes integrality free and leaves the closed formula something to prove.\n\n**Boundary values, read off the definition and not stipulated.**\n\n- $\\binom{n}{0} = 1$ **for every $n$, including $n = 0$**: the subsets of $n$ of\n  cardinality $0$ are exactly the subsets equal to $\\varnothing$\n  ([[def-finite-cardinality]], clause (b)), so $[n]^{0} = \\{\\varnothing\\}$, a\n  one-element set. No empty-product convention is involved.\n- $\\binom{n}{n} = 1$: if $S \\subseteq n$ has $\\lvert S\\rvert = n = \\lvert n\\rvert$\n  then $S = n$ by clause 3 of [[thm-subset-of-a-finite-set]], so\n  $[n]^{n} = \\{n\\}$.\n- $\\binom{n}{k} = 0$ for $k > n$: a subset $S \\subseteq n$ has\n  $\\lvert S\\rvert \\le n$ by clause 2 of [[thm-subset-of-a-finite-set]], so\n  $\\lvert S\\rvert = k > n$ is impossible and $[n]^{k} = \\varnothing$\n  ([[lem-nat-trichotomy]]).\n- $\\binom{n}{1} = n$: a subset of cardinality $1$ is $\\{x\\}$ for exactly one\n  $x \\in n$, since $\\lvert S\\rvert = 1$ means $S \\approx \\{0\\}$; so\n  $S \\mapsto$ its unique element is a bijection $[n]^{1} \\to n$.\n- $\\binom{0}{0} = 1$ and $\\binom{0}{k} = 0$ for $k \\ge 1$, both instances of the\n  above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-nat-trichotomy",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{N}$ exactly one of $m < n$, $m = n$, $m > n$ holds. In particular the order ([[def-nat-order]]) is total.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n([[def-natural-numbers]], [[thm-recursion]]):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natural-numbers]]), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.\n\n- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$\n  for every $s \\in S$.\n- $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$\n  for every $s \\in S$.\n\nA set has at most one maximum: if $m_1$ and $m_2$ are both maxima then\n$m_1 \\in S$ gives $m_1 \\le m_2$ and $m_2 \\in S$ gives $m_2 \\le m_1$, so\n$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy\naxiom of an ordered field ([[def-ordered-field]], [[def-complete-ordered-field]]).\nThe same argument applies to minima, so we may write $\\max S$ and $\\min S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n([[def-ordered-field]], [[def-field]]).\n\n**Natural exponents.** By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of [[lem-power-laws]]: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors ([[lem-of-no-zero-divisors]]).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n([[lem-of-inverse-unique]]).\n\n**Integer exponents.** Every integer $m$ ([[def-integers]]) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ ([[lem-nat-embeds-int]],\n[[def-int-operations]]). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a cell and $t\\in[0,1]$. Both $t$ and $1-t$ are nonnegative, so their natural powers are nonnegative by induction using the recursive definition [F10] and closure of nonnegative reals under multiplication. By [F3]–[F4], $\\binom nk$ is a natural that is either zero or positive; [F5] sends its zero case to zero, and [F6] sends its positive case to a positive real. Thus every $B_{k,n}(t)\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F10",
+            "given",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F2] with $x=t$ and $y=1-t$. Since $t+(1-t)=1$, [F10] and induction give $1^n=1$, so the displayed Bernstein basis terms sum to one.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F10",
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F8]–[F9], let $c_{\\min}$ and $c_{\\max}$ be the minimum and maximum of the finite control list. For each $k$, [F1], step 1.1, and [F7] give $c_{\\min}B_{k,n}(t)\\le c_{i,k}B_{k,n}(t)\\le c_{\\max}B_{k,n}(t)$: the control differences and basis weights are nonnegative, so their products are nonnegative. Summing with [F7] and using step 1.2 gives $c_{\\min}\\le p_i(x)\\le c_{\\max}$. Therefore nonnegative controls imply $p_i(x)\\ge0$. Applying this cellwise gives nonnegativity on the partition, and matching adjacent endpoint controls give continuity by the endpoint values $B_{0,n}(0)=B_{n,n}(1)=1$ and all other endpoint basis values zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement concerns a nonempty cell with a finite control list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement includes zero controls and yields nonnegativity when all are nonnegative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Degree n=0 is allowed and gives a constant cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated controls are allowed and the least and greatest values still exist."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 notes the Bernstein endpoint basis values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite weighted-sum proof uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts a sufficient condition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts a sufficient condition, not an equivalence."
+        }
+      ]
+    },
+    "ex-positive-endpoint-samples-negative-between": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-piecewise-bernstein-representation",
+          "source_section": "Definition",
+          "quote": "For degree two, the cell polynomial is $c_{i,0}(1-t)^2+\\iota\\binom21\\,c_{i,1}t(1-t)+c_{i,2}t^2$; this is the displayed Bernstein sum specialized to $n_i=2$.\n\nLet $s\\ge1$ be an integer and let $a=x_0<\\cdots<x_s=b$ be a finite partition, and on each cell $[x_i,x_{i+1}]$ choose an integer degree $n_i\\ge0$ and real controls $c_{i,0},\\ldots,c_{i,n_i}$. For $t=(x-x_i)/(x_{i+1}-x_i)\\in[0,1]$, define the Bernstein basis polynomial\n$$B_{k,n_i}(t)=\\iota\\binom{n_i}{k}t^k(1-t)^{n_i-k},\\qquad 0\\le k\\le n_i,$$\nwhere $\\binom{n_i}{k}$ is the natural binomial coefficient from [[def-binomial-coefficient]], $\\iota$ is the canonical embedding of [[def-canonical-natural]] into $\\mathbb R$, and finite sums use [[def-finite-sum]]. The cell polynomial is $p_i(x)=\\sum_{k=0}^{n_i}c_{i,k}B_{k,n_i}(t)$. These cell polynomials form a piecewise Bernstein representation. To require continuity at a shared node, impose the additional endpoint-control condition $c_{i,n_i}=c_{i+1,0}$; continuity is not part of the representation unless that condition is imposed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bernstein-convex-hull-and-positivity",
+          "source_section": "Statement",
+          "quote": "On each cell of a representation from [[def-piecewise-bernstein-representation]], the polynomial value lies between the minimum and maximum of that cell's controls. In particular, nonnegative controls imply a nonnegative polynomial throughout the cell. If every cell has nonnegative controls and adjacent endpoint controls agree, the piecewise function is continuous and nonnegative on the entire partition. This is a control-value guarantee; positivity at a finite set of sample nodes alone is not among the hypotheses.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "For a finite set $A$ and $k \\in \\mathbb{N}$ put\n\n$$[A]^{k} := \\{\\, S \\subseteq A \\ :\\ \\lvert S\\rvert = k \\,\\},$$\n\nthe set of $k$-element subsets of $A$. Every $S \\subseteq A$ is finite\n([[thm-subset-of-a-finite-set]]), so the condition $\\lvert S\\rvert = k$ makes\nsense for every subset.\n\n**$[A]^{k}$ is finite.** It is a subset of $\\mathcal{P}(A)$, which is finite by\n[[cor-cardinality-of-the-power-set]], so [[thm-subset-of-a-finite-set]] applies.\n\n**$\\lvert [A]^{k}\\rvert$ depends only on $\\lvert A\\rvert$.** Let $h : A \\to A'$ be\na bijection of finite sets. The direct image map $S \\mapsto h[S]$ carries\n$[A]^{k}$ into $[A']^{k}$, because $h$ restricted to $S$ is a bijection of $S$\nonto $h[S]$ and so $\\lvert h[S]\\rvert = \\lvert S\\rvert = k$ by the transport\nclause of [[def-finite-cardinality]]; the map $T \\mapsto h^{-1}[T]$ is its\ntwo-sided inverse, since $h^{-1}[h[S]] = S$ and $h[h^{-1}[T]] = T$ for a\nbijection $h$. So $[A]^{k} \\approx [A']^{k}$ and the two have the same\ncardinality.\n\n**Definition.** For $n, k \\in \\mathbb{N}$ set\n\n$$\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N},$$\n\nthe **binomial coefficient**. By the previous paragraph and $\\lvert n\\rvert = n$,\n\n$$\\big\\lvert [A]^{k}\\big\\rvert = \\binom{\\lvert A\\rvert}{k} \\qquad \\text{for every finite } A .$$\n\n**$\\binom{n}{k}$ is a count, so it is a natural number by construction.** It is\n*not* defined as $n!/(k!\\,(n-k)!)$: that expression involves a division, hence\nlives in $\\mathbb{R}$, and the assertion that its value is a natural number is a\ntheorem, proved in [[thm-binomial-closed-formula]]. Defining the coefficient as a\ncount makes integrality free and leaves the closed formula something to prove.\n\n**Boundary values, read off the definition and not stipulated.**\n\n- $\\binom{n}{0} = 1$ **for every $n$, including $n = 0$**: the subsets of $n$ of\n  cardinality $0$ are exactly the subsets equal to $\\varnothing$\n  ([[def-finite-cardinality]], clause (b)), so $[n]^{0} = \\{\\varnothing\\}$, a\n  one-element set. No empty-product convention is involved.\n- $\\binom{n}{n} = 1$: if $S \\subseteq n$ has $\\lvert S\\rvert = n = \\lvert n\\rvert$\n  then $S = n$ by clause 3 of [[thm-subset-of-a-finite-set]], so\n  $[n]^{n} = \\{n\\}$.\n- $\\binom{n}{k} = 0$ for $k > n$: a subset $S \\subseteq n$ has\n  $\\lvert S\\rvert \\le n$ by clause 2 of [[thm-subset-of-a-finite-set]], so\n  $\\lvert S\\rvert = k > n$ is impossible and $[n]^{k} = \\varnothing$\n  ([[lem-nat-trichotomy]]).\n- $\\binom{n}{1} = n$: a subset of cardinality $1$ is $\\{x\\}$ for exactly one\n  $x \\in n$, since $\\lvert S\\rvert = 1$ means $S \\approx \\{0\\}$; so\n  $S \\mapsto$ its unique element is a bijection $[n]^{1} \\to n$.\n- $\\binom{0}{0} = 1$ and $\\binom{0}{k} = 0$ for $k \\ge 1$, both instances of the\n  above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n([[def-natural-numbers]], [[thm-recursion]]):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natural-numbers]]), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], $\\binom21=2$; applying the recursion in [F4] twice shows its canonical real value is $2$. Expanding $\\frac1{10}(1-t)^2-\\frac45t(1-t)+\\frac1{10}t^2$ gives $t^2-t+1/10$, so [F1] identifies its Bernstein controls as $c_0=1/10$, $c_1=-2/5$, $c_2=1/10$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Direct substitution gives $p(0)=p(1)=1/10>0$, while $p(1/2)=1/4-1/2+1/10=-3/20<0$. Thus positive samples at the two endpoints do not control the interpolant between them.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The middle Bernstein control is negative, so the sufficient hypothesis in [F2] is absent; the negative value in step 1.2 is consistent with the control-hull theorem.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes one polynomial, so an empty data list is not in scope."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example has no zero samples; the failure occurs at a negative interior value."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns two sample endpoints and one interior point, not a one-sample case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Two endpoint samples are equal and positive while the polynomial is not constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Verification 1.2 explicitly checks both endpoints and the midpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The exact polynomial expansion uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        }
+      ]
+    },
+    "ex-natural-cubic-spline-undershoots-nonnegative-table": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-cubic-spline",
+          "source_section": "Definition",
+          "quote": "Let $[a,b]$ be a bounded interval and let $a\\le t_1<\\cdots<t_r\\le b$ with $r\\ge2$. A natural cubic spline with knots $t_1,\\ldots,t_r$ is a $C^2$ function on $[a,b]$ that is a polynomial of degree at most three on every $[t_j,t_{j+1}]$, has second derivative zero at $t_1$ and $t_r$, and is extended linearly on $[a,t_1]$ and $[t_r,b]$ when those intervals are nonempty. The knots $t_j$ are the distinct breakpoints; repeated observations at the same input do not create additional knots.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "**Inputs:** An integer $n\\ge2$, strictly increasing real nodes $x_0<\\cdots<x_{n-1}$, and real values $y_0,\\ldots,y_{n-1}$. All operations here are over the real numbers.\n\n**Output:** Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].\n\nPut $h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$ for $0\\le i<n-1$. Write $\\operatorname{sgn}(r)\\in\\{-1,0,1\\}$ for the sign of a real number.\n\n- If $n=2$, set $m_0=m_1=d_0$.\n- If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For $n\\ge3$, at the left endpoint compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.\n- For $n\\ge3$, at the right endpoint compute\n  $$\\widehat m_{n-1}=\\frac{(2h_{n-2}+h_{n-3})d_{n-2}-h_{n-2}d_{n-3}}{h_{n-2}+h_{n-3}}.$$\n  Apply the preceding clip and cap rule with $d_0,d_1$ replaced by $d_{n-2},d_{n-3}$ and $m_0,\\widehat m_0$ replaced by $m_{n-1},\\widehat m_{n-1}$.\n\nFor $n\\ge3$, the algorithm returns the Hermite pieces from the stated values and selected slopes. The two-node branch is the line through the two input points.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pchip-shape-preserving-no-overshoot",
+          "source_section": "Statement",
+          "quote": "For every input to [[alg-pchip-slope-selection]], the resulting interpolant is $C^1$ and interpolates all input values. On each cell with nonzero secant $d_i$, the interpolant is monotone from $y_i$ to $y_{i+1}$ and stays between those endpoint values; on a cell with $d_i=0$ it is constant. In particular, if the input values are nondecreasing (respectively nonincreasing), the complete interpolant is nondecreasing (respectively nonincreasing). No $C^2$ matching is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each displayed piece has endpoint values $S_0(0)=1$, $S_0(1)=0$, $S_1(0)=S_1(1)=0$, $S_2(0)=0$, and $S_2(1)=1$, so the pieces interpolate the given table. By [F4], their first derivatives are $S_0'=-6/5+3t^2/5$, $S_1'=-3/5+6t/5$, and $S_2'=3/5+6t/5-3t^2/5$; the derivative values match at both shared knots. Their second derivatives are $S_0''=6t/5$, $S_1''=6/5$, and $S_2''=6/5-6t/5$; these match at shared knots, and $S_0''(0)=S_2''(1)=0$. By [F1], this is a natural cubic spline.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<t<1$, $S_1(t)=-3t(1-t)/5<0$, although every tabulated value is nonnegative. Thus the natural cubic spline undershoots the data range on the middle cell.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The secants are $d_0=-1$, $d_1=0$, and $d_2=1$. By [F2], the interior slopes at nodes $1$ and $2$ are both zero because each neighboring pair includes a zero secant; the Hermite piece joining the two zero values with zero slopes is constant zero. By [F3], the first and last PCHIP pieces remain between $1$ and $0$, and between $0$ and $1$, respectively. Hence PCHIP is nonnegative throughout the interval and does not reproduce the natural spline's undershoot.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes a four-node table."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The table includes zero data values and the zero middle secant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example contains three explicit cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The middle interval has equal zero endpoint data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Verification 1.1 checks endpoint values and endpoint second derivatives."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Each function and slope is explicitly defined without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        }
+      ]
+    },
+    "ex-pchip-flat-monotone-data": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "**Inputs:** An integer $n\\ge2$, strictly increasing real nodes $x_0<\\cdots<x_{n-1}$, and real values $y_0,\\ldots,y_{n-1}$. All operations here are over the real numbers.\n\n**Output:** Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].\n\nPut $h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$ for $0\\le i<n-1$. Write $\\operatorname{sgn}(r)\\in\\{-1,0,1\\}$ for the sign of a real number.\n\n- If $n=2$, set $m_0=m_1=d_0$.\n- If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For $n\\ge3$, at the left endpoint compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.\n- For $n\\ge3$, at the right endpoint compute\n  $$\\widehat m_{n-1}=\\frac{(2h_{n-2}+h_{n-3})d_{n-2}-h_{n-2}d_{n-3}}{h_{n-2}+h_{n-3}}.$$\n  Apply the preceding clip and cap rule with $d_0,d_1$ replaced by $d_{n-2},d_{n-3}$ and $m_0,\\widehat m_0$ replaced by $m_{n-1},\\widehat m_{n-1}$.\n\nFor $n\\ge3$, the algorithm returns the Hermite pieces from the stated values and selected slopes. The two-node branch is the line through the two input points.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pchip-shape-preserving-no-overshoot",
+          "source_section": "Statement",
+          "quote": "For every input to [[alg-pchip-slope-selection]], the resulting interpolant is $C^1$ and interpolates all input values. On each cell with nonzero secant $d_i$, the interpolant is monotone from $y_i$ to $y_{i+1}$ and stays between those endpoint values; on a cell with $d_i=0$ it is constant. In particular, if the input values are nondecreasing (respectively nonincreasing), the complete interpolant is nondecreasing (respectively nonincreasing). No $C^2$ matching is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The secants are $d_0=1$, $d_1=0$, and $d_2=1$. The interior rule in [F1] gives $m_1=m_2=0$. The endpoint rule gives $\\widehat m_0=((3)(1)-0)/2=3/2$ and, by reflection, $\\widehat m_3=3/2$; neither clip nor cap changes these values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the middle cell both endpoint values are $1$ and both slopes are zero, so the Hermite formula is the constant polynomial $1$. On the first cell it is $-t^3/2+3t/2$, and on the last cell it is $1+3t^2/2-t^3/2$, for normalized local coordinate $t\\in[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The shape theorem [F2] makes the first and last pieces monotone from $0$ to $1$ and from $1$ to $2$ and makes the middle piece constant. Thus the interpolant is globally nondecreasing, has no overshoot, and retains the flat interval exactly.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes its four-node input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example includes the zero secant and constant cell."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example has four nodes and three cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The adjacent equal values make the middle cell degenerate to a constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Verification 1.1 covers both endpoint slope rules."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The algorithm is deterministic and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no equivalence."
+        }
+      ]
+    },
+    "ex-pchip-limiter-second-order-at-smooth-extremum": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pchip-slope-selection",
+          "source_section": "Definition",
+          "quote": "**Inputs:** An integer $n\\ge2$, strictly increasing real nodes $x_0<\\cdots<x_{n-1}$, and real values $y_0,\\ldots,y_{n-1}$. All operations here are over the real numbers.\n\n**Output:** Slopes $m_0,\\ldots,m_{n-1}$ and the piecewise cubic Hermite interpolant determined by these nodes, values, and slopes under [[def-piecewise-cubic-hermite-interpolant]].\n\nPut $h_i=x_{i+1}-x_i>0$ and $d_i=(y_{i+1}-y_i)/h_i$ for $0\\le i<n-1$. Write $\\operatorname{sgn}(r)\\in\\{-1,0,1\\}$ for the sign of a real number.\n\n- If $n=2$, set $m_0=m_1=d_0$.\n- If $n\\ge3$, for each interior node $1\\le k\\le n-2$, set $m_k=0$ when $d_{k-1}d_k\\le0$. When $d_{k-1}d_k>0$, put $w_1=2h_k+h_{k-1}$, $w_2=h_k+2h_{k-1}$, and\n  $$m_k=\\frac{w_1+w_2}{w_1/d_{k-1}+w_2/d_k}.$$\n- For $n\\ge3$, at the left endpoint compute\n  $$\\widehat m_0=\\frac{(2h_0+h_1)d_0-h_0d_1}{h_0+h_1}.$$\n  Set $m_0=0$ if $\\operatorname{sgn}(\\widehat m_0)\\ne\\operatorname{sgn}(d_0)$. Otherwise set $m_0=3d_0$ if $d_0d_1<0$ and $|\\widehat m_0|>3|d_0|$; in all remaining cases set $m_0=\\widehat m_0$.\n- For $n\\ge3$, at the right endpoint compute\n  $$\\widehat m_{n-1}=\\frac{(2h_{n-2}+h_{n-3})d_{n-2}-h_{n-2}d_{n-3}}{h_{n-2}+h_{n-3}}.$$\n  Apply the preceding clip and cap rule with $d_0,d_1$ replaced by $d_{n-2},d_{n-3}$ and $m_0,\\widehat m_0$ replaced by $m_{n-1},\\widehat m_{n-1}$.\n\nFor $n\\ge3$, the algorithm returns the Hermite pieces from the stated values and selected slopes. The two-node branch is the line through the two input points.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-piecewise-cubic-hermite-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer, let $x_0<\\cdots<x_N$ be real nodes, let $y_0,\\ldots,y_N\\in\\mathbb R$ be values, and let $m_0,\\ldots,m_N\\in\\mathbb R$ be prescribed slopes. For $0\\le i<N$ put $h_i=x_{i+1}-x_i>0$ and $t=(x-x_i)/h_i$ on $[x_i,x_{i+1}]$. Define\n$$H_{00}(t)=2t^3-3t^2+1,\\quad H_{01}(t)=-2t^3+3t^2,\\quad H_{10}(t)=t^3-2t^2+t,\\quad H_{11}(t)=t^3-t^2.$$\nThe cubic Hermite piece on $[x_i,x_{i+1}]$ is\n$$P_i(x)=y_iH_{00}(t)+y_{i+1}H_{01}(t)+h_im_iH_{10}(t)+h_im_{i+1}H_{11}(t).$$\nThe piecewise cubic Hermite interpolant is the function whose restriction to each such interval is $P_i$; adjacent pieces use their common prescribed value $y_i$ at a shared node. The slopes $m_i$ are input data, not values inferred from neighboring pieces.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pchip-third-order-away-from-extrema",
+          "source_section": "Statement",
+          "quote": "Let $f$ be $C^3$ on an open interval containing $[a,b]$, with $|f'(x)|\\ge c>0$ on $[a,b]$. On uniform grids $x_j=a+jh$, $j=0,\\ldots,N$, $N\\ge2$, let $P_h$ be the PCHIP interpolant to the values $f(x_j)$. There are constants $C,h_0>0$, depending only on $f$, $c$, and $[a,b]$, such that for every $h<h_0$,\n$$\\max_{x\\in[a,b]}|P_h(x)-f(x)|\\le Ch^3.$$\nThe assertion is limited to uniform grids and intervals on which the derivative stays bounded away from zero; it makes no third-order claim at an extremum.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The four secants are $d_0=-3h$, $d_1=-h$, $d_2=h$, and $d_3=3h$. At $x=-h$, the equal-width weights are $3h,3h$, so [F1] gives $m(-h)=6h/(3h/(-3h)+3h/(-h))=-3h/2$. At $x=0$ the adjacent secants have opposite signs, so [F1] gives $m(0)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With $t=(x+h)/h$ on $[-h,0]$, [F2] gives $P_h(x)/h^2=H_{00}(t)-\\frac32H_{10}(t)=1-\\frac32t+\\frac12t^3$, whereas $f(x)/h^2=(1-t)^2$. Therefore $(P_h(x)-f(x))/h^2=\\frac12t(1-t)^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At $t=1/3$, step 2.1 gives $P_h-f=2h^2/27$. Hence a uniform bound $|P_h-f|\\le Ch^3$ on cells adjacent to this extremum would imply $2/27\\le Ch$ for every sufficiently small $h$, which is impossible as $h\\to0$. The hypothesis $|f'|\\ge c>0$ in [F3] also fails because [F4] gives $f'(0)=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes h>0 and five nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The two secants at the extremum have opposite nonzero signs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The five-node grid includes the adjacent interior cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The witness is a strict stationary point at zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Verification 1.2 evaluates the exact error at an interior point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The calculation is explicit and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example refutes an extension rather than asserting an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example refutes an extension rather than asserting an equivalence."
+        }
+      ]
+    }
+  }
+}

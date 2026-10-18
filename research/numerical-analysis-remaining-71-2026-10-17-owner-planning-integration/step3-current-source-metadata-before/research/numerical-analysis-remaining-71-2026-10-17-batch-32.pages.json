@@ -1,0 +1,375 @@
+[
+  {
+    "order": 2618,
+    "id": "high-resolution-tvd-eno-and-weno-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "High-resolution TVD, ENO and WENO reconstruction",
+    "companion": "high-resolution-tvd-eno-and-weno-methods-examples",
+    "requires": [
+      "polynomial-interpolation-and-remainder",
+      "monotone-finite-volume-entropy-convergence",
+      "riemann-solvers-for-hyperbolic-systems"
+    ],
+    "items": [
+      {
+        "id": "def-na-high-resolution-reconstruction",
+        "kind": "definition",
+        "title": "Finite-volume MUSCL, nodal ENO2 and WENO5 reconstruction conventions",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "On a uniform grid, distinguish cell averages from nodal values and define the scalar MUSCL/minmod, nodal ENO2 and left-biased cell-average WENO5-JS/WENO-Z face reconstructions, including their scalar-advection update and characteristic-system interpretation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chi-Wang Shu, Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws, complete lecture notes",
+              "url": "https://www3.nd.edu/~zxu2/acms60790S13/Shu-WENO-notes.pdf",
+              "locator": "§§2.1.1 and 2.2.1–2.2.2, PDF pp. 3–21: reconstruction from cell averages, ENO stencil selection, WENO convex weights and Jiang–Shu indicators."
+            },
+            {
+              "title": "Guang-Shan Jiang and Chi-Wang Shu, Efficient Implementation of Weighted ENO Schemes",
+              "url": "https://lsec.cc.ac.cn/lcfd/DEWENO/paper/WENO_1996.pdf",
+              "locator": "§§2–4, PDF pp. 3–18: WENO candidate stencils, smoothness indicators, nonlinear weights and optimal linear combination."
+            },
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§3.1–3.3, PDF pp. 31–35: piecewise-linear MUSCL cell reconstruction, minmod slopes and the fully discrete CFL distinction."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-linear-monotone-first-order-barrier",
+        "kind": "theorem",
+        "title": "A monotone linear one-step advection scheme cannot be second order at noninteger CFL",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "For a fixed noninteger Courant number, no finite-stencil translation-invariant conservative linear one-step scheme for scalar advection is both monotone and second-order accurate.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws, full textbook",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 16 §16.1, Theorem 16.1, printed pp. 174–175 (PDF pp. 187–188): a linear monotonicity-preserving method is at most first order."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-eno2-reconstruction-third-order",
+        "kind": "lemma",
+        "title": "The selected nodal ENO2 quadratic reconstructs the face to third order",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "thm-lagrange-interpolation-remainder"
+        ],
+        "dependency_level": 1,
+        "statement": "For nodal data from a C3 scalar function on a uniform grid, either quadratic selected by the stated ENO2 divided-difference rule approximates the intervening face value with error O(h^3), including ties.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chi-Wang Shu, Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws, complete lecture notes",
+              "url": "https://www3.nd.edu/~zxu2/acms60790S13/Shu-WENO-notes.pdf",
+              "locator": "§§2.1.1 and 2.2.1, PDF pp. 3–17: polynomial interpolation and ENO divided-difference stencil selection."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-weno5-optimal-linear-reconstruction",
+        "kind": "lemma",
+        "title": "The WENO5 ideal linear weights reproduce quartics at the right face",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 1,
+        "statement": "The ideal WENO5 weights (1/10, 6/10, 3/10) combine the three displayed cell-average candidate functionals into a fifth-order right-face reconstruction.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chi-Wang Shu, Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws, complete lecture notes",
+              "url": "https://www3.nd.edu/~zxu2/acms60790S13/Shu-WENO-notes.pdf",
+              "locator": "§2.2.2, PDF pp. 18–21: optimal linear weights, candidate cell-average reconstructions and fifth-order consistency."
+            },
+            {
+              "title": "Guang-Shan Jiang and Chi-Wang Shu, Efficient Implementation of Weighted ENO Schemes",
+              "url": "https://lsec.cc.ac.cn/lcfd/DEWENO/paper/WENO_1996.pdf",
+              "locator": "§§2–3, PDF pp. 3–13: fifth-order WENO candidate functionals and their optimal linear combination."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-musc-minmod-second-order-on-smooth-data",
+        "kind": "theorem",
+        "title": "MUSCL/minmod face states are second order on smooth monotone data",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 1,
+        "statement": "If a C3 scalar profile is strictly monotone near a uniform-grid cell, its minmod-limited MUSCL face states approximate the exact face values with error O(h^2).",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§3.1–3.3, PDF pp. 31–35: cell-centered piecewise-linear MUSCL reconstruction and minmod selection."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl",
+        "kind": "theorem",
+        "title": "Direct forward-Euler MUSCL/minmod is TVD under the sharp two-thirds CFL bound",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "For the unchanged direct linear-advection forward-Euler MUSCL/minmod update, finite-variation bi-infinite or periodic data have nonincreasing total variation for |a|Δt/h≤2/3, including equality; the bound is sharp throughout the original CFL range through one.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§3.1–3.3, PDF pp. 31–35: equation (3.1.2) is the direct MUSCL update, equation (3.3.1) is minmod, and equation (3.3.8) gives the sufficient CFL restriction. The variation estimate, signed-velocity reduction and sharpness are proved locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+        "kind": "counterexample",
+        "title": "The specified direct MUSCL/minmod flux update is not TVD at CFL one",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "The direct reconstructed-upwind forward-Euler update in the PE02 design is not total-variation diminishing for every CFL number in [0,1].",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§3.3, PDF pp. 32–35, especially condition (3.3.8): the minmod MUSCL update requires an additional CFL restriction; the local finite data below directly refute the PE02 CFL-one assertion."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+        "kind": "theorem",
+        "title": "Fixed-epsilon WENO-JS and WENO-Z face reconstructions are fifth order",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction"
+        ],
+        "dependency_level": 2,
+        "statement": "For C5 data and a fixed positive dimensionally scaled epsilon, the displayed WENO-JS and WENO-Z cell-average reconstructions have fifth-order face error as h tends to zero.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Guang-Shan Jiang and Chi-Wang Shu, Efficient Implementation of Weighted ENO Schemes",
+              "url": "https://lsec.cc.ac.cn/lcfd/DEWENO/paper/WENO_1996.pdf",
+              "locator": "§§2–3, PDF pp. 3–13: Jiang–Shu indicators, normalized nonlinear weights and fifth-order smooth-region reconstruction."
+            },
+            {
+              "title": "Chi-Wang Shu, Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws, complete lecture notes",
+              "url": "https://www3.nd.edu/~zxu2/acms60790S13/Shu-WENO-notes.pdf",
+              "locator": "§2.2.2, PDF pp. 18–21: accuracy condition for convex WENO weights and the fifth-order cell-average construction."
+            },
+            {
+              "title": "Andrew K. Henrick, Tariq D. Aslam and Joseph M. Powers, Mapped weighted essentially non-oscillatory schemes: Achieving optimal order near critical points",
+              "url": "https://academicweb.nd.edu/~powers/paper.list/jcp.weno5m.05.pdf",
+              "locator": "§4.3–4.5, printed pp. 552–554: the WENO-JS order depends on epsilon and resolution; the critical-point analysis distinguishes the fixed-epsilon limiting regime from small scale-dependent epsilon. The source studies finite-difference fluxes; this item proves the finite-volume face-state claim locally."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2619,
+    "id": "high-resolution-tvd-eno-and-weno-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "High-resolution TVD, ENO and WENO reconstruction — Examples",
+    "companion": "high-resolution-tvd-eno-and-weno-methods",
+    "requires": [
+      "high-resolution-tvd-eno-and-weno-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-na-minmod-extremum-clipping",
+        "kind": "example",
+        "title": "Minmod clips the slope at a smooth quadratic maximum",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "For cell averages of u(x)=1-x^2 on a uniform grid centered at zero, minmod sets the central slope to zero and reconstructs both adjacent face states as the central average.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-na-unlimited-centered-reconstruction-overshoots",
+        "kind": "counterexample",
+        "title": "Unlimited centered reconstruction creates new extrema on a step",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "Unlimited centered slopes with the reconstructed upwind forward-Euler update can increase total variation and create values outside the initial range even at CFL one half.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-na-smooth-linear-advection-reconstruction",
+        "kind": "example",
+        "title": "MUSCL and WENO reconstruct a translating affine profile exactly",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction",
+          "thm-na-musc-minmod-second-order-on-smooth-data",
+          "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction"
+        ],
+        "dependency_level": 3,
+        "statement": "For u(x,t)=x-at on a uniform grid, minmod MUSCL and every normalized WENO variant reconstruct the upwind face value exactly and the conservative update advances the cell averages exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-weno-js-critical-point-epsilon-scaling",
+        "kind": "example",
+        "title": "A first-order critical point exposes WENO-JS epsilon scaling",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction",
+          "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction"
+        ],
+        "dependency_level": 3,
+        "statement": "For cell averages of u(x)=x^2+x^3 at the face x=0, the WENO-JS choice epsilon=h^4 gives a fourth-order face error, while fixed epsilon and the displayed WENO-Z comparison retain at least fifth order.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew K. Henrick, Tariq D. Aslam and Joseph M. Powers, Mapped weighted essentially non-oscillatory schemes: Achieving optimal order near critical points",
+              "url": "https://academicweb.nd.edu/~powers/paper.list/jcp.weno5m.05.pdf",
+              "locator": "§§4.2–4.5, printed pp. 552–554: the WENO-JS order depends on epsilon and resolution at critical points. The source analyzes finite-difference fluxes; the cell-average face calculation here is performed explicitly."
+            },
+            {
+              "title": "Guang-Shan Jiang and Chi-Wang Shu, Efficient Implementation of Weighted ENO Schemes",
+              "url": "https://lsec.cc.ac.cn/lcfd/DEWENO/paper/WENO_1996.pdf",
+              "locator": "§3, PDF pp. 7–13: the WENO-JS smoothness indicators and normalized weights used in the calculation."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-burgers-godunov-musc-shock",
+        "kind": "example",
+        "title": "Positive-state Burgers shock and the monotone finite-volume baseline",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme",
+          "def-kruzhkov-entropy-solution",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "thm-monotone-finite-volume-entropy-convergence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "For the Burgers Riemann datum 1 to 0, the entropy shock travels at speed 1/2; the positive-state Godunov flux is monotone and the batch-29 convergence theorem applies to its first-order finite-volume baseline.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§2.2.2–2.3.3, PDF pp. 15–23, and §3.3, pp. 32–35: positive-state Burgers Godunov flux, monotone finite-volume convergence context and minmod MUSCL reconstruction."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,1428 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-pe03-euler-llf-split-state-positive",
+    "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+    "lem-pe03-hll-half-cell-riemann-averages",
+    "thm-pe03-hll-update-preserves-convex-invariant-domain",
+    "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+    "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+    "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+    "ex-pe03-burgers-entropy-residual",
+    "ex-pe03-conservative-positivity-rescaling",
+    "ex-pe03-entropy-stable-underresolved-shock",
+    "ex-pe03-near-vacuum-euler-hll-update"
+  ],
+  "contracts": {
+    "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-euler-positive-margin-domain",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$, and use the state variables and internal\nenergy density from [[def-ideal-gas-euler-state-and-pressure]]. Define the\n**positive-margin set**\n$$K_{\\gamma,\\varepsilon}:=\\left\\{(\\rho,m,E):\\rho\\ge\\varepsilon,\\quad E-\\frac{m^2}{2\\rho}\\ge\\varepsilon\\right\\}.$$\nEvery member has positive density and positive pressure. Closedness and\nconvexity are proved in\n[[prop-pe03-euler-state-and-margin-domains-are-convex-and-closed]]; those properties are not\nbeing inferred from this definition alone.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $U_k=(\\rho_k,m_k,E_k)\\in\\mathcal G_\\gamma$ for $k=1,2$ and $0\\le\\theta\\le1$. Put $\\rho_\\theta=\\theta\\rho_1+(1-\\theta)\\rho_2$ and similarly define $m_\\theta,E_\\theta$. Weighted Cauchy–Schwarz applied to $m_\\theta=\\sqrt{\\theta\\rho_1}(\\sqrt\\theta m_1/\\sqrt{\\rho_1})+\\sqrt{(1-\\theta)\\rho_2}(\\sqrt{1-\\theta}m_2/\\sqrt{\\rho_2})$ gives $m_\\theta^2\\le\\rho_\\theta\\bigl(\\theta m_1^2/\\rho_1+(1-\\theta)m_2^2/\\rho_2\\bigr)$. Thus $\\rho_\\theta>0$ and $E_\\theta-m_\\theta^2/(2\\rho_\\theta)\\ge\\theta(E_1-m_1^2/(2\\rho_1))+(1-\\theta)(E_2-m_2^2/(2\\rho_2))>0$. Therefore $\\mathcal G_\\gamma$ is convex.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $U_1,U_2\\in K_{\\gamma,\\varepsilon}$, the weighted Cauchy–Schwarz inequality in step 1.1 gives $\\rho_\\theta\\ge\\varepsilon$ and $E_\\theta-m_\\theta^2/(2\\rho_\\theta)\\ge\\theta\\varepsilon+(1-\\theta)\\varepsilon=\\varepsilon$. Hence $K_{\\gamma,\\varepsilon}$ is convex.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $U_n=(\\rho_n,m_n,E_n)\\in K_{\\gamma,\\varepsilon}$ converges to $U=(\\rho,m,E)$, then $\\rho\\ge\\varepsilon>0$ and continuity of $(\\rho,m,E)\\mapsto E-m^2/(2\\rho)$ on $\\rho\\ge\\varepsilon$ gives $E-m^2/(2\\rho)\\ge\\varepsilon$. Thus $U\\in K_{\\gamma,\\varepsilon}$, proving closedness.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the endpoint theta=0 in the weighted inequality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes theta=1 and uses the positive internal energy of that endpoint state."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate branch is asserted beyond the strict hypotheses stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 retain theta=0 and theta=1, including the epsilon boundary of the margin set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "proposition"
+    },
+    "lem-pe03-euler-llf-split-state-positive": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\delta\\in\\{-1/a,1/a\\}$. From [F1], direct substitution in $U+\\delta F(U)$ gives $\\rho_\\delta=\\rho(1+\\delta u)=\\rho x$, $m_\\delta=\\rho u(1+\\delta u)+\\delta p$, and $E_\\delta=E+\\delta u(E+p)$. Expanding $E_\\delta-m_\\delta^2/(2\\rho_\\delta)$ and using $E=e+\\rho u^2/2$ yields $e_\\delta=e x-\\delta^2p^2/(2\\rho x)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $a\\ge|u|+c$ and $c>0$, $x\\ge1-|u|/a\\ge c/a>0$, so $\\rho_\\delta>0$. Also $|\\delta|/x\\le1/c$, hence $\\frac{\\delta^2p^2}{2\\rho e x^2}\\le\\frac{p^2}{2\\rho e c^2}=\\frac{\\gamma-1}{2\\gamma}<1$. Therefore $e_\\delta=e x\\left(1-\\frac{\\delta^2p^2}{2\\rho e x^2}\\right)>0$, so $U_\\delta\\in\\mathcal G_\\gamma$. The argument covers both signs of $\\delta$ and the equality case $a=|u|+c$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid at u=0, where x=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No exponent or one-element parameter is part of the stated claim unless named in the checked evidence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves c>0 and x>0, so the denominator cannot degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly includes the equality case a=|u|+c."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "lem-pe03-hll-half-cell-riemann-averages": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hll-two-wave-flux",
+          "source_section": "Definition",
+          "quote": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hll-two-wave-flux",
+          "source_section": "Definition",
+          "quote": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe03-first-order-hll-finite-volume-update",
+          "source_section": "Definition",
+          "quote": "Let $F:\\mathcal A\\to\\mathbb R^m$ be the flux of the one-dimensional system in\n[[def-hyperbolic-system-and-characteristic-families]]. On a periodic uniform\nmesh of $N\\ge2$ cells of width $h>0$, let $U_i\\in\\mathcal A$ be the cell means\nand put $\\nu=\\Delta t/h\\ge0$. At each face $(i+1/2)$ choose explicit speeds\n$S_{L,i+1/2}<0<S_{R,i+1/2}$ and evaluate the middle branch of the HLL flux\n[[def-hll-two-wave-flux]] on $(U_i,U_{i+1})$. The **first-order HLL update** is\n$$U_i^+=U_i-\\nu\\bigl(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\bigr),\\qquad i\\pmod N.$$\nThe speeds are supplied data. Neither this definition nor later algebraic\nresults assert that they enclose the wave speeds of an exact nonlinear Riemann\nsolution.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $D=S_R-S_L>0$. Substitution of $U_*$ gives $U_*-U_L=(S_R(U_R-U_L)-(F_R-F_L))/D$ and $U_*-U_R=(S_L(U_R-U_L)-(F_R-F_L))/D$. Therefore $F_L+S_L(U_*-U_L)=F_R+S_R(U_*-U_R)$, and expanding either side yields exactly [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], in coordinates with the face at $x=0$ the HLL profile is $U_L$ for $x/t<S_L$, $U_*$ for $S_L<x/t<S_R$, and $U_R$ for $x/t>S_R$. On $[-h/2,0]$ at time $\\Delta t$, the two portions have lengths $h/2+S_L\\Delta t$ and $-S_L\\Delta t$; dividing by $h/2$ gives $A^-$. The CFL condition makes both lengths nonnegative. On $[0,h/2]$, the portions have lengths $S_R\\Delta t$ and $h/2-S_R\\Delta t$; dividing by $h/2$ gives $A^+$, again with nonnegative lengths.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the right face of cell $i$, step 1.1 gives $\\widehat F_{i+1/2}=F(U_i)+S_{L,i+1/2}(U_{*,i+1/2}-U_i)$; at its left face it gives $\\widehat F_{i-1/2}=F(U_i)+S_{R,i-1/2}(U_{*,i-1/2}-U_i)$. Substitution in [F3] yields $U_i^+=(1-\\nu a_R-\\nu a_L)U_i+\\nu a_RU_{*,i+1/2}+\\nu a_LU_{*,i-1/2}$, where $a_R=-S_{L,i+1/2}$ and $a_L=S_{R,i-1/2}$. The half-sum $\\tfrac12(A^+_{i-1/2}+A^-_{i+1/2})$ has those same three coefficients, proving the identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives A-minus=U_L and A-plus=U_R when nu=0; step 3.1 then leaves the cell mean unchanged."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No exponent or one-element parameter is part of the stated claim unless named in the checked evidence."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate branch is asserted beyond the strict hypotheses stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 permits equality in either CFL bound, where one wave portion has zero length."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "lemma"
+    },
+    "thm-pe03-hll-update-preserves-convex-invariant-domain": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe03-convex-invariant-domain",
+          "source_section": "Definition",
+          "quote": "Let $m,N\\ge1$, let $\\mathcal A\\subseteq\\mathbb R^m$ be a state domain, and let\n$\\Phi:\\mathcal A^N\\to\\mathcal A^N$ be a one-step update on $N$ cell states.\nA set $K\\subseteq\\mathcal A$ is **convex** if\n$\\theta U+(1-\\theta)V\\in K$ for every $U,V\\in K$ and $\\theta\\in[0,1]$.\nIt is a **convex invariant domain for $\\Phi$** if it is convex and\n$\\Phi(K^N)\\subseteq K^N$. The word invariant refers only to this stated\none-step map and its stated admissible inputs; it asserts no invariance for a\ndifferent flux, time integrator, or exact Riemann evolution.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pe03-hll-half-cell-riemann-averages",
+          "source_section": "Statement",
+          "quote": "Use the first-order HLL update of\n[[def-pe03-first-order-hll-finite-volume-update]]. At a face with left and right\nstates $U_L,U_R$, supplied speeds $S_L<0<S_R$, and physical flux values\n$F_L=F(U_L),F_R=F(U_R)$, define\n$$U_*:=\\frac{S_RU_R-S_LU_L-(F_R-F_L)}{S_R-S_L}.$$\nIf the one-sided CFL bounds $2\\nu(-S_L)\\le1$ and $2\\nu S_R\\le1$ hold, the\naverages of the HLL fan over the adjacent left and right half-cells are,\nrespectively,\n$$A^-=(1-2\\nu(-S_L))U_L+2\\nu(-S_L)U_*,\\qquad A^+=(1-2\\nu S_R)U_R+2\\nu S_RU_*.$$\nFor every cell $i$, the updated mean satisfies\n$$U_i^+=\\frac12\\left(A^+_{i-1/2}+A^-_{i+1/2}\\right),$$\nwhere each face uses its own supplied speeds and intermediate state.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At each face, the stated HLL fan-average hypothesis gives $A^-,A^+\\in K$. In the sufficient intermediate-state case, the CFL bounds make the coefficients in each formula of [F2] nonnegative and sum to one, so convexity and $U_L,U_R,U_*\\in K$ give the same conclusion.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $U_i^+=\\tfrac12(A^+_{i-1/2}+A^-_{i+1/2})$. This is a convex combination of two members of $K$, so $U_i^+\\in K$ for every cell. The argument is one-step and uses only the supplied HLL speeds and the explicit CFL bounds.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No independent zero-valued parameter boundary is asserted beyond the explicit cases listed as checked."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No exponent or one-element parameter is part of the stated claim unless named in the checked evidence."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate branch is asserted beyond the strict hypotheses stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 allows a CFL coefficient to equal zero while all convex weights remain nonnegative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem"
+    },
+    "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe03-system-entropy-pair-and-potential",
+          "source_section": "Definition",
+          "quote": "Use the conservation-system convention of\n[[def-hyperbolic-system-and-characteristic-families]]: on an open convex state\ndomain $\\mathcal A\\subseteq\\mathbb R^m$, the flux is $F:\\mathcal A\\to\\mathbb R^m$.\nA **convex entropy pair** is a pair $(\\eta,q)$ with $\\eta\\in C^2(\\mathcal A)$,\n$q\\in C^1(\\mathcal A)$, positive-semidefinite Hessian $D^2\\eta$, and\n$$Dq(U)=D\\eta(U)\\,DF(U)\\qquad(U\\in\\mathcal A).$$\nThe **entropy variable** is the column vector $v(U)=\\nabla\\eta(U)$; gradients\nare represented as columns, so the compatibility equation above means\n$\\nabla q(U)=DF(U)^T v(U)$. The **entropy potential** is\n$\\psi(U)=v(U)^T F(U)-q(U)$. This definition does not assert that every convex\n$\\eta$ admits a flux $q$; the compatibility equation is part of the hypothesis.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-tadmor-entropy-conservative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be a convex entropy pair on an open domain $\\mathcal A$, with\nentropy variable $v$ and potential $\\psi$ as in\n[[def-pe03-system-entropy-pair-and-potential]]. A continuous two-point flux\n$F^{ec}:\\mathcal A\\times\\mathcal A\\to\\mathbb R^m$ is **entropy-conservative\nin Tadmor's sense** if it is consistent and symmetric,\n$F^{ec}(U,U)=F(U)$, and satisfies the exact jump identity\n$$\\bigl(v(U_R)-v(U_L)\\bigr)^T F^{ec}(U_L,U_R)=\\psi(U_R)-\\psi(U_L)$$\nfor every pair $U_L,U_R\\in\\mathcal A$. This definition asserts no existence\nfor a prescribed entropy pair.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe03-entropy-stable-dissipative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be an entropy pair with entropy variable $v$ and potential\n$\\psi$, and let $F^{ec}$ be a consistent entropy-conservative flux as in\n[[def-pe03-tadmor-entropy-conservative-flux]]. For each pair\n$(U_L,U_R)\\in\\mathcal A^2$, choose a symmetric positive-semidefinite matrix\n$D(U_L,U_R)\\in\\mathbb R^{m\\times m}$. The associated **entropy-stable\ndissipative flux** is\n$$F^{es}(U_L,U_R):=F^{ec}(U_L,U_R)-\\frac12D(U_L,U_R)(v(U_R)-v(U_L)).$$\nPositive semidefinite means $z^TD(U_L,U_R)z\\ge0$ for every $z\\in\\mathbb R^m$.\nNo fully discrete time-step property is included.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At a face, [F2]–[F3] give $[v]^TF^{es}=[\\psi]-\\tfrac12[v]^TD[v]\\le[\\psi]$, since $[v]^TD[v]\\ge0$. This uses only positive semidefiniteness, including the case where the jump or dissipation vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $[v]_{i+1/2}=v_{i+1}-v_i$ and $[\\psi]_{i+1/2}=\\psi_{i+1}-\\psi_i$, and use the arithmetic means in the definition of $\\widehat q$. Then $-v_i^TF^{es}_{i+1/2}+\\widehat q_{i+1/2}=\\tfrac12[v]_{i+1/2}^TF^{es}_{i+1/2}-\\tfrac12(\\psi_i+\\psi_{i+1})$ and $v_i^TF^{es}_{i-1/2}-\\widehat q_{i-1/2}=\\tfrac12[v]_{i-1/2}^TF^{es}_{i-1/2}+\\tfrac12(\\psi_{i-1}+\\psi_i)$. At equal states the same formula gives $\\widehat q=q$ by [F1] and the consistency in [F2], so this is a consistent numerical entropy flux. The right and left interface terms now combine with the entropy-jump defects from step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the chain rule and the semidiscrete update, $\\Delta x\\dot\\eta(U_i)=-v_i^TF^{es}_{i+1/2}+v_i^TF^{es}_{i-1/2}$. Add $\\widehat q_{i+1/2}-\\widehat q_{i-1/2}$ and use step 2.1. The potential terms combine as $-\\tfrac12(\\psi_i+\\psi_{i+1})+\\tfrac12(\\psi_{i-1}+\\psi_i)=-\\tfrac12([\\psi]_{i+1/2}+[\\psi]_{i-1/2})$. Hence $\\Delta x$ times the cell residual equals $\\tfrac12([v]_{i+1/2}^TF^{es}_{i+1/2}-[\\psi]_{i+1/2})+\\tfrac12([v]_{i-1/2}^TF^{es}_{i-1/2}-[\\psi]_{i-1/2})$, which is nonpositive by step 1.1. This proves the local cell inequality; summing it on the periodic mesh cancels all numerical entropy fluxes. No time discretization was used.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers vanishing entropy-variable jump, for which the face defect is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No exponent or one-element parameter is part of the stated claim unless named in the checked evidence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only positive semidefiniteness, so singular dissipation matrices are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional open-endpoint claim is made beyond the endpoint checks listed as checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem"
+    },
+    "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pe03-convex-scaling-positivity-limiter",
+          "source_section": "Definition",
+          "quote": "Let $K\\subseteq\\mathbb R^m$ be closed and convex (convex in the sense of\n[[def-pe03-convex-invariant-domain]]), let $J$ be a finite nonempty\nindex set, let $w_j>0$ with $\\sum_{j\\in J}w_j=1$, and let input states\n$V_j\\in\\mathbb R^m$ have mean $\\bar V=\\sum_jw_jV_j\\in K$. The **maximal\nconvex scaling limiter** returns the largest $\\theta\\in[0,1]$ for which every\n$$V_j^\\theta=\\bar V+\\theta(V_j-\\bar V)$$\nbelongs to $K$, together with all the states $V_j^\\theta$. Equivalently, form\n$$S=\\{\\theta\\in[0,1]:V_j^\\theta\\in K\\text{ for every }j\\in J\\},$$\nand return $\\theta_*:=\\max S$ and $(V_j^{\\theta_*})_{j\\in J}$. The mean is\nassumed admissible; implementation, cost, and any pointwise-in-cell property\nare not part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-euler-positive-margin-domain",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$, and use the state variables and internal\nenergy density from [[def-ideal-gas-euler-state-and-pressure]]. Define the\n**positive-margin set**\n$$K_{\\gamma,\\varepsilon}:=\\left\\{(\\rho,m,E):\\rho\\ge\\varepsilon,\\quad E-\\frac{m^2}{2\\rho}\\ge\\varepsilon\\right\\}.$$\nEvery member has positive density and positive pressure. Closedness and\nconvexity are proved in\n[[prop-pe03-euler-state-and-margin-domains-are-convex-and-closed]]; those properties are not\nbeing inferred from this definition alone.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$. The ideal-gas admissible set\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\ E-\\frac{m^2}{2\\rho}>0\\right\\}$$\nand the positive-margin set $K_{\\gamma,\\varepsilon}$ from\n[[def-pe03-euler-positive-margin-domain]] are convex, and\n$K_{\\gamma,\\varepsilon}$ is closed in $\\mathbb R^3$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The feasible parameter set $S=\\{\\theta\\in[0,1]:\\bar V+\\theta(V_j-\\bar V)\\in K_{\\gamma,\\varepsilon}\\text{ for every }j\\}$ contains $0$. Each node map is continuous and $K_{\\gamma,\\varepsilon}$ is closed by [F3], so each inverse image is closed; the finite intersection $S$ is closed in compact $[0,1]$. Thus $S$ is nonempty compact and has a maximum $\\theta_*$. By its definition, every limited node lies in $K_{\\gamma,\\varepsilon}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using $\\sum_jw_j=1$ and $\\sum_jw_jV_j=\\bar V$, the limited weighted mean is $\\sum_jw_j(\\bar V+\\theta_*(V_j-\\bar V))=\\bar V+\\theta_*(\\bar V-\\bar V)=\\bar V$. By [F2], each limited node has density at least $\\varepsilon>0$ and pressure at least $(\\gamma-1)\\varepsilon>0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If every original $V_j\\in K_{\\gamma,\\varepsilon}$, then $1\\in S$, so $\\theta_*=1$. If a target state has distance at least $\\delta$ from the complement and the candidate differs from it by less than $\\delta$, the candidate belongs to $K_{\\gamma,\\varepsilon}$; applying this at every node makes $1$ feasible. Thus the limiter leaves all candidates unchanged under the stated strict margin, and their reconstruction error is unchanged. The conclusion concerns only the supplied nodes.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves theta=0 is feasible because the mean lies in K."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves theta=1 is feasible when every original node is already in K."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 still attains a maximum when the feasible set is the singleton {0}."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 check both theta=0 and theta=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem"
+    },
+    "thm-pe03-ideal-gas-llf-branch-preserves-positivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hll-two-wave-flux",
+          "source_section": "Definition",
+          "quote": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-pe03-euler-llf-split-state-positive",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$. For $U=(\\rho,m,E)\\in\\mathcal G_\\gamma$, let\n$e=E-m^2/(2\\rho)$, $p=(\\gamma-1)e$, $u=m/\\rho$, and\n$c=\\sqrt{\\gamma p/\\rho}$. If $a\\ge |u|+c$, then both split states\n$$U_\\delta=U+\\delta F(U),\\qquad \\delta\\in\\{-1/a,1/a\\},$$\nbelong to $\\mathcal G_\\gamma$, where $F(U)=(m,m^2/\\rho+p,u(E+p))$.\nMore precisely, with $x=1+\\delta u$ their density and internal-energy density are\n$$\\rho_\\delta=\\rho x,\\qquad e_\\delta=e x-\\frac{\\delta^2p^2}{2\\rho x}>0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$. The ideal-gas admissible set\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\ E-\\frac{m^2}{2\\rho}>0\\right\\}$$\nand the positive-margin set $K_{\\gamma,\\varepsilon}$ from\n[[def-pe03-euler-positive-margin-domain]] are convex, and\n$K_{\\gamma,\\varepsilon}$ is closed in $\\mathbb R^3$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-pe03-hll-half-cell-riemann-averages",
+          "source_section": "Statement",
+          "quote": "Use the first-order HLL update of\n[[def-pe03-first-order-hll-finite-volume-update]]. At a face with left and right\nstates $U_L,U_R$, supplied speeds $S_L<0<S_R$, and physical flux values\n$F_L=F(U_L),F_R=F(U_R)$, define\n$$U_*:=\\frac{S_RU_R-S_LU_L-(F_R-F_L)}{S_R-S_L}.$$\nIf the one-sided CFL bounds $2\\nu(-S_L)\\le1$ and $2\\nu S_R\\le1$ hold, the\naverages of the HLL fan over the adjacent left and right half-cells are,\nrespectively,\n$$A^-=(1-2\\nu(-S_L))U_L+2\\nu(-S_L)U_*,\\qquad A^+=(1-2\\nu S_R)U_R+2\\nu S_RU_*.$$\nFor every cell $i$, the updated mean satisfies\n$$U_i^+=\\frac12\\left(A^+_{i-1/2}+A^-_{i+1/2}\\right),$$\nwhere each face uses its own supplied speeds and intermediate state.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-pe03-hll-update-preserves-convex-invariant-domain",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a convex set in the state domain, and consider a periodic uniform\nmesh and one first-order HLL update as defined in\n[[def-pe03-first-order-hll-finite-volume-update]]. Assume every cell mean\n$U_i\\in K$. At every face impose the **HLL fan-average hypothesis** that the\ntwo adjacent half-cell averages $A^-,A^+$ from\n[[lem-pe03-hll-half-cell-riemann-averages]] lie in $K$, with that lemma's local\nCFL bounds. Then every updated mean $U_i^+$ belongs to $K$. A sufficient\ncondition for the fan-average hypothesis is that every HLL intermediate state\n$U_*\\in K$, because the stated CFL makes each half-cell average a convex\ncombination of a cell state and $U_*$. The result does not assert a bound on\nexact nonlinear wave speeds.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a face with states $U_L,U_R$ and speed $a$. By [F3] applied to $U_L$ and $U_R$, both $U_L+F_L/a$ and $U_R-F_R/a$ lie in $\\mathcal G_\\gamma$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $S_L=-a$, $S_R=a$ into [F2] and using the intermediate-state formula in [F5] gives $U_* = \\tfrac12(U_L+F_L/a)+\\tfrac12(U_R-F_R/a)$. The two weights are nonnegative and sum to one, so [F4] implies $U_*\\in\\mathcal G_\\gamma$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The assumed speed bound gives $a>0$ and the displayed CFL gives $2\\nu a\\le1$, so both HLL half-cell averages have nonnegative convex-combination coefficients. Thus every HLL intermediate state and cell state lies in $\\mathcal G_\\gamma$, and [F6] yields $U_i^+\\in\\mathcal G_\\gamma$ for each cell. By [F1], this means positive density and pressure. The proof makes no claim for the other HLL branches or for fully discrete entropy.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows c>0 and therefore the admitted speed a is strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No exponent or one-element parameter is part of the stated claim unless named in the checked evidence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include equality in the speed and CFL bounds; zero convex weights are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 permits 2 nu a=1, when a half-cell coefficient may vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "kind": "theorem"
+    },
+    "ex-pe03-near-vacuum-euler-hll-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pe03-euler-llf-split-state-positive",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$. For $U=(\\rho,m,E)\\in\\mathcal G_\\gamma$, let\n$e=E-m^2/(2\\rho)$, $p=(\\gamma-1)e$, $u=m/\\rho$, and\n$c=\\sqrt{\\gamma p/\\rho}$. If $a\\ge |u|+c$, then both split states\n$$U_\\delta=U+\\delta F(U),\\qquad \\delta\\in\\{-1/a,1/a\\},$$\nbelong to $\\mathcal G_\\gamma$, where $F(U)=(m,m^2/\\rho+p,u(E+p))$.\nMore precisely, with $x=1+\\delta u$ their density and internal-energy density are\n$$\\rho_\\delta=\\rho x,\\qquad e_\\delta=e x-\\frac{\\delta^2p^2}{2\\rho x}>0.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$. The ideal-gas admissible set\n$$\\mathcal G_\\gamma=\\left\\{(\\rho,m,E):\\rho>0,\\ E-\\frac{m^2}{2\\rho}>0\\right\\}$$\nand the positive-margin set $K_{\\gamma,\\varepsilon}$ from\n[[def-pe03-euler-positive-margin-domain]] are convex, and\n$K_{\\gamma,\\varepsilon}$ is closed in $\\mathbb R^3$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pe03-hll-half-cell-riemann-averages",
+          "source_section": "Statement",
+          "quote": "Use the first-order HLL update of\n[[def-pe03-first-order-hll-finite-volume-update]]. At a face with left and right\nstates $U_L,U_R$, supplied speeds $S_L<0<S_R$, and physical flux values\n$F_L=F(U_L),F_R=F(U_R)$, define\n$$U_*:=\\frac{S_RU_R-S_LU_L-(F_R-F_L)}{S_R-S_L}.$$\nIf the one-sided CFL bounds $2\\nu(-S_L)\\le1$ and $2\\nu S_R\\le1$ hold, the\naverages of the HLL fan over the adjacent left and right half-cells are,\nrespectively,\n$$A^-=(1-2\\nu(-S_L))U_L+2\\nu(-S_L)U_*,\\qquad A^+=(1-2\\nu S_R)U_R+2\\nu S_RU_*.$$\nFor every cell $i$, the updated mean satisfies\n$$U_i^+=\\frac12\\left(A^+_{i-1/2}+A^-_{i+1/2}\\right),$$\nwhere each face uses its own supplied speeds and intermediate state.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$ and a periodic uniform mesh. Suppose every cell state\n$U_i\\in\\mathcal G_\\gamma$. Apply the first-order HLL update of\n[[def-pe03-first-order-hll-finite-volume-update]]. At each face $(i+1/2)$ choose a symmetric HLL\nbranch $S_L=-a_{i+1/2}$, $S_R=a_{i+1/2}$ with\n$$a_{i+1/2}\\ge\\max\\bigl(|u_i|+c_i,|u_{i+1}|+c_{i+1}\\bigr),\\qquad 2\\nu a_{i+1/2}\\le1.$$\nThen one first-order HLL update preserves $\\mathcal G_\\gamma$; in particular,\nevery updated density and pressure is strictly positive. This is the symmetric\nlocal Lax–Friedrichs branch with a stated speed bound, not a claim that arbitrary\nHLL speed estimates are valid or that the bound is necessary.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-pe03-first-order-hll-finite-volume-update",
+          "source_section": "Definition",
+          "quote": "Let $F:\\mathcal A\\to\\mathbb R^m$ be the flux of the one-dimensional system in\n[[def-hyperbolic-system-and-characteristic-families]]. On a periodic uniform\nmesh of $N\\ge2$ cells of width $h>0$, let $U_i\\in\\mathcal A$ be the cell means\nand put $\\nu=\\Delta t/h\\ge0$. At each face $(i+1/2)$ choose explicit speeds\n$S_{L,i+1/2}<0<S_{R,i+1/2}$ and evaluate the middle branch of the HLL flux\n[[def-hll-two-wave-flux]] on $(U_i,U_{i+1})$. The **first-order HLL update** is\n$$U_i^+=U_i-\\nu\\bigl(\\widehat F_{i+1/2}-\\widehat F_{i-1/2}\\bigr),\\qquad i\\pmod N.$$\nThe speeds are supplied data. Neither this definition nor later algebraic\nresults assert that they enclose the wave speeds of an exact nonlinear Riemann\nsolution.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-hll-two-wave-flux",
+          "source_section": "Definition",
+          "quote": "For a two-state problem for a flux $f$ on the open state domain $G$ of\n[[def-hyperbolic-system-and-characteristic-families]], choose explicit speeds\n$S_L<S_R$. A signal speed means the propagation speed of one wave in the\nparticular Riemann solution being approximated. If the HLL model is used as an\nenclosing approximation to that fan, its admissibility hypothesis is that\nevery such speed lies in $[S_L,S_R]$; this definition supplies no general\nwave-speed bound.\nSet $f_L=f(u_L)$ and $f_R=f(u_R)$. The HLL flux is\n$$\\widehat f_{\\rm HLL}=\\begin{cases}f_L,&0\\le S_L,\\\\\\dfrac{S_Rf_L-S_Lf_R+S_LS_R(u_R-u_L)}{S_R-S_L},&S_L<0<S_R,\\\\f_R,&S_R\\le0.\\end{cases}$$\nIn the middle case the model has three constant regions separated by the two\nwaves $S_L,S_R$ and one intermediate state. The wave-speed enclosure is a\nseparate hypothesis whenever an approximation claim uses it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The kinetic energy density is $\\rho u^2/2=5\\times10^{-13}$ and $p/(\\gamma-1)=5/2\\times10^{-12}$, so $E=3\\times10^{-12}$. Hence [F1] gives the specified pressure and positive internal energy, so both states lie in $\\mathcal G_\\gamma$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Their sound speed satisfies $c^2=7/50000<(3/250)^2$, hence $|u|+c<1/100+3/250=11/500=a$. Also $\\nu a=1/4$, so $2\\nu a=1/2\\le1$. The symmetric-speed hypotheses in [F2]–[F5] hold, with the positive admissibility verified in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the discontinuity, substitution of $S_L=-a,S_R=a$ into [F7] and the HLL intermediate-state formula of [F4] gives $U_*=(U_L+F_L/a+U_R-F_R/a)/2$. Both split states are in $\\mathcal G_\\gamma$ by [F2], so $U_*\\in\\mathcal G_\\gamma$ by [F3]. At equal-state faces, the same middle-state formula gives $U_*=U_L$ or $U_R$. Substituting the shared face fluxes in [F6], or equivalently using [F4], yields $U_i^+=(3/4)U_L+(1/4)U_*$ and $U_{i+1}^+=(3/4)U_R+(1/4)U_*$. Convexity keeps both states in $\\mathcal G_\\gamma$, and [F1] gives positive density and pressure, using the CFL verification in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the small but strictly positive initial density and pressure; zero states are excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No exponent or one-element parameter is part of the stated claim unless named in the checked evidence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves a strict sound-speed margin and step 3.1 keeps the HLL convex weights nonnegative."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional open-endpoint claim is made beyond the endpoint checks listed as checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Near-vacuum symmetric HLL parameter check",
+          "method": "exact rational arithmetic",
+          "input": {
+            "gamma": "7/5",
+            "density": "1e-8",
+            "pressure": "1e-12",
+            "velocity": [
+              "-1/100",
+              "1/100"
+            ],
+            "speed": "11/500",
+            "nu": "125/11"
+          },
+          "calculation": "c^2=7/50000<(3/250)^2, |u|+c<11/500, nu*a=1/4, and 2*nu*a=1/2. With delta=±500/11, x is 6/11 or 16/11; delta^2*p^2/(2*rho*e)=5/121 and the minimum e_delta/e is 31/66.",
+          "expected": {
+            "sound_speed_upper": "3/250",
+            "courant": "1/4",
+            "cfl": "1/2",
+            "minimum_split_internal_energy_ratio": "31/66",
+            "update_weights": [
+              "3/4",
+              "1/4"
+            ]
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example"
+    },
+    "ex-pe03-burgers-entropy-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe03-system-entropy-pair-and-potential",
+          "source_section": "Definition",
+          "quote": "Use the conservation-system convention of\n[[def-hyperbolic-system-and-characteristic-families]]: on an open convex state\ndomain $\\mathcal A\\subseteq\\mathbb R^m$, the flux is $F:\\mathcal A\\to\\mathbb R^m$.\nA **convex entropy pair** is a pair $(\\eta,q)$ with $\\eta\\in C^2(\\mathcal A)$,\n$q\\in C^1(\\mathcal A)$, positive-semidefinite Hessian $D^2\\eta$, and\n$$Dq(U)=D\\eta(U)\\,DF(U)\\qquad(U\\in\\mathcal A).$$\nThe **entropy variable** is the column vector $v(U)=\\nabla\\eta(U)$; gradients\nare represented as columns, so the compatibility equation above means\n$\\nabla q(U)=DF(U)^T v(U)$. The **entropy potential** is\n$\\psi(U)=v(U)^T F(U)-q(U)$. This definition does not assert that every convex\n$\\eta$ admits a flux $q$; the compatibility equation is part of the hypothesis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-tadmor-entropy-conservative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be a convex entropy pair on an open domain $\\mathcal A$, with\nentropy variable $v$ and potential $\\psi$ as in\n[[def-pe03-system-entropy-pair-and-potential]]. A continuous two-point flux\n$F^{ec}:\\mathcal A\\times\\mathcal A\\to\\mathbb R^m$ is **entropy-conservative\nin Tadmor's sense** if it is consistent and symmetric,\n$F^{ec}(U,U)=F(U)$, and satisfies the exact jump identity\n$$\\bigl(v(U_R)-v(U_L)\\bigr)^T F^{ec}(U_L,U_R)=\\psi(U_R)-\\psi(U_L)$$\nfor every pair $U_L,U_R\\in\\mathcal A$. This definition asserts no existence\nfor a prescribed entropy pair.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe03-entropy-stable-dissipative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be an entropy pair with entropy variable $v$ and potential\n$\\psi$, and let $F^{ec}$ be a consistent entropy-conservative flux as in\n[[def-pe03-tadmor-entropy-conservative-flux]]. For each pair\n$(U_L,U_R)\\in\\mathcal A^2$, choose a symmetric positive-semidefinite matrix\n$D(U_L,U_R)\\in\\mathbb R^{m\\times m}$. The associated **entropy-stable\ndissipative flux** is\n$$F^{es}(U_L,U_R):=F^{ec}(U_L,U_R)-\\frac12D(U_L,U_R)(v(U_R)-v(U_L)).$$\nPositive semidefinite means $z^TD(U_L,U_R)z\\ge0$ for every $z\\in\\mathbb R^m$.\nNo fully discrete time-step property is included.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $\\eta''(u)=1$, $\\eta'(u)=u$, and $q'(u)=u^2=\\eta'(u)f'(u)$, so this is a convex entropy pair. Thus $v=u$ and $\\psi=uf-q=u^3/6$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The displayed $f^{ec}$ is symmetric and $f^{ec}(u,u)=u^2/2=f(u)$. Moreover, $(u_R-u_L)f^{ec}(u_L,u_R)=\\frac{u_R^3-u_L^3}{6}=\\psi(u_R)-\\psi(u_L)$, so [F2] applies using $\\psi=u^3/6$ from step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking $D=1$ in [F3], at $(1,0)$ we have $f^{ec}=1/6$, $[v]=-1$, and $[\\psi]=-1/6$. Therefore $[v]f^{es}-[\\psi]=(-1)(1/6+1/2)-(-1/6)=-1/2$. In general the same substitution gives residual $-\\tfrac12(u_R-u_L)^2\\le0$, using the formula in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives the general residual -1/2 times the squared jump, which is zero for equal states."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No exponent or one-element parameter is part of the stated claim unless named in the checked evidence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero entropy-variable jump as equality in the residual formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional open-endpoint claim is made beyond the endpoint checks listed as checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Quadratic Burgers entropy residual",
+          "method": "exact polynomial factorization",
+          "input": {
+            "u_left": 1,
+            "u_right": 0,
+            "entropy_dissipation": 1
+          },
+          "calculation": "f_ec=(uL^2+uL*uR+uR^2)/6=1/6; f_es=1/6+1/2=2/3; [v]=-1 and [psi]=-1/6, so [v]*f_es-[psi]=-1/2.",
+          "expected": {
+            "entropy_residual": "-1/2",
+            "general_residual": "-(uR-uL)^2/2"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example"
+    },
+    "ex-pe03-conservative-positivity-rescaling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pe03-convex-scaling-positivity-limiter",
+          "source_section": "Definition",
+          "quote": "Let $K\\subseteq\\mathbb R^m$ be closed and convex (convex in the sense of\n[[def-pe03-convex-invariant-domain]]), let $J$ be a finite nonempty\nindex set, let $w_j>0$ with $\\sum_{j\\in J}w_j=1$, and let input states\n$V_j\\in\\mathbb R^m$ have mean $\\bar V=\\sum_jw_jV_j\\in K$. The **maximal\nconvex scaling limiter** returns the largest $\\theta\\in[0,1]$ for which every\n$$V_j^\\theta=\\bar V+\\theta(V_j-\\bar V)$$\nbelongs to $K$, together with all the states $V_j^\\theta$. Equivalently, form\n$$S=\\{\\theta\\in[0,1]:V_j^\\theta\\in K\\text{ for every }j\\in J\\},$$\nand return $\\theta_*:=\\max S$ and $(V_j^{\\theta_*})_{j\\in J}$. The mean is\nassumed admissible; implementation, cost, and any pointwise-in-cell property\nare not part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-euler-positive-margin-domain",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$ and $\\varepsilon>0$, and use the state variables and internal\nenergy density from [[def-ideal-gas-euler-state-and-pressure]]. Define the\n**positive-margin set**\n$$K_{\\gamma,\\varepsilon}:=\\left\\{(\\rho,m,E):\\rho\\ge\\varepsilon,\\quad E-\\frac{m^2}{2\\rho}\\ge\\varepsilon\\right\\}.$$\nEvery member has positive density and positive pressure. Closedness and\nconvexity are proved in\n[[prop-pe03-euler-state-and-margin-domains-are-convex-and-closed]]; those properties are not\nbeing inferred from this definition alone.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ideal-gas-euler-state-and-pressure",
+          "source_section": "Definition",
+          "quote": "Fix $\\gamma>1$. In one space dimension the conserved state is\n$U=(\\rho,m,E)\\in\\mathbb R^3$, where $\\rho$ is density, $m$ momentum, and\n$E$ total energy per unit volume. The **admissible-state set** is the open set\n$$\\mathcal G_\\gamma=\\{(\\rho,m,E):\\rho>0,\\ E>m^2/(2\\rho)\\}.$$\nThe ideal-gas pressure on this set is\n$$p(U)=(\\gamma-1)\\left(E-\\frac{m^2}{2\\rho}\\right)>0,$$\nthe velocity is $u=m/\\rho$, and the flux is\n$$F(U)=\\left(m,\\frac{m^2}{\\rho}+p,\\frac{m}{\\rho}(E+p)\\right).$$\nThe sound speed is $c=\\sqrt{\\gamma p/\\rho}$. These definitions apply only\non $\\mathcal G_\\gamma$; a state with nonpositive density or nonpositive\ninternal energy is inadmissible. The set is open because $\\rho$ and\n$E-m^2/(2\\rho)$ are continuous on $\\rho>0$ and the inequalities are strict;\nall displayed flux functions are smooth on this domain.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+          "source_section": "Statement",
+          "quote": "Fix $\\gamma>1$, $\\varepsilon>0$, a finite nonempty node set $J$, positive\nweights $w_j$ summing to one, and candidate states $V_j\\in\\mathbb R^3$ with\nmean $\\bar V=\\sum_jw_jV_j\\in K_{\\gamma,\\varepsilon}$. Apply the maximal\nconvex scaling limiter of\n[[alg-pe03-convex-scaling-positivity-limiter]] with $K=K_{\\gamma,\\varepsilon}$.\nIts output is well-defined, every limited node lies in $K_{\\gamma,\\varepsilon}$,\nand the weighted cell mean remains $\\bar V$. Hence every limited node has\npositive density and positive pressure. If the unscaled nodes already lie in\n$K_{\\gamma,\\varepsilon}$, the maximal parameter is $\\theta_*=1$. In\nparticular, if smooth target states stay a distance at least $\\delta>0$ from\n$\\mathbb R^3\\setminus K_{\\gamma,\\varepsilon}$ and each reconstruction node\nhas error less than $\\delta$, the limiter is inactive and preserves that\nreconstruction's accuracy. No positivity between finitely many nodes is\nclaimed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The weighted mean is $(V_1+V_2)/2=(1,0,1)$. Its density is $1$ and its internal-energy density is $1$, so it belongs to $K_{7/5,1/2}$ by [F2]. The scaled states are $(1,4\\theta,1)$ and $(1,-4\\theta,1)$, each with internal energy $1-8\\theta^2$. Hence they lie in $K_{7/5,1/2}$ exactly when $1-8\\theta^2\\ge1/2$, or $0\\le\\theta\\le1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The largest feasible parameter is $\\theta_*=1/4$ by [F1]. The outputs are $(1,1,1)$ and $(1,-1,1)$; each has internal-energy density $1/2$ and pressure $(2/5)(1/2)=1/5>0$ by [F3]. Their weighted mean is $(1,0,1)$, also as guaranteed by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 shows theta=0 is feasible and has the admissible mean as every node."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves theta=1 violates the positive-margin condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 reaches the positive-margin boundary exactly at theta=1/4."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compute the feasible interval endpoints theta=0 and theta=1/4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Two-node Euler convex scaling",
+          "method": "exact rational arithmetic",
+          "input": {
+            "weights": [
+              "1/2",
+              "1/2"
+            ],
+            "mean": [
+              "1",
+              "0",
+              "1"
+            ],
+            "nodes": [
+              [
+                "1",
+                "4",
+                "1"
+              ],
+              [
+                "1",
+                "-4",
+                "1"
+              ]
+            ],
+            "gamma": "7/5",
+            "epsilon": "1/2"
+          },
+          "calculation": "At scale theta, internal energy is 1-8*theta^2. The constraint 1-8*theta^2>=1/2 is equivalent to 0<=theta<=1/4; at theta=1/4 the limited nodes are (1,±1,1), each with internal energy 1/2 and pressure 1/5.",
+          "expected": {
+            "theta": "1/4",
+            "limited_nodes": [
+              [
+                "1",
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "-1",
+                "1"
+              ]
+            ],
+            "mean": [
+              "1",
+              "0",
+              "1"
+            ],
+            "pressure_each": "1/5"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example"
+    },
+    "ex-pe03-entropy-stable-underresolved-shock": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe03-system-entropy-pair-and-potential",
+          "source_section": "Definition",
+          "quote": "Use the conservation-system convention of\n[[def-hyperbolic-system-and-characteristic-families]]: on an open convex state\ndomain $\\mathcal A\\subseteq\\mathbb R^m$, the flux is $F:\\mathcal A\\to\\mathbb R^m$.\nA **convex entropy pair** is a pair $(\\eta,q)$ with $\\eta\\in C^2(\\mathcal A)$,\n$q\\in C^1(\\mathcal A)$, positive-semidefinite Hessian $D^2\\eta$, and\n$$Dq(U)=D\\eta(U)\\,DF(U)\\qquad(U\\in\\mathcal A).$$\nThe **entropy variable** is the column vector $v(U)=\\nabla\\eta(U)$; gradients\nare represented as columns, so the compatibility equation above means\n$\\nabla q(U)=DF(U)^T v(U)$. The **entropy potential** is\n$\\psi(U)=v(U)^T F(U)-q(U)$. This definition does not assert that every convex\n$\\eta$ admits a flux $q$; the compatibility equation is part of the hypothesis.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe03-tadmor-entropy-conservative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be a convex entropy pair on an open domain $\\mathcal A$, with\nentropy variable $v$ and potential $\\psi$ as in\n[[def-pe03-system-entropy-pair-and-potential]]. A continuous two-point flux\n$F^{ec}:\\mathcal A\\times\\mathcal A\\to\\mathbb R^m$ is **entropy-conservative\nin Tadmor's sense** if it is consistent and symmetric,\n$F^{ec}(U,U)=F(U)$, and satisfies the exact jump identity\n$$\\bigl(v(U_R)-v(U_L)\\bigr)^T F^{ec}(U_L,U_R)=\\psi(U_R)-\\psi(U_L)$$\nfor every pair $U_L,U_R\\in\\mathcal A$. This definition asserts no existence\nfor a prescribed entropy pair.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe03-entropy-stable-dissipative-flux",
+          "source_section": "Definition",
+          "quote": "Let $(\\eta,q)$ be an entropy pair with entropy variable $v$ and potential\n$\\psi$, and let $F^{ec}$ be a consistent entropy-conservative flux as in\n[[def-pe03-tadmor-entropy-conservative-flux]]. For each pair\n$(U_L,U_R)\\in\\mathcal A^2$, choose a symmetric positive-semidefinite matrix\n$D(U_L,U_R)\\in\\mathbb R^{m\\times m}$. The associated **entropy-stable\ndissipative flux** is\n$$F^{es}(U_L,U_R):=F^{ec}(U_L,U_R)-\\frac12D(U_L,U_R)(v(U_R)-v(U_L)).$$\nPositive semidefinite means $z^TD(U_L,U_R)z\\ge0$ for every $z\\in\\mathbb R^m$.\nNo fully discrete time-step property is included.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+          "source_section": "Statement",
+          "quote": "Let $(\\eta,q)$ be a convex entropy pair on an open set $\\mathcal A$, with\nentropy variable $v$ and potential $\\psi$ as in\n[[def-pe03-system-entropy-pair-and-potential]]. On a periodic mesh of $N\\ge2$\ncells of width $\\Delta x>0$, let differentiable states $U_i(t)\\in\\mathcal A$\nsatisfy\n$$\\dot U_i=-\\frac{F^{es}_{i+1/2}-F^{es}_{i-1/2}}{\\Delta x},$$\nwhere every face flux is the entropy-stable dissipative flux of\n[[def-pe03-entropy-stable-dissipative-flux]]. Define\n$$\\widehat q_{i+1/2}:=\\left(\\frac{v_i+v_{i+1}}2\\right)^T F^{es}_{i+1/2}-\\frac{\\psi_i+\\psi_{i+1}}2.$$\nThen each cell satisfies\n$$\\frac{d}{dt}\\eta(U_i)+\\frac{\\widehat q_{i+1/2}-\\widehat q_{i-1/2}}{\\Delta x}\\le0.$$\nSumming over the periodic mesh gives nonincrease of total discrete entropy.\nThis is a semidiscrete result; it asserts no entropy inequality for a chosen\nfully discrete time integrator.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Rankine–Hugoniot speed from states $u_L=1,u_R=0$ is $(f(0)-f(1))/(0-1)=1/2$. Since $f'(0)=0<1/2<1=f'(1)$, it is a compressive shock. Its entropy production is $q(0)-q(1)-\\tfrac12(\\eta(0)-\\eta(1))=-1/3+1/4=-1/12<0$, so it satisfies the quadratic entropy inequality.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The entropy-conservative Burgers flux is $f^{ec}=(u_L^2+u_Lu_R+u_R^2)/6$: it is symmetric and diagonal-consistent, and $(u_R-u_L)f^{ec}=(u_R^3-u_L^3)/6=[\\psi]$, so [F2] applies. Hence $f^{ec}(1,0)=1/6$ and [F3] gives $f^{es}(1,0)=2/3$. With $[u]=-1$ and $[\\psi]=-1/6$ from step 1.1, the Tadmor residual is $[u]f^{es}-[\\psi]=-2/3+1/6=-1/2<0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Equal-state faces have flux $f^{es}(1,1)=1/2$ and $f^{es}(0,0)=0$ by [F2]–[F3]. Thus the left state adjacent to the jump updates to $1-\\tfrac12(2/3-1/2)=11/12$, and the right state updates to $0-\\tfrac12(0-2/3)=1/3$. The jump is spread over two intermediate values. This is a finite computation only; [F4] does not certify the forward-Euler step's entropy inequality. The interface flux value was obtained in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the specified nonempty state domain, finite mesh, or finite node set; it makes no claim for an empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the residual -1/2 times the squared jump, which vanishes at equal states."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No exponent or one-element parameter is part of the stated claim unless named in the checked evidence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks strict Lax inequalities, so no sonic endpoint is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies 0<1/2<1; the shock speed is strictly between the characteristic speeds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite algebra, finite sums, or compact subsets of [0,1] are used; no arbitrary-family choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward direction to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to audit."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Four-cell coarse Burgers shock update",
+          "method": "exact rational arithmetic",
+          "input": {
+            "states": [
+              "1",
+              "1",
+              "0",
+              "0"
+            ],
+            "nu": "1/2",
+            "dissipation": "1"
+          },
+          "calculation": "At equal faces the fluxes are 1/2 and 0; at the 1-to-0 face f_ec=1/6 and f_es=2/3. The two adjacent forward-Euler states are 1-(1/2)(2/3-1/2)=11/12 and 0-(1/2)(0-2/3)=1/3.",
+          "expected": {
+            "left_updated": "11/12",
+            "right_updated": "1/3",
+            "semidiscrete_interface_residual": "-1/2",
+            "fully_discrete_entropy_claim": false
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example"
+    }
+  }
+}

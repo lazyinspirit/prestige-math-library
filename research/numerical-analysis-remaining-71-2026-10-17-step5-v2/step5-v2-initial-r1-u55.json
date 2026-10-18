@@ -1,0 +1,134 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "55",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-spherical-harmonic-partial-wave-conventions",
+      "model": "gpt-6-luna",
+      "context_sha256": "1f06520ddcb5b15a8e6c096e1c98e3331ccbc5083b2da8e3d1cc7fc0fb475e8c",
+      "outcome": "false_positive",
+      "reason": "No circular premise: H_ell is explicitly the restriction of homogeneous harmonic polynomials, independent of P_ell. The justifying lemma constructs its finite-dimensional kernel Z_ell without using P_ell (steps 1.1–2.3), then derives the zonal ODE, coefficient recursion and positive diagonal normalization in step 4.1. That establishes existence and uniqueness of P_ell rather than presupposing it. SCHEMA.md expressly permits justified_by results to depend on their definition; there is no reverse deps edge.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-volume-far-field-map-is-bounded",
+      "model": "gpt-6-luna",
+      "context_sha256": "319ec4cb379c077afc5f356cfb62bcfe93328b7269421c159d608a9c742d2f96",
+      "outcome": "false_positive",
+      "reason": "The model specifies an integral formula, and its justified_by edge delegates continuity to this lemma as SCHEMA.md permits. Step 1.1 proves absolute integrability and the norm estimate from ||qv||_1 <= ||q||_infinity sqrt(|D|)||v||_2; step 1.2 independently proves the directional Lipschitz bound using the real-phase exponential estimate. Neither step assumes that the output already belongs to C(S^2), so the cited model convention creates no circular premise.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-volume-integral-scattering-fredholm-stability",
+      "model": "gpt-6-luna",
+      "context_sha256": "1763d42a5ff3f0b6072e47ff372dfb2243547979910742ecf08c3dd0c6218a6d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Statement has the undefined condition “K_k is injective through I-K_k” rather than a well-formed hypothesis that A_k=I-K_k is injective. Injectivity of K_k alone is not the Fredholm hypothesis, so step 1.1 cannot follow from that wording. Replaced only that clause by “If I-K_k is injective”, matching Given, F2, the approved contract and the actual published Fredholm theorem. Compact K_k on complex Banach L2 under AC then gives a bounded inverse, and A_k(u-v)=f-A_kv proves the residual bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-spherical-harmonic-partial-wave-conventions",
+      "disposition": "unaffected",
+      "post_sha256": "4a8b7da6e5441360a0c1570c8cbde5542e489821399e8b28d6011b4786c06fd0",
+      "review_context_sha256": "acd7ffd7950a86ca4daff452e0ebf9fc0a2b68ef8eb9235929fcff2afa8d60c6",
+      "reason": "No circular premise: H_ell is explicitly the restriction of homogeneous harmonic polynomials, independent of P_ell. The justifying lemma constructs its finite-dimensional kernel Z_ell without using P_ell (steps 1.1–2.3), then derives the zonal ODE, coefficient recursion and positive diagonal normalization in step 4.1. That establishes existence and uniqueness of P_ell rather than presupposing it. SCHEMA.md expressly permits justified_by results to depend on their definition; there is no reverse deps edge. The polar convention gives eigenvalue ell(ell+1); degree zero gives P_0=1. Reviewed the owning contract and page, with Countable Choice and DC retained and no global basis selection.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-volume-far-field-map-is-bounded",
+      "disposition": "unaffected",
+      "post_sha256": "c45f55b999a14b91b110c7ee16cd3787697aa41360d6dee3398e61e23df4ec12",
+      "review_context_sha256": "c64ee999bdf164a77cbfdb7f667bf682a117b67c1192852dfee86da338f6ddf0",
+      "reason": "The model specifies an integral formula, and its justified_by edge delegates continuity to this lemma as SCHEMA.md permits. Step 1.1 proves absolute integrability and the norm estimate from ||qv||_1 <= ||q||_infinity sqrt(|D|)||v||_2; step 1.2 independently proves the directional Lipschitz bound using the real-phase exponential estimate. Neither step assumes that the output already belongs to C(S^2), so the cited model convention creates no circular premise. Steps 1.3 and 2.1 are also sound: s >= r/2, the rationalized phase discrepancy is <= R_0^2/r, and splitting (r/s)e^{ik(s-r)} minus e^{-ik theta.y} gives exactly (2R_0+|k|R_0^2)/r. Integrals are class independent, and k=0 is allowed. Owning contract and page agree.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-volume-integral-scattering-fredholm-stability",
+      "disposition": "repaired",
+      "post_sha256": "2b68afed75b1eb2efbb7763999aaa36c2d12268d49ac88f0f7e415e8010e092a",
+      "review_context_sha256": "921ee8855464495a4ec2d76cd89694f3c8a7eb2573a9f8a1dd7d229e8cca0ae6",
+      "reason": "The original Statement has the undefined condition “K_k is injective through I-K_k” rather than a well-formed hypothesis that A_k=I-K_k is injective. Injectivity of K_k alone is not the Fredholm hypothesis, so step 1.1 cannot follow from that wording. Replaced only that clause by “If I-K_k is injective”, matching Given, F2, the approved contract and the actual published Fredholm theorem. Compact K_k on complex Banach L2 under AC then gives a bounded inverse, and A_k(u-v)=f-A_kv proves the residual bound. Read the complete compactness and Fredholm supplier proofs and the actual completeness/operator interfaces. AC, positive finite measure, complex scalar field, and the caveat against arbitrary physical uniqueness remain explicit. No proof or dependency changes, and no prior judge record was present. This is a repair review by its author, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-near-resonant-volume-operator-error-amplification",
+    "thm-volume-product-integration-solution-and-far-field-error"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-volume-integral-scattering-fredholm-stability",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "finding": "Undefined injectivity clause does not state the premise used by Fredholm step 1.1.",
+      "correction": "Replace “If $K_k$ is injective through $I-K_k$” by “If $I-K_k$ is injective”.",
+      "status": "fixed",
+      "reason": "The original Statement has the undefined condition “K_k is injective through I-K_k” rather than a well-formed hypothesis that A_k=I-K_k is injective. Injectivity of K_k alone is not the Fredholm hypothesis, so step 1.1 cannot follow from that wording. Replaced only that clause by “If I-K_k is injective”, matching Given, F2, the approved contract and the actual published Fredholm theorem. Compact K_k on complex Banach L2 under AC then gives a bounded inverse, and A_k(u-v)=f-A_kv proves the residual bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed all assigned reviews in dependency order and captured review-contexts immediately after each review. The first two guards equal the frozen before guards and remain unaffected; only the Fredholm guard changed. No new items, shared metadata edits, judgment stamps or independent acceptance claims.",
+    "Compared the original and corrected Statement literally: the sole change is “If $K_k$ is injective through $I-K_k$” to “If $I-K_k$ is injective”. Proof, deps, AC assumptions and residual estimate are unchanged. The owning contract already requires injectivity of I-K_k and needs no update.",
+    "Direct dependency/reference search over items/ and library/ found the two recorded frontier consumers and the owning page, all examined. No outside or published consumer was found, and no published-ledger update is proposed. Unchanged consumer interfaces end propagation at this hop.",
+    "No authoritative external sources were consulted or claimed: the recorded familiar mathematics was checked directly against the complete relevant local arguments and actual supplier statements. The Step-4 digest concern about ex-small-norm-volume-scatterer-born-truncation is outside this assignment and remains with its owner; this report does not claim to resolve it.",
+    "All focused checks passed with exit 0: node tools/tsx-run.mjs tools/precheck.mts --json items/thm-volume-integral-scattering-fredholm-stability.md (1 proof, 0 failures); node tools/rendercheck.mjs --json items/thm-volume-integral-scattering-fredholm-stability.md (1 file, no errors or warnings); node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-55.proof-contracts.json --strict --items def-spherical-harmonic-partial-wave-conventions,lem-volume-far-field-map-is-bounded,thm-volume-integral-scattering-fredholm-stability --json (all 3 checked, no errors or warnings); node tools/proof-layout.mjs items/thm-volume-integral-scattering-fredholm-stability.md (1 item, 2 steps, 0 defects), run once after the final item edit. No unresolved assigned obligation remains."
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "thm-volume-integral-scattering-fredholm-stability",
+      "id": "ex-near-resonant-volume-operator-error-amplification",
+      "path": "items/ex-near-resonant-volume-operator-error-amplification.md",
+      "affected_use": "Verification F1 and step 1.1 use AC, compact K_k and injective I-K_k to obtain the unique solution and bounded inverse; the Example and Given both explicitly assume injectivity of I-K_k.",
+      "invalidated_claim": null,
+      "disposition": "unaffected",
+      "reason": "The explicit corrected hypothesis is already supplied, and the calculation (I-K_k)((1-lambda)^(-1)phi)=phi is unchanged.",
+      "minimality": "No consumer edit is necessary; its own interface remains unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "thm-volume-integral-scattering-fredholm-stability",
+      "id": "thm-volume-product-integration-solution-and-far-field-error",
+      "path": "items/thm-volume-product-integration-solution-and-far-field-error.md",
+      "affected_use": "The dependency list names this Fredholm theorem. The Statement, Given and step 1.1 explicitly require injectivity of I-K_k; the proof obtains eventual inversion and convergence from thm-collectively-compact-operator-stability-and-error in F3.",
+      "invalidated_claim": null,
+      "disposition": "unaffected",
+      "reason": "The existing injectivity premise is exactly the corrected supplier condition, and the generic collective-compactness argument and error identity do not change.",
+      "minimality": "No consumer edit is necessary; its own Statement remains unchanged.",
+      "route": "frontier-owner"
+    }
+  ],
+  "page_interface_reviews": [
+    {
+      "path": "library/numerical-pdes-and-spatial-discretization/volume-integral-scattering-and-partial-wave-error.md",
+      "affected_use": "The page lists the Fredholm theorem and describes an injective Fredholm branch with no unconditional scattering uniqueness.",
+      "disposition": "unaffected",
+      "reason": "The corrected hypothesis agrees with the page summary; no page edit or further hop is needed."
+    }
+  ]
+}

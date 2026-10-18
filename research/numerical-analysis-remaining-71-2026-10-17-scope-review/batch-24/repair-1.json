@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "24",
+  "round": 1,
+  "reviewed_items": [
+    "lem-square-root-kalman-householder-error-rational-envelope",
+    "lem-square-root-kalman-gram-perturbation-bound",
+    "lem-square-root-kalman-measurement-block-factor-identity",
+    "lem-square-root-kalman-prediction-factor-identity",
+    "lem-square-root-kalman-schur-perturbation-bound",
+    "lem-square-root-kalman-triangular-solve-forward-bound",
+    "alg-finite-budget-square-root-kalman-filter",
+    "lem-square-root-kalman-prearray-qr-error-bound",
+    "thm-square-root-kalman-finite-procedure-status",
+    "thm-square-root-kalman-finite-horizon-perturbation-bound",
+    "ex-square-root-kalman-perturbed-prearray-psd-factor",
+    "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+    "ex-square-root-kalman-singular-prior-positive-innovation",
+    "ex-square-root-kalman-nearly-noiseless-solve-sensitivity"
+  ],
+  "reviewed_pages": [
+    "square-root-covariance-update-error-and-stability",
+    "square-root-covariance-update-error-and-stability-examples"
+  ],
+  "decision": "accept",
+  "reason": "Local repairs are complete and affected consumers have been checked. This prepared batch returns to final whole-batch review; it is not independent batch acceptance.",
+  "findings": [
+    {
+      "id": "lem-square-root-kalman-measurement-block-factor-identity",
+      "type": "prerequisite",
+      "reason": "Padded both covariance factors to at least their row dimensions, ensuring the transposed prearray has at least p+n rows. Zero padding preserves the Gram identities and arbitrary-rank scope."
+    },
+    {
+      "id": "lem-square-root-kalman-measurement-block-factor-identity",
+      "type": "local",
+      "reason": "Normalized the factor by flipping its first p columns, so the positive-diagonal factor and all subsequent block identities use the same L; the Gram product is preserved."
+    },
+    {
+      "id": "alg-finite-budget-square-root-kalman-filter",
+      "type": "local",
+      "reason": "Applied the sign changes to the first p columns of the transposed QR factor before using its blocks. The updated factor has positive innovation diagonal and unchanged Gram product."
+    },
+    {
+      "id": "thm-square-root-kalman-finite-procedure-status",
+      "type": "local",
+      "reason": "Narrowed the triangular-solve supplier fact to the finite recursive schedule actually needed for termination; the definition alone does not establish uniqueness."
+    },
+    {
+      "id": "ex-square-root-kalman-perturbed-prearray-psd-factor",
+      "type": "local",
+      "reason": "Specified that the perturbed prearray has observation coefficient 11/10, making its use of the measurement-block identity's prearray premise explicit."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-finite-budget-square-root-kalman-filter",
+      "decision": "accept",
+      "reason": "Its predicted factor has d_k columns, meeting the repaired padding condition; its normalized blocks preserve the factor identities."
+    },
+    {
+      "id": "thm-square-root-kalman-finite-procedure-status",
+      "decision": "accept",
+      "reason": "The finite termination argument uses only the declared finite solve schedule and remains valid."
+    },
+    {
+      "id": "thm-square-root-kalman-finite-horizon-perturbation-bound",
+      "decision": "accept",
+      "reason": "The algorithm supplies the required factor shape, and sign normalization preserves the joint Gram matrix and block identities used in the bounds."
+    },
+    {
+      "id": "ex-square-root-kalman-perturbed-prearray-psd-factor",
+      "decision": "accept",
+      "reason": "The perturbed array is now explicitly identified as a measurement prearray with positive innovation."
+    },
+    {
+      "id": "ex-subtractive-kalman-update-loses-positive-semidefiniteness",
+      "decision": "accept",
+      "reason": "Its factor-product contrast uses only the preserved covariance identity."
+    },
+    {
+      "id": "ex-square-root-kalman-singular-prior-positive-innovation",
+      "decision": "accept",
+      "reason": "The algorithm's scalar predicted factor has one column even when its value is zero, so the QR shape condition holds."
+    },
+    {
+      "id": "ex-square-root-kalman-nearly-noiseless-solve-sensitivity",
+      "decision": "accept",
+      "reason": "The scalar block identities and residual-to-update calculation remain valid after sign normalization."
+    }
+  ]
+}

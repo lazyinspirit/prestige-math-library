@@ -1,0 +1,2253 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "36",
+  "scope": [
+    "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+    "def-pe04-diagonal-norm-sbp-element-data",
+    "def-pe04-upwind-dg-transport-discretization",
+    "alg-pe04-first-order-upwind-forward-euler",
+    "def-pe04-cellwise-l2-projection",
+    "def-pe04-upwind-sbp-sat-transport-discretization",
+    "thm-pe04-upwind-dg-l2-energy-stability",
+    "def-pe04-flux-differencing-sbp-systems",
+    "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+    "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy",
+    "thm-pe04-upwind-sbp-sat-l2-energy-stability",
+    "thm-pe04-dg-smooth-solution-l2-error-bound",
+    "thm-pe04-flux-differencing-sbp-conservation-and-entropy-stability",
+    "thm-pe04-ssprk33-first-order-upwind-entropy-preservation",
+    "cex-pe04-underintegrated-burgers-collocation-entropy-growth",
+    "ex-pe04-central-versus-upwind-periodic-transport",
+    "ex-pe04-upwind-transport-with-inflow",
+    "ex-pe04-sbp-inflow-sat-energy-identity"
+  ],
+  "contracts": {
+    "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Definition: the zero polynomial belongs to every stated broken polynomial space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Definition: for N=1 the endpoint conventions apply and there are no interior nodes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: strict inequalities a=x0<...<xN=b give each cell length h_j>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-pe04-diagonal-norm-sbp-element-data": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Definition: constant preservation is explicitly imposed as D_{K,l}1=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-pe04-upwind-dg-transport-discretization": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-one-dimensional-interval-mesh-and-broken-polynomials",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Definition: when beta=0 every numerical flux b times trace is zero, including either trace choice at b=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Definition: a one-cell mesh has only its physical boundary faces, which use the stated inflow/outflow rule."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet.",
+          "evidence": "Definition: at b=0 either trace gives the same zero numerical flux, so the permitted trace choice does not affect the equation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "alg-pe04-first-order-upwind-forward-euler": {
+      "kind": "algorithm",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Definition: beta=0 gives lambda_K=0 and U_K^+=U_K."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-pe04-cellwise-l2-projection": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-measure-space",
+          "def-calligraphic-l-p-on-a-measure-space"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Definition: u=0 satisfies the orthogonality equations with p=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-pe04-upwind-sbp-sat-transport-discretization": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Definition: beta=0 makes the volume derivative and every SAT term vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Definition: a single interval cell has its two endpoint SATs and no interior face."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-pe04-upwind-dg-l2-energy-stability": {
+      "kind": "theorem",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-matching-affine-simplicial-meshes",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "def-countable-choice"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe04-upwind-dg-transport-discretization",
+          "source_section": "Definition",
+          "quote": "The **upwind DG semidiscretization** seeks a differentiable cellwise polynomial $u_h(t)$ such that for every $K\\in\\mathcal T_h$ and $v_h\\in\\mathbb P_p(K)$,\n$$\\int_K (\\partial_tu_h)v_h\\,dx-\\int_K \\beta u_h\\cdot\\nabla v_h\\,dx+\\sum_{F\\subset\\partial K}\\int_F\\widehat f_{K,F}v_h\\,dS=0.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-affine-simplex-gauss-green-formula",
+          "source_section": "Statement",
+          "quote": "$$\\int_K\\operatorname{div}G\\,dx=\\sum_{F\\subset\\partial K}\\int_FG\\cdot n_{K,F}\\,dS.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-oriented-facet-cancellation-on-matching-meshes",
+          "source_section": "Statement",
+          "quote": "In the sum of the oriented boundaries of all top-dimensional cells, every interior\nfacet occurs twice with opposite signs; every boundary facet occurs once.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the DG equation on each cell take $v=u_h$. The time term is $\\frac12\\frac{d}{dt}\\|u_h\\|_{L^2(K)}^2$. Since $\\beta$ is constant, $-\\int_K\\beta u_h\\cdot\\nabla u_h=-\\frac12\\int_K\\operatorname{div}(\\beta u_h^2)=-\\frac12\\sum_{F\\subset\\partial K}\\int_F(\\beta\\cdot n_{K,F})u_h^2$ by [F2] and [A1]. Sum over cells; [F3] pairs the two opposite normals on each interior facet.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix an interior facet oriented from $K^-$ to $K^+$ and put $b=\\beta\\cdot n_F$. The two face terms from step 1.1 and the two upwind numerical-flux terms combine to $-\\frac b2((u^-)^2-(u^+)^2)+b\\widehat u(u^--u^+)$. If $b>0$, then $\\widehat u=u^-$ and this is $\\frac b2(u^+-u^-)^2$; if $b<0$, then $\\widehat u=u^+$ and this is $\\frac{|b|}{2}(u^+-u^-)^2$. For $b=0$ it vanishes.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On an outflow boundary face, $b=\\beta\\cdot n>0$ and $\\widehat u=u_h$, so the volume and flux terms combine to $\\frac b2u_h^2$. On an inflow face, $b<0$ and $\\widehat u=g$, so they combine to $\\frac{|b|}{2}u_h^2-|b|gu_h=\\frac{|b|}{2}(u_h-g)^2-\\frac{|b|}{2}g^2$. Faces with $b=0$ contribute zero.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting the interior contribution from step 2.1 and the boundary contributions from step 2.2 into the sum of the tested DG equations gives the displayed identity. All terms on the left after the time derivative are nonnegative; setting $g=0$ proves the final stability statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Step 3.1: setting g=0 leaves only nonnegative jump and outflow terms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Steps 3.1 and 3.1: a one-cell mesh has no interior-face sum, while the boundary terms remain explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet.",
+          "evidence": "Step 1.1: the only nonalgebraic imported step is the Countable Choice licensed Green formula, recorded below."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "single-face-upwind-jump",
+          "claim": "At b>0 the interior energy contribution is b/2 times the squared jump.",
+          "method": "substitute two traces in step 1.2",
+          "input": {
+            "b": 2,
+            "u_minus": 3,
+            "u_plus": 1
+          },
+          "calculation": "2/2*(1-3)^2=4.",
+          "expected": {
+            "dissipation": 4
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Countable Choice is required only through the exact cited affine-simplex Green/full-support supplier or the forward-Euler result; no stronger choice principle is used."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "1.1"
+          ],
+          "use": "The imported geometric supplier uses Countable Choice exactly where identified in the proof facts; this item uses no stronger choice principle."
+        }
+      ],
+      "axiom_note": "Countable Choice only, through the exact cited supplier(s); no additional axiom branch is used.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-pe04-flux-differencing-sbp-systems": {
+      "kind": "definition",
+      "risk": "low",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe03-system-entropy-pair-and-potential",
+          "def-pe03-tadmor-entropy-conservative-flux",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "unresolved": []
+      },
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Definition: equal traces make [v]=0 and the interface flux is consistent with the physical normal flux."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Definition: a one-cell mesh has no interior interfaces; only the stated boundary flux remains."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-pe04-cellwise-l2-projection-exists-best-approximation": {
+      "kind": "lemma",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-cellwise-l2-projection",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe04-cellwise-l2-projection",
+          "source_section": "Definition",
+          "quote": "$$\\mathcal P_K(u)=\\left\\{p\\in\\mathbb P_p(K):\\int_K(u-p)w\\,d\\mu=0\\text{ for every }w\\in\\mathbb P_p(K)\\right\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the finite monomial basis $\\{\\phi_1,\\ldots,\\phi_M\\}$ of $\\mathbb P_p(K)$. Its Gram matrix $G_{ij}=\\int_K\\phi_i\\phi_j\\,d\\mu$ is positive definite: for every nonzero coefficient vector $c$, the polynomial $q=\\sum_i c_i\\phi_i$ is continuous and nonzero at some point of $K$, so it is bounded away from zero on a nonempty relatively open subset; full support gives $c^TGc=\\int_Kq^2\\,d\\mu>0$. Each moment $b_i=\\int_Ku\\phi_i\\,d\\mu$ is finite by [F2]. The invertible system $Gc=b$ therefore has a unique solution, and $p=\\sum_i c_i\\phi_i$ satisfies [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $w\\in\\mathbb P_p(K)$, write $u-w=(u-\\Pi_Ku)+(\\Pi_Ku-w)$. The first term is orthogonal to the second by [F1], hence $\\|u-w\\|_2^2=\\|u-\\Pi_Ku\\|_2^2+\\|\\Pi_Ku-w\\|_2^2\\ge\\|u-\\Pi_Ku\\|_2^2$. Taking square roots proves best approximation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Step 1.1: for u=0 all moments vanish, and positive definiteness makes the unique projection zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Statement: the p=0 case is included in p>=0 and its Gram matrix is a positive 1-by-1 matrix."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet.",
+          "evidence": "Step 1.1: the proof chooses an explicit finite monomial basis, with no choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "constant-projection-p0",
+          "claim": "For K=[-1,1], Lebesgue measure, p=0, and u(x)=x, the orthogonal projection is zero and minimizes L2 distance among constants.",
+          "method": "exact moment and square calculation",
+          "input": {
+            "K": "[-1,1]",
+            "p": 0,
+            "u": "x"
+          },
+          "calculation": "The mean of x is 0; ||x-c||_2^2=2/3+2c^2, minimized at c=0.",
+          "expected": {
+            "projection": 0,
+            "squared_error": "2/3"
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy": {
+      "kind": "theorem",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "alg-pe04-first-order-upwind-forward-euler",
+          "def-pe04-upwind-dg-transport-discretization",
+          "lem-affine-simplex-gauss-green-formula",
+          "def-countable-choice"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pe04-first-order-upwind-forward-euler",
+          "source_section": "Definition",
+          "quote": "The **degree-zero upwind forward-Euler update** is admissible when $\\lambda_K\\le1$ for every cell; its output is\n$$U_K^+=U_K-\\frac{\\Delta t}{V_K}\\sum_{F\\subset\\partial K}A_F\\widehat f_{K,F}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-affine-simplex-gauss-green-formula",
+          "source_section": "Statement",
+          "quote": "$$\\int_K\\operatorname{div}G\\,dx=\\sum_{F\\subset\\partial K}\\int_FG\\cdot n_{K,F}\\,dS.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2] with the constant vector field $\\beta$, $\\sum_FA_Fb_{K,F}=0$, hence $\\sum_FA_F(-b_{K,F})^+=\\sum_FA_Fb_{K,F}^+$. Rewriting [F1] gives $U_K^+=(1-\\lambda_K)U_K+\\sum_{F\\subset\\partial K}\\frac{\\Delta tA_F(-b_{K,F})^+}{V_K}U_{K_F}$. All coefficients are nonnegative by $\\lambda_K\\le1$, and their sum is $(1-\\lambda_K)+\\lambda_K=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Convexity of $\\eta$ and the convex-combination formula in step 1.1 give $V_K\\eta(U_K^+)\\le V_K(1-\\lambda_K)\\eta(U_K)+\\Delta t\\sum_FA_F(-b_{K,F})^+\\eta(U_{K_F})$. Sum over cells. Each incoming coefficient for an upwind cell $J$ is paired with the equal outgoing coefficient $\\Delta tA_Fb_{J,F}^+$ on that same periodic face, so these terms exactly fill the subtracted $V_J\\lambda_J\\eta(U_J)$ contributions. Therefore $\\sum_KV_K\\eta(U_K^+)\\le\\sum_KV_K\\eta(U_K)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiply the update [F1] by $V_K$ and sum over cells. Every periodic interior face contributes one shared flux with each of its two opposite outward normals, so its two signed contributions cancel. This proves $\\sum_KV_KU_K^+=\\sum_KV_KU_K$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Step 1.1: zero velocity gives lambda_K=0 and the update is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Steps 3.1 and 3.1: the finite periodic face-pairing argument applies when the periodic mesh has one cell as well."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet.",
+          "evidence": "Step 1.1: the only imported geometric step is the Countable Choice licensed Green formula, recorded below."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "two-cell-jensen-check",
+          "claim": "The periodic degree-zero upwind update is a convex averaging map and does not increase quadratic entropy at an admissible CFL.",
+          "method": "finite exact update",
+          "input": {
+            "a": 1,
+            "h": 1,
+            "dt": 0.5,
+            "U": [
+              1,
+              -1
+            ]
+          },
+          "calculation": "U+=[0,0], so the weighted mass stays 0 and the quadratic entropy drops from 1 to 0.",
+          "expected": {
+            "mass_before": 0,
+            "mass_after": 0,
+            "entropy_before": 1,
+            "entropy_after": 0
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Countable Choice is required only through the exact cited affine-simplex Green/full-support supplier or the forward-Euler result; no stronger choice principle is used."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "1.1"
+          ],
+          "use": "The imported geometric supplier uses Countable Choice exactly where identified in the proof facts; this item uses no stronger choice principle."
+        }
+      ],
+      "axiom_note": "Countable Choice only, through the exact cited supplier(s); no additional axiom branch is used.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-pe04-upwind-sbp-sat-l2-energy-stability": {
+      "kind": "theorem",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-upwind-sbp-sat-transport-discretization",
+          "def-pe04-diagonal-norm-sbp-element-data"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe04-diagonal-norm-sbp-element-data",
+          "source_section": "Definition",
+          "quote": "$$D_{K,\\ell}\\mathbf1=0,\\qquad R_{K,F}\\mathbf1=\\mathbf1_F,\\qquad Q_{K,\\ell}+Q_{K,\\ell}^{T}=\\sum_{F\\subset\\partial K} n_{K,F,\\ell}R_{K,F}^{T}M_{K,F}R_{K,F}$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe04-upwind-sbp-sat-transport-discretization",
+          "source_section": "Definition",
+          "quote": "$$H_K\\dot U_K+\\sum_{\\ell=1}^d\\beta_\\ell Q_{K,\\ell}U_K+\\sum_{F\\subset\\partial K}R_{K,F}^{T}M_{K,F}\\,b_{K,F}(\\widehat U_{K,F}-U_{K,F})=0.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiply the cell equation in [F2] on the left by $U^T$. The derivative term is $\\frac12\\frac{d}{dt}(U^THU)$ because $H$ is symmetric. Also $aU^TQU=\\frac a2U^T(Q+Q^T)U=\\frac a2\\sum_FR_FU^TM_FR_FU$ by [F1], since a scalar equals its transpose.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Combining the volume boundary term from step 1.1 with the SAT term on a face of outward speed $b$ gives the scalar quadratic contribution $b\\widehat U U_F-\\frac b2U_F^2$. At an interior interface with $b>0$, the two cells contribute $\\frac b2(U^- -U^+)^2$ after inserting $\\widehat U=U^-$ on the downstream face; for $b<0$ the same calculation with the roles reversed gives $\\frac{|b|}{2}(U^+-U^-)^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "At the inflow boundary $b=-a$ and $\\widehat U=g$, so the contribution is $\\frac a2(U_{\\mathrm{in}}-g)^2-\\frac a2g^2$. At the outflow boundary $b=a$ and $\\widehat U=U_{\\mathrm{out}}$, so it is $\\frac a2U_{\\mathrm{out}}^2$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Sum steps 2.1 and 2.2 over all cells. Matching interface quadrature nodes and weights make each interior contribution appear once, giving the stated identity. Each displayed dissipation term is nonnegative, so zero inflow data imply $dE_h/dt\\le0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a>0, so zero transport speed is outside its stated branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Statement and steps 3.1–3.1: one interval cell has no interior jump sum and retains the single inflow and outflow terms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "two-node-inflow-energy",
+          "claim": "The explicit two-node SBP operator satisfies the inflow energy identity.",
+          "method": "exact matrix multiplication",
+          "input": {
+            "a": 2,
+            "U_left": 3,
+            "U_right": 1,
+            "g": 2
+          },
+          "calculation": "The ODE gives dE/dt=2, and 2+(a/2)U_right^2+(a/2)(U_left-g)^2=2+1+1=4=(a/2)g^2.",
+          "expected": {
+            "dE_dt": 2,
+            "identity_rhs": 4
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-pe04-dg-smooth-solution-l2-error-bound": {
+      "kind": "theorem",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-upwind-dg-transport-discretization",
+          "def-pe04-cellwise-l2-projection",
+          "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+          "def-matching-affine-simplicial-meshes",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "def-countable-choice"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe04-upwind-dg-transport-discretization",
+          "source_section": "Definition",
+          "quote": "The **upwind DG semidiscretization** seeks a differentiable cellwise polynomial $u_h(t)$ such that for every $K\\in\\mathcal T_h$ and $v_h\\in\\mathbb P_p(K)$,\n$$\\int_K (\\partial_tu_h)v_h\\,dx-\\int_K \\beta u_h\\cdot\\nabla v_h\\,dx+\\sum_{F\\subset\\partial K}\\int_F\\widehat f_{K,F}v_h\\,dS=0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe04-cellwise-l2-projection",
+          "source_section": "Definition",
+          "quote": "$$\\mathcal P_K(u)=\\left\\{p\\in\\mathbb P_p(K):\\int_K(u-p)w\\,d\\mu=0\\text{ for every }w\\in\\mathbb P_p(K)\\right\\}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-simplex-gauss-green-formula",
+          "source_section": "Statement",
+          "quote": "$$\\int_K\\operatorname{div}G\\,dx=\\sum_{F\\subset\\partial K}\\int_FG\\cdot n_{K,F}\\,dS.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-oriented-facet-cancellation-on-matching-meshes",
+          "source_section": "Statement",
+          "quote": "In the sum of the oriented boundaries of all top-dimensional cells, every interior\nfacet occurs twice with opposite signs; every boundary facet occurs once.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Then the Euclidean ball $B(x,r)$ is\nLebesgue measurable and satisfies\n$$0<\\lambda(B(x,r))<\\infty.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "A **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set $\\mathcal T$ of closed,\nnondegenerate $d$-simplices",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-pe04-cellwise-l2-projection-exists-best-approximation",
+          "source_section": "Statement",
+          "quote": "For every finite measure $\\mu$ on a bounded nondegenerate interval or nondegenerate affine simplex $K$ that assigns positive measure to every nonempty relatively open subset, every $p\\ge0$, and every $u\\in\\mathcal L^2(\\mu)$, the set $\\mathcal P_K(u)$ in [[def-pe04-cellwise-l2-projection]] contains exactly one polynomial $\\Pi_Ku$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiplying the exact PDE by $w\\in\\mathbb P_p(K)$ and integrating by parts with [F3] gives its weak equation; the exact inflow trace is $g$ and the outflow trace is the exact upwind trace.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Because each cell is a nondegenerate simplex, it is the closure of its nonempty Euclidean interior. Every nonempty relatively open subset of a cell therefore intersects that interior in a nonempty Euclidean-open set, which contains a Euclidean ball. By [F5] and [A1] the ball has positive measure, so Lebesgue measure has full support on each cell.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The full-support condition in step 1.2 lets us invoke the cellwise projection lemma [F7] on every cell, so $\\Pi_hu$ is well defined.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $\\theta=u_h-\\Pi_hu$, so $u_h-u=\\theta+\\eta$. Subtract the exact weak equation in step 1.1 from [F1] and test with $v_h=\\theta$. Differentiating projection orthogonality in [F2] on the fixed mesh gives $(\\eta_t,\\theta)_K=0$. If $p=0$, then $\\nabla\\theta=0$; if $p\\ge1$, then $\\nabla\\theta\\in\\mathbb P_{p-1}(K)^d$. Since $\\beta$ is constant, in either case $\\beta\\cdot\\nabla\\theta\\in\\mathbb P_p(K)$ and $(\\eta,\\beta\\cdot\\nabla\\theta)_K=0$. This leaves only the transport error and the upwind face-flux differences.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Integrate the remaining $-(\\beta\\theta,\\nabla\\theta)_K$ by parts using [F3] and sum over cells using [F4]. At an interior face the homogeneous upwind terms combine to $\\frac12\\int_F|\\beta\\cdot n_F|[\\theta]^2$; at inflow the volume term is $\\frac12\\int_{\\Gamma_-}|\\beta\\cdot n|\\theta^2$, and at outflow the homogeneous term is $\\frac12\\int_{\\Gamma_+}(\\beta\\cdot n)\\theta^2$. By the face flux differences from step 3.1, inflow contributes no projection residual because both fluxes use $g$; interior and outflow residuals move to the right with signs $+\\int_F(\\beta\\cdot n_F)\\eta^{\\mathrm{up}}[\\theta]$ and $-\\int_{\\Gamma_+}(\\beta\\cdot n)\\eta\\theta$, respectively. Hence\n$$\\frac12\\frac d{dt}\\|\\theta\\|_2^2+\\frac12\\sum_{F\\in\\mathcal F_h^{\\mathrm{int}}}\\int_F|\\beta\\cdot n_F|[\\theta]^2+\\frac12\\int_{\\Gamma_-}|\\beta\\cdot n|\\theta^2+\\frac12\\int_{\\Gamma_+}(\\beta\\cdot n)\\theta^2=\\sum_{F\\in\\mathcal F_h^{\\mathrm{int}}}\\int_F(\\beta\\cdot n_F)\\eta^{\\mathrm{up}}[\\theta]-\\int_{\\Gamma_+}(\\beta\\cdot n)\\eta\\theta.$$",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "A1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For each interior face use $|b||\\eta^{\\mathrm{up}}||[\\theta]|\\le\\frac{|b|}{4}[\\theta]^2+|b||\\eta^{\\mathrm{up}}|^2$, and on outflow use $b|\\eta||\\theta|\\le\\frac b4\\theta^2+b|\\eta|^2$. Absorbing the first terms into the half-dissipation terms of step 4.1 and dropping the remaining nonnegative boundary and jump terms gives $\\frac d{dt}\\|\\theta\\|_2^2\\le2R_h(t)^2$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Integrating the differential inequality gives $\\|\\theta(T)\\|_2^2\\le\\|\\theta(0)\\|_2^2+2\\int_0^TR_h(t)^2dt$. Since $u_h-u=\\theta+\\eta$, the triangle inequality at $T$ gives the stated estimate.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Statement: when beta=0, the interior and boundary residual weights vanish, leaving the projection error terms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Step 4.1: for a one-cell mesh the interior-face sum is empty and the displayed boundary terms still give the estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet.",
+          "evidence": "Steps 1.1, 1.2 and 4.1: Countable Choice is used only through the Green and full-support suppliers, as recorded below."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "zero-velocity-residual",
+          "claim": "At beta=0 the face residual R_h vanishes.",
+          "method": "substitute beta=0 in the definition",
+          "input": {
+            "beta": [
+              0,
+              0
+            ]
+          },
+          "calculation": "Every weight |beta dot n| and beta dot n in R_h is zero.",
+          "expected": {
+            "R_h_squared": 0
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ],
+          "reason": "Countable Choice is required only through the exact cited affine-simplex Green/full-support supplier or the forward-Euler result; no stronger choice principle is used."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ],
+          "use": "The imported geometric supplier uses Countable Choice exactly where identified in the proof facts; this item uses no stronger choice principle."
+        }
+      ],
+      "axiom_note": "Countable Choice only, through the exact cited supplier(s); no additional axiom branch is used.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-pe04-flux-differencing-sbp-conservation-and-entropy-stability": {
+      "kind": "theorem",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "def-pe04-flux-differencing-sbp-systems",
+          "def-pe04-diagonal-norm-sbp-element-data",
+          "def-pe03-system-entropy-pair-and-potential",
+          "def-pe03-tadmor-entropy-conservative-flux",
+          "lem-oriented-facet-cancellation-on-matching-meshes"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe04-flux-differencing-sbp-systems",
+          "source_section": "Definition",
+          "quote": "$$\\widehat F_{n,F,q}^*(U^-,U^+)=\\sum_{\\ell=1}^d n_\\ell F_\\ell^{ec}(U^-,U^+)-\\frac{\\alpha_{F,q}}2\\bigl(v(U^+)-v(U^-)\\bigr).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pe04-diagonal-norm-sbp-element-data",
+          "source_section": "Definition",
+          "quote": "$$D_{K,\\ell}\\mathbf1=0,\\qquad R_{K,F}\\mathbf1=\\mathbf1_F,\\qquad Q_{K,\\ell}+Q_{K,\\ell}^{T}=\\sum_{F\\subset\\partial K} n_{K,F,\\ell}R_{K,F}^{T}M_{K,F}R_{K,F}$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pe03-system-entropy-pair-and-potential",
+          "source_section": "Definition",
+          "quote": "The **entropy potential** is\n$\\psi(U)=v(U)^T F(U)-q(U)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-pe03-tadmor-entropy-conservative-flux",
+          "source_section": "Definition",
+          "quote": "$$\\bigl(v(U_R)-v(U_L)\\bigr)^T F^{ec}(U_L,U_R)=\\psi(U_R)-\\psi(U_L)$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-oriented-facet-cancellation-on-matching-meshes",
+          "source_section": "Statement",
+          "quote": "In the sum of the oriented boundaries of all top-dimensional cells, every interior\nfacet occurs twice with opposite signs; every boundary facet occurs once.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a fixed cell and direction write $F_{ij}^{ec}=F_\\ell^{ec}(U_i,U_j)$ and $\\psi_i=\\psi_\\ell(U_i)$. Symmetry of $F_\\ell^{ec}$ from [F4] gives $2\\sum_{i,j}Q_{ij}v_i^TF_{ij}^{ec}=\\sum_{i,j}Q_{ij}(v_i-v_j)^TF_{ij}^{ec}+\\sum_{i,j}(Q_{ij}+Q_{ji})v_j^TF_{ij}^{ec}$. By [F4] the first sum is $\\sum_{i,j}Q_{ij}(\\psi_i-\\psi_j)=-\\sum_j\\psi_j(Q^T\\mathbf1)_j=-\\sum_F\\sum_q\\omega_{F,q}\\psi_{n_F}(U_{F,q})$, since $Q\\mathbf1=0$ and $Q^T\\mathbf1=(Q+Q^T)\\mathbf1$ by [F2]. The second sum is $\\sum_F\\sum_q\\omega_{F,q}v(U_{F,q})^TF_{n_F}(U_{F,q})$ by [F2], diagonal face selection, and consistency from [F4]. Summing directions and the potential identity in [F3] proves the volume entropy boundary identity.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The chain rule gives $\\frac{d}{dt}\\sum_iH_{ii}\\eta(U_i)=\\sum_iH_{ii}v(U_i)^T\\dot U_i$. Since the semidiscrete equation is $H\\dot U+V+SAT=0$, the entropy rate is the negative of the volume and SAT contractions. Combining the volume contraction from step 1.1 with $-v^TR^TM(\\widehat F_n^*-F_n)$ cancels the physical flux and leaves, on each cell face, $\\sum_q\\omega_{F,q}(\\psi_{n_F}(U_{F,q})-v(U_{F,q})^T\\widehat F_{n_F,q}^*)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Sum the cell entropy rates from step 2.1. By [F5] the two cell contributions at an interior face can be written in one orientation as $-[\\psi_n]+[v]^T\\widehat F_{n,F,q}^*$. Substitution of the flux definition in [F1] and the directional jump identity [F4] makes this $-\\alpha_{F,q}\\lVert[v]\\rVert^2/2$. The boundary-cell contributions are $-\\mathcal B_h$ by definition. Moving these terms to the left gives the asserted identity, and [A1] gives nonincrease.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each component, the constant-vector contraction of the volume term is $2\\sum_{i,j}Q_{ij}F^{ec}(U_i,U_j)=\\sum_{i,j}(Q_{ij}+Q_{ji})F^{ec}(U_i,U_j)$. The SBP identity and diagonal face selection [F2] reduce this to the physical normal-flux quadrature on the cell boundary, since consistency of the directional fluxes in [F4] gives $F^{ec}(U_i,U_i)=F(U_i)$. The constant-vector contraction of the SAT [F1] subtracts that physical flux and leaves only the numerical normal-flux quadrature. Its interior contributions cancel by normal reversal from the interface formula [F1]; identified periodic boundary partners cancel in the same way. Therefore the periodic quadrature-weighted total state is constant.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Step 4.1: alpha_{F,q}=0 gives zero interior entropy dissipation; the boundary condition still gives the inequality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Step 4.1: a one-cell mesh has no interior face sum; only the boundary entropy contribution remains."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "interface-entropy-dissipation",
+          "claim": "The defined normal flux has entropy defect alpha/2 times the squared entropy-variable jump.",
+          "method": "substitute in Tadmor identity",
+          "input": {
+            "alpha": 2,
+            "entropy_variable_jump": [
+              1,
+              -2
+            ]
+          },
+          "calculation": "The defect is alpha/2*(1^2+(-2)^2)=5.",
+          "expected": {
+            "entropy_dissipation": 5
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-pe04-ssprk33-first-order-upwind-entropy-preservation": {
+      "kind": "theorem",
+      "risk": "high",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations",
+        "examined": [
+          "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy",
+          "alg-pe04-first-order-upwind-forward-euler",
+          "alg-ssprk33",
+          "prop-ssprk33-third-order-and-convex-preservation",
+          "def-convex-subset-of-euclidean-space",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-countable-choice"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ssprk33",
+          "source_section": "Definition",
+          "quote": "1. Query $f(t,y)$. On success set $Y_1=y+h f(t,y)$.\n2. Query $f(t+h,Y_1)$. On success set $Y_2=\\frac34y+\\frac14\\bigl(Y_1+h f(t+h,Y_1)\\bigr)$.\n3. Query $f(t+h/2,Y_2)$. On success set $y^+=\\frac13y+\\frac23\\bigl(Y_2+h f(t+h/2,Y_2)\\bigr)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy",
+          "source_section": "Statement",
+          "quote": "For every convex function $\\eta:\\mathbb R\\to\\mathbb R$, the weighted discrete entropy does not increase:\n$$\\sum_KV_K\\eta(U_K^+)\\le\\sum_KV_K\\eta(U_K).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-ssprk33-third-order-and-convex-preservation",
+          "source_section": "Statement",
+          "quote": "If $\\Phi:C\\to\\mathbb R$ is convex, meaning $\\Phi(\\theta u+(1-\\theta)v)\\le\\theta\\Phi(u)+(1-\\theta)\\Phi(v)$ for $u,v\\in C$ and $0\\le\\theta\\le1$, and $\\Phi(E_h(u))\\le\\Phi(u)$ for every $u\\in C$, then $\\Phi$ does not increase at any of the three stages or at the output.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-pe04-first-order-upwind-forward-euler",
+          "source_section": "Definition",
+          "quote": "The **degree-zero upwind forward-Euler update** is admissible when $\\lambda_K\\le1$ for every cell; its output is\n$$U_K^+=U_K-\\frac{\\Delta t}{V_K}\\sum_{F\\subset\\partial K}A_F\\widehat f_{K,F}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the spatially autonomous SSPRK(3,3) step has exactly the three displayed convex-combination stages. Set $C=\\mathbb R^{\\mathcal T_h}$ and $\\Phi(U)=\\sum_KV_K\\eta(U_K)$. For $U,V\\in C$ and $0\\le t\\le1$, apply [F5] in each cell and multiply by $V_K>0$ from [F6]; summing proves convexity of $\\Phi$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The state space $C$ is convex and $\\Phi$ is convex. By [F2], every forward-Euler image of a cell-state vector lies in $C$ and has no larger $\\Phi$ value under the assumed cell CFL. Thus the hypotheses of the convex-transfer clause [F3] hold at the same $\\Delta t$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [F3] to the three stages in [F1] gives $\\Phi(U^{n+1})\\le\\Phi(U^n)$, which is the asserted weighted entropy inequality. The flux-differencing semidiscrete entropy theorem is not used in this transfer.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Steps 1.1–3.1: convexity and the forward-Euler entropy bound include the zero state whenever it is an admitted cell-state vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Statement: the finite-dimensional state vector and weighted entropy include a one-cell periodic mesh."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement/definition specifies the relevant inflow/outflow boundary traces and oriented endpoint/face conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet.",
+          "evidence": "Step 3.1: the theorem inherits only the Countable Choice premise already declared by the forward-Euler supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "convex-transfer-stage-check",
+          "claim": "A convex entropy bound transfers through the coefficient-one SSPRK(3,3) convex combinations once the FE map decreases it.",
+          "method": "apply Jensen at each stage",
+          "input": {
+            "FE_entropy_before": 1,
+            "FE_entropy_after": 0.5,
+            "convex_weights": [
+              "3/4,1/4",
+              "1/3,2/3"
+            ]
+          },
+          "calculation": "At every stage, Jensen bounds the convex combination by the corresponding convex combination of no-larger forward-Euler entropy values.",
+          "expected": {
+            "stage_entropy_nonincrease": true
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "Countable Choice is required only through the exact cited affine-simplex Green/full-support supplier or the forward-Euler result; no stronger choice principle is used."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-countable-choice",
+          "steps": [
+            "2.1"
+          ],
+          "use": "The imported geometric supplier uses Countable Choice exactly where identified in the proof facts; this item uses no stronger choice principle."
+        }
+      ],
+      "axiom_note": "Countable Choice only, through the exact cited supplier(s); no additional axiom branch is used.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "cex-pe04-underintegrated-burgers-collocation-entropy-growth": {
+      "kind": "counterexample",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations-examples",
+        "examined": [
+          "def-pe04-diagonal-norm-sbp-element-data"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe04-diagonal-norm-sbp-element-data",
+          "source_section": "Definition",
+          "quote": "$$D_{K,\\ell}\\mathbf1=0,\\qquad R_{K,F}\\mathbf1=\\mathbf1_F,\\qquad Q_{K,\\ell}+Q_{K,\\ell}^{T}=\\sum_{F\\subset\\partial K} n_{K,F,\\ell}R_{K,F}^{T}M_{K,F}R_{K,F}$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives $D\\mathbf1=0$ and $HD+D^TH=\\operatorname{diag}(-1,0,1)=B$, so the derivative and norm satisfy the stated SBP identity. The three-point Gauss–Lobatto rule is exact through degree three, while both the quadratic entropy integrand $u_h^2$ and cubic entropy flux $u_h^3$ exceed that degree for a quadratic polynomial; the pointwise collocation therefore underintegrates these nonlinear products.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At the chosen state, $f(U)=(9/2,1/2,2)^T$ and $\\widehat f_{\\partial}=13/4$. Hence $Df(U)=(-27/4,-5/4,17/4)^T$ and $H^{-1}B(\\widehat f_{\\partial}-f(U_{\\partial}))=(15/4,0,15/4)^T$. The semidiscrete residual is therefore $(-3,-5/4,8)^T$, so $\\dot U=(3,5/4,-8)^T$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The discrete entropy rate is $\\dot E=U^TH\\dot U=(-3)(1/3)(3)+(-1)(4/3)(5/4)+(-2)(1/3)(-8)=2/3>0$. This exact periodic state contradicts the asserted universal nonincrease, despite the SBP identity; it does not contradict the entropy-stable flux-differencing theorem, which uses a different volume flux.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample requires the stated nonzero nodal vector; the zero vector is not offered as an entropy-growth witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Counterexample: one reference element with the explicit three-node rule is the complete periodic witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1: all three distinct nodes and positive quadrature weights are explicitly verified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1: both periodic endpoint flux corrections are included in the exact residual."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "three-node-periodic-entropy-rate",
+          "claim": "The stated SBP collocation witness has positive quadratic-entropy rate.",
+          "method": "exact rational matrix evaluation",
+          "input": {
+            "U": [
+              -3,
+              -1,
+              -2
+            ],
+            "H": [
+              "1/3",
+              "4/3",
+              "1/3"
+            ],
+            "f(U)": [
+              "9/2",
+              "1/2",
+              "2"
+            ],
+            "boundary_flux": "13/4"
+          },
+          "calculation": "The residual is (-3,-5/4,8), so dot(U)=(3,5/4,-8) and U^T H dot(U)=2/3.",
+          "expected": {
+            "entropy_rate": "2/3"
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-pe04-central-versus-upwind-periodic-transport": {
+      "kind": "example",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations-examples",
+        "examined": [
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe04-upwind-dg-transport-discretization",
+          "source_section": "Definition",
+          "quote": "The **upwind DG semidiscretization** seeks a differentiable cellwise polynomial $u_h(t)$ such that for every $K\\in\\mathcal T_h$ and $v_h\\in\\mathbb P_p(K)$,\n$$\\int_K (\\partial_tu_h)v_h\\,dx-\\int_K \\beta u_h\\cdot\\nabla v_h\\,dx+\\sum_{F\\subset\\partial K}\\int_F\\widehat f_{K,F}v_h\\,dS=0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the central flux, both faces of cell 1 see the same pair $(u_1,u_2)$ and hence the same flux; likewise for cell 2. Thus $\\dot u_1=\\dot u_2=0$ and $E=\\frac h2(u_1^2+u_2^2)$ has $\\dot E=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the upwind flux, the two cell equations are $\\dot u_1=-\\frac ah(u_1-u_2)$ and $\\dot u_2=-\\frac ah(u_2-u_1)$. Therefore $\\dot E=h(u_1\\dot u_1+u_2\\dot u_2)=-a(u_1-u_2)^2$. In particular, at $(u_1,u_2)=(1,-1)$ the central rate is zero and the upwind rate is $-4a<0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Step 2.1: equal states give zero upwind energy rate by the displayed jump-square identity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is specifically the two-cell periodic comparison; it makes no one-cell comparison claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: the periodic indexing identifies both endpoint face pairs explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "two-cell-central-upwind-rate",
+          "claim": "For the fixed two-cell state (1,-1), central flux has zero energy rate and upwind flux dissipates energy.",
+          "method": "exact degree-zero flux balances",
+          "input": {
+            "a": 1,
+            "h": 1,
+            "states": [
+              1,
+              -1
+            ]
+          },
+          "calculation": "Central rate=0; upwind rate=-a*(1-(-1))^2=-4.",
+          "expected": {
+            "central_rate": 0,
+            "upwind_rate": -4
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-pe04-upwind-transport-with-inflow": {
+      "kind": "example",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations-examples",
+        "examined": [
+          "def-pe04-upwind-dg-transport-discretization"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe04-upwind-dg-transport-discretization",
+          "source_section": "Definition",
+          "quote": "The **upwind DG semidiscretization** seeks a differentiable cellwise polynomial $u_h(t)$ such that for every $K\\in\\mathcal T_h$ and $v_h\\in\\mathbb P_p(K)$,\n$$\\int_K (\\partial_tu_h)v_h\\,dx-\\int_K \\beta u_h\\cdot\\nabla v_h\\,dx+\\sum_{F\\subset\\partial K}\\int_F\\widehat f_{K,F}v_h\\,dS=0.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the constant test $v_h=1$ in the DG equation. The cell mass is $U$, the outflow contribution is $aU$, and the inflow contribution is $-ag$, so $\\dot U+aU-ag=0$ and $\\dot U=a(g-U)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $E(t)=\\frac12U(t)^2$, multiply the ODE by $U$ to get $\\dot E=aU(g-U)=\\frac a2g^2-\\frac a2U^2-\\frac a2(U-g)^2$. Rearranging displays the outflow energy, mismatch dissipation at inflow, and energy supplied by the boundary datum.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Step 2.1: U=g is the stationary branch and the energy identity has zero net rate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Example: exactly one interval cell is used, with its two endpoint fluxes stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: the inflow value at x=0 and outflow state at x=1 appear with their signed contributions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "one-cell-inflow-ode",
+          "claim": "The one-cell inflow ODE and energy balance agree for a concrete datum.",
+          "method": "substitute into the exact scalar ODE",
+          "input": {
+            "a": 2,
+            "U": 3,
+            "g": 1
+          },
+          "calculation": "dot(U)=2*(1-3)=-4; dot(E)=U*dot(U)=-12; the split right side is 1-9-4=-12.",
+          "expected": {
+            "dot_U": -4,
+            "dot_E": -12
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-pe04-sbp-inflow-sat-energy-identity": {
+      "kind": "example",
+      "risk": "medium",
+      "dependency_review": {
+        "placement": "hyperbolic-dg-and-summation-by-parts-discretizations-examples",
+        "examined": [
+          "def-pe04-upwind-sbp-sat-transport-discretization",
+          "thm-pe04-upwind-sbp-sat-l2-energy-stability"
+        ],
+        "unresolved": []
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pe04-upwind-sbp-sat-transport-discretization",
+          "source_section": "Definition",
+          "quote": "$$H_K\\dot U_K+\\sum_{\\ell=1}^d\\beta_\\ell Q_{K,\\ell}U_K+\\sum_{F\\subset\\partial K}R_{K,F}^{T}M_{K,F}\\,b_{K,F}(\\widehat U_{K,F}-U_{K,F})=0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pe04-upwind-sbp-sat-l2-energy-stability",
+          "source_section": "Statement",
+          "quote": "$$\\frac{dE_h}{dt}+\\frac a2\\sum_{F\\text{ interior}}[U]_F^2+\\frac a2U_{\\mathrm{out}}^2+\\frac a2(U_{\\mathrm{in}}-g)^2=\\frac a2g^2$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrices satisfy $H D=\\begin{pmatrix}-1/2&1/2\\\\-1/2&1/2\\end{pmatrix}$ and $HD+D^TH=B$, so $U^THD U=\\frac12(U_R^2-U_L^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiply the ODE in [F1] by $U^T$. The inflow penalty contributes $aU_L(U_L-g)$, and step 1.1 gives $\\dot E+\\frac a2U_R^2+\\frac a2(U_L-g)^2=\\frac a2g^2$. Thus the penalty has the sign required by the upwind energy identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated mesh, cell, state domain, or finite-dimensional data are assumed to be defined and nonempty; no empty-input claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "No separate zero-valued branch is needed to establish this item; any zero behavior follows by direct substitution in its displayed formulas.",
+          "evidence": "Step 2.1: U_L=U_R=g makes both the SAT correction and energy change zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The item makes no separate cardinality-one assertion; the stated finite-cell formulas apply under its stated mesh hypotheses.",
+          "evidence": "Example: the two-node SBP rule is applied to one interval with one inflow and one outflow endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement/definition explicitly excludes zero-length intervals, degenerate cells, zero face weights, or other excluded degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: left inflow and right outflow endpoint terms are computed explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite formulas use no selection from an arbitrary nonempty family; imported choice-dependent suppliers are separately recorded in the axiom worksheet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not assert a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "id": "two-node-inflow-sat",
+          "claim": "The SAT sign gives the exact endpoint energy balance for a finite two-node input.",
+          "method": "exact matrix multiplication",
+          "input": {
+            "a": 2,
+            "U_left": 3,
+            "U_right": 1,
+            "g": 2
+          },
+          "calculation": "The ODE gives dot(U)=(0,4), hence dot(E)=2 and dot(E)+1+1=4=(a/2)g^2.",
+          "expected": {
+            "dot_E": 2,
+            "identity_rhs": 4
+          }
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "axiom_note": "No AC, DC, or Countable Choice is used; all constructions are explicit and finite.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    }
+  }
+}

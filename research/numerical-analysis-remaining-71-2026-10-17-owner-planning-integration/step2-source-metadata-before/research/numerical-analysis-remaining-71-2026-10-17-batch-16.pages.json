@@ -1,0 +1,694 @@
+[
+  {
+    "order": 2586,
+    "id": "hierarchical-low-rank-matrices-and-error-propagation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Hierarchical low rank matrices and error propagation",
+    "companion": "hierarchical-low-rank-matrices-and-error-propagation-examples",
+    "requires": [
+      "randomized-low-rank-approximation",
+      "sparse-direct-elimination-and-ordering",
+      "tensor-train-compression-and-truncation-error"
+    ],
+    "items": [
+      {
+        "id": "def-hlr-cluster-trees-and-geometric-admissibility",
+        "kind": "definition",
+        "title": "Finite cluster trees and geometric admissibility",
+        "statement": "Defines balanced binary cluster trees over finite ordered index sets, the diameter and distance of geometric clusters, the admissibility test, and recursive block-cluster refinement.",
+        "deps": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.3.2–2.3.3",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-hlr-core-svd-recompression-with-tolerance",
+        "kind": "algorithm",
+        "title": "Core-SVD recompression with rank and error tolerances",
+        "statement": "Given a sum of low-rank factors, a rank cap k and a Frobenius tolerance, constructs a core-SVD truncation or returns tolerance-not-met.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.2",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-hlr-balanced-cluster-tree-size-and-depth",
+        "kind": "lemma",
+        "title": "Size and depth of a balanced cluster tree",
+        "statement": "A binary tree split by halves until clusters contain at most b indices has logarithmic depth and O(n/b) cluster nodes, with the stated leaf-size bounds.",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.3.2",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-hlr-block-cluster-leaves-partition-index-pairs",
+        "kind": "lemma",
+        "title": "Block-cluster leaves partition the index-pair set",
+        "statement": "The recursive admissible block-cluster tree has pairwise disjoint terminal rectangles whose union is the full row-index by column-index product.",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.3.2–2.3.3",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-hlr-and-h2-block-matrix-representations",
+        "kind": "definition",
+        "title": "H- and H²-matrix block representations",
+        "statement": "Defines H-block storage with dense nearfield leaves and rank-k farfield factors, together with the represented block matrix.",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.1",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+        "kind": "theorem",
+        "title": "Core-SVD recompression is best at the declared Frobenius tolerance",
+        "statement": "The core-SVD factors have the singular values of the represented factor sum; the algorithm returns a minimum-rank approximation meeting tolerance under the cap, or certifies none exists.",
+        "deps": [
+          "alg-hlr-core-svd-recompression-with-tolerance",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-best-rank-k-frobenius-matrix-approximation",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.2, Theorem 2.4.2.6",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-hlr-block-matvec",
+        "kind": "algorithm",
+        "title": "H-matrix block matrix-vector multiplication",
+        "statement": "Applies dense nearfield blocks and factorized farfield blocks on a finite disjoint block partition.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.3.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-hlr-bottom-up-recompression",
+        "kind": "algorithm",
+        "title": "Bottom-up low-rank recompression of block contributions",
+        "statement": "Processes each admissible block’s finite factor-sum tree in postorder, recompressing at every node and summing the exact local discarded-tail norms into a certified blockwise Frobenius error bound.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "alg-hlr-core-svd-recompression-with-tolerance",
+          "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.4.2–2.4.3",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-hlr-compress-exact-lu-factors",
+        "kind": "algorithm",
+        "title": "Compress exact block LU factors with local tolerances",
+        "statement": "Given exact block lower and upper factors of A, compress only admissible off-diagonal factor blocks, keep diagonal and nearfield blocks exact, and return local Frobenius error bounds.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "alg-hlr-core-svd-recompression-with-tolerance",
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-h2-nested-cluster-bases-and-interaction-lists",
+        "kind": "definition",
+        "title": "Nested H² cluster bases and interaction lists",
+        "statement": "Defines row and column cluster bases, transfer matrices expressing nestedness, coupling matrices on admissible blocks, and bounded interaction lists.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.6",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-hlr-separated-cauchy-block-rank-bound",
+        "kind": "theorem",
+        "title": "A separated Cauchy block has a geometric rank bound",
+        "statement": "For points in separated one-dimensional intervals, the first r terms of the geometric kernel expansion give a rank-at-most-r matrix and an explicit entrywise and Frobenius error bound.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-hlr-cluster-trees-and-geometric-admissibility"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.2.2.1",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-h2-matrix-vector-multiplication",
+        "kind": "algorithm",
+        "title": "Nested-basis H² matrix-vector multiplication",
+        "statement": "Uses upward and downward cluster-basis passes, admissible coupling products, and exact dense nearfield products.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-h2-nested-cluster-bases-and-interaction-lists"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.6",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-hlr-block-addition",
+        "kind": "algorithm",
+        "title": "Tolerance-controlled H-matrix block addition",
+        "statement": "Adds dense nearfield blocks exactly and runs bottom-up recompression on a factor-sum tree for each far block, returning a certified local error bound or a tolerance failure.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "alg-hlr-bottom-up-recompression"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.3",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-hlr-block-product",
+        "kind": "algorithm",
+        "title": "Tolerance-controlled H-matrix block product",
+        "statement": "Forms the exact intermediate-cluster product contributions, keeps near outputs dense, and recompresses each far-output factor-sum tree bottom-up under local budgets.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-hlr-cluster-trees-and-geometric-admissibility",
+          "alg-hlr-bottom-up-recompression"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.4",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-hlr-block-matvec-correct",
+        "kind": "theorem",
+        "title": "H-matrix block multiplication returns the represented matrix action",
+        "statement": "The H-matrix block matvec algorithm returns exactly the action of the represented block matrix on every compatible vector.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "alg-hlr-block-matvec"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.3.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-h2-matrix-vector-multiplication-correct",
+        "kind": "theorem",
+        "title": "Nested-basis H² multiplication is exact for its represented matrix",
+        "statement": "The upward and downward transfer passes return exactly the represented H² matrix action.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-h2-nested-cluster-bases-and-interaction-lists",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "alg-h2-matrix-vector-multiplication"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.6",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hlr-blockwise-error-propagation",
+        "kind": "theorem",
+        "title": "Blockwise Frobenius errors propagate by disjoint block sums",
+        "statement": "Local block tolerances yield a root-sum-square global Frobenius bound; addition and product errors obey explicit bounds for perturbed operands.",
+        "deps": [
+          "alg-hlr-block-addition",
+          "alg-hlr-block-product",
+          "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "alg-hlr-bottom-up-recompression",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.4.2–2.4.4",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hlr-storage-and-matvec-complexity",
+        "kind": "theorem",
+        "title": "Balanced H and H² storage and matvec complexity",
+        "statement": "Under explicit leaf-size, depth, block-count and interaction-list bounds, H storage and matvec work are O(k n log(2n/k)); nested H² storage and matvec work are O(k n).",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility",
+          "lem-hlr-balanced-cluster-tree-size-and-depth",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-h2-nested-cluster-bases-and-interaction-lists",
+          "alg-hlr-block-matvec",
+          "alg-h2-matrix-vector-multiplication"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.3.5, 2.4",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hlr-approximate-factorization-residual-and-inverse-error",
+        "kind": "theorem",
+        "title": "Compressed block LU factors have a residual and inverse certificate",
+        "statement": "Local Frobenius errors in compressed exact LU factors bound the global residual; if the inverse-scaled bound is below one, the approximate factor product is invertible with an explicit inverse error.",
+        "deps": [
+          "alg-hlr-compress-exact-lu-factors",
+          "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "thm-hlr-blockwise-error-propagation",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-best-rank-k-frobenius-matrix-approximation",
+          "thm-rank-nullity",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-invertible-matrices-correspond-to-linear-isomorphisms"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2587,
+    "id": "hierarchical-low-rank-matrices-and-error-propagation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Hierarchical low rank matrices and error propagation — Examples",
+    "companion": "hierarchical-low-rank-matrices-and-error-propagation",
+    "requires": [
+      "hierarchical-low-rank-matrices-and-error-propagation"
+    ],
+    "items": [
+      {
+        "id": "ex-hlr-accumulated-truncation-can-destroy-positive-definiteness",
+        "kind": "example",
+        "title": "Two accepted local truncations can destroy positive definiteness after accumulation",
+        "statement": "Two rank-one corrections, each within its own Frobenius tolerance, may be discarded before assembly and leave an indefinite approximate matrix.",
+        "deps": [
+          "alg-hlr-core-svd-recompression-with-tolerance",
+          "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-hlr-nearfield-block-requires-full-rank",
+        "kind": "example",
+        "title": "A nearfield identity block requires full rank for subunit spectral error",
+        "statement": "A diagonal two-point block is inadmissible and no rank-one approximation to the identity has spectral error below one.",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility",
+          "def-hlr-and-h2-block-matrix-representations",
+          "thm-eckart-young-best-rank-k-approximation",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.1",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-hlr-separated-cauchy-block",
+        "kind": "example",
+        "title": "A rank-one approximation of a separated Cauchy block",
+        "statement": "For two points in each of two separated intervals, the first Cauchy expansion term gives an explicit rank-one block and exactly computable residual.",
+        "deps": [
+          "thm-hlr-separated-cauchy-block-rank-bound",
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, Max-Planck-Institut MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2, 6.2, 9.2.",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.2.2.1",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

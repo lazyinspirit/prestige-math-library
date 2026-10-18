@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "kind": "read-only-published-proof-repair-proposal",
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "created_at": "2026-10-18T03:42:02.560727+00:00",
+  "reviewer": "/root/gate_url_linear",
+  "id": "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+  "source": "items/thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block.md",
+  "status": "proposed; published source not edited pending root ordinary pre-edit claim and release",
+  "actual_alert_file": "research/numerical-analysis-remaining-71-2026-10-17-batch-18-step5-context.json",
+  "alert_disposition": {
+    "indexing": "The cited constructive QR supplier explicitly uses zero-based columns k=0,...,n-1. Under that actual convention, after k completed pivots the next diagonal is r_kk and k=r-1 is the final nonzero pivot. Thus the assertion that it must be r_(k+1,k+1) is not a mathematical counterexample under the supplier convention. The current proof should explicitly name the convention and state the induction, because it currently invites a one-based reading.",
+    "phase": "Confirmed literal overstatement: neither the QR definition nor the annihilation theorem imposes positive diagonals. Real signs and complex phases are permitted, so the invariant identity is |r_kk| equal to residual norm. For example Q=[-1],R=[-1],A=[1] is a valid one-step exact QR over the reals, while the residual norm is one. The proof only needs nonvanishing, so modulus fixes it without changing the theorem.",
+    "trailing_block": "Clarify that image-span containment makes every coordinate in rows r onward vanish, including entries above the trailing-block diagonal. This directly gives the complete displayed zero block.",
+    "full_statement": "The stated rank/invertible-leading-block/zero-trailing-block conclusion remains correct; no narrowing or numerical-method change is needed."
+  },
+  "original_statement": "\nLet $\\mathbb F=\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$\nhave rank $r$, and let\n\n$$A\\Pi=QR$$\nbe an exact column-pivoted QR factorisation in which, at each step, the next\ncolumn is chosen with maximal residual $2$-norm among the remaining columns.\nThen\n$$R=\\begin{pmatrix}R_{11}&R_{12}\\\\0&0\\end{pmatrix},$$\n\nwhere $R_{11}\\in M_r(\\mathbb F)$ is upper triangular with nonzero diagonal and\nhence is invertible.\n",
+  "proposed_edits": [
+    {
+      "section": "Proof",
+      "step": "1.1",
+      "guard_unique_current_text": "1.1 After $k$ pivot steps, the first $k$ pivoted columns span the same subspace as the first $k$ columns of $QR$, and the next pivot diagonal entry $r_{kk}$ is the norm of the residual of the chosen column after projection onto that span. Hence $r_{kk}\\ne 0$ exactly when some remaining column still has a nonzero residual, that is, still lies outside the span of the first $k$ chosen columns. [L1, L2, algebra]",
+      "proposed_replacement": "1.1 Use zero-based row and column indices. Suppose $k$ pivot steps have been completed and the first $k$ chosen columns are independent; for $k=0$ this condition is vacuous. Their upper triangular leading block is nonsingular, so their span is the span of the first $k$ columns of $Q$. Orthogonality or unitarity identifies the residual of each remaining column after projection onto this span with its active coordinates in rows $k$ onward. The next pivot has index $k$; the transformations in [L2] concentrate its active coordinates in row $k$ and preserve their norm. Thus $|r_{kk}|$ is the norm of that residual, without any diagonal sign or phase convention. By the greedy rule, $r_{kk}\\ne0$ exactly when some remaining column lies outside the span of the first $k$ chosen columns. [L1, L2, algebra]"
+    },
+    {
+      "section": "Proof",
+      "step": "2.1",
+      "guard_unique_current_text": "2.1 For $k<r$, the chosen columns cannot already span every column of $A$, because then all columns would lie in a $k$-dimensional span and [L4] would give rank at most $k<r$. Therefore some remaining column has nonzero residual, and by the greedy rule step 1.1 gives $r_{kk}\\ne 0$. Thus the first $r$ diagonal entries of $R$ are nonzero. [step 1.1, L4, algebra]",
+      "proposed_replacement": "2.1 Induct over $k=0,\\ldots,r-1$. If the first $k$ chosen columns are independent, their span has dimension $k<r$, so [L4] implies that some remaining column lies outside it. Step 1.1 and the greedy rule give $r_{kk}\\ne0$, and the new chosen column is independent of its predecessors. Starting with the empty list proves that the first $r$ chosen columns are independent and that $r_{00},\\ldots,r_{r-1,r-1}$ are nonzero. [step 1.1, L4, induction, algebra]"
+    },
+    {
+      "section": "Proof",
+      "step": "3.1",
+      "guard_unique_current_text": "3.1 After $r$ pivot columns have been chosen, [L4] says no further independent column exists. Hence every remaining column lies in the span of the first $r$ chosen columns, so every remaining residual is zero. Step 1.1 then forces every entry below and on the diagonal in the trailing block to be zero, giving $$R=\\begin{pmatrix}R_{11}&R_{12}\\\\0&0\\end{pmatrix}.$$ The block $R_{11}$ is upper triangular with nonzero diagonal by step 2.1, so it is invertible. [step 1.1, step 2.1, L3, L4, algebra]",
+      "proposed_replacement": "3.1 The first $r$ chosen columns are independent by step 2.1 and therefore span every column of $A$ by [L4]. Their span is the span of the first $r$ columns of $Q$, so all coordinates of every column of $Q^*A\\Pi$ in rows indexed $r$ onward are zero. This gives the whole zero lower block, including every entry of the trailing block, not merely its diagonal. Hence $$R=\\begin{pmatrix}R_{11}&R_{12}\\\\0&0\\end{pmatrix}.$$ The block $R_{11}$ is upper triangular with nonzero diagonal by step 2.1; back-substitution solves $R_{11}x=b$ uniquely for every $b$, giving a two-sided inverse as in [L3]. For $r=0$, all columns of $A$ are zero and $R_{11}$ is the empty identity, which is its own inverse under [L3]. [step 1.1, step 2.1, L1, L3, L4, algebra]"
+    }
+  ],
+  "unchanged": [
+    "Statement byte-for-byte",
+    "Facts & Assumptions",
+    "Frontmatter and all dependencies",
+    "Proof step 4.1",
+    "Pivot selection rule, tie handling, numerical modes and all algorithm interfaces"
+  ],
+  "mathematical_reasoning": {
+    "base": "The empty selected family is independent and spans the zero subspace. The next active transformed vector is the orthogonal residual because the earlier independent triangular columns span exactly the earlier Q columns.",
+    "induction": "For k<r that span cannot contain the whole image. A remaining nonzero residual exists; greedy maximum residual selection chooses one. A unitary active-row annihilation preserves its norm and places it at diagonal index k, whose modulus is positive, adding one independent column. The range k=0,...,r-1 covers all r pivots.",
+    "finish": "The first r independent chosen columns span the image of the rank-r matrix. Therefore every transformed column has zero coordinates outside the first r Q columns. The upper triangular leading block has nonzero diagonal and a unique back-substitution solve, giving its inverse.",
+    "boundaries": "Rank zero gives A=0 and the empty leading block, whose self-inverse convention is explicitly supplied by the cited invertibility definition. At full column rank the induction includes the last available pivot and the trailing column block is empty. Signs and complex phases never enter the independence argument."
+  },
+  "actual_prerequisites_read": [
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "finding": "Defines orthonormal/full unitary factors and upper triangular/trapezoidal R; imposes no diagonal sign or phase."
+    },
+    {
+      "id": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+      "finding": "Its constructive Proof 1.1 explicitly processes k=0,...,n-1, preserves earlier rows and permits zero active vectors via identity updates."
+    },
+    {
+      "id": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+      "finding": "Statements 2 and 3 guarantee output modulus equals input norm; complex Givens proof explicitly returns a phase times that norm."
+    },
+    {
+      "id": "def-invertible-matrix-and-general-linear-group",
+      "finding": "Two-sided inverse convention and explicit self-inverse empty identity support the leading-block conclusion including rank zero."
+    },
+    {
+      "id": "def-rank-and-nullity",
+      "finding": "Rank is image dimension, including zero-dimensional spaces."
+    }
+  ],
+  "consumer_impact": [
+    {
+      "id": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "path": "items/alg-strong-rank-revealing-qr-with-finite-swaps.md",
+      "actual_use": "Exact initialization step 1 requires full column rank and a nonsingular selected leading block. It does not require a positive diagonal, and the finite-precision branch already distinguishes rounded factors and separately certified exact identities.",
+      "disposition": "Current interface use remains sound; no consumer source change."
+    },
+    {
+      "id": "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+      "path": "items/cex-classical-column-pivoted-qr-is-not-strong-with-factor-one.md",
+      "actual_use": "Fact F3 and Proof 1.1 use greedy residual-norm selection at full rank. Proof 2.1 explicitly chooses Q=I,R=A for its particular positive-diagonal triangular input; it does not infer positivity from the general theorem.",
+      "disposition": "Counterexample remains sound unchanged."
+    },
+    {
+      "id": "batch-18 ID consumers",
+      "actual_use": "Step4 alert reaches the published theorem through the exact RRQR initializer; it only requires a nonsingular leading block, which is preserved with the same full-column-rank hypothesis.",
+      "disposition": "No expanded interface or downstream source correction is created by this proof-only clarification."
+    }
+  ],
+  "ownership": "No Statement or Definition change proposed. Root owns ordinary published pre-edit claim/archive, fresh actual local checks, verification pointer/receipt, hashes, native alert disposition and integration.",
+  "limits": "No source, metadata, contract, manifest, ledger, native report, code or decision edited. No hashes, checks, tests, gates or external-text reading claimed. Complete current published proof, cited prerequisite carriers and both direct consumer carriers were read; reasoning is elementary finite-dimensional QR and does not need an uncertain external result."
+}

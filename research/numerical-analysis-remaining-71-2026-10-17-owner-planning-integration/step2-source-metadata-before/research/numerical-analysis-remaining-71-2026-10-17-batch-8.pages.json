@@ -1,0 +1,395 @@
+[
+  {
+    "order": 2570,
+    "id": "nonuniform-fast-fourier-transforms",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Nonuniform fast fourier transforms",
+    "companion": "nonuniform-fast-fourier-transforms-examples",
+    "requires": [
+      "computed-fast-transforms-and-convolution"
+    ],
+    "items": [
+      {
+        "id": "def-nufft-finite-array-norms",
+        "kind": "definition",
+        "title": "Finite complex-array norms used by the NUFFT certificates",
+        "statement": "Define the finite complex-array l1, Euclidean, and maximum norms, including value zero on the empty index set.",
+        "deps": [
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-nonnegative-square-root-exists-and-unique",
+          "def-complete-ordered-real-field",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 0,
+        "strategy": "Give explicit finite-sum/max formulas and state the empty-set convention.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, fourth edition",
+              "url": "https://linear.axler.net/LADR4e.pdf",
+              "locator": "Section 6A, printed pp. 182–186: complex Euclidean norm and counting inner product, Example 6.3(a), Definition 6.7 and Example 6.8(a). The local finite-index/empty-index, l1 and maximum conventions and finite well-definedness proof are supplied explicitly here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nufft-periodized-gaussian-gridding-kernel",
+        "kind": "definition",
+        "title": "Periodized Gaussian gridding kernel",
+        "statement": "For tau>0 define the period-one Gaussian sum phi_tau(x)=sum_n exp(-pi(x+n)^2/tau); local convergence and continuity are established by a same-page lemma.",
+        "deps": [
+          "def-real-elementary-functions-and-domains"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-nufft-gaussian-periodization-converges"
+        ],
+        "strategy": "Use Gaussian decay and an explicit geometric majorant on each compact interval.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-nufft-finite-euclidean-norm-triangle",
+        "kind": "lemma",
+        "title": "Triangle inequality for the finite NUFFT Euclidean norm",
+        "statement": "For finite complex arrays, the counting Euclidean norm satisfies the triangle inequality.",
+        "deps": [
+          "def-nufft-finite-array-norms",
+          "def-complete-ordered-real-field",
+          "lem-of-square-positive",
+          "lem-of-square-monotone",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove finite-array Cauchy–Schwarz by expanding a nonnegative squared norm, then expand the norm of a sum.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, fourth edition",
+              "url": "https://linear.axler.net/LADR4e.pdf",
+              "locator": "Section 6A, printed pp. 188–190: orthogonal decomposition 6.13, Cauchy–Schwarz inequality 6.14 and complete proof, triangle inequality 6.17 and complete proof. The local finite-complex-array proof expands the same projection residual and squared norm directly, including the zero case."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nufft-transform-types-and-mode-conventions",
+        "kind": "definition",
+        "title": "Type-1, type-2, and type-3 nonuniform Fourier transforms",
+        "statement": "Fix the normalized torus, finite source and mode sets, signs, scaling, type-3 frequency lists, and the exact finite-sum conventions used by the page.",
+        "deps": [
+          "def-complex-exponential",
+          "def-real-elementary-functions-and-domains",
+          "def-nufft-finite-array-norms",
+          "def-finite-sum-in-a-commutative-monoid",
+          "thm-complex-numbers-form-a-field",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-generalised-associativity"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define each finite matrix explicitly and prove the type-2 formula is its conjugate transpose by finite expansion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-nufft-gaussian-periodization-converges",
+        "kind": "lemma",
+        "title": "Local uniform convergence of the periodized Gaussian",
+        "statement": "The Gaussian periodization converges absolutely and locally uniformly, defines a continuous function, and is one-periodic, without a choice axiom.",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "def-real-elementary-functions-and-domains",
+          "lem-archimedean-property-from-completeness",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 1,
+        "strategy": "On each compact interval bound both tails by a convergent geometric series, then prove continuity by a uniform-tail epsilon argument.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-nufft-gaussian-image-tail-bound",
+        "kind": "lemma",
+        "title": "Explicit tail for the periodized Gaussian image sum",
+        "statement": "A finite image sum on [0,1] encloses the periodized Gaussian after adding an explicit two-sided geometric remainder.",
+        "deps": [
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "lem-nufft-gaussian-periodization-converges",
+          "def-real-elementary-functions-and-domains",
+          "thm-geometric-series",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "dependency_level": 2,
+        "strategy": "Split the positive and negative omitted indices and bound each tail by a geometric series."
+      },
+      {
+        "id": "lem-nufft-gaussian-periodization-fourier-series",
+        "kind": "lemma",
+        "title": "Fourier series of the periodized Gaussian",
+        "statement": "Under Countable Choice, the periodized Gaussian has Fourier coefficients sqrt(tau) exp(-pi tau r^2), and its absolutely convergent Fourier series equals the kernel.",
+        "deps": [
+          "def-countable-choice",
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "def-real-elementary-functions-and-domains",
+          "def-schwartz-space-and-its-seminorms",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "lem-nufft-gaussian-periodization-converges",
+          "lem-derivative-algebra-and-chain-rules",
+          "thm-derivative-of-exponential",
+          "thm-exponential-beats-every-polynomial",
+          "thm-poisson-summation-for-schwartz-functions"
+        ],
+        "dependency_level": 2,
+        "strategy": "Show the underlying Gaussian is Schwartz, apply the inspected Schwartz Poisson-summation theorem, and substitute the exact two-pi Gaussian transform.",
+        "axiom_base": "Countable Choice is required by the Schwartz Poisson-summation and Gaussian Fourier-transform suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-nufft-gaussian-spread-truncation-tail",
+        "kind": "lemma",
+        "title": "Explicit periodized Gaussian spread-tail bound",
+        "statement": "Truncating each coordinate spread to the 2w+1 nearest periodic grid points has a uniform Gaussian-tail bound; the total omitted product-kernel mass is bounded by a coordinatewise union estimate.",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "def-real-elementary-functions-and-domains",
+          "lem-nufft-gaussian-periodization-converges",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-derivative-of-exponential",
+          "thm-exponential-beats-every-polynomial",
+          "thm-exponential-is-strictly-increasing",
+          "thm-ftc-second-part",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 2,
+        "strategy": "Reindex periodic grid sums by the integer lattice, apply a shifted Gaussian tail comparison, and sum the complement of a product neighborhood by a union bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-nufft-gaussian-grid-alias-identity-and-bound",
+        "kind": "lemma",
+        "title": "Exact Gaussian grid alias identity and explicit alias bound",
+        "statement": "For a rectangular power-of-two grid with M_r>2K_r, the normalized grid DFT deconvolves to the type-1 sum plus an absolutely convergent alias series bounded by ||c||_1 times a finite product of explicit geometric terms.",
+        "deps": [
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "lem-nufft-gaussian-periodization-fourier-series",
+          "def-countable-choice",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-geometric-series",
+          "def-real-elementary-functions-and-domains",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "lem-nonnegative-square-root-exists-and-unique"
+        ],
+        "dependency_level": 3,
+        "strategy": "Substitute the absolutely convergent kernel Fourier series, use the finite root-of-unity sum coordinatewise, and bound nonzero signed aliases by a geometric series.",
+        "axiom_base": "Countable Choice is inherited from the local Gaussian periodization Fourier-series lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "kind": "algorithm",
+        "title": "Certified Gaussian gridding for type 1 and type 2",
+        "statement": "Search a finite list of positive rational Gaussian parameters, power-of-two oversampled grids, and widths; use outward elementary-function enclosures, spreading, unitary axis FFTs, mode deconvolution, explicit analytic error bounds, and conservative failure statuses.",
+        "deps": [
+          "alg-certified-elementary-range-evaluation",
+          "alg-na-computed-unitary-radix-two-fft",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-countable-choice",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-nufft-finite-array-norms",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-outward-rounded-interval-and-ball-operations",
+          "def-real-elementary-functions-and-domains",
+          "lem-nufft-gaussian-grid-alias-identity-and-bound",
+          "lem-nufft-gaussian-image-tail-bound",
+          "lem-nufft-gaussian-periodization-fourier-series",
+          "lem-nufft-gaussian-spread-truncation-tail",
+          "thm-na-computed-unitary-radix-two-fft-error-bound",
+          "thm-na-interval-pi-matches-canonical-fourier-pi",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-real-elementary-range-enclosures"
+        ],
+        "dependency_level": 4,
+        "strategy": "Use the exact alias identity and product Gaussian tail, certify kernel and denominator enclosures, and transfer the published radix-two FFT norm error through interval deconvolution.",
+        "axiom_base": "The certificate branch carries Countable Choice through the local Schwartz Poisson-summation supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+        "kind": "theorem",
+        "title": "Certified type-1 Gaussian gridding error and type-2 adjoint bound",
+        "statement": "For a successful algorithm result, type 1 has an explicit l-infinity error bounded by an analytic alias-plus-tail term times ||c||_1 and a computed outward rounding radius; the matching type-2 matrix is the conjugate transpose and has the analogous l-infinity bound.",
+        "deps": [
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-nufft-finite-array-norms",
+          "def-matrix-product-and-identity-matrix",
+          "def-nufft-periodized-gaussian-gridding-kernel",
+          "lem-nufft-gaussian-periodization-fourier-series",
+          "lem-nufft-gaussian-grid-alias-identity-and-bound",
+          "lem-nufft-gaussian-spread-truncation-tail",
+          "lem-nufft-gaussian-image-tail-bound",
+          "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "def-countable-choice",
+          "thm-na-computed-unitary-radix-two-fft-error-bound",
+          "thm-finite-parseval-and-plancherel",
+          "thm-radix-two-fft-arithmetic-complexity",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-real-elementary-range-enclosures",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-real-elementary-functions-and-domains",
+          "lem-nonnegative-square-root-exists-and-unique",
+          "lem-nufft-finite-euclidean-norm-triangle"
+        ],
+        "dependency_level": 5,
+        "strategy": "Bound exact grid aliases and omitted spreading, enclose the finite-precision FFT and interval deconvolution, then use the entrywise matrix bound to transfer the same analytic constant to the adjoint.",
+        "axiom_base": "Countable Choice is inherited through the local Schwartz Poisson-summation supplier.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2571,
+    "id": "nonuniform-fast-fourier-transforms-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Nonuniform fast fourier transforms — Examples",
+    "companion": "nonuniform-fast-fourier-transforms",
+    "requires": [
+      "nonuniform-fast-fourier-transforms"
+    ],
+    "items": [
+      {
+        "id": "ex-nufft-mri-fourier-samples",
+        "kind": "example",
+        "title": "Exact MRI Fourier samples from a two-point object",
+        "statement": "A two-point weighted object with an off-grid source has exact type-1 Fourier samples given by the stated finite sum, illustrating the discrete MRI k-space model.",
+        "deps": [
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-complex-exponential"
+        ],
+        "dependency_level": 2,
+        "strategy": "Substitute the explicit source locations and coefficients into the type-1 definition and evaluate the zero mode exactly.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leslie Greengard and June-Yub Lee, Accelerating the Nonuniform Fast Fourier Transform",
+              "url": "https://cims.nyu.edu/~greengar/glee_nufft_sirev.pdf",
+              "locator": "Example 4, printed pp. 451–452: MRI sampling as nonuniform Fourier evaluation; this example recomputes a separate exact two-point model."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-nufft-small-deconvolution-mode-is-inconclusive",
+        "kind": "example",
+        "title": "A positive mode multiplier too small to certify",
+        "statement": "A concrete finite dyadic format and Gaussian mode have a strictly positive exact deconvolution multiplier below the smallest positive subnormal, forcing the interval branch to return inconclusive.",
+        "deps": [
+          "alg-nufft-certified-gaussian-gridding-type1-type2",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-real-elementary-functions-and-domains",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "lem-nonnegative-square-root-exists-and-unique"
+        ],
+        "dependency_level": 5,
+        "strategy": "Compare the exact positive multiplier with the least subnormal using a lower bound for pi and the positive exponential series.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-nufft-clustered-sources-l1-error",
+        "kind": "example",
+        "title": "Clustered sources and absolute l1 error",
+        "statement": "Two nearby sources with opposite coefficients have fixed coefficient l1 norm while a selected Fourier coefficient tends to zero, so the proved estimate is absolute and supplies no relative-error guarantee.",
+        "deps": [
+          "def-nufft-transform-types-and-mode-conventions",
+          "def-nufft-finite-array-norms",
+          "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+          "def-countable-choice",
+          "def-real-elementary-functions-and-domains",
+          "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+          "thm-complex-exponential-addition-and-real-extension",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "thm-sine-and-cosine-derivatives",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-ftc-second-part",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "dependency_level": 6,
+        "strategy": "Compute the exact two-source sum and bound its small exponential difference with the sine and cosine derivative formulas.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  }
+]

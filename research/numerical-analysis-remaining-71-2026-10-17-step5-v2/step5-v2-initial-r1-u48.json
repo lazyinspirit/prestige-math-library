@@ -1,0 +1,97 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "48",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "lem-half-order-kernel-translation-modulus-in-l1",
+      "model": "gpt-6-luna",
+      "context_sha256": "e468749b5505e42c29c14f61afea3a383f6fda2e3ca34a85b5a16df4c05fc6c3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly attributes the improper-limit convention to a definition of finite-interval integration. This is nonfatal: the Statement already specifies the improper convention and step 1.1 independently establishes the cutoff limit by an explicit Cauchy estimate. F1 now separates that local convention from the cited ordinary integral definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-half-order-midpoint-order-loss",
+      "model": "gpt-6-luna",
+      "context_sha256": "615ba6c10a4d9434a9eb9d5c753938c243eb7b8fd4d8d2b225722f2a2a8fa741",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The cited midpoint algorithm requires an everywhere evaluable real function on [0,1], but the original g was supplied only on (0,1]. This application omitted an actual domain hypothesis. The verification now calls the algorithm on the explicit extension g-tilde(0)=0, g-tilde(y)=y^(-1/2) for y>0. Every midpoint is positive, so all samples and the improper-integral comparison are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-half-order-kernel-translation-modulus-in-l1",
+      "disposition": "repaired",
+      "post_sha256": "afae964a7b3242119c6481a0efb61a35afe8b96b1f1b7637e9aeb7baaa4d403f",
+      "review_context_sha256": "bf799e4539e55fe87bb84833e42f58d31987861826bb5ef5a4644dfe3253d676",
+      "reason": "Checked the split-interval Cauchy estimate, including coincident and boundary singularities. The capped kernel has removed mass 2 sqrt(eta), each translated tail is bounded by that mass, and uniform continuity gives T <= 4 sqrt(eta)+omega_eta(d), a finite supremum and the stated limit. Only the F1 citation/convention wording changed; the Statement and dependencies are unchanged. This is repair-author verification, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-half-order-midpoint-order-loss",
+      "disposition": "repaired",
+      "post_sha256": "54d14db12f0c18aadbdecf6828a622f367d188796b09f9b1bdddd5b20cf04494",
+      "review_context_sha256": "28c364857dc3ca754cd4dd89ba4c9dc148d5155ca2ea98f94e97e397a9c3f013",
+      "reason": "Verified the extension satisfies the full algorithm domain without assuming continuity at zero. Rescaling truncated tagged sums gives first-panel mass 2 sqrt(h), while its midpoint sample is sqrt(2h). On every later panel g-prime is increasing, so the symmetric difference integrates nonnegatively; N=1 has no later panels. The positive lower bound precludes second order. The product rule interpolates the regular factor 1, whose hats sum to 1, and returns S_0(1)=2. The Example claim, dependencies and choice requirements are unchanged. This is repair-author verification, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-half-order-kernel-translation-modulus-in-l1",
+      "phase": "initial",
+      "round": 1,
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "facts-block",
+      "reason": "F1 incorrectly attributes the improper-limit convention to a definition of finite-interval integration. This is nonfatal: the Statement already specifies the improper convention and step 1.1 independently establishes the cutoff limit by an explicit Cauchy estimate. F1 now separates that local convention from the cited ordinary integral definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-half-order-midpoint-order-loss",
+      "phase": "initial",
+      "round": 1,
+      "severity": "fatal",
+      "status": "fixed",
+      "locus": "proof-step",
+      "reason": "The cited midpoint algorithm requires an everywhere evaluable real function on [0,1], but the original g was supplied only on (0,1]. This application omitted an actual domain hypothesis. The verification now calls the algorithm on the explicit extension g-tilde(0)=0, g-tilde(y)=y^(-1/2) for y>0. Every midpoint is positive, so all samples and the improper-integral comparison are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed in assigned dependency order, levels 0 then 2. Both IDs are assigned draft members of the frozen frontier. No new items, published edits, shared-ledger edits, judge stamps or workflow state writes were made.",
+    "Kernel claim and conventions: split improper Riemann integrals at distinct singular locations; coincident locations give zero. Examined items/lem-half-order-kernel-translation-modulus-in-l1.md, its owning batch-48 proof contract, its A page, and all eight cited supplier Statements plus the ordinary-integral Definition. The sole repair is F1 wording. Its Statement is unchanged; no consumer propagation is triggered.",
+    "Midpoint claim and conventions: N>=1, h=1/N, improper singular integral 2, error >= (2-sqrt(2))*sqrt(h), and exact product integration for regular factor 1. Examined the complete assigned verification and owning contract, the A/B pages, the singular-integral supplier proof, the product-integration Definition, midpoint algorithm Definition and actual calculus/integral prerequisite Statements. Added the endpoint extension only in Facts and Verification and made first-panel rescaling explicit. The Example claim is unchanged. No Statement or Definition changed, so downstream is empty.",
+    "The existing contract already quotes the full algorithm domain and records the first-panel, later-panel and product-rule obligations. Those obligations remain valid with the explicit extension, and the focused strict contract check passed without contract edits. A shared-write lock attempt returned busy; no shared metadata mutation was performed.",
+    "Authoritative external sources were not consulted: the elementary improper-integral estimates, capped-kernel smoothing and convexity argument are familiar. Existing bibliography is retained; no external reading or independent review of these repairs is claimed. No potentially defective published item or outside consumer was found; no published-ledger update is proposed.",
+    "PASS (exit 0): node tools/tsx-run.mjs tools/precheck.mts items/lem-half-order-kernel-translation-modulus-in-l1.md items/ex-half-order-midpoint-order-loss.md \u2014 2 checked, 0 failing.",
+    "PASS (exit 0): node tools/rendercheck.mjs items/lem-half-order-kernel-translation-modulus-in-l1.md items/ex-half-order-midpoint-order-loss.md \u2014 both YAML and all mathematical spans parse.",
+    "PASS (exit 0): node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-48.proof-contracts.json --strict --items lem-half-order-kernel-translation-modulus-in-l1,ex-half-order-midpoint-order-loss --json \u2014 ok:true, no errors or warnings.",
+    "PASS (exit 0), after final item edits: node tools/proof-layout.mjs items/lem-half-order-kernel-translation-modulus-in-l1.md items/ex-half-order-midpoint-order-loss.md \u2014 2 items, 6 steps, 0 defects.",
+    "Each review-contexts command was run immediately after completing its item review, in supplier order, and both returned hashes are copied verbatim. No unresolved mathematical obligations remain in this assignment; controller-owned collection, independent rejudgment and certification remain outside this report."
+  ]
+}

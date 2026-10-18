@@ -1,0 +1,82 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "29",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "ex-godunov-fv-captures-stationary-burgers-shock",
+      "model": "gpt-6-luna",
+      "context_sha256": "85d41a98629e95a53a7c40e9cef2d13b5333c34d24ab7a23cab4ee33a01c80fa",
+      "outcome": "false_positive",
+      "reason": "The carrier does not assert m in N or include m=0. It specifies h_m=1/m and tau_m=h_m/4 as meshes, whose imported definition requires h_m,tau_m>0; the positive-integer indexing m=1,2,... is therefore admissible and is explicitly identified in the owning contract risk_review. The convention 0 in N does not require every indexed mesh family to contain a zero index. Thus no h_0=1/0 is asserted and the rejection adds an absent hypothesis.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-godunov-fv-captures-stationary-burgers-shock",
+      "disposition": "unaffected",
+      "post_sha256": "cf943a4a5c363291855e179bb8933992f6a6953d9893fa1cd79c9ddb37663290",
+      "review_context_sha256": "6d425007d1928d0fc234f554711b4ab3dc1c9e79e3e4e8f0b08efc097da53f27",
+      "reason": "Checked the complete example, its six verification steps, current supplier interfaces, owning proof contract and both page interfaces. The face pairs (1,1), (1,-1), (-1,-1) all give Godunov flux 1/2, so the update and both reconstructions remain exactly stationary. The weak boundary term cancels; the left-minus-right entropy flux is 1-k^2 for -1<k<1 and zero otherwise, including k=+/-1, and the initial trace is exact. Distinct traces give Rankine-Hugoniot speed 0/(-2)=0. The positive-index meshes vanish, TV(u_0)=2, tau_m/h_m=1/4 and the full CFL value is 1/2. Nonintegrable tails select the theorem branch assuming AC_omega without DC. No defect or metadata repair is necessary; the current guard equals the assignment before guard.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "ex-godunov-fv-captures-stationary-burgers-shock",
+      "model": "gpt-6-luna",
+      "context_sha256": "85d41a98629e95a53a7c40e9cef2d13b5333c34d24ab7a23cab4ee33a01c80fa",
+      "outcome": "false_positive",
+      "reason": "The carrier does not assert m in N or include m=0. It specifies h_m=1/m and tau_m=h_m/4 as meshes, whose imported definition requires h_m,tau_m>0; the positive-integer indexing m=1,2,... is therefore admissible and is explicitly identified in the owning contract risk_review. The convention 0 in N does not require every indexed mesh family to contain a zero index. Thus no h_0=1/0 is asserted and the rejection adds an absent hypothesis.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair_required",
+    "changed_files": [],
+    "index_convention": "m=1,2,... indexes positive meshes; n=0,1,... indexes time steps. These indices have different roles.",
+    "contract_path": "research/numerical-analysis-remaining-71-2026-10-17-batch-29.proof-contracts.json",
+    "contract_locator": "contracts.ex-godunov-fv-captures-stationary-burgers-shock.risk_review.notes",
+    "source_evidence": "Local supplier statements/definitions and direct computations were checked; no external source reading is claimed.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-godunov-fv-captures-stationary-burgers-shock.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked, 0 failures; pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-godunov-fv-captures-stationary-burgers-shock.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-29.proof-contracts.json --strict --items ex-godunov-fv-captures-stationary-burgers-shock --json",
+        "exit_code": 0,
+        "result": "ok:true; assigned item checked; 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-godunov-fv-captures-stationary-burgers-shock.md",
+        "exit_code": 0,
+        "result": "1 item, 6 steps, 0 defects."
+      }
+    ],
+    "propagation": "No item, Statement or Definition was changed; no downstream examination event was generated.",
+    "published_ledger": "No published defect or affected published consumer was identified; no published-ledger update is proposed.",
+    "unresolved_obligations": [],
+    "next_action": "Engine collection of this adjudication; no judges, stamps, certificates or round state were written."
+  }
+}

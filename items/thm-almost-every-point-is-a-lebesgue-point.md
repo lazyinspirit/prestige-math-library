@@ -8,11 +8,11 @@ landmark: true
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-countable-choice, def-lebesgue-point-and-lebesgue-set, def-measure-null-set-and-almost-everywhere, lem-rat-embeds-dense, thm-countable-union-of-null-is-null, thm-product-of-countable, thm-rationals-countable, thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n]
+deps: [def-countable-choice, def-lebesgue-point-and-lebesgue-set, def-measure-null-set-and-almost-everywhere, lem-rat-embeds-dense, thm-lebesgue-measure-is-a-complete-measure, thm-finite-and-countable-subadditivity-of-measures, thm-product-of-countable, thm-rationals-countable, thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n]
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
   precheck: pass
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-published-hjb-local-repairs/thm-almost-every-point-is-a-lebesgue-point.json
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis: Modern Techniques and Their Applications, 2nd ed., Theorem 3.20"
@@ -43,7 +43,7 @@ $$\lim_{r\to0^+}\frac{1}{\lambda(B(x,r))} \int_{B(x,r)}|f(y)-f(x)|\,d\lambda(y)=
 
 [L4] Rationals are dense in the reals. ([[lem-rat-embeds-dense]])
 
-[L5] A countable union of null sets is null. ([[thm-countable-union-of-null-is-null]])
+[L5] Under Countable Choice, $\lambda_n$ is a complete measure on the Lebesgue sigma-algebra of $\mathbb R^n$ ([[thm-lebesgue-measure-is-a-complete-measure]]). Countable subadditivity gives $\lambda_n(\bigcup_k N_k)\le\sum_k\lambda_n(N_k)=0$ for every sequence of measurable $\lambda_n$-null sets ([[thm-finite-and-countable-subadditivity-of-measures]]).
 
 [L6] If $u\in L^1_{\mathrm{loc}}(\mathbb{R}^n)$, then $A_ru(x)\to u(x)$ for almost every $x$. ([[thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n]])
 
@@ -51,7 +51,7 @@ $$\lim_{r\to0^+}\frac{1}{\lambda(B(x,r))} \int_{B(x,r)}|f(y)-f(x)|\,d\lambda(y)=
 
 **Proof technique:** direct.
 
-1.1 Let [L3, L5, L6, given, construct] $$D:=\{a+ib:a,b\in\mathbb{Q}\}.$$ By [L3], $D$ is countable. For each $c\in D$, the function $u_c:=|f-c|$ is locally integrable, so [L6] gives a null set $N_c$ such that $$\lim_{r\to0^+}A_ru_c(x)=u_c(x)=|f(x)-c|$$ for every $x\notin N_c$. Put $$N:=\bigcup_{c\in D}N_c.$$ By [L5], $N$ is null. [L3, L5, L6, given, construct]
+1.1 Let [L3, L5, L6, given, construct] $$D:=\{a+ib:a,b\in\mathbb{Q}\}.$$ By [L3], $D$ is countable. For each $c\in D$, the function $u_c:=|f-c|$ is locally integrable, so [L6] and [L2] give a measurable $\lambda_n$-null set $N_c$ containing all exceptions such that $$\lim_{r\to0^+}A_ru_c(x)=u_c(x)=|f(x)-c|$$ for every $x\notin N_c$. Put $$N:=\bigcup_{c\in D}N_c.$$ By [L5], $N$ is null. [L3, L5, L6, given, construct]
 
 2.1 Fix $x\notin N$ and let $\varepsilon>0$. By density [L4], choose [step 1.1, L4, algebra] $c\in D$ with $|f(x)-c|<\varepsilon$. Then for every $r>0$, $$\frac{1}{\lambda(B(x,r))}\int_{B(x,r)}|f(y)-f(x)|\,d\lambda(y) \le A_r|f-c|(x)+|c-f(x)|.$$ Taking $r\to0^+$ and using step 1.1 gives $$\limsup_{r\to0^+}\frac{1}{\lambda(B(x,r))} \int_{B(x,r)}|f(y)-f(x)|\,d\lambda(y) \le 2\varepsilon.$$ Since $\varepsilon$ is arbitrary, the limit is $0$. [step 1.1, L4, algebra]
 

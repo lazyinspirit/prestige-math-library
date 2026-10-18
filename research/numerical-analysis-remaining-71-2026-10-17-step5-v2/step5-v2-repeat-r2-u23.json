@@ -1,0 +1,139 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "repeat",
+  "round": 2,
+  "unit": "23",
+  "input_sha256": "bfc74348b3090198db4979e3e40b1d618ca0ba8239506d634bc1c4c72fe13345",
+  "decisions": [
+    {
+      "id": "alg-finite-budget-structure-preserving-doubling-for-dare",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "8b006cb2c6a3dc4e5c2cf486ec6db35d5532d3870a95e296dc2a314ec53f98d0",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The Definition requires a status on every exit, but assigns only inverse-inconclusive and range-failure. For exact scalar A=0, B=0, C=0, R=1 and N=0, initialization and residual reporting succeed while no status is defined; the same omission occurs after N successful updates. This is an incomplete defining procedure (other), rather than a false algebraic inference or a missing dependency citation. Added budget-exhausted for normal completion, explicitly including N=0 and retaining all required diagnostics.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-finite-budget-structure-preserving-doubling-for-dare",
+      "disposition": "repaired",
+      "post_sha256": "f25f05a1996bd631bdba6b9886346356e6e0503471514b76a5d4343ae8ee491d",
+      "review_context_sha256": "bb61e1534f0e5cb740e7542a097ee34eedcecc5867e198c70573578f341fda87",
+      "reason": "Checked standard DARE initialization, finite rational preprocessing, complete-pivoting inverse solves, point-certifier input/return contracts, the three recurrence updates, and residual-only failure handling. The new normal branch returns budget-exhausted after all N updates, including the empty loop, and requires the existing diagnostics. Existing initialization and recurrence failures retain their statuses; unavailable residuals do not change recurrence status. The change asserts no convergence, PSD preservation of rounded data, or stabilizing acceptance, and leaves every mathematical update and dependency unchanged. This is a local repair review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-sda-psd-blocks-and-symmetry-defect",
+    "lem-riccati-finite-budget-wrappers-return-a-status",
+    "lem-sda-doubling-composition-and-psd-invariants",
+    "prop-riccati-dense-work-and-acceptance-diagnostics",
+    "thm-sda-convergence-and-eventual-quadratic-envelope"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-finite-budget-structure-preserving-doubling-for-dare",
+      "phase": "repeat",
+      "round": 2,
+      "unit": "23",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "status": "fixed",
+      "locus": "Definition: normal return after successful initialization and all N recurrence updates",
+      "reason": "The required status output was undefined for N=0 and for every successful budget completion. Added an explicit budget-exhausted branch with N completed updates, retaining diagnostics and all failure statuses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "before_guard_sha256": "d39ca8988e1e75214b3d50e86cee83bacdaf7be8cf837b4e626394d500fbb769",
+    "interface_change": "The sole item edit adds a normal-return paragraph to ## Definition. Inputs, initialization, exact/rounded recurrence formulas, residual handling, dependency lists, and diagnostic limitations are unchanged. No prerequisite or arbitrary-choice assumption is added.",
+    "mathematical_checks": "For A=B=C=0 and R=1, exact initialization gives G_0=H_0=0; every M_j and S_j equals 1 and every update remains zero. Previously N=0 and N>0 both had no normal status. They now return budget-exhausted with exactly N completed updates and zero residual/symmetry defects. The finite branch likewise receives a normal status when its supplied proposals certify and all stored operations succeed. These are direct symbolic checks of the specified branches, not execution of a numerical implementation.",
+    "source_reading": "Local supplier and consumer texts were consulted. No external source was needed or consulted for the missing status branch; familiar=true concerns the elementary procedure and matrix-interface checks made here.",
+    "contract": "The assigned algorithm contract has no proof derivations or citation quotations. Its empty-loop, one-update, endpoint and diagnostic boundary clauses remain valid under the explicit normal return. No contract or manifest edit is necessary.",
+    "step4_digest": "The rejection-blind digest concern names Newton-Kleinman controls, outside this assignment; it supplies no SDA finding requiring an additional edit.",
+    "consumer_checks": [
+      {
+        "id": "lem-sda-doubling-composition-and-psd-invariants",
+        "path": "items/lem-sda-doubling-composition-and-psd-invariants.md",
+        "affected_use": "Statement and [F1] use A_1=A(I+GH)^{-1}A, G_1=G+A(I+GH)^{-1}GA*, and H_1=H+A*H(I+GH)^{-1}A; steps 1.1-2.1 establish PSD preservation and map composition.",
+        "disposition": "sound_unchanged",
+        "reason": "All three updates, their exact interpretation and admissible data are identical. The added status branch follows successful updates and alters neither inverse existence nor map composition."
+      },
+      {
+        "id": "thm-sda-convergence-and-eventual-quadratic-envelope",
+        "path": "items/thm-sda-convergence-and-eventual-quadratic-envelope.md",
+        "affected_use": "Statement uses the exact recurrence initialized by A_0=A, G_0=BR^{-1}B*, H_0=Q; step 1.1 identifies H_j=P_{2^j} through the PSD/composition lemma.",
+        "disposition": "sound_unchanged",
+        "reason": "The exact recurrence is unchanged for every finite budget. The return label imposes no convergence assertion and changes neither H_j nor the infinite sequence analyzed through arbitrary budgets."
+      },
+      {
+        "id": "ex-sda-psd-blocks-and-symmetry-defect",
+        "path": "items/ex-sda-psd-blocks-and-symmetry-defect.md",
+        "affected_use": "Given and [F1] invoke one exact SDA update, and steps 1.1-2.1 compute W_0, G_1, H_1 and the symmetry defect of a perturbed stored H_1.",
+        "disposition": "sound_unchanged",
+        "reason": "The one-step formulas and raw-matrix diagnostics are unchanged. The N=1 normal-return label does not alter any displayed matrix or the warning that symmetrization need not restore PSD."
+      },
+      {
+        "id": "lem-riccati-finite-budget-wrappers-return-a-status",
+        "path": "items/lem-riccati-finite-budget-wrappers-return-a-status.md",
+        "affected_use": "Statement promises termination with the declared output/status, [F7] counts SDA recurrence/residual calls, and proof steps 1.4 and 3.1 use the finite loop and final reporting.",
+        "disposition": "sound_unchanged",
+        "reason": "The explicit normal-return branch supplies the formerly missing status. No extra solve, update or diagnostic is added, so nN recurrence calls, m(N+1) residual calls, and finite termination remain justified. No claim or proof edit is required."
+      },
+      {
+        "id": "prop-riccati-dense-work-and-acceptance-diagnostics",
+        "path": "items/prop-riccati-dense-work-and-acceptance-diagnostics.md",
+        "affected_use": "[F6] specifies one dense solve with I+G_jH_j and three matrix updates; step 3.2 derives O(n^3) per exact recurrence step and O(Nn^3) for N such steps.",
+        "disposition": "sound_unchanged",
+        "reason": "Assigning a fixed normal-return status adds no matrix operation or certificate call. The recurrence work and the separate residual/acceptance limitations remain unchanged."
+      }
+    ],
+    "page_check": {
+      "path": "library/numerical-linear-algebra-and-approximation/numerical-algebraic-riccati-equations-and-stabilizing-branches.md",
+      "affected_use": "The item list places the algorithm on this page; Numerical scope and limits treats SDA as an exact-arithmetic structure theorem and requires fresh symmetry/residual/positivity checks for finite candidates.",
+      "disposition": "sound_unchanged",
+      "reason": "The page makes no claim about the normal-return label. The new budget-exhausted status grants no acceptance evidence and preserves all page limitations."
+    },
+    "outside_consumer_findings": [],
+    "published_ledger_updates": [],
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-finite-budget-structure-preserving-doubling-for-dare.md --json",
+        "exit_code": 0,
+        "result": "1 file; 0 phase proofs checked; 0 failures; algorithm status not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-finite-budget-structure-preserving-doubling-for-dare.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-23.proof-contracts.json --items alg-finite-budget-structure-preserving-doubling-for-dare --strict --json",
+        "exit_code": 0,
+        "result": "Assigned algorithm checked; ok=true; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-finite-budget-structure-preserving-doubling-for-dare.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects; run once after final item edit."
+      }
+    ],
+    "downstream_inventory": "Current dependency/reference graph discovery and literal item/page searches agree on five direct item consumers, all draft members of the frozen frontier. They are recorded above without edits. No outside or published direct consumer was found; no further hop is licensed because no consumer Statement or Definition changed.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, ordinary frontier consumer routing and independent rejudgment/certification remain engine-owned; no judgment, stamp or round transition was written."
+  }
+}

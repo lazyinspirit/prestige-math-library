@@ -1,0 +1,892 @@
+[
+  {
+    "order": 2693.25,
+    "id": "homogenization-and-multiscale-finite-element-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Homogenization, multiscale FEM and heterogeneous media",
+    "companion": "homogenization-and-multiscale-finite-element-methods-examples",
+    "requires": [
+      "adaptive-finite-element-methods",
+      "finite-element-pde-constrained-optimization",
+      "isogeometric-galerkin-methods"
+    ],
+    "items": [
+      {
+        "id": "def-periodic-scalar-diffusion-data",
+        "kind": "definition",
+        "title": "Uniformly elliptic periodic scalar diffusion data",
+        "deps": [
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Fix an integer $d\\ge1$ and the unit cell $Y=(0,1)^d$ with Lebesgue measure $|Y|=1$. Assume Countable Choice for the $L^2$ conventions of [[def-countable-choice]]. A **uniformly elliptic periodic scalar diffusion coefficient** is a measurable real function $a:\\mathbb R^d\\to\\mathbb R$ such that $a(y+k)=a(y)$ for almost every $y$ and every $k\\in\\mathbb Z^d$, and there are constants $0<\\lambda\\le\\Lambda<\\infty$ with $\\lambda\\le a(y)\\le\\Lambda$ almost everywhere on $Y$. Coefficients are identified when they agree almost everywhere.\n\nFor $\\epsilon>0$, the physical scalar coefficient is $a_\\epsilon(x)=a(x/\\epsilon)$ and the associated matrix is $a_\\epsilon(x)I_d$. The bounded-domain branch used on this page is $\\Omega=(0,1)^d$ with homogeneous zero boundary values. Its weak equation for datum $f\\in L^2(\\Omega;\\mathbb R)$ is\n$$\\int_\\Omega a(x/\\epsilon)\\nabla u_\\epsilon\\cdot\\nabla v\\,dx=\\int_\\Omega fv\\,dx\\qquad(v\\in H^1_0(\\Omega;\\mathbb R)).$$\nNo coefficient regularity beyond measurability and the displayed bounds is part of this definition.\n\nFor every $\\epsilon>0$, the map $x\\mapsto x/\\epsilon$ is a $C^1$ diffeomorphism of $\\mathbb R^d$. By [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]], its pullback preserves Lebesgue measurability and takes null-set changes to null-set changes (apply the theorem also to the inverse map). Thus $a_\\epsilon$ is a well-defined almost-everywhere class independent of the representative of $a$. The same result applies to every affine translation and positive dilation used in periodic sampling below, so almost-everywhere coefficient bounds are preserved under those pullbacks.\n\nThe ellipticity bounds hold almost everywhere on all of $\\mathbb R^d$, not just on $Y$: periodicity transfers the exceptional null set from $Y$ to each lattice translate, translations preserve null sets by the same change-of-variables theorem, and the countably many translates cover $\\mathbb R^d$ up to their null boundaries.",
+        "strategy": "State the coefficient, cell, period, energy form, and weak boundary-value branch.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.1, PDF pp. 1–3: periodic scalar conductivity, unit cell, ellipticity and zero-Dirichlet model."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §§1.1–1.3, printed pp. 3–23: bounded periodic coefficients and Dirichlet homogenization setting."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-periodic-zero-mean-cell-space",
+        "kind": "definition",
+        "title": "Zero-mean periodic Sobolev cell space",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Fix $d\\ge1$, $Y=(0,1)^d$, and Countable Choice for the Sobolev conventions of [[def-countable-choice]]. Let $C^\\infty_\\#(Y)$ be the restrictions to $Y$ of smooth $\\mathbb Z^d$-periodic real functions on $\\mathbb R^d$. Define\n$$H^1_\\#(Y):=\\overline{C^\\infty_\\#(Y)}^{\\,H^1(Y)},\\qquad V_\\#:=\\left\\{v\\in H^1_\\#(Y):\\int_Yv\\,dy=0\\right\\}.$$\nThe integral is the normalized cell mean because $|Y|=1$. Derivatives are weak derivatives on $Y$ and the periodic condition is the closure convention in this definition; no pointwise boundary trace is being imposed. Equip $V_\\#$ with the inherited $H^1$ norm.",
+        "strategy": "Fix equivalence-class and periodic-trace conventions, mean normalization, and the Hilbert norm.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§§1.2.2–1.2.3, PDF pp. 6–8: periodic cell space, corrector mean convention and variational formulation."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §§1.1–1.2, printed pp. 3–13: periodic Sobolev corrector space and cell normalization."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-unit-cube-h01-separability-and-l2-compactness",
+        "kind": "lemma",
+        "title": "Separable H1-zero space and compact L2 inclusion on a cube",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "thm-bolzano-weierstrass",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-holder-inequality-for-integrals",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Assume Countable Choice and let $Q=(0,1)^d$, $d\\ge1$. Then $H^1_0(Q;\\mathbb R)$ is a separable real Hilbert space. It satisfies\n$$\\|v\\|_{L^2(Q)}\\le\\|\\partial_0v\\|_{L^2(Q)}\\le\\|\\nabla v\\|_{L^2(Q)}\\qquad(v\\in H^1_0(Q)).$$\nMoreover, every sequence bounded in $H^1_0(Q)$ has a subsequence converging in $L^2(Q)$. These conclusions use Countable Choice only; no Axiom of Choice or Dependent Choice is needed in the proof below.",
+        "strategy": "Embed in a finite product of separable L2 spaces, prove Poincare on test functions, and use periodic Fourier coefficients of zero extensions with a uniform high-frequency tail bound.",
+        "sources": {
+          "references": [
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.1, printed pp. 3–8: H1-zero energy space, Poincaré control and bounded-solution compactness context."
+            },
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.3.1, PDF pp. 11–14: uniform H1-zero bounds and the compact L2 subsequence used in homogenization."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-periodic-cell-problem",
+        "kind": "definition",
+        "title": "Periodic scalar cell problem",
+        "deps": [
+          "def-periodic-scalar-diffusion-data",
+          "def-periodic-zero-mean-cell-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For coefficient $a$, cell $Y$, and zero-mean periodic space $V_\\#$ from [[def-periodic-scalar-diffusion-data]] and [[def-periodic-zero-mean-cell-space]], and for $p\\in\\mathbb R^d$, the **weak periodic cell equation** asks for $\\chi_p\\in V_\\#$ such that\n$$\\int_Y a(y)(p+\\nabla_y\\chi_p(y))\\cdot\\nabla_yv(y)\\,dy=0\\qquad(v\\in V_\\#).$$\nThe sign convention is $p+\\nabla_y\\chi_p$; the zero-mean condition fixes the additive constant. This definition alone asserts neither existence nor uniqueness.",
+        "strategy": "Specify the test space, coefficient, sign convention, and mean-zero gauge.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.2.3, PDF pp. 7–8: the variational cell problem and mean-zero corrector."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.2, printed pp. 9–13: periodic corrector equations."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-periodic-cell-poincare",
+        "kind": "lemma",
+        "title": "Mean-zero Poincare inequality on the periodic cell",
+        "deps": [
+          "def-periodic-zero-mean-cell-space",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-countable-choice",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-holder-inequality-for-integrals",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $Y=(0,1)^d$ and $V_\\#$ be the mean-zero periodic $H^1$ space of [[def-periodic-zero-mean-cell-space]]. Then every $v\\in V_\\#$ satisfies\n$$\\|v\\|_{L^2(Y)}\\le\\sqrt d\\,\\|\\nabla v\\|_{L^2(Y)},$$\nand every $v\\in H^1_\\#(Y)$ satisfies $\\int_Y\\nabla v=0$. Consequently $\\|\\nabla v\\|_2$ is a complete norm on $V_\\#$ equivalent to its inherited $H^1$ norm.",
+        "strategy": "Prove the zero mean of smooth periodic derivatives on opposite faces, then prove Poincare by coordinate telescoping, Jensen, Fubini, and Cauchy-Schwarz; pass both claims to the closure.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.2.2, PDF pp. 6–7: Poincare inequality on the periodic mean-zero space."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.2, printed pp. 9–13: coercivity on periodic corrector spaces."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-periodic-averaging-on-cube",
+        "kind": "lemma",
+        "title": "Periodic averaging and rescaling bounds on the unit cube",
+        "deps": [
+          "def-periodic-zero-mean-cell-space",
+          "def-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $Y=(0,1)^d$, $Q=(0,1)^d$, $g\\in L^1(Y)$ be extended $\\mathbb Z^d$-periodically, and $\\varphi\\in C_c^1(Q)$. As $\\epsilon\\downarrow0$,\n$$\\int_Q\\varphi(x)g(x/\\epsilon)\\,dx\\longrightarrow\\left(\\int_Yg\\right)\\left(\\int_Q\\varphi\\right).$$\nIf $g\\in L^2(Y)$ and $0<\\epsilon\\le1$, then $\\|g(\\cdot/\\epsilon)\\|_{L^2(Q)}\\le C_d\\|g\\|_{L^2(Y)}$. In particular, for $g\\in L^2(Y)$, $g(\\cdot/\\epsilon)\\rightharpoonup\\int_Yg$ weakly in $L^2(Q)$.",
+        "strategy": "Tile the support by epsilon-cells, compare the slow factor on each cell, bound the boundary-cell remainder, and extend the weak limit by L2 density.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.3.1, Lemma 1.3.2, PDF p. 15: periodic weak averaging; the local cell-tiling argument also proves the stated L1 variant."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.2, Proposition 1.2.2, printed pp. 12–13: weak averaging of periodic rescalings."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-periodic-two-scale-convergence",
+        "kind": "definition",
+        "title": "Two-scale weak convergence for periodic tests",
+        "deps": [
+          "def-periodic-zero-mean-cell-space",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Let $Q=Y=(0,1)^d$, let $\\epsilon_n>0$ tend to zero, and let $(u_n)$ be bounded in $L^2(Q)$. We say $u_n$ **two-scale converges weakly** to $u\\in L^2(Q\\times Y)$ along $(\\epsilon_n)$ if for every finite sum\n$$\\Phi(x,y)=\\sum_{r=1}^m\\phi_r(x)\\psi_r(y),\\quad \\phi_r\\in C_c^\\infty(Q),\\quad\\psi_r\\in C_\\#^\\infty(Y),$$\none has\n$$\\lim_{n\\to\\infty}\\int_Qu_n(x)\\Phi(x,x/\\epsilon_n)\\,dx=\\int_Q\\int_Yu(x,y)\\Phi(x,y)\\,dy\\,dx.$$\nHere $C_\\#^\\infty(Y)$ is the smooth $\\mathbb Z^d$-periodic class from [[def-periodic-zero-mean-cell-space]]. The test definition is independent of how a finite sum is represented because both sides are linear in $\\Phi$.",
+        "strategy": "Fix the Y-periodic test convention and the limiting pairing on the product space.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "Definition 1.3.3, PDF p. 13: two-scale convergence on periodic test functions."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.3, printed pp. 14–19: periodic two-scale limits."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-periodic-cell-corrector-wellposedness",
+        "kind": "lemma",
+        "title": "Existence and uniqueness of periodic cell correctors",
+        "deps": [
+          "def-periodic-scalar-diffusion-data",
+          "def-periodic-cell-problem",
+          "def-periodic-zero-mean-cell-space",
+          "lem-periodic-cell-poincare",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-lax-milgram",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Assume $a,\\lambda,\\Lambda,Y,V_\\#$ are as in [[def-periodic-scalar-diffusion-data]] and [[def-periodic-zero-mean-cell-space]]. For each $p\\in\\mathbb R^d$, the equation in [[def-periodic-cell-problem]] has a unique solution $\\chi_p\\in V_\\#$. The map $p\\mapsto\\chi_p$ is linear, and\n$$\\|\\nabla\\chi_p\\|_{L^2(Y)}\\le(\\Lambda/\\lambda)|p|,\\qquad \\|\\chi_p\\|_{L^2(Y)}\\le\\sqrt d(\\Lambda/\\lambda)|p|.$$",
+        "strategy": "Use the cell Poincare bound to make the gradient norm Hilbert-equivalent and apply Lax-Milgram.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.2.2, equation (1.9) and Lemma 1.2.1, PDF p. 7: periodic cell equation and solvability context; the local proof treats the weak right-hand side by Lax–Milgram."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.2, printed pp. 9–13: existence, uniqueness and bounds for periodic correctors."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-two-scale-compactness-for-l2-bounded-sequences",
+        "kind": "theorem",
+        "title": "Two-scale compactness for bounded L2 sequences",
+        "deps": [
+          "def-periodic-two-scale-convergence",
+          "lem-periodic-averaging-on-cube",
+          "lem-product-rectangle-kernels-are-dense-in-product-l-two",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-bolzano-weierstrass",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $Q=Y=(0,1)^d$, let $\\epsilon_n\\downarrow0$ (monotonicity may be dropped; only $\\epsilon_n\\to0$ is used), and suppose $(u_n)$ is bounded in $L^2(Q)$. Then some subsequence two-scale converges in the sense of [[def-periodic-two-scale-convergence]] to a function $u\\in L^2(Q\\times Y)$.",
+        "strategy": "Use the periodic sampling norm identity, a countable dense product-test family, deterministic diagonal extraction, and Riesz representation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.3.2, Theorem 1.3.4, PDF p. 15: two-scale compactness statement; the countable-test and Riesz proof is supplied locally."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.3, printed pp. 15–18: related qualitative homogenization by compensated compactness, not a proof of this two-scale compactness theorem."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-periodic-cell-correctors-and-effective-tensor",
+        "kind": "definition",
+        "title": "Periodic correctors and effective tensor",
+        "deps": [
+          "def-periodic-cell-problem",
+          "def-periodic-scalar-diffusion-data",
+          "lem-periodic-cell-corrector-wellposedness",
+          "lem-standard-basis-of-f-n",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "The library represents $\\mathbb R^d$ as functions on $d=\\{0,\\ldots,d-1\\}$, with standard basis $\\widetilde e_j$ for $j<d$ ([[lem-standard-basis-of-f-n]]). For the usual PDE coordinate labels $i=1,\\ldots,d$, write $x_i:=x(i-1)$, set $e_i:=\\widetilde e_{i-1}$, write $p_i:=p(i-1)$, and set $\\partial_i:=\\partial_{i-1}$ in the multi-index convention of [[def-ck-and-multi-index-notation-in-several-variables]]. The same shift applies to vector and tensor components, so component label $i$ means library index $i-1$. By [[lem-periodic-cell-corrector-wellposedness]], let $\\chi_i:=\\chi_{e_i}$ be the unique mean-zero solution of the periodic cell equation. Define $\\chi_p=\\sum_{i=1}^d p_i\\chi_i$ and define the constant matrix $A^*$ by its columns:\n$$A^*e_i:=\\int_Ya(y)(e_i+\\nabla\\chi_i(y))\\,dy\\qquad(1\\le i\\le d).$$\nEquivalently, $A^*p=\\int_Ya(y)(p+\\nabla\\chi_p(y))dy$. All integrals are finite because $a\\in L^\\infty(Y)$ and $\\nabla\\chi_i\\in L^2(Y)$. This definition does not itself assert symmetry or ellipticity.",
+        "strategy": "State the coordinate and flux-average conventions; well-definedness is supplied by the cited cell-solvability lemma.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.2.2, equations (1.9)–(1.13), PDF pp. 7–8: cell correctors and effective matrix from averaged flux."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §§1.2–1.3, printed pp. 9–23: correctors and homogenized coefficient."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-two-scale-gradient-decomposition-for-h01",
+        "kind": "lemma",
+        "title": "Two-scale structure of bounded H1-zero gradients",
+        "deps": [
+          "thm-two-scale-compactness-for-l2-bounded-sequences",
+          "lem-unit-cube-h01-separability-and-l2-compactness",
+          "def-periodic-two-scale-convergence",
+          "lem-periodic-averaging-on-cube",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-chain-rule-for-differentials-of-smooth-maps",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-periodic-zero-mean-cell-space",
+          "lem-periodic-cell-poincare",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "lem-separable-hilbert-bounded-sequence-weak-subsequence",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $Q=Y=(0,1)^d$, $\\epsilon_n\\to0$, and $(u_n)$ be bounded in $H^1_0(Q)$. There are a subsequence, $u\\in H^1_0(Q)$, and $u_1\\in L^2(Q;V_\\#)$ such that $u_n\\rightharpoonup u$ in $H^1_0(Q)$, $u_n\\to u$ in $L^2(Q)$, and\n$$\\nabla u_n\\overset{2}{\\rightharpoonup}\\nabla_xu(x)+\\nabla_yu_1(x,y).$$\nHere vector-valued two-scale convergence means componentwise convergence as in [[def-periodic-two-scale-convergence]], and $L^2(Q;V_\\#)$ denotes product-measurable functions whose $y$-slices lie in $V_\\#$ almost everywhere and whose squared $H^1(Y)$ slice norms are integrable over $Q$.",
+        "strategy": "Show the two-scale limit of u_n is y-independent, test gradients against y-divergence-free fields, and construct the unique mean-zero potential by Fourier coefficients.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.3.2, Theorem 1.3.6 and its proof, PDF p. 17: divergence-free tests identify the gradient plus periodic-potential decomposition."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.3, printed pp. 15–18: related qualitative homogenization by compensated compactness; the two-scale gradient decomposition is proved locally here."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-periodic-effective-tensor-symmetric-elliptic",
+        "kind": "theorem",
+        "title": "Symmetry and uniform ellipticity of the effective tensor",
+        "deps": [
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "lem-periodic-cell-corrector-wellposedness",
+          "lem-periodic-cell-poincare",
+          "def-periodic-scalar-diffusion-data"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Under the scalar periodic ellipticity hypotheses of [[def-periodic-scalar-diffusion-data]], the matrix $A^*$ of [[def-periodic-cell-correctors-and-effective-tensor]] is symmetric and satisfies\n$$\\lambda |p|^2\\le p\\cdot A^*p\\le\\Lambda|p|^2\\qquad(p\\in\\mathbb R^d).$$",
+        "strategy": "Use the cell equation for the symmetric energy representation, mean-zero gradients, and the minimizing characterization.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.2.3, PDF pp. 7–9: symmetric energy formula and ellipticity of the effective matrix."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.2, Definition 1.2.1 and Lemmas 1.2.4–1.2.5, printed pp. 11–14: effective matrix, ellipticity and symmetry."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "alg-fehmm-periodic-cell-micro-macro",
+        "kind": "algorithm",
+        "title": "Periodic FE-HMM with simplicial macro and periodic P1 micro meshes",
+        "deps": [
+          "def-afem-nvb-labelled-triangulation-family",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-periodic-cell-problem",
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "def-periodic-scalar-diffusion-data",
+          "def-periodic-zero-mean-cell-space",
+          "def-function-space",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "justified_by": [
+          "lem-fehmm-micro-cell-solves-wellposedness"
+        ],
+        "dependency_level": 4,
+        "statement": "This procedure defines a real-arithmetic finite-dimensional FE-HMM discretization. Its output is $U_H$ unless an `ExactSolve` call returns `singular-system`, in which case that token is returned; [[lem-fehmm-micro-cell-solves-wellposedness]] proves the exceptional branch is unreachable for the stated inputs. It makes no bit-complexity claim, no coefficient-oracle claim, and no claim about numerically computing its exact integral entries; those entries are the mathematical values of the displayed integrals. Fix $Q=(0,1)^2$ and coefficient $a$ from [[def-periodic-scalar-diffusion-data]]. Use the diagonal of the square from $(0,0)$ to $(1,1)$ as a two-triangle initial matching macro mesh. Label that shared diagonal $0$ in both triangles and each exterior edge $1$. It is a compatible labeled mesh in the sense of [[def-afem-nvb-labelled-triangulation-family]]. The macro input is any finite admissible descendant triangulation $\\mathcal T$ of this mesh. Its cells are closed affine triangles as in [[def-matching-affine-simplicial-meshes]].\n\nChoose $\\epsilon>0$, a micro side length $\\delta>0$, $f\\in L^2(Q)$, and a finite matching triangulation $\\mathcal M$ of the unit square whose opposite boundary edges and vertices match under translation by the PDE coordinate vectors $e_1,e_2$ of [[def-periodic-cell-correctors-and-effective-tensor]]. The periodic micro space is\n$$W_{\\mathcal M}:=\\{z\\in V_\\#:z\\text{ is continuous and affine on every triangle of }\\mathcal M\\}.$$\nHere $z$ means an $H^1_\\#(Y)$ class with a continuous periodic piecewise-affine representative; the periodic closure condition identifies opposite traces. Thus $W_{\\mathcal M}$ is the finite-dimensional mean-zero subspace of the periodic P1 space, as proved in [[lem-fehmm-micro-cell-solves-wellposedness]]. Let $V_H$ be the conforming zero-boundary continuous piecewise-affine macro space on $\\mathcal T$, using [[def-broken-and-conforming-polynomial-spaces]]. Its inclusion in $H^1_0(Q)$ is supplied by [[thm-matching-continuous-piecewise-polynomials-are-wkp]] and [[thm-zero-boundary-piecewise-polynomials-in-w10p]].\n\nIdentify vertices of $\\mathcal M$ that match under the opposite-edge translations, and order the resulting periodic vertex classes by the lexicographically least representative of each class. Let $\\phi_1,\\ldots,\\phi_N$ be the continuous periodic P1 nodal functions for these classes, with $\\phi_i=1$ at class $i$ and $0$ at the other classes. Set $m_i=\\int_Y\\phi_i\\,dy$. If $N=1$, use the empty basis of $W_{\\mathcal M}$; otherwise use\n$$\\psi_i:=\\phi_i-\\frac{m_i}{m_1}\\phi_1\\qquad(2\\le i\\le N)$$\nas the ordered basis of $W_{\\mathcal M}$. The nodal basis spans the full periodic P1 space, and these functions form a basis of its mean-zero subspace.\n\nUse the following exact solver on the systems assembled below. Given a real matrix $A\\in\\mathbb R^{n\\times n}$ and $b\\in\\mathbb R^n$, `ExactSolve(A,b)` returns the empty vector if $n=0$. Otherwise use temporary solver labels $1,\\ldots,n$, with solver coordinate $i$ corresponding to library coordinate $i-1$ of $\\mathbb R^n$ ([[def-function-space]]), and form the augmented matrix $[A\\mid b]$. For $k=1,\\ldots,n$, choose the least row index $p\\ge k$ whose current entry in column $k$ is nonzero; if there is no such row, return `singular-system`. Swap the entire augmented rows $p$ and $k$. For each $i=k+1,\\ldots,n$, set $r=A_{ik}/A_{kk}$, replace the entire augmented row $i$ by row $i-r\\,\\mathrm{row}_k$, and set its column-$k$ entry to zero. After this loop, compute in order $k=n,n-1,\\ldots,1$ by\n$$x_k=\\frac{b_k-\\sum_{j=k+1}^n A_{kj}x_j}{A_{kk}},$$\nusing entries of the resulting upper-triangular augmented matrix. Return the vector $x\\in\\mathbb R^n$ whose library coordinate $x(k-1)$ equals $x_k$. All arithmetic and zero tests are exact over $\\mathbb R$; the systems assembled below are positive definite.\n\nOrder macro triangles by lexicographic order of their barycenters. For each such $K$, use its barycenter $x_K$ as the single quadrature point with positive weight $|K|$, and set\n$$b_K(y):=a\\!\\left(\\frac{x_K}{\\epsilon}+\\frac{\\delta}{\\epsilon}y\\right)\\quad(y\\in Y).$$\nThe affine change-of-variables theorem [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]] makes this a measurable coefficient class independent of the representative of $a$, with $\\lambda\\le b_K\\le\\Lambda$ almost everywhere. For each PDE coordinate vector $e_j$ of [[def-periodic-cell-correctors-and-effective-tensor]], in order $j=1,2$, assemble\n$$G^K_{i\\ell}:=\\int_Yb_K\\nabla\\psi_\\ell\\cdot\\nabla\\psi_i\\,dy,\\qquad r^K_{i,j}:=-\\int_Yb_K e_j\\cdot\\nabla\\psi_i\\,dy$$\nover the micro-basis indices $2\\le i,\\ell\\le N$. If that basis is empty, set $w^h_{K,j}=0$; otherwise call `ExactSolve(G^K,r^K_{\\cdot,j})`, index its returned coordinates by $2,\\ldots,N$, and set $w^h_{K,j}=\\sum_{\\ell=2}^N x_\\ell\\psi_\\ell$. Then set\n$$A^h_Ke_j:=\\int_Yb_K(y)(e_j+\\nabla_yw^h_{K,j}(y))\\,dy.$$\nIf the micro call returns `singular-system`, propagate that output; [[lem-fehmm-micro-cell-solves-wellposedness]] proves this branch is not reached. Otherwise identify solver index $i-1$ with micro-basis index $i$ for $2\\le i\\le N$ and use the returned coefficient as $x_i$ in the displayed sum. The `singular-system` branch is included to make the solver instruction total.\n\nOrder the interior vertices of $\\mathcal T$ lexicographically and let $\\varphi_1,\\ldots,\\varphi_M$ be the corresponding nodal basis of $V_H$. If $M=0$, set $U_H=0$. Otherwise assemble\n$$H_{rs}:=\\sum_{K\\in\\mathcal T}|K|\\,\\nabla\\varphi_s|_K\\cdot A^h_K\\nabla\\varphi_r|_K,\\qquad F_r:=\\int_Qf\\varphi_r\\,dx,$$\ncall `ExactSolve(H,F)`. If it returns `singular-system`, propagate that output; the well-posedness lemma proves this branch is not reached. Otherwise set $U_H:=\\sum_{s=1}^M x_s\\varphi_s$, with solver index $s$ identified with macro-basis index $s$. This basis system is exactly the variational system\n$$B_H(U,V)=\\sum_{K\\in\\mathcal T}|K|\\,\\nabla U|_K\\cdot A^h_K\\nabla V|_K=\\int_QfV\\qquad(V\\in V_H).$$\nThe macro matrix is positive definite and its `singular-system` branch is unreachable by [[lem-fehmm-micro-cell-solves-wellposedness]]. Output $U_H$. The centroid quadrature is positive and exact for constants, which is the only quadrature property used in the error theorem.",
+        "strategy": "Specify every input, sampling domain, coupling convention, matrix formula, finite solve, and singular-system output.",
+        "sources": {
+          "references": [
+            {
+              "title": "Patrick Ciarlet Jr. and Christian Stohrer, Finite-element heterogeneous multiscale method for the Helmholtz equation",
+              "url": "https://comptes-rendus.academie-sciences.fr/mathematique/item/10.1016/j.crma.2014.07.006.pdf",
+              "locator": "§§2–3: quadrature points, periodic cell sampling, and macro assembly conventions."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-fehmm-period-aligned-sampling-has-zero-resonance",
+        "kind": "lemma",
+        "title": "No sampling resonance for period-aligned periodic micro cells",
+        "deps": [
+          "def-periodic-scalar-diffusion-data",
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "lem-periodic-cell-corrector-wellposedness",
+          "lem-periodic-cell-poincare",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For any dimension $d$, phase $\\theta\\in\\mathbb R^d$, and positive integer $m$, let $b(y)=a(\\theta+my)$ on $Y$. Let $w_p\\in V_\\#$ be the unique mean-zero minimizer of $\\int_Yb(y)|p+\\nabla v(y)|^2dy$ and define $A_{\\theta,m}^{\\rm ex}p=\\int_Yb(y)(p+\\nabla w_p(y))dy$. Then $A_{\\theta,m}^{\\rm ex}=A^*$ for every $p\\in\\mathbb R^d$. Thus a micro side length $\\delta=m\\epsilon$ has zero continuum sampling/resonance error, regardless of phase; a separate finite micro-space error can remain.",
+        "strategy": "Pull the corrector back by the integer dilation, verify its weak cell equation, and average the periodic flux over the integer number of cells.",
+        "sources": {
+          "references": [
+            {
+              "title": "Patrick Ciarlet Jr. and Christian Stohrer, Finite-element heterogeneous multiscale method for the Helmholtz equation",
+              "url": "https://comptes-rendus.academie-sciences.fr/mathematique/item/10.1016/j.crma.2014.07.006.pdf",
+              "locator": "§§2–3: periodic micro problems and FE-HMM assembly conventions."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-fehmm-one-dimensional-nonaligned-resonance-bound",
+        "kind": "lemma",
+        "title": "One-dimensional nonaligned micro sampling resonance bound",
+        "deps": [
+          "def-periodic-scalar-diffusion-data",
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "def-periodic-cell-problem",
+          "lem-periodic-cell-corrector-wellposedness",
+          "lem-periodic-cell-poincare",
+          "def-periodic-ltwo-weak-derivative",
+          "lem-fourier-coefficients-of-a-periodic-weak-derivative",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "In one dimension, let $a$ be measurable, $1$-periodic, and satisfy $0<\\lambda\\le a\\le\\Lambda$. For a phase $\\theta\\in\\mathbb R$ and ratio $r=\\delta/\\epsilon\\ge1$, let $w_r\\in V_\\#$ solve $\\int_0^1a(\\theta+ry)(1+w_r')v'\\,dy=0$ for every $v\\in V_\\#$, and define $A_r(\\theta)=\\int_0^1a(\\theta+ry)(1+w_r')\\,dy$. Then\n$$A_r(\\theta)=\\left(\\int_0^1\\frac{dy}{a(\\theta+ry)}\\right)^{-1},\\qquad A^*=\\left(\\int_0^1\\frac{dy}{a(y)}\\right)^{-1},$$\nand\n$$|A_r(\\theta)-A^*|\\le\\frac{2\\Lambda^2}{\\lambda r}=\\frac{2\\Lambda^2}{\\lambda}\\frac\\epsilon\\delta.$$\nNo dimension-independent bound for the unaligned case is claimed here.",
+        "strategy": "Use the harmonic-mean cell formula, split the interval into whole periods and one remainder, then compare reciprocal averages.",
+        "sources": {
+          "references": [
+            {
+              "title": "Patrick Ciarlet Jr. and Christian Stohrer, Finite-element heterogeneous multiscale method for the Helmholtz equation",
+              "url": "https://comptes-rendus.academie-sciences.fr/mathematique/item/10.1016/j.crma.2014.07.006.pdf",
+              "locator": "§§2–3: micro sampling domains, coupling conditions, and effective coefficient reconstruction."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-periodic-dirichlet-homogenization-on-unit-cube",
+        "kind": "theorem",
+        "title": "Periodic scalar Dirichlet homogenization on the unit cube",
+        "deps": [
+          "def-periodic-scalar-diffusion-data",
+          "def-periodic-cell-problem",
+          "lem-periodic-cell-corrector-wellposedness",
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "thm-periodic-effective-tensor-symmetric-elliptic",
+          "lem-periodic-averaging-on-cube",
+          "thm-two-scale-compactness-for-l2-bounded-sequences",
+          "lem-two-scale-gradient-decomposition-for-h01",
+          "lem-unit-cube-h01-separability-and-l2-compactness",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-lax-milgram",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-countable-choice",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-periodic-zero-mean-cell-space",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-weak-topology-on-a-normed-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Let $Q=(0,1)^d$, let $a$ be a measurable $\\mathbb Z^d$-periodic scalar coefficient with $0<\\lambda\\le a\\le\\Lambda$, and let $f\\in L^2(Q)$. For $\\epsilon>0$ let $u_\\epsilon\\in H^1_0(Q)$ be the unique weak solution\n$$\\int_Qa(x/\\epsilon)\\nabla u_\\epsilon\\cdot\\nabla v=\\int_Qfv\\qquad(v\\in H^1_0(Q)).$$\nLet $u_0\\in H^1_0(Q)$ be the unique solution with $A^*$ from [[def-periodic-cell-correctors-and-effective-tensor]] in place of $a(x/\\epsilon)I$. Then as $\\epsilon\\downarrow0$, $u_\\epsilon\\rightharpoonup u_0$ in $H^1_0(Q)$.",
+        "strategy": "Obtain the two-scale gradient limit, identify the cell equation using epsilon-scaled oscillating tests, average the flux, and use uniqueness to remove subsequences.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.3.1, Theorem 1.3.1 and proof, PDF pp. 12–15; §1.3.2, equations (1.48)–(1.50), PDF pp. 18–19: periodic Dirichlet homogenization and its two-scale variational derivation."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.3, Theorem 1.3.2 and the following Dirichlet discussion, printed pp. 15–18: qualitative homogenization and flux identification by compensated compactness."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-periodic-flux-corrector",
+        "kind": "lemma",
+        "title": "Antisymmetric periodic flux potential",
+        "deps": [
+          "def-periodic-scalar-diffusion-data",
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "lem-periodic-cell-corrector-wellposedness",
+          "thm-periodic-effective-tensor-symmetric-elliptic",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "For each column $j$, define the mean-zero periodic flux $q^j(y)=a(y)(e_j+\\nabla\\chi_j(y))-A^*e_j$. There is a mean-zero periodic tensor $\\sigma^j\\in H^1_\\#(Y;\\mathbb R^{d\\times d})$ such that $\\sigma^j_{ik}=-\\sigma^j_{ki}$ and\n$$q_i^j=\\sum_{k=1}^d\\partial_{y_k}\\sigma^j_{ik}\\quad\\text{in distributions on the torus},\\qquad \\|\\sigma^j\\|_{H^1(Y)}\\le C_d\\|q^j\\|_{L^2(Y)}.$$",
+        "strategy": "Solve a mean-zero periodic Poisson problem by Lax-Milgram; prove the vector-potential divergence vanishes by Fourier coefficients.",
+        "sources": {
+          "references": [
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 2 §2.1, printed pp. 26–27: Proposition 2.1.1 constructs a mean-zero periodic antisymmetric flux potential from the mean-zero divergence-free corrector flux by solving a periodic Poisson equation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-fehmm-micro-cell-solves-wellposedness",
+        "kind": "lemma",
+        "title": "Well-posedness of the finite FE-HMM micro solves",
+        "deps": [
+          "alg-fehmm-periodic-cell-micro-macro",
+          "def-periodic-zero-mean-cell-space",
+          "def-periodic-scalar-diffusion-data",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-periodic-cell-poincare",
+          "lem-unit-cube-h01-separability-and-l2-compactness",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "lem-affine-simplex-gauss-green-formula",
+          "lem-oriented-facet-cancellation-on-matching-meshes",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "thm-lax-milgram",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "For every macro cell $K$ in [[alg-fehmm-periodic-cell-micro-macro]], the coefficient $b_K$ satisfies $\\lambda\\le b_K\\le\\Lambda$. For each $p\\in\\mathbb R^2$, both the full cell problem on $V_\\#$ and its restriction to $W_{\\mathcal M}$ have unique solutions $w_{K,p}$ and $w^h_{K,p}$. The tensors\n$$A_K^{\\rm ex}p=\\int_Yb_K(p+\\nabla w_{K,p}),\\qquad A_K^hp=\\int_Yb_K(p+\\nabla w^h_{K,p})$$\nare symmetric and satisfy $\\lambda I\\le A_K^{\\rm ex},A_K^h\\le\\Lambda I$. Consequently the macro FE-HMM system in the algorithm has a unique solution. The exact Gaussian-elimination calls specified there terminate without the `singular-system` branch and return the unique solutions of the assembled micro and macro variational systems.",
+        "strategy": "Restrict the uniformly elliptic form to the finite periodic subspace and apply Lax-Milgram.",
+        "sources": {
+          "references": [
+            {
+              "title": "Patrick Ciarlet Jr. and Christian Stohrer, Finite-element heterogeneous multiscale method for the Helmholtz equation",
+              "url": "https://comptes-rendus.academie-sciences.fr/mathematique/item/10.1016/j.crma.2014.07.006.pdf",
+              "locator": "§§2–3: FE-HMM quadrature samples, periodic micro coupling and macro assembly."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-periodic-dirichlet-homogenization-strong-l2",
+        "kind": "corollary",
+        "title": "Strong L2 convergence in periodic Dirichlet homogenization",
+        "deps": [
+          "thm-periodic-dirichlet-homogenization-on-unit-cube",
+          "lem-unit-cube-h01-separability-and-l2-compactness",
+          "def-countable-choice",
+          "def-periodic-scalar-diffusion-data"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "Under the hypotheses and notation of [[thm-periodic-dirichlet-homogenization-on-unit-cube]], $u_\\epsilon\\to u_0$ strongly in $L^2(Q)$.",
+        "strategy": "Apply the local cube compactness lemma to every parameter sequence and identify every strong cluster limit by the weak homogenization theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.3.1, PDF pp. 11–16: compactness upgrades weak homogenization to strong L2 convergence."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 1 §1.3, printed pp. 14–23: compactness of solutions and uniqueness of the homogenized limit."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-periodic-boundary-layer-corrector-estimate",
+        "kind": "theorem",
+        "title": "Boundary-cutoff corrector estimate for regular periodic data",
+        "deps": [
+          "def-periodic-scalar-diffusion-data",
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "lem-periodic-cell-corrector-wellposedness",
+          "thm-periodic-effective-tensor-symmetric-elliptic",
+          "lem-periodic-flux-corrector",
+          "lem-periodic-averaging-on-cube",
+          "lem-unit-cube-h01-separability-and-l2-compactness",
+          "thm-lax-milgram",
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "lem-compactly-supported-h1-belongs-to-h-zero"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "Let $Q=(0,1)^d$, $0<\\lambda\\le a\\le\\Lambda$ be scalar and periodic, and let $f\\in L^2(Q)$. For each $\\epsilon>0$, let $u_\\epsilon\\in H^1_0(Q)$ solve the oscillatory weak equation with coefficient $a(x/\\epsilon)$, and suppose $u_0\\in C^2(\\overline Q)\\cap H^1_0(Q)$ solves the homogenized equation with the same datum $f$. For $0<\\epsilon\\le1/4$ choose a Lipschitz cutoff $\\eta_\\epsilon$ equal to zero where $\\operatorname{dist}(x,\\partial Q)\\le\\epsilon$, equal to one where that distance is at least $2\\epsilon$, and with $|\\nabla\\eta_\\epsilon|\\le C_d/\\epsilon$. Define\n$$w_\\epsilon(x)=u_0(x)+\\epsilon\\eta_\\epsilon(x)\\sum_{j=1}^d\\chi_j(x/\\epsilon)\\partial_ju_0(x).$$\nThen $w_\\epsilon\\in H^1_0(Q)$ and, for a constant independent of $\\epsilon$,\n$$\\|\\nabla(u_\\epsilon-w_\\epsilon)\\|_{L^2(Q)}+\\|u_\\epsilon-u_0\\|_{L^2(Q)}\\le C\\sqrt\\epsilon.$$\nThe constant may depend on $d,\\lambda,\\Lambda$, the fixed corrector and flux-potential $H^1(Y)$ norms, $\\|u_0\\|_{C^2(\\overline Q)}$, and the cutoff profile. No rate is asserted without this regularity and periodicity.",
+        "strategy": "Construct the cutoff expansion, bound its boundary-strip residual, use the antisymmetric flux potential to gain epsilon in the interior, and test the residual equation with the error.",
+        "sources": {
+          "references": [
+            {
+              "title": "Grégoire Allaire, Introduction to Homogenization Theory, Lecture 1",
+              "url": "https://www.cmap.polytechnique.fr/~allaire/homog/lect1.pdf",
+              "locator": "§1.3.2, Theorem 1.3.6 and equations (1.48)–(1.50), PDF pp. 17–19: gradient decomposition and homogenized-limit context; the quantitative cutoff estimate is proved locally here."
+            },
+            {
+              "title": "Zhongwei Shen, Lectures on Periodic Homogenization of Elliptic Systems",
+              "url": "https://arxiv.org/pdf/1710.11257",
+              "locator": "Chapter 2 §§2.1–2.2, printed pp. 26–33: flux-corrector Proposition 2.1.1 and cutoff two-scale expansion with an $O(\\epsilon^{1/2})$ H1 estimate in Theorem 2.2.2. Its smoothed expansion differs from this local scalar estimate."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-fehmm-micro-tensor-approximation-error",
+        "kind": "lemma",
+        "title": "Energy identity for FE-HMM micro tensor error",
+        "deps": [
+          "alg-fehmm-periodic-cell-micro-macro",
+          "lem-fehmm-micro-cell-solves-wellposedness",
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "thm-periodic-effective-tensor-symmetric-elliptic",
+          "lem-periodic-cell-corrector-wellposedness"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "For a fixed macro sample $K$ in [[alg-fehmm-periodic-cell-micro-macro]], let $b_K$ be its sampled coefficient, $w_{K,p}\\in V_\\#$ the full periodic cell solution, and $w^h_{K,p}\\in W_{\\mathcal M}$ its micro P1 solution from [[lem-fehmm-micro-cell-solves-wellposedness]]. Set $\\|\\nabla v\\|_{b_K}^2=\\int_Yb_K|\\nabla v|^2$. Then\n$$p\\cdot(A_K^h-A_K^{\\rm ex})p=\\|\\nabla(w^h_{K,p}-w_{K,p})\\|_{b_K}^2\\ge0,$$\nand for any $z_h\\in W_{\\mathcal M}$,\n$$\\|\\nabla(w^h_{K,p}-w_{K,p})\\|_{b_K}\\le\\|\\nabla(z_h-w_{K,p})\\|_{b_K}.$$\nIn particular $\\|A_K^h-A_K^{\\rm ex}\\|_{op}\\le\\eta_K^2$, where $\\eta_K=\\sup_{|p|=1}\\inf_{z_h\\in W_{\\mathcal M}}\\|\\nabla(z_h-w_{K,p})\\|_{b_K}$ and $\\|M\\|_{op}=\\sup_{|p|=1}|Mp|$.",
+        "strategy": "Subtract the continuous and discrete variational equations and use the energy-minimizing characterization.",
+        "sources": {
+          "references": [
+            {
+              "title": "Patrick Ciarlet Jr. and Christian Stohrer, Finite-element heterogeneous multiscale method for the Helmholtz equation",
+              "url": "https://comptes-rendus.academie-sciences.fr/mathematique/item/10.1016/j.crma.2014.07.006.pdf",
+              "locator": "§§2–3: cell sampling and the FE-HMM macro/micro error split."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fehmm-macro-micro-resonance-error-decomposition",
+        "kind": "theorem",
+        "title": "FE-HMM macro, micro, and sampling error separation",
+        "deps": [
+          "alg-fehmm-periodic-cell-micro-macro",
+          "lem-fehmm-micro-cell-solves-wellposedness",
+          "lem-fehmm-micro-tensor-approximation-error",
+          "lem-fehmm-period-aligned-sampling-has-zero-resonance",
+          "thm-periodic-effective-tensor-symmetric-elliptic",
+          "def-afem-nvb-labelled-triangulation-family",
+          "def-matching-affine-simplicial-meshes",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "lem-unit-cube-h01-separability-and-l2-compactness"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "Let $U_H$ be the FE-HMM solution from [[alg-fehmm-periodic-cell-micro-macro]] on a matching macro triangulation of $Q=(0,1)^2$, and let $u_0\\in H^1_0(Q)$ solve the homogenized equation with coefficient $A^*$. For each macro cell let $A_K^{\\rm ex}$ be the exact periodic-coupling sampled tensor and $A_K^h$ its discrete micro tensor. Define\n$$\\Delta_{\\rm micro}=\\max_K\\|A_K^h-A_K^{\\rm ex}\\|_{op},\\qquad \\Delta_{\\rm res}=\\max_K\\|A_K^{\\rm ex}-A^*\\|_{op},\\qquad \\Delta=\\Delta_{\\rm micro}+\\Delta_{\\rm res},$$\nand $\\eta_H=\\inf_{V\\in V_H}\\|\\nabla(u_0-V)\\|_{L^2(Q)}$. If $\\Delta<\\lambda$, then\n$$\\|\\nabla(U_H-u_0)\\|_2\\le\\frac{\\lambda+\\Lambda}{\\lambda-\\Delta}\\,\\eta_H+\\frac{\\Delta}{\\lambda-\\Delta}\\,\\|\\nabla u_0\\|_2.$$\nThe first term is macro best approximation; the second is explicitly split by $\\Delta_{\\rm micro}$ and $\\Delta_{\\rm res}$. By [[lem-fehmm-micro-tensor-approximation-error]], $\\Delta_{\\rm micro}\\le\\max_K\\eta_K^2$. If every micro ratio is an integer, [[lem-fehmm-period-aligned-sampling-has-zero-resonance]] gives $\\Delta_{\\rm res}=0$. The condition $\\Delta<\\lambda$ is a sufficient perturbation condition; no arbitrary-scale accuracy is asserted.",
+        "strategy": "Bound the bilinear-form perturbation by the tensor discrepancy, prove coercivity, and derive a finite-dimensional energy-Strang estimate.",
+        "sources": {
+          "references": [
+            {
+              "title": "Patrick Ciarlet Jr. and Christian Stohrer, Finite-element heterogeneous multiscale method for the Helmholtz equation",
+              "url": "https://comptes-rendus.academie-sciences.fr/mathematique/item/10.1016/j.crma.2014.07.006.pdf",
+              "locator": "§3: discrete macro problem, sampled effective matrices, and micro/macro error terms."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2693.5,
+    "id": "homogenization-and-multiscale-finite-element-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Homogenization, multiscale FEM and heterogeneous media — Examples",
+    "companion": "homogenization-and-multiscale-finite-element-methods",
+    "requires": [
+      "homogenization-and-multiscale-finite-element-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-layered-periodic-effective-tensor",
+        "kind": "example",
+        "title": "Layered medium: harmonic normal and arithmetic tangential means",
+        "deps": [
+          "thm-periodic-effective-tensor-symmetric-elliptic",
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "lem-periodic-cell-corrector-wellposedness",
+          "lem-fehmm-one-dimensional-nonaligned-resonance-bound",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Let $d\\ge2$, $0<\\rho<1$, and let $a(y)=a_1$ for $0<y_1<\\rho$ and $a(y)=a_2$ for $\\rho<y_1<1$, extended periodically, where $a_1,a_2>0$. Then\n$$A^*=\\operatorname{diag}\\left(\\left(\\frac\\rho{a_1}+\\frac{1-\\rho}{a_2}\\right)^{-1},\\ \\rho a_1+(1-\\rho)a_2,\\ldots,\\rho a_1+(1-\\rho)a_2\\right).$$",
+        "strategy": "Solve the one-dimensional normal flux equation and test the tangential cell equation directly.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-periodic-effective-tensor-high-contrast-no-uniform-condition-number",
+        "kind": "example",
+        "title": "High contrast destroys contrast-independent conditioning",
+        "deps": [
+          "thm-periodic-effective-tensor-symmetric-elliptic",
+          "def-periodic-cell-correctors-and-effective-tensor",
+          "lem-fehmm-one-dimensional-nonaligned-resonance-bound",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "In dimension $d\\ge2$, let $a_\\kappa(y_1)=\\kappa$ on the first half-period and $1$ on the second, with $0<\\kappa\\le1$. Then\n$$A^*_\\kappa=\\operatorname{diag}\\left(\\frac{2\\kappa}{1+\\kappa},\\frac{1+\\kappa}{2},\\ldots,\\frac{1+\\kappa}{2}\\right),\\qquad \\operatorname{cond}_2(A^*_\\kappa)=\\frac{(1+\\kappa)^2}{4\\kappa}\\longrightarrow\\infty\\quad(\\kappa\\downarrow0).$$\nThus pointwise ellipticity of each fixed coefficient does not give a contrast-independent condition number.",
+        "strategy": "Use the exact layered tensor from the cell formulas and compute its two eigenvalues.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-nonaligned-periodic-sampling-resonance",
+        "kind": "example",
+        "title": "A nonaligned one-dimensional micro window has resonance error",
+        "deps": [
+          "lem-fehmm-one-dimensional-nonaligned-resonance-bound",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Let $a(y)=1$ on $[0,1/2)$ and $a(y)=2$ on $[1/2,1)$, extended with period one. At phase $\\theta=0$ and nonaligned ratio $r=\\delta/\\epsilon=3/2$, the exact sampled harmonic tensor is $A_r=6/5$, whereas $A^*=4/3$. The discrepancy is $2/15>0$ even though the continuum coefficient is periodic.",
+        "strategy": "Integrate the reciprocal coefficient over one and one-half periods and compare the two reciprocal averages.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-fehmm-macro-micro-resonance-ledger",
+        "kind": "example",
+        "title": "FE-HMM energy error ledger with distinct components",
+        "deps": [
+          "thm-fehmm-macro-micro-resonance-error-decomposition",
+          "lem-fehmm-micro-tensor-approximation-error"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "Suppose a verified FE-HMM ledger has ellipticity bounds $\\lambda=1$, $\\Lambda=2$, macro best-approximation bound $\\eta_H\\le1/10$, micro tensor discrepancy bound $\\Delta_{\\rm micro}\\le1/20$, sampling discrepancy bound $\\Delta_{\\rm res}\\le1/20$, and homogenized energy norm $\\|\\nabla u_0\\|_2\\le1$. Then the macro theorem certifies\n$$\\|\\nabla(U_H-u_0)\\|_2\\le\\frac49.$$\nThese are conditional certified inputs for the ledger; the example makes no claim that they arise for every coefficient, scale ratio, or mesh.",
+        "strategy": "Compute the discrepancy threshold, coercivity factor, and each error contribution exactly.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

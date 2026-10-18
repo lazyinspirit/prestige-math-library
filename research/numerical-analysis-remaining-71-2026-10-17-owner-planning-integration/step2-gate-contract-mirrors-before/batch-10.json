@@ -1,0 +1,1632 @@
+{
+  "version": 1,
+  "level": "numerical-analysis-remaining-71-2026-10-17-batch-10",
+  "scope": [
+    "lem-tensor-unfoldings-are-frobenius-isometries",
+    "thm-best-rank-k-frobenius-matrix-approximation",
+    "lem-full-column-rank-matrix-least-squares-solution",
+    "thm-tensor-train-storage-and-inner-product-cost",
+    "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+    "thm-hosvd-quasioptimal-multilinear-rank-error",
+    "thm-exact-cp-als-block-updates-are-monotone",
+    "cex-best-rank-two-cp-approximation-may-not-exist",
+    "ex-separable-grid-tensor-has-tt-rank-one",
+    "ex-two-tt-truncations-realise-root-sum-squares-bound",
+    "ex-diagonal-tensor-has-large-minimal-tt-ranks"
+  ],
+  "contracts": {
+    "lem-tensor-unfoldings-are-frobenius-isometries": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a mode-$k$ unfolding, the map from a multi-index $(i_1,\\ldots,i_d)$ to the matrix position consisting of row $i_k$ and the ordered tuple of all other indices is a bijection: the row and column tuple recover every original index exactly once. Thus the entrywise sum defining $\\langle A_{(k)},B_{(k)}\\rangle_F$ is precisely the same finite sum as $\\langle A,B\\rangle_F$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a cut-$k$ unfolding, splitting the tuple into $(i_1,\\ldots,i_k)$ and $(i_{k+1},\\ldots,i_d)$ is also a bijection with the original multi-index set. Its entrywise inner-product sum therefore equals $\\langle A,B\\rangle_F$ as well. Taking $B=A$ and nonnegative square roots proves each norm identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive mode sizes and d≥2 are part of the tensor convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The same finite reindexing preserves the zero inner product (steps 1.1 and 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Singleton mode sizes still give bijective one-entry index maps (steps 1.1 and 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated or singleton mode sizes do not affect the index bijections (steps 1.1 and 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Cuts k=1 and k=d−1 are both tuple splittings covered by step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof explicitly reindexes finite multi-indices and selects no witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Mode and cut unfoldings are bijections of the same finite entry indices and therefore preserve Frobenius products and norms. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "Mode and cut unfoldings are bijections of the same finite entry indices and therefore preserve Frobenius products and norms. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "b2c3a75bae67b100c00aac0ca9ea71f265f940c3df20f9d8cb9f88ba3a89ee07",
+            "row_sha256": "8d52e717b19f0e639bf6b1a400da2a72478fe08212bface4259f48897cf2b1cc",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "Mode and cut unfoldings are bijections of the same finite entry indices and therefore preserve Frobenius products and norms. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "b2c3a75bae67b100c00aac0ca9ea71f265f940c3df20f9d8cb9f88ba3a89ee07",
+            "row_sha256": "8d52e717b19f0e639bf6b1a400da2a72478fe08212bface4259f48897cf2b1cc",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Mode and cut unfoldings are bijections of the same finite entry indices and therefore preserve Frobenius products and norms. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "Mode and cut unfoldings are bijections of the same finite entry indices and therefore preserve Frobenius products and norms. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "b2c3a75bae67b100c00aac0ca9ea71f265f940c3df20f9d8cb9f88ba3a89ee07",
+            "row_sha256": "b9d4e9a9bca029dc026dc9f08f183f9a2c7d309748d291321dad67b64a5605a0",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "Mode and cut unfoldings are bijections of the same finite entry indices and therefore preserve Frobenius products and norms. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "b2c3a75bae67b100c00aac0ca9ea71f265f940c3df20f9d8cb9f88ba3a89ee07",
+            "row_sha256": "b9d4e9a9bca029dc026dc9f08f183f9a2c7d309748d291321dad67b64a5605a0",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        }
+      ],
+      "source_locators": "Kolda–Bader §2.4; De Lathauwer–De Moor–Vandewalle §2.",
+      "finite_checks": [],
+      "kind": "lemma"
+    },
+    "thm-best-rank-k-frobenius-matrix-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the full output singular-vector basis $u_1,\\ldots,u_m$ from an SVD of $A$, ordered so its first $q$ vectors correspond to the positive singular values in the statement. The SVD sends each positive input singular vector to a nonzero multiple of its corresponding output vector and sends every remaining input basis vector to zero. Thus the image of $A$ is exactly $\\operatorname{span}(u_1,\\ldots,u_q)$, so $q=\\operatorname{rank}(A)$ by [F1]. If $k\\ge q$, then $A_k=A$ and $\\delta_k=0$, so the lower bound follows from nonnegativity of the norm. Suppose henceforth that $k<q$, and let $B$ have rank at most $k$. Its column image has an orthonormal basis; let $P$ be the orthogonal projection onto that image. Then $PB=B$, and the columnwise orthogonal decomposition by $P$ and $I-P$ gives $\\|A-B\\|_F^2\\ge\\|(I-P)(A-B)\\|_F^2=\\|(I-P)A\\|_F^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $a_j=\\|Pu_j\\|^2$ for $1\\le j\\le q$. Since $P$ is an orthogonal projection, $0\\le a_j\\le1$. Expanding the SVD of $A$ and using orthonormality of $(v_j)$ gives $\\|(I-P)A\\|_F^2=\\sum_{j=1}^q\\sigma_j^2(1-a_j)$. If $(w_\\ell)_{\\ell=1}^{s}$ is an orthonormal basis of the range of $P$, then the full output basis from step 1.1 gives $\\sum_{j=1}^q a_j\\le\\sum_{\\ell=1}^{s}\\sum_{j=1}^{m}|\\langle w_\\ell,u_j\\rangle|^2=s=\\operatorname{rank}(B)\\le k$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $\\lambda_j=\\sigma_j^2$, so $\\lambda_1\\ge\\cdots\\ge\\lambda_q>0$. Using $\\sum_j a_j\\le k$, $0\\le a_j\\le1$, and $k<q$, we obtain $\\sum_{j=1}^q\\lambda_j a_j\\le\\sum_{j=1}^k\\lambda_j a_j+\\lambda_{k+1}\\sum_{j=k+1}^q a_j\\le k\\lambda_{k+1}+\\sum_{j=1}^k(\\lambda_j-\\lambda_{k+1})a_j\\le\\sum_{j=1}^k\\lambda_j$. Therefore step 2.1 implies $\\|A-B\\|_F^2\\ge\\sum_{j=k+1}^q\\sigma_j^2=\\delta_k^2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The image of $A_k$ is contained in $\\operatorname{span}(u_1,\\ldots,u_{\\min(k,q)})$, so its rank is at most $k$. The omitted SVD terms are pairwise Frobenius-orthogonal rank-one matrices because both singular-vector families are orthonormal; hence $\\|A-A_k\\|_F^2=\\sum_{j=k+1}^q\\sigma_j^2=\\delta_k^2$. Together with step 3.1, this proves the truncation is optimal.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: A zero-rank matrix has an empty positive-singular-value list, and both the truncation and its tail error are explicitly zero.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A zero-rank matrix has an empty positive-singular-value list, and both the truncation and its tail error are explicitly zero.",
+            "item_sha256": "e9664631dc23ebee70d13572d1e39cbdc2fbeadf7ee517b561fb553f8d1ac730",
+            "row_sha256": "83f0577822d9247f2def6c1fca4f90da8885369711116f75533e2e645355a3e9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A zero-rank matrix has an empty positive-singular-value list, and both the truncation and its tail error are explicitly zero.",
+            "item_sha256": "e9664631dc23ebee70d13572d1e39cbdc2fbeadf7ee517b561fb553f8d1ac730",
+            "row_sha256": "83f0577822d9247f2def6c1fca4f90da8885369711116f75533e2e645355a3e9",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For A=0, q=0 and the empty tail is zero (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For rank-one A, cap zero gives zero and cap at least one gives A (steps 1.1 and 4.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Tied singular values leave the orthogonal tail norm unchanged (steps 2.1 and 4.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cap k=0 case is included in step 3.1 and k≥q in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite-dimensional SVD bases and the image projection of B are used (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Truncated singular values give an optimal feasible approximation and a universal lower bound, but the result does not classify every minimizer.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Truncated singular values give an optimal feasible approximation and a universal lower bound, but the result does not classify every minimizer.",
+            "item_sha256": "e9664631dc23ebee70d13572d1e39cbdc2fbeadf7ee517b561fb553f8d1ac730",
+            "row_sha256": "53cd05e30da87e40882e9a49d90c2b7bdd0e3e101adebc6e2b2ea8e4cbe5839f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Truncated singular values give an optimal feasible approximation and a universal lower bound, but the result does not classify every minimizer.",
+            "item_sha256": "e9664631dc23ebee70d13572d1e39cbdc2fbeadf7ee517b561fb553f8d1ac730",
+            "row_sha256": "53cd05e30da87e40882e9a49d90c2b7bdd0e3e101adebc6e2b2ea8e4cbe5839f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Attaining the tail norm is not asserted to force a uniquely prescribed singular-vector truncation, especially when singular values tie.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Attaining the tail norm is not asserted to force a uniquely prescribed singular-vector truncation, especially when singular values tie.",
+            "item_sha256": "e9664631dc23ebee70d13572d1e39cbdc2fbeadf7ee517b561fb553f8d1ac730",
+            "row_sha256": "7eb7fe82d642a6bcd9bcf6b2119f44533b3f0f02e6f5fb4a1c5bd7117ab5bbda",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Attaining the tail norm is not asserted to force a uniquely prescribed singular-vector truncation, especially when singular values tie.",
+            "item_sha256": "e9664631dc23ebee70d13572d1e39cbdc2fbeadf7ee517b561fb553f8d1ac730",
+            "row_sha256": "7eb7fe82d642a6bcd9bcf6b2119f44533b3f0f02e6f5fb4a1c5bd7117ab5bbda",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "source_locators": "Dupuy §1.1.2; Axler, Linear Algebra Done Right, Ch. 7.",
+      "finite_checks": [
+        {
+          "name": "2×2 diagonal matrix, cap one",
+          "calculation": "For A=diag(3,1), the rank-one truncation diag(3,0) has Frobenius error 1, the discarded singular value.",
+          "result": "tail bound attained"
+        }
+      ],
+      "kind": "theorem"
+    },
+    "lem-full-column-rank-matrix-least-squares-solution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Gram matrix $G=M^*M$ is invertible: if $Gx=0$, then $0=x^*Gx=\\|Mx\\|_2^2$, so $Mx=0$; full column rank forces $x=0$. Thus the square map $G:\\mathbb F^r\\to\\mathbb F^r$ is injective and therefore bijective in finite dimension. Define $W_*=G^{-1}M^*Y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $R=Y-MW_*$. Then $M^*R=M^*Y-M^*MW_*=0$. For every $W$, write $Y-MW=R+M(W_*-W)$. The two summands are Frobenius-orthogonal because $M^*R=0$, so $\\|Y-MW\\|_F^2=\\|R\\|_F^2+\\|M(W-W_*)\\|_F^2\\ge\\|R\\|_F^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Equality in step 2.1 requires $M(W-W_*)=0$. Full column rank implies each column of $W-W_*$ is zero, hence $W=W_*$. Therefore $W_*$ is the unique minimizer.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes p,r,s≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero target gives W*=0; the orthogonal residual identity still holds (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For p=r=s=1 and M≠0 the normal equation gives the scalar exact solution (steps 1.1–3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Rank deficiency violates the hypothesis used for invertibility and uniqueness (steps 1.1 and 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "When p=r, full column rank makes M invertible and the same formula applies (steps 1.1–2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The minimizer is explicitly defined by the inverse Gram matrix."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Normal equations produce the unique least-squares minimizer through an orthogonal residual decomposition, without a biconditional formulation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Normal equations produce the unique least-squares minimizer through an orthogonal residual decomposition, without a biconditional formulation.",
+            "item_sha256": "e6b91ab1dedfde22693071ce9eb54dc3dc15249101e5173c3055d382653216c0",
+            "row_sha256": "f06cadbabe8c4c79ac9221648801c1b75177afa3b020aa2538acc737ed7ff1aa",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Normal equations produce the unique least-squares minimizer through an orthogonal residual decomposition, without a biconditional formulation.",
+            "item_sha256": "e6b91ab1dedfde22693071ce9eb54dc3dc15249101e5173c3055d382653216c0",
+            "row_sha256": "f06cadbabe8c4c79ac9221648801c1b75177afa3b020aa2538acc737ed7ff1aa",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The equality case in the residual identity supplies uniqueness, not a converse characterizing full column rank from one minimizing datum.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The equality case in the residual identity supplies uniqueness, not a converse characterizing full column rank from one minimizing datum.",
+            "item_sha256": "e6b91ab1dedfde22693071ce9eb54dc3dc15249101e5173c3055d382653216c0",
+            "row_sha256": "55394eceaa593e4062c25141e9803b7ee9af7a26753b74c9297d23b79f7f8eb4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The equality case in the residual identity supplies uniqueness, not a converse characterizing full column rank from one minimizing datum.",
+            "item_sha256": "e6b91ab1dedfde22693071ce9eb54dc3dc15249101e5173c3055d382653216c0",
+            "row_sha256": "55394eceaa593e4062c25141e9803b7ee9af7a26753b74c9297d23b79f7f8eb4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "source_locators": "Caltech ACM 270-1, Lecture 13 §4.3; Kolda–Bader §3.4.",
+      "finite_checks": [
+        {
+          "name": "One-column least squares",
+          "calculation": "For M=(1,0)^T and Y=(2,3)^T, W*=2; every w has squared error (2−w)^2+9≥9.",
+          "result": "formula and uniqueness verified"
+        }
+      ],
+      "kind": "lemma"
+    },
+    "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$. A tensor-train (TT) representation consists of integers $r_0=r_d=1$, internal bond sizes $r_1,\\ldots,r_{d-1}\\in\\mathbb N_0$, and cores\n$$ G_k\\in\\mathbb F^{r_{k-1}\\times n_k\\times r_k}\\quad(1\\le k\\le d) $$\nsuch that\n$$ A_{i_1,\\ldots,i_d} =\\sum_{\\alpha_1=1}^{r_1}\\cdots\\sum_{\\alpha_{d-1}=1}^{r_{d-1}} G_1(1,i_1,\\alpha_1)G_2(\\alpha_1,i_2,\\alpha_2)\\cdots G_d(\\alpha_{d-1},i_d,1). $$\nAn empty bond index set gives an empty sum, hence the zero tensor; in particular, all internal bond sizes zero represent zero. A bond size $r_k$ is the storage dimension contracted between cores $k$ and $k+1$. The cut-$k$ unfolding groups modes $1,\\ldots,k$ against $k+1,\\ldots,d$ as fixed in [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\nFor an internal bond $k$, an invertible matrix $S\\in\\mathbb F^{r_k\\times r_k}$ gives a gauge transformation by replacing the two adjacent cores with\n$$ \\widetilde G_k(\\alpha,i,\\beta)=\\sum_{\\gamma=1}^{r_k}G_k(\\alpha,i,\\gamma)S_{\\gamma\\beta}, \\qquad \\widetilde G_{k+1}(\\beta,j,\\eta)=\\sum_{\\gamma=1}^{r_k}(S^{-1})_{\\beta\\gamma}G_{k+1}(\\gamma,j,\\eta). $$\nTheir contraction is unchanged because $\\sum_\\beta S_{\\gamma\\beta}(S^{-1})_{\\beta\\gamma'}=\\delta_{\\gamma,\\gamma'}$.\n\nThe left matricization of core $G_k$ has row index $(\\alpha_{k-1},i_k)$ and column index $\\alpha_k$. The core is left-isometric if this matrix $L_k$ satisfies $L_k^*L_k=I_{r_k}$. The right matricization has row index $\\alpha_{k-1}$ and column index $(i_k,\\alpha_k)$; the core is right-isometric if its matrix $R_k$ satisfies $R_kR_k^*=I_{r_{k-1}}$. A TT is in mixed canonical gauge about core $\\ell$ when cores $k<\\ell$ are left-isometric and cores $k>\\ell$ are right-isometric.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tensor-unfoldings-are-frobenius-isometries",
+          "source_section": "Statement",
+          "quote": "For tensors $A,B$ of the same finite shape, every mode unfolding and every cut unfolding preserves the Frobenius inner product and norm.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-best-rank-k-frobenius-matrix-approximation",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, where $m,n\\ge1$, have a singular value decomposition\n$$ A=\\sum_{j=1}^{q}\\sigma_j u_jv_j^*,\\qquad \\sigma_1\\ge\\cdots\\ge\\sigma_q>0, $$\nwhere $q=\\operatorname{rank}(A)$. For an integer $k\\ge0$, put\n$$ A_k=\\sum_{j=1}^{\\min(k,q)}\\sigma_j u_jv_j^*, \\qquad \\delta_k^2=\\sum_{j=k+1}^{q}\\sigma_j^2 $$\nwith an empty sum equal to zero. Then $\\operatorname{rank}(A_k)\\le k$, $\\|A-A_k\\|_F=\\delta_k$, and every matrix $B$ with $\\operatorname{rank}(B)\\le k$ satisfies $\\|A-B\\|_F\\ge\\delta_k$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-sequential-tensor-train-svd",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. The input is a tensor $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$, and exactly one of:\n\n- rank caps $c_1,\\ldots,c_{d-1}\\in\\mathbb N_0$; or\n- absolute tail tolerances $\\tau_1,\\ldots,\\tau_{d-1}\\in[0,\\infty)$.\n\nAt cut $k$, flatten the current remainder with rows $(\\alpha_{k-1},i_k)$ and columns $(i_{k+1},\\ldots,i_d)$, where $\\alpha_0=1$, and compute an exact compact SVD $M_k=U_k\\Sigma_kV_k^*$. Its positive singular values are ordered decreasingly as $\\sigma_1,\\ldots,\\sigma_s$. Under rank caps choose $q_k=\\min(c_k,s)$. Under tolerances choose the least $q_k\\in\\{0,\\ldots,s\\}$ for which $\\sum_{j>q_k}\\sigma_j^2\\le\\tau_k^2$. This set is nonempty because $q_k=s$ gives tail zero. Record the discarded tail\n$$ \\delta_k=\\left(\\sum_{j>q_k}\\sigma_j^2\\right)^{1/2}. $$\n\nReshape the first $q_k$ columns of $U_k$ into core $G_k$ and reshape $\\Sigma_{k,1:q_k}V_{k,1:q_k}^*$ as the next remainder. After cut $d-1$, reshape the remaining matrix as $G_d$. If $q_k=0$, the remainder has zero row dimension; all later ranks and tails are set to zero and the remaining cores are the corresponding empty zero arrays. Thus the zero tensor has all internal ranks zero, a cap zero returns the zero tensor, and a tolerance large enough to select $q_k=0$ does the same. The output is the TT core list and the cut tails $(\\delta_k)$. Any SVD tie at a retained cutoff may be resolved by any orthonormal choice within the tied singular subspace.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-tensor-train-rounding",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. The input is a valid TT core list for a tensor of order $d\\ge2$ and exactly one of rank caps $c_1,\\ldots,c_{d-1}\\in\\mathbb N_0$ or absolute tail tolerances $\\tau_1,\\ldots,\\tau_{d-1}\\in[0,\\infty)$.\n\n1. **Left orthogonalize without truncation.** For $k=1,\\ldots,d-1$, reshape core $G_k$ into a matrix with rows $(\\alpha_{k-1},i_k)$ and columns $\\alpha_k$. Compute an exact compact SVD $M=U\\Sigma V^*$, replace $G_k$ by the reshape of $U$, and absorb $\\Sigma V^*$ into the next core along their common bond. Omitting zero singular directions is exact. The resulting cores $G_1,\\ldots,G_{d-1}$ are left-isometric.\n\n2. **Truncate from right to left.** For $k=d,d-1,\\ldots,2$, reshape the current $G_k$ into a matrix $M_k$ with rows $\\alpha_{k-1}$ and columns $(i_k,\\alpha_k)$, and compute an exact compact SVD $M_k=U_k\\Sigma_kV_k^*$. If its positive singular values are $\\sigma_1\\ge\\cdots\\ge\\sigma_s>0$, choose $q_{k-1}=\\min(c_{k-1},s)$ for rank caps, or the least $q_{k-1}\\in\\{0,\\ldots,s\\}$ with $\\sum_{j>q_{k-1}}\\sigma_j^2\\le\\tau_{k-1}^2$ for tolerances. Record $\\delta_{k-1}=(\\sum_{j>q_{k-1}}\\sigma_j^2)^{1/2}$. Replace $G_k$ by the reshape of the first $q_{k-1}$ rows of $V_k^*$ and absorb $U_{k,1:q}\\Sigma_{k,1:q}$ into the previous core.\n\nIf $q_{k-1}=0$, the represented tensor becomes zero; set all remaining internal ranks to zero and their unperformed tails to zero. If the input represents zero, return the all-zero-rank representation and zero tails immediately. The output is the rounded core list and all recorded cut tails. No finite-precision error guarantee is part of this exact-arithmetic procedure.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Any TT representation with bond size $r_k$ factors the cut unfolding as $A^{\\langle k\\rangle}=L_kR_k$: the columns of $L_k$ are the contracted first $k$ cores indexed by the bond $\\alpha_k$, and the rows of $R_k$ are the contracted remaining cores with that same bond index. This is a matrix product through an inner dimension $r_k$, so $\\operatorname{rank}(A^{\\langle k\\rangle})\\le r_k$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For rounding, let $C_\\ell$ be the contraction of cores $\\ell+1,\\ldots,d$, with row index the bond after core $\\ell$ and column index the suffix $(i_{\\ell+1},\\ldots,i_d)$; the empty suffix gives $C_d=[1]$. Put $R_\\ell=C_\\ell^*$. Backward induction from $C_d$ shows $C_\\ell C_\\ell^*=I$: if $G_{\\ell+1}^{(R)}$ is the right matricization of core $G_{\\ell+1}$ and $C_{\\ell+1}C_{\\ell+1}^*=I$, then $C_\\ell=G_{\\ell+1}^{(R)}(I_{n_{\\ell+1}}\\otimes C_{\\ell+1})$, so $C_\\ell C_\\ell^*=G_{\\ell+1}^{(R)}(I_{n_{\\ell+1}}\\otimes C_{\\ell+1}C_{\\ell+1}^*)G_{\\ell+1}^{(R)*}=G_{\\ell+1}^{(R)}G_{\\ell+1}^{(R)*}=I$ by right-isometry. Forward induction similarly gives orthonormal columns for each prefix interface: $L_0=[1]$ and $L_j=(L_{j-1}\\otimes I_{n_j})G_j^{(L)}$. Since $L_{j-1}^*L_{j-1}=I$, $(L_{j-1}\\otimes I_{n_j})^*(L_{j-1}\\otimes I_{n_j})=I$, so $L_j^*L_j=G_j^{(L)*}G_j^{(L)}=I$. When the right-to-left sweep processes cut $k$, cores $1,\\ldots,k$ still have that left gauge and cores $k+2,\\ldots,d$ have the right gauge. The current cut unfolding is $L_kM_{k+1}J$, where $M_{k+1}$ is core $G_{k+1}$ reshaped with row index the incoming bond and column index $(i_{k+1},\\alpha_{k+1})$, and $J=I_{n_{k+1}}\\otimes R_{k+1}^*$. Since $R_{k+1}^*R_{k+1}=I$, $JJ^*=I$. The local SVD truncation replaces $M_{k+1}$ by $M_{k+1}V_qV_q^*$, where $V_q$ has the retained right singular vectors, so the full unfolding changes from $L_kM_{k+1}J$ to $L_kM_{k+1}V_qV_q^*J=(L_kM_{k+1}J)(J^*V_qV_q^*J)$. Since $JJ^*=I$ and $V_q^*V_q=I$, $J^*V_qV_q^*J$ is the orthogonal projection onto $T_k=\\operatorname{ran}(J^*V_q)$, a subspace of the suffix modes $k+1,\\ldots,d$. Thus the resulting tensor is the projection onto $S_k=\\mathbb F^{n_1\\times\\cdots\\times n_k}\\otimes T_k$. With $E=M_{k+1}(I-V_qV_q^*)$, the global residual norm satisfies $\\|L_kEJ\\|_F^2=\\operatorname{tr}(J^*E^*L_k^*L_kEJ)=\\operatorname{tr}(E^*EJJ^*)=\\|E\\|_F^2=\\delta_k^2$. At the next cut $k-1$, the right interface $R_k$ has orthonormal columns spanning $T_k$. Its local embedding is $I_{n_k}\\otimes R_k$, so every newly retained suffix vector lies in $\\operatorname{ran}(I_{n_k}\\otimes R_k)=\\mathbb F^{n_k}\\otimes T_k$. Hence $S_{k-1}\\subseteq S_k$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In full-rank TT-SVD, set $Q_0=[1]$ and recursively $Q_k=(Q_{k-1}\\otimes I_{n_k})U_k$ using the left singular vectors retained at cut $k$. Since $Q_{k-1}^*Q_{k-1}=I$ and $U_k^*U_k=I$, the columns of every $Q_k$ are orthonormal. Substituting each exact SVD of the current remainder into the preceding factorization gives $A^{\\langle k\\rangle}=Q_k\\Sigma_kV_k^*$ for each cut. The retained singular values are all positive, so this factorization has rank $r_k$. By step 1.1 no exact TT can have a smaller bond, proving the full-rank characterization.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For TT-SVD, let $S_0=\\mathbb F^{n_1\\times\\cdots\\times n_d}$ and, after truncating cut $k$, let $S_k=\\operatorname{ran}(Q_k)\\otimes\\mathbb F^{n_{k+1}\\times\\cdots\\times n_d}$. The retained prefix matrices satisfy $\\operatorname{ran}(Q_k)\\subseteq\\operatorname{ran}(Q_{k-1}\\otimes I_{n_k})$, hence $S_k\\subseteq S_{k-1}$. At step $k$, the current unfolding is $(Q_{k-1}\\otimes I_{n_k})M_k$. If $U_q$ contains the retained left singular vectors, the new unfolding is $(Q_{k-1}\\otimes I_{n_k})U_qU_q^*M_k$, the orthogonal projection of the current tensor onto $S_k$. The discarded matrix $M_k-U_qU_q^*M_k$ has squared Frobenius norm $\\delta_k^2$ by [F3]; left multiplication by the isometry $Q_{k-1}\\otimes I_{n_k}$ preserves that norm by direct expansion of the Frobenius inner product, equivalently [F2].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In either algorithm, let $A_0=A$ and let $A_j$ be the approximation after the $j$th truncation in execution order. By steps 3.1 and 1.2, each step is an orthogonal projection onto a retained subspace nested inside the preceding one. Therefore $e_j=A_{j-1}-A_j$ is orthogonal to every later increment, which lies in the retained subspace at step $j$. Telescoping gives $A-\\widehat A=\\sum_j e_j$, an orthogonal sum, and each $\\|e_j\\|_F$ is the recorded tail for that cut. Hence $\\|A-\\widehat A\\|_F^2=\\sum_{k=1}^{d-1}\\delta_k^2$. If a zero-rank truncation occurs, the output becomes zero and the unperformed tails are zero, so this same argument includes that branch. If no positive singular value is discarded, every $\\delta_k=0$ and the output is exactly $A$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The final suffix factor is explicitly the empty contraction equal to the scalar one, and the zero-rank stopping branch is handled separately in the proof.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The final suffix factor is explicitly the empty contraction equal to the scalar one, and the zero-rank stopping branch is handled separately in the proof.",
+            "item_sha256": "72f9d64cbe9b94b634522300131dd311f3de5fb4b9e9e227186d480d67fda760",
+            "row_sha256": "ed545ed984ade7bd193b9acbab17addd52fb3b88d46d4ec56e96ba626cc9ff29",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The final suffix factor is explicitly the empty contraction equal to the scalar one, and the zero-rank stopping branch is handled separately in the proof.",
+            "item_sha256": "72f9d64cbe9b94b634522300131dd311f3de5fb4b9e9e227186d480d67fda760",
+            "row_sha256": "ed545ed984ade7bd193b9acbab17addd52fb3b88d46d4ec56e96ba626cc9ff29",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero input has zero tails; a rank-zero cutoff and unperformed tails are handled in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At d=2 there is one cut and the same one-term squared-tail argument applies (steps 1.2 and 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Tied singular values still define orthogonal projections, and q=0 is handled (steps 1.2, 3.1, 4.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Retaining no positive values gives q=0; retaining all gives zero tail (step 4.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite-dimensional SVD bases are used; tied choices preserve the subspaces (steps 1.2–3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Exact TT ranks are the unfolding ranks and discarded orthogonal tails give a root-sum-square truncation bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "Exact TT ranks are the unfolding ranks and discarded orthogonal tails give a root-sum-square truncation bound.",
+            "item_sha256": "72f9d64cbe9b94b634522300131dd311f3de5fb4b9e9e227186d480d67fda760",
+            "row_sha256": "164255bb53306c5d42d002ed918129dc6d8c1cca20679d00c6a9d9c57aa78ba5",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "Exact TT ranks are the unfolding ranks and discarded orthogonal tails give a root-sum-square truncation bound.",
+            "item_sha256": "72f9d64cbe9b94b634522300131dd311f3de5fb4b9e9e227186d480d67fda760",
+            "row_sha256": "164255bb53306c5d42d002ed918129dc6d8c1cca20679d00c6a9d9c57aa78ba5",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The upper error estimate is not asserted as a necessary lower bound on every tensor-train approximation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The upper error estimate is not asserted as a necessary lower bound on every tensor-train approximation.",
+            "item_sha256": "72f9d64cbe9b94b634522300131dd311f3de5fb4b9e9e227186d480d67fda760",
+            "row_sha256": "9a8ea0f4c6299f4a0daf53cd4eff831ae99cb201c935dca13e0e1abde72cf764",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The upper error estimate is not asserted as a necessary lower bound on every tensor-train approximation.",
+            "item_sha256": "72f9d64cbe9b94b634522300131dd311f3de5fb4b9e9e227186d480d67fda760",
+            "row_sha256": "9a8ea0f4c6299f4a0daf53cd4eff831ae99cb201c935dca13e0e1abde72cf764",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        }
+      ],
+      "source_locators": "Oseledets §§2–3; Dupuy §§1.2.2, 1.2.4–1.2.5 and Theorems 1.2.12, 1.2.14.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-tensor-train-storage-and-inner-product-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$. A tensor-train (TT) representation consists of integers $r_0=r_d=1$, internal bond sizes $r_1,\\ldots,r_{d-1}\\in\\mathbb N_0$, and cores\n$$ G_k\\in\\mathbb F^{r_{k-1}\\times n_k\\times r_k}\\quad(1\\le k\\le d) $$\nsuch that\n$$ A_{i_1,\\ldots,i_d} =\\sum_{\\alpha_1=1}^{r_1}\\cdots\\sum_{\\alpha_{d-1}=1}^{r_{d-1}} G_1(1,i_1,\\alpha_1)G_2(\\alpha_1,i_2,\\alpha_2)\\cdots G_d(\\alpha_{d-1},i_d,1). $$\nAn empty bond index set gives an empty sum, hence the zero tensor; in particular, all internal bond sizes zero represent zero. A bond size $r_k$ is the storage dimension contracted between cores $k$ and $k+1$. The cut-$k$ unfolding groups modes $1,\\ldots,k$ against $k+1,\\ldots,d$ as fixed in [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\nFor an internal bond $k$, an invertible matrix $S\\in\\mathbb F^{r_k\\times r_k}$ gives a gauge transformation by replacing the two adjacent cores with\n$$ \\widetilde G_k(\\alpha,i,\\beta)=\\sum_{\\gamma=1}^{r_k}G_k(\\alpha,i,\\gamma)S_{\\gamma\\beta}, \\qquad \\widetilde G_{k+1}(\\beta,j,\\eta)=\\sum_{\\gamma=1}^{r_k}(S^{-1})_{\\beta\\gamma}G_{k+1}(\\gamma,j,\\eta). $$\nTheir contraction is unchanged because $\\sum_\\beta S_{\\gamma\\beta}(S^{-1})_{\\beta\\gamma'}=\\delta_{\\gamma,\\gamma'}$.\n\nThe left matricization of core $G_k$ has row index $(\\alpha_{k-1},i_k)$ and column index $\\alpha_k$. The core is left-isometric if this matrix $L_k$ satisfies $L_k^*L_k=I_{r_k}$. The right matricization has row index $\\alpha_{k-1}$ and column index $(i_k,\\alpha_k)$; the core is right-isometric if its matrix $R_k$ satisfies $R_kR_k^*=I_{r_{k-1}}$. A TT is in mixed canonical gauge about core $\\ell$ when cores $k<\\ell$ are left-isometric and cores $k>\\ell$ are right-isometric.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Core $G_k$ contains $r_{k-1}n_kr_k$ entries, so storing all cores requires the stated sum. The corresponding dense tensor would have $\\prod_kn_k$ entries; the TT formula counts its actual core storage and by itself asserts no savings unless that sum is smaller.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $E_0=[1]$ and recursively define $(E_k)_{\\alpha_k,\\beta_k}=\\sum_{\\alpha_{k-1}=1}^{r_{k-1}}\\sum_{\\beta_{k-1}=1}^{s_{k-1}}\\sum_{i_k=1}^{n_k}(E_{k-1})_{\\alpha_{k-1},\\beta_{k-1}}\\overline{G_k(\\alpha_{k-1},i_k,\\alpha_k)}H_k(\\beta_{k-1},i_k,\\beta_k)$. Induction on $k$ expands $E_k$ as the sum over indices $i_1,\\ldots,i_k$ and bonds $\\alpha_k,\\beta_k$ of the conjugate prefix contraction of $A$ times the prefix contraction of $B$. At $k=d$, the terminal bonds each have size one, so this is exactly $\\langle A,B\\rangle_F$ by [F1] and [F2].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At step $k$, each of the $r_ks_k$ output entries accumulates $n_kr_{k-1}s_{k-1}$ terms. Thus its arithmetic is bounded by a fixed constant times $n_kr_{k-1}s_{k-1}r_ks_k$. Summing over modes gives the displayed cost. The recurrence stores the previous and next environments, of sizes $r_{k-1}s_{k-1}$ and $r_ks_k$, so its additional workspace is bounded by a constant times their maximum over $k$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The TT representation uses its positive mode count and terminal bonds; a zero-mode scalar convention is not asserted here.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The TT representation uses its positive mode count and terminal bonds; a zero-mode scalar convention is not asserted here.",
+            "item_sha256": "459d2ba689da17c337bd572c90311d71b912eacdff1f953a9d39c102b5ba0d0e",
+            "row_sha256": "4aa944bef43fa963f7cdaf5d90dc8b5df3ac6d13b032031598067dd42c575dd3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The TT representation uses its positive mode count and terminal bonds; a zero-mode scalar convention is not asserted here.",
+            "item_sha256": "459d2ba689da17c337bd572c90311d71b912eacdff1f953a9d39c102b5ba0d0e",
+            "row_sha256": "4aa944bef43fa963f7cdaf5d90dc8b5df3ac6d13b032031598067dd42c575dd3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero internal bonds give empty environments and the recurrence still yields the zero inner product (step 1.2)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "All mode and bond sizes one give one stored entry per core and constant work per mode (steps 1.1–2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero bond dimensions are represented by empty cores and sums in the same recurrence (steps 1.1–2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The terminal bonds equal one, initializing and terminating scalar environments (step 1.2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The contraction and index sums are explicit; no basis is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Counting actual core entries gives exact storage, while contraction environments give the arithmetic bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Counting actual core entries gives exact storage, while contraction environments give the arithmetic bound.",
+            "item_sha256": "459d2ba689da17c337bd572c90311d71b912eacdff1f953a9d39c102b5ba0d0e",
+            "row_sha256": "96f503de0be86051e9641d2f5587e28957262a199d4d66b30c4ef02a2ae3e12f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Counting actual core entries gives exact storage, while contraction environments give the arithmetic bound.",
+            "item_sha256": "459d2ba689da17c337bd572c90311d71b912eacdff1f953a9d39c102b5ba0d0e",
+            "row_sha256": "96f503de0be86051e9641d2f5587e28957262a199d4d66b30c4ef02a2ae3e12f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A storage total alone cannot identify TT cores or establish a converse rank or compression guarantee.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "A storage total alone cannot identify TT cores or establish a converse rank or compression guarantee.",
+            "item_sha256": "459d2ba689da17c337bd572c90311d71b912eacdff1f953a9d39c102b5ba0d0e",
+            "row_sha256": "0bc68ef64ca5967bc0c61ac09dc1de21d730ef625c8185b786b320760ff8bf3a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "A storage total alone cannot identify TT cores or establish a converse rank or compression guarantee.",
+            "item_sha256": "459d2ba689da17c337bd572c90311d71b912eacdff1f953a9d39c102b5ba0d0e",
+            "row_sha256": "0bc68ef64ca5967bc0c61ac09dc1de21d730ef625c8185b786b320760ff8bf3a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        }
+      ],
+      "source_locators": "Oseledets §4.2; Dupuy §1.2.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-hosvd-quasioptimal-multilinear-rank-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tucker-multilinear-rank-and-mode-products",
+          "source_section": "Definition",
+          "quote": "For a tensor $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, its multilinear rank is\n$$ \\operatorname{mlrank}(A)=\\bigl(\\operatorname{rank}A_{(1)},\\ldots,\\operatorname{rank}A_{(d)}\\bigr). $$\nIf $U\\in\\mathbb F^{m\\times n_k}$, the mode-$k$ product $A\\times_k U$ is the tensor with mode-$k$ size $m$ and entries\n$$ (A\\times_k U)_{i_1,\\ldots,i_{k-1},j,i_{k+1},\\ldots,i_d} =\\sum_{i_k=1}^{n_k}A_{i_1,\\ldots,i_d}U_{j,i_k}. $$\nThe product is bilinear in the entries; no conjugation is used in this tensor contraction.\n\nA Tucker representation with mode ranks bounded by $r=(r_1,\\ldots,r_d)$ is a factorization\n$$ A=G\\times_1 U_1\\times_2\\cdots\\times_d U_d, $$\nwhere $U_k\\in\\mathbb F^{n_k\\times r_k}$ and $G\\in\\mathbb F^{r_1\\times\\cdots\\times r_d}$. Separately, write\n$$ \\mathcal T_r=\\{B\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}:\\operatorname{rank}B_{(k)}\\le r_k\\text{ for each }k\\} $$\nfor the multilinear-rank-bounded set used in approximation statements.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tensor-unfoldings-are-frobenius-isometries",
+          "source_section": "Statement",
+          "quote": "For tensors $A,B$ of the same finite shape, every mode unfolding and every cut unfolding preserves the Frobenius inner product and norm.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-best-rank-k-frobenius-matrix-approximation",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, where $m,n\\ge1$, have a singular value decomposition\n$$ A=\\sum_{j=1}^{q}\\sigma_j u_jv_j^*,\\qquad \\sigma_1\\ge\\cdots\\ge\\sigma_q>0, $$\nwhere $q=\\operatorname{rank}(A)$. For an integer $k\\ge0$, put\n$$ A_k=\\sum_{j=1}^{\\min(k,q)}\\sigma_j u_jv_j^*, \\qquad \\delta_k^2=\\sum_{j=k+1}^{q}\\sigma_j^2 $$\nwith an empty sum equal to zero. Then $\\operatorname{rank}(A_k)\\le k$, $\\|A-A_k\\|_F=\\delta_k$, and every matrix $B$ with $\\operatorname{rank}(B)\\le k$ satisfies $\\|A-B\\|_F\\ge\\delta_k$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-hosvd-truncation",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. Given $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ and integer rank caps $0\\le r_k\\le n_k$, compute an exact SVD of each mode unfolding $A_{(k)}$. Let $U_k$ consist of the first $q_k=\\min(r_k,\\operatorname{rank}A_{(k)})$ left singular vectors, with any orthonormal choice at a tied cutoff. Define $P_k=U_kU_k^*$, the orthogonal projection onto their span; for $q_k=0$, set $P_k=0$.\n\nReturn the factors $U_k$, the core $G=A\\times_1U_1^*\\times_2\\cdots\\times_dU_d^*$, and reconstruction\n$$ \\widehat A=G\\times_1U_1\\times_2\\cdots\\times_dU_d =A\\times_1P_1\\times_2\\cdots\\times_dP_d. $$\nThe algorithm makes no finite-precision claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $P_k=U_kU_k^*$ be the orthogonal projection used in mode $k$, and let $\\mathcal P_k$ denote its action on that mode. The projections $\\mathcal P_k$ commute for distinct modes, since they act on different tensor indices. By [F4], $\\widehat A=\\mathcal P_1\\cdots\\mathcal P_dA$. The telescoping identity gives $A-\\widehat A=\\sum_{k=1}^d\\mathcal P_1\\cdots\\mathcal P_{k-1}(I-\\mathcal P_k)A$. For $k<\\ell$, the $k$th summand lies in the kernel of $\\mathcal P_k$, while the $\\ell$th lies in its range. These summands are orthogonal, so their squared norms add.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each $\\mathcal P_j$ is an orthogonal projection and hence a contraction: its range and kernel are orthogonal, so applying it cannot increase the squared norm. Consequently, $\\|A-\\widehat A\\|_F^2=\\sum_{k=1}^d\\|\\mathcal P_1\\cdots\\mathcal P_{k-1}(I-\\mathcal P_k)A\\|_F^2\\le\\sum_{k=1}^d\\|(I-\\mathcal P_k)A\\|_F^2$. By [F2], $\\|(I-\\mathcal P_k)A\\|_F$ is the Frobenius error of truncating $A_{(k)}$ to rank $r_k$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix any $B\\in\\mathcal T_r$. Its mode-$k$ unfolding has rank at most $r_k$ by [F1], so [F3] implies $\\|(I-\\mathcal P_k)A\\|_F\\le\\|A_{(k)}-B_{(k)}\\|_F=\\|A-B\\|_F$. Substitute this bound for each $k$ in step 2.1 to obtain $\\|A-\\widehat A\\|_F^2\\le d\\|A-B\\|_F^2$. Since it holds for every $B\\in\\mathcal T_r$, taking the infimum and square roots proves the claim.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The tensor dimensions are positive and d≥2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For A=0, the output and feasible optimum are zero (steps 1.1–3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Rank caps 0 and 1 are covered by the projection argument (steps 1.1–3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero singular values and tied cutoffs still give orthogonal projections (steps 1.1 and 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Caps zero and n_k give zero and identity mode projections respectively (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite-dimensional SVD bases exist; tied leading subspaces preserve the estimates (steps 1.1–3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Commuting orthogonal mode projections give a quasioptimal error bound, without characterizing every tensor that attains the best multilinear rank error.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Commuting orthogonal mode projections give a quasioptimal error bound, without characterizing every tensor that attains the best multilinear rank error.",
+            "item_sha256": "1b49c07f7955f833a21b2461f93c2389f93a92b1d93dbb77d1684dc59e12385e",
+            "row_sha256": "edbf10784fd5aa18b97a06faef72a0fd08b7757f648157a3cfb170ec7aab58fb",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Commuting orthogonal mode projections give a quasioptimal error bound, without characterizing every tensor that attains the best multilinear rank error.",
+            "item_sha256": "1b49c07f7955f833a21b2461f93c2389f93a92b1d93dbb77d1684dc59e12385e",
+            "row_sha256": "edbf10784fd5aa18b97a06faef72a0fd08b7757f648157a3cfb170ec7aab58fb",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A quasioptimal low-rank tensor need not be an HOSVD reconstruction, and the bound is not asserted as a converse construction.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A quasioptimal low-rank tensor need not be an HOSVD reconstruction, and the bound is not asserted as a converse construction.",
+            "item_sha256": "1b49c07f7955f833a21b2461f93c2389f93a92b1d93dbb77d1684dc59e12385e",
+            "row_sha256": "b6a7124551a20a55bc652853fceeb617cb5c31fcea412551a5b6b5162286418c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A quasioptimal low-rank tensor need not be an HOSVD reconstruction, and the bound is not asserted as a converse construction.",
+            "item_sha256": "1b49c07f7955f833a21b2461f93c2389f93a92b1d93dbb77d1684dc59e12385e",
+            "row_sha256": "b6a7124551a20a55bc652853fceeb617cb5c31fcea412551a5b6b5162286418c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "source_locators": "De Lathauwer–De Moor–Vandewalle §5, Property 10; Kolda–Bader §4.2.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "thm-exact-cp-als-block-updates-are-monotone": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-budgeted-cp-alternating-least-squares",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. Inputs are a tensor $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, a proposed CP component count $R\\in\\mathbb N_0$, initial factor matrices $F_k\\in\\mathbb F^{n_k\\times R}$, and a finite sweep budget $N_{\\max}\\in\\mathbb N_0$. The objective is\n$$ \\Phi(F_1,\\ldots,F_d)=\\left\\|A-\\sum_{j=1}^{R}F_1(:,j)\\otimes\\cdots\\otimes F_d(:,j)\\right\\|_F^2. $$\nOn every exit, return the tuple $(F_1,\\ldots,F_d,\\widehat A,\\text{status})$, where\n$$ \\widehat A=\\sum_{j=1}^{R}F_1(:,j)\\otimes\\cdots\\otimes F_d(:,j) $$\nis evaluated from the factor matrices as they stand at that exit. If $R=0$, return the empty factor matrices, the zero model, and status “rank-zero-model” immediately. If $N_{\\max}=0$, return the current factors and model with status “budget-exhausted”. Otherwise, for each of at most $N_{\\max}$ sweeps, visit modes $k=1,\\ldots,d$ in that order. With the other factors fixed, form $Z_k$ whose rows are indexed by all tuples $(i_\\ell)_{\\ell\\ne k}$ and whose column $j$ is\n$$ (Z_k)_{(i_\\ell)_{\\ell\\ne k},j}=\\prod_{\\ell\\ne k}(F_\\ell)_{i_\\ell,j}. $$\nThe mode-$k$ unfolding model is $A_{(k)}\\approx XZ_k^{\\mathsf T}$. If $Z_k$ is not full column rank, halt and return the current factors and model with status “rank-deficient-design”; no factor has changed at this block. If it has full column rank, solve the equivalent adjoint problem\n$$ \\min_{Y\\in\\mathbb F^{R\\times n_k}}\\|A_{(k)}^*-\\overline{Z_k}Y\\|_F $$\nand replace $F_k$ by $Y^*$. The matrix $\\overline{Z_k}$ has full column rank, so the minimizer is unique by [[lem-full-column-rank-matrix-least-squares-solution]]. After each completed sweep, increment the sweep counter. Return the current factors and model with status “budget-exhausted” after the $N_{\\max}$th completed sweep. This finite-budget procedure guarantees neither convergence nor a global best CP approximation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-full-column-rank-matrix-least-squares-solution",
+          "source_section": "Statement",
+          "quote": "Let $p,r,s\\ge1$, let $M\\in\\mathbb F^{p\\times r}$ have full column rank, and let $Y\\in\\mathbb F^{p\\times s}$. Among all $W\\in\\mathbb F^{r\\times s}$, the function $W\\mapsto\\|Y-MW\\|_F$ has the unique minimizer\n$$ W_*=(M^*M)^{-1}M^*Y. $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a successful mode-$k$ update and keep all other factor matrices fixed. The residual objective as a function of the replaced factor $X$ is $\\|A_{(k)}-XZ_k^{\\mathsf T}\\|_F^2$. Taking adjoints preserves the Frobenius norm and rewrites it as $\\|A_{(k)}^*-\\overline{Z_k}X^*\\|_F^2$. Since $Z_k$ has full column rank, so does $\\overline{Z_k}$; [F2] therefore makes the algorithm's update the unique minimizer of this block objective. The old factor is an admissible candidate, so the updated objective is at most the old one.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A rank-deficient-design branch stops before changing a factor, so the objective is identical before and after that branch. Every other executed update satisfies step 1.1; chaining these finitely many inequalities across any completed part of a sweep proves the objective is nonincreasing through all successful exact block updates. This asserts no convergence or global optimality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The tensor dimensions are positive; R=0 is treated under zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For R=0 the model is the empty sum and no update occurs; the objective is unchanged (steps 1.1–2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one component the same least-squares comparison proves each successful block decrease (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A rank-deficient design halts without replacing its factor (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At zero sweep budget no block executes; any finite sequence is monotone by step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The full-rank minimizer is unique and the rank-deficient branch makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement line 27 asserts monotonicity for each successful exact CP-ALS block update. Proof 1.1 compares the exact block minimizer with the previous factor, rather than characterizing successful updates by a decrease in residual.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Statement line 27 asserts monotonicity for each successful exact CP-ALS block update. Proof 1.1 compares the exact block minimizer with the previous factor, rather than characterizing successful updates by a decrease in residual.",
+            "item_sha256": "08e65fea2755793a7f153978c443574c6544e39e3f963c3e6d4b71cea1aa9653",
+            "row_sha256": "bd76a5c8a7a97166add51b1baf0931bbc896b05e96875018528125f45da0a271",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Statement line 27 asserts monotonicity for each successful exact CP-ALS block update. Proof 1.1 compares the exact block minimizer with the previous factor, rather than characterizing successful updates by a decrease in residual.",
+            "item_sha256": "08e65fea2755793a7f153978c443574c6544e39e3f963c3e6d4b71cea1aa9653",
+            "row_sha256": "bd76a5c8a7a97166add51b1baf0931bbc896b05e96875018528125f45da0a271",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 explains that a rank-deficient-design halt leaves the objective unchanged and disclaims convergence or global optimality. An unchanged or decreasing objective is not asserted to imply that the block update succeeded.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Proof 2.1 explains that a rank-deficient-design halt leaves the objective unchanged and disclaims convergence or global optimality. An unchanged or decreasing objective is not asserted to imply that the block update succeeded.",
+            "item_sha256": "08e65fea2755793a7f153978c443574c6544e39e3f963c3e6d4b71cea1aa9653",
+            "row_sha256": "4ac170e82bdf2b436b03d0453794f71d5465ba378536207d27314c2eed8f69a4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_structure; indices35-69 reviewed by /root/gate_coverage_structure/boundary_3b",
+            "reason": "Proof 2.1 explains that a rank-deficient-design halt leaves the objective unchanged and disclaims convergence or global optimality. An unchanged or decreasing objective is not asserted to imply that the block update succeeded.",
+            "item_sha256": "08e65fea2755793a7f153978c443574c6544e39e3f963c3e6d4b71cea1aa9653",
+            "row_sha256": "4ac170e82bdf2b436b03d0453794f71d5465ba378536207d27314c2eed8f69a4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-3.json"
+          }
+        }
+      ],
+      "source_locators": "Caltech ACM 270-1, Lecture 13 §4.3; Kolda–Bader §3.4.",
+      "finite_checks": [],
+      "kind": "theorem"
+    },
+    "cex-best-rank-two-cp-approximation-may-not-exist": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-canonical-polyadic-rank",
+          "source_section": "Definition",
+          "quote": "For $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, its canonical polyadic rank (CP rank) is the least integer $R\\ge0$ for which\n$$ A=\\sum_{q=1}^{R}a_q^{(1)}\\otimes\\cdots\\otimes a_q^{(d)},\\qquad a_q^{(k)}\\in\\mathbb F^{n_k}. $$\nThe empty sum is zero, so the zero tensor has CP rank $0$. The coordinate expansion\n$$ A=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d} A_{i_1,\\ldots,i_d}\\,e_{i_1}^{(1)}\\otimes\\cdots\\otimes e_{i_d}^{(d)} $$\nshows that the set of admissible finite integers $R$ is nonempty. The well-ordering of $\\mathbb N_0$ therefore makes the least such $R$ well-defined.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $W=e_2\\otimes e_1\\otimes e_1+e_1\\otimes e_2\\otimes e_1+e_1\\otimes e_1\\otimes e_2$. It has an explicit three-term CP expression, so its CP rank is at most three. Its first-mode slices are $W_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ and $W_2=\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix}$. They are linearly independent, and $\\det(xW_1+yW_2)=-x^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $W$ had a two-term expression $a\\otimes b\\otimes c+a'\\otimes b'\\otimes c'$. The first-mode slices being independent forces $a,a'$ to be independent. If $b,b'$ or $c,c'$ were dependent, every linear combination of the two slices would have matrix rank at most one, so its determinant would vanish identically, contrary to $\\det(xW_1+yW_2)=-x^2$. Thus both pairs are independent. For any $x,y$, the pencil slice is $(xa_1+ya_2)bc^{\\mathsf T}+(xa'_1+ya'_2)b'c'^{\\mathsf T}$. Its determinant is a nonzero constant times $(xa_1+ya_2)(xa'_1+ya'_2)$. Independence of $a,a'$ makes the two linear factors nonproportional, so this determinant has two distinct zero lines; it cannot equal $-x^2$, which vanishes on the repeated line $x=0$. This contradiction proves $\\operatorname{rank}_{CP}(W)>2$, hence it is exactly three.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $\\varepsilon>0$, define $W_\\varepsilon=\\varepsilon^{-1}\\bigl((e_1+\\varepsilon e_2)^{\\otimes3}-e_1^{\\otimes3}\\bigr)$. This is a difference of two elementary tensors, with the scalar absorbed into one factor, so its CP rank is at most two. Expanding gives $W_\\varepsilon=W+\\varepsilon(e_2\\otimes e_2\\otimes e_1+e_2\\otimes e_1\\otimes e_2+e_1\\otimes e_2\\otimes e_2)+\\varepsilon^2e_2^{\\otimes3}$, so $\\|W_\\varepsilon-W\\|_F\\to0$. Thus the infimal rank-two approximation error is zero. Since step 2.1 shows $W$ itself has rank three, no rank-at-most-two tensor attains that infimum.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a fixed tensor in R^{2×2×2}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An approximation error of zero would require W itself, whose CP rank is three (steps 2.1–3.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample concerns failure of attainment for rank at most two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The repeated pencil root −x² contradicts the two distinct zero lines forced by rank two (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The explicit rank-two family converges in Frobenius norm as epsilon→0 (step 3.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The approximants are explicitly defined for every epsilon>0 (step 3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A rank-three tensor is a limit of rank-two tensors, so the rank-two approximation infimum is not attained. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A rank-three tensor is a limit of rank-two tensors, so the rank-two approximation infimum is not attained. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "84f3e37b461ef5bb8a64b7fece0273a896d13442d9123687f6651fa572bd41a8",
+            "row_sha256": "29d26decc307e7035364eca7b1fc9b536a889c2741fb4f29316646e95f5ded8c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A rank-three tensor is a limit of rank-two tensors, so the rank-two approximation infimum is not attained. The result derives this conclusion from its supplied hypotheses; it contains no additional forward half of a characterization.",
+            "item_sha256": "84f3e37b461ef5bb8a64b7fece0273a896d13442d9123687f6651fa572bd41a8",
+            "row_sha256": "29d26decc307e7035364eca7b1fc9b536a889c2741fb4f29316646e95f5ded8c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A rank-three tensor is a limit of rank-two tensors, so the rank-two approximation infimum is not attained. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+          "template_review": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A rank-three tensor is a limit of rank-two tensors, so the rank-two approximation infimum is not attained. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "84f3e37b461ef5bb8a64b7fece0273a896d13442d9123687f6651fa572bd41a8",
+            "row_sha256": "9930477f24b1f7234135cbbc8b05833dd818bd72e3adfb0eb34d80d461cdb4c8",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "root-delegate-gate_url_chemistry",
+            "reason": "A rank-three tensor is a limit of rank-two tensors, so the rank-two approximation infimum is not attained. The conclusion is not asserted to reconstruct the input assumptions, so a converse implication is outside the mathematical contract.",
+            "item_sha256": "84f3e37b461ef5bb8a64b7fece0273a896d13442d9123687f6651fa572bd41a8",
+            "row_sha256": "9930477f24b1f7234135cbbc8b05833dd818bd72e3adfb0eb34d80d461cdb4c8",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-5.json"
+          }
+        }
+      ],
+      "source_locators": "Kolda–Bader §3.3; Dupuy §1.2.3.",
+      "finite_checks": [
+        {
+          "name": "Rank-three pencil and approximants",
+          "calculation": "The two slices have pencil determinant −x². Expansion of W_epsilon gives W plus epsilon times the three two-e_2 terms plus epsilon squared e_2⊗e_2⊗e_2.",
+          "result": "rank-two sequence converges to rank-three W"
+        }
+      ],
+      "kind": "counterexample"
+    },
+    "ex-separable-grid-tensor-has-tt-rank-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$. A tensor-train (TT) representation consists of integers $r_0=r_d=1$, internal bond sizes $r_1,\\ldots,r_{d-1}\\in\\mathbb N_0$, and cores\n$$ G_k\\in\\mathbb F^{r_{k-1}\\times n_k\\times r_k}\\quad(1\\le k\\le d) $$\nsuch that\n$$ A_{i_1,\\ldots,i_d} =\\sum_{\\alpha_1=1}^{r_1}\\cdots\\sum_{\\alpha_{d-1}=1}^{r_{d-1}} G_1(1,i_1,\\alpha_1)G_2(\\alpha_1,i_2,\\alpha_2)\\cdots G_d(\\alpha_{d-1},i_d,1). $$\nAn empty bond index set gives an empty sum, hence the zero tensor; in particular, all internal bond sizes zero represent zero. A bond size $r_k$ is the storage dimension contracted between cores $k$ and $k+1$. The cut-$k$ unfolding groups modes $1,\\ldots,k$ against $k+1,\\ldots,d$ as fixed in [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\nFor an internal bond $k$, an invertible matrix $S\\in\\mathbb F^{r_k\\times r_k}$ gives a gauge transformation by replacing the two adjacent cores with\n$$ \\widetilde G_k(\\alpha,i,\\beta)=\\sum_{\\gamma=1}^{r_k}G_k(\\alpha,i,\\gamma)S_{\\gamma\\beta}, \\qquad \\widetilde G_{k+1}(\\beta,j,\\eta)=\\sum_{\\gamma=1}^{r_k}(S^{-1})_{\\beta\\gamma}G_{k+1}(\\gamma,j,\\eta). $$\nTheir contraction is unchanged because $\\sum_\\beta S_{\\gamma\\beta}(S^{-1})_{\\beta\\gamma'}=\\delta_{\\gamma,\\gamma'}$.\n\nThe left matricization of core $G_k$ has row index $(\\alpha_{k-1},i_k)$ and column index $\\alpha_k$. The core is left-isometric if this matrix $L_k$ satisfies $L_k^*L_k=I_{r_k}$. The right matricization has row index $\\alpha_{k-1}$ and column index $(i_k,\\alpha_k)$; the core is right-isometric if its matrix $R_k$ satisfies $R_kR_k^*=I_{r_{k-1}}$. A TT is in mixed canonical gauge about core $\\ell$ when cores $k<\\ell$ are left-isometric and cores $k>\\ell$ are right-isometric.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, $d\\ge2$, and let $A^{\\langle k\\rangle}$ denote its cut-$k$ unfolding. For sequential TT-SVD, let $r_k$ be its retained bond size and $\\delta_k$ its discarded singular-value tail at cut $k$. For rounding, let the input TT represent $A$ and use the same notation for the output bond sizes and recorded tails. Then both procedures satisfy\n$$ \\|A-\\widehat A\\|_F^2\\le\\sum_{k=1}^{d-1}\\delta_k^2. $$\nIf no positive singular value is discarded, the output is exactly $A$. In full-rank TT-SVD, $r_k=\\operatorname{rank}(A^{\\langle k\\rangle})$ for every cut, and these are the minimal possible TT bond sizes among exact representations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At cut $k$, the unfolding is the outer product of the vector with entries $\\prod_{j=1}^{k}u^{(j)}_{i_j}$ and the vector with entries $\\prod_{j=k+1}^{d}u^{(j)}_{i_j}$. Both vectors are nonzero, so this matrix has rank one.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $G_k(1,i_k,1)=u^{(k)}_{i_k}$ for each core. Their contraction is $\\prod_ku^{(k)}_{i_k}=A_{i_1,\\ldots,i_d}$, so this is an exact TT with every internal bond size one. By [F3] these sizes are minimal; full-rank TT-SVD therefore also returns this exact rank-one structure.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes d≥2 and positive mode sizes."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All factor vectors are assumed nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=2 the only cut is an outer product of two nonzero vectors (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Individual coordinates may vanish while each nonzero factor and both product vectors remain nonzero (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The first and last cuts use nonempty products of nonzero vectors (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The cores are explicitly defined from the given vectors (step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Each unfolding factors as an outer product of nonzero vectors, proving rank one without claiming a characterization of all grid tensors.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Each unfolding factors as an outer product of nonzero vectors, proving rank one without claiming a characterization of all grid tensors.",
+            "item_sha256": "d96612cad03d72b1bcda77871b80970705e4e974cd83561a14716d0212ba2de7",
+            "row_sha256": "3aef956273021df3fb9c631cf6ca1d063ddc6f885e4d4c3983a6febe0017e382",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Each unfolding factors as an outer product of nonzero vectors, proving rank one without claiming a characterization of all grid tensors.",
+            "item_sha256": "d96612cad03d72b1bcda77871b80970705e4e974cd83561a14716d0212ba2de7",
+            "row_sha256": "3aef956273021df3fb9c631cf6ca1d063ddc6f885e4d4c3983a6febe0017e382",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not separately derive separability from minimal TT rank one, even though such a characterization can be proved elsewhere.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The example does not separately derive separability from minimal TT rank one, even though such a characterization can be proved elsewhere.",
+            "item_sha256": "d96612cad03d72b1bcda77871b80970705e4e974cd83561a14716d0212ba2de7",
+            "row_sha256": "2287d232e4986448b548847951b7a3a73d2c6fd4860b4f8fe654b0d95a0949fe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The example does not separately derive separability from minimal TT rank one, even though such a characterization can be proved elsewhere.",
+            "item_sha256": "d96612cad03d72b1bcda77871b80970705e4e974cd83561a14716d0212ba2de7",
+            "row_sha256": "2287d232e4986448b548847951b7a3a73d2c6fd4860b4f8fe654b0d95a0949fe",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "source_locators": "Oseledets §2; Dupuy Example 1.2.3.",
+      "finite_checks": [
+        {
+          "name": "Two-factor product tensor",
+          "calculation": "For u=(1,2)^T and v=(3,4)^T, uv^T=[[3,4],[6,8]] has rank one and is the contraction of cores u and v.",
+          "result": "explicit representation verified"
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-two-tt-truncations-realise-root-sum-squares-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sequential-tensor-train-svd",
+          "source_section": "Definition",
+          "quote": "Work in exact arithmetic over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. The input is a tensor $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$, and exactly one of:\n\n- rank caps $c_1,\\ldots,c_{d-1}\\in\\mathbb N_0$; or\n- absolute tail tolerances $\\tau_1,\\ldots,\\tau_{d-1}\\in[0,\\infty)$.\n\nAt cut $k$, flatten the current remainder with rows $(\\alpha_{k-1},i_k)$ and columns $(i_{k+1},\\ldots,i_d)$, where $\\alpha_0=1$, and compute an exact compact SVD $M_k=U_k\\Sigma_kV_k^*$. Its positive singular values are ordered decreasingly as $\\sigma_1,\\ldots,\\sigma_s$. Under rank caps choose $q_k=\\min(c_k,s)$. Under tolerances choose the least $q_k\\in\\{0,\\ldots,s\\}$ for which $\\sum_{j>q_k}\\sigma_j^2\\le\\tau_k^2$. This set is nonempty because $q_k=s$ gives tail zero. Record the discarded tail\n$$ \\delta_k=\\left(\\sum_{j>q_k}\\sigma_j^2\\right)^{1/2}. $$\n\nReshape the first $q_k$ columns of $U_k$ into core $G_k$ and reshape $\\Sigma_{k,1:q_k}V_{k,1:q_k}^*$ as the next remainder. After cut $d-1$, reshape the remaining matrix as $G_d$. If $q_k=0$, the remainder has zero row dimension; all later ranks and tails are set to zero and the remaining cores are the corresponding empty zero arrays. Thus the zero tensor has all internal ranks zero, a cap zero returns the zero tensor, and a tolerance large enough to select $q_k=0$ does the same. The output is the TT core list and the cut tails $(\\delta_k)$. Any SVD tie at a retained cutoff may be resolved by any orthonormal choice within the tied singular subspace.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, $d\\ge2$, and let $A^{\\langle k\\rangle}$ denote its cut-$k$ unfolding. For sequential TT-SVD, let $r_k$ be its retained bond size and $\\delta_k$ its discarded singular-value tail at cut $k$. For rounding, let the input TT represent $A$ and use the same notation for the output bond sizes and recorded tails. Then both procedures satisfy\n$$ \\|A-\\widehat A\\|_F^2\\le\\sum_{k=1}^{d-1}\\delta_k^2. $$\nIf no positive singular value is discarded, the output is exactly $A$. In full-rank TT-SVD, $r_k=\\operatorname{rank}(A^{\\langle k\\rangle})$ for every cut, and these are the minimal possible TT bond sizes among exact representations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With columns ordered by $(i_2,i_3)=(1,1),(1,2),(2,1),(2,2)$, the first unfolding is $\\begin{pmatrix}3&0&0&1\\\\0&2&0&0\\end{pmatrix}$. Its rows are orthogonal with norms $\\sqrt{10}$ and $2$, so the leading singular value is $\\sqrt{10}$ and the first discarded tail is $\\delta_1=2$. The retained left vector is $(1,0)^{\\mathsf T}$, and the remainder $\\Sigma_1V_1^*$ reshaped as a $2\\times2$ matrix is $\\begin{pmatrix}3&0\\\\0&1\\end{pmatrix}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The second remainder has singular values $3$ and $1$, hence its rank-one truncation discards $\\delta_2=1$ and returns the tensor $\\widehat A=3e_1\\otimes e_1\\otimes e_1$. The omitted entries of $A-\\widehat A$ are $e_1\\otimes e_2\\otimes e_2$ and $2e_2\\otimes e_1\\otimes e_2$, which are orthogonal and have squared norms $1$ and $4$. Therefore $\\|A-\\widehat A\\|_F=\\sqrt5=\\sqrt{\\delta_1^2+\\delta_2^2}$, realizing equality in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty 2×2×2 tensor."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The specified tensor is nonzero and both caps equal one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each of the two cuts retains exactly one singular direction under its cap (steps 1.1–2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The spectra (sqrt(10),2) and (3,1) have distinct cutoff values."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both internal cuts k=1 and k=2 have tails 2 and 1 (steps 1.1 and 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Distinct singular values fix the retained directions up to sign, which does not change the reconstructed tensor (steps 1.1–2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Two explicit orthogonal discarded entries realize equality in the root-sum-squares error bound for this fixed tensor.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Two explicit orthogonal discarded entries realize equality in the root-sum-squares error bound for this fixed tensor.",
+            "item_sha256": "0588ff6bdbe2ccb81690d17ef2ec467a353dca2d3f3e5740f9f1834ef1867340",
+            "row_sha256": "6a69378d84b82cce0cb396c2e9658901d3ce675904c3783d3980965a615a0ba7",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Two explicit orthogonal discarded entries realize equality in the root-sum-squares error bound for this fixed tensor.",
+            "item_sha256": "0588ff6bdbe2ccb81690d17ef2ec467a353dca2d3f3e5740f9f1834ef1867340",
+            "row_sha256": "6a69378d84b82cce0cb396c2e9658901d3ce675904c3783d3980965a615a0ba7",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Equality in the TT truncation error estimate does not single out these three tensor entries or this particular sequence of singular vectors.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Equality in the TT truncation error estimate does not single out these three tensor entries or this particular sequence of singular vectors.",
+            "item_sha256": "0588ff6bdbe2ccb81690d17ef2ec467a353dca2d3f3e5740f9f1834ef1867340",
+            "row_sha256": "5c9eb7d987317d5e5f58850278b943f1515da6eb15ddf9091cd6194957f4d1b4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Equality in the TT truncation error estimate does not single out these three tensor entries or this particular sequence of singular vectors.",
+            "item_sha256": "0588ff6bdbe2ccb81690d17ef2ec467a353dca2d3f3e5740f9f1834ef1867340",
+            "row_sha256": "5c9eb7d987317d5e5f58850278b943f1515da6eb15ddf9091cd6194957f4d1b4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "source_locators": "Oseledets §2.2; Dupuy §1.2.4.",
+      "finite_checks": [
+        {
+          "name": "Two cut tails",
+          "calculation": "The tails are 2 and 1; the output error has orthogonal entries of magnitudes 1 and 2, so squared error 5=2^2+1^2.",
+          "result": "root-sum-square bound attained"
+        }
+      ],
+      "kind": "example"
+    },
+    "ex-diagonal-tensor-has-large-minimal-tt-ranks": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "source_section": "Definition",
+          "quote": "Fix a field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, an integer $d\\ge2$, and positive integers $n_1,\\ldots,n_d$. A finite order-$d$ tensor of shape $(n_1,\\ldots,n_d)$ is an array $A=(A_{i_1,\\ldots,i_d})$ indexed by $1\\le i_k\\le n_k$. Its Frobenius inner product and norm are\n$$ \\langle A,B\\rangle_F=\\sum_{i_1=1}^{n_1}\\cdots\\sum_{i_d=1}^{n_d}\\overline{A_{i_1,\\ldots,i_d}}B_{i_1,\\ldots,i_d}, \\qquad \\|A\\|_F=\\sqrt{\\langle A,A\\rangle_F}. $$\nFor a matrix, rank means the dimension of its column image and the Frobenius inner product is the same entrywise formula. The adjoint $M^*$ is conjugate transpose (transpose over $\\mathbb R$).\n\nFor $1\\le k\\le d$, the mode-$k$ unfolding $A_{(k)}$ has $n_k$ rows and $\\prod_{j\\ne k}n_j$ columns. Its row index is $i_k$ and its column index is the remaining tuple in increasing mode order, lexicographically ordered. Its entry at that row and column is the corresponding entry of $A$. For $1\\le k<d$, the cut-$k$ unfolding $A^{\\langle k\\rangle}$ has row tuple $(i_1,\\ldots,i_k)$ and column tuple $(i_{k+1},\\ldots,i_d)$, each lexicographically ordered. These conventions fix all reshapes used below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tensor-train-cores-bond-ranks-and-canonical-gauges",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$ with $d\\ge2$. A tensor-train (TT) representation consists of integers $r_0=r_d=1$, internal bond sizes $r_1,\\ldots,r_{d-1}\\in\\mathbb N_0$, and cores\n$$ G_k\\in\\mathbb F^{r_{k-1}\\times n_k\\times r_k}\\quad(1\\le k\\le d) $$\nsuch that\n$$ A_{i_1,\\ldots,i_d} =\\sum_{\\alpha_1=1}^{r_1}\\cdots\\sum_{\\alpha_{d-1}=1}^{r_{d-1}} G_1(1,i_1,\\alpha_1)G_2(\\alpha_1,i_2,\\alpha_2)\\cdots G_d(\\alpha_{d-1},i_d,1). $$\nAn empty bond index set gives an empty sum, hence the zero tensor; in particular, all internal bond sizes zero represent zero. A bond size $r_k$ is the storage dimension contracted between cores $k$ and $k+1$. The cut-$k$ unfolding groups modes $1,\\ldots,k$ against $k+1,\\ldots,d$ as fixed in [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\nFor an internal bond $k$, an invertible matrix $S\\in\\mathbb F^{r_k\\times r_k}$ gives a gauge transformation by replacing the two adjacent cores with\n$$ \\widetilde G_k(\\alpha,i,\\beta)=\\sum_{\\gamma=1}^{r_k}G_k(\\alpha,i,\\gamma)S_{\\gamma\\beta}, \\qquad \\widetilde G_{k+1}(\\beta,j,\\eta)=\\sum_{\\gamma=1}^{r_k}(S^{-1})_{\\beta\\gamma}G_{k+1}(\\gamma,j,\\eta). $$\nTheir contraction is unchanged because $\\sum_\\beta S_{\\gamma\\beta}(S^{-1})_{\\beta\\gamma'}=\\delta_{\\gamma,\\gamma'}$.\n\nThe left matricization of core $G_k$ has row index $(\\alpha_{k-1},i_k)$ and column index $\\alpha_k$. The core is left-isometric if this matrix $L_k$ satisfies $L_k^*L_k=I_{r_k}$. The right matricization has row index $\\alpha_{k-1}$ and column index $(i_k,\\alpha_k)$; the core is right-isometric if its matrix $R_k$ satisfies $R_kR_k^*=I_{r_{k-1}}$. A TT is in mixed canonical gauge about core $\\ell$ when cores $k<\\ell$ are left-isometric and cores $k>\\ell$ are right-isometric.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{n_1\\times\\cdots\\times n_d}$, $d\\ge2$, and let $A^{\\langle k\\rangle}$ denote its cut-$k$ unfolding. For sequential TT-SVD, let $r_k$ be its retained bond size and $\\delta_k$ its discarded singular-value tail at cut $k$. For rounding, let the input TT represent $A$ and use the same notation for the output bond sizes and recorded tails. Then both procedures satisfy\n$$ \\|A-\\widehat A\\|_F^2\\le\\sum_{k=1}^{d-1}\\delta_k^2. $$\nIf no positive singular value is discarded, the output is exactly $A$. In full-rank TT-SVD, $r_k=\\operatorname{rank}(A^{\\langle k\\rangle})$ for every cut, and these are the minimal possible TT bond sizes among exact representations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each cut $k$, only the $n$ row tuples $(j,\\ldots,j)$ and the matching $n$ column tuples $(j,\\ldots,j)$ contain nonzero entries of $A^{\\langle k\\rangle}$. The resulting matrix has $n$ ones in distinct rows and columns and zeros elsewhere, so its rank is exactly $n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], every exact TT representation has bond size $n$ at every cut. Such a representation is explicit: the first core enforces $\\alpha_1=i_1$, each interior core enforces $\\alpha_{k-1}=i_k=\\alpha_k$, and the last core enforces $\\alpha_{d-1}=i_d$. Contracting these Kronecker-delta entries yields $1$ exactly when all mode indices are the same and $0$ otherwise, which is the stated tensor.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes d≥3 and n≥2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The tensor is a sum of n≥2 distinct nonzero basis tensors."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The case n=1 is excluded by the hypothesis n≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All n nonzero singular values tie at one, but rank and minimal bond size remain n (steps 1.1–2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The calculation applies to every 1≤k<d, including both endpoint cuts (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses entrywise ranks and explicit standard-basis delta cores (steps 1.1–2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cut unfoldings have rank equal to the diagonal count and the explicit cores attain that minimal bond size; this is not a biconditional statement.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The cut unfoldings have rank equal to the diagonal count and the explicit cores attain that minimal bond size; this is not a biconditional statement.",
+            "item_sha256": "109e5a86ca84cad2f0698d0b9945396f08f313a775c7e61e3b37615e52cb262a",
+            "row_sha256": "115957215d4c7dbc4594d43613edd11fc533e1eb88537d4a584a3ff7ab9c037d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The cut unfoldings have rank equal to the diagonal count and the explicit cores attain that minimal bond size; this is not a biconditional statement.",
+            "item_sha256": "109e5a86ca84cad2f0698d0b9945396f08f313a775c7e61e3b37615e52cb262a",
+            "row_sha256": "115957215d4c7dbc4594d43613edd11fc533e1eb88537d4a584a3ff7ab9c037d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Minimal bond sizes do not determine a unique diagonal tensor or a unique TT representation; larger redundant representations remain possible.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Minimal bond sizes do not determine a unique diagonal tensor or a unique TT representation; larger redundant representations remain possible.",
+            "item_sha256": "109e5a86ca84cad2f0698d0b9945396f08f313a775c7e61e3b37615e52cb262a",
+            "row_sha256": "ef5a511c1f85502b7a30725f7f545d7b450687c24e291c58899a02961b21fac2",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Minimal bond sizes do not determine a unique diagonal tensor or a unique TT representation; larger redundant representations remain possible.",
+            "item_sha256": "109e5a86ca84cad2f0698d0b9945396f08f313a775c7e61e3b37615e52cb262a",
+            "row_sha256": "ef5a511c1f85502b7a30725f7f545d7b450687c24e291c58899a02961b21fac2",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "source_locators": "Dupuy Example 1.2.3 and Theorem 1.2.12; Oseledets §2.",
+      "finite_checks": [
+        {
+          "name": "d=3,n=2 instance",
+          "calculation": "A111=A222=1; each of the two cut unfoldings has rank 2 and delta cores reproduce exactly those entries.",
+          "result": "both minimal bond sizes are 2"
+        }
+      ],
+      "kind": "example"
+    }
+  }
+}

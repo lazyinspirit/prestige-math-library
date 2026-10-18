@@ -1,0 +1,247 @@
+{
+  "group": "o",
+  "batches": [
+    "44"
+  ],
+  "pages_read": [
+    "finite-volume-diffusion-and-mimetic-fluxes",
+    "finite-volume-diffusion-and-mimetic-fluxes-examples"
+  ],
+  "items_read": [
+    "def-fv-admissible-cell-face-mesh",
+    "def-tpfa-harmonic-face-scheme",
+    "def-hybrid-mimetic-fv-scheme",
+    "def-fv-regular-simplicial-companion-family",
+    "thm-tpfa-green-coercivity-maximum-principle",
+    "thm-path-certified-fv-discrete-poincare",
+    "prop-hybrid-mimetic-scheme-coercive-conservative-affine-exact",
+    "lem-fv-conforming-companion-and-test-recovery",
+    "thm-tpfa-flux-energy-convergence-smooth-interface",
+    "thm-tpfa-discrete-rellich-and-physical-gradient-closure",
+    "lem-mimetic-fv-parabolic-limit-identification",
+    "lem-hybrid-mimetic-backward-euler-energy-and-compactness",
+    "thm-hybrid-mimetic-parabolic-weak-flux-limit",
+    "ex-orthogonal-voronoi-harmonic-diffusion",
+    "cex-nonorthogonal-two-point-flux-inconsistent",
+    "ex-harmonic-transmissibility-material-interface",
+    "ex-anisotropic-mimetic-flux-on-skew-cell"
+  ],
+  "conventions": [
+    {
+      "convention": "Face flux is signed outward from its incident cell; conservation means Q_K,F + Q_L,F = 0. In dimension one, a face is an endpoint with measure 1.",
+      "fixed_by": "def-fv-admissible-cell-face-mesh",
+      "matters_for": [
+        "def-tpfa-harmonic-face-scheme",
+        "def-hybrid-mimetic-fv-scheme",
+        "thm-tpfa-green-coercivity-maximum-principle",
+        "prop-hybrid-mimetic-scheme-coercive-conservative-affine-exact",
+        "ex-harmonic-transmissibility-material-interface"
+      ]
+    },
+    {
+      "convention": "TPFA requires interior center segments normal to the face plane and crossing the relative interior; boundary face centroids are normal projections. Interior transmissibility uses the distance-weighted harmonic mean of positive scalar cell coefficients.",
+      "fixed_by": "def-tpfa-harmonic-face-scheme",
+      "matters_for": [
+        "thm-tpfa-flux-energy-convergence-smooth-interface",
+        "thm-tpfa-discrete-rellich-and-physical-gradient-closure",
+        "cex-nonorthogonal-two-point-flux-inconsistent",
+        "ex-harmonic-transmissibility-material-interface"
+      ]
+    },
+    {
+      "convention": "The TPFA face-copy reconstruction is an energy bookkeeping space and does not partition the physical domain.",
+      "fixed_by": "def-tpfa-harmonic-face-scheme",
+      "matters_for": [
+        "thm-tpfa-discrete-rellich-and-physical-gradient-closure"
+      ]
+    },
+    {
+      "convention": "Hybrid unknowns are cell and shared face means; cell points are volume centroids. The method imposes face-moment closure and does not require center-to-face orthogonality.",
+      "fixed_by": "def-hybrid-mimetic-fv-scheme",
+      "matters_for": [
+        "prop-hybrid-mimetic-scheme-coercive-conservative-affine-exact",
+        "lem-fv-conforming-companion-and-test-recovery",
+        "lem-hybrid-mimetic-backward-euler-energy-and-compactness",
+        "thm-hybrid-mimetic-parabolic-weak-flux-limit",
+        "ex-anisotropic-mimetic-flux-on-skew-cell"
+      ]
+    },
+    {
+      "convention": "A regular simplicial companion family is refining and uniformly regular on a bounded connected Lipschitz polyhedral domain, with matching shape-regular fan subdivisions and uniformly bounded connected vertex stars. Its companion is obtained by averaging incident cell values at interior vertices and setting boundary vertices to zero.",
+      "fixed_by": "def-fv-regular-simplicial-companion-family",
+      "matters_for": [
+        "lem-fv-conforming-companion-and-test-recovery",
+        "thm-tpfa-discrete-rellich-and-physical-gradient-closure",
+        "lem-hybrid-mimetic-backward-euler-energy-and-compactness",
+        "thm-hybrid-mimetic-parabolic-weak-flux-limit"
+      ]
+    },
+    {
+      "convention": "The computed parabolic branch assumes AC, p > max(1, 2d/(d+2)), uniformly positive bounded stabilization, strong L2 initialization, and vanishing maximum time step. Spatial and temporal refinement are independent.",
+      "fixed_by": "lem-hybrid-mimetic-backward-euler-energy-and-compactness",
+      "matters_for": [
+        "thm-hybrid-mimetic-parabolic-weak-flux-limit"
+      ]
+    },
+    {
+      "convention": "The conditional limit-identification lemma assumes conforming reconstructions, compactness, vanishing weak residuals and an energy limsup; it does not establish those properties for a computed scheme.",
+      "fixed_by": "lem-mimetic-fv-parabolic-limit-identification",
+      "matters_for": [
+        "thm-hybrid-mimetic-parabolic-weak-flux-limit"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-fv-conforming-companion-and-test-recovery",
+      "statement": "Under AC and the regular simplicial companion geometry, B_h,p and D_h,p are uniformly equivalent; E_h maps zero-boundary cell-face vectors into W0^{1,p}, with uniformly bounded W^{1,p} norm and O(h) Lp reconstruction error. On the strict L2 embedding branch the L2 error is O(h^ϑ). Mean interpolation is stable, smooth tests have consistent gradients and O(h) residual seminorm, and the discrete weak-gradient defect is O(h).",
+      "used_by": [
+        "thm-tpfa-discrete-rellich-and-physical-gradient-closure",
+        "lem-hybrid-mimetic-backward-euler-energy-and-compactness",
+        "thm-hybrid-mimetic-parabolic-weak-flux-limit"
+      ]
+    },
+    {
+      "id": "lem-hybrid-mimetic-backward-euler-energy-and-compactness",
+      "statement": "Under its stated regular companion geometry, centroid, stabilization, monotone p-growth, data and initialization hypotheses, every finite backward-Euler step has a solution. Every selection satisfies uniform energy and dual-time-derivative bounds and has a subsequence whose computed cell states converge strongly in every finite Lr(0,T;L2) and in Lp(Q), with weak conforming companions and computed gradients converging to u and ∇u.",
+      "used_by": [
+        "thm-hybrid-mimetic-parabolic-weak-flux-limit"
+      ]
+    },
+    {
+      "id": "def-hybrid-mimetic-fv-scheme",
+      "statement": "Defines centroid-based cell and face means, the reconstructed gradient and affine residual, the stabilized linear form, outward numerical face fluxes, and the monotone p-growth backward-Euler extension.",
+      "used_by": [
+        "prop-hybrid-mimetic-scheme-coercive-conservative-affine-exact",
+        "lem-fv-conforming-companion-and-test-recovery",
+        "lem-hybrid-mimetic-backward-euler-energy-and-compactness",
+        "thm-hybrid-mimetic-parabolic-weak-flux-limit",
+        "ex-anisotropic-mimetic-flux-on-skew-cell"
+      ]
+    },
+    {
+      "id": "def-tpfa-harmonic-face-scheme",
+      "statement": "On boundary-anchored TPFA-admissible meshes with positive scalar cell coefficients, defines harmonic interior transmissibilities, Dirichlet boundary transmissibilities, outward shared fluxes, cell balances and the symmetric homogeneous-Dirichlet energy.",
+      "used_by": [
+        "thm-tpfa-green-coercivity-maximum-principle",
+        "thm-path-certified-fv-discrete-poincare",
+        "thm-tpfa-flux-energy-convergence-smooth-interface",
+        "thm-tpfa-discrete-rellich-and-physical-gradient-closure",
+        "ex-orthogonal-voronoi-harmonic-diffusion",
+        "cex-nonorthogonal-two-point-flux-inconsistent",
+        "ex-harmonic-transmissibility-material-interface"
+      ]
+    },
+    {
+      "id": "thm-tpfa-green-coercivity-maximum-principle",
+      "statement": "For a finite boundary-anchored TPFA mesh with positive transmissibilities, the cell operator satisfies the displayed discrete Green identity; its stiffness matrix is symmetric positive definite, arbitrary finite source and boundary data give a unique solution, and nonnegative source and boundary data give nonnegative cell values.",
+      "used_by": [
+        "thm-tpfa-flux-energy-convergence-smooth-interface"
+      ]
+    },
+    {
+      "id": "thm-hybrid-mimetic-parabolic-weak-flux-limit",
+      "statement": "Under exactly the energy/compactness lemma's hypotheses, a subsequence of computed states converges to a weak monotone diffusion solution with initial trace u0. Actual constitutive fields and the stated physical numerical-flux reconstruction converge weakly to a(x,∇u); flux energies converge, stabilization vanishes, and terminal cell states converge strongly in L2.",
+      "used_by": [
+        "finite-volume-diffusion-and-mimetic-fluxes"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-reference-simplex-trace-and-gauss-green",
+      "used_for": "Sobolev facet traces, scaled trace estimates and simplex Gauss–Green in companion interpolation and weak-gradient identities; its Countable Choice hypothesis is supplied by AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-reference-simplex-poincare-wirtinger",
+      "used_for": "Scaled simplex mean-zero estimates and telescoping of simplex and facet means in mean-interpolator stability.",
+      "opened": true
+    },
+    {
+      "id": "thm-poincare-inequality-for-w-one-p-zero",
+      "used_for": "Controlling conforming companion function norms by gradient norms and bounding source functionals on W0^{1,p}.",
+      "opened": true
+    },
+    {
+      "id": "thm-holder-inequality-for-integrals",
+      "used_for": "Weighted residual estimates, source bounds, reconstruction estimates and passage through weak pairings.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Continuity of averaged Carathéodory fluxes on bounded finite-dimensional argument sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+      "used_for": "Reflexivity of scalar Lp spaces underlying coordinatewise extraction of gradient and constitutive-field subsequences.",
+      "opened": true
+    },
+    {
+      "id": "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence",
+      "used_for": "Weak subsequence extraction; AC supplies its ultrafilter, DC and Hahn–Banach assumptions.",
+      "opened": true
+    },
+    {
+      "id": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+      "used_for": "Scalar time integration by parts and identification of the initial trace in conditional parabolic limit identification.",
+      "opened": true
+    },
+    {
+      "id": "thm-rellich-compactness-from-w-one-p-zero-to-lp",
+      "used_for": "Compact W0^{1,p} to Lp inclusion in the Ehrling argument upgrading computed-state convergence to Lp(Q).",
+      "opened": true
+    },
+    {
+      "id": "thm-c-c-infinity-rn-is-dense-in-l-p-of-rn",
+      "used_for": "Extending equality of weak constitutive-field and cell-average limits from smooth vector tests to all Lp tests.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice convention for Sobolev compactness, weak subsequences and Bochner approximation interfaces.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-phase-field-discrete-realizations",
+      "finding": "The Remarks call thm-tpfa-green-coercivity-maximum-principle \"The published TPFA theorem\", but the cited item's current frontmatter is \"status: draft\". The description of its Dirichlet boundary penalties is faithful; the publication-status wording is inaccurate.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "finite-volume-diffusion-and-mimetic-fluxes",
+      "to": "conservative-finite-volume-weak-limits",
+      "faithful": true,
+      "note": "Read the supplier page and thm-conservative-finite-volume-weak-limit. Its result is conditional on strong local L1 convergence and local uniform boundedness for a one-dimensional scalar conservation law. The diffusion items do not invoke it to obtain parabolic compactness or flux identification; the page edge serves as conservation and weak-formulation context."
+    },
+    {
+      "from": "finite-volume-diffusion-and-mimetic-fluxes",
+      "to": "nonlinear-parabolic-compactness-and-monotone-evolution",
+      "faithful": true,
+      "note": "Checked the actual evolution triple, strict Sobolev embedding, weak-gradient compactness, outward-zero, discrete Aubin–Lions, chain-rule and Minty suppliers. The computed-state compactness proof explicitly replaces the conforming-state hypothesis by companion estimates and finite projections. The energy limsup is derived before Minty is applied."
+    },
+    {
+      "from": "compressible-viscous-flow-and-entropy-stable-fluxes",
+      "to": "finite-volume-diffusion-and-mimetic-fluxes",
+      "faithful": true,
+      "note": "Read the page and def-orthogonal-fv-compressible-viscous-scheme. Its cited uniform interval mesh is a valid specialization of the cell-face definition. It defines its own rightward viscous flux and zero boundary fluxes and does not import scalar TPFA coercivity or a mimetic PDE limit."
+    },
+    {
+      "from": "reaction-diffusion-invariants-and-pattern-discretization",
+      "to": "finite-volume-diffusion-and-mimetic-fluxes",
+      "faithful": true,
+      "note": "Read the page and def-fv-tpfa-no-flux-diffusion-specialization. It retains positive symmetric interior TPFA conductances and explicitly replaces boundary fluxes by zero. Its graph energy and weighted self-adjointness follow directly; it makes no arbitrary-mesh accuracy claim or use of Dirichlet positive definiteness."
+    },
+    {
+      "from": "phase-field-and-energy-dissipative-discretization",
+      "to": "finite-volume-diffusion-and-mimetic-fluxes",
+      "faithful": true,
+      "note": "Read the page and def-phase-field-discrete-realizations. The finite-volume branch explicitly omits Dirichlet boundary penalties and proves its Neumann kernel separately. The page restricts its PDE convergence claim to the conforming interval realization and does not apply the conditional zero-boundary mimetic lemma to the Neumann branch. A publication-status wording defect is recorded separately."
+    }
+  ]
+}

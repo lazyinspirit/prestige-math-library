@@ -1,0 +1,874 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "kind": "finite-smoke-obligation-preserving-proposal",
+  "module": "tools/finite-smoke-numerical-frontier71-special.mjs",
+  "export": "numericalFrontierSpecialChecks",
+  "canonical_contracts_changed": false,
+  "execution": "Not executed: user waived software tests and root reserved all validation for a fresh native full battery. No self-test, syntax check, individual validator or fixture callback was run.",
+  "registry_reuse": "Inspected existing finite-smoke and numerical registry/core; none implements an exact matching Ewald/special-function fixture. Reused only the existing exact rational/core helpers, not the parent aggregator.",
+  "row_count": 44,
+  "fixture_count": 30,
+  "rows": [
+    {
+      "batch": 12,
+      "id": "ex-ewald-nonneutral-zero-mode-obstruction",
+      "index": 0,
+      "original_obligation": {
+        "case": "unit charge against constant test",
+        "inputs": {
+          "q1": 1
+        },
+        "calculation": "<rho,1>=1 while <-Delta u,1>=<u,-Delta 1>=0",
+        "expected": "contradiction 0=4pi",
+        "evidence": "steps 1.1-1.2"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 The right side would be $4\\pi\\langle\\rho,1\\rangle=4\\pi q_1=4\\pi$ by [F1], contradicting step 1.1. Therefore no periodic distribution solution exists for this nonneutral source. [given, F1, step 1.1, algebra] \u220e",
+        "parameters": {
+          "fixture": "ewald-unit-nonneutral"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 12,
+      "id": "ex-ewald-neutral-dipole-cell",
+      "index": 0,
+      "original_obligation": {
+        "case": "unit-cell dipole structure factor",
+        "inputs": {
+          "q": [
+            1,
+            -1
+          ],
+          "x1": [
+            0,
+            0,
+            0
+          ],
+          "x2": [
+            0.5,
+            0,
+            0
+          ]
+        },
+        "calculation": "rho_k=1-exp(-pi*i*k1)=1-(-1)^k1",
+        "expected": "0 for even k1; 2 for odd k1",
+        "evidence": "steps 1.1-1.2"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.1 The two positions are distinct in $\\mathbb R^3/\\mathbb Z^3$ and $q_1+q_2=0$. For $k\\in\\mathbb Z^3$, [F1] gives $\\rho_k=1-e^{-2\\pi i k_1/2}=1-(-1)^{k_1}$; hence $\\rho_0=0$, $\\rho_k=0$ when $k_1$ is even, and $\\rho_k=2$ when $k_1$ is odd. [given, F1, algebra]",
+        "parameters": {
+          "fixture": "ewald-dipole-modes"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 12,
+      "id": "ex-ewald-source-collision-field-singularity",
+      "index": 0,
+      "original_obligation": {
+        "case": "source limit",
+        "inputs": {
+          "q1": 1,
+          "r": "r -> 0+"
+        },
+        "calculation": "U_alpha(r)=1/r+O(1)",
+        "expected": "U_alpha is unbounded at the source",
+        "evidence": "steps 1.1-1.2"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 Writing $r=|x-x_1|$, [F2] gives the self-potential expansion $\\phi_s(r)=1/r-2\\alpha/\\sqrt\\pi+O(r^2)$. Substituting the stated error-function expansion into the derivative formula in [F2] cancels the $r^{-1}$ terms and gives $\\phi_s'(r)=-1/r^2+O(r)$. Since $q_1=1$, its gradient is $\\phi_s'(r)(x-x_1)/r=-(x-x_1)/r^3+O(r)$. Adding the bounded nonself potential and gradient from step 1.1 proves both expansions in the Example. [F2, step 1.1, algebra]",
+        "parameters": {
+          "fixture": "ewald-collision-self-kernel"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the source-collision obligation as a finite sanity consequence of its actual screened self-term: two positive alphas and five shrinking nonzero dyadic radii compare both potential and radial derivative against their Coulomb leading terms. The source proves the remaining periodic contribution bounded; the smoke does not replace that proof.",
+      "limitations": "Only the independently integrated screened self-kernel is sampled. A finite list cannot prove unboundedness, the O(1) periodic remainder, or any infinite Ewald formula; those authored asymptotic claims remain proof obligations."
+    },
+    {
+      "batch": 12,
+      "id": "ex-ewald-alpha-cutoff-tradeoff",
+      "index": 0,
+      "original_obligation": {
+        "case": "strict monotonicity at fixed cutoffs",
+        "inputs": {
+          "alpha1": 1,
+          "alpha2": 2,
+          "m": "m >= floor(R) >= 1"
+        },
+        "calculation": "exp(-4m^2)/2 < exp(-m^2); exp(-m^2/16) > exp(-m^2/4)",
+        "expected": "real tail decreases and reciprocal tail increases",
+        "evidence": "steps 1.1-2.1"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.2 If $0<\\alpha_1<\\alpha_2$, then for every $m\\ge M_R\\ge1$, $e^{-\\alpha_2^2m^2}/\\alpha_2<e^{-\\alpha_1^2m^2}/\\alpha_1$ because both positive factors strictly decrease. The positive convergent sum therefore gives $\\mathcal R(\\alpha_2)<\\mathcal R(\\alpha_1)$. [F1, F2, algebra]",
+        "parameters": {
+          "fixture": "ewald-cutoff-tradeoff"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the alpha1=1,alpha2=2 comparison at all eight supported shells m=1..8, checking each strict inequality and the positive weighted partial sums.",
+      "limitations": "Finite shell and sum consequences only; no infinite-tail monotonicity, tail estimate, cutoff optimization or alpha-limit proof."
+    },
+    {
+      "batch": 12,
+      "id": "ex-ewald-mesh-energy-force-consistency",
+      "index": 0,
+      "original_obligation": {
+        "case": "4x4x4 order-3 dipole grid",
+        "inputs": {
+          "M": [
+            4,
+            4,
+            4
+          ],
+          "P": 3,
+          "x1": [
+            0.125,
+            0.125,
+            0.125
+          ],
+          "x2": [
+            0.625,
+            0.125,
+            0.125
+          ],
+          "K": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              -1,
+              0,
+              0
+            ]
+          ]
+        },
+        "calculation": "4x_i coordinates are (0.5,0.5,0.5) and (2.5,0.5,0.5); sinc(pi/4) is nonzero; the modes are symmetric and satisfy |k_r|<2",
+        "expected": "no knots or denominator zero; the classical mesh energy-gradient identity applies",
+        "evidence": "steps 1.1-2.2"
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.2 By [F1], $z_k=q_1b_k(t_1)+q_2b_k(t_2)$. With $P=3$, the factors $b_k$ are differentiable. The chain rule gives $\\nabla_{x_i}z_k=q_i\\nabla_xb_k(t_i)$. Therefore $\\nabla_{x_i}(\\frac12c_k|z_k|^2)=q_ic_k\\operatorname{Re}(\\overline{z_k}\\nabla_xb_k(t_i))$. Summing over $k\\in\\mathcal K$ and negating yields exactly the stated energy-gradient force. [F1, F2, algebra]",
+        "parameters": {
+          "fixture": "ewald-mesh-gradient"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves every original 4x4x4/P3/dipole/signed-mode datum. Computes finite cardinal spread, negative-sign unitary DFT and conjugate-window deconvolution, then compares corrected and uncorrected gathers against perturbed energies. An additional nearby off-knot offset prevents a vacuous all-stationary force check.",
+      "limitations": "Fixed floating mesh arithmetic and centered finite differences only; not certified FFT computation, infinite reciprocal sums or deterministic error-theorem validation."
+    },
+    {
+      "batch": 25,
+      "id": "def-airy-initial-value-series",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "The series reduces to the declared c0 and c1 initial values; c2=0."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For $y(z)=\\sum_{k\\ge0}c_kz^k$, set $c_2=0$ and\n$c_{k+3}=c_k/((k+3)(k+2))$ for $k\\ge0$. Define $\\operatorname{Ai}$ by this\nseries with\n\n$$c_0=\\frac{1}{3^{2/3}\\Gamma(2/3)},\\qquad c_1=-\\frac{1}{3^{1/3}\\Gamma(1/3)},$$\n\nand define $\\operatorname{Bi}$ by the same recurrence with\n\n$$c_0=\\frac{1}{3^{1/6}\\Gamma(2/3)},\\qquad c_1=\\frac{3^{1/6}}{\\Gamma(1/3)}.$$\n\nHere $\\Gamma$ is Euler's integral on the right half-plane from\n[[def-euler-gamma-function]]. The standard Airy initial values are those in\nDLMF \u00a79.2(ii); in particular, the power of $3$ in $\\operatorname{Bi}(0)$ is\nin the denominator.",
+        "parameters": {
+          "fixture": "airy-origin-coefficients"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves c0/c1/c2 and the k=0,1 recurrence cases by two exact free-initial-coefficient polynomials. Independent transformed Gamma quadratures also check all four Ai/Bi normalizations at z=0; this does not invoke or purport to execute the source Gamma/Airy procedures.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "def-fresnel-erf-and-hypergeometric-series",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "C(0)=S(0)=erf(0)=0, erfc(0)=1, and the Gauss series at z=0 is 1."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For $z\\in\\mathbb C$, define the Fresnel functions and error function by\n\n$$C(z)=\\sum_{k=0}^{\\infty}\\frac{(-1)^k(\\pi/2)^{2k}z^{4k+1}}{(2k)!(4k+1)}, \\qquad S(z)=\\sum_{k=0}^{\\infty}\\frac{(-1)^k(\\pi/2)^{2k+1}z^{4k+3}}{(2k+1)!(4k+3)}, \\qquad \\operatorname{erf}(z)=\\frac{2}{\\sqrt\\pi}\\sum_{k=0}^{\\infty}\\frac{(-1)^kz^{2k+1}}{k!(2k+1)}, \\qquad \\operatorname{erfc}(z)=1-\\operatorname{erf}(z).$$\n\nThe following local lemmas prove convergence and show that $C,S,\\operatorname{erf}$\nequal the standard entire integral functions with their usual normalizations.\n\nFor $a,b,c,z\\in\\mathbb C$ with $c\\notin\\{0,-1,-2,\\ldots\\}$ and $|z|<1$,\ndefine\n\n$$(a)_0=1,\\qquad (a)_k=\\prod_{j=0}^{k-1}(a+j),\\qquad {}_2F_1(a,b;c;z)=\\sum_{k=0}^{\\infty}\\frac{(a)_k(b)_k}{(c)_k k!}z^k.$$\n\nOnly this Gauss-series branch of ${}_2F_1$ is defined on this page; no value\noutside $|z|<1$ or across a continuation cut is implicit.",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "def-integer-order-bessel-series",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "J0(0)=I0(0)=1, and Jn(0)=In(0)=0 for n>=1."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$J_n(z)=\\sum_{k=0}^{\\infty}\\frac{(-1)^k(z/2)^{2k+n}}{k!(k+n)!}, \\qquad I_n(z)=\\sum_{k=0}^{\\infty}\\frac{(z/2)^{2k+n}}{k!(k+n)!}.$$",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-explicit-euler-constant-enclosure",
+      "index": 0,
+      "original_obligation": {
+        "case": "M=1",
+        "calculation": "H1=1 and log(1)=0, so the theorem specializes to 0<=1-gamma<=1."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For each integer $M\\ge1$, put $H_M=\\sum_{k=1}^M1/k$. Euler's constant\n$\\gamma$ satisfies\n$$0\\le H_M-\\log M-\\gamma\\le\\frac1M.$$\nThus $[H_M-\\log M-1/M,\\ H_M-\\log M]$ is a finite enclosure for $\\gamma$.",
+        "parameters": {
+          "fixture": "euler-constant-m1"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-gamma-functional-equation-meromorphic-extension",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=1",
+        "calculation": "Gamma(2)=1*Gamma(1)=1, using Gamma(1)=1 from the integral definition."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For every $z\\in\\mathbb C\\setminus\\{0,-1,-2,\\ldots\\}$,\n$$\\Gamma(z+1)=z\\Gamma(z),$$\nwhere $\\Gamma$ is the meromorphic continuation of Euler's Gamma function.",
+        "parameters": {
+          "fixture": "gamma-recurrence-one"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-airy-series-coefficient-recurrence-and-tail",
+      "index": 0,
+      "original_obligation": {
+        "case": "k=0,1",
+        "calculation": "c3=c0/6 and c4=c1/12; c2=0 supplies the missing residue class."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "## Proof\n1.1 Multiplying the coefficient relation in [F1] by $z^{k+3}$ shows that the coefficient of $z^{k+1}$ in $y''$ is $c_k$, which is the coefficient of $z^{k+1}$ in $zy$. At degree $0$, the coefficients agree because $c_2=0$; at degree $1$, they agree by the recurrence at $k=0$. Thus the formal series satisfy $y''=zy$. [F1, algebra]",
+        "parameters": {
+          "fixture": "airy-origin-coefficients"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves c0/c1/c2 and the k=0,1 recurrence cases by two exact free-initial-coefficient polynomials. Independent transformed Gamma quadratures also check all four Ai/Bi normalizations at z=0; this does not invoke or purport to execute the source Gamma/Airy procedures.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-erf-series-geometric-tail",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "Every erf term is zero, so the tail is exactly zero; the ratio formula is not used as a 0/0 quotient."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "[F1] [[def-fresnel-erf-and-hypergeometric-series]]:\n$e_k=(2/\\sqrt\\pi)(-1)^kz^{2k+1}/(k!(2k+1))$.",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-fresnel-series-geometric-tail",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "Every C and S term is zero; both tails are exactly zero."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "[F1] [[def-fresnel-erf-and-hypergeometric-series]]: $c_k=(-1)^k(\\pi/2)^{2k}\nz^{4k+1}/((2k)!(4k+1))$ and\n$s_k=(-1)^k(\\pi/2)^{2k+1}z^{4k+3}/((2k+1)!(4k+3))$.",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-gauss-hypergeometric-series-geometric-tail",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "The k=0 term is 1 and every higher term is zero; the value is 1."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "[F1] [[def-fresnel-erf-and-hypergeometric-series]]:\n$h_k=(a)_k(b)_kz^k/((c)_kk!)$ and\n$(a)_{k+1}=(a+k)(a)_k$ (and likewise for $b,c$).",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-integer-order-bessel-series-tail",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "For n=0 the only nonzero term is the k=0 term 1; for n>=1 all terms vanish."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "## Proof\n1.1 For either term sequence, cancellation of the factorials gives $|a_{k+1}|/|a_k|=|z|^2/[4(k+1)(k+n+1)]$ whenever $a_k\\ne0$; at $z=0$ the series are finite-valued directly. This ratio decreases to $0$. [given, F1, algebra]",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-fresnel-erf-hypergeometric-series",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "The exact partial sums return C=S=erf=0 and the Gauss value 1, with zero mathematical tail."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "- For $C$, sum its defining terms $c_0,\\ldots,c_{q-1}$ from\n  [[def-fresnel-erf-and-hypergeometric-series]] by interval arithmetic,\n  using $P_q/2$ for $\\pi/2$. Let $c_q$ be the first omitted term and set\n  $$r_C=\\frac{(\\sup P_q)^2 M(z)^4}{4(2q+1)(2q+2)}.$$\n  If $r_C<1$, enlarge the partial-sum rectangle in both coordinates by\n  $M(c_q)/(1-r_C)$; otherwise skip this stage.\n- For $S$, sum its first $q$ defining terms using $P_q/2$, let $s_q$\n  be the first omitted term, and set\n  $$r_S=\\frac{(\\sup P_q)^2 M(z)^4}{4(2q+2)(2q+3)}.$$\n  If $r_S<1$, enlarge the partial-sum rectangle in both coordinates by\n  $M(s_q)/(1-r_S)$; otherwise skip this stage.\n- For erf, use the interval $2/R_q$ from the single square-root call above\n  for $2/\\sqrt\\pi$,\n  sum the first $q$ defining terms, and let $e_q$ be the first omitted\n  term. Set $r_E=M(z)^2/(q+1)$. If $r_E<1$, enlarge the partial-sum\n  rectangle in both coordinates by $M(e_q)/(1-r_E)$; otherwise skip this\n  stage.\n- For the Gauss series, compute its terms by $h_0=1$ and\n  $$h_{k+1}=h_k\\,z\\,\\frac{(a+k)(b+k)}{(c+k)(k+1)}$$\n  using exact interval operations. No denominator $c+k$ vanishes by the\n  domain check. If $a$ or $b$ is a nonpositive integer, let $L$ be one\n  more than the smaller absolute value of those nonpositive integer\n  parameters. If $L\\le q$, sum exactly through $h_{L-1}$ and use zero\n  tail. Otherwise put\n  $$A=|\\Re a|+|\\Im a|,\\quad B=|\\Re b|+|\\Im b|,\\quad C_0=|\\Re c|+|\\Im c|,\\quad Z_0=|\\Re z|+|\\Im z|,$$\n  and\n  $$r_H=Z_0\\frac{(1+A/q)(1+B/q)}{1-C_0/q}.$$\n  If $q>C_0$ and $r_H<1$, sum $h_0,\\ldots,h_{q-1}$, let $h_q$\n  be the first omitted term, and enlarge the partial-sum rectangle in both\n  coordinates by $M(h_q)/(1-r_H)$; otherwise skip this stage. The geometric\n  bound in [[lem-gauss-hypergeometric-series-geometric-tail]] applies because\n  $A,B,C_0,Z_0$ dominate the corresponding complex moduli.",
+        "parameters": {
+          "fixture": "special-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-bessel-integral-representations-and-scaled-range",
+      "index": 0,
+      "original_obligation": {
+        "case": "x=0,n=0",
+        "calculation": "Both integral representations equal 1; e^{-x}I0(x)=1."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$J_n(x)=\\frac1\\pi\\int_0^\\pi\\cos(n\\theta-x\\sin\\theta)\\,d\\theta, \\qquad I_n(x)=\\frac1\\pi\\int_0^\\pi e^{x\\cos\\theta}\\cos(n\\theta)\\,d\\theta.$$",
+        "parameters": {
+          "fixture": "bessel-integrals-origin"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-binet-loggamma-right-halfplane-identity",
+      "index": 0,
+      "original_obligation": {
+        "case": "u=1/2",
+        "calculation": "On the first unit interval Phi(u)=u(1-u)/2, so Phi(1/2)=1/8, the asserted sharp panel maximum."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For $\\operatorname{Re}z>0$, let $\\ell_+(z)$ be the branch in\n[[def-loggamma-right-halfplane-branch]]. Define\n$$\\Phi(u)=\\int_0^u\\bigl(\\lfloor v\\rfloor-v+1/2\\bigr)\\,dv.$$\nThen the absolutely convergent integral satisfies\n$$\\ell_+(z)=\\left(z-\\frac12\\right)\\operatorname{Log}z-z+ \\frac12\\log(2\\pi)+\\int_0^\\infty\\frac{\\Phi(u)}{(u+z)^2}\\,du.$$\nOn each unit interval, $\\Phi(n+t)=t(1-t)/2$ for $0\\le t\\le1$; hence\n$0\\le\\Phi(u)\\le1/8$.",
+        "parameters": {
+          "fixture": "binet-half-panel"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-erfcx-moment-recurrence",
+      "index": 0,
+      "original_obligation": {
+        "case": "k=0",
+        "calculation": "The recurrence is 2xM0+2M1=1 and r0=1/(2(x+r1)); division uses M1>0."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$2xM_0+2M_1=1, \\qquad kM_{k-1}=2xM_k+2M_{k+1}\\quad(k\\ge1).$$",
+        "parameters": {
+          "fixture": "erfcx-moments-k0"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-integer-order-bessel-recurrences-and-ode",
+      "index": 0,
+      "original_obligation": {
+        "case": "n=0,z=0",
+        "calculation": "The series limits give J0(0)=I0(0)=1; for n>=1 both limits are zero."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "At $z=0$, the series limits are $J_0(0)=I_0(0)=1$ and\n$J_n(0)=I_n(0)=0$ for $n\\ge1$.",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-bessel-integral-midpoint-error",
+      "index": 0,
+      "original_obligation": {
+        "case": "n=0,x=0",
+        "calculation": "The integrand is the constant 1, Qm/pi=1, and the stated error bound is zero."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$\\left|J_n(x)-\\frac{Q_m}{\\pi}\\right| \\le \\frac{h^2}{24}\\left((n+|x|)^2+|x|\\right).$$",
+        "parameters": {
+          "fixture": "bessel-midpoint-origin"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-erfcx-asymptotic-remainder",
+      "index": 0,
+      "original_obligation": {
+        "case": "N=1",
+        "calculation": "erfcx(x)-1/(x sqrt(pi))=-R1 with 0<=R1<=1/(2 x^3 sqrt(pi))."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$\\operatorname{erfcx}(x)-S_N(x)=(-1)^N R_N(x),\\qquad 0\\le R_N(x)\\le \\frac1{x\\sqrt\\pi}\\frac{(2N)!}{4^N N!x^{2N}}.$$",
+        "parameters": {
+          "fixture": "erfcx-asymptotic-one"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-erfcx-continued-fraction-enclosure",
+      "index": 0,
+      "original_obligation": {
+        "case": "N=0",
+        "calculation": "r0 lies in [0,1/(2x)], yielding the first finite enclosure without any backward step."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$\\operatorname{erfcx}(x)\\in \\left[\\frac1{\\sqrt\\pi(x+\\sup I_0)}, \\frac1{\\sqrt\\pi(x+\\inf I_0)}\\right].$$",
+        "parameters": {
+          "fixture": "erfcx-cf-zero"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-scaled-modified-bessel-midpoint-error",
+      "index": 0,
+      "original_obligation": {
+        "case": "n=0,x=0",
+        "calculation": "The scaled integrand is the constant 1, Qm/pi=1, and the error bound is zero."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Let $n\\ge0$ be an integer, $x\\ge0$, $m\\ge1$, $h=\\pi/m$, and\n$$f(\\theta)=e^{-x(1-\\cos\\theta)}\\cos(n\\theta),\\qquad Q_m=h\\sum_{j=0}^{m-1}f((j+1/2)h).$$\nThen\n$$\\left|e^{-x}I_n(x)-\\frac{Q_m}{\\pi}\\right| \\le \\frac{h^2}{24}\\bigl((x+n)^2+x\\bigr).$$\nThe bound certifies the exact midpoint integral. Floating-point summation is\ncertified only if its operations are enclosed separately.",
+        "parameters": {
+          "fixture": "bessel-midpoint-origin"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-sectorial-stirling-explicit-remainder-bound",
+      "index": 0,
+      "original_obligation": {
+        "case": "delta=pi/2",
+        "calculation": "The constant becomes 1/(8 sin^2(pi/4)|z|)=1/(4|z|)."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Fix $0<\\delta\\le\\pi/2$ and $z\\in\\mathbb C$ with $\\operatorname{Re}z>0$.\nFor the branch $\\ell_+$ from [[def-loggamma-right-halfplane-branch]],\n[[lem-binet-loggamma-right-halfplane-identity]] gives\n$$\\ell_+(z)=\\left(z-\\frac12\\right)\\operatorname{Log}z-z+ \\frac12\\log(2\\pi)+R(z), \\qquad R(z)=\\int_0^\\infty\\frac{\\Phi(u)}{(u+z)^2}\\,du,$$\nwhere $\\Phi(u)=\\int_0^u(\\lfloor v\\rfloor-v+1/2)\\,dv$. Then\n$$|R(z)|\\le \\frac{1}{8\\sin^2(\\delta/2)|z|}.$$\nFor $\\delta=\\pi/2$, the bound is $1/(4|z|)$. The relative error after\nexponentiating the three main terms is at most $\\exp(|R(z)|)-1$.",
+        "parameters": {
+          "fixture": "stirling-half-pi-sector"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-erfcx-evaluation",
+      "index": 0,
+      "original_obligation": {
+        "case": "x=1,N=0",
+        "calculation": "The initial ratio interval [0,1/2] yields erfcx(1) in [2/(3 sqrt(pi)),1/sqrt(pi)] before any refinement."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Form the continued-fraction candidate as follows. Set\n$I_D=[0,(D+1)/(2x)]$. For $k=D-1,\\ldots,0$, set\n$$I_k=\\left[\\frac{k+1}{2(x+\\sup I_{k+1})}, \\frac{k+1}{2(x+\\inf I_{k+1})}\\right]$$\nby outward interval operations. Apply the decreasing map\n$r\\mapsto1/(\\sqrt\\pi(x+r))$ to $I_0$, evaluating $\\sqrt\\pi$ with\n$R_q$, to obtain a candidate interval $C_q$. The finite-depth\ncontainment lemma [[lem-erfcx-continued-fraction-enclosure]] makes $C_q$\na valid enclosure for every $D\\ge0$.",
+        "parameters": {
+          "fixture": "erfcx-cf-zero"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored x=1 depth-zero initial ratio enclosure, with its exact printed endpoints, and compares it against an independently integrated positive erfcx representation. The current source states the underlying continued-fraction enclosure is valid for every D>=0; the fixture does not falsely claim its positive-cap stage schedule actually executes D=0.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-gamma-loggamma-evaluation",
+      "index": 0,
+      "original_obligation": {
+        "case": "Z={1}",
+        "calculation": "The exact targets are Gamma(1)=1 and ell(1)=0; interval success remains conditional on the finite tolerance tests."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "If both log candidates are available, intersect them when the intersection is\nnonempty; if empty, discard the stage. If only one is available, select it.\nFor target $\\ell$, use this rectangle as the output candidate. For target\n$\\Gamma$, call the complex exponential node on the selected rectangle and\nuse its finite output rectangle. Return success at the first stage whose\ncandidate radius is at most $\\varepsilon_a$. Set relative_certified to true\nexactly when relative tolerance was requested, zero is excluded, and the\ncontract's relative-radius test passes; a failed relative test does not\nprevent absolute success. If no stage succeeds before its caps, return\ninconclusive.",
+        "parameters": {
+          "fixture": "gamma-targets-one"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves Gamma(1)=1 and ell(1)=0 via a finite product/Euler interval and an independent Euler-integrand quadrature. Explicit loose/tight tolerance comparisons preserve the conditional-success qualification.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-bessel-casoratian-invariant-positive",
+      "index": 0,
+      "original_obligation": {
+        "case": "j=0,x=1",
+        "calculation": "W0=J0(1)^2+J1(1)^2>0; the x=1 alternating-series lower bounds give W0>=193/256."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 By [F2], $W_0=J_0D_1-J_1D_0=J_0^2+J_1^2$, which is strictly positive by [F3]. A linear dependence of $J,D$ would make every $2\\times2$ determinant $W_j$ zero, so they are independent. [F2, F3, step 1.1, algebra] \u220e",
+        "parameters": {
+          "fixture": "bessel-casoratian"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-finite-miller-terminal-error-identity",
+      "index": 0,
+      "original_obligation": {
+        "case": "fixed finite N",
+        "calculation": "Substituting n=s into the displayed identity gives zero error, as normalization requires."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "$$\\widehat J_n-J_n= \\frac{q\\bigl(J_sD_n-J_nD_s\\bigr)}{J_s+qD_s}.$$",
+        "parameters": {
+          "fixture": "miller-normalization"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves both required n=s normalization zeros for s=0,1 at fixed N=4,x=1, and additionally computes non-normalization slots so the test does not merely simplify an identically zero numerator.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-airy-evaluation",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0",
+        "calculation": "The power-series branches reduce to Ai(0) and Bi(0); the constants are enclosed through the Gamma evaluator."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For $s\\in\\{1/6,1/3,2/3\\}$, outward-round the exact rational $s$ to a\ndyadic interval $S_{s,p}$, then call\n[[alg-certified-elementary-range-evaluation]] on the real expression DAG\n$\\exp(S_{s,p}\\log 3)$, with the same exponent range, precision $p$, and\ntruncation $q$. These calls enclose $3^s$ by\n[[thm-real-elementary-range-enclosures]]. If a required call is not finite,\nskip this stage. Embed each real power interval $X$ as the complex rectangle $X+i[0,0]$, then combine it with the Gamma rectangles by outward complex arithmetic\nto enclose the two initial coefficients\n$$(a_0,a_1)=\\left(\\frac{1}{3^{2/3}\\Gamma(2/3)}, -\\frac{1}{3^{1/3}\\Gamma(1/3)}\\right)$$\nfor Ai, or\n$$(b_0,b_1)=\\left(\\frac{1}{3^{1/6}\\Gamma(2/3)}, \\frac{3^{1/6}}{\\Gamma(1/3)}\\right)$$\nfor Bi. If any divisor rectangle contains zero or an arithmetic operation is non-finite, skip this stage.",
+        "parameters": {
+          "fixture": "airy-origin-coefficients"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves c0/c1/c2 and the k=0,1 recurrence cases by two exact free-initial-coefficient polynomials. Independent transformed Gamma quadratures also check all four Ai/Bi normalizations at z=0; this does not invoke or purport to execute the source Gamma/Airy procedures.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-integer-order-bessel-evaluation",
+      "index": 0,
+      "original_obligation": {
+        "case": "n=0,x=0",
+        "calculation": "Both J0(0) and e^0 I0(0) equal 1; the integral branches have constant integrand and zero midpoint remainder."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Before forming any stage constant, if the target is scaled $I$ and $x=0$,\nuse precision $p=p_{\\max}$, form $[1,1]$ when $n=0$ and $[0,0]$ when $n\\ge1$, and round its\nendpoints outward to that format. If either conversion overflows,\nreturn range. Otherwise apply the ordinary absolute-radius test to the rounded candidate and return `success` only when it passes; return `inconclusive` if it fails. The internal exact candidate has radius zero, but outward underflow may widen its stored enclosure. Set a successful output's relative flag by the usual contract test, so a zero value\nreceives no relative certificate. This branch does not call the\nelementary-range procedure.",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "ex-hypergeometric-branch-cut-domain",
+      "index": 0,
+      "original_obligation": {
+        "case": "z=0,-2",
+        "calculation": "At z=0 the value is 1 by the removable limit; z=-2 lies outside the unit disk but in the principal-log continuation domain."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "3.1 Since $|-2|>1$, the defined Gauss-series branch fails its domain check and [F5] returns `domain`; this does not contradict the continued formula in step 2.1, which is a separately declared branch. [F1, F5, step 2.1] \u220e",
+        "parameters": {
+          "fixture": "hypergeometric-domain"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "ex-erfc-subtraction-cancellation",
+      "index": 0,
+      "original_obligation": {
+        "case": "delta1=eta,delta2=-eta",
+        "calculation": "For |delta1|,|delta2|<=eta the output error is 2eta, so the bound is attained."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 The same tail integral tends to zero as $x\\to\\infty$, because the nonnegative Gaussian is integrable by [F3]. If $|\\delta_1|,|\\delta_2|\\le\\eta$ with fixed $\\eta>0$, the choice $\\delta_1=\\eta$, $\\delta_2=-\\eta$ attains error $2\\eta$, so the relative error is $2\\eta/\\operatorname{erfc}(x)$ and is unbounded. By [F1], multiplying an enclosure of $\\operatorname{erfcx}(x)$ by an outward enclosure of $e^{-x^2}$ gives an enclosure of $\\operatorname{erfc}(x)$; [F4] supplies the first factor whenever its finite evaluator succeeds, while [F5] gives the second factor and an absolute erf enclosure. [F1, F3, F4, F5, step 1.1] \u220e",
+        "parameters": {
+          "fixture": "erf-subtraction"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "ex-erfcx-asymptotic-optimal-truncation",
+      "index": 0,
+      "original_obligation": {
+        "case": "x=3,N=9",
+        "calculation": "a_{k+1}/a_k=(k+1/2)/9; the ratios at k=8 and k=9 are 17/18<1 and 19/18>1."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "## Proof\n1.1 The positive term ratio is $$\\frac{a_{k+1}(x)}{a_k(x)}=\\frac{k+1/2}{x^2}.$$ For $0\\le k<N$, this ratio is at most $(N-1/2)/x^2\\le1$, so the terms do not increase up to $a_N$. For $k\\ge N$, the ratio is at least $(N+1/2)/x^2\\ge1$, so terms do not decrease after $a_N$. Hence $a_N$ is a least term. [given, algebra]",
+        "parameters": {
+          "fixture": "erfcx-least-term"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "ex-forward-bessel-recurrence-loses-sign",
+      "index": 0,
+      "original_obligation": {
+        "case": "x=1,n=0,1,2",
+        "calculation": "J0>=3/4, J1>=7/16, and D2=2J0+J1>=31/16>D1; later Dn grows by at least a factor 3."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 By [F4], $D_0(1)=-J_1(1)<0$ and $D_1(1)=J_0(1)>0$; hence $D_2=2D_1-D_0>D_1>0$. If $n\\ge2$ and $D_n\\ge D_{n-1}>0$, then $D_{n+1}=2nD_n-D_{n-1}\\ge(2n-1)D_n\\ge3D_n$. Induction gives $D_n\\ge3^{n-2}D_2$ for $n\\ge2$, so $D_n\\to\\infty$. [F1, F3, F4, step 1.1, induction]",
+        "parameters": {
+          "fixture": "bessel-forward-sign"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "ex-relative-error-near-an-airy-zero",
+      "index": 0,
+      "original_obligation": {
+        "case": "Ai(xi)=0",
+        "calculation": "An enclosure containing zero fails the positive distance-to-zero test, so only absolute certification is available."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "## Proof\n1.1 At $x=\\xi$, every enclosure containing the exact value also contains $0$. Therefore the zero-exclusion condition in [F3] fails, while [F4] still permits an absolute-radius success enclosure. [F1, F3, F4]",
+        "parameters": {
+          "fixture": "relative-zero-box"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the exact-zero enclosure distance obstruction with three distinct zero-containing intervals and a positive-distance control. The exact Airy zero is the mathematical hypothesis; the finite geometry check neither searches for nor claims to certify its existence.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "ex-scaled-modified-bessel-overflow-avoidance",
+      "index": 0,
+      "original_obligation": {
+        "case": "n=0,x=0",
+        "calculation": "e^0 I0(0)=1 lies in [0,1]; the unscaled value grows without bound as x increases."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "3.1 The scaled range in [F1] holds for every $x\\ge0$, while step 2.1 shows the unscaled value exceeds any fixed finite range for sufficiently large $x$. The scaled integral method of [[lem-scaled-modified-bessel-midpoint-error]] evaluates the bounded scaled quantity directly. [F1, step 2.1] \u220e",
+        "parameters": {
+          "fixture": "bessel-zero-branches"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves exact J/I origin terms for orders0..8 and both target families. For the overflow example the same selector additionally checks five finite increasing unscaled I0 values and bounded scaled values, without claiming those samples prove unbounded growth.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-spherical-bessel-and-hankel-radial-solutions",
+      "index": 0,
+      "original_obligation": {
+        "case": "ell=0",
+        "calculation": "The recurrence starts from j_0=sin(z)/z and h_0^(1)=-i exp(iz); step 1.1 verifies L_0=0."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.1 Write $f_0(z)=\\sin z/z$ and $g_0(z)=-ie^{iz}/z$. By [F2]\u2013[F3], $f_0'=\\cos z/z-\\sin z/z^2$ and $f_0''=-\\sin z/z-2\\cos z/z^2+2\\sin z/z^3$, so $L_0f_0=0$. Also $g_0'=e^{iz}(1/z+i/z^2)$ and $g_0''=e^{iz}(i/z-2/z^2-2i/z^3)$, so $L_0g_0=0$. For any function with the required finite derivatives on $(0,\\infty)$, put $y_\\ell=(-z)^\\ell D^\\ell f$ with $D=z^{-1}d/dz$. Since $(D^\\ell f)'=zD^{\\ell+1}f$, differentiating the product gives $y_\\ell'=\\ell y_\\ell/z-y_{\\ell+1}$, hence $y_{\\ell+1}=\\ell y_\\ell/z-y_\\ell'$. This recurrence applies to both functions in [F1]. [F1, F2, F3, algebra]",
+        "parameters": {
+          "fixture": "spherical-ode-l0"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the ell=0 radial residual check using the actual source h0=-i exp(iz)/z. The old prose obligation omitted /z once; its current source and the paired Wronskian obligation contain the correct denominator. No source assertion was changed.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "lem-spherical-bessel-and-hankel-radial-solutions",
+      "index": 1,
+      "original_obligation": {
+        "case": "Wronskian at ell=0",
+        "calculation": "Substitution of j_0=sin(z)/z, j_0\u2032=cos(z)/z-sin(z)/z^2, h_0=-i exp(iz)/z, and h_0\u2032=exp(iz)/z+i exp(iz)/z^2 gives z^2 W=i."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "For the functions of [[def-spherical-bessel-and-hankel-functions]], define\n$$L_\\ell y:=y''+\\frac2z y'+\\left(1-\\frac{\\ell(\\ell+1)}{z^2}\\right)y\\qquad(z>0).$$\nThen $L_\\ell j_\\ell=L_\\ell h_\\ell^{(1)}=0$, and for $y=j,h^{(1)}$,\n$$y_{\\ell+1}(z)=\\frac{\\ell}{z}y_\\ell(z)-y_\\ell'(z),\\qquad y_\\ell'(z)=y_{\\ell-1}(z)-\\frac{\\ell+1}{z}y_\\ell(z)\\quad(\\ell\\ge1).$$\nThe regular-origin and outgoing-infinity normalizations are\n$$j_\\ell(z)=\\frac{z^\\ell}{(2\\ell+1)!!}+O(z^{\\ell+2}),\\quad h_\\ell^{(1)}(z)=-i(2\\ell-1)!!z^{-\\ell-1}(1+O(z))\\quad(z\\downarrow0),$$\n$$j_\\ell(z)=\\frac{\\sin(z-\\ell\\pi/2)}z+O(z^{-2}),\\quad h_\\ell^{(1)}(z)=(-i)^{\\ell+1}\\frac{e^{iz}}z+O(z^{-2})\\quad(z\\to\\infty),$$\nwhere $(-1)!!:=1$. Their Wronskian is\n$$j_\\ell(z)(h_\\ell^{(1)})'(z)-j_\\ell'(z)h_\\ell^{(1)}(z)=\\frac{i}{z^2}.$$",
+        "parameters": {
+          "fixture": "spherical-wronskian-l0"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "def-spherical-bessel-evaluation-contract",
+      "index": 0,
+      "original_obligation": {
+        "case": "ell=0 scaling",
+        "calculation": "c_0=d_0=1, J_0^sc=j_0, H_0^sc=-i, and the scaled derivative is the scaled derivative of the original function."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Let $\\ell\\ge0$ be an integer and $z>0$ real. Put\n$$c_\\ell=(2\\ell+1)!!=\\prod_{r=0}^{\\ell}(2r+1),\\qquad d_\\ell=(2\\ell-1)!!=\\prod_{r=1}^{\\ell}(2r-1),$$\nwhere the second product is empty and equals $1$ when $\\ell=0$. Using the outgoing convention of [[def-spherical-bessel-and-hankel-functions]], define\n$$J_\\ell^{\\rm sc}(z)=c_\\ell z^{-\\ell}j_\\ell(z),\\qquad D J_\\ell^{\\rm sc}(z)=c_\\ell z^{-\\ell}j_\\ell'(z),$$\n$$H_\\ell^{\\rm sc}(z)=d_\\ell^{-1}z^{\\ell+1}e^{-iz}h_\\ell^{(1)}(z),\\qquad D H_\\ell^{\\rm sc}(z)=d_\\ell^{-1}z^{\\ell+1}e^{-iz}(h_\\ell^{(1)})'(z).$$\nThe symbols $D J_\\ell^{\\rm sc}$ and $D H_\\ell^{\\rm sc}$ mean the scaled derivatives of the original functions, not derivatives of the scaled functions. The available targets are $j_\\ell$, $j_\\ell'$, $h_\\ell^{(1)}$, $(h_\\ell^{(1)})'$, and these four scaled quantities; every derivative is with respect to $z$.",
+        "parameters": {
+          "fixture": "spherical-scaled-graph-l0"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "alg-certified-scaled-spherical-bessel-evaluation",
+      "index": 0,
+      "original_obligation": {
+        "case": "ell=0 graph",
+        "calculation": "The graph gives j_0=sin(z)/z, j_0\u2032=cos(z)/z-sin(z)/z^2, h_0^(1)=-i exp(iz)/z, and (h_0^(1))\u2032=exp(iz)/z+i exp(iz)/z^2."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "Construct Laurent polynomials by\n$$A_0=0,\\quad B_0=z^{-1},\\quad C_0=-iz^{-1},$$\n$$A_{r+1}=rz^{-1}A_r-A_r'-B_r,\\quad B_{r+1}=rz^{-1}B_r-B_r'+A_r,\\quad C_{r+1}=rz^{-1}C_r-C_r'-iC_r$$\nfor $r=0,\\ldots,\\ell-1$. With $s$ and $c$ denoting the sine and cosine input enclosures, form the unscaled outputs\n$$u=A_\\ell c+B_\\ell s,\\quad v=(A_\\ell'+B_\\ell)c+(B_\\ell'-A_\\ell)s,\\quad w=C_\\ell(c+is),\\quad t=(C_\\ell'+iC_\\ell)(c+is).$$\nForm the scaled outputs\n$$c_\\ell z^{-\\ell}u,\\quad c_\\ell z^{-\\ell}v,\\quad d_\\ell^{-1}z^{\\ell+1}C_\\ell,\\quad d_\\ell^{-1}z^{\\ell+1}(C_\\ell'+iC_\\ell).$$\nCollect like Laurent powers exactly; in particular cancel negative powers in the scaled $h_\\ell^{(1)}$ value when they cancel algebraically. A remaining $z^{-1}$ in the scaled derivative is evaluated only on positive input intervals.",
+        "parameters": {
+          "fixture": "spherical-scaled-graph-l0"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "thm-certified-scaled-spherical-bessel-enclosures",
+      "index": 0,
+      "original_obligation": {
+        "case": "Cauchy coefficients n=0,1,2",
+        "calculation": "S_0=1, S_1=i/1!+(-i)/1!=0, and S_2=i^2/2!+(-i)i/(1!1!)+(-i)^2/2!=-1/2+1-1/2=0."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.2 The two series for $e^{-iz}$ and $e^{iz}$ are absolutely convergent by [F2], so [F7] identifies their product with the sum of the Cauchy-product coefficients. For total degree $n$, its coefficient is $z^n S_n$, where $S_n=\\sum_{r=0}^{n}(-i)^r i^{n-r}/(r!(n-r)!)$. For $1\\le r\\le n$, combining over the denominator $r!(n+1-r)!$ and using $(n+1-r)!=(n+1-r)(n-r)!$ and $r!=r(r-1)!$ gives $1/(r!(n+1-r)!)=(1/(n+1))(1/(r!(n-r)!)+1/((r-1)!(n+1-r)!))$. For $r=0$ or $r=n+1$, omit the summand whose index is outside $0,\\ldots,n$; the remaining summand equals the left side by $0!=1$. Splitting the finite sum for $S_{n+1}$ with this identity and reindexing its second part gives $S_{n+1}=(iS_n-iS_n)/(n+1)=0$ for every $n\\ge0$, while $S_0=1$. The factorials and $n+1$ are nonzero by [F2], so these divisions are defined. Hence the product series has constant coefficient $1$ and every positive-degree coefficient $0$, so $e^{-iz}e^{iz}=1$. [F2, F7, algebra]",
+        "parameters": {
+          "fixture": "complex-cauchy-coefficients"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "thm-certified-scaled-spherical-bessel-enclosures",
+      "index": 1,
+      "original_obligation": {
+        "case": "ell=0 scaled outputs",
+        "calculation": "At ell=0, J_0^sc=sin(z)/z, D J_0^sc=cos(z)/z-sin(z)/z^2, H_0^sc=-i, and D H_0^sc=1+i/z."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "2.1 Multiplying the unscaled expressions of step 1.1 by the scales in [[def-spherical-bessel-evaluation-contract]] gives the four scaled identities. For $H_\\ell^{\\rm sc}$ and $D H_\\ell^{\\rm sc}$, cancel $e^{-iz}e^{iz}$ by step 1.2; the derivative scale acts on the original $h_\\ell^{(1)}$ derivative as defined, not on $H_\\ell^{\\rm sc}$. Starting with $C_0=-iz^{-1}$, if $C_\\ell$ has exponents $-1,\\ldots,-\\ell-1$, then $\\ell z^{-1}C_\\ell$ and $C_\\ell'$ have exponents at least $-\\ell-2$, while $-iC_\\ell$ has exponents at least $-\\ell-1$; induction gives only exponents $-1,\\ldots,-\\ell-1$ in $C_\\ell$. Thus $z^{\\ell+1}C_\\ell$ is a polynomial and $z^{\\ell+1}(C_\\ell'+iC_\\ell)$ has at worst exponent $-1$, which is well-defined on the positive input domain. [F1, F3, F4, step 1.1, step 1.2, algebra, induction]",
+        "parameters": {
+          "fixture": "spherical-scaled-graph-l0"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    },
+    {
+      "batch": 25,
+      "id": "thm-certified-scaled-spherical-bessel-enclosures",
+      "index": 2,
+      "original_obligation": {
+        "case": "Taylor tail M=1,b=1",
+        "calculation": "E_1=2*1^2/2!=1 and M+2=3>=2b=2."
+      },
+      "finite_smoke": {
+        "check": "numerical-frontier71-special-fixture",
+        "asserts": "1.3 Fix a positive input box $I=[a,b]$ and choose $M$ with $M+2\\ge2b$. For every $z\\in I$, the first omitted absolute exponential-series term is at most $b^{M+1}/(M+1)!$. Each subsequent ratio is at most $b/(M+2)\\le1/2$, so the sum of the omitted terms is at most $2b^{M+1}/(M+1)!=E_M$. Thus the real and imaginary parts of $T_M(z)$, enlarged by $[-E_M,E_M]$, contain $\\cos z$ and $\\sin z$. Exact rational interval addition and multiplication enclose pointwise addition and multiplication by their endpoint-hull formulas; inversion of a positive interval $[a,b]$ is $[1/b,1/a]$. Evaluation over the finite graph and outward rounding therefore preserve containment of every graph value on $I$. [F2, F4, F6, algebra]",
+        "parameters": {
+          "fixture": "spherical-taylor-m1"
+        }
+      },
+      "preserved_obligation_rationale": "Preserves the authored case by independently computing the fixed mathematical data named in original_obligation; shared selectors compute every component of each combined zero/origin obligation, not just one value.",
+      "limitations": "Bounded finite fixture only; no general theorem, arbitrary input, asymptotic limit, certified rounding implementation or unconditional finite-cap success is inferred."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "batch": "67",
+  "opened": [
+    "ale-interface-and-partitioned-multiphysics-discretization",
+    "ale-interface-and-partitioned-multiphysics-discretization-examples",
+    "alg-ale-robin-robin-partitioned-iteration",
+    "alg-ale-upwind-finite-volume-step",
+    "cor-ale-exact-splitting-residual-orders",
+    "def-ale-linear-diffusion-transmission-model",
+    "def-ale-moving-domain-map",
+    "def-ale-periodic-moving-grid",
+    "def-ale-toy-added-mass-recurrence",
+    "ex-ale-added-mass-toy-recurrence-instability",
+    "ex-ale-expanding-mesh-free-stream",
+    "ex-ale-two-domain-heat-interface-flux-balance",
+    "lem-ale-jacobi-geometric-conservation-identity",
+    "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+    "lem-ale-schur-complement-positive-and-minimizes-energy",
+    "lem-ale-schur-residual-controls-interface-energy-error",
+    "thm-ale-monolithic-backward-euler-energy-identity",
+    "thm-ale-one-dimensional-reynolds-transport-identity",
+    "thm-ale-reynolds-transport-identity",
+    "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+    "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+    "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "cor-ale-exact-splitting-residual-orders",
+      "location": "Statement",
+      "defect": "missing-hypothesis",
+      "evidence": "The Statement asserts global O(h) and O(h^2) errors under the remaining Lipschitz, regularity, and step-size hypotheses, but does not specify initialization. The cited theorem requires ||y_0-y(0)||_2 ≤ C_0 h^p and states its exact-flow estimates with exact initial data. With a=b=0, exact y(0)=0, and both split sequences initialized at 1 for every h, all paths remain in a compact tube and the splitting defects vanish, but the global error stays 1. The cited hypotheses therefore do not license the claim as written.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-ale-reynolds-transport-identity",
+      "location": "research/numerical-analysis-remaining-71-2026-10-17-batch-67.proof-contracts.json: contracts.thm-ale-reynolds-transport-identity.axioms[0].uses[0]",
+      "defect": "citation-inaccurate",
+      "evidence": "The current contract records uses: [\"4.1\"] for def-countable-choice. In the current item, Proof step 4.1 substitutes the ALE Jacobian identity and changes variables; Proof step 5.1 applies [F5] and [F13] and states that Countable Choice is used through them. The contract locator points to a step with no such use.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Checked all 22 scoped carriers and current suppliers needed for the transport, diffusion/Robin, upwind, and splitting arguments. The current thm-lebesgue-criterion-in-rn step 3.2 gap remains in the integrable-to-null direction; the assigned Reynolds proofs use its separately proved null-discontinuities-to-integrability direction. Full Joosten, Donea, and Strang source PDFs could not be retrieved, so those external locators were not independently fully checked; the assigned claims were assessed from their local proofs."
+}

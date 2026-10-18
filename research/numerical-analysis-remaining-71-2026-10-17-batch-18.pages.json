@@ -1,0 +1,439 @@
+[
+  {
+    "order": 2590,
+    "id": "interpolative-cur-and-nystrom-decompositions",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Interpolative cur and nystrom decompositions",
+    "companion": "interpolative-cur-and-nystrom-decompositions-examples",
+    "requires": [
+      "sketched-least-squares-and-subspace-embeddings"
+    ],
+    "items": [
+      {
+        "id": "alg-strong-rrqr-interpolative-decomposition",
+        "kind": "algorithm",
+        "title": "Strong-RRQR interpolative decomposition with explicit statuses",
+        "statement": "Input a finite real or complex matrix $A\\in\\mathbb F^{m\\times n}$ with $m\\ge n\\ge1$, an integer $k$ with $0\\le k\\le n$, a factor $f\\ge1$, a finite swap cap $S\\in\\mathbb N\\cup\\{0\\}$, and an arithmetic mode: exact arithmetic or finite precision. Finite-precision inputs and the arithmetic format have the represented-dyadic meaning specified by the called QR algorithm; all exact certificate calculations below use unbounded-size rational arithmetic on those represented values. In that mode supply the called QR procedure's finite real format, rounding rule and optional certificate-pass budget $C\\in\\mathbb N_0$ (default $1$); forward them unchanged on the interior call. Its exact unitary $W$ is reconstructed from the final sweep's dyadic reflector record, and its score and residual bounds may be symbolic nonnegative square roots of exact rationals. The direct ID check below uses only rational candidate entries and does not require evaluating those square roots. The procedure returns an algorithm status in `success`, `rank-deficient-input`, `singular-selected-block`, `swap-budget-exhausted`, or `range-failure`. On a successful branch it returns the selected index list $J$ and coefficient matrix $T$; finite-precision outputs are candidates until their certification status is checked. For $1\\le k<n$, it also returns the RRQR diagnostics specified in step 4, including the rank status, selected-block conditioning data, and score data. In finite precision it returns separately the underlying RRQR certificate status and certificate data, and an ID-certificate status for the returned $J,T$.\n\n1. If $k=0$, return `success`, $J=\\varnothing$, and the unique $0\\times n$ matrix $T$. Then $A(:,J)T=0$. Set the block, rank, and conditioning diagnostics to not applicable and both certificate statuses to `not-required`. This branch includes $A=0$.\n2. If $k=n$, return `success`, $J=(1,\\ldots,n)$, and $T=I_n$. Then $A(:,J)T=A$. Set the block, rank, and conditioning diagnostics to not applicable and both certificate statuses to `not-required`.\n3. If $1\\le k<n$, call [[alg-strong-rank-revealing-qr-with-finite-swaps]] on $(A,k,f,S)$ in the requested arithmetic mode. In exact arithmetic, propagate each nonsuccess status without returning $J,T$. In finite precision, propagate each nonsuccess status, including `range-failure`, without returning $J,T$; retain any partial diagnostics supplied by the called procedure. On either mode's nonsuccess branch set both certificate statuses to `not-applicable` and return no ID-certificate data.\n4. On success, let $\\Pi$ be the returned column permutation. In exact arithmetic retain the full factorization $A\\Pi=QR$ with unitary $Q$ and partition its upper-trapezoidal factor after its first $k$ rows and columns as\n   $$R=\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}.$$\n   In finite precision use the returned candidate factors $\\widehat Q,\\widehat R$ and the corresponding blocks; the exact unitary transformation representation $W$ remains part of the certificate data in step 5. Let $J$ be the ordered list of original column indices in the first $k$ positions of $\\Pi$. Set $X=R_{11}^{-1}R_{12}$ in exact arithmetic, or use the returned candidate $X$ in finite precision, and define $T$ by $T\\Pi=[I_k\\ \\ X]$. Retain for the final output $J,T$, the full factor ($Q$ or $\\widehat Q$), and the diagnostics $(\\Pi,R_{11},R_{12},R_{22},X,(\\omega_i)_i,(\\gamma_j)_j,(s_{ij})_{ij},\\max_{i,j}|X_{ij}|,\\max_{i,j}s_{ij})$, where $\\omega_i=\\|e_i^*R_{11}^{-1}\\|_2$, $\\gamma_j=\\|R_{22}(:,j)\\|_2$, and $s_{ij}=(|X_{ij}|^2+(\\omega_i\\gamma_j)^2)^{1/2}$. In finite precision these are candidate values; retain validated enclosures only when supplied by the certificate. Continue to step 5 before returning.\n5. In exact arithmetic, the returned decomposition and diagnostics refer to the exact successful factorization; set both certificate statuses to `not-required`. In finite precision, retain the called procedure's RRQR certificate status and any completed data $(W,(b_{ij}),\\varepsilon)$, including its dyadic reflector record and exact squared quantities, unchanged and independently of the following direct ID check; fields not computed on an `uncertified` branch remain absent. If a candidate $X$ or other required output is nonfinite, return `range-failure` without $J,T$, with both certificate statuses `not-applicable`. Otherwise form $T$ by copying the candidate entries and inserting exact zeros and ones, so no new rounding changes $X$. For the actual returned $J,T$, compute in exact rational complex arithmetic\n   $$D=A-A(:,J)T,\\qquad r^2=\\sum_{a=1}^m\\sum_{b=1}^n|D_{ab}|^2,\\qquad c^2=\\max_{a,b}|T_{ab}|^2.$$\n   Check the dimensions, distinct valid indices in $J$, the entrywise identity $T(:,J)=I_k$, and $c^2\\le f^2$. Set the ID-certificate status to `certified` exactly when these checks pass, and otherwise to `uncertified`. Return the exact rational data $(D,r^2,c^2)$ and the check outcomes in either case. The residual bound is the symbolic nonnegative square root $\\sqrt{r^2}$, so its reporting requires no floating-point square root or range conversion. A `certified` ID therefore obeys\n   $$T(:,J)=I_k,\\qquad \\max_{a,b}|T_{ab}|\\le f,\\qquad \\|A-A(:,J)T\\|_2\\le\\sqrt{r^2}.$$\n   This direct certificate is independent of the RRQR certificate: it can certify the actual interpolation and this explicit residual bound even when RRQR score certification is unavailable. It does not certify the RRQR singular-value comparison or replace its score and unitary-reconstruction conditions. No iterative certificate search or rounding-based equality test is used. Return `success` with these outputs and the two separately assigned certificate statuses.\n\nThe error theorem below concerns exact-arithmetic success. It gives no finite-precision error bound for a returned candidate; a strong singular-value-relative bound additionally requires verified RRQR score and factorization information. Step 5 supplies its separate direct bound for the actual represented output, without asserting that it equals the exact-arithmetic trailing-block bound.",
+        "deps": [
+          "alg-strong-rank-revealing-qr-with-finite-swaps"
+        ],
+        "justified_by": [
+          "lem-strong-rrqr-interpolative-decomposition-returns-a-status"
+        ],
+        "dependency_level": 0,
+        "source_path": "items/alg-strong-rrqr-interpolative-decomposition.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ming Gu and Stanley C. Eisenstat, Efficient Algorithms for Computing a Strong Rank-Revealing QR Factorization, §§3–4",
+              "url": "https://math.berkeley.edu/~mgu/MA273/Strong_RRQR.pdf"
+            },
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §13",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-moore-penrose-products-are-orthogonal-projectors",
+        "kind": "lemma",
+        "title": "The Moore-Penrose products are orthogonal projectors",
+        "statement": "Let $M\\in\\mathbb F^{p\\times q}$ be any finite real or complex matrix, and let $M^\\dagger$ be its unique Moore-Penrose inverse. Then $P=MM^\\dagger$ and $Q=M^\\dagger M$ are self-adjoint idempotents. The range of $P$ is $\\operatorname{Ran}(M)$, and the range of $Q$ is $\\operatorname{Ran}(M^\\dagger)$. Thus both are orthogonal projections. If $M$ has full row rank, then $MM^\\dagger=I_p$.",
+        "deps": [
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-moore-penrose-products-are-orthogonal-projectors.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §§13.1–13.2",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            },
+            {
+              "title": "Alex Gittens and Michael W. Mahoney, Revisiting the Nyström Method, §4.1",
+              "url": "https://www.jmlr.org/papers/volume17/gittens16a/gittens16a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cur-reconstruction-cores",
+        "kind": "definition",
+        "title": "Skeleton and projected least-squares CUR cores",
+        "statement": "Let $A\\in\\mathbb F^{m\\times n}$ over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ with $m,n\\ge1$, and let $I=(i_1,\\ldots,i_k)$ and $J=(j_1,\\ldots,j_k)$ be ordered lists of distinct row and column indices. For $k=0$, both lists and all selected matrices have zero size, with ordinary empty-matrix multiplication. Define $C=A(:,J)\\in\\mathbb F^{m\\times k}$, $R=A(I,:)\\in\\mathbb F^{k\\times n}$, and the cross matrix $W=A(I,J)\\in\\mathbb F^{k\\times k}$, using the same orders in $I,J,W$.\n\nThe **skeleton CUR core** is $U_{\\mathrm{skel}}=W^\\dagger$ and its reconstruction is $\\widehat A_{\\mathrm{skel}}=C W^\\dagger R$. The **projected least-squares CUR core** is $U_{\\mathrm{proj}}=C^\\dagger A R^\\dagger$ and its reconstruction is\n$\\widehat A_{\\mathrm{proj}}=C(C^\\dagger A R^\\dagger)R=(CC^\\dagger)A(R^\\dagger R)$.\n\nFor $k=0$, both reconstructions are the zero $m\\times n$ matrix.\n\nThe Moore-Penrose theorem in the dependencies guarantees that these formulas are single-valued for singular as well as nonsingular $C,R,W$. The two core constructions may yield the same matrix: for $A=[1]$ and $I=J=(1)$, both cores equal $[1]$. The projection residual bound on the A page applies only to $\\widehat A_{\\mathrm{proj}}$; it is not asserted for the skeleton core $W^\\dagger$.",
+        "deps": [
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/def-cur-reconstruction-cores.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §§13.1–13.2",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            },
+            {
+              "title": "Nathan Halko, Per-Gunnar Martinsson, and Joel A. Tropp, Finding Structure with Randomness, §3.2.3",
+              "url": "https://arxiv.org/pdf/0909.4061"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-psd-nystrom-approximation",
+        "kind": "definition",
+        "title": "The positive-semidefinite Nyström approximation",
+        "statement": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite with $n\\ge1$, and let $S\\in\\mathbb F^{n\\times s}$ with $s\\ge0$ be any finite sketch matrix. Put $W=S^*AS\\in\\mathbb F^{s\\times s}$. The **Nyström approximation** associated with $(A,S)$ is\n$\\widehat A_{\\mathrm{nys}}=AS\\,W^\\dagger S^*A$.\n\nThe Moore-Penrose inverse is defined for every finite matrix, including singular $W$, and is unique by the dependencies. No rank, sampling, or probabilistic condition is part of this definition.",
+        "deps": [
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/def-psd-nystrom-approximation.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §14.2",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            },
+            {
+              "title": "Alex Gittens and Michael W. Mahoney, Revisiting the Nyström Method, §4.1",
+              "url": "https://www.jmlr.org/papers/volume17/gittens16a/gittens16a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-strong-rrqr-interpolative-decomposition-returns-a-status",
+        "strategy": "Complete same-frontier prerequisite authored by the assigned Codex escalation owner; see the exact scope report and source-local proof.",
+        "kind": "lemma",
+        "title": "Capped RRQR interpolation returns a status and its direct certificate bounds the actual residual",
+        "deps": [
+          "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "alg-strong-rrqr-interpolative-decomposition",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ming Gu and Stanley C. Eisenstat, Efficient Algorithms for Computing a Strong Rank-Revealing QR Factorization, Sections 3–4",
+              "url": "https://math.berkeley.edu/~mgu/MA273/Strong_RRQR.pdf"
+            },
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, Section 13",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            }
+          ]
+        },
+        "statement": "For every admissible input to\n[[alg-strong-rrqr-interpolative-decomposition]], in either exact arithmetic or\nits specified represented finite-precision mode, the procedure terminates\nwith exactly one listed algorithm status. The interior branch makes at most\n$S$ swaps and at most $S+1$ score-test passes. In finite precision the reported\ninput rank is the exact rank of the represented matrix, not a numerical-rank\nestimate for unrepresented data. Every certificate status is assigned in finite\nwork, without a search until success.\n\nOn a finite-precision successful interior branch, the direct certificate data\n$(D,r^2,c^2)$ refer to the actual returned $J,T$ and satisfy\n\n$$D=A-A(:,J)T,\\qquad r^2=\\sum_{a,b}|D_{ab}|^2,\\qquad c^2=\\max_{a,b}|T_{ab}|^2.$$\n\nAn ID-certificate status `certified` guarantees\n\n$$T(:,J)=I_k,\\qquad \\max_{a,b}|T_{ab}|\\le f,\\qquad \\|A-A(:,J)T\\|_2\\le\\sqrt{r^2}.$$\n\nThis direct bound needs no successful RRQR certificate. It asserts no\nsingular-value-relative error bound for an uncertified RRQR candidate.",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-strong-rrqr-interpolative-decomposition-error",
+        "kind": "theorem",
+        "title": "Strong-RRQR interpolative decomposition error and coefficient bounds",
+        "statement": "Let $A\\in\\mathbb F^{m\\times n}$ over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, with $m\\ge n\\ge1$, and let $0\\le k\\le n$, $f\\ge1$. The spectral norm is $\\|M\\|_2=\\sup_{\\|x\\|_2=1}\\|Mx\\|_2$, and $\\sigma_j(M)$ is the $j$th singular value in decreasing order. The procedure [[alg-strong-rrqr-interpolative-decomposition]] returns the exact zero approximation for $k=0$ and the exact reconstruction for $k=n$. For $1\\le k<n$, assume $\\operatorname{rank}(A)=n$ and its exact-arithmetic strong-RRQR call returns success, and write $g=(1+f^2k(n-k))^{1/2}$ for the returned blocks. Then $T(:,J)=I_k$, $\\max_{i,j}|T_{ij}|\\le f$, and\n\n$$\\|A-A(:,J)T\\|_2=\\|R_{22}\\|_2\\le g\\,\\sigma_{k+1}(A).$$\n\nNo decomposition or error conclusion is asserted when the procedure returns a rank-loss or budget status. This theorem gives no finite-precision error bound for a returned candidate; such a bound requires verified score bounds and a reconstruction certificate for the actual returned interpolative decomposition.",
+        "deps": [
+          "alg-strong-rrqr-interpolative-decomposition",
+          "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "thm-strong-rrqr-singular-value-comparisons",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-strong-rrqr-interpolative-decomposition-error.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ming Gu and Stanley C. Eisenstat, Efficient Algorithms for Computing a Strong Rank-Revealing QR Factorization, Theorem 3.2",
+              "url": "https://math.berkeley.edu/~mgu/MA273/Strong_RRQR.pdf"
+            },
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §13.3",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            },
+            {
+              "title": "Nathan Halko, Per-Gunnar Martinsson, and Joel A. Tropp, Finding Structure with Randomness, §3.3.2",
+              "url": "https://arxiv.org/pdf/0909.4061"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-skeleton-cur-exactness",
+        "kind": "theorem",
+        "title": "Skeleton CUR is exact for a full-rank cross",
+        "statement": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $m,n\\ge1$, and let $A\\in\\mathbb F^{m\\times n}$. Choose an integer $0\\le k\\le\\min(m,n)$ and ordered lists $I$ and $J$ of $k$ distinct valid row and column indices, respectively. Let $C=A(:,J)$, $R=A(I,:)$, and $W=A(I,J)\\in\\mathbb F^{k\\times k}$ as in [[def-cur-reconstruction-cores]]. If $\\operatorname{rank}(A)=\\operatorname{rank}(W)=k$, then the skeleton CUR reconstruction satisfies\n$C W^\\dagger R=A$.\nFor $k=0$, use the empty-matrix convention: a rank-zero $A$ is zero and the empty product reconstructs the zero $m\\times n$ matrix.",
+        "deps": [
+          "def-cur-reconstruction-cores",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "def-rank-and-nullity",
+          "thm-rank-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-skeleton-cur-exactness.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §13.1",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            },
+            {
+              "title": "Nathan Halko, Per-Gunnar Martinsson, and Joel A. Tropp, Finding Structure with Randomness, §3.2.3",
+              "url": "https://arxiv.org/pdf/0909.4061"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cur-projection-residual-bound",
+        "kind": "theorem",
+        "title": "Projected CUR has a two-sided Frobenius residual bound",
+        "statement": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $m,n\\ge1$, $A\\in\\mathbb F^{m\\times n}$, and choose an integer $0\\le k\\le\\min(m,n)$ and ordered lists $I,J$ of $k$ distinct valid row and column indices, respectively. Set $C=A(:,J)$ and $R=A(I,:)$ as in [[def-cur-reconstruction-cores]], and define $P_C=CC^\\dagger$ and $P_R=R^\\dagger R$. The projected least-squares CUR approximation is $\\widehat A_{\\mathrm{proj}}=C(C^\\dagger A R^\\dagger)R=P_CAP_R$. With $\\|X\\|_F=(\\sum_{i,j}|X_{ij}|^2)^{1/2}$,\n\n$$\\|A-\\widehat A_{\\mathrm{proj}}\\|_F\\le\\|(I_m-P_C)A\\|_F+\\|A(I_n-P_R)\\|_F.$$\n\nThis bound is for the projected least-squares core only; it is not asserted for the skeleton core $W^\\dagger$.",
+        "deps": [
+          "def-cur-reconstruction-cores",
+          "lem-moore-penrose-products-are-orthogonal-projectors"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-cur-projection-residual-bound.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §13.2",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            },
+            {
+              "title": "Nathan Halko, Per-Gunnar Martinsson, and Joel A. Tropp, Finding Structure with Randomness, §3.2.3",
+              "url": "https://arxiv.org/pdf/0909.4061"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nystrom-square-root-projector-identity",
+        "kind": "lemma",
+        "title": "Nyström is a square-root orthogonal-projection compression",
+        "statement": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $n\\ge1$, $s\\ge0$, $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite, $S\\in\\mathbb F^{n\\times s}$, and $B=A^{1/2}S$. If $P_{\\operatorname{Ran}(B)}$ denotes the orthogonal projection onto the range of $B$, then\n\n$$\\widehat A_{\\mathrm{nys}}=A^{1/2}P_{\\operatorname{Ran}(B)}A^{1/2}=A^{1/2}B(B^*B)^\\dagger B^*A^{1/2}=A^{1/2}BB^\\dagger A^{1/2}.$$",
+        "deps": [
+          "def-psd-nystrom-approximation",
+          "lem-moore-penrose-products-are-orthogonal-projectors",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-nystrom-square-root-projector-identity.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §14.2",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            },
+            {
+              "title": "Alex Gittens and Michael W. Mahoney, Revisiting the Nyström Method, Lemma 1 and §4.1",
+              "url": "https://www.jmlr.org/papers/volume17/gittens16a/gittens16a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-psd-nystrom-order-and-exactness",
+        "kind": "theorem",
+        "title": "Nyström is positive semidefinite, dominated by A, and exact when it captures the range",
+        "statement": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $n\\ge1$, $s\\ge0$, $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite, and $S\\in\\mathbb F^{n\\times s}$. In the Loewner order, where $B\\preceq C$ means $C-B$ is positive semidefinite, the Nyström approximation in [[def-psd-nystrom-approximation]] satisfies\n$0\\preceq\\widehat A_{\\mathrm{nys}}\\preceq A$.\nIf the sketch captures the range in the sense that $\\operatorname{Ran}(AS)=\\operatorname{Ran}(A)$, then $\\widehat A_{\\mathrm{nys}}=A$. Here rank, when used in the proof, means dimension of the range.",
+        "deps": [
+          "def-psd-nystrom-approximation",
+          "lem-nystrom-square-root-projector-identity",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-psd-nystrom-order-and-exactness.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per-Gunnar Martinsson and Joel A. Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §14.2",
+              "url": "https://www.tropp.caltech.edu/books/MT20-Randomized-Numerical-arXiv-v3.pdf"
+            },
+            {
+              "title": "Alex Gittens and Michael W. Mahoney, Revisiting the Nyström Method, §4.1",
+              "url": "https://www.jmlr.org/papers/volume17/gittens16a/gittens16a.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nystrom-deterministic-spectral-residual-bound",
+        "kind": "theorem",
+        "title": "Nyström deterministic spectral residual bound under a full-row-rank leading sketch",
+        "statement": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $n\\ge1$, $s\\ge0$, and let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_n\\ge0$. Let $S\\in\\mathbb F^{n\\times s}$, and choose an integer $0\\le k\\le n$ and an orthonormal eigenbasis $U=(U_1\\ U_2)$ with the first $k$ eigenvectors in $U_1$. Set\n$\\Lambda_1=\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_k)$,\n$\\Lambda_2=\\operatorname{diag}(\\lambda_{k+1},\\ldots,\\lambda_n)$,\n$\\Omega_1=U_1^*S$, and $\\Omega_2=U_2^*S$. Empty blocks have norm zero, $\\lambda_{n+1}:=0$, and the $0\\times s$ matrix has full row rank vacuously. If $\\Omega_1$ has full row rank, then, deterministically,\n\n$$\\|A-\\widehat A_{\\mathrm{nys}}\\|_2\\le\\lambda_{k+1}+\\|\\Lambda_2^{1/2}\\Omega_2\\Omega_1^\\dagger\\|_2^2.$$\n\nHere $\\|M\\|_2=\\sup_{\\|x\\|_2=1}\\|Mx\\|_2$ is the induced Euclidean operator norm. No probability assumption on $S$ is made.",
+        "deps": [
+          "def-psd-nystrom-approximation",
+          "lem-nystrom-square-root-projector-identity",
+          "lem-moore-penrose-products-are-orthogonal-projectors",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-singular-value-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-nystrom-deterministic-spectral-residual-bound.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alex Gittens and Michael W. Mahoney, Revisiting the Nyström Method, Theorem 2 and §4.1.1",
+              "url": "https://www.jmlr.org/papers/volume17/gittens16a/gittens16a.pdf"
+            },
+            {
+              "title": "Nathan Halko, Per-Gunnar Martinsson, and Joel A. Tropp, Finding Structure with Randomness, Theorem 9.1",
+              "url": "https://arxiv.org/pdf/0909.4061"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2591,
+    "id": "interpolative-cur-and-nystrom-decompositions-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Interpolative cur and nystrom decompositions — Examples",
+    "companion": "interpolative-cur-and-nystrom-decompositions",
+    "requires": [
+      "interpolative-cur-and-nystrom-decompositions"
+    ],
+    "items": [
+      {
+        "id": "cex-arbitrary-selected-columns-miss-dominant-direction",
+        "kind": "counterexample",
+        "title": "A prescribed column can miss the dominant direction",
+        "statement": "For every real matrix $A\\in\\mathbb R^{m\\times n}$ with $m\\ge n\\ge2$, every integer $1\\le k<n$, and every prescribed ordered list $J$ of $k$ distinct valid column indices, there is a matrix $T\\in\\mathbb R^{k\\times n}$ with $T(:,J)=I_k$, $\\max_{i,j}|T_{ij}|\\le1$, and\n$\\|A-A(:,J)T\\|_2\\le\\sqrt{1+k(n-k)}\\,\\sigma_{k+1}(A)$, where $\\|\\cdot\\|_2$ is the Euclidean operator norm and $\\sigma_j(A)$ is the $j$th singular value.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "source_path": "items/cex-arbitrary-selected-columns-miss-dominant-direction.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-exact-rank-two-skeleton-cur",
+        "kind": "example",
+        "title": "An exact rank-two CUR reconstruction from a nonsingular cross",
+        "statement": "Take\n$A=\\begin{bmatrix}1&0&1\\\\0&1&1\\\\1&1&2\\end{bmatrix}$,\nand select $I=J=(1,2)$. The resulting skeleton CUR factors reconstruct $A$ exactly.",
+        "deps": [
+          "def-cur-reconstruction-cores",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-skeleton-cur-exactness"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/ex-exact-rank-two-skeleton-cur.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-psd-nystrom-residual-is-psd",
+        "kind": "example",
+        "title": "A PSD Nyström residual remains positive semidefinite",
+        "statement": "For $A=\\operatorname{diag}(4,1)$ and $S=e_1$, the Nyström approximation is $\\operatorname{diag}(4,0)$ and its residual is the positive-semidefinite matrix $\\operatorname{diag}(0,1)$.",
+        "deps": [
+          "def-psd-nystrom-approximation",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-psd-nystrom-order-and-exactness"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "source_path": "items/ex-psd-nystrom-residual-is-psd.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

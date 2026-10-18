@@ -1,0 +1,2633 @@
+[PDF PAGE 1]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV
+SPACES
+LARS DIENING, JOHANNES STORN, AND TABEA TSCHERPEL
+Abstract. We introduce a Scott–Zhang type projection operator mapping
+to Lagrange elements for arbitrary polynomial order. In addition to the usual
+properties, this operator is compatible with duals of ﬁrst order Sobolev spaces.
+More speciﬁcally, it is stable in the corresponding negative norms and allows
+for optimal rates of convergence. We discuss alternative operators with similar
+properties. As applications of the operator we prove interpolation error esti-
+mates for parabolic problems and smoothen rough right-hand sides in a least
+squares ﬁnite element method.
+1. Introduction
+Interpolation operators are an important tool in numerical analysis and thus have
+been studied intensively [Cl´e75; SZ90; Car99; Mel05; DR07; EG17]. While the focus
+of these works lies primarily on error control in W s,p(Ω) for non-negative orders
+s ∈N0, less is known for error control in negative Sobolev spaces W −1,p(Ω) with
+p ∈(1, ∞). Such results are, however, needed for recent developments including
+• time-stepping and space-time ﬁnite element methods for parabolic prob-
+lems, where the time-derivative can only be controlled in this norm (cf. [Ste15;
+TV16; SW21]),
+• multilevel decompositions (cf. [BPV00; WZ17; F¨uh22]) and operator pre-
+conditioning (cf. [SV20; SV21]),
+• regularizations for PDEs with rough right-hand side, in particular for meth-
+ods that require the right-hand side to be in Lp(Ω) like some DG, DPG, non-
+conforming, or least squares schemes (cf. [VZ18a; VZ18b; VZ19; FHK22]),
+• a posteriori error control for rough right-hand sides (cf. [KV21]).
+This paper addresses this issue by designing a local Scott–Zhang type projection
+operator Π0 (resp. Π) onto the Lagrange ﬁnite element space of arbitrary polynomial
+degree k ∈N. The operator is stable and achieves optimal rates of convergence with
+respect to Sobolev norms of order larger or equal to minus one as stated in our main
+result in Theorem 1.
+The construction of the operator and its analysis is carried out in Section 2 and
+generalizes Tantardini’s approach for the lowest-order case k = 1 [Tan13, Sec. 7.6].
+We modify the classical design of the celebrated Scott–Zhang projection operator
+[SZ90] by using inner products with weights suited for functions in negative norm
+Sobolev spaces. In particular, our weights are continuous, which allows testing with
+2020 Mathematics Subject Classiﬁcation.
+65D05, 65M15, 65N15, 65N30,
+Key words and phrases. Scott-Zhang, interpolation, projection, dual norm, negative Sobolev
+space, singular data.
+The work of the authors was supported by the Deutsche Forschungsgemeinschaft (DFG,
+German Research Foundation) – SFB 1283/2 2021 – 317210226.
+1
+arXiv:2112.08515v2  [math.NA]  28 Dec 2022
+
+[PDF PAGE 2]
+2
+L. DIENING, J. STORN, AND T. TSCHERPEL
+dual Sobolev functions. Furthermore, the design leads to an adjoint operator Π∗
+0
+that preserves constants on interior simplices. Both properties are not available
+for most classical interpolation operators (see Section 3) but essential for the proof
+of stability and optimal convergence in Section 2.4. In Section 2.2 we deﬁne the
+weight functions locally by using polynomials of higher polynomial degree and in
+Section 2.3 we use them to obtain a global biorthogonal system. Section 2.5 displays
+a modiﬁcation of Π0 in the vicinity of the boundary. This leads to an operator Π
+with optimal approximation properties for functions without zero boundary traces.
+In Section 3 we compare the operator Π0 to existing operators suited for the
+approximation in the negative norm Sobolev space.
+For some applications it is
+beneﬁcial to have a self-adjoint operator, which our operator is not. However, this
+property is not compatible with the operator being a local projection as demon-
+strated in Section 3.1. Therefore, in Section 3.2 we introduce an alternative local
+and self-adjoint operator, that is, however, not a projection.
+This reduces the
+maximal rate of convergence by one. Section 3.3 illustrates that local projection
+operators with the beneﬁcial properties of Π0 need local weight functions of higher
+polynomial degree. This justiﬁes the more involved design of Π0 in Section 2.
+In Section 4 we present several applications of the novel operators. In Sections 4.1
+and 4.2 we investigate interpolation error estimates for parabolic problems. Sec-
+tion 4.1 utilizes recent results in [TV16] showing quasi-optimality of semi-discrete
+numerical schemes. Applying the operator Π0 leads to an a priori error estimate
+for arbitrary polynomial degrees k ∈N, similar to the one obtained for k = 1 in
+[Tan13, Prop. 7.27].
+For parabolic problems simultaneous space-time ﬁnite element methods repre-
+sent an alternative to standard time-marching schemes. Such space-time schemes
+treat the time as an additional spatial dimension and apply techniques available for
+time-independent problems, see for example [Ste15; LMN16; SW21; DS22]. In Sec-
+tion 4.2 we construct an interpolation operator based on Π0 that improves existing
+interpolation error estimates on tensor product meshes signiﬁcantly. In Section 4.3
+we apply the operator Π to the right-hand side of a least squares ﬁnite element
+method. This leads to a computable scheme even for right-hand sides f ̸∈L2(Ω).
+Based on the properties of Π we conclude optimal rates of convergence. The appen-
+dix displays results on approximation theory in Bochner spaces used in Section 4.2.
+Notation. Throughout this paper we use the following notation. We suppose that
+Ω⊂Rd is a bounded, polyhedral domain with a shape regular triangulation T
+consisting of closed simplices. For any simplex T ∈T we denote the neighboring
+patch of T by ωT := S{T ′ ∈T : T ∩T ′ ̸= ∅} and the local mesh size hT := diam(T).
+We denote by V the set of vertices in T . For any vertex j ∈V we deﬁne the closed
+vertex patches by ωj := S{T ∈T : j ∈T} and ω2
+j := S{T ∈T : T ∩ωj ̸= ∅}, and
+the local mesh size by hj := diam(ωj).
+By Lp(Ω) and W s,p(Ω) we denote the standard Lebesgue and Sobolev space of
+order s ∈N0 and integrability p ∈[1, ∞]. Whenever m, s are indices for the diﬀer-
+entiability, then they are integers. The set W 1,p
+0
+(Ω) denotes the subset of W 1,p(Ω)-
+functions with zero boundary traces.
+In the following let p′ be the H¨older ex-
+ponent of p ∈[1, ∞], deﬁned by 1/p + 1/p′ = 1. For p ∈(1, ∞] we denote by
+W −1,p(Ω) := (W 1,p′
+0
+(Ω))∗the dual Sobolev space. We write ⟨f, g⟩Ωboth for the
+L2-scalar product
+R
+Ωf(x) · g(x) dx and for the dual pairing ⟨f, g⟩W −1,p(Ω),W 1,p′
+0
+(Ω).
+
+[PDF PAGE 3]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+3
+Let Pk(T) denote the space of polynomials of degree at most k on T ∈T .
+Let L1
+k(T ) for k ∈N denote the space of Lagrange functions of order k, i.e., W 1,1-
+functions whose restriction to each d-simplex T ∈T is in Pk(T). Let L1
+k,0(T ) :=
+L1
+k(T )∩W 1,1
+0
+(Ω) denote the subset of discrete functions with zero boundary traces.
+If there exist generic constants 0 < c ≤C < ∞that might depend on ﬁxed
+parameters as the polynomial degree k ∈N, the domain Ω, and the shape regularity
+of T , but are independent of any further quantities, we write A ≲B for A ≤CB
+and A ≂B for cB ≤A ≤CB.
+2. Projection operator
+In this section we design an interpolation operator that is well-deﬁned for func-
+tions in negative Sobolev spaces.
+The operator is a projection and has useful
+additional properties including (local) stability and approximation properties.
+2.1. Main results: Properties of the projection operator. In Sections 2.2–
+2.5 we present for arbitrary k ∈N Scott–Zhang type interpolation operators
+Π0 : W −1,2(Ω) →L1
+k,0(T )
+and
+Π: W −1,2(Ω) →L1
+k(T ).
+We shall see that those operators are deﬁned on the larger dual space (W 1,∞
+0
+(Ω))∗,
+and hence in particular on W −1,p(Ω) for any p ∈(1, ∞]. Compared to existing op-
+erators their main advantages are stability and approximation properties including
+ones with respect to negative Sobolev norms. They represent a generalization of
+the lowest order case k = 1 introduced in [Tan13, Sec. 7.6]. All results are presented
+for scalar functions but obviously extend to vector-valued functions.
+Theorem 1 (Main result). Let k ∈N be arbitrary. The operators Π0 and Π are
+linear projections onto L1
+k,0(T ) and L1
+k(T ), respectively. In addition, they have the
+following properties, for any j ∈V and T ∈T :
+Localization of norms. For p ∈(1, ∞) there holds
+∥ξ −Π0ξ∥W −1,p(Ω) ≂
+ X
+j∈V
+∥ξ −Π0ξ∥p
+W −1,p(ωj)
+1/p
+for all ξ ∈W −1,p(Ω).
+(1)
+Approximabilty. For p ∈(1, ∞), q ∈[1, ∞] and 0 ≤m ≤s ≤k + 1 one has
+∥v −Π0v∥W −1,p(ωj) ≲hj∥v∥Lp(ω2
+j )
+for all v ∈Lp(Ω),
+∥w −Π0w∥W −1,p(ωj) ≲hs+1
+j
+∥∇sw∥Lp(ω2
+j )
+for all w ∈W 1,p
+0
+(Ω) ∩W s,p(Ω),
+∥∇m(w −Π0w)∥Lq(T ) ≲hs−m
+T
+∥∇sw∥Lq(ωT )
+for all w ∈W 1,q
+0
+(Ω) ∩W s,q(Ω).
+(2)
+Local Stability. For p ∈(1, ∞), q ∈[1, ∞] and 0 ≤s ≤k there holds
+∥Π0ξ∥W −1,p(ωj) ≲∥ξ∥W −1,p(ω2
+j )
+for all ξ ∈W −1,p(Ω),
+∥Π0v∥Lq(T ) ≲∥v∥Lq(ωT )
+for all v ∈Lq(Ω),
+∥∇sΠ0w∥Lq(T ) ≲∥∇sw∥Lq(ωT )
+for all w ∈W 1,q
+0
+(Ω) ∩W s,q(Ω).
+(3)
+Global Stability. For p ∈(1, ∞), q ∈[1, ∞] and 0 ≤s ≤k one has
+∥Π0ξ∥W −1,p(Ω) ≲∥ξ∥W −1,p(Ω)
+for all ξ ∈W −1,p(Ω),
+∥Π0v∥Lq(Ω) ≲∥v∥Lq(Ω)
+for all v ∈Lq(Ω),
+∥∇sΠ0w∥Lq(Ω) ≲∥∇sw∥Lq(Ω)
+for all w ∈W 1,q
+0
+(Ω) ∩W s,q(Ω).
+(4)
+
+[PDF PAGE 4]
+4
+L. DIENING, J. STORN, AND T. TSCHERPEL
+All statements of the theorem are valid for the projection Π, even for w ∈W 1,q(Ω)
+and w ∈W 1,p(Ω) instead of w ∈W 1,q
+0
+(Ω) and w ∈W 1,p
+0
+(Ω), respectively. The
+hidden constants are independent of p and q.
+A key in the proof of Theorem 1 are certain properties of the L2-adjoint operators
+Π∗
+0 and Π∗of Π0 and Π, respectively, presented in the following theorem.
+Theorem 2 (Adjoint operators). Let Π0 and Π be the projection operators in The-
+orem 1. The L2-adjoint projection Π∗
+0 maps (W 1,∞
+0
+(Ω))∗onto a subset of L1
+3k,0(T )
+and satisﬁes the following properties, for any j ∈V and T ∈T :
+Preservation of constants. Π∗
+0 preserves constants on interior simplices, i.e.,
+(Π∗
+01)|T = 1
+for all T ∈T with T ∩∂Ω= ∅.
+(5)
+Localization of norms. For any p ∈(1, ∞) there holds
+∥ξ −Π∗
+0ξ∥W −1,p(Ω) ≂
+ X
+j∈V
+∥ξ −Π∗
+0ξ∥p
+W −1,p(ωj)
+1/p
+for all ξ ∈W −1,p(Ω).
+(6)
+Approximabilty. For p ∈(1, ∞), q ∈[1, ∞] and 0 ≤m ≤s ≤1 one has
+∥v −Π∗
+0v∥W −1,p(ωj) ≲hj∥v∥Lp(ω2
+j )
+for v ∈Lp(Ω),
+∥w −Π∗
+0w∥W −1,p(ωj) ≲hs+1
+j
+∥∇sw∥Lp(ω2
+j )
+for w ∈W 1,p
+0
+(Ω) ∩W s,p(Ω),
+∥∇m(w −Π∗
+0w)∥Lq(T ) ≲hs−m
+T
+∥∇sw∥Lq(ωT )
+for w ∈W 1,q
+0
+(Ω) ∩W s,q(Ω).
+(7)
+Local Stability. For p ∈(1, ∞) and q ∈[1, ∞] there holds
+∥Π∗
+0ξ∥W −1,p(ωj) ≲∥ξ∥W −1,p(ω2
+j )
+for all ξ ∈W −1,p(Ω),
+∥Π∗
+0v∥Lq(T ) ≲∥v∥Lq(ωT )
+for all v ∈Lq(Ω),
+∥∇Π∗
+0w∥Lq(T ) ≲∥∇w∥Lq(ωT )
+for all w ∈W 1,q
+0
+(Ω).
+(8)
+Global Stability. For p ∈(1, ∞) and q ∈[1, ∞] one has
+∥Π∗
+0ξ∥W −1,p(Ω) ≲∥ξ∥W −1,p(Ω)
+for all ξ ∈W −1,p(Ω),
+∥Π∗
+0v∥Lq(Ω) ≲∥v∥Lq(Ω)
+for all v ∈Lq(Ω),
+∥∇Π∗
+0w∥Lq(Ω) ≲∥∇w∥Lq(Ω)
+for all w ∈W 1,q
+0
+(Ω).
+(9)
+All statements of the theorem except localization and stability in W −1,p(Ω) and
+W −1,p(ωj) are valid for the L2-adjoint projection Π∗: L1(Ω) →L1
+3k,0(T ) as well.
+Still, the localization in (6) holds for functions in Lp(Ω). The hidden constants are
+independent of p and q.
+To prove Theorem 1 and 2 we locally construct in Section 2.2 a system of poly-
+nomials of degree 3k dual to the Bernstein polynomials of degree k. Those allow
+us to ﬁnd a system of global biorthogonal functions in Section 2.3. In Section 2.4
+we design the operator Π0 mapping to L1
+k,0(T ) and verify its properties. The key
+ingredient in the proof of approximation and stability results of Π0 in negative
+Sobolev norms is the preservation of constants of the adjoint operator Π∗
+0 in (5),
+see Remark 10 below for further discussions. In Section 2.5 we introduce Π, which
+modiﬁes Π0 close to the boundary and maps to L1
+k(T ).
+Remark 3 (Fractional orders). Combining the localization of the norm and in-
+terpolating between the approximation estimates allows us to obtain estimates with
+fractional orders of convergence.
+
+[PDF PAGE 5]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+5
+Remark 4 (Other approaches). Classical Scott–Zhang type operators, such as the
+one in [SZ90], use discontinuous weight functions and hence are not deﬁned on
+W −1,2(Ω). In addition their adjoint operators do not preserve constants on interior
+simplices as in (5), which is a key in the proof of optimal convergence rates in
+Section 2.4 below. Operators that are better suited for approximation in W −1,2(Ω)
+include the following.
+• In [TV16, Thm. 5.2] Tantardini and Veeser design for arbitrary polyno-
+mial degree k ∈N an operator with W −1,2(Ω)-approximability for W s,2(Ω)-
+functions with s = 0, . . . , k + 1. However, the operator is not well-deﬁned
+on W −1,2(Ω).
+• In [Tan13, Sec. 7.6] Tantardini introduces an operator for k = 1 deﬁned
+on W −1,2(Ω) with W −1,2-approximability for functions in W −1,2(Ω). This
+operator is well-deﬁned on W −1,2(Ω) and coincides with our lowest-order
+operator. Indeed, the reformulation of this operator inspires our general-
+ization to k ≥1, see Remark 6.
+• In [F¨uh22] F¨uhrer introduces several operators for the analysis of multilevel
+preconditioning.
+One of them is a projection onto the space L0
+0(T ) and
+allows for W −1,2(Ω)-approximability of functions in L2(Ω), see [F¨uh22,
+Thm. 8]. This operator is W −1,2(Ω)-stable, but not W 1,2(Ω)-stable.
+• In [SV20] Stevenson and van Veneti¨e develop an alternative projection for
+the analysis of operator preconditioning. Their operator satisﬁes approx-
+imation and stability estimates in W −1,2(Ω), but has a slightly increased
+support. For a more detailed comparison see Remark 22.
+• In [KV21] Kreuzer and Veeser introduce an operator that is locally W −1,2-
+stable with local W −1,2-approximability.
+The operator is a projection to
+piecewise constant functions enriched by the span of face-supported Dirac
+distributions.
+Thus, it does not map to a polynomial space but to true
+functionals (not representable by L2-densities).
+A possible alternative technique to derive similar localized estimates as in Theorem 1
+is discussed in [Vee19, Thm. 3].
+2.2. Local construction. In this section we locally construct a system of polyno-
+mial functions of degree 3k that forms a biorthogonal system in conjunction with
+Bernstein polynomials of degree k ∈N.
+Bernstein basis. Let N denote the set of Lagrange nodes of L1
+k(T ), for k ∈N.
+As for the Lagrange basis we can assign each Bernstein basis function bi ∈L1
+k(T )
+to a Lagrange node i ∈N.
+Its support ωi := supp(bi) ⊂Ωconsists of those
+d-simplices T ∈T that contain the Lagrange node i ∈N, that is, ωi = S{T ∈
+T : i ∈T}. The Bernstein polynomials are best deﬁned in terms of local barycentric
+coordinates λ = (λ0, . . . , λd).
+To each Lagrange node i ∈N and each simplex
+T ∈T (ωi) := {T ′ ∈T : T ⊂ωi} we assign a multi-index α(i, T) = α ∈Nd+1
+0
+with
+|α| := |α0| + · · · + |α0| = k that naturally corresponds to the node i. Then bi is an
+element in the space Pk(T) of polynomials with maximal degree k and is locally
+given by
+bi|T = bα(i,T ) = bα = |α|!
+α! λα ∈Pk(T).
+(10)
+The set of Bernstein polynomials {bi : i ∈N} is a basis of L1
+k(T ) and {bi : i ∈N ◦}
+with N ◦:= {i ∈N : i ̸∈∂Ω} is a basis of L1
+k,0(T ). Each function bi is non-negative,
+
+[PDF PAGE 6]
+6
+L. DIENING, J. STORN, AND T. TSCHERPEL
+which is crucial for the following arguments. Note that locally on T ∈T we have
+X
+|α|=k
+bα =
+X
+|α|=k
+|α|!
+α! λα =
+
+d
+X
+j=0
+λj
+k
+= 1.
+(11)
+This implies that (bi)i∈N is a partition of unity, that is,
+X
+i∈N
+bi = 1,
+(12)
+which is essential for the following construction. For the local construction of a
+system of biorthogonal polynomials we consider the standard reference d-simplex
+bT with volume | bT| = 1/d!. In the following let α, β, µ ∈Nd
+0 be multi-indices with
+|α| = |β| = |µ| = k. The value ⟨bα, 1⟩b
+T is independent of α and is denoted by
+ck := ⟨bα, 1⟩b
+T =
+k!
+(d + k)!.
+(13)
+Lemma 5 (Local dual basis). For each multi-index α ∈Nd+1
+0
+with |α| = k there
+exists a polynomial pα ∈P3k( bT) such that the following properties are satisﬁed.
+(a) For any α there exists a polynomial zα ∈P2k( bT) such that
+pα = bαzα.
+(b) For all multi-indices α, β ∈Nd+1
+0
+with |α| = |β| = k we have
+⟨pα, bβ⟩b
+T = δα,β.
+(c) One has that
+X
+|α|=k
+pα = 1
+ck
+= (d + k)!
+k!
+.
+(d) The functions zα and pα are symmetric with respect to permutations of the
+barycentric coordinates.
+Proof. Inspired by the operator introduced by Tantardini [Tan13] for k = 1 (see
+Remark 6 below), we use the ansatz, with functions qα ∈Pk( bT) to be determined,
+pα = bαzα
+with
+zα = (d + k)!
+k!
++ qα −
+X
+|µ|=k
+bµqµ.
+(14)
+Then we have that zα ∈P2k( bT) and pα ∈P3k( bT) and thus (a) is satisﬁed. The
+property P
+|α|=k bα = 1 leads to
+X
+|α|=k
+pα =
+X
+|α|=k
+bα
+(d + k)!
+k!
++ qα −
+X
+|µ|=k
+bµqµ
+
+= (d + k)!
+k!
+.
+Hence, the property in (c) results directly from our ansatz as well. The crucial
+step is to determine qα such that (b) holds. Let N := dim Pk( bT). For all vectors
+(rµ)|µ|=k ∈Pk( bT)N we abbreviate the sum
+¯r :=
+X
+|µ|=k
+bµrµ.
+
+[PDF PAGE 7]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+7
+With the deﬁnition in (14) and with this notation, (b) is equivalent to
+⟨bα(qα −¯q), bβ⟩b
+T = δα,β −(d + k)!
+k!
+⟨bα, bβ⟩b
+T
+for all |α| = |β| = k.
+(15)
+Let us deﬁne the linear operator S that maps vectors of polynomials (rα)|α|=k to
+the matrix (⟨bα(rα −¯r), bβ⟩b
+T )α,β in the sense that
+S :
+ Pk( bT)
+N →RN×N
+with
+(rα)|α|=k 7→(⟨bα(rα −¯r), bβ⟩b
+T )α,β.
+The vectors in (Pk( bT))N have N 2 degrees of freedom and the image has N 2 entries.
+However, the operator S is neither injective nor surjective.
+The ﬁrst isomorphism theorem states that the restriction S : U 7→S(U) with
+quotient space U = (Pk( bT))N/ ker(S) is an isomorphism. Let (rα)|α|=k be in the
+kernel of S, i.e.,
+⟨bα(rα −¯r), bβ⟩b
+T = 0
+for all α, β.
+(16)
+Since rα ∈span{bβ : |β| = k}, it follows in particular that
+⟨bα(rα −¯r), rα⟩b
+T = 0
+for any α.
+(17)
+By (17) and the partition of unity P
+|α|=k bα = 1 we have
+X
+|α|=k
+Z
+b
+T
+bα|rα −¯r|2 dx =
+X
+|α|=k
+⟨bαrα, rα⟩b
+T −2
+X
+|α|=k
+⟨bα¯r, rα⟩b
+T +
+X
+|α|=k
+⟨bα¯r, ¯r⟩b
+T
+= ⟨¯r, ¯r⟩b
+T −
+X
+|α|=k
+⟨bαrα, rα⟩b
+T .
+Jensen’s inequality and P
+|α|=k bα = 1 lead to the upper bound
+⟨¯r, ¯r⟩b
+T =
+Z
+b
+T
+
+X
+|α|=k
+bαrα
+
+2
+dx ≤
+Z
+b
+T
+X
+|α|=k
+bα|rα|2 dx =
+X
+|α|=k
+⟨bαrα, rα⟩b
+T .
+Applying this estimate in the previous equation shows that
+X
+|α|=k
+Z
+b
+T
+bα|rα −¯r|2 dx ≤0.
+(18)
+Since the Bernstein polynomials bα are positive except of set of zero measure, the
+upper bound in (18) yields rα = ¯r for all α. Hence, the kernel of S reads
+ker(S) = {(rα)|α|=k ∈(Pk( bT))N : rα = r ∈Pk( bT) for all α with |α| = k}.
+The restriction of S to (Pk( bT))N/ ker(S) is bijective on its image. We claim that
+the image S(U) consists of all non-diagonal entries, that is,
+RN×N = S(U) ⊕R
+with R := {(Mα,β)α,β ∈RN×N : Mα,β = 0 for α ̸= β}.
+(19)
+We verify the claim as follows. Similar to the calculations above, we conclude for
+all polynomials (rα)|α|=k ∈(Pk( bT))N that
+⟨bα(rα −¯r), bα⟩b
+T = ⟨¯r, bα⟩b
+T −
+X
+µ̸=α
+⟨bµrµ, bα⟩b
+T −⟨bα¯r, bα⟩b
+T
+=
+X
+µ̸=α
+⟨bµ(¯r −rµ), bα⟩b
+T .
+(20)
+
+[PDF PAGE 8]
+8
+L. DIENING, J. STORN, AND T. TSCHERPEL
+Since the sum in the right-hand side of (20) contains solely oﬀ-diagonal entries of
+S((rα)|α|=k), it vanishes by deﬁnition for all S((rα)|α|=k) ∈R. Hence, the left-
+hand side equals zero and so S((rα)|α|=k) = 0.
+This implies S(U) ∩R = {0}.
+The bijectivity of S with respect to U shows that dim(RN×N) −dim(S(U)) =
+N 2 −(N 2 −N) = N = dim(R). This veriﬁes the claim in (19). Thus, we can ﬁnd
+polynomials (qα)|α|=k ∈(Pk( bT))N with
+⟨bα(qα −¯q), bβ⟩b
+T = −(d + k)!
+k!
+⟨bα, bβ⟩b
+T
+for all α ̸= β.
+(21)
+With the calculation in (20), we recover for all β the diagonal case from (21) by
+⟨bβ(qβ −¯q), bβ⟩b
+T =
+X
+µ̸=β
+⟨bµ(¯q −qµ), bβ⟩b
+T =
+X
+µ̸=β
+(d + k)!
+k!
+⟨bµ, bβ⟩b
+T
+= (d + k)!
+k!
+⟨1, bµ⟩b
+T −(d + k)!
+k!
+⟨bβ, bβ⟩b
+T = 1 −(d + k)!
+k!
+⟨bβ, bβ⟩b
+T .
+This proves the existence of functions (qα)|α|=k satisfying (15). The construction
+is symmetric with respect to any permutation of the barycentric coordinates which
+ensures (d).
+□
+Remark 6 (Comparison with Tantardini). In the linear case k = 1 Tantardini
+constructed in Section 7.6 of her PhD thesis [Tan13] a Scott–Zhang type operator
+with weights ψℓ= | bT| |ωℓ|−1pℓ, for ℓ∈V, where the function pℓreads locally
+pℓ
+(d + 1)! = λℓ
+ 
+λ2
+ℓ−(d + 2)(d + 5)
+2
+X
+j̸=ℓ
+λ2
+j + d2 + 7d + 16
+2
+λℓ
+X
+j̸=ℓ
+λj + 2
+X
+i,j
+i<j,i̸=ℓ,j̸=ℓ
+λiλj
+
+.
+Since 1 = P
+ℓλ2
+ℓ+ P
+j,ℓ: j<ℓ2λjλℓ, this can be rewritten as
+pℓ
+(d + 1)! = λℓ
+ 
+1 −
+(d + 2)(d + 5)
+2
++ 1
+ X
+j̸=ℓ
+λ2
+j +
+d2 + 7d + 16
+2
+−2
+
+λℓ
+X
+j̸=ℓ
+λj
+!
+= λℓ
+ 
+1 −(d + 3)(d + 4)
+2
+X
+j̸=ℓ
+λ2
+j + (d + 3)(d + 4)
+2
+λℓ
+X
+j̸=ℓ
+λj
+!
+= λℓ
+ 
+1 −(d + 3)(d + 4)
+2
+X
+j
+λ2
+j + (d + 3)(d + 4)
+2
+λℓ
+X
+j
+λj
+!
+= λℓ
+ 
+1 + (d + 3)(d + 4)
+2
+
+λℓ−
+X
+j
+λ2
+j
+
+.
+We obtain (14) with c−1
+1
+= (d + 1)! and
+qeℓ= (d + 4)!
+2(d + 2)λℓ.
+This representation of Tantardini’s operator for k = 1 inspired our ansatz in (14).
+
+[PDF PAGE 9]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+9
+2.3. Global biorthogonal basis. In the following we introduce a system of func-
+tions that is biorthogonal to Bernstein polynomials. It can be viewed as a basis of
+the spanned subspace of L1
+3k(T ), which is dual to the Bernstein basis of L1
+k(T ).
+Proposition 7 (Global dual basis). There exist polynomials ψi ∈L1
+3k(T ) for all
+Lagrange nodes i ∈N with the following properties.
+(a) Product structure. For each ψi there exists a ζi ∈L1
+2k(ωi) such that
+ψi = biζi.
+In particular the support is local in the sense that supp ψi ⊂supp bi.
+(b) Biorthogonality. We have for all nodes i, j ∈N the relation
+⟨bi, ψj⟩Ω= δi,j.
+(c) Boundedness. We have the upper bounds
+∥ψi∥L∞(ωi) ≲|ωi|−1,
+∥∇ψi∥L∞(ωi) ≲diam(ωi)−1|ωi|−1.
+The hidden constant in the ﬁrst estimate depends on k and the one in the
+second estimate additionally on the shape regularity of T .
+(d) Preservation of mass. We have the identity
+X
+i∈N
+⟨1, bi⟩Ωψi = 1.
+Proof. Let us consider an arbitrary but ﬁxed T ∈T . The restriction of each global
+bi with i ∈N ∩T to T is given by bα(i,T ), where α(i, T) ∈Nd
+0 with |α| = k,
+see (10).
+Let zα ∈P2k(T) and pα ∈P3k(T) with pα = bαzα denote the local
+basis functions given by Lemma 5 transformed from bT to T. Now, we can locally
+patch these functions together to obtain global functions zi ∈L1
+2k(T (ωi)) and
+pi ∈L1
+3k(T (ωi)) with T (ωi) := {T ′ ∈T : T ⊂ωi} such that zi = zα(i,T ) and
+pi = pα(i,T ) on each T ∈T (ωi). The symmetry of the local functions with respect to
+permutations of the barycentric coordinates due to Lemma 5 ensures the continuity
+of the functions on ωi in this construction.
+Using the local properties in Lemma 5 we proceed to prove the properties of
+the functions pi and zi. By Lemma 5 (a) we have that pi = bizi and supp(pi) ⊂
+supp(bi) = ωi. This allows us to extend pi by zero to any T /∈T (ωi) and we obtain
+that pi ∈L1
+3k(T ). Using the aﬃne transformation and Lemma 5 (b) shows
+⟨bi, pj⟩T = |T|
+| bT|
+δi,j
+for all i, j ∈N and T ∈T .
+(22)
+Lemma 5 (c) yields that
+X
+i∈N
+pi = 1
+ck
+.
+(23)
+We deﬁne the rescaled functions ψi ∈L1
+3k(T ) and ζi ∈L1
+2k(T (ωi)) by
+ψi := | bT|
+|ωi|pi
+and
+ζi := | bT|
+|ωi|zi.
+
+[PDF PAGE 10]
+10
+L. DIENING, J. STORN, AND T. TSCHERPEL
+We have ψi = biζi and supp(ψi) ⊂supp(bi) = ωi, which proves (a). Furthermore,
+by (22) for all i, j ∈N we have that
+⟨bi, ψj⟩Ω= | ˆT|
+|ωj|⟨bi, pj⟩Ω= | ˆT|
+|ωj|
+X
+T ∈T (ωi∩ωj)
+|T|
+| bT|
+δi,j = δi,j.
+This proves (b). Further, (23) yields that
+X
+i∈N
+⟨1, bi⟩Ωψi =
+X
+i∈N
+| ˆT|
+|ωi|⟨1, bi⟩Ωpi = ck
+X
+i∈N
+pi = 1,
+which proves (d). Finally, a scaling argument yields the upper bounds in (c).
+□
+2.4. Construction and proof of main results. With the biorthogonal system of
+Bernstein polynomials (bi)i∈N and functions (ψi)i∈N from Proposition 7 at hand we
+are in the position to design the Scott–Zhang type interpolation operator Π0. The
+construction of Π requires an adaptation close to the boundary and we postpone
+this to Section 2.5. Recall that N denotes the set of all Lagrange nodes of L1
+k(T )
+and denote by N ◦:= N \ ∂Ωthe set of interior Lagrange nodes. We deﬁne the
+projection operator Π0 : W −1,2(Ω) →L1
+k,0(T ) by
+Π0v :=
+X
+i∈N ◦
+⟨v, ψi⟩Ωbi
+for v ∈L2(Ω).
+(24)
+Thanks to the fact that ψi ∈W 1,∞
+0
+(Ω), this operator is deﬁned on the dual space
+(W 1,∞
+0
+(Ω))∗. In particular, Π0ξ is deﬁned for any ξ ∈W −1,p(Ω) with p ∈(1, ∞).
+The L2-adjoint operator Π∗
+0 : L2(Ω) →span{ψi : i ∈N ◦} ⊂L1
+3k,0(T ) reads
+Π∗
+0v =
+X
+i∈N ◦
+⟨v, bi⟩Ωψi
+for all v ∈L2(Ω).
+(25)
+Since bi ∈W 1,∞
+0
+(Ω), this operator is also deﬁned on W −1,p(Ω) for any p ∈(1, ∞).
+Lemma 8 (Non-negative orders). The operator Π0 is a projection. Moreover, Π0
+and Π∗
+0 are locally stable in the sense that for all p ∈[1, ∞], for any 0 ≤s ≤k and
+any T ∈T we have that
+∥Π0v∥Lp(T ) ≲∥v∥Lp(ωT )
+for all v ∈Lp(Ω),
+∥∇sΠ0w∥Lp(T ) ≲∥∇sw∥Lp(ωT )
+for all w ∈W 1,p
+0
+(Ω) ∩W s,p(Ω),
+∥Π∗
+0v∥Lp(T ) ≲∥v∥Lp(ωT )
+for all v ∈Lp(Ω),
+∥∇Π∗
+0w∥Lp(T ) ≲∥∇w∥Lp(ωT )
+for all w ∈W 1,p
+0
+(Ω).
+(26)
+In addition, Π0 and Π∗
+0 have the following local approximation properties for all
+p ∈[1, ∞], all T ∈T , and all w ∈W 1,p
+0
+(Ω) ∩W s,p(Ω):
+∥∇m(w −Π0w)∥Lp(T ) ≲hs−m
+T
+∥∇sw∥Lp(ωT )
+for all 0 ≤m ≤s ≤k + 1,
+∥∇m(w −Π∗
+0w)∥Lp(T ) ≲h1−m
+T
+∥∇w∥Lp(ωT )
+for m = 0, 1.
+(27)
+The adjoint operator preserves constants on interior simplices, that is,
+(Π∗
+01)|T = 1
+for all T ∈T with T ∩∂Ω= ∅.
+(28)
+
+[PDF PAGE 11]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+11
+Proof. Due to the biorthogonality of (bi)i∈N and (ψi)i∈N by Proposition 7 the
+operators Π0 and Π∗
+0 are linear projections. By Proposition 7 (d) we have
+Π∗
+01 =
+X
+i∈N ◦
+⟨1, bi⟩Ωψi = 1 −
+X
+i∈N \N ◦
+⟨1, bi⟩Ωψi.
+In particular, this shows (28). From Proposition 7 (c) we conclude
+∥ψi∥Lp′(ωi)∥bi∥Lp(ωi) ≲1
+for all p ∈[1, ∞].
+(29)
+This implies the local Lp-stability of Π0 for p ∈[1, ∞) as
+∥Π0v∥Lp(T ) ≲
+ X
+i∈N∩T
+ ∥v∥Lp(ωi)∥ψi∥Lp′(ωi)∥bi∥Lp(T )
+p
+ 1
+p
+≲∥v∥Lp(ωT ),
+and for p = ∞analogously. The same proof applies to the local Lp-stability of Π∗
+0.
+The projection property of Π0 on L1
+k,0(T ) and inverse estimates yield
+∥∇m(w −Π0w)∥Lp(T ) ≲
+inf
+wh∈L1
+k,0(T )
+ ∥∇m(w −wh)∥Lp(T ) + h−m
+T
+∥Π0(w −wh)∥Lp(T )
+
+≲
+inf
+wh∈L1
+k,0(T )
+ ∥∇m(w −wh)∥Lp(T ) + h−m
+T
+∥w −wh∥Lp(ωT )
+
+≲hs−m
+T
+∥∇sw∥Lp(ωT )
+for all 0 ≤m ≤s ≤k + 1.
+This proves the local approximation estimate of Π0 in (27) and, taking m = s, the
+local stability in (26). We continue to consider Π∗
+0. We deﬁne cT := |ωT |−1 R
+ωT w dx
+for T ∩∂Ω= ∅and cT := 0 for T ∩∂Ω̸= ∅. Since Π∗
+0cT = cT in both cases, inverse
+estimates and Friedrichs’/Poincar´e’s inequality imply that
+∥∇m(w −Π∗
+0w)∥Lp(T ) ≲∥∇m(w −cT )∥Lp(T ) + h−m
+T
+∥Π∗
+0(w −cT )∥Lp(T )
+≲∥∇m(w −cT )∥Lp(T ) + h−m
+T
+∥w −cT ∥Lp(ωT )
+≲h1−m
+T
+∥∇w∥Lp(ωT ).
+This proves the local approximation property of Π∗
+0 in (27). Taking m = 1 also the
+local Sobolev stability in (26) follows, which ﬁnishes the proof.
+□
+Remark 9 (Preservation of constants by the adjoint). To conclude optimal con-
+vergence rates in dual Sobolev spaces we have to take advantage of approximation
+properties of the adjoint operator. Such properties would automatically be satisﬁed
+by self-adjoint projection operators. However, in Section 3.1 below we argue that
+our operator cannot be self-adjoint. The weaker condition (28) cures this lack of
+self-adjointness. This weaker condition has been introduced for the lowest order
+case in [Tan13, Prop. 7.22] and has also been employed by Tantardini and Veeser
+in [TV16, Sec. 5]. Therein, they introduce for all polynomial degrees k ∈N a local
+projection with optimal approximability in W −1,2(Ω) for functions in L2(Ω). How-
+ever, they use discontinuous weight functions and consequently their operator does
+not extend to W −1,2(Ω)-functions.
+Remark 10 (Preservation of mass). Let the operator P be deﬁned as our operator
+Π0 but including the boundary nodes, i.e., Pv := P
+i∈N ⟨v, ψi⟩Ωbi. Proposition 7 (d)
+ensures that ⟨Pv, 1⟩Ω= ⟨v, 1⟩Ω, and in this sense P preserves the mass. By duality
+this property is equivalent to P ∗1 = 1 on Ω.
+
+[PDF PAGE 12]
+12
+L. DIENING, J. STORN, AND T. TSCHERPEL
+The preservation of constants by the adjoint operator Π∗
+0 in (28) is key in the
+approximation results of Π∗
+0 in Sobolev norms, see (27). Consequently, by duality it
+is the crucial ingredient in the proof of approximation properties of Π0 in negative
+Sobolev norms.
+Lemma 11 (Localization of norms). For all p ∈(1, ∞) and ξ ∈W −1,p(Ω) we have
+∥ξ −Π0ξ∥W −1,p(Ω) ≂
+ X
+j∈V
+∥ξ −Π0ξ∥p
+W −1,p(ωj)
+1/p
+,
+∥ξ −Π∗
+0ξ∥W −1,p(Ω) ≂
+ X
+j∈V
+∥ξ −Π∗
+0ξ∥p
+W −1,p(ωj)
+1/p
+.
+Proof. Let (ϕj)j∈V denote the nodal basis of L1
+1(T ), which forms a partition of
+unity. For all w ∈W 1,p′
+0
+(Ω) we use the fact that ϕj(w −Π∗
+0w) ∈W 1,p′
+0
+(ωj), the
+approximation property in (27) and the ﬁnite overlap of the patches ω2
+j to calculate
+⟨ξ −Π0ξ, w⟩Ω= ⟨ξ −Π0ξ, w −Π∗
+0w⟩Ω
+=
+X
+j∈V
+⟨ξ −Π0ξ, ϕj(w −Π∗
+0w)⟩Ω
+≤
+X
+j∈V
+∥ξ −Π0ξ∥W −1,p(ωj)∥∇(ϕj(w −Π∗
+0w))∥Lp′(ωj)
+≲
+X
+j∈V
+∥ξ −Π0ξ∥W −1,p(ωj)∥∇w∥Lp′(ω2
+j )
+≲
+ X
+j∈V
+∥ξ −Π0ξ∥p
+W −1,p(ωj)
+1/p
+∥∇w∥Lp′(Ω).
+This proves
+∥ξ −Π0ξ∥W −1,p(Ω) ≲
+ X
+j∈V
+∥ξ −Π0ξ∥p
+W −1,p(ωj)
+1/p
+.
+(30)
+The reverse estimate does not rely on the properties of the projection. Indeed, for
+any g ∈W −1,p(Ω) we ﬁnd a sequence (sj)j ∈ℓp′(V) with ∥(sj)j∥ℓp′(V) = 1 and
+wj ∈W 1,p′
+0
+(ωj) with ∥∇wj∥Lp′(ωj) = 1 such that
+ X
+j∈V
+∥g∥p
+W −1,p(ωj)
+1/p
+=
+X
+j∈V
+∥g∥W −1,p(ωj)sj =
+X
+j∈V
+⟨g, wj⟩ωj sj.
+By the fact that P
+j∈V sjwj ∈W 1,p′
+0
+(Ω) we obtain
+ X
+j∈V
+∥g∥p
+W −1,p(ωj)
+1/p
+≤∥g∥W −1,p(Ω)
+
+X
+j∈V
+sj∇wj
+
+Lp′(Ω)
+.
+Since each simplex T ∈T is covered by d + 1 nodal patches, we have
+
+X
+j∈V
+sj∇wj
+
+p′
+Lp′(Ω)
+=
+X
+T ∈T
+Z
+T
+
+X
+j∈V
+sj∇wj
+
+p′
+dx ≤(d + 1)p′/p X
+T ∈T
+X
+j∈V
+Z
+T
+|sj∇wj|p′ dx
+= (d + 1)p′/p X
+j∈V
+|sj|p′∥∇wj∥p′
+Lp′(Ω) = (d + 1)p′/p.
+
+[PDF PAGE 13]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+13
+Combining these estimates shows
+ X
+j∈V
+∥g∥p
+W −1,p(ωj)
+1/p
+≤(d + 1)1/p∥g∥W −1,p(Ω).
+(31)
+The claim for Π0 follows by (30) and choosing g = ξ −Π0ξ in (31). The statement
+for Π∗
+0 follows by exchanging the roles of Π0 and Π∗
+0 in the proof.
+□
+Related localization techniques for negative Sobolev spaces W −1,p(Ω) applied to
+residuals in a posteriori analysis are employed in [CDN12; BMV20; KV21].
+Lemma 12 (Negative order). Let p ∈(1, ∞), j ∈V, and 0 ≤s ≤k + 1. Then
+∥ξ −Π0ξ∥W −1,p(ωj) ≲∥ξ∥W −1,p(ω2
+j )
+for all ξ ∈W −1,p(Ω),
+∥v −Π0v∥W −1,p(ωj) ≲hj∥v∥Lp(ω2
+j )
+for all v ∈Lp(Ω),
+∥w −Π0w∥W −1,p(ωj) ≲hs+1
+j
+∥∇sw∥Lp(ω2
+j )
+for all w ∈W 1,p
+0
+(Ω) ∩W s,p(Ω),
+∥ξ −Π∗
+0ξ∥W −1,p(ωj) ≲∥ξ∥W −1,p(ω2
+j )
+for all ξ ∈W −1,p(Ω),
+∥v −Π∗
+0v∥W −1,p(ωj) ≲hj∥v∥Lp(ω2
+j )
+for all v ∈Lp(Ω),
+∥w −Π∗
+0w∥W −1,p(ωj) ≲h2
+j∥∇w∥Lp(ω2
+j )
+for all w ∈W 1,p
+0
+(Ω).
+(32)
+Furthermore, for all ξ ∈W −1,p(Ω) one has
+∥Π0ξ∥W −1,p(Ω) ≲∥ξ∥W −1,p(Ω)
+and
+∥Π∗
+0ξ∥W −1,p(Ω) ≲∥ξ∥W −1,p(Ω).
+(33)
+Proof. Let j ∈V and ξ ∈W −1,p(Ω). By the locality of Π0 and Π∗
+0 and (27) (with
+m = 0) for any g ∈W 1,p′
+0
+(ωj), and noting that g −Π∗
+0g ∈W 1,p′
+0
+(ω2
+j ), we obtain
+⟨ξ −Π0ξ, g⟩ωj = ⟨ξ, g −Π∗
+0g⟩Ω= ⟨ξ, g −Π∗
+0g⟩ω2
+j
+≤∥ξ∥W −1,p(ω2
+j )∥∇(g −Π∗
+0g)∥Lp′(ω2
+j ) ≲∥ξ∥W −1,p(ω2
+j )∥∇g∥Lp′(ωj).
+Taking the supremum over all g ∈W 1,p′
+0
+(ωj) with ∥∇g∥Lp′(ωj) ≤1 proves the ﬁrst
+statement in (32).
+As a consequence of Poincar´e’s inequality we have ∥g∥Lp′(ωj) ≲hj∥∇g∥Lp′(ωj)
+for all g ∈W 1,p′
+0
+(ωj). By duality we obtain
+∥v∥W −1,p(ωj) ≲hj∥v∥Lp(ωj)
+for all v ∈Lp(ωj).
+(34)
+The same holds for ωj replaced by ω2
+j , so the second claim of (32) follows from the
+ﬁrst one. Applying (34) with v := w −Π0w for w ∈W 1,p
+0
+(Ω) we obtain with (27)
+for m = 0 and s = 0, . . . , k + 1 that
+∥w −Π0w∥W −1,p(ωj) ≲hj∥w −Π0w∥Lp(ωj) ≲hs+1
+j
+∥∇sw∥Lp(ω2
+j ).
+This proves the estimates for Π0 in (32). The ones for Π∗
+0 follow in the same manner.
+
+[PDF PAGE 14]
+14
+L. DIENING, J. STORN, AND T. TSCHERPEL
+The global stability in (33) follows from the local one by the localization of the
+norm in Lemma 11. Applying those and the arguments used in (31) leads to
+∥Π0ξ∥W −1,p(Ω) ≤∥ξ −Π0ξ∥W −1,p(Ω) + ∥ξ∥W −1,p(Ω)
+≲
+ X
+j∈V
+∥ξ −Π0ξ∥p
+W −1,p(ωj)
+1/p
++ ∥ξ∥W −1,p(Ω)
+≲
+ X
+j∈V
+∥ξ∥p
+W −1,p(ω2
+j )
+1/p
++ ∥ξ∥W −1,p(Ω)
+≲∥ξ∥W −1,p(Ω).
+The same proof works for Π∗
+0.
+□
+Now Lemmas 8, 11 and 12 prove Theorems 1 and 2.
+Remark 13 (AFEM). Let bT be a reﬁnement of T .
+Then the local design of
+Π0 : L2(Ω) →L1
+k,0(T ) shows that for all ˆvh ∈L1
+k,0(bT ) one has
+Π0ˆvh = ˆvh on T
+for all T ∈bT ∩T with ωT ⊂bT ∩T .
+(35)
+In other words, the restriction Π0 : L1
+k,0(bT ) →L1
+k,0(T ) is the identity on non-reﬁned
+elements T that are surrounded by non-reﬁned elements. This is vital in the proof of
+discrete reliability for adaptive ﬁnite element schemes; cf. [CFPP14; CR17; Ste07].
+In certain situations it is possible [CKNS08, Lem. 3.6] or needed [DKS16, Lem. 4.3]
+to have equality in (35) on all unreﬁned simplices T ∈bT ∩T . The following example
+shows however that this requirement is not compatible with the key property Π∗
+01 = 1
+locally as in (28) needed for approximation results in W −1,p(Ω) as in Theorem 1.
+Let T be a triangulation of Ω= (0, 1) and let bT be a reﬁnement that results
+from the bisection of a single interval T ∈T .
+Let ˆϕ ∈L1
+1(bT ) denote the hat
+function related to the new node ℓ= mid(T), that is, ˆϕ(i) = 0 for all nodes i ∈N
+and ˆϕ(ℓ) = 1. Then any operator ˜Π: W 1,p
+0
+(Ω) →L1
+1,0(T ) with ˜Π ˆϕ = ˆϕ on all
+T ∈bT ∩T must satisfy ˜Π ˆϕ = 0. This yields 0 = ⟨˜Π ˆϕ, 1⟩Ω= ⟨ˆϕ, ˜Π∗1⟩Ωand thus
+shows that ˜Π∗1 ̸= 1.
+2.5. Boundary correction for Π. Since Π0 maps to L1
+k,0(T ) the stability esti-
+mate ∥∇Π01∥L2(Ω) ≲∥∇1∥L2(Ω) = 0 cannot hold and requires a modiﬁcation of our
+operator. In this subsection we show how to obtain the stability and approximation
+estimates of Theorem 1 for functions without zero trace.
+Let (ϕj)j∈V denote the nodal basis of L1
+1(T ) and deﬁne η := P
+j∈V◦ϕj ∈L1
+1,0(T ),
+then η is one on all interior elements and zero on the boundary. The Riesz rep-
+resentation theorem yields that for any boundary node i ∈N \ N ◦there exists a
+function ρi ∈span{bℓ: ℓ∈N ∩ωi} ⊂L1
+k(T ) with
+⟨biηρi, bℓ⟩Ω= ⟨ψi, bℓ⟩Ω
+for all ℓ∈N ∩ωi.
+(36)
+This allows us to replace any function ψi, which is non-zero on the boundary, by
+the equivalent weight biηρi ∈L1
+2k+1,0(T ). Hence, we deﬁne
+eψi :=
+(
+ψi
+for all i ∈N ◦:= N \ ∂Ω,
+biηρi
+for all i ∈N \ N ◦.
+(37)
+
+[PDF PAGE 15]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+15
+Proposition 14 (Modiﬁed dual basis). The polynomials eψi ∈L1
+3k,0(T ) for i ∈N
+have the following properties.
+(a) Product structure. For each eψi there exists a eζi ∈L1
+2k(ωi) such that
+eψi = bieζi.
+In particular the support is local in the sense that supp eψi ⊂supp bi.
+(b) Biorthogonality. We have for all nodes i, j ∈N the relation
+⟨bi, eψj⟩Ω= δi,j.
+(c) Boundedness. We have the upper bounds
+∥eψi∥L∞(ωi) ≲|ωi|−1,
+∥∇eψi∥L∞(ωi) ≲diam(ωi)−1|ωi|−1.
+The hidden constants depend on k and the shape regularity of T .
+(d) Preservation of mass on interior elements. We have the identity
+X
+i∈N
+⟨1, bi⟩Ωeψi|T = 1
+for all T ∈T with T ∩∂Ω= ∅.
+Proof. This result follows by Proposition 7 and scaling arguments.
+□
+We deﬁne the modiﬁcation of Π0 as Π: L2(Ω) →L1
+k(Ω) with
+Πv :=
+X
+i∈N
+⟨v, eψi⟩Ωbi
+for all v ∈L2(Ω).
+(38)
+In contrast to the deﬁnition of Π0 the sum includes boundary nodes. Again, since
+eψi ∈W 1,∞
+0
+(Ω), the operator Π extends to an operator on W −1,p(Ω) with p ∈(1, ∞).
+The L2-adjoint Π∗: L2(Ω) →L1
+3k,0(T ) reads
+Π∗v =
+X
+i∈N
+⟨v, bi⟩Ωeψi
+for all v ∈Lp(Ω).
+(39)
+Since the Bernstein polynomials bi for i ∈∂Ωdo not have zero boundary traces,
+Π does not map onto functions with zero trace. Hence, we can extend Π∗only
+to L1(Ω)-functions. On the other hand, by Proposition 14 (b) Π is a projection onto
+L1
+k(T ). Using this additional property together with properties in Proposition 14
+(which are similar to the ones in Proposition 7) in the proofs of Section 2.4 leads
+to the statements for Π in Theorems 1 and 2.
+Remark 15 (Zero trace on part of the boundary). A modiﬁcation of our design
+leads to a projection operator onto L1
+k,Γ(T ) := {vh ∈L1
+k(T ): vh|Γ = 0}, where
+Γ ⊂∂Ωdenotes a part of the boundary that is resolved by the triangulation. The
+resulting operator has the approximation properties displayed in Theorem 1, where
+we can even replace the space W 1,q
+0
+(Ω) by W 1,q
+Γ (Ω) := {v ∈W 1,q(Ω): v|Γ = 0}.
+3. Alternative operators
+In this section we discuss alternative operators deﬁned on W −1,2(Ω) mapping to
+L1
+k,0(T ) that share some of the properties of the projection Π0. We are interested in
+operators that are self-adjoint, projections, local, and have approximation proper-
+ties. Note that the operator Π0 has all those properties except of being self-adjoint.
+However, it is not possible to add this property, without giving up one of the others,
+see Lemma 16. In the following sections we present selected operators that satisfy
+some but not all of the properties mentioned.
+
+[PDF PAGE 16]
+16
+L. DIENING, J. STORN, AND T. TSCHERPEL
+3.1. Self-adjoint and projection. We start by noting that there is only one self-
+adjoint projection onto L1
+k,0(T ), namely the L2-projection Π2 determined by
+⟨Π2v, wh⟩Ω= ⟨v, wh⟩Ω
+for all v ∈L2(Ω) and wh ∈L1
+k,0(T ).
+(40)
+Lemma 16 (Uniqueness). Every self-adjoint projection P : L2(Ω) →L1
+k,0(T ) is
+the L2-projection Π2.
+Proof. Let P : L2(Ω) →L1
+k,0(T ) be a self-adjoint projection. We have
+⟨Pv, wh⟩Ω= ⟨v, Pwh⟩Ω= ⟨v, wh⟩Ω
+for all v ∈L2(Ω), wh ∈L1
+k,0(T ).
+This deﬁnes the L2-projection to L1
+k,0(T ) and hence we have that P = Π2.
+□
+Since L1
+k,0(T ) ⊂W 1,p′
+0
+(Ω) the L2-projection Π2 extends to ξ ∈W −1,p(Ω) for
+any p ∈(1, ∞). Due to its global deﬁnition the L2-projection is not local. This
+means that the support of the projection of a local function is in general global.
+Nevertheless, this operator is useful in some situations. For uniform meshes, as
+well as for certain graded meshes, the L2-projection is W 1,p
+0
+(Ω)-stable and thus by
+duality also stable in W −1,p(Ω). This includes a wide class of adaptively generated
+meshes, for example meshes generated by the newest vertex bisection, see [CT87;
+BPS02; Car02; GHS16; BY14; DST21] for more details. Note that W 1,2-stability
+fails for general graded meshes, as shown by Bank and Yserentant [BY14, Sec. 7].
+3.2. Self-adjoint and local. In this subsection we focus on self-adjoint and local
+operators. Both properties are very useful for the numerical analysis of various
+problems. The lowest order case k = 1 is considered for example in [Car99; CV99;
+BPV00; MP14] featuring the operator I : L1(Ω) →L1
+1,0(T ) with
+Iv :=
+X
+i∈N ◦
+⟨v, bi⟩Ω
+⟨1, bi⟩Ω
+bi
+for all v ∈L1(Ω).
+(41)
+The operator is W 1,2
+0
+(Ω)-stable, and therefore by duality also W −1,2(Ω)-stable. It
+has the approximation property
+∥w −Iw∥L2(T ) ≲h∥∇w∥L2(ωT )
+for all w ∈W 1,2
+0
+(Ω) and T ∈T .
+Since I is not a projection, it does not preserve linear functions and consequently
+one has in general a reduced maximal order of convergence in the sense that
+∥w −Iw∥L2(T ) ̸≲h2∥∇2w∥L2(ωT )
+for w ∈W 1,2
+0
+(Ω) ∩W 2,2(Ω) and T ∈T .
+The local self-adjoint operator I was generalized to polynomial degrees k ∈N in
+[DST21, Eq. 3.4], which we discuss in the following. We restrict the presentation
+to the case of zero boundary traces, since in this case the self-adjoint operator
+extends to a mapping on W −1,2(Ω) = (W 1,2
+0
+(Ω))∗. The design of I for k ∈N is
+based on local weighted projections. Let V denote the set of vertices in T and
+let ϕj ∈L1
+1(T ) denote the nodal basis function associated to the vertex j ∈V
+and ωj = supp(ϕj) ⊂Ω.
+For j ∈V and vk−1 ∈L1
+k−1(T (ωj)) we denote by
+ϕjvk−1 ∈L1
+k(T ) the function where we extend vk−1 outside of ωj by zero. We set
+for all j ∈V the space of local Lagrange functions with zero boundary traces on
+the boundary ∂Ωby
+L1
+k−1,∂Ω(T (ωj)) := {vk−1 ∈L1
+k−1(T (ωj)): ϕjvk−1 ∈L1
+k,0(T )}.
+(42)
+
+[PDF PAGE 17]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+17
+Let Ij : L2(ωj) →L1
+k−1,∂Ω(T (ωj)) with j ∈V denote the orthogonal projection
+with respect to the weighted inner product ⟨•, •⟩ϕj := ⟨ϕj •, •⟩ωj. By the deﬁnition
+in (42) we have ϕjL1
+k−1,∂Ω(T (ωj)) ⊂L1
+k,0(T ). Hence the mapping Ij extends to
+an operator on W −1,p(Ω) mapping to L1
+k−1,∂Ω(T (ωj)) deﬁned by
+⟨Ijξ, vk−1⟩ϕj = ⟨ξ, vk−1⟩ϕj
+for all ξ ∈W −1,p(Ω), vk−1 ∈L1
+k−1,∂Ω(T (ωj)).
+(43)
+The combination of the local operators Ij leads to the operator
+I : W −1,p(Ω) →L1
+k,0(T )
+with
+I :=
+X
+j∈V
+ϕjIj.
+(44)
+Notice that for k = 1 this operator coincides with the operator deﬁned in (41).
+Lemma 17 (Properties of I). The operator I satisﬁes the following properties.
+(a) It is linear and self-adjoint with respect to ⟨•, •⟩Ω.
+(b) It is L2-elliptic on L1
+k,0(T ) in the sense that for all vh ∈L1
+k,0(T )
+k
+2k + d ∥vh∥2
+L2(Ω) ≤⟨Ivh, vh⟩Ω≤∥vh∥2
+L2(Ω),
+k
+2k + d ∥vh∥L2(Ω) ≤∥Ivh∥L2(Ω) ≤∥vh∥L2(Ω).
+(c) One has ∥Iv∥L2(Ω) ≤∥v∥L2(Ω) for all v ∈L2(Ω).
+(d) It is the identity on L1
+k−1,0(T ).
+(e) The diﬀerence Id −I is orthogonal on L1
+k−1,0(T ), that is,
+⟨ξ −Iξ, vk−1⟩Ω= 0
+for all ξ ∈W −1,p(Ω) and vk−1 ∈L1
+k−1,0(T ).
+(f) It is local in the sense that for all T ∈T and v ∈Lp(Ω) one has
+supp
+ I(v1T )
+
+⊂ωT .
+(g) It satisﬁes IΠ2 = I = Π2I, where Π2 is L2-projection to L1
+k,0(T ) as in (40).
+(h) The operator I preserves constants on interior simplices, that is,
+(I1)|T = 1
+for all T ∈T with T ∩∂Ω= ∅.
+Proof. The proof of (a)–(g) is presented in [DST21, Sec. 3]. For the proof of (h) note
+that L1
+k−1,∂Ω(T (ωj)) = L1
+k−1(T (ωj)) for any j ∈V◦. Then the claim follows from
+Ij1 = 1 for all j ∈V◦and (P
+j∈V◦ϕj)|T = 1 for T ∈T such that T ∩∂Ω= ∅.
+□
+Theorem 18 (Interpolation error). Let k ∈N be arbitrary. The operator I has
+the following properties, for any j ∈V and T ∈T :
+Localization of norms. For p ∈(1, ∞) there holds
+∥ξ −Iξ∥W −1,p(Ω) ≂
+ X
+j∈V
+∥ξ −Iξ∥p
+W −1,p(ωj)
+1/p
+for all ξ ∈W −1,p(Ω).
+(45)
+Approximabilty. For p ∈(1, ∞), q ∈[1, ∞] and 0 ≤m ≤s ≤k one has
+∥v −Iv∥W −1,p(ωj) ≲hj∥v∥Lp(ω2
+j )
+for all v ∈Lp(Ω),
+∥w −Iw∥W −1,p(ωj) ≲hs+1
+j
+∥∇sw∥Lp(ω2
+j )
+for all w ∈W 1,p
+0
+(Ω) ∩W s,p(Ω),
+∥∇m(w −Iw)∥Lq(T ) ≲hs−m
+T
+∥∇sw∥Lq(ωT )
+for all w ∈W 1,q
+0
+(Ω) ∩W s,q(Ω).
+(46)
+
+[PDF PAGE 18]
+18
+L. DIENING, J. STORN, AND T. TSCHERPEL
+Local Stability. For p ∈(1, ∞), q ∈[1, ∞] and 0 ≤s ≤k there holds
+∥Iξ∥W −1,p(ωj) ≲∥ξ∥W −1,p(ω2
+j )
+for all ξ ∈W −1,p(Ω),
+∥Iv∥Lq(T ) ≲∥v∥Lq(ωT )
+for all v ∈Lq(Ω),
+∥∇sIw∥Lq(T ) ≲∥∇sw∥Lq(ωT )
+for all w ∈W 1,q
+0
+(Ω) ∩W s,q(Ω).
+(47)
+Global Stability. For p ∈(1, ∞), q ∈[1, ∞] and 0 ≤s ≤k one has
+∥Iξ∥W −1,p(Ω) ≲∥ξ∥W −1,p(Ω)
+for all ξ ∈W −1,p(Ω),
+∥Iv∥Lq(Ω) ≲∥v∥Lq(Ω)
+for all v ∈Lq(Ω),
+∥∇sIw∥Lq(Ω) ≲∥∇sw∥Lq(Ω)
+for all w ∈W 1,q
+0
+(Ω) ∩W s,q(Ω).
+(48)
+The hidden constants are independent of p and q.
+Proof. We start with the veriﬁcation of the Lq-stability in (48). Let v ∈L∞(Ω).
+By the deﬁnition in (44) we obtain
+∥Iv∥L∞(Ω) ≤
+
+X
+j∈V
+ϕj∥Ijv∥L∞(ωj)
+
+L∞(Ω) ≤max
+j∈V ∥Ijv∥L∞(ωj).
+Let j ∈V. Then by an inverse estimate and the shape regularity of T we have that
+∥Ijv∥L∞(ωj) =
+max
+T ∈T (ωj) ∥Ijv∥L∞(T ) ≲|ωj|−1/2
+X
+T ∈T (ωj)
+∥ϕ1/2
+j
+Ijv∥2
+L2(T )
+1/2
+.
+Due to (43) the sum can be bounded as
+X
+T ∈T (ωj)
+∥ϕ1/2
+j
+Ijv∥2
+L2(T ) = ⟨Ijv, v⟩ϕj ≤∥Ijv∥L∞(Ω)∥v∥L∞(Ω)|ωj|.
+Combining the previous three estimates shows
+∥Iv∥L∞(Ω) ≲∥v∥L∞(Ω).
+For q ∈[1, ∞] we conclude global Lq-stability by interpolation with the L2-stability,
+see Lemma 17 (c), and duality. By locality of I the local Lq-estimates in (47) follow.
+The remaining statements of the theorem follow with similar arguments as in the
+proof of Theorem 1 for Π0 in Section 2.4 using the local Lp-stability and Lemma 17.
+The reduced maximal order of approximability s ≤k in (46) is due the fact that I
+only preserves functions in L1
+k−1,0(T ) but not functions in L1
+k,0(T ).
+□
+3.3. Locality and projection. Our operators Π0 and Π as well as further Scott–
+Zhang type operators like the ones in [SZ90; TV16] are local projections that are
+not self-adjoint. While the latter operators use discontinuous polynomial weights,
+we use continuous weight functions to ensure that the operator is well-deﬁned on
+functionals in W −1,2(Ω). Yet, the polynomial degree 3k of our weights is much
+higher than the polynomial degree k of the discontinuous weights. A natural ques-
+tion to ask is whether it is possible to reduce the polynomial order of the continuous
+weight functions and obtain a local projection with properties as in Theorem 1. In
+the following we argue that we need L1
+k+1,0(T ) weights to ensure locality of the
+projection. Furthermore, we illustrate that projections with similar locality and
+W −1,2-approximation properties as Π0 require even larger degrees than k + 1. In
+particular, we show that the degree 3k is optimal for k = 1 = d.
+
+[PDF PAGE 19]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+19
+Let P : L2(Ω) →L1
+k,0(T ) be a linear and bounded operator. As a consequence
+of the Riesz representation theorem, there exist unique weights ρi ∈L2(Ω) with
+i ∈N ◦such that P has a representation in terms of the Bernstein basis
+Pv =
+X
+i∈N ◦
+⟨v, ρi⟩Ωbi.
+(49)
+The adjoint operator P ∗: L2(Ω) →L2(Ω) reads
+P ∗w =
+X
+i∈N ◦
+⟨w, bi⟩Ωρi.
+(50)
+Lemma 19 (Projection). Let P : L2(Ω) →L1
+k,0(T ) be a linear bounded operator
+with the representation in (49). If P is a projection, then one has that
+⟨ρi, bj⟩Ω= δi,j
+for all i, j ∈N ◦.
+Furthermore, trivially P ∗is a projection onto the span of {ρi : i ∈N ◦}.
+Proof. Since P is a projection, we have for all j ∈N ◦that
+Pbj =
+X
+i∈N ◦
+⟨bj, ρi⟩Ωbi = bj.
+Because (bi)i∈N ◦is a basis, this implies that ⟨bj, ρi⟩Ω= δi,j for any i, j ∈N ◦.
+□
+The following lemma is a stronger version of Lemma 16 showing that any pro-
+jection with same order continuous weights is the L2-projection.
+Since the L2-
+projection is not local this implies that a projection to L1
+k,0(T ) cannot be local
+when it has weight functions of the same polynomial degree k.
+Lemma 20 (Same order weights). Let P : L2(Ω) →L1
+k,0(T ) be a projection onto
+L1
+k,0(T ) with weights ρi ∈L1
+k,0(T ) in (49). Then P is the L2-projection Π2 in (40).
+Proof. Let P : L2(Ω)→L1
+k,0(T ) be a projection with representation as in (49) and
+weights ρi ∈L1
+k,0(T ). Since the functions (bi)i∈N ◦form a basis of L1
+k,0(T ), the
+biorthogonality in Lemma 19 implies that also the functions (ρi)i∈N ◦form a basis
+of L1
+k,0(T ). Thus, the adjoint operator P ∗as represented in (50) is a projection
+onto L1
+k,0(T ). Hence, for any v ∈L2(Ω) and any wh ∈L1
+k,0(T ) we ﬁnd that
+⟨v −Pv, wh⟩Ω= ⟨v, wh −P ∗wh⟩Ω= 0.
+This is exactly the deﬁnition of the L2-projection and thus ﬁnishes the proof.
+□
+It is possible to construct a local projection with weight functions in L1
+k+1,0(T )
+as the following remark shows.
+Remark 21 (k+1 weights). For given polynomial degree k ≥1 let Π0 be our W −1,2-
+stable projection deﬁned in (24) and Ik+1 the interpolation operator deﬁned in (44)
+mapping to L1
+k+1,0(T ).
+Then Π0 and Ik+1 are both W −1,2-stable and preserve
+L1
+k,0(T )-functions. Thus, the composition Π0 ◦Ik+1 is a projection onto L1
+k,0(T )
+which is W −1,2-stable. The weights of Ik+1 are L1
+k+1,0(T )-functions, so the weights
+of Π0 ◦Ik+1 are also L1
+k+1,0(T )-functions with increased support. For the operator
+Π0 ◦Ik+1 we obtain similar properties as in Theorem 1 but with ω2
+i replaced by ω3
+i .
+
+[PDF PAGE 20]
+20
+L. DIENING, J. STORN, AND T. TSCHERPEL
+Remark 22 (Alternative weights). Further suitable weight functions with slightly
+enlarged support have been designed in [SV20]. The authors’ approach relies on an
+element bubble correction. For the weight functions one can use for example func-
+tions in L1
+k+d+1(T ) or weight functions in L1
+k+1(T ′), where T ′ is a full barycentric
+reﬁnement of T .
+The resulting projection operator eΠ is local in the sense that
+supp(eΠ(v1T )) ⊂ω2
+T for any T ∈T . Hence it has the same locality property as the
+operator in Remark 21 but uses higher polynomial degrees for the weight functions.
+The operator in the previous remark is not as local as the projection operator
+Π0 with weights of degree 3k. The following remark shows that for the special case
+of k = d = 1 one cannot take a lower polynomial degree for an operator as local
+as Π0 such that its adjoint preserving constants on interior simplices. Recall that
+the latter is a key in the proof of Theorem 1. In particular, it does not suﬃce to
+choose weights of polynomial degree k + 1.
+Remark 23 (Increased order, d = k = 1). We consider a regular triangulation that
+contains the interior simplex T = [0, 1]. Assume that there are weight functions
+ρ0, ρ1 ∈L1
+2,0(T ) which satisfy that ρi(j) = 0, if i ̸= j, to ensure the locality. This
+requirement and symmetry show that on T the weights ρ0 and ρ1 are of the form
+ρ0 = λ0(sλ0 + tλ1)
+and
+ρ1 = λ1(sλ1 + tλ0)
+for some s, t ∈R.
+The property Π∗1 = 1 requires ρ0 +ρ1 = c−1
+k
+= 2 on T, which determines s = 1 and
+t = 2. It follows that ⟨ρ0, b1⟩Ω= ⟨ρ0, λ1⟩T > 0. This contradicts the biorthogonality
+in Lemma 5 (b).
+4. Applications
+This section contains applications of the projections Π and Π0 to illustrate their
+beneﬁcial properties. We investigate a semi- and a full discretization of the heat
+equation as well as a least squares ﬁnite element method with rough given data.
+4.1. Interpolation in semi-discrete time marching schemes. We consider
+the heat equation on a bounded time space cylinder Q = J ×Ωwith bounded time
+interval J = (0, T) and a bounded Lipschitz domain Ω⊂Rd. For given right-hand
+side f : Q →R and initial data u0 : Ω→R we aim to ﬁnd a function u satisfying
+∂tu −∆xu = f
+in Q,
+u(0, •) = u0
+in Ω,
+(51)
+u = 0
+on J × ∂Ω.
+With the standard notation for Bochner spaces we assume that f ∈L2(J ; W −1,2(Ω))
+and u0 ∈L2(Ω). The unique weak solution can be found in the space
+V := L2(J ; W 1,2
+0
+(Ω)) ∩W 1,2(J ; W −1,2(Ω)).
+(52)
+In the following we consider a semi-discretization in time.
+More speciﬁcally,
+for a regular partition Tx of Ωinto closed simplices our semi-discrete ansatz space
+reads Vhx := W 1,2(J ; L1
+k,0(Tx)) ⊂V . Let Π2 : L2(Ω) →L1
+k,0(Tx) denote the L2-
+orthogonal projection mapping to L1
+k,0(Tx). Then the discrete solution uh ∈Vhx
+satisﬁes uh(0, •) = Π2u0 and for all wh ∈L1
+k,0(Tx) and for a.e. s ∈J
+⟨∂tuh(s), wh⟩Ω+ ⟨∇xuh(s), ∇xwh⟩Ω= ⟨f(s), wh⟩Ω.
+(53)
+
+[PDF PAGE 21]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+21
+While classical error analysis for such problems treats rate-optimality, see [Tho06],
+more recent results include also quasi-optimality of the semi-discrete approximation.
+In [CH02, Thm. 3.4] and [TV16, Thm. 3.10] the authors prove that under the
+(necessary) assumption that the L2-projection Π2 is W 1,2
+0
+(Ω)-stable it holds that
+∥∇x(u −uh)∥2
+L2(J ;L2(Ω)) + ∥∂t(u −uh)∥2
+L2(J ;W −1,2(Ω))
+≲
+min
+vh∈Vhx
+
+∥∇x(u −vh)∥2
+L2(J ;L2(Ω)) + ∥∂t(u −vh)∥2
+L2(J ;W −1,2(Ω))
+
+.
+(54)
+Refer to Section 3.1 for details on Π2 and its W 1,2
+0
+(Ω)-stability. The properties
+of our projection Π0, as introduced in Section 2, allow us to reprove the following
+error estimate in [TV16, Eq. 5.10]. Let Vx denote the set of vertices in Tx.
+Theorem 24 (A priori error estimate). If Π2 is W 1,2
+0
+(Ω)-stable, then for the so-
+lution u to (51) and the semi-discrete solution uh to (53) and all r = 1, . . . , k + 1
+and s = 0, . . . , k + 1 one has that
+∥∇x(u −uh)∥2
+L2(J ;L2(Ω)) + ∥∂t(u −uh)∥2
+L2(J ;W −1,2(Ω))
+≲
+X
+j∈Vx
+
+h2(r−1)
+j
+∥∇r
+xu∥2
+L2(J ;L2(ω2
+j )) + h2(s+1)
+j
+∥∂t∇s
+xu∥2
+L2(J ;L2(ω2
+j ))
+
+.
+Proof. For any v ∈V we denote by Π0v ∈L2(J ; L1
+kx(Tx)) the pointwise in time
+application of the projection operator Π0, introduced in Section 2. For smooth
+functions v ∈V we obtain the commutation property ∂tΠ0v = Π0∂tv. Due to
+density and the W −1,2-stability in Theorem 1 this extends to arbitrary functions
+v ∈V . With the best approximation property (54) with vh := Πu, the commutation
+property, and the interpolation error estimates in Theorem 1 the claim follows.
+□
+Remark 25 (Fractional orders). Using fractional estimates for our interpolation
+operator (see Remark 3) allows us to extend the result of Theorem 24 to fractional
+orders, similarly as in [Tan13, Prop. 7.27] for polynomial degree k = 1.
+4.2. Interpolation on tensor meshes in space-time domains. So-called space-
+time ﬁnite element methods constitute an alternative to time-marching schemes for
+parabolic problems. Space-time methods treat the time as an additional spatial
+dimension and apply techniques known from time-independent problems, see for
+example [Ste15; LMN16; SW21; DS22]. The resulting schemes are quasi-optimal
+and hence we can bound the best-approximation error from above by an interpola-
+tion error. This results in optimal rates of convergence for the numerical schemes
+and motivates adaptive mesh reﬁnement. However, existing interpolation opera-
+tors as in [FK21, Sec. 4.1] or [Ste15, Cor. 3.4] require smooth solutions and are not
+stable with respect to the norm in the space V given by
+∥•∥V := ∥∂t•∥L2(J ;W −1,2(Ω)) + ∥∇x•∥L2(J ;L2(Ω)).
+We remedy this diﬃculty for discrete tensor product subspaces. Let Tt denote a
+partition of the time interval J into closed intervals and let Tx denote a regular
+partition of the domain Ωinto closed simplices. The tensor product mesh Q :=
+Tt ⊗Tx consists of closed time-space cells K = Kt × Kx with Kt ∈Tt and Kx ∈Tx.
+For polynomial degrees kt, kx ∈N the discrete tensor product subspace is given by
+Vh := L1
+kt(Tt) ⊗L1
+kx,0(Tx) ⊂V.
+(55)
+
+[PDF PAGE 22]
+22
+L. DIENING, J. STORN, AND T. TSCHERPEL
+In other words, each element vh ∈Vh is a continuous piecewise polynomial function.
+More speciﬁcally, for each time-space cell K = Kt × Kx ∈Q there are polynomials
+vt ∈Pkt(Kt) and vx ∈Pkx(Kx) with vh|K = vtvx. Similarly, we deﬁne the time-
+discrete space by
+Vht := L1
+kt(Tt) ⊗L2(Ω) ⊂V.
+Let Πt : L2(J ) →L1
+kt(Tt) denote the 1D Scott–Zhang type interpolation operator
+deﬁned in (24) without zero boundary traces. More precisely, let bt,i ∈L1
+kt(Tt)
+denote the Bernstein basis functions associated to the Lagrange node i ∈Nt of Tt
+and let ψt,i ∈L1
+3kt(Tt) denote the biorthogonal basis functions designed in Section 2.
+Then the operator reads
+Πtvt :=
+X
+i∈Nt
+⟨vt, ψt,i⟩J bt,i
+for all vt ∈L2(J ).
+We extend this operator to a mapping Πt : L2(J ; L2(Ω)) →Vht deﬁned by
+Πtv =
+X
+i∈Nt
+⟨v, ψt,i⟩J bt,i
+for all v ∈L2(J ; L2(Ω)).
+(56)
+Let ωKt = S{K′
+t ∈Tt : Kt ∩K′
+t ̸= ∅} denote the element patch with respect to the
+partition in time for all Kt ∈Tt. We assume that Tt is shape regular in the sense
+that we have for all T ∈Tt the equivalence hKt := |Kt| ≂|ωKt|.
+Theorem 26 (Interpolation in time). Let X denote the space W −1,2(ω) with ω ⊂Ω
+or L2(Kx) with Kx ∈Tx. The projection Πt : L2(J ; L2(Ω)) →Vht deﬁned in (56)
+satisﬁes for all v ∈V , all m, s ∈N0 with 0 ≤m ≤s ≤kt + 1, and all Kt ∈Tt
+∥∂m
+t (v −Πtv)∥L2(Kt;X) ≲hs−m
+Kt
+∥∂s
+t v∥L2(ωKt;X).
+(57)
+Proof. Let X be deﬁned as in the theorem. Let v ∈W s,2(I; X) for some s ∈N0,
+let m ∈N0 with m ≤s, and let τ ∈Kt ∈Tt. The deﬁnition of Πt in (56) yields
+∂m
+t Πtv(τ) =
+X
+i∈Nt
+⟨v, ψt,i⟩J ∂m
+t bt,i(τ) =
+X
+i∈Nt∩Kt
+⟨v, ψt,i⟩J ∂m
+t bt,i(τ).
+Hence, Jensen’s inequality, supp(ψt,i) ⊂ωt,i := supp(bt,i), and the fact that by
+Proposition 7 we have ∥ψt,i∥L2(ωt,i) ≲|Kt|−1/2, yield
+∥∂m
+t Πtv(τ)∥X ≤
+X
+i∈Nt∩Kt
+Z
+J
+∥v(σ)∥X|ψt,i(σ)| dσ |∂m
+t bt,i(τ)|
+≲|Kt|−m
+X
+i∈Nt∩Kt
+Z
+ωt,i
+∥v(σ)∥X|ψt,i(s)| ds
+≤|Kt|−m
+X
+i∈Nt∩Kt
+∥v∥L2(ωt,i;X)∥ψt,i∥L2(ωt,i)
+≲|Kt|−m|Kt|−1/2∥v∥L2(ωKt;X).
+Integrating over Kt results in
+∥∂m
+t Πtv∥L2(Kt;X) ≲|Kt|−m∥v∥L2(ωKt;X).
+(58)
+
+[PDF PAGE 23]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+23
+We use the averaged Taylor polynomial T ktv ∈Pkt(Kt) ⊗X of degree kt in
+Bochner spaces. The deﬁnition and approximation properties of T kt are presented
+in Lemma 33 below. From this and the inequality in (58) it follows that
+∥∂m
+t (v −Πtv)∥L2(Kt;X)
+≤∥∂m
+t (v −T ktv)∥L2(Kt;X) + ∥∂m
+t Πt(v −T ktv)∥L2(Kt;X)
+≲|Kt|s−m∥∂s
+t v∥L2(ωKt;X)
+for all s = m, . . . , kt + 1.
+□
+In addition to an interpolation operator in time we now want to apply an interpo-
+lation operator Πx : V →Vhx := L2(J ) ⊗L1
+kx,0(Tx) in space. This operator results
+from applying the projection Π: W −1,2(Ω) →L1
+kx,0(Tx) deﬁned in (24) pointwise
+in time. More precisely, let bx,i ∈L1
+kx,0(Tx) denote the Bernstein basis function
+and let ψx,i ∈L1
+3kx,0(Tx) denote the biorthogonal basis deﬁned in Section 2 for all
+interior Lagrange nodes i ∈N ◦
+x of Tx. The interpolation operator in space reads
+Πxv =
+X
+i∈N ◦
+x
+⟨v, ψx,i⟩Ωbx,i
+for all v ∈V.
+(59)
+The composition of both operators Π⊗:= ΠtΠx : V →Vh reads
+Π⊗v =
+X
+i∈Nt
+X
+j∈N ◦
+x
+Z
+J
+⟨v(s), ψt,i(s)ψx,j⟩Ωds bt,ibx,j
+for all v ∈V.
+(60)
+Lemma 27 (Commutation). The interpolation operators satisfy for all functions
+ξ ∈W 1,2(J ; W −1,2(Ω)), v ∈L2(J ; W 1,2
+0
+(Ω)), and w ∈V
+∂tΠxξ = Πx∂tξ,
+∇xΠtv = Πt∇xv,
+ΠtΠxw = ΠxΠtw.
+(61)
+Proof. For smooth functions the commutation properties follow directly from the
+identities in (56), (59), and (60). For general functions in the respective function
+spaces the identities follow by density arguments and the stability properties of Πt
+and Πx according to Theorem 1.
+□
+The properties of Πx and Πt lead to the following stability result.
+Theorem 28 (Stability). We have for all v ∈V , K = Kt×Kx ∈Q, and m, ℓ∈N0
+∥∂m
+t ∇ℓ
+xΠ⊗v∥L2(Kt;L2(Kx)) ≲∥∂m
+t ∇ℓ
+xv∥L2(ωKt;L2(ωKx)),
+∥∂m
+t Π⊗v∥L2(Kt;W −1,2(Ω)) ≲∥∂m
+t v∥L2(ωKt;W −1,2(Ω)).
+Proof. Let v ∈V and let m, ℓ∈N0. By the stability properties of Πx in Theorem 1
+and Πt in Theorem 26 using the commutation properties in Lemma 27 we have that
+∥∂m
+t Π⊗v∥L2(Kt;W −1,2(Ω)) = ∥∂m
+t ΠtΠxv∥L2(Kt;W −1,2(Ω))
+≲∥∂m
+t Πxv∥L2(ωKt;W −1,2(Ω)) = ∥Πx∂m
+t v∥L2(ωKt;W −1,2(Ω)) ≲∥∂m
+t v∥L2(ωKt;W −1,2(Ω)).
+A similar calculation leads to local stability in the L2-norms.
+□
+The approximation properties of Πx and Πt result in the following estimates.
+Let Vx denote the set of vertices in Tx and let ωx,j := S{T ∈Tx : j ∈T} and
+ω2
+x,j := S{T ∈Tx : T ∩ωx,j ̸= ∅} denote the spatial nodal patches for j ∈Vx.
+
+[PDF PAGE 24]
+24
+L. DIENING, J. STORN, AND T. TSCHERPEL
+Theorem 29 (Approximation on tensor meshes). We have for all v ∈V , all time-
+space cells K = Kt × Kx ∈Q, and all integers 0 ≤m ≤s ≤kt + 1 the estimate
+∥∂m
+t (v −Π⊗v)∥L2(Kt;W −1,2(Ω)) ≲hs−m
+Kt
+∥∂s
+t v∥L2(ωKt;W −1,2(Ω))
++
+ X
+j∈Vx
+∥∂m
+t v −Πx∂m
+t v∥2
+L2(ωKt;W −1,2(ωx,j))
+1/2
+.
+(62)
+The local interpolation error in space with vertex j ∈V are bounded for integers
+0 ≤r ≤kx + 1 by
+∥∂m
+t v −Πx∂m
+t v∥L2(ωKt;W −1,2(ωx,j)) ≲∥∂m
+t v∥L2(ωKt;W −1,2(ω2
+x,j)),
+∥∂m
+t v −Πx∂m
+t v∥L2(ωKt;W −1,2(ωx,j)) ≲hr+1
+Kx ∥∂m
+t ∇r
+xv∥L2(ωKt;L2(ω2
+x,j)).
+(63)
+Furthermore, we have the local L2-estimate for all integers 0 ≤m ≤s ≤kt + 1 and
+0 ≤ℓ≤r ≤kx + 1 as
+∥∂m
+t ∇ℓ
+x(v −Π⊗v)∥L2(Kt;L2(Kx))
+≲hs−m
+Kt
+∥∂s
+t ∇ℓ
+xv∥L2(ωKt;L2(Kx)) + hr−ℓ
+Kx ∥∂m
+t ∇r
+xv∥L2(ωKt;L2(ωKx)).
+(64)
+Proof. Let v ∈V and let Kt ∈Tt. The local estimates in (63) follow directly by
+Theorem 1. The triangle inequality yields with δ := v −Πtv that
+∥∂m
+t (v −Π⊗v)∥L2(Kt;W −1,2(Ω)) ≤∥∂m
+t (v −Πxv)∥L2(Kt;W −1,2(Ω))
++ ∥∂m
+t (v −Πtv)∥L2(Kt;W −1,2(Ω)) + ∥∂m
+t (δ −Πxδ)∥L2(Kt;W −1,2(Ω)).
+(65)
+Due to Theorem 1, the commutation property in Lemma 27, and the stability of
+Πt in Theorem 26 the third addend satisﬁes for v ∈W s,2(ωKt; W −1,2(Ω)) that
+∥∂m
+t (δ −Πxδ)∥2
+L2(Kt;W −1,2(Ω)) = ∥∂m
+t δ −Πx∂m
+t δ∥2
+L2(Kt;W −1,2(Ω))
+≂
+X
+i∈Vx
+∥∂m
+t δ −Πx∂tδ∥2
+L2(Kt;W −1,2(ωx,j)) ≲
+X
+i∈Vx
+∥∂m
+t v −Πx∂m
+t v∥2
+L2(ωKt;W −1,2(ωx,j)).
+The ﬁrst term on the right-hand side of (65) can be bounded similarly. By Theo-
+rem 26 we obtain for the second term and all 0 ≤m ≤s ≤kt + 1 that
+∥∂m
+t (v −Πtv)∥L2(Kt;W −1,2(Ω)) ≲hs−m
+Kt
+∥∂s
+t v∥L2(ωKt;W −1,2(Ω)).
+Combining the previous estimates proves (62). Similar arguments prove the local
+L2-estimate in (64).
+□
+Remark 30 (Applications). The discretization Vh in (55) is used in [SW21] and
+[DS22]. The extension of the result to adaptively reﬁned meshes is an open problem.
+Such an adaptive reﬁnement might result in unstructured simplicial meshes as in
+[LSTY21] or in varying spatial meshes associated to certain time steps [SVW22].
+Remark 31 (Comparison). The projection operator ΠFK : V →L1
+1(Tt) ⊗L1
+1,0(Tx)
+for tensor-product meshes in [FK21, Thm. 7] combines Lagrange interpolation in
+time and the L2-projection Π2 in space. This leads to an operator that is local in
+time but non-local in space. Let hx := maxKx∈Tx hKx denote the maximal mesh size
+in Tx, then this operator satisﬁes for all v ∈V and any Kt ∈Tt
+∥∇x(v −ΠFKv)∥L2(Kt,L2(Ω)) ≲hKt∥∂t∇xv∥L2(Kt,L2(Ω)) + hx∥∇2
+xv∥L∞(Kt,L2(Ω)),
+∥∂t(v −ΠFKv)∥L2(Kt;W −1,2(Ω)) ≲hKt∥∂2
+t v∥L2(Kt;W −1,2(Ω)) + h2
+x
+hKt
+∥∇xv∥L∞(Kt;L2(Ω)).
+
+[PDF PAGE 25]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+25
+This result requires more regular solutions than the estimate in Theorem 29.
+4.3. Smoothing rough right-hand sides. Besides in parabolic problems, func-
+tions in negative Sobolev spaces occur as right-hand sides of elliptic PDEs. Such
+rough right-hand sides cause severe diﬃculties for several established numerical
+schemes like non-conforming, DPG, or DG methods.
+Indeed, they may lead to
+an ill-posed system or to a reduced rate of convergence compared to conforming
+schemes. Applying a smoothing operator to the right-hand side, as for example
+in [VZ18a; VZ18b; VZ19], is one possible remedy.
+We illustrate the use of the
+operator Π deﬁned in Section 2 as such a smoothing operator by applying it to a
+least squares ﬁnite element method. We thereby complement the result in [FHK22,
+Sec. 3.3] for the lowest-order case k = 0, by the higher-order cases k ≥1. For this
+we use the discrete space deﬁned below in (68). For the simplicity of presentation
+we consider the Poisson equation as model problem. Note that the ideas presented
+extend to a much wider class of PDEs as illustrated in [CS18].
+Given a function f ∈W −1,2(Ω) we seek the solution u ∈W 1,2
+0
+(Ω) to
+−∆u = f
+in W −1,2(Ω).
+(66)
+We reformulate the problem as ﬁrst order system given by
+div σ + f = 0
+in W −1,2(Ω)
+and
+∇u −σ = 0
+in L2(Ω).
+(67)
+Let the space H(div, Ω) and the Raviart–Thomas space for k ∈N0 be given by
+H(div, Ω) := {τ ∈L2(Ω)d : div τ ∈L2(Ω)},
+RT k(T ) := {τh ∈H(div, Ω): τh(x)|T ∈Pk(T)d + xPk(T) for all T ∈T }.
+The general idea of ﬁrst-order system least square methods (FOSLS) consists in
+minimizing the residuals of (67) in the squared L2-norms over discrete spaces as
+Xh := L1
+k+1,0(T ) × RT k(T ).
+(68)
+However, the L2-norm of the ﬁrst residual is not well-deﬁned for non square-
+integrable f ∈W −1,2(Ω) \ L2(Ω).
+We remedy this issue by using the operator
+Π: W −1,2(Ω) →L1
+k(T ) as a smoother and instead compute the minimizer
+(˜uh, ˜σh) = arg min
+(vh,τh)∈Xh
+∥div τh + Πf∥2
+L2(Ω) + ∥∇vh −τh∥2
+L2(Ω).
+(69)
+Theorem 32 (A priori estimate). Let k ∈N. With the minimizers ˜uh, ˜σh in (69)
+and the solution u to (66) one has for all (sj)j∈V ⊂{0, . . . , k + 1} that
+∥∇(u −˜uh)∥2
+L2(Ω) + ∥∇u −˜σh∥2
+L2(Ω)
+≲
+X
+j∈V
+h2sj
+j
+∥f∥2
+W −1+sj ,2(ω2
+j ) +
+min
+(vh,τh)∈Xh
+ ∥∇(u −vh)∥2
+L2(Ω) + ∥∇u −τh∥2
+L2(Ω)
+
+.
+The hidden constant depends solely on the shape regularity of T and the domain Ω.
+Proof. Let ˜u ∈W 1,2
+0
+(Ω) solve the auxiliary problem −∆˜u = Πf in W −1,2(Ω).
+Applying the triangle inequality yields
+∥∇(u −˜uh)∥L2(Ω) + ∥∇u −˜σh∥L2(Ω)
+≤2∥∇(u −˜u)∥L2(Ω) + ∥∇(˜u −˜uh)∥L2(Ω) + ∥∇˜u −˜σh∥L2(Ω).
+
+[PDF PAGE 26]
+26
+L. DIENING, J. STORN, AND T. TSCHERPEL
+The latter two addends are bounded due to the quasi-optimality [BG09, Thm. 5.30]
+of the LSFEM with right-hand side Πf by
+∥∇(˜u −˜uh)∥L2(Ω) + ∥∇˜u −˜σh∥L2(Ω) + ∥div ∇˜u −div ˜σh∥L2(Ω)
+≲
+min
+(vh,τh)∈Xh
+ ∥∇(˜u −vh)∥L2(Ω) + ∥∇˜u −τh∥L2(Ω) + ∥div ∇˜u −div τh∥L2(Ω)
+
+.
+By the triangle inequality the ﬁrst term can be bounded as
+min
+vh∈L1
+k+1,0(T )∥∇(˜u −vh)∥L2(Ω) ≤∥∇(u −˜u)∥L2(Ω) +
+min
+vh∈L1
+k+1,0(T )∥∇(u −vh)∥L2(Ω).
+Let Πpw
+2 : L2(Ω) →L0
+k(T ) be the L2-orthogonal projection onto piece-wise polyno-
+mials of degree k ∈N. The interpolation operator IRT : H(div, Ω) →RT k(T ) in
+[EG21, Thm. 23.12] satisﬁes Πpw
+2 div σ = div IRT σ and
+∥σ −IRT σ∥L2(Ω) ≲
+min
+τh∈RT k(T )∥σ −τh∥L2(Ω)
+for all σ ∈H(div, Ω).
+Since −div ∇˜u = Πf ∈L1
+k(T ) ⊂L0
+k(T ), the application of IRT to σ := ∇˜u shows
+min
+τh∈RT k(T )∥∇˜u −τh∥L2(Ω) + ∥Πf + div τh∥L2(Ω)
+≤∥∇˜u −IRT ∇˜u∥L2(Ω) + ∥−div ∇˜u + div IRT ∇˜u∥L2(Ω)
+≲
+min
+τh∈RT k(T )∥∇˜u −τh∥L2(Ω).
+Theorem 1 bounds ∥∇(u −˜u)∥L2(Ω) = ∥f −Πf∥W −1,2(Ω). Combining all estimates
+concludes the proof.
+□
+Appendix A. Averaged Taylor polynomial in Bochner spaces
+In this appendix we introduce the averaged Taylor polynomial in Bochner spaces
+Lp(I; X) for an open interval I of size ht > 0 and a Banach space X. We adapt
+the techniques employed in [BS08, Ch. 4] to our need. Recall that Ps(I) ⊗X is
+the space of X-valued polynomials of order at most s ∈N0. Let η ∈C∞
+0 (I) be a
+normalized density function with ∥η∥L1(I) = 1 and ∥∂m
+t η∥L∞(I) ≲h−m−1
+t
+for any
+m ∈N0. Such a function can be obtained by scaling and translation of the standard
+bump function on the unit interval. For v ∈W s,1(I; X) with s ∈N we deﬁne the
+averaged Taylor polynomial T sv ∈Ps(I) ⊗X for all τ ∈I by
+(T sv)(τ) :=
+s
+X
+ℓ=0
+1
+ℓ!
+Z
+I
+(∂ℓ
+tv)(σ) (τ −σ)ℓη(σ) dσ
+=
+s
+X
+ℓ=0
+(−1)ℓ
+ℓ!
+Z
+I
+v(σ) ∂ℓ
+t
+ (τ −σ)ℓη(σ)
+
+dσ.
+(70)
+The second formula allows us to deﬁne the polynomial for functions v ∈L1(I; X).
+Lemma 33 (Averaged Taylor polynomial). The averaged Taylor polynomial of
+order s ∈N0 has the following properties.
+(a) For all vs ∈Ps(I) ⊗X we have the identity vs = T svs.
+(b) It holds ∂ℓ
+tT sw = T s−ℓ∂ℓ
+tw for all ℓ∈N0 with ℓ≤s and w ∈W ℓ,1(I; X).
+(c) For 0 ≤m ≤s and all v ∈L1(I; X) there holds
+∥∂m
+t T sv∥L∞(I;X) ≲h−1
+t ∥∂m
+t v∥L1(I;X).
+
+[PDF PAGE 27]
+INTERPOLATION OPERATOR ON NEGATIVE SOBOLEV SPACES
+27
+(d) For p ∈[1, ∞], 0 ≤m ≤s, and all v ∈W m,p(I; X) there holds
+∥∂m
+t T sv∥Lp(I;X) ≲∥∂m
+t v∥Lp(I;X).
+(e) For p ∈[1, ∞], 0 ≤m ≤n ≤s + 1, and all v ∈W n,p(I; X) there holds
+∥∂m
+t (v −T sv)∥Lp(I;X) ≲hn−m
+t
+∥∂n
+t v∥Lp(I;X).
+The hidden constants solely depend on s.
+Proof. Let s ∈N0, p ∈[1, ∞], and v ∈L1(I; X). Then (a) and (b) follow exactly
+as in Proposition 4.1.9 and 4.1.17 in [BS08], respectively. We estimate for τ ∈I
+∥(T sv)(τ)∥X ≤
+s
+X
+ℓ=0
+1
+ℓ!
+Z
+I
+∥v(σ)∥X
+∂ℓ
+t
+ (τ −σ)ℓη(σ)
+ dσ
+≤∥v∥L1(I;X)
+s
+X
+ℓ=0
+1
+ℓ!
+s
+X
+k=0
+ℓ
+k
+
+hk
+t ∥∂k
+t η∥L∞(I) ≤h−1
+t ∥v∥L1(I;X).
+This shows ∥T sv∥L∞(I;X) ≲h−1
+t ∥v∥L1(I;X) and thus veriﬁes (c) for m = 0. An
+application of (b) proves the general case m = 0, . . . , s. H¨older’s inequality yields
+∥∂m
+t T sv∥Lp(I;X) ≲h
+1
+p
+t ∥∂m
+t T sv∥L∞(I;X) ≲h
+1
+p −1
+t
+∥∂m
+t v∥L1(I;X) ≤∥∂m
+t v∥Lp(I;X).
+This proves (d). Let z ∈X∗, then for all τ ∈I
+⟨(T sv)(τ), z⟩X×X∗= T s(⟨v, z⟩X×X∗)(τ).
+We assume that v ∈W s+1(I; X) and conclude for the remainder Rsv := v −T sv
+by Proposition 4.2.8 of [BS08] that for almost all τ ∈I we have
+⟨(Rsv)(τ), z⟩X×X∗
+ =
+Rs(⟨v(τ), z⟩X×X∗)
+
+≲
+Z
+I
+|τ −σ|s|∂s+1
+t
+⟨v(σ), z⟩X×X∗| dσ
+≲
+Z
+I
+|τ −σ|s∥∂s+1
+t
+v(σ)∥X dσ ∥z∥X∗.
+Taking the supremum over all z ∈X∗with ∥z∥X∗≤1 implies
+∥(Rsv)(τ)∥X ≲
+Z
+I
+|τ −σ|s∥∂s+1
+t
+v(σ)∥X dσ ≲hs
+t∥∂s+1
+t
+v∥L1(I;X).
+This proves that
+∥v −T sv∥L∞(I;X) = ∥Rsv∥L∞(I;X) ≲hs
+t∥∂s+1
+t
+v∥L1(I;X).
+Thus, applying H¨older’s inequality we obtain
+∥v −T sv∥Lp(I;X) ≤h
+1
+p
+t ∥Rsv∥L∞(I;X)
+≤h
+s+ 1
+p
+t
+∥∂s+1
+t
+v∥L1(I;X) ≲hs+1
+t
+∥∂s+1
+t
+v∥Lp(I;X).
+This proves (e) for m = 0 and n = s + 1. For general m = 0, . . . , s we calculate
+∥∂m
+t (v −T sv)∥Lp(I;X) = ∥(∂m
+t v) −T s−m(∂m
+t v)∥Lp(I;X) ≲hs+1−m
+t
+∥∂s+1
+t
+v∥Lp(I;X).
+This proves (e) for n = s + 1. For n ≤s we conclude with T sT n−1v = T n−1v that
+∥∂m
+t (v −T sv)∥Lp(I;X) ≤∥∂m
+t (v −T n−1v)∥Lp(I;X) + ∥∂m
+t T s(v −T n−1v)∥Lp(I;X).
+
+[PDF PAGE 28]
+28
+L. DIENING, J. STORN, AND T. TSCHERPEL
+The stability (d) and the already proven case of (e) show that
+∥∂m
+t (v −T sv)∥Lp(I;X) ≲∥∂m
+t (v −T n−1v)∥Lp(I;X) ≲hn−m
+t
+∥∂n
+t v∥Lp(I;X).
+This proves the claim.
+□
+References
+[BG09]
+P. B. Bochev and M. D. Gunzburger. Least-squares ﬁnite element meth-
+ods. Vol. 166. Applied Mathematical Sciences. Springer, New York, 2009,
+pp. xxii+660. doi: 10.1007/b13382.
+[BMV20]
+J. Blechta, J. M´alek, and M. Vohral´ık. “Localization of the W −1,q norm for
+local a posteriori eﬃciency”. In: IMA J. Numer. Anal. 40.2 (2020), pp. 914–
+950. doi: 10.1093/imanum/drz002.
+[BPS02]
+J. H. Bramble, J. E. Pasciak, and O. Steinbach. “On the Stability of the
+L2- Projection in H1(Ω)”. In: Mathematics of Computation 71.237 (2002),
+pp. 147–156. doi: 10.1090/S0025-5718-01-01314-X.
+[BPV00]
+J. H. Bramble, J. E. Pasciak, and P. S. Vassilevski. “Computational scales of
+Sobolev norms with application to preconditioning”. In: Math. Comp. 69.230
+(2000), pp. 463–480. doi: 10.1090/S0025-5718-99-01106-0.
+[BS08]
+S. Brenner and R. Scott. The Mathematical Theory of Finite Element Meth-
+ods. 3rd. Vol. 15. Texts in Applied Mathematics. Springer, 2008. doi: 10.
+1007/978-0-387-75934-0.
+[BY14]
+R. E. Bank and H. Yserentant. “On the H1-stability of the L2-projection
+onto ﬁnite element spaces”. In: Numer. Math. 126.2 (2014), pp. 361–381.
+doi: 10.1007/s00211-013-0562-4.
+[Car02]
+C. Carstensen. “Merging the Bramble-Pasciak-Steinbach and the Crouzeix-
+Thom´ee criterion for H1-stability of the L2-projection onto ﬁnite element
+spaces”. In: Math. Comp. 71.237 (2002), pp. 157–163. doi: 10.1090/S0025-
+5718-01-01316-3.
+[Car99]
+C. Carstensen. “Quasi-interpolation and a posteriori error analysis in ﬁ-
+nite element methods”. In: M2AN Math. Model. Numer. Anal. 33.6 (1999),
+pp. 1187–1202. doi: 10.1051/m2an:1999140.
+[CDN12]
+A. Cohen, R. DeVore, and R. H. Nochetto. “Convergence rates of AFEM
+with H−1 data”. In: Found. Comput. Math. 12.5 (2012), pp. 671–718. doi:
+10.1007/s10208-012-9120-1.
+[CFPP14]
+C. Carstensen, M. Feischl, M. Page, and D. Praetorius. “Axioms of adaptiv-
+ity”. In: Comput. Math. Appl. 67.6 (2014), pp. 1195–1253. doi: 10.1016/j.
+camwa.2013.12.003.
+[CH02]
+K. Chrysaﬁnos and L. S. Hou. “Error estimates for semidiscrete ﬁnite element
+approximations of linear and semilinear parabolic equations under minimal
+regularity assumptions”. In: SIAM J. Numer. Anal. 40.1 (2002), pp. 282–
+306. doi: 10.1137/S0036142900377991.
+[CKNS08]
+J. M. Cascon, C. Kreuzer, R. H. Nochetto, and K. G. Siebert. “Quasi-optimal
+convergence rate for an adaptive ﬁnite element method”. In: SIAM J. Numer.
+Anal. 46.5 (2008), pp. 2524–2550. doi: 10.1137/07069047X.
+[Cl´e75]
+P. Cl´ement. “Approximation by ﬁnite element functions using local regular-
+ization”. In: Rev. Fran¸caise Automat. Informat. Recherche Op´erationnelle
+S´er. 9.R-2 (1975), pp. 77–84. doi: 10.2307/2007825.
+[CR17]
+C. Carstensen and H. Rabus. “Axioms of adaptivity with separate marking
+for data resolution”. In: SIAM J. Numer. Anal. 55.6 (2017), pp. 2644–2665.
+doi: 10.1137/16M1068050.
+
+[PDF PAGE 29]
+REFERENCES
+29
+[CS18]
+C. Carstensen and J. Storn. “Asymptotic exactness of the least-squares ﬁnite
+element residual”. In: SIAM J. Numer. Anal. 56.4 (2018), pp. 2008–2028.
+doi: 10.1137/17M1125972.
+[CT87]
+M. Crouzeix and V. Thom´ee. “The Stability in Lp and W 1
+p of the L2-
+Projection onto Finite Element Function Spaces”. In: Math. Comp. 48.178
+(1987), pp. 521–532. doi: 10.2307/2007825.
+[CV99]
+C. Carstensen and R. Verf¨urth. “Edge residuals dominate a posteriori error
+estimates for low order ﬁnite element methods”. In: SIAM J. Numer. Anal.
+36.5 (1999), pp. 1571–1587. doi: 10.1137/S003614299732334X.
+[DKS16]
+L. Diening, C. Kreuzer, and R. Stevenson. “Instance optimality of the adap-
+tive maximum strategy”. In: Found. Comput. Math. 16.1 (2016), pp. 33–68.
+doi: 10.1007/s10208-014-9236-6.
+[DR07]
+L. Diening and M. R˚uˇziˇcka. “Interpolation operators in Orlicz-Sobolev spaces”.
+In: Numer. Math. 107.1 (2007), pp. 107–129. doi: 10.1007/s00211-007-
+0079-9.
+[DS22]
+L. Diening and J. Storn. “A space-time DPG method for the heat equation”.
+In: Comput. Math. Appl. 105 (2022), pp. 41–53. doi: 10.1016/j.camwa.
+2021.11.013.
+[DST21]
+L. Diening, J. Storn, and T. Tscherpel. “On the Sobolev and Lp-Stability of
+the L2-Projection”. In: SIAM J. Numer. Anal. 59.5 (2021), pp. 2571–2607.
+doi: 10.1137/20M1358013.
+[EG17]
+A. Ern and J.-L. Guermond. “Finite element quasi-interpolation and best ap-
+proximation”. In: ESAIM Math. Model. Numer. Anal. 51.4 (2017), pp. 1367–
+1385. doi: 10.1051/m2an/2016066.
+[EG21]
+A. Ern and J.-L. Guermond. Finite elements I—Approximation and inter-
+polation. Vol. 72. Texts in Applied Mathematics. Springer, Cham, 2021,
+pp. xii+325. doi: 10.1007/978-3-030-56341-7.
+[FHK22]
+T. F¨uhrer, N. Heuer, and M. Karkulik. “MINRES for Second-Order PDEs
+with Singular Data”. In: SIAM J. Numer. Anal. 60.3 (2022), pp. 1111–1135.
+doi: 10.1137/21M1457023.
+[FK21]
+T. F¨uhrer and M. Karkulik. “Space–time least-squares ﬁnite elements for
+parabolic equations”. In: Comput. Math. with Appl. 92 (2021), pp. 27–36.
+doi: 10.1016/j.camwa.2021.03.004.
+[F¨uh22]
+T. F¨uhrer. “Multilevel decompositions and norms for negative order Sobolev
+spaces”. In: Math. Comp. 91 (2022), pp. 183–218. doi: https://doi.org/
+10.1090/mcom/3674.
+[GHS16]
+F. D. Gaspoz, C.-J. Heine, and K. G. Siebert. “Optimal grading of the newest
+vertex bisection and H1-stability of the L2-projection”. In: IMA J. Numer.
+Anal. 36.3 (2016), pp. 1217–1241. doi: 10.1093/imanum/drv044.
+[KV21]
+C. Kreuzer and A. Veeser. “Oscillation in a posteriori error estimation”. In:
+Numer. Math. 148.1 (2021), pp. 43–78. doi: 10.1007/s00211-021-01194-8.
+[LMN16]
+U. Langer, S. E. Moore, and M. Neum¨uller. “Space-time isogeometric analysis
+of parabolic evolution problems”. In: Comput. Methods Appl. Mech. Engrg.
+306 (2016), pp. 342–363. doi: 10.1016/j.cma.2016.03.042.
+[LSTY21]
+U. Langer, O. Steinbach, F. Tr¨oltzsch, and H. Yang. “Unstructured Space-
+Time Finite Element Methods for Optimal Control of Parabolic Equations”.
+In: SIAM J. Numer. Anal. 43.2 (2021), A744–A771. doi: 10.1137/20M1330452.
+[Mel05]
+J. M. Melenk. “hp-interpolation of nonsmooth functions and an application
+to hp-a posteriori error estimation”. In: SIAM J. Numer. Anal. 43.1 (2005),
+pp. 127–155. doi: 10.1137/S0036142903432930.
+[MP14]
+A. M˚alqvist and D. Peterseim. “Localization of elliptic multiscale problems”.
+In: Math. Comp. 83.290 (2014), pp. 2583–2603. doi: 10.1090/S0025-5718-
+2014-02868-8.
+
+[PDF PAGE 30]
+30
+REFERENCES
+[Ste07]
+R. Stevenson. “Optimality of a standard adaptive ﬁnite element method”.
+In: Found. Comput. Math. 7.2 (2007), pp. 245–269. doi: 10.1007/s10208-
+005-0183-0.
+[Ste15]
+O. Steinbach. “Space-time ﬁnite element methods for parabolic problems”.
+In: Comput. Methods Appl. Math. 15.4 (2015), pp. 551–566. doi: 10.1515/
+cmam-2015-0026.
+[SV20]
+R. Stevenson and R. van Veneti¨e. “Uniform preconditioners for problems of
+negative order”. In: Math. Comp. 89.322 (2020), pp. 645–674. doi: 10.1090/
+mcom/3481.
+[SV21]
+R. Stevenson and R. van Veneti¨e. “Uniform preconditioners of linear com-
+plexity for problems of negative order”. In: Comput. Methods Appl. Math.
+21.2 (2021), pp. 469–478. doi: 10.1515/cmam-2020-0052.
+[SVW22]
+R. Stevenson, R. van Veneti¨e, and J. Westerdiep. “A wavelet-in-time, ﬁ-
+nite element-in-space adaptive method for parabolic evolution equations”.
+In: Advances in Computational Mathematics 48.3 (Apr. 2022), p. 17. doi:
+10.1007/s10444-022-09930-w.
+[SW21]
+R. Stevenson and J. Westerdiep. “Stability of Galerkin discretizations of a
+mixed space-time variational formulation of parabolic evolution equations”.
+In: IMA J. Numer. Anal. 41.1 (2021), pp. 28–47. doi: 10.1093/imanum/
+drz069.
+[SZ90]
+L. R. Scott and S. Zhang. “Finite Element Interpolation of nonsmooth Func-
+tions satisfying boundary conditions”. In: Math. Comput. 54.190 (Apr. 1990),
+pp. 483–493. doi: 10.2307/2008497.
+[Tan13]
+F. Tantardini. “Quasi-optimality in the backward Euler-Galerkin method
+for linear parabolic problems”. PhD thesis. Universit`a degli Studi di Milano,
+2013.
+[Tho06]
+V. Thom´ee. Galerkin ﬁnite element methods for parabolic problems. Second.
+Vol. 25. Springer Series in Computational Mathematics. Springer-Verlag,
+Berlin, 2006, pp. xii+370. doi: 10.1007/3-540-33122-0.
+[TV16]
+F. Tantardini and A. Veeser. “The L2-projection and quasi-optimality of
+Galerkin methods for parabolic equations”. In: SIAM J. Numer. Anal. 54.1
+(2016), pp. 317–340. doi: 10.1137/140996811.
+[Vee19]
+A. Veeser. “Best error localizations for piecewise polynomial approximation
+of gradients, functions and functionals”. In: Numerical mathematics and ad-
+vanced applications—ENUMATH 2017. Vol. 126. Lect. Notes Comput. Sci.
+Eng. Springer, Cham, 2019, pp. 357–365. doi: 10.1007/978-3-319-96415-
+7\_31.
+[VZ18a]
+A. Veeser and P. Zanotti. “Quasi-optimal nonconforming methods for sym-
+metric elliptic problems. I—Abstract theory”. In: SIAM J. Numer. Anal.
+56.3 (2018), pp. 1621–1642. doi: 10.1137/17M1116362.
+[VZ18b]
+A. Veeser and P. Zanotti. “Quasi-optimal nonconforming methods for sym-
+metric elliptic problems. III—Discontinuous Galerkin and other interior penalty
+methods”. In: SIAM J. Numer. Anal. 56.5 (2018), pp. 2871–2894. doi: 10.
+1137/17M1151675.
+[VZ19]
+A. Veeser and P. Zanotti. “Quasi-optimal nonconforming methods for sym-
+metric elliptic problems. II—Overconsistency and classical nonconforming
+elements”. In: SIAM J. Numer. Anal. 57.1 (2019), pp. 266–292. doi: 10.
+1137/17M1151651.
+[WZ17]
+J. Wu and H. Zheng. “Uniform convergence of multigrid methods for adaptive
+meshes”. In: Appl. Numer. Math. 113 (2017), pp. 109–123. doi: 10.1016/j.
+apnum.2016.11.005.
+
+[PDF PAGE 31]
+REFERENCES
+31
+(L. Diening, J. Storn) Department of Mathematics, Bielefeld University, Postfach 10
+01 31, 33501 Bielefeld, Germany
+Email address: lars.diening@uni-bielefeld.de
+Email address: jstorn@math.uni-bielefeld.de
+(T. Tscherpel) Department of Mathematics, TU Darmstadt, Dolivostraße 15, 64293
+Darmstadt, Germany
+Email address: tscherpel@mathematik.tu-darmstadt.de

@@ -1,0 +1,1327 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "18",
+  "scope": [
+    "alg-strong-rrqr-interpolative-decomposition",
+    "lem-moore-penrose-products-are-orthogonal-projectors",
+    "def-cur-reconstruction-cores",
+    "def-psd-nystrom-approximation",
+    "thm-strong-rrqr-interpolative-decomposition-error",
+    "thm-skeleton-cur-exactness",
+    "thm-cur-projection-residual-bound",
+    "lem-nystrom-square-root-projector-identity",
+    "thm-psd-nystrom-order-and-exactness",
+    "thm-nystrom-deterministic-spectral-residual-bound",
+    "cex-arbitrary-selected-columns-miss-dominant-direction",
+    "ex-exact-rank-two-skeleton-cur",
+    "ex-psd-nystrom-residual-is-psd"
+  ],
+  "contracts": {
+    "alg-strong-rrqr-interpolative-decomposition": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires m>=n>=1, excluding a zero-dimensional ambient matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition: The definition explicitly returns the zero approximation for k=0 and also names A=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition: The exact k=n branch covers n=1, and the k=0 branch is explicit in the definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition: The definition propagates rank-deficient-input, singular-selected-block, and swap-budget-exhausted statuses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition: The definition gives separate k=0 and k=n branches."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "lem-moore-penrose-products-are-orthogonal-projectors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F1], $P^*=P$ and $Q^*=Q$. Also $P^2=MM^\\dagger MM^\\dagger=M(M^\\dagger M M^\\dagger)=MM^\\dagger=P$, and $Q^2=M^\\dagger M M^\\dagger M=(M^\\dagger M M^\\dagger)M=M^\\dagger M=Q$. Hence both products are self-adjoint idempotents.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The range of $P$ is contained in $\\operatorname{Ran}(M)$ because $P=MM^\\dagger$, while $PM=M$ by [F1], so $\\operatorname{Ran}(M)\\subseteq\\operatorname{Ran}(P)$. Thus $\\operatorname{Ran}(P)=\\operatorname{Ran}(M)$. The range of $Q$ is contained in $\\operatorname{Ran}(M^\\dagger)$, and $QM^\\dagger=M^\\dagger$ by [F1], so these ranges are equal.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "A self-adjoint idempotent is the orthogonal projection onto its range: each vector $x$ decomposes as $Px+(I-P)x$, the first term lies in the range, the second lies in the kernel, and self-adjointness makes the range orthogonal to the kernel. The same argument applies to $Q$. If $M$ has full row rank, $\\operatorname{Ran}(M)=\\mathbb F^p$, so step 2.1 gives $\\operatorname{Ran}(P)=\\mathbb F^p$ and therefore $P=I_p$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement: The statement allows zero row or column dimension; empty products still satisfy the Penrose equations (steps 1.1–2.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: The defining equations and product calculations include the zero matrix (steps 1.1–2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The algebra is dimension independent and includes one-by-one matrices (steps 1.1–2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: No rank assumption is imposed; singular matrices are included in the statement and proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "def-cur-reconstruction-cores": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition: The definition explicitly allows k=0 and gives both zero reconstructions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition: The formulas are single-valued for A=0 by the defined Moore-Penrose inverses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition: The formulas apply at k=1 without a separate restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition: Singular C, R, and W are permitted because the formulas use their Moore-Penrose inverses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition: The k=0 convention is explicit, and k may equal the smaller ambient dimension."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "def-psd-nystrom-approximation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition: The sketch width s may be zero; then the zero-size core gives the zero approximation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition: The formula is defined for A=0 and returns zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition: The formula applies at n=1 or s=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition: The core S*AS may be singular; its Moore-Penrose inverse is defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "thm-strong-rrqr-interpolative-decomposition-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-strong-rrqr-interpolative-decomposition",
+          "source_section": "Definition",
+          "quote": "Input a real or complex matrix $A\\in\\mathbb F^{m\\times n}$ with $m\\ge n\\ge1$, an integer $k$ with $0\\le k\\le n$, a factor $f\\ge1$, and a finite swap cap $S\\in\\mathbb N\\cup\\{0\\}$. The output is a status and, on a successful branch, a selected index list $J$ and coefficient matrix $T$.\n\n1. If $k=0$, return success, $J=\\varnothing$, and the unique $0\\times n$ matrix $T$. The product $A(:,J)T$ is the zero $m\\times n$ matrix. This branch includes $A=0$.\n2. If $k=n$, return success, $J=(1,\\ldots,n)$, and $T=I_n$. Then $A(:,J)T=A$.\n3. If $1\\le k<n$, run the exact-arithmetic version of [[alg-strong-rank-revealing-qr-with-finite-swaps]] on $(A,k,f,S)$. Propagate any nonsuccess status, including rank-deficient-input, singular-selected-block, and swap-budget-exhausted, without returning a decomposition.\n4. On exact-arithmetic success, let $\\Pi$ be the returned column permutation, with the first $k$ indices forming $J$, and let\n   $$A\\Pi=Q\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}$$\n   be its full QR factorization. Set $X=R_{11}^{-1}R_{12}$ and define $T$ by $T\\Pi=[I_k\\ \\ X]$. Return this $J,T$ and the status success.\n\nThe finite-precision branch propagates the underlying algorithm's certificate status. An uncertified candidate is not a certified interpolative decomposition. The theorem below concerns exact-arithmetic success; a computed error guarantee requires the underlying verified score and reconstruction certificate.\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "source_section": "Definition",
+          "quote": "Input a real or complex matrix $A\\in\\mathbb F^{m\\times n}$ with $m\\ge n$, a target $k$ with $0\\le k<n$, a factor $f\\ge1$, and a finite swap cap $S\\in\\mathbb N\\cup\\{0\\}$. The exact-arithmetic version is specified below. A finite-precision implementation uses the same branches, tests finiteness after each operation, and returns `range-failure` if a required quantity is nonfinite.\n\n1. If $A$ is not full column rank, return `rank-deficient-input`. Otherwise initialize a column permutation $\\Pi$ and the full column-pivoted QR factorization $A\\Pi=QR$, where $Q\\in\\mathbb F^{m\\times m}$ is unitary and $R\\in\\mathbb F^{m\\times n}$ is upper trapezoidal. At each pivot choose a remaining column of maximal residual $2$-norm, resolving ties by the smallest original column index. Partition $R=\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}$ after the first $k$ rows and columns. Do not return the reduced QR form. The selected first $k$ columns then have a nonsingular leading block. For $k=0$, return this full factorization with `success`.\n2. For $k>0$, refactor the current fixed column order in the full QR form, without further pivoting whenever needed, using unitary Householder or Givens transformations. If the selected leading block is singular, return `singular-selected-block`.\n3. Form $X=R_{11}^{-1}R_{12}$. For $1\\le i\\le k$ let $\\omega_i=\\|e_i^*R_{11}^{-1}\\|_2$; for $1\\le j\\le n-k$ let $\\gamma_j=\\|R_{22}(:,j)\\|_2$. Define the swap score $s_{ij}=\\bigl(|X_{ij}|^2+(\\omega_i\\gamma_j)^2\\bigr)^{1/2}$.\n4. If $\\max_{i,j}|X_{ij}|>f$, choose the lexicographically first pair attaining the largest $|X_{ij}|$. Otherwise, if $\\max_{i,j}s_{ij}>f$, choose the lexicographically first pair attaining the largest score. If neither inequality holds, return `success` and the factors, permutation, $X$, and maximum score. The first branch retains the usual coefficient-triggered swap; the second controls the trailing residual needed for the strong spectral comparison.\n5. When a violating pair was chosen, if the swap count is already $S$, return `swap-budget-exhausted` with the current partial factors. Otherwise interchange the chosen selected and trailing columns, restore triangular form with Givens rotations, increment the swap count, and return to step 2.\n\nThe statuses are `success`, `rank-deficient-input`, `singular-selected-block`, `swap-budget-exhausted`, and `range-failure`. In particular, ordinary column-pivoted QR is only the initialization: the procedure does not assert that its output alone satisfies the strong bounds. Both exact and finite-precision outputs use the full factor shape. A finite-precision `success` is a candidate until the following certificate is verified. Retain the ordered local transformation data representing an exact unitary product $W$ separately from the rounded dense $Q$. Let $\\widehat R$ denote the returned upper trapezoidal matrix. A certificate consists of a nonsingular $\\widehat R_{11}$, rigorous upper bounds $b_{ij}$ on the exact real numbers $\\bigl(|(\\widehat R_{11}^{-1}\\widehat R_{12})_{ij}|^2+\\|e_i^*\\widehat R_{11}^{-1}\\|_2^2\\|\\widehat R_{22}(:,j)\\|_2^2\\bigr)^{1/2}$, and $\\varepsilon\\ge0$ with $\\|A\\Pi-W\\widehat R\\|_2\\le\\varepsilon$. All $b_{ij}\\le f$ are required. For $k=0$ there are no score or inverse conditions. The bounds must account for arithmetic and input representation; ordinary rounded score and residual evaluations do not constitute this certificate. Exact arithmetic on represented data or validated outward enclosures may establish it. If certification is unavailable or a bound exceeds its threshold, report `uncertified` for the certificate, retaining the algorithm status and all candidate outputs.\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-strong-rrqr-singular-value-comparisons",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$ have full column rank, $m\\ge n$, and let the exact-arithmetic version of [[alg-strong-rank-revealing-qr-with-finite-swaps]] return `success` with full QR factorization\n$$A\\Pi=Q\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix},$$\nwhere $Q\\in\\mathbb F^{m\\times m}$ is unitary and the displayed $R$ is upper trapezoidal with $m$ rows. Let the target satisfy $0\\le k<n$ and the factor satisfy $f\\ge1$. For $1\\le k<n$, assume $R_{11}\\in\\mathbb F^{k\\times k}$ is nonsingular and put $X=R_{11}^{-1}R_{12}$. Put $g=(1+f^2k(n-k))^{1/2}$. Then\n$$\\sigma_i(R_{11})\\ge\\frac{\\sigma_i(A)}{g}\\quad(1\\le i\\le k),\\qquad \\sigma_j(R_{22})\\le g\\,\\sigma_{k+j}(A)\\quad(1\\le j\\le n-k).$$\nFor $k=0$, the second comparison is the equality $R_{22}=Q^*A\\Pi$ with $g=1$. These conclusions use the combined score in the algorithm; the bound on $X$ alone is not used as a substitute for control of $R_{22}$. For a computed candidate $\\widehat R$ with the algorithm's verified certificate $(W,(b_{ij}),\\varepsilon)$, put $\\widetilde A=W\\widehat R\\Pi^*$. No full-column-rank assumption on $\\widetilde A$ is required beyond nonsingularity of $\\widehat R_{11}$ when $k>0$. Then the corresponding residual-adjusted bounds are\n$$\\sigma_i(\\widehat R_{11})\\ge\\frac{\\sigma_i(A)-\\varepsilon}{g}\\quad(1\\le i\\le k),\\qquad \\sigma_j(\\widehat R_{22})\\le g\\bigl(\\sigma_{k+j}(A)+\\varepsilon\\bigr)\\quad(1\\le j\\le n-k).$$\nFor $k=0$, these reduce to $\\sigma_j(\\widehat R)\\le\\sigma_j(A)+\\varepsilon$. Computed scores alone do not certify either conclusion.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "If $k=0$, the algorithm returns $T$ with zero rows, so $A(:,J)T=0$ and the residual is $A$. If $k=n$, it returns $J=(1,\\ldots,n)$ and $T=I_n$, so the residual is zero. Assume henceforth $1\\le k<n$ and exact-arithmetic success.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "With $X=R_{11}^{-1}R_{12}$, [F1] gives $T\\Pi=[I_k\\ \\ X]$, so the first $k$ columns of $T\\Pi$ are $I_k$ and therefore $T(:,J)=I_k$. By [F2], $|X_{ij}|^2\\le |X_{ij}|^2+(\\omega_i\\gamma_j)^2\\le f^2$, hence $|X_{ij}|\\le f$. Since $f\\ge1$, the identity entries also obey the same coefficient bound.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "Put $C=A(:,J)$, the first $k$ columns of $A\\Pi$. Then $C=Q\\begin{bmatrix}R_{11}\\\\0\\end{bmatrix}$ and $C(T\\Pi)=Q\\begin{bmatrix}R_{11}&R_{11}X\\\\0&0\\end{bmatrix} =Q\\begin{bmatrix}R_{11}&R_{12}\\\\0&0\\end{bmatrix}$. Subtracting from $A\\Pi$ gives $(A-CT)\\Pi=Q\\begin{bmatrix}0&0\\\\0&R_{22}\\end{bmatrix}$. A unitary matrix preserves vector norms, and a permutation maps the unit sphere onto itself; the definition of the operator norm therefore gives $\\|A-CT\\|_2=\\|R_{22}\\|_2$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The domain of $R_{22}$ has dimension $n-k>0$, so [F4] gives $\\|R_{22}\\|_2=\\sigma_1(R_{22})$. Apply [F3] with $j=1$ and combine with step 1.3 to obtain the stated residual bound.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires m>=n>=1, so zero-dimensional ambient matrices are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: The k=0 branch returns the zero interpolation and states its residual (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: For n=1 the k=n branch is exact; the statement covers k=1 whenever n>1 (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: Rank loss and exhausted swap budget return statuses without an error claim, as stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: Both k=0 and k=n branches are explicit (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "thm-skeleton-cur-exactness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cur-reconstruction-cores",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$ over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ with $m,n\\ge1$, and let $I=(i_1,\\ldots,i_k)$ and $J=(j_1,\\ldots,j_k)$ be ordered lists of distinct row and column indices. For $k=0$, both lists and all selected matrices have zero size, with ordinary empty-matrix multiplication. Define $C=A(:,J)\\in\\mathbb F^{m\\times k}$, $R=A(I,:)\\in\\mathbb F^{k\\times n}$, and the cross matrix $W=A(I,J)\\in\\mathbb F^{k\\times k}$, using the same orders in $I,J,W$.\n\nThe **skeleton CUR core** is $U_{\\mathrm{skel}}=W^\\dagger$ and its reconstruction is $\\widehat A_{\\mathrm{skel}}=C W^\\dagger R$. The **projected least-squares CUR core** is $U_{\\mathrm{proj}}=C^\\dagger A R^\\dagger$ and its reconstruction is\n$\\widehat A_{\\mathrm{proj}}=C(C^\\dagger A R^\\dagger)R=(CC^\\dagger)A(R^\\dagger R)$.\n\nFor $k=0$, both reconstructions are the zero $m\\times n$ matrix.\n\nThe Moore-Penrose theorem in the dependencies guarantees that these formulas are single-valued for singular as well as nonsingular $C,R,W$. The two core choices are distinct. The projection residual bound on the A page applies only to $\\widehat A_{\\mathrm{proj}}$; it is not asserted for the skeleton core $W^\\dagger$.\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].\n",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].\n\n",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are\n\n$$\\operatorname{nullity}T:=\\dim_F(\\ker T),\\qquad \\operatorname{rank}T:=\\dim_F(\\operatorname{im}T).$$\n\nBoth dimensions are defined. The kernel is a linear subspace of the\nfinite-dimensional space $V$, so it is finite-dimensional by\n[[thm-linear-kernel-image-and-injectivity]] and\n[[thm-dimension-of-a-linear-subspace]]. The image is finite-dimensional because\n[[lem-kernel-basis-extension-gives-image-basis]] constructs a finite basis of\nit from a basis of $V$. Thus rank and nullity are natural numbers, including\nwhen $V$ is the zero space.\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "If $k=0$, the hypothesis $\\operatorname{rank}(A)=0$ and [F4] imply $\\operatorname{Ran}(A)=\\{0\\}$, so $A=0$. The stated empty product is also zero. Assume henceforth $k>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "The square matrix $W$ has rank $k$ in a $k$-dimensional domain and codomain. By [F4] and [F5] its kernel has dimension zero and its image has dimension $k$, so it is both injective and surjective and has an inverse $W^{-1}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "The matrix $W^{-1}$ satisfies all four equations in [F2]: $WW^{-1}W=W$, $W^{-1}WW^{-1}=W^{-1}$, and $WW^{-1}=W^{-1}W=I_k$ are self-adjoint. By uniqueness [F3], $W^\\dagger=W^{-1}$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "If $Cx=0$, restricting to rows $I$ gives $Wx=0$, and invertibility of $W$ from step 1.2 gives $x=0$. Hence $C$ is injective and has rank $k$ by [F4] and [F5]. Since the columns of $C$ are columns of $A$, $\\operatorname{Ran}(C)\\subseteq\\operatorname{Ran}(A)$; both spaces have dimension $k$, so they are equal.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Equality of these column spaces supplies a matrix $X$ with $A=CX$. Restricting to rows $I$ yields $R=WX$, so $X=W^{-1}R$. Therefore $A=CW^{-1}R=CW^\\dagger R$ by step 1.3 and [F1].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement: The k=0 selected-index case is explicit and yields the zero reconstruction (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: Rank-zero A is handled in the k=0 branch (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The proof applies for k=1 when the one-by-one cross has rank one (steps 2.1–4.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: The theorem assumes rank(W)=k; singular crosses are outside its hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: The k=0 endpoint is handled explicitly (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "thm-cur-projection-residual-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cur-reconstruction-cores",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$ over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ with $m,n\\ge1$, and let $I=(i_1,\\ldots,i_k)$ and $J=(j_1,\\ldots,j_k)$ be ordered lists of distinct row and column indices. For $k=0$, both lists and all selected matrices have zero size, with ordinary empty-matrix multiplication. Define $C=A(:,J)\\in\\mathbb F^{m\\times k}$, $R=A(I,:)\\in\\mathbb F^{k\\times n}$, and the cross matrix $W=A(I,J)\\in\\mathbb F^{k\\times k}$, using the same orders in $I,J,W$.\n\nThe **skeleton CUR core** is $U_{\\mathrm{skel}}=W^\\dagger$ and its reconstruction is $\\widehat A_{\\mathrm{skel}}=C W^\\dagger R$. The **projected least-squares CUR core** is $U_{\\mathrm{proj}}=C^\\dagger A R^\\dagger$ and its reconstruction is\n$\\widehat A_{\\mathrm{proj}}=C(C^\\dagger A R^\\dagger)R=(CC^\\dagger)A(R^\\dagger R)$.\n\nFor $k=0$, both reconstructions are the zero $m\\times n$ matrix.\n\nThe Moore-Penrose theorem in the dependencies guarantees that these formulas are single-valued for singular as well as nonsingular $C,R,W$. The two core choices are distinct. The projection residual bound on the A page applies only to $\\widehat A_{\\mathrm{proj}}$; it is not asserted for the skeleton core $W^\\dagger$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-moore-penrose-products-are-orthogonal-projectors",
+          "source_section": "Statement",
+          "quote": "Let $M\\in\\mathbb F^{p\\times q}$ be any finite real or complex matrix, and let $M^\\dagger$ be its unique Moore-Penrose inverse. Then $P=MM^\\dagger$ and $Q=M^\\dagger M$ are self-adjoint idempotents. The range of $P$ is $\\operatorname{Ran}(M)$, and the range of $Q$ is $\\operatorname{Ran}(M^\\dagger)$. Thus both are orthogonal projections. If $M$ has full row rank, then $MM^\\dagger=I_p$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Put $P_C=CC^\\dagger$ and $P_R=R^\\dagger R$. By [F1], $\\widehat A_{\\mathrm{proj}}=P_CAP_R$, and [F2] makes both factors orthogonal projections.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Algebra gives $A-P_CAP_R=(I_m-P_C)A+P_CA(I_n-P_R)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For an orthogonal projection $P$ and each column vector $x$, the decomposition $x=Px+(I-P)x$ is orthogonal, so $\\|Px\\|_2\\le\\|x\\|_2$. Summing squared column norms gives $\\|PY\\|_F\\le\\|Y\\|_F$ for every compatible matrix $Y$. The Frobenius norm is the Euclidean norm of the entries, so its triangle inequality applied to step 2.1 and this contraction with $P=P_C$, $Y=A(I_n-P_R)$ gives the asserted bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns positive finite ambient matrix dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: For A=0, the approximation and both residual terms vanish (steps 1.1–2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The projector identity and columnwise contraction apply for one selected row or column (steps 1.1–2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: C and R may be rank deficient; the proof uses Moore-Penrose orthogonal projectors (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "lem-nystrom-square-root-projector-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-psd-nystrom-approximation",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite with $n\\ge1$, let $S\\in\\mathbb F^{n\\times s}$ with $s\\ge0$ be any finite sketch matrix, and put $W=S^*AS\\in\\mathbb F^{s\\times s}$. The **Nyström approximation** associated with $(A,S)$ is\n$\\widehat A_{\\mathrm{nys}}=AS\\,W^\\dagger S^*A$.\n\nThe Moore-Penrose inverse is defined for every finite matrix, including singular $W$, and is unique by the dependencies. No rank, sampling, or probabilistic condition is part of this definition.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-moore-penrose-products-are-orthogonal-projectors",
+          "source_section": "Statement",
+          "quote": "Let $M\\in\\mathbb F^{p\\times q}$ be any finite real or complex matrix, and let $M^\\dagger$ be its unique Moore-Penrose inverse. Then $P=MM^\\dagger$ and $Q=M^\\dagger M$ are self-adjoint idempotents. The range of $P$ is $\\operatorname{Ran}(M)$, and the range of $Q$ is $\\operatorname{Ran}(M^\\dagger)$. Thus both are orthogonal projections. If $M$ has full row rank, then $MM^\\dagger=I_p$.\n\n",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].\n\n",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].\n",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Set $D=B^*B=S^*AS$. From $(A^{1/2})^2=A$ and $A^{1/2}=(A^{1/2})^*$, [F1] rewrites as $\\widehat A_{\\mathrm{nys}}=A^{1/2}B D^\\dagger B^*A^{1/2}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Since $D=D^*$, taking adjoints of the four defining equations [F5] shows $(D^\\dagger)^*$ also satisfies them for $D$. Uniqueness [F3] gives $(D^\\dagger)^*=D^\\dagger$. Thus $P=BD^\\dagger B^*$ is self-adjoint, and $P^2=BD^\\dagger(B^*B)D^\\dagger B^*=BD^\\dagger D D^\\dagger B^*=P$ by the Moore-Penrose equation $D^\\dagger D D^\\dagger=D^\\dagger$. Hence $P$ is an orthogonal projection.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "Put $Q=D^\\dagger D$. By [F2], $Q$ is an orthogonal projection. The equations [F5] $DD^\\dagger D=D$ and $D^\\dagger D D^\\dagger=D^\\dagger$ imply $DQ=D$; therefore $Qx=0$ iff $Dx=0$. Also $x^*Dx=\\|Bx\\|_2^2$, so $\\ker D=\\ker B$. Since $Q$ is an orthogonal projection, $\\operatorname{Ran}(I-Q)=\\ker Q=\\ker B$, and consequently $B(I-Q)=0$, or $BQ=B$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Step 1.3 gives $PB=BD^\\dagger D=BQ=B$. Since $P$ has range contained in $\\operatorname{Ran}(B)$ and fixes every vector in $\\operatorname{Ran}(B)$, its range is exactly $\\operatorname{Ran}(B)$. Thus $P=P_{\\operatorname{Ran}(B)}$. The projector $BB^\\dagger$ has the same range by [F2]. For each vector, orthogonal projection decomposes it uniquely into a component in $\\operatorname{Ran}(B)$ and one in its orthogonal complement, so these two projectors coincide. Substituting this identity into step 1.1 proves all displayed formulas.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a positive square-matrix dimension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: For A=0 the sketch and both projector-compression products are zero (steps 1.1–2.2)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The algebra applies to one-dimensional A and any finite sketch width (steps 1.1–2.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: No rank condition is imposed on B or B*B; the proof permits a singular core (steps 1.2–2.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "thm-psd-nystrom-order-and-exactness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-nystrom-square-root-projector-identity",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite, $S\\in\\mathbb F^{n\\times s}$, and $B=A^{1/2}S$. If $P_{\\operatorname{Ran}(B)}$ denotes the orthogonal projection onto the range of $B$, then\n\n$$\\widehat A_{\\mathrm{nys}}=A^{1/2}P_{\\operatorname{Ran}(B)}A^{1/2}=A^{1/2}B(B^*B)^\\dagger B^*A^{1/2}=A^{1/2}BB^\\dagger A^{1/2}.$$\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Put $M=A^{1/2}$ and $P=P_{\\operatorname{Ran}(MS)}$. By [F1], for every vector $x$, $x^*\\widehat A_{\\mathrm{nys}}x=\\|PMx\\|_2^2\\ge0$ and $x^*(A-\\widehat A_{\\mathrm{nys}})x=\\|(I-P)Mx\\|_2^2\\ge0$. Both matrices are Hermitian, so these quadratic-form inequalities prove $0\\preceq\\widehat A_{\\mathrm{nys}}\\preceq A$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Assume $\\operatorname{Ran}(AS)=\\operatorname{Ran}(A)$. By [F2], choose an orthonormal eigenbasis of $A$ with eigenvalues $\\lambda_i\\ge0$. In that basis the diagonal matrix with entries $\\sqrt{\\lambda_i}$ is positive semidefinite and squares to $A$, so it equals $A^{1/2}$ by uniqueness [F3]. Thus $A$ and $A^{1/2}$ have the same range and the same rank.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Let $B=A^{1/2}S$. Then $\\operatorname{Ran}(B)\\subseteq\\operatorname{Ran}(A^{1/2})$ and $AS=A^{1/2}B$. The assumption gives $\\operatorname{rank}(AS)=\\operatorname{rank}(A)$, while a linear map cannot increase the dimension of a subspace's image, so $\\operatorname{rank}(AS)\\le\\operatorname{rank}(B)\\le\\operatorname{rank}(A^{1/2})=\\operatorname{rank}(A)$ by step 1.2. The ranks are equal, and the range inclusion therefore yields $\\operatorname{Ran}(B)=\\operatorname{Ran}(A^{1/2})$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The projection in [F1] is consequently the identity on $\\operatorname{Ran}(A^{1/2})$. Since $A^{1/2}x$ lies in that range for every $x$, [F1] gives $\\widehat A_{\\mathrm{nys}}x=A^{1/2}A^{1/2}x=Ax$ for every $x$. Thus $\\widehat A_{\\mathrm{nys}}=A$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires n>=1, so zero-dimensional ambient matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: For A=0 the compression and residual are zero, and the range exactness condition holds (steps 1.1–3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: The eigenbasis and projector proof includes n=1 (steps 1.1–3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: Singular A and S*AS are allowed; exactness is conditional on Ran(AS)=Ran(A) (steps 2.1–3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "thm-nystrom-deterministic-spectral-residual-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-nystrom-square-root-projector-identity",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite, $S\\in\\mathbb F^{n\\times s}$, and $B=A^{1/2}S$. If $P_{\\operatorname{Ran}(B)}$ denotes the orthogonal projection onto the range of $B$, then\n\n$$\\widehat A_{\\mathrm{nys}}=A^{1/2}P_{\\operatorname{Ran}(B)}A^{1/2}=A^{1/2}B(B^*B)^\\dagger B^*A^{1/2}=A^{1/2}BB^\\dagger A^{1/2}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.\n\n",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-moore-penrose-products-are-orthogonal-projectors",
+          "source_section": "Statement",
+          "quote": "Let $M\\in\\mathbb F^{p\\times q}$ be any finite real or complex matrix, and let $M^\\dagger$ be its unique Moore-Penrose inverse. Then $P=MM^\\dagger$ and $Q=M^\\dagger M$ are self-adjoint idempotents. The range of $P$ is $\\operatorname{Ran}(M)$, and the range of $Q$ is $\\operatorname{Ran}(M^\\dagger)$. Thus both are orthogonal projections. If $M$ has full row rank, then $MM^\\dagger=I_p$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$\n\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Put $M=A^{1/2}$, $Y=MS$, and let $P=P_{\\operatorname{Ran}(Y)}$. By [F1], $A-\\widehat A_{\\mathrm{nys}}=M(I-P)M=X^*X$ for $X=(I-P)M$, since $P$ is self-adjoint and idempotent. A singular value decomposition from [F4] writes $X=U_X\\Sigma_XV_X^*$ and $X^*X=V_X\\Sigma_X^2V_X^*$; [F5] therefore gives $\\|A-\\widehat A_{\\mathrm{nys}}\\|_2=\\|X\\|_2^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "By [F2], choose an orthonormal eigenbasis $U$ of $A$. The diagonal matrix whose entries are the nonnegative square roots of its eigenvalues is a positive-semidefinite square root, hence it is $A^{1/2}$ by uniqueness [F6]. Thus in this basis, $M=U\\operatorname{diag}(\\Lambda_1^{1/2},\\Lambda_2^{1/2})U^*$ and $U^*Y=\\begin{bmatrix}\\Lambda_1^{1/2}\\Omega_1\\\\\\Lambda_2^{1/2}\\Omega_2\\end{bmatrix}$. For any unit vector $x=U(x_1,x_2)$, set $c=\\Omega_1^\\dagger x_1$. Then [F3] gives $\\Omega_1c=x_1$, and $Yc=U\\begin{bmatrix}\\Lambda_1^{1/2}x_1\\\\\\Lambda_2^{1/2}\\Omega_2\\Omega_1^\\dagger x_1\\end{bmatrix}\\in\\operatorname{Ran}(Y)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Orthogonal projection gives the shortest distance to its range, so $\\|(I-P)Mx\\|_2\\le\\|Mx-Yc\\|_2 =\\|\\Lambda_2^{1/2}(x_2-\\Omega_2\\Omega_1^\\dagger x_1)\\|_2$. Write $G=\\Lambda_2^{1/2}\\Omega_2\\Omega_1^\\dagger$ and $H=\\Lambda_2^{1/2}$. For unit $(x_1,x_2)$, the last norm is at most $\\|G\\|_2\\|x_1\\|_2+\\|H\\|_2\\|x_2\\|_2 \\le(\\|G\\|_2^2+\\|H\\|_2^2)^{1/2}$ by the scalar Cauchy-Schwarz inequality. Taking the supremum over unit $x$ yields $\\|X\\|_2^2\\le\\|G\\|_2^2+\\|H\\|_2^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Since $H$ is diagonal with nonnegative entries, [F2] and [F5] give $\\|H\\|_2^2=\\lambda_{k+1}$, including the declared empty-tail convention. Combine this with step 1.1 and step 2.1 to obtain $\\|A-\\widehat A_{\\mathrm{nys}}\\|_2\\le\\lambda_{k+1}+\\|\\Lambda_2^{1/2}\\Omega_2\\Omega_1^\\dagger\\|_2^2$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement: The n=1 case has k=0 or k=n, both covered by the empty-block conventions and proof (steps 1.1–2.2)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement: For A=0 all eigenvalues and the residual are zero; the bound holds under its rank premise (steps 1.1–2.2)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement: For n=1 the k=0 and k=1 endpoint cases are included (steps 2.1–2.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement: A may be singular and the tail block may be empty; full row rank of Omega_1 is the explicit remaining premise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement: The k=0 and k=n conventions are explicit in the statement and proof (steps 1.2–2.2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "cex-arbitrary-selected-columns-miss-dominant-direction": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Any $1\\times2$ matrix satisfying $T(:,J)=1$ has the form $T=(t,1)$. The coefficient condition gives $|t|\\le1$, and direct multiplication gives $A-A(:,J)T=\\begin{bmatrix}10&0\\\\-t&0\\end{bmatrix}$. Its spectral norm is the Euclidean norm of its first column, $\\sqrt{100+|t|^2}\\ge10$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The singular values of the diagonal matrix in [A1] are $10$ and $1$, so the proposed upper bound is $\\sqrt{1+1\\cdot(2-1)}\\,\\sigma_2(A)=\\sqrt2$. Since $10>\\sqrt2$, no such $T$ satisfies the claim.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes a nonempty 2-by-2 matrix and one selected column."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample matrix is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample: The witness uses k=1 and computes the one-column interpolant (steps 1.1–1.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample: The selected column misses the dominant singular direction and gives the residual lower bound (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The counterexample: The selected list J=(2) is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "ex-exact-rank-two-skeleton-cur": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cur-reconstruction-cores",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$ over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ with $m,n\\ge1$, and let $I=(i_1,\\ldots,i_k)$ and $J=(j_1,\\ldots,j_k)$ be ordered lists of distinct row and column indices. For $k=0$, both lists and all selected matrices have zero size, with ordinary empty-matrix multiplication. Define $C=A(:,J)\\in\\mathbb F^{m\\times k}$, $R=A(I,:)\\in\\mathbb F^{k\\times n}$, and the cross matrix $W=A(I,J)\\in\\mathbb F^{k\\times k}$, using the same orders in $I,J,W$.\n\nThe **skeleton CUR core** is $U_{\\mathrm{skel}}=W^\\dagger$ and its reconstruction is $\\widehat A_{\\mathrm{skel}}=C W^\\dagger R$. The **projected least-squares CUR core** is $U_{\\mathrm{proj}}=C^\\dagger A R^\\dagger$ and its reconstruction is\n$\\widehat A_{\\mathrm{proj}}=C(C^\\dagger A R^\\dagger)R=(CC^\\dagger)A(R^\\dagger R)$.\n\nFor $k=0$, both reconstructions are the zero $m\\times n$ matrix.\n\nThe Moore-Penrose theorem in the dependencies guarantees that these formulas are single-valued for singular as well as nonsingular $C,R,W$. The two core choices are distinct. The projection residual bound on the A page applies only to $\\widehat A_{\\mathrm{proj}}$; it is not asserted for the skeleton core $W^\\dagger$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-skeleton-cur-exactness",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $A\\in\\mathbb F^{m\\times n}$, and choose $k$ rows and $k$ columns in fixed orders. Let $C=A(:,J)$, $R=A(I,:)$, and $W=A(I,J)\\in\\mathbb F^{k\\times k}$ as in [[def-cur-reconstruction-cores]]. If $\\operatorname{rank}(A)=\\operatorname{rank}(W)=k$, then the skeleton CUR reconstruction satisfies\n$C W^\\dagger R=A$.\nFor $k=0$, use the empty-matrix convention: a rank-zero $A$ is zero and the empty product reconstructs the zero $m\\times n$ matrix.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Direct extraction gives $C=\\begin{bmatrix}1&0\\\\0&1\\\\1&1\\end{bmatrix}$, $R=\\begin{bmatrix}1&0&1\\\\0&1&1\\end{bmatrix}$, and $W=I_2$. Since $I_2$ satisfies the four Penrose equations [F3], uniqueness [F4] gives $W^\\dagger=I_2$; [F1] therefore gives the reconstruction $CR$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Multiplication yields $CR=\\begin{bmatrix}1&0&1\\\\0&1&1\\\\1&1&2\\end{bmatrix}=A$. The identity $I_2$ satisfies the Penrose equations [F3], hence equals $W^\\dagger$ by uniqueness [F4]. The third row of $A$ is the sum of the first two, and the first two are independent, so $\\operatorname{rank}(A)=2=\\operatorname{rank}(W)$. Hence [F2] also applies and confirms the exact skeleton CUR identity.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty 3-by-3 matrix and two selected indices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The displayed matrix is nonzero and rank two."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example: The finite calculation checks the selected cross and reconstruction (steps 1.1–1.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example: The selected cross is nonsingular and the rank condition is computed directly (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example: The row and column lists are explicitly fixed as (1,2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "ex-psd-nystrom-residual-is-psd": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-psd-nystrom-approximation",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite with $n\\ge1$, let $S\\in\\mathbb F^{n\\times s}$ with $s\\ge0$ be any finite sketch matrix, and put $W=S^*AS\\in\\mathbb F^{s\\times s}$. The **Nyström approximation** associated with $(A,S)$ is\n$\\widehat A_{\\mathrm{nys}}=AS\\,W^\\dagger S^*A$.\n\nThe Moore-Penrose inverse is defined for every finite matrix, including singular $W$, and is unique by the dependencies. No rank, sampling, or probabilistic condition is part of this definition.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-psd-nystrom-order-and-exactness",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite and $S\\in\\mathbb F^{n\\times s}$. In the Loewner order, where $B\\preceq C$ means $C-B$ is positive semidefinite, the Nyström approximation in [[def-psd-nystrom-approximation]] satisfies\n$0\\preceq\\widehat A_{\\mathrm{nys}}\\preceq A$.\nIf the selected columns capture the range in the sense that $\\operatorname{Ran}(AS)=\\operatorname{Ran}(A)$, then $\\widehat A_{\\mathrm{nys}}=A$. Here rank, when used in the proof, means dimension of the range.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "We have $AS=(4,0)^T$ and $S^*AS=[4]$. The scalar $[1/4]$ satisfies all four equations [F3], so it is the Moore-Penrose inverse by uniqueness [F4]. Substitution in [F1] gives $\\widehat A_{\\mathrm{nys}}=\\operatorname{diag}(4,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Subtracting from $A$ gives $A-\\widehat A_{\\mathrm{nys}}=\\operatorname{diag}(0,1)$, which is positive semidefinite by its nonnegative diagonal entries. The general order statement [F2] also gives $0\\preceq\\widehat A_{\\mathrm{nys}}\\preceq A$ in this instance.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty 2-by-2 matrix and a one-column sketch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The target matrix A is positive definite and nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example: The one-column sketch and all products are computed explicitly (steps 1.1–1.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example: The approximation and residual are exact, including the zero residual eigenvalue (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example: The sketch S=e1 is fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    }
+  }
+}

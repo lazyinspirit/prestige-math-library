@@ -1,0 +1,1624 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "53",
+  "level": 0,
+  "scheduling_input_sha256": "b0d6b606d9f0adf93bf26882cde035d4f83d66f0f547ba77005ea921b39161c6",
+  "scope": [
+    "lem-sipdg-physical-simplex-trace-green",
+    "def-sipdg-jump-average-convention",
+    "def-sipdg-bilinear-form-and-energy-norm",
+    "lem-sipdg-discrete-flux-inverse-bound",
+    "lem-sipdg-energy-seminorm-is-a-norm",
+    "lem-sipdg-boundedness-augmented-norm",
+    "thm-sipdg-exact-consistency",
+    "lem-sipdg-adjoint-consistency-h2",
+    "thm-sipdg-coercivity-large-penalty",
+    "thm-sipdg-l2-error-under-adjoint-regularity",
+    "thm-sipdg-energy-error-estimate",
+    "ex-sipdg-broken-function-is-not-h1",
+    "ex-sipdg-one-dimensional-interior-jump",
+    "ex-sipdg-small-penalty-loses-coercivity"
+  ],
+  "contracts": {
+    "lem-sipdg-physical-simplex-trace-green": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.\n\nA **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set $\\mathcal T$ of closed,\nnondegenerate $d$-simplices such that their union is $\\overline\\Omega$,\ntheir interiors are pairwise disjoint, $\\Omega$ is the interior of their\nunion, and the intersection of two distinct cells is either empty or a\nwhole face of each. Thus no lower-dimensional crack is omitted from\n$\\Omega$ while its surrounding cells are retained. Every interior facet is\nincident to exactly two cells and every boundary facet to one. The faces of\na cell are the convex hulls of its vertex subsets. A facet means a face of\ndimension $d-1$.\n\nFor each cell $K\\in\\mathcal T$, an affine bijection\n$$F_K:\\overline{\\widehat S_d}\\to K,\\qquad F_K(\\widehat x)=b_K+A_K\\widehat x,$$\nwith invertible $A_K\\in\\mathbb R^{d\\times d}$ is a **reference map**.\nChoose the vertex order so $\\det A_K>0$; this is the orientation convention\nused for Piola formulas. Write $h_K:=\\operatorname{diam}(K)$ and let\n$\\rho_K$ be the radius of the largest Euclidean ball contained in $K$.\nA family $\\{\\mathcal T_h\\}_{h\\in H}$ is **shape regular** if there is a\nfinite $\\sigma$ such that $h_K/\\rho_K\\le\\sigma$ for every\n$h\\in H$ and $K\\in\\mathcal T_h$. This universal condition is vacuous for\nan empty family.\nThis definition uses radius; references using the diameter of the inscribed\nball differ by a factor of two.\n\nAn affine image of the reference square is a parallelogram. A general\nquadrilateral requires a nonaffine map and is outside this affine definition;\ncurved-cell approximation is not included here.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-affine-pullback-weak-derivatives-and-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F(\\widehat x)=A\\widehat x+b$ be an affine bijection from a bounded open\nset $\\widehat K\\subset\\mathbb R^d$ to $K$, where $A$ is invertible, and let\n$1\\le p\\le\\infty$. For every integer $r\\ge0$ and scalar\n$v\\in W^{r,p}(K)$, the pullback $\\widehat v:=v\\circ F$ belongs to\n$W^{r,p}(\\widehat K)$. For $r\\ge1$ its first weak derivatives satisfy\n$$D_{\\widehat x_j}\\widehat v=\\sum_{i=1}^d A_{ij}(D_{x_i}v)\\circ F,$$\nand higher derivatives are obtained by applying this constant-matrix rule\nrepeatedly. In particular, for each $0\\le m\\le r$,\n$$|\\widehat v|_{W^{m,p}(\\widehat K)}\\le C(d,m)\\|A\\|^m|\\det A|^{-1/p}|v|_{W^{m,p}(K)},$$\nwhere $|\\det A|^{-1/p}:=1$ for $p=\\infty$. The reverse estimate holds\nwith $A^{-1}$ and $|\\det A|^{1/p}$ in place of $A$ and\n$|\\det A|^{-1/p}$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reference-simplex-trace-and-gauss-green",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $1<p<\\infty$ and $p'=p/(p-1)$. For each facet $F$ of\n$\\widehat S_d$, restriction of smooth functions extends uniquely to a\nbounded linear trace map\n$$\\gamma_F:W^{1,p}(\\widehat S_d;\\mathbb R)\\to L^p(F;\\mathbb R).$$\nFor real-valued $u\\in W^{1,p}(\\widehat S_d)$ and\n$G\\in W^{1,p'}(\\widehat S_d;\\mathbb R^d)$, the facet traces satisfy\n$$\\int_{\\widehat S_d}u\\,\\operatorname{div}G+\\nabla u\\cdot G\\,dx =\\sum_{F\\subset\\partial\\widehat S_d}\\int_F\\gamma_Fu\\,\\gamma_FG\\cdot\\widehat n_F\\,dS.$$\nHere $\\gamma_FG$ is the componentwise trace and $\\widehat n_F$ is the\noutward unit normal. The bounded C1-domain trace and Green theorems are not\nused for the simplex.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-affine-simplex-gauss-green-formula",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K$ be a nondegenerate affine $d$-simplex and let\n$G\\in C^1(\\overline K;\\mathbb R^d)$. If $n_{K,F}$ is the outward unit\nnormal on each facet $F$, then\n$$\\int_K\\operatorname{div}G\\,dx=\\sum_{F\\subset\\partial K}\\int_FG\\cdot n_{K,F}\\,dS.$$\nFor an orientation-preserving affine map $F_K(\\widehat x)=b+A\\widehat x$,\nthe oriented area element transforms as\n$$n_{K,F}\\,dS=\\det(A)A^{-T}\\widehat n_{\\widehat F}\\,d\\widehat S.$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-smooth-density-on-reference-simplex",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, $k\\in\\mathbb N_0$,\n$1\\le p<\\infty$, and let\n$\\widehat S_d$ be the reference simplex. Then restrictions of functions\nsmooth on a neighbourhood of $\\overline{\\widehat S_d}$ are dense in\n$W^{k,p}(\\widehat S_d)$ in its Sobolev norm. No density assertion for\n$p=\\infty$ is made.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $\\widehat u=u\\circ F_K$ and $\\widehat G=\\det(B)B^{-1}(G\\circ F_K)$. By [F2], both belong to $W^{1,2}(\\widehat S_d)$. Define the physical traces by $\\gamma_Fu(F_K(\\widehat x))=\\gamma_{\\widehat F}\\widehat u(\\widehat x)$ and $\\gamma_FG(F_K(\\widehat x))=(\\det B)^{-1}B\\gamma_{\\widehat F}\\widehat G(\\widehat x)$. The reference traces in [F3] are in $L^2(\\widehat F)$; the constant affine surface Jacobian $\\det(B)|B^{-T}\\widehat n_{\\widehat F}|>0$ from [F4] and the fixed matrix factor show these definitions give bounded $L^2(F)$ traces. For a fixed map, [F5] supplies smooth approximants to $\\widehat u$ and each component of $G\\circ F_K$; the reverse estimate in [F2] maps them to smooth approximants on $K$. Thus smooth functions on $K$ are dense in $W^{1,2}(K)$, and any two bounded affine-transfer trace maps agree on this dense smooth class, so they agree on all of $W^{1,2}(K)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Applying the componentwise weak chain rule [F2] and the identity $\\sum_jB_{\\ell j}(B^{-1})_{ji}=\\delta_{\\ell i}$ gives $\\operatorname{div}_{\\widehat x}\\widehat G=\\det(B)(\\operatorname{div}_xG)\\circ F_K$. Also $\\nabla_{\\widehat x}\\widehat u\\cdot\\widehat G=((B^T\\nabla_xu)\\circ F_K)\\cdot(\\det(B)B^{-1}(G\\circ F_K))=\\det(B)(\\nabla_xu\\cdot G)\\circ F_K$. The volume products are integrable by [F7], so [F6] applied to their positive and negative parts identifies the reference volume integral in [F3] with the physical volume integral in the claim. The reference boundary products are integrable by [F3] and [F7]. By the trace definition in step 1.1, $\\gamma_{\\widehat F}\\widehat G=\\det(B)B^{-1}(\\gamma_FG)\\circ F_K$; hence its normal pairing is $\\det(B)(\\gamma_FG)\\cdot B^{-T}\\widehat n_{\\widehat F}\\,d\\widehat S=(\\gamma_FG)\\cdot n_{K,F}\\,dS$ by [F4], while the scalar trace is the pullback of $\\gamma_Fu$. Applying [F3] and summing over the finitely many facets proves the identity.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-physical-simplex-trace-green: The theorem requires an existing nondegenerate physical simplex K, so an empty cell is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-physical-simplex-trace-green: Taking u=0 and G=0 makes both volume and facet integrals zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-physical-simplex-trace-green: The result is local to one physical simplex and all of its d+1 facets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-physical-simplex-trace-green: The Statement requires a nondegenerate affine simplex and det B>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-physical-simplex-trace-green: Every facet, including every boundary facet, occurs in the Gauss–Green sum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-physical-simplex-trace-green: Countable Choice is explicit and is used only through the named affine pullback, change-of-variables, and trace suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-physical-simplex-trace-green asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-physical-simplex-trace-green asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-sipdg-jump-average-convention": {
+      "kind": "definition",
+      "risk": "medium",
+      "proof_strategy": "not-applicable",
+      "axiom_use": "No choice principle is used. The proof or definition uses finite cell and face families or explicitly specified data.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-jump-average-convention: The Definition fixes a finite mesh; an empty facet family contributes no jump or average values."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-jump-average-convention: The zero scalar and vector fields have zero jump and zero average on every facet."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-jump-average-convention: A one-cell mesh has only boundary facets, which use the stated one-sided trace convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-jump-average-convention: The Definition requires nondegenerate affine simplices and their well-defined facets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-jump-average-convention: Boundary facets and the one-dimensional companion endpoints use one-sided traces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-jump-average-convention: Only finitely many face orientations are selected; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition def-sipdg-jump-average-convention asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition def-sipdg-jump-average-convention asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-sipdg-bilinear-form-and-energy-norm": {
+      "kind": "definition",
+      "risk": "medium",
+      "proof_strategy": "not-applicable",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-bilinear-form-and-energy-norm: The Definition uses finite cell and facet sums; empty sums are zero and no nonempty-domain result is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-bilinear-form-and-energy-norm: For v=0 all volume, flux, jump, load, and penalty terms vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-bilinear-form-and-energy-norm: The allowed minimum degree k=1 and a one-cell mesh leave the form and boundary terms defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-bilinear-form-and-energy-norm: The mesh is affine simplicial, d≥2, h_F>0, and the coefficient and penalty parameters are positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-bilinear-form-and-energy-norm: Boundary facets use the one-sided flux, jump, and average prescribed by the convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition def-sipdg-bilinear-form-and-energy-norm: Countable Choice is assumed for the Sobolev and trace suppliers; no full Axiom of Choice is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition def-sipdg-bilinear-form-and-energy-norm asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition def-sipdg-bilinear-form-and-energy-norm asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-sipdg-discrete-flux-inverse-bound": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sipdg-bilinear-form-and-energy-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev notation below. Each cell $K$ is the closed simplex from [[def-matching-affine-simplicial-meshes]]; in $W^{m,2}(K)$ notation, $K$ means its open interior, and its facets are the boundary faces of that interior. Write $H^m(K):=W^{m,2}(K;\\mathbb R)$ for $m=1,2$. Use the mesh and jump convention of [[def-sipdg-jump-average-convention]]. Specialize [[def-broken-and-conforming-polynomial-spaces]] to scalar real polynomials of a fixed degree $k\\ge1$, so $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$. On every cell $K$, let $A_K\\in\\mathbb R^{d\\times d}$ be a constant symmetric matrix. Assume common bounds $0<\\lambda\\le\\Lambda<\\infty$ such that\n$$\\lambda|\\xi|^2\\le \\xi^TA_K\\xi\\le\\Lambda|\\xi|^2\\qquad(\\xi\\in\\mathbb R^d,\\ K\\in\\mathcal T).$$\nWrite $A|_K=A_K$, let $h_F:=\\operatorname{diam}(F)>0$, and fix a penalty parameter $\\gamma>0$. Define $\\mathcal D_h$ to consist of broken real-valued functions $v$ with $v|_K\\in H^1(K)$, distributional $\\operatorname{div}(A_K\\nabla v|_K)\\in L^2(K)$, and an $L^2(F)$ one-sided normal coefficient-flux trace $r_{K,F}(v)$ on every facet $F$ of each cell $K$. Precisely, $r_{K,F}(v)$ is the unique $L^2(F)$ function satisfying\n$$\\int_K A_K\\nabla v\\cdot\\nabla\\phi+\\operatorname{div}(A_K\\nabla v)\\,\\phi\\,dx=\\sum_{F\\subset\\partial K}\\int_F r_{K,F}(v)\\,\\gamma_F\\phi\\,dS\\qquad(\\phi\\in C^\\infty(\\overline K)).$$\nHere $\\gamma_F\\phi$ is the value trace from [[lem-sipdg-physical-simplex-trace-green]]; uniqueness follows by testing smooth functions supported near the relative interior of each facet, whose restrictions are dense in $L^2(F)$. If $F=K^-\\cap K^+$ and $n_F$ points outward from $K^-$, set $q_F(v):=\\tfrac12(r_{K^-,F}(v)-r_{K^+,F}(v))$; on a boundary facet set $q_F(v):=r_{K,F}(v)$ with the outward normal. These definitions agree with $\\{A\\nabla_hv\\}_F\\cdot n_F$ whenever the classical one-sided vector flux traces exist. Broken polynomials and cellwise $H^2$ functions belong to $\\mathcal D_h$ by [[lem-sipdg-physical-simplex-trace-green]]. For $v,w\\in\\mathcal D_h$, define\n$$a_h(v,w):=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(v)[w]_F\\,dS-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(w)[v]_F\\,dS+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\int_F[v]_F[w]_F\\,dS,$$\nBoundary-facet integrals use the counting-measure convention in dimension $d-1$; for $d\\ge2$ this is ordinary facet surface measure. The expression is real and symmetric.\n\nDefine the energy expression and its augmented version on $\\mathcal D_h$ by\n$$\\|v\\|_{DG}^2:=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla v\\,dx+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\|[v]_F\\|_{L^2(F)}^2,$$\n$$\\|v\\|_{DG,*}^2:=\\|v\\|_{DG}^2+\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v)\\|_{L^2(F)}^2.$$\nThe first expression is initially a seminorm on $V_h^{\\rm br}$; its definiteness is not part of this definition. The stated Sobolev notation follows [[def-sobolev-space-wkp-and-its-norm]]. Cellwise $H^2$ functions have the required value and normal coefficient-flux traces by [[lem-sipdg-physical-simplex-trace-green]], because $A_K$ is constant. The augmented expression is defined whenever $v\\in\\mathcal D_h$, so it applies in particular to the exact functions, dual functions and discrete polynomials used below.\n\nFor $f\\in L^2(\\Omega)$ define the discrete load $\\ell_h(w):=\\sum_{K\\in\\mathcal T}\\int_K f w\\,dx$. A symmetric interior-penalty DG solution is a function $u_h\\in V_h^{\\rm br}$ satisfying $a_h(u_h,w_h)=\\ell_h(w_h)$ for every $w_h\\in V_h^{\\rm br}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-polynomial-inverse-and-discrete-trace-estimates",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix polynomial degree $k\\ge0$, $1\\le p,q\\le\\infty$, and integers\n$0\\le m\\le\\ell\\le k$. Let the shape-regular affine simplex family be as in\n[[def-matching-affine-simplicial-meshes]]. For every cell $K$ in that family,\nthere is a constant independent of cell size such that, for every\n$v\\in\\mathbb P_k(K)$ and every facet $F\\subset\\partial K$,\n$$|v|_{W^{\\ell,p}(K)} \\le C h_K^{m-\\ell+d(1/p-1/q)}|v|_{W^{m,q}(K)},$$\n$$\\|v\\|_{L^p(F)} \\le C h_K^{(d-1)/p-d/q}\\|v\\|_{L^q(K)}.$$\nUse $1/\\infty=0$. Constants may depend on $d,k,p,q$ and the family shape\nregularity bound, but not on $K$ or $h_K$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each cell $K$, $A_K\\nabla(v_h|_K)$ is a vector polynomial of degree at most $k-1$. Let $C_{\\rm inv}$ be $\\sqrt d$ times the trace constant in [F2] with polynomial degree $k-1$, so the estimate applies componentwise. Use $|A_K\\xi|\\le\\Lambda|\\xi|$. For an interior face, convexity of the squared norm gives $|\\{A\\nabla_hv_h\\}|^2\\le\\tfrac12(|A_{K^-}\\nabla v_h^-|^2+|A_{K^+}\\nabla v_h^+|^2)$; for a boundary face there is one term. By [A1], $h_F\\le h_K$, so $h_F\\|q_F(v_h)\\|_{L^2(F)}^2\\le C_{\\rm inv}^2\\Lambda^2\\sum_{K\\in\\mathcal T_F}\\|\\nabla v_h\\|_{L^2(K)}^2$, where $\\mathcal T_F$ is the set of one or two incident cells.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Each simplex has $d+1$ facets, so summing step 1.1 over all faces counts each cell at most $d+1$ times. Ellipticity gives $\\sum_K\\|\\nabla v_h\\|_{L^2(K)}^2\\le\\lambda^{-1}\\sum_K\\int_KA_K\\nabla v_h\\cdot\\nabla v_h$. Thus the required estimate holds with $C_{\\rm flux}:=(d+1)C_{\\rm inv}^2\\Lambda^2/\\lambda$.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-discrete-flux-inverse-bound: With no cells or faces the asserted finite sums are empty and the inequality is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-discrete-flux-inverse-bound: For v_h=0 both sides of the inverse-trace inequality are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-discrete-flux-inverse-bound: The allowed case k=1 gives a constant cell gradient and the estimate still uses the degree-zero trace bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-discrete-flux-inverse-bound: The Statement requires λ>0, nondegenerate shape-regular simplices, and h_F≤h_K."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-discrete-flux-inverse-bound: A boundary facet has one incident cell and its flux is counted once."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-discrete-flux-inverse-bound: Countable Choice is carried only through the published inverse-trace supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-discrete-flux-inverse-bound asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-discrete-flux-inverse-bound asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-sipdg-energy-seminorm-is-a-norm": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No choice principle is used. The proof or definition uses finite cell and face families or explicitly specified data.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sipdg-bilinear-form-and-energy-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev notation below. Each cell $K$ is the closed simplex from [[def-matching-affine-simplicial-meshes]]; in $W^{m,2}(K)$ notation, $K$ means its open interior, and its facets are the boundary faces of that interior. Write $H^m(K):=W^{m,2}(K;\\mathbb R)$ for $m=1,2$. Use the mesh and jump convention of [[def-sipdg-jump-average-convention]]. Specialize [[def-broken-and-conforming-polynomial-spaces]] to scalar real polynomials of a fixed degree $k\\ge1$, so $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$. On every cell $K$, let $A_K\\in\\mathbb R^{d\\times d}$ be a constant symmetric matrix. Assume common bounds $0<\\lambda\\le\\Lambda<\\infty$ such that\n$$\\lambda|\\xi|^2\\le \\xi^TA_K\\xi\\le\\Lambda|\\xi|^2\\qquad(\\xi\\in\\mathbb R^d,\\ K\\in\\mathcal T).$$\nWrite $A|_K=A_K$, let $h_F:=\\operatorname{diam}(F)>0$, and fix a penalty parameter $\\gamma>0$. Define $\\mathcal D_h$ to consist of broken real-valued functions $v$ with $v|_K\\in H^1(K)$, distributional $\\operatorname{div}(A_K\\nabla v|_K)\\in L^2(K)$, and an $L^2(F)$ one-sided normal coefficient-flux trace $r_{K,F}(v)$ on every facet $F$ of each cell $K$. Precisely, $r_{K,F}(v)$ is the unique $L^2(F)$ function satisfying\n$$\\int_K A_K\\nabla v\\cdot\\nabla\\phi+\\operatorname{div}(A_K\\nabla v)\\,\\phi\\,dx=\\sum_{F\\subset\\partial K}\\int_F r_{K,F}(v)\\,\\gamma_F\\phi\\,dS\\qquad(\\phi\\in C^\\infty(\\overline K)).$$\nHere $\\gamma_F\\phi$ is the value trace from [[lem-sipdg-physical-simplex-trace-green]]; uniqueness follows by testing smooth functions supported near the relative interior of each facet, whose restrictions are dense in $L^2(F)$. If $F=K^-\\cap K^+$ and $n_F$ points outward from $K^-$, set $q_F(v):=\\tfrac12(r_{K^-,F}(v)-r_{K^+,F}(v))$; on a boundary facet set $q_F(v):=r_{K,F}(v)$ with the outward normal. These definitions agree with $\\{A\\nabla_hv\\}_F\\cdot n_F$ whenever the classical one-sided vector flux traces exist. Broken polynomials and cellwise $H^2$ functions belong to $\\mathcal D_h$ by [[lem-sipdg-physical-simplex-trace-green]]. For $v,w\\in\\mathcal D_h$, define\n$$a_h(v,w):=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(v)[w]_F\\,dS-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(w)[v]_F\\,dS+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\int_F[v]_F[w]_F\\,dS,$$\nBoundary-facet integrals use the counting-measure convention in dimension $d-1$; for $d\\ge2$ this is ordinary facet surface measure. The expression is real and symmetric.\n\nDefine the energy expression and its augmented version on $\\mathcal D_h$ by\n$$\\|v\\|_{DG}^2:=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla v\\,dx+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\|[v]_F\\|_{L^2(F)}^2,$$\n$$\\|v\\|_{DG,*}^2:=\\|v\\|_{DG}^2+\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v)\\|_{L^2(F)}^2.$$\nThe first expression is initially a seminorm on $V_h^{\\rm br}$; its definiteness is not part of this definition. The stated Sobolev notation follows [[def-sobolev-space-wkp-and-its-norm]]. Cellwise $H^2$ functions have the required value and normal coefficient-flux traces by [[lem-sipdg-physical-simplex-trace-green]], because $A_K$ is constant. The augmented expression is defined whenever $v\\in\\mathcal D_h$, so it applies in particular to the exact functions, dual functions and discrete polynomials used below.\n\nFor $f\\in L^2(\\Omega)$ define the discrete load $\\ell_h(w):=\\sum_{K\\in\\mathcal T}\\int_K f w\\,dx$. A symmetric interior-penalty DG solution is a function $u_h\\in V_h^{\\rm br}$ satisfying $a_h(u_h,w_h)=\\ell_h(w_h)$ for every $w_h\\in V_h^{\\rm br}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.\n\nA **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set $\\mathcal T$ of closed,\nnondegenerate $d$-simplices such that their union is $\\overline\\Omega$,\ntheir interiors are pairwise disjoint, $\\Omega$ is the interior of their\nunion, and the intersection of two distinct cells is either empty or a\nwhole face of each. Thus no lower-dimensional crack is omitted from\n$\\Omega$ while its surrounding cells are retained. Every interior facet is\nincident to exactly two cells and every boundary facet to one. The faces of\na cell are the convex hulls of its vertex subsets. A facet means a face of\ndimension $d-1$.\n\nFor each cell $K\\in\\mathcal T$, an affine bijection\n$$F_K:\\overline{\\widehat S_d}\\to K,\\qquad F_K(\\widehat x)=b_K+A_K\\widehat x,$$\nwith invertible $A_K\\in\\mathbb R^{d\\times d}$ is a **reference map**.\nChoose the vertex order so $\\det A_K>0$; this is the orientation convention\nused for Piola formulas. Write $h_K:=\\operatorname{diam}(K)$ and let\n$\\rho_K$ be the radius of the largest Euclidean ball contained in $K$.\nA family $\\{\\mathcal T_h\\}_{h\\in H}$ is **shape regular** if there is a\nfinite $\\sigma$ such that $h_K/\\rho_K\\le\\sigma$ for every\n$h\\in H$ and $K\\in\\mathcal T_h$. This universal condition is vacuous for\nan empty family.\nThis definition uses radius; references using the diameter of the inscribed\nball differ by a factor of two.\n\nAn affine image of the reference square is a parallelogram. A general\nquadrilateral requires a nonaffine map and is outside this affine definition;\ncurved-cell approximation is not included here.\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-sipdg-physical-simplex-trace-green",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, let $\\widehat S_d$ be the reference simplex, and let $F_K(\\widehat x)=b+B\\widehat x$ map $\\overline{\\widehat S_d}$ affinely onto a nondegenerate closed simplex $K$, with $\\det B>0$. Sobolev spaces on $K$ mean spaces on its open interior. For every scalar $u\\in W^{1,2}(K)$ and vector field $G\\in W^{1,2}(K;\\mathbb R^d)$, each physical facet has bounded $L^2$ traces $\\gamma_Fu$ and $\\gamma_FG$, obtained by affine transfer from the reference trace maps. These traces are independent of the chosen orientation-preserving reference map, and they satisfy\n$$\\int_K u\\,\\operatorname{div}G+\\nabla u\\cdot G\\,dx=\\sum_{F\\subset\\partial K}\\int_F(\\gamma_Fu)(\\gamma_FG)\\cdot n_{K,F}\\,dS,$$\nwhere $n_{K,F}$ is the outward unit normal.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Suppose $\\|v_h\\|_{DG}=0$. Every cell-gradient term is zero, and positive definiteness of $A_K$ implies $\\nabla(v_h|_K)=0$ almost everywhere. Since $v_h|_K$ is a polynomial on the connected simplex $K$, it is a constant $c_K$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Every interior-facet jump is zero by [F1], so adjacent cells have equal constants. Thus $c_K$ is constant on each connected component of the cell-facet adjacency graph. For any such component, sum [F5] over its finitely many cells. The cell volumes are positive, while the two oriented integrals on every shared facet cancel; if there were no unshared facet, this would give $d\\sum_K|K|=0$, a contradiction. Every unshared facet is an exterior mesh facet by the matching property [F2]. On that facet the boundary jump is the cell trace itself, so [F1] forces the component's constant to be zero. Therefore $v_h=0$ on every cell.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The expression is homogeneous under scalar multiplication. Define its associated pairing by $b_{DG}(v_h,w_h):=\\sum_K\\int_K\\nabla v_h^TA_K\\nabla w_h+\\gamma\\sum_Fh_F^{-1}\\int_F[v_h]_F[w_h]_F$. For any vectors $\\xi,\\eta$, the quadratic $(\\xi+t\\eta)^TA_K(\\xi+t\\eta)$ is nonnegative for all real $t$; if $\\eta\\ne0$, its discriminant is nonpositive, giving $|\\xi^TA_K\\eta|\\le(\\xi^TA_K\\xi)^{1/2}(\\eta^TA_K\\eta)^{1/2}$, and the case $\\eta=0$ is immediate. [F3] bounds the resulting cell integrals and each facet integral, while [F4] combines the finitely many cell and facet terms to give $|b_{DG}(v_h,w_h)|\\le\\|v_h\\|_{DG}\\|w_h\\|_{DG}$. Expanding $b_{DG}(v_h+w_h,v_h+w_h)$ gives $\\|v_h+w_h\\|_{DG}^2\\le(\\|v_h\\|_{DG}+\\|w_h\\|_{DG})^2$. Thus the triangle inequality holds; together with step 2.1 this proves the norm axioms.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-energy-seminorm-is-a-norm: The Statement assumes a nonempty bounded polyhedral domain, excluding the empty mesh case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-energy-seminorm-is-a-norm: Step 1.1 starts from zero energy and the subsequent jump and boundary terms force every cell constant to vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-energy-seminorm-is-a-norm: The proof covers a single simplex: its boundary-facet penalty forces its constant mode to zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-energy-seminorm-is-a-norm: The mesh consists of nondegenerate simplices and the coefficient and penalty weights are positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-energy-seminorm-is-a-norm: The boundary-facet jump term is essential to remove constants on each cell-adjacency component."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-energy-seminorm-is-a-norm: The proof uses only the finite cell-facet graph and finite-dimensional L2 products; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-energy-seminorm-is-a-norm asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-energy-seminorm-is-a-norm asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-sipdg-boundedness-augmented-norm": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sipdg-bilinear-form-and-energy-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev notation below. Each cell $K$ is the closed simplex from [[def-matching-affine-simplicial-meshes]]; in $W^{m,2}(K)$ notation, $K$ means its open interior, and its facets are the boundary faces of that interior. Write $H^m(K):=W^{m,2}(K;\\mathbb R)$ for $m=1,2$. Use the mesh and jump convention of [[def-sipdg-jump-average-convention]]. Specialize [[def-broken-and-conforming-polynomial-spaces]] to scalar real polynomials of a fixed degree $k\\ge1$, so $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$. On every cell $K$, let $A_K\\in\\mathbb R^{d\\times d}$ be a constant symmetric matrix. Assume common bounds $0<\\lambda\\le\\Lambda<\\infty$ such that\n$$\\lambda|\\xi|^2\\le \\xi^TA_K\\xi\\le\\Lambda|\\xi|^2\\qquad(\\xi\\in\\mathbb R^d,\\ K\\in\\mathcal T).$$\nWrite $A|_K=A_K$, let $h_F:=\\operatorname{diam}(F)>0$, and fix a penalty parameter $\\gamma>0$. Define $\\mathcal D_h$ to consist of broken real-valued functions $v$ with $v|_K\\in H^1(K)$, distributional $\\operatorname{div}(A_K\\nabla v|_K)\\in L^2(K)$, and an $L^2(F)$ one-sided normal coefficient-flux trace $r_{K,F}(v)$ on every facet $F$ of each cell $K$. Precisely, $r_{K,F}(v)$ is the unique $L^2(F)$ function satisfying\n$$\\int_K A_K\\nabla v\\cdot\\nabla\\phi+\\operatorname{div}(A_K\\nabla v)\\,\\phi\\,dx=\\sum_{F\\subset\\partial K}\\int_F r_{K,F}(v)\\,\\gamma_F\\phi\\,dS\\qquad(\\phi\\in C^\\infty(\\overline K)).$$\nHere $\\gamma_F\\phi$ is the value trace from [[lem-sipdg-physical-simplex-trace-green]]; uniqueness follows by testing smooth functions supported near the relative interior of each facet, whose restrictions are dense in $L^2(F)$. If $F=K^-\\cap K^+$ and $n_F$ points outward from $K^-$, set $q_F(v):=\\tfrac12(r_{K^-,F}(v)-r_{K^+,F}(v))$; on a boundary facet set $q_F(v):=r_{K,F}(v)$ with the outward normal. These definitions agree with $\\{A\\nabla_hv\\}_F\\cdot n_F$ whenever the classical one-sided vector flux traces exist. Broken polynomials and cellwise $H^2$ functions belong to $\\mathcal D_h$ by [[lem-sipdg-physical-simplex-trace-green]]. For $v,w\\in\\mathcal D_h$, define\n$$a_h(v,w):=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(v)[w]_F\\,dS-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(w)[v]_F\\,dS+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\int_F[v]_F[w]_F\\,dS,$$\nBoundary-facet integrals use the counting-measure convention in dimension $d-1$; for $d\\ge2$ this is ordinary facet surface measure. The expression is real and symmetric.\n\nDefine the energy expression and its augmented version on $\\mathcal D_h$ by\n$$\\|v\\|_{DG}^2:=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla v\\,dx+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\|[v]_F\\|_{L^2(F)}^2,$$\n$$\\|v\\|_{DG,*}^2:=\\|v\\|_{DG}^2+\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v)\\|_{L^2(F)}^2.$$\nThe first expression is initially a seminorm on $V_h^{\\rm br}$; its definiteness is not part of this definition. The stated Sobolev notation follows [[def-sobolev-space-wkp-and-its-norm]]. Cellwise $H^2$ functions have the required value and normal coefficient-flux traces by [[lem-sipdg-physical-simplex-trace-green]], because $A_K$ is constant. The augmented expression is defined whenever $v\\in\\mathcal D_h$, so it applies in particular to the exact functions, dual functions and discrete polynomials used below.\n\nFor $f\\in L^2(\\Omega)$ define the discrete load $\\ell_h(w):=\\sum_{K\\in\\mathcal T}\\int_K f w\\,dx$. A symmetric interior-penalty DG solution is a function $u_h\\in V_h^{\\rm br}$ satisfying $a_h(u_h,w_h)=\\ell_h(w_h)$ for every $w_h\\in V_h^{\\rm br}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Set $X(v)^2:=\\sum_K\\int_K\\nabla v^TA_K\\nabla v\\,dx$ and $J(v)^2:=\\sum_Fh_F^{-1}\\|[v]_F\\|_{L^2(F)}^2$. For any real vectors $\\xi,\\eta$, positivity of $A_K$ gives $(\\xi+t\\eta)^TA_K(\\xi+t\\eta)\\ge0$ for every real $t$; the discriminant of this quadratic implies $|\\xi^TA_K\\eta|\\le(\\xi^TA_K\\xi)^{1/2}(\\eta^TA_K\\eta)^{1/2}$. Applying [F2] on each cell and then [F3] to the finite cell sum gives $|\\sum_K\\int_K\\nabla v^TA_K\\nabla w|\\le X(v)X(w)$. The same two inequalities give $|\\gamma\\sum_Fh_F^{-1}\\int_F[v]_F[w]_F|\\le\\gamma J(v)J(w)$. Applying [F3] to the two-component vectors $(X(v),\\sqrt\\gamma J(v))$ and $(X(w),\\sqrt\\gamma J(w))$ shows that the absolute value of the sum of the volume and penalty terms is at most $\\|v\\|_{DG}\\|w\\|_{DG}\\le\\|v\\|_{DG,*}\\|w\\|_{DG,*}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For one flux term, weighted Cauchy–Schwarz using [F2] on each face and [F3] on the finite face sum gives $|\\sum_F\\int_Fq_F(v)[w]_F|\\le(\\sum_Fh_F\\|q_F(v)\\|_2^2)^{1/2}J(w)\\le\\gamma^{-1/2}\\|v\\|_{DG,*}\\|w\\|_{DG,*}$. Interchanging $v,w$ gives the same bound for the other flux term. Adding these two bounds to step 1.1 proves the stated bilinear-form constant.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The energy pairing $b_{DG}(v,w):=\\sum_K\\int_K\\nabla v^TA_K\\nabla w+\\gamma\\sum_Fh_F^{-1}\\int_F[v]_F[w]_F$ is symmetric and nonnegative on the diagonal. Step 1.1 proves $|b_{DG}(v,w)|\\le\\|v\\|_{DG}\\|w\\|_{DG}$. Expanding $b_{DG}(v+w,v+w)$ and using this bound gives $\\|v+w\\|_{DG}^2\\le(\\|v\\|_{DG}+\\|w\\|_{DG})^2$; the formula also gives nonnegativity and absolute homogeneity. Taking square roots proves the seminorm axioms.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-boundedness-augmented-norm: The form domain permits empty sums, for which the bilinear bound is 0≤0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-boundedness-augmented-norm: For v=0 or w=0 every bilinear-form term is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-boundedness-augmented-norm: The estimate uses finite cell and face sums and has no minimum-degree restriction beyond the stated SIPDG space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-boundedness-augmented-norm: The Definition requires h_F>0, γ>0, and positive-definite cell coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-boundedness-augmented-norm: Boundary faces use the one-sided flux and jump, and the same weighted bound includes them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-boundedness-augmented-norm: Countable Choice is inherited from the stated form domain; the boundedness argument itself uses finite sums and integral Cauchy–Schwarz."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-boundedness-augmented-norm asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-boundedness-augmented-norm asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-sipdg-exact-consistency": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sipdg-bilinear-form-and-energy-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev notation below. Each cell $K$ is the closed simplex from [[def-matching-affine-simplicial-meshes]]; in $W^{m,2}(K)$ notation, $K$ means its open interior, and its facets are the boundary faces of that interior. Write $H^m(K):=W^{m,2}(K;\\mathbb R)$ for $m=1,2$. Use the mesh and jump convention of [[def-sipdg-jump-average-convention]]. Specialize [[def-broken-and-conforming-polynomial-spaces]] to scalar real polynomials of a fixed degree $k\\ge1$, so $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$. On every cell $K$, let $A_K\\in\\mathbb R^{d\\times d}$ be a constant symmetric matrix. Assume common bounds $0<\\lambda\\le\\Lambda<\\infty$ such that\n$$\\lambda|\\xi|^2\\le \\xi^TA_K\\xi\\le\\Lambda|\\xi|^2\\qquad(\\xi\\in\\mathbb R^d,\\ K\\in\\mathcal T).$$\nWrite $A|_K=A_K$, let $h_F:=\\operatorname{diam}(F)>0$, and fix a penalty parameter $\\gamma>0$. Define $\\mathcal D_h$ to consist of broken real-valued functions $v$ with $v|_K\\in H^1(K)$, distributional $\\operatorname{div}(A_K\\nabla v|_K)\\in L^2(K)$, and an $L^2(F)$ one-sided normal coefficient-flux trace $r_{K,F}(v)$ on every facet $F$ of each cell $K$. Precisely, $r_{K,F}(v)$ is the unique $L^2(F)$ function satisfying\n$$\\int_K A_K\\nabla v\\cdot\\nabla\\phi+\\operatorname{div}(A_K\\nabla v)\\,\\phi\\,dx=\\sum_{F\\subset\\partial K}\\int_F r_{K,F}(v)\\,\\gamma_F\\phi\\,dS\\qquad(\\phi\\in C^\\infty(\\overline K)).$$\nHere $\\gamma_F\\phi$ is the value trace from [[lem-sipdg-physical-simplex-trace-green]]; uniqueness follows by testing smooth functions supported near the relative interior of each facet, whose restrictions are dense in $L^2(F)$. If $F=K^-\\cap K^+$ and $n_F$ points outward from $K^-$, set $q_F(v):=\\tfrac12(r_{K^-,F}(v)-r_{K^+,F}(v))$; on a boundary facet set $q_F(v):=r_{K,F}(v)$ with the outward normal. These definitions agree with $\\{A\\nabla_hv\\}_F\\cdot n_F$ whenever the classical one-sided vector flux traces exist. Broken polynomials and cellwise $H^2$ functions belong to $\\mathcal D_h$ by [[lem-sipdg-physical-simplex-trace-green]]. For $v,w\\in\\mathcal D_h$, define\n$$a_h(v,w):=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(v)[w]_F\\,dS-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(w)[v]_F\\,dS+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\int_F[v]_F[w]_F\\,dS,$$\nBoundary-facet integrals use the counting-measure convention in dimension $d-1$; for $d\\ge2$ this is ordinary facet surface measure. The expression is real and symmetric.\n\nDefine the energy expression and its augmented version on $\\mathcal D_h$ by\n$$\\|v\\|_{DG}^2:=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla v\\,dx+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\|[v]_F\\|_{L^2(F)}^2,$$\n$$\\|v\\|_{DG,*}^2:=\\|v\\|_{DG}^2+\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v)\\|_{L^2(F)}^2.$$\nThe first expression is initially a seminorm on $V_h^{\\rm br}$; its definiteness is not part of this definition. The stated Sobolev notation follows [[def-sobolev-space-wkp-and-its-norm]]. Cellwise $H^2$ functions have the required value and normal coefficient-flux traces by [[lem-sipdg-physical-simplex-trace-green]], because $A_K$ is constant. The augmented expression is defined whenever $v\\in\\mathcal D_h$, so it applies in particular to the exact functions, dual functions and discrete polynomials used below.\n\nFor $f\\in L^2(\\Omega)$ define the discrete load $\\ell_h(w):=\\sum_{K\\in\\mathcal T}\\int_K f w\\,dx$. A symmetric interior-penalty DG solution is a function $u_h\\in V_h^{\\rm br}$ satisfying $a_h(u_h,w_h)=\\ell_h(w_h)$ for every $w_h\\in V_h^{\\rm br}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sipdg-jump-average-convention",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ and let $\\mathcal T$ be a finite matching affine simplicial mesh of a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, with shape-regularity bound $\\sigma$, as in [[def-matching-affine-simplicial-meshes]]. Write $\\mathcal F_h^{\\rm int}$ for its interior facets and $\\mathcal F_h^{\\rm bdy}$ for its boundary facets, and put $\\mathcal F_h=\\mathcal F_h^{\\rm int}\\cup\\mathcal F_h^{\\rm bdy}$. The trial functions below belong to the broken scalar polynomial space $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$ from [[def-broken-and-conforming-polynomial-spaces]].\n\nFor each interior facet $F=K^-\\cap K^+$, choose a unit normal $n_F$ pointing from $K^-$ to $K^+$. For a scalar or vector field $g$ with traces from both cells, define\n$$[g]_F:=g^- - g^+,\\qquad \\{g\\}_F:=\\tfrac12(g^-+g^+).$$\nFor a boundary facet $F\\subset\\partial K\\cap\\partial\\Omega$, let $n_F=n_K$ be the outward unit normal and define $[g]_F:=g|_K$ and $\\{g\\}_F:=g|_K$. Reversing the chosen interior normal also reverses $[g]_F$, so the scalar jump/average contractions used in the form are independent of that choice.\n\nFor one-dimensional interval examples, use the following separate extension of the same formulas. At an interior point shared by a left cell $K^-$ and right cell $K^+$, orient from left to right and set $[g]_F=g^- - g^+$ and $\\{g\\}_F=(g^-+g^+)/2$. At either endpoint use the one-sided trace for both jump and average, and use counting measure on the zero-dimensional face. This extension is not an instance of the published $d\\ge2$ mesh definition above.\n\nThe following diagram records the interior orientation; the formulas above are the definitions, and the diagram is only a convention aid.\n\n```tikz\n\\begin{tikzpicture}[baseline=-0.5ex]\n  \\fill[blue!8] (0,0) rectangle (1.5,1.5);\n  \\fill[orange!10] (1.5,0) rectangle (3,1.5);\n  \\draw[thick] (0,0) rectangle (1.5,1.5);\n  \\draw[thick] (1.5,0) rectangle (3,1.5);\n  \\draw[very thick] (1.5,0)--(1.5,1.5);\n  \\draw[->,thick] (1.2,0.75)--(2.1,0.75) node[midway,below] {$n_F$};\n  \\node at (0.75,1.15) {$K^-$};\n  \\node at (2.25,1.15) {$K^+$};\n  \\node[rotate=90] at (1.5,0.75) {$F$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sipdg-physical-simplex-trace-green",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, let $\\widehat S_d$ be the reference simplex, and let $F_K(\\widehat x)=b+B\\widehat x$ map $\\overline{\\widehat S_d}$ affinely onto a nondegenerate closed simplex $K$, with $\\det B>0$. Sobolev spaces on $K$ mean spaces on its open interior. For every scalar $u\\in W^{1,2}(K)$ and vector field $G\\in W^{1,2}(K;\\mathbb R^d)$, each physical facet has bounded $L^2$ traces $\\gamma_Fu$ and $\\gamma_FG$, obtained by affine transfer from the reference trace maps. These traces are independent of the chosen orientation-preserving reference map, and they satisfy\n$$\\int_K u\\,\\operatorname{div}G+\\nabla u\\cdot G\\,dx=\\sum_{F\\subset\\partial K}\\int_F(\\gamma_Fu)(\\gamma_FG)\\cdot n_{K,F}\\,dS,$$\nwhere $n_{K,F}$ is the outward unit normal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On each cell $K$, take $v=w_h|_K$ and $G=A_K\\nabla u$. Since $u|_K\\in H^2(K)$, [F4] and constant $A_K$ give $G\\in W^{1,2}(K;\\mathbb R^d)$, so [F2] and the cell equation yield $\\int_KA_K\\nabla u\\cdot\\nabla w_h=\\int_Kfw_h+\\sum_{F\\subset\\partial K}\\int_F(A_K\\nabla u\\cdot n_{K,F})w_h|_K$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Sum step 1.1 over cells. On an interior facet the two outward normals are $n_F$ and $-n_F$; the assumed normal-flux equality makes the two boundary terms equal $\\int_Fq_F(u)[w_h]_F$. On a boundary facet the single term is also $\\int_Fq_F(u)[w_h]_F$ by the one-sided convention. Therefore the broken volume term equals $\\ell_h(w_h)+\\sum_F\\int_Fq_F(u)[w_h]_F$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The matching traces of $u$ and its zero boundary trace give $[u]_F=0$ on every facet. Substitution into the SIPDG form makes its second flux-jump term exactly cancel the face sum of step 2.1, while its adjoint-consistency term and penalty term vanish. Hence $a_h(u,w_h)=\\ell_h(w_h)$.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-exact-consistency: An empty mesh makes the cell and face sums empty; no nonempty-domain conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-exact-consistency: If u=0 and f=0, both sides of the consistency identity vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-exact-consistency: On a one-cell mesh there are no interior matching conditions, and the boundary terms are covered by the one-sided convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-exact-consistency: The Statement assumes a matching affine simplicial mesh and positive-definite cell coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-exact-consistency: Boundary facets are included; the zero boundary trace makes their jumps vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-exact-consistency: Countable Choice is explicitly assumed for the physical-simplex Green identity and the Sobolev suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement thm-sipdg-exact-consistency asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement thm-sipdg-exact-consistency asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-sipdg-adjoint-consistency-h2": {
+      "kind": "lemma",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sipdg-bilinear-form-and-energy-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev notation below. Each cell $K$ is the closed simplex from [[def-matching-affine-simplicial-meshes]]; in $W^{m,2}(K)$ notation, $K$ means its open interior, and its facets are the boundary faces of that interior. Write $H^m(K):=W^{m,2}(K;\\mathbb R)$ for $m=1,2$. Use the mesh and jump convention of [[def-sipdg-jump-average-convention]]. Specialize [[def-broken-and-conforming-polynomial-spaces]] to scalar real polynomials of a fixed degree $k\\ge1$, so $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$. On every cell $K$, let $A_K\\in\\mathbb R^{d\\times d}$ be a constant symmetric matrix. Assume common bounds $0<\\lambda\\le\\Lambda<\\infty$ such that\n$$\\lambda|\\xi|^2\\le \\xi^TA_K\\xi\\le\\Lambda|\\xi|^2\\qquad(\\xi\\in\\mathbb R^d,\\ K\\in\\mathcal T).$$\nWrite $A|_K=A_K$, let $h_F:=\\operatorname{diam}(F)>0$, and fix a penalty parameter $\\gamma>0$. Define $\\mathcal D_h$ to consist of broken real-valued functions $v$ with $v|_K\\in H^1(K)$, distributional $\\operatorname{div}(A_K\\nabla v|_K)\\in L^2(K)$, and an $L^2(F)$ one-sided normal coefficient-flux trace $r_{K,F}(v)$ on every facet $F$ of each cell $K$. Precisely, $r_{K,F}(v)$ is the unique $L^2(F)$ function satisfying\n$$\\int_K A_K\\nabla v\\cdot\\nabla\\phi+\\operatorname{div}(A_K\\nabla v)\\,\\phi\\,dx=\\sum_{F\\subset\\partial K}\\int_F r_{K,F}(v)\\,\\gamma_F\\phi\\,dS\\qquad(\\phi\\in C^\\infty(\\overline K)).$$\nHere $\\gamma_F\\phi$ is the value trace from [[lem-sipdg-physical-simplex-trace-green]]; uniqueness follows by testing smooth functions supported near the relative interior of each facet, whose restrictions are dense in $L^2(F)$. If $F=K^-\\cap K^+$ and $n_F$ points outward from $K^-$, set $q_F(v):=\\tfrac12(r_{K^-,F}(v)-r_{K^+,F}(v))$; on a boundary facet set $q_F(v):=r_{K,F}(v)$ with the outward normal. These definitions agree with $\\{A\\nabla_hv\\}_F\\cdot n_F$ whenever the classical one-sided vector flux traces exist. Broken polynomials and cellwise $H^2$ functions belong to $\\mathcal D_h$ by [[lem-sipdg-physical-simplex-trace-green]]. For $v,w\\in\\mathcal D_h$, define\n$$a_h(v,w):=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(v)[w]_F\\,dS-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(w)[v]_F\\,dS+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\int_F[v]_F[w]_F\\,dS,$$\nBoundary-facet integrals use the counting-measure convention in dimension $d-1$; for $d\\ge2$ this is ordinary facet surface measure. The expression is real and symmetric.\n\nDefine the energy expression and its augmented version on $\\mathcal D_h$ by\n$$\\|v\\|_{DG}^2:=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla v\\,dx+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\|[v]_F\\|_{L^2(F)}^2,$$\n$$\\|v\\|_{DG,*}^2:=\\|v\\|_{DG}^2+\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v)\\|_{L^2(F)}^2.$$\nThe first expression is initially a seminorm on $V_h^{\\rm br}$; its definiteness is not part of this definition. The stated Sobolev notation follows [[def-sobolev-space-wkp-and-its-norm]]. Cellwise $H^2$ functions have the required value and normal coefficient-flux traces by [[lem-sipdg-physical-simplex-trace-green]], because $A_K$ is constant. The augmented expression is defined whenever $v\\in\\mathcal D_h$, so it applies in particular to the exact functions, dual functions and discrete polynomials used below.\n\nFor $f\\in L^2(\\Omega)$ define the discrete load $\\ell_h(w):=\\sum_{K\\in\\mathcal T}\\int_K f w\\,dx$. A symmetric interior-penalty DG solution is a function $u_h\\in V_h^{\\rm br}$ satisfying $a_h(u_h,w_h)=\\ell_h(w_h)$ for every $w_h\\in V_h^{\\rm br}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sipdg-physical-simplex-trace-green",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, let $\\widehat S_d$ be the reference simplex, and let $F_K(\\widehat x)=b+B\\widehat x$ map $\\overline{\\widehat S_d}$ affinely onto a nondegenerate closed simplex $K$, with $\\det B>0$. Sobolev spaces on $K$ mean spaces on its open interior. For every scalar $u\\in W^{1,2}(K)$ and vector field $G\\in W^{1,2}(K;\\mathbb R^d)$, each physical facet has bounded $L^2$ traces $\\gamma_Fu$ and $\\gamma_FG$, obtained by affine transfer from the reference trace maps. These traces are independent of the chosen orientation-preserving reference map, and they satisfy\n$$\\int_K u\\,\\operatorname{div}G+\\nabla u\\cdot G\\,dx=\\sum_{F\\subset\\partial K}\\int_F(\\gamma_Fu)(\\gamma_FG)\\cdot n_{K,F}\\,dS,$$\nwhere $n_{K,F}$ is the outward unit normal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On each cell apply [F2] with scalar $v=e|_K$ and vector field $G=A_K\\nabla z$, which belongs to $W^{1,2}$ by [F4]. Symmetry of $A_K$ and the dual equation give $\\int_KA_K\\nabla e\\cdot\\nabla z=\\int_Ke^2+\\sum_{F\\subset\\partial K}\\int_F e(A_K\\nabla z\\cdot n_{K,F})$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Sum step 1.1 over all cells. Matching normal fluxes make each interior-face contribution $\\int_Fq_F(z)[e]_F$, and the boundary contributions use $[e]_F=e$. Thus $\\sum_K\\int_KA_K\\nabla e\\cdot\\nabla z=\\|e\\|_{L^2(\\Omega)}^2+\\sum_F\\int_Fq_F(z)[e]_F$.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The traces of $z$ match on interior facets and vanish on boundary facets, so $[z]_F=0$ for every $F$. In $a_h(e,z)$ the term $-q_F(e)[z]_F$ and the penalty term therefore vanish; the remaining flux term is $-\\sum_F\\int_Fq_F(z)[e]_F$. Substituting step 2.1 proves the identity.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-adjoint-consistency-h2: An empty mesh makes both the cell integral and facet sum empty; the identity is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-adjoint-consistency-h2: If e=0 then the dual equation gives zero right side and both sides of the identity are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-adjoint-consistency-h2: On one cell the only faces are boundary faces, covered by the zero trace and one-sided convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-adjoint-consistency-h2: The Statement requires nondegenerate affine cells and cellwise H2 functions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-adjoint-consistency-h2: Boundary facets use [e]=e and [z]=0, exactly the terms retained in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement lem-sipdg-adjoint-consistency-h2: Countable Choice is inherited from the physical-simplex trace and Green suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-adjoint-consistency-h2 asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement lem-sipdg-adjoint-consistency-h2 asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-sipdg-coercivity-large-penalty": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sipdg-bilinear-form-and-energy-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev notation below. Each cell $K$ is the closed simplex from [[def-matching-affine-simplicial-meshes]]; in $W^{m,2}(K)$ notation, $K$ means its open interior, and its facets are the boundary faces of that interior. Write $H^m(K):=W^{m,2}(K;\\mathbb R)$ for $m=1,2$. Use the mesh and jump convention of [[def-sipdg-jump-average-convention]]. Specialize [[def-broken-and-conforming-polynomial-spaces]] to scalar real polynomials of a fixed degree $k\\ge1$, so $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$. On every cell $K$, let $A_K\\in\\mathbb R^{d\\times d}$ be a constant symmetric matrix. Assume common bounds $0<\\lambda\\le\\Lambda<\\infty$ such that\n$$\\lambda|\\xi|^2\\le \\xi^TA_K\\xi\\le\\Lambda|\\xi|^2\\qquad(\\xi\\in\\mathbb R^d,\\ K\\in\\mathcal T).$$\nWrite $A|_K=A_K$, let $h_F:=\\operatorname{diam}(F)>0$, and fix a penalty parameter $\\gamma>0$. Define $\\mathcal D_h$ to consist of broken real-valued functions $v$ with $v|_K\\in H^1(K)$, distributional $\\operatorname{div}(A_K\\nabla v|_K)\\in L^2(K)$, and an $L^2(F)$ one-sided normal coefficient-flux trace $r_{K,F}(v)$ on every facet $F$ of each cell $K$. Precisely, $r_{K,F}(v)$ is the unique $L^2(F)$ function satisfying\n$$\\int_K A_K\\nabla v\\cdot\\nabla\\phi+\\operatorname{div}(A_K\\nabla v)\\,\\phi\\,dx=\\sum_{F\\subset\\partial K}\\int_F r_{K,F}(v)\\,\\gamma_F\\phi\\,dS\\qquad(\\phi\\in C^\\infty(\\overline K)).$$\nHere $\\gamma_F\\phi$ is the value trace from [[lem-sipdg-physical-simplex-trace-green]]; uniqueness follows by testing smooth functions supported near the relative interior of each facet, whose restrictions are dense in $L^2(F)$. If $F=K^-\\cap K^+$ and $n_F$ points outward from $K^-$, set $q_F(v):=\\tfrac12(r_{K^-,F}(v)-r_{K^+,F}(v))$; on a boundary facet set $q_F(v):=r_{K,F}(v)$ with the outward normal. These definitions agree with $\\{A\\nabla_hv\\}_F\\cdot n_F$ whenever the classical one-sided vector flux traces exist. Broken polynomials and cellwise $H^2$ functions belong to $\\mathcal D_h$ by [[lem-sipdg-physical-simplex-trace-green]]. For $v,w\\in\\mathcal D_h$, define\n$$a_h(v,w):=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(v)[w]_F\\,dS-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(w)[v]_F\\,dS+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\int_F[v]_F[w]_F\\,dS,$$\nBoundary-facet integrals use the counting-measure convention in dimension $d-1$; for $d\\ge2$ this is ordinary facet surface measure. The expression is real and symmetric.\n\nDefine the energy expression and its augmented version on $\\mathcal D_h$ by\n$$\\|v\\|_{DG}^2:=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla v\\,dx+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\|[v]_F\\|_{L^2(F)}^2,$$\n$$\\|v\\|_{DG,*}^2:=\\|v\\|_{DG}^2+\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v)\\|_{L^2(F)}^2.$$\nThe first expression is initially a seminorm on $V_h^{\\rm br}$; its definiteness is not part of this definition. The stated Sobolev notation follows [[def-sobolev-space-wkp-and-its-norm]]. Cellwise $H^2$ functions have the required value and normal coefficient-flux traces by [[lem-sipdg-physical-simplex-trace-green]], because $A_K$ is constant. The augmented expression is defined whenever $v\\in\\mathcal D_h$, so it applies in particular to the exact functions, dual functions and discrete polynomials used below.\n\nFor $f\\in L^2(\\Omega)$ define the discrete load $\\ell_h(w):=\\sum_{K\\in\\mathcal T}\\int_K f w\\,dx$. A symmetric interior-penalty DG solution is a function $u_h\\in V_h^{\\rm br}$ satisfying $a_h(u_h,w_h)=\\ell_h(w_h)$ for every $w_h\\in V_h^{\\rm br}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sipdg-discrete-flux-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mathcal T$, $A_K$, $k$, $\\lambda$, $\\Lambda$, $h_F$, and $q_F$ be as in [[def-sipdg-bilinear-form-and-energy-norm]]. There is a constant $C_{\\rm flux}<\\infty$, depending only on $d$, $k$, $\\sigma$, $\\lambda$, and $\\Lambda$, such that every $v_h\\in V_h^{\\rm br}$ satisfies\n$$\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v_h)\\|_{L^2(F)}^2\\le C_{\\rm flux}\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v_h\\cdot\\nabla v_h\\,dx.$$\nThe constant is uniform over the mesh family and does not depend on its cell sizes. In particular, the penalty threshold derived from this estimate is mesh-degree and shape dependent; it is not a universal numerical constant.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sipdg-energy-seminorm-is-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $\\|\\cdot\\|_{DG}$ be the energy expression from [[def-sipdg-bilinear-form-and-energy-norm]] on a finite matching simplicial mesh of a nonempty bounded polyhedral domain, with $\\lambda>0$ and $\\gamma>0$. Then $\\|\\cdot\\|_{DG}$ is a norm on $V_h^{\\rm br}$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $X^2:=\\sum_K\\int_KA_K\\nabla v_h\\cdot\\nabla v_h$ and $J^2:=\\sum_Fh_F^{-1}\\|[v_h]_F\\|_{L^2(F)}^2$. Cauchy–Schwarz on the finite face sum and [F2] give $|\\sum_F\\int_Fq_F(v_h)[v_h]_F|\\le (\\sum_Fh_F\\|q_F(v_h)\\|_F^2)^{1/2}J\\le\\sqrt{C_{\\rm flux}}XJ$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], $a_h(v_h,v_h)=X^2-2\\sum_F\\int_Fq_F(v_h)[v_h]_F+\\gamma J^2$. Young's inequality gives $2\\sqrt{C_{\\rm flux}}XJ\\le\\tfrac12X^2+2C_{\\rm flux}J^2$, hence $a_h(v_h,v_h)\\ge\\tfrac12X^2+(\\gamma-2C_{\\rm flux})J^2\\ge\\tfrac12(X^2+\\gamma J^2)=\\tfrac12\\|v_h\\|_{DG}^2$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The coefficient matrix of $a_h$ in any basis of the finite-dimensional space $V_h^{\\rm br}$ is symmetric by [F1]. If its matrix kernel contained a nonzero vector, the corresponding $v_h\\ne0$ would satisfy $a_h(v_h,v_h)=0$, contradicting [F3] and step 2.1. Therefore the square matrix is injective, hence invertible in finite dimension, so every load has exactly one solution.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-coercivity-large-penalty: For an empty mesh the finite-dimensional trial space is the zero space and the inequality is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-coercivity-large-penalty: For v_h=0 the coercivity inequality is equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-coercivity-large-penalty: A one-cell mesh is covered; its boundary jumps contribute to the penalty and norm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-coercivity-large-penalty: The threshold assumes k≥1, shape regularity, λ>0, and γ≥4C_flux."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-coercivity-large-penalty: Boundary facets are included as one-sided flux and jump terms in the Cauchy and penalty sums."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-coercivity-large-penalty: Countable Choice is carried by the inverse-trace supplier; the absorption step uses only finite sums and Young’s inequality."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement thm-sipdg-coercivity-large-penalty asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement thm-sipdg-coercivity-large-penalty asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-sipdg-l2-error-under-adjoint-regularity": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-sipdg-exact-consistency",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let the mesh, coefficients, and SIPDG form be as in [[def-sipdg-bilinear-form-and-energy-norm]]. Suppose $u|_K\\in H^2(K)$ on every cell, its facet traces agree across every interior facet, its boundary trace is zero, and $f|_K=-\\nabla\\cdot(A_K\\nabla u)$ on each cell with $f\\in L^2(\\Omega)$. Assume also that the normal coefficient fluxes agree across interior facets: $(A_{K^-}\\nabla u^- )\\cdot n_F=(A_{K^+}\\nabla u^+ )\\cdot n_F$. Then for every $w_h\\in V_h^{\\rm br}$,\n$$a_h(u,w_h)=\\ell_h(w_h):=\\sum_{K\\in\\mathcal T}\\int_K f w_h\\,dx.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sipdg-boundedness-augmented-norm",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the SIPDG setting of [[def-sipdg-bilinear-form-and-energy-norm]], with $\\gamma>0$. For all $v,w\\in\\mathcal D_h$,\n$$|a_h(v,w)|\\le C_B\\|v\\|_{DG,*}\\|w\\|_{DG,*},\\qquad C_B:=2+2\\gamma^{-1/2}.$$\nThe energy expression $\\|\\cdot\\|_{DG}$ is also a seminorm on $\\mathcal D_h$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sipdg-adjoint-consistency-h2",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh and coefficient hypotheses of [[def-sipdg-bilinear-form-and-energy-norm]]. Let $e|_K\\in H^2(K)$ on every cell, and let $z|_K\\in H^2(K)$ be a dual solution with matching interior traces, zero boundary trace, matching normal coefficient fluxes, and $-\\nabla\\cdot(A_K\\nabla z)=e$ on every cell. Then the SIPDG form, extended to these piecewise regular functions by its same formula, satisfies\n$$a_h(e,z)=\\|e\\|_{L^2(\\Omega)}^2.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\n\nEvery $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ belongs to\n$W^{k,p}(\\Omega;\\mathbb K)$. Indeed $\\varphi$ is bounded with compact support,\nhence lies in $L^p(\\Omega;\\mathbb K)$ for every exponent in range, and each of\nits classical partial derivatives is again smooth and compactly supported,\nhence lies in $L^p(\\Omega;\\mathbb K)$ and is the corresponding weak derivative\nby [[lem-classical-derivatives-are-weak-derivatives]].\n\nDefine the **zero-boundary Sobolev space**\n$$W_0^{k,p}(\\Omega;\\mathbb K):=\\overline{C_c^\\infty(\\Omega;\\mathbb K)},$$\nthe closure taken in the normed space\n$(W^{k,p}(\\Omega;\\mathbb K),\\|\\cdot\\|_{W^{k,p}(\\Omega)})$ of\n[[def-sobolev-space-wkp-and-its-norm]]. The norm is a genuine norm on classes\nby [[lem-sobolev-norm-is-well-defined-and-definite]], so this is the usual\nmetric closure of a subset of a normed space: $u\\in W_0^{k,p}(\\Omega;\\mathbb K)$\nif and only if for every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with\n$\\|u-\\varphi\\|_{W^{k,p}(\\Omega)}<\\delta$. Write\n$H_0^k(\\Omega):=W_0^{k,2}(\\Omega;\\mathbb K)$ when the scalar field is fixed by\ncontext.\n\nThree warnings are part of the definition. First, this is a closure of\nalmost-everywhere classes, and all its equalities are equalities of Sobolev\nclasses. Second, no pointwise boundary values and no trace characterization\nare asserted: a description of $W_0^{k,p}$ by vanishing boundary data belongs\nto the later trace theory and is not used here. Third, the closure is defined\nfor every $1\\le p\\le\\infty$, but for $p=\\infty$ it is not claimed that every\ncompactly supported $W^{k,\\infty}(\\Omega)$ function lies in $W_0^{k,\\infty}(\\Omega)$;\nthe definition merely names the closure of the test functions.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-sipdg-physical-simplex-trace-green",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, let $\\widehat S_d$ be the reference simplex, and let $F_K(\\widehat x)=b+B\\widehat x$ map $\\overline{\\widehat S_d}$ affinely onto a nondegenerate closed simplex $K$, with $\\det B>0$. Sobolev spaces on $K$ mean spaces on its open interior. For every scalar $u\\in W^{1,2}(K)$ and vector field $G\\in W^{1,2}(K;\\mathbb R^d)$, each physical facet has bounded $L^2$ traces $\\gamma_Fu$ and $\\gamma_FG$, obtained by affine transfer from the reference trace maps. These traces are independent of the chosen orientation-preserving reference map, and they satisfy\n$$\\int_K u\\,\\operatorname{div}G+\\nabla u\\cdot G\\,dx=\\sum_{F\\subset\\partial K}\\int_F(\\gamma_Fu)(\\gamma_FG)\\cdot n_{K,F}\\,dS,$$\nwhere $n_{K,F}$ is the outward unit normal.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sipdg-exact-consistency",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let the mesh, coefficients, and SIPDG form be as in [[def-sipdg-bilinear-form-and-energy-norm]]. Suppose $u|_K\\in H^2(K)$ on every cell, its facet traces agree across every interior facet, its boundary trace is zero, and $f|_K=-\\nabla\\cdot(A_K\\nabla u)$ on each cell with $f\\in L^2(\\Omega)$. Assume also that the normal coefficient fluxes agree across interior facets: $(A_{K^-}\\nabla u^- )\\cdot n_F=(A_{K^+}\\nabla u^+ )\\cdot n_F$. Then for every $w_h\\in V_h^{\\rm br}$,\n$$a_h(u,w_h)=\\ell_h(w_h):=\\sum_{K\\in\\mathcal T}\\int_K f w_h\\,dx.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sipdg-bilinear-form-and-energy-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev notation below. Each cell $K$ is the closed simplex from [[def-matching-affine-simplicial-meshes]]; in $W^{m,2}(K)$ notation, $K$ means its open interior, and its facets are the boundary faces of that interior. Write $H^m(K):=W^{m,2}(K;\\mathbb R)$ for $m=1,2$. Use the mesh and jump convention of [[def-sipdg-jump-average-convention]]. Specialize [[def-broken-and-conforming-polynomial-spaces]] to scalar real polynomials of a fixed degree $k\\ge1$, so $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$. On every cell $K$, let $A_K\\in\\mathbb R^{d\\times d}$ be a constant symmetric matrix. Assume common bounds $0<\\lambda\\le\\Lambda<\\infty$ such that\n$$\\lambda|\\xi|^2\\le \\xi^TA_K\\xi\\le\\Lambda|\\xi|^2\\qquad(\\xi\\in\\mathbb R^d,\\ K\\in\\mathcal T).$$\nWrite $A|_K=A_K$, let $h_F:=\\operatorname{diam}(F)>0$, and fix a penalty parameter $\\gamma>0$. Define $\\mathcal D_h$ to consist of broken real-valued functions $v$ with $v|_K\\in H^1(K)$, distributional $\\operatorname{div}(A_K\\nabla v|_K)\\in L^2(K)$, and an $L^2(F)$ one-sided normal coefficient-flux trace $r_{K,F}(v)$ on every facet $F$ of each cell $K$. Precisely, $r_{K,F}(v)$ is the unique $L^2(F)$ function satisfying\n$$\\int_K A_K\\nabla v\\cdot\\nabla\\phi+\\operatorname{div}(A_K\\nabla v)\\,\\phi\\,dx=\\sum_{F\\subset\\partial K}\\int_F r_{K,F}(v)\\,\\gamma_F\\phi\\,dS\\qquad(\\phi\\in C^\\infty(\\overline K)).$$\nHere $\\gamma_F\\phi$ is the value trace from [[lem-sipdg-physical-simplex-trace-green]]; uniqueness follows by testing smooth functions supported near the relative interior of each facet, whose restrictions are dense in $L^2(F)$. If $F=K^-\\cap K^+$ and $n_F$ points outward from $K^-$, set $q_F(v):=\\tfrac12(r_{K^-,F}(v)-r_{K^+,F}(v))$; on a boundary facet set $q_F(v):=r_{K,F}(v)$ with the outward normal. These definitions agree with $\\{A\\nabla_hv\\}_F\\cdot n_F$ whenever the classical one-sided vector flux traces exist. Broken polynomials and cellwise $H^2$ functions belong to $\\mathcal D_h$ by [[lem-sipdg-physical-simplex-trace-green]]. For $v,w\\in\\mathcal D_h$, define\n$$a_h(v,w):=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(v)[w]_F\\,dS-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(w)[v]_F\\,dS+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\int_F[v]_F[w]_F\\,dS,$$\nBoundary-facet integrals use the counting-measure convention in dimension $d-1$; for $d\\ge2$ this is ordinary facet surface measure. The expression is real and symmetric.\n\nDefine the energy expression and its augmented version on $\\mathcal D_h$ by\n$$\\|v\\|_{DG}^2:=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla v\\,dx+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\|[v]_F\\|_{L^2(F)}^2,$$\n$$\\|v\\|_{DG,*}^2:=\\|v\\|_{DG}^2+\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v)\\|_{L^2(F)}^2.$$\nThe first expression is initially a seminorm on $V_h^{\\rm br}$; its definiteness is not part of this definition. The stated Sobolev notation follows [[def-sobolev-space-wkp-and-its-norm]]. Cellwise $H^2$ functions have the required value and normal coefficient-flux traces by [[lem-sipdg-physical-simplex-trace-green]], because $A_K$ is constant. The augmented expression is defined whenever $v\\in\\mathcal D_h$, so it applies in particular to the exact functions, dual functions and discrete polynomials used below.\n\nFor $f\\in L^2(\\Omega)$ define the discrete load $\\ell_h(w):=\\sum_{K\\in\\mathcal T}\\int_K f w\\,dx$. A symmetric interior-penalty DG solution is a function $u_h\\in V_h^{\\rm br}$ satisfying $a_h(u_h,w_h)=\\ell_h(w_h)$ for every $w_h\\in V_h^{\\rm br}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The result is immediate if $\\|e\\|_{L^2}=0$. Otherwise choose $z_h$ from the stated approximation hypothesis. For $s=1$, [F3] gives $a_h(e,z_e)=\\|e\\|_{L^2}^2$ under the stated piecewise-$H^2$ and trace-matching hypotheses; for $s<1$ this identity is [A1]. Exact consistency plus the discrete equation give $a_h(e,z_h)=0$ by [F1]. Hence $\\|e\\|_{L^2}^2=a_h(e,z_e-z_h)$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "A1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [F7], $u$ is cellwise $H^2$ and $u_h,z_h$ are broken polynomials, so $e=u-u_h$ and $z_h$ belong to $\\mathcal D_h$. For each cell $K$, a test in $C_c^\\infty(K)$ extended by zero belongs to $V$ by [F5]; the weak dual equation then gives $\\operatorname{div}(A_K\\nabla z_e)|_K=-e|_K\\in L^2(K)$ in distributions. Item 1 supplies the one-sided $L^2$ normal flux traces, and $z_e\\in V$ supplies its cellwise $H^1$ restrictions and value traces by [F6]. Thus $z_e\\in\\mathcal D_h$ and [F2] gives $|a_h(e,z_e-z_h)|\\le C_B\\|e\\|_{DG,*}\\|z_e-z_h\\|_{DG,*}$ with $C_B=2+2\\gamma^{-1/2}$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply step 1.2 to step 1.1 and then use the dual approximation and regularity assumptions. This gives $\\|e\\|_{L^2}^2\\le C_BC_{\\rm app}C_{\\rm reg}h^s\\ell_\\Omega^{1-s}\\|e\\|_{DG,*}\\|e\\|_{L^2}$. Divide by the positive $\\|e\\|_{L^2}$ to obtain the asserted estimate.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-l2-error-under-adjoint-regularity: The condition 0<h≤diam(Ω) excludes an empty domain or empty mesh."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-l2-error-under-adjoint-regularity: Step 1.1 handles the zero-error case before division by its L2 norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-l2-error-under-adjoint-regularity: The estimate is stated for k≥1 and remains meaningful on a one-cell mesh with h>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-l2-error-under-adjoint-regularity: The Statement requires s∈(1/2,1], h>0, and h≤diam(Ω)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-l2-error-under-adjoint-regularity: The form domain requires the dual solution’s one-sided normal flux traces on every facet, including boundary facets."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-l2-error-under-adjoint-regularity: Countable Choice is stated and inherited through the exact-consistency, physical-trace, and zero-boundary Sobolev suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement thm-sipdg-l2-error-under-adjoint-regularity asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement thm-sipdg-l2-error-under-adjoint-regularity asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-sipdg-energy-error-estimate": {
+      "kind": "theorem",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sipdg-bilinear-form-and-energy-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Sobolev notation below. Each cell $K$ is the closed simplex from [[def-matching-affine-simplicial-meshes]]; in $W^{m,2}(K)$ notation, $K$ means its open interior, and its facets are the boundary faces of that interior. Write $H^m(K):=W^{m,2}(K;\\mathbb R)$ for $m=1,2$. Use the mesh and jump convention of [[def-sipdg-jump-average-convention]]. Specialize [[def-broken-and-conforming-polynomial-spaces]] to scalar real polynomials of a fixed degree $k\\ge1$, so $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$. On every cell $K$, let $A_K\\in\\mathbb R^{d\\times d}$ be a constant symmetric matrix. Assume common bounds $0<\\lambda\\le\\Lambda<\\infty$ such that\n$$\\lambda|\\xi|^2\\le \\xi^TA_K\\xi\\le\\Lambda|\\xi|^2\\qquad(\\xi\\in\\mathbb R^d,\\ K\\in\\mathcal T).$$\nWrite $A|_K=A_K$, let $h_F:=\\operatorname{diam}(F)>0$, and fix a penalty parameter $\\gamma>0$. Define $\\mathcal D_h$ to consist of broken real-valued functions $v$ with $v|_K\\in H^1(K)$, distributional $\\operatorname{div}(A_K\\nabla v|_K)\\in L^2(K)$, and an $L^2(F)$ one-sided normal coefficient-flux trace $r_{K,F}(v)$ on every facet $F$ of each cell $K$. Precisely, $r_{K,F}(v)$ is the unique $L^2(F)$ function satisfying\n$$\\int_K A_K\\nabla v\\cdot\\nabla\\phi+\\operatorname{div}(A_K\\nabla v)\\,\\phi\\,dx=\\sum_{F\\subset\\partial K}\\int_F r_{K,F}(v)\\,\\gamma_F\\phi\\,dS\\qquad(\\phi\\in C^\\infty(\\overline K)).$$\nHere $\\gamma_F\\phi$ is the value trace from [[lem-sipdg-physical-simplex-trace-green]]; uniqueness follows by testing smooth functions supported near the relative interior of each facet, whose restrictions are dense in $L^2(F)$. If $F=K^-\\cap K^+$ and $n_F$ points outward from $K^-$, set $q_F(v):=\\tfrac12(r_{K^-,F}(v)-r_{K^+,F}(v))$; on a boundary facet set $q_F(v):=r_{K,F}(v)$ with the outward normal. These definitions agree with $\\{A\\nabla_hv\\}_F\\cdot n_F$ whenever the classical one-sided vector flux traces exist. Broken polynomials and cellwise $H^2$ functions belong to $\\mathcal D_h$ by [[lem-sipdg-physical-simplex-trace-green]]. For $v,w\\in\\mathcal D_h$, define\n$$a_h(v,w):=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla w\\,dx-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(v)[w]_F\\,dS-\\sum_{F\\in\\mathcal F_h}\\int_F q_F(w)[v]_F\\,dS+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\int_F[v]_F[w]_F\\,dS,$$\nBoundary-facet integrals use the counting-measure convention in dimension $d-1$; for $d\\ge2$ this is ordinary facet surface measure. The expression is real and symmetric.\n\nDefine the energy expression and its augmented version on $\\mathcal D_h$ by\n$$\\|v\\|_{DG}^2:=\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v\\cdot\\nabla v\\,dx+\\gamma\\sum_{F\\in\\mathcal F_h}h_F^{-1}\\|[v]_F\\|_{L^2(F)}^2,$$\n$$\\|v\\|_{DG,*}^2:=\\|v\\|_{DG}^2+\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v)\\|_{L^2(F)}^2.$$\nThe first expression is initially a seminorm on $V_h^{\\rm br}$; its definiteness is not part of this definition. The stated Sobolev notation follows [[def-sobolev-space-wkp-and-its-norm]]. Cellwise $H^2$ functions have the required value and normal coefficient-flux traces by [[lem-sipdg-physical-simplex-trace-green]], because $A_K$ is constant. The augmented expression is defined whenever $v\\in\\mathcal D_h$, so it applies in particular to the exact functions, dual functions and discrete polynomials used below.\n\nFor $f\\in L^2(\\Omega)$ define the discrete load $\\ell_h(w):=\\sum_{K\\in\\mathcal T}\\int_K f w\\,dx$. A symmetric interior-penalty DG solution is a function $u_h\\in V_h^{\\rm br}$ satisfying $a_h(u_h,w_h)=\\ell_h(w_h)$ for every $w_h\\in V_h^{\\rm br}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sipdg-coercivity-large-penalty",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Use the mesh, coefficient field, energy norm, and form of [[def-sipdg-bilinear-form-and-energy-norm]], and let $C_{\\rm flux}$ be the constant of [[lem-sipdg-discrete-flux-inverse-bound]]. If $\\gamma\\ge4C_{\\rm flux}$, then\n$$a_h(v_h,v_h)\\ge\\tfrac12\\|v_h\\|_{DG}^2\\qquad(v_h\\in V_h^{\\rm br}).$$\nThus the discrete bilinear form is coercive with constant $1/2$ in the broken energy norm. For every $f\\in L^2(\\Omega)$, the finite-dimensional SIPDG system has a unique solution. The sufficient threshold depends on the polynomial degree, shape regularity, and coefficient ellipticity bounds; no universal penalty value is asserted.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sipdg-exact-consistency",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let the mesh, coefficients, and SIPDG form be as in [[def-sipdg-bilinear-form-and-energy-norm]]. Suppose $u|_K\\in H^2(K)$ on every cell, its facet traces agree across every interior facet, its boundary trace is zero, and $f|_K=-\\nabla\\cdot(A_K\\nabla u)$ on each cell with $f\\in L^2(\\Omega)$. Assume also that the normal coefficient fluxes agree across interior facets: $(A_{K^-}\\nabla u^- )\\cdot n_F=(A_{K^+}\\nabla u^+ )\\cdot n_F$. Then for every $w_h\\in V_h^{\\rm br}$,\n$$a_h(u,w_h)=\\ell_h(w_h):=\\sum_{K\\in\\mathcal T}\\int_K f w_h\\,dx.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-sipdg-discrete-flux-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mathcal T$, $A_K$, $k$, $\\lambda$, $\\Lambda$, $h_F$, and $q_F$ be as in [[def-sipdg-bilinear-form-and-energy-norm]]. There is a constant $C_{\\rm flux}<\\infty$, depending only on $d$, $k$, $\\sigma$, $\\lambda$, and $\\Lambda$, such that every $v_h\\in V_h^{\\rm br}$ satisfies\n$$\\sum_{F\\in\\mathcal F_h}h_F\\|q_F(v_h)\\|_{L^2(F)}^2\\le C_{\\rm flux}\\sum_{K\\in\\mathcal T}\\int_K A_K\\nabla v_h\\cdot\\nabla v_h\\,dx.$$\nThe constant is uniform over the mesh family and does not depend on its cell sizes. In particular, the penalty threshold derived from this estimate is mesh-degree and shape dependent; it is not a universal numerical constant.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-sipdg-boundedness-augmented-norm",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the SIPDG setting of [[def-sipdg-bilinear-form-and-energy-norm]], with $\\gamma>0$. For all $v,w\\in\\mathcal D_h$,\n$$|a_h(v,w)|\\le C_B\\|v\\|_{DG,*}\\|w\\|_{DG,*},\\qquad C_B:=2+2\\gamma^{-1/2}.$$\nThe energy expression $\\|\\cdot\\|_{DG}$ is also a seminorm on $\\mathcal D_h$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The exact solution $u$ is cellwise $H^2$ and $u_h,w_h$ are broken polynomials, so $u-w_h$ and $u_h-w_h$ belong to $\\mathcal D_h$. The boundedness constant for their form pairing is $C_B=2+2\\gamma^{-1/2}$ by [F5].",
+          "inputs": [
+            "F1",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $w_h$ and set $z_h=u_h-w_h$. If $z_h=0$ the estimate for this choice is immediate. Otherwise, coercivity [F2], the discrete equation and exact consistency [F3] give $\\tfrac12\\|z_h\\|_{DG}^2\\le a_h(z_h,z_h)=a_h(u-w_h,z_h)$. By [F4] and $\\sum_K\\int_K\\nabla z_h^TA_K\\nabla z_h\\le\\|z_h\\|_{DG}^2$, $\\|z_h\\|_{DG,*}\\le\\sqrt{1+C_{\\rm flux}}\\|z_h\\|_{DG}$. Apply [F5] and step 1.1 to obtain $\\tfrac12\\|z_h\\|_{DG}^2\\le C_B\\sqrt{1+C_{\\rm flux}}\\|u-w_h\\|_{DG,*}\\|z_h\\|_{DG}$. Dividing by $\\|z_h\\|_{DG}>0$ proves $\\|z_h\\|_{DG}\\le2C_B\\sqrt{1+C_{\\rm flux}}\\|u-w_h\\|_{DG,*}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $\\|\\cdot\\|_{DG}$ is a seminorm on $\\mathcal D_h$ by [F5], its triangle inequality and step 2.1 give $\\|u-u_h\\|_{DG}\\le\\|u-w_h\\|_{DG}+\\|w_h-u_h\\|_{DG}\\le(1+2C_B\\sqrt{1+C_{\\rm flux}})\\|u-w_h\\|_{DG,*}$. This holds for every $w_h$, so taking the infimum proves both assertions.",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-energy-error-estimate: An empty mesh gives zero error and empty sums; the bound remains vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-energy-error-estimate: Choosing w_h=u_h makes both the error and approximation term zero when u=u_h."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-energy-error-estimate: The result holds for the minimum degree k=1 and a one-cell mesh under the same coercivity threshold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-energy-error-estimate: The estimate assumes positive ellipticity and γ≥4C_flux on a shape-regular matching mesh."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-energy-error-estimate: Boundary jump and flux terms are included in the augmented norm and the exact-consistency identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement thm-sipdg-energy-error-estimate: Countable Choice is inherited only through the declared inverse-trace and physical Green suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement thm-sipdg-energy-error-estimate asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement thm-sipdg-energy-error-estimate asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-sipdg-broken-function-is-not-h1": {
+      "kind": "example",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "Countable Choice is explicitly assumed and listed in deps. It is used only through the named Sobolev, trace, or change-of-variables suppliers recorded in Facts & Assumptions; no full Axiom of Choice is invoked.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sipdg-jump-average-convention",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ and let $\\mathcal T$ be a finite matching affine simplicial mesh of a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, with shape-regularity bound $\\sigma$, as in [[def-matching-affine-simplicial-meshes]]. Write $\\mathcal F_h^{\\rm int}$ for its interior facets and $\\mathcal F_h^{\\rm bdy}$ for its boundary facets, and put $\\mathcal F_h=\\mathcal F_h^{\\rm int}\\cup\\mathcal F_h^{\\rm bdy}$. The trial functions below belong to the broken scalar polynomial space $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$ from [[def-broken-and-conforming-polynomial-spaces]].\n\nFor each interior facet $F=K^-\\cap K^+$, choose a unit normal $n_F$ pointing from $K^-$ to $K^+$. For a scalar or vector field $g$ with traces from both cells, define\n$$[g]_F:=g^- - g^+,\\qquad \\{g\\}_F:=\\tfrac12(g^-+g^+).$$\nFor a boundary facet $F\\subset\\partial K\\cap\\partial\\Omega$, let $n_F=n_K$ be the outward unit normal and define $[g]_F:=g|_K$ and $\\{g\\}_F:=g|_K$. Reversing the chosen interior normal also reverses $[g]_F$, so the scalar jump/average contractions used in the form are independent of that choice.\n\nFor one-dimensional interval examples, use the following separate extension of the same formulas. At an interior point shared by a left cell $K^-$ and right cell $K^+$, orient from left to right and set $[g]_F=g^- - g^+$ and $\\{g\\}_F=(g^-+g^+)/2$. At either endpoint use the one-sided trace for both jump and average, and use counting measure on the zero-dimensional face. This extension is not an instance of the published $d\\ge2$ mesh definition above.\n\nThe following diagram records the interior orientation; the formulas above are the definitions, and the diagram is only a convention aid.\n\n```tikz\n\\begin{tikzpicture}[baseline=-0.5ex]\n  \\fill[blue!8] (0,0) rectangle (1.5,1.5);\n  \\fill[orange!10] (1.5,0) rectangle (3,1.5);\n  \\draw[thick] (0,0) rectangle (1.5,1.5);\n  \\draw[thick] (1.5,0) rectangle (3,1.5);\n  \\draw[very thick] (1.5,0)--(1.5,1.5);\n  \\draw[->,thick] (1.2,0.75)--(2.1,0.75) node[midway,below] {$n_F$};\n  \\node at (0.75,1.15) {$K^-$};\n  \\node at (2.25,1.15) {$K^+$};\n  \\node[rotate=90] at (1.5,0.75) {$F$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The traces at $x=1/2$ are $v^-=1$ and $v^+=0$, so [F2] gives $[v]=1$. For every smooth compactly supported $\\varphi$, direct integration on the two intervals gives $\\int_0^1v\\varphi'=\\int_0^{1/2}\\varphi'=\\varphi(1/2)$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If an $L^2$ weak derivative $g$ existed, [F1] would give $\\varphi(1/2)=-\\int_0^1g\\varphi$. Choose a fixed smooth bump $\\eta$ supported in $(-1,1)$ with $\\eta(0)=1$, and let $\\varphi_\\varepsilon(x)=\\eta((x-1/2)/\\varepsilon)$ for $0<\\varepsilon<1/2$. Then $\\varphi_\\varepsilon(1/2)=1$ while $\\|\\varphi_\\varepsilon\\|_{L^2}=\\sqrt\\varepsilon\\|\\eta\\|_{L^2(-1,1)}\\to0$. Cauchy–Schwarz forces $|\\int g\\varphi_\\varepsilon|\\le\\|g\\|_2\\|\\varphi_\\varepsilon\\|_2\\to0$, contradicting step 1.1. Thus no such $g$ exists and $v\\notin W^{1,2}(0,1)$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-broken-function-is-not-h1: The Example fixes the nonempty interval partition (0,1) into two cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-broken-function-is-not-h1: The witness is the nonzero piecewise-constant function; the zero function is not claimed to fail H1 membership."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-broken-function-is-not-h1: The broken polynomial has degree zero, which is included in the published broken polynomial space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-broken-function-is-not-h1: Both interval cells have length 1/2 and the interior point is strictly inside (0,1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-broken-function-is-not-h1: The test functions are compactly supported inside (0,1), and the singular derivative occurs only at the interior point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-broken-function-is-not-h1: The bump function is one fixed explicit smooth witness; no choice principle is used beyond the Sobolev definition’s declared background."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example ex-sipdg-broken-function-is-not-h1 asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example ex-sipdg-broken-function-is-not-h1 asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-sipdg-one-dimensional-interior-jump": {
+      "kind": "example",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No choice principle is used. The proof or definition uses finite cell and face families or explicitly specified data.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sipdg-jump-average-convention",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ and let $\\mathcal T$ be a finite matching affine simplicial mesh of a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, with shape-regularity bound $\\sigma$, as in [[def-matching-affine-simplicial-meshes]]. Write $\\mathcal F_h^{\\rm int}$ for its interior facets and $\\mathcal F_h^{\\rm bdy}$ for its boundary facets, and put $\\mathcal F_h=\\mathcal F_h^{\\rm int}\\cup\\mathcal F_h^{\\rm bdy}$. The trial functions below belong to the broken scalar polynomial space $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$ from [[def-broken-and-conforming-polynomial-spaces]].\n\nFor each interior facet $F=K^-\\cap K^+$, choose a unit normal $n_F$ pointing from $K^-$ to $K^+$. For a scalar or vector field $g$ with traces from both cells, define\n$$[g]_F:=g^- - g^+,\\qquad \\{g\\}_F:=\\tfrac12(g^-+g^+).$$\nFor a boundary facet $F\\subset\\partial K\\cap\\partial\\Omega$, let $n_F=n_K$ be the outward unit normal and define $[g]_F:=g|_K$ and $\\{g\\}_F:=g|_K$. Reversing the chosen interior normal also reverses $[g]_F$, so the scalar jump/average contractions used in the form are independent of that choice.\n\nFor one-dimensional interval examples, use the following separate extension of the same formulas. At an interior point shared by a left cell $K^-$ and right cell $K^+$, orient from left to right and set $[g]_F=g^- - g^+$ and $\\{g\\}_F=(g^-+g^+)/2$. At either endpoint use the one-sided trace for both jump and average, and use counting measure on the zero-dimensional face. This extension is not an instance of the published $d\\ge2$ mesh definition above.\n\nThe following diagram records the interior orientation; the formulas above are the definitions, and the diagram is only a convention aid.\n\n```tikz\n\\begin{tikzpicture}[baseline=-0.5ex]\n  \\fill[blue!8] (0,0) rectangle (1.5,1.5);\n  \\fill[orange!10] (1.5,0) rectangle (3,1.5);\n  \\draw[thick] (0,0) rectangle (1.5,1.5);\n  \\draw[thick] (1.5,0) rectangle (3,1.5);\n  \\draw[very thick] (1.5,0)--(1.5,1.5);\n  \\draw[->,thick] (1.2,0.75)--(2.1,0.75) node[midway,below] {$n_F$};\n  \\node at (0.75,1.15) {$K^-$};\n  \\node at (2.25,1.15) {$K^+$};\n  \\node[rotate=90] at (1.5,0.75) {$F$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The derivative is $1$ on both cells, so the broken volume term is $\\int_0^{1/2}1\\,dx+\\int_{1/2}^11\\,dx=1$. At the interior point $x=1/2$, [F1] gives $[v]=1/2-(-1/2)=1$ and $\\{v'\\}=1$, while both boundary traces vanish.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The interior consistency terms contribute $-2\\{v'\\}[v]=-2$, and the penalty contributes $\\gamma h_F^{-1}[v]^2=1\\cdot2\\cdot1=2$. Adding these to the volume term from step 1.1 gives $a_h(v,v)=1-2+2=1$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-one-dimensional-interior-jump: The Example fixes the nonempty two-cell interval partition of (0,1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-one-dimensional-interior-jump: The specified piecewise-affine v is nonzero and has zero endpoint values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-one-dimensional-interior-jump: The witness is degree one and all three point faces have the stated positive scale h_F=1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-one-dimensional-interior-jump: Both interval cells have positive length 1/2; point faces use counting measure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-one-dimensional-interior-jump: Both endpoint traces vanish, so all endpoint consistency and penalty terms vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-one-dimensional-interior-jump: The interval, function, coefficient, penalty, and face measures are explicitly specified; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example ex-sipdg-one-dimensional-interior-jump asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example ex-sipdg-one-dimensional-interior-jump asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-sipdg-small-penalty-loses-coercivity": {
+      "kind": "example",
+      "risk": "medium",
+      "proof_strategy": "direct",
+      "axiom_use": "No choice principle is used. The proof or definition uses finite cell and face families or explicitly specified data.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sipdg-jump-average-convention",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge2$ and let $\\mathcal T$ be a finite matching affine simplicial mesh of a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, with shape-regularity bound $\\sigma$, as in [[def-matching-affine-simplicial-meshes]]. Write $\\mathcal F_h^{\\rm int}$ for its interior facets and $\\mathcal F_h^{\\rm bdy}$ for its boundary facets, and put $\\mathcal F_h=\\mathcal F_h^{\\rm int}\\cup\\mathcal F_h^{\\rm bdy}$. The trial functions below belong to the broken scalar polynomial space $V_h^{\\rm br}=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb R)$ from [[def-broken-and-conforming-polynomial-spaces]].\n\nFor each interior facet $F=K^-\\cap K^+$, choose a unit normal $n_F$ pointing from $K^-$ to $K^+$. For a scalar or vector field $g$ with traces from both cells, define\n$$[g]_F:=g^- - g^+,\\qquad \\{g\\}_F:=\\tfrac12(g^-+g^+).$$\nFor a boundary facet $F\\subset\\partial K\\cap\\partial\\Omega$, let $n_F=n_K$ be the outward unit normal and define $[g]_F:=g|_K$ and $\\{g\\}_F:=g|_K$. Reversing the chosen interior normal also reverses $[g]_F$, so the scalar jump/average contractions used in the form are independent of that choice.\n\nFor one-dimensional interval examples, use the following separate extension of the same formulas. At an interior point shared by a left cell $K^-$ and right cell $K^+$, orient from left to right and set $[g]_F=g^- - g^+$ and $\\{g\\}_F=(g^-+g^+)/2$. At either endpoint use the one-sided trace for both jump and average, and use counting measure on the zero-dimensional face. This extension is not an instance of the published $d\\ge2$ mesh definition above.\n\nThe following diagram records the interior orientation; the formulas above are the definitions, and the diagram is only a convention aid.\n\n```tikz\n\\begin{tikzpicture}[baseline=-0.5ex]\n  \\fill[blue!8] (0,0) rectangle (1.5,1.5);\n  \\fill[orange!10] (1.5,0) rectangle (3,1.5);\n  \\draw[thick] (0,0) rectangle (1.5,1.5);\n  \\draw[thick] (1.5,0) rectangle (3,1.5);\n  \\draw[very thick] (1.5,0)--(1.5,1.5);\n  \\draw[->,thick] (1.2,0.75)--(2.1,0.75) node[midway,below] {$n_F$};\n  \\node at (0.75,1.15) {$K^-$};\n  \\node at (2.25,1.15) {$K^+$};\n  \\node[rotate=90] at (1.5,0.75) {$F$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Both cell derivatives equal $1$, so the volume term is $1$. The endpoint terms vanish because $v(0)=v(1)=0$. At the interior point, [F1] gives $[v]=1$ and $\\{v'\\}=1$. The energy expression is $\\|v\\|_{DG}^2=1+(1/4)(1/(1/2))\\cdot1^2=3/2>0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The two consistency terms sum to $-2$, while the penalty term is $(1/4)(1/(1/2))\\cdot1^2=1/2$. Therefore $a_h(v,v)=1-2+1/2=-1/2<0$, which contradicts coercivity with any positive constant in a positive energy norm.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-small-penalty-loses-coercivity: The Example fixes the nonempty two-cell interval partition of (0,1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-small-penalty-loses-coercivity: The witness v is nonzero and its energy is explicitly positive, 3/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-small-penalty-loses-coercivity: The witness is degree one and uses the two-cell mesh with every point-face scale h_F=1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-small-penalty-loses-coercivity: Both interval cells have positive length 1/2 and the interior jump is at x=1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-small-penalty-loses-coercivity: The endpoint values vanish; the negative bilinear value comes only from the interior face."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example ex-sipdg-small-penalty-loses-coercivity: All data and the finite witness are explicit; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example ex-sipdg-small-penalty-loses-coercivity asserts no biconditional, so there are no forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example ex-sipdg-small-penalty-loses-coercivity asserts no biconditional, so there are no forward and reverse directions."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

@@ -1,0 +1,525 @@
+[
+  {
+    "order": 2694,
+    "id": "semi-lagrangian-characteristic-transport",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Semi-Lagrangian characteristic transport",
+    "companion": "semi-lagrangian-characteristic-transport-examples",
+    "requires": [
+      "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "event-location-and-hybrid-trajectory-error"
+    ],
+    "items": [
+      {
+        "id": "def-semilagrangian-periodic-grid-and-interpolant",
+        "kind": "definition",
+        "title": "Periodic tensor grids and multilinear interpolation",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $d\\ge1$, let $\\ell_1,\\ldots,\\ell_d>0$, and let $N_1,\\ldots,N_d\\ge1$ be integers. The periodic rectangular box is\n$$\\mathbb T^d_{\\ell}:=\\mathbb R^d/(\\ell_1\\mathbb Z\\times\\cdots\\times\\ell_d\\mathbb Z).$$\nSet $h_j:=\\ell_j/N_j$. Its uniform tensor grid has nodes $x_{\\boldsymbol i}=(i_1h_1,\\ldots,i_dh_d)$, indexed by $0\\le i_j<N_j$, with indices understood modulo $N_j$.\n\nFor node data $V_{\\boldsymbol i}$ and a lift $x\\in\\mathbb R^d$ of a point on the torus, define\n$$q_j:=\\left\\lfloor x_j/h_j\\right\\rfloor,\\qquad \\theta_j:=x_j/h_j-q_j\\in[0,1),$$\nand for $\\boldsymbol\\epsilon\\in\\{0,1\\}^d$ define\n$$w_{\\boldsymbol\\epsilon}(x):=\\prod_{j=1}^d\\theta_j^{\\epsilon_j}(1-\\theta_j)^{1-\\epsilon_j}.$$\nThe tensor-product multilinear interpolant is\n$$\\mathcal I_hV(x):=\\sum_{\\boldsymbol\\epsilon\\in\\{0,1\\}^d}w_{\\boldsymbol\\epsilon}(x)V_{([q_1+\\epsilon_1]_{N_1},\\ldots,[q_d+\\epsilon_d]_{N_d})},$$\nwhere $[k]_N$ is the residue in $\\{0,\\ldots,N-1\\}$. The formula is unchanged when a period $\\ell_j$ is added to $x_j$, so it defines an interpolant on $\\mathbb T^d_{\\ell}$. If $N_j=1$, the two corner indices in that coordinate coincide; the formula still gives the same node value.\n\nFor a continuous periodic function $v$, $\\mathcal I_hv$ means the interpolant of its grid samples. Put $h:=\\max_jh_j$.",
+        "source_path": "items/def-semilagrangian-periodic-grid-and-interpolant.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-c1-velocity-has-global-characteristic-flow",
+        "kind": "theorem",
+        "title": "A periodic C1 velocity has a global characteristic flow on a finite horizon",
+        "deps": [
+          "def-linear-transport-equation-and-its-characteristic-flow",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-mean-value-inequality-for-total-derivatives"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $d\\ge1$, $T>0$, $\\ell_j>0$, and let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$. Suppose $b:J\\times\\mathbb R^d\\to\\mathbb R^d$ is $C^1$ and periodic in $x_j$ with period $\\ell_j$ for every $j$. Choose a compact interval $K\\subset J$ with $[0,T]\\subset\\operatorname{int}K$, and put $M_K:=\\sup_{K\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$. For every $s\\in[0,T]$ and $x\\in\\mathbb R^d$, there is a unique solution $X(\\cdot;s,x)$ of\n$$X'(t)=b(t,X(t)),\\qquad X(s;s,x)=x,$$\non the whole interval $[0,T]$. The lifted flow is periodic-equivariant:\n$$X(t;s,x+\\boldsymbol k\\boldsymbol\\ell)=X(t;s,x)+\\boldsymbol k\\boldsymbol\\ell\\qquad(\\boldsymbol k\\in\\mathbb Z^d),$$\nwhere $\\boldsymbol k\\boldsymbol\\ell=(k_1\\ell_1,\\ldots,k_d\\ell_d)$. If $M_T:=\\sup_{[0,T]\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$, then\n$$\\|X(t;s,x)-x\\|_2\\le M_T|t-s|\\qquad(t\\in[0,T]).$$\nThus each characteristic stays in a compact tube $[0,T]\\times\\overline B(x,M_TT+1)$.",
+        "source_path": "items/thm-periodic-c1-velocity-has-global-characteristic-flow.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-semilagrangian-transverse-first-hit-error",
+        "kind": "lemma",
+        "title": "A transverse backward boundary hit has a certified time and trace error bound",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "lem-hybrid-guard-derivative-along-mode",
+          "lem-transverse-hybrid-event-time-error",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-norm-inequality-for-the-vector-valued-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $J=[a,b]$ be a compact bracket, let $y$ be an exact incoming characteristic on $J$, and let $g(t,x)$ be a boundary guard that is $L_g$-Lipschitz in its state argument on a tube containing the exact path and a dense reconstruction $U$. Suppose $h(t):=g(t,y(t))$ has a root $\\tau\\in J$ and a declared orientation $\\sigma\\in\\{-1,1\\}$ with $\\sigma h'(t)\\ge\\nu>0$ throughout $J$. If\n$$\\sup_{t\\in J}\\|y(t)-U(t)\\|_2\\le\\eta,\\qquad |g(\\widehat\\tau,U(\\widehat\\tau))|\\le\\varepsilon,\\qquad \\widehat\\tau\\in J,$$\nthen the matched first-hit time satisfies\n$$|\\widehat\\tau-\\tau|\\le\\Delta:=\\frac{L_g\\eta+\\varepsilon}{\\nu}.$$\nIf the boundary value $\\beta(t,x)$ is Lipschitz in time and state with constants $L_t^\\beta,L_x^\\beta$ on the same tube and $\\|y'(t)\\|_2\\le M$, then\n$$|\\beta(\\widehat\\tau,U(\\widehat\\tau))-\\beta(\\tau,y(\\tau))|\\le L_t^\\beta\\Delta+L_x^\\beta(\\eta+M\\Delta).$$\nThis is a local one-hit bound. It gives no conclusion at grazing, unresolved, or simultaneous events.",
+        "source_path": "items/lem-semilagrangian-transverse-first-hit-error.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-semilagrangian-backtracking-on-periodic-grid",
+        "kind": "algorithm",
+        "title": "Explicit Euler characteristic backtracking with multilinear interpolation",
+        "deps": [
+          "def-semilagrangian-periodic-grid-and-interpolant",
+          "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "def-linear-transport-equation-and-its-characteristic-flow"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Inputs are a periodic grid from [[def-semilagrangian-periodic-grid-and-interpolant]], a finite horizon $T>0$, a positive integer $M$ of time steps, a periodic $C^1$ velocity $b$, periodic initial data $u_0$, node values $U^0_{\\boldsymbol i}=u_0(x_{\\boldsymbol i})$, and a nonnegative integer step budget $B$. Write $\\Delta t=T/M$ and $t_n=n\\Delta t$. The output is either `success` with $U^0,\\ldots,U^M$, or `budget-exhausted` with no partial final state.\n\n1. If $B<M$, return `budget-exhausted` before changing the input data.\n2. For $n=0,\\ldots,M-1$ and each arrival node $x_{\\boldsymbol i}$, compute the explicit backward Euler foot lift\n   $$\\widetilde x_{\\boldsymbol i}^{\\,n}:=x_{\\boldsymbol i}-\\Delta t\\,b(t_{n+1},x_{\\boldsymbol i}).$$\n   Reduce each coordinate modulo its period when evaluating the periodic interpolant.\n3. Set\n   $$U_{\\boldsymbol i}^{n+1}:=\\mathcal I_h U^n(\\widetilde x_{\\boldsymbol i}^{\\,n}).$$\n4. After the $M$ finite updates, return `success` with all node arrays.\n\nThe finite step budget counts time updates. Every update evaluates one foot per grid node and a finite sum of $2^d$ interpolation terms. The procedure imposes no bound on $\\|b\\|\\Delta t/h$; the floor-and-fraction convention in the interpolation definition applies even when a foot crosses many grid cells.",
+        "source_path": "items/alg-semilagrangian-backtracking-on-periodic-grid.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+        "kind": "lemma",
+        "title": "Periodic multilinear interpolation is convex and L-infinity contractive",
+        "deps": [
+          "def-semilagrangian-periodic-grid-and-interpolant"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For the periodic tensor interpolant of [[def-semilagrangian-periodic-grid-and-interpolant]], every value is a convex combination of the $2^d$ corner data. Consequently nonnegative data remain nonnegative, the interpolant lies between the minimum and maximum corner values, and for any node arrays $V,W$,\n$$\\|\\mathcal I_hV-\\mathcal I_hW\\|_{L^\\infty(\\mathbb T^d_\\ell)}\\le\\|V-W\\|_{\\ell^\\infty}.$$\nThese conclusions hold at every foot, with no displacement-to-cell-size restriction.",
+        "source_path": "items/lem-periodic-tensor-interpolant-is-convex-and-linf-contracting.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-characteristic-map-is-orientation-preserving",
+        "kind": "lemma",
+        "title": "A periodic C1 characteristic map is an orientation-preserving diffeomorphism",
+        "deps": [
+          "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "lem-transport-characteristics-depend-c-one-on-initial-position",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "thm-intermediate-value"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Under the hypotheses of [[thm-periodic-c1-velocity-has-global-characteristic-flow]], fix $s,t\\in[0,T]$ and let $\\Phi_{t,s}(x):=X(t;s,x)$ on the periodic lift $\\mathbb R^d$. Then $\\Phi_{t,s}$ is a $C^1$ diffeomorphism with inverse $\\Phi_{s,t}$, and\n$$\\det D_x\\Phi_{t,s}(x)>0\\qquad(x\\in\\mathbb R^d).$$",
+        "source_path": "items/lem-periodic-characteristic-map-is-orientation-preserving.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-tensor-interpolation-hessian-error",
+        "kind": "lemma",
+        "title": "Tensor multilinear interpolation has a second-derivative error bound",
+        "deps": [
+          "def-semilagrangian-periodic-grid-and-interpolant",
+          "thm-lagrange-interpolation-remainder",
+          "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $u\\in C^2(\\mathbb T^d_\\ell)$ and let $h_j$ be the coordinate mesh widths in [[def-semilagrangian-periodic-grid-and-interpolant]]. Then\n$$\\|\\mathcal I_hu-u\\|_{L^\\infty(\\mathbb T^d_\\ell)}\\le\\frac18\\sum_{j=1}^dh_j^2\\|\\partial_{jj}u\\|_{L^\\infty(\\mathbb T^d_\\ell)}.$$\nThe estimate includes grid nodes and periodic cell endpoints.",
+        "source_path": "items/lem-periodic-tensor-interpolation-hessian-error.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-euler-backward-characteristic-foot-error",
+        "kind": "lemma",
+        "title": "Explicit Euler gives a second-order local backward-foot defect",
+        "deps": [
+          "alg-semilagrangian-backtracking-on-periodic-grid",
+          "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-norm-inequality-for-the-vector-valued-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $b\\in C^1([0,T]\\times\\mathbb R^d;\\mathbb R^d)$ be periodic in space, and set\n$$M:=\\sup\\|b\\|_2,\\qquad L_x:=\\sup\\|D_xb\\|,\\qquad L_t:=\\sup\\|\\partial_tb\\|_2,$$\nwhere the suprema are over one full periodic time-space cylinder. For $0\\le t_n<t_{n+1}\\le T$, $\\Delta t=t_{n+1}-t_n$, and an arrival lift $x$, let $X(t_n;t_{n+1},x)$ be the exact backward characteristic foot. The explicit Euler foot $x-\\Delta t\\,b(t_{n+1},x)$ satisfies\n$$\\bigl\\|X(t_n;t_{n+1},x)-(x-\\Delta t\\,b(t_{n+1},x))\\bigr\\|_2\\le\\frac12(L_xM+L_t)(\\Delta t)^2.$$\nThe estimate is local for every positive $\\Delta t$; it requires no relation between displacement and grid width.",
+        "source_path": "items/lem-euler-backward-characteristic-foot-error.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+        "kind": "lemma",
+        "title": "Characteristic departure cells are measurable and have positive finite volume",
+        "deps": [
+          "lem-periodic-characteristic-map-is-orientation-preserving",
+          "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "def-countable-choice",
+          "lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets",
+          "lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-measure-monotonicity"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Assume the Axiom of Countable Choice. Let $\\Omega=\\prod_{j=1}^d(0,\\ell_j)$ be the bounded open fundamental box used for Lebesgue measure, and let $Q=\\prod_{j=1}^d[0,\\ell_j)$ be its half-open grid-indexing copy. Let $\\Phi$ be the periodic $C^1$ characteristic diffeomorphism of [[lem-periodic-characteristic-map-is-orientation-preserving]], and let $A_i\\subseteq Q$ be a Lebesgue-measurable arrival cell with $|A_i|:=\\lambda_d(A_i\\cap\\Omega)>0$. Then $D_i:=\\Phi^{-1}(A_i)$, interpreted on the torus and represented in $\\Omega$, is Lebesgue measurable and satisfies\n$$0<|D_i|<\\infty.$$\nThis includes every finite tensor-grid cell with nonempty interior. The departure cells form a partition up to null sets whenever a finite family of arrival cells does; an exact torus partition pulls back to an exact torus partition.",
+        "source_path": "items/lem-periodic-flow-departure-cells-have-positive-finite-volume.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-characteristic-cell-overlap-remapping",
+        "kind": "definition",
+        "title": "Characteristic-cell overlap remapping for a conservative density",
+        "deps": [
+          "def-semilagrangian-periodic-grid-and-interpolant",
+          "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "lem-periodic-characteristic-map-is-orientation-preserving",
+          "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-intersection-volume-conservative-remapping"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]) for this Lebesgue-measurable-volume branch. Work on the periodic box $\\mathbb T^d_\\ell$ of [[def-semilagrangian-periodic-grid-and-interpolant]]. For measure calculations use the bounded open fundamental domain $\\Omega:=\\prod_{j=1}^d(0,\\ell_j)$; the period faces omitted from the half-open grid-indexing copy $Q=\\prod_{j=1}^d[0,\\ell_j)$ are Lebesgue-null by [[thm-lebesgue-measure-of-a-box-of-every-kind]]. For a periodic measurable set $E$, define $|E|:=\\lambda_d(E\\cap\\Omega)$, where $\\lambda_d$ is the $d$-dimensional Lebesgue measure of [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]. Let $\\{C_j\\}_{j=1}^J$ be a finite measurable source-cell partition and $\\{A_i\\}_{i=1}^J$ a finite measurable arrival-cell partition of $\\Omega$ up to null sets, with every cell of positive volume; their grid labels use the half-open convention in $Q$. Let $\\Phi=\\Phi_{t_{n+1},t_n}$ be the exact characteristic map from time $t_n$ to $t_{n+1}$. Its inverse images $D_i:=\\Phi^{-1}(A_i)$ are the **departure cells**; [[lem-periodic-flow-departure-cells-have-positive-finite-volume]] gives their measurability and positive finite volume, while [[lem-periodic-characteristic-map-is-orientation-preserving]] gives the diffeomorphism and positive-Jacobian convention.\n\nGiven a source cell-average density $\\rho_j^n$ on $C_j$, set\n$$\\overline\\rho_i:=\\frac{1}{|D_i|}\\sum_{j=1}^J|D_i\\cap C_j|\\rho_j^n,\\qquad \\rho_i^{n+1}:=\\frac{|D_i|}{|A_i|}\\overline\\rho_i.$$\nThe first formula is the exact intersection-volume remap of [[def-intersection-volume-conservative-remapping]] from the source partition to the departure partition. The second is the characteristic volume factor that converts the average on a departure cell into the transported mass per arrival-cell volume. All intersections and volumes are exact in this mathematical definition; a geometric approximation or quadrature rule would require a separate error term.",
+        "source_path": "items/def-characteristic-cell-overlap-remapping.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-semilagrangian-global-error-from-local-defects",
+        "kind": "theorem",
+        "title": "Periodic semi-Lagrangian error is controlled by local foot and interpolation defects",
+        "deps": [
+          "alg-semilagrangian-backtracking-on-periodic-grid",
+          "def-linear-transport-equation-and-its-characteristic-flow",
+          "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+          "lem-periodic-tensor-interpolation-hessian-error",
+          "lem-euler-backward-characteristic-foot-error",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Fix $T>0$ and a periodic box with grid width $h=\\max_j h_j$. Let $u\\in C^1([0,T];C^2(\\mathbb T^d_\\ell))$ solve the nonconservative linear transport equation\n$$u_t+b\\cdot\\nabla u=0,$$\nwith the periodic $C^1$ velocity and global flow of [[thm-periodic-c1-velocity-has-global-characteristic-flow]]. Consider $N$ equal time steps $\\Delta t=T/N$ and node updates\n$U_{\\boldsymbol i}^{n+1}=(\\mathcal J_h U^n)(\\widetilde x_{\\boldsymbol i}^{\\,n}),$\nwhere $\\mathcal J_h$ reconstructs a nodal array as a periodic function and $\\widetilde x_{\\boldsymbol i}^{\\,n}$ is a computed backward foot. Suppose constants $\\Lambda\\ge1$, $C_I\\ge0$, and $C_F\\ge0$ are uniform over the refinement family and independent of $h,\\Delta t,N$. Assume $\\|\\mathcal J_hV-\\mathcal J_hW\\|_{L^\\infty}\\le\\Lambda\\|V-W\\|_{\\ell^\\infty}$ for all node arrays, the pointwise interpolation defect at each computed foot is at most $C_Ih^{r+1}$ for the exact samples $u^n_{\\boldsymbol i}=u(x_{\\boldsymbol i},t_n)$, and, for compatible lifts of the computed and exact feet, the foot error satisfies\n$\\|\\widetilde x_{\\boldsymbol i}^{\\,n}-X(t_n;t_{n+1},x_{\\boldsymbol i})\\|_2\\le C_F(\\Delta t)^{q+1}$,\nfor integers $q,r\\ge1$. If $L_u:=\\sup_{[0,T]\\times\\mathbb T^d_\\ell}\\|\\nabla u\\|_2$ and $E_n:=\\max_{\\boldsymbol i}|U_{\\boldsymbol i}^n-u(x_{\\boldsymbol i},t_n)|$, then, with\n$$\\delta_h:=C_Ih^{r+1}+\\Lambda L_u C_F(\\Delta t)^{q+1},$$\n$$E_N\\le\\Lambda^NE_0+\\delta_h\\sum_{k=0}^{N-1}\\Lambda^k.$$\nIn the contractive case $\\Lambda=1$, this becomes\n$$E_N\\le E_0+T\\left(C_I\\frac{h^{r+1}}{\\Delta t}+L_uC_F(\\Delta t)^q\\right).$$\nFor the explicit Euler and tensor multilinear algorithm, [[lem-euler-backward-characteristic-foot-error]], [[lem-periodic-tensor-interpolation-hessian-error]], and [[lem-periodic-tensor-interpolant-is-convex-and-linf-contracting]] give $q=r=1$ and $\\Lambda=1$. Thus convergence for this branch follows, for example, when $E_0\\to0$, $\\Delta t\\to0$, and $h^2/\\Delta t\\to0$. No classical advective CFL restriction is used; the joint consistency refinement is still required by this bound.",
+        "source_path": "items/thm-periodic-semilagrangian-global-error-from-local-defects.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-characteristic-cell-overlap-remapping-conserves-mass-and-positivity",
+        "kind": "theorem",
+        "title": "Characteristic-cell overlap remapping preserves mass and positivity",
+        "deps": [
+          "def-characteristic-cell-overlap-remapping",
+          "thm-overlap-remap-l2-projection-conservation-positivity",
+          "lem-periodic-characteristic-map-is-orientation-preserving",
+          "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Assume Countable Choice and the finite measurable positive-volume partition hypotheses in [[def-characteristic-cell-overlap-remapping]]. For nonnegative source averages $\\rho_j^n\\ge0$, the characteristic-cell overlap remap satisfies $\\rho_i^{n+1}\\ge0$ for every arrival cell and\n$$\\sum_i|D_i|\\overline\\rho_i=\\sum_j|C_j|\\rho_j^n.$$\nIn particular, it satisfies\n$$\\sum_i|A_i|\\rho_i^{n+1}=\\sum_j|C_j|\\rho_j^n.$$\nThe proof applies [[thm-overlap-remap-l2-projection-conservation-positivity]] to the source partition $\\{C_j\\}$ and departure partition $\\{D_i\\}$; its stated Countable Choice assumption is included here.",
+        "source_path": "items/thm-characteristic-cell-overlap-remapping-conserves-mass-and-positivity.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            },
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2695,
+    "id": "semi-lagrangian-characteristic-transport-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Semi-Lagrangian characteristic transport — Examples",
+    "companion": "semi-lagrangian-characteristic-transport",
+    "requires": [
+      "semi-lagrangian-characteristic-transport"
+    ],
+    "items": [
+      {
+        "id": "ex-semilagrangian-constant-speed-crosses-many-cells",
+        "kind": "example",
+        "title": "A constant-speed foot can cross many cells in one stable update",
+        "deps": [
+          "alg-semilagrangian-backtracking-on-periodic-grid",
+          "def-semilagrangian-periodic-grid-and-interpolant",
+          "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Take the one-dimensional torus of length $1$, $16$ uniform cells of width $h=1/16$, constant velocity $b=1$, one step $\\Delta t=3/10$, and arrival node $x_0=0$. The Courant displacement is $b\\Delta t/h=4.8$, so the backtracked foot crosses more than four cells. Give the two grid nodes bracketing that foot values $2$ and $10$.",
+        "source_path": "items/ex-semilagrangian-constant-speed-crosses-many-cells.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-semilagrangian-fixed-grid-time-refinement-keeps-interpolation-error",
+        "kind": "example",
+        "title": "Refining time alone leaves interpolation diffusion on a fixed grid",
+        "deps": [
+          "alg-semilagrangian-backtracking-on-periodic-grid",
+          "def-semilagrangian-periodic-grid-and-interpolant",
+          "thm-exponential-product-limit"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Fix an integer $N\\ge4$, the unit torus, and $h=1/N$. Let $b=1$ and use final time $T=h$, but split it into $K$ steps of length $\\Delta t=h/K$. The smooth periodic initial function\n$$u_0(x):=\\prod_{j=1}^{N-1}\\frac{\\sin^2(\\pi(x-j/N))}{\\sin^2(-\\pi j/N)}$$\nhas grid samples $U_0^0=1$ and $U_j^0=0$ for $1\\le j<N$. Exact transport over $T=h$ shifts those samples by exactly one node. The semi-Lagrangian method, however, performs $K$ fractional linear interpolations on the same fixed spatial grid.",
+        "source_path": "items/ex-semilagrangian-fixed-grid-time-refinement-keeps-interpolation-error.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-semilagrangian-pointwise-interpolation-can-change-grid-mass",
+        "kind": "example",
+        "title": "Variable-foot pointwise interpolation can change the grid sum",
+        "deps": [
+          "alg-semilagrangian-backtracking-on-periodic-grid",
+          "def-semilagrangian-periodic-grid-and-interpolant"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Use the period-$3$ one-dimensional grid with nodes $0,1,2$, $h=1$, and one time step $\\Delta t=1$. Set\n$$b(x)=\\frac5{12}-\\frac16\\cos\\!\\left(\\frac{2\\pi x}{3}\\right)-\\frac1{2\\sqrt3}\\sin\\!\\left(\\frac{2\\pi x}{3}\\right).$$\nThis is a smooth periodic velocity. Start with grid values $(U_0,U_1,U_2)=(0,0,1)$, which are samples of the smooth nonnegative period-$3$ function\n$$u_0(x)=\\frac{16}{9}\\sin^2\\!\\left(\\frac{\\pi x}{3}\\right)\\sin^2\\!\\left(\\frac{\\pi(x-1)}{3}\\right).$$",
+        "source_path": "items/ex-semilagrangian-pointwise-interpolation-can-change-grid-mass.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lukas Einkemmer and Alexander Ostermann, On the error propagation of semi-Lagrange and Fourier methods for advection problems, Computers & Mathematics with Applications 69 (2015), 170–179",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4375614/"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-conservative-overlap-transfer-under-smooth-deforming-flow",
+        "kind": "example",
+        "title": "A smooth deforming flow remaps two cell averages conservatively",
+        "deps": [
+          "def-characteristic-cell-overlap-remapping",
+          "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "lem-periodic-characteristic-map-is-orientation-preserving",
+          "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Assume Countable Choice. On the unit torus take the smooth autonomous velocity $b(x)=\\sin(2\\pi x)$ and any fixed time $T>0$. Its exact flow $\\Phi=\\Phi_{T,0}$ is an orientation-preserving diffeomorphism. Use source and arrival cells $C_1=A_1=[0,1/4)$ and $C_2=A_2=[1/4,1)$ in a fundamental interval, with initial cell averages $(\\rho_1^0,\\rho_2^0)=(1,0)$. The flow fixes $0$ and $1/2$; on $(0,1/2)$ it moves points strictly to the right. Define $r:=\\Phi^{-1}(1/4)$.",
+        "source_path": "items/ex-conservative-overlap-transfer-under-smooth-deforming-flow.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "European Centre for Medium-Range Weather Forecasts, Numerical Methods, Meteorological Training Course Lecture Series, 2002",
+              "url": "https://www.ecmwf.int/sites/default/files/elibrary/2002/16948-numerical-methods.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

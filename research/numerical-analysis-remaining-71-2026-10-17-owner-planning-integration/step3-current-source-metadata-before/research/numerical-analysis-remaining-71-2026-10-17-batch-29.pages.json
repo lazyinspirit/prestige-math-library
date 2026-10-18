@@ -1,0 +1,405 @@
+[
+  {
+    "order": 2612,
+    "id": "monotone-finite-volume-entropy-convergence",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Monotone finite-volume entropy convergence",
+    "companion": "monotone-finite-volume-entropy-convergence-examples",
+    "requires": [
+      "conservative-finite-volume-weak-limits"
+    ],
+    "items": [
+      {
+        "id": "def-bounded-bv-data-on-line",
+        "kind": "definition",
+        "title": "Bounded BV data on the real line",
+        "statement": "The bounded, locally integrable translation-variation class BV_b(R), with no L1(R) tail requirement.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-l-infinity-on-a-measure-space",
+          "def-locally-integrable-function-on-r-n"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§2.3.1, pp. 19–20: one-dimensional BV seminorms and the spatial translation estimate used in the scheme analysis."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "§4.6, Theorems 4.18–4.19, PDF pp. 55–57: the BV convention, Helly compactness and the L1-data convergence theorem."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-monotone-finite-volume-entropy-scheme",
+        "kind": "definition",
+        "title": "Monotone finite-volume scheme and invariant-interval CFL",
+        "statement": "A locally Lipschitz, consistent, coordinatewise monotone two-point flux and conservative cell-average update under the full invariant-interval CFL bound lambda(L1+L2)<=1.",
+        "deps": [
+          "def-bounded-bv-data-on-line",
+          "def-conservative-finite-volume-scheme"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§2.2.2–2.2.3, pp. 15–18: monotone numerical fluxes, invariant-range CFL and standard Godunov/Lax–Friedrichs fluxes."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "§4.4.4, PDF pp. 49–50: local Lipschitz monotone fluxes and the CFL condition; §4.6, pp. 55–57: convergence hypotheses."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-piecewise-linear-fv-time-interpolant",
+        "kind": "definition",
+        "title": "Piecewise-linear time interpolant of a finite-volume scheme",
+        "statement": "The affine-in-time, cellwise-constant reconstruction between consecutive monotone finite-volume states.",
+        "deps": [
+          "def-monotone-finite-volume-entropy-scheme",
+          "def-finite-volume-space-time-reconstruction"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§2.3.1, pp. 19–21: discrete time-variation estimates for the finite-volume state."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "Theorem 4.19, §4.6, PDF p. 56: the precise affine-in-time interpolant on each cell and time slab."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-monotone-fv-update-preserves-range-and-tvd",
+        "kind": "lemma",
+        "title": "Invariant range, TVD and time increments for a monotone finite-volume update",
+        "statement": "The full CFL makes the update map isotone and constant-preserving, giving invariant range, discrete TVD and a summed time-increment bound.",
+        "deps": [
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "Proposition 2.3.1 and its proof, §2.3.1, PDF pp. 19–20 (space TVD); Proposition 2.3.3, p. 20 (time increments)."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "Lemma 4.13 and Lemma 4.14, §§4.5.3–4.5.4, PDF pp. 52–54: TVD and time-continuity estimates for monotone schemes."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-monotone-fv-discrete-kruzhkov-inequality",
+        "kind": "lemma",
+        "title": "Discrete Kruzhkov inequality for a monotone finite-volume scheme",
+        "statement": "The Crandall–Majda numerical entropy flux G_k yields the exact one-step discrete Kruzhkov inequality for every real entropy level.",
+        "deps": [
+          "def-monotone-finite-volume-entropy-scheme",
+          "lem-monotone-fv-update-preserves-range-and-tvd",
+          "def-kruzhkov-entropy-solution"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "Proposition 2.3.6 and its proof, §2.3.2, PDF pp. 21–22: the discrete entropy flux built from componentwise maxima/minima."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "§4.5.2, Proposition 4.10, PDF pp. 50–51: the numerical entropy flux and its derivation from monotonicity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-monotone-fv-local-compactness-and-trace",
+        "kind": "lemma",
+        "title": "Local compactness and initial trace for BV finite-volume states",
+        "statement": "A rational-point diagonal plus temporal translation bound gives local strong compactness, the exact initial trace, and a common limit of affine and piecewise-constant reconstructions.",
+        "deps": [
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme",
+          "def-piecewise-linear-fv-time-interpolant",
+          "lem-monotone-fv-update-preserves-range-and-tvd",
+          "thm-bolzano-weierstrass",
+          "lem-q-and-irrationals-dense-r",
+          "thm-rationals-countable",
+          "thm-monotone-convergence-for-the-integral",
+          "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "Propositions 2.3.1 and 2.3.3, §2.3.1, PDF pp. 19–21: spatial BV and discrete time-increment estimates."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "Theorems 4.18–4.19, §4.6, PDF pp. 55–57: Helly compactness and the affine-in-time interpolant. The rational-point proof and nonintegrable-data trace argument are supplied locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-monotone-finite-volume-entropy-convergence",
+        "kind": "theorem",
+        "title": "Strong entropy convergence of monotone finite-volume schemes",
+        "statement": "For scalar C1 flux and bounded BV data, a consistent monotone locally Lipschitz flux under the full invariant CFL and positive lower time-to-space ratio converges strongly locally to the unique Kruzhkov solution, with separate DC and non-DC data branches.",
+        "deps": [
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme",
+          "def-piecewise-linear-fv-time-interpolant",
+          "lem-monotone-fv-update-preserves-range-and-tvd",
+          "lem-monotone-fv-discrete-kruzhkov-inequality",
+          "lem-monotone-fv-local-compactness-and-trace",
+          "thm-conservative-finite-volume-weak-limit",
+          "def-kruzhkov-entropy-solution",
+          "thm-kruzhkov-local-l1-contraction",
+          "thm-existence-of-bounded-kruzhkov-entropy-solutions",
+          "thm-extreme-value-metric",
+          "cor-mean-value-theorem",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§2.2–2.3.3, PDF pp. 13–23: monotone fluxes, invariant bounds, TVD/time increments, the discrete entropy inequality and convergence under a CFL condition. The local compactness and initial-trace proofs are supplied here."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "§§4.4.4–4.6, PDF pp. 49–57, especially Proposition 4.10, Lemmas 4.13–4.14, Theorem 4.18 and Theorem 4.19. The book proof covers L1 data and uses a global-tail argument; the nonintegrable BV branch is proved locally here."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2613,
+    "id": "monotone-finite-volume-entropy-convergence-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Monotone finite-volume entropy convergence — Examples",
+    "companion": "monotone-finite-volume-entropy-convergence",
+    "requires": [
+      "monotone-finite-volume-entropy-convergence"
+    ],
+    "items": [
+      {
+        "id": "cex-nonmonotone-fv-scheme-selects-expansion-shock",
+        "kind": "counterexample",
+        "title": "A consistent nonmonotone flux selects a nonentropy expansion shock",
+        "statement": "A smooth consistent shared-face flux with negative first derivative at (-1,0) preserves a strongly convergent stationary Burgers expansion shock that violates the k=0 Kruzhkov inequality.",
+        "deps": [
+          "def-bounded-bv-data-on-line",
+          "def-conservative-finite-volume-scheme",
+          "def-locally-bounded-distributional-weak-solution",
+          "def-kruzhkov-entropy-solution",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§2.3.2–2.3.3, PDF pp. 21–23: discrete entropy inequalities and why they are needed in addition to weak conservation."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "§4.5.2, PDF pp. 50–51: entropy admissibility is a separate inequality beyond the weak conservation law."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-godunov-fv-monotone-under-cfl",
+        "kind": "example",
+        "title": "Burgers Godunov flux under the invariant-interval CFL bound",
+        "statement": "On [-M,M], the Burgers Godunov flux is coordinatewise monotone and M-Lipschitz in each coordinate, so lambda<=1/(2M) satisfies the full CFL and the convergence theorem applies.",
+        "deps": [
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme",
+          "def-godunov-flux-for-burgers",
+          "lem-godunov-flux-for-burgers-is-continuous-and-consistent",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-monotone-finite-volume-entropy-convergence"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§2.2.3, pp. 17–18: Godunov flux and monotonicity under a CFL condition; §2.3.3, pp. 22–23: convergence."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "§4.4.4, p. 50 (Godunov flux is monotone and locally Lipschitz); §4.6, pp. 55–57 (monotone-scheme convergence)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-lax-friedrichs-fv-monotone-under-cfl",
+        "kind": "example",
+        "title": "Lax–Friedrichs flux under the invariant-interval CFL bound",
+        "statement": "With alpha>=sup_I|f'|, the Lax–Friedrichs flux has coordinate Lipschitz constants (L+alpha)/2 and is monotone; lambda(L+alpha)<=1 yields convergence under the theorem.",
+        "deps": [
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme",
+          "thm-extreme-value-metric",
+          "cor-mean-value-theorem",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-monotone-finite-volume-entropy-convergence"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§2.2.3, pp. 17–18: the Lax–Friedrichs numerical flux and its monotonicity condition; §2.3.3, pp. 22–23: convergence."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "§4.4.4, p. 49: partial derivatives of the Lax–Friedrichs flux and the CFL condition; §4.6, pp. 55–57: convergence."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-godunov-fv-captures-stationary-burgers-shock",
+        "kind": "example",
+        "title": "Godunov scheme captures a stationary Burgers entropy shock",
+        "statement": "The aligned 1-to--1 Burgers shock has common Godunov face flux 1/2, is stationary at every grid level, has Rankine–Hugoniot speed zero, and satisfies every Kruzhkov inequality.",
+        "deps": [
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme",
+          "def-godunov-flux-for-burgers",
+          "lem-godunov-flux-for-burgers-is-continuous-and-consistent",
+          "def-distributional-weak-solution-of-a-scalar-conservation-law",
+          "thm-rankine-hugoniot-jump-condition",
+          "def-kruzhkov-entropy-solution",
+          "def-countable-choice",
+          "ex-godunov-fv-monotone-under-cfl",
+          "thm-monotone-finite-volume-entropy-convergence"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A beginner’s course in finite volume approximation of scalar conservation laws, complete lecture note",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§2.3.3–2.4, PDF pp. 22–24: monotone-scheme entropy convergence and numerical Burgers shock examples."
+            },
+            {
+              "title": "Siddhartha Mishra, Ulrik S. Fjordholm and Rémi Abgrall, Numerical Methods for Conservation Laws, ETH lecture notes",
+              "url": "https://metaphor.ethz.ch/x/2019/hs/401-4671-00L/literature/mishra_hyperbolic_pdes.pdf",
+              "locator": "§4.4, PDF pp. 40–44 (Godunov/Lax–Friedrichs fluxes and Burgers shocks); §4.6, pp. 55–57 (entropy convergence)."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

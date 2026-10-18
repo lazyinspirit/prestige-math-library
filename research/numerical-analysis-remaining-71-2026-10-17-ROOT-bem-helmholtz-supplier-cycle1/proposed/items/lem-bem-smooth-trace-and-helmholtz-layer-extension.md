@@ -1,0 +1,49 @@
+---
+id: lem-bem-smooth-trace-and-helmholtz-layer-extension
+kind: lemma
+title: Smooth-boundary trace lifts and Sobolev Helmholtz layer extensions
+status: draft
+origin: pipeline
+pipeline_run: numerical-analysis-remaining-71-2026-10-17
+deps: [def-bem-smooth-helmholtz-combined-field-operator, lem-bem-half-order-bessel-slobodeckij-equivalence, thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms, thm-fourier-inversion-on-schwartz-space, thm-lax-milgram, def-axiom-of-choice, def-countable-choice]
+justified_by: []
+proof_strategy: direct
+axiom_use: "The Axiom of Choice is assumed; it supplies Countable Choice for Fourier, variational and harmonic regularity suppliers."
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Sayas, First Steps in the Boundary Element Method; local proof of the C2 extension below"
+      url: https://team-pancho.github.io/teaching/math838/BEM.pdf
+---
+
+## Statement
+
+Assume the Axiom of Choice. For the $C^2$ boundary and orientation of [[def-bem-smooth-helmholtz-combined-field-operator]], there are bounded traces from either side of a bounded collar into $H^{1/2}(\Gamma)$, bounded trace lifts into $H^1(\Omega^-)$ and into compactly supported $H^1(\mathbb R^3)$, and bounded extensions of the classical layers
+$$S_k:H^{-1/2}(\Gamma)\longrightarrow H^1_{\rm loc}(\mathbb R^3),\qquad D_k:H^{1/2}(\Gamma)\longrightarrow H^1(\Omega^-)\oplus H^1_{\rm loc}(\overline{\Omega^+}).$$
+Here the exterior local space means $H^1$ on each bounded exterior collar/domain truncation, including its boundary. Both restrictions solve $(\Delta+k^2)u=0$ weakly and have bounded weak conormals in $H^{-1/2}(\Gamma)$. With the fixed normal $n$, they obey Green's identity, with duality linear in the conormal and conjugate-linear in the trace. Their exterior restrictions are smooth away from $\Gamma$ and satisfy the uniform Sommerfeld condition $\sup_\omega|r(\partial_r-ik)u(r\omega)|\to0$. Bounds are at fixed $k$ and fixed bounded neighborhoods. The single layer has one trace across $\Gamma$.
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice, a fixed $k>0$, and the domain, kernels and complex chart spaces in the cited definition. Smooth boundary densities below mean restrictions of smooth ambient functions; these are dense in the chart spaces by chart mollification and cutoffs.
+
+[F1] Tangential Plancherel and Fourier inversion hold with the $2\pi$ convention ([[thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms]], [[thm-fourier-inversion-on-schwartz-space]]); the Bessel and Slobodeckij half-order norms agree up to constants ([[lem-bem-half-order-bessel-slobodeckij-equivalence]]).
+
+[F2] A bounded coercive sesquilinear form on a complex Hilbert space has its bounded variational inverse under Countable Choice ([[thm-lax-milgram]], [[def-countable-choice]], [[def-axiom-of-choice]]).
+
+## Proof
+
+1.1 Write $a(\xi)=(1+4\pi^2|\xi|^2)^{1/2}$. For a compactly supported smooth flat-space function $v$, Fourier inversion in the last coordinate and Cauchy–Schwarz give $|\widehat{v(\cdot,0)}(\xi)|^2\le C a(\xi)^{-1}\int(a(\xi)^2+4\pi^2\tau^2)|\widehat v(\xi,\tau)|^2d\tau$. Integration in $\xi$ proves the flat $H^1\to H^{1/2}$ trace estimate. The lift $\widehat{Lg}(\xi,t)=\widehat g(\xi)e^{-a(\xi)|t|}\chi(t)$, with $\chi=1$ near zero and compactly supported, has trace $g$ and $H^1$ norm bounded by $C\|g\|_{H^{1/2}}$, by integrating $e^{-2a|t|}$. In a $C^2$ graph chart $x=(z,t+\psi(z))$, the change of variables has determinant one and bounded derivative and inverse derivative; the chain rule bounds the two $H^1$ norms. Graph and chart distances and surface Jacobians are uniformly comparable, so the Slobodeckij double integral gives the corresponding $H^{1/2}$ norm comparison. A finite partition of unity and smaller chart cutoffs therefore transport the flat trace and lifts to the surface. Reflection in $t=0$ and convolution give density and the one-sided extension estimates. A zero-trace $H^1$ function has zero-extension in $H^1$ (the distributional boundary derivative is its trace times $n$, which vanishes), and the kernel of the trace is $H^1_0$: in a flat half-chart a zero-trace function satisfies $v(z,t)=\int_0^t\partial_tv(z,s)ds$, whence $\epsilon^{-2}\int_{0<t<2\epsilon}|v|^2\le C\int_{0<t<2\epsilon}|\partial_tv|^2\to0$. Cutting it off for $t<\epsilon$ therefore changes its $H^1$ norm by a quantity tending to zero; convolution of each resulting interior-supported function proves the claim. Transport this construction by the graph maps and sum the partition. These arguments apply to $C^2$ charts directly and do not import any polyhedral theorem. [F1, given, algebra, construct]
+
+1.2 Put $P_k=-\Delta-k^2$ and $G_k(x)=e^{ik|x|}/(4\pi|x|)$. Radial differentiation gives $P_kG_k=0$ for $x\ne0$. On a punctured test-function support, integration by parts gives the inner boundary contribution $\int_{|x|=\epsilon}(G_k\partial_r v-v\partial_rG_k)dS\to v(0)$, since $G_k=O(\epsilon^{-1})$ and $\partial_rG_k=-1/(4\pi\epsilon^2)+O(1)$. Thus $P_kG_k=\delta_0$ distributionally. Choose $\zeta\in C_c^\infty(\mathbb R^3)$ equal to one on a ball larger than every difference $x-y$ needed for the fixed bounded target and source sets. The function $g=\zeta G_k$ is in $L^1$ and $P_kg=\delta_0+h$ with smooth compactly supported $h$ supported away from zero. Hence $(4\pi^2|\xi|^2-k^2)\widehat g(\xi)=1+\widehat h(\xi)$. For large $|\xi|$ this gives $|\widehat g|\le C(1+|\xi|^2)^{-1}$; for bounded $\xi$ the same estimate follows from $g\in L^1$ with a larger constant. Plancherel now proves $g*:H^{-1}(\mathbb R^3)\to H^1(\mathbb R^3)$ and $g*:L^2\to H^2$. For distributions of bounded support these coincide on the chosen target set with $G_k*$, since the kernels agree on all differences there. [F1, step 1.1, given, algebra]
+
+2.1 For $\lambda\in H^{-1/2}(\Gamma)$, the distribution $T_\lambda$ defined by $T_\lambda(v)=\lambda(v|_\Gamma)$ (using the complex-bilinear distributional convention) is supported on $\Gamma$ and is in $H^{-1}(\mathbb R^3)$ by step 1.1. Thus $S_k\lambda=G_k*T_\lambda$ is globally $H^1$ near the surface by step 1.2; it has a common trace and solves $P_kS_k\lambda=0$ off $\Gamma$. For smooth $\lambda$, Fubini identifies the convolution with the classical single-layer integral, because $1/|x-y|$ is locally integrable in three dimensions. [step 1.1, step 1.2, given, construct]
+
+3.1 Given $\phi\in H^{1/2}(\Gamma)$, take a bounded interior lift $F_0$ from step 1.1. On $H^1_0(\Omega^-)$ apply [F2] to $b(v,w)=\int(\nabla v\cdot\overline{\nabla w}+v\bar w)$ and the functional $-b(F_0,w)$. This produces $F=F_0+v$ with trace $\phi$, $(-\Delta+1)F=0$, and $\|F\|_{H^1}\le C\|\phi\|_{H^{1/2}}$. Define $q\in H^{-1/2}(\Gamma)$ by $\langle q,g\rangle=b(F,Lg)$ for an interior lift $Lg$. Independence follows since differences of lifts are in $H^1_0$, and boundedness follows from step 1.1. For $f=F1_{\Omega^-}$ and any smooth compactly supported test $v$, two weak integrations by parts give $P_kf(v)=-(1+k^2)\int_{\Omega^-}Fv+q(v|_\Gamma)-\int_\Gamma\phi\partial_nv$. In distributions, the last term is minus the source of the classical double layer. Convolving this equality with $G_k$ is legitimate because $f$ has compact support, and $G_k*P_kf=(P_kG_k)*f=f$. Consequently define
+$$D_k\phi=S_kq-(1+k^2)G_k*f-f.$$
+For smooth $\phi$, the differentiated fundamental-solution identity and distributional convolution identify this expression away from $\Gamma$ with $\int_\Gamma\partial_{n_y}G_k(x-y)\phi(y)dS_y$. The first term is $H^1$ near $\Gamma$, the second is $H^2$ by step 1.2, and $f$ restricts to $F$ and zero on the two sides. This proves the asserted bounded piecewise $H^1$ extension and its uniqueness by density. It also shows its trace jump is $-\phi$. [F2, step 1.1, step 1.2, step 2.1, given, construct, algebra]
+
+4.1 Each layer solves $P_ku=0$ on either side by its source identity. For any such interior restriction define $\langle q^-,g\rangle=\int_{\Omega^-}(\nabla u\cdot\overline{\nabla Lg}-k^2u\overline{Lg})$. Differences of lifts are in $H^1_0$, so the weak PDE proves independence; step 1.1 gives $\|q^-\|_{H^{-1/2}}\le C\|u\|_{H^1}$. For the exterior choose a compactly supported lift in a bounded collar and use minus this integral, because the exterior's outward normal on $\Gamma$ is $-n$. This gives $q^+$ with the same bound. These definitions are Green's identity for arbitrary $H^1$ tests, with the declared sesquilinear convention. [step 1.1, step 2.1, step 3.1, given, algebra]
+
+5.1 Away from $\Gamma$ all derivatives of the layer kernels are smooth in the source variable, so their distributional pairings can be differentiated in $x$, proving smoothness there. Uniformly for bounded $y$ and $r\to\infty$, $G_k(r\omega-y)=O(r^{-1})$ and $(\partial_r-ik)G_k(r\omega-y)=O(r^{-2})$ together with any fixed finite number of $y$ derivatives; these follow by differentiating $|r\omega-y|=r-\omega\cdot y+O(r^{-1})$. The same estimates hold after one source normal derivative. The $H^{1/2}(\Gamma)$ norm of the first remainder is $O(r^{-2})$ by its uniform value and first source derivative bounds, so pairing with $\lambda\in H^{-1/2}$ proves the single-layer radiation condition. The double-layer radiation condition follows by integration against $\phi\in L^2(\Gamma)$ and the source normal derivative remainder bound. This proves all assertions. [step 2.1, step 3.1, step 4.1, given, algebra] ∎

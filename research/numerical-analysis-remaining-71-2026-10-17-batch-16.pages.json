@@ -1,0 +1,715 @@
+[
+  {
+    "order": 2586,
+    "id": "hierarchical-low-rank-matrices-and-error-propagation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Hierarchical low rank matrices and error propagation",
+    "companion": "hierarchical-low-rank-matrices-and-error-propagation-examples",
+    "requires": [
+      "randomized-low-rank-approximation",
+      "sparse-direct-elimination-and-ordering",
+      "tensor-train-compression-and-truncation-error"
+    ],
+    "items": [
+      {
+        "id": "def-hlr-cluster-trees-and-geometric-admissibility",
+        "kind": "definition",
+        "title": "Finite cluster trees and geometric admissibility",
+        "statement": "Let $I$ be a nonempty finite totally ordered set, let $d\\ge1$, and assign a point $\\xi_i\\in\\mathbb R^d$ to each $i\\in I$. A **cluster** is a nonempty subset of $I$. For a cluster $\\tau$, write $X_\\tau=\\{\\xi_i:i\\in\\tau\\}$, $\\operatorname{diam}(\\tau)=\\max_{i,j\\in\\tau}\\|\\xi_i-\\xi_j\\|_2$, and $\\operatorname{dist}(\\tau,\\sigma)=\\min_{i\\in\\tau,j\\in\\sigma}\\|\\xi_i-\\xi_j\\|_2$. These extrema exist because the index sets are finite and nonempty; repeated geometric points are allowed.\n\nA **balanced cluster tree with leaf threshold $b$**, where $1\\le b\\le |I|$, is the rooted binary tree whose root is $I$, whose children of an internal cluster $\\tau$ are its first $\\lfloor|\\tau|/2\\rfloor$ and last $\\lceil|\\tau|/2\\rceil$ indices in the fixed order, and which stops splitting at clusters of size at most $b$. Its two children are disjoint and their union is $\\tau$.\n\nFor the column side, let $J$ be a nonempty finite totally ordered set, assign points $\\zeta_j\\in\\mathbb R^d$ for $j\\in J$, and build its balanced cluster tree by the same rule with its own threshold $1\\le b_J\\le|J|$. Column clusters are nonempty subsets $\\sigma\\subseteq J$, with $X_\\sigma=\\{\\zeta_j:j\\in\\sigma\\}$ and $\\operatorname{diam}(\\sigma)=\\max_{j,j'\\in\\sigma}\\|\\zeta_j-\\zeta_{j'}\\|_2$. For a row cluster $\\tau\\subseteq I$ and a column cluster $\\sigma\\subseteq J$, set $\\operatorname{dist}(\\tau,\\sigma)=\\min_{i\\in\\tau,j\\in\\sigma}\\|\\xi_i-\\zeta_j\\|_2$. Row and column roles distinguish the assignments even when the index sets overlap. In the square case with a common point assignment, take $J=I$ and $\\zeta_i=\\xi_i$.\n\nFix an admissibility parameter $\\eta>0$. A pair of clusters $(\\tau,\\sigma)$ is **admissible** when $\\operatorname{dist}(\\tau,\\sigma)>0$ and $\\operatorname{dist}(\\tau,\\sigma)\\ge\\eta\\max(\\operatorname{diam}(\\tau),\\operatorname{diam}(\\sigma))$. The strict positive-distance condition keeps coincident or intersecting clusters in the near field, including diagonal singleton blocks.\n\nThe **block-cluster tree** starts at $(I,J)$. It stops at a pair if that pair is admissible or if both clusters are leaves. Otherwise, if only one cluster is nonleaf, it splits that cluster. If both are nonleaf, it splits the cluster of larger cardinality; ties are resolved by splitting the row cluster. The children of a split are the corresponding child-cluster pairs. Its terminal pairs are called **block-cluster leaves**. Admissible leaves are **far blocks**; nonadmissible leaves, which have two leaf clusters, are **near blocks**.",
+        "deps": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§1.3–1.6, 2.1–2.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.3.2–2.3.3",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-hlr-balanced-cluster-tree-size-and-depth",
+        "kind": "lemma",
+        "title": "Size and depth of a balanced cluster tree",
+        "statement": "Let $I$ be a finite ordered set of size $n\\ge1$, and let $b$ be an integer with $1\\le b\\le n$. In the balanced cluster tree of [[def-hlr-cluster-trees-and-geometric-admissibility]], every cluster at depth $h$ has size at most $\\lceil n/2^h\\rceil$. The tree has depth at most $\\lceil\\log_2(n/b)\\rceil$, at most $2n/b$ leaves, and at most $4n/b-1$ nodes.",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§2.1.1–2.1.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.3.2",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-hlr-block-cluster-leaves-partition-index-pairs",
+        "kind": "lemma",
+        "title": "Block-cluster leaves partition the index-pair set",
+        "statement": "Let $I,J$ be nonempty finite index sets with finite cluster trees, and construct the block-cluster tree as in [[def-hlr-cluster-trees-and-geometric-admissibility]]. Its terminal rectangles $\\tau\\times\\sigma$ are pairwise disjoint and their union is $I\\times J$.",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§1.5, 2.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.3.2–2.3.3",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-hlr-core-svd-recompression-with-tolerance",
+        "kind": "algorithm",
+        "title": "Core-SVD recompression with rank and error tolerances",
+        "statement": "**Input:** A field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, positive integers $m,n$, a finite factor list $U_s\\in\\mathbb F^{m\\times r_s}$ and $V_s\\in\\mathbb F^{n\\times r_s}$ representing $M=\\sum_s U_sV_s^*$, a rank cap $0\\le k\\le\\min(m,n)$, and a Frobenius tolerance $\\delta\\ge0$. The conjugate transpose $M^*$ and Frobenius norm are those of [[def-finite-tensor-arrays-and-frobenius-inner-product]].\n\n**Procedure:** Concatenate the factors as $U=[U_1\\ \\cdots\\ U_p]$ and $V=[V_1\\ \\cdots\\ V_p]$, so $M=UV^*$. Take compact singular value decompositions $U=Q_UR_U$ and $V=Q_VR_V$, where the columns of $Q_U,Q_V$ are orthonormal and span the respective column spaces. Form the core $C=R_UR_V^*$ and compute an SVD $C=P\\Sigma Q^*$. Let its positive singular values be $s_1\\ge\\cdots\\ge s_t>0$. Find the smallest $q\\in\\{0,\\ldots,\\min(k,t)\\}$ for which $e_q:=(\\sum_{j>q}s_j^2)^{1/2}\\le\\delta$. If no such $q$ exists, return **tolerance-not-met**. Otherwise return **success** with factors $\\widehat U=Q_UP_{[:,1:q]}\\Sigma_q$ and $\\widehat V=Q_VQ_{[:,1:q]}$, where $\\Sigma_q=\\operatorname{diag}(s_1,\\ldots,s_q)$, and the exact discarded-tail certificate $e_q$; when $q=0$, use empty $m\\times0$ and $n\\times0$ factors.\n\nThe compact decompositions retain only positive singular directions. If the factor list is empty or its represented matrix is zero, then $t=0$ and the procedure returns the rank-zero representation because $\\delta\\ge0$. Any SVD choices in repeated singular subspaces are permitted. No result is returned when the requested cap cannot certify the tolerance.",
+        "deps": [
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§7.1–7.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.2",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-hlr-and-h2-block-matrix-representations",
+        "kind": "definition",
+        "title": "H-matrix block representation",
+        "statement": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $I,J$ be nonempty finite index sets with point assignments as in [[def-hlr-cluster-trees-and-geometric-admissibility]], and let $\\mathcal P$ be the block-cluster leaves of [[lem-hlr-block-cluster-leaves-partition-index-pairs]]. Fix an integer rank cap $k\\ge1$. An **H-matrix representation with cap $k$** assigns to each far block $b=(\\tau,\\sigma)\\in\\mathcal P$ factors $U_b\\in\\mathbb F^{\\tau\\times r_b}$ and $V_b\\in\\mathbb F^{\\sigma\\times r_b}$ with $0\\le r_b\\le k$, representing that block by $U_bV_b^*$. Each near block is stored as its full dense matrix $D_b\\in\\mathbb F^{\\tau\\times\\sigma}$. Since $\\mathcal P$ partitions $I\\times J$, these blocks determine a unique represented matrix $\\widetilde A\\in\\mathbb F^{I\\times J}$.\n\nThe rank cap on far blocks is an assumption about the representation or the target's approximability; geometric admissibility alone does not imply that a given matrix block has low rank. Near blocks remain dense and receive no low-rank guarantee.",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§1.6, 2.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.1",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+        "kind": "theorem",
+        "title": "Core-SVD recompression is best at the declared Frobenius tolerance",
+        "statement": "Let $M=\\sum_s U_sV_s^*$ be the finite matrix input to [[alg-hlr-core-svd-recompression-with-tolerance]], and let $k$ and $\\delta\\ge0$ be its rank cap and Frobenius tolerance. If the algorithm returns **success** with rank $q$, its returned matrix $\\widehat M$ has rank $q$ and satisfies $\\|M-\\widehat M\\|_F=(\\sum_{j>q}s_j(M)^2)^{1/2}\\le\\delta$. No lower-rank matrix meets the same tolerance. If the algorithm returns **tolerance-not-met**, no matrix of rank at most $k$ meets the tolerance.",
+        "deps": [
+          "alg-hlr-core-svd-recompression-with-tolerance",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-best-rank-k-frobenius-matrix-approximation",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§7.1–7.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.2, Theorem 2.4.2.6",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-h2-nested-cluster-bases-and-interaction-lists",
+        "kind": "definition",
+        "title": "Nested H² cluster bases and interaction lists",
+        "statement": "In the H-matrix setting of [[def-hlr-and-h2-block-matrix-representations]], an **H² representation** assigns a row basis $U_\\tau\\in\\mathbb F^{\\tau\\times r_\\tau}$ to every row cluster $\\tau$ and a column basis $V_\\sigma\\in\\mathbb F^{\\sigma\\times s_\\sigma}$ to every column cluster $\\sigma$, with $0\\le r_\\tau,s_\\sigma\\le k$. For every internal row cluster $\\tau$ with children $\\tau_1,\\tau_2$, it stores transfer matrices $E^U_{\\tau_i}\\in\\mathbb F^{r_{\\tau_i}\\times r_\\tau}$ satisfying\n\n$$U_\\tau|_{\\tau_i}=U_{\\tau_i}E^U_{\\tau_i}\\qquad(i=1,2).$$\n\nFor every internal column cluster $\\sigma$ with children $\\sigma_1,\\sigma_2$, it stores transfer matrices $E^V_{\\sigma_j}\\in\\mathbb F^{s_{\\sigma_j}\\times s_\\sigma}$ satisfying $V_\\sigma|_{\\sigma_j}=V_{\\sigma_j}E^V_{\\sigma_j}$. These identities are the **nested-basis conditions**. An admissible block leaf $(\\tau,\\sigma)$ is represented by $U_\\tau S_{\\tau\\sigma}V_\\sigma^*$ with coupling matrix $S_{\\tau\\sigma}\\in\\mathbb F^{r_\\tau\\times s_\\sigma}$; near block leaves remain dense.\n\nLet $\\mathcal P_{\\rm far}$ denote the admissible leaves of the block-cluster partition. The row interaction list of $\\tau$ is $\\mathcal L_U(\\tau)=\\{\\sigma:(\\tau,\\sigma)\\in\\mathcal P_{\\rm far}\\}$, and the column interaction list of $\\sigma$ is $\\mathcal L_V(\\sigma)=\\{\\tau:(\\tau,\\sigma)\\in\\mathcal P_{\\rm far}\\}$. An H² representation may impose a bound on these list lengths or on their total count; any complexity theorem must state which bound it uses.\n\n**Storage convention:** Store the basis arrays explicitly only at leaf clusters. Store each internal cluster's child-to-parent transfer matrices; the basis of an internal cluster is reconstructed recursively from its children and these transfers.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), Chapter 9, §§9.1–9.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.6",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-hlr-block-matvec",
+        "kind": "algorithm",
+        "title": "H-matrix block matrix-vector multiplication",
+        "statement": "**Input:** An H-matrix representation $\\widetilde A$ on a finite block-cluster partition $\\mathcal P$ as in [[def-hlr-and-h2-block-matrix-representations]], and a vector $x\\in\\mathbb F^J$.\n\n**Procedure:** Initialize $y\\in\\mathbb F^I$ to zero. For every far block $b=(\\tau,\\sigma)$ with factors $U_b,V_b$, compute $z_b=V_b^*x|_\\sigma$ and add $U_bz_b$ to $y|_\\tau$. For every near block with dense entries $D_b$, compute $D_bx|_\\sigma$ and add it to $y|_\\tau$. Return $y$. All arithmetic is exact; contributions to a row cluster are summed over its block leaves.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §1.6",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.3.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-hlr-bottom-up-recompression",
+        "kind": "algorithm",
+        "title": "Bottom-up low-rank recompression of block contributions",
+        "statement": "Let $b=(\\tau,\\sigma)$ be an admissible leaf of the finite block-cluster partition in [[def-hlr-and-h2-block-matrix-representations]]. A **factor-sum tree for $b$** is a finite rooted binary tree whose leaves carry factor pairs $U_v\\in\\mathbb F^{\\tau\\times r_v}$, $V_v\\in\\mathbb F^{\\sigma\\times r_v}$ for exact contributions $M_v=U_vV_v^*$; each internal node denotes the sum of the exact matrices denoted by its two children. Here $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $*$ is conjugate transpose, and all factors have the displayed finite dimensions.\n\n**Input:** Such a tree, a rank cap $k\\ge1$, node tolerances $\\theta_v\\ge0$ whose sum over all nodes is at most a requested block tolerance $\\delta_b\\ge0$, and the procedures/results [[alg-hlr-core-svd-recompression-with-tolerance]] and [[thm-hlr-core-svd-recompression-is-best-rank-tolerance]].\n\n**Procedure:** Traverse the tree in postorder. At a leaf, pass its exact factor pair to core-SVD recompression. At an internal node, concatenate the returned child factor pairs, which represents the sum of the two child approximations, and pass that pair to core-SVD recompression. At every node use effective core cap $k_b=\\min(k,|\\tau|,|\\sigma|)$ and tolerance $\\theta_v$. If any call returns **tolerance-not-met**, return that status and node. On success, retain its factors and exact discarded-tail norm $\\rho_v$. Define the node's reported error bound by $e_v=\\rho_v$ at a leaf and $e_v=e_{v_1}+e_{v_2}+\\rho_v$ at an internal node. If all calls succeed, return the root factors and $e_{\\rm root}$. Then the root matrix has rank at most $k$ and its Frobenius error from the sum of all leaf contributions is at most $e_{\\rm root}\\le\\sum_v\\theta_v\\le\\delta_b$. A failed call means only that this chosen tree and its assigned local budgets did not produce a certificate; it does not assert that no rank-$k$ approximation of the full sum meets $\\delta_b$.\n\nNear blocks are not passed to this routine: they are assembled and stored densely and exactly. For a leaf carrying a dense contribution $D\\in\\mathbb F^{m\\times n}$, use the exact factor pair $(D,I_n)$, where $I_n$ is the identity matrix; the routine may then compress it under its assigned tolerance.\n\nThe rank and error guarantees are proved in [[lem-hlr-bottom-up-recompression-error-bound]].",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "alg-hlr-core-svd-recompression-with-tolerance",
+          "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§6.2, 7.1–7.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.4.2–2.4.3",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-hlr-bottom-up-recompression-error-bound"
+        ]
+      },
+      {
+        "id": "thm-hlr-separated-cauchy-block-rank-bound",
+        "kind": "theorem",
+        "title": "A separated Cauchy block has a geometric rank bound",
+        "statement": "Let $0\\le a<b$, $c\\ge0$, and choose $m,n\\ge1$ points $x_i\\in[0,a]$ and $y_j\\in[b,b+c]$. Put $q=a/b<1$ and define the Cauchy block $K_{ij}=1/(y_j-x_i)$. For any integer $r\\ge1$, the matrix $\\widetilde K$ with entries $\\widetilde K_{ij}=\\sum_{\\ell=0}^{r-1}x_i^\\ell y_j^{-(\\ell+1)}$ has rank at most $r$ and satisfies $|K_{ij}-\\widetilde K_{ij}|\\le q^r/(b-a)$ and $\\|K-\\widetilde K\\|_F\\le\\sqrt{mn}\\,q^r/(b-a)$. If $b-a\\ge\\eta\\max(a,c)$ and the H-matrix rank cap satisfies $k\\ge r$, the sampled clusters are admissible and $\\widetilde K$ is a permitted rank-at-most-$k$ far-block representation.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-hlr-cluster-trees-and-geometric-admissibility",
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§1.2–1.3",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.2.2.1",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-hlr-compress-exact-lu-factors",
+        "kind": "algorithm",
+        "title": "Compress exact block LU factors with local tolerances",
+        "statement": "**Input:** An exact factorization $A=LU$ of a square matrix $A\\in\\mathbb F^{n\\times n}$, where $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and $n\\ge1$, with $L$ block lower triangular and $U$ block upper triangular on a common ordered cluster partition; an integer rank cap $k\\ge1$; and a nonnegative local Frobenius tolerance for each admissible off-diagonal block of $L$ and $U$. The factorization $A=LU$ is supplied as a hypothesis, not computed by this procedure.\n\n**Procedure:** Copy every dense nearfield block and every diagonal block exactly. For each strictly lower admissible block $D_b\\in\\mathbb F^{m_b\\times n_b}$ of $L$ and each strictly upper admissible block $D_b$ of $U$, form the one-pair factor list $(D_b,I_{n_b})$, representing $D_b=D_bI_{n_b}^*$, and pass it to [[alg-hlr-core-svd-recompression-with-tolerance]] with effective cap $\\min(k,m_b,n_b)$ and its given local tolerance. Keep structural zero blocks zero. If any compression reports **tolerance-not-met**, return that status and the factor/block identity. Otherwise return $\\widehat L,\\widehat U$ and the local discarded-tail bounds $\\epsilon_b^L,\\epsilon_c^U$ reported by the recompressions. The exact diagonal blocks preserve block triangularity; no claim is made that the compressed factors are exact factors of $A$.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "alg-hlr-core-svd-recompression-with-tolerance",
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§6.2, 7.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-hlr-bottom-up-recompression-error-bound",
+        "strategy": "Complete same-frontier prerequisite authored by the assigned Codex escalation owner; see the exact scope report and source-local proof.",
+        "kind": "lemma",
+        "title": "Bottom-up factor-sum recompression has the reported rank and Frobenius error bound",
+        "deps": [
+          "alg-hlr-bottom-up-recompression",
+          "alg-hlr-core-svd-recompression-with-tolerance",
+          "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§6.2, 7.1–7.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.4.2–2.4.3",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "statement": "Use [[alg-hlr-bottom-up-recompression]] on a finite factor-sum tree for one admissible block over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, with exact arithmetic, rank cap $k\\ge1$, node tolerances $\\theta_v\\ge0$, and $\\sum_v\\theta_v\\le\\delta_b$. Let $T_v$ be the subtree rooted at $v$, and let $M_v$ be the sum of its exact leaf contributions. Whenever all calls in $T_v$ succeed, the returned factors represent a matrix $\\widehat M_v$ of rank at most $k$, and the reported bound satisfies\n$$\\|M_v-\\widehat M_v\\|_F\\le e_v=\\sum_{w\\in T_v}\\rho_w\\le\\sum_{w\\in T_v}\\theta_w.$$\nIn particular, if the routine succeeds at the root,\n$$\\operatorname{rank}(\\widehat M_{\\rm root})\\le k,\\qquad \\|M_{\\rm root}-\\widehat M_{\\rm root}\\|_F\\le e_{\\rm root}=\\sum_w\\rho_w\\le\\sum_w\\theta_w\\le\\delta_b.$$\nHere $\\rho_w$ is the exact discarded-tail norm returned at node $w$. A **tolerance-not-met** status at a node only means this chosen tree and these assigned local budgets did not produce the requested certificate; it does not assert that no rank-$k$ approximation of the exact full sum meets $\\delta_b$.",
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-hlr-block-addition",
+        "kind": "algorithm",
+        "title": "Tolerance-controlled H-matrix block addition",
+        "statement": "**Input:** Two H-matrix representations $A,B$ on the same block-cluster partition $\\mathcal P$, a rank cap $k\\ge1$, and for each far block $b\\in\\mathcal P$ a factor-sum tree with node tolerances whose total is at most $\\delta_b\\ge0$. The tree leaves are the exact factors of $A_b$ and $B_b$.\n\n**Procedure:** For each near block, store the exact dense sum $A_b+B_b$ and report local error $e_b=0$. For each far block, run [[alg-hlr-bottom-up-recompression]] on its factor-sum tree with cap $k$. If any block returns **tolerance-not-met**, return that status and the block identity; otherwise store the root factors, report the certified error bound $e_b$ returned by that routine, and retain the block partition. The input's node budgets sum to at most $\\delta_b$, so $e_b\\le\\delta_b$ by the bottom-up error guarantee.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "alg-hlr-bottom-up-recompression"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §6.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.3",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-hlr-block-product",
+        "kind": "algorithm",
+        "title": "Tolerance-controlled H-matrix block product",
+        "statement": "**Input:** H-matrix representations $A\\in\\mathbb F^{I\\times K}$ and $B\\in\\mathbb F^{K\\times J}$, a recursively generated output block-cluster partition as in [[def-hlr-cluster-trees-and-geometric-admissibility]], a rank cap $k\\ge1$, local tolerances $\\delta_b\\ge0$ for far output blocks, and for each output block $b=(\\tau,\\sigma)$ a finite intermediate-cluster family $\\mathcal K_b$ partitioning $K$ such that the restrictions $A_{\\tau\\kappa}$ and $B_{\\kappa\\sigma}$ are available in dense or factorized form for each $\\kappa\\in\\mathcal K_b$. For a far output block, its factor-sum tree has one exact product term for each $\\kappa\\in\\mathcal K_b$ and node tolerances totaling at most $\\delta_b$. This compatibility condition is part of the input.\n\n**Procedure:** For each output block, use the exact identity $C_b=\\sum_{\\kappa\\in\\mathcal K_b}A_{\\tau\\kappa}B_{\\kappa\\sigma}$. If the output block is near, form and store this dense sum exactly and report $e_b=0$. For a far output block, convert each product term to factor form: $UV^*\\cdot PQ^*=U(V^*P)Q^*$ when both factors are low rank; $UV^*\\cdot D=U(D^*V)^*$ and $D\\cdot PQ^*=(DP)Q^*$ when one factor is dense; and $D_1D_2=D_1(D_2^*)^*$ when both are dense. These formulas produce factors with matching inner dimensions. Run [[alg-hlr-bottom-up-recompression]] on the resulting finite factor-sum tree with cap $k$. If any block returns **tolerance-not-met**, return that status and block identity; otherwise store the root factors and its certified bound $e_b\\le\\delta_b$.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-hlr-cluster-trees-and-geometric-admissibility",
+          "alg-hlr-bottom-up-recompression"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §6.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.4",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-hlr-block-matvec-correct",
+        "kind": "theorem",
+        "title": "H-matrix block multiplication returns the represented matrix action",
+        "statement": "For every H-matrix representation $\\widetilde A\\in\\mathbb F^{I\\times J}$ on the block-cluster partition of [[lem-hlr-block-cluster-leaves-partition-index-pairs]] and every vector $x\\in\\mathbb F^J$, [[alg-hlr-block-matvec]] returns $\\widetilde A x$ exactly.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "alg-hlr-block-matvec"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §1.6",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.3.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-h2-matrix-vector-multiplication",
+        "kind": "algorithm",
+        "title": "Nested-basis H² matrix-vector multiplication",
+        "statement": "**Input:** An H² representation $\\widetilde A$ with row bases $U_\\tau$, column bases $V_\\sigma$, transfer matrices from [[def-h2-nested-cluster-bases-and-interaction-lists]], and a vector $x\\in\\mathbb F^J$.\n\n**Procedure:**\n\n1. Initialize an upward coefficient vector $z_\\sigma$ for each column cluster. At each leaf $\\sigma$, set $z_\\sigma=V_\\sigma^*x|_\\sigma$. At each internal cluster $\\sigma$ with children $\\sigma_1,\\sigma_2$, set $z_\\sigma=\\sum_{j=1}^2(E^V_{\\sigma_j})^*z_{\\sigma_j}$.\n2. Initialize a downward coefficient vector $w_\\tau=0$ for each row cluster and an output vector $y=0$. For each admissible leaf $(\\tau,\\sigma)$, add $S_{\\tau\\sigma}z_\\sigma$ to $w_\\tau$. For each near leaf $(\\tau,\\sigma)$, add $D_{\\tau\\sigma}x|_\\sigma$ to $y|_\\tau$.\n3. Traverse the row tree from root to leaves. For each parent $\\tau$ and child $\\tau_i$, add $E^U_{\\tau_i}w_\\tau$ to $w_{\\tau_i}$. At each row leaf $\\tau$, add $U_\\tau w_\\tau$ to $y|_\\tau$. Return $y$.\n\nThe upward and downward traversals follow the finite cluster trees; block and cluster contributions are accumulated in exact arithmetic.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-h2-nested-cluster-bases-and-interaction-lists"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), Chapter 9, §§9.1–9.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.6",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-hlr-blockwise-error-propagation",
+        "kind": "theorem",
+        "title": "Blockwise Frobenius errors propagate by disjoint block sums",
+        "statement": "For any finite matrix partition into disjoint blocks, if each local residual satisfies $\\|E_b\\|_F\\le\\delta_b$, then the assembled residual satisfies $\\|E\\|_F\\le(\\sum_b\\delta_b^2)^{1/2}$. In particular, let $A,B$ be conformable finite real or complex matrices, and let $\\widetilde A,\\widetilde B$ be approximations with $\\|A-\\widetilde A\\|_F\\le\\epsilon_A$ and $\\|B-\\widetilde B\\|_F\\le\\epsilon_B$. If a successful block addition or block product from [[alg-hlr-block-addition]] or [[alg-hlr-block-product]] returns $\\widehat S$ or $\\widehat C$, with disjoint output blocks $b$ and local Frobenius errors $e_b\\le\\delta_b$, put $\\delta=(\\sum_b\\delta_b^2)^{1/2}$. Then\n\n$$\\|A+B-\\widehat S\\|_F\\le\\epsilon_A+\\epsilon_B+\\delta,$$\n\nand\n\n$$\\|AB-\\widehat C\\|_F\\le\\epsilon_A\\|B\\|_F+\\|A\\|_F\\epsilon_B+\\epsilon_A\\epsilon_B+\\delta.$$",
+        "deps": [
+          "alg-hlr-block-addition",
+          "alg-hlr-block-product",
+          "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "lem-hlr-bottom-up-recompression-error-bound",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§1.6, 6.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.4.2–2.4.4",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hlr-storage-and-matvec-complexity",
+        "kind": "theorem",
+        "title": "Balanced H and H² storage and matvec complexity",
+        "statement": "Let $I=J$ have size $n$, let $1\\le k\\le n$, and use balanced cluster trees with leaf threshold $b=k$. Let $s\\ge1$ be independent of $n,k$. Assume:\n\n1. at each level of the block-cluster tree, the far leaves satisfy $\\sum_{(\\tau,\\sigma)}(|\\tau|+|\\sigma|)\\le2sn$;\n2. the total number of near leaves is at most $s\\lceil n/k\\rceil$;\n3. the total number of admissible H² coupling blocks is at most $s\\lceil n/k\\rceil$.\n\nCount scalar storage entries and exact scalar arithmetic operations, with constants allowed to depend on $s$ but not on $n,k$. Then an H-matrix with far-block ranks at most $k$ has storage and matvec work $O(sk n\\log_2(2n/k))$. An H²-matrix with nested bases of ranks at most $k$ has storage and matvec work $O(sk n)$. The bounds depend on the stated block-count assumptions; geometric admissibility alone does not imply them.",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility",
+          "lem-hlr-balanced-cluster-tree-size-and-depth",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-h2-nested-cluster-bases-and-interaction-lists",
+          "alg-hlr-block-matvec",
+          "alg-h2-matrix-vector-multiplication"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§1.6, 7.1, 9.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §§2.3.5, 2.4",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-h2-matrix-vector-multiplication-correct",
+        "kind": "theorem",
+        "title": "Nested-basis H² multiplication is exact for its represented matrix",
+        "statement": "For every nested-basis H² representation $\\widetilde A\\in\\mathbb F^{I\\times J}$ and every vector $x\\in\\mathbb F^J$, [[alg-h2-matrix-vector-multiplication]] returns $\\widetilde A x$ exactly.",
+        "deps": [
+          "def-hlr-and-h2-block-matrix-representations",
+          "def-h2-nested-cluster-bases-and-interaction-lists",
+          "lem-hlr-block-cluster-leaves-partition-index-pairs",
+          "alg-h2-matrix-vector-multiplication"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), Chapter 9, §§9.1–9.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.6",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-hlr-approximate-factorization-residual-and-inverse-error",
+        "kind": "theorem",
+        "title": "Compressed block LU factors have a residual and inverse certificate",
+        "statement": "Let $A\\in\\mathbb F^{n\\times n}$ be invertible over $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $n\\ge1$, and let $A=LU$ be an exact block lower-upper factorization. Suppose [[alg-hlr-compress-exact-lu-factors]] returns $\\widehat L,\\widehat U$ and exact local discarded-tail errors $e_b^L,e_c^U$. All operations and norms in this theorem are exact. Put $\\epsilon_L=(\\sum_b(e_b^L)^2)^{1/2}$, $\\epsilon_U=(\\sum_c(e_c^U)^2)^{1/2}$, $\\widehat A=\\widehat L\\widehat U$, and $\\eta=\\epsilon_L\\|U\\|_F+\\|\\widehat L\\|_F\\epsilon_U$. Then\n\n$$\\|A-\\widehat A\\|_F\\le\\eta\\qquad\\text{and}\\qquad\\|A-\\widehat A\\|_2\\le\\eta.$$\n\nIf $q=\\|A^{-1}\\|_2\\eta<1$, then $\\widehat A$ is invertible and\n\n$$\\|\\widehat A^{-1}-A^{-1}\\|_2\\le\\frac{\\|A^{-1}\\|_2^2\\eta}{1-q}.$$",
+        "deps": [
+          "alg-hlr-compress-exact-lu-factors",
+          "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "thm-hlr-blockwise-error-propagation",
+          "def-finite-tensor-arrays-and-frobenius-inner-product",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-best-rank-k-frobenius-matrix-approximation",
+          "thm-rank-nullity",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-invertible-matrices-correspond-to-linear-isomorphisms"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§6.2, 7.2",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            },
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2587,
+    "id": "hierarchical-low-rank-matrices-and-error-propagation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Hierarchical low rank matrices and error propagation — Examples",
+    "companion": "hierarchical-low-rank-matrices-and-error-propagation",
+    "requires": [
+      "hierarchical-low-rank-matrices-and-error-propagation"
+    ],
+    "items": [
+      {
+        "id": "ex-hlr-nearfield-block-requires-full-rank",
+        "kind": "example",
+        "title": "A nearfield identity block requires full rank for subunit spectral error",
+        "statement": "Let $\\tau=\\{1,2\\}$ have coordinates $0$ and $1$, choose leaf threshold $b=2$, and use the block $\\tau\\times\\tau$. Its distance from itself is zero, so it is inadmissible and terminates as a dense near block. For $I_2$, no rank-one approximation has operator-norm error below one.",
+        "deps": [
+          "def-hlr-cluster-trees-and-geometric-admissibility",
+          "def-hlr-and-h2-block-matrix-representations",
+          "thm-eckart-young-best-rank-k-approximation",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§1.5–1.6",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-hlr-accumulated-truncation-can-destroy-positive-definiteness",
+        "kind": "example",
+        "title": "Two accepted local truncations can destroy positive definiteness after accumulation",
+        "statement": "Let $e_2=(0,1)^{\\mathsf T}$, $M=\\operatorname{diag}(1,-1/50)$, and $D_1=D_2=(3/50)e_2e_2^*$. The exact sum $A=M+D_1+D_2=\\operatorname{diag}(1,1/10)$ is positive definite. If each rank-one update is separately recompressed to rank zero with tolerance $\\delta=3/50$ before assembly, both local truncations are accepted and the assembled approximation is $M$, which is indefinite. Each local error $3/50$ is below the smaller diagonal coefficient $1/10$ of $A$. The example concerns truncation of low-rank updates before their sum is assembled; it does not claim that every SVD truncation of a completed positive-definite H-matrix destroys positivity.",
+        "deps": [
+          "alg-hlr-core-svd-recompression-with-tolerance",
+          "thm-hlr-core-svd-recompression-is-best-rank-tolerance",
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, AdvNumCSE Lecture Document, Chapter 2, “Local Low-Rank Compression of Non-Local Operators” (ETH Zürich, AT’23), §2.4.5",
+              "url": "https://people.math.ethz.ch/~grsam/ADVNCSE/ADVNCSE.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-hlr-separated-cauchy-block",
+        "kind": "example",
+        "title": "A rank-one approximation of a separated Cauchy block",
+        "statement": "Take $x_1=0,x_2=1$ in $[0,1]$ and $y_1=2,y_2=3$ in $[2,3]$. For $K_{ij}=1/(y_j-x_i)$ and rank order $r=1$, the first geometric term is $\\widetilde K_{ij}=1/y_j$. It gives a rank-one approximation with an exactly computable nonzero residual.",
+        "deps": [
+          "thm-hlr-separated-cauchy-block-rank-bound",
+          "def-finite-tensor-arrays-and-frobenius-inner-product"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steffen Börm, Lars Grasedyck, and Wolfgang Hackbusch, Hierarchical Matrices, MiS Lecture Note 21 (2003; revised June 2006), §§1.2–1.3",
+              "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-2103.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

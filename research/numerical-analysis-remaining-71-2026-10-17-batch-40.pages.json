@@ -1,0 +1,705 @@
+[
+  {
+    "order": 2634,
+    "id": "graph-diffusion-and-metric-network-pde-numerics",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Graph diffusion and metric network pde numerics",
+    "companion": "graph-diffusion-and-metric-network-pde-numerics-examples",
+    "requires": [
+      "finite-generator-master-equations-and-uniformization",
+      "elliptic-finite-difference-methods",
+      "parabolic-finite-element-methods",
+      "algebraic-and-spectral-graph-theory",
+      "conjugate-gradients-minres-and-preconditioning"
+    ],
+    "items": [
+      {
+        "id": "def-anchored-finite-metric-graph-h1-space",
+        "kind": "definition",
+        "title": "Anchored finite metric graph and its H1 energy space",
+        "statement": "Assume the Axiom of Choice as required by the cited one-dimensional\nrepresentative interface. A **finite metric graph**\n$\\Gamma=(V,E,\\partial_-,\\partial_+,\\ell)$ consists of finite vertex and\nedge sets $V,E$, endpoint maps $\\partial_-,\\partial_+:E\\to V$, and edge\nlengths $0<\\ell_e<\\infty$. Distinct edges with the same endpoints are\nallowed, as are loop edges with $\\partial_-e=\\partial_+e$. Every vertex is\nan endpoint of at least one edge. The two endpoint incidences $(e,-)$ and\n$(e,+)$ remain distinct even for a loop. A graph path is a finite sequence\n$z_0,e_1,z_1,\\ldots,e_n,z_n$ with $n\\ge0$ and\n$\\{\\partial_-e_j,\\partial_+e_j\\}=\n\\{z_{j-1},z_j\\}$ for every $j$; a loop permits $z_{j-1}=z_j$. Vertices in\nthe same connected edge component are those joined by such a path. Orient\neach edge only to choose its coordinate $x_e\\in[0,\\ell_e]$, with $0$ at\n$\\partial_-e$ and $\\ell_e$ at $\\partial_+e$. For $z\\in V$, let\n$\\mathcal I(z):=\\{(e,-):\\partial_-e=z\\}\\cup\\{(e,+):\\partial_+e=z\\}$\nbe its finite set of endpoint incidences.\nThe edge-product spaces are\n\n$$H:=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R),\\qquad \\mathcal W:=\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R).$$\n\nFor $w_e\\in H^1(0,\\ell_e)$, its endpoint values mean the values of the unique\nabsolutely continuous representative supplied by\n[[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]].\nThe **trace-matching graph Sobolev space** is the subspace of $\\mathcal W$\nwhose endpoint-incidence traces all agree at each vertex. For a designated\nanchor set $D\\subseteq V$, define the **anchored graph energy space**\n\n$$V_D:=\\{w\\in\\mathcal W:\\ w_{\\iota}=w_{\\iota'}\\text{ whenever }\\iota,\\iota'\\in\\mathcal I(v),\\quad w_{\\iota}=0\\text{ for each }v\\in D,\\ \\iota\\in\\mathcal I(v)\\}.$$\n\nWe equip $H$ with the edge-sum $L^2$ inner product and $V_D$ with\n\n$$\\|w\\|_{V_D}^2=\\sum_{e\\in E}\\int_0^{\\ell_e}(|w_e|^2+|w'_e|^2)\\,dx_e.$$\n\nNo Kirchhoff derivative condition is built into $V_D$; that condition is a\nnatural boundary condition of the later weak diffusion form. The elliptic\nand P1 error results below assume that $D$ meets every connected edge\ncomponent.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "lem-one-dimensional-sobolev-endpoint-estimate",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define interval orientation, endpoint traces, edge-product norms, common vertex values, and the anchored subspace. State the one-dimensional representative convention and full choice dependency explicitly.",
+        "axiom_base": "The Axiom of Choice is used through the published one-dimensional W^{1,2} representative theorem; no additional choice is made in the finite edge product.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-conservative-network-advection-routing",
+        "kind": "definition",
+        "title": "Conservative nonnegative network advection routing",
+        "statement": "At a directed network junction, let $n_{\\rm in}$ edges carry nonnegative\nincoming **mass fluxes** $q^{\\rm in}_i$ into the junction, and let\n$n_{\\rm out}$ edges carry outgoing mass fluxes. A **conservative nonnegative\nrouting matrix** is a real matrix\n$P\\in\\mathbb R^{n_{\\rm out}\\times n_{\\rm in}}$ such that\n\n$$P_{ji}\\ge0,\\qquad \\sum_{j=1}^{n_{\\rm out}}P_{ji}=1 \\quad(1\\le i\\le n_{\\rm in}).$$\n\nIt routes the incoming flux vector to\n$q^{\\rm out}=Pq^{\\rm in}$. The column $i$ distributes the mass flux arriving\non incoming edge $i$ among the outgoing edges. The column-sum condition\nstipulates no source or sink at the junction. It is a model condition on flux;\nit does not assert that the densities on incident edges are equal.",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define edge orientation, incoming and outgoing flux vectors, nonnegative routing weights, and the column-sum balance condition without imposing continuity of edge densities.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+              "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+              "locator": "§3.2, Theorems 3.1–3.2 and §3.4, Theorem 3.4, PDF pp. 7–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-finite-weighted-network-diffusion-data",
+        "kind": "definition",
+        "title": "Finite weighted network diffusion data",
+        "statement": "Let $G=(V,E)$ be a finite simple graph with ordered vertex and edge sets.\nChoose an orientation of each edge and let $B\\in\\mathbb R^{V\\times E}$ be\nthe resulting incidence matrix of\n[[def-oriented-incidence-matrix-of-a-graph]]: a column has $-1$ at its tail,\n$+1$ at its head, and zero elsewhere. Let $D\\subseteq V$ be the vertices with\nprescribed Dirichlet values and let $I=V\\setminus D$ be the free vertices.\nAssign a mass $m_i>0$ to each $i\\in I$ and a conductance $c_e\\ge0$ to each\n$e\\in E$. Put\n\n$$M=\\operatorname{diag}(m_i)_{i\\in I},\\qquad C=\\operatorname{diag}(c_e)_{e\\in E},\\qquad L_C=BCB^{\\mathsf T}.$$\n\nThe matrix $L_C$ is the **conductance-weighted graph stiffness**. Its free\nDirichlet restriction $L_D$ is the principal submatrix $(L_C)_{I,I}$. The\nfinite weighted network diffusion equation is\n\n$$M u'(t)+L_Du(t)=f(t),$$\n\nwhere $u(t)\\in\\mathbb R^I$ and $f(t)\\in\\mathbb R^I$. If $D=\\varnothing$,\nthis is the closed Neumann network equation. If the boundary values are\ninstead a nonzero vector $g(t)$, restriction of $L_C(u,g)$ to $I$ gives\n$M u'+L_Du=f-(L_C)_{I,D}g$.\n\nWhen every $c_e=1$, $L_C=BB^{\\mathsf T}$ agrees with the ordinary graph\nLaplacian by\n[[thm-laplacian-is-the-oriented-incidence-product]]. Zero conductances are\nallowed and remove those edges from the diffusion coupling; they do not remove\nthe vertices or masses.",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-oriented-incidence-matrix-of-a-graph",
+          "def-laplacian-matrix-of-a-finite-simple-graph",
+          "thm-laplacian-is-the-oriented-incidence-product",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_level": 0,
+        "strategy": "State orientation and row/column conventions, define free and Dirichlet sets and positive diagonal masses, and define B C B^T and its free restriction. Distinguish closed Neumann and grounded Dirichlet equations.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fan R. K. Chung, Spectral Graph Theory, Chapter 1: Eigenvalues and the Laplacian of a Graph, CBMS 92 (1997), complete chapter text",
+              "url": "https://fanchung.ucsd.edu/cbms.pdf",
+              "locator": "Complete Chapter 1 text; §§1.2 and 1.4, printed pp. 2–14."
+            },
+            {
+              "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+              "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+              "locator": "§3.2, Theorems 3.1–3.2 and §3.4, Theorem 3.4, PDF pp. 7–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-metric-graph-p1-edge-mesh",
+        "kind": "definition",
+        "title": "Conforming P1 edge mesh on an anchored metric graph",
+        "statement": "Assume $E\\ne\\varnothing$. For each edge $e$, choose a finite partition\n$$0=x_{e,0}<x_{e,1}<\\cdots<x_{e,N_e}=\\ell_e,$$\nwhere $N_e\\ge1$, and let $\\mathcal T_h$ be the union of the resulting\ninterval cells $K_{e,j}=[x_{e,j-1},x_{e,j}]$. Set\n$h=\\max_{e,j}(x_{e,j}-x_{e,j-1})$. The conforming **P1 edge space** is\n$$V_h=\\{w\\in V_D:\\ w_e\\text{ is affine on every }K_{e,j}\\}.$$\nThus internal nodal values are single-valued along each edge, while the\noriginal-vertex matching and zero-anchor conditions are inherited from\n$V_D$. The maximum step $h$ is positive and finite because the mesh has\nfinitely many cells of positive length.",
+        "deps": [
+          "def-anchored-finite-metric-graph-h1-space"
+        ],
+        "dependency_level": 1,
+        "strategy": "Specify finite edge partitions, maximum cell length, nodal degrees of freedom, endpoint matching at original vertices, and zero anchor values.",
+        "axiom_base": "No new choice principle is used; the underlying graph space already declares its Axiom of Choice dependency.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-anchored-metric-graph-h1-space-is-hilbert",
+        "kind": "lemma",
+        "title": "The anchored metric graph H1 space is a closed Hilbert subspace",
+        "statement": "Assume the Axiom of Choice. For a finite metric graph and anchor set $D$, the trace-matching space and\nthe anchored space $V_D$ of\n[[def-anchored-finite-metric-graph-h1-space]] are closed real Hilbert\nsubspaces of $\\bigoplus_{e\\in E}H^1(0,\\ell_e;\\mathbb R)$ with the\nedge-product $H^1$ inner product.",
+        "deps": [
+          "def-anchored-finite-metric-graph-h1-space",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "lem-one-dimensional-sobolev-endpoint-estimate",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove each endpoint trace map is bounded by the one-dimensional endpoint estimate, so all matching and anchor constraints are kernels of finitely many continuous linear maps; use finite-product completeness and the closed-subspace theorem.",
+        "axiom_base": "The Axiom of Choice is inherited from the one-dimensional H1 Hilbert and representative interfaces used to define edge traces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-anchored-metric-graph-poincare",
+        "kind": "lemma",
+        "title": "Path Poincare inequality on an anchored finite metric graph",
+        "statement": "Assume the Axiom of Choice and assume every connected edge component of the finite metric graph $\\Gamma$\nhas at least one anchor in $D$. Put\n$L_\\Gamma=\\sum_{e\\in E}\\ell_e$. Then every $w\\in V_D$ satisfies\n\n$$\\|w\\|_{L^2(\\Gamma)}\\le L_\\Gamma \\left(\\sum_{e\\in E}\\|w'_e\\|_{L^2(e)}^2\\right)^{1/2}.$$",
+        "deps": [
+          "def-anchored-finite-metric-graph-h1-space",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-holder-inequality-for-integrals",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Choose one finite path from an anchor to one endpoint of each edge, apply the edgewise fundamental theorem along the path and edge segment, and integrate the resulting Cauchy-Schwarz bound over all edges.",
+        "axiom_base": "The Axiom of Choice is inherited through the one-dimensional absolutely-continuous representative theorem; only finitely many paths are selected.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-metric-graph-kirchhoff-green-identity",
+        "kind": "lemma",
+        "title": "Green identity and Kirchhoff flux cancellation on a metric graph",
+        "statement": "Assume the Axiom of Choice. Orient each edge coordinate from $0$ at\n$\\partial_-e$ to $\\ell_e$ at $\\partial_+e$. For endpoint incidences\n$(e,-)$ and $(e,+)$ define the outward derivatives by\n$\\partial_{\\nu_{(e,-)}}u_e=-u'_e(0)$ and\n$\\partial_{\\nu_{(e,+)}}u_e=+u'_e(\\ell_e)$. The two incidences are both\nincluded at a loop vertex. For $\\iota=(e,\\pm)$ write $e(\\iota)=e$.\nIf $u_e\\in H^2(0,\\ell_e)$, with $H^2$ as defined by\n[[def-sobolev-space-wkp-and-its-norm]],\n$v\\in V_D$, and each edge has a constant diffusivity $\\kappa_e>0$, then\n\n$$\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u'_ev'_e\\,dx_e =-\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u''_ev_e\\,dx_e +\\sum_{z\\in V}v(z)\\sum_{\\iota\\in\\mathcal I(z)}\\kappa_{e(\\iota)}\\partial_{\\nu_\\iota}u_{e(\\iota)}(z).$$\n\nThus zero test traces remove anchored endpoint terms, and a Kirchhoff\ncondition\n$\\sum_{\\iota\\in\\mathcal I(z)}\\kappa_{e(\\iota)}\\partial_{\\nu_\\iota}u_{e(\\iota)}(z)=0$ at each free vertex\ncancels the remaining terms.",
+        "deps": [
+          "def-anchored-finite-metric-graph-h1-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-algebra-of-derivatives",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Orient each interval, define its outward derivative at both endpoints, integrate the derivative product on each edge, collect the endpoint terms, group them by vertices, then apply trace matching, anchors, and Kirchhoff balance.",
+        "axiom_base": "The Axiom of Choice is inherited through the edgewise Sobolev representatives used for endpoint values.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-weighted-network-energy-kernel-and-mass-balance",
+        "kind": "lemma",
+        "title": "Energy, kernel, and weighted mass balance for a finite network",
+        "statement": "Use the data of [[def-finite-weighted-network-diffusion-data]]. Let\n$E_+=\\{e\\in E:c_e>0\\}$ and let $G_+=(V,E_+)$; its connected components are\nthe **positive-conductance components**. For $x\\in\\mathbb R^I$, let\n$\\bar x\\in\\mathbb R^V$ equal $x$ on $I$ and $0$ on $D$. Then\n\n$$x^{\\mathsf T}L_Dx=\\sum_{e\\in E}c_e (\\bar x_{\\mathrm{head}(e)}-\\bar x_{\\mathrm{tail}(e)})^2\\ge0.$$\n\nConsequently $L_D$ is symmetric positive semidefinite, and $x\\in\\ker L_D$\nexactly when $\\bar x$ is constant on each positive-conductance component and\nthat constant is zero on every such component meeting $D$. In the closed\ncase $D=\\varnothing$, every differentiable solution of\n$Mu'+L_Cu=f$ satisfies\n\n$$\\frac{d}{dt}\\mathbf1^{\\mathsf T}Mu(t)=\\mathbf1^{\\mathsf T}f(t).$$\n\nThus homogeneous closed diffusion conserves weighted mass\n$\\mathbf1^{\\mathsf T}Mu$, which need not equal the unweighted sum\n$\\mathbf1^{\\mathsf T}u$.",
+        "deps": [
+          "def-finite-weighted-network-diffusion-data",
+          "def-oriented-incidence-matrix-of-a-graph"
+        ],
+        "dependency_level": 1,
+        "strategy": "Expand x^T L_D x edge by edge, characterize zero-energy vectors on positive-conductance components, and multiply the closed evolution by 1^T M.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fan R. K. Chung, Spectral Graph Theory, Chapter 1: Eigenvalues and the Laplacian of a Graph, CBMS 92 (1997), complete chapter text",
+              "url": "https://fanchung.ucsd.edu/cbms.pdf",
+              "locator": "Complete Chapter 1 text; §§1.2 and 1.4, printed pp. 2–14."
+            },
+            {
+              "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+              "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+              "locator": "§3.2, Theorems 3.1–3.2 and §3.4, Theorem 3.4, PDF pp. 7–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-conservative-network-routing-conserves-flux",
+        "kind": "theorem",
+        "title": "A conservative routing matrix preserves total flux",
+        "statement": "Let $P$ be a conservative nonnegative routing matrix from\n[[def-conservative-network-advection-routing]], and let\n$q^{\\rm in}\\in\\mathbb R^{n_{\\rm in}}$ be entrywise nonnegative. Then\n$q^{\\rm out}=Pq^{\\rm in}$ is entrywise nonnegative and\n$$\\sum_{j=1}^{n_{\\rm out}}q^{\\rm out}_j =\\sum_{i=1}^{n_{\\rm in}}q^{\\rm in}_i.$$",
+        "deps": [
+          "def-conservative-network-advection-routing"
+        ],
+        "dependency_level": 1,
+        "strategy": "Expand output coordinates as nonnegative finite sums and interchange the two finite sums; use the column-sum condition to identify the totals.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+              "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+              "locator": "§3.2, Theorems 3.1–3.2 and §3.4, Theorem 3.4, PDF pp. 7–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "cor-weighted-network-gauged-cg-applicability",
+        "kind": "corollary",
+        "title": "Exact-arithmetic CG after grounding or a Neumann gauge",
+        "statement": "Use the weighted network data of\n[[def-finite-weighted-network-diffusion-data]]. The exact-arithmetic\nconjugate-gradient result\n[[thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error]]\napplies to each of the following systems:\n\n1. $M+\\tau L_D$ for every $\\tau>0$;\n2. the grounded steady matrix $L_D$ if every positive-conductance component\n   containing a free vertex also meets the Dirichlet set $D$;\n3. the closed Neumann matrix $L_C$ restricted to $K^\\perp$, where\n   $K=\\ker L_C$, for every compatible right-hand side $b\\in K^\\perp$.\n\nIn case 3 the gauge $u\\in K^\\perp$ gives the unique solution of $L_Cu=b$.\nHere $K^\\perp$ uses the standard Euclidean inner product\n$\\langle x,y\\rangle=x^{\\mathsf T}y$. If a stated unknown space is\nzero-dimensional, its solver claim is vacuous.\nThese are exact-arithmetic applicability claims only; no finite-precision\nstability claim is made.",
+        "deps": [
+          "def-finite-weighted-network-diffusion-data",
+          "lem-weighted-network-energy-kernel-and-mass-balance",
+          "thm-rank-nullity",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use the edge energy to prove positive definiteness on the grounded subspace and on ker(L)^perp, use finite-dimensional injectivity for the compatible gauged solve, then match the actual HPD hypotheses of the published CG result.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fan R. K. Chung, Spectral Graph Theory, Chapter 1: Eigenvalues and the Laplacian of a Graph, CBMS 92 (1997), complete chapter text",
+              "url": "https://fanchung.ucsd.edu/cbms.pdf",
+              "locator": "Complete Chapter 1 text; §§1.2 and 1.4, printed pp. 2–14."
+            },
+            {
+              "title": "Jonathan Richard Shewchuk, An Introduction to the Conjugate Gradient Method Without the Agonizing Pain, complete lecture note",
+              "url": "https://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf",
+              "locator": "Complete 64-page lecture note; §§2, 7.1 and 7.3, printed pp. 5–7 and 24–26."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-metric-graph-p1-interpolation-estimate",
+        "kind": "lemma",
+        "title": "P1 edge interpolation estimate with junction compatibility",
+        "statement": "Assume the Axiom of Choice, any anchor set $D\\subseteq V$ as in\n[[def-anchored-finite-metric-graph-h1-space]], a mesh\n$\\mathcal T_h$ of [[def-metric-graph-p1-edge-mesh]], positive constants\n$\\kappa_e$ on the edges, and edgewise $u_e\\in H^2(0,\\ell_e;\\mathbb R)$ as in\n[[def-sobolev-space-wkp-and-its-norm]], with the\ntrace matching and anchor conditions of $V_D$. Let $I_hu$ be the edgewise\nnodal linear interpolant. Then $I_hu\\in V_h$ and\n$$\\left(\\sum_{e\\in E}\\kappa_e\\|(u_e-I_hu_e)'\\|_{L^2(e)}^2\\right)^{1/2} \\le h\\left(\\sum_{e\\in E}\\kappa_e\\|u''_e\\|_{L^2(e)}^2\\right)^{1/2}.$$",
+        "deps": [
+          "def-anchored-finite-metric-graph-h1-space",
+          "def-metric-graph-p1-edge-mesh",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-holder-inequality-for-integrals",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "On each cell express the interpolant slope as the mean of u prime, bound the fluctuation of u prime using the integral of u second derivative and Cauchy-Schwarz, sum squared estimates with conductance weights, and verify common vertex nodal values.",
+        "axiom_base": "The Axiom of Choice is inherited through the one-dimensional representatives of u and u prime; the interpolation estimate itself uses only finite sums and Cauchy-Schwarz.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-metric-graph-p1-parabolic-semidiscrete-stability",
+        "kind": "theorem",
+        "title": "Energy-stable semidiscrete P1 evolution on an anchored metric graph",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let a finite metric graph\nwith nonempty edge set have every connected edge component anchored, let\n$V=V_D$ and $H=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R)$, and let $V_h$\nbe its conforming P1 edge space. Put $L_\\Gamma=\\sum_e\\ell_e$,\n$\\alpha=\\kappa_{\\min}/(1+L_\\Gamma^2)$, and assume constant diffusivities\n$0<\\kappa_{\\min}\\le\\kappa_e\\le\\kappa_{\\max}$. For $T>0$,\n$f\\in L^2(0,T;V_D^*)$, and $u_h^0\\in V_h$, define\n$a(w,v)=\\sum_e\\kappa_e\\int_0^{\\ell_e}w'_ev'_e\\,dx_e$. There is a unique\n$u_h\\in H^1(0,T;V_h)$ with $u_h(0)=u_h^0$ satisfying, for almost every $t$,\n\n$$((u_h)'(t),v_h)_H+a(u_h(t),v_h)=\\langle f(t),v_h\\rangle_{V_D^*,V_D}\\qquad(v_h\\in V_h).$$\n\nFor every $t\\in[0,T]$,\n\n$$\\|u_h(t)\\|_H^2+\\alpha\\int_0^t\\|u_h(s)\\|_{V_D}^2\\,ds\\le\\|u_h^0\\|_H^2+\\alpha^{-1}\\int_0^t\\|f(s)\\|_{V_D^*}^2\\,ds.$$\n\nHere $V_h$ is the finite P1 space from\n[[def-metric-graph-p1-edge-mesh]]. This is a semidiscrete\nexistence and energy statement; it gives no parabolic spatial error rate.",
+        "deps": [
+          "def-anchored-finite-metric-graph-h1-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-anchored-metric-graph-h1-space-is-hilbert",
+          "lem-anchored-metric-graph-poincare",
+          "def-metric-graph-p1-edge-mesh",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-parabolic-evolution-triple-and-energy-space",
+          "thm-parabolic-finite-dimensional-measurable-ode",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Verify the dense continuous graph evolution triple by edgewise compactly supported smooth functions, verify finite-dimensional conforming P1 inclusion and coercivity, then apply the actual generic finite-dimensional parabolic ODE interface.",
+        "axiom_base": "The Axiom of Choice is inherited from graph traces; the generic finite-dimensional ODE supplier imposes no additional choice axiom.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods, complete lecture notes, Chapter 12",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Complete 118-page notes; Chapter 12 §12.1, PDF/printed p. 102."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-metric-graph-weak-elliptic-problem",
+        "kind": "theorem",
+        "title": "Well-posed weak elliptic diffusion on an anchored metric graph",
+        "statement": "Assume the Axiom of Choice and Countable Choice, $E\\ne\\varnothing$, and that the anchor set $D$ meets every connected\nedge component of the finite metric graph $\\Gamma$. Let constant edge\ndiffusivities satisfy\n$$0<\\kappa_{\\min}\\le\\kappa_e\\le\\kappa_{\\max}<\\infty.$$\nFor every $f\\in H=\\bigoplus_{e\\in E}L^2(0,\\ell_e;\\mathbb R)$ there is a unique\n$u\\in V_D$ such that\n\n$$a(u,v):=\\sum_{e\\in E}\\kappa_e\\int_0^{\\ell_e}u'_ev'_e\\,dx_e=F(v):=\\sum_{e\\in E}\\int_0^{\\ell_e}f_ev_e\\,dx_e\\qquad(v\\in V_D).$$\n\nThe equation is the anchored weak metric-graph diffusion problem. Whenever\n$u_e\\in H^2(0,\\ell_e)$ as defined in\n[[def-sobolev-space-wkp-and-its-norm]], the Green identity\n[[lem-metric-graph-kirchhoff-green-identity]] identifies its interior\nequation as $-\\kappa_eu''_e=f_e$ and its natural free-vertex condition as\nKirchhoff balance of the outward diffusive fluxes.",
+        "deps": [
+          "def-anchored-finite-metric-graph-h1-space",
+          "lem-anchored-metric-graph-h1-space-is-hilbert",
+          "lem-anchored-metric-graph-poincare",
+          "lem-metric-graph-kirchhoff-green-identity",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-lax-milgram",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Bound the diffusion form and load on the anchored graph Hilbert space, use path Poincare and the lower diffusivity bound for coercivity, and apply Lax-Milgram with its exact Countable Choice hypothesis.",
+        "axiom_base": "Full AC is inherited from graph-space traces and AC; Countable Choice is additionally used by the published Lax-Milgram theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-weighted-network-semigroup-and-euler-positivity",
+        "kind": "theorem",
+        "title": "Positive graph-diffusion semigroup and Euler maps",
+        "statement": "Use the data of [[def-finite-weighted-network-diffusion-data]] and write\n$L=L_D$. For any $t\\ge0$, the homogeneous exact semigroup\n$$S_D(t)=e^{-tM^{-1}L}$$\nmaps entrywise nonnegative initial vectors to entrywise nonnegative vectors.\nFor a forward Euler step of size $\\tau\\ge0$, the map\n$$E_F(\\tau)=I-\\tau M^{-1}L$$\nis entrywise nonnegative, and hence positivity preserving for every\nnonnegative input, exactly when\n$$0\\le\\tau\\le\\tau_F:=\\min_{\\substack{i\\in I\\\\L_{ii}>0}}\\frac{m_i}{L_{ii}},$$\nwhere the minimum of an empty set is $+\\infty$. For every $\\tau>0$, the\nbackward Euler map $(M+\\tau L)^{-1}M$ exists and is positivity preserving.\nThe forward Euler threshold is sharp for positivity of the full step matrix.",
+        "deps": [
+          "def-finite-weighted-network-diffusion-data",
+          "lem-weighted-network-energy-kernel-and-mass-balance",
+          "thm-xd-finite-generator-master-equation-uniformization",
+          "def-xd-finite-column-generator",
+          "lem-xd-finite-matrix-exponential-series"
+        ],
+        "dependency_level": 2,
+        "strategy": "Transform to the column mass state for the closed generator, extend positivity to arbitrary nonnegative data, prove the grounded case by a nonnegative diagonal shift, compute the exact forward Euler matrix threshold, and use a minimum-coordinate argument for backward Euler.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fan R. K. Chung, Spectral Graph Theory, Chapter 1: Eigenvalues and the Laplacian of a Graph, CBMS 92 (1997), complete chapter text",
+              "url": "https://fanchung.ucsd.edu/cbms.pdf",
+              "locator": "Complete Chapter 1 text; §§1.2 and 1.4, printed pp. 2–14."
+            },
+            {
+              "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+              "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+              "locator": "§3.2, Theorems 3.1–3.2 and §3.4, Theorem 3.4, PDF pp. 7–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-metric-graph-p1-fem-cea-and-energy-rate",
+        "kind": "theorem",
+        "title": "Cea and O(h) energy error for conforming metric graph P1 FEM",
+        "statement": "Assume the Axiom of Choice and Countable Choice, every edge component is anchored, each $\\kappa_e$ is constant with\n$0<\\kappa_{\\min}\\le\\kappa_e\\le\\kappa_{\\max}$, and the weak solution $u$ of\n[[thm-metric-graph-weak-elliptic-problem]] satisfies\n$u_e\\in H^2(0,\\ell_e)$, as defined in\n[[def-sobolev-space-wkp-and-its-norm]], on every edge. For the conforming P1 space $V_h$ of\n[[def-metric-graph-p1-edge-mesh]], let $u_h\\in V_h$ solve\n$$a(u_h,v_h)=F(v_h)\\qquad(v_h\\in V_h),$$\nwhere $a$ and $F$ are the weak diffusion form and load of that theorem. Put\n$L_\\Gamma=\\sum_e\\ell_e$,\n$M_a=\\kappa_{\\max}$, and\n$\\alpha_a=\\kappa_{\\min}/(1+L_\\Gamma^2)$. Then $u_h$ exists uniquely and\n$$\\|u-u_h\\|_{V_D}\\le\\frac{M_a}{\\alpha_a}\\inf_{v_h\\in V_h}\\|u-v_h\\|_{V_D}.$$\n$$\\left(\\sum_e\\kappa_e\\|(u_e-u_{h,e})'\\|_{L^2(e)}^2\\right)^{1/2}\\le h\\left(\\sum_e\\kappa_e\\|u''_e\\|_{L^2(e)}^2\\right)^{1/2}.$$\nThus the energy-seminorm error is $O(h)$ for this fixed finite graph and\nedgewise H2 solution. The Green identity\n[[lem-metric-graph-kirchhoff-green-identity]] identifies the natural\nfree-vertex condition as Kirchhoff balance; this theorem makes no claim for\nvertex singularities or higher-dimensional junctions.",
+        "deps": [
+          "def-anchored-finite-metric-graph-h1-space",
+          "lem-anchored-metric-graph-h1-space-is-hilbert",
+          "lem-anchored-metric-graph-poincare",
+          "lem-metric-graph-kirchhoff-green-identity",
+          "thm-metric-graph-weak-elliptic-problem",
+          "def-metric-graph-p1-edge-mesh",
+          "lem-metric-graph-p1-interpolation-estimate",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "cor-symmetric-galerkin-best-approximation-in-energy-norm",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Check boundedness and coercivity of the graph form, verify the finite P1 space is conforming, apply the published Cea and symmetric best-approximation results with Countable Choice, then use the local H2 interpolation estimate.",
+        "axiom_base": "Full AC is inherited from graph traces; Countable Choice is used through the published Cea/Galerkin interface.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2635,
+    "id": "graph-diffusion-and-metric-network-pde-numerics-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Graph diffusion and metric network pde numerics — Examples",
+    "companion": "graph-diffusion-and-metric-network-pde-numerics",
+    "requires": [
+      "graph-diffusion-and-metric-network-pde-numerics"
+    ],
+    "items": [
+      {
+        "id": "cex-density-continuity-fails-unequal-speed-routing",
+        "kind": "counterexample",
+        "title": "Density continuity can violate conservative advection balance",
+        "statement": "A universal junction rule declaring the density equal on every incident\nedge always conserves mass for advection with unequal edge speeds.",
+        "deps": [
+          "def-conservative-network-advection-routing",
+          "thm-conservative-network-routing-conserves-flux"
+        ],
+        "dependency_level": 2,
+        "strategy": "Compute incoming and outgoing fluxes under equal positive density, then give a column-stochastic routing matrix showing the conservative flux condition.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+              "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+              "locator": "§3.2, Theorems 3.1–3.2 and §3.4, Theorem 3.4, PDF pp. 7–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-disconnected-unanchored-network-solve",
+        "kind": "example",
+        "title": "A disconnected unanchored network gives a singular steady solve",
+        "statement": "Let a closed four-vertex network have edges $(1,2)$ and $(3,4)$ with\nconductances $1$ and $3$. Its steady stiffness is singular: each disconnected\npositive-conductance component contributes an independent constant kernel\nmode. The load $(1,0,0,0)^{\\mathsf T}$ is incompatible with the first\ncomponent's Neumann balance, so it has no steady solution.\n\nThe two disconnected edges and their conductances are shown below; all vertex masses are one, and the right-hand side is $b=(1,0,0,0)^{\\mathsf T}$.\n\n\\begin{center}\n\\begin{tikzpicture}[every node/.style={font=\\small}]\n  \\node[circle,draw] (v1) at (0,0) {$1$};\n  \\node[circle,draw] (v2) at (1.7,0) {$2$};\n  \\node[circle,draw] (v3) at (3.5,0) {$3$};\n  \\node[circle,draw] (v4) at (5.2,0) {$4$};\n  \\draw[->] (v1) -- node[above] {$c=1$} (v2);\n  \\draw[->] (v3) -- node[above] {$c=3$} (v4);\n  \\node[below=4pt] at (v1) {$b_1=1$};\n  \\node[below=4pt] at (v2) {$b_2=0$};\n  \\node[below=4pt] at (v3) {$b_3=0$};\n  \\node[below=4pt] at (v4) {$b_4=0$};\n\\end{tikzpicture}\n\\end{center}",
+        "deps": [
+          "def-finite-weighted-network-diffusion-data",
+          "lem-weighted-network-energy-kernel-and-mass-balance"
+        ],
+        "dependency_level": 2,
+        "strategy": "Write the two edge blocks, identify the component indicator vectors in the kernel, and exhibit distinct solutions or an incompatible load.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fan R. K. Chung, Spectral Graph Theory, Chapter 1: Eigenvalues and the Laplacian of a Graph, CBMS 92 (1997), complete chapter text",
+              "url": "https://fanchung.ucsd.edu/cbms.pdf",
+              "locator": "Complete Chapter 1 text; §§1.2 and 1.4, printed pp. 2–14."
+            },
+            {
+              "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+              "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+              "locator": "§3.2, Theorems 3.1–3.2 and §3.4, Theorem 3.4, PDF pp. 7–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-y-junction-metric-graph-kirchhoff-flux",
+        "kind": "example",
+        "title": "A Y-junction satisfies Kirchhoff flux balance",
+        "statement": "Take three unit edges oriented from a central vertex $v$ to leaves $a,b,c$,\nwith unit diffusivity and prescribed leaf values $u(a)=2$, $u(b)=0$, and\n$u(c)=1$. Define on the three edge coordinates\n$u_1(x)=1+x$, $u_2(x)=1-x$, and $u_3(x)=1$ for $0\\le x\\le1$. The common\ncentral trace is $1$, and the total outward diffusive flux at $v$ is zero.\n\nThe arrows give the coordinate orientations from the central vertex; the drawing is schematic and the proof uses the exact endpoint values below.\n\n\\begin{center}\n\\begin{tikzpicture}[>=stealth, every node/.style={font=\\small}]\n  \\node[circle,draw] (v) at (0,0) {$v:1$};\n  \\node[circle,draw] (a) at (-2,1.4) {$a:2$};\n  \\node[circle,draw] (b) at (2,1.4) {$b:0$};\n  \\node[circle,draw] (c) at (0,-2) {$c:1$};\n  \\draw[->] (v) -- node[above left] {$u_1(x)=1+x$} (a);\n  \\draw[->] (v) -- node[above right] {$u_2(x)=1-x$} (b);\n  \\draw[->] (v) -- node[right] {$u_3(x)=1$} (c);\n\\end{tikzpicture}\n\\end{center}",
+        "deps": [
+          "def-anchored-finite-metric-graph-h1-space",
+          "lem-metric-graph-kirchhoff-green-identity",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the three edge functions and orientations, compute their common central trace, compute each outward endpoint derivative, and verify the Kirchhoff sum and leaf data.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mario Arioli and Michele Benzi, A Finite Element Method for Quantum Graphs, Emory CS Technical Report TR-2015-009 (44-page full text)",
+              "url": "https://www.cs.emory.edu/technical-reports/techrep-00275.pdf",
+              "locator": "Complete 44-page report; §2, §4, §7.2, printed/PDF pp. 3–14 and 22–23."
+            },
+            {
+              "title": "Peter Kuchment, Quantum graphs: an introduction and a brief survey, arXiv:0802.3442 (2008)",
+              "url": "https://arxiv.org/pdf/0802.3442",
+              "locator": "Complete 39-page full text; §2 Graphs and metric graphs (printed pp. 2–3), §4 Vertex conditions and §4.1 Quadratic form (printed pp. 5–9)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-three-compartment-weighted-migration",
+        "kind": "example",
+        "title": "Three-compartment migration conserves weighted mass",
+        "statement": "Consider a closed three-vertex path with orientation $1\\to2\\to3$, masses\n$(1,2,3)$, conductances $(1,2)$, homogeneous diffusion, and initial state\n$u(0)=(2,1,4)^{\\mathsf T}$. Its conserved weighted mass is $16$. The\nconstant state $(8/3,8/3,8/3)^{\\mathsf T}$ is an equilibrium with that same\nweighted mass, and the exact trajectory from the stated nonnegative initial\nstate stays entrywise nonnegative. No convergence-to-equilibrium claim is made.\n\nThe diagram records the orientation, conductances, and vertex masses; edge lengths are schematic and are not used in the matrix calculation.\n\n\\begin{center}\n\\begin{tikzpicture}[>=stealth, every node/.style={font=\\small}]\n  \\node[circle,draw] (v1) at (0,0) {$1$};\n  \\node[circle,draw] (v2) at (2.1,0) {$2$};\n  \\node[circle,draw] (v3) at (4.2,0) {$3$};\n  \\draw[->] (v1) -- node[above] {$c_1=1$} (v2);\n  \\draw[->] (v2) -- node[above] {$c_2=2$} (v3);\n  \\node[below=4pt] at (v1) {$m_1=1$};\n  \\node[below=4pt] at (v2) {$m_2=2$};\n  \\node[below=4pt] at (v3) {$m_3=3$};\n\\end{tikzpicture}\n\\end{center}",
+        "deps": [
+          "def-finite-weighted-network-diffusion-data",
+          "lem-weighted-network-energy-kernel-and-mass-balance",
+          "thm-weighted-network-semigroup-and-euler-positivity"
+        ],
+        "dependency_level": 3,
+        "strategy": "Write the oriented incidence, diagonal mass, and conductance matrices explicitly; compute the weighted Laplacian, verify weighted conservation, and check constant equilibria.",
+        "axiom_base": "No choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Fan R. K. Chung, Spectral Graph Theory, Chapter 1: Eigenvalues and the Laplacian of a Graph, CBMS 92 (1997), complete chapter text",
+              "url": "https://fanchung.ucsd.edu/cbms.pdf",
+              "locator": "Complete Chapter 1 text; §§1.2 and 1.4, printed pp. 2–14."
+            },
+            {
+              "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+              "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+              "locator": "§3.2, Theorems 3.1–3.2 and §3.4, Theorem 3.4, PDF pp. 7–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      }
+    ]
+  }
+]

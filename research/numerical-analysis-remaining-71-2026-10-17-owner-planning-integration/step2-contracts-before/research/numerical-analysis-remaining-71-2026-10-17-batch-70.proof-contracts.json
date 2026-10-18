@@ -1,0 +1,1692 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "70",
+  "level": 3,
+  "scheduling_input_sha256": "440346ab3c5cc06016bb3d05991ba08441e0b3960a4500fb1a3903e5ffa9e060",
+  "scope": [
+    "thm-periodic-c1-velocity-has-global-characteristic-flow",
+    "lem-semilagrangian-transverse-first-hit-error",
+    "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+    "lem-periodic-characteristic-map-is-orientation-preserving",
+    "lem-periodic-tensor-interpolation-hessian-error",
+    "lem-euler-backward-characteristic-foot-error",
+    "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+    "thm-periodic-semilagrangian-global-error-from-local-defects",
+    "thm-characteristic-cell-overlap-remapping-conserves-mass-and-positivity",
+    "ex-semilagrangian-constant-speed-crosses-many-cells",
+    "ex-semilagrangian-fixed-grid-time-refinement-keeps-interpolation-error",
+    "ex-semilagrangian-pointwise-interpolation-can-change-grid-mass",
+    "ex-conservative-overlap-transfer-under-smooth-deforming-flow"
+  ],
+  "contracts": {
+    "thm-periodic-c1-velocity-has-global-characteristic-flow": {
+      "risk": "medium",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-transport-equation-and-its-characteristic-flow",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n\\times\\mathbb R$ be open and let\n$a:\\Omega\\to\\mathbb R^n$, $c:\\Omega\\to\\mathbb R$, and $f:\\Omega\\to\\mathbb R$.\nThe scalar first-order equation\n\n$$u_t(x,t)+a(x,t)\\cdot\\nabla_x u(x,t)+c(x,t)u(x,t)=f(x,t)$$\n\nis a **linear transport equation**.\n\nFix $(x_0,t_0)\\in\\Omega$. A **characteristic through $(x_0,t_0)$** is a\nsolution $X(\\cdot)$ of the ODE\n\n$$X'(s)=a(X(s),s),\\qquad X(t_0)=x_0,$$\n\non an interval containing $t_0$. The corresponding space-time curve is\n$s\\mapsto (X(s),s)$. If these initial-value problems have unique solutions for\nvarying initial data, write $X(s;t_0,x_0)$ for the solution through\n$(x_0,t_0)$. The resulting maps $x_0\\mapsto X(s;t_0,x_0)$, on the domains\nwhere they are defined, form the **characteristic flow** of the transport\nfield. Without uniqueness there are characteristics, but no single-valued\ncharacteristic flow.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Periodicity and continuity on the compact cylinder $K\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]$ give finite bounds $M_K:=\\sup\\|b\\|_2$ and $L:=\\sup\\|D_xb\\|$ there. The same bounds hold on all spatial translates. By [F5] each time slice is globally $L$-Lipschitz in $x$. Since $[0,T]\\subset\\operatorname{int}K$, choose $\\delta>0$ small enough that every radius-$\\delta$ time interval centered in $[0,T]$ lies in $K$, $\\delta(M_K+1)\\le1$, and $\\delta(L+1)<1$. On each corresponding unit-radius state cylinder, [F2] therefore gives a unique local solution through its center.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Partition the finite interval between $s$ and any $t\\in[0,T]$ into finitely many subintervals of length at most $\\delta$. Apply [F2] successively at each endpoint, using the preceding endpoint value as the next initial state. The resulting curves agree on their shared endpoints and have the same derivative $b(r,X(r))$ there, so they concatenate to a solution on $[0,T]$. Repeated local uniqueness from [F2] proves uniqueness on the concatenated interval. This is a finite construction and selects no family of local solutions over an infinite index set.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "For the constructed solution on $[0,T]$, [F3] and [F4] give $\\|X(t;s,x)-x\\|_2\\le\\int_{\\min(s,t)}^{\\max(s,t)}\\|b(r,X(r))\\|_2\\,dr\\le M_T|t-s|$. Thus its graph lies in the stated compact tube. For a period vector $\\boldsymbol k\\boldsymbol\\ell$, the curve $X(t;s,x+\\boldsymbol k\\boldsymbol\\ell)-\\boldsymbol k\\boldsymbol\\ell$ solves the same IVP as $X(t;s,x)$ by periodicity of $b$; uniqueness gives periodic equivariance.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For b=0 the unique flow is stationary and the displacement bound is equality in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite continuation and displacement bound cover s,t at both 0 and T in steps 2.1–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only a finite sequence of local continuations and explicitly requires no infinite choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "lem-semilagrangian-transverse-first-hit-error": {
+      "risk": "medium",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$, with $T\\ge0$ and positive integer state dimension $d\\ge1$, consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}:D_m\\to\\mathbb R$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}:U_{mn}\\to\\mathbb R^d$ on an open neighborhood $U_{mn}\\subseteq D_m$ of the guard zero set, satisfying $(t,R_{mn}(t,x))\\in D_n$ for every $(t,x)\\in U_{mn}$. Here $C^1$ has the meaning in [[def-c-one-map-and-local-inverse]]. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hybrid-guard-derivative-along-mode",
+          "source_section": "Statement",
+          "quote": "Let $y$ be a differentiable solution in mode $m$ on an interval $J$, with $y'(t)=f_m(t,y(t))$. Let $g(t,x)$ be $C^1$ on an open neighborhood of the graph of $y$, and define $h(t)=g(t,y(t))$. Then $h$ is differentiable on $J$ and\n$$h'(t)=\\partial_tg(t,y(t))+D_xg(t,y(t))f_m(t,y(t)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-transverse-hybrid-event-time-error",
+          "source_section": "Statement",
+          "quote": "Let $J=[a,b]$ with $a<b$, let $y$ be an exact incoming mode trajectory on $J$, and let $U$ be a dense reconstruction with $\\sup_{t\\in J}\\|y(t)-U(t)\\|_2\\le\\eta$. Let $g(t,x)$ be $L_g$-Lipschitz in $x$ on the certified tube, with declared crossing orientation $\\sigma\\in\\{-1,+1\\}$. Suppose $h(t)=g(t,y(t))$ has a root $\\tau\\in J$ and, throughout $J$, $\\sigma h'(t)\\ge\\nu$ for some $\\nu>0$. If a reported time $\\widehat\\tau\\in J$ satisfies $|g(\\widehat\\tau,U(\\widehat\\tau))|\\le\\varepsilon$, then\n$$|\\widehat\\tau-\\tau|\\le\\frac{L_g\\eta+\\varepsilon}{\\nu}\\le\\frac{C(\\eta+\\varepsilon)}{\\nu},\\qquad C:=\\max\\{L_g,1\\}.$$\nThe same-sign derivative condition makes $\\tau$ the unique guard root in $J$. The conclusion concerns a root matched to this transverse bracket; it gives no bound at grazing or across a change of event ordering.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "By [F2], the transversality hypothesis is the mode derivative condition required by [F3]. Apply [F3] to this matched bracket with the stated $\\eta,\\varepsilon,L_g,\\nu$; it yields the unique transverse root and the displayed bound $|\\widehat\\tau-\\tau|\\le\\Delta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "By [F4] and [F5], $\\|y(\\widehat\\tau)-y(\\tau)\\|_2\\le M|\\widehat\\tau-\\tau|\\le M\\Delta$. The triangle inequality with the dense-output bound gives $\\|U(\\widehat\\tau)-y(\\tau)\\|_2\\le\\eta+M\\Delta$. Apply the time and state Lipschitz inequalities for $\\beta$ to obtain the second displayed bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When η=ε=0, step 1.1 gives Δ=0 and step 2.1 gives zero trace error."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict margin ν>0 in the Statement excludes a grazing or degenerate crossing; step 1.1 uses this denominator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The root and reported hit are allowed in the closed bracket J=[a,b], and steps 1.1–2.1 apply on that bracket."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting": {
+      "risk": "medium",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semilagrangian-periodic-grid-and-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $\\ell_1,\\ldots,\\ell_d>0$, and let $N_1,\\ldots,N_d\\ge1$ be integers. The periodic rectangular box is\n$$\\mathbb T^d_{\\ell}:=\\mathbb R^d/(\\ell_1\\mathbb Z\\times\\cdots\\times\\ell_d\\mathbb Z).$$\nSet $h_j:=\\ell_j/N_j$. Its uniform tensor grid has nodes $x_{\\boldsymbol i}=(i_1h_1,\\ldots,i_dh_d)$, indexed by $0\\le i_j<N_j$, with indices understood modulo $N_j$.\n\nFor node data $V_{\\boldsymbol i}$ and a lift $x\\in\\mathbb R^d$ of a point on the torus, define\n$$q_j:=\\left\\lfloor x_j/h_j\\right\\rfloor,\\qquad \\theta_j:=x_j/h_j-q_j\\in[0,1),$$\nand for $\\boldsymbol\\epsilon\\in\\{0,1\\}^d$ define\n$$w_{\\boldsymbol\\epsilon}(x):=\\prod_{j=1}^d\\theta_j^{\\epsilon_j}(1-\\theta_j)^{1-\\epsilon_j}.$$\nThe tensor-product multilinear interpolant is\n$$\\mathcal I_hV(x):=\\sum_{\\boldsymbol\\epsilon\\in\\{0,1\\}^d}w_{\\boldsymbol\\epsilon}(x)V_{([q_1+\\epsilon_1]_{N_1},\\ldots,[q_d+\\epsilon_d]_{N_d})},$$\nwhere $[k]_N$ is the residue in $\\{0,\\ldots,N-1\\}$. The formula is unchanged when a period $\\ell_j$ is added to $x_j$, so it defines an interpolant on $\\mathbb T^d_{\\ell}$. If $N_j=1$, the two corner indices in that coordinate coincide; the formula still gives the same node value.\n\nFor a continuous periodic function $v$, $\\mathcal I_hv$ means the interpolant of its grid samples. Put $h:=\\max_jh_j$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Each factor $\\theta_j$ and $1-\\theta_j$ is nonnegative, so every $w_{\\boldsymbol\\epsilon}(x)\\ge0$. Summing over all binary vectors factorizes as $\\sum_{\\boldsymbol\\epsilon}w_{\\boldsymbol\\epsilon}(x)=\\prod_{j=1}^d((1-\\theta_j)+\\theta_j)=1$. Thus $\\mathcal I_hV(x)$ is a convex combination of its corner data, even when wrapping makes two corner indices coincide.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "If $V_{\\boldsymbol i}\\ge0$ at every node, each summand in the interpolant is nonnegative, so its value is nonnegative; the same convex-combination identity bounds it by the minimum and maximum corner data.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "At each $x$, [F1] and the triangle inequality give $|\\mathcal I_hV(x)-\\mathcal I_hW(x)|\\le\\sum_{\\boldsymbol\\epsilon}w_{\\boldsymbol\\epsilon}(x)|V_{\\boldsymbol i(\\boldsymbol\\epsilon)}-W_{\\boldsymbol i(\\boldsymbol\\epsilon)}|\\le\\|V-W\\|_{\\ell^\\infty}\\sum_{\\boldsymbol\\epsilon}w_{\\boldsymbol\\epsilon}(x)=\\|V-W\\|_{\\ell^\\infty}$. Taking the supremum over $x$ proves the stated contraction; no estimate in this argument uses the displacement size.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero node arrays interpolate to zero by the convex formula in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If a coordinate has N_j=1, coincident wrapped corner indices still have weights summing to one by step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A grid coordinate with N_j=1 is admitted and its coincident corners are covered explicitly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At a grid node θ_j=0, the endpoint weight formula in step 1.1 returns the node value exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "lem-periodic-characteristic-map-is-orientation-preserving": {
+      "risk": "medium",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $T>0$, $\\ell_j>0$, and let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$. Suppose $b:J\\times\\mathbb R^d\\to\\mathbb R^d$ is $C^1$ and periodic in $x_j$ with period $\\ell_j$ for every $j$. Choose a compact interval $K\\subset J$ with $[0,T]\\subset\\operatorname{int}K$, and put $M_K:=\\sup_{K\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$. For every $s\\in[0,T]$ and $x\\in\\mathbb R^d$, there is a unique solution $X(\\cdot;s,x)$ of\n$$X'(t)=b(t,X(t)),\\qquad X(s;s,x)=x,$$\non the whole interval $[0,T]$. The lifted flow is periodic-equivariant:\n$$X(t;s,x+\\boldsymbol k\\boldsymbol\\ell)=X(t;s,x)+\\boldsymbol k\\boldsymbol\\ell\\qquad(\\boldsymbol k\\in\\mathbb Z^d),$$\nwhere $\\boldsymbol k\\boldsymbol\\ell=(k_1\\ell_1,\\ldots,k_d\\ell_d)$. If $M_T:=\\sup_{[0,T]\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$, then\n$$\\|X(t;s,x)-x\\|_2\\le M_T|t-s|\\qquad(t\\in[0,T]).$$\nThus each characteristic stays in a compact tube $[0,T]\\times\\overline B(x,M_TT+1)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-transport-characteristics-depend-c-one-on-initial-position",
+          "source_section": "Statement",
+          "quote": "Let $a$ be $C^1$ on an open neighborhood of the graph of a characteristic\n$X(\\cdot;\\xi_0)$ solving\n\n$$X'(t)=a(X(t),t),\\qquad X(t_0;\\xi_0)=\\xi_0,$$\n\non a compact interval $I$ containing $t_0$. Then, after shrinking to a\nneighborhood $U_0$ of $\\xi_0$, every initial point $\\xi\\in U_0$ determines a\ncharacteristic $X(\\cdot;\\xi)$ on the same interval $I$, the map\n$(t,\\xi)\\mapsto X(t;\\xi)$ is continuous on $I\\times U_0$, and for each\n$t\\in I$ the map $\\xi\\mapsto X(t;\\xi)$ is $C^1$. Its Jacobian matrix\n$Y(t,\\xi)=D_\\xi X(t;\\xi)$ satisfies\n\n$$Y'(t,\\xi)=D_xa(X(t,\\xi),t)\\,Y(t,\\xi),\\qquad Y(t_0,\\xi)=I_n.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every real matrix $A\\in M_n(\\mathbb R)$,\n$$A\\text{ is invertible}\\quad\\Longleftrightarrow\\quad\\det(A)\\ne0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "source_section": "Statement",
+          "quote": "For each fixed $n\\ge1$, the function $\\det:M_n(\\mathbb R)\\to\\mathbb R$ is evaluation of the polynomial\n$$P_n:=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}x_{\\sigma(i),i}$$\nin the $n^2$ commuting variables $x_{ri}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "By [F1], both the forward flow $\\Phi_{t,s}$ and the reverse-time flow $\\Phi_{s,t}$ are defined. Uniqueness of the ODE implies that following the same characteristic first from $s$ to $t$ and then backward to $s$ returns the initial point; likewise in the opposite order. Thus $\\Phi_{s,t}\\circ\\Phi_{t,s}=\\mathrm{id}$ and $\\Phi_{t,s}\\circ\\Phi_{s,t}=\\mathrm{id}$. By [F2] both maps are $C^1$, so $\\Phi_{t,s}$ is a $C^1$ diffeomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Applying [F3] to $\\Phi_{s,t}\\circ\\Phi_{t,s}=\\mathrm{id}$ gives $D\\Phi_{s,t}(\\Phi_{t,s}(x))D\\Phi_{t,s}(x)=I_d$. Hence $D\\Phi_{t,s}(x)$ is invertible, and [F4] gives $\\det D\\Phi_{t,s}(x)\\ne0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "For fixed $s,x$, the function $r\\mapsto\\det D\\Phi_{r,s}(x)$ is continuous by [F2] and [F5], and equals $1$ at $r=s$. It never vanishes by step 2.1. If it were negative at some $r$, [F6] on the interval between $s$ and $r$ would force a zero, a contradiction. Therefore it is positive at every $r$, including the chosen $t$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For b=0, the flow is the identity and its Jacobian determinant is 1, as used in steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof applies for d=1 as well as higher dimensions; step 2.1 is the scalar derivative identity in that case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When t=s, the flow is the identity; the determinant starts at 1 in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed-time argument includes s,t at 0 or T by the closed interval in the Statement and step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "lem-periodic-tensor-interpolation-hessian-error": {
+      "risk": "medium",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semilagrangian-periodic-grid-and-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $\\ell_1,\\ldots,\\ell_d>0$, and let $N_1,\\ldots,N_d\\ge1$ be integers. The periodic rectangular box is\n$$\\mathbb T^d_{\\ell}:=\\mathbb R^d/(\\ell_1\\mathbb Z\\times\\cdots\\times\\ell_d\\mathbb Z).$$\nSet $h_j:=\\ell_j/N_j$. Its uniform tensor grid has nodes $x_{\\boldsymbol i}=(i_1h_1,\\ldots,i_dh_d)$, indexed by $0\\le i_j<N_j$, with indices understood modulo $N_j$.\n\nFor node data $V_{\\boldsymbol i}$ and a lift $x\\in\\mathbb R^d$ of a point on the torus, define\n$$q_j:=\\left\\lfloor x_j/h_j\\right\\rfloor,\\qquad \\theta_j:=x_j/h_j-q_j\\in[0,1),$$\nand for $\\boldsymbol\\epsilon\\in\\{0,1\\}^d$ define\n$$w_{\\boldsymbol\\epsilon}(x):=\\prod_{j=1}^d\\theta_j^{\\epsilon_j}(1-\\theta_j)^{1-\\epsilon_j}.$$\nThe tensor-product multilinear interpolant is\n$$\\mathcal I_hV(x):=\\sum_{\\boldsymbol\\epsilon\\in\\{0,1\\}^d}w_{\\boldsymbol\\epsilon}(x)V_{([q_1+\\epsilon_1]_{N_1},\\ldots,[q_d+\\epsilon_d]_{N_d})},$$\nwhere $[k]_N$ is the residue in $\\{0,\\ldots,N-1\\}$. The formula is unchanged when a period $\\ell_j$ is added to $x_j$, so it defines an interpolant on $\\mathbb T^d_{\\ell}$. If $N_j=1$, the two corner indices in that coordinate coincide; the formula still gives the same node value.\n\nFor a continuous periodic function $v$, $\\mathcal I_hv$ means the interpolant of its grid samples. Put $h:=\\max_jh_j$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lagrange-interpolation-remainder",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $a<b$, let $x_0<\\cdots<x_n$ lie in $[a,b]$, and let $f\\in C^{n+1}([a,b],\\mathbb R)$ with the convention of [[def-higher-derivatives-and-smoothness]]. Put $p=I_n f$ and $\\omega_n(X)=\\prod_{j=0}^n(X-x_j)$ as in [[def-cardinal-polynomial-interpolation]]. If $x=x_j$ for a node, then $f(x)-p(x)=0$. If $x\\in[a,b]$ is not a node, there is\n$$\\xi\\in\\bigl(\\min\\{x,x_0\\},\\max\\{x,x_n\\}\\bigr)$$\nsuch that\n$$f(x)-p(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!_{\\mathbb R}}\\,\\omega_n(x),$$\nwhere $(n+1)!_{\\mathbb R}:=\\prod_{j=1}^{n+1}j$, with each natural factor read as its canonical real image under [[def-canonical-natural]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+          "source_section": "Statement",
+          "quote": "For the periodic tensor interpolant of [[def-semilagrangian-periodic-grid-and-interpolant]], every value is a convex combination of the $2^d$ corner data. Consequently nonnegative data remain nonnegative, the interpolant lies between the minimum and maximum corner values, and for any node arrays $V,W$,\n$$\\|\\mathcal I_hV-\\mathcal I_hW\\|_{L^\\infty(\\mathbb T^d_\\ell)}\\le\\|V-W\\|_{\\ell^\\infty}.$$\nThese conclusions hold at every foot, with no displacement-to-cell-size restriction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Fix one coordinate interval $[a,b]$ of length $h_j$ and hold the other coordinates fixed. If $x_j$ is an endpoint, the linear interpolant is exact by [F2]. Otherwise [F2] gives $|u(x)-I_ju(x)|\\le\\frac12\\|\\partial_{jj}u\\|_\\infty(x_j-a)(b-x_j)$. Writing $\\theta=(x_j-a)/h_j\\in(0,1)$, the product equals $h_j^2\\theta(1-\\theta)\\le h_j^2/4$, hence the one-coordinate error is at most $h_j^2\\|\\partial_{jj}u\\|_\\infty/8$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "Write the tensor interpolant as $I_1\\cdots I_d$, where $I_j$ interpolates only coordinate $j$. The telescoping identity $u-I_1\\cdots I_du=(u-I_1u)+I_1(u-I_2u)+\\cdots+I_1\\cdots I_{d-1}(u-I_du)$ follows by cancellation of adjacent terms.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Apply the one-coordinate estimate of step 1.1 to each term before its preceding-coordinate operators. Every preceding product $I_1\\cdots I_{j-1}$ is sup-norm nonexpansive by [F3], so the norm of the $j$th term is at most $h_j^2\\|\\partial_{jj}u\\|_\\infty/8$. Summing the $d$ bounds proves the result. Periodic endpoint cells use the periodic lift of $u$, which has the same derivative suprema, and at every grid node the interpolation is exact by the definition.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If u is affine in each coordinate, every coordinate interpolation remainder vanishes in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1 the telescoping sum in steps 1.2–2.1 has one term, giving the usual degree-one remainder bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At either endpoint x_j=a or b, the interpolant is exact by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Periodic cell endpoints are grid nodes; step 2.1 states exactness there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "lem-euler-backward-characteristic-foot-error": {
+      "risk": "medium",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-semilagrangian-backtracking-on-periodic-grid",
+          "source_section": "Definition",
+          "quote": "Inputs are a periodic grid from [[def-semilagrangian-periodic-grid-and-interpolant]], a finite horizon $T>0$, a positive integer $M$ of time steps, a periodic $C^1$ velocity $b$, periodic initial data $u_0$, node values $U^0_{\\boldsymbol i}=u_0(x_{\\boldsymbol i})$, and a nonnegative integer step budget $B$. Write $\\Delta t=T/M$ and $t_n=n\\Delta t$. The output is either `success` with $U^0,\\ldots,U^M$, or `budget-exhausted` with no partial final state.\n\n1. If $B<M$, return `budget-exhausted` before changing the input data.\n2. For $n=0,\\ldots,M-1$ and each arrival node $x_{\\boldsymbol i}$, compute the explicit backward Euler foot lift\n   $$\\widetilde x_{\\boldsymbol i}^{\\,n}:=x_{\\boldsymbol i}-\\Delta t\\,b(t_{n+1},x_{\\boldsymbol i}).$$\n   Reduce each coordinate modulo its period when evaluating the periodic interpolant.\n3. Set\n   $$U_{\\boldsymbol i}^{n+1}:=\\mathcal I_h U^n(\\widetilde x_{\\boldsymbol i}^{,n}).$$\n4. After the $M$ finite updates, return `success` with all node arrays.\n\nThe finite step budget counts time updates. Every update evaluates one foot per grid node and a finite sum of $2^d$ interpolation terms. The procedure imposes no bound on $\\|b\\|\\Delta t/h$; the floor-and-fraction convention in the interpolation definition applies even when a foot crosses many grid cells.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $T>0$, $\\ell_j>0$, and let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$. Suppose $b:J\\times\\mathbb R^d\\to\\mathbb R^d$ is $C^1$ and periodic in $x_j$ with period $\\ell_j$ for every $j$. Choose a compact interval $K\\subset J$ with $[0,T]\\subset\\operatorname{int}K$, and put $M_K:=\\sup_{K\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$. For every $s\\in[0,T]$ and $x\\in\\mathbb R^d$, there is a unique solution $X(\\cdot;s,x)$ of\n$$X'(t)=b(t,X(t)),\\qquad X(s;s,x)=x,$$\non the whole interval $[0,T]$. The lifted flow is periodic-equivariant:\n$$X(t;s,x+\\boldsymbol k\\boldsymbol\\ell)=X(t;s,x)+\\boldsymbol k\\boldsymbol\\ell\\qquad(\\boldsymbol k\\in\\mathbb Z^d),$$\nwhere $\\boldsymbol k\\boldsymbol\\ell=(k_1\\ell_1,\\ldots,k_d\\ell_d)$. If $M_T:=\\sup_{[0,T]\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$, then\n$$\\|X(t;s,x)-x\\|_2\\le M_T|t-s|\\qquad(t\\in[0,T]).$$\nThus each characteristic stays in a compact tube $[0,T]\\times\\overline B(x,M_TT+1)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "By [F2] and [F3], for $s\\in[t_n,t_{n+1}]$ the backward characteristic satisfies $X(s)=x-\\int_s^{t_{n+1}}b(X(r),r)\\,dr$. Applying [F4] and the velocity bound gives $\\|X(s)-x\\|_2\\le M(t_{n+1}-s)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Subtracting the explicit Euler foot from the exact foot and using [F3] writes the difference as the integral from t_n to t_{n+1} of b(t_{n+1},x)-b(s,X(s)). The derivative bounds make its integrand norm at most L_x times the state difference plus L_t times (t_{n+1}-s); by step 1.1 the state difference is at most M(t_{n+1}-s). Integrating the resulting bound (L_x M+L_t)(t_{n+1}-s) gives one half (L_x M+L_t)(Delta t)^2.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If b=0 then M=L_x=L_t=0, and both feet coincide in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The estimate applies to every closed time subinterval [t_n,t_{n+1}]⊆[0,T] by steps 1.1–2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "lem-periodic-flow-departure-cells-have-positive-finite-volume": {
+      "risk": "medium",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-periodic-characteristic-map-is-orientation-preserving",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-periodic-c1-velocity-has-global-characteristic-flow]], fix $s,t\\in[0,T]$ and let $\\Phi_{t,s}(x):=X(t;s,x)$ on the periodic lift $\\mathbb R^d$. Then $\\Phi_{t,s}$ is a $C^1$ diffeomorphism with inverse $\\Phi_{s,t}$, and\n$$\\det D_x\\Phi_{t,s}(x)>0\\qquad(x\\in\\mathbb R^d).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $n\\ge1$, let $x\\in\\mathbb{R}^n$, and let $r>0$. Then the Euclidean ball $B(x,r)$ is\nLebesgue measurable and satisfies\n$$0<\\lambda(B(x,r))<\\infty.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-measure-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure on $(X,\\mathcal A)$. If $A,B\\in\\mathcal A$ and $A\\subseteq B$, then $\\mu(A)\\le\\mu(B)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Write the grid cell as $A_i=\\prod_j[a_j,b_j)$ in $Q$, and let $\\Lambda=\\prod_j\\ell_j\\mathbb Z$ be the period lattice. Its torus lift is the countable union $\\widehat A_i=\\bigcup_{k\\in\\mathbb Z^d}\\prod_j[a_j+k_j\\ell_j,b_j+k_j\\ell_j)$. Each half-open box is Borel, so $\\widehat A_i$ is Borel; continuity of $\\Phi$ makes $\\Phi^{-1}(\\widehat A_i)$ Borel, and its intersection with the open box $\\Omega$ is Borel. By [A1] and [F2], this representative of $D_i$ is Lebesgue measurable. Equivariance under $\\Lambda$ makes the torus preimage independent of the chosen lift. Since [F1] makes $\\Phi$ a bijection on the torus, inverse images preserve disjointness and unions, so departure cells form a partition whenever the arrival cells do.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "The interior of $A_i$ is nonempty, so its lift-preimage is a nonempty open periodic set. It contains an open product box. In each of its finitely many coordinate intervals, take a point away from the discrete period lattice; the resulting point is in the interior of one lattice tile. A sufficiently small ball around it lies both in that tile and in the lift-preimage. Translate the ball by a period vector into $\\Omega$. By [F3] it has positive measure; [F5] then gives $|D_i|>0$. Also $D_i\\subseteq\\Omega$, and [F4] and [F5] give $|D_i|\\le|\\Omega|=\\prod_j\\ell_j<\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Dimension d=1 is included: the torus lift and half-open interval argument in steps 1.1–2.1 remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A zero-width cell is excluded by the nonempty-interior hypothesis; step 2.1 uses an interior ball."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The half-open cell faces and fundamental-box faces are handled by the periodic lift and restriction in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly assumed for Borel-to-Lebesgue measurability; the additional point and coordinate selections in step 2.1 are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "reason": "Countable Choice is explicitly assumed and used only in the listed proof steps."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "thm-periodic-semilagrangian-global-error-from-local-defects": {
+      "risk": "medium",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-transport-equation-and-its-characteristic-flow",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n\\times\\mathbb R$ be open and let\n$a:\\Omega\\to\\mathbb R^n$, $c:\\Omega\\to\\mathbb R$, and $f:\\Omega\\to\\mathbb R$.\nThe scalar first-order equation\n\n$$u_t(x,t)+a(x,t)\\cdot\\nabla_x u(x,t)+c(x,t)u(x,t)=f(x,t)$$\n\nis a **linear transport equation**.\n\nFix $(x_0,t_0)\\in\\Omega$. A **characteristic through $(x_0,t_0)$** is a\nsolution $X(\\cdot)$ of the ODE\n\n$$X'(s)=a(X(s),s),\\qquad X(t_0)=x_0,$$\n\non an interval containing $t_0$. The corresponding space-time curve is\n$s\\mapsto (X(s),s)$. If these initial-value problems have unique solutions for\nvarying initial data, write $X(s;t_0,x_0)$ for the solution through\n$(x_0,t_0)$. The resulting maps $x_0\\mapsto X(s;t_0,x_0)$, on the domains\nwhere they are defined, form the **characteristic flow** of the transport\nfield. Without uniqueness there are characteristics, but no single-valued\ncharacteristic flow.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-semilagrangian-backtracking-on-periodic-grid",
+          "source_section": "Definition",
+          "quote": "Inputs are a periodic grid from [[def-semilagrangian-periodic-grid-and-interpolant]], a finite horizon $T>0$, a positive integer $M$ of time steps, a periodic $C^1$ velocity $b$, periodic initial data $u_0$, node values $U^0_{\\boldsymbol i}=u_0(x_{\\boldsymbol i})$, and a nonnegative integer step budget $B$. Write $\\Delta t=T/M$ and $t_n=n\\Delta t$. The output is either `success` with $U^0,\\ldots,U^M$, or `budget-exhausted` with no partial final state.\n\n1. If $B<M$, return `budget-exhausted` before changing the input data.\n2. For $n=0,\\ldots,M-1$ and each arrival node $x_{\\boldsymbol i}$, compute the explicit backward Euler foot lift\n   $$\\widetilde x_{\\boldsymbol i}^{\\,n}:=x_{\\boldsymbol i}-\\Delta t\\,b(t_{n+1},x_{\\boldsymbol i}).$$\n   Reduce each coordinate modulo its period when evaluating the periodic interpolant.\n3. Set\n   $$U_{\\boldsymbol i}^{n+1}:=\\mathcal I_h U^n(\\widetilde x_{\\boldsymbol i}^{,n}).$$\n4. After the $M$ finite updates, return `success` with all node arrays.\n\nThe finite step budget counts time updates. Every update evaluates one foot per grid node and a finite sum of $2^d$ interpolation terms. The procedure imposes no bound on $\\|b\\|\\Delta t/h$; the floor-and-fraction convention in the interpolation definition applies even when a foot crosses many grid cells.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $T>0$, $\\ell_j>0$, and let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$. Suppose $b:J\\times\\mathbb R^d\\to\\mathbb R^d$ is $C^1$ and periodic in $x_j$ with period $\\ell_j$ for every $j$. Choose a compact interval $K\\subset J$ with $[0,T]\\subset\\operatorname{int}K$, and put $M_K:=\\sup_{K\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$. For every $s\\in[0,T]$ and $x\\in\\mathbb R^d$, there is a unique solution $X(\\cdot;s,x)$ of\n$$X'(t)=b(t,X(t)),\\qquad X(s;s,x)=x,$$\non the whole interval $[0,T]$. The lifted flow is periodic-equivariant:\n$$X(t;s,x+\\boldsymbol k\\boldsymbol\\ell)=X(t;s,x)+\\boldsymbol k\\boldsymbol\\ell\\qquad(\\boldsymbol k\\in\\mathbb Z^d),$$\nwhere $\\boldsymbol k\\boldsymbol\\ell=(k_1\\ell_1,\\ldots,k_d\\ell_d)$. If $M_T:=\\sup_{[0,T]\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$, then\n$$\\|X(t;s,x)-x\\|_2\\le M_T|t-s|\\qquad(t\\in[0,T]).$$\nThus each characteristic stays in a compact tube $[0,T]\\times\\overline B(x,M_TT+1)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euler-backward-characteristic-foot-error",
+          "source_section": "Statement",
+          "quote": "Let $b\\in C^1([0,T]\\times\\mathbb R^d;\\mathbb R^d)$ be periodic in space, and set\n$$M:=\\sup\\|b\\|_2,\\qquad L_x:=\\sup\\|D_xb\\|,\\qquad L_t:=\\sup\\|\\partial_tb\\|_2,$$\nwhere the suprema are over one full periodic time-space cylinder. For $0\\le t_n<t_{n+1}\\le T$, $\\Delta t=t_{n+1}-t_n$, and an arrival lift $x$, let $X(t_n;t_{n+1},x)$ be the exact backward characteristic foot. The explicit Euler foot $x-\\Delta t\\,b(t_{n+1},x)$ satisfies\n$$\\bigl\\|X(t_n;t_{n+1},x)-(x-\\Delta t\\,b(t_{n+1},x))\\bigr\\|_2\\le\\frac12(L_xM+L_t)(\\Delta t)^2.$$\nThe estimate is local for every positive $\\Delta t$; it requires no relation between displacement and grid width.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+          "source_section": "Statement",
+          "quote": "For the periodic tensor interpolant of [[def-semilagrangian-periodic-grid-and-interpolant]], every value is a convex combination of the $2^d$ corner data. Consequently nonnegative data remain nonnegative, the interpolant lies between the minimum and maximum corner values, and for any node arrays $V,W$,\n$$\\|\\mathcal I_hV-\\mathcal I_hW\\|_{L^\\infty(\\mathbb T^d_\\ell)}\\le\\|V-W\\|_{\\ell^\\infty}.$$\nThese conclusions hold at every foot, with no displacement-to-cell-size restriction.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-periodic-tensor-interpolation-hessian-error",
+          "source_section": "Statement",
+          "quote": "Let $u\\in C^2(\\mathbb T^d_\\ell)$ and let $h_j$ be the coordinate mesh widths in [[def-semilagrangian-periodic-grid-and-interpolant]]. Then\n$$\\|\\mathcal I_hu-u\\|_{L^\\infty(\\mathbb T^d_\\ell)}\\le\\frac18\\sum_{j=1}^dh_j^2\\|\\partial_{jj}u\\|_{L^\\infty(\\mathbb T^d_\\ell)}.$$\nThe estimate includes grid nodes and periodic cell endpoints.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Along the exact characteristic $X(\\cdot;t_{n+1},x_{\\boldsymbol i})$, [F1] gives $X'=b(t,X)$. The chain rule [F4] therefore gives $\\frac{d}{dt}u(X(t),t)=u_t+b\\cdot\\nabla u=0$. Hence $u(x_{\\boldsymbol i},t_{n+1})=u(X(t_n;t_{n+1},x_{\\boldsymbol i}),t_n)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Add and subtract $(\\mathcal J_hu^n)(\\widetilde x_{\\boldsymbol i}^{\\,n})$ and $u(\\widetilde x_{\\boldsymbol i}^{\\,n},t_n)$. The operator bound gives a first difference at most $\\Lambda E_n$; the interpolation defect contributes at most $C_Ih^{r+1}$; and the spatial Lipschitz bound for $u$ plus the foot error contributes at most $L_uC_F(\\Delta t)^{q+1}$. Since $\\Lambda\\ge1$, this is at most $\\delta_h+\\Lambda E_n$. Taking the maximum over nodes yields $E_{n+1}\\le\\Lambda E_n+\\delta_h$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-3-1",
+          "claim": "Induction on $n$ in the recurrence gives $E_n\\le\\Lambda^nE_0+\\delta_h\\sum_{k=0}^{n-1}\\Lambda^k$: at $n=0$ the sum is empty, and the recurrence multiplies the preceding finite sum by $\\Lambda$ and adds its next term. Taking $n=N$ proves the first bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-4-1",
+          "claim": "If $\\Lambda=1$, the sum in step 3.1 is $N=T/\\Delta t$, so substituting the definition of $\\delta_h$ gives the second bound. The default Euler and tensor multilinear branch has the stated local constants by [F5]–[F7]. Therefore the displayed sufficient refinement conditions make both error terms and the initial error tend to zero. No step uses $\\|b\\|\\Delta t/h\\le1$; consistency follows from the two explicit defect terms rather than a classical advective CFL condition.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With E_0=C_I=C_F=0, steps 2.1–4.1 give E_N=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1, the empty lower-index sum and one recurrence application in step 3.1 give the stated bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The contractive boundary Λ=1 is treated by the finite geometric sum in step 4.1; Λ>1 retains the separate bound from step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The maximum includes n=N at t=T, and step 4.1 uses N=T/Δt."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "thm-characteristic-cell-overlap-remapping-conserves-mass-and-positivity": {
+      "risk": "high",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-characteristic-cell-overlap-remapping",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]) for this Lebesgue-measurable-volume branch. Work on the periodic box $\\mathbb T^d_\\ell$ of [[def-semilagrangian-periodic-grid-and-interpolant]]. For measure calculations use the bounded open fundamental domain $\\Omega:=\\prod_{j=1}^d(0,\\ell_j)$; the period faces omitted from the half-open grid-indexing copy $Q=\\prod_{j=1}^d[0,\\ell_j)$ are Lebesgue-null by [[thm-lebesgue-measure-of-a-box-of-every-kind]]. For a periodic measurable set $E$, define $|E|:=\\lambda_d(E\\cap\\Omega)$, where $\\lambda_d$ is the $d$-dimensional Lebesgue measure of [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]. Let $\\{C_j\\}_{j=1}^J$ be a finite measurable source-cell partition and $\\{A_i\\}_{i=1}^J$ a finite measurable arrival-cell partition of $\\Omega$ up to null sets, with every cell of positive volume; their grid labels use the half-open convention in $Q$. Let $\\Phi=\\Phi_{t_{n+1},t_n}$ be the exact characteristic map from time $t_n$ to $t_{n+1}$. Its inverse images $D_i:=\\Phi^{-1}(A_i)$ are the **departure cells**; [[lem-periodic-flow-departure-cells-have-positive-finite-volume]] gives their measurability and positive finite volume, while [[lem-periodic-characteristic-map-is-orientation-preserving]] gives the diffeomorphism and positive-Jacobian convention.\n\nGiven a source cell-average density $\\rho_j^n$ on $C_j$, set\n$$\\overline\\rho_i:=\\frac{1}{|D_i|}\\sum_{j=1}^J|D_i\\cap C_j|\\rho_j^n,\\qquad \\rho_i^{n+1}:=\\frac{|D_i|}{|A_i|}\\overline\\rho_i.$$\nThe first formula is the exact intersection-volume remap of [[def-intersection-volume-conservative-remapping]] from the source partition to the departure partition. The second is the characteristic volume factor that converts the average on a departure cell into the transported mass per arrival-cell volume. All intersections and volumes are exact in this mathematical definition; a geometric approximation or quadrature rule would require a separate error term.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-overlap-remap-l2-projection-conservation-positivity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Under the finite partition hypotheses of [[def-intersection-volume-conservative-remapping]], let $P_0(\\mathcal T)$ be the target cellwise-constant subspace of $L^2(\\Omega)$. For every source piecewise-constant $v$, $Rv$ is the $L^2$ orthogonal projection of $v$ onto $P_0(\\mathcal T)$, hence $\\|Rv\\|_2\\le\\|v\\|_2$. It preserves total mass, $\\int_\\Omega Rv=\\int_\\Omega v$, and if all $v_i\\ge0$ then every target value $(Rv)_j\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-characteristic-map-is-orientation-preserving",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-periodic-c1-velocity-has-global-characteristic-flow]], fix $s,t\\in[0,T]$ and let $\\Phi_{t,s}(x):=X(t;s,x)$ on the periodic lift $\\mathbb R^d$. Then $\\Phi_{t,s}$ is a $C^1$ diffeomorphism with inverse $\\Phi_{s,t}$, and\n$$\\det D_x\\Phi_{t,s}(x)>0\\qquad(x\\in\\mathbb R^d).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\Omega=\\prod_{j=1}^d(0,\\ell_j)$ be the bounded open fundamental box used for Lebesgue measure, and let $Q=\\prod_{j=1}^d[0,\\ell_j)$ be its half-open grid-indexing copy. Let $\\Phi$ be the periodic $C^1$ characteristic diffeomorphism of [[lem-periodic-characteristic-map-is-orientation-preserving]], and let $A_i$ be a finite tensor-grid cell in $Q$ with nonempty interior. Then $D_i:=\\Phi^{-1}(A_i)$, interpreted on the torus and represented in $\\Omega$, is Lebesgue measurable and satisfies\n$$0<|D_i|<\\infty.$$\nThe finite family of departure cells is a partition whenever the arrival cells form a partition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "By [F3] the characteristic map is bijective on the torus, and [F4] makes the departure cells a measurable positive-volume partition. Thus the source and departure partitions meet the finite-partition hypotheses of [F2]. Applying [F2] to the source values in [F1] gives $\\overline\\rho_i\\ge0$ for every $i$ and the departure-mass identity $\\sum_i|D_i|\\overline\\rho_i=\\sum_j|C_j|\\rho_j^n$. The Countable Choice assumption [A1] is exactly the axiom branch required by [F2] and [F4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Since [F4] gives $|D_i|>0$ and each arrival cell has $|A_i|>0$, [F1] scales the nonnegative $\\overline\\rho_i$ by the positive ratio $|D_i|/|A_i|$, so $\\rho_i^{n+1}\\ge0$. Also $|A_i|\\rho_i^{n+1}=|D_i|\\overline\\rho_i$ term by term. Summing this equality and substituting the identity from step 1.1 proves the asserted total mass equality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If every source average is zero, the nonnegative weighted averages and arrival averages are zero by steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-cell source and arrival partition is included in the finite-sum identities of steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero-volume cells are excluded by the positive-volume hypotheses; step 2.1 uses positive denominators."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Periodic boundary faces are accounted for by the torus partition and departure partition in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is assumed in the exact supplier and departure-volume proof; step 1.1 identifies this axiom branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Countable Choice is explicitly assumed and used only in the listed proof steps."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "ex-semilagrangian-constant-speed-crosses-many-cells": {
+      "risk": "medium",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semilagrangian-periodic-grid-and-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $\\ell_1,\\ldots,\\ell_d>0$, and let $N_1,\\ldots,N_d\\ge1$ be integers. The periodic rectangular box is\n$$\\mathbb T^d_{\\ell}:=\\mathbb R^d/(\\ell_1\\mathbb Z\\times\\cdots\\times\\ell_d\\mathbb Z).$$\nSet $h_j:=\\ell_j/N_j$. Its uniform tensor grid has nodes $x_{\\boldsymbol i}=(i_1h_1,\\ldots,i_dh_d)$, indexed by $0\\le i_j<N_j$, with indices understood modulo $N_j$.\n\nFor node data $V_{\\boldsymbol i}$ and a lift $x\\in\\mathbb R^d$ of a point on the torus, define\n$$q_j:=\\left\\lfloor x_j/h_j\\right\\rfloor,\\qquad \\theta_j:=x_j/h_j-q_j\\in[0,1),$$\nand for $\\boldsymbol\\epsilon\\in\\{0,1\\}^d$ define\n$$w_{\\boldsymbol\\epsilon}(x):=\\prod_{j=1}^d\\theta_j^{\\epsilon_j}(1-\\theta_j)^{1-\\epsilon_j}.$$\nThe tensor-product multilinear interpolant is\n$$\\mathcal I_hV(x):=\\sum_{\\boldsymbol\\epsilon\\in\\{0,1\\}^d}w_{\\boldsymbol\\epsilon}(x)V_{([q_1+\\epsilon_1]_{N_1},\\ldots,[q_d+\\epsilon_d]_{N_d})},$$\nwhere $[k]_N$ is the residue in $\\{0,\\ldots,N-1\\}$. The formula is unchanged when a period $\\ell_j$ is added to $x_j$, so it defines an interpolant on $\\mathbb T^d_{\\ell}$. If $N_j=1$, the two corner indices in that coordinate coincide; the formula still gives the same node value.\n\nFor a continuous periodic function $v$, $\\mathcal I_hv$ means the interpolant of its grid samples. Put $h:=\\max_jh_j$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-tensor-interpolant-is-convex-and-linf-contracting",
+          "source_section": "Statement",
+          "quote": "For the periodic tensor interpolant of [[def-semilagrangian-periodic-grid-and-interpolant]], every value is a convex combination of the $2^d$ corner data. Consequently nonnegative data remain nonnegative, the interpolant lies between the minimum and maximum corner values, and for any node arrays $V,W$,\n$$\\|\\mathcal I_hV-\\mathcal I_hW\\|_{L^\\infty(\\mathbb T^d_\\ell)}\\le\\|V-W\\|_{\\ell^\\infty}.$$\nThese conclusions hold at every foot, with no displacement-to-cell-size restriction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Since $b=1$, the explicit Euler foot at $x_0=0$ is $-3/10$, which wraps to $7/10$ on the unit torus. On the lift, $(-3/10)/h=-24/5=-5+1/5$, so the lower index is $-5\\equiv11\\pmod{16}$, the upper index is $12$, and $\\theta=1/5$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "The update is therefore $(1-\\theta)2+\\theta10=(4/5)2+(1/5)10=18/5$. By [F2] this value lies in $[2,10]$, despite the 4.8-cell displacement. The example uses no displacement CFL restriction.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "id": "constant-speed-update",
+          "step": "2.1",
+          "method": "exact-hand-calculation",
+          "inputs": {
+            "h": "1/16",
+            "dt": "3/10",
+            "b": "1",
+            "node_values": [
+              "2",
+              "10"
+            ]
+          },
+          "expected": "18/5, in [2,10]",
+          "actual": "(4/5)·2+(1/5)·10=18/5",
+          "status": "checked"
+        }
+      ],
+      "finite_check_disposition": "The finite values are evaluated exactly by the named proof step; this records the hand calculation and does not claim a separate software test.",
+      "finite_smoke": []
+    },
+    "ex-semilagrangian-fixed-grid-time-refinement-keeps-interpolation-error": {
+      "risk": "medium",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-semilagrangian-backtracking-on-periodic-grid",
+          "source_section": "Definition",
+          "quote": "Inputs are a periodic grid from [[def-semilagrangian-periodic-grid-and-interpolant]], a finite horizon $T>0$, a positive integer $M$ of time steps, a periodic $C^1$ velocity $b$, periodic initial data $u_0$, node values $U^0_{\\boldsymbol i}=u_0(x_{\\boldsymbol i})$, and a nonnegative integer step budget $B$. Write $\\Delta t=T/M$ and $t_n=n\\Delta t$. The output is either `success` with $U^0,\\ldots,U^M$, or `budget-exhausted` with no partial final state.\n\n1. If $B<M$, return `budget-exhausted` before changing the input data.\n2. For $n=0,\\ldots,M-1$ and each arrival node $x_{\\boldsymbol i}$, compute the explicit backward Euler foot lift\n   $$\\widetilde x_{\\boldsymbol i}^{\\,n}:=x_{\\boldsymbol i}-\\Delta t\\,b(t_{n+1},x_{\\boldsymbol i}).$$\n   Reduce each coordinate modulo its period when evaluating the periodic interpolant.\n3. Set\n   $$U_{\\boldsymbol i}^{n+1}:=\\mathcal I_h U^n(\\widetilde x_{\\boldsymbol i}^{,n}).$$\n4. After the $M$ finite updates, return `success` with all node arrays.\n\nThe finite step budget counts time updates. Every update evaluates one foot per grid node and a finite sum of $2^d$ interpolation terms. The procedure imposes no bound on $\\|b\\|\\Delta t/h$; the floor-and-fraction convention in the interpolation definition applies even when a foot crosses many grid cells.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-product-limit",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\lim_{n\\to\\infty}\\left(1+\\frac{x}{\\iota(n)}\\right)^n=\\exp(x),$$\nwith the sequence started after $n>|x|$, so the base is positive.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Each denominator in $u_0$ is nonzero because $j/N\\notin\\mathbb Z$, each factor is smooth and $1$-periodic, and at node $x_0=0$ every factor equals $1$. At node $x_m=m/N$ with $1\\le m<N$, the factor with $j=m$ vanishes. Thus the grid samples are exactly the stated unit vector. The exact characteristic is $X(t;s,x)=x+(t-s)$, so at $T=h$ the exact grid vector has value $1$ at node $1$ and $0$ at node $2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "Here $\\alpha=\\Delta t/h=1/K$. Repeated application of [F1] is convolution with the two coefficients $(1-1/K,1/K)$; induction using Pascal's identity shows that after $K$ steps the contribution from exactly two one-node shifts at node $2$ is $\\binom{K}{2}K^{-2}(1-1/K)^{K-2}$. Periodic wrap can add other nonnegative contributions, so $U_2^K\\ge\\binom{K}{2}K^{-2}(1-1/K)^{K-2}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Since $\\binom K2K^{-2}\\to1/2$ and $(1-1/K)^{K-2}=(1-1/K)^K/(1-1/K)^2\\to e^{-1}$ by [F2], we have $\\liminf_{K\\to\\infty}U_2^K\\ge e^{-1}/2>0$, whereas the exact value at node $2$ is zero. Thus reducing $\\Delta t$ at fixed $h$ does not remove this interpolation error. The sufficient condition $h^2/\\Delta t\\to0$ in the global error theorem cannot be dropped from that bound: here $h^2/\\Delta t=hK\\to\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example fixes N≥4 and lets K grow; no zero-width spatial cell or zero time step is admitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The exact shift over T=h and node-2 value are computed in step 1.1; the limiting comparison is in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    },
+    "ex-semilagrangian-pointwise-interpolation-can-change-grid-mass": {
+      "risk": "medium",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semilagrangian-periodic-grid-and-interpolant",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $\\ell_1,\\ldots,\\ell_d>0$, and let $N_1,\\ldots,N_d\\ge1$ be integers. The periodic rectangular box is\n$$\\mathbb T^d_{\\ell}:=\\mathbb R^d/(\\ell_1\\mathbb Z\\times\\cdots\\times\\ell_d\\mathbb Z).$$\nSet $h_j:=\\ell_j/N_j$. Its uniform tensor grid has nodes $x_{\\boldsymbol i}=(i_1h_1,\\ldots,i_dh_d)$, indexed by $0\\le i_j<N_j$, with indices understood modulo $N_j$.\n\nFor node data $V_{\\boldsymbol i}$ and a lift $x\\in\\mathbb R^d$ of a point on the torus, define\n$$q_j:=\\left\\lfloor x_j/h_j\\right\\rfloor,\\qquad \\theta_j:=x_j/h_j-q_j\\in[0,1),$$\nand for $\\boldsymbol\\epsilon\\in\\{0,1\\}^d$ define\n$$w_{\\boldsymbol\\epsilon}(x):=\\prod_{j=1}^d\\theta_j^{\\epsilon_j}(1-\\theta_j)^{1-\\epsilon_j}.$$\nThe tensor-product multilinear interpolant is\n$$\\mathcal I_hV(x):=\\sum_{\\boldsymbol\\epsilon\\in\\{0,1\\}^d}w_{\\boldsymbol\\epsilon}(x)V_{([q_1+\\epsilon_1]_{N_1},\\ldots,[q_d+\\epsilon_d]_{N_d})},$$\nwhere $[k]_N$ is the residue in $\\{0,\\ldots,N-1\\}$. The formula is unchanged when a period $\\ell_j$ is added to $x_j$, so it defines an interpolant on $\\mathbb T^d_{\\ell}$. If $N_j=1$, the two corner indices in that coordinate coincide; the formula still gives the same node value.\n\nFor a continuous periodic function $v$, $\\mathcal I_hv$ means the interpolant of its grid samples. Put $h:=\\max_jh_j$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-semilagrangian-backtracking-on-periodic-grid",
+          "source_section": "Definition",
+          "quote": "Inputs are a periodic grid from [[def-semilagrangian-periodic-grid-and-interpolant]], a finite horizon $T>0$, a positive integer $M$ of time steps, a periodic $C^1$ velocity $b$, periodic initial data $u_0$, node values $U^0_{\\boldsymbol i}=u_0(x_{\\boldsymbol i})$, and a nonnegative integer step budget $B$. Write $\\Delta t=T/M$ and $t_n=n\\Delta t$. The output is either `success` with $U^0,\\ldots,U^M$, or `budget-exhausted` with no partial final state.\n\n1. If $B<M$, return `budget-exhausted` before changing the input data.\n2. For $n=0,\\ldots,M-1$ and each arrival node $x_{\\boldsymbol i}$, compute the explicit backward Euler foot lift\n   $$\\widetilde x_{\\boldsymbol i}^{\\,n}:=x_{\\boldsymbol i}-\\Delta t\\,b(t_{n+1},x_{\\boldsymbol i}).$$\n   Reduce each coordinate modulo its period when evaluating the periodic interpolant.\n3. Set\n   $$U_{\\boldsymbol i}^{n+1}:=\\mathcal I_h U^n(\\widetilde x_{\\boldsymbol i}^{,n}).$$\n4. After the $M$ finite updates, return `success` with all node arrays.\n\nThe finite step budget counts time updates. Every update evaluates one foot per grid node and a finite sum of $2^d$ interpolation terms. The procedure imposes no bound on $\\|b\\|\\Delta t/h$; the floor-and-fraction convention in the interpolation definition applies even when a foot crosses many grid cells.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "The squared-sine factors are smooth and period $3$; the value is zero at nodes $0$ and $1$ and equals $1$ at node $2$. Direct substitution into $b$ gives $(b(0),b(1),b(2))=(1/4,1/4,3/4)$. Therefore the three lifted feet are $-1/4,3/4,5/4$. Their interpolation rows, in node order $0,1,2$, are $(3/4,0,1/4)$, $(1/4,3/4,0)$, and $(0,3/4,1/4)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Applying those rows to $(0,0,1)$ gives the new grid values $(1/4,0,1/4)$. The grid sum changes from $1$ to $1/2$. This is a pointwise interpolation update, so the grid sum is a diagnostic only; the result shows why pointwise interpolation is not itself a conservative remap.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The data include two zero nodes; step 2.1 verifies the exact output at those nodes and the changed sum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The period-3 grid has three nodes; step 1.1 lists each of its three interpolation rows."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The wrapped foot at −1/4 and the other cell fractions are included explicitly in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "id": "three-node-grid-sum",
+          "step": "2.1",
+          "method": "exact-hand-calculation",
+          "inputs": {
+            "data": [
+              "0",
+              "0",
+              "1"
+            ],
+            "velocity_samples": [
+              "1/4",
+              "1/4",
+              "3/4"
+            ]
+          },
+          "expected": "new grid sum 1/2",
+          "actual": "new values (1/4,0,1/4), sum 1/2",
+          "status": "checked"
+        }
+      ],
+      "finite_check_disposition": "The finite values are evaluated exactly by the named proof step; this records the hand calculation and does not claim a separate software test.",
+      "finite_smoke": []
+    },
+    "ex-conservative-overlap-transfer-under-smooth-deforming-flow": {
+      "risk": "medium",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-periodic-c1-velocity-has-global-characteristic-flow",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $T>0$, $\\ell_j>0$, and let $J\\subseteq\\mathbb R$ be an open interval containing $[0,T]$. Suppose $b:J\\times\\mathbb R^d\\to\\mathbb R^d$ is $C^1$ and periodic in $x_j$ with period $\\ell_j$ for every $j$. Choose a compact interval $K\\subset J$ with $[0,T]\\subset\\operatorname{int}K$, and put $M_K:=\\sup_{K\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$. For every $s\\in[0,T]$ and $x\\in\\mathbb R^d$, there is a unique solution $X(\\cdot;s,x)$ of\n$$X'(t)=b(t,X(t)),\\qquad X(s;s,x)=x,$$\non the whole interval $[0,T]$. The lifted flow is periodic-equivariant:\n$$X(t;s,x+\\boldsymbol k\\boldsymbol\\ell)=X(t;s,x)+\\boldsymbol k\\boldsymbol\\ell\\qquad(\\boldsymbol k\\in\\mathbb Z^d),$$\nwhere $\\boldsymbol k\\boldsymbol\\ell=(k_1\\ell_1,\\ldots,k_d\\ell_d)$. If $M_T:=\\sup_{[0,T]\\times[0,\\ell_1]\\times\\cdots\\times[0,\\ell_d]}\\|b\\|_2$, then\n$$\\|X(t;s,x)-x\\|_2\\le M_T|t-s|\\qquad(t\\in[0,T]).$$\nThus each characteristic stays in a compact tube $[0,T]\\times\\overline B(x,M_TT+1)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-characteristic-map-is-orientation-preserving",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-periodic-c1-velocity-has-global-characteristic-flow]], fix $s,t\\in[0,T]$ and let $\\Phi_{t,s}(x):=X(t;s,x)$ on the periodic lift $\\mathbb R^d$. Then $\\Phi_{t,s}$ is a $C^1$ diffeomorphism with inverse $\\Phi_{s,t}$, and\n$$\\det D_x\\Phi_{t,s}(x)>0\\qquad(x\\in\\mathbb R^d).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-characteristic-cell-overlap-remapping",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]) for this Lebesgue-measurable-volume branch. Work on the periodic box $\\mathbb T^d_\\ell$ of [[def-semilagrangian-periodic-grid-and-interpolant]]. For measure calculations use the bounded open fundamental domain $\\Omega:=\\prod_{j=1}^d(0,\\ell_j)$; the period faces omitted from the half-open grid-indexing copy $Q=\\prod_{j=1}^d[0,\\ell_j)$ are Lebesgue-null by [[thm-lebesgue-measure-of-a-box-of-every-kind]]. For a periodic measurable set $E$, define $|E|:=\\lambda_d(E\\cap\\Omega)$, where $\\lambda_d$ is the $d$-dimensional Lebesgue measure of [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]. Let $\\{C_j\\}_{j=1}^J$ be a finite measurable source-cell partition and $\\{A_i\\}_{i=1}^J$ a finite measurable arrival-cell partition of $\\Omega$ up to null sets, with every cell of positive volume; their grid labels use the half-open convention in $Q$. Let $\\Phi=\\Phi_{t_{n+1},t_n}$ be the exact characteristic map from time $t_n$ to $t_{n+1}$. Its inverse images $D_i:=\\Phi^{-1}(A_i)$ are the **departure cells**; [[lem-periodic-flow-departure-cells-have-positive-finite-volume]] gives their measurability and positive finite volume, while [[lem-periodic-characteristic-map-is-orientation-preserving]] gives the diffeomorphism and positive-Jacobian convention.\n\nGiven a source cell-average density $\\rho_j^n$ on $C_j$, set\n$$\\overline\\rho_i:=\\frac{1}{|D_i|}\\sum_{j=1}^J|D_i\\cap C_j|\\rho_j^n,\\qquad \\rho_i^{n+1}:=\\frac{|D_i|}{|A_i|}\\overline\\rho_i.$$\nThe first formula is the exact intersection-volume remap of [[def-intersection-volume-conservative-remapping]] from the source partition to the departure partition. The second is the characteristic volume factor that converts the average on a departure cell into the transported mass per arrival-cell volume. All intersections and volumes are exact in this mathematical definition; a geometric approximation or quadrature rule would require a separate error term.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-periodic-flow-departure-cells-have-positive-finite-volume",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\Omega=\\prod_{j=1}^d(0,\\ell_j)$ be the bounded open fundamental box used for Lebesgue measure, and let $Q=\\prod_{j=1}^d[0,\\ell_j)$ be its half-open grid-indexing copy. Let $\\Phi$ be the periodic $C^1$ characteristic diffeomorphism of [[lem-periodic-characteristic-map-is-orientation-preserving]], and let $A_i$ be a finite tensor-grid cell in $Q$ with nonempty interior. Then $D_i:=\\Phi^{-1}(A_i)$, interpreted on the torus and represented in $\\Omega$, is Lebesgue measurable and satisfies\n$$0<|D_i|<\\infty.$$\nThe finite family of departure cells is a partition whenever the arrival cells form a partition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Since $b(x)>0$ on $(0,1/2)$, the forward trajectory from $1/4$ strictly increases and cannot reach the equilibrium $1/2$ at finite time by uniqueness in [F1]. Thus $\\Phi(1/4)>1/4$, while $\\Phi(0)=0$ and $\\Phi(1/2)=1/2$. Monotonicity in [F2] gives $0<r<1/4$. With representatives in the open fundamental interval $(0,1)$, $D_1=(0,r)$ and $D_2=[r,1)$, so $|D_1|=r$, $|D_2|=1-r$, and the nonzero overlaps with the occupied source cell $C_1\\cap(0,1)$ are $|D_1\\cap C_1|=r$ and $|D_2\\cap C_1|=1/4-r$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Formula [F3] gives $\\overline\\rho_1=1$ and $\\overline\\rho_2=(1/4-r)/(1-r)$. Since $|A_1|=1/4$ and $|A_2|=3/4$, the arrival averages are $\\rho_1^1=4r>0$ and $\\rho_2^1=\\frac43(1/4-r)>0$. Their total mass is $\\frac14\\rho_1^1+\\frac34\\rho_2^1=r+(1/4-r)=1/4$, equal to the initial mass $\\frac14\\cdot1+\\frac34\\cdot0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The second source cell has zero initial average; steps 1.1–2.1 compute its nonnegative remapped value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-cell partition has positive source and arrival volumes and is evaluated term by term in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The periodic endpoints 0 and 1 are fixed by the flow; step 1.1 uses this to identify the wrapped partition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is stated for the Lebesgue-volume branch; steps 1.1–2.1 use only the resulting well-defined cell volumes."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no separate branch for this case; its explicit hypotheses and quantifiers delimit the claim. The named case does not add a distinct conclusion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "reason": "Countable Choice is explicitly assumed and used only in the listed proof steps."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; any finite algebra is evaluated directly in the proof steps.",
+      "finite_smoke": []
+    }
+  }
+}

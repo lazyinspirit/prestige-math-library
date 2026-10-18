@@ -1,0 +1,238 @@
+{
+  "group": "j",
+  "batches": ["29"],
+  "pages_read": [
+    "monotone-finite-volume-entropy-convergence",
+    "monotone-finite-volume-entropy-convergence-examples"
+  ],
+  "items_read": [
+    "def-bounded-bv-data-on-line",
+    "def-monotone-finite-volume-entropy-scheme",
+    "def-piecewise-linear-fv-time-interpolant",
+    "lem-monotone-fv-update-preserves-range-and-tvd",
+    "lem-monotone-fv-discrete-kruzhkov-inequality",
+    "lem-monotone-fv-local-compactness-and-trace",
+    "thm-monotone-finite-volume-entropy-convergence",
+    "cex-nonmonotone-fv-scheme-selects-expansion-shock",
+    "ex-godunov-fv-monotone-under-cfl",
+    "ex-lax-friedrichs-fv-monotone-under-cfl",
+    "ex-godunov-fv-captures-stationary-burgers-shock"
+  ],
+  "conventions": [
+    {
+      "convention": "Bounded BV data are Lebesgue almost-everywhere classes with TV(u) = sup over h > 0 of h⁻¹∫|u(x+h)−u(x)| dx. Global integrability is not required.",
+      "fixed_by": "def-bounded-bv-data-on-line",
+      "matters_for": [
+        "lem-monotone-fv-update-preserves-range-and-tvd",
+        "lem-monotone-fv-local-compactness-and-trace",
+        "thm-monotone-finite-volume-entropy-convergence",
+        "cex-nonmonotone-fv-scheme-selects-expansion-shock",
+        "ex-godunov-fv-captures-stationary-burgers-shock"
+      ]
+    },
+    {
+      "convention": "Cells are [jh,(j+1)h), j ∈ ℤ; time indices start at zero. Initialization uses cell averages, and the update subtracts λ times right flux minus left flux.",
+      "fixed_by": "def-monotone-finite-volume-entropy-scheme",
+      "matters_for": [
+        "def-piecewise-linear-fv-time-interpolant",
+        "lem-monotone-fv-update-preserves-range-and-tvd",
+        "lem-monotone-fv-discrete-kruzhkov-inequality",
+        "ex-godunov-fv-captures-stationary-burgers-shock"
+      ]
+    },
+    {
+      "convention": "Flux monotonicity and coordinate Lipschitz bounds are required on the initial essential-range square I². The full invariant-interval CFL condition is λ(L₁+L₂) ≤ 1.",
+      "fixed_by": "def-monotone-finite-volume-entropy-scheme",
+      "matters_for": [
+        "lem-monotone-fv-update-preserves-range-and-tvd",
+        "lem-monotone-fv-discrete-kruzhkov-inequality",
+        "thm-monotone-finite-volume-entropy-convergence",
+        "ex-godunov-fv-monotone-under-cfl",
+        "ex-lax-friedrichs-fv-monotone-under-cfl"
+      ]
+    },
+    {
+      "convention": "W interpolates affinely between Uⁿ and Uⁿ⁺¹ on each time slab; the piecewise-constant reconstruction uses Uⁿ on that slab.",
+      "fixed_by": "def-piecewise-linear-fv-time-interpolant",
+      "matters_for": [
+        "lem-monotone-fv-local-compactness-and-trace",
+        "thm-monotone-finite-volume-entropy-convergence"
+      ]
+    },
+    {
+      "convention": "Entropy levels range over every real k, including levels outside I; q_k(s) = sgn(s−k)(f(s)−f(k)), with sgn(0)=0.",
+      "fixed_by": "lem-monotone-fv-discrete-kruzhkov-inequality",
+      "matters_for": [
+        "thm-monotone-finite-volume-entropy-convergence",
+        "cex-nonmonotone-fv-scheme-selects-expansion-shock",
+        "ex-godunov-fv-captures-stationary-burgers-shock"
+      ]
+    },
+    {
+      "convention": "The convergence theorem assumes ACω, additionally DC when u₀ ∈ L¹(ℝ), and a positive lower bound τ_m/h_m ≥ c_*. Its convergence conclusions are local.",
+      "fixed_by": "thm-monotone-finite-volume-entropy-convergence",
+      "matters_for": [
+        "ex-godunov-fv-monotone-under-cfl",
+        "ex-lax-friedrichs-fv-monotone-under-cfl",
+        "ex-godunov-fv-captures-stationary-burgers-shock"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-monotone-fv-update-preserves-range-and-tvd",
+      "statement": "Under the full invariant-interval CFL bound, H is nondecreasing in each coordinate on I³ and preserves constants. Every state remains in I, ∑_j|U_{j+1}ⁿ−U_jⁿ| ≤ TV(u₀), and (h/τ)∑_j|U_jⁿ⁺¹−U_jⁿ| ≤ (L₁+L₂)TV(u₀).",
+      "used_by": [
+        "lem-monotone-fv-discrete-kruzhkov-inequality",
+        "lem-monotone-fv-local-compactness-and-trace",
+        "thm-monotone-finite-volume-entropy-convergence"
+      ]
+    },
+    {
+      "id": "lem-monotone-fv-local-compactness-and-trace",
+      "statement": "For bounded BV data and vanishing meshes satisfying the full invariant-interval CFL bound, every subsequence has a further subsequence whose linear interpolants converge uniformly in time in L¹(K) on every bounded interval K to a continuous local-L¹ map u with u(0)=u₀ and values in I. The piecewise-constant reconstructions converge strongly to the same u in local space-time L¹.",
+      "used_by": [
+        "thm-monotone-finite-volume-entropy-convergence"
+      ]
+    },
+    {
+      "id": "lem-monotone-fv-discrete-kruzhkov-inequality",
+      "statement": "For every j ∈ ℤ, n ≥ 0 and k ∈ ℝ, |U_jⁿ⁺¹−k|−|U_jⁿ−k|+λ(G_k(U_jⁿ,U_{j+1}ⁿ)−G_k(U_{j−1}ⁿ,U_jⁿ)) ≤ 0, where G_k(a,b)=F(a∨k,b∨k)−F(a∧k,b∧k), and G_k(s,s)=q_k(s) for s ∈ I.",
+      "used_by": [
+        "thm-monotone-finite-volume-entropy-convergence"
+      ]
+    },
+    {
+      "id": "thm-monotone-finite-volume-entropy-convergence",
+      "statement": "Assume ACω, T>0, f ∈ C¹(ℝ), bounded BV initial data, a locally Lipschitz consistent flux monotone on I², vanishing meshes with (τ_m/h_m)(L₁+L₂) ≤ 1 and τ_m/h_m ≥ c_*>0, and additionally DC if u₀ ∈ L¹(ℝ). Then there is a unique bounded Kruzhkov entropy solution with datum u₀; W_m converges in C([0,T];L¹_loc(ℝ)) and the piecewise-constant reconstructions converge strongly in local space-time L¹.",
+      "used_by": [
+        "ex-godunov-fv-monotone-under-cfl",
+        "ex-lax-friedrichs-fv-monotone-under-cfl",
+        "ex-godunov-fv-captures-stationary-burgers-shock"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-l-p-space-as-a-quotient-by-null-functions",
+      "used_for": "Almost-everywhere equivalence classes in the bounded BV definition.",
+      "opened": true
+    },
+    {
+      "id": "def-l-infinity-on-a-measure-space",
+      "used_for": "Essential boundedness of the initial data.",
+      "opened": true
+    },
+    {
+      "id": "def-locally-integrable-function-on-r-n",
+      "used_for": "Local integrability without integrability at infinity.",
+      "opened": true
+    },
+    {
+      "id": "def-kruzhkov-entropy-solution",
+      "used_for": "Entropy-flux sign, all-real entropy levels, and strong local initial trace.",
+      "opened": true
+    },
+    {
+      "id": "thm-bolzano-weierstrass",
+      "used_for": "Bounded real subsequence extraction in local BV compactness.",
+      "opened": true
+    },
+    {
+      "id": "lem-q-and-irrationals-dense-r",
+      "used_for": "Rational spatial partitions and finite rational time nets.",
+      "opened": true
+    },
+    {
+      "id": "thm-rationals-countable",
+      "used_for": "Fixed rational enumeration for deterministic diagonal extraction.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Integration of sums of absolute successive differences.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+      "used_for": "Almost-everywhere convergence from summable successive differences.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Local L¹ limits of bounded sections and space-time reconstructions.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Identification of the measurable space-time limit with continuous local-L¹ time sections.",
+      "opened": true
+    },
+    {
+      "id": "thm-kruzhkov-local-l1-contraction",
+      "used_for": "Uniqueness for bounded entropy solutions with equal local initial traces, including nonintegrable data.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-of-bounded-kruzhkov-entropy-solutions",
+      "used_for": "Existence only on the L¹∩L∞ data branch under ACω and DC.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Bounded derivatives on compact state intervals.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Local Lipschitz bounds for the physical flux and the Lax–Friedrichs coordinate estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicitly assumed ACω interface.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "The additional assumption attached to the imported integrable-data existence branch.",
+      "opened": true
+    },
+    {
+      "id": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+      "used_for": "A nonnegative interior test detecting the expansion shock's entropy defect.",
+      "opened": true
+    },
+    {
+      "id": "thm-rankine-hugoniot-jump-condition",
+      "used_for": "Zero speed of the stationary Burgers shock with distinct traces.",
+      "opened": true
+    },
+    {
+      "id": "def-distributional-weak-solution-of-a-scalar-conservation-law",
+      "used_for": "The bounded weak formulation with its initial boundary term in the stationary shock example.",
+      "opened": true
+    },
+    {
+      "id": "def-scalar-conservation-law-and-flux",
+      "used_for": "The scalar conservation-law interface underlying the external conservative-scheme and weak-limit prerequisites.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "monotone-finite-volume-entropy-convergence",
+      "to": "conservative-finite-volume-weak-limits",
+      "faithful": true,
+      "note": "The cell, initialization, reconstruction and shared-flux conventions agree. The convergence theorem invokes the conditional weak-limit supplier after obtaining strong local convergence and uniform range bounds, carries ACω, and supplies compactness and entropy admissibility separately. The examples use the exact Burgers Godunov formula and consistency result."
+    },
+    {
+      "from": "high-resolution-tvd-eno-and-weno-methods",
+      "to": "monotone-finite-volume-entropy-convergence",
+      "faithful": true,
+      "note": "The declared page prerequisite supplies reading context. The current high-resolution page and its item references do not invoke the monotone entropy-convergence theorem or infer convergence for reconstructed MUSCL, ENO or WENO schemes. Its cell-average and componentwise monotonicity conventions are compatible with this batch."
+    }
+  ]
+}

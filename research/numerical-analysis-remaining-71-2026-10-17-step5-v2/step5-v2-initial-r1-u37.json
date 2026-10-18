@@ -1,0 +1,91 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "37",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "lem-pe05-source-quadrature-consistency",
+      "model": "gpt-6-luna",
+      "context_sha256": "5427e90f1eba1dc87adc4547c3e62967438f5b46404aa8080b17eec651082f52",
+      "outcome": "false_positive",
+      "reason": "The Statement explicitly sets b_i=b(x_i), without exempting ghost indices. Thus every bed value used in the two reconstructed faces is sampled; the proposed constant-bed/raised-ghost counterexample violates this hypothesis. The general scheme permits arbitrary ghost beds, but that does not override this lemma's additional sampling assumption. Taylor expansion gives delta_+-delta_-=b'(x_i)d+O(d^2), and the clipping remainder lies in [0,delta^2], including h=0 and delta=h; the resulting O(d) estimate and local L1 limit are sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-pe05-hll-dam-break-wets-dry-cell",
+      "model": "gpt-6-luna",
+      "context_sha256": "5f57244289a22de6b4fe843c181cf6cab377423f960448191be5c8cb97f52425",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 omits the cited theorem's finite-chain/periodic domain. This is a nonfatal omitted localization: its N=1 case applies to each cell with its actual admissible neighbors as ghost states, producing exactly the same two face fluxes and update. F2 now states that scope and step 2.1 supplies this argument. The explicitly computed front flux (1/2,1/4), updates (3/4,1/8) and (1/4,1/8), and CFL products are correct.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-pe05-source-quadrature-consistency",
+      "disposition": "unaffected",
+      "post_sha256": "8f8023765e8c4e51f402227cb41320897dd0786baa91f0b65272fad86c099a46",
+      "review_context_sha256": "c5cb57daed1d87e0f7dee8e61bbd47b2873dd09677d80045a71eb9075614db7a",
+      "reason": "The Statement explicitly sets b_i=b(x_i), without exempting ghost indices. Thus every bed value used in the two reconstructed faces is sampled; the proposed constant-bed/raised-ghost counterexample violates this hypothesis. The general scheme permits arbitrary ghost beds, but that does not override this lemma's additional sampling assumption. Taylor expansion gives delta_+-delta_-=b'(x_i)d+O(d^2), and the clipping remainder lies in [0,delta^2], including h=0 and delta=h; the resulting O(d) estimate and local L1 limit are sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-pe05-hll-dam-break-wets-dry-cell",
+      "disposition": "repaired",
+      "post_sha256": "4f5bc619357e68a1f67abab608cc208ad063903004dae4d5f900128c32de8c92",
+      "review_context_sha256": "f106ed4e30ffb56ba48121e674c99387d34e8b4ff0a077c6868ba852be95e65b",
+      "reason": "Checked the finite-chain theorem, scheme, owning contract and page interface. F2 now states the N=1 finite-chain scope. Step 2.1 supplies the missing localization with the actual neighboring initial states and flat ghost beds; the two face fluxes and update agree exactly with the full-line calculation. CFL equality is allowed. The two explicit updates are wet and their depth sum is one; other cells have equal face fluxes and remain unchanged. This is repair-author validation, not independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "lem-pe05-source-quadrature-consistency",
+      "outcome": "false_positive",
+      "status": "dismissed",
+      "locus": "statement",
+      "reason": "The Statement explicitly sets b_i=b(x_i), without exempting ghost indices. Thus every bed value used in the two reconstructed faces is sampled; the proposed constant-bed/raised-ghost counterexample violates this hypothesis. The general scheme permits arbitrary ghost beds, but that does not override this lemma's additional sampling assumption. Taylor expansion gives delta_+-delta_-=b'(x_i)d+O(d^2), and the clipping remainder lies in [0,delta^2], including h=0 and delta=h; the resulting O(d) estimate and local L1 limit are sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "ex-pe05-hll-dam-break-wets-dry-cell",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "locus": "facts-block and proof-step 2.1",
+      "reason": "F2 omits the cited theorem's finite-chain/periodic domain. This is a nonfatal omitted localization: its N=1 case applies to each cell with its actual admissible neighbors as ghost states, producing exactly the same two face fluxes and update. F2 now states that scope and step 2.1 supplies this argument. The explicitly computed front flux (1/2,1/4), updates (3/4,1/8) and (1/4,1/8), and CFL products are correct.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed both assigned tuple reviews in dependency order. Source lemma, full scheme and balance-law definitions, example, finite-chain admissibility theorem, both owning page interfaces and the two assigned contract entries were read. No external source consultation is claimed: Taylor expansion, positive-part estimates and the finite-volume localization/calculation are familiar.",
+    "Only items/ex-pe05-hll-dam-break-wets-dry-cell.md changed: F2 states the actual finite-chain scope, and step 2.1 applies the N=1 case with the actual initial neighbors and their beds. The Example section is unchanged. No Statement or Definition changed in either assigned item; no new prerequisite, downstream event or maintenance route is required. No published-consumer finding was discovered, so no published-ledger update is proposed.",
+    "The existing contract retains the exact supplier quotation and unchanged fact/step inputs. Focused strict validation passed without metadata edits. Shared-lock acquisition was refused while another batch held it; no shared file or lock was modified. No judgments, stamps, round state, certificates or other reports were changed.",
+    "node tools/tsx-run.mjs tools/precheck.mts items/lem-pe05-source-quadrature-consistency.md items/ex-pe05-hll-dam-break-wets-dry-cell.md --json: exit 0, 2 checked, 0 failed.",
+    "node tools/rendercheck.mjs items/lem-pe05-source-quadrature-consistency.md items/ex-pe05-hll-dam-break-wets-dry-cell.md --json: exit 0, 2 checked, no errors or warnings.",
+    "node tools/proof-layout.mjs items/ex-pe05-hll-dam-break-wets-dry-cell.md: exit 0, 1 item, 3 steps, 0 defects; run once after the final item edit.",
+    "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-37.proof-contracts.json --items lem-pe05-source-quadrature-consistency,ex-pe05-hll-dam-break-wets-dry-cell --strict --json: exit 0, both checked, no errors or warnings.",
+    "Independent exact-rational arithmetic computation (Python fractions) of the HLL formula: front flux (1/2,1/4), adjacent updates (3/4,1/8) and (1/4,1/8), summed depth 1 and CFL products 1,1/2,0 all verified; exit 0. This finite calculation is a sanity check, not an independent mathematical review.",
+    "Both required review-contexts commands completed successfully and their returned post/context hashes were copied verbatim. The first review guard equals the frozen assignment before guard, so it is unaffected. The example guard differs and is repaired. No unresolved mathematical obligations remain in this assignment; subsequent independent judging and controller certification remain owed."
+  ]
+}

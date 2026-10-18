@@ -1,0 +1,679 @@
+[
+  {
+    "order": 2678,
+    "id": "reaction-diffusion-invariants-and-pattern-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Reaction-diffusion systems, invariants and pattern computation",
+    "companion": "reaction-diffusion-invariants-and-pattern-discretization-examples",
+    "requires": [
+      "parabolic-finite-difference-methods",
+      "finite-volume-diffusion-and-mimetic-fluxes",
+      "imex-and-operator-splitting-methods",
+      "finite-generator-master-equations-and-uniformization"
+    ],
+    "items": [
+      {
+        "id": "def-reaction-vector-field-and-quasipositivity",
+        "kind": "definition",
+        "deps": [],
+        "dependency_level": 0,
+        "title": "Reaction vector fields and quasi-positivity",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§0, printed p. 1: concentrations of several species and a coupled reaction vector; §4, printed pp. 26–27: the boundary sign criterion for positivity of a locally Lipschitz semidiscrete ODE."
+            },
+            {
+              "title": "Luca Doria, Numerical Algorithms, lecture notes, Johannes Gutenberg-Universität Mainz, 2022",
+              "url": "https://www.staff.uni-mainz.de/doria/NumAlg/NumAlg.pdf",
+              "locator": "§§10.6–10.7, PDF pp. 149–151: scalar and vector reaction-diffusion formulations and the Jacobian linearization at a homogeneous equilibrium."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-periodic-reaction-diffusion-grid",
+        "kind": "definition",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "lem-periodic-heat-difference-amplification-symbol"
+        ],
+        "dependency_level": 0,
+        "title": "Periodic rectangular reaction-diffusion grid",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Luca Doria, Numerical Algorithms, lecture notes, Johannes Gutenberg-Universität Mainz, 2022",
+              "url": "https://www.staff.uni-mainz.de/doria/NumAlg/NumAlg.pdf",
+              "locator": "§§10.6–10.8, PDF pp. 149–153: vector reaction-diffusion models, modal linearization, and the Brusselator illustration."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-reaction-invariant-rectangle",
+        "kind": "definition",
+        "deps": [
+          "def-reaction-vector-field-and-quasipositivity"
+        ],
+        "dependency_level": 1,
+        "title": "Inward reaction rectangles",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§4, printed pp. 26–27: inward signs on the boundary of the nonnegative orthant for a positive ODE flow. A bounded rectangle additionally requires upper-face signs, stated here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-stoichiometric-mass-invariant",
+        "kind": "definition",
+        "deps": [
+          "def-reaction-vector-field-and-quasipositivity"
+        ],
+        "dependency_level": 1,
+        "title": "Stoichiometric conservation and dissipation functionals",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§0, printed p. 1: mass conservation as a qualitative requirement for transport-reaction discretizations. The weighted linear-functional convention here is defined explicitly."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-semilinear-reaction-diffusion-system",
+        "kind": "definition",
+        "deps": [
+          "def-reaction-vector-field-and-quasipositivity",
+          "def-reaction-invariant-rectangle"
+        ],
+        "dependency_level": 2,
+        "title": "Semilinear vector reaction-diffusion systems",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§0, printed p. 1: the vector concentration equation for several species with diffusion and local reaction terms; §9, printed pp. 60–64: splitting the evolution into reaction and diffusion subproblems."
+            },
+            {
+              "title": "Luca Doria, Numerical Algorithms, lecture notes, Johannes Gutenberg-Universität Mainz, 2022",
+              "url": "https://www.staff.uni-mainz.de/doria/NumAlg/NumAlg.pdf",
+              "locator": "§§10.6–10.7, PDF pp. 149–151: the vector reaction-diffusion equation and linearization at a homogeneous equilibrium."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-fv-tpfa-no-flux-diffusion-specialization",
+        "kind": "definition",
+        "deps": [
+          "def-fv-admissible-cell-face-mesh",
+          "def-tpfa-harmonic-face-scheme"
+        ],
+        "dependency_level": 2,
+        "title": "No-flux TPFA diffusion generator",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, updated author text, 2019",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §9.2, PDF pp. 38–44: interior-face transmissibilities and shared conservative TPFA fluxes."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§2, PDF pp. 8–10: orthogonal TPFA fluxes, positive transmissibilities, and the weighted stiffness matrix."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass",
+        "kind": "theorem",
+        "deps": [
+          "def-reaction-vector-field-and-quasipositivity",
+          "def-reaction-invariant-rectangle",
+          "def-stoichiometric-mass-invariant",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "thm-gronwall-integral-inequality",
+          "thm-ftc-second-part"
+        ],
+        "dependency_level": 2,
+        "title": "Inward reaction fields preserve rectangles and stoichiometric mass",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§4, printed pp. 26–27: inward boundary signs for positive semidiscrete reaction ODEs; the local proof supplies the full rectangle argument."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-forward-euler-reaction-step-preserves-invariant-rectangle-and-mass",
+        "kind": "lemma",
+        "deps": [
+          "def-reaction-vector-field-and-quasipositivity",
+          "def-reaction-invariant-rectangle",
+          "def-stoichiometric-mass-invariant"
+        ],
+        "dependency_level": 2,
+        "title": "A bounded forward-Euler reaction step preserves an inward rectangle",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§6, printed pp. 39–40: forward-Euler positivity under an explicit reaction Lipschitz step bound; the local proof gives the rectangle and mass version."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cell-centered-rectangular-no-flux-tpfa-grid",
+        "kind": "definition",
+        "deps": [
+          "def-fv-tpfa-no-flux-diffusion-specialization",
+          "def-periodic-reaction-diffusion-grid"
+        ],
+        "dependency_level": 3,
+        "title": "Cell-centered rectangular TPFA grid with homogeneous no-flux boundaries",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, updated author text, 2019",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §§9.2–9.3, PDF pp. 38–47: orthogonal cell-centered TPFA fluxes and boundary-face conventions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-reaction-diffusion-continuous-mass-balance",
+        "kind": "theorem",
+        "deps": [
+          "def-semilinear-reaction-diffusion-system",
+          "def-stoichiometric-mass-invariant",
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-ftc-second-part",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "title": "Continuous reaction-diffusion mass balance on boxes, tori, and piecewise C1 domains",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§0, printed p. 1: mass-balance modeling for multiple species; the local proof supplies the continuous no-flux and periodic identities."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-fv-grid-spatial-consistency",
+        "kind": "lemma",
+        "deps": [
+          "def-periodic-reaction-diffusion-grid",
+          "def-semilinear-reaction-diffusion-system",
+          "cor-taylor-lagrange-and-cauchy-remainders"
+        ],
+        "dependency_level": 3,
+        "title": "Second-order spatial consistency of the periodic FV heat stencil",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§4, printed pp. 28–29: centered diffusion stencils and their second-order spatial truncation error."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-fv-grid-reaction-diffusion-commutator-bound",
+        "kind": "lemma",
+        "deps": [
+          "def-periodic-reaction-diffusion-grid",
+          "def-semilinear-reaction-diffusion-system",
+          "def-reaction-vector-field-and-quasipositivity",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "cor-mean-value-theorem",
+          "cor-differentiable-implies-continuous"
+        ],
+        "dependency_level": 3,
+        "title": "Mesh-uniform reaction-diffusion commutator bound on a periodic grid",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§9, printed pp. 60–61: the Lie local defect contains the commutator; the notes explicitly warn that mesh-uniform bounds require control of the commutator terms."
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-two-species-continuous-and-discrete-turing-criterion",
+        "kind": "proposition",
+        "deps": [
+          "def-semilinear-reaction-diffusion-system",
+          "def-periodic-reaction-diffusion-grid",
+          "lem-periodic-heat-difference-amplification-symbol"
+        ],
+        "dependency_level": 3,
+        "title": "Two-species continuous and discrete dispersion criteria",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Luca Doria, Numerical Algorithms, lecture notes, Johannes Gutenberg-Universität Mainz, 2022",
+              "url": "https://www.staff.uni-mainz.de/doria/NumAlg/NumAlg.pdf",
+              "locator": "§§10.7–10.8, PDF pp. 150–153: two-species diffusion-dependent mode matrices and the reaction-diffusion model example."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+        "kind": "theorem",
+        "deps": [
+          "def-fv-tpfa-no-flux-diffusion-specialization",
+          "def-periodic-reaction-diffusion-grid",
+          "def-stoichiometric-mass-invariant",
+          "lem-xd-finite-matrix-exponential-series",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-picard-lindelof-local-existence-and-uniqueness"
+        ],
+        "dependency_level": 3,
+        "title": "Finite-volume and periodic diffusion preserve intervals and weighted mass",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, updated author text, 2019",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §§9.2–9.3, PDF pp. 38–47: positive TPFA transmissibilities, conservative cell balances, and the diffusion energy form."
+            },
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§4, printed pp. 26–29: positivity of finite spatial diffusion discretizations; this item proves the mass-weighted interval result for the stated matrices."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-exact-lie-reaction-diffusion-step",
+        "kind": "algorithm",
+        "deps": [
+          "def-semilinear-reaction-diffusion-system",
+          "def-reaction-invariant-rectangle",
+          "def-fv-tpfa-no-flux-diffusion-specialization",
+          "def-periodic-reaction-diffusion-grid",
+          "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+          "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass"
+        ],
+        "dependency_level": 4,
+        "title": "Exact reaction-then-diffusion Lie step on FV or periodic grids",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§9, printed pp. 60–64: first-order operator splitting into separately solved diffusion and reaction subproblems."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-euler-reaction-lie-diffusion-step",
+        "kind": "algorithm",
+        "deps": [
+          "def-semilinear-reaction-diffusion-system",
+          "def-reaction-invariant-rectangle",
+          "def-fv-tpfa-no-flux-diffusion-specialization",
+          "def-periodic-reaction-diffusion-grid",
+          "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+          "lem-forward-euler-reaction-step-preserves-invariant-rectangle-and-mass"
+        ],
+        "dependency_level": 4,
+        "title": "Forward-Euler reaction followed by exact FV or periodic diffusion",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§6, printed pp. 39–40: forward-Euler reaction positivity under an explicit step restriction."
+            },
+            {
+              "title": "Jérôme Droniou, Finite volume schemes for diffusion equations: introduction to and review of modern methods, 2014",
+              "url": "https://arxiv.org/pdf/1407.1567",
+              "locator": "§§1.3 and 2.2, PDF pp. 6–10: monotone finite-volume diffusion and nonnegative transmissibility conditions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-exact-lie-step-preserves-invariant-rectangle-and-mass",
+        "kind": "theorem",
+        "deps": [
+          "def-fv-tpfa-no-flux-diffusion-specialization",
+          "def-periodic-reaction-diffusion-grid",
+          "alg-exact-lie-reaction-diffusion-step",
+          "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+          "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass",
+          "def-stoichiometric-mass-invariant"
+        ],
+        "dependency_level": 5,
+        "title": "Exact reaction-diffusion Lie steps preserve rectangles and mass balance",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§§4 and 9, printed pp. 26–27 and 60–64: reaction positivity and the reaction-then-diffusion Lie composition."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-euler-lie-step-preserves-invariant-rectangle-and-mass",
+        "kind": "theorem",
+        "deps": [
+          "def-fv-tpfa-no-flux-diffusion-specialization",
+          "def-periodic-reaction-diffusion-grid",
+          "alg-euler-reaction-lie-diffusion-step",
+          "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+          "lem-forward-euler-reaction-step-preserves-invariant-rectangle-and-mass",
+          "def-stoichiometric-mass-invariant"
+        ],
+        "dependency_level": 5,
+        "title": "A bounded Euler-reaction Lie step preserves rectangles and mass balance",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§6, printed pp. 39–40: forward-Euler reaction positivity requires an explicit step bound."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-periodic-reaction-diffusion-lie-error-estimate",
+        "kind": "theorem",
+        "deps": [
+          "alg-exact-lie-reaction-diffusion-step",
+          "def-periodic-reaction-diffusion-grid",
+          "def-semilinear-reaction-diffusion-system",
+          "lem-periodic-fv-grid-spatial-consistency",
+          "lem-periodic-fv-grid-reaction-diffusion-commutator-bound",
+          "thm-exact-lie-step-preserves-invariant-rectangle-and-mass",
+          "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass",
+          "thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass",
+          "thm-gronwall-integral-inequality",
+          "lem-xd-finite-matrix-exponential-series",
+          "thm-ftc-second-part"
+        ],
+        "dependency_level": 6,
+        "title": "Mesh-uniform first-order Lie error for a smooth periodic reaction-diffusion solution",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§9, printed pp. 60–64: Lie splitting, its local commutator defect, and the need for bounds uniform in spatial discretization."
+            },
+            {
+              "title": "Luca Doria, Numerical Algorithms, lecture notes, Johannes Gutenberg-Universität Mainz, 2022",
+              "url": "https://www.staff.uni-mainz.de/doria/NumAlg/NumAlg.pdf",
+              "locator": "§§10.6–10.8, PDF pp. 149–153: smooth periodic reaction-diffusion modes and the vector model context."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cell-centered-no-flux-reaction-diffusion-lie-error",
+        "kind": "theorem",
+        "deps": [
+          "def-cell-centered-rectangular-no-flux-tpfa-grid",
+          "def-periodic-reaction-diffusion-grid",
+          "thm-periodic-reaction-diffusion-lie-error-estimate",
+          "alg-exact-lie-reaction-diffusion-step",
+          "thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass",
+          "lem-xd-finite-matrix-exponential-series"
+        ],
+        "dependency_level": 7,
+        "title": "No-flux rectangular TPFA Lie error by even reflection",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Eymard, T. Gallouët, and R. Herbin, Finite Volume Methods, updated author text, 2019",
+              "url": "https://raphaeleh.github.io/PUBLI/bookevol.pdf",
+              "locator": "Chapter 9 §§9.2–9.3, PDF pp. 38–47: orthogonal cell-centered fluxes and conservative boundary treatment."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2679,
+    "id": "reaction-diffusion-invariants-and-pattern-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Reaction-diffusion systems, invariants and pattern computation — Examples",
+    "companion": "reaction-diffusion-invariants-and-pattern-discretization",
+    "requires": [
+      "reaction-diffusion-invariants-and-pattern-discretization"
+    ],
+    "items": [
+      {
+        "id": "cex-consistent-mass-p1-fem-diffusion-fails-positivity",
+        "kind": "counterexample",
+        "deps": [
+          "lem-xd-finite-matrix-exponential-series",
+          "thm-picard-lindelof-local-existence-and-uniqueness"
+        ],
+        "dependency_level": 0,
+        "title": "Consistent-mass P1 diffusion can leave the nonnegative cone",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-brusselator-continuous-turing-instability",
+        "kind": "example",
+        "deps": [
+          "def-reaction-vector-field-and-quasipositivity",
+          "prop-two-species-continuous-and-discrete-turing-criterion"
+        ],
+        "dependency_level": 4,
+        "title": "A Brusselator with a continuous Turing-unstable torus mode",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Luca Doria, Numerical Algorithms, lecture notes, Johannes Gutenberg-Universität Mainz, 2022",
+              "url": "https://www.staff.uni-mainz.de/doria/NumAlg/NumAlg.pdf",
+              "locator": "§§10.6–10.7, PDF pp. 149–151: general reaction-diffusion systems and linear Turing mode analysis. The explicit Brusselator field and its calculations are supplied locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-three-cell-grid-suppresses-continuous-turing-mode",
+        "kind": "example",
+        "deps": [
+          "prop-two-species-continuous-and-discrete-turing-criterion",
+          "ex-brusselator-continuous-turing-instability"
+        ],
+        "dependency_level": 5,
+        "title": "A three-cell periodic grid suppresses the Brusselator's unstable continuous mode",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Luca Doria, Numerical Algorithms, lecture notes, Johannes Gutenberg-Universität Mainz, 2022",
+              "url": "https://www.staff.uni-mainz.de/doria/NumAlg/NumAlg.pdf",
+              "locator": "§10.7, PDF pp. 150–151: general diffusion-dependent mode matrices. The Brusselator and the three-cell spectral calculation are supplied locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-fisher-kpp-forward-reaction-euler-bound",
+        "kind": "example",
+        "deps": [
+          "def-fv-tpfa-no-flux-diffusion-specialization",
+          "alg-euler-reaction-lie-diffusion-step",
+          "thm-euler-lie-step-preserves-invariant-rectangle-and-mass"
+        ],
+        "dependency_level": 6,
+        "title": "A forward-Euler Fisher–KPP reaction step preserves its interval under a sharp simple bound",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Willem Hundsdorfer, Numerical Solution of Advection-Diffusion-Reaction Equations, lecture notes for Ph.D. course, 1996",
+              "url": "https://ir.cwi.nl/pub/4797/4797D.pdf",
+              "locator": "§6, printed pp. 39–40: forward-Euler positivity bounds for reaction updates; the scalar interval calculation is verified here."
+            }
+          ]
+        },
+        "statement": "Let $r>0$ and use the scalar Fisher–KPP reaction $F(u)=ru(1-u)$ on $R=[0,1]$, followed by exact no-flux TPFA diffusion with any diffusivity $d\\ge0$. For a nonnegative step $\\tau$, the forward-Euler reaction map preserves $[0,1]$ for every starting value $u\\in[0,1]$ exactly when $0\\le\\tau r\\le1$; after that step, exact no-flux TPFA diffusion also preserves the interval. For $\\tau>0$, on any finite grid with positive cell weights, the reaction strictly increases the discrete mass if at least one cell value lies in $(0,1)$ and leaves it unchanged if every cell value is a reaction equilibrium $0$ or $1$. At $\\tau=0$ the reaction map is the identity. This example makes no mass-conservation claim."
+      }
+    ]
+  }
+]

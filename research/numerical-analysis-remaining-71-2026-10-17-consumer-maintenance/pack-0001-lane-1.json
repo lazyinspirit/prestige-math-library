@@ -1,0 +1,38 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "pack": "pack-0001",
+  "lane": 1,
+  "ids": [
+    "lem-exact-dyadic-determinant-sign-correct-and-terminates"
+  ],
+  "assignment": "research/numerical-analysis-remaining-71-2026-10-17-consumer-maintenance/pack-0001-lane-1.json",
+  "task": "research/numerical-analysis-remaining-71-2026-10-17-consumer-maintenance/pack-0001-lane-1.md",
+  "report": "research/numerical-analysis-remaining-71-2026-10-17-consumer-maintenance/pack-0001-lane-1-report.json",
+  "before": {
+    "lem-exact-dyadic-determinant-sign-correct-and-terminates": {
+      "sha256": "ce1d981fec7169507b8081a4e33fae7b1512a4237cdcc981b16e099b28ac13d1",
+      "guard_sha256": "bcc5c4d8320f3dc88362969e37d6b57296f09c72ebb50abb7392fe990b8e7678",
+      "statement_sha256": "e1f78aacfe12e83dd11399469549e3e091c924febd48f9bd18c37ce98183791b",
+      "text": "---\nid: lem-exact-dyadic-determinant-sign-correct-and-terminates\nkind: lemma\ntitle: The integer-clearance determinant-sign algorithm is correct and terminates\nstatus: draft\norigin: pipeline\npipeline_run: numerical-analysis-remaining-71-2026-10-17\npage: certified-geometric-predicates\ndependency_level: 3\nproof_strategy: direct\nprovenance:\n  statement: literature-derived\n  proof: ai-generated\ndeps: [alg-exact-dyadic-determinant-sign, lem-dyadic-determinant-integer-clearance-preserves-sign, def-certified-geometric-predicate-determinants]\nsources:\n  references:\n    - title: \"CGAL Manual, Robustness Issues: exact arithmetic and predicates\"\n      url: \"https://doc.cgal.org/latest/Manual/devman_robustness.html\"\n---\n\n## Statement\n\nFor every finite encoded $s\\times s$ matrix $M$ of exact dyadic rationals,\n$s\\ge1$, [[alg-exact-dyadic-determinant-sign]] terminates and returns\n$\\operatorname{sgn}(\\det M)$, including zero. No axiom of choice is required.\n\n## Facts & Assumptions\n\n**Given:** A positive integer $s$ and a finite encoding of the dyadic entries of $M$; arbitrary-precision integer arithmetic means exact arithmetic on finite integer encodings, without a fixed storage cap.\n\n[F1] [[alg-exact-dyadic-determinant-sign]]: write $M_{ij}=a_{ij}/2^{b_{ij}}$ with $b_{ij}\\ge0$, take $k_i=\\max_j b_{ij}$, form the integer matrix $N_{ij}=2^{k_i}M_{ij}$, and return the sign of its integer Leibniz sum.\n\n[F2] [[def-certified-geometric-predicate-determinants]]: the dyadic determinant is the signed permutation sum, with exactly one entry from each row in each product.\n\n[F3] [[lem-dyadic-determinant-integer-clearance-preserves-sign]]: positive power-of-two row clearance preserves determinant sign and zero.\n\n## Proof\n\n1.1 Each finitely encoded dyadic entry can be put in the form in [F1] by integer shifts and cancellation of powers of two; zero uses exponent zero. Since $s\\ge1$, every row has a nonempty finite list of exponents and its maximum $k_i$ exists and is computed by finitely many comparisons. Then $N_{ij}=a_{ij}2^{k_i-b_{ij}}$ is an exactly computable integer. [given, F1, construct, algebra]\n\n2.1 In each permutation product of $N$, the row factors multiply to the same positive integer $C=\\prod_i2^{k_i}$. Thus [F2] gives $\\det N=C\\det M$, the sign-preserving identity underlying [F3]. The integer sum in [F1] is exactly $\\det N$, so the returned sign equals $\\operatorname{sgn}(\\det M)$, also when this value is zero. [F1, F2, F3, step 1.1, algebra]\n\n3.1 There are exactly $s!$ permutations, which can be enumerated in lexicographic order from the finite set of tuples of length $s$ with entries in $\\{0,\\ldots,s-1\\}$ by retaining those with distinct entries. Each product, sum, integer shift and sign comparison operates on finite integer encodings and terminates. Hence all loops and the algorithm terminate, even for singular matrices and $s=1$; there is no pivot division. All constructions are explicit and finite, so no axiom of choice is used. [given, F1, step 1.1, step 2.1, construct] ∎\n"
+    }
+  },
+  "obligations": [
+    {
+      "key": "176d1872677eb182628ec01e265ed28cb1ec28e38c8940c36e287001b302787a",
+      "id": "lem-exact-dyadic-determinant-sign-correct-and-terminates",
+      "event_key": "655a4646245405a782ad8980c3644baae181f180d3e0e443c244623f17f132b4",
+      "status": "pending",
+      "paths": [
+        [
+          "alg-exact-dyadic-determinant-sign",
+          "lem-exact-dyadic-determinant-sign-correct-and-terminates"
+        ]
+      ],
+      "event": {
+        "id": "alg-exact-dyadic-determinant-sign",
+        "before_statement_sha256": "12e18baa0db527d08b1dd3b4953963dee1df2ad2d3d2aaef641cebd0556fb3fc",
+        "after_statement_sha256": "9fb5eb6e5ef54e0e120fbaa38b65b0bb3a39d9ccda4395eed04a9b283f5503ac"
+      }
+    }
+  ]
+}

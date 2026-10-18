@@ -1,0 +1,374 @@
+[
+  {
+    "order": 2624,
+    "id": "elasticity-near-incompressibility-and-locking-free-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Linear elasticity, nearly incompressible limits and locking",
+    "companion": "elasticity-near-incompressibility-and-locking-free-discretization-examples",
+    "requires": [
+      "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "mixed-finite-elements-and-stokes-stability"
+    ],
+    "items": [
+      {
+        "id": "alg-linear-elasticity-rigid-body-nullspace-gauge",
+        "kind": "algorithm",
+        "title": "Algebraic gauge for a rigid-body stiffness nullspace",
+        "statement": "Let $K\\in\\mathbb R^{N\\times N}$ be symmetric positive semidefinite, let $R\\in\\mathbb R^{N\\times r}$ have full column rank and satisfy $\\ker K=\\operatorname{range}R$, and let $f\\in\\mathbb R^N$ be compatible in the sense $R^Tf=0$. Define the gauge solve as the procedure:\n\n1. Form the square augmented matrix and right-hand side\n$$\n\\begin{bmatrix}K&R\\\\R^T&0\\end{bmatrix},\\qquad \\begin{bmatrix}f\\\\0\\end{bmatrix}.\n$$\n2. Solve for $(u,\\gamma)\\in\\mathbb R^N\\times\\mathbb R^r$.\n3. Return $u$, which is the representative satisfying $R^Tu=0$.\n\nThe input hypotheses must be checked for the particular stiffness matrix. The procedure does not identify an omitted nullspace or assert a load is compatible.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Give the inputs, admissibility conditions, exact augmented system, and output; prove its algebraic properties separately.",
+        "justified_by": [
+          "lem-linear-elasticity-rigid-body-gauge-system-is-nonsingular"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§1, printed pp. 1–2, and §5, printed p. 12: rigid motions do not change strain or stress and must be respected in discretization."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 3, §§3.2 and 3.4, printed pp. 140–173: singular saddle matrices, kernels, and finite-dimensional stability."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-linear-elasticity-rigid-body-gauge-system-is-nonsingular",
+        "kind": "lemma",
+        "title": "The rigid-body gauge system is nonsingular",
+        "statement": "Let $K$ and $R$ satisfy the input hypotheses of [[alg-linear-elasticity-rigid-body-nullspace-gauge]]. Then $\\begin{bmatrix}K&R\\\\R^T&0\\end{bmatrix}$ is nonsingular. For $R^Tf=0$, its unique solution with right-hand side $\\begin{bmatrix}f\\\\0\\end{bmatrix}$ has $\\gamma=0$ and is the unique $u$ satisfying $Ku=f$ and $R^Tu=0$.",
+        "deps": [
+          "alg-linear-elasticity-rigid-body-nullspace-gauge"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove the homogeneous augmented system has only the zero solution, then use finite-dimensional rank-nullity and compatibility.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§1, printed pp. 1–2, and §5, printed p. 12: rigid-motion invariance of strain and the resulting stiffness nullspace."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 3, §§3.2 and 3.4, printed pp. 140–173: finite-dimensional matrix kernels and solvability."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-linear-elasticity-displacement-formulation-and-data",
+        "kind": "definition",
+        "title": "Linear isotropic elasticity: displacement form and data",
+        "statement": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be nonempty, open, bounded, connected, and Lipschitz. Use the real spaces $V=H^1_0(D;\\mathbb R^d)$ and $Q=L^2_0(D)$, norms $\\|v\\|_V=\\|\\nabla v\\|_{L^2(D)}$ and $\\|q\\|_Q=\\|q\\|_{L^2(D)}$, and $b(v,q)=-\\int_Dq\\,\\operatorname{div}v$ as in [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]]. For a real normed space $X$, write $X'$ for its continuous real dual with operator norm $\\|F\\|_{X'}=\\sup_{\\|x\\|_X\\le1}|F(x)|$. Let $\\mu\\in L^\\infty(D;\\mathbb R)$ satisfy $0<\\mu_0\\le\\mu(x)\\le\\mu_1<\\infty$ almost everywhere, let $\\lambda\\ge0$ be a scalar, and let $f\\in V'$. For any $w,z\\in H^1(D;\\mathbb R^d)$ define $\\varepsilon(w)=(\\nabla w+\\nabla w^T)/2$ and\n$$a_\\mu(w,z)=2\\int_D\\mu\\,\\varepsilon(w):\\varepsilon(z),\\qquad \\mathcal E_\\lambda(w,z)=a_\\mu(w,z)+\\lambda\\int_D\\operatorname{div}w\\,\\operatorname{div}z,$$\nand $\\sigma_\\lambda(w)=2\\mu\\varepsilon(w)+\\lambda(\\operatorname{div}w)I_d$. The homogeneous-Dirichlet model restricts these forms to $V$, with displacement zero on the full boundary; an example may prescribe a different boundary partition but gains no well-posedness claim from this definition. This is a linear small-strain model; no nonlinear, injectivity, or contrast-independent estimate is asserted.\n\nCountable Choice is inherited through the imported Sobolev and Stokes-space conventions; this definition makes no arbitrary-index selection.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the typed model and exact coefficient, strain, stress, load, boundary, and norm conventions.",
+        "justified_by": [
+          "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§§3.3–3.4 and 4.1, printed pp. 8–10: strain, Lamé stress, displacement form, and the Dirichlet Korn estimate."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §§8.1–8.2 and 8.12.1, printed pp. 460–463 and 519–520: nearly incompressible displacement form and its mixed counterpart."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-linear-elasticity-mixed-pressure-gauge-is-well-defined",
+        "kind": "lemma",
+        "title": "The mixed pressure has the mean-zero gauge",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open, let $0<\\lambda<\\infty$, and let $u\\in H^1_0(D;\\mathbb R^d)$. Since $D$ has finite measure, Hölder's inequality makes every $L^2(D)$ representative integrable, and almost-everywhere equal representatives have the same integral. Thus the local mean-zero space\n$$Q_D:=\\left\\{q\\in L^2(D;\\mathbb R):\\int_Dq=0\\right\\}.$$\nSet $p=-\\lambda\\operatorname{div}u$. Then $p\\in Q_D$. If additionally $d\\in\\{2,3\\}$ and $D$ is nonempty, connected, and Lipschitz, this $Q_D$ is exactly the space $Q=L^2_0(D)$ of [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]], so $p$ belongs to the mixed elasticity model's pressure space.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use the zero-mean divergence supplier and closure of L2_0 under scalar multiplication.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§5.1, printed p. 13: pressure is introduced through the divergence constraint."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §8.2, printed pp. 462–463: zero-mean pressure gauge from the divergence pairing."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+        "kind": "theorem",
+        "title": "Dirichlet elasticity energy bound and Galerkin estimate",
+        "statement": "Assume Countable Choice and the data of [[def-linear-elasticity-displacement-formulation-and-data]]. For every finite $\\lambda\\ge0$ there is a unique $u\\in V$ such that $\\mathcal E_\\lambda(u,v)=f(v)$ for every $v\\in V$. It satisfies\n$$\n\\|u\\|_V\\le\\mu_0^{-1}\\|f\\|_{V'},\\qquad \\sqrt{\\mathcal E_\\lambda(u,u)}\\le\\mu_0^{-1/2}\\|f\\|_{V'}.\n$$\nFor every finite-dimensional conforming subspace $V_h\\subset V$, the Galerkin solution $u_h$ is unique and\n$$\n\\|u-u_h\\|_V\\le\\frac{2\\mu_1+d\\lambda}{\\mu_0}\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.\n$$",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-lax-milgram",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations"
+        ],
+        "dependency_level": 3,
+        "strategy": "Bound the form, use the homogeneous Korn identity for coercivity, apply Lax-Milgram, test with the solution, and apply the stated Céa theorem.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§4.1, printed pp. 9–10: displacement weak form, Korn coercivity, and well-posedness; §5.1, printed p. 13: Lamé-parameter dependence."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 1, §1.3 and Chapter 8, §8.12.1, printed pp. 16–29 and 519–520: coercive Galerkin analysis and displacement formulation for nearly incompressible elasticity."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-linear-elasticity-near-incompressible-mixed-mini-pair",
+        "kind": "definition",
+        "title": "Displacement-pressure formulation and mini-element pair",
+        "statement": "Assume Countable Choice, as in the imported model and mini-element spaces. Use the model, spaces, and sign convention of [[def-linear-elasticity-displacement-formulation-and-data]]. For finite $\\lambda>0$, set $p=-\\lambda\\operatorname{div}u\\in Q$ and write the mixed equations\n$$\na_\\mu(u,v)+b(v,p)=f(v),\\qquad b(u,q)-\\lambda^{-1}(p,q)_{L^2(D)}=0\n$$\nfor all $v\\in V$ and $q\\in Q$. The pressure belongs to $Q$ by [[lem-linear-elasticity-mixed-pressure-gauge-is-well-defined]], which uses the zero-mean-divergence result. At the endpoint $\\lambda=\\infty$, define $\\lambda^{-1}=0$ and impose $b(u,q)=0$; this is the incompressible constraint. At $\\lambda=0$ use the primal displacement problem with $p=0$, not a mixed saddle system.\n\nFor a connected polygonal or polyhedral $D$ in dimension $d=2$ or $3$ with a conforming shape-regular affine simplicial mesh, the discrete pair $(V_h,Q_h)$ is exactly the P1-bubble/P1 mini-element pair of [[def-na-mini-element-p1-bubble-p1-spaces]]. The discrete mixed equations use the same $a_\\mu,b,\\lambda^{-1}$ and replace $V,Q$ by $V_h,Q_h$.",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "def-countable-choice",
+          "lem-linear-elasticity-mixed-pressure-gauge-is-well-defined"
+        ],
+        "dependency_level": 3,
+        "strategy": "State the pressure sign, compressibility term, incompressible convention, finite-element spaces, and the separate lambda=0 branch.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§5.1, printed p. 13: pressure reformulation of the nearly incompressible displacement equation and the limiting Stokes constraint."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §§8.2, 8.4.1–8.4.2, 8.6.1, 8.7.1, and 8.12.1, printed pp. 462–470, 487–492, and 519–520."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error",
+        "kind": "theorem",
+        "title": "Uniform mini-element stability through the incompressible limit",
+        "statement": "Assume Countable Choice and the model and mixed conventions of [[def-linear-elasticity-displacement-formulation-and-data]] and [[def-linear-elasticity-near-incompressible-mixed-mini-pair]]. Let $D$ be bounded, connected, and Lipschitz, $d\\in\\{2,3\\}$, $0<\\mu_0\\le\\mu\\le\\mu_1$, and $f\\in V'$. For every $\\lambda\\in[0,\\infty]$ the continuous problem has a unique solution; at $\\lambda=0$ use the primal problem and set $p_0=0$, while at $\\lambda=\\infty$ impose $\\operatorname{div}u=0$. If $D$ is polygonal or polyhedral and $\\{\\mathcal T_h\\}$ is any conforming shape-regular affine simplicial mesh family with a common shape-regularity bound, the mini-element discrete problem has a unique solution for every $h$ and every $\\lambda\\in[0,\\infty]$, with $p_{h,0}=0$. There is a constant $C$ depending only on $d,D,\\mu_0,\\mu_1$ and the common shape-regularity bound, but independent of $\\lambda$ and $h$, such that\n$$\\|u_\\lambda\\|_V+\\|p_\\lambda\\|_Q\\le C\\|f\\|_{V'},\\qquad \\|u_\\lambda-u_{h,\\lambda}\\|_V+\\|p_\\lambda-p_{h,\\lambda}\\|_Q\\le C\\inf_{v_h\\in V_h,\\,q_h\\in Q_h}\\bigl(\\|u_\\lambda-v_h\\|_V+\\|p_\\lambda-q_h\\|_Q\\bigr).$$\nAt $\\lambda=\\infty$ the constraint is $\\operatorname{div}u=0$. The estimate makes no heterogeneous-coefficient robustness claim beyond the displayed dependence.",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "def-linear-elasticity-near-incompressible-mixed-mini-pair",
+          "lem-linear-elasticity-mixed-pressure-gauge-is-well-defined",
+          "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-na-continuous-stokes-divergence-infsup",
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "thm-na-mini-element-fortin-stability"
+        ],
+        "dependency_level": 8,
+        "strategy": "Separate the low-lambda projected primal branch from the high-lambda perturbed saddle branch; handle lambda=infinity by kernel coercivity and inf-sup, then prove uniform best-approximation bounds.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§5.1, printed p. 13: the displacement-pressure equations and the limiting incompressibility constraint."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §§8.2, 8.4.1–8.4.2, 8.6.1, 8.7.1, and 8.12.1, printed pp. 462–470, 487–492, and 519–520: pressure gauge, Fortin stability, MINI pair, and perturbed Stokes limit."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2625,
+    "id": "elasticity-near-incompressibility-and-locking-free-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Linear elasticity, nearly incompressible limits and locking — Examples",
+    "companion": "elasticity-near-incompressibility-and-locking-free-discretization",
+    "requires": [
+      "elasticity-near-incompressibility-and-locking-free-discretization"
+    ],
+    "items": [
+      {
+        "id": "ex-linear-elasticity-rigid-body-stiffness-nullspace",
+        "kind": "example",
+        "title": "Rigid motions in a free-body stiffness nullspace",
+        "statement": "Let $D\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, be a connected polygonal or polyhedral domain with a finite conforming affine simplicial mesh $\\mathcal T_h$ and no essential boundary constraints. Define the continuous P1 vector space $S_h=\\{v\\in C^0(\\overline D;\\mathbb R^d):v|_K\\text{ is affine for every }K\\in\\mathcal T_h\\}$ and its global nodal basis $(\\phi_i)_{i=1}^N$. For constants $\\mu>0$ and $\\lambda\\ge0$, set $\\varepsilon(v)=(\\nabla v+\\nabla v^T)/2$, $k(v,w)=2\\mu\\int_D\\varepsilon(v):\\varepsilon(w)+\\lambda\\int_D\\operatorname{div}v\\,\\operatorname{div}w$, and $K_{ij}=k(\\phi_j,\\phi_i)$. For every infinitesimal rigid motion $r(x)=a+\\Omega x$, with $a\\in\\mathbb R^d$ and $\\Omega^T=-\\Omega$, its nodal coefficient vector lies in $\\ker K$. Thus the range of any complete nullspace basis supplied to [[alg-linear-elasticity-rigid-body-nullspace-gauge]] must contain these translation and rotation vectors. This example does not claim they exhaust the nullspace on every mesh.",
+        "deps": [
+          "alg-linear-elasticity-rigid-body-nullspace-gauge"
+        ],
+        "dependency_level": 1,
+        "strategy": "Represent each rigid motion exactly in the continuous P1 space and evaluate its strain and divergence.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§1, printed pp. 1–2, and §5, printed p. 12: translations and rotations preserve strain and must be represented in discretizations."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 3, §§3.2–3.4, printed pp. 140–173: finite-dimensional kernels and singular matrix systems."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-linear-elasticity-cantilever-manufactured-shear",
+        "kind": "example",
+        "title": "A manufactured shear field on a clamped rectangle",
+        "statement": "Assume Countable Choice. On $D=(0,1)^2$, clamp the left edge $\\Gamma_D=\\{0\\}\\times(0,1)$ and prescribe traction on the other three open edges $\\Gamma_N$. Let $\\mu>0$ and $\\lambda\\ge0$ be constants and set $u(x,y)=(0,x)$. The stress $\\sigma_\\lambda(u)=2\\mu\\varepsilon(u)+\\lambda(\\operatorname{div}u)I_2$ is constant and satisfies $-\\operatorname{div}\\sigma_\\lambda(u)=0$, $u|_{\\Gamma_D}=0$, and $\\sigma_\\lambda(u)n=(0,\\mu)$ on the right edge, $(\\mu,0)$ on the top edge, and $(-\\mu,0)$ on the bottom edge. This is a manufactured linear-elasticity solution; no uniqueness result for partial Dirichlet data is asserted.",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Compute the affine gradient, symmetric strain, constant stress, and boundary tractions directly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§§3.1–3.4 and 4.1, printed pp. 7–10: strain, stress, traction, and the displacement equilibrium equation."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §8.12.1, printed pp. 519–520: homogeneous Dirichlet elasticity and its variational form."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-linear-elasticity-p1-volumetric-locking-fixed-mesh",
+        "kind": "example",
+        "title": "A fixed-mesh P1 volumetric-locking obstruction",
+        "statement": "Assume Countable Choice. On $D=(0,1)^2$, let $c=(1/2,1/2)$ and split the square into the four triangles joining $c$ to consecutive corners. The continuous P1 vector space with zero boundary values has no nonzero elementwise divergence-free field. Choose a nonzero smooth compactly supported divergence-free displacement $u$ and set $f=-\\operatorname{div}(2\\varepsilon(u))$. Then $u$ solves the continuous model with $\\mu=1$ for every finite $\\lambda\\ge0$, but the P1 displacement Galerkin solutions on this fixed mesh tend to zero as $\\lambda\\to\\infty$, so their $V$-norm error tends to $\\|u\\|_V>0$. The mini mixed pair on the same mesh retains the $\\lambda$-uniform best-approximation estimate of [[thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error]]. This is a fixed-mesh obstruction, not a mesh-uniform P1 rate.",
+        "deps": [
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "def-linear-elasticity-near-incompressible-mixed-mini-pair",
+          "thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "Compute all four element divergences, construct one smooth solenoidal exact solution, and use finite-dimensional compactness to prove the P1 discrete limit is zero.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Introduction to Linear Elasticity and Its Finite Element Approximation (complete 13-page notes)",
+              "url": "https://cpb-us-e2.wpmucdn.com/sites.uci.edu/dist/5/3624/files/2019/01/elasticity.pdf",
+              "locator": "§5.1, printed p. 13: locking from a large Lamé parameter and the divergence-free approximation space."
+            },
+            {
+              "title": "Daniele Boffi, Franco Brezzi, Michel Fortin, Mixed Finite Element Methods and Applications (complete 691-page text)",
+              "url": "https://www.karlin.mff.cuni.cz/~knobloch/FILES/Boffi-Brezzi-Fortin-Mixed_FEMs_and_Applications.pdf",
+              "locator": "Chapter 8, §§8.3 and 8.12.1, printed pp. 466–468 and 519–520: overconstrained low-order displacement spaces and the mixed pressure formulation."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

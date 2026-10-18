@@ -1,0 +1,37 @@
+---
+id: alg-strong-rank-revealing-qr-with-finite-swaps
+kind: algorithm
+title: "Strong rank-revealing QR with finite swaps and explicit statuses"
+status: published
+origin: pipeline
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block, thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]
+dependency_level: 0
+verification:
+  precheck: n/a
+  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-published-qr-local-repair/alg-strong-rank-revealing-qr-with-finite-swaps.json
+sources:
+  references:
+    - title: "Ming Gu and Stanley C. Eisenstat, Efficient Algorithms for Computing a Strong Rank-Revealing QR Factorization, §§3–4"
+      url: "https://math.berkeley.edu/~mgu/MA273/Strong_RRQR.pdf"
+    - title: "Lecture Notes on Matrix Computations, Remark 3.2.2"
+      url: "https://zhims.github.io/doc/note/computing/matrixComputations.pdf"
+---
+
+## Definition
+
+Input a real or complex matrix $A\in\mathbb F^{m\times n}$ with $m\ge n$, a target $k$ with $0\le k<n$, a factor $f\ge1$, and a finite swap cap $S\in\mathbb N\cup\{0\}$. The exact-arithmetic version is specified below. In finite precision, $A$ denotes the represented matrix: each real and imaginary component, and $f$, is a finite binary floating-point number, interpreted as its exact dyadic rational value. The arithmetic format and rounding rule are fixed for a run. A nonfinite input or required rounded intermediate returns `range-failure`. This mode makes no rank claim about an unspecified matrix before input rounding.
+
+For the finite-precision rank test, copy the represented $A$ into exact rational complex arithmetic. Scan columns from left to right with a current pivot row, select the first nonzero entry at or below that row, interchange rows, and eliminate entries below it by exact rational row operations. If no such entry exists, skip that column. Increment the pivot row only after a nonzero pivot. The number $r$ of pivots is the reported exact represented-input rank. Return `rank-deficient-input` if $r<n$; otherwise continue with rank status `full-column-rank`. This test uses unbounded-size rational integers, not the rounded QR diagonal or a numerical-rank threshold. In exact mode, use the same finite row-elimination instructions over the exact input field to decide the rank condition in step 1.
+
+All remaining finite-precision QR factorizations use finite elimination sweeps: process columns in order, with the declared pivoting only at initialization, and annihilate subdiagonal entries by at most $mn$ local Householder/Givens updates per factorization. A zero target needs no update, and a zero pair uses the identity rotation. Each update is a fixed finite sequence of scalar arithmetic and square-root operations; a nonzero denominator is checked before division. An invalid operation, nonfinite quantity, or inability to form an update returns `range-failure`. Maximum searches scan finite lists using rounded candidate quantities and the stated tie rules. In step 2, decide singularity of the represented candidate $R_{11}$ by the same exact rational elimination before a rounded triangular solve; a singular block returns `singular-selected-block`. These finite-precision decisions do not assert that rounded factors are exact factors of $A$.
+
+1. If $A$ is not full column rank, return `rank-deficient-input`. Otherwise initialize a column permutation $\Pi$ and the full column-pivoted QR factorization $A\Pi=QR$, where $Q\in\mathbb F^{m\times m}$ is unitary and $R\in\mathbb F^{m\times n}$ is upper trapezoidal. At each pivot choose a remaining column of maximal residual $2$-norm, resolving ties by the smallest original column index. Partition $R=\begin{bmatrix}R_{11}&R_{12}\\0&R_{22}\end{bmatrix}$ after the first $k$ rows and columns. Do not return the reduced QR form. The selected first $k$ columns then have a nonsingular leading block. For $k=0$, return this full factorization with `success`.
+2. For $k>0$, refactor the current fixed column order in the full QR form, without further pivoting whenever needed, using unitary Householder or Givens transformations. If the selected leading block is singular, return `singular-selected-block`.
+3. Form $X=R_{11}^{-1}R_{12}$. For $1\le i\le k$ let $\omega_i=\|e_i^*R_{11}^{-1}\|_2$; for $1\le j\le n-k$ let $\gamma_j=\|R_{22}(:,j)\|_2$. Define the swap score $s_{ij}=\bigl(|X_{ij}|^2+(\omega_i\gamma_j)^2\bigr)^{1/2}$.
+4. If $\max_{i,j}|X_{ij}|>f$, choose the lexicographically first pair attaining the largest $|X_{ij}|$. Otherwise, if $\max_{i,j}s_{ij}>f$, choose the lexicographically first pair attaining the largest score. If neither inequality holds, return `success` and the factors, permutation, $X$, and maximum score. The first branch retains the usual coefficient-triggered swap; the second controls the trailing residual needed for the strong spectral comparison.
+5. When a violating pair was chosen, if the swap count is already $S$, return `swap-budget-exhausted` with the current partial factors. Otherwise interchange the chosen selected and trailing columns, restore triangular form with Givens rotations, increment the swap count, and return to step 2.
+
+The statuses are `success`, `rank-deficient-input`, `singular-selected-block`, `swap-budget-exhausted`, and `range-failure`. In particular, ordinary column-pivoted QR is only the initialization: the procedure does not assert that its output alone satisfies the strong bounds. Both exact and finite-precision outputs use the full factor shape. A finite-precision `success` is a candidate until the following certificate is verified. Retain the ordered local transformation data representing an exact unitary product $W$ separately from the rounded dense $Q$. Let $\widehat R$ denote the returned upper trapezoidal matrix. A certificate consists of a nonsingular $\widehat R_{11}$, rigorous upper bounds $b_{ij}$ on the exact real numbers $\bigl(|(\widehat R_{11}^{-1}\widehat R_{12})_{ij}|^2+\|e_i^*\widehat R_{11}^{-1}\|_2^2\|\widehat R_{22}(:,j)\|_2^2\bigr)^{1/2}$, and $\varepsilon\ge0$ with $\|A\Pi-W\widehat R\|_2\le\varepsilon$. All $b_{ij}\le f$ are required. For $k=0$ there are no score or inverse conditions. The bounds concern the represented input $A$; a claim about different intended data also needs its separately supplied input-error bound. Ordinary rounded score and residual evaluations do not constitute this certificate. Exact arithmetic on represented data or validated outward enclosures may establish it. Certification is optional postprocessing, separate from the finite core status: use only a prescribed finite list of exact checks or outward-enclosure operations, with a fixed finite refinement budget chosen before that attempt (zero is allowed). There is no search until certification succeeds. Failure to obtain valid finite bounds within that budget, including a zero-containing divisor enclosure or a range failure in certification, sets the certificate status to `uncertified` and preserves the core status. A supplied certificate is accepted only after those rigorous checks; otherwise it is absent. If certification is unavailable or a bound exceeds its threshold, report `uncertified` for the certificate, retaining the algorithm status and all candidate outputs.

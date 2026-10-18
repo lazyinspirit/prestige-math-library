@@ -1,0 +1,595 @@
+[
+  {
+    "order": 2620,
+    "id": "invariant-domain-and-entropy-stable-conservative-schemes",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Positivity, invariant domains and entropy-stable systems fluxes",
+    "companion": "invariant-domain-and-entropy-stable-conservative-schemes-examples",
+    "requires": [
+      "high-resolution-tvd-eno-and-weno-methods"
+    ],
+    "items": [
+      {
+        "id": "def-pe03-convex-invariant-domain",
+        "kind": "definition",
+        "title": "Convex invariant domains for a one-step update",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "For a one-step map on N cell states, a convex invariant domain is a convex state set K whose N-fold product is mapped into itself.",
+        "strategy": "Give the typed definition and exact scope; no preservation property is inferred for another map.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J.-L. Guermond and B. Popov, Invariant Domains and First-Order Continuous Finite Element Approximation for Hyperbolic Systems",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_popov_sinum_hyperbolic_systems_2016.pdf",
+              "locator": "\u00a72.2, Definitions 2.3\u20132.4, PDF pp. 3\u20134; complete 24-page article read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe03-system-entropy-pair-and-potential",
+        "kind": "definition",
+        "title": "Convex entropy pairs, entropy variables, and entropy potentials for systems",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families"
+        ],
+        "dependency_level": 1,
+        "statement": "For a C2 convex entropy eta and compatible entropy flux q on a convex open state domain, define v=grad eta and psi=v dot F-q.",
+        "strategy": "State derivative and column-vector conventions; no existence of q is asserted.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Tadmor, Entropy Stable Schemes for Hyperbolic Conservation Laws, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "\u00a74.1, Entropy Variables, PDF p. 11; full 27-page chapter read"
+            },
+            {
+              "title": "R. B\u00fcrger, P. E. M\u00e9ndez, and C. Par\u00e9s, On Entropy Stable Schemes for Degenerate Parabolic Multispecies Kinematic Flow Models",
+              "url": "https://www.ci2ma.udec.cl/pdf/pre-publicaciones2/2018/pp18-24.pdf",
+              "locator": "\u00a72.1, entropy variables and potential, PDF pp. 5\u20136; full 29-page preprint read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-pe03-convex-scaling-positivity-limiter",
+        "kind": "algorithm",
+        "title": "Maximal convex scaling toward an admissible cell mean",
+        "deps": [
+          "def-pe03-convex-invariant-domain"
+        ],
+        "dependency_level": 1,
+        "statement": "For finitely many positive-weight nodes with mean in a closed convex set K, return the maximal theta in [0,1] such that every segment-scaled node remains in K.",
+        "strategy": "Specify the finite input, output, feasible set, and maximum selection; make no complexity claim.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "X. Zhang and C.-W. Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "\u00a72, positivity-preserving scaling limiter, PDF pp. 5\u20139; complete article read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe03-first-order-hll-finite-volume-update",
+        "kind": "definition",
+        "title": "First-order finite-volume update using supplied HLL speeds",
+        "deps": [
+          "def-hyperbolic-system-and-characteristic-families",
+          "def-hll-two-wave-flux"
+        ],
+        "dependency_level": 2,
+        "statement": "On a periodic uniform mesh, define the first-order conservative cell-mean update from shared HLL middle-branch fluxes with supplied speeds S_L<0<S_R.",
+        "strategy": "State the indexing, periodic convention, flux branch, and supplied-speed caveat.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Part II, HLL solver, derivation and implementation, complete chapter inspected"
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Part II, HLLE Solver, complete chapter inspected"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe03-euler-positive-margin-domain",
+        "kind": "definition",
+        "title": "Positive-margin admissible states for ideal-gas Euler",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure"
+        ],
+        "justified_by": [
+          "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed"
+        ],
+        "dependency_level": 2,
+        "statement": "For gamma>1 and epsilon>0, define the Euler state set rho>=epsilon and E-m^2/(2rho)>=epsilon.",
+        "strategy": "Define the set and defer its closedness and convexity to a proved proposition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "X. Zhang and C.-W. Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "\u00a72, positivity-preserving Euler admissible set and limiter, PDF pp. 5\u20139; complete 34-page article read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe03-euler-llf-split-state-positive",
+        "kind": "lemma",
+        "title": "Ideal-gas Euler states remain positive under Lax\u2013Friedrichs flux splitting",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure"
+        ],
+        "dependency_level": 2,
+        "statement": "If a>=|u|+c for an admissible one-dimensional ideal-gas Euler state, then U\u00b1F(U)/a have positive density and internal energy.",
+        "strategy": "Compute the split density and internal energy, then bound the exact pressure term using c^2=gamma p/rho.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Part II, Euler equation of state and HLLE wave-speed branch, complete chapter inspected"
+            },
+            {
+              "title": "X. Zhang and C.-W. Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "\u00a72, sufficient Euler positivity condition and Lax\u2013Friedrichs/HLL flux discussion, PDF pp. 5\u20139; complete article read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe03-tadmor-entropy-conservative-flux",
+        "kind": "definition",
+        "title": "Tadmor entropy-conservative two-point flux",
+        "deps": [
+          "def-pe03-system-entropy-pair-and-potential"
+        ],
+        "dependency_level": 2,
+        "statement": "Define a consistent symmetric two-point flux by the exact entropy-variable jump identity against the entropy potential.",
+        "strategy": "State consistency, symmetry, domain, and jump identity; do not claim existence.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Tadmor, Entropy Stable Schemes for Hyperbolic Conservation Laws, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "\u00a7\u00a74.2 and 4.6, entropy-conservative fluxes, PDF pp. 11\u201317; full chapter read"
+            },
+            {
+              "title": "R. B\u00fcrger, P. E. M\u00e9ndez, and C. Par\u00e9s, On Entropy Stable Schemes for Degenerate Parabolic Multispecies Kinematic Flow Models",
+              "url": "https://www.ci2ma.udec.cl/pdf/pre-publicaciones2/2018/pp18-24.pdf",
+              "locator": "\u00a72.2, entropy-conservative numerical flux, PDF pp. 6\u20138; full preprint read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+        "kind": "proposition",
+        "title": "Euler positive states are convex and positive-margin sets are closed convex",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-pe03-euler-positive-margin-domain"
+        ],
+        "dependency_level": 3,
+        "statement": "The ideal-gas Euler positive state set and the positive-margin set are convex, and the positive-margin set is closed.",
+        "strategy": "Prove the kinetic-energy perspective inequality by weighted Cauchy\u2013Schwarz and verify closedness by continuity away from rho=0.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Part II, ideal-gas Euler variables and positive-density/pressure state domain, complete chapter inspected"
+            },
+            {
+              "title": "X. Zhang and C.-W. Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "\u00a72, Euler admissible set and convex-combination argument, PDF pp. 5\u20139; complete 34-page article read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-pe03-entropy-stable-dissipative-flux",
+        "kind": "definition",
+        "title": "Entropy-stable flux from positive-semidefinite entropy-variable dissipation",
+        "deps": [
+          "def-pe03-tadmor-entropy-conservative-flux"
+        ],
+        "dependency_level": 3,
+        "statement": "Define F_es=F_ec-D[v]/2 for symmetric positive-semidefinite D.",
+        "strategy": "State the matrix condition and exclude fully discrete conclusions.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Tadmor, Entropy Stable Schemes for Hyperbolic Conservation Laws, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "\u00a7\u00a74.2\u20134.3, entropy-conservative fluxes and numerical viscosity, PDF pp. 11\u201313; full chapter read"
+            },
+            {
+              "title": "R. B\u00fcrger, P. E. M\u00e9ndez, and C. Par\u00e9s, On Entropy Stable Schemes for Degenerate Parabolic Multispecies Kinematic Flow Models",
+              "url": "https://www.ci2ma.udec.cl/pdf/pre-publicaciones2/2018/pp18-24.pdf",
+              "locator": "\u00a7\u00a72.2\u20132.3, entropy-conservative flux and added entropy-variable diffusion, PDF pp. 6\u20138; full preprint read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pe03-hll-half-cell-riemann-averages",
+        "kind": "lemma",
+        "title": "First-order HLL updates are averages of adjacent half-cell fan averages",
+        "deps": [
+          "def-pe03-first-order-hll-finite-volume-update",
+          "def-hll-two-wave-flux",
+          "thm-hll-flux-is-consistent-and-conservative"
+        ],
+        "dependency_level": 3,
+        "statement": "Under the one-sided HLL CFL bounds, compute both half-cell fan averages and express each updated cell mean as their half-sum.",
+        "strategy": "Derive the HLL flux identities algebraically, integrate the piecewise constant fan over half-cells, and substitute into the update.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Part II, HLL solver, middle-state conservation and implementation, complete chapter inspected"
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Part II, HLLE middle-state formula, complete chapter inspected"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe03-hll-update-preserves-convex-invariant-domain",
+        "kind": "theorem",
+        "title": "First-order HLL update preserves a convex invariant domain under admissible fan averages",
+        "deps": [
+          "def-pe03-convex-invariant-domain",
+          "def-pe03-first-order-hll-finite-volume-update",
+          "lem-pe03-hll-half-cell-riemann-averages"
+        ],
+        "dependency_level": 4,
+        "statement": "If cell states and HLL intermediate states lie in a convex set and the stated half-cell CFL coefficients are nonnegative, one update remains in that set.",
+        "strategy": "Show each HLL half-cell average is a convex combination, then average the two halves.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J.-L. Guermond and B. Popov, Invariant Domains and First-Order Continuous Finite Element Approximation for Hyperbolic Systems",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_popov_sinum_hyperbolic_systems_2016.pdf",
+              "locator": "\u00a72.2, convex invariant domains and Riemann averages, PDF pp. 3\u20134; complete article read"
+            },
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Shallow_water_approximate.html",
+              "locator": "Part II, HLL solver derivation and finite-volume use, complete chapter inspected"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux",
+        "kind": "theorem",
+        "title": "Semidiscrete cell entropy inequality for Tadmor-dissipative fluxes",
+        "deps": [
+          "def-pe03-system-entropy-pair-and-potential",
+          "def-pe03-tadmor-entropy-conservative-flux",
+          "def-pe03-entropy-stable-dissipative-flux"
+        ],
+        "dependency_level": 4,
+        "statement": "On a periodic mesh, a semidiscrete finite-volume system with Tadmor entropy-conservative flux plus symmetric positive-semidefinite entropy-variable dissipation satisfies a local cell entropy inequality.",
+        "strategy": "Compute the face jump defect, derive the consistent numerical entropy flux, and combine the two face contributions in each cell.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Tadmor, Entropy Stable Schemes for Hyperbolic Conservation Laws, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "\u00a7\u00a74.1\u20134.3, entropy variables, jump condition, and semidiscrete entropy balance, PDF pp. 11\u201313; complete chapter read"
+            },
+            {
+              "title": "R. B\u00fcrger, P. E. M\u00e9ndez, and C. Par\u00e9s, On Entropy Stable Schemes for Degenerate Parabolic Multispecies Kinematic Flow Models",
+              "url": "https://www.ci2ma.udec.cl/pdf/pre-publicaciones2/2018/pp18-24.pdf",
+              "locator": "\u00a72.2, semidiscrete entropy balance from the jump identity, PDF pp. 6\u20138; complete preprint read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity",
+        "kind": "theorem",
+        "title": "Convex scaling preserves the cell mean and positive-margin node states",
+        "deps": [
+          "alg-pe03-convex-scaling-positivity-limiter",
+          "def-pe03-euler-positive-margin-domain",
+          "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed"
+        ],
+        "dependency_level": 4,
+        "statement": "For a positive-margin Euler mean and positive quadrature weights, the maximal convex limiter exists, preserves the weighted mean, keeps every node positive, and is inactive under a strict accuracy margin.",
+        "strategy": "Use compactness of the closed feasible-parameter set, compute the weighted mean, and prove the strict-margin inactivity condition.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "X. Zhang and C.-W. Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "\u00a72, positivity-preserving scaling limiter and strict positive-state accuracy, PDF pp. 5\u20139; complete article read"
+            },
+            {
+              "title": "J.-L. Guermond and B. Popov, Invariant Domains and First-Order Continuous Finite Element Approximation for Hyperbolic Systems",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_popov_sinum_hyperbolic_systems_2016.pdf",
+              "locator": "\u00a72.2, convex invariant sets and convex combinations, PDF pp. 3\u20134; complete article read"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pe03-ideal-gas-llf-branch-preserves-positivity",
+        "kind": "theorem",
+        "title": "Symmetric HLL speeds preserve ideal-gas density and internal-energy positivity",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-hll-two-wave-flux",
+          "def-pe03-first-order-hll-finite-volume-update",
+          "lem-pe03-euler-llf-split-state-positive",
+          "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+          "lem-pe03-hll-half-cell-riemann-averages",
+          "thm-pe03-hll-update-preserves-convex-invariant-domain"
+        ],
+        "dependency_level": 5,
+        "statement": "On the symmetric branch S_L=-a,S_R=a with a>=max(|u_L|+c_L,|u_R|+c_R) and 2nu a<=1, the first-order ideal-gas Euler HLL update preserves positive density and pressure.",
+        "strategy": "Prove both Lax\u2013Friedrichs split states are admissible, express the HLL middle state as their convex average, and invoke the invariant-domain update theorem.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Part II, HLLE Solver and ideal-gas state variables, complete chapter inspected"
+            },
+            {
+              "title": "X. Zhang and C.-W. Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "\u00a72, positive Euler states, Lax\u2013Friedrichs/HLL fluxes and CFL convex combinations, PDF pp. 5\u20139; full article read"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2621,
+    "id": "invariant-domain-and-entropy-stable-conservative-schemes-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Positivity, invariant domains and entropy-stable systems fluxes \u2014 Examples",
+    "companion": "invariant-domain-and-entropy-stable-conservative-schemes",
+    "requires": [
+      "invariant-domain-and-entropy-stable-conservative-schemes"
+    ],
+    "items": [
+      {
+        "id": "ex-pe03-burgers-entropy-residual",
+        "kind": "example",
+        "title": "Exact Tadmor entropy residual for a dissipative Burgers flux",
+        "deps": [
+          "def-pe03-system-entropy-pair-and-potential",
+          "def-pe03-tadmor-entropy-conservative-flux",
+          "def-pe03-entropy-stable-dissipative-flux"
+        ],
+        "dependency_level": 4,
+        "statement": "For Burgers flux with quadratic entropy, the symmetric Tadmor flux is consistent and satisfies the jump identity; unit entropy-variable dissipation gives residual -1/2 at the jump 1 to 0.",
+        "strategy": "Verify entropy compatibility and factor the cubic jump exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Tadmor, Entropy Stable Schemes for Hyperbolic Conservation Laws, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "\u00a7\u00a74.1\u20134.3, entropy potential and entropy-stable dissipation, PDF pp. 11\u201313; full chapter read"
+            },
+            {
+              "title": "R. B\u00fcrger, P. E. M\u00e9ndez, and C. Par\u00e9s, On Entropy Stable Schemes for Degenerate Parabolic Multispecies Kinematic Flow Models",
+              "url": "https://www.ci2ma.udec.cl/pdf/pre-publicaciones2/2018/pp18-24.pdf",
+              "locator": "\u00a72.2, entropy-conservative jump identity, PDF pp. 6\u20138; full preprint read"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe03-conservative-positivity-rescaling",
+        "kind": "example",
+        "title": "Two Euler quadrature nodes rescaled to a positive margin",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-pe03-euler-positive-margin-domain",
+          "alg-pe03-convex-scaling-positivity-limiter",
+          "thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity"
+        ],
+        "dependency_level": 5,
+        "statement": "Two equal-weight Euler nodes with mean (1,0,1) admit the exact maximal scaling theta=1/4 into K_(7/5,1/2), preserving their mean and positive pressure.",
+        "strategy": "Compute the internal energy along the scaling segment and check the mean directly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "X. Zhang and C.-W. Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "\u00a72, convex scaling limiter for Euler density and pressure, PDF pp. 5\u20139; full article read"
+            },
+            {
+              "title": "J.-L. Guermond and B. Popov, Invariant Domains and First-Order Continuous Finite Element Approximation for Hyperbolic Systems",
+              "url": "https://people.tamu.edu/~guermond/PUBLICATIONS/guermond_popov_sinum_hyperbolic_systems_2016.pdf",
+              "locator": "\u00a72.2, preservation by convex combinations, PDF pp. 3\u20134; complete article read"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe03-entropy-stable-underresolved-shock",
+        "kind": "example",
+        "title": "An entropy-stable Burgers flux still smears an under-resolved shock",
+        "deps": [
+          "def-pe03-system-entropy-pair-and-potential",
+          "def-pe03-tadmor-entropy-conservative-flux",
+          "def-pe03-entropy-stable-dissipative-flux",
+          "thm-pe03-semidiscrete-entropy-inequality-for-dissipative-flux"
+        ],
+        "dependency_level": 5,
+        "statement": "For Burgers data (1,1,0,0), a unit-dissipation Tadmor flux has a negative interface entropy residual but one coarse forward-Euler update produces 11/12 and 1/3 adjacent to the jump.",
+        "strategy": "Verify the shock entropy sign, the numerical fluxes, the semidiscrete residual, and the explicit finite update separately.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Tadmor, Entropy Stable Schemes for Hyperbolic Conservation Laws, Handbook of Numerical Methods for Hyperbolic Problems, Vol. 17",
+              "url": "https://math.umd.edu/~tadmor/references/files/Tadmor%20entropy%20stable%20schemes-r%20handbook2016.pdf",
+              "locator": "\u00a7\u00a74.1\u20134.3, semidiscrete entropy stability and numerical viscosity, PDF pp. 11\u201313; complete chapter read"
+            },
+            {
+              "title": "R. B\u00fcrger, P. E. M\u00e9ndez, and C. Par\u00e9s, On Entropy Stable Schemes for Degenerate Parabolic Multispecies Kinematic Flow Models",
+              "url": "https://www.ci2ma.udec.cl/pdf/pre-publicaciones2/2018/pp18-24.pdf",
+              "locator": "\u00a7\u00a72.2\u20132.3, entropy stability and added dissipation, PDF pp. 6\u20138; full preprint read"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pe03-near-vacuum-euler-hll-update",
+        "kind": "example",
+        "title": "A near-vacuum Euler state remains positive under symmetric HLL speeds",
+        "deps": [
+          "def-ideal-gas-euler-state-and-pressure",
+          "def-hll-two-wave-flux",
+          "def-pe03-first-order-hll-finite-volume-update",
+          "prop-pe03-euler-state-and-margin-domains-are-convex-and-closed",
+          "lem-pe03-euler-llf-split-state-positive",
+          "lem-pe03-hll-half-cell-riemann-averages",
+          "thm-pe03-ideal-gas-llf-branch-preserves-positivity"
+        ],
+        "dependency_level": 6,
+        "statement": "For gamma=7/5, density 10^-8 and pressure 10^-12, the stated symmetric HLL wave-speed branch satisfies its CFL and yields a positive one-step update.",
+        "strategy": "Verify the Euler states, sound speed, speed branch, CFL, and convex update coefficients exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo, Riemann Problems and Jupyter Solutions",
+              "url": "https://www.clawpack.org/riemann_book/html/Euler_approximate.html",
+              "locator": "Part II, ideal-gas Euler and HLLE solver, complete chapter inspected"
+            },
+            {
+              "title": "X. Zhang and C.-W. Shu, On Positivity-Preserving High Order Discontinuous Galerkin Schemes for Compressible Euler Equations on Rectangular Meshes",
+              "url": "https://www.math.purdue.edu/~zhan1966/research/paper/euler.pdf",
+              "locator": "\u00a72, positivity of density and pressure, PDF pp. 5\u20139; full article read"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

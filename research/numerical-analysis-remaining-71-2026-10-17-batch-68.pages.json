@@ -1,0 +1,972 @@
+[
+  {
+    "order": 2690,
+    "id": "hp-finite-elements-and-spectral-element-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "hp finite elements and spectral elements",
+    "companion": "hp-finite-elements-and-spectral-element-methods-examples",
+    "requires": [
+      "spectral-collocation-and-galerkin-methods",
+      "curved-mesh-geometry-and-conservative-mesh-transfer"
+    ],
+    "items": [
+      {
+        "id": "def-hp-integrated-legendre-projector",
+        "kind": "definition",
+        "title": "Endpoint-preserving integrated Legendre projector",
+        "deps": [
+          "def-legendre-polynomial-family-and-l2-pairing",
+          "lem-legendre-weighted-derivative-orthogonality-and-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "For $p\\ge1$ and $g\\in L^2(-1,1)$, define the degree-$(p-1)$ Legendre orthogonal projection\n$$\n\\Pi_{p-1}g:=\\sum_{n=0}^{p-1}\\frac{2n+1}{2}\\left(\\int_{-1}^1g(t)P_n(t)\\,dt\\right)P_n.\n$$\nFor $c\\in\\mathbb R$, define the endpoint-anchored integrated projector\n$$\n\\mathcal I_p(c,g)(x):=c+\\int_{-1}^x\\Pi_{p-1}g(t)\\,dt,\\qquad -1\\le x\\le1.\n$$\nIf an absolutely continuous function $f$ is represented as $f(x)=f(-1)+\\int_{-1}^xf'(t)\\,dt$ with $f'\\in L^2$, write $I_pf:=\\mathcal I_p(f(-1),f')$. The finite sum and integral are defined for every such input; no choice axiom is used in this definition.",
+        "source_path": "items/def-hp-integrated-legendre-projector.md",
+        "local_order": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, p-version FEM",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§§30.1–30.4: Legendre projection and endpoint-preserving integrated polynomial interpolation."
+            },
+            {
+              "title": "Leszek F. Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.oden.utexas.edu/~leszek/classes/EM394F/book.pdf",
+              "locator": "§3.1.4, printed pp. 64–68: integrated hierarchical bases with endpoint degrees of freedom."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-hp-variable-degree-spaces-on-matching-meshes",
+        "kind": "definition",
+        "title": "Variable-degree conforming hp spaces on matching affine meshes",
+        "deps": [
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $d\\ge2$ and let $\\mathcal T$ be a finite matching affine simplicial mesh of a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$ in the sense of [[def-matching-affine-simplicial-meshes]]. A **degree map** is a function $p:\\mathcal T\\to\\mathbb N_0$ with finite values. The broken simplex space associated with $(\\mathcal T,p)$ is\n$$\nV^{\\mathrm{br}}(\\mathcal T,p):=\\{v\\in L^2(\\Omega):v|_K\\in\\mathbb P_{p_K}(K)\\text{ for every }K\\in\\mathcal T\\},\n$$\nwhere $p_K:=p(K)$ and $\\mathbb P_m(K)$ denotes restrictions of real polynomials of total degree at most $m$. Its **conforming hp space** is the subspace of functions whose two polynomial traces agree on every interior facet. The zero-boundary hp space further requires the polynomial trace to vanish on every boundary facet. For an interior facet $F=K\\cap K'$, its trace degree is $p_F:=\\min(p_K,p_{K'})$; equality of the two traces means that their common polynomial belongs to $\\mathbb P_{p_F}(F)$.\n\nA **matching affine tensor-box mesh** is a finite face-to-face partition of a bounded polytope into affine images of $[-1,1]^d$, with pairwise disjoint interiors. For a scalar degree $p_K$ on each box, the local tensor space is $\\mathbb Q_{p_K}(K)$, the pullback of polynomials of degree at most $p_K$ in each reference coordinate. The conforming box hp space is defined by equality of polynomial traces across every shared face, and its zero-boundary subspace by zero traces on the exterior faces. For a shared face $F=K\\cap K'$, set $p_F=\\min(p_K,p_{K'})$; its common trace lies in $\\mathbb Q_{p_F}(F)$ in tangential reference coordinates. This definition of tensor boxes does not include curved or non-affine cells.\n\nOn either mesh, **h-refinement** replaces one cell by a finite matching partition of that cell and assigns degrees to the children; **p-refinement** raises at least one cell degree while leaving the mesh fixed; **hp-refinement** performs both operations. A local polynomial basis is **hierarchical** if its ordered degree layers span the nested spaces $\\mathbb P_0\\subset\\cdots\\subset\\mathbb P_p$ (or $\\mathbb Q_0\\subset\\cdots\\subset\\mathbb Q_p$), with each new layer extending the preceding span. For example, pullbacks of reference monomials $\\widehat x^\\nu$ ordered by $|\\nu|$ give such a basis for $\\mathbb P_p$, and tensor monomials $\\xi^\\nu$ ordered by $\\max_i\\nu_i$ give one for $\\mathbb Q_p$. This basis convention does not assert stability of a particular basis or projector.",
+        "source_path": "items/def-hp-variable-degree-spaces-on-matching-meshes.md",
+        "local_order": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leszek F. Demkowicz, Mathematical Theory of Finite Elements, §3.1.4, Hierarchical Shape Functions",
+              "url": "https://users.oden.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete lecture-note monograph, §3.1.4, printed pp. 64–68: p-version refinement, variable-order elements, and degree-layered vertex, edge, face, and cell shape functions."
+            },
+            {
+              "title": "Martin Vohralík, Finite Element Methods, Chapter 6, hp finite elements",
+              "url": "https://who.rocq.inria.fr/Martin.Vohralik/Enseig/FEM/FEM.pdf",
+              "locator": "Complete lecture-note monograph, Chapter 6, printed pp. 54–58: conforming piecewise-polynomial spaces, hp approximation scope, and degree-of-freedom count."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-legendre-gauss-lobatto-nodes-are-distinct",
+        "kind": "lemma",
+        "title": "Legendre-Gauss-Lobatto nodes are distinct and interior critical points are simple",
+        "deps": [
+          "def-legendre-polynomial-family-and-l2-pairing",
+          "lem-legendre-weighted-derivative-orthogonality-and-norm",
+          "thm-rolle"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "For every integer $p\\ge1$, the Legendre polynomial $P_p$ has exactly $p$ simple roots in $(-1,1)$, and $P_p'$ has exactly $p-1$ simple roots in $(-1,1)$, one between each consecutive pair of roots of $P_p$. Consequently, the $p+1$ nodes consisting of $-1$, $1$, and the roots of $P_p'$ are pairwise distinct.",
+        "source_path": "items/lem-legendre-gauss-lobatto-nodes-are-distinct.md",
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, p-version FEM",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§§30.1–30.2: Legendre polynomial family and p-version spectral points."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Short note on the mass matrix for Gauss-Lobatto grid points",
+              "url": "https://arxiv.org/pdf/1412.2276",
+              "locator": "§1, pp. 1–2: Legendre–Gauss–Lobatto nodes defined as endpoints and roots of the Legendre derivative."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-reference-jacobi-weighted-endpoint-kernel",
+        "kind": "lemma",
+        "title": "Weighted Jacobi endpoint kernel on the reference interval",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "For an integer $d\\ge1$, put $w_d(t)=(1-t)^{d-1}$ on $[0,1]$ and, for $n\\ge0$, define\n$$\\phi_n(t):=\\frac{(-1)^n}{n!}(1-t)^{-(d-1)}\\frac{d^n}{dt^n}\\bigl(t^n(1-t)^{n+d-1}\\bigr).$$\nThe quotient extends to a polynomial of degree $n$. These polynomials are pairwise orthogonal in $L^2(w_d\\,dt)$, with\n$$\\phi_n(0)=(-1)^n,\\qquad \\operatorname{lc}(\\phi_n)=\\binom{2n+d-1}{n},\\qquad \\int_0^1w_d\\phi_n^2\\,dt=\\frac1{2n+d}.$$\nConsequently, for every $p\\ge0$ the squared norm of endpoint evaluation $q\\mapsto q(0)$ on $\\mathbb P_p([0,1])$ with this weighted $L^2$ norm is exactly $(p+1)(p+d)$.",
+        "source_path": "items/lem-reference-jacobi-weighted-endpoint-kernel.md",
+        "local_order": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leszek F. Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.oden.utexas.edu/~leszek/classes/EM394F/book.pdf",
+              "locator": "§3.1.4, printed pp. 64–68: Jacobi-based hierarchical p-version functions and endpoint degrees of freedom."
+            },
+            {
+              "title": "Tim Warburton and Jan S. Hesthaven, On the Constants in hp-Finite Element Trace Inverse Inequalities",
+              "url": "https://infoscience.epfl.ch/server/api/core/bitstreams/a541b153-f562-48eb-baa1-b42f9335269d/content",
+              "locator": "§§3–4, pp. 4–14: Jacobi endpoint evaluation and its use in explicit simplex trace bounds."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hp-simplex-weighted-spectral-projection",
+        "kind": "theorem",
+        "title": "Weighted simplex polynomial projection has explicit p-rates",
+        "deps": [
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $\\widehat K$ be the reference simplex of [[def-matching-affine-simplicial-meshes]], let $\\alpha=(\\alpha_0,\\ldots,\\alpha_d)$ have nonnegative real entries, and let $\\omega_\\alpha=\\prod_{j=0}^d\\lambda_j^{\\alpha_j}$, where $\\lambda_j$ are its barycentric coordinates. Give polynomials the inner product $\\langle f,g\\rangle_\\alpha=\\int_{\\widehat K}\\omega_\\alpha fg$. Put $\\mathbb P_{-1}=\\{0\\}$ and let $E_n=\\mathbb P_n(\\widehat K)\\ominus\\mathbb P_{n-1}(\\widehat K)$ in this weighted inner product. For a finite sum $u=\\sum_{n\\ge0}u_n$, $u_n\\in E_n$, define\n$$\n\\|u\\|_{\\mathcal H_\\alpha^s}^2:=\\sum_{n\\ge0}(1+\\mu_n)^s\\|u_n\\|_{L^2(\\omega_\\alpha)}^2,\\qquad \\mu_n=n(n+d+|\\alpha|),\n$$\nand define $\\mathcal H_\\alpha^s$ as the completion of these finite sums. If $m\\ge\\ell\\ge0$, its orthogonal degree truncation $P_pu=\\sum_{n=0}^pu_n$ obeys\n$$\n\\|u-P_pu\\|_{\\mathcal H_\\alpha^\\ell}\\le(1+\\mu_{p+1})^{-(m-\\ell)/2}\\|u\\|_{\\mathcal H_\\alpha^m}.\n$$\nFor $q\\in\\mathbb P_p(\\widehat K)$, $\\|q\\|_{\\mathcal H_\\alpha^m}\\le(1+\\mu_p)^{(m-\\ell)/2}\\|q\\|_{\\mathcal H_\\alpha^\\ell}$. These are estimates in the explicitly coefficient-defined scale $\\mathcal H_\\alpha^s$; they do not identify that scale with ordinary unweighted $H^s(\\widehat K)$.",
+        "source_path": "items/thm-hp-simplex-weighted-spectral-projection.md",
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Matthias Braess and Christoph Schwab, Approximation on polyhedral domains with geometric meshes",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports1999/1999-08_fp.pdf",
+              "locator": "§3, Theorem 3.3 and proof, printed pp. 6–8: weighted simplex orthogonal degree layers and eigenvalues n(n+d+|alpha|)."
+            },
+            {
+              "title": "Leszek F. Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.oden.utexas.edu/~leszek/classes/EM394F/book.pdf",
+              "locator": "§3.1.4, printed pp. 64–68: hierarchical Jacobi polynomial bases; used as independent weighted-polynomial context, not as an unweighted H1 supplier."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hp-triangle-degree-uniform-strong-edge-lift",
+        "kind": "lemma",
+        "title": "A degree-uniform polynomial edge lift with the strong edge norm",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. Let $p\\in\\mathbb N_0$, let $T=\\{(x,y):x>0,\\ y>0,\\ x+y<1\\}$, and let $q$ be a real polynomial of degree at most $p$ satisfying $q(0)=q(1)=0$. Define the polynomial $R(t)=q(t)/t$ by cancellation at $t=0$, and put\n\n$$\nLq(x,y)=q(x)-xR(1-y).\n$$\n\nThen $Lq\\in\\mathbb P_p(T)$, it equals $q$ on $y=0$, and it vanishes on $x=0$ and $x+y=1$. Moreover,\n\n$$\n\\|Lq\\|_{H^1(T)}\\le4\\|q'\\|_{L^2(0,1)},\n$$\n\nindependently of $p$. Permuting the three vertices gives the same bound, up to one fixed constant, for each reference edge. If $K$ is a shape-regular affine triangle, $E$ is an edge of length $\\ell_E$, and $h_K=\\operatorname{diam}(K)$, the transported lift satisfies\n\n$$\n|L_Eq|_{H^1(K)}\\le C_\\gamma\\ell_E^{1/2}\\|\\partial_\\tau q\\|_{L^2(E)},\\qquad \\|L_Eq\\|_{L^2(K)}\\le C_\\gamma h_K\\ell_E^{1/2}\\|\\partial_\\tau q\\|_{L^2(E)}.\n$$\n\nConsequently continuous polynomial data on the three edges of a triangle, each of degree at most the cell degree, have a polynomial extension of that cell degree. The estimate uses the strong $H^1$ edge norm and asserts no optimal $H^{1/2}$ trace-lifting bound.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 30: hp Finite Elements",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§30.4.2, projection-based interpolation on triangles. The source states a p-stable H^(1/2) extension but leaves major steps as exercises; this item proves an explicit, different H^1-edge-norm lift."
+            },
+            {
+              "title": "Martin Vohralík, Finite Element Methods, Chapter 6: hp finite elements",
+              "url": "https://who.rocq.inria.fr/Martin.Vohralik/Enseig/FEM/FEM.pdf",
+              "locator": "§§6.1–6.3, printed pp. 54–57: conforming hp spaces and the stated (but incompletely derived) simplex approximation context. The formula below is proved locally."
+            }
+          ]
+        },
+        "owner_proposal": "research/numerical-analysis-remaining-71-2026-10-17-ROOT-hp-simplex-supplier-cycle1/proposed-items/lem-hp-triangle-degree-uniform-strong-edge-lift.md",
+        "dependency_level": 0,
+        "local_order": 6,
+        "source_path": "items/lem-hp-triangle-degree-uniform-strong-edge-lift.md"
+      },
+      {
+        "id": "lem-hp-unweighted-legendre-derivative-tail",
+        "kind": "lemma",
+        "title": "An ordinary derivative controls the Legendre tail with a factorial ratio",
+        "deps": [
+          "lem-legendre-weighted-derivative-orthogonality-and-norm",
+          "cor-weierstrass-approximation-on-a-closed-interval",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice for the $k\\ge1$ branch. Let $P_n$ be the real Legendre polynomial normalized by $P_n(1)=1$, and let $\\Pi_N$ be the $L^2(-1,1;\\mathbb R)$ orthogonal projection onto $\\mathbb P_N(-1,1)$. For every integer $k\\ge1$, every integer $N\\ge k-1$, and every real-valued $f\\in H^k(-1,1)$,\n\n$$\n\\|f-\\Pi_Nf\\|_{L^2(-1,1)}\\le\\left(\\frac{(N+1-k)!}{(N+1+k)!}\\right)^{1/2}\\|f^{(k)}\\|_{L^2(-1,1)}.\n$$\n\nFor $k=0$, every integer $N\\ge0$, and $f\\in L^2(-1,1)$, $\\|f-\\Pi_Nf\\|_2\\le\\|f\\|_2$. For $n,m\\ge k$ the repeated derivative orthogonality identity is\n\n$$\n\\int_{-1}^1(1-x^2)^kP_n^{(k)}(x)P_m^{(k)}(x)\\,dx=\\frac{2}{2n+1}\\frac{(n+k)!}{(n-k)!}\\,\\delta_{nm}.\n$$",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shen and Tang, Spectral and High-Order Methods with Applications",
+              "url": "https://www.math.purdue.edu/~shen7/sp_intro12/book.pdf",
+              "locator": "Chapter 1, §1.8, printed pp. 61–67: Jacobi/Legendre projection estimates, derivative orthogonality, and the weighted Sobolev scale. The exact ordinary unweighted factorial estimate is proved locally here."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 30: hp Finite Elements",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§30.4.2, projection-based interpolation on triangles and the Legendre tail estimate; the higher-order derivative identity is completed locally here."
+            }
+          ]
+        },
+        "owner_proposal": "research/numerical-analysis-remaining-71-2026-10-17-ROOT-hp-simplex-supplier-cycle1/proposed-items/lem-hp-unweighted-legendre-derivative-tail.md",
+        "dependency_level": 0,
+        "local_order": 7,
+        "source_path": "items/lem-hp-unweighted-legendre-derivative-tail.md"
+      },
+      {
+        "id": "lem-hp-analytic-polynomial-approximation-on-a-triangle",
+        "kind": "lemma",
+        "title": "Analytic derivative bounds give exponential polynomial approximation on a triangle",
+        "deps": [
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-ftc-second-part"
+        ],
+        "justified_by": [],
+        "statement": "Let $S$ be the closed reference triangle $\\overline T$, where $T=\\{x,y>0,x+y<1\\}$, or the closed interval $[0,1]$, and let $f:S\\to\\mathbb R$ be real-valued. Write $\\mathbb P_p(S)$ for restrictions of real polynomials of total degree at most $p$ on the triangle and degree at most $p$ on the interval. Say that $f$ is smooth up to $S$ when every partial derivative on the interior has a continuous extension to $S$. Suppose that for some $M>0$ and $A\\ge1$,\n\n$$\n\\|D^\\alpha f\\|_{L^\\infty(S)}\\le M A^{|\\alpha|}|\\alpha|!\\qquad\\text{for every multi-index }\\alpha.\n$$\n\nUse $\\|g\\|_{W^{1,\\infty}(S)}:=\\|g\\|_{L^\\infty(S)}+\\sum_{i=1}^{\\dim S}\\|\\partial_i g\\|_{L^\\infty(S)}$. Then constants $C,b>0$, depending only on $A$ and the fixed reference domain, satisfy\n\n$$\n\\inf_{q\\in\\mathbb P_p(S)}\\|f-q\\|_{W^{1,\\infty}(S)}\\le CM e^{-bp}\\qquad(p\\ge1).\n$$\n\nFor the interval branch there is also an endpoint-preserving polynomial $J_pf\\in\\mathbb P_p([0,1])$ whose derivative is the $L^2$ orthogonal projection of $f'$ onto $\\mathbb P_{p-1}$. It satisfies $\\|(J_pf)'\\|_2\\le\\|f'\\|_2$ and $\\|f-J_pf\\|_{H^1}\\le CM e^{-bp}$ after changing $C,b$ by constants depending only on $A$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yanchen He, Paul Houston, Christoph Schwab, and Thomas P. Wihler, Exponential Convergence of hp-ILGFEM, version 1",
+              "url": "https://arxiv.org/pdf/2404.18569",
+              "locator": "§§2.3 and 4.1, PDF pp. 5–11: analytic corner classes and exponential hp approximation context. The polynomial-mask construction below is independent and supplies its local approximation step."
+            },
+            {
+              "title": "Shen and Tang, Spectral and High-Order Methods with Applications",
+              "url": "https://www.math.purdue.edu/~shen7/sp_intro12/book.pdf",
+              "locator": "Chapter 1, §1.8, printed pp. 61–67: polynomial approximation estimates and the analytic convergence discussion; the multivariate mask proof below is local."
+            }
+          ]
+        },
+        "owner_proposal": "research/numerical-analysis-remaining-71-2026-10-17-ROOT-hp-corner-supplier-cycle1/proposed/items/lem-hp-analytic-polynomial-approximation-on-a-triangle.md",
+        "dependency_level": 0,
+        "local_order": 8,
+        "source_path": "items/lem-hp-analytic-polynomial-approximation-on-a-triangle.md"
+      },
+      {
+        "id": "lem-hp-weighted-analytic-corner-pointwise-control",
+        "kind": "lemma",
+        "title": "Weighted analytic polygon functions have corner decay and scaled analytic bounds",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-matching-affine-simplicial-meshes",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-shape-regular-affine-simplex-scaling",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-l-one-approximate-identity-on-rn",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^2$ be a bounded open polygonal domain with finitely many straight sides and corner set $\\mathcal C=\\{c_1,\\ldots,c_m\\}$, with interior angle at each corner strictly between $0$ and $2\\pi$. Let $0\\le\\beta_i<1$ and write $\\Phi_\\gamma(x)=\\prod_{i=1}^m|x-c_i|^{\\gamma_i}$ for a vector $\\gamma\\in[0,\\infty)^m$. For integer $k\\ge2$, define\n\n$$\n\\|v\\|_{H^{k,2}_\\beta(\\Omega)}^2=\\|v\\|_{H^1(\\Omega)}^2+\\sum_{j=2}^k\\sum_{|\\alpha|=j}\\|\\Phi_{\\beta+j-2}D^\\alpha v\\|_{L^2(\\Omega)}^2,\n$$\n\nwhere $(\\beta+j-2)_i=\\beta_i+j-2$ and a zero exponent contributes the factor one. Let $u\\in H^{k,2}_\\beta(\\Omega)$ for every integer $k\\ge2$, with real-valued weak derivatives, and suppose constants $C_u,d_u>0$ satisfy\n\n$$\n\\left\\|\\Phi_{\\beta+j-2}\\sum_{|\\alpha|=j}|D^\\alpha u|\\right\\|_{L^2(\\Omega)}\\le C_ud_u^{j-2}(j-2)!\\qquad(j\\ge2).\n$$\n\nFor each fixed $0<a<\\min_i(1-\\beta_i)$ there are constants $C,A,R>0$ such that the weak class of $u$ has a unique representative $\\widetilde u\\in C(\\overline\\Omega)$, smooth up to every open side away from corners, and for $0<r=|x-c_i|<R$,\n\n$$\n|\\widetilde u(x)-\\widetilde u(c_i)|\\le Cr^a,\\qquad |D^\\alpha\\widetilde u(x)|\\le CA^{|\\alpha|}|\\alpha|!r^{a-|\\alpha|}\\quad(|\\alpha|\\ge1).\n$$\n\nOn every compact subset of $\\overline\\Omega\\setminus\\mathcal C$, the derivatives satisfy ordinary factorial bounds $|D^\\alpha u|\\le C_0A_0^{|\\alpha|}|\\alpha|!$. On every closed nondegenerate shape-regular affine triangle $K\\subset\\overline\\Omega$ with $K^\\circ\\subset\\Omega$ and $K\\cap\\mathcal C=\\varnothing$, whose ratio $h_K/\\operatorname{dist}(K,\\mathcal C)$ is bounded above and below by fixed positive constants, where $\\operatorname{dist}(K,\\mathcal C)=\\inf_{x\\in K,c\\in\\mathcal C}|x-c|$, set $r_K=\\min(R,\\operatorname{dist}(K,\\mathcal C))$. After subtracting a suitable constant from the pullback $\\widehat u$ to the reference triangle of [[def-matching-affine-simplicial-meshes]], $\\|D^\\alpha\\widehat u\\|_\\infty\\le C A_1^{|\\alpha|}|\\alpha|!r_K^a$ for every multi-index $\\alpha$, with constants uniform over this family. If a closed nondegenerate shape-regular affine triangle $K\\subset\\overline\\Omega$ with $K^\\circ\\subset\\Omega$, diameter $h<R$, has a corner $c_i$ as a vertex, its vertex affine interpolant $a_K$ satisfies\n\n$$\n|u-a_K|_{H^1(K)}\\le Ch^a,\\qquad \\|u-a_K\\|_{L^2(K)}\\le Ch^{a+1}.\n$$",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yanchen He, Paul Houston, Christoph Schwab, and Thomas P. Wihler, Exponential Convergence of hp-ILGFEM, version 1",
+              "url": "https://arxiv.org/pdf/2404.18569",
+              "locator": "§2.3, equation (12), Definition 1, and the continuity assertion preceding it, PDF pp. 5–6: weighted corner regularity and its continuity context. The quantitative pointwise bounds are proved locally here."
+            },
+            {
+              "title": "Martin Vohralík, Finite Element Methods, Chapter 6: hp finite elements",
+              "url": "https://who.rocq.inria.fr/Martin.Vohralik/Enseig/FEM/FEM.pdf",
+              "locator": "§6.4, printed pp. 56–58: polygon-corner hp convergence context. The weighted pointwise estimates needed by the local proof are supplied here."
+            }
+          ]
+        },
+        "owner_proposal": "research/numerical-analysis-remaining-71-2026-10-17-ROOT-hp-corner-supplier-cycle1/proposed/items/lem-hp-weighted-analytic-corner-pointwise-control.md",
+        "dependency_level": 0,
+        "local_order": 9,
+        "source_path": "items/lem-hp-weighted-analytic-corner-pointwise-control.md"
+      },
+      {
+        "id": "def-legendre-gauss-lobatto-rule-on-affine-boxes",
+        "kind": "definition",
+        "title": "Legendre-Gauss-Lobatto nodes, weights, and tensor quadrature",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "def-legendre-polynomial-family-and-l2-pairing",
+          "lem-legendre-weighted-derivative-orthogonality-and-norm",
+          "lem-legendre-gauss-lobatto-nodes-are-distinct"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Fix an integer $p\\ge1$. Let $\\xi_0=-1$, $\\xi_p=1$, and let $\\xi_1<\\cdots<\\xi_{p-1}$ be the roots of $P_p'$ in $(-1,1)$; for $p=1$ this interior list is empty. By [[lem-legendre-gauss-lobatto-nodes-are-distinct]] these $p+1$ nodes are distinct. Define $\\ell_j(x)=\\prod_{0\\le i\\le p,\\ i\\ne j}(x-\\xi_i)/(\\xi_j-\\xi_i)$, set $w_j=\\int_{-1}^1\\ell_j(x)\\,dx$, and define the **Legendre–Gauss–Lobatto rule** by $Q_p(f)=\\sum_{j=0}^p w_jf(\\xi_j)$.\n\nOn $[-1,1]^d$ its tensor rule is $Q_p^{\\otimes d}(f)=\\sum_{j_1,\\ldots,j_d=0}^p(w_{j_1}\\cdots w_{j_d})f(\\xi_{j_1},\\ldots,\\xi_{j_d})$. For an affine box map $F_K(\\xi)=b_K+J_K\\xi$, define the transported rule by $Q_{K,p}(f)=|\\det J_K|Q_p^{\\otimes d}(f\\circ F_K)$. The nodal basis on $K$ is the pullback of $\\prod_{r=1}^d\\ell_{j_r}(\\xi_r)$. The local mass and stiffness forms are respectively $m_{K,p}(v,w)=Q_{K,p}(vw)$ and $a_{K,p}(v,w)=Q_{K,p}(\\nabla v\\cdot\\nabla w)$; any sampled coefficient is evaluated at the same quadrature nodes. Global forms are assembled by summing the cell forms.",
+        "source_path": "items/def-legendre-gauss-lobatto-rule-on-affine-boxes.md",
+        "local_order": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, p-version FEM",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§§30.1–30.4: Legendre nodal bases, endpoint-preserving interpolation, and spectral p-version context."
+            },
+            {
+              "title": "Lloyd N. Trefethen, Short note on the mass matrix for Gauss-Lobatto grid points",
+              "url": "https://arxiv.org/pdf/1412.2276",
+              "locator": "§§2–3, pp. 2–6: GLL quadrature and mass-matrix correction."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hp-corner-uniform-degree-dof-count",
+        "kind": "lemma",
+        "title": "Uniform-degree polygon corner spaces have cubic degree-of-freedom growth",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For $k\\ge1$, let a matching triangulation $\\mathcal T_k$ of a polygon have at most $C_0k$ triangles. Assign a uniform total polynomial degree $p_k\\ge1$ with $p_k\\le C_1k$. The algebraic space of continuous piecewise $\\mathbb P_{p_k}$ functions has dimension\n$$\nN_k\\le C_2k^3,\n$$\nwhere $C_2$ depends only on $C_0$ and $C_1$. The same upper bound holds for any subspace imposing homogeneous boundary traces. This is an upper count only; it asserts no hp approximation rate.",
+        "source_path": "items/lem-hp-corner-uniform-degree-dof-count.md",
+        "local_order": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yanchen He, Paul Houston, Christoph Schwab, and Thomas P. Wihler, Exponential Convergence of hp-ILGFEM, version 1",
+              "url": "https://arxiv.org/pdf/2404.18569",
+              "locator": "§4.1, equations (29)–(31), PDF pp. 10–11: at most O(k) triangles, uniform degree p_k proportional to k, and dimension O(k^3)."
+            },
+            {
+              "title": "Leszek F. Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.oden.utexas.edu/~leszek/classes/EM394F/book.pdf",
+              "locator": "§3.1.4, printed pp. 64–68: local polynomial degree and dimension-layer conventions; the global count is proved here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+        "kind": "lemma",
+        "title": "Matching variable-degree polynomial traces give an H1 function",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "thm-matching-continuous-piecewise-polynomials-are-wkp",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice. On a finite matching affine simplicial mesh or a finite face-to-face affine tensor-box mesh, a piecewise polynomial scalar function whose two traces agree on every interior facet belongs to $H^1(\\Omega)$, and its weak gradient equals its ordinary cellwise polynomial gradient almost everywhere. The simplex degrees may vary by cell; the box degrees may also vary.",
+        "source_path": "items/lem-variable-degree-polynomial-spaces-are-h1-conforming.md",
+        "local_order": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2019, Chapter 32, H1-conforming approximation",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2019/chap32.pdf",
+              "locator": "§32.1, printed pp. 144–145: matching piecewise-polynomial traces and the H1-conforming space."
+            },
+            {
+              "title": "Luca Heltai, Numerical Methods for Partial Differential Equations, Lecture 2",
+              "url": "https://luca-heltai.github.io/nmpde/lectures/lecture-02/",
+              "locator": "§10: continuity across matching faces and conforming finite-element functions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hp-reference-interval-integrated-legendre-projection",
+        "kind": "theorem",
+        "title": "Integrated Legendre projection gives an explicit p-rate in H1",
+        "deps": [
+          "lem-legendre-weighted-derivative-orthogonality-and-norm",
+          "def-hp-integrated-legendre-projector",
+          "def-legendre-weighted-sobolev-scale",
+          "thm-legendre-weighted-projection-error-rate",
+          "cor-weierstrass-approximation-on-a-closed-interval",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice. Let $p\\ge1$, $s\\ge0$, $g\\in H_L^s$ as defined in [[def-legendre-weighted-sobolev-scale]], identified with its canonical $L^2(-1,1)$ class, and let $c\\in\\mathbb R$. Define $u(x)=c+\\int_{-1}^xg(t)\\,dt$ and $I_pu=\\mathcal I_p(c,g)$ by [[def-hp-integrated-legendre-projector]]. Then $u$ and $I_pu$ are absolutely continuous, $I_pu\\in\\mathbb P_p$, and $I_pu(\\pm1)=u(\\pm1)$. Moreover,\n$$\\|u-I_pu\\|_{H^1(-1,1)} \\le\\sqrt5\\,(1+p(p+1))^{-s/2}\\|g\\|_{H_L^s},$$\nwhere the displayed $H^1$ error norm is $\\bigl(\\|u-I_pu\\|_{L^2}^2+\\|g-\\Pi_{p-1}g\\|_{L^2}^2\\bigr)^{1/2}$. This coefficient-scale assertion does not identify $H_L^s$ with an ordinary derivative-based Sobolev norm.",
+        "source_path": "items/thm-hp-reference-interval-integrated-legendre-projection.md",
+        "local_order": 14,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, p-version FEM",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§§30.1–30.4: Legendre orthogonality and the integrated polynomial projection; the general simplex extension is not used as a proof here."
+            },
+            {
+              "title": "Leszek F. Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.oden.utexas.edu/~leszek/classes/EM394F/book.pdf",
+              "locator": "§3.1.4, printed pp. 64–68: hierarchical p-version bases and endpoint/edge degrees of freedom."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hp-simplex-p-dependent-face-trace-inverse",
+        "kind": "theorem",
+        "title": "Degree-explicit polynomial trace inverse inequality on simplices",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "lem-reference-jacobi-weighted-endpoint-kernel",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Assume Countable Choice ([[def-countable-choice]]), as required by the affine-scaling supplier used below.\n\nLet $K$ be a nondegenerate $d$-simplex, $d\\ge2$, let $F$ be one of its facets, and let $p\\ge0$. For every $v\\in\\mathbb P_p(K)$,\n$$\n\\|v\\|_{L^2(F)}^2\\le\\frac{(p+1)(p+d)|F|}{d|K|}\\|v\\|_{L^2(K)}^2.\n$$\nIf $K$ belongs to a shape-regular affine simplex family with $h_K=\\operatorname{diam}(K)$ and shape bound $\\sigma$, then\n$$\n\\|v\\|_{L^2(F)}^2\\le C_{d,\\sigma}\\frac{(p+1)(p+d)}{h_K}\\|v\\|_{L^2(K)}^2.\n$$\nFor $p\\ge1$, the normal derivative of $v$ has degree at most $p-1$ on $K$ and satisfies the same inequalities with $(p+1)(p+d)$ replaced by $p(p+d-1)$. In particular, polynomial normal-flux trace penalties have the explicit scale $p(p+d-1)/h_K$; this is an inverse trace bound, not a p-approximation or a DG coercivity theorem.",
+        "source_path": "items/thm-hp-simplex-p-dependent-face-trace-inverse.md",
+        "local_order": 15,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Warburton and Jan S. Hesthaven, On the Constants in hp-Finite Element Trace Inverse Inequalities",
+              "url": "https://infoscience.epfl.ch/server/api/core/bitstreams/a541b153-f562-48eb-baa1-b42f9335269d/content",
+              "locator": "§§3–4, pp. 4–14: exact Jacobi endpoint-kernel trace bounds on intervals, triangles, and simplices."
+            },
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 11, Local interpolation on affine meshes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap11.pdf",
+              "locator": "§11.1, printed pp. 117–119: affine simplex scaling and shape-regular face/volume factors."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hp-triangle-unweighted-smooth-approximation",
+        "kind": "theorem",
+        "title": "Constructive ordinary Sobolev polynomial approximation on triangles",
+        "deps": [
+          "lem-hp-unweighted-legendre-derivative-tail",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-reference-simplex-sobolev-extension",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "thm-bramble-hilbert-on-reference-simplex",
+          "lem-shape-regular-affine-simplex-scaling",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "cor-finite-dimensional-subspaces-are-closed",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice. Let $T=\\{(x,y):x>0,\\ y>0,\\ x+y<1\\}$, let $r\\ge5$ be an integer, let $p\\ge2r-4$ be an integer, and put $n=\\lfloor p/2\\rfloor$ and\n\n$$\n\\eta_{n,r}=\\left(\\frac{(n-r+3)!}{(n+r-5)!}\\right)^{1/2}.\n$$\n\nThere is a bounded linear map $A_{p,r}:H^r(T;\\mathbb R)\\to\\mathbb P_p(T;\\mathbb R)$, where $\\mathbb P_p(T;\\mathbb R)$ is the restriction of real polynomials in $(x,y)$ of total degree at most $p$. It is explicitly defined in the proof from the reference-simplex extension, a unique moment polynomial, and finite Legendre projections, and satisfies\n\n$$\n\\|u-A_{p,r}u\\|_{H^2(T)}\\le C_r\\eta_{n,r}|u|_{H^r(T)}.\n$$\n\nHere $C_r$ is independent of $p$ and is the product of a fixed reference extension bound, the reference moment-projection bound, and an absolute tensor-projection constant; no useful growth bound in $r$ is asserted. For a shape-regular affine triangle $K$ of diameter $h_K$, affine transport gives\n\n$$\n\\left(\\sum_{j=0}^2h_K^{2j-2}|u-A_{K,p,r}u|_{H^j(K)}^2\\right)^{1/2}\\le C_{r,\\gamma}\\eta_{n,r}h_K^{r-1}|u|_{H^r(K)}.\n$$\n\nIf $p\\ge4(r-2)$, then $\\eta_{n,r}\\le(4/p)^{r-4}$. This is a conservative ordinary Sobolev rate; it is neither an optimal $p^{-(r-1)}$ estimate nor an analytic growth estimate for $C_r$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shen and Tang, Spectral and High-Order Methods with Applications",
+              "url": "https://www.math.purdue.edu/~shen7/sp_intro12/book.pdf",
+              "locator": "Chapter 1, §1.8, printed pp. 61–67: ordinary and weighted polynomial projection estimates. The local tensor proof supplies the stated triangle construction."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 30: hp Finite Elements",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§30.4.2, projection-based triangle interpolation and the p-dependent Legendre tail. Major extension steps are left as exercises; this proof supplies the local construction and mixed-derivative accounting."
+            }
+          ]
+        },
+        "owner_proposal": "research/numerical-analysis-remaining-71-2026-10-17-ROOT-hp-simplex-supplier-cycle1/proposed-items/thm-hp-triangle-unweighted-smooth-approximation.md",
+        "dependency_level": 1,
+        "local_order": 16,
+        "source_path": "items/thm-hp-triangle-unweighted-smooth-approximation.md"
+      },
+      {
+        "id": "thm-hp-analytic-p-convergence-on-fixed-tensor-mesh",
+        "kind": "theorem",
+        "title": "Analytic data converge exponentially under fixed-mesh p refinement",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+          "def-hp-integrated-legendre-projector",
+          "lem-legendre-weighted-derivative-orthogonality-and-norm",
+          "lem-taylor-lagrange-remainder-from-mean-value",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-ftc-second-part",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice. Let $\\Omega$ be partitioned by a fixed finite matching affine tensor-box mesh, and let $u\\in C^1(\\overline\\Omega)$ be smooth on each box. For each cell $K$, let $\\widehat u_K$ be its pullback to $[-1,1]^d$. Assume that for fixed constants $M>0$ and $R>1$,\n$$\n\\sup_{\\widehat x\\in[-1,1]^d}|\\partial^\\nu\\widehat u_K(\\widehat x)|\\le M|\\nu|!R^{-|\\nu|}\n$$\nfor every multi-index $\\nu\\in\\mathbb N_0^d$ and every cell $K$. Choose any $q$ with $R^{-1}<q<1$. For each common degree $p\\ge1$, tensorize the endpoint-preserving integrated Legendre projector of [[def-hp-integrated-legendre-projector]] on each reference cell and transport it to $K$, obtaining $u_p$. Then the cell traces of $u_p$ agree across every shared face and\n$$\n\\|u-u_p\\|_{H^1(\\Omega)}\\le C_{\\mathcal T,d,R,q}M q^p.\n$$\nThe constant may depend on the fixed mesh; the estimate is a p-rate on a fixed mesh and makes no claim about h-refinement.",
+        "source_path": "items/thm-hp-analytic-p-convergence-on-fixed-tensor-mesh.md",
+        "local_order": 13,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leszek F. Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.oden.utexas.edu/~leszek/classes/EM394F/book.pdf",
+              "locator": "§3.1.4, printed pp. 64–68: hierarchical p-version spaces and tensor-product element bases."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, p-version FEM",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§§30.1–30.4: p-refinement and tensor-product interpolation context; this item supplies its own tensor estimate."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hp-simplex-p-explicit-conforming-interpolant",
+        "kind": "lemma",
+        "title": "Constructive varying-degree triangle interpolation in unweighted H1",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "def-hp-integrated-legendre-projector",
+          "lem-hp-triangle-degree-uniform-strong-edge-lift",
+          "thm-hp-triangle-unweighted-smooth-approximation",
+          "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+          "thm-reference-simplex-trace-and-gauss-green",
+          "thm-lagrange-point-evaluation-threshold-on-reference-simplex",
+          "lem-smooth-density-on-reference-simplex",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Assume Full Choice. Let $\\mathcal T$ be a finite matching shape-regular affine triangulation in two dimensions, let each cell $K$ have an arbitrary finite total degree $p_K\\ge1$, and let $u\\in C(\\overline\\Omega;\\mathbb R)$ satisfy $u|_K\\in H^2(K)$ for every cell. For every edge $E$, let $\\tau_E$ be either unit tangent direction and write $\\partial_{\\tau_E}v=\\nabla v\\cdot\\tau_E$. For an interior edge $E=K\\cap K'$, set $p_E=\\min(p_K,p_{K'})$; for a boundary edge of $K$, set $p_E=p_K$. Put $m_K=\\min_{E\\subset\\partial K}p_E$. There is a linear interpolant $I_{\\mathcal T,p}u$ in the trace-matching space of [[def-hp-variable-degree-spaces-on-matching-meshes]]. It preserves any zero boundary edge data: if $u$ vanishes on a boundary edge, so does $I_{\\mathcal T,p}u$. For every $q\\in\\mathbb P_{m_K}(K;\\mathbb R)$,\n\n$$\n|u-I_{\\mathcal T,p}u|_{H^1(K)}\\le |u-q|_{H^1(K)}+C_\\gamma\\sum_{E\\subset\\partial K}\\left(\\ell_E^{-1/2}\\|u-q\\|_{L^2(E)}+\\ell_E^{1/2}\\|\\partial_{\\tau_E}(u-q)\\|_{L^2(E)}\\right),\n$$\n\nand\n\n$$\nh_K^{-1}\\|u-I_{\\mathcal T,p}u\\|_{L^2(K)}+|u-I_{\\mathcal T,p}u|_{H^1(K)} \\le C_\\gamma\\left(h_K^{-1}\\|u-q\\|_{L^2(K)}+|u-q|_{H^1(K)}+\\sum_{E\\subset\\partial K}\\left(\\ell_E^{-1/2}\\|u-q\\|_{L^2(E)}+\\ell_E^{1/2}\\|\\partial_{\\tau_E}(u-q)\\|_{L^2(E)}\\right)\\right).\n$$\n\nThe constant is independent of the degrees and their ratios. In particular, if integer $r\\ge5$, $m_K\\ge2r-4$, $n_K=\\lfloor m_K/2\\rfloor$, and $u|_K\\in H^r(K)$, then\n\n$$\n|u-I_{\\mathcal T,p}u|_{H^1(K)}\\le C_{r,\\gamma}h_K^{r-1}\\left(\\frac{(n_K-r+3)!}{(n_K+r-5)!}\\right)^{1/2}|u|_{H^r(K)}.\n$$\n\nFor $m_K\\ge4(r-2)$ the factorial factor is at most $(4/m_K)^{r-4}$. The effective degree $m_K$ records the lowest degree among the shared edge traces; no rate independent of neighboring trace degrees is asserted.",
+        "source_path": "items/lem-hp-simplex-p-explicit-conforming-interpolant.md",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 30: hp Finite Elements",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§30.4.2, projection-based triangle interpolation and polynomial extension. The source leaves major extension steps as exercises; the local proof below supplies a strong-edge-norm lift and varying-degree assembly."
+            },
+            {
+              "title": "Martin Vohralík, Finite Element Methods, Chapter 6: hp finite elements",
+              "url": "https://who.rocq.inria.fr/Martin.Vohralik/Enseig/FEM/FEM.pdf",
+              "locator": "Theorems 6.2.1 and 6.3.1, printed pp. 55–57: simplex hp rates are stated while their involved approximation developments are omitted; the complete local rate and assembly are proved here."
+            }
+          ]
+        },
+        "owner_proposal": "research/numerical-analysis-remaining-71-2026-10-17-ROOT-hp-simplex-supplier-cycle1/proposed-items/lem-hp-simplex-p-explicit-conforming-interpolant.md",
+        "local_order": 17
+      },
+      {
+        "id": "thm-hp-gll-top-mode-and-puniform-energy-equivalence",
+        "kind": "theorem",
+        "title": "GLL quadrature changes only the top Legendre modes and is p-uniformly equivalent",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "def-legendre-gauss-lobatto-rule-on-affine-boxes",
+          "def-legendre-polynomial-family-and-l2-pairing",
+          "lem-legendre-weighted-derivative-orthogonality-and-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For every $p\\ge1$, the one-dimensional GLL rule integrates all polynomials of degree at most $2p-1$ exactly and has positive weights. If $f=\\sum_{n=0}^pa_nP_n$, then\n$$Q_p(f^2)-\\int_{-1}^1f^2=\\frac{2(p+1)}{p(2p+1)}a_p^2.$$\nFor every $v\\in\\mathbb Q_p([-1,1]^d)$,\n$$\\|v\\|_{L^2}^2\\le Q_p^{\\otimes d}(v^2)\\le3^d\\|v\\|_{L^2}^2,\\qquad \\|\\nabla v\\|_{L^2}^2\\le Q_p^{\\otimes d}(|\\nabla v|^2)\\le3^d\\|\\nabla v\\|_{L^2}^2.$$\nThe same inequalities hold on affine boxes under the transported rule. If a pointwise-defined scalar coefficient $a:\\overline K\\to\\mathbb R$ is Lebesgue measurable on $K$ and satisfies $0<\\underline a\\le a(x)\\le\\overline a$ throughout $\\overline K$, the sampled form $Q_{K,p}(a|\\nabla v|^2)$ is equivalent to the exact weighted energy $\\int_Ka|\\nabla v|^2$ with lower factor $\\underline a/\\overline a$ and upper factor $3^d\\overline a/\\underline a$. These are p-uniform stability bounds; they do not bound the Strang consistency defect or equate quadrature with exact Galerkin assembly.",
+        "source_path": "items/thm-hp-gll-top-mode-and-puniform-energy-equivalence.md",
+        "local_order": 19,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Saul A. Teukolsky, Short note on the mass matrix for Gauss-Lobatto grid points",
+              "url": "https://arxiv.org/pdf/1412.2276",
+              "locator": "§§2–3, pp. 2–6: exact rank-one top-Legendre-mode correction to the GLL mass matrix."
+            },
+            {
+              "title": "Lucas Johannes Petrus Timmermans, Analysis of Spectral Element Methods with Application to Incompressible Flow",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/3500485/412687.pdf",
+              "locator": "§§2.2.4–2.3, PDF pp. 35–39: tensor GLL mass and stiffness forms; cited for context, not as a substitute for this proof."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hp-corner-exponential-energy-convergence",
+        "kind": "theorem",
+        "title": "Exponential hp energy convergence for weighted-analytic polygon corners",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "lem-hp-triangle-degree-uniform-strong-edge-lift",
+          "lem-hp-analytic-polynomial-approximation-on-a-triangle",
+          "lem-hp-weighted-analytic-corner-pointwise-control",
+          "lem-hp-corner-uniform-degree-dof-count",
+          "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^2$ be a bounded polygonal open domain with finite corner set $\\mathcal C=\\{c_1,\\ldots,c_m\\}$ and weights $0\\le\\beta_i<1$. For $\\gamma\\in[0,\\infty)^m$ define $\\Phi_\\gamma(x)=\\prod_i|x-c_i|^{\\gamma_i}$; $\\beta+j-2$ means componentwise addition. For integer $k\\ge2$, define\n\n$$\n\\|v\\|_{H^{k,2}_\\beta(\\Omega)}^2=\\|v\\|_{H^1(\\Omega)}^2+\\sum_{j=2}^k\\sum_{|\\alpha|=j}\\|\\Phi_{\\beta+j-2}D^\\alpha v\\|_2^2.\n$$\n\nLet $B^2_\\beta(\\Omega)$ consist of real-valued functions in every $H^{k,2}_\\beta(\\Omega)$ for which some $C_u,d_u>0$ satisfy\n\n$$\n\\left\\|\\Phi_{\\beta+k-2}\\sum_{|\\alpha|=k}|D^\\alpha u|\\right\\|_2\\le C_ud_u^{k-2}(k-2)!\\qquad(k\\ge2).\n$$\n\nLet $(\\mathcal T_k)_{k\\ge1}$ be nested finite matching shape-regular affine triangulations of $\\Omega$, with at most $C_0k$ triangles. Write $h_T=\\operatorname{diam}(T)$ and $\\operatorname{dist}(T,\\mathcal C)=\\inf_{x\\in T,c\\in\\mathcal C}|x-c|$. Assume a fixed $0<\\sigma<1$ and $C_1>0$ satisfy\n\n$$\n\\sigma\\le\\frac{h_T}{\\operatorname{dist}(T,\\mathcal C)}\\le\\sigma^{-1}\\quad(\\overline T\\cap\\mathcal C=\\varnothing),\\qquad h_T\\le C_1\\sigma^k\\quad(\\overline T\\cap\\mathcal C\\ne\\varnothing).\n$$\n\nLet $p_k\\in\\mathbb N$ be uniform total polynomial degrees with $c_0k\\le p_k\\le c_1k$ for fixed $0<c_0\\le c_1$. For a fixed union $\\Gamma_D$ of polygon edges, let $V_k$ be the space of broken piecewise-$\\mathbb P_{p_k}$ functions whose polynomial traces agree on every interior edge and vanish on the boundary edges in $\\Gamma_D$; put $N_k=\\dim V_k$. This is the corresponding subspace of the variable-degree space in [[def-hp-variable-degree-spaces-on-matching-meshes]].\nFor this smoother class, the boundary condition means that the unique continuous representative supplied by [[lem-hp-weighted-analytic-corner-pointwise-control]] vanishes pointwise on the edges in $\\Gamma_D$; no zero condition is imposed on the other edges. If $u\\in B^2_\\beta(\\Omega)$ satisfies this boundary condition, then constants $C,b>0$, independent of $k$, satisfy\n\n$$\n\\inf_{v_k\\in V_k}\\|\\nabla(u-v_k)\\|_{L^2(\\Omega)}\\le Ce^{-bN_k^{1/3}}.\n$$\n\nFor a bounded coercive conforming Galerkin problem on a Hilbert space $V\\subset H^1(\\Omega)$, assume $u\\in V$ is its exact variational solution: $a(u,v)=F(v)$ for every $v\\in V$, with bounded load $F$. If $V_k\\subset V$ and the norm on $V$ is equivalent to the gradient seminorm, Céa's estimate gives the same exponential rate for the energy error, with its actual $M/\\alpha$ and norm-equivalence factors included. The constants may depend on the polygon, weights, weighted analytic bounds, mesh shape and grading constants, degree constants, $\\Gamma_D$, and the Galerkin coercivity and norm-equivalence constants.",
+        "source_path": "items/thm-hp-corner-exponential-energy-convergence.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yanchen He, Paul Houston, Christoph Schwab, and Thomas P. Wihler, Exponential Convergence of hp-ILGFEM, version 1",
+              "url": "https://arxiv.org/pdf/2404.18569",
+              "locator": "§2.3, Definition 1; §4.1, equations (29)–(31), and Theorem 2, PDF pp. 5–11. The article invokes prior approximation results; the local layer construction is proved here."
+            },
+            {
+              "title": "Martin Vohralík, Finite Element Methods, Chapter 6: hp finite elements",
+              "url": "https://who.rocq.inria.fr/Martin.Vohralik/Enseig/FEM/FEM.pdf",
+              "locator": "Theorems 6.2.1, 6.3.1, and 6.4.1, printed pp. 55–58: hp rates and corner comparison context; the relevant approximation developments are omitted there and supplied locally here."
+            }
+          ]
+        },
+        "owner_proposal": "research/numerical-analysis-remaining-71-2026-10-17-ROOT-hp-corner-supplier-cycle1/proposed/items/thm-hp-corner-exponential-energy-convergence.md",
+        "local_order": 20
+      },
+      {
+        "id": "thm-hp-galerkin-energy-error-on-fixed-mesh",
+        "kind": "theorem",
+        "title": "Cea transfers the fixed-mesh analytic p rate to the energy error",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+          "thm-hp-analytic-p-convergence-on-fixed-tensor-mesh",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice. On a fixed finite matching affine tensor-box mesh, let $V=H^1(\\Omega)$ with its standard norm, let $a(v,w)=\\int_\\Omega(\\nabla v\\cdot\\nabla w+vw)$, and let $F$ be a bounded linear functional on $V$. Let $u\\in V$ solve $a(u,w)=F(w)$ for all $w\\in V$, and let $u_p$ be its conforming Galerkin solution in the common-degree trace-matching tensor space of [[def-hp-variable-degree-spaces-on-matching-meshes]]. If the analytic hypotheses of [[thm-hp-analytic-p-convergence-on-fixed-tensor-mesh]] hold with constants $M,R$ and $R^{-1}<q<1$, then\n$$\n\\|u-u_p\\|_{H^1(\\Omega)}\\le C_{\\mathcal T,d,R,q}M q^p.\n$$\nThis is the fixed-mesh analytic branch; it does not assert an h-dependent estimate or an ordinary Sobolev p-rate on simplices.",
+        "source_path": "items/thm-hp-galerkin-energy-error-on-fixed-mesh.md",
+        "local_order": 18,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Basic error analysis",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap26.pdf",
+              "locator": "§26.3.1–26.3.2, printed pp. 28–30: Galerkin orthogonality and the M/alpha Céa factor."
+            },
+            {
+              "title": "Martin Vohralík, Finite Element Methods",
+              "url": "https://who.rocq.inria.fr/Martin.Vohralik/Enseig/FEM/FEM.pdf",
+              "locator": "Chapter 6, Theorem 6.2.1: p-dependent approximation-rate context; the local proof required for that result is not supplied there."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hp-galerkin-h-p-regularity-energy-bound",
+        "strategy": "Complete same-frontier prerequisite authored by the assigned Codex escalation owner; see the exact scope report and source-local proof.",
+        "kind": "theorem",
+        "title": "Galerkin energy error with local h, trace degree and Sobolev regularity",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "lem-hp-simplex-p-explicit-conforming-interpolant",
+          "thm-hp-triangle-unweighted-smooth-approximation",
+          "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "thm-bramble-hilbert-on-reference-simplex",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 26, Basic error analysis",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap26.pdf",
+              "locator": "Sections 26.3.1–26.3.2: Céa transfer of conforming approximation errors. The precise local comparison functional and conservative factorial rate are supplied by the proved local triangle items."
+            },
+            {
+              "title": "Martin Vohralík, Finite Element Methods, Chapter 6, hp finite elements",
+              "url": "https://who.rocq.inria.fr/Martin.Vohralik/Enseig/FEM/FEM.pdf",
+              "locator": "Chapter 6, Theorems 6.2.1 and 6.3.1: h, p and Sobolev-regularity approximation and energy-error context; the exact estimates used here have local proofs."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $\\mathcal T$ be any finite matching shape-regular affine triangulation of a bounded polygonal open set $\\Omega\\subset\\mathbb R^2$, with shape bound $\\gamma$ and arbitrary degrees $p_K\\ge1$. Set $p_E=\\min(p_K,p_{K'})$ on an interior edge, $p_E=p_K$ on a boundary edge, and $m_K=\\min_{E\\subset\\partial K}p_E$. Thus the effective degree retains neighboring shared-trace restrictions, without a bound on degree ratios.\n\nChoose $\\chi=1$ and $V=H^1(\\Omega)$, or $\\chi=0$ and $V=H_0^1(\\Omega)$, with Hilbert norm\n$$\\|v\\|_V^2=|v|_{H^1(\\Omega)}^2+\\chi\\|v\\|_{L^2(\\Omega)}^2.$$\nLet $V_{\\mathcal T,p}$ be the corresponding conforming hp space, imposing zero boundary traces in the $\\chi=0$ branch. Suppose the real bilinear form $a$ and real linear functional $F$ satisfy\n$$|a(v,w)|\\le M_a\\|v\\|_V\\|w\\|_V,\\qquad a(v,v)\\ge\\alpha_a\\|v\\|_V^2,\\qquad \\alpha_a>0,$$\nwith $F$ bounded. Let $u\\in V$ be the variational solution and $u_{\\mathcal T,p}$ its conforming Galerkin solution. Suppose $u\\in C(\\overline\\Omega)$ and $u|_K\\in H^2(K)$; in the zero-boundary branch its continuous representative vanishes on the boundary edges.\n\nFor any cellwise comparison polynomials $q_K\\in\\mathbb P_{m_K}(K)$ put $w_K=u-q_K$ and\n$$J_K(q_K)=|w_K|_{H^1(K)}+\\sum_{E\\subset\\partial K}\\left(\\ell_E^{-1/2}\\|w_K\\|_{L^2(E)}+\\ell_E^{1/2}\\|\\partial_{\\tau_E}w_K\\|_{L^2(E)}\\right),\\qquad R_K(q_K)=h_K^{-1}\\|w_K\\|_{L^2(K)}+J_K(q_K).$$\nThen the actual energy-space error obeys\n$$\\|u-u_{\\mathcal T,p}\\|_V\\le\\frac{M_a}{\\alpha_a}C_\\gamma\\left(\\sum_{K\\in\\mathcal T}\\bigl[J_K(q_K)^2+\\chi h_K^2R_K(q_K)^2\\bigr]\\right)^{1/2}.$$\nThis comparison estimate applies to every degree assignment and the stated piecewise $H^2$ inputs; the comparison polynomials need not match across edges.\n\nFor any cellwise integers $s_K\\ge2$ with $m_K\\ge s_K-1$ and $u|_K\\in H^{s_K}(K)$, this also gives the general h-refinement bound\n$$\\|u-u_{\\mathcal T,p}\\|_V\\le\\frac{M_a}{\\alpha_a}\\left(\\sum_K C_{s_K,\\gamma}^2(1+\\chi h_K^2)h_K^{2(s_K-1)}|u|_{H^{s_K}(K)}^2\\right)^{1/2}.$$\nIn particular every assignment $p_K\\ge1$ admits the piecewise $H^2$ estimate with $s_K=2$.\n\nFor the additional explicit p-dependent refinement, let integers $r_K\\ge5$ satisfy $m_K\\ge2r_K-4$, assume $u|_K\\in H^{r_K}(K)$, and put $n_K=\\lfloor m_K/2\\rfloor$ and\n$$\\eta_{K}=\\left(\\frac{(n_K-r_K+3)!}{(n_K+r_K-5)!}\\right)^{1/2}.$$\nThere are constants $C_{r_K,\\gamma}$ independent of all diameters, degrees and degree ratios such that\n$$\\|u-u_{\\mathcal T,p}\\|_V\\le\\frac{M_a}{\\alpha_a}\\left(\\sum_{K\\in\\mathcal T}C_{r_K,\\gamma}^2(1+\\chi h_K^2)h_K^{2(r_K-1)}\\eta_K^2|u|_{H^{r_K}(K)}^2\\right)^{1/2}.$$\nIf $m_K\\ge4(r_K-2)$, one may replace $\\eta_K$ by $(4/m_K)^{r_K-4}$. For a common regularity $r$, this displays local $h_K^{r-1}$ and the proved conservative trace-degree factor $m_K^{-(r-4)}$. It does not claim the optimal $p^{-(r-1)}$ rate or any bound on growth of $C_{r,\\gamma}$ as $r\\to\\infty$. The separate fixed-mesh tensor-analytic and weighted-corner exponential results remain independent branches.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-hp-gll-strang-error-with-aliasing-defect",
+        "kind": "theorem",
+        "title": "GLL spectral-element energy error retains the quadrature defect",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "def-legendre-gauss-lobatto-rule-on-affine-boxes",
+          "lem-variable-degree-polynomial-spaces-are-h1-conforming",
+          "thm-hp-gll-top-mode-and-puniform-energy-equivalence",
+          "def-variational-crime-error-framework",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice. Let $\\Omega$ have a fixed finite matching affine tensor-box mesh with cell degrees $p_K\\ge1$, and let $V_p$ be its trace-matching hp space. On $V=H^1(\\Omega)$ use $a(v,w)=\\int_\\Omega(\\nabla v\\cdot\\nabla w+vw)$ and a bounded load $F$. Define the discrete form on $V_p$ by\n$$\na_p(v_p,w_p)=\\sum_{K\\in\\mathcal T}\\left(a_{K,p_K}(v_p|_K,w_p|_K)+m_{K,p_K}(v_p|_K,w_p|_K)\\right),\n$$\nusing the GLL stiffness and mass forms from [[def-legendre-gauss-lobatto-rule-on-affine-boxes]]. Let $u$ solve the exact variational problem and let $u_p\\in V_p$ solve $a_p(u_p,w_p)=F(w_p)$ for every $w_p\\in V_p$, with the exact load restricted to $V_p$. Define the form defect $\\delta_{a,p}$ by [[def-variational-crime-error-framework]]. Then\n$$\\|u-u_p\\|_{H^1(\\Omega)} \\le \\inf_{v_p\\in V_p}\\bigl(2\\|u-v_p\\|_{H^1(\\Omega)}+\\delta_{a,p}(v_p)\\bigr).$$\nThe stability factor is uniform in all cell degrees. The defect is retained as stated; no aliasing or p-decay estimate is asserted, and GLL assembly is not identified with exact Galerkin assembly.",
+        "source_path": "items/thm-hp-gll-strang-error-with-aliasing-defect.md",
+        "local_order": 21,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf",
+              "locator": "§§27.1–27.3, printed pp. 1–8: the first Strang estimate and exact consistency defects."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html",
+              "locator": "Chapter 25: variational crimes, stability, and consistency-defect context."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2691,
+    "id": "hp-finite-elements-and-spectral-element-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "hp finite elements and spectral elements — Examples",
+    "companion": "hp-finite-elements-and-spectral-element-methods",
+    "requires": [
+      "hp-finite-elements-and-spectral-element-methods"
+    ],
+    "items": [
+      {
+        "id": "cex-hp-degree-independent-sipdg-penalty-loses-coercivity",
+        "kind": "counterexample",
+        "title": "A degree-independent SIPDG penalty loses coercivity",
+        "deps": [
+          "lem-reference-jacobi-weighted-endpoint-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For the symmetric interior penalty discontinuous Galerkin (SIPDG) form, choosing a penalty coefficient $\\eta$ independent of polynomial degree always makes the form coercive on discontinuous piecewise polynomials.",
+        "source_path": "items/cex-hp-degree-independent-sipdg-penalty-loses-coercivity.md",
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Warburton and Jan S. Hesthaven, On the Constants in hp-Finite Element Trace Inverse Inequalities",
+              "url": "https://infoscience.epfl.ch/server/api/core/bitstreams/a541b153-f562-48eb-baa1-b42f9335269d/content",
+              "locator": "§§2–4, pp. 3–14: sharp p-dependent polynomial endpoint and face inverse trace constants."
+            },
+            {
+              "title": "Leszek F. Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.oden.utexas.edu/~leszek/classes/EM394F/book.pdf",
+              "locator": "§3.1.4, printed pp. 64–68: hierarchical p-version bases; the explicit SIPDG witness is proved locally."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-hp-gll-mass-top-mode-correction",
+        "kind": "example",
+        "title": "The degree-two GLL mass matrix changes only its highest Legendre mode",
+        "deps": [
+          "def-legendre-gauss-lobatto-rule-on-affine-boxes",
+          "thm-hp-gll-top-mode-and-puniform-energy-equivalence",
+          "lem-legendre-weighted-derivative-orthogonality-and-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For $p=2$, the one-dimensional Legendre basis $(P_0,P_1,P_2)$ has exact mass matrix $\\operatorname{diag}(2,2/3,2/5)$, whereas the GLL quadrature mass matrix is $\\operatorname{diag}(2,2/3,1)$. The only change is the top mode, with correction $3/5$.",
+        "source_path": "items/ex-hp-gll-mass-top-mode-correction.md",
+        "local_order": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Short note on the mass matrix for Gauss-Lobatto grid points",
+              "url": "https://arxiv.org/pdf/1412.2276",
+              "locator": "§§2–3, pp. 2–6: the highest Legendre coefficient gives the rank-one mass correction."
+            },
+            {
+              "title": "Lucas Johannes Petrus Timmermans, Analysis of Spectral Element Methods with Application to Incompressible Flow",
+              "url": "https://pure.tue.nl/ws/portalfiles/portal/3500485/412687.pdf",
+              "locator": "§2.2.4, PDF pp. 35–37: GLL mass matrix in the nodal basis."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-hp-reentrant-corner-h-versus-hp",
+        "kind": "example",
+        "title": "A reentrant-corner mode separates fixed-degree h error from hp error",
+        "deps": [
+          "def-hp-variable-degree-spaces-on-matching-meshes",
+          "cor-finite-dimensional-subspaces-are-closed",
+          "lem-hp-weighted-analytic-corner-pointwise-control",
+          "thm-hp-corner-exponential-energy-convergence",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice for the hp comparison. Let\n\n$$\n\\Omega=((-1,1)\\times(0,1))\\cup((-1,0)\\times(-1,1)),\n$$\n\nthe L-shaped polygon with reentrant corner at the origin. In polar coordinates about the origin, $\\Omega$ lies in $0<\\theta<3\\pi/2$. Define\n\n$$\nu(r,\\theta)=r^{2/3}\\sin(2\\theta/3).\n$$\n\nThis mode vanishes on exactly the two boundary edges ending at the origin, which are the fixed Dirichlet set $\\Gamma_D$; no zero boundary value is imposed on the outer edges. Let $\\widehat T$ be a fixed nondegenerate closed triangle with one vertex at the origin and $\\widehat T\\setminus\\{0\\}\\subset\\Omega$. Choose $h_0>0$ so $T_h=h\\widehat T\\subset\\overline\\Omega$ for $0<h\\le h_0$. For each fixed integer degree $p\\ge0$ there is $c_p>0$ such that\n\n$$\n\\inf_{q\\in\\mathbb P_p(T_h)}|u-q|_{H^1(T_h)}\\ge c_ph^{2/3}.\n$$\n\nThis gives a local lower bound for fixed-degree approximation; if $T_h$ is itself one cell of a piecewise-polynomial mesh and its local degree is $p$, it also bounds below the global error on that mesh. In contrast, on any nested matching shape-regular corner-graded mesh family satisfying the hypotheses of [[thm-hp-corner-exponential-energy-convergence]], with uniform total degrees $p_k\\simeq k$ and zero values imposed only on $\\Gamma_D$,\n\n$$\n\\inf_{v_k\\in V_k}|u-v_k|_{H^1(\\Omega)}\\le Ce^{-bN_k^{1/3}}.\n$$\n\n\nThe diagram records the reentrant sector and the two boundary edges in $\\Gamma_D$. The proof uses the coordinate description above, not the picture.\n\n```tikz\n\\begin{tikzpicture}[scale=1.35]\n  \\fill[gray!12] (-1,-1) -- (0,-1) -- (0,0) -- (1,0) -- (1,1) -- (-1,1) -- cycle;\n  \\draw[thick] (-1,-1) -- (0,-1) -- (0,0) -- (1,0) -- (1,1) -- (-1,1) -- cycle;\n  \\draw[blue,very thick] (0,-1) -- (0,0) -- (1,0);\n  \\draw[->] (0.42,0) arc[start angle=0,end angle=270,radius=0.42];\n  \\node[blue] at (0.47,0.13) {$\\Gamma_D$};\n  \\node[above left] at (0,0) {$c=(0,0)$};\n  \\node at (-0.55,0.52) {$u(r,\\theta)$};\n  \\node[right] at (1,0) {$\\theta=0$};\n  \\node[below] at (0,-1) {$\\theta=3\\pi/2$};\n\\end{tikzpicture}\n```",
+        "source_path": "items/ex-hp-reentrant-corner-h-versus-hp.md",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martin Vohralík, Finite Element Methods, Chapter 6: hp finite elements",
+              "url": "https://who.rocq.inria.fr/Martin.Vohralik/Enseig/FEM/FEM.pdf",
+              "locator": "Theorems 6.2.1 and 6.4.1, printed pp. 55–58: the p-approximation and exponential corner comparison context; omitted approximation details are supplied locally in this batch."
+            },
+            {
+              "title": "Yanchen He, Paul Houston, Christoph Schwab, and Thomas P. Wihler, Exponential Convergence of hp-ILGFEM, version 1",
+              "url": "https://arxiv.org/pdf/2404.18569",
+              "locator": "§2.3 and §4.1, Definition 1, equations (29)–(31), and Theorem 2, PDF pp. 5–11: weighted corner class and geometric hp comparison context; the proof below verifies both the local h witness and its weighted membership."
+            }
+          ]
+        },
+        "owner_proposal": "research/numerical-analysis-remaining-71-2026-10-17-ROOT-hp-corner-supplier-cycle1/proposed/items/ex-hp-reentrant-corner-h-versus-hp.md",
+        "local_order": 4,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-hp-analytic-p-refinement-on-a-fixed-box",
+        "kind": "example",
+        "title": "An analytic box solution has exponential Galerkin p convergence",
+        "deps": [
+          "thm-hp-analytic-p-convergence-on-fixed-tensor-mesh",
+          "thm-hp-galerkin-energy-error-on-fixed-mesh",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Assume Countable Choice.\n\nOn the single reference square $\\Omega=(-1,1)^2$ let $u(x,y)=1/(4-x)$ and use $a(v,w)=\\int_\\Omega(\\nabla v\\cdot\\nabla w+vw)$ on $H^1(\\Omega)$ with exact load $F(w)=a(u,w)$. For every $p\\ge1$, the tensor-degree-$p$ conforming Galerkin solution $u_p$ satisfies\n$$\n\\|u-u_p\\|_{H^1(\\Omega)}\\le C\\,\\frac13\\left(\\frac34\\right)^p\n$$\nfor a fixed constant $C$.",
+        "source_path": "items/ex-hp-analytic-p-refinement-on-a-fixed-box.md",
+        "local_order": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, p-version FEM",
+              "url": "https://jschoeberl.github.io/iFEM/pversion/hpfem.html",
+              "locator": "§§30.1–30.4: Legendre projection and exponential p-approximation context; the example uses the local explicit estimate."
+            },
+            {
+              "title": "Leszek F. Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.oden.utexas.edu/~leszek/classes/EM394F/book.pdf",
+              "locator": "§3.1.4, printed pp. 64–68: p-refinement spaces and hierarchical polynomial degrees."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

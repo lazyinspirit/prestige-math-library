@@ -1,0 +1,781 @@
+[
+  {
+    "order": 2636,
+    "id": "energy-stable-incompressible-navier-stokes-discretization",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Evolutionary incompressible flow discretization",
+    "companion": "energy-stable-incompressible-navier-stokes-discretization-examples",
+    "requires": [
+      "mixed-finite-elements-and-stokes-stability",
+      "nonlinear-parabolic-compactness-and-monotone-evolution"
+    ],
+    "items": [
+      {
+        "id": "lem-na-halfline-heat-logarithmic-mass-loss",
+        "kind": "lemma",
+        "title": "Logarithmic halfline heat mass loss at the pressure endpoint",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-gaussian-kernels-form-an-approximate-identity",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-young-convolution-inequality",
+          "thm-dominated-convergence",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 0,
+        "strategy": "Fully author the complete locally proved proposal at research/numerical-analysis-remaining-71-2026-10-17-ROOT-mini-pressure-supplier-cycle4/proposed-items/lem-na-halfline-heat-logarithmic-mass-loss.md; preserve exact original domain, force, initial-data and mesh scope. The generated counterexample is contextual, never a logical supplier.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume the Axiom of Choice. Fix $\\nu>0$, $1/2<\\alpha\\le3/4$, and nonnegative $\\eta\\in C^\\infty([0,\\infty))$ supported in $[0,1/16)$ and equal to $1$ on $[0,1/32]$. Define $w_0(y)=\\eta(y)y^{-1/2}(\\log(1/y))^{-\\alpha}$ for $0<y<1/16$, and $w_0(y)=0$ for $y\\ge1/16$. Put\n$$G_t(s)=(4\\pi\\nu t)^{-1/2}e^{-s^2/(4\\nu t)},$$\n$$w(t,y)=\\int_0^\\infty[G_t(y-z)-G_t(y+z)]w_0(z)\\,dz.$$\nThen $w_0\\in L^1\\cap L^2(0,\\infty)$, $w\\ge0$, $w(t,0)=0$, $w_t=\\nu w_{yy}$, and $w$ is smooth for positive time, including at $y=0$. Moreover\n$$\\sup_{t>0}\\|w(t)\\|_j\\le\\|w_0\\|_j\\quad(j=1,2),\\qquad w(t)\\to w_0\\text{ in }L^2\\text{ as }t\\downarrow0,$$\n$$\\int_0^T\\|w_y(t)\\|_2^2\\,dt\\le(2\\nu)^{-1}\\|w_0\\|_2^2,\\qquad \\int_0^T\\|w(t)\\|_4^4\\,dt<\\infty.$$\nWrite $M(t)=\\int_0^\\infty w(t,y)\\,dy$, $M_0=\\int_0^\\infty w_0$, $m(t)=M(t)-M_0$, and $h(t,y)=-\\int_y^\\infty w(t,z)\\,dz$. Then $h_y=w$, $h_t=\\nu h_{yy}$, $h(t,0)=-M(t)$, and $m(0)=0$. For some $t_*>0$ and $c,C>0$, writing $L(t)=\\log(1/t)$,\n$$c t^{-3/4}L(t)^{-\\alpha}\\le -m'(t)\\le C t^{-3/4}L(t)^{-\\alpha},\\qquad |m(t)|\\le C t^{1/4}L(t)^{-\\alpha}\\quad(0<t<t_*).$$\nConsequently $m'\\in L^1(0,T)\\setminus L^{4/3}(0,T)$ and\n$$\\int_0^T\\bigl(|m'(t)|t^{1/4}+|m(t)|t^{-3/4}\\bigr)^2\\,dt<\\infty$$\nfor every finite $T>0$. On each bounded $y$ interval, $h(t,\\cdot)\\to h_0(\\cdot)=-\\int_{\\cdot}^\\infty w_0$ uniformly as $t\\downarrow0$. On each closed interval separated from $\\operatorname{supp}w_0$, all spatial derivatives of $w$ are bounded for small positive time by $C_Nt^{-N}e^{-c/t}$, with constants allowed to depend on the derivative."
+      },
+      {
+        "id": "lem-na-shrinking-boundary-stream-corrector",
+        "kind": "lemma",
+        "title": "A shrinking clamped-stream correction on the square",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-holder-inequality-for-integrals",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
+        ],
+        "dependency_level": 0,
+        "strategy": "Fully author the complete locally proved proposal at research/numerical-analysis-remaining-71-2026-10-17-ROOT-mini-pressure-supplier-cycle4/proposed-items/lem-na-shrinking-boundary-stream-corrector.md; preserve exact original domain, force, initial-data and mesh scope. The generated counterexample is contextual, never a logical supplier.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume the Axiom of Choice. Let $D=(0,1)^2$, $b\\in C^\\infty(\\overline D)$ vanish on $\\partial D$, and choose $\\rho\\in C^\\infty([0,\\infty))$ equal to $1$ on $[0,1/3]$ and $0$ on $[1,\\infty)$. Set $d_1=x$, $d_2=1-x$, $d_3=y$, $d_4=1-y$, and\n$$R_\\ell(x,y)=1-\\prod_{i=1}^4(1-\\rho(d_i/\\ell)),\\qquad 0<\\ell<1/16.$$\nThis function is $1$ near the boundary and supported in strips of total area at most $4\\ell$. There is $C$, independent of $\\ell$, such that\n$$\\|\\nabla(bR_\\ell)\\|_\\infty\\le C,\\qquad \\|D^k(bR_\\ell)\\|_2\\le C\\ell^{3/2-k}\\quad(k=1,2,3).$$\nFor $\\ell(t)=\\sqrt t$, $0<t<T<1/256$,\n$$\\|\\partial_t\\nabla(bR_{\\sqrt t})\\|_2\\le Ct^{-1}t^{1/4}.$$\nIf $m\\in C^1((0,T))$, $\\operatorname{rot}\\psi=(\\psi_y,-\\psi_x)$, and $r=-m\\operatorname{rot}(bR_{\\sqrt t})$, then\n$$\\|r\\|_\\infty\\le C|m|,\\quad \\|r\\|_2\\le C|m|t^{1/4},\\quad \\|\\nabla r\\|_2\\le C|m|t^{-1/4},$$\n$$\\|r_t\\|_2+\\|\\Delta r\\|_2\\le C(|m'|t^{1/4}+|m|t^{-3/4}).$$\nMoreover $bR_\\ell=0$ and $\\partial_n(bR_\\ell)=\\partial_n b$ on each side. Thus if a smooth stream $\\Psi$ has zero boundary value and $\\partial_n\\Psi=m\\partial_n b$, then $\\Psi-mbR_\\ell$ has both zero value and zero normal derivative there, and its rotation has zero velocity trace. On any fixed $J\\Subset(0,1)$ and sufficiently small $t$, the additional estimate $\\|\\partial_xr\\|_{L^\\infty(J\\times(0,1))}\\le C_J|m|$ holds."
+      },
+      {
+        "id": "lem-na-solenoidal-scalar-equations-give-weak-continuity",
+        "kind": "lemma",
+        "title": "Scalar weak equations give a weakly continuous Hilbert-space representative",
+        "statement": "Assume the Axiom of Choice. Let $0<T<\\infty$, let $H$ be a separable real Hilbert space, let $X\\subseteq H$ be a dense real linear subspace, and let $u_0\\in H$. Suppose $u\\in L^2(0,T;H)$ and $\\|u(t)\\|_H\\le M$ for almost every $t$, for some finite $M$. Suppose also that for every $v\\in X$ there is $h_v\\in L^1(0,T)$ such that, for every $\\eta\\in C^1([0,T])$ vanishing near $T$,\n$$-\\int_0^T (u(t),v)_H\\eta'(t)\\,dt=\\int_0^T h_v(t)\\eta(t)\\,dt+(u_0,v)_H\\eta(0).$$\nThen there is a unique weakly continuous map $\\widetilde u:[0,T]\\to H$ equal to $u$ almost everywhere and satisfying $\\widetilde u(0)=u_0$. Here weak continuity means that $t\\mapsto(\\widetilde u(t),w)_H$ is continuous for every $w\\in H$.",
+        "deps": [
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-countable-union-of-null-is-null",
+          "def-separable-space",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+        ],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Introduction to Finite Element Methods: evolution-space background",
+              "url": "https://arxiv.org/pdf/1709.08618v2.pdf",
+              "locator": "Chapter 11 evolution-space context; the scalar-equation/Riesz argument is proved locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-evolutionary-skew-convective-form",
+        "kind": "definition",
+        "title": "The skew convective form for incompressible flow",
+        "statement": "Let $D\\subset\\mathbb R^d$ be a bounded connected Lipschitz domain with $d\\in\\{2,3\\}$, and let $V=H^1_0(D;\\mathbb R^d)$ as in [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]]. For $a,b,c\\in V$, define the real **skew convective form**\n$$c(a;b,c):=\\frac12\\int_D\\big((a\\cdot\\nabla)b\\cdot c-(a\\cdot\\nabla)c\\cdot b\\big)\\,dx.$$\nThe middle and last slots are displayed separately to emphasize $c(a;b,c)=-c(a;c,b)$. In particular $c(a;b,b)=0$. The integrals are well-defined on $V$ by [[lem-na-evolutionary-skew-convective-form-bound]]. If additionally $\\operatorname{div}a=0$, then $c(a;b,c)=\\int_D(a\\cdot\\nabla)b\\cdot c$.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces"
+        ],
+        "dependency_level": 2,
+        "strategy": "Local proof or explicit, source-linked definition; proof contracts are generated from the finished carrier.",
+        "justified_by": [
+          "lem-na-evolutionary-skew-convective-form-bound"
+        ],
+        "aliases": []
+      },
+      {
+        "id": "def-na-evolutionary-incompressible-ns-weak-solution",
+        "kind": "definition",
+        "title": "Energy weak solutions of incompressible Navier–Stokes",
+        "statement": "Assume Countable Choice, as in the Stokes-space conventions of [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]]. Let $D\\subset\\mathbb R^d$ be a nonempty bounded connected Lipschitz domain, $d\\in\\{2,3\\}$, and let $\\nu>0$. Use $V=H^1_0(D;\\mathbb R^d)$ and $Q=L^2_0(D)$ from [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]], the viscosity form $a_\\nu(v,w)=2\\nu\\int_D\\varepsilon(v):\\varepsilon(w)$, and the form $c$ from [[def-na-evolutionary-skew-convective-form]]. Set\n$$V_\\sigma=\\{v\\in V:\\operatorname{div}v=0\\text{ in }L^2(D)\\},\\qquad H_\\sigma=\\overline{V_\\sigma}^{\\,L^2(D)}.$$\nFor $f\\in L^2(0,T;L^2(D;\\mathbb R^d))$ and $u_0\\in H_\\sigma$, an **energy weak solution** is a velocity $u\\in L^\\infty(0,T;H_\\sigma)\\cap L^2(0,T;V_\\sigma)$, weakly continuous into $H_\\sigma$, and a pressure $p\\in L^{4/3}(0,T;Q)$ with zero spatial mean a.e., such that $\\operatorname{div}u=0$ a.e. and, for every $\\varphi\\in C^1([0,T];V)$ vanishing near $T$,\n$$-\\int_0^T(u,\\partial_t\\varphi)_{L^2}\\,dt+\\int_0^T\\big(a_\\nu(u,\\varphi)+c(u;u,\\varphi)+b(\\varphi,p)\\big)\\,dt=\\int_0^T(f,\\varphi)_{L^2}\\,dt+(u_0,\\varphi(0))_{L^2}.$$\nIt also satisfies, for almost every $t\\in(0,T)$,\n$$\\frac12\\|u(t)\\|_{L^2}^2+\\nu\\int_0^t\\|\\nabla u(s)\\|_{L^2}^2\\,ds\\le\\frac12\\|u_0\\|_{L^2}^2+\\int_0^t(f(s),u(s))_{L^2}\\,ds.$$\nNo uniqueness is included in this definition. The formulation uses the real duality convention of [[def-pe12-gelfand-triple]].",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-evolutionary-skew-convective-form",
+          "def-pe12-gelfand-triple",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "Local proof or explicit, source-linked definition; proof contracts are generated from the finished carrier.",
+        "justified_by": [
+          "lem-na-evolutionary-ns-weak-form-is-well-defined"
+        ],
+        "aliases": []
+      },
+      {
+        "id": "lem-na-evolutionary-skew-convective-form-bound",
+        "kind": "lemma",
+        "title": "Continuity, energy cancellation, and Sobolev bounds for skew convection",
+        "statement": "Assume Countable Choice. For $d\\in\\{2,3\\}$ and $V=H^1_0(D;\\mathbb R^d)$ on a bounded Lipschitz domain, the form in [[def-na-evolutionary-skew-convective-form]] is a continuous real trilinear map $V^3\\to\\mathbb R$, is skew in its last two slots, and satisfies\n$$|c(a;b,w)|\\le C_D\\|a\\|_{L^2}^{1/2}\\|\\nabla a\\|_{L^2}^{1/2}\\|\\nabla b\\|_{L^2}\\|\\nabla w\\|_{L^2}.$$\nConsequently, if $u\\in L^\\infty(0,T;L^2)\\cap L^2(0,T;V)$, then $c(u;u,\\cdot)\\in L^{4/3}(0,T;V^*)$. If $\\operatorname{div}u=0$ and $d=2$, the sharper estimate\n$$|c(u;u,w)|\\le C_D\\|u\\|_{L^2}\\|\\nabla u\\|_{L^2}\\|\\nabla w\\|_{L^2}$$\nholds. If $\\operatorname{div}a=0$, the skew form agrees with the advective form $\\int_D(a\\cdot\\nabla)b\\cdot w$.",
+        "deps": [
+          "def-na-evolutionary-skew-convective-form",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "cor-sobolev-inequality-for-w-one-p-zero",
+          "thm-holder-inequality-for-integrals",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "def-na-mini-navier-stokes-backward-euler-scheme",
+        "kind": "definition",
+        "title": "The mixed mini-element backward Euler Navier–Stokes scheme",
+        "statement": "Assume Countable Choice as inherited from the energy-space conventions. Interpret each interval forcing average as a Bochner integral; its existence follows from the stated L2 forcing and the Bochner integrability criterion ([[def-countable-choice]], [[thm-bochner-integrability-criterion]]). Let $D$ be as in [[def-na-evolutionary-incompressible-ns-weak-solution]], let $\\mathcal T_h$ be a conforming shape-regular affine simplicial mesh of $D$, and let $V_h,Q_h,Z_h$ be the MINI spaces and weak divergence kernel of [[def-na-mini-element-p1-bubble-p1-spaces]] and [[def-na-discrete-weak-and-exact-divergence-free-spaces]]. For a partition $0=t_0<\\cdots<t_N=T$, write $\\tau_n=t_n-t_{n-1}$ and $f_h^n=\\tau_n^{-1}\\int_{t_{n-1}}^{t_n}f(t)\\,dt$. Given $u_h^0\\in Z_h$, a **backward Euler mini-element solution** is a sequence $(u_h^n,p_h^n)\\in V_h\\times Q_h$ satisfying, for $n=1,\\ldots,N$,\n$$\\left(\\frac{u_h^n-u_h^{n-1}}{\\tau_n},v_h\\right)_{L^2}+a_\\nu(u_h^n,v_h)+c(u_h^n;u_h^n,v_h)+b(v_h,p_h^n)=(f_h^n,v_h)_{L^2}\\quad(v_h\\in V_h),$$\n$$b(u_h^n,q_h)=0\\quad(q_h\\in Q_h).$$\nAll pressure variables use the zero-mean gauge $Q_h\\subset L^2_0(D)$. Restriction to $v_h\\in Z_h$ eliminates pressure. The equations are well-defined by [[lem-na-mini-be-scheme-is-well-defined]]; this definition claims no solver termination or error rate.",
+        "deps": [
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "def-na-evolutionary-skew-convective-form",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Local proof or explicit, source-linked definition; proof contracts are generated from the finished carrier.",
+        "justified_by": [
+          "lem-na-mini-be-scheme-is-well-defined"
+        ],
+        "aliases": []
+      },
+      {
+        "id": "def-na-solenoidal-energy-weak-ns-velocity",
+        "kind": "definition",
+        "title": "Solenoidal energy weak velocity for incompressible Navier–Stokes",
+        "statement": "Assume Countable Choice as inherited from [[def-na-evolutionary-incompressible-ns-weak-solution]]. Let $D$, $V$, $Q$, $V_\\sigma$, $H_\\sigma$, $a_\\nu$, and $c$ be as in [[def-na-evolutionary-incompressible-ns-weak-solution]]; the Stokes velocity and pressure spaces are $V=H^1_0(D)^d$ and $Q=L^2_0(D)$ as specified in [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]]. For $f\\in L^2(0,T;L^2(D)^d)$ and $u_0\\in H_\\sigma$, a **solenoidal energy weak velocity** is a velocity $u\\in L^\\infty(0,T;H_\\sigma)\\cap L^2(0,T;V_\\sigma)$ that is weakly continuous into $H_\\sigma$, satisfies $\\operatorname{div}u=0$ almost everywhere, and obeys the scalar-test weak equation\n$$-\\int_0^T(u(t),v)_{L^2}\\eta'(t)\\,dt+\\int_0^T\\big(a_\\nu(u(t),v)+c(u(t);u(t),v)\\big)\\eta(t)\\,dt=\\int_0^T(f(t),v)_{L^2}\\eta(t)\\,dt+(u_0,v)_{L^2}\\eta(0)$$\nfor every fixed $v\\in V_\\sigma$ and $\\eta\\in C^1([0,T])$ vanishing near $T$. It also satisfies, for almost every $t\\in(0,T)$,\n$$\\frac12\\|u(t)\\|_{L^2}^2+\\nu\\int_0^t\\|\\nabla u(s)\\|_{L^2}^2\\,ds\\le\\frac12\\|u_0\\|_{L^2}^2+\\int_0^t(f(s),u(s))_{L^2}\\,ds.$$\nThis solenoidal definition does not itself assert a pressure exists in $L^{4/3}(0,T;L^2_0(D))$; that is a separate regularity conclusion.",
+        "deps": [
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-evolutionary-skew-convective-form",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Local proof or explicit, source-linked definition; proof contracts are generated from the finished carrier.",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "lem-na-evolutionary-ns-weak-form-is-well-defined",
+        "kind": "lemma",
+        "title": "Integrability of the energy weak Navier–Stokes formulation",
+        "statement": "Assume Countable Choice. For the energy class and data in [[def-na-evolutionary-incompressible-ns-weak-solution]], every term in its time-tested momentum identity is integrable, and the nonlinear map $t\\mapsto c(u(t);u(t),\\cdot)$ belongs to $L^{4/3}(0,T;V^*)$.",
+        "deps": [
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "lem-na-evolutionary-skew-convective-form-bound",
+          "def-pe12-gelfand-triple",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-na-ns-weak-solution-uniqueness-2d-and-weak-strong-3d",
+        "kind": "theorem",
+        "title": "Two-dimensional uniqueness and conditional three-dimensional weak–strong uniqueness",
+        "statement": "Assume the Axiom of Choice. Let $D\\subset\\mathbb R^d$ be bounded, connected and Lipschitz, let $\\nu>0$, and use the energy weak-solution definition in [[def-na-evolutionary-incompressible-ns-weak-solution]]. For fixed data $(u_0,f)$, energy weak solutions are unique when $d=2$. When $d=3$, if one of two energy weak solutions $v$ additionally belongs to $C^1([0,T];V_\\sigma)$, has $\\nabla v\\in L^1(0,T;L^\\infty(D))$, and its equation holds as an identity in $V_\\sigma^*$ almost everywhere in time, then every other energy weak solution with the same data equals $v$. The three-dimensional conclusion is conditional on this strong branch and asserts no uniqueness between arbitrary energy weak solutions.",
+        "deps": [
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-evolutionary-skew-convective-form-bound",
+          "lem-pe12-evolution-energy-chain-rule",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "thm-holder-inequality-for-integrals",
+          "thm-young-inequality-real-exponents",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "lem-na-mini-be-scheme-is-well-defined",
+        "kind": "lemma",
+        "title": "Well-definedness of the finite-dimensional mini backward Euler equations",
+        "statement": "Assume Countable Choice. For each fixed finite mesh and time partition in [[def-na-mini-navier-stokes-backward-euler-scheme]], every term of its velocity equation is a continuous finite-dimensional functional of the trial and test vectors, the pressure constraints are linear, and the forcing averages exist.",
+        "deps": [
+          "def-na-mini-navier-stokes-backward-euler-scheme",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "def-na-evolutionary-skew-convective-form",
+          "lem-na-evolutionary-skew-convective-form-bound",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "lem-na-two-dimensional-solenoidal-energy-velocity-uniqueness",
+        "kind": "lemma",
+        "title": "Uniqueness and strong trace for two-dimensional solenoidal energy velocities",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-na-solenoidal-energy-weak-ns-velocity",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-evolutionary-skew-convective-form",
+          "def-pe12-gelfand-triple",
+          "lem-pe12-evolution-energy-chain-rule",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-sobolev-spaces-are-banach-spaces",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "cor-hilbert-spaces-are-reflexive",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "thm-holder-inequality-for-integrals",
+          "thm-dominated-convergence",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "lem-na-evolutionary-skew-convective-form-bound"
+        ],
+        "dependency_level": 5,
+        "strategy": "Fully author the complete locally proved proposal at research/numerical-analysis-remaining-71-2026-10-17-ROOT-mini-pressure-supplier-cycle4/proposed-items/lem-na-two-dimensional-solenoidal-energy-velocity-uniqueness.md; preserve exact original domain, force, initial-data and mesh scope. The generated counterexample is contextual, never a logical supplier.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume the Axiom of Choice. Let $D\\subset\\mathbb R^2$ be bounded, connected, Lipschitz and polyhedral, $T>0$, $\\nu>0$, $f\\in L^2(0,T;L^2(D)^2)$ and $u_0\\in H_\\sigma$. There is at most one solenoidal energy weak velocity in the sense of [[def-na-solenoidal-energy-weak-ns-velocity]] for these data. Every such velocity belongs to $L^4(0,T;L^4(D)^2)\\cap C([0,T];H_\\sigma)$ and has its actual restricted derivative in $L^2(0,T;V_\\sigma^*)$. The continuity is strong, its initial value is $u_0$, and its solenoidal evolution equation satisfies the Hilbert-triple energy chain rule. No full nonsolenoidal $V^*$ derivative or regular instantaneous pressure is asserted."
+      },
+      {
+        "id": "lem-na-continuous-pressure-recovery-from-solenoidal-residual",
+        "kind": "lemma",
+        "title": "Mean-zero pressure recovery from a solenoidal residual",
+        "statement": "Assume Countable Choice and let $D$ be bounded, connected and Lipschitz. If $1<s<\\infty$ and $R\\in L^s(0,T;V^*)$ satisfies $R(t)(v)=0$ for every $v\\in V_\\sigma=\\ker(\\operatorname{div}:V\\to L^2_0(D))$ outside one common null set, then there is a unique $p\\in L^s(0,T;L^2_0(D))$ such that $R(t)(v)=b(v,p(t))$ for every $v\\in V$ almost everywhere. Moreover, $\\|p\\|_{L^sL^2}\\le C_{\\rm div}(D)\\|R\\|_{L^sV^*}$.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "lem-na-mini-fortin-l2-approximation",
+        "kind": "lemma",
+        "title": "The mini-element Fortin map approximates in L2",
+        "statement": "Let $\\Pi_h:H^1_0(D;\\mathbb R^d)\\to V_h$ be the MINI Fortin map constructed in [[thm-na-mini-element-fortin-stability]]. On every shape-regular matching mesh, there is a constant $C$ independent of $h$ such that\n$$\\|v-\\Pi_hv\\|_{L^2(D)}\\le Ch\\|\\nabla v\\|_{L^2(D)}\\qquad(v\\in H^1_0(D;\\mathbb R^d)).$$\nFor every fixed $v\\in H^1_0(D)^d$, $\\Pi_hv\\to v$ in $H^1_0$ as $h\\to0$. If $v\\in V_\\sigma$, exact Fortin preservation also gives $\\Pi_hv\\in Z_h$.",
+        "deps": [
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "thm-na-mini-element-fortin-stability",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "lem-shape-regular-affine-simplex-scaling",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-na-mini-be-step-existence-energy",
+        "kind": "theorem",
+        "title": "Backward Euler MINI step existence and discrete energy bound",
+        "statement": "Assume Countable Choice, the mini-element hypotheses of [[def-na-mini-navier-stokes-backward-euler-scheme]], $f\\in L^2(0,T;L^2(D)^d)$, and an initial value $u_h^0\\in Z_h$. On every finite positive time partition there is at least one mixed solution $(u_h^n,p_h^n)_{n=1}^N$ of the backward Euler scheme. Every such solution satisfies, for $0\\le m\\le N$, the work-form inequality\n$$\\frac12\\|u_h^m\\|_2^2+\\frac12\\sum_{n=1}^m\\|u_h^n-u_h^{n-1}\\|_2^2+\\nu\\sum_{n=1}^m\\tau_n\\|\\nabla u_h^n\\|_2^2\\le\\frac12\\|u_h^0\\|_2^2+\\sum_{n=1}^m\\tau_n(f_h^n,u_h^n)_{L^2}.$$\nConsequently it satisfies the mesh-independent estimate\n$$\\frac12\\|u_h^m\\|_2^2+\\frac12\\sum_{n=1}^m\\|u_h^n-u_h^{n-1}\\|_2^2+\\frac{\\nu}{2}\\sum_{n=1}^m\\tau_n\\|\\nabla u_h^n\\|_2^2\\le\\frac12\\|u_h^0\\|_2^2+\\frac{C_P(D)^2}{2\\nu}\\|f\\|_{L^2(0,T;L^2)}^2.$$\nThe constant is independent of mesh size and time-step sizes.",
+        "deps": [
+          "def-na-mini-navier-stokes-backward-euler-scheme",
+          "lem-na-mini-be-scheme-is-well-defined",
+          "def-na-evolutionary-skew-convective-form",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-evolutionary-skew-convective-form-bound",
+          "lem-pe12-outward-zero-brouwer",
+          "thm-na-mini-element-fortin-stability",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "lem-parabolic-discrete-energy-identity",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-holder-inequality-for-integrals",
+          "lem-bochner-integral-norm-inequality",
+          "thm-young-inequality-real-exponents",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "lem-na-mini-fortin-h2-approximation",
+        "kind": "lemma",
+        "title": "Second-order L2 approximation by the MINI Fortin map",
+        "deps": [
+          "thm-na-mini-element-fortin-stability",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "thm-na-discrete-helmholtz-projection-and-pressure-schur",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "Fully author the complete locally proved proposal at research/numerical-analysis-remaining-71-2026-10-17-ROOT-mini-pressure-supplier-cycle4/proposed-items/lem-na-mini-fortin-h2-approximation.md; preserve exact original domain, force, initial-data and mesh scope. The generated counterexample is contextual, never a logical supplier.",
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume Countable Choice. Let $D$ be a bounded connected Lipschitz polygonal or polyhedral domain in dimension $d\\in\\{2,3\\}$, with a matching affine shape-regular simplicial mesh and $h=\\max_Kh_K$. Let $I_h$ be the face-average interpolant of [[lem-na-scott-zhang-boundary-preserving-p1-interpolant]], and let $\\Pi_h$ be exactly the MINI Fortin map constructed in [[thm-na-mini-element-fortin-stability]]:\n$$\\Pi_hv=I_hv+\\sum_Kb_Kc_K,\\qquad c_K=\\frac{\\int_K(v-I_hv)}{\\int_Kb_K}.$$\nFor $\\omega_K$ the vertex patch of $K$ and every $v\\in H^2(D)^d\\cap H^1_0(D)^d$,\n$$\\|v-\\Pi_hv\\|_{L^2(K)}\\le Ch_K^2\\|D^2v\\|_{L^2(\\omega_K)},\\qquad \\|\\nabla(v-\\Pi_hv)\\|_{L^2(K)}\\le Ch_K\\|D^2v\\|_{L^2(\\omega_K)}.$$\nConsequently,\n$$\\|v-\\Pi_hv\\|_2\\le Ch^2\\|D^2v\\|_2,\\qquad \\|v-\\Pi_hv\\|_V\\le Ch\\|D^2v\\|_2,\\qquad \\|w\\|_V:=\\|\\nabla w\\|_2.$$\nThe constants depend only on dimension, the fixed domain and the mesh shape-regularity bound. They are independent of the smallest element diameter and require no quasiuniformity.\n\nLet $V_\\sigma$ and $Z_h$ be the exact solenoidal space and weak MINI kernel, and let $P_{Z_h}:L^2(D)^d\\to Z_h$ be the $L^2$-orthogonal projector. For every $v\\in H^2(D)^d\\cap V_\\sigma$,\n$$\\Pi_hv\\in Z_h,\\qquad \\|(I-P_{Z_h})v\\|_2\\le Ch^2\\|D^2v\\|_2.$$\nIn particular, if $u\\in W^{1,\\infty}(0,T;H^2(D)^d\\cap V_\\sigma)$, then\n$$\\|(I-P_{Z_h})u\\|_{L^\\infty(0,T;L^2)}\\le Ch^2\\|u\\|_{L^\\infty(0,T;H^2)},\\qquad \\|(I-P_{Z_h})u_t\\|_{L^\\infty(0,T;L^2)}\\le Ch^2\\|u_t\\|_{L^\\infty(0,T;H^2)}.$$"
+      },
+      {
+        "id": "lem-na-mini-weak-solenoidal-compactness",
+        "kind": "lemma",
+        "title": "Strong L2 compactness for weakly solenoidal MINI trajectories",
+        "statement": "Assume the Axiom of Choice. Let $D\\subset\\mathbb R^d$ be bounded, connected and polyhedral, $d=2$ or $3$. Let $\\mathcal T_j$ be matching shape-regular meshes with $h_j\\to0$, let $Z_j$ be the weak MINI divergence kernels, and let $0=t_0^j<\\cdots<t_{N_j}^j=T$ have maximum step tending to zero. Suppose $U_j^n\\in Z_j$, their piecewise-constant reconstructions $\\overline U_j$ satisfy\n$$\\sup_j\\left(\\max_n\\|U_j^n\\|_{L^2}+\\|\\overline U_j\\|_{L^2(0,T;H^1_0)}\\right)<\\infty,$$\nand the following coefficient condition holds: for every finite $L^2$-orthonormal family $e_1,\\ldots,e_m\\in V_\\sigma$, the $E$-valued piecewise-constant functions\n$$Y_j(t)=\\sum_{i=1}^m(U_j^n,\\Pi_je_i)_{L^2}e_i\\quad(t\\in(t_{n-1}^j,t_n^j])$$\nhave uniformly bounded $L^2(0,T;E)$ norms and their backward difference quotients are bounded in $L^{4/3}(0,T;E)$; here $\\Pi_j$ is the MINI Fortin map and $E=\\operatorname{span}\\{e_i\\}$. Then $(\\overline U_j)$ is relatively compact in $L^2(0,T;L^2(D)^d)$.",
+        "deps": [
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "thm-na-mini-element-fortin-stability",
+          "lem-na-mini-fortin-l2-approximation",
+          "thm-pe12-discrete-aubin-lions-compactness",
+          "cor-bounded-map-into-h-one-zero-followed-by-rellich-is-compact-on-ltwo",
+          "lem-parabolic-zero-boundary-sobolev-space-is-separable",
+          "lem-separable-hilbert-bounded-sequence-weak-subsequence",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "lem-weak-lower-semicontinuity-of-the-sobolev-norm",
+          "thm-pe12-bochner-lp-completeness",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-na-mini-solenoidal-stokes-projection-error",
+        "kind": "theorem",
+        "title": "Approximation by the MINI solenoidal energy projection",
+        "statement": "Assume Countable Choice and the MINI mesh hypotheses. For $z\\in V_\\sigma$, define $S_hz\\in Z_h$ by\n$$a_\\nu(S_hz,w_h)=a_\\nu(z,w_h)\\qquad(w_h\\in Z_h).$$\nThis defines a unique linear projection and\n$$\\|z-S_hz\\|_V\\le\\sqrt2\\inf_{w_h\\in Z_h}\\|z-w_h\\|_V.$$\nIf additionally $z\\in H^2(D)^d$ and $q\\in H^1(D)\\cap L^2_0(D)$, then\n$$\\|z-S_hz\\|_V\\le C_0(1+\\nu^{-1})h\\bigl(\\|z\\|_{H^2(D)}+\\|q\\|_{H^1(D)}\\bigr),$$\nwhere $C_0$ is independent of $h$ and $\\nu$ and depends on $D$, shape regularity and the uniform MINI inf-sup constant.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "thm-na-mini-element-h1-pressure-error",
+          "thm-na-mini-element-fortin-stability",
+          "thm-na-mixed-galerkin-quasioptimality",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-na-mini-be-smooth-velocity-error",
+        "kind": "theorem",
+        "title": "Smooth-branch velocity error for backward Euler MINI",
+        "statement": "Assume Countable Choice. Assume the MINI mesh and time-partition hypotheses of [[def-na-mini-navier-stokes-backward-euler-scheme]]. Suppose $(u,p)$ is a strong solution of the no-slip Navier–Stokes equations with forcing $f\\in L^2(0,T;L^2(D)^d)$ and $u\\in W^{1,\\infty}(0,T;H^2(D)^d\\cap V_\\sigma)$ and $p\\in W^{1,\\infty}(0,T;H^1(D)\\cap L^2_0(D))$. Set\n$$M:=1+\\|u\\|_{W^{1,\\infty}H^2}+\\|p\\|_{W^{1,\\infty}H^1},\\quad M_u:=\\|u\\|_{L^\\infty V},$$\n$$M_\\infty:=\\bigl(\\|u_0\\|_2^2+C_P(D)^2\\nu^{-1}\\|f\\|_{L^2L^2}^2\\bigr)^{1/2},\\quad M_E:=\\nu^{-1/2}\\|u_0\\|_2+C_P(D)\\nu^{-1}\\|f\\|_{L^2L^2},$$\nand $\\Lambda:=1+C_D\\nu^{-3}M_u^4$, where $C_D$ depends only on the domain, dimension and the trilinear-form constant. For sufficiently fine time partitions satisfying $\\tau_{\\max}\\Lambda\\le\\tfrac12$, initialize by $u_h^0=P_{Z_h}u_0$ and choose any backward Euler MINI solution. Then\n$$\\max_{0\\le n\\le N}\\|u(t_n)-u_h^n\\|_2+\\nu^{1/2}\\left(\\sum_{n=1}^N\\tau_n\\|u(t_n)-u_h^n\\|_V^2\\right)^{1/2}\\le C_*\\bigl(hM+\\tau_{\\max}M^2\\bigr),$$\nwhere one may take\n$$C_*:=C_{D,\\mathrm{shape}}(1+\\nu)^2(1+\\nu^{-4})(1+T)^2(1+M_\\infty+M_E+M)^4\\exp(2T\\Lambda).$$\nHere $f$ is the forcing of the strong solution and $C_{D,\\mathrm{shape}}$ is independent of $h$, all time steps, and $\\nu$. The polynomial factor displays the positive and inverse viscosity powers produced by Young's inequalities and static Stokes projection. The explicit factor $\\nu^{-3}$ in $\\Lambda$ and exponential dependence on $T\\Lambda$ are retained; no Reynolds-uniform estimate is asserted. The corresponding pressure error estimate required by PE06 remains escalated in [[rem-na-pe06-pressure-recovery-escalation]].",
+        "deps": [
+          "def-na-mini-navier-stokes-backward-euler-scheme",
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "def-na-evolutionary-skew-convective-form",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "thm-na-mini-be-step-existence-energy",
+          "thm-na-mini-solenoidal-stokes-projection-error",
+          "thm-na-mixed-galerkin-quasioptimality",
+          "lem-na-evolutionary-skew-convective-form-bound",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "thm-na-discrete-helmholtz-projection-and-pressure-schur",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-homogeneous-dirichlet-korn-identity",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-holder-inequality-for-integrals",
+          "thm-young-inequality-real-exponents",
+          "def-countable-choice"
+        ],
+        "dependency_level": 10,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-na-mini-navier-stokes-be-subsequential-limit",
+        "kind": "theorem",
+        "title": "MINI backward Euler converges subsequentially to a solenoidal energy weak velocity",
+        "statement": "Assume the Axiom of Choice. Let $D\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, be nonempty, bounded, connected, Lipschitz and polyhedral, and let $0<T<\\infty$. Let $\\{\\mathcal T_j\\}$ be matching shape-regular affine simplicial meshes with $h_j\\to0$, and let the time partitions of $[0,T]$ have maximum step tending to zero, with no relation required between the two limits. Let $f\\in L^2(0,T;L^2(D)^d)$ and $u_0\\in H_\\sigma$. On each mesh take $u_j^0=P_{Z_j}u_0$, the $L^2$-orthogonal projection onto the weak MINI kernel, and choose any backward Euler MINI solution from [[thm-na-mini-be-step-existence-energy]]. Then a subsequence of piecewise-constant velocities converges strongly in $L^2(0,T;L^2(D)^d)$ and weakly in $L^2(0,T;H^1_0(D)^d)$ to a velocity $u$ satisfying the solenoidal weak momentum equation, initial trace and energy inequality in [[def-na-solenoidal-energy-weak-ns-velocity]]. This theorem supplies the velocity limit and its energy inequality. It does not assert the pressure regularity and pressure-bearing formulation required by the PE06 plan; that remaining claim is recorded in [[rem-na-pe06-pressure-recovery-escalation]].",
+        "deps": [
+          "def-na-solenoidal-energy-weak-ns-velocity",
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "def-na-mini-navier-stokes-backward-euler-scheme",
+          "lem-na-evolutionary-skew-convective-form-bound",
+          "thm-na-mini-be-step-existence-energy",
+          "lem-na-mini-fortin-l2-approximation",
+          "lem-na-mini-weak-solenoidal-compactness",
+          "lem-na-solenoidal-scalar-equations-give-weak-continuity",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "def-na-discrete-weak-and-exact-divergence-free-spaces",
+          "thm-na-mini-element-fortin-stability",
+          "thm-na-discrete-helmholtz-projection-and-pressure-schur",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "thm-pe12-discrete-aubin-lions-compactness",
+          "lem-pe12-bochner-lp-mollification",
+          "lem-pe12-space-time-gradient-weak-compactness",
+          "cor-sobolev-inequality-for-w-one-p-zero",
+          "thm-holder-inequality-for-integrals",
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence",
+          "lem-weak-lower-semicontinuity-of-the-sobolev-norm",
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "def-separable-space",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 10,
+        "strategy": "direct",
+        "forward_refs": [
+          "cex-na-polyhedral-energy-ns-pressure-endpoint"
+        ],
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "lem-na-solenoidal-evolution-integrated-pressure-recovery",
+        "kind": "lemma",
+        "title": "Integrated pressure recovery and MINI pressure-primitive convergence",
+        "statement": "Assume the Axiom of Choice. Let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected and Lipschitz, with $d\\in\\{2,3\\}$, let $0<T<\\infty$ and $\\nu>0$. Use $V=H^1_0(D;\\mathbb R^d)$, $Q=L^2_0(D)$, $V_\\sigma=\\ker(\\operatorname{div}:V\\to Q)$, $H_\\sigma=\\overline{V_\\sigma}^{\\,L^2(D)}$, the bilinear form $a_\\nu(v,w)=2\\nu\\int_D\\varepsilon(v):\\varepsilon(w)$, the pressure form $b(v,q)=-(q,\\operatorname{div}v)_{L^2}$, and the real skew convective form $c$ from [[def-na-stokes-zero-mean-pressure-and-velocity-spaces]], [[def-na-evolutionary-skew-convective-form]] and [[def-na-solenoidal-energy-weak-ns-velocity]]. Let $C_P$ be a Poincare constant, $C_{\\rm div}$ a bounded divergence-right-inverse constant, and choose $C_c$ large enough that\n$$|c(a;b,v)|\\le C_c\\|a\\|_V\\|b\\|_V\\|v\\|_V,\\qquad \\|c(a;a,\\cdot)\\|_{V^*}\\le C_c\\|a\\|_{L^2}^{1/2}\\|a\\|_V^{3/2}.$$\nFor $f\\in L^2(0,T;L^2(D)^d)$ and $u_0\\in H_\\sigma$, let $u$ be a solenoidal energy weak velocity. Put $U=\\|u\\|_{L^\\infty L^2}$, $E=\\|u\\|_{L^2V}$ and $F=\\|f\\|_{L^2L^2}$. There is a unique $P\\in L^\\infty(0,T;Q)\\cap C_w([0,T];Q)$ with $P(0)=0$ such that, for every $t\\in[0,T]$ and $v\\in V$,\n$$ (u(t)-u_0,v)_{L^2}+\\int_0^t\\bigl(a_\\nu(u(s),v)+c(u(s);u(s),v)\\bigr)\\,ds+b(v,P(t))=\\int_0^t(f(s),v)_{L^2}\\,ds.$$\nHere $C_w$ means continuity when tested against every fixed element of the Hilbert space $Q$. Moreover,\n$$\\|P\\|_{L^\\infty Q}\\le C_{\\rm div}\\bigl(C_P(U+\\|u_0\\|_{L^2})+C_P\\sqrt T F+2\\nu\\sqrt T E+C_cT^{1/4}U^{1/2}E^{3/2}\\bigr).$$\nDefine the $Q$-valued time distribution $p=\\partial_tP$ by\n$$\\langle p,\\eta\\rangle=-\\int_0^TP(t)\\eta'(t)\\,dt\\qquad(\\eta\\in C_c^\\infty(0,T)).$$\nThe bound $\\|\\langle p,\\eta\\rangle\\|_Q\\le\\|P\\|_{L^\\infty Q}\\|\\eta'\\|_{L^1}$ makes this a continuous linear map from scalar test functions to $Q$. Then $p$ is the unique mean-zero distributional pressure for $u$, and for every $\\varphi\\in C^1([0,T];V)$ vanishing near $T$,\n$$-\\int_0^T(u,\\varphi')_{L^2}\\,dt+\\int_0^T\\bigl(a_\\nu(u,\\varphi)+c(u;u,\\varphi)\\bigr)\\,dt-\\int_0^Tb(\\varphi',P)\\,dt=\\int_0^T(f,\\varphi)_{L^2}\\,dt+(u_0,\\varphi(0))_{L^2}.$$\nThis pressure is a distribution; the assertion does not place $p$ in $L^{4/3}(0,T;Q)$.\n\nFor the discrete assertions, further assume that $D$ is polyhedral. Let $\\mathcal T_j$ be matching shape-regular MINI meshes with $h_j\\to0$, and let $0=t_0^j<\\cdots<t_{N_j}^j=T$ have maximum step $\\tau_{\\max,j}\\to0$. On each mesh take $u_{h,j}^0=P_{Z_j}u_0$ and any actual scheme solution $(u_{h,j}^n,p_{h,j}^n)$. Write $\\overline u_{h,j}(t)=u_{h,j}^n$ and $\\overline p_{h,j}(t)=p_{h,j}^n$ on $(t_{n-1}^j,t_n^j]$. For any subsequence for which $\\overline u_{h,j}$ converges to $u$ as in [[thm-na-mini-navier-stokes-be-subsequential-limit]], define $P_{h,j}^0=0$, $P_{h,j}^m=\\sum_{n=1}^m\\tau_n^jp_{h,j}^n$, and let $P_{h,j}$ be the continuous piecewise-affine interpolant of these nodal values. If $\\max_n\\|u_{h,j}^n\\|_{L^2}\\le U_j$ and $\\|\\overline u_{h,j}\\|_{L^2V}\\le E_j$, then the uniform MINI inf-sup lower bound $\\beta>0$ gives\n$$\\sup_{t\\in[0,T]}\\|P_{h,j}(t)\\|_{L^2}\\le\\beta^{-1}\\bigl(2C_PU_j+C_P\\sqrt T F+2\\nu\\sqrt T E_j+C_cT^{1/4}U_j^{1/2}E_j^{3/2}\\bigr).$$\nAlong a further subsequence, $P_{h,j}\\rightharpoonup P$ in $L^2(0,T;Q)$. The piecewise-constant pressures converge to $p$ as $Q$-valued time distributions: for every $q\\in Q$ and $\\eta\\in C_c^\\infty(0,T)$,\n$$\\int_0^T(\\overline p_{h,j}(t),q)_{L^2}\\eta(t)\\,dt\\longrightarrow(\\langle p,\\eta\\rangle,q)_{L^2}.$$\nNo relation between mesh size and maximum time step is imposed. These conclusions give pressure primitives and time-distribution convergence, not an instantaneous pressure regularity estimate.\n\nFinally, let $u_t^{\\mathrm{full}}$ denote the distributional derivative of $u$ as a $V^*$-valued distribution, using the embedding $L^2(D)^d\\hookrightarrow V^*$. For this $u$, the pressure-bearing $L^{4/3}(0,T;Q)$ clause holds if and only if $u_t^{\\mathrm{full}}$ is represented by an $L^{4/3}(0,T;V^*)$ Bochner function. This criterion concerns the actual full derivative, not an extension of its restriction to $V_\\sigma$.",
+        "deps": [
+          "def-na-solenoidal-energy-weak-ns-velocity",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-evolutionary-skew-convective-form",
+          "lem-na-evolutionary-skew-convective-form-bound",
+          "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "lem-na-continuous-pressure-recovery-from-solenoidal-residual",
+          "thm-na-mini-navier-stokes-be-subsequential-limit",
+          "def-na-mini-navier-stokes-backward-euler-scheme",
+          "thm-na-mini-be-step-existence-energy",
+          "thm-na-mini-element-fortin-stability",
+          "lem-na-mini-fortin-l2-approximation",
+          "thm-na-discrete-helmholtz-projection-and-pressure-schur",
+          "lem-pe12-bochner-lp-mollification",
+          "lem-parabolic-weak-compactness-separable-bochner-hilbert",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "cor-sobolev-inequality-for-w-one-p-zero",
+          "thm-holder-inequality-for-integrals",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-bochner-integrable-function",
+          "def-strongly-measurable-banach-valued-function",
+          "thm-bochner-integrability-criterion",
+          "lem-bochner-integral-norm-inequality",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-distributional-derivative",
+          "thm-countable-union-of-null-is-null",
+          "def-separable-space",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+        ],
+        "dependency_level": 11,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "thm-na-mini-be-smooth-integrated-pressure-error",
+        "kind": "theorem",
+        "title": "First-order smooth pressure-primitive error for backward Euler MINI",
+        "statement": "Assume Countable Choice and every domain, mesh, time-partition, smooth-solution, initialization and time-step hypothesis of [[thm-na-mini-be-smooth-velocity-error]]. Thus $D$ is a bounded connected Lipschitz polyhedral domain in dimension $d\\in\\{2,3\\}$, the matching affine simplicial meshes are shape regular, $\\nu>0$, $f\\in L^2(0,T;L^2(D)^d)$, and $(u,p)$ is a strong no-slip solution with\n$$u\\in W^{1,\\infty}(0,T;H^2(D)^d\\cap V_\\sigma),\\qquad p\\in W^{1,\\infty}(0,T;H^1(D)\\cap Q),\\qquad Q=L^2_0(D).$$\nThe point values of these classes mean their unique continuous representatives, constructed in the proof using Countable Choice. Set\n$$M=1+\\|u\\|_{W^{1,\\infty}H^2}+\\|p\\|_{W^{1,\\infty}H^1},\\qquad M_u=\\|u\\|_{L^\\infty V},\\qquad M_E=\\nu^{-1/2}\\|u(0)\\|_2+C_P\\nu^{-1}\\|f\\|_{L^2L^2}.$$\nLet $C_*$ and $\\Lambda$ be exactly the explicit viscosity-dependent constants in [[thm-na-mini-be-smooth-velocity-error]] and impose its restriction $\\tau_{\\max}\\Lambda\\le1/2$. Use the same initialization $u_h^0=P_{Z_h}u(0)$ and any mixed backward Euler MINI solution. Define\n$$e_n=u(t_n)-u_h^n,\\qquad E_0=\\max_{0\\le n\\le N}\\|e_n\\|_2,\\qquad E_1=\\left(\\sum_{n=1}^N\\tau_n\\|e_n\\|_V^2\\right)^{1/2},\\qquad H=hM+\\tau_{\\max}M^2.$$\nLet $\\beta>0$ be the uniform MINI inf-sup lower bound, $M_b=\\sqrt d$, and let $C_I$ be a mean-adjusted continuous P1 pressure interpolation constant satisfying\n$$\\inf_{q_h\\in Q_h}\\|q-q_h\\|_2\\le C_Ih\\|q\\|_{H^1(D)}\\qquad(q\\in H^1(D)\\cap Q).$$\nChoose $C_c$ with $|c(a;b,v)|\\le C_c\\|a\\|_V\\|b\\|_V\\|v\\|_V$, put $P(t)=\\int_0^tp(s)\\,ds$, $P_h^0=0$, $P_h^m=\\sum_{n=1}^m\\tau_np_h^n$, and let $P_h$ be the continuous piecewise-affine interpolant through $P_h^m$. Then\n$$\\max_{0\\le m\\le N}\\|P(t_m)-P_h^m\\|_2\\le(1+M_b/\\beta)C_IThM+\\beta^{-1}\\bigl(2C_PE_0+[2\\nu\\sqrt T+C_c(M_E+\\sqrt T M_u)]E_1+2\\nu T\\tau_{\\max}M+2C_cT\\tau_{\\max}M^2\\bigr).$$\nIn particular, with\n$$K=(1+M_b/\\beta)C_IT+\\beta^{-1}\\bigl(2C_P+[2\\nu\\sqrt T+C_c(M_E+\\sqrt T M_u)]\\nu^{-1/2}\\bigr)C_*+\\beta^{-1}(2\\nu T+2C_cT),$$\none has\n$$\\max_m\\|P(t_m)-P_h^m\\|_2\\le KH,\\qquad \\|P-P_h\\|_{L^\\infty(0,T;Q)}\\le(K+1)H.$$\nFor the right-constant pressure reconstruction $\\overline p_h(t)=p_h^n$ on $(t_{n-1},t_n]$, every $\\eta\\in C_c^\\infty(0,T)$ also satisfies\n$$\\left\\|\\int_0^T\\bigl(p(t)-\\overline p_h(t)\\bigr)\\eta(t)\\,dt\\right\\|_2\\le(K+1)H\\|\\eta'\\|_{L^1(0,T)}.$$\nThe constants are independent of $h$ and the individual time steps; their viscosity dependence includes the displayed powers and the exponential contained in $C_*$. No additional mesh/time relation is imposed. This estimate controls accumulated pressure and the stated negative time norm; it does not claim an instantaneous $L^{4/3}_tL^2_x$ pressure-error rate.",
+        "deps": [
+          "thm-na-mini-be-smooth-velocity-error",
+          "def-na-mini-navier-stokes-backward-euler-scheme",
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "lem-na-evolutionary-ns-weak-form-is-well-defined",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-evolutionary-skew-convective-form",
+          "thm-na-mini-element-fortin-stability",
+          "lem-na-scott-zhang-boundary-preserving-p1-interpolant",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "lem-na-evolutionary-skew-convective-form-bound",
+          "thm-na-mini-be-step-existence-energy",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "cor-sobolev-inequality-for-w-one-p-zero",
+          "thm-holder-inequality-for-integrals",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-bochner-integrable-function",
+          "def-strongly-measurable-banach-valued-function",
+          "thm-bochner-integrability-criterion",
+          "lem-bochner-integral-norm-inequality",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "def-separable-space",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "thm-countable-union-of-null-is-null",
+          "def-countable-choice"
+        ],
+        "dependency_level": 11,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": []
+      },
+      {
+        "id": "rem-na-pe06-pressure-recovery-escalation",
+        "kind": "remark",
+        "title": "PE06 generic pressure refutation and remaining smooth pressure obligation",
+        "statement": "The PE06 plan requires two instantaneous pressure conclusions: a pressure-bearing subsequential weak solution with $p\\in L^{4/3}(0,T;L^2_0(D))$, and the pressure part of the smooth-branch velocity/pressure error estimate. The unchanged [[thm-na-mini-navier-stokes-be-subsequential-limit]] proves the solenoidal velocity equation and its energy inequality; it does not state a pressure-bearing solution in the regular-pressure class [[def-na-evolutionary-incompressible-ns-weak-solution]]. The unchanged [[thm-na-mini-be-smooth-velocity-error]] proves the velocity estimate only.\n\nThe additive [[lem-na-solenoidal-evolution-integrated-pressure-recovery]] now gives a unique mean-zero time-distribution pressure and bounded continuous pressure primitive for the limiting velocity, plus uniformly bounded discrete primitives and weak convergence of reconstructed pressures as time distributions. It also proves the exact criterion: the regular $L^{4/3}_tL^2_0$ pressure exists precisely when the actual full distributional derivative $u_t\\in L^{4/3}(0,T;V^*)$. The current limit argument establishes the derivative only after restriction to $V_\\sigma$. Extending that restricted functional by a divergence lift does not prove that the extension is the actual full derivative. The sufficient condition $u\\in W^{1,4/3}(0,T;L^2(D)^d)$ would imply the criterion, but this regularity is not supplied by the stated energy hypotheses. The primitive result does not establish it.\n\nThe additive [[thm-na-mini-be-smooth-integrated-pressure-error]] gives a first-order estimate for the accumulated pressure $P(t)=\\int_0^tp(s)\\,ds$, its piecewise-affine discrete primitive, and the specified negative time norm. It does not bound the instantaneous $L^{4/3}_tL^2_x$ pressure error. Applying the discrete inf-sup inequality to the unintegrated pressure equation leaves the full-test derivative residual\n$$d_n=\\sup_{v_h\\ne0}\\frac{|(D_\\tau e_n,v_h)_{L^2}|}{\\|v_h\\|_V},\\qquad \\Delta=\\left(\\sum_n\\tau_nd_n^{4/3}\\right)^{3/4}.$$\nA proof of $\\Delta=O(h+\\tau_{\\max})$, or a different complete instantaneous pressure argument under the original hypotheses, would close that clause. The current nodal velocity estimate does not itself control this derivative norm uniformly as the smallest time step tends to zero. The new primitive estimate cannot be differentiated to supply it.\n\nThe formerly proposed uniform $H^1$ bound for the $L^2$-orthogonal projector $P_{Z_h}:V_h\\to Z_h$ is false. On the square, the continuous orthogonal projection of an explicit smooth no-slip velocity onto the Leray space has a nonzero tangential boundary trace, so it is not in $H^1_0$. If the proposed discrete bound held on a refining MINI family, composition with the actual uniformly $H^1$-stable Fortin maps and weak compactness would force that false continuous mapping property. The full-test and restricted-$V_h$ versions are therefore unavailable. The projector obstruction is a refutation of that proposed supplier only; it proves neither that the original pressure claims are impossible nor that another route cannot prove them.\n\n**Affected claims:** the PE06 pressure-bearing regularity clause following [[thm-na-mini-navier-stokes-be-subsequential-limit]], including $p\\in L^{4/3}(0,T;L^2_0(D))$, and the instantaneous pressure-rate clause paired with [[thm-na-mini-be-smooth-velocity-error]].\n\n**Source limits:** Süli–Tscherpel explicitly use a pressure-free weak formulation and discuss a distributional-in-time pressure expectation for their Lipschitz no-slip setting. Their problem has a more general stress law and a different approximation/limit route, so that statement is not a proof of the exact Newtonian, $L^2$-forcing PE06 claim or of its impossibility. Guermond and Boffi–Brezzi–Fortin supply static divergence lifting and mixed inf-sup context, not either missing evolutionary estimate.\n\n**Current decision:** keep both original instantaneous pressure claims escalated to the owner for a complete proof under their unchanged hypotheses. Do not replace them by the primitive conclusions, classify them as an open problem, or use the false projector route.",
+        "deps": [
+          "thm-na-mini-navier-stokes-be-subsequential-limit",
+          "thm-na-mini-be-smooth-velocity-error",
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "lem-na-continuous-pressure-recovery-from-solenoidal-residual",
+          "lem-na-solenoidal-evolution-integrated-pressure-recovery",
+          "thm-na-mini-be-smooth-integrated-pressure-error",
+          "thm-na-discrete-helmholtz-projection-and-pressure-schur",
+          "thm-na-mini-element-fortin-stability",
+          "thm-na-mini-element-h1-pressure-error"
+        ],
+        "dependency_level": 12,
+        "strategy": "direct",
+        "forward_refs": [
+          "cex-na-polyhedral-energy-ns-pressure-endpoint"
+        ],
+        "justified_by": [],
+        "aliases": []
+      }
+    ]
+  },
+  {
+    "order": 2637,
+    "id": "energy-stable-incompressible-navier-stokes-discretization-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Evolutionary incompressible flow discretization — Examples",
+    "companion": "energy-stable-incompressible-navier-stokes-discretization",
+    "requires": [
+      "energy-stable-incompressible-navier-stokes-discretization"
+    ],
+    "items": [
+      {
+        "id": "ex-na-zero-mean-pressure-gauge",
+        "kind": "example",
+        "title": "Fixing the spatially constant pressure mode",
+        "statement": "On a bounded connected domain $D$, adding any spatial constant $c(t)$ to a pressure does not change the weak momentum equation with zero-boundary velocity tests. The condition $p(t)\\in L^2_0(D)$ fixes that freedom uniquely.",
+        "deps": [
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 53: Stokes equations",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap53.pdf",
+              "locator": "Mean-zero pressure gauge and mixed formulation; the spatial-constant cancellation is verified locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-na-periodic-taylor-green-vortex",
+        "kind": "example",
+        "title": "The two-dimensional Taylor–Green vortex on the flat torus",
+        "statement": "This is a periodic-boundary example, not a no-slip example. On the torus obtained by identifying opposite sides of $(0,2\\pi)^2$, let $A(t)=e^{-2\\nu t}$ and define\n$$u(x,y,t)=A(t)(\\sin x\\cos y,-\\cos x\\sin y),\\qquad p(x,y,t)=\\frac{A(t)^2}{4}(\\cos 2x+\\cos 2y).$$\nThe pressure is periodic and has zero mean on the fundamental square.\n\n\\begin{center}\n\\begin{tikzpicture}[scale=0.85]\n\\draw[thick] (0,0) rectangle (4,2.6);\n\\node at (2,1.3) {fundamental square};\n\\node[blue] at (2,2.82) {$y=0\\sim2\\pi$};\n\\node[blue] at (2,-0.22) {$y=0\\sim2\\pi$};\n\\node[red,rotate=90] at (-0.28,1.3) {$x=0\\sim2\\pi$};\n\\node[red,rotate=90] at (4.28,1.3) {$x=0\\sim2\\pi$};\n\\end{tikzpicture}\n\\end{center}\n\nThe rectangle is only a fundamental-domain picture: each pair of equally labelled opposite edges is identified point-for-point, so fields and derivatives must be periodic across the seams. The picture records the topology; the verification below is analytic.",
+        "deps": [
+          "def-na-evolutionary-skew-convective-form",
+          "thm-sine-and-cosine-derivatives",
+          "thm-double-angle-and-power-reduction-identities",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-derivative-of-exponential",
+          "thm-ftc-first-part"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": []
+        }
+      },
+      {
+        "id": "ex-na-unit-square-mini-mesh-family",
+        "kind": "example",
+        "title": "A matching shape-regular MINI mesh family on the unit square",
+        "statement": "For each positive integer $n$, divide $D=(0,1)^2$ into $n^2$ equal squares and split every square along its lower-left to upper-right diagonal.\n\n\\begin{center}\n\\begin{tikzpicture}[scale=1.25]\n\\draw[thick] (0,0) rectangle (2,2);\n\\draw (1,0)--(1,2);\n\\draw (0,1)--(2,1);\n\\draw (0,0)--(1,1);\n\\draw (1,0)--(2,1);\n\\draw (0,1)--(1,2);\n\\draw (1,1)--(2,2);\n\\node at (0.25,1.75) {$K_1$};\n\\node at (1.75,0.25) {$K_2$};\n\\end{tikzpicture}\n\\end{center}\n\nThe figure shows the $n=2$ case only; it draws all grid edges and the same diagonal in each square. The cell diameter is $h_n=\\sqrt2/n$, so this family refines to zero mesh size.",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-na-mini-element-p1-bubble-p1-spaces",
+          "thm-na-mini-element-fortin-stability"
+        ],
+        "dependency_level": 8,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": []
+        }
+      },
+      {
+        "id": "ex-na-mini-backward-euler-energy-budget",
+        "kind": "example",
+        "title": "Zero-forcing discrete energy budget",
+        "statement": "Take $f=0$ and any initial weak-kernel velocity $u_h^0\\in Z_h$. Every backward Euler MINI solution satisfies\n$$\\frac12\\|u_h^m\\|_2^2+\\frac12\\sum_{n=1}^m\\|u_h^n-u_h^{n-1}\\|_2^2+\\nu\\sum_{n=1}^m\\tau_n\\|\\nabla u_h^n\\|_2^2\\le\\frac12\\|u_h^0\\|_2^2.$$",
+        "deps": [
+          "thm-na-mini-be-step-existence-energy",
+          "def-na-mini-navier-stokes-backward-euler-scheme"
+        ],
+        "dependency_level": 9,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaoming He, Finite Element Methods, Chapter 9: unsteady Navier–Stokes equations",
+              "url": "https://bpb-us-e2.wpmucdn.com/sites.mst.edu/dist/a/189/files/2023/09/Finite_Elements_Chapter_9.pdf",
+              "locator": "Backward-Euler energy context; the exact finite-step identity is derived from current local suppliers."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-na-conditional-three-dimensional-flow-computation",
+        "kind": "example",
+        "title": "A conditional three-dimensional computation with no uniqueness claim",
+        "statement": "Let $D=(0,1)^3$, $f=0$, and choose a nonzero $\\chi\\in C_c^\\infty(0,1)$, for example a smooth bump supported in $(1/4,3/4)$. Put $\\psi(x,y,z)=\\chi(x)\\chi(y)\\chi(z)$ and\n$$u_0=(\\partial_y\\psi,-\\partial_x\\psi,0).$$\nThis supplies explicit smooth no-slip data for a three-dimensional MINI backward Euler computation; initialize the discrete scheme with $u_h^0=P_{Z_h}u_0$.",
+        "deps": [
+          "def-na-mini-navier-stokes-backward-euler-scheme",
+          "thm-na-mini-be-step-existence-energy",
+          "thm-na-ns-weak-solution-uniqueness-2d-and-weak-strong-3d",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice",
+          "ex-na-mini-backward-euler-energy-budget",
+          "thm-na-discrete-helmholtz-projection-and-pressure-schur"
+        ],
+        "dependency_level": 10,
+        "strategy": "direct",
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": []
+        }
+      },
+      {
+        "id": "cex-na-polyhedral-energy-ns-pressure-endpoint",
+        "kind": "counterexample",
+        "title": "An energy Navier–Stokes velocity on the square without endpoint-integrable pressure",
+        "deps": [
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "lem-na-halfline-heat-logarithmic-mass-loss",
+          "lem-na-shrinking-boundary-stream-corrector",
+          "def-na-solenoidal-energy-weak-ns-velocity",
+          "def-na-evolutionary-incompressible-ns-weak-solution",
+          "def-na-stokes-zero-mean-pressure-and-velocity-spaces",
+          "def-na-evolutionary-skew-convective-form",
+          "lem-na-zero-mean-of-zero-boundary-divergence",
+          "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "thm-na-mini-navier-stokes-be-subsequential-limit",
+          "lem-na-two-dimensional-solenoidal-energy-velocity-uniqueness",
+          "thm-holder-inequality-for-integrals",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 11,
+        "generation": {
+          "role": "counterexample"
+        },
+        "strategy": "Fully author the complete locally proved proposal at research/numerical-analysis-remaining-71-2026-10-17-ROOT-mini-pressure-supplier-cycle4/proposed-items/cex-na-polyhedral-energy-ns-pressure-endpoint.md; preserve exact original domain, force, initial-data and mesh scope. The generated counterexample is contextual, never a logical supplier.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume the Axiom of Choice. For every bounded connected Lipschitz polyhedral $D\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, constant $\\nu>0$, finite $T>0$, $f\\in L^2(0,T;L^2(D)^d)$ and $u_0\\in H_\\sigma$, the solenoidal energy weak velocity obtained as a MINI backward-Euler subsequential limit admits a mean-zero pressure in $L^{4/3}(0,T;L^2_0(D))$.\n\nFor every $\\nu>0$, there exist $T>0$, $D=(0,1)^2$, $u_0\\in H_\\sigma$ and $f\\in L^2(0,T;L^2(D)^2)$ with a unique solenoidal energy weak velocity $u$. This $u$ is smooth for positive time, has zero boundary trace, and satisfies the energy equality. Its unique mean-zero distributional pressure is an $L^1(0,T;L^2_0(D))$ function $p$ with $p\\notin L^{4/3}(0,T;L^2_0(D))$. Thus $u$ does not satisfy the regular-pressure requirement in [[def-na-evolutionary-incompressible-ns-weak-solution]]. Every MINI subsequential energy limit for these data equals $u$."
+      }
+    ]
+  }
+]

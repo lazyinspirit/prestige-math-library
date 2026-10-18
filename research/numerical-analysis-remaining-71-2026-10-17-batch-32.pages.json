@@ -1,0 +1,385 @@
+[
+  {
+    "order": 2618,
+    "id": "high-resolution-tvd-eno-and-weno-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "High-resolution TVD, ENO and WENO reconstruction",
+    "companion": "high-resolution-tvd-eno-and-weno-methods-examples",
+    "requires": [
+      "polynomial-interpolation-and-remainder",
+      "monotone-finite-volume-entropy-convergence",
+      "riemann-solvers-for-hyperbolic-systems"
+    ],
+    "items": [
+      {
+        "id": "def-na-high-resolution-reconstruction",
+        "kind": "definition",
+        "title": "Finite-volume MUSCL, nodal ENO2 and WENO5 reconstruction conventions",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Let $h>0$, let $I_i=[ih,(i+1)h)$, let $x_i=(i+\\tfrac12)h$ be its center, and write $x_{i+1/2}=(i+1)h$ and $x_{i-1/2}=ih$ for its right and left faces. A **cell average** of a locally integrable scalar function $u$ is $U_i=h^{-1}\\int_{I_i}u(x)\\,dx$. The cells are half-open only to form a partition; the choice of endpoint representatives does not change an integral.\n\nHere **MUSCL/minmod** means the piecewise-linear reconstruction with the limiter defined next; **nodal ENO2** means the two-stencil quadratic selector defined below; and **cell-average WENO5-JS/WENO-Z** means the three-candidate reconstructions with the normalized nonlinear weights displayed below. These names specify the constructions and do not, by themselves, assert an accuracy or stability property.\n\nFor real $a,b$, define\n$$\\operatorname{minmod}(a,b)=\\begin{cases}\\operatorname{sgn}(a)\\min(|a|,|b|),&ab>0,\\\\0,&ab\\le0.\\end{cases}$$\nThe **MUSCL/minmod reconstruction** assigns the cell slope $s_i=h^{-1}\\operatorname{minmod}(U_i-U_{i-1},U_{i+1}-U_i)$ and the two face states $U_{i-1/2}^{+,M}=U_i-hs_i/2$ and $U_{i+1/2}^{-,M}=U_i+hs_i/2$. Here $+$ denotes a trace from the right cell and $-$ a trace from the left cell.\n\nFor separate **nodal** data $V_j=u(y_j)$ at $y_j=jh$, define the second divided difference by $[y_a,y_b,y_c]V=(((V_c-V_b)/(y_c-y_b))-((V_b-V_a)/(y_b-y_a)))/(y_c-y_a)$. At the face $y_{i+1/2}=(i+\\tfrac12)h$, set $d_L=|[y_{i-1},y_i,y_{i+1}]V|$ and $d_R=|[y_i,y_{i+1},y_{i+2}]V|$. Choose the left triple when $d_L\\le d_R$ and otherwise choose the right triple. For the selected triple $(y_a,y_b,y_c)$ define its Newton quadratic by\n$$P_{a,b,c}(y)=V_a+\\frac{V_b-V_a}{y_b-y_a}(y-y_a)+[y_a,y_b,y_c]V\\,(y-y_a)(y-y_b).$$\nThe **nodal ENO2 face value** is $P_{a,b,c}(y_{i+1/2})$. This nodal interpolation branch is distinct from the cell-average WENO branch below.\n\nFor cell averages $U_{i-2},\\ldots,U_{i+2}$, define the left-biased WENO5 candidate face functionals\n$$p_0=(2U_{i-2}-7U_{i-1}+11U_i)/6,\\qquad p_1=(-U_{i-1}+5U_i+2U_{i+1})/6,\\qquad p_2=(2U_i+5U_{i+1}-U_{i+2})/6.$$\nDefine the Jiang–Shu indicators\n$$\\beta_0=\\tfrac{13}{12}(U_{i-2}-2U_{i-1}+U_i)^2+\\tfrac14(U_{i-2}-4U_{i-1}+3U_i)^2,$$\n$$\\beta_1=\\tfrac{13}{12}(U_{i-1}-2U_i+U_{i+1})^2+\\tfrac14(U_{i-1}-U_{i+1})^2,\\qquad \\beta_2=\\tfrac{13}{12}(U_i-2U_{i+1}+U_{i+2})^2+\\tfrac14(3U_i-4U_{i+1}+U_{i+2})^2.$$\nFix a positive parameter $\\epsilon_0$ with the same units as each $\\beta_k$, independently of $h$, and ideal weights $(d_0,d_1,d_2)=(1/10,6/10,3/10)$. If $u$ is nondimensionalized, $\\epsilon_0$ is a fixed positive number. The **WENO-JS weights** and left face value are $\\alpha_k^J=d_k/(\\epsilon_0+\\beta_k)^2$, $\\omega_k^J=\\alpha_k^J/\\sum_{l=0}^2\\alpha_l^J$, and $U_{i+1/2}^{-,J}=\\sum_{k=0}^2\\omega_k^Jp_k$. For the **WENO-Z comparison**, use the fifth-order $p=2$ weights: with $\\tau_5=|\\beta_0-\\beta_2|$, set $\\alpha_k^Z=d_k[1+(\\tau_5/(\\epsilon_0+\\beta_k))^2]$, $\\omega_k^Z=\\alpha_k^Z/\\sum_{l=0}^2\\alpha_l^Z$, and $U_{i+1/2}^{-,Z}=\\sum_{k=0}^2\\omega_k^Zp_k$. All denominators are positive because $\\epsilon_0>0$ and every $\\beta_k$ is a sum of squares. The right face state is obtained by reflection about that face: replace each stencil value $U_k$ in the displayed left formula by $U_{2i+1-k}$.\n\nFor scalar linear advection $u_t+a u_x=0$, a **direct reconstructed-upwind forward-Euler update** uses $\\nu=a\\Delta t/h$, the flux $F_{i+1/2}=aU_{i+1/2}^{-,M}$ when $a\\ge0$ and $F_{i+1/2}=aU_{i+1/2}^{+,M}$ when $a<0$, and $U_i^{n+1}=U_i^n-(\\Delta t/h)(F_{i+1/2}-F_{i-1/2})$. The total variation of a sequence is $\\operatorname{TV}(U)=\\sum_{i\\in\\mathbb Z}|U_{i+1}-U_i|$ when the sum is finite; **TVD** means that this quantity does not increase in one update.\n\nFor a vector system whose flux Jacobian at an interface is diagonalizable as $A=R\\Lambda R^{-1}$ with real diagonal $\\Lambda$, a **characteristic-wise reconstruction** applies a chosen scalar reconstruction to the components of $R^{-1}U$ and maps the reconstructed vector back by $R$. This definition alone gives no TVD or stability result for systems.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chi-Wang Shu, Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws, complete lecture notes",
+              "url": "https://www3.nd.edu/~zxu2/acms60790S13/Shu-WENO-notes.pdf",
+              "locator": "§§2.1.1 and 2.2.1–2.2.2, PDF pp. 3–21: reconstruction from cell averages, ENO stencil selection, WENO convex weights and Jiang–Shu indicators."
+            },
+            {
+              "title": "Guang-Shan Jiang and Chi-Wang Shu, Efficient Implementation of Weighted ENO Schemes",
+              "url": "https://lsec.cc.ac.cn/lcfd/DEWENO/paper/WENO_1996.pdf",
+              "locator": "§§2–4, PDF pp. 3–18: WENO candidate stencils, smoothness indicators, nonlinear weights and optimal linear combination."
+            },
+            {
+              "title": "Marcos Castro, Bruno Costa and Wai Sun Don, High order weighted essentially non-oscillatory WENO-Z schemes for hyperbolic conservation laws",
+              "url": "https://doi.org/10.1016/j.jcp.2010.11.028",
+              "locator": "§2 and §4: WENO-Z weights use a power parameter p; for fifth order (r=3), p=2 is the critical-point accurate choice. This item states the cell-average face formula locally."
+            },
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§3.1–3.3, PDF pp. 31–35: piecewise-linear MUSCL cell reconstruction, minmod slopes and the fully discrete CFL distinction."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-linear-monotone-first-order-barrier",
+        "kind": "theorem",
+        "title": "A monotone linear one-step advection scheme cannot be second order at noninteger CFL",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Let $a\\ne0$, $h>0$ and $\\Delta t>0$, and put $\\nu=a\\Delta t/h$. Fix a noninteger $\\nu$. Consider a finite-stencil, translation-invariant linear one-step scheme\n$$U_j^{n+1}=\\sum_{\\ell=-r}^{r}c_\\ell U_{j+\\ell}^n$$\nwith real coefficients that may depend on the fixed $\\nu$ but are independent of $h$, $j$ and $n$. Assume the scheme is conservative, is consistent with $u_t+a u_x=0$, and is second-order accurate in the local truncation sense. For these fixed coefficients, second-order consistency requires exact matching of the constant, linear and quadratic Taylor moments for the one-step translation. If the update is monotone in the componentwise order on grid sequences, then these assumptions are inconsistent. Thus at a noninteger Courant number no such linear monotone scheme can be second order.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Randall J. LeVeque, Numerical Methods for Conservation Laws, full textbook",
+              "url": "https://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf",
+              "locator": "Ch. 16 §16.1, Theorem 16.1, printed pp. 174–175 (PDF pp. 187–188): a linear monotonicity-preserving method is at most first order."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-eno2-reconstruction-third-order",
+        "kind": "lemma",
+        "title": "The selected nodal ENO2 quadratic reconstructs the face to third order",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "thm-lagrange-interpolation-remainder"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $h>0$, let $y_j=jh$, and let $u\\in C^3([y_{i-1},y_{i+2}])$ with $M:=\\sup|u'''|<\\infty$. Form the nodal ENO2 value at $y_{i+1/2}$ by the rule in [[def-na-high-resolution-reconstruction]]. Then\n$$|U^{ENO2}_{i+1/2}-u(y_{i+1/2})|\\le Mh^3/16.$$\nThe conclusion holds for either selected triple, so it includes the left-tie case.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chi-Wang Shu, Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws, complete lecture notes",
+              "url": "https://www3.nd.edu/~zxu2/acms60790S13/Shu-WENO-notes.pdf",
+              "locator": "§§2.1.1 and 2.2.1, PDF pp. 3–17: polynomial interpolation and ENO divided-difference stencil selection."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-weno5-optimal-linear-reconstruction",
+        "kind": "lemma",
+        "title": "The WENO5 ideal linear weights reproduce quartics at the right face",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $h>0$, let $I_j=[jh,(j+1)h)$, and let $x_{i+1/2}=(i+1)h$. For $u\\in C^5$ on the union of cells $I_{i-2},\\ldots,I_{i+2}$, let $p_0,p_1,p_2$ be the cell-average functionals in [[def-na-high-resolution-reconstruction]]. Each candidate reproduces every polynomial of degree at most two exactly at $x_{i+1/2}$. The ideal combination $p_{opt}=p_0/10+3p_1/5+3p_2/10$ reproduces every polynomial of degree at most four and satisfies $|p_{opt}-u(x_{i+1/2})|\\le (23/15)(3^5/5!)\\,\\sup|u^{(5)}|\\,h^5$. Each candidate separately satisfies $|p_k-u(x_{i+1/2})|\\le15\\sup|u'''|h^3$.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chi-Wang Shu, Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws, complete lecture notes",
+              "url": "https://www3.nd.edu/~zxu2/acms60790S13/Shu-WENO-notes.pdf",
+              "locator": "§2.2.2, PDF pp. 18–21: optimal linear weights, candidate cell-average reconstructions and fifth-order consistency."
+            },
+            {
+              "title": "Guang-Shan Jiang and Chi-Wang Shu, Efficient Implementation of Weighted ENO Schemes",
+              "url": "https://lsec.cc.ac.cn/lcfd/DEWENO/paper/WENO_1996.pdf",
+              "locator": "§§2–3, PDF pp. 3–13: fifth-order WENO candidate functionals and their optimal linear combination."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-musc-minmod-second-order-on-smooth-data",
+        "kind": "theorem",
+        "title": "MUSCL/minmod face states are second order on smooth monotone data",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "cor-taylor-remainder-bound"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $u\\in C^2$ on a neighborhood of a cell and its two neighbors, and suppose $|u'(x)|\\ge c>0$ there. Let $U_j$ be the averages of $u$ over uniform cells of width $h$, centered at $x_j=x_0+jh$. For sufficiently small $h$, the MUSCL/minmod face states of [[def-na-high-resolution-reconstruction]] satisfy\n$$|U_i+hs_i/2-u(x_i+h/2)|\\le C h^2,\\qquad |U_i-hs_i/2-u(x_i-h/2)|\\le C h^2,$$\nwhere $C$ depends only on $c$ and a bound for $|u''|$ on the stated neighborhood.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§3.1–3.3, PDF pp. 31–35: cell-centered piecewise-linear MUSCL reconstruction and minmod selection."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl",
+        "kind": "theorem",
+        "title": "Direct forward-Euler MUSCL/minmod is TVD under the sharp two-thirds CFL bound",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $h>0$, $\\Delta t\\ge0$, $a\\in\\mathbb R$, and $\\mu=|a|\\Delta t/h$. Use the direct reconstructed-upwind forward-Euler update for scalar linear advection from [[def-na-high-resolution-reconstruction]], with the stated MUSCL/minmod reconstruction and no time predictor; write $U^+$ for the sequence after one such update. The data are either a real bi-infinite sequence with finite discrete total variation\n$$\\operatorname{TV}(U)=\\sum_{i\\in\\mathbb Z}|U_i-U_{i-1}|<\\infty,$$\nor a real $N$-periodic sequence, for an integer $N\\ge1$, with\n$$\\operatorname{TV}_N(U)=\\sum_{i=0}^{N-1}|U_i-U_{i-1}|,$$\nwhere periodic indices are taken modulo $N$. If $0\\le\\mu\\le2/3$, one update satisfies $\\operatorname{TV}(U^+)\\le\\operatorname{TV}(U)$ in the bi-infinite case and $\\operatorname{TV}_N(U^+)\\le\\operatorname{TV}_N(U)$ in the periodic case.\n\nThe constant $2/3$ is sharp within the original range $0\\le\\mu\\le1$: for every $2/3<\\mu\\le1$ there are finite-support data of variation $2$ whose updated variation is $3\\mu>2$. For every period $N\\ge7$, the same witness periodized with period $N$ has the same strict increase.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§3.1–3.3, PDF pp. 31–35: equation (3.1.2) is the direct MUSCL update, equation (3.3.1) is minmod, and equation (3.3.8) gives the sufficient CFL restriction. The variation estimate, signed-velocity reduction and sharpness are proved locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+        "kind": "counterexample",
+        "title": "The specified direct MUSCL/minmod flux update is not TVD at CFL one",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "The direct reconstructed-upwind forward-Euler update in [[def-na-high-resolution-reconstruction]] is TVD for every scalar grid sequence whenever $|a|\\Delta t/h\\le1$.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§3.3, PDF pp. 32–35, especially condition (3.3.8): the minmod MUSCL update requires an additional CFL restriction; the local finite data below directly refute the PE02 CFL-one assertion."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+        "kind": "theorem",
+        "title": "Fixed-epsilon WENO-JS and WENO-Z face reconstructions are fifth order",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $u\\in C^5$ on the five-cell stencil, let $\\sup|u'''|<\\infty$ and $\\sup|u^{(5)}|<\\infty$, and let $\\epsilon_0>0$ be fixed independently of $h$. For the cell-average WENO-JS and WENO-Z states in [[def-na-high-resolution-reconstruction]], there is a constant $C$ independent of sufficiently small $h$ such that\n$$|U_{i+1/2}^{-,J}-u(x_{i+1/2})|\\le Ch^5,\\qquad |U_{i+1/2}^{-,Z}-u(x_{i+1/2})|\\le Ch^5.$$\nThe same result holds for the reflected right states.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Guang-Shan Jiang and Chi-Wang Shu, Efficient Implementation of Weighted ENO Schemes",
+              "url": "https://lsec.cc.ac.cn/lcfd/DEWENO/paper/WENO_1996.pdf",
+              "locator": "§§2–3, PDF pp. 3–13: Jiang–Shu indicators, normalized nonlinear weights and fifth-order smooth-region reconstruction."
+            },
+            {
+              "title": "Chi-Wang Shu, Essentially Non-Oscillatory and Weighted Essentially Non-Oscillatory Schemes for Hyperbolic Conservation Laws, complete lecture notes",
+              "url": "https://www3.nd.edu/~zxu2/acms60790S13/Shu-WENO-notes.pdf",
+              "locator": "§2.2.2, PDF pp. 18–21: accuracy condition for convex WENO weights and the fifth-order cell-average construction."
+            },
+            {
+              "title": "Andrew K. Henrick, Tariq D. Aslam and Joseph M. Powers, Mapped weighted essentially non-oscillatory schemes: Achieving optimal order near critical points",
+              "url": "https://academicweb.nd.edu/~powers/paper.list/jcp.weno5m.05.pdf",
+              "locator": "§4.3–4.5, printed pp. 552–554: the WENO-JS order depends on epsilon and resolution; the critical-point analysis distinguishes the fixed-epsilon limiting regime from small scale-dependent epsilon. The source studies finite-difference fluxes; this item proves the finite-volume face-state claim locally."
+            },
+            {
+              "title": "Marcos Castro, Bruno Costa and Wai Sun Don, High order weighted essentially non-oscillatory WENO-Z schemes for hyperbolic conservation laws",
+              "url": "https://doi.org/10.1016/j.jcp.2010.11.028",
+              "locator": "§2 and §4: WENO-Z weights use a power parameter p and analyze critical-point accuracy; for fifth order (r=3), p=2 is the choice used here. The source treats finite differences; this item proves the finite-volume face-state estimate locally."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2619,
+    "id": "high-resolution-tvd-eno-and-weno-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "High-resolution TVD, ENO and WENO reconstruction — Examples",
+    "companion": "high-resolution-tvd-eno-and-weno-methods",
+    "requires": [
+      "high-resolution-tvd-eno-and-weno-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-na-minmod-extremum-clipping",
+        "kind": "example",
+        "title": "Minmod clips the slope at a smooth quadratic maximum",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "For $u(x)=1-(x-h/2)^2$ and cells $I_j=[jh,(j+1)h)$, the cell average in the central cell $I_0$ is $U_0=1-h^2/12$ and its two neighbors have $U_{-1}=U_1=1-13h^2/12$. The minmod slope in the central cell is zero, so the reconstruction clips the central slope at the smooth maximum.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-na-unlimited-centered-reconstruction-overshoots",
+        "kind": "counterexample",
+        "title": "Unlimited centered reconstruction creates new extrema on a step",
+        "deps": [
+          "def-na-high-resolution-reconstruction"
+        ],
+        "dependency_level": 1,
+        "statement": "An unlimited centered-slope reconstruction with the reconstructed upwind forward-Euler update is TVD and range-preserving for every scalar grid sequence whenever $|a|\\Delta t/h\\le1$.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-na-smooth-linear-advection-reconstruction",
+        "kind": "example",
+        "title": "MUSCL and WENO reconstruct a translating affine profile exactly",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction",
+          "thm-na-musc-minmod-second-order-on-smooth-data",
+          "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $I_i=[ih,(i+1)h)$, $x_i=(i+\\tfrac12)h$, and $u(x,t)=x-at$ for a fixed $a\\in\\mathbb R$. On this affine profile, both the minmod MUSCL reconstruction and each of the three normalized WENO5 reconstructions give the exact upwind face value; the corresponding conservative forward-Euler update advances every cell average exactly by one time step.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-weno-js-critical-point-epsilon-scaling",
+        "kind": "example",
+        "title": "A first-order critical point exposes WENO-JS epsilon scaling",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "lem-na-weno5-optimal-linear-reconstruction",
+          "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction"
+        ],
+        "dependency_level": 3,
+        "statement": "Work in nondimensional coordinates with $u(x)=x^2+x^3$ and reconstruct the face $x=0$, the interface between cells $I_{-1}$ and $I_0$. This is a first-order critical point: $u'(0)=0$ and $u''(0)=2$. If the WENO-JS parameter is scaled as $\\epsilon_h=h^4$, the cell-average face state has error $\\frac{54}{95}h^4+O(h^5)$, so this branch is fourth order at the face. With the fixed $\\epsilon_0>0$ of [[thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction]], the theorem's fifth-order branch applies; with the same $\\epsilon_h$, the WENO-Z comparison has error $O(h^6)$ on this polynomial.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew K. Henrick, Tariq D. Aslam and Joseph M. Powers, Mapped weighted essentially non-oscillatory schemes: Achieving optimal order near critical points",
+              "url": "https://academicweb.nd.edu/~powers/paper.list/jcp.weno5m.05.pdf",
+              "locator": "§§4.2–4.5, printed pp. 552–554: the WENO-JS order depends on epsilon and resolution at critical points. The source analyzes finite-difference fluxes; the cell-average face calculation here is performed explicitly."
+            },
+            {
+              "title": "Guang-Shan Jiang and Chi-Wang Shu, Efficient Implementation of Weighted ENO Schemes",
+              "url": "https://lsec.cc.ac.cn/lcfd/DEWENO/paper/WENO_1996.pdf",
+              "locator": "§3, PDF pp. 7–13: the WENO-JS smoothness indicators and normalized weights used in the calculation."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-na-burgers-godunov-musc-shock",
+        "kind": "example",
+        "title": "Positive-state Burgers shock and the monotone finite-volume baseline",
+        "deps": [
+          "def-na-high-resolution-reconstruction",
+          "def-bounded-bv-data-on-line",
+          "def-monotone-finite-volume-entropy-scheme",
+          "def-kruzhkov-entropy-solution",
+          "def-rankine-hugoniot-and-lax-shocks",
+          "thm-monotone-finite-volume-entropy-convergence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "For $f(u)=u^2/2$ and $u_0(x)=1$ for $x<0$, $u_0(x)=0$ for $x>0$, the entropy shock moves right at speed $1/2$. For states $a,b\\in[0,1]$, define the positive-state Burgers Godunov flux by $F_G(a,b)=\\min_{v\\in[a,b]}f(v)$ when $a\\le b$ and $F_G(a,b)=\\max_{v\\in[b,a]}f(v)$ when $a>b$. Since $f$ is increasing on $[0,1]$, both cases give $F_G(a,b)=a^2/2$. Minmod slopes vanish for the initial step, so the first MUSCL flux update is the first-order Godunov update; the batch-29 monotone finite-volume theorem applies to its mesh-refined baseline under Countable Choice and the stated CFL conditions.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jérôme Droniou, A Beginner’s Course in Finite Volume Approximation of Scalar Conservation Laws, complete lecture notes",
+              "url": "https://math.univ-cotedazur.fr/u/massonr/MAM5/droniou-scalar-hyp.pdf",
+              "locator": "§§2.2.2–2.3.3, PDF pp. 15–23, and §3.3, pp. 32–35: positive-state Burgers Godunov flux, monotone finite-volume convergence context and minmod MUSCL reconstruction."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

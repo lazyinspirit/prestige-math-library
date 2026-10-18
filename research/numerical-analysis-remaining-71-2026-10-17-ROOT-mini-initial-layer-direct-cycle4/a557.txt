@@ -1,0 +1,1557 @@
+Helsinki University of Technology Institute of Mathematics Research Reports
+Espoo 2009
+A557
+ANALYSIS OF FINITE ELEMENT METHODS FOR THE
+BRINKMAN PROBLEM
+Mika Juntunen
+Rolf Stenberg
+AB TEKNILLINEN KORKEAKOULU
+TEKNISKA HÖGSKOLAN
+HELSINKI UNIVERSITY OF TECHNOLOGY
+TECHNISCHE UNIVERSITÄT HELSINKI
+UNIVERSITE DE TECHNOLOGIE D’HELSINKI
+
+
+
+
+Helsinki University of Technology Institute of Mathematics Research Reports
+Espoo 2009
+A557
+ANALYSIS OF FINITE ELEMENT METHODS FOR THE
+BRINKMAN PROBLEM
+Mika Juntunen
+Rolf Stenberg
+Helsinki University of Technology
+Faculty of Information and Natural Sciences
+Department of Mathematics and Systems Analysis
+
+
+Mika Juntunen, Rolf Stenberg: Analysis of ﬁnite element methods for the
+Brinkman problem; Helsinki University of Technology Institute of Mathematics
+Research Reports A557 (2009).
+Abstract:
+The parameter dependent Brinkman problem, covering a ﬁeld
+of problems from the Darcy equations to the Stokes problem, is studied. A
+mathematical framework is introduced for analyzing the problem. Using this
+we prove uniform a priori and a posteriori estimates for two families of ﬁnite
+element methods. We also discuss Nitshe’s method for imposing boundary
+conditions.
+AMS subject classiﬁcations: 65N30
+Keywords: Brinkman equation, Stokes equation, Darcy equation, Nitsche’s method,
+mixed ﬁnite element methods, stabilized methods
+Correspondence
+Helsinki University of Technology
+Department of Mathematics and Systems Analysis
+P.O. Box 1100
+FI-02015 TKK
+Finland
+mika.juntunen@tkk.ﬁ, rolf.stenberg@tkk.ﬁ
+ISBN 978-951-22-9604-0 (print)
+ISBN 978-951-22-9605-7 (PDF)
+ISSN 0784-3143 (print)
+ISSN 1797-5867 (PDF)
+Helsinki University of Technology
+Faculty of Information and Natural Sciences
+Department of Mathematics and Systems Analysis
+P.O. Box 1100,
+FI-02015 TKK,
+Finland
+email: math@tkk.ﬁ
+http://math.tkk.ﬁ/
+
+
+1
+Introduction
+The purpose of this paper is to analyze ﬁnite element methods for the
+Brinkman equations modeling porous media ﬂow. The model is usually de-
+rived by homogenization assuming a high porosity, cf. [11, 1, 2, 3, 15]. The
+equations are, in fact, a whole range of equations with Darcy’s equations
+and Stokes equations as limits. As a consequence, it is not trivial to design
+eﬃcient ﬁnite element methods. If they are eﬃcient for the Darcy problem
+that is not necessarily the case for Stokes, and vice versa. Tied to this are
+the norms used in the analysis for the velocity and pressure, respectively.
+Roughly speaking, they change place when going from one extreme to the
+other.
+The plan of the paper is as follows. In the next section we introduce
+a framework using two scales of norms for analyzing the problem. We do
+not use the approach of [12] since that does not include the Stokes limit.
+In Section 3 we consider a family of classical mixed ﬁnite element methods.
+We prove the stability (in the chosen norms) and derive both a priori and a
+posteriori error estimates. Next, we perform the same analysis for a family
+of stabilized ﬁnte element methods. In Section 5 we follow [8] and discuss
+the enforcement of Dirichlet boundary conditions by Nitsche’s method.
+In a forthcoming paper [9] we present the results of numerical tests with
+the ﬁnite element methods.
+2
+The Brinkman problem
+Let Ω⊂RN be a domain with polygonal or polyhedral boundary.
+The
+Brinkman problem is the parameter dependent equations
+−t2Au + u + ∇p = f in Ω,
+(1)
+div u = g in Ω,
+(2)
+where the parameter 0 ≤t ≤C.
+Above we denote A = div ε(u) and
+ε(u) = (∇u + ∇uT)/2.
+For t > 0 the equations are formally a Stokes
+problem for which we assume homogeneous essential boundary conditions
+u = 0 on ∂Ω.
+(3)
+In the limit t = 0, we obtain the Darcy problem with the natural boundary
+conditions
+u · n = 0 on ∂Ω.
+(4)
+Since the boundary conditions are homogenous, the compatibility condition
+g ∈L2
+0(Ω) is required for the load in both cases. The same condition; p ∈
+L2
+0(Ω), is imposed in order to have a unique pressure.
+The natural energy norm for the velocity is
+∥v∥2
+t = t2∥ε(v)∥2
+0 + ∥v∥2
+0,
+(5)
+3
+
+
+and the natural solution space is V; the completion of [C∞
+0 (Ω)]N with respect
+to this norm. For t > 0 we have
+V = [H1
+0(Ω)]N,
+(6)
+but the equivalence is not uniform, for 0 < t ≤C it holds
+C1t∥v∥1 ≤∥v∥t ≤C2∥v∥1.
+(7)
+(Here and in the sequel all constants C and Ci are assumed independent of
+t and the mesh parameter h.) For t = 0 the space is
+V = [L2(Ω)]N.
+(8)
+Hence, when t > 0 is ”small”, the equations are best considered as a singu-
+lar perturbation of the Darcy equations. Note that the essential boundary
+conditions disappear from the energy space in the limit t = 0.
+The space for the pressure is deﬁned through the norm
+|∥q∥|t = sup
+v∈V
+⟨v, ∇q⟩
+∥v∥t
+,
+(9)
+where ⟨·, ·⟩denotes the duality pairing in V × V ∗. In other words, the distri-
+butional gradient of the pressure is required to lie in the dual V ∗. The space
+is denoted by Q:
+Q = { q ∈L2
+0(Ω) | |∥q∥|t < ∞}.
+(10)
+Note that for (v, q) ∈V × Q it holds
+⟨v, ∇q⟩=
+(
+−(div v, q)
+for t > 0,
+(v, ∇q)
+for t = 0,
+(11)
+where (·, ·) denotes the L2-inner products. For t > 0 the Babuˇska-Brezzi
+condition []
+sup
+v∈V
+(div v, q)
+∥v∥1
+≥C∥q∥0
+∀q ∈L2
+0(Ω)
+(12)
+implies that Q = L2
+0(Ω), but again the equivalence is not uniformly valid.
+For 0 < t < C we have
+C1∥q∥0 ≤|∥q∥|t ≤C2t−1∥q∥0.
+(13)
+For t = 0 we have
+|∥q∥|t ≡∥∇q∥0
+(14)
+and Q = H1(Ω) ∩L2
+0(Ω).
+Deﬁne the bilinear forms
+a(u, v) = t2 (ε(u), ε(v)) + (u, v) ,
+(15)
+b(v, p) = ⟨v, ∇p⟩
+(16)
+4
+
+
+and
+B(u, p; v, q) = a(u, v) + b(v, p) + b(u, q).
+(17)
+The weak formulation of the problem is then: Find (u, p) ∈V × Q such that
+B(u, p; v, q) = L(v, q)
+∀(v, q) ∈V × Q,
+(18)
+where
+L(v, q) = (f, v) −(g, q) .
+(19)
+By deﬁnition of the norms and Korn’s inequality, Brezzi’s conditions for
+a saddle point problem are satisﬁed, namely
+a(v, v) ≥C∥v∥2
+t
+∀v ∈V
+and
+sup
+v∈V
+b(v, q)
+∥v∥t
+≥|∥q∥|t
+∀q ∈Q.
+(20)
+These two imply the stability condition
+sup
+(v,q)∈V×Q
+B(w, r; v, q)
+∥v∥t + |∥q∥|t
+≥C
+∥w∥t + |∥r∥|t
+
+∀(w, r) ∈V × Q
+(21)
+by which the solution is unique.
+3
+Mixed ﬁnite element methods
+We assume a partitioning Ch of the domain Ωinto simplices. With K ∈Ch
+we denote an element of the partitioning, and the maximum size of K ∈Ch is
+denoted by h. With Γh we denote the internal edges/faces of the partitioning.
+The ﬁnite element spaces are a generalization of the classical MINI ele-
+ment [4] and they are deﬁned as
+Vh = {v ∈V ∩[C(Ω)]N | v|K ∈[Pk(K) ∪Bk+N(K)]N ∀K ∈Ch },
+(22)
+Qh = {q ∈L2
+0(Ω) ∩C(Ω) | q|K ∈Pk(K) ∀K ∈Ch },
+(23)
+where Pk(K) denotes the polynomials of degree k and
+Bk+N(K) = Pk+N(K) ∩H1
+0(K)
+are the bubbles of degree k + N. In the analysis will also use the subspace
+Vh ⊂Vh where the ”bubbles” are left out:
+Vh = {v ∈V ∩[C(Ω)]N | v|K ∈[Pk(K)]N ∀K ∈Ch },
+(24)
+The ﬁnite element formulations is: ﬁnd (uh, ph) ∈Vh × Qh such that
+B(uh, ph; v, q) = L(v, q)
+∀(v, q) ∈Vh × Qh.
+(25)
+5
+
+
+3.1
+Stability
+To prove the stability of our formulation we have to verify the two conditions,
+the ellipticity and the inf-sup condition. For this we will utilize the following
+discrete counterpart of the norm (9)
+|∥q∥|2
+t,h =
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥∇q∥2
+0,K.
+(26)
+This norm is also important in practice, since it can be readily computed.
+First, we prove the inf-sup condition with this norm.
+Lemma 1. There is a constant C > 0 such that
+sup
+v∈Vh
+b(v, q)
+∥v∥t
+≥C|∥q∥|t,h
+∀q ∈Qh.
+(27)
+Proof. For q ∈Qh given, it holds ∇q|K ∈[Pk−1(K)]N, and we can deﬁne
+v ∈Vh through
+v|K =
+
+h2
+K
+t2 + h2
+K
+
+bK∇q|K,
+(28)
+where bK is the cubic/quartic bubble on K. For v it holds
+b(v, q) = (v, ∇q) ≥C
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥∇q∥2
+0,K = C|∥q∥|2
+t,h
+(29)
+and
+∥v∥2
+t = t2∥∇v∥2
+0 + ∥v∥2
+0 ≤C
+X
+K∈Ch
+(t2h−2
+K + 1)∥v∥2
+0,K
+(30)
+≤C
+X
+K∈Ch
+(t2h−2
+K + 1)
+h2
+K
+t2 + h2
+K
+2∥∇q∥2
+0,K = C|∥q∥|2
+t,h.
+Combining equations (29) and (30) completes the proof.
+Next, we use the ’Pitk¨aranta-Verf¨urth’-trick (see [14, 17]) to prove the
+stability in the continuous norm.
+Lemma 2. There is a constant C > 0 such that
+sup
+v∈Vh
+b(v, q)
+∥v∥t
+≥C|∥q∥|t
+∀q ∈Qh.
+(31)
+Proof. Due to the continuous inf-sup condition (20), there exist w ∈V such
+that
+b(w, q) ≥|∥q∥|2
+t
+and
+∥w∥t ≤|∥q∥|t
+∀q ∈Qh.
+(32)
+6
+
+
+With ˜w ∈Vh we denote the Cl´ement-Scott-Zhang interpolant [6, 5] of w.
+For this it holds
+X
+K∈Kh
+h−2
+K ∥w −˜w∥2
+0,K ≤C∥∇w∥2
+0,
+(33)
+∥˜w∥0 ≤C∥w∥0
+and
+∥∇˜w∥0 ≤C∥∇w∥0.
+(34)
+This gives
+X
+K∈Ch
+t + hK
+hK
+2∥˜w −w∥2
+0,K ≤2
+X
+K∈Ch
+ t
+hK
+2 + 1
+
+∥˜w −w∥2
+0,K
+≤C∥w∥2
+t ≤C∥˜w∥2
+t.
+(35)
+Using the estimates above, we obtain
+b( ˜w, q) = ( ˜w, ∇q)
+= (w, ∇q) + ( ˜w −w, ∇q)
+≥|∥q∥|2
+t −
+X
+K∈Ch
+hK
+t + hK
+∥∇q∥0,K
+t + hK
+hK
+∥˜w −w∥0,K
+≥|∥q∥|2
+t −|∥q∥|t,h
+ X
+K∈Ch
+t + hK
+hK
+2∥˜w −w∥2
+0,K
+1/2
+≥|∥q∥|2
+t −C|∥q∥|t,h∥w∥t
+(36)
+≥
+
+|∥q∥|t −C|∥q∥|t,h
+
+∥w∥t
+≥
+
+C1|∥q∥|t −C2|∥q∥|t,h
+
+∥˜w∥t.
+Thus, we have
+sup
+v∈Vh
+b(v, q)
+∥v∥t
+≥C1|∥q∥|t −C2|∥q∥|t,h.
+(37)
+Combining this estimate and Lemma 1, with 0 < α < 1, we get
+sup
+v∈Vh
+b(v, q)
+∥v∥t
+= α sup
+v∈Vh
+b(v, q)
+∥v∥t
++ (1 −α) sup
+v∈Vh
+b(v, q)
+∥v∥t
+≥αC1|∥q∥|t −αC2|∥q∥|t,h + (1 −α)C|∥q∥|t,h
+= αC1|∥q∥|t + (C −α(C + C2))|∥q∥|t,h.
+(38)
+Choosing α such that 0 < α < C/(C + C2) proves the assertion.
+Lemmas 1 and 2 give the two stability results.
+Theorem 3. There is a constant C > 0 such that
+sup
+(v,q)∈Vh×Qh
+B(w, r; v, q)
+∥v∥t + |∥q∥|t
+≥C
+∥w∥t + |∥r∥|t
+
+∀(w, r) ∈Vh × Qh.
+(39)
+Theorem 4. There is a constant C > 0 such that
+sup
+(v,q)∈Vh×Qh
+B(w, r; v, q)
+∥v∥t + |∥q∥|t,h
+≥C
+∥w∥t + |∥r∥|t,h
+
+∀(w, r) ∈Vh × Qh. (40)
+7
+
+
+3.2
+A priori estimate
+The stability estimate of Theorem 3 and the consistency gives the following
+quasioptimality result.
+Theorem 5. There exists a constant C > 0 such that
+∥u −uh∥t + |∥p −ph∥|t ≤C
+
+inf
+v∈Vh ∥u −v∥t + inf
+q∈Qh |∥p −q∥|t
+	
+.
+(41)
+Standard interpolation estimates then give.
+Theorem 6. Assume that the problem has a smooth solution. Then it holds
+∥u −uh∥t + |∥p −ph∥|t,h = O(hk).
+(42)
+When measuring the error in the computable mesh dependent norm for
+the pressure we get the following theorem.
+Theorem 7. There exists C > 0 such that
+∥u−uh∥t +|∥p−ph∥|t,h ≤C
+
+inf
+v∈Vh
+n
+∥u−v∥t +t
+ X
+K∈Ch
+h−2
+K ∥u−v∥2
+0,K
+1/2o
++ inf
+q∈Qh
+n
+|∥p −q∥|t,h + |∥p −q∥|t
+o
+.
+(43)
+Proof. By the triangle inequality
+∥u−uh∥t+|∥p−ph∥|t,h ≤∥u−v∥t+|∥p−q∥|t,h+∥uh−v∥t+|∥ph−q∥|t,h. (44)
+Hence, we have to bound
+∥uh −v∥t + |∥ph −q∥|t,h.
+Using the stability estimate of Theorem 4 we know there exists (w, r) ∈
+Vh × Qh, with
+∥w∥t + |∥r∥|t,h ≤C
+(45)
+such that
+∥uh −v∥t + |∥ph −q∥|t,h ≤B(uh −v, ph −q; w, r).
+(46)
+By the consistency we have
+B(uh −v, ph −q; w, r) = B(u −v, p −q; w, r),
+(47)
+Using Schwartz inequality we then get
+B(u −v, p −q; w, r)
+= t2 (∇(u −v), ∇w) + (u −v, w) + ⟨w, p −q⟩+ (u −v, ∇r)
+≤t∥∇(u −v)∥0 t∥∇w∥0 + ∥u −v∥0∥w∥0 + ∥w∥t|∥p −q∥|t
++
+ X
+K∈Ch
+t + hK
+hK
+2∥u −v∥2
+0,K
+1/2 X
+K∈Ch
+hK
+t + hK
+
+∥∇r∥2
+0,K
+1/2
+(48)
+≤C
+
+∥u −v∥t + |∥p −q∥|t + t
+ X
+K∈Ch
+h−2
+K ∥u −v∥2
+0,K
+1/2
+.
+Combining equations (44) – (48) proves equation (43).
+8
+
+
+3.3
+A posteriori estimate
+In this section we will introduce and analyze a residual based a posteri-
+ori estimator. In an earlier paper we have done this for the related scalar
+reaction-diﬀusion [10]. The element wise estimator is deﬁned by
+EK(uh, ph)2 =
+h2
+K
+t2 + h2
+K
+∥t2Auh−uh−∇ph+f∥2
+0,K+(t2+h2
+K)∥div uh−g∥2
+0,K
++
+hK
+t2 + h2
+K
+∥[[t2εn(uh)]]∥2
+0,∂K\∂Ω+ t2 + h2
+K
+hK
+∥uh · n∥2
+0,∂K∩∂Ω
+(49)
+and the global estimator is
+η =
+ X
+K∈Ch
+EK(uh, ph)21/2
+.
+(50)
+Here εn(·) denotes the normal derivative and [[·]] is the jump. Note, that the
+last term in (49) vanishes when t > 0.
+In the limit t = 0 (or as t < h) the a posteriori estimator becomes
+EK(uh, ph)2 ≈∥uh + ∇ph −f∥2
+0,K + h2
+K∥div uh −g∥2
+0,K + hE∥uh · n∥2
+0,∂K∩∂Ω,
+which is the estimator for the Darcy problem. On the other hand, if t ≥C >
+0, the estimator can be expressed as (since uh|∂Ω= 0)
+EK(uh, ph)2 ≈h2
+K∥t2Auh −uh −∇ph + f∥2
+0,K + ∥div uh −g∥2
+0,K
++ hE∥[[εn(uh)]]∥2
+0,∂K\∂Ω,
+which is the standard Stokes estimator.
+For our analysis we will need a saturation assumption. The partitioning
+Ch is reﬁned into Ch/2 by dividing each triangle/tetrahedron K into four/eight
+elements with mesh size less or equal to hK/2. By (uh/2, ph/2) ∈Vh/2 × Qh/2
+we denote the ﬁnite element solution on the reﬁned mesh.
+Assumption 8. There exists a positive constant β < 1 such that
+∥u −uh/2∥t + |∥p −ph/2∥|t,h ≤β
+∥u −uh∥t + |∥p −ph∥|t,h
+
+.
+(51)
+The main result is the following theorem.
+Theorem 9. Let Assumption 8 hold. Then there exists C > 0 such that
+∥u −uh∥t + |∥p −ph∥|t,h ≤Cη.
+(52)
+Proof. By the triangle inequality the saturation assumption gives
+∥u −uh∥t + |∥p −ph∥|t,h ≤
+1
+1 −β
+∥uh/2 −uh∥t + |∥ph/2 −ph∥|t,h
+
+.
+(53)
+9
+
+
+From the stability, Theorem 4, there exists (v, q) ∈Vh/2 × Qh/2, with
+∥v∥t + |∥q∥|t,h ≤C,
+(54)
+such that
+∥uh/2 −uh∥t + |∥ph/2 −ph∥|t,h ≤B(uh/2 −uh, ph/2 −ph; v, q).
+(55)
+Let now (˜v, ˜q) ∈Vh × Qh be the normal Lagrange interpolants to (v, q).
+Since Vh ⊂Vh and Vh ⊂Vh/2 (and Qh/2 ⊂Qh) it holds
+B(uh/2 −uh, ph/2 −ph; ˜v, ˜q) = 0.
+Hence we have
+B(uh/2 −uh, ph/2 −ph; v, q) = B(uh/2 −uh, ph/2 −ph; v −˜v, q −˜q).
+(56)
+Writing out the right hand side, using the fact that (uh/2, ph/2) satisﬁes
+B(uh/2, ph/2; v −˜v, q −˜q) = (f, v −˜v) −(g, q −˜q)
+(57)
+and integrating by parts, we have
+B(uh/2 −uh, ph/2 −ph; v −˜v, q −˜q)
+= (f, v −˜v) −(g, q −˜q) −t2 (ε(uh), ε(v −˜v)) −(uh, v −˜v)
+−(v −˜v, ∇ph) −(uh, ∇(q −˜q))
+=
+X
+K∈Ch
+n t2Auh −uh −∇ph + f, v −˜v
+
+K + t2 ⟨εn(uh), v −˜v⟩∂K
++ (div uh −g, q −˜q)K −⟨uh · n, q −˜q⟩∂K∩∂Ω
+o
+.
+(58)
+Since, v, ˜v, q and ˜q, all are in ﬁnite element subspaces, scaling arguments
+give
+ X
+K∈Ch
+t + hK
+hK
+2∥v −˜v∥2
+0,K
+1/2
+≤C
+ X
+K∈Ch
+t2∥∇v∥2
+0,K + ∥v∥2
+0,K
+1/2
+≤C∥v∥t ≤C,
+(59)
+ X
+K∈Ch
+t2 + h2
+K
+hK
+∥v −˜v∥2
+0,∂K
+1/2
+≤C
+ X
+K∈Ch
+t2 + h2
+K
+hK
+h−1
+K ∥v −˜v∥2
+0,K
+1/2
+= C
+ X
+K∈Ch
+ t2
+h2
+K
++ 1
+
+∥v −˜v∥2
+0,K
+1/2
+≤C
+ X
+K∈Ch
+t2∥∇v∥2
+0,K + ∥v∥2
+0,K
+
+(60)
+= C∥v∥t ≤C
+10
+
+
+and
+ X
+K∈Ch
+hK
+(t + hK)2∥q −˜q∥2
+0,∂K + (t + hK)−2∥q −˜q∥2
+0,K
+1/2
+≤C
+ X
+K∈Ch
+hK
+t + hK
+2∥∇q∥2
+0,K
+1/2
+≤C|∥q∥|t,h ≤C.
+(61)
+Using the Schwartz inequality and the properties above in equation (58)
+completes the proof.
+We show that the a posteriori estimator also gives a lower bound to the
+error. In this sense the estimator is sharp.
+3.4
+Eﬃciency of the a posteriori estimate
+We show that the a posteriori upper bound is also a lower bound to the error.
+In this sense the estimator is sharp.
+Theorem 10. There exist C > 0 such that
+Cη2 ≤∥u −uh∥2
+t + |∥p −ph∥|2
+t,h
+(62)
++
+X
+K∈Ch
+
+h2
+K
+t2 + h2
+K
+∥f −fh∥2
+0,K + (t2 + h2
+K)∥g −gh∥2
+0,K
+
+,
+where the projections fh ∈Vh and gh ∈Qh.
+We use suitable cut-oﬀfunctions to prove the above theorem, we refer to
+[18] for more details. The ﬁrst cut-oﬀfunction is ΨK; the support of ΨK is
+element K and 0 ≤ΨK ≤1. The second cut-oﬀfunction is ΨE; the support
+of ΨE is ωE and 0 ≤ΨE ≤1. The domain ωE is the elements sharing edge
+(in 3D face) E. For the edge (or face) E we also need an extension mapping
+χ : L2(E) →L2(ωE) such that in E χ is the identity operator. The proof
+of the lemma below follows with scaling arguments; note that p and σ are
+polynomials, cf. [18].
+Lemma 11. For an arbitrary element K, having edge/face E, and for arbi-
+trary polynomials p and σ it holds:
+∥ΨKp∥0,K ≤∥p∥0,K ≤C∥Ψ1/2
+K p∥0,K
+(63)
+∥∇(ΨKp)∥0,K ≤Ch−1
+K ∥ΨKp∥0,K
+(64)
+∥σ∥0,E ≤C∥Ψ1/2
+E σ∥0,E
+(65)
+Ch1/2
+E ∥σ∥0,E ≤∥ΨEχσ∥0,E ≤Ch1/2
+E ∥σ∥0,E
+(66)
+∥∇(ΨEχσ)∥0,K ≤Ch−1
+K ∥ΨEχσ∥0,K.
+(67)
+11
+
+
+Proof. We bound the terms of EK(uh, ph) separately. We begin with the ﬁrst
+internal residual term and introduce
+R1
+K = t2Auh −uh −∇ph + f,
+R1
+K,red = t2Auh −uh −∇ph + fh,
+w = ΨKR1
+K,red.
+We have, using Lemma 11,
+∥R1
+K,red∥2
+0,K ≤C∥Ψ1/2
+K R1
+K,red∥2
+0,K = C
+R1
+K,red, w
+
+K
+= C
+ R1
+K, w
+
+K + (fh −f, w)K
+
+= C
+
+t2 (∇(u −uh), ∇w)K + (uh −u, w)K
++ (∇(ph −p), w)K + (fh −f, w)K
+
+≤C
+
+t2h−1
+K ∥∇(u −uh)∥0,K + ∥u −uh∥0,K
++ ∥∇(p −ph)∥0,K + ∥f −fh∥0,K
+
+∥R1
+K,red∥0,K.
+(68)
+Combining the above result with ∥R1
+K∥0,K ≤∥R1
+K,red∥0,K + ∥f −fh∥0,K gives
+hK
+t + hK
+∥t2Auh −uh −∇ph + f∥0,K
+(69)
+≤C
+∥u −uh∥t,K + |∥p −ph∥|t,h,K +
+hK
+t + hK
+∥f −fh∥0,K
+
+.
+Next bound the second internal residual term and introduce
+R2
+K = div uh −g,
+R2
+K,red = div uh −gh,
+w = ΨKR2
+K,red.
+Using Lemma 11 we get
+∥R2
+K,red∥2
+0,K ≤C∥Ψ1/2
+K R2
+K,red∥2
+0,K = C
+R2
+K,red, w
+
+K
+= C
+ R2
+K, w
+
+K + (g −gh, w)K
+
+= C
+
+(div (uh −u), w)K + (g −gh, w)K
+
+= C
+
+t
+t + hK
+(div (uh −u), w)K
++
+hK
+t + hK
+(uh −u, div w)K + (g −gh, w)K
+
+≤C
+
+(t + hK)−1∥u −uh∥t,K + ∥g −gh∥0,K
+
+∥R2
+K,red∥0,K.
+(70)
+Combining the result with ∥R2
+K∥0,K ≤∥R2
+K,red∥0,K + ∥g −gh∥0,K gives
+(t + hK)∥div uh −g∥0,K ≤C
+∥u −uh∥t,K + (t + hK)∥g −gh∥0,K
+
+.
+(71)
+12
+
+
+Next we bound the internal jumps. We introduce
+R1
+E = t2[[εn(uh)]],
+w = ΨEχR1
+E
+and continue with Lemma 11
+∥R1
+E∥2
+0,E ≤C∥Ψ1/2
+E R1
+E∥2
+0,E = C
+R1
+E, w
+
+E
+= C
+ R1
+K, w
+
+ωE −t2 (∇(u −uh), ∇w)ωE
+−(u −uh, w)ωE −(∇(p −ph), w)ωE
+
+≤C
+
+t2h−1/2
+K
+∥∇(u −uh)∥0,ωE + h1/2
+K ∥u −uh∥ωE
++ h1/2
+K ∥∇(p −ph)∥ωE + h1/2
+K ∥f −fh∥ωE
+
+∥R1
+E∥0,E.
+(72)
+Thus, we have
+h1/2
+E
+t + hE
+∥t2[[εn(uh)]]∥0,E ≤C
+
+∥u −uh∥t,ωE +
+hK
+t + hK
+∥f −fh)∥ωE
+
+.
+(73)
+Lastly we bound the boundary residual. We deﬁne
+R2
+E = (u −uh) · n,
+w = ΨEχR2
+E
+and continue with Lemma 11
+∥R2
+E∥2
+0,E ≤C∥Ψ1/2
+E R2
+E∥2
+0,E = C
+R2
+E, w
+
+E
+= C
+ R2
+K, w
+
+ωE + (uh −u, ∇w)ωE
+
+(74)
+≤C
+ h1/2
+K
+t + hK
+∥u −uh∥t,ωE + h1/2
+K ∥g −gh∥ωE + h−1/2
+K
+∥u −uh∥ωE
+
+∥R2
+E∥0,E.
+Hence we get
+t + hK
+h1/2
+K
+∥u −uh∥0,E ≤C
+
+∥u −uh∥t,ωE + (t + hK)∥g −gh∥ωE
+
+.
+(75)
+Now we have bounded all the terms of the a posteriori estimator and
+combining equations (69), (71), (73) and (75) completes the proof.
+4
+Stabilized methods
+Stabilized methods enable us to use the standard ﬁnite elements without
+bubble degrees of freedom. Thus, the subspaces are
+Vh = {v ∈V ∩[C(Ω)]N | v|K ∈[Pk(K)]N ∀K ∈Ch },
+(76)
+Qh = {q ∈L2
+0(Ω) ∩C(Ω) | q|K ∈Pk(K) ∀K ∈Ch },
+(77)
+13
+
+
+The stabilized method is: Find (uh, ph) ∈Vh × Qh such that
+Bh(uh, ph; v, q) = Lh(v, q)
+∀(v, q) ∈Vh × Qh,
+(78)
+with
+Bh(uh, ph; v, q) = B(uh, ph; v, q)
+(79)
+−α
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+t2Auh −uh −∇ph, t2Av −v −∇q
+
+K
+and
+Lh(v, q) = L(v, q) −α
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+f, t2Av −v −∇q
+
+K ,
+(80)
+with a parameter α > 0. For the method to be consistent we assume that
+t2Au −u −∇p = f ∈[L2(Ω)]N.
+(81)
+Then it holds
+Bh(u −uh, p −ph; v, q) = 0
+∀(v, q) ∈Vh × Qh.
+(82)
+Note, that one does not have to assume that t2Au ∈[L2(Ω)]2, and ∇p ∈
+L2(Ω) (contrary to some quite widespread belief).
+4.1
+Stability
+For the analysis it is convenient to introduce the constant CI in the following
+inverse inequality
+h2
+K∥Aw∥2
+0,K ≤CI∥∇w∥2
+0,K
+∀w ∈[Pk(K)]N.
+(83)
+The stability result is then.
+Theorem 12. Assume that 0 < α < min{1/(2CI), 1/2}. Then there exists
+a constant C > 0 such that
+sup
+(v,q)∈Vh×Qh
+Bh(w, r; v, q)
+∥v∥t + |∥q∥|t,h
+≥C
+∥w∥t + |∥r∥|t,h
+
+∀(w, r) ∈Vh × Qh. (84)
+Proof. For (w, r) ∈Vh × Qh arbitrary we have
+Bh(w, r; w, −r) = t2∥∇w∥2
+0 + ∥w∥2
+0
+(85)
+−α
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+
+∥t2Aw −w∥2
+0,K −∥∇r∥2
+0,K
+	
+.
+From this we get
+Bh(w, r; w, −r) ≥t2∥∇w∥2
+0 + ∥w∥2
+0 + α|∥r∥|2
+t,h
+(86)
+−2α
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+t4∥Aw∥2
+0,K −2α
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥w∥2
+0,K.
+14
+
+
+Applying the inverse inequality gives
+Bh(w, r; w, −r) ≥(1 −2αCI)t2∥∇w∥2
+0 + (1 −2α)∥w∥2
+0 + α|∥r∥|2
+t,h.
+(87)
+The assumption 0 < α < min{1/(2CI), 1/2} implies the asserted stability.
+Remark 13. Using the Pitk¨aranta-Verf¨urth technique is also possible to
+prove the stability with the continuous norm for the pressure
+sup
+(v,q)∈Vh×Qh
+Bh(w, r; v, q)
+∥v∥t + |∥q∥|t
+≥C
+∥w∥t + |∥r∥|t
+
+∀(w, r) ∈Vh × Qh.
+(88)
+See [7] where this is done for the Stokes problem.
+4.2
+A priori estimate
+In the spirit of stabilized methods and a posteriori estimates we will formu-
+late the a priori estimate as a quasi-optimality result that contain a term
+measuring the residual.
+Theorem 14. Assume that 0 < α < min{1/(2CI), 1/2}. Then it holds
+∥u −uh∥t + |∥p −ph∥|t,h
+≤C
+inf
+(v,q)∈Vh×Qh
+n
+∥u −v∥t + t
+ X
+K∈Ch
+h−2
+K ∥u −v∥2
+0,K
+1/2
++ |∥p −q∥|t,h + |∥p −q∥|t
+(89)
++
+ X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥t2Av −v −∇q + f∥2
+0,K
+1/2o
+.
+Proof. The proof is very similar to the proof of Theorem 7 and here we only
+consider the additional terms arising from the added stabilizing term.
+For equation (89) to hold, all we need to bound is
+I =
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+t2A(u −v) −(u −v) −∇(p −q), t2Aw −w −∇r
+
+K .
+(90)
+Assumption (81) gives
+I =
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+−t2Av + v + ∇q −f, t2Aw −w −∇r
+
+K
+≤
+ X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥t2Av −v −∇q + f∥2
+0,K
+1/2
+(91)
+×
+ X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥t2Aw −w −∇r∥2
+0,K
+1/2
+.
+15
+
+
+Using the inverse inequality (83) we have
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥t2Aw −w −∇r∥2
+0,K
+≤C
+X
+K∈Ch
+
+t2
+t2 + h2
+K
+t2h2
+K∥Aw∥2
+0,K +
+h2
+K
+t2 + h2
+K
+∥w∥2
+0,K +
+h2
+K
+t2 + h2
+K
+∥∇q∥2
+0,K
+
+≤C(∥w∥t + |∥r∥|t,h) ≤C.
+(92)
+The relations (90) – (92) prove (93).
+Again, standard interpolation estimates give
+Theorem 15. Assume that 0 < α < min{1/(2CI), 1/2} and that the problem
+has a smooth solution. Then it holds
+∥u −uh∥t + |∥p −ph∥|t,h = O(hk).
+4.3
+A posteriori estimate
+The a posteriori estimator is deﬁned exactly as for the mixed method, i.e.
+by (50).
+Theorem 16. Let Assumption 8 hold. Then there exist constants C1, C2 > 0
+such that
+C1η ≤∥u −uh∥t + |∥p −ph∥|t,h ≤C2η.
+(93)
+Proof. In addition to the terms estimated in Theorem 9 we get the term
+ α
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+−t2Auh+uh+∇ph−f, t2A(v−˜v)−(v−˜v)−∇(q−˜q)
+
+K
+.
+(94)
+Using the Schwarz inequality this is bounded by
+ X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥t2Auh −uh −∇ph + f∥2
+0,K
+1/2
+(95)
+×
+ X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥t2A(v −˜v) −(v −˜v) −∇(q −˜q)∥2
+0,K
+1/2
+.
+Noticing that
+X
+K∈Ch
+h2
+K
+t2 + h2
+K
+∥t2A(v −˜v) −(v −˜v) −∇(q −˜q)∥2
+0,K
+≤C
+X
+K∈Ch
+
+t2
+t2 + h2
+K
+t2h2
+K∥A(v −˜v)∥2
+0,K +
+h2
+K
+t2 + h2
+K
+∥v −˜v∥2
+0,K
++
+h2
+K
+t2 + h2
+K
+∥∇(q −˜q)∥2
+0,K
+
+≤C
+
+t2∥∇v∥2
+0 + ∥v∥2
+0 + |∥q∥|2
+t,h
+
+≤C
+(96)
+16
+
+
+completes the proof of the upper bound.
+The proof of the lower bound does not use the bilinear form. Hence the
+proof of Theorem 10 also holds in the present case.
+5
+Imposing boundary conditions using
+Nitsche’s method
+In this section we will outline the modiﬁed ﬁnite element methods when
+the Dirichlet boundary conditions are imposed in a weak sense using the
+technique of Nitsche [13]. Using this, we obtain formulations that uses the
+same ﬁnite element spaces both for t > 0 and in the limit t = 0.
+The
+ﬁnite element space Qh used for the pressure is unaltered, i.e. (23) and (77).
+The spaces for the velocity are altered so that no boundary conditions are
+assumed; a spaces including ”bubbles” for the mixed formulation:
+Vh = {v ∈[C(Ω)]N | v|K ∈[Pk(K) ∪Bk+N(K)]N ∀K ∈Ch },
+(97)
+and a clean polynomial space for the stabilized method:
+Vh = {v ∈[C(Ω)]N | v|K ∈[Pk(K)]N ∀K ∈Ch }.
+(98)
+The discrete variational formulations are modiﬁed by changing the bilinear
+form a(·, ·) in (17) to
+ah(u, v) = t2
+(ε(u), ε(v))
++
+X
+E∈Γh
+−⟨εn(u), v⟩E −⟨εn(v), u⟩E + γh−1
+E ⟨u, v⟩E
+
++ (u, v) ,
+(99)
+where we denote with Γh the edges/faces on the boundary ∂Ω. The bilinear
+forms obtained we denote by Nh. The right hand sides, given by (19) and
+(80), respectively, we denote by Fh. The weak formulation of the problem is
+then: ﬁnd (uh, ph) ∈Vh × Qh such that
+Nh(uh, ph; v, q) = Fh(v, q)
+∀(v, q) ∈Vh × Qh.
+(100)
+This formulation is clearly consistent. For the analysis one uses the following
+norms for the velocity
+∥v∥2
+t,h = t2
+∥∇v∥2
+0 +
+X
+E∈Γh
+h−1
+E ∥v∥2
+0,E
+
++ ∥v∥2
+0,
+(101)
+⌊⌉v⌊⌉2
+t,h = ∥v∥2
+t,h + t2 X
+E∈Γh
+hE∥εn(v)∥2
+0,E.
+(102)
+By the discrete trace inequality (when E ⊂∂K we have hE ≈hK)
+hK∥εn(v)∥2
+0,∂K ≤C′
+I∥∇v∥2
+0,K
+∀v ∈Vh|K
+(103)
+the two norms are equivalent in Vh. From which the coercivity of ah easily
+follows using Schwartz and Young’s inequalities [13, 16].
+17
+
+
+Lemma 17. For γ > C′
+I it holds
+ah(v, v) ≥C∥v∥2
+t,h
+∀v ∈Vh.
+□
+(104)
+The proofs of the stability of the original methods carry over the the
+present modiﬁcations with the norm ∥· ∥t changed to ∥· ∥t,h.
+Theorem 18. Assume that the stability parameters satisfy γ > C′
+I and 0 <
+α < min{1/(2CI), 1/2}. Then there exists a constant C > 0 such that
+sup
+(v,q)∈Vh×Qh
+Bh(w, r; v, q)
+∥v∥t,h + |∥q∥|t,h
+≥C
+∥w∥t,h + |∥r∥|t,h
+
+∀(w, r) ∈Vh × Qh.
+(105)
+The previous a priori estimates are now valid with ∥u −uh∥t replaced by
+∥u−uh∥t,h on the left hand sides, and with ∥u−v∥t,h replaced by ⌊⌉u−v⌊⌉t,h
+on the right hand side, respectively. As before, for a smooth solution we
+obtain an O(hk) convergence rate.
+The modiﬁcation needed for the a posteriori estimate is to add the term
+t2h−1
+K ∥uh∥2
+0,∂K∩∂Ωto EK(uh, ph)2.
+References
+[1] G. Allaire. Homogenization of the Navier-Stokes equations in open sets
+perforated with tiny holes. I. abstract framework, a volume distribution
+of holes. Arch. Rational Mech. Anal., 113(3):209–259, 1990.
+[2] G. Allaire. Homogenization of the Navier-Stokes equations in open sets
+perforated with tiny holes. II. Noncritical sizes of the holes for a volume
+distribution and a surface distribution of holes. Arch. Rational Mech.
+Anal., 113(3):261–298, 1990.
+[3] T. Arbogast and H. L. Lehr. Homogenization of a Darcy-Stokes system
+modeling vuggy porous media. Comput. Geosci., 10(3):291–302, 2006.
+[4] D. N. Arnold, F. Brezzi, and M. Fortin. A stable ﬁnite element for the
+Stokes equations. Calcolo, 21(4):337–344 (1985), 1984.
+[5] S. C. Brenner and L. R. Scott.
+The Mathematical Theory of Finite
+Element Methods, volume 15 of Texts in Applied Mathematics. Springer-
+Verlag, New York, second edition, 2002.
+[6] P. Cl´ement. Approximation of ﬁnite element functions using local regu-
+larization. RAIRO Num. Anal., 9:77–84, 1975.
+[7] L.P. Franca and R. Stenberg. Error analysis of some Galerkin least-
+squares methods for the elasticity equations.
+SIAM J. Num. Anal.,
+28(6):1680–1699, 1991.
+18
+
+
+[8] P. Hansbo and M. Juntunen. Weakly imposed Dirichlet boundary condi-
+tions for the Brinkman model of porous media ﬂow. Applied Numerical
+Mathematics, 59(6):1274–1289, 2009.
+[9] M. Juntunen and R. Stenberg. Computations with ﬁnite element meth-
+ods for the brinkman problem. Helsinki University of Technology Insti-
+tute of Mathematics Research Report, A569, 2009.
+[10] M. Juntunen and R Stenberg. A residual based a posteriori estimator
+for the reaction-diﬀusion problem. C. R. Math. Acad. Sci. Paris, 2009.
+[11] T. L´evy. Loi de Darcy ou loi de Brinkman? C. R. Acad. Sci. Paris S´er.
+II M´ec. Phys. Chim. Sci. Univers Sci. Terre, 292(12):871–874, Erratum
+(17):1239, 1981.
+[12] K. A. Mardal, Xue-Cheng Tai, and R. Winther. A robust ﬁnite element
+method for Darcy-Stokes ﬂow. SIAM J. Numer. Anal., 40(5):1605–1631
+(electronic), 2002.
+[13] J. Nitsche.
+¨Uber ein Variationsprinzip zur L¨osung von Dirichlet-
+Problemen bei Verwendung von Teilr¨aumen, die keinen Randbedin-
+gungen unterworfen sind. Abh. Math. Sem. Univ. Hamburg, 36:9–15,
+1970/1971.
+[14] J. Pitk¨aranta. Boundary subspaces for the ﬁnite element method with
+Lagrange multipliers. Numer. Math., 33:273–289, 1979.
+[15] K. R. Rajagopal. On a hierarchy of approximate models for ﬂows of
+incompressible ﬂuids through porous solids. Math. Models Methods Appl.
+Sci., 17(2):215–252, 2007.
+[16] R. Stenberg. On some techniques for approximating boundary conditions
+in the ﬁnite element method. J. Comput. Appl. Math., 63(1-3):139–148,
+1995.
+[17] R. Verf¨urth. Error estimates for a mixed ﬁnite element approximation
+of the Stokes equations. RAIRO Anal. Numer., 18:175–182, 1984.
+[18] R. Verf¨urth. A Review of a Posteriori Error Estimation and Adaptive
+Mesh-Reﬁnement Techniques. Teubner Verlag and J. Wiley, Stuttgart,
+1996.
+19
+
+
+
+
+(continued from the back cover)
+A562
+Antti H. Niemi
+A bilinear shell element based on a reﬁned shallow shell model
+December 2008
+A561
+Antti Hannukainen, Sergey Korotov, Michal Krizek
+On nodal superconvergence in 3D by averaging piecewise linear, bilinear, and
+trilinear FE approximations
+December 2008
+A560
+Sampsa Pursiainen
+Computational methods in electromagnetic biomedical inverse problems
+November 2008
+A559
+Sergey Korotov, Michal Krizek, Jakub Solc
+On a discrete maximum principle for linear FE solutions of elliptic problems
+with a nondiagonal coefﬁcient matrix
+November 2008
+A558
+Jos´e Igor Morlanes, Antti Rasila, Tommi Sottinen
+Empirical evidence on arbitrage by changing the stock exchange
+December 2008
+A556
+Lourenc¸o Beir˜ao da Veiga, Jarkko Niiranen, Rolf Stenberg
+A posteriori error analysis for the Morley plate element with general boundary
+conditions
+December 2008
+A555
+Juho K¨onn¨o, Rolf Stenberg
+Finite element analysis of composite plates with an application to the paper
+cockling problem
+December 2008
+A554
+Lasse Leskel¨a
+Stochastic relations of random variables and processes
+October 2008
+A553
+Rolf Stenberg
+A nonstandard mixed ﬁnite element family
+September 2008
+
+
+HELSINKI UNIVERSITY OF TECHNOLOGY INSTITUTE OF MATHEMATICS
+RESEARCH REPORTS
+The reports are available at http://math.tkk.ﬁ/reports/ .
+The list of reports is continued inside the back cover.
+A567
+Antti Hannukainen, Sergey Korotov, Michal Krizek
+On a bisection algorithm that produces conforming locally reﬁned simplicial
+meshes
+April 2009
+A566
+Mika Juntunen, Rolf Stenberg
+A residual based a posteriori estimator for the reaction–diffusion problem
+February 2009
+A565
+Ehsan Azmoodeh, Yulia Mishura, Esko Valkeila
+On hedging European options in geometric fractional Brownian motion market
+model
+February 2009
+A564
+Antti H. Niemi
+Best bilinear shell element: ﬂat, twisted or curved?
+February 2009
+A563
+Dmitri Kuzmin, Sergey Korotov
+Goal-oriented a posteriori error estimates for transport problems
+February 2009
+ISBN 978-951-22-9604-0 (print)
+ISBN 978-951-22-9605-7 (PDF)
+ISSN 0784-3143 (print)
+ISSN 1797-5867 (PDF)

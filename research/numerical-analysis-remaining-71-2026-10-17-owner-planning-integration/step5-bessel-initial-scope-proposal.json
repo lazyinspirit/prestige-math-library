@@ -1,0 +1,70 @@
+{
+  "scope": "Readonly focused Bessel stage-constant supplier and initial-stage tail repair proposal",
+  "owner": "/root/scope25_gamma_continuation_owner",
+  "target_source": "items/alg-certified-integer-order-bessel-evaluation.md",
+  "canonical_sources_edited": false,
+  "actual_full_reading": [
+    {
+      "path": "CLAUDE.md",
+      "scope": "Full normative instructions reread."
+    },
+    {
+      "path": "items/alg-certified-integer-order-bessel-evaluation.md",
+      "scope": "Full YAML and Definition, including all stage ranges, caps, shared operation budget, early scaled-I zero branch, stage constants, SeriesJ, midpoint candidates, Miller branch, and success/failure rules."
+    },
+    {
+      "path": "items/lem-trigonometric-identities-machin-and-range-reduction.md",
+      "scope": "Full Statement, Facts and proof. Statement gives Machin identity and sine/cosine tails; arctangent tail is imported as L2 and used in proof 4.1, not explicitly supplied by this Statement."
+    },
+    {
+      "path": "items/lem-range-reduced-exp-log-and-arctan-series-enclosures.md",
+      "scope": "Full Statement, Facts and proof. Stated integer parameter begins at N>=1; the arctangent partial sum runs through k=N and tail has exponent 2N+3. Proof 1.4 identifies the real arctangent series; proof 3.1 derives its geometric tail."
+    },
+    {
+      "path": "items/def-real-elementary-functions-and-domains.md",
+      "scope": "Full Definition and metadata. Real arctangent is the oriented Riemann integral from zero, defined for every real argument; pi is four times arctan one."
+    }
+  ],
+  "confirmed_local_defect": "The stage-constant paragraph attributes the arctangent tail to the Machin supplier, whose Statement does not contain that tail. The exact existing range-reduced tail lemma should be cited and added as a direct dependency. Its stated positive truncation order does not directly cover the one-term q=1 sum when reindexed as N=q-1.",
+  "domain_and_index_checks": [
+    "The actual stage loop starts at q=1 and all relevant caps are positive, so suppressing the first stage would narrow valid finite-cap behavior.",
+    "The rational arguments 1/5 and 1/239 are positive and at most 1/2, within the exact arctangent-tail domain and with positive denominator 1-r^2.",
+    "For q>=2, set N=q-1>=1. Then A_N is exactly the algorithm sum through q-1 and the published remainder is exactly r^(2q+1)/((2q+1)(1-r^2)).",
+    "For q=1, use the already stated N=1 enclosure about r-r^3/3. Triangle inequality gives error from r at most r^3/3+r^5/(5(1-r^2)), no larger than the existing one-term radius r^3/(3(1-r^2)). The nonnegative difference is exactly 2r^5/(15(1-r^2)).",
+    "Machin combines the two enclosures by the exact real identity and existing outward arithmetic. No principal complex arctangent branch or continuation issue is present."
+  ],
+  "literal_edits": [
+    {
+      "path": "items/alg-certified-integer-order-bessel-evaluation.md",
+      "operation": "replace_exact_once",
+      "old": "thm-real-elementary-range-enclosures, lem-trigonometric-identities-machin-and-range-reduction, def-factorial-and-falling-factorial",
+      "new": "thm-real-elementary-range-enclosures, lem-trigonometric-identities-machin-and-range-reduction, lem-range-reduced-exp-log-and-arctan-series-enclosures, def-factorial-and-falling-factorial",
+      "purpose": "Add the exact existing arctangent-tail supplier without modifying a published supplier."
+    },
+    {
+      "path": "items/alg-certified-integer-order-bessel-evaluation.md",
+      "operation": "replace_exact_once",
+      "old": "At stage $q$, compute an outward dyadic interval $P_q$ containing $\\pi$\nfrom the Machin identity and alternating arctangent tails in\n[[lem-trigonometric-identities-machin-and-range-reduction]]: for\n$r=1/5,1/239$, use the $q$-term sum\n$\\sum_{k=0}^{q-1}(-1)^kr^{2k+1}/(2k+1)$ and tail bound\n$r^{2q+1}/((2q+1)(1-r^2))$, combine by $16\\arctan(1/5)-4\\arctan(1/239)$,\nand round outward to the selected format at precision $p$. If this\nconversion is non-finite or $\\inf P_q\\le0$, midpoint candidates are\nunavailable at this stage; the independent power-series or Miller branches may\nstill be attempted.",
+      "new": "At stage $q$, compute an outward dyadic interval $P_q$ containing $\\pi$\nfrom the Machin identity in\n[[lem-trigonometric-identities-machin-and-range-reduction]] and the\narctangent tail in\n[[lem-range-reduced-exp-log-and-arctan-series-enclosures]]: for\n$r=1/5,1/239$, use the $q$-term sum\n$\\sum_{k=0}^{q-1}(-1)^kr^{2k+1}/(2k+1)$ and tail bound\n$r^{2q+1}/((2q+1)(1-r^2))$, combine by $16\\arctan(1/5)-4\\arctan(1/239)$,\nand round outward to the selected format at precision $p$. If this\nconversion is non-finite or $\\inf P_q\\le0$, midpoint candidates are\nunavailable at this stage; the independent power-series or Miller branches may\nstill be attempted.\n\nFor justification of the same tail bound at every stage, both rational\narguments satisfy $0<r\\le1/2$. For $q\\ge2$, apply the cited arctangent\ntail with $N=q-1\\ge1$. For $q=1$, its case $N=1$ gives\n$$|\\arctan r-r|\\le r^3/3+\\frac{r^5}{5(1-r^2)}\n\\le\\frac{r^3}{3(1-r^2)},$$\nwhich is exactly the bound used for the one-term sum. The second inequality\nfollows since the right side minus the preceding expression is\n$2r^5/(15(1-r^2))\\ge0$.",
+      "purpose": "Separate the Machin identity from the tail citation and justify q=1 using the existing N=1 theorem."
+    }
+  ],
+  "preservation": {
+    "definition_input_output_contract": "Unchanged. No target, argument, order, tolerance, exponent range, status, or relative-certification behavior is changed.",
+    "stage_schedule": "Unchanged, including stage one and all finite caps.",
+    "computed_constants": "Unchanged q-term sums, rational tail radii, Machin combination, and outward rounding.",
+    "operation_budget": "Unchanged shared W accounting, nested interruption, and candidate availability. The added inequalities are mathematical justification, not instructions to compute an extra sum, check, candidate, or integral.",
+    "branches": "Independent series/Miller branches, midpoint availability test, early scaled-I zero case and all success/inconclusive/range returns remain verbatim.",
+    "published_suppliers": "No supplier Statement or proof needs change; in particular no silent extension of the range lemma to N=0 is required."
+  },
+  "native_owner_handoff": "After root admission, the native owner can apply the two literal edits. Root retains metadata, dependency-level and proof/readiness integration ownership. No source edit was made in preparing this proposal.",
+  "not_run": [
+    "tests",
+    "gates",
+    "validators",
+    "checkers",
+    "hashing",
+    "native control transitions"
+  ],
+  "remaining_mathematical_uncertainty": null
+}

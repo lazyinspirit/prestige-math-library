@@ -1,0 +1,13 @@
+# Batch 38: review 0
+
+Run: numerical-analysis-remaining-71-2026-10-17
+Batch: 38
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: discrete-de-rham-complexes-and-edge-elements, discrete-de-rham-complexes-and-edge-elements-examples
+Items: def-na-hcurl-space, lem-na-contractible-lipschitz-polyhedron-boundary-connected, lem-na-lipschitz-scalar-h1-h2-extension, lem-na-graded-whitney-mesh-size-and-boundary-shifts, def-na-lowest-order-whitney-de-rham-spaces, def-na-zero-tangential-hcurl, lem-na-compact-support-hcurl-fourier-splitting, lem-na-weak-local-potentials-and-continuation, lem-na-hcurl-curlfree-potential-contractible, cex-na-canonical-edge-moments-not-bounded-on-hcurl, def-na-curl-curl-kernel-quotient-gauge, lem-na-nedelec-edge-unisolvence, lem-na-weak-hcurl-tangential-trace, lem-na-lipschitz-support-and-zero-boundary-closure, lem-na-whitney-moments-commute-with-grad-curl-div, thm-na-stable-mixed-curl-curl-kernel-quotient, lem-na-full-dirichlet-hcurl-regular-decomposition, thm-na-regular-decomposition-zero-tangential-hcurl, thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes, lem-na-relative-curl-kernel-is-zero-boundary-gradients, lem-na-whitney-averaged-pullback-moment-bounds, lem-na-whitney-cochain-correction-and-strong-convergence, thm-na-uniformly-bounded-commuting-cochain-projection, lem-na-discrete-gradient-lift-gap-estimate, thm-na-discrete-compactness-and-poincare-lowest-order-nedelec, ex-na-nedelec-edge-circulation-and-stokes, ex-na-nodal-curlcurl-spurious-gradient-mode, ex-na-handle-domain-harmonic-edge-field
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

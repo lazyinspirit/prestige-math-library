@@ -1,0 +1,212 @@
+{
+  "group": "p",
+  "batches": ["46"],
+  "pages_read": [
+    "nonlinear-full-approximation-multigrid",
+    "nonlinear-full-approximation-multigrid-examples"
+  ],
+  "items_read": [
+    "alg-fas-two-grid-cycle",
+    "lem-fas-second-derivative-of-composed-cycle-map",
+    "alg-fas-vw-cycle",
+    "lem-fas-coarse-branch-derivative",
+    "lem-fas-vw-cycle-work-and-status",
+    "lem-fas-fine-root-fixed-point",
+    "thm-fas-local-contraction-under-derivative-bound",
+    "lem-fas-linear-vw-cycle-translation",
+    "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+    "lem-fas-inexact-coarse-solve-residual-defect",
+    "ex-fas-semilinear-reaction-diffusion-local-convergence",
+    "ex-fas-reaction-poisson-tau-cancellation",
+    "cex-fas-zero-tau-breaks-fine-root",
+    "ex-fas-bifurcation-shrinks-contraction-ball",
+    "ex-fas-linear-cycle-equivalence"
+  ],
+  "conventions": [
+    {
+      "convention": "The fine equation is F_h(u)=f_h. Iterate restriction I, residual restriction R, and prolongation P are independent linear maps. After pre-smoothing, the coarse target is F_H(Iu)+R(f_h−F_h(u)); tau is F_H(Iu)−RF_h(u), and correction is u+P(v−Iu).",
+      "fixed_by": "alg-fas-two-grid-cycle",
+      "matters_for": [
+        "alg-fas-vw-cycle",
+        "lem-fas-coarse-branch-derivative",
+        "lem-fas-fine-root-fixed-point",
+        "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+        "ex-fas-reaction-poisson-tau-cancellation",
+        "cex-fas-zero-tau-breaks-fine-root",
+        "ex-fas-linear-cycle-equivalence"
+      ]
+    },
+    {
+      "convention": "Arithmetic is exact. Smoother counts and solver budgets are finite; exact-root means zero residual, while inexact-root means a positive explicitly computed residual. Final status certifies the returned iterate's own level equation.",
+      "fixed_by": "alg-fas-two-grid-cycle",
+      "matters_for": [
+        "alg-fas-vw-cycle",
+        "lem-fas-vw-cycle-work-and-status",
+        "lem-fas-fine-root-fixed-point"
+      ]
+    },
+    {
+      "convention": "Levels run from 0 to J, with 0 the base level. Each recursive call lowers the level; repeated coarse calls retain the same target and start from the latest coarse iterate. V and W use one and two calls respectively.",
+      "fixed_by": "alg-fas-vw-cycle",
+      "matters_for": [
+        "lem-fas-vw-cycle-work-and-status",
+        "lem-fas-fine-root-fixed-point",
+        "thm-fas-linear-cycle-reduces-to-galerkin-correction"
+      ]
+    },
+    {
+      "convention": "The exact coarse branch passes through Iu_* and has invertible DF_H(Iu_*); the pre/post smoothing maps fix u_*.",
+      "fixed_by": "lem-fas-coarse-branch-derivative",
+      "matters_for": [
+        "thm-fas-local-contraction-under-derivative-bound",
+        "ex-fas-semilinear-reaction-diffusion-local-convergence"
+      ]
+    },
+    {
+      "convention": "All derivative norms are induced Euclidean operator norms. The local theorem gives contraction of errors toward the fixed root with factor q+Lr/2, rather than asserting contraction between every pair of points.",
+      "fixed_by": "thm-fas-local-contraction-under-derivative-bound",
+      "matters_for": [
+        "lem-fas-inexact-coarse-solve-residual-defect",
+        "ex-fas-semilinear-reaction-diffusion-local-convergence",
+        "ex-fas-bifurcation-shrinks-contraction-ball"
+      ]
+    },
+    {
+      "convention": "Linear reduction assumes an SPD Galerkin hierarchy, full-column-rank prolongations, R_j=P_j transpose, matching residual-correction smoothers and cycle counts; I_j may be any linear map of the stated dimensions.",
+      "fixed_by": "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+      "matters_for": [
+        "ex-fas-linear-cycle-equivalence"
+      ]
+    },
+    {
+      "convention": "The coarse residual-to-solution estimate is an independent hypothesis; invertibility of the coarse Jacobian alone does not supply it.",
+      "fixed_by": "lem-fas-inexact-coarse-solve-residual-defect",
+      "matters_for": [
+        "lem-fas-inexact-coarse-solve-residual-defect"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-fas-two-grid-cycle",
+      "statement": "Defines the finite-budget two-grid procedure: pre-smooth, form g_H=F_H(Iu)+R(f_h−F_h(u)), make finitely many coarse calls, correct by P(z−Iu), post-smooth, and report the final fine residual and status.",
+      "used_by": [
+        "alg-fas-vw-cycle",
+        "lem-fas-coarse-branch-derivative",
+        "thm-fas-local-contraction-under-derivative-bound",
+        "lem-fas-inexact-coarse-solve-residual-defect",
+        "ex-fas-semilinear-reaction-diffusion-local-convergence",
+        "ex-fas-reaction-poisson-tau-cancellation",
+        "cex-fas-zero-tau-breaks-fine-root",
+        "ex-fas-bifurcation-shrinks-contraction-ball",
+        "ex-fas-linear-cycle-equivalence"
+      ]
+    },
+    {
+      "id": "alg-fas-vw-cycle",
+      "statement": "Defines a finite hierarchy whose noncoarsest levels use the two-grid procedure with the next-level cycle as coarse solver, finite metered budgets, and one or two repeated coarse calls.",
+      "used_by": [
+        "lem-fas-vw-cycle-work-and-status",
+        "lem-fas-fine-root-fixed-point",
+        "thm-fas-linear-cycle-reduces-to-galerkin-correction"
+      ]
+    },
+    {
+      "id": "lem-fas-fine-root-fixed-point",
+      "statement": "Under root-fixing smoothers, admissible restrictions selected as exact coarse roots at zero defect, and a base solver preserving initial exact roots, the exact-branch FAS V/W cycle leaves an exact fine root fixed, for arbitrary admissible transfers.",
+      "used_by": [
+        "thm-fas-local-contraction-under-derivative-bound",
+        "ex-fas-semilinear-reaction-diffusion-local-convergence",
+        "ex-fas-reaction-poisson-tau-cancellation",
+        "cex-fas-zero-tau-breaks-fine-root"
+      ]
+    },
+    {
+      "id": "thm-fas-local-contraction-under-derivative-bound",
+      "statement": "For the actual C1 exact-branch cycle fixing u_*, on a closed radius-r ball with q=‖DE(u_*)‖<1 and L-Lipschitz derivative, q+Lr/2<1 implies ball invariance and ‖u_k−u_*‖≤(q+Lr/2)^k‖u_0−u_*‖.",
+      "used_by": [
+        "lem-fas-inexact-coarse-solve-residual-defect",
+        "ex-fas-semilinear-reaction-diffusion-local-convergence",
+        "ex-fas-bifurcation-shrinks-contraction-ball"
+      ]
+    },
+    {
+      "id": "lem-fas-coarse-branch-derivative",
+      "statement": "Under its C1, selected-branch, fixed-root and invertible-coarse-Jacobian hypotheses, DE(u_*)=DS_post(u_*)[Id−P DF_H(Iu_*)⁻¹ R DF_h(u_*)]DS_pre(u_*).",
+      "used_by": [
+        "thm-fas-local-contraction-under-derivative-bound",
+        "ex-fas-semilinear-reaction-diffusion-local-convergence"
+      ]
+    },
+    {
+      "id": "lem-fas-second-derivative-of-composed-cycle-map",
+      "statement": "For compatible C2 maps E=T∘C∘S, the second derivative is D²T(z)[DC(y)DS(x)h,DC(y)DS(x)k]+DT(z)(D²C(y)[DS(x)h,DS(x)k]+DC(y)D²S(x)[h,k]), where y=S(x) and z=C(y).",
+      "used_by": [
+        "ex-fas-semilinear-reaction-diffusion-local-convergence",
+        "ex-fas-bifurcation-shrinks-contraction-ball"
+      ]
+    },
+    {
+      "id": "lem-fas-linear-vw-cycle-translation",
+      "statement": "For the linear Galerkin V/W procedure, Cycle(j,x+a,b+A_ja)=a+Cycle(j,x,b), with identical hierarchy, smoothing matrices, sweep counts and cycle count.",
+      "used_by": [
+        "thm-fas-linear-cycle-reduces-to-galerkin-correction"
+      ]
+    },
+    {
+      "id": "thm-fas-linear-cycle-reduces-to-galerkin-correction",
+      "statement": "Under the stated SPD Galerkin hierarchy, transpose residual restriction, matching smoothers and finite cycle counts, exact-branch linear FAS returns exactly the corresponding Galerkin correction V/W iterate; iterate restriction may be any linear map of the stated dimensions.",
+      "used_by": [
+        "ex-fas-linear-cycle-equivalence"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-finite-dimensional-normed-spaces-are-banach",
+      "used_for": "Completeness of the finite-dimensional vector and operator spaces used in the second-derivative composition lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "Chain and bounded-bilinear product rules when differentiating products of derivative operators.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-implicit-function-theorem",
+      "used_for": "Existence, C1 regularity and derivative formula for the selected coarse branch through Iu_*.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation of the actual pre-smoother, coarse-correction and post-smoother composition.",
+      "opened": true
+    },
+    {
+      "id": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+      "used_for": "The quadratic Taylor remainder, with endpoints reversed to obtain the linear term DE(u_*).",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Converting the examples' explicit second-derivative bounds into derivative-Lipschitz estimates on convex balls.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "nonlinear-full-approximation-multigrid",
+      "to": "multigrid-methods-and-complexity",
+      "faithful": true,
+      "note": "Read the supplier page, finite Galerkin cycle Definition and energy-projector theorem. The FAS consumer preserves the SPD, full-column-rank, Galerkin, transpose-restriction and matching-smoother hypotheses. Its translation argument handles repeated W calls from the current coarse iterate. No unconditional convergence or linear-work claim is imported."
+    },
+    {
+      "from": "nonlinear-full-approximation-multigrid",
+      "to": "nonlinear-parabolic-compactness-and-monotone-evolution",
+      "faithful": true,
+      "note": "Read the supplier page and monotone-diffusion-flux Definition. This is contextual: the FAS example proves its finite-dimensional monotonicity directly and explicitly imports no parabolic compactness, FEM projector stability or continuum convergence theorem. Neither page asserts a stronger interface in the reverse direction."
+    }
+  ]
+}

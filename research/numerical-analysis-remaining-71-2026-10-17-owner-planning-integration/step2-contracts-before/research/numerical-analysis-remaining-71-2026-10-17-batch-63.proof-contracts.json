@@ -1,0 +1,3169 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "63",
+  "level": 2,
+  "scheduling_input_sha256": "3e56be5a0babb93cab000e5e0dd2cabcf1ed3b667e7762cf442a5f8ce3c3f663",
+  "scope": [
+    "def-intersection-volume-conservative-remapping",
+    "def-isoparametric-curved-cell-map",
+    "lem-h2-zero-boundary-p1-interpolant-conforming",
+    "def-curved-domain-geometry-approximation",
+    "lem-curved-p1-interpolation-scaling",
+    "lem-isoparametric-pullback-and-surface-metric",
+    "thm-overlap-remap-l2-projection-conservation-positivity",
+    "lem-curved-boundary-lift-residual",
+    "lem-isoparametric-cofactor-normal-perturbation",
+    "lem-isoparametric-laplace-tensor-defect",
+    "lem-parabolic-domain-map-approximation",
+    "thm-overlap-remap-error-from-approximation-and-geometry",
+    "lem-curved-nvb-closure-preserves-matching-traces",
+    "thm-curved-isoparametric-strang-error-bound",
+    "alg-certified-convex-polygon-overlap",
+    "thm-certified-polygon-overlap-correctness",
+    "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+    "thm-curved-uniform-nvb-quality-and-termination",
+    "ex-isoparametric-unit-disk-mesh",
+    "ex-inverted-isoparametric-map-detection",
+    "cex-delaunay-tetrahedral-sliver",
+    "ex-conservative-transfer-between-moving-curved-meshes",
+    "ex-parabolic-curved-domain-linear-geometry-approximation"
+  ],
+  "contracts": {
+    "lem-isoparametric-pullback-and-surface-metric": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-isoparametric-curved-cell-map",
+          "source_section": "Definition",
+          "quote": "Fix a reference matching affine simplicial mesh as in [[def-matching-affine-simplicial-meshes]]. An admissible curved cell is the image of a closed reference simplex $\\widehat K$ under a map $F_K\\in C^2(\\widehat K;\\mathbb R^d)$ that extends to a diffeomorphism on a neighborhood, is orientation preserving, and satisfies $0<j_0\\le J_K:=\\det DF_K\\le j_1$ and $\\|DF_K\\|+\\|(DF_K)^{-1}\\|+\\|D^2F_K\\|\\le C_F$. The physical cells have disjoint interiors, cover the domain up to their shared facets, and maps agree on each common reference facet under the prescribed affine facet identification. Define the volume metric $G_K=DF_K^TDF_K$, volume factor $J_K=\\sqrt{\\det G_K}$, and for a reference facet parame",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The chain rule [F2] gives $\\nabla_\\xi\\widehat u=DF^T(\\nabla_xu\\circ F)$. Since $DF$ is invertible by admissibility, multiplication by $DF^{-T}$ yields $\\nabla_xu\\circ F=DF^{-T}\\nabla_\\xi\\widehat u$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "For a regular face parametrization, the differential maps a coordinate vector $z$ to $Df z$ and its squared Euclidean length is $z^TG_fz$. The vector $G_f^{-1}\\nabla(u\\circ f)$ is therefore the coordinate vector whose image under $Df$ has the defining inner products with every tangent vector; its image is the tangential gradient. Taking its squared norm gives $\\nabla(u\\circ f)^TG_f^{-1}\\nabla(u\\circ f)$. The Gram determinant gives the $k$-volume scaling factor.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The energy identity follows by substituting step 1.1 into $|\\nabla u|^2$ and applying [F3] to the nonnegative measurable energy density. Since $J_F>0$, the absolute determinant in [F3] equals $J_F$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "A1",
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses Countable Choice through the change-of-variables supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The change-of-variables supplier explicitly assumes Countable Choice."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "lem-curved-p1-interpolation-scaling": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-local-finite-element-interpolation-estimates",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $k\\ge0$, $1\\le p<\\infty$, and let\n$(\\widehat S_d,\\widehat P,\\widehat\\Sigma)$ be a reference finite element\nwhose polynomial space contains $\\mathbb P_k$. Assume its degrees of\nfreedom are bounded on $W^{\\ell,p}(\\widehat S_d)$ for an integer\n$\\ell\\ge1$, let $r,m\\in\\mathbb N_0$, and let $\\widehat I$ be its\ninterpolant. Thus\n$\\widehat Iq=q$ for $q\\in\\mathbb P_k$. On a shape-regular affine mesh\nas in [[def-matching-affine-simplicial-meshes]], for each cell $K$ with its\norientation-preserving reference map $F_K$ define\n$$I_Kv=(\\widehat I(v\\circ F_K))\\circ F_K^{-1}.$$\nFor every such cell, if $\\ell\\le r\\le k+1$ and $0\\le m\\le r$, then for\n$v\\in W^{r,p}(K)$,\n$$|v-I_Kv|_{",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-isoparametric-curved-cell-map",
+          "source_section": "Definition",
+          "quote": "Fix a reference matching affine simplicial mesh as in [[def-matching-affine-simplicial-meshes]]. An admissible curved cell is the image of a closed reference simplex $\\widehat K$ under a map $F_K\\in C^2(\\widehat K;\\mathbb R^d)$ that extends to a diffeomorphism on a neighborhood, is orientation preserving, and satisfies $0<j_0\\le J_K:=\\det DF_K\\le j_1$ and $\\|DF_K\\|+\\|(DF_K)^{-1}\\|+\\|D^2F_K\\|\\le C_F$. The physical cells have disjoint interiors, cover the domain up to their shared facets, and maps agree on each common reference facet under the prescribed affine facet identification. Define the volume metric $G_K=DF_K^TDF_K$, volume factor $J_K=\\sqrt{\\det G_K}$, and for a reference facet parame",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-c-k-boundary-flattening-preserves-wkp-locally",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $k\\ge1$, $1\\le p\\le\\infty$ and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Let $U,V\\subseteq\\mathbb R^n$ be open\nand let $\\Phi:U\\to V$ be a $C^k$ diffeomorphism with inverse\n$\\Psi:=\\Phi^{-1}:V\\to U$. Fix open sets $U_0\\subset\\subset U$ and\n$V_0\\subset\\subset V$ with $\\Phi(U_0)\\subseteq V_0$, and suppose that on\n$\\overline{U_0}$ the derivatives of $\\Phi$ through order $k$ are bounded and\nthat on $\\overline{V_0}$ the derivatives of $\\Psi$ through order $k$ are\nbounded; in the situation of\n[[def-bounded-c-k-domain-and-boundary-charts]] these are exactly the compact\npatches on which the flattening chart and its inverse have bounded derivatives\nthrough order $k$. Then:",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lagrange-point-evaluation-threshold-on-reference-simplex",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge2$, let $N\\in\\mathbb N_0$, choose\n$x_1,\\ldots,x_N\\in\\overline{\\widehat S_d}$, and let\n$\\ell\\ge1$ be an integer. If $1\\le p<\\infty$ and $\\ell>d/p$, then each\npoint evaluation has a unique continuous-representative value and\n$$|u(x_j)|\\le C\\|u\\|_{W^{\\ell,p}(\\widehat S_d)}.$$\nIf $p=\\infty$, the same conclusion holds for every $\\ell\\ge1$.\nConsequently any finite set of Lagrange nodal evaluations is bounded on\nthe stated Sobolev space and defines a well-defined degree-of-freedom\nfunctional there. No boundedness at $\\ell=d/p$ is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "By [F5], the three nodal values are well-defined on the $H^2$ class. Apply [F4] to the diffeomorphism $\\Psi$ on open neighborhoods of $\\overline{\\widetilde K}$ and $\\overline K$. The closures are compact in these neighborhoods, and the displayed derivative and inverse bounds give $\\|w\\|_{H^2(\\widetilde K)}\\le C\\|v\\|_{H^2(K)}$ for $w=v\\circ\\Psi$. Applying the same composition result to $\\Psi^{-1}$ gives uniform equivalence of the $L^2$ and $H^1$ norms when the interpolant error is pushed back to $K$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Apply [F1] to $w$ on the affine triangle $\\widetilde K$. The mapped interpolant is exactly $(I_{\\widetilde K}w)\\circ\\Psi^{-1}$ because its three nodal values are those of $v$ at the three image vertices. The affine estimates give $\\|w-I_{\\widetilde K}w\\|_{L^2(\\widetilde K)}\\le C h_K^2\\|w\\|_{H^2(\\widetilde K)}$ and $|w-I_{\\widetilde K}w|_{H^1(\\widetilde K)}\\le Ch_K\\|w\\|_{H^2(\\widetilde K)}$, using the assumed diameter comparability.",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Push the error through $\\Psi^{-1}$ using step 1.1. The resulting uniform norm bounds are the two claimed estimates. AC is used only in the automatic nodal-boundedness clause of [F1], and Countable Choice is used through [F1] and [F4].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 states the AC and Countable Choice uses through the interpolation and composition suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "3.1"
+          ],
+          "reason": "AC is needed for the automatic Lagrange nodal-boundedness application in the affine interpolation supplier."
+        },
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "3.1"
+          ],
+          "reason": "Countable Choice is a declared dependency of both the affine interpolation and nonlinear Sobolev-composition suppliers."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "thm-overlap-remap-l2-projection-conservation-positivity": {
+      "risk": "medium",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-intersection-volume-conservative-remapping",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lebesgue-measurable domain of finite positive measure. Let $\\mathcal S=(S_i)_{i=1}^m$ and $\\mathcal T=(T_j)_{j=1}^n$ be finite measurable partitions of $\\Omega$ up to null sets, with disjoint interiors modulo null sets and positive cell volumes. Define exact overlap weights $w_{ji}=|T_j\\cap S_i|$. For source constants $v_i$, the intersection-volume remap is the target piecewise-constant field $Rv$ whose value on $T_j$ is $ (Rv)_j=|T_j|^{-1}\\sum_i w_{ji}v_i$. All weights are exact measures; an approximate clipping weight is not silently substituted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "By [F4], Lebesgue measure is countably additive and hence finitely additive. The partition hypotheses therefore give $\\sum_iw_{ji}=|T_j|$ for every target cell and $\\sum_jw_{ji}=|S_i|$ for every source cell; omitted partition boundaries are null and do not change these measures. The same finite additivity gives $\\int_{T_j}v=\\sum_iw_{ji}v_i$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "For any target cellwise-constant $z$, sum over target cells: $\\int_\\Omega(v-Rv)z=\\sum_j z_j(\\sum_iw_{ji}v_i-|T_j|(Rv)_j)=0$ by [F1] and step 1.1. Thus $v-Rv$ is orthogonal to the target subspace.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Orthogonality with $z=Rv$ gives $\\|v\\|_2^2=\\|Rv\\|_2^2+\\|v-Rv\\|_2^2$, so $\\|Rv\\|_2\\le\\|v\\|_2$. All terms are finite because the partitions are finite, cells have finite volume, and $v$ is piecewise constant.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "By the column-sum identity in step 1.1, $\\int Rv=\\sum_j|T_j|(Rv)_j=\\sum_i|S_i|v_i=\\int v$. If each $v_i\\ge0$, every overlap weight is nonnegative, so the defining finite weighted average is nonnegative.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ],
+          "reason": "The Lebesgue-measure supplier explicitly assumes Countable Choice."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "lem-parabolic-domain-map-approximation": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-shape-regular-affine-simplex-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F_K(\\widehat x)=b_K+A_K\\widehat x$ map the fixed reference simplex\n$\\widehat S_d$ bijectively to a cell $K$ of a shape-regular family, and let\n$h_K$ be its diameter and $\\rho_K$ its inradius. There are constants\n$c,C>0$, depending only on $d$, the reference simplex, and the shape\nregularity bound, such that\n$$c h_K\\le s_{\\min}(A_K)\\le \\|A_K\\|\\le C h_K, \\qquad c h_K^d\\le\\det A_K\\le C h_K^d.$$\nFor each facet $F$, its affine surface Jacobian is comparable to\n$h_K^{d-1}$, and its altitude from the opposite vertex is comparable to\n$h_K$. Thus Sobolev scaling constants can be expressed using $h_K$ alone,\nwith constants uniform over the family.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-curved-domain-geometry-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Direct differentiation gives $D\\Phi=\\begin{pmatrix}1&0\\\\x/2&1\\end{pmatrix}$ and determinant $1$; the stated inverse is verified by substitution. On a triangle with barycentric coordinates $\\lambda_i$ and vertex first-coordinates $x_i$, exact quadratic expansion gives $I_h(x^2/4)-x^2/4=\\frac14\\sum_{i<j}\\lambda_i\\lambda_j(x_i-x_j)^2$. Since $|x_i-x_j|\\le h_K$ and $0\\le\\lambda_i\\le1$, this is bounded by $Ch_K^2$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Differentiating the barycentric expression in step 1.1, only the factors $\\lambda_i\\lambda_j$ vary; their derivatives are bounded by $C h_K^{-1}$ using [F2], while $|x_i-x_j|^2\\le h_K^2$. The product rule therefore gives a derivative bound $Ch_K$. Thus $\\|D(I_h(x^2/4)-x^2/4)\\|_{L^\\infty(K)}\\le Ch_K$, yielding the global $Ch$ derivative estimate and the $Ch^2$ value estimate. By [F3] these are the geometry errors $e_1$ and $e_0$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The first coordinate of $\\Phi_h$ is $x$, and on each vertical segment its second coordinate is the continuous piecewise-affine function $y+I_h(x^2/4)(x,y)$. Its slope on every subsegment is $1+\\partial_y I_h(x^2/4)\\ge1-Ch$. Choose $h$ with $Ch\\le1/2$. Integration over the finitely many subsegments makes this coordinate strictly increasing with increment at least half the vertical increment. Equal images must therefore have equal first coordinates and then equal second-coordinate inputs; hence $\\Phi_h$ is injective. The same derivative estimate gives $\\det D\\Phi_h=1+\\partial_yI_h(x^2/4)\\ge1/2$.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The affine shape-scaling supplier explicitly assumes Countable Choice."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "lem-isoparametric-laplace-tensor-defect": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-curved-domain-geometry-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-isoparametric-pullback-and-surface-metric",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F:\\widehat K\\to K$ be an admissible $C^1$ orientation-preserving cell diffeomorphism and let $u$ be $C^1$ on $K$. With $\\widehat u=u\\circ F$, one has $\\nabla_xu\\circ F=DF^{-T}\\nabla_{\\xi}\\widehat u$ and $\\int_K |\\nabla u|^2dx=\\int_{\\widehat K}J_F\\nabla\\widehat u^T(DF^{-1}DF^{-T})\\nabla\\widehat u\\,d\\xi$. For a regular $k$-dimensional parametrized face $f:U\\subset\\mathbb R^k\\to\\mathbb R^d$ with metric $G_f=Df^TDf$, the induced area factor is $\\sqrt{\\det G_f}$ and the tangential gradient of $u\\circ f$ is $DfG_f^{-1}\\nabla(u\\circ f)$; its squared norm is $\\nabla(u\\circ f)^TG_f^{-1}\\nabla(u\\circ f)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "On the bounded matrix set $\\|A\\|,\\|C\\|\\le M$, the determinant is a polynomial in the entries, so its derivative is bounded on that set and $|\\det A-\\det C|\\le C_d M^{d-1}\\|A-C\\|$. Apply this with $A=D\\Phi$ and $C=D\\Phi_h$ to obtain $|J-J_h|\\le C e_1$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The inverse identity $A^{-1}-C^{-1}=A^{-1}(C-A)C^{-1}$ and $J,J_h\\ge j_*$ show $\\|D\\Phi^{-1}-D\\Phi_h^{-1}\\|\\le C(d,M,j_*)e_1$; indeed every singular value is at most $M$ and their product is at least $j_*$, so the smallest is at least $j_*/M^{d-1}$ and each inverse norm is at most $M^{d-1}/j_*$.  Expanding $J A^{-1}A^{-T}-J_hC^{-1}C^{-T}$ into the determinant difference and the two inverse-factor differences gives $\\|B-B_h\\|_\\infty\\le Ce_1$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Pointwise, $|\\nabla v^T(B-B_h)\\nabla w|\\le Ce_1|\\nabla v||\\nabla w|$. Integrating and applying [F3] proves the stated bilinear-form defect bound; the right side is finite because both gradients are in $L^2$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "thm-overlap-remap-error-from-approximation-and-geometry": {
+      "risk": "medium",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-curved-domain-geometry-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-intersection-volume-conservative-remapping",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lebesgue-measurable domain of finite positive measure. Let $\\mathcal S=(S_i)_{i=1}^m$ and $\\mathcal T=(T_j)_{j=1}^n$ be finite measurable partitions of $\\Omega$ up to null sets, with disjoint interiors modulo null sets and positive cell volumes. Define exact overlap weights $w_{ji}=|T_j\\cap S_i|$. For source constants $v_i$, the intersection-volume remap is the target piecewise-constant field $Rv$ whose value on $T_j$ is $ (Rv)_j=|T_j|^{-1}\\sum_i w_{ji}v_i$. All weights are exact measures; an approximate clipping weight is not silently substituted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-overlap-remap-l2-projection-conservation-positivity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Under the finite partition hypotheses of [[def-intersection-volume-conservative-remapping]], let $P_0(\\mathcal T)$ be the target cellwise-constant subspace of $L^2(\\Omega)$. For every source piecewise-constant $v$, $Rv$ is the $L^2$ orthogonal projection of $v$ onto $P_0(\\mathcal T)$, hence $\\|Rv\\|_2\\le\\|v\\|_2$. It preserves total mass, $\\int_\\Omega Rv=\\int_\\Omega v$, and if all $v_i\\ge0$ then every target value $(Rv)_j\\ge0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The Lipschitz condition gives $|u(\\Phi(X))-u(\\Phi_h(X))|\\le L_ue_0$ for every $X$. Integrating its square against $J_h\\le J^*$ gives the geometry term $L_ue_0\\sqrt{J^*|\\widehat\\Omega|}$.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "For any $q\\in L^2(\\Omega_h)$ and target cell $T$, [F3] gives $|T||P_Tq|_T^2=|\\int_Tq|^2/|T|\\le\\int_T|q|^2$. Summing over the disjoint target cells shows $P_T$ is contractive. The same averaging identity gives $q-P_Tq$ orthogonal to every target-cellwise constant, so $P_T$ is the orthogonal projection.",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "By [F2], $Rv_S=P_Tv_S$. Thus $u-Rv_S=(u-P_Tu)+P_T(u-v_S)$; the two terms are orthogonal and $P_T$ is contractive by step 1.2. The first term has norm $\\eta_T$ and the second is at most $\\eta_S$, whence $\\|u-Rv_S\\|_{L^2(\\Omega_h)}\\le\\eta_T+\\eta_S$.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Apply [F4] separately on the finitely many mesh cells to identify the physical $L^2(\\Omega_h)$ norm in step 2.1 with the weighted pullback norm of $(u-Rv_S)\\circ\\Phi_h$. The triangle inequality with step 1.1 proves the claimed bound.",
+          "inputs": [
+            "F4",
+            "A1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "3.1"
+          ],
+          "reason": "The change-of-variables supplier explicitly assumes Countable Choice."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "lem-curved-nvb-closure-preserves-matching-traces": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-afem-nvb-conforming-closure-and-cumulative-counting",
+          "source_section": "Statement",
+          "quote": "Fix a compatible labeled initial mesh. Recursive reference-edge closure of any finite marked set terminates, produces a matching conforming NVB descendant, and preserves the shape bound of [[lem-afem-nvb-shape-regularity-and-three-generation-properties]]. For a sequence of such refinements in which each selected cell is first requested for three uniform generations, there is a constant $C_{\\rm cl}$ depending only on the initial mesh such that\n$$\\#\\mathcal T_n-\\#\\mathcal T_0\\le C_{\\rm cl}\\sum_{k=0}^{n-1}\\#M_k.$$\nThe constant is for the cumulative sequence; no uniform bound on the added cells in one single refinement call is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-isoparametric-curved-cell-map",
+          "source_section": "Definition",
+          "quote": "Fix a reference matching affine simplicial mesh as in [[def-matching-affine-simplicial-meshes]]. An admissible curved cell is the image of a closed reference simplex $\\widehat K$ under a map $F_K\\in C^2(\\widehat K;\\mathbb R^d)$ that extends to a diffeomorphism on a neighborhood, is orientation preserving, and satisfies $0<j_0\\le J_K:=\\det DF_K\\le j_1$ and $\\|DF_K\\|+\\|(DF_K)^{-1}\\|+\\|D^2F_K\\|\\le C_F$. The physical cells have disjoint interiors, cover the domain up to their shared facets, and maps agree on each common reference facet under the prescribed affine facet identification. Define the volume metric $G_K=DF_K^TDF_K$, volume factor $J_K=\\sqrt{\\det G_K}$, and for a reference facet parame",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Apply [F1] to the finite request. Its output is a conforming affine triangulation, so each interior edge is represented by the same complete reference segment from both incident cells; no hanging edge subdivision remains.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "On a common edge, the assumed geometry map has one trace from the shared reference segment. By [F2] the two incident curved-cell parametrizations use that same trace, and injectivity prevents distinct reference interfaces from being identified as overlapping physical interiors. Thus the physical curved interface matches.",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "thm-curved-isoparametric-strang-error-bound": {
+      "risk": "medium",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-hk-and-hk-zero-notation",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice, as in\n[[def-sobolev-space-wkp-and-its-norm]] and\n[[lem-sobolev-norm-is-well-defined-and-definite]]. For an open set\n$\\Omega\\subseteq\\mathbb R^n$, $n\\ge1$, an integer $k\\ge0$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, set\n$$H^k(\\Omega;\\mathbb K):=W^{k,2}(\\Omega;\\mathbb K).$$\nThe elements are the same almost-everywhere classes, and their weak\nderivatives and norm are exactly those already defined for $W^{k,2}$. When the\nscalar field is fixed, write $H^k(\\Omega)$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-shape-regular-affine-simplex-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F_K(\\widehat x)=b_K+A_K\\widehat x$ map the fixed reference simplex\n$\\widehat S_d$ bijectively to a cell $K$ of a shape-regular family, and let\n$h_K$ be its diameter and $\\rho_K$ its inradius. There are constants\n$c,C>0$, depending only on $d$, the reference simplex, and the shape\nregularity bound, such that\n$$c h_K\\le s_{\\min}(A_K)\\le \\|A_K\\|\\le C h_K, \\qquad c h_K^d\\le\\det A_K\\le C h_K^d.$$\nFor each facet $F$, its affine surface Jacobian is comparable to\n$h_K^{d-1}$, and its altitude from the opposite vertex is comparable to\n$h_K$. Thus Sobolev scaling constants can be expressed using $h_K$ alone,\nwith constants uniform over the family.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-curved-domain-geometry-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-parabolic-domain-map-approximation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\widehat\\Omega=[-1,1]^2$, let $\\mathcal T_h$ be a matching shape-regular affine triangulation, and put $\\Phi(x,y)=(x,y+x^2/4)$. Let $I_h$ be the vertexwise P1 interpolant and $\\Phi_h(x,y)=(x,y+I_h(x^2/4))$. In the notation of [[def-curved-domain-geometry-approximation]], there is a constant $C$ depending only on the shape-regularity bound such that $e_0\\le Ch^2$ and $e_1\\le Ch$. For sufficiently small $h$, $\\det D\\Phi_h\\ge1/2$, and $\\Phi_h$ is globally one-to-one on the square. The exact map has $\\det D\\Phi=1$ and a global inverse $(X,Y)\\mapsto(X,Y-X^2/4)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-isoparametric-pullback-and-surface-metric",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F:\\widehat K\\to K$ be an admissible $C^1$ orientation-preserving cell diffeomorphism and let $u$ be $C^1$ on $K$. With $\\widehat u=u\\circ F$, one has $\\nabla_xu\\circ F=DF^{-T}\\nabla_{\\xi}\\widehat u$ and $\\int_K |\\nabla u|^2dx=\\int_{\\widehat K}J_F\\nabla\\widehat u^T(DF^{-1}DF^{-T})\\nabla\\widehat u\\,d\\xi$. For a regular $k$-dimensional parametrized face $f:U\\subset\\mathbb R^k\\to\\mathbb R^d$ with metric $G_f=Df^TDf$, the induced area factor is $\\sqrt{\\det G_f}$ and the tangential gradient of $u\\circ f$ is $DfG_f^{-1}\\nabla(u\\circ f)$; its squared norm is $\\nabla(u\\circ f)^TG_f^{-1}\\nabla(u\\circ f)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-isoparametric-laplace-tensor-defect",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi,\\Phi_h$ be the orientation-preserving maps of [[def-curved-domain-geometry-approximation]], with $J,J_h\\ge j_*>0$ and $\\|D\\Phi\\|_\\infty+\\|D\\Phi_h\\|_\\infty\\le M$. Set $B=J D\\Phi^{-1}D\\Phi^{-T}$ and $B_h=J_hD\\Phi_h^{-1}D\\Phi_h^{-T}$. Then $\\|B-B_h\\|_\\infty\\le C e_1$, where $C$ depends only on $d,j_*,M$. Consequently $|\\int_{\\widehat\\Omega}\\nabla v^T(B-B_h)\\nabla w|\\le C e_1\\|\\nabla v\\|_2\\|\\nabla w\\|_2$ for $v,w\\in H^1(\\widehat\\Omega)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-curved-p1-interpolation-scaling",
+          "source_section": "Statement",
+          "quote": "Assume AC and Countable Choice. In dimension two let $K=\\Psi(\\widetilde K)$, where $\\widetilde K$ is a shape-regular affine triangle of diameter comparable to $h_K$, and $\\Psi$ extends to a $C^2$ diffeomorphism on a neighborhood of $\\overline{\\widetilde K}$. Assume $\\|D\\Psi\\|_\\infty+\\|D\\Psi^{-1}\\|_\\infty+\\|D^2\\Psi\\|_\\infty+\\|J_\\Psi^{-1}\\|_\\infty$ are uniformly bounded. Let $v$ denote its continuous representative and set $I_Kv=(I_{\\widetilde K}(v\\circ\\Psi))\\circ\\Psi^{-1}$, the mapped nodal P1 interpolant. For $v\\in H^2(K)$, $\\|v-I_Kv\\|_{L^2(K)}\\le C h_K^2\\|v\\|_{H^2(K)}$ and $|v-I_Kv|_{H^1(K)}\\le C h_K\\|v\\|_{H^2(K)}$, with $C$ uniform over the family.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-h2-zero-boundary-p1-interpolant-conforming",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Let\n$\\Omega=(-1,1)^2$ have a finite matching affine triangular mesh, and let\n$u\\in H^2(\\Omega;\\mathbb R)\\cap H^1_0(\\Omega;\\mathbb R)$. On each triangle\ntake the unique continuous representative of the restriction of $u$. These\nrepresentatives give one well-defined value at every mesh vertex. The global\nnodal P1 interpolant $I_hu$, affine on each triangle and equal to these values\nat its vertices, is continuous, has zero trace on every boundary edge, and\nbelongs to $H^1_0(\\Omega)$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space, $a:V\\times V\\to\\mathbb K$ a bounded coercive form with boundedness constant $M$ and coercivity constant $\\alpha>0$, and $F:V\\to\\mathbb K$ a bounded functional linear in the real case and conjugate-linear in the complex test argument. Let $V_h\\subseteq V$ be finite-dimensional, and let $a_h:V_h\\times V_h\\to\\mathbb K$ and $F_h:V_h\\to\\mathbb K$ be bounded, with $F_h$ having the same test-linearity as $F$, and $a_h$ coercive with constant $\\alpha_h>0$ in the inherited norm. Both $a$ and $a_h$ are sesquilinear (bilinear over $\\mathbb R$), linear in their first argument and conjugate-linear in their second over $\\mathbb C$. There",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-variational-crime-error-framework",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. In the **exact variational problem**, $V$ is a Hilbert space, $a:V\\times V\\to\\mathbb K$ is a bounded coercive sesquilinear form (bilinear when $\\mathbb K=\\mathbb R$), linear in its first argument and conjugate-linear in its second when $\\mathbb K=\\mathbb C$, and $F:V\\to\\mathbb K$ is bounded and has the same linearity in its test argument as the second argument of $a$. Exact solutions satisfy $a(u,v)=F(v)$ for every $v\\in V$. Boundedness and coercivity have the meanings in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-curved-boundary-lift-residual",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\widehat\\Omega=(-1,1)^2$ be covered by a finite matching cell mesh, and let $\\Phi,\\Phi_h$ be continuous geometry maps whose cellwise $C^1$ derivatives satisfy $\\|D\\Phi\\|_\\infty+\\|D\\Phi_h\\|_\\infty\\le M$, $e_0=\\|\\Phi-\\Phi_h\\|_\\infty$, and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty;op}$. Let $G$ be a scalar physical boundary lift on an open convex neighborhood containing both images and every segment joining corresponding image points, with $\\|DG\\|_\\infty\\le L_1$ and $\\|D^2G\\|_\\infty\\le L_2$. Define the piecewise pullback gradients by $\\nabla_{pw}(G\\circ\\Phi)=D\\Phi^T\\nabla G(\\Phi)$ and $\\nabla_{pw}(G\\circ\\Phi_h)=D\\Phi_h^T\\nabla G(\\Phi_h)$, and set\n$$\\ell_{\\partial,h}(w)=\\int",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-w-one-two-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. On $H^1(\\Omega)=W^{1,2}(\\Omega;\\mathbb K)$ ([[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]) define $$(u,v)_{H^1}:=(u,v)_{L^2}+\\sum_{i=1}^n(D_iu,D_iv)_{L^2},$$ with the $L^2$ inner product of [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Then $(\\cdot,\\cdot)_{H^1}$ is an inner product on the Sobolev classes whose induced norm is the $W^{1,2}$ norm of [[def-sobolev-space-wkp-and-its-norm]], and $H^1(\\Omega)$ is a Hilbert space for it. The zero-boundary space $H^1_0(\\Omega)$ is a closed subspace of $H^1(\\Omega)$ ([[def-wkp-zero-as-a-sobolev",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The exact shear has positive determinant, and [F1] gives $J_h\\ge1/2$; thus both tensor formulas are defined almost everywhere. By [L1] and [F8], $V=H^1_0(\\widehat\\Omega)$ is Hilbert in the stated $H^1$ norm. The boundedness and coercivity assumptions, bounded loads, finite-dimensional conforming subspace $V_h\\subset V$, and the given variational equations supply the remaining hypotheses of [F5].",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F8",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "For $v_h,w_h\\in V_h$, [F2] and integral Cauchy--Schwarz give $|a(v_h,w_h)-a_h(v_h,w_h)| \\le C e_1\\|v_h\\|_{H^1}\\|w_h\\|_{H^1}.$ Taking the supremum in [F6] yields $\\delta_{a,h}(v_h)\\le C h\\|v_h\\|_{H^1}$ by [F1]. The assumed load decomposition and the triangle inequality give $\\delta_{F,h}\\le\\epsilon_{F,h}^{\\mathrm{bulk}}+ \\epsilon_{\\partial,h}$, because restriction of the $V^*$ residual norm to $V_h\\subset V$ cannot increase it.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "step": "1.3",
+          "claim": "By [L2], the shape-regular matching mesh satisfies the affine scaling hypotheses in [F3]. Apply [F3] on each triangle with the identity geometry map. The finite element interpolants assemble into the global nodal interpolant $I_hu$, and [F4] gives $I_hu\\in V_h$. Squaring each local estimate, summing over cells, and using $h_K\\le h$ gives $\\|u-I_hu\\|_{H^1}\\le Ch\\|u\\|_{H^2}$. Since $h\\le1$, [L1] gives $\\|I_hu\\|_{H^1}\\le\\|u\\|_{H^1}+Ch\\|u\\|_{H^2}\\le C\\|u\\|_{H^2}$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "A1",
+            "A2",
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Use $I_hu$ as the comparison function in [F5]. Step 1.3 bounds the best-approximation term by $Ch\\|u\\|_{H^2}$; steps 1.2 and 1.3 bound its form defect by $Ch\\|I_hu\\|_{H^1}\\le Ch\\|u\\|_{H^2}$; and step 1.2 bounds the load defect by the two stated load tolerances. Uniform positive discrete coercivity in [F5] proves the displayed Strang estimate.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "By [F1] and [F7], $\\epsilon_{\\partial,h}\\le C_G(e_0+e_1)\\le C_G(h^2+h)\\le C_G' h$ for $h\\le1$. The residual remains an explicit term of the error bound, including when its $O(h)$ rate dominates higher-order geometric terms.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "L3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.3, and 2.1 use Countable Choice through the H1 Hilbert, interpolation, and first-Strang suppliers; step 1.3 also uses AC for nodal evaluation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.3"
+          ],
+          "reason": "AC is required by the P1 interpolation nodal-boundedness branch and by the local H2/H10 conformity result used for the comparison interpolant."
+        },
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ],
+          "reason": "Countable Choice is required by the first-Strang and H1 Hilbert interfaces, geometry interpolation, local conformity, and the boundary-lift residual estimate."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "thm-certified-polygon-overlap-correctness": {
+      "risk": "medium",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-certified-convex-polygon-overlap",
+          "source_section": "Definition",
+          "quote": "Input two finite, positive-area convex polygons $P,Q\\subset\\mathbb Q^2$ with rational vertices listed cyclically; output their exact rational intersection polygon and its exact area, or `unresolved` if a required orientation sign or convexity condition cannot be certified. Normalize each polygon to counterclockwise order by exact signed area. For each directed edge of $Q$, clip the current cyclic vertex list of $P$ to its closed left half-plane. Evaluate each orientation exactly: clear a common positive denominator from the rational coordinates and call [[alg-certified-dyadic-geometric-predicate]] on the resulting integer (hence dyadic) coordinates. For a crossing segment $S E$, insert the e",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-certified-dyadic-geometric-predicate",
+          "source_section": "Definition",
+          "quote": "Input: an ordered finite tuple of exact dyadic points in dimension $d=2$ or\n$d=3$, a request for orientation, raw incircle/insphere sign, or the\norientation-normalized sphere-side sign, and optionally a filter configuration\ncontaining a floating format, its exact dyadic unit-roundoff bound, and a\nverifiable finite range certificate. Construct the matrix in\n[[def-certified-geometric-predicate-determinants]] exactly using dyadic\ninteger arithmetic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-intersection-volume-conservative-remapping",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lebesgue-measurable domain of finite positive measure. Let $\\mathcal S=(S_i)_{i=1}^m$ and $\\mathcal T=(T_j)_{j=1}^n$ be finite measurable partitions of $\\Omega$ up to null sets, with disjoint interiors modulo null sets and positive cell volumes. Define exact overlap weights $w_{ji}=|T_j\\cap S_i|$. For source constants $v_i$, the intersection-volume remap is the target piecewise-constant field $Rv$ whose value on $T_j$ is $ (Rv)_j=|T_j|^{-1}\\sum_i w_{ji}v_i$. All weights are exact measures; an approximate clipping weight is not silently substituted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Clearing one common positive denominator from the three rational points in an orientation test multiplies the determinant by a positive square, so its sign is unchanged and all scaled coordinates are integers. Therefore [F2] returns the exact side classification, including boundary zero, for every clipping pass.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "A convex polygon is the intersection of the closed inward half-planes of its directed edges. For one clipping edge, a segment with both endpoints inside stays; one outside endpoint is removed; and a crossing segment meets the supporting line at the exact parameter $t=s(S)/(s(S)-s(E))$, which lies in $[0,1]$ because the endpoint signs have opposite weak signs. Joining the retained vertices and these crossing points is exactly the boundary of the previous convex polygon intersected with that half-plane. Duplicate endpoints at zero signs do not change the set.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Induction over the finite edge list of $Q$ shows the final polygon is $P$ intersected with every defining half-plane of $Q$, hence is exactly $P\\cap Q$. Each pass processes a finite list and adds at most two crossings per clip edge, so the finitely many passes terminate.",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "The final vertices are rational because every crossing uses rational operations with a nonzero exact denominator. For a nondegenerate simple polygon the shoelace sum equals its signed area; the output is counterclockwise, so this is its nonnegative Lebesgue area. A convex intersection with fewer than three noncollinear vertices is empty or lies in an affine line. By [F4], the line and all its subsets are Lebesgue null, so the returned area is zero in these degenerate cases.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "A1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 treats empty and lower-dimensional intersections as Lebesgue-null and returns exact area zero."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "4.1"
+          ],
+          "reason": "Countable Choice is stated and used through the cited measure, interpolation, or Strang supplier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "thm-curved-uniform-nvb-quality-and-termination": {
+      "risk": "medium",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-incremental-planar-delaunay-correctness-and-termination",
+          "source_section": "Statement",
+          "quote": "For every nonempty finite indexed dyadic planar site set, after duplicate collapse the algorithm of [[alg-incremental-planar-delaunay-edge-flips]] terminates. In the affine-dimension-two branch, after each insertion the augmented triangles are exactly the $d=2$ lower simplices of the common fixed-universe formal lift, as defined in [[lem-lower-lifted-facets-cover-the-convex-hull]]. After removing synthetic vertices, the output triangulates the input convex hull with weakly empty original circumdisks and coherent lexicographic ties. In dimensions zero and one, the algorithm returns the defined single site or consecutive chain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-afem-nvb-labelled-triangulation-family",
+          "source_section": "Definition",
+          "quote": "A compatible labeled initial mesh is a finite matching affine simplicial triangulation $\\mathcal T_0$ of a polygon in $\\mathbb R^2$ as in [[def-matching-affine-simplicial-meshes]]; matching means distinct cell interiors are disjoint and any shared boundary is a complete common facet. with labels on its edges such that each triangle has one edge labeled $0$ and two labeled $1$, and every shared edge has the same label from both incident triangles. For a descendant triangle of generation $g(K)$, its three edge labels, in any order, are $(g(K)+1,g(K)+1,g(K))$. The unique edge labeled $g(K)$ is its reference edge.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-afem-nvb-shape-regularity-and-three-generation-properties",
+          "source_section": "Statement",
+          "quote": "For any compatible 2D initial labeling from [[def-afem-nvb-labelled-triangulation-family]], every conforming NVB descendant has shape regularity bounded by a constant depending only on the initial mesh. Three complete generations of uniform bisection of a triangle split each original edge at its midpoint, create a new interior midpoint on the median from the opposite vertex, and give child diameters at most half the parent diameter.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-curved-nvb-closure-preserves-matching-traces",
+          "source_section": "Statement",
+          "quote": "Let a compatible labeled reference triangulation be refined by recursive reference-edge closure as in [[alg-dorfler-marking-and-conforming-nvb-refinement]]. The closure terminates in a matching conforming affine descendant. If every cell is mapped through one common injective geometry map whose traces agree on common reference facets, the resulting curved cells also have matching interfaces.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-dorfler-marking-and-conforming-nvb-refinement",
+          "source_section": "Definition",
+          "quote": "Input: a finite labeled conforming mesh $\\mathcal T$, exact nonnegative arrays $(\\eta_K^2)_{K\\in\\mathcal T}$ and $(o_K^2)_{K\\in\\mathcal T}$, where $\\eta_K^2$ is the cell estimator contribution and $o_K^2$ the cell data-oscillation contribution, bulk-fraction parameters $\\theta_E,\\theta_O\\in(0,1]$, a per-call total bisection budget $B\\in\\mathbb N_0$, and a stable total order of mesh identifiers. For an array $q_K\\ge0$ and $\\theta\\in(0,1]$, sort by decreasing $q_K$ and then increasing identifier. If $\\sum_Kq_K=0$, return the empty set. Otherwise return the shortest initial segment whose sum is at least $\\theta\\sum_Kq_K$. Thus these parameters are fractions of the squared contributions (the squ",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "alg-delaunay-seeded-curved-uniform-nvb-refinement",
+          "source_section": "Definition",
+          "quote": "Input the exact dyadic square $[-1,1]^2$, a tolerance $0<\\tau\\le1/4$, and the exact shear $\\Phi(x,y)=(x,y+x^2/4)$. The boundary features are the four closed edges and four vertices; features are incident when their sets intersect, and separation is the minimum Euclidean distance between nonincident feature sets. Record the interior boundary-angle certificate $\\alpha=\\pi/2$ and the nonincident-feature separation certificate $\\sigma=1$. Run exact planar Delaunay insertion on the four square corners. Verify its output consists of two triangles sharing a diagonal; label that diagonal reference on both triangles and label the boundary edges nonreference. Set $k=0$. While $(3/2)2^{-k}(2\\sqrt2)>\\ta",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-isoparametric-curved-cell-map",
+          "source_section": "Definition",
+          "quote": "Fix a reference matching affine simplicial mesh as in [[def-matching-affine-simplicial-meshes]]. An admissible curved cell is the image of a closed reference simplex $\\widehat K$ under a map $F_K\\in C^2(\\widehat K;\\mathbb R^d)$ that extends to a diffeomorphism on a neighborhood, is orientation preserving, and satisfies $0<j_0\\le J_K:=\\det DF_K\\le j_1$ and $\\|DF_K\\|+\\|(DF_K)^{-1}\\|+\\|D^2F_K\\|\\le C_F$. The physical cells have disjoint interiors, cover the domain up to their shared facets, and maps agree on each common reference facet under the prescribed affine facet identification. Define the volume metric $G_K=DF_K^TDF_K$, volume factor $J_K=\\sqrt{\\det G_K}$, and for a reference facet parame",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-curved-domain-geometry-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Directly from the square coordinates, each interior angle is $\\pi/2$, opposite edges and nonincident vertices/edges are separated by distance $2$, so $\\sigma=1$ is a valid lower certificate [A1]. The four corners are distinct dyadic sites in convex position. By [F1] the returned Delaunay triangulation covers the square; with four extreme vertices it has exactly two triangles sharing one diagonal. Each is right isosceles. Labeling the shared diagonal as reference on both sides gives compatible initial labels.",
+          "inputs": [
+            "F1",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "In each call the squared estimator array is constantly one and the oscillation array is zero. With $\\theta_E=1$, the shortest initial segment whose sum reaches the total contains every cell, so every current cell is requested for three generations. The recursive closure theorem [F4] says this finite request terminates, so some finite number $N$ of bisections suffices. By [F6], failed budget calls leave the mesh unchanged; repeated doubling eventually reaches $B\\ge N$ and a complete call.",
+          "inputs": [
+            "F4",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Each right-isosceles triangle has its hypotenuse as reference edge. Bisection at the hypotenuse midpoint joins that point to the right-angle vertex; the two resulting triangles have equal legs of half the parent hypotenuse and hence are right isosceles, with their inherited leg as hypotenuse/reference. Thus every bisection in the closure process preserves the $45^\\circ$ minimum angle; [F3] supplies the uniform shape bound and three-generation diameter reduction.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "By [F3], each complete three-generation request reduces every requested parent diameter by at least one half; closure only adds bisections, which cannot increase diameter. The initial reference diameter is $2\\sqrt2$. Since $\\|D\\Phi\\|_{op}\\le\\|D\\Phi\\|_F\\le3/2$ on the square, the mean-value inequality gives mapped diameter at most $(3/2)2^{-k}2\\sqrt2$. A finite integer $k$ satisfies the stopping inequality for every $\\tau>0$.",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The shear has determinant $1$, and both $D\\Phi$ and $D\\Phi^{-1}$ have operator norm at most $3/2$ on the square. Its singular values therefore lie in $[2/3,3/2]$, so it multiplies the reference metric condition number by at most $9/4$ and preserves orientation. The reference triangles have disjoint interiors in a square of area $4$. Any right-isosceles reference triangle of diameter at least $\\tau/(3/2)$ has area at least $\\tau^2/9$; disjoint interiors therefore allow at most $36/\\tau^2$ such cells. This packing bound is consistent with the finite uniform refinement and the stated positive feature and angle certificates.",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the proof is an analytic or general exact-geometry argument.",
+      "finite_smoke": []
+    },
+    "ex-inverted-isoparametric-map-detection": {
+      "risk": "low",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-isoparametric-curved-cell-map",
+          "source_section": "Definition",
+          "quote": "Fix a reference matching affine simplicial mesh as in [[def-matching-affine-simplicial-meshes]]. An admissible curved cell is the image of a closed reference simplex $\\widehat K$ under a map $F_K\\in C^2(\\widehat K;\\mathbb R^d)$ that extends to a diffeomorphism on a neighborhood, is orientation preserving, and satisfies $0<j_0\\le J_K:=\\det DF_K\\le j_1$ and $\\|DF_K\\|+\\|(DF_K)^{-1}\\|+\\|D^2F_K\\|\\le C_F$. The physical cells have disjoint interiors, cover the domain up to their shared facets, and maps agree on each common reference facet under the prescribed affine facet identification. Define the volume metric $G_K=DF_K^TDF_K$, volume factor $J_K=\\sqrt{\\det G_K}$, and for a reference facet parame",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The derivative matrix is $DF=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, whose determinant is $-1$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Since $-1$ is not bounded below by any positive $j_0$, this map is rejected by the admissibility certificate.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "The explicit finite calculations are carried in the Verification steps; the disk uses exact formula checks and the remap example has rational overlap weights.",
+      "finite_smoke": [
+        {
+          "name": "orientation-reversing affine map",
+          "input": "DF=[[0,1],[1,0]]",
+          "expected": "det(DF)=-1; reject"
+        }
+      ]
+    },
+    "ex-isoparametric-unit-disk-mesh": {
+      "risk": "low",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-isoparametric-curved-cell-map",
+          "source_section": "Definition",
+          "quote": "Fix a reference matching affine simplicial mesh as in [[def-matching-affine-simplicial-meshes]]. An admissible curved cell is the image of a closed reference simplex $\\widehat K$ under a map $F_K\\in C^2(\\widehat K;\\mathbb R^d)$ that extends to a diffeomorphism on a neighborhood, is orientation preserving, and satisfies $0<j_0\\le J_K:=\\det DF_K\\le j_1$ and $\\|DF_K\\|+\\|(DF_K)^{-1}\\|+\\|D^2F_K\\|\\le C_F$. The physical cells have disjoint interiors, cover the domain up to their shared facets, and maps agree on each common reference facet under the prescribed affine facet identification. Define the volume metric $G_K=DF_K^TDF_K$, volume factor $J_K=\\sqrt{\\det G_K}$, and for a reference facet parame",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-isoparametric-pullback-and-surface-metric",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F:\\widehat K\\to K$ be an admissible $C^1$ orientation-preserving cell diffeomorphism and let $u$ be $C^1$ on $K$. With $\\widehat u=u\\circ F$, one has $\\nabla_xu\\circ F=DF^{-T}\\nabla_{\\xi}\\widehat u$ and $\\int_K |\\nabla u|^2dx=\\int_{\\widehat K}J_F\\nabla\\widehat u^T(DF^{-1}DF^{-T})\\nabla\\widehat u\\,d\\xi$. For a regular $k$-dimensional parametrized face $f:U\\subset\\mathbb R^k\\to\\mathbb R^d$ with metric $G_f=Df^TDf$, the induced area factor is $\\sqrt{\\det G_f}$ and the tangential gradient of $u\\circ f$ is $DfG_f^{-1}\\nabla(u\\circ f)$; its squared norm is $\\nabla(u\\circ f)^TG_f^{-1}\\nabla(u\\circ f)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "$g'(t)=a(\\pi/4)\\sec^2(\\pi t/4)>0$, so $H$ maps $[-1,1]$ bijectively onto $[-a,a]^2$, since $g(-1)=-a$ and $g(1)=a$. Its Gram determinant gives the same volume factor by [F2]. On the top sector, $\\theta'=-\\pi/4$ and $r_s=1-a/\\sin\\theta\\ge1-a\\sqrt2>0$ because $\\sin\\theta\\ge\\sqrt2/2$. Polar-coordinate differentiation gives $\\det DF=r r_s(-\\theta')>0$; the Gram determinant satisfies $\\sqrt{\\det(DF^TDF)}=\\det DF$. Rotations preserve these determinants.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "At $s=0$, $F(t,0)=(a\\cot\\theta(t),a)=(g(t),a)$, which is exactly the trace of $H$ on its top edge; at $s=1$, $r=1$, so the outer trace is the unit-circle arc from angle $3\\pi/4$ to $\\pi/4$. The two radial side traces match those of adjacent rotated sectors. Hence all ten pieces meet only along identical mapped edges.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "For each angle $\\theta\\in[\\pi/4,3\\pi/4]$, the square boundary on that ray has radius $a/\\sin\\theta$ and the unit-circle boundary has radius $1$. The sector map covers exactly the radii between them. Four rotated angular ranges cover the annulus outside the central square, with shared corner rays only; $H$ covers the central square. Therefore the ten mapped triangles cover the unit disk without interior overlap.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "The central area is $4a^2=1$. By [F3], the sector area is the polar integral $\\frac12\\int_{\\pi/4}^{3\\pi/4}(1-a^2\\csc^2\\theta)d\\theta$. Since $[-\\cot\\theta]_{\\pi/4}^{3\\pi/4}=2$, this equals $\\pi/4-a^2=(\\pi-1)/4$. Four rotated sectors have total area $\\pi-1$, so the union area is $\\pi$, consistent with the unit disk.",
+          "inputs": [
+            "F3",
+            "A1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 treat all matched sector and central-square boundary traces, including the sector corner rays."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "4.1"
+          ],
+          "reason": "Countable Choice is stated and used through the cited measure, interpolation, or Strang supplier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "The explicit finite calculations are carried in the Verification steps; the disk uses exact formula checks and the remap example has rational overlap weights.",
+      "finite_smoke": [
+        {
+          "name": "sector area and total area",
+          "input": "a=1/2; four sectors with theta in [pi/4,3pi/4]",
+          "expected": "each sector=(pi-1)/4; total area=1+(pi-1)=pi"
+        }
+      ]
+    },
+    "ex-conservative-transfer-between-moving-curved-meshes": {
+      "risk": "low",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-curved-domain-geometry-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-intersection-volume-conservative-remapping",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lebesgue-measurable domain of finite positive measure. Let $\\mathcal S=(S_i)_{i=1}^m$ and $\\mathcal T=(T_j)_{j=1}^n$ be finite measurable partitions of $\\Omega$ up to null sets, with disjoint interiors modulo null sets and positive cell volumes. Define exact overlap weights $w_{ji}=|T_j\\cap S_i|$. For source constants $v_i$, the intersection-volume remap is the target piecewise-constant field $Rv$ whose value on $T_j$ is $ (Rv)_j=|T_j|^{-1}\\sum_i w_{ji}v_i$. All weights are exact measures; an approximate clipping weight is not silently substituted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-overlap-remap-l2-projection-conservation-positivity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Under the finite partition hypotheses of [[def-intersection-volume-conservative-remapping]], let $P_0(\\mathcal T)$ be the target cellwise-constant subspace of $L^2(\\Omega)$. For every source piecewise-constant $v$, $Rv$ is the $L^2$ orthogonal projection of $v$ onto $P_0(\\mathcal T)$, hence $\\|Rv\\|_2\\le\\|v\\|_2$. It preserves total mass, $\\int_\\Omega Rv=\\int_\\Omega v$, and if all $v_i\\ge0$ then every target value $(Rv)_j\\ge0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The shear is a global $C^1$ diffeomorphism with inverse $(X,Y)\\mapsto(X,Y-X^2/4)$ and derivative $\\begin{pmatrix}1&0\\\\x/2&1\\end{pmatrix}$ of determinant $1$. Apply [F4] to each overlap to see that its physical area equals the reference overlap area. In the reference square, the two diagonals meet at the center; the two diagonals divide the square into four corner triangles, each with base $2$ along a side and altitude $1$ to the center, so each nonempty source-target overlap has area $1$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Each target triangle has area $2$ and receives source mass $2(1)+0(1)=2$, so its target average is $1$. The source mass is $2\\cdot2+0\\cdot2=4$, and target mass is $2(1)+2(1)=4$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The exact remap therefore has source values $(2,0)$, four nonempty overlaps of area $1$, target cell areas $2$, and target averages $(1,1)$. This explicitly verifies the remap formula.",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Countable Choice is stated and used through the cited measure, interpolation, or Strang supplier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "The explicit finite calculations are carried in the Verification steps; the disk uses exact formula checks and the remap example has rational overlap weights.",
+      "finite_smoke": [
+        {
+          "name": "opposite diagonal remap",
+          "input": "square area 4; four overlap areas 1; source values 2,0",
+          "expected": "target values 1,1; source and target mass 4"
+        }
+      ]
+    },
+    "ex-parabolic-curved-domain-linear-geometry-approximation": {
+      "risk": "low",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-curved-domain-geometry-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parabolic-domain-map-approximation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\widehat\\Omega=[-1,1]^2$, let $\\mathcal T_h$ be a matching shape-regular affine triangulation, and put $\\Phi(x,y)=(x,y+x^2/4)$. Let $I_h$ be the vertexwise P1 interpolant and $\\Phi_h(x,y)=(x,y+I_h(x^2/4))$. In the notation of [[def-curved-domain-geometry-approximation]], there is a constant $C$ depending only on the shape-regularity bound such that $e_0\\le Ch^2$ and $e_1\\le Ch$. For sufficiently small $h$, $\\det D\\Phi_h\\ge1/2$, and $\\Phi_h$ is globally one-to-one on the square. The exact map has $\\det D\\Phi=1$ and a global inverse $(X,Y)\\mapsto(X,Y-X^2/4)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-isoparametric-laplace-tensor-defect",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi,\\Phi_h$ be the orientation-preserving maps of [[def-curved-domain-geometry-approximation]], with $J,J_h\\ge j_*>0$ and $\\|D\\Phi\\|_\\infty+\\|D\\Phi_h\\|_\\infty\\le M$. Set $B=J D\\Phi^{-1}D\\Phi^{-T}$ and $B_h=J_hD\\Phi_h^{-1}D\\Phi_h^{-T}$. Then $\\|B-B_h\\|_\\infty\\le C e_1$, where $C$ depends only on $d,j_*,M$. Consequently $|\\int_{\\widehat\\Omega}\\nabla v^T(B-B_h)\\nabla w|\\le C e_1\\|\\nabla v\\|_2\\|\\nabla w\\|_2$ for $v,w\\in H^1(\\widehat\\Omega)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Differentiate $\\Phi$ to obtain $D\\Phi=\\begin{pmatrix}1&0\\\\x/2&1\\end{pmatrix}$ and $\\det D\\Phi=1$. The quadratic term makes the image of a nonvertical straight edge a parabolic arc, while vertical edges remain vertical.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Apply [F2] on the shape-regular mesh to get the stated value error, derivative error, and positive-Jacobian certificate.",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Substitute $e_1\\le Ch$ from step 1.2 into [F3]. This yields $\\|B-B_h\\|_\\infty\\le Ch$ with constants uniform over the mesh family.",
+          "inputs": [
+            "F3",
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.2",
+            "2.1"
+          ],
+          "reason": "The parabolic interpolation lemma explicitly assumes Countable Choice through affine shape scaling."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "The explicit finite calculations are carried in the Verification steps; the disk uses exact formula checks and the remap example has rational overlap weights.",
+      "finite_smoke": [
+        {
+          "name": "parabolic geometry order",
+          "input": "Phi=(x,y+x^2/4), affine mesh size h",
+          "expected": "e0=O(h^2), e1=O(h), tensor defect O(h)"
+        }
+      ]
+    },
+    "cex-delaunay-tetrahedral-sliver": {
+      "risk": "low",
+      "kind": "counterexample",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-three-dimensional-delaunay-and-weighted-regular-lower-hull",
+          "source_section": "Definition",
+          "quote": "For a weighted site $(p,w)$, define its power distance from $x\\in\\mathbb R^3$ by\n$$\\pi_{(p,w)}(x)=\\|x-p\\|^2-w.$$\nIts lifted point is $\\widehat p=(p,\\|p\\|^2-w)\\in\\mathbb R^4$. A lower face of the lifted convex hull is a face supported by a nonvertical hyperplane $z=\\ell(x)$ with every lifted site on or above that hyperplane. The projection of the union of lower faces is the **regular subdivision** of the projected sites; a simplex in that subdivision has an empty power sphere, meaning its common power distance is no larger than that of any input site.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The first three points are noncollinear in $z=0$ and $p_4$ has positive height, so the four points are affinely independent and form a nondegenerate tetrahedron. Its volume is one third of base area $1/2$ times height $\\varepsilon$, namely $V=\\varepsilon/6$. With only these four sites, its circumsphere contains no other site in its interior, so [F1] makes it an empty-sphere Delaunay tetrahedron.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The total face area $S$ is at least the base area $1/2$ and is bounded above uniformly for $0<\\varepsilon<1$, since every edge length is bounded by $2$ and each of the four face areas is at most half the product of two such edge lengths. The inradius is $r=3V/S=\\varepsilon/(2S)$, so $0<r\\le\\varepsilon$ and $r\\to0$. The diameter is at least $|p_1-p_2|=1$. Thus empty-sphere Delaunay membership imposes no positive uniform inradius-to-diameter bound in three dimensions.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "The one-parameter family is verified symbolically; no external finite evaluator is needed.",
+      "finite_smoke": [
+        {
+          "name": "flat tetrahedron",
+          "input": "epsilon in (0,1), base area 1/2, height epsilon",
+          "expected": "V=epsilon/6, diameter>=1, inradius<=epsilon"
+        }
+      ]
+    },
+    "lem-isoparametric-cofactor-normal-perturbation": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-isoparametric-curved-cell-map",
+          "source_section": "Definition",
+          "quote": "Fix a reference matching affine simplicial mesh as in [[def-matching-affine-simplicial-meshes]]. An admissible curved cell is the image of a closed reference simplex $\\widehat K$ under a map $F_K\\in C^2(\\widehat K;\\mathbb R^d)$ that extends to a diffeomorphism on a neighborhood, is orientation preserving, and satisfies $0<j_0\\le J_K:=\\det DF_K\\le j_1$ and $\\|DF_K\\|+\\|(DF_K)^{-1}\\|+\\|D^2F_K\\|\\le C_F$. The physical cells have disjoint interiors, cover the domain up to their shared facets, and maps agree on each common reference facet under the prescribed affine facet identification. Define the volume metric $G_K=DF_K^TDF_K$, volume factor $J_K=\\sqrt{\\det G_K}$, and for a reference facet parame",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-curved-domain-geometry-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Each entry of $\\operatorname{cof}(A)$ is a signed $(d-1)$-minor, hence a polynomial of degree $d-1$ in the entries of $A$. On the bounded matrix ball $\\|A\\|_{op},\\|A_h\\|_{op}\\le M$, its derivative is bounded by a constant depending only on $d,M$. The mean-value inequality therefore gives $\\|\\operatorname{cof}(A)-\\operatorname{cof}(A_h)\\|_{op}\\le C(d,M)\\|A-A_h\\|_{op}=C(d,M)e_1$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Let $T$ have orthonormal columns spanning the reference facet tangent space, so $Q=[T,\\widehat n]$ is orthogonal. The squared Gram-metric surface factor is $\\det(T^TA^TAT)$. The identity $\\operatorname{cof}(A)^T\\operatorname{cof}(A)=\\operatorname{cof}(A^TA)$ and orthogonal covariance of cofactors show $\\widehat n^T\\operatorname{cof}(A^TA)\\widehat n$ is the bottom-right cofactor of $Q^TA^TAQ$, which is exactly $\\det(T^TA^TAT)$. Therefore $\\|\\operatorname{cof}(A)\\widehat n\\|^2=\\det(T^TA^TAT)$, so $J_\\Gamma(A)$ is the Gram-metric surface factor.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "If $\\sigma_1(A)\\ge\\cdots\\ge\\sigma_d(A)>0$ are the singular values, the smallest singular value of $\\operatorname{cof}(A)$ is $\\prod_{i=2}^d\\sigma_i(A)=\\det(A)/\\sigma_1(A)\\ge j_*/M$. Thus $J_\\Gamma(A)\\ge j_*/M$, and the same bound holds for $A_h$. The reverse triangle inequality and step 1.1 give $|J_\\Gamma(A)-J_\\Gamma(A_h)|\\le C(d,M)e_1$.",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Put $a=\\operatorname{cof}(A)\\widehat n$ and $b=\\operatorname{cof}(A_h)\\widehat n$. For nonzero vectors, $|a/|a|-b/|b||\\le 2|a-b|/\\min(|a|,|b|)$. The lower bounds from step 2.1 and the cofactor gap from step 1.1 therefore imply $|n_\\Gamma(A)-n_\\Gamma(A_h)|\\le C(d,M,j_*)e_1$. Combining the three estimates proves the result.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the item proves a general analytic perturbation estimate.",
+      "finite_smoke": []
+    },
+    "lem-curved-boundary-lift-residual": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-curved-domain-geometry-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat\\Omega\\subset\\mathbb R^d$ be a bounded reference domain and let $\\Phi,\\Phi_h:\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ be cellwise $C^2$ admissible maps with matching traces, positive Jacobians, and common image topology. The exact and approximate domains are $\\Omega=\\Phi(\\widehat\\Omega)$ and $\\Omega_h=\\Phi_h(\\widehat\\Omega)$. Define $e_0=\\|\\Phi-\\Phi_h\\|_{L^\\infty(\\widehat\\Omega)}$ and $e_1=\\|D\\Phi-D\\Phi_h\\|_{L^\\infty(\\widehat\\Omega;op)}$. A geometry approximation claim must separately state bounds on $e_0,e_1$, both Jacobian lower bounds, and boundary-trace compatibility; none follows from the word “isoparametric.”",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-elementary-volume-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and let $A \\subseteq \\mathbb{R}^n$ be an elementary set\n([[def-elementary-set-in-rn]]). If",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-half-open-box",
+          "source_section": "Definition",
+          "quote": "Fix $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $\\mathbb{R}^n$ be the set of\nfunctions $n \\to \\mathbb{R}$, writing $x_i := x(i)$ for $i < n$\n([[lem-metrics-on-rn]]). A **parameter** is a function $n \\to\n\\overline{\\mathbb{R}}$, where $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup\n\\{-\\infty, +\\infty\\}$ carries the total order of [[def-extended-reals]]. For a\npair $(a,b)$ of parameters set",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-elementary-set-in-rn",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$. A subset $E \\subseteq \\mathbb{R}^n$ is an **elementary set** when\nthere are a natural number $m$ and a list $B_0, \\dots, B_{m-1}$ of half-open\nboxes ([[def-half-open-box]]), that is a function $j \\mapsto B_j$ on\n$\\{\\, j \\in \\mathbb{N} : j < m \\,\\}$ whose values are half-open boxes, with",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Because each geometry map and its traces are continuous across every interior facet, $G\\circ\\Phi$ and $G\\circ\\Phi_h$ have matching traces there. For a compactly supported smooth test function, integration by parts cell by cell cancels the interior-facet terms; the outer boundary term vanishes because the test is compactly supported. Thus the displayed piecewise gradients are the weak gradients of the pulled-back lifts. On each cell, [F2] and the triangle inequality give $|\\nabla_{pw}(G\\circ\\Phi)-\\nabla_{pw}(G\\circ\\Phi_h)|\\le L_1e_1+ML_2e_0,$ using the bound on $D^2G$ along the joining segment.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "For $n\\ge2$ put $B_n=[-1+1/n,1-1/n)^2$. Each $B_n$ is an elementary half-open box, and $(-1,1)^2=\\bigcup_{n\\ge2}B_n$: one inclusion is immediate, and for any $x\\in(-1,1)^2$ choose $n$ with $1/n<\\min_i\\{1+x_i,1-x_i\\}$ for both coordinates. Thus [F4] makes $\\widehat\\Omega$ measurable. Since $\\widehat\\Omega\\subset B=[-1,1)^2$, [F5] and [F4] give $|\\widehat\\Omega|\\le\\lambda_2(B)=4$. Step 1.1 therefore yields $\\|\\nabla_{pw}(G\\circ\\Phi)-\\nabla_{pw}(G\\circ\\Phi_h)\\|_{L^2(\\widehat\\Omega)}\\le 2(L_1e_1+ML_2e_0).$",
+          "inputs": [
+            "F4",
+            "F5",
+            "A1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Apply [F3] to the defining integral for $\\ell_{\\partial,h}(w)$ and use $\\|\\nabla w\\|_{L^2}\\le\\|w\\|_{H^1}$. Taking the supremum over unit $H^1_0$ tests proves the dual bound.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim states no separate empty endpoint or biconditional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim states no separate zero endpoint or biconditional."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim states no separate one endpoint or biconditional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim states no separate degenerate endpoint or biconditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim states no separate endpoints endpoint or biconditional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim states no separate nonempty-choice endpoint or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-forward endpoint or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim states no separate iff-reverse endpoint or biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The Lebesgue measure supplier used for the finite reference-square measure assumes Countable Choice."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No separate finite-smoke check applies; the item proves a general analytic perturbation estimate.",
+      "finite_smoke": []
+    },
+    "lem-h2-zero-boundary-p1-interpolant-conforming": {
+      "risk": "medium",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-affine-pullback-weak-derivatives-and-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F(\\widehat x)=A\\widehat x+b$ be an affine bijection from a bounded open\nset $\\widehat K\\subset\\mathbb R^d$ to $K$, where $A$ is invertible, and let\n$1\\le p\\le\\infty$. For every integer $r\\ge0$ and scalar\n$v\\in W^{r,p}(K)$, the pullback $\\widehat v:=v\\circ F$ belongs to\n$W^{r,p}(\\widehat K)$. For $r\\ge1$ its first weak derivatives satisfy\n$$D_{\\widehat x_j}\\widehat v=\\sum_{i=1}^d A_{ij}(D_{x_i}v)\\circ F,$$\nand higher derivatives are obtained by applying this constant-matrix rule\nrepeatedly. In particular, for each $0\\le m\\le r$,\n$$|\\widehat v|_{W^{m,p}(\\widehat K)}\\le C(d,m)\\|A\\|^m|\\det A|^{-1/p}|v|_{W^{m,p}(K)},$$\nwhere $|\\det A|^{-1/p}:=1$ for $p=\\infty$. The r",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-reference-simplex-sobolev-extension",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge2$. For every integer $k\\ge0$ and\n$1\\le p\\le\\infty$, there is a bounded linear operator\n$$E_{k,p}:W^{k,p}(\\widehat S_d)\\longrightarrow W^{k,p}(\\mathbb R^d)$$\nwhose restriction to $\\widehat S_d$ is the input class. Consequently\n$\\widehat S_d$ is a $W^{k,p}$-extension domain in the sense of\n[[def-sobolev-extension-domain-and-extension-operator]]. The operator may\nbe chosen with support in one fixed bounded set.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-higher-order-sobolev-embedding",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, let $\\Omega$ be a bounded $W^{k,p}$-extension domain, $k\\ge1$ and $1\\le p<\\infty$. Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and $u\\in W^{k,p}(\\Omega;\\mathbb K)$. Then:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-extension-theorem-for-bounded-smooth-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k\\ge1$, $1\\le p\\le\\infty$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $\\Omega\\subset\\mathbb R^n$ be a\nbounded $C^k$ domain in the graph sense of\n[[def-bounded-c-k-domain-and-boundary-charts]]. Then for every open set\n$V\\subseteq\\mathbb R^n$ with $\\overline\\Omega\\subseteq V$ there is a bounded\nlinear extension operator\n$$E:W^{k,p}(\\Omega;\\mathbb K)\\longrightarrow W^{k,p}(\\mathbb R^n;\\mathbb K),\\qquad (Eu)|_\\Omega=u\\ \\text{a.e. on }\\Omega,$$\nsuch that $\\operatorname{supp}(Eu)$ is a compact subset of $V$ for every\n$u\\in W^{k,p}(\\Omega;\\mathbb K)$. In particular each bounded $C^k$ domain is a\n$W^{k,p}$-extension domain, with an operator whose output is suppor",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-zero-extension-from-w-one-p-zero",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For any open $\\Omega\\subseteq\\mathbb R^n$,\n$n\\ge1$, any $1\\le p\\le\\infty$ and any\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, extension by zero\n$$E_0u(x)=u(x)\\ \\ (x\\in\\Omega),\\qquad E_0u(x)=0\\ \\ (x\\notin\\Omega),$$\nacted on representatives, sends $W_0^{1,p}(\\Omega;\\mathbb K)$ linearly into\n$W^{1,p}(\\mathbb R^n;\\mathbb K)$. For every $u\\in W_0^{1,p}(\\Omega;\\mathbb K)$\nand every coordinate direction $i$, the class $D_i(E_0u)$ is the zero\nextension of the class $D_iu$, and every $L^p$ component norm is preserved:\n$$\\|E_0u\\|_{L^p(\\mathbb R^n)}=\\|u\\|_{L^p(\\Omega)},\\qquad \\|D_i(E_0u)\\|_{L^p(\\mathbb R^n)}=\\|D_iu\\|_{L^p(\\Omega)},$$\nso that $\\|E_0u\\|_{W^{1,p}(\\mathbb R^n)}=\\|u\\|_{W",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-trace-estimate-on-the-half-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge2$, $d=n-1$, $1\\le p<\\infty$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$H=\\{x=(x',x_n)\\in\\mathbb R^n:x_n>0\\}$ with\n$\\partial H=\\mathbb R^d\\times\\{0\\}$. Write $\\partial_n$ for the last\ncoordinate derivative.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p<\\infty$ and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then the compactly supported smooth\nfunctions $C_c^\\infty(\\mathbb R^n;\\mathbb K)$ are dense in\n$W^{k,p}(\\mathbb R^n;\\mathbb K)$: for every\n$u\\in W^{k,p}(\\mathbb R^n;\\mathbb K)$ and every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\mathbb R^n;\\mathbb K)$ with\n$$\\|\\varphi-u\\|_{W^{k,p}(\\mathbb R^n)}<\\delta.$$\nNo such norm-density assertion is made for $p=\\infty$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-differentials-of-smooth-maps",
+          "source_section": "Statement",
+          "quote": "If $F:M\\to N$ and $G:N\\to P$ are smooth, then $d(G\\circ F)_p=dG_{F(p)}\\circ dF_p$ for every $p\\in M$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$\\eta\\in C^\\infty(\\Omega;\\mathbb K)$ and\n$u\\in L^1_{\\mathrm{loc}}(\\Omega;\\mathbb K)$. For\n$\\alpha\\in\\mathbb N_0^n$, suppose that for every $\\gamma\\le\\alpha$ there is\n$v_\\gamma\\in L^1_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ with\n$D^\\gamma u=v_\\gamma$ weakly. Then $\\eta u$ has a weak $\\alpha$-derivative,\nand its almost-everywhere class is\n$$D^\\alpha(\\eta u)=\\sum_{\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}(D^\\beta\\eta)D^{\\alpha-\\beta}u\\quad\\text{in }L^1_{\\mathrm{loc}}(\\Omega;\\mathbb K).$$\nwhere $D^\\beta\\eta$ is the classical derivative and products are pointwise\nproducts of rep",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega$ be a bounded polyhedral open set with a finite matching\naffine simplicial mesh, let $1\\le p<\\infty$, and let $v$ be a real-valued\nconforming piecewise polynomial whose polynomial trace vanishes on every boundary\nfacet. Then\n$$v\\in W^{1,p}_0(\\Omega),\\qquad \\|v\\|_{L^p(\\Omega)}\\le C_\\Omega\\|\\nabla v\\|_{L^p(\\Omega)}.$$\nHere $W^{1,p}_0$ is the norm closure of $C_c^\\infty(\\Omega)$; no C1\ntrace characterization is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "For each mesh triangle $K$, apply [F1] to pull $u|_K$ back to the reference triangle, and then apply [F2]. This gives a continuous representative on $\\overline K$. It is unique: if two continuous representatives differed at one point, continuity would make them differ on a nonempty open subset of $K$, contradicting [F6]. Thus each cellwise nodal value is individually well-defined.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F6",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Put $z=E_0u$, the zero extension from [F3]. On either side of any straight line, the half-space trace is obtained from the positive-half-space trace in [F4] by a translation and, when needed, a reflection; [F5] verifies that these changes preserve the Sobolev class and norm. The two traces of a global $H^1(\\mathbb R^2)$ class across such a line agree: choose $z_m\\in C_c^\\infty(\\mathbb R^2)$ converging to $z$ by [F4]; the two traces of each $z_m$ are its same classical restriction, and boundedness of the two trace maps passes this equality to the limit. On the exterior half-space of each side of $\\Omega$, $z=0$, so both its exterior trace and its interior trace are zero.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "If $K_+$ and $K_-$ share an interior edge, every point $x$ in the relative interior of that edge has a ball $B\\subset\\Omega$ meeting only those two cells. By [F2], $u|_B$ has a continuous representative. On each of the two open half-balls $B\\cap K_\\pm$, this representative and the corresponding representative from step 1.1 agree almost everywhere, hence everywhere by [F6]. Taking limits to $x$ shows the two cell values agree at $x$; continuity along the closed edge gives agreement at its endpoints as well. For an interior mesh vertex, take a ball about the vertex contained in $\\Omega$ and repeat this argument for every incident cell.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F6",
+            "F10",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "Let $x$ lie in the relative interior of a boundary mesh edge $E$. Choose a ball $B$ centered at $x$ small enough that its interior half-ball lies in the unique incident triangle $K$ and its other boundary is disjoint from all mesh edges. By [F9] choose $\\chi\\in C_c^\\infty(B)$ equal to one near $x$. On the interior half-space define $v=\\chi u_K$ inside $B$ and zero outside, where $u_K$ is the continuous cell representative from step 1.1. The cutoff vanishes near the circular part of $\\partial B$, so the weak test identity shows $v\\in H^1$ of that half-space; it is compactly supported and continuous on the closed half-space. Its class is $\\chi z$ there. By linearity and boundedness of the trace, and by approximation with the smooth functions in step 1.2, $T(\\chi z)=\\chi Tz=0$ on the side. The classical-restriction clause of [F4] gives $T v=\\chi u_K|_E$, so $u_K=0$ almost everywhere near $x$ on $E$. Continuity from step 1.1 makes this value zero at every point of that edge, including its endpoints.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F4",
+            "F5",
+            "F7",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Interior edge values agree by step 2.1. At a boundary vertex, the incident triangles form a connected fan because the square is convex; the fan is a chain under adjacency across edges containing that vertex, and at least one end cell has a boundary edge. Step 2.2 gives zero at the vertex in that end cell, and step 2.1 propagates that value through the fan. Thus all cell values at every shared vertex agree and boundary vertex values are zero. The affine traces of adjacent P1 interpolants agree because they agree at both edge endpoints, so $I_hu$ is continuous; on each boundary edge it is affine with both endpoint values zero, hence its trace is zero. Apply [F8] to conclude $I_hu\\in H^1_0(\\Omega)$.",
+          "inputs": [
+            "A2",
+            "F8",
+            "F10",
+            "given",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is fixed to the nonempty square (-1,1)^2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement includes u=0; step 1.1 gives its unique zero cell representatives and step 3.1 assembles the zero interpolant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The lemma has no one-parameter endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes a matching mesh of nondegenerate affine triangles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 carry interior-edge equality and boundary zero values to every edge endpoint; step 3.1 propagates the boundary vertex values through the square mesh fan."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 2.2 cite the Axiom of Choice and Countable Choice at the Sobolev embedding, trace, and zero-extension interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ],
+          "reason": "AC is required by the reference-simplex and smooth-domain extension/Sobolev embeddings and the half-space trace theorem used to define continuous cell representatives and classical boundary traces."
+        },
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ],
+          "reason": "Countable Choice is required through affine weak-derivative pullback, zero extension, half-space trace/density, the weak product rule, and the zero-boundary P1 membership theorem."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "The claim is a Sobolev trace and conformity theorem; its general proof has no separate finite numerical check.",
+      "finite_smoke": []
+    },
+    "def-isoparametric-curved-cell-map": {
+      "risk": "low",
+      "kind": "definition",
+      "proof_strategy": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Admissible cell maps and their metric conventions are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Admissible cell maps and their metric conventions are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Admissible cell maps and their metric conventions are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Admissible cell maps and their metric conventions are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Admissible cell maps and their metric conventions are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Admissible cell maps and their metric conventions are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Admissible cell maps and their metric conventions are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Admissible cell maps and their metric conventions are specified by definition; the item has no proof section."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "A finite numerical check is not applicable to a pure definition; finite examples are checked in their own B-page items.",
+      "finite_smoke": []
+    },
+    "def-curved-domain-geometry-approximation": {
+      "risk": "low",
+      "kind": "definition",
+      "proof_strategy": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The error quantities and hypotheses are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The error quantities and hypotheses are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The error quantities and hypotheses are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The error quantities and hypotheses are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The error quantities and hypotheses are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The error quantities and hypotheses are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The error quantities and hypotheses are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The error quantities and hypotheses are specified by definition; the item has no proof section."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "A finite numerical check is not applicable to a pure definition; finite examples are checked in their own B-page items.",
+      "finite_smoke": []
+    },
+    "def-intersection-volume-conservative-remapping": {
+      "risk": "low",
+      "kind": "definition",
+      "proof_strategy": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite-cell overlap weights and target averages are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The finite-cell overlap weights and target averages are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The finite-cell overlap weights and target averages are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The finite-cell overlap weights and target averages are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite-cell overlap weights and target averages are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-cell overlap weights and target averages are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite-cell overlap weights and target averages are specified by definition; the item has no proof section."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite-cell overlap weights and target averages are specified by definition; the item has no proof section."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "A finite numerical check is not applicable to a pure definition; finite examples are checked in their own B-page items.",
+      "finite_smoke": []
+    },
+    "alg-certified-convex-polygon-overlap": {
+      "risk": "high",
+      "kind": "algorithm",
+      "proof_strategy": "algorithm-specification",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition and the disjoint-square finite smoke return the empty intersection with exact area zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition handles outputs with fewer than three noncollinear vertices; the edge-touch finite smoke has exact area zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Polygon vertices are not a one-parameter endpoint case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition returns zero area for empty, point, or segment outputs after exact duplicate removal."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition clips by closed half-planes and preserves exact zero orientation signs; the edge-touch finite smoke covers a shared boundary edge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure uses fixed finite rational inputs and deterministic exact arithmetic; it selects no element from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm specification is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm specification is not a biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "Exact rational polygon cases are included as finite smoke calculations; no floating-point test is used.",
+      "finite_smoke": [
+        {
+          "name": "identical unit squares",
+          "input": "P=Q=[(0,0),(1,0),(1,1),(0,1)] in counterclockwise order",
+          "expected": "Each closed clip retains the square; output vertices are the same four corners and shoelace area is 1."
+        },
+        {
+          "name": "edge-touching unit squares",
+          "input": "P=[0,1]x[0,1], Q=[1,2]x[0,1]",
+          "expected": "The intersection is the common vertical segment; exact zero signs retain its boundary and the fewer-than-three-noncollinear branch returns area 0."
+        },
+        {
+          "name": "disjoint unit squares",
+          "input": "P=[0,1]x[0,1], Q=[2,3]x[0,1]",
+          "expected": "A clip pass empties the cyclic vertex list; output is empty with area 0."
+        }
+      ]
+    },
+    "alg-delaunay-seeded-curved-uniform-nvb-refinement": {
+      "risk": "high",
+      "kind": "algorithm",
+      "proof_strategy": "algorithm-specification",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm has a fixed nonempty square input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The tolerance hypothesis is strict: 0<tau."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The tolerance range ends at 1/4 and contains no tau=1 endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition explicitly returns unresolved if the Delaunay seed is not the stated two-triangle full-dimensional square triangulation or a predicate is unresolved."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition includes tau=1/4; the finite smoke checks that the diameter loop stops after k=5 because the bound at k=4 exceeds 1/4 and the bound at k=5 is below it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure takes a fixed finite exact site list and uses deterministic algorithms; it selects no element from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm specification is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm specification is not a biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "The square seed and tolerance-loop values are exact finite calculations; the external Delaunay and closure readiness remains recorded in cross-batch evidence.",
+      "finite_smoke": [
+        {
+          "name": "four-corner square seed",
+          "input": "Sites (-1,-1), (1,-1), (1,1), (-1,1) with distinct stable identifiers",
+          "expected": "The convex hull is the square; either cocircular tie resolution gives two triangles sharing one diagonal, all angles are 45 or 90 degrees, and the boundary certificates are alpha=pi/2 and sigma=1."
+        },
+        {
+          "name": "tolerance endpoint",
+          "input": "tau=1/4; loop bound is (3/2)*2^(-k)*(2*sqrt(2))=3*sqrt(2)*2^(-k)",
+          "expected": "At k=4 the bound is 3*sqrt(2)/16>1/4; at k=5 it is 3*sqrt(2)/32<1/4, so exactly five complete cycles are requested if each closure call completes."
+        }
+      ]
+    }
+  }
+}

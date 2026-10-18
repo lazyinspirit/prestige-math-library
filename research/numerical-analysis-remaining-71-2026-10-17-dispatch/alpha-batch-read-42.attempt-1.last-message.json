@@ -1,0 +1,232 @@
+{
+  "group": "n",
+  "batches": ["42"],
+  "pages_read": [
+    "yee-fdtd-and-transient-maxwell-discretization",
+    "yee-fdtd-and-transient-maxwell-discretization-examples"
+  ],
+  "items_read": [
+    "lem-maxwell-rectangular-stokes-identity",
+    "def-transient-maxwell-system-with-material-interfaces",
+    "def-maxwell-discrete-cochain-and-yee-grid",
+    "lem-maxwell-discrete-incidence-identities",
+    "lem-maxwell-yee-step-matrix-is-positive-definite",
+    "def-maxwell-edge-fem-semidiscretization",
+    "alg-maxwell-yee-leapfrog-update",
+    "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+    "def-maxwell-edge-ritz-projection",
+    "lem-maxwell-nedelec-smooth-interpolation-estimate",
+    "thm-maxwell-yee-gauss-constraints-propagate",
+    "thm-maxwell-yee-strict-cfl-modified-energy",
+    "lem-maxwell-periodic-yee-consistency",
+    "thm-maxwell-edge-fem-energy-conservation",
+    "lem-maxwell-edge-ritz-projection-well-defined",
+    "thm-maxwell-yee-cartesian-dispersion-and-cfl",
+    "thm-maxwell-periodic-yee-smooth-solution-error",
+    "thm-maxwell-yee-midpoint-conductivity-energy-balance",
+    "lem-maxwell-magnetic-compatible-initial-projection",
+    "thm-maxwell-edge-fem-smooth-solution-error",
+    "ex-maxwell-pec-rectangular-cavity-mode",
+    "ex-maxwell-dielectric-jump-reflection",
+    "ex-maxwell-incompatible-current-gauss-drift",
+    "ex-maxwell-yee-periodic-plane-wave-dispersion"
+  ],
+  "conventions": [
+    {
+      "convention": "Fields are real; B is magnetic flux density and H=μ⁻¹B. Material tensors ε and μ are measurable, symmetric, time independent and uniformly positive definite. Conductive current is σE, and charge continuity uses impressed plus conductive current.",
+      "fixed_by": "def-transient-maxwell-system-with-material-interfaces",
+      "matters_for": [
+        "def-maxwell-edge-fem-semidiscretization",
+        "thm-maxwell-edge-fem-energy-conservation",
+        "thm-maxwell-edge-fem-smooth-solution-error",
+        "ex-maxwell-dielectric-jump-reflection"
+      ]
+    },
+    {
+      "convention": "G, C and D are signed coboundary matrices. Electric unknowns are oriented edge integrals and magnetic unknowns are oriented face fluxes. Discrete electric charge is defined by GᵀM_e e=ρ.",
+      "fixed_by": "def-maxwell-discrete-cochain-and-yee-grid",
+      "matters_for": [
+        "lem-maxwell-discrete-incidence-identities",
+        "alg-maxwell-yee-leapfrog-update",
+        "thm-maxwell-yee-gauss-constraints-propagate",
+        "ex-maxwell-incompatible-current-gauss-drift"
+      ]
+    },
+    {
+      "convention": "The PEC cochain closure retains interior electric edges and interior charge vertices, but all magnetic faces and cells, including boundary-normal magnetic fluxes. It has no separate boundary surface-charge cochain.",
+      "fixed_by": "def-maxwell-discrete-cochain-and-yee-grid",
+      "matters_for": [
+        "lem-maxwell-discrete-incidence-identities",
+        "thm-maxwell-yee-gauss-constraints-propagate",
+        "thm-maxwell-yee-strict-cfl-modified-energy"
+      ]
+    },
+    {
+      "convention": "Yee initialization is e⁰ and b⁻¹ᐟ². For n≥0, Faraday updates bⁿ⁺¹ᐟ² first, then Ampere solves for eⁿ⁺¹ with conductivity evaluated at (eⁿ⁺¹+eⁿ)/2.",
+      "fixed_by": "alg-maxwell-yee-leapfrog-update",
+      "matters_for": [
+        "thm-maxwell-yee-gauss-constraints-propagate",
+        "thm-maxwell-yee-strict-cfl-modified-energy",
+        "lem-maxwell-periodic-yee-consistency",
+        "thm-maxwell-yee-midpoint-conductivity-energy-balance"
+      ]
+    },
+    {
+      "convention": "Strict spectral CFL means Δt²λ_max<4; λ_max=0 when the retained electric space is zero dimensional. Equality at a positive maximal eigenvalue is a repeated-root endpoint, not a coercive stability case.",
+      "fixed_by": "thm-maxwell-yee-strict-cfl-modified-energy",
+      "matters_for": [
+        "thm-maxwell-yee-cartesian-dispersion-and-cfl",
+        "thm-maxwell-periodic-yee-smooth-solution-error",
+        "thm-maxwell-yee-midpoint-conductivity-energy-balance",
+        "ex-maxwell-yee-periodic-plane-wave-dispersion"
+      ]
+    },
+    {
+      "convention": "The PEC electric FE space is N_h¹ intersected with closure-defined H₀(curl); the magnetic space is full N_h² without a zero normal boundary condition. The inherited analytic space and projection interfaces assume Countable Choice.",
+      "fixed_by": "def-maxwell-edge-fem-semidiscretization",
+      "matters_for": [
+        "def-maxwell-edge-ritz-projection",
+        "lem-maxwell-nedelec-smooth-interpolation-estimate",
+        "lem-maxwell-magnetic-compatible-initial-projection",
+        "thm-maxwell-edge-fem-smooth-solution-error"
+      ]
+    },
+    {
+      "convention": "Yee consistency and convergence rates concern smooth homogeneous periodic fields with constant scalar coefficients. FE rates concern the stated piecewise smooth data on shape-regular, material-aligned tetrahedral meshes.",
+      "fixed_by": "lem-maxwell-periodic-yee-consistency",
+      "matters_for": [
+        "thm-maxwell-periodic-yee-smooth-solution-error",
+        "thm-maxwell-edge-fem-smooth-solution-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-maxwell-yee-strict-cfl-modified-energy",
+      "statement": "For a lossless, source-free Yee update, the staggered cross-energy is conserved and is bounded below by one half of (1−Δt²λ_max/4) times the electric squared mass norm plus one half of the centered magnetic squared mass norm. Strict spectral CFL gives positivity; a positive maximal eigenvalue has a repeated root −1 at equality and an exponentially growing mode above equality.",
+      "used_by": [
+        "thm-maxwell-yee-cartesian-dispersion-and-cfl",
+        "thm-maxwell-periodic-yee-smooth-solution-error",
+        "thm-maxwell-yee-midpoint-conductivity-energy-balance"
+      ]
+    },
+    {
+      "id": "lem-maxwell-discrete-incidence-identities",
+      "statement": "For the incidence matrices G,C,D of def-maxwell-discrete-cochain-and-yee-grid, one has CG=0 and DC=0. The conclusion holds for the full periodic complex and for the PEC mixed closure defined there.",
+      "used_by": [
+        "thm-maxwell-yee-gauss-constraints-propagate",
+        "ex-maxwell-incompatible-current-gauss-drift"
+      ]
+    },
+    {
+      "id": "lem-maxwell-nedelec-smooth-interpolation-estimate",
+      "statement": "Under the inherited Countable Choice assumption, on a finite matching shape-regular affine tetrahedral mesh with aligned material interfaces, the canonical edge and face interpolants of the stated piecewise C¹ trace-compatible fields have combined L², curl and divergence error bounded by C_σ h |Ω|¹ᐟ² times the stated maximum cellwise first-derivative bounds.",
+      "used_by": [
+        "lem-maxwell-magnetic-compatible-initial-projection",
+        "thm-maxwell-edge-fem-smooth-solution-error"
+      ]
+    },
+    {
+      "id": "lem-maxwell-magnetic-compatible-initial-projection",
+      "statement": "For the stated contractible Lipschitz domain, shape-regular family, inherited Countable Choice assumption and divergence-free piecewise smooth B₀ with matching normal traces, B_h⁰=π_h²B₀+P_X(B₀−π_h²B₀) belongs to N_h², has zero discrete divergence, has error orthogonal to every discrete curl in the μ⁻¹ inner product, and has error at most C h M_B.",
+      "used_by": [
+        "thm-maxwell-edge-fem-smooth-solution-error"
+      ]
+    },
+    {
+      "id": "lem-maxwell-edge-ritz-projection-well-defined",
+      "statement": "In the Countable Choice branch of def-maxwell-edge-ritz-projection, the equation defining R_hu has a unique solution for each u∈V, and its a₊ error is at most the infimum of the a₊ approximation errors over V_h.",
+      "used_by": [
+        "thm-maxwell-edge-fem-smooth-solution-error"
+      ]
+    },
+    {
+      "id": "lem-maxwell-periodic-yee-consistency",
+      "statement": "For the stated smooth source-free homogeneous periodic solution, with bounded spatial derivatives of E through order four, fourth time derivative of E and third time derivative of B, exact edge and face samples satisfy electric residual norm at most C_T(h²+Δt²) and unscaled Faraday residual norm at most C_TΔt³ whenever Δt≤t_n≤T−Δt.",
+      "used_by": [
+        "thm-maxwell-periodic-yee-smooth-solution-error"
+      ]
+    },
+    {
+      "id": "lem-maxwell-finite-dimensional-ode-existence-uniqueness",
+      "statement": "In the inherited Countable Choice branch, for any finite matching mesh, initial edge and face coefficients and continuous load vector on [0,T], the source-driven semidiscrete Maxwell system has one and only one global C¹ solution on [0,T].",
+      "used_by": [
+        "thm-maxwell-edge-fem-energy-conservation",
+        "thm-maxwell-edge-fem-smooth-solution-error"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Endpoint differences in the rectangular Stokes proof and finite-dimensional mean-value bounds in the PEC error proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+      "used_for": "Riemann integrability of the continuous curl components on a rectangular face.",
+      "opened": true
+    },
+    {
+      "id": "thm-riemann-fubini-on-product-rectangles",
+      "used_for": "Exchanging iterated integrals in the rectangular Stokes calculation; its section-integrability qualification exposes the concern recorded below.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit inherited choice assumption for the analytic FE spaces, commuting projections and their consumers.",
+      "opened": true
+    },
+    {
+      "id": "def-matching-affine-simplicial-meshes",
+      "used_for": "Matching tetrahedral meshes, orientation-preserving affine reference maps and shape-regularity conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-affine-piola-differential-and-trace-moment-identities",
+      "used_for": "Preservation of edge and face moments and covariant/contravariant scaling in smooth interpolation.",
+      "opened": true
+    },
+    {
+      "id": "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+      "used_for": "The augmented homogeneous matrix system establishing existence and uniqueness for continuous-load Maxwell coefficient ODEs.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Passing dominated time difference quotients through scalar pairings in the PEC smooth-error proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+      "used_for": "Extending compact-test estimates to L² fields and identifying weak curl limits in the PEC error proof.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-maxwell-rectangular-stokes-identity",
+      "concern": "F3 states: “For a Riemann-integrable function on a product of nondegenerate rectangles, the iterated Riemann integrals in either order equal the product integral.” This omits the cited supplier's section-integrability qualification. The supplier explicitly says it does not assert that every section is integrable. For example, on [0,1]² let f(x,y)=1 when x=1/2 and y is rational, and zero otherwise. The double Riemann integral exists and equals zero, but the y-section at x=1/2 is not Riemann integrable. Thus F3 as written is false. The actual C¹ Stokes application has continuous sections and remains supported.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "lem-maxwell-discrete-incidence-identities",
+      "concern": "F1 says “the PEC operators are induced on the quotient by the boundary subcomplex.” The defined mixed closure retains all boundary faces and cells while removing boundary electric edges and charge vertices; the ordinary relative quotient also removes boundary-face cochains. Step 2.1 correctly uses the mixed restriction matrices instead, so this is a conflicting description of the convention rather than a defect in that calculation.",
+      "severity": "presentation"
+    },
+    {
+      "id": "lem-maxwell-discrete-incidence-identities",
+      "concern": "The Statement covers a finite oriented cell complex, including the Cartesian Yee grid, but steps 1.1 and 1.2 establish absolute boundary-of-boundary cancellation only for triangular faces and tetrahedra. Step 2.1 then invokes the absolute identities for the general complex. Polygonal and polyhedral cancellation, or an appropriate general cellular-boundary argument, is left implicit. The cubical Yee case closes by the same elementary signed cancellation.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "yee-fdtd-and-transient-maxwell-discretization",
+      "to": "discrete-de-rham-complexes-and-edge-elements",
+      "faithful": true,
+      "note": "Checked the supplier page and actual H(curl), zero-tangential closure, Whitney-space, edge-unisolvence, commuting-moment, averaged-pullback, correction and bounded-projection interfaces against their Maxwell uses. The consumers retain matching affine tetrahedra, shape regularity where required and Countable Choice. Magnetic initialization uses the full degree-two/three projection family without imposing zero normal boundary trace; the electric PEC argument uses the separate relative-space equality. Canonical edge moments are applied to the stated smooth inputs, not arbitrary rough H(curl) fields. The supplier statements support these consumer uses."
+    }
+  ]
+}

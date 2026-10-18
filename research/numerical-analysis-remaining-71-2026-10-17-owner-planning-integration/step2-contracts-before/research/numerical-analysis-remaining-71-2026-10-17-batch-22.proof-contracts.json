@@ -1,0 +1,970 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "22",
+  "level": 0,
+  "scheduling_input_sha256": "a9c2867eaa03cf0691cfe311c2db2df06f2bb75d230effbc8a099369ec33749c",
+  "scope": [
+    "def-matrix-polynomial-and-homogeneous-eigenpairs",
+    "def-first-frobenius-companion-pencil",
+    "thm-first-companion-pencil-is-strong-linearization",
+    "lem-first-companion-pencil-residual-transfer",
+    "def-coefficientwise-weighted-backward-error-for-matrix-polynomial",
+    "thm-exact-coefficientwise-weighted-backward-error",
+    "def-rational-matrix-eigenproblem-and-pole-domain",
+    "prop-clearing-a-common-denominator-away-from-poles",
+    "ex-quadratic-damped-vibration-first-companion-pencil",
+    "ex-infinite-polynomial-eigenvalue-from-singular-leading-coefficient",
+    "ex-rational-transfer-function-pole-is-a-spurious-cleared-root"
+  ],
+  "contracts": {
+    "def-matrix-polynomial-and-homogeneous-eigenpairs": {
+      "claim": "Definition of grade-m square matrix polynomials, regularity, homogeneous eigenpairs, finite and infinite parameters, reversal, and algebraic multiplicity.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes the stated positive dimensions or nonzero inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: regularity requires det P not identically zero; the zero coefficient matrices are otherwise allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n,m≥1 and the formulas include n=1,m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: A_m may be singular and [1:0] records that case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: [λ:1] and [1:0] specify finite and infinite parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all objects are explicitly given by finite formulas; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition does not assert an additional biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition does not assert an additional biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; this is a definition."
+    },
+    "def-first-frobenius-companion-pencil": {
+      "claim": "Definition of the sign-normalized first Frobenius companion pencil and its finite companion lift.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes the stated positive dimensions or nonzero inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits vanishing coefficients; no coefficient inversion is required."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition states the m=1 lift and empty lower rows."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition imposes no nonsingularity on A_m."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition defines the lift for every finite λ and the pencil formula covers the grade."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all objects are explicitly given by finite formulas; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition does not assert an additional biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition does not assert an additional biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; the defining block formulas are checked in the theorem and examples."
+    },
+    "thm-first-companion-pencil-is-strong-linearization": {
+      "claim": "For every regular grade-m square matrix polynomial, the fixed first Frobenius companion pencil and its reversal are unimodularly equivalent to P and its reversal with identity blocks; determinant, eigenvector recovery, and infinity multiplicity follow.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matrix-polynomial-and-homogeneous-eigenpairs",
+          "source_section": "Definition",
+          "quote": "The **grade-$m$ homogeneous polynomial** is\n$$P_h(\\alpha,\\beta):=\\sum_{j=0}^{m}A_j\\alpha^j\\beta^{m-j}.$$",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-frobenius-companion-pencil",
+          "source_section": "Definition",
+          "quote": "The **first Frobenius companion pencil** with the sign convention used here is\n$$L(\\lambda):=A_c-\\lambda B_c=\\begin{bmatrix}\\lambda A_m+A_{m-1}&A_{m-2}&\\cdots&A_0\\\\-I_n&\\lambda I_n&\\cdots&0\\\\0&-I_n&\\ddots&\\vdots\\\\\\vdots&\\ddots&\\ddots&\\lambda I_n\\end{bmatrix}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-schur-complement",
+          "step": "1.1",
+          "claim": "The lower-left block is polynomially invertible, its Schur complement is P, and the determinant sign cancels to give det L=det P.",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "finite-unimodular-equivalence",
+          "step": "2.1",
+          "claim": "Explicit row and column operations using D inverse transform L to diag(P,I), and all transformations are unimodular.",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "reversed-unimodular-equivalence",
+          "step": "3.1",
+          "claim": "Reordering reversal-pencil blocks gives an invertible polynomial pivot and Schur complement rev P, so the reversal is a linearization too.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "homogeneous-spectrum-and-vectors",
+          "step": "2.2",
+          "claim": "The homogeneous determinant identity holds for all projective parameters, with explicit finite and infinite eigenvector correspondences.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "degree-defect-at-infinity",
+          "step": "4.1",
+          "claim": "The reversal determinant has zero order mn-deg det P at zero; this yields the infinity multiplicity and distinguishes geometric from algebraic multiplicity.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n,m≥1 and regular P."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The regularity hypothesis excludes det P identically zero; step 4.1 uses its finite degree."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 handle m=1 directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 4.1 treat singular A_m and distinguish geometric nullity from algebraic degree defect."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 treats [1:0], and step 4.1 computes its multiplicity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 construct explicit polynomial row and column operations; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 proves P(λ)x=0 implies L(λ)z(λ,x)=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 recovers x=z_m and P(λ)x=0 from a nonzero finite pencil eigenvector."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; block elimination and the exact degree-defect computation are proved locally.",
+      "proof_strategy": "direct block elimination"
+    },
+    "lem-first-companion-pencil-residual-transfer": {
+      "claim": "An arbitrary companion-pencil residual has an exact block formula for the polynomial residual and an explicit Frobenius-norm transfer bound; no unscaled uniform transfer is asserted.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matrix-polynomial-and-homogeneous-eigenpairs",
+          "source_section": "Definition",
+          "quote": "Write $x^*$ for conjugate transpose, $\\langle u,v\\rangle:=v^*u$ for the Euclidean inner product, $\\|x\\|_2:=(x^*x)^{1/2}$ for the Euclidean vector norm, and $\\|M\\|_F:=(\\sum_{r,s}|M_{rs}|^2)^{1/2}$ for the Frobenius matrix norm.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-frobenius-companion-pencil",
+          "source_section": "Definition",
+          "quote": "The **first Frobenius companion pencil** with the sign convention used here is\n$$L(\\lambda):=A_c-\\lambda B_c=\\begin{bmatrix}\\lambda A_m+A_{m-1}&A_{m-2}&\\cdots&A_0\\\\-I_n&\\lambda I_n&\\cdots&0\\\\0&-I_n&\\ddots&\\vdots\\\\\\vdots&\\ddots&\\ddots&\\lambda I_n\\end{bmatrix}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lower-block-recurrence",
+          "step": "1.1",
+          "claim": "The lower block residual equations give an explicit formula for every z_j in terms of x=z_m and the lower residuals.",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "exact-polynomial-residual-identity",
+          "step": "2.1",
+          "claim": "Substitution into the top row yields exactly P(λ)x=e_1+sum Q_k(λ)e_k.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "residual-norm-bound-and-scaling-example",
+          "step": "3.1",
+          "claim": "Rowwise Cauchy–Schwarz bounds each Q_k e_k; a dual Cauchy–Schwarz argument gives the sum bound, and the companion lift verifies the special exact case.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "unscaled-residual-counterexample",
+          "step": "4.1",
+          "claim": "For the fixed scalar polynomial λ²+1, a unit pencil residual can correspond to an arbitrarily large polynomial residual as t grows.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 includes m=1, when the lower residual sum is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles y=0 separately, when the norm bound is immediate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the companion lift has zero lower residual blocks."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits arbitrary lower residual blocks, including all zero, without division."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses polynomial powers and does not divide by λ, so λ=0 is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 gives an explicit scalar family; all constructions are explicit and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is an identity and norm bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is an identity and norm bound, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; the scalar counterexample family is verified symbolically in step 2.1.",
+      "proof_strategy": "direct block elimination"
+    },
+    "def-coefficientwise-weighted-backward-error-for-matrix-polynomial": {
+      "claim": "Definition of the infimal weighted Frobenius norm of independent coefficient perturbations that make a fixed homogeneous polynomial eigenpair exact.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes the stated positive dimensions or nonzero inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition requires x≠0; the zero residual itself is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition requires each weight ω_j>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition includes finite and infinite projective parameters."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes both [λ:1] and [1:0]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all objects are explicitly given by finite formulas; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition does not assert an additional biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition does not assert an additional biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; the next theorem proves attainment and the exact value."
+    },
+    "thm-exact-coefficientwise-weighted-backward-error": {
+      "claim": "For any nonzero homogeneous projective parameter and nonzero vector, the weighted Frobenius backward-error infimum is attained and equals the residual divided by the vector norm and weighted homogeneous coefficient norm.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-coefficientwise-weighted-backward-error-for-matrix-polynomial",
+          "source_section": "Definition",
+          "quote": "The **coefficientwise weighted Frobenius backward error** is the infimum\n$$\\eta_F(P,[\\alpha:\\beta],x;\\omega):=\\inf\\left\\{\\left(\\sum_{j=0}^{m}\\frac{\\|\\Delta A_j\\|_F^2}{\\omega_j^2}\\right)^{1/2}:\\ \\sum_{j=0}^{m}(A_j+\\Delta A_j)\\alpha^j\\beta^{m-j}x=0,\\quad \\Delta A_j\\in\\mathbb C^{n\\times n}\\right\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-homogeneous-weight-sum",
+          "step": "1.1",
+          "claim": "At least one endpoint monomial is positive for every nonzero projective parameter, so S>0 and the denominator is well-defined.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "lower-bound-for-perturbation-cost",
+          "step": "2.1",
+          "claim": "Feasibility, rowwise complex Cauchy–Schwarz and finite Cauchy–Schwarz give the lower bound on every perturbation cost.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "attaining-rank-one-perturbations",
+          "step": "2.2",
+          "claim": "The explicit rank-one perturbations cancel the residual and are feasible.",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "exact-cost-and-endpoints",
+          "step": "3.1",
+          "claim": "The rank-one Frobenius norm gives the lower bound exactly, proving attainment and the finite, infinite, zero-residual, and reversed-weight formulas.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes m≥1 and x≠0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the zero-residual case with zero perturbations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves S>0 at the projective endpoints using the positive endpoint weight."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves S>0 when α=0 or β=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 evaluates [λ:1], [1:0], and the reversed coefficient weights."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.2–3.1 construct an explicit rank-one minimizer; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is an exact minimum formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is an exact minimum formula, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; the exact minimizer and both projective boundary cases are verified in the proof.",
+      "proof_strategy": "direct minimization"
+    },
+    "def-rational-matrix-eigenproblem-and-pole-domain": {
+      "claim": "Definition of a square rational matrix eigenproblem on the complement of the poles of its reduced common denominator.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes the stated positive dimensions or nonzero inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: q=1 gives an empty pole set and Ω=ℂ."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the zero matrix function has denominator 1 and is defined throughout Ω."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition applies to scalar rational eigenproblems when n=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition uses reduced fractions, so common-denominator zeros are actual entry poles."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all objects are explicitly given by finite formulas; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition does not assert an additional biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition does not assert an additional biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; the pole-free domain is a definition."
+    },
+    "prop-clearing-a-common-denominator-away-from-poles": {
+      "claim": "On the pole-free domain, multiplying by the common denominator preserves kernels; at poles cleared roots are inadmissible.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rational-matrix-eigenproblem-and-pole-domain",
+          "source_section": "Definition",
+          "quote": "A **rational eigenpair** is a pair $(\\lambda,x)$ with $\\lambda\\in\\Omega$, $x\\in\\mathbb C^n\\setminus\\{0\\}$, and $R(\\lambda)x=0$; its $\\lambda$ is a rational eigenvalue. The **cleared-denominator polynomial equation** is $N(\\lambda)x=0$, but it represents the rational eigenproblem only on $\\Omega$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "equivalence-on-pole-free-domain",
+          "step": "1.1",
+          "claim": "Since q(λ) is nonzero on Ω, multiplication and division by it preserve the zero equation in both directions.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "pole-roots-excluded",
+          "step": "2.1",
+          "claim": "At a pole R is undefined, so no cleared root there is in the rational eigenproblem domain.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem hypotheses require positive dimensions and nonzero vectors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The rational matrix has positive square size by definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 concerns nonzero eigenvectors; x=0 is excluded by the definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles a cleared polynomial matrix singular at a pole."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 distinguish λ∈Ω from λ in the pole set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use only multiplication and division by the specified scalar denominator; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves R(λ)x=0 implies N(λ)x=0 for λ∈Ω."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves N(λ)x=0 implies R(λ)x=0 for λ∈Ω."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; denominator clearing is verified algebraically.",
+      "proof_strategy": "direct scalar multiplication"
+    },
+    "ex-quadratic-damped-vibration-first-companion-pencil": {
+      "claim": "For P(λ)=λ²+(1/2)λ+2, the roots are -1/4±i√31/4, the companion determinant is P, and the lifted vector (λ,1) is a pencil eigenvector at either root.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matrix-polynomial-and-homogeneous-eigenpairs",
+          "source_section": "Definition",
+          "quote": "The **grade-$m$ matrix polynomial** is\n$$P(\\lambda):=\\sum_{j=0}^{m}A_j\\lambda^j.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-frobenius-companion-pencil",
+          "source_section": "Definition",
+          "quote": "The **first Frobenius companion pencil** with the sign convention used here is\n$$L(\\lambda):=A_c-\\lambda B_c=\\begin{bmatrix}\\lambda A_m+A_{m-1}&A_{m-2}&\\cdots&A_0\\\\-I_n&\\lambda I_n&\\cdots&0\\\\0&-I_n&\\ddots&\\vdots\\\\\\vdots&\\ddots&\\ddots&\\lambda I_n\\end{bmatrix}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-first-companion-pencil-is-strong-linearization",
+          "source_section": "Statement",
+          "quote": "In particular, $\\det(A_c-\\lambda B_c)=\\det P(\\lambda)$; finite eigenvectors correspond by $x\\mapsto z(\\lambda,x)$;",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "quadratic-roots",
+          "step": "1.1",
+          "claim": "The quadratic formula gives the two complex roots and A2=1 excludes an infinity eigenvalue.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "companion-determinant",
+          "step": "2.1",
+          "claim": "Expanding the 2 by 2 determinant gives P and hence the same finite roots.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "lifted-eigenvector",
+          "step": "3.1",
+          "claim": "Direct multiplication sends (λ,1) to (P(λ),0), which vanishes at either root.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes n=1 and m=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives P(0)=2, so zero is not a root."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the scalar mass coefficient A2=1 and computes both roots."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 has nonzero discriminant, so the two roots are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 notes A2=1, so there is no eigenvalue at infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use the explicit quadratic formula and companion lift; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes roots and lifted vectors but states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes roots and lifted vectors but states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; the exact roots, determinant and lifted residual are computed in the Verification.",
+      "proof_strategy": "direct calculation"
+    },
+    "ex-infinite-polynomial-eigenvalue-from-singular-leading-coefficient": {
+      "claim": "For P(λ)=diag(1,λ²) of grade 2, the infinity eigenvalue has algebraic multiplicity 2 and geometric multiplicity 1, while λ=0 is a separate finite eigenvalue.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matrix-polynomial-and-homogeneous-eigenpairs",
+          "source_section": "Definition",
+          "quote": "The point $[1:0]$ is the parameter at infinity; there $P_h(1,0)=A_m$, so it is an eigenvalue exactly when $A_m$ is singular. For regular $P$, the algebraic multiplicity at a finite $\\lambda_0$ is the order of the zero of $\\det P$ at $\\lambda_0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-frobenius-companion-pencil",
+          "source_section": "Definition",
+          "quote": "The **first Frobenius companion pencil** with the sign convention used here is\n$$L(\\lambda):=A_c-\\lambda B_c=\\begin{bmatrix}\\lambda A_m+A_{m-1}&A_{m-2}&\\cdots&A_0\\\\-I_n&\\lambda I_n&\\cdots&0\\\\0&-I_n&\\ddots&\\vdots\\\\\\vdots&\\ddots&\\ddots&\\lambda I_n\\end{bmatrix}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-first-companion-pencil-is-strong-linearization",
+          "source_section": "Statement",
+          "quote": "The algebraic multiplicity of infinity in both problems is $mn-\\deg\\det P$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "infinity-algebraic-multiplicity",
+          "step": "1.1",
+          "claim": "The determinant is nonzero of degree two, so the degree defect from mn=4 gives infinity multiplicity two; reversal confirms the order at zero.",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "infinity-geometric-multiplicity",
+          "step": "2.1",
+          "claim": "The leading matrix has rank one and kernel span e1, giving geometric multiplicity one and the stated companion infinity vector.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "separate-finite-root",
+          "step": "3.1",
+          "claim": "At λ=0 the finite kernel is span e2 and its companion lift differs from the infinity vector.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes n=m=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives det P=λ², which is not the zero polynomial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the rank-one leading matrix and its one-dimensional kernel."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 show algebraic multiplicity two but geometric multiplicity one at infinity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 distinguishes the finite root λ=0 from the projective infinity point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use explicit coefficient matrices and basis vectors; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies finite and infinite eigenpairs but states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies finite and infinite eigenpairs but states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; exact determinants, ranks, kernels and reversal are computed in the Verification.",
+      "proof_strategy": "direct calculation"
+    },
+    "ex-rational-transfer-function-pole-is-a-spurious-cleared-root": {
+      "claim": "The transfer matrix diag((λ-1)^-1,1) has no rational eigenpairs on its domain, but denominator clearing gives a singular polynomial matrix at the excluded pole λ=1.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rational-matrix-eigenproblem-and-pole-domain",
+          "source_section": "Definition",
+          "quote": "A **rational eigenpair** is a pair $(\\lambda,x)$ with $\\lambda\\in\\Omega$, $x\\in\\mathbb C^n\\setminus\\{0\\}$, and $R(\\lambda)x=0$; its $\\lambda$ is a rational eigenvalue.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-clearing-a-common-denominator-away-from-poles",
+          "source_section": "Statement",
+          "quote": "No point of $\\mathcal P=\\mathbb C\\setminus\\Omega$ is a rational eigenvalue, regardless of whether $N(\\lambda)$ is singular there.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "state-space-denominator",
+          "step": "1.1",
+          "claim": "The stated matrices realize R and its reduced common denominator clears it to N=diag(1,λ-1).",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "exclude-cleared-pole-root",
+          "step": "2.1",
+          "claim": "R is invertible off its pole, while N(1) has kernel span e2; λ=1 is excluded by the rational domain.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes a 2 by 2 rational matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows no nonzero kernel vector for every λ≠1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the explicit second constant channel and its realization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the singular cleared matrix N(1) at the pole."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the pole λ=1 as outside Ω."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use an explicit rational matrix, denominator and kernel vector; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example demonstrates a spurious cleared root and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example demonstrates a spurious cleared root and states no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "No named finite-smoke check applies; the realization, determinant and pole candidate are calculated exactly.",
+      "proof_strategy": "direct calculation"
+    }
+  }
+}

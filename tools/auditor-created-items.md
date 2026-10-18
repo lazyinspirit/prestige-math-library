@@ -7,6 +7,156 @@ escalation. It is an owner attestation, not a native dispatch result, independen
 review, adjudication, judgment, or certificate of successful local checks.
 Existing native and Step-3 origin validation remains mandatory.
 
+## Native origin before the first certificate
+
+When a genuine native Step-3 author creates a helper and an owner repairs it
+before the first certification, preserve native birth separately from current
+repair. Do not relabel the creator, reset mtimes, restore old mathematical
+content, or run certification early to obtain provenance. The metadata command
+below does not run a gate or create an auditor-created certification:
+
+```sh
+node tools/auditor-created-items.mjs native-origin --run RUN --step 3 --id ITEM --evidence research/ORIGIN-EVIDENCE.json
+```
+
+The registration evidence uses the following fields. Every marker is an
+existing research file with its actual raw SHA256. The tool, rather than the
+caller, derives `recorded_at` and `native_write_binding`:
+
+```json
+{
+  "version": 1,
+  "policy": "native-created-step3-origin-evidence-v1",
+  "run": "RUN",
+  "step": 3,
+  "id": "ITEM",
+  "owner_identity": "/root",
+  "reason": "Concrete reason for preserving native creation before later owner maintenance",
+  "native_execution_credit": false,
+  "mathematical_acceptance": false,
+  "baseline_sha256": "JSON_STRINGIFY_PARSED_STEP3_BASELINE_HASH",
+  "page": "ORIGINAL_PAGE",
+  "batch": "ORIGINAL_BATCH",
+  "author_result": "alpha-ACTUAL_LABEL.attempt-N.result.json",
+  "author_evidence": {
+    "result": {"path": "research/RUN-dispatch/ACTUAL.result.json", "sha256": "RAW_HASH"},
+    "prompt": {"path": "research/RUN-dispatch/ACTUAL.prompt.md", "sha256": "RAW_HASH"},
+    "log": {"path": "research/RUN-dispatch/ACTUAL.log", "sha256": "RAW_HASH"}
+  },
+  "native_item": {"path": "research/ACTUAL-NATIVE-PREIMAGE.md", "sha256": "RAW_HASH"},
+  "native_manifest": {"path": "research/ACTUAL-NATIVE-MANIFEST.json", "sha256": "RAW_HASH"},
+  "native_contract": {"path": "research/ACTUAL-NATIVE-CONTRACT.json", "sha256": "RAW_HASH"},
+  "native_metadata_capture": {"path": "research/ACTUAL-CAPTURE.json", "sha256": "RAW_HASH"},
+  "carriers": {
+    "guard_sha256": "ORIGINAL_GUARD_HASH",
+    "judge_sha256": "ORIGINAL_JUDGE_HASH",
+    "item_file_sha256": "ORIGINAL_RAW_HASH",
+    "manifest_sha256": "ORIGINAL_ITEM_MANIFEST_PROJECTION_HASH",
+    "contract_sha256": "ORIGINAL_CONTRACT_ENTRY_HASH",
+    "step3_subject_sha256": "ORIGINAL_SUBJECT_HASH"
+  },
+  "replay": {
+    "policy": "literal-python-item-writer-v1",
+    "writer_script": "/tmp/ACTUAL-WRITER.py",
+    "transform_script": "/tmp/ACTUAL-TRANSFORM.py"
+  }
+}
+```
+
+All original baseline and filesystem exclusion checks apply. The native result
+must be a successfully completed, unaborted immutable Step-3 author attempt,
+with its authentic prompt, batch coverage and unchanged result/prompt/log bytes.
+`author_result` remains that native filename, never an owner task identity.
+Original home and batch cannot move through this route. The native manifest and
+contract must be retained archives, not the mutable canonical paths. Their
+per-item projections supply the six original hashes under the ordinary hash
+definitions above. A real metadata capture has `captured_at` and
+`sources: [{source, archive, raw_sha256, owner_modified_source: false,
+source_stat_at_capture: {mtime_utc}}]`. Each original canonical metadata source
+and archive must match the expected run/batch filename and its retained hash;
+the actual captured mtime must lie in the authenticated native interval (with
+the existing 1.5-second start tolerance). Capture time is after native completion
+and before registration. Missing original item mtimes are not reconstructed.
+
+The source preimage is authenticated by restricted **static** replay of the
+actual successful write commands in that exact native log. Python 3 in isolated
+mode parses the shell wrapper and Python AST; it never executes or imports log
+code. The supported emitter is a literal `item(i,title,deps,body,level)` function
+that concatenates a literal frontmatter f-string and body, then writes
+`(base/(i+'.md')).write_text(t)` with `base=Path('items')`. Only literal
+constants, names bound to scalar constants, lists, string concatenation, plain
+f-string substitution and a literal separator's `join` are evaluated. A later
+optional `edit(id, lambda t: ...)` supports only chained literal replacements
+and the precisely recognized finite `dep` list insertion. Both scripts must
+occur in unique successful `cat`-heredoc/`python3` commands; transforms must
+follow creation. The reconstructed full raw item must equal the retained
+preimage exactly. Other script shapes fail closed; this is not a generic Python
+interpreter or a source-reading attestation. Only evidence markers, source
+hashes and command hashes are stored; transcripts and scripts are not copied.
+
+Registration writes the immutable canonical
+`research/RUN-step3-native-origin-ITEM.json`, policy
+`native-created-step3-origin-v1`. Different existing origins are refused.
+The recorder changes no source, baseline, dispatch, timestamp or certificate.
+
+Registration and first Step-3 closure require the operational native log and
+exact static replay. The version-3 `step3-close` receipt now declares
+`native_origin_evidence_policy: "native-created-step3-origin-freeze-v1"`.
+After its ordinary native currency checks, close replays every registered
+origin and freezes the immutable origin receipt's raw hash, the baseline,
+original item/manifest/contract/metadata-capture archives, and native result
+and prompt. It does not freeze or copy the transcript. Existing origin receipts
+remain byte-identical.
+
+When the log is present, every origin load still checks its exact hash and
+replays it. When it is absent after a scoped clone, a load requires that exact
+version-3 closed receipt and policy, every retained marker and raw origin hash
+in its frozen artifact map, and the engine's successful
+`tool-step3-close.result.json` (`written_by: "autopilot"`, matching run,
+tool/label/all coverage and completion no earlier than closure). All original
+identity, baseline, source projection and native result/prompt checks still
+apply. The loader checks these pins directly without recursively invoking
+closure verification. Missing or unsealed evidence fails; this gives no new
+native execution or mathematical acceptance credit. Closure verification
+reconstructs the same exact source-only evidence set, detecting added,
+removed or changed origins and retained markers.
+Native result files may retain absolute prompt/log paths from the original
+workspace. A relocated clone recognizes these only through that same frozen
+origin and exact result/prompt markers, with the canonical path suffixes and
+common original directory prefix checked. Unsealed author-result path checks
+are unchanged; no result or operational path is rewritten.
+
+After actual outside repair and metadata integration, use ordinary
+`owner-recertify` before the first whole-stage certificate. Its research JSON
+uses policy `native-created-step3-current-repair-v1` with version 1, matching
+run/step 3/id, `owner_identity: "/root"`, a substantive `reason`,
+`native_execution_credit: false`, `mathematical_acceptance: false`, the exact
+`native_origin: {path, sha256}`, and `current_carriers` containing all six
+actual current hashes. Supply
+`review: {completed: true, no_unresolved_defect: true,
+current_proof_suppliers_and_direct_consumers_checked: true}` only after that
+review has genuinely happened. This is owner repair review, never a claim that
+the original native worker reviewed changed bytes.
+
+`repairs` is a nonempty ordered list of actual
+`{author_identity, before_raw_sha256, after_raw_sha256, evidence: {path, sha256}}`
+records. The chain begins at the authenticated native preimage and ends at the
+current raw item; intermediate root normalization is a separate attributed
+link. Each immutable report must name the run, item, actual `/root` or
+`/root/TASK` author and both raw hashes. Contract-only maintenance may retain
+equal source hashes but still requires current six-carrier binding and actual
+review. Do not credit one repairer with another writer's work. Later maintenance
+uses a new current-carrier recertification, retaining the original native origin
+and a complete truthful repair chain.
+
+The ordinary certifier and shared loader validate this origin and owner
+recertification while preserving the native `author_result` and immutable
+result/prompt evidence. A changed source, manifest or contract requires current
+recertification, including before the first certification. Only this
+authenticated original write reconstruction replaces the obsolete live-mtime
+inference; no other native-origin or current-carrier check is relaxed. Existing
+certification, independent review, judgment and full gate duties remain due.
+
 After integrating the actual new item, manifest entry and contract entry, the
 owner prepares a JSON attestation from retained evidence and records it with:
 

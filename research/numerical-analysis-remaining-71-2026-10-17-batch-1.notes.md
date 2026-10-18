@@ -1,0 +1,39 @@
+# Batch 1 authoring notes — NA-46
+
+## Plan and design reconciliation
+
+- `research/plan-spec.json` controls page identities, order, category, scope and page-level `requires`: A page order 2556 requires `quasi-monte-carlo-discrepancy-and-rules`; B page order 2557 requires the A page. Its `scaffold` field points to `research/plan-numerical-linear-track.md`, so that pair-specific section controls the detailed convention and latest source/status direction. The `items: []` field is the unpopulated scaffold inventory, not an instruction to omit authoring directed by the current NA-46 design and owner direction.
+- The numerical-analysis design at `research/plan-numerical-analysis-track.md` lines 660–672 describes the same fixed-$d\ge3$ open question but uses “subsets” and contains an earlier 2026-10-14 status snapshot. The mapped numerical-linear design at `research/plan-numerical-linear-track.md` lines 233–273 gives the current 2026-10-17 source review, fixes $d$ before $n\to\infty$, and requires ordered configurations with repetitions counted. `plan-spec.json` does not specify a set-versus-multiset convention; the published supplier `def-star-discrepancy-and-digital-net` specifies ordered point multisets, multiplicity, and half-open anchored boxes. That exact supplier and the mapped current design resolve the older “subset” wording without changing the plan's scope.
+- The owner authoring direction requires a genuine open-problem/status carrier only and forbids treating it as a logical supplier. The A item is therefore an `op-` status formulation, with no proof section or proof stamp. The B item is a finite discrepancy calculation proved directly from the definition. Its source-based rate comparison is contextual only; it proves no partial asymptotic theorem and does not use the open problem as a premise.
+
+## Item inventory and dependency levels
+
+| Page | Item | Logical dependencies | Dependency level | Reason |
+|---|---|---|---:|---|
+| `optimal-star-discrepancy-order-in-dimension-at-least-three` | `op-optimal-star-discrepancy-order-dimension-at-least-three` | `def-star-discrepancy-and-digital-net` | 0 | The discrepancy definition is an existing published prerequisite outside this run. |
+| `optimal-star-discrepancy-order-in-dimension-at-least-three-examples` | `ex-one-point-star-discrepancy-center` | `def-star-discrepancy-and-digital-net` | 0 | The example uses only the existing published discrepancy definition; no edge to the open problem is declared. |
+
+The page-level B-to-A `requires` relation is placement context within this pair, not a logical item dependency. Both items have no in-run supplier, so batch 1 remains at dependency level 0 with no prerequisite batch. No cycle or missing local definition was found. No choice principle is used or required.
+
+## Supplier and source evidence
+
+- Read the actual published `items/def-star-discrepancy-and-digital-net.md` and its home page. Its relevant Definition states $D_N^*$ as the supremum of the normalized count-minus-volume error over products of half-open intervals $[0,u_j)$, for ordered nonempty point lists in $[0,1)^d$, with repeats counted by multiplicity. Its status is `published`; its own dependency closure remains external context and is not widened here.
+- The two independent source treatments are Owen's author-hosted book, printed pp. 17–19 and Theorem 15.7, and Dick's full arXiv v3 paper, §1 and Remarks 1.3–1.5. The source coverage records exact locators, supported items, all selected harvested results and dispositions, and current full-text fetch stamps. The ROOT cycle-1 packet remains the evidence for the Owen page inspection: its report explicitly distinguishes the prior successful full urllib retrieval from this author's web-reader 403 and does not claim the whole book was read.
+- Owen's Roth lower bound is recorded only as a classical baseline, not as the strongest known lower bound. Dick v3 states a uniform growing-dimension tractability result; Remark 1.4 separates fixed dimension and does not state the missing matching fixed-$d$ lower rate. No proof acceptance is inferred from the preprint. The current-results search remains bounded, not exhaustive.
+
+## Cross-batch disposition
+
+The A and B items depend only on the published `def-star-discrepancy-and-digital-net`. The B page's A-page `requires` edge is in the same pair and is not an item proof dependency. There are no cross-batch or same-frontier item dependencies; the owned batch input is therefore `[]`. The unified owner ledger and shared plan files were not edited.
+
+## Source and proof limitations
+
+The open problem's status is source review, not a solution or acceptance. The finite B example's verification proves the singleton formula, including the strict half-open endpoint and supremum-not-maximum boundary, from the exact supplier excerpt. No registered finite-smoke check applies to this elementary supremum calculation; exact dimensions $d=2$ and $d=3$ are substituted in the proof itself. The example's asymptotic rate comparison is documented in Remarks and page summary as literature context, not a locally asserted best-known theorem.
+
+## Scoped checks and handoff blockers — 2026-10-17
+
+- `source-fetch-check --stamp` fetched both distinct sources successfully: Owen's 197-page PDF (5,231,225 bytes) and Dick v3 (12 pages, 380,080 bytes). The final two-page coverage check verifies all 4 page/source records; no source is dropped or unresolved.
+- `coverage-checklist` passed: 2 pages, 12 harvested results, 0 errors and 0 warnings. `manifest-deps` passed for 2 items. The focused `content-policy` passed for 2 items with no warnings. Focused `depcheck` passed for the two items and their dependency closure with 0 errors/warnings. `rendercheck` passed for the 2 items and 2 pages; `proof-layout` passed for 2 items/4 proof steps with 0 defects. `precheck` reports the open problem as not applicable and the B example as pass (1 proof checked, 0 failures). The first precheck supplied a canonical phase renumbering; that repair was adopted and the final precheck passed.
+- The scoped item-level dependency calculation passed: both items are level 0, with no cycle. Whole-run `item-dependency-levels.mjs check` did not pass: 131 other page inventories are still empty and `ex-ewald-source-collision-field-singularity` has recorded level 4 versus computed level 1. No cycle was found. These pages/items are outside batch 1 and were not edited.
+- The B example's selected strict proof contract passes with 0 errors/warnings. Full batch strict validation reports four errors on the open-problem item because `tools/proof-contract.mjs` tests `item.kind === 'open-problem'` at line 90, while `loadItem` returns no `kind` field (lines 302–309); it therefore falls through to ordinary proof worksheets. The specialized `open_problem_review` is complete. Adding citations, derivations, routine steps or boundary worksheets would violate the open-problem contract, so this item needs owner resolution of the validator mismatch. The shared tool was not edited.
+- `step1-decisions.mjs record` was attempted for both items, without `--owner`; neither record was written. `loadStep3` cannot parse the current run because `research/numerical-analysis-remaining-71-2026-10-17-batch-40.pages.json` has malformed JSON: “Unexpected non-whitespace character after JSON at position 33593 (line 627 column 2).” Batch 40 is outside this assignment and was not repaired. The B example passes its own readiness conditions; the open problem requires owner escalation on the contract-validator mismatch. Both formal Step 1 records are unavailable until the run manifest parse issue is resolved.
+- Read-only autopilot status at 2026-10-17 11:25:31 UTC remained `running` at `1-scaffold`, with 0/71 dispatch results and nothing in flight. No runtime state or owner verdict was changed.

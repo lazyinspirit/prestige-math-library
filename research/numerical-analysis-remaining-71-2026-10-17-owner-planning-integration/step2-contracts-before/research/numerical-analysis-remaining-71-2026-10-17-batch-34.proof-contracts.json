@@ -1,0 +1,3693 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-na-l2-zero-mean-hilbert",
+    "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+    "lem-na-hdiv-weak-normal-trace",
+    "lem-na-piola-divergence-and-flux-identities",
+    "lem-na-h0div-div-zero-mean",
+    "lem-na-h1-zero-boundary-is-zero-normal-hdiv",
+    "lem-na-hdiv-is-hilbert-and-h0div-closed",
+    "lem-na-cell-average-l2-projection",
+    "lem-na-piola-preserves-rt-bdm-spaces",
+    "lem-na-rt0-p0-kernel-is-divergencefree",
+    "lem-na-simplex-h1-facet-trace-bound",
+    "lem-na-h1-interior-facet-traces-agree",
+    "lem-na-rt0-unisolvence-and-global-conformity",
+    "thm-na-darcy-mixed-wellposedness",
+    "thm-na-rt0-p0-local-mass-conservation",
+    "lem-na-rt0-h1-interpolation-bounded-and-commuting",
+    "thm-na-rt0-p0-bounded-divergence-lift-and-infsup",
+    "thm-na-rt0-bounded-commuting-projection",
+    "thm-na-rt0-p0-darcy-error-estimate",
+    "thm-na-rt0-hybridization-equivalence-static-condensation",
+    "ex-na-primal-p1-flux-is-not-locally-conservative",
+    "ex-na-constant-flux-reference-triangle",
+    "ex-na-checkerboard-permeability-contrast",
+    "ex-na-two-triangle-hybrid-static-condensation"
+  ],
+  "contracts": {
+    "lem-na-l2-zero-mean-hilbert": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-no",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-closed-subspace-of-a-banach-space-is-banach",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a Banach space and let $W\\subseteq V$ be a closed linear subspace,\nequipped with the restricted norm. Then $W$ is a Banach space.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Define $\\ell(q):=\\int_Dq\\,dx$. By [F2], $|\\ell(q)|\\le |D|^{1/2}\\|q\\|_2$, and linearity of the integral makes $\\ell$ a bounded real linear functional. Its kernel is exactly $L^2_0(D)$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The kernel of a continuous functional is closed: if $q_n\\in L^2_0(D)$ and $q_n\\to q$ in $L^2$, then $|\\ell(q)|=|\\ell(q-q_n)|\\le |D|^{1/2}\\|q-q_n\\|_2\\to0$, so $\\ell(q)=0$. Thus $L^2_0(D)$ is a closed linear subspace of $L^2(D)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "The inner product on $L^2(D)$ restricts to an inner product on $L^2_0(D)$ and induces the inherited $L^2$ norm. By [F1], $L^2(D)$ is complete; by [F3] and step 2.1, its closed subspace $L^2_0(D)$ is complete. Therefore it is a real Hilbert space with the restricted inner product.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-smooth-neighborhood-dense-in-h1-simplex": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with $n\\ge1$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then $C_c^\\infty(\\Omega;\\mathbb K)$ is dense in $L^2(\\Omega;\\mathbb K)$: for every $f\\in L^2(\\Omega;\\mathbb K)$ and every $\\delta>0$ there is $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with $\\|\\varphi-f\\|_{L^2(\\Omega)}<\\delta$. Consequentl",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ ([[def-linear-map]],\n[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi \\in C_c^\\infty(\\mathbb{R}^n)$ satisfy",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-l-one-approximate-identities-converge-in-l-p",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $u\\in W^{k,p}(\\Omega;\\mathbb K)$ with $k\\in\\mathbb N_0$,\n$1\\le p\\le\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$\\rho\\in C_c^\\infty(\\mathbb R^n)$ be nonnegative with\n$\\int_{\\mathbb R^n}\\rho=1$ and $\\operatorname{supp}\\rho\\subseteq\\overline B_1(0)$.\nFor $\\varepsi",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Choose $c\\in K$ and $s\\in(0,1)$, and put $T_s(x)=c+s(x-c)$ and $U_s=T_s^{-1}(K)$. Since $K$ is convex and $c$ is interior, $T_s(\\overline K)$ is a compact subset of $K$; hence $U_s$ is an open simplex containing $\\overline K$ with positive distance from $\\overline K$ to $U_s^c$. Define $u_s=u\\circ T_s$ on $U_s$. For $\\psi\\in C_c^\\infty(U_s)$, change variables $y=T_s(x)$ in the weak derivative identity of $u$; with $\\widetilde\\psi(y)=\\psi(T_s^{-1}y)$ one has $D_{y_i}\\widetilde\\psi=s^{-1}(D_{x_i}\\psi)\\circ T_s^{-1}$, so the identity gives $D_i u_s=s(D_i u)\\circ T_s$ distributionally.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For any $g\\in L^2(K)$, extend it by zero to $\\mathbb R^d$. Given $\\eta>0$, choose $\\phi\\in C_c^\\infty(\\mathbb R^d)$ with $\\|g-\\phi\\|_{L^2(K)}<\\eta$ by [F2]. Because $T_s(K)\\subset K$, change of variables [F3] gives $\\|(g-\\phi)\\circ T_s\\|_{L^2(K)}\\le s^{-d/2}\\eta$, while uniform continuity of $\\phi$ on $\\overline K$ gives $\\|\\phi\\circ T_s-\\phi\\|_{L^2(K)}\\to0$ as $s\\to1^-$. The triangle inequality and arbitrary $\\eta$ therefore show $\\|g\\circ T_s-g\\|_{L^2(K)}\\to0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Apply step 1.2 to $g=u$ and to every $g=D_i u$. By step 1.1, $D_i u_s=s(D_i u)\\circ T_s$, and $s\\to1$; hence $u_s|_K\\to u$ in the full $H^1(K)$ norm as $s\\to1^-$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Choose $s$ close enough to $1$ that $\\|u_s-u\\|_{H^1(K)}<\\varepsilon/2$, and let $r=\\operatorname{dist}(\\overline K,U_s^c)>0$. Choose the bump from [F4] and then $0<\\delta<r$. The zero extension of $u_s$ is locally integrable by [F8], so $w_\\delta=(\\rho_\\delta*E_0u_s)$ is smooth by [F7]. On $K$, [F6] gives $D_iw_\\delta=\\rho_\\delta*E_0(D_i u_s)$. Each zero extension is in $L^2(\\mathbb R^d)$; [F5] therefore gives $\\|w_\\delta-u_s\\|_{H^1(K)}\\to0$ as $\\delta\\to0^+$. Choose $\\delta<r$ small enough to make this norm less than $\\varepsilon/2$. Then $w_\\delta$ is smooth on a neighborhood of $\\overline K$, and the triangle inequality with step 2.1 gives $\\|w_\\delta-u\\|_{H^1(K)}<\\varepsilon$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-hdiv-weak-normal-trace": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-hdiv-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the published Sobolev interfaces cited below. Let $D\\subseteq\\mathbb R^d$ be open and use real scalars. $L^2(D;\\mathbb R^d)$ means the $d$-tuple of real $L^2$ equivalence classes, with norm $\\|v\\|_2^2=\\sum_{j=1}^d\\|v_j\\|_2^2$. The test space $C_c^\\infty(D;\\mathbb R)$ consists of real smooth functions compactly supported in $D$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For $w\\in H^1(D)$ put $L_v(w):=\\int_D(v\\cdot\\nabla w+(\\operatorname{div}v)w)$. The two integrals are finite by [F3], and Cauchy–Schwarz in $\\mathbb R^2$ gives $|L_v(w)|\\le\\|v\\|_2\\|\\nabla w\\|_2+\\|\\operatorname{div}v\\|_2\\|w\\|_2\\le\\|v\\|_{H(\\operatorname{div};D)}\\|w\\|_{H^1(D)}.$ Thus $L_v$ is a bounded real linear functional on $H^1(D)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For every $\\phi\\in C_c^\\infty(D;\\mathbb R)$, [F1] gives $L_v(\\phi)=0$. If $z\\in H^1_0(D)$, then for each $\\varepsilon>0$, [F2] gives such a $\\phi$ with $\\|z-\\phi\\|_{H^1}<\\varepsilon$; step 1.1 yields $|L_v(z)|=|L_v(z-\\phi)|\\le\\|v\\|_{H(\\operatorname{div})}\\varepsilon$. Since this holds for every $\\varepsilon>0$, $L_v(z)=0$. Therefore $L_v$ is constant on each coset of $H^1_0(D)$ and defines $\\gamma_n v$ on $T_D$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "For any $[w]\\in T_D$, step 2.1 makes $L_v(w)$ the same for every representative. Applying step 1.1 to every representative $w+z$, $z\\in H^1_0(D)$, and taking the infimum of their $H^1$ norms gives $|\\langle\\gamma_n v,[w]\\rangle|\\le\\|v\\|_{H(\\operatorname{div};D)}\\|[w]\\|_{T_D}$. Hence $\\gamma_n v$ is bounded with the claimed norm.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-piola-divergence-and-flux-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-contravariant-piola-map",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat K,K\\subset\\mathbb R^d$ be nondegenerate open simplices and let $F_K:\\widehat K\\to K$ be the orientation-preserving affine bijection $F_K(\\widehat x)=A_K\\widehat x+b_K$, where $J_K:=\\det A_K>0$. For a measurable vector field $\\widehat v$ on $\\widehat K$, define its contravariant Piola push-forward by\n$$\n(\\mathcal P_K\\widehat v)(x):=J_K^{-1}A_K\\w",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Write $v_i(F_K(\\widehat x))=J_K^{-1}\\sum_j(A_K)_{ij}\\widehat v_j(\\widehat x)$. The chain rule [F2] for $F_K^{-1}$ gives $\\partial_{x_i}=\\sum_k(A_K^{-1})_{ki}\\partial_{\\widehat x_k}$; since $A_K$ is constant, summing the derivatives gives $(\\operatorname{div}_xv)\\circ F_K=J_K^{-1}\\sum_{i,k,j}(A_K^{-1})_{ki}(A_K)_{ij}\\partial_{\\widehat x_k}\\widehat v_j=J_K^{-1}\\sum_j\\partial_{\\widehat x_j}\\widehat v_j.$ The middle equality uses $A_K^{-1}A_K=I$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Choose oriented tangent vectors $\\widehat t_1,\\ldots,\\widehat t_{d-1}$ on $\\widehat F$. Under $F_K$ the tangent vectors are $A_K\\widehat t_i$; multilinearity of the determinant gives the oriented area-normal transformation $n_F ds=\\operatorname{cof}(A_K)\\widehat n_{\\widehat F}d\\widehat s$. Since $A_K$ is invertible, $\\operatorname{cof}(A_K)=J_KA_K^{-T}$. Therefore the Piola flux element satisfies $v\\cdot n_F\\,ds=(J_K^{-1}A_K\\widehat v)\\cdot(J_KA_K^{-T}\\widehat n_{\\widehat F})\\,d\\widehat s=\\widehat v\\cdot\\widehat n_{\\widehat F}\\,d\\widehat s.$ Integrating over the corresponding facets proves the flux identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a variable nonempty family is used locally; any inherited Countable Choice assumption is listed separately in axioms."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-h0div-div-zero-mean": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-h0div-space",
+          "source_section": "Definition",
+          "quote": "For an open set $D\\subseteq\\mathbb R^d$, let $T_D=H^1(D)/H^1_0(D)$ be the trace quotient of [[lem-na-hdiv-weak-normal-trace]], and let $\\gamma_n:H(\\operatorname{div};D)\\to T_D'$ be its weak normal trace. Define\n$$\nH_0(\\operatorname{div};D):=\\{v\\in H(\\operatorname{div};D):\\gamma_n v=0\\text{ in }T_D'\\}.\n$$\nThus zero normal trace means that the Green-duality fu",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-hdiv-weak-normal-trace",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the Sobolev-space interfaces below. Let $D\\subseteq\\mathbb R^d$ be open and $v\\in H(\\operatorname{div};D)$. Define the trace quotient\n$$T_D:=H^1(D)/H^1_0(D),\\qquad \\|[w]\\|_{T_D}:=\\inf_{z\\in H^1_0(D)}\\|w+z\\|_{H^1(D)}.$$\nThen the formula\n$$\n\\langle\\gamma_n v,[w]\\rangle:=\\int_D\\bigl(v\\cdot\\nabla w+(\\operatorname{div}v)w\\bigr)\\,dx\n$$\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-na-hdiv-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the published Sobolev interfaces cited below. Let $D\\subseteq\\mathbb R^d$ be open and use real scalars. $L^2(D;\\mathbb R^d)$ means the $d$-tuple of real $L^2$ equivalence classes, with norm $\\|v\\|_2^2=\\sum_{j=1}^d\\|v_j\\|_2^2$. The test space $C_c^\\infty(D;\\mathbb R)$ consists of real smooth functions compactly supported in $D$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Since $\\operatorname{div}v\\in L^2(D)$ by [F5], and $|D|<\\infty$ by [F3], [F4] shows $\\operatorname{div}v\\in L^1(D)$. The constant class $1$ is an admissible element of $H^1(D)$ by [F3] and the definition of the weak Sobolev norm, so its trace class $[1]$ lies in $T_D$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Apply [F2] with $w=1$. Since $\\nabla1=0$, Green duality gives $\\langle\\gamma_n v,[1]\\rangle=\\int_D\\operatorname{div}v\\,dx$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "By [F1], $\\gamma_n v=0$ as a functional on $T_D'$, so its value at $[1]$ is zero. The identity in step 2.1 therefore gives $\\int_D\\operatorname{div}v=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-h1-zero-boundary-is-zero-normal-hdiv": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-hdiv-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the published Sobolev interfaces cited below. Let $D\\subseteq\\mathbb R^d$ be open and use real scalars. $L^2(D;\\mathbb R^d)$ means the $d$-tuple of real $L^2$ equivalence classes, with norm $\\|v\\|_2^2=\\sum_{j=1}^d\\|v_j\\|_2^2$. The test space $C_c^\\infty(D;\\mathbb R)$ consists of real smooth functions compactly supported in $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-hdiv-weak-normal-trace",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the Sobolev-space interfaces below. Let $D\\subseteq\\mathbb R^d$ be open and $v\\in H(\\operatorname{div};D)$. Define the trace quotient\n$$T_D:=H^1(D)/H^1_0(D),\\qquad \\|[w]\\|_{T_D}:=\\inf_{z\\in H^1_0(D)}\\|w+z\\|_{H^1(D)}.$$\nThen the formula\n$$\n\\langle\\gamma_n v,[w]\\rangle:=\\int_D\\bigl(v\\cdot\\nabla w+(\\operatorname{div}v)w\\bigr)\\,dx\n$$\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-na-h0div-space",
+          "source_section": "Definition",
+          "quote": "For an open set $D\\subseteq\\mathbb R^d$, let $T_D=H^1(D)/H^1_0(D)$ be the trace quotient of [[lem-na-hdiv-weak-normal-trace]], and let $\\gamma_n:H(\\operatorname{div};D)\\to T_D'$ be its weak normal trace. Define\n$$\nH_0(\\operatorname{div};D):=\\{v\\in H(\\operatorname{div};D):\\gamma_n v=0\\text{ in }T_D'\\}.\n$$\nThus zero normal trace means that the Green-duality fu",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Since each component of $w$ and each first weak derivative is in $L^2(D)$ by [F1], the finite sum $\\operatorname{div}w=\\sum_{j=1}^d\\partial_jw_j$ lies in $L^2(D)$. Thus $w\\in H(\\operatorname{div};D)$ by its definition.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By [A1,F2], choose vector fields $w_n\\in C_c^\\infty(D;\\mathbb R^d)$ with $w_n\\to w$ in $H^1$. For arbitrary $\\phi\\in H^1(D)$, the weak-derivative identity for $\\phi$, tested against each compactly supported component $(w_n)_j$, gives $\\int_Dw_n\\cdot\\nabla\\phi+\\int_D(\\operatorname{div}w_n)\\phi=0.$ The H1 convergence implies $w_n\\to w$ in $L^2$ and $\\operatorname{div}w_n\\to\\operatorname{div}w$ in $L^2$. Specifically, [F5] bounds the difference of the Green pairings by $\\|w_n-w\\|_2\\|\\nabla\\phi\\|_2+\\|\\operatorname{div}w_n-\\operatorname{div}w\\|_2\\|\\phi\\|_2\\longrightarrow0.$ Thus $\\int_Dw\\cdot\\nabla\\phi+\\int_D(\\operatorname{div}w)\\phi=0$. This holds for every $\\phi\\in H^1(D)$; hence [F3] gives $\\gamma_nw=0$, and [F4] implies $w\\in H_0(\\operatorname{div};D)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-hdiv-is-hilbert-and-h0div-closed": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-no",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-hdiv-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the published Sobolev interfaces cited below. Let $D\\subseteq\\mathbb R^d$ be open and use real scalars. $L^2(D;\\mathbb R^d)$ means the $d$-tuple of real $L^2$ equivalence classes, with norm $\\|v\\|_2^2=\\sum_{j=1}^d\\|v_j\\|_2^2$. The test space $C_c^\\infty(D;\\mathbb R)$ consists of real smooth functions compactly supported in $D$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-hdiv-weak-normal-trace",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the Sobolev-space interfaces below. Let $D\\subseteq\\mathbb R^d$ be open and $v\\in H(\\operatorname{div};D)$. Define the trace quotient\n$$T_D:=H^1(D)/H^1_0(D),\\qquad \\|[w]\\|_{T_D}:=\\inf_{z\\in H^1_0(D)}\\|w+z\\|_{H^1(D)}.$$\nThen the formula\n$$\n\\langle\\gamma_n v,[w]\\rangle:=\\int_D\\bigl(v\\cdot\\nabla w+(\\operatorname{div}v)w\\bigr)\\,dx\n$$\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-closed-subspace-of-a-banach-space-is-banach",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a Banach space and let $W\\subseteq V$ be a closed linear subspace,\nequipped with the restricted norm. Then $W$ is a Banach space.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Let $(v_n)$ be Cauchy in the graph norm. By [F1] applied componentwise, $v_n\\to v$ in $L^2(D;\\mathbb R^d)$ and $\\operatorname{div}v_n\\to g$ in $L^2(D)$ for some $v,g$. For every $\\phi\\in C_c^\\infty(D;\\mathbb R)$, the distributional identity gives $\\int_D v_n\\cdot\\nabla\\phi=-\\int_D(\\operatorname{div}v_n)\\phi$. Holder's inequality [F4] passes both pairings to their $L^2$ limits, so $\\int_Dv\\cdot\\nabla\\phi=-\\int_Dg\\phi$. Hence $g=\\operatorname{div}v$ distributionally, $v\\in H(\\operatorname{div};D)$, and [F2] gives graph-norm convergence $v_n\\to v$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "algebra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The displayed graph inner product is the sum of the real $L^2$ inner products of $v$ and its divergence, so it induces exactly the graph norm. By step 1.1 that norm is complete; therefore H(div) is Hilbert.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "By [F3], if $v_n\\in H_0(\\operatorname{div};D)$ and $v_n\\to v$ in H(div), then $\\gamma_n v_n\\to\\gamma_n v$ in $T_D'$. Since each $\\gamma_n v_n=0$, the limit trace is zero, so $v\\in H_0(\\operatorname{div};D)$. This proves closedness; [F5] and step 2.1 show that the restricted inner-product space is complete.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-cell-average-l2-projection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The cell integral is linear, so the formula defines a linear piecewise-constant map. If $g$ is constant on each cell, its cell average is the same constant, so $P_0g=g$. For any piecewise constant $q_h$, $\\int_D(g-P_0g)q_h=\\sum_Kq_K\\left(\\int_Kg-|K|\\,|K|^{-1}\\int_Kg\\right)=0.$ Thus the range is orthogonal to the residual and $P_0$ is the orthogonal projection onto $\\mathbb P_0(\\mathcal T_h)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By [F2], $|K|\\,|(P_0g)|_K|^2=|K|^{-1}|\\int_Kg|^2\\le\\int_K|g|^2$. Summing over cells gives $\\|P_0g\\|_2^2\\le\\|g\\|_2^2$. Summing the defining averages multiplied by cell measures gives $\\int_DP_0g=\\sum_K\\int_Kg=\\int_Dg$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a variable nonempty family is used locally; any inherited Countable Choice assumption is listed separately in axioms."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "One-cell average",
+          "method": "exact scalar calculation",
+          "input": {
+            "cell_measure": 1,
+            "g_constant": 3
+          },
+          "calculation": "P0 g = integral_K 3 = 3, and integral_K(P0g)=integral_Kg=3.",
+          "expected": {
+            "projection_value": 3,
+            "norm_ratio": 1,
+            "integral_preserved": true
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-piola-preserves-rt-bdm-spaces": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-contravariant-piola-map",
+          "source_section": "Definition",
+          "quote": "Let $\\widehat K,K\\subset\\mathbb R^d$ be nondegenerate open simplices and let $F_K:\\widehat K\\to K$ be the orientation-preserving affine bijection $F_K(\\widehat x)=A_K\\widehat x+b_K$, where $J_K:=\\det A_K>0$. For a measurable vector field $\\widehat v$ on $\\widehat K$, define its contravariant Piola push-forward by\n$$\n(\\mathcal P_K\\widehat v)(x):=J_K^{-1}A_K\\w",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-simplicial-mesh-rt-bdm-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a bounded, connected polyhedral Lipschitz domain. A matching affine simplicial mesh and its shape regularity have the exact meaning of [[def-matching-affine-simplicial-meshes]]; additionally, call the mesh facet-connected when its dual graph (one vertex per cell and one edge per shar",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For BDM, if $\\widehat v\\in\\mathbb P_k(\\widehat K)^d$, then $\\widehat v\\circ F^{-1}$ is a vector polynomial of degree at most $k$ in $x$ because $F^{-1}$ is affine. Multiplication by the constant matrix $J^{-1}A$ preserves this degree, so [F1] maps BDM into BDM. Applying the same argument to the inverse affine map proves onto-ness.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Write an RT field as $\\widehat v(\\widehat x)=\\widehat p(\\widehat x)+\\widehat x\\widehat q(\\widehat x)$ with $\\widehat p\\in\\mathbb P_k^d$ and homogeneous $\\widehat q$ of degree $k$. The push-forward of the first term is in $\\mathbb P_k^d$. For the second term, use $\\widehat x=A^{-1}(x-b)$: its image is $J^{-1}(x-b)\\widehat q(A^{-1}(x-b))$. The scalar polynomial $\\widehat q(A^{-1}(x-b))$ has highest homogeneous part $q_k(x):=\\widehat q(A^{-1}x)$ of degree $k$, with remainder of degree at most $k-1$. Thus $(x-b)\\widehat q(A^{-1}(x-b))=xq_k(x)+p_k(x)$ for some vector polynomial $p_k$ of degree at most $k$: all terms from $x$ times the remainder and from $b$ times the full scalar polynomial have degree at most $k$. Therefore the image lies in $\\operatorname{RT}_k(K)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The inverse Piola map is the contravariant Piola map for the orientation-preserving affine bijection $F^{-1}$, up to the displayed inverse formula in [F1]. The same polynomial decomposition from step 1.2 applied to $F^{-1}$ maps $\\operatorname{RT}_k(K)$ into $\\operatorname{RT}_k(\\widehat K)$. Hence the forward inclusion is onto.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a variable nonempty family is used locally; any inherited Countable Choice assumption is listed separately in axioms."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: the forward construction or implication is proved."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: the reverse construction or implication is proved."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Affine RT0 polynomial image",
+          "method": "exact degree count",
+          "input": {
+            "dimension": 2,
+            "k": 0,
+            "affine": "F(x)=Ax+b"
+          },
+          "calculation": "A constant vector plus J^(-1)(x-b) times a translated constant remains in P0^2+xP0; the inverse affine map gives the reverse inclusion.",
+          "expected": {
+            "image": "RT0(K)",
+            "onto": true
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-na-rt0-p0-kernel-is-divergencefree": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-h0div-div-zero-mean",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open. If $v\\in H_0(\\operatorname{div};D)$, then $\\operatorname{div}v\\in L^1(D)$ and\n$$\\int_D\\operatorname{div}v\\,dx=0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-simplicial-mesh-rt-bdm-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a bounded, connected polyhedral Lipschitz domain. A matching affine simplicial mesh and its shape regularity have the exact meaning of [[def-matching-affine-simplicial-meshes]]; additionally, call the mesh facet-connected when its dual graph (one vertex per cell and one edge per shar",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-h0div-space",
+          "source_section": "Definition",
+          "quote": "For an open set $D\\subseteq\\mathbb R^d$, let $T_D=H^1(D)/H^1_0(D)$ be the trace quotient of [[lem-na-hdiv-weak-normal-trace]], and let $\\gamma_n:H(\\operatorname{div};D)\\to T_D'$ be its weak normal trace. Define\n$$\nH_0(\\operatorname{div};D):=\\{v\\in H(\\operatorname{div};D):\\gamma_n v=0\\text{ in }T_D'\\}.\n$$\nThus zero normal trace means that the Green-duality fu",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "By [F2], $\\operatorname{div}v_h$ is cellwise constant; by [F1], its global mean is zero. Thus $\\operatorname{div}v_h\\in Q_h$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "If $v_h\\in Z_h$, test its defining orthogonality with the admissible choice $q_h=\\operatorname{div}v_h$ from step 1.1. Then $0=b(v_h,q_h)=-\\|\\operatorname{div}v_h\\|_{L^2(D)}^2$, so its divergence vanishes in $L^2$. Conversely, if $\\operatorname{div}v_h=0$, the defining integral $b(v_h,q_h)$ is zero for every $q_h\\in Q_h$. This proves the equality, including the case $Q_h=\\{0\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the one-cell or zero-pressure-space branch is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: the forward construction or implication is proved."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: the reverse construction or implication is proved."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-simplex-h1-facet-trace-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K\\subset\\mathbb R^d$ be a nondegenerate open simplex. For every $u\\in H^1(K;\\mathbb R)$ and every $\\varepsilon>0$, there is a function $u_\\varepsilon$ smooth on an open neighborhood of $\\overline K$ with $\\|u_\\varepsilon-u\\|_{H^1(K)}<\\varepsilon$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-shape-regular-affine-simplex-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F_K(\\widehat x)=b_K+A_K\\widehat x$ map the fixed reference simplex\n$\\widehat S_d$ bijectively to a cell $K$ of a shape-regular family, and let\n$h_K$ be its diameter and $\\rho_K$ its inradius. There are constants\n$c,C>0$, depending only on $d$, the reference simplex, and the shape\nregularity bound, such that\n$$c h_K\\le s_{\\min}(A",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ ([[def-linear-map]],\n[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "It suffices first to prove the reference estimate for a smooth function. On the reference simplex choose a facet $\\widehat F$ opposite a vertex $a$, and parameterize inward segments by $x(y,t)=(1-t)y+ta$, $y\\in\\widehat F$, $0\\le t\\le\\tfrac12$. For fixed $y$ and $t$ in $[\\tfrac14,\\tfrac12]$, the fundamental theorem of calculus and Cauchy–Schwarz give $|u(y)|^2\\le2|u(x(y,t))|^2+2t\\int_0^t |(a-y)\\cdot\\nabla u(x(y,s))|^2,ds.$ Integrate in $y$ and $t$. The segment Jacobian is a fixed positive constant times $(1-t)^{d-1}$, bounded above and below on this interval; $|a-y|$ is bounded on the compact reference simplex. Changing variables in the first integral and using Fubini [F4] in the second bounds $\\|u\\|_{L^2(\\widehat F)}^2$ by $C_d(\\|u\\|_{L^2(\\widehat K)}^2+\\|\\nabla u\\|_{L^2(\\widehat K)}^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For a general affine simplex write $x=b+A\\widehat x$ and $\\widehat u=u\\circ F$. The affine change of variables [F5] gives $\\|\\widehat u\\|_{L^2(\\widehat K)}^2=|\\det A|^{-1}\\|u\\|_{L^2(K)}^2$ and $\\|\\nabla_{\\widehat x}\\widehat u\\|_2^2\\le |\\det A|^{-1}\\|A\\|^2\\|\\nabla_xu\\|_2^2$. Facet surface measure scales by the corresponding cofactor, with factor comparable to $h_K^{d-1}$; substituting [F2] into step 1.1 yields the asserted $h_K^{-1}$ and $h_K$ factors.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "For smooth-neighborhood approximants $u_n\\to u$ in $H^1(K)$ from [F1], step 2.1 applied to $u_n-u_m$ makes their facet restrictions Cauchy in $L^2(F)$. Define $\\gamma_Fu$ as this limit. If another such sequence is chosen, the same bound applied to the difference of the sequences shows the same limit, so the trace is well-defined. Passing to the limit in step 2.1 gives the displayed bound for $u$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-h1-interior-facet-traces-agree": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-simplex-h1-facet-trace-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For a nondegenerate affine simplex $K$ with diameter $h_K$ and shape bound $h_K/r_K\\le\\gamma$, and any facet $F$, every $u\\in H^1(K)$ has a well-defined trace $\\gamma_Fu\\in L^2(F)$ and\n$$\n\\|\\gamma_Fu\\|_{L^2(F)}^2\\le C(d,\\gamma)\\bigl(h_K^{-1}\\|u\\|_{L^2(K)}^2+h_K\\|\\nabla u\\|_{L^2(K)}^2\\bigr).\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi \\in C_c^\\infty(\\mathbb{R}^n)$ satisfy",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-l-one-approximate-identities-converge-in-l-p",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $u\\in W^{k,p}(\\Omega;\\mathbb K)$ with $k\\in\\mathbb N_0$,\n$1\\le p\\le\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$\\rho\\in C_c^\\infty(\\mathbb R^n)$ be nonnegative with\n$\\int_{\\mathbb R^n}\\rho=1$ and $\\operatorname{supp}\\rho\\subseteq\\overline B_1(0)$.\nFor $\\varepsi",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Fix a compact $(d-1)$-simplex $G$ contained in the relative interior of $F$. A sufficiently small open tube around $G$ has closure in $D$. Cover its closure by finitely many balls whose larger concentric balls still have closure in $D$; [F2] supplies a smooth cutoff equal to one on each smaller ball and supported in its larger ball. The function $\\chi=1-\\prod_i(1-\\chi_i)$ is compactly supported in $D$ and equals one near $G$. The zero extension $W$ of $\\chi w$ belongs to $H^1(\\mathbb R^d)$: for a test function $\\psi$, the weak product rule follows directly from $\\int_D\\chi w\\,\\partial_i\\psi=\\int_Dw\\,\\partial_i(\\chi\\psi)-\\int_Dw(\\partial_i\\chi)\\psi=-\\int_D(\\chi\\partial_iw+w\\partial_i\\chi)\\psi,$ and compact support of $\\chi$ removes any boundary term on extension.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Let $W_\\varepsilon=\\rho_\\varepsilon*W$ with the mollifier of [F2]. By [F3] applied to $W$ and its weak derivatives, and by derivative commutation on the tube where $\\chi=1$, $W_\\varepsilon\\to w$ in $H^1$ on every smaller tube around $G$. Each $W_\\varepsilon$ is smooth by [F4]. Cover $G$ by finitely many smaller simplices on each side whose shared facet portions lie in that tube. The trace bound [F1] on each smaller simplex shows the traces of $W_\\varepsilon$ converge in $L^2$ there to the local traces of $w$. By locality and uniqueness of the bounded trace extension, these are the restrictions of the elementwise traces defined on $K_+$ and $K_-$. The smooth $W_\\varepsilon$ has identical restrictions from both sides, so the two traces are equal; their limits are equal as well.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Countably many compact facet simplices $G$ exhaust the relative interior of $F$; its boundary has $(d-1)$-dimensional measure zero. Step 2.1 gives equality on each such patch, hence equality almost everywhere on all of $F$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-rt0-unisolvence-and-global-conformity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-simplicial-mesh-rt-bdm-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a bounded, connected polyhedral Lipschitz domain. A matching affine simplicial mesh and its shape regularity have the exact meaning of [[def-matching-affine-simplicial-meshes]]; additionally, call the mesh facet-connected when its dual graph (one vertex per cell and one edge per shar",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-piola-preserves-rt-bdm-spaces",
+          "source_section": "Statement",
+          "quote": "Let $F(\\widehat x)=A\\widehat x+b$ be an orientation-preserving affine bijection between nondegenerate $d$-simplices, with $J=\\det A>0$, and use the contravariant Piola map of [[def-na-contravariant-piola-map]]. For every $k\\ge0$, it maps $\\operatorname{RT}_k(\\widehat K)$ bijectively onto $\\operatorname{RT}_k(K)$, and for every $k\\ge1$ it maps $\\operatorname{",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-piola-divergence-and-flux-identities",
+          "source_section": "Statement",
+          "quote": "Let $F_K(\\widehat x)=A_K\\widehat x+b_K$ be as in [[def-na-contravariant-piola-map]], and let $\\widehat v\\in C^1(\\overline{\\widehat K};\\mathbb R^d)$. Set $v=\\mathcal P_K\\widehat v$. Then\n$$\n(\\operatorname{div}_x v)(F_K(\\widehat x))=J_K^{-1}\\operatorname{div}_{\\widehat x}\\widehat v(\\widehat x).\n$$\nFor each facet $\\widehat F$ mapped to $F$, with the correspondi",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-simplex-gauss-green-formula",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K$ be a nondegenerate affine $d$-simplex and let\n$G\\in C^1(\\overline K;\\mathbb R^d)$. If $n_{K,F}$ is the outward unit\nnormal on each facet $F$, then\n$$\\int_K\\operatorname{div}G\\,dx=\\sum_{F\\subset\\partial K}\\int_FG\\cdot n_{K,F}\\,dS.$$\nFor an orientation-preserving affine map $F_K(\\widehat x)=b+A\\widehat x$,\nthe oriented area ele",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-simplex-h1-facet-trace-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For a nondegenerate affine simplex $K$ with diameter $h_K$ and shape bound $h_K/r_K\\le\\gamma$, and any facet $F$, every $u\\in H^1(K)$ has a well-defined trace $\\gamma_Fu\\in L^2(F)$ and\n$$\n\\|\\gamma_Fu\\|_{L^2(F)}^2\\le C(d,\\gamma)\\bigl(h_K^{-1}\\|u\\|_{L^2(K)}^2+h_K\\|\\nabla u\\|_{L^2(K)}^2\\bigr).\n$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-h1-interior-facet-traces-agree",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D$ be a polyhedral open set with a conforming affine simplicial mesh, let $K_+$ and $K_-$ share an interior facet $F$, and let $w\\in H^1(D)$. The elementwise $L^2(F)$ traces of $w|_{K_+}$ and $w|_{K_-}$ agree almost everywhere on $F$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K\\subset\\mathbb R^d$ be a nondegenerate open simplex. For every $u\\in H^1(K;\\mathbb R)$ and every $\\varepsilon>0$, there is a function $u_\\varepsilon$ smooth on an open neighborhood of $\\overline K$ with $\\|u_\\varepsilon-u\\|_{H^1(K)}<\\varepsilon$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-na-hdiv-weak-normal-trace",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the Sobolev-space interfaces below. Let $D\\subseteq\\mathbb R^d$ be open and $v\\in H(\\operatorname{div};D)$. Define the trace quotient\n$$T_D:=H^1(D)/H^1_0(D),\\qquad \\|[w]\\|_{T_D}:=\\inf_{z\\in H^1_0(D)}\\|w+z\\|_{H^1(D)}.$$\nThen the formula\n$$\n\\langle\\gamma_n v,[w]\\rangle:=\\int_D\\bigl(v\\cdot\\nabla w+(\\operatorname{div}v)w\\bigr)\\,dx\n$$\n",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-na-h0div-space",
+          "source_section": "Definition",
+          "quote": "For an open set $D\\subseteq\\mathbb R^d$, let $T_D=H^1(D)/H^1_0(D)$ be the trace quotient of [[lem-na-hdiv-weak-normal-trace]], and let $\\gamma_n:H(\\operatorname{div};D)\\to T_D'$ be its weak normal trace. Define\n$$\nH_0(\\operatorname{div};D):=\\{v\\in H(\\operatorname{div};D):\\gamma_n v=0\\text{ in }T_D'\\}.\n$$\nThus zero normal trace means that the Green-duality fu",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-weak-derivatives-are-unique-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$,\n$\\alpha\\in\\mathbb N_0^n$, and $u,v,w\\in L^1_{\\mathrm{loc}}(\\Omega)$. If both\n$v$ and $w$ are weak $\\alpha$-derivatives of $u$, then\n$$v=w\\quad\\text{almost everywhere on }\\Omega.$$\nThus a weak derivative, when it exists, is unique as an almost-everywhere\nclass. No connectedness assump",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "On the reference simplex $\\widehat S_d=\\{x_i>0,\\sum_i x_i<1\\}$, each coordinate facet has outward normal $-e_i$ and area $1/(d-1)!$, while the top facet has outward normal $(1,\\ldots,1)/\\sqrt d$ and area $\\sqrt d/(d-1)!$. For $\\widehat v=a+cx$, the constant-vector facet fluxes sum to zero by [F3], and the flux sum of $cx$ is $c/(d-1)!=dc|\\widehat S_d|$. If all facet fluxes vanish then $c=0$; the coordinate-facet fluxes then force each $a_i=0$. The flux map is injective between spaces of dimension $d+1$, hence bijective.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For any physical simplex, [F2] transports the reference flux degrees of freedom bijectively, so the same unisolvence holds. On each facet, $(a+cx)\\cdot n$ is constant because $x\\cdot n$ is constant on its supporting hyperplane; equal integrated fluxes therefore give equal normal components.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Let $v$ be a piecewise RT0 field with matching shared-facet fluxes. For $\\phi\\in C_c^\\infty(D)$, apply [F3] to $\\phi v$ cellwise and sum: interior facet terms cancel by step 2.1 and the common value of $\\phi$, and boundary terms vanish because $\\phi$ is compactly supported. Thus $\\int_Dv\\cdot\\nabla\\phi=-\\sum_K\\int_K(\\operatorname{div}v)\\phi$. The cellwise divergence is constant and in $L^2$, so $v\\in H(\\operatorname{div};D)$ by definition.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "claim": "Conversely, let $v$ be a piecewise RT0 field in H(div), with global $L^2$ divergence $g$. For every test supported in one cell, the global distributional identity and cellwise Gauss–Green identify $g$ with that cell's polynomial divergence; uniqueness [F7] gives equality almost everywhere there. For arbitrary $\\phi\\in C_c^\\infty(D)$, summing cellwise Green formulas and comparing with the global distributional identity yields $\\sum_{F=K^+\\cap K^-\\,\\mathrm{interior}}\\int_F\\phi(v_{K^+}\\cdot n_{K^+}+v_{K^-}\\cdot n_{K^-})=0$. Each normal sum is constant on its facet. If one were nonzero, choose a nonnegative smooth test supported in a small ball around a relative-interior point of that facet, meeting no other facet, and positive on a subpatch; the sum would be a nonzero constant times a positive surface integral, a contradiction. Hence all interior fluxes match.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F7",
+            "step 2.1",
+            "construct",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "Suppose the interior fluxes match. For $w\\in H^1(D)$, approximate each restriction $w|_K$ in H1 by smooth-neighborhood functions using [F5]. The trace bound [F4] and volume convergence pass cellwise Gauss–Green to each restriction. Interior traces of $w$ agree by [F4], and the normal components of $v$ agree by step 2.1, so interior terms cancel. If $c_F$ denotes the constant outward normal component on a boundary facet $F$, the resulting identity is $\\int_D(v\\cdot\\nabla w+\\operatorname{div}v\\,w)=\\sum_{F\\subset\\partial D}c_F\\int_F\\gamma_Fw$. By [F6] this is the weak normal-trace functional; in particular, if every boundary flux is zero then $v\\in H_0(\\operatorname{div};D)$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "claim": "Conversely, if $v\\in H_0(\\operatorname{div};D)$, its zero trace and the identity in step 4.1 give $\\sum_{F\\subset\\partial D}c_F\\int_F\\gamma_Fw=0$ for every $w\\in H^1(D)$. For any selected boundary facet, choose a smooth function on $\\mathbb R^d$ supported in a small ball about a relative-interior point of that facet, positive on a subpatch, and meeting no other boundary facet; its restriction lies in $H^1(D)$. The sum then reduces to the selected $c_F$ times a positive surface integral, so $c_F=0$. Thus every boundary facet flux vanishes.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F6",
+            "step 3.2",
+            "step 4.1",
+            "construct",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [
+        {
+          "name": "Reference RT0 dimensions and flux kernel",
+          "method": "exact finite-dimensional calculation",
+          "input": {
+            "dimensions": [
+              2,
+              3
+            ]
+          },
+          "calculation": "For d=2,3, dim(RT0)=d+1 equals the number of facets; zero coordinate-facet fluxes force each constant component zero and total flux forces c=0.",
+          "expected": {
+            "dimensions": {
+              "2": 3,
+              "3": 4
+            },
+            "kernel_dimension": 0
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-na-darcy-mixed-wellposedness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-hdiv-is-hilbert-and-h0div-closed",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every open $D\\subseteq\\mathbb R^d$, the real space $H(\\operatorname{div};D)$ with the graph inner product\n$$\n(v,w)_{H(\\operatorname{div})}:=(v,w)_{L^2(D;\\mathbb R^d)}+(\\operatorname{div}v,\\operatorname{div}w)_{L^2(D)}\n$$\nis a Hilbert space. Its subspace $H_0(\\operatorname{div};D)$ of [[def-na-h0div-space]] is closed, hence is Hil",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-l2-zero-mean-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be a measurable set of finite measure, and set\n$$L^2_0(D):=\\left\\{q\\in L^2(D;\\mathbb R):\\int_Dq\\,dx=0\\right\\}.$$\nWith the real $L^2$ inner product $(q,r)=\\int_Dqr\\,dx$, $L^2_0(D)$ is a closed real Hilbert subspace of $L^2(D;\\mathbb R)$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-h0div-div-zero-mean",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open. If $v\\in H_0(\\operatorname{div};D)$, then $\\operatorname{div}v\\in L^1(D)$ and\n$$\\int_D\\operatorname{div}v\\,dx=0.$$",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "source_section": "Statement",
+          "quote": "Let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected and Lipschitz, with $d\\in\\{2,3\\}$. Under Countable Choice there is a bounded linear map $B_D:L^2_0(D)\\to H^1_0(D;\\mathbb R^d)$ such that\n$$\\operatorname{div}B_Dq=q,\\qquad \\|\\nabla B_Dq\\|_2\\le C_{\\rm div}(D)\\|q\\|_2.$$\nFor a chosen finite cover and tree decomposition from [[lem-na-lipschitz-domain-finit",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-homogeneous-dirichlet-poincare",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open, and suppose its first coordinate projection is contained in an interval $(a,b)$ of width $L=b-a$. For every real $v\\in H^1_0(D)$,\n$$\\|v\\|_{L^2(D)}\\le L\\|\\partial_1v\\|_{L^2(D)}\\le L\\|\\nabla v\\|_{L^2(D)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-na-babuska-brezzi-kernel-coercivity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V,Q$ be real Hilbert spaces, and let $a:V\\times V\\to\\mathbb R$ and $b:V\\times Q\\to\\mathbb R$ be bounded bilinear forms. If $Q=\\{0\\}$, the theorem reduces to Lax–Milgram on $V$ with $Z=V$ and $p=0$. Otherwise, if $Q\\ne\\{0\\}$, assume $V\\ne\\{0\\}$. Define $B:V\\to Q$ by $(Bv,q)_Q=b(v,q)$ and set $\\beta:=\\inf_{q\\ne0}\\sup_{v\\ne0}b(v,q)",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-na-h1-zero-boundary-is-zero-normal-hdiv",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $D\\subset\\mathbb R^d$ be open. Every real vector field $w\\in H^1_0(D;\\mathbb R^d)$ belongs to $H_0(\\operatorname{div};D)$, where the latter is the kernel of the weak normal trace. In particular, $\\operatorname{div}w\\in L^2(D)$ and its weak normal trace vanishes on the whole boundary trace quotient.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The form bounds follow from the permeability eigenvalue bounds: $|a(u,v)|\\le\\kappa_{\\min}^{-1}\\|u\\|_{L^2}\\|v\\|_{L^2}\\le\\kappa_{\\min}^{-1}\\|u\\|_V\\|v\\|_V$, and $|b(v,q)|\\le\\|\\operatorname{div}v\\|_2\\|q\\|_2\\le\\|v\\|_V\\|q\\|_Q$. Thus $M_a\\le\\kappa_{\\min}^{-1}$ and $M_b\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For $q\\in Q$, the right inverse [F3] gives $B_Dq\\in H^1_0(D;\\mathbb R^d)$, so [F7] places $B_Dq$ in $V$. Its graph norm is finite.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "Define $B:V\\to Q$ by $(Bv,q)_Q=b(v,q)$. Since $b(v,q)=-\\int_Dq\\operatorname{div}v$ and [F2] places the divergence in $Q$, $Bv=-\\operatorname{div}v$. Hence $Z=\\ker B=\\{v\\in V:\\operatorname{div}v=0\\}$; it is closed because divergence is continuous in the graph norm. For $v\\in Z$, the graph norm equals $\\|v\\|_2$, and $a(v,v)\\ge\\kappa_{\\max}^{-1}\\|v\\|_2^2=\\kappa_{\\max}^{-1}\\|v\\|_V^2$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For nonzero $q\\in Q$, choose $v=-B_Dq$. Then $b(v,q)=\\|q\\|_2^2$ by [F3]. The Poincare bound [F4] gives $\\|B_Dq\\|_V^2=\\|B_Dq\\|_2^2+\\|q\\|_2^2\\le(1+L^2C_{\\rm div}^2)\\|q\\|_2^2$. Therefore the inf-sup constant for $b$ on $V\\times Q$ is at least $(1+L^2C_{\\rm div}^2)^{-1/2}>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "If $Q=\\{0\\}$, [F2] makes $Z=V$, so the Countable Choice Lax–Milgram branch of [F5] applies using coercivity from step 1.3. If $Q\\ne\\{0\\}$, [F3] supplies a nonzero $q$; then $B_Dq\\in V$ by step 1.2 and is nonzero since its divergence is $q$. The positive inf-sup from step 2.1 and the nonzero Hilbert spaces [F1] allow the mixed branch of [F5]. In both cases boundedness from step 1.1, closedness and coercivity from step 1.3, and data functionals $F$ and $G(q)=-\\int_Dfq$ satisfy [F5]; [F6] makes $G$ bounded. The theorem gives the asserted unique pair, and the pressure mean-zero condition removes the additive constant.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-na-rt0-p0-local-mass-conservation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-neumann-darcy-mixed-problem",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be a bounded connected Lipschitz polyhedral domain, $d\\in\\{2,3\\}$, and set $V:=H_0(\\operatorname{div};D)$ and $Q:=L^2_0(D)$ with the real graph and integral inner products from [[def-na-hdiv-space]] and [[lem-na-l2-zero-mean-hilbert]]. A permeability tensor $K(x)$ is a measurable real symmetric $d\\times d$ m",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-simplicial-mesh-rt-bdm-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a bounded, connected polyhedral Lipschitz domain. A matching affine simplicial mesh and its shape regularity have the exact meaning of [[def-matching-affine-simplicial-meshes]]; additionally, call the mesh facet-connected when its dual graph (one vertex per cell and one edge per shar",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-h0div-div-zero-mean",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open. If $v\\in H_0(\\operatorname{div};D)$, then $\\operatorname{div}v\\in L^1(D)$ and\n$$\\int_D\\operatorname{div}v\\,dx=0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-cell-average-l2-projection",
+          "source_section": "Statement",
+          "quote": "For a finite conforming simplicial mesh of bounded $D$, define $P_0:L^2(D)\\to\\mathbb P_0(\\mathcal T_h)$ cellwise by\n$$ (P_0g)|_K=|K|^{-1}\\int_Kg. $$\nThen $P_0$ is linear, equals the identity on piecewise constants, is the $L^2$-orthogonal projection onto that space, satisfies $\\|P_0g\\|_2\\le\\|g\\|_2$, and preserves the integral $\\int_DP_0g=\\int_Dg$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-rt0-unisolvence-and-global-conformity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. On each $d$-simplex $K$, $\\operatorname{RT}_0(K)=\\{a+cx:a\\in\\mathbb R^d,c\\in\\mathbb R\\}$ has dimension $d+1$, and the $d+1$ integrated outward facet-normal fluxes determine its element uniquely. A piecewise RT0 field belongs to $H(\\operatorname{div};D)$ exactly when",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Let $P_0f$ be the cellwise average of $f$. By [F2] and [F3], both $\\operatorname{div}u_h$ and $P_0f$ are in $Q_h$. Put $g_h=\\operatorname{div}u_h-P_0f\\in Q_h$. For every $q_h\\in Q_h$, [F1] and the orthogonality property in [F3] give $\\int_Dg_hq_h=0$. Taking $q_h=g_h$ yields $\\|g_h\\|_2^2=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "On each cell the equality $\\operatorname{div}u_h=P_0f$ says the constant divergence equals the cell average of $f$; multiplying by $|K|$ gives the exact element balance. The field $u_h$ is globally RT0 and in H0(div), so [F4] supplies matching interior normal values and zero boundary normal values. The H(div) conformity result equates the flux with the weak normal trace, hence the asserted normal conditions hold.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the one-cell or zero-pressure-space branch is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-na-rt0-h1-interpolation-bounded-and-commuting": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-rt0-h1-interpolation",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice, a conforming affine simplicial mesh $\\mathcal T_h$ from [[def-na-simplicial-mesh-rt-bdm-spaces]], and $v\\in H^1(D;\\mathbb R^d)$. The facet trace inequality of [[lem-na-simplex-h1-facet-trace-bound]] makes each moment $m_F(v):=\\int_F\\gamma_Fv\\cdot n_F$ finite. On each cell $K$, use its outward normals to prescribe the $d+1$ facet mome",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-rt0-unisolvence-and-global-conformity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. On each $d$-simplex $K$, $\\operatorname{RT}_0(K)=\\{a+cx:a\\in\\mathbb R^d,c\\in\\mathbb R\\}$ has dimension $d+1$, and the $d+1$ integrated outward facet-normal fluxes determine its element uniquely. A piecewise RT0 field belongs to $H(\\operatorname{div};D)$ exactly when",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-simplex-h1-facet-trace-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For a nondegenerate affine simplex $K$ with diameter $h_K$ and shape bound $h_K/r_K\\le\\gamma$, and any facet $F$, every $u\\in H^1(K)$ has a well-defined trace $\\gamma_Fu\\in L^2(F)$ and\n$$\n\\|\\gamma_Fu\\|_{L^2(F)}^2\\le C(d,\\gamma)\\bigl(h_K^{-1}\\|u\\|_{L^2(K)}^2+h_K\\|\\nabla u\\|_{L^2(K)}^2\\bigr).\n$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-shape-regular-affine-simplex-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F_K(\\widehat x)=b_K+A_K\\widehat x$ map the fixed reference simplex\n$\\widehat S_d$ bijectively to a cell $K$ of a shape-regular family, and let\n$h_K$ be its diameter and $\\rho_K$ its inradius. There are constants\n$c,C>0$, depending only on $d$, the reference simplex, and the shape\nregularity bound, such that\n$$c h_K\\le s_{\\min}(A",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-affine-simplex-gauss-green-formula",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K$ be a nondegenerate affine $d$-simplex and let\n$G\\in C^1(\\overline K;\\mathbb R^d)$. If $n_{K,F}$ is the outward unit\nnormal on each facet $F$, then\n$$\\int_K\\operatorname{div}G\\,dx=\\sum_{F\\subset\\partial K}\\int_FG\\cdot n_{K,F}\\,dS.$$\nFor an orientation-preserving affine map $F_K(\\widehat x)=b+A\\widehat x$,\nthe oriented area ele",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-na-smooth-neighborhood-dense-in-h1-simplex",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K\\subset\\mathbb R^d$ be a nondegenerate open simplex. For every $u\\in H^1(K;\\mathbb R)$ and every $\\varepsilon>0$, there is a function $u_\\varepsilon$ smooth on an open neighborhood of $\\overline K$ with $\\|u_\\varepsilon-u\\|_{H^1(K)}<\\varepsilon$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-na-simplicial-mesh-rt-bdm-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a bounded, connected polyhedral Lipschitz domain. A matching affine simplicial mesh and its shape regularity have the exact meaning of [[def-matching-affine-simplicial-meshes]]; additionally, call the mesh facet-connected when its dual graph (one vertex per cell and one edge per shar",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Let $a_F$ be the vertex opposite facet $F$ in $K$ and define $\\phi_{K,F}(x)=(x-a_F)/(d|K|)$. On $F$, $(x-a_F)\\cdot n_K$ is the altitude $H_F$, so $\\int_F\\phi_{K,F}\\cdot n_K=H_F|F|/(d|K|)=1$ by the simplex pyramid identity $d|K|=H_F|F|$. On any other facet, $a_F$ and $x$ lie in its hyperplane, hence $\\phi_{K,F}\\cdot n_K=0$. Thus $I_Kv=\\sum_{F\\subset\\partial K}m_{K,F}(v)\\phi_{K,F}$, where $m_{K,F}$ is the outward moment. By [F2], [F7], and Cauchy–Schwarz, $|m_{K,F}(v)|\\le C(h_K^{(d-2)/2}\\|v\\|_K+h_K^{d/2}\\|\\nabla v\\|_K)$. Also [F3] gives $\\|\\phi_{K,F}\\|_K\\le C h_K|K|^{-1/2}\\le C h_K^{1-d/2}$. Multiplying and summing the fixed $d+1$ terms proves $\\|I_Kv\\|_K\\le C(\\|v\\|_K+h_K\\|\\nabla v\\|_K)$. Squaring and summing cells yields the global stability estimate since $h_K\\le h$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The divergence of $I_Kv\\in\\operatorname{RT}_0(K)$ is constant. For smooth-neighborhood approximants to $v|_K$ from [F5], Gauss–Green [F4] says the sum of their outward facet moments equals the integral of their divergence. The trace bound [F2] and H1 convergence let both sides pass to the limit, so $\\int_K\\operatorname{div}I_Kv=\\sum_{F\\subset\\partial K}m_{K,F}(v)=\\int_K\\operatorname{div}v$. Dividing by $|K|$ gives the stated cell average.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "If $v\\in H^1_0(D;\\mathbb R^d)$, choose compactly supported smooth vector fields converging to it in H1 by [F5]. Their boundary facet moments are zero; the trace bound [F2] passes this zero moment to $v$. Hence $I_hv$ has zero boundary facet flux, and [F1] gives membership in $H_0(\\operatorname{div};D)$; [F6] then gives $I_hv\\in V_h$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-na-rt0-p0-bounded-divergence-lift-and-infsup": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-na-bounded-lipschitz-domain-divergence-right-inverse",
+          "source_section": "Statement",
+          "quote": "Let $D\\subset\\mathbb R^d$ be nonempty, bounded, connected and Lipschitz, with $d\\in\\{2,3\\}$. Under Countable Choice there is a bounded linear map $B_D:L^2_0(D)\\to H^1_0(D;\\mathbb R^d)$ such that\n$$\\operatorname{div}B_Dq=q,\\qquad \\|\\nabla B_Dq\\|_2\\le C_{\\rm div}(D)\\|q\\|_2.$$\nFor a chosen finite cover and tree decomposition from [[lem-na-lipschitz-domain-finit",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-rt0-h1-interpolation-bounded-and-commuting",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, a shape-regular mesh with $h=\\max_Kh_K$, and $I_h$ from [[def-na-rt0-h1-interpolation]]. There is $C$ depending only on dimension and the shape bound such that every $v\\in H^1(D;\\mathbb R^d)$ satisfies\n$$\\|I_hv\\|_{L^2(D)}\\le C(\\|v\\|_{L^2(D)}+h\\|\\nabla v\\|_{L^2(D)}),\\qquad (\\operatorname{div}I_hv)|_K=|K|^{-1}\\int_K\\operatorname{div}v.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-homogeneous-dirichlet-poincare",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open, and suppose its first coordinate projection is contained in an interval $(a,b)$ of width $L=b-a$. For every real $v\\in H^1_0(D)$,\n$$\\|v\\|_{L^2(D)}\\le L\\|\\partial_1v\\|_{L^2(D)}\\le L\\|\\nabla v\\|_{L^2(D)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Since $q_h$ is cellwise constant, its cell average is itself. By [F1] and the commuting identity [F2], $\\operatorname{div}S_hq_h=P_0(\\operatorname{div}B_Dq_h)=q_h$. The input $B_Dq_h$ is in H1_0, so [F2] gives $S_hq_h\\in V_h$. Linearity follows from the linear divergence lift and interpolation.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The stability estimate [F2] and [F1], [F3] imply $\\|S_hq_h\\|_2\\le C_I C_{\\rm div}(L+h)\\|q_h\\|_2\\le C_R\\|q_h\\|_2,$ because $h\\le\\operatorname{diam}D$. The right-inverse identity from step 1.1 then yields $\\|S_hq_h\\|_{H(\\operatorname{div})}^2=\\|S_hq_h\\|_2^2+\\|q_h\\|_2^2\\le(1+C_R^2)\\|q_h\\|_2^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "For nonzero $q_h\\in Q_h$, take $v_h=-S_hq_h$. Then $b(v_h,q_h)=\\|q_h\\|_2^2$ and $\\|v_h\\|_{H(\\operatorname{div})}\\le\\sqrt{1+C_R^2}\\|q_h\\|_2$ by step 2.1. This admissible test gives the lower bound on the supremum for each $q_h$; taking the infimum over nonzero $q_h$ proves the stated $\\beta_h$ bound. The constants depend on $D$, its chosen continuous lift, and the shape bound, but not on $h$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: the one-cell or zero-pressure-space branch is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-na-rt0-bounded-commuting-projection": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-h0div-div-zero-mean",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open. If $v\\in H_0(\\operatorname{div};D)$, then $\\operatorname{div}v\\in L^1(D)$ and\n$$\\int_D\\operatorname{div}v\\,dx=0.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-cell-average-l2-projection",
+          "source_section": "Statement",
+          "quote": "For a finite conforming simplicial mesh of bounded $D$, define $P_0:L^2(D)\\to\\mathbb P_0(\\mathcal T_h)$ cellwise by\n$$ (P_0g)|_K=|K|^{-1}\\int_Kg. $$\nThen $P_0$ is linear, equals the identity on piecewise constants, is the $L^2$-orthogonal projection onto that space, satisfies $\\|P_0g\\|_2\\le\\|g\\|_2$, and preserves the integral $\\int_DP_0g=\\int_Dg$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-rt0-p0-bounded-divergence-lift-and-infsup",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, a bounded connected Lipschitz polyhedral $D$ in dimension two or three, and a shape-regular conforming mesh. Let $C_I$ be the mesh-independent constant in the RT0 interpolation estimate and let $L$ be a coordinate-slab width for $D$. If $B_D$ is the actual right inverse of [[thm-na-bounded-lipschitz-domain-divergence-right-inverse]],",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-no",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-rt0-p0-kernel-is-divergencefree",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. With $V_h=\\operatorname{RT}_0(\\mathcal T_h)\\cap H_0(\\operatorname{div};D)$, $Q_h=\\mathbb P_0(\\mathcal T_h)\\cap L^2_0(D)$ and $b(v_h,q_h)=-\\int_Dq_h\\operatorname{div}v_h$, the discrete kernel\n$$Z_h:=\\{v_h\\in V_h:b(v_h,q_h)=0\\text{ for every }q_h\\in Q_h\\}$$\nis exactly",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Define $q_h=P_0\\operatorname{div}v$, $r=v-S_hq_h$, and let $P_{Z_h}$ be the orthogonal projection from [F3]. Set $\\Pi_hv:=S_hq_h+P_{Z_h}r.$ Both terms are in $V_h$, and the second lies in $Z_h$. Thus [F2] and [F4] give $\\operatorname{div}\\Pi_hv=q_h=P_0\\operatorname{div}v$. The cell-average map, $S_h$, and the orthogonal projection are linear, so $\\Pi_h$ is linear.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "If $v_h\\in V_h$, then $\\operatorname{div}v_h$ is cellwise constant, so $P_0\\operatorname{div}v_h=\\operatorname{div}v_h$. Consequently $v_h-S_h(\\operatorname{div}v_h)\\in V_h$ has zero divergence and lies in $Z_h$ by [F4]. Its orthogonal projection is itself; substituting in the formula of step 1.1 gives $\\Pi_hv_h=v_h$. Hence $\\Pi_h$ is a projection.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Let $C_S=\\sqrt{1+C_R^2}$. Since $\\|q_h\\|_2\\le\\|\\operatorname{div}v\\|_2$, [F2] gives $\\|S_hq_h\\|_2\\le C_R\\|q_h\\|_2$, hence $\\|r\\|_2\\le\\|v\\|_2+C_R\\|q_h\\|_2$. Also $\\|P_{Z_h}r\\|_2\\le\\|r\\|_2$ and its divergence is zero. Therefore [F2] gives $\\|\\Pi_hv\\|_{H(\\operatorname{div})}\\le C_S\\|q_h\\|_2+\\|r\\|_2\\le C_S\\|q_h\\|_2+\\|v\\|_2+C_R\\|q_h\\|_2\\le(1+C_S+C_R)\\|v\\|_{H(\\operatorname{div})}.$ This bound is uniform in mesh size. The formula uses only the $L^2$ divergence, the discrete right inverse, and a finite-dimensional $L^2$ projection, so no facet trace of $v$ is used.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-na-rt0-p0-darcy-error-estimate": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-na-darcy-mixed-wellposedness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the hypotheses in [[def-na-neumann-darcy-mixed-problem]] on a bounded connected Lipschitz domain in dimension two or three. For every $F\\in V'$ and $f\\in Q$, there is a unique $(u,p)\\in V\\times Q$ solving\n$$a(u,v)+b(v,p)=F(v),\\qquad b(u,q)=-\\int_Dfq$$\nfor all $v\\in V,q\\in Q$. The graph norm on the flux and zero-mean pressure norm ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-rt0-p0-bounded-divergence-lift-and-infsup",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, a bounded connected Lipschitz polyhedral $D$ in dimension two or three, and a shape-regular conforming mesh. Let $C_I$ be the mesh-independent constant in the RT0 interpolation estimate and let $L$ be a coordinate-slab width for $D$. If $B_D$ is the actual right inverse of [[thm-na-bounded-lipschitz-domain-divergence-right-inverse]],",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-na-rt0-p0-kernel-is-divergencefree",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. With $V_h=\\operatorname{RT}_0(\\mathcal T_h)\\cap H_0(\\operatorname{div};D)$, $Q_h=\\mathbb P_0(\\mathcal T_h)\\cap L^2_0(D)$ and $b(v_h,q_h)=-\\int_Dq_h\\operatorname{div}v_h$, the discrete kernel\n$$Z_h:=\\{v_h\\in V_h:b(v_h,q_h)=0\\text{ for every }q_h\\in Q_h\\}$$\nis exactly",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-na-neumann-darcy-mixed-problem",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be a bounded connected Lipschitz polyhedral domain, $d\\in\\{2,3\\}$, and set $V:=H_0(\\operatorname{div};D)$ and $Q:=L^2_0(D)$ with the real graph and integral inner products from [[def-na-hdiv-space]] and [[lem-na-l2-zero-mean-hilbert]]. A permeability tensor $K(x)$ is a measurable real symmetric $d\\times d$ m",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-na-mixed-galerkin-quasioptimality",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V,Q$ be real Hilbert spaces and let $F\\in V\\prime$, $G\\in Q\\prime$ be bounded data. Suppose bounded bilinear forms $a,b$ and $(u,p)\\in V\\times Q$ satisfy\n$$a(u,v)+b(v,p)=F(v),\\qquad b(u,q)=G(q)$$\nfor all $v\\in V,q\\in Q$. Let $V_h\\subset V$, $Q_h\\subset Q$ be finite-dimensional conforming subspaces, with $Q_h\\ne\\{0\\}$ and discret",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-na-rt0-unisolvence-and-global-conformity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. On each $d$-simplex $K$, $\\operatorname{RT}_0(K)=\\{a+cx:a\\in\\mathbb R^d,c\\in\\mathbb R\\}$ has dimension $d+1$, and the $d+1$ integrated outward facet-normal fluxes determine its element uniquely. A piecewise RT0 field belongs to $H(\\operatorname{div};D)$ exactly when",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-na-simplicial-mesh-rt-bdm-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a bounded, connected polyhedral Lipschitz domain. A matching affine simplicial mesh and its shape regularity have the exact meaning of [[def-matching-affine-simplicial-meshes]]; additionally, call the mesh facet-connected when its dual graph (one vertex per cell and one edge per shar",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Suppose first there are at least two cells. Facet-connectedness implies there are at least two independent cell constants before imposing the one mean constraint, hence $Q_h\\ne\\{0\\}$. The stable lift [F2] gives a positive discrete inf-sup constant. If $z_h$ belongs to the discrete kernel, [F3] gives $\\operatorname{div}z_h=0$; hence its graph norm is its $L^2$ norm and the coefficient lower bound [F4] gives discrete coercivity with $\\alpha_*=\\kappa_{\\max}^{-1}$. The bounds in [F4] give $M_a=\\kappa_{\\min}^{-1}$ and $M_b=1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Apply [F5] to the conforming spaces $V_h\\subset V$, $Q_h\\subset Q$, continuous solution [F1], and the constants in step 1.1. This gives a unique Galerkin pair and the bound with $\\beta_h$. Since $\\beta_h\\ge\\widehat\\beta$, each occurrence of $\\beta_h^{-1}$ in the supplied formulas is no larger than $\\widehat\\beta^{-1}$; all coefficients and best-approximation errors are nonnegative, so replacing $\\beta_h^{-1}$ by $\\widehat\\beta^{-1}$ only enlarges $R_h,U_h,P_h$. The $L^2$ flux error estimate follows from $\\|e\\|_{K^{-1}}^2\\le\\kappa_{\\min}^{-1}\\|e\\|_2^2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "If the mesh has one cell, every facet is a physical-boundary facet. The boundary-zero facet moments and [F6] force $V_h=\\{0\\}$, while a constant with zero global mean is zero, so $Q_h=\\{0\\}$. The zero pair is the sole discrete pair. Finally $M_a/\\alpha_*=\\kappa_{\\max}/\\kappa_{\\min}$, making the permeability-contrast dependence explicit in the formulas rather than uniform in that ratio.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 2.1",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: the one-cell or zero-pressure-space branch is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-na-rt0-hybridization-equivalence-static-condensation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-hybridized-rt0-darcy-system",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-na-rt0-unisolvence-and-global-conformity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. On each $d$-simplex $K$, $\\operatorname{RT}_0(K)=\\{a+cx:a\\in\\mathbb R^d,c\\in\\mathbb R\\}$ has dimension $d+1$, and the $d+1$ integrated outward facet-normal fluxes determine its element uniquely. A piecewise RT0 field belongs to $H(\\operatorname{div};D)$ exactly when",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-rt0-p0-darcy-error-estimate",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, the Darcy data in [[def-na-neumann-darcy-mixed-problem]], and a facet-connected shape-regular mesh. For at least two cells, set $C_R$ as in the stable lift theorem and define\n$$\\widehat\\beta=(1+C_R^2)^{-1/2},\\quad M_a=\\kappa_{\\min}^{-1},\\quad M_b=1,\\quad\\alpha_*=\\kappa_{\\max}^{-1}.$$\nLet $(u,p)$ solve the continuous source-only Darcy",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-na-rt0-p0-local-mass-conservation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]], and let $(u_h,p_h)\\in V_h\\times Q_h$ solve the discrete Darcy equations with source $f\\in L^2_0(D)$. Then on every cell $K$,\n$$\\operatorname{div}u_h|_K=|K|^{-1}\\int_Kf,\\qquad\\int_K\\operatorname{div}u_h=\\int_Kf.$$\nThe normal flux is single-valued on every interior facet",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-na-rt0-unisolvence-and-global-conformity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. On each $d$-simplex $K$, $\\operatorname{RT}_0(K)=\\{a+cx:a\\in\\mathbb R^d,c\\in\\mathbb R\\}$ has dimension $d+1$, and the $d+1$ integrated outward facet-normal fluxes determine its element uniquely. A piecewise RT0 field belongs to $H(\\operatorname{div};D)$ exactly when",
+          "uses": [
+            "1.3",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-na-neumann-darcy-mixed-problem",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be a bounded connected Lipschitz polyhedral domain, $d\\in\\{2,3\\}$, and set $V:=H_0(\\operatorname{div};D)$ and $Q:=L^2_0(D)$ with the real graph and integral inner products from [[def-na-hdiv-space]] and [[lem-na-l2-zero-mean-hilbert]]. A permeability tensor $K(x)$ is a measurable real symmetric $d\\times d$ m",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-na-h0div-div-zero-mean",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be bounded and open. If $v\\in H_0(\\operatorname{div};D)$, then $\\operatorname{div}v\\in L^1(D)$ and\n$$\\int_D\\operatorname{div}v\\,dx=0.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Start with a hybrid solution. Its jump constraints and zero boundary flux, together with [F2], make $u_h$ a member of $V_h$. Summing the cell balances against any cellwise constant mean-zero $q_h$ gives the discrete second mixed equation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Conversely let $(u_h,p_h)$ be the unique conforming solution. Its cell balances hold by [F4]. Let $W_h$ be the broken flux space and define the jump map $J:W_h\\to\\mathbb R^{\\mathcal F_h^i}$ by $J_F(v)=\\int_F(v_{K^+}\\cdot n_{K^+}+v_{K^-}\\cdot n_{K^-})$. Its kernel consists of fields with matching interior fluxes, hence lies in $V_h$ by [F2]. Define $\\ell(v)=\\sum_K[a_K(u_h,v_K)-\\int_Kp_h\\operatorname{div}v_K]$. The conforming first equation gives $\\ell=0$ on $\\ker J$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "Suppose there are at least two cells. Every cell is incident to an interior facet because the dual graph is connected and has more than one vertex. The local space $W_K$ therefore contains a basis flux with nonzero total outward flux, so $D_K:W_K\\to\\mathbb R$, $D_Kv=\\int_K\\operatorname{div}v$, is onto. The homogeneous local saddle block has equations $a_K(u,v)-pD_Kv=0$ for all $v\\in W_K$ and $D_Ku=0$. Taking $v=u$ gives $a_K(u,u)=0$, so [F6] gives $u=0$; then surjectivity of $D_K$ forces $p=0$. The square finite-dimensional block is injective and hence invertible.",
+          "step": "1.3",
+          "inputs": [
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Let $c=|D|^{-1}\\sum_K|K|p_K$ and set $\\bar p_K=p_K-c$. Then $\\bar p\\in Q_h$. Sum the local first equations against a conforming test $v_h\\in V_h$. The facet-multiplier terms cancel by normal continuity; the constant pressure term contributes $-c\\int_D\\operatorname{div}v_h=0$ by [F7]. The remaining equation is $a(u_h,v_h)-\\int_D\\bar p\\operatorname{div}v_h=0$. Thus $(u_h,\\bar p)$ is the conforming mixed solution, which is unique by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "The map $J$ is onto: for each interior facet $F$, use [F5] on one adjacent cell with zero flux on its other facets and zero field on all other cells; its image is the coordinate vector for $F$. Since $\\ell$ vanishes on $\\ker J$, the formula $\\mu(Jv):=\\ell(v)$ is well-defined and linear on $\\mathbb R^{\\mathcal F_h^i}$. Write $\\mu(y)=\\sum_F\\mu_Fy_F$ and choose $\\lambda_F=-\\mu_F$. Then $\\ell(v)+\\sum_F\\lambda_FJ_F(v)=0$ for all broken $v$. Taking tests supported in one cell yields each local hybrid equation; balances were already shown, so $(u_h,p_h,\\lambda)$ is hybrid. This proves the correspondence before quotienting the pressure gauge.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Invert the local blocks to express each $(u_K,p_K)$ as an affine function of the multiplier vector $\\lambda$, with source-dependent right sides. Substitution into $J_F(u)=0$ gives a linear system solely on the finitely many interior-facet multipliers; this is static condensation. Existence and correspondence follow from steps 1.1–2.2. For its homogeneous nullspace, any multiplier vector yields a homogeneous hybrid solution, hence by step 2.1 a conforming solution with zero source. Uniqueness [F3] forces $u=0$ and $p_K=c$ for one global constant. The local equations then read $\\sum_{F\\subset\\partial K,\\ F\\mathrm{interior}}(\\lambda_F-c)\\int_Fv_K\\cdot n_K=0$ for all $v_K\\in W_K$, since Gauss–Green and the zero physical-boundary flux give $D_Kv_K=\\sum_{F\\mathrm{interior}}\\int_Fv_K\\cdot n_K$. Using the independent facet basis [F5] gives $\\lambda_F=c$ on every interior facet. Conversely a common constant vector is a null vector by the gauge identity in [F1]. Thus the kernel is exactly the constant gauge.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "For one cell there are no interior multipliers. All its facets are physical boundary facets, so zero boundary flux and local unisolvence [F2] force $W_K=\\{0\\}$; also $Q_h=\\{0\\}$. The hybrid cell pressure is arbitrary, but every two such values differ by the common gauge, so the quotient contains one solution, corresponding to the zero conforming pair.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1: the formula or estimate includes the zero input and the same displayed identities apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2: the one-cell or zero-pressure-space branch is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1: the forward construction or implication is proved."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1: the reverse construction or implication is proved."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-na-primal-p1-flux-is-not-locally-conservative": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-hdiv-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the published Sobolev interfaces cited below. Let $D\\subseteq\\mathbb R^d$ be open and use real scalars. $L^2(D;\\mathbb R^d)$ means the $d$-tuple of real $L^2$ equivalence classes, with norm $\\|v\\|_2^2=\\sum_{j=1}^d\\|v_j\\|_2^2$. The test space $C_c^\\infty(D;\\mathbb R)$ consists of real smooth functions compactly supported in $D$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Let $K_1=\\{0<y<x<1\\}$ and $K_2=\\{0<x<y<1\\}$. The affine formulas $p_1(x,y)=y$ and $p_2(x,y)=x$ agree on $x=y$ and attain the four stated vertex values, so they define a continuous piecewise-P1 function. Their negative gradients are $q_1=(0,-1)$ and $q_2=(-1,0)$, each with classical divergence zero. With fixed diagonal normal $n=(1,-1)/\\sqrt2$, $q_1\\cdot n=1/\\sqrt2$ and $q_2\\cdot n=-1/\\sqrt2$, so the jump magnitude is $\\sqrt2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For $\\phi\\in C_c^\\infty(D)$, integration by parts on the two triangles shows that the distributional divergence of the piecewise field is the nonzero line measure on the diagonal with density $q_1\\cdot n-q_2\\cdot n=\\sqrt2$ in this orientation (the distributional pairing is the negative of the summed outward boundary flux). To see it cannot be an $L^2$ function, choose a nonnegative smooth $\\psi$ supported in the open diagonal with positive line integral and a smooth transverse cutoff $\\eta$ with $\\eta(0)=1$; set $\\phi_\\varepsilon(y,t)=\\psi(y)\\eta(t/\\varepsilon)$ in tubular coordinates, extended by zero. The surface pairing is the fixed nonzero number $\\sqrt2\\int\\psi$, whereas $\\|\\phi_\\varepsilon\\|_{L^2(D)}=O(\\varepsilon^{1/2})$. If the distribution were represented by $g\\in L^2(D)$, [F2] would give $|\\int g\\phi_\\varepsilon|\\le\\|g\\|_2\\|\\phi_\\varepsilon\\|_2\\to0$, a contradiction. By [F1] the field is not in H(div).",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This is a fixed nonzero finite example, not a parameterized zero-data assertion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [
+        {
+          "name": "Diagonal normal jump",
+          "method": "exact dot products",
+          "input": {
+            "q1": [
+              0,
+              -1
+            ],
+            "q2": [
+              -1,
+              0
+            ],
+            "normal": [
+              0.7071067811865475,
+              -0.7071067811865475
+            ]
+          },
+          "calculation": "q1 dot n=1/sqrt(2), q2 dot n=-1/sqrt(2); the jump magnitude is sqrt(2), a nonzero surface divergence.",
+          "expected": {
+            "jump_magnitude": "sqrt(2)",
+            "in_hdiv": false
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-na-constant-flux-reference-triangle": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-simplicial-mesh-rt-bdm-spaces",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $d\\in\\{2,3\\}$ and let $D\\subset\\mathbb R^d$ be a bounded, connected polyhedral Lipschitz domain. A matching affine simplicial mesh and its shape regularity have the exact meaning of [[def-matching-affine-simplicial-meshes]]; additionally, call the mesh facet-connected when its dual graph (one vertex per cell and one edge per shar",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-na-rt0-unisolvence-and-global-conformity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. On each $d$-simplex $K$, $\\operatorname{RT}_0(K)=\\{a+cx:a\\in\\mathbb R^d,c\\in\\mathbb R\\}$ has dimension $d+1$, and the $d+1$ integrated outward facet-normal fluxes determine its element uniquely. A piecewise RT0 field belongs to $H(\\operatorname{div};D)$ exactly when",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-affine-simplex-gauss-green-formula",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K$ be a nondegenerate affine $d$-simplex and let\n$G\\in C^1(\\overline K;\\mathbb R^d)$. If $n_{K,F}$ is the outward unit\nnormal on each facet $F$, then\n$$\\int_K\\operatorname{div}G\\,dx=\\sum_{F\\subset\\partial K}\\int_FG\\cdot n_{K,F}\\,dS.$$\nFor an orientation-preserving affine map $F_K(\\widehat x)=b+A\\widehat x$,\nthe oriented area ele",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The gradient is $\\nabla p=(-1,0)$, so $q+\\nabla p=0$ pointwise. The three outward unit normals are $(-1,0)$ on $x=0$, $(0,-1)$ on $y=0$, and $(1,1)/\\sqrt2$ on the hypotenuse. Their facet lengths are $1,1,\\sqrt2$, respectively. Therefore the integrated fluxes are $-1$, $0$, and $(1/\\sqrt2)\\sqrt2=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Their sum is zero, equal to $\\int_K\\operatorname{div}q=0$ by [F2]. Since $q$ is in RT0 and the fluxes are its facet degrees of freedom by [F1], the data also uniquely determine this constant flux among RT0 fields.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This is a fixed nonzero finite example, not a parameterized zero-data assertion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the one-cell or zero-pressure-space branch is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [
+        {
+          "name": "Reference triangle facet fluxes",
+          "method": "exact normal and length calculation",
+          "input": {
+            "flux": [
+              1,
+              0
+            ],
+            "facets": [
+              "x=0",
+              "y=0",
+              "x+y=1"
+            ]
+          },
+          "calculation": "Outward flux integrals are -1, 0, and +1; their sum is zero.",
+          "expected": {
+            "fluxes": [
+              -1,
+              0,
+              1
+            ],
+            "sum": 0
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-na-checkerboard-permeability-contrast": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-neumann-darcy-mixed-problem",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $D\\subset\\mathbb R^d$ be a bounded connected Lipschitz polyhedral domain, $d\\in\\{2,3\\}$, and set $V:=H_0(\\operatorname{div};D)$ and $Q:=L^2_0(D)$ with the real graph and integral inner products from [[def-na-hdiv-space]] and [[lem-na-l2-zero-mean-hilbert]]. A permeability tensor $K(x)$ is a measurable real symmetric $d\\times d$ m",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-na-rt0-p0-darcy-error-estimate",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, the Darcy data in [[def-na-neumann-darcy-mixed-problem]], and a facet-connected shape-regular mesh. For at least two cells, set $C_R$ as in the stable lift theorem and define\n$$\\widehat\\beta=(1+C_R^2)^{-1/2},\\quad M_a=\\kappa_{\\min}^{-1},\\quad M_b=1,\\quad\\alpha_*=\\kappa_{\\max}^{-1}.$$\nLet $(u,p)$ solve the continuous source-only Darcy",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-rt0-p0-darcy-error-estimate",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, the Darcy data in [[def-na-neumann-darcy-mixed-problem]], and a facet-connected shape-regular mesh. For at least two cells, set $C_R$ as in the stable lift theorem and define\n$$\\widehat\\beta=(1+C_R^2)^{-1/2},\\quad M_a=\\kappa_{\\min}^{-1},\\quad M_b=1,\\quad\\alpha_*=\\kappa_{\\max}^{-1}.$$\nLet $(u,p)$ solve the continuous source-only Darcy",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The two positive scalar values are $1$ and $10^6$, so their minimum and maximum are exactly $\\kappa_{\\min}=1$ and $\\kappa_{\\max}=10^6$. Their reciprocals in $K^{-1}$ are $1$ and $10^{-6}$; substituting into the energy definition gives $\\|v\\|_{K^{-1}}^2=\\int_{D_1}|v|^2+10^{-6}\\int_{D_{10^6}}|v|^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The error theorem constants are $M_a=1$, $\\alpha_*=10^{-6}$, so $\\alpha_*^{-1}=10^6$ and $M_a/\\alpha_*=10^6$. The inf-sup lower bound $\\widehat\\beta=(1+C_R^2)^{-1/2}$ has no permeability parameter because the divergence lift is geometric; this example therefore records an explicit contrast dependence and supplies no contrast-independent error claim.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This is a fixed nonzero finite example, not a parameterized zero-data assertion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [
+        {
+          "name": "Checkerboard coefficient constants",
+          "method": "exact reciprocal and ratio",
+          "input": {
+            "permeabilities": [
+              1,
+              1000000
+            ]
+          },
+          "calculation": "kappa_min=1, kappa_max=10^6, K^-1 weights are 1 and 10^-6, and M_a/alpha_*=10^6.",
+          "expected": {
+            "kappa_min": 1,
+            "kappa_max": 1000000,
+            "inverse_weights": [
+              1,
+              0.000001
+            ],
+            "contrast_factor": 1000000
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-na-two-triangle-hybrid-static-condensation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-hybridized-rt0-darcy-system",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-rt0-hybridization-equivalence-static-condensation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the source-only Darcy system and hybrid equations of [[def-na-hybridized-rt0-darcy-system]] on a facet-connected mesh. The hybrid solutions modulo the common pressure shift $(p,\\lambda)\\mapsto(p+c,\\lambda+c)$ are in one-to-one correspondence with the conforming RT0/P0 Darcy solution. If the mesh has at least two cells, every local",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-simplex-gauss-green-formula",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K$ be a nondegenerate affine $d$-simplex and let\n$G\\in C^1(\\overline K;\\mathbb R^d)$. If $n_{K,F}$ is the outward unit\nnormal on each facet $F$, then\n$$\\int_K\\operatorname{div}G\\,dx=\\sum_{F\\subset\\partial K}\\int_FG\\cdot n_{K,F}\\,dS.$$\nFor an orientation-preserving affine map $F_K(\\widehat x)=b+A\\widehat x$,\nthe oriented area ele",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-rt0-unisolvence-and-global-conformity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the mesh conventions of [[def-na-simplicial-mesh-rt-bdm-spaces]]. On each $d$-simplex $K$, $\\operatorname{RT}_0(K)=\\{a+cx:a\\in\\mathbb R^d,c\\in\\mathbb R\\}$ has dimension $d+1$, and the $d+1$ integrated outward facet-normal fluxes determine its element uniquely. A piecewise RT0 field belongs to $H(\\operatorname{div};D)$ exactly when",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Each cell has area $1/2$. The field $\\theta_1=(x-1,y)$ has zero normal component on $x=1$ and $y=0$, and unit integrated outward flux on the diagonal from $K_1$; $\\theta_2=(x,y-1)$ has zero normal component on $x=0$ and $y=1$, and unit integrated outward flux on the diagonal from $K_2$. Their divergences are both $2$, so $\\int_{K_i}\\operatorname{div}\\theta_i=1$ by [F3]. The two zero-boundary conditions and the single free facet degree of freedom make each $\\theta_i$ a basis of its local space by [F4]. Direct integration gives $\\int_{K_1}|\\theta_1|^2=\\int_0^1\\int_0^x((x-1)^2+y^2)\\,dy\\,dx=\\tfrac16,$ and reflection symmetry gives $\\int_{K_2}|\\theta_2|^2=1/6$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Write $u_i=t_i\\theta_i$. The cell balances in [F1] give $t_1=\\int_{K_1}f=1/2$ and $t_2=\\int_{K_2}f=-1/2$. For a local test $v_i=s\\theta_i$, its integrated divergence is $s$ and its interior outward flux is $s$. The first hybrid equation is therefore $t_i s/6-p_i s+\\lambda s=0$ for every real $s$, equivalently $t_i/6-p_i+\\lambda=0$. The jump equation is $t_1+t_2=0$, which the balance values satisfy.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Solving the local equations gives $p_1=1/12+\\lambda$ and $p_2=-1/12+\\lambda$. Since the cells have equal area, their global mean is $\\lambda$; choose the mean-zero gauge $\\lambda=0$ to obtain the stated pressures. After local elimination the single skeleton equation is $t_1+t_2=0$, independent of $\\lambda$, so its one-dimensional nullspace consists exactly of common constant shifts. This is the constant gauge described in [F2].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty-domain or empty-mesh branch is not separately asserted; the item uses its stated open-domain, nondegenerate-cell, or finite-mesh hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This is a fixed nonzero finite example, not a parameterized zero-data assertion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-cell, unit-cardinality, scalar-exponent, or endpoint-count branch is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate simplices or nonpositive coefficient bounds are excluded by the item hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No independent interval-endpoint or limiting-endpoint claim occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1: the Countable Choice interface is explicitly declared and used through the cited supplier or sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no biconditional or two-way correspondence requiring a separate reverse direction."
+        }
+      ],
+      "axioms": [
+        "def-countable-choice"
+      ],
+      "finite_checks": [
+        {
+          "name": "Two-cell hybrid equations",
+          "method": "exact polynomial integrals and scalar elimination",
+          "input": {
+            "cell_areas": [
+              0.5,
+              0.5
+            ],
+            "source": [
+              1,
+              -1
+            ],
+            "unit_permeability": true
+          },
+          "calculation": "Integral |theta_i|^2=1/6 and integrated divergence of theta_i=1; t1=1/2,t2=-1/2, p1=1/12+lambda,p2=-1/12+lambda, and the only condensed equation is t1+t2=0.",
+          "expected": {
+            "t": [
+              0.5,
+              -0.5
+            ],
+            "pressure_at_lambda_zero": [
+              0.08333333333333333,
+              -0.08333333333333333
+            ],
+            "skeleton_nullity": 1
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

@@ -1,0 +1,265 @@
+[
+  {
+    "order": 2588,
+    "id": "sketched-least-squares-and-subspace-embeddings",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Sketched least squares and subspace embeddings",
+    "companion": "sketched-least-squares-and-subspace-embeddings-examples",
+    "requires": [
+      "randomized-low-rank-approximation",
+      "computed-fast-transforms-and-convolution"
+    ],
+    "items": [
+      {
+        "id": "alg-sketch-and-solve-least-squares",
+        "kind": "algorithm",
+        "title": "Rank-aware sketch-and-solve least squares",
+        "statement": "Apply a supplied sketch S to A and b, call the rank-thresholded SVD least-squares routine on (SA,Sb) at threshold zero with a finite sweep budget, and return a status, rank evidence, sketched and physical residuals, and a separate solve-error certificate field.",
+        "deps": [
+          "alg-rank-thresholded-least-squares-by-svd"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/alg-sketch-and-solve-least-squares.md"
+      },
+      {
+        "id": "def-oblivious-l2-subspace-embedding",
+        "kind": "definition",
+        "title": "Oblivious squared-norm subspace embeddings",
+        "statement": "Define fixed-subspace and oblivious (epsilon,delta) l2 embeddings using the squared-norm (1±epsilon) inequality, and distinguish the fixed-subspace probability from simultaneous preservation of every subspace.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/def-oblivious-l2-subspace-embedding.md"
+      },
+      {
+        "id": "def-sketch-qr-right-preconditioner",
+        "kind": "definition",
+        "title": "Right preconditioner from the reduced QR factor of a sketch",
+        "statement": "Given a reduced QR factorization SA=QR with nonsingular R, define the sketch-based right preconditioner P=R^(-1); state when it is defined and leave rank/factorisation failures explicit.",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/def-sketch-qr-right-preconditioner.md"
+      },
+      {
+        "id": "def-subspace-leverage-scores",
+        "kind": "definition",
+        "title": "Row leverage scores of a finite-dimensional subspace",
+        "statement": "Define the row leverage score ell_i(U)=||e_i*Q||_2^2 from an orthonormal basis Q of a d-dimensional subspace U of K^n; its basis independence and normalisation are proved by the listed justified-by supplier.",
+        "deps": [],
+        "justified_by": [
+          "lem-subspace-leverage-score-identities"
+        ],
+        "dependency_level": 0,
+        "source_path": "items/def-subspace-leverage-scores.md"
+      },
+      {
+        "id": "lem-hermitian-sphere-net-controls-operator-norm",
+        "kind": "lemma",
+        "title": "A sphere net controls a real or complex Hermitian operator norm",
+        "statement": "A 1/4-net of the unit sphere in K^d has size at most 9^d over R and 9^(2d) over C, and for Hermitian H its largest absolute quadratic form on the net is at least ||H||_2/2.",
+        "deps": [
+          "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-hermitian-sphere-net-controls-operator-norm.md"
+      },
+      {
+        "id": "lem-gaussian-squared-norm-tail",
+        "kind": "lemma",
+        "title": "Squared-norm concentration for real and normalized complex Gaussians",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $m\\ge1$, and let $g_1,\\ldots,g_m$ be independent standard real\nGaussian scalars or independent normalized complex Gaussian scalars, with\n$\\mathbb E|g_j|^2=1$. For $0<t<1$,\n$$\n\\Pr\\left\\{\\left|\\frac1m\\sum_{j=1}^m|g_j|^2-1\\right|\\ge t\\right\\}\\le2e^{-mt^2/8}.\n$$",
+        "deps": [
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-gaussian-squared-norm-tail.md"
+      },
+      {
+        "id": "lem-subspace-leverage-score-identities",
+        "kind": "lemma",
+        "title": "Leverage scores are basis-independent and sum to the dimension",
+        "statement": "For any orthonormal basis Q of U, ell_i=||e_i*Q||_2^2 is basis-independent, 0≤ell_i≤1, sum_i ell_i=dim U, and ell_i=0 exactly for a zero i-th row of Q.",
+        "deps": [
+          "def-subspace-leverage-scores"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-subspace-leverage-score-identities.md"
+      },
+      {
+        "id": "thm-sketch-and-solve-exact-minimizer",
+        "kind": "theorem",
+        "title": "A converged exact sketch-and-solve run returns a sketch minimizer",
+        "statement": "If the zero-threshold SVD solver called by sketch-and-solve converges in exact arithmetic, the returned vector is the unique minimum-norm minimizer of ||S(Ax-b)||_2.",
+        "deps": [
+          "alg-sketch-and-solve-least-squares",
+          "thm-svd-thresholded-least-squares-minimum-norm-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-sketch-and-solve-exact-minimizer.md"
+      },
+      {
+        "id": "thm-sketch-qr-right-preconditioner-conditioned-spectrum",
+        "kind": "theorem",
+        "title": "An embedded QR right preconditioner has controlled singular values",
+        "statement": "For full-column-rank A and an epsilon embedding of Ran(A), the reduced QR of SA has nonsingular R and P=R^(-1) gives singular values of AP between 1/sqrt(1+epsilon) and 1/sqrt(1-epsilon).",
+        "deps": [
+          "def-sketch-qr-right-preconditioner",
+          "def-oblivious-l2-subspace-embedding",
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-sketch-qr-right-preconditioner-conditioned-spectrum.md"
+      },
+      {
+        "id": "alg-leverage-score-row-sampling-sketch",
+        "kind": "algorithm",
+        "title": "With-replacement leverage-score row sampling and rescaling",
+        "statement": "For orthonormal Q, probabilities pi_i≥beta ell_i/d, and sample count m, draw m indices independently with replacement and place e_i*/sqrt(m pi_i) in the corresponding sketch rows; zero-probability rows necessarily have zero leverage.",
+        "deps": [
+          "def-subspace-leverage-scores",
+          "lem-subspace-leverage-score-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "source_path": "items/alg-leverage-score-row-sampling-sketch.md"
+      },
+      {
+        "id": "thm-gaussian-oblivious-l2-subspace-embedding",
+        "kind": "theorem",
+        "title": "Gaussian sketches embed a fixed subspace at the additive dimension rate",
+        "statement": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $1\\le d\\le n$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$U\\subseteq\\mathbb K^n$ be a fixed $d$-dimensional subspace. Let\n$G\\in\\mathbb K^{m\\times n}$ have iid standard real Gaussian entries when\n$\\mathbb K=\\mathbb R$, or iid normalized complex Gaussian entries with\n$\\mathbb E|g|^2=1$ when $\\mathbb K=\\mathbb C$. Put $S=G/\\sqrt m$.\nFor $0<\\varepsilon,\\delta<1$, if\n$$\nm\\ge192\\varepsilon^{-2}\\bigl(d+\\log(1/\\delta)\\bigr),\n$$\nthen with probability at least $1-\\delta$, $S$ is an\n$\\varepsilon$-subspace embedding for $U$. Thus this Gaussian distribution\nis an $(\\varepsilon,\\delta)$ oblivious $\\ell_2$ subspace embedding for\ndimension $d$.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+          "lem-gaussian-squared-norm-tail",
+          "lem-hermitian-sphere-net-controls-operator-norm",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-countable-choice",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-gaussian-oblivious-l2-subspace-embedding.md"
+      },
+      {
+        "id": "thm-sketch-and-solve-residual-guarantee",
+        "kind": "theorem",
+        "title": "Embedding span(A,b) gives the sketch-and-solve residual factor",
+        "statement": "If 0<epsilon<1 and S preserves squared norms within 1±epsilon on span(Ran(A),b), an exact sketch minimizer satisfies ||Axhat-b||_2^2≤((1+epsilon)/(1-epsilon)) min_x ||Ax-b||_2^2.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "alg-sketch-and-solve-least-squares",
+          "thm-sketch-and-solve-exact-minimizer",
+          "thm-least-squares-solutions-and-normal-equation"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-sketch-and-solve-residual-guarantee.md"
+      },
+      {
+        "id": "thm-leverage-score-row-sampling-subspace-embedding",
+        "kind": "theorem",
+        "title": "Leverage-score row sampling embeds the column space",
+        "statement": "For d≥1, beta∈(0,1], epsilon,delta∈(0,1), and pi_i≥beta ell_i/d, with replacement leverage sampling embeds Ran(Q) with probability at least 1-delta if m≥8 d log(2d/delta)/(beta epsilon^2); for delta≤1/2, m≥16 d log(d/delta)/(beta epsilon^2) suffices. The local proof derives the leverage-sample variance and applies the published matrix-Bernstein supplier.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "def-subspace-leverage-scores",
+          "lem-subspace-leverage-score-identities",
+          "alg-leverage-score-row-sampling-sketch",
+          "lem-bounded-independent-matrix-bernstein-via-trace-exponential",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-leverage-score-row-sampling-subspace-embedding.md"
+      }
+    ]
+  },
+  {
+    "order": 2589,
+    "id": "sketched-least-squares-and-subspace-embeddings-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Sketched least squares and subspace embeddings — Examples",
+    "companion": "sketched-least-squares-and-subspace-embeddings",
+    "requires": [
+      "sketched-least-squares-and-subspace-embeddings"
+    ],
+    "items": [
+      {
+        "id": "cex-embedding-the-column-space-alone-does-not-control-ls-residual",
+        "kind": "counterexample",
+        "title": "Embedding Ran(A) alone does not control the sketch-and-solve residual",
+        "statement": "Refute the claim that embedding Ran(A) alone yields the ((1+epsilon)/(1-epsilon)) residual-square factor by the exact 2-dimensional example A=e_1, b=e_1+e_2, S=[1,1], epsilon=1/4.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "alg-sketch-and-solve-least-squares"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/cex-embedding-the-column-space-alone-does-not-control-ls-residual.md"
+      },
+      {
+        "id": "ex-leverage-zero-rows-and-high-coherence",
+        "kind": "example",
+        "title": "Zero leverage rows and a maximally coherent one-dimensional design",
+        "statement": "For Q=e_1 in R^3, compute leverage scores (1,0,0), coherence 3, exact leverage sampling, and the failure of one uniform rescaled row sample.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "def-subspace-leverage-scores",
+          "lem-subspace-leverage-score-identities",
+          "alg-leverage-score-row-sampling-sketch"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "source_path": "items/ex-leverage-zero-rows-and-high-coherence.md"
+      },
+      {
+        "id": "ex-overdetermined-regression-exact-subspace-sketch",
+        "kind": "example",
+        "title": "An exact two-row sketch for a three-row regression problem",
+        "statement": "For A=(1,1,1)^T, b=e_1, and S with rows (1,1,1)/sqrt(3) and (2,-1,-1)/sqrt(6), compute the exact original and sketched least-squares minimizer x=1/3 and residual-square 2/3.",
+        "deps": [
+          "def-oblivious-l2-subspace-embedding",
+          "alg-sketch-and-solve-least-squares",
+          "thm-sketch-and-solve-exact-minimizer",
+          "thm-sketch-and-solve-residual-guarantee"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "source_path": "items/ex-overdetermined-regression-exact-subspace-sketch.md"
+      }
+    ]
+  }
+]

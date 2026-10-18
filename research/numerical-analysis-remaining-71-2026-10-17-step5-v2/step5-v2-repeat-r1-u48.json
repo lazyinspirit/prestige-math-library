@@ -1,0 +1,90 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "48",
+  "input_sha256": "e9e862a5d9fc0f5beca3860e9017960e4487dcd5836978457e73185a3b4d2016",
+  "decisions": [
+    {
+      "id": "lem-half-order-kernel-translation-modulus-in-l1",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "56a2f0da862daa29376902b4413f734308a1d0edf8bcd7493b9626c28cdf155d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 1.1 leaves the cutoff index range unstated: d/(4m) is undefined at m=0. This is a nonfatal indexing omission, since the same explicit construction works for m>=1 and reindexing changes neither the Cauchy tail estimate nor its limit. Replaced it by d/(4(m+1)) for integers m>=0; for d=|x-x′|>0 every cutoff is positive, at most d/4<d/3, and decreases to zero. No additional hypothesis or supplier is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-half-order-kernel-translation-modulus-in-l1",
+      "disposition": "repaired",
+      "post_sha256": "50c37666f87b41713492174665da9352cb13167a255a7a72f113663291ecd795",
+      "review_context_sha256": "d1a32632fda3235519328113e1ae0c753bfafd869bc27e293b77c19b385f1a65",
+      "reason": "Reviewed the split improper integral, including x=x′ and one-sided boundary singularities. On a truncated tail at c, the other kernel is bounded by (2d/3)^(-1/2), while integrating r^(-1/2) gives a bound 2sqrt(rho); the finite sum of these vanishing bounds makes the truncated integrals Cauchy and compares arbitrary cutoffs to the explicit sequence. Cauchy completeness supplies the real limit without choice. For the continuous capped kernel the removed mass on [-1,1] is 2sqrt(eta); two translated tails and uniform continuity give T<=4sqrt(eta)+omega_eta(d). The nonempty bounded supremum therefore exists and tends to zero. Corrected only the cutoff formula/index domain in the item. Synchronized its contract step 1.1 and cutoff boundary row, and synchronized the pre-existing F8 compactness clause in contract step 2.1. The Statement, dependencies, choice requirements, and owning page interface are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-half-order-kernel-translation-modulus-in-l1",
+      "severity": "nonfatal",
+      "location": "proof-step",
+      "step": "1.1",
+      "disposition": "fixed",
+      "reason": "Step 1.1 leaves the cutoff index range unstated: d/(4m) is undefined at m=0. This is a nonfatal indexing omission, since the same explicit construction works for m>=1 and reindexing changes neither the Cauchy tail estimate nor its limit. Replaced it by d/(4(m+1)) for integers m>=0; for d=|x-x′|>0 every cutoff is positive, at most d/4<d/3, and decreases to zero. No additional hypothesis or supplier is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_files": [
+      "items/lem-half-order-kernel-translation-modulus-in-l1.md",
+      "research/numerical-analysis-remaining-71-2026-10-17-batch-48.proof-contracts.json"
+    ],
+    "dependency_evidence": {
+      "F1": "Exact Definition excerpt in the current owning proof contract specifies identity-integrator Riemann sums and zero-length intervals.",
+      "F2": "Current thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators Statement, clause 2, applied on positive truncated intervals to primitive 2sqrt(r).",
+      "F3": "Current thm-reals-cauchy-complete Statement and full proof; its input is itself indexed k>=1, so a positive-index reading of the former formula already gives the same Cauchy argument.",
+      "F4_F5": "Current Statements of thm-continuous-implies-integrable, thm-additivity-over-subintervals, and thm-monotonicity-of-the-integral apply to the closed nonsingular truncated intervals.",
+      "F6_F8": "Current Statements of thm-heine-cantor-metric and thm-heine-borel-rn give choice-free uniform continuity of the continuous cap on compact [-1,1].",
+      "F7": "Current cor-cauchy-reals-lub-complete Statement supplies the finite nonempty bounded suprema."
+    },
+    "interface_comparison": "The only edited item text is within proof step 1.1; the original Statement and every Definition section remain byte-for-byte unchanged. No direct-consumer propagation is triggered.",
+    "published_ledger": "No potentially defective published supplier or consumer was identified in this focused review; no published-ledger update is proposed.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-48.proof-contracts.json --strict --items lem-half-order-kernel-translation-modulus-in-l1 --json",
+        "exit_code": 0,
+        "result": "ok:true; one scoped item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-half-order-kernel-translation-modulus-in-l1.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 checked proof, 0 failures; pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-half-order-kernel-translation-modulus-in-l1.md --json",
+        "exit_code": 0,
+        "result": "1 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-half-order-kernel-translation-modulus-in-l1.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects."
+      }
+    ],
+    "operational_note": "A rendercheck --help probe unexpectedly selected the full corpus because that tool lacks a help option; it was interrupted with exit 130. It supplies no validation evidence. The explicit one-item rendercheck above passed. Failed CLI-discovery probes supplied no check evidence.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary current certification/judgment routing; no independent review of this repair is claimed."
+  }
+}

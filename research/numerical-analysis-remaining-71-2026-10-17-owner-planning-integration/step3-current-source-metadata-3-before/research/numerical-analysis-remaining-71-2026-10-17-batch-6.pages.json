@@ -1,0 +1,616 @@
+[
+  {
+    "order": 2566,
+    "id": "wavelet-transforms-and-nonlinear-approximation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Wavelet transforms and nonlinear approximation",
+    "companion": "wavelet-transforms-and-nonlinear-approximation-examples",
+    "requires": [
+      "computed-fast-transforms-and-convolution",
+      "polynomial-approximation-and-chebyshev-interpolation"
+    ],
+    "items": [
+      {
+        "id": "def-na-finite-periodic-haar-transform",
+        "deps": [
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Finite periodic Haar transform",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handouts 3 and 7",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/9ae8fd2b4313aea9cb1d828e3d431301_Handout3.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "Let $J\\ge1$, $N=2^J$, and $x\\in\\mathbb R^N$, with the Euclidean inner product and norm of [[def-euclidean-inner-product]]. Put $a^{(0)}=x$. For $r=1,\\ldots,J$ and $0\\le k<2^{J-r}$ define\n$$a^{(r)}_k=\\frac{a^{(r-1)}_{2k}+a^{(r-1)}_{2k+1}}{\\sqrt2},\\qquad d^{(r)}_k=\\frac{a^{(r-1)}_{2k}-a^{(r-1)}_{2k+1}}{\\sqrt2}.$$\nThe finite periodic Haar transform $T_Hx$ is the length-$N$ vector obtained by listing $a^{(J)}_0$, then $d^{(J)}_0$, then the entries of $d^{(J-1)}$, and continuing through $d^{(1)}$. The input is already of even dyadic length; this convention uses no padding and no endpoint extension."
+      },
+      {
+        "id": "def-na-periodic-orthogonal-compact-filter-dwt",
+        "deps": [
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Periodic finite orthogonal compact-filter wavelet transform",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handouts 3 and 7",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/f95f7897eb0d62fc82ab88c3ae3937e6_Handout7.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "Let $L\\ge1$, let $N$ be even with $N\\ge2L$, and let $h=(h_0,\\ldots,h_{L-1})\\in\\mathbb R^L$. Set $g_j=(-1)^j h_{L-1-j}$ for $0\\le j<L$, and set $h_j=g_j=0$ for all other integers $j$. The pair $(h,g)$ is an admissible orthogonal filter pair when\n$$\\sum_jh_j=\\sqrt2,\\quad \\sum_jg_j=0,\\quad \\sum_jh_jh_{j-2r}=\\delta_{r0},\\quad \\sum_jg_jg_{j-2r}=\\delta_{r0},\\quad \\sum_jh_jg_{j-2r}=0\\quad(r\\in\\mathbb Z).$$\nHere $\\delta_{r0}=1$ for $r=0$ and $0$ for $r\\ne0$.\nFor $x\\in\\mathbb R^N$, define\n$$a_k=\\sum_{j=0}^{L-1}h_jx_{(2k+j)\\bmod N},\\qquad d_k=\\sum_{j=0}^{L-1}g_jx_{(2k+j)\\bmod N}\\qquad(0\\le k<N/2).$$\nThis is the one-level periodic analysis map. It has no padding: the indices are reduced modulo $N$. Its matrix $W$ has the $N/2$ rows for $a_k$ followed by the $N/2$ rows for $d_k$. Synthesis is, by definition, multiplication by $W^T$. A multilevel transform repeats this one-level rule on the approximation vector while its current length $M$ is even and $M\\ge2L$, then stops; the boundary convention at every level is periodic modulo that level's current length."
+      },
+      {
+        "id": "def-na-daubechies-d4-filter",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Explicit four-tap Daubechies filter and its high-pass partner",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 8",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/29303d64110d5953075d8f3781ce61fe_Handout8.pdf"
+            },
+            {
+              "title": "Jelena Kovačević, Vivek K. Goyal, and Martin Vetterli, Fourier and Wavelet Signal Processing",
+              "url": "https://www.fourierandwavelets.org/FWSP_a3.2_2013.pdf"
+            }
+          ]
+        },
+        "statement": "Set\n$$h=\\frac1{4\\sqrt2}(1+\\sqrt3,\\ 3+\\sqrt3,\\ 3-\\sqrt3,\\ 1-\\sqrt3),\\qquad g_j=(-1)^jh_{3-j}\\quad(0\\le j\\le3).$$\nBoth filters are zero outside the indices $0,1,2,3$. The high-pass filter is therefore $g=(h_3,-h_2,h_1,-h_0)$. The exact admissibility and two-moment properties of this pair are the statement of [[thm-na-daubechies-d4-filter-qmf-and-two-moments]]."
+      },
+      {
+        "id": "def-na-smooth-derivative-bound-class",
+        "deps": [
+          "def-continuity-and-derivative-on-real-interval"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Smooth functions on the unit interval with bounded derivative data",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 13",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/99231bc0f90b87508c01a2e7f5a960e7_Handout13.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "Let $q\\ge1$ be an integer and let $U\\subseteq\\mathbb R$ be an open interval containing $[0,1]$. A real function $f:U\\to\\mathbb R$ belongs to the smooth derivative-bound class $\\mathcal S^q$ when it is $C^q$ on $U$ in the sense of [[def-continuity-and-derivative-on-real-interval]]. For $0\\le r\\le q$ define $M_r(f)=\\sup_{0\\le t\\le1}|f^{(r)}(t)|$, with $f^{(0)}=f$. These derivative bounds are finite because the derivatives are continuous on the compact interval. They are bounds on the restriction to $[0,1]$, not a norm on arbitrary extensions to $U$; no claim that this class exhausts $W^{q,\\infty}(0,1)$ is part of the definition."
+      },
+      {
+        "id": "def-na-haar-cell-average-projection",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Haar cell-average projection on the unit interval",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 3",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/9ae8fd2b4313aea9cb1d828e3d431301_Handout3.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "For an integer $J\\ge0$, put $h=2^{-J}$ and $I_{J,k}=[kh,(k+1)h]$ for $0\\le k<2^J$. For an integrable real function $f$ on $[0,1]$, its Haar cell-average projection is the piecewise constant function\n$$P_Jf(x)=\\frac1h\\int_{I_{J,k}}f(t)\\,dt\\quad\\text{when }x\\in[kh,(k+1)h).$$\nThe value at $x=1$ is defined by the average on the last cell. The half-open intervals give an unambiguous partition for point values; changing endpoint values does not change the integrals or the $L^2$ error."
+      },
+      {
+        "id": "def-na-hard-soft-coefficient-thresholding",
+        "deps": [
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Hard m-term retention and soft thresholding of finite coefficients",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            },
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 15",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/d22d96dea13c0396474b1d87439fc4d0_Handout15.pdf"
+            }
+          ]
+        },
+        "statement": "Let $c\\in\\mathbb R^N$. For $m\\in\\{0,\\ldots,N\\}$, choose any set $S_m$ of $m$ indices whose absolute coefficients are among the $m$ largest, resolving ties arbitrarily. The hard m-term retention $H_m(c)$ has coordinate $c_i$ for $i\\in S_m$ and $0$ otherwise. For a threshold $\\lambda\\ge0$, the soft-threshold vector $S_\\lambda(c)$ has coordinates\n$$S_\\lambda(c)_i=\\operatorname{sign}(c_i)(|c_i|-\\lambda)_+,\\qquad (t)_+=\\max(t,0),$$\nwith $\\operatorname{sign}(0)=0$. Soft thresholding shrinks retained coefficients; it is not defined by a prescribed number of retained terms."
+      },
+      {
+        "id": "def-na-wavelet-coefficient-besov-quasinorm",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Finite wavelet-coefficient Besov quasi-norm on a dyadic multilevel transform",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9, §9.2.3",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            },
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 13",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/99231bc0f90b87508c01a2e7f5a960e7_Handout13.pdf"
+            }
+          ]
+        },
+        "statement": "For an integer $J\\ge3$, a coarse block $a=(a_0,a_1,a_2,a_3)$, a real $s>0$, and $p>0$, define the finite wavelet-coefficient Besov quasi-norm\n$$\\|(a,d)\\|_{b^s_{p,p}(J)}^p=\\sum_{\\nu=0}^3|a_\\nu|^p+\\sum_{j=2}^{J-1}2^{jp(s+1/2-1/p)}\\sum_{k=0}^{2^j-1}|d_{j,k}|^p.$$\nThis is the wavelet coefficient convention, with one coarse block and detail blocks indexed by their number $2^j$ of coefficients. At the critical relation $p=(s+1/2)^{-1}$, every scale weight equals $1$, so the quasi-norm is exactly the $\\ell^p$ quasi-norm of the full coefficient vector. This finite coefficient definition does not assert equivalence with an intrinsic function-space Besov norm."
+      },
+      {
+        "id": "def-na-finite-riesz-synthesis-matrix",
+        "deps": [
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Finite Riesz synthesis matrix and biorthogonal coefficient coordinates",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            },
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 11",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/1bb693efeb7d2ea97f12ae72812f7522_Handout11.pdf"
+            }
+          ]
+        },
+        "statement": "Let $V\\in\\mathbb R^{N\\times N}$ be invertible and suppose there are constants $0<A\\le B<\\infty$ such that\n$$A\\|z\\|_2^2\\le\\|Vz\\|_2^2\\le B\\|z\\|_2^2\\quad\\text{for every }z\\in\\mathbb R^N.$$\nCall $V$ a finite Riesz synthesis matrix and call $A,B$ Riesz bounds. For a signal $x\\in\\mathbb R^N$, the analysis coefficients are $c=V^{-1}x$ and synthesis is $x=Vc$. The inverse analysis matrix and synthesis matrix form a biorthogonal coordinate pair; unless $A=B=1$, coefficient truncation errors need not equal Euclidean tail energy."
+      },
+      {
+        "id": "thm-na-finite-periodic-haar-transform-orthogonality",
+        "deps": [
+          "def-na-finite-periodic-haar-transform",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "kind": "theorem",
+        "title": "Orthogonality, inverse, and Parseval identity for the finite periodic Haar transform",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handouts 3 and 7",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/9ae8fd2b4313aea9cb1d828e3d431301_Handout3.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "For every $J\\ge1$ and $x\\in\\mathbb R^{2^J}$, the transform $T_H$ of [[def-na-finite-periodic-haar-transform]] is an orthogonal linear map. Its inverse is $T_H^{T}$ and $\\|T_Hx\\|_2^2=\\|x\\|_2^2$."
+      },
+      {
+        "id": "thm-na-periodic-orthogonal-compact-filter-dwt-inverse-parseval",
+        "deps": [
+          "def-na-periodic-orthogonal-compact-filter-dwt",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "kind": "theorem",
+        "title": "Inverse and Parseval identity for a periodic orthogonal compact-filter transform",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handouts 3 and 7",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/f95f7897eb0d62fc82ab88c3ae3937e6_Handout7.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "For every admissible pair $(h,g)$, every even $N\\ge2L$, and every $x\\in\\mathbb R^N$, the analysis matrix $W$ in [[def-na-periodic-orthogonal-compact-filter-dwt]] is orthogonal. Thus synthesis $W^T$ is its inverse and $\\|Wx\\|_2^2=\\|x\\|_2^2$. Every multilevel transform defined there is also orthogonal, with inverse given by reversing the stages and applying each stage's transpose."
+      },
+      {
+        "id": "thm-na-daubechies-d4-filter-qmf-and-two-moments",
+        "deps": [
+          "def-na-daubechies-d4-filter",
+          "def-na-periodic-orthogonal-compact-filter-dwt"
+        ],
+        "dependency_level": 1,
+        "kind": "theorem",
+        "title": "The explicit four-tap Daubechies pair satisfies the orthogonal filter and two-moment conditions",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 8",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/29303d64110d5953075d8f3781ce61fe_Handout8.pdf"
+            },
+            {
+              "title": "Jelena Kovačević, Vivek K. Goyal, and Martin Vetterli, Fourier and Wavelet Signal Processing",
+              "url": "https://www.fourierandwavelets.org/FWSP_a3.2_2013.pdf"
+            }
+          ]
+        },
+        "statement": "The pair $(h,g)$ in [[def-na-daubechies-d4-filter]] is admissible in [[def-na-periodic-orthogonal-compact-filter-dwt]]. In addition, $\\sum_{j=0}^3j^rg_j=0$ for $r=0,1$, so the high-pass filter annihilates constant and affine data."
+      },
+      {
+        "id": "thm-na-haar-cell-average-w1inf-error-bound",
+        "deps": [
+          "def-na-haar-cell-average-projection",
+          "def-na-smooth-derivative-bound-class",
+          "lem-taylor-lagrange-remainder-from-mean-value"
+        ],
+        "dependency_level": 1,
+        "kind": "theorem",
+        "title": "Haar cell averages approximate smooth bounded-derivative data at first order",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handouts 3 and 9",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/9ae8fd2b4313aea9cb1d828e3d431301_Handout3.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "Let $f\\in\\mathcal S^1$ with $M_1=M_1(f)$. For every integer $J\\ge0$, with $h=2^{-J}$ and $P_J$ as in [[def-na-haar-cell-average-projection]],\n$$\\left(\\int_0^1|f(x)-P_Jf(x)|^2\\,dx\\right)^{1/2}\\le \\frac{h}{\\sqrt2}M_1.$$\nThus the cell-average Haar approximation has first-order error on the explicit derivative-bounded smooth class $\\mathcal S^1$."
+      },
+      {
+        "id": "thm-na-orthogonal-best-m-term-thresholding",
+        "deps": [
+          "def-na-hard-soft-coefficient-thresholding",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "kind": "theorem",
+        "title": "Hard m-term retention is optimal for an orthonormal coefficient basis",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            },
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 15",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/d22d96dea13c0396474b1d87439fc4d0_Handout15.pdf"
+            }
+          ]
+        },
+        "statement": "Let $U\\in\\mathbb R^{N\\times N}$ satisfy $U^TU=UU^T=I_N$, let $x\\in\\mathbb R^N$, and set $c=Ux$. For any $S\\subseteq\\{0,\\ldots,N-1\\}$ let $P_Sc$ retain exactly the coordinates in $S$. Then\n$$\\|x-U^TP_Sc\\|_2^2=\\sum_{i\\notin S}|c_i|^2.$$\nConsequently, for every $0\\le m\\le N$, $H_m(c)$ from [[def-na-hard-soft-coefficient-thresholding]] minimizes reconstruction error over all choices retaining at most $m$ coefficients. Its squared error is exactly the sum of the discarded squared coefficients."
+      },
+      {
+        "id": "prop-na-riesz-coefficient-tail-error-bound",
+        "deps": [
+          "def-na-finite-riesz-synthesis-matrix",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "kind": "proposition",
+        "title": "Biorthogonal coefficient truncation error is controlled by Riesz bounds",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            },
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 11",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/1bb693efeb7d2ea97f12ae72812f7522_Handout11.pdf"
+            }
+          ]
+        },
+        "statement": "Let $V$ be a finite Riesz synthesis matrix with bounds $A,B$ as in [[def-na-finite-riesz-synthesis-matrix]], let $c=V^{-1}x$, and retain coefficients in $S\\subseteq\\{0,\\ldots,N-1\\}$. Define $S^c=\\{0,\\ldots,N-1\\}\\setminus S$, and define $(P_Sc)_i=c_i$ for $i\\in S$ and $0$ otherwise. Then\n$$A\\sum_{i\\notin S}|c_i|^2\\le\\|x-VP_Sc\\|_2^2\\le B\\sum_{i\\notin S}|c_i|^2.$$\nThus a biorthogonal transform has coefficient-tail error constants given by its Riesz bounds; an orthonormal identity with constant $1$ is the special case $A=B=1$."
+      },
+      {
+        "id": "def-na-d4-periodic-multilevel-transform",
+        "deps": [
+          "def-na-daubechies-d4-filter",
+          "def-na-periodic-orthogonal-compact-filter-dwt",
+          "thm-na-daubechies-d4-filter-qmf-and-two-moments"
+        ],
+        "dependency_level": 2,
+        "kind": "definition",
+        "title": "Periodic multilevel transform using the four-tap Daubechies filter",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handouts 8 and 15",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/29303d64110d5953075d8f3781ce61fe_Handout8.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "Let $J\\ge3$ and $N=2^J$. Starting with $a^{(0)}=x\\in\\mathbb R^N$, for $\\ell=1,\\ldots,J-2$ apply one-level periodic analysis with the D4 pair of [[def-na-daubechies-d4-filter]] to the current approximation vector $a^{(\\ell-1)}$, whose length is $N/2^{\\ell-1}\\ge8$. Store the detail vector $d^{(\\ell)}$ and set the next approximation to $a^{(\\ell)}$. Stop with the length-four vector $a^{(J-2)}$. The output consists of that coarse vector and all detail vectors, ordered from coarsest details to finest. At every stage indices are reduced modulo that stage's current length; there is no padding or symmetric extension."
+      },
+      {
+        "id": "thm-na-critical-besov-coefficients-best-m-tail",
+        "deps": [
+          "def-na-wavelet-coefficient-besov-quasinorm",
+          "thm-na-orthogonal-best-m-term-thresholding"
+        ],
+        "dependency_level": 2,
+        "kind": "theorem",
+        "title": "Critical Besov coefficient control implies a best m-term squared-error rate",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9, §§9.2.2–9.2.3",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            },
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 15",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/d22d96dea13c0396474b1d87439fc4d0_Handout15.pdf"
+            }
+          ]
+        },
+        "statement": "Let $J\\ge3$, $N=2^J$, $s>0$, and $p=(s+1/2)^{-1}\\in(0,2)$. Let $U\\in\\mathbb R^{N\\times N}$ be orthogonal, $x\\in\\mathbb R^N$, and $c=Ux$. Regard $c$ as one coarse block $a\\in\\mathbb R^4$ and detail blocks $d_j\\in\\mathbb R^{2^j}$ for $2\\le j\\le J-1$, with the norm of [[def-na-wavelet-coefficient-besov-quasinorm]]. For $1\\le m\\le N$, hard retention of the $m$ largest coefficients has reconstruction error\n$$\\|x-U^TH_m(c)\\|_2\\le \\sqrt{\\frac{p}{2-p}}\\,\\|c\\|_{b^s_{p,p}(J)}\\,m^{-s},$$\nwhere $c=Ux$ and $U$ is the orthogonal analysis matrix."
+      },
+      {
+        "id": "lem-na-d4-multilevel-detail-support-and-moments",
+        "deps": [
+          "def-na-d4-periodic-multilevel-transform",
+          "thm-na-periodic-orthogonal-compact-filter-dwt-inverse-parseval",
+          "thm-na-daubechies-d4-filter-qmf-and-two-moments"
+        ],
+        "dependency_level": 3,
+        "kind": "lemma",
+        "title": "Local support, affine cancellation, and normalization of multilevel D4 detail rows",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handouts 7, 8 and 13",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/99231bc0f90b87508c01a2e7f5a960e7_Handout13.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "In the multilevel transform of [[def-na-d4-periodic-multilevel-transform]], a detail row at stage $\\ell$ has $2^{J-\\ell}$ translates, is supported on at most $3(2^\\ell-1)+1$ consecutive input indices on a periodic lift, has Euclidean norm $1$, and annihilates every affine function of the lifted sample index. Its $\\ell^1$ norm, meaning the sum of absolute row entries, is at most the square root of its support size. Since $1\\le\\ell\\le J-2$, this support has fewer than $N=2^J$ indices and so its lifted support contains no repeated residue modulo $N$."
+      },
+      {
+        "id": "lem-na-sampled-smooth-d4-coefficient-decay",
+        "deps": [
+          "lem-na-d4-multilevel-detail-support-and-moments",
+          "def-na-smooth-derivative-bound-class",
+          "lem-taylor-lagrange-remainder-from-mean-value"
+        ],
+        "dependency_level": 4,
+        "kind": "lemma",
+        "title": "Two D4 vanishing moments give a local coefficient bound for smooth periodic samples",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 13",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/99231bc0f90b87508c01a2e7f5a960e7_Handout13.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "Let $J\\ge3$, $N=2^J$, and let $f:\\mathbb R\\to\\mathbb R$ be $1$-periodic and $C^2$. Its restriction to an open interval $U\\supset[0,1]$ belongs to $\\mathcal S^2$; write $M_2=M_2(f|_U)$. Form $x_n=N^{-1/2}f(n/N)$ for $0\\le n<N$, and analyze $x$ with the multilevel D4 transform. For a detail coefficient $d_{j,k}$ at scale $j=J-\\ell$ ($1\\le\\ell\\le J-2$), one has\n$$|d_{j,k}|\\le\\frac{9\\sqrt3}{2}M_2\\,2^{-5j/2}.$$"
+      },
+      {
+        "id": "cor-na-sampled-smooth-d4-besov-best-m-rate",
+        "deps": [
+          "lem-na-sampled-smooth-d4-coefficient-decay",
+          "def-na-wavelet-coefficient-besov-quasinorm",
+          "thm-na-critical-besov-coefficients-best-m-tail",
+          "def-na-d4-periodic-multilevel-transform",
+          "thm-na-periodic-orthogonal-compact-filter-dwt-inverse-parseval"
+        ],
+        "dependency_level": 5,
+        "kind": "corollary",
+        "title": "Smooth periodic samples have a best m-term D4 Besov-tail rate",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9, §9.2.3",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            },
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handouts 8 and 13",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/99231bc0f90b87508c01a2e7f5a960e7_Handout13.pdf"
+            }
+          ]
+        },
+        "statement": "Let $J\\ge3$, $N=2^J$, and let $f:\\mathbb R\\to\\mathbb R$ be $1$-periodic and $C^2$, with $f|_U\\in\\mathcal S^2$ for an open interval $U\\supset[0,1]$. Form the normalized sample vector $x_n=N^{-1/2}f(n/N)$ and its multilevel D4 coefficients $(a,d)$. For any $0<s<2$, set $p=(s+1/2)^{-1}$. Then\n$$\\|(a,d)\\|_{b^s_{p,p}(J)}^p\\le4M_0^p+\\frac{(9\\sqrt3M_2/2)^p\\,2^{-2p(2-s)}}{1-2^{-p(2-s)}},$$\nwhere $M_r=\\sup_{[0,1]}|f^{(r)}|$, and for $1\\le m\\le N$,\n$$\\|x-U_N^TH_m(U_Nx)\\|_2\\le \\sqrt{\\frac p{2-p}}\\left(4M_0^p+\\frac{(9\\sqrt3M_2/2)^p\\,2^{-2p(2-s)}}{1-2^{-p(2-s)}}\\right)^{1/p}m^{-s}.$$\nThe norm is the finite wavelet-coefficient convention of [[def-na-wavelet-coefficient-besov-quasinorm]]; no intrinsic Besov norm equivalence is asserted."
+      }
+    ]
+  },
+  {
+    "order": 2567,
+    "id": "wavelet-transforms-and-nonlinear-approximation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Wavelet transforms and nonlinear approximation — Examples",
+    "companion": "wavelet-transforms-and-nonlinear-approximation",
+    "requires": [
+      "wavelet-transforms-and-nonlinear-approximation"
+    ],
+    "items": [
+      {
+        "id": "ex-na-boundary-extension-changes-haar-coefficients",
+        "deps": [
+          "def-na-finite-periodic-haar-transform"
+        ],
+        "dependency_level": 1,
+        "kind": "example",
+        "title": "Periodic and symmetric padding give different Haar coefficients",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 15",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/d22d96dea13c0396474b1d87439fc4d0_Handout15.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "Start with the odd-length data $(0,0,1)$. Define two explicit padding rules to length four. Periodic endpoint padding appends the first entry, giving $x_P=(0,0,1,0)$. Symmetric endpoint padding repeats the final entry, giving $x_S=(0,0,1,1)$. Applying the first Haar stage to the last pair gives $(a,d)=(1/\\sqrt2,1/\\sqrt2)$ for $x_P$ and $(a,d)=(\\sqrt2,0)$ for $x_S$. The coefficients change because the boundary rule changes the pair presented to the filter."
+      },
+      {
+        "id": "ex-na-haar-step-vector-compression",
+        "deps": [
+          "def-na-finite-periodic-haar-transform",
+          "thm-na-finite-periodic-haar-transform-orthogonality",
+          "thm-na-orthogonal-best-m-term-thresholding"
+        ],
+        "dependency_level": 2,
+        "kind": "example",
+        "title": "Exact two-coefficient Haar compression of a four-entry step vector",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handouts 3 and 15",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/9ae8fd2b4313aea9cb1d828e3d431301_Handout3.pdf"
+            },
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            }
+          ]
+        },
+        "statement": "For the four-entry step vector $x=(1,1,0,0)$, the finite periodic Haar transform has coefficient vector $(1,1,0,0)$ in the order “coarse average, coarsest detail, finest details.” Retaining the first two coefficients reconstructs $x$ exactly. Among one-coefficient approximations the squared error is $1$."
+      },
+      {
+        "id": "ex-na-soft-threshold-bias-versus-hard-best-m",
+        "deps": [
+          "def-na-hard-soft-coefficient-thresholding",
+          "thm-na-orthogonal-best-m-term-thresholding"
+        ],
+        "dependency_level": 2,
+        "kind": "example",
+        "title": "Soft thresholding shrinks a retained coefficient while hard best-m retention does not",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stéphane Mallat, A Wavelet Tour of Signal Processing, 3rd ed., Chapter 9",
+              "url": "https://www.di.ens.fr/~mallat/College/WaveletTourChap9.pdf"
+            },
+            {
+              "title": "Gilbert Strang and Kevin Amaratunga, Wavelets and Filter Banks, MIT OpenCourseWare 18.327, Handout 15",
+              "url": "https://ocw.mit.edu/courses/18-327-wavelets-filter-banks-and-applications-spring-2003/d22d96dea13c0396474b1d87439fc4d0_Handout15.pdf"
+            }
+          ]
+        },
+        "statement": "In the standard orthonormal basis, let $c=(3,1)$, choose $m=1$, and use soft threshold $\\lambda=1$. Hard best-1 retention gives $(3,0)$ and error norm $1$. Soft thresholding gives $(2,0)$ and error norm $\\sqrt2$: it both shrinks the retained coefficient and discards the smaller one."
+      }
+    ]
+  }
+]

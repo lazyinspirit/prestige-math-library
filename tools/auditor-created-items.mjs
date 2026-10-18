@@ -16,6 +16,8 @@ import { isMinimalItemReceipt } from './step3-decisions.mjs';
 import { currentHashesMany } from './step5-terminal-resolution.mjs';
 import { historicalStep3OwnerReceipt } from './step3-owner-history.mjs';
 import { archivedProofContext, recordOwnerContextArchive } from './step3-owner-context-history.mjs';
+import { loadNativeCreationOrigin, recordNativeCreationOrigin, validateNativeCurrentRepair,
+  nativeOriginClosureEvidence as collectNativeOriginClosureEvidence, frozenNativeAuthorPaths } from './step3-native-creation-origin.mjs';
 export { recordOwnerContextArchive } from './step3-owner-context-history.mjs';
 
 const safe = (value, what = 'value') => {
@@ -71,6 +73,33 @@ const ownerRecertificationPath = (root, run, step, id, hashes) => {
 const OWNER_CREATION_POLICY = 'owner-spawned-step3-creation-v1';
 const ownerCreationPath = (root, run, id) => join(root, 'research',
   `${safe(run, 'run')}-step3-owner-creation-${safe(id, 'item ID')}.json`);
+function nativeCreation(root, run, id, marker = null) {
+  return loadNativeCreationOrigin(root, run, id, {
+    baseline: stageBaseline(root, run, 3), authors: successfulAuthorResults(root, run, 3),
+    row: inventory(root, run).find(row => row.id === id),
+  }, marker);
+}
+export function nativeOriginClosureEvidence(root, run, options = {}) {
+  const prefix = `${safe(run, 'run')}-step3-native-origin-`;
+  if (!readdirSync(join(root, 'research')).some(name => name.startsWith(prefix) && name.endsWith('.json'))) return {};
+  const baseline = stageBaseline(root, run, 3), authors = successfulAuthorResults(root, run, 3);
+  const rows = inventory(root, run);
+  return collectNativeOriginClosureEvidence(root, run,
+    id => ({ baseline, authors, row: rows.find(row => row.id === id) }), options);
+}
+export function recordNativeOrigin(root, run, step, id, evidence) {
+  if (Number(step) !== 3) throw Error('Native origin supports Step 3 only');
+  const file = researchFile(root, evidence);
+  if (ownerCreation(root, run, id)) throw Error(`${id}: already has an owner-created origin`);
+  const existing = auditorCreatedCertificationsPath(root, run, 3);
+  if (existsSync(existing) && read(existing).items?.some(row => row.id === id && !row.native_origin))
+    throw Error(`${id}: existing native certification already supplies its origin; use ordinary recertification`);
+  return recordNativeCreationOrigin(root, run, step, id,
+    { path: evidence, sha256: sha(readFileSync(file)) }, {
+      baseline: stageBaseline(root, run, 3), authors: successfulAuthorResults(root, run, 3),
+      row: inventory(root, run).find(row => row.id === id),
+    });
+}
 const researchFile = (root, path) => {
   const file = resolve(root, String(path ?? ''));
   const boundary = realpathSync(join(root, 'research'));
@@ -703,6 +732,10 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
   const evidenceText = evidencePath.startsWith(`${researchRoot}/`) && existsSync(evidencePath)
     ? readFileSync(evidencePath, 'utf8') : '';
   const liveRow = step === 3 ? inventory(root, run).find(row => row.id === id) : null;
+  const native = receipt.native_origin && step === 3 ? nativeCreation(root, run, id, receipt.native_origin) : null;
+  if (receipt.native_origin && (!native || receipt.author_result !== native.receipt.author_result
+    || receipt.owner_creation || receipt.basis !== undefined)) throw Error(`${id}: invalid native-origin recertification`);
+  if (native) validateNativeCurrentRepair(root, run, id, native, hashes, evidenceText);
   const step3Bootstrap = step === 3 && receipt.basis !== undefined && liveRow
     ? bootstrapStep3Author(root, run, id, liveRow, hashes, evidenceText, historical
       ? { historicalContext: { marker: { path: `research/${path.split('/').at(-1)}`, sha256: sha(bytes) },
@@ -1396,22 +1429,25 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
   // certificate. Explicit current-carrier recertification can precede that gate.
   const creation = prior?.owner_creation ? ownerCreation(root, run, id, prior.owner_creation)
     : step === 3 && !prior ? ownerCreation(root, run, id) : null;
+  const native = step === 3 ? nativeCreation(root, run, id, prior?.native_origin) : null;
+  if (native && creation) throw Error(`${id}: conflicting creation classes`);
   if (creation && (row.page !== creation.receipt.page || row.batch !== String(creation.receipt.batch)))
     throw Error(`${id}: owner creation home and batch cannot be changed by recertification`);
   const citationRefresh = step === 3 && id === 'lem-tangential-maximal-function-norm-bound'
     && step3ManifestRepairEvidence(evidenceText)?.owner_citation_replay;
-  const bootstrap = (!prior && !creation) || citationRefresh
+  const bootstrap = (!prior && !creation && !native) || citationRefresh
     ? step === 3 ? bootstrapStep3Author(root, run, id, row, hashes, evidenceText)
       : step === 5 ? bootstrapStep5Author(root, run, id, row, hashes) : null
     : null;
   if (citationRefresh && bootstrap?.basis !== 'initial-step3-authenticated-native-input-manifest-mirror')
     throw Error(`${id}: unauthenticated owner citation replay`);
-  const authorResult = prior?.author_result ?? bootstrap?.result_file;
+  const authorResult = prior?.author_result ?? native?.receipt.author_result ?? bootstrap?.result_file;
   if (!authorResult && !creation) throw Error(`${id}: no prior auditor-created certification to recertify or eligible Step ${step} owner bootstrap`);
   if (!evidenceText.includes(id))
     throw Error(`${id}: owner evidence must be a research file naming the item`);
   if (step === 3 && !step3EvidenceBindsCurrentCarriers(evidenceText, run, id, hashes))
     throw Error(`${id}: Step-3 owner evidence must name the active run and every exact current carrier hash`);
+  if (native) validateNativeCurrentRepair(root, run, id, native, hashes, evidenceText);
   let path = ownerRecertificationPath(root, run, step, id, hashes);
   let supersedes;
   if (refreshEvidence) {
@@ -1440,10 +1476,11 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
   }
   const receipt = { version: 1, policy: OWNER_RECERTIFICATION_POLICY, run, step, id,
     owner: true, at: new Date().toISOString(), reason: String(reason).trim(),
-    evidence: `research/${evidencePath.split('/').at(-1)}`,
+    evidence: native ? evidencePath.slice(resolve(root).length + 1) : `research/${evidencePath.split('/').at(-1)}`,
     evidence_sha256: sha(readFileSync(evidencePath, 'utf8')),
     ...(supersedes ? { supersedes } : {}),
     ...(creation ? { owner_creation: creation.marker } : { author_result: authorResult }),
+    ...(native ? { native_origin: native.marker } : {}),
     ...(bootstrap ? { basis: bootstrap.basis,
       ...(bootstrap.current_item_unchanged ? { current_item_unchanged: true } : {}),
       ...(['initial-step3-current-definition-manifest-review',
@@ -1541,7 +1578,8 @@ function immutableAuthorResult(root, run, step, file, row) {
   const dir = resolve(root, 'research', `${run}-dispatch`);
   const resultPath = join(dir, file);
   const promptPath = join(dir, `${row.role}-${row.label}${row.evidence_tag}.prompt.md`);
-  if (![promptPath, `research/${run}-dispatch/${row.role}-${row.label}${row.evidence_tag}.prompt.md`].includes(row.prompt)
+  if ((![promptPath, `research/${run}-dispatch/${row.role}-${row.label}${row.evidence_tag}.prompt.md`].includes(row.prompt)
+      && !(Number(step) === 3 && frozenNativeAuthorPaths(root, run, file, row.prompt, row.log)))
     || !statSync(resultPath).isFile() || !statSync(promptPath).isFile()
     || realpathSync(resultPath) !== resultPath || realpathSync(promptPath) !== promptPath) return false;
   const identity = [`run: ${run}`, `role: ${row.role}`, `label: ${row.label}`,
@@ -1653,6 +1691,16 @@ function provenanceRows(root, run, step, cache = new Map()) {
   const authors = successfulAuthorResults(root, run, step);
   for (const row of rows) {
     const creation = row.owner_creation ? ownerCreation(root, run, row.id, row.owner_creation) : null;
+    const native = row.native_origin && step === 3 ? nativeCreation(root, run, row.id, row.native_origin) : null;
+    if (row.native_origin && (!native || creation || row.author_result !== native.receipt.author_result
+      || row.origin_step !== undefined || row.evidence_class !== undefined
+      || (!row.owner_recertification && CARRIER_KEYS.some(key => row[key] !== native.receipt.carriers[key]))))
+      throw Error(`${row.id}: invalid preserved native creation provenance`);
+    if (native && row.owner_recertification) {
+      const owner = read(researchFile(root, row.owner_recertification.path));
+      if (!owner.native_origin || hashValue(owner.native_origin) !== hashValue(native.marker))
+        throw Error(`${row.id}: repair lost preserved native origin`);
+    }
     if (creation && (step !== 3 || row.author_result !== undefined || row.origin_step !== undefined
       || row.evidence_class !== 'owner-spawned-creation'
       || row.page !== creation.receipt.page || String(row.batch) !== String(creation.receipt.batch)
@@ -1872,6 +1920,25 @@ export function certifyAuditorCreatedItems(root, run, step) {
       if (!before || matchesCarriers(before, row, hashes)) continue;
     }
     const creation = step === 3 && !carried ? ownerCreation(root, run, id) : null;
+    const native = step === 3 && !carried ? nativeCreation(root, run, id) : null;
+    if (native && creation) throw Error(`${id}: conflicting creation classes`);
+    if (native) {
+      const originalCurrent = CARRIER_KEYS.every(key => hashes[key] === native.receipt.carriers[key]);
+      const owner = !originalCurrent && !priorCurrent
+        ? ownerRecertification(root, run, step, id, hashes, native.receipt.author_result) : null;
+      if (!originalCurrent && !priorCurrent && !owner)
+        throw Error(`${id}: preserved native origin needs explicit current owner recertification`);
+      if (priorCurrent && (!prior.native_origin || hashValue(prior.native_origin) !== hashValue(native.marker)))
+        throw Error(`${id}: current certification lost its preserved native origin`);
+      if (priorCurrent) for (const key of Object.keys(hashes)) hashes[key] = prior[key];
+      certified.push({ id, page: row.page, batch, ...hashes,
+        author_result: native.receipt.author_result, author_evidence: {
+          result: native.receipt.author_evidence.result, prompt: native.receipt.author_evidence.prompt,
+        }, native_origin: native.marker,
+        ...((priorCurrent && prior.owner_recertification) || owner
+          ? { owner_recertification: priorCurrent ? prior.owner_recertification : owner } : {}) });
+      continue;
+    }
     if (creation) {
       if (row.page !== creation.receipt.page || row.batch !== String(creation.receipt.batch))
         throw Error(`${id}: owner creation home and batch cannot be changed by recertification`);
@@ -1930,11 +1997,13 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const args = process.argv.slice(2), command = args[0];
     const value = flag => { const at = args.indexOf(flag); return at < 0 ? undefined : args[at + 1]; };
     const run = value('--run'), step = Number(value('--step'));
-    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 3|5; owner-create --run RUN --step 3 --id ITEM --evidence research/JSON; owner-context-archive --run RUN --step 3 --id ITEM --certification research/JSON --context-id CONTEXT --source research/FILE --owner-identity /root --reason TEXT; owner-source-archive --run RUN --step 3 --id ITEM --source research/FILE --owner-identity OWNER --reason TEXT; owner-recertify --run RUN --step 3|5 --id ITEM --evidence research/FILE --reason TEXT [--refresh-evidence (identical-carrier dilation decision binding only)]';
+    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 3|5; native-origin|owner-create --run RUN --step 3 --id ITEM --evidence research/JSON; owner-context-archive --run RUN --step 3 --id ITEM --certification research/JSON --context-id CONTEXT --source research/FILE --owner-identity /root --reason TEXT; owner-source-archive --run RUN --step 3 --id ITEM --source research/FILE --owner-identity OWNER --reason TEXT; owner-recertify --run RUN --step 3|5 --id ITEM --evidence research/FILE --reason TEXT [--refresh-evidence (identical-carrier dilation decision binding only)]';
     if (!run || ![3, 5].includes(step)) throw Error(usage);
     const result = command === 'baseline'
       ? writeAuditorCreatedBaseline(process.cwd(), run, step)
       : command === 'certify' ? certifyAuditorCreatedItems(process.cwd(), run, step)
+        : command === 'native-origin'
+          ? recordNativeOrigin(process.cwd(), run, step, value('--id'), value('--evidence'))
         : command === 'owner-create'
           ? recordOwnerCreation(process.cwd(), run, step, value('--id'), value('--evidence'))
         : command === 'owner-source-archive'
@@ -1948,7 +2017,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     if (!result) throw Error(usage);
     if (command === 'owner-context-archive') console.log(`step3-owner-context-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
     else if (command === 'owner-source-archive') console.log(`step3-owner-source-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
-    else if (['owner-recertify', 'owner-create'].includes(command)) console.log(`step${step}-${command === 'owner-create' ? 'owner-creation' : 'owner-recertification'}: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+    else if (['owner-recertify', 'owner-create', 'native-origin'].includes(command)) console.log(`step${step}-${command === 'native-origin' ? 'native-origin' : command === 'owner-create' ? 'owner-creation' : 'owner-recertification'}: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
     else console.log(`step${step}-auditor-${command === 'baseline' ? 'baseline' : 'certifications'}: ${result.items.length ?? result.items} item(s) ${result.reused ? 'reused' : command === 'baseline' ? 'recorded' : 'certified'}`);
   } catch (error) {
     console.error(error.message);

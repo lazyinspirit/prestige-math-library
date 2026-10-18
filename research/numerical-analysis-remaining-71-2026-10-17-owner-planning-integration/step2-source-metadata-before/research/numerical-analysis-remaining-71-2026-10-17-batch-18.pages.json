@@ -1,0 +1,222 @@
+[
+  {
+    "order": 2590,
+    "id": "interpolative-cur-and-nystrom-decompositions",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Interpolative cur and nystrom decompositions",
+    "companion": "interpolative-cur-and-nystrom-decompositions-examples",
+    "requires": [
+      "sketched-least-squares-and-subspace-embeddings"
+    ],
+    "items": [
+      {
+        "id": "alg-strong-rrqr-interpolative-decomposition",
+        "kind": "algorithm",
+        "title": "Strong-RRQR interpolative decomposition with explicit statuses",
+        "statement": "Define the exact-arithmetic rank-k column ID from a successful strong-RRQR factorization, with T(:,J)=I, k=0 and k=n branches, and explicit rank-loss, budget, and finite-precision certificate statuses.",
+        "deps": [
+          "alg-strong-rank-revealing-qr-with-finite-swaps"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/alg-strong-rrqr-interpolative-decomposition.md"
+      },
+      {
+        "id": "lem-moore-penrose-products-are-orthogonal-projectors",
+        "kind": "lemma",
+        "title": "The Moore-Penrose products are orthogonal projectors",
+        "statement": "For every finite matrix M, MM† and M†M are self-adjoint idempotents; MM† projects onto Ran(M), and full row rank implies MM†=I.",
+        "deps": [
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-moore-penrose-products-are-orthogonal-projectors.md"
+      },
+      {
+        "id": "def-cur-reconstruction-cores",
+        "kind": "definition",
+        "title": "Skeleton and projected least-squares CUR cores",
+        "statement": "For selected columns C=A(:,J), rows R=A(I,:), and cross W=A(I,J), define the skeleton core W† and the distinct projected least-squares core C†AR†, identifying the corresponding reconstructions.",
+        "deps": [
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/def-cur-reconstruction-cores.md"
+      },
+      {
+        "id": "def-psd-nystrom-approximation",
+        "kind": "definition",
+        "title": "The positive-semidefinite Nyström approximation",
+        "statement": "For Hermitian positive-semidefinite A and any conformal sketch S, define the Nyström core S*AS and approximation AS(S*AS)†S*A, with explicit finite matrix dimensions.",
+        "deps": [
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/def-psd-nystrom-approximation.md"
+      },
+      {
+        "id": "thm-strong-rrqr-interpolative-decomposition-error",
+        "kind": "theorem",
+        "title": "Strong-RRQR interpolative decomposition error and coefficient bounds",
+        "statement": "On exact-arithmetic success, the selected-column ID has identity interpolation columns, coefficient modulus at most f, and residual norm equal to ||R22||2 and at most sqrt(1+f^2 k(n-k))*sigma_(k+1)(A); handle k=0 and k=n separately.",
+        "deps": [
+          "alg-strong-rrqr-interpolative-decomposition",
+          "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "thm-strong-rrqr-singular-value-comparisons",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-strong-rrqr-interpolative-decomposition-error.md"
+      },
+      {
+        "id": "thm-skeleton-cur-exactness",
+        "kind": "theorem",
+        "title": "Skeleton CUR is exact for a full-rank cross",
+        "statement": "If the selected cross W is k-by-k and rank(A)=rank(W)=k, the skeleton reconstruction C W† R equals A, including the rank-zero branch.",
+        "deps": [
+          "def-cur-reconstruction-cores",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "def-rank-and-nullity",
+          "thm-rank-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-skeleton-cur-exactness.md"
+      },
+      {
+        "id": "thm-cur-projection-residual-bound",
+        "kind": "theorem",
+        "title": "Projected CUR has a two-sided Frobenius residual bound",
+        "statement": "For the projected least-squares CUR core C†AR†, its residual is bounded by ||(I-P_C)A||F+||A(I-P_R)||F, where P_C=CC† and P_R=R†R; this conclusion is not assigned to the skeleton W† core.",
+        "deps": [
+          "def-cur-reconstruction-cores",
+          "lem-moore-penrose-products-are-orthogonal-projectors"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-cur-projection-residual-bound.md"
+      },
+      {
+        "id": "lem-nystrom-square-root-projector-identity",
+        "kind": "lemma",
+        "title": "Nyström is a square-root orthogonal-projection compression",
+        "statement": "For B=A^(1/2)S, the Nyström approximation equals A^(1/2)P_Ran(B)A^(1/2), with P_Ran(B)=B(B*B)†B*=BB†.",
+        "deps": [
+          "def-psd-nystrom-approximation",
+          "lem-moore-penrose-products-are-orthogonal-projectors",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "source_path": "items/lem-nystrom-square-root-projector-identity.md"
+      },
+      {
+        "id": "thm-psd-nystrom-order-and-exactness",
+        "kind": "theorem",
+        "title": "Nyström is positive semidefinite, dominated by A, and exact when it captures the range",
+        "statement": "For every PSD A and sketch S, 0<=Ahat<=A; if Ran(AS)=Ran(A), then Ahat=A.",
+        "deps": [
+          "def-psd-nystrom-approximation",
+          "lem-nystrom-square-root-projector-identity",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-psd-nystrom-order-and-exactness.md"
+      },
+      {
+        "id": "thm-nystrom-deterministic-spectral-residual-bound",
+        "kind": "theorem",
+        "title": "Nyström deterministic spectral residual bound under a full-row-rank leading sketch",
+        "statement": "Partition A's eigenvalues at k and write Ω1=U1*S, Ω2=U2*S. If Ω1 has full row rank, ||A-Ahat||2 <= λ_(k+1)+||Λ2^(1/2)Ω2Ω1†||2^2, with the empty-tail convention.",
+        "deps": [
+          "def-psd-nystrom-approximation",
+          "lem-nystrom-square-root-projector-identity",
+          "lem-moore-penrose-products-are-orthogonal-projectors",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-singular-value-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/thm-nystrom-deterministic-spectral-residual-bound.md"
+      }
+    ]
+  },
+  {
+    "order": 2591,
+    "id": "interpolative-cur-and-nystrom-decompositions-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Interpolative cur and nystrom decompositions — Examples",
+    "companion": "interpolative-cur-and-nystrom-decompositions",
+    "requires": [
+      "interpolative-cur-and-nystrom-decompositions"
+    ],
+    "items": [
+      {
+        "id": "cex-arbitrary-selected-columns-miss-dominant-direction",
+        "kind": "counterexample",
+        "title": "A prescribed column can miss the dominant direction",
+        "statement": "Refute a uniform rank-k ID error guarantee for every prescribed column set by A=diag(10,1), k=1, and J={2}; every interpolant with T(:,J)=1 has residual norm at least 10 although sigma_2(A)=1.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "source_path": "items/cex-arbitrary-selected-columns-miss-dominant-direction.md"
+      },
+      {
+        "id": "ex-exact-rank-two-skeleton-cur",
+        "kind": "example",
+        "title": "An exact rank-two CUR reconstruction from a nonsingular cross",
+        "statement": "For the displayed rank-two 3-by-3 matrix and its leading 2-by-2 cross, compute C, W, R and verify C W† R=A.",
+        "deps": [
+          "def-cur-reconstruction-cores",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-skeleton-cur-exactness"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "source_path": "items/ex-exact-rank-two-skeleton-cur.md"
+      },
+      {
+        "id": "ex-psd-nystrom-residual-is-psd",
+        "kind": "example",
+        "title": "A PSD Nyström residual remains positive semidefinite",
+        "statement": "For A=diag(4,1) and S=e1, compute Ahat=diag(4,0) and A-Ahat=diag(0,1), confirming the general PSD-order theorem.",
+        "deps": [
+          "def-psd-nystrom-approximation",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-psd-nystrom-order-and-exactness"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "source_path": "items/ex-psd-nystrom-residual-is-psd.md"
+      }
+    ]
+  }
+]

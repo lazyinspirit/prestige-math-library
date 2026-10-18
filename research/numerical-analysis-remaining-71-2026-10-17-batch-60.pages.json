@@ -1,0 +1,1023 @@
+[
+  {
+    "order": 2674,
+    "id": "least-squares-fem-and-practical-dpg",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "First-order least-squares FEM and practical DPG",
+    "companion": "least-squares-fem-and-practical-dpg-examples",
+    "requires": [
+      "variational-crimes-and-strang-lemmas",
+      "discrete-de-rham-complexes-and-edge-elements"
+    ],
+    "items": [
+      {
+        "id": "lem-na-ultraweak-poisson-rotation-trace-2d",
+        "kind": "lemma",
+        "title": "Planar rotation carries H(div) normal traces to tangential traces",
+        "statement": "Assume Countable Choice. For a nondegenerate oriented triangle $K\\subset\\mathbb R^2$, set $R(a,b)=(-b,a)$, let $n$ be cell-outward and $t=Rn$. If $\\sigma\\in H(\\operatorname{div};K)$ is real, then $R\\sigma\\in H(\\operatorname{curl};K)$, $\\operatorname{curl}(R\\sigma)=\\operatorname{div}\\sigma$ distributionally, and $\\int_K(R\\sigma\\cdot R\\nabla\\phi+\\operatorname{curl}(R\\sigma)\\phi)=\\langle\\gamma_n\\sigma,[\\phi]\\rangle$ for all $\\phi\\in H^1(K)$. Thus weak tangential trace equals weak normal trace under $t=Rn$.\n\nHere $H(\\operatorname{curl};K):=\\{w\\in L^2(K;\\mathbb R^2):\\partial_1w_2-\\partial_2w_1\\in L^2(K)\\}$ with its graph norm. The weak tangential trace is the functional on $H^1(K)/H^1_0(K)$ defined by the integral in the Statement; the computation below proves it is the rotation of the PE08 weak normal trace.",
+        "deps": [
+          "def-na-hdiv-space",
+          "lem-na-hdiv-weak-normal-trace",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the two-dimensional rotated H(curl) interface locally from the actual H(div) trace supplier; verify the distributional derivative identity and orientation sign without importing the 3D PE09 trace Statement.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper; \u00a72 Theorem 2.1 and proof; \u00a7\u00a73.1\u20133.4, including Lemmas 3.1\u20133.3 on ultraweak Poisson and Fortin maps."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper; \u00a7\u00a73.1\u20133.2, Lemmas 4.1\u20134.4, Theorem 4.2. The graph inf-sup proof assumes simply connected Lipschitz domain."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page course monograph; \u00a7\u00a75.1\u20135.2 ideal/practical DPG; \u00a7\u00a75.6.2 and 5.6.4 Fortin and mixed stability."
+            },
+            {
+              "title": "C. Carstensen, L. Demkowicz, and J. Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page paper; full \u00a72 and Theorem 2.1 proof, \u00a73.1. The Poisson stability application cites the same simply-connected source."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-least-squares-poisson-first-order",
+        "kind": "definition",
+        "title": "First-order least-squares formulation of the Dirichlet Poisson problem",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^2$ be bounded connected Lipschitz and $f\\in L^2(\\Omega;\\mathbb R)$. Solve $-\\Delta u=f$, $u\\in H^1_0(\\Omega)$; set $\\sigma=-\\nabla u$, so $\\operatorname{div}\\sigma=f$. For a finite conforming shape-regular triangular mesh, define $X_h=RT_0(\\mathcal T_h)\\times(P_1(\\mathcal T_h)\\cap H^1_0(\\Omega))$ and $J_h(\\sigma_h,u_h)=\\|\\sigma_h+\\nabla u_h\\|_2^2+\\|\\operatorname{div}\\sigma_h-f\\|_2^2$. Here $RT_0(K)=P_0(K)^2+xP_0(K)$ and $P_1$ is continuous piecewise affine. The real Sobolev-space and zero-boundary conventions are [[def-sobolev-space-wkp-and-its-norm]] and [[def-wkp-zero-as-a-sobolev-closure]]; H(div), mesh, and RT conventions are [[def-na-hdiv-space]] and [[def-na-simplicial-mesh-rt-bdm-spaces]]. This is the plan-spec PE30 sign convention; negating the design flux converts its residuals to these and preserves the squared objective. Integrals are exact; geometry, quadrature and roundoff errors are excluded.",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "State the real spaces, load, sign convention, mesh, conforming RT0/P1 trial family, and squared residual functional; the proof suppliers establish conformity and norm equivalence separately.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Bochev and Max Gunzburger, Least-squares finite element methods",
+              "url": "https://people.sc.fsu.edu/~mgunzburger/files_papers/gunzburger-ls-icm.pdf",
+              "locator": "Complete 26-page paper; \u00a7\u00a72.2.1 and 4.1\u20134.2 on first-order least-squares Poisson and residual norm equivalence."
+            },
+            {
+              "title": "J. Bond, R. Chaudhry, L. Cyr, and L. Olson, A First-Order System Least-Squares Finite Element Method for the Poisson-Boltzmann Equation",
+              "url": "https://lukeo.cs.illinois.edu/files/2010_BoChCyOl_lspbe.pdf",
+              "locator": "Complete 11-page paper; Theorem 1 and proof, used comparatively because its coefficients and boundary hypotheses differ."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-na-ultraweak-poisson-dpg-formulation",
+        "kind": "definition",
+        "title": "Ultraweak Poisson DPG spaces and plan-consistent bilinear form",
+        "statement": "Assume Countable Choice. Let $d=2$ or $3$, $\\Omega\\subset\\mathbb R^d$ bounded connected Lipschitz polyhedral and $\\mathcal T_h$ a finite conforming shape-regular simplicial partition; all fields are real. For a load $f\\in L^2(\\Omega;\\mathbb R)$, put $H(div,\\mathcal T_h)=\\prod_KH(div;K)$ and $H^1(\\mathcal T_h)=\\prod_KH^1(K)$, with squared broken graph norm $\\sum_K(\\|\\tau\\|_2^2+\\|div\\tau\\|_2^2+\\|v\\|_2^2+\\|\\nabla v\\|_2^2)$. Let $\\widehat U$ be the elementwise trace range of $H^1_0(\\Omega)$ and $\\widehat Q_n$ the elementwise weak normal trace range of $H(div;\\Omega)$, each with global lift infimum norm; range membership is compatibility and normal traces are conservative across interior facets. Set $U=L^2(\\Omega)^d\\times L^2(\\Omega)\\times\\widehat U\\times\\widehat Q_n$, $V=H(div,\\mathcal T_h)\\times H^1(\\mathcal T_h)$. For $x=(\\sigma,u,\\widehat u,\\widehat\\sigma_n)$ and $y=(\\tau,v)$, define\n$$b(x,y)=(\\sigma,\\tau)-(u,div_h\\tau)+\\langle\\widehat u,\\tau\\cdot n\\rangle-(\\sigma,\\nabla_hv)+\\langle\\widehat\\sigma_n,v\\rangle,\\quad F_f(y)=(f,v).$$\nPairings sum over cell boundaries and use the cell-outward normal. The sign convention is $\\sigma=-\\nabla u$, $div\\sigma=f$.",
+        "deps": [
+          "def-na-hdiv-space",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-ultraweak-poisson-rotation-trace-2d",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "Define each skeleton trace as a range quotient with its extension infimum; write all orientation and sign conventions explicitly. The local quotient/gluing theorem justifies well-definedness and completeness.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper; \u00a72 Theorem 2.1 and proof; \u00a7\u00a73.1\u20133.4, including Lemmas 3.1\u20133.3 on ultraweak Poisson and Fortin maps."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper; \u00a7\u00a73.1\u20133.2, Lemmas 4.1\u20134.4, Theorem 4.2. The graph inf-sup proof assumes simply connected Lipschitz domain."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page course monograph; \u00a7\u00a75.1\u20135.2 ideal/practical DPG; \u00a7\u00a75.6.2 and 5.6.4 Fortin and mixed stability."
+            },
+            {
+              "title": "C. Carstensen, L. Demkowicz, and J. Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page paper; full \u00a72 and Theorem 2.1 proof, \u00a73.1. The Poisson stability application cites the same simply-connected source."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-least-squares-poisson-residual-norm-equivalence",
+        "kind": "lemma",
+        "title": "Least-squares residual norm is equivalent to H(div) x H1_0 error",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^2$ be bounded connected Lipschitz and $C_P$ satisfy $\\|w\\|_2\\le C_P\\|\\nabla w\\|_2$ on $H^1_0$. For $z=(\\delta\\sigma,\\delta u)\\in H(div)\\times H^1_0$, put $Rz=(\\delta\\sigma+\\nabla\\delta u,div\\delta\\sigma)$. This is injective and its norm is equivalent to the product graph norm. If $a=\\|R_1z\\|_2$, $b=\\|R_2z\\|_2$, $g=\\|\\nabla\\delta u\\|_2$, then $g\\le a+C_Pb$, $\\|\\delta u\\|_2\\le C_P(a+C_Pb)$, $\\|\\delta\\sigma\\|_2\\le2a+C_Pb$, and $\\|Rz\\|^2\\le2\\|z\\|^2_{H(div)\\times H^1}$.",
+        "deps": [
+          "def-na-least-squares-poisson-first-order",
+          "def-na-hdiv-space",
+          "def-countable-choice",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "dependency_level": 5,
+        "strategy": "Use the H^1_0 density definition to establish the weak Green identity, pair the first residual with grad(delta u), apply bounded-domain Poincare, and recover both graph components; prove the reverse estimate by triangle inequalities.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Bochev and Max Gunzburger, Least-squares finite element methods",
+              "url": "https://people.sc.fsu.edu/~mgunzburger/files_papers/gunzburger-ls-icm.pdf",
+              "locator": "Complete 26-page paper; \u00a7\u00a72.2.1 and 4.1\u20134.2 on first-order least-squares Poisson and residual norm equivalence."
+            },
+            {
+              "title": "J. Bond, R. Chaudhry, L. Cyr, and L. Olson, A First-Order System Least-Squares Finite Element Method for the Poisson-Boltzmann Equation",
+              "url": "https://lukeo.cs.illinois.edu/files/2010_BoChCyOl_lspbe.pdf",
+              "locator": "Complete 11-page paper; Theorem 1 and proof, used comparatively because its coefficients and boundary hypotheses differ."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-na-practical-dpg-finite-riesz-solves",
+        "kind": "algorithm",
+        "title": "Exact local finite Riesz solves for practical DPG tests",
+        "statement": "**Inputs:** A finite-dimensional real graph-test space presented as $V_r(K)=\\operatorname{span}\\{v_1,\\ldots,v_N\\}$, an ordered finite generating family (not assumed independent), a trial datum $w$, the graph inner product $(\\cdot,\\cdot)_V$, and the linear functional $\\ell_w(v)=b_K(w,v)$ on $V_r(K)$.\n\n**Output:** Either a vector in $V_r(K)$ or the status `singular-test-matrix`.\n\n**Admissible conditions:** $N\\ge0$; all entries are real and exact; $\\ell_w$ is defined and linear on $V_r(K)$. The Gram entries and functional values are evaluated exactly. No quadrature or rounded solve is part of this procedure.\n\n**Instructions:**\n\n1. Form $G_{ij}=(v_j,v_i)_V$ and $g_i=\\ell_w(v_i)$ exactly.\n2. Initialize $L=I_N$ and compute an unpivoted symmetric $LDL^{\\mathsf T}$ factorization in the listed order. At pivot $k$, set\n   $$d_k=G_{kk}-\\sum_{j<k}L_{kj}^2d_j.$$\n   If $d_k\\le0$, return `singular-test-matrix`. Otherwise set $D_{kk}=d_k$ and\n   $$L_{ik}=\\frac{G_{ik}-\\sum_{j<k}L_{ij}L_{kj}d_j}{d_k}\\qquad(i>k).$$\n3. Solve $Lz=g$, $Dy=z$, and $L^{\\mathsf T}c=y$ exactly, and return $\\sum_{j=1}^N c_jv_j$. For $N=0$, return the zero vector of $V_r(K)$.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "thm-riesz-representation-in-finite-dimensions"
+        ],
+        "dependency_level": 5,
+        "strategy": "Specify inputs, exact output tests, element-local Gram systems, an exact positive-definiteness check, and the failure status; numerical quadrature and floating solve errors are not included.",
+        "justified_by": [
+          "thm-na-practical-dpg-fortin-quasioptimality"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper; \u00a72 Theorem 2.1 and proof; \u00a7\u00a73.1\u20133.4, including Lemmas 3.1\u20133.3 on ultraweak Poisson and Fortin maps."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper; \u00a7\u00a73.1\u20133.2, Lemmas 4.1\u20134.4, Theorem 4.2. The graph inf-sup proof assumes simply connected Lipschitz domain."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page course monograph; \u00a7\u00a75.1\u20135.2 ideal/practical DPG; \u00a7\u00a75.6.2 and 5.6.4 Fortin and mixed stability."
+            },
+            {
+              "title": "C. Carstensen, L. Demkowicz, and J. Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page paper; full \u00a72 and Theorem 2.1 proof, \u00a73.1. The Poisson stability application cites the same simply-connected source."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-hdiv-normal-trace-surjectivity",
+        "kind": "lemma",
+        "title": "Weak H(div) normal trace surjects onto the scalar trace dual",
+        "statement": "Assume Countable Choice and the local trace quotient convention of [[lem-na-hdiv-weak-normal-trace]]. Let $D\\subset\\mathbb R^d$ be open; all spaces are real. With $T_D=H^1(D)/H^1_0(D)$ and its quotient norm, the weak normal trace map\n$$\\gamma_n:H(\\operatorname{div};D)\\longrightarrow T_D',\\qquad \\langle\\gamma_n\\tau,[w]\\rangle=\\int_D\\bigl(\\tau\\cdot\\nabla w+(\\operatorname{div}\\tau)w\\bigr),$$\nis onto. In fact every $L\\in T_D'$ has a lift $\\tau\\in H(\\operatorname{div};D)$ satisfying $\\gamma_n\\tau=L$ and $\\|\\tau\\|_{H(\\operatorname{div})}\\le\\|L\\|_{T_D'}$.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "def-na-hdiv-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Represent a scalar trace-dual functional on H1 by Riesz; its vanishing on H1_0 forces the Riesz vector to solve Delta z=z distributionally, so grad z is H(div) and its weak normal trace is the original functional.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper, \u00a73.2 and \u00a73.3: global scalar and normal skeleton trace spaces and their extension quotient norms. Those definitions give the interface; the local Riesz construction in this item supplies the surjectivity proof."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper, \u00a7\u00a73.1\u20133.2: ultraweak trial skeleton trace quotient spaces and their lift norms. The paper supplies context for the trace interface; the local proof here establishes onto-ness independently."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-ultraweak-poisson-skeleton-quotients",
+        "kind": "lemma",
+        "title": "Ultraweak Poisson skeleton spaces are Hilbert trace quotients",
+        "statement": "Assume Countable Choice and [[def-na-ultraweak-poisson-dpg-formulation]]. The elementwise trace map $\\Gamma_0:H^1_0(\\Omega)\\to\\prod_KH^1(K)/H^1_0(K)$ and normal-trace map $\\Gamma_n:H(div;\\Omega)\\to\\prod_K(H^1(K)/H^1_0(K))'$ have real Hilbert quotient ranges with global lift infimum norms. These equal the infima over broken extensions whose gluing belongs to the respective global space. Compatibility means membership in these ranges, so normal traces are conservative on each interior facet in the weak distributional sense.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "def-na-hdiv-space",
+          "lem-na-hdiv-is-hilbert-and-h0div-closed",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-simplex-h1-facet-trace-bound",
+          "lem-na-h1-interior-facet-traces-agree",
+          "def-countable-choice",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "dependency_level": 6,
+        "strategy": "Prove trace-map continuity and closed kernels, identify range norms with quotient norms, and prove the scalar and normal-trace gluing implications by elementwise Green identities and facet cancellation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper; \u00a72 Theorem 2.1 and proof; \u00a7\u00a73.1\u20133.4, including Lemmas 3.1\u20133.3 on ultraweak Poisson and Fortin maps."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper; \u00a7\u00a73.1\u20133.2, Lemmas 4.1\u20134.4, Theorem 4.2. The graph inf-sup proof assumes simply connected Lipschitz domain."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page course monograph; \u00a7\u00a75.1\u20135.2 ideal/practical DPG; \u00a7\u00a75.6.2 and 5.6.4 Fortin and mixed stability."
+            },
+            {
+              "title": "C. Carstensen, L. Demkowicz, and J. Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page paper; full \u00a72 and Theorem 2.1 proof, \u00a73.1. The Poisson stability application cites the same simply-connected source."
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-na-practical-dpg-roundoff-and-normal-equations",
+        "kind": "remark",
+        "title": "Exact DPG stability does not certify quadrature or algebraic solve errors",
+        "statement": "The Fortin, boundedness, and Riesz arguments use exact integrals and exact finite solves; they imply no quadrature or floating-point perturbation estimate. For full-column-rank real $A\\in\\mathbb R^{m\\times n}$ with $m\\ge n\\ge1$, $\\kappa_2(A^TA)=\\kappa_2(A)^2$.",
+        "deps": [
+          "alg-na-practical-dpg-finite-riesz-solves",
+          "thm-normal-equations-square-the-spectral-condition-number"
+        ],
+        "dependency_level": 6,
+        "strategy": "State the exact-analysis boundary and quote only the literal normal-equation condition-number theorem; no numerical stability claim is inferred.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper; \u00a72 Theorem 2.1 and proof; \u00a7\u00a73.1\u20133.4, including Lemmas 3.1\u20133.3 on ultraweak Poisson and Fortin maps."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper; \u00a7\u00a73.1\u20133.2, Lemmas 4.1\u20134.4, Theorem 4.2. The graph inf-sup proof assumes simply connected Lipschitz domain."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page course monograph; \u00a7\u00a75.1\u20135.2 ideal/practical DPG; \u00a7\u00a75.6.2 and 5.6.4 Fortin and mixed stability."
+            },
+            {
+              "title": "C. Carstensen, L. Demkowicz, and J. Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page paper; full \u00a72 and Theorem 2.1 proof, \u00a73.1. The Poisson stability application cites the same simply-connected source."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-ultraweak-poisson-bilinear-form-bounded",
+        "kind": "lemma",
+        "title": "The ultraweak Poisson DPG bilinear form is bounded",
+        "statement": "Assume Countable Choice. On the real trial and broken graph-test spaces of [[def-na-ultraweak-poisson-dpg-formulation]], $b$ is bounded by $|b(x,y)|\\le5\\|x\\|_U\\|y\\|_V$, uniformly in mesh size.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-hdiv-weak-normal-trace",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "For each skeleton pairing choose an admissible global or broken lift, apply the local Green-dual trace bound, take the extension infimum, and combine the five terms by Cauchy-Schwarz.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper; \u00a72 Theorem 2.1 and proof; \u00a7\u00a73.1\u20133.4, including Lemmas 3.1\u20133.3 on ultraweak Poisson and Fortin maps."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper; \u00a7\u00a73.1\u20133.2, Lemmas 4.1\u20134.4, Theorem 4.2. The graph inf-sup proof assumes simply connected Lipschitz domain."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page course monograph; \u00a7\u00a75.1\u20135.2 ideal/practical DPG; \u00a7\u00a75.6.2 and 5.6.4 Fortin and mixed stability."
+            },
+            {
+              "title": "C. Carstensen, L. Demkowicz, and J. Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page paper; full \u00a72 and Theorem 2.1 proof, \u00a73.1. The Poisson stability application cites the same simply-connected source."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-ultraweak-poisson-trial-kernel",
+        "kind": "lemma",
+        "title": "The ultraweak Poisson trial operator has trivial kernel",
+        "statement": "Assume Countable Choice. In the spaces of [[def-na-ultraweak-poisson-dpg-formulation]], if $b(x,y)=0$ for every broken test on a bounded connected Lipschitz domain, then $x=(\\sigma,u,\\widehat u,\\widehat\\sigma_n)=0$.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "def-countable-choice",
+          "lem-na-hdiv-normal-trace-surjectivity",
+          "def-na-hdiv-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "dependency_level": 7,
+        "strategy": "Test first with compactly supported element fields to derive the distributional first-order and divergence equations, identify the skeleton traces by Green duality, glue to H^1_0 and H(div), then test the homogeneous weak Poisson solution with itself.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper; \u00a72 Theorem 2.1 and proof; \u00a7\u00a73.1\u20133.4, including Lemmas 3.1\u20133.3 on ultraweak Poisson and Fortin maps."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper; \u00a7\u00a73.1\u20133.2, Lemmas 4.1\u20134.4, Theorem 4.2. The graph inf-sup proof assumes simply connected Lipschitz domain."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page course monograph; \u00a7\u00a75.1\u20135.2 ideal/practical DPG; \u00a7\u00a75.6.2 and 5.6.4 Fortin and mixed stability."
+            },
+            {
+              "title": "C. Carstensen, L. Demkowicz, and J. Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page paper; full \u00a72 and Theorem 2.1 proof, \u00a73.1. The Poisson stability application cites the same simply-connected source."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-least-squares-poisson-space-conformity",
+        "kind": "lemma",
+        "title": "The RT0/P1 least-squares family is conforming",
+        "statement": "Assume Countable Choice. The finite-mesh family $RT_0(\\mathcal T_h)\\times(P_1(\\mathcal T_h)\\cap H^1_0(\\Omega))$ from [[def-na-least-squares-poisson-first-order]] is a finite-dimensional subspace of $H(div;\\Omega)\\times H^1_0(\\Omega)$.",
+        "deps": [
+          "def-na-least-squares-poisson-first-order",
+          "lem-na-rt0-unisolvence-and-global-conformity",
+          "lem-na-h1-interior-facet-traces-agree",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Use the actual RT0 facet-flux unisolvence/conformity supplier for the flux and the global H^1_0 definition for the continuous piecewise P1 component; finite mesh polynomial spaces are finite dimensional.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Bochev and Max Gunzburger, Least-squares finite element methods",
+              "url": "https://people.sc.fsu.edu/~mgunzburger/files_papers/gunzburger-ls-icm.pdf",
+              "locator": "Complete 26-page paper; \u00a7\u00a72.2.1 and 4.1\u20134.2 on first-order least-squares Poisson and residual norm equivalence."
+            },
+            {
+              "title": "J. Bond, R. Chaudhry, L. Cyr, and L. Olson, A First-Order System Least-Squares Finite Element Method for the Poisson-Boltzmann Equation",
+              "url": "https://lukeo.cs.illinois.edu/files/2010_BoChCyOl_lspbe.pdf",
+              "locator": "Complete 11-page paper; Theorem 1 and proof, used comparatively because its coefficients and boundary hypotheses differ."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-practical-dpg-fortin-p1-r3",
+        "kind": "lemma",
+        "title": "A uniformly bounded Fortin map for the practical P1/R3 DPG family",
+        "statement": "Assume Countable Choice. For trials $P_1(K)^2\\times P_1(K)$, continuous trace $\\widetilde P_2(\\partial K)$ and normal trace $P_1(\\partial K)$ on a shape-regular triangular mesh, there is an element-local Fortin map into $P_3(K)^2\\times P_3(K)$. It has a mesh-independent broken graph bound, preserves the scalar cell mean, satisfies $\\|v-\\Pi^{grad}_3v\\|_{L^2(K)}\\le Ch_K\\|\\nabla v\\|_{L^2(K)}$, and $b(w_h,y-\\Pi y)=0$ for all discrete trial tuples and broken tests.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "def-na-simplicial-mesh-rt-bdm-spaces",
+          "def-na-contravariant-piola-map",
+          "lem-na-piola-preserves-rt-bdm-spaces",
+          "thm-affine-piola-differential-and-trace-moment-identities",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-simplex-h1-facet-trace-bound",
+          "lem-shape-regular-affine-simplex-scaling",
+          "def-countable-choice",
+          "thm-reference-simplex-poincare-wirtinger"
+        ],
+        "dependency_level": 7,
+        "strategy": "Construct the scalar moment map and RT2 subspace moment map explicitly for p=1,d=2; prove the full RT2 unisolvence needed by the moment system, all four DPG moment identities, the mean-zero local Poincare estimate, and shape-uniform reference-to-cell graph bounds.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper; \u00a72 Theorem 2.1 and proof; \u00a7\u00a73.1\u20133.4, including Lemmas 3.1\u20133.3 on ultraweak Poisson and Fortin maps."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper; \u00a7\u00a73.1\u20133.2, Lemmas 4.1\u20134.4, Theorem 4.2. The graph inf-sup proof assumes simply connected Lipschitz domain."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page course monograph; \u00a7\u00a75.1\u20135.2 ideal/practical DPG; \u00a7\u00a75.6.2 and 5.6.4 Fortin and mixed stability."
+            },
+            {
+              "title": "C. Carstensen, L. Demkowicz, and J. Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page paper; full \u00a72 and Theorem 2.1 proof, \u00a73.1. The Poisson stability application cites the same simply-connected source."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-na-ultraweak-poisson-ideal-trial-to-test",
+        "kind": "algorithm",
+        "title": "Ideal Poisson DPG trial-to-test Riesz map",
+        "statement": "**Input:** A real trial vector $w\\in U$.\n\n**Output:** The ideal test vector $Tw\\in V$.\n\n**Admissible conditions:** $U$ and $V$ are the real Hilbert spaces in [[def-na-ultraweak-poisson-dpg-formulation]], and $b$ is the bounded real bilinear form on them, with boundedness supplied by [[lem-na-ultraweak-poisson-bilinear-form-bounded]]. The definition uses exact Hilbert-space operations and makes no claim of practical computability.\n\n**Instructions:** Form the bounded linear functional $\\ell_w(v)=b(w,v)$ on $V$. Apply the Hilbert-space Riesz representation procedure to obtain the unique $Tw\\in V$ satisfying\n$$\n(Tw,v)_V=\\ell_w(v)=b(w,v)\\qquad(v\\in V),\n$$\nand return $Tw$. For a finite-dimensional trial subspace $U_h$, the ideal test space is $T(U_h)$.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-ultraweak-poisson-bilinear-form-bounded",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "Specify the bounded functional on the real Hilbert test space, invoke the exact published Riesz hypotheses, and define the ideal test space without claiming its computability.",
+        "justified_by": [
+          "thm-na-ideal-ultraweak-poisson-energy-best-approximation"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page paper; \u00a72 Theorem 2.1 and proof; \u00a7\u00a73.1\u20133.4, including Lemmas 3.1\u20133.3 on ultraweak Poisson and Fortin maps."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page paper; \u00a7\u00a73.1\u20133.2, Lemmas 4.1\u20134.4, Theorem 4.2. The graph inf-sup proof assumes simply connected Lipschitz domain."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page course monograph; \u00a7\u00a75.1\u20135.2 ideal/practical DPG; \u00a7\u00a75.6.2 and 5.6.4 Fortin and mixed stability."
+            },
+            {
+              "title": "C. Carstensen, L. Demkowicz, and J. Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page paper; full \u00a72 and Theorem 2.1 proof, \u00a73.1. The Poisson stability application cites the same simply-connected source."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-least-squares-poisson-best-approximation",
+        "kind": "theorem",
+        "title": "The conforming RT0/P1 least-squares Poisson minimizer is unique and best approximating",
+        "statement": "Assume the Axiom of Choice and Countable Choice required by the weak Poisson supplier. Let $f\\in L^2(\\Omega)$ on a bounded connected Lipschitz polygon, and let $(\\sigma,u)=(-\\nabla u,u)$ be the unique weak Dirichlet solution. The exact functional $J_h$ has a unique minimizer in the conforming RT0/P1 family, and that minimizer is the orthogonal best approximation in the residual inner product. Its scalar component remains in $H^1_0(\\Omega)$.",
+        "deps": [
+          "def-na-least-squares-poisson-first-order",
+          "lem-na-least-squares-poisson-space-conformity",
+          "lem-na-least-squares-poisson-residual-norm-equivalence",
+          "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "Use the actual weak Poisson existence supplier under its Axiom of Choice and Countable Choice hypotheses, identify the least-squares residual with the linear residual map of the error, and use finite-dimensional orthogonal projection in the equivalent residual inner product.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Bochev and Max Gunzburger, Least-squares finite element methods",
+              "url": "https://people.sc.fsu.edu/~mgunzburger/files_papers/gunzburger-ls-icm.pdf",
+              "locator": "Complete 26-page article; \u00a7\u00a72.2.1 and 4.1\u20134.2."
+            },
+            {
+              "title": "J. Bond et al., A First-Order System Least-Squares Finite Element Method for the Poisson-Boltzmann Equation",
+              "url": "https://lukeo.cs.illinois.edu/files/2010_BoChCyOl_lspbe.pdf",
+              "locator": "Complete 11-page article; Theorem 1 and proof; comparative weighted model."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-na-ultraweak-poisson-bounded-load-lifting",
+        "kind": "lemma",
+        "title": "A topology-free bounded lifting of every ultraweak Poisson load",
+        "statement": "Assume Countable Choice and the real spaces and signs of [[def-na-ultraweak-poisson-dpg-formulation]]. For every bounded connected Lipschitz polyhedron $\u03a9\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, and every finite conforming shape-regular simplicial mesh, give $U$ the squared product norm from its two $L^2$ factors and two global trace lift-infimum norms, and give $V$ its full broken graph norm. Define $B:U\\to V'$ by $(Bx)(y)=b(x,y)$. There is a bounded linear map $R:V'\\to U$ such that $BR=I_{V'}$ and $\\|R\\|\\le C_*$. Choose any $C_P>0$ with $\\|w\\|_2\\le C_P\\|\\nabla w\\|_2$ for $w\\in H^1_0(\\Omega)$, put $a=(C_P^2+2)^{1/2}$, and set $$C_*^2=(1+a)^2+(1+C_Pa)^2+(1+C_P^2)a^2+(\\sqrt2+a)^2+1.$$ The constant is independent of the mesh. No simple-connectivity or connected-boundary hypothesis is imposed.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-ultraweak-poisson-bilinear-form-bounded",
+          "lem-na-hdiv-is-hilbert-and-h0div-closed",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-na-hdiv-weak-normal-trace",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-lax-milgram",
+          "def-na-hdiv-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "strategy": "Represent an arbitrary broken graph-dual load by its exact four-coefficient Riesz vector, solve one global H1_0 variational problem, form a global H(div) field with the required divergence, use its actual traces, verify all five signed pairings, and sum the product-norm bounds.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Section 3.2 gives the exact real ultraweak Poisson form and broken graph test norm; the arbitrary-load lifting is proved locally here."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Sections 4.1\u20134.3 use a topological decomposition under simple connectivity; the present lifting does not use that route."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-na-practical-dpg-fortin-quasioptimality",
+        "kind": "theorem",
+        "title": "Fortin stability and quasi-optimality for practical DPG",
+        "statement": "Assume Countable Choice and the real form and spaces of [[def-na-ultraweak-poisson-dpg-formulation]] on a finite conforming triangular mesh. For every admissible local input to [[alg-na-practical-dpg-finite-riesz-solves]], the exact factorization terminates after $O(N_K^3)$ scalar arithmetic operations once its Gram entries and right-hand side are formed; it returns `singular-test-matrix` exactly for a dependent input family, and on an independent family it returns the unique finite Riesz representative. Let $U_h\\subset U$ consist of volume fields $\\sigma_h|_K\\in P_1(K)^2$, $u_h|_K\\in P_1(K)$, continuous scalar traces $\\widehat u_h|_{\\partial K}\\in\\widetilde P_2(\\partial K)$, and conservative normal traces $\\widehat\\sigma_{n,h}|_{\\partial K}\\in P_1(\\partial K)$. This is finite-dimensional. Let $V_r=\\prod_K(P_3(K)^2\\times P_3(K))$, presented cellwise by fixed ordered bases, and let $T_r:U_h\\to V_r$ be the assembled finite Riesz map. On each fixed basis the unique local Riesz representatives assemble to a bounded linear map satisfying $\\|T_rw_h\\|_V\\le\\|b\\|\\|w_h\\|_U$. Now assume the continuous primal and adjoint graph inf-sup constants have minimum $\\beta>0$. Let $\\Pi:V\\to V_r$ be the bounded Fortin map of [[lem-na-practical-dpg-fortin-p1-r3]], with $b(U_h,(I-\\Pi)V)=0$ and $\\|\\Pi\\|\\le C_\\Pi$. Then for every bounded load $F\\in V'$, the practical DPG system tested with $T_r(U_h)$ has a unique solution $x_h$, and\n$$\\|x-x_h\\|_U\\le(1+\\|b\\|C_\\Pi/\\beta)\\inf_{z_h\\in U_h}\\|x-z_h\\|_U,$$\nwhere $x$ is the exact continuous solution.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-bilinear-form-bounded",
+          "lem-na-ultraweak-poisson-trial-kernel",
+          "lem-na-practical-dpg-fortin-p1-r3",
+          "thm-na-babuska-brezzi-kernel-coercivity",
+          "def-countable-choice",
+          "thm-riesz-representation-for-hilbert-space",
+          "alg-na-practical-dpg-finite-riesz-solves",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-hdiv-is-hilbert-and-h0div-closed",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space"
+        ],
+        "dependency_level": 8,
+        "strategy": "Derive the discrete inf-sup bound from the explicit Fortin identities, express the practical DPG equations as the mixed residual Riesz system, apply the exact Babu\u0161ka\u2013Brezzi supplier, and prove the quasi-optimal estimate.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page article; \u00a72 Theorem 2.1/proof, \u00a7\u00a73.1\u20133.4 and Lemmas 3.1\u20133.3."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page article; \u00a7\u00a73\u20134 and Theorem 4.2; simple connectivity hypothesis noted."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page monograph; \u00a7\u00a75.1\u20135.2 and \u00a7\u00a75.6.2, 5.6.4."
+            },
+            {
+              "title": "Carstensen, Demkowicz, and Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page article; complete \u00a72/Theorem 2.1 proof and \u00a73.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-ultraweak-poisson-adjoint-graph-infsup",
+        "kind": "theorem",
+        "title": "Adjoint graph inf-sup for ultraweak Poisson on connected Lipschitz polyhedra",
+        "statement": "Assume Countable Choice. For every bounded connected Lipschitz polyhedron $\\Omega\\subset\\mathbb R^d$, $d\\in\\{2,3\\}$, and every finite conforming shape-regular simplicial mesh, give $U$ its $L^2$/global-quotient product norm and $V$ the full broken graph norm of [[def-na-ultraweak-poisson-dpg-formulation]]. With $C_*$ from [[lem-na-ultraweak-poisson-bounded-load-lifting]], the primal and adjoint bounds are $$\\sup_{y\\ne0}\\frac{|b(x,y)|}{\\|y\\|_V}\\ge C_*^{-1}\\|x\\|_U,\\qquad \\sup_{x\\ne0}\\frac{|b(x,y)|}{\\|x\\|_U}\\ge C_*^{-1}\\|y\\|_V.$$ Both constants are independent of the mesh. The bounded operator $B:U\\to V'$ and its Riesz trial-to-test map $T:U\\to V$ are boundedly invertible, with inverse norms at most $C_*$. No simple-connectivity or connected-boundary hypothesis is required; connected polyhedra with holes are included.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-na-hdiv-is-hilbert-and-h0div-closed",
+          "lem-na-ultraweak-poisson-bounded-load-lifting",
+          "lem-na-ultraweak-poisson-trial-kernel",
+          "lem-na-ultraweak-poisson-bilinear-form-bounded",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "Use the global arbitrary-load right inverse to obtain surjectivity, combine it with the proved zero trial kernel for bounded invertibility and the primal bound, and use the Hilbert Riesz map to construct an adjoint witness for each test vector.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Section 3 gives the ultraweak form and abstract DPG framework; its Poisson inf-sup input is imported rather than proved for the present topology-free domain class."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Sections 4.1\u20134.3 give a different inf-sup proof under simple connectivity; the local proof here uses no Hodge or potential decomposition."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Sections 5.1\u20135.2 describe ideal and practical DPG operators; the connected-domain graph bounds below follow from the local right inverse."
+            },
+            {
+              "title": "Carstensen, Demkowicz, and Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Section 2 gives the abstract DPG estimator framework; the topology-free graph bound below is proved locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-ideal-ultraweak-poisson-energy-best-approximation",
+        "kind": "theorem",
+        "title": "Ideal ultraweak Poisson DPG is the energy best approximation",
+        "statement": "Assume Countable Choice and the real trial/test spaces and bilinear form of [[def-na-ultraweak-poisson-dpg-formulation]], with $|b(w,v)|\\le5\\|w\\|_U\\|v\\|_V$ as in [[lem-na-ultraweak-poisson-bilinear-form-bounded]]. The ideal trial-to-test map $T$ of [[alg-na-ultraweak-poisson-ideal-trial-to-test]] is well defined, bounded linear, and satisfies $\\|T\\|\\le5$. Let $x\\in U$ be any exact ultraweak solution and let $U_h\\subset U$ be finite dimensional. The ideal DPG equations with test space $T(U_h)$ have a unique solution $x_h$, which is the orthogonal projection of $x$ in the induced energy inner product $(w,z)_E=(Tw,Tz)_V$. Consequently $\\|x-x_h\\|_E=\\inf_{z_h\\in U_h}\\|x-z_h\\|_E=\\|B(x-x_h)\\|_{V'}$.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-ultraweak-poisson-skeleton-quotients",
+          "lem-na-ultraweak-poisson-bilinear-form-bounded",
+          "lem-na-ultraweak-poisson-trial-kernel",
+          "alg-na-ultraweak-poisson-ideal-trial-to-test",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "The trivial trial kernel makes the Riesz trial-to-test map injective; its image inner product is the energy inner product, and finite-dimensional orthogonal projection gives existence, uniqueness, best approximation, and the residual identity.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page article; \u00a72 Theorem 2.1/proof, \u00a7\u00a73.1\u20133.4 and Lemmas 3.1\u20133.3."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page article; \u00a7\u00a73\u20134 and Theorem 4.2; simple connectivity hypothesis noted."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page monograph; \u00a7\u00a75.1\u20135.2 and \u00a7\u00a75.6.2, 5.6.4."
+            },
+            {
+              "title": "Carstensen, Demkowicz, and Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page article; complete \u00a72/Theorem 2.1 proof and \u00a73.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-na-practical-dpg-residual-estimator-equivalence",
+        "kind": "theorem",
+        "title": "Practical DPG residual is reliable and efficient up to data oscillation",
+        "statement": "Assume Countable Choice. Assume the continuous trial-to-test operator is boundedly invertible with lower inf-sup constant $\\beta>0$, and let $\\Pi:V\\to V_r$ be the bounded Fortin map with $b(U_h,(I-\\Pi)V)=0$. For any exact solution $x=B^{-1}F$ and any $\\widetilde x_h\\in U_h$, define the practical residual estimator $\\eta=\\|F-B\\widetilde x_h\\|_{V_r'}$ and Fortin data oscillation $\\operatorname{osc}(F)=\\|F\\circ(I-\\Pi)\\|_{V'}$. Then\n$$\\beta^2\\|x-\\widetilde x_h\\|_U^2\\le\\eta^2+(\\|\\Pi\\|\\eta+\\operatorname{osc}(F))^2,\\quad \\eta\\le\\|b\\|\\|x-\\widetilde x_h\\|_U,$$\n$$\\operatorname{osc}(F)\\le\\|b\\|\\|I-\\Pi\\|\\inf_{z_h\\in U_h}\\|x-z_h\\|_U.$$\nFor the stated P1/R3 Poisson Fortin map, $\\operatorname{osc}(F_f)\\le C(\\sum_Kh_K^2\\|f-f_K\\|_{L^2(K)}^2)^{1/2}$, where $f_K=|K|^{-1}\\int_K f$; it vanishes for cellwise constant $f$.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "lem-na-practical-dpg-fortin-p1-r3",
+          "thm-na-practical-dpg-fortin-quasioptimality",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "strategy": "Prove the full residual-representer reliability identity by orthogonal projection onto the discrete test space, use the Fortin property to bound the omitted component, derive efficiency from restriction of the full dual norm, and identify the Poisson data oscillation.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page article; \u00a72 Theorem 2.1/proof, \u00a7\u00a73.1\u20133.4 and Lemmas 3.1\u20133.3."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page article; \u00a7\u00a73\u20134 and Theorem 4.2; simple connectivity hypothesis noted."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Complete 229-page monograph; \u00a7\u00a75.1\u20135.2 and \u00a7\u00a75.6.2, 5.6.4."
+            },
+            {
+              "title": "Carstensen, Demkowicz, and Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page article; complete \u00a72/Theorem 2.1 proof and \u00a73.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-na-practical-dpg-poisson-quasioptimality-estimator",
+        "kind": "corollary",
+        "title": "P1/R3 practical DPG quasi-optimality and residual estimator for Poisson",
+        "statement": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^2$ be any bounded connected Lipschitz polygon, including polygons with holes, and let $\\mathcal T_h$ be any finite conforming shape-regular triangular mesh. Use the exact two-dimensional P1/R3 practical family selected in PE30: volume fields $\\sigma_h|_K\\in P_1(K)^2$ and $u_h|_K\\in P_1(K)$; compatible global scalar traces of degree at most two on facets, zero on boundary facets; conservative global normal traces of degree at most one; and broken tests $V_r=\\prod_K(P_3(K)^2\\times P_3(K))$, with the graph inner product inherited from $V$. The local Fortin projection $\\Pi:V\\to V_r$ is that of [[lem-na-practical-dpg-fortin-p1-r3]], and $C_\\Pi$ is its operator norm bound. For each $f\\in L^2(\\Omega)$, the continuous ultraweak solution $x$ and practical solution $x_h$ exist uniquely, with $$\\|x-x_h\\|_U\\le(1+5C_\\Pi C_*)\\inf_{z_h\\in U_h}\\|x-z_h\\|_U.$$ For every $\\widetilde x_h\\in U_h$, put $\\eta=\\|F_f-B\\widetilde x_h\\|_{V_r'}$, where $V_r'$ is the dual of $V_r$ with its induced norm, and $\\operatorname{osc}(F_f)=\\|F_f\\circ(I-\\Pi)\\|_{V'}$. Then $$C_*^{-2}\\|x-\\widetilde x_h\\|_U^2\\le\\eta^2+(C_\\Pi\\eta+\\operatorname{osc}(F_f))^2,\\qquad \\eta\\le5\\|x-\\widetilde x_h\\|_U,$$ and $$\\operatorname{osc}(F_f)\\le C_{\\rm osc}\\left(\\sum_Kh_K^2\\|f-f_K\\|_{L^2(K)}^2\\right)^{1/2},\\qquad f_K=|K|^{-1}\\int_Kf,$$ where $h_K=\\operatorname{diam}(K)$ and $C_{\\rm osc}$ is the cellwise constant from the Fortin map's mean-preserving local $L^2$ estimate. The constants $C_*$, $C_\\Pi$, and $C_{\\rm osc}$ are independent of mesh size for the fixed domain and shape-regular family. The practical corollary is two-dimensional; the continuous graph theorem also covers dimension three.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "thm-na-ultraweak-poisson-adjoint-graph-infsup",
+          "lem-na-ultraweak-poisson-bilinear-form-bounded",
+          "lem-na-practical-dpg-fortin-p1-r3",
+          "thm-na-practical-dpg-fortin-quasioptimality",
+          "thm-na-practical-dpg-residual-estimator-equivalence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 10,
+        "strategy": "Instantiate the locally proved connected-domain graph inf-sup theorem in dimension two, apply the exact P1/R3 Fortin map to the conditional practical and residual estimates, and use scalar cell-mean preservation for the data-oscillation bound.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Sections 2 and 3 give the abstract practical-DPG theorem and planar polynomial family; the current connected-domain result uses the local graph theorem."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "The Poisson graph inf-sup proof in Section 4 assumes simple connectivity; that proof is not imported for the connected-polygon conclusion here."
+            },
+            {
+              "title": "Leszek Demkowicz, Mathematical Theory of Finite Elements",
+              "url": "https://users.ices.utexas.edu/~leszek/classes/EM394H/book.pdf",
+              "locator": "Sections 5.1\u20135.2 give the ideal and practical Petrov\u2013Galerkin framework used by the conditional local results."
+            },
+            {
+              "title": "Carstensen, Demkowicz, and Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Section 2 proves the abstract residual reliability/efficiency estimate; Section 3 applies it to Poisson under its stated stability input."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2675,
+    "id": "least-squares-fem-and-practical-dpg-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "First-order least-squares FEM and practical DPG \u2014 Examples",
+    "companion": "least-squares-fem-and-practical-dpg",
+    "requires": [
+      "least-squares-fem-and-practical-dpg"
+    ],
+    "items": [
+      {
+        "id": "cex-na-least-squares-boundary-omission-nonunique",
+        "kind": "counterexample",
+        "title": "Dropping the H1-zero boundary condition makes least squares nonunique",
+        "statement": "If zero boundary values are removed from the continuous first-order Poisson least-squares problem with zero load, every constant scalar $u$ with $\\sigma=0$ has zero residual; hence the unconstrained minimizer is not unique.",
+        "deps": [
+          "def-na-least-squares-poisson-first-order"
+        ],
+        "dependency_level": 5,
+        "strategy": "Take f=0 and any nonzero constant; verify both residual components vanish and contrast with the actual H^1_0 boundary condition.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Bochev and Max Gunzburger, Least-squares finite element methods",
+              "url": "https://people.sc.fsu.edu/~mgunzburger/files_papers/gunzburger-ls-icm.pdf",
+              "locator": "Complete 26-page article; \u00a7\u00a72.2.1 and 4.1\u20134.2."
+            },
+            {
+              "title": "J. Bond et al., A First-Order System Least-Squares Finite Element Method for the Poisson-Boltzmann Equation",
+              "url": "https://lukeo.cs.illinois.edu/files/2010_BoChCyOl_lspbe.pdf",
+              "locator": "Complete 11-page article; Theorem 1 and proof; comparative weighted model."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-na-least-squares-poisson-residual-certificate",
+        "kind": "example",
+        "title": "An exact polynomial Poisson solution has a zero residual certificate",
+        "statement": "Assume Countable Choice. On $\\Omega=(0,1)^2$ with its two-triangle diagonal mesh, let $u=x(1-x)y(1-y)$, $\\sigma=-\\nabla u$, and $f=-\\Delta u$. Then $u\\in H^1_0(\\Omega)$, $\\sigma\\in H(div;\\Omega)$, $\\sigma+\\nabla u=0$, and $div\\sigma-f=0$, so the continuous least-squares residual is zero.",
+        "deps": [
+          "def-na-least-squares-poisson-first-order",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-countable-choice",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-na-hdiv-space"
+        ],
+        "dependency_level": 5,
+        "strategy": "Differentiate the quartic polynomial, verify the four boundary restrictions, calculate div(-grad u)=-Delta u, and evaluate both squared residual terms.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Bochev and Max Gunzburger, Least-squares finite element methods",
+              "url": "https://people.sc.fsu.edu/~mgunzburger/files_papers/gunzburger-ls-icm.pdf",
+              "locator": "Complete 26-page article; \u00a7\u00a72.2.1 and 4.1\u20134.2."
+            },
+            {
+              "title": "J. Bond et al., A First-Order System Least-Squares Finite Element Method for the Poisson-Boltzmann Equation",
+              "url": "https://lukeo.cs.illinois.edu/files/2010_BoChCyOl_lspbe.pdf",
+              "locator": "Complete 11-page article; Theorem 1 and proof; comparative weighted model."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-na-practical-dpg-too-small-test-space",
+        "kind": "counterexample",
+        "title": "A smaller constant test space gives a nontrivial practical DPG kernel",
+        "statement": "On one triangle, take a four-dimensional trial subspace of $P_1(K)^2\\times P_0(K)$ and the three-dimensional constant test space $P_0(K)^2\\times P_0(K)$. The practical trial-to-test map has a nontrivial kernel, so the normal equations cannot have a unique trial solution for any load for which a solution exists.",
+        "deps": [
+          "def-na-ultraweak-poisson-dpg-formulation",
+          "alg-na-practical-dpg-finite-riesz-solves"
+        ],
+        "dependency_level": 6,
+        "strategy": "Compute the dimensions of P0(K)^2 x P0(K) and a four-vector trial subspace, then apply finite-dimensional rank-nullity to the Riesz trial-to-test map.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page article; \u00a72 Theorem 2.1/proof, \u00a7\u00a73.1\u20133.4 and Lemmas 3.1\u20133.3."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page article; \u00a7\u00a73\u20134 and Theorem 4.2; simple connectivity hypothesis noted."
+            },
+            {
+              "title": "Carstensen, Demkowicz, and Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page article; complete \u00a72/Theorem 2.1 proof and \u00a73.1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-na-ideal-and-practical-dpg-test-vectors",
+        "kind": "example",
+        "title": "An explicit finite model separates ideal and practical test vectors",
+        "statement": "Let $U=V=\\mathbb R^2$ with Euclidean inner product, $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$, $b(x,y)=(Ax)\\cdot y$, $U_h=\\operatorname{span}(e_2)$, practical test space $V_r=\\operatorname{span}(e_1)$, and load $F(y)=e_1\\cdot y$. Then $Te_2=(1,1)$, $T^re_2=e_1$, and ideal and practical trial coefficients are $1/2$ and $1$.",
+        "deps": [
+          "alg-na-ultraweak-poisson-ideal-trial-to-test",
+          "alg-na-practical-dpg-finite-riesz-solves",
+          "thm-riesz-representation-in-finite-dimensions"
+        ],
+        "dependency_level": 9,
+        "strategy": "Compute the two Riesz maps from the identity and one-dimensional Gram matrices, then solve the one-by-one ideal and practical Galerkin equations exactly.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jay Gopalakrishnan and Weifeng Qiu, An analysis of the practical DPG method",
+              "url": "https://wiki.math.ntnu.no/_media/tma4183/2017v/1107.4293.pdf",
+              "locator": "Complete 15-page article; \u00a72 Theorem 2.1/proof, \u00a7\u00a73.1\u20133.4 and Lemmas 3.1\u20133.3."
+            },
+            {
+              "title": "Leszek Demkowicz and Jay Gopalakrishnan, Analysis of the DPG method for the Poisson equation",
+              "url": "https://web.pdx.edu/~gjay/pub/DPGlaplace.pdf",
+              "locator": "Complete 22-page article; \u00a7\u00a73\u20134 and Theorem 4.2; simple connectivity hypothesis noted."
+            },
+            {
+              "title": "Carstensen, Demkowicz, and Gopalakrishnan, A Posteriori Error Control for DPG Methods",
+              "url": "https://web.pdx.edu/~gjay/pub/cdg.pdf",
+              "locator": "Complete 21-page article; complete \u00a72/Theorem 2.1 proof and \u00a73.1."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

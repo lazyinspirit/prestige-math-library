@@ -1,0 +1,2810 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "67",
+  "level": 3,
+  "scheduling_input_sha256": "432e8113021662076ce5e7a06e5c2e36e0db1488bffb1073e0cd909c1c4d8f0c",
+  "scope": [
+    "cor-ale-exact-splitting-residual-orders",
+    "lem-ale-jacobi-geometric-conservation-identity",
+    "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+    "lem-ale-schur-complement-positive-and-minimizes-energy",
+    "thm-ale-monolithic-backward-euler-energy-identity",
+    "lem-ale-schur-residual-controls-interface-energy-error",
+    "thm-ale-one-dimensional-reynolds-transport-identity",
+    "thm-ale-reynolds-transport-identity",
+    "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+    "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+    "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl",
+    "ex-ale-added-mass-toy-recurrence-instability",
+    "ex-ale-expanding-mesh-free-stream",
+    "ex-ale-two-domain-heat-interface-flux-balance"
+  ],
+  "contracts": {
+    "cor-ale-exact-splitting-residual-orders": {
+      "risk": "medium",
+      "kind": "corollary",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-additive-ode-and-partition",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U\\subseteq\\mathbb R^d$ be open, and let $a,b:U\\to\\mathbb R^d$. The **additive autonomous ODE partition** with components $a$ and $b$ is the initial-value problem\n$$y'(t)=a(y(t))+b(y(t)),\\qquad y(t_0)=y_0\\in U,$$\nin the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. The term *autonomous* means that neither component has a separate time argument. A numerical method may evaluate $a$ explicitly and solve an equation involving $b$ implicitly; this naming convention does not assert that either exact subflow exists or that an implicit stage has a solution.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-exact-split-flows-lie-strang-and-bracket",
+          "source_section": "Definition",
+          "quote": "Let $a,b:U\\to\\mathbb R^d$ be $C^3$ fields on an open set, and restrict attention to points and time intervals for which the unique local solutions of $x'=a(x)$ and $x'=b(x)$ remain in $U$. Denote their exact solution maps by $\\Phi_a^t$ and $\\Phi_b^t$. The **Lie split map** applies $a$ and then $b$:\n$$L_h:=\\Phi_b^h\\circ\\Phi_a^h.$$\nThe **Strang split map** applies half of $a$, then $b$, then half of $a$:\n$$S_h:=\\Phi_a^{h/2}\\circ\\Phi_b^h\\circ\\Phi_a^{h/2}.$$\nDefine the vector-field Lie bracket convention\n$$[a,b](y):=Db(y)a(y)-Da(y)b(y).$$\nThis definition is finite-dimensional. It asserts neither that an unbounded operator has a common invariant domain nor that its commutators are bounded.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lie-strang-global-orders-and-subflow-error",
+          "source_section": "Statement",
+          "quote": "Let $a,b\\in C^3(U,\\mathbb R^d)$ define the additive IVP of [[def-additive-ode-and-partition]] and have exact subflows on a common compact convex tube over $[0,T]$. Assume $a,b$ are Lipschitz there with constants $L_a,L_b$, and the exact solution, all split stages, and all numerical states remain in that tube with positive margin. For all sufficiently small $h=T/N$ and exact initial data, the exact Lie and Strang split maps of [[def-exact-split-flows-lie-strang-and-bracket]] satisfy\n$$\\max_{0\\le n\\le N}\\|y_n^{\\rm Lie}-y(t_n)\\|_2\\le C_1h,\\qquad \\max_{0\\le n\\le N}\\|y_n^{\\rm Strang}-y(t_n)\\|_2\\le C_2h^2.$$\nThe constants may depend on the tube, the fields, and $T$. For approximate subflows, suppose $\\|\\widehat\\Phi_c^s(u)-\\Phi_c^s(u)\\|_2\\le\\epsilon_c(s)$ for $c\\in\\{a,b\\}$ and every admitted starting state $u$. If all approximate compositions stay in the tube, their composed one-step maps are Lipschitz with constant $1+\\widehat Lh$ for some $\\widehat L\\ge0$, and\n$$\\epsilon_b(h)+\\exp(L_bh)\\epsilon_a(h)=O(h^2)$$\nfor Lie and\n$$\\epsilon_a(h/2)+\\exp(L_ah/2)\\epsilon_b(h)+\\exp((L_a/2+L_b)h)\\epsilon_a(h/2)=O(h^3)$$\nfor Strang, then the same respective global orders hold. These additional conditions keep subflow-solver errors separate from splitting errors.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F2], the optional split system and its stage maps are exactly the finite-dimensional additive ODE, Lie map, and Strang map covered by [F3]. The common-tube, regularity, and exact-initial-data assumptions of [F3] are explicit hypotheses here.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] to these maps. Its exact-flow conclusion gives global errors $O(h)$ for Lie and $O(h^2)$ for Strang. Its approximate-subflow conclusion requires the additional individual error budgets and one-step stability bound and keeps these contributions separate from the splitting defects. No unbounded-operator conclusion is imported.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The asserted error concerns actual exact and numerical trajectories sharing an initial state in a compact tube; it is not an existence claim for an empty family of paths.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The asserted error concerns actual exact and numerical trajectories sharing an initial state in a compact tube; it is not an existence claim for an empty family of paths.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "ffe89240d2034c48ccf0cb0b878405a35e1c81702b4ca2de1bed74c1a9d2e895",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The asserted error concerns actual exact and numerical trajectories sharing an initial state in a compact tube; it is not an existence claim for an empty family of paths.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "ffe89240d2034c48ccf0cb0b878405a35e1c81702b4ca2de1bed74c1a9d2e895",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With exact initialization y_0=y(0), a=b=0 gives identity exact flows and zero global error. A fixed mismatched initial value instead retains its error and is excluded by the repaired Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-stage or one-subflow boundary case is asserted; the compositions are the fixed Lie and Strang maps."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The positive tube margin and the inherited step-size hypotheses keep all subflows in their common regularity region; leaving that tube is excluded from the corollary rather than covered by its order claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The positive tube margin and the inherited step-size hypotheses keep all subflows in their common regularity region; leaving that tube is excluded from the corollary rather than covered by its order claim.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "de3944b6e7924135e87645dd1f7c770ee05fc90612c67c7a3621c28af2c8ddc4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The positive tube margin and the inherited step-size hypotheses keep all subflows in their common regularity region; leaving that tube is excluded from the corollary rather than covered by its order claim.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "de3944b6e7924135e87645dd1f7c770ee05fc90612c67c7a3621c28af2c8ddc4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement places exact and numerical paths on the full closed interval [0,T]; the final maximum includes n=N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The optional branch supplies exact stage flows and imports a deterministic error theorem for their fixed compositions; no representative or subsequence is chosen in this two-step application.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The optional branch supplies exact stage flows and imports a deterministic error theorem for their fixed compositions; no representative or subsequence is chosen in this two-step application.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "a572be1bcc03171d91301d307db5b32fbe56a7ab6a86654b49ebdff588e7a72a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The optional branch supplies exact stage flows and imports a deterministic error theorem for their fixed compositions; no representative or subsequence is chosen in this two-step application.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "a572be1bcc03171d91301d307db5b32fbe56a7ab6a86654b49ebdff588e7a72a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The imported splitting theorem supplies first and second global orders on the common compact tube.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The imported splitting theorem supplies first and second global orders on the common compact tube.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "c3f3176a0e0d42697601dfc79df09aa384153fc6fe30afda01df920626c16942",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "The imported splitting theorem supplies first and second global orders on the common compact tube.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "c3f3176a0e0d42697601dfc79df09aa384153fc6fe30afda01df920626c16942",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An observed order does not certify the tube margin, regularity, or separate subflow budgets required by the hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "An observed order does not certify the tube margin, regularity, or separate subflow budgets required by the hypotheses.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "3a6960bab0b58099193b98dbf591b074f3955a6e0f1f9a37cab3657b5057154f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_linear",
+            "reason": "An observed order does not certify the tube margin, regularity, or separate subflow budgets required by the hypotheses.",
+            "item_sha256": "5240045c5e2e02e144e2cdfa8f9a104ce09c2a430e4d0c41c4a411efbd647cbd",
+            "row_sha256": "3a6960bab0b58099193b98dbf591b074f3955a6e0f1f9a37cab3657b5057154f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-8.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": []
+    },
+    "lem-ale-jacobi-geometric-conservation-identity": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-moving-domain-map",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a time interval $[0,T]$ with $T>0$, and a nonempty bounded open reference domain $\\widehat\\Omega\\subset\\mathbb R^d$ with compact Jordan closure; Jordan measurability means equality of finite-rectangle inner and outer contents ([[def-jordan-inner-and-outer-content]]). In dimension $d=1$, require $\\widehat\\Omega$ to be a finite union of bounded open intervals with pairwise disjoint closures. In dimensions $d\\ge2$, require a finite piecewise-$C^1$ boundary presentation: a finite family of compact boundary faces $S_1,\\ldots,S_q$ and a compact edge set $E$ such that the faces cover $\\partial\\widehat\\Omega$, each face lies in a regular $C^1$ hypersurface patch, $S_i\\cap E$ is surface-null, all face overlaps lie in $E$, and off $E$ the boundary is locally one $C^1$ graph with $\\widehat\\Omega$ on one side. The faces carry that side's outward unit normal.\n\nAn **ALE moving-domain map** is a map $A:[0,T]\\times\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ whose space-time restriction extends to a $C^2$ map on a neighborhood of this set, and for each $t$ the map $A_t(\\xi):=A(t,\\xi)$ is an orientation-preserving diffeomorphism on neighborhoods of the closures. Write $\\Omega(t):=A_t(\\widehat\\Omega)$ and $J(\\xi,t):=\\det D_\\xi A_t(\\xi)>0$. Define the **mesh velocity** in physical coordinates by $w_m(x,t):=\\partial_t A_t(A_t^{-1}(x))$. In $d=1$ the moving boundary consists of the transported interval endpoints. In $d\\ge2$, require the transported faces under $A_t$ to satisfy the same finite piecewise-$C^1$ boundary-presentation conditions; the diffeomorphism carries the reference faces and edge set to that presentation, with the transported outward normal.\n\nThis definition fixes the regularity and sign conventions for the continuous ALE identities. It does not assert a discrete approximation property, a nonintersection theorem for a computed mesh, or well-posedness of a coupled PDE.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $(\\xi,t)$ and write $H=\\partial_tF(\\xi,t)$. Differentiability gives $F(\\xi,t+h)=F+hH+o(h)$. Since $F$ is invertible, factor this as $F[I+hF^{-1}H+o(h)]$. The permutation expansion of the determinant gives $\\det(I+hK+o(h))=1+h\\operatorname{tr}K+o(h)$: the identity permutation contributes $1+h\\sum_jK_{jj}+o(h)$, while every nonidentity permutation contains at least two off-diagonal factors of order $h$. Hence $\\partial_tJ=J\\operatorname{tr}(F^{-1}H)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiate $w_m(A_t(\\xi),t)=\\partial_tA_t(\\xi)$ in $\\xi$. The chain rule and equality of the mixed derivatives of the $C^2$ map give $H=(D_xw_m)(A_t(\\xi),t)F$. Therefore $\\operatorname{tr}(F^{-1}H)=\\operatorname{tr}(F^{-1}(D_xw_m)F)=\\operatorname{tr}(D_xw_m)=\\operatorname{div}_xw_m$, using cyclic invariance of trace. Substitution into step 1.1 proves the identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ALE identity is pointwise on the reference moving-domain map, whose positive Jacobian presupposes a genuine invertible geometry.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The ALE identity is pointwise on the reference moving-domain map, whose positive Jacobian presupposes a genuine invertible geometry.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "0f490fd6130bcc1fcb201e9cb18df4796c07c305f5ccd8e378a26d0cacf44b5d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The ALE identity is pointwise on the reference moving-domain map, whose positive Jacobian presupposes a genuine invertible geometry.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "0f490fd6130bcc1fcb201e9cb18df4796c07c305f5ccd8e378a26d0cacf44b5d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses J>0 from the diffeomorphism; singular or zero Jacobians are excluded by the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: In one spatial dimension the determinant is the scalar derivative and the identity reduces to its ordinary time chain rule.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "In one spatial dimension the determinant is the scalar derivative and the identity reduces to its ordinary time chain rule.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "14e53c8852f0dde14825f0a0e598a681e588606df059a2d0c0e857d38dad064a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "In one spatial dimension the determinant is the scalar derivative and the identity reduces to its ordinary time chain rule.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "14e53c8852f0dde14825f0a0e598a681e588606df059a2d0c0e857d38dad064a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 factors through the invertible F; this proof does not extend to a singular cell map."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The C2 extension in the definition gives the same determinant differentiation at t=0 and t=T whenever one-sided restriction is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The matrix derivative and transported velocity are supplied functions; differentiating them pointwise makes no arbitrary selection of moving particles.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The matrix derivative and transported velocity are supplied functions; differentiating them pointwise makes no arbitrary selection of moving particles.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "e931a54bb26a71fd85b8d16c44929d36f7e622ecbf4f33253f0422f38e4901fd",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The matrix derivative and transported velocity are supplied functions; differentiating them pointwise makes no arbitrary selection of moving particles.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "e931a54bb26a71fd85b8d16c44929d36f7e622ecbf4f33253f0422f38e4901fd",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The determinant chain rule yields the continuous geometric conservation identity for the specified smooth ALE map.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The determinant chain rule yields the continuous geometric conservation identity for the specified smooth ALE map.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "bc18260ffbf99322670765c9de8ec4725020657d1e6c283c590b0aef1f01bcc3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "The determinant chain rule yields the continuous geometric conservation identity for the specified smooth ALE map.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "bc18260ffbf99322670765c9de8ec4725020657d1e6c283c590b0aef1f01bcc3",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Satisfying a scalar Jacobian evolution equation would not reconstruct an invertible ALE map or a particular discrete time integrator.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "Satisfying a scalar Jacobian evolution equation would not reconstruct an invertible ALE map or a particular discrete time integrator.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "f1de2ee9259c8f6e95a5bf77a5ba0d87cf9985ce33b0026a5bc966db8cfaff5d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gaussian_planning",
+            "reason": "Satisfying a scalar Jacobian evolution equation would not reconstruct an invertible ALE map or a particular discrete time integrator.",
+            "item_sha256": "e4a87bc0a4635fd91d6f7b8f05b5138cc077b8885440f387a0f8b2ab35b304b9",
+            "row_sha256": "f1de2ee9259c8f6e95a5bf77a5ba0d87cf9985ce33b0026a5bc966db8cfaff5d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-9.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": []
+    },
+    "lem-ale-periodic-face-motion-satisfies-discrete-gcl": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-periodic-moving-grid",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge1$, a reference cell width $\\Delta\\xi>0$, a time step $\\Delta t>0$, and a physical period length $L>0$. Face positions $x_{i+1/2}^n$ and face velocities $w_{i+1/2}^n$ are indexed periodically by $i\\in\\mathbb Z$, with $x_{i+N+1/2}^n=x_{i+1/2}^n+L$ and $w_{i+N+1/2}^n=w_{i+1/2}^n$. The physical cell $i$ is $[x_{i-1/2}^n,x_{i+1/2}^n]$ and its dimensionless Jacobian is $J_i^n=(x_{i+1/2}^n-x_{i-1/2}^n)/\\Delta\\xi$; require $J_i^n>0$.\n\nFor a constant physical advection speed $a\\in\\mathbb R$, the relative face speed is $c_{i+1/2}^n:=a-w_{i+1/2}^n$. Write $c^+:=\\max(c,0)$ and $c^-:=\\min(c,0)$. The prescribed face move is $x_{i+1/2}^{n+1}=x_{i+1/2}^n+\\Delta t\\,w_{i+1/2}^n$. The cell average $\\bar u_i^n$ is the average over the corresponding physical cell.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Subtract the left-face update from the right-face update for cell $i$. This gives $x_{i+1/2}^{n+1}-x_{i-1/2}^{n+1}=x_{i+1/2}^n-x_{i-1/2}^n+\\Delta t(w_{i+1/2}^n-w_{i-1/2}^n)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Divide by the positive reference width $\\Delta\\xi$ and use the definition of $J_i^{n+1}$ and $J_i^n$ in [F1]. The claimed identity follows.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The grid definition requires N≥1, so the periodic cell family is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If face velocities vanish then both face positions and the cell Jacobian remain fixed, giving the geometric conservation identity with zero increment.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "If face velocities vanish then both face positions and the cell Jacobian remain fixed, giving the geometric conservation identity with zero increment.",
+            "item_sha256": "30762f0df65df34de00184143fa183a4d404ff1f02c3eddb605ee3dc51cb9153",
+            "row_sha256": "93631f803c373f5735571ebc0f10f4d54165cc1f74f85cec478cd50f6d5230f2",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "If face velocities vanish then both face positions and the cell Jacobian remain fixed, giving the geometric conservation identity with zero increment.",
+            "item_sha256": "30762f0df65df34de00184143fa183a4d404ff1f02c3eddb605ee3dc51cb9153",
+            "row_sha256": "93631f803c373f5735571ebc0f10f4d54165cc1f74f85cec478cd50f6d5230f2",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The face-difference identity in steps 1.1–2.1 also holds for the allowed one-cell periodic grid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 is an algebraic identity even if a moved width is nonpositive; positivity is a separate algorithm success condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use both faces of each cell, including the periodic end face through periodic indexing."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Both face updates are supplied explicitly, and subtracting their values and dividing by reference width determines each cell Jacobian.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Both face updates are supplied explicitly, and subtracting their values and dividing by reference width determines each cell Jacobian.",
+            "item_sha256": "30762f0df65df34de00184143fa183a4d404ff1f02c3eddb605ee3dc51cb9153",
+            "row_sha256": "35e90c9ca775ac0d5f89f9599f6fcde18d2a223d474486c2b132723eafe1474e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Both face updates are supplied explicitly, and subtracting their values and dividing by reference width determines each cell Jacobian.",
+            "item_sha256": "30762f0df65df34de00184143fa183a4d404ff1f02c3eddb605ee3dc51cb9153",
+            "row_sha256": "35e90c9ca775ac0d5f89f9599f6fcde18d2a223d474486c2b132723eafe1474e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conservation identity follows from the prescribed face motion; it is not an equivalence determining individual face velocities.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The conservation identity follows from the prescribed face motion; it is not an equivalence determining individual face velocities.",
+            "item_sha256": "30762f0df65df34de00184143fa183a4d404ff1f02c3eddb605ee3dc51cb9153",
+            "row_sha256": "a89056d62dc059db8a8b1d92fdad6a56a79d4e8b468577e0b7e3647e83cf8a64",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The conservation identity follows from the prescribed face motion; it is not an equivalence determining individual face velocities.",
+            "item_sha256": "30762f0df65df34de00184143fa183a4d404ff1f02c3eddb605ee3dc51cb9153",
+            "row_sha256": "a89056d62dc059db8a8b1d92fdad6a56a79d4e8b468577e0b7e3647e83cf8a64",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A Jacobian increment fixes only the difference of neighboring velocities, so it cannot reconstruct their common translation component.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A Jacobian increment fixes only the difference of neighboring velocities, so it cannot reconstruct their common translation component.",
+            "item_sha256": "30762f0df65df34de00184143fa183a4d404ff1f02c3eddb605ee3dc51cb9153",
+            "row_sha256": "381e489678e17d9e4e1b28cd254a19222a3ad54368042c6dcf59d953b4fa7cfb",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A Jacobian increment fixes only the difference of neighboring velocities, so it cannot reconstruct their common translation component.",
+            "item_sha256": "30762f0df65df34de00184143fa183a4d404ff1f02c3eddb605ee3dc51cb9153",
+            "row_sha256": "381e489678e17d9e4e1b28cd254a19222a3ad54368042c6dcf59d953b4fa7cfb",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": []
+    },
+    "lem-ale-schur-complement-positive-and-minimizes-energy": {
+      "risk": "low",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-linear-diffusion-transmission-model",
+          "source_section": "Definition",
+          "quote": "Let $I_1,I_2$ and the common trace space $\\Lambda$ be finite-dimensional real inner-product spaces, with $\\dim\\Lambda\\ge1$, and set $X_i:=I_i\\oplus\\Lambda$. The trace map is $\\gamma_i(x_i,\\lambda_i)=\\lambda_i$. Let $M_i$ and $A_i$ be self-adjoint positive-definite operators on $X_i$, let $\\Delta t>0$, and define the local backward-Euler block $B_i:=\\Delta t^{-1}M_i+A_i$. In coordinates $I_i\\oplus\\Lambda$, write\n\n$$B_i=\\begin{pmatrix}B_{i,00}&B_{i,0\\Gamma}\\\\B_{i,\\Gamma0}&B_{i,\\Gamma\\Gamma}\\end{pmatrix},\\qquad g_i=(g_{i,0},g_{i,\\Gamma}).$$\n\nFor a prescribed local trace $\\lambda_i$, solve the interior equation $B_{i,00}x_i+B_{i,0\\Gamma}\\lambda_i=g_{i,0}$ and define the outward algebraic interface flux $q_i:=B_{i,\\Gamma0}x_i+B_{i,\\Gamma\\Gamma}\\lambda_i-g_{i,\\Gamma}$. Eliminating $x_i$ gives $q_i=S_i\\lambda_i-f_i$, where $S_i:=B_{i,\\Gamma\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}B_{i,0\\Gamma}$ and $f_i:=g_{i,\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}g_{i,0}$. The sign convention is outward flux on each subdomain.\n\nThe monolithic interface equations are trace continuity $\\lambda_1=\\lambda_2=\\lambda$ and flux balance $q_1+q_2=0$, equivalently $(S_1+S_2)\\lambda=f_1+f_2$. These finite-dimensional matrices represent a linear diffusion-transmission step; no nonlinear fluid-structure well-posedness is asserted.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $x\\ne0$, $\\langle Kx,x\\rangle=\\langle B(x,0),(x,0)\\rangle>0$. Thus $K$ has zero kernel and is invertible because it is an endomorphism of a finite-dimensional space.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $z$, put $x_*=-K^{-1}Cz$. Expanding the quadratic form and completing the square gives $\\langle B(x,z),(x,z)\\rangle=\\langle K(x-x_*),x-x_*\\rangle+\\langle(D-C^*K^{-1}C)z,z\\rangle$. The first term is nonnegative and vanishes exactly at $x=x_*$, proving the minimum formula.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $z\\ne0$, then $(x_*,z)\\ne0$, so positive definiteness of $B$ gives $\\langle Sz,z\\rangle=\\langle B(x_*,z),(x_*,z)\\rangle>0$. Hence $S$ is positive definite; applying this to each $B_i$ in [F1] proves the final claim.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Either block space may have dimension zero: the unique operator on that space is invertible and the square-completion formula still applies.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Either block space may have dimension zero: the unique operator on that space is invertible and the square-completion formula still applies.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "e13190198dcef33281fdc5da8f037b25e5db5bddd47e4101a51e30b87d079947",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Either block space may have dimension zero: the unique operator on that space is invertible and the square-completion formula still applies.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "e13190198dcef33281fdc5da8f037b25e5db5bddd47e4101a51e30b87d079947",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For z=0, step 2.1 gives minimum zero at x_*=0; strict positivity is only asserted for z≠0 in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar one-case or one-pass branch occurs in this block-matrix lemma."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 also cover a zero-dimensional interior space: its unique endomorphism is invertible and the completion-of-squares proof reduces to the trace block; no singular block is admitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Schur complement concerns fixed finite positive-definite blocks, with no varying interval or time-limit parameter in the algebra.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The Schur complement concerns fixed finite positive-definite blocks, with no varying interval or time-limit parameter in the algebra.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "4e9abee774af2ea66c2cbeb8cc86ca5f4e3810e41554af3101e8cbc5bb1e8e52",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The Schur complement concerns fixed finite positive-definite blocks, with no varying interval or time-limit parameter in the algebra.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "4e9abee774af2ea66c2cbeb8cc86ca5f4e3810e41554af3101e8cbc5bb1e8e52",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The minimizer is the explicit negative inverse-interior-block action on the coupling term, so no family of minimizing vectors is chosen.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The minimizer is the explicit negative inverse-interior-block action on the coupling term, so no family of minimizing vectors is chosen.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "75fd316ea181e99e17f377d150ef07760504b4530919698f208b5d8b4f102a74",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The minimizer is the explicit negative inverse-interior-block action on the coupling term, so no family of minimizing vectors is chosen.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "75fd316ea181e99e17f377d150ef07760504b4530919698f208b5d8b4f102a74",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Positive definiteness of the full block supplies positive diagonal and Schur blocks together with a minimum formula, without an iff statement.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Positive definiteness of the full block supplies positive diagonal and Schur blocks together with a minimum formula, without an iff statement.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "534a22c3cca81c2255bf830fedf3076ddb91272a655dfac6634d3751995e1813",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "Positive definiteness of the full block supplies positive diagonal and Schur blocks together with a minimum formula, without an iff statement.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "534a22c3cca81c2255bf830fedf3076ddb91272a655dfac6634d3751995e1813",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse block-positivity criterion could be derived from square completion but is not an additional claim made by this lemma.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The converse block-positivity criterion could be derived from square completion but is not an additional claim made by this lemma.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "5aabe748362625471245b660447b537ee92ed8cfcf545fc24ed7313592792fda",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The converse block-positivity criterion could be derived from square completion but is not an additional claim made by this lemma.",
+            "item_sha256": "ffbfdd823f1b1763c78706c72d700b92f3a4780f03745da0ba7b7d23c8f95ef0",
+            "row_sha256": "5aabe748362625471245b660447b537ee92ed8cfcf545fc24ed7313592792fda",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": []
+    },
+    "thm-ale-monolithic-backward-euler-energy-identity": {
+      "risk": "high",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-linear-diffusion-transmission-model",
+          "source_section": "Definition",
+          "quote": "Let $I_1,I_2$ and the common trace space $\\Lambda$ be finite-dimensional real inner-product spaces, with $\\dim\\Lambda\\ge1$, and set $X_i:=I_i\\oplus\\Lambda$. The trace map is $\\gamma_i(x_i,\\lambda_i)=\\lambda_i$. Let $M_i$ and $A_i$ be self-adjoint positive-definite operators on $X_i$, let $\\Delta t>0$, and define the local backward-Euler block $B_i:=\\Delta t^{-1}M_i+A_i$. In coordinates $I_i\\oplus\\Lambda$, write\n\n$$B_i=\\begin{pmatrix}B_{i,00}&B_{i,0\\Gamma}\\\\B_{i,\\Gamma0}&B_{i,\\Gamma\\Gamma}\\end{pmatrix},\\qquad g_i=(g_{i,0},g_{i,\\Gamma}).$$\n\nFor a prescribed local trace $\\lambda_i$, solve the interior equation $B_{i,00}x_i+B_{i,0\\Gamma}\\lambda_i=g_{i,0}$ and define the outward algebraic interface flux $q_i:=B_{i,\\Gamma0}x_i+B_{i,\\Gamma\\Gamma}\\lambda_i-g_{i,\\Gamma}$. Eliminating $x_i$ gives $q_i=S_i\\lambda_i-f_i$, where $S_i:=B_{i,\\Gamma\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}B_{i,0\\Gamma}$ and $f_i:=g_{i,\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}g_{i,0}$. The sign convention is outward flux on each subdomain.\n\nThe monolithic interface equations are trace continuity $\\lambda_1=\\lambda_2=\\lambda$ and flux balance $q_1+q_2=0$, equivalently $(S_1+S_2)\\lambda=f_1+f_2$. These finite-dimensional matrices represent a linear diffusion-transmission step; no nonlinear fluid-structure well-posedness is asserted.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The interior rows of the two local blocks give their backward-Euler subdomain equations; after eliminating those rows, the common trace row is $q_1+q_2=0$ by the definition in [F1]. For a common trace $\\lambda$, the paired interface work is therefore $\\langle q_1,\\lambda\\rangle+\\langle q_2,\\lambda\\rangle=\\langle q_1+q_2,\\lambda\\rangle=0$; this cancellation uses the shared trace and outward-flux sign convention.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On $V$, the assembled bilinear form associated with $\\Delta t^{-1}M_i+A_i$ is positive definite: for $v\\in V\\setminus\\{0\\}$, at least one $v_i\\ne0$, and every corresponding summand $\\Delta t^{-1}\\langle M_iv_i,v_i\\rangle+\\langle A_iv_i,v_i\\rangle$ is positive. Hence the finite-dimensional restricted operator has zero kernel and is invertible, so the variational step has a unique solution. Test the monolithic equation with $v=u^{n+1}$ and multiply by $\\Delta t$. For each $i$, self-adjointness gives $2\\langle M_i(u_i^{n+1}-u_i^n),u_i^{n+1}\\rangle=\\|u_i^{n+1}\\|_{M_i}^2-\\|u_i^n\\|_{M_i}^2+\\|u_i^{n+1}-u_i^n\\|_{M_i}^2$. Summing this identity and retaining $\\Delta t\\sum_i\\langle A_i u_i^{n+1},u_i^{n+1}\\rangle$ yields the stated equality.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $F_i^{n+1}=0$ for both subdomains, the right-hand side is zero and both the time-jump term and diffusion term on the left are nonnegative. Therefore $\\|u^{n+1}\\|_M^2\\le\\|u^n\\|_M^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: If the common-trace trial space is trivial, the unique zero vector solves its vacuous variational system and the energy identity is zero.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "If the common-trace trial space is trivial, the unique zero vector solves its vacuous variational system and the energy identity is zero.",
+            "item_sha256": "ffbadd75c055df3b9f36df941d0293216e8d740e14f7e26fdc60165923f03284",
+            "row_sha256": "951ba142f66929a6232a623037d8f20e468ffc6190b463ab9697bda3ccc4d27f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "If the common-trace trial space is trivial, the unique zero vector solves its vacuous variational system and the energy identity is zero.",
+            "item_sha256": "ffbadd75c055df3b9f36df941d0293216e8d740e14f7e26fdc60165923f03284",
+            "row_sha256": "951ba142f66929a6232a623037d8f20e468ffc6190b463ab9697bda3ccc4d27f",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives nonincrease when both forcing vectors vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement fixes two subdomains and a nonzero common trace space; it has no one-subdomain branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require positive-definite mass and diffusion operators and Δt>0, excluding singular blocks and zero time step."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 cancels the paired interface work using the shared trace and opposite outward flux balance."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The restricted finite-dimensional positive-definite system has one solution, and the energy proof tests with that supplied solution.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The restricted finite-dimensional positive-definite system has one solution, and the energy proof tests with that supplied solution.",
+            "item_sha256": "ffbadd75c055df3b9f36df941d0293216e8d740e14f7e26fdc60165923f03284",
+            "row_sha256": "d642dd6ee4cc52cff6e62a7cb17a914a952b14254afd0628485853824ac0dd3d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The restricted finite-dimensional positive-definite system has one solution, and the energy proof tests with that supplied solution.",
+            "item_sha256": "ffbadd75c055df3b9f36df941d0293216e8d740e14f7e26fdc60165923f03284",
+            "row_sha256": "d642dd6ee4cc52cff6e62a7cb17a914a952b14254afd0628485853824ac0dd3d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The assembled backward-Euler problem has a solution and exact energy ledger; these are consequences rather than a characterization of flux balance.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The assembled backward-Euler problem has a solution and exact energy ledger; these are consequences rather than a characterization of flux balance.",
+            "item_sha256": "ffbadd75c055df3b9f36df941d0293216e8d740e14f7e26fdc60165923f03284",
+            "row_sha256": "1b0c02b0c6748586f7ba2c951089545984d845141ac1f75c276c6caafcd6c86c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The assembled backward-Euler problem has a solution and exact energy ledger; these are consequences rather than a characterization of flux balance.",
+            "item_sha256": "ffbadd75c055df3b9f36df941d0293216e8d740e14f7e26fdc60165923f03284",
+            "row_sha256": "1b0c02b0c6748586f7ba2c951089545984d845141ac1f75c276c6caafcd6c86c",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A single energy equality would not determine the full coupled variational equations, and no such reverse assertion is present.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A single energy equality would not determine the full coupled variational equations, and no such reverse assertion is present.",
+            "item_sha256": "ffbadd75c055df3b9f36df941d0293216e8d740e14f7e26fdc60165923f03284",
+            "row_sha256": "fff76d8812c42defc4a6cd2b448c2da48c548dc25c936ced402b4fd4b731a396",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A single energy equality would not determine the full coupled variational equations, and no such reverse assertion is present.",
+            "item_sha256": "ffbadd75c055df3b9f36df941d0293216e8d740e14f7e26fdc60165923f03284",
+            "row_sha256": "fff76d8812c42defc4a6cd2b448c2da48c548dc25c936ced402b4fd4b731a396",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-67",
+        "notes": "Read all steps 1.1–2.1 and the full diffusion-transmission definition. Common traces and the defined outward algebraic flux make interface work exactly <q1+q2,lambda>=0. The sum of dt^{-1}M_i+A_i restricted to the finite-dimensional common-trace subspace is positive definite, hence invertible, including zero-dimensional interiors. Testing with the new solution and the self-adjoint polarization identity yields every time-jump and diffusion term with the stated sign. Zero forcing gives nonincrease; zero state and arbitrary positive dt are admitted. No continuum FSI or arbitrary-choice assertion is imported. Reader/refuter raised no finding on this item; no defect."
+      }
+    },
+    "lem-ale-schur-residual-controls-interface-energy-error": {
+      "risk": "medium",
+      "kind": "lemma",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-linear-diffusion-transmission-model",
+          "source_section": "Definition",
+          "quote": "Let $I_1,I_2$ and the common trace space $\\Lambda$ be finite-dimensional real inner-product spaces, with $\\dim\\Lambda\\ge1$, and set $X_i:=I_i\\oplus\\Lambda$. The trace map is $\\gamma_i(x_i,\\lambda_i)=\\lambda_i$. Let $M_i$ and $A_i$ be self-adjoint positive-definite operators on $X_i$, let $\\Delta t>0$, and define the local backward-Euler block $B_i:=\\Delta t^{-1}M_i+A_i$. In coordinates $I_i\\oplus\\Lambda$, write\n\n$$B_i=\\begin{pmatrix}B_{i,00}&B_{i,0\\Gamma}\\\\B_{i,\\Gamma0}&B_{i,\\Gamma\\Gamma}\\end{pmatrix},\\qquad g_i=(g_{i,0},g_{i,\\Gamma}).$$\n\nFor a prescribed local trace $\\lambda_i$, solve the interior equation $B_{i,00}x_i+B_{i,0\\Gamma}\\lambda_i=g_{i,0}$ and define the outward algebraic interface flux $q_i:=B_{i,\\Gamma0}x_i+B_{i,\\Gamma\\Gamma}\\lambda_i-g_{i,\\Gamma}$. Eliminating $x_i$ gives $q_i=S_i\\lambda_i-f_i$, where $S_i:=B_{i,\\Gamma\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}B_{i,0\\Gamma}$ and $f_i:=g_{i,\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}g_{i,0}$. The sign convention is outward flux on each subdomain.\n\nThe monolithic interface equations are trace continuity $\\lambda_1=\\lambda_2=\\lambda$ and flux balance $q_1+q_2=0$, equivalently $(S_1+S_2)\\lambda=f_1+f_2$. These finite-dimensional matrices represent a linear diffusion-transmission step; no nonlinear fluid-structure well-posedness is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ale-schur-complement-positive-and-minimizes-energy",
+          "source_section": "Statement",
+          "quote": "Let $B=\\begin{pmatrix}K&C\\\\C^*&D\\end{pmatrix}$ be a self-adjoint positive-definite operator on a finite-dimensional real inner-product direct sum $I\\oplus\\Lambda$. Then $K$ is positive definite, $S:=D-C^*K^{-1}C$ is positive definite on $\\Lambda$, and for every $z\\in\\Lambda$,\n\n$$\\langle Sz,z\\rangle=\\min_{x\\in I}\\langle B(x,z),(x,z)\\rangle.$$\n\nIn particular, the local Schur operators $S_i$ in [[def-ale-linear-diffusion-transmission-model]] are positive definite.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $e:=\\widetilde\\lambda-\\lambda_*$. By [F1], $\\rho=Se$. Since $S$ is positive definite, $e=S^{-1}\\rho$; the operator-norm inequality gives $\\|e\\|\\le\\|S^{-1}\\|\\,\\|\\rho\\|$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The reconstructed state difference on subdomain $i$ has trace $e$. By [F2], its squared minimum $B_i$ energy is $\\langle S_ie,e\\rangle$. Adding the two subdomains gives $\\|\\widetilde u-u_*\\|_{B_1\\oplus B_2}^2=\\langle Se,e\\rangle=\\langle \\rho,S^{-1}\\rho\\rangle$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Cauchy–Schwarz and the operator norm yield $\\langle \\rho,S^{-1}\\rho\\rangle\\le\\|S^{-1}\\|\\,\\|\\rho\\|^2$. Take nonnegative square roots to obtain the stated energy bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Zero-dimensional subdomain interiors are allowed while the trace space stays nonzero; reconstruction is then the trace vector itself and the Schur energy argument is unchanged.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Zero-dimensional subdomain interiors are allowed while the trace space stays nonzero; reconstruction is then the trace vector itself and the Schur energy argument is unchanged.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "a228c180b75772df4630a6a61b82f09df83b3dc15f13409309cf64dbe4585f4d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "Zero-dimensional subdomain interiors are allowed while the trace space stays nonzero; reconstruction is then the trace vector itself and the Schur energy argument is unchanged.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "a228c180b75772df4630a6a61b82f09df83b3dc15f13409309cf64dbe4585f4d",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For ρ=0, step 1.1 gives e=0 and step 3.1 gives zero reconstructed energy error."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-parameter or one-subdomain case is asserted; the two-subdomain sum is fixed in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "S is positive definite by the stated SPD Schur hypotheses, so its inverse is defined and no degenerate singular case is admitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The residual estimate is finite-dimensional and contains no time-step limit or interface-endpoint regularity assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The residual estimate is finite-dimensional and contains no time-step limit or interface-endpoint regularity assertion.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "0c5d3a345094279307f3af3db7934749050cbe120e743d953f734d0ed52f8173",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The residual estimate is finite-dimensional and contains no time-step limit or interface-endpoint regularity assertion.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "0c5d3a345094279307f3af3db7934749050cbe120e743d953f734d0ed52f8173",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The exact trace and interior reconstructions are uniquely solved SPD systems, so they require no choice among multiple minimizers.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The exact trace and interior reconstructions are uniquely solved SPD systems, so they require no choice among multiple minimizers.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "a47a6e2e5da88719d025b472714b2aa4eb5e2775537bfea171c8f381616fee61",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The exact trace and interior reconstructions are uniquely solved SPD systems, so they require no choice among multiple minimizers.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "a47a6e2e5da88719d025b472714b2aa4eb5e2775537bfea171c8f381616fee61",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The supplied trace residual controls both trace and reconstructed energy errors as sufficient estimates.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The supplied trace residual controls both trace and reconstructed energy errors as sufficient estimates.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "64bd7d76aa2e999fc08df7438c2ceae0e27f5dbebfe62564ec87763a173eefaa",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "The supplied trace residual controls both trace and reconstructed energy errors as sufficient estimates.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "64bd7d76aa2e999fc08df7438c2ceae0e27f5dbebfe62564ec87763a173eefaa",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A small error does not identify a particular residual size without an additional upper operator bound, and no equality of these norms is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A small error does not identify a particular residual size without an additional upper operator bound, and no equality of these norms is claimed.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "959ff5a4e47621cfb9b96dfe7207e68fa3d097888eddfafd2ad60d5e23bfa9b1",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A small error does not identify a particular residual size without an additional upper operator bound, and no equality of these norms is claimed.",
+            "item_sha256": "24a0883363794d9569fab77238642fe849fcd0dffb5012b39c4775f94bf4e454",
+            "row_sha256": "959ff5a4e47621cfb9b96dfe7207e68fa3d097888eddfafd2ad60d5e23bfa9b1",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": []
+    },
+    "thm-ale-one-dimensional-reynolds-transport-identity": {
+      "risk": "medium",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-moving-domain-map",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a time interval $[0,T]$ with $T>0$, and a nonempty bounded open reference domain $\\widehat\\Omega\\subset\\mathbb R^d$ with compact Jordan closure; Jordan measurability means equality of finite-rectangle inner and outer contents ([[def-jordan-inner-and-outer-content]]). In dimension $d=1$, require $\\widehat\\Omega$ to be a finite union of bounded open intervals with pairwise disjoint closures. In dimensions $d\\ge2$, require a finite piecewise-$C^1$ boundary presentation: a finite family of compact boundary faces $S_1,\\ldots,S_q$ and a compact edge set $E$ such that the faces cover $\\partial\\widehat\\Omega$, each face lies in a regular $C^1$ hypersurface patch, $S_i\\cap E$ is surface-null, all face overlaps lie in $E$, and off $E$ the boundary is locally one $C^1$ graph with $\\widehat\\Omega$ on one side. The faces carry that side's outward unit normal.\n\nAn **ALE moving-domain map** is a map $A:[0,T]\\times\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ whose space-time restriction extends to a $C^2$ map on a neighborhood of this set, and for each $t$ the map $A_t(\\xi):=A(t,\\xi)$ is an orientation-preserving diffeomorphism on neighborhoods of the closures. Write $\\Omega(t):=A_t(\\widehat\\Omega)$ and $J(\\xi,t):=\\det D_\\xi A_t(\\xi)>0$. Define the **mesh velocity** in physical coordinates by $w_m(x,t):=\\partial_t A_t(A_t^{-1}(x))$. In $d=1$ the moving boundary consists of the transported interval endpoints. In $d\\ge2$, require the transported faces under $A_t$ to satisfy the same finite piecewise-$C^1$ boundary-presentation conditions; the diffeomorphism carries the reference faces and edge set to that presentation, with the transported outward normal.\n\nThis definition fixes the regularity and sign conventions for the continuous ALE identities. It does not assert a discrete approximation property, a nonintersection theorem for a computed mesh, or well-posedness of a coupled PDE.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ale-jacobi-geometric-conservation-identity",
+          "source_section": "Statement",
+          "quote": "For the ALE moving-domain map $A_t$ of [[def-ale-moving-domain-map]], let $F(\\xi,t):=D_\\xi A_t(\\xi)$ and $J(\\xi,t):=\\det F(\\xi,t)$. Then\n\n$$\\partial_t J(\\xi,t)=J(\\xi,t)\\,\\operatorname{div}_x w_m(A_t(\\xi),t).$$\n\nThis is the continuous geometric conservation identity. It makes no discrete or time-integration claim.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $g:U\\to\\mathbb R^n$ be injective and $C^1$, and suppose $Dg(x)$ is invertible for every $x\\in U$. Let $K\\subseteq U$ be compact and Jordan measurable. For a bounded function $f:g(K)\\to\\mathbb R$, the following are equivalent:\n\n1. $f$ is Riemann integrable on $g(K)$;\n2. $x\\mapsto f(g(x))|\\det Dg(x)|$ is Riemann integrable on $K$.\n\nWhen either condition holds,\n$$\\int_{g(K)}f(y)\\,dy=\\int_K f(g(x))|\\det Dg(x)|\\,dx.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-riemann-integral-over-a-jordan-set",
+          "source_section": "Definition",
+          "quote": "Let $E\\subseteq\\mathbb R^m$ be bounded in the metric sense of\n[[def-metric-bounded-diameter]] and Jordan measurable, and let\n$f:E\\to\\mathbb R$ be bounded. Choose a nondegenerate rectangle\n$Q\\supseteq E$, whose existence follows from\n[[def-jordan-inner-and-outer-content]], and define the zero extension\n$$\\widetilde f_Q(x):=\\begin{cases}f(x),&x\\in E,\\\\0,&x\\in Q\\setminus E.\\end{cases}$$\nThe function $f$ is **Riemann integrable over $E$** when $\\widetilde f_Q$ is integrable over $Q$, and then\n$$\\int_Ef:=\\int_Q\\widetilde f_Q.$$\nIndependence of the bounding rectangle, for both integrability and value, is proved in [[lem-jordan-set-integral-well-defined]] and recorded as the definition's forward justification. For $f=1$, the zero extension is $1_E$, so [[thm-jordan-content-and-indicator-integrability]] gives $\\int_E1=\\operatorname{cont}(E)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-jordan-content-and-indicator-integrability",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its indicator $1_E$ is Riemann integrable on a fixed nondegenerate bounding\nrectangle $Q$. In that case\n$$\\int_Q1_E=\\operatorname{cont}(E).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-jordan-boundary-criterion",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its boundary $\\partial E$ is null, equivalently has content zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-lebesgue-criterion-in-rn",
+          "source_section": "Statement",
+          "quote": "A bounded real function on a closed nondegenerate rectangle in $\\mathbb R^m$, $m\\ge1$, is Riemann integrable if and only if its discontinuity set is null.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\widehat K=\\overline{\\widehat\\Omega}$, $K_t=A_t(\\widehat K)=\\overline{\\Omega(t)}$, and let $B_t=\\partial\\Omega(t)$ and $\\widehat B=\\partial\\widehat\\Omega$. These boundaries are finite endpoint sets, hence compact. Covering each point by intervals of arbitrarily small total length shows that both have Jordan content zero and are compact Jordan sets. By [F10] the boundaries are null and the two open domains are Jordan measurable.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F10",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any continuous $h$ on $K_t$, its zero extensions from $\\Omega(t)$ and $K_t$ to a nondegenerate closed interval containing $K_t$ in its interior are bounded and can be discontinuous only at $B_t$. By [F11] they are integrable. Their difference is supported on $B_t$ and bounded in absolute value by a constant times $1_{B_t}$; [F8] gives $\\int 1_{B_t}=0$, so [F7] shows their integrals agree. The same argument applies on $\\widehat K$ and $\\widehat\\Omega$. The map image in [F3] is compact Jordan, and [F5] makes $g(\\cdot,t)$ and $G(\\cdot,t)$ integrable on the compact closures. Change of variables on those closures, followed by the open/closed equalities just proved, gives $I(t)=\\int_{\\widehat K}G(\\xi,t)\\,d\\xi=\\int_{\\widehat\\Omega}G(\\xi,t)\\,d\\xi$, where $G(\\xi,t):=g(A_t(\\xi),t)J(\\xi,t)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For small nonzero $h$, apply [F6] to $s\\mapsto G(\\xi,s)$ between $t$ and $t+h$. The difference quotient equals $\\partial_tG(\\xi,\\theta_\\xi)$ at an intermediate time. By [F9], $\\partial_tG$ is uniformly continuous on $\\widehat K$ times a compact time neighborhood of $t$, so these quotients converge uniformly in $\\xi$ to $\\partial_tG(\\xi,t)$. The latter and each quotient are integrable on $\\widehat K$ by [F5]; [F7] and [F8] bound the integral of their difference by its uniform norm times $\\operatorname{cont}(\\widehat K)$. Since $I(t)=\\int_{\\widehat K}G(\\xi,t)\\,d\\xi$ by step 2.1, it follows that $I'(t)=\\int_{\\widehat K}\\partial_tG(\\xi,t)\\,d\\xi$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The chain and product rules together with [F2] give $I'(t)=\\int_{\\widehat K}J(\\partial_tg+\\partial_xg\\,w_m+g\\,\\partial_xw_m)(A_t(\\xi),t)\\,d\\xi$. This integrand is continuous on the compact reference closure; [F3] changes variables on the compact closures, and step 2.1 converts the resulting physical-domain integrals to open-domain integrals. Thus $I'(t)=\\int_{\\Omega(t)}[\\partial_tg+\\partial_x(gw_m)](x,t)\\,dx$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The function $x\\mapsto g(x,t)w_m(x,t)$ is differentiable on each compact image interval and its derivative is continuous, hence integrable there by [F5]. Apply [F4] to obtain $\\int_{\\alpha_j}^{\\beta_j}\\partial_x(gw_m)\\,dx=g(\\beta_j,t)w_m(\\beta_j,t)-g(\\alpha_j,t)w_m(\\alpha_j,t)$. Summing right endpoints with normal $+1$ and left endpoints with normal $-1$ proves the boundary term. No choice axiom is used.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: If the finite interval union is empty, both domain integrals and the endpoint sum vanish; no change-of-variables boundary contribution remains.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "If the finite interval union is empty, both domain integrals and the endpoint sum vanish; no change-of-variables boundary contribution remains.",
+            "item_sha256": "cae9ce0abfacd0c517f4c83df9280f13c60d9410f25f3ea409258b13bdfc016f",
+            "row_sha256": "62f818e915d0b48f0eeb4cb93850eff2bbdb9df76c85069dd039db6ffb3b199b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "If the finite interval union is empty, both domain integrals and the endpoint sum vanish; no change-of-variables boundary contribution remains.",
+            "item_sha256": "cae9ce0abfacd0c517f4c83df9280f13c60d9410f25f3ea409258b13bdfc016f",
+            "row_sha256": "62f818e915d0b48f0eeb4cb93850eff2bbdb9df76c85069dd039db6ffb3b199b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With g=0 every term in the identity vanishes; steps 3.1–4.1 remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof sums over an arbitrary finite K≥1; for K=1, step 5.1 gives the two endpoint terms with their stated signs."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition excludes zero-length intervals and requires disjoint closures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 explicitly assigns n=-1 at each left endpoint and n=+1 at each right endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 index the given finite interval list and use no selection from a family; this is the stated choice-free branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A prescribed increasing moving-domain map yields the transport identity, without characterizing all moving sets admitting such a formula.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A prescribed increasing moving-domain map yields the transport identity, without characterizing all moving sets admitting such a formula.",
+            "item_sha256": "cae9ce0abfacd0c517f4c83df9280f13c60d9410f25f3ea409258b13bdfc016f",
+            "row_sha256": "aeb602d3d473b277ee316934155cf5f7b2619bab7b2208b0a9900444ce040f0b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "A prescribed increasing moving-domain map yields the transport identity, without characterizing all moving sets admitting such a formula.",
+            "item_sha256": "cae9ce0abfacd0c517f4c83df9280f13c60d9410f25f3ea409258b13bdfc016f",
+            "row_sha256": "aeb602d3d473b277ee316934155cf5f7b2619bab7b2208b0a9900444ce040f0b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The scalar integral identity is not asserted to reconstruct the ALE map or guarantee its positive spatial derivative.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The scalar integral identity is not asserted to reconstruct the ALE map or guarantee its positive spatial derivative.",
+            "item_sha256": "cae9ce0abfacd0c517f4c83df9280f13c60d9410f25f3ea409258b13bdfc016f",
+            "row_sha256": "47b011b2b07391bf3f5aa81f71b2ab80eb17aba968c0fff11f80fdbc92f62f40",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_phasefield_provenance",
+            "reason": "The scalar integral identity is not asserted to reconstruct the ALE map or guarantee its positive spatial derivative.",
+            "item_sha256": "cae9ce0abfacd0c517f4c83df9280f13c60d9410f25f3ea409258b13bdfc016f",
+            "row_sha256": "47b011b2b07391bf3f5aa81f71b2ab80eb17aba968c0fff11f80fdbc92f62f40",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-4.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "This analytic endpoint proof is choice-free; no separate finite-smoke check applies.",
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "alpha-batch-67",
+        "notes": "Read every proof step 1.1–5.1, ALE map and Jacobian proofs, and exact statements of all eleven cited facts (twelve dependencies). Finite disjoint interval endpoints are null/content-zero, compact change of variables applies with positive A_x, and open/closed integrals agree by zero-extension comparison. C2 map and C1 g give continuous time derivative of G; MVT plus uniform continuity on compact space-time yields uniform difference-quotient convergence, without choosing a function of intermediate points. The integral error is bounded by reference content times uniform norm. Jacobian identity, product rule and interval FTC give endpoint flux signs. Empty reference is excluded, zero g and stationary mesh work, and no Countable Choice is used. Independent current Lebesgue-criterion review finds false converse step 3.2, but the used sufficient direction 1.2,2.1,3.1,4.1,5.1 is sound. Published-source full-iff disposition remains open for owner; no local transport correction is needed.",
+        "blocker": "Owner disposition of published thm-lebesgue-criterion-in-rn converse Proof 3.2; actual sufficient-direction consumer interface reviewed sound. No published repair authorized in this dispatch."
+      }
+    },
+    "thm-ale-reynolds-transport-identity": {
+      "risk": "high",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ale-moving-domain-map",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a time interval $[0,T]$ with $T>0$, and a nonempty bounded open reference domain $\\widehat\\Omega\\subset\\mathbb R^d$ with compact Jordan closure; Jordan measurability means equality of finite-rectangle inner and outer contents ([[def-jordan-inner-and-outer-content]]). In dimension $d=1$, require $\\widehat\\Omega$ to be a finite union of bounded open intervals with pairwise disjoint closures. In dimensions $d\\ge2$, require a finite piecewise-$C^1$ boundary presentation: a finite family of compact boundary faces $S_1,\\ldots,S_q$ and a compact edge set $E$ such that the faces cover $\\partial\\widehat\\Omega$, each face lies in a regular $C^1$ hypersurface patch, $S_i\\cap E$ is surface-null, all face overlaps lie in $E$, and off $E$ the boundary is locally one $C^1$ graph with $\\widehat\\Omega$ on one side. The faces carry that side's outward unit normal.\n\nAn **ALE moving-domain map** is a map $A:[0,T]\\times\\overline{\\widehat\\Omega}\\to\\mathbb R^d$ whose space-time restriction extends to a $C^2$ map on a neighborhood of this set, and for each $t$ the map $A_t(\\xi):=A(t,\\xi)$ is an orientation-preserving diffeomorphism on neighborhoods of the closures. Write $\\Omega(t):=A_t(\\widehat\\Omega)$ and $J(\\xi,t):=\\det D_\\xi A_t(\\xi)>0$. Define the **mesh velocity** in physical coordinates by $w_m(x,t):=\\partial_t A_t(A_t^{-1}(x))$. In $d=1$ the moving boundary consists of the transported interval endpoints. In $d\\ge2$, require the transported faces under $A_t$ to satisfy the same finite piecewise-$C^1$ boundary-presentation conditions; the diffeomorphism carries the reference faces and edge set to that presentation, with the transported outward normal.\n\nThis definition fixes the regularity and sign conventions for the continuous ALE identities. It does not assert a discrete approximation property, a nonintersection theorem for a computed mesh, or well-posedness of a coupled PDE.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ale-jacobi-geometric-conservation-identity",
+          "source_section": "Statement",
+          "quote": "For the ALE moving-domain map $A_t$ of [[def-ale-moving-domain-map]], let $F(\\xi,t):=D_\\xi A_t(\\xi)$ and $J(\\xi,t):=\\det F(\\xi,t)$. Then\n\n$$\\partial_t J(\\xi,t)=J(\\xi,t)\\,\\operatorname{div}_x w_m(A_t(\\xi),t).$$\n\nThis is the continuous geometric conservation identity. It makes no discrete or time-integration claim.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bounded-piecewise-c-one-euclidean-domain",
+          "source_section": "Definition",
+          "quote": "Under the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]], a finite piecewise $C^1$ presentation of a nonempty bounded open $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, consists of compact faces $S_1,\\ldots,S_q$ covering its boundary, each a compact Borel subset of a regular $C^1$ hypersurface patch, and a compact edge set $E\\subset\\partial\\Omega$. Require $S_j\\cap E$ to have surface measure zero in each face, using [[lem-surface-integral-is-independent-of-c-one-boundary-charts]]. E contains the boundaries of the faces relative to their patches and every overlap $S_i\\cap S_j$, i different from j. At every point outside E the domain boundary is locally a single $C^1$ graph with Omega on one side. Each face carries this actual outward unit normal off E. Values assigned to the normal on E do not affect its integral.\n\nFor a specified finite gluing also list the open pieces with disjoint interiors, the shared faces, and their opposite outward normals. Require the pieces to cover the final domain up to their boundary faces, and the exposed faces to give its specified presentation. Internal faces are counted twice before cancellation, once from each side. The phrase piecewise smooth by itself supplies none of this data.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $g:U\\to\\mathbb R^n$ be injective and $C^1$, and suppose $Dg(x)$ is invertible for every $x\\in U$. Let $K\\subseteq U$ be compact and Jordan measurable. For a bounded function $f:g(K)\\to\\mathbb R$, the following are equivalent:\n\n1. $f$ is Riemann integrable on $g(K)$;\n2. $x\\mapsto f(g(x))|\\det Dg(x)|$ is Riemann integrable on $K$.\n\nWhen either condition holds,\n$$\\int_{g(K)}f(y)\\,dy=\\int_K f(g(x))|\\det Dg(x)|\\,dx.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. If Omega has the specified finite piecewise $C^1$ presentation and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, then $\\int_\\Omega\\operatorname{div}F=\\sum_j\\int_{S_j}F\\cdot\\nu_j\\,dS$, with faces counted once off E. All integrals are finite. In a specified finite gluing, the two fluxes on every shared face cancel.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-riemann-integral-over-a-jordan-set",
+          "source_section": "Definition",
+          "quote": "Let $E\\subseteq\\mathbb R^m$ be bounded in the metric sense of\n[[def-metric-bounded-diameter]] and Jordan measurable, and let\n$f:E\\to\\mathbb R$ be bounded. Choose a nondegenerate rectangle\n$Q\\supseteq E$, whose existence follows from\n[[def-jordan-inner-and-outer-content]], and define the zero extension\n$$\\widetilde f_Q(x):=\\begin{cases}f(x),&x\\in E,\\\\0,&x\\in Q\\setminus E.\\end{cases}$$\nThe function $f$ is **Riemann integrable over $E$** when $\\widetilde f_Q$ is integrable over $Q$, and then\n$$\\int_Ef:=\\int_Q\\widetilde f_Q.$$\nIndependence of the bounding rectangle, for both integrability and value, is proved in [[lem-jordan-set-integral-well-defined]] and recorded as the definition's forward justification. For $f=1$, the zero extension is $1_E$, so [[thm-jordan-content-and-indicator-integrability]] gives $\\int_E1=\\operatorname{cont}(E)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-jordan-content-and-indicator-integrability",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its indicator $1_E$ is Riemann integrable on a fixed nondegenerate bounding\nrectangle $Q$. In that case\n$$\\int_Q1_E=\\operatorname{cont}(E).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-jordan-boundary-criterion",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its boundary $\\partial E$ is null, equivalently has content zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-lebesgue-criterion-in-rn",
+          "source_section": "Statement",
+          "quote": "A bounded real function on a closed nondegenerate rectangle in $\\mathbb R^m$, $m\\ge1$, is Riemann integrable if and only if its discontinuity set is null.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $n\\ge1$, let $Q=\\prod_{j=1}^n[a_j,b_j]$ with $a_j<b_j$, and let $f:Q\\to\\mathbb R$ be bounded and Borel. If $f$ is Riemann integrable, then $f\\in L^1(\\lambda_n|_Q)$ and its Lebesgue and Riemann integrals agree.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\widehat K=\\overline{\\widehat\\Omega}$, $K_t=A_t(\\widehat K)=\\overline{\\Omega(t)}$, and let $B_t=\\partial\\Omega(t)$ and $\\widehat B=\\partial\\widehat\\Omega$. Cover each compact face in either finite boundary presentation by finitely many smaller regular $C^1$ graph charts with bounded base and bounded graph derivative. For a base grid of side $\\delta$, each chart needs at most $C\\delta^{-(d-1)}$ base cubes; the Lipschitz bound places each graph portion in an axis-parallel $d$-cube of side $C'\\delta$. The total covering volume is at most $C''\\delta$, which tends to zero. Since there are finitely many faces, both boundaries are compact Jordan sets of content zero. By [F11] they are null and the open domains are Jordan measurable; by the compact-image conclusion in [F4], $K_t$ is compact Jordan.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F11",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any continuous $h$ on $K_t$, its zero extensions from $\\Omega(t)$ and $K_t$ to a nondegenerate closed rectangle containing $K_t$ in its interior are bounded and have discontinuities only on $B_t$, a null set, so [F12] makes them integrable. Their difference is supported on $B_t$ and bounded in absolute value by a constant times $1_{B_t}$. By [F8], $\\int 1_{B_t}=0$, and [F7] shows the two integrals agree. The same argument applies to $\\widehat K$ and $\\widehat\\Omega$. By [F10], continuous integrands on the compact closures are integrable, so [F4] applies to the compact closures. Consequently, for $G(\\xi,t):=g(A_t(\\xi),t)J(\\xi,t)$, $I(t):=\\int_{\\Omega(t)}g\\,dx=\\int_{\\widehat K}G(\\xi,t)\\,d\\xi=\\int_{\\widehat\\Omega}G(\\xi,t)\\,d\\xi$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "F10",
+            "F12",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For small nonzero $h$, apply [F6] to $s\\mapsto G(\\xi,s)$ between $t$ and $t+h$. The difference quotient equals $\\partial_tG(\\xi,\\theta_\\xi)$ at an intermediate time. By [F9], $\\partial_tG$ is uniformly continuous on $\\widehat K$ times a compact time neighborhood of $t$, so these quotients converge uniformly in $\\xi$ to $\\partial_tG(\\xi,t)$. The derivative and difference quotients are continuous on the compact Jordan set $\\widehat K$, hence integrable by [F10]. [F7] and [F8] bound the integral of their difference by its uniform norm times $\\operatorname{cont}(\\widehat K)$. Since $I(t)=\\int_{\\widehat K}G(\\xi,t)\\,d\\xi$ by step 2.1, $I'(t)=\\int_{\\widehat K}\\partial_tG(\\xi,t)\\,d\\xi$. The chain and product rules then give $I'(t)=\\int_{\\widehat K}J(\\partial_tg+\\nabla_xg\\cdot w_m)+g\\partial_tJ\\,d\\xi$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Substitute [F2] into step 3.1 and use $\\nabla_xg\\cdot w_m+g\\operatorname{div}_xw_m=\\operatorname{div}_x(gw_m)$. The resulting integrand is continuous on the moving closure. Apply [F4] to the compact closures and use the open/closed integral equality from step 2.1 to obtain $I'(t)=\\int_{\\Omega(t)}(\\partial_tg+\\operatorname{div}_x(gw_m))\\,dx$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F10",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Set $f=\\operatorname{div}_x(gw_m)$ and choose a nondegenerate closed box $Q$ containing $K_t$ in its interior. The field $gw_m$ is $C^1$ on the moving closure, so $f$ is continuous and bounded there. Its zero extension $\\widetilde f$ from the open set $\\Omega(t)$ to $Q$ is Borel: each strict superlevel is a relatively open subset of $\\Omega(t)$, together with $Q\\setminus\\Omega(t)$ when the level is negative. Step 2.1 gives its Riemann integrability. By [A1] and [F13], its Riemann integral over $Q$ equals its Lebesgue integral, which is the Lebesgue integral of $f$ over $\\Omega(t)$. Thus the Jordan volume integral in step 4.1 is exactly the volume integral used by [F5]. Apply [F5] to $gw_m$ on the finite piecewise-$C^1$ presentation [F3] to obtain $\\int_{\\Omega(t)}\\operatorname{div}_x(gw_m)\\,dx=\\int_{\\partial\\Omega(t)}gw_m\\cdot n\\,dS$. Substitution into step 4.1 proves the asserted identity. Countable Choice is used through [F5] and [F13].",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F13",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The moving-domain definition requires a nonempty bounded open reference domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For g=0, steps 3.1–4.1 yield zero bulk and boundary integrals."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem assumes d>=2, so a one-dimensional moving interval is outside its stated transport interface.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The theorem assumes d>=2, so a one-dimensional moving interval is outside its stated transport interface.",
+            "item_sha256": "c8084116e18b7c87684a538034c95210748f3573a2520a5778aa67bc29e2ec80",
+            "row_sha256": "e15ac32156d2edbff64beaf02df9258594df7889618da1626a2acf4d7a91ee0e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The theorem assumes d>=2, so a one-dimensional moving interval is outside its stated transport interface.",
+            "item_sha256": "c8084116e18b7c87684a538034c95210748f3573a2520a5778aa67bc29e2ec80",
+            "row_sha256": "e15ac32156d2edbff64beaf02df9258594df7889618da1626a2acf4d7a91ee0e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite presentation allows edge and face-overlap sets only when they are surface-null; step 5.1 is unaffected by those sets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement asserts the derivative only for t in (0,T), so temporal endpoints are outside its claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 invokes the explicitly declared Countable Choice divergence-theorem branch, and the axiom record names this as its only use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The derivative identity follows from the ALE diffeomorphism and regularity assumptions, without claiming their necessity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The derivative identity follows from the ALE diffeomorphism and regularity assumptions, without claiming their necessity.",
+            "item_sha256": "c8084116e18b7c87684a538034c95210748f3573a2520a5778aa67bc29e2ec80",
+            "row_sha256": "a2ec6aad4881717bf95ab2041b575b949da811ec10bdabe9afceda9e84ce1890",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The derivative identity follows from the ALE diffeomorphism and regularity assumptions, without claiming their necessity.",
+            "item_sha256": "c8084116e18b7c87684a538034c95210748f3573a2520a5778aa67bc29e2ec80",
+            "row_sha256": "a2ec6aad4881717bf95ab2041b575b949da811ec10bdabe9afceda9e84ce1890",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstructs an ALE map or boundary regularity from one transport integral identity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "No converse reconstructs an ALE map or boundary regularity from one transport integral identity.",
+            "item_sha256": "c8084116e18b7c87684a538034c95210748f3573a2520a5778aa67bc29e2ec80",
+            "row_sha256": "24cac0239d144917f14c1b9fbc9ebbaec633ec642bfc20b6515a72b9d47a6213",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "No converse reconstructs an ALE map or boundary regularity from one transport integral identity.",
+            "item_sha256": "c8084116e18b7c87684a538034c95210748f3573a2520a5778aa67bc29e2ec80",
+            "row_sha256": "24cac0239d144917f14c1b9fbc9ebbaec633ec642bfc20b6515a72b9d47a6213",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "5.1"
+          ],
+          "reason": "Proof 5.1 applies the Countable-Choice-dependent divergence theorem and the bounded Borel Riemann/Lebesgue comparison lemma; no such use occurs in 4.1."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "alpha-batch-67",
+        "notes": "Read every proof step 1.1–5.1, moving-map/Jacobian proofs, finite-boundary definition, Borel comparison proof and exact statements of every other cited dependency. Finite Lipschitz graph covers have volume O(delta), giving null boundaries; C2 diffeomorphism permits compact change of variables. Uniform time quotients of G on a compact time neighborhood justify differentiation. Chain/product and Jacobian identities yield the Jordan divergence integral. Its zero extension is bounded Borel and Riemann integrable, meeting the Countable-Choice comparison lemma; the C1 field gw_m and transported finite boundary meet divergence-theorem hypotheses. Exact AC uses are both in 5.1, not 4.1: corrected only that contract locator. Zero fields and fixed mesh give the expected identities; d>=2 and interior times exclude dimensional/time endpoint ambiguity. Published Lebesgue-criterion converse step 3.2 is defective, while its independently read sufficient direction used here is sound; full-iff source disposition remains open for owner.",
+        "blocker": "Owner disposition of published thm-lebesgue-criterion-in-rn converse Proof 3.2; actual sufficient-direction consumer interface reviewed sound. No published repair authorized in this dispatch."
+      }
+    },
+    "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream": {
+      "risk": "low",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-periodic-moving-grid",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge1$, a reference cell width $\\Delta\\xi>0$, a time step $\\Delta t>0$, and a physical period length $L>0$. Face positions $x_{i+1/2}^n$ and face velocities $w_{i+1/2}^n$ are indexed periodically by $i\\in\\mathbb Z$, with $x_{i+N+1/2}^n=x_{i+1/2}^n+L$ and $w_{i+N+1/2}^n=w_{i+1/2}^n$. The physical cell $i$ is $[x_{i-1/2}^n,x_{i+1/2}^n]$ and its dimensionless Jacobian is $J_i^n=(x_{i+1/2}^n-x_{i-1/2}^n)/\\Delta\\xi$; require $J_i^n>0$.\n\nFor a constant physical advection speed $a\\in\\mathbb R$, the relative face speed is $c_{i+1/2}^n:=a-w_{i+1/2}^n$. Write $c^+:=\\max(c,0)$ and $c^-:=\\min(c,0)$. The prescribed face move is $x_{i+1/2}^{n+1}=x_{i+1/2}^n+\\Delta t\\,w_{i+1/2}^n$. The cell average $\\bar u_i^n$ is the average over the corresponding physical cell.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-ale-upwind-finite-volume-step",
+          "source_section": "Definition",
+          "quote": "**Inputs:** The periodic grid and relative speeds of [[def-ale-periodic-moving-grid]], cell averages $\\bar u_i^n\\in\\mathbb R$, a constant physical speed $a$, face velocities $w_{i+1/2}^n$, $\\Delta t>0$, and $\\Delta\\xi>0$.\n\n**Instructions:**\n\n1. Move each face by $x_{i+1/2}^{n+1}=x_{i+1/2}^n+\\Delta t\\,w_{i+1/2}^n$ and compute $J_i^{n+1}=(x_{i+1/2}^{n+1}-x_{i-1/2}^{n+1})/\\Delta\\xi$.\n2. If any $J_i^{n+1}\\le0$, return the status `mesh_crossing` and no updated state.\n3. Otherwise, for every face set $c_{i+1/2}^n=a-w_{i+1/2}^n$ and $\\widehat F_{i+1/2}^n=(c_{i+1/2}^n)^+\\bar u_i^n+(c_{i+1/2}^n)^-\\bar u_{i+1}^n$, with periodic indices and $c^+=\\max(c,0)$, $c^-=\\min(c,0)$.\n4. Return the status `success` and the unique cell averages defined by $J_i^{n+1}\\bar u_i^{n+1}=J_i^n\\bar u_i^n-(\\Delta t/\\Delta\\xi)(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)$.\n\nAll state updates occur only after every new cell Jacobian has passed the positivity check.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ale-periodic-face-motion-satisfies-discrete-gcl",
+          "source_section": "Statement",
+          "quote": "For the face motion of [[def-ale-periodic-moving-grid]], every cell satisfies\n\n$$J_i^{n+1}=J_i^n+\\frac{\\Delta t}{\\Delta\\xi}\\left(w_{i+1/2}^n-w_{i-1/2}^n\\right).$$",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the input has a finite number $N$ of cells and faces. The algorithm performs a fixed finite number of arithmetic operations and comparisons per cell or face, so its face movement and Jacobian check terminate. If some $J_i^{n+1}\\le0$, its specified branch returns `mesh_crossing` before any state update.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Sum the update in [F2] over one period. Each face flux occurs once with a plus sign and once with a minus sign, so the periodic flux sum is zero. The remaining identity is $\\sum_iJ_i^{n+1}\\bar u_i^{n+1}=\\sum_iJ_i^n\\bar u_i^n$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If every input average equals $U$, then $c^++c^-=c$ gives $\\widehat F_{i+1/2}=(a-w_{i+1/2})U$. Thus $\\widehat F_{i+1/2}-\\widehat F_{i-1/2}=-U(w_{i+1/2}-w_{i-1/2})$. Substituting this in [F2] and using [F3] gives $J_i^{n+1}\\bar u_i^{n+1}=J_i^{n+1}U$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If all checked Jacobians are positive, each update equation in [F2] has the unique solution obtained by dividing its specified right-hand side by $J_i^{n+1}>0$. There are finitely many such formulas, and no further failure branch, so the algorithm returns `success` with exactly this array.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the success branch of step 2.1, divide the equality in step 1.3 by $J_i^{n+1}>0$ to obtain $\\bar u_i^{n+1}=U$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The moving periodic grid has finitely many actual cells; an empty flux array is not the supplied grid input.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The moving periodic grid has finitely many actual cells; an empty flux array is not the supplied grid input.",
+            "item_sha256": "1a5e137df746d8116f26cf82479bc6fdf7600756614e228af7d37fc42615cc9d",
+            "row_sha256": "fe91a11a3cf66fa882b1eaf7896c3a5ea7c1c265ef84e2cd6818706cd4661972",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The moving periodic grid has finitely many actual cells; an empty flux array is not the supplied grid input.",
+            "item_sha256": "1a5e137df746d8116f26cf82479bc6fdf7600756614e228af7d37fc42615cc9d",
+            "row_sha256": "fe91a11a3cf66fa882b1eaf7896c3a5ea7c1c265ef84e2cd6818706cd4661972",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Taking the constant state U=0 in step 2.1 and then using step 1.2 gives the zero output, while step 1.1 still telescopes mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Periodic telescoping in step 1.1 includes the allowed N=1 case, with the same periodic face flux on both sides."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The theorem is conditional on success, so step 1.2 excludes any new cell with J_i^{n+1}≤0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the periodic boundary flux once with each sign; no unpaired endpoint flux remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Face motion and flux updates are prescribed finite operations, with no selected infinite sequence of roots.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Face motion and flux updates are prescribed finite operations, with no selected infinite sequence of roots.",
+            "item_sha256": "1a5e137df746d8116f26cf82479bc6fdf7600756614e228af7d37fc42615cc9d",
+            "row_sha256": "1d1e70eb78a225b2e609c8e7f503616278c008298a0d24b0f90b0bbce95e4964",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Face motion and flux updates are prescribed finite operations, with no selected infinite sequence of roots.",
+            "item_sha256": "1a5e137df746d8116f26cf82479bc6fdf7600756614e228af7d37fc42615cc9d",
+            "row_sha256": "1d1e70eb78a225b2e609c8e7f503616278c008298a0d24b0f90b0bbce95e4964",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem supplies a success-versus-mesh-crossing dichotomy and then conservation, not a characterization by conserved mass alone.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The theorem supplies a success-versus-mesh-crossing dichotomy and then conservation, not a characterization by conserved mass alone.",
+            "item_sha256": "1a5e137df746d8116f26cf82479bc6fdf7600756614e228af7d37fc42615cc9d",
+            "row_sha256": "9d99d703edf81318dbd2d36dc80fbb45de7b91452d64d9a0a115be87876f0554",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "The theorem supplies a success-versus-mesh-crossing dichotomy and then conservation, not a characterization by conserved mass alone.",
+            "item_sha256": "1a5e137df746d8116f26cf82479bc6fdf7600756614e228af7d37fc42615cc9d",
+            "row_sha256": "9d99d703edf81318dbd2d36dc80fbb45de7b91452d64d9a0a115be87876f0554",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Mass conservation cannot imply positive future Jacobians; the explicit mesh check is still required.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Mass conservation cannot imply positive future Jacobians; the explicit mesh check is still required.",
+            "item_sha256": "1a5e137df746d8116f26cf82479bc6fdf7600756614e228af7d37fc42615cc9d",
+            "row_sha256": "2edc067313046fe1d4c44b067ef53f1770f4973e454e595b056b3c6886aace82",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_harvest",
+            "reason": "Mass conservation cannot imply positive future Jacobians; the explicit mesh check is still required.",
+            "item_sha256": "1a5e137df746d8116f26cf82479bc6fdf7600756614e228af7d37fc42615cc9d",
+            "row_sha256": "2edc067313046fe1d4c44b067ef53f1770f4973e454e595b056b3c6886aace82",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-1.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-67",
+        "notes": "Read full Proof 1.1–3.1, periodic grid, discrete-GCL proof and algorithm Definition. The finite N face table is periodic even for N=1; the branch checks all new Jacobians before dividing. Nonpositive Jacobians return mesh_crossing and no state; positive Jacobians give unique finite explicit updates. Periodic fluxes telescope, preserving sum J_i u_i (physical mass differs by fixed Delta xi). For constants including U=0 and relative speed zero, c+ + c-=c and discrete GCL make the right side J_new U. No CFL is used for these two identities; mesh crossing is explicitly excluded from success. No choice, self-edge or circular property claim is introduced; no reader/refuter finding or further defect."
+      }
+    },
+    "thm-ale-robin-robin-iteration-contracts-and-certifies-stop": {
+      "risk": "high",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-linear-diffusion-transmission-model",
+          "source_section": "Definition",
+          "quote": "Let $I_1,I_2$ and the common trace space $\\Lambda$ be finite-dimensional real inner-product spaces, with $\\dim\\Lambda\\ge1$, and set $X_i:=I_i\\oplus\\Lambda$. The trace map is $\\gamma_i(x_i,\\lambda_i)=\\lambda_i$. Let $M_i$ and $A_i$ be self-adjoint positive-definite operators on $X_i$, let $\\Delta t>0$, and define the local backward-Euler block $B_i:=\\Delta t^{-1}M_i+A_i$. In coordinates $I_i\\oplus\\Lambda$, write\n\n$$B_i=\\begin{pmatrix}B_{i,00}&B_{i,0\\Gamma}\\\\B_{i,\\Gamma0}&B_{i,\\Gamma\\Gamma}\\end{pmatrix},\\qquad g_i=(g_{i,0},g_{i,\\Gamma}).$$\n\nFor a prescribed local trace $\\lambda_i$, solve the interior equation $B_{i,00}x_i+B_{i,0\\Gamma}\\lambda_i=g_{i,0}$ and define the outward algebraic interface flux $q_i:=B_{i,\\Gamma0}x_i+B_{i,\\Gamma\\Gamma}\\lambda_i-g_{i,\\Gamma}$. Eliminating $x_i$ gives $q_i=S_i\\lambda_i-f_i$, where $S_i:=B_{i,\\Gamma\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}B_{i,0\\Gamma}$ and $f_i:=g_{i,\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}g_{i,0}$. The sign convention is outward flux on each subdomain.\n\nThe monolithic interface equations are trace continuity $\\lambda_1=\\lambda_2=\\lambda$ and flux balance $q_1+q_2=0$, equivalently $(S_1+S_2)\\lambda=f_1+f_2$. These finite-dimensional matrices represent a linear diffusion-transmission step; no nonlinear fluid-structure well-posedness is asserted.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ale-schur-complement-positive-and-minimizes-energy",
+          "source_section": "Statement",
+          "quote": "Let $B=\\begin{pmatrix}K&C\\\\C^*&D\\end{pmatrix}$ be a self-adjoint positive-definite operator on a finite-dimensional real inner-product direct sum $I\\oplus\\Lambda$. Then $K$ is positive definite, $S:=D-C^*K^{-1}C$ is positive definite on $\\Lambda$, and for every $z\\in\\Lambda$,\n\n$$\\langle Sz,z\\rangle=\\min_{x\\in I}\\langle B(x,z),(x,z)\\rangle.$$\n\nIn particular, the local Schur operators $S_i$ in [[def-ale-linear-diffusion-transmission-model]] are positive definite.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-ale-robin-robin-partitioned-iteration",
+          "source_section": "Definition",
+          "quote": "**Inputs:** Positive-definite real Schur operators $S_1,S_2$ on the nonzero finite-dimensional trace space $\\Lambda$, loads $f_1,f_2\\in\\Lambda$, a parameter $\\alpha>0$, initial incoming datum $r_1^0\\in\\Lambda$, tolerance $\\varepsilon>0$, and integer pass budget $M\\ge1$.\n\nAll vector norms on $\\Lambda$ and operator norms on its endomorphisms are induced by its specified real inner product. Set $R_i:=(\\alpha I-S_i)(\\alpha I+S_i)^{-1}$, $q_i:=\\|R_i\\|$, and $q:=q_1q_2$. For each pass $m=0,\\ldots,M-1$, perform in order\n\n$$ (S_1+\\alpha I)\\lambda_1^{m+1}=r_1^m+f_1,\\quad r_2^{m+1}=(\\alpha I-S_1)\\lambda_1^{m+1}+f_1;\\quad (S_2+\\alpha I)\\lambda_2^{m+1}=r_2^{m+1}+f_2,\\quad r_1^{m+1}=(\\alpha I-S_2)\\lambda_2^{m+1}+f_2. $$\n\nIf $\\|r_1^{m+1}-r_1^m\\|\\le (1-q)\\varepsilon/\\|(\\alpha I+S_1)^{-1}\\|$, return `converged` with trace $\\lambda_1^{m+1}$ and pass count $m+1$. If all $M$ passes are used without this test succeeding, return `budget_exhausted` with the last trace $\\lambda_1^M$ and pass count $M$. This procedure states the finite stop predicate but makes no claim about its error certificate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $i$, $S_i+\\alpha I$ is self-adjoint positive definite because $\\langle(S_i+\\alpha I)z,z\\rangle=\\langle S_i z,z\\rangle+\\alpha\\|z\\|^2>0$ for every $z\\ne0$. It is therefore invertible on the finite-dimensional space $\\Lambda$; its inverse and the operators $R_i$ have finite norms, and $\\|(\\alpha I+S_1)^{-1}\\|>0$ because $\\Lambda\\ne\\{0\\}$. Each first solve uniquely determines $\\lambda_1^{m+1}$, the first exchange uniquely determines $r_2^{m+1}$, the second solve uniquely determines $\\lambda_2^{m+1}$, and the last exchange uniquely determines $r_1^{m+1}$. Since $M$ is finite, these operations define all passes up to $M$; the tests either return `converged` at the first pass that satisfies them or, if none does, return `budget_exhausted` with the last trace. Thus the algorithm is well-defined and terminates within its stated budget.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1] and [F2], $S:=S_1+S_2$ is positive definite, so the monolithic trace $\\lambda_*=S^{-1}(f_1+f_2)$ exists uniquely. Set $p_i^*:=S_i\\lambda_*-f_i$; then $p_1^*+p_2^*=0$. Define $r_1^*:=\\alpha\\lambda_*+p_1^*$ and $r_2^*:=\\alpha\\lambda_*+p_2^*$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The first Robin equation in [F3] is equivalent to $r_1=\\alpha\\lambda_1+p_1$, and its exchange is $r_2=\\alpha\\lambda_1-p_1$; the second equation and exchange have the same forms with indices 1 and 2 reversed. Since $p_2^*=-p_1^*$, the pair $(r_1^*,r_2^*)$ is unchanged by both exchanges, so $\\lambda_*$ gives a fixed point.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, at any fixed point the two exchange equalities give $r_2=\\alpha\\lambda_1-p_1=\\alpha\\lambda_2+p_2$ and $r_1=\\alpha\\lambda_1+p_1=\\alpha\\lambda_2-p_2$. Adding the equalities for $r_2$ and $r_1$ yields $2\\alpha(\\lambda_1-\\lambda_2)=0$, hence $\\lambda_1=\\lambda_2$; subtracting yields $p_1+p_2=0$. Thus the common trace solves the unique monolithic equation from step 1.2, proving the fixed point is unique.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F2] and [F4], in an orthonormal eigenbasis of $S_i$, $R_i$ has eigenvalues $(\\alpha-\\sigma)/(\\alpha+\\sigma)$ with $\\sigma>0$. Each has absolute value strictly below $1$, so $q_i<1$. Subtracting the fixed-point equations from the iteration equations in [F3] gives $r_2^{m+1}-r_2^*=R_1(r_1^m-r_1^*)$ and then $r_1^{m+1}-r_1^*=R_2(r_2^{m+1}-r_2^*)$. Therefore the displayed error map holds and $q=q_1q_2<1$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $e_m=r_1^m-r_1^*$ and $d_m=r_1^{m+1}-r_1^m$. The error map in step 3.1 gives $d_m=(R_2R_1-I)e_m$. Since $\\|R_2R_1\\|\\le q<1$, the reverse triangle inequality yields $\\|d_m\\|\\ge(1-q)\\|e_m\\|$. The first solve in [F3] gives $\\lambda_1^{m+1}-\\lambda_*=(\\alpha I+S_1)^{-1}e_m$. Therefore the stop test in [F3] implies $\\|\\lambda_1^{m+1}-\\lambda_*\\|\\le\\|(\\alpha I+S_1)^{-1}\\|\\,\\|d_m\\|/(1-q)\\le\\varepsilon$. If the finite pass budget is exhausted without this test, no trace certificate has been issued.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Step 1.1 uses the nonzero interface space to make the inverse norm in the stopping threshold positive.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Step 1.1 uses the nonzero interface space to make the inverse norm in the stopping threshold positive.",
+            "item_sha256": "d4443b4dcdd69a28b9eea4363050f18ebc5e5396f3f80c90cc66e3afb088d642",
+            "row_sha256": "bab25b8f7204e0958c1744c1285dd88c85d4710442e322eefc54d963faf776e4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Step 1.1 uses the nonzero interface space to make the inverse norm in the stopping threshold positive.",
+            "item_sha256": "d4443b4dcdd69a28b9eea4363050f18ebc5e5396f3f80c90cc66e3afb088d642",
+            "row_sha256": "bab25b8f7204e0958c1744c1285dd88c85d4710442e322eefc54d963faf776e4",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If the initial Robin datum is the fixed datum, step 2.1 has zero error and the returned trace is exact."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The algorithm requires M≥1 and step 3.1 certifies the first-pass trace whenever its stop test holds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case q=0 is allowed: the estimate in step 3.1 becomes ||e_m||≤||d_m|| and the reflection product is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The iteration is on a finite-dimensional trace space and has no spatial or temporal endpoint variable."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every positive finite-dimensional Robin system has a unique solution, fixing each exchange without arbitrary selection.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Every positive finite-dimensional Robin system has a unique solution, fixing each exchange without arbitrary selection.",
+            "item_sha256": "d4443b4dcdd69a28b9eea4363050f18ebc5e5396f3f80c90cc66e3afb088d642",
+            "row_sha256": "196f3b02361cc6c5ca5838727cb9af820f277d457c6831affd56dd6a2ec4fd5b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope13_fresnel_repair",
+            "reason": "Every positive finite-dimensional Robin system has a unique solution, fixing each exchange without arbitrary selection.",
+            "item_sha256": "d4443b4dcdd69a28b9eea4363050f18ebc5e5396f3f80c90cc66e3afb088d642",
+            "row_sha256": "196f3b02361cc6c5ca5838727cb9af820f277d457c6831affd56dd6a2ec4fd5b",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-10.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the monolithic trace gives a Robin fixed point."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 proves every Robin fixed point has matching traces and balanced fluxes, hence is monolithic."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-67",
+        "notes": "Read all six proof steps 1.1–4.1 and the complete model, Schur lemma and algorithm, plus the exact real spectral theorem Statement. SPD makes each Robin solve and monolithic Schur sum invertible. Nonzero trace dimension makes the inverse norm in the threshold positive. Checked both fixed-point directions: the exchanges imply 2alpha(lambda1-lambda2)=0 and p1+p2=0, and the monolithic solution gives the fixed exchanges. Spectral eigenvalues (alpha-sigma)/(alpha+sigma) have modulus <1; the product bound needs no simultaneous diagonalization or commuting S1,S2. The stop bound controls e_m via ||d_m||>=(1-q)||e_m|| and therefore the returned first trace indexed m+1, with no off-by-one error. q=0, initial fixed datum, zero loads, one-dimensional trace, M=1 and budget exhaustion all meet the stated branches. No guarantee is claimed for exhausted budgets. No reader/refuter defect or unproved property imported."
+      }
+    },
+    "thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl": {
+      "risk": "high",
+      "kind": "theorem",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-periodic-moving-grid",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge1$, a reference cell width $\\Delta\\xi>0$, a time step $\\Delta t>0$, and a physical period length $L>0$. Face positions $x_{i+1/2}^n$ and face velocities $w_{i+1/2}^n$ are indexed periodically by $i\\in\\mathbb Z$, with $x_{i+N+1/2}^n=x_{i+1/2}^n+L$ and $w_{i+N+1/2}^n=w_{i+1/2}^n$. The physical cell $i$ is $[x_{i-1/2}^n,x_{i+1/2}^n]$ and its dimensionless Jacobian is $J_i^n=(x_{i+1/2}^n-x_{i-1/2}^n)/\\Delta\\xi$; require $J_i^n>0$.\n\nFor a constant physical advection speed $a\\in\\mathbb R$, the relative face speed is $c_{i+1/2}^n:=a-w_{i+1/2}^n$. Write $c^+:=\\max(c,0)$ and $c^-:=\\min(c,0)$. The prescribed face move is $x_{i+1/2}^{n+1}=x_{i+1/2}^n+\\Delta t\\,w_{i+1/2}^n$. The cell average $\\bar u_i^n$ is the average over the corresponding physical cell.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-ale-upwind-finite-volume-step",
+          "source_section": "Definition",
+          "quote": "**Inputs:** The periodic grid and relative speeds of [[def-ale-periodic-moving-grid]], cell averages $\\bar u_i^n\\in\\mathbb R$, a constant physical speed $a$, face velocities $w_{i+1/2}^n$, $\\Delta t>0$, and $\\Delta\\xi>0$.\n\n**Instructions:**\n\n1. Move each face by $x_{i+1/2}^{n+1}=x_{i+1/2}^n+\\Delta t\\,w_{i+1/2}^n$ and compute $J_i^{n+1}=(x_{i+1/2}^{n+1}-x_{i-1/2}^{n+1})/\\Delta\\xi$.\n2. If any $J_i^{n+1}\\le0$, return the status `mesh_crossing` and no updated state.\n3. Otherwise, for every face set $c_{i+1/2}^n=a-w_{i+1/2}^n$ and $\\widehat F_{i+1/2}^n=(c_{i+1/2}^n)^+\\bar u_i^n+(c_{i+1/2}^n)^-\\bar u_{i+1}^n$, with periodic indices and $c^+=\\max(c,0)$, $c^-=\\min(c,0)$.\n4. Return the status `success` and the unique cell averages defined by $J_i^{n+1}\\bar u_i^{n+1}=J_i^n\\bar u_i^n-(\\Delta t/\\Delta\\xi)(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)$.\n\nAll state updates occur only after every new cell Jacobian has passed the positivity check.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+          "source_section": "Statement",
+          "quote": "For every input satisfying [[alg-ale-upwind-finite-volume-step]], the procedure completes after finitely many operations and returns exactly one of `mesh_crossing` (with no updated state, if some $J_i^{n+1}\\le0$) or `success` (with a unique updated array, if all $J_i^{n+1}>0$). Whenever it returns `success`, it preserves total periodic mass, $\\sum_iJ_i^{n+1}\\bar u_i^{n+1}=\\sum_iJ_i^n\\bar u_i^n$. It also preserves every constant state: if $\\bar u_i^n=U$ for every cell, then $\\bar u_i^{n+1}=U$ for every cell. The mass and constant-state properties require no CFL condition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\mu=\\Delta t/\\Delta\\xi$. Expanding the flux difference in [F2] gives $J_i^{n+1}U_i'=\\mu(c_{i-1/2}^n)^+U_{i-1}+[J_i^n-\\mu((c_{i+1/2}^n)^+-(c_{i-1/2}^n)^-)]U_i-\\mu(c_{i+1/2}^n)^-U_{i+1}$. The first and third coefficients are nonnegative by the sign definitions of positive and negative parts; the middle coefficient is nonnegative by the CFL condition.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Divide by the positive $J_i^{n+1}$ from success. The resulting matrix $P$ has nonnegative entries, so $U\\le V$ componentwise implies $PU\\le PV$, and $U\\ge0$ implies $PU\\ge0$. By [F3], the update preserves constants, hence every row of $P$ sums to $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each coordinate vector $e_j$, mass conservation in [F3] gives $\\sum_iJ_i^{n+1}P_{ij}=J_j^n$. Linearity and nonnegativity now imply $\\sum_iJ_i^{n+1}|U_i'-V_i'|=\\sum_iJ_i^{n+1}|(P(U-V))_i|\\le\\sum_j(\\sum_iJ_i^{n+1}P_{ij})|U_j-V_j|=\\sum_jJ_j^n|U_j-V_j|$. This is the asserted weighted $L^1$ contraction.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The successful ALE step requires positive old and new cell volumes on an actual periodic grid.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The successful ALE step requires positive old and new cell volumes on an actual periodic grid.",
+            "item_sha256": "6f13c78d11317f6b585b476a3d72a75d15d466e15d155963209b60bde5e422c9",
+            "row_sha256": "4ed05ba1acbbdf4fd0e055cbf9684923a9566070b2b868354622429c95c0f99e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "The successful ALE step requires positive old and new cell volumes on an actual periodic grid.",
+            "item_sha256": "6f13c78d11317f6b585b476a3d72a75d15d466e15d155963209b60bde5e422c9",
+            "row_sha256": "4ed05ba1acbbdf4fd0e055cbf9684923a9566070b2b868354622429c95c0f99e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The coefficient formula in step 1.1 and linear update give zero output from zero input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "All coefficient and weighted-column arguments in steps 1.1–3.1 are indexed periodically and also apply for N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At equality in the CFL condition the middle coefficient in step 1.1 is zero, still nonnegative."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The periodic indices in steps 1.1 and 3.1 account for the last-to-first face with no boundary loss."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Inputs, interface speeds and the successful finite update are supplied; positive and negative parts are canonical.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Inputs, interface speeds and the successful finite update are supplied; positive and negative parts are canonical.",
+            "item_sha256": "6f13c78d11317f6b585b476a3d72a75d15d466e15d155963209b60bde5e422c9",
+            "row_sha256": "b90e9f03d7057d209ef85a5c521969e401c27e92e1c87ce85e0d0ebdaab2bf25",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Inputs, interface speeds and the successful finite update are supplied; positive and negative parts are canonical.",
+            "item_sha256": "6f13c78d11317f6b585b476a3d72a75d15d466e15d155963209b60bde5e422c9",
+            "row_sha256": "b90e9f03d7057d209ef85a5c521969e401c27e92e1c87ce85e0d0ebdaab2bf25",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Nonnegative update coefficients prove monotonicity and summation proves weighted L1 contraction.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Nonnegative update coefficients prove monotonicity and summation proves weighted L1 contraction.",
+            "item_sha256": "6f13c78d11317f6b585b476a3d72a75d15d466e15d155963209b60bde5e422c9",
+            "row_sha256": "e220bbf1c9efe05d49e29b6595bc0a48bb6f89cfc56e6bd6ee9ba0980f5f5789",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Nonnegative update coefficients prove monotonicity and summation proves weighted L1 contraction.",
+            "item_sha256": "6f13c78d11317f6b585b476a3d72a75d15d466e15d155963209b60bde5e422c9",
+            "row_sha256": "e220bbf1c9efe05d49e29b6595bc0a48bb6f89cfc56e6bd6ee9ba0980f5f5789",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Contractivity for one selected input pair does not imply every cell satisfies the stated sufficient CFL inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Contractivity for one selected input pair does not imply every cell satisfies the stated sufficient CFL inequality.",
+            "item_sha256": "6f13c78d11317f6b585b476a3d72a75d15d466e15d155963209b60bde5e422c9",
+            "row_sha256": "2be69fca905145c50686b995246504b5aa0c135b930ed95fe7411e8e5789412e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "scope34_hdiv_owner",
+            "reason": "Contractivity for one selected input pair does not imply every cell satisfies the stated sufficient CFL inequality.",
+            "item_sha256": "6f13c78d11317f6b585b476a3d72a75d15d466e15d155963209b60bde5e422c9",
+            "row_sha256": "2be69fca905145c50686b995246504b5aa0c135b930ed95fe7411e8e5789412e",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-12.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": []
+    },
+    "ex-ale-added-mass-toy-recurrence-instability": {
+      "risk": "low",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-toy-added-mass-recurrence",
+          "source_section": "Definition",
+          "quote": "For positive scalars $m_s$ and $m_f$, call $m_s$ the structure mass and $m_f$ the fluid added mass in the **scalar toy added-mass recurrence**. Given a scalar initial velocity increment $\\delta v_0$, define successive increments by\n\n$$m_s\\,\\delta v_{n+1}=-m_f\\,\\delta v_n\\qquad(n\\ge0).$$\n\nThis is a stipulated one-mode sequential update used only to expose its amplification factor. It is not derived from, and makes no stability claim about, a general fluid-structure discretization.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Dividing [F1] by $m_s=1$ gives $\\delta v_{n+1}=-2\\delta v_n$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induction yields $\\delta v_n=(-2)^n\\delta v_0$: it holds at $n=0$, and multiplying the formula at $n$ by $-2$ gives it at $n+1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $|\\delta v_0|>0$, $|\\delta v_n|=2^n|\\delta v_0|$ and $|\\delta v_{n+1}|=2|\\delta v_n|>|\\delta v_n|$. If instead $\\delta v_0=0$, step 2.1 gives zero increments throughout, so the nonzero hypothesis is needed for growth. Thus this specified recurrence is unstable in the stated scalar sense; no broader FSI claim follows.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The example fixes two positive masses and one scalar initial increment; there is no empty list of interacting fields or meshes.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The example fixes two positive masses and one scalar initial increment; there is no empty list of interacting fields or meshes.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "76eb97d124067ec58f5683e864ddfdc142cc817e4fed4919b01785e689c0e934",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The example fixes two positive masses and one scalar initial increment; there is no empty list of interacting fields or meshes.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "76eb97d124067ec58f5683e864ddfdc142cc817e4fed4919b01785e689c0e934",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 records the excluded boundary δv0=0, for which all increments are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 with ms=1 and mf=2 yields the single multiplier −2; step 2.1 iterates it for every n≥0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition requires ms>0 and mf>0, so zero-mass degeneracies are outside the recurrence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The recurrence starts at time index zero and induction includes that initial value; its asymptotic growth has no finite terminal endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The recurrence starts at time index zero and induction includes that initial value; its asymptotic growth has no finite terminal endpoint.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "dc9d64effc8d534c6a9c9cef0dbbda31ecae0bb6ba0df74bb2a5dacfdc9a4baf",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The recurrence starts at time index zero and induction includes that initial value; its asymptotic growth has no finite terminal endpoint.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "dc9d64effc8d534c6a9c9cef0dbbda31ecae0bb6ba0df74bb2a5dacfdc9a4baf",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The initial nonzero increment is given and the later increments are explicit powers of minus two, so no solution selection is required.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The initial nonzero increment is given and the later increments are explicit powers of minus two, so no solution selection is required.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "4eef2ce535f2d4ec2fa518e9442cd57b5b3760e611eb0cdb50509dadc87bee75",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The initial nonzero increment is given and the later increments are explicit powers of minus two, so no solution selection is required.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "4eef2ce535f2d4ec2fa518e9442cd57b5b3760e611eb0cdb50509dadc87bee75",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The specified mass ratio and nonzero initial increment imply geometric growth of this scalar recurrence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The specified mass ratio and nonzero initial increment imply geometric growth of this scalar recurrence.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "aabe65600e82a03dadc5af34f77e79aab4fd58ff0b036023056ba4e647274656",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "The specified mass ratio and nonzero initial increment imply geometric growth of this scalar recurrence.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "aabe65600e82a03dadc5af34f77e79aab4fd58ff0b036023056ba4e647274656",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Geometric instability in some other coupled system would not imply this particular mass ratio or scalar added-mass model.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "Geometric instability in some other coupled system would not imply this particular mass ratio or scalar added-mass model.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "e260615fc6546814b5f0e466ccea4fbfd3c13502e428dec6db1bef23efc35298",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_url_cwi",
+            "reason": "Geometric instability in some other coupled system would not imply this particular mass ratio or scalar added-mass model.",
+            "item_sha256": "e59053478cd1e56915e916e52156338bbf71b7598ed409e83523381a87fd342c",
+            "row_sha256": "e260615fc6546814b5f0e466ccea4fbfd3c13502e428dec6db1bef23efc35298",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-6.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-67",
+        "notes": "Read the full recurrence definition and Verification 1.1–3.1. Positive masses permit division, the specified ratio is -2, and induction from n=0 gives (-2)^n delta v0. Its magnitude doubles for every nonzero initial increment. Zero initial increment is explicitly stationary and excluded from strict growth. This is the stipulated scalar recurrence, not a derived general FSI instability claim. No choice or analytic convergence premise is needed; reader/refuter raised no finding and no defect is identified."
+      }
+    },
+    "ex-ale-expanding-mesh-free-stream": {
+      "risk": "low",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-periodic-moving-grid",
+          "source_section": "Definition",
+          "quote": "Fix $N\\ge1$, a reference cell width $\\Delta\\xi>0$, a time step $\\Delta t>0$, and a physical period length $L>0$. Face positions $x_{i+1/2}^n$ and face velocities $w_{i+1/2}^n$ are indexed periodically by $i\\in\\mathbb Z$, with $x_{i+N+1/2}^n=x_{i+1/2}^n+L$ and $w_{i+N+1/2}^n=w_{i+1/2}^n$. The physical cell $i$ is $[x_{i-1/2}^n,x_{i+1/2}^n]$ and its dimensionless Jacobian is $J_i^n=(x_{i+1/2}^n-x_{i-1/2}^n)/\\Delta\\xi$; require $J_i^n>0$.\n\nFor a constant physical advection speed $a\\in\\mathbb R$, the relative face speed is $c_{i+1/2}^n:=a-w_{i+1/2}^n$. Write $c^+:=\\max(c,0)$ and $c^-:=\\min(c,0)$. The prescribed face move is $x_{i+1/2}^{n+1}=x_{i+1/2}^n+\\Delta t\\,w_{i+1/2}^n$. The cell average $\\bar u_i^n$ is the average over the corresponding physical cell.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-ale-upwind-finite-volume-step",
+          "source_section": "Definition",
+          "quote": "**Inputs:** The periodic grid and relative speeds of [[def-ale-periodic-moving-grid]], cell averages $\\bar u_i^n\\in\\mathbb R$, a constant physical speed $a$, face velocities $w_{i+1/2}^n$, $\\Delta t>0$, and $\\Delta\\xi>0$.\n\n**Instructions:**\n\n1. Move each face by $x_{i+1/2}^{n+1}=x_{i+1/2}^n+\\Delta t\\,w_{i+1/2}^n$ and compute $J_i^{n+1}=(x_{i+1/2}^{n+1}-x_{i-1/2}^{n+1})/\\Delta\\xi$.\n2. If any $J_i^{n+1}\\le0$, return the status `mesh_crossing` and no updated state.\n3. Otherwise, for every face set $c_{i+1/2}^n=a-w_{i+1/2}^n$ and $\\widehat F_{i+1/2}^n=(c_{i+1/2}^n)^+\\bar u_i^n+(c_{i+1/2}^n)^-\\bar u_{i+1}^n$, with periodic indices and $c^+=\\max(c,0)$, $c^-=\\min(c,0)$.\n4. Return the status `success` and the unique cell averages defined by $J_i^{n+1}\\bar u_i^{n+1}=J_i^n\\bar u_i^n-(\\Delta t/\\Delta\\xi)(\\widehat F_{i+1/2}^n-\\widehat F_{i-1/2}^n)$.\n\nAll state updates occur only after every new cell Jacobian has passed the positivity check.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ale-upwind-step-conserves-mass-and-preserves-free-stream",
+          "source_section": "Statement",
+          "quote": "For every input satisfying [[alg-ale-upwind-finite-volume-step]], the procedure completes after finitely many operations and returns exactly one of `mesh_crossing` (with no updated state, if some $J_i^{n+1}\\le0$) or `success` (with a unique updated array, if all $J_i^{n+1}>0$). Whenever it returns `success`, it preserves total periodic mass, $\\sum_iJ_i^{n+1}\\bar u_i^{n+1}=\\sum_iJ_i^n\\bar u_i^n$. It also preserves every constant state: if $\\bar u_i^n=U$ for every cell, then $\\bar u_i^{n+1}=U$ for every cell. The mass and constant-state properties require no CFL condition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The moved faces are $0$, $1.01$, and $2$. Hence the two updated Jacobians are $1.01$ and $0.99$, both positive, so [F2] returns `success` and performs the state update.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The relative speeds at these faces are $0$, $-0.1$, and $0$, so the fluxes are $0$, $-0.1U$, and $0$. Formula [F2] gives $J_1^{n+1}\\bar u_1^{n+1}=U-0.1(-0.1U)=1.01U$ and $J_2^{n+1}\\bar u_2^{n+1}=U-0.1(0.1U)=0.99U$. Dividing by the positive Jacobians gives both updated averages equal to $U$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The new total mass is $1.01U+0.99U=2U$, equal to the old mass $U+U$. This is the finite instance of [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The calculation fixes two cells with positive updated Jacobians and a nonzero time step; deleting a cell is not an instance of that update.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The calculation fixes two cells with positive updated Jacobians and a nonzero time step; deleting a cell is not an instance of that update.",
+            "item_sha256": "441b2fcb0fdf2ecf8093dc00b0897def910b5a136d4105d321947c1d6869620b",
+            "row_sha256": "46cf8379e804c36b51f4b541f5e96d982251b48f447759ddccb4510a147d4452",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The calculation fixes two cells with positive updated Jacobians and a nonzero time step; deleting a cell is not an instance of that update.",
+            "item_sha256": "441b2fcb0fdf2ecf8093dc00b0897def910b5a136d4105d321947c1d6869620b",
+            "row_sha256": "46cf8379e804c36b51f4b541f5e96d982251b48f447759ddccb4510a147d4452",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The formulas in step 1.2 remain valid for U=0 and produce zero averages and zero mass."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example explicitly uses a two-cell period and makes no one-cell numerical calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies both moved Jacobians are strictly positive, so this example avoids the mesh_crossing branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the periodic face fluxes at both ends of the period, which cancel as used in the mass check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Face velocities and Jacobian updates are explicitly given, and substitution of the arbitrary constant state determines both new cell values without selection.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "Face velocities and Jacobian updates are explicitly given, and substitution of the arbitrary constant state determines both new cell values without selection.",
+            "item_sha256": "441b2fcb0fdf2ecf8093dc00b0897def910b5a136d4105d321947c1d6869620b",
+            "row_sha256": "f20732b4fd3c3a7fc17b496ade697eed5cb472ad6a5a621908d950ac0531fb64",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "Face velocities and Jacobian updates are explicitly given, and substitution of the arbitrary constant state determines both new cell values without selection.",
+            "item_sha256": "441b2fcb0fdf2ecf8093dc00b0897def910b5a136d4105d321947c1d6869620b",
+            "row_sha256": "f20732b4fd3c3a7fc17b496ade697eed5cb472ad6a5a621908d950ac0531fb64",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The two-cell expanding-mesh calculation verifies the geometric conservation law and exact free-stream preservation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The two-cell expanding-mesh calculation verifies the geometric conservation law and exact free-stream preservation.",
+            "item_sha256": "441b2fcb0fdf2ecf8093dc00b0897def910b5a136d4105d321947c1d6869620b",
+            "row_sha256": "2e0551582d29ead80d15e19dca766ad38a79859f513bc19fdc73f6a6643c43a8",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The two-cell expanding-mesh calculation verifies the geometric conservation law and exact free-stream preservation.",
+            "item_sha256": "441b2fcb0fdf2ecf8093dc00b0897def910b5a136d4105d321947c1d6869620b",
+            "row_sha256": "2e0551582d29ead80d15e19dca766ad38a79859f513bc19fdc73f6a6643c43a8",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not characterize all moving meshes or all ALE fluxes satisfying free-stream preservation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The example does not characterize all moving meshes or all ALE fluxes satisfying free-stream preservation.",
+            "item_sha256": "441b2fcb0fdf2ecf8093dc00b0897def910b5a136d4105d321947c1d6869620b",
+            "row_sha256": "ff684e90f16d3a90ec664a30f3655cafd41a327c5e661656e464009eaccf93b6",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/scope25_gamma_continuation_owner",
+            "reason": "The example does not characterize all moving meshes or all ALE fluxes satisfying free-stream preservation.",
+            "item_sha256": "441b2fcb0fdf2ecf8093dc00b0897def910b5a136d4105d321947c1d6869620b",
+            "row_sha256": "ff684e90f16d3a90ec664a30f3655cafd41a327c5e661656e464009eaccf93b6",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-11.json"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": []
+    },
+    "ex-ale-two-domain-heat-interface-flux-balance": {
+      "risk": "medium",
+      "kind": "example",
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ale-linear-diffusion-transmission-model",
+          "source_section": "Definition",
+          "quote": "Let $I_1,I_2$ and the common trace space $\\Lambda$ be finite-dimensional real inner-product spaces, with $\\dim\\Lambda\\ge1$, and set $X_i:=I_i\\oplus\\Lambda$. The trace map is $\\gamma_i(x_i,\\lambda_i)=\\lambda_i$. Let $M_i$ and $A_i$ be self-adjoint positive-definite operators on $X_i$, let $\\Delta t>0$, and define the local backward-Euler block $B_i:=\\Delta t^{-1}M_i+A_i$. In coordinates $I_i\\oplus\\Lambda$, write\n\n$$B_i=\\begin{pmatrix}B_{i,00}&B_{i,0\\Gamma}\\\\B_{i,\\Gamma0}&B_{i,\\Gamma\\Gamma}\\end{pmatrix},\\qquad g_i=(g_{i,0},g_{i,\\Gamma}).$$\n\nFor a prescribed local trace $\\lambda_i$, solve the interior equation $B_{i,00}x_i+B_{i,0\\Gamma}\\lambda_i=g_{i,0}$ and define the outward algebraic interface flux $q_i:=B_{i,\\Gamma0}x_i+B_{i,\\Gamma\\Gamma}\\lambda_i-g_{i,\\Gamma}$. Eliminating $x_i$ gives $q_i=S_i\\lambda_i-f_i$, where $S_i:=B_{i,\\Gamma\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}B_{i,0\\Gamma}$ and $f_i:=g_{i,\\Gamma}-B_{i,\\Gamma0}B_{i,00}^{-1}g_{i,0}$. The sign convention is outward flux on each subdomain.\n\nThe monolithic interface equations are trace continuity $\\lambda_1=\\lambda_2=\\lambda$ and flux balance $q_1+q_2=0$, equivalently $(S_1+S_2)\\lambda=f_1+f_2$. These finite-dimensional matrices represent a linear diffusion-transmission step; no nonlinear fluid-structure well-posedness is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ale-schur-complement-positive-and-minimizes-energy",
+          "source_section": "Statement",
+          "quote": "Let $B=\\begin{pmatrix}K&C\\\\C^*&D\\end{pmatrix}$ be a self-adjoint positive-definite operator on a finite-dimensional real inner-product direct sum $I\\oplus\\Lambda$. Then $K$ is positive definite, $S:=D-C^*K^{-1}C$ is positive definite on $\\Lambda$, and for every $z\\in\\Lambda$,\n\n$$\\langle Sz,z\\rangle=\\min_{x\\in I}\\langle B(x,z),(x,z)\\rangle.$$\n\nIn particular, the local Schur operators $S_i$ in [[def-ale-linear-diffusion-transmission-model]] are positive definite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ale-monolithic-backward-euler-energy-identity",
+          "source_section": "Statement",
+          "quote": "Assume the finite-dimensional diffusion-transmission model of [[def-ale-linear-diffusion-transmission-model]]. Let $V:=\\{(v_1,v_2)\\in X_1\\oplus X_2:\\gamma_1v_1=\\gamma_2v_2\\}$ be the common-trace space, take $u^n\\in V$, and let $F_i^{n+1}\\in X_i$. In the block notation of the definition, set the local right-hand side to $g_i:=\\Delta t^{-1}M_i u_i^n+F_i^{n+1}$; assemble the local equations with common trace and the outward algebraic fluxes $q_i$ from that definition. There is a unique $u^{n+1}\\in V$ satisfying\n\n$$\\sum_{i=1}^2\\left(\\left\\langle M_i\\frac{u_i^{n+1}-u_i^n}{\\Delta t},v_i\\right\\rangle+\\langle A_i u_i^{n+1},v_i\\rangle\\right)=\\sum_{i=1}^2\\langle F_i^{n+1},v_i\\rangle\\qquad(v\\in V).$$\n\nIt obeys the exact identity\n\n$$\\frac12\\left(\\|u^{n+1}\\|_M^2-\\|u^n\\|_M^2+\\|u^{n+1}-u^n\\|_M^2\\right)+\\Delta t\\|u^{n+1}\\|_A^2=\\Delta t\\sum_{i=1}^2\\langle F_i^{n+1},u_i^{n+1}\\rangle,$$\n\nwhere $\\|v\\|_M^2:=\\sum_i\\langle M_iv_i,v_i\\rangle$ and $\\|v\\|_A^2:=\\sum_i\\langle A_iv_i,v_i\\rangle$. In the unforced case the monolithic backward-Euler energy is nonincreasing.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-ale-robin-robin-partitioned-iteration",
+          "source_section": "Definition",
+          "quote": "**Inputs:** Positive-definite real Schur operators $S_1,S_2$ on the nonzero finite-dimensional trace space $\\Lambda$, loads $f_1,f_2\\in\\Lambda$, a parameter $\\alpha>0$, initial incoming datum $r_1^0\\in\\Lambda$, tolerance $\\varepsilon>0$, and integer pass budget $M\\ge1$.\n\nAll vector norms on $\\Lambda$ and operator norms on its endomorphisms are induced by its specified real inner product. Set $R_i:=(\\alpha I-S_i)(\\alpha I+S_i)^{-1}$, $q_i:=\\|R_i\\|$, and $q:=q_1q_2$. For each pass $m=0,\\ldots,M-1$, perform in order\n\n$$ (S_1+\\alpha I)\\lambda_1^{m+1}=r_1^m+f_1,\\quad r_2^{m+1}=(\\alpha I-S_1)\\lambda_1^{m+1}+f_1;\\quad (S_2+\\alpha I)\\lambda_2^{m+1}=r_2^{m+1}+f_2,\\quad r_1^{m+1}=(\\alpha I-S_2)\\lambda_2^{m+1}+f_2. $$\n\nIf $\\|r_1^{m+1}-r_1^m\\|\\le (1-q)\\varepsilon/\\|(\\alpha I+S_1)^{-1}\\|$, return `converged` with trace $\\lambda_1^{m+1}$ and pass count $m+1$. If all $M$ passes are used without this test succeeding, return `budget_exhausted` with the last trace $\\lambda_1^M$ and pass count $M$. This procedure states the finite stop predicate but makes no claim about its error certificate.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ale-robin-robin-iteration-contracts-and-certifies-stop",
+          "source_section": "Statement",
+          "quote": "Assume the model, positive Schur operators, and algorithm of [[def-ale-linear-diffusion-transmission-model]], [[lem-ale-schur-complement-positive-and-minimizes-energy]], and [[alg-ale-robin-robin-partitioned-iteration]], with $\\alpha>0$. Every Robin solve in the algorithm exists uniquely, and for every admitted input it returns `converged` with the current first-subdomain trace on the first passing test, or returns `budget_exhausted` with $\\lambda_1^M$ after at most $M$ passes. Let $\\lambda_*$ be the unique monolithic trace solving $(S_1+S_2)\\lambda_*=f_1+f_2$, and put $R_i=(\\alpha I-S_i)(\\alpha I+S_i)^{-1}$ and $q_i=\\|R_i\\|$, $q=q_1q_2$. Then $q<1$, the unique fixed point of the iteration corresponds exactly to $\\lambda_*$, and the incoming-data error satisfies\n\n$$r_1^{m+1}-r_1^*=R_2R_1(r_1^m-r_1^*),\\qquad\\|r_1^{m+1}-r_1^*\\|\\le q\\|r_1^m-r_1^*\\|.$$\n\nIf the algorithm's stop test succeeds at pass $m+1$, its returned trace satisfies $\\|\\lambda_1^{m+1}-\\lambda_*\\|\\le\\varepsilon$. A `budget_exhausted` return carries no such certificate.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The local backward-Euler blocks are $B_1=\\operatorname{diag}(1,2)$ and $B_2=\\operatorname{diag}(1,1)$, which are positive definite. With zero off-diagonal blocks between the interior and trace coordinates, their Schur operators are $S_1=2$ and $S_2=1$, so [F2] applies.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On pass one, $\\lambda_1^1=(2+1)/3=1$, $r_2^1=(1-2)1+1=0$, $\\lambda_2^1=(0+5)/2=2.5$, and $r_1^1=(1-1)2.5+5=5$. Here $q_1=|(1-2)/(1+2)|=1/3$, $q_2=0$, and the stop threshold is $0.1/(1/3)=0.3$; the incoming-data change is $|5-2|=3$, so the algorithm does not stop.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The monolithic scalar equation is $3\\lambda=6$, hence $\\lambda_*=2$. Its fluxes are $q_1=2(2)-1=3$ and $q_2=1(2)-5=-3$, so they balance and the interface work $\\lambda_*(q_1+q_2)$ vanishes as in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On pass two, $\\lambda_1^2=(5+1)/3=2$, $r_2^2=(1-2)2+1=-1$, $\\lambda_2^2=(-1+5)/2=2$, and $r_1^2=(1-1)2+5=5$. The incoming-data change is $0\\le0.3$, so [F4] returns `converged` with trace $2$; [F5] certifies its error is at most $0.1$ relative to $\\lambda_*=2$ from step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two nonempty scalar interior spaces and one scalar trace space, and both condensed operators are explicit positive numbers.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The example has two nonempty scalar interior spaces and one scalar trace space, and both condensed operators are explicit positive numbers.",
+            "item_sha256": "e522cedd795c6d091c3c63773211d0482d2a338640ebec1e52e4588e1b891fe6",
+            "row_sha256": "031238166ccea2c0e187abd84db99d6f8355535c16598c540edf320666295254",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "The example has two nonempty scalar interior spaces and one scalar trace space, and both condensed operators are explicit positive numbers.",
+            "item_sha256": "e522cedd795c6d091c3c63773211d0482d2a338640ebec1e52e4588e1b891fe6",
+            "row_sha256": "031238166ccea2c0e187abd84db99d6f8355535c16598c540edf320666295254",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero condensed loads f1=1 and f2=5 and does not claim the zero-load solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trace space is explicitly one dimensional, Λ=R, and steps 1.1, 1.2, 2.1, and 3.1 perform the scalar solves."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies both local blocks and their Schur values are positive, excluding singular local solves."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 computes equal-and-opposite outward interface fluxes 3 and −3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Each Robin pass solves an explicit scalar linear equation and the second pass meets the stated stop rule, so no branch of interface solutions is selected.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "Each Robin pass solves an explicit scalar linear equation and the second pass meets the stated stop rule, so no branch of interface solutions is selected.",
+            "item_sha256": "e522cedd795c6d091c3c63773211d0482d2a338640ebec1e52e4588e1b891fe6",
+            "row_sha256": "b6c3a9ffff59463483620a9031abff39578fdafadec69e7c842264fe71275b2a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_coverage_source_kinds",
+            "reason": "Each Robin pass solves an explicit scalar linear equation and the second pass meets the stated stop rule, so no branch of interface solutions is selected.",
+            "item_sha256": "e522cedd795c6d091c3c63773211d0482d2a338640ebec1e52e4588e1b891fe6",
+            "row_sha256": "b6c3a9ffff59463483620a9031abff39578fdafadec69e7c842264fe71275b2a",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-2.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes one fixed point and its trace; it makes no equivalence claim of its own."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes one fixed point and its trace; it makes no equivalence claim of its own."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_check_disposition": "All finite numerical or algebraic instances are evaluated exactly in the Verification steps; no registered finite-smoke check applies.",
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-67",
+        "notes": "Read all Verification steps and all five actual suppliers in full (model, Schur lemma, monolithic energy, Robin algorithm and certified contraction theorem). dt=2 and the specified SPD masses/diffusions give B1=diag(1,2), B2=diag(1,1), hence Schur values 2 and 1. Condensed scalar loads 1,5 give lambda*=2 and outward fluxes 3,-3, with zero common-trace work. Pass one gives traces 1,5/2, outgoing incoming datum 5 and change 3; q1=1/3,q2=0, inverse norm 1/3 give threshold 3/10, so no premature stop. Pass two gives both traces 2 and unchanged datum 5, so the finite-budget endpoint returns converged with certified error <=1/10 (actual error zero). No claim is made for other loads or budgets; no choice or general PDE assertion. Reader/refuter found no defect and the direct calculations agree."
+      }
+    }
+  }
+}

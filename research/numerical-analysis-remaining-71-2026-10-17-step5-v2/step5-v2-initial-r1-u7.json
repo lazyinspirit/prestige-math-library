@@ -1,0 +1,508 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "7",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "lem-leibniz-determinant-forward-error-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "86b7f81d5d70f917886184c3f21f8006c00e87b849b4897bf58c50ab3fe7c498",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The selected relative-model system can contain nondyadic real numbers, while the cited definition covers only dyadic matrices. The repair explicitly defines the same finite Leibniz polynomial for real entries without narrowing the Statement. Checked s-1 product errors, s!-1 accumulator errors, exact zeros and gamma_a+gamma_b+gamma_a gamma_b <= gamma_(a+b) under qu<1; no dyadic assumption or choice is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-exact-dyadic-determinant-sign",
+      "model": "gpt-6-luna",
+      "context_sha256": "24b07b4c8ff50b8b4a89a7a786bc9a524fe6dae44cbdfcc26fdc87283abd4b8e",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The procedure itself is finite and correct for arbitrary positive matrix order, but its Definition contained its correctness argument and its justified_by target established only geometric orders. Removed the embedded proof and pointed justified_by at a separately authored arbitrary-order lemma. The lemma checks the actual row scales via det N=(product 2^k_i)det M, computes the exact finite integer sum, and proves termination on finite encodings including zero and s=1.",
+      "uncertain": false,
+      "source_urls": [
+        "https://doc.cgal.org/latest/Manual/devman_robustness.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "lem-lifted-determinant-sign-matches-sphere-side",
+      "model": "gpt-6-luna",
+      "context_sha256": "09890efe53a5299ef117cb40c018a2ebcd50a395c41834ea8f13691c8de7bb26",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Statement and proof correctly establish L_d=-O_d R and O_d L_d=-O_d^2 R. Swapping two base rows changes both raw determinants but leaves the geometric side fixed, so the old title omitted essential orientation normalization. Corrected only the title. Checked cofactor signs (-1)^d and (-1)^(d+3), the unique-sphere hypothesis O_d!=0, and inside/on/outside signs; Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-floating-filter-sign-is-exact",
+      "model": "gpt-6-luna",
+      "context_sha256": "0dcf7b5866273b2cb12839cf69530ccdf1e80f362a85c7f5d5b4f8b625cff85c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited algorithm step 4 already distinguishes the positive and negative endpoint tests, but F1 stated only that the interval excludes zero and therefore did not by itself imply the polarity asserted in proof 3.1. Expanded F1 to give the exact two cited branch tests. Verified S<=U, gamma_q>=0, E>=gamma_q U and determinant containment, so strict endpoint tests give the correct signs; Statement and proof remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-dyadic-geometric-predicate",
+      "model": "gpt-6-luna",
+      "context_sha256": "89e36f6d996a754229557242e8a34a08533e53c06d427a5d09d3758891ea2276",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The old input admitted an arbitrary finite tuple, so e.g. a one-point d=2 orientation request had no square predicate matrix. Added exactly d+1 orientation points or d+2 lifted/sphere-side points as admissibility conditions already required by the determinant definition and owning contract. Specified outputs and explicit return for raw requests, retained all zero/degenerate and fallback behavior, and cited the new arbitrary-order fallback lemma as its correctness prerequisite.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+      "model": "gpt-6-luna",
+      "context_sha256": "c30b4ff2a6572a5252765b4765c96c3df0d904c7dc489d9ed48a91624322014f",
+      "outcome": "false_positive",
+      "reason": "False positive: alg-floating-filter-for-geometric-determinants step 2 returns inconclusive for any nonfinite interval operation, and step 3 does so when rounding E overflows. Thus the existing predicate step 2 already invokes the exact fallback in every such case; no separate nonfinite output branch is needed. Checked all five proof steps against the fixed arities, finite dyadic matrix construction, exact integer fallback, strict filter signs and O_d L_d normalization. The item guard equals its assignment before guard. Only its F3 contract quotation was refreshed after the supplier embedded proof was removed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-leibniz-determinant-forward-error-bound",
+      "disposition": "repaired",
+      "post_sha256": "31e075b905af5d1caf98ac26c103a8d7d5a46f14564cffd092d4b050f475dea3",
+      "review_context_sha256": "9ee301d93c6a2b6e65ec1800ef558225a7be445ec3d3ac7ee6393be04a47418e",
+      "reason": "The selected relative-model system can contain nondyadic real numbers, while the cited definition covers only dyadic matrices. The repair explicitly defines the same finite Leibniz polynomial for real entries without narrowing the Statement. Checked s-1 product errors, s!-1 accumulator errors, exact zeros and gamma_a+gamma_b+gamma_a gamma_b <= gamma_(a+b) under qu<1; no dyadic assumption or choice is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-exact-dyadic-determinant-sign",
+      "disposition": "repaired",
+      "post_sha256": "5958362bdcd3d64ab185c38daab5f61b4ea052fa1b134b48fa8d0f795ff8e927",
+      "review_context_sha256": "b485b67bed3cde64ec14fe87bd2b02e9cd3068e8a15a827d19383ab6542d75de",
+      "reason": "The procedure itself is finite and correct for arbitrary positive matrix order, but its Definition contained its correctness argument and its justified_by target established only geometric orders. Removed the embedded proof and pointed justified_by at a separately authored arbitrary-order lemma. The lemma checks the actual row scales via det N=(product 2^k_i)det M, computes the exact finite integer sum, and proves termination on finite encodings including zero and s=1.",
+      "uncertain": false,
+      "source_urls": [
+        "https://doc.cgal.org/latest/Manual/devman_robustness.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "lem-exact-dyadic-determinant-sign-correct-and-terminates",
+      "disposition": "authored",
+      "post_sha256": "bcc5c4d8320f3dc88362969e37d6b57296f09c72ebb50abb7392fe990b8e7678",
+      "review_context_sha256": "8d95342c79e7cc48f5be29b77d66c0fede8d30b30bf2ee8c1be86e6d95972e37",
+      "reason": "The exact-sign algorithm accepts every positive matrix order; its old geometric justified_by theorem only covers orders at most five, and the row-clearance supplier does not prove execution termination. This lemma proves the actual algorithm correct and terminating for arbitrary finite s and supplies the fallback call in step 2 of alg-certified-dyadic-geometric-predicate. Source context consulted: CGAL Robustness Issues, exact integer/rational predicates and floating filters; the row-scaling identity and termination argument are proved locally, not attributed to that manual. This is author self-check, not independent review.",
+      "uncertain": false,
+      "source_urls": [
+        "https://doc.cgal.org/latest/Manual/devman_robustness.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "lem-lifted-determinant-sign-matches-sphere-side",
+      "disposition": "repaired",
+      "post_sha256": "0f290895c59fc0bbbd2b9a25e9ffff025c0b8539c203a602c3615d89abd55e5f",
+      "review_context_sha256": "2bf6c24833d8c61d7d1bae3ef8a71fa900f43bda703cbdde80767d5903892562",
+      "reason": "The Statement and proof correctly establish L_d=-O_d R and O_d L_d=-O_d^2 R. Swapping two base rows changes both raw determinants but leaves the geometric side fixed, so the old title omitted essential orientation normalization. Corrected only the title. Checked cofactor signs (-1)^d and (-1)^(d+3), the unique-sphere hypothesis O_d!=0, and inside/on/outside signs; Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-floating-filter-sign-is-exact",
+      "disposition": "repaired",
+      "post_sha256": "b454fedacc83bc496427cdd42edd33af5121310f667df27b9a570ab3110f3aa4",
+      "review_context_sha256": "2e1ad7669297110b200b0d872ee2658a777e0473652a1b99174de762d882fe9f",
+      "reason": "The cited algorithm step 4 already distinguishes the positive and negative endpoint tests, but F1 stated only that the interval excludes zero and therefore did not by itself imply the polarity asserted in proof 3.1. Expanded F1 to give the exact two cited branch tests. Verified S<=U, gamma_q>=0, E>=gamma_q U and determinant containment, so strict endpoint tests give the correct signs; Statement and proof remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-dyadic-geometric-predicate",
+      "disposition": "repaired",
+      "post_sha256": "4bc0b75b17b9d4322016de93ad2ae974e64ac12adf94f4f980e960eab049894a",
+      "review_context_sha256": "b3045735b03c8cd9a247888912ccef3add5c7ce8b864da27475c66dfaa1bb7d0",
+      "reason": "The old input admitted an arbitrary finite tuple, so e.g. a one-point d=2 orientation request had no square predicate matrix. Added exactly d+1 orientation points or d+2 lifted/sphere-side points as admissibility conditions already required by the determinant definition and owning contract. Specified outputs and explicit return for raw requests, retained all zero/degenerate and fallback behavior, and cited the new arbitrary-order fallback lemma as its correctness prerequisite.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+      "disposition": "unaffected",
+      "metadata_repair_only": true,
+      "post_sha256": "e9c0a77fd0b7376e41fd70c262a5a9af7468bd32375d9eda059035e13b9d93a6",
+      "review_context_sha256": "b7f57ea9858e2430d21b7a5fd10c522e0f48c90a717abca0365f56af6fd9a895",
+      "reason": "False positive: alg-floating-filter-for-geometric-determinants step 2 returns inconclusive for any nonfinite interval operation, and step 3 does so when rounding E overflows. Thus the existing predicate step 2 already invokes the exact fallback in every such case; no separate nonfinite output branch is needed. Checked all five proof steps against the fixed arities, finite dyadic matrix construction, exact integer fallback, strict filter signs and O_d L_d normalization. The item guard equals its assignment before guard. Only its F3 contract quotation was refreshed after the supplier embedded proof was removed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [
+    {
+      "id": "lem-exact-dyadic-determinant-sign-correct-and-terminates",
+      "kind": "lemma",
+      "home_page": "certified-geometric-predicates",
+      "batch": "7",
+      "consumers": [
+        "alg-certified-dyadic-geometric-predicate"
+      ],
+      "reason": "The exact-sign algorithm accepts every positive matrix order; its old geometric justified_by theorem only covers orders at most five, and the row-clearance supplier does not prove execution termination. This lemma proves the actual algorithm correct and terminating for arbitrary finite s and supplies the fallback call in step 2 of alg-certified-dyadic-geometric-predicate. Source context consulted: CGAL Robustness Issues, exact integer/rational predicates and floating filters; the row-scaling identity and termination argument are proved locally, not attributed to that manual.",
+      "uncertain": false,
+      "source_urls": [
+        "https://doc.cgal.org/latest/Manual/devman_robustness.html"
+      ],
+      "familiar": true
+    }
+  ],
+  "downstream": [
+    "alg-certified-convex-polygon-overlap",
+    "alg-certified-dyadic-geometric-predicate",
+    "alg-exact-dyadic-determinant-sign",
+    "alg-incremental-planar-delaunay-edge-flips",
+    "alg-incremental-three-dimensional-regular-cavity-repair",
+    "ex-nearly-cocircular-sites-certified-incircle",
+    "ex-nearly-collinear-triangle-certified-orientation",
+    "lem-exact-dyadic-determinant-sign-correct-and-terminates",
+    "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+    "thm-certified-polygon-overlap-correctness",
+    "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-resolved-finding",
+      "id": "lem-leibniz-determinant-forward-error-bound",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "The selected relative-model system can contain nondyadic real numbers, while the cited definition covers only dyadic matrices. The repair explicitly defines the same finite Leibniz polynomial for real entries without narrowing the Statement. Checked s-1 product errors, s!-1 accumulator errors, exact zeros and gamma_a+gamma_b+gamma_a gamma_b <= gamma_(a+b) under qu<1; no dyadic assumption or choice is used.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u7.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-resolved-finding",
+      "id": "alg-exact-dyadic-determinant-sign",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "The procedure itself is finite and correct for arbitrary positive matrix order, but its Definition contained its correctness argument and its justified_by target established only geometric orders. Removed the embedded proof and pointed justified_by at a separately authored arbitrary-order lemma. The lemma checks the actual row scales via det N=(product 2^k_i)det M, computes the exact finite integer sum, and proves termination on finite encodings including zero and s=1.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u7.json",
+      "uncertain": false,
+      "source_urls": [
+        "https://doc.cgal.org/latest/Manual/devman_robustness.html"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-resolved-finding",
+      "id": "lem-lifted-determinant-sign-matches-sphere-side",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "The Statement and proof correctly establish L_d=-O_d R and O_d L_d=-O_d^2 R. Swapping two base rows changes both raw determinants but leaves the geometric side fixed, so the old title omitted essential orientation normalization. Corrected only the title. Checked cofactor signs (-1)^d and (-1)^(d+3), the unique-sphere hypothesis O_d!=0, and inside/on/outside signs; Statement is unchanged.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u7.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-resolved-finding",
+      "id": "thm-floating-filter-sign-is-exact",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "The cited algorithm step 4 already distinguishes the positive and negative endpoint tests, but F1 stated only that the interval excludes zero and therefore did not by itself imply the polarity asserted in proof 3.1. Expanded F1 to give the exact two cited branch tests. Verified S<=U, gamma_q>=0, E>=gamma_q U and determinant containment, so strict endpoint tests give the correct signs; Statement and proof remain unchanged.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u7.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-resolved-finding",
+      "id": "alg-certified-dyadic-geometric-predicate",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "finding": "The old input admitted an arbitrary finite tuple, so e.g. a one-point d=2 orientation request had no square predicate matrix. Added exactly d+1 orientation points or d+2 lifted/sphere-side points as admissibility conditions already required by the determinant definition and owning contract. Specified outputs and explicit return for raw requests, retained all zero/degenerate and fallback behavior, and cited the new arbitrary-order fallback lemma as its correctness prerequisite.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u7.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "record-consumer-examination",
+      "suppliers": [
+        "alg-exact-dyadic-determinant-sign",
+        "alg-certified-dyadic-geometric-predicate",
+        "lem-exact-dyadic-determinant-sign-correct-and-terminates"
+      ],
+      "published_consumers": [],
+      "status": "no-published-consumer-defect-found",
+      "reason": "Searched item dependency/reference uses and library/article links. All existing direct item consumers are draft members of the frozen frontier; the newly authored helper is outside the frontier and has creation-only review duties. No published item was edited or adjudicated, and no outside existing consumer needs maintenance for these interfaces.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "lem-leibniz-determinant-forward-error-bound",
+      "repair": "Facts/Given now defines the real-entry determinant locally. Original Statement unchanged, so no propagation.",
+      "validation": "Review-contexts succeeded; final focused checks pending.",
+      "next_action": "Separate arbitrary-order exact-sign correctness into a helper, replacing the misleading algorithm justified_by target. No unresolved mathematics in the error bound."
+    },
+    {
+      "id": "alg-exact-dyadic-determinant-sign",
+      "repair": "Definition instructions and input/output specification retained; only embedded correctness paragraph removed. New helper replaces the old justified_by target. Shared manifest/page/contract registration pending lock availability.",
+      "validation": "review-contexts succeeded for the algorithm and helper before any next supplier edit.",
+      "next_action": "Review sphere-side lemma and floating-filter theorem; register helper when shared lock releases."
+    },
+    {
+      "id": "lem-lifted-determinant-sign-matches-sphere-side",
+      "repair": "Title now explicitly says orientation-normalized; original Statement and all proof steps retained.",
+      "validation": "review-contexts succeeded immediately after review.",
+      "next_action": "Repair the floating theorem F1 paraphrase to include its cited branch thresholds."
+    },
+    {
+      "id": "thm-floating-filter-sign-is-exact",
+      "repair": "F1 now reproduces the already-cited algorithm step 4 thresholds; original Statement unchanged.",
+      "validation": "review-contexts succeeded immediately after review.",
+      "next_action": "Make predicate arity and outputs explicit; attach the generic fallback lemma as a prerequisite."
+    },
+    {
+      "id": "alg-certified-dyadic-geometric-predicate",
+      "repair": "Explicitly types the fixed-size determinant requests and returns their raw sign; no originally specified predicate is removed. The owning contract already excludes missing/single-site tuples.",
+      "validation": "review-contexts succeeded immediately after review. Shared mirrors still await registration lock.",
+      "next_action": "Review final soundness theorem against this exact procedure and preserve false-positive item unchanged."
+    },
+    {
+      "id": "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+      "repair": "No item edit. Refreshed F3 contract quote to retain only the exact fallback instructions still in the supplier Definition.",
+      "validation": "review-contexts repeated after examining that quote-only metadata effect; both hashes remained identical. Strict proof contracts pass for all 7 assigned/created items.",
+      "next_action": "Finish direct-consumer inventory and scoped formatting/dependency checks. Helper is registered on the page, manifest and proof-contract registry under the shared lock."
+    },
+    {
+      "status": "owner-routed-outside-assignment-findings",
+      "findings": [
+        {
+          "id": "alg-floating-filter-for-geometric-determinants",
+          "path": "items/alg-floating-filter-for-geometric-determinants.md",
+          "affected_use": "Definition input paragraph assigns gamma_q=qu/(1-qu) before testing qu>=1.",
+          "evidence": "At s=2, q=2 and an allowed dyadic roundoff bound u=1/2 gives qu=1, so the assignment divides by zero before the intended inconclusive branch. The focused assigned geometric call sizes are at least three, and their q values 7,26,123 cannot satisfy qu=1 for dyadic u; the assigned soundness theorem is unaffected.",
+          "minimality": "Owner should move the qu>=1 early-return guard before gamma_q formation. This unassigned frontier algorithm was not edited."
+        },
+        {
+          "id": "ex-nearly-cocircular-sites-certified-incircle",
+          "path": "items/ex-nearly-cocircular-sites-certified-incircle.md",
+          "affected_use": "Verification 1.2 infers U=S from F6 enclosure alone.",
+          "evidence": "Enclosure supplies only U>=S. Independently enumerated all 24 exact dyadic permutation products and outward absolute-term partial sums for delta=2^-52: the largest significant bit count is 107, and S=4+3delta+delta^2. Thus every such intermediate is representable at precision 113 under the stated range assumption, which supplies the missing exactness justification.",
+          "minimality": "Owner should add the intermediate-representability argument in this unassigned proof step; no Statement change is necessary."
+        }
+      ],
+      "uncertain": false
+    },
+    {
+      "status": "completed",
+      "registration": "The new ID was absent from the original inventory and aliases, current item/manifest/task searches. Registered exactly once in batch-7.pages.json, the owning A-page items list and batch-7.proof-contracts.json scope/contracts under tools/step5-shared-write-lock.mjs. The report is the engine creation-registry input. The frozen frontier was not enlarged.",
+      "validation": [
+        {
+          "check": "precheck",
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-leibniz-determinant-forward-error-bound.md items/alg-exact-dyadic-determinant-sign.md items/lem-lifted-determinant-sign-matches-sphere-side.md items/thm-floating-filter-sign-is-exact.md items/alg-certified-dyadic-geometric-predicate.md items/thm-certified-dyadic-geometric-predicate-sound-and-terminates.md items/lem-exact-dyadic-determinant-sign-correct-and-terminates.md --json",
+          "exit_code": 0,
+          "result": "7 files; 5 proofs pass; 2 algorithm proofs not applicable; 0 failures."
+        },
+        {
+          "check": "rendercheck",
+          "command": "node tools/rendercheck.mjs items/lem-leibniz-determinant-forward-error-bound.md items/alg-exact-dyadic-determinant-sign.md items/lem-lifted-determinant-sign-matches-sphere-side.md items/thm-floating-filter-sign-is-exact.md items/alg-certified-dyadic-geometric-predicate.md items/thm-certified-dyadic-geometric-predicate-sound-and-terminates.md items/lem-exact-dyadic-determinant-sign-correct-and-terminates.md library/numerical-linear-algebra-and-approximation/certified-geometric-predicates.md --json",
+          "exit_code": 0,
+          "result": "8 checked; no errors or warnings."
+        },
+        {
+          "check": "proof-contract",
+          "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-7.proof-contracts.json --strict --items lem-leibniz-determinant-forward-error-bound,alg-exact-dyadic-determinant-sign,lem-lifted-determinant-sign-matches-sphere-side,thm-floating-filter-sign-is-exact,alg-certified-dyadic-geometric-predicate,thm-certified-dyadic-geometric-predicate-sound-and-terminates,lem-exact-dyadic-determinant-sign-correct-and-terminates",
+          "exit_code": 0,
+          "result": "7/7 checked; 0 errors and 0 warnings after refreshing the assigned theorem F3 quote."
+        },
+        {
+          "check": "depcheck",
+          "command": "node tools/depcheck.mjs --items-file /tmp/step5-u7-items.json --json",
+          "exit_code": 0,
+          "result": "Focused selection of exactly the six assigned IDs and helper: 0 errors/warnings; 33 prerequisite items checked for cycles; owning page included."
+        },
+        {
+          "check": "proof-layout",
+          "command": "node tools/proof-layout.mjs items/lem-leibniz-determinant-forward-error-bound.md items/alg-exact-dyadic-determinant-sign.md items/lem-lifted-determinant-sign-matches-sphere-side.md items/thm-floating-filter-sign-is-exact.md items/alg-certified-dyadic-geometric-predicate.md items/lem-exact-dyadic-determinant-sign-correct-and-terminates.md",
+          "exit_code": 0,
+          "result": "6 changed items; 15 steps; 0 defects. Run once after all final item edits."
+        },
+        {
+          "check": "report-currency",
+          "result": "Read-only comparison confirms exact input digest, all seven stored item/context hashes, and unaffected/repaired guard dispositions match current files. Stored hashes were not refreshed."
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Engine collects the report and routes the complete frontier examination inventory and two out-of-assignment findings to their owners. Independent rejudgment/certification remain engine-owned; this report supplies no independent review of the authored helper or repairs."
+    }
+  ],
+  "downstream_examinations": [
+    {
+      "supplier": "alg-exact-dyadic-determinant-sign",
+      "id": "alg-certified-dyadic-geometric-predicate",
+      "path": "items/alg-certified-dyadic-geometric-predicate.md",
+      "affected_use": "Definition step 2 calls the exact integer-clearance determinant sign whenever the filter is skipped or inconclusive.",
+      "invalidated_claim": "None: the exact routine instructions, admissible matrices and sign output are unchanged.",
+      "minimality": "The assigned arity repair now directly cites the new generic correctness lemma; no further interface change is necessary.",
+      "disposition": "sound_unchanged",
+      "route": "assigned-review"
+    },
+    {
+      "supplier": "alg-exact-dyadic-determinant-sign",
+      "id": "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+      "path": "items/thm-certified-dyadic-geometric-predicate-sound-and-terminates.md",
+      "affected_use": "F3 and proof steps 1.2–1.3 use the fallback integer Leibniz sum and its finite computation.",
+      "invalidated_claim": "None: the same instructions remain, and F4 proves the sign transfer directly in this theorem.",
+      "minimality": "Only the F3 contract quote contained the removed explanatory paragraph; it was refreshed without changing the item.",
+      "disposition": "sound_unchanged",
+      "route": "assigned-review"
+    },
+    {
+      "supplier": "alg-exact-dyadic-determinant-sign",
+      "id": "alg-incremental-three-dimensional-regular-cavity-repair",
+      "path": "items/alg-incremental-three-dimensional-regular-cavity-repair.md",
+      "affected_use": "Definition final paragraph evaluates weighted formal determinant coefficients using exact integer determinant signs.",
+      "invalidated_claim": "None: the arbitrary finite dyadic matrix domain and integer-sign routine are preserved.",
+      "minimality": "The separate lemma now proves the same arbitrary-order guarantee; weighted matrices remain admissible and need no edit.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-exact-dyadic-determinant-sign",
+      "id": "thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination",
+      "path": "items/thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination.md",
+      "affected_use": "F6 and proof 1.1 compute every finite dyadic coefficient determinant sign, including zero, by finite integer arithmetic.",
+      "invalidated_claim": "None: the new justified_by lemma proves precisely this property for all finite orders.",
+      "minimality": "Neither the algorithm instructions nor its output contract changes; this use remains sound without a theorem Statement change.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-exact-dyadic-determinant-sign",
+      "id": "lem-exact-dyadic-determinant-sign-correct-and-terminates",
+      "path": "items/lem-exact-dyadic-determinant-sign-correct-and-terminates.md",
+      "affected_use": "F1 and proof steps 1.1–3.1 analyze the exact row scales and finite integer permutation sum for all s>=1.",
+      "invalidated_claim": "None: the helper proves the preserved algorithm specification rather than assuming its conclusion.",
+      "minimality": "Authored the missing generic correctness and termination proof; it supplies the assigned predicate fallback.",
+      "disposition": "sound_unchanged",
+      "route": "new-helper"
+    },
+    {
+      "supplier": "alg-certified-dyadic-geometric-predicate",
+      "id": "alg-certified-convex-polygon-overlap",
+      "path": "items/alg-certified-convex-polygon-overlap.md",
+      "affected_use": "Definition second paragraph clears a common positive coordinate denominator from each rational orientation test of three points.",
+      "invalidated_claim": "None: each call is a d=2 orientation on exactly three integer points.",
+      "minimality": "Positive scaling preserves the determinant sign and the clarified arity is satisfied; no consumer repair is needed.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-certified-dyadic-geometric-predicate",
+      "id": "thm-certified-polygon-overlap-correctness",
+      "path": "items/thm-certified-polygon-overlap-correctness.md",
+      "affected_use": "F2 is used in proof 1.1 for the three rational points of each clipping orientation after common positive denominator clearance.",
+      "invalidated_claim": "None: every actual use is a three-point d=2 orientation with exact integer coordinates.",
+      "minimality": "The proof already supplies the required arity and uses the unchanged zero/sign/termination guarantee.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-certified-dyadic-geometric-predicate",
+      "id": "alg-incremental-planar-delaunay-edge-flips",
+      "path": "items/alg-incremental-planar-delaunay-edge-flips.md",
+      "affected_use": "CHOOSE-SUPERTRIANGLE tests orientation triples and incircle quadruples; LEGALIZE uses O(u,v,w) and L(u,v,w,p).",
+      "invalidated_claim": "None: the explicit tuples have exactly three orientation rows and four lifted rows in dimension two.",
+      "minimality": "All call sites satisfy the clarified arity and preserve the separate formal tie rule; no interface repair is needed.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-certified-dyadic-geometric-predicate",
+      "id": "alg-incremental-three-dimensional-regular-cavity-repair",
+      "path": "items/alg-incremental-three-dimensional-regular-cavity-repair.md",
+      "affected_use": "Definition uses the certified predicate for ordinary 3D orientation; each projected base is a four-site subset.",
+      "invalidated_claim": "None: each orientation base contains exactly d+1=4 points; weighted tests continue to use the separate integer routine.",
+      "minimality": "The arity clause matches the existing four-site enumeration, so the algorithm stays unchanged.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-certified-dyadic-geometric-predicate",
+      "id": "ex-nearly-collinear-triangle-certified-orientation",
+      "path": "items/ex-nearly-collinear-triangle-certified-orientation.md",
+      "affected_use": "F8 and Verification 3.1 send the inconclusive binary64 filter on A,B,C to the exact orientation fallback.",
+      "invalidated_claim": "None: the example supplies exactly three planar dyadic points.",
+      "minimality": "The returned positive sign and exact-zero policy are unchanged; no repair follows from the arity clarification.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-certified-dyadic-geometric-predicate",
+      "id": "ex-nearly-cocircular-sites-certified-incircle",
+      "path": "items/ex-nearly-cocircular-sites-certified-incircle.md",
+      "affected_use": "The declared dependency supplies the raw lifted predicate on the four planar sites A,B,C,D and the normalized base-circle sign.",
+      "invalidated_claim": "None from this interface: four lifted rows and the first three base rows meet the clarified arities.",
+      "minimality": "The arity/use remains sound. Its separate Step-4 U=S justification concern is routed to the owner, without editing this unassigned item.",
+      "disposition": "sound_unchanged",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-certified-dyadic-geometric-predicate",
+      "id": "thm-certified-dyadic-geometric-predicate-sound-and-terminates",
+      "path": "items/thm-certified-dyadic-geometric-predicate-sound-and-terminates.md",
+      "affected_use": "Statement quantifies requests in this algorithm, and proof 1.1 constructs their dyadic matrices while 1.2–2.1 follows its branches.",
+      "invalidated_claim": "None: requests in the procedure now explicitly have their already-required determinant arity.",
+      "minimality": "The proof covers every admissible request, including skipped/inconclusive fallback and degenerate-base; item unchanged.",
+      "disposition": "sound_unchanged",
+      "route": "assigned-review"
+    },
+    {
+      "supplier": "lem-exact-dyadic-determinant-sign-correct-and-terminates",
+      "id": "alg-certified-dyadic-geometric-predicate",
+      "path": "items/alg-certified-dyadic-geometric-predicate.md",
+      "affected_use": "The new direct dependency and Remarks justify correctness and termination of the exact fallback called in Definition step 2.",
+      "invalidated_claim": "The old arbitrary-order routine lacked a separate theorem covering all its admissible inputs.",
+      "minimality": "This is the necessary direct consumer anchoring the helper to the assigned arity/procedure repair.",
+      "disposition": "sound_unchanged",
+      "route": "assigned-review"
+    },
+    {
+      "supplier": "lem-exact-dyadic-determinant-sign-correct-and-terminates",
+      "id": "alg-exact-dyadic-determinant-sign",
+      "path": "items/alg-exact-dyadic-determinant-sign.md",
+      "affected_use": "The justified_by link now points to the lemma analyzing this algorithm at every positive matrix order.",
+      "invalidated_claim": "The old geometric justified_by theorem did not assert the full arbitrary-matrix specification.",
+      "minimality": "A well-definedness discharge is a reference, not a reverse deps edge; the prerequisite graph remains acyclic.",
+      "disposition": "sound_unchanged",
+      "route": "assigned-review"
+    }
+  ]
+}

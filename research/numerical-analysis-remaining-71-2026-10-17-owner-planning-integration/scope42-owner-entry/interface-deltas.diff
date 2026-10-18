@@ -1,0 +1,30 @@
+--- before/def-maxwell-edge-fem-semidiscretization
+
++++ current/def-maxwell-edge-fem-semidiscretization
+
+@@ -2,8 +2,8 @@
+
+ 
+ Let $\Omega$ be a bounded contractible Lipschitz polyhedron with a finite matching affine tetrahedral mesh $\mathcal T_h$, and use the real lowest-order spaces $W_h^0,N_h^1,N_h^2,N_h^3$ defined in [[def-na-lowest-order-whitney-de-rham-spaces]]. The electric trial field is $E_h(t)\in N_h^1\cap H_0(\operatorname{curl};\Omega)$; the magnetic flux field is $B_h(t)\in N_h^2$, with no imposed zero normal trace on $B_h$. PEC means the closure-defined zero tangential subspace from [[def-na-zero-tangential-hcurl]]. Periodic analogues use the periodic cell complex. Countable Choice is inherited from the H(div) and affine Piola space definitions in the suppliers; the finite matrix operations below use no additional choice.
+ 
+-For edge basis $\{\phi_i\}$ and face basis $\{\psi_a\}$, define the symmetric mass matrices
++Put $V_h:=N_h^1\cap H_0(\operatorname{curl};\Omega)$. Choose an edge basis $\{\phi_i\}_{i=1}^{N_e}$ of the electric trial space $V_h$ and a face basis $\{\psi_a\}_{a=1}^{N_f}$ of $N_h^2$, so $N_e=\dim V_h$ and $N_f=\dim N_h^2$. Define the symmetric mass matrices
+ $$ (M_e)_{ij}=\int_\Omega \phi_j^T\epsilon\phi_i\,dx,\qquad (M_b)_{ab}=\int_\Omega \psi_b^T\mu^{-1}\psi_a\,dx.$$
+-They are positive definite by the coefficient bounds in [[def-transient-maxwell-system-with-material-interfaces]] and linear independence of the finite element bases. Let $C$ and $D$ be the coefficient matrices of $\operatorname{curl}:N_h^1\to N_h^2$ and $\operatorname{div}:N_h^2\to N_h^3$ in the oriented edge, face, and cell moment bases; the moment-commuting supplier gives $DC=0$. Set $j_i(t)=\int_\Omega J_{\rm src}(t)\cdot\phi_i\,dx$, with $J_{\rm src}\in C([0,T];L^2(\Omega;\mathbb R^3))$. The lossless, conductivity-free semidiscretization with this source is
++They are positive definite by the coefficient bounds in [[def-transient-maxwell-system-with-material-interfaces]] and linear independence of the finite element bases. Let $C$ and $D$ be the coefficient matrices, in these chosen bases, of the restricted map $\operatorname{curl}:V_h\to N_h^2$ and of $\operatorname{div}:N_h^2\to N_h^3$. The moment-commuting supplier gives $DC=0$ on the full spaces, hence also after restriction to $V_h$. Set $j_i(t)=\int_\Omega J_{\rm src}(t)\cdot\phi_i\,dx$, with $J_{\rm src}\in C([0,T];L^2(\Omega;\mathbb R^3))$. The lossless, conductivity-free semidiscretization with this source is
+ $$M_e\dot e-C^TM_b b=-j,\qquad \dot b+Ce=0.$$
+ This is a spatial Galerkin system only; no time integrator is included. The cochain convention and weak material-interface formulation come from the declared spaces and [[def-transient-maxwell-system-with-material-interfaces]]. Smooth interpolation and a uniformly bounded commuting projection are separate prerequisites for the later error estimate and are not asserted by this definition.
+
+--- before/thm-maxwell-edge-fem-smooth-solution-error
+
++++ current/thm-maxwell-edge-fem-smooth-solution-error
+
+@@ -1,6 +1,6 @@
+
+ ## Statement
+ 
+-Let $\Omega$ be a bounded contractible Lipschitz polyhedron with a shape-regular family of matching affine tetrahedral meshes, maximum diameter $h\to0$, and mesh-aligned material interfaces. Let $\epsilon,\mu$ be time-independent symmetric uniformly positive definite bounded coefficients. Let $(E,B)$ be a PEC solution of [[def-transient-maxwell-system-with-material-interfaces]] with $J_{\rm src}\in C^1([0,T];L^2(\Omega)^3)$, satisfying the stated current continuity and magnetic divergence constraints. Assume $E,E_t,E_{tt}$ are piecewise $C^1$ in space, their curls are piecewise $C^1$, and their tangential traces match across interior mesh faces and vanish on the exterior PEC boundary; assume $B(0)$ is piecewise $C^1$ with matching normal traces and $\operatorname{div}B(0)=0$. These bounds are uniform in time on $[0,T]$.
++Let $\Omega$ be a bounded contractible Lipschitz polyhedron with a shape-regular family of matching affine tetrahedral meshes, maximum diameter $h\to0$, and mesh-aligned material interfaces. Let $\epsilon,\mu$ be time-independent symmetric uniformly positive definite bounded coefficients. Let $(E,B)$ be a PEC solution of [[def-transient-maxwell-system-with-material-interfaces]] with $J_{\rm src}\in C^1([0,T];L^2(\Omega)^3)$, satisfying the stated current continuity and magnetic divergence constraints. Assume $E,E_t,E_{tt}$ are piecewise $C^1$ in space, their curls are piecewise $C^1$, and their tangential traces match across interior mesh faces and vanish on the exterior PEC boundary; assume $B(0)$ is piecewise $C^1$ with matching normal traces and $\operatorname{div}B(0)=0$. These bounds are uniform in time on $[0,T]$. Assume also that $E\in C^2([0,T];H_0(\operatorname{curl};\Omega))$, where the PEC space is the closure-defined space in [[def-na-zero-tangential-hcurl]].
+ 
+ Take the semidiscrete solution of [[def-maxwell-edge-fem-semidiscretization]] with exact load moments, initialize $E_h(0)=R_hE(0)$ using the Maxwell Ritz map of [[def-maxwell-edge-ritz-projection]], and initialize $B_h(0)=B_h^0$ by [[lem-maxwell-magnetic-compatible-initial-projection]]. Write $\theta_h(t)=E_h(t)-R_hE(t)$. The Countable Choice assumption required by that projection interface is in force. Then the semidiscrete solution exists uniquely and
+ $$\sup_{0\le t\le T}\left(\|E_h(t)-E(t)\|_{L^2(\Omega)}+\|\operatorname{curl}(E_h(t)-E(t))\|_{L^2(\Omega)}+\|B_h(t)-B(t)\|_{L^2(\Omega)}\right)\le C_T h.$$

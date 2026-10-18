@@ -1,0 +1,338 @@
+[
+  {
+    "order": 2692,
+    "id": "isogeometric-galerkin-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Isogeometric Galerkin discretization",
+    "companion": "isogeometric-galerkin-methods-examples",
+    "requires": [
+      "spline-evaluation-and-interpolation-algorithms",
+      "curved-mesh-geometry-and-conservative-mesh-transfer",
+      "elasticity-near-incompressibility-and-locking-free-discretization"
+    ],
+    "items": [
+      {
+        "id": "def-nurbs-patch-map-and-rational-spline-space",
+        "kind": "definition",
+        "title": "Tensor-product NURBS patch maps and rational spline spaces",
+        "statement": "Defines tensor-product B-spline numerators on a parameter box, positive rational weights, the NURBS denominator and basis, the geometry map, and piecewise C1 bi-Lipschitz patch admissibility with positive cell Jacobians and explicit derivative and inverse bounds.",
+        "deps": [
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction",
+          "def-bounded-piecewise-c-one-euclidean-domain"
+        ],
+        "dependency_level": 0,
+        "strategy": "State the tensor-product indices, weights, denominator, rational basis, map domain and range, map admissibility, and the exact limits of the definition.",
+        "source_path": "items/def-nurbs-patch-map-and-rational-spline-space.md"
+      },
+      {
+        "id": "lem-compactly-supported-h1-belongs-to-h-zero",
+        "kind": "lemma",
+        "title": "Compactly supported H1 functions lie in H1_0",
+        "statement": "Under Countable Choice, every compactly supported H1 function on an open set belongs to H1_0, proved by zero extension, Meyers–Serrin approximation, and a cutoff.",
+        "deps": [
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-compact-support-zero-extension-in-wkp",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Extend by zero, approximate in H1 on R^d, multiply by a cutoff equal to one on the compact support, and prove cutoff multiplication preserves H1.",
+        "source_path": "items/lem-compactly-supported-h1-belongs-to-h-zero.md"
+      },
+      {
+        "id": "lem-tensor-q1-interpolation-h1-estimate",
+        "kind": "lemma",
+        "title": "Tensor Q1 nodal interpolation has a first-order H1 error bound",
+        "statement": "On a uniform degree-one tensor grid in the unit box, the nodal Q1 interpolant of a C1 function with Lipschitz gradient belongs to the tensor spline space and its H1 error is bounded by C_d h Lip(grad g), with an explicit dimension constant.",
+        "deps": [
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "dependency_level": 0,
+        "strategy": "On each cell subtract the affine Taylor polynomial, use the explicit Q1 nodal shape functions, bound their gradients, and sum cellwise L2 estimates.",
+        "source_path": "items/lem-tensor-q1-interpolation-h1-estimate.md"
+      },
+      {
+        "id": "lem-isogeometric-pullback-energy-norm-equivalence",
+        "kind": "lemma",
+        "title": "Bi-Lipschitz NURBS maps preserve H1 energy up to explicit constants",
+        "statement": "For a finite piecewise C1 bi-Lipschitz NURBS map with j_- <= det DF <= j_+ and bounds on DF and its inverse, pullback is an isomorphism between H1 physical and parametric spaces, preserves H1_0, and transforms gradients and scalar or elasticity energy forms by the inverse-Jacobian and determinant factors.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-meyers-serrin-density-on-an-arbitrary-open-set",
+          "lem-compactly-supported-h1-belongs-to-h-zero",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove the estimates for smooth functions cellwise, extend by Meyers-Serrin density and H1 completeness, and pass the weak-gradient identity and zero-boundary closure through compactly supported approximants.",
+        "source_path": "items/lem-isogeometric-pullback-energy-norm-equivalence.md"
+      },
+      {
+        "id": "lem-matching-nurbs-patch-traces-give-h1-conformity",
+        "kind": "lemma",
+        "title": "Matching NURBS patch traces give a global H1 function",
+        "statement": "For a finite face-to-face partition into bounded piecewise C1 NURBS cells, a piecewise C1 field with square-integrable cell gradients and equal traces on every shared face belongs to H1 of the union; interior face fluxes cancel in the weak derivative identity.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains"
+        ],
+        "dependency_level": 1,
+        "strategy": "Test the distributional derivative on a smooth compactly supported function, integrate by parts on each cell, cancel matching interface traces, and identify the remaining L2 cell gradients.",
+        "source_path": "items/lem-matching-nurbs-patch-traces-give-h1-conformity.md"
+      },
+      {
+        "id": "lem-positive-nurbs-basis-and-quotient-derivative",
+        "kind": "lemma",
+        "title": "Positive weights give a bounded partition-of-unity NURBS basis",
+        "statement": "For a finite tensor-product B-spline basis with nonnegative basis functions summing to one and weights w_- <= w_i <= w_+, the NURBS denominator lies in [w_-,w_+], the rational basis is nonnegative and sums to one, its span is S_h/W, and its cellwise derivative has the quotient-rule formula and an explicit weight-dependent bound.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use products of the one-dimensional partition identities, bound the denominator by a convex combination of weights, then differentiate the quotient on each knot cell.",
+        "source_path": "items/lem-positive-nurbs-basis-and-quotient-derivative.md"
+      },
+      {
+        "id": "lem-nurbs-laplace-tensor-gap-under-map-error",
+        "kind": "lemma",
+        "title": "NURBS map derivative errors bound the pulled-back Laplace tensor",
+        "statement": "For exact and approximate admissible NURBS maps F and F_h on the same parameter box, with positive Jacobians and operator bounds ||DF||, ||DF_h||, ||DF inverse||, ||DF_h inverse|| <= M and ||DF-DF_h||_Linf <= delta, the unit-diffusion pullback tensors B_F=det(DF) DF^{-1}DF^{-T} and B_Fh differ in operator L infinity norm by at most (d M^(d+1)+2 M^(d+3)) delta.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use determinant multilinearity, the inverse-matrix difference identity, and a product expansion to bound the transformed tensors.",
+        "source_path": "items/lem-nurbs-laplace-tensor-gap-under-map-error.md"
+      },
+      {
+        "id": "thm-nurbs-quotient-best-approximation-transfer",
+        "kind": "theorem",
+        "title": "NURBS quotient spaces transfer numerator H1 approximation",
+        "statement": "For a positive W1,infinity NURBS denominator W and a parameter function u that is C1 on each knot cell with matching traces, the physical rational spline (s/W) composed with F inverse approximates u composed with F inverse in H1 by an explicit constant depending on the lower weight bound, ||W||_W1,infinity, and the NURBS map bounds, times ||W u-s||_H1. This transfers an actual numerator approximation bound but asserts no general degree rate.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity"
+        ],
+        "dependency_level": 2,
+        "strategy": "Write u-s/W=(Wu-s)/W and apply the weak product rule and the positive lower bound to control both the value and gradient errors.",
+        "source_path": "items/thm-nurbs-quotient-best-approximation-transfer.md"
+      },
+      {
+        "id": "thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry",
+        "kind": "theorem",
+        "title": "Homogeneous knot insertion preserves an admissible NURBS patch",
+        "statement": "Inserting one new knot in one coordinate of a finite tensor-product NURBS patch and updating its homogeneous control net by the single-knot B-spline insertion rule leaves the rational geometry map unchanged and leaves every updated weight positive.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "alg-single-new-b-spline-knot-insertion",
+          "thm-single-new-knot-insertion-preserves-b-spline-curve"
+        ],
+        "dependency_level": 3,
+        "strategy": "Lift each tensor-product control point to homogeneous coordinates, apply the proved curve-preserving insertion to every coefficient slice, and project back using the positive last coordinate.",
+        "source_path": "items/thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry.md"
+      },
+      {
+        "id": "def-isogeometric-galerkin-patch-space-and-refinement",
+        "kind": "definition",
+        "title": "Conforming isogeometric Galerkin spaces and h/p/k refinement",
+        "statement": "Defines finite single-patch and matching multipatch rational spline spaces pushed to the physical domain, their conforming H1 and H1_0 subspaces, and h-, p-, and k-refinement conventions. Exact geometry is preserved by h insertion; p/k geometry preservation is asserted only when a positive homogeneous re-representation is verified.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "alg-single-new-b-spline-knot-insertion",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry",
+          "lem-isogeometric-pullback-energy-norm-equivalence"
+        ],
+        "dependency_level": 4,
+        "strategy": "Specify the finite-dimensional coefficient spaces, trace compatibility across matching interfaces, the H1_0 restriction, and the distinct geometric obligations for h, p, and k changes.",
+        "source_path": "items/def-isogeometric-galerkin-patch-space-and-refinement.md"
+      },
+      {
+        "id": "thm-isogeometric-elasticity-galerkin-quasioptimality",
+        "kind": "theorem",
+        "title": "Finite-parameter isogeometric elasticity Galerkin approximation",
+        "statement": "For the homogeneous-Dirichlet isotropic small-strain elasticity model in dimensions two or three, every finite Lamé parameter lambda >= 0 and every finite-dimensional conforming isogeometric displacement space have a unique exact-integral Galerkin solution with the explicit (2 mu_1 + d lambda)/mu_0 best-approximation factor. No lambda-uniform bound is asserted.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "def-linear-elasticity-displacement-formulation-and-data",
+          "thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Match the homogeneous Dirichlet model and finite-dimensional conforming trial-space hypotheses exactly, then apply the current Batch 35 elasticity Galerkin theorem.",
+        "source_path": "items/thm-isogeometric-elasticity-galerkin-quasioptimality.md"
+      },
+      {
+        "id": "thm-isogeometric-perturbed-geometry-quadrature-strang-bound",
+        "kind": "theorem",
+        "title": "Isogeometric geometry and quadrature errors satisfy a Strang bound",
+        "statement": "For exact and approximate admissible maps on a common reference box, the conforming first-Strang bound splits into geometry, quadrature, and load defects, assuming discrete coercivity. For unit diffusion, the geometry term is at most (d M^(d+1)+2 M^(d+3)) ||DF-DG||_infinity ||v_h||_H1 when map and inverse derivative bounds are at most M.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "lem-nurbs-laplace-tensor-gap-under-map-error",
+          "def-variational-crime-error-framework",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Pull the exact problem to the common parameter domain, split the form defect into geometry and quadrature parts, retain the load defect, and apply the published first Strang estimate.",
+        "source_path": "items/thm-isogeometric-perturbed-geometry-quadrature-strang-bound.md"
+      },
+      {
+        "id": "thm-isogeometric-poisson-galerkin-quasioptimality",
+        "kind": "theorem",
+        "title": "Exact isogeometric Poisson Galerkin approximation is quasioptimal",
+        "statement": "For a bounded coercive scalar diffusion form on a bounded Lipschitz patch domain and every finite-dimensional conforming isogeometric subspace V_h subset H1_0, the exact-integral Galerkin solution is unique and satisfies the M/alpha best-approximation bound in the H1_0 norm.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-w-one-two-is-a-hilbert-space",
+          "lem-na-homogeneous-dirichlet-poincare",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Check that the NURBS trial space is finite dimensional and conforming, then apply the published Céa theorem with the displayed form constants.",
+        "source_path": "items/thm-isogeometric-poisson-galerkin-quasioptimality.md"
+      },
+      {
+        "id": "thm-nurbs-tensor-product-l2-approximation",
+        "kind": "theorem",
+        "title": "Tensorized spline quasi-interpolation gives a NURBS L2 rate",
+        "statement": "Assume the Axiom of Choice and, in each coordinate, a clamped spline mesh and local quasi-interpolant family with the hypotheses of the published one-dimensional Sobolev approximation theorem. For smooth numerator data g=W(u composed with F), tensorizing these families gives an anisotropic L2 approximation bound with each coordinate rate h_r^(ell_r+1); division by W and the NURBS change of variables transfers it to the physical patch with explicit weight and Jacobian constants. It does not assert an H1 energy rate.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "def-local-spline-quasi-interpolant",
+          "thm-sobolev-spline-quasi-interpolant-rate",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "lem-isogeometric-pullback-energy-norm-equivalence"
+        ],
+        "dependency_level": 5,
+        "strategy": "Tensorize the coordinate operators, prove their L2 stability by summing local bounds with finite overlap, telescope I minus the product, and transfer the numerator estimate through W and F.",
+        "source_path": "items/thm-nurbs-tensor-product-l2-approximation.md"
+      },
+      {
+        "id": "thm-nurbs-p1-tensor-spline-h1-error-rate",
+        "kind": "theorem",
+        "title": "Smooth NURBS numerators admit an explicit h energy rate in degree one",
+        "statement": "For a single admissible NURBS patch with continuous positive piecewise C1 denominator, a compactly supported C1,1 numerator, and a uniform degree-one C0 tensor grid, Q1 interpolation gives a conforming rational approximation with physical H1 error at most C_F C_W C_d h Lip(grad g). The exact scalar Poisson Galerkin solution inherits the beta/alpha energy bound; map, weight, coefficient, and dimension constants remain explicit.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "thm-nurbs-quotient-best-approximation-transfer",
+          "thm-isogeometric-poisson-galerkin-quasioptimality",
+          "lem-compactly-supported-h1-belongs-to-h-zero",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "lem-tensor-q1-interpolation-h1-estimate",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use tensor Q1 nodal interpolation of the numerator, reproduce its affine Taylor polynomial on each cell, bound derivative errors by the Hessian supremum, transfer through W and F, and apply Céa.",
+        "source_path": "items/thm-nurbs-p1-tensor-spline-h1-error-rate.md"
+      }
+    ]
+  },
+  {
+    "order": 2693,
+    "id": "isogeometric-galerkin-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Isogeometric Galerkin discretization — Examples",
+    "companion": "isogeometric-galerkin-methods",
+    "requires": [
+      "isogeometric-galerkin-methods"
+    ],
+    "items": [
+      {
+        "id": "cex-positive-nurbs-weights-do-not-imply-admissible-patch",
+        "kind": "counterexample",
+        "title": "Positive NURBS weights do not imply a globally injective patch",
+        "statement": "A bilinear tensor-product patch with all weights equal to one can have a zero and sign-changing Jacobian and can fail global injectivity.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative"
+        ],
+        "dependency_level": 2,
+        "strategy": "Give the four control points for F(xi,eta)=(xi,eta(1-2xi)), compute its determinant, and exhibit distinct parameters with the same image.",
+        "source_path": "items/cex-positive-nurbs-weights-do-not-imply-admissible-patch.md"
+      },
+      {
+        "id": "ex-isogeometric-quarter-annulus-nurbs-patch",
+        "kind": "example",
+        "title": "A rational quadratic patch exactly covers a quarter annulus",
+        "statement": "The tensor-product NURBS patch with a linear radial coordinate and a weighted quadratic quarter-circle coordinate maps [r0,1] x [0,1] bijectively onto the quarter annulus r0 <= sqrt(x^2+y^2) <= 1, x,y >= 0, with positive Jacobian.",
+        "deps": [
+          "def-nurbs-patch-map-and-rational-spline-space",
+          "lem-positive-nurbs-basis-and-quotient-derivative",
+          "lem-isogeometric-pullback-energy-norm-equivalence",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Compute the rational quadratic arc, verify the unit-circle identity and strict angular monotonicity, then compute the radial-angular Jacobian.",
+        "source_path": "items/ex-isogeometric-quarter-annulus-nurbs-patch.md"
+      },
+      {
+        "id": "cex-multipatch-trace-mismatch-not-h1",
+        "kind": "counterexample",
+        "title": "Matching geometry alone does not make a multipatch field conforming",
+        "statement": "Two identity NURBS patches with adjacent physical images and a unit jump in the field trace across their common face define a piecewise rational field that is not in H1 of the union.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "lem-matching-nurbs-patch-traces-give-h1-conformity",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function"
+        ],
+        "dependency_level": 5,
+        "strategy": "Integrate by parts on the two rectangles to identify the interface measure in the distributional derivative, then use a concentrating test-function sequence to rule out an L2 weak derivative.",
+        "source_path": "items/cex-multipatch-trace-mismatch-not-h1.md"
+      },
+      {
+        "id": "ex-isogeometric-k-refinement-of-the-identity-patch",
+        "kind": "example",
+        "title": "Degree elevation and knot insertion preserve the identity patch",
+        "statement": "A degree-one tensor-product identity patch can be represented exactly after degree elevation to degree two and insertion of simple midpoint knots, producing C1 continuity without changing its geometry.",
+        "deps": [
+          "def-isogeometric-galerkin-patch-space-and-refinement",
+          "thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry",
+          "thm-single-new-knot-insertion-preserves-b-spline-curve",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "dependency_level": 5,
+        "strategy": "Verify the degree-two Bernstein representation of each coordinate, then apply the homogeneous knot-insertion preservation theorem in each coordinate.",
+        "source_path": "items/ex-isogeometric-k-refinement-of-the-identity-patch.md"
+      }
+    ]
+  }
+]

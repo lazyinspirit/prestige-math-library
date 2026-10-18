@@ -1,0 +1,180 @@
+{
+  "group": "k",
+  "batches": ["32"],
+  "pages_read": [
+    "high-resolution-tvd-eno-and-weno-methods",
+    "high-resolution-tvd-eno-and-weno-methods-examples"
+  ],
+  "items_read": [
+    "def-na-high-resolution-reconstruction",
+    "thm-na-linear-monotone-first-order-barrier",
+    "lem-na-eno2-reconstruction-third-order",
+    "lem-na-weno5-optimal-linear-reconstruction",
+    "thm-na-musc-minmod-second-order-on-smooth-data",
+    "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl",
+    "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+    "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+    "ex-na-minmod-extremum-clipping",
+    "cex-na-unlimited-centered-reconstruction-overshoots",
+    "ex-na-smooth-linear-advection-reconstruction",
+    "ex-na-weno-js-critical-point-epsilon-scaling",
+    "ex-na-burgers-godunov-musc-shock"
+  ],
+  "conventions": [
+    {
+      "convention": "Finite-volume data are averages over I_i=[ih,(i+1)h), centered at (i+1/2)h; the right face x_{i+1/2} is (i+1)h. Superscripts − and + denote traces from the left and right cells.",
+      "fixed_by": "def-na-high-resolution-reconstruction",
+      "matters_for": [
+        "lem-na-weno5-optimal-linear-reconstruction",
+        "thm-na-musc-minmod-second-order-on-smooth-data",
+        "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl",
+        "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+        "ex-na-burgers-godunov-musc-shock"
+      ]
+    },
+    {
+      "convention": "Nodal ENO2 uses separate point samples at y_j=jh, selects between two quadratic interpolants by absolute second divided differences, and resolves ties to the left.",
+      "fixed_by": "def-na-high-resolution-reconstruction",
+      "matters_for": [
+        "lem-na-eno2-reconstruction-third-order"
+      ]
+    },
+    {
+      "convention": "WENO ideal weights are (1/10,6/10,3/10). The default epsilon is positive and independent of h; the WENO-Z comparison uses power p=2.",
+      "fixed_by": "def-na-high-resolution-reconstruction",
+      "matters_for": [
+        "lem-na-weno5-optimal-linear-reconstruction",
+        "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+        "ex-na-smooth-linear-advection-reconstruction",
+        "ex-na-weno-js-critical-point-epsilon-scaling"
+      ]
+    },
+    {
+      "convention": "The MUSCL update is direct reconstructed-upwind forward Euler with no time predictor. Its TVD theorem concerns scalar linear advection, finite-variation bi-infinite data or periodic data, and the inclusive bound |a|Δt/h≤2/3.",
+      "fixed_by": "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl",
+      "matters_for": [
+        "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+        "high-resolution-tvd-eno-and-weno-methods"
+      ]
+    },
+    {
+      "convention": "The linear monotonicity barrier fixes a noninteger Courant number and finite-stencil coefficients independent of h; second-order consistency matches translation moments through quadratic data.",
+      "fixed_by": "thm-na-linear-monotone-first-order-barrier",
+      "matters_for": [
+        "thm-na-linear-monotone-first-order-barrier"
+      ]
+    },
+    {
+      "convention": "The Burgers convergence claim applies to the first-order two-point baseline, with h_m=1/m and τ_m=h_m/2, under Countable Choice. Its nonintegrable bounded-BV datum uses the supplier's branch without Dependent Choice.",
+      "fixed_by": "ex-na-burgers-godunov-musc-shock",
+      "matters_for": [
+        "ex-na-burgers-godunov-musc-shock"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-na-high-resolution-reconstruction",
+      "statement": "Defines the minmod MUSCL face states, the separate nodal ENO2 selector, the cell-average WENO5 candidates and JS/Z weights, reflected right states, and the direct reconstructed-upwind forward-Euler update.",
+      "used_by": [
+        "lem-na-eno2-reconstruction-third-order",
+        "lem-na-weno5-optimal-linear-reconstruction",
+        "thm-na-musc-minmod-second-order-on-smooth-data",
+        "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl",
+        "cex-na-musc-minmod-forward-euler-not-tvd-at-cfl-one",
+        "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+        "ex-na-minmod-extremum-clipping",
+        "cex-na-unlimited-centered-reconstruction-overshoots",
+        "ex-na-smooth-linear-advection-reconstruction",
+        "ex-na-weno-js-critical-point-epsilon-scaling",
+        "ex-na-burgers-godunov-musc-shock"
+      ]
+    },
+    {
+      "id": "lem-na-weno5-optimal-linear-reconstruction",
+      "statement": "For C5 cell-average data, each candidate reproduces polynomials through degree two and has error at most 15 sup|u'''| h³. The ideal combination p_0/10+3p_1/5+3p_2/10 reproduces polynomials through degree four and has error at most (23/15)(3⁵/5!) sup|u⁽⁵⁾| h⁵.",
+      "used_by": [
+        "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+        "ex-na-smooth-linear-advection-reconstruction",
+        "ex-na-weno-js-critical-point-epsilon-scaling"
+      ]
+    },
+    {
+      "id": "thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction",
+      "statement": "For C5 data on the five-cell stencil, finite stated derivative bounds, and fixed epsilon_0>0 independent of h, both cell-average WENO-JS and WENO-Z face errors are bounded by Ch⁵ for sufficiently small h; the same holds for reflected right states.",
+      "used_by": [
+        "ex-na-smooth-linear-advection-reconstruction",
+        "ex-na-weno-js-critical-point-epsilon-scaling"
+      ]
+    },
+    {
+      "id": "thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl",
+      "statement": "The specified direct scalar linear-advection MUSCL/minmod update is TVD for 0≤|a|Δt/h≤2/3 on finite-variation bi-infinite data and N-periodic data for N≥1. For every 2/3<|a|Δt/h≤1, finite-support data of variation 2 have updated variation 3|a|Δt/h; the periodized witness works for every N≥7.",
+      "used_by": [
+        "high-resolution-tvd-eno-and-weno-methods"
+      ]
+    },
+    {
+      "id": "thm-na-musc-minmod-second-order-on-smooth-data",
+      "statement": "For C2 data with |u'|≥c>0 on the cell neighborhood, both MUSCL/minmod face errors are bounded by Ch² for sufficiently small h, where C depends only on c and a bound for |u''|.",
+      "used_by": [
+        "ex-na-smooth-linear-advection-reconstruction"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+      "used_for": "Uniqueness identifies the selected Newton quadratic with the three-node polynomial interpolant in the ENO2 proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-lagrange-interpolation-remainder",
+      "used_for": "The three-node remainder formula gives the ENO2 bound Mh³/16 for either candidate stencil.",
+      "opened": true
+    },
+    {
+      "id": "cor-taylor-remainder-bound",
+      "used_for": "Taylor remainder bounds establish the MUSCL face estimate and the candidate and ideal WENO reconstruction estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-kruzhkov-entropy-solution",
+      "used_for": "The Burgers example checks all scalar Kruzhkov entropy jump inequalities and the strong local L1 initial trace.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Identifies the Countable Choice assumption carried by the Burgers example's imported monotone finite-volume convergence theorem.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "high-resolution-tvd-eno-and-weno-methods-examples",
+      "concern": "The prose says, “The final counterexample computes the new extrema produced by unlimited centered slopes.” That counterexample is the second listed item; the final listed item is the Burgers example. The positional description does not match the page inventory.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "high-resolution-tvd-eno-and-weno-methods",
+      "to": "monotone-finite-volume-entropy-convergence",
+      "faithful": true,
+      "note": "The actual use is in the Burgers companion example. It checks bounded translation variation, the nonintegrable-data Countable Choice branch, a globally defined locally Lipschitz flux monotone on [0,1]², the full CFL bound, and the positive time-to-space ratio. Convergence is asserted for the first-order baseline, without extending it to subsequent MUSCL updates."
+    },
+    {
+      "from": "high-resolution-tvd-eno-and-weno-methods",
+      "to": "riemann-solvers-for-hyperbolic-systems",
+      "faithful": true,
+      "note": "The Burgers example uses the Rankine–Hugoniot identity at states 1 and 0 to obtain speed 1/2 and checks entropy admissibility directly. It does not invoke the supplier page's local systems solver for arbitrary large data or infer system TVD from characteristic reconstruction."
+    },
+    {
+      "from": "invariant-domain-and-entropy-stable-conservative-schemes",
+      "to": "high-resolution-tvd-eno-and-weno-methods",
+      "faithful": true,
+      "note": "The consumer's Prerequisite interface explicitly makes this a page-reading prerequisite and states that its proofs invoke no MUSCL, ENO, WENO, TVD, or fully discrete time-stepping result. Its first-order HLL and semidiscrete entropy claims do not overstate this batch's scalar reconstruction results."
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "group": "j",
+  "batches": [
+    "28"
+  ],
+  "pages_read": [
+    "conservative-finite-volume-weak-limits",
+    "conservative-finite-volume-weak-limits-examples"
+  ],
+  "items_read": [
+    "def-locally-bounded-distributional-weak-solution",
+    "def-conservative-finite-volume-scheme",
+    "def-finite-volume-space-time-reconstruction",
+    "def-godunov-flux-for-burgers",
+    "lem-godunov-flux-for-burgers-is-continuous-and-consistent",
+    "lem-finite-volume-discrete-summation-by-parts",
+    "lem-conservative-fv-face-fluxes-converge-in-l1loc",
+    "thm-conservative-finite-volume-weak-limit",
+    "ex-godunov-fv-captures-burgers-shock-speed",
+    "ex-bounded-fv-reconstructions-need-not-be-strongly-compact",
+    "cex-conservative-fv-weak-limit-need-not-be-entropic"
+  ],
+  "conventions": [
+    {
+      "convention": "The scalar problem is one-dimensional on the full line. Cells are [jh_m,(j+1)h_m), time levels are nτ_m with n starting at zero, and initialization uses cell averages of one fixed initial datum.",
+      "fixed_by": "def-conservative-finite-volume-scheme",
+      "matters_for": [
+        "lem-finite-volume-discrete-summation-by-parts",
+        "thm-conservative-finite-volume-weak-limit",
+        "ex-godunov-fv-captures-burgers-shock-speed",
+        "cex-conservative-fv-weak-limit-need-not-be-entropic"
+      ]
+    },
+    {
+      "convention": "Positive numerical flux points right; the update subtracts τ_m/h_m times right flux minus left flux. One shared interface flux enters adjacent updates with opposite signs. Consistency means continuous F with F(a,a)=f(a); no CFL condition is imposed.",
+      "fixed_by": "def-conservative-finite-volume-scheme",
+      "matters_for": [
+        "lem-finite-volume-discrete-summation-by-parts",
+        "lem-conservative-fv-face-fluxes-converge-in-l1loc",
+        "thm-conservative-finite-volume-weak-limit",
+        "cex-conservative-fv-weak-limit-need-not-be-entropic"
+      ]
+    },
+    {
+      "convention": "On each cell-time slab the state is U_j^{m,n} and the reconstructed flux is the right-face value Q_{j+1/2}^{m,n}; consequently Q_m(x,t)=F(U_m(x,t),U_m(x+h_m,t)) almost everywhere.",
+      "fixed_by": "def-finite-volume-space-time-reconstruction",
+      "matters_for": [
+        "lem-conservative-fv-face-fluxes-converge-in-l1loc",
+        "thm-conservative-finite-volume-weak-limit"
+      ]
+    },
+    {
+      "convention": "Local boundedness extends to every bounded spatial interval times (0,T') with T'<T. Tests may meet t=0, and the weak identity includes the initial boundary term; neither entropy inequalities nor a strong initial trace are part of this definition.",
+      "fixed_by": "def-locally-bounded-distributional-weak-solution",
+      "matters_for": [
+        "thm-conservative-finite-volume-weak-limit",
+        "ex-godunov-fv-captures-burgers-shock-speed",
+        "cex-conservative-fv-weak-limit-need-not-be-entropic"
+      ]
+    },
+    {
+      "convention": "The weak-limit theorem assumes ACω, strong local L1 convergence in the open time cylinder, and bounds uniform in m up to t=0. Compactness and entropy admissibility are not conclusions.",
+      "fixed_by": "thm-conservative-finite-volume-weak-limit",
+      "matters_for": [
+        "ex-bounded-fv-reconstructions-need-not-be-strongly-compact",
+        "cex-conservative-fv-weak-limit-need-not-be-entropic",
+        "thm-monotone-finite-volume-entropy-convergence"
+      ]
+    },
+    {
+      "convention": "For Burgers flux s²/2, the Godunov flux takes the minimum over [a,b] when a≤b and the maximum over [b,a] when b<a.",
+      "fixed_by": "def-godunov-flux-for-burgers",
+      "matters_for": [
+        "lem-godunov-flux-for-burgers-is-continuous-and-consistent",
+        "ex-godunov-fv-captures-burgers-shock-speed",
+        "cex-conservative-fv-weak-limit-need-not-be-entropic"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-conservative-finite-volume-weak-limit",
+      "statement": "Assume ACω. For continuous f, bounded locally integrable initial datum u₀, and continuous F with F(a,a)=f(a), consider the defined conservative schemes with h_m,τ_m→0 and initial cell averages of u₀. If their reconstructions converge strongly in L1_loc(R×(0,T)) to u and are uniformly locally bounded on every I×[0,T'] with I bounded and T'<T, then u is a locally bounded distributional weak solution with initial datum u₀.",
+      "used_by": [
+        "ex-bounded-fv-reconstructions-need-not-be-strongly-compact",
+        "cex-conservative-fv-weak-limit-need-not-be-entropic",
+        "thm-monotone-finite-volume-entropy-convergence"
+      ]
+    },
+    {
+      "id": "lem-conservative-fv-face-fluxes-converge-in-l1loc",
+      "statement": "Assume ACω. For reconstructions using a continuous consistent numerical flux, if h_m→0, U_m→u strongly in L1_loc(R×(0,T)), and the states have uniform local bounds up to t=0, then u is locally essentially bounded up to the initial face and Q_m→f(u) in L1(I×(0,T')) for every bounded interval I and T'<T.",
+      "used_by": [
+        "thm-conservative-finite-volume-weak-limit"
+      ]
+    },
+    {
+      "id": "lem-finite-volume-discrete-summation-by-parts",
+      "statement": "For the defined conservative update and space-time test averages Φ_j^{m,n}, if N≥1 and the test vanishes for t≥t_{N−1}^m, then the sum of the initial term Σ_j h_m U_j^{m,0}Φ_j^{m,0}, the time term Σ_{n=1}^{N−1}Σ_j h_m U_j^{m,n}(Φ_j^{m,n}−Φ_j^{m,n−1}), and the flux term Σ_{n=0}^{N−1}Σ_j τ_m Q_{j+1/2}^{m,n}(Φ_{j+1}^{m,n}−Φ_j^{m,n}) equals zero.",
+      "used_by": [
+        "thm-conservative-finite-volume-weak-limit"
+      ]
+    },
+    {
+      "id": "lem-godunov-flux-for-burgers-is-continuous-and-consistent",
+      "statement": "The map G defined in def-godunov-flux-for-burgers is continuous on R² and satisfies G(a,a)=f_B(a)=a²/2 for every real a.",
+      "used_by": [
+        "ex-godunov-fv-captures-burgers-shock-speed",
+        "cex-conservative-fv-weak-limit-need-not-be-entropic"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-scalar-conservation-law-and-flux",
+      "used_for": "Scalar Cauchy problem, continuous physical flux, and initial-data conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-distributional-weak-solution-of-a-scalar-conservation-law",
+      "used_for": "The initial-boundary-term weak formulation and the distinction between its global boundedness requirement and the batch's local formulation.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The exact ACω assumption inherited by translation continuity, flux convergence, and the weak-limit theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Countable additivity in the face-flux lemma's derivation of countable subadditivity.",
+      "opened": true
+    },
+    {
+      "id": "prop-measure-monotonicity",
+      "used_for": "Measure estimates and the same subadditivity derivation.",
+      "opened": true
+    },
+    {
+      "id": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+      "used_for": "Finite measure of bounded measurable rectangles and integrability of bounded cutoffs.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of closed bounded state intervals and state squares.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Boundedness of continuous physical and numerical fluxes on compact state sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Uniform continuity of the numerical flux on the compact state square.",
+      "opened": true
+    },
+    {
+      "id": "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+      "used_for": "L1 continuity of spatial translations of the compactly supported cutoff, under ACω.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+      "used_for": "Translation isometry and change of spatial integration domain in the shifted-state convergence estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "The area estimate controlling the strip near t=0, with the chosen endpoint conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-rankine-hugoniot-jump-condition",
+      "used_for": "The stationary Burgers example's speed calculation with jumps defined as right trace minus left trace.",
+      "opened": true
+    },
+    {
+      "id": "def-kruzhkov-entropy-solution",
+      "used_for": "The nonnegative-test entropy inequality and entropy-pair sign convention used to refute admissibility of the expansion-shock limit.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "monotone-finite-volume-entropy-convergence",
+      "to": "conservative-finite-volume-weak-limits",
+      "faithful": true,
+      "note": "The scheme and interpolant retain the supplier's cells, orientation, initialization, and piecewise-constant reconstruction. The convergence theorem's F5 and step 2.1 apply the weak-limit theorem under ACω after obtaining strong local convergence and invariant-range bounds. Entropy inequalities and the initial trace are established separately."
+    },
+    {
+      "from": "finite-volume-diffusion-and-mimetic-fluxes",
+      "to": "conservative-finite-volume-weak-limits",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite: the diffusion page's listed items do not cite the scalar weak-limit theorem or its reconstructions. Its outward-from-cell convention expresses the same shared-face cancellation as Q_{K,F}+Q_{L,F}=0. No scalar hyperbolic convergence conclusion is transferred to diffusion."
+    }
+  ]
+}

@@ -1,0 +1,309 @@
+{
+  "group": "u",
+  "batches": ["61"],
+  "pages_read": [
+    "particle-in-cell-and-particle-mesh-kinetic-methods",
+    "particle-in-cell-and-particle-mesh-kinetic-methods-examples"
+  ],
+  "items_read": [
+    "def-periodic-pic-grid-and-inner-product",
+    "lem-periodic-composite-trapezoid-error",
+    "def-periodic-pic-shape-assignment-and-gather",
+    "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+    "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+    "alg-periodic-pic-zero-mean-poisson-solver",
+    "thm-periodic-pic-charge-conservation-and-neutralized-source",
+    "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+    "thm-periodic-pic-deposition-potential-gather-adjointness",
+    "lem-periodic-pic-smooth-assignment-weights",
+    "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+    "def-periodic-pic-regularized-grid-interaction-kernel",
+    "lem-periodic-pic-shape-partition-and-quadrature-bound",
+    "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution",
+    "alg-periodic-pic-classical-rk4-step",
+    "def-periodic-pic-separable-hamiltonian-grid-model",
+    "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+    "thm-periodic-pic-smooth-density-grid-force-consistency",
+    "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+    "thm-periodic-pic-mean-field-error-with-force-defect",
+    "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+    "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error",
+    "thm-periodic-pic-staged-fixed-regularization-error-budget",
+    "ex-periodic-high-frequency-pic-sampling-alias",
+    "cex-periodic-nonneutral-source-has-no-poisson-solution",
+    "ex-periodic-one-dimensional-pic-cic-charge-deposition",
+    "ex-cold-two-stream-stipulated-pic-experiment",
+    "ex-periodic-smooth-density-poisson-grid-force-error",
+    "ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode"
+  ],
+  "conventions": [
+    {
+      "convention": "The spatial dimension is 1, 2, or 3; L>0; N≥3 is odd; h=L/N. Grid indices wrap periodically, the pairing includes cell volume h^d, A_h is the positive negative-Laplacian stencil, and D^0 is the centered first difference. There is no Nyquist mode.",
+      "fixed_by": "def-periodic-pic-grid-and-inner-product",
+      "matters_for": [
+        "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+        "alg-periodic-pic-zero-mean-poisson-solver",
+        "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+        "thm-periodic-pic-smooth-density-grid-force-consistency"
+      ]
+    },
+    {
+      "convention": "Algebraic assignment weights are nonnegative and sum to one pointwise. The smooth branch uses the explicit positive even product kernel and its sampled normalizer. Deposition subtracts the uniform background Q/L^d; scalar and vector gathering use the same weights.",
+      "fixed_by": "def-periodic-pic-shape-assignment-and-gather",
+      "matters_for": [
+        "thm-periodic-pic-charge-conservation-and-neutralized-source",
+        "thm-periodic-pic-deposition-potential-gather-adjointness",
+        "lem-periodic-pic-shape-partition-and-quadrature-bound",
+        "ex-periodic-one-dimensional-pic-cic-charge-deposition"
+      ]
+    },
+    {
+      "convention": "A_h† acts on the full grid space by removing the source mean and returning the unique zero-mean potential.",
+      "fixed_by": "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+      "matters_for": [
+        "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+        "def-periodic-pic-separable-hamiltonian-grid-model",
+        "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy"
+      ]
+    },
+    {
+      "convention": "The one-species particle branch has total mass M>0, total charge Q, charge-to-mass ratio c=Q/M, equal particle charges Q/P and masses M/P, and phase kernels on Euclidean lifts. Regularization ε remains fixed.",
+      "fixed_by": "def-periodic-pic-regularized-grid-interaction-kernel",
+      "matters_for": [
+        "alg-periodic-pic-classical-rk4-step",
+        "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+        "thm-periodic-pic-mean-field-error-with-force-defect",
+        "thm-periodic-pic-staged-fixed-regularization-error-budget"
+      ]
+    },
+    {
+      "convention": "Vector quadrature uses Euclidean norms and a joint supremum over the gather location and integration variable in the shifted kernel–field product.",
+      "fixed_by": "lem-periodic-pic-shape-partition-and-quadrature-bound",
+      "matters_for": [
+        "thm-periodic-pic-smooth-density-grid-force-consistency",
+        "thm-periodic-pic-staged-fixed-regularization-error-budget"
+      ]
+    },
+    {
+      "convention": "The Hamiltonian force is obtained by differentiating the deposited-density energy. It is a separate branch from ordinary centered-field interpolation.",
+      "fixed_by": "def-periodic-pic-separable-hamiltonian-grid-model",
+      "matters_for": [
+        "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy",
+        "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error",
+        "ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode"
+      ]
+    },
+    {
+      "convention": "RK4 and the Fourier Poisson solver use exact arithmetic. RK4 trajectory estimates require exact initialization, a common compact convex tube containing paired stages, bounded derivatives through order four, and 0<Δt≤h_0. Retained times are nΔt≤T; a step at T is unnecessary.",
+      "fixed_by": "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+      "matters_for": [
+        "thm-periodic-pic-staged-fixed-regularization-error-budget",
+        "ex-cold-two-stream-stipulated-pic-experiment"
+      ]
+    },
+    {
+      "convention": "Countable Choice is assumed only for the leapfrog Lebesgue-volume assertion. Reversibility, symplecticity, exact-ODE energy conservation, and the conditional order-two estimate are choice-free.",
+      "fixed_by": "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error",
+      "matters_for": [
+        "thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-periodic-centered-difference-poisson-zero-mode-and-gauge",
+      "statement": "A_h is self-adjoint and nonnegative, its kernel consists exactly of constants, and its range is exactly the zero-mean arrays. Every zero-mean source has a unique zero-mean solution. Its Fourier eigenvalues are 4h^(-2)Σ_a sin²(πk_a/N), vanishing only at k=0.",
+      "used_by": [
+        "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+        "alg-periodic-pic-zero-mean-poisson-solver",
+        "thm-periodic-pic-charge-conservation-and-neutralized-source",
+        "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+        "def-periodic-pic-regularized-grid-interaction-kernel",
+        "thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution",
+        "def-periodic-pic-separable-hamiltonian-grid-model",
+        "thm-periodic-pic-smooth-density-grid-force-consistency"
+      ]
+    },
+    {
+      "id": "thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth",
+      "statement": "For fixed ε>0 and a finite signed Borel measure μ, the explicit kernel is strictly positive, even, smooth, and has integral one. The neutralized convolution source is smooth with zero mean, and its displayed Fourier series gives the unique zero-mean periodic Poisson solution, with all derivative series absolutely and uniformly convergent.",
+      "used_by": [
+        "lem-periodic-pic-smooth-assignment-weights",
+        "def-periodic-pic-regularized-grid-interaction-kernel",
+        "lem-periodic-pic-shape-partition-and-quadrature-bound",
+        "thm-periodic-pic-smooth-density-grid-force-consistency",
+        "ex-periodic-smooth-density-poisson-grid-force-error"
+      ]
+    },
+    {
+      "id": "thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint",
+      "statement": "Removing the source mean and solving in the zero-mean gauge defines a linear self-adjoint map A_h† on the full finite grid space, with A_h A_h†s=s−s̄1 and A_h†1=0.",
+      "used_by": [
+        "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+        "def-periodic-pic-separable-hamiltonian-grid-model",
+        "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+        "thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy"
+      ]
+    },
+    {
+      "id": "lem-periodic-pic-shape-partition-and-quadrature-bound",
+      "statement": "The smooth weights form a partition of unity with Z≥Z_min>0. Measure deposition differs from nodal convolution by at most C_η‖η_ε‖∞‖μ‖TV h²/Z_min. For Euclidean-valued C² g, gathering differs from η_ε*g by at most (C_{η,g}+C_η‖g‖∞)h²/Z_min, using the stated translation-uniform shifted-product constant.",
+      "used_by": [
+        "thm-periodic-pic-smooth-density-grid-force-consistency"
+      ]
+    },
+    {
+      "id": "thm-periodic-pic-poisson-residual-to-gathered-force-bound",
+      "statement": "For a compatible source and any approximate potential, the zero-mean residual controls the centered-field error by ‖D^0(φ−φ̃)‖_h≤γ_{N,L}‖r‖_h, with γ_{N,L}≤L/4. Particle gathering adds the explicit factor (|q_p|/m_p)h^(−d/2).",
+      "used_by": [
+        "thm-periodic-pic-smooth-density-grid-force-consistency"
+      ]
+    },
+    {
+      "id": "thm-periodic-pic-smooth-density-grid-force-consistency",
+      "statement": "For fixed ε>0 and a finite signed Borel measure μ, the assigned source is compatible and the gathered field error is at most L^(d/2)h^(2−d/2)(γ_{N,L}C_src+C_3)+C_int h², with the displayed derivative constants. This tends to zero for d≤3 at fixed ε.",
+      "used_by": [
+        "thm-periodic-pic-staged-fixed-regularization-error-budget",
+        "ex-periodic-smooth-density-poisson-grid-force-error"
+      ]
+    },
+    {
+      "id": "thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz",
+      "statement": "For fixed ε, grid, Q, and M, the grid and continuum phase kernels are globally Lipschitz in the two-variable sum convention, with the stated finite derivative-supremum and Fourier-sum constants.",
+      "used_by": [
+        "thm-periodic-pic-mean-field-error-with-force-defect",
+        "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube"
+      ]
+    },
+    {
+      "id": "thm-periodic-pic-mean-field-error-with-force-defect",
+      "statement": "Under the stated characteristic-flow, first-moment, integrable-path-supremum, and uniform pair-kernel-defect assumptions, W_1(ν_t^h,μ_t)≤exp(2L_εt)(δ_0+tδ_{ε,h}), where δ_0 is the actual initial W_1 error.",
+      "used_by": [
+        "thm-periodic-pic-staged-fixed-regularization-error-budget"
+      ]
+    },
+    {
+      "id": "thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube",
+      "statement": "Under the stated C⁴ compact-tube, paired-stage, local-defect, step-width, and exact-initialization assumptions, the stacked Euclidean trajectory error at every retained grid time is bounded by C_4(exp(L_*T)−1)h_t⁴/L_* when L_*>0, and by C_4Th_t⁴ when L_*=0.",
+      "used_by": [
+        "thm-periodic-pic-staged-fixed-regularization-error-budget"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-euler-midpoint-rk4-tableaus",
+      "used_for": "The classical four-stage RK4 coefficients used by the PIC step.",
+      "opened": true
+    },
+    {
+      "id": "def-globally-lipschitz-mean-field-kernel",
+      "used_for": "The two-variable Lipschitz convention and its factor 2 in Dobrushin stability.",
+      "opened": true
+    },
+    {
+      "id": "def-p-one-wasserstein-one",
+      "used_for": "Probability, finite-first-moment, and coupling-infimum conventions; no optimal coupling is assumed.",
+      "opened": true
+    },
+    {
+      "id": "def-characteristic-mean-field-solution",
+      "used_for": "Joint Borel characteristic maps, pushforwards, absolute continuity, and integrable path suprema.",
+      "opened": true
+    },
+    {
+      "id": "def-mean-field-and-weighted-vortex-particle-systems",
+      "used_for": "The equal-probability finite-particle system and empirical law.",
+      "opened": true
+    },
+    {
+      "id": "thm-gronwall-integral-inequality",
+      "used_for": "Uniqueness of duplicate particle paths and integral stability estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-w1-dobrushin-stability-with-force-defect",
+      "used_for": "Transported-coupling estimates with bounded label defects under the exact path-integrability hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "prop-euler-midpoint-rk4-orders-and-stability-functions",
+      "used_for": "Uniform fourth-order exact-start local accuracy of classical RK4.",
+      "opened": true
+    },
+    {
+      "id": "prop-explicit-rk-order-conditions-through-four",
+      "used_for": "Checking the C⁴ autonomous compact-tube hypotheses and local O(h⁵) argument underlying the RK4 order supplier.",
+      "opened": true
+    },
+    {
+      "id": "lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube",
+      "used_for": "The one-step bound 1+hLe^(Lh_0) for paired admitted stages.",
+      "opened": true
+    },
+    {
+      "id": "def-leapfrog-step-map",
+      "used_for": "Kick–drift–kick composition, right-to-left composition order, and inverse shears.",
+      "opened": true
+    },
+    {
+      "id": "def-local-leapfrog-domain-on-an-open-configuration-set",
+      "used_for": "Admitted intermediate configurations in the geometric and trajectory-error suppliers.",
+      "opened": true
+    },
+    {
+      "id": "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+      "used_for": "Symplectic Jacobian identities for a C² potential and symmetric positive-definite mass matrix.",
+      "opened": true
+    },
+    {
+      "id": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+      "used_for": "Symplecticity of the admitted leapfrog composition.",
+      "opened": true
+    },
+    {
+      "id": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+      "used_for": "Conditional leapfrog local O(h³) and finite-time O(h²) errors on a controlled compact convex tube.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Lebesgue-volume preservation from a global C¹ diffeomorphism with determinant one, assuming Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicitly isolated choice assumption for the volume-preservation assertion.",
+      "opened": true
+    },
+    {
+      "id": "def-periodic-fourier-collocation-grid",
+      "used_for": "The five-node odd Fourier interpolation space in the sampling-alias example.",
+      "opened": true
+    },
+    {
+      "id": "lem-periodic-fourier-mode-aliasing-under-sampling",
+      "used_for": "Equality of mode-6 and mode-1 samples modulo five.",
+      "opened": true
+    },
+    {
+      "id": "alg-periodic-fourier-collocation-differentiation-matrix",
+      "used_for": "The spectral differentiation procedure used in the alias example.",
+      "opened": true
+    },
+    {
+      "id": "thm-periodic-fourier-collocation-differentiation-is-exact",
+      "used_for": "Exact differentiation of the collocation interpolant, separately from centered finite differences.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-periodic-one-dimensional-pic-cic-charge-deposition",
+      "concern": "The promised diagram is supplied as an unfenced raw environment beginning '\\begin{tikzpicture}[x=2cm,y=1cm,>=stealth,every node/.style={font=\\small}]' and ending '\\end{tikzpicture}'. The actual renderer, ../prestige-intelligence/web/components/library/ItemBody.tsx, withDiagrams, immediately delegates content without '```tikz' to MathMarkdown and extracts diagrams only with the fenced tikz/tikzcd regex. MathMarkdown has no raw-TikZ renderer. Consequently this source does not produce the promised stencil diagram and exposes TeX as prose. The numerical and adjoint calculations are unaffected.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": []
+}

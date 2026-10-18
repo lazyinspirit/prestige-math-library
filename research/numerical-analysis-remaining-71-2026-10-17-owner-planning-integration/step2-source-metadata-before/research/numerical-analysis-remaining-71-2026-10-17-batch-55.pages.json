@@ -1,0 +1,847 @@
+[
+  {
+    "order": 2664,
+    "id": "volume-integral-scattering-and-partial-wave-error",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Volume integral scattering and partial wave error",
+    "companion": "volume-integral-scattering-and-partial-wave-error-examples",
+    "requires": [
+      "nystrom-product-integration-and-fredholm-error",
+      "stable-special-function-recurrences-and-certified-evaluation",
+      "randomized-quasi-monte-carlo-and-replicates"
+    ],
+    "items": [
+      {
+        "id": "def-volume-integral-scattering-model",
+        "kind": "definition",
+        "title": "The three-dimensional volume integral scattering model",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-exponential",
+          "def-euclidean-inner-product",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-laplacian-of-a-c2-function"
+        ],
+        "justified_by": [
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "lem-volume-far-field-map-is-bounded"
+        ],
+        "dependency_level": 0,
+        "source_path": "items/def-volume-integral-scattering-model.md",
+        "statement": "Let $D\\subset\\mathbb R^3$ be a bounded Lebesgue-measurable set, let $M:=|D|$, let $q\\in L^\\infty(D;\\mathbb C)$, and let $k\\in\\mathbb R$. Here $L^2$ and $L^\\infty$ are equivalence classes modulo null functions ([[def-l-p-space-as-a-quotient-by-null-functions]]), and $L^\\infty$ means essentially bounded with respect to Lebesgue measure ([[def-essential-supremum-with-respect-to-a-measure]]). We regard $q$ as zero off $D$. The convention is the volume equation\n$$u=f+K_k u,\\qquad K_k u(x):=\\int_D G_k(x-y)q(y)u(y)\\,dy,\\qquad G_k(z):=\\frac{e^{ik|z|}}{4\\pi|z|}\\quad(z\\ne0).$$\nSet $G_k(0):=0$; when $M>0$ the diagonal in $D\\times D$ is product-null, so this value is only a representative convention. The input and unknown are classes in complex $L^2(D)$, and the displayed equation is interpreted as an equality of those classes. Its formula is well defined by [[lem-volume-integral-operator-well-defined-and-bounded]].\n\nThe associated far-field map is\n$$\\mathcal F_k[v](\\theta):=\\frac1{4\\pi}\\int_D e^{-ik\\theta\\cdot y}q(y)v(y)\\,dy,\\qquad \\theta\\in S^2.$$\nHere $S^2$ has the surface measure of [[def-polar-surface-measure-on-the-unit-sphere]]. The map is well defined as a continuous function of $\\theta$ by [[lem-volume-far-field-map-is-bounded]].\n\nFor $x\\notin\\overline D$, the exterior volume potential is\n$$V_kv(x):=\\int_D G_k(x-y)q(y)v(y)\\,dy.$$\nThis is absolutely convergent because $x$ has positive distance from the compact set $\\overline D$ and $qv\\in L^1(D)$.\n\nIf $M=0$, define $L^2(D)=\\{0\\}$ and $K_k=0$; all solution and far-field statements on that space are the zero-space statements. The substantive operator results below assume $0<M<\\infty$.\n\nThis is a stipulated integral-equation model with the sign convention $(-\\Delta-k^2)(u-f)=q u$ when the corresponding distributional Helmholtz equation is used. In the acoustic notation of Scherzer–Mindrinos, their equation $u=u_i-k^2\\Phi*((1-n)u)$ corresponds to $q=k^2(n-1)$. No existence or uniqueness for all contrasts is asserted by this definition.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "The formula is definitional; the separately supplied well-definedness lemma states its Countable Choice hypothesis. No physical uniqueness claim is part of this definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, Chapter 5, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 79–82, Lippmann–Schwinger equation and volume potential; our sign convention is stated explicitly."
+            },
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, Chapter 8",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 149–156, partial-wave and Lippmann–Schwinger conventions."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "lem-finite-volume-hilbert-schmidt-rescaling",
+        "kind": "lemma",
+        "title": "Rescaling finite-measure kernel operators to probability spaces",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-completed-product-measure",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/lem-finite-volume-hilbert-schmidt-rescaling.md",
+        "statement": "Assume AC. Let $(X,\\mu)$ and $(Y,\\nu)$ be finite measure spaces with masses $0<M_X:=\\mu(X)<\\infty$ and $0<M_Y:=\\nu(Y)<\\infty$. Put $d\\widehat\\mu=d\\mu/M_X$ and $d\\widehat\\nu=d\\nu/M_Y$. For $a\\in L^2(X\\times Y,\\mu\\times\\nu)$, let $T_a:L^2(Y,\\nu)\\to L^2(X,\\mu)$ be its square-integrable-kernel operator and let $\\widehat T$ be the operator with kernel $\\widehat a:=\\sqrt{M_XM_Y}\\,a$ against $\\widehat\\nu$. The maps $U_Xg=\\sqrt{M_X}g$ and $U_Yh=\\sqrt{M_Y}h$ are unitary and\n$$U_XT_aU_Y^{-1}=\\widehat T.$$\nMoreover $\\|\\widehat a\\|_{L^2(\\widehat\\mu\\times\\widehat\\nu)}=\\|a\\|_{L^2(\\mu\\times\\nu)}$, so the operator norms and kernel $L^2$ norms agree. If either mass is zero, the corresponding $L^2$ space and kernel operator are zero.\n\nFor $X=Y=D$ with Lebesgue mass $M>0$, the normalized kernel is $\\widehat a=Ma$ and the measure is $d\\widehat x=dx/M$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "AC is carried only to use completed-product kernel operators with the exact well-definedness interface of the published Hilbert–Schmidt supplier; the scaling algebra itself makes no choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems",
+              "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+              "locator": "Chapter 3, §3.3, printed pp. 60–65; the finite-measure normalization is derived locally."
+            },
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 79–82, volume-potential setting; the source and target measure scaling is derived locally."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "lem-three-dimensional-scattering-kernel-is-square-integrable",
+        "kind": "lemma",
+        "title": "The three-dimensional free-space scattering kernel is square integrable",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "def-countable-choice",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "cor-volume-of-a-closed-three-ball"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "source_path": "items/lem-three-dimensional-scattering-kernel-is-square-integrable.md",
+        "statement": "Let $D\\subset\\mathbb R^3$ be bounded and Lebesgue measurable, let $M:=|D|$, $d_D:=\\operatorname{diam}(D)$, $q\\in L^\\infty(D;\\mathbb C)$, and $k\\in\\mathbb R$. If $M>0$, define $a(x,y)=G_k(x-y)q(y)$ off the diagonal and set it to zero on the diagonal. Then $a\\in L^2(D\\times D)$ and\n$$\\|a\\|_{L^2(D\\times D)}^2\\le\\frac{\\|q\\|_\\infty^2 M d_D}{4\\pi}.$$\nIf $M=0$, every measurable kernel on $D\\times D$ represents the zero product $L^2$ class.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "The polar-coordinate and completed-product Tonelli suppliers assume Countable Choice; no full Axiom of Choice is used here.",
+        "sources": {
+          "references": [
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 79–82, the three-dimensional Helmholtz volume kernel; square integrability is proved locally."
+            },
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, version July 15, 2009, Chapter 8",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 147–149, the three-dimensional outgoing Helmholtz radial kernel; the local proof establishes its square-integrability over bounded domains."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "lem-volume-integral-operator-well-defined-and-bounded",
+        "kind": "lemma",
+        "title": "The volume integral operator is well defined and bounded on L2",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "lem-three-dimensional-scattering-kernel-is-square-integrable",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "source_path": "items/lem-volume-integral-operator-well-defined-and-bounded.md",
+        "statement": "Let $D$ have finite Lebesgue measure. For every product-measurable kernel $a\\in L^2(D\\times D;\\mathbb C)$, the formula $T_av(x)=\\int_Da(x,y)v(y)dy$ defines a representative-independent complex-linear map $L^2(D;\\mathbb C)\\to L^2(D;\\mathbb C)$ and $\\|T_a\\|\\le\\|a\\|_{L^2(D\\times D)}$. Consequently, under [[def-volume-integral-scattering-model]] with $0<|D|<\\infty$,\n$$\\|K_k\\|_{L^2\\to L^2}\\le\\|G_k(\\cdot-\\cdot)q(\\cdot)\\|_{L^2(D\\times D)}\\le\\|q\\|_\\infty\\sqrt{\\frac{|D|\\,\\operatorname{diam}(D)}{4\\pi}}.$$\nFor $|D|=0$ the operator is zero.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice is used by the completed-product Tonelli/Fubini interface. No full Axiom of Choice or compactness claim is used in this boundedness branch.",
+        "sources": {
+          "references": [
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 79–82, volume-potential definition and its integral equation; this L2 well-definedness estimate is proved locally."
+            },
+            {
+              "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems",
+              "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+              "locator": "Chapter 3, §3.3, printed pp. 60–65, the integral-operator equation setting; the L2(D) kernel estimate is proved locally."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-volume-integral-operator-is-compact",
+        "kind": "theorem",
+        "title": "The volume integral scattering operator is compact",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "lem-finite-volume-hilbert-schmidt-rescaling",
+          "lem-three-dimensional-scattering-kernel-is-square-integrable",
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "lem-square-integrable-kernels-define-bounded-compact-integral-operators",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-compact-linear-operator",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "thm-heine-borel-rn",
+          "thm-finite-products-of-compact-spaces",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "cor-volume-of-a-closed-three-ball"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "source_path": "items/thm-volume-integral-operator-is-compact.md",
+        "statement": "Assume AC and the data of [[def-volume-integral-scattering-model]] with $0<|D|<\\infty$. Then $K_k:L^2(D;\\mathbb C)\\to L^2(D;\\mathbb C)$ is compact and\n$$\\|K_k\\|\\le\\|G_k(x-y)q(y)\\|_{L^2(D\\times D)}\\le\\|q\\|_\\infty\\sqrt{\\frac{|D|\\operatorname{diam}(D)}{4\\pi}}.$$\n\nThe proof supplies both the finite-measure Hilbert–Schmidt rescaling route required by the kernel interface and the singular-truncation/Schur route specified for this volume kernel. No uniqueness or outgoing-scattering solvability is asserted here.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "AC is used by the probability-space square-integrable-kernel supplier and supplies the Countable Choice/Dependent Choice needed for the norm-closure and Arzelà–Ascoli steps. The Schur small-ball estimate itself is choice-free once the stated polar-coordinate interface is available.",
+        "sources": {
+          "references": [
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, Chapter 5, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 79–82, volume potential and compact Fredholm formulation; the L2 proof is supplied locally."
+            },
+            {
+              "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems",
+              "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+              "locator": "Chapter 3, §3.3, compactness and Fredholm integral-operator framework, printed pp. 60–65; the 3D L2 kernel estimate and rescaling are proved locally."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-volume-integral-scattering-born-neumann-error",
+        "kind": "theorem",
+        "title": "Born truncation error for a small-norm volume integral operator",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "def-countable-choice",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "source_path": "items/thm-volume-integral-scattering-born-neumann-error.md",
+        "statement": "Assume Countable Choice and the data of [[def-volume-integral-scattering-model]] with $0<|D|<\\infty$. If $\\rho:=\\|K_k\\|_{L^2\\to L^2}<1$, then for every $f\\in L^2(D;\\mathbb C)$ the equation $u=f+K_ku$ has a unique solution. For each integer $m\\ge0$, define the Born partial sum $u_m:=\\sum_{j=0}^{m}K_k^jf$. Then\n$$\\|u-u_m\\|_2\\le\\frac{\\rho^{m+1}}{1-\\rho}\\|f\\|_2.$$\nNo compactness, analytic continuation, or physical uniqueness hypothesis is used in this small-norm branch.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is used only for completeness of the complex L2 space and the completed-product operator interface; no full Axiom of Choice or Fredholm uniqueness result is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 80–81, Lippmann–Schwinger volume equation; the small-norm Born estimate is proved locally."
+            },
+            {
+              "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.3",
+              "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+              "locator": "Printed pp. 11–12, Neumann-series inverse estimate; the partial-sum tail is derived locally."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-volume-integral-scattering-fredholm-stability",
+        "kind": "theorem",
+        "title": "Fredholm solvability and residual stability for volume scattering",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "thm-volume-integral-operator-is-compact",
+          "thm-fredholm-alternative-for-identity-minus-compact",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "def-banach-space",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "def-compact-linear-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "source_path": "items/thm-volume-integral-scattering-fredholm-stability.md",
+        "statement": "Assume AC and the hypotheses of [[def-volume-integral-scattering-model]] with $0<|D|<\\infty$. If $K_k$ is injective through $I-K_k$, then for every $f\\in L^2(D;\\mathbb C)$ there is a unique $u\\in L^2(D;\\mathbb C)$ solving $(I-K_k)u=f$, and $A_k:=I-K_k$ has a bounded inverse. Writing $R_k:=\\|A_k^{-1}\\|$, every $v\\in L^2(D;\\mathbb C)$ satisfies\n$$\\|u-v\\|_2\\le R_k\\|f-(I-K_k)v\\|_2.$$\nThis is an operator-theoretic Fredholm branch; no physical uniqueness statement for the exterior PDE is asserted.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "AC is required by the published Fredholm alternative and supplies Countable Choice for completeness of L2(D). The theorem assumes injectivity; it does not prove outgoing-PDE uniqueness for arbitrary contrasts.",
+        "sources": {
+          "references": [
+            {
+              "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, Chapter 3, §3.3",
+              "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+              "locator": "Printed pp. 60–65, Fredholm solvability and solution error for compact integral operators."
+            },
+            {
+              "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.3",
+              "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+              "locator": "Printed pp. 12–13, Fredholm alternative and collectively compact solution stability."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "lem-volume-far-field-map-is-bounded",
+        "kind": "lemma",
+        "title": "The volume far-field map is bounded and is the uniform far-field limit",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-complex-exponential",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-chain-rule",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "source_path": "items/lem-volume-far-field-map-is-bounded.md",
+        "statement": "Let $D,q,k$ be as in [[def-volume-integral-scattering-model]], with $0<|D|<\\infty$, and put $R_0>\\sup_{y\\in D}|y|$. Then $\\mathcal F_k:L^2(D;\\mathbb C)\\to C(S^2;\\mathbb C)$ is linear and\n$$\\|\\mathcal F_kv\\|_\\infty\\le\\frac{\\|q\\|_\\infty\\sqrt{|D|}}{4\\pi}\\|v\\|_2.$$\nIt is Lipschitz in direction with constant at most $|k|R_0\\|q\\|_\\infty\\sqrt{|D|}\\|v\\|_2/(4\\pi)$. For every $r\\ge2R_0$, the exterior volume potential of [[def-volume-integral-scattering-model]] satisfies\n$$\\sup_{\\theta\\in S^2}\\left|r e^{-ikr}V_kv(r\\theta)-\\mathcal F_kv(\\theta)\\right|\\le\\frac{2R_0+|k|R_0^2}{4\\pi r}\\|q\\|_\\infty\\sqrt{|D|}\\|v\\|_2.$$\nThus $\\mathcal F_kv$ is the uniform far-field amplitude under the outgoing $e^{ikr}/r$ convention.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "No Choice axiom beyond the stated L2 and surface-measure conventions is used in the pointwise far-field bounds.",
+        "sources": {
+          "references": [
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, §5.2.2",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF p. 70, the far-field mapping; the volume-potential asymptotic below is derived locally."
+            },
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, Chapter 8, §8.1.2",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 143–145, scattered-wave far-field amplitude convention."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "lem-dyadic-cell-average-projections-converge-in-l2",
+        "kind": "lemma",
+        "title": "Dyadic cell-average projections converge strongly in L2 of a bounded set",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-b-adic-step-functions-dense-in-l2-cube",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "source_path": "items/lem-dyadic-cell-average-projections-converge-in-l2.md",
+        "statement": "Let $D\\subset\\mathbb R^3$ be bounded and Lebesgue measurable, and choose a half-open cube $Q$ containing $D$. Subdivide $Q$ into its nested dyadic cubes at mesh $h_N=2^{-N}\\operatorname{side}(Q)$. Let $E_{N,j}=D\\cap Q_{N,j}$ range over the finitely many cells of positive measure, let $V_N\\subset L^2(D;\\mathbb C)$ be the functions constant on each such cell, and define $P_N$ by replacing a function on each $E_{N,j}$ by its cell average. Then $P_N$ is the orthogonal projection onto $V_N$, $\\|P_N\\|\\le1$, the spaces $V_N$ are increasing, and $P_Nv\\to v$ in $L^2(D;\\mathbb C)$ for every $v\\in L^2(D;\\mathbb C)$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Only the hypotheses of the cited dyadic-density result are used; the projection argument uses finite sums and no arbitrary-index choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Variance of Scrambled Net Quadrature, §6",
+              "url": "https://citeseerx.ist.psu.edu/document?doi=f6282581a7ecdce7e38020a74b3022ccf1cfe14e&repid=rep1&type=pdf",
+              "locator": "Base-b elementary-box density in L2; the restriction to a bounded measurable set is proved locally."
+            },
+            {
+              "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems",
+              "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+              "locator": "Chapter 3, §3.3, the finite-dimensional discretization setting, printed pp. 60–65; dyadic projection convergence is derived locally."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "def-volume-product-integration-scheme",
+        "kind": "definition",
+        "title": "Cell-volume product integration for the scattering kernel",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "lem-dyadic-cell-average-projections-converge-in-l2",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "lem-volume-far-field-map-is-bounded"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "source_path": "items/def-volume-product-integration-scheme.md",
+        "statement": "Let $D,q,k$ be as in [[def-volume-integral-scattering-model]], $0<|D|<\\infty$, let $P_N$ be the dyadic cell-average projection of [[lem-dyadic-cell-average-projections-converge-in-l2]], and put $K_N:=P_NK_k$ and $f_N:=P_Nf$. This is a finite-rank volume product-integration rule on $L^2(D)$; the projection and kernel convention are fixed by those definitions.\n\nFor each positive-measure cell $E_{N,j}$ set $\\phi_{N,j}:=|E_{N,j}|^{-1/2}\\mathbf1_{E_{N,j}}$. The exact product-cell weights and right-hand side are\n$$A^{(N)}_{ij}:=\\langle K_k\\phi_{N,j},\\phi_{N,i}\\rangle=\\frac{1}{\\sqrt{|E_{N,i}||E_{N,j}|}}\\int_{E_{N,i}}\\int_{E_{N,j}}G_k(x-y)q(y)\\,dy\\,dx,\\qquad b^{(N)}_i:=\\frac{1}{\\sqrt{|E_{N,i}|}}\\int_{E_{N,i}}f(x)\\,dx.$$\nThe finite system is $(I-A^{(N)})c=b^{(N)}$, and its reconstruction is $u_N=\\sum_jc_j\\phi_{N,j}$. Equivalently, it solves $(I-K_N)u_N=f_N$ in $V_N$. Its far-field output is the exact cell integral\n$$\\mathcal F_N(c)(\\theta):=\\mathcal F_k[u_N](\\theta)=\\sum_j\\frac{c_j}{4\\pi\\sqrt{|E_{N,j}|}}\\int_{E_{N,j}}e^{-ik\\theta\\cdot y}q(y)\\,dy.$$\nA singular finite matrix has status `singular`; the definition makes no unconditional invertibility claim. The double integrals are taken over whole cell pairs, including diagonal pairs; no point value of $G_k$ at its singular diagonal is sampled. Finiteness is established by [[lem-volume-integral-operator-well-defined-and-bounded]] and [[lem-volume-far-field-map-is-bounded]].\n\nThe rule uses exact cell weights as a mathematical discretization. This definition makes no claim about floating-point evaluation or approximate cell weights.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "The rule is definitional. Its matrix coefficients are finite by the cited kernel-integrability supplier.",
+        "sources": {
+          "references": [
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 79–82, volume integral equation and compact-support convention; the L2 cell rule is supplied locally."
+            },
+            {
+              "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+              "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+              "locator": "Printed pp. 60–65, Nyström finite-rank equation and reconstruction framework; the local scheme integrates 3D volume cell pairs exactly."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-volume-product-integration-solution-and-far-field-error",
+        "kind": "theorem",
+        "title": "Fredholm convergence and far-field error for cell-volume product integration",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "def-volume-product-integration-scheme",
+          "lem-dyadic-cell-average-projections-converge-in-l2",
+          "thm-volume-integral-operator-is-compact",
+          "thm-volume-integral-scattering-fredholm-stability",
+          "lem-volume-far-field-map-is-bounded",
+          "thm-collectively-compact-operator-stability-and-error",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "def-banach-space",
+          "def-compact-linear-operator",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-metric-compactness-equivalences"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "source_path": "items/thm-volume-product-integration-solution-and-far-field-error.md",
+        "statement": "Assume AC and the data of [[def-volume-integral-scattering-model]] with $0<|D|<\\infty$. Let $P_N,K_N=P_NK_k,f_N=P_Nf$ and the exact cell-pair matrices be as in [[def-volume-product-integration-scheme]], and suppose $I-K_k$ is injective. Then there is $N_0$ such that for all $N\\ge N_0$ the matrix $I-A^{(N)}$ is nonsingular and its reconstruction $u_N\\in V_N$ is the unique solution of $(I-K_N)u_N=f_N$. If $u$ solves $(I-K_k)u=f$, there is a constant $C<\\infty$ independent of $N,f$ such that\n$$\\|u_N-u\\|_2\\le C\\bigl(\\|(P_N-I)K_ku\\|_2+\\|(P_N-I)f\\|_2\\bigr).$$\nWriting $C_F:=\\|q\\|_\\infty\\sqrt{|D|}/(4\\pi)$, the exact far-field outputs obey\n$$\\|\\mathcal F_k[u_N]-\\mathcal F_k[u]\\|_{C(S^2)}\\le C_F C\\bigl(\\|(P_N-I)K_ku\\|_2+\\|(P_N-I)f\\|_2\\bigr)\\longrightarrow0.$$\nThis gives eventual solvability and convergence for the stated cell-volume product rule; it does not assert operator-norm convergence $K_N\\to K_k$ or finite-precision error bounds.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "AC is used for L2 completeness, compact-metric sequential arguments, and the actual collectively compact stability theorem. The projection convergence and finite matrix representation are otherwise explicit.",
+        "sources": {
+          "references": [
+            {
+              "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+              "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+              "locator": "Printed pp. 60–65, collectively compact stability and Nyström solution error. Their specific quadrature rule is on C([0,1]); this theorem separately verifies every generic hypothesis for the L2 volume projections."
+            },
+            {
+              "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.3",
+              "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+              "locator": "Printed pp. 12–13, generic collectively compact Fredholm solution-stability framework."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "def-spherical-harmonic-partial-wave-conventions",
+        "kind": "definition",
+        "title": "Spherical harmonics and partial-wave conventions in three dimensions",
+        "deps": [
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-laplacian-of-a-c2-function"
+        ],
+        "justified_by": [
+          "lem-spherical-harmonics-form-complete-basis-and-addition-formula"
+        ],
+        "dependency_level": 0,
+        "source_path": "items/def-spherical-harmonic-partial-wave-conventions.md",
+        "statement": "Use the unit sphere $S^2$ and its polar surface measure $d\\sigma$ from [[def-polar-surface-measure-on-the-unit-sphere]]. For each integer $\\ell\\ge0$, let $\\mathcal H_\\ell$ be the complex vector space of restrictions to $S^2$ of homogeneous degree-$\\ell$ polynomials $P$ on $\\mathbb R^3$ satisfying the Euclidean harmonic equation $\\Delta P=0$. In polar coordinates $x=r\\omega$, define $\\Delta_{S^2}$ by\n$$\\Delta_{\\mathbb R^3}=\\partial_r^2+\\frac2r\\partial_r+\\frac1{r^2}\\Delta_{S^2},$$\nequivalently $\\Delta_{S^2}=\\frac1{\\sin\\theta}\\partial_\\theta(\\sin\\theta\\partial_\\theta)+\\frac1{\\sin^2\\theta}\\partial_\\phi^2$ away from the poles. Thus if $Y\\in\\mathcal H_\\ell$ is the restriction of $P$, then $\\Delta_{S^2}Y=-\\ell(\\ell+1)Y$.\n\nFor $\\ell\\ge0$, define the normalized zonal polynomial $P_\\ell(t)$ to be the degree-$\\ell$ polynomial satisfying\n$$ (1-t^2)P_\\ell''(t)-2tP_\\ell'(t)+\\ell(\\ell+1)P_\\ell(t)=0,\\qquad P_\\ell(1)=1.$$\nThe later harmonic-basis lemma proves existence and uniqueness of this normalized polynomial and identifies it with the usual Legendre convention.\n\nThe term **partial wave of degree $\\ell$** means the $\\mathcal H_\\ell$ component of an angular expansion in $L^2(S^2,d\\sigma;\\mathbb C)$. Completeness, orthogonality, finite dimension, and the evaluation bound for these components are established in [[lem-spherical-harmonics-form-complete-basis-and-addition-formula]].\n\nFor a radial field $u(r,\\omega)$, its degree-$\\ell$ component is written $u_\\ell(r,\\omega)\\in\\mathcal H_\\ell$; any orthonormal basis within this finite-dimensional space gives the equivalent scalar mode equations. The definition does not select such a basis globally.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "The definitions make no basis selection. The later completeness theorem states its regularity and measure hypotheses explicitly.",
+        "sources": {
+          "references": [
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, Chapter 8",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 145–149, Legendre/spherical-harmonic partial-wave expansion and radial equation."
+            },
+            {
+              "title": "Pierre Capel, Introduction to Scattering Theory, TALENT lecture notes",
+              "url": "https://indico.mitp.uni-mainz.de/event/279/sessions/1001/attachments/2951/3418/Capel1TALENTFB22ho.pdf",
+              "locator": "PDF pp. 17–21, spherical harmonics and radial equation."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "lem-spherical-harmonics-form-complete-basis-and-addition-formula",
+        "kind": "lemma",
+        "title": "Spherical harmonics form a complete basis with the addition formula",
+        "deps": [
+          "def-spherical-harmonic-partial-wave-conventions",
+          "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "thm-c-c-is-dense-in-l-p-for-radon-measures",
+          "def-radon-measure-on-an-lch-space",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "cor-second-green-identity-on-a-bounded-c-one-domain",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "cor-volume-of-a-closed-three-ball",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-rank-nullity",
+          "def-dimension",
+          "def-linear-subspace",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "def-euclidean-spheres-and-closed-balls",
+          "thm-heine-borel-rn",
+          "def-locally-compact-space",
+          "def-second-countable-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "source_path": "items/lem-spherical-harmonics-form-complete-basis-and-addition-formula.md",
+        "statement": "Use $\\mathcal H_\\ell$ from [[def-spherical-harmonic-partial-wave-conventions]]. For every $\\ell\\ge0$, $\\dim_\\mathbb C\\mathcal H_\\ell=2\\ell+1$; the spaces $\\mathcal H_\\ell$ are pairwise orthogonal in $L^2(S^2,d\\sigma;\\mathbb C)$ and their algebraic sum is dense there. Thus they give a complete orthogonal spherical-harmonic expansion. For any orthonormal basis $Y_{\\ell 1},\\ldots,Y_{\\ell,2\\ell+1}$ of $\\mathcal H_\\ell$, the basis-independent reproducing kernel\n$$Z_\\ell(\\omega,\\eta):=\\sum_{m=1}^{2\\ell+1}Y_{\\ell m}(\\omega)\\overline{Y_{\\ell m}(\\eta)}$$\nsatisfies $Z_\\ell(\\omega,\\omega)=(2\\ell+1)/(4\\pi)$. In particular,\n$$|g(\\omega)|\\le\\sqrt{\\frac{2\\ell+1}{4\\pi}}\\,\\|g\\|_{L^2(S^2)}\\qquad(g\\in\\mathcal H_\\ell).$$\nFor fixed $\\eta$, rotational invariance makes $Z_\\ell(\\omega,\\eta)$ a degree-$\\ell$ zonal polynomial of $\\omega\\cdot\\eta$; normalizing $P_\\ell(1)=1$ gives the usual addition identity $Z_\\ell(\\omega,\\eta)=\\frac{2\\ell+1}{4\\pi}P_\\ell(\\omega\\cdot\\eta)$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice and Dependent Choice are used for regularity and L2 density of the finite surface measure; the finite-dimensional harmonic construction uses no arbitrary-index choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, Chapter 8, §§8.1–8.2",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 145–149, spherical harmonics, addition theorem, and plane-wave expansion; the completeness and addition-kernel proof is supplied locally."
+            },
+            {
+              "title": "Pierre Capel, Introduction to Scattering Theory, TALENT lecture notes",
+              "url": "https://indico.mitp.uni-mainz.de/event/279/sessions/1001/attachments/2951/3418/Capel1TALENTFB22ho.pdf",
+              "locator": "PDF pp. 17–20, spherical-harmonic partial waves and Legendre normalization."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "lem-outgoing-helmholtz-kernel-is-a-fundamental-solution",
+        "kind": "lemma",
+        "title": "The outgoing three-dimensional Helmholtz kernel is a fundamental solution",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "cor-second-green-identity-on-a-bounded-c-one-domain",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "def-countable-choice",
+          "def-test-function-space-d-of-an-open-set",
+          "def-test-function-topology",
+          "def-fixed-support-test-function-frechet-space",
+          "def-distribution",
+          "def-distributional-derivative",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "thm-locally-integrable-functions-embed-in-distributions"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "source_path": "items/lem-outgoing-helmholtz-kernel-is-a-fundamental-solution.md",
+        "statement": "For real $k$, let $\\Phi_k(x)=e^{ik|x|}/(4\\pi|x|)$ for $x\\ne0$. In the sense of distributions on $\\mathbb R^3$,\n$$(-\\Delta-k^2)\\Phi_k=\\delta_0.$$\nHere $\\delta_0$ is the point-mass distribution defined by $\\langle\\delta_0,\\varphi\\rangle=\\varphi(0)$ for every $\\varphi\\in C_c^\\infty(\\mathbb R^3)$. Consequently, if $g\\in L^1(\\mathbb R^3)$ has bounded support, the integral $\\int_{\\mathbb R^3}\\Phi_k(x-y)g(y)\\,dy$ is absolutely finite for almost every $x$. Define $V$ by this integral almost everywhere (and arbitrarily on the exceptional null set). Then $V\\in L^1_{\\rm loc}$ and $(-\\Delta-k^2)V=g$ distributionally.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice is required by the polar-coordinate, second-Green, and locally-integrable-to-distribution interfaces. The point-source identity is a test-function calculation; no full Axiom of Choice is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, Chapter 5, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 79–82, outgoing Helmholtz volume potential and the Lippmann–Schwinger equation; the distributional normalization is verified locally."
+            },
+            {
+              "title": "Pierre Capel, Introduction to Scattering Theory, TALENT lecture notes",
+              "url": "https://indico.mitp.uni-mainz.de/event/279/sessions/1001/attachments/2951/3418/Capel1TALENTFB22ho.pdf",
+              "locator": "PDF pp. 16–19, outgoing radial Helmholtz solution and Green-function convention."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-volume-scattering-radial-partial-wave-boundary-problem",
+        "kind": "theorem",
+        "title": "Radial volume scattering separates into matched partial-wave boundary problems",
+        "deps": [
+          "thm-certified-scaled-spherical-bessel-enclosures",
+          "def-spherical-bessel-evaluation-contract",
+          "def-volume-integral-scattering-model",
+          "def-spherical-harmonic-partial-wave-conventions",
+          "lem-spherical-harmonics-form-complete-basis-and-addition-formula",
+          "def-spherical-bessel-and-hankel-functions",
+          "lem-spherical-bessel-and-hankel-radial-solutions",
+          "lem-outgoing-helmholtz-kernel-is-a-fundamental-solution",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "source_path": "items/thm-volume-scattering-radial-partial-wave-boundary-problem.md",
+        "statement": "Assume Countable Choice and Dependent Choice. Let $R>0$, $k>0$, and $Q\\in C([0,R];\\mathbb C)$. Set $q(x)=Q(|x|)$ on $B_R$ and $q(x)=0$ outside $B_R$. Choose for every $\\ell$ an orthonormal basis $Y_{\\ell m}$ of $\\mathcal H_\\ell$. Suppose $u^{\\rm inc}$ is a classical free Helmholtz field and $u=u^{\\rm inc}+V$ satisfies the volume-potential equation $V(x)=\\int_{B_R}G_k(x-y)q(y)u(y)dy$. Assume $u$ is continuous on $\\overline B_R$, piecewise $C^2$ on either side of $|x|=R$, and $u$ and its radial derivative are continuous across that interface. For every spherical harmonic $Y_{\\ell m}$ assume its coefficient\n$$w_{\\ell m}(r):=r\\int_{S^2}u(r\\omega)\\overline{Y_{\\ell m}(\\omega)}d\\sigma(\\omega)$$\nsatisfies the regular-origin condition $w_{\\ell m}(r)=O(r^{\\ell+1})$ as $r\\downarrow0$. Write the incident mode as $r\\int u^{\\rm inc}(r\\omega)\\overline{Y_{\\ell m}}d\\sigma=\\alpha_{\\ell m}rj_\\ell(kr)$. The outgoing radiation condition is $\\lim_{r\\to\\infty}\\sup_{\\omega\\in S^2}|r(\\partial_rV(r\\omega)-ikV(r\\omega))|=0$. Then each reduced mode satisfies\n$$w_{\\ell m}''(r)+\\left(k^2+Q(r)-\\frac{\\ell(\\ell+1)}{r^2}\\right)w_{\\ell m}(r)=0\\quad(0<r<R),$$\nis regular at $0$, and has for $r>R$ the form\n$$w_{\\ell m}(r)=\\alpha_{\\ell m}rj_\\ell(kr)+\\beta_{\\ell m}rh_\\ell^{(1)}(kr).$$\nThe interior and exterior values and first derivatives agree at $R$. This is a conditional mode reduction and matching statement; it asserts neither existence nor uniqueness of the total field.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice and Dependent Choice are inherited from the stated complete-harmonic supplier. The mode equations are finite integrations; no uniqueness of the full scattering problem is inferred.",
+        "sources": {
+          "references": [
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, version July 15, 2009, Chapter 8",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 147–153, radial equation, regular-origin solution, and square-well matching."
+            },
+            {
+              "title": "Pierre Capel, Introduction to Scattering Theory, TALENT lecture notes",
+              "url": "https://indico.mitp.uni-mainz.de/event/279/sessions/1001/attachments/2951/3418/Capel1TALENTFB22ho.pdf",
+              "locator": "PDF pp. 20–32, partial-wave radial equations and matching conditions."
+            },
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, Chapter 5, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 79–82, the outgoing volume-potential relation used to obtain the distributional Helmholtz equation."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "thm-exponential-partial-wave-truncation-bound",
+        "kind": "theorem",
+        "title": "Exponential coefficient decay gives a uniform partial-wave truncation bound",
+        "deps": [
+          "def-spherical-harmonic-partial-wave-conventions",
+          "lem-spherical-harmonics-form-complete-basis-and-addition-formula",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "source_path": "items/thm-exponential-partial-wave-truncation-bound.md",
+        "statement": "Assume Countable Choice and Dependent Choice. Let $b_\\ell\\in\\mathcal H_\\ell$ for every integer $\\ell\\ge0$, where $\\mathcal H_\\ell$ is defined in [[def-spherical-harmonic-partial-wave-conventions]]. Suppose constants $C\\ge0$ and $\\rho>1$ satisfy $\\|b_\\ell\\|_{L^2(S^2)}\\le C\\rho^{-\\ell}$ for all $\\ell$. Then $b(\\omega):=\\sum_{\\ell=0}^\\infty b_\\ell(\\omega)$ converges uniformly on $S^2$, and for every integer $L\\ge0$,\n$$\\sup_{\\omega\\in S^2}\\left|b(\\omega)-\\sum_{\\ell=0}^L b_\\ell(\\omega)\\right|\\le C\\sqrt{\\frac{2L+3}{4\\pi}}\\,\\frac{\\rho^{-(L+1)}}{(1-\\rho^{-1})^2}.$$\nThis is a conditional angular-coefficient bound; it does not assert exponential decay for general scattering data.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice and Dependent Choice are carried from the complete-harmonic supplier used for the addition-kernel estimate. The exponential coefficient hypothesis is explicit and is not deduced for arbitrary contrasts.",
+        "sources": {
+          "references": [
+            {
+              "title": "Pierre Capel, Introduction to Scattering Theory, TALENT lecture notes",
+              "url": "https://indico.mitp.uni-mainz.de/event/279/sessions/1001/attachments/2951/3418/Capel1TALENTFB22ho.pdf",
+              "locator": "PDF pp. 17–21, harmonic expansion and angular truncation context; the uniform coefficient tail estimate is proved locally."
+            },
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, version July 15, 2009, Chapter 8",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 145–150, spherical-harmonic expansion and addition theorem."
+            }
+          ]
+        },
+        "status": "draft"
+      }
+    ]
+  },
+  {
+    "order": 2665,
+    "id": "volume-integral-scattering-and-partial-wave-error-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Volume integral scattering and partial wave error — Examples",
+    "companion": "volume-integral-scattering-and-partial-wave-error",
+    "requires": [
+      "volume-integral-scattering-and-partial-wave-error"
+    ],
+    "items": [
+      {
+        "id": "ex-small-norm-volume-scatterer-born-truncation",
+        "kind": "example",
+        "title": "A small-norm ball scatterer has a certified Born tail",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "lem-three-dimensional-scattering-kernel-is-square-integrable",
+          "thm-volume-integral-scattering-born-neumann-error",
+          "cor-volume-of-a-closed-three-ball"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "source_path": "items/ex-small-norm-volume-scatterer-born-truncation.md",
+        "statement": "Take $D=B(0,1)\\subset\\mathbb R^3$, constant contrast $q=1/2$, real $k$, and arbitrary $f\\in L^2(D)$. The general kernel estimate gives $\\|K_k\\|\\le1/\\sqrt6<1$, so the Born series converges and its $m$th partial sum has an explicit geometric error bound.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice is inherited from the Born theorem for L2 completeness; the numerical norm bound itself is a direct kernel estimate.",
+        "sources": {
+          "references": [
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, Sommersemester 2015, Chapter 5, §5.2.6",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "PDF pp. 79–82, Lippmann–Schwinger volume equation; the ball norm and geometric Born tail are calculated locally."
+            },
+            {
+              "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.3",
+              "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+              "locator": "Printed pp. 11–12, Neumann-series solution estimate."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "ex-near-resonant-volume-operator-error-amplification",
+        "kind": "example",
+        "title": "A near-unit volume-operator mode amplifies forcing error",
+        "deps": [
+          "def-volume-integral-scattering-model",
+          "thm-volume-integral-scattering-fredholm-stability",
+          "thm-volume-integral-operator-is-compact"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "source_path": "items/ex-near-resonant-volume-operator-error-amplification.md",
+        "statement": "Conditionally suppose a compact volume operator $K_k$ has a normalized eigenmode $\\phi$ with eigenvalue $\\lambda\\ne1$, and suppose $I-K_k$ is injective. The Fredholm branch then applies. Forcing along $\\phi$ is amplified by exactly $|1-\\lambda|^{-1}$; this example does not claim that every physical contrast has such an eigenvalue.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "The operator-theoretic existence and residual estimate inherit the Axiom of Choice from the Fredholm theorem; the eigenvector calculation is algebraic.",
+        "sources": {
+          "references": [
+            {
+              "title": "Andreas Neubauer and Ronny Ramlau, Lecture Notes: Integral Equations and Boundary Value Problems, §3.3",
+              "url": "https://www.jyu.fi/en/file-download/download/public/28300",
+              "locator": "Printed pp. 60–65, Fredholm solvability and solution-error conditioning."
+            },
+            {
+              "title": "Habib Ammari, Brian Fitzpatrick, and Sanghyeon Yu, Mathematical and Computational Methods in Photonics: Tutorial Notes, §1.3",
+              "url": "https://people.math.ethz.ch/~grsam/HS16/MCMP/Mathematical%20and%20Computational%20Methods%20in%20Photonics%20-%20Tutorial%20Notes.pdf",
+              "locator": "Printed pp. 12–13, compact Fredholm stability and inverse-norm amplification."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "ex-radial-square-well-exact-partial-wave-matching",
+        "kind": "example",
+        "title": "Exact matching for the radial square well in the zeroth partial wave",
+        "deps": [
+          "thm-certified-scaled-spherical-bessel-enclosures",
+          "def-spherical-bessel-evaluation-contract",
+          "def-volume-integral-scattering-model",
+          "def-spherical-harmonic-partial-wave-conventions",
+          "def-spherical-bessel-and-hankel-functions",
+          "thm-volume-scattering-radial-partial-wave-boundary-problem",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "source_path": "items/ex-radial-square-well-exact-partial-wave-matching.md",
+        "statement": "Assume Countable Choice and Dependent Choice. Let $Q(r)=V_0>0$ on $0\\le r\\le R$, let $k>0$, and put $\\kappa=\\sqrt{k^2+V_0}$. In the $\\ell=0$ reduced radial channel with incident regular mode $w^{\\rm inc}(r)=\\sin(kr)/k$, write the regular interior solution as $A\\sin(\\kappa r)$ and the exterior total mode as $\\sin(kr)/k+B e^{ikr}$. Exact continuity of the value and derivative determines $A$ and $B$ below.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No additional axiom is used; the example is a two-equation boundary matching calculation under the radial theorem's conditional hypotheses.",
+        "sources": {
+          "references": [
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, version July 15, 2009, Chapter 8",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 151–153, exact radial square-well matching."
+            },
+            {
+              "title": "Pierre Capel, Introduction to Scattering Theory, TALENT lecture notes",
+              "url": "https://indico.mitp.uni-mainz.de/event/279/sessions/1001/attachments/2951/3418/Capel1TALENTFB22ho.pdf",
+              "locator": "PDF pp. 29–32, radial matching and phase-shift conventions."
+            }
+          ]
+        },
+        "status": "draft"
+      },
+      {
+        "id": "ex-forward-plane-wave-fixed-partial-wave-cutoff-fails",
+        "kind": "example",
+        "title": "A fixed partial-wave cutoff misses the forward high-frequency plane wave",
+        "deps": [
+          "def-spherical-harmonic-partial-wave-conventions",
+          "lem-spherical-harmonics-form-complete-basis-and-addition-formula",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-polar-surface-measure-on-the-unit-sphere"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "source_path": "items/ex-forward-plane-wave-fixed-partial-wave-cutoff-fails.md",
+        "statement": "Assume Countable Choice and Dependent Choice. For a fixed direction $d\\in S^2$, consider the incident plane wave $g_k(\\omega)=e^{ikd\\cdot\\omega}$ on the unit sphere. Let $\\Pi_L$ denote projection onto degrees $0,\\ldots,L$. For each fixed $L$, its value at the forward direction tends to zero as $k\\to\\infty$, whereas $g_k(d)=e^{ik}$ has modulus one. Thus a fixed angular cutoff has forward error tending to one; uniform high-frequency accuracy below one requires the cutoff to tend to infinity.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice and Dependent Choice are carried from the harmonic supplier used for the projection kernel; the decay bound itself is finite integration by parts.",
+        "sources": {
+          "references": [
+            {
+              "title": "Pierre Capel, Introduction to Scattering Theory, TALENT lecture notes",
+              "url": "https://indico.mitp.uni-mainz.de/event/279/sessions/1001/attachments/2951/3418/Capel1TALENTFB22ho.pdf",
+              "locator": "PDF pp. 17–21, plane-wave partial-wave decomposition; the fixed-cutoff forward-error conclusion is proved locally."
+            },
+            {
+              "title": "Maximilian Kreuzer, Quantum Theory: Lecture Notes, version July 15, 2009, Chapter 8",
+              "url": "https://hep.itp.tuwien.ac.at/~kreuzer/Quanten.15.07.09.pdf",
+              "locator": "PDF pp. 145–150, plane-wave expansion and spherical-harmonic addition identity."
+            }
+          ]
+        },
+        "status": "draft"
+      }
+    ]
+  }
+]

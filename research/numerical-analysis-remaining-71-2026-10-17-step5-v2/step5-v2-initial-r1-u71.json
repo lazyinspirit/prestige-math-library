@@ -1,0 +1,325 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "71",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "def-na-finite-state-discounted-bellman-system",
+      "model": "gpt-6-luna",
+      "context_sha256": "c8e4752b166c32c74524b421d52707aae6760bde6bbafc9dfde8ed8dbe5457e0",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Definition correctly permits state-dependent action sets, so a common-action full matrix Q^a is undefined. This is a nonfatal defect confined to Remarks. Define p^a_ij=delta_ij+q^a_ij/lambda rowwise: q^a_ii=-sum_{j!=i}q^a_ij ensures positivity and row sum one, and moving -lambda V_i outside the maximum gives exactly the displayed discounted equation. The Definition, finite-choice convention, contract and page interfaces are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-convex-support-localization-and-lipschitz-dual-gradient",
+      "model": "gpt-6-luna",
+      "context_sha256": "6c9460823b2ab98e39fd6f392d9dcb0cc5e3c53d4e925a76b659f248937cc3db",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F3 (Bolzano-Weierstrass) and F4 (compact extreme values) explicitly require n>=1, whereas this lemma also covers R^0. The original proof does not discharge that boundary case. Added a direct check: a nonempty U in R^0 is {0}, its subdifferential is {0}, H(0)=f(0), F*(0)=-f(0), and g=0; the empty-domain assertions are vacuous. The existing directional-slope, support localization, coercive minimization, and conjugate sandwich arguments then apply with n>=1. The Statement and AC assumption are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-lipschitz-critical-image-null",
+      "model": "gpt-6-luna",
+      "context_sha256": "a3bdfa9a3c6b9391cfef1b28958a746e6913daae3dd61db6a0922c61b17a5d43",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Differentiability controls g(p_i+h)-g(p_i)-Dg(p_i)h, so the original unshifted tube inclusion in step 1.2 is false even for a nonzero constant map. Replaced it with the affine image g(p_i)+Dg(p_i)B(0,5r_i) and centered the adapted orthonormal coordinates at g(p_i). Translated small boxes still fit in axis-parallel cubes of side O_n(epsilon r_i); the rank q<=n-1 count and total volume O_n(epsilon(L+1)^(n-1)r_i^n) remain valid. Disjoint-ball volume summability and countable cube covers complete the unchanged null-image conclusion, including n=1, L=0 and rank zero.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-rademacher-euclidean",
+      "model": "gpt-6-luna",
+      "context_sha256": "5d94e2729f1b8958f5fdc979d3d23a66fbbe4fc632fff5b54513ab11fda30bb0",
+      "outcome": "false_positive",
+      "reason": "The alleged reverse implication is definitional, not an inference from completeness: thm-lebesgue-measure-is-a-complete-measure Facts L1 explicitly states lambda_n=lambda_n* restricted to the measurable sets, citing def-lebesgue-measure-and-the-lebesgue-sigma-algebra. Thus a measurable lambda-null exceptional set has outer measure zero, and the already-declared null-equivalence theorem converts it to a cube-cover-null set. Checked ACL weak gradients, rational strong-Lebesgue-point reduction, Poincare oscillation, both Lipschitz-volume contradictions and countable localization under the declared AC assumption. No item edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-finite-control-howard-policy-iteration",
+      "model": "gpt-6-luna",
+      "context_sha256": "748afcee5d9cfda2127ee1b394e301197a1137552af0bff672ba6474c7901f26",
+      "outcome": "false_positive",
+      "reason": "The separate result thm-na-howard-policy-iteration-monotone-improvement-termination is listed later on the same home page. Its complete proof shows a nonnegative residual strict at switched states, inverse-positive policy evaluation with positive diagonal, strict value increase, nonrecurrence among P policies, and terminal Bellman optimality and uniqueness. Thus the algorithm phrase \"the theorem below\" has an actual proved referent; no proof belongs inside this procedure Definition. The procedure has finite deterministic ties, exact well-defined solves, convergence tested before exhaustion, and a sufficient P-evaluation budget.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+      "model": "gpt-6-luna",
+      "context_sha256": "946d0b18a1d80ac4cf0f9c41fc89f395ab09bd476551c01cfb63822ba8dd0959",
+      "outcome": "false_positive",
+      "reason": "Monotonicity is proved separately in lem-na-diagonal-diffusion-stencil-is-monotone, listed later on the same home page. Its proof expands the sign-dependent neighbor weights tau(alpha/h^2-|b|/h) and tau alpha/h^2, checks the center coefficient 1-tau sum(2alpha/h^2-|b|/h), and proves nonnegativity and row sum one under the two algorithm guards. Taking the finite maximum preserves order. The algorithm correctly supplies the recurrence, coefficient evaluation times, initialization, admissibility conditions and final array; its title does not require a duplicate proof inside the Definition. Corrected a separate contract boundary sentence that allowed zero diffusion despite the inherited alpha>=alpha_*>0 hypothesis. The item guard is unchanged; this is a metadata-only repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-na-finite-state-discounted-bellman-system",
+      "disposition": "repaired",
+      "post_sha256": "4de3d8e7a5b637d4e240920e56337c93d8a20fe3d27079a178dd0317c5892abf",
+      "review_context_sha256": "2c10586290424b0140cdd39500e4c892f47b459e6c606456f34f030ad5a8241b",
+      "reason": "Repaired only Remarks using state/action-indexed transition rows and the exact discounted Bellman equation. Nonnegative entries, row sums, discount scaling, finite-choice conventions and the unchanged Definition agree with the owning contract and page.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-convex-support-localization-and-lipschitz-dual-gradient",
+      "disposition": "repaired",
+      "post_sha256": "ab5e87da161ca1185938e25d0980dd0237cff1abe0d162176f089edf1de48695",
+      "review_context_sha256": "7a0dcaf9a1712abe343825f01480d411f002e970910b0390ed7efa4b79ff9b88",
+      "reason": "Added the explicit empty-domain and R^0 cases before using the positive-dimensional compactness interfaces. Checked all support, localization, strongly convex minimization and dual-gradient arguments; the Statement and full AC assumption are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-lipschitz-critical-image-null",
+      "disposition": "repaired",
+      "post_sha256": "c9f6d92fc029b9e3915b3fc4c7775b71511c327090fd77492bc021280e945cf3",
+      "review_context_sha256": "1d66f485a078d29c9d05da3320803fa705f459fc9db21e194c15c9d6e917b951",
+      "reason": "Centered the rank-deficient affine image and adapted coordinates at g(p_i). Translation preserves the explicit cube-size estimate; rank deficiency, disjoint-ball summability and countable covers prove the unchanged null-image statement, including constant maps.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-rademacher-euclidean",
+      "disposition": "unaffected",
+      "post_sha256": "32fa48155f4302c6afd345d7e30c5e4b2b7028e49ca6f9e5b8774d8c414f2e2c",
+      "review_context_sha256": "514e7d3695e0b30c0ed6c02706c8fcb7cce2384f65ab28571cd120359e2a6d30",
+      "reason": "F11 is sound because Lebesgue measure is outer measure restricted to measurable sets, explicitly recorded in the cited theorem Facts L1. Checked the ACL, strong Lebesgue-point, Poincare and Lipschitz-volume arguments; the item is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-finite-control-howard-policy-iteration",
+      "disposition": "unaffected",
+      "post_sha256": "cb346db7502170adf337db2bb37c95180d8d7f5162c44e5b9604c34b64a7d648",
+      "review_context_sha256": "b452cfcfaa33f4ac05e13d9a4c6a79c0d9da1a7661c8a2d2af12af4b76b24b36",
+      "reason": "The later same-page Howard theorem proves strict value improvement, nonrecurrence, termination within P evaluations and Bellman uniqueness. Its proof matches the exact algorithm, including deterministic ties and convergence-before-exhaustion. The item and contract are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+      "disposition": "unaffected",
+      "post_sha256": "c3bdc4d838ea466ec67fadccd88e3253a192bd2a6980032d0409689f5385ee06",
+      "review_context_sha256": "22cabe2ca78e4f7a8b5a59237e49368affea6b05ebe6282a2aaa5710986183dd",
+      "reason": "The separate same-page monotonicity lemma correctly proves nonnegative row weights and preservation of order under the two guards. Corrected only contract evidence that wrongly permitted zero diffusion; the inherited model requires alpha>=alpha_*>0. The item guard is unchanged.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "id": "def-na-finite-state-discounted-bellman-system",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "locus": "remarks",
+      "reason": "Repaired only Remarks using state/action-indexed transition rows and the exact discounted Bellman equation. Nonnegative entries, row sums, discount scaling, finite-choice conventions and the unchanged Definition agree with the owning contract and page.",
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "nonfatal"
+    },
+    {
+      "id": "lem-na-convex-support-localization-and-lipschitz-dual-gradient",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "locus": "proof-step",
+      "reason": "Added the explicit empty-domain and R^0 cases before using the positive-dimensional compactness interfaces. Checked all support, localization, strongly convex minimization and dual-gradient arguments; the Statement and full AC assumption are unchanged.",
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-na-lipschitz-critical-image-null",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "locus": "proof-step",
+      "reason": "Centered the rank-deficient affine image and adapted coordinates at g(p_i). Translation preserves the explicit cube-size estimate; rank deficiency, disjoint-ball summability and countable covers prove the unchanged null-image statement, including constant maps.",
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-na-rademacher-euclidean",
+      "outcome": "false_positive",
+      "status": "dismissed",
+      "reason": "F11 is sound because Lebesgue measure is outer measure restricted to measurable sets, explicitly recorded in the cited theorem Facts L1. Checked the ACL, strong Lebesgue-point, Poincare and Lipschitz-volume arguments; the item is unchanged.",
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-finite-control-howard-policy-iteration",
+      "outcome": "false_positive",
+      "status": "dismissed",
+      "reason": "The later same-page Howard theorem proves strict value improvement, nonrecurrence, termination within P evaluations and Bellman uniqueness. Its proof matches the exact algorithm, including deterministic ties and convergence-before-exhaustion. The item and contract are unchanged.",
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+      "outcome": "false_positive",
+      "status": "dismissed",
+      "reason": "The separate same-page monotonicity lemma correctly proves nonnegative row weights and preservation of order under the two guards. Corrected only contract evidence that wrongly permitted zero diffusion; the inherited model requires alpha>=alpha_*>0. The item guard is unchanged.",
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-metadata-repair",
+      "id": "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "locus": "contract-boundary",
+      "reason": "The old degenerate-boundary sentence permitted alpha=0, contradicting the inherited uniform ellipticity alpha>=alpha_*>0. Corrected that owning-contract evidence without changing the algorithm carrier or its guards. This is separate from the false-positive monotonicity rejection.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "nonfatal"
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "items": [
+      {
+        "id": "def-na-finite-state-discounted-bellman-system",
+        "statement_definition_changed": false,
+        "checks": "Precheck: not applicable to the definition. Rendering passed. Final changed-item proof-layout passed: 3 items, 10 steps, 0 defects. No downstream trigger.",
+        "unresolved_obligations": []
+      },
+      {
+        "id": "lem-na-convex-support-localization-and-lipschitz-dual-gradient",
+        "statement_definition_changed": false,
+        "checks": "Strict one-item proof-contract check passed with no errors or warnings after synchronizing step 1.1. Context rerun after that metadata change returned identical hashes; mathematical effects rechecked.",
+        "unresolved_obligations": []
+      },
+      {
+        "id": "lem-na-lipschitz-critical-image-null",
+        "statement_definition_changed": false,
+        "checks": "Synchronized the exact step 1.2 contract derivation under the shared lock. The focused strict contract check passed with no errors or warnings. Rechecked the metadata effects; review-context hashes remained identical.",
+        "unresolved_obligations": []
+      },
+      {
+        "id": "thm-na-rademacher-euclidean",
+        "statement_definition_changed": false,
+        "checks": "Six-item precheck passed: 3 proofs passed, 3 definitions/algorithms not applicable, 0 failures. Six-item rendercheck passed: 6 checked, no errors or warnings.",
+        "unresolved_obligations": []
+      },
+      {
+        "id": "alg-na-finite-control-howard-policy-iteration",
+        "statement_definition_changed": false,
+        "checks": "Six-item strict proof-contract check passed without errors or warnings. Final changed-item proof-layout passed: 3 items, 10 steps, 0 defects.",
+        "unresolved_obligations": []
+      },
+      {
+        "id": "alg-na-explicit-diagonal-diffusion-hjb-grid-step",
+        "statement_definition_changed": false,
+        "checks": "Corrected the degenerate-boundary evidence under the shared lock. Preserved the exact old row in prior_contract_boundary, removed its stale current-row review fields, and wrote no new stamp. Focused strict contract check passed; rechecked metadata effects and copied identical current review-context hashes.",
+        "unresolved_obligations": [],
+        "prior_contract_boundary": {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: A zero diagonal diffusion coefficient is allowed only with zero drift in that coordinate under the local drift-dominance restriction.",
+          "template_review": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A zero diagonal diffusion coefficient is allowed only with zero drift in that coordinate under the local drift-dominance restriction.",
+            "item_sha256": "70c1e9beb70734cc9b4ee99b8c1f3f7c4a4379e288e98510d5ec82640e102e1b",
+            "row_sha256": "71045cc517f8dbec7fd834b7a5db0f14877422eaf0392ff87a89f56106181f17",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/gate_url_iga_wiley",
+            "reason": "A zero diagonal diffusion coefficient is allowed only with zero drift in that coordinate under the local drift-dominance restriction.",
+            "item_sha256": "70c1e9beb70734cc9b4ee99b8c1f3f7c4a4379e288e98510d5ec82640e102e1b",
+            "row_sha256": "71045cc517f8dbec7fd834b7a5db0f14877422eaf0392ff87a89f56106181f17",
+            "evidence_file": "research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-boundary-reviews/lane-7.json"
+          }
+        },
+        "current_contract_boundary": {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The inherited model requires uniform ellipticity alpha_j^a >= alpha_* > 0, so zero diagonal diffusion is excluded. Zero drift is allowed; equality in the drift-dominance and CFL guards is also admitted."
+        }
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-na-finite-state-discounted-bellman-system.md items/lem-na-convex-support-localization-and-lipschitz-dual-gradient.md items/lem-na-lipschitz-critical-image-null.md items/thm-na-rademacher-euclidean.md items/alg-na-finite-control-howard-policy-iteration.md items/alg-na-explicit-diagonal-diffusion-hjb-grid-step.md --json",
+        "exit_code": 0,
+        "result": "6 files: 3 proofs passed; 3 definition/algorithm files not applicable; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-na-finite-state-discounted-bellman-system.md items/lem-na-convex-support-localization-and-lipschitz-dual-gradient.md items/lem-na-lipschitz-critical-image-null.md items/thm-na-rademacher-euclidean.md items/alg-na-finite-control-howard-policy-iteration.md items/alg-na-explicit-diagonal-diffusion-hjb-grid-step.md --json",
+        "exit_code": 0,
+        "result": "6 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-71.proof-contracts.json --strict --items def-na-finite-state-discounted-bellman-system,lem-na-convex-support-localization-and-lipschitz-dual-gradient,lem-na-lipschitz-critical-image-null,thm-na-rademacher-euclidean,alg-na-finite-control-howard-policy-iteration,alg-na-explicit-diagonal-diffusion-hjb-grid-step --json",
+        "exit_code": 0,
+        "result": "All 6 checked; no errors or warnings. After the last two contract updates the same strict check was rerun on exactly those 2 IDs and passed."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-na-finite-state-discounted-bellman-system.md items/lem-na-convex-support-localization-and-lipschitz-dual-gradient.md items/lem-na-lipschitz-critical-image-null.md",
+        "exit_code": 0,
+        "result": "3 changed items; 10 steps; 0 defects. Run after final item edits; subsequent edits affected contract/report metadata only."
+      },
+      {
+        "command": "Read-only exact-tuple, itemHashGuard, disposition, and literal Statement/Definition hash comparisons against initial-1.json",
+        "exit_code": 0,
+        "result": "All 6 tuples and guards match; all 6 defining sections unchanged."
+      }
+    ],
+    "downstream_reason": "No original Statement or Definition changed. No new items were needed. Accordingly no supplier-interface event or downstream maintenance inventory was triggered.",
+    "published_ledger_updates": [],
+    "unresolved_obligations": [],
+    "independent_review_of_repairs_claimed": false
+  }
+}

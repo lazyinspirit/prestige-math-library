@@ -1,0 +1,218 @@
+{
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "9",
+  "input_sha256": "047cec63eb41f7c596fd501e01ff1260863c988f59685b18317656e6f709d27e",
+  "decisions": [
+    {
+      "id": "thm-realified-dense-residual-certificate",
+      "model": "gpt-6-luna",
+      "context_sha256": "c7e76a61671fb80bea8f94f7e1b88dfa129ca9545aa5e0894f9d4144bf2d81d7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The complex branch incorrectly gives A the vector type C^n. Its displayed realification and proof 1.1 unambiguously use an n by n matrix; correcting that type (and stating n>=1) preserves the proved residual bound. This is a recoverable notation defect, not a failure of the error estimate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-displacement-rank-generators-and-lower-shift",
+      "model": "gpt-6-luna",
+      "context_sha256": "eb5cdf03dd04a6e4d0c5e3400827c52eb350a1722a85fd0a313232862b8170ff",
+      "outcome": "confirmed_nonfatal",
+      "reason": "With unrestricted r, taking G=A-ZAZ* and H=I_n gives a width-n generator for every A, so the final Toeplitz-like label is vacuous. Kressner-Luce section 2 calls small displacement rank Toeplitz-like; section 2.1 permits nonminimal generators. Clarified the small-rank terminology and dimension-independent uniform bound without altering any displacement or generator formula.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "lem-displacement-generator-update-under-scalar-schur-elimination",
+      "model": "gpt-6-luna",
+      "context_sha256": "7d15a41853c104d734ca9af58acf71bef3c11699510800575f515a005644a58c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 incorrectly attributes adjoint evaluation to the matrix-product definition, which supplies only finite sums for products and the identity matrix. The block expansion and q*=e*+(r*Z*−r*)/d are correct. Restricted the citation to multiplication and explicitly defined conjugate transpose locally; no missing substantial theorem or change of claim is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-realified-dense-residual-certificate",
+      "disposition": "repaired",
+      "post_sha256": "90c502c7fe054625edaad5f29ad6277906d5227e99821c174bf84a31045e859b",
+      "review_context_sha256": "49cff546b8d4c56e47a27c3544a21bb3daf7a6783864f28329e28a5413846619",
+      "reason": "Checked the five supplier interfaces and all six proof steps: at most s relative-error factors per dot-product term, exact zeros assigned error zero, gamma_s+u(1+gamma_s)<=gamma_(s+1), the infinity row-sum bound, d=0, and the realification signs and dimension. Only the complex matrix type and explicit n>=1 were corrected. No independent review of this repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-displacement-rank-generators-and-lower-shift",
+      "disposition": "repaired",
+      "post_sha256": "ae0f2b7c583bbd7eb598fd5a31b48634fd6057552713ab13b97d5d76e5ab39c0",
+      "review_context_sha256": "89b86a06520ebe7f9f86b4e4e7d3b0c4ad17960c4ff95262352567f32be1490d",
+      "reason": "Checked the lower-shift entries, Stein displacement, width-r product shapes, and the distinction between generator width and actual rank against section 2 and the opening of 2.1 in Kressner-Luce. Repaired the unrestricted Toeplitz-like label. All four direct consumers use the unchanged shift or generator formulas and no small-rank label; their mathematical uses remain sound.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "lem-displacement-generator-update-under-scalar-schur-elimination",
+      "disposition": "repaired",
+      "post_sha256": "1dfd2fd187c1a5f2f90a1493ad2ae044b35f07dcb6d3314096eb966a600429d3",
+      "review_context_sha256": "3f405a3b23e74e8e6ced49d4774f65262feabaca70d4bccfe195d7787392c40a",
+      "reason": "Checked all four proof steps and actual F1-F3 supplier interfaces. The four blocks of GH* give d, ell, r* and the trailing displacement; expanding ell q*+p r*+d p q* cancels the shift boundary terms and leaves −ell r*/d+Z ell r* Z*/d. This proves the stated Schur identity and rank bound for any nonzero complex d, including n=2 and rank decrease. Source Lemma 3.1 states the general block update but gives only a reference for its proof; the scalar identity is verified locally here. Only F3 changed, so the Statement is identical and no propagation is triggered.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.epfl.ch/labs/mathicse/wp-content/uploads/2018/10/23.2016_DK-RL.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-toeplitz-matrix-has-displacement-rank-at-most-two",
+    "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+    "lem-displacement-generator-update-under-scalar-schur-elimination",
+    "thm-gohberg-semencul-inverse-identity-and-cost"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-realified-dense-residual-certificate",
+      "location": "statement",
+      "severity": "nonfatal",
+      "finding": "The complex branch types the coefficient matrix as a vector.",
+      "repair": "Changed A in C^n to A in C^{n x n} and made n>=1 explicit.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u9.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-displacement-rank-generators-and-lower-shift",
+      "location": "definition",
+      "severity": "nonfatal",
+      "finding": "An unrestricted displacement-rank bound labels every matrix Toeplitz-like.",
+      "repair": "Clarified small rank relative to dimension and a dimension-independent uniform bound for families; displacement and generator formulas unchanged.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u9.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-displacement-generator-update-under-scalar-schur-elimination",
+      "location": "facts-block",
+      "severity": "nonfatal",
+      "finding": "F3 overstates the matrix-product supplier by attributing adjoints to it.",
+      "repair": "Restricted the cited assertion to matrix products and supplied the local coordinate definition of conjugate transpose.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u9.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-gohberg-semencul-inverse-identity-and-cost",
+      "status": "owner-review-required",
+      "location": "facts-block",
+      "reason": "Outside assigned lane: F5 says “Matrix products and adjoints use the finite entrywise matrix-product convention” and cites only def-matrix-product-and-identity-matrix. The supplier does not define adjoints. Owner should examine the same citation overstatement repaired in the assigned Schur lemma. The affected shift formulas remain sound.",
+      "minimal_repair": "Restrict the citation to multiplication and explicitly state conjugate transpose as a local convention; no Statement change or downstream expansion is indicated.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u9.json"
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "no-update",
+      "reason": "Exact-ID searches and the four direct consumer carriers identify only draft frontier consumers of the changed definition and no item consumers of the residual theorem. No potentially defective published consumer or published repair was found.",
+      "evidence": "research/numerical-analysis-remaining-71-2026-10-17-step5-v2/step5-v2-initial-r1-u9.json"
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "unresolved_assigned_mathematics": [],
+    "claim_and_conventions": "Preserved the specified real residual DAG, exact-zero/normal-range hypotheses, gamma_(s+1) bound, and explicit 2n-dimensional complex realification. Preserved the lower Stein shift A−ZAZ*, generator widths, nonzero scalar pivot, q denominator conjugate(d), Schur identity and rank bound. No AC use or new prerequisite was introduced.",
+    "source_reading": "For the definition, consulted Kressner-Luce section 2 (displacement and small-rank terminology) and the generator definitions at the start of section 2.1. For the Schur lemma, read the complete Lemma 3.1 and its one-sentence reference-only proof; its displayed formulas specialize with k=1 and F=Z_n to the local p and q formulas. The paper prints real generator shapes despite complex input; the local complex algebra directly verifies the needed identity. No reading of the paper cited by that reference-only proof is claimed. Residual analysis and elementary complex matrix algebra were checked from familiar mathematics and the complete local supplier carriers.",
+    "metadata_repairs": [
+      "Updated only the residual Statement and displacement Definition mirrors in research/numerical-analysis-remaining-71-2026-10-17-batch-9.pages.json.",
+      "Refreshed the changed definition quotation in the two owning batch-9 contracts that cite it: lem-toeplitz-matrix-has-displacement-rank-at-most-two and lem-displacement-generator-update-under-scalar-schur-elimination. Other contract rows and historical reviews were preserved.",
+      "Each shared metadata edit used tools/step5-shared-write-lock.mjs acquire, reread, edit, literal-mirror check, release. Context hashes were captured immediately after each mathematical review; no older context hash was refreshed."
+    ],
+    "interface_changes": [
+      {
+        "id": "thm-realified-dense-residual-certificate",
+        "section": "Statement",
+        "before": "For complex $A,x,b\\in\\mathbb C^n$",
+        "after": "For $n\\ge1$, complex $A\\in\\mathbb C^{n\\times n}$ and $x,b\\in\\mathbb C^n$",
+        "item_consumers": [],
+        "page_use": "library/numerical-linear-algebra-and-approximation/toeplitz-circulant-and-displacement-structured-solvers.md: residual paragraph explicitly uses dimension 2n; remains sound and unchanged."
+      },
+      {
+        "id": "def-displacement-rank-generators-and-lower-shift",
+        "section": "Definition",
+        "before": "A matrix with displacement rank at most $r$ is called Toeplitz-like (relative to this shift).",
+        "after": "The term **Toeplitz-like** refers to matrices whose displacement rank is small relative to $n$; the rank bound $r$ must be specified rather than unrestricted. For a family of growing dimensions, a uniform bound means that $r$ is independent of $n$.",
+        "page_use": "Owning page displacement paragraph uses only the unchanged Stein formula, width-two Toeplitz generator and width-s Schur update; remains sound and unchanged."
+      }
+    ],
+    "downstream_examination": [
+      {
+        "id": "lem-toeplitz-matrix-has-displacement-rank-at-most-two",
+        "path": "items/lem-toeplitz-matrix-has-displacement-rank-at-most-two.md",
+        "affected_use": "Statement and F1 use the lower shift Z_n and define a generator by T−ZTZ*=GH*; Proof 1.1-2.1 computes the boundary displacement and a factorization through C^2.",
+        "disposition": "unaffected: formulas and rank-two argument unchanged; only its contract supplier quotation was refreshed."
+      },
+      {
+        "id": "alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve",
+        "path": "items/alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve.md",
+        "affected_use": "Definition step 4 uses the fixed lower shift in L(Z_n v)L(Z_n v)*b in the returned solution formula.",
+        "disposition": "unaffected: lower-shift entries unchanged; no procedure instruction uses the Toeplitz-like label."
+      },
+      {
+        "id": "lem-displacement-generator-update-under-scalar-schur-elimination",
+        "path": "items/lem-displacement-generator-update-under-scalar-schur-elimination.md",
+        "affected_use": "Statement, F1 and Proof 1.1 partition Z_n and compare A−Z_n A Z_n* with the supplied width-s generator GH*.",
+        "disposition": "unaffected by the terminology correction; assigned F3 repair completed separately with identical Statement."
+      },
+      {
+        "id": "thm-gohberg-semencul-inverse-identity-and-cost",
+        "path": "items/thm-gohberg-semencul-inverse-identity-and-cost.md",
+        "affected_use": "Statement and Proof 4.1-6.1 use Z_n in the inverse displacement X−Z_n X Z_n* and telescope with Z_n^n=0 to reconstruct the triangular Toeplitz formula.",
+        "disposition": "unaffected by the terminology correction; same shift and displacement remain valid. Separate F5 citation wording concern routed to owner without editing the item."
+      }
+    ],
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-realified-dense-residual-certificate.md items/def-displacement-rank-generators-and-lower-shift.md items/lem-displacement-generator-update-under-scalar-schur-elimination.md --json",
+        "exit_code": 0,
+        "result": "3 files; 2 proofs pass, definition not-applicable; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-realified-dense-residual-certificate.md items/def-displacement-rank-generators-and-lower-shift.md items/lem-displacement-generator-update-under-scalar-schur-elimination.md --json",
+        "exit_code": 0,
+        "result": "3 items checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-9.proof-contracts.json --strict --items thm-realified-dense-residual-certificate,def-displacement-rank-generators-and-lower-shift,lem-displacement-generator-update-under-scalar-schur-elimination --json",
+        "exit_code": 0,
+        "result": "All 3 assigned contracts pass; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-analysis-remaining-71-2026-10-17-batch-9.proof-contracts.json --strict --items lem-toeplitz-matrix-has-displacement-rank-at-most-two --json",
+        "exit_code": 0,
+        "result": "The additional refreshed supplier quotation passes; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-realified-dense-residual-certificate.md items/def-displacement-rank-generators-and-lower-shift.md items/lem-displacement-generator-update-under-scalar-schur-elimination.md",
+        "exit_code": 0,
+        "result": "3 items, 10 steps, 0 defects; run after final item edits."
+      }
+    ],
+    "handoff": "All 3 assigned tuples decided and all 3 item reviews captured. No new items, no item judgments or stamps, no central certificates or round state written. Engine retains independent review/rejudgment and owner routing; no independent review of own repairs claimed."
+  }
+}

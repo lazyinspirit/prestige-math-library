@@ -1,0 +1,420 @@
+{
+  "group": "c",
+  "batches": [
+    "8"
+  ],
+  "pages_read": [
+    "nonuniform-fast-fourier-transforms",
+    "nonuniform-fast-fourier-transforms-examples"
+  ],
+  "items_read": [
+    "def-nufft-finite-array-norms",
+    "def-nufft-periodized-gaussian-gridding-kernel",
+    "lem-nufft-finite-euclidean-norm-triangle",
+    "def-nufft-transform-types-and-mode-conventions",
+    "lem-nufft-gaussian-periodization-converges",
+    "lem-nufft-gaussian-image-tail-bound",
+    "lem-nufft-gaussian-periodization-fourier-series",
+    "lem-nufft-gaussian-spread-truncation-tail",
+    "lem-nufft-gaussian-grid-alias-identity-and-bound",
+    "alg-nufft-certified-gaussian-gridding-type1-type2",
+    "lem-nufft-certified-gaussian-gridding-returns-a-status",
+    "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+    "ex-nufft-mri-fourier-samples",
+    "ex-nufft-small-deconvolution-mode-is-inconclusive",
+    "ex-nufft-clustered-sources-l1-error"
+  ],
+  "conventions": [
+    {
+      "convention": "Finite-array norms use counting sums; the counting inner product is linear in its first argument. All three norms and the inner product are zero on an empty index set.",
+      "fixed_by": "def-nufft-finite-array-norms",
+      "matters_for": [
+        "lem-nufft-finite-euclidean-norm-triangle",
+        "def-nufft-transform-types-and-mode-conventions",
+        "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+        "ex-nufft-clustered-sources-l1-error"
+      ]
+    },
+    {
+      "convention": "Type 1 uses exp(-2πi k·x), type 2 uses exp(+2πi k·x), and the mode box includes both endpoints -K_r and K_r. Type-1/type-2 coordinates are period-one representatives; type 3 uses real frequencies and has no implicit wrapping or scaling.",
+      "fixed_by": "def-nufft-transform-types-and-mode-conventions",
+      "matters_for": [
+        "lem-nufft-gaussian-grid-alias-identity-and-bound",
+        "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+        "ex-nufft-mri-fourier-samples",
+        "ex-nufft-clustered-sources-l1-error"
+      ]
+    },
+    {
+      "convention": "The periodized kernel is φ_τ(x)=Σ_n exp(-π(x+n)²/τ), with τ>0 and period one.",
+      "fixed_by": "def-nufft-periodized-gaussian-gridding-kernel",
+      "matters_for": [
+        "lem-nufft-gaussian-periodization-converges",
+        "lem-nufft-gaussian-image-tail-bound",
+        "lem-nufft-gaussian-periodization-fourier-series",
+        "lem-nufft-gaussian-spread-truncation-tail",
+        "lem-nufft-gaussian-grid-alias-identity-and-bound"
+      ]
+    },
+    {
+      "convention": "The Gaussian Fourier-series statement assumes Countable Choice and uses the multiplier √τ exp(-πτr²).",
+      "fixed_by": "lem-nufft-gaussian-periodization-fourier-series",
+      "matters_for": [
+        "lem-nufft-gaussian-grid-alias-identity-and-bound",
+        "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+        "ex-nufft-clustered-sources-l1-error"
+      ]
+    },
+    {
+      "convention": "The grid DFT has normalization 1/P. Signed mode k occupies the least-nonnegative-residue slot κ(k); M_r>2K_r makes those slots distinct.",
+      "fixed_by": "lem-nufft-gaussian-grid-alias-identity-and-bound",
+      "matters_for": [
+        "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint"
+      ]
+    },
+    {
+      "convention": "Spread neighborhoods include the distance endpoint w_r/M_r, and require M_r≥2w_r+1. Image truncation instead retains integer images -L_r through L_r after reducing displacement to [0,1).",
+      "fixed_by": "alg-nufft-certified-gaussian-gridding-type1-type2",
+      "matters_for": [
+        "lem-nufft-certified-gaussian-gridding-returns-a-status",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint"
+      ]
+    },
+    {
+      "convention": "Inputs are exact finite dyadics; candidates and refinement controls are finite. Interval arithmetic admits subnormal endpoints, while the selected operationwise FFT model requires successful no-range-failure operations. Every used twiddle certificate must meet the supplied bound, including a literal zero bound.",
+      "fixed_by": "alg-nufft-certified-gaussian-gridding-type1-type2",
+      "matters_for": [
+        "lem-nufft-certified-gaussian-gridding-returns-a-status",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+        "ex-nufft-small-deconvolution-mode-is-inconclusive"
+      ]
+    },
+    {
+      "convention": "Certification requires the complete outward absolute-error bound to meet a positive requested tolerance. Exhausting candidates returns inconclusive; the N=0 branch returns exact zero type-1 output or empty type-2 output with zero radii.",
+      "fixed_by": "alg-nufft-certified-gaussian-gridding-type1-type2",
+      "matters_for": [
+        "lem-nufft-certified-gaussian-gridding-returns-a-status",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+        "ex-nufft-clustered-sources-l1-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-nufft-gaussian-grid-alias-identity-and-bound",
+      "statement": "Assume Countable Choice. For the stated finite source data, positive τ_r and integers M_r>2K_r, the normalized periodized-grid DFT equals Σ_q Φ̂(k+q⊙M)Σ_j c_j exp(-2πi(k+q⊙M)·x_j). After division by Φ̂(k)>0, its error from F_k is at most AΣ_j|c_j|, where s_r=exp(-πτ_rM_r(M_r-2K_r)) and A=∏_r(1+2s_r/(1-s_r))-1.",
+      "used_by": [
+        "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint"
+      ]
+    },
+    {
+      "id": "lem-nufft-gaussian-spread-truncation-tail",
+      "statement": "For d≥1, τ_r>0 and integers M_r,w_r≥1 with M_r≥2w_r+1, the omitted spreading mass outside W(x) is at most T_d=Σ_r T_r∏_{s≠r}S_s, where a_r=π/(τ_rM_r²), S_r=2/(1-exp(-a_r)) and T_r=2exp(-a_rw_r²)(1+1/(2a_rw_r)). Each full one-coordinate grid mass is at most S_r.",
+      "used_by": [
+        "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint"
+      ]
+    },
+    {
+      "id": "alg-nufft-certified-gaussian-gridding-type1-type2",
+      "statement": "On the specified exact dyadic type-1/type-2 data and finite controls, process the finite candidate list in order, using outward Gaussian enclosures, guarded positive deconvolution, checked computed unitary FFTs and complete error certificates. Return the first candidate meeting the requested positive tolerance as certified, or inconclusive with the first recorded non-success reason after exhaustion; malformed controls return invalid-input.",
+      "used_by": [
+        "lem-nufft-certified-gaussian-gridding-returns-a-status",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+        "ex-nufft-small-deconvolution-mode-is-inconclusive"
+      ]
+    },
+    {
+      "id": "lem-nufft-gaussian-periodization-fourier-series",
+      "statement": "Assume Countable Choice. For τ>0, the Fourier coefficient of φ_τ at each integer r is √τ exp(-πτr²), and φ_τ(x)=Σ_r √τ exp(-πτr²)exp(2πirx). The periodized series converges locally uniformly, and the Fourier series converges absolutely and uniformly.",
+      "used_by": [
+        "lem-nufft-gaussian-grid-alias-identity-and-bound",
+        "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint"
+      ]
+    },
+    {
+      "id": "lem-nufft-gaussian-image-tail-bound",
+      "statement": "For τ>0, integer L≥1 and x∈[0,1], the finite image sum φ_{τ,L} retaining -L≤n≤L satisfies 0≤φ_τ(x)-φ_{τ,L}(x)≤2exp(-πL²/τ)/(1-exp(-πL/τ)); the denominator is positive.",
+      "used_by": [
+        "alg-nufft-certified-gaussian-gridding-type1-type2",
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint"
+      ]
+    },
+    {
+      "id": "thm-nufft-gaussian-gridding-error-and-type2-adjoint",
+      "statement": "Assume Countable Choice and the algorithm's input hypotheses. For a successful candidate, ε_ana≥α+T_d/(Pd_min), and the returned centers satisfy ‖F̂-F‖∞≤ε_ana‖c‖₁+B_round and ‖ĝ-A*f‖∞≤ε_ana‖f‖₁+B_round*. The N=0 errors are zero. For fixed dimension, bounded widths and image cutoffs, and fixed interval-series controls, one candidate has scalar work O(P log P+Nw^d), apart from the stated elementary-range evaluation work; no type-3 cost claim follows.",
+      "used_by": [
+        "ex-nufft-clustered-sources-l1-error"
+      ]
+    },
+    {
+      "id": "lem-nufft-finite-euclidean-norm-triangle",
+      "statement": "For a finite index set E and arrays x,y∈ℂ^E, the Euclidean norm of def-nufft-finite-array-norms satisfies ‖x+y‖₂≤‖x‖₂+‖y‖₂.",
+      "used_by": [
+        "thm-nufft-gaussian-gridding-error-and-type2-adjoint"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "used_for": "Finite, guarded elementary-function enclosures used throughout the certificate.",
+      "opened": true
+    },
+    {
+      "id": "alg-dyadic-square-root-bisection",
+      "used_for": "Finite square-root endpoint computation in the termination argument.",
+      "opened": true
+    },
+    {
+      "id": "alg-na-certified-unit-circle-phase",
+      "used_for": "Finite phase refinement and twiddle certificates.",
+      "opened": true
+    },
+    {
+      "id": "alg-na-computed-unitary-radix-two-fft",
+      "used_for": "The actual forward and inverse computed grid transforms and their failure branches.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Euler's formula and unit modulus of Fourier phases.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive Gaussian multipliers, geometric ratios and reciprocal estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-complete-ordered-real-field",
+      "used_for": "Real ordering, finite maxima and nonnegative finite norm sums.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Conjugation, complex modulus and counting-inner-product calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-exponential",
+      "used_for": "Finite Fourier expressions and exp(0)=1.",
+      "opened": true
+    },
+    {
+      "id": "def-continuity-and-derivative-on-real-interval",
+      "used_for": "Continuity and differentiation conventions in Gaussian convergence and tail proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit assumption inherited from Gaussian Fourier analysis and Poisson summation.",
+      "opened": true
+    },
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "used_for": "Directed endpoints, overflow and the least positive subnormal in the inconclusive example.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum-in-a-commutative-monoid",
+      "used_for": "Finite-array sums, enumeration independence and empty sums.",
+      "opened": true
+    },
+    {
+      "id": "def-intervals-rectangles-and-complex-balls",
+      "used_for": "Represented complex rectangles, balls, moduli and finite expression DAGs.",
+      "opened": true
+    },
+    {
+      "id": "def-logarithm-to-a-base",
+      "used_for": "Base-two logarithms in the FFT operation count.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Finite matrix factorization and entrywise adjoint calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "used_for": "The selected no-underflow FFT arithmetic model, representability and range failures.",
+      "opened": true
+    },
+    {
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "used_for": "Outward arithmetic, guarded division and square-root endpoint operations.",
+      "opened": true
+    },
+    {
+      "id": "def-real-elementary-functions-and-domains",
+      "used_for": "Elementary-function domains, the interval π convention, integral comparison and exponential series.",
+      "opened": true
+    },
+    {
+      "id": "def-schwartz-space-and-its-seminorms",
+      "used_for": "Checking that the Gaussian satisfies the hypotheses of Poisson summation.",
+      "opened": true
+    },
+    {
+      "id": "lem-archimedean-property-from-completeness",
+      "used_for": "Selecting an explicit integer threshold for compact-uniform Gaussian tail bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-conjugation-and-modulus-laws",
+      "used_for": "Complex triangle inequalities, multiplicativity and conjugation laws.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-algebra-and-chain-rules",
+      "used_for": "Gaussian derivatives and continuity of finite Gaussian sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+      "used_for": "Continuity of cosine in the clustered-source integral estimate.",
+      "opened": true
+    },
+    {
+      "id": "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+      "used_for": "The exact Gaussian multiplier, with t=1/τ and the inherited Countable Choice assumption.",
+      "opened": true
+    },
+    {
+      "id": "lem-nonnegative-square-root-exists-and-unique",
+      "used_for": "Finite Euclidean norms, positive Gaussian multipliers and square-root comparisons.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "used_for": "Passing from squared-norm comparisons to norm comparisons.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-positive",
+      "used_for": "Strict positivity of a nonzero vector's squared norm.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Root-of-unity calculations and exact Fourier phase factorizations.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "used_for": "Finite complex arithmetic and distributivity in transform definitions.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Smoothness and derivatives of Gaussian functions.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "The geometric majorant for the periodized Gaussian.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-beats-every-polynomial",
+      "used_for": "Gaussian decay, Schwartz seminorms and vanishing tail terms.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Gaussian upper bounds, positive denominators and minimum mode multipliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-parseval-and-plancherel",
+      "used_for": "Unitarity of grid transforms and transfer of Euclidean uncertainty bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Gaussian integral-tail estimates and the bound |sin t|≤t.",
+      "opened": true
+    },
+    {
+      "id": "thm-generalised-associativity",
+      "used_for": "Reordering finite complex sums in the adjoint identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Explicit convergence, image-tail and alias-series bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite maximum construction in the array-norm definition.",
+      "opened": true
+    },
+    {
+      "id": "thm-kernel-and-fibres-of-complex-exponential",
+      "used_for": "The exact root-of-unity filter in the grid alias identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "used_for": "Checked forward/inverse axis error factors and their tensor-axis composition.",
+      "opened": true
+    },
+    {
+      "id": "thm-na-interval-pi-matches-canonical-fourier-pi",
+      "used_for": "Compatibility of interval Machin enclosures with the Fourier phase constant.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Monotonicity and positivity used in the operation-count proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "used_for": "Containment of exact finite arithmetic values by successful outward computations.",
+      "opened": true
+    },
+    {
+      "id": "thm-poisson-summation-for-schwartz-functions",
+      "used_for": "The absolutely uniformly convergent Gaussian Fourier expansion.",
+      "opened": true
+    },
+    {
+      "id": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+      "used_for": "Conjugate Fourier signs and the cosine modulus bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-radix-two-fft-arithmetic-complexity",
+      "used_for": "The scalar arithmetic count for grid-line FFTs.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "used_for": "Sound finite exponential, square-root and other real elementary enclosures.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "Integrating cosine to bound the clustered-source Fourier coefficient.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "nonuniform-fast-fourier-transforms",
+      "concern": "The authoritative dispatch lists three page prerequisites: computed-fast-transforms-and-convolution, outward-rounded-interval-and-ball-arithmetic, and finite-precision-direct-factorizations. The current page frontmatter declares only computed-fast-transforms-and-convolution. Its prose explicitly identifies outward-rounded-interval-and-ball-arithmetic as supplying interfaces used directly by the certificate, and the algorithm also imports the published operationwise arithmetic model. Reconcile the page prerequisite metadata with the assigned inventory.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": []
+}

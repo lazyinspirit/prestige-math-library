@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "run": "numerical-analysis-remaining-71-2026-10-17",
+  "batch": "2",
+  "round": 0,
+  "reviewed_items": [
+    "def-rbf-kernels-sites-and-augmented-interpolation",
+    "lem-rbf-augmented-system-is-invertible",
+    "def-normalized-matern-spectral-kernel",
+    "lem-matern-spectral-integral-and-normalization",
+    "def-bessel-potential-space-and-restriction-quotient",
+    "lem-matern-weighted-fourier-space-is-hilbert-and-injective",
+    "lem-schwartz-dense-in-fourier-bessel-potential-space",
+    "lem-matern-native-space-fourier-identity-and-positive-definiteness",
+    "lem-restricted-matern-native-space-is-sobolev",
+    "lem-cone-sites-admit-stable-polynomial-norming-stencils",
+    "lem-sobolev-zeros-bound-on-a-cone-domain",
+    "thm-native-interpolation-projection-and-power-function",
+    "thm-matern-interpolation-fill-distance-error",
+    "lem-separated-sites-matern-gram-bound",
+    "cor-matern-mesh-ratio-conditioning-bound",
+    "alg-augmented-rbf-finite-difference-weights",
+    "thm-rbf-fd-polynomial-reproduction-and-local-truncation",
+    "ex-smooth-scattered-surface-matern-rate",
+    "ex-duplicate-rbf-sites-singular-gram-matrix",
+    "ex-small-fill-distance-can-have-poor-rbf-conditioning"
+  ],
+  "reviewed_pages": [
+    "radial-basis-and-kernel-interpolation",
+    "radial-basis-and-kernel-interpolation-examples"
+  ],
+  "decision": "repair",
+  "reason": "The approved scope and core claims are retained, including the no-mesh-ratio fill-distance rate and the exact-arithmetic separation estimate. One local repair can resolve the missing prerequisites, proof gaps, and example-scope mismatch.",
+  "findings": [
+    {
+      "id": "def-bessel-potential-space-and-restriction-quotient",
+      "type": "prerequisite",
+      "reason": "The Definition links def-real-and-complex-inner-product-space for its inner-product convention, but that supplier is absent from deps. Add the direct dependency."
+    },
+    {
+      "id": "lem-schwartz-dense-in-fourier-bessel-potential-space",
+      "type": "local",
+      "reason": "Proof step 4.1 cites steps 1.2–4.2, but step 4.2 does not exist. Correct the reference; steps 1.2 and 2.2 establish Schwartz membership."
+    },
+    {
+      "id": "lem-cone-sites-admit-stable-polynomial-norming-stencils",
+      "type": "prerequisite",
+      "reason": "Step 1.1 uses that every open interval contains infinitely many real values. thm-reals-field does not supply an order; add thm-reals-ordered-field and make the finite selection of distinct values explicit."
+    },
+    {
+      "id": "lem-sobolev-zeros-bound-on-a-cone-domain",
+      "type": "prerequisite",
+      "reason": "Steps 1.1 and 2.1 use Cauchy–Schwarz in L2, but cor-cauchy-schwarz-inequality-for-l-two is absent from deps/Facts. Declare that supplier."
+    },
+    {
+      "id": "lem-sobolev-zeros-bound-on-a-cone-domain",
+      "type": "local",
+      "reason": "Step 1.1 uses h^{-1}, while the Statement allows h_X=0. Establish locally that finite X cannot fill a nonempty open domain exactly, before the Fourier split."
+    },
+    {
+      "id": "thm-native-interpolation-projection-and-power-function",
+      "type": "prerequisite",
+      "reason": "Step 2.1 uses Cauchy–Schwarz in the restricted Hilbert space; add thm-cauchy-schwarz-in-an-inner-product-space as a supplier."
+    },
+    {
+      "id": "thm-matern-interpolation-fill-distance-error",
+      "type": "prerequisite",
+      "reason": "The proof applies the zeros lemma, which requires an integer m>nu, but never selects such an m. State the choice and supply the Archimedean fact, e.g. cor-cauchy-reals-lub-complete and thm-of-archimedean."
+    },
+    {
+      "id": "thm-matern-interpolation-fill-distance-error",
+      "type": "local",
+      "reason": "Step 2.1 says the residual evaluation functional has norm exactly P_X by the representer identity, while the cited theorem proves only the upper bound. Add the norm-attaining witness r/||r|| when r is nonzero, and handle r=0."
+    },
+    {
+      "id": "lem-separated-sites-matern-gram-bound",
+      "type": "local",
+      "reason": "Step 6.1 uses that the eigenvalues sum to trace(K_X)=N. Derive the trace identity from the orthonormal eigenbasis or cite an appropriate supplier."
+    },
+    {
+      "id": "ex-smooth-scattered-surface-matern-rate",
+      "type": "prerequisite",
+      "reason": "The proof consumes full AC/CC through its Bessel, Schwartz, and interpolation suppliers without carrying those assumptions or dependencies. It also applies the interpolation theorem on an admitted cube while verifying only the cone condition; establish the cube's bounded-Lipschitz property."
+    },
+    {
+      "id": "ex-smooth-scattered-surface-matern-rate",
+      "type": "prerequisite",
+      "reason": "Step 2.1 uses the real exponential derivative and chain/product rules, none declared in deps, and invokes Gaussian decay at infinity without applying a matching supplier. Add the derivative, chain, and product suppliers and use thm-exponential-beats-every-polynomial (for example with r^2)."
+    },
+    {
+      "id": "ex-small-fill-distance-can-have-poor-rbf-conditioning",
+      "type": "prerequisite",
+      "reason": "The proof uses the CC-dependent spectral and separation results without stating CC or declaring def-countable-choice. F1 also calls the cube admitted while checking only its cone condition; establish its bounded-Lipschitz property."
+    },
+    {
+      "id": "ex-small-fill-distance-can-have-poor-rbf-conditioning",
+      "type": "scope",
+      "reason": "The approved example isolates near-duplicate separation, but the Example statement says midpoint grids while step 1.2 proves a grid augmented by a new site. It also does not force the mesh ratio to diverge. State the augmented family and choose delta_m<1/(4m^2); prove distinctness, h_Zm>=1/(2m), and rho_Zm->infinity."
+    },
+    {
+      "id": "ex-small-fill-distance-can-have-poor-rbf-conditioning",
+      "type": "local",
+      "reason": "Step 2.1 uses lambda_max>=trace(K_Zm)/|Z_m|=1 without deriving that trace is the eigenvalue sum. Add the short orthonormal-eigenbasis calculation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "radial-basis-and-kernel-interpolation-examples",
+      "decision": "accept",
+      "reason": "This is the only current consumer of the two example items. Its existing description already identifies the near-duplicate construction and diverging exact condition numbers, and remains consistent with the requested clarification."
+    }
+  ]
+}
